@@ -1,0 +1,26 @@
+<!ENTITY sb.editor.inline	"選択範囲にインラインコメントを付加">
+<!ENTITY sb.editor.marker	"選択範囲をハイライト">
+<!ENTITY sb.editor.unline	"すべてのインラインコメントを解除">
+<!ENTITY sb.editor.unmark	"すべてのハイライトを解除">
+<!ENTITY sb.editor.cutter	"選択範囲をカット">
+<!ENTITY sb.editor.iframe	"インナーフレームを削除">
+<!ENTITY sb.editor.eraser	"消去ツール：不要な部分を直接クリックしてタグ単位で削除できます。">
+<!ENTITY sb.editor.undo		"すべての変更を破棄して前回保存時の状態へ戻す">
+<!ENTITY sb.editor.save		"表示されている状態で保存">
+<!ENTITY sb.editor.exit		"編集モード終了">
+
+<!ENTITY sb.inline.enter	"入力">
+<!ENTITY sb.inline.delete	"削除">
+
+<!ENTITY sb.expand.comment	"コメントエリアを広げる">
+
+<!ENTITY sn.save			"保存">
+<!ENTITY sn.close			"閉じる">
+<!ENTITY sn.preview			"HTMLプレビュー">
+<!ENTITY sn.template		"テンプレートHTML">
+<!ENTITY sn.template.edit	"テンプレートHTMLの編集">
+<!ENTITY sn.help			"ヘルプ">
+<!ENTITY sn.autolinefeed	"自動改行">
+<!ENTITY sn.autolinefeed.t	"HTMLプレビュー時、行末に&lt;br&gt;タグを自動で付加します">
+<!ENTITY sn.quit.nosave		"保存せず終了">
+

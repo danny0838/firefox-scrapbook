@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+
+<!--skin-->
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+
+<!--locale-->
+<!DOCTYPE window SYSTEM "chrome://scrapbook/locale/scrapbook.dtd">
+
+<!--window-->
+<window id="ScrapBookExportWindow"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<textbox value="Now outputting HTML..." readonly="true" />
+
+	<!--JavaScript-->
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/export.js" />
+
+</window>

@@ -1,0 +1,22 @@
+<!ENTITY sb.title					"ScrapBook">
+<!ENTITY sb.capture					"Capture">
+<!ENTITY sb.capture.partial			"Capture Selection">
+<!ENTITY sb.capture.partial.as		"Capture Selection As...">
+<!ENTITY sb.capture.entire			"Capture Page">
+<!ENTITY sb.capture.entire.as		"Capture Page As...">
+<!ENTITY sb.capture.target			"Capture Link">
+<!ENTITY sb.capture.target.as		"Capture Link As...">
+
+<!ENTITY sb.detail					"Capture Detail">
+<!ENTITY sb.detail.selectfolder		"Folder">
+<!ENTITY sb.detail.rootfolder		"Root Folder">
+
+<!ENTITY sb.detail.linked			"Capture including linked files">
+<!ENTITY sb.detail.linked.image		"Image">
+<!ENTITY sb.detail.linked.sound		"Sound">
+<!ENTITY sb.detail.linked.movie		"Movie">
+<!ENTITY sb.detail.linked.archive	"Archive">
+<!ENTITY sb.detail.linked.all		"All Linked Files">
+
+<!ENTITY sb.overlay.editing			"Switch to Editing Mode">
+

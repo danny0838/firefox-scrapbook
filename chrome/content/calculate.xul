@@ -1,0 +1,76 @@
+<?xml version="1.0" ?>
+
+<!--skin-->
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+<?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
+
+<!--locale-->
+<!DOCTYPE wizard SYSTEM "chrome://scrapbook/locale/scrapbook.dtd">
+
+<!--dialog-->
+<wizard id="ScrapBookCalcWizard"
+        title="&sb.title; - &sb.tools.list;"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        persist="screenX screenY"
+        onload="SB_initList();">
+
+	<!--JavaScript for Preference-->
+	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
+	<!--JavaScript-->
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/calculate.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/property.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
+
+	<!--StringBundle-->
+	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/scrapbook.properties" />
+
+	<!--popup-->
+	<popupset>
+		<popup id="ScrapBookTreePopup" onpopupshowing="SB_createPopupMenuList();">
+			<menuitem id="ScrapBookTreePopupO" label="&sb.open;"      oncommand="SB_openList(event, false);" default="true" />
+			<menuitem id="ScrapBookTreePopupT" label="&sb.opentab;"   oncommand="SB_openList(event, true);" />
+			<menuitem id="ScrapBookTreePopupL" label="&sb.launchdir;" oncommand="SB_transmitList('L');" />
+			<menuseparator /><menuitem id="ScrapBookTreePopupD" class="menuitem-iconic" label="&sb.delete;"     oncommand="SB_deleteList();" disbabled="true" />
+			<menuseparator /><menuitem id="ScrapBookTreePopupP" class="menuitem-iconic" label="&sb.property;"   oncommand="SB_transmitList('P');" />
+		</popup>
+	</popupset>
+
+	<wizardpage label="&sb.tools.list;" description="Calculate and list the size of your collection">
+
+		<grid>
+			<columns>
+				<column />
+				<column flex="1" />
+			</columns>
+			<rows>
+				<row align="center">
+					<label value="Total Size: " />
+					<textbox id="ScrapBookTotalSize" readonly="true" />
+				</row>
+				<row align="center">
+					<label value="Validate: " />
+					<textbox id="ScrapBookValidate" readonly="true" />
+				</row>
+			</rows>
+		</grid>
+
+		<listbox id="ScrapBookCalcList" contextmenu="ScrapBookTreePopup" ondblclick="SB_openList(event, false);" flex="1" style="height:10em;">
+			<listhead>
+				<listheader label="&sb.prop.title;" />
+				<listheader label="&sb.prop.size;" />
+			</listhead>
+			<listcols>
+				<listcol flex="2" style="width:250px;" />
+				<listcol flex="1" style="width:100px;" />
+			</listcols>
+		</listbox>
+
+		<hbox>
+			<textbox id="ScrapBookMessage" class="plain" flex="1" readonly="true" />
+			<progressmeter id="ScrapBookProgress" mode="determined" value="0" style="width:160px;" />
+		</hbox>
+
+	</wizardpage>
+
+</wizard>

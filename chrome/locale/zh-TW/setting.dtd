@@ -1,0 +1,21 @@
+<!ENTITY sb.setting					"設定">
+<!ENTITY sb.setting.general			"一般設定">
+<!ENTITY sb.setting.usetabs			"分頁設定">
+<!ENTITY sb.setting.advance			"進階設定">
+
+<!ENTITY sb.setting.detaildialog	"以拖曳方式擷取資料時，顯示「詳細資訊」對話方塊。">
+<!ENTITY sb.setting.notification	"顯示「擷取完畢」提醒視窗（可能只在 Windows 下有用？）">
+<!ENTITY sb.setting.hidefavicon		"在擷取文件清單中不顯示網站圖示">
+<!ENTITY sb.setting.folderclick		"展開某資料夾時，折疊其他資料夾（像 IE 的「我的最愛」模式）">
+<!ENTITY sb.setting.quickdelete		"刪除擷取文件時不加確認">
+<!ENTITY sb.setting.utf8encode		"擷取文件一律以 UTF-8 重新編碼（可以解決部分字元被換成「?」符號的問題。）">
+<!ENTITY sb.setting.usetabs.d		"勾選項目將以新分頁開啟">
+
+<!ENTITY sb.setting.filer			"「瀏覽檔案」命令所使用的程式">
+<!ENTITY sb.setting.defaultfiler	"預設（如果您使用 Windows，則可能是檔案總管）">
+<!ENTITY sb.setting.browse			"瀏覽">
+
+<!ENTITY sb.setting.data			"擷取文件存放處">
+<!ENTITY sb.setting.data.default	"預設（在您的個人設定檔資料夾中）">
+<!ENTITY sb.setting.data.notify		"如果您欲搬動既存資料，請先自行移動「ScrapBook」資料夾，而後調整此設定值。">
+

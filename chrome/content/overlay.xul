@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+
+<!--skin-->
+<?xml-stylesheet href="chrome://scrapbook/skin/overlay.css" type="text/css" ?>
+
+<!--locale-->
+<!DOCTYPE overlay SYSTEM "chrome://scrapbook/locale/overlay.dtd">
+
+<overlay id="scrapbooktasksOverlay"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<!--JavaScript for Preference-->
+	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
+	<!--JavaScript-->
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/overlay.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
+	<!--JavaScript for Drag And Drop-->
+	<script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
+	<script type="application/x-javascript" src="chrome://global/content/nsTransferable.js" />
+	<script type="application/x-javascript" src="chrome://global/content/nsJSSupportsUtils.js" />
+	<script type="application/x-javascript" src="chrome://global/content/nsJSComponentManager.js" />
+
+	<!--broadcast-->
+	<broadcasterset id="mainBroadcasterSet">
+		<broadcaster id="viewScrapBookSidebar"
+		             autoCheck="false"
+		             label="&sb.title;"
+		             type="checkbox" group="sidebar"
+		             sidebarurl="chrome://scrapbook/content/scrapbook.xul"
+		             sidebartitle="&sb.title;"
+		             oncommand="toggleSidebar('viewScrapBookSidebar');" />
+	</broadcasterset>
+
+	<!--keyset-->
+	<keyset id="mainKeyset">
+		<key id="key_openScrapBookSidebar" command="viewScrapBookSidebar"   key="K" modifiers="alt" />
+		<key id="key_switchEditingMode" oncommand="SB_switchEditingMode();" key="J" modifiers="alt" />
+		<key id="key_captureEntireAs"   oncommand="SBcapture.doCaptureDocument(false, true, 'urn:scrapbook:root', 0);" key="K" modifiers="accel shift" />
+<!--
+		<key id="key_viewXULD" key="\" oncommand="window.location.reload();" modifiers="accel"/>
+-->
+	</keyset>
+
+	<!--sidebar-->
+	<menupopup id="viewSidebarMenu">
+		<menuitem observes="viewScrapBookSidebar" key="key_openScrapBookSidebar" />
+	</menupopup>
+
+	<!--toolmenu-->
+	<menupopup id="menu_ToolsPopup">
+		<menuitem key="key_openScrapBookSidebar" observes="viewScrapBookSidebar" position="1" />
+	</menupopup>
+
+	<!--toolbar-->
+	<toolbarpalette id="BrowserToolbarPalette">
+		<toolbarbutton id="scrapbook-button"
+		               tooltiptext="&sb.title;"
+		               observes="viewScrapBookSidebar"
+		               class="toolbarbutton-1" />
+	</toolbarpalette>
+
+	<!--context menu-->
+	<popup id="contentAreaContextMenu">
+		<menuseparator />
+		<menuitem id="ScrapBookContextMenu1" class="menuitem-iconic" label="&sb.capture.partial;"    oncommand="SBcapture.doCaptureDocument(true,  false, 'urn:scrapbook:root', 0);" />
+		<menuitem id="ScrapBookContextMenu2" class="menuitem-iconic" label="&sb.capture.partial.as;" oncommand="SBcapture.doCaptureDocument(true,  true,  'urn:scrapbook:root', 0);" />
+		<menuitem id="ScrapBookContextMenu3" class="menuitem-iconic" label="&sb.capture.entire;"     oncommand="SBcapture.doCaptureDocument(false, false, 'urn:scrapbook:root', 0);" />
+		<menuitem id="ScrapBookContextMenu4" class="menuitem-iconic" label="&sb.capture.entire.as;"  oncommand="SBcapture.doCaptureDocument(false, true,  'urn:scrapbook:root', 0);" />
+<!--
+		<menuitem id="ScrapBookContextMenu5" class="menuitem-iconic" label="&sb.capture.target;"     oncommand="SBcapture.doCaptureTarget(document.popupNode, false);" />
+		<menuitem id="ScrapBookContextMenu6" class="menuitem-iconic" label="&sb.capture.target.as;"  oncommand="SBcapture.doCaptureTarget(document.popupNode, true);" />
+-->
+	</popup>
+
+	<!--status bar-->
+	<statusbar id="status-bar">
+		<statusbarpanel id="ScrapBookStatusPanel"
+		                class="statusbarpanel-iconic"
+		                tooltiptext="&sb.title; &sb.overlay.editing;"
+		                hidden="true"
+		                onclick="SB_switchEditingMode();"
+		                insertafter="adblock-status,statusbar-updates,statusbarpanel-progress,security-button,privacy-button,offline-status,popupIcon,statusbar-display,component-bar"
+		                style="padding:0px 2px;" />
+	</statusbar>
+
+</overlay>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://scrapbook/skin/notify.css" type="text/css"?>
+
+<window id="ScrapBookNotify"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        windowtype="alert:alert"
+        align="start"
+        onload="SB_onNotifyLoad();">
+
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js"/>
+	<script type="application/x-javascript" src="chrome://scrapbook/content/notify.js"/>
+
+	<hbox id="ScrapBookNotifyBox">
+		<hbox id="ScrapBookNotifyIconBox" align="center" valign="center">
+			<image id="ScrapBookNotifyIcon" autostretch="never"/>
+		</hbox>
+		<vbox id="ScrapBookNotifyTextBox">
+			<label id="ScrapBookNotifyTitle" class="plain" value="ScrapBook: Capture Completed." />
+			<label id="ScrapBookNotifyText"  class="plain" onclick="SB_onNotifyClick();"/>
+		</vbox>
+	</hbox>
+
+	<script type="application/x-javascript"><![CDATA[
+		gID = window.arguments[0];
+		var iconURL = window.arguments[1];
+		if ( !iconURL ) iconURL = SBcommon.getDefaultIcon("");
+		document.getElementById("ScrapBookNotifyIcon").src   = iconURL;
+		document.getElementById("ScrapBookNotifyText").value = window.arguments[2];
+	]]></script>
+
+</window>

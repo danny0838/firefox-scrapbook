@@ -1,0 +1,21 @@
+<!ENTITY sb.setting					"Setting">
+<!ENTITY sb.setting.general			"General">
+<!ENTITY sb.setting.usetabs			"Use Tabs">
+<!ENTITY sb.setting.advance			"Advanced">
+
+<!ENTITY sb.setting.detaildialog	"Show 'Capture Detail' dialog when capture by drag-and-drop into Sidebar">
+<!ENTITY sb.setting.notification	"Show 'Capture Completed' notification (work only with Windows?)">
+<!ENTITY sb.setting.hidefavicon		"Don't display favicon in the tree">
+<!ENTITY sb.setting.folderclick		"When expand a tree folder, collapse all other folders (like IE Favorites)">
+<!ENTITY sb.setting.quickdelete		"Don't confirm when delete">
+<!ENTITY sb.setting.utf8encode		"Capture as UTF-8 encoding (Resolve garbles of symbols into '?')">
+<!ENTITY sb.setting.usetabs.d		"Checked actions use new tabs.">
+
+<!ENTITY sb.setting.filer			"Program for 'Browse Files' Menu">
+<!ENTITY sb.setting.defaultfiler	"Default (If Windows, maybe Explorer.)">
+<!ENTITY sb.setting.browse			"Browse">
+
+<!ENTITY sb.setting.data			"Destination to Store Data">
+<!ENTITY sb.setting.data.default	"Default (In your Profile Folder)">
+<!ENTITY sb.setting.data.notify		"If you want to migrate existing data, move 'ScrapBook' folder manually in advance. Then configure the destination.">
+

@@ -1,0 +1,33 @@
+/* ::::: namespace ::::: */
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/* ::::: Toolbar Button ::::: */
+
+#scrapbook-button
+{
+	list-style-image: url("chrome://scrapbook/skin/mainicon1.png");
+}
+
+toolbar[iconsize="small"] #scrapbook-button
+{
+	list-style-image: url("chrome://scrapbook/skin/mainicon2.png");
+}
+
+
+/* ::::: Context Menu ::::: */
+
+menuitem#ScrapBookContextMenu1 { list-style-image: url('chrome://scrapbook/skin/capture_partial.png'); }
+menuitem#ScrapBookContextMenu2 { list-style-image: url('chrome://scrapbook/skin/capture_partial_as.png'); }
+menuitem#ScrapBookContextMenu3 { list-style-image: url('chrome://scrapbook/skin/capture_entire.png'); }
+menuitem#ScrapBookContextMenu4 { list-style-image: url('chrome://scrapbook/skin/capture_entire_as.png'); }
+
+menuitem#ScrapBookContextMenu1 .menu-iconic-icon,
+menuitem#ScrapBookContextMenu2 .menu-iconic-icon,
+menuitem#ScrapBookContextMenu3 .menu-iconic-icon,
+menuitem#ScrapBookContextMenu4 .menu-iconic-icon
+{
+	width : 13px !important;
+	height: 13px !important;
+}
+

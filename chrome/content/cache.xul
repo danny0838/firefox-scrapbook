@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+
+<!--skin-->
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+
+<!--locale-->
+<!DOCTYPE dialog SYSTEM "chrome://scrapbook/locale/scrapbook.dtd">
+
+<!--window-->
+<window id="ScrapBookCacheWindow"
+        title="ScrapBook - &sb.search.build;"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        style="width:28em;"
+        onload="SB_initFT('CACHE');">
+
+	<!--JavaScript-->
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/fulltext.js" />
+
+	<vbox id="ScrapBookStatus" flex="1" style="padding:2px;">
+		<textbox id="ScrapBookStatusLabel" value="initializing..." flex="1" readonly="true" />
+		<progressmeter id="ScrapBookStatusProgress" flex="1" mode="determined" value="0" />
+	</vbox>
+
+</window>

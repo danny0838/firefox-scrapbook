@@ -1,0 +1,89 @@
+<?xml version="1.0" ?>
+
+<!--skin-->
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+<?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
+
+<!--locale-->
+<!DOCTYPE dialog SYSTEM "chrome://scrapbook/locale/scrapbook.dtd">
+
+<!--dialog-->
+<dialog id="ScrapBookPropertyDialog"
+        title="&sb.title; - &sb.property;"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        buttons="accept,cancel"
+        style="width:36em;"
+        onload="SB_initProp();"
+        ondialogaccept="SB_acceptProp();"
+        ondialogcancel="SB_cancelProp();">
+
+	<!--JavaScript for Preference-->
+	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
+	<!--JavaScript-->
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/property.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
+
+	<!--StringBundle-->
+	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/scrapbook.properties" />
+
+	<tabbox>
+		<tabs orient="horizontal">
+			<tab label="&sb.prop.general;" />
+			<tab label="&sb.prop.comment;" id="ScrapBookPropCommentTab" style="" />
+		</tabs>
+		<tabpanels>
+			<!--tabpanel-->
+			<tabpanel>
+				<grid flex="1">
+					<columns>
+						<column />
+						<column flex="1" />
+					</columns>
+					<rows>
+						<!--editable-->
+						<row align="center">
+							<label control="ScrapBookPropTitle" value="&sb.prop.title;:" />
+							<hbox>
+								<textbox id="ScrapBookPropTitle" flex="1" style="height:1.7em;" />
+								<button id="ScrapBookPropTitleButton" label="&sb.prop.htmltitle;" oncommand="SB_getTitle();" />
+							</hbox>
+						</row>
+						<row id="ScrapBookPropIconRow" align="center" style="margin-bottom:0px;">
+							<label control="ScrapBookPropIcon" value="&sb.prop.icon;:" />
+							<hbox align="center">
+								<image id="ScrapBookPropIcon" style="margin-left:8px;width:16px;height:16px;" />
+								<spacer flex="1" />
+								<button label="&sb.prop.iconurl;..." oncommand="SB_changeIcon();" />
+							</hbox>
+						</row>
+						<separator class="groove" />
+						<!--readonly-->
+						<row align="center">
+							<label control="ScrapBookPropDate" value="&sb.prop.date;:" />
+							<textbox id="ScrapBookPropDate" readonly="true" />
+						</row>
+						<row id="ScrapBookPropSourceRow" align="center">
+							<label control="ScrapBookPropSource" value="&sb.prop.source;:" />
+							<textbox id="ScrapBookPropSource" readonly="true" />
+						</row>
+						<row id="ScrapBookPropCharsRow" align="center">
+							<label control="ScrapBookPropChars" value="&sb.prop.chars;:" />
+							<textbox id="ScrapBookPropChars" readonly="true" />
+						</row>
+						<row id="ScrapBookPropSizeRow" align="center">
+							<label control="ScrapBookPropSize" value="&sb.prop.size;:" />
+							<textbox id="ScrapBookPropSize" readonly="true" />
+						</row>
+					</rows>
+				</grid>
+			</tabpanel>
+			<!--tabpanel-->
+			<tabpanel>
+				<textbox id="ScrapBookPropComment" multiline="true" flex="1" oninput="SB_changeCommentTab(this.value);" />
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+	<box id="okCancelButtons" />
+
+</dialog>

@@ -1,0 +1,83 @@
+<?xml version="1.0" ?>
+
+<!--skin-->
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+<?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
+<?xml-stylesheet href="chrome://global/skin/arrow.css" type="text/css" ?>
+
+<!--locale-->
+<!DOCTYPE dialog [
+<!ENTITY % scrapbookDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+%scrapbookDTD;
+<!ENTITY % overlayDTD   SYSTEM "chrome://scrapbook/locale/overlay.dtd" >
+%overlayDTD;
+]>
+
+<!--dialog-->
+<dialog id="ScrapBookDetailDialog"
+        title="&sb.title; - &sb.detail;"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        style="width:35em;"
+        persist="screenX screenY"
+        onload="SB_initDetail();"
+        ondialogaccept="SB_acceptDetail();"
+        ondialogcancel="SB_cancelDetail();">
+
+	<!--JavaScript-->
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/detail.js" />
+
+	<!--StringBundle-->
+	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/scrapbook.properties" />
+
+	<!--dialogheader-->
+	<dialogheader title="&sb.title; &sb.capture;" description="&sb.detail;" />
+
+	<tabbox>
+		<tabs orient="horizontal">
+			<tab label="&sb.prop.general;" />
+			<tab label="&sb.prop.comment;" />
+		</tabs>
+		<tabpanels>
+			<!--tabpanel-->
+			<tabpanel orient="vertical">
+				<!--title-->
+				<hbox align="center" flex="1">
+					<label control="ScrapBookDetailTitle" value="&sb.prop.title;:" />
+					<textbox id="ScrapBookDetailTitle" flex="1" style="height:1.8em;" />
+					<button id="ScrapBookDetailTitleButton" label="&sb.prop.htmltitle;" oncommand="SB_getHtmlTitle();" />
+				</hbox>
+				<spacer style="height:6px;" />
+				<!--folder-->
+				<hbox align="center" flex="1">
+					<label value="&sb.detail.selectfolder;:" />
+					<menulist id="ScrapBookDetailMenuList" class="folder-icon" flex="1">
+						<menupopup id="ScrapBookDetailMenuPopup" oncommand="SB_onSelectFolder(event);">
+							<menuitem id="urn:scrapbook:root" label="&sb.detail.rootfolder;" class="menuitem-iconic folder-icon" />
+							<menuseparator />
+						</menupopup>
+					</menulist>
+				</hbox>
+				<spacer style="height:8px;" />
+				<!--linked files-->
+				<groupbox>
+					<caption label="&sb.detail.linked;" />
+					<checkbox id="ScrapBookDetailLinkedI" persist="checked" label="&sb.detail.linked.image; (jpg, png, gif)" />
+					<checkbox id="ScrapBookDetailLinkedS" persist="checked" label="&sb.detail.linked.sound; (mp3, wav, ram)" />
+					<checkbox id="ScrapBookDetailLinkedM" persist="checked" label="&sb.detail.linked.movie; (mpg, avi, ram, mov, wmv)" />
+					<checkbox id="ScrapBookDetailLinkedA" persist="checked" label="&sb.detail.linked.archive; (zip, lzh, rar, xpi)" />
+					<checkbox id="ScrapBookDetailLinkedZ" persist="checked" label="&sb.detail.linked.all;" oncommand="SB_toggleCheckLinked();" />
+				</groupbox>
+			</tabpanel>
+			<!--comment-->
+			<tabpanel>
+				<textbox id="ScrapBookDetailComment" multiline="true" flex="1" />
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+
+	<!--buttons-->
+	<box id="okCancelButtons" />
+
+</dialog>

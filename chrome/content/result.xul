@@ -1,0 +1,57 @@
+<?xml version="1.0" ?>
+
+<!--skin-->
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+<?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
+
+<!--locale-->
+<!DOCTYPE dialog SYSTEM "chrome://scrapbook/locale/scrapbook.dtd">
+
+<!--window-->
+<window id="ScrapBookResultWindow"
+        title="ScrapBook - Full Text Search Result"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        onload="SB_initFT('SEARCH');">
+
+	<!--JavaScript-->
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/fulltext.js" />
+
+	<!--popup-->
+	<popupset>
+		<popup id="ScrapBookTreePopup">
+			<menuitem id="ScrapBookTreePopupO" label="&sb.open;"    oncommand="SB_openResult(event, 'O');" />
+			<menuitem id="ScrapBookTreePopupT" label="&sb.opentab;" oncommand="SB_openResult(event, 'T');" />
+		</popup>
+	</popupset>
+
+	<!--result header-->
+	<hbox id="ScrapBookResult" class="sb-header" align="center">
+		<label value="Now Searching..." id="ScrapBookResultLabel" />
+		<spacer flex="1" />
+		<toolbarbutton class="sb-header-exit" oncommand="SB_exitResult();" />
+	</hbox>
+
+	<!--result list-->
+	<listbox id="ScrapBookResultList" contextmenu="ScrapBookTreePopup" onclick="SB_openResult(event, 'P');" class="plain" style="height:160px;">
+		<listhead>
+			<listheader label="&sb.prop.title;" />
+			<listheader label="&sb.prop.content;" />
+			<listheader label="&sb.prop.comment;" />
+			<listheader label="&sb.folder;" />
+		</listhead>
+		<listcols>
+			<listcol flex="3" style="width:150px;" />
+			<listcol flex="4" style="width:200px;" />
+			<listcol flex="3" style="width:150px;" />
+			<listcol flex="1" style="width:100px;" />
+		</listcols>
+	</listbox>
+
+	<splitter />
+
+	<!--browser-->
+	<browser id="ScrapBookBrowser" type="content-primary" flex="1" onload="SB_browserOnload(event);" />
+
+</window>

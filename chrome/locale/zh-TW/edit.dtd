@@ -1,0 +1,26 @@
+<!ENTITY sb.editor.inline	"Add Inline Comment to the Selection">
+<!ENTITY sb.editor.marker	"標示選取區">
+<!ENTITY sb.editor.unline	"Remove All Inline Comments">
+<!ENTITY sb.editor.unmark	"移除所有標示">
+<!ENTITY sb.editor.cutter	"刪除選取區">
+<!ENTITY sb.editor.iframe	"Remove Innerframes">
+<!ENTITY sb.editor.eraser	"Erase Tool : 刪除點選區塊的工具">
+<!ENTITY sb.editor.undo		"復原、放棄變動">
+<!ENTITY sb.editor.save		"儲存">
+<!ENTITY sb.editor.exit		"離開">
+
+<!ENTITY sb.inline.enter	"Enter">
+<!ENTITY sb.inline.delete	"Delete">
+
+<!ENTITY sb.expand.comment	"展開評注欄">
+
+<!ENTITY sn.save			"Save">
+<!ENTITY sn.close			"Close">
+<!ENTITY sn.preview			"HTML Preview">
+<!ENTITY sn.template		"Template HTML">
+<!ENTITY sn.template.edit	"Edit Template HTML">
+<!ENTITY sn.help			"Help">
+<!ENTITY sn.autolinefeed	"Auto-Linefeed">
+<!ENTITY sn.autolinefeed.t	"Add &lt;br&gt; tag to the end-of-line at the HTML preview">
+<!ENTITY sn.quit.nosave		"Quit without Saving">
+

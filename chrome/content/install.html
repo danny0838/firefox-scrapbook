@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+<head>
+	<title>Install ScrapBook</title>
+
+<script src="sidebarinstall.js" language="JavaScript" type="text/javascript"></script>
+<script language="JavaScript" type="text/javascript">
+function install() {
+	if(confirm("Do you want to install ScrapBook into the Sidebar?")) {
+		addPanel("ScrapBook","chrome://scrapbook/content/scrapbook.xul","");
+	}
+}
+
+</script>
+<style type="text/css">
+body {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 20pt;
+	text-align: center;
+}
+
+</style>
+</head>
+
+<body>
+
+<strong>ScrapBook Chrome Sidebar installation</strong>
+<p style="font-size:smaller;">Please make sure your sidebar is visible before installing. You can hit F9 a few times to get it to appear.</p>
+<p style="font-size:smaller;">And please note there are two serious bugs specific to Mozilla Suite. Check them at <a href="http://amb.vis.ne.jp/mozilla/scrapbook/bug.php">Bugs</a> page.</p>
+<input type="button" value="Install ScrapBook to the Sidebar" onclick="install();">
+</body>
+</html>

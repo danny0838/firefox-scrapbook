@@ -1,0 +1,12 @@
+/* ::::: ScrapBook Setting ::::: */
+
+dialog#ScrapBookSettingDialog { width:36em; }
+tabpanel#ScrapBookSettingTabpanel1 > vbox { padding-top:6px; }
+tabpanel#ScrapBookSettingTabpanel2 > vbox { padding-top:6px; }
+tabpanel#ScrapBookSettingTabpanel1 > vbox > checkbox { margin-bottom:10px; }
+tabpanel#ScrapBookSettingTabpanel2 > vbox > checkbox { margin-bottom: 6px; }
+tabpanel#ScrapBookSettingTabpanel3 textbox { height:1.6em; }
+tabpanel#ScrapBookSettingTabpanel3 groupbox { margin-bottom:12px; }
+tabpanel#ScrapBookSettingTabpanel3 textbox#ScrapBookDataNotify { height:3.2em !important; padding-left:36px !important; padding-top: 6px !important; }
+box#okCancelButtons { margin-top:12px; }
+

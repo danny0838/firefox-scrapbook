@@ -1,0 +1,141 @@
+/* ::::: ScrapBook Capture Detail */
+
+@import url('chrome://browser/skin/bookmarks/addBookmark.css');
+
+
+/* ::::: ScrapBook ::::: */
+
+toolbar#ScrapBookMainToolbar toolbarbutton
+{
+	margin :0px !important;
+	padding:3px !important;
+}
+
+menuitem#ScrapBookTreePopupN .menu-iconic-icon,
+menuitem#ScrapBookTreePopupD.menu-iconic-icon,
+menuitem#ScrapBookTreePopupP .menu-iconic-icon
+{
+	width : 13px !important;
+	height: 13px !important;
+}
+
+
+/* ::::: ScrapBook Tree ::::: */
+
+treechildren::-moz-tree-image(ScrapBookTreecolTitle, leaf)
+{
+	-moz-image-region: auto !important;
+	list-style-image: url('chrome://scrapbook/skin/treeitem.png') !important;
+	width: 16px; height: 16px;
+}
+
+treechildren::-moz-tree-image(ScrapBookTreecolTitle, leaf, note)
+{
+	list-style-image: url('chrome://scrapbook/skin/treenote.png') !important;
+}
+
+treechildren::-moz-tree-drop-feedback
+{
+	background-color: Highlight;
+	width: 80px;
+	height: 2px;
+}
+
+
+/* ::::: ScrapBook Tree Popup ::::: */
+
+menuitem#ScrapBookTreePopupN { list-style-image: url('chrome://scrapbook/skin/menu_createfolder.png'); }
+menuitem#ScrapBookTreePopupC { list-style-image: url('chrome://scrapbook/skin/menu_createnote.png'); }
+menuitem#ScrapBookTreePopupD { list-style-image: url('chrome://scrapbook/skin/menu_delete.png'); }
+menuitem#ScrapBookTreePopupP { list-style-image: url('chrome://scrapbook/skin/menu_property.png'); }
+
+
+/* ::::: ScrapBook Header ::::: */
+
+.sb-header
+{
+	background-color:#E7F4FC !important;
+	background-image:none    !important;
+	border:1px solid #0FA9E5 !important;
+	padding:3px !important;
+}
+
+.sb-header-ex
+{
+	background-color:#FFE4C7 !important;
+	border:1px solid #FF8099 !important;
+	padding:3px !important;
+}
+
+.sb-header toolbarbutton,
+.sb-header-ex toolbarbutton
+{
+	padding:0px !important; margin:0px !important;
+}
+
+.sb-header-exit
+{
+	list-style-image:url('chrome://scrapbook/skin/exit.png');
+	-moz-appearance:none;
+}
+
+
+/* ::::: ScrapBook Search, Result ::::: */
+
+#ScrapBookSearch
+{
+	max-width :24px !important;
+	max-height:16px !important;
+	margin :2px !important;
+	padding:0px !important;
+	background-image:url('chrome://scrapbook/skin/dropdown.png');
+}
+
+listbox#ScrapBookResultList listitem[selected="true"] listcell
+{
+	color: ThreeDHighlight !important;
+}
+
+
+/* ::::: ScrapBook Property ::::: */
+
+dialog#ScrapBookPropertyDialog row
+{
+	margin-bottom:3px;
+}
+
+dialog#ScrapBookPropertyDialog row > textbox
+{
+	height: 1.6em;
+	border: 0;
+	-moz-appearance: none;
+}
+
+
+/* ::::: ScrapBook List ::::: */
+
+listbox .listcell-icon
+{
+	width: 16px; height: 16px;
+}
+
+listbox .text-right
+{
+	text-align:right; padding-right:10px;
+}
+
+
+/* ::::: ScrapNote ::::: */
+
+browser
+{
+	background-color: #FFFFFF;
+}
+
+#ScrapNoteWindow #ScrapNoteTextbox,
+#ScrapNoteWindow #ScrapNoteTemplateTextbox
+{
+	font-size: 16px;
+	font-family: monospace;
+}
+
