@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+
+	<Description about="urn:mozilla:install-manifest">
+
+		<em:id>{53A03D43-5363-4669-8190-99061B2DEBA5}</em:id>
+		<em:name>ScrapBook</em:name>
+		<em:version>0.12.0</em:version>
+		<em:description>This extension helps you to save Web pages and easily manage collections.</em:description>
+		<em:creator>Gomita</em:creator>
+		<em:contributor>Bob Chao</em:contributor>
+		<em:homepageURL>http://amb.vis.ne.jp/mozilla/scrapbook/</em:homepageURL>
+		<em:optionsURL>chrome://scrapbook/content/setting.xul</em:optionsURL>
+		<em:aboutURL>chrome://scrapbook/content/about.xul</em:aboutURL>
+		<em:iconURL>chrome://scrapbook/skin/mainicon1.png</em:iconURL>
+		<em:updateURL>http://amb.vis.ne.jp/mozilla/scrapbook/update.rdf?ver=0.12.0</em:updateURL>
+
+		<em:file>
+			<Description about="urn:mozilla:extension:file:scrapbook.jar">
+				<em:package>content/</em:package>
+				<em:skin>skin/classic/</em:skin>
+				<em:locale>locale/en-US/</em:locale>
+				<em:locale>locale/ja-JP/</em:locale>
+				<em:locale>locale/zh-TW/</em:locale>
+			</Description>
+		</em:file>
+
+		<em:targetApplication>
+			<Description>
+				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+				<em:minVersion>0.9</em:minVersion>
+				<em:maxVersion>1.0</em:maxVersion>
+			</Description>
+		</em:targetApplication>
+
+	</Description>
+
+</RDF>
