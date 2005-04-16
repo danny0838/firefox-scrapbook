@@ -22,7 +22,6 @@ function ScrapBookItem(aID)
 	this.icon    = "";
 	this.source  = "";
 	this.comment = "";
-	this.content = "";
 }
 
 
@@ -36,7 +35,6 @@ var SBservice = {
 	UC     : Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter),
 	WM     : Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator),
 	PB     : Components.classes['@mozilla.org/preferences;1'].getService(Components.interfaces.nsIPrefBranch),
-	PBI    : Components.classes['@mozilla.org/preferences;1'].getService(Components.interfaces.nsIPrefBranchInternal),
 };
 
 
@@ -101,9 +99,10 @@ var SBcommon = {
 	},
 
 
-	getTimeStamp : function()
+	getTimeStamp : function(advance)
 	{
 		var dd = new Date;
+		if ( advance ) dd.setTime(dd.getTime() + 1000 * advance);
 		var y = dd.getFullYear();
 		var m = dd.getMonth() + 1; if ( m < 10 ) m = "0" + m;
 		var d = dd.getDate();      if ( d < 10 ) d = "0" + d;
@@ -184,8 +183,12 @@ var SBcommon = {
 
 	resolveURL : function(aBaseURL, aRelURL)
 	{
-		var aBaseURLObj = this.convertURLToObject(aBaseURL);
-		return aBaseURLObj.resolve(aRelURL);
+		try {
+			var aBaseURLObj = this.convertURLToObject(aBaseURL);
+			return aBaseURLObj.resolve(aRelURL);
+		} catch(ex) {
+			alert("ScrapBook ERROR: Failed to resolve URL.\n" + aBaseURL + "\n" + aRelURL);
+		}
 	},
 
 
@@ -204,7 +207,7 @@ var SBcommon = {
 		}
 		catch(ex)
 		{
-			alert("***SCRAPBOOK_ERROR: Failed to read file.\n");
+			dump("ScrapBook ERROR: Failed to read file.\n" + aFile.path + "\n");
 			return false;
 		}
 	},
@@ -213,8 +216,8 @@ var SBcommon = {
 	writeFile : function(aFile, aContent, aChars)
 	{
 		if ( aFile.exists() ) aFile.remove(false);
-		aFile.create(aFile.NORMAL_FILE_TYPE, 0666);
 		try {
+			aFile.create(aFile.NORMAL_FILE_TYPE, 0666);
 			SBservice.UC.charset = aChars;
 			aContent = SBservice.UC.ConvertFromUnicode(aContent);
 			var ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
@@ -224,8 +227,21 @@ var SBcommon = {
 		}
 		catch(ex)
 		{
-			alert("ScrapBook ERROR: Failed to write file.\n" + ex);
+			alert("ScrapBook ERROR: Failed to write file: " + aFile.leafName);
 		}
+	},
+
+
+	writeIndexDat : function(aSBitem)
+	{
+		var myDAT = "";
+		var myDATFile = this.getContentDir(aSBitem.id).clone();
+		myDATFile.append("index.dat");
+		for ( var prop in aSBitem )
+		{
+			myDAT += prop + "\t" + aSBitem[prop] + "\n";
+		}
+		this.writeFile(myDATFile, myDAT, "UTF-8");
 	},
 
 
@@ -280,35 +296,37 @@ var SBcommon = {
 	convertURLToFile : function(aURLString)
 	{
 		var aURL = this.convertURLToObject(aURLString);
-		if ( !aURL.schemeIs('file') ) return; 
+		if ( !aURL.schemeIs("file") ) return; 
 		try {
-			var fileHandler = SBservice.IO.getProtocolHandler('file').QueryInterface(Components.interfaces.nsIFileProtocolHandler);
+			var fileHandler = SBservice.IO.getProtocolHandler("file").QueryInterface(Components.interfaces.nsIFileProtocolHandler);
 			return fileHandler.getFileFromURLSpec(aURLString); 
-		}
-		catch(ex)
-		{
-			alert("ScrapBook ERROR: Failed to convert URL to nsILocalFile.");
+		} catch(ex) {
+			dump("*** ScrapBook ERROR: Failed to getFileFromURLSpec: " + aURLString + "\n");
 		}
 	},
 
 
 
-	launchDirectory : function(aID)
+	launchDirectory : function(aDir)
 	{
-		var myDir = this.getContentDir(aID);
-		if ( nsPreferences.getBoolPref("scrapbook.filer.default", true) )
+		if ( this.getBoolPref("scrapbook.filer.default", true) )
 		{
 			try {
-				myDir = myDir.QueryInterface(Components.interfaces.nsILocalFile);
-				myDir.launch();
-			} catch(err) {
-				var myDirPath = SBservice.IO.newFileURI(myDir).spec;
-				this.loadURL(myDirPath, false);
+				aDir = aDir.QueryInterface(Components.interfaces.nsILocalFile);
+				aDir.launch();
+			} catch(ex) {
+				var aDirPath = SBservice.IO.newFileURI(aDir).spec;
+				this.loadURL(aDirPath, false);
 			}
 		}
 		else
 		{
-			this.execProgram(nsPreferences.getLocalizedUnicharPref("scrapbook.filer.path", ""), [myDir.path]);
+			try {
+				var filerPath = SBservice.PB.getComplexValue("scrapbook.filer.path", Components.interfaces.nsIPrefLocalizedString).data;
+				this.execProgram(filerPath, [aDir.path]);
+			} catch(ex) {
+				alert(ex);
+			}
 		}
 	},
 
@@ -334,6 +352,14 @@ var SBcommon = {
 	},
 
 
+	getFocusedWindow : function()
+	{
+		var myWindow = document.commandDispatcher.focusedWindow;
+		if ( !myWindow || myWindow == window ) myWindow = window._content;
+		return myWindow;
+	},
+
+
 	getURL : function(aID, aType)
 	{
 		if ( aType == "note") {
@@ -352,21 +378,29 @@ var SBcommon = {
 			case "note"   : return "chrome://scrapbook/skin/treenote.png";   break;
 			default       : return "chrome://scrapbook/skin/treeitem.png";   break;
 		}
-	}
+	},
+
+
+	setBoolPref: function (aName, aValue)
+	{
+		try {
+			SBservice.PB.setBoolPref(aName, aValue);
+		} catch(ex) {
+		}
+	},
+
+
+	getBoolPref : function(aName, aDefVal)
+	{
+		try {
+			return SBservice.PB.getBoolPref(aName);
+		} catch(ex) {
+			return aDefVal;
+		}
+	},
 
 
 };
-
-
-
-function SB_switchEditingMode()
-{
-	var curURL = window._content.location.href;
-	if ( curURL.match(/^file/) && curURL.match(/\/data\/(\d{14})\/index\.html$/) )
-	{
-		SBcommon.loadURL("chrome://scrapbook/content/edit.xul?id=" + RegExp.$1, false);
-	}
-}
 
 
 

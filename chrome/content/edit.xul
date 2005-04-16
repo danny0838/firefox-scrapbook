@@ -10,6 +10,7 @@
 <!--window-->
 <window id="ScrapBookEditWindow"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:html="http://www.w3.org/1999/xhtml"
         onload="SB_initEdit();">
 
 	<!--JavaScript for Preference-->
@@ -21,67 +22,107 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/linemarker.js" />
 
 	<!--StringBundle-->
-	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/scrapbook.properties" />
+	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/edit.properties" />
 
 	<popupset>
 		<tooltip id="ScrapBookTooltip" />
 	</popupset>
 
+	<!--header-->
+	<hbox id="ScrapBookHeader" class="sb-header" style="border-top:0px !important;border-right:0px !important;border-left:0px !important;" hidden="true">
+		<label flex="1" crop="end" value="" onclick="SBcommon.loadURL(this.value, event.button > 0);" style="color:#0000FF;text-decoration:underline;cursor:pointer;" />
+	</hbox>
+
 	<!--browser-->
 	<browser id="ScrapBookBrowser" type="content-primary" flex="1" onload="SB_browserOnload(event);" />
 
 	<!--editor-->
-	<toolbar id="ScrapBookEditor" align="center" style="border-top:1px solid ThreeDShadow;padding:1px;">
+	<toolbar id="ScrapEditor" align="center" style="border-top:1px solid ThreeDShadow;padding:1px;">
 		<!--title-->
-	    <image id="ScrapBookEditorIcon" style="width:16px;height:16px;margin-left:3px;" />
-		<textbox id="ScrapBookEditorTitle"   ondblclick="this.select();" onkeypress="if (event.keyCode == 13) SBeditor.saveResource();" flex="1" style="height:1.7em;max-width:180px;" />
+	    <image id="ScrapEditorIcon" style="width:16px;height:16px;margin-left:3px;cursor:pointer;" onclick="if (event.button == 0) window.openDialog('chrome://scrapbook/content/property.xul','','modal,centerscreen,chrome',gID);SBeditor.init(gID);" />
+		<textbox id="ScrapEditorTitle"   ondblclick="this.select();" onkeypress="if (event.keyCode == 13) SBeditor.saveResource();" flex="1" style="padding:2px;max-width:180px;" />
 		<!--comment-->
 		<toolbarbutton id="ScrapBookCommentExpander" tooltiptext="&sb.expand.comment;" image="chrome://scrapbook/skin/edit_comment.png" oncommand="SBeditor.toggleCommentXUL(true);" />
-		<textbox id="ScrapBookEditorComment" ondblclick="this.select();" onkeypress="if (event.keyCode == 13) SBeditor.saveResource();" flex="3" style="height:1.7em;" />
-		<textbox id="ScrapBookEditorFlasher" style="width:30px;color:#FFFFFF;" class="plain" readonly="true" />
+		<textbox id="ScrapEditorComment" ondblclick="this.select();" onkeypress="if (event.keyCode == 13) SBeditor.saveResource();" flex="3" style="padding:2px;" />
+		<textbox id="ScrapEditorFlasher" style="width:30px;color:#FFFFFF;" class="plain" readonly="true" />
 		<!--tools-->
-		<toolbarbutton id="ScrapBookEditorInline" tooltiptext="&sb.editor.inline;" image="chrome://scrapbook/skin/edit_inline.png" oncommand="SBinline.init();" />
-		<toolbarbutton id="ScrapBookEditorMarker" type="menu-button" image="chrome://scrapbook/skin/edit_marker.png" tooltiptext="&sb.editor.marker;" oncommand="if ( event.originalTarget.localName == 'toolbarbutton' ) SB_editorMarker(false);">
+		<toolbarbutton id="ScrapEditorInline" type="menu-button" tooltiptext="&sb.editor.block;" image="chrome://scrapbook/skin/edit_inline.png" oncommand="if ( event.originalTarget.localName == 'toolbarbutton' ) SBblockComment.add();">
 			<menupopup>
-				<menuitem id="ScrapBookEditorMarkerP" type="radio" label="Pink"   style="background-color:#FFB6C1;" oncommand="SB_editorMarker('#FFB6C1');" />
-				<menuitem id="ScrapBookEditorMarkerB" type="radio" label="Blue"   style="background-color:#ADD8E6;" oncommand="SB_editorMarker('#ADD8E6');" />
-				<menuitem id="ScrapBookEditorMarkerG" type="radio" label="Green"  style="background-color:#90EE90;" oncommand="SB_editorMarker('#90EE90');" />
-				<menuitem id="ScrapBookEditorMarkerY" type="radio" label="Yellow" style="background-color:#FFFF00;" oncommand="SB_editorMarker('#FFFF00');" />
+				<menuitem label="&sb.block.customize;" oncommand="setTimeout(function(){ SBblockComment.customizeCSS(true); }, 0);" />
+				<menuitem label="&sb.block.hide;"      oncommand="setTimeout(function(){ SBblockComment.toggleHide(); }, 0);" type="checkbox" id="ScrapBookBlockHide" />
+				<menuseparator />
+				<menuitem label="&sb.editor.inline;"   oncommand="setTimeout(function(){ SBinlineComment.init(); }, 0);" />
+				<menuitem label="&sb.editor.block;"    oncommand="setTimeout(function(){ SBblockComment.add(); }, 0);" />
 			</menupopup>
 		</toolbarbutton>
-		<toolbarbutton id="ScrapBookEditorCutter" type="menu-button" image="chrome://scrapbook/skin/edit_cutter.png" tooltiptext="&sb.editor.cutter;" oncommand="if ( event.originalTarget.localName == 'toolbarbutton' ) SB_editorCutter(event);">
+		<toolbarbutton id="ScrapEditorMarker" type="menu-button" image="chrome://scrapbook/skin/edit_marker.png" tooltiptext="&sb.editor.marker;" oncommand="if ( event.originalTarget.localName == 'toolbarbutton' ) SE_marker(false);">
 			<menupopup>
-				<menuitem label="&sb.editor.unline;" oncommand="SB_editorRemoveAllSpan('scrapbook-inline-comment');" />
-				<menuitem label="&sb.editor.unmark;" oncommand="SB_editorRemoveAllSpan('linemarker-marked-line');" />
-				<menuitem label="&sb.editor.iframe;" oncommand="SBeditDocument.removeElements('IFRAME');" />
-				<menuitem label="&sb.editor.cutter;" oncommand="SB_editorCutter();" />
+				<menuitem id="ScrapEditorMarkerP" type="radio" label="Pink"   style="background-color:#FFB6C1;" oncommand="SE_marker('#FFB6C1');" />
+				<menuitem id="ScrapEditorMarkerB" type="radio" label="Blue"   style="background-color:#ADD8E6;" oncommand="SE_marker('#ADD8E6');" />
+				<menuitem id="ScrapEditorMarkerG" type="radio" label="Green"  style="background-color:#90EE90;" oncommand="SE_marker('#90EE90');" />
+				<menuitem id="ScrapEditorMarkerY" type="radio" label="Yellow" style="background-color:#FFFF00;" oncommand="SE_marker('#FFFF00');" />
 			</menupopup>
 		</toolbarbutton>
-		<toolbarbutton id="ScrapBookEditorEraser" tooltiptext="&sb.editor.eraser;" image="chrome://scrapbook/skin/edit_eraser.png" oncommand="SBeditor.toggleEraser();" type="checkbox" />
-		<toolbarbutton id="ScrapBookEditorUndo"   tooltiptext="&sb.editor.undo;"   image="chrome://scrapbook/skin/edit_undo.png"   oncommand="SBeditor.undo();" />
-		<toolbarbutton id="ScrapBookEditorSave"   tooltiptext="&sb.editor.save;"   image="chrome://scrapbook/skin/edit_save.png"   oncommand="SBeditor.save();" />
-		<toolbarbutton tooltiptext="&sb.editor.exit;" image="chrome://scrapbook/skin/exit.png" oncommand="SB_switchNormalMode();" />
+		<toolbarbutton id="ScrapEditorCutter" type="menu-button" image="chrome://scrapbook/skin/edit_cutter.png" tooltiptext="&sb.editor.cutter;" oncommand="if ( event.originalTarget.localName == 'toolbarbutton' ) SE_cutter(event);">
+			<menupopup>
+				<menuitem label="Remove All SCRIPT Tags" oncommand="SE_removeElementsByTagName('script');" />
+				<menuitem label="Remove All IFRAME Tags" oncommand="SE_removeElementsByTagName('iframe');" />
+				<menuseparator />
+				<menuitem label="&sb.editor.unline;" oncommand="SE_removeAllSpan('scrapbook-inline-comment');" />
+				<menuitem label="&sb.editor.unmark;" oncommand="SE_removeAllSpan('linemarker-marked-line');" />
+				<menuitem label="&sb.editor.cutter;" oncommand="SE_cutter();" />
+			</menupopup>
+		</toolbarbutton>
+		<toolbarbutton id="ScrapEditorEraser"  tooltiptext="&sb.editor.eraser;"   image="chrome://scrapbook/skin/edit_eraser.png" oncommand="SBeditor.toggleEraser();" type="checkbox" />
+		<toolbarbutton id="ScrapEditorUndo"    label="&sb.editor.undo;"           image="chrome://scrapbook/skin/edit_undo.png"   oncommand="SBeditDOMEraser.undo();" accesskey="Z" hidden="true" />
+		<toolbarbutton id="ScrapEditorRestore" tooltiptext="&sb.editor.restore;"  image="chrome://scrapbook/skin/edit_undo.png"   oncommand="SBeditor.restore();" />
+		<toolbarbutton id="ScrapEditorSave"    tooltiptext="&sb.editor.save;"     image="chrome://scrapbook/skin/edit_save.png"   oncommand="SBeditor.save();" />
+		<toolbarbutton tooltiptext="&sb.editor.exit;" image="chrome://scrapbook/skin/exit.png" oncommand="SB_exitEditingMode();" />
 	</toolbar>
 	<!--inline header-->
-	<hbox id="ScrapBookResult" align="center" hidden="true">
+	<hbox id="ScrapBookInlineHeader" class="sb-header" align="center" hidden="true">
 		<label value="" />
 		<spacer flex="1" />
-		<toolbarbutton image="chrome://scrapbook/skin/exit.png" style="-moz-appearance:none;" oncommand="SBinline.exit();" />
+		<toolbarbutton image="chrome://scrapbook/skin/exit.png" style="-moz-appearance:none;" oncommand="SBinlineComment.exit();" />
 	</hbox>
 	<!--inline comment-->
 	<toolbar id="ScrapBookInline" align="center" hidden="true" style="border-top:1px solid ThreeDShadow;padding:1px;">
 	    <image src="chrome://scrapbook/skin/edit_comment.png" style="width:16px;height:13px;margin-left:3px;" />
-		<textbox id="ScrapBookInlineTextbox" ondblclick="this.select();" onblur="SBinline.exit();" onkeypress="SBinline.keypress(event);" flex="1" style="height:1.7em;" />
-		<toolbarbutton id="ScrapBookInlineSave"   label="&sb.inline.enter;"  oncommand="SBinline.save();" />
-		<toolbarbutton id="ScrapBookInlineDelete" label="&sb.inline.delete;" oncommand="SBinline.remove();" />
+		<textbox id="ScrapBookInlineTextbox" ondblclick="this.select();" onblur="SBinlineComment.exit();" onkeypress="SBinlineComment.keypress(event);" flex="1" style="height:1.7em;" />
+		<toolbarbutton id="ScrapBookInlineSave"   label="&sb.inline.enter;"  oncommand="SBinlineComment.save();" />
+		<toolbarbutton id="ScrapBookInlineDelete" label="&sb.inline.delete;" oncommand="SBinlineComment.remove();" />
 	</toolbar>
 	<!--multiline comment-->
-	<textbox id="ScrapBookEditorCommentML" ondblclick="this.select();" onblur="SBeditor.saveResource();" hidden="true" disabled="true" multiline="true" style="height:8em;" />
+	<textbox id="ScrapEditorCommentML" ondblclick="this.select();" onblur="SBeditor.saveResource();" hidden="true" disabled="true" multiline="true" style="height:8em;" />
+
+	<!--block style header-->
+	<hbox id="ScrapBookBlockHeader" class="sb-header-ex" align="center" hidden="true">
+		<label value="&sb.block.customize;" />
+		<spacer flex="1" />
+		<toolbarbutton image="chrome://scrapbook/skin/exit.png" style="-moz-appearance:none;" oncommand="SBblockComment.customizeCSS(false);" />
+	</hbox>
+	<!--block style-->
+	<textbox id="ScrapBookBlockStyle" ondblclick="this.select();" hidden="true" multiline="true" style="height:10em;" />
+
+	<!--block comment-->
+	<hbox collapsed="true">
+		<html:div id="ScrapBookBlock"><!--
+			--><html:form style="margin:none !important;padding:none !important;"><!--
+				--><html:textarea style="width:100%;height:100px;" /><!--
+				--><html:div style="text-align:right;"><!--
+					--><html:input type="button" value="&sb.inline.enter;"  onclick="this.parentNode.parentNode.parentNode.setAttribute('class','scrapbook-block-comment');this.parentNode.parentNode.parentNode.appendChild(document.createTextNode(this.parentNode.parentNode.firstChild.value));this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);" /><!--
+					--><html:input type="button" value="&sb.inline.delete;" onclick="this.parentNode.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode.parentNode);" /><!--
+				--></html:div><!--
+			--></html:form><!--
+		--></html:div>
+	</hbox>
 
 	<!--script-->
 	<script type="application/x-javascript"><![CDATA[
-		SBcomment   = document.getElementById("ScrapBookEditorComment");
-		SBcommentML = document.getElementById("ScrapBookEditorCommentML");
+		SBheader     = document.getElementById("ScrapBookHeader");
+		SBcomment    = document.getElementById("ScrapEditorComment");
+		SBcommentML  = document.getElementById("ScrapEditorCommentML");
+		SBundoButton = document.getElementById("ScrapEditorUndo");
 		SBeditor.toggleCommentXUL(false);
 	]]></script>
 

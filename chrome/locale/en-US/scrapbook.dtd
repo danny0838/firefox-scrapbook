@@ -1,46 +1,23 @@
 <!ENTITY sb.title			"ScrapBook">
 
-<!ENTITY sb.open			"Open">
-<!ENTITY sb.opentab			"Open in New Tab">
-<!ENTITY sb.opensource		"Open Source URL">
-<!ENTITY sb.launchdir		"Browse Files">
-<!ENTITY sb.delete			"Delete">
-<!ENTITY sb.property		"Properties">
-
-<!ENTITY sb.folder			"Folder">
-<!ENTITY sb.folder.new		"New Folder...">
-<!ENTITY sb.folder.toggle	"Expand/Collapse">
-<!ENTITY sb.folder.openall	"Open All in Tabs">
-<!ENTITY sb.folder.view		"Open All in One Tab">
-<!ENTITY sb.folder.manage	"Manage Folder...">
-<!ENTITY sb.togglefolders	"Expand/Collapse All Folders">
+<!ENTITY sb.new.folder		"New Folder...">
+<!ENTITY sb.new.note		"New Note">
+<!ENTITY sb.toggleallopen	"Expand/Collapse All Folders">
 
 <!ENTITY sb.tools			"Tools">
 <!ENTITY sb.tools.setting	"Settings...">
-<!ENTITY sb.editing.mode	"Always Editing Mode">
-<!ENTITY sb.tools.search	"Show Search Bar">
-<!ENTITY sb.tools.list		"Calculation of Size">
+<!ENTITY sb.tools.editing	"Always Editing Mode">
 <!ENTITY sb.tools.manage	"Manage Tree...">
-<!ENTITY sb.tools.backup	"Compressed Backup">
-<!ENTITY sb.tools.export	"Export Tree as HTML">
+<!ENTITY sb.manage			"Manage">
+<!ENTITY sb.tools.calculate	"Calculation of Size">
+<!ENTITY sb.tools.sorttree	"Sort Entire Tree">
+<!ENTITY sb.tools.directory	"ScrapBook Directory">
+<!ENTITY sb.tools.urls		"Capture Multiple URLs">
+<!ENTITY sb.tools.trade		"Import / Export">
+<!ENTITY sb.tools.output	"Output Tree as HTML">
+<!ENTITY sb.tools.backup	"Backup with Compression">
 <!ENTITY sb.tools.homepage	"Home Page">
 <!ENTITY sb.tools.about		"About">
-<!ENTITY sb.tools.reset		"Reset Statusbar">
-
-<!ENTITY sb.prop.date		"Date">
-<!ENTITY sb.prop.type		"Type">
-<!ENTITY sb.prop.title		"Title">
-<!ENTITY sb.prop.chars		"Charset">
-<!ENTITY sb.prop.icon		"Icon">
-<!ENTITY sb.prop.source		"URL">
-<!ENTITY sb.prop.comment	"Comment">
-<!ENTITY sb.prop.content	"Content">
-<!ENTITY sb.prop.size		"Size">
-<!ENTITY sb.prop.id.date	"ID (Time)">
-
-<!ENTITY sb.prop.general	"General Info">
-<!ENTITY sb.prop.htmltitle	"Get HTML Title">
-<!ENTITY sb.prop.iconurl	"Change Icon">
 
 <!ENTITY sb.search			"Search">
 <!ENTITY sb.search.fulltext	"Full Text Search">
@@ -48,7 +25,6 @@
 <!ENTITY sb.search.re		"Use RegExp">
 <!ENTITY sb.search.cs		"Match Case">
 <!ENTITY sb.search.cache	"Update Cache for Full Text Search">
-<!ENTITY sb.search.build	"Now Building Cache...">
 <!ENTITY sb.search.clear	"Clear Form History">
 
 <!ENTITY sb.filter.days		"Filter by Days">
@@ -58,7 +34,8 @@
 <!ENTITY sb.filter.1week	"This Week">
 <!ENTITY sb.filter.2week	"Last 2 Weeks">
 
-<!ENTITY sb.note.new		"New Note">
+<!ENTITY sb.note.opentab	"Open in Tab">
 <!ENTITY sb.note.close		"Close">
-<!ENTITY sb.note.opentab	"Edit in Tab">
+
+<!ENTITY sb.move			"Move into Folder">
 

@@ -1,0 +1,39 @@
+<!ENTITY sb.setting			": Paramétrage">
+<!ENTITY sb.setting.general	"Général">
+<!ENTITY sb.setting.usetabs	"Utiliser des onglets">
+<!ENTITY sb.setting.advance	"Avancé">
+<!ENTITY sb.setting.capture	"Capture">
+<!ENTITY sb.setting.editing	"Editing">
+<!ENTITY sb.setting.program	"Programs">
+
+<!ENTITY sb.setting.browser.submenu		"Enable submenu inside the browser context menu (Change after restart)">
+<!ENTITY sb.setting.capture.detail		"Afficher la fenêtre 'Détail de la capture' en cas de capture par glisser / déposer dans la barre latérale">
+<!ENTITY sb.setting.capture.notify		"Afficher la notification 'Capture terminée'  (seulement sous Windows ?)">
+<!ENTITY sb.setting.tree.hidefavicon	"Ne pas afficher de favicône dans l'arborescence">
+<!ENTITY sb.setting.tree.singleexpand	"Quand un dossier de l'arborescence est déployé, réduire tous les autres dossiers (cf. les favoris d'IE)">
+<!ENTITY sb.setting.tree.quickdelete	"Ne pas confirmer en cas de suppression">
+
+<!ENTITY sb.setting.usetabs.d			"Utiliser de nouveaux onglets pour les actions entreprises.">
+<!ENTITY sb.setting.usetabs.note		"Open Notes in Tab">
+
+<!ENTITY sb.setting.capture.utf8encode		"Convert into UTF-8 encoding (Recommend)">
+<!ENTITY sb.setting.capture.utf8encode.d	"If check off, some characters frequently garbles into '?'.">
+<!ENTITY sb.setting.capture.removescript	"Remove JavaScript (Recommend)">
+<!ENTITY sb.setting.capture.removescript.d	"If check off, sometimes fails to preserve the page layout.">
+
+<!ENTITY sb.setting.edit.showheader		"Show header">
+<!ENTITY sb.setting.edit.multilines		"Enable multiline comment">
+<!ENTITY sb.setting.edit.confirmsave.1	"Interval for confirming save">
+<!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 = never confirm)">
+
+<!ENTITY sb.setting.program.filer			"Programme pour le menu 'Parcourir les fichiers'">
+<!ENTITY sb.setting.program.filer.default	"Par défaut (pour Windows, Explorer.)">
+<!ENTITY sb.setting.browse					"Parcourir">
+
+<!ENTITY sb.setting.data			"Destination du stockage des données">
+<!ENTITY sb.setting.data.default	"Par défaut (dans le dossier de votre profil)">
+<!ENTITY sb.setting.data.notice		"Si vous voulez déplacer des données existantes, déplacez auparavant manuellement le dossier 'ScrapBook'. Puis, configurez la destination.">
+
+<!ENTITY sb.setting.restorefavicons		"Restore favicons">
+<!ENTITY sb.setting.restorefavicons.d	"If favicons are not displayed, press this button:">
+

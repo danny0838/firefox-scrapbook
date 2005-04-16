@@ -1,0 +1,39 @@
+<!ENTITY sb.setting			"Impostazioni">
+<!ENTITY sb.setting.general	"Generali">
+<!ENTITY sb.setting.usetabs	"Schede">
+<!ENTITY sb.setting.advance	"Avanzate">
+<!ENTITY sb.setting.capture	"Cattura">
+<!ENTITY sb.setting.editing	"Modifica">
+<!ENTITY sb.setting.program	"Programmi">
+
+<!ENTITY sb.setting.browser.submenu		"Attivare i sottomenu dentro il menu contestuale del browser (riavvio necessario)">
+<!ENTITY sb.setting.capture.detail		"Visualizzare la finestra di dialogo 'Dettagli cattura' quando si cattura tramite drag-and-drop nel pannello">
+<!ENTITY sb.setting.capture.notify		"Visualizzare la finestra di notifica 'Cattura completata' (Nota! Potrebbe funzionare solo in ambiente Windows)">
+<!ENTITY sb.setting.tree.hidefavicon	"Non visualizzare le favicon nel diagramma delle directory">
+<!ENTITY sb.setting.tree.singleexpand	"Quando si espande una cartella nel diagramma delle directory, contrarre tutte le altre cartelle (come in IE)">
+<!ENTITY sb.setting.tree.quickdelete	"Non richiedere alcuna conferma quando si cancellano i dati">
+
+<!ENTITY sb.setting.usetabs.d			"Le seguenti azioni verranno eseguite in nuove schede:">
+<!ENTITY sb.setting.usetabs.note		"Apri le note in nuove schede">
+
+<!ENTITY sb.setting.capture.utf8encode		"Convertire nella codifica UTF-8 (raccomandato)">
+<!ENTITY sb.setting.capture.utf8encode.d	"Se non selezionato, la visualizzazione di alcuni caratteri potrebbe alterarsi nel menu '?'.">
+<!ENTITY sb.setting.capture.removescript	"Rimuovere JavaScript (raccomandato)">
+<!ENTITY sb.setting.capture.removescript.d	"Se non selezionato, l'impaginazione potrebbe talvolta non essere salvata correttamente.">
+
+<!ENTITY sb.setting.edit.showheader		"Visualizza intestazioni">
+<!ENTITY sb.setting.edit.multilines		"Attiva il commento su più linee">
+<!ENTITY sb.setting.edit.confirmsave.1	"Intervallo per la conferma di salvataggio ogni">
+<!ENTITY sb.setting.edit.confirmsave.2	"min. (0 = nessuna conferma)">
+
+<!ENTITY sb.setting.program.filer			"Programma per visualizzare i file">
+<!ENTITY sb.setting.program.filer.default	"Predefinito (in ambiente Windows, solitamente Explorer)">
+<!ENTITY sb.setting.browse					"Visualizza">
+
+<!ENTITY sb.setting.data			"Cartella dove conservare i dati">
+<!ENTITY sb.setting.data.default	"Predefinita (nella cartella del proprio profilo)">
+<!ENTITY sb.setting.data.notice		"Se si desidera spostare i dati esistenti, spostare prima manualmente la cartella 'ScrapBook' ed indicare quindi il percorso scelto.">
+
+<!ENTITY sb.setting.restorefavicons		"Ripristina le favicon">
+<!ENTITY sb.setting.restorefavicons.d	"In caso le favicon non vengano correttamente visualizzate, cliccare sul seguente pulsante:">
+

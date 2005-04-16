@@ -1,0 +1,11 @@
+<!ENTITY sn.save		"Salva">
+<!ENTITY sn.close		"Chiudi">
+<!ENTITY sn.tools		"Strumenti">
+<!ENTITY sn.preview		"Anteprima HTML">
+<!ENTITY sn.template		"Modifica maschera HTML">
+<!ENTITY sn.autolinefeed	"Auto-Linefeed">
+<!ENTITY sn.autolinefeed.t	"Aggiungi il tag &lt;br&gt; a fine-linea nell'anteprima HTML">
+<!ENTITY sn.fontsize		"Grandezza carattere">
+<!ENTITY sn.help		"Aiuto">
+<!ENTITY sn.exit		"Esci">
+

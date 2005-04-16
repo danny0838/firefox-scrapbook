@@ -1,0 +1,15 @@
+<!ENTITY sb.detail					"Speicherung - Details">
+<!ENTITY sb.detail.rootfolder		"Hauptverzeichnis">
+<!ENTITY sb.detail.new.folder		"Neuer Ordner">
+<!ENTITY sb.detail.select.folder	"Markierter Ordner">
+
+<!ENTITY sb.detail.linked			"Speichere mit verlinkten Dateien">
+<!ENTITY sb.detail.linked.image		"Bild">
+<!ENTITY sb.detail.linked.sound		"Musik">
+<!ENTITY sb.detail.linked.movie		"Film">
+<!ENTITY sb.detail.linked.archive	"Archiv">
+<!ENTITY sb.detail.linked.all		"Alle verlinkten Dateien">
+
+<!ENTITY sb.detail.linked.seq		"Sichere verkn&#x00FC;pften Webseiten der Reiche nach">
+<!ENTITY sb.detail.linked.seq.d		"(in einem automatisch erstellten Unterordner)">
+

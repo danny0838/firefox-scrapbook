@@ -1,0 +1,15 @@
+<!ENTITY sb.detail					"Capture Detail">
+<!ENTITY sb.detail.rootfolder		"Root Folder">
+<!ENTITY sb.detail.new.folder		"New Folder">
+<!ENTITY sb.detail.select.folder	"Select Folder">
+
+<!ENTITY sb.detail.linked			"Capture including linked files">
+<!ENTITY sb.detail.linked.image		"Image">
+<!ENTITY sb.detail.linked.sound		"Sound">
+<!ENTITY sb.detail.linked.movie		"Movie">
+<!ENTITY sb.detail.linked.archive	"Archive">
+<!ENTITY sb.detail.linked.all		"All Linked Files">
+
+<!ENTITY sb.detail.linked.seq		"Capture all linked Web pages sequentially">
+<!ENTITY sb.detail.linked.seq.d		"(in a subfolder automatically created)">
+

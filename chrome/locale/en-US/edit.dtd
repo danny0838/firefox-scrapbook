@@ -1,26 +1,19 @@
 <!ENTITY sb.editor.inline	"Add Inline Comment to the Selection">
+<!ENTITY sb.editor.block	"Add Block Comment after Selection">
 <!ENTITY sb.editor.marker	"Highlight the Selection">
 <!ENTITY sb.editor.unline	"Remove All Inline Comments">
 <!ENTITY sb.editor.unmark	"Remove All Highlights">
 <!ENTITY sb.editor.cutter	"Remove the Selection">
-<!ENTITY sb.editor.iframe	"Remove Innerframes">
-<!ENTITY sb.editor.eraser	"Erase Tool: A Tool for Removing Clicked Block.">
-<!ENTITY sb.editor.undo		"Abandon Changes and Restore">
+<!ENTITY sb.editor.eraser	"DOM Eraser: A Tool for Removing Clicked Element in the Web Page.">
+<!ENTITY sb.editor.undo		"Undo">
+<!ENTITY sb.editor.restore	"Abandon Changes and Restore">
 <!ENTITY sb.editor.save		"Save Changes">
 <!ENTITY sb.editor.exit		"Exit Editing Mode">
 
 <!ENTITY sb.inline.enter	"Enter">
 <!ENTITY sb.inline.delete	"Delete">
+<!ENTITY sb.block.customize	"Customize CSS for Block Comments">
+<!ENTITY sb.block.hide		"Hide Block Comments">
 
 <!ENTITY sb.expand.comment	"Expand Comment Area">
-
-<!ENTITY sn.save			"Save">
-<!ENTITY sn.close			"Close">
-<!ENTITY sn.preview			"HTML Preview">
-<!ENTITY sn.template		"Template HTML">
-<!ENTITY sn.template.edit	"Edit Template HTML">
-<!ENTITY sn.help			"Help">
-<!ENTITY sn.autolinefeed	"Auto-Linefeed">
-<!ENTITY sn.autolinefeed.t	"Add &lt;br&gt; tag to the end-of-line at the HTML preview">
-<!ENTITY sn.quit.nosave		"Quit without Saving">
 

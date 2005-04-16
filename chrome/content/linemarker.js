@@ -50,7 +50,7 @@ function lmSetMarker(selection, spanClass, spanStyle, spanTitle)
 		range.setEnd(selection.anchorNode, selection.anchorOffset);
 	}
 
-	var line = targetDocument.createElementNS(NS_XHTML, 'span');
+	var line = targetDocument.createElement('span');
 	if ( spanStyle ) line.setAttribute('style', spanStyle);
 	if ( spanClass ) line.setAttribute('class', spanClass);
 	if ( spanTitle ) line.setAttribute('title', spanTitle);

@@ -1,0 +1,8 @@
+<!ENTITY sb.url.description	"URL (每行一個 URL)">
+
+<!ENTITY sb.url.tools		"自動偵測 URL">
+<!ENTITY sb.url.tools.tabs	"此視窗中所有的分頁">
+<!ENTITY sb.url.tools.local	"某目錄下所有的 HTML 檔">
+<!ENTITY sb.url.tools.webox	"WeBox 的 default.html">
+<!ENTITY sb.url.tools.clear	"清除">
+

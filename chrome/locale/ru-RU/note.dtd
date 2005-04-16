@@ -1,0 +1,11 @@
+<!ENTITY sn.save			"Сохранить">
+<!ENTITY sn.close			"Закрыть">
+<!ENTITY sn.tools			"Интсрументы">
+<!ENTITY sn.preview			"HTML предв. просмотр">
+<!ENTITY sn.template		"Править HTML шаблон">
+<!ENTITY sn.autolinefeed	"Автоперенос строк">
+<!ENTITY sn.autolinefeed.t	"Добавлять &lt;br&gt; тэг в конец строки при предв. просмотре">
+<!ENTITY sn.fontsize		"Размер шрифта">
+<!ENTITY sn.help			"Помощь">
+<!ENTITY sn.exit			"Выход">
+

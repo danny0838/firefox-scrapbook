@@ -1,0 +1,19 @@
+<!ENTITY sb.editor.inline	"Ajouter en ligne un commentaire sur la sélection">
+<!ENTITY sb.editor.block	"Ajouter un commentaire de bloc après la sélection">
+<!ENTITY sb.editor.marker	"Surligner la sélection">
+<!ENTITY sb.editor.unline	"Supprimer tous les commentaires en ligne">
+<!ENTITY sb.editor.unmark	"Supprimer tous les surlignages">
+<!ENTITY sb.editor.cutter	"Supprimer la sélection">
+<!ENTITY sb.editor.eraser	"DOM Eraser: un outil pour supprimer un bloc sélectionné.">
+<!ENTITY sb.editor.undo		"Défaire">
+<!ENTITY sb.editor.restore	"Abandonner les changements et restaurer">
+<!ENTITY sb.editor.save		"Sauvegarder les changements">
+<!ENTITY sb.editor.exit		"Quitter le mode édition">
+
+<!ENTITY sb.inline.enter	"Enregistrer">
+<!ENTITY sb.inline.delete	"Supprimer">
+<!ENTITY sb.block.customize	"Personnaliser CSS pour les commentaires de bloc">
+<!ENTITY sb.block.hide		"Cacher les commentaires de bloc">
+
+<!ENTITY sb.expand.comment	"Déployer la zone de commentaire">
+

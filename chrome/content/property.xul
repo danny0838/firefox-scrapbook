@@ -5,27 +5,24 @@
 <?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
 
 <!--locale-->
-<!DOCTYPE dialog SYSTEM "chrome://scrapbook/locale/scrapbook.dtd">
+<!DOCTYPE dialog SYSTEM "chrome://scrapbook/locale/property.dtd">
 
 <!--dialog-->
 <dialog id="ScrapBookPropertyDialog"
-        title="&sb.title; - &sb.property;"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         buttons="accept,cancel"
-        style="width:36em;"
+        style="width:400px;"
         onload="SB_initProp();"
         ondialogaccept="SB_acceptProp();"
         ondialogcancel="SB_cancelProp();">
 
-	<!--JavaScript for Preference-->
-	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
 	<!--JavaScript-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/property.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 
 	<!--StringBundle-->
-	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/scrapbook.properties" />
+	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/property.properties" />
 
 	<tabbox>
 		<tabs orient="horizontal">
@@ -40,39 +37,51 @@
 						<column />
 						<column flex="1" />
 					</columns>
-					<rows>
-						<!--editable-->
+					<rows id="ScrapBookPropRows">
+						<!--title-->
 						<row align="center">
 							<label control="ScrapBookPropTitle" value="&sb.prop.title;:" />
 							<hbox>
-								<textbox id="ScrapBookPropTitle" flex="1" style="height:1.7em;" />
-								<button id="ScrapBookPropTitleButton" label="&sb.prop.htmltitle;" oncommand="SB_getTitle();" />
+								<menulist id="ScrapBookPropTitle" editable="true" flex="1">
+									<menupopup onpopupshowing="SB_fillHTMLTitle(this);" />
+								</menulist>
 							</hbox>
 						</row>
-						<row id="ScrapBookPropIconRow" align="center" style="margin-bottom:0px;">
-							<label control="ScrapBookPropIcon" value="&sb.prop.icon;:" />
-							<hbox align="center">
-								<image id="ScrapBookPropIcon" style="margin-left:8px;width:16px;height:16px;" />
-								<spacer flex="1" />
-								<button label="&sb.prop.iconurl;..." oncommand="SB_changeIcon();" />
-							</hbox>
-						</row>
-						<separator class="groove" />
-						<!--readonly-->
-						<row align="center">
-							<label control="ScrapBookPropDate" value="&sb.prop.date;:" />
-							<textbox id="ScrapBookPropDate" readonly="true" />
-						</row>
+						<!--source-->
 						<row id="ScrapBookPropSourceRow" align="center">
 							<label control="ScrapBookPropSource" value="&sb.prop.source;:" />
-							<textbox id="ScrapBookPropSource" readonly="true" />
+							<textbox id="ScrapBookPropSource" />
 						</row>
+						<!--icon-->
+						<row id="ScrapBookPropIconRow" align="center">
+							<label value="&sb.prop.icon;:" />
+							<hbox align="center">
+								<image id="ScrapBookPropIcon" style="width:16px;height:16px;margin:0px 8px;" />
+								<toolbarbutton id="ScrapBookPropIconMenu" label="&sb.prop.icon.change;" type="menu">
+									<menupopup>
+										<menuitem label="&sb.prop.icon.default;"    oncommand="SB_setDefaultIcon();" />
+										<menuitem label="&sb.prop.icon.favicon;..." oncommand="SB_pickupIcon('FAVICON');" />
+										<menuitem label="&sb.prop.icon.custom;..."  oncommand="SB_pickupIcon('CUSTOM');" />
+									</menupopup>
+								</toolbarbutton>
+								<spacer flex="1" />
+								<checkbox id="ScrapBookPropMark" label="&sb.prop.mark;" />
+							</hbox>
+						</row>
+						<separator class="groove" style="margin:8px 0px;" />
+						<!--id (datetime)-->
+						<row align="center">
+							<label value="&sb.prop.date;:" />
+							<textbox id="ScrapBookPropDate" readonly="true" />
+						</row>
+						<!--chars-->
 						<row id="ScrapBookPropCharsRow" align="center">
-							<label control="ScrapBookPropChars" value="&sb.prop.chars;:" />
+							<label value="&sb.prop.encode;:" />
 							<textbox id="ScrapBookPropChars" readonly="true" />
 						</row>
+						<!--filesize-->
 						<row id="ScrapBookPropSizeRow" align="center">
-							<label control="ScrapBookPropSize" value="&sb.prop.size;:" />
+							<label value="&sb.prop.size;:" />
 							<textbox id="ScrapBookPropSize" readonly="true" />
 						</row>
 					</rows>
@@ -84,6 +93,5 @@
 			</tabpanel>
 		</tabpanels>
 	</tabbox>
-	<box id="okCancelButtons" />
 
 </dialog>

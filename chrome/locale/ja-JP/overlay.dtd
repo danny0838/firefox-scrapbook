@@ -1,22 +1,12 @@
-<!ENTITY sb.title					"ScrapBook">
-<!ENTITY sb.capture					"取り込み">
-<!ENTITY sb.capture.partial			"選択範囲の取り込み">
-<!ENTITY sb.capture.partial.as		"選択範囲の詳細な取り込み...">
-<!ENTITY sb.capture.entire			"ページの取り込み">
-<!ENTITY sb.capture.entire.as		"ページの詳細な取り込み...">
-<!ENTITY sb.capture.target			"リンク先ページの取り込み">
-<!ENTITY sb.capture.target.as		"リンク先ページの詳細な取り込み">
+<!ENTITY sb.title				"ScrapBook">
+<!ENTITY sb.capture.partial		"選択範囲の取り込み">
+<!ENTITY sb.capture.partial.as	"選択範囲の詳細な取り込み...">
+<!ENTITY sb.capture.entire		"ページの取り込み">
+<!ENTITY sb.capture.entire.as	"ページの詳細な取り込み...">
+<!ENTITY sb.capture.frame		"フレームの取り込み">
+<!ENTITY sb.capture.frame.as	"フレームの詳細な取り込み">
+<!ENTITY sb.capture.target		"リンク先の取り込み">
+<!ENTITY sb.capture.target.as	"リンク先の詳細な取り込み...">
 
-<!ENTITY sb.detail					"取り込み詳細">
-<!ENTITY sb.detail.selectfolder		"フォルダ">
-<!ENTITY sb.detail.rootfolder		"ルートフォルダ">
-
-<!ENTITY sb.detail.linked			"リンク先のファイルも含めて取り込む">
-<!ENTITY sb.detail.linked.image		"画像">
-<!ENTITY sb.detail.linked.sound		"サウンド">
-<!ENTITY sb.detail.linked.movie		"ムービー">
-<!ENTITY sb.detail.linked.archive	"アーカイブ">
-<!ENTITY sb.detail.linked.all		"すべてのリンク先 （リンク先はファイルとみなされます）">
-
-<!ENTITY sb.overlay.editing			"編集モードに切り替えます">
+<!ENTITY sb.overlay.editing		"編集モードに切り替えます">
 

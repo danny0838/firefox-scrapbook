@@ -1,21 +1,39 @@
-<!ENTITY sb.setting					"設定">
-<!ENTITY sb.setting.general			"全般設定">
-<!ENTITY sb.setting.usetabs			"タブの利用">
-<!ENTITY sb.setting.advance			"上級設定">
+<!ENTITY sb.setting			"設定">
+<!ENTITY sb.setting.general	"全般設定">
+<!ENTITY sb.setting.usetabs	"タブの利用">
+<!ENTITY sb.setting.advance	"パス設定">
+<!ENTITY sb.setting.capture	"取り込み">
+<!ENTITY sb.setting.editing	"編集モード">
+<!ENTITY sb.setting.program	"プログラム">
 
-<!ENTITY sb.setting.detaildialog	"サイドバーへのドラッグドロップによる取り込み時、詳細ダイアログを表示">
-<!ENTITY sb.setting.notification	"取り込みが完了したら通知する　（Windowsのみ正常動作）">
-<!ENTITY sb.setting.hidefavicon		"ツリーにfaviconを表示しない">
-<!ENTITY sb.setting.folderclick		"ツリーフォルダ展開時、他のフォルダを収縮　（IEお気に入り風）">
-<!ENTITY sb.setting.quickdelete		"削除確認をしない">
-<!ENTITY sb.setting.utf8encode		"UTF-8へ変換して取り込む　（記号が?に文字化けするバグを解決します）">
-<!ENTITY sb.setting.usetabs.d		"チェックの付いている操作は新しいタブで開きます">
+<!ENTITY sb.setting.browser.submenu		"ブラウザのコンテキストメニューをサブメニュー化　（再起動後有効）">
+<!ENTITY sb.setting.capture.detail		"サイドバーへのドラッグ＆ドロップによる取り込み時、取り込み詳細を表示">
+<!ENTITY sb.setting.capture.notify		"取り込みが完了したら通知する　（Windowsのみ正常動作）">
+<!ENTITY sb.setting.tree.hidefavicon	"ツリーにfaviconを表示しない">
+<!ENTITY sb.setting.tree.singleexpand	"ツリーのフォルダ展開時、他のフォルダを折りたたむ　（IEお気に入り風）">
+<!ENTITY sb.setting.tree.quickdelete	"削除確認をしない">
 
-<!ENTITY sb.setting.filer			"「ファイルをブラウズ」で用いるプログラム">
-<!ENTITY sb.setting.defaultfiler	"デフォルト（Windowsなら多分エクスプローラ）">
-<!ENTITY sb.setting.browse			"参照">
+<!ENTITY sb.setting.usetabs.d			"チェックがオンの操作は、新しいタブで開きます。">
+<!ENTITY sb.setting.usetabs.note		"ノートをタブで開く">
+
+<!ENTITY sb.setting.capture.utf8encode		"UTF-8へ変換する　（推奨）">
+<!ENTITY sb.setting.capture.utf8encode.d	"チェックをオフにした場合、記号が ? に文字化けする問題がたびたび生じます。">
+<!ENTITY sb.setting.capture.removescript	"JavaScriptを除去　（推奨）">
+<!ENTITY sb.setting.capture.removescript.d	"チェックをオフにした場合、正確なレイアウトで取り込めない問題が時々生じます。">
+
+<!ENTITY sb.setting.edit.showheader		"ヘッダを表示する">
+<!ENTITY sb.setting.edit.multilines		"コメント入力欄を複数行にする">
+<!ENTITY sb.setting.edit.confirmsave.1	"保存確認の間隔">
+<!ENTITY sb.setting.edit.confirmsave.2	"分　（0で確認無しになります）">
+
+<!ENTITY sb.setting.program.filer			"ファイルの表示に用いるプログラム">
+<!ENTITY sb.setting.program.filer.default	"デフォルト　（Windowsなら多分エクスプローラ）">
+<!ENTITY sb.setting.browse					"参照">
 
 <!ENTITY sb.setting.data			"データ保存先">
-<!ENTITY sb.setting.data.default	"デフォルト （プロファイルフォルダ下）">
-<!ENTITY sb.setting.data.notify		"既存のデータを移行する場合は、前もって手動で'ScrapBook'フォルダを移動させてからデータ保存先を変更してください。">
+<!ENTITY sb.setting.data.default	"デフォルト　（プロファイルフォルダ下）">
+<!ENTITY sb.setting.data.notice		"既存のデータを移行する場合は、前もって手動でScrapBookディレクトリを移動させてからデータ保存先を変更してください。">
+
+<!ENTITY sb.setting.restorefavicons		"faviconを修復">
+<!ENTITY sb.setting.restorefavicons.d	"ツリーのfaviconが表示されない場合、このボタンを押してください:">
 

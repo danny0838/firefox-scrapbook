@@ -1,0 +1,24 @@
+<!ENTITY sb.open			"Openen">
+<!ENTITY sb.open.tab		"Openen in Tabblad">
+<!ENTITY sb.open.newtab		"Openen in Nieuw Tabblad">
+<!ENTITY sb.open.source		"Openen Bron Locatie">
+<!ENTITY sb.show.files		"Show Files">
+<!ENTITY sb.delete			"Verwijderen">
+<!ENTITY sb.property		"Eigenschappen">
+
+<!ENTITY sb.folder.toggle	"Uitvouwen/Toeklappen">
+<!ENTITY sb.folder.openall	"Alles Openen in Tabbladen">
+<!ENTITY sb.folder.combine	"Open in Combined View">
+<!ENTITY sb.folder.manage	"Map Beheren...">
+<!ENTITY sb.manage			"Manage">
+
+<!ENTITY sb.new.folder		"Nieuwe Map...">
+<!ENTITY sb.new.note		"Nieuwe Notitie">
+
+<!ENTITY sb.sort.folder		"Sorteer Map">
+<!ENTITY sb.sort.title.asc	"Sorteer op Titel (A &gt; Z)">
+<!ENTITY sb.sort.title.desc	"Sort op Titel (Z &gt; A)">
+<!ENTITY sb.sort.date.asc	"Chronologisch">
+<!ENTITY sb.sort.date.desc	"Omgekeerd Chronologisch">
+<!ENTITY sb.sort.recursive	"Sorteer ook de onderliggende mappen">
+

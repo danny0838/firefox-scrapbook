@@ -12,95 +12,102 @@
 
 
 
+var SBstring;
 var SBdataBack;
 var SBdataPathBack;
 var SBcheckList = {
-	'ScrapBookFolderClick'	: false,
-	'ScrapBookDetailDialog'	: false,
-	'ScrapBookNotification'	: false,
-	'ScrapBookHideFavicon'	: false,
-	'ScrapBookQuickDelete'	: false,
-	'ScrapBookUTF8Encode'	: true,
-	'ScrapBookUseTabO'		: false,
-	'ScrapBookUseTabS'		: false,
-	'ScrapBookUseTabV'		: false,
-	'ScrapBookUseTabR'		: false,
-	'ScrapBookUseTabX'		: false,
-	'ScrapBookUseTabH'		: false,
+	'ScrapBookBrowserSubmenu'  		: false,
+	'ScrapBookCaptureDetail'		: false,
+	'ScrapBookCaptureNotify'		: false,
+	'ScrapBookTreeSingleExpand'		: false,
+	'ScrapBookTreeHideFavicon'		: false,
+	'ScrapBookTreeQuickDelete'		: false,
+	'ScrapBookCaptureUTF8Encode'	: true,
+	'ScrapBookCaptureRemoveScript'	: true,
+	'ScrapBookEditShowHeader'		: true,
+	'ScrapBookEditMultilines'		: false,
+	'ScrapBookUseTabO'	: false,
+	'ScrapBookUseTabS'	: false,
+	'ScrapBookUseTabC'	: false,
+	'ScrapBookUseTabR'	: false,
+	'ScrapBookUseTabP'	: false,
+	'ScrapBookUseTabN'	: false,
 };
-
 
 
 
 function SB_initSetting()
 {
-	for ( var eCheck in SBcheckList )
+	SBstring = document.getElementById("ScrapBookString");
+	for ( var aCheck in SBcheckList )
 	{
-		var eCheckXUL = document.getElementById(eCheck);
-		eCheckXUL.checked = nsPreferences.getBoolPref(eCheckXUL.getAttribute("prefstring"), SBcheckList[eCheck]);
+		var aCheckXUL = document.getElementById(aCheck);
+		aCheckXUL.checked = nsPreferences.getBoolPref(aCheckXUL.getAttribute("prefstring"), SBcheckList[aCheck]);
 	}
-	document.getElementById("ScrapBookFilerCheckbox").checked = nsPreferences.getBoolPref("scrapbook.filer.default", true);
-	document.getElementById("ScrapBookFilerTextbox").value = nsPreferences.copyUnicharPref("scrapbook.filer.path", "");
-	SB_onCommandFilerCheckbox();
+	document.getElementById("ScrapBookProgramFilerCheckbox").checked = nsPreferences.getBoolPref("scrapbook.filer.default", true);
+	document.getElementById("ScrapBookProgramFilerTextbox").value = nsPreferences.copyUnicharPref("scrapbook.filer.path", "");
+	SB_toggleDefaultProgramFiler();
 	SBdataBack     = document.getElementById("ScrapBookDataCheckbox").checked = nsPreferences.getBoolPref("scrapbook.data.default", true);
 	SBdataPathBack = document.getElementById("ScrapBookDataTextbox").value = nsPreferences.copyUnicharPref("scrapbook.data.path", "");
-	SB_onCommandDataCheckbox();
+	SB_toggleDefaultDestination();
+	document.getElementById("ScrapBookEditConfirmSave").value = nsPreferences.getIntPref("scrapbook.edit.confirmsave", 3);
 }
 
 
 function SB_acceptSetting()
 {
-	for ( var eCheck in SBcheckList )
+	for ( var aCheck in SBcheckList )
 	{
-		var eCheckXUL = document.getElementById(eCheck);
-		nsPreferences.setBoolPref(eCheckXUL.getAttribute("prefstring"), eCheckXUL.checked);
+		var aCheckXUL = document.getElementById(aCheck);
+		nsPreferences.setBoolPref(aCheckXUL.getAttribute("prefstring"), aCheckXUL.checked);
 	}
-	nsPreferences.setBoolPref("scrapbook.filer.default", document.getElementById("ScrapBookFilerCheckbox").checked);
-	nsPreferences.setUnicharPref("scrapbook.filer.path", document.getElementById("ScrapBookFilerTextbox").value);
+	nsPreferences.setIntPref("scrapbook.edit.confirmsave", parseInt(document.getElementById("ScrapBookEditConfirmSave").value));
+	nsPreferences.setBoolPref("scrapbook.filer.default", document.getElementById("ScrapBookProgramFilerCheckbox").checked);
+	nsPreferences.setUnicharPref("scrapbook.filer.path", document.getElementById("ScrapBookProgramFilerTextbox").value);
 	nsPreferences.setBoolPref("scrapbook.data.default", document.getElementById("ScrapBookDataCheckbox").checked);
 	nsPreferences.setUnicharPref("scrapbook.data.path", document.getElementById("ScrapBookDataTextbox").value);
 	if ( SBdataBack     != document.getElementById("ScrapBookDataCheckbox").checked || 
 	     SBdataPathBack != document.getElementById("ScrapBookDataTextbox").value )
 	{
-		document.getElementById("ScrapBookSettingTabpanels").selectedIndex = 2;
-		SB_reconstructRDF();
-		window.opener.location.reload();
+		document.getElementById("ScrapBookSettingTabpanels").selectedIndex = 4;
+		SB_resolveIconURL(false);
 	}
+	window.opener.location.reload();
 }
 
 
-function SB_onCommandFilerCheckbox()
+function SB_toggleDefaultProgramFiler()
 {
-	document.getElementById("ScrapBookFilerTextbox").disabled = document.getElementById("ScrapBookFilerCheckbox").checked;
-	document.getElementById("ScrapBookFilerButton").disabled  = document.getElementById("ScrapBookFilerCheckbox").checked;
+	document.getElementById("ScrapBookProgramFilerTextbox").disabled = document.getElementById("ScrapBookProgramFilerCheckbox").checked;
+	document.getElementById("ScrapBookProgramFilerButton").disabled  = document.getElementById("ScrapBookProgramFilerCheckbox").checked;
 }
 
 
-function SB_onCommandFilerButton()
+function SB_selectProgramFiler()
 {
 	var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-	FP.init(window, "Program for 'Browse Files' Menu", FP.modeOpen);
+	FP.init(window, SBstring.getString("SELECT_FILER"), FP.modeOpen);
 	FP.appendFilters(FP.filterApps);
 	var answer = FP.show();
 	if ( answer == FP.returnOK )
 	{
 		var theFile = FP.file;
-		document.getElementById("ScrapBookFilerTextbox").value = theFile.path;
+		document.getElementById("ScrapBookProgramFilerTextbox").value = theFile.path;
 	}
 }
 
 
-function SB_onCommandDataCheckbox()
+function SB_toggleDefaultDestination()
 {
 	document.getElementById("ScrapBookDataTextbox").disabled = document.getElementById("ScrapBookDataCheckbox").checked;
 	document.getElementById("ScrapBookDataButton").disabled  = document.getElementById("ScrapBookDataCheckbox").checked;
 }
 
 
-function SB_onCommandDataButton()
+function SB_selectDestination()
 {
 	var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-	FP.init(window, "Select the 'ScrapBook' folder where to store collected data.", FP.modeGetFolder);
+	FP.init(window, SBstring.getString("SELECT_DESTINATION"), FP.modeGetFolder);
 	var answer = FP.show();
 	if ( answer == FP.returnOK )
 	{
@@ -110,27 +117,41 @@ function SB_onCommandDataButton()
 }
 
 
-function SB_reconstructRDF()
+function SB_resolveIconURL(verbose)
 {
+	var tmp = document.getElementById("ScrapBookDataTextbox").value;
+
 	SBRDF.init();
 
 	var dataDir = SBcommon.getScrapBookDir().clone();
 	dataDir.append("data");
 	var dataDirURL = SBcommon.convertFilePathToURL(dataDir.path);
 
-	var ResList = SBRDF.data.GetAllResources();
-	while ( ResList.hasMoreElements() )
+	if ( dataDirURL.charAt(dataDirURL.length - 1) != "/" ) dataDirURL = dataDirURL + "/";
+
+	var shouldFlush = false;
+	var ResSet = SBRDF.data.GetAllResources();
+	while ( ResSet.hasMoreElements() )
 	{
-		var myRes = ResList.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-		var mySBitem = new ScrapBookItem(SBRDF.getProperty("id", myRes));
-		mySBitem.icon = SBRDF.getProperty("icon",  myRes);
-		if ( mySBitem.icon.match(/\/data\/(\d{14}\/.*$)/) )
+		var myRes = ResSet.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+		var myID   = SBRDF.getProperty("id", myRes);
+		var myIcon = SBRDF.getProperty("icon", myRes);
+		if ( verbose ) document.getElementById("ScrapBookDataTextbox").value = SBstring.getString("RESOLVE_ICON_URL") + myID;
+		if ( myIcon.match(/(\d{14}\/.*$)/) )
 		{
-			var newIconURL = dataDirURL + RegExp.$1;
-			SBRDF.updateItem(myRes, "icon", newIconURL);
-			document.getElementById("ScrapBookDataNotify").value = "scanning..." + myRes.Value;
+			var newIcon = dataDirURL + RegExp.$1;
+			if ( myIcon != newIcon )
+			{
+				dump("*** resolve icon URL: " + newIcon + "\n");
+				SBRDF.updateItem(myRes, "icon", newIcon);
+				document.getElementById("ScrapBookDataTextbox").value = SBstring.getString("RESOLVE_ICON_URL") + myRes.Value;
+				shouldFlush = true;
+			}
 		}
 	}
+	if ( shouldFlush ) SBRDF.flush();
+
+	document.getElementById("ScrapBookDataTextbox").value = tmp;
 }
 
 

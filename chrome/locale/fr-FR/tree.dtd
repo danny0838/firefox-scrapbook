@@ -1,0 +1,24 @@
+<!ENTITY sb.open			"Ouverture">
+<!ENTITY sb.open.tab		"Éditer dans un onglet">
+<!ENTITY sb.open.newtab		"Ouvrir dans un nouvel onglet">
+<!ENTITY sb.open.source		"Ouvrir l'URL de la source">
+<!ENTITY sb.show.files		"Show Files">
+<!ENTITY sb.delete			"Supprimer">
+<!ENTITY sb.property		"Propriétés">
+
+<!ENTITY sb.folder.toggle	"Déployer / Réduire">
+<!ENTITY sb.folder.openall	"Tout ouvrir dans des onglets">
+<!ENTITY sb.folder.combine	"Open in Combined View">
+<!ENTITY sb.folder.manage	"Gérer les dossiers...">
+<!ENTITY sb.manage			"Manage">
+
+<!ENTITY sb.new.folder		"Nouveau dossier...">
+<!ENTITY sb.new.note		"Nouvelle note">
+
+<!ENTITY sb.sort.folder		"Classer le dossier">
+<!ENTITY sb.sort.title.asc	"Classer par titre (A &gt; Z)">
+<!ENTITY sb.sort.title.desc	"Classer par titre (Z &gt; A)">
+<!ENTITY sb.sort.date.asc	"Chronologique">
+<!ENTITY sb.sort.date.desc	"Chronologique inversé">
+<!ENTITY sb.sort.recursive	"Classer périodiquement les sous-dossiers">
+

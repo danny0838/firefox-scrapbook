@@ -1,0 +1,8 @@
+<!ENTITY sb.url.description	"URL (Skriv in en URL:er per rad)">
+
+<!ENTITY sb.url.tools		"URL-Detektor">
+<!ENTITY sb.url.tools.tabs	"Alla öppna flikar i fönstret">
+<!ENTITY sb.url.tools.local	"Alla Lokala HTML-filer under vald mapp">
+<!ENTITY sb.url.tools.webox	"default.html för WeBoX">
+<!ENTITY sb.url.tools.clear	"Rensa">
+

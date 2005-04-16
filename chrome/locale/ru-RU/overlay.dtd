@@ -1,0 +1,12 @@
+<!ENTITY sb.title				"ScrapBook">
+<!ENTITY sb.capture.partial		"Сохранить выделеное">
+<!ENTITY sb.capture.partial.as	"Сохранить выделенное как...">
+<!ENTITY sb.capture.entire		"Сохранить">
+<!ENTITY sb.capture.entire.as	"Сохранить как...">
+<!ENTITY sb.capture.frame		"Сохранить фрейм">
+<!ENTITY sb.capture.frame.as	"Сохранить фрейм как...">
+<!ENTITY sb.capture.target		"Сохранить файл">
+<!ENTITY sb.capture.target.as	"Сохранить файл как...">
+
+<!ENTITY sb.overlay.editing		"Включить режим редактирования">
+

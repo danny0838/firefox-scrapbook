@@ -1,0 +1,8 @@
+<!ENTITY sb.url.description	"URL （改行して複数入力可）">
+
+<!ENTITY sb.url.tools		"URL検出ツール">
+<!ENTITY sb.url.tools.tabs	"現在のウィンドウに開かれたすべてのタブ">
+<!ENTITY sb.url.tools.local	"指定したディレクトリ以下のすべてのローカルHTML">
+<!ENTITY sb.url.tools.webox	"WeBoX の default.html からローカルHTMLを検出">
+<!ENTITY sb.url.tools.clear	"クリア">
+

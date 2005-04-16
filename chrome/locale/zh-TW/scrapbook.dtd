@@ -1,54 +1,30 @@
 <!ENTITY sb.title			"ScrapBook">
 
-<!ENTITY sb.open			"開啟">
-<!ENTITY sb.opentab			"開啟於新分頁中">
-<!ENTITY sb.opensource		"開啟原始網址">
-<!ENTITY sb.launchdir		"瀏覽檔案">
-<!ENTITY sb.delete			"刪除">
-<!ENTITY sb.property		"文件屬性">
-
-<!ENTITY sb.folder			"資料夾">
-<!ENTITY sb.folder.new		"開新資料夾...">
-<!ENTITY sb.folder.toggle	"展開／折疊">
-<!ENTITY sb.folder.openall	"以分頁開啟所有資料">
-<!ENTITY sb.folder.view		"以單一分頁開啟所有資料">
-<!ENTITY sb.folder.manage	"管理資料夾...">
-<!ENTITY sb.togglefolders	"展開／折疊所有資料夾">
+<!ENTITY sb.new.folder		"開新資料夾...">
+<!ENTITY sb.new.note		"新增筆記">
+<!ENTITY sb.toggleallopen	"展開／折疊所有資料夾">
 
 <!ENTITY sb.tools			"工具">
 <!ENTITY sb.tools.setting	"設定...">
-<!ENTITY sb.editing.mode	"直接進入編輯模式">
-<!ENTITY sb.tools.search	"顯示搜尋列">
-<!ENTITY sb.tools.list		"計算文件大小">
+<!ENTITY sb.tools.editing	"直接進入編輯模式">
 <!ENTITY sb.tools.manage	"管理擷取文件...">
-<!ENTITY sb.tools.backup	"Compressed Backup">
-<!ENTITY sb.tools.export	"將文件列表轉存為 HTML">
-<!ENTITY sb.tools.homepage	"首頁">
+<!ENTITY sb.manage			"管理擷取文件">
+<!ENTITY sb.tools.calculate	"計算文件大小">
+<!ENTITY sb.tools.sorttree	"所有文件排序">
+<!ENTITY sb.tools.directory	"開啟 ScrapBook 目錄">
+<!ENTITY sb.tools.urls		"擷取多重 URL">
+<!ENTITY sb.tools.trade		"匯入 / 匯出">
+<!ENTITY sb.tools.output	"將資料列表匯出為 HTML">
+<!ENTITY sb.tools.backup	"壓縮並備份資料">
+<!ENTITY sb.tools.homepage	"ScrapBook 首頁">
 <!ENTITY sb.tools.about		"關於 ScrapBook">
-<!ENTITY sb.tools.reset		"重新設定狀態列">
-
-<!ENTITY sb.prop.date		"日期">
-<!ENTITY sb.prop.type		"型態">
-<!ENTITY sb.prop.title		"標題">
-<!ENTITY sb.prop.chars		"字集">
-<!ENTITY sb.prop.icon		"圖示">
-<!ENTITY sb.prop.source		"網址">
-<!ENTITY sb.prop.comment	"評注">
-<!ENTITY sb.prop.content	"內容">
-<!ENTITY sb.prop.size		"文件大小">
-<!ENTITY sb.prop.id.date	"ID（日期）">
-
-<!ENTITY sb.prop.general	"一般資訊">
-<!ENTITY sb.prop.htmltitle	"取得文件標題">
-<!ENTITY sb.prop.iconurl	"更換圖示">
 
 <!ENTITY sb.search			"搜尋">
 <!ENTITY sb.search.fulltext	"全文搜尋">
 <!ENTITY sb.search.all		"所有欄位">
 <!ENTITY sb.search.re		"使用規則運算式">
 <!ENTITY sb.search.cs		"大小寫需相符">
-<!ENTITY sb.search.cache	"更新全文搜尋">
-<!ENTITY sb.search.build	"快取建立中...">
+<!ENTITY sb.search.cache	"更新全文搜尋快取">
 <!ENTITY sb.search.clear	"清除搜尋歷史紀錄">
 
 <!ENTITY sb.filter.days		"依擷取日期檢視">
@@ -58,7 +34,8 @@
 <!ENTITY sb.filter.1week	"本週">
 <!ENTITY sb.filter.2week	"兩週內">
 
-<!ENTITY sb.note.new		"New Note">
-<!ENTITY sb.note.close		"Close">
-<!ENTITY sb.note.opentab	"Edit in Tab">
+<!ENTITY sb.note.opentab	"開啟於新分頁中">
+<!ENTITY sb.note.close		"關閉">
+
+<!ENTITY sb.move			"移到其他資料夾中">
 

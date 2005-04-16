@@ -1,0 +1,39 @@
+<!ENTITY sb.setting			"Asetukset">
+<!ENTITY sb.setting.general	"Yleiset">
+<!ENTITY sb.setting.usetabs	"Välilehti">
+<!ENTITY sb.setting.advance	"Muut">
+<!ENTITY sb.setting.capture	"Kaappaus">
+<!ENTITY sb.setting.editing	"Muokkaus">
+<!ENTITY sb.setting.program	"Ohjelmat">
+
+<!ENTITY sb.setting.browser.submenu		"Käytä selaimen ponnahdusvalikossa alavalikkoa (vaatii uudelleenkäynnistyksen)">
+<!ENTITY sb.setting.capture.detail		"Näytä Kaappauksen yksityiskohdat -ikkuna vedettäessä sivu sivupaneeliin">
+<!ENTITY sb.setting.capture.notify		"Näytä ilmoitus kun kaappaus on valmis (toimii vain Windowsissa)">
+<!ENTITY sb.setting.tree.hidefavicon	"Älä näytä sivun kuvaketta puussa">
+<!ENTITY sb.setting.tree.singleexpand	"Laajennettaessa puunäkymässä kansion sisältö, supista muut kansiot">
+<!ENTITY sb.setting.tree.quickdelete	"Poista sivut vahvistamatta">
+
+<!ENTITY sb.setting.usetabs.d			"Valitut toiminnot avaavat uuden välilehden.">
+<!ENTITY sb.setting.usetabs.note		"Avaa muistilaput välilehdessä">
+
+<!ENTITY sb.setting.capture.utf8encode		"Muunna UTF-8 -merkistöön (suositeltua)">
+<!ENTITY sb.setting.capture.utf8encode.d	"Jotkin merkit voidaan korvata kysymysmerkeillä, jos tätä ei ole valittu.">
+<!ENTITY sb.setting.capture.removescript	"Poista JavaScript (suositeltua)">
+<!ENTITY sb.setting.capture.removescript.d	"Sivujen asettelu voi rikkoutua, jos tätä ei ole valittu.">
+
+<!ENTITY sb.setting.edit.showheader		"Näytä otsake">
+<!ENTITY sb.setting.edit.multilines		"Salli usean rivin kommentit">
+<!ENTITY sb.setting.edit.confirmsave.1	"Tallennuksen varmistusväli">
+<!ENTITY sb.setting.edit.confirmsave.2	"min  (0 = älä varmenna)">
+
+<!ENTITY sb.setting.program.filer			"Oletusohjelma &quot;Selaa tiedostoja&quot; toimintoon">
+<!ENTITY sb.setting.program.filer.default	"Oletus (Windowsilla Explorer)">
+<!ENTITY sb.setting.browse					"Valitse">
+
+<!ENTITY sb.setting.data			"Tietojen tallennuskansio">
+<!ENTITY sb.setting.data.default	"Oletus (Profiilikansio)">
+<!ENTITY sb.setting.data.notice		"Siirrettäessä olemassaolevia sivukaappauksia toiseen profiiliin, kopioi ensin käsin ScrapBookin kansio ja asenna ScrapBook vasta sen jälkeen profiiliin.">
+
+<!ENTITY sb.setting.restorefavicons		"Restore favicons">
+<!ENTITY sb.setting.restorefavicons.d	"If favicons are not displayed, press this button:">
+

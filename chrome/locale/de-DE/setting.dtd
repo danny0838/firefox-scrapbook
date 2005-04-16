@@ -1,0 +1,39 @@
+<!ENTITY sb.setting			"Einstellungen">
+<!ENTITY sb.setting.general	"Allgemein">
+<!ENTITY sb.setting.usetabs	"Tabs">
+<!ENTITY sb.setting.advance	"Erweitert">
+<!ENTITY sb.setting.capture	"Speicherung">
+<!ENTITY sb.setting.editing	"Bearbeiten">
+<!ENTITY sb.setting.program	"Programme">
+
+<!ENTITY sb.setting.browser.submenu		"Erzeugt ein Untermen&#x00FC; im Firefox-Kontexmen&#x00FC; (&#x00C4;nderung nach Neustart)">
+<!ENTITY sb.setting.capture.detail		"Zeige Details wenn eine Speicherung durch Ziehen in die Sidebar erfolgt">
+<!ENTITY sb.setting.capture.notify		"Zeige Fertig-Meldung wenn das Speichern beendet wurde">
+<!ENTITY sb.setting.tree.hidefavicon	"Keine Favicons im Verzeichnisbaum anzeigen">
+<!ENTITY sb.setting.tree.singleexpand	"Wenn ein Ordner ge&#x00F6;ffnet wird, &#x00F6;ffne auch alle anderen Ordner">
+<!ENTITY sb.setting.tree.quickdelete	"Keine L&#x00F6;schwarnung anzeigen">
+
+<!ENTITY sb.setting.usetabs.d			"Unten ausgew&#x00E4;hlte Eintr&#x00E4;ge werden in einem neuen Tab ge&#x00F6;ffnet">
+<!ENTITY sb.setting.usetabs.note		"&#x00D6;ffne Kommentare in einem neuen Tab">
+
+<!ENTITY sb.setting.capture.utf8encode		"Wandle in UTF-8 Kodierung um (Empfohlen)">
+<!ENTITY sb.setting.capture.utf8encode.d	"Wenn nicht ausgew&#x00E4;hlt, werden einige Buchstaben falsch dargestellt '?'.">
+<!ENTITY sb.setting.capture.removescript	"JavaScript ausschalten (Empfohlen)">
+<!ENTITY sb.setting.capture.removescript.d	"Wenn nicht ausgew&#x00E4;hlt, wird das Seitenlayout eventuell falsch dargestellt.">
+
+<!ENTITY sb.setting.edit.showheader		"&#x00DC;berschrift anzeigen">
+<!ENTITY sb.setting.edit.multilines		"Erm&#x00F6;gliche mehrzeilige Kommentare">
+<!ENTITY sb.setting.edit.confirmsave.1	"Abfrage Speicherintervall">
+<!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 = keine Abfrage)">
+
+<!ENTITY sb.setting.program.filer			"Programm f&#x00FC;r Datei-Anzeige">
+<!ENTITY sb.setting.program.filer.default	"Grundeinstellung (Explorer)">
+<!ENTITY sb.setting.browse					"Suche">
+
+<!ENTITY sb.setting.data			"Verzeichnis f&#x00FC;r Speicherung">
+<!ENTITY sb.setting.data.default	"Grundeinstellung (Profile-Ordner)">
+<!ENTITY sb.setting.data.notice		"Wenn Sie den Speicherort &#x00E4;ndern, so verschieben Sie vorab den 'ScrapBook'-Ordner in das vorgew&#x00E4;hlte Verzeichnis.">
+
+<!ENTITY sb.setting.restorefavicons		"Favicons wiederherstellen">
+<!ENTITY sb.setting.restorefavicons.d	"Wenn Favicons nicht angezeigt werden, dr&#x00FC;cken Sie diesen Button:">
+

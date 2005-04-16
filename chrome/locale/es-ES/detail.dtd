@@ -1,0 +1,15 @@
+<!ENTITY sb.detail					"Detalle de captura">
+<!ENTITY sb.detail.rootfolder		"Carpeta de administrador">
+<!ENTITY sb.detail.new.folder		"Nueva carpeta">
+<!ENTITY sb.detail.select.folder	"Select Folder">
+
+<!ENTITY sb.detail.linked			"Capturar incluyendo ficheros de enlazados">
+<!ENTITY sb.detail.linked.image		"Imagen">
+<!ENTITY sb.detail.linked.sound		"Sonido">
+<!ENTITY sb.detail.linked.movie		"Video">
+<!ENTITY sb.detail.linked.archive	"Archivo">
+<!ENTITY sb.detail.linked.all		"Todos los enlaces">
+
+<!ENTITY sb.detail.linked.seq		"Capture all linked Web pages sequentially">
+<!ENTITY sb.detail.linked.seq.d		"(in a subfolder automatically created)">
+

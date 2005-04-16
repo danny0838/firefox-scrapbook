@@ -33,7 +33,7 @@ function SB_initView()
 	}
 
 
-	var htmlSrc = SB_getHTMLhead();
+	var htmlSrc = SB_getHTMLHead(SBRDF.getProperty("title", gRes));
 
 	SBservice.RDFC.Init(SBRDF.data, gRes);
 	var ResList = SBservice.RDFC.GetElements();
@@ -48,10 +48,10 @@ function SB_initView()
 		aSBitem.source  = SBRDF.getProperty("source", aRes);
 		aSBitem.comment = SBRDF.getProperty("comment", aRes);
 		if ( !aSBitem.icon ) aSBitem.icon = SBcommon.getDefaultIcon(SBRDF.getProperty("type", aRes));
-		htmlSrc += SB_getHTMLbody(aSBitem);
+		htmlSrc += SB_getHTMLBody(aSBitem);
 	}
 
-	htmlSrc += SB_getHTMLfoot();
+	htmlSrc += SB_getHTMLFoot();
 
 	var htmlFile = SBcommon.getScrapBookDir().clone();
 	htmlFile.append("collection.html");
@@ -62,35 +62,32 @@ function SB_initView()
 }
 
 
-function SB_getHTMLhead()
+function SB_getHTMLHead(aTitle)
 {
 	var HTML = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">\n\n'
 	         + '<html>\n\n'
 	         + '<head>\n'
 	         + '	<meta http-equiv="Content-Type" content="text/html;Charset=UTF-8">\n'
 	         + '	<meta http-equiv="Content-Style-Type" content="text/css">\n'
-	         + '	<title>ScrapBook</title>\n'
+	         + '	<title>' + aTitle + '</title>\n'
 	         + '	<link rel="stylesheet" type="text/css" href="chrome://scrapbook/skin/collection.css" media="screen,print">\n'
 	         + '</head>\n\n'
-	         + '<body>\n\n'
-	         + '<h1>ScrapBook - View Whole Collection</h1>\n\n';
+	         + '<body>\n\n';
 	return HTML;
 }
 
 
-function SB_getHTMLbody(aSBitem)
+function SB_getHTMLBody(aSBitem)
 {
-	var aSource = ( aSBitem.source.length > 60 ) ? aSBitem.source.substring(0,60) + "..." : aSBitem.source;
+	var aSource = ( aSBitem.source.length > 100 ) ? aSBitem.source.substring(0,100) + "..." : aSBitem.source;
 	var aFilePath = './data/' + aSBitem.id + '/index.html';
-	var HTML = '<h2><img src="' + aSBitem.icon + '" width="16" height="16" alt=""><a href="' + aFilePath + '" target="_top">' + aSBitem.title + '</a></h2>\n'
-	         + '<iframe src="' + aFilePath + '" onload="this.setAttribute(\'style\', \'height:\' + (this.contentDocument.height+30));"></iframe>\n'
-	         + '<cite><a href="' + aSBitem.source + '" target="_top">' + aSource + '</a></cite>\n'
-	         + '<blockquote>' + aSBitem.comment.replace(/ __BR__ /g, '<br>') + '</blockquote>\n\n';
+	var HTML = '<cite>' + aSBitem.title + ' <a href="' + aSBitem.source + '" target="_top">' + aSource + '</a></cite>\n'
+		     + '<iframe src="' + aFilePath + '" onload="this.setAttribute(\'style\', \'height:\' + (this.contentDocument.height+30));"></iframe>\n';
 	return HTML;
 }
 
 
-function SB_getHTMLfoot()
+function SB_getHTMLFoot()
 {
 	var HTML = '</body>\n\n' + '</html>\n';
 	return HTML;

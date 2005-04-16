@@ -1,0 +1,19 @@
+<!ENTITY sb.editor.inline	"Краткий комментарий к выделенному">
+<!ENTITY sb.editor.block	"Расширенный комментарий после выделенного">
+<!ENTITY sb.editor.marker	"Маркировать цветом выделенное">
+<!ENTITY sb.editor.unline	"Удалить все простые комментарии">
+<!ENTITY sb.editor.unmark	"Удалить все цветовые пометки">
+<!ENTITY sb.editor.cutter	"Удалить выделенное">
+<!ENTITY sb.editor.eraser	"Очитска страницы: удаление блоков">
+<!ENTITY sb.editor.undo		"Отменить">
+<!ENTITY sb.editor.restore	"Отменить все правки и вернуться к первоначальному виду">
+<!ENTITY sb.editor.save		"Зафиксировать правки">
+<!ENTITY sb.editor.exit		"Выйти из режима редактирования">
+
+<!ENTITY sb.inline.enter	"Да">
+<!ENTITY sb.inline.delete	"Удалить">
+<!ENTITY sb.block.customize	"Настроить стиль расширенного комментария">
+<!ENTITY sb.block.hide		"Спрятать расширенные комментарии">
+
+<!ENTITY sb.expand.comment	"Расширить поле комментария">
+

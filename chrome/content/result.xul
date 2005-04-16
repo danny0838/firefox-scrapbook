@@ -5,30 +5,38 @@
 <?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
 
 <!--locale-->
-<!DOCTYPE dialog SYSTEM "chrome://scrapbook/locale/scrapbook.dtd">
+<!DOCTYPE window [
+<!ENTITY % propertyDTD  SYSTEM "chrome://scrapbook/locale/property.dtd" >
+%propertyDTD;
+<!ENTITY % treeDTD      SYSTEM "chrome://scrapbook/locale/tree.dtd" >
+%treeDTD;
+]>
 
 <!--window-->
 <window id="ScrapBookResultWindow"
-        title="ScrapBook - Full Text Search Result"
+        title="ScrapBook"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        onload="SB_initFT('SEARCH');">
+        onload="SB_initFullText('SEARCH');">
 
 	<!--JavaScript-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/fulltext.js" />
 
+	<!--StringBundle-->
+	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/fulltext.properties" />
+
 	<!--popup-->
 	<popupset>
 		<popup id="ScrapBookTreePopup">
-			<menuitem id="ScrapBookTreePopupO" label="&sb.open;"    oncommand="SB_openResult(event, 'O');" />
-			<menuitem id="ScrapBookTreePopupT" label="&sb.opentab;" oncommand="SB_openResult(event, 'T');" />
+			<menuitem id="ScrapBookTreePopupO" label="&sb.open;"        oncommand="SB_openResult(event, 'O');" />
+			<menuitem id="ScrapBookTreePopupT" label="&sb.open.newtab;" oncommand="SB_openResult(event, 'T');" />
 		</popup>
 	</popupset>
 
 	<!--result header-->
 	<hbox id="ScrapBookResult" class="sb-header" align="center">
-		<label value="Now Searching..." id="ScrapBookResultLabel" />
+		<label flex="1" crop="end" id="ScrapBookResultLabel" />
 		<spacer flex="1" />
 		<toolbarbutton class="sb-header-exit" oncommand="SB_exitResult();" />
 	</hbox>
@@ -39,7 +47,7 @@
 			<listheader label="&sb.prop.title;" />
 			<listheader label="&sb.prop.content;" />
 			<listheader label="&sb.prop.comment;" />
-			<listheader label="&sb.folder;" />
+			<listheader label="&sb.prop.folder;" />
 		</listhead>
 		<listcols>
 			<listcol flex="3" style="width:150px;" />
@@ -47,6 +55,13 @@
 			<listcol flex="3" style="width:150px;" />
 			<listcol flex="1" style="width:100px;" />
 		</listcols>
+		<!--template-->
+		<listitem id="ScrapBookResultListTemplate" hidden="true">
+			<listcell class="listcell-iconic" />
+			<listcell />
+			<listcell />
+			<listcell />
+		</listitem>
 	</listbox>
 
 	<splitter />

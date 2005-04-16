@@ -1,0 +1,3 @@
+<!ENTITY sb.output.option.all	"Exportuj wszystko">
+<!ENTITY sb.output.option.frame	"Exportuj jako dokument HTML z ramką">
+<!ENTITY sb.output.option.open	"Otwórz wyeksportowany dokument HTML w przeglądarce">

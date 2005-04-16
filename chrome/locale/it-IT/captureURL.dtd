@@ -1,0 +1,8 @@
+<!ENTITY sb.url.description	"URL (Inserire più URL linea per linea)">
+
+<!ENTITY sb.url.tools		"Rilevatore URL">
+<!ENTITY sb.url.tools.tabs	"Tutte le schede aperte nella finestra">
+<!ENTITY sb.url.tools.local	"Tutti i file HTML locali sotto la directory">
+<!ENTITY sb.url.tools.webox	"default.html per WeBoX">
+<!ENTITY sb.url.tools.clear	"Pulisci">
+

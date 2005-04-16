@@ -3,9 +3,6 @@
 <!--skin-->
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 
-<!--locale-->
-<!DOCTYPE window SYSTEM "chrome://scrapbook/locale/scrapbook.dtd">
-
 <!--window-->
 <window id="ScrapBookViewWindow"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"

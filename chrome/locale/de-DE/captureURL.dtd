@@ -1,0 +1,8 @@
+<!ENTITY sb.url.description	"URL (URLs Zeile-f&#x00FC;r-Zeile)">
+
+<!ENTITY sb.url.tools		"URL Anzeige">
+<!ENTITY sb.url.tools.tabs	"Alle im Fenster ge&#x00F6;ffneten Tabs">
+<!ENTITY sb.url.tools.local	"Alle localen HTMLs im Verzeichnis">
+<!ENTITY sb.url.tools.webox	"default.html f&#x00FC;r WeBoX">
+<!ENTITY sb.url.tools.clear	"Leeren">
+

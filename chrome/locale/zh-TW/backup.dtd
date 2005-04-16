@@ -1,0 +1,7 @@
+<!ENTITY sb.backup.d		"壓縮並備份 ScrapBook 資料。">
+<!ENTITY sb.backup.program	"壓縮程式">
+<!ENTITY sb.backup.file		"備份資料存放處">
+<!ENTITY sb.backup.browse	"瀏覽">
+<!ENTITY sb.backup.arg		"命令列參數">
+<!ENTITY sb.backup.arg.d1	"&#37;dst 為放置備份檔的資料夾路徑。">
+<!ENTITY sb.backup.arg.d2	"&#37;src 為 ScrapBook 資料夾路徑。">

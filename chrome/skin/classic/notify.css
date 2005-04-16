@@ -16,18 +16,25 @@
 	padding-top  : 5px;
 }
 
+#ScrapBookNotifyIcon {
+	width : 16px;
+	height: 16px;
+}
+
 #ScrapBookNotifyTitle {
 	font-weight: bold;
 }
 
-#ScrapBookNotifyText {
+#ScrapBookNotifyText,
+#ScrapBookNotifyTextA {
 	margin-right: 6px;
 	cursor: pointer;
 	color: #1455D6;
 	text-decoration: underline;
 }
 
-#ScrapBookNotifyText:hover:active {
+#ScrapBookNotifyText:hover:active,
+#ScrapBookNotifyTextA:hover:active {
 	color: #424F63;
 }
 

@@ -1,0 +1,39 @@
+<!ENTITY sb.setting			"Opties">
+<!ENTITY sb.setting.general	"Algemeen">
+<!ENTITY sb.setting.usetabs	"Gebruik Tabbladen">
+<!ENTITY sb.setting.advance	"Geavanceerd">
+<!ENTITY sb.setting.capture	"Capture">
+<!ENTITY sb.setting.editing	"Editing">
+<!ENTITY sb.setting.program	"Programs">
+
+<!ENTITY sb.setting.browser.submenu		"Enable submenu inside the browser context menu (Change after restart)">
+<!ENTITY sb.setting.capture.detail		"'Bewaren: Detail' dialoog tonen bij bewaren door verslepen in zijbalk">
+<!ENTITY sb.setting.capture.notify		"Bewaren Voltooid Melding Tonen (werkt alleen in Windows)">
+<!ENTITY sb.setting.tree.hidefavicon	"Favicon niet weergeven in de mappenstructuur">
+<!ENTITY sb.setting.tree.singleexpand	"Alle andere mappen toeklappen bij het uitvouwen van een map">
+<!ENTITY sb.setting.tree.quickdelete	"Geen bevestiging nodig bij verwijderen">
+
+<!ENTITY sb.setting.usetabs.d			"Aangevinkte acties gebruiken nieuwe tabbladen">
+<!ENTITY sb.setting.usetabs.note		"Open Notes in Tab">
+
+<!ENTITY sb.setting.capture.utf8encode		"Convert into UTF-8 encoding (Recommend)">
+<!ENTITY sb.setting.capture.utf8encode.d	"If check off, some characters frequently garbles into '?'.">
+<!ENTITY sb.setting.capture.removescript	"Remove JavaScript (Recommend)">
+<!ENTITY sb.setting.capture.removescript.d	"If check off, sometimes fails to preserve the page layout.">
+
+<!ENTITY sb.setting.edit.showheader		"Show header">
+<!ENTITY sb.setting.edit.multilines		"Enable multiline comment">
+<!ENTITY sb.setting.edit.confirmsave.1	"Interval for confirming save">
+<!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 = never confirm)">
+
+<!ENTITY sb.setting.program.filer			"Programma voor het 'Verken Bestanden' Menu">
+<!ENTITY sb.setting.program.filer.default	"Standaard (Voor Windows: Waarschijnlijk Verkenner.)">
+<!ENTITY sb.setting.browse					"Verkennen">
+
+<!ENTITY sb.setting.data			"Locatie om Gegevens op te slaan">
+<!ENTITY sb.setting.data.default	"Standaardlocatie (Profiel)">
+<!ENTITY sb.setting.data.notice		"Als u uw bestaande gegevens wilt overbrengen, verplaats dan de 'ScrapBook' map eerst manueel. Verander daarna de Locatie om de Gegevens op te slaan.">
+
+<!ENTITY sb.setting.restorefavicons		"Restore favicons">
+<!ENTITY sb.setting.restorefavicons.d	"If favicons are not displayed, press this button:">
+

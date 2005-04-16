@@ -1,0 +1,41 @@
+<!ENTITY sb.title			"ScrapBook">
+
+<!ENTITY sb.new.folder		"新建文件夹...">
+<!ENTITY sb.new.note		"新建便签">
+<!ENTITY sb.toggleallopen	"展开/折叠所有文件夹">
+
+<!ENTITY sb.tools			"工具">
+<!ENTITY sb.tools.setting	"设置...">
+<!ENTITY sb.tools.editing	"直接进入编辑模式">
+<!ENTITY sb.tools.manage	"管理文件...">
+<!ENTITY sb.manage			"Manage">
+<!ENTITY sb.tools.calculate	"计算文件大小">
+<!ENTITY sb.tools.sorttree	"Sort Entire Tree">
+<!ENTITY sb.tools.directory	"ScrapBook Directory">
+<!ENTITY sb.tools.urls		"Capture Multiple URLs">
+<!ENTITY sb.tools.trade		"Import / Export">
+<!ENTITY sb.tools.output	"Output Tree as HTML">
+<!ENTITY sb.tools.backup	"Backup with Compression">
+<!ENTITY sb.tools.homepage	"主页">
+<!ENTITY sb.tools.about		"关于">
+
+<!ENTITY sb.search			"搜索">
+<!ENTITY sb.search.fulltext	"全文搜索">
+<!ENTITY sb.search.all		"全部">
+<!ENTITY sb.search.re		"使用正则表达式">
+<!ENTITY sb.search.cs		"区分大小写">
+<!ENTITY sb.search.cache	"更新全文搜索缓存">
+<!ENTITY sb.search.clear	"清空搜索历史记录">
+
+<!ENTITY sb.filter.days		"按日期分类">
+<!ENTITY sb.filter.today	"今天">
+<!ENTITY sb.filter.2days	"两天内">
+<!ENTITY sb.filter.3days	"三天内">
+<!ENTITY sb.filter.1week	"本周">
+<!ENTITY sb.filter.2week	"两周内">
+
+<!ENTITY sb.note.opentab	"在标签页中打开">
+<!ENTITY sb.note.close		"关闭">
+
+<!ENTITY sb.move			"Move into Folder">
+

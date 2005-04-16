@@ -1,0 +1,24 @@
+<!ENTITY sb.open			"Avaa">
+<!ENTITY sb.open.tab		"Avaa välilehdessä">
+<!ENTITY sb.open.newtab		"Avaa uuteen välilehteen">
+<!ENTITY sb.open.source		"Avaa lähde-URL">
+<!ENTITY sb.show.files		"Näytä tiedostot">
+<!ENTITY sb.delete			"Poista">
+<!ENTITY sb.property		"Ominaisuudet">
+
+<!ENTITY sb.folder.toggle	"Laajenna/Supista">
+<!ENTITY sb.folder.openall	"Avaa kaikki välilehtiin">
+<!ENTITY sb.folder.combine	"Avaa yhdistetyssä näkymässä">
+<!ENTITY sb.folder.manage	"Muokkaa kansioita...">
+<!ENTITY sb.manage			"Muokkaa sivuarkistoa">
+
+<!ENTITY sb.new.folder		"Uusi kansio...">
+<!ENTITY sb.new.note		"Uusi muistilappu">
+
+<!ENTITY sb.sort.folder		"Järjestä kansio">
+<!ENTITY sb.sort.title.asc	"Järjestä otsikon mukaan (A-Ö)">
+<!ENTITY sb.sort.title.desc	"Järjestä otsikon mukaan (Ö-A)">
+<!ENTITY sb.sort.date.asc	"Aikajärjestys">
+<!ENTITY sb.sort.date.desc	"Käänteinen aikajärjestys">
+<!ENTITY sb.sort.recursive	"Järjestä alakansioiden sisältökin">
+

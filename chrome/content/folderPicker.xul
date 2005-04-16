@@ -1,0 +1,79 @@
+<?xml version="1.0" ?>
+
+<!--skin-->
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+<?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
+
+<!--overlay-->
+<?xul-overlay href="chrome://scrapbook/content/tree.xul"?>
+
+<!--locale-->
+<!DOCTYPE dialog SYSTEM "chrome://scrapbook/locale/detail.dtd">
+
+<!--dialog-->
+<dialog id="ScrapBookFolderPicker"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        title="&sb.detail.select.folder;"
+        style="width:380px;height:360px;"
+        buttonlabelextra2="&sb.detail.new.folder;..."
+        onload="SB_initFP();"
+        ondialogaccept="SB_acceptFP();"
+        ondialogcancel="SB_cancelFP();"
+        ondialogextra2="SB_createFolderFP();">
+
+	<!--JavaScript-->
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapbook.js" />
+	<script type="application/x-javascript"><![CDATA[
+		var SBstring;
+		function SB_initFP()
+		{
+			SBstring = document.getElementById("ScrapBookString");
+			SBRDF.init();
+			SBtreeUtil.init("ScrapBookTree", true);
+			document.documentElement.buttons = "accept,cancel,extra2";
+		}
+		function SB_acceptFP()
+		{
+			if ( document.getElementById("ScrapBookFolderPickerRoot").checked )
+				window.arguments[0].target = SBservice.RDF.GetResource(SBtree.ref);
+			else
+				window.arguments[0].target = SBtreeUtil.getSelection(true, 1)[0];
+		}
+		function SB_cancelFP()
+		{
+			window.arguments[0].target = null;
+		}
+		function SB_createFolderFP()
+		{
+			if ( SB_createFolder() )
+			{
+				SB_clearRootSelection();
+				window.arguments[0].shouldUpdate = true;
+			}
+		}
+		function SB_clearTreeSelection()
+		{
+			SBtree.view.selection.clearSelection();
+		}
+		function SB_clearRootSelection()
+		{
+			document.getElementById("ScrapBookFolderPickerRoot").setAttribute("checked", false);
+		}
+	]]></script>
+
+	<!--StringBundle (for DEFAULT_FOLDER)-->
+	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/scrapbook.properties" />
+
+	<checkbox id="ScrapBookFolderPickerRoot" label="&sb.detail.rootfolder;" checked="true" oncommand="SB_clearTreeSelection();" style="margin-bottom:10px;" />
+
+	<!--folder tree-->
+	<tree id="ScrapBookTree"
+	      seltype="single"
+	      onclick="SB_clearRootSelection();SBtreeUtil.onClickDefault(event);"
+	      onkeypress="event.preventBubble();"
+	      style="-moz-appearance:listbox;"
+	      flex="1" />
+
+</dialog>

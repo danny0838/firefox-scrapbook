@@ -1,0 +1,39 @@
+<!ENTITY sb.setting			"Nastavení">
+<!ENTITY sb.setting.general	"Obecné">
+<!ENTITY sb.setting.usetabs	"Použít taby">
+<!ENTITY sb.setting.advance	"Pokročilé">
+<!ENTITY sb.setting.capture	"Capture">
+<!ENTITY sb.setting.editing	"Editing">
+<!ENTITY sb.setting.program	"Programs">
+
+<!ENTITY sb.setting.browser.submenu		"Enable submenu inside the browser context menu (Change after restart)">
+<!ENTITY sb.setting.capture.detail		"Zobraz dialog zachycení, když se zachycení provede pomocí drag-and-drop do Sidebaru">
+<!ENTITY sb.setting.capture.notify		"Zobraz notifikaci 'Zachycení dokončeno' (funkční jen na Oknech?)">
+<!ENTITY sb.setting.tree.hidefavicon	"Nezobrazovat favicon v adresáři">
+<!ENTITY sb.setting.tree.singleexpand	"Při rozbalení adresáře, sbal všechny ostatní složky (jako Oblíbené v IE)">
+<!ENTITY sb.setting.tree.quickdelete	"Nežádat potvrzení při mazání">
+
+<!ENTITY sb.setting.usetabs.d			"Akce při kterých se použijí nové taby.">
+<!ENTITY sb.setting.usetabs.note		"Open Notes in Tab">
+
+<!ENTITY sb.setting.capture.utf8encode		"Convert into UTF-8 encoding (Recommend)">
+<!ENTITY sb.setting.capture.utf8encode.d	"If check off, some characters frequently garbles into '?'.">
+<!ENTITY sb.setting.capture.removescript	"Remove JavaScript (Recommend)">
+<!ENTITY sb.setting.capture.removescript.d	"If check off, sometimes fails to preserve the page layout.">
+
+<!ENTITY sb.setting.edit.showheader		"Show header">
+<!ENTITY sb.setting.edit.multilines		"Enable multiline comment">
+<!ENTITY sb.setting.edit.confirmsave.1	"Interval for confirming save">
+<!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 = never confirm)">
+
+<!ENTITY sb.setting.program.filer			"Program pro 'Procházení souborů'">
+<!ENTITY sb.setting.program.filer.default	"Standardní (Na Windows, asi Explorer.)">
+<!ENTITY sb.setting.browse					"Browse">
+
+<!ENTITY sb.setting.data			"Nastavení cesty k datům">
+<!ENTITY sb.setting.data.default	"Standardní (ve vašem Profilu)">
+<!ENTITY sb.setting.data.notice		"Jestliže chcete použít vaše předchozí data, přesuňte manuálně složku 'ScrapBook' předtím, než k ní nastavíte cestu.">
+
+<!ENTITY sb.setting.restorefavicons		"Restore favicons">
+<!ENTITY sb.setting.restorefavicons.d	"If favicons are not displayed, press this button:">
+

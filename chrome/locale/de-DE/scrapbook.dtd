@@ -1,0 +1,41 @@
+<!ENTITY sb.title			"ScrapBook">
+
+<!ENTITY sb.new.folder		"Neuer Ordner">
+<!ENTITY sb.new.note		"Neue Notiz">
+<!ENTITY sb.toggleallopen	"&#x00D6;ffne/Schlie&#x00DF;e alle Ordner">
+
+<!ENTITY sb.tools			"Tools">
+<!ENTITY sb.tools.setting	"Einstellungen">
+<!ENTITY sb.tools.editing	"URL immer im Bearbeitungs-Modus &#x00F6;ffnen">
+<!ENTITY sb.tools.manage	"Verzeichnisbaum bearbeiten">
+<!ENTITY sb.manage			"Bearbeiten">
+<!ENTITY sb.tools.calculate	"Gr&#x00F6;&#x00DF;e der Sammlung berechnen">
+<!ENTITY sb.tools.sorttree	"Sortiere Verzeichnisbaum">
+<!ENTITY sb.tools.directory	"ScrapBook Verzeichnis">
+<!ENTITY sb.tools.urls		"Speichere mehrere URLs">
+<!ENTITY sb.tools.trade		"Import / Export">
+<!ENTITY sb.tools.output	"Verzeichnisbaum als HTML speichern">
+<!ENTITY sb.tools.backup	"Speicherung mit Kompression">
+<!ENTITY sb.tools.homepage	"Homepage">
+<!ENTITY sb.tools.about		"&#x00DC;ber">
+
+<!ENTITY sb.search			"Suche">
+<!ENTITY sb.search.fulltext	"Volltext-Suche">
+<!ENTITY sb.search.all		"Alle">
+<!ENTITY sb.search.re		"Nutze RegExp">
+<!ENTITY sb.search.cs		"&#x00DC;bereinstimmung">
+<!ENTITY sb.search.cache	"Cache aktuallisieren">
+<!ENTITY sb.search.clear	"L&#x00F6;sche Chronik">
+
+<!ENTITY sb.filter.days		"Filtern nach Zeitraum">
+<!ENTITY sb.filter.today	"Heute">
+<!ENTITY sb.filter.2days	"Letzte 2 Tage">
+<!ENTITY sb.filter.3days	"Letzte 3 Tage">
+<!ENTITY sb.filter.1week	"Diese Woche">
+<!ENTITY sb.filter.2week	"Letzte 2 Wochen">
+
+<!ENTITY sb.note.opentab	"&#x00D6;ffne in Tab">
+<!ENTITY sb.note.close		"Schlie&#x00DF;en">
+
+<!ENTITY sb.move			"Ordner anzeigen">
+

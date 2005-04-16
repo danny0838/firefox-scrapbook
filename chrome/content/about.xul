@@ -5,7 +5,12 @@
 <?xml-stylesheet href="chrome://scrapbook/skin/about.css" type="text/css" ?>
 
 <!--locale-->
-<!DOCTYPE dialog SYSTEM "chrome://scrapbook/locale/scrapbook.dtd">
+<!DOCTYPE dialog [
+<!ENTITY % scrapbookDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+%scrapbookDTD;
+<!ENTITY % aboutDTD     SYSTEM "chrome://scrapbook/locale/about.dtd" >
+%aboutDTD;
+]>
 
 <!--dialog-->
 <dialog id="ScrapBookAboutDialog"
@@ -17,6 +22,9 @@
 	<!--JavaScript-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/about.js" />
 
+	<!--StringBundle-->
+	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/about.properties" />
+
 	<!--groupbox-->
 	<groupbox align="center" orient="horizontal">
 		<vbox flex="1">
@@ -27,23 +35,59 @@
 			</hbox>
 			<separator />
 			<!--created by-->
-			<label value="Created by: " class="header" />
-			<label value="Gomita" />
-			<separator class="thin" />
-			<!--home page-->
-			<label value="Home Page: " class="header" />
-			<label value="http://amb.vis.ne.jp/mozilla/scrapbook/" class="link" onclick="window.opener.SBcommon.loadURL(event.target.value, true);" />
+			<label value="&sb.about.author;" class="header" />
+			<hbox align="center">
+				<label value="Gomita" style="padding-right:80px;" onclick="SB_secret();" />
+				<label value="http://amb.vis.ne.jp/mozilla/scrapbook/" class="link" onclick="window.opener.SBcommon.loadURL(event.target.value, true);" />
+			</hbox>
+			<separator class="thin"/>
+			<!--translated by-->
+			<label value="&sb.about.translate;" class="header" />
+			<grid flex="1">
+				<columns>
+					<column flex="1" />
+					<column flex="1" />
+				</columns>
+				<rows>
+					<row>
+						<label value="趙柏強 (zh-TW)" href="http://leolo.ath.cx/~bobchao/" class="link" onclick="SB_visit(this);" />
+						<label value="MatrixIsAllOver (it-IT)" href="http://www.extenzilla.it/forum/viewtopic.php?t=396" class="link" onclick="SB_visit(this);" />
+					</row>
+					<row>
+						<label value="Gigamax (de-DE)" href="http://www.8ung.at/gigamax/" class="link" onclick="SB_visit(this);" />
+						<label value="Proyecto NAVE (es-ES)" href="http://nave.escomposlinux.org/" class="link" onclick="SB_visit(this);" />
+					</row>
+					<row>
+						<label value="Mori (fr-FR)" href="http://extensions.geckozone.org/ScrapBook/" class="link" onclick="SB_visit(this);" />
+						<label value="陈力 (zh-CN)" href="http://www.firefox-china.org/" class="link" onclick="SB_visit(this);" />
+					</row>
+					<row>
+						<label value="WowTIP (sv-SE)" href="wowtip@hotmail.com" class="link" onclick="SB_mailto(this);" />
+						<label value="Ville Pohjanheimo (fi-FI)" href="http://www.dabase.com/~ville/" class="link" onclick="SB_visit(this);" />
+					</row>
+					<row>
+						<label value="mlok (cs-CZ)" href="http://mlok.a4.cz/scrapbook/" class="link" onclick="SB_visit(this);" />
+						<label value="Yury Merkulov aka RED (ru-RU)" />
+					</row>
+					<row>
+						<label value="Eoin O'Cinneide (ga-IE)" href="eoinkennedy@hotmail.com" class="link" onclick="SB_mailto(this);" />
+						<label value="Michaël Van Dorpe (nl-NL)" />
+					</row>
+					<row>
+						<label value="Leszek(teo)Życzkowski (pl-PL)" href="http://mozillapl.org/katalogi_i_bazy/baza_dodatkow/rozszerzenia/oddzielne_moduly/scrapbook" class="link" onclick="SB_visit(this);" />
+						<label />
+					</row>
+				</rows>
+			</grid>
 			<separator class="thin"/>
 			<!--latest version-->
-			<label value="Update Info: " class="header" />
+			<label value="&sb.about.update;" class="header" />
 			<hbox align="center">
-				<image id="ScrapBookUpdateImage" />
+				<image id="ScrapBookUpdateImage" style="margin-right:6px;" />
 				<label id="ScrapBookUpdateLabel" />
 			</hbox>
 			<separator class="thin" />
 		</vbox>
 	</groupbox>
-
-	<box id="okCancelButtons" />
 
 </dialog>

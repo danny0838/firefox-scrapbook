@@ -1,0 +1,20 @@
+<!ENTITY sb.prop.date		"Datum">
+<!ENTITY sb.prop.type		"Typ">
+<!ENTITY sb.prop.title		"Název">
+<!ENTITY sb.prop.encode		"Znaková sada">
+<!ENTITY sb.prop.icon		"Ikona">
+<!ENTITY sb.prop.source		"URL">
+<!ENTITY sb.prop.comment	"Komentář">
+<!ENTITY sb.prop.content	"Obsah">
+<!ENTITY sb.prop.size		"Velikost">
+<!ENTITY sb.prop.id.date	"ID (Čas)">
+<!ENTITY sb.prop.folder		"Složka">
+
+<!ENTITY sb.prop.general	"Obecné informace">
+
+<!ENTITY sb.prop.icon.change	"Změnit">
+<!ENTITY sb.prop.icon.default	"Default">
+<!ENTITY sb.prop.icon.favicon	"Select favicon">
+<!ENTITY sb.prop.icon.custom	"Select custom icon">
+<!ENTITY sb.prop.mark			"Mark">
+

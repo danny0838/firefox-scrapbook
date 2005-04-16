@@ -1,0 +1,24 @@
+<!ENTITY sb.open			"Oscail">
+<!ENTITY sb.open.tab		"Oscail i T&#225;b">
+<!ENTITY sb.open.newtab		"Oscail i T&#225;b Nua">
+<!ENTITY sb.open.source		"Oscail URL Foinsithe">
+<!ENTITY sb.show.files		"Teasp&#225;inn Comhaid">
+<!ENTITY sb.delete			"Scrios">
+<!ENTITY sb.property		"Treithe">
+
+<!ENTITY sb.folder.toggle	"Leathnaigh/Leacaigh">
+<!ENTITY sb.folder.openall	"Oscail Gach Ceann i dT&#225;ba">
+<!ENTITY sb.folder.combine	"Oscail i Combined View">
+<!ENTITY sb.folder.manage	"Riaraidh Comhadlann...">
+<!ENTITY sb.manage			"Riaraidh">
+
+<!ENTITY sb.new.folder		"Comhadlann Nua...">
+<!ENTITY sb.new.note		"N&#243;ta Nua">
+
+<!ENTITY sb.sort.folder		"S&#243;rt&#225;il an Comhadlann">
+<!ENTITY sb.sort.title.asc	"S&#243;rt&#225;il f&#233; Teideal (A &gt; Z)">
+<!ENTITY sb.sort.title.desc	"S&#243;rt&#225;il f&#233; Teideal (Z &gt; A)">
+<!ENTITY sb.sort.date.asc	"Croineola&#237;och">
+<!ENTITY sb.sort.date.desc	"Croineola&#237;och Aisiompaithe">
+<!ENTITY sb.sort.recursive	"S&#243;rt&#225;il Athfhillteanach na Fothchomhadlainn">
+

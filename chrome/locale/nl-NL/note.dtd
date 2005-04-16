@@ -1,0 +1,11 @@
+<!ENTITY sn.save			"Opslaan">
+<!ENTITY sn.close			"Sluiten">
+<!ENTITY sn.tools			"Opties">
+<!ENTITY sn.preview			"HTML Voorbeeld">
+<!ENTITY sn.template		"Bewerk HTML Sjabloon">
+<!ENTITY sn.autolinefeed	"Auto-Linefeed">
+<!ENTITY sn.autolinefeed.t	"&lt;br&gt; tag toevoegen aan het regeleinde aan het HTML voorbeeld">
+<!ENTITY sn.fontsize		"Font Size">
+<!ENTITY sn.help			"Help">
+<!ENTITY sn.exit			"Exit">
+

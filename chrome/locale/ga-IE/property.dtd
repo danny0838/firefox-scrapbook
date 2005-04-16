@@ -1,0 +1,20 @@
+<!ENTITY sb.prop.date		"D&#225;ta">
+<!ENTITY sb.prop.type		"Saghas">
+<!ENTITY sb.prop.title		"Teideal">
+<!ENTITY sb.prop.encode		"C&#243;d&#225;il">
+<!ENTITY sb.prop.icon		"Deilbh&#237;n">
+<!ENTITY sb.prop.source		"URL">
+<!ENTITY sb.prop.comment	"L&#233;iri&#250;">
+<!ENTITY sb.prop.content	"&#193;bhar">
+<!ENTITY sb.prop.size		"Toirt">
+<!ENTITY sb.prop.id.date	"ID (Am)">
+<!ENTITY sb.prop.folder		"Comhadlann">
+
+<!ENTITY sb.prop.general	"Eolas Ginear&#225;lta">
+
+<!ENTITY sb.prop.icon.change	"Aistrigh">
+<!ENTITY sb.prop.icon.default	"R&#233;amhshocraithe">
+<!ENTITY sb.prop.icon.favicon	"Select favicon">
+<!ENTITY sb.prop.icon.custom	"Select custom icon">
+<!ENTITY sb.prop.mark			"Marc&#225;il">
+

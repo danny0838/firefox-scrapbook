@@ -5,12 +5,22 @@
 <?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
 
 <!--locale-->
-<!DOCTYPE wizard SYSTEM "chrome://scrapbook/locale/scrapbook.dtd">
+<!DOCTYPE wizard [
+<!ENTITY % scrapbookDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+%scrapbookDTD;
+<!ENTITY % treeDTD      SYSTEM "chrome://scrapbook/locale/tree.dtd" >
+%treeDTD;
+<!ENTITY % propertyDTD  SYSTEM "chrome://scrapbook/locale/property.dtd" >
+%propertyDTD;
+<!ENTITY % calculateDTD SYSTEM "chrome://scrapbook/locale/calculate.dtd" >
+%calculateDTD;
+]>
 
-<!--dialog-->
+<!--wizard-->
 <wizard id="ScrapBookCalcWizard"
-        title="&sb.title; - &sb.tools.list;"
+        title="&sb.title; - &sb.tools.calculate;"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        width="450" height="400"
         persist="screenX screenY"
         onload="SB_initList();">
 
@@ -23,20 +33,20 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 
 	<!--StringBundle-->
-	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/scrapbook.properties" />
+	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/calculate.properties" />
 
 	<!--popup-->
 	<popupset>
 		<popup id="ScrapBookTreePopup" onpopupshowing="SB_createPopupMenuList();">
-			<menuitem id="ScrapBookTreePopupO" label="&sb.open;"      oncommand="SB_openList(event, false);" default="true" />
-			<menuitem id="ScrapBookTreePopupT" label="&sb.opentab;"   oncommand="SB_openList(event, true);" />
-			<menuitem id="ScrapBookTreePopupL" label="&sb.launchdir;" oncommand="SB_transmitList('L');" />
+			<menuitem label="&sb.open;"        oncommand="SB_openList(event, false);" default="true" />
+			<menuitem label="&sb.open.newtab;" oncommand="SB_openList(event, true);" />
+			<menuitem label="&sb.show.files;"  oncommand="SB_transmitList('L');" />
 			<menuseparator /><menuitem id="ScrapBookTreePopupD" class="menuitem-iconic" label="&sb.delete;"     oncommand="SB_deleteList();" disbabled="true" />
 			<menuseparator /><menuitem id="ScrapBookTreePopupP" class="menuitem-iconic" label="&sb.property;"   oncommand="SB_transmitList('P');" />
 		</popup>
 	</popupset>
 
-	<wizardpage label="&sb.tools.list;" description="Calculate and list the size of your collection">
+	<wizardpage label="&sb.tools.calculate;">
 
 		<grid>
 			<columns>
@@ -45,12 +55,12 @@
 			</columns>
 			<rows>
 				<row align="center">
-					<label value="Total Size: " />
+					<label value="&sb.calc.total.size;:" />
 					<textbox id="ScrapBookTotalSize" readonly="true" />
 				</row>
 				<row align="center">
-					<label value="Validate: " />
-					<textbox id="ScrapBookValidate" readonly="true" />
+					<label value="&sb.calc.diagnosis;:" />
+					<textbox id="ScrapBookDiagnosis" readonly="true" />
 				</row>
 			</rows>
 		</grid>
@@ -58,7 +68,7 @@
 		<listbox id="ScrapBookCalcList" contextmenu="ScrapBookTreePopup" ondblclick="SB_openList(event, false);" flex="1" style="height:10em;">
 			<listhead>
 				<listheader label="&sb.prop.title;" />
-				<listheader label="&sb.prop.size;" />
+				<listheader label="&sb.prop.size;" sortDirection="ascending" />
 			</listhead>
 			<listcols>
 				<listcol flex="2" style="width:250px;" />

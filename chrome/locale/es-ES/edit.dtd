@@ -1,0 +1,19 @@
+<!ENTITY sb.editor.inline	"Añadir comentario incorporado a la selección">
+<!ENTITY sb.editor.block	"Add Block Comment after Selection">
+<!ENTITY sb.editor.marker	"Resaltar seleccionado">
+<!ENTITY sb.editor.unline	"Borrar todos comentarios incorporados">
+<!ENTITY sb.editor.unmark	"Borrar resaltado">
+<!ENTITY sb.editor.cutter	"Borrar seleccionado">
+<!ENTITY sb.editor.eraser	"Borrador DOM:  Elimina bloques al hacer click en ellos.">
+<!ENTITY sb.editor.undo		"Undo">
+<!ENTITY sb.editor.restore	"Abandonar cambios y restaurar">
+<!ENTITY sb.editor.save		"Guardar">
+<!ENTITY sb.editor.exit		"Salir">
+
+<!ENTITY sb.inline.enter	"Introducir">
+<!ENTITY sb.inline.delete	"Borrar">
+<!ENTITY sb.block.customize	"Customize CSS for Block Comments">
+<!ENTITY sb.block.hide		"Hide Block Comments">
+
+<!ENTITY sb.expand.comment	"Expandir area de comentarios">
+

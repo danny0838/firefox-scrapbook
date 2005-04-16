@@ -1,0 +1,20 @@
+<!ENTITY sb.prop.date		"Дата">
+<!ENTITY sb.prop.type		"Тип">
+<!ENTITY sb.prop.title		"Заголовок">
+<!ENTITY sb.prop.encode		"Кодировка">
+<!ENTITY sb.prop.icon		"Значок">
+<!ENTITY sb.prop.source		"URL">
+<!ENTITY sb.prop.comment	"Комментарий">
+<!ENTITY sb.prop.content	"Содержимое">
+<!ENTITY sb.prop.size		"Размер">
+<!ENTITY sb.prop.id.date	"ID (Время)">
+<!ENTITY sb.prop.folder		"Папка">
+
+<!ENTITY sb.prop.general	"Основная информация">
+
+<!ENTITY sb.prop.icon.change	"Change">
+<!ENTITY sb.prop.icon.default	"Default">
+<!ENTITY sb.prop.icon.favicon	"Select favicon">
+<!ENTITY sb.prop.icon.custom	"Select custom icon">
+<!ENTITY sb.prop.mark			"Mark">
+

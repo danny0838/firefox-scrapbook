@@ -1,0 +1,24 @@
+<!ENTITY sb.open			"打开">
+<!ENTITY sb.open.tab		"在标签页中打开">
+<!ENTITY sb.open.newtab		"在新建标签页中打开">
+<!ENTITY sb.open.source		"打开原始 URL">
+<!ENTITY sb.show.files		"Show Files">
+<!ENTITY sb.delete			"删除">
+<!ENTITY sb.property		"属性">
+
+<!ENTITY sb.folder.toggle	"展开/折叠">
+<!ENTITY sb.folder.openall	"在标签页中打开所有文件">
+<!ENTITY sb.folder.combine	"Open in Combined View">
+<!ENTITY sb.folder.manage	"管理文件夹...">
+<!ENTITY sb.manage			"Manage">
+
+<!ENTITY sb.new.folder		"新建文件夹...">
+<!ENTITY sb.new.note		"新建便签">
+
+<!ENTITY sb.sort.folder		"Sort Folder">
+<!ENTITY sb.sort.title.asc	"Sort by Title (A &gt; Z)">
+<!ENTITY sb.sort.title.desc	"Sort by Title (Z &gt; A)">
+<!ENTITY sb.sort.date.asc	"Chronological">
+<!ENTITY sb.sort.date.desc	"Reverse Chronological">
+<!ENTITY sb.sort.recursive	"Sort Sub-folders Recursively">
+

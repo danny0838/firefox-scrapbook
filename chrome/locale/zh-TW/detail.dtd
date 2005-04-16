@@ -1,0 +1,15 @@
+<!ENTITY sb.detail					"擷取資訊">
+<!ENTITY sb.detail.rootfolder		"ScrapBook">
+<!ENTITY sb.detail.new.folder		"開新資料夾">
+<!ENTITY sb.detail.select.folder	"選取資料夾">
+
+<!ENTITY sb.detail.linked			"一併擷取連結目標">
+<!ENTITY sb.detail.linked.image		"圖片">
+<!ENTITY sb.detail.linked.sound		"音樂">
+<!ENTITY sb.detail.linked.movie		"影片">
+<!ENTITY sb.detail.linked.archive	"壓縮檔">
+<!ENTITY sb.detail.linked.all		"所有連結檔案">
+
+<!ENTITY sb.detail.linked.seq		"依序擷取所有連結網頁">
+<!ENTITY sb.detail.linked.seq.d		"(會存放在一個新資料夾中)">
+

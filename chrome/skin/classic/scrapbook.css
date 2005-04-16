@@ -12,8 +12,9 @@ toolbar#ScrapBookMainToolbar toolbarbutton
 }
 
 menuitem#ScrapBookTreePopupN .menu-iconic-icon,
-menuitem#ScrapBookTreePopupD.menu-iconic-icon,
-menuitem#ScrapBookTreePopupP .menu-iconic-icon
+menuitem#ScrapBookTreePopupD .menu-iconic-icon,
+menuitem#ScrapBookTreePopupP .menu-iconic-icon,
+menuitem#ScrapBookTreePopupC .menu-iconic-icon
 {
 	width : 13px !important;
 	height: 13px !important;
@@ -40,6 +41,12 @@ treechildren::-moz-tree-drop-feedback
 	width: 80px;
 	height: 2px;
 }
+
+treechildren::-moz-tree-cell-text(ScrapBookTreecolTitle, leaf, marked)
+{
+	font-weight: bold;
+}
+
 
 
 /* ::::: ScrapBook Tree Popup ::::: */
@@ -99,16 +106,22 @@ listbox#ScrapBookResultList listitem[selected="true"] listcell
 
 /* ::::: ScrapBook Property ::::: */
 
-dialog#ScrapBookPropertyDialog row
+dialog#ScrapBookPropertyDialog rows#ScrapBookPropRows row
 {
-	margin-bottom:3px;
+	margin-bottom: 3px;
 }
 
 dialog#ScrapBookPropertyDialog row > textbox
 {
-	height: 1.6em;
-	border: 0;
-	-moz-appearance: none;
+	height: 1.8em;
+	padding: 2px;
+}
+
+dialog#ScrapBookPropertyDialog row > textbox[readonly="true"]
+{
+	height: 1.7em;
+	-moz-appearance: none !important;
+	border: none;
 }
 
 
@@ -132,10 +145,4 @@ browser
 	background-color: #FFFFFF;
 }
 
-#ScrapNoteWindow #ScrapNoteTextbox,
-#ScrapNoteWindow #ScrapNoteTemplateTextbox
-{
-	font-size: 16px;
-	font-family: monospace;
-}
 

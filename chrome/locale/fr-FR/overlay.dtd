@@ -1,0 +1,12 @@
+<!ENTITY sb.title				"ScrapBook">
+<!ENTITY sb.capture.partial		"Saisie de la sélection">
+<!ENTITY sb.capture.partial.as	"Faire une saisie de la sélection dans...">
+<!ENTITY sb.capture.entire		"Saisie de la page">
+<!ENTITY sb.capture.entire.as	"Faire une saisie de la page dans...">
+<!ENTITY sb.capture.frame		"Capture du cadre">
+<!ENTITY sb.capture.frame.as	"Capture du cadre dans...">
+<!ENTITY sb.capture.target		"Saisie du lien">
+<!ENTITY sb.capture.target.as	"Faire une saisie du lien dans...">
+
+<!ENTITY sb.overlay.editing		"Passer en mode édition">
+

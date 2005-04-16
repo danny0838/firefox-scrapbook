@@ -1,0 +1,41 @@
+<!ENTITY sb.title			"Leabhar Gearrth&#225;n">
+
+<!ENTITY sb.new.folder		"Comhadlann Nua...">
+<!ENTITY sb.new.note		"N&#243;ta Nua">
+<!ENTITY sb.toggleallopen	"Leathnaigh/Leacaigh gach Comhadlann">
+
+<!ENTITY sb.tools			"Uirlis&#237;">
+<!ENTITY sb.tools.setting	"Socraithe...">
+<!ENTITY sb.tools.editing	"Modh Eagarthireachta i gcona&#237;">
+<!ENTITY sb.tools.manage	"Riaraidh Crann...">
+<!ENTITY sb.manage			"Bainist&#237;ocht">
+<!ENTITY sb.tools.calculate	"Toirt Measta">
+<!ENTITY sb.tools.sorttree	"S&#243;rtil an Chrann ar Fad">
+<!ENTITY sb.tools.directory	"Comhadlann Leabhar Gearrth&#225;n">
+<!ENTITY sb.tools.urls		"Ilghabh&#225;il URL">
+<!ENTITY sb.tools.trade		"Iomp&#243;rt&#225;il / Easport&#225;il">
+<!ENTITY sb.tools.output	"Easp&#243;rt&#225;il Crann mar HTML">
+<!ENTITY sb.tools.backup	"C&#250;ltaigh le Comhbhr&#250;">
+<!ENTITY sb.tools.homepage	"Bunleathanach">
+<!ENTITY sb.tools.about		"Eolas">
+
+<!ENTITY sb.search			"Cuardaigh">
+<!ENTITY sb.search.fulltext	"Cuardach T&#233;acs Ioml&#225;n">
+<!ENTITY sb.search.all		"Gach Rud">
+<!ENTITY sb.search.re		"&#218;s&#225;id RegExp">
+<!ENTITY sb.search.cs		"Triail C&#225;s a Macasamhail">
+<!ENTITY sb.search.cache	"Athnuacha Taisce do Cuardach T&#233;acs Ioml&#225;n">
+<!ENTITY sb.search.clear	"Glan Stair na Foirmeacha">
+
+<!ENTITY sb.filter.days		"Scagadh f&#233; Laethanta">
+<!ENTITY sb.filter.today	"Inniu">
+<!ENTITY sb.filter.2days	"An D&#225; L&#225; Deireanach">
+<!ENTITY sb.filter.3days	"An Tr&#237; L&#225; Deireanach">
+<!ENTITY sb.filter.1week	"An tSeachtain Seo">
+<!ENTITY sb.filter.2week	"An Coic&#237;s Deireanach">
+
+<!ENTITY sb.note.opentab	"Oscail i T&#225;b">
+<!ENTITY sb.note.close		"D&#250;n">
+
+<!ENTITY sb.move			"Bog go Comhadlann">
+

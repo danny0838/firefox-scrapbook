@@ -1,0 +1,7 @@
+<!ENTITY sb.backup.d		"Backup entire ScrapBook data with compression.">
+<!ENTITY sb.backup.program	"Compression Program">
+<!ENTITY sb.backup.file		"Destination File to Backup">
+<!ENTITY sb.backup.browse	"Parcourir">
+<!ENTITY sb.backup.arg		"Command Line Arguments">
+<!ENTITY sb.backup.arg.d1	"&#37;dst is the path to the backup file.">
+<!ENTITY sb.backup.arg.d2	"&#37;src is the path to the ScrapBook directory.">

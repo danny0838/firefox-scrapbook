@@ -1,0 +1,137 @@
+<?xml version="1.0" ?>
+
+<!--skin-->
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+<?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
+
+<!--overlay-->
+<?xul-overlay href="chrome://scrapbook/content/tree.xul" ?>
+
+<!--locale-->
+<!DOCTYPE window [
+<!ENTITY % scrapbookDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+%scrapbookDTD;
+<!ENTITY % propertyDTD  SYSTEM "chrome://scrapbook/locale/property.dtd" >
+%propertyDTD;
+<!ENTITY % tradeDTD     SYSTEM "chrome://scrapbook/locale/trade.dtd" >
+%tradeDTD;
+<!ENTITY % treeDTD      SYSTEM "chrome://scrapbook/locale/tree.dtd" >
+%treeDTD;
+]>
+
+<!--window-->
+<window id="ScrapBookTradeWindow"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        title="&sb.title; - &sb.tools.trade;"
+        width="640" height="480" 
+        onload="setTimeout(SB_initTrade, 0);">
+
+	<!--JavaScript for Preference-->
+	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
+	<!--JavaScript for DND-->
+	<script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
+	<script type="application/x-javascript" src="chrome://global/content/nsTransferable.js" />
+	<script type="application/x-javascript" src="chrome://global/content/nsJSSupportsUtils.js" />
+	<script type="application/x-javascript" src="chrome://global/content/nsJSComponentManager.js" />
+	<!--JavaScript-->
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/tree.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapbook.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/manage.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/trade.js" />
+
+	<!--stringbundle-->
+	<stringbundleset>
+		<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/scrapbook.properties" />
+		<stringbundle id="ScrapBookTradeString" src="chrome://scrapbook/locale/trade.properties" />
+	</stringbundleset>
+
+	<!--keyset-->
+	<keyset id="ScrapBookWindowKey">
+		<key key="a" modifiers="accel" oncommand="SBlist.focus();SBlist.selectAll();" />
+	</keyset>
+
+	<!--popup-->
+	<popupset>
+		<popup id="ScrapBookTreePopup" />
+		<popup id="ScrapBookListPopup">
+			<menuitem label="&sb.open;"        oncommand="SBtradeContext.open(false);" default="true" />
+			<menuitem label="&sb.open.newtab;" oncommand="SBtradeContext.open(true);" />
+			<menuitem label="&sb.show.files;"  oncommand="SBtradeContext.showFiles();" />
+			<menuseparator />
+			<menuitem class="menuitem-iconic" label="&sb.delete;"   oncommand="SBtradeContext.deleteDir();" src="chrome://scrapbook/skin/menu_delete.png" />
+			<menuseparator />
+			<menuitem class="menuitem-iconic" label="&sb.property;" oncommand="SBtradeContext.showIndexDat();" src="chrome://scrapbook/skin/menu_property.png" />
+		</popup>
+	</popupset>
+
+	<hbox flex="1">
+
+		<vbox flex="1" style="min-width:150px;">
+			<!--main toolbar-->
+			<toolbar id="ScrapBookMainToolbar" class="plain">
+				<toolbarbutton tooltiptext="&sb.new.folder;"    image="chrome://scrapbook/skin/tool_createfolder.png" oncommand="SB_createFolder();" />
+				<toolbarbutton tooltiptext="&sb.toggleallopen;" image="chrome://scrapbook/skin/tool_togglefolder.png" oncommand="SBtreeUtil.toggleAllFolders();" />
+			</toolbar>
+			<!--scrapbook tree-->
+			<tree id="ScrapBookTree"
+			      contextmenu="ScrapBookTreePopup"
+			      onclick="SBtreeUtil.onClickDefault(event);"
+			      ondblclick="if (event.button == 0) SB_openDblClick(event);"
+			      onkeypress="SB_onKeyPressItem(event);"
+			      ondraggesture="if (event.originalTarget.localName == 'treechildren') nsDragAndDrop.startDrag(event,SBdragObserver);event.stopPropagation();"
+			      ondragover="nsDragAndDrop.dragOver(event,SBdropObserver);event.stopPropagation();"
+			      ondragdrop="nsDragAndDrop.drop(event,SBdropObserver);event.stopPropagation();"
+			      flex="2"
+			      class="plain"
+			      style="-moz-appearance:listbox;" />
+		</vbox>
+
+		<splitter />
+
+		<vbox flex="2" style="min-width:300px;">
+			<hbox align="center">
+				<image id="ScrapBookTradeIcon" style="width:16px;height:16px;margin-left:5px;" />
+				<textbox id="ScrapBookTradePath" readonly="true" flex="1" style="padding:2px;height:1.7em;" />
+				<button label="&sb.trade.browse;..."  oncommand="SBtrade.selectPath();" />
+				<button label="&sb.trade.showfolder;" oncommand="SBtrade.showFolder();" />
+			</hbox>
+			<!--listbox-->
+			<listbox id="ScrapBookTradeList"
+			         contextmenu="ScrapBookListPopup"
+			         seltype="multiple"
+			         ondraggesture="if ( event.originalTarget.localName == 'listitem' ) nsDragAndDrop.startDrag(event,STdragObserver);event.stopPropagation();"
+			         ondragover="nsDragAndDrop.dragOver(event,STdropObserver);event.stopPropagation();"
+			         ondragdrop="nsDragAndDrop.drop(event,STdropObserver);event.stopPropagation();"
+			         ondblclick="if ( event.button == 0 ) SBtradeContext.open(false);"
+			         flex="1"
+			         class="plain"
+			         style="-moz-appearance:listbox;">
+				<listhead>
+					<listheader label="&sb.prop.title;" />
+					<listheader label="&sb.trade.dateofexport;" />
+				</listhead>
+				<listcols>
+					<listcol flex="2" />
+					<listcol flex="1" style="min-width:160px;max-width:160px;" />
+				</listcols>
+			</listbox>
+		</vbox>
+
+	</hbox>
+
+	<splitter />
+
+	<listbox id="ScrapBookTradeLog" class="plain" style="height:6.4em;-moz-appearance:listbox;" />
+
+	<!--status bar-->
+	<sidebarheader id="ScrapBookStatusBar" align="center" style="padding-left:2px;">
+		<hbox align="center" flex="1" id="ScrapBookStatusBox">
+			<image id="ScrapBookStatusImage" />
+			<label id="ScrapBookStatusLabel" crop="end" flex="1" value="" />
+		</hbox>
+		<progressmeter id="ScrapBookTradeProgress" mode="determined" value="0" width="160" hidden="true" />
+	</sidebarheader>
+
+</window>

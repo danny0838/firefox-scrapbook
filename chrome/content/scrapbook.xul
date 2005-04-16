@@ -4,8 +4,16 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 <?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
 
+<!--overlay-->
+<?xul-overlay href="chrome://scrapbook/content/tree.xul"?>
+
 <!--locale-->
-<!DOCTYPE window SYSTEM "chrome://scrapbook/locale/scrapbook.dtd">
+<!DOCTYPE window [
+<!ENTITY % scrapbookDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+%scrapbookDTD;
+<!ENTITY % propertyDTD  SYSTEM "chrome://scrapbook/locale/property.dtd" >
+%propertyDTD;
+]>
 
 <!--window-->
 <window id="ScrapBookWindow"
@@ -15,13 +23,11 @@
         onload="SB_init();"
         onunload="SB_finalize();">
 
-	<!--JavaScript for Preference-->
-	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
 	<!--JavaScript-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapbook.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapnote.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<!--JavaScript for Drag And Drop-->
 	<script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
 	<script type="application/x-javascript" src="chrome://global/content/nsTransferable.js" />
@@ -29,33 +35,13 @@
 	<script type="application/x-javascript" src="chrome://global/content/nsJSComponentManager.js" />
 
 	<!--string bundle-->
-	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/scrapbook.properties" />
-
-	<!--keyset-->
-	<keyset id="ScrapBookKeyset">
-		<key id="key_switchEditingMode" oncommand="SB_switchEditingMode();" key="J" modifiers="alt" />
-	</keyset>
+	<stringbundleset id="ScrapBookStringBundle">
+		<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/scrapbook.properties" />
+	</stringbundleset>
 
 	<!--popup-->
-	<popupset>
-		<popup id="ScrapBookTreePopup" onpopupshowing="SB_createPopupMenu();">
-			<menuitem id="ScrapBookTreePopupO" label="&sb.open;"           oncommand="SB_open(false, false);" default="true" />
-			<menuitem id="ScrapBookTreePopupT" label="&sb.opentab;"        oncommand="SB_open(true,  false);" />
-			<menuitem id="ScrapBookTreePopupE" label="&sb.note.opentab;"   oncommand="SB_open(true,  false);" />
-			<menuitem id="ScrapBookTreePopupS" label="&sb.opensource;"     oncommand="SB_transmit('S');" />
-			<menuitem id="ScrapBookTreePopupL" label="&sb.launchdir;"      oncommand="SB_transmit('L');" />
-			<menuitem id="ScrapBookTreePopupF" label="&sb.folder.toggle;"  oncommand="SB_open(false, true);"  hidden="true" />
-			<menuitem id="ScrapBookTreePopupA" label="&sb.folder.openall;" oncommand="SB_openAllInTabs();"    hidden="true" />
-			<menuitem id="ScrapBookTreePopupV" label="&sb.folder.view;"    oncommand="SB_transmit('V');" hidden="true" />
-			<menuitem id="ScrapBookTreePopupM" label="&sb.folder.manage;"  oncommand="SB_transmit('M');" hidden="true" />
-			<menuseparator />
-			<menuitem id="ScrapBookTreePopupN" class="menuitem-iconic" label="&sb.folder.new;" oncommand="SB_createFolder(false);" />
-			<menuitem id="ScrapBookTreePopupC" class="menuitem-iconic" label="&sb.note.new;"   oncommand="SB_createNote(false);" />
-			<menuseparator />
-			<menuitem id="ScrapBookTreePopupD" class="menuitem-iconic" label="&sb.delete;"     oncommand="SB_delete();" />
-			<menuseparator />
-			<menuitem id="ScrapBookTreePopupP" class="menuitem-iconic" label="&sb.property;"   oncommand="SB_transmit('P');" />
-		</popup>
+	<popupset id="ScrapBookPopupset">
+		<popup id="ScrapBookTreePopup" />
 		<popup id="ScrapBookSearchPopup" onpopupshowing="document.getElementById('ScrapBookSearchTextbox').select();" position="after_start">
 			<menuitem id="ScrapBookSearchF" label="&sb.search.fulltext;" type="radio" oncommand="SBsearch.change('fulltext');" />
 			<menuseparator />
@@ -96,7 +82,6 @@
 				         autocompletesearch="form-history"
 				         autocompletesearchparam="ScrapBookSearchHistory"
 				         ontextentered="SBsearch.enter(this.value);"
-				         onkeypress="if ( event.keyCode == 13 ) SBsearch.press(this.value);"
 				         enablehistory="true"
 				         tabscrolling="true"
 				         accesskey="S"
@@ -112,71 +97,51 @@
 		</toolbar>
 		<!--main toolbar-->
 		<toolbar id="ScrapBookMainToolbar" class="plain">
-			<toolbarbutton tooltiptext="&sb.folder.new;"    image="chrome://scrapbook/skin/tool_createfolder.png" oncommand="SB_createFolder(true);" />
-			<toolbarbutton tooltiptext="&sb.togglefolders;" image="chrome://scrapbook/skin/tool_togglefolder.png" oncommand="SB_toggleAllFolder();" />
-			<toolbarbutton tooltiptext="&sb.note.new;"      image="chrome://scrapbook/skin/tool_createnote.png"   oncommand="SB_createNote(true);" />
+			<toolbarbutton tooltiptext="&sb.new.folder;"    image="chrome://scrapbook/skin/tool_createfolder.png" oncommand="SB_createFolder();" />
+			<toolbarbutton tooltiptext="&sb.toggleallopen;" image="chrome://scrapbook/skin/tool_togglefolder.png" oncommand="SBtreeUtil.toggleAllFolders();" />
+			<toolbarbutton tooltiptext="&sb.new.note;"      image="chrome://scrapbook/skin/tool_createnote.png"   oncommand="SB_createNote();" />
 			<spacer flex="1" />
 			<toolbarbutton type="menu" label="&sb.tools;">
 				<menupopup id="ScrapBookMenuPopup">
 					<menuitem label="&sb.tools.setting;" oncommand="window.openDialog('chrome://scrapbook/content/setting.xul','','modal,centerscreen,chrome,resizable=yes');" />
 					<menuseparator />
-					<menuitem label="&sb.editing.mode;" id="ScrapBookEditingMode" oncommand="SB_toggleEditingMode();" type="checkbox" persist="checked" />
-					<menuseparator id="ScrapBookMenuSeparator1" />
-					<menuitem label="&sb.tools.list;..."   oncommand="window.openDialog('chrome://scrapbook/content/calculate.xul','','centerscreen');" />
-					<menuitem label="&sb.tools.manage;"    oncommand="window.openDialog('chrome://scrapbook/content/manage.xul','','chrome,all,dialog=no','urn:scrapbook:root');" />
-					<menuitem label="&sb.tools.export;"    oncommand="SB_transmitURL('chrome://scrapbook/content/export.xul','scrapbook.usetab.export');" />
-<!--
-					<menuitem label="&sb.tools.backup;..." oncommand="window.openDialog('chrome://scrapbook/content/backup.xul','','centerscreen');" />
-					<menuitem label="&sb.tools.reset;"     oncommand="SBstatus.reset();" />
--->
-					<menuseparator id="ScrapBookMenuSeparator2" />
-					<menuitem label="&sb.tools.homepage;"  oncommand="SB_transmitURL('http://amb.vis.ne.jp/mozilla/scrapbook/','scrapbook.usetab.home');" />
-					<menuitem label="&sb.tools.about;"     oncommand="window.openDialog('chrome://scrapbook/content/about.xul','','modal,centerscreen,chrome,resizable=no');" />
+					<menuitem label="&sb.tools.editing;" id="ScrapBookEditingMode" oncommand="SB_toggleEditingMode();" type="checkbox" persist="checked" />
+					<menuseparator />
+					<menuitem label="&sb.manage;"          oncommand="window.openDialog('chrome://scrapbook/content/manage.xul','','chrome,centerscreen,all,resizable,dialog=no','urn:scrapbook:root');" />
+					<menuitem label="&sb.tools.calculate;" oncommand="window.openDialog('chrome://scrapbook/content/calculate.xul','','chrome,centerscreen,all,dialog=no');" />
+					<menuitem label="&sb.tools.sorttree;"  oncommand="window.openDialog('chrome://scrapbook/content/sortTree.xul','','chrome,centerscreen,modal');" />
+					<menuitem label="&sb.tools.directory;" oncommand="SBcommon.launchDirectory(SBcommon.getScrapBookDir());" />
+					<menuseparator />
+					<menuitem label="&sb.tools.urls;"   oncommand="window.top.openDialog('chrome://scrapbook/content/captureURL.xul','','chrome,centerscreen,all,resizable,dialog=no');" />
+					<menuitem label="&sb.tools.trade;"  oncommand="window.openDialog('chrome://scrapbook/content/trade.xul','','chrome,centerscreen,all,resizable,dialog=no');" />
+					<menuitem label="&sb.tools.output;" oncommand="window.openDialog('chrome://scrapbook/content/output.xul','','chrome,centerscreen,modal,resizable');" />
+					<menuitem label="&sb.tools.backup;" oncommand="window.openDialog('chrome://scrapbook/content/backup.xul','','chrome,centerscreen,modal');" />
+					<menuseparator />
+					<menuitem label="&sb.tools.homepage;"  oncommand="SBcommon.loadURL('http://amb.vis.ne.jp/mozilla/scrapbook/',true);" />
+					<menuitem label="&sb.tools.about;"     oncommand="window.openDialog('chrome://scrapbook/content/about.xul','','chrome,centerscreen,modal,resizable=no');" />
 				</menupopup>
 			</toolbarbutton>
 		</toolbar>
 	</toolbox>
 
-	<vbox flex="1">
-		<!--search result-->
-		<hbox id="ScrapBookResult" class="sb-header" align="center" hidden="true">
-			<label crop="end" />
+	<vbox flex="1" id="ScrapBookBox">
+		<!--header-->
+		<hbox id="ScrapBookHeader" class="sb-header" align="center" hidden="true">
+			<label flex="1" crop="end" />
 			<spacer flex="1" />
 			<toolbarbutton class="sb-header-exit" oncommand="SBsearch.exit();" />
 		</hbox>
 		<vbox id="ScrapBookTreeBox" flex="2" persist="height">
 			<!--tree-->
 			<tree id="ScrapBookTree"
-			      datasources="rdf:null"
-			      ref="urn:scrapbook:root"
-			      flags="dont-build-content"
 			      onclick="SB_onClickItem(event);"
 			      onkeypress="SB_onKeyPressItem(event);"
-			      ondraggesture="if (event.originalTarget.localName == 'treechildren') nsDragAndDrop.startDrag(event,dragObserver);event.stopPropagation();"
-			      ondragover="nsDragAndDrop.dragOver(event,dropObserver);event.stopPropagation();"
-			      ondragdrop="nsDragAndDrop.drop(event,dropObserver);event.stopPropagation();"
+			      ondraggesture="if (event.originalTarget.localName == 'treechildren') nsDragAndDrop.startDrag(event,SBdragObserver);event.stopPropagation();"
+			      ondragover="nsDragAndDrop.dragOver(event,SBdropObserver);event.stopPropagation();"
+			      ondragdrop="nsDragAndDrop.drop(event,SBdropObserver);event.stopPropagation();"
 			      contextmenu="ScrapBookTreePopup"
-			      hidecolumnpicker="true"
 			      seltype="single"
-			      class="plain" flex="1">
-				<treecols>
-					<treecol id="ScrapBookTreecolTitle" hideheader="true" primary="true" flex="1" />
-				</treecols>
-				<template>
-					<rule id="ScrapBookTreeRule">
-						<treechildren flex="1">
-							<treeitem uri="rdf:*">
-								<treerow>
-									<treecell id="ScrapBookTreeItem"
-									          label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title"
-									          src="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon"
-									          properties="Name rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
-								</treerow>
-							</treeitem>
-						</treechildren>
-					</rule>
-				</template>
-			</tree>
+			      class="plain" flex="1" />
 		</vbox>
 		<splitter id="ScrapBookSplitter" class="plain" hidden="true" />
 		<!--note-->
@@ -193,12 +158,6 @@
 		</vbox>
 	</vbox>
 
-	<!--statusbar-->
-	<sidebarheader id="ScrapBookStatusBar" align="center">
-		<hbox align="center" flex="1" style="padding-left:2px;">
-			<image id="ScrapBookStatusImage" />
-			<label id="ScrapBookStatusLabel" crop="end" flex="1" />
-		</hbox>
-	</sidebarheader>
+	<sidebarheader id="ScrapBookStatusBar" />
 
 </window>

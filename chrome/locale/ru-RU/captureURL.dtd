@@ -1,0 +1,8 @@
+<!ENTITY sb.url.description	"URL (Введите адреса строка за строкой)">
+
+<!ENTITY sb.url.tools		"URL детектор">
+<!ENTITY sb.url.tools.tabs	"Открыть все вклдаки в окне">
+<!ENTITY sb.url.tools.local	"Все локальные страницы внутри каталога">
+<!ENTITY sb.url.tools.webox	"default.html для WeBoX">
+<!ENTITY sb.url.tools.clear	"Очистить">
+

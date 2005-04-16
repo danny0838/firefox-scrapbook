@@ -1,46 +1,23 @@
 <!ENTITY sb.title			"ScrapBook">
 
-<!ENTITY sb.open			"開く">
-<!ENTITY sb.opentab			"新しいタブで開く">
-<!ENTITY sb.opensource		"ソースのURLを開く">
-<!ENTITY sb.launchdir		"ファイルをブラウズ">
-<!ENTITY sb.delete			"削除">
-<!ENTITY sb.property		"プロパティ">
-
-<!ENTITY sb.folder			"フォルダ">
-<!ENTITY sb.folder.new		"新しいフォルダ...">
-<!ENTITY sb.folder.toggle	"広げる／たたむ">
-<!ENTITY sb.folder.openall	"すべてタブで開く">
-<!ENTITY sb.folder.view		"フォルダ内一括表示">
-<!ENTITY sb.folder.manage	"フォルダの管理...">
-<!ENTITY sb.togglefolders	"すべてのフォルダを広げる／たたむ">
+<!ENTITY sb.new.folder		"新しいフォルダ...">
+<!ENTITY sb.new.note		"新しいノート">
+<!ENTITY sb.toggleallopen	"すべてのフォルダを広げる／たたむ">
 
 <!ENTITY sb.tools			"ツール">
 <!ENTITY sb.tools.setting	"設定...">
-<!ENTITY sb.editing.mode	"常に編集モード">
-<!ENTITY sb.tools.search	"検索バーを表示">
-<!ENTITY sb.tools.list		"データサイズ計算">
+<!ENTITY sb.tools.editing	"常に編集モード">
 <!ENTITY sb.tools.manage	"ツリーの管理...">
+<!ENTITY sb.manage			"管理">
+<!ENTITY sb.tools.calculate	"データサイズ計算">
+<!ENTITY sb.tools.sorttree	"ツリー全体をソート">
+<!ENTITY sb.tools.directory	"ScrapBookフォルダ">
+<!ENTITY sb.tools.urls		"URL一括取り込み">
+<!ENTITY sb.tools.trade		"インポート/エクスポート">
+<!ENTITY sb.tools.output	"ツリーのHTML出力">
 <!ENTITY sb.tools.backup	"圧縮してバックアップ">
-<!ENTITY sb.tools.export	"ツリーをHTML出力">
 <!ENTITY sb.tools.homepage	"ホームページ">
 <!ENTITY sb.tools.about		"バージョン情報">
-<!ENTITY sb.tools.reset		"ステータスバーリセット">
-
-<!ENTITY sb.prop.date		"日時">
-<!ENTITY sb.prop.type		"形式">
-<!ENTITY sb.prop.title		"タイトル">
-<!ENTITY sb.prop.chars		"文字コード">
-<!ENTITY sb.prop.icon		"アイコン">
-<!ENTITY sb.prop.source		"ソースURL">
-<!ENTITY sb.prop.comment	"コメント">
-<!ENTITY sb.prop.content	"本文">
-<!ENTITY sb.prop.size		"サイズ">
-<!ENTITY sb.prop.id.date	"ID（日時）">
-
-<!ENTITY sb.prop.general	"一般情報">
-<!ENTITY sb.prop.htmltitle	"HTMLタイトル取得">
-<!ENTITY sb.prop.iconurl	"アイコン変更">
 
 <!ENTITY sb.search			"検索">
 <!ENTITY sb.search.fulltext	"全文検索">
@@ -48,7 +25,6 @@
 <!ENTITY sb.search.re		"正規表現の使用">
 <!ENTITY sb.search.cs		"大文字/小文字の区別">
 <!ENTITY sb.search.cache	"全文検索用キャッシュを更新">
-<!ENTITY sb.search.build	"キャッシュを構築中...">
 <!ENTITY sb.search.clear	"入力履歴のクリア">
 
 <!ENTITY sb.filter.days		"日数でフィルタ">
@@ -58,7 +34,8 @@
 <!ENTITY sb.filter.1week	"今週">
 <!ENTITY sb.filter.2week	"最近2週間">
 
-<!ENTITY sb.note.new		"新しいノート">
+<!ENTITY sb.note.opentab	"タブで開く">
 <!ENTITY sb.note.close		"閉じる">
-<!ENTITY sb.note.opentab	"タブで編集">
+
+<!ENTITY sb.move			"フォルダへ移動">
 

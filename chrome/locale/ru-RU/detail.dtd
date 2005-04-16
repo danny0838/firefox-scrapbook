@@ -1,0 +1,15 @@
+<!ENTITY sb.detail					"Детали сохранения">
+<!ENTITY sb.detail.rootfolder		"Корневая папка">
+<!ENTITY sb.detail.new.folder		"Новая папка">
+<!ENTITY sb.detail.select.folder	"Выбрать папку">
+
+<!ENTITY sb.detail.linked			"Сохранять:">
+<!ENTITY sb.detail.linked.image		"Изображения">
+<!ENTITY sb.detail.linked.sound		"Аудио">
+<!ENTITY sb.detail.linked.movie		"Фильмы">
+<!ENTITY sb.detail.linked.archive	"Архивы">
+<!ENTITY sb.detail.linked.all		"Все файлы">
+
+<!ENTITY sb.detail.linked.seq		"Захватить все Web страницы последовательно">
+<!ENTITY sb.detail.linked.seq.d		"(подкаталог автоматически создается)">
+

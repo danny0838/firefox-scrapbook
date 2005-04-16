@@ -1,0 +1,12 @@
+<!ENTITY sb.title				"ScrapBook">
+<!ENTITY sb.capture.partial		"Zachytit výběr">
+<!ENTITY sb.capture.partial.as	"Zachytit výběr jako...">
+<!ENTITY sb.capture.entire		"Zachytit stránku">
+<!ENTITY sb.capture.entire.as	"Zachytit stránku jako...">
+<!ENTITY sb.capture.frame		"Zachytit rám">
+<!ENTITY sb.capture.frame.as	"Zachytit rám jako...">
+<!ENTITY sb.capture.target		"Zachytit Odkaz">
+<!ENTITY sb.capture.target.as	"Zachytit Odkaz jako...">
+
+<!ENTITY sb.overlay.editing		"Přepnout do Editačního módu">
+

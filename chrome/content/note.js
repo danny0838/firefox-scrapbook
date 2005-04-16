@@ -29,17 +29,23 @@ function SN_init()
 	gRes = SBservice.RDF.GetResource("urn:scrapbook:item" + gID);
 	SBnote.edit(gRes);
 	SNtemplate.init();
+	SNfontSize.init();
+	if ( nsPreferences.getBoolPref("scrapbook.note.preview", false) ) SNpreview.show();
 }
 
 
-function SN_quitNoSave()
+function SN_finalize(exit)
 {
-	SBnote.toSave = false;
-	window.location.href = "about:blank";
+	SBnote.save(window);
+	nsPreferences.setBoolPref("scrapbook.note.preview", SNpreview.state);
+	nsPreferences.setIntPref("scrapbook.note.fontsize", SNfontSize.pixel);
+	if ( exit) window.location.href = "about:blank";
 }
 
 
 var SNpreview = {
+
+	state : false,
 
 	show : function()
 	{
@@ -56,7 +62,7 @@ var SNpreview = {
 		myTitle = myTitle.replace(/</g, "&lt;");
 		myTitle = myTitle.replace(/>/g, "&gt;");
 		myTitle = myTitle.replace(/\"/g, "&quot;");
-		if ( document.getElementById("ScrapNoteToolbarA").checked ) myContent = myContent.replace(/([^>])$/mg, "$1<br>");
+		if ( document.getElementById("ScrapNoteToolbarA").getAttribute("checked") ) myContent = myContent.replace(/([^>])$/mg, "$1<br>");
 		mySrc = mySrc.replace(/<%NOTE_TITLE%>/g,   myTitle);
 		mySrc = mySrc.replace(/<%NOTE_CONTENT%>/g, myContent);
 		var myHTML = SBcommon.getScrapBookDir().clone();
@@ -67,6 +73,7 @@ var SNpreview = {
 		document.getElementById("ScrapNoteHeader").lastChild.hidden = false;
 		document.getElementById("ScrapNoteBrowser").removeAttribute("src");
 		document.getElementById("ScrapNoteBrowser").setAttribute("src", SBcommon.convertFilePathToURL(myHTML.path));
+		this.state = true;
 	},
 
 	exit : function()
@@ -74,6 +81,7 @@ var SNpreview = {
 		document.getElementById("ScrapNoteSplitter").hidden = true;
 		document.getElementById("ScrapNoteBrowser").hidden  = true;
 		document.getElementById("ScrapNoteHeader").lastChild.hidden = true;
+		this.state = false;
 	},
 
 };
@@ -133,13 +141,35 @@ var SNtemplate = {
 	{
 		this.save();
 		this.show(false);
-		if ( checkOff ) document.getElementById("ScrapNoteToolbarT").checked = false;
+		if ( checkOff ) document.getElementById("ScrapNoteToolbarT").setAttribute("checked", false);
 	},
 
 	change : function(aBool)
 	{
 		this.toSave = aBool;
 		document.getElementById("ScrapNoteToolbarS").disabled = !aBool;
+	},
+
+};
+
+
+var SNfontSize = {
+
+	pixel : 16,
+
+	init : function()
+	{
+		this.pixel = nsPreferences.getIntPref("scrapbook.note.fontsize", 16);
+		this.change(this.pixel);
+		document.getElementById("ScrapNoteToolbarF" + this.pixel).setAttribute("checked", true)
+	},
+
+	change : function(aPixel)
+	{
+		this.pixel = aPixel;
+		var newStyle = "font-size: " + aPixel + "px; font-family: monospace;";
+		SBnote.editXUL.setAttribute("style", newStyle);
+		SNtemplate.editXUL.setAttribute("style", newStyle);
 	},
 
 };

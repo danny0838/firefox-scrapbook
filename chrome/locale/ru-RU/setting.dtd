@@ -1,0 +1,39 @@
+<!ENTITY sb.setting			"Настройки">
+<!ENTITY sb.setting.general	"Основные">
+<!ENTITY sb.setting.usetabs	"Использование вкладок">
+<!ENTITY sb.setting.advance	"Дополнительно">
+<!ENTITY sb.setting.capture	"Захват">
+<!ENTITY sb.setting.editing	"Редактирование">
+<!ENTITY sb.setting.program	"Программа">
+
+<!ENTITY sb.setting.browser.submenu		"Включить подменю в контекстном меню браузера (Изменится после перезагрузки)">
+<!ENTITY sb.setting.capture.detail		"Показывать диалог 'Детали сохранения' при сохранении страницы перетаскиванием иконки">
+<!ENTITY sb.setting.capture.notify		"Показывать сообщение 'Сохранение завершено' (возможно, работает только в Windows)">
+<!ENTITY sb.setting.tree.hidefavicon	"Не показывать иконки страниц в дереве">
+<!ENTITY sb.setting.tree.singleexpand	"При раскрытии папки дерева, остальные свернуть">
+<!ENTITY sb.setting.tree.quickdelete	"Не спрашивать подтверждения при удалении">
+
+<!ENTITY sb.setting.usetabs.d			"Следующие действия выполнять в новых вкладках:">
+<!ENTITY sb.setting.usetabs.note		"Открыть заметки во вкладке">
+
+<!ENTITY sb.setting.capture.utf8encode		"Перевести в кодировку UTF-8 (рекомендуется)">
+<!ENTITY sb.setting.capture.utf8encode.d	"Если выключено, то некоторые последовательности символов будут отображаться как '?'.">
+<!ENTITY sb.setting.capture.removescript	"Удалить JavaScript (рекомендуется)">
+<!ENTITY sb.setting.capture.removescript.d	"Если выключено, то иногда нарушается разметка страницы.">
+
+<!ENTITY sb.setting.edit.showheader		"Показать заголовок">
+<!ENTITY sb.setting.edit.multilines		"Включить многострочный комментарий">
+<!ENTITY sb.setting.edit.confirmsave.1	"Интервал для подтверждения сохранения">
+<!ENTITY sb.setting.edit.confirmsave.2	"мин.  (0 = никогда не подтверждать)">
+
+<!ENTITY sb.setting.program.filer			"Программа для выполнения пункта 'Состав файлов'">
+<!ENTITY sb.setting.program.filer.default	"По умолчанию (Если Windows, возможно Explorer)">
+<!ENTITY sb.setting.browse					"Выбрать">
+
+<!ENTITY sb.setting.data			"Папка для хранения данных">
+<!ENTITY sb.setting.data.default	"По умолчанию (В Вашем домашнем каталоге/Профиле)">
+<!ENTITY sb.setting.data.notice		"В случае переноса накопленных данных, перенесите вручную папку 'ScrapBook' в нужное Вам место. Затем укажите это новое расположение.">
+
+<!ENTITY sb.setting.restorefavicons		"Restore favicons">
+<!ENTITY sb.setting.restorefavicons.d	"If favicons are not displayed, press this button:">
+

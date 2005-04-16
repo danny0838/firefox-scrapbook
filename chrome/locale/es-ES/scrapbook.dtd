@@ -1,0 +1,41 @@
+<!ENTITY sb.title			"ScrapBook">
+
+<!ENTITY sb.new.folder		"Nueva carpeta...">
+<!ENTITY sb.new.note		"Nueva nota">
+<!ENTITY sb.toggleallopen	"Expandir/Colapsar todas las carpetas">
+
+<!ENTITY sb.tools			"Herramientas">
+<!ENTITY sb.tools.setting	"Preferencias...">
+<!ENTITY sb.tools.editing	"Modo edición siempre">
+<!ENTITY sb.tools.manage	"Administrar árbol...">
+<!ENTITY sb.manage			"Manage">
+<!ENTITY sb.tools.calculate	"Calcular tamaño">
+<!ENTITY sb.tools.sorttree	"Sort Entire Tree">
+<!ENTITY sb.tools.directory	"ScrapBook Directory">
+<!ENTITY sb.tools.urls		"Capture Multiple URLs">
+<!ENTITY sb.tools.trade		"Import / Export">
+<!ENTITY sb.tools.output	"Output Tree as HTML">
+<!ENTITY sb.tools.backup	"Backup with Compression">
+<!ENTITY sb.tools.homepage	"Página de inicio">
+<!ENTITY sb.tools.about		"Acerca de">
+
+<!ENTITY sb.search			"Buscar">
+<!ENTITY sb.search.fulltext	"Buscar en todo el texto">
+<!ENTITY sb.search.all		"Todo">
+<!ENTITY sb.search.re		"Usar RegExp">
+<!ENTITY sb.search.cs		"Tal y como escribas">
+<!ENTITY sb.search.cache	"Actualizar caché al buscar en todo el texto">
+<!ENTITY sb.search.clear	"Limpiar historial de busqueda">
+
+<!ENTITY sb.filter.days		"Filtrar por días">
+<!ENTITY sb.filter.today	"Hoy">
+<!ENTITY sb.filter.2days	"Hace 2 días">
+<!ENTITY sb.filter.3days	"Hace 3 días">
+<!ENTITY sb.filter.1week	"Esta semana">
+<!ENTITY sb.filter.2week	"Hace 2 semanas">
+
+<!ENTITY sb.note.opentab	"Abrir en pestaña">
+<!ENTITY sb.note.close		"Cerrar">
+
+<!ENTITY sb.move			"Move into Folder">
+

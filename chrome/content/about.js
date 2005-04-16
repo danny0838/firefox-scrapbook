@@ -12,10 +12,11 @@
 
 
 
-const CURRENT_VER = "0.12.0";
-const CURRENT_BID = "Build ID 20041214";
+const CURRENT_VER = "0.15.1";
+const CURRENT_BID = "Build ID 20050416";
 const UPDATE_URL  = "http://amb.vis.ne.jp/mozilla/scrapbook/update.rdf?ver=" + CURRENT_VER;
 
+var SBstring;
 var SBupdateImage;
 var SBupdateLabel;
 
@@ -23,14 +24,35 @@ var SBupdateLabel;
 
 function SB_initAbout()
 {
+	SBstring = document.getElementById("ScrapBookString");
+
 	var SBversion = document.getElementById("ScrapBookAboutVersion");
 	SBversion.setAttribute("value", "Version " + CURRENT_VER + " (" + CURRENT_BID + ")");
 
 	SBupdateImage = document.getElementById("ScrapBookUpdateImage");
 	SBupdateLabel = document.getElementById("ScrapBookUpdateLabel");
 	SBupdateImage.setAttribute("src", "chrome://scrapbook/skin/status_busy.gif");
-	SBupdateLabel.setAttribute("value", "Now checking for updates...");
+	SBupdateLabel.setAttribute("value", SBstring.getString("CHECKING"));
 	setTimeout(SB_setUpdateInfo, 500);
+}
+
+
+function SB_visit(aXUL)
+{
+	window.opener.SBcommon.loadURL(aXUL.getAttribute("href"), true);
+}
+
+
+function SB_mailto(aXUL)
+{
+	window.opener.SBcommon.loadURL('mailto:' + aXUL.getAttribute('href'), false);
+}
+
+
+function SB_secret()
+{
+	window.opener.SBstatus.httpBusy(5, "32% : product-mozilla-screen");
+	setTimeout(function() { window.opener.top.document.getElementById("statusbar-display").label = "Transferring data from www.mozilla.org..."; }, 0);
 }
 
 
@@ -42,8 +64,8 @@ function SB_setUpdateInfo()
 
 	httpReq.onerror = function(aEvent)
 	{
-		SBupdateLabel.setAttribute("value", "Failed to check for updates (could not connet)");
-		SBupdateImage.removeAttribute("src");
+		SBupdateLabel.setAttribute("value", SBstring.getString("CHECK_FAILURE"));
+		SB_removeUpdateImage();
 	};
 	httpReq.onload = function(aEvent)
 	{
@@ -52,28 +74,28 @@ function SB_setUpdateInfo()
 			var CV = SB_parseVersion(CURRENT_VER);
 			var LV = SB_parseVersion(LATEST_VER);
 			if ( CV > 0 && LV > 0 && LV > CV ) {
-				SBupdateLabel.setAttribute("value", "New Version " + LATEST_VER + " is Now Available.");
+				SBupdateLabel.setAttribute("value", SBstring.getFormattedString("NEW_VERSION_AVAILABLE", [LATEST_VER]));
 				SBupdateLabel.setAttribute("class", "link");
 				SBupdateLabel.setAttribute("style", "font-weight:bold;");
 			} else {
-				SBupdateLabel.setAttribute("value", "No Updates Found.");
+				SBupdateLabel.setAttribute("value", SBstring.getString("NO_UPDATES_FOUND"));
 			}
 		}
-		catch(err)
+		catch(ex)
 		{
-			SBupdateLabel.setAttribute("value", "Failed to check for updates (could not parse XML)");
+			SBupdateLabel.setAttribute("value", SBstring.getString("CHECK_FAILURE"));
 		}
-		SBupdateImage.removeAttribute("src");
+		SB_removeUpdateImage();
 	};
 
 	try {
-		httpReq.setRequestHeader("User-Agent", "ScrapBook Ver." + CURRENT_VER);
+		httpReq.setRequestHeader("User-Agent", "Scrapbook Ver." + CURRENT_VER);
 		httpReq.overrideMimeType("application/xml");
 		httpReq.send(null);
 	} catch(err) {
 		httpReq.abort();
-		SBupdateLabel.setAttribute("value", "Failed to check for updates (could not connet)");
-		SBupdateImage.removeAttribute("src");
+		SBupdateLabel.setAttribute("value", SBstring.getString("CHECK_FAILURE"));
+		SB_removeUpdateImage();
 	}
 }
 
@@ -87,6 +109,20 @@ function SB_parseVersion(verStr)
 	} else {
 		return 0;
 	}
+}
+
+
+function SB_removeUpdateImage()
+{
+	SBupdateImage.removeAttribute("src");
+	SBupdateImage.removeAttribute("style");
+}
+
+
+function SB_secret()
+{
+	window.opener.SBstatus.httpBusy(5, "32% : product-mozilla-screen.png");
+	setTimeout(function() { window.opener.top.window.status = "Transferring data from www.mozilla.org..."; }, 0);
 }
 
 

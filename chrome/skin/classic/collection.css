@@ -1,60 +1,32 @@
 /* ::::: collection ::::: */
 
 body {
-	margin:25px;
+	margin:0px;
 	background-color:#FFFFFF;
-}
-
-h1 {
-	display:none;
-}
-
-h2 {
-	font-size:x-large;
-	font-weight:bold;
-	font-family:Arial, Verdana, Times;
-	margin-bottom:3px;
-}
-
-h2 > img {
-	vertical-align:middle;
-	margin-right:5px;
 }
 
 cite {
 	display:block;
-	text-align:right;
-	font-family:"Verdana","Arial","Sans-Serif","Helvetica";
+	padding:2px 5px;
+	font-family:'MS UI Gothic','Tahoma','Verdana','Arial','Sans-Serif','Helvetica';
 	font-style:normal;
-	font-size:11px;
-	color:#707070;
+	font-size:12px;
+	background-color:#E7F4FC;
+	border-top   :1px solid #0FA9E5;
+	border-bottom:1px solid #0FA9E5;
 }
 
-blockquote {
-	font-size:small;
-	padding-left:30px;
-	background-image:url('chrome://scrapbook/skin/tabicon_comment.png');
-	background-repeat:no-repeat;
-	margin-left:30px;
-	margin-bottom:50px;
-}
-
-h2 > a {
-	color:#000000;
-	text-decoration:none;
-}
-
-cite > a {
-	color:#3388FF;
+a {
+	color:#0000FF;
 }
 
 a:hover {
-	background-color:#DDEEFF;
+	color:#3388FF;
 }
 
 iframe {
-	border:2px solid skyblue;
 	padding:0px;
+	border:0px;
 	margin:0px;
 	width:100%;
 	height:250px;

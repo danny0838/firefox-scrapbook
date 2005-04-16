@@ -35,14 +35,15 @@ var SBnote = {
 		this.lock = true;
 		setTimeout(function(){ SBnote.lock = false; }, 1000);
 		this.save();
-		var newSBitem = new ScrapBookItem(SBcommon.getTimeStamp());
+		var newID = SBRDF.identify(SBcommon.getTimeStamp());
+		var newSBitem = new ScrapBookItem(newID);
 		newSBitem.type  = "note";
 		newSBitem.chars = "UTF-8";
 		this.curRes = SBRDF.addItem(newSBitem, tarResName, tarRelIdx);
 		this.curFile = SBcommon.getContentDir(SBRDF.getProperty("id", this.curRes)).clone();
 		this.curFile.append("index.html");
 		SBcommon.writeFile(this.curFile, "", "UTF-8");
-		this.edit(this.curRes);
+		SBpref.usetabNote ? this.open(this.curRes, true) : this.edit(this.curRes);
 	},
 
 	edit : function(aRes)
@@ -64,9 +65,15 @@ var SBnote = {
 		document.getElementById("ScrapNoteLabel").value = SBRDF.getProperty("title", this.curRes);
 		if ( !this.sidebar )
 		{
-			var myIcon = SBRDF.getProperty("icon", this.curRes);
-			document.getElementById("ScrapNoteImage").setAttribute("src", myIcon ? myIcon : SBcommon.getDefaultIcon("note"));
+			var myIcon = SBcommon.getDefaultIcon("note");
+			document.getElementById("ScrapNoteImage").setAttribute("src", myIcon);
 			if ( !document.getElementById("ScrapNoteBrowser").hidden ) SNpreview.show();
+			var myBrowser = SBservice.WM.getMostRecentWindow("navigator:browser").getBrowser();
+			if ( myBrowser.selectedBrowser.contentWindow.gID == gID )
+			{
+				myBrowser.selectedTab.label = SBRDF.getProperty("title", this.curRes);
+				myBrowser.selectedTab.setAttribute("image", myIcon);
+			}
 		}
 	},
 
@@ -83,8 +90,9 @@ var SBnote = {
 	updateResource : function()
 	{
 		var myTitle = this.editXUL.value.split("\n")[0].replace(/\t/g, " ");
-		if ( myTitle.length > 72 ) myTitle = myTitle.substring(0,72) + "...";
+		if ( myTitle.length > 50 ) myTitle = myTitle.substring(0,50) + "...";
 		SBRDF.updateItem(this.curRes, "title", myTitle);
+		SBRDF.flush();
 	},
 
 	exit : function()
@@ -149,7 +157,7 @@ function SN_insertTab(aEvent)
 		}
 	}
 	catch(ex) {
-		dump("*** failed to execute cmd_insertText\n");
+		dump("*** ScrapBook Exception: Failed to execute cmd_insertText.\n");
 	}
 }
 

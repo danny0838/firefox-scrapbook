@@ -1,0 +1,19 @@
+<!ENTITY sb.editor.inline	"Dodaj komentarz w linii zaznaczenia">
+<!ENTITY sb.editor.block	"Dodaj blok komentarza po zaznaczeniu">
+<!ENTITY sb.editor.marker	"Podświetl zaznaczenie">
+<!ENTITY sb.editor.unline	"Usuń wszystkie komentarze w linii zaznaczenia">
+<!ENTITY sb.editor.unmark	"Usuń wszystkie podświetlone komentarze">
+<!ENTITY sb.editor.cutter	"Usuń zaznaczenie">
+<!ENTITY sb.editor.eraser	"DOM Eraser: Narzędzie usuwające zaznaczone bloki">
+<!ENTITY sb.editor.undo		"Cofnij">
+<!ENTITY sb.editor.restore	"Zrezygnuj ze zmian i przywróć poprzednie wpisy">
+<!ENTITY sb.editor.save		"Zapisz zmiany">
+<!ENTITY sb.editor.exit		"Opuść tryb edycji">
+
+<!ENTITY sb.inline.enter	"Zapisz">
+<!ENTITY sb.inline.delete	"Usuń">
+<!ENTITY sb.block.customize	"Dostosuj CSS dla bloku komentarzy">
+<!ENTITY sb.block.hide		"Ukryj blok komentarzy">
+
+<!ENTITY sb.expand.comment	"Powiększ obszar komentarza">
+

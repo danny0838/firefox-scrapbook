@@ -1,0 +1,5 @@
+<!ENTITY sb.capture			"Kaappaa">
+<!ENTITY sb.capture.abort	"Hylkää">
+<!ENTITY sb.capture.retry	"Yritä uudestaan">
+<!ENTITY sb.capture.skip	"Ohita">
+

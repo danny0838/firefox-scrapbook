@@ -1,0 +1,20 @@
+<!ENTITY sb.prop.date		"日期">
+<!ENTITY sb.prop.type		"类型">
+<!ENTITY sb.prop.title		"标题">
+<!ENTITY sb.prop.encode		"编码">
+<!ENTITY sb.prop.icon		"图标">
+<!ENTITY sb.prop.source		"网址">
+<!ENTITY sb.prop.comment	"评注">
+<!ENTITY sb.prop.content	"内容">
+<!ENTITY sb.prop.size		"文件大小">
+<!ENTITY sb.prop.id.date	"ID (时间)">
+<!ENTITY sb.prop.folder		"文件夹">
+
+<!ENTITY sb.prop.general	"常规信息">
+
+<!ENTITY sb.prop.icon.change	"改变图标">
+<!ENTITY sb.prop.icon.default	"Default">
+<!ENTITY sb.prop.icon.favicon	"Select favicon">
+<!ENTITY sb.prop.icon.custom	"Select custom icon">
+<!ENTITY sb.prop.mark			"Mark">
+
