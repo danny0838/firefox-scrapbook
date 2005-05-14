@@ -7,7 +7,7 @@
 
 		<em:id>{53A03D43-5363-4669-8190-99061B2DEBA5}</em:id>
 		<em:name>ScrapBook</em:name>
-		<em:version>0.15.1</em:version>
+		<em:version>0.15.2</em:version>
 		<em:description>This extension helps you to save Web pages and easily manage collections.</em:description>
 		<em:creator>Gomita</em:creator>
 		<em:contributor>Bob Chao</em:contributor>
@@ -27,7 +27,7 @@
 		<em:optionsURL>chrome://scrapbook/content/setting.xul</em:optionsURL>
 		<em:aboutURL>chrome://scrapbook/content/about.xul</em:aboutURL>
 		<em:iconURL>chrome://scrapbook/skin/mainicon1.png</em:iconURL>
-		<em:updateURL>http://amb.vis.ne.jp/mozilla/scrapbook/update.rdf?ver=0.15.1</em:updateURL>
+		<em:updateURL>http://amb.vis.ne.jp/mozilla/scrapbook/update.rdf?ver=0.15.2</em:updateURL>
 
 		<em:file>
 			<Description about="urn:mozilla:extension:file:scrapbook.jar">

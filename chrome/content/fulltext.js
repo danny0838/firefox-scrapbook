@@ -29,7 +29,7 @@ var SBhighlightColors = ["#FFFF33","#66FFFF","#90FF90","#FF9999","#FF99FF"];
 
 
 
-function SB_initFullText(type)
+function SB_initFT(type)
 {
 	SBstatus = document.getElementById("ScrapBookStatus");
 	SBstring = document.getElementById("ScrapBookString");
@@ -54,20 +54,6 @@ function SB_execSearch()
 	}
 	const TTSU = Components.classes['@mozilla.org/intl/texttosuburi;1'].getService(Components.interfaces.nsITextToSubURI);
 	gQueryStrings['q'] = TTSU.UnEscapeAndConvert("UTF-8", gQueryStrings['q']);
-
-	var shouldBuild = false;
-	if ( !gCacheFile.exists() )
-	{
-		shouldBuild = true;
-	}
-	else
-	{
-		var curTime = new Date().getTime();
-		var modTime = gCacheFile.lastModifiedTime;
-		if ( modTime && (curTime - modTime) > 1000 * 60 * 60 * 24 * 5 ) shouldBuild = true;
-	}
-
-	if ( shouldBuild ) window.openDialog('chrome://scrapbook/content/cache.xul','','chrome,centerscreen,modal');
 
 	SBRDF.init();
 	SCRDF.init();
@@ -278,9 +264,10 @@ function SB_browserOnload(aEvent)
 
 var SBcache = {
 
-	i       : 0,
-	total   : 0,
+	i : 0,
 	dataDir : null,
+	resList : [],
+	folderTitles : [],
 
 	build : function()
 	{
@@ -291,22 +278,13 @@ var SBcache = {
 		SCRDF.removeAllEntries();
 		this.dataDir = SBcommon.getScrapBookDir().clone();
 		this.dataDir.append("data");
-		var ResSet = SBRDF.data.GetAllResources();
-		while ( ResSet.hasMoreElements() )
-		{
-			ResSet.getNext();
-			this.total++;
-		}
-		this.total -= 2;
+		this.initRecursively(SBservice.RDF.GetResource("urn:scrapbook:root"));
 
-		this.processRDFRecursively(SBservice.RDF.GetResource("urn:scrapbook:root"));
-
-		SBstatus.firstChild.value = "";
-		SCRDF.flush();
-		window.close();
+		this.i = 0;
+		this.asyncProcess(this.resList[this.i]);
 	},
 
-	processRDFRecursively : function(aContRes)
+	initRecursively : function(aContRes)
 	{
 		SBservice.RDFC.Init(SBRDF.data, aContRes);
 		var ResSet = SBservice.RDFC.GetElements();
@@ -314,43 +292,72 @@ var SBcache = {
 		{
 			var myRes  = ResSet.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
 			var myType = SBRDF.getProperty("type", myRes);
-			SBstatus.firstChild.value = SBstring.getString("BUILD_CACHE_SCAN") + myRes.Value;
-			SBstatus.lastChild.value  = Math.round(++this.i / this.total * 100);
-			if ( SBservice.RDFCU.IsContainer(SBRDF.data, myRes) )
-			{
-				this.processRDFRecursively(myRes);
-			}
-			else if ( myType == "image" || myType == "file" )
-			{
+			SBstatus.firstChild.value = SBstring.getString("BUILD_CACHE_INIT") + " (" + this.i + ")";
+			if ( SBservice.RDFCU.IsContainer(SBRDF.data, myRes) ) {
+				this.initRecursively(myRes);
+			} else if ( myType == "image" || myType == "file" ) {
 				continue;
-			}
-			else
-			{
-				var myID    = SBRDF.getProperty("id", myRes);
-				var myChars = SBRDF.getProperty("chars", myRes);
-				var myDir = this.dataDir.clone();
-				myDir.append(myID);
-				var myContentList = [];
-				var num = 0;
-				do {
-					var myFile = myDir.clone();
-					myFile.append("index" + ((num > 0) ? num : "") + ".html");
-					if ( !myFile.exists() ) break;
-					var myContent = SBcommon.readFile(myFile);
-					try {
-						SBservice.UC.charset = myChars;
-						myContent = SBservice.UC.ConvertToUnicode(myContent);
-					} catch(ex) {
-						dump("*** ScrapBook Failed to ConvertToUnicode : " + SBRDF.getProperty("title", myRes) + "\n");
-					}
-					myContentList.push( SB_convertHTML2Text(myContent) );
-				}
-				while ( ++num < 100 );
-				myContentList = myContentList.join("\n").replace(/[\x00-\x1F\x7F]/g, " ");
-				SCRDF.addEntry(myRes, myContentList, SBRDF.getProperty("title", aContRes));
+			} else {
+				this.resList[this.i]  = myRes;
+				this.folderTitles[this.i] = SBRDF.getProperty("title", aContRes);
+				this.i++;
 			}
 		}
-	}
+	},
+
+	asyncProcess : function(aRes)
+	{
+		SBstatus.firstChild.value = SBstring.getString("BUILD_CACHE_SCAN") + " " + SBRDF.getProperty("title", aRes);
+		SBstatus.lastChild.value  = Math.round(this.i / this.resList.length * 100);
+		if ( window.title != this.folderTitles[this.i] ) window.title = this.folderTitles[this.i];
+		var myID    = SBRDF.getProperty("id",    aRes);
+		var myChars = SBRDF.getProperty("chars", aRes);
+		var myDir = this.dataDir.clone();
+		myDir.append(myID);
+		var myContentList = [];
+		var num = 0;
+		do {
+			var myFile = myDir.clone();
+			myFile.append("index" + ((num > 0) ? num : "") + ".html");
+			if ( !myFile.exists() ) break;
+			var myContent = SBcommon.readFile(myFile);
+			try {
+				SBservice.UC.charset = myChars;
+				myContent = SBservice.UC.ConvertToUnicode(myContent);
+			} catch(ex) {
+				dump("*** ScrapBook Failed to ConvertToUnicode : " + SBRDF.getProperty("title", aRes) + "\n");
+			}
+			myContentList.push( SB_convertHTML2Text(myContent) );
+		}
+		while ( ++num < 10 );
+		myContentList = myContentList.join("\n").replace(/[\x00-\x1F\x7F]/g, " ");
+		SCRDF.addEntry(aRes, myContentList, this.folderTitles[this.i]);
+		if ( ++this.i < this.resList.length ) {
+			setTimeout(function() { SBcache.asyncProcess(SBcache.resList[SBcache.i]); }, 0);
+		} else {
+			this.finish();
+		}
+	},
+
+	finish : function()
+	{
+		SBstatus.firstChild.value = "";
+		SCRDF.flush();
+		try {
+			if ( window.arguments[0] ) SBcommon.loadURL(window.arguments[0], true);
+		} catch(ex) {
+		}
+		window.close();
+	},
+
+	unload : function()
+	{
+		if ( this.i != this.resList.length )
+		{
+			SCRDF.removeAllEntries();
+			SCRDF.flush();
+		}
+	},
 
 };
 

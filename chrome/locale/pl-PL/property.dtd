@@ -12,9 +12,9 @@
 
 <!ENTITY sb.prop.general	"Informacje podstawowe">
 
-<!ENTITY sb.prop.icon.change	"Change">
-<!ENTITY sb.prop.icon.default	"Default">
-<!ENTITY sb.prop.icon.favicon	"Select favicon">
-<!ENTITY sb.prop.icon.custom	"Select custom icon">
-<!ENTITY sb.prop.mark			"Mark">
+<!ENTITY sb.prop.icon.change	"Zmień">
+<!ENTITY sb.prop.icon.default	"Domyślna">
+<!ENTITY sb.prop.icon.favicon	"Wybierz ikonę">
+<!ENTITY sb.prop.icon.custom	"Wybierz własną ikonę">
+<!ENTITY sb.prop.mark			"Zaznacz">
 

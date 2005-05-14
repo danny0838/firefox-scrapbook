@@ -1,7 +1,7 @@
 <!ENTITY sb.detail					"Détail de la saisie ">
 <!ENTITY sb.detail.rootfolder		"Dossier racine">
 <!ENTITY sb.detail.new.folder		"Nouveau dossier">
-<!ENTITY sb.detail.select.folder	"Select Folder">
+<!ENTITY sb.detail.select.folder	"Sélectionner le dossier">
 
 <!ENTITY sb.detail.linked			"Saisie incluant les fichiers mis en lien">
 <!ENTITY sb.detail.linked.image		"Image">
@@ -10,6 +10,6 @@
 <!ENTITY sb.detail.linked.archive	"Archive">
 <!ENTITY sb.detail.linked.all		"Tous les fichiers mis en lien">
 
-<!ENTITY sb.detail.linked.seq		"Capture all linked Web pages sequentially">
-<!ENTITY sb.detail.linked.seq.d		"(in a subfolder automatically created)">
+<!ENTITY sb.detail.linked.seq		"Capturer séquentiellement toutes les pages Web mises en lien">
+<!ENTITY sb.detail.linked.seq.d		"(dans un sous-dossier automatiquement créé)">
 

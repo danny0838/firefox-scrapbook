@@ -37,7 +37,7 @@
 				<menuitem label="&sb.sort.recursive;" id="ScrapBookSortRecursive" type="checkbox" persist="checked" />
 			</menupopup>
 		</menu>
-		<menuitem id="ScrapBookTreePopupM" label="&sb.manage;..." oncommand="SB_transmit('M');" hidden="true" />
+		<menuitem id="ScrapBookTreePopupM" label="&sb.manage;" oncommand="SB_transmit('M');" hidden="true" />
 		<menuseparator />
 		<menuitem id="ScrapBookTreePopupN" class="menuitem-iconic" label="&sb.new.folder;" oncommand="SB_createFolder();" />
 		<menuitem id="ScrapBookTreePopupC" class="menuitem-iconic" label="&sb.new.note;"   oncommand="SB_createNote();" />

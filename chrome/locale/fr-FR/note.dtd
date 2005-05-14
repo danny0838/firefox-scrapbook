@@ -5,7 +5,7 @@
 <!ENTITY sn.template		"Éditer le modèle HTML">
 <!ENTITY sn.autolinefeed	"Remplissage automatique des lignes">
 <!ENTITY sn.autolinefeed.t	"Ajouter les balises &lt;br&gt; à  la fin  des lignes en mode HTML affiché">
-<!ENTITY sn.fontsize		"Font Size">
+<!ENTITY sn.fontsize		"Taille de police">
 <!ENTITY sn.help			"Aide">
-<!ENTITY sn.exit			"Exit">
+<!ENTITY sn.exit			"Quitter">
 

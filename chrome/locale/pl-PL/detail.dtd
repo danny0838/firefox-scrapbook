@@ -1,7 +1,7 @@
 <!ENTITY sb.detail					"Szczegóły przechwytywania">
 <!ENTITY sb.detail.rootfolder		"Folder główny">
 <!ENTITY sb.detail.new.folder		"Nowy folder">
-<!ENTITY sb.detail.select.folder	"Select Folder">
+<!ENTITY sb.detail.select.folder	"Wybierz folder">
 
 <!ENTITY sb.detail.linked			"Przechwytuj łącznie z powiązanymi plikami">
 <!ENTITY sb.detail.linked.image		"Grafikę">
@@ -10,6 +10,6 @@
 <!ENTITY sb.detail.linked.archive	"Archiwa">
 <!ENTITY sb.detail.linked.all		"Wszystkie powiązane pliki">
 
-<!ENTITY sb.detail.linked.seq		"Capture all linked Web pages sequentially">
-<!ENTITY sb.detail.linked.seq.d		"(in a subfolder automatically created)">
+<!ENTITY sb.detail.linked.seq		"Przechwytuj wszystkie powiązane strony internetowe po kolei">
+<!ENTITY sb.detail.linked.seq.d		"(zapisz w automatycznie utworzonym subfolderze)">
 

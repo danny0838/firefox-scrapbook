@@ -8,14 +8,14 @@
 <!ENTITY sb.tools.setting	"Paramètres...">
 <!ENTITY sb.tools.editing	"Toujours en mode édition">
 <!ENTITY sb.tools.manage	"Gérer l'arborescence...">
-<!ENTITY sb.manage			"Manage">
+<!ENTITY sb.manage			"Gestion">
 <!ENTITY sb.tools.calculate	"Calcul de la taille">
 <!ENTITY sb.tools.sorttree	"Classer l'arborescence entière">
-<!ENTITY sb.tools.directory	"ScrapBook Directory">
-<!ENTITY sb.tools.urls		"Capture Multiple URLs">
-<!ENTITY sb.tools.trade		"Import / Export">
-<!ENTITY sb.tools.output	"Output Tree as HTML">
-<!ENTITY sb.tools.backup	"Backup with Compression">
+<!ENTITY sb.tools.directory	"Répertoire de ScrapBook">
+<!ENTITY sb.tools.urls		"Capture multiple d'URLs">
+<!ENTITY sb.tools.trade		"Importer / Exporter">
+<!ENTITY sb.tools.output	"Arborescence comme HTML">
+<!ENTITY sb.tools.backup	"Sauvegarde par compression">
 <!ENTITY sb.tools.homepage	"Page d'accueil">
 <!ENTITY sb.tools.about		"À propos">
 
@@ -37,5 +37,5 @@
 <!ENTITY sb.note.opentab	"Éditer dans un onglet">
 <!ENTITY sb.note.close		"Fermer">
 
-<!ENTITY sb.move			"Move into Folder">
+<!ENTITY sb.move			"Déplacer dans un dossier">
 

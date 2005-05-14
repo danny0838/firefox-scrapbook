@@ -29,15 +29,15 @@
 	<groupbox align="center" orient="horizontal">
 		<vbox flex="1">
 			<!--title,version-->
-			<hbox align="baseline">
-				<label id="ScrapBookAboutTitle" value="&sb.title;" />
+			<vbox>
+				<image id="ScrapBookAboutTitle" />
 				<label id="ScrapBookAboutVersion" />
-			</hbox>
+			</vbox>
 			<separator />
 			<!--created by-->
 			<label value="&sb.about.author;" class="header" />
 			<hbox align="center">
-				<label value="Gomita" style="padding-right:80px;" onclick="SB_secret();" />
+				<label value="Gomita" style="padding-right:80px;" ondblclick="SB_secret();" />
 				<label value="http://amb.vis.ne.jp/mozilla/scrapbook/" class="link" onclick="window.opener.SBcommon.loadURL(event.target.value, true);" />
 			</hbox>
 			<separator class="thin"/>

@@ -3,10 +3,10 @@
 <!ENTITY sb.setting.usetabs	"Utiliser des onglets">
 <!ENTITY sb.setting.advance	"Avancé">
 <!ENTITY sb.setting.capture	"Capture">
-<!ENTITY sb.setting.editing	"Editing">
-<!ENTITY sb.setting.program	"Programs">
+<!ENTITY sb.setting.editing	"Éditer">
+<!ENTITY sb.setting.program	"Programmes">
 
-<!ENTITY sb.setting.browser.submenu		"Enable submenu inside the browser context menu (Change after restart)">
+<!ENTITY sb.setting.browser.submenu		"Autoriser le sous-menu au sein du menu contextuel du navigateur (la modification sera effective au redémarrage)">
 <!ENTITY sb.setting.capture.detail		"Afficher la fenêtre 'Détail de la capture' en cas de capture par glisser / déposer dans la barre latérale">
 <!ENTITY sb.setting.capture.notify		"Afficher la notification 'Capture terminée'  (seulement sous Windows ?)">
 <!ENTITY sb.setting.tree.hidefavicon	"Ne pas afficher de favicône dans l'arborescence">
@@ -14,17 +14,17 @@
 <!ENTITY sb.setting.tree.quickdelete	"Ne pas confirmer en cas de suppression">
 
 <!ENTITY sb.setting.usetabs.d			"Utiliser de nouveaux onglets pour les actions entreprises.">
-<!ENTITY sb.setting.usetabs.note		"Open Notes in Tab">
+<!ENTITY sb.setting.usetabs.note		"Ouvrir des notes dans un onglet">
 
-<!ENTITY sb.setting.capture.utf8encode		"Convert into UTF-8 encoding (Recommend)">
-<!ENTITY sb.setting.capture.utf8encode.d	"If check off, some characters frequently garbles into '?'.">
-<!ENTITY sb.setting.capture.removescript	"Remove JavaScript (Recommend)">
-<!ENTITY sb.setting.capture.removescript.d	"If check off, sometimes fails to preserve the page layout.">
+<!ENTITY sb.setting.capture.utf8encode		"Convertir en encodage UTF-8 (Recommandé)">
+<!ENTITY sb.setting.capture.utf8encode.d	"Si cette option n'est pas choisie, certains caractères peuvent être remplacés par '?'.">
+<!ENTITY sb.setting.capture.removescript	"Désactiver JavaScript (Recommandé)">
+<!ENTITY sb.setting.capture.removescript.d	"Si cette option n'est pas choisie, la disposition de la page peut ne pas être conservée.">
 
-<!ENTITY sb.setting.edit.showheader		"Show header">
-<!ENTITY sb.setting.edit.multilines		"Enable multiline comment">
-<!ENTITY sb.setting.edit.confirmsave.1	"Interval for confirming save">
-<!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 = never confirm)">
+<!ENTITY sb.setting.edit.showheader		"Afficher l'en-tête">
+<!ENTITY sb.setting.edit.multilines		"Autoriser un commentaire multilinéaire">
+<!ENTITY sb.setting.edit.confirmsave.1	"Délai pour confirmer la sauvegarde">
+<!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 = aucune confirmation)">
 
 <!ENTITY sb.setting.program.filer			"Programme pour le menu 'Parcourir les fichiers'">
 <!ENTITY sb.setting.program.filer.default	"Par défaut (pour Windows, Explorer.)">
@@ -34,6 +34,6 @@
 <!ENTITY sb.setting.data.default	"Par défaut (dans le dossier de votre profil)">
 <!ENTITY sb.setting.data.notice		"Si vous voulez déplacer des données existantes, déplacez auparavant manuellement le dossier 'ScrapBook'. Puis, configurez la destination.">
 
-<!ENTITY sb.setting.restorefavicons		"Restore favicons">
-<!ENTITY sb.setting.restorefavicons.d	"If favicons are not displayed, press this button:">
+<!ENTITY sb.setting.restorefavicons		"Restaurer les favicônes">
+<!ENTITY sb.setting.restorefavicons.d	"Si les favicônes n'apparaissent pas, cliquez sur ce bouton :">
 

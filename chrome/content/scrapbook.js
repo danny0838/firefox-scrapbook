@@ -637,8 +637,7 @@ var SBsearch = {
 			this.cs = document.getElementById("ScrapBookSearchOptionCS").getAttribute("checked");
 			if ( this.FORM_HISTORY ) this.FORM_HISTORY.addEntry("ScrapBookSearchHistory", this.query);
 			if ( this.type == "fulltext" ) {
-				var tabbed = (top.window._content.location.href.substring(0,37) == "chrome://scrapbook/content/result.xul") ? false : SBpref.usetabSearch;
-				SBcommon.loadURL("chrome://scrapbook/content/result.xul?q=" + this.query + "&re=" + this.re.toString() + "&cs=" + this.cs.toString(), tabbed);
+				this.execFT();
 		 
 			} else {
 				var regex1 = this.re ? this.query : this.query.replace(/([\*\+\?\.\|\[\]\{\}\^\/\$\\])/g, "\\$1");
@@ -647,6 +646,32 @@ var SBsearch = {
 				this.exec(false);
 			}
 		}
+	},
+
+	execFT : function()
+	{
+		var cache = SBcommon.getScrapBookDir().clone();
+		cache.append("cache.rdf");
+		var shouldBuild = false;
+		if ( !cache.exists() || cache.fileSize < 1024 * 32 ) {
+			shouldBuild = true;
+		} else {
+			var modTime = cache.lastModifiedTime;
+			if ( modTime && (new Date().getTime() - modTime) > 1000 * 60 * 60 * 24 * 5 ) shouldBuild = true;
+		}
+		var resURL   = "chrome://scrapbook/content/result.xul";
+		var resQuery = "?q=" + this.query + "&re=" + this.re.toString() + "&cs=" + this.cs.toString();
+		if ( shouldBuild ) {
+			this.buildFT(resURL + resQuery);
+		} else {
+			var tabbed = (top.window._content.location.href.substring(0,37) == resURL) ? false : SBpref.usetabSearch;
+			SBcommon.loadURL(resURL + resQuery, tabbed);
+		}
+	},
+
+	buildFT : function(resURL)
+	{
+		window.openDialog('chrome://scrapbook/content/cache.xul','','chrome,dialog=no', resURL);
 	},
 
 	exec : function(forceTitle)

@@ -2,15 +2,15 @@
 <!ENTITY sb.open.tab		"Otwórz w panelu">
 <!ENTITY sb.open.newtab		"Otwórz w nowym panelu">
 <!ENTITY sb.open.source		"Otwórz plik źródłowy URL">
-<!ENTITY sb.show.files		"Show Files">
+<!ENTITY sb.show.files		"Pokaż pliki">
 <!ENTITY sb.delete			"Usuń">
 <!ENTITY sb.property		"Właściwości folderu">
 
 <!ENTITY sb.folder.toggle	"Rozwiń/zwiń">
 <!ENTITY sb.folder.openall	"Otwórz wszystko w nowych panelach">
-<!ENTITY sb.folder.combine	"Open in Combined View">
-<!ENTITY sb.folder.manage	"Zarządzaj folderami...">
-<!ENTITY sb.manage			"Manage">
+<!ENTITY sb.folder.combine	"Otwórz w widoku kombinowanym">
+<!ENTITY sb.folder.manage	"Zarządzanie folderami...">
+<!ENTITY sb.manage			"Zarządzaj">
 
 <!ENTITY sb.new.folder		"Nowy folder...">
 <!ENTITY sb.new.note		"Nowa notatka">

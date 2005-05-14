@@ -1,7 +1,7 @@
 /* ::::: about ::::: */
 
 dialog {
-	background-color:#FFFFFF; width:420px;
+	background-color:#FFFFFF;
 }
 
 groupbox {
@@ -12,12 +12,13 @@ label {
 	margin:2px 0px;
 }
 
-label#ScrapBookAboutTitle {
-	font-family:Arial, Helvetica, sans-serif; font-weight:bold; font-size:x-large;
+image#ScrapBookAboutTitle {
+	list-style-image: url('chrome://scrapbook/skin/title.png');
+	width:400px; height:30px;
 }
 
 label#ScrapBookAboutVersion {
-	font-family:Arial, Helve2tica, sans-serif; font-weight:bold; margin-left:12px;
+	font-family:Arial, Helvetica, sans-serif; font-weight:bold;
 }
 
 label.header {

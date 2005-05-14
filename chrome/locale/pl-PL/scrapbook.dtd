@@ -8,16 +8,16 @@
 <!ENTITY sb.tools.setting	"Ustawienia...">
 <!ENTITY sb.tools.editing	"Pracuj w trybie edycji">
 <!ENTITY sb.tools.manage	"Zarządzaj drzewem folderów...">
-<!ENTITY sb.manage			"Manage">
+<!ENTITY sb.manage			"Zarządzanie">
 <!ENTITY sb.tools.calculate	"Oblicz zajmowaną powierzchnię">
 <!ENTITY sb.tools.sorttree	"Sortuj całe drzewo">
-<!ENTITY sb.tools.directory	"ScrapBook Directory">
-<!ENTITY sb.tools.urls		"Capture Multiple URLs">
-<!ENTITY sb.tools.trade		"Import / Export">
-<!ENTITY sb.tools.output	"Output Tree as HTML">
-<!ENTITY sb.tools.backup	"Backup with Compression">
+<!ENTITY sb.tools.directory	"Katalog główny ScrapBook">
+<!ENTITY sb.tools.urls		"Przechwytuj złożone adresy URL">
+<!ENTITY sb.tools.trade		"Import / Eksport">
+<!ENTITY sb.tools.output	"Zapisz dane jako dokument HTML">
+<!ENTITY sb.tools.backup	"Twórz plik kopii zapasowej z kompresją">
 <!ENTITY sb.tools.homepage	"Strona domowa">
-<!ENTITY sb.tools.about		"O...">
+<!ENTITY sb.tools.about		"O rozszerzeniu">
 
 <!ENTITY sb.search			"Szukaj">
 <!ENTITY sb.search.fulltext	"Szukaj wszystkich słów">
@@ -37,5 +37,5 @@
 <!ENTITY sb.note.opentab	"Otwórz w panelu">
 <!ENTITY sb.note.close		"Zamknij">
 
-<!ENTITY sb.move			"Move into Folder"><!--NEW-->
+<!ENTITY sb.move			"Przenieś do folderu"><!--NOWA-->
 

@@ -1,5 +1,5 @@
 <!ENTITY sb.capture			"Przechwyć">
 <!ENTITY sb.capture.abort	"Usuń">
-<!ENTITY sb.capture.retry	"Retry">
-<!ENTITY sb.capture.skip	"Skip">
+<!ENTITY sb.capture.retry	"Spróbuj ponownie">
+<!ENTITY sb.capture.skip	"Pomiń">
 

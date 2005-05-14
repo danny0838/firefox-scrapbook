@@ -1,8 +1,8 @@
-<!ENTITY sb.url.description	"URL (Enter URLs line-by-line)">
+<!ENTITY sb.url.description	"URL (entrer les URLs ligne par ligne)">
 
-<!ENTITY sb.url.tools		"URL Detector">
-<!ENTITY sb.url.tools.tabs	"All Open Tabs in the Window">
-<!ENTITY sb.url.tools.local	"All Local HTMLs under the Directory">
-<!ENTITY sb.url.tools.webox	"default.html for WeBoX">
-<!ENTITY sb.url.tools.clear	"Clear">
+<!ENTITY sb.url.tools		"Détecteur d'URL">
+<!ENTITY sb.url.tools.tabs	"Tous les onglets ouverts dans la fenêtre">
+<!ENTITY sb.url.tools.local	"Tous les HTMLs locaux sous le répertoire">
+<!ENTITY sb.url.tools.webox	"défaut.html pour 'WeBoX'">
+<!ENTITY sb.url.tools.clear	"Nettoyer">
 

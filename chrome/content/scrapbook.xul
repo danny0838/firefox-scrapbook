@@ -65,7 +65,7 @@
 			</menu>
 			<menu label="&sb.tools;">
 				<menupopup>
-					<menuitem label="&sb.search.cache;" oncommand="window.openDialog('chrome://scrapbook/content/cache.xul','','modal,chrome,centerscreen');" />
+					<menuitem label="&sb.search.cache;" oncommand="SBsearch.buildFT('');" />
 					<menuitem label="&sb.search.clear;" oncommand="SBsearch.clearFormHistory();" />
 				</menupopup>
 			</menu>

@@ -2,11 +2,11 @@
 <!ENTITY sb.setting.general	"Główne">
 <!ENTITY sb.setting.usetabs	"Panele">
 <!ENTITY sb.setting.advance	"Zaawansowane">
-<!ENTITY sb.setting.capture	"Capture">
-<!ENTITY sb.setting.editing	"Editing">
-<!ENTITY sb.setting.program	"Programs">
+<!ENTITY sb.setting.capture	"Przechwytywanie">
+<!ENTITY sb.setting.editing	"Edycja">
+<!ENTITY sb.setting.program	"Programy">
 
-<!ENTITY sb.setting.browser.submenu		"Enable submenu inside the browser context menu (Change after restart)">
+<!ENTITY sb.setting.browser.submenu		"Włącz submenu w głównym menu kontekstowym przeglądarki (zmiany zostaną zastosowane po ponownym uruchomieniu przeglądarki)">
 <!ENTITY sb.setting.capture.detail		"Pokaż okno ''Szczegóły przechwytywania'', gdy przechwytujesz przeciągając ikonkę witryny lub etykietę panelu do sidebaru">
 <!ENTITY sb.setting.capture.notify		"Pokaż okienko powiadomienia ''Przechwytywanie zakończone'' (działa tylko w systemie Windows)">
 <!ENTITY sb.setting.tree.hidefavicon	"Nie wyświetlaj ikonek w widoku drzewa">
@@ -14,26 +14,26 @@
 <!ENTITY sb.setting.tree.quickdelete	"Nie potwierdzaj usuwania">
 
 <!ENTITY sb.setting.usetabs.d			"Zaznaczone poniżej akcje otwieraj w nowym panelu">
-<!ENTITY sb.setting.usetabs.note		"Open Notes in Tab">
+<!ENTITY sb.setting.usetabs.note		"Otwórz notes w panelu">
 
-<!ENTITY sb.setting.capture.utf8encode		"Convert into UTF-8 encoding (Recommend)">
-<!ENTITY sb.setting.capture.utf8encode.d	"If check off, some characters frequently garbles into '?'.">
-<!ENTITY sb.setting.capture.removescript	"Remove JavaScript (Recommend)">
-<!ENTITY sb.setting.capture.removescript.d	"If check off, sometimes fails to preserve the page layout.">
+<!ENTITY sb.setting.capture.utf8encode		"Przekonwertuj na kodowanie UTF-8   (zalecane)">
+<!ENTITY sb.setting.capture.utf8encode.d	"Jeżeli tego nie wykonasz niektóre litery zostaną przekształcone na '?'.">
+<!ENTITY sb.setting.capture.removescript	"Usuń JavaScript   (zalecane)">
+<!ENTITY sb.setting.capture.removescript.d	"Jeżeli tego nie wykonasz czasami nie uda się zachować wyglądu strony.">
 
-<!ENTITY sb.setting.edit.showheader		"Show header">
-<!ENTITY sb.setting.edit.multilines		"Enable multiline comment">
-<!ENTITY sb.setting.edit.confirmsave.1	"Interval for confirming save">
-<!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 = never confirm)">
+<!ENTITY sb.setting.edit.showheader		"Pokaż nagłówek">
+<!ENTITY sb.setting.edit.multilines		"Włącz wieloliniowe komentarze">
+<!ENTITY sb.setting.edit.confirmsave.1	"Czas oczekiwania na potwierdzenie zapisu">
+<!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 = nigdy nie potwierdzaj)">
 
 <!ENTITY sb.setting.program.filer			"Wybierz program do szukania plików">
 <!ENTITY sb.setting.program.filer.default	"Domyślny (jeżeli systemem operacyjnym jest Windows, będzie to Explorator Windows.)">
-<!ENTITY sb.setting.browse					"Browse">
+<!ENTITY sb.setting.browse					"Szukaj">
 
 <!ENTITY sb.setting.data			"Folder zapisu danych">
 <!ENTITY sb.setting.data.default	"Domyślny (folder zapisu w profilu użytkownika)">
 <!ENTITY sb.setting.data.notice		"Jeżeli chcesz przenieść istniejące dane, przenieś wcześniej ręcznie folder ''ScrapBook''.">
 
-<!ENTITY sb.setting.restorefavicons		"Restore favicons">
-<!ENTITY sb.setting.restorefavicons.d	"If favicons are not displayed, press this button:">
+<!ENTITY sb.setting.restorefavicons		"Odtwórz ikonki">
+<!ENTITY sb.setting.restorefavicons.d	"Jeżeli ikonki nie są wyświetlane, naciśnij ten przycisk:">
 

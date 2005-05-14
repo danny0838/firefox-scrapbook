@@ -16,7 +16,7 @@
 <window id="ScrapBookResultWindow"
         title="ScrapBook"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        onload="SB_initFullText('SEARCH');">
+        onload="SB_initFT('SEARCH');">
 
 	<!--JavaScript-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />

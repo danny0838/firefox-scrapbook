@@ -51,9 +51,8 @@ var SBcapture = {
 	doCaptureDocument : function(ROOT_WINDOW, SELECTION_ONLY, DETAIL_DIALOG, RESOURCE_NAME, RESOURCE_INDEX)
 	{
 		SBRDF.init();
-		var myID = SBRDF.identify(SBcommon.getTimeStamp());
 
-		this.item = new ScrapBookItem(myID);
+		this.item = new ScrapBookItem(SBRDF.identify(SBcommon.getTimeStamp()));
 		this.item.chars  = ROOT_WINDOW.document.characterSet;
 		this.item.source = ROOT_WINDOW.location.href;
 		this.init();
@@ -67,12 +66,7 @@ var SBcapture = {
 		var titleList = ROOT_WINDOW.document.title ? [ROOT_WINDOW.document.title] : [this.item.source];
 		if ( SELECTION_ONLY )
 		{
-			try {
-				this.selection = ROOT_WINDOW.getSelection();
-			} catch(ex) {
-				alert(ex);
-				return;
-			}
+			this.selection = ROOT_WINDOW.getSelection();
 			var lines = this.selection.toString().split("\n");
 			for ( var i = 0; i < lines.length; i++ )
 			{
@@ -122,7 +116,7 @@ var SBcapture = {
 			} catch(ex) {
 			}
 			window.openDialog(
-				"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
+				"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no",
 				this.linkURLs, this.refURLObj.spec, false, true, newRes.Value, 0
 			);
 		}
@@ -144,8 +138,8 @@ var SBcapture = {
 	doCaptureFile : function(TARGET_URL, CAPTURE_TYPE, REFER_URL, DETAIL_DIALOG, RESOURCE_NAME, RESOURCE_INDEX)
 	{
 		SBRDF.init();
-		var myID = SBRDF.identify(SBcommon.getTimeStamp());
-		this.item = new ScrapBookItem(myID);
+
+		this.item = new ScrapBookItem(SBRDF.identify(SBcommon.getTimeStamp()));
 		this.item.title  = SBcommon.getFileName(TARGET_URL);
 		this.item.icon   = "moz-icon://" + this.item.title + "?size=16";
 		this.item.source = TARGET_URL;

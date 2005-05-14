@@ -5,7 +5,7 @@
 <!ENTITY sn.template		"Edycja szablonu dokumentu HTML">
 <!ENTITY sn.autolinefeed	"Autouzupełnianie">
 <!ENTITY sn.autolinefeed.t	"Dodaj znacznik &lt;br&gt; na końcu linii w podglądzie dokumentu HTML">
-<!ENTITY sn.fontsize		"Font Size">
+<!ENTITY sn.fontsize		"Wielkość czcionki">
 <!ENTITY sn.help			"Pomoc">
-<!ENTITY sn.exit			"Exit">
+<!ENTITY sn.exit			"Zakończ">
 

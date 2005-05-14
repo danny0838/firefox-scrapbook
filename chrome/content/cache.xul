@@ -7,7 +7,10 @@
 <window id="ScrapBookCacheWindow"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         style="width:320px;"
-        onload="SB_initFullText('CACHE');">
+        onload="SB_initFT('CACHE');"
+        onunload="SBcache.unload();"
+        screenX="20" screenY="20"
+        persist="screenX screenY">
 
 	<!--JavaScript-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
@@ -17,7 +20,7 @@
 	<!--StringBundle-->
 	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/fulltext.properties" />
 
-	<vbox id="ScrapBookStatus" flex="1" style="padding:2px;">
+	<vbox id="ScrapBookStatus" style="padding:2px;">
 		<textbox id="ScrapBookStatusLabel" flex="1" readonly="true" />
 		<progressmeter id="ScrapBookStatusProgress" flex="1" mode="determined" value="0" />
 	</vbox>
