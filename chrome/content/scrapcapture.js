@@ -461,15 +461,21 @@ var SBcapture = {
 				if ( !this.selection && aNode.getAttribute("href").charAt(0) == "#" ) return aNode;
 				var ext = SBcommon.splitFileName(SBcommon.getFileName(aNode.href))[1];
 				var flag = false;
-				switch ( ext.toLowerCase() ) {
+				switch ( ext.toLowerCase() )
+				{
 					case "jpg" : case "jpeg" : case "png" : case "gif" : flag = this.linked.img; break;
-					case "mp3" : case "wav"  : case "ram" : case "rm"  : flag = this.linked.snd; break;
+					case "mp3" : case "wav"  : case "ram" : case "wma" : flag = this.linked.snd; break;
 					case "mpg" : case "mpeg" : case "avi" : 
 					case "ram" : case "rm"   : case "mov" : case "wmv" : flag = this.linked.mov; break;
 					case "zip" : case "lzh"  : case "rar" :	case "xpi" : flag = this.linked.arc; break;
-					default : if ( this.linked.seq ) this.linkURLs.push(aNode.href);
+					default :
+						if ( ext && this.linked.custom )
+						{
+							if ( (", " + this.linked.custom + ", ").indexOf(", " + ext + ", ") != -1 ) flag = true;
+						}
+						if ( !flag && this.linked.seq ) this.linkURLs.push(aNode.href);
 				}
-				if ( flag || this.linked.all ) {
+				if ( flag ) {
 					var aFileName = this.download(aNode.href);
 					if (aFileName) aNode.setAttribute("href", aFileName);
 				} else {
@@ -609,6 +615,7 @@ var SBcapture = {
 		{
 			var seq = 1;
 			var fileLR = SBcommon.splitFileName(newFileName);
+			if ( !fileLR[1] ) fileLR[1] = "dat";
 			while ( this.file2URL[ fileLR[0] + "_" + SBcommon.leftZeroPad3(seq) + "." + fileLR[1] ] != undefined ) { seq++; }
 			newFileName = fileLR[0] + "_" + SBcommon.leftZeroPad3(seq) + "." + fileLR[1];
 		}

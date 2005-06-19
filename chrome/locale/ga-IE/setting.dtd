@@ -9,7 +9,6 @@
 <!ENTITY sb.setting.browser.submenu		"Cumasaigh fo-roghchl&#225;ir sa roghchl&#225;ir comhth&#233;acs don Brabhs&#225;la&#237; (Aistrithe tar eis ath-thos&#250;)">
 <!ENTITY sb.setting.capture.detail		"Taispe&#225;in Mionsonr&#250; 'Sonr&#250; Gabhile' nuair a deintear tarraing-agus-scaoil isteach sa thaobh-bharra">
 <!ENTITY sb.setting.capture.notify		"Taispe&#225;in F&#243;gra 'Gabh&#225;il Cro&#237;chnaithe' (obair&#237;onn s&#233; le Windows amh&#225;in)?">
-<!ENTITY sb.setting.tree.hidefavicon	"N&#225; Taispe&#225;in cean&#225;n-deilbh&#237;n sa chrann">
 <!ENTITY sb.setting.tree.singleexpand	"Nuair a leathnaiotar comhadlann crainne, leachaigh gach comhadlann eile (ar n&#243;s Ceanin Taisc&#233;ala&#237; Idirl&#237;n)">
 <!ENTITY sb.setting.tree.quickdelete	"N&#225; Cinntigh Nuair a Scriostar">
 
@@ -32,7 +31,6 @@
 
 <!ENTITY sb.setting.data			"Sprioc chun Sonra&#237; a chuir i dTaisce">
 <!ENTITY sb.setting.data.default	"Luach R&#233;amhshocraithe (I do Comhadlann Pr&#243;if&#237;l)">
-<!ENTITY sb.setting.data.notice		"M&#225;s m&#237;on leat sonra&#237;at&#225; ann a imirce, bog l&#225;imhe an comhadlann 'ScrapBook' roimh r&#233;. Ansin cumraigh an sprioc.">
 
 <!ENTITY sb.setting.restorefavicons		"Deisig na deilbh&#237;n&#237;-cean&#225;ileacha">
 <!ENTITY sb.setting.restorefavicons.d	"Mura d'teaspaintear na deilbh&#237;n&#237;-cean&#225;ileacha, br&#250;igh an chnaipe seo:">

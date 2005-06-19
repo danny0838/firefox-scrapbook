@@ -9,7 +9,6 @@
 <!ENTITY sb.setting.browser.submenu		"Enable submenu inside the browser context menu (Change after restart)">
 <!ENTITY sb.setting.capture.detail		"Show 'Capture Detail' dialog when capturing by drag-and-drop into Sidebar">
 <!ENTITY sb.setting.capture.notify		"Show 'Capture Completed' notification (work only with Windows)">
-<!ENTITY sb.setting.tree.hidefavicon	"Don't display favicons in the tree">
 <!ENTITY sb.setting.tree.singleexpand	"When expanding a tree folder, collapse all other folders (like IE Favorites)">
 <!ENTITY sb.setting.tree.quickdelete	"Don't confirm when deleting">
 
@@ -32,7 +31,6 @@
 
 <!ENTITY sb.setting.data			"Destination to Store Data">
 <!ENTITY sb.setting.data.default	"Default (In your Profile Folder)">
-<!ENTITY sb.setting.data.notice		"If you want to migrate existing data, move 'ScrapBook' folder manually in advance. Then configure the destination.">
 
 <!ENTITY sb.setting.restorefavicons		"Restore favicons">
 <!ENTITY sb.setting.restorefavicons.d	"If favicons are not displayed, press this button:">

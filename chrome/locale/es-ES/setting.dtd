@@ -9,7 +9,6 @@
 <!ENTITY sb.setting.browser.submenu		"Enable submenu inside the browser context menu (Change after restart)">
 <!ENTITY sb.setting.capture.detail		"Mostrar diálogo 'Detalle de captura' cuando capture utilizando el método arrastrar y soltar sobre el panel lateral">
 <!ENTITY sb.setting.capture.notify		"Mostrar notificación 'Captura completada' (solo en Windows)">
-<!ENTITY sb.setting.tree.hidefavicon	"No mostrar favicon en el árbol">
 <!ENTITY sb.setting.tree.singleexpand	"Al expandir una carpeta del árbol, colapsar las otras carpetas (como los Favoritos del IE)">
 <!ENTITY sb.setting.tree.quickdelete	"Don't confirm when delete">
 
@@ -32,7 +31,6 @@
 
 <!ENTITY sb.setting.data			"Destino para los datos guardados">
 <!ENTITY sb.setting.data.default	"Por defecto (en la carpeta de tu perfil)">
-<!ENTITY sb.setting.data.notice		"Si quieres migrar tus datos actuales, mueve la carpeta 'ScrapBook' manualmente. Después configura el destino.">
 
 <!ENTITY sb.setting.restorefavicons		"Restore favicons">
 <!ENTITY sb.setting.restorefavicons.d	"If favicons are not displayed, press this button:">

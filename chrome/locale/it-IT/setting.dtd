@@ -9,7 +9,6 @@
 <!ENTITY sb.setting.browser.submenu		"Attivare i sottomenu dentro il menu contestuale del browser (riavvio necessario)">
 <!ENTITY sb.setting.capture.detail		"Visualizzare la finestra di dialogo 'Dettagli cattura' quando si cattura tramite drag-and-drop nel pannello">
 <!ENTITY sb.setting.capture.notify		"Visualizzare la finestra di notifica 'Cattura completata' (Nota! Potrebbe funzionare solo in ambiente Windows)">
-<!ENTITY sb.setting.tree.hidefavicon	"Non visualizzare le favicon nel diagramma delle directory">
 <!ENTITY sb.setting.tree.singleexpand	"Quando si espande una cartella nel diagramma delle directory, contrarre tutte le altre cartelle (come in IE)">
 <!ENTITY sb.setting.tree.quickdelete	"Non richiedere alcuna conferma quando si cancellano i dati">
 
@@ -32,7 +31,6 @@
 
 <!ENTITY sb.setting.data			"Cartella dove conservare i dati">
 <!ENTITY sb.setting.data.default	"Predefinita (nella cartella del proprio profilo)">
-<!ENTITY sb.setting.data.notice		"Se si desidera spostare i dati esistenti, spostare prima manualmente la cartella 'ScrapBook' ed indicare quindi il percorso scelto.">
 
 <!ENTITY sb.setting.restorefavicons		"Ripristina le favicon">
 <!ENTITY sb.setting.restorefavicons.d	"In caso le favicon non vengano correttamente visualizzate, cliccare sul seguente pulsante:">

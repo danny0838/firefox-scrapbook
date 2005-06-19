@@ -162,7 +162,7 @@ var SBcommon = {
 			ret[1] = aFileName.substring(pos + 1, aFileName.length);
 		} else {
 			ret[0] = aFileName;
-			ret[1] = "dat";
+			ret[1] = "";
 		}
 		return ret;
 	},

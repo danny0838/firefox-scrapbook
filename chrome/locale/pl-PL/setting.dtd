@@ -9,7 +9,6 @@
 <!ENTITY sb.setting.browser.submenu		"Włącz submenu w głównym menu kontekstowym przeglądarki (zmiany zostaną zastosowane po ponownym uruchomieniu przeglądarki)">
 <!ENTITY sb.setting.capture.detail		"Pokaż okno ''Szczegóły przechwytywania'', gdy przechwytujesz przeciągając ikonkę witryny lub etykietę panelu do sidebaru">
 <!ENTITY sb.setting.capture.notify		"Pokaż okienko powiadomienia ''Przechwytywanie zakończone'' (działa tylko w systemie Windows)">
-<!ENTITY sb.setting.tree.hidefavicon	"Nie wyświetlaj ikonek w widoku drzewa">
 <!ENTITY sb.setting.tree.singleexpand	"Gdy rozwijasz folder jako widok drzewa, zwiń wszystkie inne foldery">
 <!ENTITY sb.setting.tree.quickdelete	"Nie potwierdzaj usuwania">
 
@@ -32,7 +31,6 @@
 
 <!ENTITY sb.setting.data			"Folder zapisu danych">
 <!ENTITY sb.setting.data.default	"Domyślny (folder zapisu w profilu użytkownika)">
-<!ENTITY sb.setting.data.notice		"Jeżeli chcesz przenieść istniejące dane, przenieś wcześniej ręcznie folder ''ScrapBook''.">
 
 <!ENTITY sb.setting.restorefavicons		"Odtwórz ikonki">
 <!ENTITY sb.setting.restorefavicons.d	"Jeżeli ikonki nie są wyświetlane, naciśnij ten przycisk:">

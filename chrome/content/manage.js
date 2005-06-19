@@ -20,7 +20,6 @@ function SB_initManage()
 	SBtreeUtil.init("ScrapBookManageTree", false);
 	SB_initObservers();
 	SBpref.init();
-	SB_toggleShowFavicon();
 	SBtree.ref = window.arguments[0];
 	var popupKeys = ['C','M','E'];
 	for ( var i = 0; i < popupKeys.length; i++ )

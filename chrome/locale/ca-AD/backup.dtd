@@ -1,0 +1,7 @@
+<!ENTITY sb.backup.d		"Fes una còpia de seguretat comprimida de totes les dades de l'ScrapBook.">
+<!ENTITY sb.backup.program	"Programa de compressió">
+<!ENTITY sb.backup.file		"Fitxer a on es desarà la còpia de seguretat">
+<!ENTITY sb.backup.browse	"Navega">
+<!ENTITY sb.backup.arg		"Arguments de la línia d'ordres">
+<!ENTITY sb.backup.arg.d1	"&#37;dst és el camí cap al fitxer a on es desarà la còpia de seguretat.">
+<!ENTITY sb.backup.arg.d2	"&#37;src és el camí cap a la carpeta de l'ScrapBook.">

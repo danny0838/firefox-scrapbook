@@ -117,8 +117,6 @@ var SBtask = {
 	toggleShowButtons : function(willShow)
 	{
 		document.getElementById("ScrapBookCaptureRetryButton").hidden = !willShow;
-		if ( this.index == gURLs.length - 1 ) willShow = false;
-		document.getElementById("ScrapBookCaptureSkipButton").hidden = !willShow;
 	},
 
 	succeed : function()
@@ -130,8 +128,13 @@ var SBtask = {
 	fail : function(aErrorMsg)
 	{
 		if ( aErrorMsg ) SB_trace(aErrorMsg);
-		if ( gURLs.length > 1 ) SBlistbox.getItemAtIndex(this.index).setAttribute("style", "color:#FF0000;font-weight:bold;");
-		this.toggleShowButtons(true);
+		if ( gURLs.length > 1 ) {
+			SBlistbox.getItemAtIndex(this.index).label = "[" + this.index + "] " + aErrorMsg;
+			SBlistbox.getItemAtIndex(this.index).setAttribute("style", "color:#FF0000;font-weight:bold;");
+			this.skip(true);
+		} else {
+			this.toggleShowButtons(true);
+		}
 	},
 
 	skip : function(quickly)

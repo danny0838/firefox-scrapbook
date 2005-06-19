@@ -8,7 +8,7 @@
 <!ENTITY sb.detail.linked.sound		"Ljud">
 <!ENTITY sb.detail.linked.movie		"Filmer">
 <!ENTITY sb.detail.linked.archive	"Filarkiv">
-<!ENTITY sb.detail.linked.all		"Alla länkade filer">
+<!ENTITY sb.detail.linked.custom	"Custom">
 
 <!ENTITY sb.detail.linked.seq		"Spara alla länkade websidor i sekvens">
 <!ENTITY sb.detail.linked.seq.d		"(i en undermapp som skapas automatiskt)">

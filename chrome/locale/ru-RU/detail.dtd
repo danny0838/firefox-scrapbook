@@ -8,7 +8,7 @@
 <!ENTITY sb.detail.linked.sound		"Аудио">
 <!ENTITY sb.detail.linked.movie		"Фильмы">
 <!ENTITY sb.detail.linked.archive	"Архивы">
-<!ENTITY sb.detail.linked.all		"Все файлы">
+<!ENTITY sb.detail.linked.custom	"Custom">
 
 <!ENTITY sb.detail.linked.seq		"Захватить все Web страницы последовательно">
 <!ENTITY sb.detail.linked.seq.d		"(подкаталог автоматически создается)">

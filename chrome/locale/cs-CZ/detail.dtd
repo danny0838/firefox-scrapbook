@@ -8,7 +8,7 @@
 <!ENTITY sb.detail.linked.sound		"Zvuk">
 <!ENTITY sb.detail.linked.movie		"Video">
 <!ENTITY sb.detail.linked.archive	"Archiv">
-<!ENTITY sb.detail.linked.all		"Všechny soubory">
+<!ENTITY sb.detail.linked.custom	"Custom">
 
 <!ENTITY sb.detail.linked.seq		"Capture all linked Web pages sequentially">
 <!ENTITY sb.detail.linked.seq.d		"(in a subfolder automatically created)">

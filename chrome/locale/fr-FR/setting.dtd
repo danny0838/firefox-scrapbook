@@ -9,7 +9,6 @@
 <!ENTITY sb.setting.browser.submenu		"Autoriser le sous-menu au sein du menu contextuel du navigateur (la modification sera effective au redémarrage)">
 <!ENTITY sb.setting.capture.detail		"Afficher la fenêtre 'Détail de la capture' en cas de capture par glisser / déposer dans la barre latérale">
 <!ENTITY sb.setting.capture.notify		"Afficher la notification 'Capture terminée'  (seulement sous Windows ?)">
-<!ENTITY sb.setting.tree.hidefavicon	"Ne pas afficher de favicône dans l'arborescence">
 <!ENTITY sb.setting.tree.singleexpand	"Quand un dossier de l'arborescence est déployé, réduire tous les autres dossiers (cf. les favoris d'IE)">
 <!ENTITY sb.setting.tree.quickdelete	"Ne pas confirmer en cas de suppression">
 
@@ -32,7 +31,6 @@
 
 <!ENTITY sb.setting.data			"Destination du stockage des données">
 <!ENTITY sb.setting.data.default	"Par défaut (dans le dossier de votre profil)">
-<!ENTITY sb.setting.data.notice		"Si vous voulez déplacer des données existantes, déplacez auparavant manuellement le dossier 'ScrapBook'. Puis, configurez la destination.">
 
 <!ENTITY sb.setting.restorefavicons		"Restaurer les favicônes">
 <!ENTITY sb.setting.restorefavicons.d	"Si les favicônes n'apparaissent pas, cliquez sur ce bouton :">

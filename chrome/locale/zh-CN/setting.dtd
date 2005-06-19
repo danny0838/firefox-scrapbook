@@ -9,7 +9,6 @@
 <!ENTITY sb.setting.browser.submenu		"Enable submenu inside the browser context menu (Change after restart)">
 <!ENTITY sb.setting.capture.detail		"以拖拽方式获取资料时, 显示 '资料获取细节' 对话框">
 <!ENTITY sb.setting.capture.notify		"显示 '获取资料完毕' 提示框 (仅在 Windows 下有效?)">
-<!ENTITY sb.setting.tree.hidefavicon	"文件目录中不显示网站图标">
 <!ENTITY sb.setting.tree.singleexpand	"展开某文件夹时, 折叠其他文件夹 (类似于 IE 收藏夹)">
 <!ENTITY sb.setting.tree.quickdelete	"不显示删除确认对话框">
 
@@ -32,7 +31,6 @@
 
 <!ENTITY sb.setting.data			"获取资料存放处">
 <!ENTITY sb.setting.data.default	"默认 (在您的个人设定文件夹中)">
-<!ENTITY sb.setting.data.notice		"如果您想移动已存资料, 请先手动移动 'ScrapBook' 文件夹, 再调整该设定值.">
 
 <!ENTITY sb.setting.restorefavicons		"Restore favicons">
 <!ENTITY sb.setting.restorefavicons.d	"If favicons are not displayed, press this button:">

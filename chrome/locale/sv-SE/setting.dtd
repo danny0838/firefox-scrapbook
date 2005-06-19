@@ -9,7 +9,6 @@
 <!ENTITY sb.setting.browser.submenu		"Visa undermeny i webläsarens högerklick-meny (Aktiveras efter omstart av webläsaren)">
 <!ENTITY sb.setting.capture.detail		"Visa 'Spara i Scrapbook'-dialogrutan när en sida dras till Scrapbook">
 <!ENTITY sb.setting.capture.notify		"Visa 'Sparad i Scrapbook'-meddelandet (Fungerar endast i Windows?)">
-<!ENTITY sb.setting.tree.hidefavicon	"Visa inte favoritikonen i trädet">
 <!ENTITY sb.setting.tree.singleexpand	"När en träd-mapp visas, göm alla andra mappar (som IE-Favoriter)">
 <!ENTITY sb.setting.tree.quickdelete	"Bekräfta ej vid radering">
 
@@ -32,7 +31,6 @@
 
 <!ENTITY sb.setting.data			"Välj sökväg för sparade data">
 <!ENTITY sb.setting.data.default	"Standard (I din användarprofils mapp)">
-<!ENTITY sb.setting.data.notice		"Om du vill flytta existerande data, flytta först 'Scrapbook'-mappen manuellt. Ställ därefter in den nya sökvägen.">
 
 <!ENTITY sb.setting.restorefavicons		"Återställ favoritikoner">
 <!ENTITY sb.setting.restorefavicons.d	"Om favoritikoner inte visas, Klicka här:">

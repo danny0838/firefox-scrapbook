@@ -8,7 +8,7 @@
 <!ENTITY sb.detail.linked.sound		"サウンド">
 <!ENTITY sb.detail.linked.movie		"ムービー">
 <!ENTITY sb.detail.linked.archive	"アーカイブ">
-<!ENTITY sb.detail.linked.all		"すべてのリンク先 （リンク先はファイルとみなされます）">
+<!ENTITY sb.detail.linked.custom	"カスタム">
 
 <!ENTITY sb.detail.linked.seq		"すべてのリンク先Webページを順次取り込む">
 <!ENTITY sb.detail.linked.seq.d		"（自動的にサブフォルダが作成されます）">

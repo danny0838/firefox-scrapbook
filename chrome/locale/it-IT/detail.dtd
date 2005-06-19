@@ -8,7 +8,7 @@
 <!ENTITY sb.detail.linked.sound		"Suoni">
 <!ENTITY sb.detail.linked.movie		"Filmati">
 <!ENTITY sb.detail.linked.archive	"Archivi">
-<!ENTITY sb.detail.linked.all		"Tutti i file nei link">
+<!ENTITY sb.detail.linked.custom	"Custom">
 
 <!ENTITY sb.detail.linked.seq		"Cattura tutte le pagine web indicate in sequenza">
 <!ENTITY sb.detail.linked.seq.d		"(in una sottocartella creata automaticamente)">

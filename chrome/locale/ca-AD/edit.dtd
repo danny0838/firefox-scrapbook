@@ -1,0 +1,19 @@
+<!ENTITY sb.editor.inline	"Afegeix una anotació a la selecció">
+<!ENTITY sb.editor.block	"Afegeix un comentari després de la selecció">
+<!ENTITY sb.editor.marker	"Ressalta la selecció">
+<!ENTITY sb.editor.unline	"Suprimeix totes les anotacions">
+<!ENTITY sb.editor.unmark	"Suprimeix tots els ressaltaments">
+<!ENTITY sb.editor.cutter	"Suprimeix la selecció">
+<!ENTITY sb.editor.eraser	"Esborrador DOM: Una eina per a suprimir elements d'una pàgina web.">
+<!ENTITY sb.editor.undo		"Desfés">
+<!ENTITY sb.editor.restore	"Abandona els canvis i restaura">
+<!ENTITY sb.editor.save		"Desa els canvis">
+<!ENTITY sb.editor.exit		"Surt del mode d'edició">
+
+<!ENTITY sb.inline.enter	"D'acord">
+<!ENTITY sb.inline.delete	"Suprimeix">
+<!ENTITY sb.block.customize	"Edita l'estil CSS dels comentaris">
+<!ENTITY sb.block.hide		"Amaga els comentaris">
+
+<!ENTITY sb.expand.comment	"Expandeix/Redueix l'àrea de comentaris">
+

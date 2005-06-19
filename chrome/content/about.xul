@@ -75,7 +75,7 @@
 					</row>
 					<row>
 						<label value="Leszek(teo)Życzkowski (pl-PL)" href="http://mozillapl.org/katalogi_i_bazy/baza_dodatkow/rozszerzenia/oddzielne_moduly/scrapbook" class="link" onclick="SB_visit(this);" />
-						<label />
+						<label value="Joan Sala Soler (ca-AD)" href="joansala@gmail.com" class="link" onclick="SB_mailto(this);" />
 					</row>
 				</rows>
 			</grid>

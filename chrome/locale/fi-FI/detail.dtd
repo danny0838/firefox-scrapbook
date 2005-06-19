@@ -8,7 +8,7 @@
 <!ENTITY sb.detail.linked.sound		"Ääni">
 <!ENTITY sb.detail.linked.movie		"Video">
 <!ENTITY sb.detail.linked.archive	"Paketti">
-<!ENTITY sb.detail.linked.all		"Kaikki linkitetyt tiedostot">
+<!ENTITY sb.detail.linked.custom	"Custom">
 
 <!ENTITY sb.detail.linked.seq		"Kaappaa kaikki linkitetyt sivut järjestyksessä">
 <!ENTITY sb.detail.linked.seq.d		"(automaattisesti luotuun alakansioon)">

@@ -9,7 +9,6 @@
 <!ENTITY sb.setting.browser.submenu		"Включить подменю в контекстном меню браузера (Изменится после перезагрузки)">
 <!ENTITY sb.setting.capture.detail		"Показывать диалог 'Детали сохранения' при сохранении страницы перетаскиванием иконки">
 <!ENTITY sb.setting.capture.notify		"Показывать сообщение 'Сохранение завершено' (возможно, работает только в Windows)">
-<!ENTITY sb.setting.tree.hidefavicon	"Не показывать иконки страниц в дереве">
 <!ENTITY sb.setting.tree.singleexpand	"При раскрытии папки дерева, остальные свернуть">
 <!ENTITY sb.setting.tree.quickdelete	"Не спрашивать подтверждения при удалении">
 
@@ -32,7 +31,6 @@
 
 <!ENTITY sb.setting.data			"Папка для хранения данных">
 <!ENTITY sb.setting.data.default	"По умолчанию (В Вашем домашнем каталоге/Профиле)">
-<!ENTITY sb.setting.data.notice		"В случае переноса накопленных данных, перенесите вручную папку 'ScrapBook' в нужное Вам место. Затем укажите это новое расположение.">
 
 <!ENTITY sb.setting.restorefavicons		"Restore favicons">
 <!ENTITY sb.setting.restorefavicons.d	"If favicons are not displayed, press this button:">

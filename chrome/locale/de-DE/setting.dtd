@@ -9,7 +9,6 @@
 <!ENTITY sb.setting.browser.submenu		"Erzeugt ein Untermen&#x00FC; im Firefox-Kontexmen&#x00FC; (&#x00C4;nderung nach Neustart)">
 <!ENTITY sb.setting.capture.detail		"Zeige Details wenn eine Speicherung durch Ziehen in die Sidebar erfolgt">
 <!ENTITY sb.setting.capture.notify		"Zeige Fertig-Meldung wenn das Speichern beendet wurde">
-<!ENTITY sb.setting.tree.hidefavicon	"Keine Favicons im Verzeichnisbaum anzeigen">
 <!ENTITY sb.setting.tree.singleexpand	"Wenn ein Ordner ge&#x00F6;ffnet wird, &#x00F6;ffne auch alle anderen Ordner">
 <!ENTITY sb.setting.tree.quickdelete	"Keine L&#x00F6;schwarnung anzeigen">
 
@@ -32,7 +31,6 @@
 
 <!ENTITY sb.setting.data			"Verzeichnis f&#x00FC;r Speicherung">
 <!ENTITY sb.setting.data.default	"Grundeinstellung (Profile-Ordner)">
-<!ENTITY sb.setting.data.notice		"Wenn Sie den Speicherort &#x00E4;ndern, so verschieben Sie vorab den 'ScrapBook'-Ordner in das vorgew&#x00E4;hlte Verzeichnis.">
 
 <!ENTITY sb.setting.restorefavicons		"Favicons wiederherstellen">
 <!ENTITY sb.setting.restorefavicons.d	"Wenn Favicons nicht angezeigt werden, dr&#x00FC;cken Sie diesen Button:">

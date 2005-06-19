@@ -14,7 +14,7 @@
 
 var SBstring;
 var SBheader;
-var SBedit;
+var gEditingMode;
 
 var SBdropObserver = {};
 var SBdragObserver = {};
@@ -35,8 +35,7 @@ function SB_init()
 	SB_initObservers();
 
 	SBpref.init();
-	SB_toggleShowFavicon();
-	SB_toggleEditingMode();
+	gEditingMode = document.getElementById("ScrapBookEditingMode").getAttribute("checked");
 
 	setTimeout(function(){ SBstatus.getHttpTask(); }, 0);
 }
@@ -124,24 +123,6 @@ function SB_finalize()
 
 
 
-function SB_toggleShowFavicon()
-{
-	if ( SBpref.hideFavicon ) {
-		document.getElementById("ScrapBookTreeItem").removeAttribute("src");
-	} else {
-		document.getElementById("ScrapBookTreeItem").setAttribute("src", "rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon");
-	}
-	SB_rebuildAllTree();
-}
-
-
-function SB_toggleEditingMode()
-{
-	SBedit = document.getElementById("ScrapBookEditingMode").getAttribute("checked");
-}
-
-
-
 function SB_onKeyPressItem(aEvent)
 {
 	switch ( aEvent.keyCode )
@@ -214,7 +195,7 @@ function SB_open(tabbed, folderOpen)
 	if ( SBpref.usetabOpen ) tabbed = true;
 	var myDir = SBcommon.getContentDir(myID);
 	var myDirPath = SBservice.IO.newFileURI(myDir).spec;
-	if ( SBedit ) {
+	if ( gEditingMode ) {
 		if ( !tabbed ) {
 			try {
 				top.document.getElementById("content").contentDocument.getElementById("ScrapBookBrowser").setAttribute("src", myDirPath + "index.html");
@@ -269,7 +250,7 @@ function SB_delete()
 	{
 		if ( rmIDs[i].length == 14 ) SBcommon.removeDirSafety( SBcommon.getContentDir(rmIDs[i]) );
 	}
-	SBstatus.trace(rmIDs.length + " items removed");
+	SBstatus.trace("Removed: " + rmIDs.length + " items");
 	if ( SBnote.curRes && rmIDs[0] == SBnote.curRes.Value.substring(18,32) ) SBnote.exit(false);
 }
 
@@ -347,6 +328,11 @@ var SBdropUtil = {
 			     SBtree.view.isContainerOpen(this.row) &&
 			     SBtree.view.isContainerEmpty(this.row) == false )
 			{
+				if ( curAbsIdx == this.row )
+				{
+					SBstatus.trace("can't drop folder after open container");
+					return;
+				}
 				SBstatus.trace("drop after open container");
 				tarPar = tarRes;
 				tarRes = SBtree.builderView.getResourceAtIndex(this.row + 1);

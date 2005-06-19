@@ -14,6 +14,7 @@
 
 var SBstring;
 var SBarguments = {};
+var SBcustom;
 var gLinkedExpanding = false;
 
 
@@ -26,12 +27,13 @@ function SB_initDetail()
 	} catch(ex) {
 		alert("ScrapBook ERROR: No Arguments.");
 	}
+	SBcustom = document.getElementById("ScrapBookDetailLinkedCustom");
+	SB_toggleLinkedCustom();
+	SBcustom.nextSibling.value = nsPreferences.copyUnicharPref("scrapbook.detail.custom", "pdf, doc");
 	SBstring = document.getElementById("ScrapBookString");
 	document.documentElement.getButton("accept").label = SBstring.getString("CAPTURE_OK_BUTTON");
 	document.documentElement.getButton("accept").accesskey = "C";
 	SB_fillTitleList();
-
-
 	setTimeout(SB_initFolderWithDelay, 100);
 }
 
@@ -43,10 +45,9 @@ function SB_initFolderWithDelay()
 }
 
 
-function SB_toggleLinkedChecking()
+function SB_toggleLinkedCustom()
 {
-	var checkBox = document.getElementById("ScrapBookDetailLinkedU");
-	checkBox.nextSibling.disabled = !checkBox.checked;
+	SBcustom.nextSibling.disabled = !SBcustom.checked;
 }
 
 
@@ -194,9 +195,13 @@ function SB_acceptDetail()
 	window.opener.SBcapture.linked.snd   = document.getElementById("ScrapBookDetailLinkedS").checked;
 	window.opener.SBcapture.linked.mov   = document.getElementById("ScrapBookDetailLinkedM").checked;
 	window.opener.SBcapture.linked.arc   = document.getElementById("ScrapBookDetailLinkedA").checked;
-
-
 	window.opener.SBcapture.linked.seq   = document.getElementById("ScrapBookDetailLinkSeq").checked;
+	window.opener.SBcapture.linked.custom = "";
+	if ( SBcustom.checked )
+	{
+		window.opener.SBcapture.linked.custom = SBcustom.nextSibling.value.replace(/[^0-9a-zA-Z,\|]/g, "").replace(/[,\|]/g, ", ");
+		nsPreferences.setUnicharPref("scrapbook.detail.custom", window.opener.SBcapture.linked.custom);
+	}
 }
 
 

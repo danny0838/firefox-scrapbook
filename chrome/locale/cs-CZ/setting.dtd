@@ -9,7 +9,6 @@
 <!ENTITY sb.setting.browser.submenu		"Enable submenu inside the browser context menu (Change after restart)">
 <!ENTITY sb.setting.capture.detail		"Zobraz dialog zachycení, když se zachycení provede pomocí drag-and-drop do Sidebaru">
 <!ENTITY sb.setting.capture.notify		"Zobraz notifikaci 'Zachycení dokončeno' (funkční jen na Oknech?)">
-<!ENTITY sb.setting.tree.hidefavicon	"Nezobrazovat favicon v adresáři">
 <!ENTITY sb.setting.tree.singleexpand	"Při rozbalení adresáře, sbal všechny ostatní složky (jako Oblíbené v IE)">
 <!ENTITY sb.setting.tree.quickdelete	"Nežádat potvrzení při mazání">
 
@@ -32,7 +31,6 @@
 
 <!ENTITY sb.setting.data			"Nastavení cesty k datům">
 <!ENTITY sb.setting.data.default	"Standardní (ve vašem Profilu)">
-<!ENTITY sb.setting.data.notice		"Jestliže chcete použít vaše předchozí data, přesuňte manuálně složku 'ScrapBook' předtím, než k ní nastavíte cestu.">
 
 <!ENTITY sb.setting.restorefavicons		"Restore favicons">
 <!ENTITY sb.setting.restorefavicons.d	"If favicons are not displayed, press this button:">

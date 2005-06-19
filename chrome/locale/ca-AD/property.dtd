@@ -1,0 +1,20 @@
+<!ENTITY sb.prop.date		"Data">
+<!ENTITY sb.prop.type		"Tipus">
+<!ENTITY sb.prop.title		"Títol">
+<!ENTITY sb.prop.encode		"Codificació">
+<!ENTITY sb.prop.icon		"Icona">
+<!ENTITY sb.prop.source		"URL">
+<!ENTITY sb.prop.comment	"Comentari">
+<!ENTITY sb.prop.content	"Contingut">
+<!ENTITY sb.prop.size		"Mida">
+<!ENTITY sb.prop.id.date	"ID (Data i hora)">
+<!ENTITY sb.prop.folder		"Carpeta">
+
+<!ENTITY sb.prop.general	"Informació general">
+
+<!ENTITY sb.prop.icon.change	"Canvia">
+<!ENTITY sb.prop.icon.default	"Per defecte">
+<!ENTITY sb.prop.icon.favicon	"Escolliu una icona de pàgina">
+<!ENTITY sb.prop.icon.custom	"Escolliu una icona personalitzada">
+<!ENTITY sb.prop.mark			"Marca">
+

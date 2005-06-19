@@ -53,7 +53,6 @@
 					<checkbox id="ScrapBookCaptureNotify"    prefstring="scrapbook.capture.notify"    label="&sb.setting.capture.notify;" />
 					<separator class="groove" />
 					<checkbox id="ScrapBookTreeSingleExpand" prefstring="scrapbook.tree.singleexpand" label="&sb.setting.tree.singleexpand;" />
-					<checkbox id="ScrapBookTreeHideFavicon"  prefstring="scrapbook.tree.hidefavicon"  label="&sb.setting.tree.hidefavicon;" />
 					<checkbox id="ScrapBookTreeQuickDelete"  prefstring="scrapbook.tree.quickdelete"  label="&sb.setting.tree.quickdelete;" />
 				</vbox>
 			</tabpanel>

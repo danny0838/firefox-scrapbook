@@ -105,7 +105,7 @@
 				<menupopup id="ScrapBookMenuPopup">
 					<menuitem label="&sb.tools.setting;" oncommand="window.openDialog('chrome://scrapbook/content/setting.xul','','modal,centerscreen,chrome,resizable=yes');" />
 					<menuseparator />
-					<menuitem label="&sb.tools.editing;" id="ScrapBookEditingMode" oncommand="SB_toggleEditingMode();" type="checkbox" persist="checked" />
+					<menuitem label="&sb.tools.editing;" id="ScrapBookEditingMode" oncommand="gEditingMode = this.getAttribute('checked');" type="checkbox" persist="checked" />
 					<menuseparator />
 					<menuitem label="&sb.manage;"          oncommand="window.openDialog('chrome://scrapbook/content/manage.xul','','chrome,centerscreen,all,resizable,dialog=no','urn:scrapbook:root');" />
 					<menuitem label="&sb.tools.calculate;" oncommand="window.openDialog('chrome://scrapbook/content/calculate.xul','','chrome,centerscreen,all,dialog=no');" />

@@ -8,7 +8,7 @@
 <!ENTITY sb.detail.linked.sound		"Dźwięk">
 <!ENTITY sb.detail.linked.movie		"Film">
 <!ENTITY sb.detail.linked.archive	"Archiwa">
-<!ENTITY sb.detail.linked.all		"Wszystkie powiązane pliki">
+<!ENTITY sb.detail.linked.custom	"Custom">
 
 <!ENTITY sb.detail.linked.seq		"Przechwytuj wszystkie powiązane strony internetowe po kolei">
 <!ENTITY sb.detail.linked.seq.d		"(zapisz w automatycznie utworzonym subfolderze)">

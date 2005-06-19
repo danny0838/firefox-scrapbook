@@ -30,7 +30,6 @@
 
 	<hbox>
 		<button id="ScrapBookCaptureRetryButton" label="&sb.capture.retry;" oncommand="SBtask.toggleShowButtons(false);SBtask.start();" hidden="true" />
-		<button id="ScrapBookCaptureSkipButton"  label="&sb.capture.skip;"  oncommand="SBtask.toggleShowButtons(false);SBtask.skip(true);" hidden="true" />
 		<spacer flex="1" />
 		<button label="&sb.capture.abort;" oncommand="window.close();" />
 	</hbox>

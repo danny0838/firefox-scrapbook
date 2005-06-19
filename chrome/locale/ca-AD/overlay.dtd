@@ -1,0 +1,12 @@
+<!ENTITY sb.title				"ScrapBook">
+<!ENTITY sb.capture.partial		"Captura la selecció">
+<!ENTITY sb.capture.partial.as	"Anomena i captura la selecció...">
+<!ENTITY sb.capture.entire		"Captura la pàgina">
+<!ENTITY sb.capture.entire.as	"Anomena i captura la pàgina...">
+<!ENTITY sb.capture.frame		"Captura el marc">
+<!ENTITY sb.capture.frame.as	"Anomena i captura el marc...">
+<!ENTITY sb.capture.target		"Captura l'enllaç">
+<!ENTITY sb.capture.target.as	"Anomena i captura l'enllaç...">
+
+<!ENTITY sb.overlay.editing		"Commuta al mode d'edició">
+

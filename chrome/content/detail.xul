@@ -71,11 +71,16 @@
 				<groupbox>
 					<caption label="&sb.detail.linked;" />
 					<checkbox id="ScrapBookDetailLinkedI" persist="checked" label="&sb.detail.linked.image; (jpg, png, gif)" />
-					<checkbox id="ScrapBookDetailLinkedS" persist="checked" label="&sb.detail.linked.sound; (mp3, wav, ram)" />
+					<checkbox id="ScrapBookDetailLinkedS" persist="checked" label="&sb.detail.linked.sound; (mp3, wav, ram, wma)" />
 					<checkbox id="ScrapBookDetailLinkedM" persist="checked" label="&sb.detail.linked.movie; (mpg, avi, ram, mov, wmv)" />
 					<checkbox id="ScrapBookDetailLinkedA" persist="checked" label="&sb.detail.linked.archive; (zip, lzh, rar, xpi)" />
+					<hbox>
+						<checkbox id="ScrapBookDetailLinkedCustom" persist="checked" label="&sb.detail.linked.custom;" oncommand="SB_toggleLinkedCustom();" />
+						<textbox flex="1" />
+					</hbox>
+					<separator class="groove" />
 					<checkbox id="ScrapBookDetailLinkSeq" persist="checked" label="&sb.detail.linked.seq;" />
-					<description style="margin-left:32px;">&sb.detail.linked.seq.d;</description>
+					<!--<description style="margin-left:32px;">&sb.detail.linked.seq.d;</description>-->
 				</groupbox>
 			</tabpanel>
 			<tabpanel>

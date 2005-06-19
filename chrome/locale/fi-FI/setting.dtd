@@ -9,7 +9,6 @@
 <!ENTITY sb.setting.browser.submenu		"Käytä selaimen ponnahdusvalikossa alavalikkoa (vaatii uudelleenkäynnistyksen)">
 <!ENTITY sb.setting.capture.detail		"Näytä Kaappauksen yksityiskohdat -ikkuna vedettäessä sivu sivupaneeliin">
 <!ENTITY sb.setting.capture.notify		"Näytä ilmoitus kun kaappaus on valmis (toimii vain Windowsissa)">
-<!ENTITY sb.setting.tree.hidefavicon	"Älä näytä sivun kuvaketta puussa">
 <!ENTITY sb.setting.tree.singleexpand	"Laajennettaessa puunäkymässä kansion sisältö, supista muut kansiot">
 <!ENTITY sb.setting.tree.quickdelete	"Poista sivut vahvistamatta">
 
@@ -32,7 +31,6 @@
 
 <!ENTITY sb.setting.data			"Tietojen tallennuskansio">
 <!ENTITY sb.setting.data.default	"Oletus (Profiilikansio)">
-<!ENTITY sb.setting.data.notice		"Siirrettäessä olemassaolevia sivukaappauksia toiseen profiiliin, kopioi ensin käsin ScrapBookin kansio ja asenna ScrapBook vasta sen jälkeen profiiliin.">
 
 <!ENTITY sb.setting.restorefavicons		"Restore favicons">
 <!ENTITY sb.setting.restorefavicons.d	"If favicons are not displayed, press this button:">

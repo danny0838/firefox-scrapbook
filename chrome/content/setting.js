@@ -20,7 +20,6 @@ var SBcheckList = {
 	'ScrapBookCaptureDetail'		: false,
 	'ScrapBookCaptureNotify'		: false,
 	'ScrapBookTreeSingleExpand'		: false,
-	'ScrapBookTreeHideFavicon'		: false,
 	'ScrapBookTreeQuickDelete'		: false,
 	'ScrapBookCaptureUTF8Encode'	: true,
 	'ScrapBookCaptureRemoveScript'	: true,

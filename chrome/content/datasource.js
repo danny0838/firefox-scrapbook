@@ -70,6 +70,7 @@ var SBRDF = {
 
 	sanitize : function(aVal)
 	{
+		aVal = aVal.replace(/[\x00-\x1F\x7F]/g, " ");
 		return aVal.match(/^(<|>|&)/) ? (" " + aVal) : aVal;
 	},
 

@@ -3,12 +3,12 @@
 <!ENTITY sb.detail.new.folder		"Comhadlann Nua">
 <!ENTITY sb.detail.select.folder	"Roghnaigh Cohmadlann">
 
-<!ENTITY sb.detail.linked		"Gabh&#225;il le Comhad Ceangailte">
+<!ENTITY sb.detail.linked			"Gabh&#225;il le Comhad Ceangailte">
 <!ENTITY sb.detail.linked.image		"Iomh&#225;">
 <!ENTITY sb.detail.linked.sound		"Fuaim">
 <!ENTITY sb.detail.linked.movie		"Scann&#225;in">
 <!ENTITY sb.detail.linked.archive	"Cartlann">
-<!ENTITY sb.detail.linked.all		"Gach Comhad Ceangailte">
+<!ENTITY sb.detail.linked.custom	"Custom">
 
 <!ENTITY sb.detail.linked.seq		"Gabh gach Leathanach ceangailte in &#243;rd">
 <!ENTITY sb.detail.linked.seq.d		"(i fo-chomhadlann cruthaithe go huathoibr&#237;ch)">
