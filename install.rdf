@@ -7,7 +7,7 @@
 
 		<em:id>{53A03D43-5363-4669-8190-99061B2DEBA5}</em:id>
 		<em:name>ScrapBook</em:name>
-		<em:version>0.15.5</em:version>
+		<em:version>0.16.0</em:version>
 		<em:description>This extension helps you to save Web pages and easily manage collections.</em:description>
 		<em:creator>Gomita</em:creator>
 		<em:contributor>Bob Chao</em:contributor>
@@ -21,14 +21,16 @@
 		<em:contributor>mlok</em:contributor>
 		<em:contributor>Yury Merkulov (RED)</em:contributor>
 		<em:contributor>Eoin O'Cinneide</em:contributor>
-		<em:contributor>Michael Van Dorpe</em:contributor>
+		<em:contributor>Liesbeth</em:contributor>
 		<em:contributor>Leszek(teo)Zyczkowski</em:contributor>
 		<em:contributor>Joan Sala Soler</em:contributor>
+		<em:contributor>Andre Luiz</em:contributor>
+		<em:contributor>George Cheng Tsoi</em:contributor>
 		<em:homepageURL>http://amb.vis.ne.jp/mozilla/scrapbook/</em:homepageURL>
 		<em:optionsURL>chrome://scrapbook/content/setting.xul</em:optionsURL>
 		<em:aboutURL>chrome://scrapbook/content/about.xul</em:aboutURL>
 		<em:iconURL>chrome://scrapbook/skin/mainicon1.png</em:iconURL>
-		<em:updateURL>http://amb.vis.ne.jp/mozilla/scrapbook/update.rdf?ver=0.15.5</em:updateURL>
+		<em:updateURL>http://amb.vis.ne.jp/mozilla/scrapbook/update.rdf?ver=0.16.0</em:updateURL>
 
 		<em:file>
 			<Description about="urn:mozilla:extension:file:scrapbook.jar">
@@ -50,6 +52,7 @@
 				<em:locale>locale/nl-NL/</em:locale>
 				<em:locale>locale/pl-PL/</em:locale>
 				<em:locale>locale/ca-AD/</em:locale>
+				<em:locale>locale/pt-BR/</em:locale>
 			</Description>
 		</em:file>
 
