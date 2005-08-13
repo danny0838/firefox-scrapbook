@@ -35,25 +35,22 @@
 
 // The original script can be found at: http://piro.sakura.ne.jp/xul/_linemarker.html
 
-function lmSetMarker(selection, spanClass, spanStyle, spanTitle)
+function sbSetMarker(aWindow, aSelection, aSpanClass, aSpanStyle, aSpanTitle)
 {
-	var targetWindow   = document.getElementById("ScrapBookBrowser").contentWindow;
-	var targetDocument = document.getElementById("ScrapBookBrowser").contentDocument;
-
-	var range = targetWindow.document.createRange();
+	var range = aWindow.document.createRange();
 
 	try {
-		range.setStart(selection.anchorNode, selection.anchorOffset);
-		range.setEnd(selection.focusNode, selection.focusOffset);
+		range.setStart(aSelection.anchorNode, aSelection.anchorOffset);
+		range.setEnd(aSelection.focusNode, aSelection.focusOffset);
 	} catch(ex) {
-		range.setStart(selection.focusNode, selection.focusOffset);
-		range.setEnd(selection.anchorNode, selection.anchorOffset);
+		range.setStart(aSelection.focusNode, aSelection.focusOffset);
+		range.setEnd(aSelection.anchorNode, aSelection.anchorOffset);
 	}
 
-	var line = targetDocument.createElement('span');
-	if ( spanStyle ) line.setAttribute('style', spanStyle);
-	if ( spanClass ) line.setAttribute('class', spanClass);
-	if ( spanTitle ) line.setAttribute('title', spanTitle);
+	var line = aWindow.document.createElement('span');
+	if ( aSpanStyle ) line.setAttribute('style', aSpanStyle);
+	if ( aSpanClass ) line.setAttribute('class', aSpanClass);
+	if ( aSpanTitle ) line.setAttribute('title', aSpanTitle);
 
 	if (range.startContainer == range.endContainer) {
 
@@ -72,13 +69,13 @@ function lmSetMarker(selection, spanClass, spanStyle, spanTitle)
 		range.insertNode(lineContents);
 	}
 	else {
-		var startRange = targetDocument.createRange();
+		var startRange = aWindow.document.createRange();
 		startRange.setStart(range.startContainer, range.startOffset);
 		startRange.setEndAfter(range.startContainer);
 		startRange.surroundContents(line.cloneNode(true));
 		startRange.detach();
 
-		var endRange = targetDocument.createRange();
+		var endRange = aWindow.document.createRange();
 		endRange.setStartBefore(range.endContainer);
 		endRange.setEnd(range.endContainer, range.endOffset);
 		var endLine = line.cloneNode(true);
@@ -86,14 +83,14 @@ function lmSetMarker(selection, spanClass, spanStyle, spanTitle)
 		endRange.insertNode(endLine);
 		endRange.detach();
 
-		lmWrapUpTexts(range.startContainer, range.endContainer, line);
+		sbWrapUpTexts(range.startContainer, range.endContainer, line);
 	}
 	range.detach();
 
 }
 
 // Find text nodes from aStartNode to aEndNode, and wrap up them in elemen node (aParent).
-function lmWrapUpTexts(aStartNode, aEndNode, aParent)
+function sbWrapUpTexts(aStartNode, aEndNode, aParent)
 {
 	var node = aStartNode,
 		newNode;
@@ -113,13 +110,17 @@ function lmWrapUpTexts(aStartNode, aEndNode, aParent)
 			node = node.nextSibling;
 		}
 		if (node == aEndNode) break traceTree;
-
+/*
 		if (node.nodeType == Node.TEXT_NODE) {
 			newNode = aParent.cloneNode(true);
 			newNode.appendChild(node.cloneNode(true));
 			node.parentNode.replaceChild(newNode, node);
 			node = newNode.lastChild;
 		}
+*/
+		node.removeAttribute("class");
+		node.removeAttribute("style");
+
 	}
 	while (node != aEndNode);
 

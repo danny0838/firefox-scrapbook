@@ -3,7 +3,7 @@
 <!ENTITY sb.setting.usetabs	"タブの利用">
 <!ENTITY sb.setting.advance	"パス設定">
 <!ENTITY sb.setting.capture	"取り込み">
-<!ENTITY sb.setting.editing	"編集モード">
+<!ENTITY sb.setting.editing	"閲覧/編集">
 <!ENTITY sb.setting.program	"プログラム">
 
 <!ENTITY sb.setting.browser.submenu		"ブラウザのコンテキストメニューをサブメニュー化　（再起動後有効）">
@@ -11,6 +11,11 @@
 <!ENTITY sb.setting.capture.notify		"取り込みが完了したら通知する　（Windowsのみ正常動作）">
 <!ENTITY sb.setting.tree.singleexpand	"ツリーのフォルダ展開時、他のフォルダを折りたたむ　（IEお気に入り風）">
 <!ENTITY sb.setting.tree.quickdelete	"削除確認をしない">
+
+<!ENTITY sb.setting.view.header			"URL情報バーを表示する">
+<!ENTITY sb.setting.view.editor			"編集ツールバーの表示">
+<!ENTITY sb.setting.view.editor.auto	"自動　（取り込んだページを表示した時）">
+<!ENTITY sb.setting.view.editor.manual	"手動　（ステータスバーの[EDIT]をクリックした時）">
 
 <!ENTITY sb.setting.usetabs.d			"チェックがオンの操作は、新しいタブで開きます。">
 <!ENTITY sb.setting.usetabs.note		"ノートをタブで開く">
@@ -20,7 +25,6 @@
 <!ENTITY sb.setting.capture.removescript	"JavaScriptを除去　（推奨）">
 <!ENTITY sb.setting.capture.removescript.d	"チェックをオフにした場合、正確なレイアウトで取り込めない問題が時々生じます。">
 
-<!ENTITY sb.setting.edit.showheader		"ヘッダを表示する">
 <!ENTITY sb.setting.edit.multilines		"コメント入力欄を複数行にする">
 <!ENTITY sb.setting.edit.confirmsave.1	"保存確認の間隔">
 <!ENTITY sb.setting.edit.confirmsave.2	"分　（0で確認無しになります）">

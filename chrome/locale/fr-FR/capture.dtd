@@ -1,4 +1,4 @@
 <!ENTITY sb.capture			"Saisie">
 <!ENTITY sb.capture.abort	"Arrêter">
 <!ENTITY sb.capture.retry	"Réessayer">
-
+<!ENTITY sb.capture.skip	"Skip">

@@ -6,9 +6,7 @@
 
 <!ENTITY sb.tools			"Tools">
 <!ENTITY sb.tools.setting	"Settings...">
-<!ENTITY sb.tools.editing	"Always Editing Mode">
-<!ENTITY sb.tools.manage	"Manage Tree...">
-<!ENTITY sb.manage			"Manage">
+<!ENTITY sb.tools.manage	"Manage">
 <!ENTITY sb.tools.calculate	"Calculation of Size">
 <!ENTITY sb.tools.sorttree	"Sort Entire Tree">
 <!ENTITY sb.tools.directory	"ScrapBook Directory">
@@ -16,6 +14,7 @@
 <!ENTITY sb.tools.trade		"Import / Export">
 <!ENTITY sb.tools.output	"Output Tree as HTML">
 <!ENTITY sb.tools.backup	"Backup with Compression">
+<!ENTITY sb.tools.repair	"Emergency Repair">
 <!ENTITY sb.tools.homepage	"Home Page">
 <!ENTITY sb.tools.about		"About">
 
@@ -26,13 +25,7 @@
 <!ENTITY sb.search.cs		"Match Case">
 <!ENTITY sb.search.cache	"Update Cache for Full Text Search">
 <!ENTITY sb.search.clear	"Clear Form History">
-
-<!ENTITY sb.filter.days		"Filter by Days">
-<!ENTITY sb.filter.today	"Today">
-<!ENTITY sb.filter.2days	"Last 2 Days">
-<!ENTITY sb.filter.3days	"Last 3 Days">
-<!ENTITY sb.filter.1week	"This Week">
-<!ENTITY sb.filter.2week	"Last 2 Weeks">
+<!ENTITY sb.search.days		"Filtering by Days">
 
 <!ENTITY sb.note.opentab	"Open in Tab">
 <!ENTITY sb.note.close		"Close">

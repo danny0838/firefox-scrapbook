@@ -127,6 +127,13 @@ dialog#ScrapBookPropertyDialog row > textbox[readonly="true"]
 
 /* ::::: ScrapBook List ::::: */
 
+treechildren::-moz-tree-image(sbTreeColTitle)
+{
+	-moz-image-region: auto !important;
+	width: 16px; height: 16px;
+	padding-right: 3px;
+}
+
 listbox .listcell-icon
 {
 	width: 16px; height: 16px;

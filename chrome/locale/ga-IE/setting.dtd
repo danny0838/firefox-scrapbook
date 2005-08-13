@@ -12,6 +12,11 @@
 <!ENTITY sb.setting.tree.singleexpand	"Nuair a leathnaiotar comhadlann crainne, leachaigh gach comhadlann eile (ar n&#243;s Ceanin Taisc&#233;ala&#237; Idirl&#237;n)">
 <!ENTITY sb.setting.tree.quickdelete	"N&#225; Cinntigh Nuair a Scriostar">
 
+<!ENTITY sb.setting.view.header			"Show URL infobar">
+<!ENTITY sb.setting.view.editor			"Show Edit Toolbar">
+<!ENTITY sb.setting.view.editor.auto	"Automatically when viewing a captured page">
+<!ENTITY sb.setting.view.editor.manual	"Manually by hitting EDIT button in the status bar">
+
 <!ENTITY sb.setting.usetabs.d			"&#218;s&#225;ideann Gn&#237;omhaithe Seice&#225;lta T&#225;banna nua.">
 <!ENTITY sb.setting.usetabs.note		"Oscail N&#243;ta&#237; i T&#225;b">
 
@@ -20,7 +25,6 @@
 <!ENTITY sb.setting.capture.removescript	"N&#225; t&#243;g JavaScript">
 <!ENTITY sb.setting.capture.removescript.d	"M&#225; muchtar, uaireanta cailltear leagain amach anleatanach.">
 
-<!ENTITY sb.setting.edit.showheader		"Teasp&#225;inn bunt&#225;sc">
 <!ENTITY sb.setting.edit.multilines		"Cumasaigh n&#243;ta tr&#225;chta ill&#237;neach">
 <!ENTITY sb.setting.edit.confirmsave.1	"Treibhse do Aitheantas Deimhni&#250;ch&#225;in S&#225;bh&#225;il">
 <!ENTITY sb.setting.edit.confirmsave.2	"&#237;osmh&#233;id.  (0 = gan aon Aitheantas Deimhni&#250;ch&#225;in)">

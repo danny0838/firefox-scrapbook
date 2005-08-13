@@ -1,0 +1,6 @@
+<!ENTITY sb.sort			"Sort">
+<!ENTITY sb.sort.title.asc	"Sortieren nach Namen (A &gt; Z)">
+<!ENTITY sb.sort.title.desc	"Sortieren Nach Namen (Z &gt; A)">
+<!ENTITY sb.sort.date.asc	"Chronologisch">
+<!ENTITY sb.sort.date.desc	"Chronologisch (umgekehrte Reihenfolge)">
+<!ENTITY sb.sort.recursive	"Sortiere Unterordner (in wiederholender Reihenfolge)">

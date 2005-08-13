@@ -1,0 +1,21 @@
+<!ENTITY sb.editor			"ScrapBook Edit Toolbar">
+<!ENTITY sb.editor.inline	"Краткий комментарий к выделенному">
+<!ENTITY sb.editor.block.insert		"Расширенный комментарий после выделенного">
+<!ENTITY sb.editor.block.customize	"Настроить стиль расширенного комментария">
+<!ENTITY sb.editor.block.hide		"Спрятать расширенные комментарии">
+<!ENTITY sb.editor.marker	"Маркировать цветом выделенное">
+<!ENTITY sb.editor.unline	"Удалить все простые комментарии">
+<!ENTITY sb.editor.unmark	"Удалить все цветовые пометки">
+<!ENTITY sb.editor.cutter	"Удалить выделенное">
+<!ENTITY sb.editor.remove.iframe	"Remove All IFRAME Tags">
+<!ENTITY sb.editor.remove.script	"Remove All SCRIPT Tags">
+<!ENTITY sb.editor.eraser	"Очитска страницы: удаление блоков">
+<!ENTITY sb.editor.undo		"Отменить">
+<!ENTITY sb.editor.restore	"Отменить все правки и вернуться к первоначальному виду">
+<!ENTITY sb.editor.save		"Зафиксировать правки">
+<!ENTITY sb.editor.find		"Find and Select from the Sidebar Tree">
+<!ENTITY sb.editor.comment	"Расширить поле комментария">
+
+<!ENTITY sb.inline.enter	"Да">
+<!ENTITY sb.inline.delete	"Удалить">
+

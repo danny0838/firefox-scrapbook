@@ -1,0 +1,21 @@
+<!ENTITY sb.editor			"ScrapBook 編集ツールバー">
+<!ENTITY sb.editor.inline	"選択範囲にインラインコメントを入力">
+<!ENTITY sb.editor.block.insert		"選択範囲の後ろへブロックコメントを挿入">
+<!ENTITY sb.editor.block.customize	"ブロックコメントのCSSをカスタマイズ">
+<!ENTITY sb.editor.block.hide		"ブロックコメントを非表示">
+<!ENTITY sb.editor.marker	"選択範囲をハイライト">
+<!ENTITY sb.editor.unline	"すべてのインラインコメントを解除">
+<!ENTITY sb.editor.unmark	"すべてのハイライトを解除">
+<!ENTITY sb.editor.cutter	"選択範囲をカット">
+<!ENTITY sb.editor.remove.iframe	"すべてのIFRAMEタグを削除">
+<!ENTITY sb.editor.remove.script	"すべてのSCRIPTタグを削除">
+<!ENTITY sb.editor.eraser	"DOMイレーサー：不要な部分を直接クリックして削除できます">
+<!ENTITY sb.editor.undo		"元に戻す">
+<!ENTITY sb.editor.restore	"すべての変更を破棄して前回保存時の状態へ戻す">
+<!ENTITY sb.editor.save		"変更を保存する">
+<!ENTITY sb.editor.find		"サイドバーのツリーから探して選択する">
+<!ENTITY sb.editor.comment	"コメントエリアを広げる">
+
+<!ENTITY sb.inline.enter	"入力">
+<!ENTITY sb.inline.delete	"削除">
+

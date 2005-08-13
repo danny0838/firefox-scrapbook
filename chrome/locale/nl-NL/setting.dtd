@@ -1,37 +1,41 @@
-<!ENTITY sb.setting			"Opties">
+<!ENTITY sb.setting			"Instellingen">
 <!ENTITY sb.setting.general	"Algemeen">
-<!ENTITY sb.setting.usetabs	"Gebruik Tabbladen">
+<!ENTITY sb.setting.usetabs	"Tabbladen">
 <!ENTITY sb.setting.advance	"Geavanceerd">
-<!ENTITY sb.setting.capture	"Capture">
-<!ENTITY sb.setting.editing	"Editing">
-<!ENTITY sb.setting.program	"Programs">
+<!ENTITY sb.setting.capture	"Bewaren">
+<!ENTITY sb.setting.editing	"Bewerken">
+<!ENTITY sb.setting.program	"Programma's">
 
-<!ENTITY sb.setting.browser.submenu		"Enable submenu inside the browser context menu (Change after restart)">
-<!ENTITY sb.setting.capture.detail		"'Bewaren: Detail' dialoog tonen bij bewaren door verslepen in zijbalk">
-<!ENTITY sb.setting.capture.notify		"Bewaren Voltooid Melding Tonen (werkt alleen in Windows)">
-<!ENTITY sb.setting.tree.singleexpand	"Alle andere mappen toeklappen bij het uitvouwen van een map">
-<!ENTITY sb.setting.tree.quickdelete	"Geen bevestiging nodig bij verwijderen">
+<!ENTITY sb.setting.browser.submenu		"Een submenu in het contextmenu van de zoekmachine toestaan (verandering na een herstart)">
+<!ENTITY sb.setting.capture.detail		"'Geavanceerd bewaren' dialoog tonen tijdens het bewaren door te verslepen naar de zijbalk">
+<!ENTITY sb.setting.capture.notify		"Melding 'Bewaren voltooid' tonen (werkt alleen in Windows)">
+<!ENTITY sb.setting.tree.singleexpand	"Alle andere mappen inklappen tijdens het uitvouwen van een map">
+<!ENTITY sb.setting.tree.quickdelete	"Geen bevestiging bij verwijderen">
 
-<!ENTITY sb.setting.usetabs.d			"Aangevinkte acties gebruiken nieuwe tabbladen">
-<!ENTITY sb.setting.usetabs.note		"Open Notes in Tab">
+<!ENTITY sb.setting.view.header			"URL-infobalk tonen">
+<!ENTITY sb.setting.view.editor			"Bewerkingsknoppenbalk tonen">
+<!ENTITY sb.setting.view.editor.auto	"Automatisch bij het bekijken van een geopende pagina">
+<!ENTITY sb.setting.view.editor.manual	"Handmatig door het EDIT-pictogram aan te klikken in de statusbalk">
 
-<!ENTITY sb.setting.capture.utf8encode		"Convert into UTF-8 encoding (Recommend)">
-<!ENTITY sb.setting.capture.utf8encode.d	"If check off, some characters frequently garbles into '?'.">
-<!ENTITY sb.setting.capture.removescript	"Remove JavaScript (Recommend)">
-<!ENTITY sb.setting.capture.removescript.d	"If check off, sometimes fails to preserve the page layout.">
+<!ENTITY sb.setting.usetabs.d			"Voor aangevinkte acties nieuwe tabbladen gebruiken:">
+<!ENTITY sb.setting.usetabs.note		"Notities in tabbladen openen">
 
-<!ENTITY sb.setting.edit.showheader		"Show header">
-<!ENTITY sb.setting.edit.multilines		"Enable multiline comment">
-<!ENTITY sb.setting.edit.confirmsave.1	"Interval for confirming save">
-<!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 = never confirm)">
+<!ENTITY sb.setting.capture.utf8encode		"Naar UTF-8-formaat omzetten (aanbevolen)">
+<!ENTITY sb.setting.capture.utf8encode.d	"Als het vinkje uitstaat, worden sommige tekens wel eens verminkt weergegeven als '?'.">
+<!ENTITY sb.setting.capture.removescript	"JavaScript verwijderen (aanbevolen)">
+<!ENTITY sb.setting.capture.removescript.d	"Als het vinkje uitstaat, wordt soms de pagina-layout niet bewaard.">
 
-<!ENTITY sb.setting.program.filer			"Programma voor het 'Verken Bestanden' Menu">
-<!ENTITY sb.setting.program.filer.default	"Standaard (Voor Windows: Waarschijnlijk Verkenner.)">
-<!ENTITY sb.setting.browse					"Verkennen">
+<!ENTITY sb.setting.edit.multilines		"Meerregelig commentaar toestaan">
+<!ENTITY sb.setting.edit.confirmsave.1	"Interval bij bevestiging 'Bewaren'">
+<!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 = nooit bevestigen)">
 
-<!ENTITY sb.setting.data			"Locatie om Gegevens op te slaan">
-<!ENTITY sb.setting.data.default	"Standaardlocatie (Profiel)">
+<!ENTITY sb.setting.program.filer			"Programma voor het 'Bestanden tonen' menu">
+<!ENTITY sb.setting.program.filer.default	"Standaard (voor Windows de Verkenner)">
+<!ENTITY sb.setting.browse					"Zoeken">
 
-<!ENTITY sb.setting.restorefavicons		"Restore favicons">
-<!ENTITY sb.setting.restorefavicons.d	"If favicons are not displayed, press this button:">
+<!ENTITY sb.setting.data			"Locatie om gegevens op te slaan">
+<!ENTITY sb.setting.data.default	"Standaard (in uw profielmap)">
+
+<!ENTITY sb.setting.restorefavicons		"Voorkeurspictogrammen herstellen">
+<!ENTITY sb.setting.restorefavicons.d	"Als de voorkeurspictogrammen niet worden vertoond, op deze knop drukken:">
 

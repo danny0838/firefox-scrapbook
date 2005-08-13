@@ -12,6 +12,11 @@
 <!ENTITY sb.setting.tree.singleexpand	"展開某資料夾時，折疊其他資料夾（像 IE 的「我的最愛」模式）">
 <!ENTITY sb.setting.tree.quickdelete	"刪除擷取文件時不加確認">
 
+<!ENTITY sb.setting.view.header			"顯示網址訊息列">
+<!ENTITY sb.setting.view.editor			"顯示編輯工具列">
+<!ENTITY sb.setting.view.editor.auto	"檢閱擷取文件時自動顯示">
+<!ENTITY sb.setting.view.editor.manual	"按下狀態列「Edit」鈕時顯示">
+
 <!ENTITY sb.setting.usetabs.d			"勾選項目將以新分頁開啟">
 <!ENTITY sb.setting.usetabs.note		"在分頁中開啟筆記">
 
@@ -20,7 +25,6 @@
 <!ENTITY sb.setting.capture.removescript	"移除 JavaScript（建議勾選）">
 <!ENTITY sb.setting.capture.removescript.d	"如果取消此項，有時會無法重現原有的版面配置。">
 
-<!ENTITY sb.setting.edit.showheader		"顯示標頭">
 <!ENTITY sb.setting.edit.multilines		"自動展開文件評注欄">
 <!ENTITY sb.setting.edit.confirmsave.1	"在">
 <!ENTITY sb.setting.edit.confirmsave.2	"分分鐘後提示存檔。（0 代表不提示）">

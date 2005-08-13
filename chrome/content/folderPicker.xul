@@ -33,6 +33,7 @@
 			SBRDF.init();
 			SBtreeUtil.init("ScrapBookTree", true);
 			document.documentElement.buttons = "accept,cancel,extra2";
+			document.getElementById("ScrapBookFolderPickerRoot").label = SBstring.getString("ROOT_FOLDER");
 		}
 		function SB_acceptFP()
 		{
@@ -63,10 +64,10 @@
 		}
 	]]></script>
 
-	<!--StringBundle (for DEFAULT_FOLDER)-->
+	<!--StringBundle-->
 	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/scrapbook.properties" />
 
-	<checkbox id="ScrapBookFolderPickerRoot" label="&sb.detail.rootfolder;" checked="true" oncommand="SB_clearTreeSelection();" style="margin-bottom:10px;" />
+	<checkbox id="ScrapBookFolderPickerRoot" checked="true" oncommand="SB_clearTreeSelection();" style="margin-bottom:10px;" />
 
 	<!--folder tree-->
 	<tree id="ScrapBookTree"

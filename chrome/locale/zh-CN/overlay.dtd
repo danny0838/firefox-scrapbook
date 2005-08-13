@@ -8,5 +8,8 @@
 <!ENTITY sb.capture.target		"获取链接">
 <!ENTITY sb.capture.target.as	"获取链接为...">
 
-<!ENTITY sb.overlay.editing		"切换至编辑模式">
+<!ENTITY sb.key.sidebar		"K">
+<!ENTITY sb.key.editor		"J">
+<!ENTITY sb.key.capture		"L">
+<!ENTITY sb.key.capture.as	"K">
 

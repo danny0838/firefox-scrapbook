@@ -42,3 +42,32 @@ menuitem#ScrapBookContextMenu8 .menu-iconic-icon
 }
 
 
+/* ::::: BrowserMessage ::::: */
+
+browsermessage[type="scrapbook"]
+{
+	-moz-appearance: none;
+	background-color: InfoBackground;
+	border-bottom: 1px solid ThreeDShadow;
+	padding: 3px 8px;
+	overflow: hidden;
+}
+
+browsermessage[type="scrapbook"] description
+{
+	-moz-appearance: none;
+	color: InfoText;
+	margin: 0px;
+	padding: 0px;
+	cursor: pointer;
+}
+
+browsermessage[type="scrapbook"] button
+{
+	-moz-appearance: none;
+	margin: 0px;
+	padding: 0px;
+	background: none;
+	border: none;
+}
+

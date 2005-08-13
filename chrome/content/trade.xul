@@ -22,8 +22,8 @@
 <!--window-->
 <window id="ScrapBookTradeWindow"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        title="&sb.title; - &sb.tools.trade;"
-        width="640" height="480" 
+        title="&sb.tools.trade; - &sb.title;"
+        width="700" height="520" 
         onload="setTimeout(SB_initTrade, 0);">
 
 	<!--JavaScript for Preference-->
@@ -39,6 +39,7 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/tree.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapbook.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/manage.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/calculate.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/trade.js" />
 
 	<!--stringbundle-->
@@ -63,6 +64,7 @@
 			<menuitem class="menuitem-iconic" label="&sb.delete;"   oncommand="SBtradeContext.deleteDir();" src="chrome://scrapbook/skin/menu_delete.png" />
 			<menuseparator />
 			<menuitem class="menuitem-iconic" label="&sb.property;" oncommand="SBtradeContext.showIndexDat();" src="chrome://scrapbook/skin/menu_property.png" />
+
 		</popup>
 	</popupset>
 
@@ -91,7 +93,7 @@
 		<splitter />
 
 		<vbox flex="2" style="min-width:300px;">
-			<hbox align="center">
+			<hbox align="center" style="margin:3px 1px;">
 				<image id="ScrapBookTradeIcon" style="width:16px;height:16px;margin-left:5px;" />
 				<textbox id="ScrapBookTradePath" readonly="true" flex="1" style="padding:2px;height:1.7em;" />
 				<button label="&sb.trade.browse;..."  oncommand="SBtrade.selectPath();" />
@@ -125,13 +127,12 @@
 
 	<listbox id="ScrapBookTradeLog" class="plain" style="height:6.4em;-moz-appearance:listbox;" />
 
-	<!--status bar-->
-	<sidebarheader id="ScrapBookStatusBar" align="center" style="padding-left:2px;">
+	<statusbar id="ScrapBookStatusBar" align="center" style="padding-left:2px;">
 		<hbox align="center" flex="1" id="ScrapBookStatusBox">
 			<image id="ScrapBookStatusImage" />
 			<label id="ScrapBookStatusLabel" crop="end" flex="1" value="" />
 		</hbox>
 		<progressmeter id="ScrapBookTradeProgress" mode="determined" value="0" width="160" hidden="true" />
-	</sidebarheader>
+	</statusbar>
 
 </window>

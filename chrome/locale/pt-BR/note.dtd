@@ -1,0 +1,12 @@
+<!ENTITY sn.save			"Salvar">
+<!ENTITY sn.close			"Fechar">
+<!ENTITY sn.tools			"Ferramentas">
+<!ENTITY sn.preview			"Pré-visualização do HTML">
+<!ENTITY sn.preview.quit	"Quit Preview">
+<!ENTITY sn.template		"Editar Template do HTML">
+<!ENTITY sn.autolinefeed	"Quebra automática">
+<!ENTITY sn.autolinefeed.t	"Adicionar a tag &lt;br&gt; no final da linha na pré-visualização do HTML">
+<!ENTITY sn.fontsize		"Tamanho da Fonte">
+<!ENTITY sn.help			"Ajuda">
+<!ENTITY sn.exit			"Sair">
+

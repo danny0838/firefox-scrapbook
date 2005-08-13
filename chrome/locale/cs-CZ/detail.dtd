@@ -1,9 +1,8 @@
 <!ENTITY sb.detail					"Detail zachycení">
-<!ENTITY sb.detail.rootfolder		"Kořenová složka">
 <!ENTITY sb.detail.new.folder		"Nová složka">
 <!ENTITY sb.detail.select.folder	"Select Folder">
 
-<!ENTITY sb.detail.linked			"Zachytit včetně souborů">
+<!ENTITY sb.detail.linked			"Download links">
 <!ENTITY sb.detail.linked.image		"Obrázek">
 <!ENTITY sb.detail.linked.sound		"Zvuk">
 <!ENTITY sb.detail.linked.movie		"Video">

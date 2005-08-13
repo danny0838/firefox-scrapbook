@@ -15,22 +15,29 @@
 function SB_initManage()
 {
 	SBstring = document.getElementById("ScrapBookString");
+	SBbaseURL = SBservice.IO.newFileURI(SBcommon.getScrapBookDir()).spec;
+	SB_disablePopupMenus();
 	SBRDF.init();
 	SBstatus.init();
 	SBtreeUtil.init("ScrapBookManageTree", false);
 	SB_initObservers();
 	SBpref.init();
 	SBtree.ref = window.arguments[0];
-	var popupKeys = ['C','M','E'];
-	for ( var i = 0; i < popupKeys.length; i++ )
-	{
-		document.getElementById("ScrapBookTreePopup" + popupKeys[i]).setAttribute("disabled", true);
-	}
 	var winTitle = SBRDF.getProperty("title", SBservice.RDF.GetResource(SBtree.ref));
 	if ( winTitle )
 	{
 		document.getElementById("ScrapBookManageWindow").setAttribute("title", winTitle);
 		document.title = winTitle;
+	}
+}
+
+
+function SB_disablePopupMenus()
+{
+	var keys = ['C','M','E'];
+	for ( var i = 0; i < keys.length; i++ )
+	{
+		document.getElementById("ScrapBookTreePopup" + keys[i]).setAttribute("disabled", true);
 	}
 }
 
@@ -102,7 +109,7 @@ function SB_deleteMultiple()
 	SBRDF.flush();
 	for ( var i = 0; i < rmIDs.length; i++ )
 	{
-		if ( rmIDs[i].length == 14 ) SBcommon.removeDirSafety( SBcommon.getContentDir(rmIDs[i]) );
+		if ( rmIDs[i].length == 14 ) SBcommon.removeDirSafety(SBcommon.getContentDir(rmIDs[i]), true);
 	}
 	SBstatus.trace(rmIDs.length + " items removed");
 }

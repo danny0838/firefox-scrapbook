@@ -8,5 +8,8 @@
 <!ENTITY sb.capture.target		"Kaappaa kohde">
 <!ENTITY sb.capture.target.as	"Kaappaa kohde nimellä...">
 
-<!ENTITY sb.overlay.editing		"Siirry muokkaustilaan">
+<!ENTITY sb.key.sidebar		"C">
+<!ENTITY sb.key.editor		"J">
+<!ENTITY sb.key.capture		"L">
+<!ENTITY sb.key.capture.as	"K">
 

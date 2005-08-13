@@ -1,8 +1,8 @@
 <!ENTITY sb.prop.date		"Datum">
-<!ENTITY sb.prop.type		"Type">
+<!ENTITY sb.prop.type		"Soort">
 <!ENTITY sb.prop.title		"Titel">
-<!ENTITY sb.prop.encode		"Codering">
-<!ENTITY sb.prop.icon		"Icoon">
+<!ENTITY sb.prop.encode		"Formaat">
+<!ENTITY sb.prop.icon		"Pictogram">
 <!ENTITY sb.prop.source		"URL">
 <!ENTITY sb.prop.comment	"Commentaar">
 <!ENTITY sb.prop.content	"Inhoud">
@@ -10,11 +10,11 @@
 <!ENTITY sb.prop.id.date	"ID (Tijd)">
 <!ENTITY sb.prop.folder		"Map">
 
-<!ENTITY sb.prop.general	"Algemene Informatie">
+<!ENTITY sb.prop.general	"Algemene informatie">
 
-<!ENTITY sb.prop.icon.change	"Verander">
-<!ENTITY sb.prop.icon.default	"Default">
-<!ENTITY sb.prop.icon.favicon	"Select favicon">
-<!ENTITY sb.prop.icon.custom	"Select custom icon">
-<!ENTITY sb.prop.mark			"Mark">
+<!ENTITY sb.prop.icon.change	"Veranderen">
+<!ENTITY sb.prop.icon.default	"Standaard">
+<!ENTITY sb.prop.icon.favicon	"Voorkeurspictogram kiezen">
+<!ENTITY sb.prop.icon.custom	"Standaardpictogram kiezen">
+<!ENTITY sb.prop.mark			"Markeren">
 

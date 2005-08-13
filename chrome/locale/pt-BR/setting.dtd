@@ -1,0 +1,41 @@
+<!ENTITY sb.setting			"Configurações">
+<!ENTITY sb.setting.general	"Geral">
+<!ENTITY sb.setting.usetabs	"Usar Abas">
+<!ENTITY sb.setting.advance	"Avançado">
+<!ENTITY sb.setting.capture	"Capturar">
+<!ENTITY sb.setting.editing	"Editar">
+<!ENTITY sb.setting.program	"Programas">
+
+<!ENTITY sb.setting.browser.submenu		"Habilitar submenu dentro do menu de contexto do navegador (necessário reiniciar)">
+<!ENTITY sb.setting.capture.detail		"Mostrar diálogo 'Detalhe da Captura' quando capturar através de arrastar-e-soltar no Painel">
+<!ENTITY sb.setting.capture.notify		"Mostrar notificação 'Captura Completa' (funciona somente com Windows)">
+<!ENTITY sb.setting.tree.singleexpand		"Quando expandir uma pasta, recolher todas as outras (como nos Favoritos do IE)">
+<!ENTITY sb.setting.tree.quickdelete		"Não pedir confirmação para apagar">
+
+<!ENTITY sb.setting.view.header			"Mostrar barra de URL">
+<!ENTITY sb.setting.view.editor			"Mostrar Barra de Ferramentas de Edição">
+<!ENTITY sb.setting.view.editor.auto		"Automaticamente ao visualizar uma página capturada">
+<!ENTITY sb.setting.view.editor.manual		"Manualmente ao clicar no botão EDIT na barra de status">
+
+<!ENTITY sb.setting.usetabs.d			"Ações selecionadas usam novas abas.">
+<!ENTITY sb.setting.usetabs.note		"Abrir anotações em abas.">
+
+<!ENTITY sb.setting.capture.utf8encode		"Converter para a codificação UTF-8 (Recomendado)">
+<!ENTITY sb.setting.capture.utf8encode.d	"Se desabilitado, alguns caracteres podem mudar para '?'.">
+<!ENTITY sb.setting.capture.removescript	"Remover JavaScript (Recomendado)">
+<!ENTITY sb.setting.capture.removescript.d	"Se desabilitado, algumas vezes a aparência da página poderá ser prejudicada.">
+
+<!ENTITY sb.setting.edit.multilines			"Permitir comentários de várias linhas">
+<!ENTITY sb.setting.edit.confirmsave.1		"Intervalo de confirmação para salvar">
+<!ENTITY sb.setting.edit.confirmsave.2		"min. (0 = nunca confirmar)">
+
+<!ENTITY sb.setting.program.filer			"Programa para navegação de arquivos">
+<!ENTITY sb.setting.program.filer.default	"Padrão (No Windows, talvez Explorer.)">
+<!ENTITY sb.setting.browse					"Navegar">
+
+<!ENTITY sb.setting.data				"Local para Salvar Dados">
+<!ENTITY sb.setting.data.default		"Padrão (Na Pasta do seu Perfil)">
+
+<!ENTITY sb.setting.restorefavicons		"Restaurar favicons">
+<!ENTITY sb.setting.restorefavicons.d	"Se os favicons não estiverem sendo mostrados, aperte este botão:">
+

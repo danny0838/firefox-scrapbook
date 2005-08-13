@@ -1,14 +1,13 @@
 <!ENTITY sb.detail					"Captura detallada">
-<!ENTITY sb.detail.rootfolder		"Carpeta mare">
 <!ENTITY sb.detail.new.folder		"Nova carpeta">
-<!ENTITY sb.detail.select.folder	"Escolliu una carpeta">
+<!ENTITY sb.detail.select.folder	"Trieu una carpeta">
 
-<!ENTITY sb.detail.linked			"Captura incloent els fitxers enllaçats">
-<!ENTITY sb.detail.linked.image		"Imatge">
-<!ENTITY sb.detail.linked.sound		"So">
-<!ENTITY sb.detail.linked.movie		"Pel·lícula">
-<!ENTITY sb.detail.linked.archive	"Arxiu">
-<!ENTITY sb.detail.linked.custom	"Custom">
+<!ENTITY sb.detail.linked			"Baixa els enllaços">
+<!ENTITY sb.detail.linked.image		"Imatges">
+<!ENTITY sb.detail.linked.sound		"Sons">
+<!ENTITY sb.detail.linked.movie		"Pel·lícules">
+<!ENTITY sb.detail.linked.archive	"Arxius">
+<!ENTITY sb.detail.linked.custom	"Personalitzats">
 
 <!ENTITY sb.detail.linked.seq		"Captura seqüencialment totes les pàgines web enllaçades">
 <!ENTITY sb.detail.linked.seq.d		"(en una subcarpeta creada automàticament)">

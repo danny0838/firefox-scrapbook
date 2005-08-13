@@ -2,6 +2,7 @@
 <!ENTITY sn.close			"Fermer">
 <!ENTITY sn.tools			"Outils">
 <!ENTITY sn.preview			"Afficher HTML">
+<!ENTITY sn.preview.quit	"Quit Preview">
 <!ENTITY sn.template		"Éditer le modèle HTML">
 <!ENTITY sn.autolinefeed	"Remplissage automatique des lignes">
 <!ENTITY sn.autolinefeed.t	"Ajouter les balises &lt;br&gt; à  la fin  des lignes en mode HTML affiché">

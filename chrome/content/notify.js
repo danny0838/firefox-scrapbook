@@ -24,10 +24,18 @@ var gID;
 function SB_onNotifyLoad()
 {
 	sizeToContent();
-	gFinalHeight = window.outerHeight;
-	window.outerHeight = 0;
-	window.moveTo( (screen.availLeft + screen.availWidth - window.outerWidth) - 10, screen.availTop + screen.availHeight - window.outerHeight);
-	setTimeout(animateNotify, gSlideTime);
+	if ( screen.availWidth > 0 )
+	{
+		gFinalHeight = window.outerHeight;
+		window.outerHeight = 0;
+		window.moveTo( (screen.availLeft + screen.availWidth - window.outerWidth) - 10, screen.availTop + screen.availHeight - window.outerHeight);
+		setTimeout(animateNotify, gSlideTime);
+	}
+	else
+	{
+		window.moveTo(0,0);
+		setTimeout(function(){ window.close(); }, gOpenTime);
+	}
 }
 
 function animateNotify()

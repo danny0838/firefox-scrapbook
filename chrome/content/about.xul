@@ -14,7 +14,7 @@
 
 <!--dialog-->
 <dialog id="ScrapBookAboutDialog"
-        title="&sb.title; - &sb.tools.about;"
+        title="&sb.tools.about; - &sb.title;"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         buttons="accept"
         onload="SB_initAbout();">
@@ -59,23 +59,27 @@
 					</row>
 					<row>
 						<label value="Mori (fr-FR)" href="http://extensions.geckozone.org/ScrapBook/" class="link" onclick="SB_visit(this);" />
-						<label value="陈力 (zh-CN)" href="http://www.firefox-china.org/" class="link" onclick="SB_visit(this);" />
-					</row>
-					<row>
 						<label value="WowTIP (sv-SE)" href="wowtip@hotmail.com" class="link" onclick="SB_mailto(this);" />
+					</row>
+					<row>
 						<label value="Ville Pohjanheimo (fi-FI)" href="http://www.dabase.com/~ville/" class="link" onclick="SB_visit(this);" />
-					</row>
-					<row>
 						<label value="mlok (cs-CZ)" href="http://mlok.a4.cz/scrapbook/" class="link" onclick="SB_visit(this);" />
+					</row>
+					<row>
 						<label value="Yury Merkulov aka RED (ru-RU)" />
-					</row>
-					<row>
 						<label value="Eoin O'Cinneide (ga-IE)" href="eoinkennedy@hotmail.com" class="link" onclick="SB_mailto(this);" />
-						<label value="Michaël Van Dorpe (nl-NL)" />
 					</row>
 					<row>
+						<label value="Liesbeth (nl-NL)" />
 						<label value="Leszek(teo)Życzkowski (pl-PL)" href="http://mozillapl.org/katalogi_i_bazy/baza_dodatkow/rozszerzenia/oddzielne_moduly/scrapbook" class="link" onclick="SB_visit(this);" />
+					</row>
+					<row>
 						<label value="Joan Sala Soler (ca-AD)" href="joansala@gmail.com" class="link" onclick="SB_mailto(this);" />
+						<label value="Andre Luiz (pt-BR)" href="http://lidzky.dotgeek.org/pt_BR/" class="link" onclick="SB_visit(this);" />
+					</row>
+					<row>
+						<label value="陈力 (zh-CN)" href="http://www.firefox-china.org/" class="link" onclick="SB_visit(this);" />
+						<label value="George Cheng Tsoi (zh-CN)" />
 					</row>
 				</rows>
 			</grid>

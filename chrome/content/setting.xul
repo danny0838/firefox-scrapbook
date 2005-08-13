@@ -16,18 +16,18 @@
 
 <!--dialog-->
 <dialog id="ScrapBookSettingDialog"
-        title="&sb.title; - &sb.setting;"
+        title="&sb.setting; - &sb.title;"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         onload="SB_initSetting();"
         ondialogaccept="SB_acceptSetting();"
         persist="screenX screenY">
 
+	<!--JavaScript for Preference-->
+	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
 	<!--JavaScript-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/setting.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
-	<!--JavaScript for Preference-->
-	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
 
 	<!--StringBundle-->
 	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/setting.properties" />
@@ -39,8 +39,8 @@
 		<tabs id="ScrapBookSettingTabs" orient="horizontal">
 			<tab label="&sb.setting.general;" />
 			<tab label="&sb.setting.usetabs;" />
+			<!--tab label="&sb.setting.editing;" /-->
 			<tab label="&sb.setting.capture;" />
-			<tab label="&sb.setting.editing;" />
 			<tab label="&sb.setting.advance;" />
 		</tabs>
 		<tabpanels id="ScrapBookSettingTabpanels" flex="1">
@@ -48,12 +48,18 @@
 			<!--general-->
 			<tabpanel class="wide1">
 				<vbox flex="1">
-					<checkbox id="ScrapBookBrowserSubmenu"   prefstring="scrapbook.browser.submenu"   label="&sb.setting.browser.submenu;" />
 					<checkbox id="ScrapBookCaptureDetail"    prefstring="scrapbook.capture.detail"    label="&sb.setting.capture.detail;" />
 					<checkbox id="ScrapBookCaptureNotify"    prefstring="scrapbook.capture.notify"    label="&sb.setting.capture.notify;" />
-					<separator class="groove" />
 					<checkbox id="ScrapBookTreeSingleExpand" prefstring="scrapbook.tree.singleexpand" label="&sb.setting.tree.singleexpand;" />
 					<checkbox id="ScrapBookTreeQuickDelete"  prefstring="scrapbook.tree.quickdelete"  label="&sb.setting.tree.quickdelete;" />
+					<checkbox id="ScrapBookBrowserSubmenu"   prefstring="scrapbook.browser.submenu"   label="&sb.setting.browser.submenu;" />
+					<separator class="groove" />
+					<checkbox id="ScrapBookViewHeader" prefstring="scrapbook.view.header" label="&sb.setting.view.header;" />
+					<radiogroup>
+						<caption label="&sb.setting.view.editor;" style="margin:10px 0px;" />
+						<radio id="ScrapBookViewEditor0" label="&sb.setting.view.editor.auto;" />
+						<radio id="ScrapBookViewEditor1" label="&sb.setting.view.editor.manual;" />
+					</radiogroup>
 				</vbox>
 			</tabpanel>
 
@@ -71,6 +77,14 @@
 				</vbox>
 			</tabpanel>
 
+			<!--editing-->
+<!--
+			<tabpanel>
+				<vbox flex="1">
+				</vbox>
+			</tabpanel>
+-->
+
 			<!--capture-->
 			<tabpanel>
 				<vbox flex="1">
@@ -81,19 +95,6 @@
 				</vbox>
 			</tabpanel>
 
-			<!--editing-->
-			<tabpanel>
-				<vbox flex="1">
-					<checkbox id="ScrapBookEditShowHeader"  prefstring="scrapbook.edit.showheader" label="&sb.setting.edit.showheader;" />
-					<checkbox id="ScrapBookEditMultilines"  prefstring="scrapbook.edit.multilines" label="&sb.setting.edit.multilines;" />
-					<hbox align="center" style="margin-top:10px;">
-						<description flex="1">&sb.setting.edit.confirmsave.1;:</description>
-						<textbox id="ScrapBookEditConfirmSave" size="3" />
-						<description flex="1">&sb.setting.edit.confirmsave.2;</description>
-					</hbox>
-				</vbox>
-			</tabpanel>
-
 			<!--advance-->
 			<tabpanel>
 				<vbox flex="1">
@@ -101,15 +102,10 @@
 					<groupbox>
 						<caption label="&sb.setting.data;" />
 						<vbox>
-							<checkbox id="ScrapBookDataCheckbox" label="&sb.setting.data.default;" checked="true" oncommand="SB_toggleDefaultDestination();" />
+							<checkbox id="ScrapBookDataCheckbox" label="&sb.setting.data.default;" checked="true" oncommand="SB_toggleDefaultDestination();SBshouldRefresh = true;" />
 							<hbox align="center" class="indent">
 								<textbox id="ScrapBookDataTextbox" disabled="true" flex="1" onfocus="blur();" />
 								<button  id="ScrapBookDataButton"  disabled="true" label="&sb.setting.browse;..." oncommand="SB_selectDestination();" />
-							</hbox>
-							<spacer height="6" />
-							<hbox align="center" class="indent">
-								<description flex="1">&sb.setting.restorefavicons.d;</description>
-								<button label="&sb.setting.restorefavicons;" oncommand="SB_resolveIconURL(true);" />
 							</hbox>
 						</vbox>
 					</groupbox>

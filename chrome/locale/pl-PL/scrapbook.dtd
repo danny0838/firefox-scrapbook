@@ -1,14 +1,12 @@
 <!ENTITY sb.title			"ScrapBook">
 
-<!ENTITY sb.new.folder		"Nowy folder...">
+<!ENTITY sb.new.folder		"Nowy folder">
 <!ENTITY sb.new.note		"Nowa notatka">
 <!ENTITY sb.toggleallopen	"Rozwiń/Zwiń wszystkie foldery">
 
 <!ENTITY sb.tools			"Narzędzia">
-<!ENTITY sb.tools.setting	"Ustawienia...">
-<!ENTITY sb.tools.editing	"Pracuj w trybie edycji">
-<!ENTITY sb.tools.manage	"Zarządzaj drzewem folderów...">
-<!ENTITY sb.manage			"Zarządzanie">
+<!ENTITY sb.tools.setting	"Ustawienia">
+<!ENTITY sb.tools.manage	"Zarządzanie">
 <!ENTITY sb.tools.calculate	"Oblicz zajmowaną powierzchnię">
 <!ENTITY sb.tools.sorttree	"Sortuj całe drzewo">
 <!ENTITY sb.tools.directory	"Katalog główny ScrapBook">
@@ -16,6 +14,7 @@
 <!ENTITY sb.tools.trade		"Import / Eksport">
 <!ENTITY sb.tools.output	"Zapisz dane jako dokument HTML">
 <!ENTITY sb.tools.backup	"Twórz plik kopii zapasowej z kompresją">
+<!ENTITY sb.tools.repair	"Emergency Repair">
 <!ENTITY sb.tools.homepage	"Strona domowa">
 <!ENTITY sb.tools.about		"O rozszerzeniu">
 
@@ -26,15 +25,9 @@
 <!ENTITY sb.search.cs		"Uwzględnij wielkość liter">
 <!ENTITY sb.search.cache	"Szukanie wszystkich słów - uaktualnij pamięć podręczną">
 <!ENTITY sb.search.clear	"Wyczyść formularz historii">
+<!ENTITY sb.search.days		"Filtrowanie wg. dni">
 
-<!ENTITY sb.filter.days		"Filtrowanie wg. dni">
-<!ENTITY sb.filter.today	"Dzisiaj">
-<!ENTITY sb.filter.2days	"Ostatnie 2 dni">
-<!ENTITY sb.filter.3days	"Ostatnie 3 dni">
-<!ENTITY sb.filter.1week	"Ostatni tydzień">
-<!ENTITY sb.filter.2week	"Ostatnie 2 tygodnie">
-
-<!ENTITY sb.note.opentab	"Otwórz w panelu">
+<!ENTITY sb.note.opentab	"Otwórz w karcie">
 <!ENTITY sb.note.close		"Zamknij">
 
 <!ENTITY sb.move			"Przenieś do folderu"><!--NOWA-->

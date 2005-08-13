@@ -19,7 +19,7 @@
 
 <!--window-->
 <window id="ScrapBookManageWindow"
-        title="&sb.title; - &sb.manage;"
+        title="&sb.tools.manage; - &sb.title;"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         xmlns:SB="http://amb.vis.ne.jp/mozilla/scrapbook-rdf#"
         width="640" height="480" persist="width height screenX screenY"

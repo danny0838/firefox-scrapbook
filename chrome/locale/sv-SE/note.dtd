@@ -2,6 +2,7 @@
 <!ENTITY sn.close			"Stäng">
 <!ENTITY sn.tools			"Verktyg">
 <!ENTITY sn.preview			"Förhandsvisa som HTML">
+<!ENTITY sn.preview.quit	"Quit Preview">
 <!ENTITY sn.template		"Redigera HTML-Mall">
 <!ENTITY sn.autolinefeed	"Automatisk radmatning">
 <!ENTITY sn.autolinefeed.t	"Lägg till &lt;br&gt; -tag till radslutet vid föhandsgranskning i HTML">

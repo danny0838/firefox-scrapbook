@@ -10,15 +10,9 @@
 <!ENTITY sb.folder.openall	"以分頁開啟所有資料">
 <!ENTITY sb.folder.combine	"合併檢視所有資料">
 <!ENTITY sb.folder.manage	"管理資料夾...">
-<!ENTITY sb.manage			"管理">
 
 <!ENTITY sb.new.folder		"開新資料夾...">
 <!ENTITY sb.new.note		"新增筆記">
 
 <!ENTITY sb.sort.folder		"資料夾文件排序">
-<!ENTITY sb.sort.title.asc	"依標題 ( A - Z )">
-<!ENTITY sb.sort.title.desc	"依標題 ( Z - A )">
-<!ENTITY sb.sort.date.asc	"依日期 (舊 - 新)">
-<!ENTITY sb.sort.date.desc	"依日期 (新 - 舊)">
-<!ENTITY sb.sort.recursive	"包括子資料夾中的文件">
 

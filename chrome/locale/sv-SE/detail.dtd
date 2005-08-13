@@ -1,9 +1,8 @@
 <!ENTITY sb.detail					"Spara i Scrapbook">
-<!ENTITY sb.detail.rootfolder		"Toppnivå">
 <!ENTITY sb.detail.new.folder		"Ny Mapp">
 <!ENTITY sb.detail.select.folder	"Välj Mapp">
 
-<!ENTITY sb.detail.linked			"Spara i Scrapbook med länkade filer">
+<!ENTITY sb.detail.linked			"Download links">
 <!ENTITY sb.detail.linked.image		"Bilder">
 <!ENTITY sb.detail.linked.sound		"Ljud">
 <!ENTITY sb.detail.linked.movie		"Filmer">

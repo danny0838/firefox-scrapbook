@@ -11,7 +11,8 @@
         title="ScrapBook - &sb.capture;"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         style="width:300px;"
-        onload="SB_initCapture();">
+        onload="SB_initCapture();"
+        onunload="SB_finalizeCapture();">
 
 	<!--JavaScript-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
@@ -29,9 +30,10 @@
 	<listbox id="ScrapBookCaptureListbox" rows="1" flex="1" />
 
 	<hbox>
-		<button id="ScrapBookCaptureRetryButton" label="&sb.capture.retry;" oncommand="SBtask.toggleShowButtons(false);SBtask.start();" hidden="true" />
+		<button id="ScrapBookCaptureSkipButton"  label="&sb.capture.skip;"  oncommand="SBtask.skip(true);" />
+		<button id="ScrapBookCaptureRetryButton" label="&sb.capture.retry;" oncommand="SBtask.toggleRetryButton(false);SBtask.start();" hidden="true" />
 		<spacer flex="1" />
-		<button label="&sb.capture.abort;" oncommand="window.close();" />
+		<button label="&sb.capture.abort;" oncommand="SB_finalizeCapture();window.close();" />
 	</hbox>
 
 </window>

@@ -2,6 +2,7 @@
 <!ENTITY sn.close			"關閉">
 <!ENTITY sn.tools			"工具">
 <!ENTITY sn.preview			"HTML 預覽">
+<!ENTITY sn.preview.quit	"快速預覽">
 <!ENTITY sn.template		"編輯 HTML 樣版">
 <!ENTITY sn.autolinefeed	"自動斷行">
 <!ENTITY sn.autolinefeed.t	"在 HTML 預覽時，於每行最後自動添加 &lt;br&gt; 標籤。">

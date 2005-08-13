@@ -2,6 +2,7 @@
 <!ENTITY sn.close			"Tanca">
 <!ENTITY sn.tools			"Eines">
 <!ENTITY sn.preview			"Mostra com a HTML">
+<!ENTITY sn.preview.quit	"Tanca la visualització prèvia">
 <!ENTITY sn.template		"Edita la plantilla HTML">
 <!ENTITY sn.autolinefeed	"Salts de línia automàtics">
 <!ENTITY sn.autolinefeed.t	"Afegeix etiquetes &lt;br&gt; al final de cada línia">

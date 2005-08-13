@@ -60,7 +60,7 @@ function SB_acceptURL()
 	if ( !SB_ensureWindowOpener() ) return;
 	window.opener.openDialog(
 		"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
-		URLs, "", false, false, tarResName, 0
+		URLs, "", false, false, tarResName, 0, false
 	);
 }
 
@@ -81,7 +81,7 @@ function SB_ensureWindowOpener()
 
 
 //////////////////////////////////////////////////
-// functions for URL tools
+// functions for URL Detector
 //////////////////////////////////////////////////
 
 function SB_clearURL()

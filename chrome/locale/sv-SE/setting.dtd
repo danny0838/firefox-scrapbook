@@ -12,6 +12,11 @@
 <!ENTITY sb.setting.tree.singleexpand	"När en träd-mapp visas, göm alla andra mappar (som IE-Favoriter)">
 <!ENTITY sb.setting.tree.quickdelete	"Bekräfta ej vid radering">
 
+<!ENTITY sb.setting.view.header			"Show URL infobar">
+<!ENTITY sb.setting.view.editor			"Show Edit Toolbar">
+<!ENTITY sb.setting.view.editor.auto	"Automatically when viewing a captured page">
+<!ENTITY sb.setting.view.editor.manual	"Manually by hitting EDIT button in the status bar">
+
 <!ENTITY sb.setting.usetabs.d			"Förkryssade val använder nya flikar.">
 <!ENTITY sb.setting.usetabs.note		"Öppna noteringar i flikar">
 
@@ -20,7 +25,6 @@
 <!ENTITY sb.setting.capture.removescript	"Avlägsna JavaScript (Rekommenderas)">
 <!ENTITY sb.setting.capture.removescript.d	"Om ej vald, kommer sidans layout ibland förvanskas.">
 
-<!ENTITY sb.setting.edit.showheader		"Visa rubrik">
 <!ENTITY sb.setting.edit.multilines		"Aktivera kommentarer med flera rader.">
 <!ENTITY sb.setting.edit.confirmsave.1	"Intervall för sparningsbekräftelse">
 <!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 = bekräfta aldrig)">

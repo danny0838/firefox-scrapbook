@@ -10,15 +10,9 @@
 <!ENTITY sb.folder.openall	"Otevřít vše v tabech">
 <!ENTITY sb.folder.combine	"Open in Combined View">
 <!ENTITY sb.folder.manage	"Správce složky...">
-<!ENTITY sb.manage			"Manage">
 
 <!ENTITY sb.new.folder		"Nová složka...">
 <!ENTITY sb.new.note		"Nová poznámka">
 
 <!ENTITY sb.sort.folder		"Seřadit složku">
-<!ENTITY sb.sort.title.asc	"Seřadit podle Názvu (A &gt; Z)">
-<!ENTITY sb.sort.title.desc	"Seřadit podle Názvu (Z &gt; A)">
-<!ENTITY sb.sort.date.asc	"Chronologicky">
-<!ENTITY sb.sort.date.desc	"Chronologicky-Převrátit">
-<!ENTITY sb.sort.recursive	"Seřadit pod-adresáře rekurzivně">
 

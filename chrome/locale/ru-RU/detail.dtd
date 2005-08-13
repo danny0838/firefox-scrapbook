@@ -1,9 +1,8 @@
 <!ENTITY sb.detail					"Детали сохранения">
-<!ENTITY sb.detail.rootfolder		"Корневая папка">
 <!ENTITY sb.detail.new.folder		"Новая папка">
 <!ENTITY sb.detail.select.folder	"Выбрать папку">
 
-<!ENTITY sb.detail.linked			"Сохранять:">
+<!ENTITY sb.detail.linked			"Download links">
 <!ENTITY sb.detail.linked.image		"Изображения">
 <!ENTITY sb.detail.linked.sound		"Аудио">
 <!ENTITY sb.detail.linked.movie		"Фильмы">

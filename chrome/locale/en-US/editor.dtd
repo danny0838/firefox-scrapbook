@@ -1,0 +1,21 @@
+<!ENTITY sb.editor			"ScrapBook Edit Toolbar">
+<!ENTITY sb.editor.inline	"Add Inline Comment to the Selection">
+<!ENTITY sb.editor.block.insert		"Insert Block Comment after Selection">
+<!ENTITY sb.editor.block.customize	"Customize CSS for Block Comments">
+<!ENTITY sb.editor.block.hide		"Hide Block Comments">
+<!ENTITY sb.editor.marker	"Highlight the Selection">
+<!ENTITY sb.editor.unline	"Remove All Inline Comments">
+<!ENTITY sb.editor.unmark	"Remove All Highlights">
+<!ENTITY sb.editor.cutter	"Remove the Selection">
+<!ENTITY sb.editor.remove.iframe	"Remove All IFRAME Tags">
+<!ENTITY sb.editor.remove.script	"Remove All SCRIPT Tags">
+<!ENTITY sb.editor.eraser	"DOM Eraser: A Tool for Removing Clicked Element in the Web Page.">
+<!ENTITY sb.editor.undo		"Undo">
+<!ENTITY sb.editor.restore	"Abandon Changes and Restore">
+<!ENTITY sb.editor.save		"Save Changes">
+<!ENTITY sb.editor.find		"Find and Select from the Sidebar Tree">
+<!ENTITY sb.editor.comment	"Expand Comment Area">
+
+<!ENTITY sb.inline.enter	"Enter">
+<!ENTITY sb.inline.delete	"Delete">
+

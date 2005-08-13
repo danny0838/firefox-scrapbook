@@ -1,4 +1,4 @@
 <!ENTITY sb.capture			"Zachycení">
 <!ENTITY sb.capture.abort	"Zrušit">
 <!ENTITY sb.capture.retry	"Retry">
-
+<!ENTITY sb.capture.skip	"Skip">

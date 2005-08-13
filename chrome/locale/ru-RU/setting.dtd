@@ -12,6 +12,11 @@
 <!ENTITY sb.setting.tree.singleexpand	"При раскрытии папки дерева, остальные свернуть">
 <!ENTITY sb.setting.tree.quickdelete	"Не спрашивать подтверждения при удалении">
 
+<!ENTITY sb.setting.view.header			"Show URL infobar">
+<!ENTITY sb.setting.view.editor			"Show Edit Toolbar">
+<!ENTITY sb.setting.view.editor.auto	"Automatically when viewing a captured page">
+<!ENTITY sb.setting.view.editor.manual	"Manually by hitting EDIT button in the status bar">
+
 <!ENTITY sb.setting.usetabs.d			"Следующие действия выполнять в новых вкладках:">
 <!ENTITY sb.setting.usetabs.note		"Открыть заметки во вкладке">
 
@@ -20,7 +25,6 @@
 <!ENTITY sb.setting.capture.removescript	"Удалить JavaScript (рекомендуется)">
 <!ENTITY sb.setting.capture.removescript.d	"Если выключено, то иногда нарушается разметка страницы.">
 
-<!ENTITY sb.setting.edit.showheader		"Показать заголовок">
 <!ENTITY sb.setting.edit.multilines		"Включить многострочный комментарий">
 <!ENTITY sb.setting.edit.confirmsave.1	"Интервал для подтверждения сохранения">
 <!ENTITY sb.setting.edit.confirmsave.2	"мин.  (0 = никогда не подтверждать)">

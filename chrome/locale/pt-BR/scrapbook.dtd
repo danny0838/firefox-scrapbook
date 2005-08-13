@@ -1,0 +1,34 @@
+<!ENTITY sb.title		"ScrapBook">
+
+<!ENTITY sb.new.folder		"Nova Pasta...">
+<!ENTITY sb.new.note		"Nova Anotação">
+<!ENTITY sb.toggleallopen	"Expandir/Recolher todas as Pastas">
+
+<!ENTITY sb.tools			"Ferramentas">
+<!ENTITY sb.tools.setting	"Configurações...">
+<!ENTITY sb.tools.manage	"Gerenciar">
+<!ENTITY sb.tools.calculate	"Calcular Tamanho">
+<!ENTITY sb.tools.sorttree	"Ordenar Toda a Árvore">
+<!ENTITY sb.tools.directory	"Diretório do ScrapBook">
+<!ENTITY sb.tools.urls		"Capturar Múltiplas URLs">
+<!ENTITY sb.tools.trade		"Importar / Exportar">
+<!ENTITY sb.tools.output	"Exportar Árvore como HTML">
+<!ENTITY sb.tools.backup	"Backup com Compressão">
+<!ENTITY sb.tools.repair	"Emergency Repair">
+<!ENTITY sb.tools.homepage	"Home Page">
+<!ENTITY sb.tools.about		"Sobre">
+
+<!ENTITY sb.search		"Pesquisa">
+<!ENTITY sb.search.fulltext	"Pesquisa de Texto">
+<!ENTITY sb.search.all		"Tudo">
+<!ENTITY sb.search.re		"Usar RegExp">
+<!ENTITY sb.search.cs		"Coincidir Maíusc./Minúsc.">
+<!ENTITY sb.search.cache	"Atualizar Cache para a Pesquisa de Texto">
+<!ENTITY sb.search.clear	"Limpar Histórico do Formulário">
+<!ENTITY sb.search.days		"Filtrar por Dias">
+
+<!ENTITY sb.note.opentab	"Abrir na Aba">
+<!ENTITY sb.note.close		"Fechar">
+
+<!ENTITY sb.move		"Mover para a Pasta">
+

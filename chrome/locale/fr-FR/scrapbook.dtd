@@ -6,9 +6,7 @@
 
 <!ENTITY sb.tools			"Outils">
 <!ENTITY sb.tools.setting	"Paramètres...">
-<!ENTITY sb.tools.editing	"Toujours en mode édition">
-<!ENTITY sb.tools.manage	"Gérer l'arborescence...">
-<!ENTITY sb.manage			"Gestion">
+<!ENTITY sb.tools.manage	"Gestion">
 <!ENTITY sb.tools.calculate	"Calcul de la taille">
 <!ENTITY sb.tools.sorttree	"Classer l'arborescence entière">
 <!ENTITY sb.tools.directory	"Répertoire de ScrapBook">
@@ -16,6 +14,7 @@
 <!ENTITY sb.tools.trade		"Importer / Exporter">
 <!ENTITY sb.tools.output	"Arborescence comme HTML">
 <!ENTITY sb.tools.backup	"Sauvegarde par compression">
+<!ENTITY sb.tools.repair	"Emergency Repair">
 <!ENTITY sb.tools.homepage	"Page d'accueil">
 <!ENTITY sb.tools.about		"À propos">
 
@@ -26,13 +25,7 @@
 <!ENTITY sb.search.cs		"Cocher la case">
 <!ENTITY sb.search.cache	"Mettre à  jour le cache pour la recherche du texte entier">
 <!ENTITY sb.search.clear	"Nettoyer l'historique">
-
-<!ENTITY sb.filter.days		"Filtre par jour">
-<!ENTITY sb.filter.today	"Aujourd'hui">
-<!ENTITY sb.filter.2days	"Les 2 derniers jours">
-<!ENTITY sb.filter.3days	"Les 3 derniers jours">
-<!ENTITY sb.filter.1week	"Cette semaine">
-<!ENTITY sb.filter.2week	"Les 2 dernières semaines">
+<!ENTITY sb.search.days		"Filtre par jour">
 
 <!ENTITY sb.note.opentab	"Éditer dans un onglet">
 <!ENTITY sb.note.close		"Fermer">

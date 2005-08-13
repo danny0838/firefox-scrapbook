@@ -1,14 +1,13 @@
-<!ENTITY sb.detail			"Dettagli cattura ">
-<!ENTITY sb.detail.rootfolder		"Cartella principale">
+<!ENTITY sb.detail					"Dettagli cattura ">
 <!ENTITY sb.detail.new.folder		"Nuova cartella">
 <!ENTITY sb.detail.select.folder	"Seleziona cartella">
 
-<!ENTITY sb.detail.linked		"Cattura file inclusi nei link">
+<!ENTITY sb.detail.linked			"Scarica i link">
 <!ENTITY sb.detail.linked.image		"Immagini">
 <!ENTITY sb.detail.linked.sound		"Suoni">
 <!ENTITY sb.detail.linked.movie		"Filmati">
 <!ENTITY sb.detail.linked.archive	"Archivi">
-<!ENTITY sb.detail.linked.custom	"Custom">
+<!ENTITY sb.detail.linked.custom	"Personale">
 
 <!ENTITY sb.detail.linked.seq		"Cattura tutte le pagine web indicate in sequenza">
 <!ENTITY sb.detail.linked.seq.d		"(in una sottocartella creata automaticamente)">

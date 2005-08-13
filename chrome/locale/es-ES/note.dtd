@@ -2,6 +2,7 @@
 <!ENTITY sn.close			"Cerrar">
 <!ENTITY sn.tools			"Herramientas">
 <!ENTITY sn.preview			"Vista preeliminar HTML">
+<!ENTITY sn.preview.quit	"Quit Preview">
 <!ENTITY sn.template		"Editar plantilla HTML">
 <!ENTITY sn.autolinefeed	"Salto de linea automático..">
 <!ENTITY sn.autolinefeed.t	"Añadir etiqueta &lt;br&gt; al final de cada linea en la vista HTML preeliminar">

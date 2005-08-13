@@ -1,0 +1,21 @@
+<!ENTITY sb.editor			"ScrapBook Edit Toolbar">
+<!ENTITY sb.editor.inline	"Cuir L&#233;iri&#250; Inl&#237;ne isteach don Roghn&#250;">
+<!ENTITY sb.editor.block.insert		"Cuir Bloc L&#233;iri&#250; isteach tar eis an Roghn&#250;">
+<!ENTITY sb.editor.block.customize	"Saincheap CSS do Bhloic L&#233;irithe">
+<!ENTITY sb.editor.block.hide		"Folaigh Bloic L&#233;irithe">
+<!ENTITY sb.editor.marker	"Aibhsigh an Roghn&#250;">
+<!ENTITY sb.editor.unline	"Bain as gach L&#233;iri&#250; Inl&#237;ne">
+<!ENTITY sb.editor.unmark	"Bain as gach Aibhsi&#250;">
+<!ENTITY sb.editor.cutter	"Bain as an Roghn&#250;">
+<!ENTITY sb.editor.remove.iframe	"Remove All IFRAME Tags">
+<!ENTITY sb.editor.remove.script	"Remove All SCRIPT Tags">
+<!ENTITY sb.editor.eraser	"L&#233;irscrios&#225;n DOM: Uirlis chun Bloic Aibhsithe a bhaint as.">
+<!ENTITY sb.editor.undo		"Cealaigh">
+<!ENTITY sb.editor.restore	"Tr&#233;ig Aistri&#250;ch&#225;in agus Athch&#243;irigh">
+<!ENTITY sb.editor.save		"Sabh&#225;il Aistri&#250;ch&#225;in">
+<!ENTITY sb.editor.find		"Find and Select from the Sidebar Tree">
+<!ENTITY sb.editor.comment	"Fairsingigh Ceantar L&#233;irithe">
+
+<!ENTITY sb.inline.enter	"Iontr&#225;il">
+<!ENTITY sb.inline.delete	"Scrios">
+

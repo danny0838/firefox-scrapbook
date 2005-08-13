@@ -1,15 +1,14 @@
-<!ENTITY sb.detail					"资料获取细节">
-<!ENTITY sb.detail.rootfolder		"ScrapBook">
+<!ENTITY sb.detail					"详细信息">
 <!ENTITY sb.detail.new.folder		"新建文件夹">
-<!ENTITY sb.detail.select.folder	"Select Folder">
+<!ENTITY sb.detail.select.folder	"选择文件夹">
 
-<!ENTITY sb.detail.linked			"同时获取链接目标">
+<!ENTITY sb.detail.linked			"同时获取链接下的">
 <!ENTITY sb.detail.linked.image		"图像">
-<!ENTITY sb.detail.linked.sound		"声音">
-<!ENTITY sb.detail.linked.movie		"影片">
+<!ENTITY sb.detail.linked.sound		"音乐">
+<!ENTITY sb.detail.linked.movie		"视频">
 <!ENTITY sb.detail.linked.archive	"压缩文件">
-<!ENTITY sb.detail.linked.custom	"Custom">
+<!ENTITY sb.detail.linked.custom	"自定义">
 
-<!ENTITY sb.detail.linked.seq		"Capture all linked Web pages sequentially">
-<!ENTITY sb.detail.linked.seq.d		"(in a subfolder automatically created)">
+<!ENTITY sb.detail.linked.seq		"依次获取全部链接">
+<!ENTITY sb.detail.linked.seq.d		"（自动创建子文件夹保存文件）">
 

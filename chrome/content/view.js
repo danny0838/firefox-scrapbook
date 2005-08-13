@@ -23,8 +23,8 @@ function SB_initView()
 
 	SBRDF.init();
 
-	var ResURL = gID ? "urn:scrapbook:item" + gID : "urn:scrapbook:root";
-	gRes = SBservice.RDF.GetResource(ResURL);
+	var resURI = gID ? "urn:scrapbook:item" + gID : "urn:scrapbook:root";
+	gRes = SBservice.RDF.GetResource(resURI);
 	var type = SBRDF.getProperty("type", gRes);
 	if ( type != "folder" )
 	{
@@ -33,64 +33,64 @@ function SB_initView()
 	}
 
 
-	var htmlSrc = SB_getHTMLHead(SBRDF.getProperty("title", gRes));
+	var src = SB_getHTMLHead(SBRDF.getProperty("title", gRes));
 
 	SBservice.RDFC.Init(SBRDF.data, gRes);
-	var ResList = SBservice.RDFC.GetElements();
-	while ( ResList.hasMoreElements() )
+	var resEnum = SBservice.RDFC.GetElements();
+	while ( resEnum.hasMoreElements() )
 	{
-		var aRes = ResList.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-		var aID  = SBRDF.getProperty("id", aRes);
-		if ( SBservice.RDFCU.IsContainer(SBRDF.data, aRes) ) continue;
-		var aSBitem = new ScrapBookItem(aID);
-		aSBitem.title   = SBRDF.getProperty("title", aRes);
-		aSBitem.icon    = SBRDF.getProperty("icon", aRes);
-		aSBitem.source  = SBRDF.getProperty("source", aRes);
-		aSBitem.comment = SBRDF.getProperty("comment", aRes);
-		if ( !aSBitem.icon ) aSBitem.icon = SBcommon.getDefaultIcon(SBRDF.getProperty("type", aRes));
-		htmlSrc += SB_getHTMLBody(aSBitem);
+		var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+		if ( SBservice.RDFCU.IsContainer(SBRDF.data, res) ) continue;
+		var item = new ScrapBookItem();
+		for ( var prop in item )
+		{
+			item[prop] = SBRDF.getProperty(prop, res);
+		}
+		if ( !item.icon ) item.icon = SBcommon.getDefaultIcon(SBRDF.getProperty("type", res));
+		dumpObj(item);
+		src += SB_getHTMLBody(item);
 	}
 
-	htmlSrc += SB_getHTMLFoot();
+	src += SB_getHTMLFoot();
 
-	var htmlFile = SBcommon.getScrapBookDir().clone();
-	htmlFile.append("collection.html");
-	if ( !htmlFile.exists() ) htmlFile.create(htmlFile.NORMAL_FILE_TYPE, 0666);
-	SBcommon.writeFile(htmlFile, htmlSrc, "UTF-8");
-	var htmlFilePath = SBservice.IO.newFileURI(htmlFile).spec;
-	window.location.href = htmlFilePath;
+	var file = SBcommon.getScrapBookDir().clone();
+	file.append("collection.html");
+	if ( !file.exists() ) file.create(file.NORMAL_FILE_TYPE, 0666);
+	SBcommon.writeFile(file, src, "UTF-8");
+	var filePath = SBservice.IO.newFileURI(file).spec;
+	window.location.href = filePath;
 }
 
 
 function SB_getHTMLHead(aTitle)
 {
-	var HTML = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">\n\n'
-	         + '<html>\n\n'
-	         + '<head>\n'
-	         + '	<meta http-equiv="Content-Type" content="text/html;Charset=UTF-8">\n'
-	         + '	<meta http-equiv="Content-Style-Type" content="text/css">\n'
-	         + '	<title>' + aTitle + '</title>\n'
-	         + '	<link rel="stylesheet" type="text/css" href="chrome://scrapbook/skin/collection.css" media="screen,print">\n'
-	         + '</head>\n\n'
-	         + '<body>\n\n';
-	return HTML;
+	var src = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">\n\n'
+	        + '<html>\n\n'
+	        + '<head>\n'
+	        + '	<meta http-equiv="Content-Type" content="text/html;Charset=UTF-8">\n'
+	        + '	<meta http-equiv="Content-Style-Type" content="text/css">\n'
+	        + '	<title>' + aTitle + '</title>\n'
+	        + '	<link rel="stylesheet" type="text/css" href="chrome://scrapbook/skin/collection.css" media="screen,print">\n'
+	        + '</head>\n\n'
+	        + '<body>\n\n';
+	return src;
 }
 
 
 function SB_getHTMLBody(aSBitem)
 {
-	var aSource = ( aSBitem.source.length > 100 ) ? aSBitem.source.substring(0,100) + "..." : aSBitem.source;
-	var aFilePath = './data/' + aSBitem.id + '/index.html';
-	var HTML = '<cite>' + aSBitem.title + ' <a href="' + aSBitem.source + '" target="_top">' + aSource + '</a></cite>\n'
-		     + '<iframe src="' + aFilePath + '" onload="this.setAttribute(\'style\', \'height:\' + (this.contentDocument.height+30));"></iframe>\n';
-	return HTML;
+	var url = ( aSBitem.source.length > 100 ) ? aSBitem.source.substring(0,100) + "..." : aSBitem.source;
+	var filePath = './data/' + aSBitem.id + '/index.html';
+	var src = '<cite>' + aSBitem.title + ' <a href="' + aSBitem.source + '" target="_top">' + url + '</a></cite>\n'
+		    + '<iframe src="' + filePath + '" onload="this.setAttribute(\'style\', \'height:\' + (this.contentDocument.height+30));"></iframe>\n';
+	return src;
 }
 
 
 function SB_getHTMLFoot()
 {
-	var HTML = '</body>\n\n' + '</html>\n';
-	return HTML;
+	var src = '</body>\n\n' + '</html>\n';
+	return src;
 }
 
 

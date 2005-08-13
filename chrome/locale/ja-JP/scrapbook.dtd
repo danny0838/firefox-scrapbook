@@ -6,9 +6,7 @@
 
 <!ENTITY sb.tools			"ツール">
 <!ENTITY sb.tools.setting	"設定...">
-<!ENTITY sb.tools.editing	"常に編集モード">
-<!ENTITY sb.tools.manage	"ツリーの管理...">
-<!ENTITY sb.manage			"管理">
+<!ENTITY sb.tools.manage	"管理">
 <!ENTITY sb.tools.calculate	"データサイズ計算">
 <!ENTITY sb.tools.sorttree	"ツリー全体をソート">
 <!ENTITY sb.tools.directory	"ScrapBookフォルダ">
@@ -16,6 +14,7 @@
 <!ENTITY sb.tools.trade		"インポート/エクスポート">
 <!ENTITY sb.tools.output	"ツリーのHTML出力">
 <!ENTITY sb.tools.backup	"圧縮してバックアップ">
+<!ENTITY sb.tools.repair	"緊急時の修復ツール">
 <!ENTITY sb.tools.homepage	"ホームページ">
 <!ENTITY sb.tools.about		"バージョン情報">
 
@@ -26,13 +25,7 @@
 <!ENTITY sb.search.cs		"大文字/小文字の区別">
 <!ENTITY sb.search.cache	"全文検索用キャッシュを更新">
 <!ENTITY sb.search.clear	"入力履歴のクリア">
-
-<!ENTITY sb.filter.days		"日数でフィルタ">
-<!ENTITY sb.filter.today	"今日">
-<!ENTITY sb.filter.2days	"最近2日">
-<!ENTITY sb.filter.3days	"最近3日">
-<!ENTITY sb.filter.1week	"今週">
-<!ENTITY sb.filter.2week	"最近2週間">
+<!ENTITY sb.search.days		"日数でフィルタリング">
 
 <!ENTITY sb.note.opentab	"タブで開く">
 <!ENTITY sb.note.close		"閉じる">

@@ -1,7 +1,7 @@
 <!ENTITY sb.setting			"Settings">
 <!ENTITY sb.setting.general	"General">
 <!ENTITY sb.setting.usetabs	"Use Tabs">
-<!ENTITY sb.setting.advance	"Advance">
+<!ENTITY sb.setting.advance	"Advanced">
 <!ENTITY sb.setting.capture	"Capture">
 <!ENTITY sb.setting.editing	"Editing">
 <!ENTITY sb.setting.program	"Programs">
@@ -12,6 +12,11 @@
 <!ENTITY sb.setting.tree.singleexpand	"When expanding a tree folder, collapse all other folders (like IE Favorites)">
 <!ENTITY sb.setting.tree.quickdelete	"Don't confirm when deleting">
 
+<!ENTITY sb.setting.view.header			"Show URL infobar">
+<!ENTITY sb.setting.view.editor			"Show Edit Toolbar">
+<!ENTITY sb.setting.view.editor.auto	"Automatically when viewing a captured page">
+<!ENTITY sb.setting.view.editor.manual	"Manually by hitting EDIT button in the status bar">
+
 <!ENTITY sb.setting.usetabs.d			"Checked actions use new tabs.">
 <!ENTITY sb.setting.usetabs.note		"Open Notes in Tab">
 
@@ -20,7 +25,6 @@
 <!ENTITY sb.setting.capture.removescript	"Remove JavaScript (Recommend)">
 <!ENTITY sb.setting.capture.removescript.d	"If check off, sometimes fails to preserve the page layout.">
 
-<!ENTITY sb.setting.edit.showheader		"Show header">
 <!ENTITY sb.setting.edit.multilines		"Enable multiline comment">
 <!ENTITY sb.setting.edit.confirmsave.1	"Interval for confirming save">
 <!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 = never confirm)">

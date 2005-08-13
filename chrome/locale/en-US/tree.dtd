@@ -10,15 +10,9 @@
 <!ENTITY sb.folder.openall	"Open All in Tabs">
 <!ENTITY sb.folder.combine	"Open in Combined View">
 <!ENTITY sb.folder.manage	"Manage Folder...">
-<!ENTITY sb.manage			"Manage">
 
 <!ENTITY sb.new.folder		"New Folder...">
 <!ENTITY sb.new.note		"New Note">
 
 <!ENTITY sb.sort.folder		"Sort Folder">
-<!ENTITY sb.sort.title.asc	"Sort by Title (A &gt; Z)">
-<!ENTITY sb.sort.title.desc	"Sort by Title (Z &gt; A)">
-<!ENTITY sb.sort.date.asc	"Chronological">
-<!ENTITY sb.sort.date.desc	"Reverse Chronological">
-<!ENTITY sb.sort.recursive	"Sort Sub-folders Recursively">
 

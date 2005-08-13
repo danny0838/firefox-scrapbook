@@ -1,41 +1,34 @@
 <!ENTITY sb.title			"ScrapBook">
 
-<!ENTITY sb.new.folder		"Nieuwe Map...">
-<!ENTITY sb.new.note		"Nieuwe Notitie">
-<!ENTITY sb.toggleallopen	"Alle Mappen Uitvouwen/Toeklappen">
+<!ENTITY sb.new.folder		"Nieuwe map...">
+<!ENTITY sb.new.note		"Nieuwe notitie">
+<!ENTITY sb.toggleallopen	"Alle mappen uitvouwen/inklappen">
 
 <!ENTITY sb.tools			"Opties">
 <!ENTITY sb.tools.setting	"Instellingen">
-<!ENTITY sb.tools.editing	"Modus Bewerken Altijd Actief">
-<!ENTITY sb.tools.manage	"Mappenstructuur Beheren...">
-<!ENTITY sb.manage			"Manage">
-<!ENTITY sb.tools.calculate	"Meten van Bestandgrootte">
-<!ENTITY sb.tools.sorttree	"Sorteer Volledige Mappenstructuur">
-<!ENTITY sb.tools.directory	"ScrapBook Directory">
-<!ENTITY sb.tools.urls		"Capture Multiple URLs">
-<!ENTITY sb.tools.trade		"Import / Export">
-<!ENTITY sb.tools.output	"Mappenstructuur als HTML Exporteren">
-<!ENTITY sb.tools.backup	"Backup with Compression">
-<!ENTITY sb.tools.homepage	"Website">
+<!ENTITY sb.tools.manage	"Beheer">
+<!ENTITY sb.tools.calculate	"Bestandsgrootte berekenen">
+<!ENTITY sb.tools.sorttree	"Volledige mappenstructuur sorteren">
+<!ENTITY sb.tools.directory	"ScrapBookmap">
+<!ENTITY sb.tools.urls		"Meerdere URL's bewaren">
+<!ENTITY sb.tools.trade		"Importeren / Exporteren">
+<!ENTITY sb.tools.output	"Mappenstructuur als HTML exporteren">
+<!ENTITY sb.tools.backup	"Met compressie backuppen">
+<!ENTITY sb.tools.repair	"Emergency Repair">
+<!ENTITY sb.tools.homepage	"Homepage">
 <!ENTITY sb.tools.about		"Over...">
 
 <!ENTITY sb.search			"Zoeken">
-<!ENTITY sb.search.fulltext	"Volledige Tekst Doorzoeken">
+<!ENTITY sb.search.fulltext	"Volledige tekst doorzoeken">
 <!ENTITY sb.search.all		"Alles">
-<!ENTITY sb.search.re		"Gebruik RegExp">
-<!ENTITY sb.search.cs		"GROOT/klein">
-<!ENTITY sb.search.cache	"Buffer voor Doorzoeken Volledige Tekst Bijwerken">
-<!ENTITY sb.search.clear	"Wis Zoekgeschiedenis">
+<!ENTITY sb.search.re		"RegExp gebruiken">
+<!ENTITY sb.search.cs		"Indentieke hoofdletters/kleine letters">
+<!ENTITY sb.search.cache	"Buffer voor doorzoeken volledige tekst bijwerken">
+<!ENTITY sb.search.clear	"Formulierengeschiedenis wissen">
+<!ENTITY sb.search.days		"Op dagen filteren">
 
-<!ENTITY sb.filter.days		"Filter op Dagen">
-<!ENTITY sb.filter.today	"Vandaag">
-<!ENTITY sb.filter.2days	"Laatste 2 Dagen">
-<!ENTITY sb.filter.3days	"Laatste 3 Dagen">
-<!ENTITY sb.filter.1week	"Deze Week">
-<!ENTITY sb.filter.2week	"Voorbije 2 Weken">
-
-<!ENTITY sb.note.opentab	"Open in Tabblad">
+<!ENTITY sb.note.opentab	"In tabblad openen">
 <!ENTITY sb.note.close		"Sluiten">
 
-<!ENTITY sb.move			"Move into Folder">
+<!ENTITY sb.move			"Naar map verplaatsen">
 

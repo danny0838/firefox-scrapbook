@@ -25,7 +25,7 @@ function SB_initDetail()
 	try {
 		SBarguments = window.arguments[0];
 	} catch(ex) {
-		alert("ScrapBook ERROR: No Arguments.");
+		alert("ScrapBook ERROR: Not enough arguments.");
 	}
 	SBcustom = document.getElementById("ScrapBookDetailLinkedCustom");
 	SB_toggleLinkedCustom();
@@ -51,75 +51,88 @@ function SB_toggleLinkedCustom()
 }
 
 
-function SB_toggleLinkedExpanding()
-{
-	gLinkedExpanding = !gLinkedExpanding;
-	document.getElementById("ScrapBookDetailExpander").setAttribute("image", gLinkedExpanding ? "chrome://scrapbook/skin/expander_up.png" : "chrome://scrapbook/skin/expander_down.png");
-	document.getElementById("ScrapBookDetailLinkedGroupbox").setAttribute("orient", gLinkedExpanding ? "vertical" : "horizontal");
-	var flags = new Array("I","S","M","A");
-	for ( var i = 0; i < flags.length; i++ )
-	{
-		var checkbox = document.getElementById("ScrapBookDetailLinked" + flags[i]);
-		if ( gLinkedExpanding ) {
-			checkbox.label = checkbox.getAttribute("tooltiptext");
-			checkbox.setAttribute("tmpsrc", checkbox.getAttribute("src"));
-			checkbox.removeAttribute("src");
-		} else {
-			checkbox.setAttribute("tooltiptext", checkbox.label);
-			checkbox.removeAttribute("label");
-			checkbox.setAttribute("src", checkbox.getAttribute("tmpsrc"));
-		}
-	}
-	document.getElementById("ScrapBookDetailLinkedU").nextSibling.hidden = !gLinkedExpanding;
-	window.sizeToContent();
-}
-
-
 
 
 var SBfolderList = {
 
-	listXUL  : null,
-	popupXUL : null,
+	get MENU_LIST()  { return document.getElementById("ScrapBookDetailFolder"); },
+	get MENU_POPUP() { return document.getElementById("ScrapBookDetailFolderPopup"); },
+
 	depth : 0,
+	recent : [],
 
 	init : function()
 	{
-		this.listXUL  = document.getElementById("ScrapBookDetailFolder");
-		this.popupXUL = document.getElementById("ScrapBookDetailFolderPopup");
-		this.depth = 0;
-		this.fillRecursively("urn:scrapbook:root");
 		if ( !SBarguments.resName ) SBarguments.resName = "urn:scrapbook:root";
-		this.listXUL.selectedItem = document.getElementById(SBarguments.resName);
-		this.listXUL.disabled = false;
+		this.refresh(SBarguments.resName, true);
+	},
+
+	refresh : function(aResID, shouldUpdate)
+	{
+		if ( shouldUpdate )
+		{
+			this.depth = 0;
+			this.recent = [];
+			this.clear();
+			this.processRecent();
+			this.processRoot();
+			this.processRecursive("urn:scrapbook:root");
+		}
+		this.MENU_LIST.selectedItem = document.getElementById(aResID);
+		this.MENU_LIST.disabled = false;
 	},
 
 	clear : function()
 	{
-		var oldItems = this.popupXUL.childNodes;
-		for ( var i = oldItems.length - 1; i > 1 ; i-- )
+		var oldItems = this.MENU_POPUP.childNodes;
+		for ( var i = 0; i < oldItems.length; i++ )
 		{
-			this.popupXUL.removeChild(oldItems[i]);
+			this.MENU_POPUP.removeChild(oldItems[i]);
 		}
 	},
 
-	fillRecursively : function(aResName)
+	fill : function(aID, aTitle)
+	{
+		var item = document.createElement("menuitem");
+		item.setAttribute("id",    aID);
+		item.setAttribute("label", aTitle);
+		item.setAttribute("depth", this.depth);
+		item.setAttribute("class", "menuitem-iconic folder-icon");
+		item.setAttribute("style", "padding-left:" + (20 * this.depth + 3) + "px;");
+		this.MENU_POPUP.appendChild(item);
+	},
+
+	processRoot : function()
+	{
+		this.fill("urn:scrapbook:root", SBstring.getString("ROOT_FOLDER"));
+		this.MENU_POPUP.appendChild(document.createElement("menuseparator"));
+	},
+
+	processRecent : function()
+	{
+		var arr = nsPreferences.copyUnicharPref("scrapbook.detail.recentfolder", "").split("|");
+		for ( var i = 0; i < arr.length; i++ )
+		{
+			if ( arr[i].length != 14 ) continue;
+			var res = SBservice.RDF.GetResource("urn:scrapbook:item" + arr[i]);
+			if ( !SBRDF.exists(res) ) continue;
+			this.recent.push(arr[i]);
+			this.fill(res.Value, SBRDF.getProperty("title", res));
+		}
+		if ( this.recent.length > 0 ) this.MENU_POPUP.appendChild(document.createElement("menuseparator"));
+	},
+
+	processRecursive : function(aResName)
 	{
 		this.depth++;
 		SBservice.RDFC.Init(SBRDF.data, SBservice.RDF.GetResource(aResName));
-		var ResList = SBservice.RDFC.GetElements();
-		while ( ResList.hasMoreElements() )
+		var resEnum = SBservice.RDFC.GetElements();
+		while ( resEnum.hasMoreElements() )
 		{
-			var aRes = ResList.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			var aID  = SBRDF.getProperty("id", aRes);
-			if ( !SBservice.RDFCU.IsContainer(SBRDF.data, aRes) ) continue;
-			var SBmenuitem = document.createElementNS("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul", "menuitem");
-			SBmenuitem.setAttribute("id",    aRes.Value);
-			SBmenuitem.setAttribute("label", SBRDF.getProperty("title", aRes));
-			SBmenuitem.setAttribute("class", "menuitem-iconic folder-icon");
-			SBmenuitem.setAttribute("style", "padding-left:" + 20 * this.depth + "px;");
-			this.popupXUL.appendChild(SBmenuitem);
-			this.fillRecursively(aRes.Value);
+			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+			if ( !SBservice.RDFCU.IsContainer(SBRDF.data, res) ) continue;
+			this.fill(res.Value, SBRDF.getProperty("title", res));
+			this.processRecursive(res.Value);
 		}
 		this.depth--;
 	},
@@ -127,31 +140,36 @@ var SBfolderList = {
 	createFolder : function()
 	{
 		var newID = SBRDF.identify(SBcommon.getTimeStamp());
-		var newSBitem = new ScrapBookItem(newID);
-		newSBitem.title = SBstring.getString("DEFAULT_FOLDER");
-		newSBitem.type = "folder";
-		var tarResName = SBarguments.resName;
-		var newRes = SBRDF.addItem(newSBitem, tarResName, 0);
+		var newItem = new ScrapBookItem(newID);
+		newItem.title = SBstring.getString("DEFAULT_FOLDER");
+		newItem.type = "folder";
+		var tarResName = this.MENU_LIST.selectedItem.getAttribute("depth") > 0 ? this.MENU_LIST.selectedItem.id : "urn:scrapbook:root";
+		var newRes = SBRDF.addItem(newItem, tarResName, 0);
 		SBRDF.createEmptySeq(newRes.Value);
 		var result = {};
-		window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome", newSBitem.id, result);
-		if ( !result.accept ) {
+		window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome", newItem.id, result);
+		if ( !result.accept )
+		{
 			SBRDF.deleteItemDescending(newRes, SBservice.RDF.GetResource(tarResName));
 			SBRDF.flush();
-		} else {
-			this.reset(newRes.Value, true);
+		}
+		else
+		{
+			this.refresh(newRes.Value, true);
+			this.onselect(newRes.Value);
 		}
 	},
 
-	reset : function(aResID, shouldUpdate)
+	updateRecent : function()
 	{
-		if ( shouldUpdate )
+		if ( SBarguments.resName == "urn:scrapbook:root" ) return;
+		var newID = SBarguments.resName.substring(18,32);
+		var newArr = [newID];
+		for ( var i = 0; i < this.recent.length; i++ )
 		{
-			SBfolderList.clear();
-			SBfolderList.fillRecursively("urn:scrapbook:root");
+			if ( this.recent[i] != newID ) newArr.push(this.recent[i]);
 		}
-		this.listXUL.selectedItem = document.getElementById(aResID);
-		this.onselect(aResID);
+		nsPreferences.setUnicharPref("scrapbook.detail.recentfolder", newArr.slice(0,5).join("|"));
 	},
 
 	onselect : function(aResID)
@@ -166,7 +184,8 @@ var SBfolderList = {
 		window.openDialog('chrome://scrapbook/content/folderPicker.xul','','modal,chrome,centerscreen,resizable=yes',result);
 		if ( result.target )
 		{
-			this.reset(result.target.Value, result.shouldUpdate);
+			this.refresh(result.target.Value, result.shouldUpdate);
+			this.onselect(result.target.Value);
 		}
 	},
 
@@ -177,13 +196,27 @@ var SBfolderList = {
 
 function SB_fillTitleList()
 {
+	var selOnly = (SBarguments.titleList.length > 1);
+	try {
+		var clip  = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
+		var trans = Components.classes["@mozilla.org/widget/transferable;1"].createInstance(Components.interfaces.nsITransferable);
+		trans.addDataFlavor("text/unicode");
+		clip.getData(trans, clip.kGlobalClipboard);
+		var str = new Object();
+		var len = new Object();
+		trans.getTransferData("text/unicode", str, len);
+		if ( str ) str = str.value.QueryInterface(Components.interfaces.nsISupportsString).toString().replace(/\r|\n|\t/g, " ");
+		if ( str.length > 100 ) str = str.substring(0,100) + "...";
+		SBarguments.titleList.push(str);
+	} catch(ex) {
+	}
 	var listXUL = document.getElementById("ScrapBookDetailTitle");
 	for ( var i = 0; i < SBarguments.titleList.length; i++ )
 	{
 		listXUL.appendItem(SBarguments.titleList[i]);
-		if ( i == 0 && SBarguments.titleList.length > 1 ) listXUL.firstChild.appendChild(document.createElement("menuseparator"));
+		if ( (i == 0 || i == SBarguments.titleList.length - 2) && SBarguments.titleList.length > 1 ) listXUL.firstChild.appendChild(document.createElement("menuseparator"));
 	}
-	listXUL.selectedIndex = (SBarguments.titleList.length > 1) ? 2 : 0;
+	listXUL.selectedIndex = selOnly ? 2 : 0;
 }
 
 
@@ -195,13 +228,14 @@ function SB_acceptDetail()
 	window.opener.SBcapture.linked.snd   = document.getElementById("ScrapBookDetailLinkedS").checked;
 	window.opener.SBcapture.linked.mov   = document.getElementById("ScrapBookDetailLinkedM").checked;
 	window.opener.SBcapture.linked.arc   = document.getElementById("ScrapBookDetailLinkedA").checked;
-	window.opener.SBcapture.linked.seq   = document.getElementById("ScrapBookDetailLinkSeq").checked;
+	window.opener.SBcapture.linked.seq   = document.getElementById("ScrapBookDetailLinkedSeq").checked;
 	window.opener.SBcapture.linked.custom = "";
 	if ( SBcustom.checked )
 	{
 		window.opener.SBcapture.linked.custom = SBcustom.nextSibling.value.replace(/[^0-9a-zA-Z,\|]/g, "").replace(/[,\|]/g, ", ");
 		nsPreferences.setUnicharPref("scrapbook.detail.custom", window.opener.SBcapture.linked.custom);
 	}
+	SBfolderList.updateRecent();
 }
 
 

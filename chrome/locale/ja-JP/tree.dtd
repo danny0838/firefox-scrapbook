@@ -10,15 +10,9 @@
 <!ENTITY sb.folder.openall	"すべてタブで開く">
 <!ENTITY sb.folder.combine	"すべて結合して開く">
 <!ENTITY sb.folder.manage	"フォルダの管理...">
-<!ENTITY sb.manage			"管理">
 
 <!ENTITY sb.new.folder		"新しいフォルダ...">
 <!ENTITY sb.new.note		"新しいノート">
 
 <!ENTITY sb.sort.folder		"フォルダ内をソート">
-<!ENTITY sb.sort.title.asc	"タイトルでソート (A &gt; Z)">
-<!ENTITY sb.sort.title.desc	"タイトルでソート (Z &gt; A)">
-<!ENTITY sb.sort.date.asc	"日時でソート (古い順)">
-<!ENTITY sb.sort.date.desc	"日時でソート (新しい順)">
-<!ENTITY sb.sort.recursive	"サブフォルダ内も再帰的にソートする">
 

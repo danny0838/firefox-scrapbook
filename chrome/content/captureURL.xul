@@ -18,12 +18,14 @@
 
 <!--dialog-->
 <dialog id="ScrapBookCaptureURLDialog"
-        title="&sb.title; - &sb.tools.urls;"
+        title="&sb.tools.urls; - &sb.title;"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         style="width:400px;"
         onload="SB_initURL();"
         ondialogaccept="SB_acceptURL();">
 
+	<!--JavaScript for Preference-->
+	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
 	<!--JavaScript-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
@@ -44,10 +46,7 @@
 				<label value="&sb.prop.folder;:" />
 				<hbox>
 					<menulist id="ScrapBookDetailFolder" class="folder-icon" flex="1" disabled="true">
-						<menupopup id="ScrapBookDetailFolderPopup" oncommand="SBfolderList.onselect(event.target.id);">
-							<menuitem id="urn:scrapbook:root" label="&sb.detail.rootfolder;" class="menuitem-iconic folder-icon" />
-							<menuseparator />
-						</menupopup>
+						<menupopup id="ScrapBookDetailFolderPopup" oncommand="SBfolderList.onselect(event.target.id);" />
 					</menulist>
 					<toolbarbutton image="chrome://scrapbook/skin/tool_createfolder.png" tooltiptext="&sb.detail.new.folder;..."    oncommand="SBfolderList.createFolder();" />
 					<toolbarbutton image="chrome://scrapbook/skin/tool_selectfolder.png" tooltiptext="&sb.detail.select.folder;..." oncommand="SBfolderList.openFolderPicker();" />
@@ -57,7 +56,7 @@
 	</grid>
 
 	<!--URL-->
-	<description flex="1">&sb.url.description;:</description>
+	<description>&sb.url.description;:</description>
 	<toolbar class="plain">
 		<spacer flex="1" />
 		<toolbarbutton type="menu" label="&sb.url.tools;">

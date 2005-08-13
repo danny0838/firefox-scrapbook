@@ -8,5 +8,8 @@
 <!ENTITY sb.capture.target		"Capturar enlace">
 <!ENTITY sb.capture.target.as	"Capturar enlace como...">
 
-<!ENTITY sb.overlay.editing		"Cambiar a modo edición">
+<!ENTITY sb.key.sidebar		"K">
+<!ENTITY sb.key.editor		"J">
+<!ENTITY sb.key.capture		"L">
+<!ENTITY sb.key.capture.as	"K">
 

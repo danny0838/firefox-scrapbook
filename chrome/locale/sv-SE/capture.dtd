@@ -1,4 +1,4 @@
 <!ENTITY sb.capture			"Spara i Scrapbook">
 <!ENTITY sb.capture.abort	"Avbryt">
 <!ENTITY sb.capture.retry	"Försök igen">
-
+<!ENTITY sb.capture.skip	"Ignorera">

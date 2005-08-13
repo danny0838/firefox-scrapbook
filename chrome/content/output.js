@@ -118,7 +118,7 @@ var SBexport = {
 		var fileName = gFrameOption ? "frame.html" : "index.html";
 		if ( document.getElementById("ScrapBookOutputOptionO").checked )
 		{
-			SBcommon.loadURL(SBcommon.convertFilePathToURL(myDir.path) + fileName, SBcommon.getBoolPref("scrapbook.usetab.export", false));
+			SBcommon.loadURL(SBcommon.convertFilePathToURL(myDir.path) + fileName, SBcommon.getBoolPref("scrapbook.usetab.output", false));
 		}
 	},
 

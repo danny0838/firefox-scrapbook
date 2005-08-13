@@ -14,7 +14,7 @@
 <!--dialog-->
 <dialog id="ScrapBookBackupDialog"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        title="&sb.title; - &sb.tools.backup;"
+        title="&sb.tools.backup; - &sb.title;"
         style="width:420px;"
         onload="SB_initBackup();"
         ondialogaccept="SB_execBackup();">

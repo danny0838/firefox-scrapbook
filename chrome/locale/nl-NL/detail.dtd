@@ -1,15 +1,14 @@
-<!ENTITY sb.detail					"Bewaren: Detail">
-<!ENTITY sb.detail.rootfolder		"Hoofdmap">
+<!ENTITY sb.detail					"Geavanceerd bewaren">
 <!ENTITY sb.detail.new.folder		"Nieuwe Map">
-<!ENTITY sb.detail.select.folder	"Select Folder">
+<!ENTITY sb.detail.select.folder	"Map kiezen">
 
 <!ENTITY sb.detail.linked			"Bewaren, inclusief gelinkte bestanden">
 <!ENTITY sb.detail.linked.image		"Afbeelding">
 <!ENTITY sb.detail.linked.sound		"Geluid">
 <!ENTITY sb.detail.linked.movie		"Video">
-<!ENTITY sb.detail.linked.archive	"Archiefbestand">
-<!ENTITY sb.detail.linked.custom	"Custom">
+<!ENTITY sb.detail.linked.archive	"Archief">
+<!ENTITY sb.detail.linked.custom	"Standaard">
 
-<!ENTITY sb.detail.linked.seq		"Capture all linked Web pages sequentially">
-<!ENTITY sb.detail.linked.seq.d		"(in a subfolder automatically created)">
+<!ENTITY sb.detail.linked.seq		"Alle gelinkte internetpagina's opeenvolgend bewaren">
+<!ENTITY sb.detail.linked.seq.d		"(in een automatisch aangemaakte submap)">
 

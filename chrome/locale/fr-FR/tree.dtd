@@ -10,15 +10,9 @@
 <!ENTITY sb.folder.openall	"Tout ouvrir dans des onglets">
 <!ENTITY sb.folder.combine	"Ouvrir en vue fusionnée">
 <!ENTITY sb.folder.manage	"Gérer les dossiers...">
-<!ENTITY sb.manage			"Gérer">
 
 <!ENTITY sb.new.folder		"Nouveau dossier...">
 <!ENTITY sb.new.note		"Nouvelle note">
 
 <!ENTITY sb.sort.folder		"Classer le dossier">
-<!ENTITY sb.sort.title.asc	"Classer par titre (A &gt; Z)">
-<!ENTITY sb.sort.title.desc	"Classer par titre (Z &gt; A)">
-<!ENTITY sb.sort.date.asc	"Chronologique">
-<!ENTITY sb.sort.date.desc	"Chronologique inversé">
-<!ENTITY sb.sort.recursive	"Classer périodiquement les sous-dossiers">
 

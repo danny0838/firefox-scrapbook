@@ -6,9 +6,7 @@
 
 <!ENTITY sb.tools			"Nástroje">
 <!ENTITY sb.tools.setting	"Nastavení...">
-<!ENTITY sb.tools.editing	"Editační mód VŽDY">
-<!ENTITY sb.tools.manage	"Správce složek...">
-<!ENTITY sb.manage			"Manage">
+<!ENTITY sb.tools.manage	"Manage">
 <!ENTITY sb.tools.calculate	"Kalkulace velikosti">
 <!ENTITY sb.tools.sorttree	"Setřídit veškerý obsah">
 <!ENTITY sb.tools.directory	"ScrapBook Directory">
@@ -16,6 +14,7 @@
 <!ENTITY sb.tools.trade		"Import / Export">
 <!ENTITY sb.tools.output	"Output Tree as HTML">
 <!ENTITY sb.tools.backup	"Backup with Compression">
+<!ENTITY sb.tools.repair	"Emergency Repair">
 <!ENTITY sb.tools.homepage	"Domovská stránka">
 <!ENTITY sb.tools.about		"O rozšíření ScapBook">
 
@@ -26,13 +25,7 @@
 <!ENTITY sb.search.cs		"Match Case-Podle důležitosti">
 <!ENTITY sb.search.cache	"Aktualizovat cache pro FullText hledání">
 <!ENTITY sb.search.clear	"Vymazat historii formuláře">
-
-<!ENTITY sb.filter.days		"Filtr podle Dní">
-<!ENTITY sb.filter.today	"Dnes">
-<!ENTITY sb.filter.2days	"Poslední 2 dny">
-<!ENTITY sb.filter.3days	"Poslední 3 dny">
-<!ENTITY sb.filter.1week	"Tento týden">
-<!ENTITY sb.filter.2week	"Poslední 2 týdny">
+<!ENTITY sb.search.days		"Filtr podle Dní">
 
 <!ENTITY sb.note.opentab	"Otevřít v tabu">
 <!ENTITY sb.note.close		"Zavřít">

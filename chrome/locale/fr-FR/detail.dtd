@@ -1,9 +1,8 @@
 <!ENTITY sb.detail					"Détail de la saisie ">
-<!ENTITY sb.detail.rootfolder		"Dossier racine">
 <!ENTITY sb.detail.new.folder		"Nouveau dossier">
 <!ENTITY sb.detail.select.folder	"Sélectionner le dossier">
 
-<!ENTITY sb.detail.linked			"Saisie incluant les fichiers mis en lien">
+<!ENTITY sb.detail.linked			"Download links">
 <!ENTITY sb.detail.linked.image		"Image">
 <!ENTITY sb.detail.linked.sound		"Son">
 <!ENTITY sb.detail.linked.movie		"Vidéo">

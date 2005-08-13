@@ -1,9 +1,8 @@
 <!ENTITY sb.detail					"Capture Detail">
-<!ENTITY sb.detail.rootfolder		"Root Folder">
 <!ENTITY sb.detail.new.folder		"New Folder">
 <!ENTITY sb.detail.select.folder	"Select Folder">
 
-<!ENTITY sb.detail.linked			"Capture including linked files">
+<!ENTITY sb.detail.linked			"Download links">
 <!ENTITY sb.detail.linked.image		"Image">
 <!ENTITY sb.detail.linked.sound		"Sound">
 <!ENTITY sb.detail.linked.movie		"Movie">

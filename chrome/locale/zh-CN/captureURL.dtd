@@ -1,8 +1,8 @@
-<!ENTITY sb.url.description	"URL (Enter URLs line-by-line)">
+<!ENTITY sb.url.description	"URL (每行输入一个 URL)">
 
-<!ENTITY sb.url.tools		"URL Detector">
-<!ENTITY sb.url.tools.tabs	"All Open Tabs in the Window">
-<!ENTITY sb.url.tools.local	"All Local HTMLs under the Directory">
-<!ENTITY sb.url.tools.webox	"default.html for WeBoX">
-<!ENTITY sb.url.tools.clear	"Clear">
+<!ENTITY sb.url.tools		"自动检测 URL">
+<!ENTITY sb.url.tools.tabs	"当前所有打开的标签页">
+<!ENTITY sb.url.tools.local	"某文件夹内所有的本地 HTML 文件">
+<!ENTITY sb.url.tools.webox	"WeBox 的 default.html">
+<!ENTITY sb.url.tools.clear	"清除">
 

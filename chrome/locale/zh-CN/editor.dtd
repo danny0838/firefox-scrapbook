@@ -1,0 +1,21 @@
+<!ENTITY sb.editor			"ScrapBook 编辑工具栏">
+<!ENTITY sb.editor.inline	"为文件添加注释">
+<!ENTITY sb.editor.block.insert		"选定一区域在其后插入批注">
+<!ENTITY sb.editor.block.customize	"自定义批注的 CSS 样式">
+<!ENTITY sb.editor.block.hide		"隐藏批注">
+<!ENTITY sb.editor.marker	"高亮显示所选内容">
+<!ENTITY sb.editor.unline	"删除所有注释">
+<!ENTITY sb.editor.unmark	"取消所有高亮显示">
+<!ENTITY sb.editor.cutter	"删除所选内容">
+<!ENTITY sb.editor.remove.iframe	"删除所有 IFRAME 标签">
+<!ENTITY sb.editor.remove.script	"删除所有 SCRIPT 标签">
+<!ENTITY sb.editor.eraser	"DOM Eraser: 单击页面上的项目可以将该部分删除。">
+<!ENTITY sb.editor.undo		"撤销">
+<!ENTITY sb.editor.restore	"全部还原">
+<!ENTITY sb.editor.save		"保存">
+<!ENTITY sb.editor.find		"在文件列表中选中正编辑的文件">
+<!ENTITY sb.editor.comment	"展开注释栏">
+
+<!ENTITY sb.inline.enter	"确定">
+<!ENTITY sb.inline.delete	"删除">
+

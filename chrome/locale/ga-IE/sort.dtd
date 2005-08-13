@@ -1,0 +1,6 @@
+<!ENTITY sb.sort			"Sort">
+<!ENTITY sb.sort.title.asc	"S&#243;rt&#225;il f&#233; Teideal (A &gt; Z)">
+<!ENTITY sb.sort.title.desc	"S&#243;rt&#225;il f&#233; Teideal (Z &gt; A)">
+<!ENTITY sb.sort.date.asc	"Croineola&#237;och">
+<!ENTITY sb.sort.date.desc	"Croineola&#237;och Aisiompaithe">
+<!ENTITY sb.sort.recursive	"S&#243;rt&#225;il Athfhillteanach na Fothchomhadlainn">

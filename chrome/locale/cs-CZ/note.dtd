@@ -2,6 +2,7 @@
 <!ENTITY sn.close			"Zavřít">
 <!ENTITY sn.tools			"Nástroje">
 <!ENTITY sn.preview			"HTML náhled">
+<!ENTITY sn.preview.quit	"Quit Preview">
 <!ENTITY sn.template		"Upravit HTML šablonu">
 <!ENTITY sn.autolinefeed	"Auto-Linefeed">
 <!ENTITY sn.autolinefeed.t	"Přidat &lt;br&gt; tag na konec řádku v HTML náhledu">

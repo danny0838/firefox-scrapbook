@@ -86,7 +86,7 @@ var SBcapture = {
 		{
 			var ret = this.showDetailDialog(titleList, RESOURCE_NAME);
 			if ( ret.change ) { RESOURCE_NAME = ret.resName; RESOURCE_INDEX = 0; }
-			if ( ret.cancel ) { return; }
+			if ( ret.cancel ) { return null; }
 		}
 
 		this.contentDir = SBcommon.getContentDir(this.item.id);
@@ -117,21 +117,11 @@ var SBcapture = {
 			}
 			window.openDialog(
 				"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no",
-				this.linkURLs, this.refURLObj.spec, false, true, newRes.Value, 0
+				this.linkURLs, this.refURLObj.spec, false, true, newRes.Value, 0, this.item.id
 			);
 		}
 
-		return true;
-	},
-
-
-	doCaptureLinkedDocument : function(ROOT_WINDOW, FILE_KEY)
-	{
-		this.item.chars = ROOT_WINDOW.document.characterSet;
-		this.init();
-		this.getFrameList(ROOT_WINDOW);
-		this.saveDocument(ROOT_WINDOW.document, FILE_KEY);
-		return true;
+		return this.item.id;
 	},
 
 
@@ -149,13 +139,13 @@ var SBcapture = {
 		{
 			var ret = this.showDetailDialog([this.item.title], RESOURCE_NAME);
 			if ( ret.change ) { RESOURCE_NAME = ret.resName; RESOURCE_INDEX = 0; }
-			if ( ret.cancel ) { return; }
+			if ( ret.cancel ) { return null; }
 		}
 		this.contentDir = SBcommon.getContentDir(this.item.id);
 		this.refURLObj  = SBcommon.convertURLToObject(REFER_URL);
 		this.saveFile(TARGET_URL, "index", CAPTURE_TYPE);
 		this.addResource(RESOURCE_NAME, RESOURCE_INDEX);
-		return true;
+		return this.item.id;
 	},
 
 
@@ -516,8 +506,11 @@ var SBcapture = {
 
 		}
 
-		var newCSStext = this.inspectCSSText(aNode.style.cssText, this.refURLObj.spec);
-		if ( newCSStext ) aNode.setAttribute("style", newCSStext);
+		if ( aNode.style && aNode.style.cssText )
+		{
+			var newCSStext = this.inspectCSSText(aNode.style.cssText, this.refURLObj.spec);
+			if ( newCSStext ) aNode.setAttribute("style", newCSStext);
+		}
 
 		if ( SBcommon.getBoolPref("scrapbook.capture.removescript", true) )
 		{

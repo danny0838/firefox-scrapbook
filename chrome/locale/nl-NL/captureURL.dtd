@@ -1,8 +1,8 @@
-<!ENTITY sb.url.description	"URL (Enter URLs line-by-line)">
+<!ENTITY sb.url.description	"URL (URL's regel-voor-regel invoeren)">
 
-<!ENTITY sb.url.tools		"URL Detector">
-<!ENTITY sb.url.tools.tabs	"All Open Tabs in the Window">
-<!ENTITY sb.url.tools.local	"All Local HTMLs under the Directory">
-<!ENTITY sb.url.tools.webox	"default.html for WeBoX">
-<!ENTITY sb.url.tools.clear	"Clear">
+<!ENTITY sb.url.tools		"URL-zoeker">
+<!ENTITY sb.url.tools.tabs	"Alle geopende tabbladen in het scherm">
+<!ENTITY sb.url.tools.local	"Alle lokale HTML's in de map">
+<!ENTITY sb.url.tools.webox	"default.html voor WeBoX">
+<!ENTITY sb.url.tools.clear	"Wissen">
 

@@ -14,7 +14,7 @@
 
 <!ENTITY sb.prop.icon.change	"Canvia">
 <!ENTITY sb.prop.icon.default	"Per defecte">
-<!ENTITY sb.prop.icon.favicon	"Escolliu una icona de pàgina">
-<!ENTITY sb.prop.icon.custom	"Escolliu una icona personalitzada">
+<!ENTITY sb.prop.icon.favicon	"Trieu una icona de pàgina">
+<!ENTITY sb.prop.icon.custom	"Trieu una icona personalitzada">
 <!ENTITY sb.prop.mark			"Marca">
 

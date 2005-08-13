@@ -1,24 +1,18 @@
 <!ENTITY sb.open			"Otwórz">
-<!ENTITY sb.open.tab		"Otwórz w panelu">
-<!ENTITY sb.open.newtab		"Otwórz w nowym panelu">
+<!ENTITY sb.open.tab		"Otwórz w karcie">
+<!ENTITY sb.open.newtab		"Otwórz w nowej karcie">
 <!ENTITY sb.open.source		"Otwórz plik źródłowy URL">
 <!ENTITY sb.show.files		"Pokaż pliki">
 <!ENTITY sb.delete			"Usuń">
 <!ENTITY sb.property		"Właściwości folderu">
 
 <!ENTITY sb.folder.toggle	"Rozwiń/zwiń">
-<!ENTITY sb.folder.openall	"Otwórz wszystko w nowych panelach">
+<!ENTITY sb.folder.openall	"Otwórz wszystko w nowych kartach">
 <!ENTITY sb.folder.combine	"Otwórz w widoku kombinowanym">
 <!ENTITY sb.folder.manage	"Zarządzanie folderami...">
-<!ENTITY sb.manage			"Zarządzaj">
 
-<!ENTITY sb.new.folder		"Nowy folder...">
+<!ENTITY sb.new.folder		"Nowy folder">
 <!ENTITY sb.new.note		"Nowa notatka">
 
 <!ENTITY sb.sort.folder		"Sortuj folder">
-<!ENTITY sb.sort.title.asc	"Sortuj wg.tytułów (od A do Z)">
-<!ENTITY sb.sort.title.desc	"Sortuj wg.tytułów (od Z do A)">
-<!ENTITY sb.sort.date.asc	"Rosnąco">
-<!ENTITY sb.sort.date.desc	"Malejąco">
-<!ENTITY sb.sort.recursive	"Sortuj subfoldery z całą zawartością">
 

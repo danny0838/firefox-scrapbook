@@ -4,7 +4,12 @@
 <?xml-stylesheet href="chrome://scrapbook/skin/overlay.css" type="text/css" ?>
 
 <!--locale-->
-<!DOCTYPE overlay SYSTEM "chrome://scrapbook/locale/overlay.dtd">
+<!DOCTYPE overlay [
+<!ENTITY % overlayDTD SYSTEM "chrome://scrapbook/locale/overlay.dtd" >
+%overlayDTD;
+<!ENTITY % editorDTD   SYSTEM "chrome://scrapbook/locale/editor.dtd" >
+%editorDTD;
+]>
 
 <overlay id="scrapbooktasksOverlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
@@ -14,18 +19,26 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/overlay.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapcapture.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/editor.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/linemarker.js" />
 
-	<!--command for browser-->
+	<!--stringbundle-->
+	<stringbundleset id="stringbundleset">
+		<stringbundle id="ScrapBookEditString" src="chrome://scrapbook/locale/editor.properties" />
+	</stringbundleset>
+
+	<!--command-->
 	<commandset id="mainCommandSet">
-		<command id="cmd_ScrapBookCapturePartial"   oncommand="SBcommand_captureWindow(true,  true,  false);" />
-		<command id="cmd_ScrapBookCapturePartialAs" oncommand="setTimeout(function() { SBcommand_captureWindow(true,  true,  true ); }, 0);" />
-		<command id="cmd_ScrapBookCaptureEntire"    oncommand="SBcommand_captureWindow(false, false, false);" />
-		<command id="cmd_ScrapBookCaptureEntireAs"  oncommand="setTimeout(function() { SBcommand_captureWindow(false, false, true ); }, 0);" />
-		<command id="cmd_ScrapBookCaptureFrame"     oncommand="SBcommand_captureWindow(true,  false, false);" />
-		<command id="cmd_ScrapBookCaptureFrameAs"   oncommand="setTimeout(function() { SBcommand_captureWindow(true,  false, true ); }, 0);" />
+		<command id="cmd_ScrapBookCapturePartial"   oncommand="sbBrowserOverlay.captureWindow(true, true, false);" />
+		<command id="cmd_ScrapBookCapturePartialAs" oncommand="sbBrowserOverlay.captureWindow(true, true, true );" />
+		<command id="cmd_ScrapBookCaptureEntire"    oncommand="sbBrowserOverlay.captureWindow(false,false,false);" />
+		<command id="cmd_ScrapBookCaptureEntireAs"  oncommand="sbBrowserOverlay.captureWindow(false,false,true );" />
+		<command id="cmd_ScrapBookCaptureFrame"     oncommand="sbBrowserOverlay.captureWindow(true, false,false);" />
+		<command id="cmd_ScrapBookCaptureFrameAs"   oncommand="sbBrowserOverlay.captureWindow(true, false,true );" />
+		<command id="cmd_ScrapBookToggleEditor"     oncommand="sbBrowserOverlay.toggleEditor();" />
 	</commandset>
 
-	<!--broadcast-->
+	<!--broadcaster-->
 	<broadcasterset id="mainBroadcasterSet">
 		<broadcaster id="viewScrapBookSidebar"
 		             autoCheck="false"
@@ -36,13 +49,18 @@
 		             oncommand="toggleSidebar('viewScrapBookSidebar');" />
 	</broadcasterset>
 
-	<!--keyset-->
+	<!--key-->
 	<keyset id="mainKeyset">
-		<key id="key_openScrapBookSidebar"     command="viewScrapBookSidebar"         key="K" modifiers="alt" />
-		<key id="key_ScrapBookCaptureEntire"   command="cmd_ScrapBookCaptureEntire"   key="L" modifiers="accel shift" />
-		<key id="key_ScrapBookCaptureEntireAs" command="cmd_ScrapBookCaptureEntireAs" key="K" modifiers="accel shift" />
-		<key id="key_ScrapBookEditingMode"     oncommand="SB_enterEditingMode();"     key="J" modifiers="alt" />
+		<key id="key_openScrapBookSidebar"     command="viewScrapBookSidebar"         key="&sb.key.sidebar;"    modifiers="alt" />
+		<key id="key_toggleScrapBookEditor"    command="cmd_ScrapBookToggleEditor"    key="&sb.key.editor;"     modifiers="alt" />
+		<key id="key_ScrapBookCaptureEntire"   command="cmd_ScrapBookCaptureEntire"   key="&sb.key.capture;"    modifiers="accel shift" />
+		<key id="key_ScrapBookCaptureEntireAs" command="cmd_ScrapBookCaptureEntireAs" key="&sb.key.capture.as;" modifiers="accel shift" />
 	</keyset>
+
+	<!--popup-->
+	<popupset id="mainPopupSet">
+		<tooltip id="ScrapBookEditTooltip" />
+	</popupset>
 
 	<!--sidebar-->
 	<menupopup id="viewSidebarMenu">
@@ -60,14 +78,6 @@
 		<menuitem key="key_openScrapBookSidebar" observes="viewScrapBookSidebar" position="1" />
 	</menupopup>
 
-	<!--toolbar-->
-	<toolbarpalette id="BrowserToolbarPalette">
-		<toolbarbutton id="scrapbook-button"
-		               tooltiptext="&sb.title;"
-		               observes="viewScrapBookSidebar"
-		               class="toolbarbutton-1" />
-	</toolbarpalette>
-
 	<!--context menu-->
 	<popup id="contentAreaContextMenu">
 		<menuseparator />
@@ -77,21 +87,72 @@
 		<menuitem id="ScrapBookContextMenu4" class="menuitem-iconic" label="&sb.capture.entire.as;"  command="cmd_ScrapBookCaptureEntireAs" />
 		<menuitem id="ScrapBookContextMenu5" class="menuitem-iconic" label="&sb.capture.frame;"      command="cmd_ScrapBookCaptureFrame" />
 		<menuitem id="ScrapBookContextMenu6" class="menuitem-iconic" label="&sb.capture.frame.as;"   command="cmd_ScrapBookCaptureFrameAs" />
-		<menuitem id="ScrapBookContextMenu7" class="menuitem-iconic" label="&sb.capture.target;"     oncommand="SBcommand_captureTarget(false);" />
-		<menuitem id="ScrapBookContextMenu8" class="menuitem-iconic" label="&sb.capture.target.as;"  oncommand="SBcommand_captureTarget(true);" />
+		<menuitem id="ScrapBookContextMenu7" class="menuitem-iconic" label="&sb.capture.target;"     oncommand="sbBrowserOverlay.captureTarget(false);" />
+		<menuitem id="ScrapBookContextMenu8" class="menuitem-iconic" label="&sb.capture.target.as;"  oncommand="sbBrowserOverlay.captureTarget(true);" />
 		<menu id="ScrapBookContextSubmenu" label="&sb.title;" hidden="true">
 			<menupopup />
 		</menu>
 	</popup>
 
-	<!--status bar-->
+	<!--toolbar-->
+	<toolbarpalette id="BrowserToolbarPalette">
+		<toolbarbutton id="scrapbook-button"
+		               tooltiptext="&sb.title;"
+		               observes="viewScrapBookSidebar"
+		               class="toolbarbutton-1" />
+	</toolbarpalette>
+
+	<!--editor-->
+	<vbox id="appcontent">
+		<vbox id="ScrapBookEditorBox">
+			<toolbar id="ScrapBookEditor" align="center" insertbefore="status-bar" style="border-top:1px solid ThreeDShadow;padding:1px;">
+			    <image id="ScrapBookEditIcon" onclick="this.nextSibling.select();" style="width:16px;height:16px;margin-left:3px;" />
+				<textbox id="ScrapBookEditTitle"   ondblclick="this.select();" oninput="sbEditor.changed2 = true;" onkeypress="if ( event.keyCode == 13 ) sbEditor.save2();" flex="1" style="padding:2px;max-width:220px;" />
+				<toolbarbutton image="chrome://scrapbook/skin/edit_comment.png" tooltiptext="&sb.editor.comment;" oncommand="sbEditor.toggleComment();" />
+				<textbox id="ScrapBookEditComment" ondblclick="this.select();" oninput="sbEditor.changed2 = true;" onkeypress="if ( event.keyCode == 13 ) if ( !sbEditor.multiline ) sbEditor.save2();" flex="3" style="padding:2px;" />
+				<spacer id="ScrapBookEditSpacer" flex="0" />
+				<toolbarbutton id="ScrapBookEditMarker" type="menu-button" persist="color" image="chrome://scrapbook/skin/edit_marker.png" tooltiptext="&sb.editor.marker;" oncommand="if ( event.originalTarget.localName == 'toolbarbutton' ) sbEditor.marker();" accesskey="Q">
+					<menupopup>
+						<menuitem label="Transparent" oncommand="sbEditor.markerTrans();" />
+						<menuitem id="ScrapBookEditMarker1" type="radio" label="Pink"   style="background-color:#FFB6C1;" oncommand="sbEditor.marker(this.style.backgroundColor, 1);" />
+						<menuitem id="ScrapBookEditMarker2" type="radio" label="Blue"   style="background-color:#ADD8E6;" oncommand="sbEditor.marker(this.style.backgroundColor, 2);" />
+						<menuitem id="ScrapBookEditMarker3" type="radio" label="Green"  style="background-color:#90EE90;" oncommand="sbEditor.marker(this.style.backgroundColor, 3);" />
+						<menuitem id="ScrapBookEditMarker4" type="radio" label="Yellow" style="background-color:#FFFF00;" oncommand="sbEditor.marker(this.style.backgroundColor, 4);" />
+					</menupopup>
+				</toolbarbutton>
+				<toolbarbutton id="ScrapBookEditCutter" type="menu-button" image="chrome://scrapbook/skin/edit_cutter.png" tooltiptext="&sb.editor.cutter;" oncommand="if ( event.originalTarget.localName == 'toolbarbutton' ) sbEditor.cutter();">
+					<menupopup>
+						<menuitem label="&sb.editor.remove.script;" oncommand="sbEditor.removeElementsByTagName('script');" />
+						<menuitem label="&sb.editor.remove.iframe;" oncommand="sbEditor.removeElementsByTagName('iframe');" />
+						<menuseparator />
+						<menuitem label="&sb.editor.unmark;" oncommand="sbEditor.removeAllSpan('linemarker-marked-line');" />
+						<menuitem label="&sb.editor.cutter;" oncommand="sbEditor.cutter();" />
+					</menupopup>
+				</toolbarbutton>
+				<toolbarbutton id="ScrapBookEditBlock" type="menu-button" tooltiptext="&sb.editor.block.insert;" image="chrome://scrapbook/skin/edit_inline.png" oncommand="if ( event.originalTarget.localName == 'toolbarbutton' ) sbBlockComment.add();">
+					<menupopup>
+						<menuitem label="&sb.editor.block.customize;" oncommand="sbBlockComment.customize();" />
+						<menuitem label="&sb.editor.block.hide;"      oncommand="sbBlockComment.toggle(this.getAttribute('checked'));" type="checkbox" />
+						<menuitem label="&sb.editor.block.insert;"    oncommand="sbBlockComment.add();" />
+					</menupopup>
+				</toolbarbutton>
+				<toolbarbutton id="ScrapBookEditEraser"  tooltiptext="&sb.editor.eraser;"   image="chrome://scrapbook/skin/edit_eraser.png" oncommand="sbDOMEraser.toggle(!this.getAttribute('checked'));" type="checkbox" />
+				<toolbarbutton id="ScrapBookEditUndo"    label="&sb.editor.undo;"           image="chrome://scrapbook/skin/edit_undo.png"   oncommand="sbDOMEraser.undo();" accesskey="Z" hidden="true" />
+				<toolbarbutton id="ScrapBookEditRestore" tooltiptext="&sb.editor.restore;"  image="chrome://scrapbook/skin/edit_undo.png"   oncommand="sbEditor.restore();" />
+				<toolbarbutton id="ScrapBookEditSave"    tooltiptext="&sb.editor.save;"     image="chrome://scrapbook/skin/edit_save.png"   oncommand="sbEditor.save1();sbEditor.save2();" accesskey="S" />
+				<toolbarbutton image="chrome://scrapbook/skin/expander_left.png" tooltiptext="&sb.editor.find;" oncommand="sbEditor.findAndSelect();" />
+				<!--<toolbarbutton image="chrome://scrapbook/skin/exit.png" oncommand="sbEditor.exit();" />-->
+			</toolbar>
+		</vbox>
+	</vbox>
+
+	<!--statusbar-->
 	<statusbar id="status-bar">
 		<statusbarpanel id="ScrapBookStatusPanel"
 		                class="statusbarpanel-iconic"
-		                tooltiptext="&sb.title; &sb.overlay.editing;"
+		                tooltiptext="&sb.editor;"
 		                hidden="true"
-		                onclick="SB_enterEditingMode();"
-		                insertafter="adblock-status,statusbar-updates,statusbarpanel-progress,security-button,privacy-button,offline-status,popupIcon,statusbar-display,component-bar"
+		                command="cmd_ScrapBookToggleEditor"
 		                style="padding:0px 2px;" />
 	</statusbar>
 

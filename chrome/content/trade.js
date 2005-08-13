@@ -20,6 +20,7 @@ var SBprogress;
 
 var SBtradeDir;
 
+var STdragObserver = {};
 var STdropObserver = {};
 
 
@@ -46,6 +47,8 @@ function SB_initTrade()
 	SBstring   = document.getElementById("ScrapBookString");
 	STstring   = document.getElementById("ScrapBookTradeString");
 	SBprogress = document.getElementById("ScrapBookTradeProgress");
+	SBbaseURL = SBservice.IO.newFileURI(SBcommon.getScrapBookDir()).spec;
+	SB_disablePopupMenus();
 	SBRDF.init();
 	SBtreeUtil.init("ScrapBookTree", false);
 	SB_initObservers();
@@ -109,7 +112,7 @@ function SB_initTrade()
 var SBexport = {
 
 	resList : [],
-	number  : 0,
+	count  : 0,
 
 	exec : function()
 	{
@@ -126,9 +129,9 @@ var SBexport = {
 		if ( this.resList.length < 1 ) return;
 		SB_trace(STstring.getString("EXPORT"));
 		SBprogress.hidden = false;
-		for ( this.number = 0; this.number < this.resList.length; this.number++ )
+		for ( this.count = 0; this.count < this.resList.length; this.count++ )
 		{
-			this.copyFromDataDir(this.resList[this.number]);
+			this.copyFromDataDir(this.resList[this.count]);
 		}
 		SB_trace(STstring.getString("EXPORT_COMPLETE"));
 		SBprogress.hidden = true;
@@ -144,16 +147,26 @@ var SBexport = {
 		}
 		SBitem.icon = SBitem.icon.match(/\d{14}\/([^\/]+)$/) ? RegExp.$1 : "";
 		SBcommon.writeIndexDat(SBitem);
-		var progRate = " (" + (this.number + 1) + "/" + this.resList.length + ") ";
+		var progRate = " (" + (this.count + 1) + "/" + this.resList.length + ") ";
+		var num = 0;
+		var destDir = SBtradeDir.clone();
+		destDir.append(SBcommon.validateFileName(SBitem.title));
+		while ( destDir.exists() && num < 256 )
+		{
+			destDir = SBtradeDir.clone();
+			destDir.append(SBcommon.validateFileName(SBitem.title) + "-" + ++num)
+		}
 		try {
-			var myContDir = SBcommon.getContentDir(SBitem.id).clone();
-			myContDir.copyTo(SBtradeDir, SBitem.id);
-		} catch(ex) {
-			SB_trace(STstring.getString("EXPORT_FAILURE") + progRate + SBitem.title + STstring.getString("SAME_ID"), "R");
+			num = num ? ("-" + num) : "";
+			var srcDir = SBcommon.getContentDir(SBitem.id).clone();
+			srcDir.copyTo(SBtradeDir, SBcommon.validateFileName(SBitem.title) + num);
+		}
+		catch(ex) {
+			SB_trace(STstring.getString("EXPORT_FAILURE") + progRate + SBitem.title, "R");
 			return;
 		}
 		SB_trace(STstring.getString("EXPORT_SUCCESS") + progRate + SBitem.title, "B");
-		SBprogress.value = Math.round( this.number / this.resList.length * 100);
+		SBprogress.value = Math.round( this.count / this.resList.length * 100);
 	},
 
 	getChildResourcesRecursively : function(aContRes)
@@ -179,7 +192,7 @@ var SBexport = {
 var SBimport = {
 
 	selItems : [],
-	number   : 0,
+	count   : 0,
 
 	exec : function(aRow, aOrient)
 	{
@@ -191,56 +204,57 @@ var SBimport = {
 		this.selItems = SBlist.selectedItems;
 		if ( SBdropUtil.orient == SBdropUtil.DROP_ON )
 		{
-			for ( this.number = 0; this.number < this.selItems.length; this.number++ )
+			for ( this.count = 0; this.count < this.selItems.length; this.count++ )
 			{
-				this.copyToDataDir(this.selItems[this.number].id, contResArray);
+				this.copyToDataDir(this.selItems[this.count], contResArray);
 			}
 		}
 		else
 		{
-			for ( this.number = this.selItems.length - 1; this.number >= 0; this.number-- )
+			for ( this.count = this.selItems.length - 1; this.count >= 0; this.count-- )
 			{
-				this.copyToDataDir(this.selItems[this.number].id, contResArray);
+				this.copyToDataDir(this.selItems[this.count], contResArray);
 			}
 		}
 		SB_trace(STstring.getString("IMPORT_COMPLETE"));
 		SBprogress.hidden = true;
 	},
 
-	copyToDataDir : function(aID, contResArray)
+	copyToDataDir : function(aListItem, contResArray)
 	{
-		var myContDir = SBtradeDir.clone();
-		myContDir.append(aID);
-		var myDATFile = myContDir.clone();
-		myDATFile.append("index.dat");
-		if ( !myDATFile.exists() )
+		var srcDir = SBtradeDir.clone();
+		srcDir.append(aListItem.getAttribute("dirName"));
+		var datFile = srcDir.clone();
+		datFile.append("index.dat");
+		if ( !datFile.exists() )
 		{
 			alert("ScrapBook ERROR: cannot find 'index.dat'.");
 			return;
 		}
-		var myDAT = SBcommon.readFile(myDATFile, myDAT, "UTF-8");
-		var SBitem = SB_parseIndexDat(myDAT);
-		if ( !SBitem["id"] || SBitem["id"].length != 14 ) return;
-		var dataDir = SBcommon.getScrapBookDir().clone();
-		dataDir.append("data");
+		var dat = SBcommon.readFile(datFile);
+		var SBitem = SB_parseIndexDat(dat);
+		if ( !SBitem.id || SBitem.id.length != 14 ) return;
+		var destDir = SBcommon.getScrapBookDir().clone();
+		destDir.append("data");
 		if  ( SBitem.icon ) {
-			SBitem.icon = SBcommon.convertFilePathToURL(dataDir.path) + SBitem.id + "/" + SBitem.icon;
+			SBitem.icon = SBcommon.convertFilePathToURL(destDir.path) + SBitem.id + "/" + SBitem.icon;
 		} else {
 			SBitem.icon = SBcommon.getDefaultIcon(SBitem.type);
 		}
 		SBitem.title   = SBcommon.convertStringToUTF8(SBitem.title);
 		SBitem.comment = SBcommon.convertStringToUTF8(SBitem.comment);
-		var progNum = SBdropUtil.orient == SBdropUtil.DROP_ON ? this.number + 1 : this.selItems.length - this.number;
-		var progRate = " (" + progNum + "/" + this.selItems.length + ") ";
+		var num  = SBdropUtil.orient == SBdropUtil.DROP_ON ? this.count + 1 : this.selItems.length - this.count;
+		var rate = " (" + num + "/" + this.selItems.length + ") ";
 		try {
-			myContDir.copyTo(dataDir, SBitem.id);
-		} catch(ex) {
-			SB_trace(STstring.getString("IMPORT_FAILURE") + progRate + SBitem.title + STstring.getString("SAME_ID"), "R");
+			srcDir.copyTo(destDir, SBitem.id);
+		}
+		catch(ex) {
+			SB_trace(STstring.getString("IMPORT_FAILURE") + rate + SBitem.title + STstring.getString("SAME_ID"), "R");
 			return;
 		}
 		SBRDF.addItem(SBitem, contResArray[0], contResArray[1]);
-		SB_trace(STstring.getString("IMPORT_SUCCESS") + progRate + SBitem.title, "B");
-		SBprogress.value = Math.round( progNum / this.selItems.length * 100);
+		SB_trace(STstring.getString("IMPORT_SUCCESS") + rate + SBitem.title, "B");
+		SBprogress.value = Math.round( num / this.selItems.length * 100);
 	},
 
 };
@@ -272,7 +286,6 @@ var SBtrade = {
 		if ( answer == FP.returnOK )
 		{
 			var theFile = FP.file;
-			if ( theFile.leafName == "data" ) { alert(STstring.getString("SELECT_PATH_ALERT")); return; }
 			this.initPath(theFile.path);
 			nsPreferences.setUnicharPref("scrapbook.trade.path", theFile.path);
 			window.location.reload();
@@ -282,50 +295,56 @@ var SBtrade = {
 
 	refresh : function()
 	{
-		var IDList = [], ID2Msec = {}, ID2SBitem = {};
-		var contDirList = SBtradeDir.directoryEntries;
-		while ( contDirList.hasMoreElements() )
+		var listItems = [];
+		var dirEnum = SBtradeDir.directoryEntries;
+		while ( dirEnum.hasMoreElements() )
 		{
-			var aDATFile, aID, aMsec = 0;
-			aDATFile = contDirList.getNext().QueryInterface(Components.interfaces.nsIFile);
-			var aID = aDATFile.leafName;
-			if ( !aID.match(/^\d{14}$/) ) continue;
-			aDATFile.append("index.dat");
-			if ( !aDATFile.exists() ) continue;
-			try {
-				aMsec = aDATFile.lastModifiedTime;
-			} catch(ex) {
+			var file = dirEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
+			var dirName = file.leafName;
+			file.append("index.dat");
+			if ( !file.exists() ) continue;
+			var SBitem = SB_parseIndexDat(SBcommon.readFile(file));
+			listItems.push([
+				SBitem.id,
+				SBitem.type,
+				SBitem.title,
+				SBitem.icon,
+				dirName,
+				file.lastModifiedTime,
+			]);
+			SBstatus.trace(SBstring.getString("SCANNING") + "... " + dirName, 1000);
+		}
+		sbCalc.heapSort(listItems, 5);
+		var litems = SBlist.childNodes;
+		for ( var i = litems.length - 1; i > 1 ; i-- )
+		{
+			SBlist.removeChild(litems[i]);
+		}
+		for ( var i = 0; i < listItems.length; i++ )
+		{
+			var icon = listItems[i][3];
+			if ( icon ) {
+				var file = SBtradeDir.clone();
+				file.append(listItems[i][4]);
+				file.append(icon);
+				icon = SBservice.IO.newFileURI(file).spec;
+			} else {
+				icon = SBcommon.getDefaultIcon(listItems[i][1]);
 			}
-			IDList.push(aID);
-			ID2Msec[aID] = aMsec;
-			ID2SBitem[aID] = SB_parseIndexDat(SBcommon.readFile(aDATFile));
-			SBstatus.trace(SBstring.getString("SCANNING") + "... " + aID, 1000);
+			var litem  = document.createElement("listitem");
+			var lcell1 = document.createElement("listcell");
+			var lcell2 = document.createElement("listcell");
+			litem.setAttribute("id", listItems[i][0]);
+			litem.setAttribute("dirName", listItems[i][4]);
+			lcell1.setAttribute("class", "listcell-iconic");
+			lcell1.setAttribute("label", SBcommon.convertStringToUTF8(listItems[i][2]));
+			lcell1.setAttribute("image", icon);
+			lcell2.setAttribute("label", this.formateMilliSeconds(listItems[i][5]));
+			litem.appendChild(lcell1);
+			litem.appendChild(lcell2);
+			SBlist.appendChild(litem);
 		}
-		IDList.sort( function(a,b){ return(ID2Msec[a] - ID2Msec[b]); });
-		var oldListItems = SBlist.childNodes;
-		for ( var i = oldListItems.length - 1; i > 1 ; i-- )
-		{
-			SBlist.removeChild(oldListItems[i]);
-		}
-		for ( var i = 0; i < IDList.length; i++ )
-		{
-			var myID = IDList[i];
-			var myIcon = ID2SBitem[myID].icon;
-			myIcon = myIcon ? SBcommon.convertFilePathToURL(SBtradeDir.path) + myID + "/" + myIcon : SBcommon.getDefaultIcon(ID2SBitem[myID].type);
-			dump(myIcon + "\n");
-			var listItem  = document.createElement("listitem");
-			var listCell1 = document.createElement("listcell");
-			var listCell2 = document.createElement("listcell");
-			listItem.setAttribute("id", myID);
-			listCell1.setAttribute("class", "listcell-iconic");
-			listCell1.setAttribute("label", SBcommon.convertStringToUTF8(ID2SBitem[myID].title));
-			listCell1.setAttribute("image", myIcon);
-			listCell2.setAttribute("label", this.formateMilliSeconds(ID2Msec[myID]));
-			listItem.appendChild(listCell1);
-			listItem.appendChild(listCell2);
-			SBlist.appendChild(listItem);
-		}
-		SB_trace(STstring.getFormattedString("DETECT", [IDList.length, SBtradeDir.path]), "G");
+		SB_trace(STstring.getFormattedString("DETECT", [listItems.length, SBtradeDir.path]), "G");
 	},
 
 	validateDirectory : function(aPath)
@@ -387,45 +406,45 @@ var SBtradeContext = {
 
 	open : function(tabbed)
 	{
-		var myID   = SBlist.currentItem.id;
-		var myType = SBlist.currentItem.getAttribute("type");
-		var myURL  = SBservice.IO.newFileURI(SBtradeDir).spec + myID + "/index.html";
-		SBcommon.loadURL(myURL, tabbed);
+		var file = SBtradeDir.clone();
+		file.append(SBlist.currentItem.getAttribute("dirName"));
+		file.append("index.html");
+		SBcommon.loadURL(SBservice.IO.newFileURI(file).spec, tabbed);
 	},
 
 	showFiles : function()
 	{
-		var myContDir = SBtradeDir.clone();
-		myContDir.append(SBlist.currentItem.id);
-		SBcommon.launchDirectory(myContDir);
+		var dir = SBtradeDir.clone();
+		dir.append(SBlist.currentItem.getAttribute("dirName"));
+		SBcommon.launchDirectory(dir);
 	},
 
 	deleteDir : function()
 	{
 		if ( SBlist.selectedCount < 1 ) return;
-		if ( !SBcommon.getBoolPref("scrapbook.tree.quickdelete", false) )
+		if ( !nsPreferences.getBoolPref("scrapbook.tree.quickdelete", false) )
 		{
 			if ( !window.confirm( SBstring.getString("CONFIRM_DELETE") ) ) return;
 		}
+		var shouldRefresh = false;
 		var selItems = SBlist.selectedItems;
-		for ( var i = selItems.length - 1; i >= 0; i-- )
+		for ( var i = 0; i < selItems.length; i++ )
 		{
-			var myID = selItems[i].id;
-			var myContDir = SBtradeDir.clone();
-			myContDir.append(myID);
-			if ( !myContDir.exists() ) continue;
-			if ( myID.length == 14 ) SBcommon.removeDirSafety(myContDir);
-			SBlist.removeItemAt( SBlist.getIndexOfItem(selItems[i]) + 2 );
+			var dir = SBtradeDir.clone();
+			dir.append(selItems[i].getAttribute("dirName"));
+			if ( !dir.exists() ) continue;
+			if ( SBcommon.removeDirSafety(dir, false) )	shouldRefresh = true;
 		}
+		if ( shouldRefresh ) SBtrade.refresh();
 	},
 
 	showIndexDat : function()
 	{
-		var myDAT = SBtradeDir.clone();
-		myDAT.append(SBlist.currentItem.id);
-		myDAT.append("index.dat");
-		if ( !myDAT.exists() ) return;
-		var SBitem = SB_parseIndexDat(SBcommon.readFile(myDAT));
+		var datFile = SBtradeDir.clone();
+		datFile.append(SBlist.currentItem.getAttribute("dirName"));
+		datFile.append("index.dat");
+		if ( !datFile.exists() ) return;
+		var SBitem = SB_parseIndexDat(SBcommon.readFile(datFile));
 		var content = "";
 		for ( var prop in SBitem )
 		{

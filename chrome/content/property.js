@@ -87,14 +87,16 @@ function SB_initProp()
 
 	SB_changeCommentTab(gSBitem.comment);
 
-	setTimeout(SB_showFileSize, 0);
+	if ( gSBitem.type != "folder" ) setTimeout(SB_initWithDelay, 0);
 }
 
 
-function SB_showFileSize()
+function SB_initWithDelay()
 {
-	var mySizeText = ( gSBitem.type == "folder" ) ? "" : SB_formatFileSize( SB_getTotalFileSize(gID), "FILES_COUNT" );
-	document.getElementById("ScrapBookPropSize").value = mySizeText;
+	var sizeCount = sbPropUtil.getTotalFileSize(gID);
+	var msg = sbPropUtil.formatFileSize(sizeCount[0]);
+	msg += "  " + SBstring.getFormattedString("FILES_COUNT", [sizeCount[1]]);
+	document.getElementById("ScrapBookPropSize").value = msg;
 }
 
 
@@ -140,25 +142,13 @@ function SB_cancelProp()
 function SB_fillHTMLTitle(popupXUL)
 {
 	if ( gTypeFolder || gTypeNote || gTypeFile ) return;
-	if ( !popupXUL.hasChildNodes() ) popupXUL.parentNode.appendItem( SB_getHTMLTitle(gID, gSBitem.chars) );
+	if ( !popupXUL.hasChildNodes() ) popupXUL.parentNode.appendItem(sbPropUtil.getHTMLTitle(gID, gSBitem.chars));
 }
 
 
 function SB_setDefaultIcon()
 {
 	document.getElementById("ScrapBookPropIcon").src = SBcommon.getDefaultIcon(gSBitem.type);
-}
-
-
-function SB_enterIconURL()
-{
-	const PS = Components.classes['@mozilla.org/embedcomp/prompt-service;1'].getService(Components.interfaces.nsIPromptService);
-	var ret = { value : SB_getIconURL() };
-	PS.prompt(window, SBstring.getString("ENTER_ICON_URL"), SBstring.getString("ENTER_ICON_URL"), ret, null, {});
-	var newIcon = ret.value;
-	if ( newIcon == null ) return;
-	if ( !newIcon ) newIcon = SBcommon.getDefaultIcon(gSBitem.type);
-	document.getElementById("ScrapBookPropIcon").src = newIcon;
 }
 
 
@@ -197,72 +187,73 @@ function SB_pickupIcon(flag)
 
 function SB_changeCommentTab(comment)
 {
-	var commentTab = document.getElementById("ScrapBookPropCommentTab");
+	var tab = document.getElementById("ScrapBookPropCommentTab");
 	if ( comment ) {
-		commentTab.setAttribute("image", "chrome://scrapbook/skin/edit_comment.png");
+		tab.setAttribute("image", "chrome://scrapbook/skin/edit_comment.png");
 	} else {
-		commentTab.removeAttribute("image");
+		tab.removeAttribute("image");
 	}
 }
 
 
 
-function SB_getHTMLTitle(aID, aChars)
-{
-	var myFile  = SBcommon.getContentDir(aID);
-	myFile.append("index.html");
-	var myContent = SBcommon.readFile(myFile);
-	try {
-		SBservice.UC.charset = aChars;
-		myContent = SBservice.UC.ConvertToUnicode(myContent);
-		var isMatch = myContent.match(/<title>([^<]+?)<\/title>/im);
-		if ( isMatch ) return RegExp.$1;
-	} catch(ex) {
-		return "";
-	}
-}
+var sbPropUtil = {
 
-
-function SB_getTotalFileSize(aID)
-{
-	var totalSize = 0;
-	var totalFile = 0;
-	var aDir = SBcommon.getContentDir(aID);
-	if ( !aDir.isDirectory() ) return [0, 0];
-	var aFileList = aDir.directoryEntries;
-	while ( aFileList.hasMoreElements() )
+	getHTMLTitle : function(aID, aChars)
 	{
-		var aFile = aFileList.getNext().QueryInterface(Components.interfaces.nsIFile);
-		totalSize += aFile.fileSize;
-		totalFile++;
-	}
-	return [totalSize, totalFile];
-}
+		var file  = SBcommon.getContentDir(aID);
+		file.append("index.html");
+		var content = SBcommon.readFile(file);
+		try {
+			SBservice.UC.charset = aChars;
+			content = SBservice.UC.ConvertToUnicode(content);
+			var isMatch = content.match(/<title>([^<]+?)<\/title>/im);
+			if ( isMatch ) return RegExp.$1;
+		} catch(ex) {
+			return "";
+		}
+	},
 
 
-function SB_formatFileSize(aSizeAndCount, aBundleName)
-{
-	var aSize  = aSizeAndCount[0];
-	var aCount = aSizeAndCount[1];
-	var sCount = (aCount && aBundleName) ? SBstring.getFormattedString(aBundleName, [aCount]) : "";
-	var ret;
-	if ( aSize > 1000 * 1000 ) {
-		return SB_divideBy100( Math.round( aSize / 1024 / 1024 * 100 ) ) + " MB  " + sCount;
-	} else {
-		return Math.round( aSize / 1024 ) + " KB  " + sCount;
-	}
-}
+	getTotalFileSize : function(aID)
+	{
+		var totalSize = 0;
+		var totalFile = 0;
+		var dir = SBcommon.getContentDir(aID);
+		if ( !dir.isDirectory() ) return [0, 0];
+		var fileEnum = dir.directoryEntries;
+		while ( fileEnum.hasMoreElements() )
+		{
+			var file = fileEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
+			totalSize += file.fileSize;
+			totalFile++;
+		}
+		return [totalSize, totalFile];
+	},
 
 
-function SB_divideBy100(aInt)
-{
-	if ( aInt % 100 == 0 ) {
-		return aInt / 100 + ".00";
-	} else if ( aInt % 10 == 0 ) {
-		return aInt / 100 + "0";
-	} else {
-		return aInt / 100;
-	}
-}
+	formatFileSize : function(aSize)
+	{
+		if ( aSize > 1000 * 1000 ) {
+			return this.divideBy100( Math.round( aSize / 1024 / 1024 * 100 ) ) + " MB";
+		} else {
+			return Math.round( aSize / 1024 ) + " KB";
+		}
+	},
+
+
+	divideBy100 : function(aInt)
+	{
+		if ( aInt % 100 == 0 ) {
+			return aInt / 100 + ".00";
+		} else if ( aInt % 10 == 0 ) {
+			return aInt / 100 + "0";
+		} else {
+			return aInt / 100;
+		}
+	},
+
+
+};
 
 

@@ -1,0 +1,6 @@
+<!ENTITY sb.sort			"Sort">
+<!ENTITY sb.sort.title.asc	"Seřadit podle Názvu (A &gt; Z)">
+<!ENTITY sb.sort.title.desc	"Seřadit podle Názvu (Z &gt; A)">
+<!ENTITY sb.sort.date.asc	"Chronologicky">
+<!ENTITY sb.sort.date.desc	"Chronologicky-Převrátit">
+<!ENTITY sb.sort.recursive	"Seřadit pod-adresáře rekurzivně">

@@ -1,0 +1,8 @@
+<!ENTITY sb.url.description	"URL (Insira uma URL por linha)">
+
+<!ENTITY sb.url.tools		"Detector de URL">
+<!ENTITY sb.url.tools.tabs	"Todas as abas abertas na janela">
+<!ENTITY sb.url.tools.local	"Todos os HTMLs no diretório local">
+<!ENTITY sb.url.tools.webox	"default.html para WeBoX">
+<!ENTITY sb.url.tools.clear	"Limpar">
+

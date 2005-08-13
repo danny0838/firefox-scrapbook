@@ -6,9 +6,7 @@
 
 <!ENTITY sb.tools			"Инструменты">
 <!ENTITY sb.tools.setting	"Настройки...">
-<!ENTITY sb.tools.editing	"Всегда включен режим редактирования">
-<!ENTITY sb.tools.manage	"Упорядочить дерево страниц...">
-<!ENTITY sb.manage			"Управление">
+<!ENTITY sb.tools.manage	"Управление">
 <!ENTITY sb.tools.calculate	"Рассчитать занимаемый размер">
 <!ENTITY sb.tools.sorttree	"Сортировать все дерево">
 <!ENTITY sb.tools.directory	"Папка ScrapBook">
@@ -16,6 +14,7 @@
 <!ENTITY sb.tools.trade		"Импорт / Экспорт">
 <!ENTITY sb.tools.output	"Сохранить дерево страниц как HTML">
 <!ENTITY sb.tools.backup	"Архивирование">
+<!ENTITY sb.tools.repair	"Emergency Repair">
 <!ENTITY sb.tools.homepage	"Домашняя страница">
 <!ENTITY sb.tools.about		"О программе">
 
@@ -26,13 +25,7 @@
 <!ENTITY sb.search.cs		"С учетом регистра">
 <!ENTITY sb.search.cache	"Обновить кэш полнотекстового поиска">
 <!ENTITY sb.search.clear	"Удалить историю автозаполнения">
-
-<!ENTITY sb.filter.days		"Показать за: ">
-<!ENTITY sb.filter.today	"сегодня">
-<!ENTITY sb.filter.2days	"последние 2 дня">
-<!ENTITY sb.filter.3days	"последние 3 дня">
-<!ENTITY sb.filter.1week	"эту неделю">
-<!ENTITY sb.filter.2week	"последние 2 недели">
+<!ENTITY sb.search.days		"Показать за: ">
 
 <!ENTITY sb.note.opentab	"Открыть на вкладке">
 <!ENTITY sb.note.close		"Закрыть">

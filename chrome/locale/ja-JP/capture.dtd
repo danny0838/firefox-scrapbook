@@ -1,4 +1,4 @@
 <!ENTITY sb.capture			"取り込み">
 <!ENTITY sb.capture.abort	"中止">
 <!ENTITY sb.capture.retry	"再試行">
-
+<!ENTITY sb.capture.skip	"スキップ">

@@ -12,6 +12,11 @@
 <!ENTITY sb.setting.tree.singleexpand	"Quand un dossier de l'arborescence est déployé, réduire tous les autres dossiers (cf. les favoris d'IE)">
 <!ENTITY sb.setting.tree.quickdelete	"Ne pas confirmer en cas de suppression">
 
+<!ENTITY sb.setting.view.header			"Show URL infobar">
+<!ENTITY sb.setting.view.editor			"Show Edit Toolbar">
+<!ENTITY sb.setting.view.editor.auto	"Automatically when viewing a captured page">
+<!ENTITY sb.setting.view.editor.manual	"Manually by hitting EDIT button in the status bar">
+
 <!ENTITY sb.setting.usetabs.d			"Utiliser de nouveaux onglets pour les actions entreprises.">
 <!ENTITY sb.setting.usetabs.note		"Ouvrir des notes dans un onglet">
 
@@ -20,7 +25,6 @@
 <!ENTITY sb.setting.capture.removescript	"Désactiver JavaScript (Recommandé)">
 <!ENTITY sb.setting.capture.removescript.d	"Si cette option n'est pas choisie, la disposition de la page peut ne pas être conservée.">
 
-<!ENTITY sb.setting.edit.showheader		"Afficher l'en-tête">
 <!ENTITY sb.setting.edit.multilines		"Autoriser un commentaire multilinéaire">
 <!ENTITY sb.setting.edit.confirmsave.1	"Délai pour confirmer la sauvegarde">
 <!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 = aucune confirmation)">

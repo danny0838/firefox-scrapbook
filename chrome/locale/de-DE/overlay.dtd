@@ -8,5 +8,8 @@
 <!ENTITY sb.capture.target		"Speichere Link">
 <!ENTITY sb.capture.target.as	"Speichere Link als...">
 
-<!ENTITY sb.overlay.editing		"Wechsel zum Bearbeitungs-Modus">
+<!ENTITY sb.key.sidebar		"K">
+<!ENTITY sb.key.editor		"J">
+<!ENTITY sb.key.capture		"L">
+<!ENTITY sb.key.capture.as	"K">
 

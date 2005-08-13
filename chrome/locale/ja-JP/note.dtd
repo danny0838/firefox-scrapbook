@@ -2,8 +2,9 @@
 <!ENTITY sn.close			"閉じる">
 <!ENTITY sn.tools			"ツール">
 <!ENTITY sn.preview			"HTMLプレビュー">
+<!ENTITY sn.preview.quit	"プレビュー中止">
 <!ENTITY sn.template		"テンプレートHTMLの編集">
-<!ENTITY sn.autolinefeed	"プレビュー時、自動改行">
+<!ENTITY sn.autolinefeed	"自動改行">
 <!ENTITY sn.autolinefeed.t	"HTMLプレビュー時、行末に&lt;br&gt;タグを自動で付加します">
 <!ENTITY sn.fontsize		"文字サイズ">
 <!ENTITY sn.help			"ヘルプ">

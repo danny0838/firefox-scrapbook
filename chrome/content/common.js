@@ -2,7 +2,7 @@
 // commmon.js
 // Implementation file for ScrapBook
 // 
-// Description: common class, functions and services
+// Description: 
 // Author: Gomita
 // Contributors: 
 // 
@@ -45,21 +45,21 @@ var SBcommon = {
 	{
 		try {
 			var isDefault = SBservice.PB.getBoolPref("scrapbook.data.default");
-			var myDataDir = SBservice.PB.getComplexValue("scrapbook.data.path", Components.interfaces.nsIPrefLocalizedString).data;
-			myDataDir = this.convertPathToFile(myDataDir);
+			var myDir = SBservice.PB.getComplexValue("scrapbook.data.path", Components.interfaces.nsIPrefLocalizedString).data;
+			myDir = this.convertPathToFile(myDir);
 		} catch(ex) {
 			isDefault = true; 
 		}
 		if ( isDefault )
 		{
-			myDataDir = SBservice.DIR.get("ProfD", Components.interfaces.nsIFile);
-			myDataDir.append("ScrapBook");
+			myDir = SBservice.DIR.get("ProfD", Components.interfaces.nsIFile);
+			myDir.append("ScrapBook");
 		}
-		if ( !myDataDir.exists() )
+		if ( !myDir.exists() )
 		{
-			myDataDir.create(myDataDir.DIRECTORY_TYPE, 0700);
+			myDir.create(myDir.DIRECTORY_TYPE, 0700);
 		}
-		return myDataDir;
+		return myDir;
 	},
 
 
@@ -74,27 +74,34 @@ var SBcommon = {
 	},
 
 
-	removeDirSafety : function(aDir)
+	removeDirSafety : function(aDir, check)
 	{
-		if ( !aDir.leafName.match(/^\d{14}$/) ) return;
-		var aFileList = aDir.directoryEntries;
-		while ( aFileList.hasMoreElements() )
-		{
-			var aFile = aFileList.getNext().QueryInterface(Components.interfaces.nsIFile);
-			if ( aFile.isFile() ) aFile.remove(false);
+		try {
+			if ( check && !aDir.leafName.match(/^\d{14}$/) ) return;
+			var fileEnum = aDir.directoryEntries;
+			while ( fileEnum.hasMoreElements() )
+			{
+				var eFile = fileEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
+				if ( eFile.isFile() ) eFile.remove(false);
+			}
+			if ( aDir.isDirectory() ) aDir.remove(false);
+			return true;
 		}
-		if ( aDir.isDirectory() ) aDir.remove(false);
+		catch(ex) {
+			alert("ScrapBook ERROR: Failed to remove dir.\n" + ex);
+			return false;
+		}
 	},
 
 
 	loadURL : function(aURL, tabbed)
 	{
-		var topWindow = SBservice.WM.getMostRecentWindow("navigator:browser");
-		var myBrowser = topWindow.document.getElementById("content");
+		var win = SBservice.WM.getMostRecentWindow("navigator:browser");
+		var browser = win.document.getElementById("content");
 		if ( tabbed ) {
-			myBrowser.selectedTab = myBrowser.addTab(aURL);
+			browser.selectedTab = browser.addTab(aURL);
 		} else {
-			myBrowser.loadURI(aURL);
+			browser.loadURI(aURL);
 		}
 	},
 
@@ -135,21 +142,21 @@ var SBcommon = {
 
 	getBaseHref : function(sURI)
 	{
-		var pos, Base;
-		Base = ( (pos = sURI.indexOf("?")) != -1 ) ? sURI.substring(0, pos) : sURI;
-		Base = ( (pos = Base.indexOf("#")) != -1 ) ? Base.substring(0, pos) : Base;
-		Base = ( (pos = Base.lastIndexOf("/")) != -1 ) ? Base.substring(0, ++pos) : Base;
-		return Base;
+		var pos, base;
+		base = ( (pos = sURI.indexOf("?")) != -1 ) ? sURI.substring(0, pos) : sURI;
+		base = ( (pos = base.indexOf("#")) != -1 ) ? base.substring(0, pos) : base;
+		base = ( (pos = base.lastIndexOf("/")) != -1 ) ? base.substring(0, ++pos) : base;
+		return base;
 	},
 
 
 	getFileName : function(aURI)
 	{
-		var pos, Name;
-		Name = ( (pos = aURI.indexOf("?")) != -1 ) ? aURI.substring(0, pos) : aURI;
-		Name = ( (pos = Name.indexOf("#")) != -1 ) ? Name.substring(0, pos) : Name;
-		Name = ( (pos = Name.lastIndexOf("/")) != -1 ) ? Name.substring(++pos) : Name;
-		return Name;
+		var pos, name;
+		name = ( (pos = aURI.indexOf("?")) != -1 ) ? aURI.substring(0, pos) : aURI;
+		name = ( (pos = name.indexOf("#")) != -1 ) ? name.substring(0, pos) : name;
+		name = ( (pos = name.lastIndexOf("/")) != -1 ) ? name.substring(++pos) : name;
+		return name;
 	},
 
 
@@ -200,10 +207,10 @@ var SBcommon = {
 			istream.init(aFile, 1, 0, false);
 			var sstream = Components.classes['@mozilla.org/scriptableinputstream;1'].createInstance(Components.interfaces.nsIScriptableInputStream);
 			sstream.init(istream);
-			var aContent = sstream.read(sstream.available());
+			var content = sstream.read(sstream.available());
 			sstream.close();
 			istream.close();
-			return aContent;
+			return content;
 		}
 		catch(ex)
 		{
@@ -248,10 +255,10 @@ var SBcommon = {
 	saveTemplateFile : function(aURISpec, aFile)
 	{
 		if ( aFile.exists() ) return;
-		var myURI = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
-		myURI.spec = aURISpec;
+		var uri = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
+		uri.spec = aURISpec;
 		var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
-		WBP.saveURI(myURI, null, null, null, null, aFile);
+		WBP.saveURI(uri, null, null, null, null, aFile);
 	},
 
 
@@ -262,7 +269,7 @@ var SBcommon = {
 			SBservice.UC.charset = "UTF-8";
 			aString = SBservice.UC.ConvertToUnicode(aString);
 		} catch(ex) {
-			alert("ScrapBook ERROR: Failure in ConvertToUnicode.");
+			dump("ScrapBook ERROR: Failure in ConvertToUnicode.\n");
 		}
 		return aString;
 	},
@@ -377,15 +384,6 @@ var SBcommon = {
 			case "folder" : return "chrome://scrapbook/skin/treefolder.png"; break;
 			case "note"   : return "chrome://scrapbook/skin/treenote.png";   break;
 			default       : return "chrome://scrapbook/skin/treeitem.png";   break;
-		}
-	},
-
-
-	setBoolPref: function (aName, aValue)
-	{
-		try {
-			SBservice.PB.setBoolPref(aName, aValue);
-		} catch(ex) {
 		}
 	},
 

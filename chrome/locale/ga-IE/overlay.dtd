@@ -8,5 +8,8 @@
 <!ENTITY sb.capture.target		"Gabh Ceangal">
 <!ENTITY sb.capture.target.as	"Gabh Ceangal Mar...">
 
-<!ENTITY sb.overlay.editing		"Aistrigh go Modh Eagarth&#243;ireachta">
+<!ENTITY sb.key.sidebar		"K">
+<!ENTITY sb.key.editor		"J">
+<!ENTITY sb.key.capture		"L">
+<!ENTITY sb.key.capture.as	"K">
 

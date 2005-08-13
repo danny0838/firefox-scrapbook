@@ -1,29 +1,33 @@
 <!ENTITY sb.setting			"Ustawienia">
 <!ENTITY sb.setting.general	"Główne">
-<!ENTITY sb.setting.usetabs	"Panele">
+<!ENTITY sb.setting.usetabs	"Karty">
 <!ENTITY sb.setting.advance	"Zaawansowane">
 <!ENTITY sb.setting.capture	"Przechwytywanie">
 <!ENTITY sb.setting.editing	"Edycja">
 <!ENTITY sb.setting.program	"Programy">
 
 <!ENTITY sb.setting.browser.submenu		"Włącz submenu w głównym menu kontekstowym przeglądarki (zmiany zostaną zastosowane po ponownym uruchomieniu przeglądarki)">
-<!ENTITY sb.setting.capture.detail		"Pokaż okno ''Szczegóły przechwytywania'', gdy przechwytujesz przeciągając ikonkę witryny lub etykietę panelu do sidebaru">
+<!ENTITY sb.setting.capture.detail		"Pokaż okno ''Szczegóły przechwytywania'', gdy przechwytujesz przeciągając ikonkę witryny lub etykietę karty do panelu bocznego">
 <!ENTITY sb.setting.capture.notify		"Pokaż okienko powiadomienia ''Przechwytywanie zakończone'' (działa tylko w systemie Windows)">
 <!ENTITY sb.setting.tree.singleexpand	"Gdy rozwijasz folder jako widok drzewa, zwiń wszystkie inne foldery">
 <!ENTITY sb.setting.tree.quickdelete	"Nie potwierdzaj usuwania">
 
-<!ENTITY sb.setting.usetabs.d			"Zaznaczone poniżej akcje otwieraj w nowym panelu">
-<!ENTITY sb.setting.usetabs.note		"Otwórz notes w panelu">
+<!ENTITY sb.setting.view.header			"Pokaż informacje o URL">
+<!ENTITY sb.setting.view.editor			"Pokaż pasek edycji:">
+<!ENTITY sb.setting.view.editor.auto	"automatycznie, gdy przechodzisz do oglądania przechwyconej strony">
+<!ENTITY sb.setting.view.editor.manual	"ręcznie przez naciśnięcie przycisku &quot;Edytuj&quot; na pasku stanu">
+
+<!ENTITY sb.setting.usetabs.d			"Zaznaczone poniżej akcje otwieraj w nowej karcie">
+<!ENTITY sb.setting.usetabs.note		"Otwórz notes w karcie">
 
 <!ENTITY sb.setting.capture.utf8encode		"Przekonwertuj na kodowanie UTF-8   (zalecane)">
 <!ENTITY sb.setting.capture.utf8encode.d	"Jeżeli tego nie wykonasz niektóre litery zostaną przekształcone na '?'.">
 <!ENTITY sb.setting.capture.removescript	"Usuń JavaScript   (zalecane)">
 <!ENTITY sb.setting.capture.removescript.d	"Jeżeli tego nie wykonasz czasami nie uda się zachować wyglądu strony.">
 
-<!ENTITY sb.setting.edit.showheader		"Pokaż nagłówek">
 <!ENTITY sb.setting.edit.multilines		"Włącz wieloliniowe komentarze">
 <!ENTITY sb.setting.edit.confirmsave.1	"Czas oczekiwania na potwierdzenie zapisu">
-<!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 = nigdy nie potwierdzaj)">
+<!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 - nigdy nie potwierdzaj)">
 
 <!ENTITY sb.setting.program.filer			"Wybierz program do szukania plików">
 <!ENTITY sb.setting.program.filer.default	"Domyślny (jeżeli systemem operacyjnym jest Windows, będzie to Explorator Windows.)">
@@ -32,6 +36,6 @@
 <!ENTITY sb.setting.data			"Folder zapisu danych">
 <!ENTITY sb.setting.data.default	"Domyślny (folder zapisu w profilu użytkownika)">
 
-<!ENTITY sb.setting.restorefavicons		"Odtwórz ikonki">
-<!ENTITY sb.setting.restorefavicons.d	"Jeżeli ikonki nie są wyświetlane, naciśnij ten przycisk:">
+<!ENTITY sb.setting.restorefavicons		"Odtwórz ikony">
+<!ENTITY sb.setting.restorefavicons.d	"Jeżeli ikony nie są wyświetlane, naciśnij ten przycisk:">
 

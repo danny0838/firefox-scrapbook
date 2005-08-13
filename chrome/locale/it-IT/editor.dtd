@@ -1,0 +1,21 @@
+<!ENTITY sb.editor					"Barra degli strumenti di ScrapBook per la modifica">
+<!ENTITY sb.editor.inline			"Aggiungi alla selezione commento in linea">
+<!ENTITY sb.editor.block.insert		"Aggiungi il commento del blocco dopo la selezione">
+<!ENTITY sb.editor.block.customize	"Personalizza CSS per i commenti dei blocchi">
+<!ENTITY sb.editor.block.hide		"Nascondi commenti dei blocchi">
+<!ENTITY sb.editor.marker			"Evidenzia la selezione">
+<!ENTITY sb.editor.unline			"Rimuovi tutti i commenti in linea">
+<!ENTITY sb.editor.unmark			"Rimuovi tutte le evidenziazioni">
+<!ENTITY sb.editor.cutter			"Rimuovi la selezione">
+<!ENTITY sb.editor.remove.iframe	"Rimuovi tutti gli IFRAME">
+<!ENTITY sb.editor.remove.script	"Rimuovi tutti gli SCRIPT">
+<!ENTITY sb.editor.eraser			"DOM Eraser: strumento per rimuovere blocchi cliccati">
+<!ENTITY sb.editor.undo				"Annulla">
+<!ENTITY sb.editor.restore			"Annulla le modifiche e ripristina">
+<!ENTITY sb.editor.save				"Salva">
+<!ENTITY sb.editor.find				"Trova e seleziona nel pannello">
+<!ENTITY sb.editor.comment			"Espandi area commento">
+
+<!ENTITY sb.inline.enter			"Inserisci">
+<!ENTITY sb.inline.delete			"Elimina">
+

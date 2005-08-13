@@ -8,5 +8,8 @@
 <!ENTITY sb.capture.target		"Сохранить файл">
 <!ENTITY sb.capture.target.as	"Сохранить файл как...">
 
-<!ENTITY sb.overlay.editing		"Включить режим редактирования">
+<!ENTITY sb.key.sidebar		"K">
+<!ENTITY sb.key.editor		"J">
+<!ENTITY sb.key.capture		"L">
+<!ENTITY sb.key.capture.as	"K">
 

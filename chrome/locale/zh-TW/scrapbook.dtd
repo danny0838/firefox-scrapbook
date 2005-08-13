@@ -6,9 +6,7 @@
 
 <!ENTITY sb.tools			"工具">
 <!ENTITY sb.tools.setting	"設定...">
-<!ENTITY sb.tools.editing	"直接進入編輯模式">
-<!ENTITY sb.tools.manage	"管理擷取文件...">
-<!ENTITY sb.manage			"管理擷取文件">
+<!ENTITY sb.tools.manage	"管理擷取文件">
 <!ENTITY sb.tools.calculate	"計算文件大小">
 <!ENTITY sb.tools.sorttree	"所有文件排序">
 <!ENTITY sb.tools.directory	"開啟 ScrapBook 目錄">
@@ -16,6 +14,7 @@
 <!ENTITY sb.tools.trade		"匯入 / 匯出">
 <!ENTITY sb.tools.output	"將資料列表匯出為 HTML">
 <!ENTITY sb.tools.backup	"壓縮並備份資料">
+<!ENTITY sb.tools.repair	"Emergency Repair">
 <!ENTITY sb.tools.homepage	"ScrapBook 首頁">
 <!ENTITY sb.tools.about		"關於 ScrapBook">
 
@@ -26,13 +25,7 @@
 <!ENTITY sb.search.cs		"大小寫需相符">
 <!ENTITY sb.search.cache	"更新全文搜尋快取">
 <!ENTITY sb.search.clear	"清除搜尋歷史紀錄">
-
-<!ENTITY sb.filter.days		"依擷取日期檢視">
-<!ENTITY sb.filter.today	"今天">
-<!ENTITY sb.filter.2days	"兩天內">
-<!ENTITY sb.filter.3days	"三天內">
-<!ENTITY sb.filter.1week	"本週">
-<!ENTITY sb.filter.2week	"兩週內">
+<!ENTITY sb.search.days		"依擷取日期檢視">
 
 <!ENTITY sb.note.opentab	"開啟於新分頁中">
 <!ENTITY sb.note.close		"關閉">

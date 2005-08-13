@@ -16,15 +16,6 @@ var SBstatus;
 var SBstring;
 
 var gCacheFile;
-var gQueryStrings  = { q : "", re : "", cs : "" };
-var gRegExpModifier;
-var gHit = 0;
-const gMax = 100;
-
-var SBincludeWords = [];
-var SBexcludeWords = [];
-
-var SBhighlightColors = ["#FFFF33","#66FFFF","#90FF90","#FF9999","#FF99FF"];
 
 
 
@@ -37,209 +28,245 @@ function SB_initFT(type)
 	gCacheFile.append("cache.rdf");
 	switch ( type )
 	{
-		case 'SEARCH' : SB_execSearch(); break;
+		case 'SEARCH' : sbResult.exec(); break;
 		case 'CACHE'  : setTimeout(function() { SBcache.build(); }, 0); break;
 	}
 }
 
 
-function SB_execSearch()
+var sbResult =
 {
-	var QS = document.location.href.match(/result\.xul\?(.*)$/);
-	QS = RegExp.$1;
-	var QA = QS.split("&");
-	for ( var i = 0; i < QA.length; i++ )
+	get TREE() { return document.getElementById("ScrapBookTree"); },
+	get CURRENT_TREEITEM() { return this.treeItems[this.TREE.currentIndex]; },
+
+
+	hit : 0,
+	max : 100,
+	QueryStrings   : { q : "", re : "", cs : "" },
+	RegExpModifier : "",
+	includeWords : [],
+	excludeWords : [],
+	highlightColors : ["#FFFF33","#66FFFF","#90FF90","#FF9999","#FF99FF"],
+	treeItems : [],
+
+
+	exec : function()
 	{
-		gQueryStrings[QA[i].split("=")[0]] = QA[i].split("=")[1];
-	}
-	const TTSU = Components.classes['@mozilla.org/intl/texttosuburi;1'].getService(Components.interfaces.nsITextToSubURI);
-	gQueryStrings['q'] = TTSU.UnEscapeAndConvert("UTF-8", gQueryStrings['q']);
-
-	SBRDF.init();
-	SCRDF.init();
-
-
-	gRegExpModifier = ( gQueryStrings['cs'] != "true" ) ? "im" : "m";
-
-	if ( gQueryStrings['re'] != "true" )
-	{
-		var RegExpInclude = new Array();
-		var RegExpExclude = new Array();
-
-		var query = gQueryStrings['q'].replace(/( |\u3000)+/g, " ");
-
-		var quotePos1;
-		var quotePos2;
-		var quotedStr;
-
-		while ( (quotePos1 = query.indexOf('"')) != -1 )
+		var qs = document.location.href.match(/result\.xul\?(.*)$/);
+		qs = RegExp.$1;
+		var qa = qs.split("&");
+		for ( var i = 0; i < qa.length; i++ )
 		{
-			quotedStr = query.substring(quotePos1+1, query.length);
-			quotePos2 = quotedStr.indexOf('"');
-			if ( quotePos2 == -1 ) break;
-			quotedStr = quotedStr.substring(0, quotePos2);
-			var replaceStr = '"' + quotedStr + '"';
-			if ( quotePos1 >= 1 && query.charAt(quotePos1-1) == '-' )
+			this.QueryStrings[qa[i].split("=")[0]] = qa[i].split("=")[1];
+		}
+		const TTSU = Components.classes['@mozilla.org/intl/texttosuburi;1'].getService(Components.interfaces.nsITextToSubURI);
+		this.QueryStrings['q'] = TTSU.UnEscapeAndConvert("UTF-8", this.QueryStrings['q']);
+
+		SBRDF.init();
+		SCRDF.init();
+
+
+		this.RegExpModifier = ( this.QueryStrings['cs'] != "true" ) ? "im" : "m";
+
+		if ( this.QueryStrings['re'] != "true" )
+		{
+			var RegExpInclude = new Array();
+			var RegExpExclude = new Array();
+
+			var query = this.QueryStrings['q'].replace(/( |\u3000)+/g, " ");
+
+			var quotePos1;
+			var quotePos2;
+			var quotedStr;
+
+			while ( (quotePos1 = query.indexOf('"')) != -1 )
 			{
-				SBexcludeWords.push(quotedStr);
-				RegExpExclude.push( new RegExp(quotedStr, gRegExpModifier) );
-				replaceStr = "-" + replaceStr;
+				quotedStr = query.substring(quotePos1+1, query.length);
+				quotePos2 = quotedStr.indexOf('"');
+				if ( quotePos2 == -1 ) break;
+				quotedStr = quotedStr.substring(0, quotePos2);
+				var replaceStr = '"' + quotedStr + '"';
+				if ( quotePos1 >= 1 && query.charAt(quotePos1-1) == '-' )
+				{
+					this.excludeWords.push(quotedStr);
+					RegExpExclude.push( new RegExp(quotedStr, this.RegExpModifier) );
+					replaceStr = "-" + replaceStr;
+				}
+				else if ( quotedStr.length > 0 )
+				{
+					this.includeWords.push(quotedStr);
+					RegExpInclude.push( new RegExp(this.escapeRegExpSpecialChars(quotedStr), this.RegExpModifier) );
+				}
+				query = query.replace(replaceStr, "");
 			}
-			else if ( quotedStr.length > 0 )
+
+			query = query.replace(/ +/g, " ").split(' ');
+
+			for ( var i=0; i<query.length; i++ )
 			{
-				SBincludeWords.push(quotedStr);
-				RegExpInclude.push( new RegExp(SB_escapeRegExpSpecialChars(quotedStr), gRegExpModifier) );
+				var word = query[i];
+				if ( word.charAt(0) == '-' )
+				{
+					word = word.substring(1, word.length);
+					this.excludeWords.push(word);
+					RegExpExclude.push( new RegExp(this.escapeRegExpSpecialChars(word), this.RegExpModifier) );
+				}
+				else if ( word.length > 0 )
+				{
+					this.includeWords.push(word);
+					RegExpInclude.push( new RegExp(this.escapeRegExpSpecialChars(word), this.RegExpModifier) );
+				}
 			}
-			query = query.replace(replaceStr, "");
+			if ( RegExpInclude.length == 0 ) return;
 		}
 
-		query = query.replace(/ +/g, " ").split(' ');
-
-		for ( var i=0; i<query.length; i++ )
+		SBservice.RDFC.Init(SCRDF.dataSource, SBservice.RDF.GetResource("urn:scrapbook:cache"));
+		var resEnum = SBservice.RDFC.GetElements();
+		while ( resEnum.hasMoreElements() && this.hit < this.max )
 		{
-			var word = query[i];
-			if ( word.charAt(0) == '-' )
+			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+			if ( res.Value == "urn:scrapbook:cache" ) continue;
+
+			if ( this.QueryStrings['re'] == "true" )
 			{
-				word = word.substring(1, word.length);
-				SBexcludeWords.push(word);
-				RegExpExclude.push( new RegExp(SB_escapeRegExpSpecialChars(word), gRegExpModifier) );
+				var re = new RegExp(this.QueryStrings['q'], this.RegExpModifier);
+				var isMatchT = SBRDF.getProperty("title",   res).match(re);
+				var isMatchM = SBRDF.getProperty("comment", res).match(re);
+				var isMatchC = SCRDF.getProperty("content", res).match(re);
 			}
-			else if ( word.length > 0 )
+			else
 			{
-				SBincludeWords.push(word);
-				RegExpInclude.push( new RegExp(SB_escapeRegExpSpecialChars(word), gRegExpModifier) );
+				var willContinue = false;
+				var myTitle   = SBRDF.getProperty("title", res);
+				var myComment = SBRDF.getProperty("comment", res);
+				var myContent = [myTitle, myComment, SCRDF.getProperty("content", res)].join("\t");
+
+				for ( var i = 0; i < RegExpInclude.length; i++ ) {
+					if ( !myContent.match(RegExpInclude[i]) ) { willContinue = true; break; }
+				}
+				if ( willContinue ) continue;
+				for ( var i = 0; i < RegExpExclude.length; i++ ) {
+					if ( myContent.match(RegExpExclude[i]) )  { willContinue = true; break; }
+				}
+				if ( willContinue ) continue;
+				var isMatchT = isMatchM = isMatchC = true;
 			}
+
+			if ( isMatchT || isMatchM || isMatchC )
+			{
+				if ( !SBRDF.exists(res) ) continue;
+				this.hit++;
+
+
+				var icon = SBRDF.getProperty("icon", res);
+				if ( !icon ) icon = SBcommon.getDefaultIcon(SBRDF.getProperty("type", res));
+				sbResult.treeItems.push([
+					SBRDF.getProperty("title", res),
+					this.extractRightContext(SCRDF.getProperty("content", res)),
+					this.extractRightContext(SBRDF.getProperty("comment", res)).replace(/ __BR__ /g, " "),
+					SCRDF.getProperty("folder", res),
+					SBRDF.getProperty("id", res),
+					SBRDF.getProperty("type", res),
+					icon,
+				]);
+			}
+			sbResult.initTree();
 		}
-		if ( RegExpInclude.length == 0 ) return;
-	}
 
-	SBservice.RDFC.Init(SCRDF.data, SBservice.RDF.GetResource("urn:scrapbook:cache"));
-	var ResSet = SBservice.RDFC.GetElements();
-	var ResCnt = SBservice.RDFC.GetCount() - 1;
-	while ( ResSet.hasMoreElements() && gHit < gMax )
-	{
-		var myRes = ResSet.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-		if ( myRes.Value == "urn:scrapbook:cache" ) continue;
-
-		if ( gQueryStrings['re'] == "true" )
+		if ( this.hit >= this.max ) document.getElementById("ScrapBookResult").setAttribute("class", "sb-header-ex");
+		var headerLabel1 = SBstring.getFormattedString( ( this.hit < this.max ) ? "RESULTS_FOUND" : "RESULTS_FOUND_OVER", [this.hit] );
+		if ( this.QueryStrings['re'] == "true" )
 		{
-			var myRE = new RegExp(gQueryStrings['q'], gRegExpModifier);
-			var isMatchT = SBRDF.getProperty("title",   myRes).match(myRE);
-			var isMatchC = SCRDF.getProperty("content", myRes).match(myRE);
-			var isMatchM = SBRDF.getProperty("comment", myRes).match(myRE);
+			var headerLabel2 = SBstring.getFormattedString("MATCHING", [ this.localizedQuotation(this.QueryStrings['q']) ]);
 		}
 		else
 		{
-			var willContinue = false;
-			var myContent = SCRDF.getProperty("content", myRes);
-			for ( var i = 0; i < RegExpInclude.length; i++ ) {
-				if ( !myContent.match(RegExpInclude[i]) ) { willContinue = true; break; }
+			var includeQuoted = [];
+			for ( var i = 0; i < this.includeWords.length; i++ ) {
+				includeQuoted.push(this.localizedQuotation(this.includeWords[i]));
 			}
-			if ( willContinue ) continue;
-			for ( var i = 0; i < RegExpExclude.length; i++ ) {
-				if ( myContent.match(RegExpExclude[i]) )  { willContinue = true; break; }
+			if ( includeQuoted.length > 0 ) includeQuoted = SBstring.getFormattedString("INCLUDING", [includeQuoted.join(" ")]);
+			var excludeQuoted = [];
+			for ( var i = 0; i < this.excludeWords.length; i++ ) {
+				excludeQuoted.push(this.localizedQuotation(this.excludeWords[i]));
 			}
-			if ( willContinue ) continue;
-			var isMatchC = true;
+			if ( excludeQuoted.length > 0 ) excludeQuoted = SBstring.getFormattedString("EXCLUDING", [excludeQuoted.join(" ")]);
+			var headerLabel2 = includeQuoted + " " + excludeQuoted;
 		}
+		document.getElementById("ScrapBookResultLabel").value = headerLabel1 + " : " + headerLabel2;
+	},
 
-		if ( isMatchT || isMatchM || isMatchC )
+
+	initTree : function()
+	{
+		var colIDs = [
+			"sbTreeColTitle",
+			"sbTreeColContent",
+			"sbTreeColComment",
+			"sbTreeColFolder",
+			"sbTreeColID",
+			"sbTreeColType",
+			"sbTreeColIcon",
+		];
+		var treeView = new sbCustomTreeView(colIDs, this.treeItems);
+		treeView.getImageSrc = function(row, col)
 		{
-			gHit++;
-			var myIcon = SBRDF.getProperty("icon", myRes);
-			var myType = SBRDF.getProperty("type", myRes);
-			if ( !myIcon ) myIcon = SBcommon.getDefaultIcon(myType);
-			var SBlistitem  = document.getElementById("ScrapBookResultListTemplate").cloneNode(true);
-			SBlistitem.setAttribute("hidden", false);
-			SBlistitem.setAttribute("id", myRes.Value);
-			SBlistitem.setAttribute("type", myType);
-			SBlistitem.childNodes[0].setAttribute("image", myIcon);
-			SBlistitem.childNodes[0].setAttribute("label", SBRDF.getProperty("title",  myRes));
-			SBlistitem.childNodes[1].setAttribute("label", SB_extractRightContext(SCRDF.getProperty("content", myRes)));
-			SBlistitem.childNodes[2].setAttribute("label", SB_extractRightContext(SBRDF.getProperty("comment", myRes)).replace(/ __BR__ /g, " "));
-			SBlistitem.childNodes[3].setAttribute("label", SCRDF.getProperty("folder", myRes));
-			if ( isMatchT ) SBlistitem.childNodes[0].setAttribute("style", "color:#0000FF;");
-			if ( isMatchC ) SBlistitem.childNodes[1].setAttribute("style", "color:#0000FF;");
-			if ( isMatchM ) SBlistitem.childNodes[2].setAttribute("style", "color:#0000FF;");
-			document.getElementById("ScrapBookResultList").appendChild(SBlistitem);
-		}
-	}
+			if ( col == "sbTreeColTitle" || col.index == 0 ) return this._items[row][6];
+		};
+		this.TREE.view = treeView;
+	},
 
-	if ( gHit >= gMax ) document.getElementById("ScrapBookResult").setAttribute("class", "sb-header-ex");
-	var headerLabel1 = SBstring.getFormattedString( ( gHit < gMax ) ? "RESULTS_FOUND" : "RESULTS_FOUND_OVER", [gHit] );
-	if ( gQueryStrings['re'] == "true" )
+
+	extractRightContext : function(aString)
 	{
-		var headerLabel2 = SBstring.getFormattedString("MATCHING", [ SB_localizedQuotation(gQueryStrings['q']) ]);
-	}
-	else
+		aString = aString.replace(/\r|\n|\t/g, " ");
+		pattern = ( this.QueryStrings['re'] == "true" ) ? this.QueryStrings['q'] : this.includeWords[0];
+		var re = new RegExp("(" + pattern + ".*)", this.RegExpModifier);
+		var ret = aString.match(re) ? RegExp.$1 : aString;
+		return ( ret.length > 100 ) ? ret.substring(0, 100) : ret;
+	},
+
+
+	escapeRegExpSpecialChars : function(aString)
 	{
-		var includeQuoted = [];
-		for ( var i = 0; i < SBincludeWords.length; i++ ) {
-			includeQuoted.push(SB_localizedQuotation(SBincludeWords[i]));
+		return aString.replace(/([\*\+\?\.\^\/\$\\\|\[\]\{\}\(\)])/g, "\\$1");
+	},
+
+
+	localizedQuotation : function(aString)
+	{
+		return SBstring.getFormattedString("QUOTATION", [aString]);
+	},
+
+
+	forward : function(key)
+	{
+		var id   = this.CURRENT_TREEITEM[4];
+		var type = this.CURRENT_TREEITEM[5];
+		var url  = SBcommon.getURL(id, type);
+		switch ( key ) {
+			case "O" : SBcommon.loadURL(url, false); break;
+			case "T" : SBcommon.loadURL(url, true); break;
+			case "P" : window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome" ,id); break;
+			case "L" : SBcommon.launchDirectory(SBcommon.getContentDir(id));
+			default  : document.getElementById("ScrapBookBrowser").setAttribute("src", url); break;
 		}
-		if ( includeQuoted.length > 0 ) includeQuoted = SBstring.getFormattedString("INCLUDING", [includeQuoted.join(" ")]);
-		var excludeQuoted = [];
-		for ( var i = 0; i < SBexcludeWords.length; i++ ) {
-			excludeQuoted.push(SB_localizedQuotation(SBexcludeWords[i]));
+	},
+
+
+	onDocumentLoad : function(aEvent)
+	{
+		aEvent.stopPropagation();
+		aEvent.preventDefault();
+		if ( this.QueryStrings["re"] == "true" ) this.includeWords = [this.QueryStrings['q']];
+		for ( var i = 0; i < this.includeWords.length; i++ )
+		{
+			sbHighlight.exec(this.highlightColors[i % this.highlightColors.length], this.includeWords[i]);
 		}
-		if ( excludeQuoted.length > 0 ) excludeQuoted = SBstring.getFormattedString("EXCLUDING", [excludeQuoted.join(" ")]);
-		var headerLabel2 = includeQuoted + " " + excludeQuoted;
-	}
-	document.getElementById("ScrapBookResultLabel").value = headerLabel1 + " : " + headerLabel2;
-}
+	},
 
 
-function SB_extractRightContext(aString)
-{
-	aString = aString.replace(/\r|\n|\t/g, " ");
-	pattern = ( gQueryStrings['re'] == "true" ) ? gQueryStrings['q'] : SBincludeWords[0];
-	var RE = new RegExp("(" + pattern + ".*)", gRegExpModifier);
-	var ret = aString.match(RE) ? RegExp.$1 : aString;
-	return ( ret.length > 100 ) ? ret.substring(0, 100) : ret;
-}
-
-
-function SB_escapeRegExpSpecialChars(aString)
-{
-	return aString.replace(/([\*\+\?\.\^\/\$\\\|\[\]\{\}\(\)])/g, "\\$1");
-}
-
-
-function SB_localizedQuotation(aString)
-{
-	return SBstring.getFormattedString("QUOTATION", [aString]);
-}
-
-
-function SB_convertHTML2Text(aStr)
-{
-	var	FORMAT_CONVERTER = Components.classes['@mozilla.org/widget/htmlformatconverter;1'].createInstance(Components.interfaces.nsIFormatConverter);
-	var fromStr = Components.classes['@mozilla.org/supports-string;1'].createInstance(Components.interfaces.nsISupportsString);
-	var toStr   = { value: null };
-	fromStr.data = aStr;
-	try {
-		FORMAT_CONVERTER.convert("text/html", fromStr, fromStr.toString().length, "text/unicode", toStr, {});
-		toStr = toStr.value.QueryInterface(Components.interfaces.nsISupportsString);
-		return toStr.toString();
-	}
-	catch(ex) {
-		return aStr;
-	}
-}
-
-
-function SB_openResult(aEvent, type)
-{
-	if ( aEvent.originalTarget.localName != "listitem" && aEvent.originalTarget.localName != "menuitem" ) return;
-	var myID   = document.getElementById("ScrapBookResultList").currentItem.id.substring(18, 32);
-	var myType = document.getElementById("ScrapBookResultList").currentItem.getAttribute("type");
-	var myURL  = SBcommon.getURL(myID, myType);
-	switch ( type ) {
-		case "P" : document.getElementById("ScrapBookBrowser").setAttribute("src", myURL); break;
-		case "O" : SBcommon.loadURL(myURL, false); break;
-		case "T" : SBcommon.loadURL(myURL, true); break;
-	}
-}
+};
 
 
 function SB_exitResult()
@@ -248,96 +275,90 @@ function SB_exitResult()
 }
 
 
-function SB_browserOnload(aEvent)
-{
-	aEvent.stopPropagation();
-	aEvent.preventDefault();
-	if ( gQueryStrings["re"] == "true" ) SBincludeWords = [gQueryStrings['q']];
-	for ( var i = 0; i < SBincludeWords.length; i++ )
-	{
-		SBhighlight.exec(SBhighlightColors[i % SBhighlightColors.length], SBincludeWords[i]);
-	}
-}
-
-
 
 
 var SBcache = {
 
-	i : 0,
+	count : 0,
 	dataDir : null,
 	resList : [],
 	folderTitles : [],
 
+
 	build : function()
 	{
-		window.title = "ScrapBook - " + SBstring.getString("BUILD_CACHE");
+		window.title = SBstring.getString("BUILD_CACHE") + " - ScrapBook";
 		SBstatus.firstChild.value = SBstring.getString("BUILD_CACHE_INIT");
 		SBRDF.init();
 		SCRDF.init();
 		SCRDF.removeAllEntries();
 		this.dataDir = SBcommon.getScrapBookDir().clone();
 		this.dataDir.append("data");
-		this.initRecursively(SBservice.RDF.GetResource("urn:scrapbook:root"));
-
-		this.i = 0;
-		this.asyncProcess(this.resList[this.i]);
+		this.initRecursive(SBservice.RDF.GetResource("urn:scrapbook:root"));
+		this.count = 0;
+		this.processAsync(this.resList[this.count]);
 	},
 
-	initRecursively : function(aContRes)
+
+	initRecursive : function(aContRes)
 	{
 		SBservice.RDFC.Init(SBRDF.data, aContRes);
-		var ResSet = SBservice.RDFC.GetElements();
-		while ( ResSet.hasMoreElements() )
+		var resEnum = SBservice.RDFC.GetElements();
+		while ( resEnum.hasMoreElements() )
 		{
-			var myRes  = ResSet.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			var myType = SBRDF.getProperty("type", myRes);
-			SBstatus.firstChild.value = SBstring.getString("BUILD_CACHE_INIT") + " (" + this.i + ")";
-			if ( SBservice.RDFCU.IsContainer(SBRDF.data, myRes) ) {
-				this.initRecursively(myRes);
-			} else if ( myType == "image" || myType == "file" ) {
-				continue;
-			} else {
-				this.resList[this.i]  = myRes;
-				this.folderTitles[this.i] = SBRDF.getProperty("title", aContRes);
-				this.i++;
+			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+			var type = SBRDF.getProperty("type", res);
+			if ( SBservice.RDFCU.IsContainer(SBRDF.data, res) )
+			{
+				this.initRecursive(res);
 			}
+			else if ( type == "image" || type == "file" )
+			{
+				continue;
+			}
+			else
+			{
+				this.resList.push(res);
+				this.folderTitles.push(SBRDF.getProperty("title", aContRes));
+			}
+			SBstatus.firstChild.value = SBstring.getString("BUILD_CACHE_INIT") + " (" + ++this.count + ")";
 		}
 	},
 
-	asyncProcess : function(aRes)
+
+	processAsync : function(aRes)
 	{
-		SBstatus.firstChild.value = SBstring.getString("BUILD_CACHE_SCAN") + " " + SBRDF.getProperty("title", aRes);
-		SBstatus.lastChild.value  = Math.round(this.i / this.resList.length * 100);
-		if ( window.title != this.folderTitles[this.i] ) window.title = this.folderTitles[this.i];
-		var myID    = SBRDF.getProperty("id",    aRes);
-		var myChars = SBRDF.getProperty("chars", aRes);
-		var myDir = this.dataDir.clone();
-		myDir.append(myID);
-		var myContentList = [];
+		var id  = SBRDF.getProperty("id", aRes);
+		var dir = this.dataDir.clone();
+		dir.append(id);
+		var contentList = [];
 		var num = 0;
 		do {
-			var myFile = myDir.clone();
-			myFile.append("index" + ((num > 0) ? num : "") + ".html");
-			if ( !myFile.exists() ) break;
-			var myContent = SBcommon.readFile(myFile);
+			var file = dir.clone();
+			file.append("index" + ((num > 0) ? num : "") + ".html");
+			if ( !file.exists() ) break;
+			var content = SBcommon.readFile(file);
 			try {
-				SBservice.UC.charset = myChars;
-				myContent = SBservice.UC.ConvertToUnicode(myContent);
+				SBservice.UC.charset = SBRDF.getProperty("chars", aRes);
+				content = SBservice.UC.ConvertToUnicode(content);
 			} catch(ex) {
 				dump("*** ScrapBook Failed to ConvertToUnicode : " + SBRDF.getProperty("title", aRes) + "\n");
 			}
-			myContentList.push( SB_convertHTML2Text(myContent) );
+			contentList.push( this.convertHTML2Text(content) );
 		}
 		while ( ++num < 10 );
-		myContentList = myContentList.join("\n").replace(/[\x00-\x1F\x7F]/g, " ");
-		SCRDF.addEntry(aRes, myContentList, this.folderTitles[this.i]);
-		if ( ++this.i < this.resList.length ) {
-			setTimeout(function() { SBcache.asyncProcess(SBcache.resList[SBcache.i]); }, 0);
+		contentList = contentList.join("\n").replace(/[\x00-\x1F\x7F]/g, " ");
+		SCRDF.addEntry(aRes, contentList, this.folderTitles[this.count]);
+		SBstatus.firstChild.value = SBstring.getString("BUILD_CACHE_SCAN") + " " + SBRDF.getProperty("title", aRes);
+		SBstatus.lastChild.value  = Math.round(this.count / this.resList.length * 100);
+		if ( window.title != this.folderTitles[this.count] ) window.title = this.folderTitles[this.count];
+		if ( ++this.count < this.resList.length ) {
+			setTimeout(function() { SBcache.processAsync(SBcache.resList[SBcache.count]); }, 0);
 		} else {
 			this.finish();
 		}
 	},
+
 
 	finish : function()
 	{
@@ -350,14 +371,33 @@ var SBcache = {
 		window.close();
 	},
 
+
 	unload : function()
 	{
-		if ( this.i != this.resList.length )
+		if ( this.count != this.resList.length )
 		{
 			SCRDF.removeAllEntries();
 			SCRDF.flush();
 		}
 	},
+
+
+	convertHTML2Text : function(aStr)
+	{
+		var	FORMAT_CONVERTER = Components.classes['@mozilla.org/widget/htmlformatconverter;1'].createInstance(Components.interfaces.nsIFormatConverter);
+		var fromStr = Components.classes['@mozilla.org/supports-string;1'].createInstance(Components.interfaces.nsISupportsString);
+		var toStr   = { value: null };
+		fromStr.data = aStr;
+		try {
+			FORMAT_CONVERTER.convert("text/html", fromStr, fromStr.toString().length, "text/unicode", toStr, {});
+			toStr = toStr.value.QueryInterface(Components.interfaces.nsISupportsString);
+			return toStr.toString();
+		}
+		catch(ex) {
+			return aStr;
+		}
+	},
+
 
 };
 
@@ -366,24 +406,24 @@ var SBcache = {
 
 var SCRDF = {
 
-	data : null,
-	cont : null,
+	dataSource : null,
+	container : null,
 
 	init : function()
 	{
 		if ( !gCacheFile.exists() ) gCacheFile.create(gCacheFile.NORMAL_FILE_TYPE, 0666);
 		var filePath = SBservice.IO.newFileURI(gCacheFile).spec;
-		this.data = SBservice.RDF.GetDataSourceBlocking(filePath);
+		this.dataSource = SBservice.RDF.GetDataSourceBlocking(filePath);
 		this.initContainer("urn:scrapbook:cache");
 	},
 
 	initContainer : function(aResID)
 	{
-		this.cont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
+		this.container = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
 		try {
-			this.cont.Init(this.data, SBservice.RDF.GetResource(aResID));
+			this.container.Init(this.dataSource, SBservice.RDF.GetResource(aResID));
 		} catch(ex) {
-			this.cont = SBservice.RDFCU.MakeSeq(this.data, SBservice.RDF.GetResource(aResID));
+			this.container = SBservice.RDFCU.MakeSeq(this.dataSource, SBservice.RDF.GetResource(aResID));
 		}
 	},
 
@@ -391,15 +431,15 @@ var SCRDF = {
 	{
 		SBRDF.sanitize(aContent);
 		SBRDF.sanitize(aFolder);
-		this.cont.AppendElement(aRes);
-		this.data.Assert(aRes, SBservice.RDF.GetResource(NS_SCRAPBOOK + "content"), SBservice.RDF.GetLiteral(aContent), true);
-		this.data.Assert(aRes, SBservice.RDF.GetResource(NS_SCRAPBOOK + "folder"),  SBservice.RDF.GetLiteral(aFolder),  true);
+		this.container.AppendElement(aRes);
+		this.dataSource.Assert(aRes, SBservice.RDF.GetResource(NS_SCRAPBOOK + "content"), SBservice.RDF.GetLiteral(aContent), true);
+		this.dataSource.Assert(aRes, SBservice.RDF.GetResource(NS_SCRAPBOOK + "folder"),  SBservice.RDF.GetLiteral(aFolder),  true);
 	},
 
 	getProperty : function(aProp, aRes)
 	{
 		try {
-			var retVal = this.data.GetTarget(aRes, SBservice.RDF.GetResource(NS_SCRAPBOOK + aProp), true);
+			var retVal = this.dataSource.GetTarget(aRes, SBservice.RDF.GetResource(NS_SCRAPBOOK + aProp), true);
 			return retVal.QueryInterface(Components.interfaces.nsIRDFLiteral).Value;
 		} catch(ex) {
 			dump("*** ScrapBook ERROR @ SCRDF::getProperty " + aProp + " " + aRes.Value + "\n");
@@ -409,25 +449,25 @@ var SCRDF = {
 
 	removeAllEntries : function()
 	{
-		var ResSet = this.data.GetAllResources();
-		while ( ResSet.hasMoreElements() )
+		var resEnum = this.dataSource.GetAllResources();
+		while ( resEnum.hasMoreElements() )
 		{
-			var aRes = ResSet.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+			var aRes = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
 			this.removeEntry(aRes);
 		}
-		SBservice.RDFCU.MakeSeq(this.data, SBservice.RDF.GetResource("urn:scrapbook:cache"));
+		SBservice.RDFCU.MakeSeq(this.dataSource, SBservice.RDF.GetResource("urn:scrapbook:cache"));
 	},
 
 	removeEntry : function(aRes)
 	{
-		this.cont.RemoveElement(aRes, true);
-		var names = this.data.ArcLabelsOut(aRes);
+		this.container.RemoveElement(aRes, true);
+		var names = this.dataSource.ArcLabelsOut(aRes);
 		while ( names.hasMoreElements() )
 		{
 			try {
 				var name  = names.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-				var value = this.data.GetTarget(aRes, name, true);
-				this.data.Unassert(aRes, name, value);
+				var value = this.dataSource.GetTarget(aRes, name, true);
+				this.dataSource.Unassert(aRes, name, value);
 			}
 			catch(ex) {
 			}
@@ -436,7 +476,7 @@ var SCRDF = {
 
 	flush : function()
 	{
-		this.data.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).Flush();
+		this.dataSource.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).Flush();
 	}
 
 };
@@ -444,7 +484,7 @@ var SCRDF = {
 
 
 
-var SBhighlight = {
+var sbHighlight = {
 
 	word : "",
 	frameList : [],

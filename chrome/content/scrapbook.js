@@ -14,7 +14,7 @@
 
 var SBstring;
 var SBheader;
-var gEditingMode;
+var SBbaseURL;
 
 var SBdropObserver = {};
 var SBdragObserver = {};
@@ -26,18 +26,16 @@ function SB_init()
 {
 	SBstring = document.getElementById("ScrapBookString");
 	SBheader = document.getElementById("ScrapBookHeader");
-
+	SBbaseURL = SBservice.IO.newFileURI(SBcommon.getScrapBookDir()).spec;
 	SBRDF.init();
 	SBstatus.init();
 	SBsearch.init();
 	SBnote.init();
 	SBtreeUtil.init("ScrapBookTree", false);
 	SB_initObservers();
-
 	SBpref.init();
-	gEditingMode = document.getElementById("ScrapBookEditingMode").getAttribute("checked");
-
 	setTimeout(function(){ SBstatus.getHttpTask(); }, 0);
+	setTimeout(function(){ if ( window.top.sbEditor.findMe ) SB_findAndSelect(); }, 100);
 }
 
 
@@ -116,6 +114,30 @@ function SB_initObservers()
 }
 
 
+function SB_findAndSelect(res)
+{
+	window.top.sbEditor.findMe = false;
+	var res = window.top.sbEditor.resource;
+	var resList = [res];
+	for ( var i = 0; i < 32; i++ )
+	{
+		res = SBRDF.findContainerRes(res);
+		if ( res.Value == "urn:scrapbook:root" ) break;
+		resList.unshift(res);
+	}
+	for ( i = 0; i < resList.length; i++ )
+	{
+		var idx = SBtree.builderView.getIndexOfResource(resList[i]);
+		SBtree.view.selection.select(idx);
+		SBtree.treeBoxObject.focused = true;
+		if ( i == 0 ) SBtree.treeBoxObject.scrollByLines(idx);
+		if ( !SBtree.view.isContainerOpen(idx) ) SBtree.view.toggleOpenState(idx);
+	}
+	SBtree.treeBoxObject.ensureRowIsVisible(idx);
+	SBtree.focus();
+}
+
+
 function SB_finalize()
 {
 	SBnote.save();
@@ -160,16 +182,16 @@ function SB_createPopupMenu()
 	var isNote   = ( SBRDF.getProperty("type", SBtree.builderView.getResourceAtIndex(curIdx)) == "note" );
 	document.getElementById("ScrapBookTreePopupO").setAttribute("hidden",  isFolder);
 	document.getElementById("ScrapBookTreePopupT").setAttribute("hidden",  isFolder || isNote);
-	document.getElementById("ScrapBookTreePopupS").setAttribute("hidden",  isFolder || isNote);
 	document.getElementById("ScrapBookTreePopupE").setAttribute("hidden", !isNote);
-	document.getElementById("ScrapBookTreePopupL").setAttribute("hidden",  isFolder);
+	document.getElementById("ScrapBookTreePopupS").setAttribute("hidden",  isFolder || isNote);
 	document.getElementById("ScrapBookTreePopupF").setAttribute("hidden", !isFolder);
 	document.getElementById("ScrapBookTreePopupF").setAttribute("default", isFolder);
 	document.getElementById("ScrapBookTreePopupA").setAttribute("hidden", !isFolder);
 	document.getElementById("ScrapBookTreePopupV").setAttribute("hidden", !isFolder);
+	document.getElementById("ScrapBookTreePopupL").setAttribute("hidden",  isFolder);
+	document.getElementById("ScrapBookTreePopupL").previousSibling.setAttribute("hidden", !isFolder);
 	document.getElementById("ScrapBookTreePopupZ").setAttribute("hidden", !isFolder);
 	document.getElementById("ScrapBookTreePopupM").setAttribute("hidden", !isFolder);
-	document.getElementById("ScrapBookTreePopup1").setAttribute("hidden", !isFolder);
 	return isFolder;
 }
 
@@ -179,33 +201,20 @@ function SB_open(tabbed, folderOpen)
 {
 	var curIdx = SBtree.currentIndex;
 	var curRes = SBtree.builderView.getResourceAtIndex(curIdx);
-	var myID = SBRDF.getProperty("id", curRes);
-	if ( !myID ) return;
+	var id = SBRDF.getProperty("id", curRes);
+	if ( !id ) return;
 	if ( SBtree.view.isContainer(curIdx) )
 	{
 		if ( folderOpen == true ) SBtree.view.toggleOpenState(curIdx);
 		if ( SBpref.singleExpand ) SBtreeUtil.collapseOtherFolders(curIdx);
-		return;
 	}
-	if ( SBRDF.getProperty("type", curRes) == "note" )
+	else if ( SBRDF.getProperty("type", curRes) == "note" )
 	{
 		SBnote.open(curRes, tabbed || SBpref.usetabNote );
-		return;
 	}
-	if ( SBpref.usetabOpen ) tabbed = true;
-	var myDir = SBcommon.getContentDir(myID);
-	var myDirPath = SBservice.IO.newFileURI(myDir).spec;
-	if ( gEditingMode ) {
-		if ( !tabbed ) {
-			try {
-				top.document.getElementById("content").contentDocument.getElementById("ScrapBookBrowser").setAttribute("src", myDirPath + "index.html");
-				return;
-			} catch(ex) {
-			}
-		}
-		SBcommon.loadURL("chrome://scrapbook/content/edit.xul?id=" + myID, tabbed);
-	} else {
-		SBcommon.loadURL(myDirPath + "index.html", tabbed);
+	else
+	{
+		SBcommon.loadURL(SBbaseURL + "data/" + id + "/index.html", tabbed || SBpref.usetabOpen);
 	}
 }
 
@@ -215,14 +224,14 @@ function SB_openAllInTabs()
 	var curIdx = SBtree.currentIndex;
 	var curRes = SBtree.builderView.getResourceAtIndex(curIdx);
 	SBservice.RDFC.Init(SBRDF.data, curRes);
-	var ResList = SBservice.RDFC.GetElements();
-	while ( ResList.hasMoreElements() )
+	var resEnum = SBservice.RDFC.GetElements();
+	while ( resEnum.hasMoreElements() )
 	{
-		var aRes = ResList.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-		if ( SBservice.RDFCU.IsContainer(SBRDF.data, aRes) ) continue;
-		var myID   = SBRDF.getProperty("id", aRes);
-		var myType = SBRDF.getProperty("type", aRes);
-		SBcommon.loadURL(SBcommon.getURL(myID, myType), true);
+		var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+		if ( SBservice.RDFCU.IsContainer(SBRDF.data, res) ) continue;
+		var id   = SBRDF.getProperty("id", res);
+		var type = SBRDF.getProperty("type", res);
+		SBcommon.loadURL(SBcommon.getURL(id, type), true);
 	}
 }
 
@@ -248,7 +257,7 @@ function SB_delete()
 	SBRDF.flush();
 	for ( var i = 0; i < rmIDs.length; i++ )
 	{
-		if ( rmIDs[i].length == 14 ) SBcommon.removeDirSafety( SBcommon.getContentDir(rmIDs[i]) );
+		if ( rmIDs[i].length == 14 ) SBcommon.removeDirSafety(SBcommon.getContentDir(rmIDs[i]), true);
 	}
 	SBstatus.trace("Removed: " + rmIDs.length + " items");
 	if ( SBnote.curRes && rmIDs[0] == SBnote.curRes.Value.substring(18,32) ) SBnote.exit(false);
@@ -262,11 +271,12 @@ function SB_transmit(flag)
 	if ( !myID ) return;
 	switch ( flag )
 	{
-		case "P"  : window.openDialog("chrome://scrapbook/content/property.xul", "", "chrome,centerscreen,modal" , myID); break;
-		case "M"  : window.openDialog("chrome://scrapbook/content/manage.xul", "", "chrome,centerscreen,all,resizable,dialog=no", curRes.Value); break;
-		case "C"  : SBcommon.loadURL("chrome://scrapbook/content/view.xul?id=" + SBRDF.getProperty("id", curRes), SBpref.usetabCombine); break;
-		case "S"  : SBcommon.loadURL(SBRDF.getProperty("source", curRes), SBpref.usetabSource); break;
-		case "L"  : SBcommon.launchDirectory(SBcommon.getContentDir(myID)); break;
+		case "P" : window.openDialog("chrome://scrapbook/content/property.xul", "", "chrome,centerscreen,modal" , myID); break;
+		case "M" : window.openDialog("chrome://scrapbook/content/manage.xul", "", "chrome,centerscreen,all,resizable,dialog=no", curRes.Value); break;
+		case "Z" : window.openDialog('chrome://scrapbook/content/sort.xul','','chrome,centerscreen,modal', curRes); break;
+		case "C" : SBcommon.loadURL("chrome://scrapbook/content/view.xul?id=" + SBRDF.getProperty("id", curRes), SBpref.usetabCombine); break;
+		case "S" : SBcommon.loadURL(SBRDF.getProperty("source", curRes), SBpref.usetabSource); break;
+		case "L" : SBcommon.launchDirectory(SBcommon.getContentDir(myID)); break;
 	}
 }
 
@@ -386,7 +396,7 @@ var SBdropUtil = {
 			{
 				top.window.openDialog(
 					"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
-					[XferString], myWindow.location.href, SBpref.captureDetail, false, ResArray[0], ResArray[1]
+					[XferString], myWindow.location.href, SBpref.captureDetail, false, ResArray[0], ResArray[1], false
 				);
 			}
 			else if ( XferString.substring(0,7) == "file://" )
@@ -500,10 +510,10 @@ function SB_rebuildAllTree()
 {
 	SBtree.builder.rebuild();
 
-	var navList = SBservice.WM.getEnumerator("navigator:browser");
-	while ( navList.hasMoreElements() )
+	var navEnum = SBservice.WM.getEnumerator("navigator:browser");
+	while ( navEnum.hasMoreElements() )
 	{
-		var nav = navList.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
+		var nav = navEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
 		try {
 			nav.document.getElementById("sidebar").contentDocument.getElementById("ScrapBookTree").builder.rebuild();
 		} catch(ex) {
@@ -577,11 +587,7 @@ var SBsearch = {
 
 	get FORM_HISTORY()
 	{
-		try {
-			return Components.classes['@mozilla.org/satchel/form-history;1'].getService(Components.interfaces.nsIFormHistory);
-		} catch(ex) {
-			return null;
-		}
+		return Components.classes['@mozilla.org/satchel/form-history;1'].getService(Components.interfaces.nsIFormHistory);
 	},
 
 	init : function()
@@ -589,7 +595,7 @@ var SBsearch = {
 		this.xulSearch = document.getElementById("ScrapBookSearch");
 		this.type = document.getElementById("ScrapBookSearch").getAttribute("searchtype");
 		var targetID = "ScrapBookSearch" + this.type.charAt(0).toUpperCase();
-		document.getElementById(targetID).setAttribute("checked", "true");
+		document.getElementById(targetID).setAttribute("checked", true);
 		this.xulSearch.src = "chrome://scrapbook/skin/search_" + this.type + ".png";
 	},
 
@@ -621,7 +627,7 @@ var SBsearch = {
 			this.query = myInput;
 			this.re = document.getElementById("ScrapBookSearchOptionRE").getAttribute("checked");
 			this.cs = document.getElementById("ScrapBookSearchOptionCS").getAttribute("checked");
-			if ( this.FORM_HISTORY ) this.FORM_HISTORY.addEntry("ScrapBookSearchHistory", this.query);
+			this.FORM_HISTORY.addEntry("ScrapBookSearchHistory", this.query);
 			if ( this.type == "fulltext" ) {
 				this.execFT();
 		 
@@ -699,8 +705,13 @@ var SBsearch = {
 		}
 	},
 
-	filterByDays : function(days)
+	filterByDays : function()
 	{
+		const PS = Components.classes['@mozilla.org/embedcomp/prompt-service;1'].getService(Components.interfaces.nsIPromptService);
+		var ret = { value : "1" };
+		if ( !PS.prompt(window, "", SBstring.getString("FILTER_BY_DAYS"), ret, null, {}) ) return;
+		var days = ret.value;
+		if ( isNaN(days) || days <= 0 ) return;
 		var ymdList = [];
 		var dd = new Date;
 		do {
@@ -732,75 +743,8 @@ var SBsearch = {
 
 	clearFormHistory : function()
 	{
-		if ( this.FORM_HISTORY ) this.FORM_HISTORY.removeEntriesForName("ScrapBookSearchHistory");
+		this.FORM_HISTORY.removeEntriesForName("ScrapBookSearchHistory");
 	}
-
-};
-
-
-
-
-var SBsort = {
-
-	key : "",
-	ascending : false,
-	recursive : false,
-
-	exec : function(treeSort, aSortKey, isAscending)
-	{
-		this.key = aSortKey;
-		this.ascending = isAscending;
-		this.recursive = treeSort ? true : document.getElementById("ScrapBookSortRecursive").getAttribute("checked");
-		if ( treeSort ) {
-			var rootRes = SBservice.RDF.GetResource("urn:scrapbook:root");
-		} else {
-			var curIdx = SBtree.currentIndex;
-			if ( curIdx == -1 || !SBtree.view.isContainer(curIdx) ) return;
-			var rootRes = SBtree.builderView.getResourceAtIndex(curIdx);
-			if ( SBtree.view.isContainerOpen(curIdx) ) SBtree.view.toggleOpenState(curIdx);
-		}
-		this.process(rootRes);
-		if ( !treeSort ) SBtree.view.toggleOpenState(curIdx);
-		SBRDF.flush();
-	},
-
-	process : function(aContRes)
-	{
-		var ResListF = [], ResListI = [], ResListN = [];
-		var aRDFCont = SBRDF.getContainer(aContRes.Value, false);
-		var ResSet = aRDFCont.GetElements();
-		while ( ResSet.hasMoreElements() )
-		{
-			var aRes = ResSet.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			if ( SBservice.RDFCU.IsContainer(SBRDF.data, aRes) )
-			{
-				ResListF.push(aRes);
-				if ( this.recursive ) SBsort.process(aRes);
-			}
-			else
-			{
-				( SBRDF.getProperty("type", aRes) == "note" ? ResListN : ResListI ).push(aRes);
-			}
-		}
-		ResListF.sort(this.compare); if ( !this.ascending ) ResListF.reverse();
-		ResListI.sort(this.compare); if ( !this.ascending ) ResListI.reverse();
-		ResListN.sort(this.compare); if ( !this.ascending ) ResListN.reverse();
-		ResListF = ResListF.concat(ResListI).concat(ResListN); 
-		for ( var i = 0; i < ResListF.length; i++ )
-		{
-			aRDFCont.RemoveElement(ResListF[i], true);
-			aRDFCont.AppendElement(ResListF[i]);
-		}
-	},
-
-	compare : function(resA, resB)
-	{
-		var a = SBRDF.getProperty(SBsort.key, resA).toUpperCase();
-		var b = SBRDF.getProperty(SBsort.key, resB).toUpperCase();
-		if ( a > b ) return 1;
-		if ( a < b ) return -1;
-		return 0;
-	},
 
 };
 

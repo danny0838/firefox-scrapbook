@@ -80,15 +80,19 @@ var SBRDF = {
 		aSBitem.comment = this.sanitize(aSBitem.comment);
 		aSBitem.icon    = this.sanitize(aSBitem.icon);
 		aSBitem.source  = this.sanitize(aSBitem.source);
+
+		if ( aParName != "urn:scrapbook:root" && SBRDF.getProperty("type", SBservice.RDF.GetResource(aParName)) != "folder" )
+		{
+			alert("ScrapBook ERROR: Resource '" + aParName + "' is not found.");
+			aParName = "urn:scrapbook:root"; aIdx = 0;
+		}
+
 		try {
 			SBservice.RDFC.Init(this.data, SBservice.RDF.GetResource(aParName));
-		} catch(ex) {
-			if ( aParName != "urn:scrapbook:root" ) {
-				this.addItem(aSBitem, "urn:scrapbook:root", 0);
-			} else {
-				alert("ScrapBook ERROR: Failed to initialize root container.\n\n" + ex);
-				return false;
-			}
+		}
+		catch(ex) {
+			alert("ScrapBook ERROR: Failed to initialize root container.\n\n" + ex);
+			return false;
 		}
 		try {
 			var newRes = SBservice.RDF.GetResource("urn:scrapbook:item" + aSBitem.id);
@@ -248,6 +252,11 @@ var SBRDF = {
 		catch(ex) {
 			return "";
 		}
+	},
+
+	exists : function(aRes)
+	{
+		return (this.getProperty("id", aRes).length == 14);
 	},
 
 	identify : function(aID)

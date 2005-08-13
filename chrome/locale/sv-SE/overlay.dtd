@@ -8,5 +8,8 @@
 <!ENTITY sb.capture.target		"Spara länk i Scrapbook">
 <!ENTITY sb.capture.target.as	"Spara länk i Scrapbook som...">
 
-<!ENTITY sb.overlay.editing		"Byt till redigeringsläge">
+<!ENTITY sb.key.sidebar		"K">
+<!ENTITY sb.key.editor		"J">
+<!ENTITY sb.key.capture		"L">
+<!ENTITY sb.key.capture.as	"K">
 

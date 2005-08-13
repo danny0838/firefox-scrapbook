@@ -4,9 +4,12 @@
 <!ENTITY sb.capture.entire		"ページの取り込み">
 <!ENTITY sb.capture.entire.as	"ページの詳細な取り込み...">
 <!ENTITY sb.capture.frame		"フレームの取り込み">
-<!ENTITY sb.capture.frame.as	"フレームの詳細な取り込み">
+<!ENTITY sb.capture.frame.as	"フレームの詳細な取り込み...">
 <!ENTITY sb.capture.target		"リンク先の取り込み">
 <!ENTITY sb.capture.target.as	"リンク先の詳細な取り込み...">
 
-<!ENTITY sb.overlay.editing		"編集モードに切り替えます">
+<!ENTITY sb.key.sidebar		"K">
+<!ENTITY sb.key.editor		"J">
+<!ENTITY sb.key.capture		"L">
+<!ENTITY sb.key.capture.as	"K">
 

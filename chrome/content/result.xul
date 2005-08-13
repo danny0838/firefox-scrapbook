@@ -22,6 +22,7 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/fulltext.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
 
 	<!--StringBundle-->
 	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/fulltext.properties" />
@@ -29,44 +30,41 @@
 	<!--popup-->
 	<popupset>
 		<popup id="ScrapBookTreePopup">
-			<menuitem id="ScrapBookTreePopupO" label="&sb.open;"        oncommand="SB_openResult(event, 'O');" />
-			<menuitem id="ScrapBookTreePopupT" label="&sb.open.newtab;" oncommand="SB_openResult(event, 'T');" />
+			<menuitem id="ScrapBookTreePopupO" label="&sb.open;"        oncommand="sbResult.forward('O');" />
+			<menuitem id="ScrapBookTreePopupT" label="&sb.open.newtab;" oncommand="sbResult.forward('T');" />
+			<menuitem label="&sb.show.files;"  oncommand="sbResult.forward('L');" />
+<!--
+			<menuseparator /><menuitem id="ScrapBookTreePopupD" class="menuitem-iconic" label="&sb.delete;"   oncommand="sbResult.remove();" />
+-->
+			<menuseparator /><menuitem id="ScrapBookTreePopupP" class="menuitem-iconic" label="&sb.property;" oncommand="sbResult.forward('P');" />
 		</popup>
 	</popupset>
 
-	<!--result header-->
+	<!--header-->
 	<hbox id="ScrapBookResult" class="sb-header" align="center">
 		<label flex="1" crop="end" id="ScrapBookResultLabel" />
 		<spacer flex="1" />
 		<toolbarbutton class="sb-header-exit" oncommand="SB_exitResult();" />
 	</hbox>
 
-	<!--result list-->
-	<listbox id="ScrapBookResultList" contextmenu="ScrapBookTreePopup" onclick="SB_openResult(event, 'P');" class="plain" style="height:160px;">
-		<listhead>
-			<listheader label="&sb.prop.title;" />
-			<listheader label="&sb.prop.content;" />
-			<listheader label="&sb.prop.comment;" />
-			<listheader label="&sb.prop.folder;" />
-		</listhead>
-		<listcols>
-			<listcol flex="3" style="width:150px;" />
-			<listcol flex="4" style="width:200px;" />
-			<listcol flex="3" style="width:150px;" />
-			<listcol flex="1" style="width:100px;" />
-		</listcols>
-		<!--template-->
-		<listitem id="ScrapBookResultListTemplate" hidden="true">
-			<listcell class="listcell-iconic" />
-			<listcell />
-			<listcell />
-			<listcell />
-		</listitem>
-	</listbox>
+	<tree id="ScrapBookTree"
+	      context="ScrapBookTreePopup"
+	      seltype="single"
+	      onselect="sbResult.forward();"
+	      class="plain"
+	      style="height:160px;">
+		<treecols>
+			<treecol id="sbTreeColTitle"   label="&sb.prop.title;"   flex="3" /><splitter class="tree-splitter" />
+			<treecol id="sbTreeColContent" label="&sb.prop.content;" flex="5" /><splitter class="tree-splitter" />
+			<treecol id="sbTreeColComment" label="&sb.prop.comment;" flex="2" /><splitter class="tree-splitter" />
+			<treecol id="sbTreeColFolder"  label="&sb.prop.folder;"  flex="1" />
+		</treecols>
+		<treechildren />
+	</tree>
 
 	<splitter />
 
 	<!--browser-->
-	<browser id="ScrapBookBrowser" type="content-primary" flex="1" onload="SB_browserOnload(event);" />
+	<browser id="ScrapBookBrowser" type="content-primary" flex="1" onload="sbResult.onDocumentLoad(event);" />
 
 </window>

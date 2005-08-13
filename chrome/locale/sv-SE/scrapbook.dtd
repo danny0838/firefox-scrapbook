@@ -6,9 +6,7 @@
 
 <!ENTITY sb.tools			"Verktyg">
 <!ENTITY sb.tools.setting	"Inställningar...">
-<!ENTITY sb.tools.editing	"Redigeringsläge är alltid aktivt">
-<!ENTITY sb.tools.manage	"Ordna trädet...">
-<!ENTITY sb.manage			"Redigera">
+<!ENTITY sb.tools.manage	"Redigera">
 <!ENTITY sb.tools.calculate	"Beräkna storlek">
 <!ENTITY sb.tools.sorttree	"Sortera hela trädet">
 <!ENTITY sb.tools.directory	"Öppna ScrapBooks mapp">
@@ -16,6 +14,7 @@
 <!ENTITY sb.tools.trade		"Importa / Exporta">
 <!ENTITY sb.tools.output	"Spara trädet som HTML">
 <!ENTITY sb.tools.backup	"Säkerhetskopia med komprimering">
+<!ENTITY sb.tools.repair	"Emergency Repair">
 <!ENTITY sb.tools.homepage	"Hemsida">
 <!ENTITY sb.tools.about		"Om">
 
@@ -26,13 +25,7 @@
 <!ENTITY sb.search.cs		"Matcha gemener/versaler">
 <!ENTITY sb.search.cache	"Uppdatera Cache inför full textsökning">
 <!ENTITY sb.search.clear	"Rensa historik">
-
-<!ENTITY sb.filter.days		"Filtrera dagvis">
-<!ENTITY sb.filter.today	"Idag">
-<!ENTITY sb.filter.2days	"Senaste två dagarna">
-<!ENTITY sb.filter.3days	"Senaste tre dagarna">
-<!ENTITY sb.filter.1week	"Denna veckan">
-<!ENTITY sb.filter.2week	"Senaste två veckorna">
+<!ENTITY sb.search.days		"Filtrera dagvis">
 
 <!ENTITY sb.note.opentab	"Öppna i flik">
 <!ENTITY sb.note.close		"Stäng">

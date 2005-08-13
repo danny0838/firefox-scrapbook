@@ -1,9 +1,8 @@
 <!ENTITY sb.detail					"Detalle de captura">
-<!ENTITY sb.detail.rootfolder		"Carpeta de administrador">
 <!ENTITY sb.detail.new.folder		"Nueva carpeta">
 <!ENTITY sb.detail.select.folder	"Select Folder">
 
-<!ENTITY sb.detail.linked			"Capturar incluyendo ficheros de enlazados">
+<!ENTITY sb.detail.linked			"Download links">
 <!ENTITY sb.detail.linked.image		"Imagen">
 <!ENTITY sb.detail.linked.sound		"Sonido">
 <!ENTITY sb.detail.linked.movie		"Video">

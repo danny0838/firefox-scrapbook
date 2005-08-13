@@ -1,4 +1,4 @@
 <!ENTITY sb.capture			"Bewaren">
 <!ENTITY sb.capture.abort	"Afbreken">
-<!ENTITY sb.capture.retry	"Retry">
-
+<!ENTITY sb.capture.retry	"Opnieuw">
+<!ENTITY sb.capture.skip	"Skip">

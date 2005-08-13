@@ -12,9 +12,9 @@
 
 <!ENTITY sb.prop.general	"Yleiset">
 
-<!ENTITY sb.prop.icon.change	"Change">
-<!ENTITY sb.prop.icon.default	"Default">
-<!ENTITY sb.prop.icon.favicon	"Select favicon">
-<!ENTITY sb.prop.icon.custom	"Select custom icon">
-<!ENTITY sb.prop.mark			"Mark">
+<!ENTITY sb.prop.icon.change	"Vaihda">
+<!ENTITY sb.prop.icon.default	"Oletus">
+<!ENTITY sb.prop.icon.favicon	"Valitse sivukuvake">
+<!ENTITY sb.prop.icon.custom	"Valitse oma sivukuvake">
+<!ENTITY sb.prop.mark			"Merkitse">
 

@@ -1,0 +1,14 @@
+<!ENTITY sb.detail					"Detalhe da Captura">
+<!ENTITY sb.detail.new.folder		"Nova Pasta">
+<!ENTITY sb.detail.select.folder	"Selecionar Pasta">
+
+<!ENTITY sb.detail.linked			"Download de links">
+<!ENTITY sb.detail.linked.image		"Imagem">
+<!ENTITY sb.detail.linked.sound		"Som">
+<!ENTITY sb.detail.linked.movie		"Filme">
+<!ENTITY sb.detail.linked.archive	"Arquivo">
+<!ENTITY sb.detail.linked.custom	"Personalizado">
+
+<!ENTITY sb.detail.linked.seq		"Capturar sequencialmente todas as páginas Web relacionadas">
+<!ENTITY sb.detail.linked.seq.d		"(em uma subpasta automaticamente criada)">
+

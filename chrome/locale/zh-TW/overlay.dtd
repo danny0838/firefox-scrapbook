@@ -8,5 +8,8 @@
 <!ENTITY sb.capture.target		"擷取連結">
 <!ENTITY sb.capture.target.as	"擷取連結設定...">
 
-<!ENTITY sb.overlay.editing		"進入編輯模式">
+<!ENTITY sb.key.sidebar		"K">
+<!ENTITY sb.key.editor		"J">
+<!ENTITY sb.key.capture		"L">
+<!ENTITY sb.key.capture.as	"K">
 

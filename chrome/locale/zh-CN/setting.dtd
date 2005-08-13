@@ -1,37 +1,41 @@
-<!ENTITY sb.setting			"设置">
+<!ENTITY sb.setting			"选项">
 <!ENTITY sb.setting.general	"常规">
-<!ENTITY sb.setting.usetabs	"使用标签页">
+<!ENTITY sb.setting.usetabs	"标签页">
 <!ENTITY sb.setting.advance	"高级">
-<!ENTITY sb.setting.capture	"Capture">
-<!ENTITY sb.setting.editing	"Editing">
-<!ENTITY sb.setting.program	"Programs">
+<!ENTITY sb.setting.capture	"获取文件">
+<!ENTITY sb.setting.editing	"编辑">
+<!ENTITY sb.setting.program	"程序">
 
-<!ENTITY sb.setting.browser.submenu		"Enable submenu inside the browser context menu (Change after restart)">
-<!ENTITY sb.setting.capture.detail		"以拖拽方式获取资料时, 显示 '资料获取细节' 对话框">
-<!ENTITY sb.setting.capture.notify		"显示 '获取资料完毕' 提示框 (仅在 Windows 下有效?)">
-<!ENTITY sb.setting.tree.singleexpand	"展开某文件夹时, 折叠其他文件夹 (类似于 IE 收藏夹)">
+<!ENTITY sb.setting.browser.submenu		"在右键菜单中为 ScrapBook 各项新建子菜单 (需要重启动)">
+<!ENTITY sb.setting.capture.detail		"以拖拽方式获取文件时，显示 '详细信息' 对话框">
+<!ENTITY sb.setting.capture.notify		"显示 '获取完成' 提示框 (只在 Windows 下有效)">
+<!ENTITY sb.setting.tree.singleexpand	"展开一个文件夹时，折叠其他文件夹">
 <!ENTITY sb.setting.tree.quickdelete	"不显示删除确认对话框">
 
-<!ENTITY sb.setting.usetabs.d			"在新建标签页中打开勾选项目.">
-<!ENTITY sb.setting.usetabs.note		"Open Notes in Tab">
+<!ENTITY sb.setting.view.header			"显示 URL 信息标题栏">
+<!ENTITY sb.setting.view.editor			"显示编辑工具栏">
+<!ENTITY sb.setting.view.editor.auto	"打开文件时自动展开">
+<!ENTITY sb.setting.view.editor.manual	"单击状态栏中的 'EDIT' 键展开">
 
-<!ENTITY sb.setting.capture.utf8encode		"Convert into UTF-8 encoding (Recommend)">
-<!ENTITY sb.setting.capture.utf8encode.d	"If check off, some characters frequently garbles into '?'.">
-<!ENTITY sb.setting.capture.removescript	"Remove JavaScript (Recommend)">
-<!ENTITY sb.setting.capture.removescript.d	"If check off, sometimes fails to preserve the page layout.">
+<!ENTITY sb.setting.usetabs.d			"强制在新标签页中打开">
+<!ENTITY sb.setting.usetabs.note		"在标签页中打开便签">
 
-<!ENTITY sb.setting.edit.showheader		"Show header">
-<!ENTITY sb.setting.edit.multilines		"Enable multiline comment">
-<!ENTITY sb.setting.edit.confirmsave.1	"Interval for confirming save">
-<!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 = never confirm)">
+<!ENTITY sb.setting.capture.utf8encode		"自动转换为 UTF-8 编码 (推荐)">
+<!ENTITY sb.setting.capture.utf8encode.d	"若取消此项，有些字符将无法正确显示。">
+<!ENTITY sb.setting.capture.removescript	"去除 JavaScript (推荐)">
+<!ENTITY sb.setting.capture.removescript.d	"若取消此项，有时无法保持原有的页面设置。">
 
-<!ENTITY sb.setting.program.filer			"'浏览文件' 命令所使用的软件">
-<!ENTITY sb.setting.program.filer.default	"默认 (在 Windows 中, 可能为资源管理器.)">
+<!ENTITY sb.setting.edit.multilines		"自动展开注释栏">
+<!ENTITY sb.setting.edit.confirmsave.1	"提示保存文件的间隔时间">
+<!ENTITY sb.setting.edit.confirmsave.2	"分钟 (0 表示从不提示)">
+
+<!ENTITY sb.setting.program.filer			"选择浏览文件的应用程序">
+<!ENTITY sb.setting.program.filer.default	"默认 (Windows 系统中一般是资源管理器)">
 <!ENTITY sb.setting.browse					"浏览">
 
-<!ENTITY sb.setting.data			"获取资料存放处">
-<!ENTITY sb.setting.data.default	"默认 (在您的个人设定文件夹中)">
+<!ENTITY sb.setting.data			"选择 ScrapBook 保存文件的文件夹">
+<!ENTITY sb.setting.data.default	"默认 (Firefox 的用户配置文件所在的文件夹)">
 
-<!ENTITY sb.setting.restorefavicons		"Restore favicons">
-<!ENTITY sb.setting.restorefavicons.d	"If favicons are not displayed, press this button:">
+<!ENTITY sb.setting.restorefavicons		"修复图标">
+<!ENTITY sb.setting.restorefavicons.d	"如果无法显示个性图标，单击 '修复图标'。">
 

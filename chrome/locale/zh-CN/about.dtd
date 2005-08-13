@@ -1,4 +1,4 @@
-<!ENTITY sb.about.author	"创建:">
-<!ENTITY sb.about.translate	"本地化:">
+<!ENTITY sb.about.author	"创建者:">
+<!ENTITY sb.about.translate	"贡献者:">
 <!ENTITY sb.about.homepage	"主页:">
-<!ENTITY sb.about.update	"更新信息:">
+<!ENTITY sb.about.update	"检查更新:">

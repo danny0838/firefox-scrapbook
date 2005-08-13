@@ -1,0 +1,6 @@
+<!ENTITY sb.sort			"Sort">
+<!ENTITY sb.sort.title.asc	"по заголовкам (A &gt; Z)">
+<!ENTITY sb.sort.title.desc	"по заголовкам (Z &gt; A)">
+<!ENTITY sb.sort.date.asc	"в хронологическом порядке">
+<!ENTITY sb.sort.date.desc	"в обратном хронол. порядке">
+<!ENTITY sb.sort.recursive	"Сортировать подпапки рекурсивно">

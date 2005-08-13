@@ -1,9 +1,8 @@
 <!ENTITY sb.detail					"Speicherung - Details">
-<!ENTITY sb.detail.rootfolder		"Hauptverzeichnis">
 <!ENTITY sb.detail.new.folder		"Neuer Ordner">
 <!ENTITY sb.detail.select.folder	"Markierter Ordner">
 
-<!ENTITY sb.detail.linked			"Speichere mit verlinkten Dateien">
+<!ENTITY sb.detail.linked			"Download links">
 <!ENTITY sb.detail.linked.image		"Bild">
 <!ENTITY sb.detail.linked.sound		"Musik">
 <!ENTITY sb.detail.linked.movie		"Film">

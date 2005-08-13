@@ -1,0 +1,21 @@
+<!ENTITY sb.editor			"Pasek edycyjny ScrapBook">
+<!ENTITY sb.editor.inline	"Dodaj komentarz w linii zaznaczenia">
+<!ENTITY sb.editor.block.insert		"Dodaj blok komentarza po zaznaczeniu">
+<!ENTITY sb.editor.block.customize	"Dostosuj CSS dla bloku komentarzy">
+<!ENTITY sb.editor.block.hide		"Ukryj blok komentarzy">
+<!ENTITY sb.editor.marker	"Podświetl zaznaczenie">
+<!ENTITY sb.editor.unline	"Usuń wszystkie komentarze w linii zaznaczenia">
+<!ENTITY sb.editor.unmark	"Usuń wszystkie podświetlone komentarze">
+<!ENTITY sb.editor.cutter	"Usuń zaznaczenie">
+<!ENTITY sb.editor.remove.iframe	"Usuń wszystkie znaczniki &lt;iframe&gt;">
+<!ENTITY sb.editor.remove.script	"Usuń wszystkie znaczniki &lt;script&gt;">
+<!ENTITY sb.editor.eraser	"DOM Eraser: Narzędzie usuwające zaznaczone bloki">
+<!ENTITY sb.editor.undo		"Cofnij">
+<!ENTITY sb.editor.restore	"Zrezygnuj ze zmian i przywróć poprzednie wpisy">
+<!ENTITY sb.editor.save		"Zapisz zmiany">
+<!ENTITY sb.editor.find		"Szukaj i wybierz z panelu bocznego">
+<!ENTITY sb.editor.comment	"Zmień obszar komentarza">
+
+<!ENTITY sb.inline.enter	"Zapisz">
+<!ENTITY sb.inline.delete	"Usuń">
+

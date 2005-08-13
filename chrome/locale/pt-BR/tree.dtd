@@ -1,0 +1,18 @@
+<!ENTITY sb.open			"Abrir">
+<!ENTITY sb.open.tab		"Abrir na Aba">
+<!ENTITY sb.open.newtab		"Abrir em nova Aba">
+<!ENTITY sb.open.source		"Abrir URL fonte">
+<!ENTITY sb.show.files		"Mostrar Arquivos">
+<!ENTITY sb.delete			"Apagar">
+<!ENTITY sb.property		"Propriedades">
+
+<!ENTITY sb.folder.toggle	"Expandir/Recolher">
+<!ENTITY sb.folder.openall	"Abrir tudo em Abas">
+<!ENTITY sb.folder.combine	"Abrir em Visualização Combinada">
+<!ENTITY sb.folder.manage	"Gerenciar Pasta...">
+
+<!ENTITY sb.new.folder		"Nova Pasta...">
+<!ENTITY sb.new.note		"Nova Anotação">
+
+<!ENTITY sb.sort.folder		"Ordenar Pasta">
+

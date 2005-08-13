@@ -10,15 +10,9 @@
 <!ENTITY sb.folder.openall	"Öppna alla i nya flikar">
 <!ENTITY sb.folder.combine	"Öppna alla sidor i mappen i en flik">
 <!ENTITY sb.folder.manage	"Ordna mappar...">
-<!ENTITY sb.manage			"Redigera">
 
 <!ENTITY sb.new.folder		"Ny Mapp...">
 <!ENTITY sb.new.note		"Ny Notering">
 
 <!ENTITY sb.sort.folder		"Sortera mappen">
-<!ENTITY sb.sort.title.asc	"Sortera efter namn (A to Z)">
-<!ENTITY sb.sort.title.desc	"Sortera efter namn (Z to A)">
-<!ENTITY sb.sort.date.asc	"Kronologiskt">
-<!ENTITY sb.sort.date.desc	"Omvänt kronologiskt">
-<!ENTITY sb.sort.recursive	"Sortera undermappar rekursivt">
 

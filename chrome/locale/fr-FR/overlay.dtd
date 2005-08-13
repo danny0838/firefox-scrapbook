@@ -8,5 +8,8 @@
 <!ENTITY sb.capture.target		"Saisie du lien">
 <!ENTITY sb.capture.target.as	"Faire une saisie du lien dans...">
 
-<!ENTITY sb.overlay.editing		"Passer en mode édition">
+<!ENTITY sb.key.sidebar		"K">
+<!ENTITY sb.key.editor		"J">
+<!ENTITY sb.key.capture		"L">
+<!ENTITY sb.key.capture.as	"K">
 

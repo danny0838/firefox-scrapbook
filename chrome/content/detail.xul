@@ -56,10 +56,7 @@
 							<label value="&sb.prop.folder;:" />
 							<hbox>
 								<menulist id="ScrapBookDetailFolder" class="folder-icon" flex="1" disabled="true">
-									<menupopup id="ScrapBookDetailFolderPopup" oncommand="SBfolderList.onselect(event.target.id);">
-										<menuitem id="urn:scrapbook:root" label="&sb.detail.rootfolder;" class="menuitem-iconic folder-icon" />
-										<menuseparator />
-									</menupopup>
+									<menupopup id="ScrapBookDetailFolderPopup" oncommand="SBfolderList.onselect(event.target.id);" />
 								</menulist>
 								<toolbarbutton image="chrome://scrapbook/skin/tool_createfolder.png" tooltiptext="&sb.detail.new.folder;..."    oncommand="SBfolderList.createFolder();" />
 								<toolbarbutton image="chrome://scrapbook/skin/tool_selectfolder.png" tooltiptext="&sb.detail.select.folder;..." oncommand="SBfolderList.openFolderPicker();" />
@@ -67,7 +64,7 @@
 						</row>
 					</rows>
 				</grid>
-				<!--linked files-->
+				<!--download links-->
 				<groupbox>
 					<caption label="&sb.detail.linked;" />
 					<checkbox id="ScrapBookDetailLinkedI" persist="checked" label="&sb.detail.linked.image; (jpg, png, gif)" />
@@ -79,8 +76,7 @@
 						<textbox flex="1" />
 					</hbox>
 					<separator class="groove" />
-					<checkbox id="ScrapBookDetailLinkSeq" persist="checked" label="&sb.detail.linked.seq;" />
-					<!--<description style="margin-left:32px;">&sb.detail.linked.seq.d;</description>-->
+					<checkbox id="ScrapBookDetailLinkedSeq" label="&sb.detail.linked.seq;" />
 				</groupbox>
 			</tabpanel>
 			<tabpanel>

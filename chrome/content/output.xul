@@ -18,7 +18,7 @@
 <!--dialog-->
 <dialog id="ScrapBookOutputDialog"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        title="&sb.title; - &sb.tools.output;"
+        title="&sb.tools.output; - &sb.title;"
         width="380" height="400"
         onload="SB_initOutput();"
         ondialogaccept="SB_execOutput();">

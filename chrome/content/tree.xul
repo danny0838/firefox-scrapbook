@@ -22,22 +22,15 @@
 		<menuitem id="ScrapBookTreePopupT" label="&sb.open.newtab;"    oncommand="SB_open(true, false);" />
 		<menuitem id="ScrapBookTreePopupE" label="&sb.open.tab;"       oncommand="SB_open(true, false);" />
 		<menuitem id="ScrapBookTreePopupS" label="&sb.open.source;"    oncommand="SB_transmit('S');" />
-		<menuitem id="ScrapBookTreePopupL" label="&sb.show.files;"     oncommand="SB_transmit('L');" />
+		<!--folder-->
 		<menuitem id="ScrapBookTreePopupF" label="&sb.folder.toggle;"  oncommand="SB_open(false, true);" hidden="true" />
 		<menuitem id="ScrapBookTreePopupA" label="&sb.folder.openall;" oncommand="SB_openAllInTabs();"   hidden="true" />
 		<menuitem id="ScrapBookTreePopupV" label="&sb.folder.combine;" oncommand="SB_transmit('C');"     hidden="true" />
-		<menuseparator id="ScrapBookTreePopup1" hidden="true" />
-		<menu id="ScrapBookTreePopupZ" label="&sb.sort.folder;" hidden="true">
-			<menupopup>
-				<menuitem label="&sb.sort.title.asc;"  oncommand="SBsort.exec(false, 'title', true);" />
-				<menuitem label="&sb.sort.title.desc;" oncommand="SBsort.exec(false, 'title', false);" />
-				<menuitem label="&sb.sort.date.asc;"   oncommand="SBsort.exec(false, 'id', true);" />
-				<menuitem label="&sb.sort.date.desc;"  oncommand="SBsort.exec(false, 'id', false);" />
-				<menuseparator />
-				<menuitem label="&sb.sort.recursive;" id="ScrapBookSortRecursive" type="checkbox" persist="checked" />
-			</menupopup>
-		</menu>
-		<menuitem id="ScrapBookTreePopupM" label="&sb.manage;" oncommand="SB_transmit('M');" hidden="true" />
+		<menuseparator />
+		<menuitem id="ScrapBookTreePopupL" label="&sb.show.files;"     oncommand="SB_transmit('L');" />
+		<!--folder-->
+		<menuitem id="ScrapBookTreePopupM" label="&sb.folder.manage;"  oncommand="SB_transmit('M');" hidden="true" />
+		<menuitem id="ScrapBookTreePopupZ" label="&sb.sort.folder;..." oncommand="SB_transmit('Z');" hidden="true" />
 		<menuseparator />
 		<menuitem id="ScrapBookTreePopupN" class="menuitem-iconic" label="&sb.new.folder;" oncommand="SB_createFolder();" />
 		<menuitem id="ScrapBookTreePopupC" class="menuitem-iconic" label="&sb.new.note;"   oncommand="SB_createNote();" />

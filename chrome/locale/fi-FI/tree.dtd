@@ -9,16 +9,10 @@
 <!ENTITY sb.folder.toggle	"Laajenna/Supista">
 <!ENTITY sb.folder.openall	"Avaa kaikki välilehtiin">
 <!ENTITY sb.folder.combine	"Avaa yhdistetyssä näkymässä">
-<!ENTITY sb.folder.manage	"Muokkaa kansioita...">
-<!ENTITY sb.manage			"Muokkaa sivuarkistoa">
+<!ENTITY sb.folder.manage	"Muokkaa kansiota...">
 
 <!ENTITY sb.new.folder		"Uusi kansio...">
 <!ENTITY sb.new.note		"Uusi muistilappu">
 
 <!ENTITY sb.sort.folder		"Järjestä kansio">
-<!ENTITY sb.sort.title.asc	"Järjestä otsikon mukaan (A-Ö)">
-<!ENTITY sb.sort.title.desc	"Järjestä otsikon mukaan (Ö-A)">
-<!ENTITY sb.sort.date.asc	"Aikajärjestys">
-<!ENTITY sb.sort.date.desc	"Käänteinen aikajärjestys">
-<!ENTITY sb.sort.recursive	"Järjestä alakansioiden sisältökin">
 

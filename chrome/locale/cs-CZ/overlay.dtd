@@ -8,5 +8,8 @@
 <!ENTITY sb.capture.target		"Zachytit Odkaz">
 <!ENTITY sb.capture.target.as	"Zachytit Odkaz jako...">
 
-<!ENTITY sb.overlay.editing		"Přepnout do Editačního módu">
+<!ENTITY sb.key.sidebar		"K">
+<!ENTITY sb.key.editor		"J">
+<!ENTITY sb.key.capture		"L">
+<!ENTITY sb.key.capture.as	"K">
 

@@ -8,5 +8,8 @@
 <!ENTITY sb.capture.target			"Przechwyć odnośnik">
 <!ENTITY sb.capture.target.as		"Przechwyć odnośnik jako...">
 
-<!ENTITY sb.overlay.editing			"Przejdź do trybu edycji">
+<!ENTITY sb.key.sidebar		"K">
+<!ENTITY sb.key.editor		"J">
+<!ENTITY sb.key.capture		"L">
+<!ENTITY sb.key.capture.as	"K">
 

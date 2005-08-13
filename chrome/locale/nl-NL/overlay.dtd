@@ -1,12 +1,15 @@
 <!ENTITY sb.title				"ScrapBook">
-<!ENTITY sb.capture.partial		"Selectie Bewaren">
-<!ENTITY sb.capture.partial.as	"Selectie Bewaren Als...">
-<!ENTITY sb.capture.entire		"Pagina Bewaren">
-<!ENTITY sb.capture.entire.as	"Pagina Bewaren Als...">
-<!ENTITY sb.capture.frame		"Deelvenster Bewaren">
-<!ENTITY sb.capture.frame.as	"Deelvenster Bewaren Als...">
-<!ENTITY sb.capture.target		"Koppeling Bewaren">
-<!ENTITY sb.capture.target.as	"Koppeling Bewaren Als...">
+<!ENTITY sb.capture.partial		"Selectie bewaren">
+<!ENTITY sb.capture.partial.as	"Selectie bewaren als...">
+<!ENTITY sb.capture.entire		"Pagina bewaren">
+<!ENTITY sb.capture.entire.as	"Pagina bewaren als...">
+<!ENTITY sb.capture.frame		"Deelvenster bewaren">
+<!ENTITY sb.capture.frame.as	"Deelvenster bewaren als...">
+<!ENTITY sb.capture.target		"Koppeling bewaren">
+<!ENTITY sb.capture.target.as	"Koppeling bewaren als...">
 
-<!ENTITY sb.overlay.editing		"Naar Modus 'Bewerken' Overschakelen">
+<!ENTITY sb.key.sidebar		"K">
+<!ENTITY sb.key.editor		"J">
+<!ENTITY sb.key.capture		"L">
+<!ENTITY sb.key.capture.as	"K">
 

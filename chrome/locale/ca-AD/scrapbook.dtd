@@ -6,9 +6,7 @@
 
 <!ENTITY sb.tools			"Eines">
 <!ENTITY sb.tools.setting	"Opcions...">
-<!ENTITY sb.tools.editing	"Activa sempre el mode d'edició">
-<!ENTITY sb.tools.manage	"Gestiona l'arbre...">
-<!ENTITY sb.manage			"Gestiona l'arbre">
+<!ENTITY sb.tools.manage	"Gestiona l'arbre">
 <!ENTITY sb.tools.calculate	"Càlcul de la mida">
 <!ENTITY sb.tools.sorttree	"Ordena tot l'arbre">
 <!ENTITY sb.tools.directory	"Carpeta de l'ScrapBook">
@@ -16,6 +14,7 @@
 <!ENTITY sb.tools.trade		"Importa / Exporta">
 <!ENTITY sb.tools.output	"Exporta l'arbre com a HTML">
 <!ENTITY sb.tools.backup	"Còpia de seguretat comprimida">
+<!ENTITY sb.tools.repair	"Emergency Repair">
 <!ENTITY sb.tools.homepage	"Vés a la pàgina inicial">
 <!ENTITY sb.tools.about		"Quant a l'ScrapBook">
 
@@ -26,13 +25,7 @@
 <!ENTITY sb.search.cs		"Distingeix entre majúscules i minúscules">
 <!ENTITY sb.search.cache	"Actualitza la memòria cau per a la cerca a tot el text">
 <!ENTITY sb.search.clear	"Buida l'historial de formularis">
-
-<!ENTITY sb.filter.days		"Filtra per dies">
-<!ENTITY sb.filter.today	"Avui">
-<!ENTITY sb.filter.2days	"Els dos últims dies">
-<!ENTITY sb.filter.3days	"Els tres últims dies">
-<!ENTITY sb.filter.1week	"Aquesta setmana">
-<!ENTITY sb.filter.2week	"Les dues últimes setmanes">
+<!ENTITY sb.search.days		"Filtra per dies">
 
 <!ENTITY sb.note.opentab	"Obre en una pestanya">
 <!ENTITY sb.note.close		"Tanca">

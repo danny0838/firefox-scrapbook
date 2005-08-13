@@ -6,11 +6,16 @@
 <!ENTITY sb.setting.editing	"Edició">
 <!ENTITY sb.setting.program	"Programes">
 
-<!ENTITY sb.setting.browser.submenu		"Mostra les ordres del menú contextual en un submenú (el canvi es farà efectiu un cop hageu reiniciat el navegador)">
+<!ENTITY sb.setting.browser.submenu		"Mostra les ordres del menú contextual en un submenú (el canvi es farà efectiu un cop hagueu reiniciat el navegador)">
 <!ENTITY sb.setting.capture.detail		"Quan arrossegui i deixi anar un element a la barra lateral mostra el diàleg &#34;Captura detallada&#34;">
 <!ENTITY sb.setting.capture.notify		"Quan la captura hagi acabat mostra una notificació (només funciona al Windows)">
 <!ENTITY sb.setting.tree.singleexpand	"Quan expandeixi una carpeta de l'arbre redueix totes les altres carpetes">
 <!ENTITY sb.setting.tree.quickdelete	"Quan suprimeixi un element no em demanis cap confirmació">
+
+<!ENTITY sb.setting.view.header			"Mostra la barra d'informació de l'URL">
+<!ENTITY sb.setting.view.editor			"Mostra la barra d'eines d'edició">
+<!ENTITY sb.setting.view.editor.auto	"Automàticament quan es visualitzi una pàgina capturada">
+<!ENTITY sb.setting.view.editor.manual	"Quan premi el botó EDIT de la barra d'estat">
 
 <!ENTITY sb.setting.usetabs.d			"Les accions seleccionades utilitzaran pestanyes noves.">
 <!ENTITY sb.setting.usetabs.note		"Obre les notes en una pestanya">
@@ -20,7 +25,6 @@
 <!ENTITY sb.setting.capture.removescript	"Suprimeix el JavaScript (recomanat)">
 <!ENTITY sb.setting.capture.removescript.d	"Si desactiveu aquesta opció a vegades no es podrà conservar correctament el format de la pàgina.">
 
-<!ENTITY sb.setting.edit.showheader		"Mostra la capçalera">
 <!ENTITY sb.setting.edit.multilines		"Expandeix inicialment l'àrea de comentaris">
 <!ENTITY sb.setting.edit.confirmsave.1	"Interval per a confirmar el desat">
 <!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 = no confirmis mai)">

@@ -1,4 +1,4 @@
 <!ENTITY sb.capture			"Сохранение">
 <!ENTITY sb.capture.abort	"Прервать">
 <!ENTITY sb.capture.retry	"Повтор">
-
+<!ENTITY sb.capture.skip	"Skip">

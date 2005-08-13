@@ -11,93 +11,108 @@
 **************************************************/
 
 
+var sbBrowserOverlay = {
 
-function SBcapture_branchContextMenu()
-{
-	document.getElementById("ScrapBookContextMenu1").hidden = !gContextMenu.isTextSelected;
-	document.getElementById("ScrapBookContextMenu2").hidden = !gContextMenu.isTextSelected;
-	document.getElementById("ScrapBookContextMenu3").hidden = gContextMenu.isTextSelected;
-	document.getElementById("ScrapBookContextMenu4").hidden = gContextMenu.isTextSelected;
-	document.getElementById("ScrapBookContextMenu5").hidden = (!gContextMenu.inFrame || gContextMenu.isTextSelected);
-	document.getElementById("ScrapBookContextMenu6").hidden = (!gContextMenu.inFrame || gContextMenu.isTextSelected);
-	document.getElementById("ScrapBookContextMenu7").hidden = (!gContextMenu.onLink || gContextMenu.onMailtoLink);
-	document.getElementById("ScrapBookContextMenu8").hidden = (!gContextMenu.onLink || gContextMenu.onMailtoLink);
-}
+	lastLocation : "",
+	prefShowHeader : false,
+	prefShowEditor : false,
 
-
-function SBcapture_initContextMenu()
-{
-	document.getElementById("contentAreaContextMenu").removeEventListener("popupshowing", SBcapture_branchContextMenu, true);
-	document.getElementById("contentAreaContextMenu").addEventListener("popupshowing",    SBcapture_branchContextMenu, true);
-	if ( SBcommon.getBoolPref("scrapbook.browser.submenu", false) )
+	init : function()
 	{
-		document.getElementById("ScrapBookContextSubmenu").hidden = false;
-		for ( var i = 1; i <= 8; i++ )
+		document.getElementById("contentAreaContextMenu").addEventListener("popupshowing", sbBrowserOverlay.onContextMenuShowing, true);
+		if ( SBcommon.getBoolPref("scrapbook.browser.submenu", false) )
 		{
-			document.getElementById("ScrapBookContextSubmenu").firstChild.appendChild(document.getElementById("ScrapBookContextMenu" + i));
+			document.getElementById("ScrapBookContextSubmenu").hidden = false;
+			for ( var i = 1; i <= 8; i++ )
+			{
+				document.getElementById("ScrapBookContextSubmenu").firstChild.appendChild(document.getElementById("ScrapBookContextMenu" + i));
+			}
 		}
-	}
-}
+		this.refresh();
+		gBrowser.mTabBox.addEventListener("select", function(){ sbBrowserOverlay.onLocationChange(); }, false);
+	},
 
+	refresh : function()
+	{
+		this.lastLocation = "";
+		this.prefShowHeader = SBcommon.getBoolPref("scrapbook.view.header", false);
+		this.prefShowEditor = SBcommon.getBoolPref("scrapbook.view.editor", false);
+		SBRDF.init();
+	},
 
-window.removeEventListener("load", SBcapture_initContextMenu, true);
-window.addEventListener("load",    SBcapture_initContextMenu, true);
+	onContextMenuShowing : function()
+	{
+		document.getElementById("ScrapBookContextMenu1").hidden = !gContextMenu.isTextSelected;
+		document.getElementById("ScrapBookContextMenu2").hidden = !gContextMenu.isTextSelected;
+		document.getElementById("ScrapBookContextMenu3").hidden = gContextMenu.isTextSelected;
+		document.getElementById("ScrapBookContextMenu4").hidden = gContextMenu.isTextSelected;
+		document.getElementById("ScrapBookContextMenu5").hidden = (!gContextMenu.inFrame || gContextMenu.isTextSelected);
+		document.getElementById("ScrapBookContextMenu6").hidden = (!gContextMenu.inFrame || gContextMenu.isTextSelected);
+		document.getElementById("ScrapBookContextMenu7").hidden = (!gContextMenu.onLink || gContextMenu.onMailtoLink);
+		document.getElementById("ScrapBookContextMenu8").hidden = (!gContextMenu.onLink || gContextMenu.onMailtoLink);
+	},
 
-
-
-
-var SB_lastFocusedURL = "";
-
-function SB_initStatusbarPanel()
-{
-	try {
+	getID : function()
+	{
 		var curURL = window._content.location.href;
-	} catch(ex) {
-		return;
-	}
-	if ( curURL != SB_lastFocusedURL )
+		var isEditable = ( curURL.match(/^file/) && curURL.match(/\/data\/(\d{14})\/index\.html/) );
+		return isEditable ? RegExp.$1 : null;
+	},
+
+	onLocationChange : function()
 	{
-		var isEditable = ( curURL.match(/^file/) && curURL.match(/\/data\/\d{14}\/index\.html$/) );
-		document.getElementById("ScrapBookStatusPanel").src    = isEditable ? "chrome://scrapbook/skin/status_edit.png" : "";
-		document.getElementById("ScrapBookStatusPanel").hidden = !isEditable;
-		SB_lastFocusedURL = curURL;
-	}
-}
+		var curURL = window._content.location.href;
+		if ( curURL == this.lastLocation ) return;
+		var id = this.getID();
+		document.getElementById("ScrapBookStatusPanel").src    = id ? "chrome://scrapbook/skin/status_edit.png" : "";
+		document.getElementById("ScrapBookStatusPanel").hidden = id ? false : true;
+		if ( id )
+		{
+			if ( this.prefShowHeader ) sbEditor.showHeader();
+			if ( this.prefShowEditor )
+				setTimeout(function(){ sbEditor.init(); }, 0);
+			else
+				document.getElementById("ScrapBookEditorBox").hidden = true;
+		}
+		else
+		{
+			document.getElementById("ScrapBookEditorBox").hidden = true;
+		}
+		this.lastLocation = curURL;
+	},
 
-
-window.removeEventListener("load" , SB_initStatusbarPanel, true);
-window.removeEventListener("focus", SB_initStatusbarPanel, true);
-window.addEventListener("load" , SB_initStatusbarPanel, true);
-window.addEventListener("focus", SB_initStatusbarPanel, true);
-
-
-
-function SBcommand_captureWindow(frameOnly, selectionOnly, showDetail)
-{
-	var targetWindow = frameOnly ? SBcommon.getFocusedWindow() : window._content;
-	SBcapture.doCaptureDocument(targetWindow, selectionOnly, showDetail, "urn:scrapbook:root", 0);
-}
-
-
-function SBcommand_captureTarget(showDetail)
-{
-	var linkURL = gContextMenu.linkURL();
-	if ( !linkURL ) return;
-	window.openDialog(
-		"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
-		[linkURL], document.popupNode.ownerDocument.location.href, showDetail, false, "urn:scrapbook:root", 0
-	);
-}
-
-
-
-function SB_enterEditingMode()
-{
-	var curURL = window._content.location.href;
-	if ( curURL.match(/^file/) && curURL.match(/\/data\/(\d{14})\/index\.html$/) )
+	toggleEditor : function()
 	{
-		SBcommon.loadURL("chrome://scrapbook/content/edit.xul?id=" + RegExp.$1, false);
-	}
-}
+		if ( !this.getID() ) return;
+		if ( document.getElementById("ScrapBookEditorBox").hidden )
+			sbEditor.init();
+		else
+			sbEditor.exit();
+	},
+
+	captureWindow : function(frameOnly, selectionOnly, showDetail)
+	{
+		var targetWindow = frameOnly ? SBcommon.getFocusedWindow() : window._content;
+		SBcapture.doCaptureDocument(targetWindow, selectionOnly, showDetail, "urn:scrapbook:root", 0);
+	},
+
+	captureTarget : function(showDetail)
+	{
+		var linkURL = gContextMenu.linkURL();
+		if ( !linkURL ) return;
+		window.openDialog(
+			"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
+			[linkURL], document.popupNode.ownerDocument.location.href, showDetail, false, "urn:scrapbook:root", 0, false
+		);
+	},
+
+};
+
+
+window.addEventListener("load", function(){ sbBrowserOverlay.init(); }, false);
+
+
+window.addEventListener("load", function(){ sbBrowserOverlay.onLocationChange(); }, true);
+
 
 

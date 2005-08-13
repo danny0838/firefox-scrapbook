@@ -1,0 +1,21 @@
+<!ENTITY sb.editor			"ScrapBook Edit Toolbar">
+<!ENTITY sb.editor.inline	"F&#x00FC;ge Kommentar der Auswahl hinzu">
+<!ENTITY sb.editor.block.insert		"F&#x00FC;ge einen Blockkommentar der Auswahl hinzu">
+<!ENTITY sb.editor.block.customize	"CSS f&#x00FC;r den Blockkommentar anpassen">
+<!ENTITY sb.editor.block.hide		"Blockkommentare verstecken">
+<!ENTITY sb.editor.marker	"Auswahl markieren">
+<!ENTITY sb.editor.unline	"L&#x00F6;sche alle Kommentare">
+<!ENTITY sb.editor.unmark	"L&#x00F6;sche alle Markierungen">
+<!ENTITY sb.editor.cutter	"L&#x00F6;sche Auswahl">
+<!ENTITY sb.editor.remove.iframe	"Remove All IFRAME Tags">
+<!ENTITY sb.editor.remove.script	"Remove All SCRIPT Tags">
+<!ENTITY sb.editor.eraser	"Entfernen des angeklickten Blockes.">
+<!ENTITY sb.editor.undo		"Zur&#x00FC;ck">
+<!ENTITY sb.editor.restore	"&#x00C4;nderungen r&#x00FC;ckg&#x00E4;ngig machen">
+<!ENTITY sb.editor.save		"Sichere &#x00C4;nderungen">
+<!ENTITY sb.editor.find		"Find and Select from the Sidebar Tree">
+<!ENTITY sb.editor.comment	"Erweitere Kommentar-Bereich">
+
+<!ENTITY sb.inline.enter	"OK">
+<!ENTITY sb.inline.delete	"L&#x00F6;schen">
+
