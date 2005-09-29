@@ -7,30 +7,14 @@
 
 		<em:id>{53A03D43-5363-4669-8190-99061B2DEBA5}</em:id>
 		<em:name>ScrapBook</em:name>
-		<em:version>0.16.0</em:version>
+		<em:version>0.17.0</em:version>
 		<em:description>This extension helps you to save Web pages and easily manage collections.</em:description>
 		<em:creator>Gomita</em:creator>
-		<em:contributor>Bob Chao</em:contributor>
-		<em:contributor>MatrixIsAllOver</em:contributor>
-		<em:contributor>Gigamax</em:contributor>
-		<em:contributor>Proyecto NAVE</em:contributor>
-		<em:contributor>Mori</em:contributor>
-		<em:contributor>Charlie Chen</em:contributor>
-		<em:contributor>WowTIP</em:contributor>
-		<em:contributor>Ville Pohjanheimo</em:contributor>
-		<em:contributor>mlok</em:contributor>
-		<em:contributor>Yury Merkulov (RED)</em:contributor>
-		<em:contributor>Eoin O'Cinneide</em:contributor>
-		<em:contributor>Liesbeth</em:contributor>
-		<em:contributor>Leszek(teo)Zyczkowski</em:contributor>
-		<em:contributor>Joan Sala Soler</em:contributor>
-		<em:contributor>Andre Luiz</em:contributor>
-		<em:contributor>George Cheng Tsoi</em:contributor>
 		<em:homepageURL>http://amb.vis.ne.jp/mozilla/scrapbook/</em:homepageURL>
 		<em:optionsURL>chrome://scrapbook/content/setting.xul</em:optionsURL>
 		<em:aboutURL>chrome://scrapbook/content/about.xul</em:aboutURL>
 		<em:iconURL>chrome://scrapbook/skin/mainicon1.png</em:iconURL>
-		<em:updateURL>http://amb.vis.ne.jp/mozilla/scrapbook/update.rdf?ver=0.16.0</em:updateURL>
+		<em:updateURL>http://amb.vis.ne.jp/mozilla/scrapbook/update.rdf?ver=0.17.0</em:updateURL>
 
 		<em:file>
 			<Description about="urn:mozilla:extension:file:scrapbook.jar">
@@ -60,7 +44,7 @@
 			<Description>
 				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
 				<em:minVersion>0.9</em:minVersion>
-				<em:maxVersion>1.0+</em:maxVersion>
+				<em:maxVersion>1.4</em:maxVersion>
 			</Description>
 		</em:targetApplication>
 
