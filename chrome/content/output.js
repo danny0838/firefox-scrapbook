@@ -22,9 +22,14 @@ function SB_initOutput()
 {
 	SBstring = document.getElementById("ScrapBookString");
 	document.documentElement.getButton("accept").label = SBstring.getString("OUTPUT_OK_BUTTON");
-	SBRDF.init();
+	sbDataSource.init();
 	SBtreeUtil.init("ScrapBookTree", true);
 	SB_selectAllFolders();
+	if ( window.location.href.match(/\?auto/) )
+	{
+		document.getElementById("ScrapBookOutputOptionO").checked = false;
+		SB_execOutput();
+	}
 }
 
 
@@ -51,29 +56,30 @@ function SB_execOutput()
 {
 	gFrameOption = document.getElementById("ScrapBookOutputOptionF").checked;
 
-	SBexport.init();
+	SBoutput.init();
 	if ( gSelectAll )
 	{
-		SBexport.processRDFRescursively(SBservice.RDF.GetResource("urn:scrapbook:root"));
+		SBoutput.processRDFRescursively(SBservice.RDF.GetResource("urn:scrapbook:root"));
 	}
 	else
 	{
 		var selResList = SBtreeUtil.getSelection(true, 1);
-		SBexport.src += "<ul>\n";
+		SBoutput.src += "<ul>\n";
 		for ( var i = 0; i < selResList.length; i++ )
 		{
-			SBexport.exec(selResList[i]);
+			SBoutput.exec(selResList[i]);
 		}
-		SBexport.src += "</ul>\n";
+		SBoutput.src += "</ul>\n";
 	}
-	SBexport.finalize();
+	SBoutput.finalize();
 	SBtreeUtil.toggleAllFolders(true);
+	if ( window.location.href.match(/\?auto/) ) setTimeout(function(){ window.close(); }, 1000);
 }
 
 
 
 
-var SBexport = {
+var SBoutput = {
 
 	depth : 0,
 	src   : "",
@@ -83,25 +89,24 @@ var SBexport = {
 		this.src = this.getHTMLHead();
 	},
 
-
 	finalize : function()
 	{
 		var myDir = SBcommon.getScrapBookDir().clone();
 		myDir.append("tree");
 		if ( !myDir.exists() ) myDir.create(myDir.DIRECTORY_TYPE, 0700);
 
-		var myArray = {
+		var urlHash = {
 			"chrome://scrapbook/skin/treestyle.css"  : "treestyle.css",
 			"chrome://scrapbook/skin/treeitem.png"   : "treeitem.png",
 			"chrome://scrapbook/skin/treenote.png"   : "treenote.png",
 			"chrome://scrapbook/skin/treefolder.png" : "treefolder.png",
 			"chrome://scrapbook/skin/tool_togglefolder.png" : "togglefolder.png",
 		};
-		for ( var target in myArray )
+		for ( var url in urlHash )
 		{
-			var targetFile = myDir.clone();
-			targetFile.append(myArray[target]);
-			SBcommon.saveTemplateFile(target, targetFile);
+			var destFile = myDir.clone();
+			destFile.append(urlHash[url]);
+			SBcommon.saveTemplateFile(url, destFile);
 		}
 
 		var myFrameFile = myDir.clone();
@@ -122,7 +127,6 @@ var SBexport = {
 		}
 	},
 
-
 	exec : function(aContRes)
 	{
 		this.src += '<li class="depth' + String(this.depth) + '">';
@@ -131,27 +135,25 @@ var SBexport = {
 		this.src += "</li>\n";
 	},
 
-
 	processRDFRescursively : function(aContRes)
 	{
 		this.depth++;
-		var myID = SBRDF.getProperty("id", aContRes);
+		var myID = sbDataSource.getProperty("id", aContRes);
 		if ( !myID ) myID = "root";
 		this.src += '<ul id="folder-' + myID + '">\n';
-		SBservice.RDFC.Init(SBRDF.data, aContRes);
+		SBservice.RDFC.Init(sbDataSource.data, aContRes);
 		var ResList = SBservice.RDFC.GetElements();
 		while ( ResList.hasMoreElements() )
 		{
 			var aRes = ResList.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
 			this.src += '<li class="depth' + String(this.depth) + '">';
 			this.src += this.getHTMLBody(aRes);
-			if ( SBservice.RDFCU.IsContainer(SBRDF.data, aRes) ) this.processRDFRescursively(aRes);
+			if ( SBservice.RDFCU.IsContainer(sbDataSource.data, aRes) ) this.processRDFRescursively(aRes);
 			this.src += "</li>\n";
 		}
 		this.src += "</ul>\n";
 		this.depth--;
 	},
-
 
 	getHTMLHead : function()
 	{
@@ -184,18 +186,17 @@ var SBexport = {
 		return HTML;
 	},
 
-
 	getHTMLBody : function(aRes)
 	{
-		var myID    = SBRDF.getProperty("id", aRes);
-		var myTitle = SBRDF.getProperty("title", aRes);
-		var myIcon  = SBRDF.getProperty("icon", aRes);
+		var myID    = sbDataSource.getProperty("id", aRes);
+		var myTitle = sbDataSource.getProperty("title", aRes);
+		var myIcon  = sbDataSource.getProperty("icon", aRes);
 		if ( myIcon.match(/(\/data\/\d{14}\/.*$)/) ) myIcon = ".." + RegExp.$1;
-		if ( !myIcon ) myIcon = SBcommon.getFileName( SBcommon.getDefaultIcon(SBRDF.getProperty("type", aRes)) );
+		if ( !myIcon ) myIcon = SBcommon.getFileName( SBcommon.getDefaultIcon(sbDataSource.getProperty("type", aRes)) );
 		myTitle = myTitle.replace(/</g, "&lt;");
 		myTitle = myTitle.replace(/>/g, "&gt;");
 		var target = gFrameOption ? ' target="main"' : "";
-		if ( SBRDF.getProperty("type", aRes) == "folder" ) {
+		if ( sbDataSource.getProperty("type", aRes) == "folder" ) {
 			HTML = '<a class="folder" href="javascript:toggle(\'folder-' + myID + '\');"><img src="./treefolder.png" width="16" height="16" alt="">' + myTitle + '</a>\n';
 		} else {
 			HTML = '<a href="../data/' + myID + '/index.html"' + target + '><img src="' + myIcon + '" width="16" height="16" alt="">' + myTitle + '</a>';
@@ -203,13 +204,11 @@ var SBexport = {
 		return HTML;
 	},
 
-
 	getHTMLFoot : function()
 	{
 		var HTML = "\n</body>\n</html>\n";
 		return HTML;
 	},
-
 
 	getHTMLFrame : function()
 	{
@@ -225,7 +224,7 @@ var SBexport = {
 		         + '</frameset>\n\n'
 		         + '</html>\n';
 		return HTML;
-	}
+	},
 
 };
 

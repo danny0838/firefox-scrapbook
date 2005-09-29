@@ -29,7 +29,7 @@ var SBsort = {
 		this.WIZARD.getButton("back").label = this.STRING.getString("START_BUTTON");
 		this.WIZARD.getButton("back").addEventListener("click", function(){ SBsort.exec(); }, false);
 		this.RADIO_GROUP.selectedIndex = this.RADIO_GROUP.getAttribute("sortIndex");
-		SBRDF.init();
+		sbDataSource.init();
 	},
 
 	exec : function()
@@ -59,25 +59,25 @@ var SBsort = {
 		this.ascending = isAscending;
 		this.recursive = document.getElementById("ScrapBookSortRecursive").getAttribute("checked");
 		this.process(aRootRes);
-		SBRDF.flush();
+		sbDataSource.flush();
 	},
 
 	process : function(aContRes)
 	{
 		var resListF = [], resListI = [], resListN = [];
-		var aRDFCont = SBRDF.getContainer(aContRes.Value, false);
+		var aRDFCont = sbDataSource.getContainer(aContRes.Value, false);
 		var resEnum = aRDFCont.GetElements();
 		while ( resEnum.hasMoreElements() )
 		{
 			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			if ( SBservice.RDFCU.IsContainer(SBRDF.data, res) )
+			if ( SBservice.RDFCU.IsContainer(sbDataSource.data, res) )
 			{
 				resListF.push(res);
 				if ( this.recursive ) this.process(res);
 			}
 			else
 			{
-				( SBRDF.getProperty("type", res) == "note" ? resListN : resListI ).push(res);
+				( sbDataSource.getProperty("type", res) == "note" ? resListN : resListI ).push(res);
 			}
 		}
 		resListF.sort(this.compare); if ( !this.ascending ) resListF.reverse();
@@ -93,8 +93,8 @@ var SBsort = {
 
 	compare : function(resA, resB)
 	{
-		var a = SBRDF.getProperty(SBsort.key, resA).toUpperCase();
-		var b = SBRDF.getProperty(SBsort.key, resB).toUpperCase();
+		var a = sbDataSource.getProperty(SBsort.key, resA).toUpperCase();
+		var b = sbDataSource.getProperty(SBsort.key, resB).toUpperCase();
 		if ( a > b ) return 1;
 		if ( a < b ) return -1;
 		return 0;

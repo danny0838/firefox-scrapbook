@@ -1,4 +1,4 @@
-<!ENTITY sb.backup.d		"Sauvegarder par compression entièrement les données de ScrapBook.">
+<!ENTITY sb.backup.d		"Sauvegarder les données complètes de ScrapBook par compression.">
 <!ENTITY sb.backup.program	"Programme de compression">
 <!ENTITY sb.backup.file		"Fichier de destination">
 <!ENTITY sb.backup.browse	"Parcourir">

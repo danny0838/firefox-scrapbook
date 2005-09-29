@@ -8,33 +8,26 @@
 
 <!ENTITY sb.setting.browser.submenu		"Autoriser le sous-menu au sein du menu contextuel du navigateur (la modification sera effective au redémarrage)">
 <!ENTITY sb.setting.capture.detail		"Afficher la fenêtre 'Détail de la capture' en cas de capture par glisser / déposer dans la barre latérale">
-<!ENTITY sb.setting.capture.notify		"Afficher la notification 'Capture terminée'  (seulement sous Windows ?)">
+<!ENTITY sb.setting.capture.notify		"Afficher la notification 'Capture terminée' (fonctionne uniquement sous Windows)">
 <!ENTITY sb.setting.tree.singleexpand	"Quand un dossier de l'arborescence est déployé, réduire tous les autres dossiers (cf. les favoris d'IE)">
 <!ENTITY sb.setting.tree.quickdelete	"Ne pas confirmer en cas de suppression">
 
-<!ENTITY sb.setting.view.header			"Show URL infobar">
-<!ENTITY sb.setting.view.editor			"Show Edit Toolbar">
-<!ENTITY sb.setting.view.editor.auto	"Automatically when viewing a captured page">
-<!ENTITY sb.setting.view.editor.manual	"Manually by hitting EDIT button in the status bar">
-
-<!ENTITY sb.setting.usetabs.d			"Utiliser de nouveaux onglets pour les actions entreprises.">
-<!ENTITY sb.setting.usetabs.note		"Ouvrir des notes dans un onglet">
+<!ENTITY sb.setting.usetabs.d			"Utiliser de nouveaux onglets pour les actions suivantes :">
+<!ENTITY sb.setting.usetabs.note		"Ouvrir les notes dans un onglet">
 
 <!ENTITY sb.setting.capture.utf8encode		"Convertir en encodage UTF-8 (Recommandé)">
 <!ENTITY sb.setting.capture.utf8encode.d	"Si cette option n'est pas choisie, certains caractères peuvent être remplacés par '?'.">
 <!ENTITY sb.setting.capture.removescript	"Désactiver JavaScript (Recommandé)">
-<!ENTITY sb.setting.capture.removescript.d	"Si cette option n'est pas choisie, la disposition de la page peut ne pas être conservée.">
+<!ENTITY sb.setting.capture.removescript.d	"Si cette option n'est pas choisie, JavaScript cause de nombreux problèmes.">
 
-<!ENTITY sb.setting.edit.multilines		"Autoriser un commentaire multilinéaire">
-<!ENTITY sb.setting.edit.confirmsave.1	"Délai pour confirmer la sauvegarde">
-<!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 = aucune confirmation)">
-
-<!ENTITY sb.setting.program.filer			"Programme pour le menu 'Parcourir les fichiers'">
-<!ENTITY sb.setting.program.filer.default	"Par défaut (pour Windows, Explorer.)">
-<!ENTITY sb.setting.browse					"Parcourir">
+<!ENTITY sb.button.browse			"Parcourir">
+<!ENTITY sb.button.show				"Afficher le dossier">
 
 <!ENTITY sb.setting.data			"Destination du stockage des données">
 <!ENTITY sb.setting.data.default	"Par défaut (dans le dossier de votre profil)">
+<!ENTITY sb.setting.data.alert		"Actuellement, vos données Scrapbook sont stockées dans le répertoire de votre 'profil' Firefox. Notez que, si vous sélectionnez [Effacer les fichiers] en effaçant votre profil Firefox, toutes les données Scrapbook seront supprimées.">
+<!ENTITY sb.setting.filer			"Programme pour le menu 'Parcourir les fichiers'">
+<!ENTITY sb.setting.filer.default	"Par défaut (pour Windows, Explorer.)">
 
 <!ENTITY sb.setting.restorefavicons		"Restaurer les favicônes">
 <!ENTITY sb.setting.restorefavicons.d	"Si les favicônes n'apparaissent pas, cliquez sur ce bouton :">

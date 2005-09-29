@@ -1,21 +1,30 @@
-<!ENTITY sb.editor			"ScrapBook Edit Toolbar">
-<!ENTITY sb.editor.inline	"Ajouter en ligne un commentaire sur la sélection">
+<!ENTITY sb.editor			"Barre d'outil d'édition ScrapBook">
+<!ENTITY sb.editor.eraser	"DOM Eraser: un outil pour supprimer un bloc sélectionné.">
+<!ENTITY sb.editor.undo		"Annuler">
+<!ENTITY sb.editor.restore	"Abandonner les changements et restaurer">
+<!ENTITY sb.editor.save		"Sauvegarder les changements">
+<!ENTITY sb.editor.comment	"Déployer la zone de commentaire">
+<!ENTITY sb.editor.marker			"Surligner la sélection">
+<!ENTITY sb.editor.marker.yellow	"Jaune">
+<!ENTITY sb.editor.marker.green		"Vert">
+<!ENTITY sb.editor.marker.blue		"Bleu">
+<!ENTITY sb.editor.marker.pink		"Rose">
+<!ENTITY sb.editor.unmark.partial	"Supprimer les surlignages de la sélection">
+<!ENTITY sb.editor.unmark.entire	"Supprimer tous les surlignages">
 <!ENTITY sb.editor.block.insert		"Ajouter un commentaire de bloc après la sélection">
 <!ENTITY sb.editor.block.customize	"Personnaliser CSS pour les commentaires de bloc">
 <!ENTITY sb.editor.block.hide		"Cacher les commentaires de bloc">
-<!ENTITY sb.editor.marker	"Surligner la sélection">
-<!ENTITY sb.editor.unline	"Supprimer tous les commentaires en ligne">
-<!ENTITY sb.editor.unmark	"Supprimer tous les surlignages">
-<!ENTITY sb.editor.cutter	"Supprimer la sélection">
-<!ENTITY sb.editor.remove.iframe	"Remove All IFRAME Tags">
-<!ENTITY sb.editor.remove.script	"Remove All SCRIPT Tags">
-<!ENTITY sb.editor.eraser	"DOM Eraser: un outil pour supprimer un bloc sélectionné.">
-<!ENTITY sb.editor.undo		"Défaire">
-<!ENTITY sb.editor.restore	"Abandonner les changements et restaurer">
-<!ENTITY sb.editor.save		"Sauvegarder les changements">
-<!ENTITY sb.editor.find		"Find and Select from the Sidebar Tree">
-<!ENTITY sb.editor.comment	"Déployer la zone de commentaire">
+<!ENTITY sb.editor.inline.add		"Ajouter un commentaire en ligne sur la sélection">
+<!ENTITY sb.editor.inline.delete	"Supprimer tous les commentaires en ligne">
+<!ENTITY sb.editor.attach.file		"Attacher un fichier à la sélection">
+<!ENTITY sb.editor.attach.link		"Attacher un lien à la sélection">
+<!ENTITY sb.editor.cutter			"Supprimer la sélection">
+<!ENTITY sb.editor.remove.iframe	"Supprimer toutes les balises IFRAME">
+<!ENTITY sb.editor.remove.script	"Supprimer toutes les balises SCRIPT">
 
-<!ENTITY sb.inline.enter	"Enregistrer">
-<!ENTITY sb.inline.delete	"Supprimer">
+<!ENTITY sb.infobar				"Barre d'information ScrapBook">
+<!ENTITY sb.infobar.home		"Origine">
+<!ENTITY sb.infobar.sitemap		"Plan du site">
+
+<!ENTITY sb.synchronize		"Synchroniser avec l'arborescence de la barre latérale">
 

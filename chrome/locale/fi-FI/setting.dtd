@@ -12,11 +12,6 @@
 <!ENTITY sb.setting.tree.singleexpand	"Laajennettaessa puunäkymässä kansion sisältö, supista muut kansiot">
 <!ENTITY sb.setting.tree.quickdelete	"Poista sivut vahvistamatta">
 
-<!ENTITY sb.setting.view.header			"Näytä URL-tietorivi">
-<!ENTITY sb.setting.view.editor			"Näytä muokkauspalkki">
-<!ENTITY sb.setting.view.editor.auto	"Kun kaapattu sivu on avoinna">
-<!ENTITY sb.setting.view.editor.manual	"Kun painetaan EDIT-painiketta tilarivillä">
-
 <!ENTITY sb.setting.usetabs.d			"Valitut toiminnot avaavat uuden välilehden.">
 <!ENTITY sb.setting.usetabs.note		"Avaa muistilaput välilehdessä">
 
@@ -25,16 +20,14 @@
 <!ENTITY sb.setting.capture.removescript	"Poista JavaScript (suositeltua)">
 <!ENTITY sb.setting.capture.removescript.d	"Sivujen asettelu voi rikkoutua, jos tätä ei ole valittu.">
 
-<!ENTITY sb.setting.edit.multilines		"Salli usean rivin kommentit">
-<!ENTITY sb.setting.edit.confirmsave.1	"Tallennuksen kyselyväli">
-<!ENTITY sb.setting.edit.confirmsave.2	"min  (0 = tallenna kysymättä)">
-
-<!ENTITY sb.setting.program.filer			"Oletusohjelma &quot;Selaa tiedostoja&quot; toimintoon">
-<!ENTITY sb.setting.program.filer.default	"Oletus (Windowsilla Explorer)">
-<!ENTITY sb.setting.browse					"Valitse">
+<!ENTITY sb.button.browse			"Valitse">
+<!ENTITY sb.button.show				"Näytä kansio">
 
 <!ENTITY sb.setting.data			"Tietojen tallennuskansio">
 <!ENTITY sb.setting.data.default	"Oletus (Profiilikansio)">
+<!ENTITY sb.setting.data.alert		"Tällä hetkellä ScrapBookin data on tallennettu Firefoxin Profiilikansioon. Huomaa, että jos poistat Firefoxin profiilin, myös kaikki Scrapbookin tiedot häviävät.">
+<!ENTITY sb.setting.filer			"Oletusohjelma &quot;Selaa tiedostoja&quot; toimintoon">
+<!ENTITY sb.setting.filer.default	"Oletus (Windowsilla Explorer)">
 
 <!ENTITY sb.setting.restorefavicons		"Palauta sivukuvakkeet">
 <!ENTITY sb.setting.restorefavicons.d	"Jos sivukuvakkeet eivät ole näkyvillä, napsauta painiketta:">

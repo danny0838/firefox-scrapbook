@@ -3,5 +3,5 @@
 <!ENTITY sb.backup.file		"Файл в который будет вестись резервное копирование">
 <!ENTITY sb.backup.browse	"Выбрать">
 <!ENTITY sb.backup.arg		"Аргументы командной строки">
-<!ENTITY sb.backup.arg.d1	"&#37;dst is the path to the backup file.">
-<!ENTITY sb.backup.arg.d2	"&#37;src is the path to the ScrapBook directory.">
+<!ENTITY sb.backup.arg.d1	"&#37;dst путь в файлу с резервной копией.">
+<!ENTITY sb.backup.arg.d2	"&#37;src путь к каталогу ScrapBook.">

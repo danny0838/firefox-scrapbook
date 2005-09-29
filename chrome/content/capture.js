@@ -12,129 +12,256 @@
 
 
 
+
 var SBstring;
-var SBbrowser;
-var SBmessage;
-var SBlistbox;
 
-var gURLs = [];
-var gRefURL = "";
-var gShowDetail   = false;
-var gDocumentOnly = false;
-var gContResName = "";
-var gContResIdx  = 0;
-var gOriginalID;
-var gURL2ID = {};
+var gURLs       = [];
+var gDepths     = [];
+var gRefURL     = "";
+var gShowDetail = false;
+var gResName    = "";
+var gResIdx     = 0;
+var gReferItem  = null;
+var gLinked     = {};
+var gFile2URL   = {};
+var gURL2Name   = {};
 
-const CAPTURE_INTERVAL = 5;
 
 
 
 function SB_trace(aMessage)
 {
-	SBmessage.value = aMessage;
+	document.getElementById("ScrapBookCaptureTextbox").value = aMessage;
 }
 
 
 function SB_initCapture()
 {
 	SBstring  = document.getElementById("ScrapBookString");
-	SBbrowser = document.getElementById("ScrapBookCaptureBrowser");
-	SBmessage = document.getElementById("ScrapBookCaptureTextbox");
-	SBlistbox = document.getElementById("ScrapBookCaptureListbox");
-	gURLs         = window.arguments[0];
-	gRefURL       = window.arguments[1];
-	gShowDetail   = window.arguments[2];
-	gDocumentOnly = window.arguments[3];
-	gContResName  = window.arguments[4];
-	gContResIdx   = window.arguments[5];
-	gOriginalID   = window.arguments[6];
-	if ( gURLs.length < 1 ) {
-		return;
-	} else if ( gURLs.length == 1 ) {
-		SBlistbox.hidden = true;
-	} else if ( gURLs.length < 10 ) {
-		SBlistbox.setAttribute("rows", gURLs.length + 2);
-	} else {
-		SBlistbox.setAttribute("rows", 10);
-	}
-	gURLs = SB_checkDuplicatedURL(gURLs);
-	SBbrowser.webProgress.addProgressListener(SBdocumentLoadListener, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
-	SBtask.init();
-	SBtask.start();
+	var myURLs  = window.arguments[0];
+	gRefURL     = window.arguments[1];
+	gShowDetail = window.arguments[2];
+	gResName    = window.arguments[3];
+	gResIdx     = window.arguments[4];
+	gReferItem  = window.arguments[5];
+	gLinked     = window.arguments[6];
+	gFile2URL   = window.arguments[7];
+	if ( gReferItem ) gURL2Name[unescape(gReferItem.source)] = "index";
+	sbInvisibleBrowser.init();
+	sbCaptureTask.init(myURLs);
+	setTimeout(function(){ sbCaptureTask.start(); }, 100);
 }
 
 
-function SB_checkDuplicatedURL(aURLs){
-
-	var URLhash = {};
-	for ( var i = 0; i < aURLs.length; i++ )
-	{
-		if ( !aURLs[i].match(/^(file|http|https):\/\//i) ) continue;
-		aURLs[i] = ( (pos = aURLs[i].indexOf("#")) != -1 ) ? aURLs[i].substring(0, pos) : aURLs[i];
-		URLhash[aURLs[i]] = true;
-	}
-	aURLs = [];
-	for ( var aURL in URLhash ) aURLs.push(aURL);
-	return aURLs;
-}
-
-
-function SB_finalizeCapture()
+function SB_splitByAnchor(aURL)
 {
-	return;
+	var pos = 0;
+	return ( (pos = aURL.indexOf("#")) < 0 ) ? [aURL, ""] : [aURL.substring(0, pos), aURL.substring(pos, aURL.length)];
+}
 
-	if ( gOriginalID )
-	{
-		var file = SBcommon.getContentDir(gOriginalID);
-		file.append("index.html");
-		var content = SBcommon.readFile(file);
-		for ( var url in gURL2ID )
-		{
+
+function SB_suggestName(aURL)
+{
+	var baseName = SBcommon.validateFileName(SBcommon.splitFileName(SBcommon.getFileName(aURL))[0]);
+	if ( baseName == "index" ) baseName = "default";
+	if ( !baseName ) baseName = "default";
+	var name = baseName + ".html";
+	var seq = 0;
+	while ( gFile2URL[name] ) name = baseName + "_" + sbContentSaver.leftZeroPad3(++seq) + ".html";
+	name = SBcommon.splitFileName(name)[0];
+	gFile2URL[name + ".html"] = aURL;
+	gFile2URL[name + ".css"]  = true;
+	return name;
+}
+
+
+function SB_fireNotification(aItem)
+{
+	try {
+		window.opener.sbContentSaver.onCaptureComplete(aItem);
+	} catch(ex) {
+		try {
+			window.opener.opener.sbContentSaver.onCaptureComplete(aItem);
+		} catch(ex) {
+			try {
+				window.opener.top.sbContentSaver.onCaptureComplete(aItem);
+			} catch(ex) {
+				dump("scrapbook::showNotify GIVE_UP_TO_FIND_WINDOW: " + ex + "\n");
+			}
 		}
-		SBcommon.writeFile(file, content, "UTF-8");
-		SBcommon.loadURL(SBcommon.convertFilePathToURL(file.path));
 	}
 }
 
 
 
 
-var SBtask = {
+var sbCaptureTask = {
 
-	index : 0,
+	get INTERVAL() { return 3; },
+	get LISTBOX()  { return document.getElementById("ScrapBookCaptureListbox"); },
+	get URL()      { return gURLs[this.index]; },
 
-	URL         : "",
+	index       : 0,
 	contentType : "",
 	isDocument  : false,
 	canRefresh  : true,
+	sniffer     : null,
+	autoScroll  : true,
+	countDown   : 0,
+	forceExit   : 0,
 
-	init : function()
+	init : function(myURLs)
 	{
-		this.index = 0;
-		for ( var i = 0; i < gURLs.length; i++ )
+		dump("sbCaptureTask::init\n");
+		if ( !gReferItem && myURLs.length == 1 )
 		{
-			SBlistbox.appendItem("[" + i + "] " + gURLs[i]);
+			this.LISTBOX.collapsed = true;
+			this.LISTBOX.setAttribute("class", "plain");
+			document.getElementById("ScrapBookCaptureSkipButton").hidden = true;
 		}
-		if ( gURLs.length == 1 ) document.getElementById("ScrapBookCaptureSkipButton").hidden = true;
+		else
+		{
+			this.LISTBOX.setAttribute("rows", 10);
+		}
+		if ( gReferItem )
+		{
+			var button = document.getElementById("ScrapBookCaptureFilterButton");
+			button.hidden = false;
+			button.nextSibling.hidden = false;
+			button.firstChild.firstChild.label += " (" + SBcommon.getRootHref(gReferItem.source) + ")" ;
+			button.firstChild.firstChild.nextSibling.label += " (" + SBcommon.getBaseHref(gReferItem.source) + ")";
+		}
+		for ( var i = 0; i < myURLs.length; i++ ) this.add(myURLs[i], 1);
+	},
+
+	add : function(aURL, aDepth)
+	{
+		if ( !aURL.match(/^(http|https|ftp|file):\/\//i) ) return;
+		if ( gReferItem )
+		{
+			if ( aDepth > gLinked.depth ) {
+				dump("sbCaptureTask::add PREVENT_INVALID_DEPTH\n");
+				return;
+			}
+			aURL = SB_splitByAnchor(aURL)[0];
+			if ( !gLinked.isPartial && aURL == gReferItem.source ) return;
+			for ( var i = 0; i < gURLs.length; i++ ) if ( aURL == gURLs[i] ) return;
+		}
+		dump("sbCaptureTask::add(DEPTH=" + aDepth + ", URL=" + aURL + ")\n");
+		gURLs.push(aURL);
+		gDepths.push(aDepth);
+		var listitem = this.LISTBOX.appendItem(aDepth + " [" + (gURLs.length - 1) + "] " + aURL);
+		listitem.setAttribute("type", "checkbox");
+		listitem.setAttribute("checked", this.filter(gURLs.length - 1));
 	},
 
 	start : function()
 	{
-		this.URL = gURLs[this.index];
+		dump("sbCaptureTask::start\t[" + this.index + "]\n");
+		this.toggleSkipButton(true);
+		this.LISTBOX.getItemAtIndex(this.index).setAttribute("indicated", true);
+		if ( this.index > 0  ) this.LISTBOX.getItemAtIndex(this.index - 1).removeAttribute("indicated");
+		if ( this.autoScroll ) this.LISTBOX.ensureIndexIsVisible(this.index);
+		var listitem = this.LISTBOX.getItemAtIndex(this.index);
+		listitem.setAttribute("disabled", true);
+		if ( !listitem.checked )
+		{
+			dump("sbCaptureTask::start SKIP_UNCHECKED [" + this.index + "]\n");
+			this.next(true);
+			return;
+		}
 		this.contentType = "";
 		this.isDocument = true;
 		this.canRefresh = true;
-		SBlistbox.focus();
-		SBlistbox.ensureIndexIsVisible(this.index);
-		SBlistbox.selectedIndex = this.index;
-		SB_trace(SBstring.getString("CONNECT") + "... " + this.URL);
-		if ( this.URL.substring(0,7) == "file://" ) {
-			SB_loadDocument();
+		SB_trace(SBstring.getString("CONNECT") + "... " + gURLs[this.index]);
+		if ( gURLs[this.index].substring(0,7) == "file://" ) {
+			sbInvisibleBrowser.load(gURLs[this.index]);
 		} else {
-			var sniffer = new SBheaderSniffer(this.URL, gRefURL);
-			sniffer.httpHead();
+			this.sniffer = new sbHeaderSniffer(gURLs[this.index], gRefURL);
+			this.sniffer.httpHead();
 		}
+	},
+
+	succeed : function()
+	{
+		dump("sbCaptureTask::succeed\t[" + this.index + "]\n");
+		this.LISTBOX.getItemAtIndex(this.index).setAttribute("status", "succeed");
+		this.next(false);
+	},
+
+	fail : function(aErrorMsg)
+	{
+		dump("sbCaptureTask::fail\t[" + this.index + "]\n");
+		if ( aErrorMsg ) SB_trace(aErrorMsg);
+		var listitem = this.LISTBOX.getItemAtIndex(this.index);
+		listitem.label = gDepths[this.index] + " [" + this.index + "] " + aErrorMsg;
+		listitem.setAttribute("status", "failure");
+		if ( gURLs.length > 1 ) {
+			this.next(true);
+		} else {
+			this.toggleRetryButton(true);
+		}
+	},
+
+	next : function(quickly)
+	{
+		dump("sbCaptureTask::next\t[" + this.index + "]\n");
+		this.toggleSkipButton(false);
+		this.LISTBOX.getItemAtIndex(this.index).setAttribute("disabled", true);
+		this.LISTBOX.getItemAtIndex(this.index).removeAttribute("indicated");
+		if ( this.sniffer ) this.sniffer.onHttpSuccess = function(){};
+		sbInvisibleBrowser.ELEMENT.stop();
+		if ( ++this.index >= gURLs.length ) {
+			this.finalize();
+		} else {
+			if ( quickly ) {
+				window.setTimeout(function(){ sbCaptureTask.start(); }, 0);
+			} else {
+				this.countDown = this.INTERVAL;
+				for ( var sec = 0; sec < this.INTERVAL; sec++ )
+				{
+					window.setTimeout(function(){ SB_trace(SBstring.getFormattedString("WAITING", [sbCaptureTask.countDown--]) + "..."); }, sec * 1000);
+				}
+				window.setTimeout(function(){ sbCaptureTask.start(); }, this.INTERVAL * 1000);
+			}
+		}
+	},
+
+	finalize : function()
+	{
+		dump("sbCaptureTask::finalize\n");
+		if ( !gReferItem )
+		{
+			if ( gURLs.length > 1 ) SB_fireNotification(null);
+			window.setTimeout(function(){ window.close(); }, 1000);
+		}
+		else
+		{
+			sbCrossLinker.invoke();
+		}
+	},
+
+	pause : function()
+	{
+		dump("sbCaptureTask::pause\n");
+		sbInvisibleBrowser.ELEMENT.stop();
+		this.toggleRetryButton(true);
+	},
+
+	retry : function()
+	{
+		dump("sbCaptureTask::retry\n");
+		this.toggleRetryButton(false);
+		sbInvisibleBrowser.fileCount = 0;
+		sbInvisibleBrowser.ELEMENT.reload();
+	},
+
+	abort : function()
+	{
+		dump("sbCaptureTask::abort\n");
+		if ( !gReferItem ) window.close();
+		if ( ++this.forceExit > 2 ) window.close();
+		if ( this.index < gURLs.length - 1 ) { this.index = gURLs.length - 1; this.next(); }
 	},
 
 	toggleRetryButton : function(willShow)
@@ -142,41 +269,41 @@ var SBtask = {
 		document.getElementById("ScrapBookCaptureRetryButton").hidden = !willShow;
 	},
 
-	succeed : function()
+	toggleSkipButton : function(willEnable)
 	{
-		if ( gURLs.length > 1 ) SBlistbox.getItemAtIndex(this.index).setAttribute("style", "color:#33CC33;");
-		this.skip(false);
+		document.getElementById("ScrapBookCaptureSkipButton").disabled = !willEnable;
 	},
 
-	fail : function(aErrorMsg)
+	toggleAutoScroll : function(aElement)
 	{
-		if ( aErrorMsg ) SB_trace(aErrorMsg);
-		if ( gURLs.length > 1 ) {
-			SBlistbox.getItemAtIndex(this.index).label = "[" + this.index + "] " + aErrorMsg;
-			SBlistbox.getItemAtIndex(this.index).setAttribute("style", "color:#FF0000;font-weight:bold;");
-			this.skip(true);
-		} else {
-			this.toggleRetryButton(true);
-		}
+		this.autoScroll = aElement.getAttribute("checked");
 	},
 
-	skip : function(quickly)
+	filter : function(i)
 	{
-		if ( ++this.index >= gURLs.length ) {
-			this.finalize();
-		} else {
-			SB_trace(SBstring.getFormattedString("WAITING", [CAPTURE_INTERVAL]) + "...");
-			window.setTimeout(function(){ SBtask.start(); }, quickly ? 0 : CAPTURE_INTERVAL * 1000);
-		}
+		return true;
 	},
 
-	finalize : function()
+	applyFilter : function(type)
 	{
-		try {
-			if ( gURLs.length > 1 ) window.opener.SBcapture.notifyOnComplete(false, false, false);
-		} catch(ex) {
+		switch ( type )
+		{
+			case "D" : var ref = SBcommon.getRootHref(gReferItem.source).toLowerCase(); this.filter = function(i){ return gURLs[i].toLowerCase().indexOf(ref) == 0; }; break;
+			case "L" : var ref = SBcommon.getBaseHref(gReferItem.source).toLowerCase(); this.filter = function(i){ return gURLs[i].toLowerCase().indexOf(ref) == 0; }; break;
+			case "S" : 
+				var ret = { value : "" };
+				if ( !SBservice.PROMPT.prompt(window, "ScrapBook", SBstring.getString("FILTER_BY_STRING"), ret, null, {}) ) return;
+				if ( ret.value ) this.filter = function(i){ return gURLs[i].toLowerCase().indexOf(ret.value.toLowerCase()) != -1; };
+				break;
+			case "N" : this.filter = function(i){ return true;  }; break;
+			case "F" : this.filter = function(i){ return false; }; break;
+			case "I" : this.filter = function(i){ return !sbCaptureTask.LISTBOX.getItemAtIndex(i).checked; }; break;
+			default  : return;
 		}
-		window.setTimeout(function(){ window.close(); }, 1500);
+		for ( var i = this.index; i < gURLs.length; i++ )
+		{
+			this.LISTBOX.getItemAtIndex(i).checked = this.filter(i);
+		}
 	},
 
 };
@@ -184,14 +311,300 @@ var SBtask = {
 
 
 
-function SBheaderSniffer(aURLSpec, aRefURLSpec)
+var sbInvisibleBrowser = {
+
+	get ELEMENT() { return document.getElementById("ScrapBookCaptureBrowser"); },
+
+	fileCount : 0,
+	onload    : null,
+
+	init : function()
+	{
+		dump("sbInvisibleBrowser::init\n");
+		this.ELEMENT.webProgress.addProgressListener(this, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
+		this.onload = function(){ sbInvisibleBrowser.execCapture(); };
+		this.ELEMENT.addEventListener("load", sbInvisibleBrowser.onload, true);
+	},
+
+	refreshEvent : function(aEvent)
+	{
+		this.ELEMENT.removeEventListener("load", this.onload, true);
+		this.onload = aEvent;
+		this.ELEMENT.addEventListener("load", this.onload, true);
+	},
+
+	load : function(aURL)
+	{
+		dump("sbInvisibleBrowser::load\t" + aURL + "\n");
+		this.fileCount = 0;
+		this.ELEMENT.docShell.allowJavascript = false;
+		this.ELEMENT.docShell.allowMetaRedirects = false;
+		this.ELEMENT.docShell.QueryInterface(Components.interfaces.nsIDocShellHistory).useGlobalHistory = false;
+		this.ELEMENT.loadURI(aURL, null, null);
+	},
+
+	execCapture : function()
+	{
+		dump("sbInvisibleBrowser::execCapture\n");
+		SB_trace(SBstring.getString("CAPTURE_START"));
+		sbCaptureTask.toggleSkipButton(false);
+		var ret = null;
+		var preset = gReferItem ? [gReferItem.id, SB_suggestName(sbCaptureTask.URL), gLinked, gFile2URL, gDepths[sbCaptureTask.index]] : null;
+		if ( this.ELEMENT.contentDocument.body && sbCaptureTask.isDocument )
+		{
+			var metaElems = this.ELEMENT.contentDocument.getElementsByTagName("meta");
+			for ( var i = 0; i < metaElems.length; i++ )
+			{
+				if ( metaElems[i].hasAttribute("http-equiv") && metaElems[i].hasAttribute("content") &&
+				     metaElems[i].getAttribute("http-equiv").toLowerCase() == "refresh" && 
+				     metaElems[i].getAttribute("content").match(/URL\=(.*)$/i) )
+				{
+					var newURL = SBcommon.resolveURL(sbCaptureTask.URL, RegExp.$1);
+					if ( newURL != sbCaptureTask.URL && sbCaptureTask.canRefresh )
+					{
+						gURLs[sbCaptureTask.index] = newURL;
+						sbCaptureTask.canRefresh = false;
+						this.ELEMENT.loadURI(newURL, null, null);
+						return;
+					}
+				}
+			}
+			ret = sbContentSaver.captureWindow(this.ELEMENT.contentWindow, false, gShowDetail, gResName, gResIdx, preset);
+		}
+		else
+		{
+			var type = sbCaptureTask.contentType.match(/image/i) ? "image" : "file";
+			ret = sbContentSaver.captureFile(sbCaptureTask.URL, gRefURL ? gRefURL : sbCaptureTask.URL, type, gShowDetail, gResName, gResIdx, preset);
+		}
+		if ( ret )
+		{
+			dump("sbInvisibleBrowser::execCapture SUCCESS\n");
+			if ( gReferItem )
+			{
+				gURL2Name[unescape(sbCaptureTask.URL)] = ret[0];
+				gFile2URL = ret[1];
+			}
+		}
+		else
+		{
+			dump("sbInvisibleBrowser::execCapture FAILURE\n");
+			SB_trace(SBstring.getString("CAPTURE_ABORT"));
+			sbCaptureTask.fail();
+		}
+	},
+
+	QueryInterface : function(aIID)
+	{
+		if (aIID.equals(Components.interfaces.nsIWebProgressListener) ||
+			aIID.equals(Components.interfaces.nsISupportsWeakReference) ||
+			aIID.equals(Components.interfaces.nsIXULBrowserWindow) ||
+			aIID.equals(Components.interfaces.nsISupports))
+			return this;
+		throw Components.results.NS_NOINTERFACE;
+	},
+
+	onStateChange : function(aWebProgress, aRequest, aStateFlags, aStatus)
+	{
+		if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
+		{
+			SB_trace(SBstring.getString("LOADING") + "... " + (++this.fileCount) + " " + sbCaptureTask.URL);
+		}
+	},
+
+	onProgressChange : function(aWebProgress, aRequest, aCurSelfProgress, aMaxSelfProgress, aCurTotalProgress, aMaxTotalProgress)
+	{
+		if ( aCurTotalProgress != aMaxTotalProgress )
+		{
+			SB_trace(SBstring.getString("TRANSFER_DATA") + "... (" + aCurTotalProgress + " Bytes)");
+		}
+	},
+
+	onStatusChange   : function() {},
+	onLocationChange : function() {},
+	onSecurityChange : function() {},
+
+};
+
+
+
+
+var sbCrossLinker = {
+
+	get ELEMENT(){ return document.getElementById("ScrapBookCaptureBrowser"); },
+
+	index    : -1,
+	baseURL  : "",
+	nameList : [],
+
+	XML      : null,
+	rootNode : null,
+	nodeHash : {},
+
+	invoke : function()
+	{
+		dumpObj(gURL2Name);
+		dump("sbCrossLinker::invoke\n");
+		if ( !sbDataSource.data ) sbDataSource.init();
+		sbDataSource.updateItem(SBservice.RDF.GetResource("urn:scrapbook:item" + gReferItem.id), "type", "site");
+		sbDataSource.flush();
+		sbInvisibleBrowser.refreshEvent(function(){ sbCrossLinker.exec(); });
+		this.ELEMENT.docShell.allowImages = false;
+		sbInvisibleBrowser.onStateChange = function(aWebProgress, aRequest, aStateFlags, aStatus)
+		{
+			if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
+			{
+				SB_trace(SBstring.getFormattedString("REBUILD_LINKS", [sbCrossLinker.index + 1, sbCrossLinker.nameList.length]) + "... "
+					+ ++sbInvisibleBrowser.fileCount + " : " + sbCrossLinker.nameList[sbCrossLinker.index] + ".html");
+			}
+		};
+		this.baseURL = SBservice.IO.newFileURI(SBcommon.getContentDir(gReferItem.id)).spec;
+		this.nameList.push("index");
+		for ( var url in gURL2Name )
+		{
+			this.nameList.push(gURL2Name[url]);
+		}
+		this.XML = document.implementation.createDocument("", "", null);
+		this.rootNode = this.XML.createElement("site");
+		this.start();
+	},
+
+	start : function()
+	{
+		if ( ++this.index < this.nameList.length )
+		{
+			dump("sbCrossLinker::start [" + this.index + "] " + this.nameList[this.index] + "\n");
+			sbInvisibleBrowser.fileCount = 0;
+			this.ELEMENT.loadURI(this.baseURL + this.nameList[this.index] + ".html", null, null);
+		}
+		else
+		{
+			SB_trace(SBstring.getString("REBUILD_LINKS_COMPLETE"));
+			this.flushXML();
+			SB_fireNotification(gReferItem);
+			window.setTimeout(function(){ window.close(); }, 1000);
+		}
+	},
+
+	exec : function()
+	{
+		if ( this.ELEMENT.currentURI.spec.indexOf("file://") != 0 )
+		{
+			return;
+		}
+		sbContentSaver.frameList = [this.ELEMENT.contentWindow];
+		sbContentSaver.getFrameList(this.ELEMENT.contentWindow);
+		if ( !this.nodeHash[this.nameList[this.index]] )
+		{
+			this.nodeHash[this.nameList[this.index]] = this.createNode(this.nameList[this.index], gReferItem.title);
+			this.nodeHash[this.nameList[this.index]].setAttribute("title", sbDataSource.sanitize(this.ELEMENT.contentTitle));
+		}
+		else
+		{
+			this.nodeHash[this.nameList[this.index]].setAttribute("title", sbDataSource.sanitize(this.ELEMENT.contentTitle));
+		}
+		for ( var f = 0; f < sbContentSaver.frameList.length; f++ )
+		{
+			var doc = sbContentSaver.frameList[f].document;
+			if ( !doc.links ) continue;
+			var shouldSave = false;
+			var linkList = doc.links;
+			for ( var i = 0; i < linkList.length; i++ )
+			{
+				var urlLR = SB_splitByAnchor(unescape(linkList[i].href));
+				if ( gURL2Name[urlLR[0]] )
+				{
+					var name = gURL2Name[urlLR[0]];
+					linkList[i].href = name + ".html" + urlLR[1];
+					if ( !this.nodeHash[name] )
+					{
+						var text = linkList[i].text ? linkList[i].text.replace(/\r|\n|\t/g, " ") : "";
+						if ( text.replace(/\s/g, "") == "" ) text = "";
+						this.nodeHash[name] = this.createNode(name, text);
+						if ( !this.nodeHash[name] ) this.nodeHash[name] = name;
+						this.nodeHash[this.nameList[this.index]].appendChild(this.nodeHash[name]);
+						dump("\t" + this.nodeHash[this.nameList[this.index]].getAttribute("file") + " -> " + this.nodeHash[name].getAttribute("file") + "\n")
+					}
+					shouldSave = true;
+				}
+			}
+			if ( shouldSave )
+			{
+				var rootNode = doc.getElementsByTagName("html")[0];
+				var src = "";
+				src = sbContentSaver.surroundByTags(rootNode, rootNode.innerHTML);
+				src = sbContentSaver.doctypeToString(doc.doctype) + src;
+				var file = SBcommon.getContentDir(gReferItem.id);
+				file.append(SBcommon.getFileName(doc.location.href));
+				SBcommon.writeFile(file, src, doc.characterSet);
+			}
+		}
+		try {
+			var nodes = window.opener.gBrowser.mTabContainer.childNodes;
+			for ( var i = 0; i < nodes.length; i++ )
+			{
+				var curURI = window.opener.gBrowser.getBrowserForTab(nodes[i]).currentURI.spec;
+				if ( curURI.match(gReferItem.id) && curURI.match(this.nameList[this.index] + ".html") )
+				{
+					dump("sbCrossLinker::exec FORCE_TO_RELOAD " + curURI + "\n");
+					window.opener.gBrowser.getBrowserForTab(nodes[i]).reload();
+				}
+			}
+		} catch(ex) {
+		}
+		this.start();
+	},
+
+	createNode : function(aName, aText)
+	{
+		dump("\tCREATE_NODE: [" + aName + ", " + aText + "]\n");
+		if ( aText.length > 100 ) aText = aText.substring(0,100) + "...";
+		var node = this.XML.createElement("page");
+		node.setAttribute("file", aName + ".html");
+		node.setAttribute("text", sbDataSource.sanitize(aText));
+		return node;
+	},
+
+	flushXML : function()
+	{
+		this.rootNode.appendChild(this.nodeHash["index"]);
+		this.XML.appendChild(this.rootNode);
+		var src = "";
+		src += '<?xml version="1.0" encoding="UTF-8"?>\n';
+		src += '<?xml-stylesheet href="../../sitemap.xsl" type="text/xsl" media="all"?>\n';
+		src += (new XMLSerializer()).serializeToString(this.XML).replace(/></g, ">\n<");
+		src += '\n';
+		var xslFile = SBcommon.getScrapBookDir().clone();
+		xslFile.append("sitemap.xsl");
+		if ( !xslFile.exists() ) SBcommon.saveTemplateFile("chrome://scrapbook/skin/sitemap.xsl", xslFile);
+		var contDir = SBcommon.getContentDir(gReferItem.id);
+		var xmlFile = contDir.clone();
+		xmlFile.append("sitemap.xml");
+		SBcommon.writeFile(xmlFile, src, "UTF-8");
+		var txt = "";
+		var txtFile1 = contDir.clone();
+		txtFile1.append("sb-file2url.txt");
+		for ( var f in gFile2URL ) txt += f + "\t" + gFile2URL[f] + "\n";
+		SBcommon.writeFile(txtFile1, txt, "UTF-8");
+		txt = "";
+		var txtFile2 = contDir.clone();
+		txtFile2.append("sb-url2name.txt");
+		for ( var u in gURL2Name ) txt += u + "\t" + gURL2Name[u] + "\n";
+		SBcommon.writeFile(txtFile2, txt, "UTF-8");
+	},
+
+};
+
+
+
+
+function sbHeaderSniffer(aURLSpec, aRefURLSpec)
 {
 	this.URLSpec    = aURLSpec;
 	this.refURLSpec = aRefURLSpec;
 }
 
 
-SBheaderSniffer.prototype = {
+sbHeaderSniffer.prototype = {
 
 	_URL     : Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL),
 	_channel : null,
@@ -199,6 +612,7 @@ SBheaderSniffer.prototype = {
 
 	httpHead : function()
 	{
+		dump("sbHeaderSniffer::httpHead\t" + this.URLSpec + "\n");
 		this._channel = null;
 		this._headers = {};
 		try {
@@ -243,159 +657,74 @@ SBheaderSniffer.prototype = {
 
 	onHttpSuccess : function()
 	{
-		SBtask.contentType = this.getHeader("Content-Type");
+		sbCaptureTask.contentType = this.getHeader("Content-Type");
 		var httpStatus = this.getStatus();
-		SB_trace(SBstring.getString("CONNECT_SUCCESS") + " (Content-Type: " + SBtask.contentType + ")");
+		dump("sbHeaderSniffer::onHttpSuccess CONTENT_TYPE = " + sbCaptureTask.contentType + "\n");
+		dump("sbHeaderSniffer::onHttpSuccess HTTP_STATUS  = " + httpStatus + "\n");
+		SB_trace(SBstring.getString("CONNECT_SUCCESS") + " (Content-Type: " + sbCaptureTask.contentType + ")");
 		switch ( httpStatus )
 		{
-			case 404 : SBtask.fail(SBstring.getString("HTTP_STATUS_404") + " (404 Not Found)"); return;
-			case 403 : SBtask.fail(SBstring.getString("HTTP_STATUS_403") + " (403 Forbidden)"); return;
-			case 500 : SBtask.fail("500 Internal Server Error"); return;
+			case 404 : sbCaptureTask.fail(SBstring.getString("HTTP_STATUS_404") + " (404 Not Found)"); return;
+			case 403 : sbCaptureTask.fail(SBstring.getString("HTTP_STATUS_403") + " (403 Forbidden)"); return;
+			case 500 : sbCaptureTask.fail("500 Internal Server Error"); return;
 		}
-		if ( !SBtask.contentType )
+		if ( !sbCaptureTask.contentType )
 		{
-			SBtask.fail(SBstring.getString("CONTENT_TYPE_FAILURE")); return;
+			dump("sbHeaderSniffer::onHttpSuccess\tCONTENT_TYPE_UNKNOWN\n");
+			sbCaptureTask.fail(SBstring.getString("CONTENT_TYPE_FAILURE")); return;
 		}
-		if ( SBtask.contentType.match(/(text|html|xml)/i) )
+		if ( sbCaptureTask.contentType.match(/(text|html|xml)/i) )
 		{
-			SBtask.isDocument = true;
-			SB_loadDocument();
+			dump("sbHeaderSniffer::onHttpSuccess\t" + this.URLSpec + " [PAGE]\n");
+			sbCaptureTask.isDocument = true;
+			sbInvisibleBrowser.load(this.URLSpec);
 		}
 		else
 		{
-			SBtask.isDocument = false;
-			gDocumentOnly ? SBtask.skip(true) : SB_execCapture();
+			dump("sbHeaderSniffer::onHttpSuccess\t" + this.URLSpec + " [FILE]\n");
+			sbCaptureTask.isDocument = false;
+			if ( gReferItem ) {
+				dump("sbHeaderSniffer::onHttpSuccess\tLIMIT_TO_WEB_PAGE\n");
+				sbCaptureTask.next(true);
+			} else {
+				sbInvisibleBrowser.execCapture();
+			}
 		}
 	},
 
 	onHttpError : function(aErrorMsg)
 	{
-		SBtask.fail(SBstring.getString("CONNECT_FAILURE") + " (" + aErrorMsg + ")");
+		dump("sbHeaderSniffer::onHttpError\n");
+		sbCaptureTask.fail(SBstring.getString("CONNECT_FAILURE") + " (" + aErrorMsg + ")");
 	},
 
 };
 
 
-function SB_loadDocument()
+
+
+sbContentSaver.onCaptureComplete = function(aItem)
 {
-	SBbrowser.docShell.allowJavascript = false;
-	SBbrowser.docShell.allowMetaRedirects = false;
-	SBbrowser.docShell.QueryInterface(Components.interfaces.nsIDocShellHistory).useGlobalHistory = false;
-	SBbrowser.removeEventListener("load", SB_execCapture, true);
-	SBbrowser.addEventListener("load", SB_execCapture, true);
-	SBbrowser.contentWindow.location.href = SBtask.URL;
-	SBdocumentLoadListener.init();
+	dump("sbContentSaver::onCaptureComplete(" + (aItem ? aItem.id : "") + ") [OVERRIDE capture.js]\n");
+	SB_trace(SBstring.getString("CAPTURE_COMPLETE") + " : " + aItem.title);
+	if ( !gReferItem && gURLs.length == 1 ) SB_fireNotification(aItem);
+	sbCaptureTask.succeed();
 }
 
 
-var SBdocumentLoadListener = {
+sbDownloadProgressCallback = {
 
-	fileCount : 0,
-
-	init : function()
+	onDownloadComplete : function(aItem)
 	{
-		this.fileCount = 0;
+		SB_trace(SBstring.getString("CAPTURE") + "... (" + sbContentSaver.httpTask[aItem.id] + ") " + aItem.title);
 	},
-
-	QueryInterface : function(aIID)
+	onAllDownloadsComplete : function(aItem)
 	{
-		if (aIID.equals(Components.interfaces.nsIWebProgressListener) ||
-			aIID.equals(Components.interfaces.nsISupportsWeakReference) ||
-			aIID.equals(Components.interfaces.nsIXULBrowserWindow) ||
-			aIID.equals(Components.interfaces.nsISupports))
-			return this;
-		throw Components.results.NS_NOINTERFACE;
+		sbContentSaver.onCaptureComplete(aItem);
 	},
-
-	onStateChange : function(aWebProgress, aRequest, aStateFlags, aStatus)
+	onDownloadProgress : function(aItem, aFileName, aProgress)
 	{
-		if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
-		{
-			SB_trace(SBstring.getString("LOADING") + "... " + ++this.fileCount + " " + SBtask.URL);
-		}
-	},
-
-	onProgressChange : function(aWebProgress, aRequest, aCurSelfProgress, aMaxSelfProgress, aCurTotalProgress, aMaxTotalProgress)
-	{
-		if ( aCurTotalProgress != aMaxTotalProgress )
-		{
-			SB_trace(SBstring.getString("TRANSFER_DATA") + "... (" + aCurTotalProgress + " Bytes)");
-		}
-	},
-
-	onStatusChange   : function() {},
-	onLocationChange : function() {},
-	onSecurityChange : function() {},
-
-}
-
-
-function SB_execCapture()
-{
-	SB_trace(SBstring.getString("CAPTURE_START"));
-	if ( SBbrowser.contentDocument.body && SBtask.isDocument )
-	{
-		var metaElems = SBbrowser.contentDocument.getElementsByTagName("meta");
-		for ( var i=0; i<metaElems.length; i++ )
-		{
-			if ( metaElems[i].hasAttribute("http-equiv") && metaElems[i].hasAttribute("content") &&
-			     metaElems[i].getAttribute("http-equiv").toLowerCase() == "refresh" && 
-			     metaElems[i].getAttribute("content").match(/URL\=(.*)$/i) )
-			{
-				var newURL = SBcommon.resolveURL(SBtask.URL, RegExp.$1);
-				if ( newURL != SBtask.URL && SBtask.canRefresh )
-				{
-					SBtask.URL = newURL;
-					SBtask.canRefresh = false;
-					SBbrowser.contentWindow.location.href = SBtask.URL;
-					return;
-				}
-			}
-		}
-		var success = SBcapture.doCaptureDocument(SBbrowser.contentWindow, false, gShowDetail, gContResName, gContResIdx);
-	}
-	else
-	{
-		var type = SBtask.contentType.match(/image/i) ? "image" : "file";
-		var success = SBcapture.doCaptureFile(SBtask.URL, type, gRefURL ? gRefURL : SBtask.URL, gShowDetail, gContResName, gContResIdx);
-	}
-	if ( success )
-	{
-		gURL2ID[SBtask.URL] = success;
-	}
-	else
-	{
-		SB_trace(SBstring.getString("CAPTURE_ABORT"));
-		SBtask.fail();
-	}
-}
-
-
-
-SBcapture.notifyOnComplete = function(aID, aIcon, aTitle)
-{
-	if ( gURLs.length == 1 )
-	{
-		window.opener.SBcapture.notifyOnComplete(aID, aIcon, aTitle);
-	}
-	SBtask.succeed();
-}
-
-
-SBdownloadListenerCallback = {
-
-	onCompleteDownload : function(aItem)
-	{
-		SB_trace(SBstring.getString("CAPTURE") + "... (" + SBcapture.httpTask[aItem.id] + ") " + aItem.title);
-	},
-	onCompleteAllDownloads : function(aItem)
-	{
-		SB_trace(SBstring.getString("CAPTURE_COMPLETE") + " : " + aItem.title);
-		SBcapture.notifyOnComplete(aItem.id, aItem.icon, aItem.title);
-	},
-	onProgressDownload : function(aItem, aFileName, aProgress)
-	{
-		SB_trace(SBstring.getString("TRANSFER_DATA") + "... (" + SBcapture.httpTask[aItem.id] + ") " + aProgress + " : " + aFileName);
+		SB_trace(SBstring.getString("TRANSFER_DATA") + "... (" + sbContentSaver.httpTask[aItem.id] + ") " + aProgress + " : " + aFileName);
 	},
 };
 

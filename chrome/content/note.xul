@@ -13,9 +13,8 @@
         onload="snGlobal.init();"
         onunload="snGlobal.finalize(false);">
 
-	<!--JavaScript for Preference-->
-	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
 	<!--JavaScript-->
+	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapnote.js" />

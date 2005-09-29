@@ -3,7 +3,6 @@
 <!--skin-->
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 <?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
-<!--?xml-stylesheet href="chrome://global/skin/arrow.css" type="text/css" ?-->
 
 <!--locale-->
 <!DOCTYPE dialog [
@@ -23,9 +22,8 @@
         ondialogaccept="SB_acceptDetail();"
         ondialogcancel="SB_cancelDetail();">
 
-	<!--JavaScript for Preference-->
-	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
 	<!--JavaScript-->
+	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/detail.js" />
@@ -64,19 +62,31 @@
 						</row>
 					</rows>
 				</grid>
-				<!--download links-->
+				<!--download linked files-->
 				<groupbox>
-					<caption label="&sb.detail.linked;" />
+					<caption label="&sb.detail.linked.file;" />
 					<checkbox id="ScrapBookDetailLinkedI" persist="checked" label="&sb.detail.linked.image; (jpg, png, gif)" />
 					<checkbox id="ScrapBookDetailLinkedS" persist="checked" label="&sb.detail.linked.sound; (mp3, wav, ram, wma)" />
 					<checkbox id="ScrapBookDetailLinkedM" persist="checked" label="&sb.detail.linked.movie; (mpg, avi, ram, mov, wmv)" />
 					<checkbox id="ScrapBookDetailLinkedA" persist="checked" label="&sb.detail.linked.archive; (zip, lzh, rar, xpi)" />
-					<hbox>
+					<hbox align="center">
 						<checkbox id="ScrapBookDetailLinkedCustom" persist="checked" label="&sb.detail.linked.custom;" oncommand="SB_toggleLinkedCustom();" />
 						<textbox flex="1" />
 					</hbox>
-					<separator class="groove" />
-					<checkbox id="ScrapBookDetailLinkedSeq" label="&sb.detail.linked.seq;" />
+				</groupbox>
+				<!--capture linked pages-->
+				<groupbox>
+					<caption label="&sb.detail.linked.page;" />
+					<hbox align="center">
+						<label value="&sb.detail.linked.page.depth;:" />
+						<radiogroup id="ScrapBookDetailLinkedP" orient="horizontal" onselect="SB_checkLinkedCustom(this);">
+							<radio label="0" selected="true" />
+							<radio label="1" />
+							<radio label="2" />
+							<radio label="3" />
+						</radiogroup>
+					</hbox>
+					<description flex="1">&sb.detail.linked.page.text;</description>
 				</groupbox>
 			</tabpanel>
 			<tabpanel>

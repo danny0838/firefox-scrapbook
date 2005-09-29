@@ -30,13 +30,14 @@ function SB_trace(aStr, aKey)
 	SBstatus.trace(aStr, 2000);
 	var listItem = SBlog.appendItem(aStr);
 	SBlog.ensureIndexIsVisible(SBlog.getRowCount() - 1);
+	var style;
 	switch ( aKey )
 	{
-		case "R" : col = "#FF0000"; break;
-		case "G" : col = "#00AA33"; break;
-		case "B" : col = "#0000FF"; break;
+		case "R" : style = "color:#FF0000;font-weight:bold;"; break;
+		case "G" : style = "color:#00AA33;"; break;
+		case "B" : style = "color:#0000FF;"; break;
 	}
-	if ( aKey ) listItem.setAttribute("style", "color:" + col + ";");
+	if ( aKey ) listItem.setAttribute("style", style);
 }
 
 
@@ -49,10 +50,9 @@ function SB_initTrade()
 	SBprogress = document.getElementById("ScrapBookTradeProgress");
 	SBbaseURL = SBservice.IO.newFileURI(SBcommon.getScrapBookDir()).spec;
 	SB_disablePopupMenus();
-	SBRDF.init();
+	sbDataSource.init();
 	SBtreeUtil.init("ScrapBookTree", false);
 	SB_initObservers();
-	SBstatus.init();
 	SBtrade.init();
 	SBtrade.refresh();
 	STdragObserver = 
@@ -143,27 +143,31 @@ var SBexport = {
 		var SBitem = new ScrapBookItem();
 		for ( var prop in SBitem )
 		{
-			SBitem[prop] = SBRDF.getProperty(prop, aRes);
+			SBitem[prop] = sbDataSource.getProperty(prop, aRes);
 		}
 		SBitem.icon = SBitem.icon.match(/\d{14}\/([^\/]+)$/) ? RegExp.$1 : "";
 		SBcommon.writeIndexDat(SBitem);
 		var progRate = " (" + (this.count + 1) + "/" + this.resList.length + ") ";
 		var num = 0;
 		var destDir = SBtradeDir.clone();
-		destDir.append(SBcommon.validateFileName(SBitem.title));
+		var dirName = SBcommon.validateFileName(SBitem.title).substring(0,64);
+		destDir.append(dirName);
 		while ( destDir.exists() && num < 256 )
 		{
 			destDir = SBtradeDir.clone();
-			destDir.append(SBcommon.validateFileName(SBitem.title) + "-" + ++num)
+			dirName = SBcommon.validateFileName(SBitem.title).substring(0,60) + "-" + ++num
+			destDir.append(dirName)
 		}
+		var srcDir = SBcommon.getContentDir(SBitem.id).clone();
 		try {
-			num = num ? ("-" + num) : "";
-			var srcDir = SBcommon.getContentDir(SBitem.id).clone();
-			srcDir.copyTo(SBtradeDir, SBcommon.validateFileName(SBitem.title) + num);
-		}
-		catch(ex) {
-			SB_trace(STstring.getString("EXPORT_FAILURE") + progRate + SBitem.title, "R");
-			return;
+			srcDir.copyTo(SBtradeDir, dirName);
+		} catch(ex) {
+			try {
+				srcDir.copyTo(SBtradeDir, SBitem.id);
+			} catch(ex) {
+				SB_trace(STstring.getString("EXPORT_FAILURE") + progRate + SBitem.title, "R");
+				return;
+			}
 		}
 		SB_trace(STstring.getString("EXPORT_SUCCESS") + progRate + SBitem.title, "B");
 		SBprogress.value = Math.round( this.count / this.resList.length * 100);
@@ -171,12 +175,12 @@ var SBexport = {
 
 	getChildResourcesRecursively : function(aContRes)
 	{
-		var aRDFCont = SBRDF.getContainer(aContRes.Value, false);
+		var aRDFCont = sbDataSource.getContainer(aContRes.Value, false);
 		var ResSet = aRDFCont.GetElements();
 		while ( ResSet.hasMoreElements() )
 		{
 			var myRes = ResSet.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			if ( SBservice.RDFCU.IsContainer(SBRDF.data, myRes) ) {
+			if ( SBservice.RDFCU.IsContainer(sbDataSource.data, myRes) ) {
 				this.getChildResourcesRecursively(myRes);
 			} else {
 				this.resList.push(myRes);
@@ -247,12 +251,11 @@ var SBimport = {
 		var rate = " (" + num + "/" + this.selItems.length + ") ";
 		try {
 			srcDir.copyTo(destDir, SBitem.id);
-		}
-		catch(ex) {
+		} catch(ex) {
 			SB_trace(STstring.getString("IMPORT_FAILURE") + rate + SBitem.title + STstring.getString("SAME_ID"), "R");
 			return;
 		}
-		SBRDF.addItem(SBitem, contResArray[0], contResArray[1]);
+		sbDataSource.addItem(SBitem, contResArray[0], contResArray[1]);
 		SB_trace(STstring.getString("IMPORT_SUCCESS") + rate + SBitem.title, "B");
 		SBprogress.value = Math.round( num / this.selItems.length * 100);
 	},
@@ -267,6 +270,7 @@ var SBtrade = {
 	init : function()
 	{
 		var dirPath = nsPreferences.copyUnicharPref("scrapbook.trade.path", "");
+		if ( !dirPath ) this.selectPath();
 		SBtradeDir = this.validateDirectory(dirPath);
 		this.initPath(dirPath);
 	},
@@ -345,6 +349,7 @@ var SBtrade = {
 			SBlist.appendChild(litem);
 		}
 		SB_trace(STstring.getFormattedString("DETECT", [listItems.length, SBtradeDir.path]), "G");
+		if ( listItems.length == 0 ) SB_trace(STstring.getString("TIPS"), "R");
 	},
 
 	validateDirectory : function(aPath)

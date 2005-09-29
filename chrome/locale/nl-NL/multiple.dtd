@@ -1,0 +1,9 @@
+<!ENTITY sb.multiple.url	"URL (URL's regel-voor-regel invoeren)">
+
+<!ENTITY sb.multiple.detector		"URL-zoeker">
+<!ENTITY sb.multiple.detector.plink	"All Links in the Page">
+<!ENTITY sb.multiple.detector.slink	"All Links in the Selection">
+<!ENTITY sb.multiple.detector.tabs	"Alle geopende tabbladen in het scherm">
+<!ENTITY sb.multiple.detector.local	"Alle lokale HTML's in de map">
+<!ENTITY sb.multiple.detector.clear	"Wissen">
+

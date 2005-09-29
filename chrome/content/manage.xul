@@ -40,7 +40,7 @@
 	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/scrapbook.properties" />
 
 	<!--keyset-->
-	<keyset id="ScrapBookWindowKey" />
+	<keyset id="ScrapBookGenericKeyset" />
 
 	<!--popup-->
 	<popupset>
@@ -51,14 +51,14 @@
 	<toolbox class="plain">
 		<!--main toolbar-->
 		<toolbar id="ScrapBookMainToolbar">
-			<toolbarbutton tooltiptext="&sb.new.folder;"    image="chrome://scrapbook/skin/tool_createfolder.png" oncommand="SB_createFolder();" />
-			<toolbarbutton tooltiptext="&sb.toggleallopen;" image="chrome://scrapbook/skin/tool_togglefolder.png" oncommand="SBtreeUtil.toggleAllFolders();" />
+			<toolbarbutton tooltiptext="&sb.new.folder;" image="chrome://scrapbook/skin/tool_createfolder.png" oncommand="SB_createFolder();" />
+			<toolbarbutton tooltiptext="&sb.toggle.all;" image="chrome://scrapbook/skin/tool_togglefolder.png" oncommand="SBtreeUtil.toggleAllFolders();" />
 			<toolbarseparator />
-			<toolbarbutton label="&sb.move;..."     image="chrome://scrapbook/skin/tool_selectfolder.png" oncommand="SB_moveIntoFolder();" />
+			<toolbarbutton label="&sb.move;..."     image="chrome://scrapbook/skin/tool_selectfolder.png" oncommand="SB_sendMultiple();" />
 			<toolbarseparator />
 			<toolbarbutton label="&sb.delete;..."   image="chrome://scrapbook/skin/menu_delete.png"   oncommand="SB_delete();" />
 			<toolbarseparator />
-			<toolbarbutton label="&sb.property;..." image="chrome://scrapbook/skin/menu_property.png" oncommand="SB_transmit('P');" />
+			<toolbarbutton label="&sb.property;..." image="chrome://scrapbook/skin/menu_property.png" oncommand="SB_forward('P');" />
 		</toolbar>
 	</toolbox>
 

@@ -15,6 +15,6 @@
 <!ENTITY sb.prop.icon.change	"Cambiar">
 <!ENTITY sb.prop.icon.default	"Default">
 <!ENTITY sb.prop.icon.favicon	"Select favicon">
-<!ENTITY sb.prop.icon.custom	"Select custom icon">
+<!ENTITY sb.prop.icon.custom	"Select user icon">
 <!ENTITY sb.prop.mark			"Mark">
 

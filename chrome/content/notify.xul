@@ -29,20 +29,4 @@
 		</vbox>
 	</hbox>
 
-	<script type="application/x-javascript"><![CDATA[
-		if ( window.arguments[0] )
-		{
-			gID = window.arguments[0];
-			var iconURL = window.arguments[1];
-			if ( !iconURL ) iconURL = SBcommon.getDefaultIcon("");
-			document.getElementById("ScrapBookNotifyIcon").src   = iconURL;
-			document.getElementById("ScrapBookNotifyText").value = window.arguments[2];
-		}
-		else
-		{
-			document.getElementById("ScrapBookNotifyText").hidden = true;
-			document.getElementById("ScrapBookNotifyTextA").hidden = false;
-		}
-	]]></script>
-
 </window>

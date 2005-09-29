@@ -1,8 +1,8 @@
-<!ENTITY sb.title			"ScrapBook">
+<!ENTITY sb.title			"Web-альбом">
 
 <!ENTITY sb.new.folder		"Новая папка...">
 <!ENTITY sb.new.note		"Создать пометку">
-<!ENTITY sb.toggleallopen	"Развернуть/Свернуть все папки">
+<!ENTITY sb.toggle.all		"Развернуть/Свернуть все папки">
 
 <!ENTITY sb.tools			"Инструменты">
 <!ENTITY sb.tools.setting	"Настройки...">
@@ -10,11 +10,12 @@
 <!ENTITY sb.tools.calculate	"Рассчитать занимаемый размер">
 <!ENTITY sb.tools.sorttree	"Сортировать все дерево">
 <!ENTITY sb.tools.directory	"Папка ScrapBook">
-<!ENTITY sb.tools.urls		"Захватить множество URL-ов">
+<!ENTITY sb.tools.combine	"Combine">
+<!ENTITY sb.tools.multiple	"Захватить множество URL-ов">
 <!ENTITY sb.tools.trade		"Импорт / Экспорт">
 <!ENTITY sb.tools.output	"Сохранить дерево страниц как HTML">
 <!ENTITY sb.tools.backup	"Архивирование">
-<!ENTITY sb.tools.repair	"Emergency Repair">
+<!ENTITY sb.tools.repair	"Срочное восстановление">
 <!ENTITY sb.tools.homepage	"Домашняя страница">
 <!ENTITY sb.tools.about		"О программе">
 

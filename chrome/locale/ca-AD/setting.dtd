@@ -12,11 +12,6 @@
 <!ENTITY sb.setting.tree.singleexpand	"Quan expandeixi una carpeta de l'arbre redueix totes les altres carpetes">
 <!ENTITY sb.setting.tree.quickdelete	"Quan suprimeixi un element no em demanis cap confirmació">
 
-<!ENTITY sb.setting.view.header			"Mostra la barra d'informació de l'URL">
-<!ENTITY sb.setting.view.editor			"Mostra la barra d'eines d'edició">
-<!ENTITY sb.setting.view.editor.auto	"Automàticament quan es visualitzi una pàgina capturada">
-<!ENTITY sb.setting.view.editor.manual	"Quan premi el botó EDIT de la barra d'estat">
-
 <!ENTITY sb.setting.usetabs.d			"Les accions seleccionades utilitzaran pestanyes noves.">
 <!ENTITY sb.setting.usetabs.note		"Obre les notes en una pestanya">
 
@@ -25,16 +20,14 @@
 <!ENTITY sb.setting.capture.removescript	"Suprimeix el JavaScript (recomanat)">
 <!ENTITY sb.setting.capture.removescript.d	"Si desactiveu aquesta opció a vegades no es podrà conservar correctament el format de la pàgina.">
 
-<!ENTITY sb.setting.edit.multilines		"Expandeix inicialment l'àrea de comentaris">
-<!ENTITY sb.setting.edit.confirmsave.1	"Interval per a confirmar el desat">
-<!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 = no confirmis mai)">
-
-<!ENTITY sb.setting.program.filer			"Programa per a explorar els fitxers">
-<!ENTITY sb.setting.program.filer.default	"Per defecte (al Windows, segurament l'Explorer).">
-<!ENTITY sb.setting.browse					"Navega">
+<!ENTITY sb.button.browse			"Navega">
+<!ENTITY sb.button.show				"Mostra la carpeta">
 
 <!ENTITY sb.setting.data			"Carpeta a on s'emmagatzemaran les dades">
 <!ENTITY sb.setting.data.default	"Per defecte (a la carpeta del vostre perfil d'usuari)">
+<!ENTITY sb.setting.data.alert		"Actualment les vostres dades de l'ScrapBook es desen en una carpeta del vostre perfil d'usuari del Firefox. Fixeu-vos que si quan suprimiu el perfil d'usuari trieu l'opció &#34;Suprimeix els fitxers&#34; totes les dades de l'ScrapBook també es suprimiran.">
+<!ENTITY sb.setting.filer			"Programa per a explorar els fitxers">
+<!ENTITY sb.setting.filer.default	"Per defecte (al Windows, segurament l'Explorer).">
 
 <!ENTITY sb.setting.restorefavicons		"Restaura les icones de pàgina">
 <!ENTITY sb.setting.restorefavicons.d	"Premeu aquest botó si no es mostren les icones de pàgina:">

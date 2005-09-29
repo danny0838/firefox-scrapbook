@@ -30,7 +30,7 @@
 		function SB_initFP()
 		{
 			SBstring = document.getElementById("ScrapBookString");
-			SBRDF.init();
+			sbDataSource.init();
 			SBtreeUtil.init("ScrapBookTree", true);
 			document.documentElement.buttons = "accept,cancel,extra2";
 			document.getElementById("ScrapBookFolderPickerRoot").label = SBstring.getString("ROOT_FOLDER");

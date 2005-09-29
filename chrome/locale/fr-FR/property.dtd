@@ -7,7 +7,7 @@
 <!ENTITY sb.prop.comment	"Commentaire">
 <!ENTITY sb.prop.content	"Contenu">
 <!ENTITY sb.prop.size		"Taille">
-<!ENTITY sb.prop.id.date	"ID (Durée)">
+<!ENTITY sb.prop.id.date	"ID (DateHeure)">
 <!ENTITY sb.prop.folder		"Dossier">
 
 <!ENTITY sb.prop.general	"Information générale">

@@ -1,21 +1,30 @@
 <!ENTITY sb.editor			"ScrapBook bewerkingsknoppenbalk">
-<!ENTITY sb.editor.inline	"Tekstopmerking aan selectie toevoegen">
-<!ENTITY sb.editor.block.insert		"Na selectie commentaarblok toevoegen">
-<!ENTITY sb.editor.block.customize	"CSS voor de commentaarblokken aanpassen">
-<!ENTITY sb.editor.block.hide		"Commentaarblokken verbergen">
-<!ENTITY sb.editor.marker	"Selectie markeren">
-<!ENTITY sb.editor.unline	"Alle tekstopmerkingen verwijderen">
-<!ENTITY sb.editor.unmark	"Alle markeringen verwijderen">
-<!ENTITY sb.editor.cutter	"Selectie verwijderen">
-<!ENTITY sb.editor.remove.iframe	"Alle IFRAME-codes verwijderen">
-<!ENTITY sb.editor.remove.script	"Alle SCRIPT-codes verwijderen">
 <!ENTITY sb.editor.eraser	"DOM Eraser: Klik op een onderdeel van de internetpagina om het te verwijderen">
 <!ENTITY sb.editor.undo		"Ongedaan maken">
 <!ENTITY sb.editor.restore	"Wijzigingen ongedaan maken">
 <!ENTITY sb.editor.save		"Wijzigingen opslaan">
-<!ENTITY sb.editor.find		"De bladwijzer in de zijbalk zoeken en selecteren">
 <!ENTITY sb.editor.comment	"Commentaargebied vergroten/verkleinen">
+<!ENTITY sb.editor.marker			"Selectie markeren">
+<!ENTITY sb.editor.marker.yellow	"Yellow">
+<!ENTITY sb.editor.marker.green		"Green">
+<!ENTITY sb.editor.marker.blue		"Blue">
+<!ENTITY sb.editor.marker.pink		"Pink">
+<!ENTITY sb.editor.unmark.partial	"Remove Highlights in the Selection">
+<!ENTITY sb.editor.unmark.entire	"Alle markeringen verwijderen">
+<!ENTITY sb.editor.block.insert		"Na selectie commentaarblok toevoegen">
+<!ENTITY sb.editor.block.customize	"CSS voor de commentaarblokken aanpassen">
+<!ENTITY sb.editor.block.hide		"Commentaarblokken verbergen">
+<!ENTITY sb.editor.inline.add		"Tekstopmerking aan selectie toevoegen">
+<!ENTITY sb.editor.inline.delete	"Alle tekstopmerkingen verwijderen">
+<!ENTITY sb.editor.attach.file		"Attach File to Selection">
+<!ENTITY sb.editor.attach.link		"Attach Link to Selection">
+<!ENTITY sb.editor.cutter			"Selectie verwijderen">
+<!ENTITY sb.editor.remove.iframe	"Alle IFRAME-codes verwijderen">
+<!ENTITY sb.editor.remove.script	"Alle SCRIPT-codes verwijderen">
 
-<!ENTITY sb.inline.enter	"Invoeren">
-<!ENTITY sb.inline.delete	"Verwijderen">
+<!ENTITY sb.infobar				"ScrapBook Info Toolbar">
+<!ENTITY sb.infobar.home		"Home">
+<!ENTITY sb.infobar.sitemap		"SiteMap">
+
+<!ENTITY sb.synchronize		"Synchronize with the Sidebar Tree">
 

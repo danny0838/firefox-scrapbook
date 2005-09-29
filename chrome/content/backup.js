@@ -31,7 +31,9 @@ function SB_initBackup()
 	document.getElementById("ScrapBookBackupProgramTextbox").value     = gProgPath;
 	document.getElementById("ScrapBookBackupDestinationTextbox").value = gDestPath;
 	document.getElementById("ScrapBookBackupArgumentsMenulist").value  = gArguments;
-	document.documentElement.getButton("accept").label = SBstring.getString("START_BUTTON");
+	SBwizard.getButton("back").hidden = true;
+	SBwizard.getButton("finish").label = SBstring.getString("START_BUTTON");
+	if ( window.location.href.match(/\?auto/) ) SB_execBackup();
 }
 
 
@@ -54,13 +56,14 @@ function SB_execBackup()
 		if ( args[i] == "%src" ) args[i] = gDataPath;
 	}
 	SBcommon.execProgram(gProgPath, args);
+	if ( window.location.href.match(/\?auto/) ) setTimeout(function(){ window.close(); }, 1000);
 }
 
 
 function SB_selectCompressionProgram()
 {
 	var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-	FP.init(window, "Select Compression Program", FP.modeOpen);
+	FP.init(window, document.getElementById("sbBackupProgramCaption").label, FP.modeOpen);
 	FP.appendFilters(FP.filterApps);
 	var answer = FP.show();
 	if ( answer == FP.returnOK )
@@ -74,9 +77,9 @@ function SB_selectCompressionProgram()
 function SB_selectBackupDestination()
 {
 	var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-	FP.init(window, "Select Destination File to Backup", FP.modeSave);
+	FP.init(window, document.getElementById("sbBackupDestinationCaption").label, FP.modeSave);
 	var ext, prog = document.getElementById("ScrapBookBackupProgramTextbox").value;
-	if ( prog.match(/WinRAR/i) ) { ext = "rar"; } else { ext = "zip"; }
+	var ext = prog.match(/WinRAR/i) ? "rar" : "zip";
 	FP.defaultString = "ScrapBook." + ext;
 	var answer = FP.show();
 	if ( answer == FP.returnOK || answer == FP.returnReplace )

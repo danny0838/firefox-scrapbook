@@ -35,96 +35,96 @@
 
 // The original script can be found at: http://piro.sakura.ne.jp/xul/_linemarker.html
 
-function sbSetMarker(aWindow, aSelection, aSpanClass, aSpanStyle, aSpanTitle)
-{
-	var range = aWindow.document.createRange();
+var sbLineMarker = {
 
-	try {
-		range.setStart(aSelection.anchorNode, aSelection.anchorOffset);
-		range.setEnd(aSelection.focusNode, aSelection.focusOffset);
-	} catch(ex) {
-		range.setStart(aSelection.focusNode, aSelection.focusOffset);
-		range.setEnd(aSelection.anchorNode, aSelection.anchorOffset);
-	}
-
-	var line = aWindow.document.createElement('span');
-	if ( aSpanStyle ) line.setAttribute('style', aSpanStyle);
-	if ( aSpanClass ) line.setAttribute('class', aSpanClass);
-	if ( aSpanTitle ) line.setAttribute('title', aSpanTitle);
-
-	if (range.startContainer == range.endContainer) {
-
-		var containerNode = range.startContainer;
-		var startOffset = range.startOffset;
-		range.setStartBefore(range.startContainer);
-		var startEdge = range.extractContents();
-		range.insertNode(startEdge);
-
-		range.selectNode(containerNode.previousSibling);
-		range.setStart(containerNode.previousSibling, startOffset);
-		var lineContents = range.extractContents();
-
-		line.appendChild(lineContents.removeChild(lineContents.firstChild));
-		lineContents.appendChild(line);
-		range.insertNode(lineContents);
-	}
-	else {
-		var startRange = aWindow.document.createRange();
-		startRange.setStart(range.startContainer, range.startOffset);
-		startRange.setEndAfter(range.startContainer);
-		startRange.surroundContents(line.cloneNode(true));
-		startRange.detach();
-
-		var endRange = aWindow.document.createRange();
-		endRange.setStartBefore(range.endContainer);
-		endRange.setEnd(range.endContainer, range.endOffset);
-		var endLine = line.cloneNode(true);
-		endLine.appendChild(endRange.extractContents());
-		endRange.insertNode(endLine);
-		endRange.detach();
-
-		sbWrapUpTexts(range.startContainer, range.endContainer, line);
-	}
-	range.detach();
-
-}
-
-// Find text nodes from aStartNode to aEndNode, and wrap up them in elemen node (aParent).
-function sbWrapUpTexts(aStartNode, aEndNode, aParent)
-{
-	var node = aStartNode,
-		newNode;
-
-	traceTree:
-	do
+	set : function(aWindow, aSelection, aTagName, aAttributes)
 	{
-		if (node.hasChildNodes()) {
-			node = node.firstChild;
+		var range = aWindow.document.createRange();
+
+		try {
+			range.setStart(aSelection.anchorNode, aSelection.anchorOffset);
+			range.setEnd(aSelection.focusNode, aSelection.focusOffset);
+		} catch(ex) {
+			range.setStart(aSelection.focusNode, aSelection.focusOffset);
+			range.setEnd(aSelection.anchorNode, aSelection.anchorOffset);
+		}
+
+		var elem = aWindow.document.createElement(aTagName);
+		for ( var attr in aAttributes )
+		{
+			elem.setAttribute(attr, aAttributes[attr]);
+		}
+
+		if (range.startContainer == range.endContainer)
+		{
+			var containerNode = range.startContainer;
+			var startOffset = range.startOffset;
+			range.setStartBefore(range.startContainer);
+			var startEdge = range.extractContents();
+			range.insertNode(startEdge);
+
+			range.selectNode(containerNode.previousSibling);
+			range.setStart(containerNode.previousSibling, startOffset);
+			var elemContents = range.extractContents();
+
+			elem.appendChild(elemContents.removeChild(elemContents.firstChild));
+			elemContents.appendChild(elem);
+			range.insertNode(elemContents);
 		}
 		else {
-			while (!node.nextSibling)
-			{
-				node = node.parentNode;
-				if (!node) break traceTree;
+			// can't attach link across tags.
+			if ( aTagName == "a" ) { alert("ScrapBook ERROR: Cannot attach link across tags."); return; }
+
+			var startRange = aWindow.document.createRange();
+			startRange.setStart(range.startContainer, range.startOffset);
+			startRange.setEndAfter(range.startContainer);
+			startRange.surroundContents(elem.cloneNode(true));
+			startRange.detach();
+
+			var endRange = aWindow.document.createRange();
+			endRange.setStartBefore(range.endContainer);
+			endRange.setEnd(range.endContainer, range.endOffset);
+			var endLine = elem.cloneNode(true);
+			endLine.appendChild(endRange.extractContents());
+			endRange.insertNode(endLine);
+			endRange.detach();
+
+			this.wrapUpText(range.startContainer, range.endContainer, elem);
+		}
+		range.detach();
+	},
+
+	// Find text nodes from aStartNode to aEndNode, and wrap up them in elemen node (aParent).
+	wrapUpText : function(aStartNode, aEndNode, aParent)
+	{
+		var node = aStartNode,
+			newNode;
+
+		traceTree : do
+		{
+			if (node.hasChildNodes()) {
+				node = node.firstChild;
 			}
-			node = node.nextSibling;
+			else {
+				while (!node.nextSibling)
+				{
+					node = node.parentNode;
+					if (!node) break traceTree;
+				}
+				node = node.nextSibling;
+			}
+			if (node == aEndNode) break traceTree;
+			if (node.nodeType == Node.TEXT_NODE) {
+				newNode = aParent.cloneNode(true);
+				newNode.appendChild(node.cloneNode(true));
+				node.parentNode.replaceChild(newNode, node);
+				node = newNode.lastChild;
+			}
 		}
-		if (node == aEndNode) break traceTree;
-/*
-		if (node.nodeType == Node.TEXT_NODE) {
-			newNode = aParent.cloneNode(true);
-			newNode.appendChild(node.cloneNode(true));
-			node.parentNode.replaceChild(newNode, node);
-			node = newNode.lastChild;
-		}
-*/
-		node.removeAttribute("class");
-		node.removeAttribute("style");
+		while (node != aEndNode);
+		return;
+	},
 
-	}
-	while (node != aEndNode);
-
-	return;
-}
+};
 
 

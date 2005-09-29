@@ -1,0 +1,9 @@
+<!ENTITY sb.multiple.url		"URL (Insira uma URL por linha)">
+
+<!ENTITY sb.multiple.detector		"Detector de URL">
+<!ENTITY sb.multiple.detector.plink	"Todos os Links na Página">
+<!ENTITY sb.multiple.detector.slink	"Todos os Links na Seleção">
+<!ENTITY sb.multiple.detector.tabs	"Todas as Abas Abertas na Janela">
+<!ENTITY sb.multiple.detector.local	"Todos os HTMLs em um Diretório Local">
+<!ENTITY sb.multiple.detector.clear	"Limpar">
+

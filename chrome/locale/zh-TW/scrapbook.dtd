@@ -2,7 +2,7 @@
 
 <!ENTITY sb.new.folder		"開新資料夾...">
 <!ENTITY sb.new.note		"新增筆記">
-<!ENTITY sb.toggleallopen	"展開／折疊所有資料夾">
+<!ENTITY sb.toggle.all		"展開／折疊所有資料夾">
 
 <!ENTITY sb.tools			"工具">
 <!ENTITY sb.tools.setting	"設定...">
@@ -10,7 +10,8 @@
 <!ENTITY sb.tools.calculate	"計算文件大小">
 <!ENTITY sb.tools.sorttree	"所有文件排序">
 <!ENTITY sb.tools.directory	"開啟 ScrapBook 目錄">
-<!ENTITY sb.tools.urls		"擷取多重 URL">
+<!ENTITY sb.tools.combine	"Combine">
+<!ENTITY sb.tools.multiple	"擷取多重 URL">
 <!ENTITY sb.tools.trade		"匯入 / 匯出">
 <!ENTITY sb.tools.output	"將資料列表匯出為 HTML">
 <!ENTITY sb.tools.backup	"壓縮並備份資料">

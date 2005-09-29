@@ -71,12 +71,13 @@
 	      context="ScrapBookTreePopup"
 	      seltype="single"
 	      ondblclick="sbCalcControl.onDblClick(event);"
+	      onkeypress="if ( event.keyCode == 46 ) sbCalcControl.remove();"
 	      style="margin:12px;"
 	      flex="1">
 		<treecols>
-			<treecol id="sbTreeColTitle" label="&sb.prop.title;"     flex="7" onclick="sbCalc.sortItems(this, 0)" primary="true" />
-			<treecol id="sbTreeColSize"  label="&sb.prop.size;"      flex="2" onclick="sbCalc.sortItems(this, 6)" sortDirection="descending" />
-			<treecol id="sbTreeColState" label="&sb.calc.diagnosis;" flex="1" onclick="sbCalc.sortItems(this, 7)" style="max-width:120px;" />
+			<treecol id="sbTreeColTitle" label="&sb.prop.title;"     flex="7" onclick="sbCalc.sortItems(this, 2)" primary="true" />
+			<treecol id="sbTreeColSize"  label="&sb.prop.size;"      flex="2" onclick="sbCalc.sortItems(this, 4)" sortDirection="descending" />
+			<treecol id="sbTreeColState" label="&sb.calc.diagnosis;" flex="1" onclick="sbCalc.sortItems(this, 6)" style="max-width:120px;" />
 		</treecols>
 		<treechildren />
 	</tree>

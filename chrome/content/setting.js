@@ -11,124 +11,120 @@
 **************************************************/
 
 
+var sbPrefService = {
 
-var SBstring;
-var SBshouldRefresh;
-var SBcheckElems = {
-	'ScrapBookBrowserSubmenu'  		: false,
-	'ScrapBookTreeSingleExpand'		: false,
-	'ScrapBookTreeQuickDelete'		: false,
-	'ScrapBookViewHeader'			: false,
-	'ScrapBookCaptureDetail'		: false,
-	'ScrapBookCaptureNotify'		: false,
-	'ScrapBookCaptureUTF8Encode'	: true,
-	'ScrapBookCaptureRemoveScript'	: true,
-	'ScrapBookUseTabO'	: false,
-	'ScrapBookUseTabS'	: false,
-	'ScrapBookUseTabC'	: false,
-	'ScrapBookUseTabR'	: false,
-	'ScrapBookUseTabP'	: false,
-	'ScrapBookUseTabN'	: false,
-};
+	get STRING() { return document.getElementById("ScrapBookString"); },
 
+	defaultValues : {
+		"sbPrefBrowserSubmenu"  	: false,
+		"sbPrefTreeSingleExpand"	: false,
+		"sbPrefTreeQuickDelete"		: false,
+		"sbPrefCaptureDetail"		: false,
+		"sbPrefCaptureNotify"		: false,
+		"sbPrefCaptureUTF8Encode"	: true,
+		"sbPrefCaptureRemoveScript"	: true,
+		"sbPrefUseTabOpen"			: false,
+		"sbPrefUseTabSource"		: false,
+		"sbPrefUseTabCombine"		: false,
+		"sbPrefUseTabSearch"		: false,
+		"sbPrefUseTabOutput"		: false,
+		"sbPrefUseTabNote"			: false,
+	},
 
+	shouldRefresh : false,
 
-function SB_initSetting()
-{
-	SBstring = document.getElementById("ScrapBookString");
-	SBshouldRefresh = false;
-	for ( var elem in SBcheckElems )
+	init : function()
 	{
-		var elem = document.getElementById(elem);
-		elem.checked = nsPreferences.getBoolPref(elem.getAttribute("prefstring"), SBcheckElems[elem]);
-	}
-	var iShowEditor = nsPreferences.getBoolPref("scrapbook.view.editor", false) ? 0 : 1;
-	document.getElementById("ScrapBookViewEditor" + iShowEditor).setAttribute("selected", true);
-	document.getElementById("ScrapBookProgramFilerCheckbox").checked = nsPreferences.getBoolPref("scrapbook.filer.default", true);
-	document.getElementById("ScrapBookProgramFilerTextbox").value = nsPreferences.copyUnicharPref("scrapbook.filer.path", "");
-	SB_toggleDefaultProgramFiler();
-	document.getElementById("ScrapBookDataCheckbox").checked = nsPreferences.getBoolPref("scrapbook.data.default", true);
-	document.getElementById("ScrapBookDataTextbox").value = nsPreferences.copyUnicharPref("scrapbook.data.path", "");
-	SB_toggleDefaultDestination();
-}
-
-
-function SB_acceptSetting()
-{
-	for ( var elem in SBcheckElems )
-	{
-		var elem = document.getElementById(elem);
-		nsPreferences.setBoolPref(elem.getAttribute("prefstring"), elem.checked);
-	}
-	var bShowEditor = document.getElementById("ScrapBookViewEditor0").selected;
-	nsPreferences.setBoolPref("scrapbook.view.editor", bShowEditor);
-	nsPreferences.setBoolPref("scrapbook.filer.default", document.getElementById("ScrapBookProgramFilerCheckbox").checked);
-	nsPreferences.setUnicharPref("scrapbook.filer.path", document.getElementById("ScrapBookProgramFilerTextbox").value);
-	nsPreferences.setBoolPref("scrapbook.data.default", document.getElementById("ScrapBookDataCheckbox").checked);
-	nsPreferences.setUnicharPref("scrapbook.data.path", document.getElementById("ScrapBookDataTextbox").value);
-
-	try {
-		window.opener.top.sbBrowserOverlay.refresh();
-		window.opener.location.reload();
-	} catch(ex) {
-		SBshouldRefresh = true;
-	}
-
-	if ( SBshouldRefresh )
-	{
-		var navEnum = SBservice.WM.getEnumerator("navigator:browser");
-		while ( navEnum.hasMoreElements() )
+		for ( var elemID in this.defaultValues )
 		{
-			var nav = navEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
-			try {
-				nav.sbBrowserOverlay.refresh();
-				nav.document.getElementById("sidebar").contentDocument.location.reload();
-			} catch(ex) {
+			var elem = document.getElementById(elemID);
+			elem.checked = nsPreferences.getBoolPref(elem.getAttribute("prefstring"), this.defaultValues[elemID]);
+		}
+		document.getElementById("sbPrefFilerCheckbox").checked = nsPreferences.getBoolPref("scrapbook.filer.default", true);
+		document.getElementById("sbPrefFilerTextbox").value = nsPreferences.copyUnicharPref("scrapbook.filer.path", "");
+		this.toggleDefaultFiler();
+		document.getElementById("sbPrefDataCheckbox").checked = nsPreferences.getBoolPref("scrapbook.data.default", true);
+		document.getElementById("sbPrefDataTextbox").value = nsPreferences.copyUnicharPref("scrapbook.data.path", "");
+		if ( document.getElementById("sbPrefDataCheckbox").checked )
+		{
+			document.getElementById("sbPrefTabs").selectedIndex = 3;
+			document.getElementById("sbPrefDataAlert").hidden = false;
+		}
+		this.toggleDefaultData();
+	},
+
+	accept : function()
+	{
+		for ( var elemID in this.defaultValues )
+		{
+			var elem = document.getElementById(elemID);
+			nsPreferences.setBoolPref(elem.getAttribute("prefstring"), elem.checked);
+		}
+		nsPreferences.setBoolPref("scrapbook.filer.default", document.getElementById("sbPrefFilerCheckbox").checked);
+		nsPreferences.setUnicharPref("scrapbook.filer.path", document.getElementById("sbPrefFilerTextbox").value);
+		nsPreferences.setBoolPref("scrapbook.data.default", document.getElementById("sbPrefDataCheckbox").checked);
+		nsPreferences.setUnicharPref("scrapbook.data.path", document.getElementById("sbPrefDataTextbox").value);
+		try {
+			window.opener.top.sbBrowserOverlay.refresh();
+			window.opener.location.reload();
+		} catch(ex) {
+			this.shouldRefresh = true;
+			dump("sbPrefService::accept OPENED_FROM_EXTENSION_MANAGER\n");
+		}
+		if ( this.shouldRefresh )
+		{
+			dump("sbPrefService::accept shouldRefresh = true\n");
+			var navEnum = SBservice.WINDOW.getEnumerator("navigator:browser");
+			while ( navEnum.hasMoreElements() )
+			{
+				var nav = navEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
+				try {
+					nav.sbBrowserOverlay.refresh();
+					nav.document.getElementById("sidebar").contentWindow.location.reload();
+				} catch(ex) {
+				}
 			}
 		}
-	}
-}
+	},
 
-
-function SB_toggleDefaultProgramFiler()
-{
-	document.getElementById("ScrapBookProgramFilerTextbox").disabled = document.getElementById("ScrapBookProgramFilerCheckbox").checked;
-	document.getElementById("ScrapBookProgramFilerButton").disabled  = document.getElementById("ScrapBookProgramFilerCheckbox").checked;
-}
-
-
-function SB_selectProgramFiler()
-{
-	var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-	FP.init(window, SBstring.getString("SELECT_FILER"), FP.modeOpen);
-	FP.appendFilters(FP.filterApps);
-	var answer = FP.show();
-	if ( answer == FP.returnOK )
+	toggleDefaultFiler : function()
 	{
-		var theFile = FP.file;
-		document.getElementById("ScrapBookProgramFilerTextbox").value = theFile.path;
-	}
-}
+		document.getElementById("sbPrefFilerTextbox").disabled = document.getElementById("sbPrefFilerCheckbox").checked;
+		document.getElementById("sbPrefFilerButton").disabled  = document.getElementById("sbPrefFilerCheckbox").checked;
+	},
 
-
-function SB_toggleDefaultDestination()
-{
-	document.getElementById("ScrapBookDataTextbox").disabled = document.getElementById("ScrapBookDataCheckbox").checked;
-	document.getElementById("ScrapBookDataButton").disabled  = document.getElementById("ScrapBookDataCheckbox").checked;
-}
-
-
-function SB_selectDestination()
-{
-	var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-	FP.init(window, SBstring.getString("SELECT_DESTINATION"), FP.modeGetFolder);
-	var answer = FP.show();
-	if ( answer == FP.returnOK )
+	selectFiler : function()
 	{
-		var theFile = FP.file;
-		document.getElementById("ScrapBookDataTextbox").value = theFile.path;
-		SBchangeDestination = true;
-	}
-}
+		var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
+		FP.init(window, document.getElementById("sbPrefFilerCaption").label, FP.modeOpen);
+		FP.appendFilters(FP.filterApps);
+		var answer = FP.show();
+		if ( answer == FP.returnOK )
+		{
+			var theFile = FP.file;
+			document.getElementById("sbPrefFilerTextbox").value = theFile.path;
+		}
+	},
+
+	toggleDefaultData : function()
+	{
+		document.getElementById("sbPrefDataTextbox").disabled = document.getElementById("sbPrefDataCheckbox").checked;
+		document.getElementById("sbPrefDataButton").disabled  = document.getElementById("sbPrefDataCheckbox").checked;
+	},
+
+	selectData : function()
+	{
+		var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
+		FP.init(window, this.STRING.getString("SELECT_DESTINATION"), FP.modeGetFolder);
+		var answer = FP.show();
+		if ( answer == FP.returnOK )
+		{
+			var theFile = FP.file;
+			document.getElementById("sbPrefDataTextbox").value = theFile.path;
+			this.shouldRefresh = true;
+		}
+	},
+
+};
 
 

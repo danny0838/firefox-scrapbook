@@ -1,21 +1,30 @@
-<!ENTITY sb.editor		"Barra de ferramentas de edição do ScrapBook">
-<!ENTITY sb.editor.inline	"Adicionar comentário na linha da seleção">
-<!ENTITY sb.editor.block.insert		"Adicionar comentário em bloco após a seleção">
+<!ENTITY sb.editor				"Barra de Ferramentas de Edição do ScrapBook">
+<!ENTITY sb.editor.eraser		"Apagador DOM: Ferramenta para remover elementos clicando na Página Web.">
+<!ENTITY sb.editor.undo			"Desfazer">
+<!ENTITY sb.editor.restore		"Descartar Mudanças e Restaurar">
+<!ENTITY sb.editor.save			"Salvar Mudanças">
+<!ENTITY sb.editor.comment		"Expandir Área do Comentário">
+<!ENTITY sb.editor.marker		"Realçar Seleção">
+<!ENTITY sb.editor.marker.yellow	"Amarelo">
+<!ENTITY sb.editor.marker.green		"Verde">
+<!ENTITY sb.editor.marker.blue		"Azul">
+<!ENTITY sb.editor.marker.pink		"Rosa">
+<!ENTITY sb.editor.unmark.partial	"Remover Realces na Seleção">
+<!ENTITY sb.editor.unmark.entire	"Remover Todos os Realces">
+<!ENTITY sb.editor.block.insert		"Adicionar Comentário em Bloco Após a Seleção">
 <!ENTITY sb.editor.block.customize	"Personalizar CSS dos Comentários em Bloco">
 <!ENTITY sb.editor.block.hide		"Esconder Comentários em Bloco">
-<!ENTITY sb.editor.marker	"Realçar Seleção">
-<!ENTITY sb.editor.unline	"Remover todos os comentários em linhas">
-<!ENTITY sb.editor.unmark	"Remover todos os realces">
-<!ENTITY sb.editor.cutter	"Remover a Seleção">
+<!ENTITY sb.editor.inline.add		"Adicionar Comentário na Linha da Seleção">
+<!ENTITY sb.editor.inline.delete	"Remover Todos os Comentários em Linhas">
+<!ENTITY sb.editor.attach.file		"Anexar um Arquivo à Seleção">
+<!ENTITY sb.editor.attach.link		"Anexar um Link à Seleção">
+<!ENTITY sb.editor.cutter			"Remover a Seleção">
 <!ENTITY sb.editor.remove.iframe	"Remover todas as tags IFRAME">
 <!ENTITY sb.editor.remove.script	"Remover todas as tags SCRIPT">
-<!ENTITY sb.editor.eraser	"Apagador DOM: Uma ferramenta para remover elementos na Página Web.">
-<!ENTITY sb.editor.undo	"Desfazer">
-<!ENTITY sb.editor.restore	"Descartar Mudanças e Restaurar">
-<!ENTITY sb.editor.save	"Salvar Mudanças">
-<!ENTITY sb.editor.find		"Find and Select from the Sidebar Tree">
-<!ENTITY sb.editor.comment	"Expandir Área do Comentário">
 
-<!ENTITY sb.inline.enter	"Inserir">
-<!ENTITY sb.inline.delete	"Apagar">
+<!ENTITY sb.infobar				"Barra de Informações do ScrapBook">
+<!ENTITY sb.infobar.home		"Home">
+<!ENTITY sb.infobar.sitemap		"Mapa do Site">
+
+<!ENTITY sb.synchronize			"Sincronizar Com a Árvore do Painel">
 

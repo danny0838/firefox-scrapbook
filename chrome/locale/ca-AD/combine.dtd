@@ -1,0 +1,6 @@
+<!ENTITY sb.combine.select		"Trieu les pàgines">
+<!ENTITY sb.combine.select.d	"Feu doble clic a les pàgines en l'ordre en el que les voleu unir.">
+<!ENTITY sb.combine.preview		"Visualització prèvia">
+<!ENTITY sb.combine.preview.d	"Un cop hagueu verificat la visualització prèvia premeu el botó Uneix.">
+<!ENTITY sb.combine.option.header	"Afegeix la capçalera d'informació a cada pàgina">
+<!ENTITY sb.combine.option.remove	"Un cop unides, suprimeix les pàgines originals">

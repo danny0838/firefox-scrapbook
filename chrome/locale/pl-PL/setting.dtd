@@ -12,11 +12,6 @@
 <!ENTITY sb.setting.tree.singleexpand	"Gdy rozwijasz folder jako widok drzewa, zwiń wszystkie inne foldery">
 <!ENTITY sb.setting.tree.quickdelete	"Nie potwierdzaj usuwania">
 
-<!ENTITY sb.setting.view.header			"Pokaż informacje o URL">
-<!ENTITY sb.setting.view.editor			"Pokaż pasek edycji:">
-<!ENTITY sb.setting.view.editor.auto	"automatycznie, gdy przechodzisz do oglądania przechwyconej strony">
-<!ENTITY sb.setting.view.editor.manual	"ręcznie przez naciśnięcie przycisku &quot;Edytuj&quot; na pasku stanu">
-
 <!ENTITY sb.setting.usetabs.d			"Zaznaczone poniżej akcje otwieraj w nowej karcie">
 <!ENTITY sb.setting.usetabs.note		"Otwórz notes w karcie">
 
@@ -25,16 +20,14 @@
 <!ENTITY sb.setting.capture.removescript	"Usuń JavaScript   (zalecane)">
 <!ENTITY sb.setting.capture.removescript.d	"Jeżeli tego nie wykonasz czasami nie uda się zachować wyglądu strony.">
 
-<!ENTITY sb.setting.edit.multilines		"Włącz wieloliniowe komentarze">
-<!ENTITY sb.setting.edit.confirmsave.1	"Czas oczekiwania na potwierdzenie zapisu">
-<!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 - nigdy nie potwierdzaj)">
-
-<!ENTITY sb.setting.program.filer			"Wybierz program do szukania plików">
-<!ENTITY sb.setting.program.filer.default	"Domyślny (jeżeli systemem operacyjnym jest Windows, będzie to Explorator Windows.)">
-<!ENTITY sb.setting.browse					"Szukaj">
+<!ENTITY sb.button.browse			"Szukaj">
+<!ENTITY sb.button.show				"Pokaż folder">
 
 <!ENTITY sb.setting.data			"Folder zapisu danych">
 <!ENTITY sb.setting.data.default	"Domyślny (folder zapisu w profilu użytkownika)">
+<!ENTITY sb.setting.data.alert		"Currently your ScrapBook data are stored in your Firefox 'Profile Folder'. Please note, if you select [Delete Files] when deleting the Firefox profile, All ScrapBook data will be removed.">
+<!ENTITY sb.setting.filer			"Wybierz program do szukania plików">
+<!ENTITY sb.setting.filer.default	"Domyślny (jeżeli systemem operacyjnym jest Windows, będzie to Explorator Windows.)">
 
 <!ENTITY sb.setting.restorefavicons		"Odtwórz ikony">
 <!ENTITY sb.setting.restorefavicons.d	"Jeżeli ikony nie są wyświetlane, naciśnij ten przycisk:">

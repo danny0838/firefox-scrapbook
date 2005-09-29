@@ -15,6 +15,8 @@
 %propertyDTD;
 <!ENTITY % tradeDTD     SYSTEM "chrome://scrapbook/locale/trade.dtd" >
 %tradeDTD;
+<!ENTITY % settingDTD   SYSTEM "chrome://scrapbook/locale/setting.dtd" >
+%settingDTD;
 <!ENTITY % treeDTD      SYSTEM "chrome://scrapbook/locale/tree.dtd" >
 %treeDTD;
 ]>
@@ -49,7 +51,7 @@
 	</stringbundleset>
 
 	<!--keyset-->
-	<keyset id="ScrapBookWindowKey">
+	<keyset id="ScrapBookGenericKeyset">
 		<key key="a" modifiers="accel" oncommand="SBlist.focus();SBlist.selectAll();" />
 	</keyset>
 
@@ -73,8 +75,8 @@
 		<vbox flex="1" style="min-width:150px;">
 			<!--main toolbar-->
 			<toolbar id="ScrapBookMainToolbar" class="plain">
-				<toolbarbutton tooltiptext="&sb.new.folder;"    image="chrome://scrapbook/skin/tool_createfolder.png" oncommand="SB_createFolder();" />
-				<toolbarbutton tooltiptext="&sb.toggleallopen;" image="chrome://scrapbook/skin/tool_togglefolder.png" oncommand="SBtreeUtil.toggleAllFolders();" />
+				<toolbarbutton tooltiptext="&sb.new.folder;" image="chrome://scrapbook/skin/tool_createfolder.png" oncommand="SB_createFolder();" />
+				<toolbarbutton tooltiptext="&sb.toggle.all;" image="chrome://scrapbook/skin/tool_togglefolder.png" oncommand="SBtreeUtil.toggleAllFolders();" />
 			</toolbar>
 			<!--scrapbook tree-->
 			<tree id="ScrapBookTree"
@@ -96,8 +98,8 @@
 			<hbox align="center" style="margin:3px 1px;">
 				<image id="ScrapBookTradeIcon" style="width:16px;height:16px;margin-left:5px;" />
 				<textbox id="ScrapBookTradePath" readonly="true" flex="1" style="padding:2px;height:1.7em;" />
-				<button label="&sb.trade.browse;..."  oncommand="SBtrade.selectPath();" />
-				<button label="&sb.trade.showfolder;" oncommand="SBtrade.showFolder();" />
+				<button label="&sb.button.browse;..." oncommand="SBtrade.selectPath();" />
+				<button label="&sb.button.show;" oncommand="SBtrade.showFolder();" />
 			</hbox>
 			<!--listbox-->
 			<listbox id="ScrapBookTradeList"
@@ -107,6 +109,7 @@
 			         ondragover="nsDragAndDrop.dragOver(event,STdropObserver);event.stopPropagation();"
 			         ondragdrop="nsDragAndDrop.drop(event,STdropObserver);event.stopPropagation();"
 			         ondblclick="if ( event.button == 0 ) SBtradeContext.open(false);"
+			         onkeypress="if ( event.keyCode == 46 ) SBtradeContext.deleteDir();"
 			         flex="1"
 			         class="plain"
 			         style="-moz-appearance:listbox;">

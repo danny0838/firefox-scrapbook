@@ -1,8 +1,0 @@
-<!ENTITY sb.url.description	"URL (Wprowadź adresy URL-i linia po linii">
-
-<!ENTITY sb.url.tools		"Wykrywacz adresów URL">
-<!ENTITY sb.url.tools.tabs	"Wszystkie otwarte karty w oknie">
-<!ENTITY sb.url.tools.local	"Wszystkie lokalne strony w katalogu">
-<!ENTITY sb.url.tools.webox	"default.html dla WeBoX">
-<!ENTITY sb.url.tools.clear	"Wyczyść">
-

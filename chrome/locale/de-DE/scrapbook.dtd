@@ -2,7 +2,7 @@
 
 <!ENTITY sb.new.folder		"Neuer Ordner">
 <!ENTITY sb.new.note		"Neue Notiz">
-<!ENTITY sb.toggleallopen	"&#x00D6;ffne/Schlie&#x00DF;e alle Ordner">
+<!ENTITY sb.toggle.all		"&#x00D6;ffne/Schlie&#x00DF;e alle Ordner">
 
 <!ENTITY sb.tools			"Tools">
 <!ENTITY sb.tools.setting	"Einstellungen">
@@ -10,7 +10,8 @@
 <!ENTITY sb.tools.calculate	"Gr&#x00F6;&#x00DF;e der Sammlung berechnen">
 <!ENTITY sb.tools.sorttree	"Sortiere Verzeichnisbaum">
 <!ENTITY sb.tools.directory	"ScrapBook Verzeichnis">
-<!ENTITY sb.tools.urls		"Speichere mehrere URLs">
+<!ENTITY sb.tools.combine	"Combine">
+<!ENTITY sb.tools.multiple	"Speichere mehrere URLs">
 <!ENTITY sb.tools.trade		"Import / Export">
 <!ENTITY sb.tools.output	"Verzeichnisbaum als HTML speichern">
 <!ENTITY sb.tools.backup	"Speicherung mit Kompression">

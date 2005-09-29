@@ -1,21 +1,30 @@
 <!ENTITY sb.editor			"ScrapBook Edit Toolbar">
-<!ENTITY sb.editor.inline	"Cuir L&#233;iri&#250; Inl&#237;ne isteach don Roghn&#250;">
-<!ENTITY sb.editor.block.insert		"Cuir Bloc L&#233;iri&#250; isteach tar eis an Roghn&#250;">
-<!ENTITY sb.editor.block.customize	"Saincheap CSS do Bhloic L&#233;irithe">
-<!ENTITY sb.editor.block.hide		"Folaigh Bloic L&#233;irithe">
-<!ENTITY sb.editor.marker	"Aibhsigh an Roghn&#250;">
-<!ENTITY sb.editor.unline	"Bain as gach L&#233;iri&#250; Inl&#237;ne">
-<!ENTITY sb.editor.unmark	"Bain as gach Aibhsi&#250;">
-<!ENTITY sb.editor.cutter	"Bain as an Roghn&#250;">
-<!ENTITY sb.editor.remove.iframe	"Remove All IFRAME Tags">
-<!ENTITY sb.editor.remove.script	"Remove All SCRIPT Tags">
 <!ENTITY sb.editor.eraser	"L&#233;irscrios&#225;n DOM: Uirlis chun Bloic Aibhsithe a bhaint as.">
 <!ENTITY sb.editor.undo		"Cealaigh">
 <!ENTITY sb.editor.restore	"Tr&#233;ig Aistri&#250;ch&#225;in agus Athch&#243;irigh">
 <!ENTITY sb.editor.save		"Sabh&#225;il Aistri&#250;ch&#225;in">
-<!ENTITY sb.editor.find		"Find and Select from the Sidebar Tree">
 <!ENTITY sb.editor.comment	"Fairsingigh Ceantar L&#233;irithe">
+<!ENTITY sb.editor.marker			"Aibhsigh an Roghn&#250;">
+<!ENTITY sb.editor.marker.yellow	"Yellow">
+<!ENTITY sb.editor.marker.green		"Green">
+<!ENTITY sb.editor.marker.blue		"Blue">
+<!ENTITY sb.editor.marker.pink		"Pink">
+<!ENTITY sb.editor.unmark.partial	"Remove Highlights in the Selection">
+<!ENTITY sb.editor.unmark.entire	"Bain as gach Aibhsi&#250;">
+<!ENTITY sb.editor.block.insert		"Cuir Bloc L&#233;iri&#250; isteach tar eis an Roghn&#250;">
+<!ENTITY sb.editor.block.customize	"Saincheap CSS do Bhloic L&#233;irithe">
+<!ENTITY sb.editor.block.hide		"Folaigh Bloic L&#233;irithe">
+<!ENTITY sb.editor.inline.add		"Cuir L&#233;iri&#250; Inl&#237;ne isteach don Roghn&#250;">
+<!ENTITY sb.editor.inline.delete	"Bain as gach L&#233;iri&#250; Inl&#237;ne">
+<!ENTITY sb.editor.attach.file		"Attach File to Selection">
+<!ENTITY sb.editor.attach.link		"Attach Link to Selection">
+<!ENTITY sb.editor.cutter			"Bain as an Roghn&#250;">
+<!ENTITY sb.editor.remove.iframe	"Remove All IFRAME Tags">
+<!ENTITY sb.editor.remove.script	"Remove All SCRIPT Tags">
 
-<!ENTITY sb.inline.enter	"Iontr&#225;il">
-<!ENTITY sb.inline.delete	"Scrios">
+<!ENTITY sb.infobar				"ScrapBook Info Toolbar">
+<!ENTITY sb.infobar.home		"Home">
+<!ENTITY sb.infobar.sitemap		"SiteMap">
+
+<!ENTITY sb.synchronize		"Synchronize with the Sidebar Tree">
 

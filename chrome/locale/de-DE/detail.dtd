@@ -1,14 +1,16 @@
-<!ENTITY sb.detail					"Speicherung - Details">
+<!ENTITY sb.detail					"Capture Detail">
 <!ENTITY sb.detail.new.folder		"Neuer Ordner">
 <!ENTITY sb.detail.select.folder	"Markierter Ordner">
 
-<!ENTITY sb.detail.linked			"Download links">
+<!ENTITY sb.detail.linked.file		"Download linked files">
 <!ENTITY sb.detail.linked.image		"Bild">
 <!ENTITY sb.detail.linked.sound		"Musik">
 <!ENTITY sb.detail.linked.movie		"Film">
 <!ENTITY sb.detail.linked.archive	"Archiv">
 <!ENTITY sb.detail.linked.custom	"Custom">
 
-<!ENTITY sb.detail.linked.seq		"Sichere verkn&#x00FC;pfte Webseiten der Reihe nach">
-<!ENTITY sb.detail.linked.seq.d		"(in einem automatisch erstellten Unterordner)">
+<!ENTITY sb.detail.linked.page			"In-depth Capture">
+<!ENTITY sb.detail.linked.page2			"Capture linked pages">
+<!ENTITY sb.detail.linked.page.depth	"Depth to follow links">
+<!ENTITY sb.detail.linked.page.text		"After completing captures, all pages will be linked each other and sitemap will be created.">
 

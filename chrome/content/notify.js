@@ -23,7 +23,23 @@ var gID;
 
 function SB_onNotifyLoad()
 {
-	sizeToContent();
+	if ( window.arguments[0] )
+	{
+		gID       = window.arguments[0].id;
+		var icon  = window.arguments[0].icon;
+		var title = window.arguments[0].title;
+		if ( !icon ) icon = SBcommon.getDefaultIcon();
+		if ( !icon.match(/:\/\//) ) icon = SBservice.IO.newFileURI(SBcommon.getContentDir(gID)).spec + icon;
+		if ( title.length > 40 ) title = title.substring(0,40) + "...";
+		document.getElementById("ScrapBookNotifyIcon").src   = icon;
+		document.getElementById("ScrapBookNotifyText").value = title;
+	}
+	else
+	{
+		document.getElementById("ScrapBookNotifyText").hidden  = true;
+		document.getElementById("ScrapBookNotifyTextA").hidden = false;
+	}
+	window.sizeToContent();
 	if ( screen.availWidth > 0 )
 	{
 		gFinalHeight = window.outerHeight;

@@ -2,13 +2,15 @@
 <!ENTITY sb.detail.new.folder		"Ny Mapp">
 <!ENTITY sb.detail.select.folder	"Välj Mapp">
 
-<!ENTITY sb.detail.linked			"Download links">
+<!ENTITY sb.detail.linked.file		"Ladda ned länkar">
 <!ENTITY sb.detail.linked.image		"Bilder">
 <!ENTITY sb.detail.linked.sound		"Ljud">
 <!ENTITY sb.detail.linked.movie		"Filmer">
 <!ENTITY sb.detail.linked.archive	"Filarkiv">
-<!ENTITY sb.detail.linked.custom	"Custom">
+<!ENTITY sb.detail.linked.custom	"Annan">
 
-<!ENTITY sb.detail.linked.seq		"Spara alla länkade websidor i sekvens">
-<!ENTITY sb.detail.linked.seq.d		"(i en undermapp som skapas automatiskt)">
+<!ENTITY sb.detail.linked.page			"In-depth Capture">
+<!ENTITY sb.detail.linked.page2			"Capture linked Web pages">
+<!ENTITY sb.detail.linked.page.depth	"Depth to follow links">
+<!ENTITY sb.detail.linked.page.text		"After completing captures, all pages will be linked each other and sitemap will be created.">
 

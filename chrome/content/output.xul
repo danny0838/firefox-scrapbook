@@ -31,9 +31,6 @@
 	<!--StringBundle-->
 	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/scrapbook.properties" />
 
-	<!--dialogheader-->
-	<!--<dialogheader title="&sb.tools.output;" />-->
-
 	<!--tree-->
 	<tree id="ScrapBookTree" onclick="SB_toggleAllSelection();" flex="1" />
 

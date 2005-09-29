@@ -1,0 +1,9 @@
+<!ENTITY sb.multiple.url	"URL (URLs Zeile-f&#x00FC;r-Zeile)">
+
+<!ENTITY sb.multiple.detector		"URL Anzeige">
+<!ENTITY sb.multiple.detector.plink	"All Links in the Page">
+<!ENTITY sb.multiple.detector.slink	"All Links in the Selection">
+<!ENTITY sb.multiple.detector.tabs	"Alle im Fenster ge&#x00F6;ffneten Tabs">
+<!ENTITY sb.multiple.detector.local	"Alle localen HTMLs im Verzeichnis">
+<!ENTITY sb.multiple.detector.clear	"Leeren">
+

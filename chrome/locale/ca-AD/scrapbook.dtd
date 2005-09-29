@@ -2,7 +2,7 @@
 
 <!ENTITY sb.new.folder		"Nova carpeta...">
 <!ENTITY sb.new.note		"Nova nota">
-<!ENTITY sb.toggleallopen	"Expandeix/Redueix totes les carpetes">
+<!ENTITY sb.toggle.all		"Expandeix/Redueix totes les carpetes">
 
 <!ENTITY sb.tools			"Eines">
 <!ENTITY sb.tools.setting	"Opcions...">
@@ -10,7 +10,8 @@
 <!ENTITY sb.tools.calculate	"Càlcul de la mida">
 <!ENTITY sb.tools.sorttree	"Ordena tot l'arbre">
 <!ENTITY sb.tools.directory	"Carpeta de l'ScrapBook">
-<!ENTITY sb.tools.urls		"Captura de múltiples URLs">
+<!ENTITY sb.tools.combine	"Uneix">
+<!ENTITY sb.tools.multiple	"Captura de múltiples URLs">
 <!ENTITY sb.tools.trade		"Importa / Exporta">
 <!ENTITY sb.tools.output	"Exporta l'arbre com a HTML">
 <!ENTITY sb.tools.backup	"Còpia de seguretat comprimida">

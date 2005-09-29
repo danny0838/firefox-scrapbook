@@ -2,3 +2,15 @@
 <!ENTITY sb.capture.abort	"Interrompi">
 <!ENTITY sb.capture.retry	"Ritenta">
 <!ENTITY sb.capture.skip	"Salta">
+<!ENTITY sb.capture.pause	"Pausa">
+
+<!ENTITY sb.capture.filter			"Filtra">
+<!ENTITY sb.capture.filter.domain	"Restringi al dominio">
+<!ENTITY sb.capture.filter.level	"Restringi alla directory">
+<!ENTITY sb.capture.filter.string	"Filtra in base alla stringa...">
+<!ENTITY sb.capture.filter.checkon	"Attiva tutti i controlli">
+<!ENTITY sb.capture.filter.checkoff	"Disattiva tutti i controlli">
+<!ENTITY sb.capture.filter.invert	"Inverti i controlli">
+
+<!ENTITY sb.capture.autoscroll	"Scorrimento automatico">
+

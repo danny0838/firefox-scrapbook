@@ -26,16 +26,19 @@ function ScrapBookItem(aID)
 
 
 
-var SBservice = {
-	RDF    : Components.classes['@mozilla.org/rdf/rdf-service;1'].getService(Components.interfaces.nsIRDFService),
-	RDFC   : Components.classes['@mozilla.org/rdf/container;1'].getService(Components.interfaces.nsIRDFContainer),
-	RDFCU  : Components.classes['@mozilla.org/rdf/container-utils;1'].getService(Components.interfaces.nsIRDFContainerUtils),
-	DIR    : Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties),
-	IO     : Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService),
-	UC     : Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter),
-	WM     : Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator),
-	PB     : Components.classes['@mozilla.org/preferences;1'].getService(Components.interfaces.nsIPrefBranch),
+const SBservice = {
+	RDF     : Components.classes['@mozilla.org/rdf/rdf-service;1'].getService(Components.interfaces.nsIRDFService),
+	RDFC    : Components.classes['@mozilla.org/rdf/container;1'].getService(Components.interfaces.nsIRDFContainer),
+	RDFCU   : Components.classes['@mozilla.org/rdf/container-utils;1'].getService(Components.interfaces.nsIRDFContainerUtils),
+	DIR     : Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties),
+	IO      : Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService),
+	UNICODE : Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter),
+	WINDOW  : Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator),
+	PROMPT  : Components.classes['@mozilla.org/embedcomp/prompt-service;1'].getService(Components.interfaces.nsIPromptService),
+	PREF    : Components.classes['@mozilla.org/preferences;1'].getService(Components.interfaces.nsIPrefBranch),
+	WM      : Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator),
 };
+
 
 
 
@@ -44,8 +47,8 @@ var SBcommon = {
 	getScrapBookDir : function()
 	{
 		try {
-			var isDefault = SBservice.PB.getBoolPref("scrapbook.data.default");
-			var myDir = SBservice.PB.getComplexValue("scrapbook.data.path", Components.interfaces.nsIPrefLocalizedString).data;
+			var isDefault = SBservice.PREF.getBoolPref("scrapbook.data.default");
+			var myDir = SBservice.PREF.getComplexValue("scrapbook.data.path", Components.interfaces.nsIPrefLocalizedString).data;
 			myDir = this.convertPathToFile(myDir);
 		} catch(ex) {
 			isDefault = true; 
@@ -88,7 +91,7 @@ var SBcommon = {
 			return true;
 		}
 		catch(ex) {
-			alert("ScrapBook ERROR: Failed to remove dir.\n" + ex);
+			alert("ScrapBook ERROR: Failed to remove files.\n" + ex);
 			return false;
 		}
 	},
@@ -96,7 +99,7 @@ var SBcommon = {
 
 	loadURL : function(aURL, tabbed)
 	{
-		var win = SBservice.WM.getMostRecentWindow("navigator:browser");
+		var win = SBservice.WINDOW.getMostRecentWindow("navigator:browser");
 		var browser = win.document.getElementById("content");
 		if ( tabbed ) {
 			browser.selectedTab = browser.addTab(aURL);
@@ -117,18 +120,6 @@ var SBcommon = {
 		var i = dd.getMinutes();   if ( i < 10 ) i = "0" + i;
 		var s = dd.getSeconds();   if ( s < 10 ) s = "0" + s;
 		return y.toString() + m.toString() + d.toString() + h.toString() + i.toString() + s.toString();
-	},
-
-
-	leftZeroPad3 : function(num)
-	{
-		if ( num < 10 ) {
-			return "00" + num;
-		} else if ( num < 100 ) {
-			return "0" + num;
-		} else {
-			return num;
-		}
 	},
 
 
@@ -177,11 +168,11 @@ var SBcommon = {
 
 	validateFileName : function(aFileName)
 	{
-		aFileName = aFileName.replace(/[\"]+/g, "'");
-		aFileName = aFileName.replace(/[\*\:\?]+/g, "-");
+		aFileName = aFileName.replace(/[\"\?!~`]+/g, "");
+		aFileName = aFileName.replace(/[\*\:\&]+/g, "+");
+		aFileName = aFileName.replace(/[\\\/\|]+/g, "-");
 		aFileName = aFileName.replace(/[\<]+/g, "(");
 		aFileName = aFileName.replace(/[\>]+/g, ")");
-		aFileName = aFileName.replace(/[\\\/\|]+/g, "_");
 		aFileName = aFileName.replace(/[\s]+/g, "_");
 		aFileName = aFileName.replace(/[%]+/g, "@");
 		return aFileName;
@@ -225,8 +216,8 @@ var SBcommon = {
 		if ( aFile.exists() ) aFile.remove(false);
 		try {
 			aFile.create(aFile.NORMAL_FILE_TYPE, 0666);
-			SBservice.UC.charset = aChars;
-			aContent = SBservice.UC.ConvertFromUnicode(aContent);
+			SBservice.UNICODE.charset = aChars;
+			aContent = SBservice.UNICODE.ConvertFromUnicode(aContent);
 			var ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
 			ostream.init(aFile, 2, 0x200, false);
 			ostream.write(aContent, aContent.length);
@@ -266,10 +257,10 @@ var SBcommon = {
 	{
 		if ( !aString ) return "";
 		try {
-			SBservice.UC.charset = "UTF-8";
-			aString = SBservice.UC.ConvertToUnicode(aString);
+			SBservice.UNICODE.charset = "UTF-8";
+			aString = SBservice.UNICODE.ConvertToUnicode(aString);
 		} catch(ex) {
-			dump("ScrapBook ERROR: Failure in ConvertToUnicode.\n");
+			dump("scrapbook::convertStringToUTF8 " + ex + "\n");
 		}
 		return aString;
 	},
@@ -329,7 +320,7 @@ var SBcommon = {
 		else
 		{
 			try {
-				var filerPath = SBservice.PB.getComplexValue("scrapbook.filer.path", Components.interfaces.nsIPrefLocalizedString).data;
+				var filerPath = SBservice.PREF.getComplexValue("scrapbook.filer.path", Components.interfaces.nsIPrefLocalizedString).data;
 				this.execProgram(filerPath, [aDir.path]);
 			} catch(ex) {
 				alert(ex);
@@ -346,7 +337,7 @@ var SBcommon = {
 			execfile.initWithPath(aExecFilePath);
 			if ( !execfile.exists() )
 			{
-				alert("ScrapBook ERROR: Following file is not exists.\n" + aExecFilePath);
+				alert("ScrapBook ERROR: File does not exist.\n" + aExecFilePath);
 				return;
 			}
 			process.init(execfile);
@@ -354,7 +345,7 @@ var SBcommon = {
 		}
 		catch (ex)
 		{
-			alert("ScrapBook ERROR: Following file is not executable.\n" + aExecFilePath);
+			alert("ScrapBook ERROR: File is not executable.\n" + aExecFilePath);
 		}
 	},
 
@@ -391,10 +382,17 @@ var SBcommon = {
 	getBoolPref : function(aName, aDefVal)
 	{
 		try {
-			return SBservice.PB.getBoolPref(aName);
+			return SBservice.PREF.getBoolPref(aName);
 		} catch(ex) {
 			return aDefVal;
 		}
+	},
+
+
+	escapeComment : function(aStr)
+	{
+		if ( aStr.length > 10000 ) alert("ScrapBook ALERT: Too long comment makes ScrapBook slow.");
+		return aStr.replace(/\r|\n/g, " __BR__ ");
 	},
 
 
@@ -404,15 +402,16 @@ var SBcommon = {
 
 function dumpObj(aObj)
 {
-	dump("\n\n\n----------------[DUMP_OBJECT]----------------\n\n\n");
+	dump("\n\n----------------[DUMP_OBJECT]----------------\n\n");
 	for ( var i in aObj )
 	{
 		try {
-			dump("." + i + " -> " + aObj[i] + "\n");
+			dump(i + " -> " + aObj[i] + "\n");
 		} catch(ex) {
 			dump("XXXXXXXXXX ERROR XXXXXXXXXX\n" + ex + "\n");
 		}
 	}
+	dump("\n\n");
 }
 
 

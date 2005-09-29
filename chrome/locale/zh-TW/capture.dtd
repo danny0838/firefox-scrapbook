@@ -2,3 +2,15 @@
 <!ENTITY sb.capture.abort	"中止">
 <!ENTITY sb.capture.retry	"重試">
 <!ENTITY sb.capture.skip	"略過">
+<!ENTITY sb.capture.pause	"暫停">
+
+<!ENTITY sb.capture.filter			"篩選">
+<!ENTITY sb.capture.filter.domain	"只擷取此網域">
+<!ENTITY sb.capture.filter.level	"只擷取此目錄">
+<!ENTITY sb.capture.filter.string	"篩選字串...">
+<!ENTITY sb.capture.filter.checkon	"全部選取">
+<!ENTITY sb.capture.filter.checkoff	"全部取消">
+<!ENTITY sb.capture.filter.invert	"反向選取">
+
+<!ENTITY sb.capture.autoscroll	"Auto-scroll">
+

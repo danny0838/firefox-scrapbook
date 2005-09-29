@@ -2,7 +2,7 @@
 
 <!ENTITY sb.new.folder		"Nová složka...">
 <!ENTITY sb.new.note		"Nová poznámka">
-<!ENTITY sb.toggleallopen	"Rozbalit/Sbalit všechny složky">
+<!ENTITY sb.toggle.all		"Rozbalit/Sbalit všechny složky">
 
 <!ENTITY sb.tools			"Nástroje">
 <!ENTITY sb.tools.setting	"Nastavení...">
@@ -10,7 +10,8 @@
 <!ENTITY sb.tools.calculate	"Kalkulace velikosti">
 <!ENTITY sb.tools.sorttree	"Setřídit veškerý obsah">
 <!ENTITY sb.tools.directory	"ScrapBook Directory">
-<!ENTITY sb.tools.urls		"Capture Multiple URLs">
+<!ENTITY sb.tools.combine	"Combine">
+<!ENTITY sb.tools.multiple	"Capture Multiple URLs">
 <!ENTITY sb.tools.trade		"Import / Export">
 <!ENTITY sb.tools.output	"Output Tree as HTML">
 <!ENTITY sb.tools.backup	"Backup with Compression">

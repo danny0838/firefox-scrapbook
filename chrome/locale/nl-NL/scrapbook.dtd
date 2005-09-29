@@ -2,7 +2,7 @@
 
 <!ENTITY sb.new.folder		"Nieuwe map...">
 <!ENTITY sb.new.note		"Nieuwe notitie">
-<!ENTITY sb.toggleallopen	"Alle mappen uitvouwen/inklappen">
+<!ENTITY sb.toggle.all		"Alle mappen uitvouwen/inklappen">
 
 <!ENTITY sb.tools			"Opties">
 <!ENTITY sb.tools.setting	"Instellingen">
@@ -10,7 +10,8 @@
 <!ENTITY sb.tools.calculate	"Bestandsgrootte berekenen">
 <!ENTITY sb.tools.sorttree	"Volledige mappenstructuur sorteren">
 <!ENTITY sb.tools.directory	"ScrapBookmap">
-<!ENTITY sb.tools.urls		"Meerdere URL's bewaren">
+<!ENTITY sb.tools.combine	"Combine">
+<!ENTITY sb.tools.multiple	"Meerdere URL's bewaren">
 <!ENTITY sb.tools.trade		"Importeren / Exporteren">
 <!ENTITY sb.tools.output	"Mappenstructuur als HTML exporteren">
 <!ENTITY sb.tools.backup	"Met compressie backuppen">

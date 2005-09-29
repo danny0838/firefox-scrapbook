@@ -10,31 +10,24 @@
 <!ENTITY sb.setting.capture.detail		"以拖拽方式获取文件时，显示 '详细信息' 对话框">
 <!ENTITY sb.setting.capture.notify		"显示 '获取完成' 提示框 (只在 Windows 下有效)">
 <!ENTITY sb.setting.tree.singleexpand	"展开一个文件夹时，折叠其他文件夹">
-<!ENTITY sb.setting.tree.quickdelete	"不显示删除确认对话框">
+<!ENTITY sb.setting.tree.quickdelete	"删除文件时不显示确认对话框">
 
-<!ENTITY sb.setting.view.header			"显示 URL 信息标题栏">
-<!ENTITY sb.setting.view.editor			"显示编辑工具栏">
-<!ENTITY sb.setting.view.editor.auto	"打开文件时自动展开">
-<!ENTITY sb.setting.view.editor.manual	"单击状态栏中的 'EDIT' 键展开">
-
-<!ENTITY sb.setting.usetabs.d			"强制在新标签页中打开">
+<!ENTITY sb.setting.usetabs.d			"选择强制在新标签页中打开的项目">
 <!ENTITY sb.setting.usetabs.note		"在标签页中打开便签">
 
 <!ENTITY sb.setting.capture.utf8encode		"自动转换为 UTF-8 编码 (推荐)">
-<!ENTITY sb.setting.capture.utf8encode.d	"若取消此项，有些字符将无法正确显示。">
+<!ENTITY sb.setting.capture.utf8encode.d	"如果取消此项，有些字符经常会无法正确显示。">
 <!ENTITY sb.setting.capture.removescript	"去除 JavaScript (推荐)">
-<!ENTITY sb.setting.capture.removescript.d	"若取消此项，有时无法保持原有的页面设置。">
+<!ENTITY sb.setting.capture.removescript.d	"如果取消此项，有时无法保持原有的页面设置。">
 
-<!ENTITY sb.setting.edit.multilines		"自动展开注释栏">
-<!ENTITY sb.setting.edit.confirmsave.1	"提示保存文件的间隔时间">
-<!ENTITY sb.setting.edit.confirmsave.2	"分钟 (0 表示从不提示)">
-
-<!ENTITY sb.setting.program.filer			"选择浏览文件的应用程序">
-<!ENTITY sb.setting.program.filer.default	"默认 (Windows 系统中一般是资源管理器)">
-<!ENTITY sb.setting.browse					"浏览">
+<!ENTITY sb.button.browse			"浏览">
+<!ENTITY sb.button.show				"打开">
 
 <!ENTITY sb.setting.data			"选择 ScrapBook 保存文件的文件夹">
-<!ENTITY sb.setting.data.default	"默认 (Firefox 的用户配置文件所在的文件夹)">
+<!ENTITY sb.setting.data.default	"默认 (在 Firefox 的配置文件夹)">
+<!ENTITY sb.setting.data.alert		"请注意! 当前设置是将 ScrapBook 获取的文件保存在 Firefox 的配置文件夹。如果您在删除 Firefox 的用户配置文件时选择 '删除配置项数据文件'，那么 ScrapBook 保存的所有文件也将被删除。">
+<!ENTITY sb.setting.filer			"选择用于 '浏览' 的应用程序">
+<!ENTITY sb.setting.filer.default	"默认 (Windows 系统中一般是资源管理器)">
 
 <!ENTITY sb.setting.restorefavicons		"修复图标">
 <!ENTITY sb.setting.restorefavicons.d	"如果无法显示个性图标，单击 '修复图标'。">

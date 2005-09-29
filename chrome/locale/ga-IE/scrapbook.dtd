@@ -2,7 +2,7 @@
 
 <!ENTITY sb.new.folder		"Comhadlann Nua...">
 <!ENTITY sb.new.note		"N&#243;ta Nua">
-<!ENTITY sb.toggleallopen	"Leathnaigh/Leacaigh gach Comhadlann">
+<!ENTITY sb.toggle.all		"Leathnaigh/Leacaigh gach Comhadlann">
 
 <!ENTITY sb.tools			"Uirlis&#237;">
 <!ENTITY sb.tools.setting	"Socraithe...">
@@ -10,7 +10,8 @@
 <!ENTITY sb.tools.calculate	"Toirt Measta">
 <!ENTITY sb.tools.sorttree	"S&#243;rtil an Chrann ar Fad">
 <!ENTITY sb.tools.directory	"Comhadlann Leabhar Gearrth&#225;n">
-<!ENTITY sb.tools.urls		"Ilghabh&#225;il URL">
+<!ENTITY sb.tools.combine	"Combine">
+<!ENTITY sb.tools.multiple	"Ilghabh&#225;il URL">
 <!ENTITY sb.tools.trade		"Iomp&#243;rt&#225;il / Easport&#225;il">
 <!ENTITY sb.tools.output	"Easp&#243;rt&#225;il Crann mar HTML">
 <!ENTITY sb.tools.backup	"C&#250;ltaigh le Comhbhr&#250;">

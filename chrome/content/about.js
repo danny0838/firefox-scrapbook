@@ -12,8 +12,8 @@
 
 
 
-const CURRENT_VER = "0.16.0";
-const CURRENT_BID = "Build ID 20050806";
+const CURRENT_VER = "0.17.0";
+const CURRENT_BID = "Build ID 20050930";
 const UPDATE_URL  = "http://amb.vis.ne.jp/mozilla/scrapbook/update.rdf?ver=" + CURRENT_VER;
 
 var SBstring;

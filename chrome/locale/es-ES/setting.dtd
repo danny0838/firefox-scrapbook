@@ -12,11 +12,6 @@
 <!ENTITY sb.setting.tree.singleexpand	"Al expandir una carpeta del árbol, colapsar las otras carpetas (como los Favoritos del IE)">
 <!ENTITY sb.setting.tree.quickdelete	"Don't confirm when delete">
 
-<!ENTITY sb.setting.view.header			"Show URL infobar">
-<!ENTITY sb.setting.view.editor			"Show Edit Toolbar">
-<!ENTITY sb.setting.view.editor.auto	"Automatically when viewing a captured page">
-<!ENTITY sb.setting.view.editor.manual	"Manually by hitting EDIT button in the status bar">
-
 <!ENTITY sb.setting.usetabs.d			"Marcar acciones para abrir en nuevas pestañas.">
 <!ENTITY sb.setting.usetabs.note		"Open Notes in Tab">
 
@@ -25,16 +20,14 @@
 <!ENTITY sb.setting.capture.removescript	"Remove JavaScript (Recommend)">
 <!ENTITY sb.setting.capture.removescript.d	"If check off, sometimes fails to preserve the page layout.">
 
-<!ENTITY sb.setting.edit.multilines		"Enable multiline comment">
-<!ENTITY sb.setting.edit.confirmsave.1	"Interval for confirming save">
-<!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 = never confirm)">
-
-<!ENTITY sb.setting.program.filer			"Programa para el menú 'Mostrar ficheros'">
-<!ENTITY sb.setting.program.filer.default	"Por defecto (Si es Windows, posiblemente 'Explorer'.)">
-<!ENTITY sb.setting.browse					"Browse">
+<!ENTITY sb.button.browse			"Browse">
+<!ENTITY sb.button.show				"Show Directory">
 
 <!ENTITY sb.setting.data			"Destino para los datos guardados">
 <!ENTITY sb.setting.data.default	"Por defecto (en la carpeta de tu perfil)">
+<!ENTITY sb.setting.data.alert		"Currently your ScrapBook data are stored in your Firefox 'Profile Folder'. Please note, if you select [Delete Files] when deleting the Firefox profile, All ScrapBook data will be removed.">
+<!ENTITY sb.setting.filer			"Programa para el menú 'Mostrar ficheros'">
+<!ENTITY sb.setting.filer.default	"Por defecto (Si es Windows, posiblemente 'Explorer'.)">
 
 <!ENTITY sb.setting.restorefavicons		"Restore favicons">
 <!ENTITY sb.setting.restorefavicons.d	"If favicons are not displayed, press this button:">

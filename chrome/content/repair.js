@@ -23,8 +23,8 @@ var sbRepair = {
 		var nextPage;
 		switch ( document.getElementById("sbRepairRadioGroup").selectedIndex )
 		{
-			case 0 : nextPage = 'sbRepairRDF1'; break;
-			case 1 : nextPage = 'sbRepairFavicons'; break;
+			case 0 : nextPage = "sbRepairRDF1"; break;
+			case 1 : nextPage = "sbRepairFavicons"; break;
 		}
 		if ( nextPage ) this.WIZARD.currentPage.next = nextPage;
 		this.WIZARD.canAdvance = nextPage ? true : false;
@@ -89,33 +89,33 @@ var sbRepair = {
 	{
 		this.WIZARD.canRewind = false;
 		this.WIZARD.getButton("finish").disabled = true;
-		SBRDF.init();
+		sbDataSource.init();
 		var dir = SBcommon.getScrapBookDir().clone();
 		dir.append("data");
 		var baseURL = SBcommon.convertFilePathToURL(dir.path);
 		if ( baseURL.charAt(baseURL.length - 1) != "/" ) baseURL = baseURL + "/";
 		var shouldFlush = false;
 		var i = 0;
-		var resEnum = SBRDF.data.GetAllResources();
+		var resEnum = sbDataSource.data.GetAllResources();
 		while ( resEnum.hasMoreElements() )
 		{
 			var res  = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			var id   = SBRDF.getProperty("id", res);
-			var icon = SBRDF.getProperty("icon", res);
-			if ( ++i % 10 == 0 ) document.getElementById("sbRepairFaviconsTextbox").value = "Resolving favicon URL: " + SBRDF.getProperty("title", res);
+			var id   = sbDataSource.getProperty("id", res);
+			var icon = sbDataSource.getProperty("icon", res);
+			if ( ++i % 10 == 0 ) document.getElementById("sbRepairFaviconsTextbox").value = "Resolving favicon URL: " + sbDataSource.getProperty("title", res);
 			if ( icon.match(/(\d{14}\/.*$)/) )
 			{
 				var newIcon = baseURL + RegExp.$1;
 				if ( icon != newIcon )
 				{
 					dump("*** RESOLVING_ICON_URL:: " + newIcon + "\n");
-					SBRDF.updateItem(res, "icon", newIcon);
+					sbDataSource.updateItem(res, "icon", newIcon);
 					shouldFlush = true;
 				}
 			}
 		}
 		document.getElementById("sbRepairFaviconsTextbox").value = "Completed.";
-		if ( shouldFlush ) { SBRDF.flush(); window.opener.reload(); }
+		if ( shouldFlush ) { sbDataSource.flush(); window.opener.reload(); }
 		this.WIZARD.getButton("finish").disabled = false;
 	},
 

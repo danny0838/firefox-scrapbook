@@ -62,8 +62,8 @@ var sbResult =
 		const TTSU = Components.classes['@mozilla.org/intl/texttosuburi;1'].getService(Components.interfaces.nsITextToSubURI);
 		this.QueryStrings['q'] = TTSU.UnEscapeAndConvert("UTF-8", this.QueryStrings['q']);
 
-		SBRDF.init();
-		SCRDF.init();
+		sbDataSource.init();
+		scDataSource.init();
 
 
 		this.RegExpModifier = ( this.QueryStrings['cs'] != "true" ) ? "im" : "m";
@@ -120,7 +120,7 @@ var sbResult =
 			if ( RegExpInclude.length == 0 ) return;
 		}
 
-		SBservice.RDFC.Init(SCRDF.dataSource, SBservice.RDF.GetResource("urn:scrapbook:cache"));
+		SBservice.RDFC.Init(scDataSource.dataSource, SBservice.RDF.GetResource("urn:scrapbook:cache"));
 		var resEnum = SBservice.RDFC.GetElements();
 		while ( resEnum.hasMoreElements() && this.hit < this.max )
 		{
@@ -130,16 +130,16 @@ var sbResult =
 			if ( this.QueryStrings['re'] == "true" )
 			{
 				var re = new RegExp(this.QueryStrings['q'], this.RegExpModifier);
-				var isMatchT = SBRDF.getProperty("title",   res).match(re);
-				var isMatchM = SBRDF.getProperty("comment", res).match(re);
-				var isMatchC = SCRDF.getProperty("content", res).match(re);
+				var isMatchT = sbDataSource.getProperty("title",   res).match(re);
+				var isMatchM = sbDataSource.getProperty("comment", res).match(re);
+				var isMatchC = scDataSource.getProperty("content", res).match(re);
 			}
 			else
 			{
 				var willContinue = false;
-				var myTitle   = SBRDF.getProperty("title", res);
-				var myComment = SBRDF.getProperty("comment", res);
-				var myContent = [myTitle, myComment, SCRDF.getProperty("content", res)].join("\t");
+				var myTitle   = sbDataSource.getProperty("title", res);
+				var myComment = sbDataSource.getProperty("comment", res);
+				var myContent = [myTitle, myComment, scDataSource.getProperty("content", res)].join("\t");
 
 				for ( var i = 0; i < RegExpInclude.length; i++ ) {
 					if ( !myContent.match(RegExpInclude[i]) ) { willContinue = true; break; }
@@ -154,19 +154,18 @@ var sbResult =
 
 			if ( isMatchT || isMatchM || isMatchC )
 			{
-				if ( !SBRDF.exists(res) ) continue;
+				if ( !sbDataSource.exists(res) ) continue;
 				this.hit++;
 
-
-				var icon = SBRDF.getProperty("icon", res);
-				if ( !icon ) icon = SBcommon.getDefaultIcon(SBRDF.getProperty("type", res));
+				var icon = sbDataSource.getProperty("icon", res);
+				if ( !icon ) icon = SBcommon.getDefaultIcon(sbDataSource.getProperty("type", res));
 				sbResult.treeItems.push([
-					SBRDF.getProperty("title", res),
-					this.extractRightContext(SCRDF.getProperty("content", res)),
-					this.extractRightContext(SBRDF.getProperty("comment", res)).replace(/ __BR__ /g, " "),
-					SCRDF.getProperty("folder", res),
-					SBRDF.getProperty("id", res),
-					SBRDF.getProperty("type", res),
+					sbDataSource.getProperty("title", res),
+					this.extractRightContext(scDataSource.getProperty("content", res)),
+					this.extractRightContext(sbDataSource.getProperty("comment", res)).replace(/ __BR__ /g, " "),
+					scDataSource.getProperty("folder", res),
+					sbDataSource.getProperty("id", res),
+					sbDataSource.getProperty("type", res),
 					icon,
 				]);
 			}
@@ -289,9 +288,9 @@ var SBcache = {
 	{
 		window.title = SBstring.getString("BUILD_CACHE") + " - ScrapBook";
 		SBstatus.firstChild.value = SBstring.getString("BUILD_CACHE_INIT");
-		SBRDF.init();
-		SCRDF.init();
-		SCRDF.removeAllEntries();
+		sbDataSource.init();
+		scDataSource.init();
+		scDataSource.removeAllEntries();
 		this.dataDir = SBcommon.getScrapBookDir().clone();
 		this.dataDir.append("data");
 		this.initRecursive(SBservice.RDF.GetResource("urn:scrapbook:root"));
@@ -302,13 +301,13 @@ var SBcache = {
 
 	initRecursive : function(aContRes)
 	{
-		SBservice.RDFC.Init(SBRDF.data, aContRes);
+		SBservice.RDFC.Init(sbDataSource.data, aContRes);
 		var resEnum = SBservice.RDFC.GetElements();
 		while ( resEnum.hasMoreElements() )
 		{
 			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			var type = SBRDF.getProperty("type", res);
-			if ( SBservice.RDFCU.IsContainer(SBRDF.data, res) )
+			var type = sbDataSource.getProperty("type", res);
+			if ( SBservice.RDFCU.IsContainer(sbDataSource.data, res) )
 			{
 				this.initRecursive(res);
 			}
@@ -319,7 +318,7 @@ var SBcache = {
 			else
 			{
 				this.resList.push(res);
-				this.folderTitles.push(SBRDF.getProperty("title", aContRes));
+				this.folderTitles.push(sbDataSource.getProperty("title", aContRes));
 			}
 			SBstatus.firstChild.value = SBstring.getString("BUILD_CACHE_INIT") + " (" + ++this.count + ")";
 		}
@@ -328,28 +327,33 @@ var SBcache = {
 
 	processAsync : function(aRes)
 	{
-		var id  = SBRDF.getProperty("id", aRes);
+		var id  = sbDataSource.getProperty("id", aRes);
 		var dir = this.dataDir.clone();
 		dir.append(id);
 		var contentList = [];
 		var num = 0;
 		do {
-			var file = dir.clone();
-			file.append("index" + ((num > 0) ? num : "") + ".html");
-			if ( !file.exists() ) break;
+			var file1 = dir.clone();
+			var file2 = dir.clone();
+			file1.append("index"  + ((num > 0) ? num : "") + ".html");
+			file2.append("index_" + ((num > 0) ? num : "") + ".html");
+			var file;
+			if      ( file1.exists() ) file = file1;
+			else if ( file2.exists() ) file = file2;
+			else break;
 			var content = SBcommon.readFile(file);
 			try {
-				SBservice.UC.charset = SBRDF.getProperty("chars", aRes);
-				content = SBservice.UC.ConvertToUnicode(content);
+				SBservice.UNICODE.charset = sbDataSource.getProperty("chars", aRes);
+				content = SBservice.UNICODE.ConvertToUnicode(content);
 			} catch(ex) {
-				dump("*** ScrapBook Failed to ConvertToUnicode : " + SBRDF.getProperty("title", aRes) + "\n");
+				dump("*** ScrapBook Failed to ConvertToUnicode : " + sbDataSource.getProperty("title", aRes) + "\n");
 			}
 			contentList.push( this.convertHTML2Text(content) );
 		}
 		while ( ++num < 10 );
 		contentList = contentList.join("\n").replace(/[\x00-\x1F\x7F]/g, " ");
-		SCRDF.addEntry(aRes, contentList, this.folderTitles[this.count]);
-		SBstatus.firstChild.value = SBstring.getString("BUILD_CACHE_SCAN") + " " + SBRDF.getProperty("title", aRes);
+		scDataSource.addEntry(aRes, contentList, this.folderTitles[this.count]);
+		SBstatus.firstChild.value = SBstring.getString("BUILD_CACHE_SCAN") + " " + sbDataSource.getProperty("title", aRes);
 		SBstatus.lastChild.value  = Math.round(this.count / this.resList.length * 100);
 		if ( window.title != this.folderTitles[this.count] ) window.title = this.folderTitles[this.count];
 		if ( ++this.count < this.resList.length ) {
@@ -363,7 +367,7 @@ var SBcache = {
 	finish : function()
 	{
 		SBstatus.firstChild.value = "";
-		SCRDF.flush();
+		scDataSource.flush();
 		try {
 			if ( window.arguments[0] ) SBcommon.loadURL(window.arguments[0], true);
 		} catch(ex) {
@@ -376,8 +380,8 @@ var SBcache = {
 	{
 		if ( this.count != this.resList.length )
 		{
-			SCRDF.removeAllEntries();
-			SCRDF.flush();
+			scDataSource.removeAllEntries();
+			scDataSource.flush();
 		}
 	},
 
@@ -404,7 +408,7 @@ var SBcache = {
 
 
 
-var SCRDF = {
+var scDataSource = {
 
 	dataSource : null,
 	container : null,
@@ -429,8 +433,8 @@ var SCRDF = {
 
 	addEntry : function(aRes, aContent, aFolder)
 	{
-		SBRDF.sanitize(aContent);
-		SBRDF.sanitize(aFolder);
+		sbDataSource.sanitize(aContent);
+		sbDataSource.sanitize(aFolder);
 		this.container.AppendElement(aRes);
 		this.dataSource.Assert(aRes, SBservice.RDF.GetResource(NS_SCRAPBOOK + "content"), SBservice.RDF.GetLiteral(aContent), true);
 		this.dataSource.Assert(aRes, SBservice.RDF.GetResource(NS_SCRAPBOOK + "folder"),  SBservice.RDF.GetLiteral(aFolder),  true);
@@ -442,7 +446,7 @@ var SCRDF = {
 			var retVal = this.dataSource.GetTarget(aRes, SBservice.RDF.GetResource(NS_SCRAPBOOK + aProp), true);
 			return retVal.QueryInterface(Components.interfaces.nsIRDFLiteral).Value;
 		} catch(ex) {
-			dump("*** ScrapBook ERROR @ SCRDF::getProperty " + aProp + " " + aRes.Value + "\n");
+			dump("*** ScrapBook ERROR @ scDataSource::getProperty " + aProp + " " + aRes.Value + "\n");
 			return "";
 		}
 	},

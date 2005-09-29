@@ -2,13 +2,15 @@
 <!ENTITY sb.detail.new.folder		"Comhadlann Nua">
 <!ENTITY sb.detail.select.folder	"Roghnaigh Cohmadlann">
 
-<!ENTITY sb.detail.linked			"Download links">
+<!ENTITY sb.detail.linked.file		"Download linked files">
 <!ENTITY sb.detail.linked.image		"Iomh&#225;">
 <!ENTITY sb.detail.linked.sound		"Fuaim">
 <!ENTITY sb.detail.linked.movie		"Scann&#225;in">
 <!ENTITY sb.detail.linked.archive	"Cartlann">
 <!ENTITY sb.detail.linked.custom	"Custom">
 
-<!ENTITY sb.detail.linked.seq		"Gabh gach Leathanach ceangailte in &#243;rd">
-<!ENTITY sb.detail.linked.seq.d		"(i fo-chomhadlann cruthaithe go huathoibr&#237;ch)">
+<!ENTITY sb.detail.linked.page			"In-depth Capture">
+<!ENTITY sb.detail.linked.page2			"Capture linked Web pages">
+<!ENTITY sb.detail.linked.page.depth	"Depth to follow links">
+<!ENTITY sb.detail.linked.page.text		"After completing captures, all pages will be linked each other and sitemap will be created.">
 

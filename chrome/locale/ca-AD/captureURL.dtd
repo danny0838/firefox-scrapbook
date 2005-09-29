@@ -1,8 +1,0 @@
-<!ENTITY sb.url.description	"URLs (Introduïu només un URL per a cada línia):">
-
-<!ENTITY sb.url.tools		"Detector d'URLs">
-<!ENTITY sb.url.tools.tabs	"Totes les pestanyes obertes a la finestra">
-<!ENTITY sb.url.tools.local	"Tots els fitxers HTML de la carpeta">
-<!ENTITY sb.url.tools.webox	"default.html per al WeBoX">
-<!ENTITY sb.url.tools.clear	"Buida">
-

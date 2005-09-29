@@ -2,7 +2,7 @@
 
 <!ENTITY sb.new.folder		"Uusi kansio...">
 <!ENTITY sb.new.note		"Uusi muistilappu">
-<!ENTITY sb.toggleallopen	"Laajenna/Supista kaikki kansiot">
+<!ENTITY sb.toggle.all		"Laajenna/Supista kaikki kansiot">
 
 <!ENTITY sb.tools			"Työkalut">
 <!ENTITY sb.tools.setting	"Asetukset...">
@@ -10,11 +10,12 @@
 <!ENTITY sb.tools.calculate	"Laske koko">
 <!ENTITY sb.tools.sorttree	"Järjestä koko puu">
 <!ENTITY sb.tools.directory	"ScrapBook-kansio">
-<!ENTITY sb.tools.urls		"Kaappaa useita sivuja">
+<!ENTITY sb.tools.combine	"Yhdistä">
+<!ENTITY sb.tools.multiple	"Kaappaa useita sivuja">
 <!ENTITY sb.tools.trade		"Tuo tai vie">
 <!ENTITY sb.tools.output	"Tulosta kansiopuu HTML:nä">
 <!ENTITY sb.tools.backup	"Varmenna tiivistäen">
-<!ENTITY sb.tools.repair	"Emergency Repair">
+<!ENTITY sb.tools.repair	"Hätäkorjaus">
 <!ENTITY sb.tools.homepage	"Kotisivu">
 <!ENTITY sb.tools.about		"Tietoja">
 

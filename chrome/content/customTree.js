@@ -3,35 +3,34 @@ function sbCustomTreeView(aColIDs, aItems)
 	this._items = aItems;
 	this._rowCount = aItems.length;
 	this.colIDs = aColIDs;
-	this.colCount = this.colIDs.length;
 }
 
 
 sbCustomTreeView.prototype = 
 {
+	normalizeColumnIndex : function(col)
+	{
+		if ( col.index > -1 ) {
+			// Firefox 1.1+
+			return col.index;
+		} else {
+			// Firefox 1.0
+			var colIdx = 0;
+			while ( colIdx < this.colIDs.length && col != this.colIDs[colIdx] ) ++colIdx;
+			return colIdx;
+		}
+	},
 	get rowCount()
 	{
 		return this._rowCount;
 	},
 	getCellText: function(row, col)
 	{
-		if ( col.index > -1 ) {
-			return this._items[row][col.index];
-		} else {
-			var colIdx = 0;
-			while ( colIdx < this.colCount && col != this.colIDs[colIdx] ) ++colIdx;
-			return this._items[row][colIdx];
-		}
+		return this._items[row][this.normalizeColumnIndex(col)];
 	},
 	setCellText: function(row, col, val)
 	{
-		if ( col.index > -1 ) {
-			this._items[row][col.index] = val;
-		} else {
-			var colIdx = 0;
-			while ( colIdx < this.colCount && col != this.colIDs[colIdx] ) ++colIdx;
-			this._items[row][colIdx] = val;
-		}
+		this._items[row][this.normalizeColumnIndex(col)] = val;
 	},
 	setTree: function(tree)
 	{

@@ -12,11 +12,6 @@
 <!ENTITY sb.setting.tree.singleexpand	"When expanding a tree folder, collapse all other folders (like IE Favorites)">
 <!ENTITY sb.setting.tree.quickdelete	"Don't confirm when deleting">
 
-<!ENTITY sb.setting.view.header			"Show URL infobar">
-<!ENTITY sb.setting.view.editor			"Show Edit Toolbar">
-<!ENTITY sb.setting.view.editor.auto	"Automatically when viewing a captured page">
-<!ENTITY sb.setting.view.editor.manual	"Manually by hitting EDIT button in the status bar">
-
 <!ENTITY sb.setting.usetabs.d			"Checked actions use new tabs.">
 <!ENTITY sb.setting.usetabs.note		"Open Notes in Tab">
 
@@ -25,16 +20,14 @@
 <!ENTITY sb.setting.capture.removescript	"Remove JavaScript (Recommend)">
 <!ENTITY sb.setting.capture.removescript.d	"If check off, sometimes fails to preserve the page layout.">
 
-<!ENTITY sb.setting.edit.multilines		"Enable multiline comment">
-<!ENTITY sb.setting.edit.confirmsave.1	"Interval for confirming save">
-<!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 = never confirm)">
-
-<!ENTITY sb.setting.program.filer			"Program for file browsing">
-<!ENTITY sb.setting.program.filer.default	"Default (If Windows, maybe Explorer.)">
-<!ENTITY sb.setting.browse					"Browse">
+<!ENTITY sb.button.browse			"Browse">
+<!ENTITY sb.button.show				"Show Directory">
 
 <!ENTITY sb.setting.data			"Destination to Store Data">
 <!ENTITY sb.setting.data.default	"Default (In your Profile Folder)">
+<!ENTITY sb.setting.data.alert		"Currently your ScrapBook data are stored in your Firefox 'Profile Folder'. Please note, if you select [Delete Files] when deleting the Firefox profile, All ScrapBook data will be removed.">
+<!ENTITY sb.setting.filer			"Program for file browsing">
+<!ENTITY sb.setting.filer.default	"Default (If Windows, maybe Explorer.)">
 
 <!ENTITY sb.setting.restorefavicons		"Restore favicons">
 <!ENTITY sb.setting.restorefavicons.d	"If favicons are not displayed, press this button:">

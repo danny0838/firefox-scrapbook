@@ -2,7 +2,7 @@
 
 <!ENTITY sb.new.folder		"Nueva carpeta...">
 <!ENTITY sb.new.note		"Nueva nota">
-<!ENTITY sb.toggleallopen	"Expandir/Colapsar todas las carpetas">
+<!ENTITY sb.toggle.all		"Expandir/Colapsar todas las carpetas">
 
 <!ENTITY sb.tools			"Herramientas">
 <!ENTITY sb.tools.setting	"Preferencias...">
@@ -10,7 +10,8 @@
 <!ENTITY sb.tools.calculate	"Calcular tamaño">
 <!ENTITY sb.tools.sorttree	"Sort Entire Tree">
 <!ENTITY sb.tools.directory	"ScrapBook Directory">
-<!ENTITY sb.tools.urls		"Capture Multiple URLs">
+<!ENTITY sb.tools.combine	"Combine">
+<!ENTITY sb.tools.multiple	"Capture Multiple URLs">
 <!ENTITY sb.tools.trade		"Import / Export">
 <!ENTITY sb.tools.output	"Output Tree as HTML">
 <!ENTITY sb.tools.backup	"Backup with Compression">

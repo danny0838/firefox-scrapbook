@@ -28,12 +28,12 @@ var sbCalc = {
 
 	exec : function()
 	{
-		SBRDF.init();
-		var resEnum = SBRDF.data.GetAllResources();
+		sbDataSource.init();
+		var resEnum = sbDataSource.data.GetAllResources();
 		while ( resEnum.hasMoreElements() )
 		{
 			var res = resEnum.getNext();
-			if ( !SBservice.RDFCU.IsContainer(SBRDF.data, res) ) this.total++;
+			if ( !SBservice.RDFCU.IsContainer(sbDataSource.data, res) ) this.total++;
 		}
 		var dataDir = SBcommon.getScrapBookDir().clone();
 		dataDir.append("data");
@@ -54,21 +54,19 @@ var sbCalc = {
 		var bytes = sbPropUtil.getTotalFileSize(id)[0];
 		this.grandSum += bytes;
 		var res   = SBservice.RDF.GetResource("urn:scrapbook:item" + id);
-		var valid = SBRDF.exists(res);
-		var icon  = SBRDF.getProperty("icon", res);
-		if ( !icon ) icon = SBcommon.getDefaultIcon(SBRDF.getProperty("type", res));
+		var valid = sbDataSource.exists(res);
+		var icon  = sbDataSource.getProperty("icon", res);
+		if ( !icon ) icon = SBcommon.getDefaultIcon(sbDataSource.getProperty("type", res));
 		this.treeItems.push([
-			SBRDF.getProperty("title", res),
-			sbPropUtil.formatFileSize(bytes),
-			valid ? "" : this.STRING.getString("INVALID"),
 			id,
-			SBRDF.getProperty("type", res),
+			sbDataSource.getProperty("type",  res),
+			sbDataSource.getProperty("title", res),
 			icon,
 			bytes,
+			sbPropUtil.formatFileSize(bytes),
 			valid,
 		]);
 		if ( !valid ) this.invalidCount++;
-
 
 		this.STATUS.label   = this.STRING.getString("CALCULATING") + "... (" + this.count + "/" + this.total + ")";
 		this.PROGRESS.value = Math.round(this.count / this.total * 100);
@@ -77,7 +75,7 @@ var sbCalc = {
 
 	finish : function()
 	{
-		this.heapSort(this.treeItems, 6);
+		this.heapSort(this.treeItems, 4);
 		this.treeItems.reverse();
 		this.initTree();
 		this.STATUS.label = "";
@@ -98,7 +96,7 @@ var sbCalc = {
 		var count = 0;
 		var fileEnum = myDir.directoryEntries;
 		while ( fileEnum.hasMoreElements() ) { fileEnum.getNext(); count++; }
-		if ( count > 20 )
+		if ( count > 30 )
 		{
 			alert(this.STRING.getString("TOO_MANY_BACKUP_FILES"));
 			SBcommon.launchDirectory(myDir);
@@ -111,16 +109,26 @@ var sbCalc = {
 			"sbTreeColTitle",
 			"sbTreeColSize",
 			"sbTreeColState",
-			"sbTreeColID",
-			"sbTreeColType",
-			"sbTreeColIcon",
-			"sbTreeColBytes",
-			"sbTreeColValid",
 		];
 		var treeView = new sbCustomTreeView(colIDs, this.treeItems);
+		treeView.getCellText = function(row, col)
+		{
+			switch ( this.normalizeColumnIndex(col) )
+			{
+				case 0 : return this._items[row][2]; break;
+				case 1 : return this._items[row][5]; break;
+				case 2 : return this._items[row][6] ? "" : sbCalc.STRING.getString("INVALID"); break;
+			}
+		};
 		treeView.getImageSrc = function(row, col)
 		{
-			if ( col == "sbTreeColTitle" || col.index == 0 ) return this._items[row][5];
+			if ( col == "sbTreeColTitle" || col.index == 0 ) return this._items[row][3];
+		};
+		treeView.getCellProperties = function(row, col, properties)
+		{
+			if ( this._items[row][6] ) return;
+			const ATOM = Components.classes["@mozilla.org/atom-service;1"].getService(Components.interfaces.nsIAtomService);
+			properties.AppendElement(ATOM.getAtom("markedRed"));
 		};
 		this.TREE.view = treeView;
 	},
@@ -189,7 +197,7 @@ var sbCalcControl = {
 
 	createPopupMenu : function(aEvent)
 	{
-		var valid = this.CURRENT_TREEITEM[7];
+		var valid = this.CURRENT_TREEITEM[6];
 		document.getElementById("ScrapBookTreePopupD").setAttribute("disabled", valid);
 		document.getElementById("ScrapBookTreePopupP").setAttribute("disabled", !valid);
 	},
@@ -201,14 +209,14 @@ var sbCalcControl = {
 
 	open : function(tabbed)
 	{
-		var id   = this.CURRENT_TREEITEM[3];
-		var type = this.CURRENT_TREEITEM[4];
+		var id   = this.CURRENT_TREEITEM[0];
+		var type = this.CURRENT_TREEITEM[1];
 		SBcommon.loadURL(SBcommon.getURL(id, type), tabbed);
 	},
 
 	remove : function()
 	{
-		var id = this.CURRENT_TREEITEM[3];
+		var id = this.CURRENT_TREEITEM[0];
 		if ( id.length != 14 ) return;
 		if ( SBcommon.removeDirSafety(SBcommon.getContentDir(id), true) )
 		{
@@ -219,7 +227,7 @@ var sbCalcControl = {
 
 	forward : function(key)
 	{
-		var id = this.CURRENT_TREEITEM[3];
+		var id = this.CURRENT_TREEITEM[0];
 		switch ( key )
 		{
 			case "P" : window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome" ,id); break;

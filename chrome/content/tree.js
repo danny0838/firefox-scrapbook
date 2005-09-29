@@ -16,7 +16,6 @@ var SBtree;
 
 
 
-
 var SBtreeUtil = {
 
 	singleExpand : false,
@@ -24,7 +23,7 @@ var SBtreeUtil = {
 	init : function(xulID, isContainer)
 	{
 		SBtree = document.getElementById(xulID);
-		SBtree.database.AddDataSource(SBRDF.data);
+		SBtree.database.AddDataSource(sbDataSource.data);
 		this.singleExpand = SBcommon.getBoolPref("scrapbook.tree.singleexpand", false);
 		if ( isContainer ) document.getElementById("ScrapBookTreeRule").setAttribute("iscontainer", true);
 		SBtree.builder.rebuild();
@@ -40,7 +39,7 @@ var SBtreeUtil = {
 		if ( SBtree.view.isContainer(curIdx) )
 		{
 			SBtree.view.toggleOpenState(curIdx);
-			if ( this.singleExpand ) SBtreeUtil.collapseOtherFolders(curIdx);
+			if ( this.singleExpand ) SBtreeUtil.collapseFoldersBut(curIdx);
 		}
 	},
 
@@ -66,7 +65,7 @@ var SBtreeUtil = {
 		}
 	},
 
-	collapseOtherFolders : function(curIdx)
+	collapseFoldersBut : function(curIdx)
 	{
 		var ascIdxList = {};
 		ascIdxList[curIdx] = true;

@@ -1,0 +1,9 @@
+<!ENTITY sb.multiple.url	"URL (Введите адреса строка за строкой)">
+
+<!ENTITY sb.multiple.detector		"URL детектор">
+<!ENTITY sb.multiple.detector.plink	"All Links in the Page">
+<!ENTITY sb.multiple.detector.slink	"All Links in the Selection">
+<!ENTITY sb.multiple.detector.tabs	"Открыть все вклдаки в окне">
+<!ENTITY sb.multiple.detector.local	"Все локальные страницы внутри каталога">
+<!ENTITY sb.multiple.detector.clear	"Очистить">
+

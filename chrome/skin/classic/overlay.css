@@ -1,8 +1,8 @@
-/* ::::: namespace ::::: */
+/* ::::: NAMESPACE ::::: */
 
 @namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
 
-/* ::::: Toolbar Button ::::: */
+/* ::::: MAIN TOOLBAR BUTTON ::::: */
 
 #scrapbook-button
 {
@@ -15,7 +15,7 @@ toolbar[iconsize="small"] #scrapbook-button
 }
 
 
-/* ::::: Context Menu ::::: */
+/* ::::: CONTEXT MENU ::::: */
 
 menuitem#ScrapBookContextMenu1 { list-style-image: url('chrome://scrapbook/skin/capture_partial.png'); }
 menuitem#ScrapBookContextMenu2 { list-style-image: url('chrome://scrapbook/skin/capture_partial_as.png'); }
@@ -42,32 +42,75 @@ menuitem#ScrapBookContextMenu8 .menu-iconic-icon
 }
 
 
-/* ::::: BrowserMessage ::::: */
+/* ::::: GENERIC TOOLBAR ::::: */
 
-browsermessage[type="scrapbook"]
+toolbox#ScrapBookToolbox toolbar
 {
-	-moz-appearance: none;
+	border-top: 1px solid ThreeDShadow;
+	padding: 1px;
+}
+
+toolbox#ScrapBookToolbox toolbar > image
+{
+	margin-left: 3px;
+}
+
+toolbox#ScrapBookToolbox toolbarbutton .toolbarbutton-icon
+{
+	margin-left : 2px;
+	margin-right: 2px;
+}
+
+toolbox#ScrapBookToolbox toolbarbutton[type="menu-button"] .toolbarbutton-icon
+{
+	margin-right: 0px;
+}
+
+
+/* ::::: EDITOR ::::: */
+
+toolbar#ScrapBookEditor textbox
+{
+	height: 1.9em !important;
+	padding: 2px  !important;
+}
+
+toolbar#ScrapBookEditor #ScrapBookEditMarker menuitem
+{
+	border: 1px solid transparent;
+}
+
+toolbar#ScrapBookEditor #ScrapBookEditMarker menuitem:hover
+{
+	border: 1px solid Highlight;
+}
+
+
+/* ::::: INFOBAR ::::: */
+
+toolbar#ScrapBookInfobar
+{
 	background-color: InfoBackground;
-	border-bottom: 1px solid ThreeDShadow;
-	padding: 3px 8px;
-	overflow: hidden;
+	padding-left: 8px;
 }
 
-browsermessage[type="scrapbook"] description
+toolbar#ScrapBookInfobar label
 {
-	-moz-appearance: none;
 	color: InfoText;
-	margin: 0px;
-	padding: 0px;
 	cursor: pointer;
+	margin-right: 50px;
 }
 
-browsermessage[type="scrapbook"] button
+toolbar#ScrapBookInfobar toolbarbutton
 {
 	-moz-appearance: none;
-	margin: 0px;
-	padding: 0px;
+	margin: 1px 0px 1px 6px;
+	padding: 2px;
 	background: none;
-	border: none;
+}
+
+toolbar#ScrapBookInfobar toolbarbutton[disabled="true"] label
+{
+	color: GrayText;
 }
 

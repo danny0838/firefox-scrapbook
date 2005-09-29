@@ -20,6 +20,7 @@ var gSBitem;
 var gTypeFolder = false;
 var gTypeNote   = false;
 var gTypeFile   = false;
+var gTypeNomark = false;
 
 
 
@@ -35,12 +36,12 @@ function SB_initProp()
 	}
 	if ( !gID ) return;
 
-	SBRDF.init();
+	sbDataSource.init();
 	gSBitem = new ScrapBookItem();
 	gRes = SBservice.RDF.GetResource("urn:scrapbook:item" + gID);
 	for ( var prop in gSBitem )
 	{
-		gSBitem[prop] = SBRDF.getProperty(prop, gRes);
+		gSBitem[prop] = sbDataSource.getProperty(prop, gRes);
 	}
 
 	gID.match(/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/);
@@ -62,7 +63,7 @@ function SB_initProp()
 	document.getElementById("ScrapBookPropertyDialog").setAttribute("title", gSBitem.title);
 	document.title = gSBitem.title;
 
-	if ( SBservice.RDFCU.IsContainer(SBRDF.data, gRes) ) gSBitem.type = "folder";
+	if ( SBservice.RDFCU.IsContainer(sbDataSource.data, gRes) ) gSBitem.type = "folder";
 
 	switch ( gSBitem.type )
 	{
@@ -79,19 +80,23 @@ function SB_initProp()
 			gTypeNote = true;
 			document.getElementById("ScrapBookPropTitle").removeAttribute("editable");
 			break;
+		case "combine" : 
+		case "site" : 
+			gTypeNomark = true;
+			break;
 	}
 	document.getElementById("ScrapBookPropSourceRow").setAttribute("hidden", gTypeFolder || gTypeNote);
 	document.getElementById("ScrapBookPropCharsRow").setAttribute("hidden",  gTypeFolder || gTypeFile);
 	document.getElementById("ScrapBookPropIconMenu").setAttribute("hidden",  gTypeNote   || gTypeFile);
-	document.getElementById("ScrapBookPropMark").setAttribute("hidden", gTypeFolder || gTypeNote || gTypeFile);
+	document.getElementById("ScrapBookPropMark").setAttribute("hidden", gTypeFolder || gTypeNote || gTypeFile || gTypeNomark);
 
 	SB_changeCommentTab(gSBitem.comment);
 
-	if ( gSBitem.type != "folder" ) setTimeout(SB_initWithDelay, 0);
+	if ( gSBitem.type != "folder" ) setTimeout(SB_delayedInit, 0);
 }
 
 
-function SB_initWithDelay()
+function SB_delayedInit()
 {
 	var sizeCount = sbPropUtil.getTotalFileSize(gID);
 	var msg = sbPropUtil.formatFileSize(sizeCount[0]);
@@ -105,7 +110,7 @@ function SB_acceptProp()
 	var newVals = {
 		title   : document.getElementById("ScrapBookPropTitle").value,
 		source  : document.getElementById("ScrapBookPropSource").value,
-		comment : document.getElementById("ScrapBookPropComment").value.replace(/\r|\n/g, " __BR__ "),
+		comment : SBcommon.escapeComment(document.getElementById("ScrapBookPropComment").value),
 		type    : gSBitem.type,
 		icon    : SB_getIconURL()
 	};
@@ -123,10 +128,10 @@ function SB_acceptProp()
 	{
 		for ( var prop in gSBitem ) 
 		{
-			SBRDF.updateItem(gRes, prop, gSBitem[prop]);
+			sbDataSource.updateItem(gRes, prop, gSBitem[prop]);
 		}
 		if ( !gTypeFolder ) SBcommon.writeIndexDat(gSBitem);
-		SBRDF.flush();
+		sbDataSource.flush();
 	}
 	if ( window.arguments[1] ) window.arguments[1].accept = true;
 }
@@ -205,8 +210,8 @@ var sbPropUtil = {
 		file.append("index.html");
 		var content = SBcommon.readFile(file);
 		try {
-			SBservice.UC.charset = aChars;
-			content = SBservice.UC.ConvertToUnicode(content);
+			SBservice.UNICODE.charset = aChars;
+			content = SBservice.UNICODE.ConvertToUnicode(content);
 			var isMatch = content.match(/<title>([^<]+?)<\/title>/im);
 			if ( isMatch ) return RegExp.$1;
 		} catch(ex) {

@@ -11,7 +11,7 @@
 **************************************************/
 
 
-var SBRDF = {
+var sbDataSource = {
 
 
 	data : null,
@@ -19,39 +19,39 @@ var SBRDF = {
 
 
 
-	init : function()
+	init : function(aQuietWarning)
 	{
 		try {
-			this.file = SBcommon.getScrapBookDir().clone();
+			this.file = SBcommon.getScrapBookDir();
 			this.file.append("scrapbook.rdf");
 			if ( !this.file.exists() )
 			{
 				this.file.create(this.file.NORMAL_FILE_TYPE, 0666);
-				var myPath = SBservice.IO.newFileURI(this.file).spec;
-				this.data = SBservice.RDF.GetDataSourceBlocking(myPath);
+				var fileURL = SBservice.IO.newFileURI(this.file).spec;
+				this.data = SBservice.RDF.GetDataSourceBlocking(fileURL);
 				this.createEmptySeq("urn:scrapbook:root");
 				this.flush();
 			}
 			else
 			{
-				this.backup(8);
-				var myPath = SBservice.IO.newFileURI(this.file).spec;
-				this.data = SBservice.RDF.GetDataSourceBlocking(myPath);
+				var fileURL = SBservice.IO.newFileURI(this.file).spec;
+				this.data = SBservice.RDF.GetDataSourceBlocking(fileURL);
 			}
 		}
 		catch(ex) {
-			alert("ScrapBook ERROR: Failed to initialize datasource.\n\n" + ex);
+			if ( !aQuietWarning ) alert("ScrapBook ERROR: Failed to initialize datasource.\n\n" + ex);
 		}
 	},
 
-	backup : function(offset)
+	backup : function()
 	{
-		var myDir = SBcommon.getScrapBookDir().clone();
-		myDir.append("backup");
-		if ( !myDir.exists() ) myDir.create(myDir.DIRECTORY_TYPE, 0700);
-		var backupFileName = "scrapbook_" + SBcommon.getTimeStamp().substring(0,offset) + ".rdf";
+		var bFile = SBcommon.getScrapBookDir();
+		bFile.append("backup");
+		if ( !bFile.exists() ) bFile.create(bFile.DIRECTORY_TYPE, 0700);
+		var bFileName = "scrapbook_" + SBcommon.getTimeStamp().substring(0,8) + ".rdf";
 		try {
-			this.file.copyTo(myDir, backupFileName);
+			this.file.copyTo(bFile, bFileName);
+			dump("sbDataSource::backup [" + bFileName + "]\n");
 		} catch(ex) {
 		}
 	},
@@ -81,7 +81,7 @@ var SBRDF = {
 		aSBitem.icon    = this.sanitize(aSBitem.icon);
 		aSBitem.source  = this.sanitize(aSBitem.source);
 
-		if ( aParName != "urn:scrapbook:root" && SBRDF.getProperty("type", SBservice.RDF.GetResource(aParName)) != "folder" )
+		if ( aParName != "urn:scrapbook:root" && this.getProperty("type", SBservice.RDF.GetResource(aParName)) != "folder" )
 		{
 			alert("ScrapBook ERROR: Resource '" + aParName + "' is not found.");
 			aParName = "urn:scrapbook:root"; aIdx = 0;

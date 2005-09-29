@@ -9,8 +9,11 @@
 	</RDF:Seq>
 
 	<!--description about package-->
-	<RDF:Description about="urn:mozilla:locale:zh-CN" chrome:name="zh-CN">
-		<chrome:packages>
+	<RDF:Description about="urn:mozilla:locale:zh-CN"
+	          chrome:displayname="Chinese(Simplified)"
+	          chrome:author="George C. Tsoi (moZine.org)"
+	          chrome:name="zh-CN">
+    <chrome:packages>
 			<RDF:Seq about="urn:mozilla:locale:zh-CN:packages">
 				<RDF:li resource="urn:mozilla:locale:zh-CN:scrapbook" />
 			</RDF:Seq>

@@ -12,7 +12,7 @@
 
 <!ENTITY sb.prop.general	"常规">
 
-<!ENTITY sb.prop.icon.change	"更改图标">
+<!ENTITY sb.prop.icon.change	"更改">
 <!ENTITY sb.prop.icon.default	"默认">
 <!ENTITY sb.prop.icon.favicon	"选择个性图标">
 <!ENTITY sb.prop.icon.custom	"选择自定义图标">

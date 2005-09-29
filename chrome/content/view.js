@@ -12,7 +12,8 @@
 
 
 
-var gID, gRes;
+var gID;
+var gRes;
 
 
 
@@ -21,11 +22,11 @@ function SB_initView()
 	gID = document.location.href.match(/\?id\=(\d{14})$/);
 	gID = RegExp.$1;
 
-	SBRDF.init();
+	sbDataSource.init();
 
 	var resURI = gID ? "urn:scrapbook:item" + gID : "urn:scrapbook:root";
 	gRes = SBservice.RDF.GetResource(resURI);
-	var type = SBRDF.getProperty("type", gRes);
+	var type = sbDataSource.getProperty("type", gRes);
 	if ( type != "folder" )
 	{
 		window.location.href = SBcommon.getURL(gID, type);
@@ -33,21 +34,20 @@ function SB_initView()
 	}
 
 
-	var src = SB_getHTMLHead(SBRDF.getProperty("title", gRes));
+	var src = SB_getHTMLHead(sbDataSource.getProperty("title", gRes));
 
-	SBservice.RDFC.Init(SBRDF.data, gRes);
+	SBservice.RDFC.Init(sbDataSource.data, gRes);
 	var resEnum = SBservice.RDFC.GetElements();
 	while ( resEnum.hasMoreElements() )
 	{
 		var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-		if ( SBservice.RDFCU.IsContainer(SBRDF.data, res) ) continue;
+		if ( SBservice.RDFCU.IsContainer(sbDataSource.data, res) ) continue;
 		var item = new ScrapBookItem();
 		for ( var prop in item )
 		{
-			item[prop] = SBRDF.getProperty(prop, res);
+			item[prop] = sbDataSource.getProperty(prop, res);
 		}
-		if ( !item.icon ) item.icon = SBcommon.getDefaultIcon(SBRDF.getProperty("type", res));
-		dumpObj(item);
+		if ( !item.icon ) item.icon = SBcommon.getDefaultIcon(sbDataSource.getProperty("type", res));
 		src += SB_getHTMLBody(item);
 	}
 
@@ -70,7 +70,7 @@ function SB_getHTMLHead(aTitle)
 	        + '	<meta http-equiv="Content-Type" content="text/html;Charset=UTF-8">\n'
 	        + '	<meta http-equiv="Content-Style-Type" content="text/css">\n'
 	        + '	<title>' + aTitle + '</title>\n'
-	        + '	<link rel="stylesheet" type="text/css" href="chrome://scrapbook/skin/collection.css" media="screen,print">\n'
+	        + '	<link rel="stylesheet" type="text/css" href="chrome://scrapbook/skin/combine.css" media="screen,print">\n'
 	        + '</head>\n\n'
 	        + '<body>\n\n';
 	return src;
@@ -79,10 +79,16 @@ function SB_getHTMLHead(aTitle)
 
 function SB_getHTMLBody(aSBitem)
 {
-	var url = ( aSBitem.source.length > 100 ) ? aSBitem.source.substring(0,100) + "..." : aSBitem.source;
-	var filePath = './data/' + aSBitem.id + '/index.html';
-	var src = '<cite>' + aSBitem.title + ' <a href="' + aSBitem.source + '" target="_top">' + url + '</a></cite>\n'
-		    + '<iframe src="' + filePath + '" onload="this.setAttribute(\'style\', \'height:\' + (this.contentDocument.height+30));"></iframe>\n';
+	var url   = ( aSBitem.source.length > 100 ) ? aSBitem.source.substring(0,100) + "..." : aSBitem.source;
+	var title = ( aSBitem.title.length  > 100 ) ? aSBitem.title.substring(0,100)  + "..." : aSBitem.title;
+	var icon  = aSBitem.icon ? aSBitem.icon : SBcommon.getDefaultIcon(aSBitem.type);
+	var src = "";
+	src += '<cite class="scrapbook-header">\n';
+	src += '\t<img src="' + icon + '" width="16" height="16">\n';
+	src += '\t<span>' + title + '</span>\n';
+	src += '\t<a href="' + aSBitem.source + '" target="_top">' + url + '</a>\n';
+	src += '</cite>\n';
+	src += '<iframe class="scrapbook-iframe" src="./data/' + aSBitem.id + '/index.html" onload="this.setAttribute(\'style\', \'height:\' + (this.contentDocument.height+30));"></iframe>\n';
 	return src;
 }
 

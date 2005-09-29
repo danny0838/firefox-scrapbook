@@ -2,7 +2,7 @@
 
 <!ENTITY sb.new.folder		"Nowy folder">
 <!ENTITY sb.new.note		"Nowa notatka">
-<!ENTITY sb.toggleallopen	"Rozwiń/Zwiń wszystkie foldery">
+<!ENTITY sb.toggle.all		"Rozwiń/Zwiń wszystkie foldery">
 
 <!ENTITY sb.tools			"Narzędzia">
 <!ENTITY sb.tools.setting	"Ustawienia">
@@ -10,7 +10,8 @@
 <!ENTITY sb.tools.calculate	"Oblicz zajmowaną powierzchnię">
 <!ENTITY sb.tools.sorttree	"Sortuj całe drzewo">
 <!ENTITY sb.tools.directory	"Katalog główny ScrapBook">
-<!ENTITY sb.tools.urls		"Przechwytuj złożone adresy URL">
+<!ENTITY sb.tools.combine	"Combine">
+<!ENTITY sb.tools.multiple	"Przechwytuj złożone adresy URL">
 <!ENTITY sb.tools.trade		"Import / Eksport">
 <!ENTITY sb.tools.output	"Zapisz dane jako dokument HTML">
 <!ENTITY sb.tools.backup	"Twórz plik kopii zapasowej z kompresją">

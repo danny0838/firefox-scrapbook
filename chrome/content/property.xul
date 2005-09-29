@@ -11,7 +11,7 @@
 <dialog id="ScrapBookPropertyDialog"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         buttons="accept,cancel"
-        style="width:400px;"
+        style="width:420px;"
         onload="SB_initProp();"
         ondialogaccept="SB_acceptProp();"
         ondialogcancel="SB_cancelProp();">

@@ -1,9 +1,9 @@
-/* ::::: ScrapBook Capture Detail */
+/* ::::: CAPTURE_DETAIL */
 
 @import url('chrome://browser/skin/bookmarks/addBookmark.css');
 
 
-/* ::::: ScrapBook ::::: */
+/* ::::: TOOLBAR ::::: */
 
 toolbar#ScrapBookMainToolbar toolbarbutton
 {
@@ -21,7 +21,7 @@ menuitem#ScrapBookTreePopupC .menu-iconic-icon
 }
 
 
-/* ::::: ScrapBook Tree ::::: */
+/* ::::: TREE ::::: */
 
 treechildren::-moz-tree-image(ScrapBookTreecolTitle, leaf)
 {
@@ -42,14 +42,19 @@ treechildren::-moz-tree-drop-feedback
 	height: 2px;
 }
 
-treechildren::-moz-tree-cell-text(ScrapBookTreecolTitle, leaf, marked)
+treechildren::-moz-tree-cell-text(marked)
 {
 	font-weight: bold;
 }
 
+treechildren::-moz-tree-cell-text(markedRed)
+{
+	font-weight: bold;
+	color: red;
+}
 
 
-/* ::::: ScrapBook Tree Popup ::::: */
+/* ::::: TREE_POPUP ::::: */
 
 menuitem#ScrapBookTreePopupN { list-style-image: url('chrome://scrapbook/skin/menu_createfolder.png'); }
 menuitem#ScrapBookTreePopupC { list-style-image: url('chrome://scrapbook/skin/menu_createnote.png'); }
@@ -57,27 +62,27 @@ menuitem#ScrapBookTreePopupD { list-style-image: url('chrome://scrapbook/skin/me
 menuitem#ScrapBookTreePopupP { list-style-image: url('chrome://scrapbook/skin/menu_property.png'); }
 
 
-/* ::::: ScrapBook Header ::::: */
+/* ::::: HEADER ::::: */
 
 .sb-header
 {
-	background-color:#E7F4FC !important;
-	background-image:none    !important;
-	border:1px solid #0FA9E5 !important;
-	padding:3px !important;
+	color: InfoText;
+	background-color: InfoBackground;	/* #E7F4FC */
+	border: 1px solid ThreeDShadow;		/* #0FA9E5 */
+	padding: 3px;
 }
 
 .sb-header-ex
 {
-	background-color:#FFE4C7 !important;
-	border:1px solid #FF8099 !important;
-	padding:3px !important;
+	background-color: #FFE4C7;
+	border: 1px solid #FF8099;
+	padding: 3px;
 }
 
 .sb-header toolbarbutton,
 .sb-header-ex toolbarbutton
 {
-	padding:0px !important; margin:0px !important;
+	padding:0px; margin:0px;
 }
 
 .sb-header-exit
@@ -87,7 +92,7 @@ menuitem#ScrapBookTreePopupP { list-style-image: url('chrome://scrapbook/skin/me
 }
 
 
-/* ::::: ScrapBook Search, Result ::::: */
+/* ::::: SEARCH_BUTTON ::::: */
 
 #ScrapBookSearch
 {
@@ -98,13 +103,8 @@ menuitem#ScrapBookTreePopupP { list-style-image: url('chrome://scrapbook/skin/me
 	background-image:url('chrome://scrapbook/skin/dropdown.png');
 }
 
-listbox#ScrapBookResultList listitem[selected="true"] listcell
-{
-	color: ThreeDHighlight !important;
-}
 
-
-/* ::::: ScrapBook Property ::::: */
+/* ::::: PROPERTIES ::::: */
 
 dialog#ScrapBookPropertyDialog rows#ScrapBookPropRows row
 {
@@ -125,7 +125,7 @@ dialog#ScrapBookPropertyDialog row > textbox[readonly="true"]
 }
 
 
-/* ::::: ScrapBook List ::::: */
+/* ::::: CUSTOM_TREE ::::: */
 
 treechildren::-moz-tree-image(sbTreeColTitle)
 {
@@ -133,6 +133,9 @@ treechildren::-moz-tree-image(sbTreeColTitle)
 	width: 16px; height: 16px;
 	padding-right: 3px;
 }
+
+
+/* ::::: COMMON ::::: */
 
 listbox .listcell-icon
 {
@@ -143,9 +146,6 @@ listbox .text-right
 {
 	text-align:right; padding-right:10px;
 }
-
-
-/* ::::: ScrapNote ::::: */
 
 browser
 {

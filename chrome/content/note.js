@@ -11,25 +11,17 @@
 **************************************************/
 
 
-
-var gID;
-var gRes;
-
-
-
 var snGlobal  ={
 
 	fontSize : 16,
 
 	init : function()
 	{
-		gID = document.location.href.match(/\?id\=(\d{14})$/);
-		gID = RegExp.$1;
+		window.location.href.match(/\?id\=(\d{14})$/);
+		var id = RegExp.$1;
 		SBnote.sidebar = false;
-		SBnote.init();
-		SBRDF.init();
-		gRes = SBservice.RDF.GetResource("urn:scrapbook:item" + gID);
-		SBnote.edit(gRes);
+		sbDataSource.init();
+		SBnote.edit(SBservice.RDF.GetResource("urn:scrapbook:item" + id));
 		snTemplate.init();
 		this.initFontSize();
 		if ( nsPreferences.getBoolPref("scrapbook.note.linefeed", true) )
@@ -37,6 +29,22 @@ var snGlobal  ={
 			document.getElementById("ScrapNoteToolbarL").setAttribute("checked", true);
 		}
 		if ( nsPreferences.getBoolPref("scrapbook.note.preview", false) ) snPreview.show();
+	},
+
+	refresh : function()
+	{
+		var icon = SBcommon.getDefaultIcon("note");
+		document.getElementById("ScrapNoteImage").setAttribute("src", icon);
+		if ( !document.getElementById("ScrapNoteBrowser").hidden ) snPreview.show();
+		var browser = SBservice.WINDOW.getMostRecentWindow("navigator:browser").getBrowser();
+		try {
+			if ( browser.selectedBrowser.contentWindow.SBnote.curRes.Value == SBnote.curRes.Value )
+			{
+				browser.selectedTab.label = sbDataSource.getProperty("title", SBnote.curRes);
+				browser.selectedTab.setAttribute("image", icon);
+			}
+		} catch(ex) {
+		}
 	},
 
 	finalize : function(exit)
@@ -118,12 +126,8 @@ var snTemplate = {
 	toSave : false,
 	file   : null,
 
-	dropListener : function() { snTemplate.change(true); },
-
 	init : function()
 	{
-		this.TEXTBOX.removeEventListener("dragdrop", this.dropListener, true);
-		this.TEXTBOX.addEventListener("dragdrop",    this.dropListener, true);
 		this.file = SBcommon.getScrapBookDir().clone();
 		this.file.append("note_template.html");
 		if ( !this.file.exists() ) SBcommon.saveTemplateFile("chrome://scrapbook/content/template.html", this.file);

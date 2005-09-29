@@ -22,14 +22,7 @@ var SBnote = {
 	toSave  : false,
 	sidebar : true,
 	lock    : false,
-
-	dropListener : function() { SBnote.change(true); },
-
-	init : function()
-	{
-		this.TEXTBOX.removeEventListener("dragdrop", this.dropListener, true);
-		this.TEXTBOX.addEventListener("dragdrop",    this.dropListener, true);
-	},
+	flag    : false,
 
 	add : function(tarResName, tarRelIdx)
 	{
@@ -37,12 +30,12 @@ var SBnote = {
 		this.lock = true;
 		setTimeout(function(){ SBnote.lock = false; }, 1000);
 		this.save();
-		var newID = SBRDF.identify(SBcommon.getTimeStamp());
+		var newID = sbDataSource.identify(SBcommon.getTimeStamp());
 		var newItem = new ScrapBookItem(newID);
 		newItem.type  = "note";
 		newItem.chars = "UTF-8";
-		this.curRes = SBRDF.addItem(newItem, tarResName, tarRelIdx);
-		this.curFile = SBcommon.getContentDir(SBRDF.getProperty("id", this.curRes)).clone();
+		this.curRes = sbDataSource.addItem(newItem, tarResName, tarRelIdx);
+		this.curFile = SBcommon.getContentDir(sbDataSource.getProperty("id", this.curRes)).clone();
 		this.curFile.append("index.html");
 		SBcommon.writeFile(this.curFile, "", "UTF-8");
 		SBpref.usetabNote ? this.open(this.curRes, true) : this.edit(this.curRes);
@@ -50,7 +43,13 @@ var SBnote = {
 
 	edit : function(aRes)
 	{
+		if ( !this.flag )
+		{
+			this.flag = true;
+			this.TEXTBOX.addEventListener("dragdrop", function(){ SBnote.change(true); }, true);
+		}
 		this.save();
+		if ( !sbDataSource.exists(aRes) ) sbDataSource.init();
 		this.curRes = aRes;
 		this.toSave = false;
 		if ( this.sidebar )
@@ -58,7 +57,7 @@ var SBnote = {
 			document.getElementById("ScrapBookSplitter").hidden = false;
 			document.getElementById("ScrapNote").hidden = false;
 		}
-		this.curFile = SBcommon.getContentDir(SBRDF.getProperty("id", this.curRes)).clone();
+		this.curFile = SBcommon.getContentDir(sbDataSource.getProperty("id", this.curRes)).clone();
 		this.curFile.append("index.html");
 		var content = SBcommon.readFile(this.curFile);
 		content = SBcommon.convertStringToUTF8(content);
@@ -66,37 +65,26 @@ var SBnote = {
 		content = content.replace(this.HTML_FOOT, "");
 		this.TEXTBOX.value = content;
 		this.TEXTBOX.focus();
-		document.getElementById("ScrapNoteLabel").value = SBRDF.getProperty("title", this.curRes);
-		if ( !this.sidebar )
-		{
-			var myIcon = SBcommon.getDefaultIcon("note");
-			document.getElementById("ScrapNoteImage").setAttribute("src", myIcon);
-			if ( !document.getElementById("ScrapNoteBrowser").hidden ) snPreview.show();
-			var browser = SBservice.WM.getMostRecentWindow("navigator:browser").getBrowser();
-			if ( browser.selectedBrowser.contentWindow.gID == gID )
-			{
-				browser.selectedTab.label = SBRDF.getProperty("title", this.curRes);
-				browser.selectedTab.setAttribute("image", myIcon);
-			}
-		}
+		document.getElementById("ScrapNoteLabel").value = sbDataSource.getProperty("title", this.curRes);
+		if ( !this.sidebar ) snGlobal.refresh();
 	},
 
 	save : function()
 	{
 		if ( !this.toSave ) return;
-		if ( !SBRDF.exists(this.curRes) ) return;
+		if ( !sbDataSource.exists(this.curRes) ) return;
 		SBcommon.writeFile(this.curFile, this.HTML_HEAD + this.TEXTBOX.value + this.HTML_FOOT, "UTF-8");
-		this.updateResource();
-		if ( this.sidebar ) SBstatus.trace("Saving... " + SBRDF.getProperty("title", this.curRes), 1000);
+		this.saveResource();
+		if ( this.sidebar ) SBstatus.trace("Saving... " + sbDataSource.getProperty("title", this.curRes), 1000);
 		this.change(false);
 	},
 
-	updateResource : function()
+	saveResource : function()
 	{
 		var title = this.TEXTBOX.value.split("\n")[0].replace(/\t/g, " ");
 		if ( title.length > 50 ) title = title.substring(0,50) + "...";
-		SBRDF.updateItem(this.curRes, "title", title);
-		SBRDF.flush();
+		sbDataSource.updateItem(this.curRes, "title", title);
+		sbDataSource.flush();
 	},
 
 	exit : function()
@@ -120,8 +108,8 @@ var SBnote = {
 		else
 		{
 			if ( tabbed ) {
-				if ( top.document.getElementById("content").contentWindow.location.href == "about:blank" ) tabbed = false;
-				SBcommon.loadURL("chrome://scrapbook/content/note.xul?id=" + SBRDF.getProperty("id", aRes), tabbed);
+				if ( top.gBrowser.currentURI.spec == "about:blank" ) tabbed = false;
+				SBcommon.loadURL("chrome://scrapbook/content/note.xul?id=" + sbDataSource.getProperty("id", aRes), tabbed);
 			} else {
 				SBnote.edit(aRes);
 			}

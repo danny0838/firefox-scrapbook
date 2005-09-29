@@ -1,11 +1,11 @@
 <!ENTITY sn.save			"Sauvegarder">
 <!ENTITY sn.close			"Fermer">
 <!ENTITY sn.tools			"Outils">
-<!ENTITY sn.preview			"Afficher HTML">
-<!ENTITY sn.preview.quit	"Quit Preview">
+<!ENTITY sn.preview			"Aperçu HTML">
+<!ENTITY sn.preview.quit	"Quitter l'aperçu">
 <!ENTITY sn.template		"Éditer le modèle HTML">
-<!ENTITY sn.autolinefeed	"Remplissage automatique des lignes">
-<!ENTITY sn.autolinefeed.t	"Ajouter les balises &lt;br&gt; à  la fin  des lignes en mode HTML affiché">
+<!ENTITY sn.autolinefeed	"Retour à la ligne automatique">
+<!ENTITY sn.autolinefeed.t	"Ajouter les balises &lt;br&gt; à  la fin des lignes en mode aperçu HTML">
 <!ENTITY sn.fontsize		"Taille de police">
 <!ENTITY sn.help			"Aide">
 <!ENTITY sn.exit			"Quitter">

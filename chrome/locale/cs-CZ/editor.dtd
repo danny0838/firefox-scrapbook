@@ -1,21 +1,30 @@
 <!ENTITY sb.editor			"ScrapBook Edit Toolbar">
-<!ENTITY sb.editor.inline	"Vložit komentář do výběru">
-<!ENTITY sb.editor.block.insert		"Přidat blokový komentář pro výběr">
-<!ENTITY sb.editor.block.customize	"Upravit CSS pro blokový komentář">
-<!ENTITY sb.editor.block.hide		"Skrýt blokové komentáře">
-<!ENTITY sb.editor.marker	"Zvýraznění výběru">
-<!ENTITY sb.editor.unline	"Odstranit všechny vložené komentáře">
-<!ENTITY sb.editor.unmark	"Odstranit všechna zvýraznění">
-<!ENTITY sb.editor.cutter	"Odstranit výběr">
-<!ENTITY sb.editor.remove.iframe	"Remove All IFRAME Tags">
-<!ENTITY sb.editor.remove.script	"Remove All SCRIPT Tags">
 <!ENTITY sb.editor.eraser	"DOM-Guma: Nástroj pro odstranění vybraného bloku.">
 <!ENTITY sb.editor.undo		"Vrátit">
 <!ENTITY sb.editor.restore	"Opustit změny a obnovit">
 <!ENTITY sb.editor.save		"Uložit změny">
-<!ENTITY sb.editor.find		"Find and Select from the Sidebar Tree">
 <!ENTITY sb.editor.comment	"Zobrazit pole pro komentář">
+<!ENTITY sb.editor.marker			"Zvýraznění výběru">
+<!ENTITY sb.editor.marker.yellow	"Yellow">
+<!ENTITY sb.editor.marker.green		"Green">
+<!ENTITY sb.editor.marker.blue		"Blue">
+<!ENTITY sb.editor.marker.pink		"Pink">
+<!ENTITY sb.editor.unmark.partial	"Remove Highlights in the Selection">
+<!ENTITY sb.editor.unmark.entire	"Odstranit všechna zvýraznění">
+<!ENTITY sb.editor.block.insert		"Přidat blokový komentář pro výběr">
+<!ENTITY sb.editor.block.customize	"Upravit CSS pro blokový komentář">
+<!ENTITY sb.editor.block.hide		"Skrýt blokové komentáře">
+<!ENTITY sb.editor.inline.add		"Vložit komentář do výběru">
+<!ENTITY sb.editor.inline.delete	"Odstranit všechny vložené komentáře">
+<!ENTITY sb.editor.attach.file		"Attach File to Selection">
+<!ENTITY sb.editor.attach.link		"Attach Link to Selection">
+<!ENTITY sb.editor.cutter			"Odstranit výběr">
+<!ENTITY sb.editor.remove.iframe	"Remove All IFRAME Tags">
+<!ENTITY sb.editor.remove.script	"Remove All SCRIPT Tags">
 
-<!ENTITY sb.inline.enter	"Vlož">
-<!ENTITY sb.inline.delete	"Smaž">
+<!ENTITY sb.infobar				"ScrapBook Info Toolbar">
+<!ENTITY sb.infobar.home		"Home">
+<!ENTITY sb.infobar.sitemap		"SiteMap">
+
+<!ENTITY sb.synchronize		"Cerca la pàgina a la barra lateral i selecciona-la">
 

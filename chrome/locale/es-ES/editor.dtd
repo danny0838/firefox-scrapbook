@@ -1,21 +1,30 @@
 <!ENTITY sb.editor			"ScrapBook Edit Toolbar">
-<!ENTITY sb.editor.inline	"Añadir comentario incorporado a la selección">
-<!ENTITY sb.editor.block.insert		"Add Block Comment after Selection">
-<!ENTITY sb.editor.block.customize	"Customize CSS for Block Comments">
-<!ENTITY sb.editor.block.hide		"Hide Block Comments">
-<!ENTITY sb.editor.marker	"Resaltar seleccionado">
-<!ENTITY sb.editor.unline	"Borrar todos comentarios incorporados">
-<!ENTITY sb.editor.unmark	"Borrar resaltado">
-<!ENTITY sb.editor.cutter	"Borrar seleccionado">
-<!ENTITY sb.editor.remove.iframe	"Remove All IFRAME Tags">
-<!ENTITY sb.editor.remove.script	"Remove All SCRIPT Tags">
 <!ENTITY sb.editor.eraser	"Borrador DOM:  Elimina bloques al hacer click en ellos.">
 <!ENTITY sb.editor.undo		"Undo">
 <!ENTITY sb.editor.restore	"Abandonar cambios y restaurar">
 <!ENTITY sb.editor.save		"Guardar">
-<!ENTITY sb.editor.find		"Find and Select from the Sidebar Tree">
 <!ENTITY sb.editor.comment	"Expandir area de comentarios">
+<!ENTITY sb.editor.marker			"Resaltar seleccionado">
+<!ENTITY sb.editor.marker.yellow	"Yellow">
+<!ENTITY sb.editor.marker.green		"Green">
+<!ENTITY sb.editor.marker.blue		"Blue">
+<!ENTITY sb.editor.marker.pink		"Pink">
+<!ENTITY sb.editor.unmark.partial	"Remove Highlights in the Selection">
+<!ENTITY sb.editor.unmark.entire	"Borrar resaltado">
+<!ENTITY sb.editor.block.insert		"Add Block Comment after Selection">
+<!ENTITY sb.editor.block.customize	"Customize CSS for Block Comments">
+<!ENTITY sb.editor.block.hide		"Hide Block Comments">
+<!ENTITY sb.editor.inline.add		"Añadir comentario incorporado a la selección">
+<!ENTITY sb.editor.inline.delete	"Borrar todos comentarios incorporados">
+<!ENTITY sb.editor.attach.file		"Attach File to Selection">
+<!ENTITY sb.editor.attach.link		"Attach Link to Selection">
+<!ENTITY sb.editor.cutter			"Borrar seleccionado">
+<!ENTITY sb.editor.remove.iframe	"Remove All IFRAME Tags">
+<!ENTITY sb.editor.remove.script	"Remove All SCRIPT Tags">
 
-<!ENTITY sb.inline.enter	"Introducir">
-<!ENTITY sb.inline.delete	"Borrar">
+<!ENTITY sb.infobar				"ScrapBook Info Toolbar">
+<!ENTITY sb.infobar.home		"Home">
+<!ENTITY sb.infobar.sitemap		"SiteMap">
+
+<!ENTITY sb.synchronize		"Synchronize with the Sidebar Tree">
 

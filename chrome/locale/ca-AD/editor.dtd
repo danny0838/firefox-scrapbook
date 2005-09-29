@@ -1,21 +1,30 @@
 <!ENTITY sb.editor			"Barra d'eines d'edició de l'ScrapBook">
-<!ENTITY sb.editor.inline	"Afegeix una anotació a la selecció">
-<!ENTITY sb.editor.block.insert		"Afegeix un comentari després de la selecció">
-<!ENTITY sb.editor.block.customize	"Edita l'estil CSS dels comentaris">
-<!ENTITY sb.editor.block.hide		"Amaga els comentaris">
-<!ENTITY sb.editor.marker	"Ressalta la selecció">
-<!ENTITY sb.editor.unline	"Suprimeix totes les anotacions">
-<!ENTITY sb.editor.unmark	"Suprimeix tots els ressaltaments">
-<!ENTITY sb.editor.cutter	"Suprimeix la selecció">
-<!ENTITY sb.editor.remove.iframe	"Suprimeix totes les etiquetes IFRAME">
-<!ENTITY sb.editor.remove.script	"Suprimeix totes les etiquetes SCRIPT">
 <!ENTITY sb.editor.eraser	"Esborrador DOM: Una eina per a suprimir elements d'una pàgina web.">
 <!ENTITY sb.editor.undo		"Desfés">
 <!ENTITY sb.editor.restore	"Abandona els canvis i restaura">
 <!ENTITY sb.editor.save		"Desa els canvis">
-<!ENTITY sb.editor.find		"Cerca la pàgina a la barra lateral i selecciona-la">
 <!ENTITY sb.editor.comment	"Expandeix/Redueix l'àrea de comentaris">
+<!ENTITY sb.editor.marker			"Ressalta la selecció">
+<!ENTITY sb.editor.marker.yellow	"Groc">
+<!ENTITY sb.editor.marker.green		"Verd">
+<!ENTITY sb.editor.marker.blue		"Blau">
+<!ENTITY sb.editor.marker.pink		"Rosa">
+<!ENTITY sb.editor.unmark.partial	"Suprimeix els ressaltaments de la selecció">
+<!ENTITY sb.editor.unmark.entire	"Suprimeix tots els ressaltaments">
+<!ENTITY sb.editor.block.insert		"Afegeix un comentari després de la selecció">
+<!ENTITY sb.editor.block.customize	"Edita l'estil CSS dels comentaris">
+<!ENTITY sb.editor.block.hide		"Amaga els comentaris">
+<!ENTITY sb.editor.inline.add		"Afegeix una anotació a la selecció">
+<!ENTITY sb.editor.inline.delete	"Suprimeix totes les anotacions">
+<!ENTITY sb.editor.attach.file		"Adjunta un fitxer a la selecció">
+<!ENTITY sb.editor.attach.link		"Adjunta un enllaç a la selecció">
+<!ENTITY sb.editor.cutter			"Suprimeix la selecció">
+<!ENTITY sb.editor.remove.iframe	"Suprimeix totes les etiquetes IFRAME">
+<!ENTITY sb.editor.remove.script	"Suprimeix totes les etiquetes SCRIPT">
 
-<!ENTITY sb.inline.enter	"D'acord">
-<!ENTITY sb.inline.delete	"Suprimeix">
+<!ENTITY sb.infobar				"Barra d'eines d'informació de l'ScrapBook">
+<!ENTITY sb.infobar.home		"Inici">
+<!ENTITY sb.infobar.sitemap		"Mapa web">
+
+<!ENTITY sb.synchronize		"Cerca la pàgina a la barra lateral i selecciona-la">
 

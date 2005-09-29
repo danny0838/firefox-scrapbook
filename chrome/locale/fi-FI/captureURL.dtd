@@ -1,8 +1,0 @@
-<!ENTITY sb.url.description	"URL (Kirjoita URLit riveittäin)">
-
-<!ENTITY sb.url.tools		"URL-tunnistin">
-<!ENTITY sb.url.tools.tabs	"Kaikki ikkunan välilehdet">
-<!ENTITY sb.url.tools.local	"Kaikki kansiossa olevat paikalliset HTML:t">
-<!ENTITY sb.url.tools.webox	"WeBoXin oletus.html">
-<!ENTITY sb.url.tools.clear	"Tyhjennä">
-

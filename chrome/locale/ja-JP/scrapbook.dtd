@@ -2,7 +2,7 @@
 
 <!ENTITY sb.new.folder		"新しいフォルダ...">
 <!ENTITY sb.new.note		"新しいノート">
-<!ENTITY sb.toggleallopen	"すべてのフォルダを広げる／たたむ">
+<!ENTITY sb.toggle.all		"すべてのフォルダを広げる／たたむ">
 
 <!ENTITY sb.tools			"ツール">
 <!ENTITY sb.tools.setting	"設定...">
@@ -10,7 +10,8 @@
 <!ENTITY sb.tools.calculate	"データサイズ計算">
 <!ENTITY sb.tools.sorttree	"ツリー全体をソート">
 <!ENTITY sb.tools.directory	"ScrapBookフォルダ">
-<!ENTITY sb.tools.urls		"URL一括取り込み">
+<!ENTITY sb.tools.combine	"結合">
+<!ENTITY sb.tools.multiple	"URL一括取り込み">
 <!ENTITY sb.tools.trade		"インポート/エクスポート">
 <!ENTITY sb.tools.output	"ツリーのHTML出力">
 <!ENTITY sb.tools.backup	"圧縮してバックアップ">

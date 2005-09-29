@@ -12,11 +12,6 @@
 <!ENTITY sb.setting.tree.singleexpand		"Quando si espande una cartella nel diagramma delle directory, contrarre tutte le altre cartelle (come in IE)">
 <!ENTITY sb.setting.tree.quickdelete		"Non richiedere alcuna conferma quando si eliminano gli elementi">
 
-<!ENTITY sb.setting.view.header				"Visualizzare la barra delle informazioni URL ">
-<!ENTITY sb.setting.view.editor				"Visualizzare la barra degli strumenti di ScrapBook per la modifica">
-<!ENTITY sb.setting.view.editor.auto		"Automaticamente quando viene aperta una pagina catturata">
-<!ENTITY sb.setting.view.editor.manual		"Manualmente facendo clic su EDIT nella barra di stato">
-
 <!ENTITY sb.setting.usetabs.d				"Le seguenti azioni verranno eseguite in nuove schede:">
 <!ENTITY sb.setting.usetabs.note			"Apri le note">
 
@@ -25,16 +20,14 @@
 <!ENTITY sb.setting.capture.removescript	"Rimuovere JavaScript (raccomandato)">
 <!ENTITY sb.setting.capture.removescript.d	"Se non selezionato, l'impaginazione potrebbe talvolta non essere salvata correttamente.">
 
-<!ENTITY sb.setting.edit.multilines			"Attiva il commento su più linee">
-<!ENTITY sb.setting.edit.confirmsave.1		"Intervallo per la conferma di salvataggio ogni">
-<!ENTITY sb.setting.edit.confirmsave.2		"min. (0 = nessuna conferma)">
-
-<!ENTITY sb.setting.program.filer			"Programma per visualizzare i file">
-<!ENTITY sb.setting.program.filer.default	"Predefinito (in ambiente Windows, solitamente Explorer)">
-<!ENTITY sb.setting.browse					"Visualizza">
+<!ENTITY sb.button.browse					"Visualizza">
+<!ENTITY sb.button.show						"Mostra cartella">
 
 <!ENTITY sb.setting.data					"Cartella dove conservare i dati">
 <!ENTITY sb.setting.data.default			"Predefinita (nella cartella del proprio profilo)">
+<!ENTITY sb.setting.data.alert				"Attualmente i dati di ScrapBook sono conservati nella cartella del proprio profilo di Firefox. Attenzione: in caso venga eliminata la cartella del proprio profilo di Firefox, selezionando [Elimina file] verranno eliminati anche tutti i dati di ScrapBook.">
+<!ENTITY sb.setting.filer					"Programma per visualizzare i file">
+<!ENTITY sb.setting.filer.default			"Predefinito (in ambiente Windows, solitamente Explorer)">
 
 <!ENTITY sb.setting.restorefavicons			"Ripristina le favicon">
 <!ENTITY sb.setting.restorefavicons.d		"In caso le favicon non vengano correttamente visualizzate, fare clic sul seguente pulsante:">

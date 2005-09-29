@@ -15,15 +15,14 @@
 function SB_initManage()
 {
 	SBstring = document.getElementById("ScrapBookString");
-	SBbaseURL = SBservice.IO.newFileURI(SBcommon.getScrapBookDir()).spec;
 	SB_disablePopupMenus();
-	SBRDF.init();
-	SBstatus.init();
+	sbDataSource.init();
 	SBtreeUtil.init("ScrapBookManageTree", false);
 	SB_initObservers();
-	SBpref.init();
+	SBbaseURL = SBcommon.getBaseHref(sbDataSource.data.URI);
 	SBtree.ref = window.arguments[0];
-	var winTitle = SBRDF.getProperty("title", SBservice.RDF.GetResource(SBtree.ref));
+	SBpref.init();
+	var winTitle = sbDataSource.getProperty("title", SBservice.RDF.GetResource(SBtree.ref));
 	if ( winTitle )
 	{
 		document.getElementById("ScrapBookManageWindow").setAttribute("title", winTitle);
@@ -50,16 +49,17 @@ function SB_openDblClick(aEvent)
 	var curRes = SBtree.builderView.getResourceAtIndex(curIdx);
 	if ( SBtree.view.isContainer(curIdx) )
 	{
-		if ( SBpref.folderclick ) SBtreeUtil.collapseOtherFolders(curIdx);
+		if ( SBpref.folderclick ) SBtreeUtil.collapseFoldersBut(curIdx);
 		return;
 	}
-	var myID   = SBRDF.getProperty("id", curRes);
-	var myType = SBRDF.getProperty("type", curRes);
+	var myID   = sbDataSource.getProperty("id", curRes);
+	var myType = sbDataSource.getProperty("type", curRes);
 	SBcommon.loadURL(SBcommon.getURL(myID, myType), tabbed);
 }
 
 
-function SB_moveIntoFolder()
+
+function SB_sendMultiple()
 {
 	var idxList = SBtreeUtil.getSelection(false, 2);
 	if ( idxList.length < 1 ) return;
@@ -78,9 +78,9 @@ function SB_moveIntoFolder()
 	var tarPar = result.target;
 	for ( i = 0; i < idxList.length; i++ )
 	{
-		SBRDF.moveItem(curResList[i], curParList[i], tarPar, -1);
+		sbDataSource.moveItem(curResList[i], curParList[i], tarPar, -1);
 	}
-	SBRDF.flush();
+	sbDataSource.flush();
 }
 
 
@@ -104,9 +104,9 @@ function SB_deleteMultiple()
 	var rmIDs = [];
 	for ( var i = 0; i < idxList.length; i++ )
 	{
-		rmIDs = rmIDs.concat ( SBRDF.deleteItemDescending(curResList[i], curParList[i]) );
+		rmIDs = rmIDs.concat ( sbDataSource.deleteItemDescending(curResList[i], curParList[i]) );
 	}
-	SBRDF.flush();
+	sbDataSource.flush();
 	for ( var i = 0; i < rmIDs.length; i++ )
 	{
 		if ( rmIDs[i].length == 14 ) SBcommon.removeDirSafety(SBcommon.getContentDir(rmIDs[i]), true);
@@ -124,7 +124,6 @@ function SB_validateMultipleSelection(aIdxList)
 	}
 	return true;
 }
-
 
 
 SBdropUtil.moveMultiple = function()
@@ -155,7 +154,7 @@ SBdropUtil.moveMultiple = function()
 			this.moveCurrentToTarget(curResList[i], curParList[i], tarResList[i], tarParList[i]);
 		}
 	}
-	SBRDF.flush();
+	sbDataSource.flush();
 }
 
 

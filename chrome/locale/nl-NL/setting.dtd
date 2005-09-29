@@ -12,11 +12,6 @@
 <!ENTITY sb.setting.tree.singleexpand	"Alle andere mappen inklappen tijdens het uitvouwen van een map">
 <!ENTITY sb.setting.tree.quickdelete	"Geen bevestiging bij verwijderen">
 
-<!ENTITY sb.setting.view.header			"URL-infobalk tonen">
-<!ENTITY sb.setting.view.editor			"Bewerkingsknoppenbalk tonen">
-<!ENTITY sb.setting.view.editor.auto	"Automatisch bij het bekijken van een geopende pagina">
-<!ENTITY sb.setting.view.editor.manual	"Handmatig door het EDIT-pictogram aan te klikken in de statusbalk">
-
 <!ENTITY sb.setting.usetabs.d			"Voor aangevinkte acties nieuwe tabbladen gebruiken:">
 <!ENTITY sb.setting.usetabs.note		"Notities in tabbladen openen">
 
@@ -25,16 +20,14 @@
 <!ENTITY sb.setting.capture.removescript	"JavaScript verwijderen (aanbevolen)">
 <!ENTITY sb.setting.capture.removescript.d	"Als het vinkje uitstaat, wordt soms de pagina-layout niet bewaard.">
 
-<!ENTITY sb.setting.edit.multilines		"Meerregelig commentaar toestaan">
-<!ENTITY sb.setting.edit.confirmsave.1	"Interval bij bevestiging 'Bewaren'">
-<!ENTITY sb.setting.edit.confirmsave.2	"min.  (0 = nooit bevestigen)">
-
-<!ENTITY sb.setting.program.filer			"Programma voor het 'Bestanden tonen' menu">
-<!ENTITY sb.setting.program.filer.default	"Standaard (voor Windows de Verkenner)">
-<!ENTITY sb.setting.browse					"Zoeken">
+<!ENTITY sb.button.browse			"Zoeken">
+<!ENTITY sb.button.show				"Map tonen">
 
 <!ENTITY sb.setting.data			"Locatie om gegevens op te slaan">
 <!ENTITY sb.setting.data.default	"Standaard (in uw profielmap)">
+<!ENTITY sb.setting.data.alert		"Currently your ScrapBook data are stored in your Firefox 'Profile Folder'. Please note, if you select [Delete Files] when deleting the Firefox profile, All ScrapBook data will be removed.">
+<!ENTITY sb.setting.filer			"Programma voor het 'Bestanden tonen' menu">
+<!ENTITY sb.setting.filer.default	"Standaard (voor Windows de Verkenner)">
 
 <!ENTITY sb.setting.restorefavicons		"Voorkeurspictogrammen herstellen">
 <!ENTITY sb.setting.restorefavicons.d	"Als de voorkeurspictogrammen niet worden vertoond, op deze knop drukken:">

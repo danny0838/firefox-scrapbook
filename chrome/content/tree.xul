@@ -11,7 +11,7 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/tree.js" />
 
 	<!--keyset-->
-	<keyset id="ScrapBookWindowKey">
+	<keyset id="ScrapBookGenericKeyset">
 		<key keycode="VK_ESCAPE" oncommand="window.close();"/>
 		<key keycode="VK_F5"     oncommand="window.location.reload();"/>
 	</keyset>
@@ -21,23 +21,23 @@
 		<menuitem id="ScrapBookTreePopupO" label="&sb.open;"           oncommand="SB_open(false, false);" default="true" />
 		<menuitem id="ScrapBookTreePopupT" label="&sb.open.newtab;"    oncommand="SB_open(true, false);" />
 		<menuitem id="ScrapBookTreePopupE" label="&sb.open.tab;"       oncommand="SB_open(true, false);" />
-		<menuitem id="ScrapBookTreePopupS" label="&sb.open.source;"    oncommand="SB_transmit('S');" />
+		<menuitem id="ScrapBookTreePopupS" label="&sb.open.source;"    oncommand="SB_forward('S');" />
 		<!--folder-->
 		<menuitem id="ScrapBookTreePopupF" label="&sb.folder.toggle;"  oncommand="SB_open(false, true);" hidden="true" />
 		<menuitem id="ScrapBookTreePopupA" label="&sb.folder.openall;" oncommand="SB_openAllInTabs();"   hidden="true" />
-		<menuitem id="ScrapBookTreePopupV" label="&sb.folder.combine;" oncommand="SB_transmit('C');"     hidden="true" />
+		<menuitem id="ScrapBookTreePopupV" label="&sb.folder.combine;" oncommand="SB_forward('C');"      hidden="true" />
 		<menuseparator />
-		<menuitem id="ScrapBookTreePopupL" label="&sb.show.files;"     oncommand="SB_transmit('L');" />
+		<menuitem id="ScrapBookTreePopupL" label="&sb.show.files;"     oncommand="SB_forward('L');" />
 		<!--folder-->
-		<menuitem id="ScrapBookTreePopupM" label="&sb.folder.manage;"  oncommand="SB_transmit('M');" hidden="true" />
-		<menuitem id="ScrapBookTreePopupZ" label="&sb.sort.folder;..." oncommand="SB_transmit('Z');" hidden="true" />
+		<menuitem id="ScrapBookTreePopupM" label="&sb.folder.manage;"  oncommand="SB_forward('M');" hidden="true" />
+		<menuitem id="ScrapBookTreePopupZ" label="&sb.sort.folder;..." oncommand="SB_forward('Z');" hidden="true" />
 		<menuseparator />
 		<menuitem id="ScrapBookTreePopupN" class="menuitem-iconic" label="&sb.new.folder;" oncommand="SB_createFolder();" />
 		<menuitem id="ScrapBookTreePopupC" class="menuitem-iconic" label="&sb.new.note;"   oncommand="SB_createNote();" />
 		<menuseparator />
 		<menuitem id="ScrapBookTreePopupD" class="menuitem-iconic" label="&sb.delete;"     oncommand="SB_delete();" />
 		<menuseparator />
-		<menuitem id="ScrapBookTreePopupP" class="menuitem-iconic" label="&sb.property;"   oncommand="SB_transmit('P');" />
+		<menuitem id="ScrapBookTreePopupP" class="menuitem-iconic" label="&sb.property;"   oncommand="SB_forward('P');" />
 	</popup>
 
 	<!--tree-->

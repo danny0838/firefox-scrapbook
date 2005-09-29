@@ -1,0 +1,6 @@
+<!ENTITY sb.combine.select		"ページの選択">
+<!ENTITY sb.combine.select.d	"結合したいページを順番にダブルクリックしてください。">
+<!ENTITY sb.combine.preview		"プレビュー">
+<!ENTITY sb.combine.preview.d	"プレビューを確認し、よろしければ結合ボタンを押してください。">
+<!ENTITY sb.combine.option.header	"各ページの先頭に情報ヘッダを付加する">
+<!ENTITY sb.combine.option.remove	"結合完了後、結合された元のページを削除する">
