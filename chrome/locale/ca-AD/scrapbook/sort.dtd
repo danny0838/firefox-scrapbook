@@ -1,0 +1,7 @@
+<!ENTITY sb.sort			"Ordenació">
+<!ENTITY sb.sort.title.asc	"Ordena per títol (A &gt; Z)">
+<!ENTITY sb.sort.title.desc	"Ordena per títol (Z &gt; A)">
+<!ENTITY sb.sort.date.asc	"Cronològic">
+<!ENTITY sb.sort.date.desc	"Cronològic invers">
+<!ENTITY sb.sort.recursive	"Ordena recursivament les subcarpetes">
+<!ENTITY sb.sort.confirm	"Avís: No podreu desfer aquesta operació. Segur que voleu ordenar tot l'arbre?">

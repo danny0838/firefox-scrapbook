@@ -1,0 +1,18 @@
+<!ENTITY sb.title				"Dosszié">
+<!ENTITY sb.capture.partial		"Kijelölés rögzítése">
+<!ENTITY sb.capture.partial.as	"Kijelölés rögzítése másként...">
+<!ENTITY sb.capture.entire		"Oldal rögzítése">
+<!ENTITY sb.capture.entire.as	"Oldal rögzítése másként...">
+<!ENTITY sb.capture.frame		"Keret rögzítése">
+<!ENTITY sb.capture.frame.as	"Keret rögzítése másként...">
+<!ENTITY sb.capture.target		"Hivatkozás rögzítése">
+<!ENTITY sb.capture.target.as	"Hivatkozás rögzítése másként...">
+
+<!ENTITY sb.capture.folder.root		"Gyökérmappa">
+<!ENTITY sb.capture.folder.select	"Mappa kiválasztása">
+
+<!ENTITY sb.key.sidebar		"K">
+<!ENTITY sb.key.editor		"J">
+<!ENTITY sb.key.capture		"L">
+<!ENTITY sb.key.capture.as	"K">
+

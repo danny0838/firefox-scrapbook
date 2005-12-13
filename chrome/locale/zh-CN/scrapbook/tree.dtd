@@ -1,0 +1,18 @@
+<!ENTITY sb.open		"打开">
+<!ENTITY sb.open.tab	"在标签页中打开">
+<!ENTITY sb.open.newtab	"在新标签页中打开">
+<!ENTITY sb.open.source	"打开原始链接">
+<!ENTITY sb.show.files	"查看文件">
+<!ENTITY sb.delete		"删除">
+<!ENTITY sb.property	"属性">
+
+<!ENTITY sb.folder.toggle	"展开/折叠文件夹">
+<!ENTITY sb.folder.openall	"在标签页中打开所有项目">
+<!ENTITY sb.folder.combine	"合并在同一标签页中打开">
+<!ENTITY sb.folder.manage	"管理文件夹...">
+
+<!ENTITY sb.new.folder	"新建文件夹...">
+<!ENTITY sb.new.note	"新建便签">
+
+<!ENTITY sb.sort.folder	"排列项目列表">
+

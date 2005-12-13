@@ -1,0 +1,137 @@
+<?xml version="1.0" ?>
+
+<!--skin-->
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+<?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
+
+<!--overlay-->
+<?xul-overlay href="chrome://scrapbook/content/tree.xul"?>
+
+<!--locale-->
+<!DOCTYPE window [
+<!ENTITY % scrapbookDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+%scrapbookDTD;
+<!ENTITY % propertyDTD  SYSTEM "chrome://scrapbook/locale/property.dtd" >
+%propertyDTD;
+<!ENTITY % treeDTD      SYSTEM "chrome://scrapbook/locale/tree.dtd" >
+%treeDTD;
+]>
+
+<!--window-->
+<window id="ScrapBookManageWindow"
+        title="&sb.tools.manage; - &sb.title;"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        xmlns:SB="http://amb.vis.ne.jp/mozilla/scrapbook-rdf#"
+        width="640" height="480" persist="width height screenX screenY"
+        onload="SB_initManage();"
+        windowtype="scrapbook">
+
+	<!--JavaScript-->
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapbook.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/manage.js" />
+	<!--JavaScript for Drag And Drop-->
+	<script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
+	<script type="application/x-javascript" src="chrome://global/content/nsTransferable.js" />
+
+	<!--StringBundle-->
+	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/scrapbook.properties" />
+
+	<!--keyset-->
+	<keyset id="ScrapBookGenericKeyset" />
+
+	<!--popup-->
+	<popupset>
+		<popup id="ScrapBookTreePopup" />
+	</popupset>
+
+	<!--toolbox-->
+	<toolbox class="plain">
+		<!--main toolbar-->
+		<toolbar id="ScrapBookMainToolbar">
+			<toolbarbutton tooltiptext="&sb.new.folder;" image="chrome://scrapbook/skin/tool_createfolder.png" oncommand="SB_createFolder();" />
+			<toolbarbutton tooltiptext="&sb.toggle.all;" image="chrome://scrapbook/skin/tool_togglefolder.png" oncommand="sbTreeHandler.toggleAllFolders();" />
+			<toolbarseparator />
+			<toolbarbutton label="&sb.move;..."     image="chrome://scrapbook/skin/tool_selectfolder.png" oncommand="SB_sendMultiple();" />
+			<toolbarseparator />
+			<toolbarbutton label="&sb.delete;..."   image="chrome://scrapbook/skin/menu_delete.png"   oncommand="SB_delete();" />
+			<toolbarseparator />
+			<toolbarbutton label="&sb.property;..." image="chrome://scrapbook/skin/menu_property.png" oncommand="SB_forward('P');" />
+		</toolbar>
+	</toolbox>
+
+	<!--tree-->
+	<tree id="ScrapBookManageTree"
+	      datasources="rdf:null"
+	      ref="urn:scrapbook:root"
+	      flags="dont-build-content"
+	      onclick="sbTreeHandler.onClick(event);"
+	      ondblclick="sbTreeHandler.onDblClick(event);"
+	      onkeypress="sbTreeHandler.onKeyPress(event);"
+	      ondraggesture="if (event.originalTarget.localName == 'treechildren') nsDragAndDrop.startDrag(event,SBdragDropObserver);event.stopPropagation();"
+	      ondragover="nsDragAndDrop.dragOver(event,SBdragDropObserver);event.stopPropagation();"
+	      ondragdrop="nsDragAndDrop.drop(event,SBdragDropObserver);event.stopPropagation();"
+	      contextmenu="ScrapBookTreePopup"
+	      enableColumnDrag="true"
+	      seltype="multiple"
+	      class="plain" flex="1">
+
+		<treecols>
+			<treecol id="ScrapBookTreecolTitle" flex="6" label="&sb.prop.title;" primary="true"
+				class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title"
+				persist="width hidden ordinal" />
+			<splitter class="tree-splitter" />
+			<treecol id="ScrapBookTreecolSource" flex="3" label="&sb.prop.source;"
+				class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#source"
+				persist="width hidden ordinal" />
+			<splitter class="tree-splitter" />
+			<treecol id="ScrapBookTreecolType" flex="1" label="&sb.prop.type;"
+				class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type"
+				hidden="true"
+				persist="width hidden ordinal" />
+			<splitter class="tree-splitter" />
+			<treecol id="ScrapBookTreecolIcon" flex="1" label="&sb.prop.icon;"
+				class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon"
+				hidden="true"
+				persist="width hidden ordinal" />
+			<splitter class="tree-splitter" />
+			<treecol id="ScrapBookTreecolChars" flex="1" label="&sb.prop.encode;"
+				class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#chars"
+				hidden="true"
+				persist="width hidden ordinal" />
+			<splitter class="tree-splitter" />
+			<treecol id="ScrapBookTreecolComment" flex="3" label="&sb.prop.comment;"
+				class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#comment"
+				persist="width hidden ordinal" />
+			<splitter class="tree-splitter" />
+			<treecol id="ScrapBookTreecolID" flex="2" label="&sb.prop.id.date;"
+				class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#id"
+				persist="width hidden ordinal" />
+		</treecols>
+
+		<template>
+			<rule>
+				<treechildren flex="1">
+					<treeitem uri="rdf:*">
+						<treerow>
+							<treecell id="ScrapBookTreeItem"
+							          label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title"
+							          src="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon"
+							          properties="Name rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type"/>
+							<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#source" />
+							<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
+							<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon" />
+							<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#chars" />
+							<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#comment" />
+							<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#id" />
+						</treerow>
+					</treeitem>
+				</treechildren>
+			</rule>
+		</template>
+	</tree>
+
+	<sidebarheader id="ScrapBookStatusBar" />
+
+</window>

@@ -1,0 +1,7 @@
+<!ENTITY sb.sort			"Sortera">
+<!ENTITY sb.sort.title.asc	"Sortera efter namn (A to Z)">
+<!ENTITY sb.sort.title.desc	"Sortera efter namn (Z to A)">
+<!ENTITY sb.sort.date.asc	"Kronologiskt">
+<!ENTITY sb.sort.date.desc	"Omvänt kronologiskt">
+<!ENTITY sb.sort.recursive	"Sortera undermappar rekursivt">
+<!ENTITY sb.sort.confirm	"Varning: Du kan inte ångra vald åtgärd. Vill du sortera hela trädet?">

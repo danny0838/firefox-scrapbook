@@ -1,0 +1,12 @@
+<!ENTITY sb.repair.rdfFile			"Odtwórz plik scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript	"Spróbuj tej opcji jeżeli drzewo katalogów nagle znika">
+<!ENTITY sb.repair.rdfFile.select	"Wybierz plik kopi zapasowej do odtworzenia">
+<!ENTITY sb.repair.rdfFile.file		"Plik">
+<!ENTITY sb.repair.rdfFile.time		"Data utworzenia">
+<!ENTITY sb.repair.rdfFile.size		"Wielkość">
+<!ENTITY sb.repair.rdfFile.complete	"Zakończono. Proszę ponownie uruchomić Firefoksa.">
+
+<!ENTITY sb.repair.favicons				"Odtwórz favicony w drzewie katalogów">
+<!ENTITY sb.repair.favicons.descript	"Spróbuj tej opcji jeżeli nagle znikają favicony">
+<!ENTITY sb.repair.favicons.complete	"Zakończono.">
+

@@ -1,0 +1,7 @@
+<!ENTITY sb.sort			"정렬">
+<!ENTITY sb.sort.title.asc	"제목으로 정렬 (A &gt; Z)">
+<!ENTITY sb.sort.title.desc	"제목으로 정렬 (Z &gt; A)">
+<!ENTITY sb.sort.date.asc	"날짜로 정렬 (오래된 순)">
+<!ENTITY sb.sort.date.desc	"날짜로 정렬 (새로운 순)">
+<!ENTITY sb.sort.recursive	"서브 폴더도 재귀적으로 정렬하기">
+<!ENTITY sb.sort.confirm	"주의: 이 실행은 되돌릴 수 없습니다.">

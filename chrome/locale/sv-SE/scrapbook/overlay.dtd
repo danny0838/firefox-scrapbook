@@ -1,0 +1,18 @@
+<!ENTITY sb.title				"ScrapBook">
+<!ENTITY sb.capture.partial		"Spara markering i Scrapbook">
+<!ENTITY sb.capture.partial.as	"Spara markering i Scrapbook som...">
+<!ENTITY sb.capture.entire		"Spara sidan i Scrapbook">
+<!ENTITY sb.capture.entire.as	"Spara sidan i Scrapbook som...">
+<!ENTITY sb.capture.frame		"Spara Frame i Scrapbook">
+<!ENTITY sb.capture.frame.as	"Spara Frame i Scrapbook som...">
+<!ENTITY sb.capture.target		"Spara länk i Scrapbook">
+<!ENTITY sb.capture.target.as	"Spara länk i Scrapbook som...">
+
+<!ENTITY sb.capture.folder.root		"Toppnivå">
+<!ENTITY sb.capture.folder.select	"Välj Mapp">
+
+<!ENTITY sb.key.sidebar		"K">
+<!ENTITY sb.key.editor		"J">
+<!ENTITY sb.key.capture		"L">
+<!ENTITY sb.key.capture.as	"K">
+

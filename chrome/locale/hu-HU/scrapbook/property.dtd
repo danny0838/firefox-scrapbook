@@ -1,0 +1,20 @@
+<!ENTITY sb.prop.date		"Dátum">
+<!ENTITY sb.prop.type		"Típus">
+<!ENTITY sb.prop.title		"Név">
+<!ENTITY sb.prop.encode		"Kódolás">
+<!ENTITY sb.prop.icon		"Ikon">
+<!ENTITY sb.prop.source		"Webcím">
+<!ENTITY sb.prop.comment	"Megjegyzés">
+<!ENTITY sb.prop.content	"Tartalom">
+<!ENTITY sb.prop.size		"Méret">
+<!ENTITY sb.prop.id.date	"ID (idő)">
+<!ENTITY sb.prop.folder		"Mappa">
+
+<!ENTITY sb.prop.general	"Általános információ">
+
+<!ENTITY sb.prop.icon.change	"Csere">
+<!ENTITY sb.prop.icon.default	"Alapértelmezett">
+<!ENTITY sb.prop.icon.favicon	"Favicon kiválasztása">
+<!ENTITY sb.prop.icon.custom	"Felhasználói ikon kiválasztása">
+<!ENTITY sb.prop.mark			"Megjelölés">
+

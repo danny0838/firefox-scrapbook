@@ -1,0 +1,18 @@
+<!ENTITY sb.open			"Megnyitás">
+<!ENTITY sb.open.tab		"Megnyitás fülön">
+<!ENTITY sb.open.newtab		"Megnyitás új fülön">
+<!ENTITY sb.open.source		"A forráswebcím megnyitása">
+<!ENTITY sb.show.files		"Fájlok megjelenítése">
+<!ENTITY sb.delete			"Törlés">
+<!ENTITY sb.property		"Tulajdonságok">
+
+<!ENTITY sb.folder.toggle	"Kibontás/Összecsukás">
+<!ENTITY sb.folder.openall	"Az összes megnyitása füleken">
+<!ENTITY sb.folder.combine	"Megnyitás kombinált nézetben">
+<!ENTITY sb.folder.manage	"Mappa kezelése...">
+
+<!ENTITY sb.new.folder		"Új mappa...">
+<!ENTITY sb.new.note		"Új jegyzet">
+
+<!ENTITY sb.sort.folder		"Mappa rendezése">
+

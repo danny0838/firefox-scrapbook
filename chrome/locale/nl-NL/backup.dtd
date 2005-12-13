@@ -1,7 +1,0 @@
-<!ENTITY sb.backup.d		"Alle gegevens van ScrapBook backuppen met compressie">
-<!ENTITY sb.backup.program	"Compressieprogramma">
-<!ENTITY sb.backup.file		"Backupbestand">
-<!ENTITY sb.backup.browse	"Zoeken">
-<!ENTITY sb.backup.arg		"Opdrachtregel voor opmerkingen">
-<!ENTITY sb.backup.arg.d1	"&#37;dst is het pad naar het backupbestand">
-<!ENTITY sb.backup.arg.d2	"&#37;src is het pad naar de ScrapBookmap">

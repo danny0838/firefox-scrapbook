@@ -1,0 +1,30 @@
+<!ENTITY sb.editor			"Barre d'outil d'édition ScrapBook">
+<!ENTITY sb.editor.eraser	"DOM Eraser: un outil pour supprimer un bloc sélectionné.">
+<!ENTITY sb.editor.undo		"Annuler">
+<!ENTITY sb.editor.restore	"Abandonner les changements et restaurer">
+<!ENTITY sb.editor.save		"Sauvegarder les changements">
+<!ENTITY sb.editor.comment	"Déployer la zone de commentaire">
+<!ENTITY sb.editor.block			"Commentaire de bloc">
+<!ENTITY sb.editor.block.insert		"Ajouter un commentaire de bloc après la sélection">
+<!ENTITY sb.editor.block.hide		"Cacher les commentaires de bloc">
+<!ENTITY sb.editor.inline.add		"Ajouter un commentaire en ligne sur la sélection">
+<!ENTITY sb.editor.inline.delete	"Supprimer tous les commentaires en ligne">
+<!ENTITY sb.editor.attach.file		"Attacher un fichier à la sélection">
+<!ENTITY sb.editor.attach.link		"Attacher un lien à la sélection">
+<!ENTITY sb.editor.cutter			"Supprimer la sélection">
+<!ENTITY sb.editor.remove.iframe	"Supprimer toutes les balises IFRAME">
+<!ENTITY sb.editor.remove.script	"Supprimer toutes les balises SCRIPT">
+
+<!ENTITY sb.highlighter				"Surligneur">
+<!ENTITY sb.highlighter.remove		"Supprimer les surlignages de la sélection">
+<!ENTITY sb.highlighter.remove.all	"Supprimer tous les surlignages">
+<!ENTITY sb.customize				"Personnaliser">
+
+<!ENTITY sb.infobar.openSource	"Ouvrir l'URL de la source">
+<!ENTITY sb.infobar.showSitemap	"Montrer &sb.infobar.sitemap;">
+<!ENTITY sb.infobar.showInfobar	"Montrer la barre d'information">
+<!ENTITY sb.infobar.home		"Origine">
+<!ENTITY sb.infobar.sitemap		"Plan du site">
+
+<!ENTITY sb.locate		"Synchroniser avec l'arborescence de la barre latérale">
+

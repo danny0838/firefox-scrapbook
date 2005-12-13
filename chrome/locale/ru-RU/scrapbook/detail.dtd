@@ -1,0 +1,16 @@
+<!ENTITY sb.detail					"Детали сохранения">
+<!ENTITY sb.detail.new.folder		"Новая папка">
+<!ENTITY sb.detail.select.folder	"Выбрать папку">
+
+<!ENTITY sb.detail.linked.file		"Загрузить ссылки">
+<!ENTITY sb.detail.linked.image		"Изображения">
+<!ENTITY sb.detail.linked.sound		"Аудио">
+<!ENTITY sb.detail.linked.movie		"Фильмы">
+<!ENTITY sb.detail.linked.archive	"Архивы">
+<!ENTITY sb.detail.linked.custom	"Вручную">
+
+<!ENTITY sb.detail.linked.page			"Многоуровневый захват">
+<!ENTITY sb.detail.linked.page2			"Захватить связанные страницы">
+<!ENTITY sb.detail.linked.page.depth	"До следующих ссылок">
+<!ENTITY sb.detail.linked.page.text		"После завершения захватов, все страницы будут связаны между собой.">
+

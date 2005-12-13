@@ -1,0 +1,7 @@
+<!ENTITY sb.backup.d		"Effettua il backup di tutti i dati di ScrapBook comprimendoli.">
+<!ENTITY sb.backup.program	"Programma per comprimere i dati">
+<!ENTITY sb.backup.file		"Destinazione del file di backup">
+<!ENTITY sb.backup.browse	"Visualizza">
+<!ENTITY sb.backup.arg		"Argomenti linea di comando">
+<!ENTITY sb.backup.arg.d1	"&#37;dst è il percorso per i file di backup.">
+<!ENTITY sb.backup.arg.d2	"&#37;src è il percorso per la cartella di ScrapBook.">

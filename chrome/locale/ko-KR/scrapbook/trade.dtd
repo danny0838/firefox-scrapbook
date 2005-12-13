@@ -1,0 +1,4 @@
+<!ENTITY sb.trade.import	"내보내기">
+<!ENTITY sb.trade.export	"가져오기">
+<!ENTITY sb.trade.restore	"복구하는 폴더 구조로 가져오기">
+<!ENTITY sb.trade.time	"내보내기한 날짜">

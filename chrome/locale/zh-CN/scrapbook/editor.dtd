@@ -1,0 +1,30 @@
+<!ENTITY sb.editor					"ScrapBook 编辑工具栏">
+<!ENTITY sb.editor.eraser			"DOM 橡皮: 单击页面上的元素可以将该部分删除。">
+<!ENTITY sb.editor.undo				"撤销">
+<!ENTITY sb.editor.restore			"全部还原">
+<!ENTITY sb.editor.save				"保存">
+<!ENTITY sb.editor.comment			"展开注释区">
+<!ENTITY sb.editor.block			"批注">
+<!ENTITY sb.editor.block.insert		"选择一区域在其后插入批注">
+<!ENTITY sb.editor.block.hide		"隐藏批注">
+<!ENTITY sb.editor.inline.add		"为所选内容添加提示">
+<!ENTITY sb.editor.inline.delete	"删除所有提示">
+<!ENTITY sb.editor.attach.file		"为所选内容附加文件">
+<!ENTITY sb.editor.attach.link		"为所选内容附加链接">
+<!ENTITY sb.editor.cutter			"删除所选内容">
+<!ENTITY sb.editor.remove.iframe	"删除所有 IFRAME 标签">
+<!ENTITY sb.editor.remove.script	"删除所有 SCRIPT 标签">
+
+<!ENTITY sb.highlighter				"高亮标记">
+<!ENTITY sb.highlighter.remove		"取消所选高亮显示">
+<!ENTITY sb.highlighter.remove.all	"取消所有高亮显示">
+<!ENTITY sb.customize				"自定义">
+
+<!ENTITY sb.infobar.openSource	"打开原始链接">
+<!ENTITY sb.infobar.showSitemap	"Show &sb.infobar.sitemap;">
+<!ENTITY sb.infobar.showInfobar	"Show Info Toolbar">
+<!ENTITY sb.infobar.home	"主页">
+<!ENTITY sb.infobar.sitemap	"网站地图">
+
+<!ENTITY sb.locate		"与侧栏列表同步">
+

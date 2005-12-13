@@ -1,0 +1,28 @@
+
+overlay	chrome://browser/content/browser.xul	chrome://scrapbook/content/overlay.xul
+content	scrapbook	jar:chrome/scrapbook.jar!/content/scrapbook/	xpcnativewrappers=no
+
+skin	scrapbook	classic/1.0	jar:chrome/scrapbook.jar!/skin/classic/scrapbook/
+style	chrome://browser/content/browser.xul	chrome://scrapbook/skin/overlay.css
+style	chrome://global/content/customizeToolbar.xul	chrome://scrapbook/skin/overlay.css
+
+locale	scrapbook	en-US	jar:chrome/scrapbook.jar!/locale/en-US/scrapbook/
+locale	scrapbook	ja-JP	jar:chrome/scrapbook.jar!/locale/ja-JP/scrapbook/
+locale	scrapbook	zh-TW	jar:chrome/scrapbook.jar!/locale/zh-TW/scrapbook/
+locale	scrapbook	it-IT	jar:chrome/scrapbook.jar!/locale/it-IT/scrapbook/
+locale	scrapbook	de-DE	jar:chrome/scrapbook.jar!/locale/de-DE/scrapbook/
+locale	scrapbook	es-ES	jar:chrome/scrapbook.jar!/locale/es-ES/scrapbook/
+locale	scrapbook	fr-FR	jar:chrome/scrapbook.jar!/locale/fr-FR/scrapbook/
+locale	scrapbook	zh-CN	jar:chrome/scrapbook.jar!/locale/zh-CN/scrapbook/
+locale	scrapbook	sv-SE	jar:chrome/scrapbook.jar!/locale/sv-SE/scrapbook/
+locale	scrapbook	fi-FI	jar:chrome/scrapbook.jar!/locale/fi-FI/scrapbook/
+locale	scrapbook	cs-CZ	jar:chrome/scrapbook.jar!/locale/cs-CZ/scrapbook/
+locale	scrapbook	ru-RU	jar:chrome/scrapbook.jar!/locale/ru-RU/scrapbook/
+locale	scrapbook	ga-IE	jar:chrome/scrapbook.jar!/locale/ga-IE/scrapbook/
+locale	scrapbook	nl-NL	jar:chrome/scrapbook.jar!/locale/nl-NL/scrapbook/
+locale	scrapbook	pl-PL	jar:chrome/scrapbook.jar!/locale/pl-PL/scrapbook/
+locale	scrapbook	ca-AD	jar:chrome/scrapbook.jar!/locale/ca-AD/scrapbook/
+locale	scrapbook	pt-BR	jar:chrome/scrapbook.jar!/locale/pt-BR/scrapbook/
+locale	scrapbook	ko-KR	jar:chrome/scrapbook.jar!/locale/ko-KR/scrapbook/
+locale	scrapbook	hu-HU	jar:chrome/scrapbook.jar!/locale/hu-HU/scrapbook/
+

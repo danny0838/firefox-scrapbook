@@ -1,0 +1,35 @@
+<!ENTITY sb.setting				"Configurações">
+<!ENTITY sb.setting.general		"Geral">
+<!ENTITY sb.setting.usetabs		"Usar Abas">
+<!ENTITY sb.setting.advance		"Avançado">
+<!ENTITY sb.setting.capture		"Capturar">
+<!ENTITY sb.setting.editing		"Editar">
+<!ENTITY sb.setting.program		"Programas">
+
+<!ENTITY sb.setting.browser.submenu		"Habilitar submenu dentro do menu de contexto do navegador (necessário reiniciar)">
+<!ENTITY sb.setting.capture.detail		"Mostrar diálogo 'Detalhe da Captura' quando capturar através de arrastar-e-soltar no Painel">
+<!ENTITY sb.setting.capture.notify		"Mostrar notificação 'Captura Completa' (funciona somente com Windows)">
+<!ENTITY sb.setting.tree.singleexpand	"Quando expandir uma pasta, recolher todas as outras (como nos Favoritos do IE)">
+<!ENTITY sb.setting.tree.quickdelete	"Não pedir confirmação para apagar">
+
+<!ENTITY sb.setting.usetabs.d			"Ações selecionadas usam novas abas.">
+<!ENTITY sb.setting.usetabs.note		"Abrir anotações em abas.">
+
+<!ENTITY sb.setting.capture.utf8encode		"Converter para a codificação UTF-8 (Recomendado)">
+<!ENTITY sb.setting.capture.utf8encode.d	"Se desabilitado, alguns caracteres podem mudar para '?'.">
+<!ENTITY sb.setting.capture.removescript	"Remover JavaScript (Recomendado)">
+<!ENTITY sb.setting.capture.removescript.d	"Se desabilitado, muitos problemas serão causados pelo JavaScript.">
+
+<!ENTITY sb.highlighter.tips		"DICA: Você pode realçar a seleção pressionando as teclas 1 ou 2 ou 3 ou 4.">
+<!ENTITY sb.setting.block.style		"Folha de Estilos">
+
+<!ENTITY sb.button.browse	"Navegar">
+<!ENTITY sb.button.show		"Mostrar Pasta">
+
+<!ENTITY sb.setting.data				"Local para Salvar Dados">
+<!ENTITY sb.setting.data.default		"Padrão (Na Pasta do seu Perfil)">
+<!ENTITY sb.setting.data.explain		"Selecione a pasta para o 'ScrapBook' armazenar dados coletados.">
+<!ENTITY sb.setting.data.alert			"Atualmente os dados do seu ScrapBook estão armazenados na pasta do seu Perfil do Firefox. Por favor note que, se você selecionar [Apagar Arquivos] ao remover seu Perfil do Firefox, todos os dados do ScrapBook também serão removidos.">
+<!ENTITY sb.setting.filer				"Programa para navegação de arquivos">
+<!ENTITY sb.setting.filer.default		"Padrão (No Windows, talvez Explorer.)">
+

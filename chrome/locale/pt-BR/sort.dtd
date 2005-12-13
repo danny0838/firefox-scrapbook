@@ -1,6 +1,0 @@
-<!ENTITY sb.sort	"Ordenar">
-<!ENTITY sb.sort.title.asc		"Ordenar por Título (A &gt; Z)">
-<!ENTITY sb.sort.title.desc		"Ordenar por Título (Z &gt; A)">
-<!ENTITY sb.sort.date.asc		"Por Data">
-<!ENTITY sb.sort.date.desc		"Por Data Reversa">
-<!ENTITY sb.sort.recursive		"Ordenar Sub-Pastas Recursivamente">

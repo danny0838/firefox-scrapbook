@@ -1,0 +1,9 @@
+<!ENTITY sb.multiple.url	"URL (L&#237;on isteach na URL l&#237;ne-ar-l&#237;ne)">
+
+<!ENTITY sb.multiple.detector		"Brathad&#225;ir URL">
+<!ENTITY sb.multiple.detector.plink	"Gach Nasc sa Leathanach">
+<!ENTITY sb.multiple.detector.slink	"Gach Nasc sa Roghn&#250;">
+<!ENTITY sb.multiple.detector.tabs	"Gach T&#225;b Oscailte sa Fhuinneoig">
+<!ENTITY sb.multiple.detector.local	"Gach HTML Aiti&#250;il f&#233; an Comhadlann">
+<!ENTITY sb.multiple.detector.clear	"Glan">
+

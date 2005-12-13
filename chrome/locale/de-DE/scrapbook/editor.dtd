@@ -1,0 +1,30 @@
+<!ENTITY sb.editor			"ScrapBook-Werkzeugleiste">
+<!ENTITY sb.editor.eraser	"DOM-Eraser: Werkzeug zum Entfernen angeklickter Elemente innerhalb einer Webseite.">
+<!ENTITY sb.editor.undo		"Rückgängig">
+<!ENTITY sb.editor.restore	"Alle Änderungen rückgängig machen">
+<!ENTITY sb.editor.save		"Änderungen speichern">
+<!ENTITY sb.editor.comment	"Beschreibungsfeld vergrößern">
+<!ENTITY sb.editor.block			"Kommentarblock">
+<!ENTITY sb.editor.block.insert		"&sb.editor.block; nach der Auswahl einfügen">
+<!ENTITY sb.editor.block.hide		"Kommentarblöcke verstecken">
+<!ENTITY sb.editor.inline.add		"Zeilenkommentar für Auswahl anlegen">
+<!ENTITY sb.editor.inline.delete	"Alle Zeilenkommentare entfernen">
+<!ENTITY sb.editor.attach.file		"Auswahl mit Datei verknüpfen">
+<!ENTITY sb.editor.attach.link		"Auswahl mit Link verknüpfen">
+<!ENTITY sb.editor.cutter			"Ausgewählten Bereich entfernen">
+<!ENTITY sb.editor.remove.iframe	"Alle IFRAME-Tags entfernen">
+<!ENTITY sb.editor.remove.script	"Alle SCRIPT-Tags entfernen">
+
+<!ENTITY sb.highlighter				"Hervorhebung ">
+<!ENTITY sb.highlighter.remove		"Hervorhebungen innerhalb der Auswahl entfernen">
+<!ENTITY sb.highlighter.remove.all	"Alle Hervorhebungen entfernen">
+<!ENTITY sb.customize				"Anpassen">
+
+<!ENTITY sb.infobar.openSource	"Ursprungs-URL öffnen">
+<!ENTITY sb.infobar.showSitemap	"Show &sb.infobar.sitemap;">
+<!ENTITY sb.infobar.showInfobar	"Show Info Toolbar">
+<!ENTITY sb.infobar.home		"Startseite">
+<!ENTITY sb.infobar.sitemap		"Sitemap">
+
+<!ENTITY sb.locate		"Mit Ordnerliste in der Sidebar synchronisieren">
+

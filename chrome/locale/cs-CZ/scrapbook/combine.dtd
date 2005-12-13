@@ -1,0 +1,6 @@
+<!ENTITY sb.combine.select		"Vybrat stránky">
+<!ENTITY sb.combine.select.d	"Dvakrát klikněte na stránky které chcete zkombinovat.">
+<!ENTITY sb.combine.preview		"Náhled">
+<!ENTITY sb.combine.preview.d	"Stiskněte tlačítko 'Sloučení' po ověření náhledu.">
+<!ENTITY sb.combine.option.header	"Přidat informační hlavičku ke každé stránce.">
+<!ENTITY sb.combine.option.remove	"Po dokončení sloučení, odstraň originální stránky.">

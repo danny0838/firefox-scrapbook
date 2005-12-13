@@ -1,0 +1,141 @@
+/* ::::: CAPTURE_DETAIL ::::: */
+
+@import url('chrome://browser/skin/bookmarks/addBookmark.css');
+
+
+/* ::::: TOOLBAR ::::: */
+
+toolbar#ScrapBookMainToolbar toolbarbutton
+{
+	margin :0px !important;
+	padding:3px !important;
+}
+
+menuitem#ScrapBookTreePopupN .menu-iconic-icon,
+menuitem#ScrapBookTreePopupD .menu-iconic-icon,
+menuitem#ScrapBookTreePopupP .menu-iconic-icon,
+menuitem#ScrapBookTreePopupC .menu-iconic-icon
+{
+	width : 13px !important;
+	height: 13px !important;
+}
+
+
+/* ::::: TREE ::::: */
+
+treechildren::-moz-tree-image(ScrapBookTreecolTitle, leaf)
+{
+	-moz-image-region: auto !important;
+	list-style-image: url('chrome://scrapbook/skin/treeitem.png') !important;
+	width: 16px; height: 16px;
+}
+
+treechildren::-moz-tree-image(ScrapBookTreecolTitle, leaf, note)
+{
+	list-style-image: url('chrome://scrapbook/skin/treenote.png') !important;
+}
+
+treechildren::-moz-tree-drop-feedback
+{
+	background-color: Highlight;
+	width: 80px;
+	height: 2px;
+}
+
+treechildren::-moz-tree-cell-text(marked)
+{
+	font-weight: bold;
+}
+
+treechildren::-moz-tree-cell-text(combine)
+{
+	color: blue;
+}
+
+treechildren::-moz-tree-cell-text(markedRed)
+{
+	font-weight: bold;
+	color: red;
+}
+
+
+/* ::::: TREE_POPUP ::::: */
+
+menuitem#ScrapBookTreePopupN { list-style-image: url('chrome://scrapbook/skin/menu_createfolder.png'); }
+menuitem#ScrapBookTreePopupC { list-style-image: url('chrome://scrapbook/skin/menu_createnote.png'); }
+menuitem#ScrapBookTreePopupD { list-style-image: url('chrome://scrapbook/skin/menu_delete.png'); }
+menuitem#ScrapBookTreePopupP { list-style-image: url('chrome://scrapbook/skin/menu_property.png'); }
+
+
+/* ::::: HEADER ::::: */
+
+.sb-header
+{
+	color: InfoText;
+	background-color: InfoBackground;	/* #E7F4FC */
+	border: 1px solid ThreeDShadow;		/* #0FA9E5 */
+	padding: 3px;
+}
+
+.sb-header-ex
+{
+	background-color: #FFE4C7;
+	border: 1px solid #FF8099;
+	padding: 3px;
+}
+
+.sb-header toolbarbutton,
+.sb-header-ex toolbarbutton
+{
+	padding:0px; margin:0px;
+}
+
+.sb-header-exit
+{
+	list-style-image:url('chrome://scrapbook/skin/exit.png');
+	-moz-appearance:none;
+}
+
+
+/* ::::: SEARCH_BUTTON ::::: */
+
+#ScrapBookSearch
+{
+	max-width :24px !important;
+	max-height:16px !important;
+	margin :2px !important;
+	padding:0px !important;
+	background-image:url('chrome://scrapbook/skin/dropdown.png');
+}
+
+
+/* ::::: CUSTOM_TREE ::::: */
+
+treechildren::-moz-tree-image(sbTreeColTitle)
+{
+	-moz-image-region: auto !important;
+	width: 16px; height: 16px;
+	padding-right: 3px;
+}
+
+
+/* ::::: COMMON ::::: */
+
+tab {
+	min-width: 80px;
+	text-align: center;
+}
+
+listbox .listcell-icon {
+	width: 16px; height: 16px;
+}
+
+listbox .text-right {
+	text-align:right; padding-right:10px;
+}
+
+browser {
+	background-color: #FFFFFF;
+}
+
+

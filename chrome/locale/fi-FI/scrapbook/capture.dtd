@@ -1,0 +1,15 @@
+<!ENTITY sb.capture			"Kaappaa">
+<!ENTITY sb.capture.abort	"Hylkää">
+<!ENTITY sb.capture.start	"Aloita">
+<!ENTITY sb.capture.retry	"Yritä uudestaan">
+<!ENTITY sb.capture.skip	"Ohita">
+<!ENTITY sb.capture.pause	"Pysäytä">
+
+<!ENTITY sb.capture.filter			"Suodatin">
+<!ENTITY sb.capture.filter.domain	"Rajoita verkkoalueeseen">
+<!ENTITY sb.capture.filter.level	"Rajoita kansioon">
+<!ENTITY sb.capture.filter.string	"Suodata tekstillä...">
+<!ENTITY sb.capture.filter.checkon	"Valitse kaikki">
+<!ENTITY sb.capture.filter.checkoff	"Poista valinta kaikista">
+<!ENTITY sb.capture.filter.invert	"Käännä valinnat">
+

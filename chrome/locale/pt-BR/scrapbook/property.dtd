@@ -1,0 +1,20 @@
+<!ENTITY sb.prop.date		"Data">
+<!ENTITY sb.prop.type		"Tipo">
+<!ENTITY sb.prop.title		"Título">
+<!ENTITY sb.prop.encode		"Codificação">
+<!ENTITY sb.prop.icon		"Ícone">
+<!ENTITY sb.prop.source		"URL">
+<!ENTITY sb.prop.comment	"Comentário">
+<!ENTITY sb.prop.content	"Conteúdo">
+<!ENTITY sb.prop.size		"Tamanho">
+<!ENTITY sb.prop.id.date	"ID (Data)">
+<!ENTITY sb.prop.folder		"Pasta">
+
+<!ENTITY sb.prop.general	"Informação Geral">
+
+<!ENTITY sb.prop.icon.change	"Alterar">
+<!ENTITY sb.prop.icon.default	"Padrão">
+<!ENTITY sb.prop.icon.favicon	"Selecionar favicon">
+<!ENTITY sb.prop.icon.custom	"Selecionar ícone personalizado">
+<!ENTITY sb.prop.mark		"Marcar">
+

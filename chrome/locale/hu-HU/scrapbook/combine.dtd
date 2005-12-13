@@ -1,0 +1,6 @@
+<!ENTITY sb.combine.select		"Oldalak kiválasztása">
+<!ENTITY sb.combine.select.d	"Kattintson duplán az összefűzendő oldalakra.">
+<!ENTITY sb.combine.preview		"Előnézet">
+<!ENTITY sb.combine.preview.d	"Nyomja meg az 'Összefűzés' gombot az előnézet ellenőrzése után.">
+<!ENTITY sb.combine.option.header	"Az információs fejléc hozzáadása mindegyik oldalhoz">
+<!ENTITY sb.combine.option.remove	"Távolítsa el az összefűzés befejezése után az eredeti oldalakat">

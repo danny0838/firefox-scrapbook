@@ -1,0 +1,16 @@
+<!ENTITY sb.detail					"详细信息">
+<!ENTITY sb.detail.new.folder		"新建文件夹">
+<!ENTITY sb.detail.select.folder	"选择文件夹">
+
+<!ENTITY sb.detail.linked.file		"下载链接的文件">
+<!ENTITY sb.detail.linked.image		"图像">
+<!ENTITY sb.detail.linked.sound		"音乐">
+<!ENTITY sb.detail.linked.movie		"视频">
+<!ENTITY sb.detail.linked.archive	"压缩文件">
+<!ENTITY sb.detail.linked.custom	"自定义">
+
+<!ENTITY sb.detail.linked.page			"深层获取">
+<!ENTITY sb.detail.linked.page2			"获取链接的网页">
+<!ENTITY sb.detail.linked.page.depth	"获取链接层数">
+<!ENTITY sb.detail.linked.page.text		"全部获取完成后，所有页面将保持彼此的链接并创建网站地图。">
+

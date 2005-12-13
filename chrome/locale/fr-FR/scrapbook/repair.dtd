@@ -1,0 +1,12 @@
+<!ENTITY sb.repair.rdfFile			"Restaurer scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript	"Essayez cela si l'arborescence de ScrapBook disparaît brutalement.">
+<!ENTITY sb.repair.rdfFile.select	"Selectionnez un fichier de sauvegarde pour la restauration.">
+<!ENTITY sb.repair.rdfFile.file		"Fichier">
+<!ENTITY sb.repair.rdfFile.time		"Date/Heure">
+<!ENTITY sb.repair.rdfFile.size		"Taille">
+<!ENTITY sb.repair.rdfFile.complete	"Terminé. Redémarrez Firefox SVP.">
+
+<!ENTITY sb.repair.favicons				"Restaurer les favicons dans l'arborescence">
+<!ENTITY sb.repair.favicons.descript	"Essayez cela si plusieurs favicons disparaissent de l'arborescence de ScrapBook.">
+<!ENTITY sb.repair.favicons.complete	"Terminé.">
+

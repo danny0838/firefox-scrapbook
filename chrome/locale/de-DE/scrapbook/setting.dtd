@@ -1,0 +1,35 @@
+<!ENTITY sb.setting			"Einstellungen">
+<!ENTITY sb.setting.general	"Allgemein">
+<!ENTITY sb.setting.usetabs	"Tab-Verhalten">
+<!ENTITY sb.setting.advance	"Erweitert">
+<!ENTITY sb.setting.capture	"Archivierung">
+<!ENTITY sb.setting.editing	"Bearbeitung">
+<!ENTITY sb.setting.program	"Programme">
+
+<!ENTITY sb.setting.browser.submenu		"ScrapBook-Einträge im Kontextmenü der Seite in eigenem Untermenü anzeigen (Neustart erforderlich)">
+<!ENTITY sb.setting.capture.detail		"Dialog &quot;Archivierungsdetails&quot; anzeigen, wenn eine Archivierung durch Ziehen mit der Maus in die Sidebar erfolgt">
+<!ENTITY sb.setting.capture.notify		"Meldung nach Abschluss der Archivierung anzeigen (nur für Windows)">
+<!ENTITY sb.setting.tree.singleexpand	"Beim Ausklappen eines Ordners in der Ordnerliste alle anderen Ordner einklappen (wie IE-Favoriten)">
+<!ENTITY sb.setting.tree.quickdelete	"Keine Warnung vor dem Löschen eines Eintrags anzeigen">
+
+<!ENTITY sb.setting.usetabs.d			"Folgende Aktionen öffnen neue Tabs:">
+<!ENTITY sb.setting.usetabs.note		"Notizen in Tab öffnen">
+
+<!ENTITY sb.setting.capture.utf8encode		"Zeichenkodierung in UTF-8 umwandeln (empfohlen)">
+<!ENTITY sb.setting.capture.utf8encode.d	"Falls nicht ausgewählt, können einige Sonderzeichen unleserlich (&quot;?&quot;) dargestellt werden.">
+<!ENTITY sb.setting.capture.removescript	"JavaScript entfernen (empfohlen)">
+<!ENTITY sb.setting.capture.removescript.d	"Falls nicht ausgewählt, kann JavaScript eine Reihe von Problemen verursachen.">
+
+<!ENTITY sb.highlighter.tips		"TIPP: Eine Auswahl kann einfach durch Betätigen der Tasten 1, 2, 3 oder 4 hervorgehoben werden.">
+<!ENTITY sb.setting.block.style		"Stylesheet zur Formatierung">
+
+<!ENTITY sb.button.browse			"Durchsuchen">
+<!ENTITY sb.button.show				"Ordner anzeigen">
+
+<!ENTITY sb.setting.data			"Zielordner für die Datenspeicherung">
+<!ENTITY sb.setting.data.default	"Standardordner (aktueller Profilordner)">
+<!ENTITY sb.setting.data.explain	"ScrapBook-Ordner auswählen, in dem die gesammelten Daten gespeichert werden sollen.">
+<!ENTITY sb.setting.data.alert		"Ihre ScrapBook-Daten werden gegenwärtig in Ihrem aktuellen Firefox-Profil gespeichert. Hinweis: Wenn Sie beim Löschen dieses Profils die Option &quot;Dateien löschen&quot; wählen, werden ebenfalls alle ScrapBook-Daten entfernt.">
+<!ENTITY sb.setting.filer			"Datei-Manager">
+<!ENTITY sb.setting.filer.default	"Standardprogramm des Betriebssystems (z.B. Windows-Explorer)">
+

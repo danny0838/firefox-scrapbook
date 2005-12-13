@@ -1,0 +1,12 @@
+<!ENTITY sn.save			"저장">
+<!ENTITY sn.close			"닫기">
+<!ENTITY sn.tools			"도구">
+<!ENTITY sn.preview			"HTML 미리 보기">
+<!ENTITY sn.preview.quit	"미리 보기 중지">
+<!ENTITY sn.template		"탬플릿 HTML 편집">
+<!ENTITY sn.autolinefeed	"자동 줄바꿈">
+<!ENTITY sn.autolinefeed.t	"HTML 미리 보기 시 행 끝에 &lt;br&gt; 태그 자동으로 붙이기">
+<!ENTITY sn.fontsize		"글자 크기">
+<!ENTITY sn.help			"도움말">
+<!ENTITY sn.exit			"종료">
+

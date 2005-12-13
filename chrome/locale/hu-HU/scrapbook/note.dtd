@@ -1,0 +1,12 @@
+<!ENTITY sn.save			"Mentés">
+<!ENTITY sn.close			"Bezárás">
+<!ENTITY sn.tools			"Eszközök">
+<!ENTITY sn.preview			"HTML nézet">
+<!ENTITY sn.preview.quit	"A(z) &sn.preview; bezárása">
+<!ENTITY sn.template		"A sablon HTML szerkesztése">
+<!ENTITY sn.autolinefeed	"Automatikus soremelés">
+<!ENTITY sn.autolinefeed.t	"A &lt;br&gt; kódelem hozzáadása a sorvéghez a &sn.preview;">
+<!ENTITY sn.fontsize		"Betűméret">
+<!ENTITY sn.help			"Súgó">
+<!ENTITY sn.exit			"Kilépés">
+

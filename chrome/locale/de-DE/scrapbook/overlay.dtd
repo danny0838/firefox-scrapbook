@@ -1,0 +1,18 @@
+<!ENTITY sb.title				"ScrapBook">
+<!ENTITY sb.capture.partial		"Auswahl archivieren">
+<!ENTITY sb.capture.partial.as	"Auswahl archivieren als...">
+<!ENTITY sb.capture.entire		"Seite archivieren">
+<!ENTITY sb.capture.entire.as	"Seite archivieren als...">
+<!ENTITY sb.capture.frame		"Frame archivieren">
+<!ENTITY sb.capture.frame.as	"Frame archivieren als...">
+<!ENTITY sb.capture.target		"Link archivieren">
+<!ENTITY sb.capture.target.as	"Link archivieren als...">
+
+<!ENTITY sb.capture.folder.root		"Hauptordner">
+<!ENTITY sb.capture.folder.select	"Ordner auswählen">
+
+<!ENTITY sb.key.sidebar		"K">
+<!ENTITY sb.key.editor		"J">
+<!ENTITY sb.key.capture		"L">
+<!ENTITY sb.key.capture.as	"K">
+

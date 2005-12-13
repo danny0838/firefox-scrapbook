@@ -1,3 +1,0 @@
-<!ENTITY sb.output.option.all	"全部导出">
-<!ENTITY sb.output.option.frame	"以含有框架的 HTML 形式导出">
-<!ENTITY sb.output.option.open	"在浏览器中打开导出的文件列表">

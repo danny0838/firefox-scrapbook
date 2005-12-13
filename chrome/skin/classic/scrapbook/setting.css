@@ -1,0 +1,42 @@
+/* ::::: SETTINGS ::::: */
+
+tab {
+	min-width: 80px;
+	text-align: center;
+}
+
+tabpanel > vbox {
+	padding-top: 6px;
+	padding-bottom: 6px;
+}
+
+textbox {
+	height: 1.8em;
+	padding: 2px;
+}
+
+tabpanel > checkbox {
+	margin-top:    5px;
+	margin-bottom: 5px;
+}
+
+groupbox {
+	margin-top:    6px;
+	margin-bottom: 6px;
+}
+
+.indent { margin-left: 30px; }
+
+#sbPrefDataAlert { margin: 10px; }
+
+
+/* ::::: CUSTOMIZE HIGHLIGHTER ::::: */
+
+colorpicker[disabled="true"] {
+	visibility: hidden;
+}
+
+dialog#hlCustomizeDialog groupbox > hbox {
+	margin-bottom: 5px;
+}
+

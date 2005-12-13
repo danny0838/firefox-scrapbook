@@ -1,0 +1,18 @@
+<!ENTITY sb.open			"Otwórz">
+<!ENTITY sb.open.tab		"Otwórz w karcie">
+<!ENTITY sb.open.newtab		"Otwórz w nowej karcie">
+<!ENTITY sb.open.source		"Pokaż źródło strony">
+<!ENTITY sb.show.files		"Pokaż pliki">
+<!ENTITY sb.delete			"Usuń">
+<!ENTITY sb.property		"Właściwości katalogu">
+
+<!ENTITY sb.folder.toggle	"Rozwiń/zwiń">
+<!ENTITY sb.folder.openall	"Otwórz wszystko w nowych kartach">
+<!ENTITY sb.folder.combine	"Pokaż połączony widok">
+<!ENTITY sb.folder.manage	"Zarządzanie katalogami">
+
+<!ENTITY sb.new.folder		"Nowy katalog">
+<!ENTITY sb.new.note		"Nowa notatka">
+
+<!ENTITY sb.sort.folder		"Sortuj katalog">
+

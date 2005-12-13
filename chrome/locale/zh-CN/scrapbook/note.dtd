@@ -1,0 +1,12 @@
+<!ENTITY sn.save			"保存">
+<!ENTITY sn.close			"关闭">
+<!ENTITY sn.tools			"工具">
+<!ENTITY sn.preview			"预览">
+<!ENTITY sn.preview.quit	"退出预览">
+<!ENTITY sn.template		"编辑 HTML 模板">
+<!ENTITY sn.autolinefeed	"自动换行">
+<!ENTITY sn.autolinefeed.t	"预览时在每行结尾自动添加 &lt;br&gt; 标记。">
+<!ENTITY sn.fontsize		"字体大小">
+<!ENTITY sn.help			"帮助">
+<!ENTITY sn.exit			"退出">
+

@@ -1,0 +1,30 @@
+<!ENTITY sb.editor			"ScrapBook bewerkingsknoppenbalk">
+<!ENTITY sb.editor.eraser	"DOM Eraser: Klik op een onderdeel van de internetpagina om het te verwijderen">
+<!ENTITY sb.editor.undo		"Ongedaan maken">
+<!ENTITY sb.editor.restore	"Wijzigingen ongedaan maken">
+<!ENTITY sb.editor.save		"Wijzigingen opslaan">
+<!ENTITY sb.editor.comment	"Commentaargebied vergroten/verkleinen">
+<!ENTITY sb.editor.block			"Commentaarblok">
+<!ENTITY sb.editor.block.insert		"Na selectie &sb.editor.block; toevoegen">
+<!ENTITY sb.editor.block.hide		"Commentaarblokken verbergen">
+<!ENTITY sb.editor.inline.add		"Tekstopmerking aan selectie toevoegen">
+<!ENTITY sb.editor.inline.delete	"Alle tekstopmerkingen verwijderen">
+<!ENTITY sb.editor.attach.file		"Bestand aan de selectie toevoegen">
+<!ENTITY sb.editor.attach.link		"Link aan de selectie toevoegen">
+<!ENTITY sb.editor.cutter			"Selectie verwijderen">
+<!ENTITY sb.editor.remove.iframe	"Alle IFRAME-codes verwijderen">
+<!ENTITY sb.editor.remove.script	"Alle SCRIPT-codes verwijderen">
+
+<!ENTITY sb.highlighter				"Markering ">
+<!ENTITY sb.highlighter.remove		"Markeringen in de selectie verwijderen">
+<!ENTITY sb.highlighter.remove.all	"Alle markeringen verwijderen">
+<!ENTITY sb.customize				"Instellingen">
+
+<!ENTITY sb.infobar.openSource	"Bronlocatie openen">
+<!ENTITY sb.infobar.showSitemap	"Toon &sb.infobar.sitemap;">
+<!ENTITY sb.infobar.showInfobar	"Informatiewerkbalk tonen">
+<!ENTITY sb.infobar.home		"Hoofdscherm">
+<!ENTITY sb.infobar.sitemap		"Internetpagina's">
+
+<!ENTITY sb.locate				"In zijbalk-mappenstructuur plaatsen">
+

@@ -1,0 +1,7 @@
+<!ENTITY sb.sort			"排列项目列表">
+<!ENTITY sb.sort.title.asc	"标题 (A &gt; Z)">
+<!ENTITY sb.sort.title.desc	"标题 (Z &gt; A)">
+<!ENTITY sb.sort.date.asc	"时间 (升序)">
+<!ENTITY sb.sort.date.desc	"时间 (降序)">
+<!ENTITY sb.sort.recursive	"包括所有子文件夹">
+<!ENTITY sb.sort.confirm	"注意: 此操作无法撤销。您确定要重新排列项目列表吗?">

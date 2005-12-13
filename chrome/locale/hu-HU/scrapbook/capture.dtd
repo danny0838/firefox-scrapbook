@@ -1,0 +1,15 @@
+<!ENTITY sb.capture			"Rögzítés">
+<!ENTITY sb.capture.abort	"Mégse">
+<!ENTITY sb.capture.start	"Indítás">
+<!ENTITY sb.capture.retry	"Ismét">
+<!ENTITY sb.capture.skip	"Kihagyás">
+<!ENTITY sb.capture.pause	"Szünet">
+
+<!ENTITY sb.capture.filter			"Szűrés">
+<!ENTITY sb.capture.filter.domain	"Korlátozás tartományra">
+<!ENTITY sb.capture.filter.level	"Korlátozás könyvtárra">
+<!ENTITY sb.capture.filter.string	"Szűrés szöveg alapján...">
+<!ENTITY sb.capture.filter.checkon	"Az összes kijelölése">
+<!ENTITY sb.capture.filter.checkoff	"Az összes törlése">
+<!ENTITY sb.capture.filter.invert	"A kijelölés megfordítása">
+

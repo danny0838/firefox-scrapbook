@@ -1,0 +1,35 @@
+<!ENTITY sb.title			"Dosszié">
+
+<!ENTITY sb.new.folder		"Új mappa...">
+<!ENTITY sb.new.note		"Új jegyzet">
+<!ENTITY sb.toggle.all		"Az összes mappa kibontása/összecsukása">
+
+<!ENTITY sb.tools			"Eszközök">
+<!ENTITY sb.tools.setting	"Beállítások...">
+<!ENTITY sb.tools.manage	"Kezelés">
+<!ENTITY sb.tools.calculate	"Méret kiszámítása">
+<!ENTITY sb.tools.sorttree	"Teljes fa rendezése">
+<!ENTITY sb.tools.directory	"Dosszié mappa">
+<!ENTITY sb.tools.combine	"Összefűzés">
+<!ENTITY sb.tools.multiple	"Több webcím rögzítése">
+<!ENTITY sb.tools.trade		"Importálás / Exportálás">
+<!ENTITY sb.tools.output	"Fa exportálása HTML-ként">
+<!ENTITY sb.tools.backup	"Biztonsági mentés tömörítéssel">
+<!ENTITY sb.tools.repair	"Vészhelyzet javítása">
+<!ENTITY sb.tools.homepage	"Honlap">
+<!ENTITY sb.tools.about		"Névjegy">
+
+<!ENTITY sb.search			"Keresés">
+<!ENTITY sb.search.fulltext	"Keresés a teljes szövegben">
+<!ENTITY sb.search.all		"Mind">
+<!ENTITY sb.search.re		"Reguláris kifejezés használata">
+<!ENTITY sb.search.cs		"A kis- és nagybetűk megkülönböztetése">
+<!ENTITY sb.search.cache	"A gyorsítótár frissítése a teljes szövegben kereséshez">
+<!ENTITY sb.search.clear	"Törlés az előzményekből">
+<!ENTITY sb.search.days		"Szűrés napok alapján">
+
+<!ENTITY sb.note.opentab	"Megnyitás fülön">
+<!ENTITY sb.note.close		"Bezárás">
+
+<!ENTITY sb.move			"Áthelyezés mappába">
+

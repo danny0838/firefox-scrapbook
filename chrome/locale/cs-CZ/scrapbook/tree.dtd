@@ -1,0 +1,18 @@
+<!ENTITY sb.open			"Otevřít">
+<!ENTITY sb.open.tab		"Otevřít v panelu">
+<!ENTITY sb.open.newtab		"Otevřít v novém panelu">
+<!ENTITY sb.open.source		"Otevřít zdroj URL">
+<!ENTITY sb.show.files		"Zobrazit soubory">
+<!ENTITY sb.delete			"Vymazat">
+<!ENTITY sb.property		"Vlastnosti">
+
+<!ENTITY sb.folder.toggle	"Rozbalit/Sbalit">
+<!ENTITY sb.folder.openall	"Otevřít vše v panelech">
+<!ENTITY sb.folder.combine	"Otevřít v kombinovaném náhledu">
+<!ENTITY sb.folder.manage	"Správce složky...">
+
+<!ENTITY sb.new.folder		"Nová složka...">
+<!ENTITY sb.new.note		"Nová poznámka">
+
+<!ENTITY sb.sort.folder		"Seřadit složku">
+

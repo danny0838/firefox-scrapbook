@@ -1,0 +1,74 @@
+<?xml version="1.0" ?>
+
+<!--skin-->
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+<?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
+
+<!--overlay-->
+<?xul-overlay href="chrome://scrapbook/content/tree.xul"?>
+
+<!--locale-->
+<!DOCTYPE wizard [
+<!ENTITY % scrapbookDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+%scrapbookDTD;
+<!ENTITY % combineDTD   SYSTEM "chrome://scrapbook/locale/combine.dtd" >
+%combineDTD;
+]>
+
+<!--wizard-->
+<wizard id="sbCombineWizard"
+        title="&sb.tools.combine; (Trial Version) - &sb.title;"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        width="600" height="500"
+        windowtype="scrapbook">
+
+	<!--JavaScript-->
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/tree.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapbook.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/manage.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/saver.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/capture.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/combine.js" />
+
+	<!--StringBundle-->
+	<stringbundleset>
+		<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/capture.properties" />
+		<stringbundle id="sbCombineString" src="chrome://scrapbook/locale/combine.properties" />
+	</stringbundleset>
+
+	<!--keyset-->
+	<keyset id="ScrapBookGenericKeyset" />
+
+	<!--startpage-->
+	<wizardpage pageid="sbCombineStartPage"
+	            next="sbCombinePreviewPage"
+	            label="&sb.combine.select;"
+	            description="&sb.combine.select.d;"
+	            onpageshow="sbPageBinder.init();">
+		<hbox flex="1">
+			<tree id="ScrapBookTree"
+			      onclick="sbTreeHandler.onClick(event);"
+			      ondblclick="if (event.button == 0) sbPageBinder.add();"
+			      onkeypress="sbTreeHandler.onKeyPress(event);"
+			      seltype="single"
+			      flex="1" style="min-width:200px;" />
+			<vbox flex="1">
+				<listbox id="sbCombineListbox" style="height:200px;margin-bottom:12px;" />
+				<checkbox id="sbCombineOptionH" label="&sb.combine.option.header;" checked="true" />
+				<checkbox id="sbCombineOptionR" label="&sb.combine.option.remove;" disabled="true" />
+			</vbox>
+		</hbox>
+	</wizardpage>
+
+	<!--previewpage-->
+	<wizardpage pageid="sbCombinePreviewPage"
+	            label="&sb.combine.preview;"
+	            description="&sb.combine.preview.d;"
+	            onpageshow="sbPageBinder.initPreview();">
+		<textbox id="ScrapBookCaptureTextbox" readonly="true" style="padding:2px;" />
+		<browser id="ScrapBookCaptureBrowser" collapsed="true" flex="1" />
+	</wizardpage>
+
+</wizard>

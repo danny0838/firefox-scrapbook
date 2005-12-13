@@ -1,0 +1,15 @@
+<!ENTITY sb.capture			"Capturar">
+<!ENTITY sb.capture.abort	"Abortar">
+<!ENTITY sb.capture.start	"Iniciar">
+<!ENTITY sb.capture.retry	"Tentar novamente">
+<!ENTITY sb.capture.skip	"Pular">
+<!ENTITY sb.capture.pause	"Pausar">
+
+<!ENTITY sb.capture.filter			"Filtrar">
+<!ENTITY sb.capture.filter.domain	"Restringir ao Domínio">
+<!ENTITY sb.capture.filter.level	"Restringir ao Diretório">
+<!ENTITY sb.capture.filter.string	"Filtrar por String...">
+<!ENTITY sb.capture.filter.checkon	"Marcar Tudo">
+<!ENTITY sb.capture.filter.checkoff	"Desmarcar Tudo">
+<!ENTITY sb.capture.filter.invert	"Inverter Marcas">
+

@@ -1,0 +1,35 @@
+<!ENTITY sb.setting			"Ustawienia">
+<!ENTITY sb.setting.general	"      Ogólne    ">
+<!ENTITY sb.setting.usetabs	"       Akcje    ">
+<!ENTITY sb.setting.advance	"Zaawansowane">
+<!ENTITY sb.setting.capture	"Przechwytywanie">
+<!ENTITY sb.setting.editing	"       Edycja    ">
+<!ENTITY sb.setting.program	"Programy">
+
+<!ENTITY sb.setting.browser.submenu		"Włącz submenu w głównym menu kontekstowym przeglądarki (zmiany zostaną zastosowane po ponownym uruchomieniu przeglądarki)">
+<!ENTITY sb.setting.capture.detail		"Pokaż okno ''Szczegóły przechwytywania'', gdy przechwytujesz przeciągając ikonkę witryny lub etykietę karty do panelu bocznego">
+<!ENTITY sb.setting.capture.notify		"Pokaż okienko powiadomienia ''Przechwytywanie zakończone'' (działa tylko w systemie Windows)">
+<!ENTITY sb.setting.tree.singleexpand	"Gdy rozwijasz katalog jako drzewo katalogów, zwiń wszystkie inne katalogi">
+<!ENTITY sb.setting.tree.quickdelete	"Nie potwierdzaj usuwania">
+
+<!ENTITY sb.setting.usetabs.d			"Zaznaczone poniżej akcje otwieraj w nowej karcie">
+<!ENTITY sb.setting.usetabs.note		"Otwórz notes w karcie">
+
+<!ENTITY sb.setting.capture.utf8encode		"Przekonwertuj na kodowanie UTF-8 (zalecane)">
+<!ENTITY sb.setting.capture.utf8encode.d	"Jeśli nie zaznaczysz tej opcji, niektóre litery zostaną przekształcone na '?'.">
+<!ENTITY sb.setting.capture.removescript	"Usuń JavaScript   (zalecane)">
+<!ENTITY sb.setting.capture.removescript.d	"Jeśli nie zaznaczysz tej opcji, czasami nie uda się zachować wyglądu strony.">
+
+<!ENTITY sb.highlighter.tips		"Podpowiedź: Można podświetlać zaznaczone elementy przy pomocy klawiszy 1, 2, 3 lub 4.">
+<!ENTITY sb.setting.block.style		"Arkusz styli">
+
+<!ENTITY sb.button.browse			"Szukaj">
+<!ENTITY sb.button.show				"Pokaż katalog">
+
+<!ENTITY sb.setting.data			"Katalog zapisu danych">
+<!ENTITY sb.setting.data.default	"Domyślny (katalog zapisu w profilu użytkownika)">
+<!ENTITY sb.setting.data.explain	"Wybierz katalog, gdzie będą magazynowane pobrane dane">
+<!ENTITY sb.setting.data.alert		"Obecnie dane ScrapBooka są zapisane w folderze profili Firefoksa. Jeżeli podczas usuwania profilu zostanie zaznaczona opcja &quot;Usuń pliki&quot; wszystkie pliki ScrapBooka zostaną usunięte.">
+<!ENTITY sb.setting.filer			"Określ menedżera plików">
+<!ENTITY sb.setting.filer.default	"Domyślny (jeżeli systemem operacyjnym jest Windows, będzie to Explorator Windows.)">
+

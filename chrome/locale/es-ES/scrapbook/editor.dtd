@@ -1,0 +1,30 @@
+<!ENTITY sb.editor			"ScrapBook Edit Toolbar">
+<!ENTITY sb.editor.eraser	"Borrador DOM:  Elimina bloques al hacer click en ellos.">
+<!ENTITY sb.editor.undo		"Undo">
+<!ENTITY sb.editor.restore	"Abandonar cambios y restaurar">
+<!ENTITY sb.editor.save		"Guardar">
+<!ENTITY sb.editor.comment	"Expandir area de comentarios">
+<!ENTITY sb.editor.block			"Block Comment">
+<!ENTITY sb.editor.block.insert		"Add &sb.editor.block; after Selection">
+<!ENTITY sb.editor.block.hide		"Hide &sb.editor.block;s">
+<!ENTITY sb.editor.inline.add		"Añadir comentario incorporado a la selección">
+<!ENTITY sb.editor.inline.delete	"Borrar todos comentarios incorporados">
+<!ENTITY sb.editor.attach.file		"Attach File to Selection">
+<!ENTITY sb.editor.attach.link		"Attach Link to Selection">
+<!ENTITY sb.editor.cutter			"Borrar seleccionado">
+<!ENTITY sb.editor.remove.iframe	"Remove All IFRAME Tags">
+<!ENTITY sb.editor.remove.script	"Remove All SCRIPT Tags">
+
+<!ENTITY sb.highlighter				"Highlighter">
+<!ENTITY sb.highlighter.remove		"Clear Highlights in the Selection">
+<!ENTITY sb.highlighter.remove.all	"Clear All Highlights">
+<!ENTITY sb.customize				"Customize">
+
+<!ENTITY sb.infobar.openSource	"Abrir URL de origen">
+<!ENTITY sb.infobar.showSitemap	"Show &sb.infobar.sitemap;">
+<!ENTITY sb.infobar.showInfobar	"Show Info Toolbar">
+<!ENTITY sb.infobar.home		"Home">
+<!ENTITY sb.infobar.sitemap		"SiteMap">
+
+<!ENTITY sb.locate		"Locate in Sidebar Tree">
+

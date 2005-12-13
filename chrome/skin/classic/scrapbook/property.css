@@ -1,0 +1,23 @@
+/* ::::: PROPERTIES ::::: */
+
+tab {
+	min-width: 80px;
+	text-align: center;
+}
+
+rows#ScrapBookPropRows row {
+	margin-bottom: 3px;
+}
+
+row > textbox {
+	height: 1.8em;
+	padding: 2px;
+}
+
+row > textbox[readonly="true"] {
+	height: 1.7em;
+	-moz-appearance: none !important;
+	border: none;
+}
+
+

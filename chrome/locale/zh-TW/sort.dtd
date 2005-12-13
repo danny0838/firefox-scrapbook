@@ -1,6 +1,0 @@
-<!ENTITY sb.sort			"排序">
-<!ENTITY sb.sort.title.asc	"依標題 ( A - Z )">
-<!ENTITY sb.sort.title.desc	"依標題 ( Z - A )">
-<!ENTITY sb.sort.date.asc	"依日期 (舊 - 新)">
-<!ENTITY sb.sort.date.desc	"依日期 (新 - 舊)">
-<!ENTITY sb.sort.recursive	"包括子資料夾中的文件">

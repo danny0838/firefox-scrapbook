@@ -1,0 +1,140 @@
+<?xml version="1.0" ?>
+
+<!--skin-->
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+<?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
+<?xml-stylesheet href="chrome://scrapbook/skin/trade.css" type="text/css" ?>
+
+<!--overlay-->
+<?xul-overlay href="chrome://scrapbook/content/tree.xul" ?>
+
+<!--locale-->
+<!DOCTYPE window [
+<!ENTITY % scrapbookDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+%scrapbookDTD;
+<!ENTITY % propertyDTD  SYSTEM "chrome://scrapbook/locale/property.dtd" >
+%propertyDTD;
+<!ENTITY % tradeDTD     SYSTEM "chrome://scrapbook/locale/trade.dtd" >
+%tradeDTD;
+<!ENTITY % settingDTD   SYSTEM "chrome://scrapbook/locale/setting.dtd" >
+%settingDTD;
+<!ENTITY % treeDTD      SYSTEM "chrome://scrapbook/locale/tree.dtd" >
+%treeDTD;
+]>
+
+<!--window-->
+<window id="ScrapBookTradeWindow"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        title="&sb.tools.trade; - &sb.title;"
+        width="720" height="520" 
+        onload="setTimeout(SB_initTrade, 0);"
+        windowtype="scrapbook">
+
+	<!--JavaScript-->
+	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
+	<script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
+	<script type="application/x-javascript" src="chrome://global/content/nsTransferable.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/tree.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapbook.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/manage.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/trade.js" />
+
+	<!--stringbundle-->
+	<stringbundleset>
+		<stringbundle id="ScrapBookString"      src="chrome://scrapbook/locale/scrapbook.properties" />
+		<stringbundle id="ScrapBookTradeString" src="chrome://scrapbook/locale/trade.properties" />
+	</stringbundleset>
+
+	<!--keyset-->
+	<keyset id="ScrapBookGenericKeyset">
+		<key key="a" modifiers="accel" oncommand="sbTrader.TREE.focus();sbTrader.TREE.view.selection.selectAll();" />
+	</keyset>
+
+	<!--popup-->
+	<popupset>
+		<popup id="ScrapBookTreePopup" />
+		<popup id="ScrapBookTradeTreePopup">
+			<menuitem label="&sb.open;"        oncommand="sbTrader.open(false);" default="true" />
+			<menuitem label="&sb.open.newtab;" oncommand="sbTrader.open(true);"  />
+			<menuitem label="&sb.show.files;"  oncommand="sbTrader.showFiles();" />
+			<menuseparator />
+			<menuitem class="menuitem-iconic" label="&sb.delete;"   src="chrome://scrapbook/skin/menu_delete.png"   oncommand="sbTrader.deleteDir();" />
+			<menuseparator />
+			<menuitem class="menuitem-iconic" label="&sb.property;" src="chrome://scrapbook/skin/menu_property.png" oncommand="sbTrader.showIndexDat();" />
+		</popup>
+	</popupset>
+
+	<hbox flex="1">
+
+		<vbox flex="1" style="width:170px;min-width:140px;">
+			<!--main toolbar-->
+			<toolbar id="ScrapBookMainToolbar" class="plain">
+				<toolbarbutton tooltiptext="&sb.new.folder;" image="chrome://scrapbook/skin/tool_createfolder.png" oncommand="SB_createFolder();" />
+				<toolbarbutton tooltiptext="&sb.toggle.all;" image="chrome://scrapbook/skin/tool_togglefolder.png" oncommand="sbTreeHandler.toggleAllFolders();" />
+			</toolbar>
+			<!--scrapbook tree-->
+			<tree id="ScrapBookTree"
+			      contextmenu="ScrapBookTreePopup"
+			      onclick="sbTreeHandler.onClick(event);"
+			      ondblclick="sbTreeHandler.onDblClick(event);"
+			      onkeypress="sbTreeHandler.onKeyPress(event);"
+			      onfocus="sbTrader.context = 'export';"
+			      ondraggesture="if (event.originalTarget.localName == 'treechildren') nsDragAndDrop.startDrag(event,SBdragDropObserver);event.stopPropagation();"
+			      ondragover="nsDragAndDrop.dragOver(event,SBdragDropObserver);event.stopPropagation();"
+			      ondragdrop="nsDragAndDrop.drop(event,SBdragDropObserver);event.stopPropagation();"
+			      flex="1"
+			      class="plain" />
+		</vbox>
+
+		<splitter />
+
+		<vbox flex="2" style="min-width:300px;">
+			<toolbar align="center" class="plain" style="padding:3px 1px;">
+				<image id="ScrapBookTradeIcon" />
+				<textbox id="ScrapBookTradePath" readonly="true" flex="1" />
+				<button label="&sb.button.browse;..." oncommand="sbTrader.selectPath();" />
+				<button label="&sb.button.show;"      oncommand="sbTrader.showFolder();" />
+			</toolbar>
+			<!--tree-->
+			<tree id="ScrapBookTradeTree"
+			      seltype="multiple"
+			      contextmenu="ScrapBookTradeTreePopup"
+			      ondblclick="sbTrader.onDblClick(event);"
+			      onkeypress="sbTrader.onKeyPress(event);"
+			      onfocus="sbTrader.context = 'import';"
+			      ondraggesture="nsDragAndDrop.startDrag(event,sbTrader.dragDropObserver);"
+			      ondragover="nsDragAndDrop.dragOver(event,sbTrader.dragDropObserver);"
+			      ondragdrop="nsDragAndDrop.drop(event,sbTrader.dragDropObserver);"
+			      class="plain" flex="1">
+				<treecols>
+					<treecol id="sbTradeTreeColTitle"  label="&sb.prop.title;"  sortIndex="0" flex="3" primary="true" />
+					<treecol id="sbTradeTreeColDate"   label="&sb.trade.time;"  sortIndex="5" flex="1" sortDirection="ascending" />
+					<treecol id="sbTradeTreeColFolder" label="&sb.prop.folder;" sortIndex="2" flex="1" />
+				</treecols>
+				<treechildren flex="1" />
+			</tree>
+			<toolbar id="ScrapBookTradeController" class="plain" style="padding-top:2px;">
+				<button label="&sb.trade.export;" oncommand="sbExportService.exec();"        image="chrome://scrapbook/skin/expander.png" />
+				<button label="&sb.trade.import;" oncommand="sbImportService.exec(-128,-1);" image="chrome://scrapbook/skin/expander_left.png" />
+				<checkbox id="ScrapBookTradeRestore" label="&sb.trade.restore;" checked="true" />
+			</toolbar>
+		</vbox>
+
+	</hbox>
+
+	<splitter />
+
+	<listbox id="ScrapBookTradeLog" class="plain" />
+
+	<statusbar id="ScrapBookStatusBar" align="center" style="padding-left:2px;">
+		<hbox align="center" flex="1" id="ScrapBookStatusBox">
+			<image id="ScrapBookStatusImage" />
+			<label id="ScrapBookStatusLabel" crop="end" flex="1" value="" />
+		</hbox>
+		<progressmeter id="ScrapBookTradeProgress" mode="determined" value="0" width="160" hidden="true" />
+	</statusbar>
+
+</window>

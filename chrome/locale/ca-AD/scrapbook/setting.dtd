@@ -1,0 +1,35 @@
+<!ENTITY sb.setting			"Opcions">
+<!ENTITY sb.setting.general	"General">
+<!ENTITY sb.setting.usetabs	"Pestanyes">
+<!ENTITY sb.setting.advance	"Avançat">
+<!ENTITY sb.setting.capture	"Captura">
+<!ENTITY sb.setting.editing	"Edició">
+<!ENTITY sb.setting.program	"Programes">
+
+<!ENTITY sb.setting.browser.submenu		"Mostra les ordres del menú contextual en un submenú (el canvi es farà efectiu un cop hagueu reiniciat el navegador)">
+<!ENTITY sb.setting.capture.detail		"Quan arrossegui i deixi anar un element a la barra lateral mostra el diàleg &#34;Captura detallada&#34;">
+<!ENTITY sb.setting.capture.notify		"Quan la captura hagi acabat mostra una notificació (només funciona al Windows)">
+<!ENTITY sb.setting.tree.singleexpand	"Quan expandeixi una carpeta de l'arbre redueix totes les altres carpetes">
+<!ENTITY sb.setting.tree.quickdelete	"Quan suprimeixi un element no em demanis cap confirmació">
+
+<!ENTITY sb.setting.usetabs.d			"Les accions seleccionades utilitzaran pestanyes noves.">
+<!ENTITY sb.setting.usetabs.note		"Obre les notes en una pestanya">
+
+<!ENTITY sb.setting.capture.utf8encode		"Converteix a la codificació de caràcters UTF-8 (recomanat)">
+<!ENTITY sb.setting.capture.utf8encode.d	"Si desactiveu aquesta opció alguns caràcters es podrien mostrar com a interrogants.">
+<!ENTITY sb.setting.capture.removescript	"Suprimeix el JavaScript (recomanat)">
+<!ENTITY sb.setting.capture.removescript.d	"Si desactiveu aquesta opció el JavaScript causarà alguns problemes.">
+
+<!ENTITY sb.highlighter.tips		"Consell: podeu ressaltar el text seleccionat prement les tecles 1, 2, 3 o 4.">
+<!ENTITY sb.setting.block.style		"Full d'estil">
+
+<!ENTITY sb.button.browse			"Navega">
+<!ENTITY sb.button.show				"Mostra la carpeta">
+
+<!ENTITY sb.setting.data			"Carpeta a on s'emmagatzemaran les dades">
+<!ENTITY sb.setting.data.default	"Per defecte (a la carpeta del vostre perfil d'usuari)">
+<!ENTITY sb.setting.data.explain	"Trieu la carpeta ScrapBook a on s'emmagatzemaran les dades recollides.">
+<!ENTITY sb.setting.data.alert		"Actualment les vostres dades de l'ScrapBook es desen en una carpeta del vostre perfil d'usuari del Firefox. Fixeu-vos que si quan suprimiu el perfil d'usuari trieu l'opció &#34;Suprimeix els fitxers&#34; totes les dades de l'ScrapBook també es suprimiran.">
+<!ENTITY sb.setting.filer			"Programa per a explorar els fitxers">
+<!ENTITY sb.setting.filer.default	"Per defecte (al Windows, segurament l'Explorer).">
+

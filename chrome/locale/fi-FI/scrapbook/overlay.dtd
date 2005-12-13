@@ -1,0 +1,18 @@
+<!ENTITY sb.title				"ScrapBook">
+<!ENTITY sb.capture.partial		"Kaappaa valinta">
+<!ENTITY sb.capture.partial.as	"Kaappaa valinta nimellä...">
+<!ENTITY sb.capture.entire		"Kaappaa sivu">
+<!ENTITY sb.capture.entire.as	"Kaappaa sivu nimellä...">
+<!ENTITY sb.capture.frame		"Kaappaa kehys">
+<!ENTITY sb.capture.frame.as	"Kaappaa kehys nimellä...">
+<!ENTITY sb.capture.target		"Kaappaa kohde">
+<!ENTITY sb.capture.target.as	"Kaappaa kohde nimellä...">
+
+<!ENTITY sb.capture.folder.root		"Juurikansio">
+<!ENTITY sb.capture.folder.select	"Valitse kansio">
+
+<!ENTITY sb.key.sidebar		"C">
+<!ENTITY sb.key.editor		"J">
+<!ENTITY sb.key.capture		"L">
+<!ENTITY sb.key.capture.as	"K">
+

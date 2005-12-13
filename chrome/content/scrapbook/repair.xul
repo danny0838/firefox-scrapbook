@@ -1,0 +1,65 @@
+<?xml version="1.0" ?>
+
+<!--skin-->
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+
+<!--locale-->
+<!DOCTYPE wizard [
+<!ENTITY % scrapbookDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+%scrapbookDTD;
+<!ENTITY % repairDTD    SYSTEM "chrome://scrapbook/locale/repair.dtd" >
+%repairDTD;
+]>
+
+<!--wizard-->
+<wizard id="sbRepairWizard"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        title="&sb.tools.repair; - &sb.title;"
+        windowtype="scrapbook">
+
+	<!--JavaScript-->
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/repair.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/trade.js" />
+
+	<keyset>
+		<key keycode="VK_F5" oncommand="window.location.reload();" />
+	</keyset>
+
+	<wizardpage pageid="sbRepairStartPage" label="&sb.tools.repair;" onpageshow="sbRepair.initStartPage();" next="sbRepairRDF1">
+		<radiogroup id="sbRepairRadioGroup">
+			<radio label="&sb.repair.rdfFile;"  oncommand="sbRepair.initStartPage();" />
+			<description flex="1" style="margin-left:30px;margin-bottom:20px;">&sb.repair.rdfFile.descript;</description>
+			<radio label="&sb.repair.favicons;" oncommand="sbRepair.initStartPage();" />
+			<description flex="1" style="margin-left:30px;margin-bottom:20px;">&sb.repair.favicons.descript;</description>
+		</radiogroup>
+	</wizardpage>
+
+	<wizardpage pageid="sbRepairRDF1"
+	            next="sbRepairRDF2"
+	            label="&sb.repair.rdfFile;"
+	            description="&sb.repair.rdfFile.select;"
+	            onpageshow="sbRepair.initRestoreRDF();">
+		<tree id="sbRepairTree" seltype="single" hidecolumnpicker="true" flex="1">
+			<treecols>
+				<treecol id="sbRepairTreecolFile" label="&sb.repair.rdfFile.file;" flex="3" />
+				<treecol id="sbRepairTreecolTime" label="&sb.repair.rdfFile.time;" flex="2" />
+				<treecol id="sbRepairTreecolSize" label="&sb.repair.rdfFile.size;" flex="1" />
+			</treecols>
+			<treechildren />
+		</tree>
+	</wizardpage>
+
+	<wizardpage pageid="sbRepairRDF2" label="&sb.repair.rdfFile;" onpageshow="sbRepair.execRestoreRDF();">
+		<description id="sbRepairRDF2Text" />
+		<label id="sbRepairRDFCompleted" value="&sb.repair.rdfFile.complete;" hidden="true" />
+	</wizardpage>
+
+	<wizardpage pageid="sbRepairFavicons" label="&sb.repair.favicons;" onpageshow="sbRepair.restoreFavicons();">
+		<textbox id="sbRepairFaviconsTextbox" readonly="true" />
+		<label id="sbRepairFaviconsCompleted" value="&sb.repair.favicons.complete;" hidden="true" />
+	</wizardpage>
+
+</wizard>

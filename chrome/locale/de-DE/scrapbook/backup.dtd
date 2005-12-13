@@ -1,0 +1,7 @@
+<!ENTITY sb.backup.d		"Komprimierte Sicherung aller ScrapBook-Daten anlegen.">
+<!ENTITY sb.backup.program	"Packprogramm">
+<!ENTITY sb.backup.file		"Zielort für die Sicherungsdatei">
+<!ENTITY sb.backup.browse	"Durchsuchen">
+<!ENTITY sb.backup.arg		"Kommandozeilenparameter">
+<!ENTITY sb.backup.arg.d1	"&#37;dst bezeichnet den Pfad zur Sicherungsdatei.">
+<!ENTITY sb.backup.arg.d2	"&#37;src bezeichnet den Pfad zum ScrapBook-Ordner.">

@@ -1,0 +1,35 @@
+<!ENTITY sb.setting			"設定">
+<!ENTITY sb.setting.general	"全般設定">
+<!ENTITY sb.setting.usetabs	"タブの利用">
+<!ENTITY sb.setting.advance	"パス設定">
+<!ENTITY sb.setting.capture	"取り込み">
+<!ENTITY sb.setting.editing	"編集機能">
+<!ENTITY sb.setting.program	"プログラム">
+
+<!ENTITY sb.setting.browser.submenu		"ブラウザのコンテキストメニューをサブメニュー化　（再起動後有効）">
+<!ENTITY sb.setting.capture.detail		"サイドバーへのドラッグ＆ドロップによる取り込み時、取り込み詳細を表示">
+<!ENTITY sb.setting.capture.notify		"取り込みが完了したら通知する　（Windowsのみ正常動作）">
+<!ENTITY sb.setting.tree.singleexpand	"ツリーのフォルダ展開時、他のフォルダを収縮　（IEお気に入り風）">
+<!ENTITY sb.setting.tree.quickdelete	"削除確認をしない">
+
+<!ENTITY sb.setting.usetabs.d			"チェックがオンの操作は、新しいタブで開きます。">
+<!ENTITY sb.setting.usetabs.note		"ノートをタブで開く">
+
+<!ENTITY sb.setting.capture.utf8encode		"UTF-8へ変換する　（推奨）">
+<!ENTITY sb.setting.capture.utf8encode.d	"チェックをオフにした場合、記号が文字化けする問題がたびたび生じます。">
+<!ENTITY sb.setting.capture.removescript	"JavaScriptを除去　（推奨）">
+<!ENTITY sb.setting.capture.removescript.d	"チェックをオフにした場合、JavaScriptによって様々な問題が生じます。">
+
+<!ENTITY sb.highlighter.tips		"TIPS: 範囲を選択してキーボードの1,2,3,4のいずれかを押すことでマーカーをセットすることもできます。">
+<!ENTITY sb.setting.block.style		"スタイルシート">
+
+<!ENTITY sb.button.browse			"参照">
+<!ENTITY sb.button.show				"フォルダを表示">
+
+<!ENTITY sb.setting.data			"データ保存先">
+<!ENTITY sb.setting.data.default	"デフォルト　（プロファイルフォルダ下）">
+<!ENTITY sb.setting.data.explain	"収集したデータを保存するためのScrapBookフォルダを選択してください。">
+<!ENTITY sb.setting.data.alert		"現在ScrapBookのデータはFirefoxのプロファイルフォルダへ保存されています。Firefoxのプロファイルを削除するとき[ファイルの削除]を選択すると、ScrapBookのデータも削除されてしまうので注意してください。">
+<!ENTITY sb.setting.filer			"ファイルの表示に用いるプログラム">
+<!ENTITY sb.setting.filer.default	"デフォルト　（Windowsなら多分エクスプローラ）">
+

@@ -1,0 +1,4 @@
+<!ENTITY sb.trade.import	"Importieren">
+<!ENTITY sb.trade.export	"Exportieren">
+<!ENTITY sb.trade.restore	"Importieren mit Wiederherstellung der Ordnerstruktur">
+<!ENTITY sb.trade.time		"Datum des Exports">

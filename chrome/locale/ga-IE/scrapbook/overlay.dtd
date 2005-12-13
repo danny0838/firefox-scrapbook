@@ -1,0 +1,18 @@
+<!ENTITY sb.title				"Leabhar Gearrth&#225;n">
+<!ENTITY sb.capture.partial		"Gabh Rogha">
+<!ENTITY sb.capture.partial.as	"Gabh Rogha Mar...">
+<!ENTITY sb.capture.entire		"Gabh Leathanach">
+<!ENTITY sb.capture.entire.as	"Gabh Leathanach Mar...">
+<!ENTITY sb.capture.frame		"Gabh Fr&#225;ma">
+<!ENTITY sb.capture.frame.as	"Gabh Fr&#225;ma Mar...">
+<!ENTITY sb.capture.target		"Gabh Ceangal">
+<!ENTITY sb.capture.target.as	"Gabh Ceangal Mar...">
+
+<!ENTITY sb.capture.folder.root		"Comhadlann Chinn">
+<!ENTITY sb.capture.folder.select	"Roghnaigh Cohmadlann">
+
+<!ENTITY sb.key.sidebar		"K">
+<!ENTITY sb.key.editor		"J">
+<!ENTITY sb.key.capture		"L">
+<!ENTITY sb.key.capture.as	"K">
+

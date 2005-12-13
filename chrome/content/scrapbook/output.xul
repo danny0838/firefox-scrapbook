@@ -1,0 +1,42 @@
+<?xml version="1.0" ?>
+
+<!--skin-->
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+<?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
+
+<!--overlay-->
+<?xul-overlay href="chrome://scrapbook/content/tree.xul"?>
+
+<!--locale-->
+<!DOCTYPE dialog [
+<!ENTITY % scrapbookDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+%scrapbookDTD;
+<!ENTITY % outputDTD    SYSTEM "chrome://scrapbook/locale/output.dtd" >
+%outputDTD;
+]>
+
+<!--dialog-->
+<dialog id="ScrapBookOutputDialog"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        title="&sb.tools.output; - &sb.title;"
+        width="380" height="400"
+        onload="SB_initOutput();"
+        ondialogaccept="SB_execOutput();"
+        windowtype="scrapbook">
+
+	<!--JavaScript-->
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/output.js" />
+
+	<!--StringBundle-->
+	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/scrapbook.properties" />
+
+	<!--tree-->
+	<tree id="ScrapBookTree" onclick="SB_toggleAllSelection();" flex="1" />
+
+	<checkbox id="ScrapBookOutputOptionA" label="&sb.output.option.all;"   style="margin-top:12px;" oncommand="setTimeout(SB_selectAllFolders, 0);" checked="true" />
+	<checkbox id="ScrapBookOutputOptionF" label="&sb.output.option.frame;" persist="checked" />
+	<checkbox id="ScrapBookOutputOptionO" label="&sb.output.option.open;"  persist="checked" checked="true" />
+
+</dialog>

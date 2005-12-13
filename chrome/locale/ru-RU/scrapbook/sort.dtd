@@ -1,0 +1,7 @@
+<!ENTITY sb.sort			"Сортировать">
+<!ENTITY sb.sort.title.asc	"по заголовкам (A &gt; Z)">
+<!ENTITY sb.sort.title.desc	"по заголовкам (Z &gt; A)">
+<!ENTITY sb.sort.date.asc	"в хронологическом порядке">
+<!ENTITY sb.sort.date.desc	"в обратном хронол. порядке">
+<!ENTITY sb.sort.recursive	"Сортировать подпапки рекурсивно">
+<!ENTITY sb.sort.confirm	"Предупреждение: Вы не сможете отменить эту операцию. Вы действительно хотите полностью переупорядочить дерево?">

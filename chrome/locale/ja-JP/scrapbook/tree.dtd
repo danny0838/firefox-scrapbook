@@ -1,0 +1,18 @@
+<!ENTITY sb.open			"開く">
+<!ENTITY sb.open.tab		"タブで開く">
+<!ENTITY sb.open.newtab		"新しいタブで開く">
+<!ENTITY sb.open.source		"ソースのURLを開く">
+<!ENTITY sb.show.files		"ファイルを表示">
+<!ENTITY sb.delete			"削除">
+<!ENTITY sb.property		"プロパティ">
+
+<!ENTITY sb.folder.toggle	"展開／収縮">
+<!ENTITY sb.folder.openall	"すべてタブで開く">
+<!ENTITY sb.folder.combine	"すべて結合して開く">
+<!ENTITY sb.folder.manage	"フォルダの管理...">
+
+<!ENTITY sb.new.folder		"新しいフォルダ...">
+<!ENTITY sb.new.note		"新しいノート">
+
+<!ENTITY sb.sort.folder		"フォルダ内をソート">
+
