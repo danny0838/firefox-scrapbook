@@ -1,9 +1,7 @@
-<!ENTITY sb.multiple.url			"URL (每行输入一个 URL)">
-
-<!ENTITY sb.multiple.detector		"检测 URL">
-<!ENTITY sb.multiple.detector.plink	"页面中包含的所有链接">
-<!ENTITY sb.multiple.detector.slink	"所选内容中的所有链接">
-<!ENTITY sb.multiple.detector.tabs	"当前所有打开的标签页">
-<!ENTITY sb.multiple.detector.local	"本地存储的 HTML 文件">
-<!ENTITY sb.multiple.detector.clear	"清除">
-
+<!ENTITY sb.multiple.url "URL (每行输入一个 URL)">
+<!ENTITY sb.multiple.detector "检测 URL">
+<!ENTITY sb.multiple.detector.plink "页面中包含的所有链接">
+<!ENTITY sb.multiple.detector.slink "所选内容中的所有链接">
+<!ENTITY sb.multiple.detector.tabs "当前所有打开的标签页">
+<!ENTITY sb.multiple.detector.local "本地存储的 HTML 文件">
+<!ENTITY sb.multiple.detector.clear "清除">

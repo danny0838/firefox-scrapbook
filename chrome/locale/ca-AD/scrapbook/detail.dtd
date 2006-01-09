@@ -1,16 +1,13 @@
-<!ENTITY sb.detail					"Captura detallada">
-<!ENTITY sb.detail.new.folder		"Nova carpeta">
-<!ENTITY sb.detail.select.folder	"Trieu una carpeta">
-
-<!ENTITY sb.detail.linked.file		"Baixa els següents fitxers enllaçats">
-<!ENTITY sb.detail.linked.image		"Imatges">
-<!ENTITY sb.detail.linked.sound		"Sons">
-<!ENTITY sb.detail.linked.movie		"Pel·lícules">
-<!ENTITY sb.detail.linked.archive	"Arxius">
-<!ENTITY sb.detail.linked.custom	"Personalitzats">
-
-<!ENTITY sb.detail.linked.page			"Captura les pàgines web enllaçades">
-<!ENTITY sb.detail.linked.page2			"Captura les pàgines web enllaçades">
-<!ENTITY sb.detail.linked.page.depth	"Profunditat">
-<!ENTITY sb.detail.linked.page.text		"Trieu amb quina profunditat s'han de seguir els enllaços. Un cop hagi finalitzat la captura, totes les pàgines s'enllaçaran les unes amb les altres i es crearà un mapa web.">
-
+<!ENTITY sb.detail "Captura detallada">
+<!ENTITY sb.detail.new.folder "Nova carpeta">
+<!ENTITY sb.detail.select.folder "Trieu una carpeta">
+<!ENTITY sb.detail.linked.file "Baixa els següents fitxers enllaçats">
+<!ENTITY sb.detail.linked.image "Imatges">
+<!ENTITY sb.detail.linked.sound "Sons">
+<!ENTITY sb.detail.linked.movie "Pel·lícules">
+<!ENTITY sb.detail.linked.archive "Arxius">
+<!ENTITY sb.detail.linked.custom "Personalitzats">
+<!ENTITY sb.detail.linked.page "Captura les pàgines web enllaçades">
+<!ENTITY sb.detail.linked.page2 "Captura les pàgines web enllaçades">
+<!ENTITY sb.detail.linked.page.depth "Profunditat">
+<!ENTITY sb.detail.linked.page.text "Trieu amb quina profunditat s'han de seguir els enllaços. Un cop hagi finalitzat la captura, totes les pàgines s'enllaçaran les unes amb les altres i es crearà un mapa web.">

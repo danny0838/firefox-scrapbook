@@ -1,35 +1,29 @@
-<!ENTITY sb.title			"Web-альбом">
-
-<!ENTITY sb.new.folder		"Новая папка...">
-<!ENTITY sb.new.note		"Создать пометку">
-<!ENTITY sb.toggle.all		"Развернуть/Свернуть все папки">
-
-<!ENTITY sb.tools			"Инструменты">
-<!ENTITY sb.tools.setting	"Настройки...">
-<!ENTITY sb.tools.manage	"Управление">
-<!ENTITY sb.tools.calculate	"Рассчитать занимаемый размер">
-<!ENTITY sb.tools.sorttree	"Сортировать все дерево">
-<!ENTITY sb.tools.directory	"Папка ScrapBook">
-<!ENTITY sb.tools.combine	"Объединение">
-<!ENTITY sb.tools.multiple	"Захватить множество URL-ов">
-<!ENTITY sb.tools.trade		"Импорт / Экспорт">
-<!ENTITY sb.tools.output	"Сохранить дерево страниц как HTML">
-<!ENTITY sb.tools.backup	"Архивирование">
-<!ENTITY sb.tools.repair	"Срочное восстановление">
-<!ENTITY sb.tools.homepage	"Домашняя страница">
-<!ENTITY sb.tools.about		"О программе">
-
-<!ENTITY sb.search			"Поиск">
-<!ENTITY sb.search.fulltext	"Полнотекстовый поиск">
-<!ENTITY sb.search.all		"Все">
-<!ENTITY sb.search.re		"Использовать шаблоны">
-<!ENTITY sb.search.cs		"С учетом регистра">
-<!ENTITY sb.search.cache	"Обновить кэш полнотекстового поиска">
-<!ENTITY sb.search.clear	"Удалить историю автозаполнения">
-<!ENTITY sb.search.days		"Показать за: ">
-
-<!ENTITY sb.note.opentab	"Открыть на вкладке">
-<!ENTITY sb.note.close		"Закрыть">
-
-<!ENTITY sb.move			"Переместить в папку">
-
+<!ENTITY sb.title "Web-альбом">
+<!ENTITY sb.new.folder "Новая папка...">
+<!ENTITY sb.new.note "Создать пометку">
+<!ENTITY sb.toggle.all "Развернуть/Свернуть все папки">
+<!ENTITY sb.tools "Инструменты">
+<!ENTITY sb.tools.setting "Настройки...">
+<!ENTITY sb.tools.manage "Управление">
+<!ENTITY sb.tools.calculate "Рассчитать занимаемый размер">
+<!ENTITY sb.tools.sorttree "Сортировать все дерево">
+<!ENTITY sb.tools.directory "Папка ScrapBook">
+<!ENTITY sb.tools.combine "Объединение">
+<!ENTITY sb.tools.multiple "Захватить множество URL-ов">
+<!ENTITY sb.tools.trade "Импорт / Экспорт">
+<!ENTITY sb.tools.output "Сохранить дерево страниц как HTML">
+<!ENTITY sb.tools.backup "Архивирование">
+<!ENTITY sb.tools.repair "Срочное восстановление">
+<!ENTITY sb.tools.homepage "Домашняя страница">
+<!ENTITY sb.tools.about "О программе">
+<!ENTITY sb.search "Поиск">
+<!ENTITY sb.search.fulltext "Полнотекстовый поиск">
+<!ENTITY sb.search.all "Все">
+<!ENTITY sb.search.re "Использовать шаблоны">
+<!ENTITY sb.search.cs "С учетом регистра">
+<!ENTITY sb.search.cache "Обновить кэш полнотекстового поиска">
+<!ENTITY sb.search.clear "Удалить историю автозаполнения">
+<!ENTITY sb.search.days "Показать за: ">
+<!ENTITY sb.note.opentab "Открыть на вкладке">
+<!ENTITY sb.note.close "Закрыть">
+<!ENTITY sb.move "Переместить в папку">

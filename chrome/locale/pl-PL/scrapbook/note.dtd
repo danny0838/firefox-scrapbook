@@ -1,12 +1,11 @@
-<!ENTITY sn.save			"Zapisz">
-<!ENTITY sn.close			"Zamknij">
-<!ENTITY sn.tools			"Narzędzia">
-<!ENTITY sn.preview			"Podgląd dokumentu HTML">
-<!ENTITY sn.preview.quit	"Zamknij okno podglądu">
-<!ENTITY sn.template		"Edycja szablonu dokumentu HTML">
-<!ENTITY sn.autolinefeed	"Autouzupełnianie">
-<!ENTITY sn.autolinefeed.t	"Dodaj znacznik &lt;br&gt; na końcu linii w podglądzie dokumentu HTML">
-<!ENTITY sn.fontsize		"Wielkość czcionki">
-<!ENTITY sn.help			"Pomoc">
-<!ENTITY sn.exit			"Zakończ">
-
+<!ENTITY sn.save "Zapisz">
+<!ENTITY sn.close "Zamknij">
+<!ENTITY sn.tools "Narzędzia">
+<!ENTITY sn.preview "Podgląd dokumentu HTML">
+<!ENTITY sn.preview.quit "Zamknij okno podglądu">
+<!ENTITY sn.template "Edycja szablonu dokumentu HTML">
+<!ENTITY sn.autolinefeed "Autouzupełnianie">
+<!ENTITY sn.autolinefeed.t "Dodaj znacznik &lt;br&gt; na końcu linii w podglądzie dokumentu HTML">
+<!ENTITY sn.fontsize "Wielkość czcionki">
+<!ENTITY sn.help "Pomoc">
+<!ENTITY sn.exit "Zakończ">

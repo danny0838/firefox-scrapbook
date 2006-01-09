@@ -1,6 +1,6 @@
-<!ENTITY sb.combine.select		"Sélectionner les pages">
-<!ENTITY sb.combine.select.d	"Double-cliquer sur les pages dans l'ordre de la combinaison voulue.">
-<!ENTITY sb.combine.preview		"Aperçu">
-<!ENTITY sb.combine.preview.d	"Presser le bouton 'Combiner' après vérification de l'aperçu.">
-<!ENTITY sb.combine.option.header	"Ajouter l'en-tête d'information à chaque page">
-<!ENTITY sb.combine.option.remove	"Supprimer les pages d'origine après combinaison">
+<!ENTITY sb.combine.select "Sélectionner les pages">
+<!ENTITY sb.combine.select.d "Double-cliquer sur les pages dans l'ordre de la combinaison voulue.">
+<!ENTITY sb.combine.preview "Aperçu">
+<!ENTITY sb.combine.preview.d "Presser le bouton 'Combiner' après vérification de l'aperçu.">
+<!ENTITY sb.combine.option.header "Ajouter l'en-tête d'information à chaque page">
+<!ENTITY sb.combine.option.remove "Supprimer les pages d'origine après combinaison">

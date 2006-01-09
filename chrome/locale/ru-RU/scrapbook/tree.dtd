@@ -1,18 +1,16 @@
-<!ENTITY sb.open			"Открыть">
-<!ENTITY sb.open.tab		"Открыть на вкладке">
-<!ENTITY sb.open.newtab		"Открыть в новой вкладке">
-<!ENTITY sb.open.source		"Открыть исходный URL">
-<!ENTITY sb.show.files		"Показать файлы">
-<!ENTITY sb.delete			"Удалить">
-<!ENTITY sb.property		"Свойства">
-
-<!ENTITY sb.folder.toggle	"Развернуть/Свернуть">
-<!ENTITY sb.folder.openall	"Открыть все на вкладках">
-<!ENTITY sb.folder.combine	"Открыть в комбинированном виде">
-<!ENTITY sb.folder.manage	"Упорядочить папки...">
-
-<!ENTITY sb.new.folder		"Новая папка...">
-<!ENTITY sb.new.note		"Создать пометку">
-
-<!ENTITY sb.sort.folder		"Сортировать папку">
-
+<!ENTITY sb.open "Открыть">
+<!ENTITY sb.open.tab "Открыть на вкладке">
+<!ENTITY sb.open.newtab "Открыть в новой вкладке">
+<!ENTITY sb.open.source "Открыть исходный URL">
+<!ENTITY sb.show.files "Показать файлы">
+<!ENTITY sb.delete "Удалить">
+<!ENTITY sb.property "Свойства">
+<!ENTITY sb.folder.toggle "Развернуть/Свернуть">
+<!ENTITY sb.folder.openall "Открыть все на вкладках">
+<!ENTITY sb.folder.combine "Открыть в комбинированном виде">
+<!ENTITY sb.folder.manage "Упорядочить папки...">
+<!ENTITY sb.new.folder "Новая папка...">
+<!ENTITY sb.new.note "Создать пометку">
+<!ENTITY sb.sort.folder "Сортировать папку">
+<!ENTITY mb.configure "Configure">
+<!ENTITY mb.profileFolder "Profile Folder">

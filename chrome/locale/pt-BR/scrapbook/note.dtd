@@ -1,12 +1,11 @@
-<!ENTITY sn.save			"Salvar">
-<!ENTITY sn.close			"Fechar">
-<!ENTITY sn.tools			"Ferramentas">
-<!ENTITY sn.preview			"Pré-visualização do HTML">
-<!ENTITY sn.preview.quit	"Fechar Pré-visualização">
-<!ENTITY sn.template		"Editar Template HTML">
-<!ENTITY sn.autolinefeed	"Quebra Automática">
-<!ENTITY sn.autolinefeed.t	"Adicionar a tag &lt;br&gt; no final da linha na pré-visualização do HTML">
-<!ENTITY sn.fontsize		"Tamanho da Fonte">
-<!ENTITY sn.help			"Ajuda">
-<!ENTITY sn.exit			"Sair">
-
+<!ENTITY sn.save "Salvar">
+<!ENTITY sn.close "Fechar">
+<!ENTITY sn.tools "Ferramentas">
+<!ENTITY sn.preview "Pré-visualização do HTML">
+<!ENTITY sn.preview.quit "Fechar Pré-visualização">
+<!ENTITY sn.template "Editar Template HTML">
+<!ENTITY sn.autolinefeed "Quebra Automática">
+<!ENTITY sn.autolinefeed.t "Adicionar a tag &lt;br&gt; no final da linha na pré-visualização do HTML">
+<!ENTITY sn.fontsize "Tamanho da Fonte">
+<!ENTITY sn.help "Ajuda">
+<!ENTITY sn.exit "Sair">

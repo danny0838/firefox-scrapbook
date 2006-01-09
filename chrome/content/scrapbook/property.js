@@ -25,7 +25,7 @@ function SB_initProp()
 
 	sbDataSource.init();
 	gSBitem = new ScrapBookItem();
-	gRes = SBservice.RDF.GetResource("urn:scrapbook:item" + gID);
+	gRes = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gID);
 	for ( var prop in gSBitem )
 	{
 		gSBitem[prop] = sbDataSource.getProperty(prop, gRes);
@@ -44,13 +44,13 @@ function SB_initProp()
 	document.getElementById("ScrapBookPropDate").value    = myDateTime;
 	document.getElementById("ScrapBookPropChars").value   = gSBitem.chars;
 	document.getElementById("ScrapBookPropComment").value = gSBitem.comment.replace(/ __BR__ /g, "\n");
-	document.getElementById("ScrapBookPropIcon").src      = gSBitem.icon ? gSBitem.icon : SBcommon.getDefaultIcon(gSBitem.type);
+	document.getElementById("ScrapBookPropIcon").src      = gSBitem.icon ? gSBitem.icon : sbCommonUtils.getDefaultIcon(gSBitem.type);
 	document.getElementById("ScrapBookPropIcon").setAttribute("tooltiptext", gSBitem.icon);
 	document.getElementById("ScrapBookPropMark").setAttribute("checked", gSBitem.type == "marked");
 	document.getElementById("ScrapBookPropertyDialog").setAttribute("title", gSBitem.title);
 	document.title = gSBitem.title;
 
-	if ( SBservice.RDFCU.IsContainer(sbDataSource.data, gRes) ) gSBitem.type = "folder";
+	if ( sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, gRes) ) gSBitem.type = "folder";
 
 	switch ( gSBitem.type )
 	{
@@ -97,7 +97,7 @@ function SB_acceptProp()
 	var newVals = {
 		title   : document.getElementById("ScrapBookPropTitle").value,
 		source  : document.getElementById("ScrapBookPropSource").value,
-		comment : SBcommon.escapeComment(document.getElementById("ScrapBookPropComment").value),
+		comment : sbCommonUtils.escapeComment(document.getElementById("ScrapBookPropComment").value),
 		type    : gSBitem.type,
 		icon    : SB_getIconURL()
 	};
@@ -117,7 +117,7 @@ function SB_acceptProp()
 		{
 			sbDataSource.updateItem(gRes, prop, gSBitem[prop]);
 		}
-		if ( !gTypeFolder ) SBcommon.writeIndexDat(gSBitem);
+		if ( !gTypeFolder ) sbCommonUtils.writeIndexDat(gSBitem);
 		sbDataSource.flush();
 	}
 	if ( window.arguments[1] ) window.arguments[1].accept = true;
@@ -140,7 +140,7 @@ function SB_fillHTMLTitle(popupXUL)
 
 function SB_setDefaultIcon()
 {
-	document.getElementById("ScrapBookPropIcon").src = SBcommon.getDefaultIcon(gSBitem.type);
+	document.getElementById("ScrapBookPropIcon").src = sbCommonUtils.getDefaultIcon(gSBitem.type);
 }
 
 
@@ -155,11 +155,11 @@ function SB_pickupIcon(aType, aLabel)
 {
 	if ( aType == "F" )
 	{
-		var dispDir = SBcommon.getContentDir(gSBitem.id);
+		var dispDir = sbCommonUtils.getContentDir(gSBitem.id);
 	}
 	else
 	{
-		var dispDir = SBcommon.getScrapBookDir().clone();
+		var dispDir = sbCommonUtils.getScrapBookDir().clone();
 		dispDir.append("icon");
 		if ( !dispDir.exists() ) dispDir.create(dispDir.DIRECTORY_TYPE, 0700);
 	}
@@ -170,7 +170,7 @@ function SB_pickupIcon(aType, aLabel)
 	var answer = FP.show();
 	if ( answer == FP.returnOK )
 	{
-		document.getElementById("ScrapBookPropIcon").src = SBcommon.convertFilePathToURL(FP.file.path);
+		document.getElementById("ScrapBookPropIcon").src = sbCommonUtils.convertFilePathToURL(FP.file.path);
 	}
 }
 
@@ -191,12 +191,12 @@ var sbPropUtil = {
 
 	getHTMLTitle : function(aID, aChars)
 	{
-		var file  = SBcommon.getContentDir(aID);
+		var file  = sbCommonUtils.getContentDir(aID);
 		file.append("index.html");
-		var content = SBcommon.readFile(file);
+		var content = sbCommonUtils.readFile(file);
 		try {
-			SBservice.UNICODE.charset = aChars;
-			content = SBservice.UNICODE.ConvertToUnicode(content);
+			sbCommonUtils.UNICODE.charset = aChars;
+			content = sbCommonUtils.UNICODE.ConvertToUnicode(content);
 			var isMatch = content.match(/<title>([^<]+?)<\/title>/im);
 			if ( isMatch ) return RegExp.$1;
 		} catch(ex) {
@@ -209,7 +209,7 @@ var sbPropUtil = {
 	{
 		var totalSize = 0;
 		var totalFile = 0;
-		var dir = SBcommon.getContentDir(aID);
+		var dir = sbCommonUtils.getContentDir(aID);
 		if ( !dir.isDirectory() ) return [0, 0];
 		var fileEnum = dir.directoryEntries;
 		while ( fileEnum.hasMoreElements() )

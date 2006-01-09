@@ -1,18 +1,15 @@
-<!ENTITY sb.title					"ScrapBook">
-<!ENTITY sb.capture.partial			"Przechwyć zaznaczenie">
-<!ENTITY sb.capture.partial.as		"Przechwyć zaznaczenie jako...">
-<!ENTITY sb.capture.entire			"Przechwyć stronę">
-<!ENTITY sb.capture.entire.as		"Przechwyć stronę jako...">
-<!ENTITY sb.capture.frame			"Przechwyć ramkę">
-<!ENTITY sb.capture.frame.as		"Przechwyć ramkę jako...">
-<!ENTITY sb.capture.target			"Przechwyć odnośnik">
-<!ENTITY sb.capture.target.as		"Przechwyć odnośnik jako...">
-
-<!ENTITY sb.capture.folder.root		"Folder główny">
-<!ENTITY sb.capture.folder.select	"Wybierz folder">
-
-<!ENTITY sb.key.sidebar		"K">
-<!ENTITY sb.key.editor		"J">
-<!ENTITY sb.key.capture		"L">
-<!ENTITY sb.key.capture.as	"K">
-
+<!ENTITY sb.title "ScrapBook">
+<!ENTITY sb.capture.partial "Przechwyć zaznaczenie">
+<!ENTITY sb.capture.partial.as "Przechwyć zaznaczenie jako...">
+<!ENTITY sb.capture.entire "Przechwyć stronę">
+<!ENTITY sb.capture.entire.as "Przechwyć stronę jako...">
+<!ENTITY sb.capture.frame "Przechwyć ramkę">
+<!ENTITY sb.capture.frame.as "Przechwyć ramkę jako...">
+<!ENTITY sb.capture.target "Przechwyć odnośnik">
+<!ENTITY sb.capture.target.as "Przechwyć odnośnik jako...">
+<!ENTITY sb.capture.folder.root "Folder główny">
+<!ENTITY sb.capture.folder.select "Wybierz folder">
+<!ENTITY sb.key.sidebar "K">
+<!ENTITY sb.key.editor "J">
+<!ENTITY sb.key.capture "L">
+<!ENTITY sb.key.capture.as "K">

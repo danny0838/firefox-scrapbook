@@ -1,20 +1,17 @@
-<!ENTITY sb.prop.date		"Datum">
-<!ENTITY sb.prop.type		"Typ">
-<!ENTITY sb.prop.title		"Název">
-<!ENTITY sb.prop.encode		"Znaková sada">
-<!ENTITY sb.prop.icon		"Ikona">
-<!ENTITY sb.prop.source		"Adresa">
-<!ENTITY sb.prop.comment	"Komentář">
-<!ENTITY sb.prop.content	"Obsah">
-<!ENTITY sb.prop.size		"Velikost">
-<!ENTITY sb.prop.id.date	"ID (Čas)">
-<!ENTITY sb.prop.folder		"Složka">
-
-<!ENTITY sb.prop.general	"Obecné informace">
-
-<!ENTITY sb.prop.icon.change	"Změnit">
-<!ENTITY sb.prop.icon.default	"Výchozí">
-<!ENTITY sb.prop.icon.favicon	"Vybrat favikonku">
-<!ENTITY sb.prop.icon.custom	"Vybrat uživatelskou ikonku">
-<!ENTITY sb.prop.mark			"Označit">
-
+<!ENTITY sb.prop.date "Datum">
+<!ENTITY sb.prop.type "Typ">
+<!ENTITY sb.prop.title "Název">
+<!ENTITY sb.prop.encode "Znaková sada">
+<!ENTITY sb.prop.icon "Ikona">
+<!ENTITY sb.prop.source "Adresa">
+<!ENTITY sb.prop.comment "Komentář">
+<!ENTITY sb.prop.content "Obsah">
+<!ENTITY sb.prop.size "Velikost">
+<!ENTITY sb.prop.id.date "ID (Čas)">
+<!ENTITY sb.prop.folder "Složka">
+<!ENTITY sb.prop.general "Obecné informace">
+<!ENTITY sb.prop.icon.change "Změnit">
+<!ENTITY sb.prop.icon.default "Výchozí">
+<!ENTITY sb.prop.icon.favicon "Vybrat favikonku">
+<!ENTITY sb.prop.icon.custom "Vybrat uživatelskou ikonku">
+<!ENTITY sb.prop.mark "Označit">

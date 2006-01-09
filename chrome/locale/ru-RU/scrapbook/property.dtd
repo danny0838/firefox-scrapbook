@@ -1,20 +1,17 @@
-<!ENTITY sb.prop.date		"Дата">
-<!ENTITY sb.prop.type		"Тип">
-<!ENTITY sb.prop.title		"Заголовок">
-<!ENTITY sb.prop.encode		"Кодировка">
-<!ENTITY sb.prop.icon		"Значок">
-<!ENTITY sb.prop.source		"URL">
-<!ENTITY sb.prop.comment	"Комментарий">
-<!ENTITY sb.prop.content	"Содержимое">
-<!ENTITY sb.prop.size		"Размер">
-<!ENTITY sb.prop.id.date	"ID (Время)">
-<!ENTITY sb.prop.folder		"Папка">
-
-<!ENTITY sb.prop.general	"Основная информация">
-
-<!ENTITY sb.prop.icon.change	"Изменить">
-<!ENTITY sb.prop.icon.default	"По умолчанию">
-<!ENTITY sb.prop.icon.favicon	"Выбраить значок">
-<!ENTITY sb.prop.icon.custom	"Выбрать свой значок">
-<!ENTITY sb.prop.mark			"Пометить">
-
+<!ENTITY sb.prop.date "Дата">
+<!ENTITY sb.prop.type "Тип">
+<!ENTITY sb.prop.title "Заголовок">
+<!ENTITY sb.prop.encode "Кодировка">
+<!ENTITY sb.prop.icon "Значок">
+<!ENTITY sb.prop.source "URL">
+<!ENTITY sb.prop.comment "Комментарий">
+<!ENTITY sb.prop.content "Содержимое">
+<!ENTITY sb.prop.size "Размер">
+<!ENTITY sb.prop.id.date "ID (Время)">
+<!ENTITY sb.prop.folder "Папка">
+<!ENTITY sb.prop.general "Основная информация">
+<!ENTITY sb.prop.icon.change "Изменить">
+<!ENTITY sb.prop.icon.default "По умолчанию">
+<!ENTITY sb.prop.icon.favicon "Выбраить значок">
+<!ENTITY sb.prop.icon.custom "Выбрать свой значок">
+<!ENTITY sb.prop.mark "Пометить">

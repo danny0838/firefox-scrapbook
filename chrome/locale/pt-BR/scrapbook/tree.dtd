@@ -1,18 +1,16 @@
-<!ENTITY sb.open			"Abrir">
-<!ENTITY sb.open.tab		"Abrir na Aba">
-<!ENTITY sb.open.newtab		"Abrir em Nova Aba">
-<!ENTITY sb.open.source		"Abrir URL Fonte">
-<!ENTITY sb.show.files		"Mostrar Arquivos">
-<!ENTITY sb.delete			"Apagar">
-<!ENTITY sb.property		"Propriedades">
-
-<!ENTITY sb.folder.toggle	"Expandir/Recolher">
-<!ENTITY sb.folder.openall	"Abrir Tudo em Abas">
-<!ENTITY sb.folder.combine	"Abrir em Visualização Combinada">
-<!ENTITY sb.folder.manage	"Gerenciar Pasta...">
-
-<!ENTITY sb.new.folder		"Nova Pasta...">
-<!ENTITY sb.new.note		"Nova Anotação">
-
-<!ENTITY sb.sort.folder		"Ordenar Pasta">
-
+<!ENTITY sb.open "Abrir">
+<!ENTITY sb.open.tab "Abrir na Aba">
+<!ENTITY sb.open.newtab "Abrir em Nova Aba">
+<!ENTITY sb.open.source "Abrir URL Fonte">
+<!ENTITY sb.show.files "Mostrar Arquivos">
+<!ENTITY sb.delete "Apagar">
+<!ENTITY sb.property "Propriedades">
+<!ENTITY sb.folder.toggle "Expandir/Recolher">
+<!ENTITY sb.folder.openall "Abrir Tudo em Abas">
+<!ENTITY sb.folder.combine "Abrir em Visualização Combinada">
+<!ENTITY sb.folder.manage "Gerenciar Pasta...">
+<!ENTITY sb.new.folder "Nova Pasta...">
+<!ENTITY sb.new.note "Nova Anotação">
+<!ENTITY sb.sort.folder "Ordenar Pasta">
+<!ENTITY mb.configure "Configure">
+<!ENTITY mb.profileFolder "Profile Folder">

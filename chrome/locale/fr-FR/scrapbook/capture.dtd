@@ -1,15 +1,13 @@
-<!ENTITY sb.capture			"Capture">
-<!ENTITY sb.capture.abort	"Arrêter">
-<!ENTITY sb.capture.start	"Démarrer">
-<!ENTITY sb.capture.retry	"Réessayer">
-<!ENTITY sb.capture.skip	"Ignorer">
-<!ENTITY sb.capture.pause	"Pause">
-
-<!ENTITY sb.capture.filter			"Filtrage">
-<!ENTITY sb.capture.filter.domain	"Limiter au domaine">
-<!ENTITY sb.capture.filter.level	"Limiter au répertoire">
-<!ENTITY sb.capture.filter.string	"Filtrer par chaîne...">
-<!ENTITY sb.capture.filter.checkon	"Sélectionner tout">
-<!ENTITY sb.capture.filter.checkoff	"Désélectionner tout">
-<!ENTITY sb.capture.filter.invert	"Inverser la sélection">
-
+<!ENTITY sb.capture "Capture">
+<!ENTITY sb.capture.abort "Arrêter">
+<!ENTITY sb.capture.start "Démarrer">
+<!ENTITY sb.capture.retry "Réessayer">
+<!ENTITY sb.capture.skip "Ignorer">
+<!ENTITY sb.capture.pause "Pause">
+<!ENTITY sb.capture.filter "Filtrage">
+<!ENTITY sb.capture.filter.domain "Limiter au domaine">
+<!ENTITY sb.capture.filter.level "Limiter au répertoire">
+<!ENTITY sb.capture.filter.string "Filtrer par chaîne...">
+<!ENTITY sb.capture.filter.checkon "Sélectionner tout">
+<!ENTITY sb.capture.filter.checkoff "Désélectionner tout">
+<!ENTITY sb.capture.filter.invert "Inverser la sélection">

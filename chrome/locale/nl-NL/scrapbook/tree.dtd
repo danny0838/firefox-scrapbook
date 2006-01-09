@@ -1,18 +1,16 @@
-<!ENTITY sb.open			"Openen">
-<!ENTITY sb.open.tab		"In een tabblad openen">
-<!ENTITY sb.open.newtab		"In een nieuw tabblad openen">
-<!ENTITY sb.open.source		"Bronlocatie openen">
-<!ENTITY sb.show.files		"Bestanden tonen">
-<!ENTITY sb.delete			"Verwijderen">
-<!ENTITY sb.property		"Eigenschappen">
-
-<!ENTITY sb.folder.toggle	"Uitvouwen/Inklappen">
-<!ENTITY sb.folder.openall	"Alles in tabbladen openen">
-<!ENTITY sb.folder.combine	"In een gecombineerd scherm openen">
-<!ENTITY sb.folder.manage	"Map Beheren...">
-
-<!ENTITY sb.new.folder		"Nieuwe map...">
-<!ENTITY sb.new.note		"Nieuwe notitie">
-
-<!ENTITY sb.sort.folder		"Map sorteren">
-
+<!ENTITY sb.open "Openen">
+<!ENTITY sb.open.tab "In een tabblad openen">
+<!ENTITY sb.open.newtab "In een nieuw tabblad openen">
+<!ENTITY sb.open.source "Bronlocatie openen">
+<!ENTITY sb.show.files "Bestanden tonen">
+<!ENTITY sb.delete "Verwijderen">
+<!ENTITY sb.property "Eigenschappen">
+<!ENTITY sb.folder.toggle "Uitvouwen/Inklappen">
+<!ENTITY sb.folder.openall "Alles in tabbladen openen">
+<!ENTITY sb.folder.combine "In een gecombineerd scherm openen">
+<!ENTITY sb.folder.manage "Map Beheren...">
+<!ENTITY sb.new.folder "Nieuwe map...">
+<!ENTITY sb.new.note "Nieuwe notitie">
+<!ENTITY sb.sort.folder "Map sorteren">
+<!ENTITY mb.configure "Configure">
+<!ENTITY mb.profileFolder "Profile Folder">

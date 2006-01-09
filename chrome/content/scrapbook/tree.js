@@ -11,9 +11,10 @@ var sbTreeHandler = {
 	init : function(isContainer, xulID)
 	{
 		if ( !xulID ) xulID = "ScrapBookTree";
-		SBtree = document.getElementById(xulID);
+		SBtree    = document.getElementById(xulID);
+		this.TREE = document.getElementById(xulID);
 		SBtree.database.AddDataSource(sbDataSource.data);
-		this.prefSingleExpand = SBcommon.getBoolPref("scrapbook.tree.singleexpand", false);
+		this.prefSingleExpand = sbCommonUtils.getBoolPref("scrapbook.tree.singleexpand", false);
 		if ( isContainer ) document.getElementById("ScrapBookTreeRule").setAttribute("iscontainer", true);
 		SBtree.builder.rebuild();
 	},
@@ -53,7 +54,7 @@ var sbTreeHandler = {
 		if ( SBtree.view.isContainer(curIdx) ) return;
 		var myID   = sbDataSource.getProperty("id", curRes);
 		var myType = sbDataSource.getProperty("type", curRes);
-		SBcommon.loadURL(SBcommon.getURL(myID, myType), aEvent.ctrlKey || aEvent.shiftKey);
+		sbCommonUtils.loadURL(sbCommonUtils.getURL(myID, myType), aEvent.ctrlKey || aEvent.shiftKey);
 	},
 
 	getSelection : function(idx2res, rule)

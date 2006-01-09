@@ -1,4 +1,4 @@
-<!ENTITY sb.trade.import	"Importeren">
-<!ENTITY sb.trade.export	"Exporteren">
-<!ENTITY sb.trade.restore	"Importeren met herstel van de mapppenstructuur">
-<!ENTITY sb.trade.time	"Exporttijd">
+<!ENTITY sb.trade.import "Importeren">
+<!ENTITY sb.trade.export "Exporteren">
+<!ENTITY sb.trade.restore "Importeren met herstel van de mapppenstructuur">
+<!ENTITY sb.trade.time "Exporttijd">

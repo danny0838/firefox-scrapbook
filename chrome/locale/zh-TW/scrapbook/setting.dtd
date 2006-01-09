@@ -1,35 +1,30 @@
-<!ENTITY sb.setting			"設定">
-<!ENTITY sb.setting.general	"一般設定">
-<!ENTITY sb.setting.usetabs	"分頁設定">
-<!ENTITY sb.setting.advance	"進階設定">
-<!ENTITY sb.setting.capture	"擷取設定">
-<!ENTITY sb.setting.editing	"編輯設定">
-<!ENTITY sb.setting.program	"程式設定">
-
-<!ENTITY sb.setting.browser.submenu		"在瀏覽器的快捷選單中，相關選項以子選單顯示（需重新啟動）">
-<!ENTITY sb.setting.capture.detail		"以拖曳方式擷取資料時，顯示「詳細資訊」對話方塊。">
-<!ENTITY sb.setting.capture.notify		"顯示「擷取完畢」提醒視窗（可能只在 Windows 下有用？）">
-<!ENTITY sb.setting.tree.singleexpand	"展開某資料夾時，折疊其他資料夾（像 IE 的「我的最愛」模式）">
-<!ENTITY sb.setting.tree.quickdelete	"刪除擷取文件時不加確認">
-
-<!ENTITY sb.setting.usetabs.d			"勾選項目將以新分頁開啟">
-<!ENTITY sb.setting.usetabs.note		"在分頁中開啟筆記">
-
-<!ENTITY sb.setting.capture.utf8encode		"自動將字元轉為 UTF-8 編碼（建議勾選）">
-<!ENTITY sb.setting.capture.utf8encode.d	"如果取消此項，有些字元會常常變成「?」。">
-<!ENTITY sb.setting.capture.removescript	"移除 JavaScript（建議勾選）">
-<!ENTITY sb.setting.capture.removescript.d	"如果取消此項，則 JavaScript 可能會引發許多問題。">
-
-<!ENTITY sb.highlighter.tips		"小技巧：編輯工具列開啟時，你可以按下數字鍵 1~4 直接標示所選區域。">
-<!ENTITY sb.setting.block.style		"樣式表">
-
-<!ENTITY sb.button.browse			"瀏覽">
-<!ENTITY sb.button.show				"顯示資料夾">
-
-<!ENTITY sb.setting.data			"擷取文件存放處">
-<!ENTITY sb.setting.data.default	"預設（在您的個人設定檔資料夾中）">
-<!ENTITY sb.setting.data.explain	"請選擇 ScrapBook 存放擷取資料的資料夾">
-<!ENTITY sb.setting.data.alert		"目前您的 ScrapBook 資料存放於 Firefox 的個人設定檔資料夾中。請注意：如果您在刪除個人設定時選擇「刪除檔案」，則所有擷取資料將會一起消失。">
-<!ENTITY sb.setting.filer			"「顯示相關檔案」命令所使用的程式">
-<!ENTITY sb.setting.filer.default	"預設（如果您使用 Windows，則可能是檔案總管）">
-
+<!ENTITY sb.setting "設定">
+<!ENTITY sb.setting.general "一般設定">
+<!ENTITY sb.setting.usetabs "分頁設定">
+<!ENTITY sb.setting.advance "進階設定">
+<!ENTITY sb.setting.capture "擷取設定">
+<!ENTITY sb.setting.editing "編輯設定">
+<!ENTITY sb.setting.program "程式設定">
+<!ENTITY sb.setting.browser.submenu "在瀏覽器的快捷選單中，相關選項以子選單顯示（需重新啟動）">
+<!ENTITY sb.setting.capture.detail "以拖曳方式擷取資料時，顯示「詳細資訊」對話方塊。">
+<!ENTITY sb.setting.capture.notify "顯示「擷取完畢」提醒視窗（可能只在 Windows 下有用？）">
+<!ENTITY sb.setting.tree.singleexpand "展開某資料夾時，折疊其他資料夾（像 IE 的「我的最愛」模式）">
+<!ENTITY sb.setting.tree.quickdelete "刪除擷取文件時不加確認">
+<!ENTITY sb.setting.usetabs.d "勾選項目將以新分頁開啟">
+<!ENTITY sb.setting.usetabs.note "在分頁中開啟筆記">
+<!ENTITY sb.setting.capture.utf8encode "自動將字元轉為 UTF-8 編碼（建議勾選）">
+<!ENTITY sb.setting.capture.utf8encode.d "如果取消此項，有些字元會常常變成「?」。">
+<!ENTITY sb.setting.capture.removescript "移除 JavaScript（建議勾選）">
+<!ENTITY sb.setting.capture.removescript.d "如果取消此項，則 JavaScript 可能會引發許多問題。">
+<!ENTITY sb.highlighter.tips "小技巧：編輯工具列開啟時，你可以按下數字鍵 1~4 直接標示所選區域。">
+<!ENTITY sb.setting.block.style "樣式表">
+<!ENTITY sb.button.browse "瀏覽">
+<!ENTITY sb.button.show "顯示資料夾">
+<!ENTITY sb.setting.data "擷取文件存放處">
+<!ENTITY sb.setting.data.default "預設（在您的個人設定檔資料夾中）">
+<!ENTITY sb.setting.data.explain "請選擇 ScrapBook 存放擷取資料的資料夾">
+<!ENTITY sb.setting.data.alert "目前您的 ScrapBook 資料存放於 Firefox 的個人設定檔資料夾中。請注意：如果您在刪除個人設定時選擇「刪除檔案」，則所有擷取資料將會一起消失。">
+<!ENTITY sb.setting.multibook.enabled "Enable Multi-ScrapBook">
+<!ENTITY sb.setting.multibook.description "This enables you to set up multiple destination to store data and switch between them quickly with toolbar button.">
+<!ENTITY sb.setting.filer "「顯示相關檔案」命令所使用的程式">
+<!ENTITY sb.setting.filer.default "預設（如果您使用 Windows，則可能是檔案總管）">

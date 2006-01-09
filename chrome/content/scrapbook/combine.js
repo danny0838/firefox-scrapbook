@@ -46,7 +46,7 @@ var sbPageBinder = {
 		if ( this.index < this.idList.length ) {
 			this.prefix  = "(" + (this.index + 1) + "/" + this.idList.length + ") ";
 			this.postfix = sbDataSource.getProperty("title", this.resList[this.index]);
-			sbInvisibleBrowser.load(SBcommon.getURL(this.currentID), this.currentID);
+			sbInvisibleBrowser.load(sbCommonUtils.getURL(this.currentID), this.currentID);
 		} else {
 			this.prefix  = "";
 			this.postfix = "combine.html";
@@ -71,14 +71,14 @@ var sbPageBinder = {
 	donePreview : function()
 	{
 		dump("sbPageBinder::donePreview\n");
-		var htmlFile = SBcommon.getScrapBookDir();
+		var htmlFile = sbCommonUtils.getScrapBookDir();
 		htmlFile.append("combine.html");
-		SBcommon.writeFile(htmlFile, sbDocumentAnalyzer.htmlSrc, "UTF-8");
-		var cssFile = SBcommon.getScrapBookDir();
+		sbCommonUtils.writeFile(htmlFile, sbDocumentAnalyzer.htmlSrc, "UTF-8");
+		var cssFile = sbCommonUtils.getScrapBookDir();
 		cssFile.append("combine.css");
-		SBcommon.writeFile(cssFile, sbDocumentAnalyzer.cssText, "UTF-8");
+		sbCommonUtils.writeFile(cssFile, sbDocumentAnalyzer.cssText, "UTF-8");
 		sbInvisibleBrowser.refreshEvent(function(){ sbPageBinder.showBrowser(); });
-		sbInvisibleBrowser.load(SBcommon.convertFilePathToURL(htmlFile.path));
+		sbInvisibleBrowser.load(sbCommonUtils.convertFilePathToURL(htmlFile.path));
 	},
 
 	showBrowser : function()
@@ -107,7 +107,7 @@ var sbPageBinder = {
 
 	onCombineComplete : function(aItem)
 	{
-		var newRes = SBservice.RDF.GetResource("urn:scrapbook:item" + aItem.id);
+		var newRes = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id);
 		sbDataSource.updateItem(newRes, "type",   "combine");
 		sbDataSource.updateItem(newRes, "source", sbDataSource.getProperty("source", this.resList[0]));
 		sbDataSource.updateItem(newRes, "icon",   sbDataSource.getProperty("icon",   this.resList[0]).replace(/\d{14}/, aItem.id));
@@ -169,7 +169,7 @@ var sbDocumentAnalyzer = {
 		if ( url.length   > 100 ) url   = url.substring(0,100)   + "...";
 		if ( title.length > 100 ) title = title.substring(0,100) + "...";
 		var icon = sbDataSource.getProperty("icon", res);
-		if ( !icon ) icon = SBcommon.getDefaultIcon(sbDataSource.getProperty("type", res));
+		if ( !icon ) icon = sbCommonUtils.getDefaultIcon(sbDataSource.getProperty("type", res));
 		src += '<cite class="scrapbook-header' + opt + '">\n';
 		src += '\t<img src="' + icon + '" width="16" height="16">\n';
 		src += '\t<span>' + title + '</span>\n';
@@ -279,7 +279,7 @@ var sbDocumentAnalyzer = {
 	{
 		if ( aNode.getAttribute(aAttr) )
 		{
-			aNode.setAttribute(aAttr, SBcommon.resolveURL(this.BROWSER.currentURI.spec, aNode.getAttribute(aAttr)));
+			aNode.setAttribute(aAttr, sbCommonUtils.resolveURL(this.BROWSER.currentURI.spec, aNode.getAttribute(aAttr)));
 		}
 		return aNode;
 	},

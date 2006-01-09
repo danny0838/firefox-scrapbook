@@ -28,7 +28,7 @@ var sbContentSaver = {
 
 	init : function(aPresetData)
 	{
-		this.item = new ScrapBookItem(sbDataSource.identify(SBcommon.getTimeStamp()));
+		this.item = new ScrapBookItem(sbDataSource.identify(sbCommonUtils.getTimeStamp()));
 		this.name = "index";
 		this.favicon = null;
 		this.file2URL = { "index.html" : true, "index.css" : true, "index.dat" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
@@ -46,8 +46,8 @@ var sbContentSaver = {
 			if ( aPresetData[4] >= this.linked.depth ) this.linked.depth = 0;
 		}
 		this.httpTask[this.item.id] = 0;
-		this.boolPref["UTF8ENCODE"]   = SBcommon.getBoolPref("scrapbook.capture.utf8encode",   true);
-		this.boolPref["REMOVESCRIPT"] = SBcommon.getBoolPref("scrapbook.capture.removescript", true);
+		this.boolPref["UTF8ENCODE"]   = sbCommonUtils.getBoolPref("scrapbook.capture.utf8encode",   true);
+		this.boolPref["REMOVESCRIPT"] = sbCommonUtils.getBoolPref("scrapbook.capture.removescript", true);
 	},
 
 	captureWindow : function(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData)
@@ -87,7 +87,7 @@ var sbContentSaver = {
 			if ( ret.cancel ) { return null; }
 		}
 
-		this.contentDir = SBcommon.getContentDir(this.item.id);
+		this.contentDir = sbCommonUtils.getContentDir(this.item.id);
 
 		this.saveDocumentInternal(aRootWindow.document, this.name);
 
@@ -136,7 +136,7 @@ var sbContentSaver = {
 	{
 		if ( !sbDataSource.data ) sbDataSource.init();
 		this.init(aPresetData);
-		this.item.title  = SBcommon.getFileName(aSourceURL);
+		this.item.title  = sbCommonUtils.getFileName(aSourceURL);
 		this.item.icon   = "moz-icon://" + this.item.title + "?size=16";
 		this.item.source = aSourceURL;
 		this.item.type   = aType;
@@ -146,8 +146,8 @@ var sbContentSaver = {
 			if ( ret.change ) { aResName = ret.resName; aResIndex = 0; }
 			if ( ret.cancel ) { return null; }
 		}
-		this.contentDir = SBcommon.getContentDir(this.item.id);
-		this.refURLObj  = SBcommon.convertURLToObject(aReferURL);
+		this.contentDir = sbCommonUtils.getContentDir(this.item.id);
+		this.refURLObj  = sbCommonUtils.convertURLToObject(aReferURL);
 		this.saveFileInternal(aSourceURL, this.name, aType);
 		this.addResource(aResName, aResIndex);
 		return [this.name, this.file2URL];
@@ -177,7 +177,7 @@ var sbContentSaver = {
 			return newLeafName;
 		}
 
-		this.refURLObj = SBcommon.convertURLToObject(aDocument.location.href);
+		this.refURLObj = sbCommonUtils.convertURLToObject(aDocument.location.href);
 
 		dump("sbContentSaver::saveDocument\t" + this.item.id + " [" + this.frameNumber + "] " + aFileKey + "\t" + aDocument.location.href + "\n");
 
@@ -271,13 +271,13 @@ var sbContentSaver = {
 
 		var myHTMLFile = this.contentDir.clone();
 		myHTMLFile.append(aFileKey + ".html");
-		SBcommon.writeFile(myHTMLFile, myHTML, this.item.chars);
+		sbCommonUtils.writeFile(myHTMLFile, myHTML, this.item.chars);
 
 		if ( myCSS )
 		{
 			var myCSSFile = this.contentDir.clone();
 			myCSSFile.append(aFileKey + ".css");
-			SBcommon.writeFile(myCSSFile, myCSS, this.item.chars);
+			sbCommonUtils.writeFile(myCSSFile, myCSS, this.item.chars);
 		}
 
 		return myHTMLFile.leafName;
@@ -288,13 +288,13 @@ var sbContentSaver = {
 	{
 		if ( !aFileKey ) aFileKey = "file" + Math.random().toString();
 
-		if ( !this.refURLObj ) this.refURLObj = SBcommon.convertURLToObject(aFileURL);
+		if ( !this.refURLObj ) this.refURLObj = sbCommonUtils.convertURLToObject(aFileURL);
 
 		dump("sbContentSaver::saveFile\t" + this.item.id + " [" + this.frameNumber + "] " + aFileKey + " (" + aCaptureType + ")\t" + aFileURL + "\n");
 
 		if ( this.frameNumber == 0 )
 		{
-			this.item.icon  = "moz-icon://" + SBcommon.getFileName(aFileURL) + "?size=16";
+			this.item.icon  = "moz-icon://" + sbCommonUtils.getFileName(aFileURL) + "?size=16";
 			this.item.type  = aCaptureType;
 			this.item.chars = "";
 		}
@@ -308,7 +308,7 @@ var sbContentSaver = {
 		}
 		var myHTMLFile = this.contentDir.clone();
 		myHTMLFile.append(aFileKey + ".html");
-		SBcommon.writeFile(myHTMLFile, myHTML, "UTF-8");
+		sbCommonUtils.writeFile(myHTMLFile, myHTML, "UTF-8");
 
 		return myHTMLFile.leafName;
 	},
@@ -325,14 +325,14 @@ var sbContentSaver = {
 		}
 		if ( this.favicon )
 		{
-			var faviconURL = SBservice.IO.newFileURI(this.contentDir).spec + this.favicon;
+			var faviconURL = sbCommonUtils.IO.newFileURI(this.contentDir).spec + this.favicon;
 			setTimeout(function(){
 				dump("sbContentSaver::addResource CHANGE_FAVICON " + faviconURL + "\n");
 				sbDataSource.updateItem(myRes, "icon", faviconURL); sbDataSource.flush();
 			}, 500);
 			this.item.icon = this.favicon;
 		}
-		SBcommon.writeIndexDat(this.item);
+		sbCommonUtils.writeIndexDat(this.item);
 	},
 
 
@@ -466,7 +466,7 @@ var sbContentSaver = {
 				if ( aNode.target == "_blank" ) aNode.setAttribute("target", "_top");
 				if ( aNode.href.match(/^javascript:/i) ) aNode = this.normalizeJavaScriptLink(aNode, "href");
 				if ( !this.selection && aNode.getAttribute("href").charAt(0) == "#" ) return aNode;
-				var ext = SBcommon.splitFileName(SBcommon.getFileName(aNode.href))[1].toLowerCase();
+				var ext = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aNode.href))[1].toLowerCase();
 				var flag = false;
 				switch ( ext )
 				{
@@ -492,7 +492,7 @@ var sbContentSaver = {
 				break;
 
 			case "form" : 
-				aNode.setAttribute("action", SBcommon.resolveURL(this.refURLObj.spec, aNode.action));
+				aNode.setAttribute("action", sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.action));
 				break;
 
 			case "meta" : 
@@ -581,7 +581,7 @@ var sbContentSaver = {
 		while ( aCSStext.match(RE) )
 		{
 			if ( ++i > 10 ) break;
-			var imgURL  = SBcommon.resolveURL(aCSShref, RegExp.$1);
+			var imgURL  = sbCommonUtils.resolveURL(aCSShref, RegExp.$1);
 			var imgFile = this.download(imgURL);
 			aCSStext = aCSStext.replace(RE, " url('" + imgFile + "')");
 		}
@@ -612,7 +612,7 @@ var sbContentSaver = {
 		if ( aURLSpec.indexOf("://") < 0 )
 		{
 			dump("sbContentSaver::download\tABSOLUTE_URL\t" + aURLSpec);
-			aURLSpec = SBcommon.resolveURL(this.refURLObj.spec, aURLSpec);
+			aURLSpec = sbCommonUtils.resolveURL(this.refURLObj.spec, aURLSpec);
 			dump(" => " + aURLSpec + "\n");
 		}
 
@@ -626,7 +626,7 @@ var sbContentSaver = {
 		var newFileName = aURL.fileName;
 
 		if ( !newFileName ) newFileName = "untitled";
-		newFileName = SBcommon.validateFileName(newFileName);
+		newFileName = sbCommonUtils.validateFileName(newFileName);
 
 		if ( this.file2URL[newFileName] == undefined )
 		{
@@ -634,7 +634,7 @@ var sbContentSaver = {
 		else if ( this.file2URL[newFileName] != aURLSpec )
 		{
 			var seq = 1;
-			var fileLR = SBcommon.splitFileName(newFileName);
+			var fileLR = sbCommonUtils.splitFileName(newFileName);
 			if ( !fileLR[1] ) fileLR[1] = "dat";
 			newFileName = fileLR[0] + "_" + this.leftZeroPad3(seq) + "." + fileLR[1];
 			while ( this.file2URL[newFileName] != undefined )
@@ -674,7 +674,7 @@ var sbContentSaver = {
 		{
 			var targetDir = this.contentDir.clone();
 			try {
-				var orgFile = SBcommon.convertURLToFile(aURLSpec);
+				var orgFile = sbCommonUtils.convertURLToFile(aURLSpec);
 				if ( !orgFile.isFile() ) return;
 				orgFile.copyTo(targetDir, newFileName);
 				this.file2URL[newFileName] = aURLSpec;
@@ -700,7 +700,7 @@ var sbContentSaver = {
 		if ( !val.match(/\(\'([^\']+)\'/) ) return aNode;
 		val = RegExp.$1;
 		if ( val.indexOf("/") == -1 && val.indexOf(".") == -1 ) return aNode;
-		val = SBcommon.resolveURL(this.refURLObj.spec, val);
+		val = sbCommonUtils.resolveURL(this.refURLObj.spec, val);
 		if ( aNode.nodeName.toLowerCase() == "img" )
 		{
 			if ( aNode.parentNode.nodeName.toLowerCase() == "a" ) {
@@ -724,8 +724,8 @@ var sbContentSaver = {
 	onCaptureComplete : function(aItem)
 	{
 		dump("sbContentSaver::onCaptureComplete(" + (aItem ? aItem.id : "") + ")\n");
-		if ( aItem && sbDataSource.getProperty("type", SBservice.RDF.GetResource("urn:scrapbook:item" + aItem.id)) == "marked" ) return;
-		if ( SBcommon.getBoolPref("scrapbook.capture.notify", false) )
+		if ( aItem && sbDataSource.getProperty("type", sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id)) == "marked" ) return;
+		if ( sbCommonUtils.getBoolPref("scrapbook.capture.notify", false) )
 		{
 			window.openDialog("chrome://scrapbook/content/notify.xul", "", "alwaysRaised,dependent,titlebar=no", aItem);
 		}

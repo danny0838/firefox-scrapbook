@@ -1,12 +1,10 @@
-<!ENTITY sb.repair.rdfFile			"Восстановить scrapbook.rdf">
-<!ENTITY sb.repair.rdfFile.descript	"Попробуйте это, если Web-альбом вдруг куда-то пропал.">
-<!ENTITY sb.repair.rdfFile.select	"Выберите резервный файл для восстановления.">
-<!ENTITY sb.repair.rdfFile.file		"Файл">
-<!ENTITY sb.repair.rdfFile.time		"Время">
-<!ENTITY sb.repair.rdfFile.size		"Размер">
-<!ENTITY sb.repair.rdfFile.complete	"Выполнено. Пожалуйста, перезагрузите Firefox.">
-
-<!ENTITY sb.repair.favicons				"Восстановить значки сайтов в дереве">
-<!ENTITY sb.repair.favicons.descript	"Попробуйте это, если вы потеряли все значки сайтов в Web-альбоме.">
-<!ENTITY sb.repair.favicons.complete	"Выполнено.">
-
+<!ENTITY sb.repair.rdfFile "Восстановить scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript "Попробуйте это, если Web-альбом вдруг куда-то пропал.">
+<!ENTITY sb.repair.rdfFile.select "Выберите резервный файл для восстановления.">
+<!ENTITY sb.repair.rdfFile.file "Файл">
+<!ENTITY sb.repair.rdfFile.time "Время">
+<!ENTITY sb.repair.rdfFile.size "Размер">
+<!ENTITY sb.repair.rdfFile.complete "Выполнено. Пожалуйста, перезагрузите Firefox.">
+<!ENTITY sb.repair.favicons "Восстановить значки сайтов в дереве">
+<!ENTITY sb.repair.favicons.descript "Попробуйте это, если вы потеряли все значки сайтов в Web-альбоме.">
+<!ENTITY sb.repair.favicons.complete "Выполнено.">

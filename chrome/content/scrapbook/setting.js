@@ -15,6 +15,7 @@ var sbPrefService = {
 		"sbPrefUseTabSearch"		: false,
 		"sbPrefUseTabOutput"		: false,
 		"sbPrefUseTabNote"			: false,
+		"sbPrefMultiBookEnabled"	: false,
 	},
 
 	shouldRefresh : false,
@@ -63,7 +64,7 @@ var sbPrefService = {
 		if ( this.shouldRefresh )
 		{
 			dump("sbPrefService::accept REFRESH_ALL_WINDOWS\n");
-			var navEnum = SBservice.WINDOW.getEnumerator("navigator:browser");
+			var navEnum = sbCommonUtils.WINDOW.getEnumerator("navigator:browser");
 			while ( navEnum.hasMoreElements() )
 			{
 				var nav = navEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
@@ -76,29 +77,20 @@ var sbPrefService = {
 		}
 	},
 
-	toggleDefaultFiler : function()
-	{
-		document.getElementById("sbPrefFilerTextbox").disabled = document.getElementById("sbPrefFilerCheckbox").checked;
-		document.getElementById("sbPrefFilerButton").disabled  = document.getElementById("sbPrefFilerCheckbox").checked;
-	},
-
-	selectFiler : function()
-	{
-		var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-		FP.init(window, document.getElementById("sbPrefFilerCaption").label, FP.modeOpen);
-		FP.appendFilters(FP.filterApps);
-		var answer = FP.show();
-		if ( answer == FP.returnOK )
-		{
-			var theFile = FP.file;
-			document.getElementById("sbPrefFilerTextbox").value = theFile.path;
-		}
-	},
-
 	toggleDefaultData : function()
 	{
-		document.getElementById("sbPrefDataTextbox").disabled = document.getElementById("sbPrefDataCheckbox").checked;
-		document.getElementById("sbPrefDataButton").disabled  = document.getElementById("sbPrefDataCheckbox").checked;
+		var isDefault = document.getElementById("sbPrefDataCheckbox").checked;
+		var mbEnabled = document.getElementById("sbPrefMultiBookEnabled").checked;
+		document.getElementById("sbPrefDataCheckbox").disabled = mbEnabled;
+		document.getElementById("sbPrefDataTextbox").disabled  = isDefault || mbEnabled;
+		document.getElementById("sbPrefDataButton").disabled   = isDefault || mbEnabled;
+	},
+
+	toggleDefaultFiler : function()
+	{
+		var isDefault = document.getElementById("sbPrefFilerCheckbox").checked;
+		document.getElementById("sbPrefFilerTextbox").disabled = isDefault;
+		document.getElementById("sbPrefFilerButton").disabled  = isDefault;
 	},
 
 	selectData : function()
@@ -111,6 +103,19 @@ var sbPrefService = {
 			var theFile = FP.file;
 			document.getElementById("sbPrefDataTextbox").value = theFile.path;
 			this.shouldRefresh = true;
+		}
+	},
+
+	selectFiler : function()
+	{
+		var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
+		FP.init(window, document.getElementById("sbPrefFilerCaption").label, FP.modeOpen);
+		FP.appendFilters(FP.filterApps);
+		var answer = FP.show();
+		if ( answer == FP.returnOK )
+		{
+			var theFile = FP.file;
+			document.getElementById("sbPrefFilerTextbox").value = theFile.path;
 		}
 	},
 
@@ -158,11 +163,11 @@ var hlPrefService = {
 
 	customizeBlockStyle : function()
 	{
-		var file = SBcommon.getScrapBookDir().clone();
+		var file = sbCommonUtils.getScrapBookDir().clone();
 		file.append("block.css");
 		if ( !file.exists() )
 		{
-			SBcommon.saveTemplateFile("chrome://scrapbook/skin/block.css", file);
+			sbCommonUtils.saveTemplateFile("chrome://scrapbook/skin/block.css", file);
 			setTimeout(function(){ hlPrefService.customizeBlockStyle(); }, 1000);
 			return;
 		}

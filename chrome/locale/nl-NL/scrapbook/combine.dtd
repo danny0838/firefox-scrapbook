@@ -1,6 +1,6 @@
-<!ENTITY sb.combine.select		"Pagina's selecteren">
-<!ENTITY sb.combine.select.d	"In volgorde op pagina's dubbelklikken om ze samen te voegen.">
-<!ENTITY sb.combine.preview		"Voorbeeld">
-<!ENTITY sb.combine.preview.d	"Op de 'Samenvoegen'-knop drukken,na controle van het voorbeeld.">
-<!ENTITY sb.combine.option.header	"Informatiekop aan elke pagina toevoegen.">
-<!ENTITY sb.combine.option.remove	"Na voltooiing van het samenvoegen, de originele pagina's verwijderen.">
+<!ENTITY sb.combine.select "Pagina's selecteren">
+<!ENTITY sb.combine.select.d "In volgorde op pagina's dubbelklikken om ze samen te voegen.">
+<!ENTITY sb.combine.preview "Voorbeeld">
+<!ENTITY sb.combine.preview.d "Op de 'Samenvoegen'-knop drukken,na controle van het voorbeeld.">
+<!ENTITY sb.combine.option.header "Informatiekop aan elke pagina toevoegen.">
+<!ENTITY sb.combine.option.remove "Na voltooiing van het samenvoegen, de originele pagina's verwijderen.">

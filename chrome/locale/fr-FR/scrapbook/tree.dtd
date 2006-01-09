@@ -1,18 +1,16 @@
-<!ENTITY sb.open			"Ouvrir">
-<!ENTITY sb.open.tab		"Éditer dans un onglet">
-<!ENTITY sb.open.newtab		"Ouvrir dans un nouvel onglet">
-<!ENTITY sb.open.source		"Ouvrir l'URL de la source">
-<!ENTITY sb.show.files		"Afficher les fichiers">
-<!ENTITY sb.delete			"Supprimer">
-<!ENTITY sb.property		"Propriétés">
-
-<!ENTITY sb.folder.toggle	"Déployer / Réduire">
-<!ENTITY sb.folder.openall	"Tout ouvrir dans des onglets">
-<!ENTITY sb.folder.combine	"Ouvrir en vue fusionnée">
-<!ENTITY sb.folder.manage	"Gérer les dossiers...">
-
-<!ENTITY sb.new.folder		"Nouveau dossier...">
-<!ENTITY sb.new.note		"Nouvelle note">
-
-<!ENTITY sb.sort.folder		"Classer le dossier">
-
+<!ENTITY sb.open "Ouvrir">
+<!ENTITY sb.open.tab "Éditer dans un onglet">
+<!ENTITY sb.open.newtab "Ouvrir dans un nouvel onglet">
+<!ENTITY sb.open.source "Ouvrir l'URL de la source">
+<!ENTITY sb.show.files "Afficher les fichiers">
+<!ENTITY sb.delete "Supprimer">
+<!ENTITY sb.property "Propriétés">
+<!ENTITY sb.folder.toggle "Déployer / Réduire">
+<!ENTITY sb.folder.openall "Tout ouvrir dans des onglets">
+<!ENTITY sb.folder.combine "Ouvrir en vue fusionnée">
+<!ENTITY sb.folder.manage "Gérer les dossiers...">
+<!ENTITY sb.new.folder "Nouveau dossier...">
+<!ENTITY sb.new.note "Nouvelle note">
+<!ENTITY sb.sort.folder "Classer le dossier">
+<!ENTITY mb.configure "Configure">
+<!ENTITY mb.profileFolder "Profile Folder">

@@ -12,39 +12,39 @@ function SB_initView()
 	sbDataSource.init();
 
 	var resURI = gID ? "urn:scrapbook:item" + gID : "urn:scrapbook:root";
-	gRes = SBservice.RDF.GetResource(resURI);
+	gRes = sbCommonUtils.RDF.GetResource(resURI);
 	var type = sbDataSource.getProperty("type", gRes);
 	if ( type != "folder" )
 	{
-		window.location.href = SBcommon.getURL(gID, type);
+		window.location.href = sbCommonUtils.getURL(gID, type);
 		return;
 	}
 
 
 	var src = SB_getHTMLHead(sbDataSource.getProperty("title", gRes));
 
-	SBservice.RDFC.Init(sbDataSource.data, gRes);
-	var resEnum = SBservice.RDFC.GetElements();
+	sbCommonUtils.RDFC.Init(sbDataSource.data, gRes);
+	var resEnum = sbCommonUtils.RDFC.GetElements();
 	while ( resEnum.hasMoreElements() )
 	{
 		var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-		if ( SBservice.RDFCU.IsContainer(sbDataSource.data, res) ) continue;
+		if ( sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, res) ) continue;
 		var item = new ScrapBookItem();
 		for ( var prop in item )
 		{
 			item[prop] = sbDataSource.getProperty(prop, res);
 		}
-		if ( !item.icon ) item.icon = SBcommon.getDefaultIcon(sbDataSource.getProperty("type", res));
+		if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(sbDataSource.getProperty("type", res));
 		src += SB_getHTMLBody(item);
 	}
 
 	src += SB_getHTMLFoot();
 
-	var file = SBcommon.getScrapBookDir().clone();
+	var file = sbCommonUtils.getScrapBookDir().clone();
 	file.append("collection.html");
 	if ( !file.exists() ) file.create(file.NORMAL_FILE_TYPE, 0666);
-	SBcommon.writeFile(file, src, "UTF-8");
-	var filePath = SBservice.IO.newFileURI(file).spec;
+	sbCommonUtils.writeFile(file, src, "UTF-8");
+	var filePath = sbCommonUtils.IO.newFileURI(file).spec;
 	window.location.href = filePath;
 }
 
@@ -68,7 +68,7 @@ function SB_getHTMLBody(aSBitem)
 {
 	var url   = ( aSBitem.source.length > 100 ) ? aSBitem.source.substring(0,100) + "..." : aSBitem.source;
 	var title = ( aSBitem.title.length  > 100 ) ? aSBitem.title.substring(0,100)  + "..." : aSBitem.title;
-	var icon  = aSBitem.icon ? aSBitem.icon : SBcommon.getDefaultIcon(aSBitem.type);
+	var icon  = aSBitem.icon ? aSBitem.icon : sbCommonUtils.getDefaultIcon(aSBitem.type);
 	var src = "";
 	src += '<cite class="scrapbook-header">\n';
 	src += '\t<img src="' + icon + '" width="16" height="16">\n';

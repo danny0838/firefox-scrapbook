@@ -1,35 +1,30 @@
-<!ENTITY sb.setting			"Socraithe">
-<!ENTITY sb.setting.general	"Ginear&#225;lta">
-<!ENTITY sb.setting.usetabs	"&#218;s&#225;id Tbanna">
-<!ENTITY sb.setting.advance	"Reamhshocraithe">
-<!ENTITY sb.setting.capture	"Gabh&#225;il">
-<!ENTITY sb.setting.editing	"Eagarth&#243;ireacht">
-<!ENTITY sb.setting.program	"Cl&#225;ranna">
-
-<!ENTITY sb.setting.browser.submenu		"Cumasaigh fo-roghchl&#225;ir sa roghchl&#225;ir comhth&#233;acs don Brabhs&#225;la&#237; (Aistrithe tar eis ath-thos&#250;)">
-<!ENTITY sb.setting.capture.detail		"Taispe&#225;in Mionsonr&#250; 'Sonr&#250; Gabhile' nuair a deintear tarraing-agus-scaoil isteach sa thaobh-bharra">
-<!ENTITY sb.setting.capture.notify		"Taispe&#225;in F&#243;gra 'Gabh&#225;il Cro&#237;chnaithe' (obair&#237;onn s&#233; le Windows amh&#225;in)?">
-<!ENTITY sb.setting.tree.singleexpand	"Nuair a leathnaiotar comhadlann crainne, leachaigh gach comhadlann eile (ar n&#243;s Ceanin Taisc&#233;ala&#237; Idirl&#237;n)">
-<!ENTITY sb.setting.tree.quickdelete	"N&#225; Cinntigh Nuair a Scriostar">
-
-<!ENTITY sb.setting.usetabs.d			"&#218;s&#225;ideann Gn&#237;omhaithe Seice&#225;lta T&#225;banna nua.">
-<!ENTITY sb.setting.usetabs.note		"Oscail N&#243;ta&#237; i T&#225;b">
-
-<!ENTITY sb.setting.capture.utf8encode		"Eastraigh go c&#243;d&#225;il UTF-8">
-<!ENTITY sb.setting.capture.utf8encode.d	"M&#225; muchtar, is feidir le carichteir teacht amach mar '?'.">
-<!ENTITY sb.setting.capture.removescript	"N&#225; t&#243;g JavaScript">
-<!ENTITY sb.setting.capture.removescript.d	"M&#225; m&#250;chtar an ticbhosca, is feidir le JavaScript an-chuid faidhbeanna a chruth&#250;.">
-
-<!ENTITY sb.highlighter.tips		"LEID: Is feidir an Roghn&#250; a Aibhsi&#250; tr&#237; cnaip&#237; 1 n&#243; 2 n&#243; 3 n&#243; 4 a bhr&#250;.">
-<!ENTITY sb.setting.block.style		"Leathnach St&#237;le">
-
-<!ENTITY sb.button.browse			"Roghnaigh">
-<!ENTITY sb.button.show				"Teasp&#225;inn Comhadlann">
-
-<!ENTITY sb.setting.data			"Sprioc chun Sonra&#237; a chuir i dTaisce">
-<!ENTITY sb.setting.data.default	"Luach R&#233;amhshocraithe (I do Comhadlann Pr&#243;if&#237;l)">
-<!ENTITY sb.setting.data.explain	"Romhnaigh comhadlann chun Sprioc Bailithe 'Leabhar Gearrthan' a choimead.">
-<!ENTITY sb.setting.data.alert		"Currently your ScrapBook data are stored in your Firefox 'Profile Folder'. Please note, if you select [Delete Files] when deleting the Firefox profile, All ScrapBook data will be removed.">
-<!ENTITY sb.setting.filer			"Cl&#225;r do Roghchl&#225;ir 'Teasp&#225;inn Comhaid'">
-<!ENTITY sb.setting.filer.default	"Luach R&#233;amhshocraithe  (M&#225;s Windows, b'fh&#233;idir Taisc&#233;ala&#237;.)">
-
+<!ENTITY sb.setting "Socraithe">
+<!ENTITY sb.setting.general "Ginear&#225;lta">
+<!ENTITY sb.setting.usetabs "&#218;s&#225;id Tbanna">
+<!ENTITY sb.setting.advance "Reamhshocraithe">
+<!ENTITY sb.setting.capture "Gabh&#225;il">
+<!ENTITY sb.setting.editing "Eagarth&#243;ireacht">
+<!ENTITY sb.setting.program "Cl&#225;ranna">
+<!ENTITY sb.setting.browser.submenu "Cumasaigh fo-roghchl&#225;ir sa roghchl&#225;ir comhth&#233;acs don Brabhs&#225;la&#237; (Aistrithe tar eis ath-thos&#250;)">
+<!ENTITY sb.setting.capture.detail "Taispe&#225;in Mionsonr&#250; 'Sonr&#250; Gabhile' nuair a deintear tarraing-agus-scaoil isteach sa thaobh-bharra">
+<!ENTITY sb.setting.capture.notify "Taispe&#225;in F&#243;gra 'Gabh&#225;il Cro&#237;chnaithe' (obair&#237;onn s&#233; le Windows amh&#225;in)?">
+<!ENTITY sb.setting.tree.singleexpand "Nuair a leathnaiotar comhadlann crainne, leachaigh gach comhadlann eile (ar n&#243;s Ceanin Taisc&#233;ala&#237; Idirl&#237;n)">
+<!ENTITY sb.setting.tree.quickdelete "N&#225; Cinntigh Nuair a Scriostar">
+<!ENTITY sb.setting.usetabs.d "&#218;s&#225;ideann Gn&#237;omhaithe Seice&#225;lta T&#225;banna nua.">
+<!ENTITY sb.setting.usetabs.note "Oscail N&#243;ta&#237; i T&#225;b">
+<!ENTITY sb.setting.capture.utf8encode "Eastraigh go c&#243;d&#225;il UTF-8">
+<!ENTITY sb.setting.capture.utf8encode.d "M&#225; muchtar, is feidir le carichteir teacht amach mar '?'.">
+<!ENTITY sb.setting.capture.removescript "N&#225; t&#243;g JavaScript">
+<!ENTITY sb.setting.capture.removescript.d "M&#225; m&#250;chtar an ticbhosca, is feidir le JavaScript an-chuid faidhbeanna a chruth&#250;.">
+<!ENTITY sb.highlighter.tips "LEID: Is feidir an Roghn&#250; a Aibhsi&#250; tr&#237; cnaip&#237; 1 n&#243; 2 n&#243; 3 n&#243; 4 a bhr&#250;.">
+<!ENTITY sb.setting.block.style "Leathnach St&#237;le">
+<!ENTITY sb.button.browse "Roghnaigh">
+<!ENTITY sb.button.show "Teasp&#225;inn Comhadlann">
+<!ENTITY sb.setting.data "Sprioc chun Sonra&#237; a chuir i dTaisce">
+<!ENTITY sb.setting.data.default "Luach R&#233;amhshocraithe (I do Comhadlann Pr&#243;if&#237;l)">
+<!ENTITY sb.setting.data.explain "Romhnaigh comhadlann chun Sprioc Bailithe 'Leabhar Gearrthan' a choimead.">
+<!ENTITY sb.setting.data.alert "Currently your ScrapBook data are stored in your Firefox 'Profile Folder'. Please note, if you select [Delete Files] when deleting the Firefox profile, All ScrapBook data will be removed.">
+<!ENTITY sb.setting.multibook.enabled "Enable Multi-ScrapBook">
+<!ENTITY sb.setting.multibook.description "This enables you to set up multiple destination to store data and switch between them quickly with toolbar button.">
+<!ENTITY sb.setting.filer "Cl&#225;r do Roghchl&#225;ir 'Teasp&#225;inn Comhaid'">
+<!ENTITY sb.setting.filer.default "Luach R&#233;amhshocraithe  (M&#225;s Windows, b'fh&#233;idir Taisc&#233;ala&#237;.)">

@@ -1,35 +1,29 @@
-<!ENTITY sb.title			"ScrapBook">
-
-<!ENTITY sb.new.folder		"新建文件夹...">
-<!ENTITY sb.new.note		"新建便签">
-<!ENTITY sb.toggle.all		"展开/折叠所有文件夹">
-
-<!ENTITY sb.tools			"工具">
-<!ENTITY sb.tools.setting	"选项...">
-<!ENTITY sb.tools.manage	"管理项目">
-<!ENTITY sb.tools.calculate	"计算大小">
-<!ENTITY sb.tools.sorttree	"排列项目列表">
-<!ENTITY sb.tools.directory	"ScrapBook 目录">
-<!ENTITY sb.tools.combine	"合并页面">
-<!ENTITY sb.tools.multiple	"多链接获取">
-<!ENTITY sb.tools.trade		"导入和导出">
-<!ENTITY sb.tools.output	"导出项目列表">
-<!ENTITY sb.tools.backup	"压缩备份">
-<!ENTITY sb.tools.repair	"紧急修复">
-<!ENTITY sb.tools.homepage	"主页">
-<!ENTITY sb.tools.about		"关于 ScrapBook">
-
-<!ENTITY sb.search			"搜索">
-<!ENTITY sb.search.fulltext	"全文搜索">
-<!ENTITY sb.search.all		"全部">
-<!ENTITY sb.search.re		"使用正则表达式">
-<!ENTITY sb.search.cs		"区分大小写">
-<!ENTITY sb.search.cache	"更新全文搜索缓存">
-<!ENTITY sb.search.clear	"清空搜索历史记录">
-<!ENTITY sb.search.days		"按时间段过滤查寻">
-
-<!ENTITY sb.note.opentab	"在标签页中打开">
-<!ENTITY sb.note.close		"关闭">
-
-<!ENTITY sb.move			"移动">
-
+<!ENTITY sb.title "ScrapBook">
+<!ENTITY sb.new.folder "新建文件夹...">
+<!ENTITY sb.new.note "新建便签">
+<!ENTITY sb.toggle.all "展开/折叠所有文件夹">
+<!ENTITY sb.tools "工具">
+<!ENTITY sb.tools.setting "选项...">
+<!ENTITY sb.tools.manage "管理项目">
+<!ENTITY sb.tools.calculate "计算大小">
+<!ENTITY sb.tools.sorttree "排列项目列表">
+<!ENTITY sb.tools.directory "ScrapBook 目录">
+<!ENTITY sb.tools.combine "合并页面">
+<!ENTITY sb.tools.multiple "多链接获取">
+<!ENTITY sb.tools.trade "导入和导出">
+<!ENTITY sb.tools.output "导出项目列表">
+<!ENTITY sb.tools.backup "压缩备份">
+<!ENTITY sb.tools.repair "紧急修复">
+<!ENTITY sb.tools.homepage "主页">
+<!ENTITY sb.tools.about "关于">
+<!ENTITY sb.search "搜索">
+<!ENTITY sb.search.fulltext "全文搜索">
+<!ENTITY sb.search.all "全部">
+<!ENTITY sb.search.re "使用正则表达式">
+<!ENTITY sb.search.cs "区分大小写">
+<!ENTITY sb.search.cache "更新全文搜索缓存">
+<!ENTITY sb.search.clear "清空搜索历史记录">
+<!ENTITY sb.search.days "按时间段过滤查寻">
+<!ENTITY sb.note.opentab "在标签页中打开">
+<!ENTITY sb.note.close "关闭">
+<!ENTITY sb.move "移动">

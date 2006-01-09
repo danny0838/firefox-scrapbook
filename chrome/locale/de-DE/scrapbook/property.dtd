@@ -1,20 +1,17 @@
-<!ENTITY sb.prop.date		"Datum">
-<!ENTITY sb.prop.type		"Typ">
-<!ENTITY sb.prop.title		"Name">
-<!ENTITY sb.prop.encode		"Kodierung">
-<!ENTITY sb.prop.icon		"Favicon">
-<!ENTITY sb.prop.source		"URL">
-<!ENTITY sb.prop.comment	"Beschreibung">
-<!ENTITY sb.prop.content	"Inhalt">
-<!ENTITY sb.prop.size		"Größe">
-<!ENTITY sb.prop.id.date	"ID (Datum/Zeit)">
-<!ENTITY sb.prop.folder		"Ordner">
-
-<!ENTITY sb.prop.general	"Allgemeine Informationen">
-
-<!ENTITY sb.prop.icon.change	"Ändern">
-<!ENTITY sb.prop.icon.default	"Standardsymbol">
-<!ENTITY sb.prop.icon.favicon	"Favicon auswählen">
-<!ENTITY sb.prop.icon.custom	"Eigenes Favicon auswählen">
-<!ENTITY sb.prop.mark			"Eintrag markieren (fett)">
-
+<!ENTITY sb.prop.date "Datum">
+<!ENTITY sb.prop.type "Typ">
+<!ENTITY sb.prop.title "Name">
+<!ENTITY sb.prop.encode "Kodierung">
+<!ENTITY sb.prop.icon "Favicon">
+<!ENTITY sb.prop.source "URL">
+<!ENTITY sb.prop.comment "Beschreibung">
+<!ENTITY sb.prop.content "Inhalt">
+<!ENTITY sb.prop.size "Größe">
+<!ENTITY sb.prop.id.date "ID (Datum/Zeit)">
+<!ENTITY sb.prop.folder "Ordner">
+<!ENTITY sb.prop.general "Allgemeine Informationen">
+<!ENTITY sb.prop.icon.change "Ändern">
+<!ENTITY sb.prop.icon.default "Standardsymbol">
+<!ENTITY sb.prop.icon.favicon "Favicon auswählen">
+<!ENTITY sb.prop.icon.custom "Eigenes Favicon auswählen">
+<!ENTITY sb.prop.mark "Eintrag markieren (fett)">

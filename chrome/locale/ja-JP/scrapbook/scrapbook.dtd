@@ -1,35 +1,29 @@
-<!ENTITY sb.title			"ScrapBook">
-
-<!ENTITY sb.new.folder		"新しいフォルダ...">
-<!ENTITY sb.new.note		"新しいノート">
-<!ENTITY sb.toggle.all		"すべてのフォルダを広げる／たたむ">
-
-<!ENTITY sb.tools			"ツール">
-<!ENTITY sb.tools.setting	"設定...">
-<!ENTITY sb.tools.manage	"管理">
-<!ENTITY sb.tools.calculate	"データサイズ計算">
-<!ENTITY sb.tools.sorttree	"ツリー全体をソート">
-<!ENTITY sb.tools.directory	"ScrapBookフォルダ">
-<!ENTITY sb.tools.combine	"結合">
-<!ENTITY sb.tools.multiple	"URL一括取り込み">
-<!ENTITY sb.tools.trade		"インポート/エクスポート">
-<!ENTITY sb.tools.output	"ツリーのHTML出力">
-<!ENTITY sb.tools.backup	"圧縮してバックアップ">
-<!ENTITY sb.tools.repair	"緊急時の修復ツール">
-<!ENTITY sb.tools.homepage	"ホームページ">
-<!ENTITY sb.tools.about		"バージョン情報">
-
-<!ENTITY sb.search			"検索">
-<!ENTITY sb.search.fulltext	"全文検索">
-<!ENTITY sb.search.all		"すべて">
-<!ENTITY sb.search.re		"正規表現の使用">
-<!ENTITY sb.search.cs		"大文字/小文字の区別">
-<!ENTITY sb.search.cache	"全文検索用キャッシュを更新">
-<!ENTITY sb.search.clear	"入力履歴のクリア">
-<!ENTITY sb.search.days		"日数でフィルタリング">
-
-<!ENTITY sb.note.opentab	"タブで開く">
-<!ENTITY sb.note.close		"閉じる">
-
-<!ENTITY sb.move			"フォルダへ移動">
-
+<!ENTITY sb.title "ScrapBook">
+<!ENTITY sb.new.folder "新しいフォルダ...">
+<!ENTITY sb.new.note "新しいノート">
+<!ENTITY sb.toggle.all "すべてのフォルダを広げる／たたむ">
+<!ENTITY sb.tools "ツール">
+<!ENTITY sb.tools.setting "設定...">
+<!ENTITY sb.tools.manage "管理">
+<!ENTITY sb.tools.calculate "データサイズ計算">
+<!ENTITY sb.tools.sorttree "ツリー全体をソート">
+<!ENTITY sb.tools.directory "ScrapBookフォルダ">
+<!ENTITY sb.tools.combine "結合">
+<!ENTITY sb.tools.multiple "URL一括取り込み">
+<!ENTITY sb.tools.trade "インポート/エクスポート">
+<!ENTITY sb.tools.output "ツリーのHTML出力">
+<!ENTITY sb.tools.backup "圧縮してバックアップ">
+<!ENTITY sb.tools.repair "緊急時の修復ツール">
+<!ENTITY sb.tools.homepage "ホームページ">
+<!ENTITY sb.tools.about "バージョン情報">
+<!ENTITY sb.search "検索">
+<!ENTITY sb.search.fulltext "全文検索">
+<!ENTITY sb.search.all "すべて">
+<!ENTITY sb.search.re "正規表現の使用">
+<!ENTITY sb.search.cs "大文字/小文字の区別">
+<!ENTITY sb.search.cache "全文検索用キャッシュを更新">
+<!ENTITY sb.search.clear "入力履歴のクリア">
+<!ENTITY sb.search.days "日数でフィルタリング">
+<!ENTITY sb.note.opentab "タブで開く">
+<!ENTITY sb.note.close "閉じる">
+<!ENTITY sb.move "フォルダへ移動">

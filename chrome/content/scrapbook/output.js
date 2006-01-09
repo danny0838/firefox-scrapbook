@@ -46,7 +46,7 @@ function SB_execOutput()
 	SBoutput.init();
 	if ( gSelectAll )
 	{
-		SBoutput.processRDFRescursively(SBservice.RDF.GetResource("urn:scrapbook:root"));
+		SBoutput.processRDFRescursively(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"));
 	}
 	else
 	{
@@ -78,7 +78,7 @@ var SBoutput = {
 
 	finalize : function()
 	{
-		var myDir = SBcommon.getScrapBookDir().clone();
+		var myDir = sbCommonUtils.getScrapBookDir().clone();
 		myDir.append("tree");
 		if ( !myDir.exists() ) myDir.create(myDir.DIRECTORY_TYPE, 0700);
 
@@ -93,24 +93,24 @@ var SBoutput = {
 		{
 			var destFile = myDir.clone();
 			destFile.append(urlHash[url]);
-			SBcommon.saveTemplateFile(url, destFile);
+			sbCommonUtils.saveTemplateFile(url, destFile);
 		}
 
 		var myFrameFile = myDir.clone();
 		myFrameFile.append("frame.html");
 		if ( !myFrameFile.exists() ) myFrameFile.create(myFrameFile.NORMAL_FILE_TYPE, 0666);
-		SBcommon.writeFile(myFrameFile, this.getHTMLFrame(), "UTF-8");
+		sbCommonUtils.writeFile(myFrameFile, this.getHTMLFrame(), "UTF-8");
 
 		var myFile = myDir.clone();
 		myFile.append("index.html");
 		if ( !myFile.exists() ) myFile.create(myFile.NORMAL_FILE_TYPE, 0666);
 		this.src += this.getHTMLFoot();
-		SBcommon.writeFile(myFile, this.src, "UTF-8");
+		sbCommonUtils.writeFile(myFile, this.src, "UTF-8");
 
 		var fileName = gFrameOption ? "frame.html" : "index.html";
 		if ( document.getElementById("ScrapBookOutputOptionO").checked )
 		{
-			SBcommon.loadURL(SBcommon.convertFilePathToURL(myDir.path) + fileName, SBcommon.getBoolPref("scrapbook.usetab.output", false));
+			sbCommonUtils.loadURL(sbCommonUtils.convertFilePathToURL(myDir.path) + fileName, sbCommonUtils.getBoolPref("scrapbook.usetab.output", false));
 		}
 	},
 
@@ -128,14 +128,14 @@ var SBoutput = {
 		var myID = sbDataSource.getProperty("id", aContRes);
 		if ( !myID ) myID = "root";
 		this.src += '<ul id="folder-' + myID + '">\n';
-		SBservice.RDFC.Init(sbDataSource.data, aContRes);
-		var ResList = SBservice.RDFC.GetElements();
+		sbCommonUtils.RDFC.Init(sbDataSource.data, aContRes);
+		var ResList = sbCommonUtils.RDFC.GetElements();
 		while ( ResList.hasMoreElements() )
 		{
 			var aRes = ResList.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
 			this.src += '<li class="depth' + String(this.depth) + '">';
 			this.src += this.getHTMLBody(aRes);
-			if ( SBservice.RDFCU.IsContainer(sbDataSource.data, aRes) ) this.processRDFRescursively(aRes);
+			if ( sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, aRes) ) this.processRDFRescursively(aRes);
 			this.src += "</li>\n";
 		}
 		this.src += "</ul>\n";
@@ -179,7 +179,7 @@ var SBoutput = {
 		var myTitle = sbDataSource.getProperty("title", aRes);
 		var myIcon  = sbDataSource.getProperty("icon", aRes);
 		if ( myIcon.match(/(\/data\/\d{14}\/.*$)/) ) myIcon = ".." + RegExp.$1;
-		if ( !myIcon ) myIcon = SBcommon.getFileName( SBcommon.getDefaultIcon(sbDataSource.getProperty("type", aRes)) );
+		if ( !myIcon ) myIcon = sbCommonUtils.getFileName( sbCommonUtils.getDefaultIcon(sbDataSource.getProperty("type", aRes)) );
 		myTitle = myTitle.replace(/</g, "&lt;");
 		myTitle = myTitle.replace(/>/g, "&gt;");
 		var target = gFrameOption ? ' target="main"' : "";

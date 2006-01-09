@@ -1,6 +1,6 @@
-<!ENTITY sb.combine.select		"Seiten auswählen">
-<!ENTITY sb.combine.select.d	"Mit Doppelklick Seiten in der gewünschten Reihenfolge zusammenfassen.">
-<!ENTITY sb.combine.preview		"Vorschau">
-<!ENTITY sb.combine.preview.d	"Nach Überprüfung der Vorschau mit &quot;Zusammenfassen&quot; fortfahren.">
-<!ENTITY sb.combine.option.header	"Informationszeile vor jeder Seite einfügen">
-<!ENTITY sb.combine.option.remove	"Nach erfolgter Zusammenfassung Originalseiten entfernen">
+<!ENTITY sb.combine.select "Seiten auswählen">
+<!ENTITY sb.combine.select.d "Mit Doppelklick Seiten in der gewünschten Reihenfolge zusammenfassen.">
+<!ENTITY sb.combine.preview "Vorschau">
+<!ENTITY sb.combine.preview.d "Nach Überprüfung der Vorschau mit &quot;Zusammenfassen&quot; fortfahren.">
+<!ENTITY sb.combine.option.header "Informationszeile vor jeder Seite einfügen">
+<!ENTITY sb.combine.option.remove "Nach erfolgter Zusammenfassung Originalseiten entfernen">

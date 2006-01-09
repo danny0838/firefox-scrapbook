@@ -6,12 +6,12 @@
 
 #scrapbook-button
 {
-	list-style-image: url("chrome://scrapbook/skin/mainicon1.png");
+	list-style-image: url("chrome://scrapbook/skin/main_24.png");
 }
 
 toolbar[iconsize="small"] #scrapbook-button
 {
-	list-style-image: url("chrome://scrapbook/skin/mainicon2.png");
+	list-style-image: url("chrome://scrapbook/skin/main_16.png");
 }
 
 

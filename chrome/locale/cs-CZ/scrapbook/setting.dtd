@@ -1,35 +1,30 @@
-<!ENTITY sb.setting			"Nastavení">
-<!ENTITY sb.setting.general	"Obecné">
-<!ENTITY sb.setting.usetabs	"Panely">
-<!ENTITY sb.setting.advance	"Pokročilé">
-<!ENTITY sb.setting.capture	"Zachycení">
-<!ENTITY sb.setting.editing	"Editace">
-<!ENTITY sb.setting.program	"Programy">
-
-<!ENTITY sb.setting.browser.submenu		"Povolit podnabídku uvnitř místní nabídky (změní se po restartu).">
-<!ENTITY sb.setting.capture.detail		"Zobrazit 'dialog zachycení', pokud dojde k zachycení přetažením do postranní lišty">
-<!ENTITY sb.setting.capture.notify		"Zobrazit notifikaci 'Zachycení dokončeno' (funkční jen ve Windows?)">
-<!ENTITY sb.setting.tree.singleexpand	"Při rozbalení adresáře, sbal všechny ostatní složky (jako Oblíbené v IE)">
-<!ENTITY sb.setting.tree.quickdelete	"Nežádat potvrzení při mazání">
-
-<!ENTITY sb.setting.usetabs.d			"Akce při kterých se použijí nové panely:">
-<!ENTITY sb.setting.usetabs.note		"Otevírat poznámky v panelu">
-
-<!ENTITY sb.setting.capture.utf8encode		"Převést do UTF-8 kódování  (Doporučeno)">
-<!ENTITY sb.setting.capture.utf8encode.d	"Pokud není zaškrtnuto, některé znaky budou často zobrazeny jako '?'">
-<!ENTITY sb.setting.capture.removescript	"Odstranit JavaScript (Doporučeno)">
-<!ENTITY sb.setting.capture.removescript.d	"Pokud není zaškrtnuto, je hodně problémů způsobeno JavaScriptem.">
-
-<!ENTITY sb.highlighter.tips		"TIP: Výběr můžete zvýraznit stisknutím klávesy 1 nebo 2 nebo 3 nebo 4.">
-<!ENTITY sb.setting.block.style		"Styl">
-
-<!ENTITY sb.button.browse			"Procházet">
-<!ENTITY sb.button.show				"Zobrazit složku">
-
-<!ENTITY sb.setting.data			"Cesta k datům">
-<!ENTITY sb.setting.data.default	"Standardní (ve vašem Profilu)">
-<!ENTITY sb.setting.data.explain	"Vyberte adresář ScrapBook kam se mají uložit nashromážděná data.">
-<!ENTITY sb.setting.data.alert		"Momentálně jsou data rozšíření ScrapBook uložena v uživatelském profilu. Při práci s tlačítkem [Smazat soubory] buďte, prosím, opatrní - můžete tak vymazat VŠECHNA data rozšíření ScrapBook.">
-<!ENTITY sb.setting.filer			"Program pro 'Procházení souborů'">
-<!ENTITY sb.setting.filer.default	"Standardní (Na Windows pravděpodobně Explorer)">
-
+<!ENTITY sb.setting "Nastavení">
+<!ENTITY sb.setting.general "Obecné">
+<!ENTITY sb.setting.usetabs "Panely">
+<!ENTITY sb.setting.advance "Pokročilé">
+<!ENTITY sb.setting.capture "Zachycení">
+<!ENTITY sb.setting.editing "Editace">
+<!ENTITY sb.setting.program "Programy">
+<!ENTITY sb.setting.browser.submenu "Povolit podnabídku uvnitř místní nabídky (změní se po restartu).">
+<!ENTITY sb.setting.capture.detail "Zobrazit 'dialog zachycení', pokud dojde k zachycení přetažením do postranní lišty">
+<!ENTITY sb.setting.capture.notify "Zobrazit notifikaci 'Zachycení dokončeno' (funkční jen ve Windows?)">
+<!ENTITY sb.setting.tree.singleexpand "Při rozbalení adresáře, sbal všechny ostatní složky (jako Oblíbené v IE)">
+<!ENTITY sb.setting.tree.quickdelete "Nežádat potvrzení při mazání">
+<!ENTITY sb.setting.usetabs.d "Akce při kterých se použijí nové panely:">
+<!ENTITY sb.setting.usetabs.note "Otevírat poznámky v panelu">
+<!ENTITY sb.setting.capture.utf8encode "Převést do UTF-8 kódování  (Doporučeno)">
+<!ENTITY sb.setting.capture.utf8encode.d "Pokud není zaškrtnuto, některé znaky budou často zobrazeny jako '?'">
+<!ENTITY sb.setting.capture.removescript "Odstranit JavaScript (Doporučeno)">
+<!ENTITY sb.setting.capture.removescript.d "Pokud není zaškrtnuto, je hodně problémů způsobeno JavaScriptem.">
+<!ENTITY sb.highlighter.tips "TIP: Výběr můžete zvýraznit stisknutím klávesy 1 nebo 2 nebo 3 nebo 4.">
+<!ENTITY sb.setting.block.style "Styl">
+<!ENTITY sb.button.browse "Procházet">
+<!ENTITY sb.button.show "Zobrazit složku">
+<!ENTITY sb.setting.data "Cesta k datům">
+<!ENTITY sb.setting.data.default "Standardní (ve vašem Profilu)">
+<!ENTITY sb.setting.data.explain "Vyberte adresář ScrapBook kam se mají uložit nashromážděná data.">
+<!ENTITY sb.setting.data.alert "Momentálně jsou data rozšíření ScrapBook uložena v uživatelském profilu. Při práci s tlačítkem [Smazat soubory] buďte, prosím, opatrní - můžete tak vymazat VŠECHNA data rozšíření ScrapBook.">
+<!ENTITY sb.setting.multibook.enabled "Enable Multi-ScrapBook">
+<!ENTITY sb.setting.multibook.description "This enables you to set up multiple destination to store data and switch between them quickly with toolbar button.">
+<!ENTITY sb.setting.filer "Program pro 'Procházení souborů'">
+<!ENTITY sb.setting.filer.default "Standardní (Na Windows pravděpodobně Explorer)">

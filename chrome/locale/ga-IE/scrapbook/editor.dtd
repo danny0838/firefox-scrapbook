@@ -1,30 +1,26 @@
-<!ENTITY sb.editor			"Barra Uirlis&#237; Eagarth&#243;ireachta an Leabhar Gearrth&#225;n">
-<!ENTITY sb.editor.eraser	"L&#233;irscrios&#225;n DOM: Uirlis chun Bloic Aibhsithe a bhaint as.">
-<!ENTITY sb.editor.undo		"Cealaigh">
-<!ENTITY sb.editor.restore	"Tr&#233;ig Aistri&#250;ch&#225;in agus Athch&#243;irigh">
-<!ENTITY sb.editor.save		"Sabh&#225;il Aistri&#250;ch&#225;in">
-<!ENTITY sb.editor.comment	"Fairsingigh Ceantar L&#233;irithe">
-<!ENTITY sb.editor.block			"Bloc L&#233;iri&#250;">
-<!ENTITY sb.editor.block.insert		"Cuir &sb.editor.block; isteach tar eis an Roghn&#250;">
-<!ENTITY sb.editor.block.hide		"Folaigh Bloic L&#233;irithe">
-<!ENTITY sb.editor.inline.add		"Cuir L&#233;iri&#250; Inl&#237;ne isteach don Roghn&#250;">
-<!ENTITY sb.editor.inline.delete	"Bain as gach L&#233;iri&#250; Inl&#237;ne">
-<!ENTITY sb.editor.attach.file		"Ceangail Comhad leis an Roghn&#250;">
-<!ENTITY sb.editor.attach.link		"Ceangail Nasc leis an Roghn&#250;">
-<!ENTITY sb.editor.cutter			"Bain as an Roghn&#250;">
-<!ENTITY sb.editor.remove.iframe	"Bain as gach Clib IFRAME">
-<!ENTITY sb.editor.remove.script	"Bain as gach Clib SCRIPT">
-
-<!ENTITY sb.highlighter				"Aibhsitheoir">
-<!ENTITY sb.highlighter.remove		"Bain as gach Aibhsigh sa Roghn&#250;">
-<!ENTITY sb.highlighter.remove.all	"Bain as gach Aibhsigh">
-<!ENTITY sb.customize				"Saincheap">
-
-<!ENTITY sb.infobar.openSource	"Oscail URL Foinsithe">
-<!ENTITY sb.infobar.showSitemap	"Show &sb.infobar.sitemap;">
-<!ENTITY sb.infobar.showInfobar	"Show Info Toolbar">
-<!ENTITY sb.infobar.home		"Baile">
-<!ENTITY sb.infobar.sitemap		"Mapa-su&#237;omha">
-
-<!ENTITY sb.locate		"Sioncronaigh le Crann an Taobh-bharra">
-
+<!ENTITY sb.editor "Barra Uirlis&#237; Eagarth&#243;ireachta an Leabhar Gearrth&#225;n">
+<!ENTITY sb.editor.eraser "L&#233;irscrios&#225;n DOM: Uirlis chun Bloic Aibhsithe a bhaint as.">
+<!ENTITY sb.editor.undo "Cealaigh">
+<!ENTITY sb.editor.restore "Tr&#233;ig Aistri&#250;ch&#225;in agus Athch&#243;irigh">
+<!ENTITY sb.editor.save "Sabh&#225;il Aistri&#250;ch&#225;in">
+<!ENTITY sb.editor.comment "Fairsingigh Ceantar L&#233;irithe">
+<!ENTITY sb.editor.block "Bloc L&#233;iri&#250;">
+<!ENTITY sb.editor.block.insert "Cuir &sb.editor.block; isteach tar eis an Roghn&#250;">
+<!ENTITY sb.editor.block.hide "Folaigh Bloic L&#233;irithe">
+<!ENTITY sb.editor.inline.add "Cuir L&#233;iri&#250; Inl&#237;ne isteach don Roghn&#250;">
+<!ENTITY sb.editor.inline.delete "Bain as gach L&#233;iri&#250; Inl&#237;ne">
+<!ENTITY sb.editor.attach.file "Ceangail Comhad leis an Roghn&#250;">
+<!ENTITY sb.editor.attach.link "Ceangail Nasc leis an Roghn&#250;">
+<!ENTITY sb.editor.cutter "Bain as an Roghn&#250;">
+<!ENTITY sb.editor.remove.iframe "Bain as gach Clib IFRAME">
+<!ENTITY sb.editor.remove.script "Bain as gach Clib SCRIPT">
+<!ENTITY sb.highlighter "Aibhsitheoir">
+<!ENTITY sb.highlighter.remove "Bain as gach Aibhsigh sa Roghn&#250;">
+<!ENTITY sb.highlighter.remove.all "Bain as gach Aibhsigh">
+<!ENTITY sb.customize "Saincheap">
+<!ENTITY sb.infobar.openSource "Oscail URL Foinsithe">
+<!ENTITY sb.infobar.showSitemap "Show &sb.infobar.sitemap;">
+<!ENTITY sb.infobar.showInfobar "Show Info Toolbar">
+<!ENTITY sb.infobar.home "Baile">
+<!ENTITY sb.infobar.sitemap "Mapa-su&#237;omha">
+<!ENTITY sb.locate "Sioncronaigh le Crann an Taobh-bharra">

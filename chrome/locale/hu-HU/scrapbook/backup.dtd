@@ -1,7 +1,7 @@
-<!ENTITY sb.backup.d		"Biztonsági mentés készítése tömörítésel a ScrapBook valamennyi adatáról.">
-<!ENTITY sb.backup.program	"Tömörítő program">
-<!ENTITY sb.backup.file		"A biztonsági mentés célfájlja">
-<!ENTITY sb.backup.browse	"Tallózás">
-<!ENTITY sb.backup.arg		"Parancssori argumentumok">
-<!ENTITY sb.backup.arg.d1	"&#37;dst a biztonsági másolat útvonala.">
-<!ENTITY sb.backup.arg.d2	"&#37;src a ScrapBook mappa útvonala.">
+<!ENTITY sb.backup.d "Biztonsági mentés készítése tömörítésel a ScrapBook valamennyi adatáról.">
+<!ENTITY sb.backup.program "Tömörítő program">
+<!ENTITY sb.backup.file "A biztonsági mentés célfájlja">
+<!ENTITY sb.backup.browse "Tallózás">
+<!ENTITY sb.backup.arg "Parancssori argumentumok">
+<!ENTITY sb.backup.arg.d1 "&#37;dst a biztonsági másolat útvonala.">
+<!ENTITY sb.backup.arg.d2 "&#37;src a ScrapBook mappa útvonala.">

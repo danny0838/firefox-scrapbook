@@ -26,7 +26,7 @@ var SBsort = {
 			rootRes = window.arguments[0];
 		}
 		catch(ex) {
-			rootRes = SBservice.RDF.GetResource("urn:scrapbook:root");;
+			rootRes = sbCommonUtils.RDF.GetResource("urn:scrapbook:root");;
 			if ( !window.confirm(document.getElementById("ScrapBookSortConfirm").value) ) return;
 		}
 		switch ( this.RADIO_GROUP.selectedIndex )
@@ -57,7 +57,7 @@ var SBsort = {
 		while ( resEnum.hasMoreElements() )
 		{
 			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			if ( SBservice.RDFCU.IsContainer(sbDataSource.data, res) )
+			if ( sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, res) )
 			{
 				resListF.push(res);
 				if ( this.recursive ) this.process(res);

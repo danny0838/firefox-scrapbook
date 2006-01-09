@@ -9,7 +9,7 @@ var snGlobal  ={
 		var id = RegExp.$1;
 		SBnote.sidebar = false;
 		sbDataSource.init();
-		SBnote.edit(SBservice.RDF.GetResource("urn:scrapbook:item" + id));
+		SBnote.edit(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id));
 		snTemplate.init();
 		this.initFontSize();
 		if ( nsPreferences.getBoolPref("scrapbook.note.linefeed", true) )
@@ -21,10 +21,10 @@ var snGlobal  ={
 
 	refresh : function()
 	{
-		var icon = SBcommon.getDefaultIcon("note");
+		var icon = sbCommonUtils.getDefaultIcon("note");
 		document.getElementById("ScrapNoteImage").setAttribute("src", icon);
 		if ( !document.getElementById("ScrapNoteBrowser").hidden ) snPreview.show();
-		var browser = SBservice.WINDOW.getMostRecentWindow("navigator:browser").getBrowser();
+		var browser = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser").getBrowser();
 		try {
 			if ( browser.selectedBrowser.contentWindow.SBnote.curRes.Value == SBnote.curRes.Value )
 			{
@@ -85,12 +85,12 @@ var snPreview = {
 		if ( document.getElementById("ScrapNoteToolbarL").getAttribute("checked") ) content = content.replace(/([^>])$/mg, "$1<br>");
 		source = source.replace(/<%NOTE_TITLE%>/g,   title);
 		source = source.replace(/<%NOTE_CONTENT%>/g, content);
-		var htmlFile = SBcommon.getScrapBookDir().clone();
+		var htmlFile = sbCommonUtils.getScrapBookDir().clone();
 		htmlFile.append("note.html");
-		SBcommon.writeFile(htmlFile, source, "UTF-8");
+		sbCommonUtils.writeFile(htmlFile, source, "UTF-8");
 		this.toggle(true);
 		document.getElementById("ScrapNoteBrowser").removeAttribute("src");
-		document.getElementById("ScrapNoteBrowser").setAttribute("src", SBcommon.convertFilePathToURL(htmlFile.path));
+		document.getElementById("ScrapNoteBrowser").setAttribute("src", sbCommonUtils.convertFilePathToURL(htmlFile.path));
 		this.state = true;
 	},
 
@@ -116,9 +116,9 @@ var snTemplate = {
 
 	init : function()
 	{
-		this.file = SBcommon.getScrapBookDir().clone();
+		this.file = sbCommonUtils.getScrapBookDir().clone();
 		this.file.append("note_template.html");
-		if ( !this.file.exists() ) SBcommon.saveTemplateFile("chrome://scrapbook/content/template.html", this.file);
+		if ( !this.file.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/template.html", this.file);
 	},
 
 	show : function(willShow)
@@ -130,8 +130,8 @@ var snTemplate = {
 
 	getTemplate : function()
 	{
-		var template = SBcommon.readFile(this.file);
-		template = SBcommon.convertStringToUTF8(template);
+		var template = sbCommonUtils.readFile(this.file);
+		template = sbCommonUtils.convertStringToUTF8(template);
 		return template;
 	},
 
@@ -146,9 +146,9 @@ var snTemplate = {
 	save : function()
 	{
 		if ( !this.toSave ) return;
-		var myCSS = SBcommon.getScrapBookDir().clone();
+		var myCSS = sbCommonUtils.getScrapBookDir().clone();
 		myCSS.append("note_template.html");
-		SBcommon.writeFile(myCSS, this.TEXTBOX.value, "UTF-8");
+		sbCommonUtils.writeFile(myCSS, this.TEXTBOX.value, "UTF-8");
 		this.change(false);
 	},
 

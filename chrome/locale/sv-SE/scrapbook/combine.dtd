@@ -1,6 +1,6 @@
-<!ENTITY sb.combine.select		"Välj sidor">
-<!ENTITY sb.combine.select.d	"Dubbelklicka sidorna i den ordning du vill att de ska kombineras.">
-<!ENTITY sb.combine.preview		"Förhandsvisa">
-<!ENTITY sb.combine.preview.d	"Tryck Kombinera-knappen efter att ha granskat förhandsvisningen.">
-<!ENTITY sb.combine.option.header	"Lägg till info-överskrift till varje sida.">
-<!ENTITY sb.combine.option.remove	"Radera originalsidorna när de kombinerats.">
+<!ENTITY sb.combine.select "Välj sidor">
+<!ENTITY sb.combine.select.d "Dubbelklicka sidorna i den ordning du vill att de ska kombineras.">
+<!ENTITY sb.combine.preview "Förhandsvisa">
+<!ENTITY sb.combine.preview.d "Tryck Kombinera-knappen efter att ha granskat förhandsvisningen.">
+<!ENTITY sb.combine.option.header "Lägg till info-överskrift till varje sida.">
+<!ENTITY sb.combine.option.remove "Radera originalsidorna när de kombinerats.">

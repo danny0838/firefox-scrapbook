@@ -1,0 +1,8 @@
+<!ENTITY mb.configure "설정">
+<!ENTITY mb.prop.name "이름">
+<!ENTITY mb.prop.path "경로">
+<!ENTITY mb.button.add "추가">
+<!ENTITY mb.button.edit "편집">
+<!ENTITY mb.button.remove "제거">
+<!ENTITY mb.button.browse "찾아보기">
+<!ENTITY mb.button.accept "확인">

@@ -1,18 +1,16 @@
-<!ENTITY sb.open			"Obre">
-<!ENTITY sb.open.tab		"Obre en una pestanya">
-<!ENTITY sb.open.newtab		"Obre en una pestanya nova">
-<!ENTITY sb.open.source		"Obre l'URL font">
-<!ENTITY sb.show.files		"Mostra els fitxers">
-<!ENTITY sb.delete			"Suprimeix">
-<!ENTITY sb.property		"Propietats">
-
-<!ENTITY sb.folder.toggle	"Expandeix/Redueix">
-<!ENTITY sb.folder.openall	"Obre'ls tots en pestanyes">
-<!ENTITY sb.folder.combine	"Obre'ls en una visualització combinada">
-<!ENTITY sb.folder.manage	"Gestiona la carpeta...">
-
-<!ENTITY sb.new.folder		"Nova carpeta...">
-<!ENTITY sb.new.note		"Nova nota">
-
-<!ENTITY sb.sort.folder		"Ordena la carpeta">
-
+<!ENTITY sb.open "Obre">
+<!ENTITY sb.open.tab "Obre en una pestanya">
+<!ENTITY sb.open.newtab "Obre en una pestanya nova">
+<!ENTITY sb.open.source "Obre l'URL font">
+<!ENTITY sb.show.files "Mostra els fitxers">
+<!ENTITY sb.delete "Suprimeix">
+<!ENTITY sb.property "Propietats">
+<!ENTITY sb.folder.toggle "Expandeix/Redueix">
+<!ENTITY sb.folder.openall "Obre'ls tots en pestanyes">
+<!ENTITY sb.folder.combine "Obre'ls en una visualització combinada">
+<!ENTITY sb.folder.manage "Gestiona la carpeta...">
+<!ENTITY sb.new.folder "Nova carpeta...">
+<!ENTITY sb.new.note "Nova nota">
+<!ENTITY sb.sort.folder "Ordena la carpeta">
+<!ENTITY mb.configure "Configure">
+<!ENTITY mb.profileFolder "Profile Folder">

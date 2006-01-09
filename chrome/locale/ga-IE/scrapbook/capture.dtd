@@ -1,15 +1,13 @@
-<!ENTITY sb.capture			"Gabh&#225;il">
-<!ENTITY sb.capture.abort	"Stad">
-<!ENTITY sb.capture.start	"Tosaigh">
-<!ENTITY sb.capture.retry	"Atriall">
-<!ENTITY sb.capture.skip	"Scipe&#225;il">
-<!ENTITY sb.capture.pause	"Sos">
-
-<!ENTITY sb.capture.filter			"Scag">
-<!ENTITY sb.capture.filter.domain	"Teoraigh go Fearann">
-<!ENTITY sb.capture.filter.level	"Teoraigh go Comhadlann">
-<!ENTITY sb.capture.filter.string	"Scagadh f&#233; Teaghr&#225;n...">
-<!ENTITY sb.capture.filter.checkon	"Las gach Ticbhosca">
-<!ENTITY sb.capture.filter.checkoff	"M&#250;ch gach Ticbhosca">
-<!ENTITY sb.capture.filter.invert	"Inbh&#233;artaigh gach Ticbhosca">
-
+<!ENTITY sb.capture "Gabh&#225;il">
+<!ENTITY sb.capture.abort "Stad">
+<!ENTITY sb.capture.start "Tosaigh">
+<!ENTITY sb.capture.retry "Atriall">
+<!ENTITY sb.capture.skip "Scipe&#225;il">
+<!ENTITY sb.capture.pause "Sos">
+<!ENTITY sb.capture.filter "Scag">
+<!ENTITY sb.capture.filter.domain "Teoraigh go Fearann">
+<!ENTITY sb.capture.filter.level "Teoraigh go Comhadlann">
+<!ENTITY sb.capture.filter.string "Scagadh f&#233; Teaghr&#225;n...">
+<!ENTITY sb.capture.filter.checkon "Las gach Ticbhosca">
+<!ENTITY sb.capture.filter.checkoff "M&#250;ch gach Ticbhosca">
+<!ENTITY sb.capture.filter.invert "Inbh&#233;artaigh gach Ticbhosca">

@@ -1,35 +1,30 @@
-<!ENTITY sb.setting			"Beállítások">
-<!ENTITY sb.setting.general	"Általános">
-<!ENTITY sb.setting.usetabs	"Fülek használata">
-<!ENTITY sb.setting.advance	"Speciális">
-<!ENTITY sb.setting.capture	"Rögzítés">
-<!ENTITY sb.setting.editing	"Szerkesztés">
-<!ENTITY sb.setting.program	"Programok">
-
-<!ENTITY sb.setting.browser.submenu		"Az almenü engedélyezése a böngésző helyi menüjében (módosítás újraindítás után)">
-<!ENTITY sb.setting.capture.detail		"A 'Rögzítés részletei' párbeszédablak megjelenítése az oldalsávba húzással történő rögzítéskor">
-<!ENTITY sb.setting.capture.notify		"A 'Rögzítés elkészült' értesítés megjelenítése (csak Windows alatt működik)">
-<!ENTITY sb.setting.tree.singleexpand	"Egy famappa kibontásakor az összes többi mappa összecsukása (mint az IE Kedvencekben)">
-<!ENTITY sb.setting.tree.quickdelete	"Nincs megerősítés törléskor">
-
-<!ENTITY sb.setting.usetabs.d			"A bejelölt műveletek új füleket használnak.">
-<!ENTITY sb.setting.usetabs.note		"A Jegyzetek megnyitása fülön">
-
-<!ENTITY sb.setting.capture.utf8encode		"UTF-8 kódolásúvá alakítás (ajánlott)">
-<!ENTITY sb.setting.capture.utf8encode.d	"He nem jelöli be, akkor némely karakter helyett gyakorta '?' jelenik meg.">
-<!ENTITY sb.setting.capture.removescript	"A JavaScript eltávolítása (ajánlott)">
-<!ENTITY sb.setting.capture.removescript.d	"Ha nem jelöli be, akkor a JavaScript sok problémát okozhat.">
-
-<!ENTITY sb.highlighter.tips		"TIPP: A kijelölés kiemeléséhez csak az 1, vagy a 2, vagy a 3, vagy a 4 gombot kell megnyomnia.">
-<!ENTITY sb.setting.block.style		"Stíluslap">
-
-<!ENTITY sb.button.browse			"Tallózás">
-<!ENTITY sb.button.show				"Mappa megnyitása">
-
-<!ENTITY sb.setting.data			"Adattárolás célhelye">
-<!ENTITY sb.setting.data.default	"Alapértelmezett (a Profile mappában)">
-<!ENTITY sb.setting.data.explain	"Válassza ki a dosszié mappáját, melyben az összegyűjtött adatokat tárolja.">
-<!ENTITY sb.setting.data.alert		"A dosszié adatainak tárolása jelenleg a Firefox 'Profile' mappájában történik. Ne feledje, hogy a [Fájok törlése] választása esetén, ami törli a Firefox profilt, a dosszié összes adata eltávolításra kerül.">
-<!ENTITY sb.setting.filer			"Fájlkezelő program">
-<!ENTITY sb.setting.filer.default	"Alapértelmezett (ha Windows, akkor lehet az Intéző)">
-
+<!ENTITY sb.setting "Beállítások">
+<!ENTITY sb.setting.general "Általános">
+<!ENTITY sb.setting.usetabs "Fülek használata">
+<!ENTITY sb.setting.advance "Speciális">
+<!ENTITY sb.setting.capture "Rögzítés">
+<!ENTITY sb.setting.editing "Szerkesztés">
+<!ENTITY sb.setting.program "Programok">
+<!ENTITY sb.setting.browser.submenu "Az almenü engedélyezése a böngésző helyi menüjében (módosítás újraindítás után)">
+<!ENTITY sb.setting.capture.detail "A 'Rögzítés részletei' párbeszédablak megjelenítése az oldalsávba húzással történő rögzítéskor">
+<!ENTITY sb.setting.capture.notify "A 'Rögzítés elkészült' értesítés megjelenítése (csak Windows alatt működik)">
+<!ENTITY sb.setting.tree.singleexpand "Egy famappa kibontásakor az összes többi mappa összecsukása (mint az IE Kedvencekben)">
+<!ENTITY sb.setting.tree.quickdelete "Nincs megerősítés törléskor">
+<!ENTITY sb.setting.usetabs.d "A bejelölt műveletek új füleket használnak.">
+<!ENTITY sb.setting.usetabs.note "A Jegyzetek megnyitása fülön">
+<!ENTITY sb.setting.capture.utf8encode "UTF-8 kódolásúvá alakítás (ajánlott)">
+<!ENTITY sb.setting.capture.utf8encode.d "He nem jelöli be, akkor némely karakter helyett gyakorta '?' jelenik meg.">
+<!ENTITY sb.setting.capture.removescript "A JavaScript eltávolítása (ajánlott)">
+<!ENTITY sb.setting.capture.removescript.d "Ha nem jelöli be, akkor a JavaScript sok problémát okozhat.">
+<!ENTITY sb.highlighter.tips "TIPP: A kijelölés kiemeléséhez csak az 1, vagy a 2, vagy a 3, vagy a 4 gombot kell megnyomnia.">
+<!ENTITY sb.setting.block.style "Stíluslap">
+<!ENTITY sb.button.browse "Tallózás">
+<!ENTITY sb.button.show "Mappa megnyitása">
+<!ENTITY sb.setting.data "Adattárolás célhelye">
+<!ENTITY sb.setting.data.default "Alapértelmezett (a Profile mappában)">
+<!ENTITY sb.setting.data.explain "Válassza ki a dosszié mappáját, melyben az összegyűjtött adatokat tárolja.">
+<!ENTITY sb.setting.data.alert "A dosszié adatainak tárolása jelenleg a Firefox 'Profile' mappájában történik. Ne feledje, hogy a [Fájok törlése] választása esetén, ami törli a Firefox profilt, a dosszié összes adata eltávolításra kerül.">
+<!ENTITY sb.setting.multibook.enabled "Enable Multi-ScrapBook">
+<!ENTITY sb.setting.multibook.description "This enables you to set up multiple destination to store data and switch between them quickly with toolbar button.">
+<!ENTITY sb.setting.filer "Fájlkezelő program">
+<!ENTITY sb.setting.filer.default "Alapértelmezett (ha Windows, akkor lehet az Intéző)">

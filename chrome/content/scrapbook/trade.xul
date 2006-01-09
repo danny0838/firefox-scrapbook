@@ -31,13 +31,6 @@
         windowtype="scrapbook">
 
 	<!--JavaScript-->
-	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
-	<script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
-	<script type="application/x-javascript" src="chrome://global/content/nsTransferable.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/tree.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapbook.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/manage.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/trade.js" />
@@ -74,6 +67,7 @@
 			<toolbar id="ScrapBookMainToolbar" class="plain">
 				<toolbarbutton tooltiptext="&sb.new.folder;" image="chrome://scrapbook/skin/tool_createfolder.png" oncommand="SB_createFolder();" />
 				<toolbarbutton tooltiptext="&sb.toggle.all;" image="chrome://scrapbook/skin/tool_togglefolder.png" oncommand="sbTreeHandler.toggleAllFolders();" />
+				<toolbarbutton id="mbToolbarButton" />
 			</toolbar>
 			<!--scrapbook tree-->
 			<tree id="ScrapBookTree"

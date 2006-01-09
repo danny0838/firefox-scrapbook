@@ -1,4 +1,4 @@
-<!ENTITY sb.trade.import	"Importovat">
-<!ENTITY sb.trade.export	"Exportovat">
-<!ENTITY sb.trade.restore	"Importovat se strukturou obnovené složky">
-<!ENTITY sb.trade.time	"Čas exportování">
+<!ENTITY sb.trade.import "Importovat">
+<!ENTITY sb.trade.export "Exportovat">
+<!ENTITY sb.trade.restore "Importovat se strukturou obnovené složky">
+<!ENTITY sb.trade.time "Čas exportování">

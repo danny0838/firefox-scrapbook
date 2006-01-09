@@ -1,7 +1,7 @@
-<!ENTITY sb.sort			"Sorteren">
-<!ENTITY sb.sort.title.asc	"Op titel oplopend sorteren (A &gt; Z)">
-<!ENTITY sb.sort.title.desc	"Op titel aflopend sorteren (Z &gt; A)">
-<!ENTITY sb.sort.date.asc	"Chronologisch (oplopend)">
-<!ENTITY sb.sort.date.desc	"Chronologisch (aflopend)">
-<!ENTITY sb.sort.recursive	"Ook de onderliggende mappen sorteren">
-<!ENTITY sb.sort.confirm	"Let op: Deze bewerking kan niet ongedaan gemaakt worden. Wilt u de volledige mappenstructuur sorteren?">
+<!ENTITY sb.sort "Sorteren">
+<!ENTITY sb.sort.title.asc "Op titel oplopend sorteren (A &gt; Z)">
+<!ENTITY sb.sort.title.desc "Op titel aflopend sorteren (Z &gt; A)">
+<!ENTITY sb.sort.date.asc "Chronologisch (oplopend)">
+<!ENTITY sb.sort.date.desc "Chronologisch (aflopend)">
+<!ENTITY sb.sort.recursive "Ook de onderliggende mappen sorteren">
+<!ENTITY sb.sort.confirm "Let op: Deze bewerking kan niet ongedaan gemaakt worden. Wilt u de volledige mappenstructuur sorteren?">

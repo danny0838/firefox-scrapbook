@@ -1,7 +1,7 @@
-<!ENTITY sb.sort			"Ordina">
-<!ENTITY sb.sort.title.asc	"Ordine per titolo (A &gt; Z)">
-<!ENTITY sb.sort.title.desc	"Ordine per titolo (Z &gt; A)">
-<!ENTITY sb.sort.date.asc	"Ordine cronologico">
-<!ENTITY sb.sort.date.desc	"Ordine cronologico inverso">
-<!ENTITY sb.sort.recursive	"Ordine ricorsivo per le sotto-cartelle">
-<!ENTITY sb.sort.confirm	"Attenzione: impossibile annullare questa operazione. Si desidera ordinare l'intero diagramma delle directory?">
+<!ENTITY sb.sort "Ordina">
+<!ENTITY sb.sort.title.asc "Ordine per titolo (A &gt; Z)">
+<!ENTITY sb.sort.title.desc "Ordine per titolo (Z &gt; A)">
+<!ENTITY sb.sort.date.asc "Ordine cronologico">
+<!ENTITY sb.sort.date.desc "Ordine cronologico inverso">
+<!ENTITY sb.sort.recursive "Ordine ricorsivo per le sotto-cartelle">
+<!ENTITY sb.sort.confirm "Attenzione: impossibile annullare questa operazione. Si desidera ordinare l'intero diagramma delle directory?">

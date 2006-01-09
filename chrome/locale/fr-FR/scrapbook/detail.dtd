@@ -1,16 +1,13 @@
-<!ENTITY sb.detail					"Détail de la capture">
-<!ENTITY sb.detail.new.folder		"Nouveau dossier">
-<!ENTITY sb.detail.select.folder	"Sélectionner le dossier">
-
-<!ENTITY sb.detail.linked.file		"Capturer les liens">
-<!ENTITY sb.detail.linked.image		"Image">
-<!ENTITY sb.detail.linked.sound		"Son">
-<!ENTITY sb.detail.linked.movie		"Vidéo">
-<!ENTITY sb.detail.linked.archive	"Archive">
-<!ENTITY sb.detail.linked.custom	"Personnalisé">
-
-<!ENTITY sb.detail.linked.page			"Capture en profondeur">
-<!ENTITY sb.detail.linked.page2			"Capture des pages Web liées">
-<!ENTITY sb.detail.linked.page.depth	"Profondeur de capture des liens">
-<!ENTITY sb.detail.linked.page.text		"Une fois les captures terminées, toutes les pages sont liées entre elles.">
-
+<!ENTITY sb.detail "Détail de la capture">
+<!ENTITY sb.detail.new.folder "Nouveau dossier">
+<!ENTITY sb.detail.select.folder "Sélectionner le dossier">
+<!ENTITY sb.detail.linked.file "Capturer les liens">
+<!ENTITY sb.detail.linked.image "Image">
+<!ENTITY sb.detail.linked.sound "Son">
+<!ENTITY sb.detail.linked.movie "Vidéo">
+<!ENTITY sb.detail.linked.archive "Archive">
+<!ENTITY sb.detail.linked.custom "Personnalisé">
+<!ENTITY sb.detail.linked.page "Capture en profondeur">
+<!ENTITY sb.detail.linked.page2 "Capture des pages Web liées">
+<!ENTITY sb.detail.linked.page.depth "Profondeur de capture des liens">
+<!ENTITY sb.detail.linked.page.text "Une fois les captures terminées, toutes les pages sont liées entre elles.">

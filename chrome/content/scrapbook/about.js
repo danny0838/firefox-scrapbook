@@ -1,6 +1,6 @@
 
-const SB_VERSION = "0.18.3";
-const SB_BUILDID = "Build ID 20051212";
+const SB_VERSION = "0.18.4";
+const SB_BUILDID = "Build ID 20051218";
 const UPDATE_URL = "http://amb.vis.ne.jp/mozilla/scrapbook/update.rdf?ver=" + SB_VERSION;
 
 var SBstring;
@@ -24,19 +24,20 @@ function SB_initAbout()
 
 function SB_visit(aXUL)
 {
-	SBcommon.loadURL(aXUL.getAttribute("href"), true);
+	sbCommonUtils.loadURL(aXUL.getAttribute("href"), true);
 }
 
 
 function SB_mailto(aXUL)
 {
-	SBcommon.loadURL('mailto:' + aXUL.getAttribute('href'), false);
+	sbCommonUtils.loadURL('mailto:' + aXUL.getAttribute('href'), false);
 }
 
 
 function SB_secret()
 {
 	window.opener.SBstatus.httpBusy(5, "32% : product-mozilla-screen");
+	window.opener.top.document.getElementById("sidebar-box").width = 190;
 	setTimeout(function() { window.opener.top.document.getElementById("statusbar-display").label = "Transferring data from www.mozilla.org..."; }, 0);
 }
 

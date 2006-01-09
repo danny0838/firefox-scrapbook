@@ -1,16 +1,13 @@
-<!ENTITY sb.detail					"캡처 상세 설정">
-<!ENTITY sb.detail.new.folder		"새 폴더">
-<!ENTITY sb.detail.select.folder	"폴더 선택">
-
-<!ENTITY sb.detail.linked.file		"링크된 파일 다운로드">
-<!ENTITY sb.detail.linked.image		"이미지">
-<!ENTITY sb.detail.linked.sound		"음악">
-<!ENTITY sb.detail.linked.movie		"영화">
-<!ENTITY sb.detail.linked.archive	"압축">
-<!ENTITY sb.detail.linked.custom	"사용자 설정">
-
-<!ENTITY sb.detail.linked.page			"상세 캡처">
-<!ENTITY sb.detail.linked.page2			"링크된 페이지 캡처">
-<!ENTITY sb.detail.linked.page.depth	"연결 링크 단계">
-<!ENTITY sb.detail.linked.page.text		"캡처 완료 후 모든 페이지는 상호 링크되어 사이트 맵이 생성됩니다.">
-
+<!ENTITY sb.detail "캡처 상세 설정">
+<!ENTITY sb.detail.new.folder "새 폴더">
+<!ENTITY sb.detail.select.folder "폴더 선택">
+<!ENTITY sb.detail.linked.file "링크된 파일 다운로드">
+<!ENTITY sb.detail.linked.image "이미지">
+<!ENTITY sb.detail.linked.sound "음악">
+<!ENTITY sb.detail.linked.movie "영화">
+<!ENTITY sb.detail.linked.archive "압축">
+<!ENTITY sb.detail.linked.custom "사용자 설정">
+<!ENTITY sb.detail.linked.page "상세 캡처">
+<!ENTITY sb.detail.linked.page2 "링크된 페이지 캡처">
+<!ENTITY sb.detail.linked.page.depth "연결 링크 단계">
+<!ENTITY sb.detail.linked.page.text "캡처 완료 후 모든 페이지는 상호 링크되어 사이트 맵이 생성됩니다.">

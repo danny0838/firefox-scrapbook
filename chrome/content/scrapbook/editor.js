@@ -24,7 +24,7 @@ var sbPageEditor = {
 			this.item[prop] = sbDataSource.getProperty(prop, sbBrowserOverlay.resource);
 		}
 		document.getElementById("ScrapBookEditTitle").value = this.item.title;
-		document.getElementById("ScrapBookEditIcon").src    = this.item.icon ? this.item.icon : SBcommon.getDefaultIcon();
+		document.getElementById("ScrapBookEditIcon").src    = this.item.icon ? this.item.icon : sbCommonUtils.getDefaultIcon();
 		this.COMMENT.value = "";
 		this.showHide(true);
 		setTimeout(function(){ sbPageEditor.delayedInit(); }, 100);
@@ -225,8 +225,8 @@ var sbPageEditor = {
 	{
 		if ( this.changed2 ) this.save2();
 		if ( !this.changed1 ) return 0;
-		var button = SBservice.PROMPT.BUTTON_TITLE_SAVE * SBservice.PROMPT.BUTTON_POS_0 + SBservice.PROMPT.BUTTON_TITLE_DONT_SAVE * SBservice.PROMPT.BUTTON_POS_1;
-		var res = SBservice.PROMPT.confirmEx(window, "ScrapBook", this.STRING.getFormattedString("EDIT_SAVE_CHANGES", [this.item.title]), button, null, null, null, null, {});
+		var button = sbCommonUtils.PROMPT.BUTTON_TITLE_SAVE * sbCommonUtils.PROMPT.BUTTON_POS_0 + sbCommonUtils.PROMPT.BUTTON_TITLE_DONT_SAVE * sbCommonUtils.PROMPT.BUTTON_POS_1;
+		var res = sbCommonUtils.PROMPT.confirmEx(window, "ScrapBook", this.STRING.getFormattedString("EDIT_SAVE_CHANGES", [this.item.title]), button, null, null, null, null, {});
 		if ( res == 0 ) this.save1();
 		this.changed1 = false;
 		return res;
@@ -256,9 +256,9 @@ var sbPageEditor = {
 			src = sbContentSaver.doctypeToString(doc.doctype) + src;
 			src = src.replace(/ -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;\">/g, '">');
 			src = src.replace(/<span>([^<]*)<\/span>/g, "$1");
-			var file = SBcommon.getContentDir(this.item.id).clone();
-			file.append(SBcommon.getFileName(doc.location.href));
-			SBcommon.writeFile(file, src, doc.characterSet);
+			var file = sbCommonUtils.getContentDir(this.item.id).clone();
+			file.append(sbCommonUtils.getFileName(doc.location.href));
+			sbCommonUtils.writeFile(file, src, doc.characterSet);
 		}
 		this.changed1 = false;
 		window.setTimeout(function() { window._content.stop(); sbPageEditor.disable(false); }, 500);
@@ -268,7 +268,7 @@ var sbPageEditor = {
 	{
 		if ( !sbDataSource.exists(sbBrowserOverlay.resource) ) { this.disable(true); return; }
 		var newTitle   = document.getElementById("ScrapBookEditTitle").value;
-		var newComment = SBcommon.escapeComment(this.COMMENT.value);
+		var newComment = sbCommonUtils.escapeComment(this.COMMENT.value);
 		if ( newTitle != this.item.title || newComment != this.item.comment )
 		{
 			this.disableTemporary(500);
@@ -277,7 +277,7 @@ var sbPageEditor = {
 			sbDataSource.flush();
 			this.item.title   = newTitle;
 			this.item.comment = newComment;
-			SBcommon.writeIndexDat(this.item);
+			sbCommonUtils.writeIndexDat(this.item);
 		}
 		this.changed2 = false;
 	},
@@ -298,7 +298,7 @@ var sbPageEditor = {
 	toggle : function()
 	{
 		if ( !sbBrowserOverlay.getID() ) return;
-		try { SBservice.PREF.setBoolPref("scrapbook.view.editor", this.TOOLBAR.hidden); } catch(ex) {}
+		try { sbCommonUtils.PREF.setBoolPref("scrapbook.view.editor", this.TOOLBAR.hidden); } catch(ex) {}
 		sbBrowserOverlay.editMode = this.TOOLBAR.hidden;
 		if ( this.TOOLBAR.hidden )
 			this.init();
@@ -446,16 +446,16 @@ var sbBlockComment = {
 
 	add : function()
 	{
-		var file = SBcommon.getScrapBookDir();
+		var file = sbCommonUtils.getScrapBookDir();
 		file.append("block.css");
 		if ( !file.exists() )
 		{
-			SBcommon.saveTemplateFile("chrome://scrapbook/skin/block.css", file);
+			sbCommonUtils.saveTemplateFile("chrome://scrapbook/skin/block.css", file);
 			setTimeout(function(){ sbBlockComment.add(); }, 1000);
 			return;
 		}
-		var style = SBcommon.readFile(file).replace(/\r|\n/g, " ");
-		var win = SBcommon.getFocusedWindow();
+		var style = sbCommonUtils.readFile(file).replace(/\r|\n/g, " ");
+		var win = sbCommonUtils.getFocusedWindow();
 		var sel = win.getSelection().QueryInterface(Components.interfaces.nsISelectionPrivate);
 		var node = sel.anchorNode;
 		if ( !node ) return;
@@ -534,7 +534,7 @@ var sbBlockComment = {
 		var sel = sbPageEditor.getSelection();
 		if ( !sel ) return;
 		var ret = {};
-		if ( !SBservice.PROMPT.prompt(window, "ScrapBook", sbPageEditor.STRING.getFormattedString("EDIT_INLINE_COMMENT", [sel.toString()]), ret, null, {}) ) return;
+		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbPageEditor.STRING.getFormattedString("EDIT_INLINE_COMMENT", [sel.toString()]), ret, null, {}) ) return;
 		if ( !ret.value ) return;
 		var attr = {};
 		attr["class"] = "scrapbook-inline-comment";
@@ -547,7 +547,7 @@ var sbBlockComment = {
 	editInline : function(aElement)
 	{
 		var ret = { value : aElement.getAttribute("title") };
-		if ( !SBservice.PROMPT.prompt(window, "ScrapBook", sbPageEditor.STRING.getFormattedString("EDIT_INLINE_COMMENT", [aElement.textContent]), ret, null, {}) ) return;
+		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbPageEditor.STRING.getFormattedString("EDIT_INLINE_COMMENT", [aElement.textContent]), ret, null, {}) ) return;
 		if ( ret.value )
 			aElement.setAttribute("title", ret.value);
 		else
@@ -564,7 +564,7 @@ var sbBlockComment = {
 		if ( aFlag == "L" )
 		{
 			var ret = {};
-			if ( !SBservice.PROMPT.prompt(window, "ScrapBook - " + aLabel, "URL:", ret, null, {}) ) return;
+			if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook - " + aLabel, "URL:", ret, null, {}) ) return;
 			if ( !ret.value ) return;
 			attr["href"] = ret.value;
 		}
@@ -575,12 +575,12 @@ var sbBlockComment = {
 			var ret = FP.show();
 			if ( ret != FP.returnOK ) return;
 			try {
-				FP.file.copyTo(SBcommon.getContentDir(sbPageEditor.item.id), FP.file.leafName);
+				FP.file.copyTo(sbCommonUtils.getContentDir(sbPageEditor.item.id), FP.file.leafName);
 			} catch(ex) {
 				alert("ScrapBook ERROR: The file '" + FP.file.leafName + "' already exists.");
 				return;
 			}
-			attr["href"] = SBcommon.getFileName(SBservice.IO.newFileURI(FP.file).spec);
+			attr["href"] = sbCommonUtils.getFileName(sbCommonUtils.IO.newFileURI(FP.file).spec);
 		}
 		sbHighlighter.set(sbPageEditor.focusedWindow, sel, "a", attr);
 		sbPageEditor.changed1 = true;
@@ -612,13 +612,13 @@ var sbInfoViewer = {
 		document.getElementById("ScrapBookInfoSite").setAttribute("image", "chrome://scrapbook/skin/info_link" + (isSite ? "1" : "0") +  ".png");
 		var srcLabel = document.getElementById("ScrapBookInfoSource");
 		srcLabel.value = sbDataSource.getProperty("source", sbBrowserOverlay.resource);
-		srcLabel.onclick = function(aEvent){ SBcommon.loadURL(srcLabel.value, aEvent.button == 1); };
+		srcLabel.onclick = function(aEvent){ sbCommonUtils.loadURL(srcLabel.value, aEvent.button == 1); };
 	},
 
 	toggle : function()
 	{
 		if ( !sbBrowserOverlay.getID() ) return;
-		try { SBservice.PREF.setBoolPref("scrapbook.view.infobar", this.TOOLBAR.hidden); } catch(ex) {}
+		try { sbCommonUtils.PREF.setBoolPref("scrapbook.view.infobar", this.TOOLBAR.hidden); } catch(ex) {}
 		sbBrowserOverlay.infoMode = this.TOOLBAR.hidden;
 		if ( this.TOOLBAR.hidden )
 			this.init();
@@ -629,7 +629,7 @@ var sbInfoViewer = {
 
 	openSource : function(tabbed)
 	{
-		SBcommon.loadURL(sbDataSource.getProperty("source", sbBrowserOverlay.resource), tabbed);
+		sbCommonUtils.loadURL(sbDataSource.getProperty("source", sbBrowserOverlay.resource), tabbed);
 	},
 
 	load : function(aFileName)

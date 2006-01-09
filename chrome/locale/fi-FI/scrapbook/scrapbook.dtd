@@ -1,35 +1,29 @@
-<!ENTITY sb.title			"ScrapBook">
-
-<!ENTITY sb.new.folder		"Uusi kansio...">
-<!ENTITY sb.new.note		"Uusi muistilappu">
-<!ENTITY sb.toggle.all		"Laajenna/Supista kaikki kansiot">
-
-<!ENTITY sb.tools			"Työkalut">
-<!ENTITY sb.tools.setting	"Asetukset...">
-<!ENTITY sb.tools.manage	"Muokkaa">
-<!ENTITY sb.tools.calculate	"Laske koko">
-<!ENTITY sb.tools.sorttree	"Järjestä koko puu">
-<!ENTITY sb.tools.directory	"ScrapBook-kansio">
-<!ENTITY sb.tools.combine	"Yhdistä">
-<!ENTITY sb.tools.multiple	"Kaappaa useita sivuja">
-<!ENTITY sb.tools.trade		"Tuo tai vie">
-<!ENTITY sb.tools.output	"Tulosta kansiopuu HTML:nä">
-<!ENTITY sb.tools.backup	"Varmenna tiivistäen">
-<!ENTITY sb.tools.repair	"Hätäkorjaus">
-<!ENTITY sb.tools.homepage	"Kotisivu">
-<!ENTITY sb.tools.about		"Tietoja">
-
-<!ENTITY sb.search			"Etsi">
-<!ENTITY sb.search.fulltext	"Täydellinen tekstihaku">
-<!ENTITY sb.search.all		"Kaikki">
-<!ENTITY sb.search.re		"Käytä RegExpejä">
-<!ENTITY sb.search.cs		"Huomaa kirjainkoko">
-<!ENTITY sb.search.cache	"Päivitä välimuisti täydellistä tekstihakua varten">
-<!ENTITY sb.search.clear	"Tyhjennä hakukentän muisti">
-<!ENTITY sb.search.days		"Suodatus päivien mukaan">
-
-<!ENTITY sb.note.opentab	"Avaa välilehdessä">
-<!ENTITY sb.note.close		"Sulje">
-
-<!ENTITY sb.move			"Siirrä kansioon">
-
+<!ENTITY sb.title "ScrapBook">
+<!ENTITY sb.new.folder "Uusi kansio...">
+<!ENTITY sb.new.note "Uusi muistilappu">
+<!ENTITY sb.toggle.all "Laajenna/Supista kaikki kansiot">
+<!ENTITY sb.tools "Työkalut">
+<!ENTITY sb.tools.setting "Asetukset...">
+<!ENTITY sb.tools.manage "Muokkaa">
+<!ENTITY sb.tools.calculate "Laske koko">
+<!ENTITY sb.tools.sorttree "Järjestä koko puu">
+<!ENTITY sb.tools.directory "ScrapBook-kansio">
+<!ENTITY sb.tools.combine "Yhdistä">
+<!ENTITY sb.tools.multiple "Kaappaa useita sivuja">
+<!ENTITY sb.tools.trade "Tuo tai vie">
+<!ENTITY sb.tools.output "Tulosta kansiopuu HTML:nä">
+<!ENTITY sb.tools.backup "Varmenna tiivistäen">
+<!ENTITY sb.tools.repair "Hätäkorjaus">
+<!ENTITY sb.tools.homepage "Kotisivu">
+<!ENTITY sb.tools.about "Tietoja">
+<!ENTITY sb.search "Etsi">
+<!ENTITY sb.search.fulltext "Täydellinen tekstihaku">
+<!ENTITY sb.search.all "Kaikki">
+<!ENTITY sb.search.re "Käytä RegExpejä">
+<!ENTITY sb.search.cs "Huomaa kirjainkoko">
+<!ENTITY sb.search.cache "Päivitä välimuisti täydellistä tekstihakua varten">
+<!ENTITY sb.search.clear "Tyhjennä hakukentän muisti">
+<!ENTITY sb.search.days "Suodatus päivien mukaan">
+<!ENTITY sb.note.opentab "Avaa välilehdessä">
+<!ENTITY sb.note.close "Sulje">
+<!ENTITY sb.move "Siirrä kansioon">

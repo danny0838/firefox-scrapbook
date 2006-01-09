@@ -1,15 +1,13 @@
-<!ENTITY sb.capture			"Spara i Scrapbook">
-<!ENTITY sb.capture.abort	"Avbryt">
-<!ENTITY sb.capture.start	"Start">
-<!ENTITY sb.capture.retry	"Försök igen">
-<!ENTITY sb.capture.skip	"Ignorera">
-<!ENTITY sb.capture.pause	"Pause">
-
-<!ENTITY sb.capture.filter			"Filtrera">
-<!ENTITY sb.capture.filter.domain	"Avgränsa till domän">
-<!ENTITY sb.capture.filter.level	"Avgränsa till mapp">
-<!ENTITY sb.capture.filter.string	"Filtrera med avseende på sträng...">
-<!ENTITY sb.capture.filter.checkon	"Markera alla">
-<!ENTITY sb.capture.filter.checkoff	"Avmarkera alla">
-<!ENTITY sb.capture.filter.invert	"Invertera markering">
-
+<!ENTITY sb.capture "Spara i Scrapbook">
+<!ENTITY sb.capture.abort "Avbryt">
+<!ENTITY sb.capture.start "Start">
+<!ENTITY sb.capture.retry "Försök igen">
+<!ENTITY sb.capture.skip "Ignorera">
+<!ENTITY sb.capture.pause "Pause">
+<!ENTITY sb.capture.filter "Filtrera">
+<!ENTITY sb.capture.filter.domain "Avgränsa till domän">
+<!ENTITY sb.capture.filter.level "Avgränsa till mapp">
+<!ENTITY sb.capture.filter.string "Filtrera med avseende på sträng...">
+<!ENTITY sb.capture.filter.checkon "Markera alla">
+<!ENTITY sb.capture.filter.checkoff "Avmarkera alla">
+<!ENTITY sb.capture.filter.invert "Invertera markering">

@@ -1,35 +1,29 @@
-<!ENTITY sb.title			"ScrapBook">
-
-<!ENTITY sb.new.folder		"Ny Mapp...">
-<!ENTITY sb.new.note		"Ny Notering">
-<!ENTITY sb.toggle.all		"Visa/Göm alla mappar">
-
-<!ENTITY sb.tools			"Verktyg">
-<!ENTITY sb.tools.setting	"Inställningar...">
-<!ENTITY sb.tools.manage	"Redigera">
-<!ENTITY sb.tools.calculate	"Beräkna storlek">
-<!ENTITY sb.tools.sorttree	"Sortera hela trädet">
-<!ENTITY sb.tools.directory	"Öppna ScrapBooks mapp">
-<!ENTITY sb.tools.combine	"Combine">
-<!ENTITY sb.tools.multiple	"Spara flera URL:er">
-<!ENTITY sb.tools.trade		"Importa / Exporta">
-<!ENTITY sb.tools.output	"Spara trädet som HTML">
-<!ENTITY sb.tools.backup	"Säkerhetskopia med komprimering">
-<!ENTITY sb.tools.repair	"Reparera">
-<!ENTITY sb.tools.homepage	"Hemsida">
-<!ENTITY sb.tools.about		"Om">
-
-<!ENTITY sb.search			"Sök">
-<!ENTITY sb.search.fulltext	"Full textsökning">
-<!ENTITY sb.search.all		"Alla">
-<!ENTITY sb.search.re		"Använd RegExp">
-<!ENTITY sb.search.cs		"Matcha gemener/versaler">
-<!ENTITY sb.search.cache	"Uppdatera Cache inför full textsökning">
-<!ENTITY sb.search.clear	"Rensa historik">
-<!ENTITY sb.search.days		"Filtrera dagvis">
-
-<!ENTITY sb.note.opentab	"Öppna i flik">
-<!ENTITY sb.note.close		"Stäng">
-
-<!ENTITY sb.move			"Flytta till mapp">
-
+<!ENTITY sb.title "ScrapBook">
+<!ENTITY sb.new.folder "Ny Mapp...">
+<!ENTITY sb.new.note "Ny Notering">
+<!ENTITY sb.toggle.all "Visa/Göm alla mappar">
+<!ENTITY sb.tools "Verktyg">
+<!ENTITY sb.tools.setting "Inställningar...">
+<!ENTITY sb.tools.manage "Redigera">
+<!ENTITY sb.tools.calculate "Beräkna storlek">
+<!ENTITY sb.tools.sorttree "Sortera hela trädet">
+<!ENTITY sb.tools.directory "Öppna ScrapBooks mapp">
+<!ENTITY sb.tools.combine "Combine">
+<!ENTITY sb.tools.multiple "Spara flera URL:er">
+<!ENTITY sb.tools.trade "Importa / Exporta">
+<!ENTITY sb.tools.output "Spara trädet som HTML">
+<!ENTITY sb.tools.backup "Säkerhetskopia med komprimering">
+<!ENTITY sb.tools.repair "Reparera">
+<!ENTITY sb.tools.homepage "Hemsida">
+<!ENTITY sb.tools.about "Om">
+<!ENTITY sb.search "Sök">
+<!ENTITY sb.search.fulltext "Full textsökning">
+<!ENTITY sb.search.all "Alla">
+<!ENTITY sb.search.re "Använd RegExp">
+<!ENTITY sb.search.cs "Matcha gemener/versaler">
+<!ENTITY sb.search.cache "Uppdatera Cache inför full textsökning">
+<!ENTITY sb.search.clear "Rensa historik">
+<!ENTITY sb.search.days "Filtrera dagvis">
+<!ENTITY sb.note.opentab "Öppna i flik">
+<!ENTITY sb.note.close "Stäng">
+<!ENTITY sb.move "Flytta till mapp">

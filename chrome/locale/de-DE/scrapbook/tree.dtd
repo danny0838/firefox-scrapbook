@@ -1,18 +1,16 @@
-<!ENTITY sb.open			"Öffnen">
-<!ENTITY sb.open.tab		"In Tab öffnen">
-<!ENTITY sb.open.newtab		"In neuem Tab öffnen">
-<!ENTITY sb.open.source		"Ursprungs-URL öffnen">
-<!ENTITY sb.show.files		"Dateien anzeigen">
-<!ENTITY sb.delete			"Löschen">
-<!ENTITY sb.property		"Eigenschaften">
-
-<!ENTITY sb.folder.toggle	"Ausklappen/Einklappen">
-<!ENTITY sb.folder.openall	"Alles in Tabs öffnen">
-<!ENTITY sb.folder.combine	"Zusammengefasste Ansicht öffnen">
-<!ENTITY sb.folder.manage	"Ordner verwalten">
-
-<!ENTITY sb.new.folder		"Neuer Ordner...">
-<!ENTITY sb.new.note		"Neue Notiz">
-
-<!ENTITY sb.sort.folder		"Ordner sortieren">
-
+<!ENTITY sb.open "Öffnen">
+<!ENTITY sb.open.tab "In Tab öffnen">
+<!ENTITY sb.open.newtab "In neuem Tab öffnen">
+<!ENTITY sb.open.source "Ursprungs-URL öffnen">
+<!ENTITY sb.show.files "Dateien anzeigen">
+<!ENTITY sb.delete "Löschen">
+<!ENTITY sb.property "Eigenschaften">
+<!ENTITY sb.folder.toggle "Ausklappen/Einklappen">
+<!ENTITY sb.folder.openall "Alles in Tabs öffnen">
+<!ENTITY sb.folder.combine "Zusammengefasste Ansicht öffnen">
+<!ENTITY sb.folder.manage "Ordner verwalten">
+<!ENTITY sb.new.folder "Neuer Ordner...">
+<!ENTITY sb.new.note "Neue Notiz">
+<!ENTITY sb.sort.folder "Ordner sortieren">
+<!ENTITY mb.configure "Configure">
+<!ENTITY mb.profileFolder "Profile Folder">

@@ -1,12 +1,10 @@
-<!ENTITY sb.repair.rdfFile			"Obnovit scrapbook.rdf">
-<!ENTITY sb.repair.rdfFile.descript	"Zkuste, když vám najednou zmizela ScrapBook data.">
-<!ENTITY sb.repair.rdfFile.select	"Zvolte zálohu k obnovení.">
-<!ENTITY sb.repair.rdfFile.file		"Soubor">
-<!ENTITY sb.repair.rdfFile.time		"Čas">
-<!ENTITY sb.repair.rdfFile.size		"Velikost">
-<!ENTITY sb.repair.rdfFile.complete	"Hotovo. Prosím restartujte Firefox.">
-
-<!ENTITY sb.repair.favicons				"Obnovit favikonky">
-<!ENTITY sb.repair.favicons.descript	"Zkuste, pokud zmizelo mnoho favikonek.">
-<!ENTITY sb.repair.favicons.complete	"Hotovo.">
-
+<!ENTITY sb.repair.rdfFile "Obnovit scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript "Zkuste, když vám najednou zmizela ScrapBook data.">
+<!ENTITY sb.repair.rdfFile.select "Zvolte zálohu k obnovení.">
+<!ENTITY sb.repair.rdfFile.file "Soubor">
+<!ENTITY sb.repair.rdfFile.time "Čas">
+<!ENTITY sb.repair.rdfFile.size "Velikost">
+<!ENTITY sb.repair.rdfFile.complete "Hotovo. Prosím restartujte Firefox.">
+<!ENTITY sb.repair.favicons "Obnovit favikonky">
+<!ENTITY sb.repair.favicons.descript "Zkuste, pokud zmizelo mnoho favikonek.">
+<!ENTITY sb.repair.favicons.complete "Hotovo.">

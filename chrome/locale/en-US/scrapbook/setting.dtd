@@ -1,35 +1,30 @@
-<!ENTITY sb.setting			"Settings">
-<!ENTITY sb.setting.general	"General">
-<!ENTITY sb.setting.usetabs	"Use Tabs">
-<!ENTITY sb.setting.advance	"Advanced">
-<!ENTITY sb.setting.capture	"Capture">
-<!ENTITY sb.setting.editing	"Edit">
-<!ENTITY sb.setting.program	"Programs">
-
-<!ENTITY sb.setting.browser.submenu		"Enable submenu inside the browser context menu (Change after restart)">
-<!ENTITY sb.setting.capture.detail		"Show 'Capture Detail' dialog when capturing by drag-and-drop into Sidebar">
-<!ENTITY sb.setting.capture.notify		"Show 'Capture Completed' notification (work only with Windows)">
-<!ENTITY sb.setting.tree.singleexpand	"When expanding a tree folder, collapse all other folders (like IE Favorites)">
-<!ENTITY sb.setting.tree.quickdelete	"Don't confirm when deleting">
-
-<!ENTITY sb.setting.usetabs.d			"Checked actions use new tabs.">
-<!ENTITY sb.setting.usetabs.note		"Open Notes in Tab">
-
-<!ENTITY sb.setting.capture.utf8encode		"Convert into UTF-8 encoding (Recommend)">
-<!ENTITY sb.setting.capture.utf8encode.d	"If check off, some characters frequently garbles into '?'.">
-<!ENTITY sb.setting.capture.removescript	"Remove JavaScript (Recommend)">
-<!ENTITY sb.setting.capture.removescript.d	"If check off, many problems are caused by JavaScript.">
-
-<!ENTITY sb.highlighter.tips		"TIPS: You can highlight selection by just pressing key 1 or 2 or 3 or 4.">
-<!ENTITY sb.setting.block.style		"Style Sheet">
-
-<!ENTITY sb.button.browse			"Browse">
-<!ENTITY sb.button.show				"Show Directory">
-
-<!ENTITY sb.setting.data			"Destination to Store Data">
-<!ENTITY sb.setting.data.default	"Default (In your Profile Folder)">
-<!ENTITY sb.setting.data.explain	"Select ScrapBook directory where to store collected data.">
-<!ENTITY sb.setting.data.alert		"Currently your ScrapBook data are stored in your Firefox 'Profile Folder'. Please note, if you select [Delete Files] when deleting the Firefox profile, All ScrapBook data will be removed.">
-<!ENTITY sb.setting.filer			"Program for file browsing">
-<!ENTITY sb.setting.filer.default	"Default (If Windows, maybe Explorer.)">
-
+<!ENTITY sb.setting "Settings">
+<!ENTITY sb.setting.general "General">
+<!ENTITY sb.setting.usetabs "Tabs">
+<!ENTITY sb.setting.advance "Advanced">
+<!ENTITY sb.setting.capture "Capture">
+<!ENTITY sb.setting.editing "Edit">
+<!ENTITY sb.setting.program "Programs">
+<!ENTITY sb.setting.browser.submenu "Enable submenu inside the browser context menu (Change after restart)">
+<!ENTITY sb.setting.capture.detail "Show 'Capture Detail' dialog when capturing by drag-and-drop into Sidebar">
+<!ENTITY sb.setting.capture.notify "Show 'Capture Completed' notification (work only with Windows)">
+<!ENTITY sb.setting.tree.singleexpand "When expanding a tree folder, collapse all other folders (like IE Favorites)">
+<!ENTITY sb.setting.tree.quickdelete "Don't confirm when deleting">
+<!ENTITY sb.setting.usetabs.d "Checked actions use new tabs.">
+<!ENTITY sb.setting.usetabs.note "Open Notes in Tab">
+<!ENTITY sb.setting.capture.utf8encode "Convert into UTF-8 encoding (Recommend)">
+<!ENTITY sb.setting.capture.utf8encode.d "If check off, some characters frequently garbles into '?'.">
+<!ENTITY sb.setting.capture.removescript "Remove JavaScript (Recommend)">
+<!ENTITY sb.setting.capture.removescript.d "If check off, many problems are caused by JavaScript.">
+<!ENTITY sb.highlighter.tips "TIPS: You can highlight selection by just pressing key 1 or 2 or 3 or 4.">
+<!ENTITY sb.setting.block.style "Style Sheet">
+<!ENTITY sb.button.browse "Browse">
+<!ENTITY sb.button.show "Show Directory">
+<!ENTITY sb.setting.data "Destination to Store Data">
+<!ENTITY sb.setting.data.default "Default (In your Profile Folder)">
+<!ENTITY sb.setting.data.explain "Select ScrapBook directory where to store collected data.">
+<!ENTITY sb.setting.data.alert "Currently your ScrapBook data are stored in your Firefox 'Profile Folder'. Please note, if you select [Delete Files] when deleting the Firefox profile, All ScrapBook data will be removed.">
+<!ENTITY sb.setting.multibook.enabled "Enable Multi-ScrapBook">
+<!ENTITY sb.setting.multibook.description "This enables you to set up multiple destination to store data and switch between them quickly with toolbar button.">
+<!ENTITY sb.setting.filer "Program for file browsing">
+<!ENTITY sb.setting.filer.default "Default (If Windows, maybe Explorer.)">

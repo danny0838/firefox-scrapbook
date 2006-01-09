@@ -101,7 +101,7 @@ var SBfolderList = {
 		for ( var i = 0; i < arr.length; i++ )
 		{
 			if ( arr[i].length != 14 ) continue;
-			var res = SBservice.RDF.GetResource("urn:scrapbook:item" + arr[i]);
+			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + arr[i]);
 			if ( !sbDataSource.exists(res) ) continue;
 			flag = true;
 			this.fill(res.Value, sbDataSource.getProperty("title", res));
@@ -113,12 +113,12 @@ var SBfolderList = {
 	processRecursive : function(aResName)
 	{
 		this.depth++;
-		SBservice.RDFC.Init(sbDataSource.data, SBservice.RDF.GetResource(aResName));
-		var resEnum = SBservice.RDFC.GetElements();
+		sbCommonUtils.RDFC.Init(sbDataSource.data, sbCommonUtils.RDF.GetResource(aResName));
+		var resEnum = sbCommonUtils.RDFC.GetElements();
 		while ( resEnum.hasMoreElements() )
 		{
 			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			if ( !SBservice.RDFCU.IsContainer(sbDataSource.data, res) ) continue;
+			if ( !sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, res) ) continue;
 			this.fill(res.Value, sbDataSource.getProperty("title", res));
 			this.processRecursive(res.Value);
 		}
@@ -127,7 +127,7 @@ var SBfolderList = {
 
 	createFolder : function()
 	{
-		var newID = sbDataSource.identify(SBcommon.getTimeStamp());
+		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
 		var newItem = new ScrapBookItem(newID);
 		newItem.title = SBstring.getString("DEFAULT_FOLDER");
 		newItem.type = "folder";
@@ -138,7 +138,7 @@ var SBfolderList = {
 		window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome", newItem.id, result);
 		if ( !result.accept )
 		{
-			sbDataSource.deleteItemDescending(newRes, SBservice.RDF.GetResource(tarResName));
+			sbDataSource.deleteItemDescending(newRes, sbCommonUtils.RDF.GetResource(tarResName));
 			sbDataSource.flush();
 		}
 		else
@@ -207,7 +207,7 @@ function SB_checkLinkedCustom(aElem)
 
 function SB_acceptDetail()
 {
-	window.opener.sbContentSaver.item.comment   = SBcommon.escapeComment(document.getElementById("ScrapBookDetailComment").value);
+	window.opener.sbContentSaver.item.comment   = sbCommonUtils.escapeComment(document.getElementById("ScrapBookDetailComment").value);
 	window.opener.sbContentSaver.item.title     = document.getElementById("ScrapBookDetailTitle").value;
 	window.opener.sbContentSaver.linked.image   = document.getElementById("ScrapBookDetailLinkedI").checked;
 	window.opener.sbContentSaver.linked.sound   = document.getElementById("ScrapBookDetailLinkedS").checked;

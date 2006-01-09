@@ -1,15 +1,13 @@
-<!ENTITY sb.capture			"Bewaren">
-<!ENTITY sb.capture.abort	"Afbreken">
-<!ENTITY sb.capture.start	"Starten">
-<!ENTITY sb.capture.retry	"Opnieuw">
-<!ENTITY sb.capture.skip	"Overslaan">
-<!ENTITY sb.capture.pause	"Pauzeren">
-
-<!ENTITY sb.capture.filter			"Filteren">
-<!ENTITY sb.capture.filter.domain	"Beperken tot het domein">
-<!ENTITY sb.capture.filter.level	"Beperken tot een map">
-<!ENTITY sb.capture.filter.string	"Filteren d.m.v. reeksen...">
-<!ENTITY sb.capture.filter.checkon	"Alle vinkjes aan">
-<!ENTITY sb.capture.filter.checkoff	"Alle vinkjes uit">
-<!ENTITY sb.capture.filter.invert	"Vinkjes omkeren">
-
+<!ENTITY sb.capture "Bewaren">
+<!ENTITY sb.capture.abort "Afbreken">
+<!ENTITY sb.capture.start "Starten">
+<!ENTITY sb.capture.retry "Opnieuw">
+<!ENTITY sb.capture.skip "Overslaan">
+<!ENTITY sb.capture.pause "Pauzeren">
+<!ENTITY sb.capture.filter "Filteren">
+<!ENTITY sb.capture.filter.domain "Beperken tot het domein">
+<!ENTITY sb.capture.filter.level "Beperken tot een map">
+<!ENTITY sb.capture.filter.string "Filteren d.m.v. reeksen...">
+<!ENTITY sb.capture.filter.checkon "Alle vinkjes aan">
+<!ENTITY sb.capture.filter.checkoff "Alle vinkjes uit">
+<!ENTITY sb.capture.filter.invert "Vinkjes omkeren">

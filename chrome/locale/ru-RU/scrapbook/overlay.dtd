@@ -1,18 +1,15 @@
-<!ENTITY sb.title				"Web-альбом">
-<!ENTITY sb.capture.partial		"Захватить выделеное">
-<!ENTITY sb.capture.partial.as	"Захватить выделенное как...">
-<!ENTITY sb.capture.entire		"Захватить">
-<!ENTITY sb.capture.entire.as	"Захватить как...">
-<!ENTITY sb.capture.frame		"Захватить фрейм">
-<!ENTITY sb.capture.frame.as	"Захватить фрейм как...">
-<!ENTITY sb.capture.target		"Захватить файл">
-<!ENTITY sb.capture.target.as	"Захватить файл как...">
-
-<!ENTITY sb.capture.folder.root		"Корневая папка">
-<!ENTITY sb.capture.folder.select	"Выбрать папку">
-
-<!ENTITY sb.key.sidebar		"K">
-<!ENTITY sb.key.editor		"J">
-<!ENTITY sb.key.capture		"L">
-<!ENTITY sb.key.capture.as	"K">
-
+<!ENTITY sb.title "Web-альбом">
+<!ENTITY sb.capture.partial "Захватить выделеное">
+<!ENTITY sb.capture.partial.as "Захватить выделенное как...">
+<!ENTITY sb.capture.entire "Захватить">
+<!ENTITY sb.capture.entire.as "Захватить как...">
+<!ENTITY sb.capture.frame "Захватить фрейм">
+<!ENTITY sb.capture.frame.as "Захватить фрейм как...">
+<!ENTITY sb.capture.target "Захватить файл">
+<!ENTITY sb.capture.target.as "Захватить файл как...">
+<!ENTITY sb.capture.folder.root "Корневая папка">
+<!ENTITY sb.capture.folder.select "Выбрать папку">
+<!ENTITY sb.key.sidebar "K">
+<!ENTITY sb.key.editor "J">
+<!ENTITY sb.key.capture "L">
+<!ENTITY sb.key.capture.as "K">

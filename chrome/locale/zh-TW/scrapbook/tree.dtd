@@ -1,18 +1,16 @@
-<!ENTITY sb.open			"開啟">
-<!ENTITY sb.open.tab		"開啟於新分頁中">
-<!ENTITY sb.open.newtab		"開啟於新分頁中">
-<!ENTITY sb.open.source		"開啟原始網址">
-<!ENTITY sb.show.files		"顯示相關檔案">
-<!ENTITY sb.delete			"刪除">
-<!ENTITY sb.property		"文件屬性">
-
-<!ENTITY sb.folder.toggle	"展開／折疊">
-<!ENTITY sb.folder.openall	"以分頁開啟所有資料">
-<!ENTITY sb.folder.combine	"合併檢視所有資料">
-<!ENTITY sb.folder.manage	"管理資料夾...">
-
-<!ENTITY sb.new.folder		"開新資料夾...">
-<!ENTITY sb.new.note		"新增筆記">
-
-<!ENTITY sb.sort.folder		"資料夾文件排序">
-
+<!ENTITY sb.open "開啟">
+<!ENTITY sb.open.tab "開啟於新分頁中">
+<!ENTITY sb.open.newtab "開啟於新分頁中">
+<!ENTITY sb.open.source "開啟原始網址">
+<!ENTITY sb.show.files "顯示相關檔案">
+<!ENTITY sb.delete "刪除">
+<!ENTITY sb.property "文件屬性">
+<!ENTITY sb.folder.toggle "展開／折疊">
+<!ENTITY sb.folder.openall "以分頁開啟所有資料">
+<!ENTITY sb.folder.combine "合併檢視所有資料">
+<!ENTITY sb.folder.manage "管理資料夾...">
+<!ENTITY sb.new.folder "開新資料夾...">
+<!ENTITY sb.new.note "新增筆記">
+<!ENTITY sb.sort.folder "資料夾文件排序">
+<!ENTITY mb.configure "Configure">
+<!ENTITY mb.profileFolder "Profile Folder">

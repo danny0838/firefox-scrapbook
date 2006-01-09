@@ -1,20 +1,17 @@
-<!ENTITY sb.prop.date		"Päiväys">
-<!ENTITY sb.prop.type		"Tyyppi">
-<!ENTITY sb.prop.title		"Otsikko">
-<!ENTITY sb.prop.encode		"Merkistökoodaus">
-<!ENTITY sb.prop.icon		"Kuvake">
-<!ENTITY sb.prop.source		"URL">
-<!ENTITY sb.prop.comment	"Kommentti">
-<!ENTITY sb.prop.content	"Sisältö">
-<!ENTITY sb.prop.size		"Koko">
-<!ENTITY sb.prop.id.date	"Tunnus (Aika)">
-<!ENTITY sb.prop.folder		"Kansio">
-
-<!ENTITY sb.prop.general	"Yleiset">
-
-<!ENTITY sb.prop.icon.change	"Vaihda">
-<!ENTITY sb.prop.icon.default	"Oletus">
-<!ENTITY sb.prop.icon.favicon	"Valitse sivukuvake">
-<!ENTITY sb.prop.icon.custom	"Valitse oma sivukuvake">
-<!ENTITY sb.prop.mark			"Merkitse">
-
+<!ENTITY sb.prop.date "Päiväys">
+<!ENTITY sb.prop.type "Tyyppi">
+<!ENTITY sb.prop.title "Otsikko">
+<!ENTITY sb.prop.encode "Merkistökoodaus">
+<!ENTITY sb.prop.icon "Kuvake">
+<!ENTITY sb.prop.source "URL">
+<!ENTITY sb.prop.comment "Kommentti">
+<!ENTITY sb.prop.content "Sisältö">
+<!ENTITY sb.prop.size "Koko">
+<!ENTITY sb.prop.id.date "Tunnus (Aika)">
+<!ENTITY sb.prop.folder "Kansio">
+<!ENTITY sb.prop.general "Yleiset">
+<!ENTITY sb.prop.icon.change "Vaihda">
+<!ENTITY sb.prop.icon.default "Oletus">
+<!ENTITY sb.prop.icon.favicon "Valitse sivukuvake">
+<!ENTITY sb.prop.icon.custom "Valitse oma sivukuvake">
+<!ENTITY sb.prop.mark "Merkitse">

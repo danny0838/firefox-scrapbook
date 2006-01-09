@@ -57,7 +57,7 @@
 		<toolbarbutton id="ScrapNoteToolbarQ" accesskey="Q" label="&sn.preview.quit;" disabled="true" oncommand="snPreview.toggle(false);" />
 		<toolbarbutton type="menu" label="&sn.tools;">
 			<menupopup>
-				<menuitem label="&sn.help;" oncommand="SBcommon.loadURL('chrome://scrapbook/locale/templateHelp.html', true);" />
+				<menuitem label="&sn.help;" oncommand="sbCommonUtils.loadURL('chrome://scrapbook/locale/templateHelp.html', true);" />
 				<menuseparator />
 				<menuitem id="ScrapNoteToolbarL" type="checkbox" label="&sn.autolinefeed;" tooltiptext="&sn.autolinefeed.t;" />
 				<menuitem id="ScrapNoteToolbarT" type="checkbox" label="&sn.template;" oncommand="this.getAttribute('checked') ? snTemplate.load() : snTemplate.exit(false);" />

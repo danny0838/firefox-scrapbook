@@ -1,30 +1,26 @@
-<!ENTITY sb.editor				"Barra de Ferramentas de Edição do ScrapBook">
-<!ENTITY sb.editor.eraser		"Apagador DOM: Ferramenta para remover elementos clicando na Página Web.">
-<!ENTITY sb.editor.undo			"Desfazer">
-<!ENTITY sb.editor.restore		"Descartar Mudanças e Restaurar">
-<!ENTITY sb.editor.save			"Salvar Mudanças">
-<!ENTITY sb.editor.comment		"Expandir Área do Comentário">
-<!ENTITY sb.editor.block			"Comentário em Bloco">
-<!ENTITY sb.editor.block.insert		"Adicionar &sb.editor.block; Após a Seleção">
-<!ENTITY sb.editor.block.hide		"Esconder Comentários em Bloco">
-<!ENTITY sb.editor.inline.add		"Adicionar Comentário na Linha da Seleção">
-<!ENTITY sb.editor.inline.delete	"Remover Todos os Comentários em Linhas">
-<!ENTITY sb.editor.attach.file		"Anexar um Arquivo à Seleção">
-<!ENTITY sb.editor.attach.link		"Anexar um Link à Seleção">
-<!ENTITY sb.editor.cutter			"Remover a Seleção">
-<!ENTITY sb.editor.remove.iframe	"Remover todas as tags IFRAME">
-<!ENTITY sb.editor.remove.script	"Remover todas as tags SCRIPT">
-
-<!ENTITY sb.highlighter				"Realce">
-<!ENTITY sb.highlighter.remove		"Remover Realces na Seleção">
-<!ENTITY sb.highlighter.remove.all	"Remover Todos os Realces">
-<!ENTITY sb.customize				"Personalizar">
-
-<!ENTITY sb.infobar.openSource	"Abrir URL Fonte">
-<!ENTITY sb.infobar.showSitemap	"Show &sb.infobar.sitemap;">
-<!ENTITY sb.infobar.showInfobar	"Show Info Toolbar">
-<!ENTITY sb.infobar.home		"Página Inicial">
-<!ENTITY sb.infobar.sitemap		"Mapa do Site">
-
-<!ENTITY sb.locate			"Sincronizar Com a Árvore do Painel">
-
+<!ENTITY sb.editor "Barra de Ferramentas de Edição do ScrapBook">
+<!ENTITY sb.editor.eraser "Apagador DOM: Ferramenta para remover elementos clicando na Página Web.">
+<!ENTITY sb.editor.undo "Desfazer">
+<!ENTITY sb.editor.restore "Descartar Mudanças e Restaurar">
+<!ENTITY sb.editor.save "Salvar Mudanças">
+<!ENTITY sb.editor.comment "Expandir Área do Comentário">
+<!ENTITY sb.editor.block "Comentário em Bloco">
+<!ENTITY sb.editor.block.insert "Adicionar &sb.editor.block; Após a Seleção">
+<!ENTITY sb.editor.block.hide "Esconder Comentários em Bloco">
+<!ENTITY sb.editor.inline.add "Adicionar Comentário na Linha da Seleção">
+<!ENTITY sb.editor.inline.delete "Remover Todos os Comentários em Linhas">
+<!ENTITY sb.editor.attach.file "Anexar um Arquivo à Seleção">
+<!ENTITY sb.editor.attach.link "Anexar um Link à Seleção">
+<!ENTITY sb.editor.cutter "Remover a Seleção">
+<!ENTITY sb.editor.remove.iframe "Remover todas as tags IFRAME">
+<!ENTITY sb.editor.remove.script "Remover todas as tags SCRIPT">
+<!ENTITY sb.highlighter "Realce">
+<!ENTITY sb.highlighter.remove "Remover Realces na Seleção">
+<!ENTITY sb.highlighter.remove.all "Remover Todos os Realces">
+<!ENTITY sb.customize "Personalizar">
+<!ENTITY sb.infobar.openSource "Abrir URL Fonte">
+<!ENTITY sb.infobar.showSitemap "Show &sb.infobar.sitemap;">
+<!ENTITY sb.infobar.showInfobar "Show Info Toolbar">
+<!ENTITY sb.infobar.home "Página Inicial">
+<!ENTITY sb.infobar.sitemap "Mapa do Site">
+<!ENTITY sb.locate "Sincronizar Com a Árvore do Painel">

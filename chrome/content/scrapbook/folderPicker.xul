@@ -22,9 +22,6 @@
         ondialogextra2="SB_createFolderFP();">
 
 	<!--JavaScript-->
-	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapbook.js" />
 	<script type="application/x-javascript"><![CDATA[
 		var SBstring;
 		function SB_initFP()
@@ -38,7 +35,7 @@
 		function SB_acceptFP()
 		{
 			if ( document.getElementById("ScrapBookFolderPickerRoot").checked )
-				window.arguments[0].target = SBservice.RDF.GetResource(SBtree.ref);
+				window.arguments[0].target = sbCommonUtils.RDF.GetResource(SBtree.ref);
 			else
 				window.arguments[0].target = sbTreeHandler.getSelection(true, 1)[0];
 			sbTreeHandler.toggleAllFolders(true);

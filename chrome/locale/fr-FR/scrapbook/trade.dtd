@@ -1,4 +1,4 @@
-<!ENTITY sb.trade.import	"Importer">
-<!ENTITY sb.trade.export	"Exporter">
-<!ENTITY sb.trade.restore	"Importer avec la structure du dossier à restaurer">
-<!ENTITY sb.trade.time	"Date d'exportation">
+<!ENTITY sb.trade.import "Importer">
+<!ENTITY sb.trade.export "Exporter">
+<!ENTITY sb.trade.restore "Importer avec la structure du dossier à restaurer">
+<!ENTITY sb.trade.time "Date d'exportation">

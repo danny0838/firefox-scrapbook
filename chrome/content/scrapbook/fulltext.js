@@ -12,11 +12,11 @@ function SB_initFT(type)
 {
 	SBstatus = document.getElementById("ScrapBookStatus");
 	SBstring = document.getElementById("ScrapBookString");
-	gCacheFile = SBcommon.getScrapBookDir().clone();
+	gCacheFile = sbCommonUtils.getScrapBookDir().clone();
 	gCacheFile.append("cache.rdf");
 	sbDataSource.init();
 	sbCacheSource.init();
-	SBbaseURL = SBcommon.getBaseHref(sbDataSource.data.URI);
+	SBbaseURL = sbCommonUtils.getBaseHref(sbDataSource.data.URI);
 	switch ( type )
 	{
 		case 'SEARCH' : sbSearchResult.exec(); break;
@@ -110,7 +110,7 @@ var sbSearchResult =
 			var folder  = sbCacheSource.getProperty("folder",  res);
 			var resURI  = res.Value.split("#")[0];
 			var name    = res.Value.split("#")[1] || "index";
-			res = SBservice.RDF.GetResource(resURI);
+			res = sbCommonUtils.RDF.GetResource(resURI);
 			var type    = sbDataSource.getProperty("type",    res);
 			var title   = sbDataSource.getProperty("title",   res);
 			var comment = sbDataSource.getProperty("comment", res);
@@ -139,7 +139,7 @@ var sbSearchResult =
 			if ( isMatchT || isMatchM || isMatchC )
 			{
 				var icon = sbDataSource.getProperty("icon", res);
-				if ( !icon ) icon = SBcommon.getDefaultIcon(type);
+				if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
 				sbSearchResult.treeItems.push([
 					title,
 					this.extractRightContext(content),
@@ -226,10 +226,10 @@ var sbSearchResult =
 		var id   = this.CURRENT_TREEITEM[5];
 		var url  = this.CURRENT_TREEITEM[6] == "note" ? "chrome://scrapbook/content/note.xul?id=" + id : SBbaseURL + "data/" + id + "/" + this.CURRENT_TREEITEM[4] + ".html";
 		switch ( key ) {
-			case "O" : SBcommon.loadURL(url, false); break;
-			case "T" : SBcommon.loadURL(url, true); break;
+			case "O" : sbCommonUtils.loadURL(url, false); break;
+			case "T" : sbCommonUtils.loadURL(url, true); break;
 			case "P" : window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome" ,id); break;
-			case "L" : SBcommon.launchDirectory(SBcommon.getContentDir(id));
+			case "L" : sbCommonUtils.launchDirectory(sbCommonUtils.getContentDir(id));
 			default  : document.getElementById("ScrapBookBrowser").setAttribute("src", url); break;
 		}
 	},
@@ -273,22 +273,22 @@ var sbCacheService = {
 		window.title = SBstring.getString("BUILD_CACHE") + " - ScrapBook";
 		SBstatus.firstChild.value = SBstring.getString("BUILD_CACHE_INIT");
 		sbCacheSource.refreshEntries();
-		this.dataDir = SBcommon.getScrapBookDir().clone();
+		this.dataDir = sbCommonUtils.getScrapBookDir().clone();
 		this.dataDir.append("data");
-		this.prepareBuilding(SBservice.RDF.GetResource("urn:scrapbook:root"));
+		this.prepareBuilding(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"));
 		this.processAsync();
 	},
 
 
 	prepareBuilding : function(aContRes)
 	{
-		SBservice.RDFC.Init(sbDataSource.data, aContRes);
-		var resEnum = SBservice.RDFC.GetElements();
+		sbCommonUtils.RDFC.Init(sbDataSource.data, aContRes);
+		var resEnum = sbCommonUtils.RDFC.GetElements();
 		while ( resEnum.hasMoreElements() )
 		{
 			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
 			var type = sbDataSource.getProperty("type", res);
-			if ( SBservice.RDFCU.IsContainer(sbDataSource.data, res) )
+			if ( sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, res) )
 			{
 				this.prepareBuilding(res);
 			}
@@ -320,7 +320,7 @@ var sbCacheService = {
 			url2name.append("sb-url2name.txt");
 			if ( url2name.exists() )
 			{
-				url2name = SBcommon.readFile(url2name).split("\n");
+				url2name = sbCommonUtils.readFile(url2name).split("\n");
 				for ( var i = 0; i < url2name.length; i++ )
 				{
 					if ( i > 256 ) break;
@@ -340,7 +340,7 @@ var sbCacheService = {
 
 	inspectFile : function(aDir, aName)
 	{
-		var resource = SBservice.RDF.GetResource(this.resList[this.index].Value + "#" + aName);
+		var resource = sbCommonUtils.RDF.GetResource(this.resList[this.index].Value + "#" + aName);
 		var contents = [];
 		var num = 0;
 		do {
@@ -361,10 +361,10 @@ var sbCacheService = {
 					return;
 				}
 			}
-			var content = SBcommon.readFile(file);
+			var content = sbCommonUtils.readFile(file);
 			try {
-				SBservice.UNICODE.charset = sbDataSource.getProperty("chars", this.resList[this.index]);
-				content = SBservice.UNICODE.ConvertToUnicode(content);
+				sbCommonUtils.UNICODE.charset = sbDataSource.getProperty("chars", this.resList[this.index]);
+				content = sbCommonUtils.UNICODE.ConvertToUnicode(content);
 			} catch(ex) {
 				dump("*** ScrapBook Failed to ConvertToUnicode : " + aDir.leafName + "\t" + aName + "\n");
 			}
@@ -396,13 +396,13 @@ var sbCacheService = {
 			{
 				dump("-\t" + uri + "\n");
 				SBstatus.firstChild.value = SBstring.getString("BUILD_CACHE_REMOVE") + " " + uri;
-				sbCacheSource.removeEntry(SBservice.RDF.GetResource(uri));
+				sbCacheSource.removeEntry(sbCommonUtils.RDF.GetResource(uri));
 			}
 		}
 		SBstatus.firstChild.value = SBstring.getString("BUILD_CACHE_UPDATE") + "cache.rdf";
 		sbCacheSource.flush();
 		try {
-			if ( window.arguments[0] ) SBcommon.loadURL(window.arguments[0], true);
+			if ( window.arguments[0] ) sbCommonUtils.loadURL(window.arguments[0], true);
 		} catch(ex) {
 		}
 		window.close();
@@ -439,13 +439,13 @@ var sbCacheSource = {
 	init : function()
 	{
 		if ( !gCacheFile.exists() ) gCacheFile.create(gCacheFile.NORMAL_FILE_TYPE, 0666);
-		var filePath = SBservice.IO.newFileURI(gCacheFile).spec;
-		this.dataSource = SBservice.RDF.GetDataSourceBlocking(filePath);
+		var filePath = sbCommonUtils.IO.newFileURI(gCacheFile).spec;
+		this.dataSource = sbCommonUtils.RDF.GetDataSourceBlocking(filePath);
 		this.container = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
 		try {
-			this.container.Init(this.dataSource, SBservice.RDF.GetResource("urn:scrapbook:cache"));
+			this.container.Init(this.dataSource, sbCommonUtils.RDF.GetResource("urn:scrapbook:cache"));
 		} catch(ex) {
-			this.container = SBservice.RDFCU.MakeSeq(this.dataSource, SBservice.RDF.GetResource("urn:scrapbook:cache"));
+			this.container = sbCommonUtils.RDFCU.MakeSeq(this.dataSource, sbCommonUtils.RDF.GetResource("urn:scrapbook:cache"));
 		}
 	},
 
@@ -460,23 +460,23 @@ var sbCacheSource = {
 			else
 				sbCacheService.uriHash[res.Value] = false;
 		}
-		this.container = SBservice.RDFCU.MakeSeq(this.dataSource, SBservice.RDF.GetResource("urn:scrapbook:cache"));
+		this.container = sbCommonUtils.RDFCU.MakeSeq(this.dataSource, sbCommonUtils.RDF.GetResource("urn:scrapbook:cache"));
 	},
 
 	addEntry : function(aRes, aContent)
 	{
 		aContent = sbDataSource.sanitize(aContent);
 		this.container.AppendElement(aRes);
-		this.dataSource.Assert(aRes, SBservice.RDF.GetResource(NS_SCRAPBOOK + "folder"),  SBservice.RDF.GetLiteral(sbCacheService.folders[sbCacheService.index]),  true);
-		this.dataSource.Assert(aRes, SBservice.RDF.GetResource(NS_SCRAPBOOK + "content"), SBservice.RDF.GetLiteral(aContent), true);
+		this.dataSource.Assert(aRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "folder"),  sbCommonUtils.RDF.GetLiteral(sbCacheService.folders[sbCacheService.index]),  true);
+		this.dataSource.Assert(aRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "content"), sbCommonUtils.RDF.GetLiteral(aContent), true);
 	},
 
 	updateEntry : function(aRes, aProp, newVal)
 	{
 		newVal = sbDataSource.sanitize(newVal);
-		aProp = SBservice.RDF.GetResource(NS_SCRAPBOOK + aProp);
+		aProp = sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + aProp);
 		var oldVal = this.dataSource.GetTarget(aRes, aProp, true).QueryInterface(Components.interfaces.nsIRDFLiteral);
-		newVal = SBservice.RDF.GetLiteral(newVal);
+		newVal = sbCommonUtils.RDF.GetLiteral(newVal);
 		this.dataSource.Change(aRes, aProp, oldVal, newVal);
 	},
 
@@ -495,7 +495,7 @@ var sbCacheSource = {
 	getProperty : function(aProp, aRes)
 	{
 		try {
-			var retVal = this.dataSource.GetTarget(aRes, SBservice.RDF.GetResource(NS_SCRAPBOOK + aProp), true);
+			var retVal = this.dataSource.GetTarget(aRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + aProp), true);
 			return retVal.QueryInterface(Components.interfaces.nsIRDFLiteral).Value;
 		} catch(ex) {
 			dump("*** ERROR sbCacheSource::getProperty " + aProp + " " + aRes.Value + "\n");

@@ -1,12 +1,11 @@
-<!ENTITY sn.save			"Tallenna">
-<!ENTITY sn.close			"Sulje">
-<!ENTITY sn.tools			"Työkalut">
-<!ENTITY sn.preview			"HTML-esikatselu">
-<!ENTITY sn.preview.quit	"Lopeta esikatselu">
-<!ENTITY sn.template		"Muokkaa HTML-pohjaa">
-<!ENTITY sn.autolinefeed	"Automaattinen rivinvaihto">
-<!ENTITY sn.autolinefeed.t	"Lisää &lt;br&gt; -tunnuksen HTML-esikatselussa rivin loppuun.">
-<!ENTITY sn.fontsize		"Kirjasinkoko">
-<!ENTITY sn.help			"Ohje">
-<!ENTITY sn.exit			"Lopeta">
-
+<!ENTITY sn.save "Tallenna">
+<!ENTITY sn.close "Sulje">
+<!ENTITY sn.tools "Työkalut">
+<!ENTITY sn.preview "HTML-esikatselu">
+<!ENTITY sn.preview.quit "Lopeta esikatselu">
+<!ENTITY sn.template "Muokkaa HTML-pohjaa">
+<!ENTITY sn.autolinefeed "Automaattinen rivinvaihto">
+<!ENTITY sn.autolinefeed.t "Lisää &lt;br&gt; -tunnuksen HTML-esikatselussa rivin loppuun.">
+<!ENTITY sn.fontsize "Kirjasinkoko">
+<!ENTITY sn.help "Ohje">
+<!ENTITY sn.exit "Lopeta">

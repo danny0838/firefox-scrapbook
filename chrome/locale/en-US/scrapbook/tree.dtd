@@ -1,18 +1,16 @@
-<!ENTITY sb.open			"Open">
-<!ENTITY sb.open.tab		"Open in Tab">
-<!ENTITY sb.open.newtab		"Open in New Tab">
-<!ENTITY sb.open.source		"Open Source URL">
-<!ENTITY sb.show.files		"Show Files">
-<!ENTITY sb.delete			"Delete">
-<!ENTITY sb.property		"Properties">
-
-<!ENTITY sb.folder.toggle	"Expand/Collapse">
-<!ENTITY sb.folder.openall	"Open All in Tabs">
-<!ENTITY sb.folder.combine	"Open in Combined View">
-<!ENTITY sb.folder.manage	"Manage Folder...">
-
-<!ENTITY sb.new.folder		"New Folder...">
-<!ENTITY sb.new.note		"New Note">
-
-<!ENTITY sb.sort.folder		"Sort Folder">
-
+<!ENTITY sb.open "Open">
+<!ENTITY sb.open.tab "Open in Tab">
+<!ENTITY sb.open.newtab "Open in New Tab">
+<!ENTITY sb.open.source "Open Source URL">
+<!ENTITY sb.show.files "Show Files">
+<!ENTITY sb.delete "Delete">
+<!ENTITY sb.property "Properties">
+<!ENTITY sb.folder.toggle "Expand/Collapse">
+<!ENTITY sb.folder.openall "Open All in Tabs">
+<!ENTITY sb.folder.combine "Open in Combined View">
+<!ENTITY sb.folder.manage "Manage Folder...">
+<!ENTITY sb.new.folder "New Folder...">
+<!ENTITY sb.new.note "New Note">
+<!ENTITY sb.sort.folder "Sort Folder">
+<!ENTITY mb.configure "Configure">
+<!ENTITY mb.profileFolder "Profile Folder">

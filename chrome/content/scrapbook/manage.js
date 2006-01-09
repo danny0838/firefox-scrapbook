@@ -6,10 +6,10 @@ function SB_initManage()
 	sbDataSource.init();
 	sbTreeHandler.init(false, "ScrapBookManageTree");
 	SB_initObservers();
-	SBbaseURL = SBcommon.getBaseHref(sbDataSource.data.URI);
+	SBbaseURL = sbCommonUtils.getBaseHref(sbDataSource.data.URI);
 	SBtree.ref = window.arguments[0];
-	SBpref.init();
-	var winTitle = sbDataSource.getProperty("title", SBservice.RDF.GetResource(SBtree.ref));
+	sbPrefs.init();
+	var winTitle = sbDataSource.getProperty("title", sbCommonUtils.RDF.GetResource(SBtree.ref));
 	if ( winTitle )
 	{
 		document.getElementById("ScrapBookManageWindow").setAttribute("title", winTitle);
@@ -59,7 +59,7 @@ function SB_deleteMultiple()
 	var idxList = sbTreeHandler.getSelection(false, 2);
 	if ( idxList.length < 1 ) return;
 	if ( SB_validateMultipleSelection(idxList) == false ) return;
-	if ( !SBpref.quickDelete )
+	if ( !sbPrefs.quickDelete )
 	{
 		if ( !window.confirm( SBstring.getString("CONFIRM_DELETE") ) ) return;
 	}
@@ -79,7 +79,7 @@ function SB_deleteMultiple()
 	sbDataSource.flush();
 	for ( var i = 0; i < rmIDs.length; i++ )
 	{
-		if ( rmIDs[i].length == 14 ) SBcommon.removeDirSafety(SBcommon.getContentDir(rmIDs[i]), true);
+		if ( rmIDs[i].length == 14 ) sbCommonUtils.removeDirSafety(sbCommonUtils.getContentDir(rmIDs[i]), true);
 	}
 	SBstatus.trace(SBstring.getFormattedString("ITEMS_REMOVED", [rmIDs.length]));
 }
@@ -93,38 +93,6 @@ function SB_validateMultipleSelection(aIdxList)
 		return false;
 	}
 	return true;
-}
-
-
-SBdropUtil.moveMultiple = function()
-{
-	var idxList = sbTreeHandler.getSelection(false, 2);
-	if ( SB_validateMultipleSelection(idxList) == false ) return;
-	var i = 0;
-	var curResList = []; var curParList = [];
-	var tarResList = []; var tarParList = [];
-	for ( i = 0; i < idxList.length; i++ )
-	{
-		curResList.push( SBtree.builderView.getResourceAtIndex(idxList[i]) );
-		curParList.push( SB_getParentResourceAtIndex(idxList[i]) );
-		tarResList.push( SBtree.builderView.getResourceAtIndex(this.row) );
-		tarParList.push( ( this.orient == this.DROP_ON ) ? tarResList[i] : SB_getParentResourceAtIndex(this.row) );
-	}
-	if ( this.orient == this.DROP_AFTER )
-	{
-		for ( i = idxList.length - 1; i >= 0 ; i-- )
-		{
-			this.moveCurrentToTarget(curResList[i], curParList[i], tarResList[i], tarParList[i]);
-		}
-	}
-	else
-	{
-		for ( i = 0; i < idxList.length; i++ )
-		{
-			this.moveCurrentToTarget(curResList[i], curParList[i], tarResList[i], tarParList[i]);
-		}
-	}
-	sbDataSource.flush();
 }
 
 

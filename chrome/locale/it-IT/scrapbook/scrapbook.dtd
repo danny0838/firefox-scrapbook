@@ -1,35 +1,29 @@
-<!ENTITY sb.title			"ScrapBook">
-
-<!ENTITY sb.new.folder		"Nuova cartella...">
-<!ENTITY sb.new.note		"Nuova nota">
-<!ENTITY sb.toggle.all		"Espandi/Contrai tutte le cartelle">
-
-<!ENTITY sb.tools			"Strumenti">
-<!ENTITY sb.tools.setting	"Impostazioni...">
-<!ENTITY sb.tools.manage	"Gestisci">
-<!ENTITY sb.tools.calculate	"Calcola la dimensione">
-<!ENTITY sb.tools.sorttree	"Ordina diagramma delle cartelle">
-<!ENTITY sb.tools.directory	"Apri cartella di ScrapBook">
-<!ENTITY sb.tools.combine	"Combina">
-<!ENTITY sb.tools.multiple	"Cattura più URL">
-<!ENTITY sb.tools.trade		"Importa / Esporta">
-<!ENTITY sb.tools.output	"Esporta diagramma delle cartelle come file HTML">
-<!ENTITY sb.tools.backup	"Effettua backup con compressione dei dati">
-<!ENTITY sb.tools.repair	"Riparazione d'emergenza">
-<!ENTITY sb.tools.homepage	"Vai al sito web di ScrapBook">
-<!ENTITY sb.tools.about		"Informazioni">
-
-<!ENTITY sb.search			"Cerca">
-<!ENTITY sb.search.fulltext	"Cerca parole intere ">
-<!ENTITY sb.search.all		"Tutto">
-<!ENTITY sb.search.re		"Usa le espressioni regolari">
-<!ENTITY sb.search.cs		"Maiuscolo/Minuscolo">
-<!ENTITY sb.search.cache	"Aggiorna cache per la ricerca testo pieno">
-<!ENTITY sb.search.clear	"Elimina cronologia moduli">
-<!ENTITY sb.search.days		"Filtra in base ai giorni">
-
-<!ENTITY sb.note.opentab	"Apri in una scheda">
-<!ENTITY sb.note.close		"Chiudi">
-
-<!ENTITY sb.move			"Sposta nella cartella">
-
+<!ENTITY sb.title "ScrapBook">
+<!ENTITY sb.new.folder "Nuova cartella...">
+<!ENTITY sb.new.note "Nuova nota">
+<!ENTITY sb.toggle.all "Espandi/Contrai tutte le cartelle">
+<!ENTITY sb.tools "Strumenti">
+<!ENTITY sb.tools.setting "Impostazioni...">
+<!ENTITY sb.tools.manage "Gestisci">
+<!ENTITY sb.tools.calculate "Calcola la dimensione">
+<!ENTITY sb.tools.sorttree "Ordina diagramma delle cartelle">
+<!ENTITY sb.tools.directory "Apri cartella di ScrapBook">
+<!ENTITY sb.tools.combine "Combina">
+<!ENTITY sb.tools.multiple "Cattura più URL">
+<!ENTITY sb.tools.trade "Importa / Esporta">
+<!ENTITY sb.tools.output "Esporta diagramma delle cartelle come file HTML">
+<!ENTITY sb.tools.backup "Effettua backup con compressione dei dati">
+<!ENTITY sb.tools.repair "Riparazione d'emergenza">
+<!ENTITY sb.tools.homepage "Vai al sito web di ScrapBook">
+<!ENTITY sb.tools.about "Informazioni">
+<!ENTITY sb.search "Cerca">
+<!ENTITY sb.search.fulltext "Cerca parole intere ">
+<!ENTITY sb.search.all "Tutto">
+<!ENTITY sb.search.re "Usa le espressioni regolari">
+<!ENTITY sb.search.cs "Maiuscolo/Minuscolo">
+<!ENTITY sb.search.cache "Aggiorna cache per la ricerca testo pieno">
+<!ENTITY sb.search.clear "Elimina cronologia moduli">
+<!ENTITY sb.search.days "Filtra in base ai giorni">
+<!ENTITY sb.note.opentab "Apri in una scheda">
+<!ENTITY sb.note.close "Chiudi">
+<!ENTITY sb.move "Sposta nella cartella">

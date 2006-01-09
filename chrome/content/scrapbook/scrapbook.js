@@ -12,11 +12,12 @@ function SB_init()
 {
 	SBstring = document.getElementById("ScrapBookString");
 	SBheader = document.getElementById("ScrapBookHeader");
+	sbMultiBookService.showButton();
 	sbDataSource.init();
 	sbTreeHandler.init(false);
 	SB_initObservers();
-	SBbaseURL = SBcommon.getBaseHref(sbDataSource.data.URI);
-	SBpref.init();
+	SBbaseURL = sbCommonUtils.getBaseHref(sbDataSource.data.URI);
+	sbPrefs.init();
 	SBsearch.init();
 	setTimeout(SB_delayedInit, 0);
 }
@@ -25,6 +26,7 @@ function SB_init()
 function SB_delayedInit()
 {
 	SBstatus.getHttpTask();
+	sbMultiBookService.showTitle();
 	if ( window.top.sbBrowserOverlay.locateMe ) SB_locate();
 }
 
@@ -158,11 +160,11 @@ function SB_open(tabbed)
 	if ( !id ) return;
 	if ( sbDataSource.getProperty("type", curRes) == "note" )
 	{
-		SBnote.open(curRes, tabbed || SBpref.usetabNote );
+		SBnote.open(curRes, tabbed || sbPrefs.usetabNote );
 	}
 	else
 	{
-		SBcommon.loadURL(SBbaseURL + "data/" + id + "/index.html", tabbed || SBpref.usetabOpen);
+		sbCommonUtils.loadURL(SBbaseURL + "data/" + id + "/index.html", tabbed || sbPrefs.usetabOpen);
 	}
 }
 
@@ -171,15 +173,15 @@ function SB_openAllInTabs()
 {
 	var curIdx = SBtree.currentIndex;
 	var curRes = SBtree.builderView.getResourceAtIndex(curIdx);
-	SBservice.RDFC.Init(sbDataSource.data, curRes);
-	var resEnum = SBservice.RDFC.GetElements();
+	sbCommonUtils.RDFC.Init(sbDataSource.data, curRes);
+	var resEnum = sbCommonUtils.RDFC.GetElements();
 	while ( resEnum.hasMoreElements() )
 	{
 		var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-		if ( SBservice.RDFCU.IsContainer(sbDataSource.data, res) ) continue;
+		if ( sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, res) ) continue;
 		var id   = sbDataSource.getProperty("id", res);
 		var type = sbDataSource.getProperty("type", res);
-		SBcommon.loadURL(SBcommon.getURL(id, type), true);
+		sbCommonUtils.loadURL(sbCommonUtils.getURL(id, type), true);
 	}
 }
 
@@ -191,7 +193,7 @@ function SB_delete()
 	if ( curIdx == -1 ) return;
 	var curRes = SBtree.builderView.getResourceAtIndex(curIdx);
 	var parRes = SB_getParentResourceAtIndex(curIdx);
-	if ( !SBpref.quickDelete || SBtree.view.isContainer(curIdx) )
+	if ( !sbPrefs.quickDelete || SBtree.view.isContainer(curIdx) )
 	{
 		if ( !window.confirm( SBstring.getString("CONFIRM_DELETE") ) ) return;
 	}
@@ -199,13 +201,13 @@ function SB_delete()
 	{
 		sbDataSource.removeElementFromContainer("urn:scrapbook:search", curRes);
 		parRes = sbDataSource.findContainerRes(curRes);
-		if ( SBservice.RDFCU.indexOf(sbDataSource.data, parRes, curRes) == -1 ) { alert("ScrapBook FATAL ERROR."); return; }
+		if ( sbCommonUtils.RDFCU.indexOf(sbDataSource.data, parRes, curRes) == -1 ) { alert("ScrapBook FATAL ERROR."); return; }
 	}
 	var rmIDs = sbDataSource.deleteItemDescending(curRes, parRes);
 	sbDataSource.flush();
 	for ( var i = 0; i < rmIDs.length; i++ )
 	{
-		if ( rmIDs[i].length == 14 ) SBcommon.removeDirSafety(SBcommon.getContentDir(rmIDs[i]), true);
+		if ( rmIDs[i].length == 14 ) sbCommonUtils.removeDirSafety(sbCommonUtils.getContentDir(rmIDs[i]), true);
 	}
 	SBstatus.trace(SBstring.getFormattedString("ITEMS_REMOVED", [rmIDs.length]));
 	if ( SBnote.curRes && rmIDs[0] == SBnote.curRes.Value.substring(18,32) ) SBnote.exit(false);
@@ -222,9 +224,9 @@ function SB_forward(flag)
 		case "P" : window.openDialog("chrome://scrapbook/content/property.xul", "", "chrome,centerscreen,modal" , myID); break;
 		case "M" : window.openDialog("chrome://scrapbook/content/manage.xul", "", "chrome,centerscreen,all,resizable,dialog=no", curRes.Value); break;
 		case "Z" : window.openDialog('chrome://scrapbook/content/sort.xul','','chrome,centerscreen,modal', curRes); break;
-		case "C" : SBcommon.loadURL("chrome://scrapbook/content/view.xul?id=" + sbDataSource.getProperty("id", curRes), SBpref.usetabCombine); break;
-		case "S" : SBcommon.loadURL(sbDataSource.getProperty("source", curRes), SBpref.usetabSource); break;
-		case "L" : SBcommon.launchDirectory(SBcommon.getContentDir(myID)); break;
+		case "C" : sbCommonUtils.loadURL("chrome://scrapbook/content/view.xul?id=" + sbDataSource.getProperty("id", curRes), sbPrefs.usetabCombine); break;
+		case "S" : sbCommonUtils.loadURL(sbDataSource.getProperty("source", curRes), sbPrefs.usetabSource); break;
+		case "L" : sbCommonUtils.launchDirectory(sbCommonUtils.getContentDir(myID)); break;
 	}
 }
 
@@ -264,7 +266,33 @@ var SBdropUtil = {
 
 	moveMultiple : function()
 	{
-		return;
+		var idxList = sbTreeHandler.getSelection(false, 2);
+		if ( SB_validateMultipleSelection(idxList) == false ) return;
+		var i = 0;
+		var curResList = []; var curParList = [];
+		var tarResList = []; var tarParList = [];
+		for ( i = 0; i < idxList.length; i++ )
+		{
+			curResList.push( SBtree.builderView.getResourceAtIndex(idxList[i]) );
+			curParList.push( SB_getParentResourceAtIndex(idxList[i]) );
+			tarResList.push( SBtree.builderView.getResourceAtIndex(this.row) );
+			tarParList.push( ( this.orient == this.DROP_ON ) ? tarResList[i] : SB_getParentResourceAtIndex(this.row) );
+		}
+		if ( this.orient == this.DROP_AFTER )
+		{
+			for ( i = idxList.length - 1; i >= 0 ; i-- )
+			{
+				this.moveCurrentToTarget(curResList[i], curParList[i], tarResList[i], tarParList[i]);
+			}
+		}
+		else
+		{
+			for ( i = 0; i < idxList.length; i++ )
+			{
+				this.moveCurrentToTarget(curResList[i], curParList[i], tarResList[i], tarParList[i]);
+			}
+		}
+		sbDataSource.flush();
 	},
 
 	moveCurrentToTarget : function(curRes, curPar, tarRes, tarPar)
@@ -316,7 +344,7 @@ var SBdropUtil = {
 	{
 		this.init(aRow, aOrient);
 		XferString = XferString.split("\n")[0];
-		var win = SBcommon.getFocusedWindow();
+		var win = sbCommonUtils.getFocusedWindow();
 		var sel = win.getSelection();
 		var isSelected = false;
 		try {
@@ -329,7 +357,7 @@ var SBdropUtil = {
 		if ( isSelected || isEntire )
 		{
 			var targetWindow = isEntire ? top.window._content : win;
-			top.window.sbContentSaver.captureWindow(targetWindow, !isEntire, SBpref.captureDetail, res[0], res[1], null);
+			top.window.sbContentSaver.captureWindow(targetWindow, !isEntire, sbPrefs.captureDetail, res[0], res[1], null);
 		}
 		else
 		{
@@ -338,13 +366,13 @@ var SBdropUtil = {
 				top.window.openDialog(
 					"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
 					[XferString], win.location.href,
-					SBpref.captureDetail, res[0], res[1],
+					sbPrefs.captureDetail, res[0], res[1],
 					null, null, null
 				);
 			}
 			else if ( XferString.substring(0,7) == "file://" )
 			{
-				top.window.sbContentSaver.captureFile(XferString, "file://", "file", SBpref.captureDetail, res[0], res[1], null);
+				top.window.sbContentSaver.captureFile(XferString, "file://", "file", sbPrefs.captureDetail, res[0], res[1], null);
 			}
 			else
 			{
@@ -377,7 +405,7 @@ function SB_getParentResourceAtIndex(aIdx)
 {
 	var parIdx = SBtree.builderView.getParentIndex(aIdx);
 	if ( parIdx == -1 ) {
-		return SBservice.RDF.GetResource(SBtree.ref);
+		return sbCommonUtils.RDF.GetResource(SBtree.ref);
 	} else {
 		return SBtree.builderView.getResourceAtIndex(parIdx);
 	}
@@ -387,7 +415,7 @@ function SB_getParentResourceAtIndex(aIdx)
 
 function SB_createFolder()
 {
-	var newID = sbDataSource.identify(SBcommon.getTimeStamp());
+	var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
 	var newItem = new ScrapBookItem(newID);
 	newItem.title = SBstring.getString("DEFAULT_FOLDER");
 	newItem.type = "folder";
@@ -418,7 +446,7 @@ function SB_createFolder()
 	window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome", newItem.id, result);
 	if ( !result.accept )
 	{
-		sbDataSource.deleteItemDescending(newRes, SBservice.RDF.GetResource(tarResName));
+		sbDataSource.deleteItemDescending(newRes, sbCommonUtils.RDF.GetResource(tarResName));
 		sbDataSource.flush();
 		return false;
 	}
@@ -426,7 +454,7 @@ function SB_createFolder()
 }
 
 
-function SB_createNote()
+function SB_createNote(tabbed)
 {
 	var tarResName, tarRelIdx, isRootPos;
 	try {
@@ -442,7 +470,7 @@ function SB_createNote()
 		tarRelIdx  = 0;
 		isRootPos  = true;
 	}
-	SBnote.add(tarResName, tarRelIdx);
+	SBnote.add(tarResName, tarRelIdx, tabbed);
 	SB_rebuildAllTree();
 	SBtree.view.selection.select(SBtree.builderView.getIndexOfResource(SBnote.curRes));
 	if ( isRootPos ) SBtree.treeBoxObject.scrollByLines(SBtree.view.rowCount);
@@ -453,7 +481,7 @@ function SB_rebuildAllTree()
 {
 	SBtree.builder.rebuild();
 
-	var navEnum = SBservice.WINDOW.getEnumerator("navigator:browser");
+	var navEnum = sbCommonUtils.WINDOW.getEnumerator("navigator:browser");
 	while ( navEnum.hasMoreElements() )
 	{
 		var nav = navEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
@@ -579,7 +607,7 @@ var SBsearch = {
 
 	execFT : function()
 	{
-		var cache = SBcommon.getScrapBookDir().clone();
+		var cache = sbCommonUtils.getScrapBookDir().clone();
 		cache.append("cache.rdf");
 		var shouldBuild = false;
 		if ( !cache.exists() || cache.fileSize < 1024 * 32 ) {
@@ -593,8 +621,8 @@ var SBsearch = {
 		if ( shouldBuild ) {
 			this.buildFT(resURL + resQuery);
 		} else {
-			var tabbed = (top.window._content.location.href.substring(0,37) == resURL) ? false : SBpref.usetabSearch;
-			SBcommon.loadURL(resURL + resQuery, tabbed);
+			var tabbed = (top.window._content.location.href.substring(0,37) == resURL) ? false : sbPrefs.usetabSearch;
+			sbCommonUtils.loadURL(resURL + resQuery, tabbed);
 		}
 	},
 
@@ -630,7 +658,7 @@ var SBsearch = {
 				aValue = sbDataSource.getProperty(this.type, aRes);
 			else
 				aValue = [sbDataSource.getProperty("title", aRes), sbDataSource.getProperty("comment", aRes), sbDataSource.getProperty("source", aRes), sbDataSource.getProperty("id", aRes)].join("\n");
-			if ( SBservice.RDFCU.IsContainer(sbDataSource.data, aRes) )
+			if ( sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, aRes) )
 			{
 				this.processRDFRecursively( sbDataSource.getContainer(aRes.Value, false) );
 			}
@@ -645,7 +673,7 @@ var SBsearch = {
 	filterByDays : function()
 	{
 		var ret = { value : "1" };
-		if ( !SBservice.PROMPT.prompt(window, "ScrapBook", SBstring.getString("FILTER_BY_DAYS"), ret, null, {}) ) return;
+		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", SBstring.getString("FILTER_BY_DAYS"), ret, null, {}) ) return;
 		var days = ret.value;
 		if ( isNaN(days) || days <= 0 ) return;
 		var ymdList = [];
@@ -687,7 +715,7 @@ var SBsearch = {
 
 
 
-var SBpref = {
+var sbPrefs = {
 
 	singleExpand  : false,
 	captureDetail : false,
@@ -700,13 +728,13 @@ var SBpref = {
 
 	init : function()
 	{
-		this.captureDetail = SBcommon.getBoolPref("scrapbook.capture.detail", false);
-		this.quickDelete   = SBcommon.getBoolPref("scrapbook.tree.quickdelete", false);
-		this.usetabOpen    = SBcommon.getBoolPref("scrapbook.usetab.open", false);
-		this.usetabSource  = SBcommon.getBoolPref("scrapbook.usetab.source", false);
-		this.usetabSearch  = SBcommon.getBoolPref("scrapbook.usetab.search", false);
-		this.usetabCombine = SBcommon.getBoolPref("scrapbook.usetab.combine", false);
-		this.usetabNote    = SBcommon.getBoolPref("scrapbook.usetab.note", false);
+		this.captureDetail = sbCommonUtils.getBoolPref("scrapbook.capture.detail", false);
+		this.quickDelete   = sbCommonUtils.getBoolPref("scrapbook.tree.quickdelete", false);
+		this.usetabOpen    = sbCommonUtils.getBoolPref("scrapbook.usetab.open", false);
+		this.usetabSource  = sbCommonUtils.getBoolPref("scrapbook.usetab.source", false);
+		this.usetabSearch  = sbCommonUtils.getBoolPref("scrapbook.usetab.search", false);
+		this.usetabCombine = sbCommonUtils.getBoolPref("scrapbook.usetab.combine", false);
+		this.usetabNote    = sbCommonUtils.getBoolPref("scrapbook.usetab.note", false);
 	},
 };
 

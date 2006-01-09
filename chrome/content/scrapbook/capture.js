@@ -52,13 +52,13 @@ function SB_splitByAnchor(aURL)
 
 function SB_suggestName(aURL)
 {
-	var baseName = SBcommon.validateFileName(SBcommon.splitFileName(SBcommon.getFileName(aURL))[0]);
+	var baseName = sbCommonUtils.validateFileName(sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aURL))[0]);
 	if ( baseName == "index" ) baseName = "default";
 	if ( !baseName ) baseName = "default";
 	var name = baseName + ".html";
 	var seq = 0;
 	while ( gFile2URL[name] ) name = baseName + "_" + sbContentSaver.leftZeroPad3(++seq) + ".html";
-	name = SBcommon.splitFileName(name)[0];
+	name = sbCommonUtils.splitFileName(name)[0];
 	gFile2URL[name + ".html"] = aURL;
 	gFile2URL[name + ".css"]  = true;
 	return name;
@@ -118,8 +118,8 @@ var sbCaptureTask = {
 			var button = document.getElementById("ScrapBookCaptureFilterButton");
 			button.hidden = false;
 			button.nextSibling.hidden = false;
-			button.firstChild.firstChild.label += " (" + SBcommon.getRootHref(gReferItem.source) + ")" ;
-			button.firstChild.firstChild.nextSibling.label += " (" + SBcommon.getBaseHref(gReferItem.source) + ")";
+			button.firstChild.firstChild.label += " (" + sbCommonUtils.getRootHref(gReferItem.source) + ")" ;
+			button.firstChild.firstChild.nextSibling.label += " (" + sbCommonUtils.getBaseHref(gReferItem.source) + ")";
 		}
 		for ( var i = 0; i < myURLs.length; i++ ) this.add(myURLs[i], 1);
 	},
@@ -297,11 +297,11 @@ var sbCaptureTask = {
 	{
 		switch ( type )
 		{
-			case "D" : var ref = SBcommon.getRootHref(gReferItem.source).toLowerCase(); this.filter = function(i){ return gURLs[i].toLowerCase().indexOf(ref) == 0; }; break;
-			case "L" : var ref = SBcommon.getBaseHref(gReferItem.source).toLowerCase(); this.filter = function(i){ return gURLs[i].toLowerCase().indexOf(ref) == 0; }; break;
+			case "D" : var ref = sbCommonUtils.getRootHref(gReferItem.source).toLowerCase(); this.filter = function(i){ return gURLs[i].toLowerCase().indexOf(ref) == 0; }; break;
+			case "L" : var ref = sbCommonUtils.getBaseHref(gReferItem.source).toLowerCase(); this.filter = function(i){ return gURLs[i].toLowerCase().indexOf(ref) == 0; }; break;
 			case "S" : 
 				var ret = { value : "" };
-				if ( !SBservice.PROMPT.prompt(window, "ScrapBook", SBstring.getString("FILTER_BY_STRING"), ret, null, {}) ) return;
+				if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", SBstring.getString("FILTER_BY_STRING"), ret, null, {}) ) return;
 				if ( ret.value ) this.filter = function(i){ return gURLs[i].toLowerCase().indexOf(ret.value.toLowerCase()) != -1; };
 				break;
 			case "N" : this.filter = function(i){ return true;  }; break;
@@ -369,7 +369,7 @@ var sbInvisibleBrowser = {
 				     metaElems[i].getAttribute("http-equiv").toLowerCase() == "refresh" && 
 				     metaElems[i].getAttribute("content").match(/URL\=(.*)$/i) )
 				{
-					var newURL = SBcommon.resolveURL(sbCaptureTask.URL, RegExp.$1);
+					var newURL = sbCommonUtils.resolveURL(sbCaptureTask.URL, RegExp.$1);
 					if ( newURL != sbCaptureTask.URL && sbCaptureTask.canRefresh )
 					{
 						gURLs[sbCaptureTask.index] = newURL;
@@ -453,7 +453,7 @@ var sbCrossLinker = {
 	invoke : function()
 	{
 		if ( !sbDataSource.data ) sbDataSource.init();
-		sbDataSource.updateItem(SBservice.RDF.GetResource("urn:scrapbook:item" + gReferItem.id), "type", "site");
+		sbDataSource.updateItem(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gReferItem.id), "type", "site");
 		sbDataSource.flush();
 		sbInvisibleBrowser.refreshEvent(function(){ sbCrossLinker.exec(); });
 		this.ELEMENT.docShell.allowImages = false;
@@ -465,7 +465,7 @@ var sbCrossLinker = {
 					+ ++sbInvisibleBrowser.fileCount + " : " + sbCrossLinker.nameList[sbCrossLinker.index] + ".html");
 			}
 		};
-		this.baseURL = SBservice.IO.newFileURI(SBcommon.getContentDir(gReferItem.id)).spec;
+		this.baseURL = sbCommonUtils.IO.newFileURI(sbCommonUtils.getContentDir(gReferItem.id)).spec;
 		this.nameList.push("index");
 		for ( var url in gURL2Name )
 		{
@@ -539,9 +539,9 @@ var sbCrossLinker = {
 				var src = "";
 				src = sbContentSaver.surroundByTags(rootNode, rootNode.innerHTML);
 				src = sbContentSaver.doctypeToString(doc.doctype) + src;
-				var file = SBcommon.getContentDir(gReferItem.id);
-				file.append(SBcommon.getFileName(doc.location.href));
-				SBcommon.writeFile(file, src, doc.characterSet);
+				var file = sbCommonUtils.getContentDir(gReferItem.id);
+				file.append(sbCommonUtils.getFileName(doc.location.href));
+				sbCommonUtils.writeFile(file, src, doc.characterSet);
 			}
 		}
 		try {
@@ -577,23 +577,23 @@ var sbCrossLinker = {
 		src += '<?xml-stylesheet href="../../sitemap.xsl" type="text/xsl" media="all"?>\n';
 		src += (new XMLSerializer()).serializeToString(this.XML).replace(/></g, ">\n<");
 		src += '\n';
-		var xslFile = SBcommon.getScrapBookDir().clone();
+		var xslFile = sbCommonUtils.getScrapBookDir().clone();
 		xslFile.append("sitemap.xsl");
-		if ( !xslFile.exists() ) SBcommon.saveTemplateFile("chrome://scrapbook/skin/sitemap.xsl", xslFile);
-		var contDir = SBcommon.getContentDir(gReferItem.id);
+		if ( !xslFile.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/skin/sitemap.xsl", xslFile);
+		var contDir = sbCommonUtils.getContentDir(gReferItem.id);
 		var xmlFile = contDir.clone();
 		xmlFile.append("sitemap.xml");
-		SBcommon.writeFile(xmlFile, src, "UTF-8");
+		sbCommonUtils.writeFile(xmlFile, src, "UTF-8");
 		var txt = "";
 		var txtFile1 = contDir.clone();
 		txtFile1.append("sb-file2url.txt");
 		for ( var f in gFile2URL ) txt += f + "\t" + gFile2URL[f] + "\n";
-		SBcommon.writeFile(txtFile1, txt, "UTF-8");
+		sbCommonUtils.writeFile(txtFile1, txt, "UTF-8");
 		txt = "";
 		var txtFile2 = contDir.clone();
 		txtFile2.append("sb-url2name.txt");
 		for ( var u in gURL2Name ) txt += u + "\t" + gURL2Name[u] + "\n";
-		SBcommon.writeFile(txtFile2, txt, "UTF-8");
+		sbCommonUtils.writeFile(txtFile2, txt, "UTF-8");
 	},
 
 };
@@ -621,7 +621,7 @@ sbHeaderSniffer.prototype = {
 		this._headers = {};
 		try {
 			this._URL.spec = this.URLSpec;
-			this._channel = SBservice.IO.newChannelFromURI(this._URL).QueryInterface(Components.interfaces.nsIHttpChannel);
+			this._channel = sbCommonUtils.IO.newChannelFromURI(this._URL).QueryInterface(Components.interfaces.nsIHttpChannel);
 			this._channel.loadFlags = this._channel.LOAD_BYPASS_CACHE;
 			this._channel.setRequestHeader("User-Agent", navigator.userAgent, false);
 			if ( this.refURLSpec ) this._channel.setRequestHeader("Referer", this.refURLSpec, false);

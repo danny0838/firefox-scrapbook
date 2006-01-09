@@ -1,18 +1,15 @@
-<!ENTITY sb.title				"ScrapBook">
-<!ENTITY sb.capture.partial		"Captura la selecció">
-<!ENTITY sb.capture.partial.as	"Anomena i captura la selecció...">
-<!ENTITY sb.capture.entire		"Captura la pàgina">
-<!ENTITY sb.capture.entire.as	"Anomena i captura la pàgina...">
-<!ENTITY sb.capture.frame		"Captura el marc">
-<!ENTITY sb.capture.frame.as	"Anomena i captura el marc...">
-<!ENTITY sb.capture.target		"Captura l'enllaç">
-<!ENTITY sb.capture.target.as	"Anomena i captura l'enllaç...">
-
-<!ENTITY sb.capture.folder.root		"Carpeta mare">
-<!ENTITY sb.capture.folder.select	"Trieu una carpeta">
-
-<!ENTITY sb.key.sidebar		"K">
-<!ENTITY sb.key.editor		"J">
-<!ENTITY sb.key.capture		"L">
-<!ENTITY sb.key.capture.as	"K">
-
+<!ENTITY sb.title "ScrapBook">
+<!ENTITY sb.capture.partial "Captura la selecció">
+<!ENTITY sb.capture.partial.as "Anomena i captura la selecció...">
+<!ENTITY sb.capture.entire "Captura la pàgina">
+<!ENTITY sb.capture.entire.as "Anomena i captura la pàgina...">
+<!ENTITY sb.capture.frame "Captura el marc">
+<!ENTITY sb.capture.frame.as "Anomena i captura el marc...">
+<!ENTITY sb.capture.target "Captura l'enllaç">
+<!ENTITY sb.capture.target.as "Anomena i captura l'enllaç...">
+<!ENTITY sb.capture.folder.root "Carpeta mare">
+<!ENTITY sb.capture.folder.select "Trieu una carpeta">
+<!ENTITY sb.key.sidebar "K">
+<!ENTITY sb.key.editor "J">
+<!ENTITY sb.key.capture "L">
+<!ENTITY sb.key.capture.as "K">

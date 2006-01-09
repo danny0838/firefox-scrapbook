@@ -1,4 +1,4 @@
-<!ENTITY sb.trade.import	"インポート">
-<!ENTITY sb.trade.export	"エクスポート">
-<!ENTITY sb.trade.restore	"フォルダ構成を復元しながらインポート">
-<!ENTITY sb.trade.time	"エクスポートした日時">
+<!ENTITY sb.trade.import "インポート">
+<!ENTITY sb.trade.export "エクスポート">
+<!ENTITY sb.trade.restore "フォルダ構成を復元しながらインポート">
+<!ENTITY sb.trade.time "エクスポートした日時">

@@ -1,12 +1,11 @@
-<!ENTITY sn.save			"Desa">
-<!ENTITY sn.close			"Tanca">
-<!ENTITY sn.tools			"Eines">
-<!ENTITY sn.preview			"Mostra com a HTML">
-<!ENTITY sn.preview.quit	"Tanca la visualització prèvia">
-<!ENTITY sn.template		"Edita la plantilla HTML">
-<!ENTITY sn.autolinefeed	"Salts de línia automàtics">
-<!ENTITY sn.autolinefeed.t	"Afegeix etiquetes &lt;br&gt; al final de cada línia">
-<!ENTITY sn.fontsize		"Mida de la lletra">
-<!ENTITY sn.help			"Ajuda">
-<!ENTITY sn.exit			"Surt">
-
+<!ENTITY sn.save "Desa">
+<!ENTITY sn.close "Tanca">
+<!ENTITY sn.tools "Eines">
+<!ENTITY sn.preview "Mostra com a HTML">
+<!ENTITY sn.preview.quit "Tanca la visualització prèvia">
+<!ENTITY sn.template "Edita la plantilla HTML">
+<!ENTITY sn.autolinefeed "Salts de línia automàtics">
+<!ENTITY sn.autolinefeed.t "Afegeix etiquetes &lt;br&gt; al final de cada línia">
+<!ENTITY sn.fontsize "Mida de la lletra">
+<!ENTITY sn.help "Ajuda">
+<!ENTITY sn.exit "Surt">

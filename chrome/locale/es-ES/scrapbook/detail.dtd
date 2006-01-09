@@ -1,16 +1,13 @@
-<!ENTITY sb.detail					"Detalle de captura">
-<!ENTITY sb.detail.new.folder		"Nueva carpeta">
-<!ENTITY sb.detail.select.folder	"Select Folder">
-
-<!ENTITY sb.detail.linked.file		"Download linked files">
-<!ENTITY sb.detail.linked.image		"Imagen">
-<!ENTITY sb.detail.linked.sound		"Sonido">
-<!ENTITY sb.detail.linked.movie		"Video">
-<!ENTITY sb.detail.linked.archive	"Archivo">
-<!ENTITY sb.detail.linked.custom	"Custom">
-
-<!ENTITY sb.detail.linked.page			"In-depth Capture">
-<!ENTITY sb.detail.linked.page2			"Capture linked Web pages">
-<!ENTITY sb.detail.linked.page.depth	"Depth to follow links">
-<!ENTITY sb.detail.linked.page.text		"After completing captures, all pages will be linked each other and sitemap will be created.">
-
+<!ENTITY sb.detail "Detalle de captura">
+<!ENTITY sb.detail.new.folder "Nueva carpeta">
+<!ENTITY sb.detail.select.folder "Select Folder">
+<!ENTITY sb.detail.linked.file "Download linked files">
+<!ENTITY sb.detail.linked.image "Imagen">
+<!ENTITY sb.detail.linked.sound "Sonido">
+<!ENTITY sb.detail.linked.movie "Video">
+<!ENTITY sb.detail.linked.archive "Archivo">
+<!ENTITY sb.detail.linked.custom "Custom">
+<!ENTITY sb.detail.linked.page "In-depth Capture">
+<!ENTITY sb.detail.linked.page2 "Capture linked Web pages">
+<!ENTITY sb.detail.linked.page.depth "Depth to follow links">
+<!ENTITY sb.detail.linked.page.text "After completing captures, all pages will be linked each other and sitemap will be created.">

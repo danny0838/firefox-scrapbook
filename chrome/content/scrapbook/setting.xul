@@ -108,11 +108,13 @@
 						<hbox align="center" class="indent">
 							<textbox id="sbPrefDataTextbox" disabled="true" flex="1" onfocus="blur();" />
 							<button  id="sbPrefDataButton"  disabled="true" label="&sb.button.browse;..." oncommand="sbPrefService.selectData();" />
-							<button  id="sbPrefDataButton2" label="&sb.button.show;" oncommand="SBcommon.launchDirectory(SBcommon.getScrapBookDir());" />
+							<!--<button  id="sbPrefDataButton2" label="&sb.button.show;" oncommand="sbCommonUtils.launchDirectory(sbCommonUtils.getScrapBookDir());" />-->
 						</hbox>
 					</vbox>
 					<description id="sbPrefDataExplain" hidden="true" value="&sb.setting.data.explain;" />
 					<description id="sbPrefDataAlert"   hidden="true" style="color: #FF0000;">&sb.setting.data.alert;</description>
+					<checkbox id="sbPrefMultiBookEnabled" prefstring="scrapbook.multibook.enabled" label="&sb.setting.multibook.enabled;" oncommand="sbPrefService.toggleDefaultData();" />
+					<description class="indent">&sb.setting.multibook.description;</description>
 				</groupbox>
 				<!--filer-->
 				<groupbox>

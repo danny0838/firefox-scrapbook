@@ -1,16 +1,13 @@
-<!ENTITY sb.detail					"Spara i Scrapbook">
-<!ENTITY sb.detail.new.folder		"Ny Mapp">
-<!ENTITY sb.detail.select.folder	"Välj Mapp">
-
-<!ENTITY sb.detail.linked.file		"Ladda ned länkar">
-<!ENTITY sb.detail.linked.image		"Bilder">
-<!ENTITY sb.detail.linked.sound		"Ljud">
-<!ENTITY sb.detail.linked.movie		"Filmer">
-<!ENTITY sb.detail.linked.archive	"Filarkiv">
-<!ENTITY sb.detail.linked.custom	"Annan">
-
-<!ENTITY sb.detail.linked.page			"Spara i Scrapbook på djupet">
-<!ENTITY sb.detail.linked.page2			"Spara länkade websidor i Scrapbook">
-<!ENTITY sb.detail.linked.page.depth	"Antal nivåer länkar ska följas">
-<!ENTITY sb.detail.linked.page.text		"När allt gar sparats i Scrapbook, kommer alla sidor vara länkade sinsemellan och en översiktsbild skapas.">
-
+<!ENTITY sb.detail "Spara i Scrapbook">
+<!ENTITY sb.detail.new.folder "Ny Mapp">
+<!ENTITY sb.detail.select.folder "Välj Mapp">
+<!ENTITY sb.detail.linked.file "Ladda ned länkar">
+<!ENTITY sb.detail.linked.image "Bilder">
+<!ENTITY sb.detail.linked.sound "Ljud">
+<!ENTITY sb.detail.linked.movie "Filmer">
+<!ENTITY sb.detail.linked.archive "Filarkiv">
+<!ENTITY sb.detail.linked.custom "Annan">
+<!ENTITY sb.detail.linked.page "Spara i Scrapbook på djupet">
+<!ENTITY sb.detail.linked.page2 "Spara länkade websidor i Scrapbook">
+<!ENTITY sb.detail.linked.page.depth "Antal nivåer länkar ska följas">
+<!ENTITY sb.detail.linked.page.text "När allt gar sparats i Scrapbook, kommer alla sidor vara länkade sinsemellan och en översiktsbild skapas.">

@@ -15,7 +15,7 @@ function SB_initBackup()
 	gProgPath  = nsPreferences.copyUnicharPref("scrapbook.backup.program", "");
 	gDestPath  = nsPreferences.copyUnicharPref("scrapbook.backup.destination", "");
 	gArguments = nsPreferences.copyUnicharPref("scrapbook.backup.arguments", "");
-	gDataPath  = SBcommon.getScrapBookDir().path;
+	gDataPath  = sbCommonUtils.getScrapBookDir().path;
 	document.getElementById("ScrapBookBackupProgramTextbox").value     = gProgPath;
 	document.getElementById("ScrapBookBackupDestinationTextbox").value = gDestPath;
 	document.getElementById("ScrapBookBackupArgumentsMenulist").value  = gArguments;
@@ -40,7 +40,7 @@ function SB_execBackup()
 		if ( args[i] == "%dst" ) args[i] = gDestPath;
 		if ( args[i] == "%src" ) args[i] = gDataPath;
 	}
-	SBcommon.execProgram(gProgPath, args);
+	sbCommonUtils.execProgram(gProgPath, args);
 	if ( window.location.href.match(/\?auto/) ) setTimeout(function(){ window.close(); }, 1000);
 }
 

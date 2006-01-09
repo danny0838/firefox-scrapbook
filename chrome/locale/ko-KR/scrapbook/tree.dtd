@@ -1,18 +1,16 @@
-<!ENTITY sb.open			"열기">
-<!ENTITY sb.open.tab		"탭으로 열기">
-<!ENTITY sb.open.newtab		"새 탭으로 열기">
-<!ENTITY sb.open.source		"소스 URL 열기">
-<!ENTITY sb.show.files		"파일 표시하기">
-<!ENTITY sb.delete			"삭제">
-<!ENTITY sb.property		"속성">
-
-<!ENTITY sb.folder.toggle	"펼치기/감추기">
-<!ENTITY sb.folder.openall	"모두 탭으로 열기">
-<!ENTITY sb.folder.combine	"모두 결합하여 열기">
-<!ENTITY sb.folder.manage	"폴더 관리...">
-
-<!ENTITY sb.new.folder		"새 폴더...">
-<!ENTITY sb.new.note		"새 노트">
-
-<!ENTITY sb.sort.folder		"폴더 정렬">
-
+<!ENTITY sb.open "열기">
+<!ENTITY sb.open.tab "탭으로 열기">
+<!ENTITY sb.open.newtab "새 탭으로 열기">
+<!ENTITY sb.open.source "소스 URL 열기">
+<!ENTITY sb.show.files "파일 표시하기">
+<!ENTITY sb.delete "삭제">
+<!ENTITY sb.property "속성">
+<!ENTITY sb.folder.toggle "보이기/감추기">
+<!ENTITY sb.folder.openall "모두 탭으로 열기">
+<!ENTITY sb.folder.combine "모두 결합하여 열기">
+<!ENTITY sb.folder.manage "폴더 관리...">
+<!ENTITY sb.new.folder "새 폴더...">
+<!ENTITY sb.new.note "새 노트">
+<!ENTITY sb.sort.folder "폴더 정렬">
+<!ENTITY mb.configure "설정">
+<!ENTITY mb.profileFolder "프로필 폴더">

@@ -1,7 +1,7 @@
-<!ENTITY sb.backup.d		"ScrapBookの全データを圧縮してバックアップします。">
-<!ENTITY sb.backup.program	"圧縮プログラム">
-<!ENTITY sb.backup.file		"バックアップ先ファイル">
-<!ENTITY sb.backup.browse	"参照">
-<!ENTITY sb.backup.arg		"コマンドライン引数">
-<!ENTITY sb.backup.arg.d1	"&#37;dst はバックアップファイルへのパスを表します。">
-<!ENTITY sb.backup.arg.d2	"&#37;src はScrapBookフォルダへのパスを表します。">
+<!ENTITY sb.backup.d "ScrapBookの全データを圧縮してバックアップします。">
+<!ENTITY sb.backup.program "圧縮プログラム">
+<!ENTITY sb.backup.file "バックアップ先ファイル">
+<!ENTITY sb.backup.browse "参照">
+<!ENTITY sb.backup.arg "コマンドライン引数">
+<!ENTITY sb.backup.arg.d1 "&#37;dst はバックアップファイルへのパスを表します。">
+<!ENTITY sb.backup.arg.d2 "&#37;src はScrapBookフォルダへのパスを表します。">

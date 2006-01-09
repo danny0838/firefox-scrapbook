@@ -1,18 +1,15 @@
-<!ENTITY sb.title				"ScrapBook">
-<!ENTITY sb.capture.partial		"선택 부분 캡처">
-<!ENTITY sb.capture.partial.as	"선택 부분 상세 캡처...">
-<!ENTITY sb.capture.entire		"페이지 캡처">
-<!ENTITY sb.capture.entire.as	"페이지 상세 캡처...">
-<!ENTITY sb.capture.frame		"프레임 캡처">
-<!ENTITY sb.capture.frame.as	"프레임 상세 캡처...">
-<!ENTITY sb.capture.target		"링크 캡처">
-<!ENTITY sb.capture.target.as	"링크 상세 캡처...">
-
-<!ENTITY sb.capture.folder.root		"루트 폴더">
-<!ENTITY sb.capture.folder.select	"폴더 선택">
-
-<!ENTITY sb.key.sidebar		"K">
-<!ENTITY sb.key.editor		"J">
-<!ENTITY sb.key.capture		"L">
-<!ENTITY sb.key.capture.as	"K">
-
+<!ENTITY sb.title "ScrapBook">
+<!ENTITY sb.capture.partial "선택 부분 캡처">
+<!ENTITY sb.capture.partial.as "선택 부분 상세 캡처...">
+<!ENTITY sb.capture.entire "페이지 캡처">
+<!ENTITY sb.capture.entire.as "페이지 상세 캡처...">
+<!ENTITY sb.capture.frame "프레임 캡처">
+<!ENTITY sb.capture.frame.as "프레임 상세 캡처...">
+<!ENTITY sb.capture.target "링크 캡처">
+<!ENTITY sb.capture.target.as "링크 상세 캡처...">
+<!ENTITY sb.capture.folder.root "루트 폴더">
+<!ENTITY sb.capture.folder.select "폴더 선택">
+<!ENTITY sb.key.sidebar "K">
+<!ENTITY sb.key.editor "J">
+<!ENTITY sb.key.capture "L">
+<!ENTITY sb.key.capture.as "K">

@@ -15,8 +15,8 @@ function SB_onNotifyLoad()
 		gID       = window.arguments[0].id;
 		var icon  = window.arguments[0].icon;
 		var title = window.arguments[0].title;
-		if ( !icon ) icon = SBcommon.getDefaultIcon();
-		if ( !icon.match(/:\/\//) ) icon = SBservice.IO.newFileURI(SBcommon.getContentDir(gID)).spec + icon;
+		if ( !icon ) icon = sbCommonUtils.getDefaultIcon();
+		if ( !icon.match(/:\/\//) ) icon = sbCommonUtils.IO.newFileURI(sbCommonUtils.getContentDir(gID)).spec + icon;
 		if ( title.length > 40 ) title = title.substring(0,40) + "...";
 		document.getElementById("ScrapBookNotifyIcon").src   = icon;
 		document.getElementById("ScrapBookNotifyText").value = title;
@@ -67,7 +67,7 @@ function closeNotify()
 
 function SB_onNotifyClick()
 {
-	SBcommon.loadURL("chrome://scrapbook/content/view.xul?id=" + gID, true);
+	sbCommonUtils.loadURL("chrome://scrapbook/content/view.xul?id=" + gID, true);
 	window.close();
 }
 

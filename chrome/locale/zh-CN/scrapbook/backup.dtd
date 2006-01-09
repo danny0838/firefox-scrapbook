@@ -1,7 +1,7 @@
-<!ENTITY sb.backup.d		"压缩并备份 ScrapBook 的所有文件">
-<!ENTITY sb.backup.program	"压缩程序">
-<!ENTITY sb.backup.file		"目标文件">
-<!ENTITY sb.backup.browse	"浏览">
-<!ENTITY sb.backup.arg		"命令行参数">
-<!ENTITY sb.backup.arg.d1	"(&#37;dst 是备份文件的保存路径。)">
-<!ENTITY sb.backup.arg.d2	"(&#37;src 是 ScrapBook 目录路径。)">
+<!ENTITY sb.backup.d "压缩并备份 ScrapBook 的所有文件">
+<!ENTITY sb.backup.program "压缩程序">
+<!ENTITY sb.backup.file "目标文件">
+<!ENTITY sb.backup.browse "浏览">
+<!ENTITY sb.backup.arg "命令行参数">
+<!ENTITY sb.backup.arg.d1 "(&#37;dst 是备份文件的保存路径。)">
+<!ENTITY sb.backup.arg.d2 "(&#37;src 是 ScrapBook 目录路径。)">

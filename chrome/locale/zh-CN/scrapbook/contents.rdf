@@ -10,7 +10,7 @@
 
 	<!--description about package-->
 	<RDF:Description about="urn:mozilla:locale:zh-CN"
-	       chrome:displayName="Chinese(Simplified)"
+	       chrome:displayName="Chinese Simplified (zh-CN)"
 	       chrome:author="George C. Tsoi(moZine.org)"
 	       chrome:name="zh-CN">
     <chrome:packages>
@@ -18,6 +18,3 @@
 				<RDF:li resource="urn:mozilla:locale:zh-CN:scrapbook" />
 			</RDF:Seq>
 		</chrome:packages>
-	</RDF:Description>
-
-</RDF:RDF>

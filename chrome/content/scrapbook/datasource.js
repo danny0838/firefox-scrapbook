@@ -10,20 +10,20 @@ var sbDataSource = {
 	init : function(aQuietWarning)
 	{
 		try {
-			this.file = SBcommon.getScrapBookDir();
+			this.file = sbCommonUtils.getScrapBookDir();
 			this.file.append("scrapbook.rdf");
 			if ( !this.file.exists() )
 			{
 				this.file.create(this.file.NORMAL_FILE_TYPE, 0666);
-				var fileURL = SBservice.IO.newFileURI(this.file).spec;
-				this.data = SBservice.RDF.GetDataSourceBlocking(fileURL);
+				var fileURL = sbCommonUtils.IO.newFileURI(this.file).spec;
+				this.data = sbCommonUtils.RDF.GetDataSourceBlocking(fileURL);
 				this.createEmptySeq("urn:scrapbook:root");
 				this.flush();
 			}
 			else
 			{
-				var fileURL = SBservice.IO.newFileURI(this.file).spec;
-				this.data = SBservice.RDF.GetDataSourceBlocking(fileURL);
+				var fileURL = sbCommonUtils.IO.newFileURI(this.file).spec;
+				this.data = sbCommonUtils.RDF.GetDataSourceBlocking(fileURL);
 			}
 		}
 		catch(ex) {
@@ -33,10 +33,10 @@ var sbDataSource = {
 
 	backup : function()
 	{
-		var bFile = SBcommon.getScrapBookDir();
+		var bFile = sbCommonUtils.getScrapBookDir();
 		bFile.append("backup");
 		if ( !bFile.exists() ) bFile.create(bFile.DIRECTORY_TYPE, 0700);
-		var bFileName = "scrapbook_" + SBcommon.getTimeStamp().substring(0,8) + ".rdf";
+		var bFileName = "scrapbook_" + sbCommonUtils.getTimeStamp().substring(0,8) + ".rdf";
 		try {
 			this.file.copyTo(bFile, bFileName);
 			dump("sbDataSource::backup [" + bFileName + "]\n");
@@ -51,7 +51,7 @@ var sbDataSource = {
 
 	unregister : function()
 	{
-		SBservice.RDF.UnregisterDataSource(this.data);
+		sbCommonUtils.RDF.UnregisterDataSource(this.data);
 	},
 
 
@@ -69,32 +69,32 @@ var sbDataSource = {
 		aSBitem.icon    = this.sanitize(aSBitem.icon);
 		aSBitem.source  = this.sanitize(aSBitem.source);
 
-		if ( aParName != "urn:scrapbook:root" && this.getProperty("type", SBservice.RDF.GetResource(aParName)) != "folder" )
+		if ( aParName != "urn:scrapbook:root" && this.getProperty("type", sbCommonUtils.RDF.GetResource(aParName)) != "folder" )
 		{
 			alert("ScrapBook ERROR: Resource '" + aParName + "' is not found.");
 			aParName = "urn:scrapbook:root"; aIdx = 0;
 		}
 
 		try {
-			SBservice.RDFC.Init(this.data, SBservice.RDF.GetResource(aParName));
+			sbCommonUtils.RDFC.Init(this.data, sbCommonUtils.RDF.GetResource(aParName));
 		}
 		catch(ex) {
 			alert("ScrapBook ERROR: Failed to initialize root container.\n\n" + ex);
 			return false;
 		}
 		try {
-			var newRes = SBservice.RDF.GetResource("urn:scrapbook:item" + aSBitem.id);
-			this.data.Assert(newRes, SBservice.RDF.GetResource(NS_SCRAPBOOK + "id"),      SBservice.RDF.GetLiteral(aSBitem.id),      true);
-			this.data.Assert(newRes, SBservice.RDF.GetResource(NS_SCRAPBOOK + "type"),    SBservice.RDF.GetLiteral(aSBitem.type),    true);
-			this.data.Assert(newRes, SBservice.RDF.GetResource(NS_SCRAPBOOK + "title"),   SBservice.RDF.GetLiteral(aSBitem.title),   true);
-			this.data.Assert(newRes, SBservice.RDF.GetResource(NS_SCRAPBOOK + "chars"),   SBservice.RDF.GetLiteral(aSBitem.chars),   true);
-			this.data.Assert(newRes, SBservice.RDF.GetResource(NS_SCRAPBOOK + "comment"), SBservice.RDF.GetLiteral(aSBitem.comment), true);
-			this.data.Assert(newRes, SBservice.RDF.GetResource(NS_SCRAPBOOK + "icon"),    SBservice.RDF.GetLiteral(aSBitem.icon),    true);
-			this.data.Assert(newRes, SBservice.RDF.GetResource(NS_SCRAPBOOK + "source"),  SBservice.RDF.GetLiteral(aSBitem.source),  true);
+			var newRes = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aSBitem.id);
+			this.data.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "id"),      sbCommonUtils.RDF.GetLiteral(aSBitem.id),      true);
+			this.data.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "type"),    sbCommonUtils.RDF.GetLiteral(aSBitem.type),    true);
+			this.data.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "title"),   sbCommonUtils.RDF.GetLiteral(aSBitem.title),   true);
+			this.data.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "chars"),   sbCommonUtils.RDF.GetLiteral(aSBitem.chars),   true);
+			this.data.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "comment"), sbCommonUtils.RDF.GetLiteral(aSBitem.comment), true);
+			this.data.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "icon"),    sbCommonUtils.RDF.GetLiteral(aSBitem.icon),    true);
+			this.data.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "source"),  sbCommonUtils.RDF.GetLiteral(aSBitem.source),  true);
 			if ( aIdx > 0 ) {
-				SBservice.RDFC.InsertElementAt(newRes, aIdx, true);
+				sbCommonUtils.RDFC.InsertElementAt(newRes, aIdx, true);
 			} else {
-				SBservice.RDFC.AppendElement(newRes);
+				sbCommonUtils.RDFC.AppendElement(newRes);
 			}
 			this.flush();
 			return newRes;
@@ -108,24 +108,24 @@ var sbDataSource = {
 	moveItem : function(curRes, curPar, tarPar, tarRelIdx)
 	{
 		try {
-			SBservice.RDFC.Init(this.data, curPar);
-			SBservice.RDFC.RemoveElement(curRes, true);
+			sbCommonUtils.RDFC.Init(this.data, curPar);
+			sbCommonUtils.RDFC.RemoveElement(curRes, true);
 		} catch(ex) {
 			alert("ScrapBook ERROR: Failed to move element at datasource (1).\n\n" + ex);
 			return;
 		}
 		try {
-			SBservice.RDFC.Init(this.data, tarPar);
+			sbCommonUtils.RDFC.Init(this.data, tarPar);
 			if ( tarRelIdx > 0 ) {
-				SBservice.RDFC.InsertElementAt(curRes, tarRelIdx, true);
+				sbCommonUtils.RDFC.InsertElementAt(curRes, tarRelIdx, true);
 			} else {
-				SBservice.RDFC.AppendElement(curRes);
+				sbCommonUtils.RDFC.AppendElement(curRes);
 			}
 		}
 		catch(ex) {
 			alert("ScrapBook ERROR: Failed to move element at datasource (2).\n\n" + ex);
-			SBservice.RDFC.Init(this.data, SBservice.RDF.GetResource("urn:scrapbook:root"));
-			SBservice.RDFC.AppendElement(curRes, true);
+			sbCommonUtils.RDFC.Init(this.data, sbCommonUtils.RDF.GetResource("urn:scrapbook:root"));
+			sbCommonUtils.RDFC.AppendElement(curRes, true);
 		}
 	},
 
@@ -133,10 +133,10 @@ var sbDataSource = {
 	{
 		newVal = this.sanitize(newVal);
 		try {
-			aProp = SBservice.RDF.GetResource(NS_SCRAPBOOK + aProp);
+			aProp = sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + aProp);
 			var oldVal = this.data.GetTarget(aRes, aProp, true);
 			oldVal = oldVal.QueryInterface(Components.interfaces.nsIRDFLiteral);
-			newVal = SBservice.RDF.GetLiteral(newVal);
+			newVal = sbCommonUtils.RDF.GetLiteral(newVal);
 			this.data.Change(aRes, aProp, oldVal, newVal);
 		}
 		catch(ex) {
@@ -146,13 +146,13 @@ var sbDataSource = {
 
 	createEmptySeq : function(aResName)
 	{
-		SBservice.RDFCU.MakeSeq(this.data, SBservice.RDF.GetResource(aResName));
+		sbCommonUtils.RDFCU.MakeSeq(this.data, sbCommonUtils.RDF.GetResource(aResName));
 	},
 
 	deleteItemDescending : function(aRes, aParRes)
 	{
-		SBservice.RDFC.Init(this.data, aParRes);
-		SBservice.RDFC.RemoveElement(aRes, true);
+		sbCommonUtils.RDFC.Init(this.data, aParRes);
+		sbCommonUtils.RDFC.RemoveElement(aRes, true);
 		var rmIDs = addIDs = [];
 		var depth = 0;
 		do {
@@ -206,9 +206,9 @@ var sbDataSource = {
 	{
 		var aCont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
 		try {
-			aCont.Init(this.data, SBservice.RDF.GetResource(aResID));
+			aCont.Init(this.data, sbCommonUtils.RDF.GetResource(aResID));
 		} catch(ex) {
-			return force ? SBservice.RDFCU.MakeSeq(this.data, SBservice.RDF.GetResource(aResID)) : null;
+			return force ? sbCommonUtils.RDFCU.MakeSeq(this.data, sbCommonUtils.RDF.GetResource(aResID)) : null;
 		}
 		return aCont;
 	},
@@ -234,7 +234,7 @@ var sbDataSource = {
 	{
 		if ( aRes.Value == "urn:scrapbook:root" ) return "";
 		try {
-			var retVal = this.data.GetTarget(aRes, SBservice.RDF.GetResource(NS_SCRAPBOOK + aProp), true);
+			var retVal = this.data.GetTarget(aRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + aProp), true);
 			return retVal.QueryInterface(Components.interfaces.nsIRDFLiteral).Value;
 		}
 		catch(ex) {
@@ -250,9 +250,9 @@ var sbDataSource = {
 	identify : function(aID)
 	{
 		var i = 0;
-		while ( this.getProperty("id", SBservice.RDF.GetResource("urn:scrapbook:item" + aID)) && i < 100 )
+		while ( this.getProperty("id", sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aID)) && i < 100 )
 		{
-			aID = SBcommon.getTimeStamp(--i);
+			aID = sbCommonUtils.getTimeStamp(--i);
 			dump("*** ScrapBook IDENTIFY RESOURCE ID [" + i + "] " + aID + "\n");
 		}
 		return aID;
@@ -260,7 +260,7 @@ var sbDataSource = {
 
 	getRelativeIndex : function(aParRes, aRes)
 	{
-		return SBservice.RDFCU.indexOf(this.data, aParRes, aRes);
+		return sbCommonUtils.RDFCU.indexOf(this.data, aParRes, aRes);
 	},
 
 	findContainerRes : function(aRes)
@@ -269,9 +269,9 @@ var sbDataSource = {
 		while ( ResList.hasMoreElements() )
 		{
 			var myRes = ResList.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			if ( SBservice.RDFCU.IsContainer(this.data, myRes) == false ) continue;
+			if ( sbCommonUtils.RDFCU.IsContainer(this.data, myRes) == false ) continue;
 			if ( myRes.Value == "urn:scrapbook:search" ) continue;
-			if ( SBservice.RDFCU.indexOf(this.data, myRes, aRes) != -1 )
+			if ( sbCommonUtils.RDFCU.indexOf(this.data, myRes, aRes) != -1 )
 			{
 				return myRes;
 			}

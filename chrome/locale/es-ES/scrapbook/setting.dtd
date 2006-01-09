@@ -1,35 +1,30 @@
-<!ENTITY sb.setting			"Preferencias">
-<!ENTITY sb.setting.general	"General">
-<!ENTITY sb.setting.usetabs	"Abrir en pestañas">
-<!ENTITY sb.setting.advance	"Avanzado">
-<!ENTITY sb.setting.capture	"Capture">
-<!ENTITY sb.setting.editing	"Edit">
-<!ENTITY sb.setting.program	"Programs">
-
-<!ENTITY sb.setting.browser.submenu		"Enable submenu inside the browser context menu (Change after restart)">
-<!ENTITY sb.setting.capture.detail		"Mostrar diálogo 'Detalle de captura' cuando capture utilizando el método arrastrar y soltar sobre el panel lateral">
-<!ENTITY sb.setting.capture.notify		"Mostrar notificación 'Captura completada' (solo en Windows)">
-<!ENTITY sb.setting.tree.singleexpand	"Al expandir una carpeta del árbol, colapsar las otras carpetas (como los Favoritos del IE)">
-<!ENTITY sb.setting.tree.quickdelete	"Don't confirm when delete">
-
-<!ENTITY sb.setting.usetabs.d			"Marcar acciones para abrir en nuevas pestañas.">
-<!ENTITY sb.setting.usetabs.note		"Open Notes in Tab">
-
-<!ENTITY sb.setting.capture.utf8encode		"Convert into UTF-8 encoding (Recommend)">
-<!ENTITY sb.setting.capture.utf8encode.d	"If check off, some characters frequently garbles into '?'.">
-<!ENTITY sb.setting.capture.removescript	"Remove JavaScript (Recommend)">
-<!ENTITY sb.setting.capture.removescript.d	"If check off, many problems are caused by JavaScript.">
-
-<!ENTITY sb.highlighter.tips		"TIPS: You can highlight selection by just pressing key 1 or 2 or 3 or 4.">
-<!ENTITY sb.setting.block.style		"Style Sheet">
-
-<!ENTITY sb.button.browse			"Browse">
-<!ENTITY sb.button.show				"Show Directory">
-
-<!ENTITY sb.setting.data			"Destino para los datos guardados">
-<!ENTITY sb.setting.data.default	"Por defecto (en la carpeta de tu perfil)">
-<!ENTITY sb.setting.data.explain	"Select ScrapBook directory where to store collected data.">
-<!ENTITY sb.setting.data.alert		"Currently your ScrapBook data are stored in your Firefox 'Profile Folder'. Please note, if you select [Delete Files] when deleting the Firefox profile, All ScrapBook data will be removed.">
-<!ENTITY sb.setting.filer			"Programa para el menú 'Show Files'">
-<!ENTITY sb.setting.filer.default	"Por defecto (Si es Windows, posiblemente 'Explorer'.)">
-
+<!ENTITY sb.setting "Preferencias">
+<!ENTITY sb.setting.general "General">
+<!ENTITY sb.setting.usetabs "Abrir en pestañas">
+<!ENTITY sb.setting.advance "Avanzado">
+<!ENTITY sb.setting.capture "Capture">
+<!ENTITY sb.setting.editing "Edit">
+<!ENTITY sb.setting.program "Programs">
+<!ENTITY sb.setting.browser.submenu "Enable submenu inside the browser context menu (Change after restart)">
+<!ENTITY sb.setting.capture.detail "Mostrar diálogo 'Detalle de captura' cuando capture utilizando el método arrastrar y soltar sobre el panel lateral">
+<!ENTITY sb.setting.capture.notify "Mostrar notificación 'Captura completada' (solo en Windows)">
+<!ENTITY sb.setting.tree.singleexpand "Al expandir una carpeta del árbol, colapsar las otras carpetas (como los Favoritos del IE)">
+<!ENTITY sb.setting.tree.quickdelete "Don't confirm when delete">
+<!ENTITY sb.setting.usetabs.d "Marcar acciones para abrir en nuevas pestañas.">
+<!ENTITY sb.setting.usetabs.note "Open Notes in Tab">
+<!ENTITY sb.setting.capture.utf8encode "Convert into UTF-8 encoding (Recommend)">
+<!ENTITY sb.setting.capture.utf8encode.d "If check off, some characters frequently garbles into '?'.">
+<!ENTITY sb.setting.capture.removescript "Remove JavaScript (Recommend)">
+<!ENTITY sb.setting.capture.removescript.d "If check off, many problems are caused by JavaScript.">
+<!ENTITY sb.highlighter.tips "TIPS: You can highlight selection by just pressing key 1 or 2 or 3 or 4.">
+<!ENTITY sb.setting.block.style "Style Sheet">
+<!ENTITY sb.button.browse "Browse">
+<!ENTITY sb.button.show "Show Directory">
+<!ENTITY sb.setting.data "Destino para los datos guardados">
+<!ENTITY sb.setting.data.default "Por defecto (en la carpeta de tu perfil)">
+<!ENTITY sb.setting.data.explain "Select ScrapBook directory where to store collected data.">
+<!ENTITY sb.setting.data.alert "Currently your ScrapBook data are stored in your Firefox 'Profile Folder'. Please note, if you select [Delete Files] when deleting the Firefox profile, All ScrapBook data will be removed.">
+<!ENTITY sb.setting.multibook.enabled "Enable Multi-ScrapBook">
+<!ENTITY sb.setting.multibook.description "This enables you to set up multiple destination to store data and switch between them quickly with toolbar button.">
+<!ENTITY sb.setting.filer "Programa para el menú 'Show Files'">
+<!ENTITY sb.setting.filer.default "Por defecto (Si es Windows, posiblemente 'Explorer'.)">

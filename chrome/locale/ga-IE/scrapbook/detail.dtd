@@ -1,16 +1,13 @@
-<!ENTITY sb.detail					"Sonr&#250; Gabh&#225;ile">
-<!ENTITY sb.detail.new.folder		"Comhadlann Nua">
-<!ENTITY sb.detail.select.folder	"Roghnaigh Cohmadlann">
-
-<!ENTITY sb.detail.linked.file		"&#237;osl&#243;d&#225;il ar Chomhaid Nascaithe">
-<!ENTITY sb.detail.linked.image		"Iomh&#225;">
-<!ENTITY sb.detail.linked.sound		"Fuaim">
-<!ENTITY sb.detail.linked.movie		"Scann&#225;in">
-<!ENTITY sb.detail.linked.archive	"Cartlann">
-<!ENTITY sb.detail.linked.custom	"Saincheaptha">
-
-<!ENTITY sb.detail.linked.page			"Grinn na Gabh&#225;ile">
-<!ENTITY sb.detail.linked.page2			"Gabh&#225;il ar Leathnaigh Gr&#233;as&#225;in Nascaithe">
-<!ENTITY sb.detail.linked.page.depth	"Doimhne chun Nascanna a Lean&#250;int">
-<!ENTITY sb.detail.linked.page.text		"Tar eis Gabh&#225;il a chr&#237;ochn&#250;, nascfar gach leathanach le ch&#233;ile agus t&#243;gfar mapa-su&#237;omha.">
-
+<!ENTITY sb.detail "Sonr&#250; Gabh&#225;ile">
+<!ENTITY sb.detail.new.folder "Comhadlann Nua">
+<!ENTITY sb.detail.select.folder "Roghnaigh Cohmadlann">
+<!ENTITY sb.detail.linked.file "&#237;osl&#243;d&#225;il ar Chomhaid Nascaithe">
+<!ENTITY sb.detail.linked.image "Iomh&#225;">
+<!ENTITY sb.detail.linked.sound "Fuaim">
+<!ENTITY sb.detail.linked.movie "Scann&#225;in">
+<!ENTITY sb.detail.linked.archive "Cartlann">
+<!ENTITY sb.detail.linked.custom "Saincheaptha">
+<!ENTITY sb.detail.linked.page "Grinn na Gabh&#225;ile">
+<!ENTITY sb.detail.linked.page2 "Gabh&#225;il ar Leathnaigh Gr&#233;as&#225;in Nascaithe">
+<!ENTITY sb.detail.linked.page.depth "Doimhne chun Nascanna a Lean&#250;int">
+<!ENTITY sb.detail.linked.page.text "Tar eis Gabh&#225;il a chr&#237;ochn&#250;, nascfar gach leathanach le ch&#233;ile agus t&#243;gfar mapa-su&#237;omha.">

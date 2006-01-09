@@ -14,7 +14,7 @@ var sbBrowserOverlay = {
 	{
 		dump("sbBrowserOverlay::init\n");
 		document.getElementById("contentAreaContextMenu").addEventListener("popupshowing", sbInitContextMenu, true);
-		if ( SBcommon.getBoolPref("scrapbook.browser.submenu", false) )
+		if ( sbCommonUtils.getBoolPref("scrapbook.browser.submenu", false) )
 		{
 			document.getElementById("ScrapBookContextSubmenu").hidden = false;
 			for ( var i = 1; i <= 8; i++ )
@@ -30,8 +30,8 @@ var sbBrowserOverlay = {
 	{
 		dump("sbBrowserOverlay::refresh\n");
 		this.lastLocation = "";
-		this.editMode = SBcommon.getBoolPref("scrapbook.view.editor",  true);
-		this.infoMode = SBcommon.getBoolPref("scrapbook.view.infobar", false);
+		this.editMode = sbCommonUtils.getBoolPref("scrapbook.view.editor",  true);
+		this.infoMode = sbCommonUtils.getBoolPref("scrapbook.view.infobar", false);
 		sbDataSource.init(true);
 		sbDataSource.backup();
 	},
@@ -53,7 +53,7 @@ var sbBrowserOverlay = {
 		document.getElementById("ScrapBookInfoStatusPanel").hidden = id ? false : true;
 		if ( id )
 		{
-			this.resource = SBservice.RDF.GetResource("urn:scrapbook:item" + id);
+			this.resource = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
 			if ( this.editMode )
 				setTimeout(function(){ sbPageEditor.init(); }, 0);
 			else
@@ -84,7 +84,7 @@ var sbBrowserOverlay = {
 		{
 			this.FOLDER_POPUP.childNodes[i].hidden = true;
 			if ( i > arr.length + 2 ) continue;
-			var res = SBservice.RDF.GetResource("urn:scrapbook:item" + arr[i-2]);
+			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + arr[i-2]);
 			if ( !sbDataSource.exists(res) ) continue;
 			this.FOLDER_POPUP.childNodes[i].hidden = false;
 			this.FOLDER_POPUP.childNodes[i].id     = res.Value;
@@ -121,7 +121,7 @@ var sbBrowserOverlay = {
 	{
 		targetID = this.verifyTargetID(targetID);
 		if ( !targetID ) return;
-		var targetWindow = frameOnly ? SBcommon.getFocusedWindow() : window._content;
+		var targetWindow = frameOnly ? sbCommonUtils.getFocusedWindow() : window._content;
 		sbContentSaver.captureWindow(targetWindow, isPartial, showDetail, targetID, 0, null);
 		this.setFolderPref(targetID);
 	},

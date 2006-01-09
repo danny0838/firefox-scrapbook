@@ -20,9 +20,9 @@ var sbCalc = {
 		while ( resEnum.hasMoreElements() )
 		{
 			var res = resEnum.getNext();
-			if ( !SBservice.RDFCU.IsContainer(sbDataSource.data, res) ) this.total++;
+			if ( !sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, res) ) this.total++;
 		}
-		var dataDir = SBcommon.getScrapBookDir().clone();
+		var dataDir = sbCommonUtils.getScrapBookDir().clone();
 		dataDir.append("data");
 		this.dirEnum = dataDir.directoryEntries;
 		this.processAsync();
@@ -40,10 +40,10 @@ var sbCalc = {
 		var id = dir.leafName;
 		var bytes = sbPropUtil.getTotalFileSize(id)[0];
 		this.grandSum += bytes;
-		var res   = SBservice.RDF.GetResource("urn:scrapbook:item" + id);
+		var res   = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
 		var valid = sbDataSource.exists(res);
 		var icon  = sbDataSource.getProperty("icon", res);
-		if ( !icon ) icon = SBcommon.getDefaultIcon(sbDataSource.getProperty("type", res));
+		if ( !icon ) icon = sbCommonUtils.getDefaultIcon(sbDataSource.getProperty("type", res));
 		this.treeItems.push([
 			id,
 			sbDataSource.getProperty("type",  res),
@@ -77,7 +77,7 @@ var sbCalc = {
 
 	checkBackup : function()
 	{
-		var myDir = SBcommon.getScrapBookDir().clone();
+		var myDir = sbCommonUtils.getScrapBookDir().clone();
 		myDir.append("backup");
 		if ( !myDir.exists() ) return;
 		var count = 0;
@@ -86,7 +86,7 @@ var sbCalc = {
 		if ( count > 30 )
 		{
 			alert(this.STRING.getString("TOO_MANY_BACKUP_FILES"));
-			SBcommon.launchDirectory(myDir);
+			sbCommonUtils.launchDirectory(myDir);
 		}
 	},
 
@@ -155,14 +155,14 @@ var sbCalcControl = {
 	{
 		var id   = this.CURRENT_TREEITEM[0];
 		var type = this.CURRENT_TREEITEM[1];
-		SBcommon.loadURL(SBcommon.getURL(id, type), tabbed);
+		sbCommonUtils.loadURL(sbCommonUtils.getURL(id, type), tabbed);
 	},
 
 	remove : function()
 	{
 		var id = this.CURRENT_TREEITEM[0];
 		if ( id.length != 14 ) return;
-		if ( SBcommon.removeDirSafety(SBcommon.getContentDir(id), true) )
+		if ( sbCommonUtils.removeDirSafety(sbCommonUtils.getContentDir(id), true) )
 		{
 			sbCalc.treeItems.splice(sbCalc.TREE.currentIndex, 1);
 			sbCalc.initTree();
@@ -175,7 +175,7 @@ var sbCalcControl = {
 		switch ( key )
 		{
 			case "P" : window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome" ,id); break;
-			case "L" : SBcommon.launchDirectory(SBcommon.getContentDir(id));
+			case "L" : sbCommonUtils.launchDirectory(sbCommonUtils.getContentDir(id));
 			default  : break;
 		}
 	},

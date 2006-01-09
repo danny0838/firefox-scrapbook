@@ -1,15 +1,13 @@
-<!ENTITY sb.capture			"Сохранение">
-<!ENTITY sb.capture.abort	"Прервать">
-<!ENTITY sb.capture.start	"Старт">
-<!ENTITY sb.capture.retry	"Повтор">
-<!ENTITY sb.capture.skip	"Пропустить">
-<!ENTITY sb.capture.pause	"Пауза">
-
-<!ENTITY sb.capture.filter			"Фильтр">
-<!ENTITY sb.capture.filter.domain	"Ограничение по Домену">
-<!ENTITY sb.capture.filter.level	"Ограничение по Каталогу">
-<!ENTITY sb.capture.filter.string	"Фильтр по строке...">
-<!ENTITY sb.capture.filter.checkon	"Пометить все включенным">
-<!ENTITY sb.capture.filter.checkoff	"Пометить все выключенным">
-<!ENTITY sb.capture.filter.invert	"Инвертировать пометку">
-
+<!ENTITY sb.capture "Сохранение">
+<!ENTITY sb.capture.abort "Прервать">
+<!ENTITY sb.capture.start "Старт">
+<!ENTITY sb.capture.retry "Повтор">
+<!ENTITY sb.capture.skip "Пропустить">
+<!ENTITY sb.capture.pause "Пауза">
+<!ENTITY sb.capture.filter "Фильтр">
+<!ENTITY sb.capture.filter.domain "Ограничение по Домену">
+<!ENTITY sb.capture.filter.level "Ограничение по Каталогу">
+<!ENTITY sb.capture.filter.string "Фильтр по строке...">
+<!ENTITY sb.capture.filter.checkon "Пометить все включенным">
+<!ENTITY sb.capture.filter.checkoff "Пометить все выключенным">
+<!ENTITY sb.capture.filter.invert "Инвертировать пометку">

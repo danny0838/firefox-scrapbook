@@ -21,7 +21,7 @@ var sbRepair = {
 	initRestoreRDF : function()
 	{
 		this.treeItems = [];
-		var backupDir = SBcommon.getScrapBookDir();
+		var backupDir = sbCommonUtils.getScrapBookDir();
 		backupDir.append("backup");
 		if ( !backupDir.exists() )
 		{
@@ -49,22 +49,22 @@ var sbRepair = {
 		if ( this.TREE.currentIndex < 0 ) { this.WIZARD.rewind(); return; }
 		var fileName = this.treeItems[this.TREE.currentIndex][0];
 		if ( !fileName ) { this.WIZARD.rewind(); return; }
-		var bFile = SBcommon.getScrapBookDir();
+		var bFile = sbCommonUtils.getScrapBookDir();
 		bFile.append("backup");
 		bFile.append(fileName);
 		if ( !bFile.exists() || !bFile.isFile() ) { this.WIZARD.rewind(); return; }
 		this.WIZARD.canRewind = false;
-		var aFile = SBcommon.getScrapBookDir();
+		var aFile = sbCommonUtils.getScrapBookDir();
 		aFile.append("scrapbook.rdf");
 		try {
-			var bDir = SBcommon.getScrapBookDir();
+			var bDir = sbCommonUtils.getScrapBookDir();
 			bDir.append("backup");
-			aFile.copyTo(bDir, "scrapbook_" + SBcommon.getTimeStamp().substring(0,8) + ".rdf");
+			aFile.copyTo(bDir, "scrapbook_" + sbCommonUtils.getTimeStamp().substring(0,8) + ".rdf");
 		} catch(ex) {
 		}
 		try {
 			aFile.remove(false);
-			var aDir = SBcommon.getScrapBookDir();
+			var aDir = sbCommonUtils.getScrapBookDir();
 			bFile.copyTo(aDir, "scrapbook.rdf");
 		} catch(ex) {
 			document.getElementById("sbRepairRDF2Text").value = "ERROR: " + ex;
@@ -78,9 +78,9 @@ var sbRepair = {
 		this.WIZARD.canRewind = false;
 		this.WIZARD.getButton("finish").disabled = true;
 		sbDataSource.init();
-		var dir = SBcommon.getScrapBookDir().clone();
+		var dir = sbCommonUtils.getScrapBookDir().clone();
 		dir.append("data");
-		var baseURL = SBcommon.convertFilePathToURL(dir.path);
+		var baseURL = sbCommonUtils.convertFilePathToURL(dir.path);
 		if ( baseURL.charAt(baseURL.length - 1) != "/" ) baseURL = baseURL + "/";
 		var shouldFlush = false;
 		var i = 0;

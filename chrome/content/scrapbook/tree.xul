@@ -8,7 +8,14 @@
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
 	<!--JavaScript-->
+	<script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
+	<script type="application/x-javascript" src="chrome://global/content/nsTransferable.js" />
+	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapbook.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/tree.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/mbService.js" />
 
 	<!--keyset-->
 	<keyset id="ScrapBookGenericKeyset">
@@ -64,6 +71,16 @@
 			</rule>
 		</template>
 	</tree>
+
+	<!--Multi-ScrapBook-->
+	<toolbarbutton id="mbToolbarButton" type="menu" tooltiptext="Multi-ScrapBook" image="chrome://scrapbook/skin/tool_multibook.png" onpopupshowing="sbMultiBookService.initMenu();" hidden="true">
+		<menupopup id="mbMenuPopup">
+			<menuitem id="mbMenuItem" type="radio" hidden="true" oncommand="sbMultiBookService.change(this, false);" />
+			<menuitem id="mbMenuItemDefault" label="&mb.profileFolder;" type="radio" oncommand="sbMultiBookService.change(this, true);" />
+			<menuseparator />
+			<menuitem label="&mb.configure;..." oncommand="sbMultiBookService.config();" />
+		</menupopup>
+	</toolbarbutton>
 
 	<!--status bar-->
 	<sidebarheader id="ScrapBookStatusBar" align="center" style="padding-left:2px;">

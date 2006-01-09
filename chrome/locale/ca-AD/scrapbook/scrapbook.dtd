@@ -1,35 +1,29 @@
-<!ENTITY sb.title	"ScrapBook">
-
-<!ENTITY sb.new.folder		"Nova carpeta...">
-<!ENTITY sb.new.note		"Nova nota">
-<!ENTITY sb.toggle.all		"Expandeix/Redueix totes les carpetes">
-
-<!ENTITY sb.tools			"Eines">
-<!ENTITY sb.tools.setting	"Opcions...">
-<!ENTITY sb.tools.manage	"Gestiona l'arbre">
-<!ENTITY sb.tools.calculate	"Càlcul de la mida">
-<!ENTITY sb.tools.sorttree	"Ordena tot l'arbre">
-<!ENTITY sb.tools.directory	"Carpeta de l'ScrapBook">
-<!ENTITY sb.tools.combine	"Uneix">
-<!ENTITY sb.tools.multiple	"Captura de múltiples URLs">
-<!ENTITY sb.tools.trade		"Importa / Exporta">
-<!ENTITY sb.tools.output	"Exporta l'arbre com a HTML">
-<!ENTITY sb.tools.backup	"Còpia de seguretat comprimida">
-<!ENTITY sb.tools.repair	"Reparació d'emergència">
-<!ENTITY sb.tools.homepage	"Vés a la pàgina inicial">
-<!ENTITY sb.tools.about		"Quant a l'ScrapBook">
-
-<!ENTITY sb.search			"Cerca">
-<!ENTITY sb.search.fulltext	"Cerca a tot el text">
-<!ENTITY sb.search.all		"Totes">
-<!ENTITY sb.search.re		"Utilitza expressions regulars">
-<!ENTITY sb.search.cs		"Distingeix entre majúscules i minúscules">
-<!ENTITY sb.search.cache	"Actualitza la memòria cau per a la cerca a tot el text">
-<!ENTITY sb.search.clear	"Buida l'historial de formularis">
-<!ENTITY sb.search.days		"Filtra per dies">
-
-<!ENTITY sb.note.opentab	"Obre en una pestanya">
-<!ENTITY sb.note.close		"Tanca">
-
-<!ENTITY sb.move	"Mou a la carpeta">
-
+<!ENTITY sb.title "ScrapBook">
+<!ENTITY sb.new.folder "Nova carpeta...">
+<!ENTITY sb.new.note "Nova nota">
+<!ENTITY sb.toggle.all "Expandeix/Redueix totes les carpetes">
+<!ENTITY sb.tools "Eines">
+<!ENTITY sb.tools.setting "Opcions...">
+<!ENTITY sb.tools.manage "Gestiona l'arbre">
+<!ENTITY sb.tools.calculate "Càlcul de la mida">
+<!ENTITY sb.tools.sorttree "Ordena tot l'arbre">
+<!ENTITY sb.tools.directory "Carpeta de l'ScrapBook">
+<!ENTITY sb.tools.combine "Uneix">
+<!ENTITY sb.tools.multiple "Captura de múltiples URLs">
+<!ENTITY sb.tools.trade "Importa / Exporta">
+<!ENTITY sb.tools.output "Exporta l'arbre com a HTML">
+<!ENTITY sb.tools.backup "Còpia de seguretat comprimida">
+<!ENTITY sb.tools.repair "Reparació d'emergència">
+<!ENTITY sb.tools.homepage "Vés a la pàgina inicial">
+<!ENTITY sb.tools.about "Quant a l'ScrapBook">
+<!ENTITY sb.search "Cerca">
+<!ENTITY sb.search.fulltext "Cerca a tot el text">
+<!ENTITY sb.search.all "Totes">
+<!ENTITY sb.search.re "Utilitza expressions regulars">
+<!ENTITY sb.search.cs "Distingeix entre majúscules i minúscules">
+<!ENTITY sb.search.cache "Actualitza la memòria cau per a la cerca a tot el text">
+<!ENTITY sb.search.clear "Buida l'historial de formularis">
+<!ENTITY sb.search.days "Filtra per dies">
+<!ENTITY sb.note.opentab "Obre en una pestanya">
+<!ENTITY sb.note.close "Tanca">
+<!ENTITY sb.move "Mou a la carpeta">

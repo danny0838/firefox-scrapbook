@@ -1,18 +1,16 @@
-<!ENTITY sb.open			"Abrir">
-<!ENTITY sb.open.tab		"Abrir en pestaña">
-<!ENTITY sb.open.newtab		"Abrir en nueva pestaña">
-<!ENTITY sb.open.source		"Abrir URL de origen">
-<!ENTITY sb.show.files		"Show Files">
-<!ENTITY sb.delete			"Borrar">
-<!ENTITY sb.property		"Propiedades">
-
-<!ENTITY sb.folder.toggle	"Expandir/Colapsar">
-<!ENTITY sb.folder.openall	"Abrir todo en pestañas">
-<!ENTITY sb.folder.combine	"Open in Combined View">
-<!ENTITY sb.folder.manage	"Administrar carpeta...">
-
-<!ENTITY sb.new.folder		"Nueva carpeta...">
-<!ENTITY sb.new.note		"Nueva nota">
-
-<!ENTITY sb.sort.folder		"Sort Folder">
-
+<!ENTITY sb.open "Abrir">
+<!ENTITY sb.open.tab "Abrir en pestaña">
+<!ENTITY sb.open.newtab "Abrir en nueva pestaña">
+<!ENTITY sb.open.source "Abrir URL de origen">
+<!ENTITY sb.show.files "Show Files">
+<!ENTITY sb.delete "Borrar">
+<!ENTITY sb.property "Propiedades">
+<!ENTITY sb.folder.toggle "Expandir/Colapsar">
+<!ENTITY sb.folder.openall "Abrir todo en pestañas">
+<!ENTITY sb.folder.combine "Open in Combined View">
+<!ENTITY sb.folder.manage "Administrar carpeta...">
+<!ENTITY sb.new.folder "Nueva carpeta...">
+<!ENTITY sb.new.note "Nueva nota">
+<!ENTITY sb.sort.folder "Sort Folder">
+<!ENTITY mb.configure "Configure">
+<!ENTITY mb.profileFolder "Profile Folder">

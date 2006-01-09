@@ -1,35 +1,30 @@
-<!ENTITY sb.setting			"Asetukset">
-<!ENTITY sb.setting.general	"Yleiset">
-<!ENTITY sb.setting.usetabs	"Välilehti">
-<!ENTITY sb.setting.advance	"Muut">
-<!ENTITY sb.setting.capture	"Kaappaus">
-<!ENTITY sb.setting.editing	"Muokkaus">
-<!ENTITY sb.setting.program	"Ohjelmat">
-
-<!ENTITY sb.setting.browser.submenu		"Käytä selaimen ponnahdusvalikossa alavalikkoa (vaatii uudelleenkäynnistyksen)">
-<!ENTITY sb.setting.capture.detail		"Näytä Kaappauksen yksityiskohdat -ikkuna vedettäessä sivu sivupaneeliin">
-<!ENTITY sb.setting.capture.notify		"Näytä ilmoitus kun kaappaus on valmis (toimii vain Windowsissa)">
-<!ENTITY sb.setting.tree.singleexpand	"Laajennettaessa puunäkymässä kansion sisältö, supista muut kansiot">
-<!ENTITY sb.setting.tree.quickdelete	"Poista sivut vahvistamatta">
-
-<!ENTITY sb.setting.usetabs.d			"Valitut toiminnot avaavat uuden välilehden.">
-<!ENTITY sb.setting.usetabs.note		"Avaa muistilaput välilehdessä">
-
-<!ENTITY sb.setting.capture.utf8encode		"Muunna UTF-8 -merkistöön (suositeltua)">
-<!ENTITY sb.setting.capture.utf8encode.d	"Jos ei ole valittuna, jotkin merkit korvataan kysymysmerkeillä.">
-<!ENTITY sb.setting.capture.removescript	"Poista JavaScript (suositeltua)">
-<!ENTITY sb.setting.capture.removescript.d	"Jos ei ole valittuna, voi aiheuttaa useita ongelmia.">
-
-<!ENTITY sb.highlighter.tips		"Vinkki: Valinnan voi korostaa painamalla näppäimiä 1, 2, 3 tai 4.">
-<!ENTITY sb.setting.block.style		"Tyylitiedosto">
-
-<!ENTITY sb.button.browse			"Valitse">
-<!ENTITY sb.button.show				"Näytä kansio">
-
-<!ENTITY sb.setting.data			"Tietojen tallennuskansio">
-<!ENTITY sb.setting.data.default	"Oletus (Profiilikansio)">
-<!ENTITY sb.setting.data.explain	"Valitse kansio, johon ScrapBook tallentaa tietonsa.">
-<!ENTITY sb.setting.data.alert		"Tällä hetkellä ScrapBookin data on tallennettu Firefoxin Profiilikansioon. Huomaa, että jos poistat Firefoxin profiilin, myös kaikki Scrapbookin tiedot häviävät.">
-<!ENTITY sb.setting.filer			"Oletusohjelma &quot;Näytä tiedostot&quot; toimintoon">
-<!ENTITY sb.setting.filer.default	"Oletus (Windowsilla Explorer)">
-
+<!ENTITY sb.setting "Asetukset">
+<!ENTITY sb.setting.general "Yleiset">
+<!ENTITY sb.setting.usetabs "Välilehti">
+<!ENTITY sb.setting.advance "Muut">
+<!ENTITY sb.setting.capture "Kaappaus">
+<!ENTITY sb.setting.editing "Muokkaus">
+<!ENTITY sb.setting.program "Ohjelmat">
+<!ENTITY sb.setting.browser.submenu "Käytä selaimen ponnahdusvalikossa alavalikkoa (vaatii uudelleenkäynnistyksen)">
+<!ENTITY sb.setting.capture.detail "Näytä Kaappauksen yksityiskohdat -ikkuna vedettäessä sivu sivupaneeliin">
+<!ENTITY sb.setting.capture.notify "Näytä ilmoitus kun kaappaus on valmis (toimii vain Windowsissa)">
+<!ENTITY sb.setting.tree.singleexpand "Laajennettaessa puunäkymässä kansion sisältö, supista muut kansiot">
+<!ENTITY sb.setting.tree.quickdelete "Poista sivut vahvistamatta">
+<!ENTITY sb.setting.usetabs.d "Valitut toiminnot avaavat uuden välilehden.">
+<!ENTITY sb.setting.usetabs.note "Avaa muistilaput välilehdessä">
+<!ENTITY sb.setting.capture.utf8encode "Muunna UTF-8 -merkistöön (suositeltua)">
+<!ENTITY sb.setting.capture.utf8encode.d "Jos ei ole valittuna, jotkin merkit korvataan kysymysmerkeillä.">
+<!ENTITY sb.setting.capture.removescript "Poista JavaScript (suositeltua)">
+<!ENTITY sb.setting.capture.removescript.d "Jos ei ole valittuna, voi aiheuttaa useita ongelmia.">
+<!ENTITY sb.highlighter.tips "Vinkki: Valinnan voi korostaa painamalla näppäimiä 1, 2, 3 tai 4.">
+<!ENTITY sb.setting.block.style "Tyylitiedosto">
+<!ENTITY sb.button.browse "Valitse">
+<!ENTITY sb.button.show "Näytä kansio">
+<!ENTITY sb.setting.data "Tietojen tallennuskansio">
+<!ENTITY sb.setting.data.default "Oletus (Profiilikansio)">
+<!ENTITY sb.setting.data.explain "Valitse kansio, johon ScrapBook tallentaa tietonsa.">
+<!ENTITY sb.setting.data.alert "Tällä hetkellä ScrapBookin data on tallennettu Firefoxin Profiilikansioon. Huomaa, että jos poistat Firefoxin profiilin, myös kaikki Scrapbookin tiedot häviävät.">
+<!ENTITY sb.setting.multibook.enabled "Enable Multi-ScrapBook">
+<!ENTITY sb.setting.multibook.description "This enables you to set up multiple destination to store data and switch between them quickly with toolbar button.">
+<!ENTITY sb.setting.filer "Oletusohjelma &quot;Näytä tiedostot&quot; toimintoon">
+<!ENTITY sb.setting.filer.default "Oletus (Windowsilla Explorer)">

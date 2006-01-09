@@ -1,30 +1,26 @@
-<!ENTITY sb.editor			"Панель редактирования ScrapBook">
-<!ENTITY sb.editor.eraser	"Очитска страницы: удаление блоков">
-<!ENTITY sb.editor.undo		"Отменить">
-<!ENTITY sb.editor.restore	"Отменить все правки и вернуться к первоначальному виду">
-<!ENTITY sb.editor.save		"Зафиксировать правки">
-<!ENTITY sb.editor.comment	"Расширить поле комментария">
-<!ENTITY sb.editor.block			"Расширенный комментарий">
-<!ENTITY sb.editor.block.insert		"Расширенный комментарий после выделенного">
-<!ENTITY sb.editor.block.hide		"Спрятать расширенные комментарии">
-<!ENTITY sb.editor.inline.add		"Краткий комментарий к выделенному">
-<!ENTITY sb.editor.inline.delete	"Удалить все простые комментарии">
-<!ENTITY sb.editor.attach.file		"Присоединить файл к выделенному">
-<!ENTITY sb.editor.attach.link		"Присоединить ссылку к выделенному">
-<!ENTITY sb.editor.cutter			"Удалить выделенное">
-<!ENTITY sb.editor.remove.iframe	"Удалить все тэги IFRAME">
-<!ENTITY sb.editor.remove.script	"Удалить все тэги SCRIPT">
-
-<!ENTITY sb.highlighter				"Тип выделения">
-<!ENTITY sb.highlighter.remove		"Удалить подсветку в выделенном">
-<!ENTITY sb.highlighter.remove.all	"Удалить все цветовые пометки">
-<!ENTITY sb.customize				"Настроить">
-
-<!ENTITY sb.infobar.openSource	"Открыть исходный URL">
-<!ENTITY sb.infobar.showSitemap	"Show &sb.infobar.sitemap;">
-<!ENTITY sb.infobar.showInfobar	"Show Info Toolbar">
-<!ENTITY sb.infobar.home		"Домой">
-<!ENTITY sb.infobar.sitemap		"Карта сайта">
-
-<!ENTITY sb.locate		"Синхронизировать с деревом боковой панели">
-
+<!ENTITY sb.editor "Панель редактирования ScrapBook">
+<!ENTITY sb.editor.eraser "Очитска страницы: удаление блоков">
+<!ENTITY sb.editor.undo "Отменить">
+<!ENTITY sb.editor.restore "Отменить все правки и вернуться к первоначальному виду">
+<!ENTITY sb.editor.save "Зафиксировать правки">
+<!ENTITY sb.editor.comment "Расширить поле комментария">
+<!ENTITY sb.editor.block "Расширенный комментарий">
+<!ENTITY sb.editor.block.insert "Расширенный комментарий после выделенного">
+<!ENTITY sb.editor.block.hide "Спрятать расширенные комментарии">
+<!ENTITY sb.editor.inline.add "Краткий комментарий к выделенному">
+<!ENTITY sb.editor.inline.delete "Удалить все простые комментарии">
+<!ENTITY sb.editor.attach.file "Присоединить файл к выделенному">
+<!ENTITY sb.editor.attach.link "Присоединить ссылку к выделенному">
+<!ENTITY sb.editor.cutter "Удалить выделенное">
+<!ENTITY sb.editor.remove.iframe "Удалить все тэги IFRAME">
+<!ENTITY sb.editor.remove.script "Удалить все тэги SCRIPT">
+<!ENTITY sb.highlighter "Тип выделения">
+<!ENTITY sb.highlighter.remove "Удалить подсветку в выделенном">
+<!ENTITY sb.highlighter.remove.all "Удалить все цветовые пометки">
+<!ENTITY sb.customize "Настроить">
+<!ENTITY sb.infobar.openSource "Открыть исходный URL">
+<!ENTITY sb.infobar.showSitemap "Show &sb.infobar.sitemap;">
+<!ENTITY sb.infobar.showInfobar "Show Info Toolbar">
+<!ENTITY sb.infobar.home "Домой">
+<!ENTITY sb.infobar.sitemap "Карта сайта">
+<!ENTITY sb.locate "Синхронизировать с деревом боковой панели">

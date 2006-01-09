@@ -1,20 +1,17 @@
-<!ENTITY sb.prop.date		"Datum">
-<!ENTITY sb.prop.type		"Typ">
-<!ENTITY sb.prop.title		"Titel">
-<!ENTITY sb.prop.encode		"Kodning">
-<!ENTITY sb.prop.icon		"Ikon">
-<!ENTITY sb.prop.source		"URL">
-<!ENTITY sb.prop.comment	"Kommentar">
-<!ENTITY sb.prop.content	"Innehåll">
-<!ENTITY sb.prop.size		"Storlek">
-<!ENTITY sb.prop.id.date	"ID (Tid)">
-<!ENTITY sb.prop.folder		"Mapp">
-
-<!ENTITY sb.prop.general	"Allmän information">
-
-<!ENTITY sb.prop.icon.change	"Ändra">
-<!ENTITY sb.prop.icon.default	"Standard">
-<!ENTITY sb.prop.icon.favicon	"Välj favoriticon">
-<!ENTITY sb.prop.icon.custom	"Välj annan ikon">
-<!ENTITY sb.prop.mark			"Markera">
-
+<!ENTITY sb.prop.date "Datum">
+<!ENTITY sb.prop.type "Typ">
+<!ENTITY sb.prop.title "Titel">
+<!ENTITY sb.prop.encode "Kodning">
+<!ENTITY sb.prop.icon "Ikon">
+<!ENTITY sb.prop.source "URL">
+<!ENTITY sb.prop.comment "Kommentar">
+<!ENTITY sb.prop.content "Innehåll">
+<!ENTITY sb.prop.size "Storlek">
+<!ENTITY sb.prop.id.date "ID (Tid)">
+<!ENTITY sb.prop.folder "Mapp">
+<!ENTITY sb.prop.general "Allmän information">
+<!ENTITY sb.prop.icon.change "Ändra">
+<!ENTITY sb.prop.icon.default "Standard">
+<!ENTITY sb.prop.icon.favicon "Välj favoriticon">
+<!ENTITY sb.prop.icon.custom "Välj annan ikon">
+<!ENTITY sb.prop.mark "Markera">

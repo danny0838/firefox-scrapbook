@@ -170,12 +170,12 @@ var sbURLDetectorF = {
 			else return;
 			this.weboxBaseURL = theFile.parent.path + '\\Data\\';
 		} else {
-			theFile = SBservice.DIR.get("ProfD", Components.interfaces.nsIFile);
+			theFile = sbCommonUtils.DIR.get("ProfD", Components.interfaces.nsIFile);
 			theFile.append("bookmarks.html");
 			if ( !theFile.exists() ) return;
 		}
 		SB_clearURL();
-		this.lines = SBcommon.readFile(theFile).split("\n");
+		this.lines = sbCommonUtils.readFile(theFile).split("\n");
 		this.inspect();
 	},
 
@@ -185,7 +185,7 @@ var sbURLDetectorF = {
 		this.result += "\n";
 		if ( this.type == "W" ) {
 			if ( this.lines[this.index].match(/ LOCALFILE\=\"([^\"]+)\" /) )
-				this.result += SBcommon.convertFilePathToURL(this.weboxBaseURL + RegExp.$1);
+				this.result += sbCommonUtils.convertFilePathToURL(this.weboxBaseURL + RegExp.$1);
 		} else {
 			if ( this.lines[this.index].match(/ HREF\=\"([^\"]+)\" /) )
 				this.result += RegExp.$1;
@@ -230,7 +230,7 @@ var sbURLDetectorD = {
 			if ( aEntry.isDirectory() ) {
 				this.inspectDirectoryWithDelay(aEntry, ++this.index);
 			} else {
-				if ( aEntry.leafName.match(/\.(html|htm)$/i) ) SB_addURL(SBcommon.convertFilePathToURL(aEntry.path));
+				if ( aEntry.leafName.match(/\.(html|htm)$/i) ) SB_addURL(sbCommonUtils.convertFilePathToURL(aEntry.path));
 			}
 		}
 		if ( curIdx == this.index ) SBstatus.value = "";

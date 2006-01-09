@@ -1,20 +1,17 @@
-<!ENTITY sb.prop.date		"日時">
-<!ENTITY sb.prop.type		"形式">
-<!ENTITY sb.prop.title		"タイトル">
-<!ENTITY sb.prop.encode		"文字コード">
-<!ENTITY sb.prop.icon		"アイコン">
-<!ENTITY sb.prop.source		"URL">
-<!ENTITY sb.prop.comment	"コメント">
-<!ENTITY sb.prop.content	"本文">
-<!ENTITY sb.prop.size		"サイズ">
-<!ENTITY sb.prop.id.date	"ID（日時）">
-<!ENTITY sb.prop.folder		"フォルダ">
-
-<!ENTITY sb.prop.general	"一般情報">
-
-<!ENTITY sb.prop.icon.change	"アイコン変更">
-<!ENTITY sb.prop.icon.default	"デフォルト">
-<!ENTITY sb.prop.icon.favicon	"faviconを選択">
-<!ENTITY sb.prop.icon.custom	"ユーザーアイコンを選択">
-<!ENTITY sb.prop.mark			"マーク">
-
+<!ENTITY sb.prop.date "日時">
+<!ENTITY sb.prop.type "形式">
+<!ENTITY sb.prop.title "タイトル">
+<!ENTITY sb.prop.encode "文字コード">
+<!ENTITY sb.prop.icon "アイコン">
+<!ENTITY sb.prop.source "URL">
+<!ENTITY sb.prop.comment "コメント">
+<!ENTITY sb.prop.content "本文">
+<!ENTITY sb.prop.size "サイズ">
+<!ENTITY sb.prop.id.date "ID（日時）">
+<!ENTITY sb.prop.folder "フォルダ">
+<!ENTITY sb.prop.general "一般情報">
+<!ENTITY sb.prop.icon.change "アイコン変更">
+<!ENTITY sb.prop.icon.default "デフォルト">
+<!ENTITY sb.prop.icon.favicon "faviconを選択">
+<!ENTITY sb.prop.icon.custom "ユーザーアイコンを選択">
+<!ENTITY sb.prop.mark "マーク">

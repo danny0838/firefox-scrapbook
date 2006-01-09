@@ -1,16 +1,13 @@
-<!ENTITY sb.detail					"Archivierungsdetails">
-<!ENTITY sb.detail.new.folder		"Neuer Ordner">
-<!ENTITY sb.detail.select.folder	"Ordner auswählen">
-
-<!ENTITY sb.detail.linked.file		"Verlinkte Dateien herunterladen">
-<!ENTITY sb.detail.linked.image		"Grafiken">
-<!ENTITY sb.detail.linked.sound		"Audio">
-<!ENTITY sb.detail.linked.movie		"Filme">
-<!ENTITY sb.detail.linked.archive	"Archive">
-<!ENTITY sb.detail.linked.custom	"Benutzerdefiniert">
-
-<!ENTITY sb.detail.linked.page			"Archivierungstiefe">
-<!ENTITY sb.detail.linked.page2			"Verlinkte Seiten archivieren">
-<!ENTITY sb.detail.linked.page.depth	"Verzeichnistiefe der Links">
-<!ENTITY sb.detail.linked.page.text		"Nach Abschluss der Archivierung werden alle Seiten untereinander verlinkt und es wird eine Sitemap erstellt.">
-
+<!ENTITY sb.detail "Archivierungsdetails">
+<!ENTITY sb.detail.new.folder "Neuer Ordner">
+<!ENTITY sb.detail.select.folder "Ordner auswählen">
+<!ENTITY sb.detail.linked.file "Verlinkte Dateien herunterladen">
+<!ENTITY sb.detail.linked.image "Grafiken">
+<!ENTITY sb.detail.linked.sound "Audio">
+<!ENTITY sb.detail.linked.movie "Filme">
+<!ENTITY sb.detail.linked.archive "Archive">
+<!ENTITY sb.detail.linked.custom "Benutzerdefiniert">
+<!ENTITY sb.detail.linked.page "Archivierungstiefe">
+<!ENTITY sb.detail.linked.page2 "Verlinkte Seiten archivieren">
+<!ENTITY sb.detail.linked.page.depth "Verzeichnistiefe der Links">
+<!ENTITY sb.detail.linked.page.text "Nach Abschluss der Archivierung werden alle Seiten untereinander verlinkt und es wird eine Sitemap erstellt.">

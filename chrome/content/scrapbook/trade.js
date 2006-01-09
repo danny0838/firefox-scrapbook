@@ -19,11 +19,12 @@ function SB_trace(aStr, aColor, aBold)
 function SB_initTrade()
 {
 	SBstring   = document.getElementById("ScrapBookString");
-	SBbaseURL = SBservice.IO.newFileURI(SBcommon.getScrapBookDir()).spec;
-	SB_disablePopupMenus();
+	sbMultiBookService.showButton();
 	sbDataSource.init();
 	sbTreeHandler.init(false);
 	SB_initObservers();
+	SBbaseURL = sbCommonUtils.IO.newFileURI(sbCommonUtils.getScrapBookDir()).spec;
+	SB_disablePopupMenus();
 	SBdragDropObserver.getSupportedFlavours = function()
 	{
 		var flavours = new FlavourSet();
@@ -92,11 +93,11 @@ var sbTrader = {
 	{
 		var dirPath = nsPreferences.copyUnicharPref("scrapbook.trade.path", "");
 		if ( !dirPath ) { this.selectPath(); this.toggleLocking(true); return; }
-		this.leftDir  = SBcommon.getScrapBookDir();
+		this.leftDir  = sbCommonUtils.getScrapBookDir();
 		this.leftDir.append("data");
 		this.rightDir = this.validateDirectory(dirPath);
 		document.getElementById("ScrapBookTradePath").value = dirPath;
-		document.getElementById("ScrapBookTradeIcon").src = "moz-icon://" + SBcommon.convertFilePathToURL(dirPath) + "?size=16";
+		document.getElementById("ScrapBookTradeIcon").src = "moz-icon://" + sbCommonUtils.convertFilePathToURL(dirPath) + "?size=16";
 		sbTrader.refresh();
 	},
 
@@ -110,18 +111,18 @@ var sbTrader = {
 			var dirName = file.leafName;
 			file.append("index.dat");
 			if ( !file.exists() ) continue;
-			var item = this.parseIndexDat(SBcommon.readFile(file));
+			var item = this.parseIndexDat(sbCommonUtils.readFile(file));
 			if ( item.icon ) {
 				var icon = this.rightDir.clone();
 				icon.append(dirName);
-				item.icon = SBcommon.convertFilePathToURL(icon.path) + "/" + item.icon;
+				item.icon = sbCommonUtils.convertFilePathToURL(icon.path) + "/" + item.icon;
 			} else {
-				item.icon = SBcommon.getDefaultIcon(item.type);
+				item.icon = sbCommonUtils.getDefaultIcon(item.type);
 			}
 			this.treeItems.push([
-				SBcommon.convertStringToUTF8(item.title),
+				sbCommonUtils.convertStringToUTF8(item.title),
 				this.formateMilliSeconds(file.lastModifiedTime),
-				SBcommon.convertStringToUTF8(item.folder),
+				sbCommonUtils.convertStringToUTF8(item.folder),
 				item.id,
 				item.icon,
 				file.lastModifiedTime,
@@ -186,7 +187,7 @@ var sbTrader = {
 
 	showFolder : function()
 	{
-		SBcommon.launchDirectory(this.rightDir);
+		sbCommonUtils.launchDirectory(this.rightDir);
 	},
 
 	toggleLocking : function(willLock)
@@ -207,14 +208,14 @@ var sbTrader = {
 
 	open : function(aEvent, tabbed)
 	{
-		SBcommon.loadURL(SBcommon.convertFilePathToURL(this.rightDir.path) + this.getCurrentDirName() + "/index.html", tabbed);
+		sbCommonUtils.loadURL(sbCommonUtils.convertFilePathToURL(this.rightDir.path) + this.getCurrentDirName() + "/index.html", tabbed);
 	},
 
 	showFiles : function()
 	{
 		var dir = this.rightDir.clone();
 		dir.append(this.getCurrentDirName());
-		SBcommon.launchDirectory(dir);
+		sbCommonUtils.launchDirectory(dir);
 	},
 
 	deleteDir : function()
@@ -232,7 +233,7 @@ var sbTrader = {
 			var dir = this.rightDir.clone();
 			dir.append(dirName);
 			if ( !dir.exists() ) continue;
-			SBcommon.removeDirSafety(dir, false);
+			sbCommonUtils.removeDirSafety(dir, false);
 		}
 		this.refresh();
 	},
@@ -243,11 +244,11 @@ var sbTrader = {
 		datFile.append(this.getCurrentDirName());
 		datFile.append("index.dat");
 		if ( !datFile.exists() ) return;
-		var item = this.parseIndexDat(SBcommon.readFile(datFile));
+		var item = this.parseIndexDat(sbCommonUtils.readFile(datFile));
 		var content = "";
 		for ( var prop in item )
 		{
-			content += prop + " : " + SBcommon.convertStringToUTF8(item[prop]) + "\n";
+			content += prop + " : " + sbCommonUtils.convertStringToUTF8(item[prop]) + "\n";
 		}
 		alert(content);
 	},
@@ -365,12 +366,12 @@ var sbExportService = {
 		item.icon = item.icon.match(/\d{14}\/([^\/]+)$/) ? RegExp.$1 : "";
 		var num = 0;
 		var destDir = sbTrader.rightDir.clone();
-		var dirName = SBcommon.validateFileName(item.title).substring(0,64);
+		var dirName = sbCommonUtils.validateFileName(item.title).substring(0,64);
 		destDir.append(dirName);
 		while ( destDir.exists() && num < 256 )
 		{
 			destDir = sbTrader.rightDir.clone();
-			dirName = SBcommon.validateFileName(item.title).substring(0,60) + "-" + ++num
+			dirName = sbCommonUtils.validateFileName(item.title).substring(0,60) + "-" + ++num
 			destDir.append(dirName)
 		}
 		var srcDir = sbTrader.leftDir.clone();
@@ -388,7 +389,7 @@ var sbExportService = {
 			}
 		}
 		destDir.append("index.dat");
-		SBcommon.writeIndexDat(item, destDir);
+		sbCommonUtils.writeIndexDat(item, destDir);
 		SB_trace(sbTrader.STRING.getString("EXPORT_SUCCESS") + rate + item.title, "B");
 		sbTrader.PROGRESS.value = Math.round( this.count / this.resList.length * 100);
 	},
@@ -399,7 +400,7 @@ var sbExportService = {
 		while ( resEnum.hasMoreElements() )
 		{
 			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			if ( SBservice.RDFCU.IsContainer(sbDataSource.data, res) ) {
+			if ( sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, res) ) {
 				this.getResourcesRecursively(res);
 			} else {
 				this.resList.push(res);
@@ -483,17 +484,17 @@ var sbImportService = {
 			alert("ScrapBook ERROR: Could not find 'index.dat'.");
 			return;
 		}
-		var dat = SBcommon.readFile(datFile);
+		var dat = sbCommonUtils.readFile(datFile);
 		var item = sbTrader.parseIndexDat(dat);
 		if ( !item.id || item.id.length != 14 ) return;
 		var destDir = sbTrader.leftDir.clone();
 		if  ( item.icon )
-			item.icon = SBcommon.convertFilePathToURL(destDir.path) + item.id + "/" + item.icon;
+			item.icon = sbCommonUtils.convertFilePathToURL(destDir.path) + item.id + "/" + item.icon;
 		else
-			item.icon = SBcommon.getDefaultIcon(item.type);
-		item.title   = SBcommon.convertStringToUTF8(item.title);
-		item.folder  = SBcommon.convertStringToUTF8(item.folder);
-		item.comment = SBcommon.convertStringToUTF8(item.comment);
+			item.icon = sbCommonUtils.getDefaultIcon(item.type);
+		item.title   = sbCommonUtils.convertStringToUTF8(item.title);
+		item.folder  = sbCommonUtils.convertStringToUTF8(item.folder);
+		item.comment = sbCommonUtils.convertStringToUTF8(item.comment);
 		var num  = this.ascending ? this.count + 1 : this.idxList.length - this.count;
 		var rate = " (" + num + "/" + this.idxList.length + ") ";
 		try {
@@ -511,7 +512,7 @@ var sbImportService = {
 			}
 			else
 			{
-				var newItem = new ScrapBookItem(sbDataSource.identify(SBcommon.getTimeStamp()));
+				var newItem = new ScrapBookItem(sbDataSource.identify(sbCommonUtils.getTimeStamp()));
 				newItem.title = item.folder;
 				newItem.type = "folder";
 				var newRes = sbDataSource.addItem(newItem, "urn:scrapbook:root", 0);
@@ -535,7 +536,7 @@ var sbImportService = {
 		while ( resEnum.hasMoreElements() )
 		{
 			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			if ( res.Value != "urn:scrapbook:search" && SBservice.RDFCU.IsContainer(sbDataSource.data, res) )
+			if ( res.Value != "urn:scrapbook:search" && sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, res) )
 			{
 				this.folderTable[sbDataSource.getProperty("title", res)] = res.Value;
 			}

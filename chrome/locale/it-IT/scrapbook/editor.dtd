@@ -1,30 +1,26 @@
-<!ENTITY sb.editor			"Mostra/Nascondi la barra degli strumenti di ScrapBook per la modifica">
-<!ENTITY sb.editor.eraser	"DOM Eraser: strumento per eliminare blocchi cliccati">
-<!ENTITY sb.editor.undo		"Annulla">
-<!ENTITY sb.editor.restore	"Annulla le modifiche e ripristina">
-<!ENTITY sb.editor.save		"Salva">
-<!ENTITY sb.editor.comment	"Espandi/Contrai l'area per il commento">
-<!ENTITY sb.editor.block			"Commento del blocco">
-<!ENTITY sb.editor.block.insert		"Aggiungi il &sb.editor.block; dopo la selezione">
-<!ENTITY sb.editor.block.hide		"Nascondi commenti dei blocchi">
-<!ENTITY sb.editor.inline.add		"Aggiungi alla selezione commento in linea">
-<!ENTITY sb.editor.inline.delete	"Elimina tutti i commenti in linea">
-<!ENTITY sb.editor.attach.file		"Allega file alla selezione">
-<!ENTITY sb.editor.attach.link		"Allega link alla selezione">
-<!ENTITY sb.editor.cutter			"Elimina la selezione">
-<!ENTITY sb.editor.remove.iframe	"Elimina tutti gli IFRAME">
-<!ENTITY sb.editor.remove.script	"Elimina tutti gli SCRIPT">
-
-<!ENTITY sb.highlighter				"Evidenziazione ">
-<!ENTITY sb.highlighter.remove		"Annulla evidenziazione nella selezione">
-<!ENTITY sb.highlighter.remove.all	"Annulla tutte le evidenziazioni">
-<!ENTITY sb.customize				"Personalizza">
-
-<!ENTITY sb.infobar.openSource	"Apri indirizzo web sorgente">
-<!ENTITY sb.infobar.showSitemap	"Show &sb.infobar.sitemap;">
-<!ENTITY sb.infobar.showInfobar	"Show Info Toolbar">
-<!ENTITY sb.infobar.home		"Pagina iniziale">
-<!ENTITY sb.infobar.sitemap		"Mappa del sito">
-
-<!ENTITY sb.locate			"Sincronizza con il diagramma delle directory nel pannello">
-
+<!ENTITY sb.editor "Mostra/Nascondi la barra degli strumenti di ScrapBook per la modifica">
+<!ENTITY sb.editor.eraser "DOM Eraser: strumento per eliminare blocchi cliccati">
+<!ENTITY sb.editor.undo "Annulla">
+<!ENTITY sb.editor.restore "Annulla le modifiche e ripristina">
+<!ENTITY sb.editor.save "Salva">
+<!ENTITY sb.editor.comment "Espandi/Contrai l'area per il commento">
+<!ENTITY sb.editor.block "Commento del blocco">
+<!ENTITY sb.editor.block.insert "Aggiungi il &sb.editor.block; dopo la selezione">
+<!ENTITY sb.editor.block.hide "Nascondi commenti dei blocchi">
+<!ENTITY sb.editor.inline.add "Aggiungi alla selezione commento in linea">
+<!ENTITY sb.editor.inline.delete "Elimina tutti i commenti in linea">
+<!ENTITY sb.editor.attach.file "Allega file alla selezione">
+<!ENTITY sb.editor.attach.link "Allega link alla selezione">
+<!ENTITY sb.editor.cutter "Elimina la selezione">
+<!ENTITY sb.editor.remove.iframe "Elimina tutti gli IFRAME">
+<!ENTITY sb.editor.remove.script "Elimina tutti gli SCRIPT">
+<!ENTITY sb.highlighter "Evidenziazione ">
+<!ENTITY sb.highlighter.remove "Annulla evidenziazione nella selezione">
+<!ENTITY sb.highlighter.remove.all "Annulla tutte le evidenziazioni">
+<!ENTITY sb.customize "Personalizza">
+<!ENTITY sb.infobar.openSource "Apri indirizzo web sorgente">
+<!ENTITY sb.infobar.showSitemap "Show &sb.infobar.sitemap;">
+<!ENTITY sb.infobar.showInfobar "Show Info Toolbar">
+<!ENTITY sb.infobar.home "Pagina iniziale">
+<!ENTITY sb.infobar.sitemap "Mappa del sito">
+<!ENTITY sb.locate "Sincronizza con il diagramma delle directory nel pannello">

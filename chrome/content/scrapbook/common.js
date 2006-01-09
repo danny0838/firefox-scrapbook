@@ -13,37 +13,33 @@ function ScrapBookItem(aID)
 }
 
 
-
-const SBservice = {
-	RDF     : Components.classes['@mozilla.org/rdf/rdf-service;1'].getService(Components.interfaces.nsIRDFService),
-	RDFC    : Components.classes['@mozilla.org/rdf/container;1'].getService(Components.interfaces.nsIRDFContainer),
-	RDFCU   : Components.classes['@mozilla.org/rdf/container-utils;1'].getService(Components.interfaces.nsIRDFContainerUtils),
-	DIR     : Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties),
-	IO      : Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService),
-	UNICODE : Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter),
-	WINDOW  : Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator),
-	PROMPT  : Components.classes['@mozilla.org/embedcomp/prompt-service;1'].getService(Components.interfaces.nsIPromptService),
-	PREF    : Components.classes['@mozilla.org/preferences;1'].getService(Components.interfaces.nsIPrefBranch),
-	WM      : Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator),
-};
+var sbCommonUtils = {
 
 
+	get RDF()     { return Components.classes['@mozilla.org/rdf/rdf-service;1'].getService(Components.interfaces.nsIRDFService); },
+	get RDFC()    { return Components.classes['@mozilla.org/rdf/container;1'].getService(Components.interfaces.nsIRDFContainer); },
+	get RDFCU()   { return Components.classes['@mozilla.org/rdf/container-utils;1'].getService(Components.interfaces.nsIRDFContainerUtils); },
+	get DIR()     { return Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties); },
+	get IO()      { return Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService); },
+	get UNICODE() { return Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter); },
+	get WINDOW()  { return Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator); },
+	get PROMPT()  { return Components.classes['@mozilla.org/embedcomp/prompt-service;1'].getService(Components.interfaces.nsIPromptService); },
+	get PREF()    { return Components.classes['@mozilla.org/preferences;1'].getService(Components.interfaces.nsIPrefBranch); },
 
 
-var SBcommon = {
 
 	getScrapBookDir : function()
 	{
 		try {
-			var isDefault = SBservice.PREF.getBoolPref("scrapbook.data.default");
-			var myDir = SBservice.PREF.getComplexValue("scrapbook.data.path", Components.interfaces.nsIPrefLocalizedString).data;
+			var isDefault = this.PREF.getBoolPref("scrapbook.data.default");
+			var myDir = this.PREF.getComplexValue("scrapbook.data.path", Components.interfaces.nsIPrefLocalizedString).data;
 			myDir = this.convertPathToFile(myDir);
 		} catch(ex) {
 			isDefault = true;
 		}
 		if ( isDefault )
 		{
-			myDir = SBservice.DIR.get("ProfD", Components.interfaces.nsIFile);
+			myDir = this.DIR.get("ProfD", Components.interfaces.nsIFile);
 			myDir.append("ScrapBook");
 		}
 		if ( !myDir.exists() )
@@ -87,7 +83,7 @@ var SBcommon = {
 
 	loadURL : function(aURL, tabbed)
 	{
-		var win = SBservice.WINDOW.getMostRecentWindow("navigator:browser");
+		var win = this.WINDOW.getMostRecentWindow("navigator:browser");
 		var browser = win.document.getElementById("content");
 		if ( tabbed ) {
 			browser.selectedTab = browser.addTab(aURL);
@@ -204,8 +200,8 @@ var SBcommon = {
 		if ( aFile.exists() ) aFile.remove(false);
 		try {
 			aFile.create(aFile.NORMAL_FILE_TYPE, 0666);
-			SBservice.UNICODE.charset = aChars;
-			aContent = SBservice.UNICODE.ConvertFromUnicode(aContent);
+			this.UNICODE.charset = aChars;
+			aContent = this.UNICODE.ConvertFromUnicode(aContent);
 			var ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
 			ostream.init(aFile, 2, 0x200, false);
 			ostream.write(aContent, aContent.length);
@@ -248,8 +244,8 @@ var SBcommon = {
 	{
 		if ( !aString ) return "";
 		try {
-			SBservice.UNICODE.charset = "UTF-8";
-			aString = SBservice.UNICODE.ConvertToUnicode(aString);
+			this.UNICODE.charset = "UTF-8";
+			aString = this.UNICODE.ConvertToUnicode(aString);
 		} catch(ex) {
 			dump("scrapbook::convertStringToUTF8 " + ex + "\n");
 		}
@@ -270,7 +266,7 @@ var SBcommon = {
 	{
 		var tmpFile = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
 		tmpFile.initWithPath(aFilePath);
-		return SBservice.IO.newFileURI(tmpFile).spec;
+		return this.IO.newFileURI(tmpFile).spec;
 	},
 
 
@@ -287,7 +283,7 @@ var SBcommon = {
 		var aURL = this.convertURLToObject(aURLString);
 		if ( !aURL.schemeIs("file") ) return; 
 		try {
-			var fileHandler = SBservice.IO.getProtocolHandler("file").QueryInterface(Components.interfaces.nsIFileProtocolHandler);
+			var fileHandler = this.IO.getProtocolHandler("file").QueryInterface(Components.interfaces.nsIFileProtocolHandler);
 			return fileHandler.getFileFromURLSpec(aURLString); 
 		} catch(ex) {
 			dump("*** ScrapBook ERROR: Failed to getFileFromURLSpec: " + aURLString + "\n");
@@ -304,14 +300,14 @@ var SBcommon = {
 				aDir = aDir.QueryInterface(Components.interfaces.nsILocalFile);
 				aDir.launch();
 			} catch(ex) {
-				var aDirPath = SBservice.IO.newFileURI(aDir).spec;
+				var aDirPath = this.IO.newFileURI(aDir).spec;
 				this.loadURL(aDirPath, false);
 			}
 		}
 		else
 		{
 			try {
-				var filerPath = SBservice.PREF.getComplexValue("scrapbook.filer.path", Components.interfaces.nsIPrefLocalizedString).data;
+				var filerPath = this.PREF.getComplexValue("scrapbook.filer.path", Components.interfaces.nsIPrefLocalizedString).data;
 				this.execProgram(filerPath, [aDir.path]);
 			} catch(ex) {
 				alert(ex);
@@ -354,7 +350,7 @@ var SBcommon = {
 		if ( aType == "note") {
 			return "chrome://scrapbook/content/note.xul?id=" + aID;
 		} else {
-			return SBservice.IO.newFileURI(this.getContentDir(aID)).spec + "index.html";
+			return this.IO.newFileURI(this.getContentDir(aID)).spec + "index.html";
 		}
 	},
 
@@ -373,7 +369,7 @@ var SBcommon = {
 	getBoolPref : function(aName, aDefVal)
 	{
 		try {
-			return SBservice.PREF.getBoolPref(aName);
+			return this.PREF.getBoolPref(aName);
 		} catch(ex) {
 			return aDefVal;
 		}

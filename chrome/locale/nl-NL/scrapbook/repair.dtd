@@ -1,12 +1,10 @@
-<!ENTITY sb.repair.rdfFile			"Scrapbook.rdf herstellen">
-<!ENTITY sb.repair.rdfFile.descript	"Dit proberen als de mappenstructuur van ScrapBook plotseling verdwijnt.">
-<!ENTITY sb.repair.rdfFile.select	"Een back-upbestand selecteren voor de restauratie.">
-<!ENTITY sb.repair.rdfFile.file		"Bestand">
-<!ENTITY sb.repair.rdfFile.time		"Tijd">
-<!ENTITY sb.repair.rdfFile.size		"Grootte">
-<!ENTITY sb.repair.rdfFile.complete	"Voltooid. Firefox herstarten a.u.b.">
-
-<!ENTITY sb.repair.favicons				"Voorkeurspictogram in de mappenstructuur herstellen">
-<!ENTITY sb.repair.favicons.descript	"Dit proberen als meerdere voorkeurspictogrammen in de mappenstructuur van ScrapBook verdwijnen.">
-<!ENTITY sb.repair.favicons.complete	"Voltooid.">
-
+<!ENTITY sb.repair.rdfFile "Scrapbook.rdf herstellen">
+<!ENTITY sb.repair.rdfFile.descript "Dit proberen als de mappenstructuur van ScrapBook plotseling verdwijnt.">
+<!ENTITY sb.repair.rdfFile.select "Een back-upbestand selecteren voor de restauratie.">
+<!ENTITY sb.repair.rdfFile.file "Bestand">
+<!ENTITY sb.repair.rdfFile.time "Tijd">
+<!ENTITY sb.repair.rdfFile.size "Grootte">
+<!ENTITY sb.repair.rdfFile.complete "Voltooid. Firefox herstarten a.u.b.">
+<!ENTITY sb.repair.favicons "Voorkeurspictogram in de mappenstructuur herstellen">
+<!ENTITY sb.repair.favicons.descript "Dit proberen als meerdere voorkeurspictogrammen in de mappenstructuur van ScrapBook verdwijnen.">
+<!ENTITY sb.repair.favicons.complete "Voltooid.">

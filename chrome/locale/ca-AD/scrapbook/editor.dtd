@@ -1,30 +1,26 @@
-<!ENTITY sb.editor			"Barra d'eines d'edició de l'ScrapBook">
-<!ENTITY sb.editor.eraser	"Esborrador DOM: Una eina per a suprimir elements d'una pàgina web.">
-<!ENTITY sb.editor.undo		"Desfés">
-<!ENTITY sb.editor.restore	"Abandona els canvis i restaura">
-<!ENTITY sb.editor.save		"Desa els canvis">
-<!ENTITY sb.editor.comment	"Expandeix/Redueix l'àrea de comentaris">
-<!ENTITY sb.editor.block			"Comentari">
-<!ENTITY sb.editor.block.insert		"Afegeix un comentari després de la selecció">
-<!ENTITY sb.editor.block.hide		"Amaga els comentaris">
-<!ENTITY sb.editor.inline.add		"Afegeix una anotació a la selecció">
-<!ENTITY sb.editor.inline.delete	"Suprimeix totes les anotacions">
-<!ENTITY sb.editor.attach.file		"Adjunta un fitxer a la selecció">
-<!ENTITY sb.editor.attach.link		"Adjunta un enllaç a la selecció">
-<!ENTITY sb.editor.cutter			"Suprimeix la selecció">
-<!ENTITY sb.editor.remove.iframe	"Suprimeix totes les etiquetes IFRAME">
-<!ENTITY sb.editor.remove.script	"Suprimeix totes les etiquetes SCRIPT">
-
-<!ENTITY sb.highlighter				"Ressaltat">
-<!ENTITY sb.highlighter.remove		"Suprimeix els ressaltats de la selecció">
-<!ENTITY sb.highlighter.remove.all	"Suprimeix tots els ressaltats">
-<!ENTITY sb.customize				"Personalitza">
-
-<!ENTITY sb.infobar.openSource	"Obre l'URL font">
-<!ENTITY sb.infobar.showSitemap	"Show &sb.infobar.sitemap;">
-<!ENTITY sb.infobar.showInfobar	"Show Info Toolbar">
-<!ENTITY sb.infobar.home		"Inici">
-<!ENTITY sb.infobar.sitemap		"Mapa web">
-
-<!ENTITY sb.locate		"Locate in Sidebar Tree">
-
+<!ENTITY sb.editor "Barra d'eines d'edició de l'ScrapBook">
+<!ENTITY sb.editor.eraser "Esborrador DOM: Una eina per a suprimir elements d'una pàgina web.">
+<!ENTITY sb.editor.undo "Desfés">
+<!ENTITY sb.editor.restore "Abandona els canvis i restaura">
+<!ENTITY sb.editor.save "Desa els canvis">
+<!ENTITY sb.editor.comment "Expandeix/Redueix l'àrea de comentaris">
+<!ENTITY sb.editor.block "Comentari">
+<!ENTITY sb.editor.block.insert "Afegeix un comentari després de la selecció">
+<!ENTITY sb.editor.block.hide "Amaga els comentaris">
+<!ENTITY sb.editor.inline.add "Afegeix una anotació a la selecció">
+<!ENTITY sb.editor.inline.delete "Suprimeix totes les anotacions">
+<!ENTITY sb.editor.attach.file "Adjunta un fitxer a la selecció">
+<!ENTITY sb.editor.attach.link "Adjunta un enllaç a la selecció">
+<!ENTITY sb.editor.cutter "Suprimeix la selecció">
+<!ENTITY sb.editor.remove.iframe "Suprimeix totes les etiquetes IFRAME">
+<!ENTITY sb.editor.remove.script "Suprimeix totes les etiquetes SCRIPT">
+<!ENTITY sb.highlighter "Ressaltat">
+<!ENTITY sb.highlighter.remove "Suprimeix els ressaltats de la selecció">
+<!ENTITY sb.highlighter.remove.all "Suprimeix tots els ressaltats">
+<!ENTITY sb.customize "Personalitza">
+<!ENTITY sb.infobar.openSource "Obre l'URL font">
+<!ENTITY sb.infobar.showSitemap "Show &sb.infobar.sitemap;">
+<!ENTITY sb.infobar.showInfobar "Show Info Toolbar">
+<!ENTITY sb.infobar.home "Inici">
+<!ENTITY sb.infobar.sitemap "Mapa web">
+<!ENTITY sb.locate "Locate in Sidebar Tree">

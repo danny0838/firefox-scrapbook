@@ -1,12 +1,10 @@
-<!ENTITY sb.repair.rdfFile			"scrapbook.rdf 복원">
-<!ENTITY sb.repair.rdfFile.descript	"ScrapBook 트리가 갑자기 표시되지 않으면 이곳을 시도하십시오.">
-<!ENTITY sb.repair.rdfFile.select	"복원을 위해 백업 파일을 선택하십시오.">
-<!ENTITY sb.repair.rdfFile.file		"파일">
-<!ENTITY sb.repair.rdfFile.time		"시간">
-<!ENTITY sb.repair.rdfFile.size		"크기">
-<!ENTITY sb.repair.rdfFile.complete	"완료. Firefox를 다시 시작하여 주십시오.">
-
-<!ENTITY sb.repair.favicons				"favicon 복원">
-<!ENTITY sb.repair.favicons.descript	"ScrapBook 트리 안의 많은 favicon이 갑자기 표시되지 않으면 이곳을 시도하십시오.">
-<!ENTITY sb.repair.favicons.complete	"완료.">
-
+<!ENTITY sb.repair.rdfFile "scrapbook.rdf 복원">
+<!ENTITY sb.repair.rdfFile.descript "ScrapBook 트리가 갑자기 표시되지 않으면 이것을 시도하십시오.">
+<!ENTITY sb.repair.rdfFile.select "복원을 위해 백업 파일을 선택하십시오.">
+<!ENTITY sb.repair.rdfFile.file "파일">
+<!ENTITY sb.repair.rdfFile.time "시간">
+<!ENTITY sb.repair.rdfFile.size "크기">
+<!ENTITY sb.repair.rdfFile.complete "완료. Firefox를 다시 시작하여 주십시오.">
+<!ENTITY sb.repair.favicons "favicon 복원">
+<!ENTITY sb.repair.favicons.descript "ScrapBook 트리 안의 많은 favicon이 갑자기 표시되지 않으면 이것을 시도하십시오.">
+<!ENTITY sb.repair.favicons.complete "완료.">
