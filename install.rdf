@@ -7,14 +7,14 @@
 
 		<em:id>{53A03D43-5363-4669-8190-99061B2DEBA5}</em:id>
 		<em:name>ScrapBook</em:name>
-		<em:version>0.18.3</em:version>
+		<em:version>0.18.4</em:version>
 		<em:description>This extension helps you to save Web pages and easily manage collections.</em:description>
 		<em:creator>Gomita</em:creator>
 		<em:homepageURL>http://amb.vis.ne.jp/mozilla/scrapbook/</em:homepageURL>
 		<em:optionsURL>chrome://scrapbook/content/setting.xul</em:optionsURL>
 		<em:aboutURL>chrome://scrapbook/content/about.xul</em:aboutURL>
-		<em:iconURL>chrome://scrapbook/skin/mainicon1.png</em:iconURL>
-		<!--<em:updateURL>http://amb.vis.ne.jp/mozilla/scrapbook/update.rdf?ver=0.18.3</em:updateURL>-->
+		<em:iconURL>chrome://scrapbook/skin/main_32.png</em:iconURL>
+		<!--<em:updateURL>http://amb.vis.ne.jp/mozilla/scrapbook/update.rdf?ver=0.18.4</em:updateURL>-->
 
 		<em:file>
 			<Description about="urn:mozilla:extension:file:scrapbook.jar">
@@ -52,7 +52,6 @@
 		</em:targetApplication>
 
 		<!-- Flock -->
-<!--
 		<em:targetApplication>
 			<Description>
 				<em:id>{a463f10c-3994-11da-9945-000d60ca027b}</em:id>
@@ -60,7 +59,6 @@
 				<em:minVersion>1.0+</em:minVersion>
 			</Description>
 		</em:targetApplication>
--->
 
 	</Description>
 
