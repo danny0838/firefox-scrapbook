@@ -2,5 +2,4 @@
 <!ENTITY sb.combine.select.d "결합하고자 하는 페이지를 순서대로 더블 클릭하여 주십시오.">
 <!ENTITY sb.combine.preview "미리 보기">
 <!ENTITY sb.combine.preview.d "미리 보기를 확인하고 이상이 없으면 결합 버튼을 클릭하여 주십시오.">
-<!ENTITY sb.combine.option.header "각 페이지 선두에 정보 헤더 부가">
-<!ENTITY sb.combine.option.remove "결합 완료 후 결합된 원래의 페이지 삭제">
+<!ENTITY sb.combine.option.remove "결합 완료 후 결합된 원래의 페이지는 삭제하기">

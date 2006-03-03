@@ -1,15 +1,11 @@
-<!ENTITY sb.prop.date "Date">
-<!ENTITY sb.prop.type "Type">
-<!ENTITY sb.prop.title "Titre">
-<!ENTITY sb.prop.encode "Encodage">
-<!ENTITY sb.prop.icon "Icône">
-<!ENTITY sb.prop.source "URL">
-<!ENTITY sb.prop.comment "Commentaire">
-<!ENTITY sb.prop.content "Contenu">
-<!ENTITY sb.prop.size "Taille">
-<!ENTITY sb.prop.id.date "ID (DateHeure)">
-<!ENTITY sb.prop.folder "Dossier">
 <!ENTITY sb.prop.general "Information générale">
+<!ENTITY sb.prop.type "Type">
+<!ENTITY sb.prop.date "Date">
+<!ENTITY sb.prop.encode "Encodage">
+<!ENTITY sb.prop.size "Taille">
+<!ENTITY sb.prop.content "Contenu">
+<!ENTITY sb.prop.folder "Dossier">
+<!ENTITY sb.prop.icon "Icône">
 <!ENTITY sb.prop.icon.change "Modifier">
 <!ENTITY sb.prop.icon.default "Défaut">
 <!ENTITY sb.prop.icon.favicon "Sélectionner une favicône">

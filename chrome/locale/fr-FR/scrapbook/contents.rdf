@@ -9,7 +9,7 @@
 	</RDF:Seq>
 
 	<!--description about package-->
-	<RDF:Description about="urn:mozilla:locale:fr-FR" chrome:name="fr-FR">
+	<RDF:Description about="urn:mozilla:locale:fr-FR" chrome:name="fr-FR" chrome:author="Calimero 988">
 		<chrome:packages>
 			<RDF:Seq about="urn:mozilla:locale:fr-FR:packages">
 				<RDF:li resource="urn:mozilla:locale:fr-FR:scrapbook" />

@@ -2,6 +2,5 @@
 <!ENTITY sb.multiple.detector "URLs automatisch ermitteln">
 <!ENTITY sb.multiple.detector.plink "Alle Links innerhalb der Seite">
 <!ENTITY sb.multiple.detector.slink "Alle Links innerhalb der Auswahl">
-<!ENTITY sb.multiple.detector.tabs "Alle offenen Tabs im aktuellen Fenster">
 <!ENTITY sb.multiple.detector.local "Alle lokalen HTML-Dateien in einem Verzeichnis">
 <!ENTITY sb.multiple.detector.clear "Löschen">

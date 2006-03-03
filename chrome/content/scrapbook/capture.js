@@ -1,7 +1,4 @@
 
-
-var SBstring;
-
 var gURLs       = [];
 var gDepths     = [];
 var gRefURL     = "";
@@ -9,31 +6,73 @@ var gShowDetail = false;
 var gResName    = "";
 var gResIdx     = 0;
 var gReferItem  = null;
-var gLinked     = {};
+var gOption     = {};
 var gFile2URL   = {};
 var gURL2Name   = {};
+var gPreset     = [];
+var gContext    = "";
 
 
 
 
 function SB_trace(aMessage)
 {
-	document.getElementById("ScrapBookCaptureTextbox").value = aMessage;
+	document.getElementById("sbCaptureTextbox").value = aMessage;
 }
 
 
 function SB_initCapture()
 {
-	SBstring  = document.getElementById("ScrapBookString");
 	var myURLs  = window.arguments[0];
 	gRefURL     = window.arguments[1];
 	gShowDetail = window.arguments[2];
 	gResName    = window.arguments[3];
 	gResIdx     = window.arguments[4];
 	gReferItem  = window.arguments[5];
-	gLinked     = window.arguments[6];
+	gOption     = window.arguments[6];
 	gFile2URL   = window.arguments[7];
-	if ( gReferItem ) gURL2Name[unescape(gReferItem.source)] = "index";
+	gPreset     = window.arguments[8];
+	if ( gReferItem )
+	{
+		gContext = "indepth";
+		gURL2Name[unescape(gReferItem.source)] = "index";
+	}
+	else if ( gPreset )
+	{
+		gContext = gPreset[1] == "index" ? "renew" : "renew-deep";
+		if ( gContext == "renew-deep" )
+		{
+			var contDir = sbCommonUtils.getContentDir(gPreset[0]);
+			var file = contDir.clone();
+			file.append("sb-file2url.txt");
+			if ( !file.exists() ) { alert("ScrapBook ERROR: Could not find 'sb-file2url.txt'."); window.close(); }
+			var lines = sbCommonUtils.readFile(file).split("\n");
+			for ( var i = 0; i < lines.length; i++ )
+			{
+				var arr = lines[i].split("\t");
+				if ( arr.length == 2 ) gFile2URL[arr[0]] = arr[1];
+			}
+			file = sbCommonUtils.getContentDir(gPreset[0]).clone();
+			file.append("sb-url2name.txt");
+			if ( !file.exists() ) { alert("ScrapBook ERROR: Could not find 'sb-url2name.txt'."); window.close(); }
+			lines = sbCommonUtils.readFile(file).split("\n");
+			for ( i = 0; i < lines.length; i++ )
+			{
+				var arr = lines[i].split("\t");
+				if ( arr.length == 2 )
+				{
+					gURL2Name[arr[0]] = arr[1];
+					if ( arr[1] == gPreset[1] ) myURLs = [arr[0]];
+				}
+			}
+			gPreset[3] = gFile2URL;
+			if ( !myURLs[0] ) { alert("ScrapBook ERROR: Could not find the source URL for " + gPreset[1] + ".html."); window.close(); }
+		}
+	}
+	else gContext = "link";
+	if ( !gOption ) gOption = {};
+	if ( !("script" in gOption ) ) gOption["script"] = false;
+	if ( !("format" in gOption ) ) gOption["format"] = true;
 	sbInvisibleBrowser.init();
 	sbCaptureTask.init(myURLs);
 	if ( gURLs.length == 1 )
@@ -67,19 +106,8 @@ function SB_suggestName(aURL)
 
 function SB_fireNotification(aItem)
 {
-	try {
-		window.opener.sbContentSaver.onCaptureComplete(aItem);
-	} catch(ex) {
-		try {
-			window.opener.opener.sbContentSaver.onCaptureComplete(aItem);
-		} catch(ex) {
-			try {
-				window.opener.top.sbContentSaver.onCaptureComplete(aItem);
-			} catch(ex) {
-				dump("scrapbook::showNotify GIVE_UP_TO_FIND_WINDOW: " + ex + "\n");
-			}
-		}
-	}
+	var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
+	win.sbCaptureObserverCallback.onCaptureComplete(aItem);
 }
 
 
@@ -88,7 +116,8 @@ function SB_fireNotification(aItem)
 var sbCaptureTask = {
 
 	get INTERVAL() { return 3; },
-	get LISTBOX()  { return document.getElementById("ScrapBookCaptureListbox"); },
+	get LISTBOX()  { return document.getElementById("sbCaptureListbox"); },
+	get STRING()   { return document.getElementById("sbCaptureString"); },
 	get URL()      { return gURLs[this.index]; },
 
 	index       : 0,
@@ -102,20 +131,19 @@ var sbCaptureTask = {
 
 	init : function(myURLs)
 	{
-		dump("sbCaptureTask::init\n");
-		if ( !gReferItem && myURLs.length == 1 )
+		if ( gContext != "indepth" && myURLs.length == 1 )
 		{
 			this.LISTBOX.collapsed = true;
 			this.LISTBOX.setAttribute("class", "plain");
-			document.getElementById("ScrapBookCaptureSkipButton").hidden = true;
+			document.getElementById("sbCaptureSkipButton").hidden = true;
 		}
 		else
 		{
 			this.LISTBOX.setAttribute("rows", 10);
 		}
-		if ( gReferItem )
+		if ( gContext == "indepth" )
 		{
-			var button = document.getElementById("ScrapBookCaptureFilterButton");
+			var button = document.getElementById("sbCaptureFilterButton");
 			button.hidden = false;
 			button.nextSibling.hidden = false;
 			button.firstChild.firstChild.label += " (" + sbCommonUtils.getRootHref(gReferItem.source) + ")" ;
@@ -128,17 +156,15 @@ var sbCaptureTask = {
 	{
 		if ( gURLs.length > 1000 ) return;
 		if ( !aURL.match(/^(http|https|ftp|file):\/\//i) ) return;
-		if ( gReferItem )
+		if ( gContext == "indepth" )
 		{
-			if ( aDepth > gLinked.depth ) {
-				dump("sbCaptureTask::add PREVENT_INVALID_DEPTH\n");
+			if ( aDepth > gOption["inDepth"] ) {
 				return;
 			}
 			aURL = SB_splitByAnchor(aURL)[0];
-			if ( !gLinked.isPartial && aURL == gReferItem.source ) return;
+			if ( !gOption["isPartial"] && aURL == gReferItem.source ) return;
 			for ( var i = 0; i < gURLs.length; i++ ) if ( aURL == gURLs[i] ) return;
 		}
-		dump("sbCaptureTask::add(DEPTH=" + aDepth + ", URL=" + aURL + ")\n");
 		gURLs.push(aURL);
 		gDepths.push(aDepth);
 		var listitem = document.createElement("listitem");
@@ -150,26 +176,24 @@ var sbCaptureTask = {
 
 	start : function()
 	{
-		dump("sbCaptureTask::start\t[" + this.index + "]\n");
 		this.seconds = -1;
 		this.toggleStartPause(true);
 		this.toggleSkipButton(true);
 		this.LISTBOX.getItemAtIndex(this.index).setAttribute("indicated", true);
-		if ( this.index > 0  ) this.LISTBOX.getItemAtIndex(this.index - 1).removeAttribute("indicated");
+		if ( this.index > 0 ) this.LISTBOX.getItemAtIndex(this.index - 1).removeAttribute("indicated");
 		this.LISTBOX.ensureIndexIsVisible(this.index);
 		var listitem = this.LISTBOX.getItemAtIndex(this.index);
 		listitem.setAttribute("disabled", true);
 		if ( !listitem.checked )
 		{
-			dump("sbCaptureTask::start SKIP_UNCHECKED [" + this.index + "]\n");
 			this.next(true);
 			return;
 		}
 		this.contentType = "";
 		this.isDocument = true;
 		this.canRefresh = true;
-		SB_trace(SBstring.getString("CONNECT") + "... " + gURLs[this.index]);
-		if ( gURLs[this.index].substring(0,7) == "file://" ) {
+		SB_trace(this.STRING.getString("CONNECT") + "... " + gURLs[this.index]);
+		if ( gURLs[this.index].indexOf("file://") == 0 ) {
 			sbInvisibleBrowser.load(gURLs[this.index]);
 		} else {
 			this.sniffer = new sbHeaderSniffer(gURLs[this.index], gRefURL);
@@ -179,14 +203,12 @@ var sbCaptureTask = {
 
 	succeed : function()
 	{
-		dump("sbCaptureTask::succeed\t[" + this.index + "]\n");
 		this.LISTBOX.getItemAtIndex(this.index).setAttribute("status", "succeed");
 		this.next(false);
 	},
 
 	fail : function(aErrorMsg)
 	{
-		dump("sbCaptureTask::fail\t[" + this.index + "]\n");
 		if ( aErrorMsg ) SB_trace(aErrorMsg);
 		var listitem = this.LISTBOX.getItemAtIndex(this.index);
 		listitem.setAttribute("label", gDepths[this.index] + " [" + this.index + "] " + aErrorMsg);
@@ -200,7 +222,6 @@ var sbCaptureTask = {
 
 	next : function(quickly)
 	{
-		dump("sbCaptureTask::next\t[" + this.index + "]\n");
 		this.toggleStartPause(true);
 		this.toggleSkipButton(false);
 		this.LISTBOX.getItemAtIndex(this.index).setAttribute("disabled", true);
@@ -221,8 +242,7 @@ var sbCaptureTask = {
 
 	countDown : function()
 	{
-		dump("sbCaptureTask::countDown " + this.seconds + "\n");
-		SB_trace(SBstring.getFormattedString("WAITING", [sbCaptureTask.seconds]) + "...");
+		SB_trace(this.STRING.getFormattedString("WAITING", [sbCaptureTask.seconds]) + "...");
 		if ( --this.seconds > 0 )
 			this.timerID = window.setTimeout(function(){ sbCaptureTask.countDown(); }, 1000);
 		else
@@ -231,33 +251,28 @@ var sbCaptureTask = {
 
 	finalize : function()
 	{
-		dump("sbCaptureTask::finalize\n");
-		if ( !gReferItem )
+		if ( gContext == "indepth" )
 		{
-			if ( gURLs.length > 1 ) SB_fireNotification(null);
-			window.setTimeout(function(){ window.close(); }, 1000);
+			sbCrossLinker.invoke();
 		}
 		else
 		{
-			sbCrossLinker.invoke();
+			if ( gURLs.length > 1 ) SB_fireNotification(null);
+			window.setTimeout(function(){ window.close(); }, 1000);
 		}
 	},
 
 	activate : function()
 	{
-		dump("sbCaptureTask::activate\n");
 		this.toggleStartPause(true);
-		if ( this.seconds < 0 ) {
-			sbInvisibleBrowser.fileCount = 0;
-			sbInvisibleBrowser.ELEMENT.reload();
-		} else {
+		if ( this.seconds < 0 )
+			sbCaptureTask.start();
+		else
 			this.countDown();
-		}
 	},
 
 	pause : function()
 	{
-		dump("sbCaptureTask::pause " + this.seconds + "\n");
 		this.toggleStartPause(false);
 		if ( this.seconds < 0 ) {
 			sbInvisibleBrowser.ELEMENT.stop();
@@ -269,23 +284,22 @@ var sbCaptureTask = {
 
 	abort : function()
 	{
-		dump("sbCaptureTask::abort\n");
-		if ( !gReferItem ) window.close();
+		if ( gContext != "indepth" ) window.close();
 		if ( ++this.forceExit > 2 ) window.close();
 		if ( this.index < gURLs.length - 1 ) { this.index = gURLs.length - 1; this.next(); }
 	},
 
 	toggleStartPause : function(allowPause)
 	{
-		document.getElementById("ScrapBookCapturePauseButton").disabled = false;
-		document.getElementById("ScrapBookCapturePauseButton").hidden = !allowPause;
-		document.getElementById("ScrapBookCaptureStartButton").hidden =  allowPause;
-		document.getElementById("ScrapBookCaptureTextbox").disabled   = !allowPause;
+		document.getElementById("sbCapturePauseButton").disabled = false;
+		document.getElementById("sbCapturePauseButton").hidden = !allowPause;
+		document.getElementById("sbCaptureStartButton").hidden =  allowPause;
+		document.getElementById("sbCaptureTextbox").disabled   = !allowPause;
 	},
 
 	toggleSkipButton : function(willEnable)
 	{
-		document.getElementById("ScrapBookCaptureSkipButton").disabled = !willEnable;
+		document.getElementById("sbCaptureSkipButton").disabled = !willEnable;
 	},
 
 	filter : function(i)
@@ -301,7 +315,7 @@ var sbCaptureTask = {
 			case "L" : var ref = sbCommonUtils.getBaseHref(gReferItem.source).toLowerCase(); this.filter = function(i){ return gURLs[i].toLowerCase().indexOf(ref) == 0; }; break;
 			case "S" : 
 				var ret = { value : "" };
-				if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", SBstring.getString("FILTER_BY_STRING"), ret, null, {}) ) return;
+				if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", this.STRING.getString("FILTER_BY_STRING"), ret, null, {}) ) return;
 				if ( ret.value ) this.filter = function(i){ return gURLs[i].toLowerCase().indexOf(ret.value.toLowerCase()) != -1; };
 				break;
 			case "N" : this.filter = function(i){ return true;  }; break;
@@ -322,14 +336,13 @@ var sbCaptureTask = {
 
 var sbInvisibleBrowser = {
 
-	get ELEMENT() { return document.getElementById("ScrapBookCaptureBrowser"); },
+	get ELEMENT() { return document.getElementById("sbCaptureBrowser"); },
 
 	fileCount : 0,
 	onload    : null,
 
 	init : function()
 	{
-		dump("sbInvisibleBrowser::init\n");
 		this.ELEMENT.webProgress.addProgressListener(this, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
 		this.onload = function(){ sbInvisibleBrowser.execCapture(); };
 		this.ELEMENT.addEventListener("load", sbInvisibleBrowser.onload, true);
@@ -344,9 +357,9 @@ var sbInvisibleBrowser = {
 
 	load : function(aURL)
 	{
-		dump("sbInvisibleBrowser::load\t" + aURL + "\n");
 		this.fileCount = 0;
-		this.ELEMENT.docShell.allowJavascript = false;
+		this.ELEMENT.docShell.allowJavascript = gOption["script"];
+		this.ELEMENT.docShell.allowImages     = gOption["format"];
 		this.ELEMENT.docShell.allowMetaRedirects = false;
 		this.ELEMENT.docShell.QueryInterface(Components.interfaces.nsIDocShellHistory).useGlobalHistory = false;
 		this.ELEMENT.loadURI(aURL, null, null);
@@ -354,12 +367,12 @@ var sbInvisibleBrowser = {
 
 	execCapture : function()
 	{
-		dump("sbInvisibleBrowser::execCapture\n");
-		SB_trace(SBstring.getString("CAPTURE_START"));
-		document.getElementById("ScrapBookCapturePauseButton").disabled = true;
+		SB_trace(sbCaptureTask.STRING.getString("CAPTURE_START"));
+		document.getElementById("sbCapturePauseButton").disabled = true;
 		sbCaptureTask.toggleSkipButton(false);
 		var ret = null;
-		var preset = gReferItem ? [gReferItem.id, SB_suggestName(sbCaptureTask.URL), gLinked, gFile2URL, gDepths[sbCaptureTask.index]] : null;
+		var preset = gReferItem ? [gReferItem.id, SB_suggestName(sbCaptureTask.URL), gOption, gFile2URL, gDepths[sbCaptureTask.index]] : null;
+		if ( gPreset ) preset = gPreset;
 		if ( this.ELEMENT.contentDocument.body && sbCaptureTask.isDocument )
 		{
 			var metaElems = this.ELEMENT.contentDocument.getElementsByTagName("meta");
@@ -379,26 +392,35 @@ var sbInvisibleBrowser = {
 					}
 				}
 			}
-			ret = sbContentSaver.captureWindow(this.ELEMENT.contentWindow, false, gShowDetail, gResName, gResIdx, preset);
+			ret = sbContentSaver.captureWindow(this.ELEMENT.contentWindow, false, gShowDetail, gResName, gResIdx, preset, gContext);
 		}
 		else
 		{
 			var type = sbCaptureTask.contentType.match(/image/i) ? "image" : "file";
-			ret = sbContentSaver.captureFile(sbCaptureTask.URL, gRefURL ? gRefURL : sbCaptureTask.URL, type, gShowDetail, gResName, gResIdx, preset);
+			ret = sbContentSaver.captureFile(sbCaptureTask.URL, gRefURL ? gRefURL : sbCaptureTask.URL, type, gShowDetail, gResName, gResIdx, preset, gContext);
 		}
 		if ( ret )
 		{
-			dump("sbInvisibleBrowser::execCapture SUCCESS\n");
-			if ( gReferItem )
+			if ( gContext == "indepth" )
 			{
 				gURL2Name[unescape(sbCaptureTask.URL)] = ret[0];
 				gFile2URL = ret[1];
 			}
+			else if ( gContext == "renew-deep" )
+			{
+				gFile2URL = ret[1];
+				var contDir = sbCommonUtils.getContentDir(gPreset[0]);
+				var txtFile = contDir.clone();
+				txtFile.append("sb-file2url.txt");
+				var txt = "";
+				for ( var f in gFile2URL ) txt += f + "\t" + gFile2URL[f] + "\n";
+				sbCommonUtils.writeFile(txtFile, txt, "UTF-8");
+			}
 		}
 		else
 		{
-			dump("sbInvisibleBrowser::execCapture FAILURE\n");
-			SB_trace(SBstring.getString("CAPTURE_ABORT"));
+			if ( gShowDetail ) window.close();
+			SB_trace(sbCaptureTask.STRING.getString("CAPTURE_ABORT"));
 			sbCaptureTask.fail("");
 		}
 	},
@@ -417,7 +439,7 @@ var sbInvisibleBrowser = {
 	{
 		if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
 		{
-			SB_trace(SBstring.getString("LOADING") + "... " + (++this.fileCount) + " " + sbCaptureTask.URL);
+			SB_trace(sbCaptureTask.STRING.getString("LOADING") + "... " + (++this.fileCount) + " " + (sbCaptureTask.URL ? sbCaptureTask.URL : this.ELEMENT.contentDocument.title));
 		}
 	},
 
@@ -425,7 +447,7 @@ var sbInvisibleBrowser = {
 	{
 		if ( aCurTotalProgress != aMaxTotalProgress )
 		{
-			SB_trace(SBstring.getString("TRANSFER_DATA") + "... (" + aCurTotalProgress + " Bytes)");
+			SB_trace(sbCaptureTask.STRING.getString("TRANSFER_DATA") + "... (" + aCurTotalProgress + " Bytes)");
 		}
 	},
 
@@ -440,7 +462,7 @@ var sbInvisibleBrowser = {
 
 var sbCrossLinker = {
 
-	get ELEMENT(){ return document.getElementById("ScrapBookCaptureBrowser"); },
+	get ELEMENT(){ return document.getElementById("sbCaptureBrowser"); },
 
 	index    : -1,
 	baseURL  : "",
@@ -453,7 +475,7 @@ var sbCrossLinker = {
 	invoke : function()
 	{
 		if ( !sbDataSource.data ) sbDataSource.init();
-		sbDataSource.updateItem(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gReferItem.id), "type", "site");
+		sbDataSource.setProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gReferItem.id), "type", "site");
 		sbDataSource.flush();
 		sbInvisibleBrowser.refreshEvent(function(){ sbCrossLinker.exec(); });
 		this.ELEMENT.docShell.allowImages = false;
@@ -461,7 +483,7 @@ var sbCrossLinker = {
 		{
 			if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
 			{
-				SB_trace(SBstring.getFormattedString("REBUILD_LINKS", [sbCrossLinker.index + 1, sbCrossLinker.nameList.length]) + "... "
+				SB_trace(sbCaptureTask.STRING.getFormattedString("REBUILD_LINKS", [sbCrossLinker.index + 1, sbCrossLinker.nameList.length]) + "... "
 					+ ++sbInvisibleBrowser.fileCount + " : " + sbCrossLinker.nameList[sbCrossLinker.index] + ".html");
 			}
 		};
@@ -480,12 +502,13 @@ var sbCrossLinker = {
 	{
 		if ( ++this.index < this.nameList.length )
 		{
+			dump("sbCrossLinker::start [" + this.index + "] " + this.nameList[this.index] + "\n");
 			sbInvisibleBrowser.fileCount = 0;
 			this.ELEMENT.loadURI(this.baseURL + this.nameList[this.index] + ".html", null, null);
 		}
 		else
 		{
-			SB_trace(SBstring.getString("REBUILD_LINKS_COMPLETE"));
+			SB_trace(sbCaptureTask.STRING.getString("REBUILD_LINKS_COMPLETE"));
 			this.flushXML();
 			SB_fireNotification(gReferItem);
 			window.setTimeout(function(){ window.close(); }, 1000);
@@ -494,7 +517,7 @@ var sbCrossLinker = {
 
 	exec : function()
 	{
-		if ( this.ELEMENT.currentURI.spec.indexOf("file://") != 0 )
+		if ( this.ELEMENT.currentURI.scheme != "file" )
 		{
 			return;
 		}
@@ -522,6 +545,7 @@ var sbCrossLinker = {
 				{
 					var name = gURL2Name[urlLR[0]];
 					linkList[i].href = name + ".html" + urlLR[1];
+					linkList[i].setAttribute("indepth", "true");
 					if ( !this.nodeHash[name] )
 					{
 						var text = linkList[i].text ? linkList[i].text.replace(/\r|\n|\t/g, " ") : "";
@@ -544,24 +568,13 @@ var sbCrossLinker = {
 				sbCommonUtils.writeFile(file, src, doc.characterSet);
 			}
 		}
-		try {
-			var nodes = window.opener.gBrowser.mTabContainer.childNodes;
-			for ( var i = 0; i < nodes.length; i++ )
-			{
-				var curURI = window.opener.gBrowser.getBrowserForTab(nodes[i]).currentURI.spec;
-				if ( curURI.match(gReferItem.id) && curURI.match(this.nameList[this.index] + ".html") )
-				{
-					window.opener.gBrowser.getBrowserForTab(nodes[i]).reload();
-				}
-			}
-		} catch(ex) {
-		}
+		this.forceReloading(gReferItem.id, this.nameList[this.index]);
 		this.start();
 	},
 
 	createNode : function(aName, aText)
 	{
-		if ( aText.length > 100 ) aText = aText.substring(0,100) + "...";
+		aText = sbCommonUtils.crop(aText, 100);
 		var node = this.XML.createElement("page");
 		node.setAttribute("file", aName + ".html");
 		node.setAttribute("text", sbDataSource.sanitize(aText));
@@ -596,6 +609,23 @@ var sbCrossLinker = {
 		sbCommonUtils.writeFile(txtFile2, txt, "UTF-8");
 	},
 
+	forceReloading : function(aID, aName)
+	{
+		try {
+			var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
+			var nodes = win.gBrowser.mTabContainer.childNodes;
+			for ( var i = 0; i < nodes.length; i++ )
+			{
+				var uri = win.gBrowser.getBrowserForTab(nodes[i]).currentURI.spec;
+				if ( uri.indexOf("/data/" + aID + "/" + aName + ".html") > 0 )
+				{
+					win.gBrowser.getBrowserForTab(nodes[i]).reload();
+				}
+			}
+		} catch(ex) {
+		}
+	},
+
 };
 
 
@@ -616,7 +646,6 @@ sbHeaderSniffer.prototype = {
 
 	httpHead : function()
 	{
-		dump("sbHeaderSniffer::httpHead\t" + this.URLSpec + "\n");
 		this._channel = null;
 		this._headers = {};
 		try {
@@ -625,29 +654,25 @@ sbHeaderSniffer.prototype = {
 			this._channel.loadFlags = this._channel.LOAD_BYPASS_CACHE;
 			this._channel.setRequestHeader("User-Agent", navigator.userAgent, false);
 			if ( this.refURLSpec ) this._channel.setRequestHeader("Referer", this.refURLSpec, false);
-		}
-		catch(ex) {
+		} catch(ex) {
 			this.onHttpError("Invalid URL");
 		}
 		try {
 			this._channel.requestMethod = "HEAD";
 			this._channel.asyncOpen(this, this);
-		}
-		catch(ex) {
+		} catch(ex) {
 			this.onHttpError(ex);
 		}
 	},
 
 	getHeader : function(aHeader)
 	{
-	 	try { return this._channel.getResponseHeader(aHeader); } catch(ex) {}
-		return "";
+	 	try { return this._channel.getResponseHeader(aHeader); } catch(ex) { return ""; }
 	},
 
 	getStatus : function()
 	{
-		try { return this._channel.responseStatus; } catch(ex) {}
-		return "";
+		try { return this._channel.responseStatus; } catch(ex) { return ""; }
 	},
 
 	visitHeader : function(aHeader, aValue)
@@ -663,32 +688,34 @@ sbHeaderSniffer.prototype = {
 	{
 		sbCaptureTask.contentType = this.getHeader("Content-Type");
 		var httpStatus = this.getStatus();
-		dump("sbHeaderSniffer::onHttpSuccess CONTENT_TYPE = " + sbCaptureTask.contentType + "\n");
-		dump("sbHeaderSniffer::onHttpSuccess HTTP_STATUS  = " + httpStatus + "\n");
-		SB_trace(SBstring.getString("CONNECT_SUCCESS") + " (Content-Type: " + sbCaptureTask.contentType + ")");
+		SB_trace(sbCaptureTask.STRING.getString("CONNECT_SUCCESS") + " (Content-Type: " + sbCaptureTask.contentType + ")");
 		switch ( httpStatus )
 		{
-			case 404 : sbCaptureTask.fail(SBstring.getString("HTTP_STATUS_404") + " (404 Not Found)"); return;
-			case 403 : sbCaptureTask.fail(SBstring.getString("HTTP_STATUS_403") + " (403 Forbidden)"); return;
+			case 404 : sbCaptureTask.fail(sbCaptureTask.STRING.getString("HTTP_STATUS_404") + " (404 Not Found)"); return;
+			case 403 : sbCaptureTask.fail(sbCaptureTask.STRING.getString("HTTP_STATUS_403") + " (403 Forbidden)"); return;
 			case 500 : sbCaptureTask.fail("500 Internal Server Error"); return;
+		}
+		var redirectURL = this.getHeader("Location");
+		if ( redirectURL )
+		{
+			if ( redirectURL.indexOf("http") != 0 ) redirectURL = this._URL.resolve(redirectURL);
+			gURLs[sbCaptureTask.index] = redirectURL;
+			sbCaptureTask.start();
+			return;
 		}
 		if ( !sbCaptureTask.contentType )
 		{
-			dump("sbHeaderSniffer::onHttpSuccess\tCONTENT_TYPE_UNKNOWN\n");
-			sbCaptureTask.fail(SBstring.getString("CONTENT_TYPE_FAILURE")); return;
+			sbCaptureTask.contentType = "text/html";
 		}
 		if ( sbCaptureTask.contentType.match(/(text|html|xml)/i) )
 		{
-			dump("sbHeaderSniffer::onHttpSuccess\t" + this.URLSpec + " [PAGE]\n");
 			sbCaptureTask.isDocument = true;
 			sbInvisibleBrowser.load(this.URLSpec);
 		}
 		else
 		{
-			dump("sbHeaderSniffer::onHttpSuccess\t" + this.URLSpec + " [FILE]\n");
 			sbCaptureTask.isDocument = false;
-			if ( gReferItem ) {
-				dump("sbHeaderSniffer::onHttpSuccess\tLIMIT_TO_WEB_PAGE\n");
+			if ( gContext == "indepth" ) {
 				sbCaptureTask.next(true);
 			} else {
 				sbInvisibleBrowser.execCapture();
@@ -698,8 +725,7 @@ sbHeaderSniffer.prototype = {
 
 	onHttpError : function(aErrorMsg)
 	{
-		dump("sbHeaderSniffer::onHttpError\n");
-		sbCaptureTask.fail(SBstring.getString("CONNECT_FAILURE") + " (" + aErrorMsg + ")");
+		sbCaptureTask.fail(sbCaptureTask.STRING.getString("CONNECT_FAILURE") + " (" + aErrorMsg + ")");
 	},
 
 };
@@ -707,29 +733,39 @@ sbHeaderSniffer.prototype = {
 
 
 
-sbContentSaver.onCaptureComplete = function(aItem)
-{
-	dump("sbContentSaver::onCaptureComplete(" + (aItem ? aItem.id : "") + ") [OVERRIDE capture.js]\n");
-	SB_trace(SBstring.getString("CAPTURE_COMPLETE") + " : " + aItem.title);
-	if ( !gReferItem && gURLs.length == 1 ) SB_fireNotification(aItem);
-	sbCaptureTask.succeed();
-}
-
-
-sbDownloadProgressCallback = {
+sbCaptureObserverCallback = {
 
 	onDownloadComplete : function(aItem)
 	{
-		SB_trace(SBstring.getString("CAPTURE") + "... (" + sbContentSaver.httpTask[aItem.id] + ") " + aItem.title);
+		SB_trace(sbCaptureTask.STRING.getString("CAPTURE") + "... (" + sbContentSaver.httpTask[aItem.id] + ") " + aItem.title);
 	},
+
 	onAllDownloadsComplete : function(aItem)
 	{
-		sbContentSaver.onCaptureComplete(aItem);
+		this.onCaptureComplete(aItem);
 	},
+
 	onDownloadProgress : function(aItem, aFileName, aProgress)
 	{
-		SB_trace(SBstring.getString("TRANSFER_DATA") + "... (" + sbContentSaver.httpTask[aItem.id] + ") " + aProgress + " : " + aFileName);
+		SB_trace(sbCaptureTask.STRING.getString("TRANSFER_DATA") + "... (" + sbContentSaver.httpTask[aItem.id] + ") " + aProgress + " : " + aFileName);
 	},
+
+	onCaptureComplete : function(aItem)
+	{
+		SB_trace(sbCaptureTask.STRING.getString("CAPTURE_COMPLETE") + " : " + aItem.title);
+		if ( gContext != "indepth" && gURLs.length == 1 ) SB_fireNotification(aItem);
+		if ( gContext == "renew" || gContext == "renew-deep" )
+		{
+			sbCrossLinker.forceReloading(gPreset[0], gPreset[1]);
+			if ( gPreset[5] )
+			{
+				sbDataSource.init();
+				sbDataSource.setProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gPreset[0]), "type", "");
+			}
+		}
+		sbCaptureTask.succeed();
+	},
+
 };
 
 

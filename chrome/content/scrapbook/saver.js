@@ -7,14 +7,13 @@ var sbContentSaver = {
 	contentDir   : null,
 	httpTask     : {},
 	file2URL     : {},
-	linked       : {},
+	option       : {},
 	refURLObj    : null,
 	favicon      : null,
 	frameList    : null,
 	frameNumber  : 0,
 	selection    : null,
 	linkURLs     : [],
-	boolPref     : [],
 
 
 	getFrameList : function(aWindow)
@@ -31,33 +30,30 @@ var sbContentSaver = {
 		this.item = new ScrapBookItem(sbDataSource.identify(sbCommonUtils.getTimeStamp()));
 		this.name = "index";
 		this.favicon = null;
-		this.file2URL = { "index.html" : true, "index.css" : true, "index.dat" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
-		this.linked   = { image : false, sound : false, movie : false, archive : false, custom : "", depth : 0, isPartial : false };
+		this.file2URL = { "index.html" : true, "index.css" : true, "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
+		this.option   = { "image" : false, "sound" : false, "movie" : false, "archive" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "format" : true, "script" : false };
 		this.linkURLs = [];
 		this.frameList   = [];
 		this.frameNumber = 0;
 		if ( aPresetData )
 		{
-			dump("sbContentSaver::init OVERWRITE_PRESET_DATA\t" + aPresetData + "\n");
 			if ( aPresetData[0] ) this.item.id  = aPresetData[0];
 			if ( aPresetData[1] ) this.name     = aPresetData[1];
-			if ( aPresetData[2] ) this.linked   = aPresetData[2];
+			if ( aPresetData[2] ) this.option   = aPresetData[2];
 			if ( aPresetData[3] ) this.file2URL = aPresetData[3];
-			if ( aPresetData[4] >= this.linked.depth ) this.linked.depth = 0;
+			if ( aPresetData[4] >= this.option["inDepth"] ) this.option["inDepth"] = 0;
 		}
+		this.option["encodeUTF8"] = sbCommonUtils.getBoolPref("scrapbook.capture.encodeUTF8", true);
 		this.httpTask[this.item.id] = 0;
-		this.boolPref["UTF8ENCODE"]   = sbCommonUtils.getBoolPref("scrapbook.capture.utf8encode",   true);
-		this.boolPref["REMOVESCRIPT"] = sbCommonUtils.getBoolPref("scrapbook.capture.removescript", true);
 	},
 
-	captureWindow : function(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData)
+	captureWindow : function(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData, aContext)
 	{
-		dump("\n\n/* ::::: " + new Date() + " ::::: */\n\n");
 		if ( !sbDataSource.data ) sbDataSource.init();
 		this.init(aPresetData);
 		this.item.chars  = aRootWindow.document.characterSet;
 		this.item.source = aRootWindow.location.href;
-		try { this.item.icon = document.getElementById("content").selectedTab.getAttribute("image"); } catch(ex) {}
+		try { this.item.icon = gBrowser.selectedTab.getAttribute("image"); } catch(ex) {}
 
 		this.getFrameList(aRootWindow);
 
@@ -82,7 +78,7 @@ var sbContentSaver = {
 
 		if ( aShowDetail )
 		{
-			var ret = this.showDetailDialog(titleList, aResName);
+			var ret = this.showDetailDialog(titleList, aResName, aContext);
 			if ( ret.change ) { aResName = ret.resName; aResIndex = 0; }
 			if ( ret.cancel ) { return null; }
 		}
@@ -99,26 +95,24 @@ var sbContentSaver = {
 
 		if ( this.httpTask[this.item.id] == 0 )
 		{
-			setTimeout(function(){ sbContentSaver.onCaptureComplete(sbContentSaver.item); }, 100);
+			setTimeout(function(){ sbCaptureObserverCallback.onCaptureComplete(sbContentSaver.item); }, 100);
 		}
 
-		if ( this.linked.depth > 0 && this.linkURLs.length > 0 )
+		if ( this.option["inDepth"] > 0 && this.linkURLs.length > 0 )
 		{
-			if ( !aPresetData )
+			if ( !aPresetData || aContext == "renew" )
 			{
-				dump("sbContentSaver::captureWindow FOLLOW_DEEPER_LINKS capture.xul\n");
 				this.item.type = "marked";
-				this.linked.isPartial = aIsPartial;
+				this.option["isPartial"] = aIsPartial;
 				window.openDialog(
 					"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no",
 					this.linkURLs, this.refURLObj.spec,
 					false, null, 0,
-					this.item, this.linked, this.file2URL
+					this.item, this.option, this.file2URL
 				);
 			}
 			else
 			{
-				dump("sbContentSaver::captureWindow FOLLOW_DEEPER_LINKS sbCaptureTask\n");
 				for ( var i = 0; i < this.linkURLs.length; i++ )
 				{
 					sbCaptureTask.add(this.linkURLs[i], aPresetData[4] + 1);
@@ -132,7 +126,7 @@ var sbContentSaver = {
 	},
 
 
-	captureFile : function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData)
+	captureFile : function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext)
 	{
 		if ( !sbDataSource.data ) sbDataSource.init();
 		this.init(aPresetData);
@@ -142,7 +136,7 @@ var sbContentSaver = {
 		this.item.type   = aType;
 		if ( aShowDetail )
 		{
-			var ret = this.showDetailDialog([this.item.title], aResName);
+			var ret = this.showDetailDialog([this.item.title], aResName, aContext);
 			if ( ret.change ) { aResName = ret.resName; aResIndex = 0; }
 			if ( ret.cancel ) { return null; }
 		}
@@ -154,22 +148,23 @@ var sbContentSaver = {
 	},
 
 
-	showDetailDialog : function(aTitleList, aResName)
+	showDetailDialog : function(aTitleList, aResName, aContext)
 	{
 		var ret = {
 			titleList : aTitleList,
 			resName   : aResName,
 			cancel    : false,
-			change    : false
+			change    : false,
+			context   : aContext
 		};
-		window.openDialog("chrome://scrapbook/content/detail.xul" + (window.opener ? "?capture" : ""), "", "chrome,modal,centerscreen,resizable", ret);
+		window.openDialog("chrome://scrapbook/content/detail.xul" + (aContext ? "?capture" : ""), "", "chrome,modal,centerscreen,resizable", ret);
 		return ret;
 	},
 
 
 	saveDocumentInternal : function(aDocument, aFileKey)
 	{
-		if ( !aDocument.body || !aDocument.contentType.match(/text|html|xml/i) )
+		if ( !aDocument.body || !aDocument.contentType.match(/html|xml/i) )
 		{
 			var captureType = (aDocument.contentType.substring(0,5) == "image") ? "image" : "file";
 			if ( this.frameNumber == 0 ) this.item.type = captureType;
@@ -179,7 +174,6 @@ var sbContentSaver = {
 
 		this.refURLObj = sbCommonUtils.convertURLToObject(aDocument.location.href);
 
-		dump("sbContentSaver::saveDocument\t" + this.item.id + " [" + this.frameNumber + "] " + aFileKey + "\t" + aDocument.location.href + "\n");
 
 		if ( this.selection )
 		{
@@ -233,26 +227,28 @@ var sbContentSaver = {
 
 
 		var myCSS = "";
-		var myStyleSheets = aDocument.styleSheets;
-		for ( var i=0; i<myStyleSheets.length; i++ )
+		if ( this.option["format"] )
 		{
-			myCSS += this.processCSSRecursively(myStyleSheets[i]);
+			var myStyleSheets = aDocument.styleSheets;
+			for ( var i=0; i<myStyleSheets.length; i++ )
+			{
+				myCSS += this.processCSSRecursively(myStyleSheets[i]);
+			}
+			if ( myCSS )
+			{
+				var newLinkNode = document.createElement("link");
+				newLinkNode.setAttribute("media", "all");
+				newLinkNode.setAttribute("href", aFileKey + ".css");
+				newLinkNode.setAttribute("type", "text/css");
+				newLinkNode.setAttribute("rel", "stylesheet");
+				rootNode.firstChild.appendChild(document.createTextNode("\n"));
+				rootNode.firstChild.appendChild(newLinkNode);
+				rootNode.firstChild.appendChild(document.createTextNode("\n"));
+			}
 		}
 
-		if ( myCSS )
-		{
-			var newLinkNode = document.createElement("link");
-			newLinkNode.setAttribute("media", "all");
-			newLinkNode.setAttribute("href", aFileKey + ".css");
-			newLinkNode.setAttribute("type", "text/css");
-			newLinkNode.setAttribute("rel", "stylesheet");
-			rootNode.firstChild.appendChild(document.createTextNode("\n"));
-			rootNode.firstChild.appendChild(newLinkNode);
-			rootNode.firstChild.appendChild(document.createTextNode("\n"));
-		}
 
-
-		if ( this.boolPref["UTF8ENCODE"] )
+		if ( this.option["encodeUTF8"] )
 		{
 			this.item.chars = "UTF-8";
 			var metaNode = document.createElement("meta");
@@ -290,7 +286,6 @@ var sbContentSaver = {
 
 		if ( !this.refURLObj ) this.refURLObj = sbCommonUtils.convertURLToObject(aFileURL);
 
-		dump("sbContentSaver::saveFile\t" + this.item.id + " [" + this.frameNumber + "] " + aFileKey + " (" + aCaptureType + ")\t" + aFileURL + "\n");
 
 		if ( this.frameNumber == 0 )
 		{
@@ -317,18 +312,13 @@ var sbContentSaver = {
 	addResource : function(aResName, aResIndex)
 	{
 		if ( !aResName ) return;
-		dump("sbContentSaver::addResource(" + aResName + ", " + aResIndex + ")\n");
 		var myRes = sbDataSource.addItem(this.item, aResName, aResIndex);
-		try {
-			(window.opener ? window.opener : window).top.document.getElementById("sidebar").contentWindow.SB_rebuildAllTree();
-		} catch(ex) {
-		}
+		sbCommonUtils.rebuildGlobal();
 		if ( this.favicon )
 		{
-			var faviconURL = sbCommonUtils.IO.newFileURI(this.contentDir).spec + this.favicon;
+			var iconURL = "resource://scrapbook/data/" + this.item.id + "/" + this.favicon;
 			setTimeout(function(){
-				dump("sbContentSaver::addResource CHANGE_FAVICON " + faviconURL + "\n");
-				sbDataSource.updateItem(myRes, "icon", faviconURL); sbDataSource.flush();
+				sbDataSource.setProperty(myRes, "icon", iconURL); sbDataSource.flush();
 			}, 500);
 			this.item.icon = this.favicon;
 		}
@@ -395,39 +385,59 @@ var sbContentSaver = {
 		{
 			case "img" : 
 			case "embed" : 
-				if ( aNode.hasAttribute("onclick") ) aNode = this.normalizeJavaScriptLink(aNode, "onclick");
-				var aFileName = this.download(aNode.src);
-				if (aFileName) aNode.setAttribute("src", aFileName);
-				break;
-
-			case "object" : 
-				var aFileName = this.download(aNode.data);
-				if (aFileName) aNode.setAttribute("data", aFileName);
-				break;
-
-			case "body" : 
-				var aFileName = this.download(aNode.background);
-				if (aFileName) aNode.setAttribute("background", aFileName);
-				break;
-
-			case "table" : 
-			case "td" : 
-			case "th" : 
-				var aFileName = this.download(aNode.getAttribute("background"));
-				if (aFileName) aNode.setAttribute("background", aFileName);
-				break;
-
-			case "input" : 
-				if ( aNode.type.toLowerCase() == "image" ) {
+				if ( this.option["format"] ) {
+					if ( aNode.hasAttribute("onclick") ) aNode = this.normalizeJavaScriptLink(aNode, "onclick");
 					var aFileName = this.download(aNode.src);
 					if (aFileName) aNode.setAttribute("src", aFileName);
+				} else {
+					return this.removeNodeFromParent(aNode);
 				}
 				break;
-
+			case "object" : 
+				if ( this.option["format"] ) {
+					var aFileName = this.download(aNode.data);
+					if (aFileName) aNode.setAttribute("data", aFileName);
+				} else {
+					return this.removeNodeFromParent(aNode);
+				}
+				break;
+			case "body" : 
+				if ( this.option["format"] ) {
+					var aFileName = this.download(aNode.background);
+					if (aFileName) aNode.setAttribute("background", aFileName);
+				} else {
+					aNode.removeAttribute("background");
+					aNode.removeAttribute("bgcolor");
+					aNode.removeAttribute("text");
+				}
+				break;
+			case "table" : 
+			case "tr" : 
+			case "th" : 
+			case "td" : 
+				if ( this.option["format"] ) {
+					var aFileName = this.download(aNode.getAttribute("background"));
+					if (aFileName) aNode.setAttribute("background", aFileName);
+				} else {
+					aNode.removeAttribute("background");
+					aNode.removeAttribute("bgcolor");
+				}
+				break;
+			case "input" : 
+				if ( aNode.type.toLowerCase() == "image" ) {
+					if ( this.option["format"] ) {
+						var aFileName = this.download(aNode.src);
+						if (aFileName) aNode.setAttribute("src", aFileName);
+					} else {
+						aNode.removeAttribute("src");
+						aNode.setAttribute("type", "button");
+						if ( aNode.hasAttribute("alt") ) aNode.setAttribute("value", aNode.getAttribute("alt"));
+					}
+				}
+				break;
 			case "link" : 
-				if ( aNode.rel.toLowerCase() == "stylesheet" ) {
-					aNode = this.removeNodeFromParent(aNode);
-					return aNode;
+				if ( aNode.rel.toLowerCase() == "stylesheet" && (aNode.href.indexOf("chrome") != 0 || !this.option["format"]) ) {
+					return this.removeNodeFromParent(aNode);
 				} else if ( aNode.rel.toLowerCase() == "shortcut icon" || aNode.rel.toLowerCase() == "icon" ) {
 					var aFileName = this.download(aNode.href);
 					if (aFileName) aNode.setAttribute("href", aFileName);
@@ -436,29 +446,21 @@ var sbContentSaver = {
 					aNode.setAttribute("href", aNode.href);
 				}
 				break;
-
 			case "base" : 
 			case "style" : 
-				aNode = this.removeNodeFromParent(aNode);
-				return aNode;
+				return this.removeNodeFromParent(aNode);
 				break;
-
 			case "script" : 
 			case "noscript" : 
-				if ( this.boolPref["REMOVESCRIPT"] )
-				{
-					aNode = this.removeNodeFromParent(aNode);
-					return aNode;
-				}
-				else
-				{
+				if ( this.option["script"] ) {
 					if ( aNode.hasAttribute("src") ) {
 						var aFileName = this.download(aNode.src);
 						if (aFileName) aNode.setAttribute("src", aFileName);
 					}
+				} else {
+					return this.removeNodeFromParent(aNode);
 				}
 				break;
-
 			case "a" : 
 			case "area" : 
 				if ( aNode.hasAttribute("onclick") ) aNode = this.normalizeJavaScriptLink(aNode, "onclick");
@@ -470,19 +472,19 @@ var sbContentSaver = {
 				var flag = false;
 				switch ( ext )
 				{
-					case "jpg" : case "jpeg" : case "png" : case "gif" : flag = this.linked.image;   break;
-					case "mp3" : case "wav"  : case "ram" : case "wma" : flag = this.linked.sound;   break;
+					case "jpg" : case "jpeg" : case "png" : case "gif" : flag = this.option["image"];   break;
+					case "mp3" : case "wav"  : case "ram" : case "wma" : flag = this.option["sound"];   break;
 					case "mpg" : case "mpeg" : case "avi" : 
-					case "ram" : case "rm"   : case "mov" : case "wmv" : flag = this.linked.movie;   break;
-					case "zip" : case "lzh"  : case "rar" :	case "xpi" : flag = this.linked.archive; break;
+					case "ram" : case "rm"   : case "mov" : case "wmv" : flag = this.option["movie"];   break;
+					case "zip" : case "lzh"  : case "rar" :	case "xpi" : flag = this.option["archive"]; break;
 					default :
-						if ( ext && this.linked.custom )
+						if ( ext && this.option["custom"] )
 						{
-							if ( (", " + this.linked.custom + ", ").indexOf(", " + ext + ", ") != -1 ) flag = true;
+							if ( (", " + this.option["custom"] + ", ").indexOf(", " + ext + ", ") != -1 ) flag = true;
 						}
-						if ( !flag && this.linked.depth > 0 ) this.linkURLs.push(aNode.href);
+						if ( !flag && this.option["inDepth"] > 0 ) this.linkURLs.push(aNode.href);
 				}
-				if ( aNode.href.indexOf("file://") == 0 ) flag = true;
+				if ( aNode.href.indexOf("file://") == 0 && !aNode.href.match(/\.html$/) ) flag = true;
 				if ( flag ) {
 					var aFileName = this.download(aNode.href);
 					if (aFileName) aNode.setAttribute("href", aFileName);
@@ -490,24 +492,20 @@ var sbContentSaver = {
 					aNode.setAttribute("href", aNode.href);
 				}
 				break;
-
 			case "form" : 
 				aNode.setAttribute("action", sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.action));
 				break;
-
 			case "meta" : 
-				if ( this.boolPref["UTF8ENCODE"] )
+				if ( this.option["encodeUTF8"] )
 				{
 					if ( aNode.hasAttribute("http-equiv") && aNode.hasAttribute("content") &&
 					     aNode.getAttribute("http-equiv").toLowerCase() == "content-type" && 
 					     aNode.getAttribute("content").match(/charset\=/i) )
 					{
-						aNode = this.removeNodeFromParent(aNode);
-						return aNode;
+						return this.removeNodeFromParent(aNode);
 					}
 				}
 				break;
-
 			case "frame"  : 
 			case "iframe" : 
 				if ( this.selection ) {
@@ -523,22 +521,22 @@ var sbContentSaver = {
 				}
 				this.refURLObj = tmpRefURL;
 				break;
-
 		}
-
-		if ( aNode.style && aNode.style.cssText )
+		if ( !this.option["format"] )
+		{
+			aNode.removeAttribute("style");
+		}
+		else if ( aNode.style && aNode.style.cssText )
 		{
 			var newCSStext = this.inspectCSSText(aNode.style.cssText, this.refURLObj.spec);
 			if ( newCSStext ) aNode.setAttribute("style", newCSStext);
 		}
-
-		if ( this.boolPref["REMOVESCRIPT"] )
+		if ( !this.option["script"] )
 		{
 			aNode.removeAttribute("onmouseover");
 			aNode.removeAttribute("onmouseout");
 			aNode.removeAttribute("onload");
 		}
-
 		return aNode;
 	},
 
@@ -551,10 +549,9 @@ var sbContentSaver = {
 		var medium = aCSS.media.mediaText;
 		if ( medium != "" && medium.indexOf("screen") < 0 && medium.indexOf("all") < 0 )
 		{
-			dump("sbContentSaver::processCSSRecursively\tINVALID_CSS\tHREF=" + aCSS.href + " MEDIA=" + medium + "\n");
 			return "";
 		}
-
+		if ( aCSS.href.indexOf("chrome") == 0 ) return "";
 		var flag = false;
 		for ( var i=0; i<aCSS.cssRules.length; i++ )
 		{
@@ -565,7 +562,6 @@ var sbContentSaver = {
 			}
 			else if ( aCSS.cssRules[i].type == 3 )
 			{
-				dump("sbContentSaver::processCSSRecursively\tIMPORTED_CSS\tHREF=" + aCSS.cssRules[i].styleSheet.href + "\n");
 				content += this.processCSSRecursively(aCSS.cssRules[i].styleSheet);
 			}
 		}
@@ -576,23 +572,23 @@ var sbContentSaver = {
 	inspectCSSText : function(aCSStext, aCSShref)
 	{
 		if ( !aCSStext ) return;
-		var RE = new RegExp(/ url\(([^\'\)]+)\)/);
+		var re = new RegExp(/ url\(([^\'\)]+)\)/);
 		var i = 0;
-		while ( aCSStext.match(RE) )
+		while ( aCSStext.match(re) )
 		{
 			if ( ++i > 10 ) break;
 			var imgURL  = sbCommonUtils.resolveURL(aCSShref, RegExp.$1);
 			var imgFile = this.download(imgURL);
-			aCSStext = aCSStext.replace(RE, " url('" + imgFile + "')");
+			aCSStext = aCSStext.replace(re, " url('" + imgFile + "')");
 		}
 		aCSStext = aCSStext.replace(/([^\{\}])(\r|\n)/g, "$1\\A");
-		RE = new RegExp(/ content: [\"\'](.*?)[\"\']; /);
-		if ( aCSStext.match(RE) )
+		re = new RegExp(/ content: \"(.*?)\"; /);
+		if ( aCSStext.match(re) )
 		{
 			var innerQuote = RegExp.$1;
 			innerQuote = innerQuote.replace(/\"/g, '\\"');
-			innerQuote = innerQuote.replace(/\\[\"\'] attr\(([^\)]+)\) \\[\"\']/g, '" attr($1) "');
-			aCSStext = aCSStext.replace(RE, ' content: "' + innerQuote + '"; ');
+			innerQuote = innerQuote.replace(/\\\" attr\(([^\)]+)\) \\\"/g, '" attr($1) "');
+			aCSStext = aCSStext.replace(re, ' content: "' + innerQuote + '"; ');
 		}
 		aCSStext = aCSStext.replace(/ quotes: [^;]+; /g, " ");
 		if ( aCSStext.match(/ background: /i) )
@@ -611,9 +607,7 @@ var sbContentSaver = {
 
 		if ( aURLSpec.indexOf("://") < 0 )
 		{
-			dump("sbContentSaver::download\tABSOLUTE_URL\t" + aURLSpec);
 			aURLSpec = sbCommonUtils.resolveURL(this.refURLObj.spec, aURLSpec);
-			dump(" => " + aURLSpec + "\n");
 		}
 
 		try {
@@ -660,7 +654,7 @@ var sbContentSaver = {
 				WBP.persistFlags |= WBP.PERSIST_FLAGS_FROM_CACHE;
 				WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile);
 				this.httpTask[this.item.id]++;
-				WBP.progressListener = new sbDownloadProgressListener(this.item, newFileName);
+				WBP.progressListener = new sbCaptureObserver(this.item, newFileName);
 				this.file2URL[newFileName] = aURLSpec;
 				return newFileName;
 			}
@@ -713,23 +707,14 @@ var sbContentSaver = {
 		}
 		else
 		{
-			aNode.setAttribute("href", val);
-			aNode.removeAttribute("onclick");
+			if ( aNode.hasAttribute("href") && aNode.getAttribute("href").indexOf("http://") != 0 )
+			{
+				aNode.setAttribute("href", val);
+				aNode.removeAttribute("onclick");
+			}
 		}
-		dump("sbContentSaver::normalizeJavaScriptLink\t" + val + "\n");
 		return aNode;
 	},
-
-
-	onCaptureComplete : function(aItem)
-	{
-		dump("sbContentSaver::onCaptureComplete(" + (aItem ? aItem.id : "") + ")\n");
-		if ( aItem && sbDataSource.getProperty("type", sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id)) == "marked" ) return;
-		if ( sbCommonUtils.getBoolPref("scrapbook.capture.notify", false) )
-		{
-			window.openDialog("chrome://scrapbook/content/notify.xul", "", "alwaysRaised,dependent,titlebar=no", aItem);
-		}
-	}
 
 
 };
@@ -737,14 +722,14 @@ var sbContentSaver = {
 
 
 
-function sbDownloadProgressListener(aSBitem, aFileName)
+function sbCaptureObserver(aSBitem, aFileName)
 {
 	this.item     = aSBitem;
 	this.fileName = aFileName;
-	this.callback = sbDownloadProgressCallback;
+	this.callback = sbCaptureObserverCallback;
 }
 
-sbDownloadProgressListener.prototype = {
+sbCaptureObserver.prototype = {
 
 	onStateChange : function(aWebProgress, aRequest, aStateFlags, aStatus)
 	{
@@ -769,30 +754,43 @@ sbDownloadProgressListener.prototype = {
 };
 
 
-var sbDownloadProgressCallback = {
+var sbCaptureObserverCallback = {
 
 	onDownloadComplete : function(aItem)
 	{
 		try {
-			top.window.document.getElementById("sidebar").contentWindow.SBstatus.httpBusy(sbContentSaver.httpTask[aItem.id], aItem.title);
+			top.window.document.getElementById("sidebar").contentWindow.sbStatusHandler.httpBusy(sbContentSaver.httpTask[aItem.id], aItem.title);
 		} catch(ex) {
 		}
 	},
+
 	onAllDownloadsComplete : function(aItem)
 	{
 		try {
-			top.window.document.getElementById("sidebar").contentWindow.SBstatus.httpComplete(aItem.title);
+			top.window.document.getElementById("sidebar").contentWindow.sbStatusHandler.httpComplete(aItem.title);
 		} catch(ex) {
 		}
-		sbContentSaver.onCaptureComplete(aItem);
+		this.onCaptureComplete(aItem);
 	},
+
 	onDownloadProgress : function(aItem, aFileName, aProgress)
 	{
 		try {
-			top.window.document.getElementById("sidebar").contentWindow.SBstatus.httpBusy(sbContentSaver.httpTask[aItem.id], aProgress + " : " + aFileName);
+			top.window.document.getElementById("sidebar").contentWindow.sbStatusHandler.httpBusy(sbContentSaver.httpTask[aItem.id], aProgress + " : " + aFileName);
 		} catch(ex) {
 		}
 	},
+
+	onCaptureComplete : function(aItem)
+	{
+		if ( aItem && sbDataSource.getProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id), "type") == "marked" ) return;
+		if ( sbCommonUtils.getBoolPref("scrapbook.notifyOnComplete", true) )
+		{
+			window.openDialog("chrome://scrapbook/content/notify.xul", "", "alwaysRaised,dependent,titlebar=no", aItem);
+		}
+		if ( aItem && aItem.id in sbContentSaver.httpTask ) delete sbContentSaver.httpTask[aItem.id];
+	},
+
 };
 
 

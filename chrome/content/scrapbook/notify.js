@@ -8,7 +8,7 @@ var gID;
 
 
 
-function SB_onNotifyLoad()
+function onNotifierLoad()
 {
 	if ( window.arguments[0] )
 	{
@@ -16,56 +16,58 @@ function SB_onNotifyLoad()
 		var icon  = window.arguments[0].icon;
 		var title = window.arguments[0].title;
 		if ( !icon ) icon = sbCommonUtils.getDefaultIcon();
-		if ( !icon.match(/:\/\//) ) icon = sbCommonUtils.IO.newFileURI(sbCommonUtils.getContentDir(gID)).spec + icon;
-		if ( title.length > 40 ) title = title.substring(0,40) + "...";
-		document.getElementById("ScrapBookNotifyIcon").src   = icon;
-		document.getElementById("ScrapBookNotifyText").value = title;
+		if ( icon.indexOf("://") < 0 ) icon = "resource://scrapbook/data/" + gID + "/" + icon;
+		document.getElementById("sbNotifierIcon").src   = icon;
+		document.getElementById("sbNotifierText").value = sbCommonUtils.crop(title, 40);
 	}
 	else
 	{
-		document.getElementById("ScrapBookNotifyText").hidden  = true;
-		document.getElementById("ScrapBookNotifyTextA").hidden = false;
+		document.getElementById("sbNotifierText").hidden  = true;
+		document.getElementById("sbNotifierTextAll").hidden = false;
 	}
 	window.sizeToContent();
-	if ( screen.availWidth > 0 )
+	if ( screen.availWidth > 0 && navigator.platform == "Win32" )
 	{
 		gFinalHeight = window.outerHeight;
 		window.outerHeight = 0;
 		window.moveTo( (screen.availLeft + screen.availWidth - window.outerWidth) - 10, screen.availTop + screen.availHeight - window.outerHeight);
-		setTimeout(animateNotify, gSlideTime);
+		setTimeout(animateNotifier, gSlideTime);
 	}
 	else
 	{
-		window.moveTo(0,0);
-		setTimeout(function(){ window.close(); }, gOpenTime);
+		window.moveTo(
+			window.opener.screenX + window.opener.outerWidth - window.outerWidth,
+			window.opener.screenY + window.opener.outerHeight - window.outerHeight
+		);
+		setTimeout(function(){ window.close(); }, gOpenTime * 2);
 	}
 }
 
-function animateNotify()
+function animateNotifier()
 {
 	if ( gCurrentHeight < gFinalHeight ) {
 		gCurrentHeight += gSlideIncrement;
 		window.screenY -= gSlideIncrement;
 		window.outerHeight += gSlideIncrement;
-		setTimeout(animateNotify, gSlideTime);
+		setTimeout(animateNotifier, gSlideTime);
 	} else {
-		setTimeout(closeNotify, gOpenTime);
+		setTimeout(closeNotifier, gOpenTime);
 	}
 }
 
-function closeNotify()
+function closeNotifier()
 {
 	if ( gCurrentHeight ) {
 		gCurrentHeight -= gSlideIncrement;
 		window.screenY += gSlideIncrement;
 		window.outerHeight -= gSlideIncrement;
-		setTimeout(closeNotify, gSlideTime);
+		setTimeout(closeNotifier, gSlideTime);
 	} else {
 		window.close();
 	}
 }
 
-function SB_onNotifyClick()
+function onNotifierClick()
 {
 	sbCommonUtils.loadURL("chrome://scrapbook/content/view.xul?id=" + gID, true);
 	window.close();

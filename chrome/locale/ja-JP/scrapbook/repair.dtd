@@ -4,7 +4,6 @@
 <!ENTITY sb.repair.rdfFile.file "ファイル">
 <!ENTITY sb.repair.rdfFile.time "日時">
 <!ENTITY sb.repair.rdfFile.size "サイズ">
-<!ENTITY sb.repair.rdfFile.complete "完了しました。Firefoxを再起動してください。">
 <!ENTITY sb.repair.favicons "favicon（ツリーのアイコン）を復元">
 <!ENTITY sb.repair.favicons.descript "ScrapBookツリーのfaviconが突然表示されなくなった場合はこちらを試してください。データ保存先フォルダを移動した際などに狂いが生じたfaviconのパスを再変換します。">
-<!ENTITY sb.repair.favicons.complete "完了しました。">
+<!ENTITY sb.repair.complete "完了しました。">

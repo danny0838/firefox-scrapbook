@@ -1,7 +1,8 @@
 <!ENTITY sb.sort "Ordnerliste sortieren">
+<!ENTITY sb.sort.reverse "Umgekehrt">
 <!ENTITY sb.sort.title.asc "Alphabetisch nach Namen sortieren (A &gt; Z)">
 <!ENTITY sb.sort.title.desc "Umgekehrt alphabetisch nach Namen sortieren (Z &gt; A)">
 <!ENTITY sb.sort.date.asc "Chronologisch sortieren">
 <!ENTITY sb.sort.date.desc "Umgekehrt chronologisch sortieren">
 <!ENTITY sb.sort.recursive "Unterordner ebenfalls sortieren">
-<!ENTITY sb.sort.confirm "Warnung: Dieser Vorgang kann nicht rückgängig gemacht werden. Möchten Sie wirklich die komplette Ordnerliste sortieren?">
+<!ENTITY sb.sort.warning "Warnung: Dieser Vorgang kann nicht rückgängig gemacht werden.">

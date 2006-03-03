@@ -1,29 +1,19 @@
-<!ENTITY sb.title "ScrapBook">
 <!ENTITY sb.new.folder "새 폴더...">
 <!ENTITY sb.new.note "새 노트">
 <!ENTITY sb.toggle.all "모든 폴더 보이기/감추기">
 <!ENTITY sb.tools "도구">
-<!ENTITY sb.tools.setting "설정...">
+<!ENTITY sb.tools.settings "설정">
 <!ENTITY sb.tools.manage "관리">
+<!ENTITY sb.tools.combine "결합하기">
+<!ENTITY sb.tools.trade "내보내기/가져오기">
+<!ENTITY sb.tools.multiple "URL 모두 캡처하기">
+<!ENTITY sb.tools.directory "ScrapBook 폴더 열기">
 <!ENTITY sb.tools.calculate "데이터 크기 계산하기">
 <!ENTITY sb.tools.sorttree "트리 전체 정렬하기">
-<!ENTITY sb.tools.directory "ScrapBook 폴더 열기">
-<!ENTITY sb.tools.combine "결합하기">
-<!ENTITY sb.tools.multiple "URL 모두 캡처하기">
-<!ENTITY sb.tools.trade "내보내기/가져오기">
-<!ENTITY sb.tools.output "트리의 HTML 출력하기">
+<!ENTITY sb.tools.output "트리를 HTML로 출력하기">
 <!ENTITY sb.tools.backup "압축하여 백업하기">
 <!ENTITY sb.tools.repair "긴급 복구 도구">
 <!ENTITY sb.tools.homepage "홈페이지">
 <!ENTITY sb.tools.about "버전 정보">
-<!ENTITY sb.search "검색">
-<!ENTITY sb.search.fulltext "전체 검색">
-<!ENTITY sb.search.all "모두">
-<!ENTITY sb.search.re "정규 표현 사용하기">
-<!ENTITY sb.search.cs "대문자/소문자 구별하기">
-<!ENTITY sb.search.cache "전체 검색 캐시 갱신하기">
-<!ENTITY sb.search.clear "입력 목록 비우기">
-<!ENTITY sb.search.days "날짜로 필터링">
 <!ENTITY sb.note.opentab "탭으로 열기">
 <!ENTITY sb.note.close "닫기">
-<!ENTITY sb.move "폴더로 이동하기">

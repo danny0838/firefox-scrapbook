@@ -1,6 +1,8 @@
 <!ENTITY sb.detail "Sonr&#250; Gabh&#225;ile">
 <!ENTITY sb.detail.new.folder "Comhadlann Nua">
 <!ENTITY sb.detail.select.folder "Roghnaigh Cohmadlann">
+<!ENTITY sb.detail.option "Roghnaithe">
+<!ENTITY sb.detail.option.format "Iomh&#225;nna agus St&#237;leanna">
 <!ENTITY sb.detail.linked.file "&#237;osl&#243;d&#225;il ar Chomhaid Nascaithe">
 <!ENTITY sb.detail.linked.image "Iomh&#225;">
 <!ENTITY sb.detail.linked.sound "Fuaim">
@@ -11,3 +13,4 @@
 <!ENTITY sb.detail.linked.page2 "Gabh&#225;il ar Leathnaigh Gr&#233;as&#225;in Nascaithe">
 <!ENTITY sb.detail.linked.page.depth "Doimhne chun Nascanna a Lean&#250;int">
 <!ENTITY sb.detail.linked.page.text "Tar eis Gabh&#225;il a chr&#237;ochn&#250;, nascfar gach leathanach le ch&#233;ile agus t&#243;gfar mapa-su&#237;omha.">
+<!ENTITY sb.detail.warnAboutRenew "N&#211;TA: Deannan 'Ath-Ghabh&#225;il' Forscr&#237;obh ar aon leathanach S&#225;bh&#225;ilte cheanna.">

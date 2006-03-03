@@ -4,11 +4,9 @@
 <!ENTITY sb.editor.restore "Ångra ändringar och återställ sidan">
 <!ENTITY sb.editor.save "Spara ändringar">
 <!ENTITY sb.editor.comment "Utöka kommentarytan">
-<!ENTITY sb.editor.block "Blockkommentar">
-<!ENTITY sb.editor.block.insert "Skapa &sb.editor.block; efter markerad text">
-<!ENTITY sb.editor.block.hide "Göm Blockkommentarer">
-<!ENTITY sb.editor.inline.add "Skapa infälld kommentar i markerad text">
-<!ENTITY sb.editor.inline.delete "Avlägsna alla infällda kommentarer">
+<!ENTITY sb.editor.sticky "Sticky Annotation">
+<!ENTITY sb.editor.sticky.create "Create &sb.editor.sticky;">
+<!ENTITY sb.editor.inline.add "Add Inline Annotation to Selection">
 <!ENTITY sb.editor.attach.file "Bifoga fil till markering">
 <!ENTITY sb.editor.attach.link "Bifoga länk till markering">
 <!ENTITY sb.editor.cutter "Radera markeringen">
@@ -19,7 +17,8 @@
 <!ENTITY sb.highlighter.remove.all "Avlägsna alla färgmarkeringar">
 <!ENTITY sb.customize "Customize">
 <!ENTITY sb.infobar.openSource "Öppna URL som posten sparades från">
-<!ENTITY sb.infobar.showSitemap "Show &sb.infobar.sitemap;">
+<!ENTITY sb.infobar.renew "Capture Again">
+<!ENTITY sb.infobar.showIndicators "Show Link Indicators">
 <!ENTITY sb.infobar.showInfobar "Show Info Toolbar">
 <!ENTITY sb.infobar.home "Hem">
 <!ENTITY sb.infobar.sitemap "Översikt">

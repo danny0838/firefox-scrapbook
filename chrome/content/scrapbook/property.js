@@ -1,197 +1,183 @@
 
-var SBstring;
+var sbPropService = {
 
-var gID;
-var gRes;
-var gSBitem;
-var gTypeFolder = false;
-var gTypeNote   = false;
-var gTypeFile   = false;
-var gTypeNomark = false;
+	get STRING() { return document.getElementById("sbPropString"); },
+	get ICON()   { return document.getElementById("sbPropIcon"); },
 
+	id       : null,
+	item     : null,
+	resource : null,
+	isTypeBookmark : false,
+	isTypeFolder   : false,
+	isTypeNote     : false,
+	isTypeFile     : false,
+	isTypeSite     : false,
 
-
-function SB_initProp()
-{
-	SBstring = document.getElementById("ScrapBookString");
-
-	try {
-		gID = window.arguments[0];
-	} catch(ex) {
-		document.location.href.match(/\?id\=(.*)$/);
-		gID = RegExp.$1;
-	}
-	if ( !gID ) return;
-
-	sbDataSource.init();
-	gSBitem = new ScrapBookItem();
-	gRes = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gID);
-	for ( var prop in gSBitem )
+	init : function()
 	{
-		gSBitem[prop] = sbDataSource.getProperty(prop, gRes);
-	}
-
-	gID.match(/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/);
-	try {
-		const SDF = Components.classes['@mozilla.org/intl/scriptabledateformat;1'].getService(Components.interfaces.nsIScriptableDateFormat);
-		var myDateTime = SDF.FormatDateTime("", SDF.dateFormatLong, SDF.timeFormatSeconds, RegExp.$1, RegExp.$2, RegExp.$3, RegExp.$4, RegExp.$5, RegExp.$6);
-	} catch(ex) {
-		var myDateTime = [RegExp.$1, RegExp.$2, RegExp.$3].join("/") + " " + [RegExp.$4, RegExp.$5, RegExp.$6].join(":");
-	}
-
-	document.getElementById("ScrapBookPropTitle").value   = gSBitem.title;
-	document.getElementById("ScrapBookPropSource").value  = gSBitem.source;
-	document.getElementById("ScrapBookPropDate").value    = myDateTime;
-	document.getElementById("ScrapBookPropChars").value   = gSBitem.chars;
-	document.getElementById("ScrapBookPropComment").value = gSBitem.comment.replace(/ __BR__ /g, "\n");
-	document.getElementById("ScrapBookPropIcon").src      = gSBitem.icon ? gSBitem.icon : sbCommonUtils.getDefaultIcon(gSBitem.type);
-	document.getElementById("ScrapBookPropIcon").setAttribute("tooltiptext", gSBitem.icon);
-	document.getElementById("ScrapBookPropMark").setAttribute("checked", gSBitem.type == "marked");
-	document.getElementById("ScrapBookPropertyDialog").setAttribute("title", gSBitem.title);
-	document.title = gSBitem.title;
-
-	if ( sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, gRes) ) gSBitem.type = "folder";
-
-	switch ( gSBitem.type )
-	{
-		case "folder" :	
-			gTypeFolder = true;
-			document.getElementById("ScrapBookPropIconRow").setAttribute("hidden", true);
-			document.getElementById("ScrapBookPropSizeRow").setAttribute("hidden", true);
-			break;
-		case "file" : 
-		case "image" : 
-			gTypeFile = true;
-			break;
-		case "note" : 
-			gTypeNote = true;
-			document.getElementById("ScrapBookPropTitle").removeAttribute("editable");
-			break;
-		case "combine" : 
-		case "site" : 
-			gTypeNomark = true;
-			break;
-	}
-	document.getElementById("ScrapBookPropSourceRow").setAttribute("hidden", gTypeFolder || gTypeNote);
-	document.getElementById("ScrapBookPropCharsRow").setAttribute("hidden",  gTypeFolder || gTypeFile);
-	document.getElementById("ScrapBookPropIconMenu").setAttribute("hidden",  gTypeNote   || gTypeFile);
-	document.getElementById("ScrapBookPropMark").setAttribute("hidden", gTypeFolder || gTypeNote || gTypeFile || gTypeNomark);
-
-	SB_changeCommentTab(gSBitem.comment);
-
-	if ( gSBitem.type != "folder" ) setTimeout(SB_delayedInit, 0);
-}
-
-
-function SB_delayedInit()
-{
-	var sizeCount = sbPropUtil.getTotalFileSize(gID);
-	var msg = sbPropUtil.formatFileSize(sizeCount[0]);
-	msg += "  " + SBstring.getFormattedString("FILES_COUNT", [sizeCount[1]]);
-	document.getElementById("ScrapBookPropSize").value = msg;
-}
-
-
-function SB_acceptProp()
-{
-	var newVals = {
-		title   : document.getElementById("ScrapBookPropTitle").value,
-		source  : document.getElementById("ScrapBookPropSource").value,
-		comment : sbCommonUtils.escapeComment(document.getElementById("ScrapBookPropComment").value),
-		type    : gSBitem.type,
-		icon    : SB_getIconURL()
-	};
-	if ( !document.getElementById("ScrapBookPropMark").hidden )
-	{
-		newVals.type = document.getElementById("ScrapBookPropMark").checked ? "marked" : "";
-	}
-	var change = false;
-	var props = ["title","source","comment","type","icon"];
-	for ( var i = 0; i < props.length; i++ )
-	{
-		if ( gSBitem[props[i]] != newVals[props[i]] ) { gSBitem[props[i]] = newVals[props[i]]; change = true; }
-	}
-	if ( change )
-	{
-		for ( var prop in gSBitem ) 
-		{
-			sbDataSource.updateItem(gRes, prop, gSBitem[prop]);
+		try {
+			this.id = window.arguments[0];
+		} catch(ex) {
+			document.location.href.match(/\?id\=(.*)$/);
+			this.id = RegExp.$1;
 		}
-		if ( !gTypeFolder ) sbCommonUtils.writeIndexDat(gSBitem);
-		sbDataSource.flush();
-	}
-	if ( window.arguments[1] ) window.arguments[1].accept = true;
-}
+		if ( !this.id ) return;
+		sbDataSource.init();
+		this.item = new ScrapBookItem();
+		this.resource = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.id);
+		for ( var prop in this.item )
+		{
+			this.item[prop] = sbDataSource.getProperty(this.resource, prop);
+		}
+		this.id.match(/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/);
+		var dateTime;
+		try {
+			const SDF = Components.classes['@mozilla.org/intl/scriptabledateformat;1'].getService(Components.interfaces.nsIScriptableDateFormat);
+			dateTime = SDF.FormatDateTime("", SDF.dateFormatLong, SDF.timeFormatSeconds, RegExp.$1, RegExp.$2, RegExp.$3, RegExp.$4, RegExp.$5, RegExp.$6);
+		} catch(ex) {
+			dateTime = [RegExp.$1, RegExp.$2, RegExp.$3].join("/") + " " + [RegExp.$4, RegExp.$5, RegExp.$6].join(":");
+		}
+		document.getElementById("sbPropTitle").value   = this.item.title;
+		document.getElementById("sbPropSource").value  = this.item.source;
+		document.getElementById("sbPropDate").value    = dateTime;
+		document.getElementById("sbPropChars").value   = this.item.chars;
+		document.getElementById("sbPropComment").value = this.item.comment.replace(/ __BR__ /g, "\n");
+		document.getElementById("sbPropMark").setAttribute("checked", this.item.type == "marked");
+		this.ICON.src = this.item.icon ? this.item.icon : sbCommonUtils.getDefaultIcon(this.item.type);
+		document.title = this.item.title;
+		if ( sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, this.resource) ) this.item.type = "folder";
+		var bundleName = "TYPE_PAGE";
+		switch ( this.item.type )
+		{
+			case "bookmark" : this.isTypeBookmark = true; bundleName = "TYPE_BOOKMARK"; break;
+			case "folder"   : this.isTypeFolder   = true; bundleName = "TYPE_FOLDER";   break;
+			case "note"     : this.isTypeNote     = true; bundleName = "TYPE_NOTE";     break;
+			case "file"     : 
+			case "image"    : this.isTypeFile     = true; bundleName = "TYPE_FILE";     break;
+			case "combine"  : this.isTypeSite     = true; bundleName = "TYPE_COMBINE";  break;
+			case "site"     : this.isTypeSite     = true; bundleName = "TYPE_INDEPTH";  break;
+		}
+		document.getElementById("sbPropType").value = this.STRING.getString(bundleName);
+		document.getElementById("sbPropSourceRow").setAttribute("hidden", this.isTypeFolder || this.isTypeNote);
+		document.getElementById("sbPropCharsRow").setAttribute("hidden",  this.isTypeFolder || this.isTypeFile || this.isTypeBookmark);
+		document.getElementById("sbPropIconMenu").setAttribute("hidden",  this.isTypeNote);
+		document.getElementById("sbPropMark").setAttribute("hidden", this.isTypeFolder || this.isTypeNote || this.isTypeFile || this.isTypeSite || this.isTypeBookmark);
+		document.getElementById("sbPropIconMenu").firstChild.firstChild.nextSibling.setAttribute("disabled", this.isTypeFolder || this.isTypeBookmark);
+		document.getElementById("sbPropSizeRow").setAttribute("hidden", this.isTypeFolder || this.isTypeBookmark);
+		if ( this.isTypeNote ) document.getElementById("sbPropTitle").removeAttribute("editable");
+		this.updateCommentTab(this.item.comment);
+		if ( !this.isTypeFolder && !this.isTypeBookmark ) setTimeout(function(){ sbPropService.delayedInit(); }, 0);
+	},
 
-
-function SB_cancelProp()
-{
-	if ( window.arguments[1] ) window.arguments[1].accept = false;
-}
-
-
-
-function SB_fillHTMLTitle(popupXUL)
-{
-	if ( gTypeFolder || gTypeNote || gTypeFile ) return;
-	if ( !popupXUL.hasChildNodes() ) popupXUL.parentNode.appendItem(sbPropUtil.getHTMLTitle(gID, gSBitem.chars));
-}
-
-
-function SB_setDefaultIcon()
-{
-	document.getElementById("ScrapBookPropIcon").src = sbCommonUtils.getDefaultIcon(gSBitem.type);
-}
-
-
-function SB_getIconURL()
-{
-	var iconURL = document.getElementById("ScrapBookPropIcon").src;
-	return ( iconURL.substring(0,24) == "chrome://scrapbook/skin/" ) ? "" : iconURL;
-}
-
-
-function SB_pickupIcon(aType, aLabel)
-{
-	if ( aType == "F" )
+	delayedInit : function()
 	{
-		var dispDir = sbCommonUtils.getContentDir(gSBitem.id);
-	}
-	else
+		var sizeCount = this.getTotalFileSize(this.id);
+		var txt = sbPropService.formatFileSize(sizeCount[0]);
+		txt += "  " + this.STRING.getFormattedString("FILES_COUNT", [sizeCount[1]]);
+		document.getElementById("sbPropSize").value = txt;
+	},
+
+	accept : function()
 	{
-		var dispDir = sbCommonUtils.getScrapBookDir().clone();
-		dispDir.append("icon");
-		if ( !dispDir.exists() ) dispDir.create(dispDir.DIRECTORY_TYPE, 0700);
-	}
-	var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-	FP.init(window, aLabel, FP.modeOpen);
-	FP.displayDirectory = dispDir;
-	FP.appendFilters(FP.filterImages);
-	var answer = FP.show();
-	if ( answer == FP.returnOK )
+		var newVals = {
+			title   : document.getElementById("sbPropTitle").value,
+			source  : document.getElementById("sbPropSource").value,
+			comment : sbCommonUtils.escapeComment(document.getElementById("sbPropComment").value),
+			type    : this.item.type,
+			icon    : this.getIconURL()
+		};
+		if ( !document.getElementById("sbPropMark").hidden )
+		{
+			newVals.type = document.getElementById("sbPropMark").checked ? "marked" : "";
+		}
+		var changed = false;
+		var props = ["title","source","comment","type","icon"];
+		for ( var i = 0; i < props.length; i++ )
+		{
+			if ( this.item[props[i]] != newVals[props[i]] ) { this.item[props[i]] = newVals[props[i]]; changed = true; }
+		}
+		if ( changed )
+		{
+			for ( var prop in this.item ) 
+			{
+				sbDataSource.setProperty(this.resource, prop, this.item[prop]);
+			}
+			if ( !this.isTypeFolder ) sbCommonUtils.writeIndexDat(this.item);
+			sbDataSource.flush();
+		}
+		if ( window.arguments[1] ) window.arguments[1].accept = true;
+	},
+
+	cancel : function()
 	{
-		document.getElementById("ScrapBookPropIcon").src = sbCommonUtils.convertFilePathToURL(FP.file.path);
-	}
-}
+		if ( window.arguments[1] ) window.arguments[1].accept = false;
+	},
 
+	fillTitle : function(aPopupElem)
+	{
+		if ( this.isTypeFolder || this.isTypeNote || this.isTypeFile || this.isTypeBookmark ) return;
+		if ( !aPopupElem.hasChildNodes() )
+		{
+			aPopupElem.parentNode.appendItem(this.getHTMLTitle(this.id, this.item.chars));
+		}
+	},
 
-function SB_changeCommentTab(comment)
-{
-	var tab = document.getElementById("ScrapBookPropCommentTab");
-	if ( comment ) {
-		tab.setAttribute("image", "chrome://scrapbook/skin/edit_comment.png");
-	} else {
-		tab.removeAttribute("image");
-	}
-}
+	setDefaultIcon : function()
+	{
+		this.ICON.src = sbCommonUtils.getDefaultIcon(this.item.type);
+	},
 
+	getIconURL : function()
+	{
+		var iconURL = this.ICON.src;
+		return ( iconURL.indexOf("chrome://scrapbook/skin/") == 0 ) ? "" : iconURL;
+	},
 
+	pickupIcon : function(aCommand, aPickerLabel)
+	{
+		var dir;
+		if ( aCommand == "F" ) {
+			dir = sbCommonUtils.getContentDir(this.item.id, true);
+			if ( !dir ) return;
+		} else {
+			dir = sbCommonUtils.getScrapBookDir().clone();
+			dir.append("icon");
+			if ( !dir.exists() ) dir.create(dir.DIRECTORY_TYPE, 0700);
+		}
+		var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
+		FP.init(window, aPickerLabel, FP.modeOpen);
+		FP.displayDirectory = dir;
+		FP.appendFilters(FP.filterImages);
+		if ( FP.show() == FP.returnOK )
+		{
+			var iconURL;
+			if      ( aCommand == "F" && dir.contains(FP.file, false) ) iconURL = "resource://scrapbook/data/" + this.id + "/" + FP.file.leafName;
+			else if ( aCommand == "U" && dir.contains(FP.file, false) ) iconURL = "resource://scrapbook/icon/" + FP.file.leafName;
+			else iconURL = sbCommonUtils.convertFilePathToURL(FP.file.path);
+			this.ICON.src = iconURL;
+		}
+	},
 
-var sbPropUtil = {
+	setIconURL : function()
+	{
+		var ret = { value : this.getIconURL() };
+		if ( !sbCommonUtils.PROMPT.prompt(window, document.getElementById("sbPropIconMenu").label, "URL:", ret, null, {}) ) return;
+		if ( ret.value ) this.ICON.src = ret.value;
+	},
+
+	updateCommentTab : function(aComment)
+	{
+		var elem = document.getElementById("sbPropCommentTab");
+		if ( aComment )
+			elem.setAttribute("image", "chrome://scrapbook/skin/edit_comment.png");
+		else
+			elem.removeAttribute("image");
+	},
 
 	getHTMLTitle : function(aID, aChars)
 	{
-		var file  = sbCommonUtils.getContentDir(aID);
+		var file  = sbCommonUtils.getContentDir(aID, true);
+		if ( !file ) return "";
 		file.append("index.html");
 		var content = sbCommonUtils.readFile(file);
 		try {
@@ -204,13 +190,12 @@ var sbPropUtil = {
 		}
 	},
 
-
 	getTotalFileSize : function(aID)
 	{
 		var totalSize = 0;
 		var totalFile = 0;
-		var dir = sbCommonUtils.getContentDir(aID);
-		if ( !dir.isDirectory() ) return [0, 0];
+		var dir = sbCommonUtils.getContentDir(aID, true);
+		if ( !dir || !dir.isDirectory() ) return [0, 0];
 		var fileEnum = dir.directoryEntries;
 		while ( fileEnum.hasMoreElements() )
 		{
@@ -221,7 +206,6 @@ var sbPropUtil = {
 		return [totalSize, totalFile];
 	},
 
-
 	formatFileSize : function(aSize)
 	{
 		if ( aSize > 1000 * 1000 ) {
@@ -230,7 +214,6 @@ var sbPropUtil = {
 			return Math.round( aSize / 1024 ) + " KB";
 		}
 	},
-
 
 	divideBy100 : function(aInt)
 	{
@@ -243,7 +226,7 @@ var sbPropUtil = {
 		}
 	},
 
-
 };
+
 
 

@@ -2,15 +2,31 @@
 <!ENTITY sb.open.tab "Avaa välilehdessä">
 <!ENTITY sb.open.newtab "Avaa uuteen välilehteen">
 <!ENTITY sb.open.source "Avaa lähde-URL">
+<!ENTITY sb.tools "Työkalut">
 <!ENTITY sb.show.files "Näytä tiedostot">
-<!ENTITY sb.delete "Poista">
+<!ENTITY sb.move "Siirrä kansioon">
+<!ENTITY sb.renew "Kaappaa uudestaan">
+<!ENTITY sb.export "Vie">
+<!ENTITY sb.remove "Poista">
 <!ENTITY sb.property "Ominaisuudet">
+<!ENTITY sb.listview "Listanäkymä">
+<!ENTITY sb.prop.title "Otsikko">
+<!ENTITY sb.prop.comment "Kommentti">
+<!ENTITY sb.prop.id.date "Tunnus (Aika)">
 <!ENTITY sb.folder.toggle "Laajenna/Supista">
+<!ENTITY sb.folder.combine "Yhdistetty näkymä">
 <!ENTITY sb.folder.openall "Avaa kaikki välilehtiin">
-<!ENTITY sb.folder.combine "Avaa yhdistetyssä näkymässä">
 <!ENTITY sb.folder.manage "Muokkaa kansiota...">
 <!ENTITY sb.new.folder "Uusi kansio...">
 <!ENTITY sb.new.note "Uusi muistilappu">
 <!ENTITY sb.sort.folder "Järjestä kansio">
-<!ENTITY mb.configure "Configure">
-<!ENTITY mb.profileFolder "Profile Folder">
+<!ENTITY sb.search "Etsi">
+<!ENTITY sb.search.fulltext "Täydellinen tekstihaku">
+<!ENTITY sb.search.all "Kaikki">
+<!ENTITY sb.search.re "Käytä RegExpejä">
+<!ENTITY sb.search.cs "Huomaa kirjainkoko">
+<!ENTITY sb.search.cache "Päivitä välimuisti täydellistä tekstihakua varten">
+<!ENTITY sb.search.clear "Tyhjennä hakukentän muisti">
+<!ENTITY sb.search.days "Suodatus päivien mukaan">
+<!ENTITY mb.configure "Muokkaa asetuksia">
+<!ENTITY mb.profileFolder "Profiilikansio">

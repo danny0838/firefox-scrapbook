@@ -2,5 +2,4 @@
 <!ENTITY sb.combine.select.d "Dwukrotnie kliknij na stronach w kolejności w jakiej chcesz je połączyć.">
 <!ENTITY sb.combine.preview "Podgląd">
 <!ENTITY sb.combine.preview.d "Po weryfikacji podglądu naciśnij przycisk ''Połącz''.">
-<!ENTITY sb.combine.option.header "Dodaj nagłówek z informacją do każdej strony">
 <!ENTITY sb.combine.option.remove "Po zakończeniu łączenia usuń oryginalne strony">

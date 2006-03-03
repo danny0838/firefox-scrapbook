@@ -2,5 +2,4 @@
 <!ENTITY sb.combine.select.d "Двойной щелчок на страницах, чтобы указать их объединение.">
 <!ENTITY sb.combine.preview "Предварительный просмотр">
 <!ENTITY sb.combine.preview.d "Нажмите кнопку 'Объединить' после предварительного просмотра.">
-<!ENTITY sb.combine.option.header "Добавить информационный заголовок на каждую страницу">
 <!ENTITY sb.combine.option.remove "После осуществления объединения удалить исходные страницы">

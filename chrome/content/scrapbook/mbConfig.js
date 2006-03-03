@@ -34,10 +34,36 @@ var sbMultiBookConfig = {
 		window.openDialog("chrome://scrapbook/content/mbProperty.xul","","chrome,centerscreen,modal", this.CURRENT_TREEITEM);
 	},
 
+	up : function()
+	{
+		var curIdx = this.TREE.currentIndex;
+		if ( curIdx < 1 ) return;
+		var tmp = this.treeItems[curIdx-1];
+		this.treeItems[curIdx-1] = this.treeItems[curIdx];
+		this.treeItems[curIdx] = tmp;
+		this.initTree();
+		this.changed = true;
+		this.TREE.view.selection.rangedSelect(curIdx-1, curIdx-1, true);
+		this.TREE.focus();
+	},
+
+	down : function()
+	{
+		var curIdx = this.TREE.currentIndex;
+		if ( curIdx >= this.treeItems.length-1 ) return;
+		var tmp = this.treeItems[curIdx + 1];
+		this.treeItems[curIdx+1] = this.treeItems[curIdx];
+		this.treeItems[curIdx] = tmp;
+		this.initTree();
+		this.changed = true;
+		this.TREE.view.selection.rangedSelect(curIdx+1, curIdx+1, true);
+		this.TREE.focus();
+	},
+
 	remove : function()
 	{
 		if ( this.TREE.currentIndex < 0 ) return;
-		if ( window.confirm(window.opener.SBstring.getString("CONFIRM_DELETE")) )
+		if ( window.confirm(window.opener.sbMainService.STRING.getString("CONFIRM_DELETE")) )
 		{
 			this.treeItems.splice(this.TREE.currentIndex, 1);
 			this.initTree();

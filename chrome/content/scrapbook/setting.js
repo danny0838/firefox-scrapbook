@@ -1,121 +1,119 @@
 
 var sbPrefService = {
 
-	defaultValues : {
-		"sbPrefBrowserSubmenu"  	: false,
-		"sbPrefTreeSingleExpand"	: false,
-		"sbPrefTreeQuickDelete"		: false,
-		"sbPrefCaptureDetail"		: false,
-		"sbPrefCaptureNotify"		: false,
-		"sbPrefCaptureUTF8Encode"	: true,
-		"sbPrefCaptureRemoveScript"	: true,
-		"sbPrefUseTabOpen"			: false,
-		"sbPrefUseTabSource"		: false,
-		"sbPrefUseTabCombine"		: false,
-		"sbPrefUseTabSearch"		: false,
-		"sbPrefUseTabOutput"		: false,
-		"sbPrefUseTabNote"			: false,
-		"sbPrefMultiBookEnabled"	: false,
-	},
-
-	shouldRefresh : false,
+	shouldCheck : false,
 
 	init : function()
 	{
-		for ( var elemID in this.defaultValues )
+		if ( document.getElementById("sbPrefDataDefault").checked )
 		{
-			var elem = document.getElementById(elemID);
-			elem.checked = nsPreferences.getBoolPref(elem.getAttribute("prefstring"), this.defaultValues[elemID]);
-		}
-		document.getElementById("sbPrefFilerCheckbox").checked = nsPreferences.getBoolPref("scrapbook.filer.default", true);
-		document.getElementById("sbPrefFilerTextbox").value = nsPreferences.copyUnicharPref("scrapbook.filer.path", "");
-		this.toggleDefaultFiler();
-		document.getElementById("sbPrefDataCheckbox").checked = nsPreferences.getBoolPref("scrapbook.data.default", true);
-		document.getElementById("sbPrefDataTextbox").value = nsPreferences.copyUnicharPref("scrapbook.data.path", "");
-		if ( document.getElementById("sbPrefDataCheckbox").checked )
-		{
-			document.getElementById("sbPrefTabs").selectedIndex = 4;
 			document.getElementById("sbPrefDataAlert").hidden = false;
+			document.getElementById("sbPrefTabs").selectedIndex = 4;
 		}
 		this.toggleDefaultData();
-		if ( window.arguments && window.arguments[0] == "e" ) document.getElementById("sbPrefTabs").selectedIndex = 3;
+		this.toggleDefaultFileViewer();
+		if ( !sbMultiBookService.validateRefresh(true) ) document.getElementById("sbPrefDataGroupbox").hidden = true;
+		if ( window.arguments && window.arguments[0] == "e" )
+		{
+			document.getElementById("sbPrefTabs").selectedIndex = 3;
+			document.getElementById("sbPrefDataGroupbox").hidden = true;
+		}
+		if ( !window.arguments && (new Date()).getSeconds() % 10 == 0 )
+		{
+			setTimeout(function(){ sbPrefService.clearUnusedPrefs(); }, 100);
+		}
 	},
 
-	accept : function()
+	clearUnusedPrefs : function()
 	{
-		for ( var elemID in this.defaultValues )
+		var oldPrefNames = [
+			"scrapbook.capture.detail",
+			"scrapbook.capture.notify",
+			"scrapbook.tree.singleexpand",
+			"scrapbook.tree.quickdelete",
+			"scrapbook.usetab.open",
+			"scrapbook.usetab.source",
+			"scrapbook.usetab.view",
+			"scrapbook.usetab.combine",
+			"scrapbook.usetab.search",
+			"scrapbook.usetab.output",
+			"scrapbook.usetab.home",
+			"scrapbook.usetab.export",
+			"scrapbook.usetab.note",
+			"scrapbook.filer.default",
+			"scrapbook.filer.path",
+			"scrapbook.detaildialog",
+			"scrapbook.notification",
+			"scrapbook.hidefavicon",
+			"scrapbook.folderclick",
+			"scrapbook.quickdelete",
+			"scrapbook.utf8encode",
+			"scrapbook.editor.comment",
+			"scrapbook.editor.marker",
+			"scrapbook.editor.blockstyle",
+			"scrapbook.edit.multilines",
+			"scrapbook.edit.confirmsave",
+			"scrapbook.edit.showheader",
+			"scrapbook.view.header",
+			"scrapbook.view.editor",
+			"scrapbook.view.infobar",
+			"scrapbook.detail.recentfolder",
+			"scrapbook.capture.utf8encode",
+			"scrapbook.capture.removescript",
+		];
+		oldPrefNames.forEach(function(aPrefName)
 		{
-			var elem = document.getElementById(elemID);
-			nsPreferences.setBoolPref(elem.getAttribute("prefstring"), elem.checked);
-		}
-		nsPreferences.setBoolPref("scrapbook.filer.default", document.getElementById("sbPrefFilerCheckbox").checked);
-		nsPreferences.setUnicharPref("scrapbook.filer.path", document.getElementById("sbPrefFilerTextbox").value);
-		nsPreferences.setBoolPref("scrapbook.data.default", document.getElementById("sbPrefDataCheckbox").checked);
-		nsPreferences.setUnicharPref("scrapbook.data.path", document.getElementById("sbPrefDataTextbox").value);
-		try {
-			window.opener.top.sbBrowserOverlay.refresh();
-			if ( window.opener.location.href.indexOf("scrapbook") > 0 )
-				window.opener.location.reload();
-			else
-				this.shouldRefresh = true;
-		} catch(ex) {
-			this.shouldRefresh = true;
-		}
-		if ( this.shouldRefresh )
-		{
-			dump("sbPrefService::accept REFRESH_ALL_WINDOWS\n");
-			var navEnum = sbCommonUtils.WINDOW.getEnumerator("navigator:browser");
-			while ( navEnum.hasMoreElements() )
-			{
-				var nav = navEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
-				try {
-					nav.sbBrowserOverlay.refresh();
-					nav.document.getElementById("sidebar").contentWindow.location.reload();
-				} catch(ex) {
-				}
+			try {
+				sbCommonUtils.PREF.clearUserPref(aPrefName);
+			} catch(ex) {
 			}
+		});
+	},
+
+	done : function()
+	{
+		if ( this.changed )
+		{
+			sbMultiBookService.refreshGlobal();
 		}
 	},
 
 	toggleDefaultData : function()
 	{
-		var isDefault = document.getElementById("sbPrefDataCheckbox").checked;
+		var isDefault = document.getElementById("sbPrefDataDefault").checked;
 		var mbEnabled = document.getElementById("sbPrefMultiBookEnabled").checked;
-		document.getElementById("sbPrefDataCheckbox").disabled = mbEnabled;
-		document.getElementById("sbPrefDataTextbox").disabled  = isDefault || mbEnabled;
-		document.getElementById("sbPrefDataButton").disabled   = isDefault || mbEnabled;
+		document.getElementById("sbPrefDataDefault").disabled = mbEnabled;
+		document.getElementById("sbPrefDataPath").disabled    = isDefault || mbEnabled;
+		document.getElementById("sbPrefDataButton").disabled  = isDefault || mbEnabled;
 	},
 
-	toggleDefaultFiler : function()
+	toggleDefaultFileViewer : function()
 	{
-		var isDefault = document.getElementById("sbPrefFilerCheckbox").checked;
-		document.getElementById("sbPrefFilerTextbox").disabled = isDefault;
-		document.getElementById("sbPrefFilerButton").disabled  = isDefault;
+		var isDefault = document.getElementById("sbPrefFileViewerDefault").checked;
+		document.getElementById("sbPrefFileViewerPath").disabled   = isDefault;
+		document.getElementById("sbPrefFileViewerButton").disabled = isDefault;
 	},
 
 	selectData : function()
 	{
 		var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-		FP.init(window, document.getElementById("sbPrefDataExplain").value, FP.modeGetFolder);
-		var answer = FP.show();
-		if ( answer == FP.returnOK )
+		FP.init(window, document.getElementById("sbPrefDataButton").getAttribute("tooltiptext"), FP.modeGetFolder);
+		if ( FP.show() == FP.returnOK )
 		{
-			var theFile = FP.file;
-			document.getElementById("sbPrefDataTextbox").value = theFile.path;
-			this.shouldRefresh = true;
+			document.getElementById("sbPrefDataPath").value = FP.file.path;
+			document.getElementById("scrapbook.data.path").value = FP.file.path;
 		}
 	},
 
-	selectFiler : function()
+	selectFileViewer : function()
 	{
 		var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-		FP.init(window, document.getElementById("sbPrefFilerCaption").label, FP.modeOpen);
+		FP.init(window, document.getElementById("sbPrefFileViewerCaption").label, FP.modeOpen);
 		FP.appendFilters(FP.filterApps);
-		var answer = FP.show();
-		if ( answer == FP.returnOK )
+		if ( FP.show() == FP.returnOK )
 		{
-			var theFile = FP.file;
-			document.getElementById("sbPrefFilerTextbox").value = theFile.path;
+			document.getElementById("sbPrefFileViewerPath").value = FP.file.path;
+			document.getElementById("scrapbook.fileViewer.path").value = FP.file.path;
 		}
 	},
 
@@ -141,7 +139,6 @@ var hlPrefService = {
 			newNode.lastChild.setAttribute("color", idx);
 			node.parentNode.insertBefore(newNode, node);
 		}
-		window.sizeToContent();
 		this.update();
 	},
 
@@ -159,19 +156,6 @@ var hlPrefService = {
 	{
 		window.openDialog('chrome://scrapbook/content/hlCustom.xul', '', 'modal,centerscreen,chrome',idx);
 		if ( this.shouldUpdate ) this.update();
-	},
-
-	customizeBlockStyle : function()
-	{
-		var file = sbCommonUtils.getScrapBookDir().clone();
-		file.append("block.css");
-		if ( !file.exists() )
-		{
-			sbCommonUtils.saveTemplateFile("chrome://scrapbook/skin/block.css", file);
-			setTimeout(function(){ hlPrefService.customizeBlockStyle(); }, 1000);
-			return;
-		}
-		file.QueryInterface(Components.interfaces.nsILocalFile).launch();
 	},
 
 };

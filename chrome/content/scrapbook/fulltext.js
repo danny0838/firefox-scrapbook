@@ -1,7 +1,6 @@
 
-var SBstatus;
-var SBstring;
-var SBbaseURL;
+var gCacheStatus;
+var gCacheString;
 
 var gCacheFile;
 
@@ -10,13 +9,12 @@ var gCacheFile;
 
 function SB_initFT(type)
 {
-	SBstatus = document.getElementById("ScrapBookStatus");
-	SBstring = document.getElementById("ScrapBookString");
+	gCacheStatus = document.getElementById("sbCacheStatus");
+	gCacheString = document.getElementById("sbCacheString");
 	gCacheFile = sbCommonUtils.getScrapBookDir().clone();
 	gCacheFile.append("cache.rdf");
 	sbDataSource.init();
 	sbCacheSource.init();
-	SBbaseURL = sbCommonUtils.getBaseHref(sbDataSource.data.URI);
 	switch ( type )
 	{
 		case 'SEARCH' : sbSearchResult.exec(); break;
@@ -27,7 +25,7 @@ function SB_initFT(type)
 
 var sbSearchResult =
 {
-	get TREE() { return document.getElementById("ScrapBookTree"); },
+	get TREE() { return document.getElementById("sbTree"); },
 	get CURRENT_TREEITEM() { return this.treeItems[this.TREE.currentIndex]; },
 	get TEXT_TO_SUB_URI()  { return Components.classes['@mozilla.org/intl/texttosuburi;1'].getService(Components.interfaces.nsITextToSubURI); },
 	get MAX_HIT() { return 100; },
@@ -35,7 +33,7 @@ var sbSearchResult =
 
 
 	hit : 0,
-	QueryStrings   : { q : "", re : "", cs : "" },
+	QueryStrings   : { q : "", re : "", cs : "", folder : "" },
 	RegExpModifier : "",
 	includeWords : [],
 	excludeWords : [],
@@ -106,14 +104,14 @@ var sbSearchResult =
 		{
 			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
 			if ( res.Value == "urn:scrapbook:cache" ) continue;
-			var content = sbCacheSource.getProperty("content", res);
-			var folder  = sbCacheSource.getProperty("folder",  res);
+			var content = sbCacheSource.getProperty(res, "content");
+			var folder  = sbCacheSource.getProperty(res, "folder");
 			var resURI  = res.Value.split("#")[0];
 			var name    = res.Value.split("#")[1] || "index";
 			res = sbCommonUtils.RDF.GetResource(resURI);
-			var type    = sbDataSource.getProperty("type",    res);
-			var title   = sbDataSource.getProperty("title",   res);
-			var comment = sbDataSource.getProperty("comment", res);
+			var type    = sbDataSource.getProperty(res, "type");
+			var title   = sbDataSource.getProperty(res, "title");
+			var comment = sbDataSource.getProperty(res, "comment");
 			if ( !sbDataSource.exists(res) ) continue;
 			if ( this.QueryStrings['re'] == "true" )
 			{
@@ -138,7 +136,7 @@ var sbSearchResult =
 			}
 			if ( isMatchT || isMatchM || isMatchC )
 			{
-				var icon = sbDataSource.getProperty("icon", res);
+				var icon = sbDataSource.getProperty(res, "icon");
 				if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
 				sbSearchResult.treeItems.push([
 					title,
@@ -157,11 +155,11 @@ var sbSearchResult =
 
 		sbSearchResult.initTree();
 
-		if ( this.hit >= this.MAX_HIT ) document.getElementById("ScrapBookResult").setAttribute("class", "sb-header-ex");
-		var headerLabel1 = SBstring.getFormattedString( ( this.hit < this.MAX_HIT ) ? "RESULTS_FOUND" : "RESULTS_FOUND_OVER", [this.hit] );
+		if ( this.hit >= this.MAX_HIT ) document.getElementById("sbResultHeader").className = "sb-header sb-header-red";
+		var headerLabel1 = gCacheString.getFormattedString( ( this.hit < this.MAX_HIT ) ? "RESULTS_FOUND" : "RESULTS_FOUND_OVER", [this.hit] );
 		if ( this.QueryStrings['re'] == "true" )
 		{
-			var headerLabel2 = SBstring.getFormattedString("MATCHING", [ this.localizedQuotation(this.QueryStrings['q']) ]);
+			var headerLabel2 = gCacheString.getFormattedString("MATCHING", [ this.localizedQuotation(this.QueryStrings['q']) ]);
 		}
 		else
 		{
@@ -169,15 +167,15 @@ var sbSearchResult =
 			for ( var x = 0; x < this.includeWords.length; x++ ) {
 				includeQuoted.push(this.localizedQuotation(this.includeWords[x]));
 			}
-			if ( includeQuoted.length > 0 ) includeQuoted = SBstring.getFormattedString("INCLUDING", [includeQuoted.join(" ")]);
+			if ( includeQuoted.length > 0 ) includeQuoted = gCacheString.getFormattedString("INCLUDING", [includeQuoted.join(" ")]);
 			var excludeQuoted = [];
 			for ( var x = 0; x < this.excludeWords.length; x++ ) {
 				excludeQuoted.push(this.localizedQuotation(this.excludeWords[x]));
 			}
-			if ( excludeQuoted.length > 0 ) excludeQuoted = SBstring.getFormattedString("EXCLUDING", [excludeQuoted.join(" ")]);
+			if ( excludeQuoted.length > 0 ) excludeQuoted = gCacheString.getFormattedString("EXCLUDING", [excludeQuoted.join(" ")]);
 			var headerLabel2 = includeQuoted + " " + excludeQuoted;
 		}
-		document.getElementById("ScrapBookResultLabel").value = headerLabel1 + " : " + headerLabel2;
+		document.getElementById("sbResultHeader").firstChild.value = headerLabel1 + " : " + headerLabel2;
 	},
 
 
@@ -193,7 +191,12 @@ var sbSearchResult =
 		var treeView = new sbCustomTreeView(colIDs, this.treeItems);
 		treeView.getImageSrc = function(row, col)
 		{
-			if ( col == "sbTreeColTitle" || col.index == 0 ) return this._items[row][7];
+			if ( col.index == 0 ) return this._items[row][7];
+		};
+		treeView.getCellProperties = function(row, col, properties)
+		{
+			if ( col.index != 0 ) return;
+			properties.AppendElement(ATOM_SERVICE.getAtom(this._items[row][6]));
 		};
 		this.TREE.view = treeView;
 	},
@@ -217,20 +220,19 @@ var sbSearchResult =
 
 	localizedQuotation : function(aString)
 	{
-		return SBstring.getFormattedString("QUOTATION", [aString]);
+		return gCacheString.getFormattedString("QUOTATION", [aString]);
 	},
 
 
 	forward : function(key)
 	{
 		var id   = this.CURRENT_TREEITEM[5];
-		var url  = this.CURRENT_TREEITEM[6] == "note" ? "chrome://scrapbook/content/note.xul?id=" + id : SBbaseURL + "data/" + id + "/" + this.CURRENT_TREEITEM[4] + ".html";
+		var url  = this.CURRENT_TREEITEM[6] == "note" ? "chrome://scrapbook/content/note.xul?id=" + id : sbCommonUtils.getBaseHref(sbDataSource.data.URI) + "data/" + id + "/" + this.CURRENT_TREEITEM[4] + ".html";
 		switch ( key ) {
 			case "O" : sbCommonUtils.loadURL(url, false); break;
 			case "T" : sbCommonUtils.loadURL(url, true); break;
 			case "P" : window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome" ,id); break;
-			case "L" : sbCommonUtils.launchDirectory(sbCommonUtils.getContentDir(id));
-			default  : document.getElementById("ScrapBookBrowser").setAttribute("src", url); break;
+			default  : document.getElementById("sbBrowser").loadURI(url); break;
 		}
 	},
 
@@ -252,7 +254,7 @@ var sbSearchResult =
 
 function SB_exitResult()
 {
-	window.location.href = document.getElementById("ScrapBookBrowser").contentWindow.location.href;
+	window.location.href = document.getElementById("sbBrowser").contentWindow.location.href;
 }
 
 
@@ -269,9 +271,17 @@ var sbCacheService = {
 
 	build : function()
 	{
-		dump("sbCacheService::build\n");
-		window.title = SBstring.getString("BUILD_CACHE") + " - ScrapBook";
-		SBstatus.firstChild.value = SBstring.getString("BUILD_CACHE_INIT");
+		var winEnum = sbCommonUtils.WINDOW.getEnumerator("scrapbook");
+		while ( winEnum.hasMoreElements() )
+		{
+			var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
+			if ( win != window && win.location.href == "chrome://scrapbook/content/cache.xul" )
+			{
+				window.close(); return;
+			}
+		}
+		document.title = gCacheString.getString("BUILD_CACHE") + " - ScrapBook";
+		gCacheStatus.firstChild.value = gCacheString.getString("BUILD_CACHE_INIT");
 		sbCacheSource.refreshEntries();
 		this.dataDir = sbCommonUtils.getScrapBookDir().clone();
 		this.dataDir.append("data");
@@ -287,19 +297,19 @@ var sbCacheService = {
 		while ( resEnum.hasMoreElements() )
 		{
 			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			var type = sbDataSource.getProperty("type", res);
+			var type = sbDataSource.getProperty(res, "type");
 			if ( sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, res) )
 			{
 				this.prepareBuilding(res);
 			}
-			else if ( type == "image" || type == "file" )
+			else if ( type == "image" || type == "file" || type == "bookmark" )
 			{
 				continue;
 			}
 			else
 			{
 				this.resList.push(res);
-				this.folders.push(sbDataSource.getProperty("title", aContRes));
+				this.folders.push(sbDataSource.getProperty(aContRes, "title"));
 			}
 		}
 	},
@@ -308,13 +318,13 @@ var sbCacheService = {
 	processAsync : function()
 	{
 		var res = this.resList[this.index];
-		var id  = sbDataSource.getProperty("id", res);
+		var id  = sbDataSource.getProperty(res, "id");
 		var dir = this.dataDir.clone();
 		dir.append(id);
-		SBstatus.firstChild.value = SBstring.getString("BUILD_CACHE_UPDATE") + " " + sbDataSource.getProperty("title", res);
-		SBstatus.lastChild.value  = Math.round((this.index + 1) / this.resList.length * 100);
+		gCacheStatus.firstChild.value = gCacheString.getString("BUILD_CACHE_UPDATE") + " " + sbDataSource.getProperty(res, "title");
+		gCacheStatus.lastChild.value  = Math.round((this.index + 1) / this.resList.length * 100);
 		this.inspectFile(dir, "index");
-		if ( sbDataSource.getProperty("type", res) == "site" )
+		if ( sbDataSource.getProperty(res, "type") == "site" )
 		{
 			var url2name = dir.clone();
 			url2name.append("sb-url2name.txt");
@@ -330,7 +340,7 @@ var sbCacheService = {
 				}
 			}
 		}
-		if ( window.title != this.folders[this.index] ) window.title = this.folders[this.index] || SBstring.getString("BUILD_CACHE");
+		if ( document.title != this.folders[this.index] ) document.title = this.folders[this.index] || gCacheString.getString("BUILD_CACHE");
 		if ( ++this.index < this.resList.length )
 			setTimeout(function(){ sbCacheService.processAsync(); }, 0);
 		else
@@ -363,10 +373,9 @@ var sbCacheService = {
 			}
 			var content = sbCommonUtils.readFile(file);
 			try {
-				sbCommonUtils.UNICODE.charset = sbDataSource.getProperty("chars", this.resList[this.index]);
+				sbCommonUtils.UNICODE.charset = sbDataSource.getProperty(this.resList[this.index], "chars");
 				content = sbCommonUtils.UNICODE.ConvertToUnicode(content);
 			} catch(ex) {
-				dump("*** ScrapBook Failed to ConvertToUnicode : " + aDir.leafName + "\t" + aName + "\n");
 			}
 			contents.push(this.convertHTML2Text(content));
 		}
@@ -374,13 +383,11 @@ var sbCacheService = {
 		contents = contents.join("\t").replace(/[\x00-\x1F\x7F]/g, " ").replace(/\s+/g, " ");
 		if ( sbCacheSource.exists(resource) )
 		{
-			dump("+\t" + aDir.leafName + "#" + aName + "\n");
 			sbCacheSource.updateEntry(resource, "folder",  this.folders[this.index]);
 			sbCacheSource.updateEntry(resource, "content", contents);
 		}
 		else
 		{
-			dump("*\t" + aDir.leafName + "#" + aName + "\n");
 			sbCacheSource.addEntry(resource, contents);
 		}
 		this.uriHash[resource.Value] = true;
@@ -389,17 +396,16 @@ var sbCacheService = {
 
 	finalize : function()
 	{
-		window.title = SBstring.getString("BUILD_CACHE_UPDATE");
+		document.title = gCacheString.getString("BUILD_CACHE_UPDATE");
 		for ( var uri in this.uriHash )
 		{
 			if ( !this.uriHash[uri] && uri != "urn:scrapbook:cache" )
 			{
-				dump("-\t" + uri + "\n");
-				SBstatus.firstChild.value = SBstring.getString("BUILD_CACHE_REMOVE") + " " + uri;
+				gCacheStatus.firstChild.value = gCacheString.getString("BUILD_CACHE_REMOVE") + " " + uri;
 				sbCacheSource.removeEntry(sbCommonUtils.RDF.GetResource(uri));
 			}
 		}
-		SBstatus.firstChild.value = SBstring.getString("BUILD_CACHE_UPDATE") + "cache.rdf";
+		gCacheStatus.firstChild.value = gCacheString.getString("BUILD_CACHE_UPDATE") + "cache.rdf";
 		sbCacheSource.flush();
 		try {
 			if ( window.arguments[0] ) sbCommonUtils.loadURL(window.arguments[0], true);
@@ -492,13 +498,12 @@ var sbCacheSource = {
 		}
 	},
 
-	getProperty : function(aProp, aRes)
+	getProperty : function(aRes, aProp)
 	{
 		try {
 			var retVal = this.dataSource.GetTarget(aRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + aProp), true);
 			return retVal.QueryInterface(Components.interfaces.nsIRDFLiteral).Value;
 		} catch(ex) {
-			dump("*** ERROR sbCacheSource::getProperty " + aProp + " " + aRes.Value + "\n");
 			return "";
 		}
 	},
@@ -539,7 +544,7 @@ var sbHighlight = {
 	{
 		this.word = word;
 
-		var rootWin = document.getElementById("ScrapBookBrowser").contentWindow;
+		var rootWin = document.getElementById("sbBrowser").contentWindow;
 		this.frameList = [rootWin];
 		this.getFrameList(rootWin);
 

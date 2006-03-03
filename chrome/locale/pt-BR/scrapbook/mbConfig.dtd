@@ -1,8 +1,8 @@
-<!ENTITY mb.configure "Configure">
-<!ENTITY mb.prop.name "Name">
-<!ENTITY mb.prop.path "Path">
-<!ENTITY mb.button.add "Add">
-<!ENTITY mb.button.edit "Edit">
-<!ENTITY mb.button.remove "Remove">
-<!ENTITY mb.button.browse "Browse">
+<!ENTITY mb.configure "Configurar">
+<!ENTITY mb.prop.name "Nome">
+<!ENTITY mb.prop.path "Caminho">
+<!ENTITY mb.button.add "Adicionar">
+<!ENTITY mb.button.edit "Editar">
+<!ENTITY mb.button.remove "Remover">
+<!ENTITY mb.button.browse "Navegar">
 <!ENTITY mb.button.accept "OK">

@@ -1,10 +1,9 @@
-<!ENTITY sb.repair.rdfFile "Restore scrapbook.rdf">
-<!ENTITY sb.repair.rdfFile.descript "Try this if ScrapBook tree disappears suddenly.">
-<!ENTITY sb.repair.rdfFile.select "Select a backup file for the restoration.">
-<!ENTITY sb.repair.rdfFile.file "File">
-<!ENTITY sb.repair.rdfFile.time "Time">
-<!ENTITY sb.repair.rdfFile.size "Size">
-<!ENTITY sb.repair.rdfFile.complete "Completed. Please restart Firefox.">
-<!ENTITY sb.repair.favicons "Restore favicons in tree">
-<!ENTITY sb.repair.favicons.descript "Try this if many favicons in ScrapBook tree disappear.">
-<!ENTITY sb.repair.favicons.complete "Completed.">
+<!ENTITY sb.repair.rdfFile "復原 scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript "如果 ScrapBook 的資料突然都不見了，就試試這個方法。">
+<!ENTITY sb.repair.rdfFile.select "選擇欲復原的檔案版本。">
+<!ENTITY sb.repair.rdfFile.file "檔案">
+<!ENTITY sb.repair.rdfFile.time "時間">
+<!ENTITY sb.repair.rdfFile.size "尺寸">
+<!ENTITY sb.repair.favicons "復原圖示">
+<!ENTITY sb.repair.favicons.descript "如果許多擷取文件中的網站圖示消失了，就試試這個方法。">
+<!ENTITY sb.repair.complete "完成。">

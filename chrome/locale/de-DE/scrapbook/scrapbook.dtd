@@ -1,29 +1,19 @@
-<!ENTITY sb.title "ScrapBook">
 <!ENTITY sb.new.folder "Neuer Ordner...">
 <!ENTITY sb.new.note "Neue Notiz">
 <!ENTITY sb.toggle.all "Alle Ordner aus-/einklappen">
 <!ENTITY sb.tools "Extras">
-<!ENTITY sb.tools.setting "Einstellungen...">
+<!ENTITY sb.tools.settings "Einstellungen">
 <!ENTITY sb.tools.manage "Ordner verwalten">
+<!ENTITY sb.tools.combine "Zusammenfassen">
+<!ENTITY sb.tools.trade "Importieren/Exportieren">
+<!ENTITY sb.tools.multiple "Mehrere URLs archivieren">
+<!ENTITY sb.tools.directory "ScrapBook-Ordner öffnen">
 <!ENTITY sb.tools.calculate "Gesamtgröße berechnen">
 <!ENTITY sb.tools.sorttree "Ordnerliste sortieren">
-<!ENTITY sb.tools.directory "ScrapBook-Ordner öffnen">
-<!ENTITY sb.tools.combine "Zusammenfassen">
-<!ENTITY sb.tools.multiple "Mehrere URLs archivieren">
-<!ENTITY sb.tools.trade "Importieren/Exportieren">
 <!ENTITY sb.tools.output "Ordnerliste als HTML ausgeben">
 <!ENTITY sb.tools.backup "Komprimierte Sicherung anlegen">
 <!ENTITY sb.tools.repair "Notfallreparatur durchführen">
 <!ENTITY sb.tools.homepage "Homepage">
 <!ENTITY sb.tools.about "Über">
-<!ENTITY sb.search "Suchen">
-<!ENTITY sb.search.fulltext "Volltextsuche">
-<!ENTITY sb.search.all "Alles">
-<!ENTITY sb.search.re "Reguläre Ausdrücke verwenden">
-<!ENTITY sb.search.cs "Groß-/Kleinschreibung beachten">
-<!ENTITY sb.search.cache "Cache für Volltextsuche aktualisieren">
-<!ENTITY sb.search.clear "Suchchronik löschen">
-<!ENTITY sb.search.days "Nach Datum filtern">
 <!ENTITY sb.note.opentab "In Tab öffnen">
 <!ENTITY sb.note.close "Schließen">
-<!ENTITY sb.move "In Ordner verschieben">

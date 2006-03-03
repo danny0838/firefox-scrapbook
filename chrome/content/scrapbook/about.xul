@@ -6,35 +6,35 @@
 
 <!--locale-->
 <!DOCTYPE dialog [
-<!ENTITY % scrapbookDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
-%scrapbookDTD;
-<!ENTITY % aboutDTD     SYSTEM "chrome://scrapbook/locale/about.dtd" >
+<!ENTITY % mainDTD     SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+%mainDTD;
+<!ENTITY % aboutDTD    SYSTEM "chrome://scrapbook/locale/about.dtd" >
 %aboutDTD;
-<!ENTITY % mozaboutDTD  SYSTEM "chrome://mozapps/locale/extensions/about.dtd" >
+<!ENTITY % mozaboutDTD SYSTEM "chrome://mozapps/locale/extensions/about.dtd" >
 %mozaboutDTD;
 ]>
 
 <!--dialog-->
-<dialog id="ScrapBookAboutDialog"
-        title="&sb.tools.about; - &sb.title;"
+<dialog id="sbAboutDialog"
+        title="&sb.tools.about; - ScrapBook"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         buttons="accept"
         onload="SB_initAbout();">
 
-	<!--JavaScript-->
+	<!--script-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/about.js" />
 
-	<!--StringBundle-->
-	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/about.properties" />
+	<!--string-->
+	<stringbundle id="sbAboutString" src="chrome://scrapbook/locale/about.properties" />
 
 	<!--groupbox-->
 	<groupbox align="center" orient="horizontal">
 		<vbox flex="1">
 			<!--title,version-->
 			<vbox>
-				<image id="ScrapBookAboutTitle" />
-				<label id="ScrapBookAboutVersion" ondblclick="SB_secret();" />
+				<image id="sbAboutTitle" src="chrome://scrapbook/skin/title.png" />
+				<label id="sbAboutVersion" ondblclick="SB_secret();" />
 			</vbox>
 			<hbox>
 				<spacer flex="1" />
@@ -43,7 +43,7 @@
 			<!--creator-->
 			<label value="&creator.label;" class="header" />
 			<hbox align="center">
-				<label value="Gomita &lt;gomita.mail@gmail.com&gt;" href="gomita.mail@gmail.com" class="link" onclick="SB_mailto(this);" />
+				<label value="Gomita &lt;gomita.mail@gmail.com&gt;" href="gomita.mail@gmail.com" class="link" onclick="SB_visit(this);" />
 			</hbox>
 			<separator class="thin" />
 			<!--contributors-->
@@ -65,40 +65,36 @@
 						<label value="MatrixIsAllOver (it-IT)" href="http://www.extenzilla.it/forum/viewtopic.php?t=396" class="link" onclick="SB_visit(this);" />
 					</row>
 					<row>
-						<label value="Proyecto NAVE (es-ES)" href="http://nave.escomposlinux.org/" class="link" onclick="SB_visit(this);" />
-						<label value="WowTIP (sv-SE)" href="wowtip@hotmail.com" class="link" onclick="SB_mailto(this);" />
-					</row>
-					<row>
+						<label value="WowTIP (sv-SE)" href="wowtip@hotmail.com" class="link" onclick="SB_visit(this);" />
 						<label value="Ville Pohjanheimo (fi-FI)" href="http://www.dabase.com/~ville/" class="link" onclick="SB_visit(this);" />
-						<label value="mlok (cs-CZ)" href="mlok.cze@gmail.com" class="link" onclick="SB_mailto(this);" />
 					</row>
 					<row>
+						<label value="mlok (cs-CZ)" href="mlok.cze@gmail.com" class="link" onclick="SB_visit(this);" />
 						<label value="Yury Merkulov aka RED (ru-RU)" />
-						<label value="Eoin O'Cinneide (ga-IE)" href="eoinkennedy@hotmail.com" class="link" onclick="SB_mailto(this);" />
 					</row>
 					<row>
+						<label value="Eoin O'Cinneide (ga-IE)" href="eoinkennedy@hotmail.com" class="link" onclick="SB_visit(this);" />
 						<label value="Liesbeth (nl-NL)" />
+					</row>
+					<row>
 						<label value="Leszek(teo)Życzkowski (pl-PL)" href="http://mozillapl.org/katalogi_i_bazy/baza_dodatkow/rozszerzenia/oddzielne_moduly/scrapbook" class="link" onclick="SB_visit(this);" />
+						<label value="Joan Sala Soler (ca-AD)" href="joansala@gmail.com" class="link" onclick="SB_visit(this);" />
 					</row>
 					<row>
-						<label value="Joan Sala Soler (ca-AD)" href="joansala@gmail.com" class="link" onclick="SB_mailto(this);" />
 						<label value="Andre Luiz (pt-BR)" href="http://codigolivre.blogspot.com/" class="link" onclick="SB_visit(this);" />
+						<label value="Calimero 988 (fr-FR)" href="calimero988-mozilla@yahoo.fr" class="link" onclick="SB_visit(this);" />
 					</row>
 					<row>
-						<label value="Calimero 988 (fr-FR)" href="calimero988-mozilla@yahoo.fr" class="link" onclick="SB_mailto(this);" />
-						<label value="박찬규 (ko-KR)" />
-					</row>
-					<row>
+						<label value="sushizang (ko-KR)" />
 						<label value="陈力 (zh-CN)" href="http://www.firefox-china.org/" class="link" onclick="SB_visit(this);" />
-						<label value="George C. Tsoi (zh-CN)" href="http://www.moZine.org/" class="link" onclick="SB_visit(this);" />
 					</row>
 					<row>
-						<label value="Christoph Metze (de-DE)" />
+						<label value="George C. Tsoi (zh-CN)" href="http://www.moZine.org/" class="link" onclick="SB_visit(this);" />
 						<label value="ReinekeFux (de-DE)" href="http://www.erweiterungen.de/" class="link" onclick="SB_visit(this);" />
 					</row>
 					<row>
 						<label value="Jozsef Tamas Herczeg (hu-HU)" href="http://www.soft-trans.hu/" class="link" onclick="SB_visit(this);" />
-						<label />
+						<label value="Jose I. Plaza (es-ES)" />
 					</row>
 				</rows>
 			</grid>
@@ -106,8 +102,8 @@
 			<!--latest version-->
 			<label value="&update-info.label;" class="header" />
 			<hbox align="center">
-				<image id="ScrapBookUpdateImage" style="margin-right:6px;" />
-				<label id="ScrapBookUpdateLabel" />
+				<image id="sbUpdateImage" style="margin-right:6px;" />
+				<label id="sbUpdateLabel" />
 			</hbox>
 			<separator class="thin" />
 		</vbox>

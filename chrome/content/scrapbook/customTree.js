@@ -1,4 +1,6 @@
 
+const ATOM_SERVICE = Components.classes['@mozilla.org/atom-service;1'].getService(Components.interfaces.nsIAtomService);
+
 function sbCustomTreeView(aColIDs, aItems)
 {
 	this._items = aItems;
@@ -9,27 +11,17 @@ function sbCustomTreeView(aColIDs, aItems)
 
 sbCustomTreeView.prototype = 
 {
-	normalizeColumnIndex : function(col)
-	{
-		if ( col.index > -1 ) {
-			return col.index;
-		} else {
-			var colIdx = 0;
-			while ( colIdx < this.colIDs.length && col != this.colIDs[colIdx] ) ++colIdx;
-			return colIdx;
-		}
-	},
 	get rowCount()
 	{
 		return this._rowCount;
 	},
 	getCellText: function(row, col)
 	{
-		return this._items[row][this.normalizeColumnIndex(col)];
+		return this._items[row][col.index];
 	},
 	setCellText: function(row, col, val)
 	{
-		this._items[row][this.normalizeColumnIndex(col)] = val;
+		this._items[row][col.index] = val;
 	},
 	setTree: function(tree)
 	{

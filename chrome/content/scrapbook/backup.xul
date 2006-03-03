@@ -5,28 +5,28 @@
 
 <!--locale-->
 <!DOCTYPE wizard [
-<!ENTITY % scrapbookDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
-%scrapbookDTD;
-<!ENTITY % backupDTD    SYSTEM "chrome://scrapbook/locale/backup.dtd" >
+<!ENTITY % mainDTD   SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+%mainDTD;
+<!ENTITY % backupDTD SYSTEM "chrome://scrapbook/locale/backup.dtd" >
 %backupDTD;
 ]>
 
 <!--wizard-->
-<wizard id="ScrapBookBackupWizard"
+<wizard id="sbBackupWizard"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         onload="SB_initBackup();"
-        title="&sb.tools.backup; - &sb.title;"
+        title="&sb.tools.backup; - ScrapBook"
         style="height:400px;"
         windowtype="scrapbook">
 
-	<!--JavaScript-->
+	<!--script-->
 	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/backup.js" />
 
-	<!--StringBundle-->
-	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/scrapbook.properties" />
+	<!--stringbundle-->
+	<stringbundle id="sbMainString" src="chrome://scrapbook/locale/scrapbook.properties" />
 
 	<wizardpage label="&sb.tools.backup;" description="&sb.backup.d;" onpageadvanced="SB_execBackup();">
 
@@ -34,23 +34,23 @@
 		<groupbox>
 			<caption id="sbBackupProgramCaption" label="&sb.backup.program;" />
 			<hbox align="center" style="padding-left:10px;">
-				<textbox id="ScrapBookBackupProgramTextbox" flex="1" style="padding:2px;" />
-				<button  id="ScrapBookBackupProgramButton" label="&sb.backup.browse;..." oncommand="SB_selectCompressionProgram();" />
+				<textbox id="sbBackupProgramTextbox" flex="1" style="padding:2px;" />
+				<button  id="sbBackupProgramButton" label="&sb.backup.browse;..." oncommand="SB_selectCompressionProgram();" />
 			</hbox>
 		</groupbox>
 		<!--destination-->
 		<groupbox>
 			<caption id="sbBackupDestinationCaption" label="&sb.backup.file;" />
 			<hbox align="center" style="padding-left:10px;">
-				<textbox id="ScrapBookBackupDestinationTextbox" flex="1" style="padding:2px;" />
-				<button  id="ScrapBookBackupDestinationButton" label="&sb.backup.browse;..." oncommand="SB_selectBackupDestination();" />
+				<textbox id="sbBackupDestinationTextbox" flex="1" style="padding:2px;" />
+				<button  id="sbBackupDestinationButton" label="&sb.backup.browse;..." oncommand="SB_selectBackupDestination();" />
 			</hbox>
 		</groupbox>
 		<!--parameteres-->
 		<groupbox>
 			<caption label="&sb.backup.arg;" />
 			<hbox align="center" style="padding-left:10px;margin-bottom:5px;">
-				<menulist id="ScrapBookBackupArgumentsMenulist" editable="true" style="width:200px;">
+				<menulist id="sbBackupArgumentsMenulist" editable="true" style="width:200px;">
 					<menupopup>
 						<menuitem label="%dst %src -r" />
 						<menuitem label="a -ep1 %dst %src" />

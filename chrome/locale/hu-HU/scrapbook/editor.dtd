@@ -4,11 +4,9 @@
 <!ENTITY sb.editor.restore "A változtatások visszavonása és visszaállítás">
 <!ENTITY sb.editor.save "A változtatások mentése">
 <!ENTITY sb.editor.comment "A jegyzetek területének megnövelése">
-<!ENTITY sb.editor.block "Jegyzet blokk">
-<!ENTITY sb.editor.block.insert "A(z) &sb.editor.block; beszúrása a kijelölés után">
-<!ENTITY sb.editor.block.hide "A(z) &sb.editor.block;s elrejtése">
-<!ENTITY sb.editor.inline.add "Beiktatott megjegyzés hozzáadása a kijelöléshez">
-<!ENTITY sb.editor.inline.delete "Az összes beiktatott megjegyzés eltávolítása">
+<!ENTITY sb.editor.sticky "Sticky Annotation">
+<!ENTITY sb.editor.sticky.create "Create &sb.editor.sticky;">
+<!ENTITY sb.editor.inline.add "Add Inline Annotation to Selection">
 <!ENTITY sb.editor.attach.file "Fájl csatolása a kijelöléshez">
 <!ENTITY sb.editor.attach.link "Hivatkozás csatolása a kijelöléshez">
 <!ENTITY sb.editor.cutter "A kijelölés eltávolítása">
@@ -19,7 +17,8 @@
 <!ENTITY sb.highlighter.remove.all "Az összes kijelölés törlése">
 <!ENTITY sb.customize "Testreszabás">
 <!ENTITY sb.infobar.openSource "A forráswebcím megnyitása">
-<!ENTITY sb.infobar.showSitemap "A(z) &sb.infobar.sitemap; megjelenítése">
+<!ENTITY sb.infobar.renew "Capture Again">
+<!ENTITY sb.infobar.showIndicators "Show Link Indicators">
 <!ENTITY sb.infobar.showInfobar "Az információs eszköztár megjelenítése">
 <!ENTITY sb.infobar.home "Kezdőlap">
 <!ENTITY sb.infobar.sitemap "Helyszerkezet">

@@ -2,15 +2,31 @@
 <!ENTITY sb.open.tab "Öppna i flik">
 <!ENTITY sb.open.newtab "Öppna i ny flik">
 <!ENTITY sb.open.source "Öppna URL som posten sparades från">
+<!ENTITY sb.tools "Verktyg">
 <!ENTITY sb.show.files "Visa filer">
-<!ENTITY sb.delete "Radera">
+<!ENTITY sb.move "Flytta till mapp">
+<!ENTITY sb.renew "Capture Again">
+<!ENTITY sb.export "Exporta">
+<!ENTITY sb.remove "Radera">
 <!ENTITY sb.property "Egenskaper">
+<!ENTITY sb.listview "List View">
+<!ENTITY sb.prop.title "Titel">
+<!ENTITY sb.prop.comment "Kommentar">
+<!ENTITY sb.prop.id.date "ID (Tid)">
 <!ENTITY sb.folder.toggle "Visa/Göm">
+<!ENTITY sb.folder.combine "Combined View">
 <!ENTITY sb.folder.openall "Öppna alla i nya flikar">
-<!ENTITY sb.folder.combine "Öppna alla sidor i mappen i en flik">
 <!ENTITY sb.folder.manage "Ordna mappar...">
 <!ENTITY sb.new.folder "Ny Mapp...">
 <!ENTITY sb.new.note "Ny Notering">
 <!ENTITY sb.sort.folder "Sortera mappen">
+<!ENTITY sb.search "Sök">
+<!ENTITY sb.search.fulltext "Full textsökning">
+<!ENTITY sb.search.all "Alla">
+<!ENTITY sb.search.re "Använd RegExp">
+<!ENTITY sb.search.cs "Matcha gemener/versaler">
+<!ENTITY sb.search.cache "Uppdatera Cache inför full textsökning">
+<!ENTITY sb.search.clear "Rensa historik">
+<!ENTITY sb.search.days "Filtrera dagvis">
 <!ENTITY mb.configure "Configure">
 <!ENTITY mb.profileFolder "Profile Folder">

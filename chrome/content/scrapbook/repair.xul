@@ -5,24 +5,25 @@
 
 <!--locale-->
 <!DOCTYPE wizard [
-<!ENTITY % scrapbookDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
-%scrapbookDTD;
-<!ENTITY % repairDTD    SYSTEM "chrome://scrapbook/locale/repair.dtd" >
+<!ENTITY % mainDTD   SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+%mainDTD;
+<!ENTITY % repairDTD SYSTEM "chrome://scrapbook/locale/repair.dtd" >
 %repairDTD;
 ]>
 
 <!--wizard-->
 <wizard id="sbRepairWizard"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        title="&sb.tools.repair; - &sb.title;"
+        title="&sb.tools.repair; - ScrapBook"
         windowtype="scrapbook">
 
-	<!--JavaScript-->
+	<!--script-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/repair.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/trade.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/mbService.js" />
 
 	<keyset>
 		<key keycode="VK_F5" oncommand="window.location.reload();" />
@@ -54,12 +55,12 @@
 
 	<wizardpage pageid="sbRepairRDF2" label="&sb.repair.rdfFile;" onpageshow="sbRepair.execRestoreRDF();">
 		<description id="sbRepairRDF2Text" />
-		<label id="sbRepairRDFCompleted" value="&sb.repair.rdfFile.complete;" hidden="true" />
+		<label id="sbRepairRDFCompleted" value="&sb.repair.complete;" hidden="true" />
 	</wizardpage>
 
 	<wizardpage pageid="sbRepairFavicons" label="&sb.repair.favicons;" onpageshow="sbRepair.restoreFavicons();">
 		<textbox id="sbRepairFaviconsTextbox" readonly="true" />
-		<label id="sbRepairFaviconsCompleted" value="&sb.repair.favicons.complete;" hidden="true" />
+		<label id="sbRepairFaviconsCompleted" value="&sb.repair.complete;" hidden="true" />
 	</wizardpage>
 
 </wizard>

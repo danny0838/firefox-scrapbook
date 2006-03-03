@@ -1,10 +1,9 @@
-<!ENTITY sb.repair.rdfFile "Restore scrapbook.rdf">
-<!ENTITY sb.repair.rdfFile.descript "Try this if ScrapBook tree disappears suddenly.">
-<!ENTITY sb.repair.rdfFile.select "Select a backup file for the restoration.">
-<!ENTITY sb.repair.rdfFile.file "File">
-<!ENTITY sb.repair.rdfFile.time "Time">
-<!ENTITY sb.repair.rdfFile.size "Size">
-<!ENTITY sb.repair.rdfFile.complete "Completed. Please restart Firefox.">
-<!ENTITY sb.repair.favicons "Restore favicons in tree">
-<!ENTITY sb.repair.favicons.descript "Try this if many favicons in ScrapBook tree disappear.">
-<!ENTITY sb.repair.favicons.complete "Completed.">
+<!ENTITY sb.repair.rdfFile "Cuir ar ais scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript "Triail &#233; seo m&#225; theann crann an Leabhar Gearrth&#225;n as radharc go tobann.">
+<!ENTITY sb.repair.rdfFile.select "Roghnaigh Comhad C&#250;ltaca don Chuir ar Ais.">
+<!ENTITY sb.repair.rdfFile.file "Comhad">
+<!ENTITY sb.repair.rdfFile.time "Am">
+<!ENTITY sb.repair.rdfFile.size "Toirt">
+<!ENTITY sb.repair.favicons "Cuir ar Ais favicons sa chrann">
+<!ENTITY sb.repair.favicons.descript "Triail &#233; seo m&#225; theann an-chuid favicons sa chrann Leabhar Gearrth&#225;n as radharc.">
+<!ENTITY sb.repair.complete "Deannta.">

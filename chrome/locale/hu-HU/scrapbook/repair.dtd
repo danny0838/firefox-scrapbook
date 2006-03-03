@@ -4,7 +4,6 @@
 <!ENTITY sb.repair.rdfFile.file "Fájl">
 <!ENTITY sb.repair.rdfFile.time "Idő">
 <!ENTITY sb.repair.rdfFile.size "Méret">
-<!ENTITY sb.repair.rdfFile.complete "Elkészült. Indítsa újra a Firefoxot.">
 <!ENTITY sb.repair.favicons "A faviconok visszaállítása a fában">
 <!ENTITY sb.repair.favicons.descript "Ezt akkor próbálja meg, ha az dossziéfa faviconjai közül sok eltűnik.">
-<!ENTITY sb.repair.favicons.complete "Elkészült.">
+<!ENTITY sb.repair.complete "Elkészült.">

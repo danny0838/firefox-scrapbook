@@ -1,6 +1,8 @@
 <!ENTITY sb.detail "Detalhe da Captura">
 <!ENTITY sb.detail.new.folder "Nova Pasta">
 <!ENTITY sb.detail.select.folder "Selecionar Pasta">
+<!ENTITY sb.detail.option "Opções">
+<!ENTITY sb.detail.option.format "Imagens e Estilos">
 <!ENTITY sb.detail.linked.file "Download de links">
 <!ENTITY sb.detail.linked.image "Imagem">
 <!ENTITY sb.detail.linked.sound "Som">
@@ -11,3 +13,4 @@
 <!ENTITY sb.detail.linked.page2 "Capturar Páginas Relacionadas">
 <!ENTITY sb.detail.linked.page.depth "Profundidade para seguir os links">
 <!ENTITY sb.detail.linked.page.text "Após completar as capturas, todas as páginas serão ligadas umas às outras e o mapa do site será criado.">
+<!ENTITY sb.detail.warnAboutRenew "AVISO: 'Capturar Novamente' substitui a página salva anteriormente.">

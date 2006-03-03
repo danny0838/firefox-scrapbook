@@ -2,5 +2,4 @@
 <!ENTITY sb.combine.select.d "Double-click pages in the order you want to combine.">
 <!ENTITY sb.combine.preview "Preview">
 <!ENTITY sb.combine.preview.d "Press 'Combine' button after verifying the preview.">
-<!ENTITY sb.combine.option.header "Add info-header to each pages">
 <!ENTITY sb.combine.option.remove "After completing combine, remove original pages">

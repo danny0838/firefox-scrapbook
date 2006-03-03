@@ -9,51 +9,64 @@
 
 <!--locale-->
 <!DOCTYPE wizard [
-<!ENTITY % scrapbookDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
-%scrapbookDTD;
-<!ENTITY % combineDTD   SYSTEM "chrome://scrapbook/locale/combine.dtd" >
+<!ENTITY % mainDTD    SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+%mainDTD;
+<!ENTITY % propDTD    SYSTEM "chrome://scrapbook/locale/property.dtd" >
+%propDTD;
+<!ENTITY % detailDTD  SYSTEM "chrome://scrapbook/locale/detail.dtd" >
+%detailDTD;
+<!ENTITY % combineDTD SYSTEM "chrome://scrapbook/locale/combine.dtd" >
 %combineDTD;
 ]>
 
 <!--wizard-->
 <wizard id="sbCombineWizard"
-        title="&sb.tools.combine; (Trial Version) - &sb.title;"
+        title="&sb.tools.combine; - ScrapBook"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         width="600" height="500"
         windowtype="scrapbook">
 
-	<!--JavaScript-->
-	<script type="application/x-javascript" src="chrome://scrapbook/content/manage.js" />
+	<!--script-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/saver.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/capture.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/detail.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/combine.js" />
 
-	<!--StringBundle-->
+	<!--stringbundle-->
 	<stringbundleset>
-		<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/capture.properties" />
+		<stringbundle id="sbMainString"    src="chrome://scrapbook/locale/scrapbook.properties" />
+		<stringbundle id="sbCaptureString" src="chrome://scrapbook/locale/capture.properties" />
 		<stringbundle id="sbCombineString" src="chrome://scrapbook/locale/combine.properties" />
 	</stringbundleset>
 
+	<!--broadcaster-->
+	<broadcasterset id="sbBroadcasters" />
+
 	<!--keyset-->
-	<keyset id="ScrapBookGenericKeyset" />
+	<keyset id="sbGenericKeys" />
 
 	<!--startpage-->
 	<wizardpage pageid="sbCombineStartPage"
 	            next="sbCombinePreviewPage"
 	            label="&sb.combine.select;"
 	            description="&sb.combine.select.d;"
-	            onpageshow="sbPageBinder.init();">
+	            onpageshow="sbCombineService.init();">
 		<hbox flex="1">
-			<tree id="ScrapBookTree"
-			      onclick="sbTreeHandler.onClick(event);"
-			      ondblclick="if (event.button == 0) sbPageBinder.add();"
+			<tree id="sbTree"
+			      onclick="sbTreeHandler.onClick(event, 0);"
+			      ondblclick="if (event.button == 0) sbCombineService.add();"
 			      onkeypress="sbTreeHandler.onKeyPress(event);"
 			      seltype="single"
 			      flex="1" style="min-width:200px;" />
 			<vbox flex="1">
+				<!--folder-->
+				<hbox align="center" style="margin-bottom:8px;">
+					<label value="&sb.prop.folder;:" />
+					<textbox id="sbFolderTextbox" readonly="true" flex="1" />
+					<toolbarbutton id="sbToolbarMove" tooltiptext="&sb.detail.select.folder;..." oncommand="sbFolderSelector2.openFolderPicker();" />
+				</hbox>
 				<listbox id="sbCombineListbox" style="height:200px;margin-bottom:12px;" />
-				<checkbox id="sbCombineOptionH" label="&sb.combine.option.header;" checked="true" />
-				<checkbox id="sbCombineOptionR" label="&sb.combine.option.remove;" disabled="true" />
+				<checkbox id="sbCombineOptionR" label="&sb.combine.option.remove;" style="color:red;" />
 			</vbox>
 		</hbox>
 	</wizardpage>
@@ -62,9 +75,9 @@
 	<wizardpage pageid="sbCombinePreviewPage"
 	            label="&sb.combine.preview;"
 	            description="&sb.combine.preview.d;"
-	            onpageshow="sbPageBinder.initPreview();">
-		<textbox id="ScrapBookCaptureTextbox" readonly="true" style="padding:2px;" />
-		<browser id="ScrapBookCaptureBrowser" collapsed="true" flex="1" />
+	            onpageshow="sbCombineService.initPreview();">
+		<textbox id="sbCaptureTextbox" readonly="true" style="padding:2px;" />
+		<browser id="sbCaptureBrowser" collapsed="true" flex="1" />
 	</wizardpage>
 
 </wizard>

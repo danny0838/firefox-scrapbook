@@ -2,15 +2,31 @@
 <!ENTITY sb.open.tab "Otevřít v panelu">
 <!ENTITY sb.open.newtab "Otevřít v novém panelu">
 <!ENTITY sb.open.source "Otevřít zdroj URL">
+<!ENTITY sb.tools "Nástroje">
 <!ENTITY sb.show.files "Zobrazit soubory">
-<!ENTITY sb.delete "Vymazat">
+<!ENTITY sb.move "Přesunout do složky">
+<!ENTITY sb.renew "Capture Again">
+<!ENTITY sb.export "Exportovat">
+<!ENTITY sb.remove "Vymazat">
 <!ENTITY sb.property "Vlastnosti">
+<!ENTITY sb.listview "List View">
+<!ENTITY sb.prop.title "Název">
+<!ENTITY sb.prop.comment "Komentář">
+<!ENTITY sb.prop.id.date "ID (Čas)">
 <!ENTITY sb.folder.toggle "Rozbalit/Sbalit">
+<!ENTITY sb.folder.combine "Kombinovaném náhledu">
 <!ENTITY sb.folder.openall "Otevřít vše v panelech">
-<!ENTITY sb.folder.combine "Otevřít v kombinovaném náhledu">
 <!ENTITY sb.folder.manage "Správce složky...">
 <!ENTITY sb.new.folder "Nová složka...">
 <!ENTITY sb.new.note "Nová poznámka">
 <!ENTITY sb.sort.folder "Seřadit složku">
+<!ENTITY sb.search "Hledat">
+<!ENTITY sb.search.fulltext "Fulltextové hledání">
+<!ENTITY sb.search.all "Vše">
+<!ENTITY sb.search.re "Použít regulární výrazy">
+<!ENTITY sb.search.cs "Porovnat podle důležitosti">
+<!ENTITY sb.search.cache "Aktualizovat cache pro Fulltextové hledání">
+<!ENTITY sb.search.clear "Vymazat historii formuláře">
+<!ENTITY sb.search.days "Filtr podle Dní">
 <!ENTITY mb.configure "Configure">
 <!ENTITY mb.profileFolder "Profile Folder">

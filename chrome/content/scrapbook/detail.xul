@@ -6,14 +6,16 @@
 
 <!--locale-->
 <!DOCTYPE dialog [
-<!ENTITY % propertyDTD SYSTEM "chrome://scrapbook/locale/property.dtd" >
-%propertyDTD;
-<!ENTITY % detailDTD   SYSTEM "chrome://scrapbook/locale/detail.dtd" >
+<!ENTITY % propDTD   SYSTEM "chrome://scrapbook/locale/property.dtd" >
+%propDTD;
+<!ENTITY % treeDTD   SYSTEM "chrome://scrapbook/locale/tree.dtd" >
+%treeDTD;
+<!ENTITY % detailDTD SYSTEM "chrome://scrapbook/locale/detail.dtd" >
 %detailDTD;
 ]>
 
 <!--dialog-->
-<dialog id="ScrapBookDetailDialog"
+<dialog id="sbDetailDialog"
         title="ScrapBook - &sb.detail;"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         style="width:400px;"
@@ -22,14 +24,14 @@
         ondialogaccept="SB_acceptDetail();"
         ondialogcancel="SB_cancelDetail();">
 
-	<!--JavaScript-->
+	<!--script-->
 	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/detail.js" />
 
-	<!--StringBundle-->
-	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/scrapbook.properties" />
+	<!--stringbundle-->
+	<stringbundle id="sbMainString" src="chrome://scrapbook/locale/scrapbook.properties" />
 
 	<tabbox flex="1">
 		<tabs orient="horizontal">
@@ -37,6 +39,7 @@
 			<tab label="&sb.prop.comment;" />
 		</tabs>
 		<tabpanels flex="1">
+			<!--general-->
 			<tabpanel orient="vertical">
 				<grid style="margin-top:3px;">
 					<columns>
@@ -46,51 +49,60 @@
 					<rows>
 						<!--title-->
 						<row align="center" style="margin-bottom:6px;">
-							<label control="ScrapBookDetailTitle" value="&sb.prop.title;:" />
-							<menulist id="ScrapBookDetailTitle" editable="true" flex="1" />
+							<label control="sbDetailTitle" value="&sb.prop.title;:" />
+							<menulist id="sbDetailTitle" editable="true" flex="1" />
 						</row>
 						<!--folder-->
-						<row align="center" style="margin-bottom:8px;">
+						<row id="sbDetailFolderRow" align="center" style="margin-bottom:6px;">
 							<label value="&sb.prop.folder;:" />
 							<hbox>
-								<menulist id="ScrapBookDetailFolder" class="folder-icon" flex="1" disabled="true">
-									<menupopup id="ScrapBookDetailFolderPopup" oncommand="SBfolderList.onselect(event.target.id);" />
+								<menulist id="sbFolderList" class="folder-icon" flex="1" disabled="true">
+									<menupopup id="sbFolderPopup" oncommand="sbFolderSelector.onSelect(event.target.id);" />
 								</menulist>
-								<toolbarbutton image="chrome://scrapbook/skin/tool_createfolder.png" tooltiptext="&sb.detail.new.folder;..."    oncommand="SBfolderList.createFolder();" />
-								<toolbarbutton image="chrome://scrapbook/skin/tool_selectfolder.png" tooltiptext="&sb.detail.select.folder;..." oncommand="SBfolderList.openFolderPicker();" />
+								<toolbarbutton id="sbToolbarNewFolder" tooltiptext="&sb.detail.new.folder;..."    oncommand="sbFolderSelector.createFolder();" />
+								<toolbarbutton id="sbToolbarMove"      tooltiptext="&sb.detail.select.folder;..." oncommand="sbFolderSelector.openFolderPicker();" />
 							</hbox>
 						</row>
 					</rows>
 				</grid>
+				<!--options-->
+				<hbox align="center" style="margin-bottom:8px;">
+					<label value="&sb.detail.option;:" />
+					<checkbox id="sbDetailFormat" label="&sb.detail.option.format;" checked="true" />
+					<checkbox id="sbDetailScript" label="JavaScript" />
+				</hbox>
 				<!--download linked files-->
 				<groupbox>
 					<caption label="&sb.detail.linked.file;" />
-					<checkbox id="ScrapBookDetailLinkedI" persist="checked" label="&sb.detail.linked.image; (jpg, png, gif)" />
-					<checkbox id="ScrapBookDetailLinkedS" persist="checked" label="&sb.detail.linked.sound; (mp3, wav, ram, wma)" />
-					<checkbox id="ScrapBookDetailLinkedM" persist="checked" label="&sb.detail.linked.movie; (mpg, avi, ram, mov, wmv)" />
-					<checkbox id="ScrapBookDetailLinkedA" persist="checked" label="&sb.detail.linked.archive; (zip, lzh, rar, xpi)" />
+					<checkbox id="sbDetailImage"   persist="checked" label="&sb.detail.linked.image; (jpg, png, gif)" />
+					<checkbox id="sbDetailSound"   persist="checked" label="&sb.detail.linked.sound; (mp3, wav, ram, wma)" />
+					<checkbox id="sbDetailMovie"   persist="checked" label="&sb.detail.linked.movie; (mpg, avi, ram, mov, wmv)" />
+					<checkbox id="sbDetailArchive" persist="checked" label="&sb.detail.linked.archive; (zip, lzh, rar, xpi)" />
 					<hbox align="center">
-						<checkbox id="ScrapBookDetailLinkedCustom" persist="checked" label="&sb.detail.linked.custom;" oncommand="SB_toggleLinkedCustom();" />
+						<checkbox id="sbDetailCustom" persist="checked" label="&sb.detail.linked.custom;" oncommand="SB_toggleLinkedCustom();" />
 						<textbox flex="1" />
 					</hbox>
 				</groupbox>
-				<!--capture linked pages-->
-				<groupbox>
+				<!--in-depth capture-->
+				<groupbox id="sbDetailInDepthBox">
 					<caption label="&sb.detail.linked.page;" />
 					<hbox align="center">
-						<label value="&sb.detail.linked.page.depth;:" />
-						<radiogroup id="ScrapBookDetailLinkedP" orient="horizontal" onselect="SB_checkLinkedCustom(this);">
+						<label id="sbDetailInDepthLabel" value="&sb.detail.linked.page.depth;:" />
+						<radiogroup id="sbDetailInDepthRadioGroup" orient="horizontal" onselect="gInDepthLevel = this.selectedIndex;">
 							<radio label="0" selected="true" />
 							<radio label="1" />
 							<radio label="2" />
 							<radio label="3" />
 						</radiogroup>
+						<toolbarbutton class="plain" image="chrome://scrapbook/skin/expander.png" style="-moz-appearance:none;" oncommand="SB_promptForDepth();" />
 					</hbox>
-					<description flex="1">&sb.detail.linked.page.text;</description>
+					<!--<description flex="1">&sb.detail.linked.page.text;</description>-->
 				</groupbox>
+				<description id="sbDetailWarnAboutRenew" flex="1" style="color:red;" hidden="true">&sb.detail.warnAboutRenew;</description>
 			</tabpanel>
+			<!--comment-->
 			<tabpanel>
-				<textbox id="ScrapBookDetailComment" multiline="true" flex="1" />
+				<textbox id="sbDetailComment" multiline="true" flex="1" />
 			</tabpanel>
 		</tabpanels>
 	</tabbox>

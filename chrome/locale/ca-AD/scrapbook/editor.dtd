@@ -4,11 +4,9 @@
 <!ENTITY sb.editor.restore "Abandona els canvis i restaura">
 <!ENTITY sb.editor.save "Desa els canvis">
 <!ENTITY sb.editor.comment "Expandeix/Redueix l'àrea de comentaris">
-<!ENTITY sb.editor.block "Comentari">
-<!ENTITY sb.editor.block.insert "Afegeix un comentari després de la selecció">
-<!ENTITY sb.editor.block.hide "Amaga els comentaris">
-<!ENTITY sb.editor.inline.add "Afegeix una anotació a la selecció">
-<!ENTITY sb.editor.inline.delete "Suprimeix totes les anotacions">
+<!ENTITY sb.editor.sticky "Sticky Annotation">
+<!ENTITY sb.editor.sticky.create "Create &sb.editor.sticky;">
+<!ENTITY sb.editor.inline.add "Add Inline Annotation to Selection">
 <!ENTITY sb.editor.attach.file "Adjunta un fitxer a la selecció">
 <!ENTITY sb.editor.attach.link "Adjunta un enllaç a la selecció">
 <!ENTITY sb.editor.cutter "Suprimeix la selecció">
@@ -19,7 +17,8 @@
 <!ENTITY sb.highlighter.remove.all "Suprimeix tots els ressaltats">
 <!ENTITY sb.customize "Personalitza">
 <!ENTITY sb.infobar.openSource "Obre l'URL font">
-<!ENTITY sb.infobar.showSitemap "Show &sb.infobar.sitemap;">
+<!ENTITY sb.infobar.renew "Capture Again">
+<!ENTITY sb.infobar.showIndicators "Show Link Indicators">
 <!ENTITY sb.infobar.showInfobar "Show Info Toolbar">
 <!ENTITY sb.infobar.home "Inici">
 <!ENTITY sb.infobar.sitemap "Mapa web">

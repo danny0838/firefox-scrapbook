@@ -1,29 +1,19 @@
-<!ENTITY sb.title "ScrapBook">
 <!ENTITY sb.new.folder "Nowy folder">
 <!ENTITY sb.new.note "Nowa notatka">
 <!ENTITY sb.toggle.all "Rozwiń/Zwiń wszystkie foldery">
 <!ENTITY sb.tools "Narzędzia">
-<!ENTITY sb.tools.setting "Ustawienia">
+<!ENTITY sb.tools.settings "Ustawienia">
 <!ENTITY sb.tools.manage "Zarządzanie">
+<!ENTITY sb.tools.combine "Łączenie stron">
+<!ENTITY sb.tools.trade "Import / Eksport">
+<!ENTITY sb.tools.multiple "Przechwytywanie adresów URL">
+<!ENTITY sb.tools.directory "Katalog główny ScrapBook">
 <!ENTITY sb.tools.calculate "Oblicz zajmowaną powierzchnię">
 <!ENTITY sb.tools.sorttree "Sortuj całe drzewo">
-<!ENTITY sb.tools.directory "Katalog główny ScrapBook">
-<!ENTITY sb.tools.combine "Łączenie stron">
-<!ENTITY sb.tools.multiple "Przechwytywanie adresów URL">
-<!ENTITY sb.tools.trade "Import / Eksport">
 <!ENTITY sb.tools.output "Zapisz dane jako dokument HTML">
 <!ENTITY sb.tools.backup "Tworzenie skompresowanej kopii zapasowej">
 <!ENTITY sb.tools.repair "Naprawa uszkodzeń">
 <!ENTITY sb.tools.homepage "Strona domowa">
 <!ENTITY sb.tools.about "O rozszerzeniu">
-<!ENTITY sb.search "Szukaj">
-<!ENTITY sb.search.fulltext "Szukaj wszystkich słów">
-<!ENTITY sb.search.all "Wszystko">
-<!ENTITY sb.search.re "Użyj RegExp (wyrażeń regularnych)">
-<!ENTITY sb.search.cs "Uwzględnij wielkość liter">
-<!ENTITY sb.search.cache "Szukanie wszystkich słów - uaktualnij pamięć podręczną">
-<!ENTITY sb.search.clear "Wyczyść formularz historii">
-<!ENTITY sb.search.days "Filtrowanie wg. dni">
 <!ENTITY sb.note.opentab "Otwórz w karcie">
 <!ENTITY sb.note.close "Zamknij">
-<!ENTITY sb.move "Przenieś do folderu">

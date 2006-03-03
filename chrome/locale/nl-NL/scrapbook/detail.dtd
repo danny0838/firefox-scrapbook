@@ -1,6 +1,8 @@
 <!ENTITY sb.detail "Geavanceerd bewaren">
 <!ENTITY sb.detail.new.folder "Nieuwe map">
 <!ENTITY sb.detail.select.folder "Map kiezen">
+<!ENTITY sb.detail.option "Options">
+<!ENTITY sb.detail.option.format "Images and Styles">
 <!ENTITY sb.detail.linked.file "Bewaren, inclusief gelinkte bestanden">
 <!ENTITY sb.detail.linked.image "Afbeelding">
 <!ENTITY sb.detail.linked.sound "Geluid">
@@ -11,3 +13,4 @@
 <!ENTITY sb.detail.linked.page2 "Gekoppelde internetpagina's bewaren">
 <!ENTITY sb.detail.linked.page.depth "Koppelingen grondig volgen">
 <!ENTITY sb.detail.linked.page.text "Na het voltooien van het bewaren, zullen alle pagina's gekoppeld worden en wordt er een internetpaginamap aangemaakt.">
+<!ENTITY sb.detail.warnAboutRenew "NOTICE: 'Capture Again' overwrites the previously saved page.">

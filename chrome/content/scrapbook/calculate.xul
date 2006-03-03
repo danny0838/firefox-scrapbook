@@ -6,34 +6,35 @@
 
 <!--locale-->
 <!DOCTYPE window [
-<!ENTITY % scrapbookDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
-%scrapbookDTD;
-<!ENTITY % treeDTD      SYSTEM "chrome://scrapbook/locale/tree.dtd" >
+<!ENTITY % mainDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+%mainDTD;
+<!ENTITY % treeDTD SYSTEM "chrome://scrapbook/locale/tree.dtd" >
 %treeDTD;
-<!ENTITY % propertyDTD  SYSTEM "chrome://scrapbook/locale/property.dtd" >
-%propertyDTD;
-<!ENTITY % calculateDTD SYSTEM "chrome://scrapbook/locale/calculate.dtd" >
-%calculateDTD;
+<!ENTITY % propDTD SYSTEM "chrome://scrapbook/locale/property.dtd" >
+%propDTD;
+<!ENTITY % calcDTD SYSTEM "chrome://scrapbook/locale/calculate.dtd" >
+%calcDTD;
 ]>
 
 <!--window-->
-<window id="ScrapBookCalcWindow"
-        title="&sb.tools.calculate; - &sb.title;"
+<window id="sbCalcWindow"
+        title="&sb.tools.calculate; - ScrapBook"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         width="500" height="450"
         persist="screenX screenY"
-        onload="setTimeout(function(){ sbCalc.exec(); }, 0);"
+        onload="setTimeout(function(){ sbCalcService.exec(); }, 0);"
         windowtype="scrapbook">
 
-	<!--JavaScript-->
+	<!--script-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/calculate.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/property.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapbook.js" />
 
-	<!--StringBundle-->
-	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/calculate.properties" />
+	<!--stringbundle-->
+	<stringbundle id="sbPropString" src="chrome://scrapbook/locale/property.properties" />
 
 	<keyset>
 		<key keycode="VK_ESCAPE" oncommand="window.close();" />
@@ -42,12 +43,12 @@
 
 	<!--popup-->
 	<popupset>
-		<popup id="ScrapBookTreePopup" onpopupshowing="sbCalcControl.createPopupMenu();">
-			<menuitem label="&sb.open;"        oncommand="sbCalcControl.open(false);" default="true" />
-			<menuitem label="&sb.open.newtab;" oncommand="sbCalcControl.open(true);" />
-			<menuitem label="&sb.show.files;"  oncommand="sbCalcControl.forward('L');" />
-			<menuseparator /><menuitem id="ScrapBookTreePopupD" class="menuitem-iconic" label="&sb.delete;"   oncommand="sbCalcControl.remove();" disbabled="true" />
-			<menuseparator /><menuitem id="ScrapBookTreePopupP" class="menuitem-iconic" label="&sb.property;" oncommand="sbCalcControl.forward('P');" />
+		<popup id="sbCalcPopup" onpopupshowing="sbCalcController.createPopupMenu();">
+			<menuitem label="&sb.open;"        oncommand="sbCalcController.open(false);" default="true" />
+			<menuitem label="&sb.open.newtab;" oncommand="sbCalcController.open(true);" />
+			<menuitem label="&sb.show.files;"  oncommand="sbCalcController.forward('L');" />
+			<menuseparator /><menuitem id="sbPopupRemove"   class="menuitem-iconic" label="&sb.remove;"   oncommand="sbCalcController.remove();" disbabled="true" />
+			<menuseparator /><menuitem id="sbPopupProperty" class="menuitem-iconic" label="&sb.property;" oncommand="sbCalcController.forward('P');" />
 		</popup>
 	</popupset>
 
@@ -59,20 +60,20 @@
 		<rows>
 			<row align="center">
 				<label value="&sb.calc.total.size;:" />
-				<textbox id="ScrapBookTotalSize" readonly="true" />
+				<textbox id="sbCalcTotalSize" readonly="true" />
 			</row>
 			<row align="center">
 				<label value="&sb.calc.diagnosis;:" />
-				<textbox id="ScrapBookDiagnosis" readonly="true" />
+				<textbox id="sbCalcDiagnosis" readonly="true" />
 			</row>
 		</rows>
 	</grid>
 
-	<tree id="ScrapBookTree"
-	      context="ScrapBookTreePopup"
+	<tree id="sbTree"
+	      context="sbCalcPopup"
 	      seltype="single"
-	      ondblclick="sbCalcControl.onDblClick(event);"
-	      onkeypress="if ( event.keyCode == 46 ) sbCalcControl.remove();"
+	      ondblclick="sbCalcController.onDblClick(event);"
+	      onkeypress="if ( event.keyCode == 46 ) sbCalcController.remove();"
 	      style="margin:12px;"
 	      flex="1">
 		<treecols>
@@ -84,8 +85,8 @@
 	</tree>
 
 	<statusbar style="border-top: 1px solid ThreeDShadow;">
-		<statusbarpanel id="ScrapBookMessage" class="plain" flex="1" />
-		<progressmeter id="ScrapBookProgress" mode="determined" value="0" width="160" />
+		<statusbarpanel id="sbCalcMessage" class="plain" flex="1" />
+		<progressmeter id="sbCalcProgress" mode="determined" value="0" width="160" />
 	</statusbar>
 
 </window>

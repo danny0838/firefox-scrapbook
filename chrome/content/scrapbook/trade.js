@@ -1,8 +1,8 @@
 
 function SB_trace(aStr, aColor, aBold)
 {
-	SBstatus.trace(aStr, 2000);
-	var listBox = document.getElementById("ScrapBookTradeLog");
+	sbStatusHandler.trace(aStr, 2000);
+	var listBox = document.getElementById("sbTradeLog");
 	var listItem = listBox.appendItem(aStr);
 	listBox.ensureIndexIsVisible(listBox.getRowCount() - 1);
 	switch ( aColor )
@@ -18,37 +18,62 @@ function SB_trace(aStr, aColor, aBold)
 
 function SB_initTrade()
 {
-	SBstring   = document.getElementById("ScrapBookString");
+	if ( window.location.href.match(/\?res=(.*)$/) )
+	{
+		var resURI = RegExp.$1;
+		document.getElementById("sbTradeOuter").collapsed = true;
+		document.getElementById("sbTradeSplitter").collapsed = true;
+		document.getElementById("sbTradeLog").collapsed = true;
+		document.getElementById("sbStatus").collapsed = true;
+		document.getElementById("sbStatus2").hidden = false;
+		window.sizeToContent();
+		window.title = document.getElementById("sbTradeExportButton").label;
+		setTimeout(function(){ sbExportService.execQuickly(resURI); }, 0);
+	}
+	else
+	{
+		window.resizeTo(720,540);
+		setTimeout(SB_delayedInitTrade, 0);
+	}
+}
+
+
+function SB_delayedInitTrade()
+{
+	document.getElementById("sbPopupOpenTab").setAttribute("disabled", "true");
+	document.getElementById("sbPopupNewNote").setAttribute("disabled", "true");
+	document.getElementById("sbPopupManage").setAttribute("disabled",  "true");
+	document.getElementById("sbPopupListView").setAttribute("disabled","true");
 	sbMultiBookService.showButton();
 	sbDataSource.init();
 	sbTreeHandler.init(false);
-	SB_initObservers();
-	SBbaseURL = sbCommonUtils.IO.newFileURI(sbCommonUtils.getScrapBookDir()).spec;
-	SB_disablePopupMenus();
-	SBdragDropObserver.getSupportedFlavours = function()
+	sbTreeDNDHandler.init();
+	sbMainService.baseURL = sbCommonUtils.IO.newFileURI(sbCommonUtils.getScrapBookDir()).spec;
+	sbMainService.initPrefs();
+	sbTreeDNDHandler.dragDropObserver.getSupportedFlavours = function()
 	{
 		var flavours = new FlavourSet();
 		flavours.appendFlavour("moz/rdfitem");
 		flavours.appendFlavour("sb/tradeitem");
 		return flavours;
 	};
-	SBbuilderObserver.onDrop = function(row, orient)
+	sbTreeDNDHandler.builderObserver.onDrop = function(row, orient)
 	{
 		try {
-			var XferDataSet  = nsTransferable.get(SBdragDropObserver.getSupportedFlavours(), nsDragAndDrop.getDragData, true);
+			var XferDataSet  = nsTransferable.get(sbTreeDNDHandler.dragDropObserver.getSupportedFlavours(), nsDragAndDrop.getDragData, true);
 			var XferData     = XferDataSet.first.first;
 			var XferDataType = XferData.flavour.contentType;
 		} catch(ex) {
-			alert("ScrapBook Exception: Failed to get contentType of XferData.");
+			alert("ScrapBook ERROR: Failed to get contentType of XferData.");
 		}
 		switch ( XferDataType )
 		{
-			case "moz/rdfitem"  : SBdropUtil.move(row, orient); break;
+			case "moz/rdfitem"  : sbTreeDNDHandler.move(row, orient); break;
 			case "sb/tradeitem" : sbImportService.exec(row, orient); break;
 		}
-		SB_rebuildAllTree();
+		sbController.rebuildLocal();
 	};
-	sbTrader.init();
+	sbTrader.init(false);
 }
 
 
@@ -56,9 +81,10 @@ function SB_initTrade()
 
 var sbTrader = {
 
-	get TREE()     { return document.getElementById("ScrapBookTradeTree"); },
-	get STRING()   { return document.getElementById("ScrapBookTradeString"); },
-	get PROGRESS() { return document.getElementById("ScrapBookTradeProgress"); },
+	get TREE()     { return document.getElementById("sbTradeTree"); },
+	get STRING()   { return document.getElementById("sbTradeString"); },
+	get PROGRESS() { return document.getElementById("sbTradeProgress"); },
+	get STATUS2()  { return document.getElementById("sbStatus2Label"); },
 
 	locked    : false,
 	context   : "import",
@@ -70,9 +96,9 @@ var sbTrader = {
 	{
 		onDragStart : function(event, transferData, action)
 		{
-			if ( event.originalTarget.localName != 'treechildren' ) return;
+			if ( event.originalTarget.localName != "treechildren" ) return;
 			transferData.data = new TransferData();
-			transferData.data.addDataForFlavour("sb/tradeitem", "dummy");
+			transferData.data.addDataForFlavour("sb/tradeitem", sbTrader.TREE.view.selection);
 		},
 		getSupportedFlavours : function()
 		{
@@ -89,16 +115,26 @@ var sbTrader = {
 		},
 	},
 
-	init : function()
+	init : function(isQuickMode)
 	{
 		var dirPath = nsPreferences.copyUnicharPref("scrapbook.trade.path", "");
 		if ( !dirPath ) { this.selectPath(); this.toggleLocking(true); return; }
 		this.leftDir  = sbCommonUtils.getScrapBookDir();
 		this.leftDir.append("data");
 		this.rightDir = this.validateDirectory(dirPath);
-		document.getElementById("ScrapBookTradePath").value = dirPath;
-		document.getElementById("ScrapBookTradeIcon").src = "moz-icon://" + sbCommonUtils.convertFilePathToURL(dirPath) + "?size=16";
-		sbTrader.refresh();
+		if ( !this.rightDir )
+		{
+			if ( !isQuickMode )
+				this.toggleLocking(true);
+			else
+				window.close();
+		}
+		if ( !isQuickMode )
+		{
+			document.getElementById("sbTradePath").value = dirPath;
+			document.getElementById("sbTradeIcon").src = "moz-icon://" + sbCommonUtils.convertFilePathToURL(dirPath) + "?size=16";
+			sbTrader.refresh();
+		}
 	},
 
 	refresh : function()
@@ -112,13 +148,13 @@ var sbTrader = {
 			file.append("index.dat");
 			if ( !file.exists() ) continue;
 			var item = this.parseIndexDat(sbCommonUtils.readFile(file));
-			if ( item.icon ) {
+			if ( item.icon && item.icon.indexOf("http") != 0 )
+			{
 				var icon = this.rightDir.clone();
 				icon.append(dirName);
 				item.icon = sbCommonUtils.convertFilePathToURL(icon.path) + "/" + item.icon;
-			} else {
-				item.icon = sbCommonUtils.getDefaultIcon(item.type);
 			}
+			if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(item.type);
 			this.treeItems.push([
 				sbCommonUtils.convertStringToUTF8(item.title),
 				this.formateMilliSeconds(file.lastModifiedTime),
@@ -127,8 +163,9 @@ var sbTrader = {
 				item.icon,
 				file.lastModifiedTime,
 				dirName,
+				item.type
 			]);
-			SBstatus.trace(SBstring.getString("SCANNING") + "... " + dirName, 1000);
+			sbStatusHandler.trace(sbMainService.STRING.getString("SCANNING") + "... " + dirName, 1000);
 		}
 		sbCustomTreeUtil.heapSort(this.treeItems, 5);
 		this.initTree();
@@ -146,11 +183,15 @@ var sbTrader = {
 		var treeView = new sbCustomTreeView(colIDs, this.treeItems);
 		treeView.getImageSrc = function(row, col)
 		{
-			if ( col == "sbTradeTreeColTitle" || col.index == 0 ) return this._items[row][4];
+			if ( col.index == 0 ) return this._items[row][4];
 		};
-		treeView.cycleHeader = function(col, elem)
+		treeView.getCellProperties = function(row, col, properties)
 		{
-			sbCustomTreeUtil.sortItems(sbTrader, elem);
+			if ( col.index == 0 ) properties.AppendElement(ATOM_SERVICE.getAtom(this._items[row][7]));
+		};
+		treeView.cycleHeader = function(col)
+		{
+			sbCustomTreeUtil.sortItems(sbTrader, col.element);
 		};
 		this.TREE.view = treeView;
 	},
@@ -165,6 +206,8 @@ var sbTrader = {
 		{
 			nsPreferences.setUnicharPref("scrapbook.trade.path", FP.file.path);
 			window.location.reload();
+		} else {
+			window.close();
 		}
 	},
 
@@ -175,27 +218,22 @@ var sbTrader = {
 		try {
 			aFileObj.initWithPath(aPath);
 		} catch(ex) {
-			alert("ScrapBook ERROR: Unrecognized path:\n" + aPath);
+			alert(this.STRING.getString("ERROR_INVALID_FILEPATH") + "\n" + aPath);
 			return false;
 		}
 		if ( !aFileObj.exists() || !aFileObj.isDirectory() ) {
-			alert("ScrapBook ERROR: Directory doesn't exist:\n" + aPath);
+			alert(this.STRING.getString("ERROR_INVALID_FILEPATH") + "\n" + aPath);
 			return false;
 		}
 		return aFileObj;
 	},
 
-	showFolder : function()
-	{
-		sbCommonUtils.launchDirectory(this.rightDir);
-	},
-
 	toggleLocking : function(willLock)
 	{
 		this.locked = willLock;
-		SBtree.setAttribute("disabled", willLock);
+		sbTreeHandler.TREE.setAttribute("disabled", willLock);
 		sbTrader.TREE.setAttribute("disabled", willLock);
-		var elems = document.getElementById("ScrapBookTradeController").childNodes;
+		var elems = document.getElementById("sbTradeToolbar").childNodes;
 		for ( var i = 0; i < elems.length; i++ ) elems[i].setAttribute("disabled", willLock);
 	},
 
@@ -208,6 +246,7 @@ var sbTrader = {
 
 	open : function(aEvent, tabbed)
 	{
+		if ( this.treeItems[sbCustomTreeUtil.getSelection(this.TREE)[0]][7] != "bookmark" ) return;
 		sbCommonUtils.loadURL(sbCommonUtils.convertFilePathToURL(this.rightDir.path) + this.getCurrentDirName() + "/index.html", tabbed);
 	},
 
@@ -215,7 +254,7 @@ var sbTrader = {
 	{
 		var dir = this.rightDir.clone();
 		dir.append(this.getCurrentDirName());
-		sbCommonUtils.launchDirectory(dir);
+		sbController.launch(dir);
 	},
 
 	deleteDir : function()
@@ -224,7 +263,7 @@ var sbTrader = {
 		if ( idxList.length < 1 ) return;
 		if ( !nsPreferences.getBoolPref("scrapbook.tree.quickdelete", false) )
 		{
-			if ( !window.confirm( SBstring.getString("CONFIRM_DELETE") ) ) return;
+			if ( !window.confirm( sbMainService.STRING.getString("CONFIRM_DELETE") ) ) return;
 		}
 		for ( var i = 0; i < idxList.length; i++ )
 		{
@@ -311,23 +350,42 @@ var sbExportService = {
 	{
 		if ( sbTrader.locked ) return;
 		if ( sbTrader.context != 'export' ) return;
-		if ( SBtree.view.selection.count == 0 ) return;
+		if ( sbTreeHandler.TREE.view.selection.count == 0 ) return;
 		sbTrader.toggleLocking(true);
 		this.count = -1;
 		this.resList = [];
 		this.parList = [];
-		if ( SBtree.currentIndex != -1 && SBtree.view.isContainer(SBtree.currentIndex) && SBtree.view.selection.count == 1 )
+		if ( sbTreeHandler.TREE.currentIndex != -1 && sbTreeHandler.TREE.view.isContainer(sbTreeHandler.TREE.currentIndex) && sbTreeHandler.TREE.view.selection.count == 1 )
 		{
-			var curRes = SBtree.builderView.getResourceAtIndex(SBtree.currentIndex);
+			var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(sbTreeHandler.TREE.currentIndex);
 			this.getResourcesRecursively(curRes);
 		}
 		else
 		{
 			this.resList = sbTreeHandler.getSelection(true, 2);
 		}
-		SB_trace(sbTrader.STRING.getString("EXPORT"));
 		sbTrader.PROGRESS.hidden = false;
 		this.next();
+	},
+
+	execQuickly : function(aResURI)
+	{
+		sbTrader.STATUS2.value = document.getElementById("sbTradeExportButton").label;
+		sbDataSource.init();
+		sbTrader.init(true);
+		var res = sbCommonUtils.RDF.GetResource(aResURI);
+		var item = new ScrapBookItem();
+		for ( var prop in item ) item[prop] = sbDataSource.getProperty(res, prop);
+		item.folder = sbDataSource.getProperty(sbDataSource.findParentResource(res), "title");
+		if ( this.copyLeftToRightInternal(item) ) {
+			sbTrader.STATUS2.value = document.getElementById("sbTradeExportButton").label + ": " + item.title;
+			setTimeout(function(){ window.close(); }, 1500);
+			if ( window.opener.location.href == "chrome://scrapbook/content/trade.xul" )
+				window.opener.sbTrader.refresh();
+		} else {
+			sbTrader.STATUS2.value = sbTrader.STRING.getString("FAILED") + ": " + item.title;
+			sbTrader.STATUS2.style.color = "#FF0000";
+		}
 	},
 
 	next : function()
@@ -343,7 +401,6 @@ var sbExportService = {
 
 	finalize : function()
 	{
-		SB_trace(sbTrader.STRING.getString("EXPORT_COMPLETE"));
 		sbTrader.PROGRESS.hidden = true;
 		sbTrader.refresh();
 		sbTrader.toggleLocking(false);
@@ -354,44 +411,61 @@ var sbExportService = {
 		var item = new ScrapBookItem();
 		for ( var prop in item )
 		{
-			item[prop] = sbDataSource.getProperty(prop, this.resList[this.count]);
+			item[prop] = sbDataSource.getProperty(this.resList[this.count], prop);
 		}
 		item.folder = this.parList[this.count];
 		if ( !item.folder )
 		{
-			var idx = SBtree.builderView.getIndexOfResource(this.resList[this.count]);
-			item.folder = sbDataSource.getProperty("title", SB_getParentResourceAtIndex(idx));
+			var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(this.resList[this.count]);
+			item.folder = sbDataSource.getProperty(sbTreeHandler.getParentResource(idx), "title");
 		}
 		if ( !item.folder ) item.folder = "";
-		item.icon = item.icon.match(/\d{14}\/([^\/]+)$/) ? RegExp.$1 : "";
+		var rate = " (" + (this.count + 1) + "/" + this.resList.length + ") ";
+		if ( this.copyLeftToRightInternal(item) )
+			SB_trace(document.getElementById("sbTradeExportButton").label + rate + item.title, "B");
+		else
+			SB_trace(sbTrader.STRING.getString("FAILED") + rate + item.title, "R" ,true);
+		sbTrader.PROGRESS.value = Math.round( this.count / this.resList.length * 100);
+	},
+
+	copyLeftToRightInternal : function(aItem)
+	{
+		if ( aItem.icon && aItem.icon.indexOf("http") != 0 )
+		{
+			aItem.icon = aItem.icon.match(/\d{14}\/([^\/]+)$/) ? RegExp.$1 : "";
+		}
 		var num = 0;
 		var destDir = sbTrader.rightDir.clone();
-		var dirName = sbCommonUtils.validateFileName(item.title).substring(0,64);
+		var dirName = sbCommonUtils.validateFileName(aItem.title).substring(0,64);
 		destDir.append(dirName);
 		while ( destDir.exists() && num < 256 )
 		{
 			destDir = sbTrader.rightDir.clone();
-			dirName = sbCommonUtils.validateFileName(item.title).substring(0,60) + "-" + ++num
+			dirName = sbCommonUtils.validateFileName(aItem.title).substring(0,60) + "-" + (++num);
 			destDir.append(dirName)
 		}
-		var srcDir = sbTrader.leftDir.clone();
-		srcDir.append(item.id);
-		if ( !srcDir.exists() || !srcDir.leafName.match(/^\d{14}$/) ) return;
-		var rate = " (" + (this.count + 1) + "/" + this.resList.length + ") ";
-		try {
-			srcDir.copyTo(sbTrader.rightDir, dirName);
-		} catch(ex) {
+		if ( aItem.type == "bookmark" )
+		{
+			destDir.create(destDir.DIRECTORY_TYPE, 0700);
+		}
+		else
+		{
+			var srcDir = sbTrader.leftDir.clone();
+			srcDir.append(aItem.id);
+			if ( !srcDir.exists() || !srcDir.leafName.match(/^\d{14}$/) ) return false;
 			try {
-				srcDir.copyTo(sbTrader.rightDir, item.id);
+				srcDir.copyTo(sbTrader.rightDir, dirName);
 			} catch(ex) {
-				SB_trace(sbTrader.STRING.getString("EXPORT_FAILURE") + rate + item.title, "R" ,true);
-				return;
+				try {
+					srcDir.copyTo(sbTrader.rightDir, aItem.id);
+				} catch(ex) {
+					return false;
+				}
 			}
 		}
 		destDir.append("index.dat");
-		sbCommonUtils.writeIndexDat(item, destDir);
-		SB_trace(sbTrader.STRING.getString("EXPORT_SUCCESS") + rate + item.title, "B");
-		sbTrader.PROGRESS.value = Math.round( this.count / this.resList.length * 100);
+		sbCommonUtils.writeIndexDat(aItem, destDir);
+		return true;
 	},
 
 	getResourcesRecursively : function(aContRes)
@@ -404,7 +478,7 @@ var sbExportService = {
 				this.getResourcesRecursively(res);
 			} else {
 				this.resList.push(res);
-				this.parList.push(sbDataSource.getProperty("title", aContRes));
+				this.parList.push(sbDataSource.getProperty(aContRes, "title"));
 			}
 		}
 	},
@@ -429,13 +503,11 @@ var sbImportService = {
 		if ( sbTrader.context != 'import' ) return;
 		if ( sbTrader.TREE.view.selection.count == 0 ) return;
 		sbTrader.toggleLocking(true);
-		this.restore = ( aRow == -128 ) ? document.getElementById("ScrapBookTradeRestore").checked : false;
-		SBdropUtil.init(aRow, aOrient);
-		this.tarResArray = ( aRow < 0 ) ? [SBtree.ref, 0] : SBdropUtil.getTarget();
-		SB_trace(sbTrader.STRING.getString("IMPORT"));
+		this.restore = ( aRow == -128 ) ? document.getElementById("sbTradeOptionRestore").checked : false;
+		this.tarResArray = ( aRow < 0 ) ? [sbTreeHandler.TREE.ref, 0] : sbTreeDNDHandler.getTarget(aRow, aOrient);
 		sbTrader.PROGRESS.hidden = false;
 		this.makeFolderTable();
-		this.ascending = ( aRow < 0 ) ? true : (SBdropUtil.orient == SBdropUtil.DROP_ON);
+		this.ascending = ( aRow < 0 ) ? true : (aOrient == 0);
 		this.idxList   = sbCustomTreeUtil.getSelection(sbTrader.TREE);
 		this.count     = this.ascending ? -1 : this.idxList.length;
 		this.next();
@@ -455,19 +527,19 @@ var sbImportService = {
 		{
 			if ( --this.count >= 0 ) {
 				this.copyRightToLeft();
-			} else {
+		} else {
 				this.finalize(); return;
 			}
 		}
-		SBtree.builder.rebuild();
+		sbTreeHandler.TREE.builder.rebuild();
 		setTimeout(function(){ sbImportService.next(); }, 300);
 	},
 
 	finalize : function()
 	{
-		SB_trace(sbTrader.STRING.getString("IMPORT_COMPLETE"));
 		sbTrader.PROGRESS.hidden = true;
-		SB_rebuildAllTree();
+		sbTrader.refresh();
+		sbController.rebuildLocal();
 		sbTrader.toggleLocking(false);
 	},
 
@@ -488,20 +560,29 @@ var sbImportService = {
 		var item = sbTrader.parseIndexDat(dat);
 		if ( !item.id || item.id.length != 14 ) return;
 		var destDir = sbTrader.leftDir.clone();
-		if  ( item.icon )
-			item.icon = sbCommonUtils.convertFilePathToURL(destDir.path) + item.id + "/" + item.icon;
-		else
-			item.icon = sbCommonUtils.getDefaultIcon(item.type);
+		if ( item.icon && item.icon.indexOf("http") != 0 ) item.icon = "resource://scrapbook/data/" + item.id + "/" + item.icon;
+		if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(item.type);
 		item.title   = sbCommonUtils.convertStringToUTF8(item.title);
 		item.folder  = sbCommonUtils.convertStringToUTF8(item.folder);
 		item.comment = sbCommonUtils.convertStringToUTF8(item.comment);
 		var num  = this.ascending ? this.count + 1 : this.idxList.length - this.count;
 		var rate = " (" + num + "/" + this.idxList.length + ") ";
-		try {
-			srcDir.copyTo(destDir, item.id);
-		} catch(ex) {
-			SB_trace(sbTrader.STRING.getString("IMPORT_FAILURE") + rate + item.title + sbTrader.STRING.getString("SAME_ID"), "R", true);
-			return;
+		if ( item.type == "bookmark" )
+		{
+			if ( sbDataSource.exists(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + item.id)) ) return;
+			if ( document.getElementById("sbTradeOptionRemove").checked ) sbCommonUtils.removeDirSafety(srcDir, false);
+		}
+		else
+		{
+			try {
+				if ( document.getElementById("sbTradeOptionRemove").checked )
+					srcDir.moveTo(destDir, item.id);
+				else
+					srcDir.copyTo(destDir, item.id);
+			} catch(ex) {
+				SB_trace(sbTrader.STRING.getString("FAILED") + rate + item.title + sbTrader.STRING.getString("ERROR_SAME_ID_EXISTS"), "R", true);
+				return;
+			}
 		}
 		var folder = "";
 		if ( this.restore )
@@ -522,10 +603,10 @@ var sbImportService = {
 				this.tarResArray[0] = newRes.Value;
 			}
 			this.tarResArray[1] = 0;
-			if ( this.tarResArray[0] != SBtree.ref ) folder = " [" + item.folder + "] ";
+			if ( this.tarResArray[0] != sbTreeHandler.TREE.ref ) folder = " [" + item.folder + "] ";
 		}
 		sbDataSource.addItem(item, this.tarResArray[0], this.tarResArray[1]);
-		SB_trace(sbTrader.STRING.getString("IMPORT_SUCCESS") + rate + folder + item.title, "B");
+		SB_trace(document.getElementById("sbTradeImportButton").label + rate + folder + item.title, "B");
 		sbTrader.PROGRESS.value = Math.round( num / this.idxList.length * 100);
 	},
 
@@ -538,7 +619,7 @@ var sbImportService = {
 			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
 			if ( res.Value != "urn:scrapbook:search" && sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, res) )
 			{
-				this.folderTable[sbDataSource.getProperty("title", res)] = res.Value;
+				this.folderTable[sbDataSource.getProperty(res, "title")] = res.Value;
 			}
 		}
 	},

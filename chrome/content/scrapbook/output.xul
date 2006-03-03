@@ -9,31 +9,34 @@
 
 <!--locale-->
 <!DOCTYPE dialog [
-<!ENTITY % scrapbookDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
-%scrapbookDTD;
-<!ENTITY % outputDTD    SYSTEM "chrome://scrapbook/locale/output.dtd" >
+<!ENTITY % mainDTD   SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+%mainDTD;
+<!ENTITY % outputDTD SYSTEM "chrome://scrapbook/locale/output.dtd" >
 %outputDTD;
 ]>
 
 <!--dialog-->
 <dialog id="ScrapBookOutputDialog"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        title="&sb.tools.output; - &sb.title;"
+        title="&sb.tools.output; - ScrapBook"
         width="380" height="400"
-        onload="SB_initOutput();"
-        ondialogaccept="SB_execOutput();"
+        onload="sbOutputService.init();"
+        ondialogaccept="sbOutputService.start();"
         windowtype="scrapbook">
 
-	<!--JavaScript-->
+	<!--script-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/output.js" />
 
-	<!--StringBundle-->
-	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/scrapbook.properties" />
+	<!--stringbundle-->
+	<stringbundle id="sbMainString" src="chrome://scrapbook/locale/scrapbook.properties" />
+
+	<!--broadcaster-->
+	<broadcasterset id="sbBroadcasters" />
 
 	<!--tree-->
-	<tree id="ScrapBookTree" onclick="SB_toggleAllSelection();" flex="1" />
+	<tree id="sbTree" onclick="sbOutputService.toggleAllSelection();" flex="1" />
 
-	<checkbox id="ScrapBookOutputOptionA" label="&sb.output.option.all;"   style="margin-top:12px;" oncommand="setTimeout(SB_selectAllFolders, 0);" checked="true" />
+	<checkbox id="ScrapBookOutputOptionA" label="&sb.output.option.all;"   style="margin-top:12px;" oncommand="sbOutputService.selectAllFolders();" checked="true" />
 	<checkbox id="ScrapBookOutputOptionF" label="&sb.output.option.frame;" persist="checked" />
 	<checkbox id="ScrapBookOutputOptionO" label="&sb.output.option.open;"  persist="checked" checked="true" />
 

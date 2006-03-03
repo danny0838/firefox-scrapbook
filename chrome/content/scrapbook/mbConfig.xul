@@ -10,12 +10,13 @@
 <window id="sbMultiBookConfig"
         title="&mb.configure; - Multi-ScrapBook"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        orient="horizontal"
         width="480" height="350"
         style="padding:10px;"
         onload="sbMultiBookConfig.init();"
         onclose="sbMultiBookConfig.done();">
 
-	<!--JavaScript-->
+	<!--script-->
 	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
@@ -31,23 +32,27 @@
 		<key keycode="VK_ESCAPE" command="sbMultiBookAccept" />
 	</keyset>
 
-	<tree id="sbMultiBookTree" seltype="single" hidecolumnpicker="true" ondblclick="sbMultiBookConfig.edit();" flex="1">
-		<treecols>
-			<treecol id="sbMultiBookTreecolName" label="&mb.prop.name;" flex="1" />
-			<splitter class="tree-splitter" />
-			<treecol id="sbMultiBookTreecolPath" label="&mb.prop.path;" flex="3" />
-		</treecols>
-		<treechildren />
-	</tree>
-
-	<spacer height="10" />
-
-	<hbox>
-		<button label="&mb.button.add;"    oncommand="sbMultiBookConfig.add();" />
-		<button label="&mb.button.edit;"   oncommand="sbMultiBookConfig.edit();" />
-		<button label="&mb.button.remove;" oncommand="sbMultiBookConfig.remove();" />
-		<spacer flex="1" />
-		<button label="&mb.button.accept;" command="sbMultiBookAccept" />
-	</hbox>
+	<vbox flex="1">
+		<tree id="sbMultiBookTree" seltype="single" hidecolumnpicker="true" ondblclick="sbMultiBookConfig.edit();" flex="1">
+			<treecols>
+				<treecol id="sbMultiBookTreecolName" label="&mb.prop.name;" flex="1" />
+				<splitter class="tree-splitter" />
+				<treecol id="sbMultiBookTreecolPath" label="&mb.prop.path;" flex="3" />
+			</treecols>
+			<treechildren />
+		</tree>
+		<spacer height="10" />
+		<hbox>
+			<button label="&mb.button.add;"    oncommand="sbMultiBookConfig.add();" />
+			<button label="&mb.button.edit;"   oncommand="sbMultiBookConfig.edit();" />
+			<button label="&mb.button.remove;" oncommand="sbMultiBookConfig.remove();" />
+			<spacer flex="1" />
+			<button label="&mb.button.accept;" command="sbMultiBookAccept" />
+		</hbox>
+	</vbox>
+	<vbox pack="center">
+			<button style="min-width:10px" image="chrome://scrapbook/skin/expander_up.png"   oncommand="sbMultiBookConfig.up();" />
+			<button style="min-width:10px" image="chrome://scrapbook/skin/expander_down.png" oncommand="sbMultiBookConfig.down();" />
+	</vbox>
 
 </window>

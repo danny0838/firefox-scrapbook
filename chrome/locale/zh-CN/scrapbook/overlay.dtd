@@ -1,15 +1,16 @@
-<!ENTITY sb.title "ScrapBook">
 <!ENTITY sb.capture.partial "获取所选内容">
-<!ENTITY sb.capture.partial.as "获取所选内容为...">
+<!ENTITY sb.capture.partial.as "获取所选内容为">
 <!ENTITY sb.capture.entire "获取页面">
-<!ENTITY sb.capture.entire.as "获取页面为...">
+<!ENTITY sb.capture.entire.as "获取页面为">
 <!ENTITY sb.capture.frame "获取框架">
-<!ENTITY sb.capture.frame.as "获取框架为...">
+<!ENTITY sb.capture.frame.as "获取框架为">
 <!ENTITY sb.capture.target "获取链接">
-<!ENTITY sb.capture.target.as "获取链接为...">
+<!ENTITY sb.capture.target.as "获取链接为">
 <!ENTITY sb.capture.folder.root "ScrapBook">
 <!ENTITY sb.capture.folder.select "选择文件夹">
+<!ENTITY sb.capture.alltabs "Capture All Tabs">
+<!ENTITY sb.capture.bookmark "Bookmark with ScrapBook">
 <!ENTITY sb.key.sidebar "K">
-<!ENTITY sb.key.editor "J">
+<!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">
 <!ENTITY sb.key.capture.as "K">

@@ -4,11 +4,9 @@
 <!ENTITY sb.editor.restore "Zrezygnuj ze zmian i przywróć poprzednie wpisy">
 <!ENTITY sb.editor.save "Zapisz zmiany">
 <!ENTITY sb.editor.comment "Powiększ obszar komentarza">
-<!ENTITY sb.editor.block "Blok komentarza">
-<!ENTITY sb.editor.block.insert "Dodaj blok komantarzy po zaznaczeniu">
-<!ENTITY sb.editor.block.hide "Ukryj blok komentarzy">
-<!ENTITY sb.editor.inline.add "Dodaj komentarz w linii zaznaczenia">
-<!ENTITY sb.editor.inline.delete "Usuń wszystkie komentarze w linii zaznaczenia">
+<!ENTITY sb.editor.sticky "Sticky Annotation">
+<!ENTITY sb.editor.sticky.create "Create &sb.editor.sticky;">
+<!ENTITY sb.editor.inline.add "Add Inline Annotation to Selection">
 <!ENTITY sb.editor.attach.file "Dołącz plik do zaznaczenia">
 <!ENTITY sb.editor.attach.link "Dołącz odnośnik do zaznaczenia">
 <!ENTITY sb.editor.cutter "Usuń zaznaczenie">
@@ -18,9 +16,10 @@
 <!ENTITY sb.highlighter.remove "Usuń podświetlenie w zaznczeniu">
 <!ENTITY sb.highlighter.remove.all "Usuń wszystkie podświetlone komentarze">
 <!ENTITY sb.customize "Dostosuj">
-<!ENTITY sb.infobar.openSource "Pokaż źródło strony">
-<!ENTITY sb.infobar.showSitemap "Show &sb.infobar.sitemap;">
+<!ENTITY sb.infobar.openSource "Pokaż stronę źródłową">
+<!ENTITY sb.infobar.renew "Capture Again">
+<!ENTITY sb.infobar.showIndicators "Show Link Indicators">
 <!ENTITY sb.infobar.showInfobar "Show Info Toolbar">
 <!ENTITY sb.infobar.home "Strona domowa">
 <!ENTITY sb.infobar.sitemap "Mapa stron">
-<!ENTITY sb.locate "Synchronizuj z drzewem katalogów w panelu bocznym">
+<!ENTITY sb.locate "Zlokalizuj w drzewie katalogów w panelu bocznym">

@@ -5,37 +5,38 @@
 
 <!--locale-->
 <!DOCTYPE wizard [
-<!ENTITY % scrapbookDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
-%scrapbookDTD;
-<!ENTITY % sortDTD      SYSTEM "chrome://scrapbook/locale/sort.dtd" >
+<!ENTITY % mainDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+%mainDTD;
+<!ENTITY % sortDTD SYSTEM "chrome://scrapbook/locale/sort.dtd" >
 %sortDTD;
 ]>
 
 <!--wizard-->
-<wizard id="ScrapBookSortWizard"
+<wizard id="sbSortWizard"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        title="&sb.sort; - &sb.title;"
-        onload="SBsort.init();"
+        title="&sb.sort; - ScrapBook"
+        onload="sbSortService.init();"
         windowtype="scrapbook">
 
-	<!--JavaScript-->
+	<!--script-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/sort.js" />
 
-	<!--StringBundle-->
-	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/scrapbook.properties" />
+	<!--stringbundle-->
+	<stringbundle id="sbMainString" src="chrome://scrapbook/locale/scrapbook.properties" />
 
 	<wizardpage label="&sb.sort;">
-		<radiogroup id="ScrapBookSortRadioGroup" persist="sortIndex">
+		<radiogroup id="sbSortRadioGroup" persist="sortIndex">
+			<radio label="&sb.sort.reverse;" />
 			<radio label="&sb.sort.title.asc;" />
 			<radio label="&sb.sort.title.desc;" />
 			<radio label="&sb.sort.date.asc;" />
 			<radio label="&sb.sort.date.desc;" />
 		</radiogroup>
 		<separator class="groove" />
-		<checkbox id="ScrapBookSortRecursive" label="&sb.sort.recursive;" persist="checked" />
-		<description id="ScrapBookSortConfirm" hidden="true" value="&sb.sort.confirm;" />
+		<checkbox id="sbSortRecursive" label="&sb.sort.recursive;" persist="checked" />
+		<description id="sbSortWarning" value="&sb.sort.warning;" style="margin:10px;color:red;" />
 	</wizardpage>
 
 </wizard>

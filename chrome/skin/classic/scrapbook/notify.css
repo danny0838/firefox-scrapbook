@@ -1,40 +1,40 @@
-/* ::::: notify ::::: */
+/* ::::: NOTIFIER ::::: */
 
-#ScrapBookNotifyBox {
+#sbNotifierBox {
 	border: 2px solid #7B969C;
 	min-height: 50px;
 }
 
-#ScrapBookNotifyIconBox {
+#sbNotifierIconBox {
 	margin-left : 4px;
 	margin-right: 6px;
 	min-height: 46px;
 }
 
-#ScrapBookNotifyTextBox {
+#sbNotifierTextBox {
 	padding-right: 10px;
 	padding-top  : 5px;
 }
 
-#ScrapBookNotifyIcon {
+#sbNotifierIcon {
 	width : 16px;
 	height: 16px;
 }
 
-#ScrapBookNotifyTitle {
+#sbNotifierTitle {
 	font-weight: bold;
 }
 
-#ScrapBookNotifyText,
-#ScrapBookNotifyTextA {
+#sbNotifierText,
+#sbNotifierTextAll {
 	margin-right: 6px;
 	cursor: pointer;
 	color: #1455D6;
 	text-decoration: underline;
 }
 
-#ScrapBookNotifyText:hover:active,
-#ScrapBookNotifyTextA:hover:active {
+#sbNotifierText:hover:active,
+#sbNotifierTextAll:hover:active {
 	color: #424F63;
 }
 

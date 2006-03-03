@@ -6,34 +6,34 @@
 
 <!--locale-->
 <!DOCTYPE dialog [
-<!ENTITY % multipleDTD  SYSTEM "chrome://scrapbook/locale/multiple.dtd" >
-%multipleDTD;
-<!ENTITY % scrapbookDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
-%scrapbookDTD;
-<!ENTITY % propertyDTD  SYSTEM "chrome://scrapbook/locale/property.dtd" >
-%propertyDTD;
-<!ENTITY % detailDTD    SYSTEM "chrome://scrapbook/locale/detail.dtd" >
+<!ENTITY % mainDTD     SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+%mainDTD;
+<!ENTITY % propDTD     SYSTEM "chrome://scrapbook/locale/property.dtd" >
+%propDTD;
+<!ENTITY % detailDTD   SYSTEM "chrome://scrapbook/locale/detail.dtd" >
 %detailDTD;
+<!ENTITY % multipleDTD SYSTEM "chrome://scrapbook/locale/multiple.dtd" >
+%multipleDTD;
 ]>
 
 <!--dialog-->
-<dialog id="ScrapBookMultipleDialog"
-        title="&sb.tools.multiple; - &sb.title;"
+<dialog id="sbMultipleDialog"
+        title="&sb.tools.multiple; - ScrapBook"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         style="width:400px;"
-        onload="SB_initMultiple();"
-        ondialogaccept="SB_acceptMultiple();"
+        onload="sbMultipleService.init();"
+        ondialogaccept="sbMultipleService.done();"
         windowtype="scrapbook">
 
-	<!--JavaScript-->
+	<!--script-->
 	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/multiple.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/detail.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/multiple.js" />
 
-	<!--StringBundle-->
-	<stringbundle id="ScrapBookString" src="chrome://scrapbook/locale/scrapbook.properties" />
+	<!--stringbundle-->
+	<stringbundle id="sbMainString" src="chrome://scrapbook/locale/scrapbook.properties" />
 
 	<grid style="margin-top:3px;">
 		<columns>
@@ -44,34 +44,27 @@
 			<!--folder-->
 			<row align="center" style="margin-bottom:8px;">
 				<label value="&sb.prop.folder;:" />
-				<hbox>
-					<menulist id="ScrapBookDetailFolder" class="folder-icon" flex="1" disabled="true">
-						<menupopup id="ScrapBookDetailFolderPopup" oncommand="SBfolderList.onselect(event.target.id);" />
-					</menulist>
-					<toolbarbutton image="chrome://scrapbook/skin/tool_createfolder.png" tooltiptext="&sb.detail.new.folder;..."    oncommand="SBfolderList.createFolder();" />
-					<toolbarbutton image="chrome://scrapbook/skin/tool_selectfolder.png" tooltiptext="&sb.detail.select.folder;..." oncommand="SBfolderList.openFolderPicker();" />
-				</hbox>
+				<textbox id="sbFolderTextbox" readonly="true" flex="1" />
+				<toolbarbutton id="sbToolbarMove" tooltiptext="&sb.detail.select.folder;..." oncommand="sbFolderSelector2.openFolderPicker();" />
 			</row>
 		</rows>
 	</grid>
 
 	<description>&sb.multiple.url;:</description>
-	<toolbar class="plain">
-		<spacer flex="1" />
+	<hbox align="right">
 		<toolbarbutton type="menu" label="&sb.multiple.detector;">
 			<menupopup>
-				<menuitem label="&sb.multiple.detector.plink;" oncommand="SB_detectURLInPage();" />
-				<menuitem label="&sb.multiple.detector.slink;" oncommand="SB_detectURLInSelection();" />
-				<menuitem label="&sb.multiple.detector.tabs;"  oncommand="SB_detectURLOfTabs();" />
-				<menuitem label="&sb.multiple.detector.local;" oncommand="sbURLDetectorD.run();" />
-				<menuitem label="Bookmarks (bookmarks.html)"   oncommand="sbURLDetectorF.run('B');" />
-				<menuitem label="WeBoX (default.html)"         oncommand="sbURLDetectorF.run('W');" />
+				<menuitem label="&sb.multiple.detector.plink;" oncommand="sbMultipleService.detectURLsInPage();" />
+				<menuitem label="&sb.multiple.detector.slink;" oncommand="sbMultipleService.detectURLsInSelection();" />
+				<menuitem label="&sb.multiple.detector.local;" oncommand="sbURLDetector1.run();" />
+				<menuitem label="Bookmarks (bookmarks.html)"   oncommand="sbURLDetector2.run('B');" />
+				<menuitem label="WeBoX (default.html)"         oncommand="sbURLDetector2.run('W');" />
 				<menuseparator />
-				<menuitem label="&sb.multiple.detector.clear;"    oncommand="SB_clearURL();" />
+				<menuitem label="&sb.multiple.detector.clear;"    oncommand="sbMultipleService.clear();" />
 			</menupopup>
 		</toolbarbutton>
-	</toolbar>
-	<textbox id="ScrapBookMultipleTextbox" multiline="true" rows="15" flex="1" />
-	<label id="ScrapBookStatus" crop="end" value="" />
+	</hbox>
+	<textbox id="ScrapBookTextbox" multiline="true" rows="15" flex="1" />
+	<label id="sbStatus" crop="end" value="" />
 
 </dialog>

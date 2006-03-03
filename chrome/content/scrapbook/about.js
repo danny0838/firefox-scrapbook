@@ -1,43 +1,41 @@
 
-const SB_VERSION = "0.18.4";
-const SB_BUILDID = "Build ID 20051218";
-const UPDATE_URL = "http://amb.vis.ne.jp/mozilla/scrapbook/update.rdf?ver=" + SB_VERSION;
+const kVERSION = "0.22.10";
+const kBUILD_TEXT = "Final Beta Version (Build ID 20060303)";
+const kUPDATE_URL = "http://amb.vis.ne.jp/mozilla/scrapbook/update.rdf";
 
-var SBstring;
-var SBupdateImage;
-var SBupdateLabel;
+var gAboutString;
+var gUpdateImage;
+var gUpdateLabel;
 
 
 
 function SB_initAbout()
 {
-	SBstring = document.getElementById("ScrapBookString");
-	var SBversion = document.getElementById("ScrapBookAboutVersion");
-	SBversion.setAttribute("value", "Version " + SB_VERSION + " (" + SB_BUILDID + ")");
-	SBupdateImage = document.getElementById("ScrapBookUpdateImage");
-	SBupdateLabel = document.getElementById("ScrapBookUpdateLabel");
-	SBupdateImage.setAttribute("src", "chrome://scrapbook/skin/status_busy.gif");
-	SBupdateLabel.setAttribute("value", SBstring.getString("CHECKING"));
+	gAboutString = document.getElementById("sbAboutString");
+	gUpdateImage = document.getElementById("sbUpdateImage");
+	gUpdateLabel = document.getElementById("sbUpdateLabel");
+	document.getElementById("sbAboutVersion").value = kBUILD_TEXT;
+	gUpdateImage.setAttribute("src", "chrome://scrapbook/skin/status_busy.gif");
+	gUpdateLabel.setAttribute("value", gAboutString.getString("CHECKING"));
 	setTimeout(SB_setUpdateInfo, 500);
 }
 
 
-function SB_visit(aXUL)
+function SB_visit(aElem)
 {
-	sbCommonUtils.loadURL(aXUL.getAttribute("href"), true);
-}
-
-
-function SB_mailto(aXUL)
-{
-	sbCommonUtils.loadURL('mailto:' + aXUL.getAttribute('href'), false);
+	var href = aElem.getAttribute("href");
+	if ( href.indexOf("@") > 0 )
+		sbCommonUtils.loadURL("mailto:" + href, false);
+	else
+		sbCommonUtils.loadURL(href, true);
+	window.close();
 }
 
 
 function SB_secret()
 {
-	window.opener.SBstatus.httpBusy(5, "32% : product-mozilla-screen");
-	window.opener.top.document.getElementById("sidebar-box").width = 190;
+	window.opener.sbStatusHandler.httpBusy(5, "32% : product-mozilla-screen");
+	window.opener.top.document.getElementById("sidebar-box").width = window.opener.top.outerWidth < 800 ? 190 : 200;
 	setTimeout(function() { window.opener.top.document.getElementById("statusbar-display").label = "Transferring data from www.mozilla.org..."; }, 0);
 }
 
@@ -46,50 +44,48 @@ function SB_setUpdateInfo()
 {
 	var httpReq = new XMLHttpRequest();
 	httpReq.parent = this;
-	httpReq.open("GET", UPDATE_URL);
+	httpReq.open("GET", kUPDATE_URL + "?ver=" + kVERSION);
 
 	httpReq.onerror = function(aEvent)
 	{
-		SBupdateLabel.setAttribute("value", SBstring.getString("CHECK_FAILURE"));
+		gUpdateLabel.setAttribute("value", gAboutString.getString("CHECK_FAILURE"));
 		SB_removeUpdateImage();
 	};
 	httpReq.onload = function(aEvent)
 	{
 		try {
-			var LATEST_VER = httpReq.responseXML.getElementsByTagNameNS("http://www.mozilla.org/2004/em-rdf#", "version")[0].textContent;
-			var CV = SB_parseVersion(SB_VERSION);
-			var LV = SB_parseVersion(LATEST_VER);
-			if ( CV > 0 && LV > 0 && LV > CV ) {
-				SBupdateLabel.setAttribute("value", SBstring.getFormattedString("NEW_VERSION_AVAILABLE", [LATEST_VER]));
-				SBupdateLabel.setAttribute("class", "link");
-				SBupdateLabel.setAttribute("style", "font-weight:bold;");
+			var latestVer = httpReq.responseXML.getElementsByTagNameNS("http://www.mozilla.org/2004/em-rdf#", "version")[0].textContent;
+			var cv = SB_parseVersion(kVERSION);
+			var lv = SB_parseVersion(latestVer);
+			if ( cv > 0 && lv > 0 && lv > cv ) {
+				gUpdateLabel.setAttribute("value", gAboutString.getFormattedString("NEW_VERSION_AVAILABLE", [latestVer]));
+				gUpdateLabel.setAttribute("class", "link");
+				gUpdateLabel.setAttribute("style", "font-weight:bold;");
 			} else {
-				SBupdateLabel.setAttribute("value", SBstring.getString("NO_UPDATES_FOUND"));
+				gUpdateLabel.setAttribute("value", gAboutString.getString("NO_UPDATES_FOUND"));
 			}
-		}
-		catch(ex)
-		{
-			SBupdateLabel.setAttribute("value", SBstring.getString("CHECK_FAILURE"));
+		} catch(ex) {
+			gUpdateLabel.setAttribute("value", gAboutString.getString("CHECK_FAILURE"));
 		}
 		SB_removeUpdateImage();
 	};
 
 	try {
-		httpReq.setRequestHeader("User-Agent", "Scrapbook Ver." + SB_VERSION);
+		httpReq.setRequestHeader("User-Agent", "ScrapBook/" + kVERSION);
 		httpReq.overrideMimeType("application/xml");
 		httpReq.send(null);
-	} catch(err) {
+	} catch(ex) {
 		httpReq.abort();
-		SBupdateLabel.setAttribute("value", SBstring.getString("CHECK_FAILURE"));
+		gUpdateLabel.setAttribute("value", gAboutString.getString("CHECK_FAILURE"));
 		SB_removeUpdateImage();
 	}
 }
 
 
-function SB_parseVersion(verStr)
+function SB_parseVersion(aVerStr)
 {
 	var verArr = [];
-	if ( verStr.match(/^(\d+)\.(\d+)\.(\d+)$/) ) {
+	if ( aVerStr.match(/^(\d+)\.(\d+)\.(\d+)$/) ) {
 		verArr[0] = parseInt(RegExp.$1); verArr[1] = parseInt(RegExp.$2); verArr[2] = parseInt(RegExp.$3);
 		return verArr[0] * 10000 + verArr[1] * 100 + verArr[2];
 	} else {
@@ -100,8 +96,8 @@ function SB_parseVersion(verStr)
 
 function SB_removeUpdateImage()
 {
-	SBupdateImage.removeAttribute("src");
-	SBupdateImage.removeAttribute("style");
+	gUpdateImage.removeAttribute("src");
+	gUpdateImage.removeAttribute("style");
 }
 
 

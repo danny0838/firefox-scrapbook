@@ -8,24 +8,24 @@
 <!DOCTYPE window SYSTEM "chrome://scrapbook/locale/notify.dtd">
 
 <!--window-->
-<window id="ScrapBookNotify"
+<window id="sbNotifierWindow"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         windowtype="alert:alert"
         align="start"
-        onload="SB_onNotifyLoad();">
+        onload="onNotifierLoad();">
 
-	<!--JavaScript-->
+	<!--script-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js"/>
 	<script type="application/x-javascript" src="chrome://scrapbook/content/notify.js"/>
 
-	<hbox id="ScrapBookNotifyBox">
-		<hbox id="ScrapBookNotifyIconBox" align="center" valign="center">
-			<image id="ScrapBookNotifyIcon" src="chrome://scrapbook/skin/mainicon2.png" autostretch="never"/>
+	<hbox id="sbNotifierBox">
+		<hbox id="sbNotifierIconBox" align="center" valign="center">
+			<image id="sbNotifierIcon" src="chrome://scrapbook/skin/mainicon2.png" autostretch="never"/>
 		</hbox>
-		<vbox id="ScrapBookNotifyTextBox">
-			<label id="ScrapBookNotifyTitle" class="plain" value="ScrapBook: &sb.capture.complete;" />
-			<label id="ScrapBookNotifyTextA" class="plain" value="&sb.capture.complete.all;" hidden="true" />
-			<label id="ScrapBookNotifyText"  class="plain" onclick="SB_onNotifyClick();" />
+		<vbox id="sbNotifierTextBox">
+			<label id="sbNotifierTitle"   class="plain" value="ScrapBook: &sb.capture.complete;" />
+			<label id="sbNotifierTextAll" class="plain" value="&sb.capture.complete.all;" hidden="true" />
+			<label id="sbNotifierText"    class="plain" onclick="onNotifierClick();" />
 		</vbox>
 	</hbox>
 

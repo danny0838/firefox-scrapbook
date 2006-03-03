@@ -30,9 +30,10 @@ var sbCommonUtils = {
 
 	getScrapBookDir : function()
 	{
+		var myDir;
 		try {
 			var isDefault = this.PREF.getBoolPref("scrapbook.data.default");
-			var myDir = this.PREF.getComplexValue("scrapbook.data.path", Components.interfaces.nsIPrefLocalizedString).data;
+			myDir = this.PREF.getComplexValue("scrapbook.data.path", Components.interfaces.nsIPrefLocalizedString).data;
 			myDir = this.convertPathToFile(myDir);
 		} catch(ex) {
 			isDefault = true;
@@ -50,13 +51,20 @@ var sbCommonUtils = {
 	},
 
 
-	getContentDir : function(aID)
+	getContentDir : function(aID, aSuppressCreate)
 	{
 		var myDir = this.getScrapBookDir().clone();
 		myDir.append("data");
 		if ( !myDir.exists() ) myDir.create(myDir.DIRECTORY_TYPE, 0700);
 		myDir.append(aID);
-		if ( !myDir.exists() ) myDir.create(myDir.DIRECTORY_TYPE, 0700);
+		if ( !myDir.exists() )
+		{
+			if ( aSuppressCreate )
+			{
+				return null;
+			}
+			myDir.create(myDir.DIRECTORY_TYPE, 0700);
+		}
 		return myDir;
 	},
 
@@ -89,6 +97,22 @@ var sbCommonUtils = {
 			browser.selectedTab = browser.addTab(aURL);
 		} else {
 			browser.loadURI(aURL);
+		}
+	},
+
+
+	rebuildGlobal : function()
+	{
+		var winEnum = this.WINDOW.getEnumerator("navigator:browser");
+		while ( winEnum.hasMoreElements() )
+		{
+			var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
+			try {
+				win.sbMenuHandler.shouldRebuild = true;
+				win.document.getElementById("sidebar").contentWindow.sbTreeHandler.TREE.builder.rebuild();
+				win.document.getElementById("sidebar").contentWindow.sbListHandler.LIST.builder.rebuild();
+			} catch(ex) {
+			}
 		}
 	},
 
@@ -174,6 +198,12 @@ var sbCommonUtils = {
 	},
 
 
+	crop : function(aString, aMaxLength)
+	{
+		return aString.length > aMaxLength ? aString.substring(0, aMaxLength) + "..." : aString;
+	},
+
+
 
 	readFile : function(aFile)
 	{
@@ -189,7 +219,6 @@ var sbCommonUtils = {
 		}
 		catch(ex)
 		{
-			dump("ScrapBook ERROR: Failed to read file.\n" + aFile.path + "\n");
 			return false;
 		}
 	},
@@ -247,7 +276,6 @@ var sbCommonUtils = {
 			this.UNICODE.charset = "UTF-8";
 			aString = this.UNICODE.ConvertToUnicode(aString);
 		} catch(ex) {
-			dump("scrapbook::convertStringToUTF8 " + ex + "\n");
 		}
 		return aString;
 	},
@@ -273,7 +301,7 @@ var sbCommonUtils = {
 	convertURLToObject : function(aURLString)
 	{
 		var aURL = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURI);
-		aURL.spec = aURLString; 
+		aURL.spec = aURLString;
 		return aURL;
 	},
 
@@ -281,37 +309,11 @@ var sbCommonUtils = {
 	convertURLToFile : function(aURLString)
 	{
 		var aURL = this.convertURLToObject(aURLString);
-		if ( !aURL.schemeIs("file") ) return; 
+		if ( !aURL.schemeIs("file") ) return;
 		try {
 			var fileHandler = this.IO.getProtocolHandler("file").QueryInterface(Components.interfaces.nsIFileProtocolHandler);
-			return fileHandler.getFileFromURLSpec(aURLString); 
+			return fileHandler.getFileFromURLSpec(aURLString);
 		} catch(ex) {
-			dump("*** ScrapBook ERROR: Failed to getFileFromURLSpec: " + aURLString + "\n");
-		}
-	},
-
-
-
-	launchDirectory : function(aDir)
-	{
-		if ( this.getBoolPref("scrapbook.filer.default", true) )
-		{
-			try {
-				aDir = aDir.QueryInterface(Components.interfaces.nsILocalFile);
-				aDir.launch();
-			} catch(ex) {
-				var aDirPath = this.IO.newFileURI(aDir).spec;
-				this.loadURL(aDirPath, false);
-			}
-		}
-		else
-		{
-			try {
-				var filerPath = this.PREF.getComplexValue("scrapbook.filer.path", Components.interfaces.nsIPrefLocalizedString).data;
-				this.execProgram(filerPath, [aDir.path]);
-			} catch(ex) {
-				alert(ex);
-			}
 		}
 	},
 
@@ -322,16 +324,13 @@ var sbCommonUtils = {
 		var process  = Components.classes["@mozilla.org/process/util;1"].createInstance(Components.interfaces.nsIProcess);
 		try {
 			execfile.initWithPath(aExecFilePath);
-			if ( !execfile.exists() )
-			{
+			if ( !execfile.exists() ) {
 				alert("ScrapBook ERROR: File does not exist.\n" + aExecFilePath);
 				return;
 			}
 			process.init(execfile);
 			process.run(false, args, args.length);
-		}
-		catch (ex)
-		{
+		} catch (ex) {
 			alert("ScrapBook ERROR: File is not executable.\n" + aExecFilePath);
 		}
 	},
@@ -339,19 +338,9 @@ var sbCommonUtils = {
 
 	getFocusedWindow : function()
 	{
-		var myWindow = document.commandDispatcher.focusedWindow;
-		if ( !myWindow || myWindow == window ) myWindow = window._content;
-		return myWindow;
-	},
-
-
-	getURL : function(aID, aType)
-	{
-		if ( aType == "note") {
-			return "chrome://scrapbook/content/note.xul?id=" + aID;
-		} else {
-			return this.IO.newFileURI(this.getContentDir(aID)).spec + "index.html";
-		}
+		var win = document.commandDispatcher.focusedWindow;
+		if ( !win || win == window || win instanceof Components.interfaces.nsIDOMChromeWindow ) win = window._content;
+		return win;
 	},
 
 
@@ -387,13 +376,14 @@ var sbCommonUtils = {
 
 
 
-function dumpObj(aObj)
+
+function dumpObj(aObj, aLimit)
 {
 	dump("\n\n----------------[DUMP_OBJECT]----------------\n\n");
 	for ( var i in aObj )
 	{
 		try {
-			dump(i + " -> " + aObj[i] + "\n");
+			dump(i + (aLimit ? "" : " -> " + aObj[i]) + "\n");
 		} catch(ex) {
 			dump("XXXXXXXXXX ERROR XXXXXXXXXX\n" + ex + "\n");
 		}

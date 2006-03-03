@@ -1,10 +1,9 @@
-<!ENTITY sb.repair.rdfFile "Restore scrapbook.rdf">
-<!ENTITY sb.repair.rdfFile.descript "Try this if ScrapBook tree disappears suddenly.">
-<!ENTITY sb.repair.rdfFile.select "Select a backup file for the restoration.">
-<!ENTITY sb.repair.rdfFile.file "File">
-<!ENTITY sb.repair.rdfFile.time "Time">
-<!ENTITY sb.repair.rdfFile.size "Size">
-<!ENTITY sb.repair.rdfFile.complete "Completed. Please restart Firefox.">
-<!ENTITY sb.repair.favicons "Restore favicons in tree">
-<!ENTITY sb.repair.favicons.descript "Try this if many favicons in ScrapBook tree disappear.">
-<!ENTITY sb.repair.favicons.complete "Completed.">
+<!ENTITY sb.repair.rdfFile "Restaurar scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript "Intentarlo si el árbol ScrapBook desaparece de repente">
+<!ENTITY sb.repair.rdfFile.select "Selecione un fichero de backup para restaurarlo.">
+<!ENTITY sb.repair.rdfFile.file "Fichero">
+<!ENTITY sb.repair.rdfFile.time "Fecha">
+<!ENTITY sb.repair.rdfFile.size "Tamaño">
+<!ENTITY sb.repair.favicons "Restaurar favicons en el árbol">
+<!ENTITY sb.repair.favicons.descript "Intentarlo si muchos favicons han desaparecido del árbol ScrapBook.">
+<!ENTITY sb.repair.complete "Completado.">

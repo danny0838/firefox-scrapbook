@@ -1,30 +1,33 @@
-<!ENTITY sb.setting "Einstellungen">
-<!ENTITY sb.setting.general "Allgemein">
-<!ENTITY sb.setting.usetabs "Tab-Verhalten">
-<!ENTITY sb.setting.advance "Erweitert">
-<!ENTITY sb.setting.capture "Archivierung">
-<!ENTITY sb.setting.editing "Bearbeitung">
-<!ENTITY sb.setting.program "Programme">
-<!ENTITY sb.setting.browser.submenu "ScrapBook-Einträge im Kontextmenü der Seite in eigenem Untermenü anzeigen (Neustart erforderlich)">
-<!ENTITY sb.setting.capture.detail "Dialog &quot;Archivierungsdetails&quot; anzeigen, wenn eine Archivierung durch Ziehen mit der Maus in die Sidebar erfolgt">
-<!ENTITY sb.setting.capture.notify "Meldung nach Abschluss der Archivierung anzeigen (nur für Windows)">
-<!ENTITY sb.setting.tree.singleexpand "Beim Ausklappen eines Ordners in der Ordnerliste alle anderen Ordner einklappen (wie IE-Favoriten)">
-<!ENTITY sb.setting.tree.quickdelete "Keine Warnung vor dem Löschen eines Eintrags anzeigen">
-<!ENTITY sb.setting.usetabs.d "Folgende Aktionen öffnen neue Tabs:">
-<!ENTITY sb.setting.usetabs.note "Notizen in Tab öffnen">
-<!ENTITY sb.setting.capture.utf8encode "Zeichenkodierung in UTF-8 umwandeln (empfohlen)">
-<!ENTITY sb.setting.capture.utf8encode.d "Falls nicht ausgewählt, können einige Sonderzeichen unleserlich (&quot;?&quot;) dargestellt werden.">
-<!ENTITY sb.setting.capture.removescript "JavaScript entfernen (empfohlen)">
-<!ENTITY sb.setting.capture.removescript.d "Falls nicht ausgewählt, kann JavaScript eine Reihe von Problemen verursachen.">
-<!ENTITY sb.highlighter.tips "TIPP: Eine Auswahl kann einfach durch Betätigen der Tasten 1, 2, 3 oder 4 hervorgehoben werden.">
-<!ENTITY sb.setting.block.style "Stylesheet zur Formatierung">
+<!ENTITY sb.pref.general "Allgemein">
+<!ENTITY sb.pref.tabs "Tab-Verhalten">
+<!ENTITY sb.pref.capture "Archivierung">
+<!ENTITY sb.pref.edit "Bearbeitung">
+<!ENTITY sb.pref.advanced "Erweitert">
+<!ENTITY sb.pref.browser.menubar "Zeige 'ScrapBook' in der Firefox Menüzeile">
+<!ENTITY sb.pref.browser.bookmark "Zeige 'Bookmark mit ScrapBook' Menü">
+<!ENTITY sb.pref.browser.submenu "ScrapBook-Einträge im Kontextmenü der Seite in eigenem Untermenü anzeigen (Neustart erforderlich)">
+<!ENTITY sb.pref.showDetailOnDrop "Dialog &quot;Archivierungsdetails&quot; anzeigen, wenn eine Archivierung durch Ziehen mit der Maus in die Sidebar erfolgt">
+<!ENTITY sb.pref.notifyOnComplete "Meldung nach Abschluss der Archivierung anzeigen">
+<!ENTITY sb.pref.confirmDelete "Vor dem Löschen bestätigen">
+<!ENTITY sb.pref.tree.autoCollapse "Beim Ausklappen eines Ordners in der Ordnerliste alle anderen Ordner einklappen">
+<!ENTITY sb.pref.tree.unshift "Position an der ein Eintrag beim verschieben/archivieren in einen Ordner hinzugefügt werden soll:">
+<!ENTITY sb.pref.tree.unshift.top "Am Anfang">
+<!ENTITY sb.pref.tree.unshift.bottom "Am Ende (Default)">
+<!ENTITY sb.pref.tabs.tips "Folgende Aktionen öffnen neue Tabs:">
+<!ENTITY sb.pref.tabs.note "Notizen in Tab öffnen">
+<!ENTITY sb.pref.tabs.openFromMenu "Öffne in einem neuen Tab vom 'ScrapBook' Menü in der Firefox Menüzeile">
+<!ENTITY sb.pref.capture.encodeUTF8 "Zeichenkodierung in UTF-8 umwandeln (empfohlen)">
+<!ENTITY sb.pref.capture.encodeUTF8.tips "Falls nicht ausgewählt, können einige Sonderzeichen unleserlich (&quot;?&quot;) dargestellt werden.">
+<!ENTITY sb.pref.capture.noscript.tips "Falls nicht ausgewählt, kann JavaScript eine Reihe von Problemen verursachen.">
+<!ENTITY sb.pref.data "Zielordner für die Datenspeicherung">
+<!ENTITY sb.pref.data.default "Standardordner (aktueller Profilordner)">
+<!ENTITY sb.pref.data.tips "ScrapBook-Ordner auswählen, in dem die gesammelten Daten gespeichert werden sollen.">
+<!ENTITY sb.pref.data.alert "Ihre ScrapBook-Daten werden gegenwärtig in Ihrem aktuellen Firefox-Profil gespeichert. Hinweis: Wenn Sie beim Löschen dieses Profils die Option &quot;Dateien löschen&quot; wählen, werden ebenfalls alle ScrapBook-Daten entfernt.">
+<!ENTITY sb.pref.multibook.enabled "Aktiviere Multi-ScrapBook">
+<!ENTITY sb.pref.multibook.tips "Diese Optione ermöglicht es Ihnen mehrere Speicherorte zu erstellen und per Toolbar Knopf schnell zwischen ihnen zu wechseln.">
+<!ENTITY sb.pref.fileViewer "Datei-Manager">
+<!ENTITY sb.pref.fileViewer.default "Standardprogramm des Betriebssystems (z.B. Windows-Explorer)">
+<!ENTITY sb.tips.highlighter "TIPP: Eine Auswahl kann einfach durch Betätigen der Tasten 1, 2, 3 oder 4 hervorgehoben werden.">
+<!ENTITY sb.tips.eraser "TIPP: Sie können ein einzelnes Element per Rechtsklick mit dem DOM Eraser auswählen.">
 <!ENTITY sb.button.browse "Durchsuchen">
 <!ENTITY sb.button.show "Ordner anzeigen">
-<!ENTITY sb.setting.data "Zielordner für die Datenspeicherung">
-<!ENTITY sb.setting.data.default "Standardordner (aktueller Profilordner)">
-<!ENTITY sb.setting.data.explain "ScrapBook-Ordner auswählen, in dem die gesammelten Daten gespeichert werden sollen.">
-<!ENTITY sb.setting.data.alert "Ihre ScrapBook-Daten werden gegenwärtig in Ihrem aktuellen Firefox-Profil gespeichert. Hinweis: Wenn Sie beim Löschen dieses Profils die Option &quot;Dateien löschen&quot; wählen, werden ebenfalls alle ScrapBook-Daten entfernt.">
-<!ENTITY sb.setting.multibook.enabled "Enable Multi-ScrapBook">
-<!ENTITY sb.setting.multibook.description "This enables you to set up multiple destination to store data and switch between them quickly with toolbar button.">
-<!ENTITY sb.setting.filer "Datei-Manager">
-<!ENTITY sb.setting.filer.default "Standardprogramm des Betriebssystems (z.B. Windows-Explorer)">

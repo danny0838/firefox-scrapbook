@@ -15,7 +15,7 @@ var sbMultiBookService = {
 	{
 		if ( "sbMultiBookOverlay" in window )
 		{
-			alert(SBstring.getString("MB_UNINSTALL"));
+			alert(document.getElementById("sbMainString").getString("MB_UNINSTALL"));
 			nsPreferences.setBoolPref("scrapbook.multibook.enabled", true);
 		}
 		if ( !this.enabled ) return;
@@ -90,31 +90,29 @@ var sbMultiBookService = {
 
 	change : function(aItem, isDefault)
 	{
-		var winEnum = sbCommonUtils.WINDOW.getEnumerator("scrapbook");
-		while ( winEnum.hasMoreElements() )
-		{
-			var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
-			if ( win != window )
-			{
-				alert(SBstring.getString("MB_CLOSE_WINDOW") + "\n" + win.title);
-				return;
-			}
-		}
+		if ( !this.validateRefresh() ) return;
 		var file, prefVal;
 		try {
 			file = sbCommonUtils.getScrapBookDir().clone();
 			file.append("folders.txt");
-			prefVal = nsPreferences.copyUnicharPref("scrapbook.detail.recentfolder", "");
-			if ( prefVal ) sbCommonUtils.writeFile(file, prefVal, "UTF-8");
+			prefVal = nsPreferences.copyUnicharPref("scrapbook.tree.folderList", "");
+			if ( prefVal )
+			{
+				sbCommonUtils.writeFile(file, prefVal, "UTF-8");
+			}
 		} catch(ex) {
 		}
+		document.getElementById("mbToolbarButton").disabled = true;
 		nsPreferences.setBoolPref("scrapbook.data.default", isDefault);
 		if ( !isDefault ) nsPreferences.setUnicharPref("scrapbook.data.path", aItem.getAttribute("path"));
 		try {
 			file = sbCommonUtils.getScrapBookDir().clone();
 			file.append("folders.txt");
 			prefVal = sbCommonUtils.readFile(file);
-			if ( prefVal ) nsPreferences.setUnicharPref("scrapbook.detail.recentfolder", prefVal);
+			if ( prefVal )
+			{
+				nsPreferences.setUnicharPref("scrapbook.tree.folderList", prefVal);
+			}
 		} catch(ex) {
 		}
 		nsPreferences.setUnicharPref("scrapbook.data.title", aItem.label);
@@ -123,17 +121,38 @@ var sbMultiBookService = {
 			refWin.sbPageEditor.dataTitle = aItem.label;
 		} catch(ex) {
 		}
+		this.refreshGlobal();
+		window.location.reload();
+	},
+
+
+	validateRefresh : function(aQuietWarning)
+	{
+		var winEnum = sbCommonUtils.WINDOW.getEnumerator("scrapbook");
+		while ( winEnum.hasMoreElements() )
+		{
+			var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
+			if ( win != window )
+			{
+				if ( !aQuietWarning ) alert(document.getElementById("sbMainString").getString("MB_CLOSE_WINDOW") + "\n[" + win.title + "]");
+				return false;
+			}
+		}
+		return true;
+	},
+
+	refreshGlobal : function()
+	{
 		winEnum = sbCommonUtils.WINDOW.getEnumerator("navigator:browser");
 		while ( winEnum.hasMoreElements() )
 		{
 			var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
 			try {
-				win.document.getElementById("sidebar").contentDocument.location.reload();
 				win.sbBrowserOverlay.refresh();
+				win.document.getElementById("sidebar").contentDocument.location.reload();
 			} catch(ex) {
 			}
 		}
-		window.location.reload();
 	},
 
 	config : function()

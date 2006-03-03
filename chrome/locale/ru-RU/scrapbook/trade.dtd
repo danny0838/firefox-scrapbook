@@ -1,4 +1,5 @@
 <!ENTITY sb.trade.import "Импорт">
 <!ENTITY sb.trade.export "Экспорт">
-<!ENTITY sb.trade.restore "Импорт с восстановленной файловой структурой">
 <!ENTITY sb.trade.time "Экспортированное время">
+<!ENTITY sb.trade.restore "Импорт с восстановленной файловой структурой">
+<!ENTITY sb.trade.remove "Remove files after importing">

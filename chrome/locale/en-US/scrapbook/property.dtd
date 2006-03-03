@@ -1,15 +1,11 @@
-<!ENTITY sb.prop.date "Date">
-<!ENTITY sb.prop.type "Type">
-<!ENTITY sb.prop.title "Title">
-<!ENTITY sb.prop.encode "Encode">
-<!ENTITY sb.prop.icon "Icon">
-<!ENTITY sb.prop.source "URL">
-<!ENTITY sb.prop.comment "Comment">
-<!ENTITY sb.prop.content "Content">
-<!ENTITY sb.prop.size "Size">
-<!ENTITY sb.prop.id.date "ID (Time)">
-<!ENTITY sb.prop.folder "Folder">
 <!ENTITY sb.prop.general "General Info">
+<!ENTITY sb.prop.type "Type">
+<!ENTITY sb.prop.date "Date">
+<!ENTITY sb.prop.encode "Encode">
+<!ENTITY sb.prop.size "Size">
+<!ENTITY sb.prop.content "Content">
+<!ENTITY sb.prop.folder "Folder">
+<!ENTITY sb.prop.icon "Icon">
 <!ENTITY sb.prop.icon.change "Change">
 <!ENTITY sb.prop.icon.default "Default">
 <!ENTITY sb.prop.icon.favicon "Select favicon">

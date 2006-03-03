@@ -1,7 +1,6 @@
-<!ENTITY sb.multiple.url "URL (Enter URLs line-by-line)">
-<!ENTITY sb.multiple.detector "URL Detector">
-<!ENTITY sb.multiple.detector.plink "All Links in the Page">
-<!ENTITY sb.multiple.detector.slink "All Links in the Selection">
-<!ENTITY sb.multiple.detector.tabs "All Open Tabs in the Window">
-<!ENTITY sb.multiple.detector.local "All Local HTMLs under the Directory">
-<!ENTITY sb.multiple.detector.clear "Clear">
+<!ENTITY sb.multiple.url "URL (Introduzca URLs línea por línea)">
+<!ENTITY sb.multiple.detector "Detector URL">
+<!ENTITY sb.multiple.detector.plink "Todos los enlaces en la página">
+<!ENTITY sb.multiple.detector.slink "Todos los enlaces en la selección">
+<!ENTITY sb.multiple.detector.local "Todos los HTMLs locales en un directorio">
+<!ENTITY sb.multiple.detector.clear "Limpiar">

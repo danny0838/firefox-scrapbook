@@ -1,30 +1,33 @@
-<!ENTITY sb.setting "Configurações">
-<!ENTITY sb.setting.general "Geral">
-<!ENTITY sb.setting.usetabs "Usar Abas">
-<!ENTITY sb.setting.advance "Avançado">
-<!ENTITY sb.setting.capture "Capturar">
-<!ENTITY sb.setting.editing "Editar">
-<!ENTITY sb.setting.program "Programas">
-<!ENTITY sb.setting.browser.submenu "Habilitar submenu dentro do menu de contexto do navegador (necessário reiniciar)">
-<!ENTITY sb.setting.capture.detail "Mostrar diálogo 'Detalhe da Captura' quando capturar através de arrastar-e-soltar no Painel">
-<!ENTITY sb.setting.capture.notify "Mostrar notificação 'Captura Completa' (funciona somente com Windows)">
-<!ENTITY sb.setting.tree.singleexpand "Quando expandir uma pasta, recolher todas as outras (como nos Favoritos do IE)">
-<!ENTITY sb.setting.tree.quickdelete "Não pedir confirmação para apagar">
-<!ENTITY sb.setting.usetabs.d "Ações selecionadas usam novas abas.">
-<!ENTITY sb.setting.usetabs.note "Abrir anotações em abas.">
-<!ENTITY sb.setting.capture.utf8encode "Converter para a codificação UTF-8 (Recomendado)">
-<!ENTITY sb.setting.capture.utf8encode.d "Se desabilitado, alguns caracteres podem mudar para '?'.">
-<!ENTITY sb.setting.capture.removescript "Remover JavaScript (Recomendado)">
-<!ENTITY sb.setting.capture.removescript.d "Se desabilitado, muitos problemas serão causados pelo JavaScript.">
-<!ENTITY sb.highlighter.tips "DICA: Você pode realçar a seleção pressionando as teclas 1 ou 2 ou 3 ou 4.">
-<!ENTITY sb.setting.block.style "Folha de Estilos">
+<!ENTITY sb.pref.general "Geral">
+<!ENTITY sb.pref.tabs "Usar Abas">
+<!ENTITY sb.pref.capture "Capturar">
+<!ENTITY sb.pref.edit "Editar">
+<!ENTITY sb.pref.advanced "Avançado">
+<!ENTITY sb.pref.browser.menubar "Exibir o menu 'ScrapBook' na barra de menus do Firefox">
+<!ENTITY sb.pref.browser.bookmark "Exibir o menu 'Criar Favorito no ScrapBook'">
+<!ENTITY sb.pref.browser.submenu "Habilitar submenu no menu de contexto do navegador (necessário reiniciar)">
+<!ENTITY sb.pref.showDetailOnDrop "Mostrar diálogo 'Detalhe da Captura' quando capturar através de arrastar-e-soltar no Painel">
+<!ENTITY sb.pref.notifyOnComplete "Mostrar aviso de 'Captura Completa'">
+<!ENTITY sb.pref.confirmDelete "Confirmar antes de apagar">
+<!ENTITY sb.pref.tree.autoCollapse "Quando expandir uma pasta, recolher todas as outras">
+<!ENTITY sb.pref.tree.unshift "Posição na pasta onde adicionar um novo item quando mover/capturar:">
+<!ENTITY sb.pref.tree.unshift.top "Início">
+<!ENTITY sb.pref.tree.unshift.bottom "Final (Padrão)">
+<!ENTITY sb.pref.tabs.tips "Ações selecionadas usam novas abas.">
+<!ENTITY sb.pref.tabs.note "Abrir notas em abas.">
+<!ENTITY sb.pref.tabs.openFromMenu "Abrir em nova aba os itens do menu 'ScrapBook'">
+<!ENTITY sb.pref.capture.encodeUTF8 "Converter para a codificação UTF-8 (Recomendado)">
+<!ENTITY sb.pref.capture.encodeUTF8.tips "Se desabilitado, alguns caracteres podem mudar para '?'.">
+<!ENTITY sb.pref.capture.noscript.tips "Se desabilitado, muitos problemas serão causados pelo JavaScript.">
+<!ENTITY sb.pref.data "Local para Salvar Dados">
+<!ENTITY sb.pref.data.default "Padrão (Na Pasta do seu Perfil)">
+<!ENTITY sb.pref.data.tips "Selecione a pasta para o 'ScrapBook' armazenar dados coletados.">
+<!ENTITY sb.pref.data.alert "Atualmente os dados do seu ScrapBook estão armazenados na pasta do seu Perfil do Firefox. Por favor note que, se você selecionar [Apagar Arquivos] ao remover seu Perfil do Firefox, todos os dados do ScrapBook também serão removidos.">
+<!ENTITY sb.pref.multibook.enabled "Habilitar Multi-ScrapBook">
+<!ENTITY sb.pref.multibook.tips "Isto permite você ter múltiplos destinos para guardar dados e alternar entre eles rapidamente através de um botão na barra de ferramentas.">
+<!ENTITY sb.pref.fileViewer "Programa para navegação de arquivos">
+<!ENTITY sb.pref.fileViewer.default "Padrão (No Windows, talvez Explorer.)">
+<!ENTITY sb.tips.highlighter "DICA: Você pode realçar a seleção pressionando as teclas 1, 2, 3 ou 4.">
+<!ENTITY sb.tips.eraser "DICA: Você pode isolar um elemento clicando nele com o botão direito usando o Apagador DOM.">
 <!ENTITY sb.button.browse "Navegar">
 <!ENTITY sb.button.show "Mostrar Pasta">
-<!ENTITY sb.setting.data "Local para Salvar Dados">
-<!ENTITY sb.setting.data.default "Padrão (Na Pasta do seu Perfil)">
-<!ENTITY sb.setting.data.explain "Selecione a pasta para o 'ScrapBook' armazenar dados coletados.">
-<!ENTITY sb.setting.data.alert "Atualmente os dados do seu ScrapBook estão armazenados na pasta do seu Perfil do Firefox. Por favor note que, se você selecionar [Apagar Arquivos] ao remover seu Perfil do Firefox, todos os dados do ScrapBook também serão removidos.">
-<!ENTITY sb.setting.multibook.enabled "Enable Multi-ScrapBook">
-<!ENTITY sb.setting.multibook.description "This enables you to set up multiple destination to store data and switch between them quickly with toolbar button.">
-<!ENTITY sb.setting.filer "Programa para navegação de arquivos">
-<!ENTITY sb.setting.filer.default "Padrão (No Windows, talvez Explorer.)">

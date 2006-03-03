@@ -1,30 +1,33 @@
-<!ENTITY sb.setting "Настройки">
-<!ENTITY sb.setting.general "Основные">
-<!ENTITY sb.setting.usetabs "Использование вкладок">
-<!ENTITY sb.setting.advance "Дополнительно">
-<!ENTITY sb.setting.capture "Захват">
-<!ENTITY sb.setting.editing "Редактирование">
-<!ENTITY sb.setting.program "Программа">
-<!ENTITY sb.setting.browser.submenu "Включить подменю в контекстном меню браузера (Изменится после перезагрузки)">
-<!ENTITY sb.setting.capture.detail "Показывать диалог 'Детали сохранения' при сохранении страницы перетаскиванием иконки">
-<!ENTITY sb.setting.capture.notify "Показывать сообщение 'Сохранение завершено' (возможно, работает только в Windows)">
-<!ENTITY sb.setting.tree.singleexpand "При раскрытии папки дерева, остальные свернуть">
-<!ENTITY sb.setting.tree.quickdelete "Не спрашивать подтверждения при удалении">
-<!ENTITY sb.setting.usetabs.d "Следующие действия выполнять в новых вкладках:">
-<!ENTITY sb.setting.usetabs.note "Открыть заметки во вкладке">
-<!ENTITY sb.setting.capture.utf8encode "Перевести в кодировку UTF-8 (рекомендуется)">
-<!ENTITY sb.setting.capture.utf8encode.d "Если выключено, то некоторые последовательности символов будут отображаться как '?'.">
-<!ENTITY sb.setting.capture.removescript "Удалить JavaScript (рекомендуется)">
-<!ENTITY sb.setting.capture.removescript.d "Если это выключить, то может быть много проблем из-за JavaScript.">
-<!ENTITY sb.highlighter.tips "Советы: Вы можете подсветить выделение с помощью клавиш 1, 2, 3 или 4.">
-<!ENTITY sb.setting.block.style "Стиль таблицы">
+<!ENTITY sb.pref.general "Основные">
+<!ENTITY sb.pref.tabs "Использование вкладок">
+<!ENTITY sb.pref.capture "Захват">
+<!ENTITY sb.pref.edit "Редактирование">
+<!ENTITY sb.pref.advanced "Дополнительно">
+<!ENTITY sb.pref.browser.menubar "Show 'ScrapBook' menu in Firefox menubar">
+<!ENTITY sb.pref.browser.bookmark "Show 'Bookmark with ScrapBook' menu">
+<!ENTITY sb.pref.browser.submenu "Включить подменю в контекстном меню браузера (Изменится после перезагрузки)">
+<!ENTITY sb.pref.showDetailOnDrop "Показывать диалог 'Детали сохранения' при сохранении страницы перетаскиванием иконки">
+<!ENTITY sb.pref.notifyOnComplete "Показывать сообщение 'Сохранение завершено'">
+<!ENTITY sb.pref.confirmDelete "Confirm before deleting">
+<!ENTITY sb.pref.tree.autoCollapse "При раскрытии папки дерева, остальные свернуть">
+<!ENTITY sb.pref.tree.unshift "Position where to add item when moving/capturing into folder:">
+<!ENTITY sb.pref.tree.unshift.top "Top">
+<!ENTITY sb.pref.tree.unshift.bottom "Bottom (Default)">
+<!ENTITY sb.pref.tabs.tips "Следующие действия выполнять в новых вкладках:">
+<!ENTITY sb.pref.tabs.note "Открыть заметки во вкладке">
+<!ENTITY sb.pref.tabs.openFromMenu "Open in new tab from 'ScrapBook' menu in Firefox menubar">
+<!ENTITY sb.pref.capture.encodeUTF8 "Перевести в кодировку UTF-8 (рекомендуется)">
+<!ENTITY sb.pref.capture.encodeUTF8.tips "Если выключено, то некоторые последовательности символов будут отображаться как '?'.">
+<!ENTITY sb.pref.capture.noscript.tips "Если это выключить, то может быть много проблем из-за JavaScript.">
+<!ENTITY sb.pref.data "Папка для хранения данных">
+<!ENTITY sb.pref.data.default "По умолчанию (В Вашем домашнем каталоге/Профиле)">
+<!ENTITY sb.pref.data.tips "Укажите папку 'ScrapBook' где Вы хотите разместить (разместили) собранные страницы.">
+<!ENTITY sb.pref.data.alert "В данный момент информация из Web-альбома хранится в профиле Firefox. Обратите внимание, что если вы выберите удаление файлов во время удаления профиля, то и вся информация из Web-альбома тоже потеряется.">
+<!ENTITY sb.pref.multibook.enabled "Включить Multi-ScrapBook">
+<!ENTITY sb.pref.multibook.tips "Разрешает использование нескольких альбомов с возможностью переключения кнопкой на панели инструментов.">
+<!ENTITY sb.pref.fileViewer "Программа для выполнения пункта 'Состав файлов'">
+<!ENTITY sb.pref.fileViewer.default "По умолчанию (Если Windows, возможно Explorer)">
+<!ENTITY sb.tips.highlighter "Советы: Вы можете подсветить выделение с помощью клавиш 1, 2, 3 или 4.">
+<!ENTITY sb.tips.eraser "Советы: You can isolate an element by right-clicking it with DOM Eraser.">
 <!ENTITY sb.button.browse "Выбрать">
 <!ENTITY sb.button.show "Показать папку">
-<!ENTITY sb.setting.data "Папка для хранения данных">
-<!ENTITY sb.setting.data.default "По умолчанию (В Вашем домашнем каталоге/Профиле)">
-<!ENTITY sb.setting.data.explain "Укажите папку 'ScrapBook' где Вы хотите разместить (разместили) собранные страницы.">
-<!ENTITY sb.setting.data.alert "В данный момент информация из Web-альбома хранится в профиле Firefox. Обратите внимание, что если вы выберите удаление файлов во время удаления профиля, то и вся информация из Web-альбома тоже потеряется.">
-<!ENTITY sb.setting.multibook.enabled "Enable Multi-ScrapBook">
-<!ENTITY sb.setting.multibook.description "This enables you to set up multiple destination to store data and switch between them quickly with toolbar button.">
-<!ENTITY sb.setting.filer "Программа для выполнения пункта 'Состав файлов'">
-<!ENTITY sb.setting.filer.default "По умолчанию (Если Windows, возможно Explorer)">

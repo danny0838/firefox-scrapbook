@@ -2,5 +2,4 @@
 <!ENTITY sb.combine.select.d "Tupla-napsauta sivuja yhdistämisjärjestyksessä.">
 <!ENTITY sb.combine.preview "Esikatsele">
 <!ENTITY sb.combine.preview.d "Napsauta Yhdistä-painiketta esikatselun jälkeen.">
-<!ENTITY sb.combine.option.header "Lisää otsaketiedot jokaiseen sivuun">
 <!ENTITY sb.combine.option.remove "Poista alkuperäiset sivut yhdistämisen jälkeen">

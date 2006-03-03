@@ -1,11 +1,11 @@
-<!ENTITY sn.save "Salva">
-<!ENTITY sn.close "Chiudi">
-<!ENTITY sn.tools "Strumenti">
-<!ENTITY sn.preview "Anteprima HTML">
-<!ENTITY sn.preview.quit "Interrompi anteprima">
-<!ENTITY sn.template "Modifica maschera HTML">
-<!ENTITY sn.autolinefeed "Tag automatico a fine linea">
-<!ENTITY sn.autolinefeed.t "Aggiungi il tag &lt;br&gt; a fine linea nell'anteprima HTML">
-<!ENTITY sn.fontsize "Grandezza carattere">
-<!ENTITY sn.help "Aiuto">
-<!ENTITY sn.exit "Esci">
+<!ENTITY sb.note.save "Salva">
+<!ENTITY sb.note.close "Chiudi">
+<!ENTITY sb.note.tools "Strumenti">
+<!ENTITY sb.note.htmlview "Anteprima HTML">
+<!ENTITY sb.note.normalview "Visualizzazione normale">
+<!ENTITY sb.note.template "Modifica maschera HTML">
+<!ENTITY sb.note.autolinefeed "Tag automatico a fine linea">
+<!ENTITY sb.note.autolinefeed.t "Aggiungi il tag &lt;br&gt; a fine linea nell'anteprima HTML">
+<!ENTITY sb.note.fontsize "Grandezza carattere">
+<!ENTITY sb.note.help "Aiuto">
+<!ENTITY sb.note.exit "Esci">

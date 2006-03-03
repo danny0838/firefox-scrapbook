@@ -3,15 +3,13 @@
 <!ENTITY sb.editor.undo "되돌리기">
 <!ENTITY sb.editor.restore "모든 변경 사항을 무시하고 이전 상태로 되돌리기">
 <!ENTITY sb.editor.save "변경 사항 저장">
-<!ENTITY sb.editor.comment "주석 영역 확장하기">
-<!ENTITY sb.editor.block "블록 주석">
-<!ENTITY sb.editor.block.insert "선택 부분 뒤에 블록 주석 삽입">
-<!ENTITY sb.editor.block.hide "블록 주석 표시하지 않기">
-<!ENTITY sb.editor.inline.add "선택 부분에 인라인 주석 입력">
-<!ENTITY sb.editor.inline.delete "모든 인라인 주석 해제">
+<!ENTITY sb.editor.comment "주석 영역 확장">
+<!ENTITY sb.editor.sticky "주석">
+<!ENTITY sb.editor.sticky.create "&sb.editor.sticky; 만들기">
+<!ENTITY sb.editor.inline.add "선택 부분에 인라인 주석 추가">
 <!ENTITY sb.editor.attach.file "선택 부분에 파일 첨부">
 <!ENTITY sb.editor.attach.link "선택 부분에 링크 추가">
-<!ENTITY sb.editor.cutter "선택 부분 삭제하기">
+<!ENTITY sb.editor.cutter "선택 부분 삭제">
 <!ENTITY sb.editor.remove.iframe "모든 IFRAME 태그 삭제">
 <!ENTITY sb.editor.remove.script "모든 SCRIPT 태그 삭제">
 <!ENTITY sb.highlighter "강조자">
@@ -19,7 +17,8 @@
 <!ENTITY sb.highlighter.remove.all "모든 강조 해제">
 <!ENTITY sb.customize "사용자 설정">
 <!ENTITY sb.infobar.openSource "소스 URL 열기">
-<!ENTITY sb.infobar.showSitemap "&sb.infobar.sitemap; 보이기">
+<!ENTITY sb.infobar.renew "다시 캡처">
+<!ENTITY sb.infobar.showIndicators "링크 지시자 보이기">
 <!ENTITY sb.infobar.showInfobar "정보 도구 모음 보이기">
 <!ENTITY sb.infobar.home "홈">
 <!ENTITY sb.infobar.sitemap "사이트 맵">

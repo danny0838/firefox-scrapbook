@@ -4,6 +4,7 @@ var sbDataSource = {
 
 	data : null,
 	file : null,
+	unshifting : false,
 
 
 
@@ -29,18 +30,37 @@ var sbDataSource = {
 		catch(ex) {
 			if ( !aQuietWarning ) alert("ScrapBook ERROR: Failed to initialize datasource.\n\n" + ex);
 		}
+		this.unshifting = sbCommonUtils.getBoolPref("scrapbook.tree.unshift", false);
 	},
 
 	backup : function()
 	{
-		var bFile = sbCommonUtils.getScrapBookDir();
-		bFile.append("backup");
-		if ( !bFile.exists() ) bFile.create(bFile.DIRECTORY_TYPE, 0700);
+		var bDir = sbCommonUtils.getScrapBookDir();
+		bDir.append("backup");
+		if ( !bDir.exists() ) bDir.create(bDir.DIRECTORY_TYPE, 0700);
 		var bFileName = "scrapbook_" + sbCommonUtils.getTimeStamp().substring(0,8) + ".rdf";
 		try {
-			this.file.copyTo(bFile, bFileName);
-			dump("sbDataSource::backup [" + bFileName + "]\n");
+			this.file.copyTo(bDir, bFileName);
+			setTimeout(function(){ sbDataSource.cleanUpBackups(bDir); }, 1000);
 		} catch(ex) {
+		}
+	},
+
+	cleanUpBackups : function(bDir)
+	{
+		var max = 5;
+		var today = (new Date()).getTime();
+		var dirEnum = bDir.directoryEntries;
+		while ( dirEnum.hasMoreElements() )
+		{
+			var entry = dirEnum.getNext().QueryInterface(Components.interfaces.nsILocalFile);
+			if ( !entry.leafName.match(/^scrapbook_(\d{4})(\d{2})(\d{2})\.rdf$/) ) continue;
+			var lifeTime = new Date(parseInt(RegExp.$1), parseInt(RegExp.$2)-1, parseInt(RegExp.$3));
+			lifeTime = Math.round((today - lifeTime) / (1000 * 60 * 60 * 24));
+			if ( lifeTime > 30 && --max >= 0 )
+			{
+				entry.remove(false);
+			}
 		}
 	},
 
@@ -68,21 +88,13 @@ var sbDataSource = {
 		aSBitem.comment = this.sanitize(aSBitem.comment);
 		aSBitem.icon    = this.sanitize(aSBitem.icon);
 		aSBitem.source  = this.sanitize(aSBitem.source);
-
-		if ( aParName != "urn:scrapbook:root" && this.getProperty("type", sbCommonUtils.RDF.GetResource(aParName)) != "folder" )
-		{
-			alert("ScrapBook ERROR: Resource '" + aParName + "' is not found.");
-			aParName = "urn:scrapbook:root"; aIdx = 0;
-		}
-
 		try {
-			sbCommonUtils.RDFC.Init(this.data, sbCommonUtils.RDF.GetResource(aParName));
-		}
-		catch(ex) {
-			alert("ScrapBook ERROR: Failed to initialize root container.\n\n" + ex);
-			return false;
-		}
-		try {
+			var cont = this.getContainer(aParName, false);
+			if ( !cont )
+			{
+				cont = this.getContainer("urn:scrapbook:root", false);
+				aIdx = 0;
+			}
 			var newRes = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aSBitem.id);
 			this.data.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "id"),      sbCommonUtils.RDF.GetLiteral(aSBitem.id),      true);
 			this.data.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "type"),    sbCommonUtils.RDF.GetLiteral(aSBitem.type),    true);
@@ -91,16 +103,19 @@ var sbDataSource = {
 			this.data.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "comment"), sbCommonUtils.RDF.GetLiteral(aSBitem.comment), true);
 			this.data.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "icon"),    sbCommonUtils.RDF.GetLiteral(aSBitem.icon),    true);
 			this.data.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "source"),  sbCommonUtils.RDF.GetLiteral(aSBitem.source),  true);
-			if ( aIdx > 0 ) {
-				sbCommonUtils.RDFC.InsertElementAt(newRes, aIdx, true);
+			if ( this.unshifting )
+			{
+				if ( aIdx == 0 || aIdx == -1 ) aIdx = 1;
+			}
+			if ( 0 < aIdx && aIdx < cont.GetCount() ) {
+				cont.InsertElementAt(newRes, aIdx, true);
 			} else {
-				sbCommonUtils.RDFC.AppendElement(newRes);
+				cont.AppendElement(newRes);
 			}
 			this.flush();
 			return newRes;
-		}
-		catch(ex) {
-			alert("ScrapBook ERROR: Failed to add element to datasource.\n\n" + ex);
+		} catch(ex) {
+			alert("ScrapBook ERROR: Failed to add resource to datasource.\n\n" + ex);
 			return false;
 		}
 	},
@@ -114,6 +129,10 @@ var sbDataSource = {
 			alert("ScrapBook ERROR: Failed to move element at datasource (1).\n\n" + ex);
 			return;
 		}
+		if ( this.unshifting )
+		{
+			if ( tarRelIdx == 0 || tarRelIdx == -1 ) tarRelIdx = 1;
+		}
 		try {
 			sbCommonUtils.RDFC.Init(this.data, tarPar);
 			if ( tarRelIdx > 0 ) {
@@ -121,26 +140,10 @@ var sbDataSource = {
 			} else {
 				sbCommonUtils.RDFC.AppendElement(curRes);
 			}
-		}
-		catch(ex) {
+		} catch(ex) {
 			alert("ScrapBook ERROR: Failed to move element at datasource (2).\n\n" + ex);
 			sbCommonUtils.RDFC.Init(this.data, sbCommonUtils.RDF.GetResource("urn:scrapbook:root"));
 			sbCommonUtils.RDFC.AppendElement(curRes, true);
-		}
-	},
-
-	updateItem : function(aRes, aProp, newVal)
-	{
-		newVal = this.sanitize(newVal);
-		try {
-			aProp = sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + aProp);
-			var oldVal = this.data.GetTarget(aRes, aProp, true);
-			oldVal = oldVal.QueryInterface(Components.interfaces.nsIRDFLiteral);
-			newVal = sbCommonUtils.RDF.GetLiteral(newVal);
-			this.data.Change(aRes, aProp, oldVal, newVal);
-		}
-		catch(ex) {
-			alert("ScrapBook ERROR: Failed to update element of datasource.\n" + ex);
 		}
 	},
 
@@ -176,8 +179,7 @@ var sbDataSource = {
 					rmIDs.push( this.removeResource(aRes) );
 				}
 			}
-		}
-		catch(ex) {
+		} catch(ex) {
 			alert("ScrapBook ERROR: Failed to clean up datasource.\n" + ex);
 		}
 		return rmIDs;
@@ -186,15 +188,14 @@ var sbDataSource = {
 	removeResource : function(aRes)
 	{
 		var names = this.data.ArcLabelsOut(aRes);
-		var rmID = this.getProperty("id", aRes);
+		var rmID = this.getProperty(aRes, "id");
 		while ( names.hasMoreElements() )
 		{
 			try {
 				var name  = names.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
 				var value = this.data.GetTarget(aRes, name, true);
 				this.data.Unassert(aRes, name, value);
-			}
-			catch(ex) {
+			} catch(ex) {
 			}
 		}
 		return rmID;
@@ -230,15 +231,39 @@ var sbDataSource = {
 
 
 
-	getProperty : function(aProp, aRes)
+	getProperty : function(aRes, aProp)
 	{
 		if ( aRes.Value == "urn:scrapbook:root" ) return "";
 		try {
 			var retVal = this.data.GetTarget(aRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + aProp), true);
 			return retVal.QueryInterface(Components.interfaces.nsIRDFLiteral).Value;
-		}
-		catch(ex) {
+		} catch(ex) {
 			return "";
+		}
+	},
+
+	setProperty : function(aRes, aProp, newVal)
+	{
+		newVal = this.sanitize(newVal);
+		aProp = sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + aProp);
+		try {
+			var oldVal = this.data.GetTarget(aRes, aProp, true);
+			oldVal = oldVal.QueryInterface(Components.interfaces.nsIRDFLiteral);
+			newVal = sbCommonUtils.RDF.GetLiteral(newVal);
+			this.data.Change(aRes, aProp, oldVal, newVal);
+		} catch(ex) {
+		}
+	},
+
+	getURL : function(aRes)
+	{
+		var id = this.getProperty(aRes, "id");
+		switch ( this.getProperty(aRes, "type") )
+		{
+			case "folder"   : return "chrome://scrapbook/content/view.xul?id=" + id; break;
+			case "note"     : return "chrome://scrapbook/content/note.xul?id=" + id; break;
+			case "bookmark" : return this.getProperty(aRes, "source"); break;
+			default         : return sbCommonUtils.getBaseHref(this.data.URI) + "data/" + id + "/index.html";
 		}
 	},
 
@@ -247,13 +272,17 @@ var sbDataSource = {
 		return this.data.ArcLabelsOut(aRes).hasMoreElements();
 	},
 
+	isContainer : function(aRes)
+	{
+		return sbCommonUtils.RDFCU.IsContainer(this.data, aRes);
+	},
+
 	identify : function(aID)
 	{
 		var i = 0;
-		while ( this.getProperty("id", sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aID)) && i < 100 )
+		while ( this.exists(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aID)) && i < 100 )
 		{
 			aID = sbCommonUtils.getTimeStamp(--i);
-			dump("*** ScrapBook IDENTIFY RESOURCE ID [" + i + "] " + aID + "\n");
 		}
 		return aID;
 	},
@@ -263,18 +292,15 @@ var sbDataSource = {
 		return sbCommonUtils.RDFCU.indexOf(this.data, aParRes, aRes);
 	},
 
-	findContainerRes : function(aRes)
+	findParentResource : function(aRes)
 	{
-		var ResList = this.data.GetAllResources();
-		while ( ResList.hasMoreElements() )
+		var resEnum = this.data.GetAllResources();
+		while ( resEnum.hasMoreElements() )
 		{
-			var myRes = ResList.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			if ( sbCommonUtils.RDFCU.IsContainer(this.data, myRes) == false ) continue;
-			if ( myRes.Value == "urn:scrapbook:search" ) continue;
-			if ( sbCommonUtils.RDFCU.indexOf(this.data, myRes, aRes) != -1 )
-			{
-				return myRes;
-			}
+			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+			if ( sbCommonUtils.RDFCU.IsContainer(this.data, res) == false ) continue;
+			if ( res.Value == "urn:scrapbook:search" ) continue;
+			if ( sbCommonUtils.RDFCU.indexOf(this.data, res, aRes) != -1 ) return res;
 		}
 	},
 

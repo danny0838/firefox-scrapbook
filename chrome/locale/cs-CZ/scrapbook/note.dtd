@@ -1,11 +1,11 @@
-<!ENTITY sn.save "Uložit">
-<!ENTITY sn.close "Zavřít">
-<!ENTITY sn.tools "Nástroje">
-<!ENTITY sn.preview "HTML náhled">
-<!ENTITY sn.preview.quit "Opustit náhled">
-<!ENTITY sn.template "Upravit HTML šablonu">
-<!ENTITY sn.autolinefeed "Auto-Linefeed">
-<!ENTITY sn.autolinefeed.t "Přidat &lt;br&gt; tag na konec řádku v HTML náhledu">
-<!ENTITY sn.fontsize "Velikost fontu">
-<!ENTITY sn.help "Nápověda">
-<!ENTITY sn.exit "Ukončit">
+<!ENTITY sb.note.save "Uložit">
+<!ENTITY sb.note.close "Zavřít">
+<!ENTITY sb.note.tools "Nástroje">
+<!ENTITY sb.note.htmlview "HTML náhled">
+<!ENTITY sb.note.normalview "Normal View">
+<!ENTITY sb.note.template "Upravit HTML šablonu">
+<!ENTITY sb.note.autolinefeed "Auto-Linefeed">
+<!ENTITY sb.note.autolinefeed.t "Přidat &lt;br&gt; tag na konec řádku v HTML náhledu">
+<!ENTITY sb.note.fontsize "Velikost fontu">
+<!ENTITY sb.note.help "Nápověda">
+<!ENTITY sb.note.exit "Ukončit">

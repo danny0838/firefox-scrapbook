@@ -1,10 +1,10 @@
 
-var sbCalc = {
+var sbCalcService = {
 
-	get TREE()     { return document.getElementById("ScrapBookTree"); },
-	get STRING()   { return document.getElementById("ScrapBookString"); },
-	get STATUS()   { return document.getElementById("ScrapBookMessage"); },
-	get PROGRESS() { return document.getElementById("ScrapBookProgress"); },
+	get TREE()     { return document.getElementById("sbTree"); },
+	get STRING()   { return document.getElementById("sbPropString"); },
+	get STATUS()   { return document.getElementById("sbCalcMessage"); },
+	get PROGRESS() { return document.getElementById("sbCalcProgress"); },
 
 	dirEnum : null,
 	treeItems : [],
@@ -37,27 +37,29 @@ var sbCalc = {
 		}
 		this.count++;
 		var dir = this.dirEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
-		var id = dir.leafName;
-		var bytes = sbPropUtil.getTotalFileSize(id)[0];
-		this.grandSum += bytes;
-		var res   = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
-		var valid = sbDataSource.exists(res);
-		var icon  = sbDataSource.getProperty("icon", res);
-		if ( !icon ) icon = sbCommonUtils.getDefaultIcon(sbDataSource.getProperty("type", res));
-		this.treeItems.push([
-			id,
-			sbDataSource.getProperty("type",  res),
-			sbDataSource.getProperty("title", res),
-			icon,
-			bytes,
-			sbPropUtil.formatFileSize(bytes),
-			valid,
-		]);
-		if ( !valid ) this.invalidCount++;
-
-		this.STATUS.label   = this.STRING.getString("CALCULATING") + "... (" + this.count + "/" + this.total + ")";
-		this.PROGRESS.value = Math.round(this.count / this.total * 100);
-		setTimeout(function() { sbCalc.processAsync(); }, 0);
+		if ( dir.isDirectory() )
+		{
+			var id = dir.leafName;
+			var bytes = sbPropService.getTotalFileSize(id)[0];
+			this.grandSum += bytes;
+			var res   = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
+			var valid = sbDataSource.exists(res);
+			var icon  = sbDataSource.getProperty(res, "icon");
+			if ( !icon ) icon = sbCommonUtils.getDefaultIcon(sbDataSource.getProperty(res, "type"));
+			this.treeItems.push([
+				id,
+				sbDataSource.getProperty(res, "type"),
+				sbDataSource.getProperty(res, "title"),
+				icon,
+				bytes,
+				sbPropService.formatFileSize(bytes),
+				valid,
+			]);
+			if ( !valid ) this.invalidCount++;
+			this.STATUS.label   = this.STRING.getString("CALCULATING") + "... (" + this.count + "/" + this.total + ")";
+			this.PROGRESS.value = Math.round(this.count / this.total * 100);
+		}
+		setTimeout(function() { sbCalcService.processAsync(); }, 0);
 	},
 
 	finish : function()
@@ -67,27 +69,12 @@ var sbCalc = {
 		this.initTree();
 		this.STATUS.label = "";
 		this.PROGRESS.hidden = true;
-		var msg = sbPropUtil.formatFileSize(this.grandSum);
+		var msg = sbPropService.formatFileSize(this.grandSum);
 		msg += "  " + this.STRING.getFormattedString("ITEMS_COUNT", [this.count]);
-		document.getElementById("ScrapBookTotalSize").value = msg;
+		document.getElementById("sbCalcTotalSize").value = msg;
 		msg = ( this.invalidCount == 0 ) ? this.STRING.getString("DIAGNOSIS_OK") : this.STRING.getFormattedString("DIAGNOSIS_NG", [this.invalidCount]);
-		document.getElementById("ScrapBookDiagnosis").value = msg;
-		setTimeout(function(){ sbCalc.checkBackup(); }, 0);
-	},
-
-	checkBackup : function()
-	{
-		var myDir = sbCommonUtils.getScrapBookDir().clone();
-		myDir.append("backup");
-		if ( !myDir.exists() ) return;
-		var count = 0;
-		var fileEnum = myDir.directoryEntries;
-		while ( fileEnum.hasMoreElements() ) { fileEnum.getNext(); count++; }
-		if ( count > 30 )
-		{
-			alert(this.STRING.getString("TOO_MANY_BACKUP_FILES"));
-			sbCommonUtils.launchDirectory(myDir);
-		}
+		document.getElementById("sbCalcDiagnosis").value = msg;
+		sbDoubleEntriesChecker.process("urn:scrapbook:root");
 	},
 
 	initTree : function()
@@ -100,29 +87,25 @@ var sbCalc = {
 		var treeView = new sbCustomTreeView(colIDs, this.treeItems);
 		treeView.getCellText = function(row, col)
 		{
-			switch ( this.normalizeColumnIndex(col) )
+			switch ( col.index )
 			{
 				case 0 : return this._items[row][2]; break;
 				case 1 : return this._items[row][5]; break;
-				case 2 : return this._items[row][6] ? "" : sbCalc.STRING.getString("INVALID"); break;
+				case 2 : return this._items[row][6] ? "" : sbCalcService.STRING.getString("INVALID"); break;
 			}
 		};
 		treeView.getImageSrc = function(row, col)
 		{
-			if ( col == "sbTreeColTitle" || col.index == 0 ) return this._items[row][3];
+			if ( col.index == 0 ) return this._items[row][3];
 		};
 		treeView.getCellProperties = function(row, col, properties)
 		{
-			if ( this._items[row][6] ) return;
-			const ATOM = Components.classes["@mozilla.org/atom-service;1"].getService(Components.interfaces.nsIAtomService);
-			properties.AppendElement(ATOM.getAtom("markedRed"));
+			if ( this._items[row][6] && col.index != 0 ) return;
+			properties.AppendElement(ATOM_SERVICE.getAtom(!this._items[row][6] ? "invalid" : this._items[row][1]));
 		};
-		treeView.cycleHeader = function(col, elem)
+		treeView.cycleHeader = function(col)
 		{
-			if ( elem )
-				sbCustomTreeUtil.sortItems(sbCalc, elem);
-			else
-				sbCustomTreeUtil.sortItems(sbCalc, col.element);
+			sbCustomTreeUtil.sortItems(sbCalcService, col.element);
 		};
 		this.TREE.view = treeView;
 	},
@@ -130,20 +113,43 @@ var sbCalc = {
 };
 
 
+var sbDoubleEntriesChecker = {
+
+	hashTable : {},
+
+	process : function(aResURI)
+	{
+		var contRes = sbDataSource.getContainer(aResURI);
+		var resEnum = contRes.GetElements();
+		while ( resEnum.hasMoreElements() )
+		{
+			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+			if ( res.Value in this.hashTable ) alert("ScrapBook WARNING: Found double entries.\n" + sbDataSource.getProperty(res, "title"));
+			this.hashTable[res.Value] = true;
+			if ( sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, res) )
+			{
+				sbDoubleEntriesChecker.process(res.Value);
+			}
+		}
+	},
+
+};
 
 
-var sbCalcControl = {
+
+
+var sbCalcController = {
 
 	get CURRENT_TREEITEM()
 	{
-		return sbCalc.treeItems[sbCalc.TREE.currentIndex];
+		return sbCalcService.treeItems[sbCalcService.TREE.currentIndex];
 	},
 
 	createPopupMenu : function(aEvent)
 	{
 		var valid = this.CURRENT_TREEITEM[6];
-		document.getElementById("ScrapBookTreePopupD").setAttribute("disabled", valid);
-		document.getElementById("ScrapBookTreePopupP").setAttribute("disabled", !valid);
+		document.getElementById("sbPopupRemove").setAttribute("disabled", valid);
+		document.getElementById("sbPopupProperty").setAttribute("disabled", !valid);
 	},
 
 	onDblClick : function(aEvent)
@@ -153,9 +159,8 @@ var sbCalcControl = {
 
 	open : function(tabbed)
 	{
-		var id   = this.CURRENT_TREEITEM[0];
-		var type = this.CURRENT_TREEITEM[1];
-		sbCommonUtils.loadURL(sbCommonUtils.getURL(id, type), tabbed);
+		var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.CURRENT_TREEITEM[0]);
+		sbCommonUtils.loadURL(sbDataSource.getURL(res), tabbed);
 	},
 
 	remove : function()
@@ -164,18 +169,18 @@ var sbCalcControl = {
 		if ( id.length != 14 ) return;
 		if ( sbCommonUtils.removeDirSafety(sbCommonUtils.getContentDir(id), true) )
 		{
-			sbCalc.treeItems.splice(sbCalc.TREE.currentIndex, 1);
-			sbCalc.initTree();
+			sbCalcService.treeItems.splice(sbCalcService.TREE.currentIndex, 1);
+			sbCalcService.initTree();
 		}
 	},
 
-	forward : function(key)
+	forward : function(aCommand)
 	{
 		var id = this.CURRENT_TREEITEM[0];
-		switch ( key )
+		switch ( aCommand )
 		{
 			case "P" : window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome" ,id); break;
-			case "L" : sbCommonUtils.launchDirectory(sbCommonUtils.getContentDir(id));
+			case "L" : sbController.launch(sbCommonUtils.getContentDir(id));
 			default  : break;
 		}
 	},

@@ -4,7 +4,6 @@
 <!ENTITY sb.repair.rdfFile.file "文件">
 <!ENTITY sb.repair.rdfFile.time "时间">
 <!ENTITY sb.repair.rdfFile.size "大小">
-<!ENTITY sb.repair.rdfFile.complete "完成。请重新启动 Firefox。">
 <!ENTITY sb.repair.favicons "恢复个性化图标">
 <!ENTITY sb.repair.favicons.descript "如果项目列表中有大量个性化图标丢失，请尝试此选项。">
-<!ENTITY sb.repair.favicons.complete "完成。">
+<!ENTITY sb.repair.complete "完成。">

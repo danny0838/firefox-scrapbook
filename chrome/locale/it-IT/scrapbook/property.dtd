@@ -1,17 +1,13 @@
-<!ENTITY sb.prop.date "Data">
-<!ENTITY sb.prop.type "Tipo">
-<!ENTITY sb.prop.title "Titolo">
-<!ENTITY sb.prop.encode "Codifica">
-<!ENTITY sb.prop.icon "Icona">
-<!ENTITY sb.prop.source "URL">
-<!ENTITY sb.prop.comment "Commento">
-<!ENTITY sb.prop.content "Contenuto">
-<!ENTITY sb.prop.size "Dimensione">
-<!ENTITY sb.prop.id.date "ID (Data/ora)">
-<!ENTITY sb.prop.folder "Cartella">
 <!ENTITY sb.prop.general "Informazioni generali">
+<!ENTITY sb.prop.type "Tipo">
+<!ENTITY sb.prop.date "Data">
+<!ENTITY sb.prop.encode "Codifica">
+<!ENTITY sb.prop.size "Dimensione">
+<!ENTITY sb.prop.content "Contenuto">
+<!ENTITY sb.prop.folder "Cartella">
+<!ENTITY sb.prop.icon "Icona">
 <!ENTITY sb.prop.icon.change "Cambia">
-<!ENTITY sb.prop.icon.default "Predefinito">
+<!ENTITY sb.prop.icon.default "Predefinita">
 <!ENTITY sb.prop.icon.favicon "Seleziona una favicon">
 <!ENTITY sb.prop.icon.custom "Seleziona un'icona personale">
 <!ENTITY sb.prop.mark "Marca">

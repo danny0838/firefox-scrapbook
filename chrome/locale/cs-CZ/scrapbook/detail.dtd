@@ -1,6 +1,8 @@
 <!ENTITY sb.detail "Detail zachycení">
 <!ENTITY sb.detail.new.folder "Nová složka">
 <!ENTITY sb.detail.select.folder "Vybrat složku">
+<!ENTITY sb.detail.option "Options">
+<!ENTITY sb.detail.option.format "Images and Styles">
 <!ENTITY sb.detail.linked.file "Stáhnout provázané soubory">
 <!ENTITY sb.detail.linked.image "Obrázek">
 <!ENTITY sb.detail.linked.sound "Zvuk">
@@ -11,3 +13,4 @@
 <!ENTITY sb.detail.linked.page2 "Zachytit provázané Webové stránky">
 <!ENTITY sb.detail.linked.page.depth "Hloubkově procházet odkazy">
 <!ENTITY sb.detail.linked.page.text "Po dokončení zachycení budou všechny stránky vzájemně propojeny a bude vytvořena mapa stránek.">
+<!ENTITY sb.detail.warnAboutRenew "NOTICE: 'Capture Again' overwrites the previously saved page.">

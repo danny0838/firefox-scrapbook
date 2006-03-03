@@ -1,11 +1,16 @@
 /* ::::: PROPERTIES ::::: */
 
+dialog {
+	width: 450px;
+}
+
 tab {
 	min-width: 80px;
 	text-align: center;
 }
 
-rows#ScrapBookPropRows row {
+rows#sbPropRows row {
+	min-height: 2.2em;
 	margin-bottom: 3px;
 }
 

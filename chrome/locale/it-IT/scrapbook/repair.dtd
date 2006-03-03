@@ -1,10 +1,9 @@
 <!ENTITY sb.repair.rdfFile "Ripristina scrapbook.rdf">
-<!ENTITY sb.repair.rdfFile.descript "Prova questo se il diagramma delle cartelle di ScrapBook scompare improvvisamente.">
+<!ENTITY sb.repair.rdfFile.descript "Prova questa opzione se il diagramma delle cartelle di ScrapBook scompare improvvisamente">
 <!ENTITY sb.repair.rdfFile.select "Seleziona un file di backup da rispristinare">
 <!ENTITY sb.repair.rdfFile.file "File">
 <!ENTITY sb.repair.rdfFile.time "Data">
 <!ENTITY sb.repair.rdfFile.size "Dimensione">
-<!ENTITY sb.repair.rdfFile.complete "Ripristino completato. Riavviare Firefox">
-<!ENTITY sb.repair.favicons "Ripristina le favicon in tree">
-<!ENTITY sb.repair.favicons.descript "Prova questo se molte favicon nel diagramma delle cartelle di ScrapBook scompaiono.">
-<!ENTITY sb.repair.favicons.complete "Ripristino completato">
+<!ENTITY sb.repair.favicons "Ripristina le favicon nel diagramma">
+<!ENTITY sb.repair.favicons.descript "Prova questa opzione se molte favicon nel diagramma delle cartelle di ScrapBook scompaiono">
+<!ENTITY sb.repair.complete "Ripristino completato.">

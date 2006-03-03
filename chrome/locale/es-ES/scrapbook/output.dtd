@@ -1,3 +1,3 @@
-<!ENTITY sb.output.option.all "Output Whole">
-<!ENTITY sb.output.option.frame "Output as HTML with Frame">
-<!ENTITY sb.output.option.open "Open Outputted HTML in Browser">
+<!ENTITY sb.output.option.all "Guardar todo">
+<!ENTITY sb.output.option.frame "Guardar como HTML con marco">
+<!ENTITY sb.output.option.open "Abrir HTML guardado con el navegador">

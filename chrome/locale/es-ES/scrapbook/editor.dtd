@@ -1,26 +1,25 @@
-<!ENTITY sb.editor "ScrapBook Edit Toolbar">
-<!ENTITY sb.editor.eraser "Borrador DOM:  Elimina bloques al hacer click en ellos.">
-<!ENTITY sb.editor.undo "Undo">
+<!ENTITY sb.editor "Barra de Herramientas de Edición">
+<!ENTITY sb.editor.eraser "Borrador DOM: Elimina bloques al hacer click en ellos.">
+<!ENTITY sb.editor.undo "Deshacer">
 <!ENTITY sb.editor.restore "Abandonar cambios y restaurar">
 <!ENTITY sb.editor.save "Guardar">
-<!ENTITY sb.editor.comment "Expandir area de comentarios">
-<!ENTITY sb.editor.block "Block Comment">
-<!ENTITY sb.editor.block.insert "Add &sb.editor.block; after Selection">
-<!ENTITY sb.editor.block.hide "Hide &sb.editor.block;s">
-<!ENTITY sb.editor.inline.add "Añadir comentario incorporado a la selección">
-<!ENTITY sb.editor.inline.delete "Borrar todos comentarios incorporados">
-<!ENTITY sb.editor.attach.file "Attach File to Selection">
-<!ENTITY sb.editor.attach.link "Attach Link to Selection">
-<!ENTITY sb.editor.cutter "Borrar seleccionado">
-<!ENTITY sb.editor.remove.iframe "Remove All IFRAME Tags">
-<!ENTITY sb.editor.remove.script "Remove All SCRIPT Tags">
-<!ENTITY sb.highlighter "Highlighter">
-<!ENTITY sb.highlighter.remove "Clear Highlights in the Selection">
-<!ENTITY sb.highlighter.remove.all "Clear All Highlights">
-<!ENTITY sb.customize "Customize">
+<!ENTITY sb.editor.comment "Expandir área de comentarios">
+<!ENTITY sb.editor.sticky "Sticky Annotation">
+<!ENTITY sb.editor.sticky.create "Create &sb.editor.sticky;">
+<!ENTITY sb.editor.inline.add "Añadir comentario a la selección">
+<!ENTITY sb.editor.attach.file "Anexar fichero a la selección">
+<!ENTITY sb.editor.attach.link "Anexar enlace a la selección">
+<!ENTITY sb.editor.cutter "Borrar todo lo seleccionado">
+<!ENTITY sb.editor.remove.iframe "Borrar todas las etiquetas IFRAME">
+<!ENTITY sb.editor.remove.script "Borrar todas las etiquetas SCRIPT">
+<!ENTITY sb.highlighter "Marcador">
+<!ENTITY sb.highlighter.remove "Limpiar marcas en la selección">
+<!ENTITY sb.highlighter.remove.all "Borrar todas las marcas">
+<!ENTITY sb.customize "Personalizar">
 <!ENTITY sb.infobar.openSource "Abrir URL de origen">
-<!ENTITY sb.infobar.showSitemap "Show &sb.infobar.sitemap;">
-<!ENTITY sb.infobar.showInfobar "Show Info Toolbar">
-<!ENTITY sb.infobar.home "Home">
-<!ENTITY sb.infobar.sitemap "SiteMap">
-<!ENTITY sb.locate "Locate in Sidebar Tree">
+<!ENTITY sb.infobar.renew "Capture Again">
+<!ENTITY sb.infobar.showIndicators "Show Link Indicators">
+<!ENTITY sb.infobar.showInfobar "Mostrar Barra de Información">
+<!ENTITY sb.infobar.home "Raiz">
+<!ENTITY sb.infobar.sitemap "Mapa del Sitio">
+<!ENTITY sb.locate "Localizar en el árbol de la barra lateral">

@@ -1,15 +1,16 @@
-<!ENTITY sb.title "ScrapBook">
 <!ENTITY sb.capture.partial "擷取選取區">
-<!ENTITY sb.capture.partial.as "擷取選取區設定...">
+<!ENTITY sb.capture.partial.as "擷取選取區設定">
 <!ENTITY sb.capture.entire "擷取文件">
-<!ENTITY sb.capture.entire.as "擷取文件設定...">
+<!ENTITY sb.capture.entire.as "擷取文件設定">
 <!ENTITY sb.capture.frame "擷取頁框">
-<!ENTITY sb.capture.frame.as "擷取頁框設定...">
+<!ENTITY sb.capture.frame.as "擷取頁框設定">
 <!ENTITY sb.capture.target "擷取連結">
-<!ENTITY sb.capture.target.as "擷取連結設定...">
+<!ENTITY sb.capture.target.as "擷取連結設定">
 <!ENTITY sb.capture.folder.root "ScrapBook">
 <!ENTITY sb.capture.folder.select "選取資料夾">
+<!ENTITY sb.capture.alltabs "擷取所有分頁">
+<!ENTITY sb.capture.bookmark "加入 ScrapBook 書籤">
 <!ENTITY sb.key.sidebar "K">
-<!ENTITY sb.key.editor "J">
+<!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">
 <!ENTITY sb.key.capture.as "K">

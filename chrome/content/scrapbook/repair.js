@@ -71,40 +71,37 @@ var sbRepair = {
 			return;
 		}
 		document.getElementById("sbRepairRDF2Text").value = document.getElementById("sbRepairRDFCompleted").value;
+		sbDataSource.init();
+		sbCommonUtils.RDF.UnregisterDataSource(sbDataSource.data);
+		sbMultiBookService.refreshGlobal();
 	},
 
 	restoreFavicons : function()
 	{
 		this.WIZARD.canRewind = false;
-		this.WIZARD.getButton("finish").disabled = true;
 		sbDataSource.init();
-		var dir = sbCommonUtils.getScrapBookDir().clone();
-		dir.append("data");
-		var baseURL = sbCommonUtils.convertFilePathToURL(dir.path);
-		if ( baseURL.charAt(baseURL.length - 1) != "/" ) baseURL = baseURL + "/";
 		var shouldFlush = false;
 		var i = 0;
 		var resEnum = sbDataSource.data.GetAllResources();
 		while ( resEnum.hasMoreElements() )
 		{
 			var res  = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			var id   = sbDataSource.getProperty("id", res);
-			var icon = sbDataSource.getProperty("icon", res);
+			var id   = sbDataSource.getProperty(res, "id");
+			var icon = sbDataSource.getProperty(res, "icon");
+			if ( res.Value == "urn:scrapbook:root" || res.Value == "urn:scrapbook:search" ) continue;
 			if ( ++i % 10 == 0 ) document.getElementById("sbRepairFaviconsTextbox").value = res.Value;
 			if ( icon.match(/(\d{14}\/.*$)/) )
 			{
-				var newIcon = baseURL + RegExp.$1;
+				var newIcon = "resource://scrapbook/data/" + RegExp.$1;
 				if ( icon != newIcon )
 				{
-					dump("*** RESOLVING_ICON_URL:: " + newIcon + "\n");
-					sbDataSource.updateItem(res, "icon", newIcon);
+					sbDataSource.setProperty(res, "icon", newIcon);
 					shouldFlush = true;
 				}
 			}
 		}
 		document.getElementById("sbRepairFaviconsTextbox").value = document.getElementById("sbRepairFaviconsCompleted").value;
 		if ( shouldFlush ) { sbDataSource.flush(); window.opener.reload(); }
-		this.WIZARD.getButton("finish").disabled = false;
 	},
 
 };

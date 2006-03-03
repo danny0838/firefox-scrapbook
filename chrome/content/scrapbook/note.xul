@@ -3,17 +3,18 @@
 <!--skin-->
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 <?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
+<?xml-stylesheet href="chrome://scrapbook/skin/note.css" type="text/css" ?>
 
 <!--locale-->
 <!DOCTYPE window SYSTEM "chrome://scrapbook/locale/note.dtd">
 
 <!--window-->
-<window id="ScrapNoteWindow"
+<window id="sbNoteWindow"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        onload="snGlobal.init();"
-        onunload="snGlobal.finalize(false);">
+        onload="sbNoteService2.init();"
+        onunload="sbNoteService2.finalize(false);">
 
-	<!--JavaScript-->
+	<!--script-->
 	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
@@ -21,61 +22,61 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/note.js" />
 
 	<!--browser-->
-	<browser id="ScrapNoteBrowser" type="content-primary" flex="3" hidden="true" onload="event.preventBubble();event.stopPropagation();" />
-	<splitter id="ScrapNoteSplitter" class="plain" hidden="true" />
+	<browser id="sbNoteBrowser" type="content-primary" flex="3" hidden="true" onload="event.preventBubble();event.stopPropagation();" />
+	<splitter id="sbSplitter" class="plain" hidden="true" />
 	<!--editor-->
-	<vbox id="ScrapNoteEditor" flex="2">
-		<hbox id="ScrapNoteHeader" class="sb-header" align="center">
-		    <image id="ScrapNoteImage" style="width:16px;height:16px;margin-left:3px;" />
-			<label id="ScrapNoteLabel" flex="1" crop="end" />
+	<vbox id="sbNoteEditor" flex="2">
+		<hbox id="sbNoteHeader" class="sb-header" align="center">
+		    <image id="sbNoteImage" />
+			<label id="sbNoteLabel" flex="1" crop="end" />
 			<spacer flex="1" />
-			<toolbarbutton image="chrome://scrapbook/skin/expander_up.png" style="-moz-appearance:none;" hidden="true" oncommand="snPreview.toggle(false);" />
+			<toolbarbutton image="chrome://scrapbook/skin/expander_up.png" style="-moz-appearance:none;" hidden="true" oncommand="sbNoteService2.toggleHTMLView(false);" />
 		</hbox>
-		<textbox id="ScrapNoteTextbox"
+		<textbox id="sbNoteTextbox"
 		         multiline="true"
-		         oninput="SBnote.change(true);"
-		         onkeypress="SBnote.insertTab(event);"
+		         oninput="sbNoteService.change(true);"
+		         onkeypress="sbNoteService.insertString(event);"
 		         class="plain" flex="1" />
 	</vbox>
 	<!--template-->
-	<vbox id="ScrapNoteTemplate" flex="2" hidden="true">
-		<hbox id="ScrapNoteTemplateHeader" class="sb-header-ex" align="center">
-			<label value="&sn.template;" />
+	<vbox id="sbNoteTemplate" flex="2" hidden="true">
+		<hbox id="sbNoteTemplateHeader" class="sb-header sb-header-red" align="center">
+			<label value="&sb.note.template;" />
 			<spacer flex="1" />
-			<toolbarbutton class="sb-header-exit" oncommand="snTemplate.exit(true);" />
+			<toolbarbutton class="sb-header-exit" oncommand="sbNoteTemplate.exit(true);" />
 		</hbox>
-		<textbox id="ScrapNoteTemplateTextbox"
+		<textbox id="sbNoteTemplateTextbox"
 		         multiline="true"
-		         oninput="snTemplate.change(true);"
-		         onkeypress="SBnote.insertTab(event);"
+		         oninput="sbNoteTemplate.change(true);"
+		         onkeypress="sbNoteService.insertString(event);"
 		         class="plain" flex="1" wrap="off" />
 	</vbox>
 	<!--toolbar-->
-	<toolbar id="ScrapNoteToolbar" align="center" style="border-top:1px solid ThreeDShadow;padding:1px;">
-		<toolbarbutton id="ScrapNoteToolbarS" accesskey="S" label="&sn.save;" image="chrome://scrapbook/skin/edit_save.png" disabled="true" oncommand="SBnote.save();snTemplate.save();" />
-		<toolbarbutton id="ScrapNoteToolbarP" accesskey="P" label="&sn.preview;" oncommand="snPreview.show();" />
-		<toolbarbutton id="ScrapNoteToolbarQ" accesskey="Q" label="&sn.preview.quit;" disabled="true" oncommand="snPreview.toggle(false);" />
-		<toolbarbutton type="menu" label="&sn.tools;">
+	<toolbar id="sbNoteToolbar" align="center">
+		<toolbarbutton id="sbNoteToolbarS" accesskey="S" label="&sb.note.save;"       disabled="true" oncommand="sbNoteService.save();sbNoteTemplate.save();" />
+		<toolbarbutton id="sbNoteToolbarH" accesskey="W" label="&sb.note.htmlview;"   oncommand="sbNoteService2.initHTMLView();" />
+		<toolbarbutton id="sbNoteToolbarN" accesskey="Q" label="&sb.note.normalview;" disabled="true" oncommand="sbNoteService2.toggleHTMLView(false);" />
+		<toolbarbutton type="menu" label="&sb.note.tools;" accesskey="T">
 			<menupopup>
-				<menuitem label="&sn.help;" oncommand="sbCommonUtils.loadURL('chrome://scrapbook/locale/templateHelp.html', true);" />
+				<menuitem label="&sb.note.help;" oncommand="sbCommonUtils.loadURL('chrome://scrapbook/locale/templateHelp.html', true);" />
 				<menuseparator />
-				<menuitem id="ScrapNoteToolbarL" type="checkbox" label="&sn.autolinefeed;" tooltiptext="&sn.autolinefeed.t;" />
-				<menuitem id="ScrapNoteToolbarT" type="checkbox" label="&sn.template;" oncommand="this.getAttribute('checked') ? snTemplate.load() : snTemplate.exit(false);" />
+				<menuitem id="sbNoteToolbarL" type="checkbox" label="&sb.note.autolinefeed;" tooltiptext="&sb.note.autolinefeed.t;" />
+				<menuitem id="sbNoteToolbarT" type="checkbox" label="&sb.note.template;" oncommand="this.getAttribute('checked') ? sbNoteTemplate.load() : sbNoteTemplate.exit(false);" />
 			</menupopup>
 		</toolbarbutton>
-		<toolbarbutton type="menu" id="ScrapNoteToolbarF" label="&sn.fontsize;">
+		<toolbarbutton type="menu" id="sbNoteToolbarF" label="&sb.note.fontsize;" accesskey="Z">
 			<menupopup>
-				<menuitem id="ScrapNoteToolbarF18" type="radio" label="18px" oncommand="snGlobal.changeFontSize(18);" />
-				<menuitem id="ScrapNoteToolbarF17" type="radio" label="17px" oncommand="snGlobal.changeFontSize(17);" />
-				<menuitem id="ScrapNoteToolbarF16" type="radio" label="16px" oncommand="snGlobal.changeFontSize(16);" />
-				<menuitem id="ScrapNoteToolbarF15" type="radio" label="15px" oncommand="snGlobal.changeFontSize(15);" />
-				<menuitem id="ScrapNoteToolbarF14" type="radio" label="14px" oncommand="snGlobal.changeFontSize(14);" />
-				<menuitem id="ScrapNoteToolbarF13" type="radio" label="13px" oncommand="snGlobal.changeFontSize(13);" />
-				<menuitem id="ScrapNoteToolbarF12" type="radio" label="12px" oncommand="snGlobal.changeFontSize(12);" />
+				<menuitem id="sbNoteToolbarF18" type="radio" label="18px" oncommand="sbNoteService2.changeFontSize(18);" />
+				<menuitem id="sbNoteToolbarF17" type="radio" label="17px" oncommand="sbNoteService2.changeFontSize(17);" />
+				<menuitem id="sbNoteToolbarF16" type="radio" label="16px" oncommand="sbNoteService2.changeFontSize(16);" />
+				<menuitem id="sbNoteToolbarF15" type="radio" label="15px" oncommand="sbNoteService2.changeFontSize(15);" />
+				<menuitem id="sbNoteToolbarF14" type="radio" label="14px" oncommand="sbNoteService2.changeFontSize(14);" />
+				<menuitem id="sbNoteToolbarF13" type="radio" label="13px" oncommand="sbNoteService2.changeFontSize(13);" />
+				<menuitem id="sbNoteToolbarF12" type="radio" label="12px" oncommand="sbNoteService2.changeFontSize(12);" />
 			</menupopup>
 		</toolbarbutton>
 		<spacer flex="1" />
-		<toolbarbutton id="ScrapNoteToolbarX" accesskey="X" tooltiptext="&sn.exit;" image="chrome://scrapbook/skin/exit.png" oncommand="snGlobal.finalize(true);" />
+		<toolbarbutton id="sbNoteToolbarX" accesskey="X" tooltiptext="&sb.note.exit;" image="chrome://scrapbook/skin/exit.png" oncommand="sbNoteService2.finalize(true);" />
 	</toolbar>
 
 </window>

@@ -1,6 +1,8 @@
 <!ENTITY sb.detail "Spara i Scrapbook">
 <!ENTITY sb.detail.new.folder "Ny Mapp">
 <!ENTITY sb.detail.select.folder "Välj Mapp">
+<!ENTITY sb.detail.option "Options">
+<!ENTITY sb.detail.option.format "Images and Styles">
 <!ENTITY sb.detail.linked.file "Ladda ned länkar">
 <!ENTITY sb.detail.linked.image "Bilder">
 <!ENTITY sb.detail.linked.sound "Ljud">
@@ -11,3 +13,4 @@
 <!ENTITY sb.detail.linked.page2 "Spara länkade websidor i Scrapbook">
 <!ENTITY sb.detail.linked.page.depth "Antal nivåer länkar ska följas">
 <!ENTITY sb.detail.linked.page.text "När allt gar sparats i Scrapbook, kommer alla sidor vara länkade sinsemellan och en översiktsbild skapas.">
+<!ENTITY sb.detail.warnAboutRenew "NOTICE: 'Capture Again' overwrites the previously saved page.">

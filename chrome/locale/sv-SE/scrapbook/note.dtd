@@ -1,11 +1,11 @@
-<!ENTITY sn.save "Spara">
-<!ENTITY sn.close "Stäng">
-<!ENTITY sn.tools "Verktyg">
-<!ENTITY sn.preview "Förhandsvisa som HTML">
-<!ENTITY sn.preview.quit "Avsluta förhandsvisning">
-<!ENTITY sn.template "Redigera HTML-Mall">
-<!ENTITY sn.autolinefeed "Automatisk radmatning">
-<!ENTITY sn.autolinefeed.t "Lägg till &lt;br&gt; -tag till radslutet vid föhandsgranskning i HTML">
-<!ENTITY sn.fontsize "Typsnittstorlek">
-<!ENTITY sn.help "Hjälp">
-<!ENTITY sn.exit "Avsluta">
+<!ENTITY sb.note.save "Spara">
+<!ENTITY sb.note.close "Stäng">
+<!ENTITY sb.note.tools "Verktyg">
+<!ENTITY sb.note.htmlview "Förhandsvisa som HTML">
+<!ENTITY sb.note.normalview "Normal View">
+<!ENTITY sb.note.template "Redigera HTML-Mall">
+<!ENTITY sb.note.autolinefeed "Automatisk radmatning">
+<!ENTITY sb.note.autolinefeed.t "Lägg till &lt;br&gt; -tag till radslutet vid föhandsgranskning i HTML">
+<!ENTITY sb.note.fontsize "Typsnittstorlek">
+<!ENTITY sb.note.help "Hjälp">
+<!ENTITY sb.note.exit "Avsluta">

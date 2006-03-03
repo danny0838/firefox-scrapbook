@@ -4,7 +4,6 @@
 <!ENTITY sb.repair.rdfFile.file "Fitxer">
 <!ENTITY sb.repair.rdfFile.time "Data">
 <!ENTITY sb.repair.rdfFile.size "Mida">
-<!ENTITY sb.repair.rdfFile.complete "La restauració ha acabat. Si us plau, reinicieu el Firefox.">
 <!ENTITY sb.repair.favicons "Restaura les icones de l'arbre">
 <!ENTITY sb.repair.favicons.descript "Proveu-ho si han desaparegut bastantes icones de l'arbre.">
-<!ENTITY sb.repair.favicons.complete "La restauració ha acabat.">
+<!ENTITY sb.repair.complete "La restauració ha acabat.">

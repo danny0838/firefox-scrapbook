@@ -1,16 +1,32 @@
 <!ENTITY sb.open "Otwórz">
 <!ENTITY sb.open.tab "Otwórz w karcie">
 <!ENTITY sb.open.newtab "Otwórz w nowej karcie">
-<!ENTITY sb.open.source "Pokaż źródło strony">
+<!ENTITY sb.open.source "Pokaż stronę źródłową">
+<!ENTITY sb.tools "Narzędzia">
 <!ENTITY sb.show.files "Pokaż pliki">
-<!ENTITY sb.delete "Usuń">
+<!ENTITY sb.move "Przenieś do folderu">
+<!ENTITY sb.renew "Capture Again">
+<!ENTITY sb.export "Eksportuj">
+<!ENTITY sb.remove "Usuń">
 <!ENTITY sb.property "Właściwości katalogu">
+<!ENTITY sb.listview "List View">
+<!ENTITY sb.prop.title "Tytuł">
+<!ENTITY sb.prop.comment "Komentarz">
+<!ENTITY sb.prop.id.date "ID (data i czas)">
 <!ENTITY sb.folder.toggle "Rozwiń/zwiń">
+<!ENTITY sb.folder.combine "Combined View">
 <!ENTITY sb.folder.openall "Otwórz wszystko w nowych kartach">
-<!ENTITY sb.folder.combine "Pokaż połączony widok">
 <!ENTITY sb.folder.manage "Zarządzanie katalogami">
 <!ENTITY sb.new.folder "Nowy katalog">
 <!ENTITY sb.new.note "Nowa notatka">
 <!ENTITY sb.sort.folder "Sortuj katalog">
-<!ENTITY mb.configure "Configure">
-<!ENTITY mb.profileFolder "Profile Folder">
+<!ENTITY sb.search "Szukaj">
+<!ENTITY sb.search.fulltext "Szukaj wszystkich słów">
+<!ENTITY sb.search.all "Wszystko">
+<!ENTITY sb.search.re "Użyj RegExp (wyrażeń regularnych)">
+<!ENTITY sb.search.cs "Uwzględnij wielkość liter">
+<!ENTITY sb.search.cache "Szukanie wszystkich słów - uaktualnij pamięć podręczną">
+<!ENTITY sb.search.clear "Wyczyść formularz historii">
+<!ENTITY sb.search.days "Filtrowanie wg. dni">
+<!ENTITY mb.configure "Konfiguruj">
+<!ENTITY mb.profileFolder "Folder profilu">

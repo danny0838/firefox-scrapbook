@@ -2,15 +2,31 @@
 <!ENTITY sb.open.tab "In een tabblad openen">
 <!ENTITY sb.open.newtab "In een nieuw tabblad openen">
 <!ENTITY sb.open.source "Bronlocatie openen">
+<!ENTITY sb.tools "Opties">
 <!ENTITY sb.show.files "Bestanden tonen">
-<!ENTITY sb.delete "Verwijderen">
+<!ENTITY sb.move "Naar map verplaatsen">
+<!ENTITY sb.renew "Capture Again">
+<!ENTITY sb.export "Exporteren">
+<!ENTITY sb.remove "Verwijderen">
 <!ENTITY sb.property "Eigenschappen">
+<!ENTITY sb.listview "List View">
+<!ENTITY sb.prop.title "Titel">
+<!ENTITY sb.prop.comment "Commentaar">
+<!ENTITY sb.prop.id.date "ID (Tijd)">
 <!ENTITY sb.folder.toggle "Uitvouwen/Inklappen">
+<!ENTITY sb.folder.combine "Gecombineerd scherm">
 <!ENTITY sb.folder.openall "Alles in tabbladen openen">
-<!ENTITY sb.folder.combine "In een gecombineerd scherm openen">
 <!ENTITY sb.folder.manage "Map Beheren...">
 <!ENTITY sb.new.folder "Nieuwe map...">
 <!ENTITY sb.new.note "Nieuwe notitie">
 <!ENTITY sb.sort.folder "Map sorteren">
+<!ENTITY sb.search "Zoeken">
+<!ENTITY sb.search.fulltext "Volledige tekst doorzoeken">
+<!ENTITY sb.search.all "Alles">
+<!ENTITY sb.search.re "RegExp gebruiken">
+<!ENTITY sb.search.cs "Indentieke hoofdletters/kleine letters">
+<!ENTITY sb.search.cache "Buffer voor doorzoeken volledige tekst bijwerken">
+<!ENTITY sb.search.clear "Formulierengeschiedenis wissen">
+<!ENTITY sb.search.days "Op dagen filteren">
 <!ENTITY mb.configure "Configure">
 <!ENTITY mb.profileFolder "Profile Folder">

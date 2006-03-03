@@ -1,11 +1,11 @@
-<!ENTITY sn.save "Sabh&#225;il">
-<!ENTITY sn.close "D&#250;n">
-<!ENTITY sn.tools "Uirlis&#237;">
-<!ENTITY sn.preview "R&#233;amhthaispe&#225;ntas HTML">
-<!ENTITY sn.preview.quit "Scoir an R&#233;amhamharc">
-<!ENTITY sn.template "Eagarth&#243;ireacht Teimpl&#233;ad HTML">
-<!ENTITY sn.autolinefeed "Coth&#250; L&#237;ne go huathoibr&#237;och">
-<!ENTITY sn.autolinefeed.t "Cuir &lt;br&gt; clib ag cr&#237;och-an-lne sa R&#233;amhthaispe&#225;ntas HTML">
-<!ENTITY sn.fontsize "Toirt Cl&#243;">
-<!ENTITY sn.help "C&#250;namh">
-<!ENTITY sn.exit "F&#225;g">
+<!ENTITY sb.note.save "Sabh&#225;il">
+<!ENTITY sb.note.close "D&#250;n">
+<!ENTITY sb.note.tools "Uirlis&#237;">
+<!ENTITY sb.note.htmlview "R&#233;amhthaispe&#225;ntas HTML">
+<!ENTITY sb.note.normalview "Normal View">
+<!ENTITY sb.note.template "Eagarth&#243;ireacht Teimpl&#233;ad HTML">
+<!ENTITY sb.note.autolinefeed "Coth&#250; L&#237;ne go huathoibr&#237;och">
+<!ENTITY sb.note.autolinefeed.t "Cuir &lt;br&gt; clib ag cr&#237;och-an-lne sa R&#233;amhthaispe&#225;ntas HTML">
+<!ENTITY sb.note.fontsize "Toirt Cl&#243;">
+<!ENTITY sb.note.help "C&#250;namh">
+<!ENTITY sb.note.exit "F&#225;g">

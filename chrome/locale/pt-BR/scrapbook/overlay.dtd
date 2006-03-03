@@ -1,15 +1,16 @@
-<!ENTITY sb.title "ScrapBook">
 <!ENTITY sb.capture.partial "Capturar Seleção">
-<!ENTITY sb.capture.partial.as "Capturar Seleção Como...">
+<!ENTITY sb.capture.partial.as "Capturar Seleção Como">
 <!ENTITY sb.capture.entire "Capturar Página">
-<!ENTITY sb.capture.entire.as "Capturar Página Como...">
+<!ENTITY sb.capture.entire.as "Capturar Página Como">
 <!ENTITY sb.capture.frame "Capturar Frame">
-<!ENTITY sb.capture.frame.as "Capturar Frame Como...">
+<!ENTITY sb.capture.frame.as "Capturar Frame Como">
 <!ENTITY sb.capture.target "Capturar Link">
-<!ENTITY sb.capture.target.as "Capturar Link Como...">
+<!ENTITY sb.capture.target.as "Capturar Link Como">
 <!ENTITY sb.capture.folder.root "Pasta Raiz">
 <!ENTITY sb.capture.folder.select "Selecionar Pasta">
+<!ENTITY sb.capture.alltabs "Capturar Todas as Abas">
+<!ENTITY sb.capture.bookmark "Criar Favorito no ScrapBook">
 <!ENTITY sb.key.sidebar "K">
-<!ENTITY sb.key.editor "J">
+<!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">
 <!ENTITY sb.key.capture.as "K">

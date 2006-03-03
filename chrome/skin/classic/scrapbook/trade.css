@@ -4,25 +4,25 @@ tree {
 	-moz-appearance: listbox;
 }
 
-tree#ScrapBookTradeTree treechildren::-moz-tree-image(sbTradeTreeColTitle)
+tree#sbTradeTree treechildren::-moz-tree-image(sbTradeTreeColTitle)
 {
 	-moz-image-region: auto !important;
 	width: 16px; height: 16px;
 	margin-right: 3px;
 }
 
-#ScrapBookTradeLog {
+#sbTradeLog {
 	height: 6.4em;
 	-moz-appearance: listbox;
 }
 
-#ScrapBookTradeIcon {
+#sbTradeIcon {
 	width: 16px;
 	height: 16px;
 	margin-left:5px;
 }
 
-#ScrapBookTradePath {
+#sbTradePath {
 	padding: 2px;
 	height: 1.7em;
 }

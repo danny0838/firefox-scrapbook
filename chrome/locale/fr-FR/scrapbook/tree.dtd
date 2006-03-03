@@ -2,15 +2,31 @@
 <!ENTITY sb.open.tab "Éditer dans un onglet">
 <!ENTITY sb.open.newtab "Ouvrir dans un nouvel onglet">
 <!ENTITY sb.open.source "Ouvrir l'URL de la source">
+<!ENTITY sb.tools "Outils">
 <!ENTITY sb.show.files "Afficher les fichiers">
-<!ENTITY sb.delete "Supprimer">
+<!ENTITY sb.move "Déplacer dans un dossier">
+<!ENTITY sb.renew "Capturer à nouveau">
+<!ENTITY sb.export "Exporter">
+<!ENTITY sb.remove "Supprimer">
 <!ENTITY sb.property "Propriétés">
+<!ENTITY sb.listview "Vue de la liste">
+<!ENTITY sb.prop.title "Titre">
+<!ENTITY sb.prop.comment "Commentaire">
+<!ENTITY sb.prop.id.date "ID (DateHeure)">
 <!ENTITY sb.folder.toggle "Déployer / Réduire">
+<!ENTITY sb.folder.combine "Vue combinée">
 <!ENTITY sb.folder.openall "Tout ouvrir dans des onglets">
-<!ENTITY sb.folder.combine "Ouvrir en vue fusionnée">
 <!ENTITY sb.folder.manage "Gérer les dossiers...">
 <!ENTITY sb.new.folder "Nouveau dossier...">
 <!ENTITY sb.new.note "Nouvelle note">
 <!ENTITY sb.sort.folder "Classer le dossier">
-<!ENTITY mb.configure "Configure">
-<!ENTITY mb.profileFolder "Profile Folder">
+<!ENTITY sb.search "Recherche">
+<!ENTITY sb.search.fulltext "Rechercher dans le texte entier">
+<!ENTITY sb.search.all "Tout">
+<!ENTITY sb.search.re "Utiliser une expression régulière (RegExp)">
+<!ENTITY sb.search.cs "Respecter la casse">
+<!ENTITY sb.search.cache "Mettre à jour le cache pour la recherche du texte entier">
+<!ENTITY sb.search.clear "Nettoyer l'historique">
+<!ENTITY sb.search.days "Filtre par jour">
+<!ENTITY mb.configure "Configurer">
+<!ENTITY mb.profileFolder "Dossier du profil">

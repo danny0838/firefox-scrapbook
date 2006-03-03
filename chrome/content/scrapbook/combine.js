@@ -1,53 +1,88 @@
 
-var sbPageBinder = {
+var sbCombineService = {
 
-	get WIZARD()    { return document.getElementById("sbCombineWizard"); },
-	get STRING()    { return document.getElementById("sbCombineString"); },
-	get LISTBOX()   { return document.getElementById("sbCombineListbox"); },
-	get currentID() { return this.idList[this.index]; },
+	get WIZARD()  { return document.getElementById("sbCombineWizard"); },
+	get STRING()  { return document.getElementById("sbCombineString"); },
+	get LISTBOX() { return document.getElementById("sbCombineListbox"); },
+	get curID()   { return this.idList[this.index]; },
+	get curRes()  { return this.resList[this.index]; },
 
 	index   : 0,
 	idList  : [],
 	resList : [],
 	parList : [],
-	option  : [],
+	option  : {},
 	prefix  : "",
 	postfix : "",
 
 	init : function()
 	{
-		SBstring = document.getElementById("ScrapBookString");
+		gOption = { "script" : true, "format" : true };
 		sbDataSource.init();
 		sbTreeHandler.init(false);
-		SB_initObservers();
 		this.index = 0;
-		this.WIZARD.getButton("back").label = this.STRING.getString("RESET_BUTTON_LABEL");
-		this.WIZARD.getButton("back").disabled = false;
-		this.WIZARD.getButton("back").onclick = function(){ SBtree.parentNode.collapsed = true; window.location.reload(); };
+		this.WIZARD.getButton("back").onclick = function(){ sbCombineService.undo(); };
 		this.WIZARD.canAdvance = false;
+		sbFolderSelector2.init();
+		if ( window.arguments ) setTimeout(function()
+		{
+			for ( var i = 0; i < window.arguments[0].length; i++ )
+			{
+				sbCombineService.add(window.arguments[0][i], window.arguments[1][i]);
+			}
+		}, 0);
 	},
 
-	add : function()
+	add : function(aRes, aParRes)
 	{
-		var curRes = SBtree.builderView.getResourceAtIndex(SBtree.currentIndex);
-		var type = sbDataSource.getProperty("type", curRes);
+		if ( !aRes || !aParRes )
+		{
+			aRes = sbTreeHandler.resource;
+			aParRes = sbTreeHandler.getParentResource(sbTreeHandler.TREE.currentIndex);
+		}
+		var type = sbDataSource.getProperty(aRes, "type");
 		if ( type == "folder" ) return;
-		if ( type == "note" || type == "file" ) { alert(this.STRING.getString("CANNOT_COMBINE_NOTES")); return; }
-		this.LISTBOX.appendItem(sbDataSource.getProperty("title", curRes));
-		this.idList.push(sbDataSource.getProperty("id", curRes));
-		this.resList.push(curRes);
-		this.parList.push(SB_getParentResourceAtIndex(SBtree.currentIndex));
+		if ( type == "site" ) alert(this.STRING.getString("WARN_ABOUT_INDEPTH"));
+		var icon = sbDataSource.getProperty(aRes, "icon");
+		if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
+		var listItem = this.LISTBOX.appendItem(sbDataSource.getProperty(aRes, "title"));
+		listItem.setAttribute("class", "listitem-iconic");
+		listItem.setAttribute("image", icon);
+		this.idList.push(sbDataSource.getProperty(aRes, "id"));
+		this.resList.push(aRes);
+		this.parList.push(aParRes);
 		this.WIZARD.canAdvance = true;
+		this.WIZARD.canRewind = true;
+	},
+
+	undo : function()
+	{
+		if ( this.idList.length == 0 || this.WIZARD.currentPage.pageid == "sbCombinePreviewPage" ) return;
+		this.LISTBOX.removeItemAt(this.idList.length - 1);
+		this.idList.pop();
+		this.resList.pop();
+		this.parList.pop();
+		if ( this.idList.length == 0 )
+		{
+			this.WIZARD.canAdvance = false;
+			this.WIZARD.canRewind = false;
+		}
 	},
 
 	next : function()
 	{
-		dump("sbPageBinder::next " + this.index + "\n");
-		if ( this.index < this.idList.length ) {
+		if ( this.index < this.idList.length )
+		{
 			this.prefix  = "(" + (this.index + 1) + "/" + this.idList.length + ") ";
-			this.postfix = sbDataSource.getProperty("title", this.resList[this.index]);
-			sbInvisibleBrowser.load(sbCommonUtils.getURL(this.currentID), this.currentID);
-		} else {
+			this.postfix = sbDataSource.getProperty(this.resList[this.index], "title");
+			var type = sbDataSource.getProperty(this.resList[this.index], "type");
+			if  ( type == "file" || type == "bookmark" )
+				sbPageCombiner.exec(type);
+			else
+				sbInvisibleBrowser.load(sbCommonUtils.getBaseHref(sbDataSource.data.URI) + "data/" + this.curID + "/index.html");
+		}
+		else
+		{
 			this.prefix  = "";
 			this.postfix = "combine.html";
 			this.donePreview();
@@ -56,68 +91,67 @@ var sbPageBinder = {
 
 	initPreview : function()
 	{
-		dump("sbPageBinder::initPreview\n");
+		this.WIZARD.canRewind = false;
 		this.WIZARD.canAdvance = false;
 		this.WIZARD.getButton("finish").label = this.STRING.getString("FINISH_BUTTON_LABEL");
 		this.WIZARD.getButton("finish").disabled = true;
-		this.option[0] = document.getElementById("sbCombineOptionH").checked;
+		this.option["R"] = document.getElementById("sbCombineOptionR").checked;
 		sbInvisibleBrowser.init();
 		sbInvisibleBrowser.ELEMENT.removeEventListener("load", sbInvisibleBrowser.onload, true);
-		sbInvisibleBrowser.onload = function(){ sbDocumentAnalyzer.exec(); };
+		sbInvisibleBrowser.onload = function(){ sbPageCombiner.exec(); };
 		sbInvisibleBrowser.ELEMENT.addEventListener("load", sbInvisibleBrowser.onload, true);
 		this.next();
 	},
 
 	donePreview : function()
 	{
-		dump("sbPageBinder::donePreview\n");
 		var htmlFile = sbCommonUtils.getScrapBookDir();
 		htmlFile.append("combine.html");
-		sbCommonUtils.writeFile(htmlFile, sbDocumentAnalyzer.htmlSrc, "UTF-8");
+		sbCommonUtils.writeFile(htmlFile, sbPageCombiner.htmlSrc, "UTF-8");
 		var cssFile = sbCommonUtils.getScrapBookDir();
 		cssFile.append("combine.css");
-		sbCommonUtils.writeFile(cssFile, sbDocumentAnalyzer.cssText, "UTF-8");
-		sbInvisibleBrowser.refreshEvent(function(){ sbPageBinder.showBrowser(); });
+		sbCommonUtils.writeFile(cssFile, sbPageCombiner.cssText, "UTF-8");
+		sbInvisibleBrowser.refreshEvent(function(){ sbCombineService.showBrowser(); });
 		sbInvisibleBrowser.load(sbCommonUtils.convertFilePathToURL(htmlFile.path));
 	},
 
 	showBrowser : function()
 	{
-		dump("sbPageBinder::showBrowser\n");
 		this.toggleElements(false);
 		sbInvisibleBrowser.ELEMENT.onclick = function(aEvent){ aEvent.preventDefault(); };
 		this.WIZARD.getButton("finish").disabled = false;
-		this.WIZARD.getButton("finish").onclick = function(){ sbPageBinder.finish(); };
+		this.WIZARD.getButton("finish").onclick = function(){ sbCombineService.finish(); };
 	},
 
 	finish : function()
 	{
-		dump("sbPageBinder::finish\n");
 		this.WIZARD.getButton("finish").disabled = true;
 		this.toggleElements(true);
-		SB_trace(SBstring.getString("CAPTURE_START"));
-		setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, "urn:scrapbook:root", 0, null); }, 0);
+		SB_trace(sbCaptureTask.STRING.getString("CAPTURE_START"));
+		setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.selection, 0, null); }, 0);
 	},
 
 	toggleElements : function(isProgressMode)
 	{
 		sbInvisibleBrowser.ELEMENT.collapsed = isProgressMode;
-		document.getElementById("ScrapBookCaptureTextbox").collapsed = !isProgressMode;
+		document.getElementById("sbCaptureTextbox").collapsed = !isProgressMode;
 	},
 
 	onCombineComplete : function(aItem)
 	{
 		var newRes = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id);
-		sbDataSource.updateItem(newRes, "type",   "combine");
-		sbDataSource.updateItem(newRes, "source", sbDataSource.getProperty("source", this.resList[0]));
-		sbDataSource.updateItem(newRes, "icon",   sbDataSource.getProperty("icon",   this.resList[0]).replace(/\d{14}/, aItem.id));
+		sbDataSource.setProperty(newRes, "type", "combine");
+		sbDataSource.setProperty(newRes, "source", sbDataSource.getProperty(this.resList[0], "source"));
+		var newIcon = sbDataSource.getProperty(this.resList[0], "icon");
+		if ( newIcon.match(/\d{14}/) ) newIcon = "resource://scrapbook/data/" + aItem.id + "/" + sbCommonUtils.getFileName(newIcon);
+		sbDataSource.setProperty(newRes, "icon", newIcon);
 		var newComment = "";
 		for ( var i = 0; i < this.resList.length; i++ )
 		{
-			var comment = sbDataSource.getProperty("comment", this.resList[i]);
+			var comment = sbDataSource.getProperty(this.resList[i], "comment");
 			if ( comment ) newComment += comment + " __BR__ ";
 		}
-		if ( newComment ) sbDataSource.updateItem(newRes, "comment", newComment);
+		if ( newComment ) sbDataSource.setProperty(newRes, "comment", newComment);
 	},
 
 };
@@ -125,65 +159,87 @@ var sbPageBinder = {
 
 
 
-var sbDocumentAnalyzer = {
+var sbPageCombiner = {
 
-	get BROWSER(){ return document.getElementById("ScrapBookCaptureBrowser"); },
+	get BROWSER(){ return document.getElementById("sbCaptureBrowser"); },
 	get BODY()   { return this.BROWSER.contentDocument.body; },
 
 	htmlSrc : "",
 	cssText : "",
+	offsetTop : 0,
+	isTargetCombined : false,
 
-	exec : function()
+	exec : function(aType)
 	{
-		dump("sbDocumentAnalyzer::exec\n");
-		if ( sbPageBinder.index == 0 )
+		this.isTargetCombined = false;
+		if ( sbCombineService.index == 0 )
 		{
 			this.htmlSrc += '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">';
 			this.htmlSrc += '<html><head>';
 			this.htmlSrc += '<meta http-equiv="Content-Type" content="text/html;Charset=UTF-8">';
 			this.htmlSrc += '<meta http-equiv="Content-Style-Type" content="text/css">';
-			this.htmlSrc += '<title>' + this.BROWSER.contentDocument.title + '</title>';
+			this.htmlSrc += '<title>' + sbDataSource.getProperty(sbCombineService.curRes, "title") + '</title>';
 			this.htmlSrc += '<link rel="stylesheet" href="combine.css" media="all">';
 			this.htmlSrc += '<link rel="stylesheet" href="chrome://scrapbook/skin/combine.css" media="all">';
+			this.htmlSrc += '<link rel="stylesheet" href="chrome://scrapbook/skin/annotation.css" media="all">';
 			this.htmlSrc += '</head><body>\n';
 		}
-		this.processDOMRecursively(this.BROWSER.contentDocument.body);
-		this.htmlSrc += this.getCiteHTML();
-		this.htmlSrc += this.surroundDOM();
-		this.cssText += this.surroundCSS();
-		if ( sbPageBinder.index == sbPageBinder.idList.length - 1 )
+		if ( aType == "file" || aType == "bookmark" )
+		{
+			this.htmlSrc += this.getCiteHTML(aType);
+		}
+		else
+		{
+			this.processDOMRecursively(this.BROWSER.contentDocument.body);
+			if ( !this.isTargetCombined ) this.htmlSrc += this.getCiteHTML(aType);
+			this.htmlSrc += this.surroundDOM();
+			this.cssText += this.surroundCSS();
+			this.offsetTop += this.BROWSER.contentDocument.body.offsetHeight;
+		}
+		if ( sbCombineService.index == sbCombineService.idList.length - 1 )
 		{
 			this.htmlSrc += '\n</body>\n</html>\n';
 		}
-		sbPageBinder.index++;
-		sbPageBinder.next();
+		sbCombineService.index++;
+		sbCombineService.next();
 	},
 
-	getCiteHTML : function()
+	getCiteHTML : function(aType)
 	{
-		var src   = '\n<!--' + sbPageBinder.postfix + '-->\n';
-		var opt   = sbPageBinder.option[0] ? "" : "-invisible";
-		var res   = sbPageBinder.resList[sbPageBinder.index];
-		var url   = sbDataSource.getProperty("source", res);
-		var title = sbDataSource.getProperty("title", res);
-		if ( url.length   > 100 ) url   = url.substring(0,100)   + "...";
-		if ( title.length > 100 ) title = title.substring(0,100) + "...";
-		var icon = sbDataSource.getProperty("icon", res);
-		if ( !icon ) icon = sbCommonUtils.getDefaultIcon(sbDataSource.getProperty("type", res));
-		src += '<cite class="scrapbook-header' + opt + '">\n';
+		var src   = '\n<!--' + sbCombineService.postfix + '-->\n';
+		var title = sbCommonUtils.crop(sbDataSource.getProperty(sbCombineService.curRes, "title") , 100);
+		var linkURL = "";
+		switch ( aType )
+		{
+			case "file" :
+				var htmlFile = sbCommonUtils.getContentDir(sbCombineService.curID);
+				htmlFile.append("index.html");
+				var isMatch = sbCommonUtils.readFile(htmlFile).match(/URL=\.\/([^\"]+)\"/);
+				if ( isMatch ) linkURL = "./data/" + sbCombineService.curID + "/" + RegExp.$1;
+				break;
+			case "note" :
+				linkURL = ""; break;
+			default :
+				linkURL = sbDataSource.getProperty(sbCombineService.curRes, "source"); break;
+		}
+		var icon = sbDataSource.getProperty(sbCombineService.curRes, "icon");
+		if ( !icon ) icon = sbCommonUtils.getDefaultIcon(aType);
+		if ( icon.indexOf("resource://") == 0 && icon.indexOf(sbCombineService.curID) > 0 )
+		{
+			icon = "./data/" + sbCombineService.curID + "/" + sbCommonUtils.getFileName(icon);
+		}
+		src += '<cite class="scrapbook-header' + '">\n';
 		src += '\t<img src="' + icon + '" width="16" height="16">\n';
-		src += '\t<span>' + title + '</span>\n';
-		src += '\t<a href="' + sbDataSource.getProperty("source", res) + '">' + url + '</a>\n';
+		src += '\t' + (linkURL ? '<a href="' + linkURL + '">' + title + '</a>' : title) + '\n';
 		src += '</cite>\n';
 		return src;
 	},
 
 	surroundDOM : function()
 	{
-		dump("sbDocumentAnalyzer::surroundDOM\n");
 		if ( this.BODY.localName.toUpperCase() != "BODY" )
 		{
-			alert(sbPageBinder.STRING.getString("CANNOT_COMBINE_FRAMES") + "\n" + sbDataSource.getProperty("title", sbPageBinder.resList[sbPageBinder.index]));
+			alert(sbCombineService.STRING.getString("CANNOT_COMBINE_FRAMES") + "\n" + sbDataSource.getProperty(sbCombineService.curRes, "title"));
 			this.BROWSER.stop();
 			window.location.reload();
 		}
@@ -197,28 +253,42 @@ var sbDocumentAnalyzer = {
 		var childNodes = this.BODY.childNodes;
 		for ( var i = childNodes.length - 2; i >= 0; i-- )
 		{
+			var nodeName  = childNodes[i].nodeName.toUpperCase();
+			if ( nodeName == "DIV" && childNodes[i].hasAttribute("class") && childNodes[i].getAttribute("class") == "scrapbook-sticky" )
+				childNodes[i].style.top = (parseInt(childNodes[i].style.top) + this.offsetTop) + "px";
+			else if ( nodeName == "CITE" && childNodes[i].hasAttribute("class") && childNodes[i].getAttribute("class") == "scrapbook-header" ) continue;
+			else if ( nodeName == "DIV"  && childNodes[i].id.match(/^item\d{14}$/) ) continue;
 			divElem.insertBefore(childNodes[i], divElem.firstChild);
 		}
-		divElem.id  = "item" + sbPageBinder.currentID;
+		divElem.id  = "item" + sbCombineService.curID;
 		divElem.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
 		return this.BODY.innerHTML;
 	},
 
 	surroundCSS : function()
 	{
-		dump("sbDocumentAnalyzer::surroundCSS\n");
 		var ret = "";
 		for ( var i = 0; i < this.BROWSER.contentDocument.styleSheets.length; i++ )
 		{
+			if ( this.BROWSER.contentDocument.styleSheets[i].href.indexOf("chrome") == 0 ) continue;
 			var cssRules = this.BROWSER.contentDocument.styleSheets[i].cssRules;
 			for ( var j = 0; j < cssRules.length; j++ )
 			{
 				var cssText = cssRules[j].cssText;
-				cssText = cssText.replace(/^html /,  "");
-				cssText = cssText.replace(/^body /,  "");
-				cssText = cssText.replace(/^body, /, ", ");
-				cssText = cssText.replace(/position: absolute; /, "position: relative; ");
-				cssText = "div#item" + sbPageBinder.currentID + " " + cssText;
+				if ( !this.isTargetCombined )
+				{
+					cssText = cssText.replace(/^html /,  "");
+					cssText = cssText.replace(/^body /,  "");
+					cssText = cssText.replace(/^body, /, ", ");
+					cssText = cssText.replace(/position: absolute; /, "position: relative; ");
+					cssText = "div#item" + sbCombineService.curID + " " + cssText;
+				}
+				var blanketLR = cssText.split("{");
+				if ( blanketLR[0].indexOf(",") > 0 )
+				{
+					blanketLR[0] = blanketLR[0].replace(/,/g, ", div#item" + sbCombineService.curID);
+					cssText = blanketLR.join("{");
+				}
 				ret += this.inspectCSSText(cssText) + "\n";
 			}
 		}
@@ -231,7 +301,7 @@ var sbDocumentAnalyzer = {
 		var RE = new RegExp(/ url\(([^\'\)]+)\)/);
 		while ( aCSSText.match(RE) && ++i < 10 )
 		{
-			aCSSText = aCSSText.replace(RE, " url('./data/" + sbPageBinder.currentID + "/" + RegExp.$1 + "')");
+			aCSSText = aCSSText.replace(RE, " url('./data/" + sbCombineService.curID + "/" + RegExp.$1 + "')");
 		}
 		return aCSSText;
 	},
@@ -266,6 +336,9 @@ var sbDocumentAnalyzer = {
 			case "AREA" : 
 				if ( aNode.href.indexOf("file://") == 0 ) aNode.setAttribute("href", aNode.href);
 				break;
+			case "CITE" : 
+				if ( aNode.hasAttribute("class") && aNode.getAttribute("class") == "scrapbook-header" ) this.isTargetCombined = true;
+				break;
 		}
 		if ( aNode.style && aNode.style.cssText )
 		{
@@ -289,11 +362,16 @@ var sbDocumentAnalyzer = {
 
 
 
-sbContentSaver.onCaptureComplete = function(aItem)
+sbCaptureObserverCallback.onCaptureComplete = function(aItem)
 {
-	dump("sbContentSaver::onCaptureComplete(" + (aItem ? aItem.id : "") + ") [OVERRIDE combine.js]\n");
-	sbPageBinder.onCombineComplete(aItem);
-	SB_trace(SBstring.getString("CAPTURE_COMPLETE") + " : " + aItem.title);
+	sbCombineService.onCombineComplete(aItem);
+	SB_trace(sbCaptureTask.STRING.getString("CAPTURE_COMPLETE") + " : " + aItem.title);
+	if ( sbCombineService.option["R"] )
+	{
+		if ( sbCombineService.resList.length != sbCombineService.parList.length ) return;
+		var rmIDs = sbController.removeInternal(sbCombineService.resList, sbCombineService.parList);
+		if ( rmIDs ) SB_trace(sbMainService.STRING.getFormattedString("ITEMS_REMOVED", [rmIDs.length]));
+	}
 	SB_fireNotification(aItem);
 	setTimeout(function(){ window.close(); }, 500);
 }
@@ -303,7 +381,7 @@ sbInvisibleBrowser.onStateChange = function(aWebProgress, aRequest, aStateFlags,
 {
 	if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
 	{
-		SB_trace(SBstring.getString("LOADING") + "... " + sbPageBinder.prefix + (++this.fileCount) + " " + sbPageBinder.postfix);
+		SB_trace(sbCaptureTask.STRING.getString("LOADING") + "... " + sbCombineService.prefix + (++this.fileCount) + " " + sbCombineService.postfix);
 	}
 };
 

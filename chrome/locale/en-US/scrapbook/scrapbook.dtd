@@ -1,29 +1,19 @@
-<!ENTITY sb.title "ScrapBook">
 <!ENTITY sb.new.folder "New Folder...">
 <!ENTITY sb.new.note "New Note">
 <!ENTITY sb.toggle.all "Expand/Collapse All Folders">
 <!ENTITY sb.tools "Tools">
-<!ENTITY sb.tools.setting "Settings...">
+<!ENTITY sb.tools.settings "Settings">
 <!ENTITY sb.tools.manage "Manage">
+<!ENTITY sb.tools.combine "Combine">
+<!ENTITY sb.tools.trade "Import / Export">
+<!ENTITY sb.tools.multiple "Capture Multiple URLs">
+<!ENTITY sb.tools.directory "ScrapBook Directory">
 <!ENTITY sb.tools.calculate "Calculation of Size">
 <!ENTITY sb.tools.sorttree "Sort Entire Tree">
-<!ENTITY sb.tools.directory "ScrapBook Directory">
-<!ENTITY sb.tools.combine "Combine">
-<!ENTITY sb.tools.multiple "Capture Multiple URLs">
-<!ENTITY sb.tools.trade "Import / Export">
 <!ENTITY sb.tools.output "Output Tree as HTML">
 <!ENTITY sb.tools.backup "Backup with Compression">
 <!ENTITY sb.tools.repair "Emergency Repair">
 <!ENTITY sb.tools.homepage "Home Page">
 <!ENTITY sb.tools.about "About">
-<!ENTITY sb.search "Search">
-<!ENTITY sb.search.fulltext "Full Text Search">
-<!ENTITY sb.search.all "All">
-<!ENTITY sb.search.re "Use RegExp">
-<!ENTITY sb.search.cs "Match Case">
-<!ENTITY sb.search.cache "Update Cache for Full Text Search">
-<!ENTITY sb.search.clear "Clear Form History">
-<!ENTITY sb.search.days "Filtering by Days">
 <!ENTITY sb.note.opentab "Open in Tab">
 <!ENTITY sb.note.close "Close">
-<!ENTITY sb.move "Move into Folder">

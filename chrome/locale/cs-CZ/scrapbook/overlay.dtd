@@ -1,15 +1,16 @@
-<!ENTITY sb.title "ScrapBook">
 <!ENTITY sb.capture.partial "Zachytit výběr">
-<!ENTITY sb.capture.partial.as "Zachytit výběr jako...">
+<!ENTITY sb.capture.partial.as "Zachytit výběr jako">
 <!ENTITY sb.capture.entire "Zachytit stránku">
-<!ENTITY sb.capture.entire.as "Zachytit stránku jako...">
+<!ENTITY sb.capture.entire.as "Zachytit stránku jako">
 <!ENTITY sb.capture.frame "Zachytit rám">
-<!ENTITY sb.capture.frame.as "Zachytit rám jako...">
+<!ENTITY sb.capture.frame.as "Zachytit rám jako">
 <!ENTITY sb.capture.target "Zachytit odkaz">
-<!ENTITY sb.capture.target.as "Zachytit odkaz jako...">
+<!ENTITY sb.capture.target.as "Zachytit odkaz jako">
 <!ENTITY sb.capture.folder.root "Kořenová složka">
 <!ENTITY sb.capture.folder.select "Vybrat složku">
+<!ENTITY sb.capture.alltabs "Capture All Tabs">
+<!ENTITY sb.capture.bookmark "Bookmark with ScrapBook">
 <!ENTITY sb.key.sidebar "K">
-<!ENTITY sb.key.editor "J">
+<!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">
 <!ENTITY sb.key.capture.as "K">

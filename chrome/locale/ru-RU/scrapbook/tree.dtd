@@ -2,15 +2,31 @@
 <!ENTITY sb.open.tab "Открыть на вкладке">
 <!ENTITY sb.open.newtab "Открыть в новой вкладке">
 <!ENTITY sb.open.source "Открыть исходный URL">
+<!ENTITY sb.tools "Инструменты">
 <!ENTITY sb.show.files "Показать файлы">
-<!ENTITY sb.delete "Удалить">
+<!ENTITY sb.move "Переместить в папку">
+<!ENTITY sb.renew "Capture Again">
+<!ENTITY sb.export "Экспорт">
+<!ENTITY sb.remove "Удалить">
 <!ENTITY sb.property "Свойства">
+<!ENTITY sb.listview "List View">
+<!ENTITY sb.prop.title "Заголовок">
+<!ENTITY sb.prop.comment "Комментарий">
+<!ENTITY sb.prop.id.date "ID (Время)">
 <!ENTITY sb.folder.toggle "Развернуть/Свернуть">
+<!ENTITY sb.folder.combine "Комбинированном виде">
 <!ENTITY sb.folder.openall "Открыть все на вкладках">
-<!ENTITY sb.folder.combine "Открыть в комбинированном виде">
 <!ENTITY sb.folder.manage "Упорядочить папки...">
 <!ENTITY sb.new.folder "Новая папка...">
 <!ENTITY sb.new.note "Создать пометку">
 <!ENTITY sb.sort.folder "Сортировать папку">
-<!ENTITY mb.configure "Configure">
-<!ENTITY mb.profileFolder "Profile Folder">
+<!ENTITY sb.search "Поиск">
+<!ENTITY sb.search.fulltext "Полнотекстовый поиск">
+<!ENTITY sb.search.all "Все">
+<!ENTITY sb.search.re "Использовать шаблоны">
+<!ENTITY sb.search.cs "С учетом регистра">
+<!ENTITY sb.search.cache "Обновить кэш полнотекстового поиска">
+<!ENTITY sb.search.clear "Удалить историю автозаполнения">
+<!ENTITY sb.search.days "Показать за: ">
+<!ENTITY mb.configure "Настроить">
+<!ENTITY mb.profileFolder "Каталог профиля">

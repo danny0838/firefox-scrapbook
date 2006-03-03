@@ -1,8 +1,8 @@
-<!ENTITY mb.configure "Configure">
-<!ENTITY mb.prop.name "Name">
-<!ENTITY mb.prop.path "Path">
-<!ENTITY mb.button.add "Add">
-<!ENTITY mb.button.edit "Edit">
-<!ENTITY mb.button.remove "Remove">
-<!ENTITY mb.button.browse "Browse">
-<!ENTITY mb.button.accept "OK">
+<!ENTITY mb.configure "設定">
+<!ENTITY mb.prop.name "名稱">
+<!ENTITY mb.prop.path "路徑">
+<!ENTITY mb.button.add "新增">
+<!ENTITY mb.button.edit "編輯">
+<!ENTITY mb.button.remove "刪除">
+<!ENTITY mb.button.browse "瀏覽">
+<!ENTITY mb.button.accept "確定">

@@ -4,11 +4,9 @@
 <!ENTITY sb.editor.restore "Отменить все правки и вернуться к первоначальному виду">
 <!ENTITY sb.editor.save "Зафиксировать правки">
 <!ENTITY sb.editor.comment "Расширить поле комментария">
-<!ENTITY sb.editor.block "Расширенный комментарий">
-<!ENTITY sb.editor.block.insert "Расширенный комментарий после выделенного">
-<!ENTITY sb.editor.block.hide "Спрятать расширенные комментарии">
-<!ENTITY sb.editor.inline.add "Краткий комментарий к выделенному">
-<!ENTITY sb.editor.inline.delete "Удалить все простые комментарии">
+<!ENTITY sb.editor.sticky "Sticky Annotation">
+<!ENTITY sb.editor.sticky.create "Create &sb.editor.sticky;">
+<!ENTITY sb.editor.inline.add "Add Inline Annotation to Selection">
 <!ENTITY sb.editor.attach.file "Присоединить файл к выделенному">
 <!ENTITY sb.editor.attach.link "Присоединить ссылку к выделенному">
 <!ENTITY sb.editor.cutter "Удалить выделенное">
@@ -19,7 +17,8 @@
 <!ENTITY sb.highlighter.remove.all "Удалить все цветовые пометки">
 <!ENTITY sb.customize "Настроить">
 <!ENTITY sb.infobar.openSource "Открыть исходный URL">
-<!ENTITY sb.infobar.showSitemap "Show &sb.infobar.sitemap;">
+<!ENTITY sb.infobar.renew "Capture Again">
+<!ENTITY sb.infobar.showIndicators "Show Link Indicators">
 <!ENTITY sb.infobar.showInfobar "Show Info Toolbar">
 <!ENTITY sb.infobar.home "Домой">
 <!ENTITY sb.infobar.sitemap "Карта сайта">

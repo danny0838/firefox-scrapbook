@@ -1,0 +1,99 @@
+/*===========================================================================
+*   Sticky Annotation
+*==========================================================================*/
+
+div.scrapbook-sticky {
+	background-color: #FAFAFA;
+	border: 1px solid #CCCCCC;
+	color: #202020;
+	white-space: -moz-pre-wrap;
+	cursor: pointer;
+	font-size: small;
+	font-weight: normal;
+	font-style: normal;
+	text-decoration: none;
+	-moz-opacity: 0.85;
+}
+
+div.scrapbook-sticky * {
+	-moz-box-sizing: border-box;
+	margin: 0px;
+	padding: 0px;
+}
+
+div.scrapbook-sticky .scrapbook-sticky-header {
+	height: 10px;
+	background-image: url('chrome://scrapbook/skin/sticky_header.png');
+	cursor: move;
+}
+
+div.scrapbook-sticky textarea {
+	width: 100%;
+	font-size: small;
+	font-family: gothic;
+}
+
+div.scrapbook-sticky .scrapbook-sticky-footer {
+	height: 16px;
+}
+
+div.scrapbook-sticky input {
+	height: 14px;
+	margin: 1px;
+	border: 1px solid #CCCCCC;
+}
+
+div.scrapbook-sticky input:focus {
+	outline: none;
+	border: 1px solid dodgerblue;
+}
+
+div.scrapbook-sticky .scrapbook-sticky-resizer {
+	position: absolute;
+	bottom: 0px;
+	right: 0px;
+	width:  16px;
+	height: 16px;
+	border: 0px;
+	cursor: se-resize;
+	background-image: url('chrome://scrapbook/skin/sticky_resizer.png');
+}
+
+
+/*===========================================================================
+*   Relative Sticky Annotation
+*==========================================================================*/
+
+div.scrapbook-sticky-relative {
+	margin: 16px 10px;
+}
+
+/* XXX I don't know how to put the resizer at left bottom in the relative box. */
+div.scrapbook-sticky-relative .scrapbook-sticky-resizer {
+	display: none;
+}
+
+/* XXX A work-around for the problem. We can resize by DND footer when editing a relative sticky annotation. */
+div.scrapbook-sticky-relative div.scrapbook-sticky-footer {
+	cursor: se-resize;
+	background-image: url('chrome://scrapbook/skin/sticky_resizer.png');
+	background-position: right bottom;
+	background-repeat: no-repeat;
+}
+
+/* We can't move a relative sticky annotation */
+div.scrapbook-sticky-relative .scrapbook-sticky-header {
+	cursor: default;
+}
+
+
+/*===========================================================================
+*   Inline Annotation
+*==========================================================================*/
+
+span.scrapbook-inline {
+	border-bottom: 2px dotted #FF3333;
+	cursor: help;
+}
+
+

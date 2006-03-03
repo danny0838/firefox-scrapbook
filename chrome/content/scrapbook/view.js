@@ -8,20 +8,16 @@ function SB_initView()
 {
 	gID = document.location.href.match(/\?id\=(\d{14})$/);
 	gID = RegExp.$1;
-
 	sbDataSource.init();
-
-	var resURI = gID ? "urn:scrapbook:item" + gID : "urn:scrapbook:root";
-	gRes = sbCommonUtils.RDF.GetResource(resURI);
-	var type = sbDataSource.getProperty("type", gRes);
-	if ( type != "folder" )
+	gRes = sbCommonUtils.RDF.GetResource(gID ? "urn:scrapbook:item" + gID : "urn:scrapbook:root");
+	if ( !sbDataSource.isContainer(gRes) )
 	{
-		window.location.href = sbCommonUtils.getURL(gID, type);
+		window.location.href = sbDataSource.getURL(gRes);
 		return;
 	}
 
 
-	var src = SB_getHTMLHead(sbDataSource.getProperty("title", gRes));
+	var src = SB_getHTMLHead(sbDataSource.getProperty(gRes, "title"));
 
 	sbCommonUtils.RDFC.Init(sbDataSource.data, gRes);
 	var resEnum = sbCommonUtils.RDFC.GetElements();
@@ -32,9 +28,9 @@ function SB_initView()
 		var item = new ScrapBookItem();
 		for ( var prop in item )
 		{
-			item[prop] = sbDataSource.getProperty(prop, res);
+			item[prop] = sbDataSource.getProperty(res, prop);
 		}
-		if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(sbDataSource.getProperty("type", res));
+		if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(sbDataSource.getProperty(res, "type"));
 		src += SB_getHTMLBody(item);
 	}
 
@@ -66,8 +62,8 @@ function SB_getHTMLHead(aTitle)
 
 function SB_getHTMLBody(aSBitem)
 {
-	var url   = ( aSBitem.source.length > 100 ) ? aSBitem.source.substring(0,100) + "..." : aSBitem.source;
-	var title = ( aSBitem.title.length  > 100 ) ? aSBitem.title.substring(0,100)  + "..." : aSBitem.title;
+	var url   = sbCommonUtils.crop(aSBitem.source, 100);
+	var title = sbCommonUtils.crop(aSBitem.title,  100);
 	var icon  = aSBitem.icon ? aSBitem.icon : sbCommonUtils.getDefaultIcon(aSBitem.type);
 	var src = "";
 	src += '<cite class="scrapbook-header">\n';
@@ -75,7 +71,7 @@ function SB_getHTMLBody(aSBitem)
 	src += '\t<span>' + title + '</span>\n';
 	src += '\t<a href="' + aSBitem.source + '" target="_top">' + url + '</a>\n';
 	src += '</cite>\n';
-	src += '<iframe class="scrapbook-iframe" src="./data/' + aSBitem.id + '/index.html" onload="this.setAttribute(\'style\', \'height:\' + (this.contentDocument.height+30));"></iframe>\n';
+	src += '<iframe class="scrapbook-iframe" src="./data/' + aSBitem.id + '/index.html" onload="this.setAttribute(\'style\', \'height:\' + (this.contentDocument.height || 600 + 30));"></iframe>\n';
 	return src;
 }
 

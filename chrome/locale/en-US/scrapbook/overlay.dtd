@@ -1,15 +1,16 @@
-<!ENTITY sb.title "ScrapBook">
 <!ENTITY sb.capture.partial "Capture Selection">
-<!ENTITY sb.capture.partial.as "Capture Selection As...">
+<!ENTITY sb.capture.partial.as "Capture Selection As">
 <!ENTITY sb.capture.entire "Capture Page">
-<!ENTITY sb.capture.entire.as "Capture Page As...">
+<!ENTITY sb.capture.entire.as "Capture Page As">
 <!ENTITY sb.capture.frame "Capture Frame">
-<!ENTITY sb.capture.frame.as "Capture Frame As...">
+<!ENTITY sb.capture.frame.as "Capture Frame As">
 <!ENTITY sb.capture.target "Capture Link">
-<!ENTITY sb.capture.target.as "Capture Link As...">
+<!ENTITY sb.capture.target.as "Capture Link As">
 <!ENTITY sb.capture.folder.root "Root Folder">
 <!ENTITY sb.capture.folder.select "Select Folder">
+<!ENTITY sb.capture.alltabs "Capture All Tabs">
+<!ENTITY sb.capture.bookmark "Bookmark with ScrapBook">
 <!ENTITY sb.key.sidebar "K">
-<!ENTITY sb.key.editor "J">
+<!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">
 <!ENTITY sb.key.capture.as "K">

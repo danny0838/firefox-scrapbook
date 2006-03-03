@@ -10,75 +10,75 @@
 
 <!--locale-->
 <!DOCTYPE window [
-<!ENTITY % scrapbookDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
-%scrapbookDTD;
-<!ENTITY % propertyDTD  SYSTEM "chrome://scrapbook/locale/property.dtd" >
-%propertyDTD;
-<!ENTITY % tradeDTD     SYSTEM "chrome://scrapbook/locale/trade.dtd" >
-%tradeDTD;
-<!ENTITY % settingDTD   SYSTEM "chrome://scrapbook/locale/setting.dtd" >
-%settingDTD;
-<!ENTITY % treeDTD      SYSTEM "chrome://scrapbook/locale/tree.dtd" >
+<!ENTITY % mainDTD  SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+%mainDTD;
+<!ENTITY % propDTD  SYSTEM "chrome://scrapbook/locale/property.dtd" >
+%propDTD;
+<!ENTITY % treeDTD  SYSTEM "chrome://scrapbook/locale/tree.dtd" >
 %treeDTD;
+<!ENTITY % prefDTD  SYSTEM "chrome://scrapbook/locale/setting.dtd" >
+%prefDTD;
+<!ENTITY % tradeDTD SYSTEM "chrome://scrapbook/locale/trade.dtd" >
+%tradeDTD;
 ]>
 
 <!--window-->
-<window id="ScrapBookTradeWindow"
+<window id="sbTradeWindow"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        title="&sb.tools.trade; - &sb.title;"
-        width="720" height="520" 
-        onload="setTimeout(SB_initTrade, 0);"
+        title="&sb.tools.trade; - ScrapBook"
+        onload="SB_initTrade();"
         windowtype="scrapbook">
 
-	<!--JavaScript-->
-	<script type="application/x-javascript" src="chrome://scrapbook/content/manage.js" />
+	<!--script-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/trade.js" />
 
+	<!--broadcaster-->
+	<broadcasterset id="sbBroadcasters" />
+
 	<!--stringbundle-->
 	<stringbundleset>
-		<stringbundle id="ScrapBookString"      src="chrome://scrapbook/locale/scrapbook.properties" />
-		<stringbundle id="ScrapBookTradeString" src="chrome://scrapbook/locale/trade.properties" />
+		<stringbundle id="sbMainString"  src="chrome://scrapbook/locale/scrapbook.properties" />
+		<stringbundle id="sbTradeString" src="chrome://scrapbook/locale/trade.properties" />
 	</stringbundleset>
 
 	<!--keyset-->
-	<keyset id="ScrapBookGenericKeyset">
+	<keyset id="sbGenericKeys">
 		<key key="a" modifiers="accel" oncommand="sbTrader.TREE.focus();sbTrader.TREE.view.selection.selectAll();" />
 	</keyset>
 
 	<!--popup-->
-	<popupset>
-		<popup id="ScrapBookTreePopup" />
-		<popup id="ScrapBookTradeTreePopup">
+	<popupset id="sbPopupSet">
+		<popup id="sbTradeTreePopup">
 			<menuitem label="&sb.open;"        oncommand="sbTrader.open(false);" default="true" />
 			<menuitem label="&sb.open.newtab;" oncommand="sbTrader.open(true);"  />
 			<menuitem label="&sb.show.files;"  oncommand="sbTrader.showFiles();" />
 			<menuseparator />
-			<menuitem class="menuitem-iconic" label="&sb.delete;"   src="chrome://scrapbook/skin/menu_delete.png"   oncommand="sbTrader.deleteDir();" />
+			<menuitem class="menuitem-iconic" label="&sb.remove;"   src="chrome://scrapbook/skin/menu_remove.png"   oncommand="sbTrader.deleteDir();" />
 			<menuseparator />
 			<menuitem class="menuitem-iconic" label="&sb.property;" src="chrome://scrapbook/skin/menu_property.png" oncommand="sbTrader.showIndexDat();" />
 		</popup>
 	</popupset>
 
-	<hbox flex="1">
+	<hbox id="sbTradeOuter" flex="1">
 
 		<vbox flex="1" style="width:170px;min-width:140px;">
 			<!--main toolbar-->
-			<toolbar id="ScrapBookMainToolbar" class="plain">
-				<toolbarbutton tooltiptext="&sb.new.folder;" image="chrome://scrapbook/skin/tool_createfolder.png" oncommand="SB_createFolder();" />
-				<toolbarbutton tooltiptext="&sb.toggle.all;" image="chrome://scrapbook/skin/tool_togglefolder.png" oncommand="sbTreeHandler.toggleAllFolders();" />
+			<toolbar id="sbMainToolbar" class="plain">
+				<toolbarbutton id="sbToolbarNewFolder" tooltiptext="&sb.new.folder;" oncommand="sbMainService.createFolder();" />
+				<toolbarbutton id="sbToolbarToggle"    tooltiptext="&sb.toggle.all;" oncommand="sbTreeHandler.toggleAllFolders();" />
 				<toolbarbutton id="mbToolbarButton" />
 			</toolbar>
 			<!--scrapbook tree-->
-			<tree id="ScrapBookTree"
-			      contextmenu="ScrapBookTreePopup"
-			      onclick="sbTreeHandler.onClick(event);"
+			<tree id="sbTree"
+			      contextmenu="sbPopup"
+			      onclick="sbTreeHandler.onClick(event, 0);"
 			      ondblclick="sbTreeHandler.onDblClick(event);"
 			      onkeypress="sbTreeHandler.onKeyPress(event);"
 			      onfocus="sbTrader.context = 'export';"
-			      ondraggesture="if (event.originalTarget.localName == 'treechildren') nsDragAndDrop.startDrag(event,SBdragDropObserver);event.stopPropagation();"
-			      ondragover="nsDragAndDrop.dragOver(event,SBdragDropObserver);event.stopPropagation();"
-			      ondragdrop="nsDragAndDrop.drop(event,SBdragDropObserver);event.stopPropagation();"
+			      ondraggesture="if (event.originalTarget.localName == 'treechildren') nsDragAndDrop.startDrag(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
+			      ondragover="nsDragAndDrop.dragOver(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
+			      ondragdrop="nsDragAndDrop.drop(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
 			      flex="1"
 			      class="plain" />
 		</vbox>
@@ -87,15 +87,15 @@
 
 		<vbox flex="2" style="min-width:300px;">
 			<toolbar align="center" class="plain" style="padding:3px 1px;">
-				<image id="ScrapBookTradeIcon" />
-				<textbox id="ScrapBookTradePath" readonly="true" flex="1" />
+				<image id="sbTradeIcon" />
+				<textbox id="sbTradePath" readonly="true" flex="1" />
 				<button label="&sb.button.browse;..." oncommand="sbTrader.selectPath();" />
-				<button label="&sb.button.show;"      oncommand="sbTrader.showFolder();" />
+				<button label="&sb.button.show;"      oncommand="sbController.launch(sbTrader.rightDir);" />
 			</toolbar>
 			<!--tree-->
-			<tree id="ScrapBookTradeTree"
+			<tree id="sbTradeTree"
 			      seltype="multiple"
-			      contextmenu="ScrapBookTradeTreePopup"
+			      contextmenu="sbTradeTreePopup"
 			      ondblclick="sbTrader.onDblClick(event);"
 			      onkeypress="sbTrader.onKeyPress(event);"
 			      onfocus="sbTrader.context = 'import';"
@@ -110,25 +110,34 @@
 				</treecols>
 				<treechildren flex="1" />
 			</tree>
-			<toolbar id="ScrapBookTradeController" class="plain" style="padding-top:2px;">
-				<button label="&sb.trade.export;" oncommand="sbExportService.exec();"        image="chrome://scrapbook/skin/expander.png" />
-				<button label="&sb.trade.import;" oncommand="sbImportService.exec(-128,-1);" image="chrome://scrapbook/skin/expander_left.png" />
-				<checkbox id="ScrapBookTradeRestore" label="&sb.trade.restore;" checked="true" />
+			<toolbar id="sbTradeToolbar" class="plain" style="padding-top:2px;">
+				<hbox align="center">
+					<button id="sbTradeExportButton" label="&sb.trade.export;" oncommand="sbExportService.exec();"        image="chrome://scrapbook/skin/expander.png" />
+					<button id="sbTradeImportButton" label="&sb.trade.import;" oncommand="sbImportService.exec(-128,-1);" image="chrome://scrapbook/skin/expander_left.png" />
+				</hbox>
+				<vbox>
+					<checkbox id="sbTradeOptionRestore" label="&sb.trade.restore;" checked="true" />
+					<checkbox id="sbTradeOptionRemove"  label="&sb.trade.remove; " checked="false" persist="checked" />
+				</vbox>
 			</toolbar>
 		</vbox>
 
 	</hbox>
 
-	<splitter />
+	<splitter id="sbTradeSplitter" />
 
-	<listbox id="ScrapBookTradeLog" class="plain" />
+	<listbox id="sbTradeLog" class="plain" />
 
-	<statusbar id="ScrapBookStatusBar" align="center" style="padding-left:2px;">
-		<hbox align="center" flex="1" id="ScrapBookStatusBox">
-			<image id="ScrapBookStatusImage" />
-			<label id="ScrapBookStatusLabel" crop="end" flex="1" value="" />
+	<statusbar id="sbStatus">
+		<hbox align="center" flex="1" id="sbStatusBox">
+			<image id="sbStatusImage" />
+			<label id="sbStatusLabel" crop="end" flex="1" value="" />
 		</hbox>
-		<progressmeter id="ScrapBookTradeProgress" mode="determined" value="0" width="160" hidden="true" />
+		<progressmeter id="sbTradeProgress" mode="determined" value="0" width="160" hidden="true" />
 	</statusbar>
+
+	<vbox id="sbStatus2" hidden="true">
+		<textbox id="sbStatus2Label" flex="1" readonly="true" width="250" />
+	</vbox>
 
 </window>

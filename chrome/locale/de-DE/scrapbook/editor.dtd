@@ -4,11 +4,9 @@
 <!ENTITY sb.editor.restore "Alle Änderungen rückgängig machen">
 <!ENTITY sb.editor.save "Änderungen speichern">
 <!ENTITY sb.editor.comment "Beschreibungsfeld vergrößern">
-<!ENTITY sb.editor.block "Kommentarblock">
-<!ENTITY sb.editor.block.insert "&sb.editor.block; nach der Auswahl einfügen">
-<!ENTITY sb.editor.block.hide "Kommentarblöcke verstecken">
-<!ENTITY sb.editor.inline.add "Zeilenkommentar für Auswahl anlegen">
-<!ENTITY sb.editor.inline.delete "Alle Zeilenkommentare entfernen">
+<!ENTITY sb.editor.sticky "Sticky Annotation">
+<!ENTITY sb.editor.sticky.create "Create &sb.editor.sticky;">
+<!ENTITY sb.editor.inline.add "Add Inline Annotation to Selection">
 <!ENTITY sb.editor.attach.file "Auswahl mit Datei verknüpfen">
 <!ENTITY sb.editor.attach.link "Auswahl mit Link verknüpfen">
 <!ENTITY sb.editor.cutter "Ausgewählten Bereich entfernen">
@@ -19,8 +17,9 @@
 <!ENTITY sb.highlighter.remove.all "Alle Hervorhebungen entfernen">
 <!ENTITY sb.customize "Anpassen">
 <!ENTITY sb.infobar.openSource "Ursprungs-URL öffnen">
-<!ENTITY sb.infobar.showSitemap "Show &sb.infobar.sitemap;">
+<!ENTITY sb.infobar.renew "Erneut archivieren">
+<!ENTITY sb.infobar.showIndicators "Show Link Indicators">
 <!ENTITY sb.infobar.showInfobar "Show Info Toolbar">
 <!ENTITY sb.infobar.home "Startseite">
-<!ENTITY sb.infobar.sitemap "Sitemap">
+<!ENTITY sb.infobar.sitemap "SiteMap">
 <!ENTITY sb.locate "Mit Ordnerliste in der Sidebar synchronisieren">

@@ -2,15 +2,31 @@
 <!ENTITY sb.open.tab "Obre en una pestanya">
 <!ENTITY sb.open.newtab "Obre en una pestanya nova">
 <!ENTITY sb.open.source "Obre l'URL font">
+<!ENTITY sb.tools "Eines">
 <!ENTITY sb.show.files "Mostra els fitxers">
-<!ENTITY sb.delete "Suprimeix">
+<!ENTITY sb.move "Mou a la carpeta">
+<!ENTITY sb.renew "Capture Again">
+<!ENTITY sb.export "Exporta">
+<!ENTITY sb.remove "Suprimeix">
 <!ENTITY sb.property "Propietats">
+<!ENTITY sb.listview "List View">
+<!ENTITY sb.prop.title "Títol">
+<!ENTITY sb.prop.comment "Comentari">
+<!ENTITY sb.prop.id.date "ID (Data i hora)">
 <!ENTITY sb.folder.toggle "Expandeix/Redueix">
+<!ENTITY sb.folder.combine "Visualització combinada">
 <!ENTITY sb.folder.openall "Obre'ls tots en pestanyes">
-<!ENTITY sb.folder.combine "Obre'ls en una visualització combinada">
 <!ENTITY sb.folder.manage "Gestiona la carpeta...">
 <!ENTITY sb.new.folder "Nova carpeta...">
 <!ENTITY sb.new.note "Nova nota">
 <!ENTITY sb.sort.folder "Ordena la carpeta">
+<!ENTITY sb.search "Cerca">
+<!ENTITY sb.search.fulltext "Cerca a tot el text">
+<!ENTITY sb.search.all "Totes">
+<!ENTITY sb.search.re "Utilitza expressions regulars">
+<!ENTITY sb.search.cs "Distingeix entre majúscules i minúscules">
+<!ENTITY sb.search.cache "Actualitza la memòria cau per a la cerca a tot el text">
+<!ENTITY sb.search.clear "Buida l'historial de formularis">
+<!ENTITY sb.search.days "Filtra per dies">
 <!ENTITY mb.configure "Configure">
 <!ENTITY mb.profileFolder "Profile Folder">

@@ -4,11 +4,9 @@
 <!ENTITY sb.editor.restore "Hylkää muutokset ja palauta">
 <!ENTITY sb.editor.save "Tallenna muutokset">
 <!ENTITY sb.editor.comment "Laajenna kommenttialuetta">
-<!ENTITY sb.editor.block "Lohkokommentti">
-<!ENTITY sb.editor.block.insert "Lisää &sb.editor.block; valinnan jälkeen">
-<!ENTITY sb.editor.block.hide "Piilota lohkokommentit">
-<!ENTITY sb.editor.inline.add "Lisää sivukommentti valintaan">
-<!ENTITY sb.editor.inline.delete "Poista kaikki sivukommentit">
+<!ENTITY sb.editor.sticky "muistilappu">
+<!ENTITY sb.editor.sticky.create "Luo &sb.editor.sticky;">
+<!ENTITY sb.editor.inline.add "Lisää valinnan tekstiin huomautus">
 <!ENTITY sb.editor.attach.file "Liitä tiedosto valintaan">
 <!ENTITY sb.editor.attach.link "Liitä linkki valintaan">
 <!ENTITY sb.editor.cutter "Poista valinta">
@@ -19,8 +17,9 @@
 <!ENTITY sb.highlighter.remove.all "Poista kaikki korostukset">
 <!ENTITY sb.customize "Muokkaa">
 <!ENTITY sb.infobar.openSource "Avaa lähde-URL">
-<!ENTITY sb.infobar.showSitemap "Show &sb.infobar.sitemap;">
-<!ENTITY sb.infobar.showInfobar "Show Info Toolbar">
+<!ENTITY sb.infobar.renew "Kaappaa uudestaan">
+<!ENTITY sb.infobar.showIndicators "Näytä linkkitunnukset">
+<!ENTITY sb.infobar.showInfobar "Näytä tietopalkki">
 <!ENTITY sb.infobar.home "Etusivu">
 <!ENTITY sb.infobar.sitemap "Sivustokartta">
 <!ENTITY sb.locate "Synkronoi sivupaneelin sivupuun kanssa">

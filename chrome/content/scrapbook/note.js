@@ -1,34 +1,35 @@
 
-var snGlobal  ={
+var sbNoteService2  ={
 
 	fontSize : 16,
+	enabledHTMLView : false,
 
 	init : function()
 	{
 		window.location.href.match(/\?id\=(\d{14})$/);
 		var id = RegExp.$1;
-		SBnote.sidebar = false;
+		sbNoteService.sidebarContext = false;
 		sbDataSource.init();
-		SBnote.edit(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id));
-		snTemplate.init();
+		sbNoteService.edit(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id));
+		sbNoteTemplate.init();
 		this.initFontSize();
 		if ( nsPreferences.getBoolPref("scrapbook.note.linefeed", true) )
 		{
-			document.getElementById("ScrapNoteToolbarL").setAttribute("checked", true);
+			document.getElementById("sbNoteToolbarL").setAttribute("checked", true);
 		}
-		if ( nsPreferences.getBoolPref("scrapbook.note.preview", false) ) snPreview.show();
+		if ( nsPreferences.getBoolPref("scrapbook.note.preview", false) ) this.initHTMLView();
 	},
 
 	refresh : function()
 	{
 		var icon = sbCommonUtils.getDefaultIcon("note");
-		document.getElementById("ScrapNoteImage").setAttribute("src", icon);
-		if ( !document.getElementById("ScrapNoteBrowser").hidden ) snPreview.show();
+		document.getElementById("sbNoteImage").setAttribute("src", icon);
+		if ( !document.getElementById("sbNoteBrowser").hidden ) this.initHTMLView();
 		var browser = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser").getBrowser();
 		try {
-			if ( browser.selectedBrowser.contentWindow.SBnote.curRes.Value == SBnote.curRes.Value )
+			if ( browser.selectedBrowser.contentWindow.sbNoteService.resource.Value == sbNoteService.resource.Value )
 			{
-				browser.selectedTab.label = sbDataSource.getProperty("title", SBnote.curRes);
+				browser.selectedTab.label = sbDataSource.getProperty(sbNoteService.resource, "title");
 				browser.selectedTab.setAttribute("image", icon);
 			}
 		} catch(ex) {
@@ -38,10 +39,10 @@ var snGlobal  ={
 	finalize : function(exit)
 	{
 		window.onunload = "";
-		SBnote.save(window);
-		nsPreferences.setBoolPref("scrapbook.note.preview",  snPreview.state);
+		sbNoteService.save(window);
+		nsPreferences.setBoolPref("scrapbook.note.preview",  this.enabledHTMLView);
 		nsPreferences.setIntPref("scrapbook.note.fontsize",  this.fontSize);
-		nsPreferences.setBoolPref("scrapbook.note.linefeed", document.getElementById("ScrapNoteToolbarL").getAttribute("checked") ? true : false);
+		nsPreferences.setBoolPref("scrapbook.note.linefeed", document.getElementById("sbNoteToolbarL").getAttribute("checked") ? true : false);
 		if ( exit ) window.location.href = "about:blank";
 	},
 
@@ -49,70 +50,63 @@ var snGlobal  ={
 	{
 		this.fontSize = nsPreferences.getIntPref("scrapbook.note.fontsize", 16);
 		this.changeFontSize(this.fontSize);
-		document.getElementById("ScrapNoteToolbarF" + this.fontSize).setAttribute("checked", true)
+		document.getElementById("sbNoteToolbarF" + this.fontSize).setAttribute("checked", true)
 	},
 
 	changeFontSize : function(aPixel)
 	{
 		this.fontSize = aPixel;
 		var newStyle = "font-size: " + aPixel + "px; font-family: monospace;";
-		SBnote.TEXTBOX.setAttribute("style", newStyle);
-		snTemplate.TEXTBOX.setAttribute("style", newStyle);
+		sbNoteService.TEXTBOX.setAttribute("style", newStyle);
+		sbNoteTemplate.TEXTBOX.setAttribute("style", newStyle);
 	},
 
-};
 
-
-var snPreview = {
-
-	state : false,
-
-	show : function()
+	initHTMLView : function()
 	{
-		SBnote.save();
-		snTemplate.save();
-		var source = snTemplate.getTemplate();
-		if ( SBnote.TEXTBOX.value.match(/\n/) ) {
+		sbNoteService.save();
+		sbNoteTemplate.save();
+		var source = sbNoteTemplate.getTemplate();
+		if ( sbNoteService.TEXTBOX.value.match(/\n/) ) {
 			var title   = RegExp.leftContext;
 			var content = RegExp.rightContext;
 		} else {
-			var title   = SBnote.TEXTBOX.value;
+			var title   = sbNoteService.TEXTBOX.value;
 			var content = "";
 		}
 		title = title.replace(/</g, "&lt;");
 		title = title.replace(/>/g, "&gt;");
 		title = title.replace(/\"/g, "&quot;");
-		if ( document.getElementById("ScrapNoteToolbarL").getAttribute("checked") ) content = content.replace(/([^>])$/mg, "$1<br>");
+		if ( document.getElementById("sbNoteToolbarL").getAttribute("checked") ) content = content.replace(/([^>])$/mg, "$1<br>");
 		source = source.replace(/<%NOTE_TITLE%>/g,   title);
 		source = source.replace(/<%NOTE_CONTENT%>/g, content);
 		var htmlFile = sbCommonUtils.getScrapBookDir().clone();
 		htmlFile.append("note.html");
 		sbCommonUtils.writeFile(htmlFile, source, "UTF-8");
-		this.toggle(true);
-		document.getElementById("ScrapNoteBrowser").removeAttribute("src");
-		document.getElementById("ScrapNoteBrowser").setAttribute("src", sbCommonUtils.convertFilePathToURL(htmlFile.path));
-		this.state = true;
+		this.toggleHTMLView(true);
+		document.getElementById("sbNoteBrowser").loadURI(sbCommonUtils.convertFilePathToURL(htmlFile.path));
+		this.enabledHTMLView = true;
 	},
 
-	toggle : function(toShow)
+	toggleHTMLView : function(willShow)
 	{
-		document.getElementById("ScrapNoteSplitter").hidden = !toShow;
-		document.getElementById("ScrapNoteBrowser").hidden  = !toShow;
-		document.getElementById("ScrapNoteHeader").lastChild.hidden = !toShow;
-		document.getElementById("ScrapNoteToolbarQ").disabled = !toShow;
-		this.state = toShow;
+		document.getElementById("sbSplitter").hidden = !willShow;
+		document.getElementById("sbNoteBrowser").hidden  = !willShow;
+		document.getElementById("sbNoteHeader").lastChild.hidden = !willShow;
+		document.getElementById("sbNoteToolbarN").disabled = !willShow;
+		this.enabledHTMLView = willShow;
 	},
 
 };
 
 
-var snTemplate = {
+var sbNoteTemplate = {
 
-	get TEXTBOX() { return document.getElementById("ScrapNoteTemplateTextbox"); },
+	get TEXTBOX() { return document.getElementById("sbNoteTemplateTextbox"); },
 
-	enable : false,
-	toSave : false,
-	file   : null,
+	enabled    : false,
+	shouldSave : false,
+	file       : null,
 
 	init : function()
 	{
@@ -123,9 +117,9 @@ var snTemplate = {
 
 	show : function(willShow)
 	{
-		document.getElementById("ScrapNoteTemplate").hidden = !willShow;
-		document.getElementById("ScrapNoteEditor").hidden   = willShow;
-		this.enable = willShow;
+		document.getElementById("sbNoteTemplate").hidden = !willShow;
+		document.getElementById("sbNoteEditor").hidden   = willShow;
+		this.enabled = willShow;
 	},
 
 	getTemplate : function()
@@ -145,7 +139,7 @@ var snTemplate = {
 
 	save : function()
 	{
-		if ( !this.toSave ) return;
+		if ( !this.shouldSave ) return;
 		var myCSS = sbCommonUtils.getScrapBookDir().clone();
 		myCSS.append("note_template.html");
 		sbCommonUtils.writeFile(myCSS, this.TEXTBOX.value, "UTF-8");
@@ -156,13 +150,13 @@ var snTemplate = {
 	{
 		this.save();
 		this.show(false);
-		if ( checkOff ) document.getElementById("ScrapNoteToolbarT").setAttribute("checked", false);
+		if ( checkOff ) document.getElementById("sbNoteToolbarT").setAttribute("checked", false);
 	},
 
 	change : function(bool)
 	{
-		this.toSave = bool;
-		document.getElementById("ScrapNoteToolbarS").disabled = !bool;
+		this.shouldSave = bool;
+		document.getElementById("sbNoteToolbarS").disabled = !bool;
 	},
 
 };

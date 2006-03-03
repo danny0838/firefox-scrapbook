@@ -5,131 +5,158 @@
 <?xml-stylesheet href="chrome://scrapbook/skin/setting.css" type="text/css" ?>
 
 <!--locale-->
-<!DOCTYPE dialog [
-<!ENTITY % settingDTD   SYSTEM "chrome://scrapbook/locale/setting.dtd" >
-%settingDTD;
-<!ENTITY % scrapbookDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
-%scrapbookDTD;
-<!ENTITY % treeDTD      SYSTEM "chrome://scrapbook/locale/tree.dtd" >
+<!DOCTYPE prefwindow [
+<!ENTITY % mainDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+%mainDTD;
+<!ENTITY % treeDTD SYSTEM "chrome://scrapbook/locale/tree.dtd" >
 %treeDTD;
-<!ENTITY % editorDTD    SYSTEM "chrome://scrapbook/locale/editor.dtd" >
-%editorDTD;
+<!ENTITY % prefDTD SYSTEM "chrome://scrapbook/locale/setting.dtd" >
+%prefDTD;
+<!ENTITY % editDTD SYSTEM "chrome://scrapbook/locale/editor.dtd" >
+%editDTD;
 ]>
 
-<!--dialog-->
-<dialog id="ScrapBookSettingDialog"
-        title="&sb.setting; - &sb.title;"
-        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        onload="sbPrefService.init();"
-        ondialogaccept="sbPrefService.accept();"
-        style="width:500px;"
-        persist="screenX screenY">
+<prefwindow id="sbPrefWindow"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+	title="&sb.tools.settings; - ScrapBook"
+	dlgbuttons="accept,cancel,help"
+	onload="sbPrefService.init();"
+	onunload="sbPrefService.done();">
 
-	<!--JavaScript-->
-	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/setting.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/highlighter.js" />
+	<prefpane id="sbPrefPane" flex="1">
 
-	<!--dialogheader-->
-	<dialogheader title="&sb.title; &sb.setting;" />
-
-	<tabbox flex="1">
-		<tabs id="sbPrefTabs" orient="horizontal" onselect="if ( this.selectedIndex == 3 ) hlPrefService.init();">
-			<tab label="&sb.setting.general;" />
-			<tab label="&sb.setting.usetabs;" />
-			<tab label="&sb.setting.capture;" />
-			<tab label="&sb.setting.editing;" />
-			<tab label="&sb.setting.advance;" />
-		</tabs>
-		<tabpanels id="sbPrefTabPanels" flex="1">
-
-			<!--general-->
-			<tabpanel orient="vertical" flex="1">
-				<checkbox id="sbPrefCaptureDetail"    prefstring="scrapbook.capture.detail"    label="&sb.setting.capture.detail;" />
-				<checkbox id="sbPrefCaptureNotify"    prefstring="scrapbook.capture.notify"    label="&sb.setting.capture.notify;" />
-				<checkbox id="sbPrefTreeSingleExpand" prefstring="scrapbook.tree.singleexpand" label="&sb.setting.tree.singleexpand;" />
-				<checkbox id="sbPrefTreeQuickDelete"  prefstring="scrapbook.tree.quickdelete"  label="&sb.setting.tree.quickdelete;" />
-				<checkbox id="sbPrefBrowserSubmenu"   prefstring="scrapbook.browser.submenu"   label="&sb.setting.browser.submenu;" />
-			</tabpanel>
-
-			<!--usetabs-->
-			<tabpanel orient="vertical" flex="1">
-				<description value="&sb.setting.usetabs.d;" style="margin-bottom:15px;" />
-				<checkbox id="sbPrefUseTabOpen"    prefstring="scrapbook.usetab.open"    label="&sb.open;" />
-				<checkbox id="sbPrefUseTabSource"  prefstring="scrapbook.usetab.source"  label="&sb.open.source;" />
-				<checkbox id="sbPrefUseTabCombine" prefstring="scrapbook.usetab.combine" label="&sb.folder.combine;" />
-				<checkbox id="sbPrefUseTabSearch"  prefstring="scrapbook.usetab.search"  label="&sb.search.fulltext;" />
-				<checkbox id="sbPrefUseTabOutput"  prefstring="scrapbook.usetab.output"  label="&sb.tools.output;" />
-				<separator class="groove" />
-				<checkbox id="sbPrefUseTabNote"    prefstring="scrapbook.usetab.note"    label="&sb.setting.usetabs.note;" />
-				<spacer height="60" />
-			</tabpanel>
-
+		<!--preferences-->
+		<preferences onchange="sbPrefService.changed = true;">
+			<preference id="scrapbook.browser.menubar"		name="scrapbook.browser.menubar"	type="bool" />
+			<preference id="scrapbook.browser.bookmark"		name="scrapbook.browser.bookmark"	type="bool" />
+			<preference id="scrapbook.browser.submenu"		name="scrapbook.browser.submenu"	type="bool" />
+			<preference id="scrapbook.showDetailOnDrop"		name="scrapbook.showDetailOnDrop"	type="bool" />
+			<preference id="scrapbook.notifyOnComplete"		name="scrapbook.notifyOnComplete"	type="bool" />
+			<preference id="scrapbook.confirmDelete"		name="scrapbook.confirmDelete"		type="bool" />
+			<preference id="scrapbook.tree.autoCollapse"	name="scrapbook.tree.autoCollapse"	type="bool" />
+			<preference id="scrapbook.tree.unshift"			name="scrapbook.tree.unshift"		type="bool" />
+			<!--tabs-->
+			<preference id="scrapbook.tabs.open"			name="scrapbook.tabs.open"			type="bool" />
+			<preference id="scrapbook.tabs.openSource"		name="scrapbook.tabs.openSource"	type="bool" />
+			<preference id="scrapbook.tabs.combinedView"	name="scrapbook.tabs.combinedView"	type="bool" />
+			<preference id="scrapbook.tabs.searchResult"	name="scrapbook.tabs.searchResult"	type="bool" />
+			<preference id="scrapbook.tabs.note"			name="scrapbook.tabs.note"			type="bool" />
+			<preference id="scrapbook.tabs.openFromMenu"	name="scrapbook.tabs.openFromMenu"	type="bool" />
 			<!--capture-->
-			<tabpanel orient="vertical" flex="1">
-				<checkbox id="sbPrefCaptureUTF8Encode"   prefstring="scrapbook.capture.utf8encode"   label="&sb.setting.capture.utf8encode;" />
-				<description class="indent">&sb.setting.capture.utf8encode.d;</description>
-				<checkbox id="sbPrefCaptureRemoveScript" prefstring="scrapbook.capture.removescript" label="&sb.setting.capture.removescript;" />
-				<description class="indent" style="color:red;">&sb.setting.capture.removescript.d;</description>
-			</tabpanel>
+			<preference id="scrapbook.capture.encodeUTF8"	name="scrapbook.capture.encodeUTF8"	type="bool" />
+			<!--advance-->
+			<preference id="scrapbook.data.default"			name="scrapbook.data.default"		type="bool" />
+			<preference id="scrapbook.data.path"			name="scrapbook.data.path"			type="unichar" />
+			<preference id="scrapbook.multibook.enabled"	name="scrapbook.multibook.enabled"	type="bool" />
+			<preference id="scrapbook.fileViewer.default"	name="scrapbook.fileViewer.default"	type="bool" />
+			<preference id="scrapbook.fileViewer.path"		name="scrapbook.fileViewer.path"	type="unichar" />
+		</preferences>
 
-			<!--editing-->
-			<tabpanel orient="vertical" flex="1">
-				<groupbox>
-					<caption label="&sb.highlighter;" />
-					<hbox id="hlPrefBox" align="center" hidden="true">
-						<label value="&sb.highlighter;" />
-						<label value="Firefox, rediscover the web" />
-						<spacer flex="1" />
-						<button label="&sb.customize;..." color="0" oncommand="hlPrefService.openDialog(this.getAttribute('color'));" />
-					</hbox>
-					<description flex="1" style="margin-top: 10px;">&sb.highlighter.tips;</description>
-				</groupbox>
-				<spacer height="10" />
-				<groupbox>
-					<caption label="&sb.editor.block;" />
-					<hbox align="center">
-						<label value="&sb.setting.block.style; (block.css):" />
-						<spacer flex="1" />
-						<button label="&sb.customize;..." oncommand="hlPrefService.customizeBlockStyle();" />
-					</hbox>
-				</groupbox>
-			</tabpanel>
+		<!--script-->
+		<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js" />
+		<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+		<script type="application/x-javascript" src="chrome://scrapbook/content/setting.js" />
+		<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
+		<script type="application/x-javascript" src="chrome://scrapbook/content/highlighter.js" />
+		<script type="application/x-javascript" src="chrome://scrapbook/content/mbService.js" />
 
-			<!--advanced-->
-			<tabpanel orient="vertical" flex="1">
-				<!--data-->
-				<groupbox>
-					<caption label="&sb.setting.data;" />
-					<vbox>
-						<checkbox id="sbPrefDataCheckbox" label="&sb.setting.data.default;" checked="true" oncommand="sbPrefService.toggleDefaultData();sbPrefService.shouldRefresh = true;" />
-						<hbox align="center" class="indent">
-							<textbox id="sbPrefDataTextbox" disabled="true" flex="1" onfocus="blur();" />
-							<button  id="sbPrefDataButton"  disabled="true" label="&sb.button.browse;..." oncommand="sbPrefService.selectData();" />
-							<!--<button  id="sbPrefDataButton2" label="&sb.button.show;" oncommand="sbCommonUtils.launchDirectory(sbCommonUtils.getScrapBookDir());" />-->
+		<!--string-->
+		<stringbundle id="sbMainString" src="chrome://scrapbook/locale/scrapbook.properties" />
+
+		<dialogheader title="ScrapBook &sb.tools.settings;" />
+
+		<tabbox flex="1">
+			<tabs id="sbPrefTabs" orient="horizontal" onselect="if ( this.selectedIndex == 3 ) hlPrefService.init();">
+				<tab label="&sb.pref.general;" />
+				<tab label="&sb.pref.tabs;" />
+				<tab label="&sb.pref.capture;" />
+				<tab label="&sb.pref.edit;" />
+				<tab label="&sb.pref.advanced;" />
+			</tabs>
+			<tabpanels id="sbPrefTabPanels" flex="1">
+
+				<!--general-->
+				<tabpanel orient="vertical" flex="1">
+					<checkbox id="sbPrefBrowserMenubar"   preference="scrapbook.browser.menubar"   label="&sb.pref.browser.menubar;" />
+					<checkbox id="sbPrefBrowserBookmark"  preference="scrapbook.browser.bookmark"  label="&sb.pref.browser.bookmark;" />
+					<checkbox id="sbPrefBrowserSubmenu"   preference="scrapbook.browser.submenu"   label="&sb.pref.browser.submenu;" />
+					<checkbox id="sbPrefShowDetailOnDrop" preference="scrapbook.showDetailOnDrop"  label="&sb.pref.showDetailOnDrop;" />
+					<checkbox id="sbPrefNotifyOnComplete" preference="scrapbook.notifyOnComplete"  label="&sb.pref.notifyOnComplete;" />
+					<checkbox id="sbPrefAutoCollapse"     preference="scrapbook.tree.autoCollapse" label="&sb.pref.tree.autoCollapse;" />
+					<checkbox id="sbPrefConfirmDelete"    preference="scrapbook.confirmDelete"     label="&sb.pref.confirmDelete;" />
+					<separator class="groove" />
+					<description>&sb.pref.tree.unshift;</description>
+					<radiogroup preference="scrapbook.tree.unshift" orient="horizontal" align="center">
+						<radio value="true"  label="&sb.pref.tree.unshift.top;" />
+						<radio value="false" label="&sb.pref.tree.unshift.bottom;" />
+					</radiogroup>
+				</tabpanel>
+
+				<!--tabs-->
+				<tabpanel orient="vertical" flex="1">
+					<description value="&sb.pref.tabs.tips;" />
+					<checkbox id="sbPrefTabsOpen"         preference="scrapbook.tabs.open"         label="&sb.open;" />
+					<checkbox id="sbPrefTabsOpenSource"   preference="scrapbook.tabs.openSource"   label="&sb.open.source;" />
+					<checkbox id="sbPrefTabsCombinedView" preference="scrapbook.tabs.combinedView" label="&sb.folder.combine;" />
+					<checkbox id="sbPrefTabsSearchResult" preference="scrapbook.tabs.searchResult" label="&sb.search.fulltext;" />
+					<separator class="groove" />
+					<checkbox id="sbPrefTabsNote"         preference="scrapbook.tabs.note"         label="&sb.pref.tabs.note;" />
+					<checkbox id="sbPrefTabsOpenFromMenu" preference="scrapbook.tabs.openFromMenu" label="&sb.pref.tabs.openFromMenu;" />
+				</tabpanel>
+
+				<!--capture-->
+				<tabpanel orient="vertical" flex="1">
+					<checkbox id="sbPrefCaptureEncodeUTF8" preference="scrapbook.capture.encodeUTF8" label="&sb.pref.capture.encodeUTF8;" />
+					<description class="indent">&sb.pref.capture.encodeUTF8.tips;</description>
+				</tabpanel>
+
+				<!--edit-->
+				<tabpanel orient="vertical" flex="1">
+					<groupbox>
+						<caption label="&sb.highlighter;" />
+						<hbox id="hlPrefBox" align="center" hidden="true">
+							<label value="&sb.highlighter;" />
+							<label value="Firefox, rediscover the web" />
+							<spacer flex="1" />
+							<button label="&sb.customize;..." color="0" oncommand="hlPrefService.openDialog(this.getAttribute('color'));" />
 						</hbox>
-					</vbox>
-					<description id="sbPrefDataExplain" hidden="true" value="&sb.setting.data.explain;" />
-					<description id="sbPrefDataAlert"   hidden="true" style="color: #FF0000;">&sb.setting.data.alert;</description>
-					<checkbox id="sbPrefMultiBookEnabled" prefstring="scrapbook.multibook.enabled" label="&sb.setting.multibook.enabled;" oncommand="sbPrefService.toggleDefaultData();" />
-					<description class="indent">&sb.setting.multibook.description;</description>
-				</groupbox>
-				<!--filer-->
-				<groupbox>
-					<caption id="sbPrefFilerCaption" label="&sb.setting.filer;" />
-					<vbox>
-						<checkbox id="sbPrefFilerCheckbox" label="&sb.setting.filer.default;" checked="true" oncommand="sbPrefService.toggleDefaultFiler();" />
-						<hbox align="center" class="indent">
-							<textbox id="sbPrefFilerTextbox" disabled="true" flex="1" style="" />
-							<button  id="sbPrefFilerButton"  disabled="true" label="&sb.button.browse;..." oncommand="sbPrefService.selectFiler();" />
-						</hbox>
-					</vbox>
-				</groupbox>
-			</tabpanel>
+					</groupbox>
+					<description style="margin-top:10px;">&sb.tips.highlighter;</description>
+					<description style="margin-top:10px;">&sb.tips.eraser;</description>
+				</tabpanel>
 
-		</tabpanels>
-	</tabbox>
+				<!--advanced-->
+				<tabpanel orient="vertical" flex="1">
+					<!--data-->
+					<groupbox id="sbPrefDataGroupbox" style="margin-bottom:12px;">
+						<caption label="&sb.pref.data;" />
+						<vbox>
+							<checkbox id="sbPrefDataDefault" preference="scrapbook.data.default" label="&sb.pref.data.default;" oncommand="sbPrefService.toggleDefaultData();" />
+							<hbox align="center" class="indent">
+								<textbox id="sbPrefDataPath" preference="scrapbook.data.path" flex="1" onfocus="blur();" />
+								<button  id="sbPrefDataButton" label="&sb.button.browse;..." tooltiptext="&sb.pref.data.tips;" oncommand="sbPrefService.selectData();" />
+							</hbox>
+						</vbox>
+						<description id="sbPrefDataAlert" class="notice" hidden="true">&sb.pref.data.alert;</description>
+						<checkbox id="sbPrefMultiBookEnabled" preference="scrapbook.multibook.enabled" label="&sb.pref.multibook.enabled;" oncommand="sbPrefService.toggleDefaultData();" />
+						<description class="indent">&sb.pref.multibook.tips;</description>
+					</groupbox>
+					<!--fileViewer-->
+					<groupbox>
+						<caption id="sbPrefFileViewerCaption" label="&sb.pref.fileViewer;" />
+						<vbox>
+							<checkbox id="sbPrefFileViewerDefault" preference="scrapbook.fileViewer.default" label="&sb.pref.fileViewer.default;" oncommand="sbPrefService.toggleDefaultFileViewer();" />
+							<hbox align="center" class="indent">
+								<textbox id="sbPrefFileViewerPath" preference="scrapbook.fileViewer.path" flex="1" />
+								<button  id="sbPrefFileViewerButton" label="&sb.button.browse;..." oncommand="sbPrefService.selectFileViewer();" />
+							</hbox>
+						</vbox>
+					</groupbox>
+				</tabpanel>
 
-</dialog>
+			</tabpanels>
+		</tabbox>
+
+	</prefpane>
+
+</prefwindow>

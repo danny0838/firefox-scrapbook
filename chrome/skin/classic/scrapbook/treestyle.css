@@ -11,11 +11,11 @@ body {
 /* ::::: header ::::: */
 
 div#header {
-	padding: 3px 10px;
-	border-bottom: 1px solid #0FA9E5;
-	background-color: #E7F4FC;
-	font-size: x-small;
-	font-family: Verdana,Arial,Helvetica,sans-serif;
+	padding: 2px 8px;
+	border: 1px solid ThreeDShadow;
+	background-color: InfoBackground;
+	font-family:"MS UI Gothic", sans-serif;
+	font-size:9pt;
 }
 
 div#header a {
@@ -23,7 +23,7 @@ div#header a {
 }
 
 div#header a:before {
-	content: url('./togglefolder.png');
+	content: url('./toggle.png');
 	vertical-align: middle;
 }
 

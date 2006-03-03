@@ -14,7 +14,7 @@
         ondialogaccept="sbMultiBookProp.done();"
         style="width:400px;">
 
-	<!--JavaScript-->
+	<!--script-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/mbProperty.js" />
 
 	<grid flex="1">

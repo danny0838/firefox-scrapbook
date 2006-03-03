@@ -1,11 +1,11 @@
-<!ENTITY sn.save "Opslaan">
-<!ENTITY sn.close "Sluiten">
-<!ENTITY sn.tools "Opties">
-<!ENTITY sn.preview "HTML-voorbeeld">
-<!ENTITY sn.preview.quit "Voorbeeld sluiten">
-<!ENTITY sn.template "HTML-sjabloon bewerken">
-<!ENTITY sn.autolinefeed "Automatisch een regel naar beneden">
-<!ENTITY sn.autolinefeed.t "&lt;br&gt; tekstopmaakcode toevoegen aan regeleinde van het HTML-voorbeeld">
-<!ENTITY sn.fontsize "Lettergrootte">
-<!ENTITY sn.help "Help">
-<!ENTITY sn.exit "Afsluiten">
+<!ENTITY sb.note.save "Opslaan">
+<!ENTITY sb.note.close "Sluiten">
+<!ENTITY sb.note.tools "Opties">
+<!ENTITY sb.note.htmlview "HTML-voorbeeld">
+<!ENTITY sb.note.normalview "Normal View">
+<!ENTITY sb.note.template "HTML-sjabloon bewerken">
+<!ENTITY sb.note.autolinefeed "Automatisch een regel naar beneden">
+<!ENTITY sb.note.autolinefeed.t "&lt;br&gt; tekstopmaakcode toevoegen aan regeleinde van het HTML-voorbeeld">
+<!ENTITY sb.note.fontsize "Lettergrootte">
+<!ENTITY sb.note.help "Help">
+<!ENTITY sb.note.exit "Afsluiten">

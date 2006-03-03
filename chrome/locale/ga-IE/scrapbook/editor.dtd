@@ -4,11 +4,9 @@
 <!ENTITY sb.editor.restore "Tr&#233;ig Aistri&#250;ch&#225;in agus Athch&#243;irigh">
 <!ENTITY sb.editor.save "Sabh&#225;il Aistri&#250;ch&#225;in">
 <!ENTITY sb.editor.comment "Fairsingigh Ceantar L&#233;irithe">
-<!ENTITY sb.editor.block "Bloc L&#233;iri&#250;">
-<!ENTITY sb.editor.block.insert "Cuir &sb.editor.block; isteach tar eis an Roghn&#250;">
-<!ENTITY sb.editor.block.hide "Folaigh Bloic L&#233;irithe">
-<!ENTITY sb.editor.inline.add "Cuir L&#233;iri&#250; Inl&#237;ne isteach don Roghn&#250;">
-<!ENTITY sb.editor.inline.delete "Bain as gach L&#233;iri&#250; Inl&#237;ne">
+<!ENTITY sb.editor.sticky "An&#243;t&#225;l Ceangailteach">
+<!ENTITY sb.editor.sticky.create "Cruthaigh &sb.editor.sticky;">
+<!ENTITY sb.editor.inline.add "Cuir An&#243;t&#225;l Ceangailteach leis an Rogha">
 <!ENTITY sb.editor.attach.file "Ceangail Comhad leis an Roghn&#250;">
 <!ENTITY sb.editor.attach.link "Ceangail Nasc leis an Roghn&#250;">
 <!ENTITY sb.editor.cutter "Bain as an Roghn&#250;">
@@ -19,8 +17,9 @@
 <!ENTITY sb.highlighter.remove.all "Bain as gach Aibhsigh">
 <!ENTITY sb.customize "Saincheap">
 <!ENTITY sb.infobar.openSource "Oscail URL Foinsithe">
-<!ENTITY sb.infobar.showSitemap "Show &sb.infobar.sitemap;">
-<!ENTITY sb.infobar.showInfobar "Show Info Toolbar">
+<!ENTITY sb.infobar.renew "Ath-Ghabh&#225;il">
+<!ENTITY sb.infobar.showIndicators "Taispe&#225;in T&#225;scaire Nascanna">
+<!ENTITY sb.infobar.showInfobar "Taispe&#225;in Barra Uirlis&#237; Eolais">
 <!ENTITY sb.infobar.home "Baile">
 <!ENTITY sb.infobar.sitemap "Mapa-su&#237;omha">
 <!ENTITY sb.locate "Sioncronaigh le Crann an Taobh-bharra">

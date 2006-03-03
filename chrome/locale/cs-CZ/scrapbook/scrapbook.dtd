@@ -1,29 +1,19 @@
-<!ENTITY sb.title "ScrapBook">
 <!ENTITY sb.new.folder "Nová složka...">
 <!ENTITY sb.new.note "Nová poznámka">
 <!ENTITY sb.toggle.all "Rozbalit/Sbalit všechny složky">
 <!ENTITY sb.tools "Nástroje">
-<!ENTITY sb.tools.setting "Nastavení...">
+<!ENTITY sb.tools.settings "Nastavení">
 <!ENTITY sb.tools.manage "Spravovat">
+<!ENTITY sb.tools.combine "Sloučit">
+<!ENTITY sb.tools.trade "Importovat/Exportovat">
+<!ENTITY sb.tools.multiple "Zachytit více URL adres">
+<!ENTITY sb.tools.directory "Adresář ScrapBook">
 <!ENTITY sb.tools.calculate "Kalkulace velikosti">
 <!ENTITY sb.tools.sorttree "Uspořádat veškerý obsah">
-<!ENTITY sb.tools.directory "Adresář ScrapBook">
-<!ENTITY sb.tools.combine "Sloučit">
-<!ENTITY sb.tools.multiple "Zachytit více URL adres">
-<!ENTITY sb.tools.trade "Importovat/Exportovat">
 <!ENTITY sb.tools.output "Exportovat vše jako HTML">
 <!ENTITY sb.tools.backup "Zálohovat s kompresí">
 <!ENTITY sb.tools.repair "Nouzová oprava">
 <!ENTITY sb.tools.homepage "Domovská stránka">
 <!ENTITY sb.tools.about "O rozšíření ScapBook">
-<!ENTITY sb.search "Hledat">
-<!ENTITY sb.search.fulltext "Fulltextové hledání">
-<!ENTITY sb.search.all "Vše">
-<!ENTITY sb.search.re "Použít regulární výrazy">
-<!ENTITY sb.search.cs "Porovnat podle důležitosti">
-<!ENTITY sb.search.cache "Aktualizovat cache pro Fulltextové hledání">
-<!ENTITY sb.search.clear "Vymazat historii formuláře">
-<!ENTITY sb.search.days "Filtr podle Dní">
 <!ENTITY sb.note.opentab "Otevřít v panelu">
 <!ENTITY sb.note.close "Zavřít">
-<!ENTITY sb.move "Přesunout do složky">

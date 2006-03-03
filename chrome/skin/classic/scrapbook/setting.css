@@ -1,4 +1,9 @@
-/* ::::: SETTINGS ::::: */
+/* ::::: SETTING ::::: */
+
+prefwindow {
+	width: 500px;
+	height: 500px;
+}
 
 tab {
 	min-width: 80px;
@@ -21,13 +26,18 @@ tabpanel > checkbox {
 }
 
 groupbox {
-	margin-top:    6px;
-	margin-bottom: 6px;
+	margin-top: 10px;
+	padding-top: 10px;
+	padding-bottom: 10px;
 }
+
+.notice { color: red; }
 
 .indent { margin-left: 30px; }
 
-#sbPrefDataAlert { margin: 10px; }
+#sbPrefDataAlert {
+	margin: 10px 10px 0px 10px;
+}
 
 
 /* ::::: CUSTOMIZE HIGHLIGHTER ::::: */
