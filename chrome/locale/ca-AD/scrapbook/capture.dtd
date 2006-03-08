@@ -1,6 +1,6 @@
 <!ENTITY sb.capture "Captura">
 <!ENTITY sb.capture.abort "Avorta">
-<!ENTITY sb.capture.start "Start">
+<!ENTITY sb.capture.start "Inicia">
 <!ENTITY sb.capture.retry "Reintenta">
 <!ENTITY sb.capture.skip "Omet">
 <!ENTITY sb.capture.pause "Pausa">

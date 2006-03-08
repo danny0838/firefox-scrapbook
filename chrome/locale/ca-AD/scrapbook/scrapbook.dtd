@@ -5,8 +5,8 @@
 <!ENTITY sb.tools.settings "Opcions">
 <!ENTITY sb.tools.manage "Gestiona l'arbre">
 <!ENTITY sb.tools.combine "Uneix">
-<!ENTITY sb.tools.trade "Importa / Exporta">
-<!ENTITY sb.tools.multiple "Captura de múltiples URLs">
+<!ENTITY sb.tools.trade "Importa/Exporta">
+<!ENTITY sb.tools.multiple "Captura de múltiples URL">
 <!ENTITY sb.tools.directory "Carpeta de l'ScrapBook">
 <!ENTITY sb.tools.calculate "Càlcul de la mida">
 <!ENTITY sb.tools.sorttree "Ordena tot l'arbre">

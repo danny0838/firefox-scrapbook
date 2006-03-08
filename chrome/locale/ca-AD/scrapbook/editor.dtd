@@ -4,9 +4,9 @@
 <!ENTITY sb.editor.restore "Abandona els canvis i restaura">
 <!ENTITY sb.editor.save "Desa els canvis">
 <!ENTITY sb.editor.comment "Expandeix/Redueix l'àrea de comentaris">
-<!ENTITY sb.editor.sticky "Sticky Annotation">
-<!ENTITY sb.editor.sticky.create "Create &sb.editor.sticky;">
-<!ENTITY sb.editor.inline.add "Add Inline Annotation to Selection">
+<!ENTITY sb.editor.sticky "Nota adhesiva">
+<!ENTITY sb.editor.sticky.create "Crea una nota adhesiva">
+<!ENTITY sb.editor.inline.add "Afegeix una anotació a la selecció">
 <!ENTITY sb.editor.attach.file "Adjunta un fitxer a la selecció">
 <!ENTITY sb.editor.attach.link "Adjunta un enllaç a la selecció">
 <!ENTITY sb.editor.cutter "Suprimeix la selecció">
@@ -17,9 +17,9 @@
 <!ENTITY sb.highlighter.remove.all "Suprimeix tots els ressaltats">
 <!ENTITY sb.customize "Personalitza">
 <!ENTITY sb.infobar.openSource "Obre l'URL font">
-<!ENTITY sb.infobar.renew "Capture Again">
-<!ENTITY sb.infobar.showIndicators "Show Link Indicators">
-<!ENTITY sb.infobar.showInfobar "Show Info Toolbar">
+<!ENTITY sb.infobar.renew "Torna a capturar-ho">
+<!ENTITY sb.infobar.showIndicators "Mostra els indicadors d'enllaços">
+<!ENTITY sb.infobar.showInfobar "Mostra la barra d'informació">
 <!ENTITY sb.infobar.home "Inici">
 <!ENTITY sb.infobar.sitemap "Mapa web">
-<!ENTITY sb.locate "Locate in Sidebar Tree">
+<!ENTITY sb.locate "Selecciona-ho a l'arbre de la barra lateral">

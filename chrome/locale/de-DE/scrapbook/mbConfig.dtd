@@ -1,8 +1,8 @@
-<!ENTITY mb.configure "Einstellungen">
+<!ENTITY mb.configure "Konfiguration">
 <!ENTITY mb.prop.name "Name">
 <!ENTITY mb.prop.path "Pfad">
-<!ENTITY mb.button.add "Neu">
-<!ENTITY mb.button.edit "Ändern">
-<!ENTITY mb.button.remove "Löschen">
-<!ENTITY mb.button.browse "Durchsuchen">
+<!ENTITY mb.button.add "Hinzufügen">
+<!ENTITY mb.button.edit "Bearbeiten">
+<!ENTITY mb.button.remove "Entfernen">
+<!ENTITY mb.button.browse "Durchsuchen...">
 <!ENTITY mb.button.accept "OK">

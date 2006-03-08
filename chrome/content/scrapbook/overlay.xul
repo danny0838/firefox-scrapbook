@@ -110,7 +110,7 @@
 		<menuitem id="ScrapBookContextMenu6" class="menuitem-iconic" label="&sb.capture.frame.as;..."   command="cmd_ScrapBookCaptureFrameAs"   />
 		<menu     id="ScrapBookContextMenu7" class="menu-iconic"     label="&sb.capture.target;"        oncommand="sbBrowserOverlay.execCaptureTarget(false, event.originalTarget.id);"  ><menupopup onpopupshowing="sbBrowserOverlay.flipOpenPopup(this);" /></menu>
 		<menuitem id="ScrapBookContextMenu8" class="menuitem-iconic" label="&sb.capture.target.as;..."  oncommand="sbBrowserOverlay.execCaptureTarget(true,  event.originalTarget.id);" />
-		<menu id="ScrapBookContextSubmenu" label="ScrapBook" hidden="true">
+		<menu id="ScrapBookContextSubmenu"   class="menu-iconic"     label="ScrapBook" hidden="true">
 			<menupopup />
 			<menupopup id="ScrapBookContextFolderPopup" onpopupshowing="sbBrowserOverlay.updatePopup();" hidden="true">
 				<menuitem class="menuitem-iconic bookmark-item" container="true" id="urn:scrapbook:root" label="&sb.capture.folder.root;" />

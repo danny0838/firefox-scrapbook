@@ -617,7 +617,7 @@ var sbContentSaver = {
 			alert("ScrapBook ERROR: Failed to download: " + aURLSpec);
 			return;
 		}
-		var newFileName = aURL.fileName;
+		var newFileName = aURL.fileName.toLowerCase();
 
 		if ( !newFileName ) newFileName = "untitled";
 		newFileName = sbCommonUtils.validateFileName(newFileName);

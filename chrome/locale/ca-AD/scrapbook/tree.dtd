@@ -5,11 +5,11 @@
 <!ENTITY sb.tools "Eines">
 <!ENTITY sb.show.files "Mostra els fitxers">
 <!ENTITY sb.move "Mou a la carpeta">
-<!ENTITY sb.renew "Capture Again">
+<!ENTITY sb.renew "Torna a capturar-ho">
 <!ENTITY sb.export "Exporta">
 <!ENTITY sb.remove "Suprimeix">
 <!ENTITY sb.property "Propietats">
-<!ENTITY sb.listview "List View">
+<!ENTITY sb.listview "Visualització com a llista">
 <!ENTITY sb.prop.title "Títol">
 <!ENTITY sb.prop.comment "Comentari">
 <!ENTITY sb.prop.id.date "ID (Data i hora)">
@@ -28,5 +28,5 @@
 <!ENTITY sb.search.cache "Actualitza la memòria cau per a la cerca a tot el text">
 <!ENTITY sb.search.clear "Buida l'historial de formularis">
 <!ENTITY sb.search.days "Filtra per dies">
-<!ENTITY mb.configure "Configure">
-<!ENTITY mb.profileFolder "Profile Folder">
+<!ENTITY mb.configure "Configuració">
+<!ENTITY mb.profileFolder "Carpeta de perfil">

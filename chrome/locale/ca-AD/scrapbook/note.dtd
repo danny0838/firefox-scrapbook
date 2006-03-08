@@ -1,8 +1,8 @@
 <!ENTITY sb.note.save "Desa">
 <!ENTITY sb.note.close "Tanca">
 <!ENTITY sb.note.tools "Eines">
-<!ENTITY sb.note.htmlview "HTML View">
-<!ENTITY sb.note.normalview "Normal View">
+<!ENTITY sb.note.htmlview "Visualització HTML">
+<!ENTITY sb.note.normalview "Visualització normal">
 <!ENTITY sb.note.template "Edita la plantilla HTML">
 <!ENTITY sb.note.autolinefeed "Salts de línia automàtics">
 <!ENTITY sb.note.autolinefeed.t "Afegeix etiquetes &lt;br&gt; al final de cada línia">

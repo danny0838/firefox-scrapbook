@@ -8,8 +8,8 @@
 <!ENTITY sb.capture.target.as "Link archivieren als">
 <!ENTITY sb.capture.folder.root "Hauptordner">
 <!ENTITY sb.capture.folder.select "Ordner auswählen">
-<!ENTITY sb.capture.alltabs "All Tabs archivieren">
-<!ENTITY sb.capture.bookmark "Bookmark mit ScrapBook">
+<!ENTITY sb.capture.alltabs "Alle Tabs archivieren">
+<!ENTITY sb.capture.bookmark "Lesezeichen mit ScrapBook erstellen">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">

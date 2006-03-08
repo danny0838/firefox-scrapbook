@@ -9,12 +9,12 @@
 <!ENTITY sb.export "Exportieren">
 <!ENTITY sb.remove "Löschen">
 <!ENTITY sb.property "Eigenschaften">
-<!ENTITY sb.listview "Listen Ansicht">
+<!ENTITY sb.listview "Geteilte Listenansicht">
 <!ENTITY sb.prop.title "Name">
 <!ENTITY sb.prop.comment "Beschreibung">
 <!ENTITY sb.prop.id.date "ID (Datum/Zeit)">
 <!ENTITY sb.folder.toggle "Ausklappen/Einklappen">
-<!ENTITY sb.folder.combine "Kombinierte Ansicht">
+<!ENTITY sb.folder.combine "Zusammengefasste Ansicht öffnen">
 <!ENTITY sb.folder.openall "Alles in Tabs öffnen">
 <!ENTITY sb.folder.manage "Ordner verwalten">
 <!ENTITY sb.new.folder "Neuer Ordner...">
@@ -28,5 +28,5 @@
 <!ENTITY sb.search.cache "Cache für Volltextsuche aktualisieren">
 <!ENTITY sb.search.clear "Suchchronik löschen">
 <!ENTITY sb.search.days "Nach Datum filtern">
-<!ENTITY mb.configure "Einstellungen">
-<!ENTITY mb.profileFolder "Profile Folder">
+<!ENTITY mb.configure "Konfigurieren">
+<!ENTITY mb.profileFolder "Profilordner">
