@@ -7,14 +7,13 @@
 
 		<em:id>{53A03D43-5363-4669-8190-99061B2DEBA5}</em:id>
 		<em:name>ScrapBook</em:name>
-		<em:version>0.22.10</em:version>
+		<em:version>0.22.11</em:version>
 		<em:description>Helps you to save Web pages and organize the collection.</em:description>
 		<em:creator>Gomita</em:creator>
 		<em:homepageURL>http://amb.vis.ne.jp/mozilla/scrapbook/</em:homepageURL>
 		<em:optionsURL>chrome://scrapbook/content/setting.xul</em:optionsURL>
 		<em:aboutURL>chrome://scrapbook/content/about.xul</em:aboutURL>
 		<em:iconURL>chrome://scrapbook/skin/main_32.png</em:iconURL>
-		<!--<em:updateURL>http://amb.vis.ne.jp/mozilla/scrapbook/update.rdf?ver=0.22.10</em:updateURL>-->
 
 		<!-- Firefox -->
 		<em:targetApplication>
