@@ -8,8 +8,8 @@
 <!ENTITY sb.capture.target.as "获取链接为">
 <!ENTITY sb.capture.folder.root "ScrapBook">
 <!ENTITY sb.capture.folder.select "选择文件夹">
-<!ENTITY sb.capture.alltabs "Capture All Tabs">
-<!ENTITY sb.capture.bookmark "Bookmark with ScrapBook">
+<!ENTITY sb.capture.alltabs "获取所有标签页">
+<!ENTITY sb.capture.bookmark "加入 ScrapBook 书签">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">

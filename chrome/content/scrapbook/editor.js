@@ -632,6 +632,7 @@ var sbAnnotationService = {
 		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbPageEditor.STRING.getFormattedString("EDIT_INLINE", [sbCommonUtils.crop(sel.toString(), 32)]), ret, null, {}) ) return;
 		if ( !ret.value ) return;
 		var attr = {};
+		attr["style"] = "border-bottom: 2px dotted #FF3333; cursor: help;"
 		attr["class"] = "scrapbook-inline";
 		attr["title"] = ret.value;
 		sbHighlighter.set(sbPageEditor.focusedWindow, sel, "span", attr);

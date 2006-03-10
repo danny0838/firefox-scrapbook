@@ -3,19 +3,19 @@
 <!ENTITY sb.pref.capture "获取">
 <!ENTITY sb.pref.edit "编辑">
 <!ENTITY sb.pref.advanced "高级">
-<!ENTITY sb.pref.browser.menubar "Show 'ScrapBook' menu in Firefox menubar">
-<!ENTITY sb.pref.browser.bookmark "Show 'Bookmark with ScrapBook' menu">
+<!ENTITY sb.pref.browser.menubar "在Firefox菜单栏显示“ScrapBook”菜单">
+<!ENTITY sb.pref.browser.bookmark "显示“Bookmark with ScrapBook”菜单">
 <!ENTITY sb.pref.browser.submenu "在浏览器右键菜单中新建子菜单 (需要重启动)">
 <!ENTITY sb.pref.showDetailOnDrop "以拖拽方式获取文件时，显示“详细信息”对话框">
 <!ENTITY sb.pref.notifyOnComplete "显示“获取完成”提示框">
-<!ENTITY sb.pref.confirmDelete "Confirm before deleting">
+<!ENTITY sb.pref.confirmDelete "删除前确认">
 <!ENTITY sb.pref.tree.autoCollapse "在列表中展开一个文件夹时，折叠其他文件夹">
-<!ENTITY sb.pref.tree.unshift "Position where to add item when moving/capturing into folder:">
-<!ENTITY sb.pref.tree.unshift.top "Top">
-<!ENTITY sb.pref.tree.unshift.bottom "Bottom (Default)">
+<!ENTITY sb.pref.tree.unshift "移动或捕获项目到文件夹放在：">
+<!ENTITY sb.pref.tree.unshift.top "顶部">
+<!ENTITY sb.pref.tree.unshift.bottom "底部 (默认)">
 <!ENTITY sb.pref.tabs.tips "所选项目将在新标签页中打开">
 <!ENTITY sb.pref.tabs.note "在标签页中打开便签">
-<!ENTITY sb.pref.tabs.openFromMenu "Open in new tab from 'ScrapBook' menu in Firefox menubar">
+<!ENTITY sb.pref.tabs.openFromMenu "在新标签页打开 Firefox 菜单的 ScrapBook 菜单项中的页面">
 <!ENTITY sb.pref.capture.encodeUTF8 "自动转换为 UTF-8 编码 (推荐)">
 <!ENTITY sb.pref.capture.encodeUTF8.tips "如果取消此项，有些字符经常会被错误显示为“??”。">
 <!ENTITY sb.pref.capture.noscript.tips "如果取消此项，将会因为 JavaScript 而引起很多问题。">
@@ -28,6 +28,6 @@
 <!ENTITY sb.pref.fileViewer "选择用于“浏览”的应用程序">
 <!ENTITY sb.pref.fileViewer.default "默认 (Windows 系统中一般是资源管理器)">
 <!ENTITY sb.tips.highlighter "提示: 您只需按 1 至 4 数字键即可使用相应标记高亮显示所选内容。">
-<!ENTITY sb.tips.eraser "提示: You can isolate an element by right-clicking it with DOM Eraser.">
+<!ENTITY sb.tips.eraser "提示: 您可以用右键的DOM橡皮隔离一个元素。">
 <!ENTITY sb.button.browse "浏览">
 <!ENTITY sb.button.show "打开">

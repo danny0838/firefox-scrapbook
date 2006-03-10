@@ -28,6 +28,6 @@
 <!ENTITY sb.pref.fileViewer "파일 표시에 이용할 프로그램">
 <!ENTITY sb.pref.fileViewer.default "초기값 (윈도우즈의 경우 익스플로러)">
 <!ENTITY sb.tips.highlighter "팁: 선택 후 1,2,3,4 키만 눌러도 선택 부분을 강조할 수 있습니다.">
-<!ENTITY sb.tips.eraser "팁: You can isolate an element by right-clicking it with DOM Eraser.">
+<!ENTITY sb.tips.eraser "팁: DOM 삭제자에서 항목을 오른쪽 버튼 클릭하면 항목들을 각각 분리시킬 수 있습니다.">
 <!ENTITY sb.button.browse "찾아보기">
 <!ENTITY sb.button.show "폴더 열기">

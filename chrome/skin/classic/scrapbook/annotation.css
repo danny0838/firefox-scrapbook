@@ -87,13 +87,3 @@ div.scrapbook-sticky-relative .scrapbook-sticky-header {
 }
 
 
-/*===========================================================================
-*   Inline Annotation
-*==========================================================================*/
-
-span.scrapbook-inline {
-	border-bottom: 2px dotted #FF3333;
-	cursor: help;
-}
-
-

@@ -5,16 +5,16 @@
 <!ENTITY sb.tools "工具">
 <!ENTITY sb.show.files "查看文件">
 <!ENTITY sb.move "移动">
-<!ENTITY sb.renew "Capture Again">
+<!ENTITY sb.renew "重新获取">
 <!ENTITY sb.export "导出">
 <!ENTITY sb.remove "删除">
 <!ENTITY sb.property "属性">
-<!ENTITY sb.listview "List View">
+<!ENTITY sb.listview "列表视图">
 <!ENTITY sb.prop.title "标题">
 <!ENTITY sb.prop.comment "注释">
 <!ENTITY sb.prop.id.date "ID (时间)">
 <!ENTITY sb.folder.toggle "展开/折叠文件夹">
-<!ENTITY sb.folder.combine "Combined View">
+<!ENTITY sb.folder.combine "组合视图">
 <!ENTITY sb.folder.openall "在标签页中打开所有项目">
 <!ENTITY sb.folder.manage "管理文件夹...">
 <!ENTITY sb.new.folder "新建文件夹...">

@@ -1,5 +1,5 @@
 <!ENTITY sb.sort "排列项目列表">
-<!ENTITY sb.sort.reverse "Reverse">
+<!ENTITY sb.sort.reverse "反序">
 <!ENTITY sb.sort.title.asc "标题 (A &gt; Z)">
 <!ENTITY sb.sort.title.desc "标题 (Z &gt; A)">
 <!ENTITY sb.sort.date.asc "时间 (升序)">

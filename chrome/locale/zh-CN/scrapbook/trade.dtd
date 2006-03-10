@@ -2,4 +2,4 @@
 <!ENTITY sb.trade.export "导出">
 <!ENTITY sb.trade.time "导出日期">
 <!ENTITY sb.trade.restore "导入并重建目录结构">
-<!ENTITY sb.trade.remove "Remove files after importing">
+<!ENTITY sb.trade.remove "导入后移除文件">
