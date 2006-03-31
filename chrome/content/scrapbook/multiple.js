@@ -6,6 +6,7 @@ var sbMultipleService = {
 
 	init : function()
 	{
+		document.documentElement.buttons = "accept,cancel,extra2";
 		document.documentElement.getButton("accept").label = document.getElementById("sbMainString").getString("CAPTURE_OK_BUTTON");
 		document.documentElement.getButton("accept").accesskey = "C";
 		this.TEXTBOX.focus();
@@ -69,6 +70,16 @@ var sbMultipleService = {
 				this.addURL(str.toString());
 			}
 		} catch(ex) {
+		}
+	},
+
+	detectURLsOfTabs : function()
+	{
+		this.clear();
+		var nodes = window.opener.gBrowser.mTabContainer.childNodes;
+		for ( var i = 0; i < nodes.length; i++ )
+		{
+			this.addURL(window.opener.gBrowser.getBrowserForTab(nodes[i]).contentDocument.location.href);
 		}
 	},
 

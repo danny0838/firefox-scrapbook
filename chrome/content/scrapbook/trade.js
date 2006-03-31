@@ -48,7 +48,7 @@ function SB_delayedInitTrade()
 	sbDataSource.init();
 	sbTreeHandler.init(false);
 	sbTreeDNDHandler.init();
-	sbMainService.baseURL = sbCommonUtils.IO.newFileURI(sbCommonUtils.getScrapBookDir()).spec;
+	sbMainService.baseURL = sbCommonUtils.getBaseHref(sbDataSource.data.URI);
 	sbMainService.initPrefs();
 	sbTreeDNDHandler.dragDropObserver.getSupportedFlavours = function()
 	{
@@ -147,8 +147,8 @@ var sbTrader = {
 			var dirName = file.leafName;
 			file.append("index.dat");
 			if ( !file.exists() ) continue;
-			var item = this.parseIndexDat(sbCommonUtils.readFile(file));
-			if ( item.icon && item.icon.indexOf("http") != 0 )
+			var item = this.parseIndexDat(sbCommonUtils.convertStringToUTF8(sbCommonUtils.readFile(file)));
+			if ( item.icon && !item.icon.match(/^http|moz-icon/) )
 			{
 				var icon = this.rightDir.clone();
 				icon.append(dirName);
@@ -156,9 +156,9 @@ var sbTrader = {
 			}
 			if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(item.type);
 			this.treeItems.push([
-				sbCommonUtils.convertStringToUTF8(item.title),
+				item.title,
 				this.formateMilliSeconds(file.lastModifiedTime),
-				sbCommonUtils.convertStringToUTF8(item.folder),
+				item.folder,
 				item.id,
 				item.icon,
 				file.lastModifiedTime,
@@ -246,7 +246,7 @@ var sbTrader = {
 
 	open : function(aEvent, tabbed)
 	{
-		if ( this.treeItems[sbCustomTreeUtil.getSelection(this.TREE)[0]][7] != "bookmark" ) return;
+		if ( this.treeItems[sbCustomTreeUtil.getSelection(this.TREE)[0]][7] == "bookmark" ) return;
 		sbCommonUtils.loadURL(sbCommonUtils.convertFilePathToURL(this.rightDir.path) + this.getCurrentDirName() + "/index.html", tabbed);
 	},
 
@@ -283,11 +283,11 @@ var sbTrader = {
 		datFile.append(this.getCurrentDirName());
 		datFile.append("index.dat");
 		if ( !datFile.exists() ) return;
-		var item = this.parseIndexDat(sbCommonUtils.readFile(datFile));
+		var item = this.parseIndexDat(sbCommonUtils.convertStringToUTF8(sbCommonUtils.readFile(datFile)));
 		var content = "";
 		for ( var prop in item )
 		{
-			content += prop + " : " + sbCommonUtils.convertStringToUTF8(item[prop]) + "\n";
+			content += prop + " : " + item[prop] + "\n";
 		}
 		alert(content);
 	},
@@ -317,7 +317,10 @@ var sbTrader = {
 			{
 				if ( !lines[i].match(/\t/) ) continue;
 				var keyVal = lines[i].split("\t");
-				item[keyVal[0]] = keyVal[1];
+				if ( keyVal.length == 2 )
+					item[keyVal[0]] = keyVal[1];
+				else
+					item[keyVal.shift()] = keyVal.join("\t");
 			}
 		} catch(ex) {
 		}
@@ -344,7 +347,6 @@ var sbExportService = {
 
 	count : -1,
 	resList : [],
-	parList : [],
 
 	exec : function()
 	{
@@ -354,7 +356,6 @@ var sbExportService = {
 		sbTrader.toggleLocking(true);
 		this.count = -1;
 		this.resList = [];
-		this.parList = [];
 		if ( sbTreeHandler.TREE.currentIndex != -1 && sbTreeHandler.TREE.view.isContainer(sbTreeHandler.TREE.currentIndex) && sbTreeHandler.TREE.view.selection.count == 1 )
 		{
 			var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(sbTreeHandler.TREE.currentIndex);
@@ -376,7 +377,7 @@ var sbExportService = {
 		var res = sbCommonUtils.RDF.GetResource(aResURI);
 		var item = new ScrapBookItem();
 		for ( var prop in item ) item[prop] = sbDataSource.getProperty(res, prop);
-		item.folder = sbDataSource.getProperty(sbDataSource.findParentResource(res), "title");
+		item.folder = this.getFolderPath(res).join("\t");
 		if ( this.copyLeftToRightInternal(item) ) {
 			sbTrader.STATUS2.value = document.getElementById("sbTradeExportButton").label + ": " + item.title;
 			setTimeout(function(){ window.close(); }, 1500);
@@ -413,13 +414,7 @@ var sbExportService = {
 		{
 			item[prop] = sbDataSource.getProperty(this.resList[this.count], prop);
 		}
-		item.folder = this.parList[this.count];
-		if ( !item.folder )
-		{
-			var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(this.resList[this.count]);
-			item.folder = sbDataSource.getProperty(sbTreeHandler.getParentResource(idx), "title");
-		}
-		if ( !item.folder ) item.folder = "";
+		item.folder = this.getFolderPath(this.resList[this.count]).join("\t");
 		var rate = " (" + (this.count + 1) + "/" + this.resList.length + ") ";
 		if ( this.copyLeftToRightInternal(item) )
 			SB_trace(document.getElementById("sbTradeExportButton").label + rate + item.title, "B");
@@ -430,13 +425,13 @@ var sbExportService = {
 
 	copyLeftToRightInternal : function(aItem)
 	{
-		if ( aItem.icon && aItem.icon.indexOf("http") != 0 )
+		if ( aItem.icon && !aItem.icon.match(/^http|moz-icon/) )
 		{
 			aItem.icon = aItem.icon.match(/\d{14}\/([^\/]+)$/) ? RegExp.$1 : "";
 		}
 		var num = 0;
 		var destDir = sbTrader.rightDir.clone();
-		var dirName = sbCommonUtils.validateFileName(aItem.title).substring(0,64);
+		var dirName = sbCommonUtils.validateFileName(aItem.title).substring(0,64) || "untitled";
 		destDir.append(dirName);
 		while ( destDir.exists() && num < 256 )
 		{
@@ -468,6 +463,18 @@ var sbExportService = {
 		return true;
 	},
 
+	getFolderPath : function(aRes)
+	{
+		var ret = [];
+		for ( var i = 0; i < 32; i++ )
+		{
+			aRes = sbDataSource.findParentResource(aRes);
+			if ( aRes.Value == "urn:scrapbook:root" ) break;
+			ret.unshift(sbDataSource.getProperty(aRes, "title"));
+		}
+		return ret;
+	},
+
 	getResourcesRecursively : function(aContRes)
 	{
 		var resEnum = sbDataSource.getContainer(aContRes.Value, false).GetElements();
@@ -478,7 +485,6 @@ var sbExportService = {
 				this.getResourcesRecursively(res);
 			} else {
 				this.resList.push(res);
-				this.parList.push(sbDataSource.getProperty(aContRes, "title"));
 			}
 		}
 	},
@@ -556,15 +562,12 @@ var sbImportService = {
 			alert("ScrapBook ERROR: Could not find 'index.dat'.");
 			return;
 		}
-		var dat = sbCommonUtils.readFile(datFile);
+		var dat = sbCommonUtils.convertStringToUTF8(sbCommonUtils.readFile(datFile));
 		var item = sbTrader.parseIndexDat(dat);
 		if ( !item.id || item.id.length != 14 ) return;
 		var destDir = sbTrader.leftDir.clone();
-		if ( item.icon && item.icon.indexOf("http") != 0 ) item.icon = "resource://scrapbook/data/" + item.id + "/" + item.icon;
+		if ( item.icon && !item.icon.match(/^http|moz-icon/) ) item.icon = "resource://scrapbook/data/" + item.id + "/" + item.icon;
 		if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(item.type);
-		item.title   = sbCommonUtils.convertStringToUTF8(item.title);
-		item.folder  = sbCommonUtils.convertStringToUTF8(item.folder);
-		item.comment = sbCommonUtils.convertStringToUTF8(item.comment);
 		var num  = this.ascending ? this.count + 1 : this.idxList.length - this.count;
 		var rate = " (" + num + "/" + this.idxList.length + ") ";
 		if ( item.type == "bookmark" )
@@ -587,22 +590,34 @@ var sbImportService = {
 		var folder = "";
 		if ( this.restore )
 		{
-			if ( this.folderTable[item.folder] ) 
+			this.tarResArray = ["urn:scrapbook:root", 0];
+			var folderList = item.folder.split("\t");
+			for ( var i = 0; i < folderList.length; i++ )
 			{
-				this.tarResArray[0] = this.folderTable[item.folder];
+		 		if ( folderList[i] == "" ) continue;
+				if ( folderList[i] in this.folderTable &&
+					sbDataSource.getRelativeIndex(
+						sbCommonUtils.RDF.GetResource(this.tarResArray[0]),
+						sbCommonUtils.RDF.GetResource(this.folderTable[folderList[i]])
+					) > 0 )
+				{
+					this.tarResArray[0] = this.folderTable[folderList[i]];
+					var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(sbCommonUtils.RDF.GetResource(this.tarResArray[0]));
+					if ( !sbTreeHandler.TREE.view.isContainerOpen(idx) ) sbTreeHandler.TREE.view.toggleOpenState(idx);
+				}
+				else
+				{
+					var newItem = new ScrapBookItem(sbDataSource.identify(sbCommonUtils.getTimeStamp()));
+					newItem.title = folderList[i];
+					newItem.type = "folder";
+					var newRes = sbDataSource.addItem(newItem, this.tarResArray[0], 0);
+					sbDataSource.createEmptySeq(newRes.Value);
+					sbTreeHandler.TREE.view.toggleOpenState(sbTreeHandler.TREE.builderView.getIndexOfResource(newRes));
+					this.folderTable[newItem.title] = newRes.Value;
+					this.tarResArray[0] = newRes.Value;
+					SB_trace(sbTrader.STRING.getFormattedString("CREATE_FOLDER", [newItem.title]), "B", true);
+				}
 			}
-			else
-			{
-				var newItem = new ScrapBookItem(sbDataSource.identify(sbCommonUtils.getTimeStamp()));
-				newItem.title = item.folder;
-				newItem.type = "folder";
-				var newRes = sbDataSource.addItem(newItem, "urn:scrapbook:root", 0);
-				sbDataSource.createEmptySeq(newRes.Value);
-				SB_trace(sbTrader.STRING.getFormattedString("CREATE_FOLDER", [newItem.title]), "B", true);
-				this.folderTable[item.folder] = newRes.Value;
-				this.tarResArray[0] = newRes.Value;
-			}
-			this.tarResArray[1] = 0;
 			if ( this.tarResArray[0] != sbTreeHandler.TREE.ref ) folder = " [" + item.folder + "] ";
 		}
 		sbDataSource.addItem(item, this.tarResArray[0], this.tarResArray[1]);
@@ -613,13 +628,20 @@ var sbImportService = {
 	makeFolderTable : function()
 	{
 		this.folderTable = {};
-		var resEnum = sbDataSource.data.GetAllResources();
+		this.makeFolderTableRecursive(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"));
+	},
+
+	makeFolderTableRecursive : function(aRes)
+	{
+		sbCommonUtils.RDFC.Init(sbDataSource.data, aRes);
+		var resEnum = sbCommonUtils.RDFC.GetElements();
 		while ( resEnum.hasMoreElements() )
 		{
 			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			if ( res.Value != "urn:scrapbook:search" && sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, res) )
+			if ( sbDataSource.isContainer(res) )
 			{
 				this.folderTable[sbDataSource.getProperty(res, "title")] = res.Value;
+				this.makeFolderTableRecursive(res);
 			}
 		}
 	},

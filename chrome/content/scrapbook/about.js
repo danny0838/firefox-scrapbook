@@ -1,6 +1,6 @@
 
-const kVERSION = "0.22.12";
-const kBUILD_TEXT = "Final Beta Version (Build ID 20060310)";
+const kVERSION = "1.0pre";
+const kBUILD_TEXT = " (Preview Release, Build ID 20060331)";
 const kUPDATE_URL = "http://amb.vis.ne.jp/mozilla/scrapbook/update.rdf";
 
 var gAboutString;
@@ -14,7 +14,7 @@ function SB_initAbout()
 	gAboutString = document.getElementById("sbAboutString");
 	gUpdateImage = document.getElementById("sbUpdateImage");
 	gUpdateLabel = document.getElementById("sbUpdateLabel");
-	document.getElementById("sbAboutVersion").value = kBUILD_TEXT;
+	document.getElementById("sbAboutVersion").value = "Version " + kVERSION + kBUILD_TEXT;
 	gUpdateImage.setAttribute("src", "chrome://scrapbook/skin/status_busy.gif");
 	gUpdateLabel.setAttribute("value", gAboutString.getString("CHECKING"));
 	setTimeout(SB_setUpdateInfo, 500);
@@ -55,9 +55,8 @@ function SB_setUpdateInfo()
 	{
 		try {
 			var latestVer = httpReq.responseXML.getElementsByTagNameNS("http://www.mozilla.org/2004/em-rdf#", "version")[0].textContent;
-			var cv = SB_parseVersion(kVERSION);
-			var lv = SB_parseVersion(latestVer);
-			if ( cv > 0 && lv > 0 && lv > cv ) {
+			const VER_COMP = Components.classes['@mozilla.org/xpcom/version-comparator;1'].getService(Components.interfaces.nsIVersionComparator);
+			if ( VER_COMP.compare(latestVer, kVERSION) > 0 ) {
 				gUpdateLabel.setAttribute("value", gAboutString.getFormattedString("NEW_VERSION_AVAILABLE", [latestVer]));
 				gUpdateLabel.setAttribute("class", "link");
 				gUpdateLabel.setAttribute("style", "font-weight:bold;");
@@ -78,18 +77,6 @@ function SB_setUpdateInfo()
 		httpReq.abort();
 		gUpdateLabel.setAttribute("value", gAboutString.getString("CHECK_FAILURE"));
 		SB_removeUpdateImage();
-	}
-}
-
-
-function SB_parseVersion(aVerStr)
-{
-	var verArr = [];
-	if ( aVerStr.match(/^(\d+)\.(\d+)\.(\d+)$/) ) {
-		verArr[0] = parseInt(RegExp.$1); verArr[1] = parseInt(RegExp.$2); verArr[2] = parseInt(RegExp.$3);
-		return verArr[0] * 10000 + verArr[1] * 100 + verArr[2];
-	} else {
-		return 0;
 	}
 }
 

@@ -23,6 +23,16 @@ var sbTreeHandler = {
 		this.TREE.builder.rebuild();
 	},
 
+	exit : function()
+	{
+		var dsEnum = this.TREE.database.GetDataSources();
+		while ( dsEnum.hasMoreElements() )
+		{
+			var ds = dsEnum.getNext().QueryInterface(Components.interfaces.nsIRDFDataSource);
+			this.TREE.database.RemoveDataSource(ds);
+		}
+	},
+
 
 	onClick : function(aEvent, aType)
 	{
@@ -234,7 +244,7 @@ var sbListHandler = {
 
 	init : function(aRes)
 	{
-		if ( !aRes)
+		if ( !aRes )
 		{
 			if ( sbTreeHandler.TREE.view.selection.count < 1 ) {
 				aRes = sbTreeHandler.TREE.resource;
@@ -265,7 +275,18 @@ var sbListHandler = {
 		this.onAfterRefresh();
 	},
 
-	exit : function(aWillLocate)
+	exit : function()
+	{
+		var dsEnum = this.LIST.database.GetDataSources();
+		while ( dsEnum.hasMoreElements() )
+		{
+			var ds = dsEnum.getNext().QueryInterface(Components.interfaces.nsIRDFDataSource);
+			this.LIST.database.RemoveDataSource(ds);
+		}
+		this.LIST.ref = null;
+	},
+
+	quit : function(aWillLocate)
 	{
 		if ( !this.enabled ) return;
 		document.getElementById("sbTreeRule").removeAttribute("iscontainer");
@@ -279,7 +300,7 @@ var sbListHandler = {
 
 	toggle : function()
 	{
-		this.enabled ? this.exit(true) : this.init(null);
+		this.enabled ? this.quit(true) : this.init(null);
 	},
 
 	goUpperLevel : function()

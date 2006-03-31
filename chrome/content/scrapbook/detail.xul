@@ -68,8 +68,9 @@
 				<!--options-->
 				<hbox align="center" style="margin-bottom:8px;">
 					<label value="&sb.detail.option;:" />
-					<checkbox id="sbDetailFormat" label="&sb.detail.option.format;" checked="true" />
-					<checkbox id="sbDetailScript" label="JavaScript" />
+					<checkbox id="sbDetailOptionImages" label="&sb.detail.option.images;" checked="true" />
+					<checkbox id="sbDetailOptionStyles" label="&sb.detail.option.styles;" checked="true" />
+					<checkbox id="sbDetailOptionScript" label="JavaScript" />
 				</hbox>
 				<!--download linked files-->
 				<groupbox>

@@ -2,7 +2,8 @@
 <!ENTITY sb.detail.new.folder "Nuova cartella">
 <!ENTITY sb.detail.select.folder "Seleziona cartella">
 <!ENTITY sb.detail.option "Opzioni">
-<!ENTITY sb.detail.option.format "Immmagini e stili">
+<!ENTITY sb.detail.option.images "Immmagini">
+<!ENTITY sb.detail.option.styles "Stili">
 <!ENTITY sb.detail.linked.file "Scarica i link">
 <!ENTITY sb.detail.linked.image "Immagini">
 <!ENTITY sb.detail.linked.sound "Suoni">
@@ -10,7 +11,6 @@
 <!ENTITY sb.detail.linked.archive "Archivi">
 <!ENTITY sb.detail.linked.custom "Personale">
 <!ENTITY sb.detail.linked.page "Cattura comprensiva di tutti">
-<!ENTITY sb.detail.linked.page2 "Cattura pagine web linkate">
 <!ENTITY sb.detail.linked.page.depth "Compresi i seguenti link">
 <!ENTITY sb.detail.linked.page.text "Dopo aver completato la cattura, tutte le pagine verranno linkate e verrà creata una mappa del sito">
 <!ENTITY sb.detail.warnAboutRenew "AVVISO: l'opzione 'Cattura ancora' sovrascrive le pagine precedentemente salvate">

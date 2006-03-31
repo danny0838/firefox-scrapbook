@@ -31,7 +31,7 @@ var sbContentSaver = {
 		this.name = "index";
 		this.favicon = null;
 		this.file2URL = { "index.html" : true, "index.css" : true, "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
-		this.option   = { "image" : false, "sound" : false, "movie" : false, "archive" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "format" : true, "script" : false };
+		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "styles" : true, "script" : false };
 		this.linkURLs = [];
 		this.frameList   = [];
 		this.frameNumber = 0;
@@ -57,7 +57,7 @@ var sbContentSaver = {
 
 		this.getFrameList(aRootWindow);
 
-		var titleList = aRootWindow.document.title ? [aRootWindow.document.title] : [this.item.source];
+		var titleList = aRootWindow.document.title && typeof(aRootWindow.document.title) == "string" ? [aRootWindow.document.title] : [this.item.source];
 		if ( aIsPartial )
 		{
 			this.selection = aRootWindow.getSelection();
@@ -227,7 +227,7 @@ var sbContentSaver = {
 
 
 		var myCSS = "";
-		if ( this.option["format"] )
+		if ( this.option["styles"] )
 		{
 			var myStyleSheets = aDocument.styleSheets;
 			for ( var i=0; i<myStyleSheets.length; i++ )
@@ -244,6 +244,7 @@ var sbContentSaver = {
 				rootNode.firstChild.appendChild(document.createTextNode("\n"));
 				rootNode.firstChild.appendChild(newLinkNode);
 				rootNode.firstChild.appendChild(document.createTextNode("\n"));
+				myCSS = myCSS.replace(/\*\|/g, "");
 			}
 		}
 
@@ -385,7 +386,7 @@ var sbContentSaver = {
 		{
 			case "img" : 
 			case "embed" : 
-				if ( this.option["format"] ) {
+				if ( this.option["images"] ) {
 					if ( aNode.hasAttribute("onclick") ) aNode = this.normalizeJavaScriptLink(aNode, "onclick");
 					var aFileName = this.download(aNode.src);
 					if (aFileName) aNode.setAttribute("src", aFileName);
@@ -394,7 +395,7 @@ var sbContentSaver = {
 				}
 				break;
 			case "object" : 
-				if ( this.option["format"] ) {
+				if ( this.option["images"] ) {
 					var aFileName = this.download(aNode.data);
 					if (aFileName) aNode.setAttribute("data", aFileName);
 				} else {
@@ -402,7 +403,7 @@ var sbContentSaver = {
 				}
 				break;
 			case "body" : 
-				if ( this.option["format"] ) {
+				if ( this.option["images"] ) {
 					var aFileName = this.download(aNode.background);
 					if (aFileName) aNode.setAttribute("background", aFileName);
 				} else {
@@ -415,7 +416,7 @@ var sbContentSaver = {
 			case "tr" : 
 			case "th" : 
 			case "td" : 
-				if ( this.option["format"] ) {
+				if ( this.option["images"] ) {
 					var aFileName = this.download(aNode.getAttribute("background"));
 					if (aFileName) aNode.setAttribute("background", aFileName);
 				} else {
@@ -425,7 +426,7 @@ var sbContentSaver = {
 				break;
 			case "input" : 
 				if ( aNode.type.toLowerCase() == "image" ) {
-					if ( this.option["format"] ) {
+					if ( this.option["images"] ) {
 						var aFileName = this.download(aNode.src);
 						if (aFileName) aNode.setAttribute("src", aFileName);
 					} else {
@@ -436,7 +437,7 @@ var sbContentSaver = {
 				}
 				break;
 			case "link" : 
-				if ( aNode.rel.toLowerCase() == "stylesheet" && (aNode.href.indexOf("chrome") != 0 || !this.option["format"]) ) {
+				if ( aNode.rel.toLowerCase() == "stylesheet" && (aNode.href.indexOf("chrome") != 0 || !this.option["styles"]) ) {
 					return this.removeNodeFromParent(aNode);
 				} else if ( aNode.rel.toLowerCase() == "shortcut icon" || aNode.rel.toLowerCase() == "icon" ) {
 					var aFileName = this.download(aNode.href);
@@ -472,11 +473,11 @@ var sbContentSaver = {
 				var flag = false;
 				switch ( ext )
 				{
-					case "jpg" : case "jpeg" : case "png" : case "gif" : flag = this.option["image"];   break;
-					case "mp3" : case "wav"  : case "ram" : case "wma" : flag = this.option["sound"];   break;
+					case "jpg" : case "jpeg" : case "png" : case "gif" : flag = this.option["dlimg"]; break;
+					case "mp3" : case "wav"  : case "ram" : case "wma" : flag = this.option["dlsnd"]; break;
 					case "mpg" : case "mpeg" : case "avi" : 
-					case "ram" : case "rm"   : case "mov" : case "wmv" : flag = this.option["movie"];   break;
-					case "zip" : case "lzh"  : case "rar" :	case "xpi" : flag = this.option["archive"]; break;
+					case "ram" : case "rm"   : case "mov" : case "wmv" : flag = this.option["dlmov"]; break;
+					case "zip" : case "lzh"  : case "rar" :	case "xpi" : flag = this.option["dlarc"]; break;
 					default :
 						if ( ext && this.option["custom"] )
 						{
@@ -522,7 +523,7 @@ var sbContentSaver = {
 				this.refURLObj = tmpRefURL;
 				break;
 		}
-		if ( !this.option["format"] )
+		if ( !this.option["styles"] )
 		{
 			aNode.removeAttribute("style");
 		}
@@ -571,14 +572,14 @@ var sbContentSaver = {
 
 	inspectCSSText : function(aCSStext, aCSShref)
 	{
-		if ( !aCSStext ) return;
-		var re = new RegExp(/ url\(([^\'\)]+)\)/);
+		if ( !aCSStext ) return "";
+		var re = new RegExp(/ url\(([^\'\)\s]+)\)/);
 		var i = 0;
 		while ( aCSStext.match(re) )
 		{
 			if ( ++i > 10 ) break;
 			var imgURL  = sbCommonUtils.resolveURL(aCSShref, RegExp.$1);
-			var imgFile = this.download(imgURL);
+			var imgFile = this.option["images"] ? this.download(imgURL) : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7";
 			aCSStext = aCSStext.replace(re, " url('" + imgFile + "')");
 		}
 		aCSStext = aCSStext.replace(/([^\{\}])(\r|\n)/g, "$1\\A");
@@ -590,12 +591,14 @@ var sbContentSaver = {
 			innerQuote = innerQuote.replace(/\\\" attr\(([^\)]+)\) \\\"/g, '" attr($1) "');
 			aCSStext = aCSStext.replace(re, ' content: "' + innerQuote + '"; ');
 		}
-		aCSStext = aCSStext.replace(/ quotes: [^;]+; /g, " ");
+		if ( aCSStext.match(/ (quotes|voice-family): \"/) )
+		{
+			return "";
+		}
 		if ( aCSStext.match(/ background: /i) )
 		{
-			aCSStext = aCSStext.replace(/ -moz-background-[^:]+: initial;/g, "");
-			aCSStext = aCSStext.replace(/ scroll 0%/, "");
-			aCSStext = aCSStext.replace(/ no-repeat scroll 0px;/g, " no-repeat 0px 0px;");
+			aCSStext = aCSStext.replace(/ -moz-background-[^:]+: -moz-[^;]+;/g, "");
+			aCSStext = aCSStext.replace(/ scroll 0(pt|px|%);/g, ";");
 		}
 		return aCSStext;
 	},

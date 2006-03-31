@@ -86,15 +86,15 @@
 					</row>
 					<row>
 						<label value="sushizang (ko-KR)" />
-						<label value="陈力 (zh-CN)" href="http://www.firefox-china.org/" class="link" onclick="SB_visit(this);" />
-					</row>
-					<row>
-						<label value="George C. Tsoi (zh-CN)" href="http://www.moZine.org/" class="link" onclick="SB_visit(this);" />
 						<label value="ReinekeFux (de-DE)" href="http://www.erweiterungen.de/" class="link" onclick="SB_visit(this);" />
 					</row>
 					<row>
 						<label value="Jozsef Tamas Herczeg (hu-HU)" href="http://www.soft-trans.hu/" class="link" onclick="SB_visit(this);" />
 						<label value="Jose I. Plaza (es-ES)" />
+					</row>
+					<row>
+						<label value="George C. Tsoi (zh-CN)" href="http://www.moZine.org/" class="link" onclick="SB_visit(this);" />
+						<label value="blackdire (zh-CN)" />
 					</row>
 				</rows>
 			</grid>

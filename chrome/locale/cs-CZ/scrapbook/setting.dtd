@@ -3,19 +3,19 @@
 <!ENTITY sb.pref.capture "Zachycení">
 <!ENTITY sb.pref.edit "Editace">
 <!ENTITY sb.pref.advanced "Pokročilé">
-<!ENTITY sb.pref.browser.menubar "Show 'ScrapBook' menu in Firefox menubar">
-<!ENTITY sb.pref.browser.bookmark "Show 'Bookmark with ScrapBook' menu">
-<!ENTITY sb.pref.browser.submenu "Povolit podnabídku uvnitř místní nabídky (změní se po restartu).">
+<!ENTITY sb.pref.browser.menubar "Zobrazit hlavní nabídku 'ScrapBook'">
+<!ENTITY sb.pref.browser.bookmark "Zobrazit kontextovou nabídku 'Přidat do ScrapBook záložek'">
+<!ENTITY sb.pref.browser.submenu "Povolit podnabídku uvnitř místní nabídky (změní se po restartu)">
 <!ENTITY sb.pref.showDetailOnDrop "Zobrazit 'dialog zachycení', pokud dojde k zachycení přetažením do postranní lišty">
 <!ENTITY sb.pref.notifyOnComplete "Zobrazit notifikaci 'Zachycení dokončeno'">
-<!ENTITY sb.pref.confirmDelete "Confirm before deleting">
+<!ENTITY sb.pref.confirmDelete "Potvrzení před smazáním">
 <!ENTITY sb.pref.tree.autoCollapse "Při rozbalení adresáře, sbal všechny ostatní složky">
-<!ENTITY sb.pref.tree.unshift "Position where to add item when moving/capturing into folder:">
-<!ENTITY sb.pref.tree.unshift.top "Top">
-<!ENTITY sb.pref.tree.unshift.bottom "Bottom (Default)">
+<!ENTITY sb.pref.tree.unshift "Pozice ve složce kam se přidá položka při přesunutí/zachycení:">
+<!ENTITY sb.pref.tree.unshift.top "Nahoru">
+<!ENTITY sb.pref.tree.unshift.bottom "Dolů (standardně)">
 <!ENTITY sb.pref.tabs.tips "Akce při kterých se použijí nové panely:">
 <!ENTITY sb.pref.tabs.note "Otevírat poznámky v panelu">
-<!ENTITY sb.pref.tabs.openFromMenu "Open in new tab from 'ScrapBook' menu in Firefox menubar">
+<!ENTITY sb.pref.tabs.openFromMenu "Otevřít nový panel z hlavní nabídky 'ScrapBook'">
 <!ENTITY sb.pref.capture.encodeUTF8 "Převést do UTF-8 kódování  (Doporučeno)">
 <!ENTITY sb.pref.capture.encodeUTF8.tips "Pokud není zaškrtnuto, některé znaky budou často zobrazeny jako '?'">
 <!ENTITY sb.pref.capture.noscript.tips "Pokud není zaškrtnuto, je hodně problémů způsobeno JavaScriptem.">
@@ -23,11 +23,11 @@
 <!ENTITY sb.pref.data.default "Standardní (ve vašem Profilu)">
 <!ENTITY sb.pref.data.tips "Vyberte adresář ScrapBook kam se mají uložit nashromážděná data.">
 <!ENTITY sb.pref.data.alert "Momentálně jsou data rozšíření ScrapBook uložena v uživatelském profilu. Při práci s tlačítkem [Smazat soubory] buďte, prosím, opatrní - můžete tak vymazat VŠECHNA data rozšíření ScrapBook.">
-<!ENTITY sb.pref.multibook.enabled "Enable Multi-ScrapBook">
-<!ENTITY sb.pref.multibook.tips "This option enables you to set up multiple destination to store data and switch between them quickly with toolbar button.">
+<!ENTITY sb.pref.multibook.enabled "Povolit Multi-ScrapBook">
+<!ENTITY sb.pref.multibook.tips "Tato možnost vám dovolí nastavit více cest kam se budou ukládat data a jejich rychlé přepínání mezi nimi pomocí tlačítka na nástrojové liště.">
 <!ENTITY sb.pref.fileViewer "Program pro 'Procházení souborů'">
 <!ENTITY sb.pref.fileViewer.default "Standardní (Na Windows pravděpodobně Explorer)">
 <!ENTITY sb.tips.highlighter "TIP: Výběr můžete zvýraznit stisknutím klávesy 1 nebo 2 nebo 3 nebo 4.">
-<!ENTITY sb.tips.eraser "TIP: You can isolate an element by right-clicking it with DOM Eraser.">
+<!ENTITY sb.tips.eraser "TIP: Prvek můžete izolovat kliknutím pravého tlačítka myši nástroje DOM Zmizík.">
 <!ENTITY sb.button.browse "Procházet">
 <!ENTITY sb.button.show "Zobrazit složku">

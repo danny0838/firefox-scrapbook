@@ -2,5 +2,6 @@
 <!ENTITY sb.multiple.detector "Detector d'URL">
 <!ENTITY sb.multiple.detector.plink "Tots els enllaços de la pàgina">
 <!ENTITY sb.multiple.detector.slink "Tots els enllaços de la selecció">
+<!ENTITY sb.multiple.detector.tabs "Totes les pestanyes obertes a la finestra">
 <!ENTITY sb.multiple.detector.local "Tots els fitxers HTML de la carpeta">
 <!ENTITY sb.multiple.detector.clear "Buida">

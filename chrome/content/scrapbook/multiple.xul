@@ -14,6 +14,8 @@
 %detailDTD;
 <!ENTITY % multipleDTD SYSTEM "chrome://scrapbook/locale/multiple.dtd" >
 %multipleDTD;
+<!ENTITY % overlayDTD  SYSTEM "chrome://scrapbook/locale/overlay.dtd" >
+%overlayDTD;
 ]>
 
 <!--dialog-->
@@ -21,8 +23,10 @@
         title="&sb.tools.multiple; - ScrapBook"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         style="width:400px;"
+        buttonlabelextra2="&sb.capture.alltabs;"
         onload="sbMultipleService.init();"
         ondialogaccept="sbMultipleService.done();"
+        ondialogextra2="window.opener.top.sbMenuHandler.execCaptureAllTabs(sbFolderSelector2.selection);window.close();"
         windowtype="scrapbook">
 
 	<!--script-->
@@ -52,17 +56,18 @@
 
 	<description>&sb.multiple.url;:</description>
 	<hbox align="right">
-		<toolbarbutton type="menu" label="&sb.multiple.detector;">
+		<button type="menu" label="&sb.multiple.detector;">
 			<menupopup>
 				<menuitem label="&sb.multiple.detector.plink;" oncommand="sbMultipleService.detectURLsInPage();" />
 				<menuitem label="&sb.multiple.detector.slink;" oncommand="sbMultipleService.detectURLsInSelection();" />
+				<menuitem label="&sb.multiple.detector.tabs;"  oncommand="sbMultipleService.detectURLsOfTabs();" />
 				<menuitem label="&sb.multiple.detector.local;" oncommand="sbURLDetector1.run();" />
 				<menuitem label="Bookmarks (bookmarks.html)"   oncommand="sbURLDetector2.run('B');" />
 				<menuitem label="WeBoX (default.html)"         oncommand="sbURLDetector2.run('W');" />
 				<menuseparator />
 				<menuitem label="&sb.multiple.detector.clear;"    oncommand="sbMultipleService.clear();" />
 			</menupopup>
-		</toolbarbutton>
+		</button>
 	</hbox>
 	<textbox id="ScrapBookTextbox" multiline="true" rows="15" flex="1" />
 	<label id="sbStatus" crop="end" value="" />

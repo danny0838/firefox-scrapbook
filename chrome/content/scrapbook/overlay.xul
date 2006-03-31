@@ -68,13 +68,15 @@
 
 	<!--menubar-->
 	<menubar id="main-menubar">
-		<menu id="ScrapBookMenu" label="ScrapBook" accesskey="&sb.key.menubar;" insertafter="bookmarks-menu"
+		<menu id="ScrapBookMenu" label="ScrapBook"
 		      datasources="rdf:null" ref="urn:scrapbook:root" flags="dont-test-empty"
-		      oncommand="sbMenuHandler.open(event);" onclick="if ( event.button == 1 ) sbMenuHandler.open(event);">
+		      accesskey="&sb.key.menubar;" insertafter="bookmarks-menu bookmarksMenu"
+		      oncommand="sbMenuHandler.onClick(event);"
+		      onclick="if ( event.button == 1 ) sbMenuHandler.onClick(event);">
 			<menupopup onpopupshowing="sbMenuHandler.onPopupShowing(event,this);">
-				<menuitem id="ScrapBookMenubarItem1" class="menuitem-iconic" label="&sb.capture.entire;"       command="cmd_ScrapBookCaptureEntire"   key="key_ScrapBookCaptureEntire" />
-				<menuitem id="ScrapBookMenubarItem2" class="menuitem-iconic" label="&sb.capture.entire.as;..." command="cmd_ScrapBookCaptureEntireAs" key="key_ScrapBookCaptureEntireAs" />
-				<menuitem id="ScrapBookMenubarItem3" class="menuitem-iconic" label="&sb.capture.alltabs;..."   oncommand="sbMenuHandler.execCaptureAllTabs();" />
+				<menuitem id="ScrapBookMenubarItem1" key="key_ScrapBookCaptureEntire" />
+				<menuitem id="ScrapBookMenubarItem2" key="key_ScrapBookCaptureEntireAs" />
+				<menuitem id="ScrapBookMenubarItem3" class="menuitem-iconic sb-capture-entire-as" label="&sb.capture.alltabs;..." oncommand="sbMenuHandler.execCaptureAllTabs();" />
 				<menuitem label="ScrapBook" observes="viewScrapBookSidebar" key="key_openScrapBookSidebar" />
 				<menuseparator />
 			</menupopup>
@@ -98,6 +100,11 @@
 			</template>
 		</menu>
 	</menubar>
+
+	<!--Tools menu-->
+	<menupopup id="menu_ToolsPopup">
+		<menuitem id="ScrapBookToolsMenu" key="key_openScrapBookSidebar" observes="viewScrapBookSidebar" position="1" />
+	</menupopup>
 
 	<!--context menu-->
 	<popup id="contentAreaContextMenu">
@@ -184,7 +191,7 @@
 					</menupopup>
 				</toolbarbutton>
 				<toolbarbutton id="ScrapBookEditEraser"  tooltiptext="&sb.editor.eraser;"  image="chrome://scrapbook/skin/edit_eraser.png" oncommand="sbDOMEraser.init(this.getAttribute('checked') ? 2 : 1);" type="checkbox" />
-				<toolbarbutton id="ScrapBookEditUndo"    label="&sb.editor.undo;"          image="chrome://scrapbook/skin/edit_undo.png"   oncommand="sbDOMEraser.undo();" accesskey="Z" hidden="true" />
+				<toolbarbutton id="ScrapBookEditUndo"    label="&sb.editor.undo;"          image="chrome://scrapbook/skin/edit_undo.png"   oncommand="sbPageEditor.undo();" accesskey="Z" hidden="true" />
 				<toolbarbutton id="ScrapBookEditRestore" tooltiptext="&sb.editor.restore;" image="chrome://scrapbook/skin/edit_undo.png"   oncommand="sbPageEditor.restore();" />
 				<toolbarbutton id="ScrapBookEditSave"    tooltiptext="&sb.editor.save;"    image="chrome://scrapbook/skin/edit_save.png"   oncommand="sbPageEditor.save1();sbPageEditor.save2();" accesskey="S" />
 				<toolbarbutton image="chrome://scrapbook/skin/expander_left.png" tooltiptext="&sb.locate;" oncommand="sbBrowserOverlay.locate(sbBrowserOverlay.resource);" />

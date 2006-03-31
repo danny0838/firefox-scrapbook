@@ -50,8 +50,8 @@
 	<!--popup-->
 	<popupset id="sbPopupSet">
 		<popup id="sbTradeTreePopup">
-			<menuitem label="&sb.open;"        oncommand="sbTrader.open(false);" default="true" />
-			<menuitem label="&sb.open.newtab;" oncommand="sbTrader.open(true);"  />
+			<menuitem label="&sb.open;"        oncommand="sbTrader.open(event, false);" default="true" />
+			<menuitem label="&sb.open.newtab;" oncommand="sbTrader.open(event, true);"  />
 			<menuitem label="&sb.show.files;"  oncommand="sbTrader.showFiles();" />
 			<menuseparator />
 			<menuitem class="menuitem-iconic" label="&sb.remove;"   src="chrome://scrapbook/skin/menu_remove.png"   oncommand="sbTrader.deleteDir();" />
@@ -96,6 +96,7 @@
 			<tree id="sbTradeTree"
 			      seltype="multiple"
 			      contextmenu="sbTradeTreePopup"
+			      onclick="if ( event.button == 1 ) sbTrader.open(event,true);"
 			      ondblclick="sbTrader.onDblClick(event);"
 			      onkeypress="sbTrader.onKeyPress(event);"
 			      onfocus="sbTrader.context = 'import';"
@@ -104,8 +105,10 @@
 			      ondragdrop="nsDragAndDrop.drop(event,sbTrader.dragDropObserver);"
 			      class="plain" flex="1">
 				<treecols>
-					<treecol id="sbTradeTreeColTitle"  label="&sb.prop.title;"  sortIndex="0" flex="3" primary="true" />
+					<treecol id="sbTradeTreeColTitle"  label="&sb.prop.title;"  sortIndex="0" flex="2" primary="true" />
+					<splitter class="tree-splitter" />
 					<treecol id="sbTradeTreeColDate"   label="&sb.trade.time;"  sortIndex="5" flex="1" sortDirection="ascending" />
+					<splitter class="tree-splitter" />
 					<treecol id="sbTradeTreeColFolder" label="&sb.prop.folder;" sortIndex="2" flex="1" />
 				</treecols>
 				<treechildren flex="1" />

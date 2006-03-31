@@ -102,7 +102,6 @@ var sbMultiBookService = {
 			}
 		} catch(ex) {
 		}
-		document.getElementById("mbToolbarButton").disabled = true;
 		nsPreferences.setBoolPref("scrapbook.data.default", isDefault);
 		if ( !isDefault ) nsPreferences.setUnicharPref("scrapbook.data.path", aItem.getAttribute("path"));
 		try {
@@ -122,7 +121,14 @@ var sbMultiBookService = {
 		} catch(ex) {
 		}
 		this.refreshGlobal();
-		window.location.reload();
+		if ( window.location.href == "chrome://scrapbook/content/trade.xul" )
+		{
+			sbTreeHandler.exit();
+			sbTreeDNDHandler.quit();
+			SB_initTrade();
+		}
+		else
+			sbMainService.refresh();
 	},
 
 
@@ -143,13 +149,14 @@ var sbMultiBookService = {
 
 	refreshGlobal : function()
 	{
-		winEnum = sbCommonUtils.WINDOW.getEnumerator("navigator:browser");
+		var winEnum = sbCommonUtils.WINDOW.getEnumerator("navigator:browser");
 		while ( winEnum.hasMoreElements() )
 		{
 			var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
 			try {
 				win.sbBrowserOverlay.refresh();
-				win.document.getElementById("sidebar").contentDocument.location.reload();
+				win.sbBrowserOverlay.onLocationChange();
+				win.document.getElementById("sidebar").contentWindow.sbMainService.refresh();
 			} catch(ex) {
 			}
 		}

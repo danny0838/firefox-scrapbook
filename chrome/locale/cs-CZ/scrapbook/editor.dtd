@@ -1,14 +1,14 @@
 <!ENTITY sb.editor "Editační lišta">
-<!ENTITY sb.editor.eraser "DOM-Guma: Nástroj pro odstranění vybraného bloku.">
+<!ENTITY sb.editor.eraser "DOM Zmizík: Nástroj pro odstranění vybraného bloku.">
 <!ENTITY sb.editor.undo "Zpět">
 <!ENTITY sb.editor.restore "Opustit změny a obnovit">
 <!ENTITY sb.editor.save "Uložit změny">
 <!ENTITY sb.editor.comment "Zobrazit pole pro komentář">
-<!ENTITY sb.editor.sticky "Sticky Annotation">
-<!ENTITY sb.editor.sticky.create "Create &sb.editor.sticky;">
-<!ENTITY sb.editor.inline.add "Add Inline Annotation to Selection">
-<!ENTITY sb.editor.attach.file "Připojit Soubor pro Výběr">
-<!ENTITY sb.editor.attach.link "Připojit Odkaz pro Výběr">
+<!ENTITY sb.editor.sticky "Nálepku">
+<!ENTITY sb.editor.sticky.create "Vytvořit &sb.editor.sticky;">
+<!ENTITY sb.editor.inline.add "Vložit poznámku k výběru">
+<!ENTITY sb.editor.attach.file "Připojit Soubor k výběru">
+<!ENTITY sb.editor.attach.link "Připojit Odkaz k výběru">
 <!ENTITY sb.editor.cutter "Odstranit výběr">
 <!ENTITY sb.editor.remove.iframe "Odstranit VŠECHNY tagy IFRAME">
 <!ENTITY sb.editor.remove.script "Odstranit VŠECHNY tagy SCRIPT">
@@ -17,9 +17,9 @@
 <!ENTITY sb.highlighter.remove.all "Odstranit všechna zvýraznění">
 <!ENTITY sb.customize "Přizpůsobit">
 <!ENTITY sb.infobar.openSource "Otevřít zdroj URL">
-<!ENTITY sb.infobar.renew "Capture Again">
-<!ENTITY sb.infobar.showIndicators "Show Link Indicators">
-<!ENTITY sb.infobar.showInfobar "Show Info Toolbar">
+<!ENTITY sb.infobar.renew "Zachytit Znovu">
+<!ENTITY sb.infobar.showIndicators "Zobrazit ukazatele typů odkazů">
+<!ENTITY sb.infobar.showInfobar "Zobrazit Informační lištu">
 <!ENTITY sb.infobar.home "Domů">
 <!ENTITY sb.infobar.sitemap "Mapa stránky">
 <!ENTITY sb.locate "Ukázat v postranní liště">

@@ -257,7 +257,7 @@ var sbDataSource = {
 
 	getURL : function(aRes)
 	{
-		var id = this.getProperty(aRes, "id");
+		var id = aRes.Value.substring(18);
 		switch ( this.getProperty(aRes, "type") )
 		{
 			case "folder"   : return "chrome://scrapbook/content/view.xul?id=" + id; break;

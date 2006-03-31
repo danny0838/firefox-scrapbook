@@ -8,8 +8,8 @@
 <!ENTITY sb.capture.target.as "Zachytit odkaz jako">
 <!ENTITY sb.capture.folder.root "Kořenová složka">
 <!ENTITY sb.capture.folder.select "Vybrat složku">
-<!ENTITY sb.capture.alltabs "Capture All Tabs">
-<!ENTITY sb.capture.bookmark "Bookmark with ScrapBook">
+<!ENTITY sb.capture.alltabs "Zachytit všechny panely">
+<!ENTITY sb.capture.bookmark "Přidat do ScrapBook záložek">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">

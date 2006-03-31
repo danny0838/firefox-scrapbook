@@ -2,4 +2,4 @@
 <!ENTITY sb.trade.export "Exportovat">
 <!ENTITY sb.trade.time "Čas exportování">
 <!ENTITY sb.trade.restore "Importovat se strukturou obnovené složky">
-<!ENTITY sb.trade.remove "Remove files after importing">
+<!ENTITY sb.trade.remove "Odstranit soubory po importování">

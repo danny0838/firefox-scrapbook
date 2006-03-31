@@ -11,6 +11,7 @@ var sbPageEditor = {
 	multiline : false,
 	frameList : [],
 	focusedWindow : null,
+	savedBody : null,
 
 	init : function()
 	{
@@ -32,6 +33,7 @@ var sbPageEditor = {
 
 	delayedInit : function()
 	{
+		sbPageEditor.allowUndo(null);
 		this.COMMENT.value = this.item.comment.replace(/ __BR__ /g, this.multiline ? "\n" : "\t");
 		if ( gBrowser.currentURI.spec.indexOf("index.html") > 0 )
 		{
@@ -115,9 +117,9 @@ var sbPageEditor = {
 	{
 		var sel = this.getSelection();
 		if ( !sel ) return;
+		this.allowUndo(this.focusedWindow.document);
 		sel.deleteFromDocument();
 		this.changed1 = true;
-		sbDOMEraser.allowUndo(false);
 	},
 
 	highlight : function(idx)
@@ -126,12 +128,12 @@ var sbPageEditor = {
 		document.getElementById("ScrapBookHighlighter").setAttribute("color", idx);
 		var sel = this.getSelection();
 		if ( !sel ) return;
+		this.allowUndo(this.focusedWindow.document);
 		var attr = {};
 		attr["class"] = "linemarker-marked-line";
 		attr["style"] = nsPreferences.copyUnicharPref("scrapbook.highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);
 		sbHighlighter.set(this.focusedWindow, sel, "span", attr);
 		this.changed1 = true;
-		sbDOMEraser.allowUndo(false);
 	},
 
 	removeHighlights : function()
@@ -179,7 +181,7 @@ var sbPageEditor = {
 			}
 		}
 		this.changed1 = true;
-		sbDOMEraser.allowUndo(false);
+		this.allowUndo(null);
 	},
 
 	removeElementsByTagName : function(aTagName)
@@ -200,7 +202,7 @@ var sbPageEditor = {
 		if ( shouldSave )
 		{
 			this.changed1 = true;
-			sbDOMEraser.allowUndo(false);
+			this.allowUndo(null);
 		}
 	},
 
@@ -222,6 +224,20 @@ var sbPageEditor = {
 		if ( this.confirmSave() == 1 ) this.restore();
 		if ( sbDOMEraser.enabled ) sbDOMEraser.init(2);
 		this.showHide(false);
+	},
+
+	allowUndo : function(aTargetDocument)
+	{
+		document.getElementById("ScrapBookEditUndo").hidden    = aTargetDocument ? false : true;
+		document.getElementById("ScrapBookEditRestore").hidden = aTargetDocument ? true  : false;
+		if ( aTargetDocument ) this.savedBody = aTargetDocument.body.cloneNode(true);
+	},
+
+	undo : function()
+	{
+		this.savedBody.ownerDocument.body.parentNode.replaceChild(this.savedBody, this.savedBody.ownerDocument.body);
+		document.getElementById("ScrapBookEditTooltip").hidden = true;
+		this.allowUndo(null);
 	},
 
 	confirmSave : function()
@@ -358,10 +374,7 @@ var sbPageEditor = {
 
 var sbDOMEraser = {
 
-	parent   : null,
-	child    : null,
-	refChild : null,
-	enabled  : false,
+	enabled : false,
 
 	init : function(aStateFlag)
 	{
@@ -369,7 +382,6 @@ var sbDOMEraser = {
 		document.getElementById("ScrapBookHighlighter").disabled = this.enabled;
 		document.getElementById("ScrapBookEditAnnotation").disabled = this.enabled;
 		document.getElementById("ScrapBookEditCutter").disabled  = this.enabled;
-		this.allowUndo(false);
 		if ( aStateFlag == 0 ) return;
 		sbPageEditor.frameList = [window._content];
 		sbPageEditor.getFrameList(window._content);
@@ -408,15 +420,13 @@ var sbDOMEraser = {
 				if ( !elem.getAttribute("style") ) elem.removeAttribute("style");
 				if ( aEvent.type == "click" )
 				{
+					sbPageEditor.allowUndo(elem.ownerDocument);
 					if ( aEvent.button == 0 )
 					{
 						if ( onMarker ) {
 							sbPageEditor.stripAttributes(elem);
 						} else {
-							this.parent   = elem.parentNode;
-							this.refChild = elem.nextSibling;
-							this.child    = this.parent.removeChild(elem);
-							this.allowUndo(true);
+							elem.parentNode.removeChild(elem);
 						}
 					}
 					else if ( aEvent.button == 2 )
@@ -426,7 +436,6 @@ var sbDOMEraser = {
 						{
 							elem.parentNode.removeChild(elem.parentNode.childNodes[i]);
 						}
-						this.allowUndo(false);
 					}
 					sbPageEditor.changed1 = true;
 				}
@@ -435,19 +444,6 @@ var sbDOMEraser = {
 				this.undo();
 				break;
 		}
-	},
-
-	allowUndo : function(aBool)
-	{
-		document.getElementById("ScrapBookEditUndo").hidden = !aBool;
-		document.getElementById("ScrapBookEditRestore").hidden = aBool;
-	},
-
-	undo : function()
-	{
-		this.parent.insertBefore(this.child, this.refChild);
-		this.allowUndo(false);
-		document.getElementById("ScrapBookEditTooltip").hidden = true;
 	},
 
 };
@@ -491,6 +487,7 @@ var sbAnnotationService = {
 	{
 		var win = sbCommonUtils.getFocusedWindow();
 		if ( win.document.body instanceof HTMLFrameSetElement ) win = win.frames[0];
+		sbPageEditor.allowUndo(win.document);
 		var targetNode;
 		if ( aPreset ) {
 			targetNode = aPreset[0];
@@ -522,8 +519,8 @@ var sbAnnotationService = {
 			headNode.appendChild(win.document.createTextNode("\n"));
 		}
 		this.editSticky(div);
-		this.change();
-		sbPageEditor.disableTemporary(1000);
+		sbPageEditor.changed1 = true;
+		sbPageEditor.disableTemporary(500);
 	},
 
 	editSticky : function(oldElem)
@@ -533,7 +530,7 @@ var sbAnnotationService = {
 		oldElem.parentNode.replaceChild(newElem, oldElem);
 		this.adjustTextArea(newElem);
 		setTimeout(function(){ newElem.firstChild.nextSibling.focus(); }, 100);
-		this.change();
+		sbPageEditor.changed1 = true;
 	},
 
 	startDrag : function(aTargetDiv, aEvent, aAction)
@@ -560,7 +557,7 @@ var sbAnnotationService = {
 			aTargetDiv.style.height = y + "px";
 			if ( aTargetDiv.firstChild.nextSibling instanceof HTMLTextAreaElement ) this.adjustTextArea(aTargetDiv);
 		}
-		this.change();
+		sbPageEditor.changed1 = true;
 		this.escape(aEvent);
 	},
 
@@ -614,20 +611,12 @@ var sbAnnotationService = {
 		return mainDiv;
 	},
 
-	change : function()
-	{
-		if ( !sbPageEditor.changed1 )
-		{
-			sbPageEditor.changed1 = true;
-			sbDOMEraser.allowUndo(false);
-		}
-	},
-
 
 	addInline : function()
 	{
 		var sel = sbPageEditor.getSelection();
 		if ( !sel ) return;
+		sbPageEditor.allowUndo(sbPageEditor.focusedWindow.document);
 		var ret = {};
 		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbPageEditor.STRING.getFormattedString("EDIT_INLINE", [sbCommonUtils.crop(sel.toString(), 32)]), ret, null, {}) ) return;
 		if ( !ret.value ) return;
@@ -655,6 +644,7 @@ var sbAnnotationService = {
 	{
 		var sel = sbPageEditor.getSelection();
 		if ( !sel ) return;
+		sbPageEditor.allowUndo(sbPageEditor.focusedWindow.document);
 		var attr = {};
 		if ( aFlag == "L" )
 		{

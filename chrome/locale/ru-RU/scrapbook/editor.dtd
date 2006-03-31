@@ -4,9 +4,9 @@
 <!ENTITY sb.editor.restore "Отменить все правки и вернуться к первоначальному виду">
 <!ENTITY sb.editor.save "Зафиксировать правки">
 <!ENTITY sb.editor.comment "Расширить поле комментария">
-<!ENTITY sb.editor.sticky "Sticky Annotation">
-<!ENTITY sb.editor.sticky.create "Create &sb.editor.sticky;">
-<!ENTITY sb.editor.inline.add "Add Inline Annotation to Selection">
+<!ENTITY sb.editor.sticky "Быстрое применчание">
+<!ENTITY sb.editor.sticky.create "Создать &sb.editor.sticky;">
+<!ENTITY sb.editor.inline.add "Добавить встроенное применчание к выделенному">
 <!ENTITY sb.editor.attach.file "Присоединить файл к выделенному">
 <!ENTITY sb.editor.attach.link "Присоединить ссылку к выделенному">
 <!ENTITY sb.editor.cutter "Удалить выделенное">
@@ -17,9 +17,9 @@
 <!ENTITY sb.highlighter.remove.all "Удалить все цветовые пометки">
 <!ENTITY sb.customize "Настроить">
 <!ENTITY sb.infobar.openSource "Открыть исходный URL">
-<!ENTITY sb.infobar.renew "Capture Again">
-<!ENTITY sb.infobar.showIndicators "Show Link Indicators">
-<!ENTITY sb.infobar.showInfobar "Show Info Toolbar">
+<!ENTITY sb.infobar.renew "Захватить снова">
+<!ENTITY sb.infobar.showIndicators "Показать индикаторы ссылок">
+<!ENTITY sb.infobar.showInfobar "Показать информационную панель">
 <!ENTITY sb.infobar.home "Домой">
 <!ENTITY sb.infobar.sitemap "Карта сайта">
 <!ENTITY sb.locate "Синхронизировать с деревом боковой панели">

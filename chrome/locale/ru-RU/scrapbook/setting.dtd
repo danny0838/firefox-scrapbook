@@ -3,19 +3,19 @@
 <!ENTITY sb.pref.capture "Захват">
 <!ENTITY sb.pref.edit "Редактирование">
 <!ENTITY sb.pref.advanced "Дополнительно">
-<!ENTITY sb.pref.browser.menubar "Show 'ScrapBook' menu in Firefox menubar">
-<!ENTITY sb.pref.browser.bookmark "Show 'Bookmark with ScrapBook' menu">
+<!ENTITY sb.pref.browser.menubar "Показать меню 'Scrapbook' в главном меню Firefox">
+<!ENTITY sb.pref.browser.bookmark "Показать меню 'Добавить в закладки Scrapbook'">
 <!ENTITY sb.pref.browser.submenu "Включить подменю в контекстном меню браузера (Изменится после перезагрузки)">
 <!ENTITY sb.pref.showDetailOnDrop "Показывать диалог 'Детали сохранения' при сохранении страницы перетаскиванием иконки">
 <!ENTITY sb.pref.notifyOnComplete "Показывать сообщение 'Сохранение завершено'">
-<!ENTITY sb.pref.confirmDelete "Confirm before deleting">
+<!ENTITY sb.pref.confirmDelete "Подтверждение перед удалением">
 <!ENTITY sb.pref.tree.autoCollapse "При раскрытии папки дерева, остальные свернуть">
-<!ENTITY sb.pref.tree.unshift "Position where to add item when moving/capturing into folder:">
-<!ENTITY sb.pref.tree.unshift.top "Top">
-<!ENTITY sb.pref.tree.unshift.bottom "Bottom (Default)">
+<!ENTITY sb.pref.tree.unshift "Позиция добавления элемента во время переноса/захвата в папку:">
+<!ENTITY sb.pref.tree.unshift.top "Верх">
+<!ENTITY sb.pref.tree.unshift.bottom "Низ (по умолчанию)">
 <!ENTITY sb.pref.tabs.tips "Следующие действия выполнять в новых вкладках:">
 <!ENTITY sb.pref.tabs.note "Открыть заметки во вкладке">
-<!ENTITY sb.pref.tabs.openFromMenu "Open in new tab from 'ScrapBook' menu in Firefox menubar">
+<!ENTITY sb.pref.tabs.openFromMenu "Открывать в новой вкладке из меню 'Scrapbook' в главном меню Firefox">
 <!ENTITY sb.pref.capture.encodeUTF8 "Перевести в кодировку UTF-8 (рекомендуется)">
 <!ENTITY sb.pref.capture.encodeUTF8.tips "Если выключено, то некоторые последовательности символов будут отображаться как '?'.">
 <!ENTITY sb.pref.capture.noscript.tips "Если это выключить, то может быть много проблем из-за JavaScript.">
@@ -28,6 +28,6 @@
 <!ENTITY sb.pref.fileViewer "Программа для выполнения пункта 'Состав файлов'">
 <!ENTITY sb.pref.fileViewer.default "По умолчанию (Если Windows, возможно Explorer)">
 <!ENTITY sb.tips.highlighter "Советы: Вы можете подсветить выделение с помощью клавиш 1, 2, 3 или 4.">
-<!ENTITY sb.tips.eraser "Советы: You can isolate an element by right-clicking it with DOM Eraser.">
+<!ENTITY sb.tips.eraser "Советы: Вы можете изолировать элмент нажатием правой кнопки мыши с DOM Eraser.">
 <!ENTITY sb.button.browse "Выбрать">
 <!ENTITY sb.button.show "Показать папку">

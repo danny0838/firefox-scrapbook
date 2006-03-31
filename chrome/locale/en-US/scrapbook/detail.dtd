@@ -2,7 +2,8 @@
 <!ENTITY sb.detail.new.folder "New Folder">
 <!ENTITY sb.detail.select.folder "Select Folder">
 <!ENTITY sb.detail.option "Options">
-<!ENTITY sb.detail.option.format "Images and Styles">
+<!ENTITY sb.detail.option.images "Images">
+<!ENTITY sb.detail.option.styles "Styles">
 <!ENTITY sb.detail.linked.file "Download linked files">
 <!ENTITY sb.detail.linked.image "Image">
 <!ENTITY sb.detail.linked.sound "Sound">
@@ -10,7 +11,6 @@
 <!ENTITY sb.detail.linked.archive "Archive">
 <!ENTITY sb.detail.linked.custom "Custom">
 <!ENTITY sb.detail.linked.page "In-depth Capture">
-<!ENTITY sb.detail.linked.page2 "Capture linked pages">
 <!ENTITY sb.detail.linked.page.depth "Depth to follow links">
 <!ENTITY sb.detail.linked.page.text "After completing captures, all pages will be linked each other and sitemap will be created.">
 <!ENTITY sb.detail.warnAboutRenew "NOTICE: 'Capture Again' overwrites the previously saved page.">

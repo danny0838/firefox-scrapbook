@@ -31,13 +31,13 @@
 	<!--popupset-->
 	<popupset id="sbPopupSet">
 		<!--tree/list popup-->
-		<popup id="sbPopup" onpopupshowing="sbController.onPopupShowing(event);" onmouseover="document.getElementById('sbPopupToolsMenu').hidePopup();">
-			<menuitem id="sbPopupOpen"       label="&sb.open;"        oncommand="sbController.open(null,false);" default="true" />
-			<menuitem id="sbPopupOpenTab"    label="&sb.open.tab;"    oncommand="sbController.open(null,true);" hidden="true" />
-			<menuitem id="sbPopupOpenNewTab" label="&sb.open.newtab;" oncommand="sbController.open(null,true);" />
-			<menuitem id="sbPopupOpenSource" label="&sb.open.source;" oncommand="sbController.forward(null,'S');" />
-			<menuitem id="sbPopupListView"     label="&sb.listview;"       oncommand="sbListHandler.init(null);" hidden="true" />
-			<menuitem id="sbPopupCombinedView" label="&sb.folder.combine;" oncommand="sbController.forward(null,'C');" hidden="true" />
+		<popup id="sbPopup" onpopupshowing="sbController.onPopupShowing(event);" onmouseover="if ( event.originalTarget.getAttribute('nodelay') ) document.getElementById('sbPopupToolsMenu').hidePopup();">
+			<menuitem id="sbPopupOpen"       label="&sb.open;"        oncommand="sbController.open(null,false);"  nodelay="true" default="true" />
+			<menuitem id="sbPopupOpenTab"    label="&sb.open.tab;"    oncommand="sbController.open(null,true);"   nodelay="true" hidden="true" />
+			<menuitem id="sbPopupOpenNewTab" label="&sb.open.newtab;" oncommand="sbController.open(null,true);"   nodelay="true" />
+			<menuitem id="sbPopupOpenSource" label="&sb.open.source;" oncommand="sbController.forward(null,'S');" nodelay="true" />
+			<menuitem id="sbPopupListView"     label="&sb.listview;"       oncommand="sbListHandler.init(null);"         hidden="true" />
+			<menuitem id="sbPopupCombinedView" label="&sb.folder.combine;" oncommand="sbController.forward(null,'C');"   hidden="true" />
 			<menuitem id="sbPopupOpenAllItems" label="&sb.folder.openall;" oncommand="sbController.openAllInTabs(null);" hidden="true" />
 			<menuseparator hidden="true" />
 			<menu id="sbPopupTools" label="&sb.tools;" onmouseover="event.preventBubble();">
@@ -121,7 +121,7 @@
 					<menuitem id="sbListToggleSource"  label="URL"               type="checkbox" persist="checked" />
 				</menupopup>
 			</toolbarbutton>
-			<toolbarbutton class="sb-header-exit" oncommand="sbListHandler.exit(true);" />
+			<toolbarbutton class="sb-header-exit" oncommand="sbListHandler.quit(true);" />
 		</hbox>
 		<richlistbox id="sbList"
 		             datasources="rdf:null"

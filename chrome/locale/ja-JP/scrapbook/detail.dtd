@@ -2,7 +2,8 @@
 <!ENTITY sb.detail.new.folder "新しいフォルダ">
 <!ENTITY sb.detail.select.folder "フォルダの選択">
 <!ENTITY sb.detail.option "オプション">
-<!ENTITY sb.detail.option.format "画像とスタイル">
+<!ENTITY sb.detail.option.images "画像">
+<!ENTITY sb.detail.option.styles "スタイル">
 <!ENTITY sb.detail.linked.file "リンク先ファイルのダウンロード">
 <!ENTITY sb.detail.linked.image "イメージ">
 <!ENTITY sb.detail.linked.sound "サウンド">
@@ -10,7 +11,6 @@
 <!ENTITY sb.detail.linked.archive "アーカイブ">
 <!ENTITY sb.detail.linked.custom "カスタム">
 <!ENTITY sb.detail.linked.page "掘り下げ取り込み">
-<!ENTITY sb.detail.linked.page2 "リンク先ページの取り込み">
 <!ENTITY sb.detail.linked.page.depth "リンクをたどる深さ">
 <!ENTITY sb.detail.linked.page.text "取り込み完了後、すべてのページは相互にリンクされ、サイトマップが生成されます。">
 <!ENTITY sb.detail.warnAboutRenew "注意: 再取り込みを行うと元のページに上書きされます。">

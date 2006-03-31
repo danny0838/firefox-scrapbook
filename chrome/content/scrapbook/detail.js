@@ -18,7 +18,7 @@ function SB_initDetail()
 	SB_fillTitleList();
 	if ( window.opener.sbContentSaver.item.source.indexOf("http://mail.google.com/") == 0 )
 	{
-		document.getElementById("sbDetailScript").disabled = true;
+		document.getElementById("sbDetailOptionScript").disabled = true;
 	}
 	if ( gArguments.context == "renew" || gArguments.context == "renew-deep" )
 	{
@@ -79,12 +79,13 @@ function SB_acceptDetail()
 {
 	window.opener.sbContentSaver.item.comment      = sbCommonUtils.escapeComment(document.getElementById("sbDetailComment").value);
 	window.opener.sbContentSaver.item.title        = document.getElementById("sbDetailTitle").value;
-	window.opener.sbContentSaver.option["format"]  = document.getElementById("sbDetailFormat").checked;
-	window.opener.sbContentSaver.option["script"]  = document.getElementById("sbDetailScript").checked;
-	window.opener.sbContentSaver.option["image"]   = document.getElementById("sbDetailImage").checked;
-	window.opener.sbContentSaver.option["sound"]   = document.getElementById("sbDetailSound").checked;
-	window.opener.sbContentSaver.option["movie"]   = document.getElementById("sbDetailMovie").checked;
-	window.opener.sbContentSaver.option["archive"] = document.getElementById("sbDetailArchive").checked;
+	window.opener.sbContentSaver.option["images"]  = document.getElementById("sbDetailOptionImages").checked;
+	window.opener.sbContentSaver.option["styles"]  = document.getElementById("sbDetailOptionStyles").checked;
+	window.opener.sbContentSaver.option["script"]  = document.getElementById("sbDetailOptionScript").checked;
+	window.opener.sbContentSaver.option["dlimg"]   = document.getElementById("sbDetailImage").checked;
+	window.opener.sbContentSaver.option["dlsnd"]   = document.getElementById("sbDetailSound").checked;
+	window.opener.sbContentSaver.option["dlmov"]   = document.getElementById("sbDetailMovie").checked;
+	window.opener.sbContentSaver.option["dlarc"]   = document.getElementById("sbDetailArchive").checked;
 	window.opener.sbContentSaver.option["inDepth"] = gInDepthLevel;
 	window.opener.sbContentSaver.option["custom"] = "";
 	if ( gCustomCheckbox.checked )

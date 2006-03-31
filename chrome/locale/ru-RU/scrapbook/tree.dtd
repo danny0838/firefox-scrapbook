@@ -5,11 +5,11 @@
 <!ENTITY sb.tools "Инструменты">
 <!ENTITY sb.show.files "Показать файлы">
 <!ENTITY sb.move "Переместить в папку">
-<!ENTITY sb.renew "Capture Again">
+<!ENTITY sb.renew "Захватить снова">
 <!ENTITY sb.export "Экспорт">
 <!ENTITY sb.remove "Удалить">
 <!ENTITY sb.property "Свойства">
-<!ENTITY sb.listview "List View">
+<!ENTITY sb.listview "Список">
 <!ENTITY sb.prop.title "Заголовок">
 <!ENTITY sb.prop.comment "Комментарий">
 <!ENTITY sb.prop.id.date "ID (Время)">

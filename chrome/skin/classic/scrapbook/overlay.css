@@ -15,12 +15,13 @@ toolbar[iconsize="small"] #scrapbook-button {
 
 /* ::::: CONTEXT_MENU ::::: */
 
+menuitem.sb-capture-partial,
     menu#ScrapBookContextMenu1 { list-style-image: url('chrome://scrapbook/skin/capture_partial.png'); }
+menuitem.sb-capture-partial-as,
 menuitem#ScrapBookContextMenu2 { list-style-image: url('chrome://scrapbook/skin/capture_partial_as.png'); }
-menuitem#ScrapBookMenubarItem1,
+menuitem.sb-capture-entire,
     menu#ScrapBookContextMenu3 { list-style-image: url('chrome://scrapbook/skin/capture_entire.png'); }
-menuitem#ScrapBookMenubarItem2,
-menuitem#ScrapBookMenubarItem3,
+menuitem.sb-capture-entire-as,
 menuitem#ScrapBookContextMenu4 { list-style-image: url('chrome://scrapbook/skin/capture_entire_as.png'); }
     menu#ScrapBookContextMenu5 { list-style-image: url('chrome://scrapbook/skin/capture_frame.png'); }
 menuitem#ScrapBookContextMenu6 { list-style-image: url('chrome://scrapbook/skin/capture_frame_as.png'); }

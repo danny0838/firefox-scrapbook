@@ -35,7 +35,15 @@ var sbMainService = {
 		this.prefs.tabsSearchResult = sbCommonUtils.getBoolPref("scrapbook.tabs.searchResult", true);
 		this.prefs.tabsCombinedView = sbCommonUtils.getBoolPref("scrapbook.tabs.combinedView", true);
 		this.prefs.tabsNote         = sbCommonUtils.getBoolPref("scrapbook.tabs.note",         false);
-		this.prefs.displayURL       = sbCommonUtils.getBoolPref("scrapbook.list.displayURL",   true);
+	},
+
+	refresh : function()
+	{
+		sbListHandler.quit();
+		sbListHandler.exit();
+		sbTreeHandler.exit();
+		sbTreeDNDHandler.quit();
+		this.init();
 	},
 
 	done : function()
@@ -49,7 +57,7 @@ var sbMainService = {
 		if ( !aRes ) aRes = window.top.sbBrowserOverlay.locateMe;
 		if ( "sbBrowserOverlay" in window.top ) window.top.sbBrowserOverlay.locateMe = null;
 		if ( aRes.Value == "urn:scrapbook:root" ) return;
-		if ( !sbDataSource.isContainer(aRes) ) sbListHandler.exit();
+		if ( !sbDataSource.isContainer(aRes) ) sbListHandler.quit();
 		var resList = [aRes];
 		for ( var i = 0; i < 32; i++ )
 		{
@@ -70,7 +78,7 @@ var sbMainService = {
 	createFolder : function()
 	{
 		if ( sbTreeHandler.TREE.ref == "urn:scrapbook:search" ) return;
-		sbListHandler.exit();
+		sbListHandler.quit();
 		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
 		var newItem = new ScrapBookItem(newID);
 		newItem.title = this.STRING.getString("DEFAULT_FOLDER");
@@ -110,7 +118,7 @@ var sbMainService = {
 	createNote : function(tabbed)
 	{
 		if ( sbTreeHandler.TREE.ref == "urn:scrapbook:search" ) return;
-		sbListHandler.exit();
+		sbListHandler.quit();
 		var tarResName, tarRelIdx, isRootPos;
 		try {
 			var curIdx = sbTreeHandler.TREE.currentIndex;
@@ -332,7 +340,7 @@ var sbTreeDNDHandler = {
 	{
 		onDragStart : function(event, transferData, action)
 		{
-			if ( event.originalTarget.localName != 'treechildren' ) return;
+			if ( event.originalTarget.localName != "treechildren" ) return;
 			var res = sbTreeHandler.TREE.builderView.getResourceAtIndex(sbTreeHandler.TREE.currentIndex);
 			transferData.data = new TransferData();
 			transferData.data.addDataForFlavour("moz/rdfitem", res.Value);
@@ -689,7 +697,7 @@ var sbSearchService = {
 		this.container = sbDataSource.getContainer("urn:scrapbook:search", true);
 		this.hitCount = 0;
 		this.processRecursive("urn:scrapbook:root");
-		sbListHandler.exit();
+		sbListHandler.quit();
 		sbTreeHandler.TREE.setAttribute("ref", "urn:scrapbook:search");
 		sbTreeHandler.TREE.builder.rebuild();
 		sbTreeDNDHandler.quit();

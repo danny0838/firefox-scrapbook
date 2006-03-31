@@ -72,13 +72,10 @@ function SB_initCapture()
 	else gContext = "link";
 	if ( !gOption ) gOption = {};
 	if ( !("script" in gOption ) ) gOption["script"] = false;
-	if ( !("format" in gOption ) ) gOption["format"] = true;
+	if ( !("images" in gOption ) ) gOption["images"] = true;
 	sbInvisibleBrowser.init();
 	sbCaptureTask.init(myURLs);
-	if ( gURLs.length == 1 )
-		sbCaptureTask.start();
-	else
-		sbCaptureTask.countDown();
+	gURLs.length == 1 ? sbCaptureTask.start() : sbCaptureTask.countDown();
 }
 
 
@@ -359,7 +356,7 @@ var sbInvisibleBrowser = {
 	{
 		this.fileCount = 0;
 		this.ELEMENT.docShell.allowJavascript = gOption["script"];
-		this.ELEMENT.docShell.allowImages     = gOption["format"];
+		this.ELEMENT.docShell.allowImages     = gOption["images"];
 		this.ELEMENT.docShell.allowMetaRedirects = false;
 		this.ELEMENT.docShell.QueryInterface(Components.interfaces.nsIDocShellHistory).useGlobalHistory = false;
 		this.ELEMENT.loadURI(aURL, null, null);

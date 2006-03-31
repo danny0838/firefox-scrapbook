@@ -2,7 +2,8 @@
 <!ENTITY sb.detail.new.folder "Új mappa">
 <!ENTITY sb.detail.select.folder "Mappa kiválasztása">
 <!ENTITY sb.detail.option "Options">
-<!ENTITY sb.detail.option.format "Images and Styles">
+<!ENTITY sb.detail.option.images "Images">
+<!ENTITY sb.detail.option.styles "Styles">
 <!ENTITY sb.detail.linked.file "A hivatkozott fájlok letöltése">
 <!ENTITY sb.detail.linked.image "Kép">
 <!ENTITY sb.detail.linked.sound "Hang">
@@ -10,7 +11,6 @@
 <!ENTITY sb.detail.linked.archive "Archívum">
 <!ENTITY sb.detail.linked.custom "Egyéni">
 <!ENTITY sb.detail.linked.page "Mélység rögzítés">
-<!ENTITY sb.detail.linked.page2 "A hivatkozott oldalak rögzítése">
 <!ENTITY sb.detail.linked.page.depth "A hivatkozás-követés mélysége">
 <!ENTITY sb.detail.linked.page.text "A rögzítések befejezése után egymáshoz kapcsolja valamennyi oldalt, és elkészíti a webhely szerkezetét.">
 <!ENTITY sb.detail.warnAboutRenew "NOTICE: 'Capture Again' overwrites the previously saved page.">

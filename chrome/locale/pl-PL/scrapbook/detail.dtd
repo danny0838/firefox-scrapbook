@@ -2,7 +2,8 @@
 <!ENTITY sb.detail.new.folder "Nowy folder">
 <!ENTITY sb.detail.select.folder "Wybierz folder">
 <!ENTITY sb.detail.option "Options">
-<!ENTITY sb.detail.option.format "Images and Styles">
+<!ENTITY sb.detail.option.images "Images">
+<!ENTITY sb.detail.option.styles "Styles">
 <!ENTITY sb.detail.linked.file "Pobierz odnośniki do">
 <!ENTITY sb.detail.linked.image "grafiki">
 <!ENTITY sb.detail.linked.sound "dźwięku">
@@ -10,7 +11,6 @@
 <!ENTITY sb.detail.linked.archive "archiwów">
 <!ENTITY sb.detail.linked.custom "Inne">
 <!ENTITY sb.detail.linked.page "Przechwytywanie szczegółowe">
-<!ENTITY sb.detail.linked.page2 "Przechwyć powiązane strony">
 <!ENTITY sb.detail.linked.page.depth "Dokładnie podążaj za odnośnikami">
 <!ENTITY sb.detail.linked.page.text "Po zakończeniu przechwytywania wszystkie strony będą powiązane ze sobą i zostanie utworzona mapa stron.">
 <!ENTITY sb.detail.warnAboutRenew "NOTICE: 'Capture Again' overwrites the previously saved page.">
