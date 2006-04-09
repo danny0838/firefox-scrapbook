@@ -85,7 +85,6 @@ richlistitem.combine .sblist-title {
 treechildren::-moz-tree-cell-text(bookmark),
 richlistitem.bookmark .sblist-title {
 	color: limegreen;
-/*	text-decoration: underline;*/
 }
 
 treechildren::-moz-tree-cell-text(invalid) {

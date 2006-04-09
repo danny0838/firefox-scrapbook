@@ -76,7 +76,7 @@ var sbOutputService = {
 		dir.append("tree");
 		if ( !dir.exists() ) dir.create(dir.DIRECTORY_TYPE, 0700);
 		var urlHash = {
-			"chrome://scrapbook/skin/treestyle.css"  : "style.css",
+			"chrome://scrapbook/skin/output.css"     : "output.css",
 			"chrome://scrapbook/skin/treeitem.png"   : "treeitem.png",
 			"chrome://scrapbook/skin/treenote.png"   : "treenote.png",
 			"chrome://scrapbook/skin/treefolder.png" : "folder.png",
@@ -116,7 +116,7 @@ var sbOutputService = {
 			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
 			this.content += '<li class="depth' + String(this.depth) + '">';
 			this.content += this.getHTMLBody(res);
-			if ( sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, res) ) this.processRescursively(res);
+			if ( sbDataSource.isContainer(res) ) this.processRescursively(res);
 			this.content += "</li>\n";
 		}
 		this.content += "</ul>\n";
@@ -128,11 +128,11 @@ var sbOutputService = {
 		var HTML = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">\n\n'
 			+ '<html>\n\n'
 			+ '<head>\n'
-			+ '	<meta http-equiv="Content-Type" content="text/html;Charset=UTF-8">\n'
+			+ '	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">\n'
 			+ '	<meta http-equiv="Content-Style-Type" content="text/css">\n'
 			+ '	<meta http-equiv="Content-Script-Type" content="text/javascript">\n'
-			+ '	<title>ScrapBook</title>\n'
-			+ '	<link rel="stylesheet" type="text/css" href="./style.css" media="all">\n'
+			+ '	<title>' + document.title + '</title>\n'
+			+ '	<link rel="stylesheet" type="text/css" href="./output.css" media="all">\n'
 			+ '	<script type="text/javascript" language="JavaScript"><!--\n'
 			+ '	function toggle(aID) {\n'
 			+ '		var listElt = document.getElementById(aID);\n'
@@ -156,20 +156,21 @@ var sbOutputService = {
 
 	getHTMLBody : function(aRes)
 	{
-		var myID    = sbDataSource.getProperty(aRes, "id");
-		var myTitle = sbDataSource.getProperty(aRes, "title");
-		var myIcon  = sbDataSource.getProperty(aRes, "icon");
-		if ( myIcon.match(/(\/data\/\d{14}\/.*$)/) ) myIcon = ".." + RegExp.$1;
-		if ( !myIcon ) myIcon = sbCommonUtils.getFileName( sbCommonUtils.getDefaultIcon(sbDataSource.getProperty(aRes, "type")) );
-		myTitle = myTitle.replace(/</g, "&lt;");
-		myTitle = myTitle.replace(/>/g, "&gt;");
-		var target = this.optionFrame ? ' target="main"' : "";
-		if ( sbDataSource.getProperty(aRes, "type") == "folder" ) {
-			HTML = '<a class="folder" href="javascript:toggle(\'folder-' + myID + '\');"><img src="./folder.png" width="16" height="16" alt="">' + myTitle + '</a>\n';
+		var id    = sbDataSource.getProperty(aRes, "id");
+		var title = sbDataSource.getProperty(aRes, "title");
+		var icon  = sbDataSource.getProperty(aRes, "icon");
+		var type  = sbDataSource.getProperty(aRes, "type");
+		if ( icon.match(/(\/data\/\d{14}\/.*$)/) ) icon = ".." + RegExp.$1;
+		if ( !icon ) icon = sbCommonUtils.getFileName( sbCommonUtils.getDefaultIcon(type) );
+		title = title.replace(/</g, "&lt;");
+		title = title.replace(/>/g, "&gt;");
+		if ( type == "folder" ) {
+			return '<a class="folder" href="javascript:toggle(\'folder-' + id + '\');"><img src="./folder.png" width="16" height="16" alt="">' + title + '</a>\n';
 		} else {
-			HTML = '<a href="../data/' + myID + '/index.html"' + target + '><img src="' + myIcon + '" width="16" height="16" alt="">' + myTitle + '</a>';
+			var href   = type == "bookmark" ? sbDataSource.getProperty(aRes, "source") : "../data/" + id + "/index.html";
+			var target = this.optionFrame ? ' target="main"' : "";
+			return '<a href="' + href + '"' + target + ' class="' + type + '"><img src="' + icon + '" width="16" height="16" alt="">' + title + '</a>';
 		}
-		return HTML;
 	},
 
 	getHTMLFoot : function()
@@ -183,8 +184,8 @@ var sbOutputService = {
 		var HTML = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">\n\n'
 			+ '<html>\n\n'
 			+ '<head>\n'
-			+ '	<meta http-equiv="Content-Type" Content="text/html;Charset=UTF-8">\n'
-			+ '	<title>ScrapBook</title>\n'
+			+ '	<meta http-equiv="Content-Type" Content="text/html;charset=UTF-8">\n'
+			+ '	<title>' + document.title + '</title>\n'
 			+ '</head>\n\n'
 			+ '<frameset cols="200,*">\n'
 			+ '	<frame name="side" src="./index.html">\n'

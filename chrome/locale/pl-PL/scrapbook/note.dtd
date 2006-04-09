@@ -2,7 +2,7 @@
 <!ENTITY sb.note.close "Zamknij">
 <!ENTITY sb.note.tools "Narzędzia">
 <!ENTITY sb.note.htmlview "Podgląd dokumentu HTML">
-<!ENTITY sb.note.normalview "Normal View">
+<!ENTITY sb.note.normalview "Widok normalny">
 <!ENTITY sb.note.template "Edycja szablonu dokumentu HTML">
 <!ENTITY sb.note.autolinefeed "Autouzupełnianie">
 <!ENTITY sb.note.autolinefeed.t "Dodaj znacznik &lt;br&gt; na końcu linii w podglądzie dokumentu HTML">

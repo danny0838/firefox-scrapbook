@@ -754,11 +754,10 @@ sbCaptureObserverCallback = {
 		if ( gContext == "renew" || gContext == "renew-deep" )
 		{
 			sbCrossLinker.forceReloading(gPreset[0], gPreset[1]);
-			if ( gPreset[5] )
-			{
-				sbDataSource.init();
-				sbDataSource.setProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gPreset[0]), "type", "");
-			}
+			sbDataSource.init();
+			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gPreset[0]);
+			sbDataSource.setProperty(res, "chars", aItem.chars);
+			if ( gPreset[5] ) sbDataSource.setProperty(res, "type", "");
 		}
 		sbCaptureTask.succeed();
 	},

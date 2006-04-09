@@ -3,19 +3,19 @@
 <!ENTITY sb.pref.capture "Przechwytywanie">
 <!ENTITY sb.pref.edit "Edycja">
 <!ENTITY sb.pref.advanced "Zaawansowane">
-<!ENTITY sb.pref.browser.menubar "Show 'ScrapBook' menu in Firefox menubar">
-<!ENTITY sb.pref.browser.bookmark "Show 'Bookmark with ScrapBook' menu">
+<!ENTITY sb.pref.browser.menubar "Wyświetl menu ScrapBooka na pasku menu Firefoksa">
+<!ENTITY sb.pref.browser.bookmark "Wyświetl menu &quot;Dodaj do zakładek używając ScrapBooka&quot;">
 <!ENTITY sb.pref.browser.submenu "Włącz submenu w głównym menu kontekstowym przeglądarki (zmiany zostaną zastosowane po ponownym uruchomieniu przeglądarki)">
-<!ENTITY sb.pref.showDetailOnDrop "Pokaż okno 'Szczegóły przechwytywania', gdy przechwytujesz przeciągając ikonkę witryny lub etykietę karty do panelu bocznego">
-<!ENTITY sb.pref.notifyOnComplete "Pokaż okienko powiadomienia 'Przechwytywanie zakończone'">
-<!ENTITY sb.pref.confirmDelete "Confirm before deleting">
+<!ENTITY sb.pref.showDetailOnDrop "Pokaż okno &quot;Szczegóły przechwytywania&quot;, gdy przechwytujesz przeciągając ikonkę witryny lub etykietę karty do panelu bocznego">
+<!ENTITY sb.pref.notifyOnComplete "Pokaż okienko powiadomienia &quot;Przechwytywanie zakończone&quot;">
+<!ENTITY sb.pref.confirmDelete "Potwierdzaj przed usunięciem">
 <!ENTITY sb.pref.tree.autoCollapse "Gdy rozwijasz katalog jako drzewo katalogów, zwiń wszystkie inne katalogi">
-<!ENTITY sb.pref.tree.unshift "Position where to add item when moving/capturing into folder:">
-<!ENTITY sb.pref.tree.unshift.top "Top">
-<!ENTITY sb.pref.tree.unshift.bottom "Bottom (Default)">
+<!ENTITY sb.pref.tree.unshift "Gdy element jest przenoszony/przechwytywany do folderu umieść go:">
+<!ENTITY sb.pref.tree.unshift.top "Na górze">
+<!ENTITY sb.pref.tree.unshift.bottom "Na dole (domyślnie)">
 <!ENTITY sb.pref.tabs.tips "Zaznaczone poniżej akcje otwieraj w nowej karcie">
 <!ENTITY sb.pref.tabs.note "Otwórz notes w karcie">
-<!ENTITY sb.pref.tabs.openFromMenu "Open in new tab from 'ScrapBook' menu in Firefox menubar">
+<!ENTITY sb.pref.tabs.openFromMenu "Elementy otwierane z menu &quot;ScrapBook&quot; umieszczonego na pasku menu Firefoksa otwórz w nowej karcie">
 <!ENTITY sb.pref.capture.encodeUTF8 "Przekonwertuj na kodowanie UTF-8 (zalecane)">
 <!ENTITY sb.pref.capture.encodeUTF8.tips "Jeśli nie zaznaczysz tej opcji, niektóre litery zostaną przekształcone na '?'.">
 <!ENTITY sb.pref.capture.noscript.tips "Jeśli nie zaznaczysz tej opcji, czasami nie uda się zachować wyglądu strony.">
@@ -28,6 +28,6 @@
 <!ENTITY sb.pref.fileViewer "Określ menedżera plików">
 <!ENTITY sb.pref.fileViewer.default "Domyślny (jeżeli systemem operacyjnym jest Windows, będzie to Explorator Windows.)">
 <!ENTITY sb.tips.highlighter "Podpowiedź: Można podświetlać zaznaczone elementy przy pomocy klawiszy 1, 2, 3 lub 4.">
-<!ENTITY sb.tips.eraser "Podpowiedź: You can isolate an element by right-clicking it with DOM Eraser.">
+<!ENTITY sb.tips.eraser "Podpowiedź: Klikając PPM można wydzielić element przy pomocy DOM Erasera.">
 <!ENTITY sb.button.browse "Szukaj">
 <!ENTITY sb.button.show "Pokaż katalog">

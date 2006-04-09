@@ -52,10 +52,10 @@ a:active {
 	color:#FFFFFF;
 }
 
-/* ::::: folder ::::: */
-a.folder {
-	font-weight: bold;
-}
+/* ::::: type ::::: */
+a.marked   { font-weight: bold; }
+a.combine  { color: blue; }
+a.bookmark { color: limegreen; }
 
 /* ::::: icon ::::: */
 li img {

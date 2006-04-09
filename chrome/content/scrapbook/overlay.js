@@ -229,30 +229,31 @@ function sbInitContextMenu(aEvent)
 {
 	if ( aEvent.originalTarget.id != "contentAreaContextMenu" ) return;
 	try {
+		var isActive = gContextMenu.isTextSelected || gContextMenu.onLink || gContextMenu.onMailtoLink;
 		document.getElementById("ScrapBookContextMenu1").hidden = !gContextMenu.isTextSelected;
 		document.getElementById("ScrapBookContextMenu2").hidden = !gContextMenu.isTextSelected;
-		document.getElementById("ScrapBookContextMenu3").hidden =  gContextMenu.isTextSelected;
-		document.getElementById("ScrapBookContextMenu4").hidden =  gContextMenu.isTextSelected;
-		document.getElementById("ScrapBookContextMenu5").hidden = (!gContextMenu.inFrame || gContextMenu.isTextSelected);
-		document.getElementById("ScrapBookContextMenu6").hidden = (!gContextMenu.inFrame || gContextMenu.isTextSelected);
-		document.getElementById("ScrapBookContextMenu7").hidden = (!gContextMenu.onLink  || gContextMenu.onMailtoLink);
-		document.getElementById("ScrapBookContextMenu8").hidden = (!gContextMenu.onLink  || gContextMenu.onMailtoLink);
-		document.getElementById("ScrapBookContextMenu9").hidden =  gContextMenu.isTextSelected || gContextMenu.onLink || gContextMenu.onMailtoLink || !sbBrowserOverlay.prefBookmarkMenu;
+		document.getElementById("ScrapBookContextMenu3").hidden = isActive;
+		document.getElementById("ScrapBookContextMenu4").hidden = isActive;
+		document.getElementById("ScrapBookContextMenu5").hidden = isActive || !gContextMenu.inFrame;
+		document.getElementById("ScrapBookContextMenu6").hidden = isActive || !gContextMenu.inFrame;
+		document.getElementById("ScrapBookContextMenu7").hidden = !gContextMenu.onLink || gContextMenu.onMailtoLink;
+		document.getElementById("ScrapBookContextMenu8").hidden = !gContextMenu.onLink || gContextMenu.onMailtoLink;
+		document.getElementById("ScrapBookContextMenu9").hidden = isActive || !sbBrowserOverlay.prefBookmarkMenu;
 	}
 	catch(ex)
 	{
+		var onLink = sbBrowserOverlay.getLinkURI() ? true : false;
 		var isSelected = sbBrowserOverlay.isSelected();
 		document.getElementById("ScrapBookContextMenu1").hidden = !isSelected;
 		document.getElementById("ScrapBookContextMenu2").hidden = !isSelected;
-		document.getElementById("ScrapBookContextMenu3").hidden =  isSelected;
-		document.getElementById("ScrapBookContextMenu4").hidden =  isSelected;
+		document.getElementById("ScrapBookContextMenu3").hidden = onLink || isSelected;
+		document.getElementById("ScrapBookContextMenu4").hidden = onLink || isSelected;
 		var inFrame = document.popupNode.ownerDocument != window.content.document;
-		document.getElementById("ScrapBookContextMenu5").hidden = !inFrame || isSelected;
-		document.getElementById("ScrapBookContextMenu6").hidden = !inFrame || isSelected;
-		var onLink = sbBrowserOverlay.getLinkURI() ? true : false;
+		document.getElementById("ScrapBookContextMenu5").hidden = onLink || isSelected || !inFrame;
+		document.getElementById("ScrapBookContextMenu6").hidden = onLink || isSelected || !inFrame;
 		document.getElementById("ScrapBookContextMenu7").hidden = !onLink;
 		document.getElementById("ScrapBookContextMenu8").hidden = !onLink;
-		document.getElementById("ScrapBookContextMenu9").hidden = isSelected || onLink || !sbBrowserOverlay.prefBookmarkMenu;
+		document.getElementById("ScrapBookContextMenu9").hidden = onLink || isSelected || !sbBrowserOverlay.prefBookmarkMenu;
 	}
 }
 

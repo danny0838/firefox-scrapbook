@@ -76,7 +76,7 @@
 			<menupopup onpopupshowing="sbMenuHandler.onPopupShowing(event,this);">
 				<menuitem id="ScrapBookMenubarItem1" key="key_ScrapBookCaptureEntire" />
 				<menuitem id="ScrapBookMenubarItem2" key="key_ScrapBookCaptureEntireAs" />
-				<menuitem id="ScrapBookMenubarItem3" class="menuitem-iconic sb-capture-entire-as" label="&sb.capture.alltabs;..." oncommand="sbMenuHandler.execCaptureAllTabs();" />
+				<menuitem id="ScrapBookMenubarItem3" class="menuitem-iconic sb-capture-entire-as" label="&sb.capture.alltabs;..." oncommand="sbMenuHandler.execCaptureAllTabs();event.preventBubble();" />
 				<menuitem label="ScrapBook" observes="viewScrapBookSidebar" key="key_openScrapBookSidebar" />
 				<menuseparator />
 			</menupopup>

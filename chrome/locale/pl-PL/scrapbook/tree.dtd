@@ -5,16 +5,16 @@
 <!ENTITY sb.tools "Narzędzia">
 <!ENTITY sb.show.files "Pokaż pliki">
 <!ENTITY sb.move "Przenieś do folderu">
-<!ENTITY sb.renew "Capture Again">
+<!ENTITY sb.renew "Przechwyć ponownie">
 <!ENTITY sb.export "Eksportuj">
 <!ENTITY sb.remove "Usuń">
 <!ENTITY sb.property "Właściwości katalogu">
-<!ENTITY sb.listview "List View">
+<!ENTITY sb.listview "Widok listy">
 <!ENTITY sb.prop.title "Tytuł">
 <!ENTITY sb.prop.comment "Komentarz">
 <!ENTITY sb.prop.id.date "ID (data i czas)">
 <!ENTITY sb.folder.toggle "Rozwiń/zwiń">
-<!ENTITY sb.folder.combine "Combined View">
+<!ENTITY sb.folder.combine "Połączony widok">
 <!ENTITY sb.folder.openall "Otwórz wszystko w nowych kartach">
 <!ENTITY sb.folder.manage "Zarządzanie katalogami">
 <!ENTITY sb.new.folder "Nowy katalog">

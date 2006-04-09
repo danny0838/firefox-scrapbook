@@ -48,30 +48,26 @@ function SB_initView()
 function SB_getHTMLHead(aTitle)
 {
 	var src = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">\n\n'
-	        + '<html>\n\n'
-	        + '<head>\n'
-	        + '	<meta http-equiv="Content-Type" content="text/html;Charset=UTF-8">\n'
-	        + '	<meta http-equiv="Content-Style-Type" content="text/css">\n'
-	        + '	<title>' + aTitle + '</title>\n'
-	        + '	<link rel="stylesheet" type="text/css" href="chrome://scrapbook/skin/combine.css" media="screen,print">\n'
-	        + '</head>\n\n'
-	        + '<body>\n\n';
+	src += '<html>\n\n'
+	src += '<head>\n'
+	src += '	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">\n'
+	src += '	<meta http-equiv="Content-Style-Type" content="text/css">\n'
+	src += '	<title>' + aTitle + '</title>\n'
+	src += '	<link rel="stylesheet" type="text/css" href="chrome://scrapbook/skin/combine.css" media="screen,print">\n'
+	src += '</head>\n\n'
+	src += '<body>\n\n';
 	return src;
 }
 
 
-function SB_getHTMLBody(aSBitem)
+function SB_getHTMLBody(aItem)
 {
-	var url   = sbCommonUtils.crop(aSBitem.source, 100);
-	var title = sbCommonUtils.crop(aSBitem.title,  100);
-	var icon  = aSBitem.icon ? aSBitem.icon : sbCommonUtils.getDefaultIcon(aSBitem.type);
 	var src = "";
 	src += '<cite class="scrapbook-header">\n';
-	src += '\t<img src="' + icon + '" width="16" height="16">\n';
-	src += '\t<span>' + title + '</span>\n';
-	src += '\t<a href="' + aSBitem.source + '" target="_top">' + url + '</a>\n';
+	src += '\t<img src="' + (aItem.icon ? aItem.icon : sbCommonUtils.getDefaultIcon(aItem.type)) + '" width="16" height="16">\n';
+	src += '\t<a href="' + aItem.source + '" target="_top">' + sbCommonUtils.crop(aItem.title, 100) + '</a>\n';
 	src += '</cite>\n';
-	src += '<iframe class="scrapbook-iframe" src="./data/' + aSBitem.id + '/index.html" onload="this.setAttribute(\'style\', \'height:\' + (this.contentDocument.height || 600 + 30));"></iframe>\n';
+	if ( aItem.type != "bookmark" ) src += '<iframe class="scrapbook-iframe" src="./data/' + aItem.id + '/index.html" onload="this.setAttribute(\'style\', \'height:\' + (this.contentDocument.height || 600 + 30));"></iframe>\n';
 	return src;
 }
 
