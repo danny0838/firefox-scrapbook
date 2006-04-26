@@ -209,7 +209,7 @@
 				<menuitem id="ScrapBookInfoPopupI" label="&sb.infobar.showIndicators;" type="checkbox" oncommand="sbInfoViewer.toggleIndicator(this.getAttribute('checked'));" persist="checked" />
 				<menuseparator />
 				<menuitem id="ScrapBookInfoPopupM" label="&sb.infobar.sitemap;"    oncommand="sbInfoViewer.load('sitemap.xml');" />
-				<menuitem id="ScrapBookInfoPopupR" label="&sb.infobar.renew;..."   oncommand="sbInfoViewer.renew();" class="menuitem-iconic" />
+				<menuitem id="ScrapBookInfoPopupR" label="&sb.infobar.renew;..."   oncommand="sbInfoViewer.renew(true);" onclick="if ( event.button == 1 ) sbInfoViewer.renew(false);" class="menuitem-iconic" />
 				<menuitem id="ScrapBookInfoPopupS" label="&sb.infobar.openSource;" oncommand="sbInfoViewer.openSourceURL(false);" onclick="if ( event.button == 1 ) sbInfoViewer.openSourceURL(true);" />
 			</menupopup>
 		</statusbarpanel>

@@ -28,6 +28,6 @@
 <!ENTITY sb.pref.fileViewer "Cl&#225;r do Roghchl&#225;ir 'Teasp&#225;inn Comhaid'">
 <!ENTITY sb.pref.fileViewer.default "Luach R&#233;amhshocraithe  (M&#225;s Windows, b'fh&#233;idir Taisc&#233;ala&#237;.)">
 <!ENTITY sb.tips.highlighter "LEID: Is feidir an Roghn&#250; a Aibhsi&#250; tr&#237; cnaip&#237; 1 n&#243; 2 n&#243; 3 n&#243; 4 a bhr&#250;.">
-<!ENTITY sb.tips.eraser "LEID: You can isolate an element by right-clicking it with DOM Eraser.">
+<!ENTITY sb.tips.eraser "LEID: Is feidir an m&#237;r a scagadh tr&#237; deaschlice&#225;il air leis an l&#233;irscios&#237; DOM.">
 <!ENTITY sb.button.browse "Roghnaigh">
 <!ENTITY sb.button.show "Teasp&#225;inn Comhadlann">

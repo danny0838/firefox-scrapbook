@@ -271,15 +271,6 @@ var sbCacheService = {
 
 	build : function()
 	{
-		var winEnum = sbCommonUtils.WINDOW.getEnumerator("scrapbook");
-		while ( winEnum.hasMoreElements() )
-		{
-			var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
-			if ( win != window && win.location.href == "chrome://scrapbook/content/cache.xul" )
-			{
-				window.close(); return;
-			}
-		}
 		document.title = gCacheString.getString("BUILD_CACHE") + " - ScrapBook";
 		gCacheStatus.firstChild.value = gCacheString.getString("BUILD_CACHE_INIT");
 		sbCacheSource.refreshEntries();

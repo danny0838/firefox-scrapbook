@@ -220,7 +220,7 @@ var sbController = {
 		}
 	},
 
-	renew : function(aRes)
+	renew : function(aRes, showDetail)
 	{
 		if ( !aRes ) aRes = this.isTreeContext ? sbTreeHandler.resource : sbListHandler.resource;
 		if ( !aRes ) return;
@@ -231,7 +231,7 @@ var sbController = {
 		top.window.openDialog(
 			"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
 			[sbDataSource.getProperty(aRes, "source")], null,
-			true, null, 0, null, null, null, preset
+			showDetail, null, 0, null, null, null, preset
 		);
 	},
 
@@ -688,7 +688,7 @@ var sbSearchService = {
 
 	buildFT : function(aResURI)
 	{
-		window.openDialog('chrome://scrapbook/content/cache.xul','','chrome,dialog=no', aResURI);
+		window.openDialog('chrome://scrapbook/content/cache.xul','ScrapBook:Cache','chrome,dialog=no', aResURI);
 	},
 
 	exec : function(forceTitle)

@@ -429,33 +429,35 @@ var sbExportService = {
 		{
 			aItem.icon = aItem.icon.match(/\d{14}\/([^\/]+)$/) ? RegExp.$1 : "";
 		}
-		var num = 0;
-		var destDir = sbTrader.rightDir.clone();
-		var dirName = sbCommonUtils.validateFileName(aItem.title).substring(0,64) || "untitled";
-		destDir.append(dirName);
-		while ( destDir.exists() && num < 256 )
-		{
+		var num = 0, destDir, dirName;
+		do {
+			dirName = sbCommonUtils.validateFileName(aItem.title).substring(0,60) || "untitled";
+			if ( num > 0 ) dirName += "-" + num;
+			dirName = dirName.replace(/\./g, "");
 			destDir = sbTrader.rightDir.clone();
-			dirName = sbCommonUtils.validateFileName(aItem.title).substring(0,60) + "-" + (++num);
-			destDir.append(dirName)
+			destDir.append(dirName);
 		}
-		if ( aItem.type == "bookmark" )
-		{
+		while ( destDir.exists() && ++num < 256 );
+		try {
 			destDir.create(destDir.DIRECTORY_TYPE, 0700);
+		} catch(ex) {
+			try {
+				destDir = sbTrader.rightDir.clone();
+				destDir.append(aItem.id);
+				destDir.create(destDir.DIRECTORY_TYPE, 0700);
+			} catch(ex) {
+				return false;
+			}
 		}
-		else
+		if ( aItem.type != "bookmark" )
 		{
 			var srcDir = sbTrader.leftDir.clone();
 			srcDir.append(aItem.id);
 			if ( !srcDir.exists() || !srcDir.leafName.match(/^\d{14}$/) ) return false;
 			try {
-				srcDir.copyTo(sbTrader.rightDir, dirName);
+				srcDir.copyTo(sbTrader.rightDir, destDir.leafName);
 			} catch(ex) {
-				try {
-					srcDir.copyTo(sbTrader.rightDir, aItem.id);
-				} catch(ex) {
-					return false;
-				}
+				return false;
 			}
 		}
 		destDir.append("index.dat");

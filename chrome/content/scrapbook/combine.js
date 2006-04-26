@@ -17,7 +17,7 @@ var sbCombineService = {
 
 	init : function()
 	{
-		gOption = { "script" : true, "format" : true };
+		gOption = { "script" : true, "images" : true };
 		sbDataSource.init();
 		sbTreeHandler.init(false);
 		this.index = 0;

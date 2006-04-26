@@ -269,6 +269,11 @@ var sbPageEditor = {
 		{
 			this.removeAllStyles(this.frameList[i]);
 			var doc = this.frameList[i].document;
+			if ( doc.contentType != "text/html" )
+			{
+				alert("ScrapBook ERROR: Cannot modify " + doc.contentType + " content.");
+				continue;
+			}
 			var rootNode = doc.getElementsByTagName("html")[0];
 			var src = "";
 			src = sbContentSaver.surroundByTags(rootNode, rootNode.innerHTML);

@@ -72,18 +72,18 @@
 					<menuseparator />
 					<menuitem label="&sb.tools.manage;"    oncommand="window.openDialog('chrome://scrapbook/content/manage.xul','','chrome,centerscreen,all,resizable,dialog=no',null);" />
 					<menuitem label="&sb.tools.combine;"   oncommand="window.openDialog('chrome://scrapbook/content/combine.xul','','chrome,centerscreen,all,resizable');" />
-					<menuitem label="&sb.tools.trade;"     oncommand="window.openDialog('chrome://scrapbook/content/trade.xul','','chrome,centerscreen,all,resizable,dialog=no');" />
+					<menuitem label="&sb.tools.trade;"     oncommand="window.openDialog('chrome://scrapbook/content/trade.xul','ScrapBook:Trade','chrome,centerscreen,all,resizable,dialog=no');" />
 					<menuitem label="&sb.tools.multiple;"  oncommand="window.top.openDialog('chrome://scrapbook/content/multiple.xul','','chrome,centerscreen,all,resizable,dialog=no');" />
 					<menuitem label="&sb.tools.directory;" oncommand="sbController.launch(sbCommonUtils.getScrapBookDir());" />
 					<menuseparator />
-					<menuitem label="&sb.tools.calculate;" oncommand="window.openDialog('chrome://scrapbook/content/calculate.xul','','chrome,centerscreen,all,dialog=no');" />
+					<menuitem label="&sb.tools.calculate;" oncommand="window.openDialog('chrome://scrapbook/content/calculate.xul','ScrapBook:Calculate','chrome,centerscreen,all,dialog=no');" />
 					<menuitem label="&sb.tools.sorttree;"  oncommand="window.openDialog('chrome://scrapbook/content/sort.xul','','chrome,centerscreen,modal');" />
-					<menuitem label="&sb.tools.output;"    oncommand="window.openDialog('chrome://scrapbook/content/output.xul','','chrome,centerscreen,modal,resizable');" />
-					<menuitem label="&sb.tools.backup;"    oncommand="window.openDialog('chrome://scrapbook/content/backup.xul','','chrome,centerscreen,modal');" />
-					<menuitem label="&sb.tools.repair;"    oncommand="window.openDialog('chrome://scrapbook/content/repair.xul','','chrome,centerscreen,all,modal,resizable,dialog=no');" />
+					<menuitem label="&sb.tools.output;"    oncommand="window.openDialog('chrome://scrapbook/content/output.xul','ScrapBook:Output','chrome,centerscreen,modal,resizable');" />
+					<menuitem label="&sb.tools.backup;"    oncommand="window.openDialog('chrome://scrapbook/content/backup.xul','ScrapBook:Backup','chrome,centerscreen,modal');" />
+					<menuitem label="&sb.tools.repair;"    oncommand="window.openDialog('chrome://scrapbook/content/repair.xul','ScrapBook:Repair','chrome,centerscreen,all,modal,resizable,dialog=no');" />
 					<menuseparator />
 					<menuitem label="&sb.tools.homepage;"  oncommand="sbCommonUtils.loadURL('http://amb.vis.ne.jp/mozilla/scrapbook/',true);" />
-					<menuitem label="&sb.tools.about;"     oncommand="window.openDialog('chrome://scrapbook/content/about.xul','','chrome,centerscreen,modal,resizable=no');" />
+					<menuitem label="&sb.tools.about;"     oncommand="window.openDialog('chrome://scrapbook/content/about.xul','ScrapBook:About','chrome,centerscreen,modal,resizable=no');" />
 				</menupopup>
 			</toolbarbutton>
 		</toolbar>
