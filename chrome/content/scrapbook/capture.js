@@ -171,7 +171,7 @@ var sbCaptureTask = {
 		this.LISTBOX.appendChild(listitem);
 	},
 
-	start : function()
+	start : function(aOverriddenURL)
 	{
 		this.seconds = -1;
 		this.toggleStartPause(true);
@@ -189,11 +189,12 @@ var sbCaptureTask = {
 		this.contentType = "";
 		this.isDocument = true;
 		this.canRefresh = true;
-		SB_trace(this.STRING.getString("CONNECT") + "... " + gURLs[this.index]);
-		if ( gURLs[this.index].indexOf("file://") == 0 ) {
-			sbInvisibleBrowser.load(gURLs[this.index]);
+		var url = aOverriddenURL || gURLs[this.index];
+		SB_trace(this.STRING.getString("CONNECT") + "... " + url);
+		if ( url.indexOf("file://") == 0 ) {
+			sbInvisibleBrowser.load(url);
 		} else {
-			this.sniffer = new sbHeaderSniffer(gURLs[this.index], gRefURL);
+			this.sniffer = new sbHeaderSniffer(url, gRefURL);
 			this.sniffer.httpHead();
 		}
 	},
@@ -696,8 +697,7 @@ sbHeaderSniffer.prototype = {
 		if ( redirectURL )
 		{
 			if ( redirectURL.indexOf("http") != 0 ) redirectURL = this._URL.resolve(redirectURL);
-			gURLs[sbCaptureTask.index] = redirectURL;
-			sbCaptureTask.start();
+			sbCaptureTask.start(redirectURL);
 			return;
 		}
 		if ( !sbCaptureTask.contentType )

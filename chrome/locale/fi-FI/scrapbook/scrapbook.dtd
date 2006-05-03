@@ -13,6 +13,7 @@
 <!ENTITY sb.tools.output "Tulosta kansiopuu HTML:nä">
 <!ENTITY sb.tools.backup "Varmenna tiivistäen">
 <!ENTITY sb.tools.repair "Hätäkorjaus">
+<!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Kotisivu">
 <!ENTITY sb.tools.about "Tietoja">
 <!ENTITY sb.note.opentab "Avaa välilehdessä">

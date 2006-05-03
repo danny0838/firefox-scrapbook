@@ -13,6 +13,7 @@
 <!ENTITY sb.tools.output "Output Tree as HTML">
 <!ENTITY sb.tools.backup "Backup with Compression">
 <!ENTITY sb.tools.repair "Emergency Repair">
+<!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Home Page">
 <!ENTITY sb.tools.about "About">
 <!ENTITY sb.note.opentab "Open in Tab">

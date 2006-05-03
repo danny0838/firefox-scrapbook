@@ -82,6 +82,7 @@
 					<menuitem label="&sb.tools.backup;"    oncommand="window.openDialog('chrome://scrapbook/content/backup.xul','ScrapBook:Backup','chrome,centerscreen,modal');" />
 					<menuitem label="&sb.tools.repair;"    oncommand="window.openDialog('chrome://scrapbook/content/repair.xul','ScrapBook:Repair','chrome,centerscreen,all,modal,resizable,dialog=no');" />
 					<menuseparator />
+					<menuitem label="&sb.tools.tips;"      oncommand="sbCommonUtils.loadURL('http://amb.vis.ne.jp/mozilla/scrapbook/tips.php',true);" />
 					<menuitem label="&sb.tools.homepage;"  oncommand="sbCommonUtils.loadURL('http://amb.vis.ne.jp/mozilla/scrapbook/',true);" />
 					<menuitem label="&sb.tools.about;"     oncommand="window.openDialog('chrome://scrapbook/content/about.xul','ScrapBook:About','chrome,centerscreen,modal,resizable=no');" />
 				</menupopup>

@@ -121,8 +121,6 @@
 							<button label="&sb.customize;..." color="0" oncommand="hlPrefService.openDialog(this.getAttribute('color'));" />
 						</hbox>
 					</groupbox>
-					<description style="margin-top:10px;">&sb.tips.highlighter;</description>
-					<description style="margin-top:10px;">&sb.tips.eraser;</description>
 				</tabpanel>
 
 				<!--advanced-->

@@ -27,7 +27,5 @@
 <!ENTITY sb.pref.multibook.tips "Imposta cartelle multiple dove conservare i dati e passa rapidamente da una cartella ad un'altra tramite apposita icona nella barra degli strumenti di ScrapBook">
 <!ENTITY sb.pref.fileViewer "Programma per visualizzare i file">
 <!ENTITY sb.pref.fileViewer.default "Predefinito (in ambiente Windows, solitamente Explorer)">
-<!ENTITY sb.tips.highlighter "Suggerimento: si può evidenziare la parte selezionata premendo i tasti dei numeri 1, 2, 3 o 4">
-<!ENTITY sb.tips.eraser "Suggerimento: si può isolare un elemento facendoci clic sopra con il tasto dx del mouse e selezionando DOM Eraser">
 <!ENTITY sb.button.browse "Visualizza">
 <!ENTITY sb.button.show "Mostra cartella">

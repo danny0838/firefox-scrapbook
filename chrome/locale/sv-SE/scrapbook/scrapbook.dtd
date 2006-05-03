@@ -13,6 +13,7 @@
 <!ENTITY sb.tools.output "Spara trädet som HTML">
 <!ENTITY sb.tools.backup "Säkerhetskopia med komprimering">
 <!ENTITY sb.tools.repair "Reparera">
+<!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Hemsida">
 <!ENTITY sb.tools.about "Om">
 <!ENTITY sb.note.opentab "Öppna i flik">

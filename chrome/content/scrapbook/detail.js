@@ -240,6 +240,12 @@ var sbFolderSelector = {
 		gArguments.change  = true;
 	},
 
+	selectTop : function()
+	{
+		this.MENU_LIST.selectedIndex = 0;
+		this.onSelect(this.MENU_LIST.selectedItem.id);
+	},
+
 	openFolderPicker : function()
 	{
 		var result = {};

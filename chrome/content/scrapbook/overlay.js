@@ -258,6 +258,19 @@ function sbInitContextMenu(aEvent)
 }
 
 
+function sbMiddleClickContextMenu(aEvent, aFlag)
+{
+	if ( aEvent.originalTarget.localName == "menu" || aEvent.button != 1 ) return;
+	switch ( aFlag )
+	{
+		case 1 : sbBrowserOverlay.execCapture(true, true, true , aEvent.originalTarget.id); break;
+		case 3 : sbBrowserOverlay.execCapture(false,false,true , aEvent.originalTarget.id); break;
+		case 5 : sbBrowserOverlay.execCapture(true, false,true , aEvent.originalTarget.id); break;
+		case 7 : sbBrowserOverlay.execCaptureTarget(true,  aEvent.originalTarget.id); break;
+	}
+}
+
+
 
 
 var sbMenuHandler = {
@@ -313,6 +326,7 @@ var sbMenuHandler = {
 
 	onClick : function(aEvent)
 	{
+		if ( aEvent.target.id == "ScrapBookMenubarItem3" ) return;
 		if ( aEvent.target.className.indexOf("sb-capture") >= 0 )
 		{
 			var selected = sbBrowserOverlay.isSelected();

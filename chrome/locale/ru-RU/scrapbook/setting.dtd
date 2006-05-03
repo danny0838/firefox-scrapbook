@@ -27,7 +27,5 @@
 <!ENTITY sb.pref.multibook.tips "Разрешает использование нескольких альбомов с возможностью переключения кнопкой на панели инструментов.">
 <!ENTITY sb.pref.fileViewer "Программа для выполнения пункта 'Состав файлов'">
 <!ENTITY sb.pref.fileViewer.default "По умолчанию (Если Windows, возможно Explorer)">
-<!ENTITY sb.tips.highlighter "Советы: Вы можете подсветить выделение с помощью клавиш 1, 2, 3 или 4.">
-<!ENTITY sb.tips.eraser "Советы: Вы можете изолировать элмент нажатием правой кнопки мыши с DOM Eraser.">
 <!ENTITY sb.button.browse "Выбрать">
 <!ENTITY sb.button.show "Показать папку">

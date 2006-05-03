@@ -13,6 +13,7 @@
 <!ENTITY sb.tools.output "Arborescence comme HTML">
 <!ENTITY sb.tools.backup "Sauvegarde avec compression">
 <!ENTITY sb.tools.repair "Réparation d'urgence">
+<!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Page d'accueil">
 <!ENTITY sb.tools.about "À propos">
 <!ENTITY sb.note.opentab "Éditer dans un onglet">

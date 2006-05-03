@@ -13,6 +13,7 @@
 <!ENTITY sb.tools.output "Сохранить дерево страниц как HTML">
 <!ENTITY sb.tools.backup "Архивирование">
 <!ENTITY sb.tools.repair "Срочное восстановление">
+<!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Домашняя страница">
 <!ENTITY sb.tools.about "О программе">
 <!ENTITY sb.note.opentab "Открыть на вкладке">

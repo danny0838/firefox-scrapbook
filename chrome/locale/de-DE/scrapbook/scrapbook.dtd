@@ -13,6 +13,7 @@
 <!ENTITY sb.tools.output "Ordnerliste als HTML ausgeben">
 <!ENTITY sb.tools.backup "Komprimierte Sicherung anlegen">
 <!ENTITY sb.tools.repair "Notfallreparatur durchführen">
+<!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Homepage">
 <!ENTITY sb.tools.about "Über">
 <!ENTITY sb.note.opentab "In Tab öffnen">

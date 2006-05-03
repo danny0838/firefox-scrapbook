@@ -27,7 +27,5 @@
 <!ENTITY sb.pref.multibook.tips "Esto le permite definir destinos múltiples para almacenar datos y moverse de uno a otro rápidamente usando botones de la barra de tareas.">
 <!ENTITY sb.pref.fileViewer "Programa para el menú 'Mostrar Ficheros'">
 <!ENTITY sb.pref.fileViewer.default "Programa por defecto (si es Windows, posiblemente 'Explorer'.)">
-<!ENTITY sb.tips.highlighter "Sugerencia: Puede marcar la selección presionando las teclas 1, 2, 3 ó 4.">
-<!ENTITY sb.tips.eraser "Sugerencia: You can isolate an element by right-clicking it with DOM Eraser.">
 <!ENTITY sb.button.browse "Examinar">
 <!ENTITY sb.button.show "Mostrar directorio">

@@ -213,6 +213,12 @@ var sbPageEditor = {
 		aElement.removeAttribute("title");
 	},
 
+	selection2Title : function(aElement)
+	{
+		aElement.value = sbCommonUtils.crop(this.getSelection().toString().replace(/[\r\n\t\s]+/g, " "), 100);
+		this.changed2 = true;
+	},
+
 	restore : function()
 	{
 		window.sbBrowserOverlay.lastLocation = "";
@@ -728,15 +734,10 @@ var sbInfoViewer = {
 
 	indicateLinks : function(aWindow)
 	{
-		var linkList = aWindow.document.links;
-		for ( var i = 0; i < linkList.length; i++ )
-		{
-			if ( linkList[i].protocol == "file:" ) linkList[i].setAttribute("indepth", "true");
-		}
-		sbPageEditor.applyStyle(aWindow, "scrapbook-indicator-style", "a[indepth]:before { content:url('chrome://scrapbook/skin/info_link1.png'); }");
+		sbPageEditor.applyStyle(aWindow, "scrapbook-indicator-style", "a[href]:not([href^=\"http\"]):not([href^=\"javascript\"]):not([href^=\"mailto\"]):before { content:url('chrome://scrapbook/skin/info_link1.png'); }");
 	},
 
-	renew : function()
+	renew : function(showDetail)
 	{
 		var id = sbBrowserOverlay.getID();
 		if ( !id ) return;
@@ -744,7 +745,7 @@ var sbInfoViewer = {
 		var source = fileName == "index" ? sbDataSource.getProperty(sbBrowserOverlay.resource, "source") : "";
 		top.window.openDialog(
 			"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
-			[source], null, true, null, 0, null, null, {}, [id, fileName, null, null, 0]
+			[source], null, showDetail, null, 0, null, null, {}, [id, fileName, null, null, 0]
 		);
 	},
 

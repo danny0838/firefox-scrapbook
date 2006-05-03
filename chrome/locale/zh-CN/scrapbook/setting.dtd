@@ -27,7 +27,5 @@
 <!ENTITY sb.pref.multibook.tips "允许您设置文件的多个保存位置。通过工具栏的“Multi-ScrapBook”按钮您可以在它们之间快速切换。">
 <!ENTITY sb.pref.fileViewer "选择用于“浏览”的应用程序">
 <!ENTITY sb.pref.fileViewer.default "默认 (Windows 系统中一般是资源管理器)">
-<!ENTITY sb.tips.highlighter "提示: 您只需按 1 至 4 数字键即可使用相应标记高亮显示所选内容。">
-<!ENTITY sb.tips.eraser "提示: 您可以用右键的DOM橡皮隔离一个元素。">
 <!ENTITY sb.button.browse "浏览">
 <!ENTITY sb.button.show "打开">

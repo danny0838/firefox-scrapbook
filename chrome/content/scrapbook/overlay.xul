@@ -76,7 +76,7 @@
 			<menupopup onpopupshowing="sbMenuHandler.onPopupShowing(event,this);">
 				<menuitem id="ScrapBookMenubarItem1" key="key_ScrapBookCaptureEntire" />
 				<menuitem id="ScrapBookMenubarItem2" key="key_ScrapBookCaptureEntireAs" />
-				<menuitem id="ScrapBookMenubarItem3" class="menuitem-iconic sb-capture-entire-as" label="&sb.capture.alltabs;..." oncommand="sbMenuHandler.execCaptureAllTabs();event.preventBubble();" />
+				<menuitem id="ScrapBookMenubarItem3" class="menuitem-iconic" label="&sb.capture.alltabs;..." oncommand="sbMenuHandler.execCaptureAllTabs();event.preventBubble();" />
 				<menuitem label="ScrapBook" observes="viewScrapBookSidebar" key="key_openScrapBookSidebar" />
 				<menuseparator />
 			</menupopup>
@@ -109,13 +109,13 @@
 	<!--context menu-->
 	<popup id="contentAreaContextMenu">
 		<menuseparator />
-		<menu     id="ScrapBookContextMenu1" class="menu-iconic"     label="&sb.capture.partial;"       command="cmd_ScrapBookCapturePartial"    ><menupopup onpopupshowing="sbBrowserOverlay.flipOpenPopup(this);" /></menu>
+		<menu     id="ScrapBookContextMenu1" class="menu-iconic"     label="&sb.capture.partial;"       command="cmd_ScrapBookCapturePartial"   onclick="sbMiddleClickContextMenu(event,1);"><menupopup onpopupshowing="sbBrowserOverlay.flipOpenPopup(this);" /></menu>
 		<menuitem id="ScrapBookContextMenu2" class="menuitem-iconic" label="&sb.capture.partial.as;..." command="cmd_ScrapBookCapturePartialAs" />
-		<menu     id="ScrapBookContextMenu3" class="menu-iconic"     label="&sb.capture.entire;"        command="cmd_ScrapBookCaptureEntire"     ><menupopup onpopupshowing="sbBrowserOverlay.flipOpenPopup(this);" /></menu>
+		<menu     id="ScrapBookContextMenu3" class="menu-iconic"     label="&sb.capture.entire;"        command="cmd_ScrapBookCaptureEntire"    onclick="sbMiddleClickContextMenu(event,3);"><menupopup onpopupshowing="sbBrowserOverlay.flipOpenPopup(this);" /></menu>
 		<menuitem id="ScrapBookContextMenu4" class="menuitem-iconic" label="&sb.capture.entire.as;..."  command="cmd_ScrapBookCaptureEntireAs"  />
-		<menu     id="ScrapBookContextMenu5" class="menu-iconic"     label="&sb.capture.frame;"         command="cmd_ScrapBookCaptureFrame"      ><menupopup onpopupshowing="sbBrowserOverlay.flipOpenPopup(this);" /></menu>
+		<menu     id="ScrapBookContextMenu5" class="menu-iconic"     label="&sb.capture.frame;"         command="cmd_ScrapBookCaptureFrame"     onclick="sbMiddleClickContextMenu(event,5);"><menupopup onpopupshowing="sbBrowserOverlay.flipOpenPopup(this);" /></menu>
 		<menuitem id="ScrapBookContextMenu6" class="menuitem-iconic" label="&sb.capture.frame.as;..."   command="cmd_ScrapBookCaptureFrameAs"   />
-		<menu     id="ScrapBookContextMenu7" class="menu-iconic"     label="&sb.capture.target;"        oncommand="sbBrowserOverlay.execCaptureTarget(false, event.originalTarget.id);"  ><menupopup onpopupshowing="sbBrowserOverlay.flipOpenPopup(this);" /></menu>
+		<menu     id="ScrapBookContextMenu7" class="menu-iconic"     label="&sb.capture.target;"        oncommand="sbBrowserOverlay.execCaptureTarget(false, event.originalTarget.id);" onclick="sbMiddleClickContextMenu(event,7);" ><menupopup onpopupshowing="sbBrowserOverlay.flipOpenPopup(this);" /></menu>
 		<menuitem id="ScrapBookContextMenu8" class="menuitem-iconic" label="&sb.capture.target.as;..."  oncommand="sbBrowserOverlay.execCaptureTarget(true,  event.originalTarget.id);" />
 		<menu id="ScrapBookContextSubmenu"   class="menu-iconic"     label="ScrapBook" hidden="true">
 			<menupopup />
@@ -156,14 +156,12 @@
 			<!--editor-->
 			<toolbar id="ScrapBookEditor" align="center" hidden="true" autoshow="true" persist="autoshow">
 			    <image id="ScrapBookEditIcon" onclick="this.nextSibling.select();" style="width:16px;height:16px;" />
-				<textbox id="ScrapBookEditTitle"   oninput="sbPageEditor.changed2 = true;" onkeypress="if ( event.keyCode == 13 ) sbPageEditor.save2();" flex="1" style="padding:2px;max-width:220px;" />
+				<textbox id="ScrapBookEditTitle"   oninput="sbPageEditor.changed2 = true;" onkeypress="if ( event.keyCode == 13 ) sbPageEditor.save2();" onclick="if ( event.button == 1 ) sbPageEditor.selection2Title(this);" flex="1" style="padding:2px;max-width:220px;" />
 				<toolbarbutton image="chrome://scrapbook/skin/edit_comment.png" tooltiptext="&sb.editor.comment;" oncommand="sbPageEditor.toggleComment();" />
 				<textbox id="ScrapBookEditComment" oninput="sbPageEditor.changed2 = true;" onkeypress="if ( event.keyCode == 13 ) if ( !sbPageEditor.multiline ) sbPageEditor.save2();" flex="3" style="padding:2px;" />
 				<spacer id="ScrapBookEditSpacer" flex="0" />
 				<toolbarbutton id="ScrapBookHighlighter" type="menu-button" persist="color" image="chrome://scrapbook/skin/edit_highlighter.png" tooltiptext="&sb.highlighter;" oncommand="if ( event.originalTarget.localName == 'toolbarbutton' ) sbPageEditor.highlight();" accesskey="Q">
 					<menupopup onpopupshowing="sbHighlighter.updatePopup();">
-						<!--<menuitem label="&sb.customize;..." />
-						<menuseparator />-->
 						<menuitem id="ScrapBookHighlighter1" type="radio" label="&sb.highlighter;1" oncommand="sbPageEditor.highlight(1);" />
 						<menuitem id="ScrapBookHighlighter2" type="radio" label="&sb.highlighter;2" oncommand="sbPageEditor.highlight(2);" />
 						<menuitem id="ScrapBookHighlighter3" type="radio" label="&sb.highlighter;3" oncommand="sbPageEditor.highlight(3);" />

@@ -27,7 +27,5 @@
 <!ENTITY sb.pref.multibook.tips "複数のデータ保存先を設定し、ツールバーボタンから素早く切り替えることができます。">
 <!ENTITY sb.pref.fileViewer "ファイルの表示に用いるプログラム">
 <!ENTITY sb.pref.fileViewer.default "デフォルト　（Windowsならエクスプローラ）">
-<!ENTITY sb.tips.highlighter "TIPS: 範囲を選択してキーボードの1,2,3,4のいずれかを押すことでマーカーをセットすることもできます。">
-<!ENTITY sb.tips.eraser "TIPS: DOMイレーサーで要素を右クリックすると、その要素以外を削除することができます。">
 <!ENTITY sb.button.browse "参照">
 <!ENTITY sb.button.show "ファイルを表示">

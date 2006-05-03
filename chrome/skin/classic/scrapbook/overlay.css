@@ -22,6 +22,7 @@ menuitem#ScrapBookContextMenu2 { list-style-image: url('chrome://scrapbook/skin/
 menuitem.sb-capture-entire,
     menu#ScrapBookContextMenu3 { list-style-image: url('chrome://scrapbook/skin/capture_entire.png'); }
 menuitem.sb-capture-entire-as,
+menuitem#ScrapBookMenubarItem3,
 menuitem#ScrapBookContextMenu4 { list-style-image: url('chrome://scrapbook/skin/capture_entire_as.png'); }
     menu#ScrapBookContextMenu5 { list-style-image: url('chrome://scrapbook/skin/capture_frame.png'); }
 menuitem#ScrapBookContextMenu6 { list-style-image: url('chrome://scrapbook/skin/capture_frame_as.png'); }

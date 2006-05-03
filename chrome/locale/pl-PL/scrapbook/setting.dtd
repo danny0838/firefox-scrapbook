@@ -27,7 +27,5 @@
 <!ENTITY sb.pref.multibook.tips "Opcja ta włącza możliwość zapisu danych w wielu katalogach docelowych oraz pozwala na łatwe przełączanie między nimi za pomocą przycisku narzędziowego">
 <!ENTITY sb.pref.fileViewer "Określ menedżera plików">
 <!ENTITY sb.pref.fileViewer.default "Domyślny (jeżeli systemem operacyjnym jest Windows, będzie to Explorator Windows.)">
-<!ENTITY sb.tips.highlighter "Podpowiedź: Można podświetlać zaznaczone elementy przy pomocy klawiszy 1, 2, 3 lub 4.">
-<!ENTITY sb.tips.eraser "Podpowiedź: Klikając PPM można wydzielić element przy pomocy DOM Erasera.">
 <!ENTITY sb.button.browse "Szukaj">
 <!ENTITY sb.button.show "Pokaż katalog">

@@ -13,6 +13,7 @@
 <!ENTITY sb.tools.output "Mappenstructuur als HTML exporteren">
 <!ENTITY sb.tools.backup "Met compressie back-uppen">
 <!ENTITY sb.tools.repair "Noodreparatie">
+<!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Homepage">
 <!ENTITY sb.tools.about "Over...">
 <!ENTITY sb.note.opentab "In tabblad openen">

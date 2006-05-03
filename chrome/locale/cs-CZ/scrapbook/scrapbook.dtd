@@ -13,6 +13,7 @@
 <!ENTITY sb.tools.output "Exportovat vše jako HTML">
 <!ENTITY sb.tools.backup "Zálohovat s kompresí">
 <!ENTITY sb.tools.repair "Nouzová oprava">
+<!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Domovská stránka">
 <!ENTITY sb.tools.about "O rozšíření ScapBook">
 <!ENTITY sb.note.opentab "Otevřít v panelu">

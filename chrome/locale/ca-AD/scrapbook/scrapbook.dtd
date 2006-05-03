@@ -13,6 +13,7 @@
 <!ENTITY sb.tools.output "Exporta l'arbre com a HTML">
 <!ENTITY sb.tools.backup "Còpia de seguretat comprimida">
 <!ENTITY sb.tools.repair "Reparació d'emergència">
+<!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Vés a la pàgina inicial">
 <!ENTITY sb.tools.about "Quant a l'ScrapBook">
 <!ENTITY sb.note.opentab "Obre en una pestanya">

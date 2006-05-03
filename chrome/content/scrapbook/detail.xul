@@ -56,7 +56,7 @@
 						<row id="sbDetailFolderRow" align="center" style="margin-bottom:6px;">
 							<label value="&sb.prop.folder;:" />
 							<hbox>
-								<menulist id="sbFolderList" class="folder-icon" flex="1" disabled="true">
+								<menulist id="sbFolderList" class="folder-icon" flex="1" onclick="if ( event.button == 1 ) sbFolderSelector.selectTop();" disabled="true">
 									<menupopup id="sbFolderPopup" oncommand="sbFolderSelector.onSelect(event.target.id);" />
 								</menulist>
 								<toolbarbutton id="sbToolbarNewFolder" tooltiptext="&sb.detail.new.folder;..."    oncommand="sbFolderSelector.createFolder();" />

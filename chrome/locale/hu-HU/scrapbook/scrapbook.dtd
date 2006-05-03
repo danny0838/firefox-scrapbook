@@ -13,6 +13,7 @@
 <!ENTITY sb.tools.output "Fa exportálása HTML-ként">
 <!ENTITY sb.tools.backup "Biztonsági mentés tömörítéssel">
 <!ENTITY sb.tools.repair "Vészhelyzet javítása">
+<!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Honlap">
 <!ENTITY sb.tools.about "Névjegy">
 <!ENTITY sb.note.opentab "Megnyitás fülön">

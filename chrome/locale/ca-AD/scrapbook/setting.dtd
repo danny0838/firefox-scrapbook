@@ -27,7 +27,5 @@
 <!ENTITY sb.pref.multibook.tips "Aquesta opció us permet establir més d'un destí per a emmagatzemar les dades. Podreu canviar ràpidament de destí mitjançant un botó de la barra d'eines.">
 <!ENTITY sb.pref.fileViewer "Programa per a explorar els fitxers">
 <!ENTITY sb.pref.fileViewer.default "Per defecte (al Windows, segurament l'Explorer).">
-<!ENTITY sb.tips.highlighter "Consell: Podeu ressaltar el text seleccionat prement les tecles 1, 2, 3 o 4.">
-<!ENTITY sb.tips.eraser "Consell: Podeu aïllar un element amb l'Esborrador DOM fent-hi clic amb el botó dret.">
 <!ENTITY sb.button.browse "Navega">
 <!ENTITY sb.button.show "Mostra la carpeta">

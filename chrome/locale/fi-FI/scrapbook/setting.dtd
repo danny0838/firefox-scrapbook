@@ -27,7 +27,5 @@
 <!ENTITY sb.pref.multibook.tips "Mahdollistaa usean tallennuskansion käytön ja liikkumisen niiden välillä työkalupalkin kuvakkeella.">
 <!ENTITY sb.pref.fileViewer "Oletusohjelma &quot;Näytä tiedostot&quot; toimintoon">
 <!ENTITY sb.pref.fileViewer.default "Oletus (Windowsilla Explorer)">
-<!ENTITY sb.tips.highlighter "Vinkki: Valinnan voi korostaa painamalla näppäimiä 1, 2, 3 tai 4.">
-<!ENTITY sb.tips.eraser "Vinkki: You can isolate an element by right-clicking it with DOM Eraser.">
 <!ENTITY sb.button.browse "Valitse">
 <!ENTITY sb.button.show "Näytä kansio">

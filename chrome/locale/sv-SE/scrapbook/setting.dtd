@@ -27,7 +27,5 @@
 <!ENTITY sb.pref.multibook.tips "This option enables you to set up multiple destination to store data and switch between them quickly with toolbar button.">
 <!ENTITY sb.pref.fileViewer "Välj program för 'Visa filer' menyn">
 <!ENTITY sb.pref.fileViewer.default "Standard (Om Windows används, antagligen Utforskaren.)">
-<!ENTITY sb.tips.highlighter "TIP: You can highlight selection by just pressing key 1 or 2 or 3 or 4.">
-<!ENTITY sb.tips.eraser "TIP: You can isolate an element by right-clicking it with DOM Eraser.">
 <!ENTITY sb.button.browse "Välj">
 <!ENTITY sb.button.show "Visa Mappen">

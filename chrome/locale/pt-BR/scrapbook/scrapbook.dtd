@@ -13,6 +13,7 @@
 <!ENTITY sb.tools.output "Exportar Árvore como HTML">
 <!ENTITY sb.tools.backup "Backup com Compactação">
 <!ENTITY sb.tools.repair "Reparo de Emergência">
+<!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Home Page">
 <!ENTITY sb.tools.about "Sobre">
 <!ENTITY sb.note.opentab "Abrir na Aba">
