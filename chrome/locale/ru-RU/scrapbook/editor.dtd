@@ -1,10 +1,10 @@
 <!ENTITY sb.editor "Панель редактирования ScrapBook">
-<!ENTITY sb.editor.eraser "Очитска страницы: удаление блоков">
+<!ENTITY sb.editor.eraser "Очистка страницы: удаление блоков">
 <!ENTITY sb.editor.undo "Отменить">
 <!ENTITY sb.editor.restore "Отменить все правки и вернуться к первоначальному виду">
 <!ENTITY sb.editor.save "Зафиксировать правки">
 <!ENTITY sb.editor.comment "Расширить поле комментария">
-<!ENTITY sb.editor.sticky "Быстрое применчание">
+<!ENTITY sb.editor.sticky "Быстрое примечание">
 <!ENTITY sb.editor.sticky.create "Создать &sb.editor.sticky;">
 <!ENTITY sb.editor.inline.add "Добавить встроенное применчание к выделенному">
 <!ENTITY sb.editor.attach.file "Присоединить файл к выделенному">

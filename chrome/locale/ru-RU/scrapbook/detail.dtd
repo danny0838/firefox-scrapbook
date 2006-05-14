@@ -3,7 +3,7 @@
 <!ENTITY sb.detail.select.folder "Выбрать папку">
 <!ENTITY sb.detail.option "Настройки">
 <!ENTITY sb.detail.option.images "Изображения">
-<!ENTITY sb.detail.option.styles "стили">
+<!ENTITY sb.detail.option.styles "Стили">
 <!ENTITY sb.detail.linked.file "Загрузить ссылки">
 <!ENTITY sb.detail.linked.image "Изображения">
 <!ENTITY sb.detail.linked.sound "Аудио">

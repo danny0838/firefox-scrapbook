@@ -1,5 +1,5 @@
 <!ENTITY sb.sort "Сортировать">
-<!ENTITY sb.sort.reverse "Развернуть">
+<!ENTITY sb.sort.reverse "в обратном порядке">
 <!ENTITY sb.sort.title.asc "по заголовкам (A &gt; Z)">
 <!ENTITY sb.sort.title.desc "по заголовкам (Z &gt; A)">
 <!ENTITY sb.sort.date.asc "в хронологическом порядке">

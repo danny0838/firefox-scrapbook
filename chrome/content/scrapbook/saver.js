@@ -477,7 +477,7 @@ var sbContentSaver = {
 					case "mp3" : case "wav"  : case "ram" : case "wma" : flag = this.option["dlsnd"]; break;
 					case "mpg" : case "mpeg" : case "avi" : 
 					case "ram" : case "rm"   : case "mov" : case "wmv" : flag = this.option["dlmov"]; break;
-					case "zip" : case "lzh"  : case "rar" :	case "xpi" : flag = this.option["dlarc"]; break;
+					case "zip" : case "lzh"  : case "rar" : case "xpi" : flag = this.option["dlarc"]; break;
 					default :
 						if ( ext && this.option["custom"] )
 						{
@@ -789,7 +789,7 @@ var sbCaptureObserverCallback = {
 		if ( aItem && sbDataSource.getProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id), "type") == "marked" ) return;
 		if ( sbCommonUtils.getBoolPref("scrapbook.notifyOnComplete", true) )
 		{
-			window.openDialog("chrome://scrapbook/content/notify.xul", "", "alwaysRaised,dependent,titlebar=no", aItem);
+			window.openDialog("chrome://scrapbook/content/notify.xul", "", "chrome,dialog=yes,titlebar=no,popup=yes", aItem);
 		}
 		if ( aItem && aItem.id in sbContentSaver.httpTask ) delete sbContentSaver.httpTask[aItem.id];
 	},

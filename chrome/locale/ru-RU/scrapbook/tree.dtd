@@ -14,11 +14,11 @@
 <!ENTITY sb.prop.comment "Комментарий">
 <!ENTITY sb.prop.id.date "ID (Время)">
 <!ENTITY sb.folder.toggle "Развернуть/Свернуть">
-<!ENTITY sb.folder.combine "Комбинированном виде">
+<!ENTITY sb.folder.combine "Комбинированный вид">
 <!ENTITY sb.folder.openall "Открыть все на вкладках">
 <!ENTITY sb.folder.manage "Упорядочить папки...">
 <!ENTITY sb.new.folder "Новая папка...">
-<!ENTITY sb.new.note "Создать пометку">
+<!ENTITY sb.new.note "Создать заметку">
 <!ENTITY sb.sort.folder "Сортировать папку">
 <!ENTITY sb.search "Поиск">
 <!ENTITY sb.search.fulltext "Полнотекстовый поиск">

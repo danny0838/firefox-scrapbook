@@ -8,6 +8,6 @@
 <!ENTITY sb.prop.icon "Значок">
 <!ENTITY sb.prop.icon.change "Изменить">
 <!ENTITY sb.prop.icon.default "По умолчанию">
-<!ENTITY sb.prop.icon.favicon "Выбраить значок">
+<!ENTITY sb.prop.icon.favicon "Выбрать значок">
 <!ENTITY sb.prop.icon.custom "Выбрать свой значок">
-<!ENTITY sb.prop.mark "Пометить">
+<!ENTITY sb.prop.mark "Выделить">

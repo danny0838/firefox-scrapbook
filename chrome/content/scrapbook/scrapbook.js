@@ -335,6 +335,8 @@ var sbTreeDNDHandler = {
 
 	row    : 0,
 	orient : 0,
+	modAlt   : false,
+	modShift : false,
 
 	dragDropObserver : 
 	{
@@ -361,8 +363,6 @@ var sbTreeDNDHandler = {
 
 	builderObserver : 
 	{
-		canDropOn          : function(){ return false; },
-		canDropBeforeAfter : function(){ return false; },
 		canDrop : function(index, orient)
 		{
 			if ( index != -1 && !sbTreeHandler.TREE.view.isContainer(index) && orient == 0 ) return false;
@@ -391,6 +391,12 @@ var sbTreeDNDHandler = {
 		onPerformAction       : function(){},
 		onPerformActionOnRow  : function(){},
 		onPerformActionOnCell : function(){},
+	},
+
+	getModifiers : function(aEvent)
+	{
+		this.modAlt   = aEvent.altKey;
+		this.modShift = aEvent.ctrlKey || aEvent.shiftKey;
 	},
 
 	init : function()
@@ -499,9 +505,9 @@ var sbTreeDNDHandler = {
 		sbDataSource.moveItem(curRes, curPar, tarPar, tarRelIdx);
 	},
 
-	capture : function(XferString, aRow, aOrient)
+	capture : function(aXferString, aRow, aOrient)
 	{
-		XferString = XferString.split("\n")[0];
+		var url = aXferString.split("\n")[0];
 		var win = sbCommonUtils.getFocusedWindow();
 		var sel = win.getSelection();
 		var isSelected = false;
@@ -509,31 +515,35 @@ var sbTreeDNDHandler = {
 			isSelected = ( sel.anchorNode.isSameNode(sel.focusNode) && sel.anchorOffset == sel.focusOffset ) ? false : true;
 		} catch(ex) {
 		}
-		var isEntire = (XferString == top.window._content.location.href);
+		var isEntire = (url == top.window._content.location.href);
 		var res = ( aRow == -1 ) ? [sbTreeHandler.TREE.ref, 0] : this.getTarget(aRow, aOrient);
-		if ( isSelected || isEntire )
+		if ( this.modAlt && isEntire )
+		{
+			top.window.sbBrowserOverlay.bookmark(res[0], res[1]);
+		}
+		else if ( isSelected || isEntire )
 		{
 			var targetWindow = isEntire ? top.window._content : win;
-			top.window.sbContentSaver.captureWindow(targetWindow, !isEntire, sbMainService.prefs.showDetailOnDrop, res[0], res[1], null);
+			top.window.sbContentSaver.captureWindow(targetWindow, !isEntire, sbMainService.prefs.showDetailOnDrop || this.modShift, res[0], res[1], null);
 		}
 		else
 		{
-			if ( XferString.indexOf("http://") == 0 || XferString.indexOf("https://") == 0 )
+			if ( url.indexOf("http://") == 0 || url.indexOf("https://") == 0 )
 			{
 				top.window.openDialog(
 					"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
-					[XferString], win.location.href,
-					sbMainService.prefs.showDetailOnDrop, res[0], res[1],
+					[url], win.location.href,
+					sbMainService.prefs.showDetailOnDrop || this.modShift, res[0], res[1],
 					null, null, null
 				);
 			}
-			else if ( XferString.indexOf("file://") == 0 )
+			else if ( url.indexOf("file://") == 0 )
 			{
-				top.window.sbContentSaver.captureFile(XferString, "file://", "file", sbMainService.prefs.showDetailOnDrop, res[0], res[1], null);
+				top.window.sbContentSaver.captureFile(url, "file://", "file", sbMainService.prefs.showDetailOnDrop, res[0], res[1], null);
 			}
 			else
 			{
-				alert(sbMainService.STRING.getString("ERROR_INVALID_URL") + "\n" + XferString);
+				alert(sbMainService.STRING.getString("ERROR_INVALID_URL") + "\n" + url);
 			}
 		}
 	},

@@ -169,15 +169,20 @@ var sbBrowserOverlay = {
 	{
 		targetID = this.verifyTargetID(targetID);
 		if ( !targetID ) return;
+		this.bookmark(targetID, 0);
+		this.setFolderPref(targetID);
+	},
+
+	bookmark : function(aResName, aResIndex)
+	{
 		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
 		var newItem = new ScrapBookItem(newID);
+		newItem.type   = "bookmark";
+		newItem.source = window._content.location.href;
 		newItem.title  = gBrowser.selectedTab.label;
 		newItem.icon   = gBrowser.selectedTab.getAttribute("image");
-		newItem.source = window._content.location.href;
-		newItem.type   = "bookmark";
-		sbDataSource.addItem(newItem, targetID, 0);
+		sbDataSource.addItem(newItem, aResName, aResIndex);
 		sbCommonUtils.rebuildGlobal();
-		this.setFolderPref(targetID);
 	},
 
 	locate : function(aRes)

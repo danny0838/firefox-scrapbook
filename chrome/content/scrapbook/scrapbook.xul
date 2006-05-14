@@ -104,7 +104,7 @@
 			      onkeypress="sbTreeHandler.onKeyPress(event);"
 			      ondraggesture="nsDragAndDrop.startDrag(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
 			      ondragover="nsDragAndDrop.dragOver(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
-			      ondragdrop="nsDragAndDrop.drop(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
+			      ondragdrop="sbTreeDNDHandler.getModifiers(event); nsDragAndDrop.drop(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
 			      contextmenu="sbPopup"
 			      hidecolumnpicker="true"
 			      seltype="single"

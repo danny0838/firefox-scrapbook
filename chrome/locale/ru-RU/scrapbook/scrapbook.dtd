@@ -1,5 +1,5 @@
 <!ENTITY sb.new.folder "Новая папка...">
-<!ENTITY sb.new.note "Создать пометку">
+<!ENTITY sb.new.note "Создать заметку">
 <!ENTITY sb.toggle.all "Развернуть/Свернуть все папки">
 <!ENTITY sb.tools "Инструменты">
 <!ENTITY sb.tools.settings "Настройки">
@@ -13,7 +13,7 @@
 <!ENTITY sb.tools.output "Сохранить дерево страниц как HTML">
 <!ENTITY sb.tools.backup "Архивирование">
 <!ENTITY sb.tools.repair "Срочное восстановление">
-<!ENTITY sb.tools.tips "Online Tips">
+<!ENTITY sb.tools.tips "Подсказки в сети">
 <!ENTITY sb.tools.homepage "Домашняя страница">
 <!ENTITY sb.tools.about "О программе">
 <!ENTITY sb.note.opentab "Открыть на вкладке">

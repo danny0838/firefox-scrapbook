@@ -20,7 +20,7 @@
 
 	<hbox id="sbNotifierBox">
 		<hbox id="sbNotifierIconBox" align="center" valign="center">
-			<image id="sbNotifierIcon" src="chrome://scrapbook/skin/mainicon2.png" autostretch="never"/>
+			<image id="sbNotifierIcon" src="chrome://scrapbook/skin/main_16.png" autostretch="never"/>
 		</hbox>
 		<vbox id="sbNotifierTextBox">
 			<label id="sbNotifierTitle"   class="plain" value="ScrapBook: &sb.capture.complete;" />

@@ -89,6 +89,7 @@ function SB_splitByAnchor(aURL)
 function SB_suggestName(aURL)
 {
 	var baseName = sbCommonUtils.validateFileName(sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aURL))[0]);
+	baseName = baseName.toLowerCase();
 	if ( baseName == "index" ) baseName = "default";
 	if ( !baseName ) baseName = "default";
 	var name = baseName + ".html";
@@ -229,7 +230,7 @@ var sbCaptureTask = {
 		if ( ++this.index >= gURLs.length ) {
 			this.finalize();
 		} else {
-			if ( quickly ) {
+			if ( quickly || gURLs[this.index].indexOf("file://") == 0 ) {
 				window.setTimeout(function(){ sbCaptureTask.start(); }, 0);
 			} else {
 				this.seconds = this.INTERVAL;

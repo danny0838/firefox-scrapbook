@@ -165,6 +165,7 @@ var sbCalcController = {
 
 	remove : function()
 	{
+		if ( this.CURRENT_TREEITEM[6] ) return;
 		var id = this.CURRENT_TREEITEM[0];
 		if ( id.length != 14 ) return;
 		if ( sbCommonUtils.removeDirSafety(sbCommonUtils.getContentDir(id), true) )
