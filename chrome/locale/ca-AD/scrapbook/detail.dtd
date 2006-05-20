@@ -14,3 +14,4 @@
 <!ENTITY sb.detail.linked.page.depth "Profunditat">
 <!ENTITY sb.detail.linked.page.text "Trieu amb quina profunditat s'han de seguir els enllaços. Un cop hagi finalitzat la captura, totes les pàgines s'enllaçaran les unes amb les altres i es crearà un mapa web.">
 <!ENTITY sb.detail.warnAboutRenew "ADVERTÈNCIA: L'ordre «Torna a capturar-ho» sobreescriurà la pàgina que s'havia desat anteriorment.">
+<!ENTITY sb.detail.warnAboutScript "ADVERTÈNCIA: JavaScript causarà alguns problemes.">

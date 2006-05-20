@@ -148,11 +148,11 @@ var sbTrader = {
 			file.append("index.dat");
 			if ( !file.exists() ) continue;
 			var item = this.parseIndexDat(sbCommonUtils.convertStringToUTF8(sbCommonUtils.readFile(file)));
-			if ( item.icon && !item.icon.match(/^http|moz-icon/) )
+			if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) )
 			{
 				var icon = this.rightDir.clone();
 				icon.append(dirName);
-				item.icon = sbCommonUtils.convertFilePathToURL(icon.path) + "/" + item.icon;
+				item.icon = sbCommonUtils.convertFilePathToURL(icon.path) + sbCommonUtils.getFileName(item.icon);
 			}
 			if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(item.type);
 			this.treeItems.push([
@@ -425,7 +425,7 @@ var sbExportService = {
 
 	copyLeftToRightInternal : function(aItem)
 	{
-		if ( aItem.icon && !aItem.icon.match(/^http|moz-icon/) )
+		if ( aItem.icon && !aItem.icon.match(/^http|moz-icon|chrome/) )
 		{
 			aItem.icon = aItem.icon.match(/\d{14}\/([^\/]+)$/) ? RegExp.$1 : "";
 		}
@@ -438,30 +438,19 @@ var sbExportService = {
 			destDir.append(dirName);
 		}
 		while ( destDir.exists() && ++num < 256 );
+		var srcDir = sbCommonUtils.getContentDir(aItem.id, false);
+		sbCommonUtils.writeIndexDat(aItem);
+		if ( !srcDir.exists() || !srcDir.leafName.match(/^\d{14}$/) ) return false;
 		try {
-			destDir.create(destDir.DIRECTORY_TYPE, 0700);
+			srcDir.copyTo(sbTrader.rightDir, destDir.leafName);
 		} catch(ex) {
 			try {
-				destDir = sbTrader.rightDir.clone();
-				destDir.append(aItem.id);
-				destDir.create(destDir.DIRECTORY_TYPE, 0700);
+				srcDir.copyTo(sbTrader.rightDir, aItem.id);
 			} catch(ex) {
 				return false;
 			}
 		}
-		if ( aItem.type != "bookmark" )
-		{
-			var srcDir = sbTrader.leftDir.clone();
-			srcDir.append(aItem.id);
-			if ( !srcDir.exists() || !srcDir.leafName.match(/^\d{14}$/) ) return false;
-			try {
-				srcDir.copyTo(sbTrader.rightDir, destDir.leafName);
-			} catch(ex) {
-				return false;
-			}
-		}
-		destDir.append("index.dat");
-		sbCommonUtils.writeIndexDat(aItem, destDir);
+		if ( aItem.type == "bookmark" ) sbCommonUtils.removeDirSafety(srcDir);
 		return true;
 	},
 
@@ -568,7 +557,7 @@ var sbImportService = {
 		var item = sbTrader.parseIndexDat(dat);
 		if ( !item.id || item.id.length != 14 ) return;
 		var destDir = sbTrader.leftDir.clone();
-		if ( item.icon && !item.icon.match(/^http|moz-icon/) ) item.icon = "resource://scrapbook/data/" + item.id + "/" + item.icon;
+		if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) ) item.icon = "resource://scrapbook/data/" + item.id + "/" + item.icon;
 		if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(item.type);
 		var num  = this.ascending ? this.count + 1 : this.idxList.length - this.count;
 		var rate = " (" + num + "/" + this.idxList.length + ") ";
@@ -593,7 +582,7 @@ var sbImportService = {
 		if ( this.restore )
 		{
 			this.tarResArray = ["urn:scrapbook:root", 0];
-			var folderList = item.folder.split("\t");
+			var folderList = "folder" in item ? item.folder.split("\t") : [];
 			for ( var i = 0; i < folderList.length; i++ )
 			{
 		 		if ( folderList[i] == "" ) continue;

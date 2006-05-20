@@ -18,7 +18,6 @@
 <!ENTITY sb.pref.tabs.openFromMenu "Открывать в новой вкладке из меню 'Scrapbook' в главном меню Firefox">
 <!ENTITY sb.pref.capture.encodeUTF8 "Перевести в кодировку UTF-8 (рекомендуется)">
 <!ENTITY sb.pref.capture.encodeUTF8.tips "Если выключено, то некоторые последовательности символов будут отображаться как '?'.">
-<!ENTITY sb.pref.capture.noscript.tips "Если это выключить, то может быть много проблем из-за JavaScript.">
 <!ENTITY sb.pref.data "Папка для хранения данных">
 <!ENTITY sb.pref.data.default "По умолчанию (В Вашем домашнем каталоге/Профиле)">
 <!ENTITY sb.pref.data.tips "Укажите папку 'ScrapBook' где Вы хотите разместить (разместили) собранные страницы.">

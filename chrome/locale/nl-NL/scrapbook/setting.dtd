@@ -18,7 +18,6 @@
 <!ENTITY sb.pref.tabs.openFromMenu "Open in new tab from 'ScrapBook' menu in Firefox menubar">
 <!ENTITY sb.pref.capture.encodeUTF8 "Naar UTF-8-formaat omzetten (aanbevolen)">
 <!ENTITY sb.pref.capture.encodeUTF8.tips "Als het vinkje uitstaat, worden sommige tekens wel eens verminkt weergegeven als '?'.">
-<!ENTITY sb.pref.capture.noscript.tips "Als het vinkje uitstaat, kunnen er veel problemen veroorzaakt worden door JavaScript.">
 <!ENTITY sb.pref.data "Locatie om gegevens op te slaan">
 <!ENTITY sb.pref.data.default "Standaard (in uw profielmap)">
 <!ENTITY sb.pref.data.tips "Een 'ScrapBook'map kiezen om uw verzamelde gegevens in op te slaan.">

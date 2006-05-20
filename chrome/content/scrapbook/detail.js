@@ -20,6 +20,7 @@ function SB_initDetail()
 	{
 		document.getElementById("sbDetailOptionScript").disabled = true;
 	}
+	sbDetailWarnService.init();
 	if ( gArguments.context == "renew" || gArguments.context == "renew-deep" )
 	{
 		document.getElementById("sbDetailFolderRow").collapsed = true;
@@ -38,6 +39,26 @@ function SB_toggleLinkedCustom()
 {
 	gCustomCheckbox.nextSibling.disabled = !gCustomCheckbox.checked;
 }
+
+
+var sbDetailWarnService = {
+
+	get ELEMENT(){ return document.getElementById("sbDetailWarnAboutScript"); },
+	offset : 0,
+
+	init : function()
+	{
+		this.offset = this.ELEMENT.boxObject.height;
+		if ( !this.offset ) this.offset = 32;
+		this.ELEMENT.hidden = true;
+	},
+
+	toggle : function ()
+	{
+		this.ELEMENT.hidden = !this.ELEMENT.hidden;
+		this.ELEMENT.hidden ? window.outerHeight -= this.offset : window.outerHeight += this.offset;
+	},
+};
 
 
 function SB_promptForDepth()

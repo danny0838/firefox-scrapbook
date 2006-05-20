@@ -18,7 +18,6 @@
 <!ENTITY sb.pref.tabs.openFromMenu "Apri dal menu 'ScrapBook' in Firefox">
 <!ENTITY sb.pref.capture.encodeUTF8 "Convertire nella codifica UTF-8 (raccomandato)">
 <!ENTITY sb.pref.capture.encodeUTF8.tips "Se l'opzione è deselezionata, molti caratteri potrebbero essere visualizzati come '?'">
-<!ENTITY sb.pref.capture.noscript.tips "Se l'opzione è deselezionata, gli JavaScript potrebbero causare molti problemi">
 <!ENTITY sb.pref.data "Cartella dove conservare i dati">
 <!ENTITY sb.pref.data.default "Predefinita (nella cartella del proprio profilo)">
 <!ENTITY sb.pref.data.tips "Selezionare la cartella 'ScrapBook' dove conservare i dati salvati">

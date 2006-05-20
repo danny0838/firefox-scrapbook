@@ -14,3 +14,4 @@
 <!ENTITY sb.detail.linked.page.depth "リンクをたどる深さ">
 <!ENTITY sb.detail.linked.page.text "取り込み完了後、すべてのページは相互にリンクされ、サイトマップが生成されます。">
 <!ENTITY sb.detail.warnAboutRenew "注意: 再取り込みを行うと元のページに上書きされます。">
+<!ENTITY sb.detail.warnAboutScript "注意: JavaScriptは何らかの問題を引き起こす可能性があります。">

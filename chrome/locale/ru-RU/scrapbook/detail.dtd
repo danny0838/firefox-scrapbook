@@ -14,3 +14,4 @@
 <!ENTITY sb.detail.linked.page.depth "До следующих ссылок">
 <!ENTITY sb.detail.linked.page.text "После завершения захватов, все страницы будут связаны между собой.">
 <!ENTITY sb.detail.warnAboutRenew "Примечание: 'Захватить снова' записывается поверх ранее сохраненной страницы.">
+<!ENTITY sb.detail.warnAboutScript "Примечание: То может быть много проблем из-за JavaScript.">

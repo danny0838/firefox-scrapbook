@@ -14,3 +14,4 @@
 <!ENTITY sb.detail.linked.page.depth "Koppelingen grondig volgen">
 <!ENTITY sb.detail.linked.page.text "Na het voltooien van het bewaren, zullen alle pagina's gekoppeld worden en wordt er een internetpaginamap aangemaakt.">
 <!ENTITY sb.detail.warnAboutRenew "NOTICE: 'Capture Again' overwrites the previously saved page.">
+<!ENTITY sb.detail.warnAboutScript "NOTICE: Kunnen er veel problemen veroorzaakt worden door JavaScript.">

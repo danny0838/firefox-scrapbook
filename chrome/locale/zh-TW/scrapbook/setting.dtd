@@ -18,7 +18,6 @@
 <!ENTITY sb.pref.tabs.openFromMenu "從 Firefox 功能表的 ScrapBook 選單中開啟資料時，開新分頁顯示該資料。">
 <!ENTITY sb.pref.capture.encodeUTF8 "自動將字元轉為 UTF-8 編碼（建議勾選）">
 <!ENTITY sb.pref.capture.encodeUTF8.tips "如果取消此項，有些字元會常常變成「?」。">
-<!ENTITY sb.pref.capture.noscript.tips "如果取消此項，則 JavaScript 可能會引發許多問題。">
 <!ENTITY sb.pref.data "擷取資料存放處">
 <!ENTITY sb.pref.data.default "預設（在您的個人設定檔資料夾中）">
 <!ENTITY sb.pref.data.tips "請選擇 ScrapBook 存放擷取資料的資料夾">

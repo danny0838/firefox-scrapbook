@@ -18,7 +18,6 @@
 <!ENTITY sb.pref.tabs.openFromMenu "Open in new tab from 'ScrapBook' menu in Firefox menubar">
 <!ENTITY sb.pref.capture.encodeUTF8 "Konvertera till UTF-8 (Rekommenderas)">
 <!ENTITY sb.pref.capture.encodeUTF8.tips "Om ej vald, kommer vissa tecken ofta förvanskas till '?'.">
-<!ENTITY sb.pref.capture.noscript.tips "Om ej vald, kommer sidans layout ibland förvanskas.">
 <!ENTITY sb.pref.data "Välj sökväg för sparade data">
 <!ENTITY sb.pref.data.default "Standard (I din användarprofils mapp)">
 <!ENTITY sb.pref.data.tips "Välj 'ScrapBook'-mapp, där insamlade data ska sparas.">

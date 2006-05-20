@@ -14,3 +14,4 @@
 <!ENTITY sb.detail.linked.page.depth "获取链接层数">
 <!ENTITY sb.detail.linked.page.text "全部获取完成后，所有页面将保持彼此的链接并创建网站地图。">
 <!ENTITY sb.detail.warnAboutRenew "注意：“重新获取” 会覆盖以前保存的页面。">
+<!ENTITY sb.detail.warnAboutScript "注意：将会因为 JavaScript 而引起很多问题。">

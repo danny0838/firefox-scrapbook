@@ -14,3 +14,4 @@
 <!ENTITY sb.detail.linked.page.depth "擷取連結層數">
 <!ENTITY sb.detail.linked.page.text "（擷取完畢後，網頁連結會自動依硬碟中位置更新。）">
 <!ENTITY sb.detail.warnAboutRenew "請注意：「重新擷取」將覆蓋之前擷取的頁面。">
+<!ENTITY sb.detail.warnAboutScript "請注意：則 JavaScript 可能會引發許多問題。">

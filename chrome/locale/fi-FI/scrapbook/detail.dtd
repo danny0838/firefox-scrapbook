@@ -14,3 +14,4 @@
 <!ENTITY sb.detail.linked.page.depth "Linkkien seuraussyvyys">
 <!ENTITY sb.detail.linked.page.text "Kaappausten valmistuttua kaikki sivut linkitetään toisiinsa ja sivustokartta luodaan.">
 <!ENTITY sb.detail.warnAboutRenew "Huom.: &quot;Kaappaa uudestaan&quot; korvaa aiemman version.">
+<!ENTITY sb.detail.warnAboutScript "Huom.: JavaScript may cause some problems.">

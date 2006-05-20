@@ -18,7 +18,6 @@
 <!ENTITY sb.pref.tabs.openFromMenu "Sivut avautuvat ScrapBook-valikosta uuteen välilehteen">
 <!ENTITY sb.pref.capture.encodeUTF8 "Muunna UTF-8 -merkistöön (suositeltua)">
 <!ENTITY sb.pref.capture.encodeUTF8.tips "Jos ei ole valittuna, jotkin merkit korvataan kysymysmerkeillä.">
-<!ENTITY sb.pref.capture.noscript.tips "Jos ei ole valittuna, voi aiheuttaa useita ongelmia.">
 <!ENTITY sb.pref.data "Tietojen tallennuskansio">
 <!ENTITY sb.pref.data.default "Oletus (Profiilikansio)">
 <!ENTITY sb.pref.data.tips "Valitse kansio, johon ScrapBook tallentaa tietonsa.">

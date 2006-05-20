@@ -485,7 +485,7 @@ var sbContentSaver = {
 						}
 						if ( !flag && this.option["inDepth"] > 0 ) this.linkURLs.push(aNode.href);
 				}
-				if ( aNode.href.indexOf("file://") == 0 && !aNode.href.match(/\.html$/) ) flag = true;
+				if ( aNode.href.indexOf("file://") == 0 && !aNode.href.match(/\.html(?:#.*)?$/) ) flag = true;
 				if ( flag ) {
 					var aFileName = this.download(aNode.href);
 					if (aFileName) aNode.setAttribute("href", aFileName);
@@ -510,8 +510,11 @@ var sbContentSaver = {
 			case "frame"  : 
 			case "iframe" : 
 				if ( this.selection ) {
-					aNode.setAttribute("src", aNode.src);
-					break;
+					this.selection = null;
+					for ( var fn = this.frameNumber; fn < this.frameList.length; fn++ )
+					{
+						if ( aNode.src == this.frameList[fn].location.href ) { this.frameNumber = fn; break; }
+					}
 				}
 				var tmpRefURL = this.refURLObj;
 				try {
@@ -521,6 +524,11 @@ var sbContentSaver = {
 					alert("ScrapBook ERROR: Failed to get document in a frame.");
 				}
 				this.refURLObj = tmpRefURL;
+				break;
+			case "xmp" : 
+				var pre = aNode.ownerDocument.createElement("pre");
+				pre.appendChild(aNode.firstChild);
+				aNode.parentNode.replaceChild(pre, aNode);
 				break;
 		}
 		if ( !this.option["styles"] )

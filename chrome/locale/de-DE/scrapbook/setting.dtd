@@ -18,7 +18,6 @@
 <!ENTITY sb.pref.tabs.openFromMenu "&quot;ScrapBook&quot;-Menüeinträge in der Menüleiste in neuem Tab öffnen">
 <!ENTITY sb.pref.capture.encodeUTF8 "Zeichenkodierung in UTF-8 umwandeln (empfohlen)">
 <!ENTITY sb.pref.capture.encodeUTF8.tips "Falls nicht ausgewählt, können einige Sonderzeichen unleserlich (&quot;?&quot;) dargestellt werden.">
-<!ENTITY sb.pref.capture.noscript.tips "Falls nicht ausgewählt, kann JavaScript eine Reihe von Problemen verursachen.">
 <!ENTITY sb.pref.data "Zielordner für die Datenspeicherung">
 <!ENTITY sb.pref.data.default "Standardordner (aktueller Profilordner)">
 <!ENTITY sb.pref.data.tips "ScrapBook-Ordner auswählen, in dem die gesammelten Daten gespeichert werden sollen.">

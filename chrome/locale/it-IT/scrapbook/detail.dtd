@@ -14,3 +14,4 @@
 <!ENTITY sb.detail.linked.page.depth "Compresi i seguenti link">
 <!ENTITY sb.detail.linked.page.text "Dopo aver completato la cattura, tutte le pagine verranno linkate e verrà creata una mappa del sito">
 <!ENTITY sb.detail.warnAboutRenew "AVVISO: l'opzione 'Cattura ancora' sovrascrive le pagine precedentemente salvate">
+<!ENTITY sb.detail.warnAboutScript "AVVISO: Gli JavaScript potrebbero causare molti problemi">

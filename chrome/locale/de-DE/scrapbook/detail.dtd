@@ -14,3 +14,4 @@
 <!ENTITY sb.detail.linked.page.depth "Verzeichnistiefe der Links">
 <!ENTITY sb.detail.linked.page.text "Nach Abschluss der Archivierung werden alle Seiten untereinander verlinkt und es wird eine Sitemap erstellt.">
 <!ENTITY sb.detail.warnAboutRenew "HINWEIS: &quot;Erneut archivieren&quot; überschreibt zuvor gespeicherte Seiten.">
+<!ENTITY sb.detail.warnAboutScript "HINWEIS: Kann JavaScript eine Reihe von Problemen verursachen.">

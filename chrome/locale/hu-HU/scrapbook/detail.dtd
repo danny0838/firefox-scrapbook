@@ -14,3 +14,4 @@
 <!ENTITY sb.detail.linked.page.depth "A hivatkozás-követés mélysége">
 <!ENTITY sb.detail.linked.page.text "A rögzítések befejezése után egymáshoz kapcsolja valamennyi oldalt, és elkészíti a webhely szerkezetét.">
 <!ENTITY sb.detail.warnAboutRenew "NOTICE: 'Capture Again' overwrites the previously saved page.">
+<!ENTITY sb.detail.warnAboutScript "NOTICE: Akkor a JavaScript sok problémát okozhat.">

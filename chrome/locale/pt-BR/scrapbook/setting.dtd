@@ -18,7 +18,6 @@
 <!ENTITY sb.pref.tabs.openFromMenu "Abrir em nova aba os itens do menu 'ScrapBook'">
 <!ENTITY sb.pref.capture.encodeUTF8 "Converter para a codificação UTF-8 (Recomendado)">
 <!ENTITY sb.pref.capture.encodeUTF8.tips "Se desabilitado, alguns caracteres podem mudar para '?'.">
-<!ENTITY sb.pref.capture.noscript.tips "Se desabilitado, muitos problemas serão causados pelo JavaScript.">
 <!ENTITY sb.pref.data "Local para Salvar Dados">
 <!ENTITY sb.pref.data.default "Padrão (Na Pasta do seu Perfil)">
 <!ENTITY sb.pref.data.tips "Selecione a pasta para o 'ScrapBook' armazenar dados coletados.">

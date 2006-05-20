@@ -18,7 +18,6 @@
 <!ENTITY sb.pref.tabs.openFromMenu "在新标签页打开 Firefox 菜单的 ScrapBook 菜单项中的页面">
 <!ENTITY sb.pref.capture.encodeUTF8 "自动转换为 UTF-8 编码 (推荐)">
 <!ENTITY sb.pref.capture.encodeUTF8.tips "如果取消此项，有些字符经常会被错误显示为“??”。">
-<!ENTITY sb.pref.capture.noscript.tips "如果取消此项，将会因为 JavaScript 而引起很多问题。">
 <!ENTITY sb.pref.data "ScrapBook 文件保存位置">
 <!ENTITY sb.pref.data.default "默认 (在 Firefox 的配置文件夹)">
 <!ENTITY sb.pref.data.tips "选择 ScrapBook 保存文件的目录">

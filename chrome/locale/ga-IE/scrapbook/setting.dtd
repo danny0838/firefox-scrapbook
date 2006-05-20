@@ -18,7 +18,6 @@
 <!ENTITY sb.pref.tabs.openFromMenu "Oscail i T&#225;b Nua &#225; roghchl&#225;r 'Leabhar Gearrth&#225;n' i mbarra rogha Firefox">
 <!ENTITY sb.pref.capture.encodeUTF8 "Eastraigh go c&#243;d&#225;il UTF-8">
 <!ENTITY sb.pref.capture.encodeUTF8.tips "M&#225; muchtar, is feidir le carichteir teacht amach mar '?'.">
-<!ENTITY sb.pref.capture.noscript.tips "M&#225; m&#250;chtar an ticbhosca, is feidir le JavaScript an-chuid faidhbeanna a chruth&#250;.">
 <!ENTITY sb.pref.data "Sprioc chun Sonra&#237; a chuir i dTaisce">
 <!ENTITY sb.pref.data.default "Luach R&#233;amhshocraithe (I do Comhadlann Pr&#243;if&#237;l)">
 <!ENTITY sb.pref.data.tips "Romhnaigh comhadlann chun Sprioc Bailithe 'Leabhar Gearrth&#225;n' a choimead.">

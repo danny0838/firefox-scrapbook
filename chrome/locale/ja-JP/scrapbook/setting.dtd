@@ -18,7 +18,6 @@
 <!ENTITY sb.pref.tabs.openFromMenu "Firefoxのメニューバーの 'ScrapBook' メニューから新しいタブで開く">
 <!ENTITY sb.pref.capture.encodeUTF8 "UTF-8へ変換する　（推奨）">
 <!ENTITY sb.pref.capture.encodeUTF8.tips "チェックをオフにした場合、記号が文字化けする問題が生じます。">
-<!ENTITY sb.pref.capture.noscript.tips "チェックをオフにした場合、JavaScriptによって様々な問題が生じます。">
 <!ENTITY sb.pref.data "データ保存先">
 <!ENTITY sb.pref.data.default "デフォルト　（プロファイルフォルダ下）">
 <!ENTITY sb.pref.data.tips "収集したデータを保存するためのScrapBookフォルダを選択してください。">

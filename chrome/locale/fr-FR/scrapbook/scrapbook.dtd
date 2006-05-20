@@ -6,14 +6,14 @@
 <!ENTITY sb.tools.manage "Gestion">
 <!ENTITY sb.tools.combine "Combiner">
 <!ENTITY sb.tools.trade "Importer / Exporter">
-<!ENTITY sb.tools.multiple "Capture des URLs multiples">
+<!ENTITY sb.tools.multiple "Capturer des URLs multiples">
 <!ENTITY sb.tools.directory "Répertoire de ScrapBook">
 <!ENTITY sb.tools.calculate "Calcul de la taille">
 <!ENTITY sb.tools.sorttree "Classer l'arborescence entière">
 <!ENTITY sb.tools.output "Arborescence comme HTML">
 <!ENTITY sb.tools.backup "Sauvegarde avec compression">
 <!ENTITY sb.tools.repair "Réparation d'urgence">
-<!ENTITY sb.tools.tips "Online Tips">
+<!ENTITY sb.tools.tips "Astuces en ligne">
 <!ENTITY sb.tools.homepage "Page d'accueil">
 <!ENTITY sb.tools.about "À propos">
 <!ENTITY sb.note.opentab "Éditer dans un onglet">

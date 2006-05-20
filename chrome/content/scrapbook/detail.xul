@@ -66,14 +66,14 @@
 					</rows>
 				</grid>
 				<!--options-->
-				<hbox align="center" style="margin-bottom:8px;">
+				<hbox align="center">
 					<label value="&sb.detail.option;:" />
 					<checkbox id="sbDetailOptionImages" label="&sb.detail.option.images;" checked="true" />
 					<checkbox id="sbDetailOptionStyles" label="&sb.detail.option.styles;" checked="true" />
-					<checkbox id="sbDetailOptionScript" label="JavaScript" />
+					<checkbox id="sbDetailOptionScript" label="JavaScript" oncommand="sbDetailWarnService.toggle();" />
 				</hbox>
 				<!--download linked files-->
-				<groupbox>
+				<groupbox style="margin-top:8px;">
 					<caption label="&sb.detail.linked.file;" />
 					<checkbox id="sbDetailImage"   persist="checked" label="&sb.detail.linked.image; (jpg, png, gif)" />
 					<checkbox id="sbDetailSound"   persist="checked" label="&sb.detail.linked.sound; (mp3, wav, ram, wma)" />
@@ -99,7 +99,8 @@
 					</hbox>
 					<!--<description flex="1">&sb.detail.linked.page.text;</description>-->
 				</groupbox>
-				<description id="sbDetailWarnAboutRenew" flex="1" style="color:red;" hidden="true">&sb.detail.warnAboutRenew;</description>
+				<description id="sbDetailWarnAboutRenew"  flex="1" style="color:red;" hidden="true">&sb.detail.warnAboutRenew;</description>
+				<description id="sbDetailWarnAboutScript" flex="1" style="color:red;">&sb.detail.warnAboutScript;</description>
 			</tabpanel>
 			<!--comment-->
 			<tabpanel>

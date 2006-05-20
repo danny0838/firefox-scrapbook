@@ -18,7 +18,6 @@
 <!ENTITY sb.pref.tabs.openFromMenu "Otevřít nový panel z hlavní nabídky 'ScrapBook'">
 <!ENTITY sb.pref.capture.encodeUTF8 "Převést do UTF-8 kódování  (Doporučeno)">
 <!ENTITY sb.pref.capture.encodeUTF8.tips "Pokud není zaškrtnuto, některé znaky budou často zobrazeny jako '?'">
-<!ENTITY sb.pref.capture.noscript.tips "Pokud není zaškrtnuto, je hodně problémů způsobeno JavaScriptem.">
 <!ENTITY sb.pref.data "Cesta k datům">
 <!ENTITY sb.pref.data.default "Standardní (ve vašem Profilu)">
 <!ENTITY sb.pref.data.tips "Vyberte adresář ScrapBook kam se mají uložit nashromážděná data.">

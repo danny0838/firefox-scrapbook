@@ -18,7 +18,6 @@
 <!ENTITY sb.pref.tabs.openFromMenu "Ouvrir dans un nouvel onglet à partir du menu 'ScrapBook' dans la barre de menu de Firefox">
 <!ENTITY sb.pref.capture.encodeUTF8 "Convertir en encodage UTF-8 (Recommandé)">
 <!ENTITY sb.pref.capture.encodeUTF8.tips "Si cette option n'est pas choisie, certains caractères peuvent être remplacés par '?'.">
-<!ENTITY sb.pref.capture.noscript.tips "Si cette option n'est pas choisie, JavaScript cause de nombreux problèmes.">
 <!ENTITY sb.pref.data "Destination du stockage des données">
 <!ENTITY sb.pref.data.default "Par défaut (dans le dossier de votre profil)">
 <!ENTITY sb.pref.data.tips "Sélectionner le dossier ScrapBook de destination des données collectées.">

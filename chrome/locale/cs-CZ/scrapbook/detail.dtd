@@ -14,3 +14,4 @@
 <!ENTITY sb.detail.linked.page.depth "Hloubkově procházet odkazy">
 <!ENTITY sb.detail.linked.page.text "Po dokončení zachycení budou všechny stránky vzájemně propojeny a bude vytvořena mapa stránek.">
 <!ENTITY sb.detail.warnAboutRenew "UPOZORNĚNÍ: 'Zachytit znovu' přepíše předchozí uloženou stránku.">
+<!ENTITY sb.detail.warnAboutScript "UPOZORNĚNÍ: je hodně problémů způsobeno JavaScriptem.">

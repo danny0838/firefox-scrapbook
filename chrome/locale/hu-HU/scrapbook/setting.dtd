@@ -18,7 +18,6 @@
 <!ENTITY sb.pref.tabs.openFromMenu "Open in new tab from 'ScrapBook' menu in Firefox menubar">
 <!ENTITY sb.pref.capture.encodeUTF8 "UTF-8 kódolásúvá alakítás (ajánlott)">
 <!ENTITY sb.pref.capture.encodeUTF8.tips "He nem jelöli be, akkor némely karakter helyett gyakorta '?' jelenik meg.">
-<!ENTITY sb.pref.capture.noscript.tips "Ha nem jelöli be, akkor a JavaScript sok problémát okozhat.">
 <!ENTITY sb.pref.data "Adattárolás célhelye">
 <!ENTITY sb.pref.data.default "Alapértelmezett (a Profile mappában)">
 <!ENTITY sb.pref.data.tips "Válassza ki a dosszié mappáját, melyben az összegyűjtött adatokat tárolja.">
