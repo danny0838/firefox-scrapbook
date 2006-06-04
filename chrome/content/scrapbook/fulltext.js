@@ -276,33 +276,19 @@ var sbCacheService = {
 		sbCacheSource.refreshEntries();
 		this.dataDir = sbCommonUtils.getScrapBookDir().clone();
 		this.dataDir.append("data");
-		this.prepareBuilding(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"));
-		this.processAsync();
-	},
-
-
-	prepareBuilding : function(aContRes)
-	{
-		sbCommonUtils.RDFC.Init(sbDataSource.data, aContRes);
-		var resEnum = sbCommonUtils.RDFC.GetElements();
-		while ( resEnum.hasMoreElements() )
+		var contResList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"), 1, true);
+		for ( var i = 0; i < contResList.length; i++ )
 		{
-			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			var type = sbDataSource.getProperty(res, "type");
-			if ( sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, res) )
+			var resList = sbDataSource.flattenResources(contResList[i], 2, false);
+			for ( var j = 0; j < resList.length; j++ )
 			{
-				this.prepareBuilding(res);
-			}
-			else if ( type == "image" || type == "file" || type == "bookmark" )
-			{
-				continue;
-			}
-			else
-			{
-				this.resList.push(res);
-				this.folders.push(sbDataSource.getProperty(aContRes, "title"));
+				var type = sbDataSource.getProperty(resList[j], "type");
+				if ( type == "image" || type == "file" || type == "bookmark" ) continue;
+				this.resList.push(resList[j]);
+				this.folders.push(sbDataSource.getProperty(contResList[i], "title"));
 			}
 		}
+		this.processAsync();
 	},
 
 

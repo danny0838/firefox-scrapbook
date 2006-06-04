@@ -8,4 +8,5 @@
 <!ENTITY sb.note.autolinefeed.t "在 HTML 預覽時，於每行最後自動添加 &lt;br&gt; 標籤。">
 <!ENTITY sb.note.fontsize "文字尺寸">
 <!ENTITY sb.note.help "說明">
+<!ENTITY sb.note.print "Print">
 <!ENTITY sb.note.exit "離開">

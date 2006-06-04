@@ -8,4 +8,5 @@
 <!ENTITY sb.note.autolinefeed.t "A &lt;br&gt; kódelem hozzáadása a sorvéghez a &sb.note.htmlview;">
 <!ENTITY sb.note.fontsize "Betűméret">
 <!ENTITY sb.note.help "Súgó">
+<!ENTITY sb.note.print "Print">
 <!ENTITY sb.note.exit "Kilépés">

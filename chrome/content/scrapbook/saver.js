@@ -473,17 +473,15 @@ var sbContentSaver = {
 				var flag = false;
 				switch ( ext )
 				{
-					case "jpg" : case "jpeg" : case "png" : case "gif" : flag = this.option["dlimg"]; break;
-					case "mp3" : case "wav"  : case "ram" : case "wma" : flag = this.option["dlsnd"]; break;
-					case "mpg" : case "mpeg" : case "avi" : 
-					case "ram" : case "rm"   : case "mov" : case "wmv" : flag = this.option["dlmov"]; break;
-					case "zip" : case "lzh"  : case "rar" : case "xpi" : flag = this.option["dlarc"]; break;
-					default :
-						if ( ext && this.option["custom"] )
-						{
-							if ( (", " + this.option["custom"] + ", ").indexOf(", " + ext + ", ") != -1 ) flag = true;
-						}
-						if ( !flag && this.option["inDepth"] > 0 ) this.linkURLs.push(aNode.href);
+					case "jpg" : case "jpeg" : case "png" : case "gif" : case "tiff" : flag = this.option["dlimg"]; break;
+					case "mp3" : case "wav"  : case "ram" : case "rm"  : case "wma"  : flag = this.option["dlsnd"]; break;
+					case "mpg" : case "mpeg" : case "avi" : case "mov" : case "wmv"  : flag = this.option["dlmov"]; break;
+					case "zip" : case "lzh"  : case "rar" : case "jar" : case "xpi"  : flag = this.option["dlarc"]; break;
+					default : if ( this.option["inDepth"] > 0 ) this.linkURLs.push(aNode.href);
+				}
+				if ( !flag && ext && this.option["custom"] )
+				{
+					if ( (", " + this.option["custom"] + ", ").indexOf(", " + ext + ", ") != -1 ) flag = true;
 				}
 				if ( aNode.href.indexOf("file://") == 0 && !aNode.href.match(/\.html(?:#.*)?$/) ) flag = true;
 				if ( flag ) {

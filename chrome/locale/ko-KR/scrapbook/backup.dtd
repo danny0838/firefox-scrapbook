@@ -1,7 +1,0 @@
-<!ENTITY sb.backup.d "ScrapBook의 모든 데이터를 압축하여 백업합니다.">
-<!ENTITY sb.backup.program "압축 프로그램">
-<!ENTITY sb.backup.file "백업 대상 파일">
-<!ENTITY sb.backup.browse "찾아보기">
-<!ENTITY sb.backup.arg "명령 라인 인수">
-<!ENTITY sb.backup.arg.d1 "&#37;dst 는 백업 파일의 경로를 나타냅니다.">
-<!ENTITY sb.backup.arg.d2 "&#37;src 는 ScrapBook 폴더로의 경로를 나타냅니다.">

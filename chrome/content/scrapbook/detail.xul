@@ -75,10 +75,10 @@
 				<!--download linked files-->
 				<groupbox style="margin-top:8px;">
 					<caption label="&sb.detail.linked.file;" />
-					<checkbox id="sbDetailImage"   persist="checked" label="&sb.detail.linked.image; (jpg, png, gif)" />
+					<checkbox id="sbDetailImage"   persist="checked" label="&sb.detail.linked.image; (jpg, png, gif, tiff)" />
 					<checkbox id="sbDetailSound"   persist="checked" label="&sb.detail.linked.sound; (mp3, wav, ram, wma)" />
-					<checkbox id="sbDetailMovie"   persist="checked" label="&sb.detail.linked.movie; (mpg, avi, ram, mov, wmv)" />
-					<checkbox id="sbDetailArchive" persist="checked" label="&sb.detail.linked.archive; (zip, lzh, rar, xpi)" />
+					<checkbox id="sbDetailMovie"   persist="checked" label="&sb.detail.linked.movie; (mpg, avi, mov, wmv)" />
+					<checkbox id="sbDetailArchive" persist="checked" label="&sb.detail.linked.archive; (zip, lzh, rar, jar, xpi)" />
 					<hbox align="center">
 						<checkbox id="sbDetailCustom" persist="checked" label="&sb.detail.linked.custom;" oncommand="SB_toggleLinkedCustom();" />
 						<textbox flex="1" />

@@ -26,7 +26,7 @@
 	<!--stringbundle-->
 	<stringbundle id="sbMainString" src="chrome://scrapbook/locale/scrapbook.properties" />
 
-	<wizardpage label="&sb.sort;">
+	<wizardpage pageid="sbSortStartPage" label="&sb.sort;">
 		<radiogroup id="sbSortRadioGroup" persist="sortIndex">
 			<radio label="&sb.sort.reverse;" />
 			<radio label="&sb.sort.title.asc;" />
@@ -37,6 +37,10 @@
 		<separator class="groove" />
 		<checkbox id="sbSortRecursive" label="&sb.sort.recursive;" persist="checked" />
 		<description id="sbSortWarning" value="&sb.sort.warning;" style="margin:10px;color:red;" />
+	</wizardpage>
+
+	<wizardpage pageid="sbSortProcessPage" label="&sb.sort;" onpageshow="sbSortService.exec();">
+		<textbox id="sbSortTextbox" readonly="true" />
 	</wizardpage>
 
 </wizard>

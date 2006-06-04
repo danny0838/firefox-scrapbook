@@ -11,8 +11,8 @@
 <!ENTITY sb.tools.calculate "Beräkna storlek">
 <!ENTITY sb.tools.sorttree "Sortera hela trädet">
 <!ENTITY sb.tools.output "Spara trädet som HTML">
-<!ENTITY sb.tools.backup "Säkerhetskopia med komprimering">
 <!ENTITY sb.tools.repair "Reparera">
+<!ENTITY sb.tools.addons "Add-on Functions">
 <!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Hemsida">
 <!ENTITY sb.tools.about "Om">

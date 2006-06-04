@@ -6,7 +6,12 @@
 <?xml-stylesheet href="chrome://scrapbook/skin/note.css" type="text/css" ?>
 
 <!--locale-->
-<!DOCTYPE window SYSTEM "chrome://scrapbook/locale/note.dtd">
+<!DOCTYPE window [
+<!ENTITY % noteDTD SYSTEM "chrome://scrapbook/locale/note.dtd" >
+%noteDTD;
+<!ENTITY % editorDTD  SYSTEM "chrome://scrapbook/locale/editor.dtd" >
+%editorDTD;
+]>
 
 <!--window-->
 <window id="sbNoteWindow"
@@ -65,18 +70,20 @@
 			</menupopup>
 		</toolbarbutton>
 		<toolbarbutton type="menu" id="sbNoteToolbarF" label="&sb.note.fontsize;" accesskey="Z">
-			<menupopup>
-				<menuitem id="sbNoteToolbarF18" type="radio" label="18px" oncommand="sbNoteService2.changeFontSize(18);" />
-				<menuitem id="sbNoteToolbarF17" type="radio" label="17px" oncommand="sbNoteService2.changeFontSize(17);" />
-				<menuitem id="sbNoteToolbarF16" type="radio" label="16px" oncommand="sbNoteService2.changeFontSize(16);" />
-				<menuitem id="sbNoteToolbarF15" type="radio" label="15px" oncommand="sbNoteService2.changeFontSize(15);" />
-				<menuitem id="sbNoteToolbarF14" type="radio" label="14px" oncommand="sbNoteService2.changeFontSize(14);" />
-				<menuitem id="sbNoteToolbarF13" type="radio" label="13px" oncommand="sbNoteService2.changeFontSize(13);" />
-				<menuitem id="sbNoteToolbarF12" type="radio" label="12px" oncommand="sbNoteService2.changeFontSize(12);" />
+			<menupopup oncommand="sbNoteService2.changeFontSize(parseInt(event.originalTarget.label));">
+				<menuitem id="sbNoteToolbarF18" type="radio" label="18px" />
+				<menuitem id="sbNoteToolbarF17" type="radio" label="17px" />
+				<menuitem id="sbNoteToolbarF16" type="radio" label="16px" />
+				<menuitem id="sbNoteToolbarF15" type="radio" label="15px" />
+				<menuitem id="sbNoteToolbarF14" type="radio" label="14px" />
+				<menuitem id="sbNoteToolbarF13" type="radio" label="13px" />
+				<menuitem id="sbNoteToolbarF12" type="radio" label="12px" />
 			</menupopup>
 		</toolbarbutton>
+		<toolbarbutton id="sbNoteToolbarP" accesskey="P" label="&sb.note.print;..." disabled="true" oncommand="document.getElementById('sbNoteBrowser').contentWindow.print();" />
 		<spacer flex="1" />
 		<toolbarbutton id="sbNoteToolbarX" accesskey="X" tooltiptext="&sb.note.exit;" image="chrome://scrapbook/skin/exit.png" oncommand="sbNoteService2.finalize(true);" />
+		<toolbarbutton image="chrome://scrapbook/skin/expander_left.png" tooltiptext="&sb.locate;" oncommand="sbCommonUtils.WINDOW.getMostRecentWindow('navigator:browser').sbBrowserOverlay.locate(sbNoteService.resource);" />
 	</toolbar>
 
 </window>

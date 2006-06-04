@@ -22,8 +22,4 @@ tree#sbTradeTree treechildren::-moz-tree-image(sbTradeTreeColTitle)
 	margin-left:5px;
 }
 
-#sbTradePath {
-	padding: 2px;
-	height: 1.7em;
-}
 

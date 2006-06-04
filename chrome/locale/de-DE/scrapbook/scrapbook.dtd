@@ -11,8 +11,8 @@
 <!ENTITY sb.tools.calculate "Gesamtgröße berechnen">
 <!ENTITY sb.tools.sorttree "Ordnerliste sortieren">
 <!ENTITY sb.tools.output "Ordnerliste als HTML ausgeben">
-<!ENTITY sb.tools.backup "Komprimierte Sicherung anlegen">
 <!ENTITY sb.tools.repair "Notfallreparatur durchführen">
+<!ENTITY sb.tools.addons "Add-on Functions">
 <!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Homepage">
 <!ENTITY sb.tools.about "Über">

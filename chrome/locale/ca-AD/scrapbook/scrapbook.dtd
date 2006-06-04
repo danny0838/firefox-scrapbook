@@ -11,8 +11,8 @@
 <!ENTITY sb.tools.calculate "Càlcul de la mida">
 <!ENTITY sb.tools.sorttree "Ordena tot l'arbre">
 <!ENTITY sb.tools.output "Exporta l'arbre com a HTML">
-<!ENTITY sb.tools.backup "Còpia de seguretat comprimida">
 <!ENTITY sb.tools.repair "Reparació d'emergència">
+<!ENTITY sb.tools.addons "Add-on Functions">
 <!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Vés a la pàgina inicial">
 <!ENTITY sb.tools.about "Quant a l'ScrapBook">

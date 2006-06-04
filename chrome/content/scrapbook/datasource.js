@@ -78,8 +78,7 @@ var sbDataSource = {
 
 	sanitize : function(aVal)
 	{
-		aVal = aVal.replace(/[\x00-\x1F\x7F]/g, " ");
-		return aVal.match(/^(<|>|&)/) ? (" " + aVal) : aVal;
+		return aVal.replace(/[\x00-\x1F\x7F]/g, " ");
 	},
 
 	addItem : function(aSBitem, aParName, aIdx)
@@ -223,10 +222,10 @@ var sbDataSource = {
 		}
 	},
 
-	removeElementFromContainer : function(aResID, aRes)
+	removeFromContainer : function(aResID, aRes)
 	{
 		var aCont = this.getContainer(aResID, true);
-		aCont.RemoveElement(aRes, true);
+		if ( aCont ) aCont.RemoveElement(aRes, true);
 	},
 
 
@@ -292,13 +291,34 @@ var sbDataSource = {
 		return sbCommonUtils.RDFCU.indexOf(this.data, aParRes, aRes);
 	},
 
+	flattenResources : function(aContRes, aRule, aRecursive)
+	{
+		var resList = [];
+		if ( aRule != 2 ) resList.push(aContRes);
+		sbCommonUtils.RDFC.Init(this.data, aContRes);
+		var resEnum = sbCommonUtils.RDFC.GetElements();
+		while ( resEnum.hasMoreElements() )
+		{
+			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+			if ( this.isContainer(res) ) {
+				if ( aRecursive )
+					resList = resList.concat(this.flattenResources(res, aRule, aRecursive));
+				else
+					if ( aRule != 2 ) resList.push(res);
+			} else {
+				if ( aRule != 1 ) resList.push(res);
+			}
+		}
+		return resList;
+	},
+
 	findParentResource : function(aRes)
 	{
 		var resEnum = this.data.GetAllResources();
 		while ( resEnum.hasMoreElements() )
 		{
 			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			if ( sbCommonUtils.RDFCU.IsContainer(this.data, res) == false ) continue;
+			if ( !this.isContainer(res) ) continue;
 			if ( res.Value == "urn:scrapbook:search" ) continue;
 			if ( sbCommonUtils.RDFCU.indexOf(this.data, res, aRes) != -1 ) return res;
 		}

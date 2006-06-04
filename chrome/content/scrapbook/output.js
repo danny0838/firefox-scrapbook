@@ -109,14 +109,12 @@ var sbOutputService = {
 		this.depth++;
 		var id = sbDataSource.getProperty(aContRes, "id") || "root";
 		this.content += '<ul id="folder-' + id + '">\n';
-		sbCommonUtils.RDFC.Init(sbDataSource.data, aContRes);
-		var resEnum = sbCommonUtils.RDFC.GetElements();
-		while ( resEnum.hasMoreElements() )
+		var resList = sbDataSource.flattenResources(aContRes, 0, false);
+		for ( var i = 1; i < resList.length; i++ )
 		{
-			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
 			this.content += '<li class="depth' + String(this.depth) + '">';
-			this.content += this.getHTMLBody(res);
-			if ( sbDataSource.isContainer(res) ) this.processRescursively(res);
+			this.content += this.getHTMLBody(resList[i]);
+			if ( sbDataSource.isContainer(resList[i]) ) this.processRescursively(resList[i]);
 			this.content += "</li>\n";
 		}
 		this.content += "</ul>\n";

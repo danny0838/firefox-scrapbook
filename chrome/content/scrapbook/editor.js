@@ -25,6 +25,7 @@ var sbPageEditor = {
 			this.item[prop] = sbDataSource.getProperty(sbBrowserOverlay.resource, prop);
 		}
 		document.getElementById("ScrapBookEditTitle").value = this.item.title;
+		try { document.getElementById("ScrapBookEditTitle").editor.transactionManager.clear(); } catch(ex) {}
 		document.getElementById("ScrapBookEditIcon").src    = this.item.icon ? this.item.icon : sbCommonUtils.getDefaultIcon();
 		this.COMMENT.value = "";
 		this.showHide(true);
@@ -35,6 +36,7 @@ var sbPageEditor = {
 	{
 		sbPageEditor.allowUndo(null);
 		this.COMMENT.value = this.item.comment.replace(/ __BR__ /g, this.multiline ? "\n" : "\t");
+		try { this.COMMENT.editor.transactionManager.clear(); } catch(ex) {}
 		if ( gBrowser.currentURI.spec.indexOf("index.html") > 0 )
 		{
 			gBrowser.selectedTab.label = this.item.title;
@@ -48,10 +50,7 @@ var sbPageEditor = {
 		{
 			this.frameList[i].onmousedown = function(aEvent){ sbAnnotationService.handleMouseDown(aEvent); };
 			this.frameList[i].onkeypress  = function(aEvent){ sbPageEditor.handleKeypress(aEvent); };
-			if ( this.item.type == "site" && document.getElementById("ScrapBookInfoPopupI").getAttribute("checked") )
-			{
-				sbInfoViewer.indicateLinks(this.frameList[i]);
-			}
+			if ( document.getElementById("ScrapBookInfoPopupI").getAttribute("checked") ) sbInfoViewer.indicateLinks(this.frameList[i]);
 		}
 		window._content.onbeforeunload = function(){ sbPageEditor.confirmSave(); };
 	},

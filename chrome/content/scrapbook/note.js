@@ -1,5 +1,5 @@
 
-var sbNoteService2  ={
+var sbNoteService2 = {
 
 	fontSize : 16,
 	enabledHTMLView : false,
@@ -25,25 +25,26 @@ var sbNoteService2  ={
 		var icon = sbCommonUtils.getDefaultIcon("note");
 		document.getElementById("sbNoteImage").setAttribute("src", icon);
 		if ( !document.getElementById("sbNoteBrowser").hidden ) this.initHTMLView();
-		var browser = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser").getBrowser();
-		try {
-			if ( browser.selectedBrowser.contentWindow.sbNoteService.resource.Value == sbNoteService.resource.Value )
-			{
-				browser.selectedTab.label = sbDataSource.getProperty(sbNoteService.resource, "title");
-				browser.selectedTab.setAttribute("image", icon);
-			}
-		} catch(ex) {
+		var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
+		if ( "sbNoteService" in win._content && win._content == window )
+		{
+			win.getBrowser().selectedTab.label = sbDataSource.getProperty(sbNoteService.resource, "title");
+			win.getBrowser().selectedTab.setAttribute("image", icon);
 		}
 	},
 
 	finalize : function(exit)
 	{
-		window.onunload = "";
+		window.onunload = null;
 		sbNoteService.save(window);
 		nsPreferences.setBoolPref("scrapbook.note.preview",  this.enabledHTMLView);
 		nsPreferences.setIntPref("scrapbook.note.fontsize",  this.fontSize);
 		nsPreferences.setBoolPref("scrapbook.note.linefeed", document.getElementById("sbNoteToolbarL").getAttribute("checked") ? true : false);
-		if ( exit ) window.location.href = "about:blank";
+		if ( exit )
+		{
+			var browser = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser").getBrowser();
+			browser.mTabContainer.childNodes.length > 1 ? window.close() : browser.loadURI("about:blank");
+		}
 	},
 
 	initFontSize : function()
@@ -94,6 +95,7 @@ var sbNoteService2  ={
 		document.getElementById("sbNoteBrowser").hidden  = !willShow;
 		document.getElementById("sbNoteHeader").lastChild.hidden = !willShow;
 		document.getElementById("sbNoteToolbarN").disabled = !willShow;
+		document.getElementById("sbNoteToolbarP").disabled = !willShow;
 		this.enabledHTMLView = willShow;
 	},
 

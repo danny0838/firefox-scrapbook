@@ -8,4 +8,5 @@
 <!ENTITY sb.note.autolinefeed.t "&sb.note.htmlview;時に行末に&lt;br&gt;タグを自動で付加します">
 <!ENTITY sb.note.fontsize "文字サイズ">
 <!ENTITY sb.note.help "ヘルプ">
+<!ENTITY sb.note.print "印刷">
 <!ENTITY sb.note.exit "終了">

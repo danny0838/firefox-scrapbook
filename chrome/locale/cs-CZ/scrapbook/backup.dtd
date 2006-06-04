@@ -1,7 +1,0 @@
-<!ENTITY sb.backup.d "Zálohování veškerých dat s kompresí.">
-<!ENTITY sb.backup.program "Komprimační program">
-<!ENTITY sb.backup.file "Cíl cesty kam se uloží záloha">
-<!ENTITY sb.backup.browse "Procházet">
-<!ENTITY sb.backup.arg "Argumenty příkazové řádky">
-<!ENTITY sb.backup.arg.d1 "&#37;dst je cesta k záloze.">
-<!ENTITY sb.backup.arg.d2 "&#37;src je cesta k adresáři ScrapBook.">

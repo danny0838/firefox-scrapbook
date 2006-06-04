@@ -11,8 +11,8 @@
 <!ENTITY sb.tools.calculate "Bestandsgrootte berekenen">
 <!ENTITY sb.tools.sorttree "Volledige mappenstructuur sorteren">
 <!ENTITY sb.tools.output "Mappenstructuur als HTML exporteren">
-<!ENTITY sb.tools.backup "Met compressie back-uppen">
 <!ENTITY sb.tools.repair "Noodreparatie">
+<!ENTITY sb.tools.addons "Add-on Functions">
 <!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Homepage">
 <!ENTITY sb.tools.about "Over...">

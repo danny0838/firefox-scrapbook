@@ -11,8 +11,8 @@
 <!ENTITY sb.tools.calculate "Méret kiszámítása">
 <!ENTITY sb.tools.sorttree "Teljes fa rendezése">
 <!ENTITY sb.tools.output "Fa exportálása HTML-ként">
-<!ENTITY sb.tools.backup "Biztonsági mentés tömörítéssel">
 <!ENTITY sb.tools.repair "Vészhelyzet javítása">
+<!ENTITY sb.tools.addons "Add-on Functions">
 <!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Honlap">
 <!ENTITY sb.tools.about "Névjegy">

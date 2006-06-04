@@ -19,17 +19,12 @@ function SB_initView()
 
 	var src = SB_getHTMLHead(sbDataSource.getProperty(gRes, "title"));
 
-	sbCommonUtils.RDFC.Init(sbDataSource.data, gRes);
-	var resEnum = sbCommonUtils.RDFC.GetElements();
-	while ( resEnum.hasMoreElements() )
+	var resList = sbDataSource.flattenResources(gRes, 2, false);
+	for ( var i = 0; i < resList.length; i++ )
 	{
-		var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-		if ( sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, res) ) continue;
+		var res = resList[i];
 		var item = new ScrapBookItem();
-		for ( var prop in item )
-		{
-			item[prop] = sbDataSource.getProperty(res, prop);
-		}
+		for ( var prop in item ) item[prop] = sbDataSource.getProperty(res, prop);
 		if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(sbDataSource.getProperty(res, "type"));
 		src += SB_getHTMLBody(item);
 	}

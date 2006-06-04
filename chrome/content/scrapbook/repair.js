@@ -34,7 +34,7 @@ var sbRepair = {
 			var fileObj  = fileEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
 			var fileName = fileObj.leafName;
 			var isMatch  = fileName.match(/^scrapbook_\d{8}\.rdf$/);
-			if ( isMatch ) this.treeItems.push([fileName, sbTrader.formateMilliSeconds(fileObj.lastModifiedTime), fileObj.fileSize]);
+			if ( isMatch ) this.treeItems.push([fileName, sbTrader.formatMilliSeconds(fileObj.lastModifiedTime), fileObj.fileSize]);
 		}
 		var colIDs = [
 			"sbRepairTreecolFile",

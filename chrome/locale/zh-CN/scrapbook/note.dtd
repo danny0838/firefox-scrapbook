@@ -8,4 +8,5 @@
 <!ENTITY sb.note.autolinefeed.t "预览时在每行结尾自动添加 &lt;br&gt; 标记。">
 <!ENTITY sb.note.fontsize "字体大小">
 <!ENTITY sb.note.help "帮助">
+<!ENTITY sb.note.print "Print">
 <!ENTITY sb.note.exit "退出">

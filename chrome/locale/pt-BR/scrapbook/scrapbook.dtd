@@ -11,8 +11,8 @@
 <!ENTITY sb.tools.calculate "Calcular Tamanho">
 <!ENTITY sb.tools.sorttree "Ordenar Toda a Árvore">
 <!ENTITY sb.tools.output "Exportar Árvore como HTML">
-<!ENTITY sb.tools.backup "Backup com Compactação">
 <!ENTITY sb.tools.repair "Reparo de Emergência">
+<!ENTITY sb.tools.addons "Add-on Functions">
 <!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Home Page">
 <!ENTITY sb.tools.about "Sobre">

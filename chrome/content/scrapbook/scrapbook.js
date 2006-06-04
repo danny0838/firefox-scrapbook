@@ -210,14 +210,8 @@ var sbController = {
 	{
 		if ( !aRes ) aRes = this.isTreeContext ? sbTreeHandler.resource : sbListHandler.resource;
 		if ( !aRes ) return;
-		sbCommonUtils.RDFC.Init(sbDataSource.data, aRes);
-		var resEnum = sbCommonUtils.RDFC.GetElements();
-		while ( resEnum.hasMoreElements() )
-		{
-			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			if ( sbDataSource.isContainer(res) ) continue;
-			sbCommonUtils.loadURL(sbDataSource.getURL(res), true);
-		}
+		var resList = sbDataSource.flattenResources(aRes, 2, false);
+		resList.forEach(function(res){ sbCommonUtils.loadURL(sbDataSource.getURL(res), true); });
 	},
 
 	renew : function(aRes, showDetail)
@@ -622,14 +616,13 @@ var sbStatusHandler = {
 var sbSearchService = {
 
 	get ELEMENT()      { return document.getElementById("sbSearchImage"); },
-	get FORM_HISTORY() { return Components.classes['@mozilla.org/satchel/form-history;1'].getService(Components.interfaces.nsIFormHistory); },
+	get FORM_HISTORY() { return Components.classes['@mozilla.org/satchel/form-history;1'].getService(Components.interfaces.nsIFormHistory2 || Components.interfaces.nsIFormHistory); },
 
 	type      : "",
 	query     : "",
 	regex     : null,
 	optionRE  : false,
 	optionCS  : false,
-	hitCount  : 0,
 	container : null,
 
 	init : function()
@@ -705,37 +698,21 @@ var sbSearchService = {
 	{
 		sbDataSource.clearContainer("urn:scrapbook:search");
 		this.container = sbDataSource.getContainer("urn:scrapbook:search", true);
-		this.hitCount = 0;
-		this.processRecursive("urn:scrapbook:root");
-		sbListHandler.quit();
-		sbTreeHandler.TREE.setAttribute("ref", "urn:scrapbook:search");
-		sbTreeHandler.TREE.builder.rebuild();
-		sbTreeDNDHandler.quit();
-		sbStatusHandler.toggleHeader(true, sbMainService.STRING.getFormattedString("SEARCH_RESULTS_FOUND", [this.hitCount]));
-	},
-
-	processRecursive : function(aResURI)
-	{
-		var contRes = sbDataSource.getContainer(aResURI);
-		var resEnum = contRes.GetElements();
-		while ( resEnum.hasMoreElements() )
+		var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"), 2, true);
+		for ( var i = 0; i < resList.length; i++ )
 		{
-			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			var val = "";
+			var val, res = resList[i];
 			if ( this.type != "all" )
 				val = sbDataSource.getProperty(res, this.type);
 			else
 				val = [sbDataSource.getProperty(res, "title"), sbDataSource.getProperty(res, "comment"), sbDataSource.getProperty(res, "source"), sbDataSource.getProperty(res, "id")].join("\n");
-			if ( sbDataSource.isContainer(res) )
-			{
-				this.processRecursive(res.Value);
-			}
-			else if ( val && val.match(this.regex) )
-			{
-				this.container.AppendElement(res);
-				this.hitCount++;
-			}
+			if ( val && val.match(this.regex) ) this.container.AppendElement(res);
 		}
+		sbListHandler.quit();
+		sbTreeHandler.TREE.setAttribute("ref", "urn:scrapbook:search");
+		sbTreeHandler.TREE.builder.rebuild();
+		sbTreeDNDHandler.quit();
+		sbStatusHandler.toggleHeader(true, sbMainService.STRING.getFormattedString("SEARCH_RESULTS_FOUND", [this.container.GetCount()]));
 	},
 
 	filterByDays : function()

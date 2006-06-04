@@ -72,7 +72,7 @@ menu#ScrapBookMenu menuitem.sb-item[sbtype="combine"] {
 }
 
 menu#ScrapBookMenu menuitem.sb-item[sbtype="bookmark"] {
-	color: limegreen;
+	color: limegreen;	/* forestgreen */
 /*	text-decoration: underline;*/
 }
 
@@ -98,12 +98,8 @@ toolbox#ScrapBookToolbox toolbarbutton[type="menu-button"] .toolbarbutton-icon {
 	margin-right: 0px;
 }
 
-
-/* ::::: EDITOR ::::: */
-
-toolbar#ScrapBookEditor textbox {
-	height: 1.9em !important;
-	padding: 2px  !important;
+toolbox#ScrapBookToolbox textbox {
+	height: 1.9em;
 }
 
 

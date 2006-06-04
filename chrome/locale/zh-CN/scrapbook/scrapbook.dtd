@@ -11,8 +11,8 @@
 <!ENTITY sb.tools.calculate "计算大小">
 <!ENTITY sb.tools.sorttree "排列项目列表">
 <!ENTITY sb.tools.output "导出项目列表">
-<!ENTITY sb.tools.backup "压缩备份">
 <!ENTITY sb.tools.repair "紧急修复">
+<!ENTITY sb.tools.addons "Add-on Functions">
 <!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "主页">
 <!ENTITY sb.tools.about "关于">

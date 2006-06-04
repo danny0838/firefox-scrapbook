@@ -8,4 +8,5 @@
 <!ENTITY sb.note.autolinefeed.t "Lägg till &lt;br&gt; -tag till radslutet vid föhandsgranskning i HTML">
 <!ENTITY sb.note.fontsize "Typsnittstorlek">
 <!ENTITY sb.note.help "Hjälp">
+<!ENTITY sb.note.print "Print">
 <!ENTITY sb.note.exit "Avsluta">

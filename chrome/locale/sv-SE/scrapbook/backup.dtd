@@ -1,7 +1,0 @@
-<!ENTITY sb.backup.d "Skapa en säkerhetskopia av hela din ScrapBook med komprimering.">
-<!ENTITY sb.backup.program "Komprimeringsprogram">
-<!ENTITY sb.backup.file "Målfil för säkerhetskopiering">
-<!ENTITY sb.backup.browse "Välj">
-<!ENTITY sb.backup.arg "Parametrar till komprimeringsprogrammet">
-<!ENTITY sb.backup.arg.d1 "&#37;dst är sökvägen till filen med säkerhetskopian.">
-<!ENTITY sb.backup.arg.d2 "&#37;src är sökvägen till mappen med ScrapBook.">

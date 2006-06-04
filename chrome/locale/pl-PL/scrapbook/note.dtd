@@ -8,4 +8,5 @@
 <!ENTITY sb.note.autolinefeed.t "Dodaj znacznik &lt;br&gt; na końcu linii w podglądzie dokumentu HTML">
 <!ENTITY sb.note.fontsize "Wielkość czcionki">
 <!ENTITY sb.note.help "Pomoc">
+<!ENTITY sb.note.print "Print">
 <!ENTITY sb.note.exit "Zakończ">

@@ -1,7 +1,0 @@
-<!ENTITY sb.backup.d "C&#250;ltaigh Sonra&#237; an Leabhar Gearrth&#225;n Ioml&#225;n le Comhbhr&#250;.">
-<!ENTITY sb.backup.program "Cl&#225;r Comhbhr&#250;">
-<!ENTITY sb.backup.file "Comhad Sprice chun C&#250;lt&#250;">
-<!ENTITY sb.backup.browse "Roghnaigh">
-<!ENTITY sb.backup.arg "Arg&#243;int&#237; L&#237;ne na n-Orduithe">
-<!ENTITY sb.backup.arg.d1 "&#37;dst is ea an cos&#225;n chuig an comhad c&#250;ltaca.">
-<!ENTITY sb.backup.arg.d2 "&#37;src is ea an cos&#225;n chuig an comhadlann don Leabhar Gearrth&#225;n.">

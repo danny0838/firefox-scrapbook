@@ -121,7 +121,7 @@ var sbTreeHandler = {
 			var parRes = this.getParentResource(curIdx);
 			if ( parRes.Value == "urn:scrapbook:search" )
 			{
-				sbDataSource.removeElementFromContainer("urn:scrapbook:search", curRes);
+				sbDataSource.removeFromContainer("urn:scrapbook:search", curRes);
 				parRes = sbDataSource.findParentResource(curRes);
 				if ( sbCommonUtils.RDFCU.indexOf(sbDataSource.data, parRes, curRes) == -1 ) { alert("ScrapBook FATAL ERROR."); return; }
 			}

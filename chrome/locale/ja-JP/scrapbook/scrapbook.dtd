@@ -11,8 +11,8 @@
 <!ENTITY sb.tools.calculate "データサイズ計算">
 <!ENTITY sb.tools.sorttree "ツリー全体をソート">
 <!ENTITY sb.tools.output "ツリーのHTML出力">
-<!ENTITY sb.tools.backup "圧縮してバックアップ">
 <!ENTITY sb.tools.repair "緊急時の修復ツール">
+<!ENTITY sb.tools.addons "アドオン機能">
 <!ENTITY sb.tools.tips "オンライン Tips">
 <!ENTITY sb.tools.homepage "ホームページ">
 <!ENTITY sb.tools.about "バージョン情報">

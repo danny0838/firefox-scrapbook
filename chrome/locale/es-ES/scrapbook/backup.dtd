@@ -1,7 +1,0 @@
-<!ENTITY sb.backup.d "Hacer backup comprimido de todos los datos del ScrapBook.">
-<!ENTITY sb.backup.program "Programa de Compresión">
-<!ENTITY sb.backup.file "Fichero de destino para el backup">
-<!ENTITY sb.backup.browse "Buscar">
-<!ENTITY sb.backup.arg "Argumentos de la línea de comandos">
-<!ENTITY sb.backup.arg.d1 "&#37;dst es la ruta al fichero de backup.">
-<!ENTITY sb.backup.arg.d2 "&#37;src es la ruta al directorio del ScrapBook.">

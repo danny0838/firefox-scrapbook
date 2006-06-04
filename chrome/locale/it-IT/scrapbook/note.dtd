@@ -8,4 +8,5 @@
 <!ENTITY sb.note.autolinefeed.t "Aggiungi il tag &lt;br&gt; a fine linea nell'anteprima HTML">
 <!ENTITY sb.note.fontsize "Grandezza carattere">
 <!ENTITY sb.note.help "Aiuto">
+<!ENTITY sb.note.print "Print">
 <!ENTITY sb.note.exit "Esci">

@@ -1,7 +1,0 @@
-<!ENTITY sb.backup.d "Varmuuskopioi ScrapBookin koko datakansio tiivistäen.">
-<!ENTITY sb.backup.program "Tiivistysohjelma">
-<!ENTITY sb.backup.file "Varmuuskopion kohdetiedosto">
-<!ENTITY sb.backup.browse "Valitse">
-<!ENTITY sb.backup.arg "Komentorivivalinnat">
-<!ENTITY sb.backup.arg.d1 "Varmuuskopiotiedoston polku on &#37;dst.">
-<!ENTITY sb.backup.arg.d2 "ScrapBook-kansion polku on &#37;src.">

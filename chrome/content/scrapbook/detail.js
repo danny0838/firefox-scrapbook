@@ -158,7 +158,7 @@ var sbFolderSelector = {
 			this.clear();
 			this.processRecent();
 			this.processRoot();
-			this.processRecursive("urn:scrapbook:root");
+			this.processRecursive(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"));
 		}
 		this.MENU_LIST.selectedItem = document.getElementById(aResID);
 		this.MENU_LIST.disabled = false;
@@ -206,17 +206,16 @@ var sbFolderSelector = {
 		this.recentList = arr;
 	},
 
-	processRecursive : function(aResName)
+	processRecursive : function(aContRes)
 	{
 		this.depth++;
-		sbCommonUtils.RDFC.Init(sbDataSource.data, sbCommonUtils.RDF.GetResource(aResName));
-		var resEnum = sbCommonUtils.RDFC.GetElements();
-		while ( resEnum.hasMoreElements() )
+		var resList = sbDataSource.flattenResources(aContRes, 1, false);
+		resList.shift();
+		for ( var i = 0; i < resList.length; i++ )
 		{
-			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			if ( !sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, res) ) continue;
+			var res = resList[i];
 			this.fill(res.Value, sbDataSource.getProperty(res, "title"));
-			this.processRecursive(res.Value);
+			this.processRecursive(res);
 		}
 		this.depth--;
 	},

@@ -45,7 +45,7 @@ var sbPropService = {
 		document.getElementById("sbPropMark").setAttribute("checked", this.item.type == "marked");
 		this.ICON.src = this.item.icon ? this.item.icon : sbCommonUtils.getDefaultIcon(this.item.type);
 		document.title = this.item.title;
-		if ( sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, this.resource) ) this.item.type = "folder";
+		if ( sbDataSource.isContainer(this.resource) ) this.item.type = "folder";
 		var bundleName = "TYPE_PAGE";
 		switch ( this.item.type )
 		{

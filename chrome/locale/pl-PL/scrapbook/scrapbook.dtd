@@ -11,8 +11,8 @@
 <!ENTITY sb.tools.calculate "Oblicz zajmowaną powierzchnię">
 <!ENTITY sb.tools.sorttree "Sortuj całe drzewo">
 <!ENTITY sb.tools.output "Zapisz dane jako dokument HTML">
-<!ENTITY sb.tools.backup "Tworzenie skompresowanej kopii zapasowej">
 <!ENTITY sb.tools.repair "Naprawa uszkodzeń">
+<!ENTITY sb.tools.addons "Add-on Functions">
 <!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Strona domowa">
 <!ENTITY sb.tools.about "O rozszerzeniu">

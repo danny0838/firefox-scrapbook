@@ -157,7 +157,7 @@ var sbTrader = {
 			if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(item.type);
 			this.treeItems.push([
 				item.title,
-				this.formateMilliSeconds(file.lastModifiedTime),
+				this.formatMilliSeconds(file.lastModifiedTime),
 				item.folder,
 				item.id,
 				item.icon,
@@ -327,7 +327,7 @@ var sbTrader = {
 		return item;
 	},
 
-	formateMilliSeconds : function(msec)
+	formatMilliSeconds : function(msec)
 	{
 		var dd = new Date(msec);
 		var y = dd.getFullYear();
@@ -359,7 +359,7 @@ var sbExportService = {
 		if ( sbTreeHandler.TREE.currentIndex != -1 && sbTreeHandler.TREE.view.isContainer(sbTreeHandler.TREE.currentIndex) && sbTreeHandler.TREE.view.selection.count == 1 )
 		{
 			var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(sbTreeHandler.TREE.currentIndex);
-			this.getResourcesRecursively(curRes);
+			this.resList = sbDataSource.flattenResources(curRes, 2, true);
 		}
 		else
 		{
@@ -464,20 +464,6 @@ var sbExportService = {
 			ret.unshift(sbDataSource.getProperty(aRes, "title"));
 		}
 		return ret;
-	},
-
-	getResourcesRecursively : function(aContRes)
-	{
-		var resEnum = sbDataSource.getContainer(aContRes.Value, false).GetElements();
-		while ( resEnum.hasMoreElements() )
-		{
-			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			if ( sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, res) ) {
-				this.getResourcesRecursively(res);
-			} else {
-				this.resList.push(res);
-			}
-		}
 	},
 
 };
@@ -619,21 +605,10 @@ var sbImportService = {
 	makeFolderTable : function()
 	{
 		this.folderTable = {};
-		this.makeFolderTableRecursive(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"));
-	},
-
-	makeFolderTableRecursive : function(aRes)
-	{
-		sbCommonUtils.RDFC.Init(sbDataSource.data, aRes);
-		var resEnum = sbCommonUtils.RDFC.GetElements();
-		while ( resEnum.hasMoreElements() )
+		var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"), 1, true);
+		for ( var i = 1; i < resList.length; i++ )
 		{
-			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			if ( sbDataSource.isContainer(res) )
-			{
-				this.folderTable[sbDataSource.getProperty(res, "title")] = res.Value;
-				this.makeFolderTableRecursive(res);
-			}
+			this.folderTable[sbDataSource.getProperty(resList[i], "title")] = resList[i].Value;
 		}
 	},
 

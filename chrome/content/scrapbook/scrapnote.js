@@ -52,7 +52,8 @@ var sbNoteService = {
 		this.notefile.append("index.html");
 		this.TEXTBOX.value = "";
 		this.TEXTBOX.value = this.getContentFromFile(this.notefile);
-		this.TEXTBOX.focus();
+		this.TEXTBOX.mInputField.focus();
+		try { this.TEXTBOX.editor.transactionManager.clear(); } catch(ex) {}
 		document.getElementById("sbNoteLabel").value = sbDataSource.getProperty(this.resource, "title");
 		if ( !this.sidebarContext ) sbNoteService2.refresh();
 	},

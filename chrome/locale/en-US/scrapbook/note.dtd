@@ -8,4 +8,5 @@
 <!ENTITY sb.note.autolinefeed.t "Add &lt;br&gt; tag to the end-of-line at &sb.note.htmlview;">
 <!ENTITY sb.note.fontsize "Font Size">
 <!ENTITY sb.note.help "Help">
+<!ENTITY sb.note.print "Print">
 <!ENTITY sb.note.exit "Exit">

@@ -20,7 +20,7 @@ var sbCalcService = {
 		while ( resEnum.hasMoreElements() )
 		{
 			var res = resEnum.getNext();
-			if ( !sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, res) ) this.total++;
+			if ( !sbDataSource.isContainer(res) ) this.total++;
 		}
 		var dataDir = sbCommonUtils.getScrapBookDir().clone();
 		dataDir.append("data");
@@ -74,7 +74,7 @@ var sbCalcService = {
 		document.getElementById("sbCalcTotalSize").value = msg;
 		msg = ( this.invalidCount == 0 ) ? this.STRING.getString("DIAGNOSIS_OK") : this.STRING.getFormattedString("DIAGNOSIS_NG", [this.invalidCount]);
 		document.getElementById("sbCalcDiagnosis").value = msg;
-		sbDoubleEntriesChecker.process("urn:scrapbook:root");
+		this.checkDoubleEntries();
 	},
 
 	initTree : function()
@@ -110,26 +110,19 @@ var sbCalcService = {
 		this.TREE.view = treeView;
 	},
 
-};
-
-
-var sbDoubleEntriesChecker = {
-
-	hashTable : {},
-
-	process : function(aResURI)
+	checkDoubleEntries : function()
 	{
-		var contRes = sbDataSource.getContainer(aResURI);
-		var resEnum = contRes.GetElements();
-		while ( resEnum.hasMoreElements() )
+		var hashTable = {};
+		var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"), 0, true);
+		for ( var i = 0; i < resList.length; i++ )
 		{
-			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			if ( res.Value in this.hashTable ) alert("ScrapBook WARNING: Found double entries.\n" + sbDataSource.getProperty(res, "title"));
-			this.hashTable[res.Value] = true;
-			if ( sbCommonUtils.RDFCU.IsContainer(sbDataSource.data, res) )
+			if ( resList[i].Value in hashTable )
 			{
-				sbDoubleEntriesChecker.process(res.Value);
+				alert("ScrapBook WARNING: Found double entries.\n" + sbDataSource.getProperty(resList[i], "title"));
+				var parRes = sbDataSource.findParentResource(resList[i]);
+				if ( parRes ) sbDataSource.removeFromContainer(parRes.Value, resList[i]);
 			}
+			hashTable[resList[i].Value] = true;
 		}
 	},
 

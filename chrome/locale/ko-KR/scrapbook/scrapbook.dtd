@@ -11,8 +11,8 @@
 <!ENTITY sb.tools.calculate "데이터 크기 계산하기">
 <!ENTITY sb.tools.sorttree "트리 전체 정렬하기">
 <!ENTITY sb.tools.output "트리를 HTML로 출력하기">
-<!ENTITY sb.tools.backup "압축하여 백업하기">
 <!ENTITY sb.tools.repair "긴급 복구 도구">
+<!ENTITY sb.tools.addons "Add-on Functions">
 <!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "홈페이지">
 <!ENTITY sb.tools.about "버전 정보">
