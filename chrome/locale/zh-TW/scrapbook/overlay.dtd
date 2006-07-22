@@ -10,6 +10,7 @@
 <!ENTITY sb.capture.folder.select "選取資料夾">
 <!ENTITY sb.capture.alltabs "擷取所有分頁">
 <!ENTITY sb.capture.bookmark "加入 ScrapBook 書籤">
+<!ENTITY sb.editbefore "Edit Before Capture">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">

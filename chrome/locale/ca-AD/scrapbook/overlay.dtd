@@ -10,6 +10,7 @@
 <!ENTITY sb.capture.folder.select "Trieu una carpeta">
 <!ENTITY sb.capture.alltabs "Captura totes les pestanyes">
 <!ENTITY sb.capture.bookmark "Afegeix l'adreça a l'ScrapBook">
+<!ENTITY sb.editbefore "Edit Before Capture">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">

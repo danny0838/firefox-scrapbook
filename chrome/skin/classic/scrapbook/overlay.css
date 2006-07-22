@@ -26,9 +26,9 @@ menuitem#ScrapBookMenubarItem3,
 menuitem#ScrapBookContextMenu4 { list-style-image: url('chrome://scrapbook/skin/capture_entire_as.png'); }
     menu#ScrapBookContextMenu5 { list-style-image: url('chrome://scrapbook/skin/capture_frame.png'); }
 menuitem#ScrapBookContextMenu6 { list-style-image: url('chrome://scrapbook/skin/capture_frame_as.png'); }
-menuitem#ScrapBookInfoPopupR,
+menuitem#ScrapBookStatusPopupR,
     menu#ScrapBookContextMenu7 { list-style-image: url('chrome://scrapbook/skin/capture_target.png'); }
-menuitem#ScrapBookInfoPopupA,
+menuitem#ScrapBookStatusPopupA,
 menuitem#ScrapBookContextMenu8 { list-style-image: url('chrome://scrapbook/skin/capture_target_as.png'); }
 
     menu#ScrapBookContextMenu1 > .menu-iconic-left image,
@@ -42,8 +42,8 @@ menuitem#ScrapBookContextMenu8   .menu-iconic-icon,
 menuitem#ScrapBookMenubarItem1   .menu-iconic-icon,
 menuitem#ScrapBookMenubarItem2   .menu-iconic-icon,
 menuitem#ScrapBookMenubarItem3   .menu-iconic-icon,
-menuitem#ScrapBookInfoPopupR     .menu-iconic-icon,
-menuitem#ScrapBookInfoPopupA     .menu-iconic-icon {
+menuitem#ScrapBookStatusPopupR   .menu-iconic-icon,
+menuitem#ScrapBookStatusPopupA   .menu-iconic-icon {
 	width : 13px !important;
 	height: 13px !important;
 }
@@ -72,8 +72,7 @@ menu#ScrapBookMenu menuitem.sb-item[sbtype="combine"] {
 }
 
 menu#ScrapBookMenu menuitem.sb-item[sbtype="bookmark"] {
-	color: limegreen;	/* forestgreen */
-/*	text-decoration: underline;*/
+	color: rgb(32,192,32);
 }
 
 

@@ -10,19 +10,20 @@ var sbContentSaver = {
 	option       : {},
 	refURLObj    : null,
 	favicon      : null,
-	frameList    : null,
+	frameList    : [],
 	frameNumber  : 0,
 	selection    : null,
 	linkURLs     : [],
 
 
-	getFrameList : function(aWindow)
+	flattenFrames : function(aWindow)
 	{
-		for ( var f=0; f<aWindow.frames.length; f++ )
+		var ret = [aWindow];
+		for ( var i = 0; i < aWindow.frames.length; i++ )
 		{
-			this.frameList.push(aWindow.frames[f]);
-			this.getFrameList(aWindow.frames[f]);
+			ret = ret.concat(this.flattenFrames(aWindow.frames[i]));
 		}
+		return ret;
 	},
 
 	init : function(aPresetData)
@@ -33,7 +34,7 @@ var sbContentSaver = {
 		this.file2URL = { "index.html" : true, "index.css" : true, "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
 		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "styles" : true, "script" : false };
 		this.linkURLs = [];
-		this.frameList   = [];
+		this.frameList = [];
 		this.frameNumber = 0;
 		if ( aPresetData )
 		{
@@ -55,7 +56,7 @@ var sbContentSaver = {
 		this.item.source = aRootWindow.location.href;
 		try { this.item.icon = gBrowser.selectedTab.getAttribute("image"); } catch(ex) {}
 
-		this.getFrameList(aRootWindow);
+		this.frameList = this.flattenFrames(aRootWindow);
 
 		var titleList = aRootWindow.document.title && typeof(aRootWindow.document.title) == "string" ? [aRootWindow.document.title] : [this.item.source];
 		if ( aIsPartial )
@@ -74,6 +75,18 @@ var sbContentSaver = {
 		{
 			this.selection = null;
 			this.item.title = titleList[0];
+		}
+
+		if ( document.getElementById("ScrapBookToolbox") && !document.getElementById("ScrapBookToolbox").hidden )
+		{
+			var modTitle = document.getElementById("ScrapBookEditTitle").value;
+			if ( titleList.indexOf(modTitle) < 0 )
+			{
+				titleList.splice(1, 0, modTitle);
+				this.item.title = modTitle;
+			}
+			this.item.comment = sbCommonUtils.escapeComment(sbPageEditor.COMMENT.value);
+			for ( var i = 0; i < this.frameList.length; i++ ) { sbPageEditor.removeAllStyles(this.frameList[i]); }
 		}
 
 		if ( aShowDetail )
@@ -387,7 +400,7 @@ var sbContentSaver = {
 			case "img" : 
 			case "embed" : 
 				if ( this.option["images"] ) {
-					if ( aNode.hasAttribute("onclick") ) aNode = this.normalizeJavaScriptLink(aNode, "onclick");
+					if ( aNode.hasAttribute("onclick") ) aNode = this.normalizeJSLink(aNode, "onclick");
 					var aFileName = this.download(aNode.src);
 					if (aFileName) aNode.setAttribute("src", aFileName);
 				} else {
@@ -464,10 +477,10 @@ var sbContentSaver = {
 				break;
 			case "a" : 
 			case "area" : 
-				if ( aNode.hasAttribute("onclick") ) aNode = this.normalizeJavaScriptLink(aNode, "onclick");
+				if ( aNode.hasAttribute("onclick") ) aNode = this.normalizeJSLink(aNode, "onclick");
 				if ( !aNode.hasAttribute("href") ) return aNode;
 				if ( aNode.target == "_blank" ) aNode.setAttribute("target", "_top");
-				if ( aNode.href.match(/^javascript:/i) ) aNode = this.normalizeJavaScriptLink(aNode, "href");
+				if ( aNode.href.match(/^javascript:/i) ) aNode = this.normalizeJSLink(aNode, "href");
 				if ( !this.selection && aNode.getAttribute("href").charAt(0) == "#" ) return aNode;
 				var ext = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aNode.href))[1].toLowerCase();
 				var flag = false;
@@ -513,13 +526,15 @@ var sbContentSaver = {
 					{
 						if ( aNode.src == this.frameList[fn].location.href ) { this.frameNumber = fn; break; }
 					}
+					this.frameNumber--;
 				}
 				var tmpRefURL = this.refURLObj;
+				this.frameNumber++
 				try {
-					var newFileName = this.saveDocumentInternal(this.frameList[this.frameNumber++].document, this.name + "_" + this.frameNumber);
+					var newFileName = this.saveDocumentInternal(this.frameList[this.frameNumber].document, this.name + "_" + this.frameNumber);
 					aNode.setAttribute("src", newFileName);
 				} catch(ex) {
-					alert("ScrapBook ERROR: Failed to get document in a frame.");
+					alert("ScrapBook ERROR: Failed to get document in a frame.\n\n" + ex);
 				}
 				this.refURLObj = tmpRefURL;
 				break;
@@ -601,10 +616,14 @@ var sbContentSaver = {
 		{
 			return "";
 		}
-		if ( aCSStext.match(/ background: /i) )
+		if ( aCSStext.indexOf(" background: ") >= 0 )
 		{
 			aCSStext = aCSStext.replace(/ -moz-background-[^:]+: -moz-[^;]+;/g, "");
-			aCSStext = aCSStext.replace(/ scroll 0(pt|px|%);/g, ";");
+			aCSStext = aCSStext.replace(/ scroll 0(?:pt|px|%);/g, ";");
+		}
+		if ( aCSStext.indexOf(" background-position: 0") >= 0 )
+		{
+			aCSStext = aCSStext.replace(/ background-position: 0(?:pt|px|%);/, " background-position: 0 0;");
 		}
 		return aCSStext;
 	},
@@ -697,7 +716,7 @@ var sbContentSaver = {
 	},
 
 
-	normalizeJavaScriptLink : function(aNode, aAttr)
+	normalizeJSLink : function(aNode, aAttr)
 	{
 		var val = aNode.getAttribute(aAttr);
 		if ( !val.match(/\(\'([^\']+)\'/) ) return aNode;
@@ -765,29 +784,30 @@ sbCaptureObserver.prototype = {
 
 var sbCaptureObserverCallback = {
 
-	onDownloadComplete : function(aItem)
+	getString : function(aBundleName){ return sbBrowserOverlay.STRING.getString(aBundleName); },
+
+	trace : function(aText)
 	{
 		try {
-			top.window.document.getElementById("sidebar").contentWindow.sbStatusHandler.httpBusy(sbContentSaver.httpTask[aItem.id], aItem.title);
+			document.getElementById("statusbar-display").label = aText;
 		} catch(ex) {
 		}
 	},
 
+	onDownloadComplete : function(aItem)
+	{
+		this.trace(this.getString("CAPTURE") + "... (" + sbContentSaver.httpTask[aItem.id] + ") " + aItem.title);
+	},
+
 	onAllDownloadsComplete : function(aItem)
 	{
-		try {
-			top.window.document.getElementById("sidebar").contentWindow.sbStatusHandler.httpComplete(aItem.title);
-		} catch(ex) {
-		}
+		this.trace(this.getString("CAPTURE_COMPLETE") + ": " + aItem.title);
 		this.onCaptureComplete(aItem);
 	},
 
 	onDownloadProgress : function(aItem, aFileName, aProgress)
 	{
-		try {
-			top.window.document.getElementById("sidebar").contentWindow.sbStatusHandler.httpBusy(sbContentSaver.httpTask[aItem.id], aProgress + " : " + aFileName);
-		} catch(ex) {
-		}
+		this.trace(this.getString("TRANSFER_DATA") + "... (" + aProgress + ") " + aFileName);
 	},
 
 	onCaptureComplete : function(aItem)

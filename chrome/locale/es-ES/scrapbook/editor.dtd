@@ -1,25 +1,24 @@
-<!ENTITY sb.editor "Barra de Herramientas de Edición">
-<!ENTITY sb.editor.eraser "Borrador DOM: Elimina bloques al hacer click en ellos.">
-<!ENTITY sb.editor.undo "Deshacer">
-<!ENTITY sb.editor.restore "Abandonar cambios y restaurar">
-<!ENTITY sb.editor.save "Guardar">
-<!ENTITY sb.editor.comment "Expandir área de comentarios">
-<!ENTITY sb.editor.sticky "Sticky Annotation">
-<!ENTITY sb.editor.sticky.create "Create &sb.editor.sticky;">
-<!ENTITY sb.editor.inline.add "Añadir comentario a la selección">
-<!ENTITY sb.editor.attach.file "Anexar fichero a la selección">
-<!ENTITY sb.editor.attach.link "Anexar enlace a la selección">
-<!ENTITY sb.editor.cutter "Borrar todo lo seleccionado">
-<!ENTITY sb.editor.remove.iframe "Borrar todas las etiquetas IFRAME">
-<!ENTITY sb.editor.remove.script "Borrar todas las etiquetas SCRIPT">
+<!ENTITY sb.toolbar.edit "Barra de Herramientas de Edición">
+<!ENTITY sb.toolbar.info "Barra de Información">
+<!ENTITY sb.edit.eraser "Borrador DOM: Elimina bloques al hacer click en ellos.">
+<!ENTITY sb.edit.undo "Deshacer">
+<!ENTITY sb.edit.restore "Abandonar cambios y restaurar">
+<!ENTITY sb.edit.save "Guardar">
+<!ENTITY sb.edit.comment "Expandir área de comentarios">
+<!ENTITY sb.edit.sticky "Sticky Annotation">
+<!ENTITY sb.edit.sticky.create "Create &sb.edit.sticky;">
+<!ENTITY sb.edit.inline.add "Añadir comentario a la selección">
+<!ENTITY sb.edit.attach.file "Anexar fichero a la selección">
+<!ENTITY sb.edit.attach.link "Anexar enlace a la selección">
+<!ENTITY sb.edit.cutter "Borrar todo lo seleccionado">
+<!ENTITY sb.edit.remove.iframe "Borrar todas las etiquetas IFRAME">
+<!ENTITY sb.edit.remove.script "Borrar todas las etiquetas SCRIPT">
 <!ENTITY sb.highlighter "Marcador">
 <!ENTITY sb.highlighter.remove "Limpiar marcas en la selección">
 <!ENTITY sb.highlighter.remove.all "Borrar todas las marcas">
-<!ENTITY sb.customize "Personalizar">
-<!ENTITY sb.infobar.openSource "Abrir URL de origen">
-<!ENTITY sb.infobar.renew "Capture Again">
-<!ENTITY sb.infobar.showIndicators "Show Link Indicators">
-<!ENTITY sb.infobar.showInfobar "Mostrar Barra de Información">
-<!ENTITY sb.infobar.home "Raiz">
-<!ENTITY sb.infobar.sitemap "Mapa del Sitio">
+<!ENTITY sb.source "Abrir URL de origen">
+<!ENTITY sb.renew "Capture Again">
 <!ENTITY sb.locate "Localizar en el árbol de la barra lateral">
+<!ENTITY sb.indicators "Show Link Indicators">
+<!ENTITY sb.info.home "Raiz">
+<!ENTITY sb.info.sitemap "Mapa del Sitio">

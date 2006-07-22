@@ -10,6 +10,7 @@
 <!ENTITY sb.capture.folder.select "Sélectionner le dossier">
 <!ENTITY sb.capture.alltabs "Capture de tous les onglets">
 <!ENTITY sb.capture.bookmark "Marquer cette page avec ScrapBook">
+<!ENTITY sb.editbefore "Editer avant la capture">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">

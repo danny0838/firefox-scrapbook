@@ -1,25 +1,24 @@
-<!ENTITY sb.editor "Pasek edycyjny ScrapBook">
-<!ENTITY sb.editor.eraser "DOM Eraser: Narzędzie usuwające zaznaczone elementy na stronach internetowych">
-<!ENTITY sb.editor.undo "Cofnij">
-<!ENTITY sb.editor.restore "Zrezygnuj ze zmian i przywróć poprzednie wpisy">
-<!ENTITY sb.editor.save "Zapisz zmiany">
-<!ENTITY sb.editor.comment "Powiększ obszar komentarza">
-<!ENTITY sb.editor.sticky "Przyklejona notatka">
-<!ENTITY sb.editor.sticky.create "Utwórz przyklejoną notatkę">
-<!ENTITY sb.editor.inline.add "Dodaj komentarz w linii zaznaczenia">
-<!ENTITY sb.editor.attach.file "Dołącz plik do zaznaczenia">
-<!ENTITY sb.editor.attach.link "Dołącz odnośnik do zaznaczenia">
-<!ENTITY sb.editor.cutter "Usuń zaznaczenie">
-<!ENTITY sb.editor.remove.iframe "Usuń wszystkie znaczniki &lt;iframe&gt;">
-<!ENTITY sb.editor.remove.script "Usuń wszystkie znaczniki &lt;script&gt;">
+<!ENTITY sb.toolbar.edit "Edit Toolbar">
+<!ENTITY sb.toolbar.info "Info Toolbar">
+<!ENTITY sb.edit.eraser "DOM Eraser: Narzędzie usuwające zaznaczone elementy na stronach internetowych">
+<!ENTITY sb.edit.undo "Cofnij">
+<!ENTITY sb.edit.restore "Zrezygnuj ze zmian i przywróć poprzednie wpisy">
+<!ENTITY sb.edit.save "Zapisz zmiany">
+<!ENTITY sb.edit.comment "Powiększ obszar komentarza">
+<!ENTITY sb.edit.sticky "Przyklejona notatka">
+<!ENTITY sb.edit.sticky.create "Utwórz przyklejoną notatkę">
+<!ENTITY sb.edit.inline.add "Dodaj komentarz w linii zaznaczenia">
+<!ENTITY sb.edit.attach.file "Dołącz plik do zaznaczenia">
+<!ENTITY sb.edit.attach.link "Dołącz odnośnik do zaznaczenia">
+<!ENTITY sb.edit.cutter "Usuń zaznaczenie">
+<!ENTITY sb.edit.remove.iframe "Usuń wszystkie znaczniki &lt;iframe&gt;">
+<!ENTITY sb.edit.remove.script "Usuń wszystkie znaczniki &lt;script&gt;">
 <!ENTITY sb.highlighter "Podświetlanie">
 <!ENTITY sb.highlighter.remove "Usuń podświetlenie w zaznczeniu">
 <!ENTITY sb.highlighter.remove.all "Usuń wszystkie podświetlone komentarze">
-<!ENTITY sb.customize "Dostosuj">
-<!ENTITY sb.infobar.openSource	"Pokaż stronę źródłową">
-<!ENTITY sb.infobar.renew "Przechwyć ponownie">
-<!ENTITY sb.infobar.showIndicators "Pokaż wskaźniki odnośników">
-<!ENTITY sb.infobar.showInfobar "Pokaż pasek informacyjny">
-<!ENTITY sb.infobar.home "Strona domowa">
-<!ENTITY sb.infobar.sitemap "Mapa stron">
+<!ENTITY sb.source	"Pokaż stronę źródłową">
+<!ENTITY sb.renew "Przechwyć ponownie">
 <!ENTITY sb.locate "Zlokalizuj w drzewie katalogów w panelu bocznym">
+<!ENTITY sb.indicators "Pokaż wskaźniki odnośników">
+<!ENTITY sb.info.home "Strona domowa">
+<!ENTITY sb.info.sitemap "Mapa stron">

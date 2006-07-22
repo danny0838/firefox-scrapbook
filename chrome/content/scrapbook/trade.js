@@ -1,7 +1,7 @@
 
 function SB_trace(aStr, aColor, aBold)
 {
-	sbStatusHandler.trace(aStr, 2000);
+	sbMainService.trace(aStr, 2000);
 	var listBox = document.getElementById("sbTradeLog");
 	var listItem = listBox.appendItem(aStr);
 	listBox.ensureIndexIsVisible(listBox.getRowCount() - 1);
@@ -24,10 +24,10 @@ function SB_initTrade()
 		document.getElementById("sbTradeOuter").collapsed = true;
 		document.getElementById("sbTradeSplitter").collapsed = true;
 		document.getElementById("sbTradeLog").collapsed = true;
-		document.getElementById("sbStatus").collapsed = true;
-		document.getElementById("sbStatus2").hidden = false;
+		document.getElementById("status-bar").collapsed = true;
+		document.getElementById("sbStatusBox").hidden = false;
 		window.sizeToContent();
-		window.title = document.getElementById("sbTradeExportButton").label;
+		document.title = document.getElementById("sbTradeExportButton").label;
 		setTimeout(function(){ sbExportService.execQuickly(resURI); }, 0);
 	}
 	else
@@ -83,8 +83,7 @@ var sbTrader = {
 
 	get TREE()     { return document.getElementById("sbTradeTree"); },
 	get STRING()   { return document.getElementById("sbTradeString"); },
-	get PROGRESS() { return document.getElementById("sbTradeProgress"); },
-	get STATUS2()  { return document.getElementById("sbStatus2Label"); },
+	get STATUS2()  { return document.getElementById("sbStatusText"); },
 
 	locked    : false,
 	context   : "import",
@@ -147,7 +146,7 @@ var sbTrader = {
 			var dirName = file.leafName;
 			file.append("index.dat");
 			if ( !file.exists() ) continue;
-			var item = this.parseIndexDat(sbCommonUtils.convertStringToUTF8(sbCommonUtils.readFile(file)));
+			var item = this.parseIndexDat(sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(file), "UTF-8"));
 			if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) )
 			{
 				var icon = this.rightDir.clone();
@@ -165,12 +164,10 @@ var sbTrader = {
 				dirName,
 				item.type
 			]);
-			sbStatusHandler.trace(sbMainService.STRING.getString("SCANNING") + "... " + dirName, 1000);
 		}
 		sbCustomTreeUtil.heapSort(this.treeItems, 5);
 		this.initTree();
 		SB_trace(sbTrader.STRING.getFormattedString("DETECT", [this.treeItems.length, this.rightDir.path]), "G");
-		if ( this.treeItems.length == 0 ) SB_trace(sbTrader.STRING.getString("TIPS"), "R");
 	},
 
 	initTree : function()
@@ -237,6 +234,11 @@ var sbTrader = {
 		for ( var i = 0; i < elems.length; i++ ) elems[i].setAttribute("disabled", willLock);
 	},
 
+	toggleProgress : function(aShowHide)
+	{
+		document.getElementById("statusbar-progresspanel").collapsed = !aShowHide;
+	},
+
 
 	getCurrentDirName : function()
 	{
@@ -283,7 +285,7 @@ var sbTrader = {
 		datFile.append(this.getCurrentDirName());
 		datFile.append("index.dat");
 		if ( !datFile.exists() ) return;
-		var item = this.parseIndexDat(sbCommonUtils.convertStringToUTF8(sbCommonUtils.readFile(datFile)));
+		var item = this.parseIndexDat(sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(datFile), "UTF-8"));
 		var content = "";
 		for ( var prop in item )
 		{
@@ -365,7 +367,7 @@ var sbExportService = {
 		{
 			this.resList = sbTreeHandler.getSelection(true, 2);
 		}
-		sbTrader.PROGRESS.hidden = false;
+		sbTrader.toggleProgress(true);
 		this.next();
 	},
 
@@ -402,7 +404,7 @@ var sbExportService = {
 
 	finalize : function()
 	{
-		sbTrader.PROGRESS.hidden = true;
+		sbTrader.toggleProgress(false);
 		sbTrader.refresh();
 		sbTrader.toggleLocking(false);
 	},
@@ -420,7 +422,7 @@ var sbExportService = {
 			SB_trace(document.getElementById("sbTradeExportButton").label + rate + item.title, "B");
 		else
 			SB_trace(sbTrader.STRING.getString("FAILED") + rate + item.title, "R" ,true);
-		sbTrader.PROGRESS.value = Math.round( this.count / this.resList.length * 100);
+		document.getElementById("sbTradeProgress").value = Math.round( this.count / this.resList.length * 100);
 	},
 
 	copyLeftToRightInternal : function(aItem)
@@ -488,7 +490,7 @@ var sbImportService = {
 		sbTrader.toggleLocking(true);
 		this.restore = ( aRow == -128 ) ? document.getElementById("sbTradeOptionRestore").checked : false;
 		this.tarResArray = ( aRow < 0 ) ? [sbTreeHandler.TREE.ref, 0] : sbTreeDNDHandler.getTarget(aRow, aOrient);
-		sbTrader.PROGRESS.hidden = false;
+		sbTrader.toggleProgress(true);
 		this.makeFolderTable();
 		this.ascending = ( aRow < 0 ) ? true : (aOrient == 0);
 		this.idxList   = sbCustomTreeUtil.getSelection(sbTrader.TREE);
@@ -520,7 +522,7 @@ var sbImportService = {
 
 	finalize : function()
 	{
-		sbTrader.PROGRESS.hidden = true;
+		sbTrader.toggleProgress(false);
 		sbTrader.refresh();
 		sbController.rebuildLocal();
 		sbTrader.toggleLocking(false);
@@ -539,7 +541,7 @@ var sbImportService = {
 			alert("ScrapBook ERROR: Could not find 'index.dat'.");
 			return;
 		}
-		var dat = sbCommonUtils.convertStringToUTF8(sbCommonUtils.readFile(datFile));
+		var dat = sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(datFile), "UTF-8");
 		var item = sbTrader.parseIndexDat(dat);
 		if ( !item.id || item.id.length != 14 ) return;
 		var destDir = sbTrader.leftDir.clone();
@@ -599,7 +601,7 @@ var sbImportService = {
 		}
 		sbDataSource.addItem(item, this.tarResArray[0], this.tarResArray[1]);
 		SB_trace(document.getElementById("sbTradeImportButton").label + rate + folder + item.title, "B");
-		sbTrader.PROGRESS.value = Math.round( num / this.idxList.length * 100);
+		document.getElementById("sbTradeProgress").value = Math.round( num / this.idxList.length * 100);
 	},
 
 	makeFolderTable : function()

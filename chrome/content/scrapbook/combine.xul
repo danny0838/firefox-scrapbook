@@ -37,6 +37,7 @@
 		<stringbundle id="sbMainString"    src="chrome://scrapbook/locale/scrapbook.properties" />
 		<stringbundle id="sbCaptureString" src="chrome://scrapbook/locale/capture.properties" />
 		<stringbundle id="sbCombineString" src="chrome://scrapbook/locale/combine.properties" />
+		<stringbundle id="sbOverlayString" src="chrome://scrapbook/locale/overlay.properties" />
 	</stringbundleset>
 
 	<!--broadcaster-->

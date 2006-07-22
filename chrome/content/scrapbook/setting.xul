@@ -19,8 +19,9 @@
 <prefwindow id="sbPrefWindow"
 	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 	title="&sb.tools.settings; - ScrapBook"
-	dlgbuttons="accept,cancel,help"
+	dlgbuttons="accept,cancel"
 	onload="sbPrefService.init();"
+	onbeforeaccept="sbPrefService.onBeforeUnload();"
 	onunload="sbPrefService.done();">
 
 	<prefpane id="sbPrefPane" flex="1">
@@ -118,7 +119,7 @@
 							<label value="&sb.highlighter;" />
 							<label value="Firefox, rediscover the web" />
 							<spacer flex="1" />
-							<button label="&sb.customize;..." color="0" oncommand="hlPrefService.openDialog(this.getAttribute('color'));" />
+							<button label="&sb.button.customize;..." color="0" oncommand="hlPrefService.openDialog(this.getAttribute('color'));" />
 						</hbox>
 					</groupbox>
 				</tabpanel>

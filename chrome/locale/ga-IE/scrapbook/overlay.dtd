@@ -10,6 +10,7 @@
 <!ENTITY sb.capture.folder.select "Roghnaigh Cohmadlann">
 <!ENTITY sb.capture.alltabs "Gabh Gach T&#225;b">
 <!ENTITY sb.capture.bookmark "Leabharmharc le ScrapBook">
+<!ENTITY sb.editbefore "Edit Before Capture">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">

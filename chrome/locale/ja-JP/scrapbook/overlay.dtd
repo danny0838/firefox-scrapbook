@@ -10,6 +10,7 @@
 <!ENTITY sb.capture.folder.select "フォルダの選択">
 <!ENTITY sb.capture.alltabs "すべてのタブを取り込み">
 <!ENTITY sb.capture.bookmark "ScrapBookにブックマーク">
+<!ENTITY sb.editbefore "取り込み前編集モード">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">

@@ -26,5 +26,6 @@
 <!ENTITY sb.pref.multibook.tips "Erlaubt das Einrichten unterschiedlicher Speicherorte, zwischen denen einfach mit einer Schaltfläche gewechselt werden kann.">
 <!ENTITY sb.pref.fileViewer "Datei-Manager">
 <!ENTITY sb.pref.fileViewer.default "Standardprogramm des Betriebssystems (z.B. Windows-Explorer)">
+<!ENTITY sb.button.customize "Anpassen">
 <!ENTITY sb.button.browse "Durchsuchen">
 <!ENTITY sb.button.show "Ordner anzeigen">

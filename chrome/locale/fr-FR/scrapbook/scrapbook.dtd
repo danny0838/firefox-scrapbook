@@ -12,8 +12,8 @@
 <!ENTITY sb.tools.sorttree "Classer l'arborescence entière">
 <!ENTITY sb.tools.output "Arborescence comme HTML">
 <!ENTITY sb.tools.repair "Réparation d'urgence">
-<!ENTITY sb.tools.addons "Add-on Functions">
-<!ENTITY sb.tools.tips "Astuces en ligne">
+<!ENTITY sb.tools.addons "Fonctions additionnelles">
+<!ENTITY sb.tools.tips "Astuces en ligne (en)">
 <!ENTITY sb.tools.homepage "Page d'accueil">
 <!ENTITY sb.tools.about "À propos">
 <!ENTITY sb.note.opentab "Éditer dans un onglet">

@@ -9,8 +9,6 @@
 <!DOCTYPE window [
 <!ENTITY % noteDTD SYSTEM "chrome://scrapbook/locale/note.dtd" >
 %noteDTD;
-<!ENTITY % editorDTD  SYSTEM "chrome://scrapbook/locale/editor.dtd" >
-%editorDTD;
 ]>
 
 <!--window-->
@@ -80,10 +78,10 @@
 				<menuitem id="sbNoteToolbarF12" type="radio" label="12px" />
 			</menupopup>
 		</toolbarbutton>
-		<toolbarbutton id="sbNoteToolbarP" accesskey="P" label="&sb.note.print;..." disabled="true" oncommand="document.getElementById('sbNoteBrowser').contentWindow.print();" />
+		<toolbarbutton id="sbNoteToolbarP" accesskey="P" label="&sb.note.print;" oncommand="sbNoteService2.initHTMLView(); sbNoteService2.BROWSER.contentWindow.print();" />
 		<spacer flex="1" />
-		<toolbarbutton id="sbNoteToolbarX" accesskey="X" tooltiptext="&sb.note.exit;" image="chrome://scrapbook/skin/exit.png" oncommand="sbNoteService2.finalize(true);" />
-		<toolbarbutton image="chrome://scrapbook/skin/expander_left.png" tooltiptext="&sb.locate;" oncommand="sbCommonUtils.WINDOW.getMostRecentWindow('navigator:browser').sbBrowserOverlay.locate(sbNoteService.resource);" />
+		<toolbarbutton class="sb-header-locate" oncommand="sbCommonUtils.WINDOW.getMostRecentWindow('navigator:browser').sbBrowserOverlay.locate(sbNoteService.resource);" />
+		<toolbarbutton class="sb-header-exit" id="sbNoteToolbarX" accesskey="X" tooltiptext="&sb.note.exit;" oncommand="sbNoteService2.finalize(true);" />
 	</toolbar>
 
 </window>

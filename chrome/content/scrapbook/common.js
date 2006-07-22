@@ -53,6 +53,11 @@ var sbCommonUtils = {
 
 	getContentDir : function(aID, aSuppressCreate)
 	{
+		if ( aID.length != 14 )
+		{
+			alert("ScrapBook FATAL ERROR in sbCommonUtils::getContentDir.");
+			return null;
+		}
 		var myDir = this.getScrapBookDir().clone();
 		myDir.append("data");
 		if ( !myDir.exists() ) myDir.create(myDir.DIRECTORY_TYPE, 0700);
@@ -71,19 +76,20 @@ var sbCommonUtils = {
 
 	removeDirSafety : function(aDir, check)
 	{
+		var file;
 		try {
 			if ( check && !aDir.leafName.match(/^\d{14}$/) ) return;
 			var fileEnum = aDir.directoryEntries;
 			while ( fileEnum.hasMoreElements() )
 			{
-				var eFile = fileEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
-				if ( eFile.isFile() ) eFile.remove(false);
+				file = fileEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
+				if ( file.isFile() ) file.remove(false);
 			}
+			file = aDir;
 			if ( aDir.isDirectory() ) aDir.remove(false);
 			return true;
-		}
-		catch(ex) {
-			alert("ScrapBook ERROR: Failed to remove files.\n" + ex);
+		} catch(ex) {
+			alert("ScrapBook ERROR: Failed to remove file '" + file.leafName + "'.\n" + ex);
 			return false;
 		}
 	},
@@ -269,11 +275,11 @@ var sbCommonUtils = {
 	},
 
 
-	convertStringToUTF8 : function(aString)
+	convertToUnicode : function(aString, aCharset)
 	{
 		if ( !aString ) return "";
 		try {
-			this.UNICODE.charset = "UTF-8";
+			this.UNICODE.charset = aCharset;
 			aString = this.UNICODE.ConvertToUnicode(aString);
 		} catch(ex) {
 		}
@@ -368,7 +374,7 @@ var sbCommonUtils = {
 	escapeComment : function(aStr)
 	{
 		if ( aStr.length > 10000 ) alert("ScrapBook ALERT: Too long comment makes ScrapBook slow.");
-		return aStr.replace(/\r|\n/g, " __BR__ ");
+		return aStr.replace(/\r|\n|\t/g, " __BR__ ");
 	},
 
 

@@ -9,8 +9,7 @@ var sbMultiBookConfig = {
 
 	init : function()
 	{
-		sbMultiBookService.initFile();
-		this.treeItems = sbMultiBookService.getListFromFile();
+		this.treeItems = sbMultiBookService.initFile();
 		this.initTree();
 	},
 
@@ -50,7 +49,7 @@ var sbMultiBookConfig = {
 	down : function()
 	{
 		var curIdx = this.TREE.currentIndex;
-		if ( curIdx >= this.treeItems.length-1 ) return;
+		if ( curIdx < 0 || curIdx >= this.treeItems.length - 1 ) return;
 		var tmp = this.treeItems[curIdx + 1];
 		this.treeItems[curIdx+1] = this.treeItems[curIdx];
 		this.treeItems[curIdx] = tmp;

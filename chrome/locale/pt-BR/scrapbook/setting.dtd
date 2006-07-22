@@ -26,5 +26,6 @@
 <!ENTITY sb.pref.multibook.tips "Isto permite você ter múltiplos destinos para guardar dados e alternar entre eles rapidamente através de um botão na barra de ferramentas.">
 <!ENTITY sb.pref.fileViewer "Programa para navegação de arquivos">
 <!ENTITY sb.pref.fileViewer.default "Padrão (No Windows, talvez Explorer.)">
+<!ENTITY sb.button.customize "Personalizar">
 <!ENTITY sb.button.browse "Navegar">
 <!ENTITY sb.button.show "Mostrar Pasta">

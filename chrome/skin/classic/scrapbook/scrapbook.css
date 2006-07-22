@@ -57,6 +57,10 @@ toolbarbutton#sbToolbarProperty {
 
 menuitem#sbPopupRenew { list-style-image: url('chrome://scrapbook/skin/capture_target_as.png'); }
 
+menuitem[type="radio"][checked="true"] {
+	font-weight: bold;
+}
+
 
 /* ::::: TREE/LIST ::::: */
 
@@ -84,7 +88,7 @@ richlistitem.combine .sblist-title {
 
 treechildren::-moz-tree-cell-text(bookmark),
 richlistitem.bookmark .sblist-title {
-	color: limegreen;	/* forestgreen */
+	color: rgb(32,192,32);
 }
 
 treechildren::-moz-tree-cell-text(invalid) {
@@ -142,6 +146,7 @@ richlistitem .sblist-comment[value=""] {
 .sb-header toolbarbutton {
 	padding: 0px;
 	margin: 0px;
+	-moz-appearance: none;
 }
 
 .sb-header toolbarbutton image {
@@ -151,7 +156,10 @@ richlistitem .sblist-comment[value=""] {
 
 .sb-header-exit {
 	list-style-image: url('chrome://scrapbook/skin/exit.png');
-	-moz-appearance: none;
+}
+
+.sb-header-locate {
+	list-style-image: url('chrome://scrapbook/skin/expander_left.png');
 }
 
 .sb-header-red {

@@ -84,7 +84,7 @@
 		<treechildren />
 	</tree>
 
-	<statusbar style="border-top: 1px solid ThreeDShadow;">
+	<statusbar style="border-top: 1px solid ThreeDShadow;" align="center">
 		<statusbarpanel id="sbCalcMessage" class="plain" flex="1" />
 		<progressmeter id="sbCalcProgress" mode="determined" value="0" width="160" />
 	</statusbar>

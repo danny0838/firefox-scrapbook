@@ -39,3 +39,7 @@ row > label {
 	padding-right: 5px;
 }
 
+#sbUpdateImage:not([src=""]) + label {
+	margin-left: 6px;
+}
+

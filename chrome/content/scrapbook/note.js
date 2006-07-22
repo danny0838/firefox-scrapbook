@@ -1,6 +1,8 @@
 
 var sbNoteService2 = {
 
+	get BROWSER(){ return document.getElementById("sbNoteBrowser"); },
+
 	fontSize : 16,
 	enabledHTMLView : false,
 
@@ -24,7 +26,7 @@ var sbNoteService2 = {
 	{
 		var icon = sbCommonUtils.getDefaultIcon("note");
 		document.getElementById("sbNoteImage").setAttribute("src", icon);
-		if ( !document.getElementById("sbNoteBrowser").hidden ) this.initHTMLView();
+		if ( !this.BROWSER.hidden ) this.initHTMLView();
 		var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
 		if ( "sbNoteService" in win._content && win._content == window )
 		{
@@ -68,12 +70,13 @@ var sbNoteService2 = {
 		sbNoteService.save();
 		sbNoteTemplate.save();
 		var source = sbNoteTemplate.getTemplate();
+		var title, content;
 		if ( sbNoteService.TEXTBOX.value.match(/\n/) ) {
-			var title   = RegExp.leftContext;
-			var content = RegExp.rightContext;
+			title   = RegExp.leftContext;
+			content = RegExp.rightContext;
 		} else {
-			var title   = sbNoteService.TEXTBOX.value;
-			var content = "";
+			title   = sbNoteService.TEXTBOX.value;
+			content = "";
 		}
 		title = title.replace(/</g, "&lt;");
 		title = title.replace(/>/g, "&gt;");
@@ -85,17 +88,16 @@ var sbNoteService2 = {
 		htmlFile.append("note.html");
 		sbCommonUtils.writeFile(htmlFile, source, "UTF-8");
 		this.toggleHTMLView(true);
-		document.getElementById("sbNoteBrowser").loadURI(sbCommonUtils.convertFilePathToURL(htmlFile.path));
+		this.BROWSER.loadURI(sbCommonUtils.convertFilePathToURL(htmlFile.path));
 		this.enabledHTMLView = true;
 	},
 
 	toggleHTMLView : function(willShow)
 	{
+		this.BROWSER.hidden  = !willShow;
 		document.getElementById("sbSplitter").hidden = !willShow;
-		document.getElementById("sbNoteBrowser").hidden  = !willShow;
 		document.getElementById("sbNoteHeader").lastChild.hidden = !willShow;
 		document.getElementById("sbNoteToolbarN").disabled = !willShow;
-		document.getElementById("sbNoteToolbarP").disabled = !willShow;
 		this.enabledHTMLView = willShow;
 	},
 
@@ -127,7 +129,7 @@ var sbNoteTemplate = {
 	getTemplate : function()
 	{
 		var template = sbCommonUtils.readFile(this.file);
-		template = sbCommonUtils.convertStringToUTF8(template);
+		template = sbCommonUtils.convertToUnicode(template, "UTF-8");
 		return template;
 	},
 

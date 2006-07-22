@@ -25,7 +25,10 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
 
 	<!--stringbundle-->
-	<stringbundle id="sbCacheString" src="chrome://scrapbook/locale/fulltext.properties" />
+	<stringbundleset>
+		<stringbundle id="sbCacheString" src="chrome://scrapbook/locale/fulltext.properties" />
+		<stringbundle id="sbMainString"  src="chrome://scrapbook/locale/scrapbook.properties" />
+	</stringbundleset>
 
 	<!--popup-->
 	<popupset>
@@ -40,7 +43,8 @@
 	<hbox id="sbResultHeader" class="sb-header" align="center">
 		<label flex="1" crop="end" />
 		<spacer flex="1" />
-		<toolbarbutton class="sb-header-exit" oncommand="SB_exitResult();" />
+		<toolbarbutton class="sb-header-locate" oncommand="sbSearchResult.forward('L');" />
+		<toolbarbutton class="sb-header-exit"   oncommand="SB_exitResult();" />
 	</hbox>
 
 	<tree id="sbTree"

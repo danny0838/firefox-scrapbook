@@ -27,47 +27,52 @@ var sbPrefService = {
 	clearUnusedPrefs : function()
 	{
 		var oldPrefNames = [
-			"scrapbook.capture.detail",
-			"scrapbook.capture.notify",
-			"scrapbook.tree.singleexpand",
-			"scrapbook.tree.quickdelete",
-			"scrapbook.usetab.open",
-			"scrapbook.usetab.source",
-			"scrapbook.usetab.view",
-			"scrapbook.usetab.combine",
-			"scrapbook.usetab.search",
-			"scrapbook.usetab.output",
-			"scrapbook.usetab.home",
-			"scrapbook.usetab.export",
-			"scrapbook.usetab.note",
-			"scrapbook.filer.default",
-			"scrapbook.filer.path",
-			"scrapbook.detaildialog",
-			"scrapbook.notification",
-			"scrapbook.hidefavicon",
-			"scrapbook.folderclick",
-			"scrapbook.quickdelete",
-			"scrapbook.utf8encode",
-			"scrapbook.editor.comment",
-			"scrapbook.editor.marker",
-			"scrapbook.editor.blockstyle",
-			"scrapbook.edit.multilines",
-			"scrapbook.edit.confirmsave",
-			"scrapbook.edit.showheader",
-			"scrapbook.view.header",
-			"scrapbook.view.editor",
-			"scrapbook.view.infobar",
-			"scrapbook.detail.recentfolder",
-			"scrapbook.capture.utf8encode",
-			"scrapbook.capture.removescript",
+			"capture.detail",
+			"capture.notify",
+			"tree.singleexpand",
+			"tree.quickdelete",
+			"usetab.open",
+			"usetab.source",
+			"usetab.view",
+			"usetab.combine",
+			"usetab.search",
+			"usetab.output",
+			"usetab.home",
+			"usetab.export",
+			"usetab.note",
+			"filer.default",
+			"filer.path",
+			"detaildialog",
+			"notification",
+			"hidefavicon",
+			"folderclick",
+			"quickdelete",
+			"utf8encode",
+			"editor.comment",
+			"editor.marker",
+			"editor.blockstyle",
+			"edit.multilines",
+			"edit.confirmsave",
+			"edit.showheader",
+			"view.header",
+			"view.editor",
+			"view.infobar",
+			"detail.recentfolder",
+			"capture.utf8encode",
+			"capture.removescript",
 		];
 		oldPrefNames.forEach(function(aPrefName)
 		{
 			try {
-				sbCommonUtils.PREF.clearUserPref(aPrefName);
+				sbCommonUtils.PREF.clearUserPref("scrapbook." + aPrefName);
 			} catch(ex) {
 			}
 		});
+	},
+
+	onBeforeUnload : function()
+	{
+		if ( sbPrefService.changed ) sbMultiBookService.readWritePref(false);
 	},
 
 	done : function()
@@ -75,6 +80,7 @@ var sbPrefService = {
 		if ( this.changed )
 		{
 			sbMultiBookService.refreshGlobal();
+			sbMultiBookService.readWritePref(true);
 		}
 	},
 

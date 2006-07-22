@@ -26,5 +26,6 @@
 <!ENTITY sb.pref.multibook.tips "這個選項可讓你指定一個以上的資料存放處，並以工具列按鈕快速切換欲儲存位置。">
 <!ENTITY sb.pref.fileViewer "「顯示相關檔案」命令所使用的程式">
 <!ENTITY sb.pref.fileViewer.default "預設（如果您使用 Windows，則可能是檔案總管）">
+<!ENTITY sb.button.customize "自訂">
 <!ENTITY sb.button.browse "瀏覽">
 <!ENTITY sb.button.show "顯示資料夾">

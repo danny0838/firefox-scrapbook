@@ -1,25 +1,24 @@
-<!ENTITY sb.editor "Editační lišta">
-<!ENTITY sb.editor.eraser "DOM Zmizík: Nástroj pro odstranění vybraného bloku.">
-<!ENTITY sb.editor.undo "Zpět">
-<!ENTITY sb.editor.restore "Opustit změny a obnovit">
-<!ENTITY sb.editor.save "Uložit změny">
-<!ENTITY sb.editor.comment "Zobrazit pole pro komentář">
-<!ENTITY sb.editor.sticky "Nálepku">
-<!ENTITY sb.editor.sticky.create "Vytvořit &sb.editor.sticky;">
-<!ENTITY sb.editor.inline.add "Vložit poznámku k výběru">
-<!ENTITY sb.editor.attach.file "Připojit Soubor k výběru">
-<!ENTITY sb.editor.attach.link "Připojit Odkaz k výběru">
-<!ENTITY sb.editor.cutter "Odstranit výběr">
-<!ENTITY sb.editor.remove.iframe "Odstranit VŠECHNY tagy IFRAME">
-<!ENTITY sb.editor.remove.script "Odstranit VŠECHNY tagy SCRIPT">
+<!ENTITY sb.toolbar.edit "Edit Toolbar">
+<!ENTITY sb.toolbar.info "Info Toolbar">
+<!ENTITY sb.edit.eraser "DOM Zmizík: Nástroj pro odstranění vybraného bloku.">
+<!ENTITY sb.edit.undo "Zpět">
+<!ENTITY sb.edit.restore "Opustit změny a obnovit">
+<!ENTITY sb.edit.save "Uložit změny">
+<!ENTITY sb.edit.comment "Zobrazit pole pro komentář">
+<!ENTITY sb.edit.sticky "Nálepku">
+<!ENTITY sb.edit.sticky.create "Vytvořit &sb.edit.sticky;">
+<!ENTITY sb.edit.inline.add "Vložit poznámku k výběru">
+<!ENTITY sb.edit.attach.file "Připojit Soubor k výběru">
+<!ENTITY sb.edit.attach.link "Připojit Odkaz k výběru">
+<!ENTITY sb.edit.cutter "Odstranit výběr">
+<!ENTITY sb.edit.remove.iframe "Odstranit VŠECHNY tagy IFRAME">
+<!ENTITY sb.edit.remove.script "Odstranit VŠECHNY tagy SCRIPT">
 <!ENTITY sb.highlighter "Zvýraznění">
 <!ENTITY sb.highlighter.remove "Odstranit zvýraznění výběru">
 <!ENTITY sb.highlighter.remove.all "Odstranit všechna zvýraznění">
-<!ENTITY sb.customize "Přizpůsobit">
-<!ENTITY sb.infobar.openSource "Otevřít zdroj URL">
-<!ENTITY sb.infobar.renew "Zachytit Znovu">
-<!ENTITY sb.infobar.showIndicators "Zobrazit ukazatele typů odkazů">
-<!ENTITY sb.infobar.showInfobar "Zobrazit Informační lištu">
-<!ENTITY sb.infobar.home "Domů">
-<!ENTITY sb.infobar.sitemap "Mapa stránky">
+<!ENTITY sb.source "Otevřít zdroj URL">
+<!ENTITY sb.renew "Zachytit Znovu">
 <!ENTITY sb.locate "Ukázat v postranní liště">
+<!ENTITY sb.indicators "Zobrazit ukazatele typů odkazů">
+<!ENTITY sb.info.home "Domů">
+<!ENTITY sb.info.sitemap "Mapa stránky">

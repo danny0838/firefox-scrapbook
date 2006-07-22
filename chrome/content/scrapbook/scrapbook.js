@@ -52,6 +52,25 @@ var sbMainService = {
 	},
 
 
+	toggleHeader : function(willShow, aLabel)
+	{
+		var header = document.getElementById("sbHeader");
+		header.hidden = !willShow;
+		header.firstChild.value = aLabel;
+		header.lastChild.onclick = function()
+		{
+			if ( sbTreeHandler.TREE.ref == "urn:scrapbook:search" ) sbSearchService.exit();
+		};
+	},
+
+	trace : function(aText, aMsec)
+	{
+		var status = top.window.document.getElementById("statusbar-display");
+		status.label = aText;
+		setTimeout(function(){ if ( status.label == aText ) status.label = ""; }, aMsec ? aMsec : 5000);
+	},
+
+
 	locate : function(aRes)
 	{
 		if ( !aRes ) aRes = window.top.sbBrowserOverlay.locateMe;
@@ -462,7 +481,7 @@ var sbTreeDNDHandler = {
 		var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
 		if ( this.orient == 0 )
 		{
-			if ( curAbsIdx == this.row ) { sbStatusHandler.trace("can't drop folder on itself"); return; }
+			if ( curAbsIdx == this.row ) { sbMainService.trace("can't drop folder on itself"); return; }
 		}
 		else
 		{
@@ -475,10 +494,10 @@ var sbTreeDNDHandler = {
 			{
 				if ( curAbsIdx == this.row )
 				{
-					sbStatusHandler.trace("can't drop folder after open container");
+					sbMainService.trace("can't drop folder after open container");
 					return;
 				}
-				sbStatusHandler.trace("drop after open container");
+				sbMainService.trace("drop after open container");
 				tarPar = tarRes;
 				tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(this.row + 1);
 				tarRelIdx = 1;
@@ -493,7 +512,7 @@ var sbTreeDNDHandler = {
 			{
 				tmpRes = sbTreeHandler.getParentResource(tmpIdx);
 				tmpIdx = sbTreeHandler.TREE.builderView.getIndexOfResource(tmpRes);
-				if ( tmpRes.Value == curRes.Value ) { sbStatusHandler.trace("can't move folder into descendant level"); return; }
+				if ( tmpRes.Value == curRes.Value ) { sbMainService.trace("can't move folder into descendant level"); return; }
 			}
 		}
 		sbDataSource.moveItem(curRes, curPar, tarPar, tarRelIdx);
@@ -553,7 +572,7 @@ var sbTreeDNDHandler = {
 		     sbTreeHandler.TREE.view.isContainerOpen(aRow) &&
 		     sbTreeHandler.TREE.view.isContainerEmpty(aRow) == false )
 		{
-			sbStatusHandler.trace("drop after open container");
+			sbMainService.trace("drop after open container");
 			tarPar = tarRes; tarRelIdx = 1;
 		}
 		return [tarPar.Value, tarRelIdx];
@@ -561,55 +580,6 @@ var sbTreeDNDHandler = {
 
 };
 
-
-
-
-var sbStatusHandler = {
-
-	get HEADER() { return document.getElementById("sbHeader"); },
-	get LABEL()  { return document.getElementById("sbStatusLabel"); },
-	get IMAGE()  { return document.getElementById("sbStatusImage"); },
-
-	toggleHeader : function(willShow, aLabel)
-	{
-		this.HEADER.hidden = !willShow;
-		this.HEADER.firstChild.value = aLabel;
-		this.HEADER.lastChild.onclick = function()
-		{
-			if ( sbTreeHandler.TREE.ref == "urn:scrapbook:search") sbSearchService.exit();
-		};
-	},
-
-	change : function(msg)
-	{
-		this.LABEL.value = msg;
-	},
-
-	trace : function(msg, msec)
-	{
-		this.LABEL.value = msg;
-		setTimeout(function(){ if ( !sbStatusHandler.IMAGE.hasAttribute("src") ) sbStatusHandler.change(""); }, msec ? msec : 5000);
-	},
-
-	httpBusy : function(count, title)
-	{
-		this.LABEL.value = (count ? "(" + count + ") " : "") + title;
-		this.IMAGE.setAttribute("src", "chrome://scrapbook/skin/status_busy.gif");
-	},
-
-	httpComplete : function(title)
-	{
-		this.LABEL.value = sbMainService.STRING.getString("COMPLETED") + ": " + title;
-		this.IMAGE.removeAttribute("src");
-	},
-
-	reset : function()
-	{
-		this.LABEL.value = "";
-		this.IMAGE.removeAttribute("src");
-	},
-
-};
 
 
 
@@ -627,16 +597,24 @@ var sbSearchService = {
 
 	init : function()
 	{
-		this.type = document.getElementById("sbSearchImage").getAttribute("searchtype");
-		document.getElementById("sbSearchPopup" + this.type.charAt(0).toUpperCase()).setAttribute("checked", true);
+		this.type = this.ELEMENT.getAttribute("searchtype");
 		this.ELEMENT.src = "chrome://scrapbook/skin/search_" + this.type + ".png";
 	},
 
 	change : function(aType)
 	{
-		this.type = aType;
 		this.ELEMENT.setAttribute("searchtype", aType);
-		this.ELEMENT.src = "chrome://scrapbook/skin/search_" + this.type + ".png";
+		this.init();
+	},
+
+	populatePopup : function()
+	{
+		var c = this.type.charAt(0).toUpperCase();
+		var arr = ["F","T","C","S","I","A"];
+		for ( var i = 0; i < arr.length; i++ )
+		{
+			document.getElementById("sbSearchPopup" + arr[i]).setAttribute("checked", arr[i] == c);
+		}
 	},
 
 	enter : function(aInput)
@@ -712,7 +690,7 @@ var sbSearchService = {
 		sbTreeHandler.TREE.setAttribute("ref", "urn:scrapbook:search");
 		sbTreeHandler.TREE.builder.rebuild();
 		sbTreeDNDHandler.quit();
-		sbStatusHandler.toggleHeader(true, sbMainService.STRING.getFormattedString("SEARCH_RESULTS_FOUND", [this.container.GetCount()]));
+		sbMainService.toggleHeader(true, sbMainService.STRING.getFormattedString("SEARCH_RESULTS_FOUND", [this.container.GetCount()]));
 	},
 
 	filterByDays : function()
@@ -740,7 +718,7 @@ var sbSearchService = {
 
 	exit : function()
 	{
-		sbStatusHandler.toggleHeader(false, "");
+		sbMainService.toggleHeader(false, "");
 		document.getElementById("sbSearchTextbox").value = "";
 		sbTreeHandler.TREE.setAttribute("ref", "urn:scrapbook:root");
 		sbTreeHandler.TREE.builder.rebuild();

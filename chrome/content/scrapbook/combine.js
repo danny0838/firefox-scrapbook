@@ -365,7 +365,6 @@ var sbPageCombiner = {
 sbCaptureObserverCallback.onCaptureComplete = function(aItem)
 {
 	sbCombineService.onCombineComplete(aItem);
-	SB_trace(sbCaptureTask.STRING.getString("CAPTURE_COMPLETE") + " : " + aItem.title);
 	if ( sbCombineService.option["R"] )
 	{
 		if ( sbCombineService.resList.length != sbCombineService.parList.length ) return;

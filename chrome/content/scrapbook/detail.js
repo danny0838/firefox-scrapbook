@@ -32,6 +32,7 @@ function SB_initDetail()
 		return;
 	}
 	setTimeout(function(){ sbFolderSelector.init(); }, 100);
+	document.getElementById("sbDetailComment").value = window.opener.sbContentSaver.item.comment.replace(/ __BR__ /g, "\n");
 }
 
 

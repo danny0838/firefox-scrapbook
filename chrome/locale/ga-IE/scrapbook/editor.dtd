@@ -1,25 +1,24 @@
-<!ENTITY sb.editor "Barra Uirlis&#237; Eagarth&#243;ireachta an Leabhar Gearrth&#225;n">
-<!ENTITY sb.editor.eraser "L&#233;irscrios&#225;n DOM: Uirlis chun Bloic Aibhsithe a bhaint as.">
-<!ENTITY sb.editor.undo "Cealaigh">
-<!ENTITY sb.editor.restore "Tr&#233;ig Aistri&#250;ch&#225;in agus Athch&#243;irigh">
-<!ENTITY sb.editor.save "Sabh&#225;il Aistri&#250;ch&#225;in">
-<!ENTITY sb.editor.comment "Fairsingigh Ceantar L&#233;irithe">
-<!ENTITY sb.editor.sticky "An&#243;t&#225;l Ceangailteach">
-<!ENTITY sb.editor.sticky.create "Cruthaigh &sb.editor.sticky;">
-<!ENTITY sb.editor.inline.add "Cuir An&#243;t&#225;l Ceangailteach leis an Rogha">
-<!ENTITY sb.editor.attach.file "Ceangail Comhad leis an Roghn&#250;">
-<!ENTITY sb.editor.attach.link "Ceangail Nasc leis an Roghn&#250;">
-<!ENTITY sb.editor.cutter "Bain as an Roghn&#250;">
-<!ENTITY sb.editor.remove.iframe "Bain as gach Clib IFRAME">
-<!ENTITY sb.editor.remove.script "Bain as gach Clib SCRIPT">
+<!ENTITY sb.toolbar.edit "Barra Uirlis&#237; Eagarth&#243;ireachta an Leabhar Gearrth&#225;n">
+<!ENTITY sb.toolbar.info "Barra Uirlis&#237; Eolais">
+<!ENTITY sb.edit.eraser "L&#233;irscrios&#225;n DOM: Uirlis chun Bloic Aibhsithe a bhaint as.">
+<!ENTITY sb.edit.undo "Cealaigh">
+<!ENTITY sb.edit.restore "Tr&#233;ig Aistri&#250;ch&#225;in agus Athch&#243;irigh">
+<!ENTITY sb.edit.save "Sabh&#225;il Aistri&#250;ch&#225;in">
+<!ENTITY sb.edit.comment "Fairsingigh Ceantar L&#233;irithe">
+<!ENTITY sb.edit.sticky "An&#243;t&#225;l Ceangailteach">
+<!ENTITY sb.edit.sticky.create "Cruthaigh &sb.edit.sticky;">
+<!ENTITY sb.edit.inline.add "Cuir An&#243;t&#225;l Ceangailteach leis an Rogha">
+<!ENTITY sb.edit.attach.file "Ceangail Comhad leis an Roghn&#250;">
+<!ENTITY sb.edit.attach.link "Ceangail Nasc leis an Roghn&#250;">
+<!ENTITY sb.edit.cutter "Bain as an Roghn&#250;">
+<!ENTITY sb.edit.remove.iframe "Bain as gach Clib IFRAME">
+<!ENTITY sb.edit.remove.script "Bain as gach Clib SCRIPT">
 <!ENTITY sb.highlighter "Aibhsitheoir">
 <!ENTITY sb.highlighter.remove "Bain as gach Aibhsigh sa Roghn&#250;">
 <!ENTITY sb.highlighter.remove.all "Bain as gach Aibhsigh">
-<!ENTITY sb.customize "Saincheap">
-<!ENTITY sb.infobar.openSource "Oscail URL Foinsithe">
-<!ENTITY sb.infobar.renew "Ath-Ghabh&#225;il">
-<!ENTITY sb.infobar.showIndicators "Taispe&#225;in T&#225;scaire Nascanna">
-<!ENTITY sb.infobar.showInfobar "Taispe&#225;in Barra Uirlis&#237; Eolais">
-<!ENTITY sb.infobar.home "Baile">
-<!ENTITY sb.infobar.sitemap "Mapa-su&#237;omha">
+<!ENTITY sb.source "Oscail URL Foinsithe">
+<!ENTITY sb.renew "Ath-Ghabh&#225;il">
 <!ENTITY sb.locate "Sioncronaigh le Crann an Taobh-bharra">
+<!ENTITY sb.indicators "Taispe&#225;in T&#225;scaire Nascanna">
+<!ENTITY sb.info.home "Baile">
+<!ENTITY sb.info.sitemap "Mapa-su&#237;omha">

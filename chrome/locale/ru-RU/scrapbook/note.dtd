@@ -8,5 +8,5 @@
 <!ENTITY sb.note.autolinefeed.t "Добавлять &lt;br&gt; тэг в конец строки при предв. просмотре">
 <!ENTITY sb.note.fontsize "Размер шрифта">
 <!ENTITY sb.note.help "Помощь">
-<!ENTITY sb.note.print "Print">
+<!ENTITY sb.note.print "Печать">
 <!ENTITY sb.note.exit "Выход">

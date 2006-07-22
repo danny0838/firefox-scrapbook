@@ -26,5 +26,6 @@
 <!ENTITY sb.pref.multibook.tips "Ezzel a lehetőséggel több célt adhat meg az adatok tárolásához, és az eszköztáron lévő gombbal gyorsan válthat át köztük.">
 <!ENTITY sb.pref.fileViewer "Fájlkezelő program">
 <!ENTITY sb.pref.fileViewer.default "Alapértelmezett (ha Windows, akkor lehet az Intéző)">
+<!ENTITY sb.button.customize "Testreszabás">
 <!ENTITY sb.button.browse "Tallózás">
 <!ENTITY sb.button.show "Mappa megnyitása">

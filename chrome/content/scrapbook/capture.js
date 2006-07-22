@@ -446,7 +446,7 @@ var sbInvisibleBrowser = {
 	{
 		if ( aCurTotalProgress != aMaxTotalProgress )
 		{
-			SB_trace(sbCaptureTask.STRING.getString("TRANSFER_DATA") + "... (" + aCurTotalProgress + " Bytes)");
+			SB_trace(sbCaptureObserverCallback.getString("TRANSFER_DATA") + "... (" + aCurTotalProgress + " Bytes)");
 		}
 	},
 
@@ -520,8 +520,7 @@ var sbCrossLinker = {
 		{
 			return;
 		}
-		sbContentSaver.frameList = [this.ELEMENT.contentWindow];
-		sbContentSaver.getFrameList(this.ELEMENT.contentWindow);
+		sbContentSaver.frameList = sbContentSaver.flattenFrames(this.ELEMENT.contentWindow);
 		if ( !this.nodeHash[this.nameList[this.index]] )
 		{
 			this.nodeHash[this.nameList[this.index]] = this.createNode(this.nameList[this.index], gReferItem.title);
@@ -731,38 +730,28 @@ sbHeaderSniffer.prototype = {
 
 
 
-sbCaptureObserverCallback = {
+sbCaptureObserverCallback.getString = function(aBundleName)
+{
+	return document.getElementById("sbOverlayString").getString(aBundleName);
+},
 
-	onDownloadComplete : function(aItem)
+sbCaptureObserverCallback.trace = function(aText)
+{
+	SB_trace(aText);
+};
+
+sbCaptureObserverCallback.onCaptureComplete = function(aItem)
+{
+	if ( gContext != "indepth" && gURLs.length == 1 ) SB_fireNotification(aItem);
+	if ( gContext == "renew" || gContext == "renew-deep" )
 	{
-		SB_trace(sbCaptureTask.STRING.getString("CAPTURE") + "... (" + sbContentSaver.httpTask[aItem.id] + ") " + aItem.title);
-	},
-
-	onAllDownloadsComplete : function(aItem)
-	{
-		this.onCaptureComplete(aItem);
-	},
-
-	onDownloadProgress : function(aItem, aFileName, aProgress)
-	{
-		SB_trace(sbCaptureTask.STRING.getString("TRANSFER_DATA") + "... (" + sbContentSaver.httpTask[aItem.id] + ") " + aProgress + " : " + aFileName);
-	},
-
-	onCaptureComplete : function(aItem)
-	{
-		SB_trace(sbCaptureTask.STRING.getString("CAPTURE_COMPLETE") + " : " + aItem.title);
-		if ( gContext != "indepth" && gURLs.length == 1 ) SB_fireNotification(aItem);
-		if ( gContext == "renew" || gContext == "renew-deep" )
-		{
-			sbCrossLinker.forceReloading(gPreset[0], gPreset[1]);
-			sbDataSource.init();
-			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gPreset[0]);
-			sbDataSource.setProperty(res, "chars", aItem.chars);
-			if ( gPreset[5] ) sbDataSource.setProperty(res, "type", "");
-		}
-		sbCaptureTask.succeed();
-	},
-
+		sbCrossLinker.forceReloading(gPreset[0], gPreset[1]);
+		sbDataSource.init();
+		var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gPreset[0]);
+		sbDataSource.setProperty(res, "chars", aItem.chars);
+		if ( gPreset[5] ) sbDataSource.setProperty(res, "type", "");
+	}
+	sbCaptureTask.succeed();
 };
 
 

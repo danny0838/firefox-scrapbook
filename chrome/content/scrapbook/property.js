@@ -58,12 +58,12 @@ var sbPropService = {
 			case "site"     : this.isTypeSite     = true; bundleName = "TYPE_INDEPTH";  break;
 		}
 		document.getElementById("sbPropType").value = this.STRING.getString(bundleName);
-		document.getElementById("sbPropSourceRow").setAttribute("hidden", this.isTypeFolder || this.isTypeNote);
-		document.getElementById("sbPropCharsRow").setAttribute("hidden",  this.isTypeFolder || this.isTypeFile || this.isTypeBookmark);
-		document.getElementById("sbPropIconMenu").setAttribute("hidden",  this.isTypeNote);
-		document.getElementById("sbPropMark").setAttribute("hidden", this.isTypeFolder || this.isTypeNote || this.isTypeFile || this.isTypeSite || this.isTypeBookmark);
+		document.getElementById("sbPropSourceRow").hidden = this.isTypeFolder || this.isTypeNote;
+		document.getElementById("sbPropCharsRow").hidden  = this.isTypeFolder || this.isTypeFile || this.isTypeBookmark;
+		document.getElementById("sbPropIconMenu").hidden  = this.isTypeNote;
+		document.getElementById("sbPropSizeRow").hidden   = this.isTypeFolder || this.isTypeBookmark;
+		document.getElementById("sbPropMark").hidden      = this.isTypeFolder || this.isTypeNote || this.isTypeFile || this.isTypeSite || this.isTypeBookmark;
 		document.getElementById("sbPropIconMenu").firstChild.firstChild.nextSibling.setAttribute("disabled", this.isTypeFolder || this.isTypeBookmark);
-		document.getElementById("sbPropSizeRow").setAttribute("hidden", this.isTypeFolder || this.isTypeBookmark);
 		if ( this.isTypeNote ) document.getElementById("sbPropTitle").removeAttribute("editable");
 		this.updateCommentTab(this.item.comment);
 		if ( !this.isTypeFolder && !this.isTypeBookmark ) setTimeout(function(){ sbPropService.delayedInit(); }, 0);
@@ -102,7 +102,7 @@ var sbPropService = {
 			{
 				sbDataSource.setProperty(this.resource, prop, this.item[prop]);
 			}
-			if ( !this.isTypeFolder ) sbCommonUtils.writeIndexDat(this.item);
+			if ( !this.isTypeFolder && !this.isTypeBookmark ) sbCommonUtils.writeIndexDat(this.item);
 			sbDataSource.flush();
 		}
 		if ( window.arguments[1] ) window.arguments[1].accept = true;
@@ -179,15 +179,8 @@ var sbPropService = {
 		var file  = sbCommonUtils.getContentDir(aID, true);
 		if ( !file ) return "";
 		file.append("index.html");
-		var content = sbCommonUtils.readFile(file);
-		try {
-			sbCommonUtils.UNICODE.charset = aChars;
-			content = sbCommonUtils.UNICODE.ConvertToUnicode(content);
-			var isMatch = content.match(/<title>([^<]+?)<\/title>/im);
-			if ( isMatch ) return RegExp.$1;
-		} catch(ex) {
-			return "";
-		}
+		var content = sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(file), aChars);
+		return content.match(/<title>([^<]+?)<\/title>/im) ? RegExp.$1 : "";
 	},
 
 	getTotalFileSize : function(aID)
@@ -206,12 +199,15 @@ var sbPropService = {
 		return [totalSize, totalFile];
 	},
 
-	formatFileSize : function(aSize)
+	formatFileSize : function(aBytes)
 	{
-		if ( aSize > 1000 * 1000 ) {
-			return this.divideBy100( Math.round( aSize / 1024 / 1024 * 100 ) ) + " MB";
+		if ( aBytes > 1000 * 1000 ) {
+			return this.divideBy100( Math.round( aBytes / 1024 / 1024 * 100 ) ) + " MB";
+		} else if ( aBytes == 0 ) {
+			return "0 KB";
 		} else {
-			return Math.round( aSize / 1024 ) + " KB";
+			var kbytes = Math.round( aBytes / 1024 );
+			return (kbytes == 0 ? 1 : kbytes) + " KB";
 		}
 	},
 

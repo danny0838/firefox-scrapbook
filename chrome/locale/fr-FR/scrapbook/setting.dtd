@@ -26,5 +26,6 @@
 <!ENTITY sb.pref.multibook.tips "Cette option vous permet de configurer des destinations multiples pour stocker vos données et basculer rapidement de l'une à l'autre avec un bouton de la barre d'outil.">
 <!ENTITY sb.pref.fileViewer "Programme pour le menu 'Afficher les fichiers'">
 <!ENTITY sb.pref.fileViewer.default "Par défaut (pour Windows, Explorer.)">
+<!ENTITY sb.button.customize "Personnaliser">
 <!ENTITY sb.button.browse "Parcourir">
 <!ENTITY sb.button.show "Afficher le dossier">

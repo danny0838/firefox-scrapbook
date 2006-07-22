@@ -12,9 +12,9 @@
 <!ENTITY sb.tools.sorttree "Сортировать все дерево">
 <!ENTITY sb.tools.output "Сохранить дерево страниц как HTML">
 <!ENTITY sb.tools.repair "Срочное восстановление">
-<!ENTITY sb.tools.addons "Add-on Functions">
-<!ENTITY sb.tools.tips "Подсказки в сети">
+<!ENTITY sb.tools.addons "Дополнения">
+<!ENTITY sb.tools.tips "Онлайн-советы">
 <!ENTITY sb.tools.homepage "Домашняя страница">
 <!ENTITY sb.tools.about "О программе">
-<!ENTITY sb.note.opentab "Открыть на вкладке">
+<!ENTITY sb.note.opentab "Открыть во вкладке">
 <!ENTITY sb.note.close "Закрыть">

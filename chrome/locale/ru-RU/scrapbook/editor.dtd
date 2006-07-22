@@ -1,25 +1,24 @@
-<!ENTITY sb.editor "Панель редактирования ScrapBook">
-<!ENTITY sb.editor.eraser "Очистка страницы: удаление блоков">
-<!ENTITY sb.editor.undo "Отменить">
-<!ENTITY sb.editor.restore "Отменить все правки и вернуться к первоначальному виду">
-<!ENTITY sb.editor.save "Зафиксировать правки">
-<!ENTITY sb.editor.comment "Расширить поле комментария">
-<!ENTITY sb.editor.sticky "Быстрое примечание">
-<!ENTITY sb.editor.sticky.create "Создать &sb.editor.sticky;">
-<!ENTITY sb.editor.inline.add "Добавить встроенное применчание к выделенному">
-<!ENTITY sb.editor.attach.file "Присоединить файл к выделенному">
-<!ENTITY sb.editor.attach.link "Присоединить ссылку к выделенному">
-<!ENTITY sb.editor.cutter "Удалить выделенное">
-<!ENTITY sb.editor.remove.iframe "Удалить все тэги IFRAME">
-<!ENTITY sb.editor.remove.script "Удалить все тэги SCRIPT">
+<!ENTITY sb.toolbar.edit "Edit Toolbar">
+<!ENTITY sb.toolbar.info "Info Toolbar">
+<!ENTITY sb.edit.eraser "Очистка страницы: удаление блоков">
+<!ENTITY sb.edit.undo "Отменить">
+<!ENTITY sb.edit.restore "Отменить все правки и вернуться к первоначальному виду">
+<!ENTITY sb.edit.save "Зафиксировать правки">
+<!ENTITY sb.edit.comment "Расширить поле комментария">
+<!ENTITY sb.edit.sticky "Быстрое примечание">
+<!ENTITY sb.edit.sticky.create "Создать &sb.edit.sticky;">
+<!ENTITY sb.edit.inline.add "Добавить встроенное применчание к выделенному">
+<!ENTITY sb.edit.attach.file "Присоединить файл к выделенному">
+<!ENTITY sb.edit.attach.link "Присоединить ссылку к выделенному">
+<!ENTITY sb.edit.cutter "Удалить выделенное">
+<!ENTITY sb.edit.remove.iframe "Удалить все тэги IFRAME">
+<!ENTITY sb.edit.remove.script "Удалить все тэги SCRIPT">
 <!ENTITY sb.highlighter "Тип выделения">
 <!ENTITY sb.highlighter.remove "Удалить подсветку в выделенном">
 <!ENTITY sb.highlighter.remove.all "Удалить все цветовые пометки">
-<!ENTITY sb.customize "Настроить">
-<!ENTITY sb.infobar.openSource "Открыть исходный URL">
-<!ENTITY sb.infobar.renew "Захватить снова">
-<!ENTITY sb.infobar.showIndicators "Показать индикаторы ссылок">
-<!ENTITY sb.infobar.showInfobar "Показать информационную панель">
-<!ENTITY sb.infobar.home "Домой">
-<!ENTITY sb.infobar.sitemap "Карта сайта">
+<!ENTITY sb.source "Открыть исходный URL">
+<!ENTITY sb.renew "Захватить снова">
 <!ENTITY sb.locate "Синхронизировать с деревом боковой панели">
+<!ENTITY sb.indicators "Показать индикаторы ссылок">
+<!ENTITY sb.info.home "Домой">
+<!ENTITY sb.info.sitemap "Карта сайта">

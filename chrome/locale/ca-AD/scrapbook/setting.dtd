@@ -26,5 +26,6 @@
 <!ENTITY sb.pref.multibook.tips "Aquesta opció us permet establir més d'un destí per a emmagatzemar les dades. Podreu canviar ràpidament de destí mitjançant un botó de la barra d'eines.">
 <!ENTITY sb.pref.fileViewer "Programa per a explorar els fitxers">
 <!ENTITY sb.pref.fileViewer.default "Per defecte (al Windows, segurament l'Explorer).">
+<!ENTITY sb.button.customize "Personalitza">
 <!ENTITY sb.button.browse "Navega">
 <!ENTITY sb.button.show "Mostra la carpeta">

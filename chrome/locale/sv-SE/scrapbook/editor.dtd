@@ -1,25 +1,24 @@
-<!ENTITY sb.editor "ScrapBooks verktygsfält för redigering">
-<!ENTITY sb.editor.eraser "DOM Eraser: Ett verktyg för att radera markerat block. ">
-<!ENTITY sb.editor.undo "Ångra">
-<!ENTITY sb.editor.restore "Ångra ändringar och återställ sidan">
-<!ENTITY sb.editor.save "Spara ändringar">
-<!ENTITY sb.editor.comment "Utöka kommentarytan">
-<!ENTITY sb.editor.sticky "Sticky Annotation">
-<!ENTITY sb.editor.sticky.create "Create &sb.editor.sticky;">
-<!ENTITY sb.editor.inline.add "Add Inline Annotation to Selection">
-<!ENTITY sb.editor.attach.file "Bifoga fil till markering">
-<!ENTITY sb.editor.attach.link "Bifoga länk till markering">
-<!ENTITY sb.editor.cutter "Radera markeringen">
-<!ENTITY sb.editor.remove.iframe "Tag bort alla IFRAME-taggar">
-<!ENTITY sb.editor.remove.script "Tag borta alla SCRIPT-taggar">
+<!ENTITY sb.toolbar.edit "Edit Toolbar">
+<!ENTITY sb.toolbar.info "Info Toolbar">
+<!ENTITY sb.edit.eraser "DOM Eraser: Ett verktyg för att radera markerat block. ">
+<!ENTITY sb.edit.undo "Ångra">
+<!ENTITY sb.edit.restore "Ångra ändringar och återställ sidan">
+<!ENTITY sb.edit.save "Spara ändringar">
+<!ENTITY sb.edit.comment "Utöka kommentarytan">
+<!ENTITY sb.edit.sticky "Sticky Annotation">
+<!ENTITY sb.edit.sticky.create "Create &sb.edit.sticky;">
+<!ENTITY sb.edit.inline.add "Add Inline Annotation to Selection">
+<!ENTITY sb.edit.attach.file "Bifoga fil till markering">
+<!ENTITY sb.edit.attach.link "Bifoga länk till markering">
+<!ENTITY sb.edit.cutter "Radera markeringen">
+<!ENTITY sb.edit.remove.iframe "Tag bort alla IFRAME-taggar">
+<!ENTITY sb.edit.remove.script "Tag borta alla SCRIPT-taggar">
 <!ENTITY sb.highlighter "Highlighter">
 <!ENTITY sb.highlighter.remove "Avlägsna färgmarkeringar i markeringen">
 <!ENTITY sb.highlighter.remove.all "Avlägsna alla färgmarkeringar">
-<!ENTITY sb.customize "Customize">
-<!ENTITY sb.infobar.openSource "Öppna URL som posten sparades från">
-<!ENTITY sb.infobar.renew "Capture Again">
-<!ENTITY sb.infobar.showIndicators "Show Link Indicators">
-<!ENTITY sb.infobar.showInfobar "Show Info Toolbar">
-<!ENTITY sb.infobar.home "Hem">
-<!ENTITY sb.infobar.sitemap "Översikt">
+<!ENTITY sb.source "Öppna URL som posten sparades från">
+<!ENTITY sb.renew "Capture Again">
 <!ENTITY sb.locate "Synkronisera med träd i sidofönstret">
+<!ENTITY sb.indicators "Show Link Indicators">
+<!ENTITY sb.info.home "Hem">
+<!ENTITY sb.info.sitemap "Översikt">

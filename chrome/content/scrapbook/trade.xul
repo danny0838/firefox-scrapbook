@@ -131,16 +131,17 @@
 
 	<listbox id="sbTradeLog" class="plain" />
 
-	<statusbar id="sbStatus">
-		<hbox align="center" flex="1" id="sbStatusBox">
-			<image id="sbStatusImage" />
-			<label id="sbStatusLabel" crop="end" flex="1" value="" />
-		</hbox>
-		<progressmeter id="sbTradeProgress" mode="determined" value="0" width="160" hidden="true" />
+	<!--status-->
+	<statusbar id="status-bar" class="chromeclass-status">
+		<statusbarpanel id="statusbar-display" flex="1" />
+		<statusbarpanel id="statusbar-progresspanel" class="statusbarpanel-progress" collapsed="true">
+			<progressmeter id="sbTradeProgress" mode="determined" value="0" width="160" />
+		</statusbarpanel>
 	</statusbar>
 
-	<vbox id="sbStatus2" hidden="true">
-		<textbox id="sbStatus2Label" flex="1" readonly="true" width="250" />
+	<!--status2-->
+	<vbox id="sbStatusBox" hidden="true">
+		<textbox id="sbStatusText" flex="1" readonly="true" width="250" />
 	</vbox>
 
 </window>

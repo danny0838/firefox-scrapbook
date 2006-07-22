@@ -157,7 +157,7 @@
 								<treecell id="sbTreeItem"
 								          label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title"
 								          src="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon"
-								          properties="Name rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type"/>
+								          properties="Name rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
 								<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#source" />
 								<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
 								<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon" />
@@ -177,6 +177,8 @@
 	<vbox id="sbListOuter" flex="1" persist="height" hidden="true" style="height:200px;" />
 
 	<!--status-->
-	<sidebarheader id="sbStatus" />
+	<statusbar id="status-bar" class="chromeclass-status">
+		<statusbarpanel id="statusbar-display" flex="1" />
+	</statusbar>
 
 </window>

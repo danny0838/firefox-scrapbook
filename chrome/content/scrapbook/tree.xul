@@ -61,7 +61,7 @@
 			<menuitem id="sbPopupProperty"  class="menuitem-iconic" label="&sb.property;" oncommand="sbController.forward(null,'P');" />
 		</popup>
 		<!--search popup-->
-		<popup id="sbSearchPopup" onpopupshowing="document.getElementById('sbSearchTextbox').select();" position="after_start">
+		<popup id="sbSearchPopup" onpopupshowing="sbSearchService.populatePopup();document.getElementById('sbSearchTextbox').select();" position="after_start">
 			<menuitem id="sbSearchPopupF" label="&sb.search.fulltext;" type="radio" oncommand="sbSearchService.change('fulltext');" />
 			<menuseparator />
 			<menuitem id="sbSearchPopupT" label="&sb.prop.title;"   type="radio" oncommand="sbSearchService.change('title');" />
@@ -148,20 +148,12 @@
 
 	<!--multibook-->
 	<toolbarbutton id="mbToolbarButton" type="menu" tooltiptext="Multi-ScrapBook" onpopupshowing="sbMultiBookService.initMenu();" hidden="true">
-		<menupopup id="mbMenuPopup">
-			<menuitem id="mbMenuItem" type="radio" hidden="true" oncommand="sbMultiBookService.change(this, false);" />
-			<menuitem id="mbMenuItemDefault" label="&mb.profileFolder;" type="radio" oncommand="sbMultiBookService.change(this, true);" />
+		<menupopup id="mbMenuPopup" oncommand="sbMultiBookService.change(event.originalTarget);">
+			<menuitem id="mbMenuItem" type="radio" autocheck="false" hidden="true" />
+			<menuitem id="mbMenuItemDefault" label="&mb.profileFolder;" type="radio" autocheck="false" />
 			<menuseparator />
-			<menuitem label="&mb.configure;..." oncommand="sbMultiBookService.config();" />
+			<menuitem label="&mb.configure;..." oncommand="sbMultiBookService.config();event.preventBubble();" />
 		</menupopup>
 	</toolbarbutton>
-
-	<!--statusbar-->
-	<sidebarheader id="sbStatus" align="center" style="padding-left:2px;">
-		<hbox align="center" flex="1" id="sbStatusBox">
-			<image id="sbStatusImage" />
-			<label id="sbStatusLabel" crop="end" flex="1" value="" />
-		</hbox>
-	</sidebarheader>
 
 </overlay>

@@ -106,7 +106,7 @@ var sbNoteService = {
 	getContentFromFile : function(aFile)
 	{
 		var content = sbCommonUtils.readFile(aFile);
-		content = sbCommonUtils.convertStringToUTF8(content);
+		content = sbCommonUtils.convertToUnicode(content, "UTF-8");
 		content = content.replace(this.HTML_HEAD, "");
 		content = content.replace(this.HTML_FOOT, "");
 		return content;

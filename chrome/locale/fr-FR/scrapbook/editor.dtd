@@ -1,25 +1,24 @@
-<!ENTITY sb.editor "Barre d'outil d'édition ScrapBook">
-<!ENTITY sb.editor.eraser "DOM Eraser: un outil pour supprimer un bloc sélectionné.">
-<!ENTITY sb.editor.undo "Annuler">
-<!ENTITY sb.editor.restore "Abandonner les changements et restaurer">
-<!ENTITY sb.editor.save "Sauvegarder les changements">
-<!ENTITY sb.editor.comment "Déployer la zone de commentaire">
-<!ENTITY sb.editor.sticky "Note collante">
-<!ENTITY sb.editor.sticky.create "Créer &sb.editor.sticky;">
-<!ENTITY sb.editor.inline.add "Ajouter une annotation à la sélection">
-<!ENTITY sb.editor.attach.file "Attacher un fichier à la sélection">
-<!ENTITY sb.editor.attach.link "Attacher un lien à la sélection">
-<!ENTITY sb.editor.cutter "Supprimer la sélection">
-<!ENTITY sb.editor.remove.iframe "Supprimer toutes les balises IFRAME">
-<!ENTITY sb.editor.remove.script "Supprimer toutes les balises SCRIPT">
+<!ENTITY sb.toolbar.edit "Barre d'outil d'édition">
+<!ENTITY sb.toolbar.info "Barre d'information">
+<!ENTITY sb.edit.eraser "DOM Eraser: un outil pour supprimer un bloc sélectionné.">
+<!ENTITY sb.edit.undo "Annuler">
+<!ENTITY sb.edit.restore "Abandonner les changements et restaurer">
+<!ENTITY sb.edit.save "Sauvegarder les changements">
+<!ENTITY sb.edit.comment "Déployer la zone de commentaire">
+<!ENTITY sb.edit.sticky "Note collante">
+<!ENTITY sb.edit.sticky.create "Créer &sb.edit.sticky;">
+<!ENTITY sb.edit.inline.add "Ajouter une annotation à la sélection">
+<!ENTITY sb.edit.attach.file "Attacher un fichier à la sélection">
+<!ENTITY sb.edit.attach.link "Attacher un lien à la sélection">
+<!ENTITY sb.edit.cutter "Supprimer la sélection">
+<!ENTITY sb.edit.remove.iframe "Supprimer toutes les balises IFRAME">
+<!ENTITY sb.edit.remove.script "Supprimer toutes les balises SCRIPT">
 <!ENTITY sb.highlighter "Surligneur">
 <!ENTITY sb.highlighter.remove "Supprimer les surlignages de la sélection">
 <!ENTITY sb.highlighter.remove.all "Supprimer tous les surlignages">
-<!ENTITY sb.customize "Personnaliser">
-<!ENTITY sb.infobar.openSource "Ouvrir l'URL de la source">
-<!ENTITY sb.infobar.renew "Capturer à nouveau">
-<!ENTITY sb.infobar.showIndicators "Montrer les indicateurs de lien">
-<!ENTITY sb.infobar.showInfobar "Montrer la barre d'information">
-<!ENTITY sb.infobar.home "Origine">
-<!ENTITY sb.infobar.sitemap "Plan du site">
+<!ENTITY sb.source "Ouvrir l'URL de la source">
+<!ENTITY sb.renew "Capturer à nouveau">
 <!ENTITY sb.locate "Synchroniser avec l'arborescence de la barre latérale">
+<!ENTITY sb.indicators "Montrer les indicateurs de lien">
+<!ENTITY sb.info.home "Origine">
+<!ENTITY sb.info.sitemap "Plan du site">

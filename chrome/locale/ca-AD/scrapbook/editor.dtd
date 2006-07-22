@@ -1,25 +1,24 @@
-<!ENTITY sb.editor "Barra d'eines d'edició de l'ScrapBook">
-<!ENTITY sb.editor.eraser "Esborrador DOM: Una eina per a suprimir elements d'una pàgina web.">
-<!ENTITY sb.editor.undo "Desfés">
-<!ENTITY sb.editor.restore "Abandona els canvis i restaura">
-<!ENTITY sb.editor.save "Desa els canvis">
-<!ENTITY sb.editor.comment "Expandeix/Redueix l'àrea de comentaris">
-<!ENTITY sb.editor.sticky "Nota adhesiva">
-<!ENTITY sb.editor.sticky.create "Crea una nota adhesiva">
-<!ENTITY sb.editor.inline.add "Afegeix una anotació a la selecció">
-<!ENTITY sb.editor.attach.file "Adjunta un fitxer a la selecció">
-<!ENTITY sb.editor.attach.link "Adjunta un enllaç a la selecció">
-<!ENTITY sb.editor.cutter "Suprimeix la selecció">
-<!ENTITY sb.editor.remove.iframe "Suprimeix totes les etiquetes IFRAME">
-<!ENTITY sb.editor.remove.script "Suprimeix totes les etiquetes SCRIPT">
+<!ENTITY sb.toolbar.edit "Barra d'eines d'edició">
+<!ENTITY sb.toolbar.info "Barra d'informació">
+<!ENTITY sb.edit.eraser "Esborrador DOM: Una eina per a suprimir elements d'una pàgina web.">
+<!ENTITY sb.edit.undo "Desfés">
+<!ENTITY sb.edit.restore "Abandona els canvis i restaura">
+<!ENTITY sb.edit.save "Desa els canvis">
+<!ENTITY sb.edit.comment "Expandeix/Redueix l'àrea de comentaris">
+<!ENTITY sb.edit.sticky "Nota adhesiva">
+<!ENTITY sb.edit.sticky.create "Crea una nota adhesiva">
+<!ENTITY sb.edit.inline.add "Afegeix una anotació a la selecció">
+<!ENTITY sb.edit.attach.file "Adjunta un fitxer a la selecció">
+<!ENTITY sb.edit.attach.link "Adjunta un enllaç a la selecció">
+<!ENTITY sb.edit.cutter "Suprimeix la selecció">
+<!ENTITY sb.edit.remove.iframe "Suprimeix totes les etiquetes IFRAME">
+<!ENTITY sb.edit.remove.script "Suprimeix totes les etiquetes SCRIPT">
 <!ENTITY sb.highlighter "Ressaltat">
 <!ENTITY sb.highlighter.remove "Suprimeix els ressaltats de la selecció">
 <!ENTITY sb.highlighter.remove.all "Suprimeix tots els ressaltats">
-<!ENTITY sb.customize "Personalitza">
-<!ENTITY sb.infobar.openSource "Obre l'URL font">
-<!ENTITY sb.infobar.renew "Torna a capturar-ho">
-<!ENTITY sb.infobar.showIndicators "Mostra els indicadors d'enllaços">
-<!ENTITY sb.infobar.showInfobar "Mostra la barra d'informació">
-<!ENTITY sb.infobar.home "Inici">
-<!ENTITY sb.infobar.sitemap "Mapa web">
+<!ENTITY sb.source "Obre l'URL font">
+<!ENTITY sb.renew "Torna a capturar-ho">
 <!ENTITY sb.locate "Selecciona-ho a l'arbre de la barra lateral">
+<!ENTITY sb.indicators "Mostra els indicadors d'enllaços">
+<!ENTITY sb.info.home "Inici">
+<!ENTITY sb.info.sitemap "Mapa web">

@@ -1,25 +1,24 @@
-<!ENTITY sb.editor "Dossziészerkesztő eszköztár">
-<!ENTITY sb.editor.eraser "DOM-radír: A weboldalon rákattintott elemek eltávolításának eszköze">
-<!ENTITY sb.editor.undo "Visszavonás">
-<!ENTITY sb.editor.restore "A változtatások visszavonása és visszaállítás">
-<!ENTITY sb.editor.save "A változtatások mentése">
-<!ENTITY sb.editor.comment "A jegyzetek területének megnövelése">
-<!ENTITY sb.editor.sticky "Sticky Annotation">
-<!ENTITY sb.editor.sticky.create "Create &sb.editor.sticky;">
-<!ENTITY sb.editor.inline.add "Add Inline Annotation to Selection">
-<!ENTITY sb.editor.attach.file "Fájl csatolása a kijelöléshez">
-<!ENTITY sb.editor.attach.link "Hivatkozás csatolása a kijelöléshez">
-<!ENTITY sb.editor.cutter "A kijelölés eltávolítása">
-<!ENTITY sb.editor.remove.iframe "Az összes IFRAME kódelem eltávolítása">
-<!ENTITY sb.editor.remove.script "Az összes SCRIPT kódelem eltávolítása">
+<!ENTITY sb.toolbar.edit "Edit Toolbar">
+<!ENTITY sb.toolbar.info "Info Toolbar">
+<!ENTITY sb.edit.eraser "DOM-radír: A weboldalon rákattintott elemek eltávolításának eszköze">
+<!ENTITY sb.edit.undo "Visszavonás">
+<!ENTITY sb.edit.restore "A változtatások visszavonása és visszaállítás">
+<!ENTITY sb.edit.save "A változtatások mentése">
+<!ENTITY sb.edit.comment "A jegyzetek területének megnövelése">
+<!ENTITY sb.edit.sticky "Sticky Annotation">
+<!ENTITY sb.edit.sticky.create "Create &sb.edit.sticky;">
+<!ENTITY sb.edit.inline.add "Add Inline Annotation to Selection">
+<!ENTITY sb.edit.attach.file "Fájl csatolása a kijelöléshez">
+<!ENTITY sb.edit.attach.link "Hivatkozás csatolása a kijelöléshez">
+<!ENTITY sb.edit.cutter "A kijelölés eltávolítása">
+<!ENTITY sb.edit.remove.iframe "Az összes IFRAME kódelem eltávolítása">
+<!ENTITY sb.edit.remove.script "Az összes SCRIPT kódelem eltávolítása">
 <!ENTITY sb.highlighter "Szövegkiemelő">
 <!ENTITY sb.highlighter.remove "A kiemelések eltávolítása a kijelölésből">
 <!ENTITY sb.highlighter.remove.all "Az összes kijelölés törlése">
-<!ENTITY sb.customize "Testreszabás">
-<!ENTITY sb.infobar.openSource "A forráswebcím megnyitása">
-<!ENTITY sb.infobar.renew "Capture Again">
-<!ENTITY sb.infobar.showIndicators "Show Link Indicators">
-<!ENTITY sb.infobar.showInfobar "Az információs eszköztár megjelenítése">
-<!ENTITY sb.infobar.home "Kezdőlap">
-<!ENTITY sb.infobar.sitemap "Helyszerkezet">
+<!ENTITY sb.source "A forráswebcím megnyitása">
+<!ENTITY sb.renew "Capture Again">
 <!ENTITY sb.locate "A hely meghatározása az Oldalsávban">
+<!ENTITY sb.indicators "Show Link Indicators">
+<!ENTITY sb.info.home "Kezdőlap">
+<!ENTITY sb.info.sitemap "Helyszerkezet">

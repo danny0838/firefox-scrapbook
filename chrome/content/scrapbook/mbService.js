@@ -3,7 +3,6 @@ var sbMultiBookService = {
 
 	enabled : false,
 	file : null,
-	flag : false,
 
 	showButton : function()
 	{
@@ -19,105 +18,76 @@ var sbMultiBookService = {
 			nsPreferences.setBoolPref("scrapbook.multibook.enabled", true);
 		}
 		if ( !this.enabled ) return;
-		var refWin = "sbPageEditor" in window.top ? window.top : window.opener.top;
-		var title = refWin.sbPageEditor.dataTitle;
+		var refWin = "sbBrowserOverlay" in window.top ? window.top : window.opener.top;
+		var title = refWin.sbBrowserOverlay.dataTitle;
 		if ( !title )
 		{
 			title = nsPreferences.copyUnicharPref("scrapbook.data.title", "");
-			refWin.sbPageEditor.dataTitle = title;
+			refWin.sbBrowserOverlay.dataTitle = title;
 		}
 		if ( title ) refWin.document.getElementById("sidebar-title").value = "ScrapBook [" + title + "]";
 	},
 
 	initMenu : function()
 	{
-		if ( this.flag ) return;
-		this.flag = true;
-		this.initFile();
 		var isDefault = nsPreferences.getBoolPref("scrapbook.data.default", true);
 		var dataPath  = nsPreferences.copyUnicharPref("scrapbook.data.path", "");
 		var popup = document.getElementById("mbMenuPopup");
-		var items = this.getListFromFile();
-		for ( var i = items.length - 1; i >= 0; i-- )
+		if ( !this.file )
 		{
-			var elem = document.getElementById("mbMenuItem").cloneNode(false);
-			elem.removeAttribute("id");
-			elem.setAttribute("hidden", false);
-			elem.setAttribute("label", items[i][0]);
-			elem.setAttribute("path",  items[i][1]);
-			if ( !isDefault && items[i][1] == dataPath ) elem.setAttribute("checked", true);
-			popup.insertBefore(elem, popup.firstChild);
+			var items = this.initFile();
+			for ( var i = items.length - 1; i >= 0; i-- )
+			{
+				var elem = document.getElementById("mbMenuItem").cloneNode(false);
+				elem.removeAttribute("id");
+				elem.setAttribute("hidden", false);
+				elem.setAttribute("label", items[i][0]);
+				elem.setAttribute("path",  items[i][1]);
+				popup.insertBefore(elem, popup.firstChild);
+			}
+		}
+		var nodes = popup.childNodes;
+		for ( var i = 0; i < nodes.length; i++ )
+		{
+			if ( !isDefault && nodes[i].getAttribute("path") == dataPath ) return nodes[i].setAttribute("checked", true);
 		}
 		if ( isDefault ) document.getElementById("mbMenuItemDefault").setAttribute("checked", true);
 	},
 
 	initFile : function()
 	{
-		var profDir = sbCommonUtils.DIR.get("ProfD", Components.interfaces.nsIFile);
-		this.file = profDir.clone();
+		this.file = sbCommonUtils.DIR.get("ProfD", Components.interfaces.nsIFile).clone();
 		this.file.append("ScrapBook");
 		this.file.append("multibook.txt");
 		if ( !this.file.exists() )
 		{
-			var oldFile = profDir.clone();
-			oldFile.append("ScrapBookPlus");
-			oldFile.append("multibook.dat");
-			if ( oldFile.exists() )
-			{
-				var newFile = profDir.clone();
-				newFile.append("ScrapBook");
-				oldFile.moveTo(newFile, "multibook.txt");
-				newFile.append("multibook.dat");
-				this.file = newFile;
-			}
-			else
-				this.file.create(this.file.NORMAL_FILE_TYPE, 0666);
+			this.file.create(this.file.NORMAL_FILE_TYPE, 0666);
+			var path = nsPreferences.copyUnicharPref("scrapbook.data.path", "");
+			if ( path ) sbCommonUtils.writeFile(this.file, "My ScrapBook\t" + path + "\n", "UTF-8");
 		}
-	},
-
-	getListFromFile : function()
-	{
 		var ret = [];
-		var lines = sbCommonUtils.convertStringToUTF8(sbCommonUtils.readFile(this.file)).split("\n");
+		var lines = sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(this.file), "UTF-8").split("\n");
 		for ( var i = 0; i < lines.length; i++ )
 		{
 			var item = lines[i].replace(/\r|\n/g, "").split("\t");
-			if ( item.length != 2 ) continue;
-			ret.push(item);
+			if ( item.length == 2 ) ret.push(item);
 		}
 		return ret;
 	},
 
-	change : function(aItem, isDefault)
+	change : function(aItem)
 	{
 		if ( !this.validateRefresh() ) return;
-		var file, prefVal;
-		try {
-			file = sbCommonUtils.getScrapBookDir().clone();
-			file.append("folders.txt");
-			prefVal = nsPreferences.copyUnicharPref("scrapbook.tree.folderList", "");
-			if ( prefVal )
-			{
-				sbCommonUtils.writeFile(file, prefVal, "UTF-8");
-			}
-		} catch(ex) {
-		}
-		nsPreferences.setBoolPref("scrapbook.data.default", isDefault);
-		if ( !isDefault ) nsPreferences.setUnicharPref("scrapbook.data.path", aItem.getAttribute("path"));
-		try {
-			file = sbCommonUtils.getScrapBookDir().clone();
-			file.append("folders.txt");
-			prefVal = sbCommonUtils.readFile(file);
-			if ( prefVal )
-			{
-				nsPreferences.setUnicharPref("scrapbook.tree.folderList", prefVal);
-			}
-		} catch(ex) {
-		}
+		aItem.setAttribute("checked", true);
+		this.readWritePref(false);
+		var path = aItem.getAttribute("path");
+		nsPreferences.setBoolPref("scrapbook.data.default", path == "");
+		if ( path != "" ) nsPreferences.setUnicharPref("scrapbook.data.path", path);
+		this.readWritePref(true);
 		nsPreferences.setUnicharPref("scrapbook.data.title", aItem.label);
 		try {
-			var refWin = "sbPageEditor" in window.top ? window.top : window.opener.top;
-			refWin.sbPageEditor.dataTitle = aItem.label;
+			var refWin = "sbBrowserOverlay" in window.top ? window.top : window.opener.top;
+			refWin.sbBrowserOverlay.dataTitle = aItem.label;
 		} catch(ex) {
 		}
 		this.refreshGlobal();
@@ -129,6 +99,23 @@ var sbMultiBookService = {
 		}
 		else
 			sbMainService.refresh();
+	},
+
+	readWritePref : function(aReadWrite)
+	{
+		var file, pref;
+		try {
+			file = sbCommonUtils.getScrapBookDir().clone();
+			file.append("folders.txt");
+			if ( aReadWrite ) {
+				pref = sbCommonUtils.readFile(file);
+				if ( pref ) nsPreferences.setUnicharPref("scrapbook.tree.folderList", pref);
+			} else {
+				pref = nsPreferences.copyUnicharPref("scrapbook.tree.folderList", "");
+				if ( pref ) sbCommonUtils.writeFile(file, pref, "UTF-8");
+			}
+		} catch(ex) {
+		}
 	},
 
 
@@ -155,7 +142,7 @@ var sbMultiBookService = {
 			var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
 			try {
 				win.sbBrowserOverlay.refresh();
-				win.sbBrowserOverlay.onLocationChange();
+				win.sbBrowserOverlay.onLocationChange(win.gBrowser.currentURI.spec);
 				win.document.getElementById("sidebar").contentWindow.sbMainService.refresh();
 			} catch(ex) {
 			}

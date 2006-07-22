@@ -26,5 +26,6 @@
 <!ENTITY sb.pref.multibook.tips "Tato možnost vám dovolí nastavit více cest kam se budou ukládat data a jejich rychlé přepínání mezi nimi pomocí tlačítka na nástrojové liště.">
 <!ENTITY sb.pref.fileViewer "Program pro 'Procházení souborů'">
 <!ENTITY sb.pref.fileViewer.default "Standardní (Na Windows pravděpodobně Explorer)">
+<!ENTITY sb.button.customize "Přizpůsobit">
 <!ENTITY sb.button.browse "Procházet">
 <!ENTITY sb.button.show "Zobrazit složku">

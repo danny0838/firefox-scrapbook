@@ -8,12 +8,14 @@
 <!DOCTYPE wizard [
 <!ENTITY % editorDTD   SYSTEM "chrome://scrapbook/locale/editor.dtd" >
 %editorDTD;
+<!ENTITY % settingDTD   SYSTEM "chrome://scrapbook/locale/setting.dtd" >
+%settingDTD;
 <!ENTITY % hlCustomDTD SYSTEM "chrome://scrapbook/locale/hlCustom.dtd" >
 %hlCustomDTD;
 ]>
 
 <dialog id="hlCustomizeDialog"
-        title="&sb.customize; - &sb.highlighter;"
+        title="&sb.button.customize; - &sb.highlighter;"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         buttonlabelextra2="&sb.hlCustom.preset; 0/8"
         onload="hlCustomizer.init();"

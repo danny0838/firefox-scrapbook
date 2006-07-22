@@ -131,7 +131,7 @@ var sbTreeHandler = {
 		var rmIDs = sbController.removeInternal(resList, parList, false);
 		if ( rmIDs )
 		{
-			sbStatusHandler.trace(sbMainService.STRING.getFormattedString("ITEMS_REMOVED", [rmIDs.length]));
+			sbMainService.trace(sbMainService.STRING.getFormattedString("ITEMS_REMOVED", [rmIDs.length]));
 			if ( "sbNoteService" in window && sbNoteService.resource && sbNoteService.resource.Value.substring(18,32) == rmIDs[0] ) sbNoteService.exit(false);
 		}
 	},

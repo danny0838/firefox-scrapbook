@@ -8,5 +8,5 @@
 <!ENTITY sb.note.autolinefeed.t "Ajouter les balises &lt;br&gt; à la fin des lignes en mode aperçu HTML">
 <!ENTITY sb.note.fontsize "Taille de police">
 <!ENTITY sb.note.help "Aide">
-<!ENTITY sb.note.print "Print">
+<!ENTITY sb.note.print "Imprimer">
 <!ENTITY sb.note.exit "Quitter">

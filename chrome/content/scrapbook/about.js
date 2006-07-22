@@ -1,6 +1,6 @@
 
-const kVERSION = "1.0.6";
-const kBUILD_TEXT = " (Build ID 20060602)";
+const kVERSION = "1.1";
+const kBUILD_TEXT = " (Build ID 20060722)";
 const kUPDATE_URL = "http://amb.vis.ne.jp/mozilla/scrapbook/update.rdf";
 
 var gAboutString;
@@ -15,8 +15,12 @@ function SB_initAbout()
 	gUpdateImage = document.getElementById("sbUpdateImage");
 	gUpdateLabel = document.getElementById("sbUpdateLabel");
 	document.getElementById("sbAboutVersion").value = "Version " + kVERSION + kBUILD_TEXT;
-	gUpdateImage.setAttribute("src", "chrome://scrapbook/skin/status_busy.gif");
-	gUpdateLabel.setAttribute("value", gAboutString.getString("CHECKING"));
+	gUpdateImage.src = "chrome://scrapbook/skin/status_busy.gif";
+	try {
+		gUpdateLabel.value = gAboutString.getString("updatingMessage");
+	} catch(ex) {
+		gUpdateLabel.value = gAboutString.getString("updatingMsg");
+	}
 	setTimeout(SB_setUpdateInfo, 500);
 }
 
@@ -34,7 +38,6 @@ function SB_visit(aElem)
 
 function SB_secret()
 {
-	window.opener.sbStatusHandler.httpBusy(5, "32% : product-mozilla-screen");
 	window.opener.top.document.getElementById("sidebar-box").width = window.opener.top.outerWidth < 800 ? 190 : 200;
 	setTimeout(function() { window.opener.top.document.getElementById("statusbar-display").label = "Transferring data from www.mozilla.org..."; }, 0);
 }
@@ -42,49 +45,49 @@ function SB_secret()
 
 function SB_setUpdateInfo()
 {
-	var httpReq = new XMLHttpRequest();
-	httpReq.parent = this;
-	httpReq.open("GET", kUPDATE_URL + "?ver=" + kVERSION);
-
-	httpReq.onerror = function(aEvent)
-	{
-		gUpdateLabel.setAttribute("value", gAboutString.getString("CHECK_FAILURE"));
-		SB_removeUpdateImage();
-	};
-	httpReq.onload = function(aEvent)
+	var req = new XMLHttpRequest();
+	req.open("GET", kUPDATE_URL + "?ver=" + kVERSION);
+	req.onload = function(aEvent)
 	{
 		try {
-			var latestVer = httpReq.responseXML.getElementsByTagNameNS("http://www.mozilla.org/2004/em-rdf#", "version")[0].textContent;
+			var latestVer = req.responseXML.getElementsByTagNameNS("http://www.mozilla.org/2004/em-rdf#", "version")[0].textContent;
 			const VER_COMP = Components.classes['@mozilla.org/xpcom/version-comparator;1'].getService(Components.interfaces.nsIVersionComparator);
 			if ( VER_COMP.compare(latestVer, kVERSION) > 0 ) {
-				gUpdateLabel.setAttribute("value", gAboutString.getFormattedString("NEW_VERSION_AVAILABLE", [latestVer]));
-				gUpdateLabel.setAttribute("class", "link");
-				gUpdateLabel.setAttribute("style", "font-weight:bold;");
+				try {
+					gUpdateLabel.value = gAboutString.getFormattedString("updateAvailableMessage", [latestVer, kVERSION]);
+				} catch(ex) {
+					gUpdateLabel.value = gAboutString.getFormattedString("updateAvailableMsg", [latestVer]);
+				}
+				gUpdateLabel.className = "link";
+				gUpdateLabel.style.fontWeight = "bold";
+				gUpdateLabel.onclick = function(){ sbCommonUtils.loadURL("http://amb.vis.ne.jp/mozilla/scrapbook/"); window.close(); };
 			} else {
-				gUpdateLabel.setAttribute("value", gAboutString.getString("NO_UPDATES_FOUND"));
+				try {
+					gUpdateLabel.setAttribute("value", gAboutString.getString("updateNoUpdateMessage"));
+				} catch(ex) {
+					gUpdateLabel.setAttribute("value", gAboutString.getString("updateNoUpdateMsg"));
+				}
 			}
 		} catch(ex) {
-			gUpdateLabel.setAttribute("value", gAboutString.getString("CHECK_FAILURE"));
+			SB_onUpdateError();
 		}
-		SB_removeUpdateImage();
+		gUpdateImage.src = "";
 	};
-
 	try {
-		httpReq.setRequestHeader("User-Agent", "ScrapBook/" + kVERSION);
-		httpReq.overrideMimeType("application/xml");
-		httpReq.send(null);
+		req.setRequestHeader("User-Agent", "ScrapBook/" + kVERSION);
+		req.overrideMimeType("application/xml");
+		req.send(null);
 	} catch(ex) {
-		httpReq.abort();
-		gUpdateLabel.setAttribute("value", gAboutString.getString("CHECK_FAILURE"));
-		SB_removeUpdateImage();
+		req.abort();
+		SB_onUpdateError();
 	}
 }
 
 
-function SB_removeUpdateImage()
+function SB_onUpdateError()
 {
-	gUpdateImage.removeAttribute("src");
-	gUpdateImage.removeAttribute("style");
+	gUpdateLabel.value = gAboutString.getString("updateErrorMessage");
+	gUpdateImage.src = "";
 }
 
 

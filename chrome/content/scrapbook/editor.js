@@ -1,64 +1,65 @@
 
 var sbPageEditor = {
 
-	get STRING()  { return document.getElementById("ScrapBookEditString"); },
 	get TOOLBAR() { return document.getElementById("ScrapBookEditor"); },
 	get COMMENT() { return document.getElementById("ScrapBookEditComment"); },
 
-	item : null,
+	item : {},
 	changed1 : false,
 	changed2 : false,
 	multiline : false,
-	frameList : [],
 	focusedWindow : null,
 	savedBody : null,
 
-	init : function()
+	init : function(aID)
 	{
-		if ( !sbDataSource.exists(sbBrowserOverlay.resource) ) { this.disable(true); return; }
-		this.disable(false);
+		if ( aID )
+		{
+			if ( aID != sbBrowserOverlay.getID() ) return;
+			if ( !sbDataSource.exists(sbBrowserOverlay.resource) ) { this.disable(true); return; }
+		}
 		this.changed1 = false;
 		this.changed2 = false;
-		this.item = new ScrapBookItem(sbDataSource.getProperty(sbBrowserOverlay.resource, "id"));
-		for ( var prop in this.item )
-		{
-			this.item[prop] = sbDataSource.getProperty(sbBrowserOverlay.resource, prop);
+		if ( aID ) {
+			this.item = new ScrapBookItem(aID);
+			for ( var prop in this.item ) this.item[prop] = sbDataSource.getProperty(sbBrowserOverlay.resource, prop);
+		} else {
+			this.item = null;
+			sbBrowserOverlay.resource = null;
 		}
-		document.getElementById("ScrapBookEditTitle").value = this.item.title;
-		try { document.getElementById("ScrapBookEditTitle").editor.transactionManager.clear(); } catch(ex) {}
-		document.getElementById("ScrapBookEditIcon").src    = this.item.icon ? this.item.icon : sbCommonUtils.getDefaultIcon();
-		this.COMMENT.value = "";
+		this.disable(false);
 		this.showHide(true);
-		setTimeout(function(){ sbPageEditor.delayedInit(); }, 100);
-	},
-
-	delayedInit : function()
-	{
-		sbPageEditor.allowUndo(null);
-		this.COMMENT.value = this.item.comment.replace(/ __BR__ /g, this.multiline ? "\n" : "\t");
+		if ( !aID )
+		{
+			document.getElementById("ScrapBookToolbox").hidden = false;
+			sbInfoViewer.TOOLBAR.hidden = true;
+		}
+		document.getElementById("ScrapBookEditTitle").value =  aID ? this.item.title : gBrowser.selectedTab.label;
+		document.getElementById("ScrapBookEditIcon").src    = (aID ? this.item.icon  : gBrowser.selectedTab.getAttribute("image")) || sbCommonUtils.getDefaultIcon();
+		try { document.getElementById("ScrapBookEditTitle").editor.transactionManager.clear(); } catch(ex) {}
+		this.COMMENT.value = aID ? this.item.comment.replace(/ __BR__ /g, this.multiline ? "\n" : "\t") : "";
 		try { this.COMMENT.editor.transactionManager.clear(); } catch(ex) {}
-		if ( gBrowser.currentURI.spec.indexOf("index.html") > 0 )
+		if ( aID && gBrowser.currentURI.spec.indexOf("index.html") > 0 )
 		{
 			gBrowser.selectedTab.label = this.item.title;
 			gBrowser.selectedTab.setAttribute("image", this.item.icon);
 		}
-		document.getElementById("ScrapBookEditEraser").checked = false;
+		sbPageEditor.allowUndo(null);
 		sbDOMEraser.init(0);
-		this.frameList = [window._content];
-		this.getFrameList(window._content);
-		for ( var i = 0; i < this.frameList.length; i++ )
+		sbContentSaver.frameList = sbContentSaver.flattenFrames(window._content);
+		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
 		{
-			this.frameList[i].onmousedown = function(aEvent){ sbAnnotationService.handleMouseDown(aEvent); };
-			this.frameList[i].onkeypress  = function(aEvent){ sbPageEditor.handleKeypress(aEvent); };
-			if ( document.getElementById("ScrapBookInfoPopupI").getAttribute("checked") ) sbInfoViewer.indicateLinks(this.frameList[i]);
+			sbContentSaver.frameList[i].onmousedown = function(aEvent){ sbAnnotationService.handleMouseDown(aEvent); };
+			sbContentSaver.frameList[i].onkeypress  = function(aEvent){ sbPageEditor.handleKeypress(aEvent); };
+			if ( aID && document.getElementById("ScrapBookStatusPopupD").getAttribute("checked") ) sbInfoViewer.indicateLinks(sbContentSaver.frameList[i]);
 		}
-		window._content.onbeforeunload = function(){ sbPageEditor.confirmSave(); };
+		if ( aID ) window._content.onbeforeunload = function(){ sbPageEditor.confirmSave(); };
 	},
 
 	handleKeypress : function(aEvent)
 	{
 		if ( aEvent.altKey || aEvent.shiftKey || aEvent.ctrlKey || aEvent.metaKey ) return;
-		if ( isFindBarVisible() ) return;
+		if ( "gFindBar" in window ? gFindBar.isFindBarVisible() : window.isFindBarVisible() ) return;
 		var idx = 0;
 		switch ( aEvent.charCode )
 		{
@@ -87,15 +88,6 @@ var sbPageEditor = {
 		document.getElementById("ScrapBookEditSpacer").setAttribute("flex", this.multiline ? 1 : 0);
 		this.COMMENT.value = val;
 		this.COMMENT.focus();
-	},
-
-	getFrameList : function(aWindow)
-	{
-		for ( var i = 0; i < aWindow.frames.length; i++ )
-		{
-			this.frameList.push(aWindow.frames[i]);
-			this.getFrameList(aWindow.frames[i]);
-		}
 	},
 
 	getSelection : function()
@@ -166,11 +158,10 @@ var sbPageEditor = {
 
 	removeAllSpan : function(aClassName)
 	{
-		this.frameList = [window._content];
-		this.getFrameList(window._content);
-		for ( var i = 0; i < this.frameList.length; i++ )
+		sbContentSaver.frameList = sbContentSaver.flattenFrames(window._content);
+		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
 		{
-			var elems = this.frameList[i].document.getElementsByTagName("span");
+			var elems = sbContentSaver.frameList[i].document.getElementsByTagName("span");
 			for ( var j = 0; j < elems.length; j++ )
 			{
 				if ( elems[j].getAttribute("class") == aClassName )
@@ -185,12 +176,11 @@ var sbPageEditor = {
 
 	removeElementsByTagName : function(aTagName)
 	{
-		this.frameList = [window._content];
-		this.getFrameList(window._content);
+		sbContentSaver.frameList = sbContentSaver.flattenFrames(window._content);
 		var shouldSave = false;
-		for ( var i = this.frameList.length - 1; i >= 0; i-- )
+		for ( var i = sbContentSaver.frameList.length - 1; i >= 0; i-- )
 		{
-			var elems = this.frameList[i].document.getElementsByTagName(aTagName);
+			var elems = sbContentSaver.frameList[i].document.getElementsByTagName(aTagName);
 			if ( elems.length < 1 ) continue;
 			for ( var j = elems.length - 1; j >= 0; j-- )
 			{
@@ -214,7 +204,10 @@ var sbPageEditor = {
 
 	selection2Title : function(aElement)
 	{
-		aElement.value = sbCommonUtils.crop(this.getSelection().toString().replace(/[\r\n\t\s]+/g, " "), 100);
+		var sel = this.getSelection();
+		if ( !sel ) return;
+		aElement.value = sbCommonUtils.crop(sel.toString().replace(/[\r\n\t\s]+/g, " "), 100);
+		sel.removeAllRanges();
 		this.changed2 = true;
 	},
 
@@ -224,9 +217,9 @@ var sbPageEditor = {
 		window._content.location.reload();
 	},
 
-	exit : function()
+	exit : function(forceExit)
 	{
-		if ( this.confirmSave() == 1 ) this.restore();
+		if ( !forceExit && this.confirmSave() == 1 ) this.restore();
 		if ( sbDOMEraser.enabled ) sbDOMEraser.init(2);
 		this.showHide(false);
 	},
@@ -247,33 +240,44 @@ var sbPageEditor = {
 
 	confirmSave : function()
 	{
-		if ( this.changed2 ) this.save2();
+		if ( this.changed2 ) this.saveResource();
 		if ( !this.changed1 ) return 0;
 		var button = sbCommonUtils.PROMPT.BUTTON_TITLE_SAVE * sbCommonUtils.PROMPT.BUTTON_POS_0 + sbCommonUtils.PROMPT.BUTTON_TITLE_DONT_SAVE * sbCommonUtils.PROMPT.BUTTON_POS_1;
-		var res = sbCommonUtils.PROMPT.confirmEx(window, "ScrapBook", this.STRING.getFormattedString("EDIT_SAVE_CHANGES", [sbCommonUtils.crop(this.item.title, 32)]), button, null, null, null, null, {});
-		if ( res == 0 ) this.save1();
+		var ret = sbCommonUtils.PROMPT.confirmEx(window, "ScrapBook", sbBrowserOverlay.STRING.getFormattedString("EDIT_SAVE_CHANGES", [sbCommonUtils.crop(this.item.title, 32)]), button, null, null, null, null, {});
+		if ( ret == 0 ) this.savePage();
 		this.changed1 = false;
-		return res;
+		return ret;
 	},
 
-	save1 : function()
+	saveOrCapture : function(aBypassDialog)
+	{
+		if ( sbBrowserOverlay.getID() ) {
+			this.savePage();
+			this.saveResource();
+		} else {
+			sbDOMEraser.init(2);
+			var sel = sbBrowserOverlay.isSelected();
+			var ret = sbBrowserOverlay.execCapture(sel, sel, !aBypassDialog, "urn:scrapbook:root");
+			if ( ret ) this.exit(true);
+		}
+	},
+
+	savePage : function()
 	{
 		if ( !sbDataSource.exists(sbBrowserOverlay.resource) ) { this.disable(true); return; }
 		var curURL = window._content.location.href;
 		if ( curURL.indexOf("file://") != 0 || !curURL.match(/\/data\/(\d{14})\/(.+)$/) || RegExp.$1 != this.item.id || RegExp.$2 == "index.dat" || RegExp.$2 == "sitemap.xml" )
 		{
-			alert("ScrapBook ERROR: Failed to save the file '" + RegExp.$2 + "'.");
+			alert("ScrapBook ERROR: Cannot save file '" + RegExp.$2 + "'.");
 			return;
 		}
-		this.frameList = [window._content];
-		this.getFrameList(window._content);
+		sbContentSaver.frameList = sbContentSaver.flattenFrames(window._content);
 		this.disable(true);
-		document.getElementById("ScrapBookEditEraser").checked = false;
 		sbDOMEraser.init(2);
-		for ( var i = 0; i < this.frameList.length; i++ )
+		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
 		{
-			this.removeAllStyles(this.frameList[i]);
-			var doc = this.frameList[i].document;
+			this.removeAllStyles(sbContentSaver.frameList[i]);
+			var doc = sbContentSaver.frameList[i].document;
 			if ( doc.contentType != "text/html" )
 			{
 				alert("ScrapBook ERROR: Cannot modify " + doc.contentType + " content.");
@@ -296,17 +300,18 @@ var sbPageEditor = {
 			var file = sbCommonUtils.getContentDir(this.item.id).clone();
 			file.append(sbCommonUtils.getFileName(doc.location.href));
 			sbCommonUtils.writeFile(file, src, charset);
-			if ( this.item.type == "site" && document.getElementById("ScrapBookInfoPopupI").getAttribute("checked") )
+			if ( document.getElementById("ScrapBookStatusPopupD").getAttribute("checked") )
 			{
-				sbInfoViewer.indicateLinks(this.frameList[i]);
+				sbInfoViewer.indicateLinks(sbContentSaver.frameList[i]);
 			}
 		}
 		this.changed1 = false;
 		window.setTimeout(function() { window._content.stop(); sbPageEditor.disable(false); }, 500);
 	},
 
-	save2 : function()
+	saveResource : function()
 	{
+		if ( !this.item ) return;
 		if ( !sbDataSource.exists(sbBrowserOverlay.resource) ) { this.disable(true); return; }
 		var newTitle   = document.getElementById("ScrapBookEditTitle").value;
 		var newComment = sbCommonUtils.escapeComment(this.COMMENT.value);
@@ -338,29 +343,35 @@ var sbPageEditor = {
 
 	toggle : function()
 	{
-		if ( !sbBrowserOverlay.getID() ) return;
+		var id = sbBrowserOverlay.getID();
+		if ( !id ) return;
 		this.TOOLBAR.setAttribute("autoshow", this.TOOLBAR.hidden);
 		sbBrowserOverlay.editMode = this.TOOLBAR.hidden;
-		this.TOOLBAR.hidden ? this.init() : this.exit();
+		this.TOOLBAR.hidden ? this.init(id) : this.exit();
 	},
 
 	showHide : function(willShow)
 	{
 		this.COMMENT.hidden = !willShow;
 		this.TOOLBAR.hidden = !willShow;
+		willShow ? this.TOOLBAR.setAttribute("moz-collapsed", "false") : this.TOOLBAR.removeAttribute("moz-collapsed");
 		sbInfoViewer.optimize();
 	},
 
 
 	applyStyle : function(aWindow, aID, aString)
 	{
+		if ( aWindow.document.getElementById(aID) )
+		{
+			return;
+		}
 		var newNode = aWindow.document.createElement("style");
 		newNode.setAttribute("media", "screen");
 		newNode.setAttribute("type", "text/css");
 		newNode.setAttribute("id", aID);
 		newNode.appendChild(aWindow.document.createTextNode(aString));
 		var headNode = aWindow.document.getElementsByTagName("head")[0];
-		headNode.appendChild(newNode);
+		if ( headNode ) headNode.appendChild(newNode);
 	},
 
 	removeStyle : function(aWindow, aID)
@@ -389,22 +400,21 @@ var sbDOMEraser = {
 	init : function(aStateFlag)
 	{
 		this.enabled = (aStateFlag == 1);
+		document.getElementById("ScrapBookEditEraser").checked = this.enabled;
+		if ( aStateFlag == 0 ) return;
 		document.getElementById("ScrapBookHighlighter").disabled = this.enabled;
 		document.getElementById("ScrapBookEditAnnotation").disabled = this.enabled;
 		document.getElementById("ScrapBookEditCutter").disabled  = this.enabled;
-		if ( aStateFlag == 0 ) return;
-		sbPageEditor.frameList = [window._content];
-		sbPageEditor.getFrameList(window._content);
-		for ( var i = 0; i < sbPageEditor.frameList.length; i++ )
+		sbContentSaver.frameList = sbContentSaver.flattenFrames(window._content);
+		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
 		{
-			sbPageEditor.frameList[i].document.onmouseover = this.enabled ? function(aEvent){ sbDOMEraser.handleEvent(aEvent); } : null;
-			sbPageEditor.frameList[i].document.onmouseout  = this.enabled ? function(aEvent){ sbDOMEraser.handleEvent(aEvent); } : null;
-			sbPageEditor.frameList[i].document.onclick     = this.enabled ? function(aEvent){ sbDOMEraser.handleEvent(aEvent); } : null;
-			sbPageEditor.frameList[i].document.onkeypress  = this.enabled ? function(aEvent){ sbDOMEraser.handleEvent(aEvent); } : null;
+			sbContentSaver.frameList[i].document.onmouseover = this.enabled ? function(aEvent){ sbDOMEraser.handleEvent(aEvent); } : null;
+			sbContentSaver.frameList[i].document.onmouseout  = this.enabled ? function(aEvent){ sbDOMEraser.handleEvent(aEvent); } : null;
+			sbContentSaver.frameList[i].document.onclick     = this.enabled ? function(aEvent){ sbDOMEraser.handleEvent(aEvent); } : null;
 			if ( this.enabled ) {
-				sbPageEditor.applyStyle(sbPageEditor.frameList[i], "scrapbook-eraser-style", "* { cursor: crosshair; }");
+				sbPageEditor.applyStyle(sbContentSaver.frameList[i], "scrapbook-eraser-style", "* { cursor: crosshair; }");
 			} else {
-				sbPageEditor.removeStyle(sbPageEditor.frameList[i], "scrapbook-eraser-style");
+				sbPageEditor.removeStyle(sbContentSaver.frameList[i], "scrapbook-eraser-style");
 			}
 		}
 	},
@@ -421,7 +431,7 @@ var sbDOMEraser = {
 			case "mouseover" :
 				elem.style.MozOutline = onMarker ? "2px dashed #0000FF" : "2px solid #FF0000";
 				document.getElementById("ScrapBookEditTooltip").hidden = false;
-				document.getElementById("ScrapBookEditTooltip").label = onMarker ? sbPageEditor.STRING.getString("EDIT_REMOVE_HIGHLIGHT") : elem.localName;
+				document.getElementById("ScrapBookEditTooltip").label = onMarker ? sbBrowserOverlay.STRING.getString("EDIT_REMOVE_HIGHLIGHT") : elem.localName;
 				document.getElementById("ScrapBookEditTooltip").showPopup(gBrowser, aEvent.clientX + gBrowser.boxObject.screenX + 50, aEvent.clientY + gBrowser.boxObject.screenY + 50);
 				break;
 			case "mouseout" :
@@ -431,28 +441,39 @@ var sbDOMEraser = {
 				if ( aEvent.type == "click" )
 				{
 					sbPageEditor.allowUndo(elem.ownerDocument);
-					if ( aEvent.button == 0 )
+					if ( aEvent.shiftKey || aEvent.ctrlKey || aEvent.button == 2 )
 					{
-						if ( onMarker ) {
-							sbPageEditor.stripAttributes(elem);
-						} else {
-							elem.parentNode.removeChild(elem);
-						}
+						this.isolateNode(elem);
 					}
-					else if ( aEvent.button == 2 )
+					else
 					{
-						aEvent.currentTarget.body.insertBefore(elem, aEvent.currentTarget.body.firstChild);
-						for ( var i = elem.parentNode.childNodes.length - 1; i > 0; i-- )
-						{
-							elem.parentNode.removeChild(elem.parentNode.childNodes[i]);
-						}
+						if ( onMarker )
+							sbPageEditor.stripAttributes(elem);
+						else
+							elem.parentNode.removeChild(elem);
 					}
 					sbPageEditor.changed1 = true;
 				}
 				break;
-			case "keypress" :
-				this.undo();
-				break;
+		}
+	},
+
+	isolateNode : function(aNode)
+	{
+		if ( !aNode || !aNode.ownerDocument.body ) return;
+		var i = 0;
+		while ( aNode != aNode.ownerDocument.body && ++i < 64 )
+		{
+			var parent = aNode.parentNode;
+			var child = parent.lastChild;
+			var j = 0;
+			while ( child && ++j < 1024 )
+			{
+				var prevChild = child.previousSibling;
+				if ( child != aNode ) parent.removeChild(child);
+				child = prevChild;
+			}
+			aNode = parent;
 		}
 	},
 
@@ -524,6 +545,7 @@ var sbAnnotationService = {
 			linkNode.setAttribute("id", "scrapbook-sticky-css");
 			linkNode.setAttribute("rel", "stylesheet");
 			var headNode = win.document.getElementsByTagName("head")[0];
+			if ( !headNode ) return;
 			headNode.appendChild(win.document.createTextNode("\n"));
 			headNode.appendChild(linkNode);
 			headNode.appendChild(win.document.createTextNode("\n"));
@@ -628,7 +650,7 @@ var sbAnnotationService = {
 		if ( !sel ) return;
 		sbPageEditor.allowUndo(sbPageEditor.focusedWindow.document);
 		var ret = {};
-		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbPageEditor.STRING.getFormattedString("EDIT_INLINE", [sbCommonUtils.crop(sel.toString(), 32)]), ret, null, {}) ) return;
+		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbBrowserOverlay.STRING.getFormattedString("EDIT_INLINE", [sbCommonUtils.crop(sel.toString(), 32)]), ret, null, {}) ) return;
 		if ( !ret.value ) return;
 		var attr = {};
 		attr["style"] = "border-bottom: 2px dotted #FF3333; cursor: help;"
@@ -641,7 +663,7 @@ var sbAnnotationService = {
 	editInline : function(aElement)
 	{
 		var ret = { value : aElement.getAttribute("title") };
-		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbPageEditor.STRING.getFormattedString("EDIT_INLINE", [sbCommonUtils.crop(aElement.textContent, 32)]), ret, null, {}) ) return;
+		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbBrowserOverlay.STRING.getFormattedString("EDIT_INLINE", [sbCommonUtils.crop(aElement.textContent, 32)]), ret, null, {}) ) return;
 		if ( ret.value )
 			aElement.setAttribute("title", ret.value);
 		else
@@ -669,10 +691,15 @@ var sbAnnotationService = {
 			FP.init(window, aLabel, FP.modeOpen);
 			var ret = FP.show();
 			if ( ret != FP.returnOK ) return;
+			var destFile = sbCommonUtils.getContentDir(sbPageEditor.item.id).clone();
+			destFile.append(FP.file.leafName);
+			if ( destFile.exists() && destFile.isFile() ) {
+				if ( !sbCommonUtils.PROMPT.confirm(window, "ScrapBook", "Would you like to overwrite the file '" + FP.file.leafName + "'?") ) return;
+				destFile.remove(false);
+			}
 			try {
-				FP.file.copyTo(sbCommonUtils.getContentDir(sbPageEditor.item.id), FP.file.leafName);
+				FP.file.copyTo(destFile.parent, FP.file.leafName);
 			} catch(ex) {
-				alert("ScrapBook ERROR: The file '" + FP.file.leafName + "' already exists.");
 				return;
 			}
 			attr["href"] = sbCommonUtils.getFileName(sbCommonUtils.IO.newFileURI(FP.file).spec);
@@ -692,20 +719,30 @@ var sbInfoViewer = {
 
 	onPopupShowing : function(aEvent)
 	{
-		if ( !sbDataSource.exists(sbBrowserOverlay.resource) ) { aEvent.preventDefault(); return; }
-		document.getElementById("ScrapBookInfoPopupT").setAttribute("checked",  sbBrowserOverlay.infoMode);
-		document.getElementById("ScrapBookInfoPopupM").setAttribute("disabled", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") != "site");
+		var id = sbBrowserOverlay.getID();
+		var elems = aEvent.originalTarget.childNodes;
+		for ( var i = 0; i < elems.length - 2; i++ ) elems[i].setAttribute("disabled", id ? "false" : "true");
+		for ( i; i < elems.length; i++ ) elems[i].hidden = id;
+		if ( id ) {
+			if ( !sbDataSource.exists(sbBrowserOverlay.resource) ) { aEvent.preventDefault(); return; }
+			document.getElementById("ScrapBookStatusPopupE").setAttribute("checked",  sbBrowserOverlay.editMode);
+			document.getElementById("ScrapBookStatusPopupI").setAttribute("checked",  sbBrowserOverlay.infoMode);
+			document.getElementById("ScrapBookStatusPopupM").setAttribute("disabled", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") != "site");
+		} else {
+			aEvent.originalTarget.lastChild.setAttribute("checked", !(sbPageEditor.TOOLBAR.hidden || document.getElementById("ScrapBookToolbox").hidden));
+		}
 	},
 
-	init : function()
+	init : function(aID)
 	{
-		if ( !sbDataSource.exists(sbBrowserOverlay.resource) ) return;
+		if ( aID != sbBrowserOverlay.getID() ) return;
+		if ( !sbDataSource.exists(sbBrowserOverlay.resource) ) { this.TOOLBAR.hidden = true; return; }
 		this.TOOLBAR.hidden = false;
-		var isSite = (sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "site");
-		document.getElementById("ScrapBookInfoHome").disabled = !isSite;
-		document.getElementById("ScrapBookInfoSite").disabled = !isSite;
-		document.getElementById("ScrapBookInfoHome").setAttribute("image", "chrome://scrapbook/skin/info_home" + (isSite ? "1" : "0") +  ".png");
-		document.getElementById("ScrapBookInfoSite").setAttribute("image", "chrome://scrapbook/skin/info_link" + (isSite ? "1" : "0") +  ".png");
+		var isTypeSite = (sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "site");
+		document.getElementById("ScrapBookInfoHome").disabled = !isTypeSite;
+		document.getElementById("ScrapBookInfoSite").disabled = !isTypeSite;
+		document.getElementById("ScrapBookInfoHome").setAttribute("image", "chrome://scrapbook/skin/info_home" + (isTypeSite ? "1" : "0") +  ".png");
+		document.getElementById("ScrapBookInfoSite").setAttribute("image", "chrome://scrapbook/skin/info_link" + (isTypeSite ? "1" : "0") +  ".png");
 		var srcLabel = document.getElementById("ScrapBookInfoSource");
 		srcLabel.value = sbDataSource.getProperty(sbBrowserOverlay.resource, "source");
 		srcLabel.onclick = function(aEvent){ sbCommonUtils.loadURL(srcLabel.value, aEvent.button == 1); };
@@ -713,21 +750,22 @@ var sbInfoViewer = {
 
 	toggle : function()
 	{
-		if ( !sbBrowserOverlay.getID() ) return;
+		var id = sbBrowserOverlay.getID();
+		if ( !id ) return;
 		this.TOOLBAR.setAttribute("autoshow", this.TOOLBAR.hidden);
 		sbBrowserOverlay.infoMode = this.TOOLBAR.hidden;
-		this.TOOLBAR.hidden ? this.init() : this.TOOLBAR.hidden = true;
+		this.TOOLBAR.hidden ? this.init(id) : this.TOOLBAR.hidden = true;
 		this.optimize();
 	},
 
 	toggleIndicator : function(willEnable)
 	{
-		for ( var i = 0; i < sbPageEditor.frameList.length; i++ )
+		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
 		{
 			if ( willEnable )
-				this.indicateLinks(sbPageEditor.frameList[i]);
+				this.indicateLinks(sbContentSaver.frameList[i]);
 			else
-				sbPageEditor.removeStyle(sbPageEditor.frameList[i], "scrapbook-indicator-style");
+				sbPageEditor.removeStyle(sbContentSaver.frameList[i], "scrapbook-indicator-style");
 		}
 	},
 
@@ -750,10 +788,11 @@ var sbInfoViewer = {
 
 	openSourceURL : function(tabbed)
 	{
+		if ( !sbBrowserOverlay.getID() ) return;
 		sbCommonUtils.loadURL(sbDataSource.getProperty(sbBrowserOverlay.resource, "source"), tabbed);
 	},
 
-	load : function(aFileName)
+	loadFile : function(aFileName)
 	{
 		gBrowser.loadURI(gBrowser.currentURI.resolve(aFileName), null, null);
 	},
