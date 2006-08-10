@@ -441,7 +441,7 @@ var sbDOMEraser = {
 				if ( aEvent.type == "click" )
 				{
 					sbPageEditor.allowUndo(elem.ownerDocument);
-					if ( aEvent.shiftKey || aEvent.ctrlKey || aEvent.button == 2 )
+					if ( aEvent.shiftKey || aEvent.button == 2 )
 					{
 						this.isolateNode(elem);
 					}

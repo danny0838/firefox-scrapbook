@@ -5,9 +5,9 @@
 <!ENTITY sb.edit.restore "全部还原">
 <!ENTITY sb.edit.save "保存">
 <!ENTITY sb.edit.comment "展开注释区">
-<!ENTITY sb.edit.sticky "Sticky Annotation">
-<!ENTITY sb.edit.sticky.create "创建 &sb.edit.sticky;">
-<!ENTITY sb.edit.inline.add "为所选内容添加注释">
+<!ENTITY sb.edit.sticky "即时贴">
+<!ENTITY sb.edit.sticky.create "创建即时贴">
+<!ENTITY sb.edit.inline.add "为所选内容添加提示">
 <!ENTITY sb.edit.attach.file "为所选内容附加文件">
 <!ENTITY sb.edit.attach.link "为所选内容附加链接">
 <!ENTITY sb.edit.cutter "删除所选内容">

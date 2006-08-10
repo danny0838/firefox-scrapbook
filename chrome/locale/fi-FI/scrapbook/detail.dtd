@@ -2,7 +2,7 @@
 <!ENTITY sb.detail.new.folder "Uusi kansio">
 <!ENTITY sb.detail.select.folder "Valitse kansio">
 <!ENTITY sb.detail.option "Asetukset">
-<!ENTITY sb.detail.option.images "Kuvatt">
+<!ENTITY sb.detail.option.images "Kuvat">
 <!ENTITY sb.detail.option.styles "Tyylit">
 <!ENTITY sb.detail.linked.file "Kaappaa linkitetyt tiedostot">
 <!ENTITY sb.detail.linked.image "Kuva">
@@ -14,4 +14,4 @@
 <!ENTITY sb.detail.linked.page.depth "Linkkien seuraussyvyys">
 <!ENTITY sb.detail.linked.page.text "Kaappausten valmistuttua kaikki sivut linkitetään toisiinsa ja sivustokartta luodaan.">
 <!ENTITY sb.detail.warnAboutRenew "Huom.: &quot;Kaappaa uudestaan&quot; korvaa aiemman version.">
-<!ENTITY sb.detail.warnAboutScript "Huom.: JavaScript may cause some problems.">
+<!ENTITY sb.detail.warnAboutScript "Huom.: JavaScript voi aiheuttaa ongelmia.">

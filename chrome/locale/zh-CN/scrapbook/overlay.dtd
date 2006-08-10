@@ -10,7 +10,7 @@
 <!ENTITY sb.capture.folder.select "选择文件夹">
 <!ENTITY sb.capture.alltabs "获取所有标签页">
 <!ENTITY sb.capture.bookmark "加入 ScrapBook 书签">
-<!ENTITY sb.editbefore "Edit Before Capture">
+<!ENTITY sb.editbefore "获取前进行编辑">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">

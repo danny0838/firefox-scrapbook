@@ -10,7 +10,7 @@
 <!ENTITY sb.capture.folder.select "Valitse kansio">
 <!ENTITY sb.capture.alltabs "Kaappaa kaikki välilehdet">
 <!ENTITY sb.capture.bookmark "Lisää kirjanmerkki ScrapBookiin">
-<!ENTITY sb.editbefore "Edit Before Capture">
+<!ENTITY sb.editbefore "Muokkaa ennen kaappausta">
 <!ENTITY sb.key.sidebar "C">
 <!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">

@@ -12,8 +12,8 @@
 <!ENTITY sb.tools.sorttree "Järjestä koko puu">
 <!ENTITY sb.tools.output "Tulosta kansiopuu HTML:nä">
 <!ENTITY sb.tools.repair "Hätäkorjaus">
-<!ENTITY sb.tools.addons "Add-on Functions">
-<!ENTITY sb.tools.tips "Online Tips">
+<!ENTITY sb.tools.addons "Lisäosien toiminnot">
+<!ENTITY sb.tools.tips "Vinkkisivu [en]">
 <!ENTITY sb.tools.homepage "Kotisivu">
 <!ENTITY sb.tools.about "Tietoja">
 <!ENTITY sb.note.opentab "Avaa välilehdessä">

@@ -206,7 +206,7 @@
 				<menuitem id="ScrapBookStatusPopupI" label="&sb.toolbar.info;" type="checkbox" oncommand="sbInfoViewer.toggle();" />
 				<menuitem id="ScrapBookStatusPopupE" label="&sb.toolbar.edit;" type="checkbox" oncommand="sbPageEditor.toggle();" />
 				<menuseparator />
-				<menuitem id="ScrapBookEditBefore" label="&sb.editbefore;" type="checkbox" autoCheck="false" oncommand="this.getAttribute('checked') ? sbPageEditor.init() : sbPageEditor.exit(true);" />
+				<menuitem id="ScrapBookEditBefore" label="&sb.editbefore;" type="checkbox" autocheck="false" oncommand="this.getAttribute('checked') == 'false' ? sbPageEditor.init() : sbPageEditor.exit(true);" />
 			</menupopup>
 		</statusbarpanel>
 	</statusbar>
