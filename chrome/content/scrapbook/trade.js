@@ -332,12 +332,7 @@ var sbTrader = {
 	formatMilliSeconds : function(msec)
 	{
 		var dd = new Date(msec);
-		var y = dd.getFullYear();
-		var m = dd.getMonth() + 1; if ( m < 10 ) m = "0" + m;
-		var d = dd.getDate();      if ( d < 10 ) d = "0" + d;
-		var h = dd.getHours();     if ( h < 10 ) h = "0" + h;
-		var i = dd.getMinutes();   if ( i < 10 ) i = "0" + i;
-		return [y.toString(),m.toString(),d.toString()].join("/") + " " + [h.toString(),i.toString()].join(":");
+		return dd.toLocaleString();
 	},
 
 };

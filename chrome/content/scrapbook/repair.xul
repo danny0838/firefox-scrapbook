@@ -45,7 +45,7 @@
 	            onpageshow="sbRepair.initRestoreRDF();">
 		<tree id="sbRepairTree" seltype="single" hidecolumnpicker="true" flex="1">
 			<treecols>
-				<treecol id="sbRepairTreecolFile" label="&sb.repair.rdfFile.file;" flex="3" />
+				<treecol id="sbRepairTreecolFile" label="&sb.repair.rdfFile.file;" flex="2" />
 				<treecol id="sbRepairTreecolTime" label="&sb.repair.rdfFile.time;" flex="2" />
 				<treecol id="sbRepairTreecolSize" label="&sb.repair.rdfFile.size;" flex="1" />
 			</treecols>

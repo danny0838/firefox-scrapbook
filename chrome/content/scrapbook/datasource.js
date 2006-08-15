@@ -55,7 +55,7 @@ var sbDataSource = {
 		{
 			var entry = dirEnum.getNext().QueryInterface(Components.interfaces.nsILocalFile);
 			if ( !entry.leafName.match(/^scrapbook_(\d{4})(\d{2})(\d{2})\.rdf$/) ) continue;
-			var lifeTime = new Date(parseInt(RegExp.$1), parseInt(RegExp.$2)-1, parseInt(RegExp.$3));
+			var lifeTime = (new Date(parseInt(RegExp.$1, 10), parseInt(RegExp.$2, 10) - 1, parseInt(RegExp.$3, 10))).getTime();
 			lifeTime = Math.round((today - lifeTime) / (1000 * 60 * 60 * 24));
 			if ( lifeTime > 30 && --max >= 0 )
 			{

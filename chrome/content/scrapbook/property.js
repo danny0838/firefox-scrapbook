@@ -30,13 +30,8 @@ var sbPropService = {
 			this.item[prop] = sbDataSource.getProperty(this.resource, prop);
 		}
 		this.id.match(/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/);
-		var dateTime;
-		try {
-			const SDF = Components.classes['@mozilla.org/intl/scriptabledateformat;1'].getService(Components.interfaces.nsIScriptableDateFormat);
-			dateTime = SDF.FormatDateTime("", SDF.dateFormatLong, SDF.timeFormatSeconds, RegExp.$1, RegExp.$2, RegExp.$3, RegExp.$4, RegExp.$5, RegExp.$6);
-		} catch(ex) {
-			dateTime = [RegExp.$1, RegExp.$2, RegExp.$3].join("/") + " " + [RegExp.$4, RegExp.$5, RegExp.$6].join(":");
-		}
+		var dd = new Date(parseInt(RegExp.$1, 10), parseInt(RegExp.$2, 10) - 1, parseInt(RegExp.$3, 10), parseInt(RegExp.$4, 10), parseInt(RegExp.$5, 10), parseInt(RegExp.$6, 10));
+		var dateTime = dd.toLocaleString();
 		document.getElementById("sbPropTitle").value   = this.item.title;
 		document.getElementById("sbPropSource").value  = this.item.source;
 		document.getElementById("sbPropDate").value    = dateTime;

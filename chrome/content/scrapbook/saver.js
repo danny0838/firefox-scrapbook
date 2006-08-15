@@ -461,6 +461,8 @@ var sbContentSaver = {
 				}
 				break;
 			case "base" : 
+				if ( !aNode.hasAttribute("target") ) return this.removeNodeFromParent(aNode);
+				break;
 			case "style" : 
 				return this.removeNodeFromParent(aNode);
 				break;
