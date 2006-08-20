@@ -12,8 +12,8 @@
 <!ENTITY sb.tools.sorttree "트리 전체 정렬하기">
 <!ENTITY sb.tools.output "트리를 HTML로 출력하기">
 <!ENTITY sb.tools.repair "긴급 복구 도구">
-<!ENTITY sb.tools.addons "Add-on Functions">
-<!ENTITY sb.tools.tips "Online Tips">
+<!ENTITY sb.tools.addons "부가 기능">
+<!ENTITY sb.tools.tips "온라인 팁">
 <!ENTITY sb.tools.homepage "홈페이지">
 <!ENTITY sb.tools.about "버전 정보">
 <!ENTITY sb.note.opentab "탭으로 열기">

@@ -12,9 +12,9 @@
 <!ENTITY sb.tools.sorttree "Uspořádat veškerý obsah">
 <!ENTITY sb.tools.output "Exportovat vše jako HTML">
 <!ENTITY sb.tools.repair "Nouzová oprava">
-<!ENTITY sb.tools.addons "Add-on Functions">
-<!ENTITY sb.tools.tips "Online Tips">
+<!ENTITY sb.tools.addons "Přídavné funkce">
+<!ENTITY sb.tools.tips "On-line tipy">
 <!ENTITY sb.tools.homepage "Domovská stránka">
-<!ENTITY sb.tools.about "O rozšíření ScapBook">
+<!ENTITY sb.tools.about "O rozšíření ScrapBook">
 <!ENTITY sb.note.opentab "Otevřít v panelu">
 <!ENTITY sb.note.close "Zavřít">

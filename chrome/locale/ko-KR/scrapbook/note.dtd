@@ -8,5 +8,5 @@
 <!ENTITY sb.note.autolinefeed.t "HTML 미리 보기 시 행 끝에 &lt;br&gt; 태그 자동으로 붙이기">
 <!ENTITY sb.note.fontsize "글자 크기">
 <!ENTITY sb.note.help "도움말">
-<!ENTITY sb.note.print "Print">
+<!ENTITY sb.note.print "인쇄">
 <!ENTITY sb.note.exit "종료">
