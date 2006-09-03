@@ -7,7 +7,7 @@
 <window id="sbCacheWindow"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         onload="SB_initFT('CACHE');"
-        style="width:320px;"
+        style="width: 320px;"
         screenX="20" screenY="20"
         persist="screenX screenY"
         windowtype="scrapbook">

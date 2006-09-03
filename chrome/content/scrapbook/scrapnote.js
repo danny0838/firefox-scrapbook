@@ -19,13 +19,14 @@ var sbNoteService = {
 		setTimeout(function(){ sbNoteService.locked = false; }, 1000);
 		this.save();
 		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
-		var newItem = new ScrapBookItem(newID);
+		var newItem = sbCommonUtils.newItem(newID);
 		newItem.type  = "note";
 		newItem.chars = "UTF-8";
 		this.resource = sbDataSource.addItem(newItem, aTarResURI, aTarRelIdx);
 		this.notefile = sbCommonUtils.getContentDir(sbDataSource.getProperty(this.resource, "id")).clone();
 		this.notefile.append("index.html");
 		sbCommonUtils.writeFile(this.notefile, "", "UTF-8");
+		if ( !("gBrowser" in window.top) ) aForceTabbed = true;
 		(sbMainService.prefs.tabsNote || aForceTabbed) ? this.open(this.resource, true) : this.edit(this.resource);
 	},
 
@@ -40,6 +41,7 @@ var sbNoteService = {
 		if ( !sbDataSource.exists(aRes) )
 		{
 			sbDataSource.init();
+			if ( !sbDataSource.exists(aRes) ) return;
 		}
 		this.resource = aRes;
 		this.changed = false;
@@ -86,17 +88,18 @@ var sbNoteService = {
 		}
 	},
 
-	open : function(aRes, tabbed)
+	open : function(aRes, aTabbed)
 	{
-		if ( top.document.getElementById("content").contentWindow.sbNoteService )
+		if ( !("gBrowser" in window.top) ) aTabbed = true;
+		if ( !aTabbed && window.top._content.sbNoteService )
 		{
-			top.document.getElementById("content").contentWindow.sbNoteService.edit(aRes);
+			window.top._content.sbNoteService.edit(aRes);
 		}
 		else
 		{
-			if ( tabbed ) {
-				if ( top.gBrowser.currentURI.spec == "about:blank" ) tabbed = false;
-				sbCommonUtils.loadURL("chrome://scrapbook/content/note.xul?id=" + sbDataSource.getProperty(aRes, "id"), tabbed);
+			if ( aTabbed ) {
+				if ( top.gBrowser && top.gBrowser.currentURI.spec == "about:blank" ) aTabbed = false;
+				sbCommonUtils.loadURL("chrome://scrapbook/content/note.xul?id=" + sbDataSource.getProperty(aRes, "id"), aTabbed);
 			} else {
 				sbNoteService.edit(aRes);
 			}

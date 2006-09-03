@@ -2,7 +2,6 @@
 <!ENTITY sb.toolbar.info "Info Toolbar">
 <!ENTITY sb.edit.eraser "DOM-radír: A weboldalon rákattintott elemek eltávolításának eszköze">
 <!ENTITY sb.edit.undo "Visszavonás">
-<!ENTITY sb.edit.restore "A változtatások visszavonása és visszaállítás">
 <!ENTITY sb.edit.save "A változtatások mentése">
 <!ENTITY sb.edit.comment "A jegyzetek területének megnövelése">
 <!ENTITY sb.edit.sticky "Sticky Annotation">

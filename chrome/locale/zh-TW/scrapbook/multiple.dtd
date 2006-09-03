@@ -4,4 +4,5 @@
 <!ENTITY sb.multiple.detector.slink "選取區中所有連結">
 <!ENTITY sb.multiple.detector.tabs "此視窗中所有的分頁">
 <!ENTITY sb.multiple.detector.local "某目錄下所有的 HTML 檔">
+<!ENTITY sb.multiple.detector.bookmarks "Bookmarks">
 <!ENTITY sb.multiple.detector.clear "清除">

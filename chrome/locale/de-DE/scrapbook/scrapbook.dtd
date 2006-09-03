@@ -4,7 +4,7 @@
 <!ENTITY sb.tools "Extras">
 <!ENTITY sb.tools.settings "Einstellungen">
 <!ENTITY sb.tools.manage "Ordner verwalten">
-<!ENTITY sb.tools.combine "Zusammenfassen">
+<!ENTITY sb.tools.combine "Combine Wizard">
 <!ENTITY sb.tools.trade "Importieren/Exportieren">
 <!ENTITY sb.tools.multiple "Mehrere URLs archivieren">
 <!ENTITY sb.tools.directory "ScrapBook-Ordner öffnen">

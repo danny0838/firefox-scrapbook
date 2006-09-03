@@ -2,7 +2,6 @@
 <!ENTITY sb.toolbar.info "Info Toolbar">
 <!ENTITY sb.edit.eraser "DOM Eraser: A tool for removing clicked elements in Web page">
 <!ENTITY sb.edit.undo "Undo">
-<!ENTITY sb.edit.restore "Abandon Changes and Restore">
 <!ENTITY sb.edit.save "Save Changes">
 <!ENTITY sb.edit.comment "Expand Comment Area">
 <!ENTITY sb.edit.sticky "Sticky Annotation">

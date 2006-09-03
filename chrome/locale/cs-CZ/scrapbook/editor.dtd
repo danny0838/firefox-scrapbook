@@ -2,7 +2,6 @@
 <!ENTITY sb.toolbar.info "Informační lišta">
 <!ENTITY sb.edit.eraser "DOM Zmizík: Nástroj pro odstranění vybraného bloku.">
 <!ENTITY sb.edit.undo "Zpět">
-<!ENTITY sb.edit.restore "Opustit změny a obnovit">
 <!ENTITY sb.edit.save "Uložit změny">
 <!ENTITY sb.edit.comment "Zobrazit pole pro komentář">
 <!ENTITY sb.edit.sticky "Nálepku">

@@ -4,7 +4,8 @@
 <!ENTITY sb.open.source "A forráswebcím megnyitása">
 <!ENTITY sb.tools "Eszközök">
 <!ENTITY sb.show.files "Fájlok megjelenítése">
-<!ENTITY sb.move "Áthelyezés mappába">
+<!ENTITY sb.move "Move">
+<!ENTITY sb.move.into "Áthelyezés mappába">
 <!ENTITY sb.renew "Capture Again">
 <!ENTITY sb.export "Exportálás">
 <!ENTITY sb.remove "Törlés">

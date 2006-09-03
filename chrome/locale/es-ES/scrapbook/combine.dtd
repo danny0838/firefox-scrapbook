@@ -1,5 +1,4 @@
-<!ENTITY sb.combine.select "Seleccionar páginas">
-<!ENTITY sb.combine.select.d "Hacer doble-click en las páginas siguiendo el orden en el que se desean combinar.">
+<!ENTITY sb.combine.dragdrop "Add items by drag-and-drop from the tree in the order you want to combine. You can drag-and-drop multiple items at once.">
 <!ENTITY sb.combine.preview "Previsualización">
 <!ENTITY sb.combine.preview.d "Pulsar el botón 'Combinar' después de verificar la previsualización.">
 <!ENTITY sb.combine.option.remove "Después de completar la combinación, borrar las páginas originales">

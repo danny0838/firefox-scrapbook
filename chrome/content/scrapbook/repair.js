@@ -34,7 +34,7 @@ var sbRepair = {
 			var fileObj  = fileEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
 			var fileName = fileObj.leafName;
 			var isMatch  = fileName.match(/^scrapbook_\d{8}\.rdf$/);
-			if ( isMatch ) this.treeItems.push([fileName, sbTrader.formatMilliSeconds(fileObj.lastModifiedTime), fileObj.fileSize]);
+			if ( isMatch ) this.treeItems.push([fileName, (new Date(fileObj.lastModifiedTime)).toLocaleString(), fileObj.fileSize]);
 		}
 		var colIDs = [
 			"sbRepairTreecolFile",
@@ -67,10 +67,9 @@ var sbRepair = {
 			var aDir = sbCommonUtils.getScrapBookDir();
 			bFile.copyTo(aDir, "scrapbook.rdf");
 		} catch(ex) {
-			document.getElementById("sbRepairRDF2Text").value = "ERROR: " + ex;
+			document.getElementById("sbRepairRDF2Label").value = "ERROR: " + ex;
 			return;
 		}
-		document.getElementById("sbRepairRDF2Text").value = document.getElementById("sbRepairRDFCompleted").value;
 		sbDataSource.init();
 		sbCommonUtils.RDF.UnregisterDataSource(sbDataSource.data);
 		sbMultiBookService.refreshGlobal();
@@ -100,7 +99,7 @@ var sbRepair = {
 				}
 			}
 		}
-		document.getElementById("sbRepairFaviconsTextbox").value = document.getElementById("sbRepairFaviconsCompleted").value;
+		document.getElementById("sbRepairFaviconsTextbox").value = document.getElementById("sbRepairRDF2Label").value;
 		if ( shouldFlush ) { sbDataSource.flush(); window.opener.reload(); }
 	},
 

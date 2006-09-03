@@ -2,7 +2,6 @@
 <!ENTITY sb.toolbar.info "Mostra le informazioni">
 <!ENTITY sb.edit.eraser "DOM Eraser: strumento per eliminare blocchi cliccati">
 <!ENTITY sb.edit.undo "Annulla">
-<!ENTITY sb.edit.restore "Annulla le modifiche e ripristina">
 <!ENTITY sb.edit.save "Salva">
 <!ENTITY sb.edit.comment "Espandi/contrai l'area per il commento">
 <!ENTITY sb.edit.sticky "Annotazione">

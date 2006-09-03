@@ -27,8 +27,8 @@ var sbMultiBookProp = {
 		else
 		{
 			try {
-				var aFile = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
-				aFile.initWithPath(this.PATH.value);
+				var file = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
+				file.initWithPath(this.PATH.value);
 			} catch(ex) {
 				alert("ScrapBook ERROR: Invalid file path.\n" + ex);
 				return;
@@ -41,15 +41,13 @@ var sbMultiBookProp = {
 		window.opener.sbMultiBookConfig.changed = true;
 	},
 
-	browse : function()
+	browse : function(aTitle)
 	{
 		var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-		FP.init(window, "Select destination to store data.", FP.modeGetFolder);
-		var answer = FP.show();
-		if ( answer == FP.returnOK )
+		FP.init(window, aTitle, FP.modeGetFolder);
+		if ( FP.show() == FP.returnOK )
 		{
-			var theFile = FP.file;
-			this.PATH.value = theFile.path;
+			this.PATH.value = FP.file.path;
 		}
 	},
 

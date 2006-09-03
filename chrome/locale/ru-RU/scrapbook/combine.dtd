@@ -1,5 +1,4 @@
-<!ENTITY sb.combine.select "Выбрать страницы">
-<!ENTITY sb.combine.select.d "Двойной щелчок на страницах, чтобы указать их объединение.">
+<!ENTITY sb.combine.dragdrop "Add items by drag-and-drop from the tree in the order you want to combine. You can drag-and-drop multiple items at once.">
 <!ENTITY sb.combine.preview "Предварительный просмотр">
 <!ENTITY sb.combine.preview.d "Нажмите кнопку 'Объединить' после предварительного просмотра.">
 <!ENTITY sb.combine.option.remove "После осуществления объединения удалить исходные страницы">

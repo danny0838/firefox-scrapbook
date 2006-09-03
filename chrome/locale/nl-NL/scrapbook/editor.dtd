@@ -2,7 +2,6 @@
 <!ENTITY sb.toolbar.info "Info Toolbar">
 <!ENTITY sb.edit.eraser "DOM Eraser: Klik op een onderdeel van de internetpagina om het te verwijderen">
 <!ENTITY sb.edit.undo "Ongedaan maken">
-<!ENTITY sb.edit.restore "Wijzigingen ongedaan maken">
 <!ENTITY sb.edit.save "Wijzigingen opslaan">
 <!ENTITY sb.edit.comment "Commentaargebied vergroten/verkleinen">
 <!ENTITY sb.edit.sticky "Sticky Annotation">

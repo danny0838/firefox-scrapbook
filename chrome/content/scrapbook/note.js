@@ -12,7 +12,9 @@ var sbNoteService2 = {
 		var id = RegExp.$1;
 		sbNoteService.sidebarContext = false;
 		sbDataSource.init();
-		sbNoteService.edit(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id));
+		var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
+		if ( !sbDataSource.exists(res) ) return window.location.href = "about:blank";
+		sbNoteService.edit(res);
 		sbNoteTemplate.init();
 		this.initFontSize();
 		if ( nsPreferences.getBoolPref("scrapbook.note.linefeed", true) )
@@ -26,7 +28,7 @@ var sbNoteService2 = {
 	{
 		var icon = sbCommonUtils.getDefaultIcon("note");
 		document.getElementById("sbNoteImage").setAttribute("src", icon);
-		if ( !this.BROWSER.hidden ) this.initHTMLView();
+		if ( !this.BROWSER.collapsed ) this.initHTMLView();
 		var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
 		if ( "sbNoteService" in win._content && win._content == window )
 		{
@@ -94,9 +96,9 @@ var sbNoteService2 = {
 
 	toggleHTMLView : function(willShow)
 	{
-		this.BROWSER.hidden  = !willShow;
-		document.getElementById("sbSplitter").hidden = !willShow;
-		document.getElementById("sbNoteHeader").lastChild.hidden = !willShow;
+		this.BROWSER.collapsed  = !willShow;
+		document.getElementById("sbSplitter").collapsed = !willShow;
+		document.getElementById("sbNoteHeader").lastChild.collapsed = !willShow;
 		document.getElementById("sbNoteToolbarN").disabled = !willShow;
 		this.enabledHTMLView = willShow;
 	},
@@ -121,8 +123,8 @@ var sbNoteTemplate = {
 
 	show : function(willShow)
 	{
-		document.getElementById("sbNoteTemplate").hidden = !willShow;
-		document.getElementById("sbNoteEditor").hidden   = willShow;
+		document.getElementById("sbNoteTemplate").collapsed = !willShow;
+		document.getElementById("sbNoteEditor").collapsed   = willShow;
 		this.enabled = willShow;
 	},
 

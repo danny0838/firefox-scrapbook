@@ -4,7 +4,8 @@
 <!ENTITY sb.open.source "ソースURLを開く">
 <!ENTITY sb.tools "ツール">
 <!ENTITY sb.show.files "ファイルを表示">
-<!ENTITY sb.move "フォルダへ移動">
+<!ENTITY sb.move "移動">
+<!ENTITY sb.move.into "フォルダへ移動">
 <!ENTITY sb.renew "再取り込み">
 <!ENTITY sb.export "エクスポート">
 <!ENTITY sb.remove "削除">

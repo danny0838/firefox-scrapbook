@@ -4,7 +4,8 @@
 <!ENTITY sb.open.source "開啟原始網址">
 <!ENTITY sb.tools "工具">
 <!ENTITY sb.show.files "顯示相關檔案">
-<!ENTITY sb.move "移到其他資料夾中">
+<!ENTITY sb.move "移到">
+<!ENTITY sb.move.into "移到其他資料夾中">
 <!ENTITY sb.renew "重新擷取">
 <!ENTITY sb.export "匯出">
 <!ENTITY sb.remove "刪除">

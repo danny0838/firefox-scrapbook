@@ -12,11 +12,10 @@ var sbPrefService = {
 		}
 		this.toggleDefaultData();
 		this.toggleDefaultFileViewer();
-		if ( !sbMultiBookService.validateRefresh(true) ) document.getElementById("sbPrefDataGroupbox").hidden = true;
-		if ( window.arguments && window.arguments[0] == "e" )
+		if ( !sbMultiBookService.validateRefresh(true) )
 		{
-			document.getElementById("sbPrefTabs").selectedIndex = 3;
-			document.getElementById("sbPrefDataGroupbox").hidden = true;
+			var idList = ["sbPrefDataDefault", "sbPrefDataPath", "sbPrefDataButton", "sbPrefMultiBookEnabled"];
+			idList.forEach(function(eltId){ document.getElementById(eltId).disabled = true; });
 		}
 		if ( !window.arguments && (new Date()).getSeconds() % 10 == 0 )
 		{
@@ -70,17 +69,11 @@ var sbPrefService = {
 		});
 	},
 
-	onBeforeUnload : function()
-	{
-		if ( sbPrefService.changed ) sbMultiBookService.readWritePref(false);
-	},
-
 	done : function()
 	{
 		if ( this.changed )
 		{
 			sbMultiBookService.refreshGlobal();
-			sbMultiBookService.readWritePref(true);
 		}
 	},
 
@@ -100,10 +93,10 @@ var sbPrefService = {
 		document.getElementById("sbPrefFileViewerButton").disabled = isDefault;
 	},
 
-	selectData : function()
+	selectData : function(aTitle)
 	{
 		var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-		FP.init(window, document.getElementById("sbPrefDataButton").getAttribute("tooltiptext"), FP.modeGetFolder);
+		FP.init(window, aTitle, FP.modeGetFolder);
 		if ( FP.show() == FP.returnOK )
 		{
 			document.getElementById("sbPrefDataPath").value = FP.file.path;

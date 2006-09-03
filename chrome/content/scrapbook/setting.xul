@@ -21,7 +21,6 @@
 	title="&sb.tools.settings; - ScrapBook"
 	dlgbuttons="accept,cancel"
 	onload="sbPrefService.init();"
-	onbeforeaccept="sbPrefService.onBeforeUnload();"
 	onunload="sbPrefService.done();">
 
 	<prefpane id="sbPrefPane" flex="1">
@@ -60,9 +59,6 @@
 		<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 		<script type="application/x-javascript" src="chrome://scrapbook/content/highlighter.js" />
 		<script type="application/x-javascript" src="chrome://scrapbook/content/mbService.js" />
-
-		<!--string-->
-		<stringbundle id="sbMainString" src="chrome://scrapbook/locale/scrapbook.properties" />
 
 		<dialogheader title="ScrapBook &sb.tools.settings;" />
 
@@ -127,13 +123,13 @@
 				<!--advanced-->
 				<tabpanel orient="vertical" flex="1">
 					<!--data-->
-					<groupbox id="sbPrefDataGroupbox" style="margin-bottom:12px;">
+					<groupbox style="margin-bottom:12px;">
 						<caption label="&sb.pref.data;" />
 						<vbox>
 							<checkbox id="sbPrefDataDefault" preference="scrapbook.data.default" label="&sb.pref.data.default;" oncommand="sbPrefService.toggleDefaultData();" />
 							<hbox align="center" class="indent">
 								<textbox id="sbPrefDataPath" preference="scrapbook.data.path" flex="1" onfocus="blur();" />
-								<button  id="sbPrefDataButton" label="&sb.button.browse;..." tooltiptext="&sb.pref.data.tips;" oncommand="sbPrefService.selectData();" />
+								<button  id="sbPrefDataButton" label="&sb.button.browse;..." oncommand="sbPrefService.selectData('&sb.pref.data.tips;');" />
 							</hbox>
 						</vbox>
 						<description id="sbPrefDataAlert" class="notice" hidden="true">&sb.pref.data.alert;</description>

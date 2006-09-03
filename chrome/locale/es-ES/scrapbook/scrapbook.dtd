@@ -4,7 +4,7 @@
 <!ENTITY sb.tools "Opciones">
 <!ENTITY sb.tools.settings "Configuración">
 <!ENTITY sb.tools.manage "Administrar">
-<!ENTITY sb.tools.combine "Combinar">
+<!ENTITY sb.tools.combine "Combine Wizard">
 <!ENTITY sb.tools.trade "Importar / Exportar">
 <!ENTITY sb.tools.multiple "Capturar múltiples URLs">
 <!ENTITY sb.tools.directory "Directorio de ScrapBook">

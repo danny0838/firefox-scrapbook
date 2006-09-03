@@ -2,7 +2,6 @@
 <!ENTITY sb.toolbar.info "信息工具栏">
 <!ENTITY sb.edit.eraser "DOM 橡皮: 单击页面上的元素可以将该部分删除。">
 <!ENTITY sb.edit.undo "撤销">
-<!ENTITY sb.edit.restore "全部还原">
 <!ENTITY sb.edit.save "保存">
 <!ENTITY sb.edit.comment "展开注释区">
 <!ENTITY sb.edit.sticky "即时贴">

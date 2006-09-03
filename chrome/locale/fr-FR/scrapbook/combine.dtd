@@ -1,5 +1,4 @@
-<!ENTITY sb.combine.select "Sélectionner les pages">
-<!ENTITY sb.combine.select.d "Double-cliquer sur les pages dans l'ordre de la combinaison voulue.">
+<!ENTITY sb.combine.dragdrop "Ajouter les éléments par glisser-déposer à partir de l'aborescence dans l'ordre de la combinaison désirée. Vous pouvez glisser-déposer plusieurs éléments à la fois.">
 <!ENTITY sb.combine.preview "Aperçu">
 <!ENTITY sb.combine.preview.d "Presser le bouton 'Combiner' après vérification de l'aperçu.">
 <!ENTITY sb.combine.option.remove "Supprimer les pages d'origine après combinaison">

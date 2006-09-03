@@ -23,7 +23,7 @@ function SB_initView()
 	for ( var i = 0; i < resList.length; i++ )
 	{
 		var res = resList[i];
-		var item = new ScrapBookItem();
+		var item = sbCommonUtils.newItem();
 		for ( var prop in item ) item[prop] = sbDataSource.getProperty(res, prop);
 		if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(sbDataSource.getProperty(res, "type"));
 		src += SB_getHTMLBody(item);

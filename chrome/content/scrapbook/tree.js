@@ -1,6 +1,8 @@
 
 var sbTreeHandler = {
 
+	get TREE() { return document.getElementById("sbTree"); },
+
 	get resource()
 	{
 		if ( this.TREE.view.selection.count < 1 )
@@ -9,14 +11,10 @@ var sbTreeHandler = {
 			return this.TREE.builderView.getResourceAtIndex(this.TREE.currentIndex);
 	},
 
-	TREE : null,
-
 	autoCollapse : false,
 
-	init : function(isContainer, xulID)
+	init : function(isContainer)
 	{
-		if ( !xulID ) xulID = "sbTree";
-		this.TREE = document.getElementById(xulID);
 		this.TREE.database.AddDataSource(sbDataSource.data);
 		this.autoCollapse = sbCommonUtils.getBoolPref("scrapbook.tree.autoCollapse", false);
 		if ( isContainer ) document.getElementById("sbTreeRule").setAttribute("iscontainer", true);
@@ -119,12 +117,6 @@ var sbTreeHandler = {
 			var curIdx = this.TREE.currentIndex;
 			var curRes = this.TREE.builderView.getResourceAtIndex(curIdx);
 			var parRes = this.getParentResource(curIdx);
-			if ( parRes.Value == "urn:scrapbook:search" )
-			{
-				sbDataSource.removeFromContainer("urn:scrapbook:search", curRes);
-				parRes = sbDataSource.findParentResource(curRes);
-				if ( sbCommonUtils.RDFCU.indexOf(sbDataSource.data, parRes, curRes) == -1 ) { alert("ScrapBook FATAL ERROR."); return; }
-			}
 			resList.push(curRes);
 			parList.push(parRes);
 		}

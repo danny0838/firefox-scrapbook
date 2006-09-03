@@ -1,5 +1,4 @@
-<!ENTITY sb.combine.select "選擇欲合併頁面">
-<!ENTITY sb.combine.select.d "請依欲合併順序雙點頁面">
+<!ENTITY sb.combine.dragdrop "Add items by drag-and-drop from the tree in the order you want to combine. You can drag-and-drop multiple items at once.">
 <!ENTITY sb.combine.preview "預覽">
 <!ENTITY sb.combine.preview.d "確認預覽結果後，請按下「合併」鈕。">
 <!ENTITY sb.combine.option.remove "合併後刪除原頁面">

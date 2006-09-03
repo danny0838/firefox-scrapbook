@@ -1,6 +1,6 @@
 
-const kVERSION = "1.1.0.3";
-const kBUILD_TEXT = " (Build ID 20060817)";
+const kVERSION = "1.2";
+const kBUILD_TEXT = " (Build ID 20060902)";
 const kUPDATE_URL = "http://amb.vis.ne.jp/mozilla/scrapbook/update.rdf";
 
 var gAboutString;
@@ -17,7 +17,7 @@ function SB_initAbout()
 	document.getElementById("sbAboutVersion").value = "Version " + kVERSION + kBUILD_TEXT;
 	gUpdateImage.src = "chrome://scrapbook/skin/status_busy.gif";
 	try {
-		gUpdateLabel.value = gAboutString.getString("updatingMessage");
+		gUpdateLabel.value = gAboutString.getFormattedString("updatingMessage", ["ScrapBook"]);
 	} catch(ex) {
 		gUpdateLabel.value = gAboutString.getString("updatingMsg");
 	}
@@ -63,7 +63,7 @@ function SB_setUpdateInfo()
 				gUpdateLabel.onclick = function(){ sbCommonUtils.loadURL("http://amb.vis.ne.jp/mozilla/scrapbook/"); window.close(); };
 			} else {
 				try {
-					gUpdateLabel.setAttribute("value", gAboutString.getString("updateNoUpdateMessage"));
+					gUpdateLabel.setAttribute("value", gAboutString.getFormattedString("updateNoUpdateMessage", ["ScrapBook"]));
 				} catch(ex) {
 					gUpdateLabel.setAttribute("value", gAboutString.getString("updateNoUpdateMsg"));
 				}

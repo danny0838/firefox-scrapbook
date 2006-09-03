@@ -2,7 +2,6 @@
 <!ENTITY sb.toolbar.info "Barra de Información">
 <!ENTITY sb.edit.eraser "Borrador DOM: Elimina bloques al hacer click en ellos.">
 <!ENTITY sb.edit.undo "Deshacer">
-<!ENTITY sb.edit.restore "Abandonar cambios y restaurar">
 <!ENTITY sb.edit.save "Guardar">
 <!ENTITY sb.edit.comment "Expandir área de comentarios">
 <!ENTITY sb.edit.sticky "Sticky Annotation">

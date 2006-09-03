@@ -12,20 +12,16 @@ var sbMultiBookService = {
 
 	showTitle : function()
 	{
-		if ( "sbMultiBookOverlay" in window )
-		{
-			alert(document.getElementById("sbMainString").getString("MB_UNINSTALL"));
-			nsPreferences.setBoolPref("scrapbook.multibook.enabled", true);
-		}
+		if ( "sbMultiBookOverlay" in window ) alert("Since ScrapBook 0.18.4, 'Multi-ScrapBook' feature was merged to ScrapBook.\n'Multi-ScrapBook' is no longer valid. Please uninstall it.");
 		if ( !this.enabled ) return;
-		var refWin = "sbBrowserOverlay" in window.top ? window.top : window.opener.top;
-		var title = refWin.sbBrowserOverlay.dataTitle;
+		var win = "sbBrowserOverlay" in window.top ? window.top : sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
+		var title = win.sbBrowserOverlay.dataTitle;
 		if ( !title )
 		{
 			title = nsPreferences.copyUnicharPref("scrapbook.data.title", "");
-			refWin.sbBrowserOverlay.dataTitle = title;
+			win.sbBrowserOverlay.dataTitle = title;
 		}
-		if ( title ) refWin.document.getElementById("sidebar-title").value = "ScrapBook [" + title + "]";
+		if ( title ) win.document.getElementById("sidebar-title").value = "ScrapBook [" + title + "]";
 	},
 
 	initMenu : function()
@@ -79,11 +75,9 @@ var sbMultiBookService = {
 	{
 		if ( !this.validateRefresh() ) return;
 		aItem.setAttribute("checked", true);
-		this.readWritePref(false);
 		var path = aItem.getAttribute("path");
 		nsPreferences.setBoolPref("scrapbook.data.default", path == "");
 		if ( path != "" ) nsPreferences.setUnicharPref("scrapbook.data.path", path);
-		this.readWritePref(true);
 		nsPreferences.setUnicharPref("scrapbook.data.title", aItem.label);
 		try {
 			var refWin = "sbBrowserOverlay" in window.top ? window.top : window.opener.top;
@@ -91,31 +85,7 @@ var sbMultiBookService = {
 		} catch(ex) {
 		}
 		this.refreshGlobal();
-		if ( window.location.href == "chrome://scrapbook/content/trade.xul" )
-		{
-			sbTreeHandler.exit();
-			sbTreeDNDHandler.quit();
-			SB_initTrade();
-		}
-		else
-			sbMainService.refresh();
-	},
-
-	readWritePref : function(aReadWrite)
-	{
-		var file, pref;
-		try {
-			file = sbCommonUtils.getScrapBookDir().clone();
-			file.append("folders.txt");
-			if ( aReadWrite ) {
-				pref = sbCommonUtils.readFile(file);
-				if ( pref ) nsPreferences.setUnicharPref("scrapbook.tree.folderList", pref);
-			} else {
-				pref = nsPreferences.copyUnicharPref("scrapbook.tree.folderList", "");
-				if ( pref ) sbCommonUtils.writeFile(file, pref, "UTF-8");
-			}
-		} catch(ex) {
-		}
+		sbMainService.refresh();
 	},
 
 

@@ -4,7 +4,8 @@
 <!ENTITY sb.open.source "Abrir URL de origen">
 <!ENTITY sb.tools "Herramientas">
 <!ENTITY sb.show.files "Mostrar Ficheros">
-<!ENTITY sb.move "Mover a carpeta">
+<!ENTITY sb.move "Move">
+<!ENTITY sb.move.into "Mover a carpeta">
 <!ENTITY sb.renew "Capture Again">
 <!ENTITY sb.export "Exportar">
 <!ENTITY sb.remove "Borrar">

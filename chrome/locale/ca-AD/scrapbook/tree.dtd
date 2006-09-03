@@ -4,7 +4,8 @@
 <!ENTITY sb.open.source "Obre l'URL font">
 <!ENTITY sb.tools "Eines">
 <!ENTITY sb.show.files "Mostra els fitxers">
-<!ENTITY sb.move "Mou a la carpeta">
+<!ENTITY sb.move "Move">
+<!ENTITY sb.move.into "Mou a la carpeta">
 <!ENTITY sb.renew "Torna a capturar-ho">
 <!ENTITY sb.export "Exporta">
 <!ENTITY sb.remove "Suprimeix">

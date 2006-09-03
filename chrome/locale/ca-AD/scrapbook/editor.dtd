@@ -2,7 +2,6 @@
 <!ENTITY sb.toolbar.info "Barra d'informació">
 <!ENTITY sb.edit.eraser "Esborrador DOM: Una eina per a suprimir elements d'una pàgina web.">
 <!ENTITY sb.edit.undo "Desfés">
-<!ENTITY sb.edit.restore "Abandona els canvis i restaura">
 <!ENTITY sb.edit.save "Desa els canvis">
 <!ENTITY sb.edit.comment "Expandeix/Redueix l'àrea de comentaris">
 <!ENTITY sb.edit.sticky "Nota adhesiva">

@@ -1,5 +1,4 @@
-<!ENTITY sb.combine.select "Välj sidor">
-<!ENTITY sb.combine.select.d "Dubbelklicka sidorna i den ordning du vill att de ska kombineras.">
+<!ENTITY sb.combine.dragdrop "Add items by drag-and-drop from the tree in the order you want to combine. You can drag-and-drop multiple items at once.">
 <!ENTITY sb.combine.preview "Förhandsvisa">
 <!ENTITY sb.combine.preview.d "Tryck Kombinera-knappen efter att ha granskat förhandsvisningen.">
 <!ENTITY sb.combine.option.remove "Radera originalsidorna när de kombinerats.">

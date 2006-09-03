@@ -4,7 +4,8 @@
 <!ENTITY sb.open.source "Открыть исходный URL">
 <!ENTITY sb.tools "Инструменты">
 <!ENTITY sb.show.files "Показать файлы">
-<!ENTITY sb.move "Переместить в папку">
+<!ENTITY sb.move "Move">
+<!ENTITY sb.move.into "Переместить в папку">
 <!ENTITY sb.renew "Захватить снова">
 <!ENTITY sb.export "Экспорт">
 <!ENTITY sb.remove "Удалить">

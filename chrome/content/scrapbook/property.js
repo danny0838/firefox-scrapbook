@@ -23,7 +23,7 @@ var sbPropService = {
 		}
 		if ( !this.id ) return;
 		sbDataSource.init();
-		this.item = new ScrapBookItem();
+		this.item = sbCommonUtils.newItem();
 		this.resource = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.id);
 		for ( var prop in this.item )
 		{
@@ -32,6 +32,7 @@ var sbPropService = {
 		this.id.match(/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/);
 		var dd = new Date(parseInt(RegExp.$1, 10), parseInt(RegExp.$2, 10) - 1, parseInt(RegExp.$3, 10), parseInt(RegExp.$4, 10), parseInt(RegExp.$5, 10), parseInt(RegExp.$6, 10));
 		var dateTime = dd.toLocaleString();
+		document.getElementById("sbPropID").value      = this.item.id;
 		document.getElementById("sbPropTitle").value   = this.item.title;
 		document.getElementById("sbPropSource").value  = this.item.source;
 		document.getElementById("sbPropDate").value    = dateTime;

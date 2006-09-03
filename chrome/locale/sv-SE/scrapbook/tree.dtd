@@ -4,7 +4,8 @@
 <!ENTITY sb.open.source "Öppna URL som posten sparades från">
 <!ENTITY sb.tools "Verktyg">
 <!ENTITY sb.show.files "Visa filer">
-<!ENTITY sb.move "Flytta till mapp">
+<!ENTITY sb.move "Move">
+<!ENTITY sb.move.into "Flytta till mapp">
 <!ENTITY sb.renew "Capture Again">
 <!ENTITY sb.export "Exporta">
 <!ENTITY sb.remove "Radera">

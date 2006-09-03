@@ -2,7 +2,6 @@
 <!ENTITY sb.toolbar.info "Barra de Informações">
 <!ENTITY sb.edit.eraser "Apagador DOM: Remove elementos da Página Web através do clique.">
 <!ENTITY sb.edit.undo "Desfazer">
-<!ENTITY sb.edit.restore "Descartar Mudanças e Restaurar">
 <!ENTITY sb.edit.save "Salvar Mudanças">
 <!ENTITY sb.edit.comment "Expandir Área do Comentário">
 <!ENTITY sb.edit.sticky "Anotação">

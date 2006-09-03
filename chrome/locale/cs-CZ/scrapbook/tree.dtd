@@ -4,7 +4,8 @@
 <!ENTITY sb.open.source "Otevřít zdroj URL">
 <!ENTITY sb.tools "Nástroje">
 <!ENTITY sb.show.files "Zobrazit soubory">
-<!ENTITY sb.move "Přesunout do složky">
+<!ENTITY sb.move "Move">
+<!ENTITY sb.move.into "Přesunout do složky">
 <!ENTITY sb.renew "Zachytit znovu">
 <!ENTITY sb.export "Exportovat">
 <!ENTITY sb.remove "Vymazat">

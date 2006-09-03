@@ -4,4 +4,5 @@
 <!ENTITY sb.multiple.detector.slink "Todos os Links na Seleção">
 <!ENTITY sb.multiple.detector.tabs "Todas as Abas Abertas na Janela">
 <!ENTITY sb.multiple.detector.local "Todos os HTMLs em um Diretório Local">
+<!ENTITY sb.multiple.detector.bookmarks "Bookmarks">
 <!ENTITY sb.multiple.detector.clear "Limpar">

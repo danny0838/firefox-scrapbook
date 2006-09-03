@@ -2,7 +2,6 @@
 <!ENTITY sb.toolbar.info "Info Toolbar">
 <!ENTITY sb.edit.eraser "Очистка страницы: удаление блоков">
 <!ENTITY sb.edit.undo "Отменить">
-<!ENTITY sb.edit.restore "Отменить все правки и вернуться к первоначальному виду">
 <!ENTITY sb.edit.save "Зафиксировать правки">
 <!ENTITY sb.edit.comment "Расширить поле комментария">
 <!ENTITY sb.edit.sticky "Быстрое примечание">

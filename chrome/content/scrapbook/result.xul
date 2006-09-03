@@ -10,6 +10,8 @@
 %propDTD;
 <!ENTITY % treeDTD SYSTEM "chrome://scrapbook/locale/tree.dtd" >
 %treeDTD;
+<!ENTITY % editDTD SYSTEM "chrome://scrapbook/locale/editor.dtd" >
+%editDTD;
 ]>
 
 <!--window-->
@@ -35,15 +37,18 @@
 		<popup id="sbPopup">
 			<menuitem id="sbPopupOpen"       label="&sb.open;"        oncommand="sbSearchResult.forward('O');" />
 			<menuitem id="sbPopupOpenNewTab" label="&sb.open.newtab;" oncommand="sbSearchResult.forward('T');" />
-			<menuseparator /><menuitem id="sbPopupProperty" class="menuitem-iconic" label="&sb.property;" oncommand="sbSearchResult.forward('P');" />
+			<menuitem id="sbPopupOpenLocate" label="&sb.locate;"      oncommand="sbSearchResult.forward('L');" />
+			<menuseparator />
+			<menuitem id="sbPopupProperty" class="menuitem-iconic" label="&sb.property;" oncommand="sbSearchResult.forward('P');" />
 		</popup>
 	</popupset>
 
 	<!--header-->
 	<hbox id="sbResultHeader" class="sb-header" align="center">
-		<label flex="1" crop="end" />
+		<label crop="end" />
+		<label crop="end" value="&sb.prop.folder;: " style="color: blue;" hidden="true" />
 		<spacer flex="1" />
-		<toolbarbutton class="sb-header-locate" oncommand="sbSearchResult.forward('L');" />
+		<toolbarbutton class="sb-header-locate" tooltiptext="&sb.locate;" oncommand="sbSearchResult.forward('L');" />
 		<toolbarbutton class="sb-header-exit"   oncommand="SB_exitResult();" />
 	</hbox>
 

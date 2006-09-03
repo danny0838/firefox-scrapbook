@@ -2,7 +2,6 @@
 <!ENTITY sb.toolbar.info "顯示資訊列">
 <!ENTITY sb.edit.eraser "DOM Eraser: 將點選的區塊刪除，或可刪除單一標示。">
 <!ENTITY sb.edit.undo "復原">
-<!ENTITY sb.edit.restore "復原、放棄變動">
 <!ENTITY sb.edit.save "存檔">
 <!ENTITY sb.edit.comment "展開文件評注欄">
 <!ENTITY sb.edit.sticky "自由註解">

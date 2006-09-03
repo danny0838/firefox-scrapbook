@@ -2,7 +2,6 @@
 <!ENTITY sb.toolbar.info "Barre d'information">
 <!ENTITY sb.edit.eraser "DOM Eraser: un outil pour supprimer un bloc sélectionné.">
 <!ENTITY sb.edit.undo "Annuler">
-<!ENTITY sb.edit.restore "Abandonner les changements et restaurer">
 <!ENTITY sb.edit.save "Sauvegarder les changements">
 <!ENTITY sb.edit.comment "Déployer la zone de commentaire">
 <!ENTITY sb.edit.sticky "Note collante">

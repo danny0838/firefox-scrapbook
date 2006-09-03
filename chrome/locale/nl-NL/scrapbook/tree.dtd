@@ -4,7 +4,8 @@
 <!ENTITY sb.open.source "Bronlocatie openen">
 <!ENTITY sb.tools "Opties">
 <!ENTITY sb.show.files "Bestanden tonen">
-<!ENTITY sb.move "Naar map verplaatsen">
+<!ENTITY sb.move "Move">
+<!ENTITY sb.move.into "Naar map verplaatsen">
 <!ENTITY sb.renew "Capture Again">
 <!ENTITY sb.export "Exporteren">
 <!ENTITY sb.remove "Verwijderen">

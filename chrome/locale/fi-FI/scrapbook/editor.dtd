@@ -2,7 +2,6 @@
 <!ENTITY sb.toolbar.info "Infopalkki">
 <!ENTITY sb.edit.eraser "DOM-poistaja: Poistaa napsautetun lohkoelementin.">
 <!ENTITY sb.edit.undo "Kumoa">
-<!ENTITY sb.edit.restore "Hylkää muutokset ja palauta">
 <!ENTITY sb.edit.save "Tallenna muutokset">
 <!ENTITY sb.edit.comment "Laajenna kommenttialuetta">
 <!ENTITY sb.edit.sticky "muistilappu">

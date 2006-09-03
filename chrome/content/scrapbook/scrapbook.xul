@@ -15,7 +15,8 @@
         title="ScrapBook"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         onload="sbMainService.init();"
-        onunload="sbMainService.done();">
+        onunload="sbMainService.done();"
+        windowtype="scrapbook">
 
 	<!--script-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapnote.js" />
@@ -32,29 +33,8 @@
 	<popupset id="sbPopupSet" />
 
 	<!--toolbox-->
-	<toolbox class="plain">
-		<!--search toolbar-->
-		<toolbar id="sbSearchToolbar" class="plain">
-			<hbox align="center" flex="1">
-				<textbox id="sbSearchTextbox"
-				         type="autocomplete"
-				         autocompletesearch="form-history"
-				         autocompletesearchparam="sbSearchHistory"
-				         ontextentered="sbSearchService.enter(this.value);"
-				         enablehistory="true"
-				         tabscrolling="true"
-				         accesskey="S"
-				         flex="1">
-					<image id="sbSearchImage"
-					       src="chrome://scrapbook/skin/search_fulltext.png"
-					       searchtype="fulltext"
-					       persist="searchtype"
-					       popup="sbSearchPopup"
-					       onclick="if ( event.button == 1 ) sbSearchService.enter(this.parentNode.value);" />
-				</textbox>
-			</hbox>
-		</toolbar>
-		<!--main toolbar-->
+	<toolbox id="sbMainToolbox" class="plain">
+		<toolbar id="sbSearchToolbar" class="plain" />
 		<toolbar id="sbMainToolbar" class="plain">
 			<toolbarbutton id="sbToolbarNewFolder" type="menu">
 				<menupopup>
@@ -70,14 +50,14 @@
 				<menupopup id="sbToolsMenuPopup">
 					<menuitem label="&sb.tools.settings;..." oncommand="sbMainService.openPrefWindow();" />
 					<menuseparator />
-					<menuitem label="&sb.tools.manage;"    oncommand="window.openDialog('chrome://scrapbook/content/manage.xul','','chrome,centerscreen,all,resizable,dialog=no',null);" />
-					<menuitem label="&sb.tools.combine;"   oncommand="window.openDialog('chrome://scrapbook/content/combine.xul','','chrome,centerscreen,all,resizable');" />
-					<menuitem label="&sb.tools.trade;"     oncommand="window.openDialog('chrome://scrapbook/content/trade.xul','ScrapBook:Trade','chrome,centerscreen,all,resizable,dialog=no');" />
+					<menuitem label="&sb.tools.manage;"    oncommand="sbCommonUtils.openManageWindow(null,null);" />
+					<menuitem label="&sb.tools.combine;"   oncommand="sbCommonUtils.openManageWindow(null,'sbToolbarCombine');" />
+					<menuitem label="&sb.tools.trade;"     oncommand="sbCommonUtils.openManageWindow(null,'sbToolbarTrade');" />
 					<menuitem label="&sb.tools.multiple;"  oncommand="window.top.openDialog('chrome://scrapbook/content/multiple.xul','','chrome,centerscreen,all,resizable,dialog=no');" />
 					<menuitem label="&sb.tools.directory;" oncommand="sbController.launch(sbCommonUtils.getScrapBookDir());" />
 					<menuseparator />
 					<menu id="sbAddOns" label="&sb.tools.addons;"><menupopup id="sbAddOnsPopup" /></menu>
-					<menuitem label="&sb.tools.calculate;" oncommand="window.openDialog('chrome://scrapbook/content/calculate.xul','ScrapBook:Calculate','chrome,centerscreen,all,dialog=no');" />
+					<menuitem label="&sb.tools.calculate;" oncommand="window.openDialog('chrome://scrapbook/content/calculate.xul','ScrapBook:Calculate','chrome,centerscreen,all,resizable,dialog=no');" />
 					<menuitem label="&sb.tools.sorttree;"  oncommand="window.openDialog('chrome://scrapbook/content/sort.xul','','chrome,centerscreen,modal');" />
 					<menuitem label="&sb.tools.output;"    oncommand="window.openDialog('chrome://scrapbook/content/output.xul','ScrapBook:Output','chrome,centerscreen,modal,resizable');" />
 					<menuitem label="&sb.tools.repair;"    oncommand="window.openDialog('chrome://scrapbook/content/repair.xul','ScrapBook:Repair','chrome,centerscreen,all,modal,resizable,dialog=no');" />
@@ -90,12 +70,12 @@
 		</toolbar>
 	</toolbox>
 
-	<vbox flex="1" id="sbOuterBox">
+	<vbox id="sbOuterBox" flex="1">
 		<!--search header-->
 		<hbox id="sbHeader" class="sb-header" align="center" hidden="true">
 			<label flex="1" crop="end" />
 			<spacer flex="1" />
-			<toolbarbutton class="sb-header-exit" />
+			<toolbarbutton class="sb-header-exit" oncommand="sbSearchService.exit();" />
 		</hbox>
 		<!--tree-->
 		<vbox id="sbTreeOuter" flex="2" persist="height">

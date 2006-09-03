@@ -4,7 +4,8 @@
 <!ENTITY sb.open.source "Oscail URL Foinsithe">
 <!ENTITY sb.tools "Uirlis&#237;">
 <!ENTITY sb.show.files "Teasp&#225;inn Comhaid">
-<!ENTITY sb.move "Bog go Comhadlann">
+<!ENTITY sb.move "Move">
+<!ENTITY sb.move.into "Bog go Comhadlann">
 <!ENTITY sb.renew "Ath-Ghabh&#225;il">
 <!ENTITY sb.export "Easport&#225;il">
 <!ENTITY sb.remove "Scrios">

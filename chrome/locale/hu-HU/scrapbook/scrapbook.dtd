@@ -4,7 +4,7 @@
 <!ENTITY sb.tools "Eszközök">
 <!ENTITY sb.tools.settings "Beállítások">
 <!ENTITY sb.tools.manage "Kezelés">
-<!ENTITY sb.tools.combine "Összefűzés">
+<!ENTITY sb.tools.combine "Combine Wizard">
 <!ENTITY sb.tools.trade "Importálás / Exportálás">
 <!ENTITY sb.tools.multiple "Több webcím rögzítése">
 <!ENTITY sb.tools.directory "Dosszié mappa">

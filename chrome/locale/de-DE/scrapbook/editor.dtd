@@ -2,7 +2,6 @@
 <!ENTITY sb.toolbar.info "Info Toolbar">
 <!ENTITY sb.edit.eraser "DOM-Eraser: Werkzeug zum Entfernen angeklickter Elemente innerhalb einer Webseite.">
 <!ENTITY sb.edit.undo "Rückgängig">
-<!ENTITY sb.edit.restore "Alle Änderungen rückgängig machen">
 <!ENTITY sb.edit.save "Änderungen speichern">
 <!ENTITY sb.edit.comment "Beschreibungsfeld vergrößern">
 <!ENTITY sb.edit.sticky "Notizkommentar">

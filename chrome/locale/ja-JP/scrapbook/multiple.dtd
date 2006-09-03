@@ -4,4 +4,5 @@
 <!ENTITY sb.multiple.detector.slink "選択範囲内のすべてのリンク">
 <!ENTITY sb.multiple.detector.tabs "現在のウィンドウに開かれたすべてのタブ">
 <!ENTITY sb.multiple.detector.local "指定したフォルダ以下のローカルHTML">
+<!ENTITY sb.multiple.detector.bookmarks "ブックマーク">
 <!ENTITY sb.multiple.detector.clear "クリア">

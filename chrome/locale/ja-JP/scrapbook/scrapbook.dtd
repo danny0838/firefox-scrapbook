@@ -4,7 +4,7 @@
 <!ENTITY sb.tools "ツール">
 <!ENTITY sb.tools.settings "設定">
 <!ENTITY sb.tools.manage "管理">
-<!ENTITY sb.tools.combine "結合ツール">
+<!ENTITY sb.tools.combine "結合ウィザード">
 <!ENTITY sb.tools.trade "インポート/エクスポート">
 <!ENTITY sb.tools.multiple "URL一括取り込み">
 <!ENTITY sb.tools.directory "ScrapBookフォルダ">

@@ -6,10 +6,7 @@
 <?xml-stylesheet href="chrome://scrapbook/skin/note.css" type="text/css" ?>
 
 <!--locale-->
-<!DOCTYPE window [
-<!ENTITY % noteDTD SYSTEM "chrome://scrapbook/locale/note.dtd" >
-%noteDTD;
-]>
+<!DOCTYPE window SYSTEM "chrome://scrapbook/locale/note.dtd">
 
 <!--window-->
 <window id="sbNoteWindow"
@@ -25,8 +22,9 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/note.js" />
 
 	<!--browser-->
-	<browser id="sbNoteBrowser" type="content-primary" flex="3" hidden="true" onload="event.preventBubble();event.stopPropagation();" />
-	<splitter id="sbSplitter" class="plain" hidden="true" />
+	<browser id="sbNoteBrowser" type="content-primary" flex="3" collapsed="true" onload="event.preventBubble();event.stopPropagation();" />
+	<!--splitter-->
+	<splitter id="sbSplitter" class="plain" collapsed="true" />
 	<!--editor-->
 	<vbox id="sbNoteEditor" flex="2">
 		<hbox id="sbNoteHeader" class="sb-header" align="center">
@@ -42,7 +40,7 @@
 		         class="plain" flex="1" />
 	</vbox>
 	<!--template-->
-	<vbox id="sbNoteTemplate" flex="2" hidden="true">
+	<vbox id="sbNoteTemplate" flex="2" collapsed="true">
 		<hbox id="sbNoteTemplateHeader" class="sb-header sb-header-red" align="center">
 			<label value="&sb.note.template;" />
 			<spacer flex="1" />
@@ -68,7 +66,7 @@
 			</menupopup>
 		</toolbarbutton>
 		<toolbarbutton type="menu" id="sbNoteToolbarF" label="&sb.note.fontsize;" accesskey="Z">
-			<menupopup oncommand="sbNoteService2.changeFontSize(parseInt(event.originalTarget.label));">
+			<menupopup oncommand="sbNoteService2.changeFontSize(parseInt(event.originalTarget.label, 10));">
 				<menuitem id="sbNoteToolbarF18" type="radio" label="18px" />
 				<menuitem id="sbNoteToolbarF17" type="radio" label="17px" />
 				<menuitem id="sbNoteToolbarF16" type="radio" label="16px" />

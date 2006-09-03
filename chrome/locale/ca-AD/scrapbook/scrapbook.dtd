@@ -4,7 +4,7 @@
 <!ENTITY sb.tools "Eines">
 <!ENTITY sb.tools.settings "Opcions">
 <!ENTITY sb.tools.manage "Gestiona l'arbre">
-<!ENTITY sb.tools.combine "Uneix">
+<!ENTITY sb.tools.combine "Combine Wizard">
 <!ENTITY sb.tools.trade "Importa/Exporta">
 <!ENTITY sb.tools.multiple "Captura de múltiples URL">
 <!ENTITY sb.tools.directory "Carpeta de l'ScrapBook">

@@ -2,7 +2,6 @@
 <!ENTITY sb.toolbar.info "情報ツールバー">
 <!ENTITY sb.edit.eraser "DOMイレーサー：不要な部分を直接クリックして削除するツール">
 <!ENTITY sb.edit.undo "元に戻す">
-<!ENTITY sb.edit.restore "すべての変更を破棄して前回保存時の状態へ戻す">
 <!ENTITY sb.edit.save "変更を保存する">
 <!ENTITY sb.edit.comment "コメントエリアを広げる">
 <!ENTITY sb.edit.sticky "付箋アノテーション">

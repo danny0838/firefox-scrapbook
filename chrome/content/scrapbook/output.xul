@@ -34,7 +34,7 @@
 	<broadcasterset id="sbBroadcasters" />
 
 	<!--tree-->
-	<tree id="sbTree" onclick="sbOutputService.toggleAllSelection();" flex="1" />
+	<tree id="sbTree" hidecolumnpicker="true" onclick="sbOutputService.toggleAllSelection();" flex="1" />
 
 	<checkbox id="ScrapBookOutputOptionA" label="&sb.output.option.all;"   style="margin-top:12px;" oncommand="sbOutputService.selectAllFolders();" checked="true" />
 	<checkbox id="ScrapBookOutputOptionF" label="&sb.output.option.frame;" persist="checked" />

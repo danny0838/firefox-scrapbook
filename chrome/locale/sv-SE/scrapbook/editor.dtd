@@ -2,7 +2,6 @@
 <!ENTITY sb.toolbar.info "Info Toolbar">
 <!ENTITY sb.edit.eraser "DOM Eraser: Ett verktyg för att radera markerat block. ">
 <!ENTITY sb.edit.undo "Ångra">
-<!ENTITY sb.edit.restore "Ångra ändringar och återställ sidan">
 <!ENTITY sb.edit.save "Spara ändringar">
 <!ENTITY sb.edit.comment "Utöka kommentarytan">
 <!ENTITY sb.edit.sticky "Sticky Annotation">

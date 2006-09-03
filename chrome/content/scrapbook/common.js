@@ -28,51 +28,54 @@ var sbCommonUtils = {
 
 
 
+	newItem : function(aID)
+	{
+		return { id : aID || "", type : "", title : "", chars : "", icon : "", source : "", comment : "" };
+	},
+
 	getScrapBookDir : function()
 	{
-		var myDir;
+		var dir;
 		try {
 			var isDefault = this.PREF.getBoolPref("scrapbook.data.default");
-			myDir = this.PREF.getComplexValue("scrapbook.data.path", Components.interfaces.nsIPrefLocalizedString).data;
-			myDir = this.convertPathToFile(myDir);
+			dir = this.PREF.getComplexValue("scrapbook.data.path", Components.interfaces.nsIPrefLocalizedString).data;
+			dir = this.convertPathToFile(dir);
 		} catch(ex) {
 			isDefault = true;
 		}
 		if ( isDefault )
 		{
-			myDir = this.DIR.get("ProfD", Components.interfaces.nsIFile);
-			myDir.append("ScrapBook");
+			dir = this.DIR.get("ProfD", Components.interfaces.nsIFile);
+			dir.append("ScrapBook");
 		}
-		if ( !myDir.exists() )
+		if ( !dir.exists() )
 		{
-			myDir.create(myDir.DIRECTORY_TYPE, 0700);
+			dir.create(dir.DIRECTORY_TYPE, 0700);
 		}
-		return myDir;
+		return dir;
 	},
-
 
 	getContentDir : function(aID, aSuppressCreate)
 	{
-		if ( aID.length != 14 )
+		if ( !aID || aID.length != 14 )
 		{
-			alert("ScrapBook FATAL ERROR in sbCommonUtils::getContentDir.");
+			alert("ScrapBook FATAL ERROR: Failed to get directory '" + aID + "'.");
 			return null;
 		}
-		var myDir = this.getScrapBookDir().clone();
-		myDir.append("data");
-		if ( !myDir.exists() ) myDir.create(myDir.DIRECTORY_TYPE, 0700);
-		myDir.append(aID);
-		if ( !myDir.exists() )
+		var dir = this.getScrapBookDir().clone();
+		dir.append("data");
+		if ( !dir.exists() ) dir.create(dir.DIRECTORY_TYPE, 0700);
+		dir.append(aID);
+		if ( !dir.exists() )
 		{
 			if ( aSuppressCreate )
 			{
 				return null;
 			}
-			myDir.create(myDir.DIRECTORY_TYPE, 0700);
+			dir.create(dir.DIRECTORY_TYPE, 0700);
 		}
-		return myDir;
+		return dir;
 	},
-
 
 	removeDirSafety : function(aDir, check)
 	{
@@ -94,7 +97,6 @@ var sbCommonUtils = {
 		}
 	},
 
-
 	loadURL : function(aURL, tabbed)
 	{
 		var win = this.WINDOW.getMostRecentWindow("navigator:browser");
@@ -105,7 +107,6 @@ var sbCommonUtils = {
 			browser.loadURI(aURL);
 		}
 	},
-
 
 	rebuildGlobal : function()
 	{
@@ -122,7 +123,6 @@ var sbCommonUtils = {
 		}
 	},
 
-
 	getTimeStamp : function(advance)
 	{
 		var dd = new Date;
@@ -136,14 +136,12 @@ var sbCommonUtils = {
 		return y.toString() + m.toString() + d.toString() + h.toString() + i.toString() + s.toString();
 	},
 
-
-	getRootHref : function(aURLString)
+	getRootHref : function(aURLSpec)
 	{
-		var aURL = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
-		aURL.spec = aURLString;
-		return aURL.scheme + "://" + aURL.host + "/";
+		var url = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
+		url.spec = aURLSpec;
+		return url.scheme + "://" + url.host + "/";
 	},
-
 
 	getBaseHref : function(sURI)
 	{
@@ -154,7 +152,6 @@ var sbCommonUtils = {
 		return base;
 	},
 
-
 	getFileName : function(aURI)
 	{
 		var pos, name;
@@ -163,7 +160,6 @@ var sbCommonUtils = {
 		name = ( (pos = name.lastIndexOf("/")) != -1 ) ? name.substring(++pos) : name;
 		return name;
 	},
-
 
 	splitFileName : function(aFileName)
 	{
@@ -179,7 +175,6 @@ var sbCommonUtils = {
 		return ret;
 	},
 
-
 	validateFileName : function(aFileName)
 	{
 		aFileName = aFileName.replace(/[\"\?!~`]+/g, "");
@@ -192,17 +187,15 @@ var sbCommonUtils = {
 		return aFileName;
 	},
 
-
 	resolveURL : function(aBaseURL, aRelURL)
 	{
 		try {
-			var aBaseURLObj = this.convertURLToObject(aBaseURL);
-			return aBaseURLObj.resolve(aRelURL);
+			var baseURLObj = this.convertURLToObject(aBaseURL);
+			return baseURLObj.resolve(aRelURL);
 		} catch(ex) {
 			alert("ScrapBook ERROR: Failed to resolve URL.\n" + aBaseURL + "\n" + aRelURL);
 		}
 	},
-
 
 	crop : function(aString, aMaxLength)
 	{
@@ -229,7 +222,6 @@ var sbCommonUtils = {
 		}
 	},
 
-
 	writeFile : function(aFile, aContent, aChars)
 	{
 		if ( aFile.exists() ) aFile.remove(false);
@@ -248,7 +240,6 @@ var sbCommonUtils = {
 		}
 	},
 
-
 	writeIndexDat : function(aItem, aFile)
 	{
 		if ( !aFile )
@@ -264,7 +255,6 @@ var sbCommonUtils = {
 		this.writeFile(aFile, content, "UTF-8");
 	},
 
-
 	saveTemplateFile : function(aURISpec, aFile)
 	{
 		if ( aFile.exists() ) return;
@@ -273,7 +263,6 @@ var sbCommonUtils = {
 		var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
 		WBP.saveURI(uri, null, null, null, null, aFile);
 	},
-
 
 	convertToUnicode : function(aString, aCharset)
 	{
@@ -295,7 +284,6 @@ var sbCommonUtils = {
 		return aFile;
 	},
 
-
 	convertFilePathToURL : function(aFilePath)
 	{
 		var tmpFile = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
@@ -303,14 +291,12 @@ var sbCommonUtils = {
 		return this.IO.newFileURI(tmpFile).spec;
 	},
 
-
 	convertURLToObject : function(aURLString)
 	{
 		var aURL = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURI);
 		aURL.spec = aURLString;
 		return aURL;
 	},
-
 
 	convertURLToFile : function(aURLString)
 	{
@@ -322,7 +308,6 @@ var sbCommonUtils = {
 		} catch(ex) {
 		}
 	},
-
 
 	execProgram : function(aExecFilePath, args)
 	{
@@ -341,14 +326,12 @@ var sbCommonUtils = {
 		}
 	},
 
-
 	getFocusedWindow : function()
 	{
 		var win = document.commandDispatcher.focusedWindow;
 		if ( !win || win == window || win instanceof Components.interfaces.nsIDOMChromeWindow ) win = window._content;
 		return win;
 	},
-
 
 	getDefaultIcon : function(type)
 	{
@@ -360,7 +343,6 @@ var sbCommonUtils = {
 		}
 	},
 
-
 	getBoolPref : function(aName, aDefVal)
 	{
 		try {
@@ -370,11 +352,21 @@ var sbCommonUtils = {
 		}
 	},
 
-
 	escapeComment : function(aStr)
 	{
-		if ( aStr.length > 10000 ) alert("ScrapBook ALERT: Too long comment makes ScrapBook slow.");
+		if ( aStr.length > 10000 ) alert("NOTICE: Too long comment makes ScrapBook slow.");
 		return aStr.replace(/\r|\n|\t/g, " __BR__ ");
+	},
+
+	openManageWindow : function(aRes, aModEltID)
+	{
+		window.openDialog("chrome://scrapbook/content/manage.xul", "ScrapBook:Manage", "chrome,centerscreen,all,resizable,dialog=no", aRes, aModEltID);
+	},
+
+	log : function(aMsg, aOpen)
+	{
+		const CONSOLE = Components.classes['@mozilla.org/consoleservice;1'].getService(Components.interfaces.nsIConsoleService);
+		CONSOLE.logStringMessage(aMsg);
 	},
 
 

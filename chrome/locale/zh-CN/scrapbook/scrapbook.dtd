@@ -4,7 +4,7 @@
 <!ENTITY sb.tools "工具">
 <!ENTITY sb.tools.settings "选项">
 <!ENTITY sb.tools.manage "管理项目">
-<!ENTITY sb.tools.combine "合并页面">
+<!ENTITY sb.tools.combine "Combine Wizard">
 <!ENTITY sb.tools.trade "导入和导出">
 <!ENTITY sb.tools.multiple "多链接获取">
 <!ENTITY sb.tools.directory "ScrapBook 目录">

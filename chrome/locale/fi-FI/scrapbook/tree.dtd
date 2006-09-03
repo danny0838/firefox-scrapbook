@@ -4,7 +4,8 @@
 <!ENTITY sb.open.source "Avaa lähde-URL">
 <!ENTITY sb.tools "Työkalut">
 <!ENTITY sb.show.files "Näytä tiedostot">
-<!ENTITY sb.move "Siirrä kansioon">
+<!ENTITY sb.move "Move">
+<!ENTITY sb.move.into "Siirrä kansioon">
 <!ENTITY sb.renew "Kaappaa uudestaan">
 <!ENTITY sb.export "Vie">
 <!ENTITY sb.remove "Poista">

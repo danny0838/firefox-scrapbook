@@ -9,7 +9,6 @@ var sbBrowserOverlay = {
 	infoMode : false,
 	resource : null,
 	locateMe : null,
-	folderList : [],
 	prefOpenFromMenu : false,
 	prefBookmarkMenu : true,
 
@@ -46,10 +45,10 @@ var sbBrowserOverlay = {
 		gBrowser.addProgressListener(this.webProgressListener);
 		var firstInit = function()
 		{
-			if ( nsPreferences.getIntPref("scrapbook.version", 0) < 20060722 )
+			if ( nsPreferences.getIntPref("scrapbook.version", 0) < 20060902 )
 			{
-				sbCommonUtils.loadURL("http://amb.vis.ne.jp/mozilla/scrapbook/version.php", true);
-				nsPreferences.setIntPref("scrapbook.version", 20060722)
+				nsPreferences.setIntPref("scrapbook.version", 20060902)
+				sbCommonUtils.loadURL("http://amb.vis.ne.jp/mozilla/scrapbook/version.php?more=1.2&less=1.2.1", true);
 			}
 		};
 		setTimeout(firstInit, 1000);
@@ -69,6 +68,14 @@ var sbBrowserOverlay = {
 		sbMenuHandler.MENU.hidden = !sbCommonUtils.getBoolPref("scrapbook.browser.menubar", true);
 		document.getElementById("ScrapBookToolsMenu").hidden = !sbMenuHandler.MENU.hidden;
 		if ( !sbMenuHandler.MENU.hidden ) sbMenuHandler.init();
+		var file = sbCommonUtils.getScrapBookDir().clone();
+		file.append("folders.txt");
+		if ( file.exists() ) {
+			nsPreferences.setUnicharPref("scrapbook.tree.folderList", sbCommonUtils.readFile(file));
+		} else {
+			var ids = nsPreferences.copyUnicharPref("scrapbook.tree.folderList", "");
+			sbCommonUtils.writeFile(file, ids, "UTF-8");
+		}
 	},
 
 	setProtocolSubstitution : function()
@@ -97,13 +104,10 @@ var sbBrowserOverlay = {
 			this.resource = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
 			if ( this.editMode ) setTimeout(function(){ sbPageEditor.init(id); }, 20); else setTimeout(function(){ sbPageEditor.showHide(false); }, 0);
 			if ( this.infoMode ) setTimeout(function(){ sbInfoViewer.init(id); }, 50);
-			this.onAfterLocationChange(aURL, id);
 		}
 		this.locateMe = null;
 		this.lastLocation = aURL;
 	},
-
-	onAfterLocationChange : function(){},
 
 	flipOpenPopup : function(aElement)
 	{
@@ -115,13 +119,13 @@ var sbBrowserOverlay = {
 
 	updatePopup : function()
 	{
-		var arr = nsPreferences.copyUnicharPref("scrapbook.tree.folderList", "").split("|");
-		this.folderList = arr;
+		var ids = nsPreferences.copyUnicharPref("scrapbook.tree.folderList", "");
+		ids = ids ? ids.split("|") : [];
 		var ni = 2;
-		for ( var i = 0; i < arr.length; i++ )
+		for ( var i = 0; i < ids.length; i++ )
 		{
-			if ( arr[i].length != 14 ) continue;
-			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + arr[i]);
+			if ( ids[i].length != 14 ) continue;
+			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + ids[i]);
 			if ( !sbDataSource.exists(res) ) continue;
 			this.FOLDER_POPUP.childNodes[ni].hidden = false;
 			this.FOLDER_POPUP.childNodes[ni].id     = res.Value;
@@ -135,20 +139,24 @@ var sbBrowserOverlay = {
 		}
 	},
 
-	setFolderPref : function(aResName)
+	updateFolderPref : function(aResURI)
 	{
-		if ( aResName == "urn:scrapbook:root" ) return;
-		var newArr = [aResName.substring(18,32)];
-		for ( var i = 0; i < this.folderList.length; i++ )
-		{
-			if ( this.folderList[i] != newArr[0] ) newArr.push(this.folderList[i]);
-		}
-		nsPreferences.setUnicharPref("scrapbook.tree.folderList", newArr.slice(0,8).join("|"));
+		if ( aResURI == "urn:scrapbook:root" ) return;
+		var oldIDs = nsPreferences.copyUnicharPref("scrapbook.tree.folderList", "");
+		oldIDs = oldIDs ? oldIDs.split("|") : [];
+		var newIDs = [aResURI.substring(18,32)];
+		oldIDs.forEach(function(id){ if ( id != newIDs[0] ) newIDs.push(id); });
+		newIDs = newIDs.slice(0,8).join("|");
+		nsPreferences.setUnicharPref("scrapbook.tree.folderList", newIDs);
+		var file = sbCommonUtils.getScrapBookDir().clone();
+		file.append("folders.txt");
+		sbCommonUtils.writeFile(file, newIDs, "UTF-8");
 	},
 
 	verifyTargetID : function(aTargetID)
 	{
-		if ( aTargetID == "ScrapBookContextPicking" || aTargetID == "cmd_ScrapBookCaptureEntire" )
+		dump("sbBrowserOverlay::verifyTargetID (aTargetID = " + aTargetID + ")\n");
+		if ( aTargetID == "ScrapBookContextPicking" )
 		{
 			var result = {};
 			window.openDialog('chrome://scrapbook/content/folderPicker.xul','','modal,chrome,centerscreen,resizable=yes',result);
@@ -158,13 +166,17 @@ var sbBrowserOverlay = {
 		return aTargetID;
 	},
 
-	execCapture : function(aFrameOnly, aIsPartial, aShowDetail, aTargetID)
+	execCapture : function(aPartialEntire, aFrameOnly, aShowDetail, aTargetID)
 	{
+		if ( aPartialEntire == 0 )
+		{
+			aPartialEntire = this.isSelected() ? 1 : 2;
+			aFrameOnly = aPartialEntire == 1;
+		}
 		aTargetID = this.verifyTargetID(aTargetID);
 		if ( !aTargetID ) return;
 		var targetWindow = aFrameOnly ? sbCommonUtils.getFocusedWindow() : window._content;
-		var ret = sbContentSaver.captureWindow(targetWindow, aIsPartial, aShowDetail, aTargetID, 0, null);
-		this.setFolderPref(aTargetID);
+		var ret = sbContentSaver.captureWindow(targetWindow, aPartialEntire == 1, aShowDetail, aTargetID, 0, null);
 		return ret;
 	},
 
@@ -183,7 +195,6 @@ var sbBrowserOverlay = {
 			"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
 			[linkURL], document.popupNode.ownerDocument.location.href, aShowDetail, aTargetID, 0, null, null, null
 		);
-		this.setFolderPref(aTargetID);
 	},
 
 	execBookmark : function(aTargetID)
@@ -191,18 +202,18 @@ var sbBrowserOverlay = {
 		aTargetID = this.verifyTargetID(aTargetID);
 		if ( !aTargetID ) return;
 		this.bookmark(aTargetID, 0);
-		this.setFolderPref(aTargetID);
 	},
 
 	bookmark : function(aResName, aResIndex)
 	{
 		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
-		var newItem = new ScrapBookItem(newID);
+		var newItem = sbCommonUtils.newItem(newID);
 		newItem.type   = "bookmark";
 		newItem.source = window._content.location.href;
 		newItem.title  = gBrowser.selectedTab.label;
 		newItem.icon   = gBrowser.selectedTab.getAttribute("image");
 		sbDataSource.addItem(newItem, aResName, aResIndex);
+		this.updateFolderPref(aResName);
 		sbCommonUtils.rebuildGlobal();
 	},
 
@@ -290,9 +301,9 @@ function sbMiddleClickContextMenu(aEvent, aFlag)
 	if ( aEvent.originalTarget.localName == "menu" || aEvent.button != 1 ) return;
 	switch ( aFlag )
 	{
-		case 1 : sbBrowserOverlay.execCapture(true, true, true , aEvent.originalTarget.id); break;
-		case 3 : sbBrowserOverlay.execCapture(false,false,true , aEvent.originalTarget.id); break;
-		case 5 : sbBrowserOverlay.execCapture(true, false,true , aEvent.originalTarget.id); break;
+		case 1 : sbBrowserOverlay.execCapture(1, true, true , aEvent.originalTarget.id); break;
+		case 3 : sbBrowserOverlay.execCapture(2, false,true , aEvent.originalTarget.id); break;
+		case 5 : sbBrowserOverlay.execCapture(2, true, true , aEvent.originalTarget.id); break;
 		case 7 : sbBrowserOverlay.execCaptureTarget(true,  aEvent.originalTarget.id); break;
 	}
 }
@@ -356,10 +367,9 @@ var sbMenuHandler = {
 		if ( aEvent.target.id == "ScrapBookMenubarItem3" ) return;
 		if ( aEvent.target.className.indexOf("sb-capture") >= 0 )
 		{
-			var selected = sbBrowserOverlay.isSelected();
 			var aShowDetail = aEvent.target.id == "ScrapBookMenubarItem2" || aEvent.button == 1;
 			var resURI = aEvent.target.hasAttribute("resuri") ? aEvent.target.getAttribute("resuri") : "urn:scrapbook:root";
-			sbBrowserOverlay.execCapture(selected, selected, aShowDetail, resURI);
+			sbBrowserOverlay.execCapture(0, null, aShowDetail, resURI);
 			return;
 		}
 		if ( aEvent.button == 1 ) this.MENU.firstChild.hidePopup();
@@ -379,7 +389,7 @@ var sbMenuHandler = {
 			case "bookmark" : url = sbDataSource.getProperty(res, "source");        break;
 			default         : url = this.baseURL + "data/" + id + "/index.html";
 		}
-		sbCommonUtils.loadURL(url, aEvent.button == 1 || aEvent.ctrlKey || aEvent.shiftKey || sbBrowserOverlay.prefOpenFromMenu);
+		sbCommonUtils.loadURL(url, (aEvent.button == 1 || aEvent.ctrlKey || aEvent.shiftKey) ^ sbBrowserOverlay.prefOpenFromMenu);
 		aEvent.preventBubble();
 	},
 
@@ -390,7 +400,6 @@ var sbMenuHandler = {
 		var tabList = [];
 		var nodes = gBrowser.mTabContainer.childNodes;
 		for ( var i = 0; i < nodes.length; i++ ) tabList.push(nodes[i]);
-		sbBrowserOverlay.setFolderPref(aTargetID);
 		this.goNextTab(tabList, aTargetID);
 	},
 

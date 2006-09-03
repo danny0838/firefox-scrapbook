@@ -1,11 +1,16 @@
 
+var sbCommonUtils;
+var sbDataSource;
+
 var sbCombineService = {
+
 
 	get WIZARD()  { return document.getElementById("sbCombineWizard"); },
 	get STRING()  { return document.getElementById("sbCombineString"); },
 	get LISTBOX() { return document.getElementById("sbCombineListbox"); },
 	get curID()   { return this.idList[this.index]; },
 	get curRes()  { return this.resList[this.index]; },
+
 
 	index   : 0,
 	idList  : [],
@@ -15,31 +20,55 @@ var sbCombineService = {
 	prefix  : "",
 	postfix : "",
 
+	dropObserver : 
+	{
+		getSupportedFlavours : function()
+		{
+			var flavours = new FlavourSet();
+			flavours.appendFlavour("moz/rdfitem");
+			return flavours;
+		},
+		onDragOver : function(event, flavour, session) {},
+		onDragExit : function(event, session) {},
+		onDrop     : function(event, transferData, session)
+		{
+			var idxList = window.top.sbTreeHandler.getSelection(false, 2);
+			idxList.forEach(function(aIdx)
+			{
+				var res    = window.top.sbTreeHandler.TREE.builderView.getResourceAtIndex(aIdx);
+				var parRes = window.top.sbTreeHandler.getParentResource(aIdx);
+				sbCombineService.add(res, parRes);
+			});
+		},
+	},
+
+
 	init : function()
 	{
 		gOption = { "script" : true, "images" : true };
-		sbDataSource.init();
-		sbTreeHandler.init(false);
-		this.index = 0;
-		this.WIZARD.getButton("back").onclick = function(){ sbCombineService.undo(); };
-		this.WIZARD.canAdvance = false;
-		sbFolderSelector2.init();
-		if ( window.arguments ) setTimeout(function()
+		if ( window.top.location.href != "chrome://scrapbook/content/manage.xul" )
 		{
-			for ( var i = 0; i < window.arguments[0].length; i++ )
-			{
-				sbCombineService.add(window.arguments[0][i], window.arguments[1][i]);
-			}
-		}, 0);
+			document.documentElement.collapsed = true;
+			return;
+		}
+		window.top.document.getElementById("mbToolbarButton").disabled = true;
+		sbCommonUtils = window.top.sbCommonUtils;
+		sbDataSource  = window.top.sbDataSource;
+		this.index = 0;
+		sbFolderSelector2.init();
+		this.WIZARD.getButton("back").onclick = function(){ sbCombineService.undo(); };
+		this.WIZARD.getButton("cancel").hidden = true;
+		this.updateButtons();
+	},
+
+	done : function()
+	{
+		window.top.document.getElementById("mbToolbarButton").disabled = false;
 	},
 
 	add : function(aRes, aParRes)
 	{
-		if ( !aRes || !aParRes )
-		{
-			aRes = sbTreeHandler.resource;
-			aParRes = sbTreeHandler.getParentResource(sbTreeHandler.TREE.currentIndex);
-		}
+		if ( this.resList.indexOf(aRes) != -1 ) return;
 		var type = sbDataSource.getProperty(aRes, "type");
 		if ( type == "folder" ) return;
 		if ( type == "site" ) alert(this.STRING.getString("WARN_ABOUT_INDEPTH"));
@@ -51,22 +80,38 @@ var sbCombineService = {
 		this.idList.push(sbDataSource.getProperty(aRes, "id"));
 		this.resList.push(aRes);
 		this.parList.push(aParRes);
-		this.WIZARD.canAdvance = true;
-		this.WIZARD.canRewind = true;
+		this.updateButtons();
 	},
 
 	undo : function()
 	{
-		if ( this.idList.length == 0 || this.WIZARD.currentPage.pageid == "sbCombinePreviewPage" ) return;
+		if ( this.idList.length == 0 ) return;
 		this.LISTBOX.removeItemAt(this.idList.length - 1);
 		this.idList.pop();
 		this.resList.pop();
 		this.parList.pop();
-		if ( this.idList.length == 0 )
-		{
-			this.WIZARD.canAdvance = false;
-			this.WIZARD.canRewind = false;
-		}
+		this.updateButtons();
+	},
+
+	updateButtons : function()
+	{
+		this.WIZARD.canRewind  = this.idList.length > 0;
+		this.WIZARD.canAdvance = this.idList.length > 1;
+	},
+
+	initPreview : function()
+	{
+		this.WIZARD.canRewind = false;
+		this.WIZARD.canAdvance = false;
+		this.WIZARD.getButton("back").onclick = null;
+		this.WIZARD.getButton("finish").label = this.STRING.getString("FINISH_BUTTON_LABEL");
+		this.WIZARD.getButton("finish").disabled = true;
+		this.option["R"] = document.getElementById("sbCombineOptionRemove").checked;
+		sbInvisibleBrowser.init();
+		sbInvisibleBrowser.ELEMENT.removeEventListener("load", sbInvisibleBrowser.onload, true);
+		sbInvisibleBrowser.onload = function(){ sbPageCombiner.exec(); };
+		sbInvisibleBrowser.ELEMENT.addEventListener("load", sbInvisibleBrowser.onload, true);
+		this.next();
 	},
 
 	next : function()
@@ -87,20 +132,6 @@ var sbCombineService = {
 			this.postfix = "combine.html";
 			this.donePreview();
 		}
-	},
-
-	initPreview : function()
-	{
-		this.WIZARD.canRewind = false;
-		this.WIZARD.canAdvance = false;
-		this.WIZARD.getButton("finish").label = this.STRING.getString("FINISH_BUTTON_LABEL");
-		this.WIZARD.getButton("finish").disabled = true;
-		this.option["R"] = document.getElementById("sbCombineOptionR").checked;
-		sbInvisibleBrowser.init();
-		sbInvisibleBrowser.ELEMENT.removeEventListener("load", sbInvisibleBrowser.onload, true);
-		sbInvisibleBrowser.onload = function(){ sbPageCombiner.exec(); };
-		sbInvisibleBrowser.ELEMENT.addEventListener("load", sbInvisibleBrowser.onload, true);
-		this.next();
 	},
 
 	donePreview : function()
@@ -152,6 +183,7 @@ var sbCombineService = {
 			if ( comment ) newComment += comment + " __BR__ ";
 		}
 		if ( newComment ) sbDataSource.setProperty(newRes, "comment", newComment);
+		return newRes;
 	},
 
 };
@@ -364,15 +396,19 @@ var sbPageCombiner = {
 
 sbCaptureObserverCallback.onCaptureComplete = function(aItem)
 {
-	sbCombineService.onCombineComplete(aItem);
+	var newRes = sbCombineService.onCombineComplete(aItem);
 	if ( sbCombineService.option["R"] )
 	{
 		if ( sbCombineService.resList.length != sbCombineService.parList.length ) return;
-		var rmIDs = sbController.removeInternal(sbCombineService.resList, sbCombineService.parList);
-		if ( rmIDs ) SB_trace(sbMainService.STRING.getFormattedString("ITEMS_REMOVED", [rmIDs.length]));
+		var rmIDs = window.top.sbController.removeInternal(sbCombineService.resList, sbCombineService.parList);
+		if ( rmIDs ) SB_trace(window.top.sbMainService.STRING.getFormattedString("ITEMS_REMOVED", [rmIDs.length]));
 	}
 	SB_fireNotification(aItem);
-	setTimeout(function(){ window.close(); }, 500);
+	setTimeout(function()
+	{
+		window.top.sbManageService.toggleRightPane("sbToolbarCombine");
+		window.top.sbMainService.locate(newRes);
+	}, 500);
 }
 
 
@@ -383,5 +419,6 @@ sbInvisibleBrowser.onStateChange = function(aWebProgress, aRequest, aStateFlags,
 		SB_trace(sbCaptureTask.STRING.getString("LOADING") + "... " + sbCombineService.prefix + (++this.fileCount) + " " + sbCombineService.postfix);
 	}
 };
+
 
 

@@ -78,11 +78,22 @@ var sbDataSource = {
 
 	sanitize : function(aVal)
 	{
+		if ( !aVal ) return "";
 		return aVal.replace(/[\x00-\x1F\x7F]/g, " ");
+	},
+
+	validateURI : function(aURI)
+	{
+		if ( aURI == "urn:scrapbook:root" || aURI == "urn:scrapbook:search" || aURI.match(/^urn:scrapbook:item\d{14}$/) ) {
+			return true;
+		} else {
+			return false;
+		}
 	},
 
 	addItem : function(aSBitem, aParName, aIdx)
 	{
+		if ( !this.validateURI("urn:scrapbook:item" + aSBitem.id) ) return;
 		aSBitem.title   = this.sanitize(aSBitem.title);
 		aSBitem.comment = this.sanitize(aSBitem.comment);
 		aSBitem.icon    = this.sanitize(aSBitem.icon);
@@ -148,6 +159,7 @@ var sbDataSource = {
 
 	createEmptySeq : function(aResName)
 	{
+		if ( !this.validateURI(aResName) ) return;
 		sbCommonUtils.RDFCU.MakeSeq(this.data, sbCommonUtils.RDF.GetResource(aResName));
 	},
 
@@ -202,30 +214,35 @@ var sbDataSource = {
 
 
 
-	getContainer : function(aResID, force)
+	getContainer : function(aResURI, force)
 	{
-		var aCont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
+		var cont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
 		try {
-			aCont.Init(this.data, sbCommonUtils.RDF.GetResource(aResID));
+			cont.Init(this.data, sbCommonUtils.RDF.GetResource(aResURI));
 		} catch(ex) {
-			return force ? sbCommonUtils.RDFCU.MakeSeq(this.data, sbCommonUtils.RDF.GetResource(aResID)) : null;
+			if ( force ) {
+				if ( !this.validateURI(aResURI) ) return null;
+				return sbCommonUtils.RDFCU.MakeSeq(this.data, sbCommonUtils.RDF.GetResource(aResURI));
+			} else {
+				return null;
+			}
 		}
-		return aCont;
+		return cont;
 	},
 
-	clearContainer : function(aResID)
+	clearContainer : function(aResURI)
 	{
-		var aCont = this.getContainer(aResID, true);
-		while( aCont.GetCount() )
+		var cont = this.getContainer(aResURI, true);
+		while( cont.GetCount() )
 		{
-			aCont.RemoveElementAt(1, true);
+			cont.RemoveElementAt(1, true);
 		}
 	},
 
-	removeFromContainer : function(aResID, aRes)
+	removeFromContainer : function(aResURI, aRes)
 	{
-		var aCont = this.getContainer(aResID, true);
-		if ( aCont ) aCont.RemoveElement(aRes, true);
+		var cont = this.getContainer(aResURI, true);
+		if ( cont ) cont.RemoveElement(aRes, true);
 	},
 
 
@@ -268,6 +285,10 @@ var sbDataSource = {
 
 	exists : function(aRes)
 	{
+		if ( typeof(aRes) == "string" )
+		{
+			aRes = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aRes);
+		}
 		return this.data.ArcLabelsOut(aRes).hasMoreElements();
 	},
 
@@ -279,7 +300,7 @@ var sbDataSource = {
 	identify : function(aID)
 	{
 		var i = 0;
-		while ( this.exists(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aID)) && i < 100 )
+		while ( this.exists(aID) && i < 100 )
 		{
 			aID = sbCommonUtils.getTimeStamp(--i);
 		}

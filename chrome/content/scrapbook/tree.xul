@@ -42,8 +42,8 @@
 			<menuseparator hidden="true" />
 			<menu id="sbPopupTools" label="&sb.tools;" onmouseover="event.preventBubble();">
 				<menupopup id="sbPopupToolsMenu">
-					<menuitem id="sbPopupShowFiles" label="&sb.show.files;" oncommand="sbController.forward(null,'L');" />
-					<menuitem id="sbPopupSend"      label="&sb.move;..."    oncommand="sbController.isTreeContext ? sbTreeHandler.send() : sbListHandler.doCommand('send');" />
+					<menuitem id="sbPopupShowFiles" label="&sb.show.files;"   oncommand="sbController.forward(null,'L');" />
+					<menuitem id="sbPopupSend"      label="&sb.move.into;..." oncommand="sbController.isTreeContext ? sbTreeHandler.send() : sbListHandler.doCommand('send');" />
 					<menuseparator />
 					<menuitem id="sbPopupRenew" class="menuitem-iconic" label="&sb.renew;..." oncommand="sbController.renew(null, true);" onclick="if ( event.button == 1 ) sbController.renew(null, false);" />
 					<menuseparator />
@@ -76,20 +76,39 @@
 			<menu label="&sb.tools;">
 				<menupopup>
 					<menuitem label="&sb.search.days;..." oncommand="sbSearchService.filterByDays();" />
-					<menuitem label="&sb.search.cache;"   oncommand="sbSearchService.buildFT('');" />
+					<menuitem label="&sb.search.cache;"   oncommand="sbSearchService.buildFT();" />
 					<menuitem label="&sb.search.clear;"   oncommand="sbSearchService.clearFormHistory();" />
 				</menupopup>
 			</menu>
 		</popup>
 	</popupset>
 
+	<!--search toolbar-->
+	<toolbar id="sbSearchToolbar" align="center">
+		<textbox id="sbSearchTextbox"
+		         type="autocomplete"
+		         autocompletesearch="form-history"
+		         autocompletesearchparam="sbSearchHistory"
+		         ontextentered="sbSearchService.enter(this.value);"
+		         enablehistory="true"
+		         tabscrolling="true"
+		         accesskey="S"
+		         flex="1">
+			<image id="sbSearchImage"
+			       src="chrome://scrapbook/skin/search_fulltext.png"
+			       searchtype="fulltext"
+			       persist="searchtype"
+			       popup="sbSearchPopup"
+			       onclick="if ( event.button == 1 ) sbSearchService.enter(this.parentNode.value);" />
+		</textbox>
+	</toolbar>
+
 	<!--tree-->
 	<tree id="sbTree"
 	      datasources="rdf:null"
 	      ref="urn:scrapbook:root"
-	      flags="dont-build-content"
-	      hidecolumnpicker="true">
-		<treecols>
+	      flags="dont-build-content">
+		<treecols id="sbTreeCols">
 			<treecol id="sbTreeColTitle" hideheader="true" primary="true" flex="1" />
 		</treecols>
 		<template>

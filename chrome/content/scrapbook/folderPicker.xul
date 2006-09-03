@@ -73,6 +73,7 @@
 	<!--folder tree-->
 	<tree id="sbTree"
 	      seltype="single"
+	      hidecolumnpicker="true"
 	      onclick="SB_clearRootSelection();sbTreeHandler.onClick(event, 0);"
 	      onkeypress="event.preventBubble();"
 	      style="-moz-appearance:listbox;"

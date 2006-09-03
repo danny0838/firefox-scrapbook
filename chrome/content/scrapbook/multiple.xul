@@ -62,7 +62,7 @@
 				<menuitem label="&sb.multiple.detector.slink;" oncommand="sbMultipleService.detectURLsInSelection();" />
 				<menuitem label="&sb.multiple.detector.tabs;"  oncommand="sbMultipleService.detectURLsOfTabs();" />
 				<menuitem label="&sb.multiple.detector.local;" oncommand="sbURLDetector1.run();" />
-				<menuitem label="Bookmarks (bookmarks.html)"   oncommand="sbURLDetector2.run('B');" />
+				<menuitem label="&sb.multiple.detector.bookmarks; (bookmarks.html)" oncommand="sbURLDetector2.run('B');" />
 				<menuitem label="WeBoX (default.html)"         oncommand="sbURLDetector2.run('W');" />
 				<menuseparator />
 				<menuitem label="&sb.multiple.detector.clear;"    oncommand="sbMultipleService.clear();" />

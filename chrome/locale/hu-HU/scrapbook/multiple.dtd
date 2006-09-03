@@ -4,4 +4,5 @@
 <!ENTITY sb.multiple.detector.slink "A kijelölésben lévő összes hivatkozás">
 <!ENTITY sb.multiple.detector.tabs "Az ablakban megnyitott összes fül">
 <!ENTITY sb.multiple.detector.local "Az összes helyi HTML valamelyik mappában">
+<!ENTITY sb.multiple.detector.bookmarks "Bookmarks">
 <!ENTITY sb.multiple.detector.clear "Törlés">

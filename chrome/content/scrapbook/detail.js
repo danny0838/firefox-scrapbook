@@ -69,8 +69,8 @@ function SB_promptForDepth()
 	);
 	if ( depth && !isNaN(depth) && depth >= 0 && depth < 100 )
 	{
-		gInDepthLevel = parseInt(depth);
-		if ( gInDepthLevel <=3 )
+		gInDepthLevel = parseInt(depth, 10);
+		if ( gInDepthLevel <= 3 )
 			document.getElementById("sbDetailInDepthRadioGroup").selectedIndex = gInDepthLevel;
 		else
 			document.getElementById("sbDetailInDepthRadioGroup").selectedItem.setAttribute("selected", false);
@@ -119,10 +119,6 @@ function SB_acceptDetail()
 	{
 		sbDataSource.setProperty(gRenewResource, "title", document.getElementById("sbDetailTitle").value);
 	}
-	if ( gArguments.context != "renew" && gArguments.context != "renew-deep" )
-	{
-		sbFolderSelector.setFolderPref();
-	}
 }
 
 
@@ -141,7 +137,6 @@ var sbFolderSelector = {
 	get MENU_POPUP() { return document.getElementById("sbFolderPopup"); },
 
 	depth : 0,
-	recentList : [],
 
 	init : function()
 	{
@@ -155,7 +150,6 @@ var sbFolderSelector = {
 		if ( shouldUpdate )
 		{
 			this.depth = 0;
-			this.recentList = [];
 			this.clear();
 			this.processRecent();
 			this.processRoot();
@@ -193,18 +187,18 @@ var sbFolderSelector = {
 
 	processRecent : function()
 	{
-		var arr = nsPreferences.copyUnicharPref("scrapbook.tree.folderList", "").split("|");
+		var ids = nsPreferences.copyUnicharPref("scrapbook.tree.folderList", "");
+		ids = ids ? ids.split("|") : [];
 		var flag = false;
-		for ( var i = 0; i < arr.length; i++ )
+		for ( var i = 0; i < ids.length; i++ )
 		{
-			if ( arr[i].length != 14 ) continue;
-			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + arr[i]);
+			if ( ids[i].length != 14 ) continue;
+			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + ids[i]);
 			if ( !sbDataSource.exists(res) ) continue;
 			flag = true;
 			this.fill(res.Value, sbDataSource.getProperty(res, "title"));
 		}
 		if ( flag ) this.MENU_POPUP.appendChild(document.createElement("menuseparator"));
-		this.recentList = arr;
 	},
 
 	processRecursive : function(aContRes)
@@ -224,7 +218,7 @@ var sbFolderSelector = {
 	createFolder : function()
 	{
 		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
-		var newItem = new ScrapBookItem(newID);
+		var newItem = sbCommonUtils.newItem(newID);
 		newItem.title = this.STRING.getString("DEFAULT_FOLDER");
 		newItem.type = "folder";
 		var tarResName = this.MENU_LIST.selectedItem.getAttribute("depth") > 0 ? this.MENU_LIST.selectedItem.id : "urn:scrapbook:root";
@@ -242,17 +236,6 @@ var sbFolderSelector = {
 			this.refresh(newRes.Value, true);
 			this.onSelect(newRes.Value);
 		}
-	},
-
-	setFolderPref : function()
-	{
-		if ( gArguments.resName == "urn:scrapbook:root" ) return;
-		var newArr = [gArguments.resName.substring(18,32)];
-		for ( var i = 0; i < this.recentList.length; i++ )
-		{
-			if ( this.recentList[i] != newArr[0] ) newArr.push(this.recentList[i]);
-		}
-		nsPreferences.setUnicharPref("scrapbook.tree.folderList", newArr.slice(0,5).join("|"));
 	},
 
 	onSelect : function(aResID)

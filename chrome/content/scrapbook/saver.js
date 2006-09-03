@@ -28,7 +28,7 @@ var sbContentSaver = {
 
 	init : function(aPresetData)
 	{
-		this.item = new ScrapBookItem(sbDataSource.identify(sbCommonUtils.getTimeStamp()));
+		this.item = sbCommonUtils.newItem(sbDataSource.identify(sbCommonUtils.getTimeStamp()));
 		this.name = "index";
 		this.favicon = null;
 		this.file2URL = { "index.html" : true, "index.css" : true, "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
@@ -54,7 +54,10 @@ var sbContentSaver = {
 		this.init(aPresetData);
 		this.item.chars  = aRootWindow.document.characterSet;
 		this.item.source = aRootWindow.location.href;
-		try { this.item.icon = gBrowser.selectedTab.getAttribute("image"); } catch(ex) {}
+		try {
+			if ( aRootWindow == gBrowser.contentWindow ) this.item.icon = gBrowser.selectedTab.getAttribute("image") || "";
+		} catch(ex) {
+		}
 
 		this.frameList = this.flattenFrames(aRootWindow);
 
@@ -326,17 +329,18 @@ var sbContentSaver = {
 	addResource : function(aResName, aResIndex)
 	{
 		if ( !aResName ) return;
-		var myRes = sbDataSource.addItem(this.item, aResName, aResIndex);
+		var res = sbDataSource.addItem(this.item, aResName, aResIndex);
 		sbCommonUtils.rebuildGlobal();
 		if ( this.favicon )
 		{
 			var iconURL = "resource://scrapbook/data/" + this.item.id + "/" + this.favicon;
 			setTimeout(function(){
-				sbDataSource.setProperty(myRes, "icon", iconURL); sbDataSource.flush();
+				sbDataSource.setProperty(res, "icon", iconURL); sbDataSource.flush();
 			}, 500);
 			this.item.icon = this.favicon;
 		}
 		sbCommonUtils.writeIndexDat(this.item);
+		if ( "sbBrowserOverlay" in window ) sbBrowserOverlay.updateFolderPref(aResName);
 	},
 
 
@@ -461,6 +465,7 @@ var sbContentSaver = {
 				}
 				break;
 			case "base" : 
+				aNode.removeAttribute("href");
 				if ( !aNode.hasAttribute("target") ) return this.removeNodeFromParent(aNode);
 				break;
 			case "style" : 

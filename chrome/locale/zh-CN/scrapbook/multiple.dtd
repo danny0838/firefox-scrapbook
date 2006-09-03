@@ -4,4 +4,5 @@
 <!ENTITY sb.multiple.detector.slink "所选内容中的所有链接">
 <!ENTITY sb.multiple.detector.tabs "当前所有打开的标签页">
 <!ENTITY sb.multiple.detector.local "本地存储的 HTML 文件">
+<!ENTITY sb.multiple.detector.bookmarks "Bookmarks">
 <!ENTITY sb.multiple.detector.clear "清除">

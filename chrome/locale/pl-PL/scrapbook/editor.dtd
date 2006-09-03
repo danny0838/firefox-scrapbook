@@ -2,7 +2,6 @@
 <!ENTITY sb.toolbar.info "Info Toolbar">
 <!ENTITY sb.edit.eraser "DOM Eraser: Narzędzie usuwające zaznaczone elementy na stronach internetowych">
 <!ENTITY sb.edit.undo "Cofnij">
-<!ENTITY sb.edit.restore "Zrezygnuj ze zmian i przywróć poprzednie wpisy">
 <!ENTITY sb.edit.save "Zapisz zmiany">
 <!ENTITY sb.edit.comment "Powiększ obszar komentarza">
 <!ENTITY sb.edit.sticky "Przyklejona notatka">

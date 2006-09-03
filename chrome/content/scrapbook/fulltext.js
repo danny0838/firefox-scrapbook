@@ -25,13 +25,12 @@ function SB_initFT(type)
 
 var sbSearchResult =
 {
-	get MAX_HIT() { return 100; },
 	get CURRENT_TREEITEM() { return this.treeItems[document.getElementById("sbTree").currentIndex]; },
 
 	index : 0,
 	count : 0,
 	hit : 0,
-	QueryStrings   : { q : "", re : "", cs : "", folder : "" },
+	QueryStrings   : { q : "", re : "", cs : "", ref : "" },
 	RegExpModifier : "",
 	RegExpInclude : [],
 	RegExpExclude : [],
@@ -39,6 +38,7 @@ var sbSearchResult =
 	excludeWords : [],
 	resEnum : null,
 	treeItems : [],
+	targetFolders : [],
 
 	exec : function()
 	{
@@ -50,6 +50,19 @@ var sbSearchResult =
 			this.QueryStrings[qa[i].split("=")[0]] = qa[i].split("=")[1];
 		}
 		this.QueryStrings['q'] = decodeURIComponent(this.QueryStrings['q']);
+
+		if ( this.QueryStrings['ref'].indexOf("urn:scrapbook:item") == 0 )
+		{
+			var refRes = sbCommonUtils.RDF.GetResource(this.QueryStrings['ref']);
+			var elt = document.getElementById("sbResultHeader").firstChild.nextSibling;
+			elt.value += sbDataSource.getProperty(refRes, "title");
+			elt.hidden = false;
+			this.targetFolders = sbDataSource.flattenResources(refRes, 1, true);
+			for ( var i = 0; i < this.targetFolders.length; i++ )
+			{
+				this.targetFolders[i] = this.targetFolders[i].Value;
+			}
+		}
 
 		this.RegExpModifier = ( this.QueryStrings['cs'] != "true" ) ? "im" : "m";
 		if ( this.QueryStrings['re'] != "true" )
@@ -103,7 +116,7 @@ var sbSearchResult =
 
 	next : function()
 	{
-		if ( this.resEnum.hasMoreElements() && this.hit < this.MAX_HIT )
+		if ( this.resEnum.hasMoreElements() )
 		{
 			if ( ++this.index % 100 == 0 ) {
 				setTimeout(function(){ sbSearchResult.process(); }, 0);
@@ -120,8 +133,22 @@ var sbSearchResult =
 	{
 		var res = this.resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
 		if ( res.Value == "urn:scrapbook:cache" ) return this.next();
-		var content = sbCacheSource.getProperty(res, "content");
 		var folder  = sbCacheSource.getProperty(res, "folder");
+		if ( this.targetFolders.length > 0 )
+		{
+			if ( folder && folder.indexOf("urn:scrapbook:item") != 0 )
+			{
+				try {
+					var target = sbCommonUtils.RDF.GetLiteral(folder);
+					var prop   = sbDataSource.data.ArcLabelsIn(target).getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+					var source = sbDataSource.data.GetSource(prop, target, true);
+					folder = source.Value;
+				} catch(ex) {
+				}
+			}
+			if ( this.targetFolders.indexOf(folder) < 0 ) return this.next();
+		}
+		var content = sbCacheSource.getProperty(res, "content");
 		var resURI  = res.Value.split("#")[0];
 		var name    = res.Value.split("#")[1] || "index";
 		res = sbCommonUtils.RDF.GetResource(resURI);
@@ -154,6 +181,7 @@ var sbSearchResult =
 		{
 			var icon = sbDataSource.getProperty(res, "icon");
 			if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
+			if ( folder.indexOf("urn:scrapbook:") == 0 ) folder = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(folder), "title");
 			sbSearchResult.treeItems.push([
 				title,
 				this.extractRightContext(content),
@@ -189,8 +217,7 @@ var sbSearchResult =
 			properties.AppendElement(ATOM_SERVICE.getAtom(this._items[row][6]));
 		};
 		document.getElementById("sbTree").view = treeView;
-		if ( this.hit >= this.MAX_HIT ) document.getElementById("sbResultHeader").className = "sb-header sb-header-red";
-		var headerLabel1 = gCacheString.getFormattedString( ( this.hit < this.MAX_HIT ) ? "RESULTS_FOUND" : "RESULTS_FOUND_OVER", [this.hit] );
+		var headerLabel1 = gCacheString.getFormattedString("RESULTS_FOUND", [this.hit] );
 		if ( this.QueryStrings['re'] == "true" )
 		{
 			var headerLabel2 = gCacheString.getFormattedString("MATCHING", [ this.localizedQuotation(this.QueryStrings['q']) ]);
@@ -279,6 +306,7 @@ var sbCacheService = {
 	resList : [],
 	folders : [],
 	uriHash : {},
+	_curResURI : "",
 
 	build : function()
 	{
@@ -296,7 +324,7 @@ var sbCacheService = {
 				var type = sbDataSource.getProperty(resList[j], "type");
 				if ( type == "image" || type == "file" || type == "bookmark" ) continue;
 				this.resList.push(resList[j]);
-				this.folders.push(sbDataSource.getProperty(contResList[i], "title"));
+				this.folders.push(contResList[i].Value);
 			}
 		}
 		this.processAsync();
@@ -327,7 +355,7 @@ var sbCacheService = {
 				}
 			}
 		}
-		if ( document.title != this.folders[this.index] ) document.title = this.folders[this.index] || gCacheString.getString("BUILD_CACHE");
+		if ( this._curResURI != this.folders[this.index] ) document.title = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(this.folders[this.index]), "title") || gCacheString.getString("BUILD_CACHE");
 		if ( ++this.index < this.resList.length )
 			setTimeout(function(){ sbCacheService.processAsync(); }, 0);
 		else

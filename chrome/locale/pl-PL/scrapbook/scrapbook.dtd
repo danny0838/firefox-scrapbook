@@ -4,7 +4,7 @@
 <!ENTITY sb.tools "Narzędzia">
 <!ENTITY sb.tools.settings "Ustawienia">
 <!ENTITY sb.tools.manage "Zarządzanie">
-<!ENTITY sb.tools.combine "Łączenie stron">
+<!ENTITY sb.tools.combine "Combine Wizard">
 <!ENTITY sb.tools.trade "Import / Eksport">
 <!ENTITY sb.tools.multiple "Przechwytywanie adresów URL">
 <!ENTITY sb.tools.directory "Katalog główny ScrapBooka">

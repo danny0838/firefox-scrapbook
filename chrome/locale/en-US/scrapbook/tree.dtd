@@ -4,7 +4,8 @@
 <!ENTITY sb.open.source "Open Source URL">
 <!ENTITY sb.tools "Tools">
 <!ENTITY sb.show.files "Show Files">
-<!ENTITY sb.move "Move into Folder">
+<!ENTITY sb.move "Move">
+<!ENTITY sb.move.into "Move into Folder">
 <!ENTITY sb.renew "Capture Again">
 <!ENTITY sb.export "Export">
 <!ENTITY sb.remove "Delete">

@@ -54,13 +54,11 @@
 	</wizardpage>
 
 	<wizardpage pageid="sbRepairRDF2" label="&sb.repair.rdfFile;" onpageshow="sbRepair.execRestoreRDF();">
-		<description id="sbRepairRDF2Text" />
-		<label id="sbRepairRDFCompleted" value="&sb.repair.complete;" hidden="true" />
+		<label id="sbRepairRDF2Label" value="&sb.repair.complete;" readonly="true" />
 	</wizardpage>
 
 	<wizardpage pageid="sbRepairFavicons" label="&sb.repair.favicons;" onpageshow="sbRepair.restoreFavicons();">
 		<textbox id="sbRepairFaviconsTextbox" readonly="true" />
-		<label id="sbRepairFaviconsCompleted" value="&sb.repair.complete;" hidden="true" />
 	</wizardpage>
 
 </wizard>

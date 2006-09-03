@@ -56,23 +56,6 @@
 							<label control="sbPropSource" value="URL:" />
 							<textbox id="sbPropSource" />
 						</row>
-						<!--label-->
-<!--
-						<row id="sbPropLabelRow" align="center">
-							<label value="&sb.prop.label;:" />
-							<hbox align="center">
-								<menulist>
-									<menupopup>
-										<menuitem label="&sb.prop.label.none;" />
-										<menuitem label="&sb.prop.label; 1" style="color:#FF0000;" />
-										<menuitem label="&sb.prop.label; 2" style="color:#006600;" />
-										<menuitem label="&sb.prop.label; 3" style="color:#0000FF;" />
-										<menuitem label="&sb.prop.label; 4" style="color:#CCCCCC;" />
-									</menupopup>
-								</menulist>
-							</hbox>
-						</row>
--->
 						<!--icon-->
 						<row id="sbPropIconRow" align="center">
 							<label value="&sb.prop.icon;:" />
@@ -91,14 +74,20 @@
 							</hbox>
 						</row>
 						<separator class="groove" style="margin:8px 0px;" />
-						<!--id (datetime)-->
+						<!--ID-->
 						<row align="center">
-							<label value="&sb.prop.type;:" />
-							<textbox id="sbPropType" readonly="true" />
+							<label value="ID:" />
+							<textbox id="sbPropID" readonly="true" />
 						</row>
+						<!--datetime-->
 						<row align="center">
 							<label value="&sb.prop.date;:" />
 							<textbox id="sbPropDate" readonly="true" />
+						</row>
+						<!--type-->
+						<row align="center">
+							<label value="&sb.prop.type;:" />
+							<textbox id="sbPropType" readonly="true" />
 						</row>
 						<!--chars-->
 						<row id="sbPropCharsRow" align="center">

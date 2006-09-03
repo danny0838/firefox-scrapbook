@@ -161,7 +161,7 @@ var sbCaptureTask = {
 			}
 			aURL = SB_splitByAnchor(aURL)[0];
 			if ( !gOption["isPartial"] && aURL == gReferItem.source ) return;
-			for ( var i = 0; i < gURLs.length; i++ ) if ( aURL == gURLs[i] ) return;
+			if ( gURLs.indexOf(aURL) != -1 ) return;
 		}
 		gURLs.push(aURL);
 		gDepths.push(aDepth);

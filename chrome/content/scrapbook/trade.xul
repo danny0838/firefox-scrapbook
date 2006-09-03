@@ -5,17 +5,12 @@
 <?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
 <?xml-stylesheet href="chrome://scrapbook/skin/trade.css" type="text/css" ?>
 
-<!--overlay-->
-<?xul-overlay href="chrome://scrapbook/content/tree.xul" ?>
-
 <!--locale-->
 <!DOCTYPE window [
-<!ENTITY % mainDTD  SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
-%mainDTD;
-<!ENTITY % propDTD  SYSTEM "chrome://scrapbook/locale/property.dtd" >
-%propDTD;
 <!ENTITY % treeDTD  SYSTEM "chrome://scrapbook/locale/tree.dtd" >
 %treeDTD;
+<!ENTITY % propDTD  SYSTEM "chrome://scrapbook/locale/property.dtd" >
+%propDTD;
 <!ENTITY % prefDTD  SYSTEM "chrome://scrapbook/locale/setting.dtd" >
 %prefDTD;
 <!ENTITY % tradeDTD SYSTEM "chrome://scrapbook/locale/trade.dtd" >
@@ -25,123 +20,85 @@
 <!--window-->
 <window id="sbTradeWindow"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        title="&sb.tools.trade; - ScrapBook"
-        onload="SB_initTrade();"
-        windowtype="scrapbook">
+        onload="sbTradeService.init();">
 
 	<!--script-->
+	<script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
+	<script type="application/x-javascript" src="chrome://global/content/nsTransferable.js" />
+	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/trade.js" />
 
-	<!--broadcaster-->
-	<broadcasterset id="sbBroadcasters" />
-
 	<!--stringbundle-->
-	<stringbundleset>
-		<stringbundle id="sbMainString"  src="chrome://scrapbook/locale/scrapbook.properties" />
-		<stringbundle id="sbTradeString" src="chrome://scrapbook/locale/trade.properties" />
-	</stringbundleset>
+	<stringbundle id="sbTradeString" src="chrome://scrapbook/locale/trade.properties" />
 
 	<!--keyset-->
-	<keyset id="sbGenericKeys">
-		<key key="a" modifiers="accel" oncommand="sbTrader.TREE.focus();sbTrader.TREE.view.selection.selectAll();" />
+	<keyset>
+		<key key="a" modifiers="accel" oncommand="sbTradeService.TREE.focus();sbTradeService.TREE.view.selection.selectAll();" />
 	</keyset>
 
 	<!--popup-->
-	<popupset id="sbPopupSet">
+	<popupset>
 		<popup id="sbTradeTreePopup">
-			<menuitem label="&sb.open;"        oncommand="sbTrader.open(event, false);" default="true" />
-			<menuitem label="&sb.open.newtab;" oncommand="sbTrader.open(event, true);"  />
-			<menuitem label="&sb.show.files;"  oncommand="sbTrader.showFiles();" />
+			<menuitem label="&sb.open;"        oncommand="sbTradeService.open(false);" default="true" />
+			<menuitem label="&sb.open.newtab;" oncommand="sbTradeService.open(true);"  />
+			<menuitem label="&sb.show.files;"  oncommand="sbTradeService.browse();" />
 			<menuseparator />
-			<menuitem class="menuitem-iconic" label="&sb.remove;"   src="chrome://scrapbook/skin/menu_remove.png"   oncommand="sbTrader.deleteDir();" />
+			<menuitem class="menuitem-iconic" label="&sb.remove;"   src="chrome://scrapbook/skin/menu_remove.png"   oncommand="sbTradeService.remove();" />
 			<menuseparator />
-			<menuitem class="menuitem-iconic" label="&sb.property;" src="chrome://scrapbook/skin/menu_property.png" oncommand="sbTrader.showIndexDat();" />
+			<menuitem class="menuitem-iconic" label="&sb.property;" src="chrome://scrapbook/skin/menu_property.png" oncommand="sbTradeService.showProperties();" />
 		</popup>
 	</popupset>
 
-	<hbox id="sbTradeOuter" flex="1">
+	<!--toolbar-->
+	<toolbar id="sbTradeHeader" align="center" class="plain" style="padding:3px 1px;">
+		<image id="sbTradeIcon" />
+		<textbox id="sbTradePath" readonly="true" flex="1" />
+		<button id="sbTradeBrowseButton" label="&sb.button.browse;..." oncommand="if ( sbTradeService.selectDir() ) sbTradeService.prepareRightDir(false);" />
+		<button group="lockTarget" label="&sb.button.show;"      oncommand="window.top.sbController.launch(sbTradeService.rightDir);" />
+	</toolbar>
 
-		<vbox flex="1" style="width:170px;min-width:140px;">
-			<!--main toolbar-->
-			<toolbar id="sbMainToolbar" class="plain">
-				<toolbarbutton id="sbToolbarNewFolder" tooltiptext="&sb.new.folder;" oncommand="sbMainService.createFolder();" />
-				<toolbarbutton id="sbToolbarToggle"    tooltiptext="&sb.toggle.all;" oncommand="sbTreeHandler.toggleAllFolders();" />
-				<toolbarbutton id="mbToolbarButton" />
-			</toolbar>
-			<!--scrapbook tree-->
-			<tree id="sbTree"
-			      contextmenu="sbPopup"
-			      onclick="sbTreeHandler.onClick(event, 0);"
-			      ondblclick="sbTreeHandler.onDblClick(event);"
-			      onkeypress="sbTreeHandler.onKeyPress(event);"
-			      onfocus="sbTrader.context = 'export';"
-			      ondraggesture="if (event.originalTarget.localName == 'treechildren') nsDragAndDrop.startDrag(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
-			      ondragover="nsDragAndDrop.dragOver(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
-			      ondragdrop="nsDragAndDrop.drop(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
-			      flex="1"
-			      class="plain" />
+	<!--tree-->
+	<tree id="sbTradeTree"
+	      seltype="multiple"
+	      contextmenu="sbTradeTreePopup"
+	      onclick="if ( event.button == 1 ) sbTradeService.open(true);"
+	      ondblclick="sbTradeService.onDblClick(event);"
+	      onkeypress="sbTradeService.onKeyPress(event);"
+	      ondraggesture="nsDragAndDrop.startDrag(event,sbTradeService.dragDropObserver);"
+	      ondragover="nsDragAndDrop.dragOver(event,sbTradeService.dragDropObserver);"
+	      ondragdrop="nsDragAndDrop.drop(event,sbTradeService.dragDropObserver);"
+	      class="plain" flex="1">
+		<treecols>
+			<treecol id="sbTradeTreeColTitle"  label="&sb.prop.title;"  sortIndex="0" flex="2" primary="true" />
+			<splitter class="tree-splitter" />
+			<treecol id="sbTradeTreeColDate"   label="&sb.trade.time;"  sortIndex="5" flex="1" sortDirection="ascending" />
+			<splitter class="tree-splitter" />
+			<treecol id="sbTradeTreeColFolder" label="&sb.prop.folder;" sortIndex="2" flex="1" />
+		</treecols>
+		<treechildren flex="1" />
+	</tree>
+
+	<!--toolbar-->
+	<toolbar id="sbTradeToolbar" class="plain" style="padding-top:2px;">
+		<hbox align="center">
+			<button id="sbTradeExportButton" label="&sb.trade.export;" group="lockTarget" oncommand="sbExportService.exec();"        image="chrome://scrapbook/skin/expander.png" />
+			<button id="sbTradeImportButton" label="&sb.trade.import;" group="lockTarget" oncommand="sbImportService.exec(-128,-1);" image="chrome://scrapbook/skin/expander_left.png" />
+		</hbox>
+		<vbox>
+			<checkbox id="sbTradeOptionRestore" label="&sb.trade.restore;" group="lockTarget" checked="true" />
+			<checkbox id="sbTradeOptionRemove"  label="&sb.trade.remove; " group="lockTarget" checked="false" persist="checked" />
 		</vbox>
+	</toolbar>
 
-		<splitter />
-
-		<vbox flex="2" style="min-width:300px;">
-			<toolbar align="center" class="plain" style="padding:3px 1px;">
-				<image id="sbTradeIcon" />
-				<textbox id="sbTradePath" readonly="true" flex="1" />
-				<button label="&sb.button.browse;..." oncommand="sbTrader.selectPath();" />
-				<button label="&sb.button.show;"      oncommand="sbController.launch(sbTrader.rightDir);" />
-			</toolbar>
-			<!--tree-->
-			<tree id="sbTradeTree"
-			      seltype="multiple"
-			      contextmenu="sbTradeTreePopup"
-			      onclick="if ( event.button == 1 ) sbTrader.open(event,true);"
-			      ondblclick="sbTrader.onDblClick(event);"
-			      onkeypress="sbTrader.onKeyPress(event);"
-			      onfocus="sbTrader.context = 'import';"
-			      ondraggesture="nsDragAndDrop.startDrag(event,sbTrader.dragDropObserver);"
-			      ondragover="nsDragAndDrop.dragOver(event,sbTrader.dragDropObserver);"
-			      ondragdrop="nsDragAndDrop.drop(event,sbTrader.dragDropObserver);"
-			      class="plain" flex="1">
-				<treecols>
-					<treecol id="sbTradeTreeColTitle"  label="&sb.prop.title;"  sortIndex="0" flex="2" primary="true" />
-					<splitter class="tree-splitter" />
-					<treecol id="sbTradeTreeColDate"   label="&sb.trade.time;"  sortIndex="5" flex="1" sortDirection="ascending" />
-					<splitter class="tree-splitter" />
-					<treecol id="sbTradeTreeColFolder" label="&sb.prop.folder;" sortIndex="2" flex="1" />
-				</treecols>
-				<treechildren flex="1" />
-			</tree>
-			<toolbar id="sbTradeToolbar" class="plain" style="padding-top:2px;">
-				<hbox align="center">
-					<button id="sbTradeExportButton" label="&sb.trade.export;" oncommand="sbExportService.exec();"        image="chrome://scrapbook/skin/expander.png" />
-					<button id="sbTradeImportButton" label="&sb.trade.import;" oncommand="sbImportService.exec(-128,-1);" image="chrome://scrapbook/skin/expander_left.png" />
-				</hbox>
-				<vbox>
-					<checkbox id="sbTradeOptionRestore" label="&sb.trade.restore;" checked="true" />
-					<checkbox id="sbTradeOptionRemove"  label="&sb.trade.remove; " checked="false" persist="checked" />
-				</vbox>
-			</toolbar>
-		</vbox>
-
-	</hbox>
-
-	<splitter id="sbTradeSplitter" />
-
+	<!--listbox-->
 	<listbox id="sbTradeLog" class="plain" />
 
-	<!--status-->
-	<statusbar id="status-bar" class="chromeclass-status">
-		<statusbarpanel id="statusbar-display" flex="1" />
-		<statusbarpanel id="statusbar-progresspanel" class="statusbarpanel-progress" collapsed="true">
-			<progressmeter id="sbTradeProgress" mode="determined" value="0" width="160" />
-		</statusbarpanel>
-	</statusbar>
-
-	<!--status2-->
-	<vbox id="sbStatusBox" hidden="true">
-		<textbox id="sbStatusText" flex="1" readonly="true" width="250" />
+	<!--quick export-->
+	<vbox id="sbTradeQuickStatus" hidden="true">
+		<textbox id="sbTradeQuickStatusText" flex="1" readonly="true" width="250" />
 	</vbox>
 
 </window>

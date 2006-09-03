@@ -21,7 +21,7 @@ var sbPageEditor = {
 		this.changed1 = false;
 		this.changed2 = false;
 		if ( aID ) {
-			this.item = new ScrapBookItem(aID);
+			this.item = sbCommonUtils.newItem(aID);
 			for ( var prop in this.item ) this.item[prop] = sbDataSource.getProperty(sbBrowserOverlay.resource, prop);
 		} else {
 			this.item = null;
@@ -44,7 +44,7 @@ var sbPageEditor = {
 			gBrowser.selectedTab.label = this.item.title;
 			gBrowser.selectedTab.setAttribute("image", this.item.icon);
 		}
-		sbPageEditor.allowUndo(null);
+		sbPageEditor.allowUndo();
 		sbDOMEraser.init(0);
 		sbContentSaver.frameList = sbContentSaver.flattenFrames(window._content);
 		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
@@ -171,7 +171,7 @@ var sbPageEditor = {
 			}
 		}
 		this.changed1 = true;
-		this.allowUndo(null);
+		this.allowUndo();
 	},
 
 	removeElementsByTagName : function(aTagName)
@@ -191,7 +191,7 @@ var sbPageEditor = {
 		if ( shouldSave )
 		{
 			this.changed1 = true;
-			this.allowUndo(null);
+			this.allowUndo();
 		}
 	},
 
@@ -226,16 +226,20 @@ var sbPageEditor = {
 
 	allowUndo : function(aTargetDocument)
 	{
-		document.getElementById("ScrapBookEditUndo").hidden    = aTargetDocument ? false : true;
-		document.getElementById("ScrapBookEditRestore").hidden = aTargetDocument ? true  : false;
-		if ( aTargetDocument ) this.savedBody = aTargetDocument.body.cloneNode(true);
+		if ( aTargetDocument )
+			this.savedBody = aTargetDocument.body.cloneNode(true);
+		else
+			delete this.savedBody;
 	},
 
 	undo : function()
 	{
-		this.savedBody.ownerDocument.body.parentNode.replaceChild(this.savedBody, this.savedBody.ownerDocument.body);
-		document.getElementById("ScrapBookEditTooltip").hidden = true;
-		this.allowUndo(null);
+		if ( this.savedBody ) {
+			this.savedBody.ownerDocument.body.parentNode.replaceChild(this.savedBody, this.savedBody.ownerDocument.body);
+			this.allowUndo();
+		} else {
+			this.restore();
+		}
 	},
 
 	confirmSave : function()
@@ -256,8 +260,7 @@ var sbPageEditor = {
 			this.saveResource();
 		} else {
 			sbDOMEraser.init(2);
-			var sel = sbBrowserOverlay.isSelected();
-			var ret = sbBrowserOverlay.execCapture(sel, sel, !aBypassDialog, "urn:scrapbook:root");
+			var ret = sbBrowserOverlay.execCapture(0, null, !aBypassDialog, "urn:scrapbook:root");
 			if ( ret ) this.exit(true);
 		}
 	},
@@ -396,9 +399,11 @@ var sbPageEditor = {
 var sbDOMEraser = {
 
 	enabled : false,
+	verbose : 0,
 
 	init : function(aStateFlag)
 	{
+		this.verbose = 0;
 		this.enabled = (aStateFlag == 1);
 		document.getElementById("ScrapBookEditEraser").checked = this.enabled;
 		if ( aStateFlag == 0 ) return;
@@ -409,10 +414,15 @@ var sbDOMEraser = {
 		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
 		{
 			sbContentSaver.frameList[i].document.onmouseover = this.enabled ? function(aEvent){ sbDOMEraser.handleEvent(aEvent); } : null;
+			sbContentSaver.frameList[i].document.onmousemove = this.enabled ? function(aEvent){ sbDOMEraser.handleEvent(aEvent); } : null;
 			sbContentSaver.frameList[i].document.onmouseout  = this.enabled ? function(aEvent){ sbDOMEraser.handleEvent(aEvent); } : null;
 			sbContentSaver.frameList[i].document.onclick     = this.enabled ? function(aEvent){ sbDOMEraser.handleEvent(aEvent); } : null;
 			if ( this.enabled ) {
-				sbPageEditor.applyStyle(sbContentSaver.frameList[i], "scrapbook-eraser-style", "* { cursor: crosshair; }");
+				var estyle = "* { cursor: crosshair; }\n"
+				           + "#scrapbook-eraser-tooltip { -moz-appearance: tooltip;"
+				           + " position: absolute; z-index: 10000; margin-top: 32px; padding: 2px 3px; max-width: 40em;"
+				           + " border: 1px solid InfoText; background-color: InfoBackground; color: InfoText; font: message-box; }";
+				sbPageEditor.applyStyle(sbContentSaver.frameList[i], "scrapbook-eraser-style", estyle);
 			} else {
 				sbPageEditor.removeStyle(sbContentSaver.frameList[i], "scrapbook-eraser-style");
 			}
@@ -424,37 +434,54 @@ var sbDOMEraser = {
 		aEvent.preventDefault();
 		var elem = aEvent.target;
 		var tagName = elem.localName.toUpperCase();
-		if ( aEvent.type != "keypress" && (tagName == "SCROLLBAR" || tagName == "HTML" || tagName == "BODY") ) return;
+		if ( aEvent.type != "keypress" && ["SCROLLBAR","HTML","BODY","FRAME","FRAMESET"].indexOf(tagName) >= 0 ) return;
 		var onMarker = (tagName == "SPAN" && elem.getAttribute("class") == "linemarker-marked-line");
-		switch ( aEvent.type )
+		if ( aEvent.type == "mouseover" || aEvent.type == "mousemove" )
 		{
-			case "mouseover" :
-				elem.style.MozOutline = onMarker ? "2px dashed #0000FF" : "2px solid #FF0000";
-				document.getElementById("ScrapBookEditTooltip").hidden = false;
-				document.getElementById("ScrapBookEditTooltip").label = onMarker ? sbBrowserOverlay.STRING.getString("EDIT_REMOVE_HIGHLIGHT") : elem.localName;
-				document.getElementById("ScrapBookEditTooltip").showPopup(gBrowser, aEvent.clientX + gBrowser.boxObject.screenX + 50, aEvent.clientY + gBrowser.boxObject.screenY + 50);
-				break;
-			case "mouseout" :
-			case "click" :
-				elem.style.MozOutline = "";
-				if ( !elem.getAttribute("style") ) elem.removeAttribute("style");
-				if ( aEvent.type == "click" )
-				{
-					sbPageEditor.allowUndo(elem.ownerDocument);
-					if ( aEvent.shiftKey || aEvent.button == 2 )
-					{
-						this.isolateNode(elem);
-					}
-					else
-					{
-						if ( onMarker )
-							sbPageEditor.stripAttributes(elem);
-						else
-							elem.parentNode.removeChild(elem);
-					}
-					sbPageEditor.changed1 = true;
+			if ( aEvent.type == "mousemove" && ++this.verbose % 3 != 0 ) return;
+			var tooltip = elem.ownerDocument.getElementById("scrapbook-eraser-tooltip");
+			if ( !tooltip )
+			{
+				tooltip = elem.ownerDocument.createElement("DIV");
+				tooltip.id = "scrapbook-eraser-tooltip";
+				elem.ownerDocument.body.appendChild(tooltip);
+			}
+			tooltip.style.left = aEvent.pageX + "px";
+			tooltip.style.top  = aEvent.pageY + "px";
+			if ( aEvent.type == "mouseover" )
+			{
+				if ( onMarker ) {
+					tooltip.textContent = sbBrowserOverlay.STRING.getString("EDIT_REMOVE_HIGHLIGHT");
+				} else {
+					tooltip.textContent = elem.localName;
+					if ( elem.id ) tooltip.textContent += ' id="' + elem.id + '"';
+					if ( elem.className ) tooltip.textContent += ' class="' + elem.className + '"';
 				}
-				break;
+				elem.style.MozOutline = onMarker ? "2px dashed #0000FF" : "2px solid #FF0000";
+			}
+		}
+		else if ( aEvent.type == "mouseout" || aEvent.type == "click" )
+		{
+			var tooltip = elem.ownerDocument.getElementById("scrapbook-eraser-tooltip");
+			if ( tooltip ) elem.ownerDocument.body.removeChild(tooltip);
+			elem.style.MozOutline = "";
+			if ( !elem.getAttribute("style") ) elem.removeAttribute("style");
+			if ( aEvent.type == "click" )
+			{
+				sbPageEditor.allowUndo(elem.ownerDocument);
+				if ( aEvent.shiftKey || aEvent.button == 2 )
+				{
+					this.isolateNode(elem);
+				}
+				else
+				{
+					if ( onMarker )
+						sbPageEditor.stripAttributes(elem);
+					else
+						elem.parentNode.removeChild(elem);
+				}
+				sbPageEditor.changed1 = true;
+			}
 		}
 	},
 
@@ -557,7 +584,7 @@ var sbAnnotationService = {
 
 	editSticky : function(oldElem)
 	{
-		var newElem = this.duplicateElement(!(oldElem.parentNode instanceof HTMLBodyElement), true, parseInt(oldElem.style.left), parseInt(oldElem.style.top), parseInt(oldElem.style.width), parseInt(oldElem.style.height));
+		var newElem = this.duplicateElement(!(oldElem.parentNode instanceof HTMLBodyElement), true, parseInt(oldElem.style.left, 10), parseInt(oldElem.style.top, 10), parseInt(oldElem.style.width, 10), parseInt(oldElem.style.height, 10));
 		newElem.firstChild.nextSibling.appendChild(document.createTextNode(oldElem.lastChild.data || ""));
 		oldElem.parentNode.replaceChild(newElem, oldElem);
 		this.adjustTextArea(newElem);
@@ -576,15 +603,15 @@ var sbAnnotationService = {
 	{
 		if ( aAction == "move" )
 		{
-			var x = parseInt(aTargetDiv.style.left || 0) + (aEvent.clientX - this.startX); if ( x < 0 ) x = 0;
-			var y = parseInt(aTargetDiv.style.top  || 0)  + (aEvent.clientY - this.startY); if ( y < 0 ) y = 0;
+			var x = parseInt(aTargetDiv.style.left || 0, 10) + (aEvent.clientX - this.startX); if ( x < 0 ) x = 0;
+			var y = parseInt(aTargetDiv.style.top  || 0, 10)  + (aEvent.clientY - this.startY); if ( y < 0 ) y = 0;
 			aTargetDiv.style.left = x + "px";
 			aTargetDiv.style.top  = y + "px";
 		}
 		else if ( aAction == "resize" )
 		{
-			var x = parseInt(aTargetDiv.style.width  || 0) + (aEvent.clientX - this.startX); if ( x < 100 ) x = 100;
-			var y = parseInt(aTargetDiv.style.height || 0) + (aEvent.clientY - this.startY); if ( y < 32 ) y = 32;
+			var x = parseInt(aTargetDiv.style.width  || 0, 10) + (aEvent.clientX - this.startX); if ( x < 100 ) x = 100;
+			var y = parseInt(aTargetDiv.style.height || 0, 10) + (aEvent.clientY - this.startY); if ( y < 32 ) y = 32;
 			aTargetDiv.style.width  = x + "px";
 			aTargetDiv.style.height = y + "px";
 			if ( aTargetDiv.firstChild.nextSibling instanceof HTMLTextAreaElement ) this.adjustTextArea(aTargetDiv);
@@ -595,7 +622,7 @@ var sbAnnotationService = {
 
 	adjustTextArea : function(aDivElem)
 	{
-		var h = parseInt(aDivElem.style.height) - 10 - 16;
+		var h = parseInt(aDivElem.style.height, 10) - 10 - 16;
 		aDivElem.firstChild.nextSibling.style.height = (h > 32 ? h : 32) + "px";
 	},
 

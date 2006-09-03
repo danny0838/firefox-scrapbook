@@ -4,7 +4,7 @@
 <!ENTITY sb.tools "Nástroje">
 <!ENTITY sb.tools.settings "Nastavení">
 <!ENTITY sb.tools.manage "Spravovat">
-<!ENTITY sb.tools.combine "Sloučit">
+<!ENTITY sb.tools.combine "Combine Wizard">
 <!ENTITY sb.tools.trade "Importovat/Exportovat">
 <!ENTITY sb.tools.multiple "Zachytit více URL adres">
 <!ENTITY sb.tools.directory "Adresář ScrapBook">
