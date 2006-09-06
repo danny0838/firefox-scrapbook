@@ -4,5 +4,5 @@
 <!ENTITY sb.multiple.detector.slink "선택 부분의 모든 링크">
 <!ENTITY sb.multiple.detector.tabs "현재 창에 열린 모든 탭">
 <!ENTITY sb.multiple.detector.local "지정 폴더 아래의 로컬 HTML">
-<!ENTITY sb.multiple.detector.bookmarks "Bookmarks">
+<!ENTITY sb.multiple.detector.bookmarks "북마크">
 <!ENTITY sb.multiple.detector.clear "비우기">

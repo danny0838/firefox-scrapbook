@@ -4,7 +4,7 @@
 <!ENTITY sb.open.source "소스 URL 열기">
 <!ENTITY sb.tools "도구">
 <!ENTITY sb.show.files "파일 표시하기">
-<!ENTITY sb.move "Move">
+<!ENTITY sb.move "이동">
 <!ENTITY sb.move.into "폴더로 이동하기">
 <!ENTITY sb.renew "다시 캡처하기">
 <!ENTITY sb.export "가져오기">

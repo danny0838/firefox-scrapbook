@@ -4,7 +4,7 @@
 <!ENTITY sb.tools "도구">
 <!ENTITY sb.tools.settings "설정">
 <!ENTITY sb.tools.manage "관리">
-<!ENTITY sb.tools.combine "Combine Wizard">
+<!ENTITY sb.tools.combine "결합 마법사">
 <!ENTITY sb.tools.trade "내보내기/가져오기">
 <!ENTITY sb.tools.multiple "URL 모두 캡처하기">
 <!ENTITY sb.tools.directory "ScrapBook 폴더 열기">

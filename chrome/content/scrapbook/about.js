@@ -1,6 +1,6 @@
 
-const kVERSION = "1.2";
-const kBUILD_TEXT = " (Build ID 20060902)";
+const kVERSION = "1.2.0.1";
+const kBUILD_TEXT = " (Build ID 20060905)";
 const kUPDATE_URL = "http://amb.vis.ne.jp/mozilla/scrapbook/update.rdf";
 
 var gAboutString;
