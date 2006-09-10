@@ -20,7 +20,7 @@
 <!ENTITY sb.pref.capture.encodeUTF8.tips "Se desabilitado, alguns caracteres podem mudar para '?'.">
 <!ENTITY sb.pref.data "Local para Salvar Dados">
 <!ENTITY sb.pref.data.default "Padrão (Na Pasta do seu Perfil)">
-<!ENTITY sb.pref.data.tips "Selecione a pasta para o 'ScrapBook' armazenar dados coletados.">
+<!ENTITY sb.pref.data.tips "Selecione a pasta para o ScrapBook armazenar dados coletados.">
 <!ENTITY sb.pref.data.alert "Atualmente os dados do seu ScrapBook estão armazenados na pasta do seu Perfil do Firefox. Por favor note que, se você selecionar [Apagar Arquivos] ao remover seu Perfil do Firefox, todos os dados do ScrapBook também serão removidos.">
 <!ENTITY sb.pref.multibook.enabled "Habilitar Multi-ScrapBook">
 <!ENTITY sb.pref.multibook.tips "Isto permite você ter múltiplos destinos para guardar dados e alternar entre eles rapidamente através de um botão na barra de ferramentas.">
