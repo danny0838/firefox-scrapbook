@@ -129,7 +129,7 @@
 							<checkbox id="sbPrefDataDefault" preference="scrapbook.data.default" label="&sb.pref.data.default;" oncommand="sbPrefService.toggleDefaultData();" />
 							<hbox align="center" class="indent">
 								<textbox id="sbPrefDataPath" preference="scrapbook.data.path" flex="1" onfocus="blur();" />
-								<button  id="sbPrefDataButton" label="&sb.button.browse;..." oncommand="sbPrefService.selectData('&sb.pref.data.tips;');" />
+								<button  id="sbPrefDataButton" label="&sb.button.browse;..." oncommand="sbPrefService.selectData(this.getAttribute('tooltiptext'));" tooltiptext="&sb.pref.data.tips;" />
 							</hbox>
 						</vbox>
 						<description id="sbPrefDataAlert" class="notice" hidden="true">&sb.pref.data.alert;</description>

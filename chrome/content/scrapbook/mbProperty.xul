@@ -37,7 +37,7 @@
 				<label control="sbMultiBookPropPath" value="&mb.prop.path;:" />
 				<hbox>
 					<textbox id="sbMultiBookPropPath" flex="1" onfocus="blur();" />
-					<button label="&sb.button.browse;" oncommand="sbMultiBookProp.browse('&sb.pref.data.tips;');" />
+					<button label="&sb.button.browse;" oncommand="sbMultiBookProp.browse(this.getAttribute('tooltiptext'));" tooltiptext="&sb.pref.data.tips;" />
 				</hbox>
 			</row>
 		</rows>
