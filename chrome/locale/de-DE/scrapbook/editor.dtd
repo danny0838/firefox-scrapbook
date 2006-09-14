@@ -1,5 +1,5 @@
-<!ENTITY sb.toolbar.edit "Edit Toolbar">
-<!ENTITY sb.toolbar.info "Info Toolbar">
+<!ENTITY sb.toolbar.edit "Werkzeugleiste anzeigen">
+<!ENTITY sb.toolbar.info "Informationsleiste anzeigen">
 <!ENTITY sb.edit.eraser "DOM-Eraser: Werkzeug zum Entfernen angeklickter Elemente innerhalb einer Webseite.">
 <!ENTITY sb.edit.undo "Rückgängig">
 <!ENTITY sb.edit.save "Änderungen speichern">

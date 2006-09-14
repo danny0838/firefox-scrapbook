@@ -10,7 +10,7 @@
 <!ENTITY sb.capture.folder.select "Ordner auswählen">
 <!ENTITY sb.capture.alltabs "Alle Tabs archivieren">
 <!ENTITY sb.capture.bookmark "Lesezeichen mit ScrapBook erstellen">
-<!ENTITY sb.editbefore "Edit Before Capture">
+<!ENTITY sb.editbefore "Vor dem Archivieren bearbeiten">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">

@@ -1,4 +1,4 @@
-<!ENTITY sb.combine.dragdrop "Add items by drag-and-drop from the tree in the order you want to combine. You can drag-and-drop multiple items at once.">
+<!ENTITY sb.combine.dragdrop "Fügen Sie Einträge, die Sie zusammenfassen wollen, durch &quot;Ziehen und Ablegen&quot; aus dem Baum hinzu. Sie können auch mehrere Einträge auf einmal auswählen.">
 <!ENTITY sb.combine.preview "Vorschau">
 <!ENTITY sb.combine.preview.d "Nach Überprüfung der Vorschau mit &quot;Zusammenfassen&quot; fortfahren.">
 <!ENTITY sb.combine.option.remove "Nach erfolgter Zusammenfassung Originalseiten entfernen">

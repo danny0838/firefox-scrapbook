@@ -3,7 +3,7 @@
 <!ENTITY sb.pref.capture "Archivieren">
 <!ENTITY sb.pref.edit "Bearbeiten">
 <!ENTITY sb.pref.advanced "Erweitert">
-<!ENTITY sb.pref.browser.menubar "&quot;ScrapBook&quot;-Menü in der Menüleiste anzeigen">
+<!ENTITY sb.pref.browser.menubar "ScrapBook-Menü in der Menüleiste anzeigen">
 <!ENTITY sb.pref.browser.bookmark "Eintrag &quot;Lesezeichen mit ScrapBook erstellen&quot; im Kontextmenü anzeigen">
 <!ENTITY sb.pref.browser.submenu "ScrapBook-Einträge im Kontextmenü der Seite in eigenem Untermenü anzeigen (Neustart erforderlich)">
 <!ENTITY sb.pref.showDetailOnDrop "Dialog &quot;Archivierungsdetails&quot; anzeigen, wenn eine Archivierung durch Ziehen mit der Maus in die Sidebar erfolgt">
@@ -11,11 +11,11 @@
 <!ENTITY sb.pref.confirmDelete "Vor dem Löschen bestätigen">
 <!ENTITY sb.pref.tree.autoCollapse "Beim Ausklappen eines Ordners in der Ordnerliste alle anderen Ordner einklappen">
 <!ENTITY sb.pref.tree.unshift "Eintrag beim Verschieben/Archivieren in einen Ordner an folgender Position einfügen:">
-<!ENTITY sb.pref.tree.unshift.top "Oben">
-<!ENTITY sb.pref.tree.unshift.bottom "Unten (Standard)">
+<!ENTITY sb.pref.tree.unshift.top "Am Anfang">
+<!ENTITY sb.pref.tree.unshift.bottom "Am Ende (Standard)">
 <!ENTITY sb.pref.tabs.tips "Folgende Aktionen öffnen neue Tabs:">
 <!ENTITY sb.pref.tabs.note "Notizen in Tab öffnen">
-<!ENTITY sb.pref.tabs.openFromMenu "&quot;ScrapBook&quot;-Menüeinträge in der Menüleiste in neuem Tab öffnen">
+<!ENTITY sb.pref.tabs.openFromMenu "ScrapBook-Menüeinträge in der Menüleiste in neuem Tab öffnen">
 <!ENTITY sb.pref.capture.encodeUTF8 "Zeichenkodierung in UTF-8 umwandeln (empfohlen)">
 <!ENTITY sb.pref.capture.encodeUTF8.tips "Falls nicht ausgewählt, können einige Sonderzeichen unleserlich (&quot;?&quot;) dargestellt werden.">
 <!ENTITY sb.pref.data "Zielordner für die Datenspeicherung">

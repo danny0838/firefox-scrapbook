@@ -43,15 +43,6 @@ var sbBrowserOverlay = {
 		}
 		this.refresh();
 		gBrowser.addProgressListener(this.webProgressListener);
-		var firstInit = function()
-		{
-			if ( nsPreferences.getIntPref("scrapbook.version", 0) < 20060902 )
-			{
-				nsPreferences.setIntPref("scrapbook.version", 20060902)
-				sbCommonUtils.loadURL("http://amb.vis.ne.jp/mozilla/scrapbook/version.php?more=1.2&less=1.2.1", true);
-			}
-		};
-		setTimeout(firstInit, 1000);
 	},
 
 	refresh : function()
