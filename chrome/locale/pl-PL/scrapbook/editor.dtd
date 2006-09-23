@@ -1,9 +1,9 @@
-<!ENTITY sb.toolbar.edit "Edit Toolbar">
-<!ENTITY sb.toolbar.info "Info Toolbar">
+<!ENTITY sb.toolbar.edit "Pasek edycyjny ScrapBook">
+<!ENTITY sb.toolbar.info "Pasek informacyjny">
 <!ENTITY sb.edit.eraser "DOM Eraser: Narzędzie usuwające zaznaczone elementy na stronach internetowych">
 <!ENTITY sb.edit.undo "Cofnij">
 <!ENTITY sb.edit.save "Zapisz zmiany">
-<!ENTITY sb.edit.comment "Powiększ obszar komentarza">
+<!ENTITY sb.edit.comment "Zmień obszar komentarza">
 <!ENTITY sb.edit.sticky "Przyklejona notatka">
 <!ENTITY sb.edit.sticky.create "Utwórz przyklejoną notatkę">
 <!ENTITY sb.edit.inline.add "Dodaj komentarz w linii zaznaczenia">
@@ -20,4 +20,4 @@
 <!ENTITY sb.locate "Zlokalizuj w drzewie katalogów w panelu bocznym">
 <!ENTITY sb.indicators "Pokaż wskaźniki odnośników">
 <!ENTITY sb.info.home "Strona domowa">
-<!ENTITY sb.info.sitemap "Mapa stron">
+<!ENTITY sb.info.sitemap "Mapa witryny">

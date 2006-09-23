@@ -4,7 +4,7 @@
 <!ENTITY sb.tools "Narzędzia">
 <!ENTITY sb.tools.settings "Ustawienia">
 <!ENTITY sb.tools.manage "Zarządzanie">
-<!ENTITY sb.tools.combine "Combine Wizard">
+<!ENTITY sb.tools.combine "Łączenie stron">
 <!ENTITY sb.tools.trade "Import / Eksport">
 <!ENTITY sb.tools.multiple "Przechwytywanie adresów URL">
 <!ENTITY sb.tools.directory "Katalog główny ScrapBooka">
@@ -12,8 +12,8 @@
 <!ENTITY sb.tools.sorttree "Sortuj całe drzewo">
 <!ENTITY sb.tools.output "Zapisz dane jako dokument HTML">
 <!ENTITY sb.tools.repair "Naprawa uszkodzeń">
-<!ENTITY sb.tools.addons "Add-on Functions">
-<!ENTITY sb.tools.tips "Online Tips">
+<!ENTITY sb.tools.addons "Funkcje dodatkowe">
+<!ENTITY sb.tools.tips "Podpowiedzi online">
 <!ENTITY sb.tools.homepage "Strona domowa">
 <!ENTITY sb.tools.about "O rozszerzeniu">
 <!ENTITY sb.note.opentab "Otwórz w karcie">

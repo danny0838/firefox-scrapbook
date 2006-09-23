@@ -33,16 +33,19 @@ var sbBrowserOverlay = {
 	init : function()
 	{
 		document.getElementById("contentAreaContextMenu").addEventListener("popupshowing", sbInitContextMenu, false);
-		if ( sbCommonUtils.getBoolPref("scrapbook.browser.submenu", false) )
-		{
-			document.getElementById("ScrapBookContextSubmenu").hidden = false;
-			for ( var i = 1; i <= 9; i++ )
-			{
-				document.getElementById("ScrapBookContextSubmenu").firstChild.appendChild(document.getElementById("ScrapBookContextMenu" + i));
-			}
-		}
 		this.refresh();
 		gBrowser.addProgressListener(this.webProgressListener);
+		if ( sbCommonUtils.getBoolPref("scrapbook.browser.submenu", false) )
+		{
+			setTimeout(function()
+			{
+				document.getElementById("ScrapBookContextSubmenu").hidden = false;
+				for ( var i = 1; i <= 9; i++ )
+				{
+					document.getElementById("ScrapBookContextSubmenu").firstChild.appendChild(document.getElementById("ScrapBookContextMenu" + i));
+				}
+			}, 1000);
+		}
 	},
 
 	refresh : function()

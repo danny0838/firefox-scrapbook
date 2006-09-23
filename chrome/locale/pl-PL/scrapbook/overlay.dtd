@@ -10,7 +10,7 @@
 <!ENTITY sb.capture.folder.select "Wybierz folder">
 <!ENTITY sb.capture.alltabs "Przechwyć wszystkie karty">
 <!ENTITY sb.capture.bookmark "Dodaj do zakładek używając ScrapBooka">
-<!ENTITY sb.editbefore "Edit Before Capture">
+<!ENTITY sb.editbefore "Edytuj przed przechwyceniem">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">

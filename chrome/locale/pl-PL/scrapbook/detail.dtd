@@ -14,4 +14,4 @@
 <!ENTITY sb.detail.linked.page.depth "Dokładnie podążaj za odnośnikami">
 <!ENTITY sb.detail.linked.page.text "Po zakończeniu przechwytywania wszystkie strony będą powiązane ze sobą i zostanie utworzona mapa stron.">
 <!ENTITY sb.detail.warnAboutRenew "Uwaga: Opcja &quot;Przechwyć ponownie&quot; nadpisze poprzednio zapisaną stronę">
-<!ENTITY sb.detail.warnAboutScript "Uwaga: JavaScript may cause some problems.">
+<!ENTITY sb.detail.warnAboutScript "Uwaga: JavaScript może powodować problemy.">
