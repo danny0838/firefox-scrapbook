@@ -15,7 +15,7 @@
 <!ENTITY sb.highlighter "Podświetlanie">
 <!ENTITY sb.highlighter.remove "Usuń podświetlenie w zaznczeniu">
 <!ENTITY sb.highlighter.remove.all "Usuń wszystkie podświetlone komentarze">
-<!ENTITY sb.source	"Pokaż stronę źródłową">
+<!ENTITY sb.source "Pokaż stronę źródłową">
 <!ENTITY sb.renew "Przechwyć ponownie">
 <!ENTITY sb.locate "Zlokalizuj w drzewie katalogów w panelu bocznym">
 <!ENTITY sb.indicators "Pokaż wskaźniki odnośników">

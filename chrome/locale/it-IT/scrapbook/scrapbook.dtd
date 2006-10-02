@@ -4,16 +4,16 @@
 <!ENTITY sb.tools "Strumenti">
 <!ENTITY sb.tools.settings "Impostazioni">
 <!ENTITY sb.tools.manage "Gestisci">
-<!ENTITY sb.tools.combine "Combine Wizard">
+<!ENTITY sb.tools.combine "Configurazione guidata di unione pagine">
 <!ENTITY sb.tools.trade "Importa / Esporta">
 <!ENTITY sb.tools.multiple "Cattura più URL">
 <!ENTITY sb.tools.directory "Apri la cartella di ScrapBook">
 <!ENTITY sb.tools.calculate "Calcola la dimensione">
 <!ENTITY sb.tools.sorttree "Ordina diagramma delle cartelle">
 <!ENTITY sb.tools.output "Esporta diagramma delle cartelle come file HTML">
-<!ENTITY sb.tools.repair "Riparazione d'emergenza">
-<!ENTITY sb.tools.addons "Add-on Functions">
-<!ENTITY sb.tools.tips "Online Tips">
+<!ENTITY sb.tools.repair "Riparazione d&apos;emergenza">
+<!ENTITY sb.tools.addons "Funzioni dei componenti aggiuntivi">
+<!ENTITY sb.tools.tips "Suggerimenti in linea">
 <!ENTITY sb.tools.homepage "Visita il sito web">
 <!ENTITY sb.tools.about "Informazioni">
 <!ENTITY sb.note.opentab "Apri in una scheda">

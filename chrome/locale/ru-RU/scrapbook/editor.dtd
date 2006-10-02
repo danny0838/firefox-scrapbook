@@ -1,23 +1,23 @@
-<!ENTITY sb.toolbar.edit "Edit Toolbar">
-<!ENTITY sb.toolbar.info "Info Toolbar">
-<!ENTITY sb.edit.eraser "Очистка страницы: удаление блоков">
+<!ENTITY sb.toolbar.edit "Панель редактирования ScrapBook">
+<!ENTITY sb.toolbar.info "Информационная панель ScrapBook">
+<!ENTITY sb.edit.eraser "DOM-очистка страницы: удаления ненужных блоков на странице">
 <!ENTITY sb.edit.undo "Отменить">
-<!ENTITY sb.edit.save "Зафиксировать правки">
-<!ENTITY sb.edit.comment "Расширить поле комментария">
+<!ENTITY sb.edit.save "Сохранить изменения">
+<!ENTITY sb.edit.comment "Увеличить размер текстового поля для комментария">
 <!ENTITY sb.edit.sticky "Быстрое примечание">
-<!ENTITY sb.edit.sticky.create "Создать &sb.edit.sticky;">
-<!ENTITY sb.edit.inline.add "Добавить встроенное применчание к выделенному">
+<!ENTITY sb.edit.sticky.create "Создать быстрое примечание">
+<!ENTITY sb.edit.inline.add "Присоединить файл к выделенному фрагменту">
 <!ENTITY sb.edit.attach.file "Присоединить файл к выделенному">
-<!ENTITY sb.edit.attach.link "Присоединить ссылку к выделенному">
-<!ENTITY sb.edit.cutter "Удалить выделенное">
+<!ENTITY sb.edit.attach.link "Присоединить ссылку к выделенному фрагменту">
+<!ENTITY sb.edit.cutter "Удалить выделенный фрагмент">
 <!ENTITY sb.edit.remove.iframe "Удалить все тэги IFRAME">
 <!ENTITY sb.edit.remove.script "Удалить все тэги SCRIPT">
-<!ENTITY sb.highlighter "Тип выделения">
+<!ENTITY sb.highlighter "Маркер">
 <!ENTITY sb.highlighter.remove "Удалить подсветку в выделенном">
-<!ENTITY sb.highlighter.remove.all "Удалить все цветовые пометки">
-<!ENTITY sb.source "Открыть исходный URL">
-<!ENTITY sb.renew "Захватить снова">
+<!ENTITY sb.highlighter.remove.all "Удалить все типы подсветок">
+<!ENTITY sb.source "Открыть URL сохраненного сайта">
+<!ENTITY sb.renew "Произвести сохранение страницы снова">
 <!ENTITY sb.locate "Синхронизировать с деревом боковой панели">
-<!ENTITY sb.indicators "Показать индикаторы ссылок">
-<!ENTITY sb.info.home "Домой">
-<!ENTITY sb.info.sitemap "Карта сайта">
+<!ENTITY sb.indicators "Показывать индикаторы ссылок">
+<!ENTITY sb.info.home "К начальной странице">
+<!ENTITY sb.info.sitemap "Показать карту сохранённого веб-сайта">

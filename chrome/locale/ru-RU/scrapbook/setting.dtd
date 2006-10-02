@@ -1,31 +1,31 @@
 <!ENTITY sb.pref.general "Основные">
-<!ENTITY sb.pref.tabs "Использование вкладок">
+<!ENTITY sb.pref.tabs "Действия с вкладками">
 <!ENTITY sb.pref.capture "Захват">
 <!ENTITY sb.pref.edit "Редактирование">
 <!ENTITY sb.pref.advanced "Дополнительно">
-<!ENTITY sb.pref.browser.menubar "Показывать меню 'Scrapbook' в главном меню Firefox">
-<!ENTITY sb.pref.browser.bookmark "Показывать в контексном меню 'Добавить в закладки Scrapbook'">
-<!ENTITY sb.pref.browser.submenu "Включить подменю в контекстном меню браузера (Требуется перезагрузка браузера)">
-<!ENTITY sb.pref.showDetailOnDrop "Показывать диалог 'Детали сохранения' при сохранении страницы перетаскиванием иконки">
-<!ENTITY sb.pref.notifyOnComplete "Показывать сообщение 'Сохранение завершено'">
+<!ENTITY sb.pref.browser.menubar "Показывать пункт &quot;Scrapbook&quot; в главном меню Firefox">
+<!ENTITY sb.pref.browser.bookmark "Показывать пункт &quot;Добавить в закладки Scrapbook&quot;">
+<!ENTITY sb.pref.browser.submenu "Использовать компактное контекстное меню в браузере (Требуется перезагрузка браузера)">
+<!ENTITY sb.pref.showDetailOnDrop "Показывать диалог &quot;Настройки сохранения страницы&quot;">
+<!ENTITY sb.pref.notifyOnComplete "Показывать сообщение &quot;Сохранение завершено&quot;">
 <!ENTITY sb.pref.confirmDelete "Требовать подтверждение перед удалением">
-<!ENTITY sb.pref.tree.autoCollapse "При раскрытии папки дерева, остальные свернуть">
-<!ENTITY sb.pref.tree.unshift "Позиция добавления элемента во время переноса/захвата в папку:">
+<!ENTITY sb.pref.tree.autoCollapse "При развёртывании одного каталога дерева, остальные автоматически сворачивать">
+<!ENTITY sb.pref.tree.unshift "Расположение добавленного элемента во время переноса/захвата в каталог:">
 <!ENTITY sb.pref.tree.unshift.top "Вверху">
 <!ENTITY sb.pref.tree.unshift.bottom "Внизу (по умолчанию)">
-<!ENTITY sb.pref.tabs.tips "Следующие действия выполнять в новых вкладках:">
+<!ENTITY sb.pref.tabs.tips "Выберите действия выполняемые в новых вкладках:">
 <!ENTITY sb.pref.tabs.note "Открывать заметки во вкладках">
-<!ENTITY sb.pref.tabs.openFromMenu "Открывать в новой вкладке из меню 'Scrapbook' в главном меню Firefox">
-<!ENTITY sb.pref.capture.encodeUTF8 "Перевести в кодировку UTF-8 (рекомендуется)">
-<!ENTITY sb.pref.capture.encodeUTF8.tips "Если выключено, то некоторые последовательности символов будут отображаться как '?'.">
-<!ENTITY sb.pref.data "Папка для хранения данных">
-<!ENTITY sb.pref.data.default "По умолчанию (В Вашем домашнем каталоге/Профиле)">
-<!ENTITY sb.pref.data.tips "Укажите папку 'ScrapBook' где Вы хотите разместить (разместили) собранные страницы.">
-<!ENTITY sb.pref.data.alert "В данный момент информация из Web-альбома хранится в профиле Firefox. Обратите внимание, что если вы выберете удаление файлов во время удаления профиля, то и вся информация из Web-альбома тоже потеряется.">
-<!ENTITY sb.pref.multibook.enabled "Включить Multi-ScrapBook">
-<!ENTITY sb.pref.multibook.tips "Разрешает использование нескольких альбомов с возможностью переключения кнопкой на панели инструментов.">
-<!ENTITY sb.pref.fileViewer "Программа для выполнения пункта 'Состав файлов'">
-<!ENTITY sb.pref.fileViewer.default "По умолчанию (Если Windows, возможно Explorer)">
+<!ENTITY sb.pref.tabs.openFromMenu "Открывать в новых вкладках из меню &quot;Scrapbook&quot; в главном меню Firefox">
+<!ENTITY sb.pref.capture.encodeUTF8 "Конвертировать в кодировку UTF-8 (рекомендуется)">
+<!ENTITY sb.pref.capture.encodeUTF8.tips "Если не использовать данную функцию, то могут возникать проблемы с отображением некоторых последовательностей символов - они будут отображаться как &apos;?&apos;.">
+<!ENTITY sb.pref.data "Расположение сохраняемой информации">
+<!ENTITY sb.pref.data.default "По умолчанию (в вашем каталоге профиля браузера)">
+<!ENTITY sb.pref.data.tips "Укажите каталог &quot;ScrapBook&quot; в котором будут располагаться/расположены сохранённые веб-страницы.">
+<!ENTITY sb.pref.data.alert "В данный момент информация веб-альбома хранится в каталоге профиля Firefox. Обратите внимание, что если вы выберите удаление файлов во время удаления профиля, то и вся информация из вашего веб-альбома тоже будет удалена.">
+<!ENTITY sb.pref.multibook.enabled "Использовать Multi-ScrapBook">
+<!ENTITY sb.pref.multibook.tips "Позволяет одновременно использовать несколько веб-альбомов с возможностью быстрого переключения между ними с помощью соответствующей кнопки на панели инструментов.">
+<!ENTITY sb.pref.fileViewer "Программа для обзора файлов в каталогах">
+<!ENTITY sb.pref.fileViewer.default "По умолчанию (если у вас ОС Windows, то можно использовать Explorer)">
 <!ENTITY sb.button.customize "Настроить">
-<!ENTITY sb.button.browse "Выбрать">
-<!ENTITY sb.button.show "Показать папку">
+<!ENTITY sb.button.browse "Обзор">
+<!ENTITY sb.button.show "Открыть каталог">

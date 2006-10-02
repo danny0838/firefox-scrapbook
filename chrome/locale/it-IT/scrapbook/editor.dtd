@@ -1,9 +1,9 @@
-<!ENTITY sb.toolbar.edit "Edit Toolbar">
+<!ENTITY sb.toolbar.edit "Modifica la barra degli strumenti">
 <!ENTITY sb.toolbar.info "Mostra le informazioni">
-<!ENTITY sb.edit.eraser "DOM Eraser: strumento per eliminare blocchi cliccati">
+<!ENTITY sb.edit.eraser "Elimina blocchi cliccati con DOM Eraser">
 <!ENTITY sb.edit.undo "Annulla">
 <!ENTITY sb.edit.save "Salva">
-<!ENTITY sb.edit.comment "Espandi/contrai l'area per il commento">
+<!ENTITY sb.edit.comment "Espandi/contrai l&apos;area per il commento">
 <!ENTITY sb.edit.sticky "Annotazione">
 <!ENTITY sb.edit.sticky.create "Crea annotazione">
 <!ENTITY sb.edit.inline.add "Aggiungi annotazione in linea alla selezione">
@@ -12,9 +12,9 @@
 <!ENTITY sb.edit.cutter "Elimina la selezione">
 <!ENTITY sb.edit.remove.iframe "Elimina tutti gli IFRAME">
 <!ENTITY sb.edit.remove.script "Elimina tutti gli SCRIPT">
-<!ENTITY sb.highlighter "Evidenziazione ">
-<!ENTITY sb.highlighter.remove "Annulla evidenziazione nella selezione">
-<!ENTITY sb.highlighter.remove.all "Annulla tutte le evidenziazioni">
+<!ENTITY sb.highlighter "Evidenziatura ">
+<!ENTITY sb.highlighter.remove "Annulla evidenziatura nella selezione">
+<!ENTITY sb.highlighter.remove.all "Annulla tutte le evidenziature">
 <!ENTITY sb.source "Apri indirizzo web sorgente">
 <!ENTITY sb.renew "Cattura ancora">
 <!ENTITY sb.locate "Sincronizza con il diagramma delle cartelle nel pannello">

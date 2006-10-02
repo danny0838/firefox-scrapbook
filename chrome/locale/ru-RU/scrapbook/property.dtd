@@ -4,10 +4,10 @@
 <!ENTITY sb.prop.encode "Кодировка">
 <!ENTITY sb.prop.size "Размер">
 <!ENTITY sb.prop.content "Содержимое">
-<!ENTITY sb.prop.folder "Папка">
+<!ENTITY sb.prop.folder "Каталог">
 <!ENTITY sb.prop.icon "Значок">
 <!ENTITY sb.prop.icon.change "Изменить">
-<!ENTITY sb.prop.icon.default "По умолчанию">
-<!ENTITY sb.prop.icon.favicon "Выбрать значок">
-<!ENTITY sb.prop.icon.custom "Выбрать свой значок">
-<!ENTITY sb.prop.mark "Выделить">
+<!ENTITY sb.prop.icon.default "Значок по умолчанию">
+<!ENTITY sb.prop.icon.favicon "Значок из файлов страницы">
+<!ENTITY sb.prop.icon.custom "Установленный значок">
+<!ENTITY sb.prop.mark "Выделить страницу в веб-альбоме">

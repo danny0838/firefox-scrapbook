@@ -10,8 +10,8 @@
 <!ENTITY sb.capture.folder.select "Seleziona cartella">
 <!ENTITY sb.capture.alltabs "Cattura tutte le schede">
 <!ENTITY sb.capture.bookmark "Nei segnalibri con ScrapBook">
-<!ENTITY sb.editbefore "Edit Before Capture">
+<!ENTITY sb.editbefore "Modifica prima di catturare">
 <!ENTITY sb.key.sidebar "K">
-<!ENTITY sb.key.menubar "S">
+<!ENTITY sb.key.menubar "B">
 <!ENTITY sb.key.capture "C">
 <!ENTITY sb.key.capture.as "O">

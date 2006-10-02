@@ -4,5 +4,5 @@
 <!ENTITY sb.sort.title.desc "Ordine per titolo (Z &gt; A)">
 <!ENTITY sb.sort.date.asc "Ordine cronologico">
 <!ENTITY sb.sort.date.desc "Ordine cronologico inverso">
-<!ENTITY sb.sort.recursive "Ordine ricorsivo per le sotto-cartelle">
-<!ENTITY sb.sort.warning "Attenzione: impossibile annullare questa operazione.">
+<!ENTITY sb.sort.recursive "Ordine ricorsivo per le sottocartelle">
+<!ENTITY sb.sort.warning "Attenzione: impossibile annullare questa operazione">

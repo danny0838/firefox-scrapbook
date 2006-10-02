@@ -1,20 +1,20 @@
-<!ENTITY sb.new.folder "Новая папка...">
+<!ENTITY sb.new.folder "Новый каталог...">
 <!ENTITY sb.new.note "Создать заметку">
-<!ENTITY sb.toggle.all "Развернуть/Свернуть все папки">
+<!ENTITY sb.toggle.all "Развернуть/Свернуть все каталоги">
 <!ENTITY sb.tools "Инструменты">
-<!ENTITY sb.tools.settings "Настройки">
-<!ENTITY sb.tools.manage "Управление">
-<!ENTITY sb.tools.combine "Combine Wizard">
-<!ENTITY sb.tools.trade "Импорт / Экспорт">
-<!ENTITY sb.tools.multiple "Захватить множество URL-ов">
-<!ENTITY sb.tools.directory "Папка ScrapBook">
-<!ENTITY sb.tools.calculate "Рассчитать занимаемый размер">
-<!ENTITY sb.tools.sorttree "Сортировать все дерево">
-<!ENTITY sb.tools.output "Сохранить дерево страниц как HTML">
-<!ENTITY sb.tools.repair "Срочное восстановление">
-<!ENTITY sb.tools.addons "Дополнения">
+<!ENTITY sb.tools.settings "Настройки расширения">
+<!ENTITY sb.tools.manage "Управление каталогами">
+<!ENTITY sb.tools.combine "Объединение веб-страниц">
+<!ENTITY sb.tools.trade "Импорт / Экспорт веб-альбомов">
+<!ENTITY sb.tools.multiple "Сохранение нескольких URL">
+<!ENTITY sb.tools.directory "Открыть каталог ScrapBook">
+<!ENTITY sb.tools.calculate "Подсчёт занимаемого объема">
+<!ENTITY sb.tools.sorttree "Сортировка дерева веб-страниц">
+<!ENTITY sb.tools.output "Сохранение дерева в виде HTML">
+<!ENTITY sb.tools.repair "Аварийное восстановление">
+<!ENTITY sb.tools.addons "Установленные дополнения">
 <!ENTITY sb.tools.tips "Онлайн-советы">
 <!ENTITY sb.tools.homepage "Домашняя страница">
-<!ENTITY sb.tools.about "О программе">
-<!ENTITY sb.note.opentab "Открыть во вкладке">
+<!ENTITY sb.tools.about "О расширении ScrapBook">
+<!ENTITY sb.note.opentab "Открыть в новой вкладке">
 <!ENTITY sb.note.close "Закрыть">

@@ -1,17 +1,17 @@
-<!ENTITY sb.detail "Детали сохранения">
-<!ENTITY sb.detail.new.folder "Новая папка">
-<!ENTITY sb.detail.select.folder "Выбрать папку">
-<!ENTITY sb.detail.option "Настройки">
+<!ENTITY sb.detail "Настройки сохранения веб-страницы">
+<!ENTITY sb.detail.new.folder "Новый каталог">
+<!ENTITY sb.detail.select.folder "Выбрать каталог">
+<!ENTITY sb.detail.option "Составные части страницы">
 <!ENTITY sb.detail.option.images "Изображения">
-<!ENTITY sb.detail.option.styles "Стили">
-<!ENTITY sb.detail.linked.file "Загрузить ссылки">
+<!ENTITY sb.detail.option.styles "CSS-стили">
+<!ENTITY sb.detail.linked.file "Загрузка содержимого по ссылкам на странице">
 <!ENTITY sb.detail.linked.image "Изображения">
-<!ENTITY sb.detail.linked.sound "Аудио">
-<!ENTITY sb.detail.linked.movie "Фильмы">
+<!ENTITY sb.detail.linked.sound "Аудио файлы">
+<!ENTITY sb.detail.linked.movie "Видео файлы">
 <!ENTITY sb.detail.linked.archive "Архивы">
-<!ENTITY sb.detail.linked.custom "Вручную">
+<!ENTITY sb.detail.linked.custom "Другие файлы">
 <!ENTITY sb.detail.linked.page "Многоуровневый захват">
-<!ENTITY sb.detail.linked.page.depth "До следующих ссылок">
-<!ENTITY sb.detail.linked.page.text "После завершения захвата, все страницы будут связаны между собой.">
-<!ENTITY sb.detail.warnAboutRenew "Примечание: 'Захватить снова' записывается поверх ранее сохраненной страницы.">
-<!ENTITY sb.detail.warnAboutScript "Примечание: Из-за JavaScript могут возникнуть некоторые проблемы.">
+<!ENTITY sb.detail.linked.page.depth "Уровень глубины захвата ссылок">
+<!ENTITY sb.detail.linked.page.text "После завершения сохранения веб-страниц они будут связаны между собой.">
+<!ENTITY sb.detail.warnAboutRenew "Примечание: При использовании функции &quot;Захватить снова&quot; сохранённая страница будет перезаписана.">
+<!ENTITY sb.detail.warnAboutScript "Внимание: Могут возникнуть проблемы с JavaScript.">

@@ -1,5 +1,5 @@
-<!ENTITY sb.toolbar.edit "Barre d'outil d'édition">
-<!ENTITY sb.toolbar.info "Barre d'information">
+<!ENTITY sb.toolbar.edit "Barre d&apos;outil d&apos;édition">
+<!ENTITY sb.toolbar.info "Barre d&apos;information">
 <!ENTITY sb.edit.eraser "DOM Eraser: un outil pour supprimer un bloc sélectionné.">
 <!ENTITY sb.edit.undo "Annuler">
 <!ENTITY sb.edit.save "Sauvegarder les changements">
@@ -15,9 +15,9 @@
 <!ENTITY sb.highlighter "Surligneur">
 <!ENTITY sb.highlighter.remove "Supprimer les surlignages de la sélection">
 <!ENTITY sb.highlighter.remove.all "Supprimer tous les surlignages">
-<!ENTITY sb.source "Ouvrir l'URL de la source">
+<!ENTITY sb.source "Ouvrir l&apos;URL de la source">
 <!ENTITY sb.renew "Capturer à nouveau">
-<!ENTITY sb.locate "Synchroniser avec l'arborescence de la barre latérale">
+<!ENTITY sb.locate "Synchroniser avec l&apos;arborescence de la barre latérale">
 <!ENTITY sb.indicators "Montrer les indicateurs de lien">
 <!ENTITY sb.info.home "Origine">
 <!ENTITY sb.info.sitemap "Plan du site">

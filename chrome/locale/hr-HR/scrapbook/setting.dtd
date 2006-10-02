@@ -1,0 +1,31 @@
+<!ENTITY sb.pref.general "Općenito">
+<!ENTITY sb.pref.tabs "Kartice">
+<!ENTITY sb.pref.capture "Hvatanje">
+<!ENTITY sb.pref.edit "Uredi">
+<!ENTITY sb.pref.advanced "Napredno">
+<!ENTITY sb.pref.browser.menubar "Prikaži &apos;ScrapBook&apos; izbornik u Firefox traci s izbornicima">
+<!ENTITY sb.pref.browser.bookmark "Prikaži izbornik &apos;Dodaj u zabilješke sa ScrapBook&apos;">
+<!ENTITY sb.pref.browser.submenu "Omogući podizbornik unutar kontekstnog izbornika preglednika (Promjena nakon ponovnog pokretanja)">
+<!ENTITY sb.pref.showDetailOnDrop "Prikaži izbornik &apos;Detalji hvatanja&apos; pri hvatanju povlačenjem-i-ispuštanjem u rubni stupac">
+<!ENTITY sb.pref.notifyOnComplete "Prikaži obavijest &apos;Hvatanje dovršeno&apos;">
+<!ENTITY sb.pref.confirmDelete "Potvrdi prije brisanja">
+<!ENTITY sb.pref.tree.autoCollapse "Prilikom širenja drva mape, sažmi sve ostale mape">
+<!ENTITY sb.pref.tree.unshift "Mjesto za dodavanje stavke prilikom micanja/hvatanja u mapu:">
+<!ENTITY sb.pref.tree.unshift.top "Vrh">
+<!ENTITY sb.pref.tree.unshift.bottom "Dno (Zadano)">
+<!ENTITY sb.pref.tabs.tips "Označene akcije učitaj u novim karticama.">
+<!ENTITY sb.pref.tabs.note "Otvori bilješke u kartici">
+<!ENTITY sb.pref.tabs.openFromMenu "Otvori u novoj kartici iz &apos;ScrapBook&apos; izbornika u Firefox traci izbornika">
+<!ENTITY sb.pref.capture.encodeUTF8 "Pretvori u UTF-8 kodiranje (Preporučljivo)">
+<!ENTITY sb.pref.capture.encodeUTF8.tips "Ako nije označeno, neki se znaci često iskrive u &apos;?&apos;.">
+<!ENTITY sb.pref.data "Odredište za spremanje podataka">
+<!ENTITY sb.pref.data.default "Zadano (U mapi Vašeg profila)">
+<!ENTITY sb.pref.data.tips "Odaberite ScrapBook direktorij gdje će se spremati prikupljeni podaci.">
+<!ENTITY sb.pref.data.alert "Trenutno su Vaši ScrapBook podaci spremljeni u Vašoj Firefox &apos;Mapi profila&apos;. Molimo Vas da obratite pozornost da ako odaberete [Obriši datoteke] prilikom brisanja Firefox profila, bit će uklonjeni svi ScrapBook podaci.">
+<!ENTITY sb.pref.multibook.enabled "Omogući Multi-ScrapBook">
+<!ENTITY sb.pref.multibook.tips "Ova Vam opcija omogućava postavljanje višestrukih odredišta za spremanje podataka i brzu promjenu između njih s gumbom alatne trake.">
+<!ENTITY sb.pref.fileViewer "Program za pregledavanje datoteka">
+<!ENTITY sb.pref.fileViewer.default "Zadano (Ako je Windows, možda Explorer.)">
+<!ENTITY sb.button.customize "Prilagodi">
+<!ENTITY sb.button.browse "Pronađi">
+<!ENTITY sb.button.show "Prikaži direktorij">

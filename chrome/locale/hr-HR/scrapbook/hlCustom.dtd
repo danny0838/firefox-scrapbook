@@ -1,0 +1,20 @@
+<!ENTITY sb.hlCustom.preset "Unaprijed postavljeni stilovi">
+<!ENTITY sb.hlCustom.background "Pozadina">
+<!ENTITY sb.hlCustom.color "Boja">
+<!ENTITY sb.hlCustom.text "Tekst">
+<!ENTITY sb.hlCustom.bold "Podebljano">
+<!ENTITY sb.hlCustom.italic "Nakošeno">
+<!ENTITY sb.hlCustom.line "Precrtano">
+<!ENTITY sb.hlCustom.border "Obrub">
+<!ENTITY sb.hlCustom.type "Tip">
+<!ENTITY sb.hlCustom.box "Okvir">
+<!ENTITY sb.hlCustom.underline "Podcrtano">
+<!ENTITY sb.hlCustom.style "Stil">
+<!ENTITY sb.hlCustom.solid "Puno">
+<!ENTITY sb.hlCustom.dotted "Točke">
+<!ENTITY sb.hlCustom.dashed "Crtice">
+<!ENTITY sb.hlCustom.double "Dvostruko">
+<!ENTITY sb.hlCustom.width "Širina">
+<!ENTITY sb.hlCustom.thin "Tanko">
+<!ENTITY sb.hlCustom.medium "Srednje">
+<!ENTITY sb.hlCustom.thick "Debelo">

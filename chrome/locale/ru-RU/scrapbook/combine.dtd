@@ -1,4 +1,4 @@
-<!ENTITY sb.combine.dragdrop "Add items by drag-and-drop from the tree in the order you want to combine. You can drag-and-drop multiple items at once.">
+<!ENTITY sb.combine.dragdrop "Добавляйте требуемые для объединения страницы обычным перетаскиванием их из дерева страниц. Также имеется возможность перетаскивать по несколько страниц сразу.">
 <!ENTITY sb.combine.preview "Предварительный просмотр">
-<!ENTITY sb.combine.preview.d "Нажмите кнопку 'Объединить' после предварительного просмотра.">
-<!ENTITY sb.combine.option.remove "После осуществления объединения удалить исходные страницы">
+<!ENTITY sb.combine.preview.d "Для запуска операции объединения нажмите кнопку &quot;Начать объединение&quot;.">
+<!ENTITY sb.combine.option.remove "После окончания операции объединения удалить исходные страницы из веб-альбома ScrapBook">

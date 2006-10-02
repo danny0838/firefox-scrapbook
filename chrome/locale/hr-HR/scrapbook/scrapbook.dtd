@@ -1,0 +1,20 @@
+<!ENTITY sb.new.folder "Nova mapa...">
+<!ENTITY sb.new.note "Nova bilješka">
+<!ENTITY sb.toggle.all "Proširi/Sažmi sve mape">
+<!ENTITY sb.tools "Alati">
+<!ENTITY sb.tools.settings "Postavke">
+<!ENTITY sb.tools.manage "Upravljaj">
+<!ENTITY sb.tools.combine "Čarobnjak za spajanje">
+<!ENTITY sb.tools.trade "Uvezi / Izvezi">
+<!ENTITY sb.tools.multiple "Hvatanje višestrukih web adresa">
+<!ENTITY sb.tools.directory "ScrapBook direktorij">
+<!ENTITY sb.tools.calculate "Izračunavanje veličine">
+<!ENTITY sb.tools.sorttree "Razvrstaj cijelo drvo">
+<!ENTITY sb.tools.output "Izvezi podatke drva kao HTML">
+<!ENTITY sb.tools.repair "Hitno popravljanje">
+<!ENTITY sb.tools.addons "Funkcije dodatka">
+<!ENTITY sb.tools.tips "Savjeti na mreži">
+<!ENTITY sb.tools.homepage "Početna stranica">
+<!ENTITY sb.tools.about "O">
+<!ENTITY sb.note.opentab "Otvori u kartici">
+<!ENTITY sb.note.close "Zatvori">

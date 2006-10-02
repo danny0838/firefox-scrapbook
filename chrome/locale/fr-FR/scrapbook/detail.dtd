@@ -13,5 +13,5 @@
 <!ENTITY sb.detail.linked.page "Capture en profondeur">
 <!ENTITY sb.detail.linked.page.depth "Profondeur de capture des liens">
 <!ENTITY sb.detail.linked.page.text "Une fois les captures terminées, toutes les pages sont liées entre elles.">
-<!ENTITY sb.detail.warnAboutRenew "IMPORTANT : 'Capturer à nouveau' remplace la page sauvegardée précédemment.">
+<!ENTITY sb.detail.warnAboutRenew "IMPORTANT : &apos;Capturer à nouveau&apos; remplace la page sauvegardée précédemment.">
 <!ENTITY sb.detail.warnAboutScript "IMPORTANT : JavaScript cause de nombreux problèmes.">

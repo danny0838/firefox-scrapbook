@@ -1,13 +1,13 @@
 <!ENTITY sb.open "Открыть">
-<!ENTITY sb.open.tab "Открыть на вкладке">
+<!ENTITY sb.open.tab "Открыть в вкладке">
 <!ENTITY sb.open.newtab "Открыть в новой вкладке">
 <!ENTITY sb.open.source "Открыть исходный URL">
 <!ENTITY sb.tools "Инструменты">
-<!ENTITY sb.show.files "Показать файлы">
-<!ENTITY sb.move "Move">
-<!ENTITY sb.move.into "Переместить в папку">
+<!ENTITY sb.show.files "Файлы веб-страницы">
+<!ENTITY sb.move "Переместить">
+<!ENTITY sb.move.into "Переместить в каталог">
 <!ENTITY sb.renew "Захватить снова">
-<!ENTITY sb.export "Экспорт">
+<!ENTITY sb.export "Экспортировать">
 <!ENTITY sb.remove "Удалить">
 <!ENTITY sb.property "Свойства">
 <!ENTITY sb.listview "Список">
@@ -16,18 +16,18 @@
 <!ENTITY sb.prop.id.date "ID (Время)">
 <!ENTITY sb.folder.toggle "Развернуть/Свернуть">
 <!ENTITY sb.folder.combine "Комбинированный вид">
-<!ENTITY sb.folder.openall "Открыть все на вкладках">
-<!ENTITY sb.folder.manage "Упорядочить папки...">
-<!ENTITY sb.new.folder "Новая папка...">
+<!ENTITY sb.folder.openall "Открыть всё во вкладках">
+<!ENTITY sb.folder.manage "Управление каталогами...">
+<!ENTITY sb.new.folder "Новый каталог...">
 <!ENTITY sb.new.note "Создать заметку">
-<!ENTITY sb.sort.folder "Сортировать папку">
+<!ENTITY sb.sort.folder "Сортировка каталогов">
 <!ENTITY sb.search "Поиск">
 <!ENTITY sb.search.fulltext "Полнотекстовый поиск">
-<!ENTITY sb.search.all "Все">
-<!ENTITY sb.search.re "Использовать шаблоны">
-<!ENTITY sb.search.cs "С учетом регистра">
-<!ENTITY sb.search.cache "Обновить кэш полнотекстового поиска">
-<!ENTITY sb.search.clear "Удалить историю автозаполнения">
-<!ENTITY sb.search.days "Показать за: ">
+<!ENTITY sb.search.all "Всё">
+<!ENTITY sb.search.re "Использовать шаблоны (RegExp)">
+<!ENTITY sb.search.cs "С учётом регистра">
+<!ENTITY sb.search.cache "Обновить кэш для полнотекстового поиска">
+<!ENTITY sb.search.clear "Удалить всю историю автозаполнения">
+<!ENTITY sb.search.days "Показать за последние: ">
 <!ENTITY mb.configure "Настроить">
 <!ENTITY mb.profileFolder "Каталог профиля">

@@ -1,4 +1,4 @@
-<!ENTITY sb.combine.dragdrop "Add items by drag-and-drop from the tree in the order you want to combine. You can drag-and-drop multiple items at once.">
+<!ENTITY sb.combine.dragdrop "Aggiungere elementi da unire tramite trascinamenti e rilascio dal diagramma delle cartelle. È possibile trascinare e rilasciare molteplici elementi contemporaneamente">
 <!ENTITY sb.combine.preview "Anteprima">
-<!ENTITY sb.combine.preview.d "Premere 'Unisci' dopo aver verificato l'anteprima">
-<!ENTITY sb.combine.option.remove "Dopo aver completato l'unione, eliminare la pagina originale">
+<!ENTITY sb.combine.preview.d "Premere &apos;Unisci&apos; dopo aver verificato l&apos;anteprima">
+<!ENTITY sb.combine.option.remove "Dopo aver completato l&apos;unione, eliminare la pagina originale">

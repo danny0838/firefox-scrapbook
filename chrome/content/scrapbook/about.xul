@@ -96,6 +96,10 @@
 						<label value="George C. Tsoi (zh-CN)" href="http://www.moZine.org/" class="link" onclick="SB_visit(this);" />
 						<label value="blackdire (zh-CN)" />
 					</row>
+					<row>
+						<label value="Krcko (hr-HR)" />
+						<label />
+					</row>
 				</rows>
 			</grid>
 			<separator class="thin"/>

@@ -1,0 +1,12 @@
+<!ENTITY sb.note.save "Spremi">
+<!ENTITY sb.note.close "Zatvori">
+<!ENTITY sb.note.tools "Alati">
+<!ENTITY sb.note.htmlview "HTML pogled">
+<!ENTITY sb.note.normalview "Normalno pogled">
+<!ENTITY sb.note.template "Uredi HTML predložak">
+<!ENTITY sb.note.autolinefeed "Automatsko popunjavanje redova">
+<!ENTITY sb.note.autolinefeed.t "Dodaj &lt;br&gt; oznaku na kraj reda u &sb.note.htmlview;">
+<!ENTITY sb.note.fontsize "Veličina fonta">
+<!ENTITY sb.note.help "Pomoć">
+<!ENTITY sb.note.print "Ispis">
+<!ENTITY sb.note.exit "Izađi">

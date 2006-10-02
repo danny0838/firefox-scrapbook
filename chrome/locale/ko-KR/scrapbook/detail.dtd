@@ -13,5 +13,5 @@
 <!ENTITY sb.detail.linked.page "상세 캡처">
 <!ENTITY sb.detail.linked.page.depth "연결 링크 단계">
 <!ENTITY sb.detail.linked.page.text "캡처 완료 후 모든 페이지는 상호 링크되어 사이트 맵이 생성됩니다.">
-<!ENTITY sb.detail.warnAboutRenew "알림: '다시 캡처하기' 기능은 이전에 저장된 페이지에 덮어씁니다.">
-<!ENTITY sb.detail.warnAboutScript "알림: 자바스크립트가 문제를 일으켰습니다.">
+<!ENTITY sb.detail.warnAboutRenew "알림: &apos;다시 캡처하기&apos; 기능은 이전에 저장된 페이지에 덮어씁니다.">
+<!ENTITY sb.detail.warnAboutScript "알림: 자바스크립트에서 문제가 발생될 수 있습니다.">

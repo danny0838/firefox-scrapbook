@@ -5,8 +5,8 @@
 <!ENTITY sb.note.normalview "Visualizzazione normale">
 <!ENTITY sb.note.template "Modifica maschera HTML">
 <!ENTITY sb.note.autolinefeed "Tag automatico a fine linea">
-<!ENTITY sb.note.autolinefeed.t "Aggiungi il tag &lt;br&gt; a fine linea nell'anteprima HTML">
+<!ENTITY sb.note.autolinefeed.t "Aggiungi il tag &lt;br&gt; a fine linea nell&apos;anteprima HTML">
 <!ENTITY sb.note.fontsize "Grandezza carattere">
 <!ENTITY sb.note.help "Aiuto">
-<!ENTITY sb.note.print "Print">
+<!ENTITY sb.note.print "Stampa">
 <!ENTITY sb.note.exit "Esci">

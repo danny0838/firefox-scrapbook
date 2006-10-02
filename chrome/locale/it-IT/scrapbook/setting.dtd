@@ -3,11 +3,11 @@
 <!ENTITY sb.pref.capture "Cattura">
 <!ENTITY sb.pref.edit "Modifica">
 <!ENTITY sb.pref.advanced "Avanzate">
-<!ENTITY sb.pref.browser.menubar "Inserire 'ScrapBook' fra i menu principali di Firefox">
-<!ENTITY sb.pref.browser.bookmark "Mostrare 'Nei segnalibri con ScrapBook' nel menu contestuale">
-<!ENTITY sb.pref.browser.submenu "Attivare i sotto-menu dentro il menu contestuale del browser (riavvio necessario)">
-<!ENTITY sb.pref.showDetailOnDrop "Visualizzare la finestra di dialogo 'Dettagli cattura' quando si cattura tramite drag and drop nel pannello">
-<!ENTITY sb.pref.notifyOnComplete "Visualizzare la finestra di notifica 'Cattura completata' (Nota! Potrebbe funzionare solo in ambiente Windows)">
+<!ENTITY sb.pref.browser.menubar "Inserire &apos;ScrapBook&apos; fra i menu principali di Firefox">
+<!ENTITY sb.pref.browser.bookmark "Mostrare &apos;Nei segnalibri con ScrapBook&apos; nel menu contestuale">
+<!ENTITY sb.pref.browser.submenu "Attivare i sottomenu dentro il menu contestuale del browser (riavvio necessario)">
+<!ENTITY sb.pref.showDetailOnDrop "Visualizzare la finestra di dialogo &apos;Dettagli cattura&apos; quando si cattura tramite trascinamento e rilascio nel pannello">
+<!ENTITY sb.pref.notifyOnComplete "Visualizzare la finestra di notifica &apos;Cattura completata&apos; (Nota! Potrebbe funzionare solo in ambiente Windows)">
 <!ENTITY sb.pref.confirmDelete "Confermare prima di eliminare">
 <!ENTITY sb.pref.tree.autoCollapse "Quando nel diagramma delle cartelle si espande una cartella, contrarre tutte le altre">
 <!ENTITY sb.pref.tree.unshift "Posizione dove aggiungere gli elementi quando si sposta/cattura dentro la cartella:">
@@ -15,17 +15,17 @@
 <!ENTITY sb.pref.tree.unshift.bottom "In fondo (opzione predefinita)">
 <!ENTITY sb.pref.tabs.tips "Le seguenti azioni verranno eseguite in nuove schede:">
 <!ENTITY sb.pref.tabs.note "Apri le note">
-<!ENTITY sb.pref.tabs.openFromMenu "Apri dal menu 'ScrapBook' in Firefox">
+<!ENTITY sb.pref.tabs.openFromMenu "Apri dal menu &apos;ScrapBook&apos; in Firefox">
 <!ENTITY sb.pref.capture.encodeUTF8 "Convertire nella codifica UTF-8 (raccomandato)">
-<!ENTITY sb.pref.capture.encodeUTF8.tips "Se l'opzione è deselezionata, molti caratteri potrebbero essere visualizzati come '?'">
+<!ENTITY sb.pref.capture.encodeUTF8.tips "Se l&apos;opzione è deselezionata, molti caratteri potrebbero essere visualizzati come &apos;?&apos;">
 <!ENTITY sb.pref.data "Cartella dove conservare i dati">
 <!ENTITY sb.pref.data.default "Predefinita (nella cartella del proprio profilo)">
-<!ENTITY sb.pref.data.tips "Selezionare la cartella 'ScrapBook' dove conservare i dati salvati">
+<!ENTITY sb.pref.data.tips "Selezionare la cartella &apos;ScrapBook&apos; dove conservare i dati salvati">
 <!ENTITY sb.pref.data.alert "Attualmente i dati di ScrapBook sono conservati nella cartella del proprio profilo di Firefox. Attenzione: in caso venga eliminata la cartella del proprio profilo di Firefox, selezionando [Elimina file] verranno eliminati anche tutti i dati di ScrapBook">
 <!ENTITY sb.pref.multibook.enabled "Attiva Multi-ScrapBook">
-<!ENTITY sb.pref.multibook.tips "Imposta cartelle multiple dove conservare i dati e passa rapidamente da una cartella ad un'altra tramite apposita icona nella barra degli strumenti di ScrapBook">
+<!ENTITY sb.pref.multibook.tips "Imposta cartelle multiple dove conservare i dati e passa rapidamente da una cartella ad un&apos;altra tramite apposita icona nella barra degli strumenti di ScrapBook">
 <!ENTITY sb.pref.fileViewer "Programma per visualizzare i file">
 <!ENTITY sb.pref.fileViewer.default "Predefinito (in ambiente Windows, solitamente Explorer)">
 <!ENTITY sb.button.customize "Personalizza">
-<!ENTITY sb.button.browse "Visualizza">
+<!ENTITY sb.button.browse "Sfoglia">
 <!ENTITY sb.button.show "Mostra cartella">

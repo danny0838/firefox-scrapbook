@@ -17,7 +17,7 @@
 <!ENTITY sb.pref.tabs.note "Otwórz notes w karcie">
 <!ENTITY sb.pref.tabs.openFromMenu "Elementy otwierane z menu &quot;ScrapBook&quot; umieszczonego na pasku menu Firefoksa otwórz w nowej karcie">
 <!ENTITY sb.pref.capture.encodeUTF8 "Przekonwertuj na kodowanie UTF-8 (zalecane)">
-<!ENTITY sb.pref.capture.encodeUTF8.tips "Jeśli nie zaznaczysz tej opcji, niektóre litery zostaną przekształcone na '?'.">
+<!ENTITY sb.pref.capture.encodeUTF8.tips "Jeśli nie zaznaczysz tej opcji, niektóre litery zostaną przekształcone na &apos;?&apos;.">
 <!ENTITY sb.pref.data "Katalog zapisu danych">
 <!ENTITY sb.pref.data.default "Domyślny (katalog zapisu w profilu użytkownika)">
 <!ENTITY sb.pref.data.tips "Wybierz katalog, gdzie będą magazynowane pobrane dane">

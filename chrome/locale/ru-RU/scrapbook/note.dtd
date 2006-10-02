@@ -1,11 +1,11 @@
 <!ENTITY sb.note.save "Сохранить">
 <!ENTITY sb.note.close "Закрыть">
 <!ENTITY sb.note.tools "Инструменты">
-<!ENTITY sb.note.htmlview "HTML предв. просмотр">
+<!ENTITY sb.note.htmlview "В виде веб-документа">
 <!ENTITY sb.note.normalview "Обычный вид">
-<!ENTITY sb.note.template "Править HTML шаблон">
+<!ENTITY sb.note.template "Изменить шаблон HTML">
 <!ENTITY sb.note.autolinefeed "Автоперенос строк">
-<!ENTITY sb.note.autolinefeed.t "Добавлять &lt;br&gt; тэг в конец строки при предв. просмотре">
+<!ENTITY sb.note.autolinefeed.t "Добавлять тэг &lt;br&gt; в конец каждой строки при просмотре &quot;В виде веб-документа&quot;">
 <!ENTITY sb.note.fontsize "Размер шрифта">
 <!ENTITY sb.note.help "Помощь">
 <!ENTITY sb.note.print "Печать">

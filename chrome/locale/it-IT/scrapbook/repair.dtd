@@ -6,4 +6,4 @@
 <!ENTITY sb.repair.rdfFile.size "Dimensione">
 <!ENTITY sb.repair.favicons "Ripristina le favicon nel diagramma">
 <!ENTITY sb.repair.favicons.descript "Prova questa opzione se molte favicon nel diagramma delle cartelle di ScrapBook scompaiono">
-<!ENTITY sb.repair.complete "Ripristino completato.">
+<!ENTITY sb.repair.complete "Ripristino completato">
