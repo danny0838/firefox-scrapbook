@@ -26,4 +26,5 @@ locale	scrapbook	pt-BR	jar:chrome/scrapbook.jar!/locale/pt-BR/scrapbook/
 locale	scrapbook	ko-KR	jar:chrome/scrapbook.jar!/locale/ko-KR/scrapbook/
 locale	scrapbook	hu-HU	jar:chrome/scrapbook.jar!/locale/hu-HU/scrapbook/
 locale	scrapbook	hr-HR	jar:chrome/scrapbook.jar!/locale/hr-HR/scrapbook/
+locale	scrapbook	sk-SK	jar:chrome/scrapbook.jar!/locale/sk-SK/scrapbook/
 

@@ -4,14 +4,14 @@
 <!ENTITY sb.detail.option "Možnosti">
 <!ENTITY sb.detail.option.images "Obrázky">
 <!ENTITY sb.detail.option.styles "Styly">
-<!ENTITY sb.detail.linked.file "Stáhnout provázané soubory">
-<!ENTITY sb.detail.linked.image "Obrázek">
-<!ENTITY sb.detail.linked.sound "Zvuk">
-<!ENTITY sb.detail.linked.movie "Video">
-<!ENTITY sb.detail.linked.archive "Archiv">
+<!ENTITY sb.detail.linked.file "Stáhnout související soubory">
+<!ENTITY sb.detail.linked.image "Obrázky">
+<!ENTITY sb.detail.linked.sound "Zvuky">
+<!ENTITY sb.detail.linked.movie "Videa">
+<!ENTITY sb.detail.linked.archive "Archívy">
 <!ENTITY sb.detail.linked.custom "Vlastní">
 <!ENTITY sb.detail.linked.page "Hloubkové zachycení">
 <!ENTITY sb.detail.linked.page.depth "Hloubkově procházet odkazy">
 <!ENTITY sb.detail.linked.page.text "Po dokončení zachycení budou všechny stránky vzájemně propojeny a bude vytvořena mapa stránek.">
 <!ENTITY sb.detail.warnAboutRenew "UPOZORNĚNÍ: 'Zachytit znovu' přepíše předchozí uloženou stránku.">
-<!ENTITY sb.detail.warnAboutScript "UPOZORNĚNÍ: je hodně problémů způsobeno JavaScriptem.">
+<!ENTITY sb.detail.warnAboutScript "UPOZORNĚNÍ: Stránky řízené skriptem (JavaScript) nemusí správně fungovat.">

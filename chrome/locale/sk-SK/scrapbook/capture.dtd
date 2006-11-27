@@ -1,0 +1,13 @@
+<!ENTITY sb.capture "Zachytenie">
+<!ENTITY sb.capture.abort "Zrušiť">
+<!ENTITY sb.capture.start "Štart">
+<!ENTITY sb.capture.retry "Reštartovať">
+<!ENTITY sb.capture.skip "Preskočiť">
+<!ENTITY sb.capture.pause "Pauza">
+<!ENTITY sb.capture.filter "Filter">
+<!ENTITY sb.capture.filter.domain "Obmedziť na oblasť">
+<!ENTITY sb.capture.filter.level "Obmedziť na priečinok">
+<!ENTITY sb.capture.filter.string "Filter podľa reťazca...">
+<!ENTITY sb.capture.filter.checkon "Všetko zapnúť">
+<!ENTITY sb.capture.filter.checkoff "Všetko vypnúť">
+<!ENTITY sb.capture.filter.invert "Obrátiť výber">

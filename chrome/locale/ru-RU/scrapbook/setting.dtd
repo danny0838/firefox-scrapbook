@@ -5,7 +5,7 @@
 <!ENTITY sb.pref.advanced "Дополнительно">
 <!ENTITY sb.pref.browser.menubar "Показывать пункт &quot;Scrapbook&quot; в главном меню Firefox">
 <!ENTITY sb.pref.browser.bookmark "Показывать пункт &quot;Добавить в закладки Scrapbook&quot;">
-<!ENTITY sb.pref.browser.submenu "Использовать компактное контекстное меню в браузере (Требуется перезагрузка браузера)">
+<!ENTITY sb.pref.browser.submenu "Использовать компактное контекстное меню в браузере (Требуется перезапуск браузера)">
 <!ENTITY sb.pref.showDetailOnDrop "Показывать диалог &quot;Настройки сохранения страницы&quot;">
 <!ENTITY sb.pref.notifyOnComplete "Показывать сообщение &quot;Сохранение завершено&quot;">
 <!ENTITY sb.pref.confirmDelete "Требовать подтверждение перед удалением">
@@ -17,9 +17,9 @@
 <!ENTITY sb.pref.tabs.note "Открывать заметки во вкладках">
 <!ENTITY sb.pref.tabs.openFromMenu "Открывать в новых вкладках из меню &quot;Scrapbook&quot; в главном меню Firefox">
 <!ENTITY sb.pref.capture.encodeUTF8 "Конвертировать в кодировку UTF-8 (рекомендуется)">
-<!ENTITY sb.pref.capture.encodeUTF8.tips "Если не использовать данную функцию, то могут возникать проблемы с отображением некоторых последовательностей символов - они будут отображаться как &apos;?&apos;.">
+<!ENTITY sb.pref.capture.encodeUTF8.tips "Если не использовать данную функцию, то могут возникать проблемы с отображением некоторых последовательностей символов — они будут отображаться как &apos;?&apos;.">
 <!ENTITY sb.pref.data "Расположение сохраняемой информации">
-<!ENTITY sb.pref.data.default "По умолчанию (в вашем каталоге профиля браузера)">
+<!ENTITY sb.pref.data.default "По умолчанию (в каталоге профиля браузера)">
 <!ENTITY sb.pref.data.tips "Укажите каталог &quot;ScrapBook&quot; в котором будут располагаться/расположены сохранённые веб-страницы.">
 <!ENTITY sb.pref.data.alert "В данный момент информация веб-альбома хранится в каталоге профиля Firefox. Обратите внимание, что если вы выберите удаление файлов во время удаления профиля, то и вся информация из вашего веб-альбома тоже будет удалена.">
 <!ENTITY sb.pref.multibook.enabled "Использовать Multi-ScrapBook">

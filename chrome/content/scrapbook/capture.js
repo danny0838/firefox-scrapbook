@@ -152,7 +152,7 @@ var sbCaptureTask = {
 
 	add : function(aURL, aDepth)
 	{
-		if ( gURLs.length > 1000 ) return;
+		if ( gURLs.length > 10000 ) return;
 		if ( !aURL.match(/^(http|https|ftp|file):\/\//i) ) return;
 		if ( gContext == "indepth" )
 		{

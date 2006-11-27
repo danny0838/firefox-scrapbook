@@ -6,8 +6,8 @@
 <!ENTITY sb.detail.option.styles "CSS-стили">
 <!ENTITY sb.detail.linked.file "Загрузка содержимого по ссылкам на странице">
 <!ENTITY sb.detail.linked.image "Изображения">
-<!ENTITY sb.detail.linked.sound "Аудио файлы">
-<!ENTITY sb.detail.linked.movie "Видео файлы">
+<!ENTITY sb.detail.linked.sound "Аудиофайлы">
+<!ENTITY sb.detail.linked.movie "Видеофайлы">
 <!ENTITY sb.detail.linked.archive "Архивы">
 <!ENTITY sb.detail.linked.custom "Другие файлы">
 <!ENTITY sb.detail.linked.page "Многоуровневый захват">

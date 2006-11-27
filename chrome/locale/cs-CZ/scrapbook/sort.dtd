@@ -1,8 +1,8 @@
 <!ENTITY sb.sort "Seřadit">
 <!ENTITY sb.sort.reverse "Obráceně">
-<!ENTITY sb.sort.title.asc "Seřadit podle Názvu (A &gt; Z)">
-<!ENTITY sb.sort.title.desc "Seřadit podle Názvu (Z &gt; A)">
-<!ENTITY sb.sort.date.asc "Chronologicky">
-<!ENTITY sb.sort.date.desc "Chronologicky-převrátit">
-<!ENTITY sb.sort.recursive "Seřadit pod-adresáře rekurzivně">
-<!ENTITY sb.sort.warning "Poznámka: Tuto operaci nemůžete vrátit.">
+<!ENTITY sb.sort.title.asc "Seřadit podle názvu (A &gt; Z)">
+<!ENTITY sb.sort.title.desc "Seřadit podle názvu (Z &gt; A)">
+<!ENTITY sb.sort.date.asc "Od nejstaršího k nejnovějšímu">
+<!ENTITY sb.sort.date.desc "Od nejnovějšího k nejstaršímu">
+<!ENTITY sb.sort.recursive "Seřadit včetně všech podadresářů">
+<!ENTITY sb.sort.warning "Poznámka: Tuto operaci NELZE vrátit zpět.">

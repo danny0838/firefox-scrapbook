@@ -1,4 +1,4 @@
-<!ENTITY sb.combine.dragdrop "Add items by drag-and-drop from the tree in the order you want to combine. You can drag-and-drop multiple items at once.">
+<!ENTITY sb.combine.dragdrop "Požadované položky přetáhněte ze seznamu v tom pořadí, v jakém je chcete sloučit. Lze přetahovat i více položek najednou.">
 <!ENTITY sb.combine.preview "Náhled">
-<!ENTITY sb.combine.preview.d "Stiskněte tlačítko 'Sloučení' po ověření náhledu.">
-<!ENTITY sb.combine.option.remove "Po dokončení sloučení, odstranit originální stránky.">
+<!ENTITY sb.combine.preview.d "Po kontrole v náhledu stiskněte tlačítko 'Sloučit'.">
+<!ENTITY sb.combine.option.remove "Po sloučení odstranit původní stránky">

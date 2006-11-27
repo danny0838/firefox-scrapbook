@@ -9,7 +9,7 @@
 <!ENTITY sb.capture.folder.root "Kořenová složka">
 <!ENTITY sb.capture.folder.select "Vybrat složku">
 <!ENTITY sb.capture.alltabs "Zachytit všechny panely">
-<!ENTITY sb.capture.bookmark "Přidat do ScrapBook záložek">
+<!ENTITY sb.capture.bookmark "Přidat mezi záložky ve ScrapBook">
 <!ENTITY sb.editbefore "Editovat před zachycením">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "S">

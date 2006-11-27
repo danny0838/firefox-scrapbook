@@ -3,5 +3,5 @@
 <!ENTITY mb.prop.path "Cesta">
 <!ENTITY mb.button.add "Přidat">
 <!ENTITY mb.button.edit "Upravit">
-<!ENTITY mb.button.remove "Odstranit">
+<!ENTITY mb.button.remove "Odebrat">
 <!ENTITY mb.button.accept "OK">

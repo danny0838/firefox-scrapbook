@@ -1,10 +1,10 @@
 <!ENTITY sb.open "Otevřít">
 <!ENTITY sb.open.tab "Otevřít v panelu">
 <!ENTITY sb.open.newtab "Otevřít v novém panelu">
-<!ENTITY sb.open.source "Otevřít zdroj URL">
+<!ENTITY sb.open.source "Otevřít zdroj odkazu">
 <!ENTITY sb.tools "Nástroje">
 <!ENTITY sb.show.files "Zobrazit soubory">
-<!ENTITY sb.move "Move">
+<!ENTITY sb.move "Přesunout">
 <!ENTITY sb.move.into "Přesunout do složky">
 <!ENTITY sb.renew "Zachytit znovu">
 <!ENTITY sb.export "Exportovat">
@@ -13,7 +13,7 @@
 <!ENTITY sb.listview "Seznam">
 <!ENTITY sb.prop.title "Název">
 <!ENTITY sb.prop.comment "Komentář">
-<!ENTITY sb.prop.id.date "ID (Čas)">
+<!ENTITY sb.prop.id.date "ID (čas)">
 <!ENTITY sb.folder.toggle "Rozbalit/Sbalit">
 <!ENTITY sb.folder.combine "Kombinovaný náhled">
 <!ENTITY sb.folder.openall "Otevřít vše v panelech">
@@ -25,9 +25,9 @@
 <!ENTITY sb.search.fulltext "Fulltextové hledání">
 <!ENTITY sb.search.all "Vše">
 <!ENTITY sb.search.re "Použít regulární výrazy">
-<!ENTITY sb.search.cs "Porovnat podle důležitosti">
-<!ENTITY sb.search.cache "Aktualizovat cache pro Fulltextové hledání">
+<!ENTITY sb.search.cs "Rozlišovat malá/VELKÁ">
+<!ENTITY sb.search.cache "Aktualizovat cache pro fulltextové hledání">
 <!ENTITY sb.search.clear "Vymazat historii formuláře">
-<!ENTITY sb.search.days "Filtr podle Dní">
+<!ENTITY sb.search.days "Filtrovat podle dní">
 <!ENTITY mb.configure "Nastavit">
 <!ENTITY mb.profileFolder "Složka ve vašem profilu">

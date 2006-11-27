@@ -4,7 +4,7 @@
 <!ENTITY sb.tools "工具">
 <!ENTITY sb.tools.settings "設定">
 <!ENTITY sb.tools.manage "管理擷取資料">
-<!ENTITY sb.tools.combine "Combine Wizard">
+<!ENTITY sb.tools.combine "文件合併精靈">
 <!ENTITY sb.tools.trade "匯入 / 匯出">
 <!ENTITY sb.tools.multiple "擷取多重 URL">
 <!ENTITY sb.tools.directory "開啟 ScrapBook 目錄">
@@ -12,8 +12,8 @@
 <!ENTITY sb.tools.sorttree "所有資料排序">
 <!ENTITY sb.tools.output "將資料列表匯出為 HTML">
 <!ENTITY sb.tools.repair "緊急救援">
-<!ENTITY sb.tools.addons "Add-on Functions">
-<!ENTITY sb.tools.tips "Online Tips">
+<!ENTITY sb.tools.addons "附加元件功能">
+<!ENTITY sb.tools.tips "使用技巧說明">
 <!ENTITY sb.tools.homepage "ScrapBook 首頁">
 <!ENTITY sb.tools.about "關於 ScrapBook">
 <!ENTITY sb.note.opentab "開啟於新分頁中">

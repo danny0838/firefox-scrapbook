@@ -5,7 +5,7 @@
 <!ENTITY sb.note.normalview "Обычный вид">
 <!ENTITY sb.note.template "Изменить шаблон HTML">
 <!ENTITY sb.note.autolinefeed "Автоперенос строк">
-<!ENTITY sb.note.autolinefeed.t "Добавлять тэг &lt;br&gt; в конец каждой строки при просмотре &quot;В виде веб-документа&quot;">
+<!ENTITY sb.note.autolinefeed.t "Добавлять тег &lt;br&gt; в конец каждой строки при просмотре &quot;В виде веб-документа&quot;">
 <!ENTITY sb.note.fontsize "Размер шрифта">
 <!ENTITY sb.note.help "Помощь">
 <!ENTITY sb.note.print "Печать">
