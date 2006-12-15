@@ -218,17 +218,17 @@ var sbContentSaver = {
 		try {
 			var headNode = aDocument.getElementsByTagName("head")[0].cloneNode(true);
 			rootNode.appendChild(headNode);
-			rootNode.appendChild(document.createTextNode("\n"));
+			rootNode.appendChild(aDocument.createTextNode("\n"));
 		} catch(ex) {
 		}
 
 		rootNode.appendChild(tmpNodeList[0]);
-		rootNode.appendChild(document.createTextNode("\n"));
+		rootNode.appendChild(aDocument.createTextNode("\n"));
 		for ( var n = 0; n < tmpNodeList.length-1; n++ )
 		{
-			tmpNodeList[n].appendChild(document.createTextNode("\n"));
+			tmpNodeList[n].appendChild(aDocument.createTextNode("\n"));
 			tmpNodeList[n].appendChild(tmpNodeList[n+1]);
-			tmpNodeList[n].appendChild(document.createTextNode("\n"));
+			tmpNodeList[n].appendChild(aDocument.createTextNode("\n"));
 		}
 
 		if ( this.selection )
@@ -252,14 +252,14 @@ var sbContentSaver = {
 			}
 			if ( myCSS )
 			{
-				var newLinkNode = document.createElement("link");
+				var newLinkNode = aDocument.createElement("link");
 				newLinkNode.setAttribute("media", "all");
 				newLinkNode.setAttribute("href", aFileKey + ".css");
 				newLinkNode.setAttribute("type", "text/css");
 				newLinkNode.setAttribute("rel", "stylesheet");
-				rootNode.firstChild.appendChild(document.createTextNode("\n"));
+				rootNode.firstChild.appendChild(aDocument.createTextNode("\n"));
 				rootNode.firstChild.appendChild(newLinkNode);
-				rootNode.firstChild.appendChild(document.createTextNode("\n"));
+				rootNode.firstChild.appendChild(aDocument.createTextNode("\n"));
 				myCSS = myCSS.replace(/\*\|/g, "");
 			}
 		}
@@ -268,12 +268,12 @@ var sbContentSaver = {
 		if ( this.option["encodeUTF8"] )
 		{
 			this.item.chars = "UTF-8";
-			var metaNode = document.createElement("meta");
+			var metaNode = aDocument.createElement("meta");
 			metaNode.setAttribute("content", aDocument.contentType + "; charset=" + this.item.chars);
 			metaNode.setAttribute("http-equiv", "Content-Type");
-			rootNode.firstChild.insertBefore(document.createTextNode("\n"), rootNode.firstChild.firstChild);
+			rootNode.firstChild.insertBefore(aDocument.createTextNode("\n"), rootNode.firstChild.firstChild);
 			rootNode.firstChild.insertBefore(metaNode, rootNode.firstChild.firstChild);
-			rootNode.firstChild.insertBefore(document.createTextNode("\n"), rootNode.firstChild.firstChild);
+			rootNode.firstChild.insertBefore(aDocument.createTextNode("\n"), rootNode.firstChild.firstChild);
 		}
 
 
@@ -359,15 +359,15 @@ var sbContentSaver = {
 
 	addCommentTag : function(targetNode, aComment)
 	{
-		targetNode.appendChild(document.createTextNode("\n"));
-		targetNode.appendChild(document.createComment(aComment));
-		targetNode.appendChild(document.createTextNode("\n"));
+		targetNode.appendChild(targetNode.ownerDocument.createTextNode("\n"));
+		targetNode.appendChild(targetNode.ownerDocument.createComment(aComment));
+		targetNode.appendChild(targetNode.ownerDocument.createTextNode("\n"));
 	},
 
 
 	removeNodeFromParent : function(aNode)
 	{
-		var newNode = document.createTextNode("");
+		var newNode = aNode.ownerDocument.createTextNode("");
 		aNode.parentNode.replaceChild(newNode, aNode);
 		aNode = newNode;
 		return aNode;
