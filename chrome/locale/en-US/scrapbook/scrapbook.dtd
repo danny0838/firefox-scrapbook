@@ -1,8 +1,9 @@
-<!ENTITY sb.new.folder "New Folder...">
+<!ENTITY sb.new.folder "New Folder">
+<!ENTITY sb.new.separator "New Separator">
 <!ENTITY sb.new.note "New Note">
-<!ENTITY sb.toggle.all "Expand/Collapse All Folders">
+<!ENTITY sb.toggle.all "Open/close All Folders">
 <!ENTITY sb.tools "Tools">
-<!ENTITY sb.tools.settings "Settings">
+<!ENTITY sb.tools.options "Options">
 <!ENTITY sb.tools.manage "Manage">
 <!ENTITY sb.tools.combine "Combine Wizard">
 <!ENTITY sb.tools.trade "Import / Export">
@@ -13,8 +14,6 @@
 <!ENTITY sb.tools.output "Output Tree as HTML">
 <!ENTITY sb.tools.repair "Emergency Repair">
 <!ENTITY sb.tools.addons "Add-on Functions">
-<!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Home Page">
-<!ENTITY sb.tools.about "About">
 <!ENTITY sb.note.opentab "Open in Tab">
 <!ENTITY sb.note.close "Close">

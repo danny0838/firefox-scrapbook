@@ -1,8 +1,9 @@
-<!ENTITY sb.new.folder "새 폴더...">
+<!ENTITY sb.new.folder "새 폴더">
+<!ENTITY sb.new.separator "새 분리자">
 <!ENTITY sb.new.note "새 노트">
-<!ENTITY sb.toggle.all "모든 폴더 보이기/감추기">
+<!ENTITY sb.toggle.all "모든 폴더 열기/닫기">
 <!ENTITY sb.tools "도구">
-<!ENTITY sb.tools.settings "설정">
+<!ENTITY sb.tools.options "설정">
 <!ENTITY sb.tools.manage "관리">
 <!ENTITY sb.tools.combine "결합 마법사">
 <!ENTITY sb.tools.trade "내보내기/가져오기">
@@ -13,8 +14,6 @@
 <!ENTITY sb.tools.output "트리를 HTML로 출력하기">
 <!ENTITY sb.tools.repair "긴급 복구 도구">
 <!ENTITY sb.tools.addons "부가 기능">
-<!ENTITY sb.tools.tips "온라인 팁">
 <!ENTITY sb.tools.homepage "홈페이지">
-<!ENTITY sb.tools.about "버전 정보">
 <!ENTITY sb.note.opentab "탭으로 열기">
 <!ENTITY sb.note.close "닫기">

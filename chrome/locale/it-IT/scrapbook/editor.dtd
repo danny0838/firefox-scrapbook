@@ -1,6 +1,6 @@
-<!ENTITY sb.toolbar.edit "Modifica la barra degli strumenti">
-<!ENTITY sb.toolbar.info "Mostra le informazioni">
-<!ENTITY sb.edit.eraser "Elimina blocchi cliccati con DOM Eraser">
+<!ENTITY sb.toolbar.edit "Mostra barra di modifica">
+<!ENTITY sb.toolbar.info "Mostra barra delle informazioni">
+<!ENTITY sb.edit.eraser "Elimina blocchi selezionati con DOM Eraser">
 <!ENTITY sb.edit.undo "Annulla">
 <!ENTITY sb.edit.save "Salva">
 <!ENTITY sb.edit.comment "Espandi/contrai l&apos;area per il commento">
@@ -18,6 +18,6 @@
 <!ENTITY sb.source "Apri indirizzo web sorgente">
 <!ENTITY sb.renew "Cattura ancora">
 <!ENTITY sb.locate "Sincronizza con il diagramma delle cartelle nel pannello">
-<!ENTITY sb.indicators "Mostra gli indicatori dei link">
+<!ENTITY sb.indicators "Mostra indicatori dei link">
 <!ENTITY sb.info.home "Pagina iniziale">
 <!ENTITY sb.info.sitemap "Mappa del sito">

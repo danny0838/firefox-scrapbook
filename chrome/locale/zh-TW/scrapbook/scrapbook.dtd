@@ -1,8 +1,9 @@
-<!ENTITY sb.new.folder "開新資料夾...">
+<!ENTITY sb.new.folder "開新資料夾">
+<!ENTITY sb.new.separator "新分隔線">
 <!ENTITY sb.new.note "新增筆記">
-<!ENTITY sb.toggle.all "展開／折疊所有資料夾">
+<!ENTITY sb.toggle.all "開關所有資料夾">
 <!ENTITY sb.tools "工具">
-<!ENTITY sb.tools.settings "設定">
+<!ENTITY sb.tools.options "設定">
 <!ENTITY sb.tools.manage "管理擷取資料">
 <!ENTITY sb.tools.combine "文件合併精靈">
 <!ENTITY sb.tools.trade "匯入 / 匯出">
@@ -13,8 +14,6 @@
 <!ENTITY sb.tools.output "將資料列表匯出為 HTML">
 <!ENTITY sb.tools.repair "緊急救援">
 <!ENTITY sb.tools.addons "附加元件功能">
-<!ENTITY sb.tools.tips "使用技巧說明">
 <!ENTITY sb.tools.homepage "ScrapBook 首頁">
-<!ENTITY sb.tools.about "關於 ScrapBook">
 <!ENTITY sb.note.opentab "開啟於新分頁中">
 <!ENTITY sb.note.close "關閉">

@@ -7,6 +7,7 @@ var sbPropService = {
 	id       : null,
 	item     : null,
 	resource : null,
+	isTypeSeparator: false,
 	isTypeBookmark : false,
 	isTypeFolder   : false,
 	isTypeNote     : false,
@@ -15,22 +16,20 @@ var sbPropService = {
 
 	init : function()
 	{
-		try {
-			this.id = window.arguments[0];
-		} catch(ex) {
-			document.location.href.match(/\?id\=(.*)$/);
-			this.id = RegExp.$1;
-		}
-		if ( !this.id ) return;
+		this.id = window.arguments[0];
+		if (!this.id)
+			return;
 		sbDataSource.init();
 		this.item = sbCommonUtils.newItem();
 		this.resource = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.id);
-		for ( var prop in this.item )
-		{
+		for (var prop in this.item) {
 			this.item[prop] = sbDataSource.getProperty(this.resource, prop);
 		}
 		this.id.match(/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/);
-		var dd = new Date(parseInt(RegExp.$1, 10), parseInt(RegExp.$2, 10) - 1, parseInt(RegExp.$3, 10), parseInt(RegExp.$4, 10), parseInt(RegExp.$5, 10), parseInt(RegExp.$6, 10));
+		var dd = new Date(
+			parseInt(RegExp.$1, 10), parseInt(RegExp.$2, 10) - 1, parseInt(RegExp.$3, 10),
+			parseInt(RegExp.$4, 10), parseInt(RegExp.$5, 10), parseInt(RegExp.$6, 10)
+		);
 		var dateTime = dd.toLocaleString();
 		document.getElementById("sbPropID").value      = this.item.id;
 		document.getElementById("sbPropTitle").value   = this.item.title;
@@ -41,28 +40,32 @@ var sbPropService = {
 		document.getElementById("sbPropMark").setAttribute("checked", this.item.type == "marked");
 		this.ICON.src = this.item.icon ? this.item.icon : sbCommonUtils.getDefaultIcon(this.item.type);
 		document.title = this.item.title;
-		if ( sbDataSource.isContainer(this.resource) ) this.item.type = "folder";
+		if (sbDataSource.isContainer(this.resource))
+			this.item.type = "folder";
 		var bundleName = "TYPE_PAGE";
-		switch ( this.item.type )
-		{
-			case "bookmark" : this.isTypeBookmark = true; bundleName = "TYPE_BOOKMARK"; break;
-			case "folder"   : this.isTypeFolder   = true; bundleName = "TYPE_FOLDER";   break;
-			case "note"     : this.isTypeNote     = true; bundleName = "TYPE_NOTE";     break;
+		switch (this.item.type) {
+			case "separator": this.isTypeSeparator = true; bundleName = "TYPE_SEPARATOR"; break;
+			case "bookmark" : this.isTypeBookmark  = true; bundleName = "TYPE_BOOKMARK";  break;
+			case "folder"   : this.isTypeFolder    = true; bundleName = "TYPE_FOLDER";    break;
+			case "note"     : this.isTypeNote      = true; bundleName = "TYPE_NOTE";      break;
 			case "file"     : 
-			case "image"    : this.isTypeFile     = true; bundleName = "TYPE_FILE";     break;
-			case "combine"  : this.isTypeSite     = true; bundleName = "TYPE_COMBINE";  break;
-			case "site"     : this.isTypeSite     = true; bundleName = "TYPE_INDEPTH";  break;
+			case "image"    : this.isTypeFile      = true; bundleName = "TYPE_FILE";      break;
+			case "combine"  : this.isTypeSite      = true; bundleName = "TYPE_COMBINE";   break;
+			case "site"     : this.isTypeSite      = true; bundleName = "TYPE_INDEPTH";   break;
 		}
 		document.getElementById("sbPropType").value = this.STRING.getString(bundleName);
-		document.getElementById("sbPropSourceRow").hidden = this.isTypeFolder || this.isTypeNote;
-		document.getElementById("sbPropCharsRow").hidden  = this.isTypeFolder || this.isTypeFile || this.isTypeBookmark;
+		document.getElementById("sbPropSourceRow").hidden = this.isTypeFolder || this.isTypeNote || this.isTypeSeparator;
+		document.getElementById("sbPropCharsRow").hidden  = this.isTypeFolder || this.isTypeFile || this.isTypeBookmark || this.isTypeSeparator;
+		document.getElementById("sbPropIconRow").hidden   = this.isTypeSeparator;
 		document.getElementById("sbPropIconMenu").hidden  = this.isTypeNote;
-		document.getElementById("sbPropSizeRow").hidden   = this.isTypeFolder || this.isTypeBookmark;
+		document.getElementById("sbPropSizeRow").hidden   = this.isTypeFolder || this.isTypeBookmark || this.isTypeSeparator;
 		document.getElementById("sbPropMark").hidden      = this.isTypeFolder || this.isTypeNote || this.isTypeFile || this.isTypeSite || this.isTypeBookmark;
 		document.getElementById("sbPropIconMenu").firstChild.firstChild.nextSibling.setAttribute("disabled", this.isTypeFolder || this.isTypeBookmark);
-		if ( this.isTypeNote ) document.getElementById("sbPropTitle").removeAttribute("editable");
+		if (this.isTypeNote)
+			document.getElementById("sbPropTitle").removeAttribute("editable");
 		this.updateCommentTab(this.item.comment);
-		if ( !this.isTypeFolder && !this.isTypeBookmark ) setTimeout(function(){ sbPropService.delayedInit(); }, 0);
+		if (!this.isTypeFolder && !this.isTypeBookmark)
+			setTimeout(function(){ sbPropService.delayedInit(); }, 0);
 	},
 
 	delayedInit : function()
@@ -82,26 +85,26 @@ var sbPropService = {
 			type    : this.item.type,
 			icon    : this.getIconURL()
 		};
-		if ( !document.getElementById("sbPropMark").hidden )
-		{
+		if (!this.isTypeSeparator && !document.getElementById("sbPropMark").hidden)
 			newVals.type = document.getElementById("sbPropMark").checked ? "marked" : "";
-		}
 		var changed = false;
-		var props = ["title","source","comment","type","icon"];
-		for ( var i = 0; i < props.length; i++ )
-		{
-			if ( this.item[props[i]] != newVals[props[i]] ) { this.item[props[i]] = newVals[props[i]]; changed = true; }
+		var props = ["title", "source", "comment", "type", "icon"];
+		for (var i = 0; i < props.length; i++) {
+			if (this.item[props[i]] != newVals[props[i]]) {
+				this.item[props[i]] = newVals[props[i]];
+				changed = true;
+			}
 		}
-		if ( changed )
-		{
-			for ( var prop in this.item ) 
-			{
+		if (changed) {
+			for (var prop in this.item)  {
 				sbDataSource.setProperty(this.resource, prop, this.item[prop]);
 			}
-			if ( !this.isTypeFolder && !this.isTypeBookmark ) sbCommonUtils.writeIndexDat(this.item);
+			if (!this.isTypeFolder && !this.isTypeBookmark && !this.isTypeSeparator)
+				sbCommonUtils.writeIndexDat(this.item);
 			sbDataSource.flush();
 		}
-		if ( window.arguments[1] ) window.arguments[1].accept = true;
+		if (window.arguments[1])
+			window.arguments[1].accept = true;
 	},
 
 	cancel : function()

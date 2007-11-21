@@ -4,14 +4,14 @@
 <!ENTITY sb.detail.option "Opzioni">
 <!ENTITY sb.detail.option.images "Immmagini">
 <!ENTITY sb.detail.option.styles "Stili">
-<!ENTITY sb.detail.linked.file "Scarica i link">
+<!ENTITY sb.detail.linked.file "File da scaricare contenuti nei link delle pagine web da catturare">
 <!ENTITY sb.detail.linked.image "Immagini">
 <!ENTITY sb.detail.linked.sound "Suoni">
 <!ENTITY sb.detail.linked.movie "Filmati">
 <!ENTITY sb.detail.linked.archive "Archivi">
-<!ENTITY sb.detail.linked.custom "Personale">
-<!ENTITY sb.detail.linked.page "Cattura comprensiva di tutti">
-<!ENTITY sb.detail.linked.page.depth "Compresi i seguenti link">
+<!ENTITY sb.detail.linked.custom "Personalizzati:">
+<!ENTITY sb.detail.linked.page "Livello di cattura dei link presenti nelle pagine web">
+<!ENTITY sb.detail.linked.page.depth "Cattura fino al seguente livello">
 <!ENTITY sb.detail.linked.page.text "Dopo aver completato la cattura, tutte le pagine verranno linkate e verrà creata una mappa del sito">
 <!ENTITY sb.detail.warnAboutRenew "AVVISO: l&apos;opzione &apos;Cattura ancora&apos; sovrascrive le pagine precedentemente salvate">
-<!ENTITY sb.detail.warnAboutScript "AVVISO: Gli JavaScript potrebbero causare molti problemi">
+<!ENTITY sb.detail.warnAboutScript "AVVISO: gli JavaScript potrebbero causare problemi">

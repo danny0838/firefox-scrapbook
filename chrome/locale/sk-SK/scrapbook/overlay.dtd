@@ -6,12 +6,13 @@
 <!ENTITY sb.capture.frame.as "Zachytiť rámec ako...">
 <!ENTITY sb.capture.target "Zachytiť odkaz">
 <!ENTITY sb.capture.target.as "Zachytiť odkaz ako...">
-<!ENTITY sb.capture.folder.root "Hlavný priečinok">
-<!ENTITY sb.capture.folder.select "Vybrať priečinok">
 <!ENTITY sb.capture.alltabs "Zachytiť všetky karty">
 <!ENTITY sb.capture.bookmark "Záložka ScrapBook">
+<!ENTITY sb.sidebar "Show in Sidebar">
+<!ENTITY sb.menu "Menu">
 <!ENTITY sb.editbefore "Upraviť pred zachytením">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "B">
 <!ENTITY sb.key.capture "L">
 <!ENTITY sb.key.capture.as "K">
+<!ENTITY sb.key.bookmark "J">

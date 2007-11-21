@@ -1,18 +1,15 @@
 <?xml version="1.0" ?>
 
-<!--skin-->
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 <?xml-stylesheet href="chrome://scrapbook/skin/property.css" type="text/css" ?>
 
-<!--locale-->
 <!DOCTYPE dialog [
-<!ENTITY % propDTD SYSTEM "chrome://scrapbook/locale/property.dtd" >
-%propDTD;
-<!ENTITY % treeDTD SYSTEM "chrome://scrapbook/locale/tree.dtd" >
-%treeDTD;
+	<!ENTITY % propDTD SYSTEM "chrome://scrapbook/locale/property.dtd" >
+	%propDTD;
+	<!ENTITY % treeDTD SYSTEM "chrome://scrapbook/locale/tree.dtd" >
+	%treeDTD;
 ]>
 
-<!--dialog-->
 <dialog id="sbPropDialog"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         buttons="accept,cancel"
@@ -20,12 +17,10 @@
         ondialogaccept="sbPropService.accept();"
         ondialogcancel="sbPropService.cancel();">
 
-	<!--script-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/property.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 
-	<!--stringbundle-->
 	<stringbundle id="sbPropString" src="chrome://scrapbook/locale/property.properties" />
 
 	<tabbox>
@@ -34,7 +29,6 @@
 			<tab label="&sb.prop.comment;" id="sbPropCommentTab" />
 		</tabs>
 		<tabpanels>
-			<!--tabpanel-->
 			<tabpanel>
 				<grid flex="1">
 					<columns>
@@ -42,7 +36,6 @@
 						<column flex="1" />
 					</columns>
 					<rows id="sbPropRows">
-						<!--title-->
 						<row align="center">
 							<label control="sbPropTitle" value="&sb.prop.title;:" />
 							<hbox>
@@ -51,12 +44,10 @@
 								</menulist>
 							</hbox>
 						</row>
-						<!--source-->
 						<row id="sbPropSourceRow" align="center">
 							<label control="sbPropSource" value="URL:" />
 							<textbox id="sbPropSource" />
 						</row>
-						<!--icon-->
 						<row id="sbPropIconRow" align="center">
 							<label value="&sb.prop.icon;:" />
 							<hbox align="center">
@@ -74,27 +65,22 @@
 							</hbox>
 						</row>
 						<separator class="groove" style="margin:8px 0px;" />
-						<!--ID-->
 						<row align="center">
 							<label value="ID:" />
 							<textbox id="sbPropID" readonly="true" />
 						</row>
-						<!--datetime-->
 						<row align="center">
 							<label value="&sb.prop.date;:" />
 							<textbox id="sbPropDate" readonly="true" />
 						</row>
-						<!--type-->
 						<row align="center">
 							<label value="&sb.prop.type;:" />
 							<textbox id="sbPropType" readonly="true" />
 						</row>
-						<!--chars-->
 						<row id="sbPropCharsRow" align="center">
 							<label value="&sb.prop.encode;:" />
 							<textbox id="sbPropChars" readonly="true" />
 						</row>
-						<!--filesize-->
 						<row id="sbPropSizeRow" align="center">
 							<label value="&sb.prop.size;:" />
 							<textbox id="sbPropSize" readonly="true" />
@@ -102,7 +88,6 @@
 					</rows>
 				</grid>
 			</tabpanel>
-			<!--tabpanel-->
 			<tabpanel>
 				<textbox id="sbPropComment" multiline="true" flex="1" oninput="sbPropService.updateCommentTab(this.value);" />
 			</tabpanel>

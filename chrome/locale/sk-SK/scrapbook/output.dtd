@@ -1,3 +1,3 @@
-<!ENTITY sb.output.option.all "Všetko exportovať">
-<!ENTITY sb.output.option.frame "Exportovať ako HTML s rámcami">
-<!ENTITY sb.output.option.open "Otvoriť exportované HTML v prehliadači">
+<!ENTITY sb.output.option.all "Output whole tree">
+<!ENTITY sb.output.option.frame "Output with frame">
+<!ENTITY sb.output.option.open "After outputting, open it in browser">

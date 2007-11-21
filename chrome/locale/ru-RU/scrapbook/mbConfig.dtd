@@ -1,7 +1,0 @@
-<!ENTITY mb.configure "Настройки">
-<!ENTITY mb.prop.name "Имя">
-<!ENTITY mb.prop.path "Путь">
-<!ENTITY mb.button.add "Добавить">
-<!ENTITY mb.button.edit "Изменить">
-<!ENTITY mb.button.remove "Удалить">
-<!ENTITY mb.button.accept "OK">

@@ -1,0 +1,31 @@
+<!ENTITY sb.prefs.main "Wyświetlanie">
+<!ENTITY sb.prefs.tabs "Karty">
+<!ENTITY sb.prefs.save "Zapisz">
+<!ENTITY sb.prefs.edit "Edycja">
+<!ENTITY sb.prefs.organize "Folder">
+<!ENTITY sb.prefs.advanced "Zaawansowane">
+<!ENTITY sb.prefs.ui.contextMenu "Wyświetl elementy rozszerzenia w głównym menu kontekstowym">
+<!ENTITY sb.prefs.ui.contextSubMenu "Wyświetl jako menu rozwijane (wymaga ponownego uruchomienia przeglądarki)">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Wyświetl element &quot;Dodaj do zakładek używając ScrapBooka&quot;">
+<!ENTITY sb.prefs.ui.toolsMenu "Wyświetl w menu &quot;Narzędzia&quot; element &quot;ScrapBook&quot;">
+<!ENTITY sb.prefs.ui.statusBar "Wyświetl ikonę rozszerzenia na pasku stanu">
+<!ENTITY sb.prefs.toolbarCustomize "Aby dodać przycisk &quot;ScrapBook&quot; lub &quot;Menu ScrapBook&quot; do psaka narzędziowego należy kliknąć prawym przyciskiem myszy na pasku narzędziowym, wybrać element &quot;Dostosuj...&quot; i przeciągnąć na pasek żądane przyciski">
+<!ENTITY sb.prefs.tabs.tips "Otwieraj w karcie wynik następujących poleceń">
+<!ENTITY sb.prefs.tabs.note "Edytuj notatkę">
+<!ENTITY sb.prefs.data "Lokalizacja folderu zapisu danych">
+<!ENTITY sb.prefs.data.default "Domyślna (folder profilu)">
+<!ENTITY sb.prefs.data.custom "Zapisz dane w">
+<!ENTITY sb.prefs.data.tips "Wybierz folder, w którym będą zapisywane dane ScrapBooka">
+<!ENTITY sb.prefs.multibook.enabled "Włącz Multi-ScrapBook">
+<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook pozwala na określenie wielu lokalizacji folderu zapisu danych i szybkie przełączanie pomiędzy nimi za pomocą przycisku narzędziowego.">
+<!ENTITY sb.prefs.confirmDelete "Ostrzegaj, gdy jest usuwane drzewo elementów">
+<!ENTITY sb.prefs.tree.autoCollapse "Otwierając folder drzewa automatycznie zamknij inne foldery">
+<!ENTITY sb.prefs.showDetailOnDrop "Wyświetl okno dialogowe &quot;Szczegóły przechwytywania&quot; podczas przechwytywania za pomocą przeciągania do panelu bocznego">
+<!ENTITY sb.prefs.notifyOnComplete "Wyświetlaj powiadomienie o zakończeniu przechwytywania">
+<!ENTITY sb.prefs.viewer "Przeglądarka plików">
+<!ENTITY sb.prefs.viewer.default "Domyślna">
+<!ENTITY sb.prefs.viewer.default.explorer "Explorer">
+<!ENTITY sb.prefs.viewer.custom "Wyświetl pliki używając">
+<!ENTITY sb.button.customize "Dostosuj">
+<!ENTITY sb.button.browse "Przeglądaj">
+<!ENTITY sb.button.show "Wyświetl pliki">

@@ -1,8 +1,9 @@
-<!ENTITY sb.new.folder "Nova Pasta...">
+<!ENTITY sb.new.folder "Nova Pasta">
+<!ENTITY sb.new.separator "New Separator">
 <!ENTITY sb.new.note "Nova Nota">
-<!ENTITY sb.toggle.all "Expandir/Recolher todas as Pastas">
+<!ENTITY sb.toggle.all "Open/close All Folders">
 <!ENTITY sb.tools "Ferramentas">
-<!ENTITY sb.tools.settings "Preferências">
+<!ENTITY sb.tools.options "Preferências">
 <!ENTITY sb.tools.manage "Organizar">
 <!ENTITY sb.tools.combine "Combinar Páginas">
 <!ENTITY sb.tools.trade "Importar / Exportar">
@@ -13,8 +14,6 @@
 <!ENTITY sb.tools.output "Exportar Árvore como HTML">
 <!ENTITY sb.tools.repair "Reparo de Emergência">
 <!ENTITY sb.tools.addons "Recursos Extras">
-<!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Home Page">
-<!ENTITY sb.tools.about "Sobre">
 <!ENTITY sb.note.opentab "Abrir na Aba">
 <!ENTITY sb.note.close "Fechar">

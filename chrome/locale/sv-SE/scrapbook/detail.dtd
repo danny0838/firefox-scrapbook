@@ -13,5 +13,5 @@
 <!ENTITY sb.detail.linked.page "Spara i Scrapbook på djupet">
 <!ENTITY sb.detail.linked.page.depth "Antal nivåer länkar ska följas">
 <!ENTITY sb.detail.linked.page.text "När allt gar sparats i Scrapbook, kommer alla sidor vara länkade sinsemellan och en översiktsbild skapas.">
-<!ENTITY sb.detail.warnAboutRenew "NOTICE: 'Capture Again' overwrites the previously saved page.">
+<!ENTITY sb.detail.warnAboutRenew "NOTICE: &apos;Capture Again&apos; overwrites the previously saved page.">
 <!ENTITY sb.detail.warnAboutScript "NOTICE: JavaScript may cause some problems.">

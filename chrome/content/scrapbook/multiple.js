@@ -25,23 +25,10 @@ var sbMultipleService = {
 		}
 		for ( var url in urlHash ) { urlList.push(url); }
 		if ( urlList.length < 1 ) return;
-		if ( !this.ensureWindowOpener() ) return;
-		window.opener.openDialog(
+		window.openDialog(
 			"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
-			urlList, "", false, sbFolderSelector2.selection, 0, null, null ,null
+			urlList, "", false, sbFolderSelector2.resURI, 0, null, null ,null
 		);
-	},
-
-	ensureWindowOpener : function()
-	{
-		var flag = false;
-		try {
-			if ( window.opener.location.href != "chrome://browser/content/browser.xul" ) flag = true;
-		} catch(ex) {
-			flag = true;
-		}
-		if ( flag ) { alert("ScrapBook ERROR: Cannot find window.opener"); return false; }
-		return true;
 	},
 
 	addURL : function(aURL)
@@ -86,7 +73,7 @@ var sbMultipleService = {
 	detectURLsInPage : function()
 	{
 		this.clear();
-		var node = window.opener.top._content.document.body;
+		var node = window.opener.top.content.document.body;
 		traceTree : while ( true )
 		{
 			if ( node instanceof HTMLAnchorElement || node instanceof HTMLAreaElement )
@@ -110,7 +97,7 @@ var sbMultipleService = {
 		var selRange  = sel.getRangeAt(0);
 		var node = selRange.startContainer;
 		if ( node.nodeName == "#text" ) node = node.parentNode;
-		var nodeRange = window.opener.top._content.document.createRange();
+		var nodeRange = window.opener.top.content.document.createRange();
 		traceTree : while ( true )
 		{
 			nodeRange.selectNode(node);

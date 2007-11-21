@@ -14,11 +14,11 @@
 <!ENTITY sb.prop.title "Title">
 <!ENTITY sb.prop.comment "Comment">
 <!ENTITY sb.prop.id.date "ID (Time)">
-<!ENTITY sb.folder.toggle "Expand/Collapse">
 <!ENTITY sb.folder.combine "Combined View">
 <!ENTITY sb.folder.openall "Open All in Tabs">
-<!ENTITY sb.folder.manage "Manage Folder...">
-<!ENTITY sb.new.folder "New Folder...">
+<!ENTITY sb.folder.manage "Manage Folder">
+<!ENTITY sb.new.folder "New Folder">
+<!ENTITY sb.new.separator "New Separator">
 <!ENTITY sb.new.note "New Note">
 <!ENTITY sb.sort.folder "Sort Folder">
 <!ENTITY sb.search "Search">
@@ -29,5 +29,5 @@
 <!ENTITY sb.search.cache "Update Cache for Full Text Search">
 <!ENTITY sb.search.clear "Clear Form History">
 <!ENTITY sb.search.days "Filtering by Days">
-<!ENTITY mb.configure "Configure">
+<!ENTITY mb.manage "Manage">
 <!ENTITY mb.profileFolder "Profile Folder">

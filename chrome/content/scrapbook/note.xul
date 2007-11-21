@@ -1,31 +1,23 @@
 <?xml version="1.0" ?>
 
-<!--skin-->
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 <?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
 <?xml-stylesheet href="chrome://scrapbook/skin/note.css" type="text/css" ?>
 
-<!--locale-->
 <!DOCTYPE window SYSTEM "chrome://scrapbook/locale/note.dtd">
 
-<!--window-->
 <window id="sbNoteWindow"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         onload="sbNoteService2.init();"
         onunload="sbNoteService2.finalize(false);">
 
-	<!--script-->
-	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js"/>
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapnote.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/note.js" />
 
-	<!--browser-->
-	<browser id="sbNoteBrowser" type="content-primary" flex="3" collapsed="true" onload="event.preventBubble();event.stopPropagation();" />
-	<!--splitter-->
+	<browser id="sbNoteBrowser" type="content-primary" flex="3" collapsed="true" onload="event.stopPropagation();" />
 	<splitter id="sbSplitter" class="plain" collapsed="true" />
-	<!--editor-->
 	<vbox id="sbNoteEditor" flex="2">
 		<hbox id="sbNoteHeader" class="sb-header" align="center">
 		    <image id="sbNoteImage" />
@@ -39,7 +31,6 @@
 		         onkeypress="sbNoteService.insertString(event);"
 		         class="plain" flex="1" />
 	</vbox>
-	<!--template-->
 	<vbox id="sbNoteTemplate" flex="2" collapsed="true">
 		<hbox id="sbNoteTemplateHeader" class="sb-header sb-header-red" align="center">
 			<label value="&sb.note.template;" />
@@ -52,12 +43,11 @@
 		         onkeypress="sbNoteService.insertString(event);"
 		         class="plain" flex="1" wrap="off" />
 	</vbox>
-	<!--toolbar-->
 	<toolbar id="sbNoteToolbar" align="center">
-		<toolbarbutton id="sbNoteToolbarS" accesskey="S" label="&sb.note.save;"       disabled="true" oncommand="sbNoteService.save();sbNoteTemplate.save();" />
-		<toolbarbutton id="sbNoteToolbarH" accesskey="W" label="&sb.note.htmlview;"   oncommand="sbNoteService2.initHTMLView();" />
-		<toolbarbutton id="sbNoteToolbarN" accesskey="Q" label="&sb.note.normalview;" disabled="true" oncommand="sbNoteService2.toggleHTMLView(false);" />
-		<toolbarbutton type="menu" label="&sb.note.tools;" accesskey="T">
+		<toolbarbutton id="sbNoteToolbarS" accesskey="&sb.note.save.accesskey;" label="&sb.note.save;"       disabled="true" oncommand="sbNoteService.save();sbNoteTemplate.save();" />
+		<toolbarbutton id="sbNoteToolbarH" accesskey="&sb.note.htmlview.accesskey;" label="&sb.note.htmlview;"   oncommand="sbNoteService2.initHTMLView();" />
+		<toolbarbutton id="sbNoteToolbarN" accesskey="&sb.note.normalview.accesskey;" label="&sb.note.normalview;" disabled="true" oncommand="sbNoteService2.toggleHTMLView(false);" />
+		<toolbarbutton type="menu" label="&sb.note.tools;" accesskey="&sb.note.tools.accesskey;">
 			<menupopup>
 				<menuitem label="&sb.note.help;" oncommand="sbCommonUtils.loadURL('chrome://scrapbook/locale/templateHelp.html', true);" />
 				<menuseparator />
@@ -65,7 +55,7 @@
 				<menuitem id="sbNoteToolbarT" type="checkbox" label="&sb.note.template;" oncommand="this.getAttribute('checked') ? sbNoteTemplate.load() : sbNoteTemplate.exit(false);" />
 			</menupopup>
 		</toolbarbutton>
-		<toolbarbutton type="menu" id="sbNoteToolbarF" label="&sb.note.fontsize;" accesskey="Z">
+		<toolbarbutton type="menu" id="sbNoteToolbarF" label="&sb.note.fontsize;" accesskey="&sb.note.fontsize.accesskey;">
 			<menupopup oncommand="sbNoteService2.changeFontSize(parseInt(event.originalTarget.label, 10));">
 				<menuitem id="sbNoteToolbarF18" type="radio" label="18px" />
 				<menuitem id="sbNoteToolbarF17" type="radio" label="17px" />
@@ -76,10 +66,10 @@
 				<menuitem id="sbNoteToolbarF12" type="radio" label="12px" />
 			</menupopup>
 		</toolbarbutton>
-		<toolbarbutton id="sbNoteToolbarP" accesskey="P" label="&sb.note.print;" oncommand="sbNoteService2.initHTMLView(); sbNoteService2.BROWSER.contentWindow.print();" />
+		<toolbarbutton id="sbNoteToolbarP" accesskey="&sb.note.print.accesskey;" label="&sb.note.print;" oncommand="sbNoteService2.initHTMLView(); sbNoteService2.BROWSER.contentWindow.print();" />
 		<spacer flex="1" />
-		<toolbarbutton class="sb-header-locate" oncommand="sbCommonUtils.WINDOW.getMostRecentWindow('navigator:browser').sbBrowserOverlay.locate(sbNoteService.resource);" />
-		<toolbarbutton class="sb-header-exit" id="sbNoteToolbarX" accesskey="X" tooltiptext="&sb.note.exit;" oncommand="sbNoteService2.finalize(true);" />
+		<toolbarbutton class="sb-header-locate" oncommand="sbCommonUtils.WINDOW.getMostRecentWindow('navigator:browser').sbBrowserOverlay.execLocate(sbNoteService.resource);" />
+		<toolbarbutton class="sb-header-exit" id="sbNoteToolbarX" accesskey="&sb.note.exit.accesskey;" tooltiptext="&sb.note.exit;" oncommand="sbNoteService2.finalize(true);" />
 	</toolbar>
 
 </window>

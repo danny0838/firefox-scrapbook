@@ -128,6 +128,25 @@ var sbTreeHandler = {
 		}
 	},
 
+	locateInternal : function(aRes)
+	{
+		var i = 0;
+		var resList = [];
+		while ( aRes && aRes.Value != this.TREE.ref && ++i < 32 )
+		{
+			resList.unshift(aRes);
+			aRes = sbDataSource.findParentResource(aRes);
+		}
+		for ( i = 0; i < resList.length; i++ )
+		{
+			var idx = this.TREE.builderView.getIndexOfResource(resList[i]);
+			if ( idx != -1 && !this.TREE.view.isContainerOpen(idx) ) this.TREE.view.toggleOpenState(idx);
+		}
+		this.TREE.treeBoxObject.ensureRowIsVisible(idx);
+		this.TREE.view.selection.select(idx);
+		this.TREE.focus();
+	},
+
 
 	getParentResource : function(aIdx)
 	{
@@ -264,7 +283,6 @@ var sbListHandler = {
 		this.LIST.scrollBoxObject.scrollToLine(0);
 		this.OBSERVER.setAttribute("checked", "true");
 		this.OBSERVER.setAttribute("lastRef", aRes.Value);
-		this.onAfterRefresh();
 	},
 
 	exit : function()
@@ -320,10 +338,7 @@ var sbListHandler = {
 			this.LIST.clearSelection();
 			this.LIST.scrollBoxObject.scrollToLine(0);
 		}
-		this.onAfterRefresh();
 	},
-
-	onAfterRefresh : function() {},
 
 
 	onClick : function(aEvent)

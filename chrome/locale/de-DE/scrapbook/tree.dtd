@@ -14,11 +14,11 @@
 <!ENTITY sb.prop.title "Name">
 <!ENTITY sb.prop.comment "Beschreibung">
 <!ENTITY sb.prop.id.date "ID (Datum/Zeit)">
-<!ENTITY sb.folder.toggle "Ausklappen/Einklappen">
 <!ENTITY sb.folder.combine "Zusammengefasste Ansicht öffnen">
 <!ENTITY sb.folder.openall "Alles in Tabs öffnen">
 <!ENTITY sb.folder.manage "Ordner verwalten">
-<!ENTITY sb.new.folder "Neuer Ordner...">
+<!ENTITY sb.new.folder "Neuer Ordner">
+<!ENTITY sb.new.separator "Neue Trennlinie">
 <!ENTITY sb.new.note "Neue Notiz">
 <!ENTITY sb.sort.folder "Ordner sortieren">
 <!ENTITY sb.search "Suchen">
@@ -29,5 +29,5 @@
 <!ENTITY sb.search.cache "Cache für Volltextsuche aktualisieren">
 <!ENTITY sb.search.clear "Suchchronik löschen">
 <!ENTITY sb.search.days "Nach Datum filtern">
-<!ENTITY mb.configure "Konfigurieren">
+<!ENTITY mb.manage "Verwalten">
 <!ENTITY mb.profileFolder "Profilordner">

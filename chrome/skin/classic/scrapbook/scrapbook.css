@@ -9,9 +9,11 @@ toolbarbutton#sbToolbarNewFolder {
 	list-style-image: url('chrome://scrapbook/skin/toolbar_create.png');
 }
 
+/*
 toolbarbutton#sbToolbarNewFolder dropmarker {
 	display: none;
 }
+*/
 
 toolbarbutton#sbToolbarToggle {
 	list-style-image: url('chrome://scrapbook/skin/toolbar_toggle.png');
@@ -29,11 +31,10 @@ toolbarbutton#mbToolbarButton {
 	list-style-image: url('chrome://scrapbook/skin/main_16.png');
 }
 
-menuitem#sbPopupNewFolder .menu-iconic-icon,
-menuitem#sbPopupNewNote   .menu-iconic-icon,
-menuitem#sbPopupRenew     .menu-iconic-icon,
-menuitem#sbPopupRemove    .menu-iconic-icon,
-menuitem#sbPopupProperty  .menu-iconic-icon {
+.sb-create .menu-iconic-icon,
+menuitem#sbPopupRenew    .menu-iconic-icon,
+menuitem#sbPopupRemove   .menu-iconic-icon,
+menuitem#sbPopupProperty .menu-iconic-icon {
 	width : 13px !important;
 	height: 13px !important;
 }
@@ -91,6 +92,14 @@ richlistitem.bookmark .sblist-title {
 	color: rgb(32,192,32);
 }
 
+richlistitem.separator .sblist-title {
+	color: GrayText;
+}
+
+richlistitem.separator image.sblist-icon {
+	display: none;
+}
+
 treechildren::-moz-tree-cell-text(invalid) {
 	color: red;
 	font-weight: bold;
@@ -136,6 +145,10 @@ richlistitem .sblist-comment[value=""] {
 
 /* ::::: HEADER ::::: */
 
+sidebarheader {
+	padding: 3px;
+}
+
 .sb-header {
 	color: InfoText;
 	background-color: InfoBackground;
@@ -143,12 +156,14 @@ richlistitem .sblist-comment[value=""] {
 	padding: 3px;
 }
 
+sidebarheader toolbarbutton,
 .sb-header toolbarbutton {
 	padding: 0px;
 	margin: 0px;
 	-moz-appearance: none;
 }
 
+sidebarheader toolbarbutton image,
 .sb-header toolbarbutton image {
 	padding: 0px 1px;
 	margin: 0px;
@@ -182,9 +197,7 @@ richlistitem .sblist-comment[value=""] {
 /* ::::: COMMON ::::: */
 
 treechildren::-moz-tree-drop-feedback {
-	background-color: Highlight;
 	width: 80px;
-	height: 2px;
 }
 
 tab {

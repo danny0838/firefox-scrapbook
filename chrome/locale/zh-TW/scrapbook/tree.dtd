@@ -14,11 +14,11 @@
 <!ENTITY sb.prop.title "標題">
 <!ENTITY sb.prop.comment "文件評注">
 <!ENTITY sb.prop.id.date "ID（日期）">
-<!ENTITY sb.folder.toggle "展開／折疊">
 <!ENTITY sb.folder.combine "合併檢視">
 <!ENTITY sb.folder.openall "以分頁開啟所有資料">
-<!ENTITY sb.folder.manage "管理資料夾...">
-<!ENTITY sb.new.folder "開新資料夾...">
+<!ENTITY sb.folder.manage "管理資料夾">
+<!ENTITY sb.new.folder "開新資料夾">
+<!ENTITY sb.new.separator "新分隔線">
 <!ENTITY sb.new.note "新增筆記">
 <!ENTITY sb.sort.folder "資料夾文件排序">
 <!ENTITY sb.search "搜尋">
@@ -29,5 +29,5 @@
 <!ENTITY sb.search.cache "更新全文搜尋快取">
 <!ENTITY sb.search.clear "清除搜尋歷史紀錄">
 <!ENTITY sb.search.days "依擷取日期檢視">
-<!ENTITY mb.configure "設定">
+<!ENTITY mb.manage "管理">
 <!ENTITY mb.profileFolder "設定檔資料夾">

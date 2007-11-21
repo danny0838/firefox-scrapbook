@@ -14,11 +14,11 @@
 <!ENTITY sb.prop.title "Teideal">
 <!ENTITY sb.prop.comment "L&#233;iri&#250;">
 <!ENTITY sb.prop.id.date "ID (Am)">
-<!ENTITY sb.folder.toggle "Leathnaigh/Leacaigh">
 <!ENTITY sb.folder.combine "Amharc Teaglamaithe">
 <!ENTITY sb.folder.openall "Oscail Gach Ceann i dT&#225;ba">
-<!ENTITY sb.folder.manage "Riaraidh Comhadlann...">
-<!ENTITY sb.new.folder "Comhadlann Nua...">
+<!ENTITY sb.folder.manage "Riaraidh Comhadlann">
+<!ENTITY sb.new.folder "Comhadlann Nua">
+<!ENTITY sb.new.separator "New Separator">
 <!ENTITY sb.new.note "N&#243;ta Nua">
 <!ENTITY sb.sort.folder "S&#243;rt&#225;il an Comhadlann">
 <!ENTITY sb.search "Cuardaigh">
@@ -29,5 +29,5 @@
 <!ENTITY sb.search.cache "Athnuacha Taisce do Cuardach T&#233;acs Ioml&#225;n">
 <!ENTITY sb.search.clear "Glan Stair na Foirmeacha">
 <!ENTITY sb.search.days "Scagadh f&#233; Laethanta">
-<!ENTITY mb.configure "Cumraigh">
+<!ENTITY mb.manage "Manage">
 <!ENTITY mb.profileFolder "Comhadlann Pr&#225;if&#237;l">

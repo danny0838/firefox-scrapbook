@@ -1,3 +1,3 @@
-<!ENTITY sb.output.option.all "Exportera allt">
-<!ENTITY sb.output.option.frame "Exportera som HTML med Frame">
-<!ENTITY sb.output.option.open "Öppna exporterad HTML i webläsaren">
+<!ENTITY sb.output.option.all "Output whole tree">
+<!ENTITY sb.output.option.frame "Output with frame">
+<!ENTITY sb.output.option.open "After outputting, open it in browser">

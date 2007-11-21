@@ -39,8 +39,8 @@ function SB_initCapture()
 	}
 	else if ( gPreset )
 	{
-		gContext = gPreset[1] == "index" ? "renew" : "renew-deep";
-		if ( gContext == "renew-deep" )
+		gContext = gPreset[1] == "index" ? "capture-again" : "capture-again-deep";
+		if ( gContext == "capture-again-deep" )
 		{
 			var contDir = sbCommonUtils.getContentDir(gPreset[0]);
 			var file = contDir.clone();
@@ -405,7 +405,7 @@ var sbInvisibleBrowser = {
 				gURL2Name[unescape(sbCaptureTask.URL)] = ret[0];
 				gFile2URL = ret[1];
 			}
-			else if ( gContext == "renew-deep" )
+			else if ( gContext == "capture-again-deep" )
 			{
 				gFile2URL = ret[1];
 				var contDir = sbCommonUtils.getContentDir(gPreset[0]);
@@ -743,7 +743,7 @@ sbCaptureObserverCallback.trace = function(aText)
 sbCaptureObserverCallback.onCaptureComplete = function(aItem)
 {
 	if ( gContext != "indepth" && gURLs.length == 1 ) SB_fireNotification(aItem);
-	if ( gContext == "renew" || gContext == "renew-deep" )
+	if ( gContext == "capture-again" || gContext == "capture-again-deep" )
 	{
 		sbCrossLinker.forceReloading(gPreset[0], gPreset[1]);
 		sbDataSource.init();

@@ -15,6 +15,7 @@ var sbSortService = {
 	{
 		this.WIZARD.getButton("back").hidden = true;
 		this.WIZARD.getButton("finish").disabled = true;
+		this.WIZARD.getButton("next").removeAttribute("accesskey");
 		this.WIZARD.canAdvance = false;
 		this.RADIO_GROUP.selectedIndex = this.RADIO_GROUP.getAttribute("sortIndex");
 		sbDataSource.init();

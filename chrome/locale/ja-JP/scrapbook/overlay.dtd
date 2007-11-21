@@ -6,12 +6,13 @@
 <!ENTITY sb.capture.frame.as "フレームの詳細な取り込み">
 <!ENTITY sb.capture.target "リンク先の取り込み">
 <!ENTITY sb.capture.target.as "リンク先の詳細な取り込み">
-<!ENTITY sb.capture.folder.root "ルートフォルダ">
-<!ENTITY sb.capture.folder.select "フォルダの選択">
 <!ENTITY sb.capture.alltabs "すべてのタブを取り込み">
 <!ENTITY sb.capture.bookmark "ScrapBookにブックマーク">
+<!ENTITY sb.sidebar "サイドバーに表示">
+<!ENTITY sb.menu "メニュー">
 <!ENTITY sb.editbefore "取り込み前編集モード">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">
 <!ENTITY sb.key.capture.as "K">
+<!ENTITY sb.key.bookmark "J">

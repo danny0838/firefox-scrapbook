@@ -6,12 +6,13 @@
 <!ENTITY sb.capture.frame.as "Uhvati okvir kao">
 <!ENTITY sb.capture.target "Uhvati poveznicu">
 <!ENTITY sb.capture.target.as "Uhvati poveznicu kao">
-<!ENTITY sb.capture.folder.root "Izvorna mapa">
-<!ENTITY sb.capture.folder.select "Odaberi mapu">
 <!ENTITY sb.capture.alltabs "Uhvati sve kartice">
 <!ENTITY sb.capture.bookmark "Dodaj u Zabilješke sa ScrapBook">
+<!ENTITY sb.sidebar "Show in Sidebar">
+<!ENTITY sb.menu "Menu">
 <!ENTITY sb.editbefore "Uredi prije hvatanja">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">
 <!ENTITY sb.key.capture.as "K">
+<!ENTITY sb.key.bookmark "J">

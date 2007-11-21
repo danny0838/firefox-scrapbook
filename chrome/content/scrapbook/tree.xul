@@ -1,67 +1,60 @@
 <?xml version="1.0" ?>
 
-<!--locale-->
 <!DOCTYPE overlay SYSTEM "chrome://scrapbook/locale/tree.dtd">
 
-<!--overlay-->
 <overlay id="sbTreeOverlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-	<!--script-->
 	<script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
-	<script type="application/x-javascript" src="chrome://global/content/nsTransferable.js" />
-	<script type="application/x-javascript" src="chrome://global/content/nsUserSettings.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapbook.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/tree.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/mbService.js" />
 
-	<!--broadcaster-->
 	<broadcasterset id="sbBroadcasters">
 		<broadcaster id="sbToggleListView" type="checkbox" autoCheck="false" persist="checked lastRef" tooltiptext="&sb.listview;" />
 	</broadcasterset>
 
-	<!--keyset-->
 	<keyset id="sbGenericKeys">
 		<key keycode="VK_ESCAPE" oncommand="window.close();"/>
 		<key keycode="VK_F5"     oncommand="window.location.reload();"/>
 	</keyset>
 
-	<!--popupset-->
 	<popupset id="sbPopupSet">
-		<!--tree/list popup-->
-		<popup id="sbPopup" onpopupshowing="sbController.onPopupShowing(event);" onmouseover="if ( event.originalTarget.getAttribute('nodelay') ) document.getElementById('sbPopupToolsMenu').hidePopup();">
-			<menuitem id="sbPopupOpen"       label="&sb.open;"        oncommand="sbController.open(null,false);"  nodelay="true" default="true" />
-			<menuitem id="sbPopupOpenTab"    label="&sb.open.tab;"    oncommand="sbController.open(null,true);"   nodelay="true" hidden="true" />
-			<menuitem id="sbPopupOpenNewTab" label="&sb.open.newtab;" oncommand="sbController.open(null,true);"   nodelay="true" />
-			<menuitem id="sbPopupOpenSource" label="&sb.open.source;" oncommand="sbController.forward(null,'S');" nodelay="true" />
+		<popup id="sbPopup" onpopupshowing="sbController.onPopupShowing(event);"
+		       onmouseover="if (event.originalTarget.getAttribute('nodelay')) document.getElementById('sbPopupToolsMenu').hidePopup();">
+			<menuitem id="sbPopupOpen"       label="&sb.open;"        nodelay="true" oncommand="sbController.open(null,false);" default="true" />
+			<menuitem id="sbPopupOpenTab"    label="&sb.open.tab;"    nodelay="true" oncommand="sbController.open(null,true);" hidden="true" />
+			<menuitem id="sbPopupOpenNewTab" label="&sb.open.newtab;" nodelay="true" oncommand="sbController.open(null,true);" />
+			<menuitem id="sbPopupOpenSource" label="&sb.open.source;" nodelay="true" oncommand="sbController.forward(null,'S');"
+			          onclick="if (event.button != 1) return; this.parentNode.hidePopup(); sbController.forward(null,'S',true);" />
 			<menuitem id="sbPopupListView"     label="&sb.listview;"       oncommand="sbListHandler.init(null);"         hidden="true" />
 			<menuitem id="sbPopupCombinedView" label="&sb.folder.combine;" oncommand="sbController.forward(null,'C');"   hidden="true" />
 			<menuitem id="sbPopupOpenAllItems" label="&sb.folder.openall;" oncommand="sbController.openAllInTabs(null);" hidden="true" />
 			<menuseparator hidden="true" />
-			<menu id="sbPopupTools" label="&sb.tools;" onmouseover="event.preventBubble();">
+			<menu id="sbPopupTools" label="&sb.tools;" onmouseover="event.stopPropagation();">
 				<menupopup id="sbPopupToolsMenu">
-					<menuitem id="sbPopupShowFiles" label="&sb.show.files;"   oncommand="sbController.forward(null,'L');" />
-					<menuitem id="sbPopupSend"      label="&sb.move.into;..." oncommand="sbController.isTreeContext ? sbTreeHandler.send() : sbListHandler.doCommand('send');" />
+					<menuitem id="sbPopupShowFiles" label="&sb.show.files;" oncommand="sbController.forward(null,'L');" />
+					<menuitem id="sbPopupSend"      label="&sb.move;..."    oncommand="sbController.isTreeContext ? sbTreeHandler.send() : sbListHandler.doCommand('send');" />
 					<menuseparator />
-					<menuitem id="sbPopupRenew" class="menuitem-iconic" label="&sb.renew;..." oncommand="sbController.renew(null, true);" onclick="if ( event.button == 1 ) sbController.renew(null, false);" />
+					<menuitem id="sbPopupRenew" class="menuitem-iconic" label="&sb.renew;..." oncommand="sbController.renew(null, true);" onclick="if (event.button == 1) sbController.renew(null, false);" />
 					<menuseparator />
 					<menuitem id="sbPopupExport" label="&sb.export;" oncommand="sbController.forward(null,'E');" />
 				</menupopup>
 			</menu>
-			<menuitem id="sbPopupManage" label="&sb.folder.manage;"  oncommand="sbController.forward(null,'M');" hidden="true" />
-			<menuitem id="sbPopupSort"   label="&sb.sort.folder;..." oncommand="sbController.forward(null,'Z');" hidden="true" />
+			<menuitem id="sbPopupManage" label="&sb.folder.manage;..." oncommand="sbController.forward(null,'M');" hidden="true" />
+			<menuitem id="sbPopupSort"   label="&sb.sort.folder;..."   oncommand="sbController.forward(null,'Z');" hidden="true" />
 			<menuseparator />
-			<menuitem id="sbPopupNewFolder" class="menuitem-iconic sb-create" label="&sb.new.folder;" oncommand="sbMainService.createFolder();" />
-			<menuitem id="sbPopupNewNote"   class="menuitem-iconic sb-create" label="&sb.new.note;"   oncommand="sbMainService.createNote();" />
+			<menuitem id="sbPopupNewFolder"    class="menuitem-iconic sb-create" label="&sb.new.folder;..." oncommand="sbMainService.createFolder();" />
+			<menuitem id="sbPopupNewSeparator" class="menuitem-iconic sb-create" label="&sb.new.separator;" oncommand="sbMainService.createSeparator();" />
+			<menuitem id="sbPopupNewNote"      class="menuitem-iconic sb-create" label="&sb.new.note;"      oncommand="sbMainService.createNote();" />
 			<menuseparator />
 			<menuitem id="sbPopupRemove"    class="menuitem-iconic" label="&sb.remove;"   oncommand="sbController.isTreeContext ? sbTreeHandler.remove() : sbListHandler.doCommand('remove');" />
 			<menuseparator />
 			<menuitem id="sbPopupProperty"  class="menuitem-iconic" label="&sb.property;" oncommand="sbController.forward(null,'P');" />
 		</popup>
-		<!--search popup-->
-		<popup id="sbSearchPopup" onpopupshowing="sbSearchService.populatePopup();document.getElementById('sbSearchTextbox').select();" position="after_start">
+		<popup id="sbSearchPopup" onpopupshowing="sbSearchService.populatePopup(); document.getElementById('sbSearchTextbox').select();" position="after_start">
 			<menuitem id="sbSearchPopupF" label="&sb.search.fulltext;" type="radio" oncommand="sbSearchService.change('fulltext');" />
 			<menuseparator />
 			<menuitem id="sbSearchPopupT" label="&sb.prop.title;"   type="radio" oncommand="sbSearchService.change('title');" />
@@ -83,7 +76,6 @@
 		</popup>
 	</popupset>
 
-	<!--search toolbar-->
 	<toolbar id="sbSearchToolbar" align="center">
 		<textbox id="sbSearchTextbox"
 		         type="autocomplete"
@@ -103,7 +95,6 @@
 		</textbox>
 	</toolbar>
 
-	<!--tree-->
 	<tree id="sbTree"
 	      datasources="rdf:null"
 	      ref="urn:scrapbook:root"
@@ -127,9 +118,8 @@
 		</template>
 	</tree>
 
-	<!--list-->
 	<vbox id="sbListOuter">
-		<hbox id="sbListHeader" class="sb-header" align="center">
+		<sidebarheader id="sbListHeader" align="center">
 			<label flex="1" crop="end" />
 			<spacer flex="1" />
 			<toolbarbutton id="sbListMoveUpButton" style="-moz-appearance:none;" oncommand="sbListHandler.goUpperLevel();" />
@@ -141,7 +131,7 @@
 				</menupopup>
 			</toolbarbutton>
 			<toolbarbutton class="sb-header-exit" oncommand="sbListHandler.quit(true);" />
-		</hbox>
+		</sidebarheader>
 		<richlistbox id="sbList"
 		             datasources="rdf:null"
 		             contextmenu="sbPopup"
@@ -165,13 +155,12 @@
 		</richlistbox>
 	</vbox>
 
-	<!--multibook-->
 	<toolbarbutton id="mbToolbarButton" type="menu" tooltiptext="Multi-ScrapBook" onpopupshowing="sbMultiBookService.initMenu();" hidden="true">
 		<menupopup id="mbMenuPopup" oncommand="sbMultiBookService.change(event.originalTarget);">
 			<menuitem id="mbMenuItem" type="radio" autocheck="false" hidden="true" />
 			<menuitem id="mbMenuItemDefault" label="&mb.profileFolder;" type="radio" autocheck="false" />
 			<menuseparator />
-			<menuitem label="&mb.configure;..." oncommand="sbMultiBookService.config();event.preventBubble();" />
+			<menuitem label="&mb.manage;..." oncommand="sbMultiBookService.config(); event.stopPropagation();" />
 		</menupopup>
 	</toolbarbutton>
 

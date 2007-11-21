@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+<?xml-stylesheet href="chrome://scrapbook/skin/prefs.css" type="text/css"?>
+<?xml-stylesheet href="chrome://mozapps/content/preferences/preferences.css"?>
+<?xml-stylesheet href="chrome://browser/skin/preferences/preferences.css"?>
+
+<!DOCTYPE prefwindow [
+	<!ENTITY % mainDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd">
+	%mainDTD;
+	<!ENTITY % treeDTD SYSTEM "chrome://scrapbook/locale/tree.dtd">
+	%treeDTD;
+	<!ENTITY % prefDTD SYSTEM "chrome://scrapbook/locale/prefs.dtd">
+	%prefDTD;
+	<!ENTITY % editDTD SYSTEM "chrome://scrapbook/locale/editor.dtd">
+	%editDTD;
+]>
+
+<prefwindow id="sbPrefWindow"
+            xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+            title="ScrapBook &sb.tools.options;"
+            style="width: 40em; min-height: 30em;"
+            onload="sbPrefWindow.init();"
+            onchange="sbPrefWindow.changed = true;"
+            onunload="sbPrefWindow.done();">
+
+	<prefpane id="mainPane" label="&sb.prefs.main;" flex="1">
+		<preferences>
+			<preference id="scrapbook.ui.contextMenu"    name="scrapbook.ui.contextMenu"    type="bool" />
+			<preference id="scrapbook.ui.contextSubMenu" name="scrapbook.ui.contextSubMenu" type="bool" />
+			<preference id="scrapbook.ui.bookmarkMenu"   name="scrapbook.ui.bookmarkMenu"   type="bool" />
+			<preference id="scrapbook.ui.toolsMenu"      name="scrapbook.ui.toolsMenu"      type="bool" />
+			<preference id="scrapbook.ui.statusBar"      name="scrapbook.ui.statusBar"      type="bool" />
+		</preferences>
+		<checkbox preference="scrapbook.ui.contextMenu"    label="&sb.prefs.ui.contextMenu;"
+		          onsyncfrompreference="sbPrefWindow.updateContextMenuUI();" />
+		<checkbox preference="scrapbook.ui.contextSubMenu" label="&sb.prefs.ui.contextSubMenu;" class="indent" group="contextmenu" />
+		<checkbox preference="scrapbook.ui.bookmarkMenu"   label="&sb.prefs.ui.bookmarkMenu;"   class="indent" group="contextmenu" />
+		<checkbox preference="scrapbook.ui.toolsMenu" label="&sb.prefs.ui.toolsMenu;" />
+		<checkbox preference="scrapbook.ui.statusBar" label="&sb.prefs.ui.statusBar;" />
+		<description class="multiline">&sb.prefs.toolbarCustomize;</description>
+	</prefpane>
+
+	<prefpane id="tabsPane" label="&sb.prefs.tabs;" flex="1">
+		<preferences>
+			<preference id="scrapbook.tabs.open"         name="scrapbook.tabs.open"         type="bool" />
+			<preference id="scrapbook.tabs.openSource"   name="scrapbook.tabs.openSource"   type="bool" />
+			<preference id="scrapbook.tabs.combinedView" name="scrapbook.tabs.combinedView" type="bool" />
+			<preference id="scrapbook.tabs.searchResult" name="scrapbook.tabs.searchResult" type="bool" />
+			<preference id="scrapbook.tabs.note"         name="scrapbook.tabs.note"         type="bool" />
+		</preferences>
+		<description value="&sb.prefs.tabs.tips;:" />
+		<checkbox preference="scrapbook.tabs.open"         label="&sb.open;" />
+		<checkbox preference="scrapbook.tabs.openSource"   label="&sb.open.source;" />
+		<checkbox preference="scrapbook.tabs.combinedView" label="&sb.folder.combine;" />
+		<checkbox preference="scrapbook.tabs.searchResult" label="&sb.search.fulltext;" />
+		<checkbox preference="scrapbook.tabs.note"         label="&sb.prefs.tabs.note;" />
+	</prefpane>
+
+	<prefpane id="editPane" label="&sb.prefs.edit;" flex="1">
+		<groupbox>
+			<caption label="&sb.highlighter;" />
+			<hbox id="hlTemplate" align="center">
+				<label />
+				<label value="Firefox, rediscover the web" />
+				<spacer flex="1" />
+				<button label="&sb.button.customize;..." hlumber="0"
+				        oncommand="sbPrefWindow.hlCustomize(this.getAttribute('hlnumber'));" />
+			</hbox>
+		</groupbox>
+	</prefpane>
+
+	<prefpane id="organizePane" label="&sb.prefs.organize;" flex="1">
+		<preferences>
+			<preference id="scrapbook.data.default"      name="scrapbook.data.default"      type="bool" />
+			<preference id="scrapbook.data.path"         name="scrapbook.data.path"         type="file" />
+			<preference id="scrapbook.multibook.enabled" name="scrapbook.multibook.enabled" type="bool" />
+			<preference id="scrapbook.confirmDelete"     name="scrapbook.confirmDelete"     type="bool" />
+			<preference id="scrapbook.tree.autoCollapse" name="scrapbook.tree.autoCollapse" type="bool" />
+		</preferences>
+		<groupbox>
+			<caption id="sbDataCaption" label="&sb.prefs.data;" />
+			<radiogroup id="sbDataDefault"
+			            preference="scrapbook.data.default"
+			            onsyncfrompreference="sbPrefWindow.updateDataUI();">
+				<radio label="&sb.prefs.data.default;" value="true" />
+				<hbox>
+					<radio label="&sb.prefs.data.custom;" value="false" />
+					<filefield id="sbDataPath" flex="1" />
+					<button id="sbDataButton"
+					        label="&sb.button.browse;..." label2="&sb.prefs.data.tips;"
+					        oncommand="sbPrefWindow.selectFolder(this.getAttribute('label2'));" />
+				</hbox>
+			</radiogroup>
+			<separator />
+			<checkbox id="sbMultiBookEnabled"
+			          preference="scrapbook.multibook.enabled"
+			          label="&sb.prefs.multibook.enabled;"
+			          onsyncfrompreference="sbPrefWindow.updateDataUI();" />
+			<description class="indent multiline">&sb.prefs.multibook.tips;</description>
+		</groupbox>
+		<checkbox preference="scrapbook.confirmDelete"     label="&sb.prefs.confirmDelete;" />
+		<checkbox preference="scrapbook.tree.autoCollapse" label="&sb.prefs.tree.autoCollapse;" />
+	</prefpane>
+
+	<prefpane id="advancedPane" label="&sb.prefs.advanced;" flex="1">
+		<preferences>
+			<preference id="scrapbook.showDetailOnDrop"   name="scrapbook.showDetailOnDrop"   type="bool" />
+			<preference id="scrapbook.notifyOnComplete"   name="scrapbook.notifyOnComplete"   type="bool" />
+			<preference id="scrapbook.fileViewer.default" name="scrapbook.fileViewer.default" type="bool" />
+			<preference id="scrapbook.fileViewer.path"    name="scrapbook.fileViewer.path"    type="file" />
+		</preferences>
+		<checkbox preference="scrapbook.showDetailOnDrop" label="&sb.prefs.showDetailOnDrop;" />
+		<checkbox preference="scrapbook.notifyOnComplete" label="&sb.prefs.notifyOnComplete;" />
+		<groupbox>
+			<caption id="sbViewerCaption" label="&sb.prefs.viewer;" />
+			<radiogroup id="sbViewer"
+			            preference="scrapbook.fileViewer.default"
+			            onsyncfrompreference="sbPrefWindow.updateViewerUI();">
+				<radio id="sbViewerDefault"
+				       label="&sb.prefs.viewer.default;"
+				       label2="&sb.prefs.viewer.default.explorer;"
+				       value="true" />
+				<hbox>
+					<radio label="&sb.prefs.viewer.custom;" value="false" />
+					<filefield id="sbViewerPath" flex="1" />
+					<button id="sbViewerButton"
+					        label="&sb.button.browse;..."
+					        oncommand="sbPrefWindow.selectViewer();" />
+				</hbox>
+			</radiogroup>
+		</groupbox>
+	</prefpane>
+
+	<script type="application/x-javascript" src="chrome://scrapbook/content/prefs.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/highlighter.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/mbService.js" />
+
+</prefwindow>

@@ -44,7 +44,6 @@ var sbContentSaver = {
 			if ( aPresetData[3] ) this.file2URL = aPresetData[3];
 			if ( aPresetData[4] >= this.option["inDepth"] ) this.option["inDepth"] = 0;
 		}
-		this.option["encodeUTF8"] = sbCommonUtils.getBoolPref("scrapbook.capture.encodeUTF8", true);
 		this.httpTask[this.item.id] = 0;
 	},
 
@@ -54,14 +53,12 @@ var sbContentSaver = {
 		this.init(aPresetData);
 		this.item.chars  = aRootWindow.document.characterSet;
 		this.item.source = aRootWindow.location.href;
-		try {
-			if ( aRootWindow == gBrowser.contentWindow ) this.item.icon = gBrowser.selectedTab.getAttribute("image") || "";
-		} catch(ex) {
+		if ( "gBrowser" in window && aRootWindow == gBrowser.contentWindow )
+		{
+			this.item.icon = gBrowser.mCurrentBrowser.mIconURL;
 		}
-
 		this.frameList = this.flattenFrames(aRootWindow);
-
-		var titleList = aRootWindow.document.title && typeof(aRootWindow.document.title) == "string" ? [aRootWindow.document.title] : [this.item.source];
+		var titles = aRootWindow.document.title ? [aRootWindow.document.title] : [this.item.source];
 		if ( aIsPartial )
 		{
 			this.selection = aRootWindow.getSelection();
@@ -69,54 +66,47 @@ var sbContentSaver = {
 			for ( var i = 0; i < lines.length; i++ )
 			{
 				lines[i] = lines[i].replace(/\r|\n|\t/g, "");
-				if ( lines[i].length > 0 ) titleList.push(lines[i].substring(0,72));
-				if ( titleList.length > 4 ) break;
+				if ( lines[i].length > 0 ) titles.push(lines[i].substring(0,72));
+				if ( titles.length > 4 ) break;
 			}
-			this.item.title = ( titleList.length > 0 ) ? titleList[1] : titleList[0];
+			this.item.title = ( titles.length > 0 ) ? titles[1] : titles[0];
 		}
 		else
 		{
 			this.selection = null;
-			this.item.title = titleList[0];
+			this.item.title = titles[0];
 		}
-
 		if ( document.getElementById("ScrapBookToolbox") && !document.getElementById("ScrapBookToolbox").hidden )
 		{
 			var modTitle = document.getElementById("ScrapBookEditTitle").value;
-			if ( titleList.indexOf(modTitle) < 0 )
+			if ( titles.indexOf(modTitle) < 0 )
 			{
-				titleList.splice(1, 0, modTitle);
+				titles.splice(1, 0, modTitle);
 				this.item.title = modTitle;
 			}
 			this.item.comment = sbCommonUtils.escapeComment(sbPageEditor.COMMENT.value);
 			for ( var i = 0; i < this.frameList.length; i++ ) { sbPageEditor.removeAllStyles(this.frameList[i]); }
 		}
-
 		if ( aShowDetail )
 		{
-			var ret = this.showDetailDialog(titleList, aResName, aContext);
-			if ( ret.change ) { aResName = ret.resName; aResIndex = 0; }
-			if ( ret.cancel ) { return null; }
+			var ret = this.showDetailDialog(titles, aResName, aContext);
+			if ( ret.result == 0 ) { return null; }
+			if ( ret.result == 2 ) { aResName = ret.resURI; aResIndex = 0; }
 		}
-
 		this.contentDir = sbCommonUtils.getContentDir(this.item.id);
-
 		this.saveDocumentInternal(aRootWindow.document, this.name);
-
 		if ( this.item.icon && this.item.type != "image" && this.item.type != "file" )
 		{
 			var iconFileName = this.download(this.item.icon);
 			this.favicon = iconFileName;
 		}
-
 		if ( this.httpTask[this.item.id] == 0 )
 		{
 			setTimeout(function(){ sbCaptureObserverCallback.onCaptureComplete(sbContentSaver.item); }, 100);
 		}
-
 		if ( this.option["inDepth"] > 0 && this.linkURLs.length > 0 )
 		{
-			if ( !aPresetData || aContext == "renew" )
+			if ( !aPresetData || aContext == "capture-again" )
 			{
 				this.item.type = "marked";
 				this.option["isPartial"] = aIsPartial;
@@ -135,12 +125,9 @@ var sbContentSaver = {
 				}
 			}
 		}
-
 		this.addResource(aResName, aResIndex);
-
 		return [this.name, this.file2URL];
 	},
-
 
 	captureFile : function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext)
 	{
@@ -152,9 +139,9 @@ var sbContentSaver = {
 		this.item.type   = aType;
 		if ( aShowDetail )
 		{
-			var ret = this.showDetailDialog([this.item.title], aResName, aContext);
-			if ( ret.change ) { aResName = ret.resName; aResIndex = 0; }
-			if ( ret.cancel ) { return null; }
+			var ret = this.showDetailDialog(null, aResName, aContext);
+			if ( ret.result == 0 ) { return null; }
+			if ( ret.result == 2 ) { aResName = ret.resURI; aResIndex = 0; }
 		}
 		this.contentDir = sbCommonUtils.getContentDir(this.item.id);
 		this.refURLObj  = sbCommonUtils.convertURLToObject(aReferURL);
@@ -163,20 +150,19 @@ var sbContentSaver = {
 		return [this.name, this.file2URL];
 	},
 
-
-	showDetailDialog : function(aTitleList, aResName, aContext)
+	showDetailDialog : function(aTitles, aResURI, aContext)
 	{
 		var ret = {
-			titleList : aTitleList,
-			resName   : aResName,
-			cancel    : false,
-			change    : false,
-			context   : aContext
+			item    : this.item,
+			option  : this.option,
+			titles  : aTitles || [this.item.title],
+			resURI  : aResURI,
+			result  : 1,
+			context : aContext || "capture"
 		};
 		window.openDialog("chrome://scrapbook/content/detail.xul" + (aContext ? "?capture" : ""), "", "chrome,modal,centerscreen,resizable", ret);
 		return ret;
 	},
-
 
 	saveDocumentInternal : function(aDocument, aFileKey)
 	{
@@ -187,10 +173,7 @@ var sbContentSaver = {
 			var newLeafName = this.saveFileInternal(aDocument.location.href, aFileKey, captureType);
 			return newLeafName;
 		}
-
 		this.refURLObj = sbCommonUtils.convertURLToObject(aDocument.location.href);
-
-
 		if ( this.selection )
 		{
 			var myRange = this.selection.getRangeAt(0);
@@ -198,7 +181,6 @@ var sbContentSaver = {
 			var curNode = myRange.commonAncestorContainer;
 			if ( curNode.nodeName == "#text" ) curNode = curNode.parentNode;
 		}
-
 		var tmpNodeList = [];
 		if ( this.selection )
 		{
@@ -212,16 +194,13 @@ var sbContentSaver = {
 		{
 			tmpNodeList.unshift(aDocument.body.cloneNode(true));
 		}
-
 		var rootNode = aDocument.getElementsByTagName("html")[0].cloneNode(false);
-
 		try {
 			var headNode = aDocument.getElementsByTagName("head")[0].cloneNode(true);
 			rootNode.appendChild(headNode);
 			rootNode.appendChild(aDocument.createTextNode("\n"));
 		} catch(ex) {
 		}
-
 		rootNode.appendChild(tmpNodeList[0]);
 		rootNode.appendChild(aDocument.createTextNode("\n"));
 		for ( var n = 0; n < tmpNodeList.length-1; n++ )
@@ -230,7 +209,6 @@ var sbContentSaver = {
 			tmpNodeList[n].appendChild(tmpNodeList[n+1]);
 			tmpNodeList[n].appendChild(aDocument.createTextNode("\n"));
 		}
-
 		if ( this.selection )
 		{
 			this.addCommentTag(tmpNodeList[tmpNodeList.length-1], "DOCUMENT_FRAGMENT");
@@ -265,54 +243,42 @@ var sbContentSaver = {
 		}
 
 
-		if ( this.option["encodeUTF8"] )
-		{
-			this.item.chars = "UTF-8";
-			var metaNode = aDocument.createElement("meta");
-			metaNode.setAttribute("content", aDocument.contentType + "; charset=" + this.item.chars);
-			metaNode.setAttribute("http-equiv", "Content-Type");
-			rootNode.firstChild.insertBefore(aDocument.createTextNode("\n"), rootNode.firstChild.firstChild);
-			rootNode.firstChild.insertBefore(metaNode, rootNode.firstChild.firstChild);
-			rootNode.firstChild.insertBefore(aDocument.createTextNode("\n"), rootNode.firstChild.firstChild);
-		}
+		this.item.chars = "UTF-8";
+		var metaNode = aDocument.createElement("meta");
+		metaNode.setAttribute("content", aDocument.contentType + "; charset=" + this.item.chars);
+		metaNode.setAttribute("http-equiv", "Content-Type");
+		rootNode.firstChild.insertBefore(aDocument.createTextNode("\n"), rootNode.firstChild.firstChild);
+		rootNode.firstChild.insertBefore(metaNode, rootNode.firstChild.firstChild);
+		rootNode.firstChild.insertBefore(aDocument.createTextNode("\n"), rootNode.firstChild.firstChild);
 
 
 		var myHTML;
 		myHTML = this.surroundByTags(rootNode, rootNode.innerHTML);
 		myHTML = this.doctypeToString(aDocument.doctype) + myHTML;
 		myHTML = myHTML.replace(/\x00/g, " ");
-
 		var myHTMLFile = this.contentDir.clone();
 		myHTMLFile.append(aFileKey + ".html");
 		sbCommonUtils.writeFile(myHTMLFile, myHTML, this.item.chars);
-
 		if ( myCSS )
 		{
 			var myCSSFile = this.contentDir.clone();
 			myCSSFile.append(aFileKey + ".css");
 			sbCommonUtils.writeFile(myCSSFile, myCSS, this.item.chars);
 		}
-
 		return myHTMLFile.leafName;
 	},
-
 
 	saveFileInternal : function(aFileURL, aFileKey, aCaptureType)
 	{
 		if ( !aFileKey ) aFileKey = "file" + Math.random().toString();
-
 		if ( !this.refURLObj ) this.refURLObj = sbCommonUtils.convertURLToObject(aFileURL);
-
-
 		if ( this.frameNumber == 0 )
 		{
 			this.item.icon  = "moz-icon://" + sbCommonUtils.getFileName(aFileURL) + "?size=16";
 			this.item.type  = aCaptureType;
 			this.item.chars = "";
 		}
-
 		var newFileName = this.download(aFileURL);
-
 		if ( aCaptureType == "image" ) {
 			var myHTML = '<html><body><img src="' + newFileName + '"></body></html>';
 		} else {
@@ -321,10 +287,8 @@ var sbContentSaver = {
 		var myHTMLFile = this.contentDir.clone();
 		myHTMLFile.append(aFileKey + ".html");
 		sbCommonUtils.writeFile(myHTMLFile, myHTML, "UTF-8");
-
 		return myHTMLFile.leafName;
 	},
-
 
 	addResource : function(aResName, aResIndex)
 	{
@@ -344,7 +308,6 @@ var sbContentSaver = {
 	},
 
 
-
 	surroundByTags : function(aNode, aContent)
 	{
 		var tag = "<" + aNode.nodeName.toLowerCase();
@@ -356,14 +319,12 @@ var sbContentSaver = {
 		return tag + aContent + "</" + aNode.nodeName.toLowerCase() + ">\n";
 	},
 
-
 	addCommentTag : function(targetNode, aComment)
 	{
 		targetNode.appendChild(targetNode.ownerDocument.createTextNode("\n"));
 		targetNode.appendChild(targetNode.ownerDocument.createComment(aComment));
 		targetNode.appendChild(targetNode.ownerDocument.createTextNode("\n"));
 	},
-
 
 	removeNodeFromParent : function(aNode)
 	{
@@ -372,7 +333,6 @@ var sbContentSaver = {
 		aNode = newNode;
 		return aNode;
 	},
-
 
 	doctypeToString : function(aDoctype)
 	{
@@ -385,7 +345,6 @@ var sbContentSaver = {
 	},
 
 
-
 	processDOMRecursively : function(rootNode)
 	{
 		for ( var curNode = rootNode.firstChild; curNode != null; curNode = curNode.nextSibling )
@@ -395,7 +354,6 @@ var sbContentSaver = {
 			this.processDOMRecursively(curNode);
 		}
 	},
-
 
 	inspectNode : function(aNode)
 	{
@@ -442,15 +400,37 @@ var sbContentSaver = {
 				}
 				break;
 			case "input" : 
-				if ( aNode.type.toLowerCase() == "image" ) {
-					if ( this.option["images"] ) {
-						var aFileName = this.download(aNode.src);
-						if (aFileName) aNode.setAttribute("src", aFileName);
-					} else {
-						aNode.removeAttribute("src");
-						aNode.setAttribute("type", "button");
-						if ( aNode.hasAttribute("alt") ) aNode.setAttribute("value", aNode.getAttribute("alt"));
-					}
+				switch (aNode.type.toLowerCase()) {
+					case "image": 
+						if (this.option["images"]) {
+							var aFileName = this.download(aNode.src);
+							if (aFileName) aNode.setAttribute("src", aFileName);
+						}
+						else {
+							aNode.removeAttribute("src");
+							aNode.setAttribute("type", "button");
+							if (aNode.hasAttribute("alt"))
+								aNode.setAttribute("value", aNode.getAttribute("alt"));
+						}
+						break;
+					case "text": 
+						aNode.setAttribute("value", aNode.value);
+						break;
+					case "checkbox": 
+					case "radio": 
+						if (aNode.checked)
+							aNode.setAttribute("checked", "checked");
+						else
+							aNode.removeAttribute("checked");
+						break;
+					default:
+				}
+				break;
+			case "textarea": 
+				if (aNode.value) {
+					while (aNode.hasChildNodes())
+						aNode.removeChild(aNode.lastChild);
+					aNode.appendChild(aNode.ownerDocument.createTextNode(aNode.value));
 				}
 				break;
 			case "link" : 
@@ -515,14 +495,11 @@ var sbContentSaver = {
 				aNode.setAttribute("action", sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.action));
 				break;
 			case "meta" : 
-				if ( this.option["encodeUTF8"] )
+				if ( aNode.hasAttribute("http-equiv") && aNode.hasAttribute("content") &&
+				     aNode.getAttribute("http-equiv").toLowerCase() == "content-type" && 
+				     aNode.getAttribute("content").match(/charset\=/i) )
 				{
-					if ( aNode.hasAttribute("http-equiv") && aNode.hasAttribute("content") &&
-					     aNode.getAttribute("http-equiv").toLowerCase() == "content-type" && 
-					     aNode.getAttribute("content").match(/charset\=/i) )
-					{
-						return this.removeNodeFromParent(aNode);
-					}
+					return this.removeNodeFromParent(aNode);
 				}
 				break;
 			case "frame"  : 
@@ -569,18 +546,16 @@ var sbContentSaver = {
 		return aNode;
 	},
 
-
 	processCSSRecursively : function(aCSS)
 	{
 		var content = "";
-
 		if ( aCSS.disabled ) return "";
 		var medium = aCSS.media.mediaText;
 		if ( medium != "" && medium.indexOf("screen") < 0 && medium.indexOf("all") < 0 )
 		{
 			return "";
 		}
-		if ( aCSS.href.indexOf("chrome") == 0 ) return "";
+		if ( aCSS.href && aCSS.href.indexOf("chrome") == 0 ) return "";
 		var flag = false;
 		for ( var i=0; i<aCSS.cssRules.length; i++ )
 		{
@@ -596,7 +571,6 @@ var sbContentSaver = {
 		}
 		return content;
 	},
-
 
 	inspectCSSText : function(aCSStext, aCSShref)
 	{
@@ -635,16 +609,13 @@ var sbContentSaver = {
 		return aCSStext;
 	},
 
-
 	download : function(aURLSpec)
 	{
 		if ( !aURLSpec ) return;
-
 		if ( aURLSpec.indexOf("://") < 0 )
 		{
 			aURLSpec = sbCommonUtils.resolveURL(this.refURLObj.spec, aURLSpec);
 		}
-
 		try {
 			var aURL = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
 			aURL.spec = aURLSpec;
@@ -653,10 +624,8 @@ var sbContentSaver = {
 			return;
 		}
 		var newFileName = aURL.fileName.toLowerCase();
-
 		if ( !newFileName ) newFileName = "untitled";
 		newFileName = sbCommonUtils.validateFileName(newFileName);
-
 		if ( this.file2URL[newFileName] == undefined )
 		{
 		}
@@ -679,7 +648,6 @@ var sbContentSaver = {
 		{
 			return newFileName;
 		}
-
 		if ( aURL.schemeIs("http") || aURL.schemeIs("https") || aURL.schemeIs("ftp") )
 		{
 			var targetFile = this.contentDir.clone();
@@ -716,12 +684,10 @@ var sbContentSaver = {
 		}
 	},
 
-
 	leftZeroPad3 : function(num)
 	{
 		if ( num < 10 ) { return "00" + num; } else if ( num < 100 ) { return "0" + num; } else { return num; }
 	},
-
 
 	normalizeJSLink : function(aNode, aAttr)
 	{
@@ -751,9 +717,7 @@ var sbContentSaver = {
 		return aNode;
 	},
 
-
 };
-
 
 
 

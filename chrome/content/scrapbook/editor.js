@@ -46,30 +46,50 @@ var sbPageEditor = {
 		}
 		sbPageEditor.allowUndo();
 		sbDOMEraser.init(0);
-		sbContentSaver.frameList = sbContentSaver.flattenFrames(window._content);
+		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
 		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
 		{
-			sbContentSaver.frameList[i].onmousedown = function(aEvent){ sbAnnotationService.handleMouseDown(aEvent); };
-			sbContentSaver.frameList[i].onkeypress  = function(aEvent){ sbPageEditor.handleKeypress(aEvent); };
+			sbContentSaver.frameList[i].document.removeEventListener("mousedown", sbAnnotationService.handleEvent, true);
+			sbContentSaver.frameList[i].document.addEventListener("mousedown",    sbAnnotationService.handleEvent, true);
+			sbContentSaver.frameList[i].document.removeEventListener("keypress", this.handleEvent, true);
+			sbContentSaver.frameList[i].document.addEventListener("keypress",    this.handleEvent, true);
 			if ( aID && document.getElementById("ScrapBookStatusPopupD").getAttribute("checked") ) sbInfoViewer.indicateLinks(sbContentSaver.frameList[i]);
 		}
-		if ( aID ) window._content.onbeforeunload = function(){ sbPageEditor.confirmSave(); };
+		if ( aID )
+		{
+			try {
+				window.content.removeEventListener("beforeunload", this.handleEvent, true);
+			}
+			catch (ex) {}
+			window.content.addEventListener("beforeunload", this.handleEvent, true);
+		}
+		var ss = Cc["@mozilla.org/browser/sessionstore;1"].getService(Ci.nsISessionStore);
+		var restoredComment = ss.getTabValue(gBrowser.mCurrentTab, "scrapbook-comment");
+		if (restoredComment)
+			document.getElementById("ScrapBookEditComment").value = restoredComment;
 	},
 
-	handleKeypress : function(aEvent)
+	handleEvent : function(aEvent)
 	{
-		if ( aEvent.altKey || aEvent.shiftKey || aEvent.ctrlKey || aEvent.metaKey ) return;
-		if ( "gFindBar" in window ? gFindBar.isFindBarVisible() : window.isFindBarVisible() ) return;
-		var idx = 0;
-		switch ( aEvent.charCode )
+		if ( aEvent.type == "keypress" )
 		{
-			case aEvent.DOM_VK_1 : idx = 1; break;
-			case aEvent.DOM_VK_2 : idx = 2; break;
-			case aEvent.DOM_VK_3 : idx = 3; break;
-			case aEvent.DOM_VK_4 : idx = 4; break;
-			default : break;
+			if ( aEvent.altKey || aEvent.shiftKey || aEvent.ctrlKey || aEvent.metaKey ) return;
+			if ( "gFindBar" in window ? gFindBar.isFindBarVisible() : window.isFindBarVisible() ) return;
+			var idx = 0;
+			switch ( aEvent.charCode )
+			{
+				case aEvent.DOM_VK_1 : idx = 1; break;
+				case aEvent.DOM_VK_2 : idx = 2; break;
+				case aEvent.DOM_VK_3 : idx = 3; break;
+				case aEvent.DOM_VK_4 : idx = 4; break;
+				default : return;
+			}
+			if ( idx > 0 ) sbPageEditor.highlight(idx);
 		}
-		if ( idx > 0 ) this.highlight(idx);
+		else if ( aEvent.type == "beforeunload" )
+		{
+			sbPageEditor.confirmSave();
+		}
 	},
 
 	toggleComment : function()
@@ -88,6 +108,13 @@ var sbPageEditor = {
 		document.getElementById("ScrapBookEditSpacer").setAttribute("flex", this.multiline ? 1 : 0);
 		this.COMMENT.value = val;
 		this.COMMENT.focus();
+	},
+
+	onInputComment: function(aValue)
+	{
+		var ss = Cc["@mozilla.org/browser/sessionstore;1"].getService(Ci.nsISessionStore);
+		ss.setTabValue(gBrowser.mCurrentTab, "scrapbook-comment", aValue);
+		this.changed2 = true; 
 	},
 
 	getSelection : function()
@@ -122,7 +149,7 @@ var sbPageEditor = {
 		this.allowUndo(this.focusedWindow.document);
 		var attr = {};
 		attr["class"] = "linemarker-marked-line";
-		attr["style"] = nsPreferences.copyUnicharPref("scrapbook.highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);
+		attr["style"] = sbCommonUtils.copyUnicharPref("scrapbook.highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);
 		sbHighlighter.set(this.focusedWindow, sel, "span", attr);
 		this.changed1 = true;
 	},
@@ -134,7 +161,7 @@ var sbPageEditor = {
 		var selRange  = sel.getRangeAt(0);
 		var node = selRange.startContainer;
 		if ( node.nodeName == "#text" ) node = node.parentNode;
-		var nodeRange = window._content.document.createRange();
+		var nodeRange = window.content.document.createRange();
 		traceTree : while ( true )
 		{
 			nodeRange.selectNode(node);
@@ -158,7 +185,7 @@ var sbPageEditor = {
 
 	removeAllSpan : function(aClassName)
 	{
-		sbContentSaver.frameList = sbContentSaver.flattenFrames(window._content);
+		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
 		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
 		{
 			var elems = sbContentSaver.frameList[i].document.getElementsByTagName("span");
@@ -176,7 +203,7 @@ var sbPageEditor = {
 
 	removeElementsByTagName : function(aTagName)
 	{
-		sbContentSaver.frameList = sbContentSaver.flattenFrames(window._content);
+		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
 		var shouldSave = false;
 		for ( var i = sbContentSaver.frameList.length - 1; i >= 0; i-- )
 		{
@@ -214,7 +241,7 @@ var sbPageEditor = {
 	restore : function()
 	{
 		window.sbBrowserOverlay.lastLocation = "";
-		window._content.location.reload();
+		window.content.location.reload();
 	},
 
 	exit : function(forceExit)
@@ -268,13 +295,13 @@ var sbPageEditor = {
 	savePage : function()
 	{
 		if ( !sbDataSource.exists(sbBrowserOverlay.resource) ) { this.disable(true); return; }
-		var curURL = window._content.location.href;
+		var curURL = window.content.location.href;
 		if ( curURL.indexOf("file://") != 0 || !curURL.match(/\/data\/(\d{14})\/(.+)$/) || RegExp.$1 != this.item.id || RegExp.$2 == "index.dat" || RegExp.$2 == "sitemap.xml" )
 		{
 			alert("ScrapBook ERROR: Cannot save file '" + RegExp.$2 + "'.");
 			return;
 		}
-		sbContentSaver.frameList = sbContentSaver.flattenFrames(window._content);
+		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
 		this.disable(true);
 		sbDOMEraser.init(2);
 		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
@@ -309,7 +336,7 @@ var sbPageEditor = {
 			}
 		}
 		this.changed1 = false;
-		window.setTimeout(function() { window._content.stop(); sbPageEditor.disable(false); }, 500);
+		window.setTimeout(function() { window.content.stop(); sbPageEditor.disable(false); }, 500);
 	},
 
 	saveResource : function()
@@ -328,6 +355,9 @@ var sbPageEditor = {
 			this.item.comment = newComment;
 			sbCommonUtils.writeIndexDat(this.item);
 		}
+		var ss = Components.classes['@mozilla.org/browser/sessionstore;1']
+			.getService(Components.interfaces.nsISessionStore);
+		ss.deleteTabValue(gBrowser.mCurrentTab, "scrapbook-comment");
 		this.changed2 = false;
 	},
 
@@ -410,13 +440,19 @@ var sbDOMEraser = {
 		document.getElementById("ScrapBookHighlighter").disabled = this.enabled;
 		document.getElementById("ScrapBookEditAnnotation").disabled = this.enabled;
 		document.getElementById("ScrapBookEditCutter").disabled  = this.enabled;
-		sbContentSaver.frameList = sbContentSaver.flattenFrames(window._content);
+		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
 		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
 		{
-			sbContentSaver.frameList[i].document.onmouseover = this.enabled ? function(aEvent){ sbDOMEraser.handleEvent(aEvent); } : null;
-			sbContentSaver.frameList[i].document.onmousemove = this.enabled ? function(aEvent){ sbDOMEraser.handleEvent(aEvent); } : null;
-			sbContentSaver.frameList[i].document.onmouseout  = this.enabled ? function(aEvent){ sbDOMEraser.handleEvent(aEvent); } : null;
-			sbContentSaver.frameList[i].document.onclick     = this.enabled ? function(aEvent){ sbDOMEraser.handleEvent(aEvent); } : null;
+			sbContentSaver.frameList[i].document.removeEventListener("mouseover", this.handleEvent, true);
+			sbContentSaver.frameList[i].document.removeEventListener("mousemove", this.handleEvent, true);
+			sbContentSaver.frameList[i].document.removeEventListener("mouseout",  this.handleEvent, true);
+			sbContentSaver.frameList[i].document.removeEventListener("click",     this.handleEvent, true);
+			if ( this.enabled ) {
+				sbContentSaver.frameList[i].document.addEventListener("mouseover", this.handleEvent, true);
+				sbContentSaver.frameList[i].document.addEventListener("mousemove", this.handleEvent, true);
+				sbContentSaver.frameList[i].document.addEventListener("mouseout",  this.handleEvent, true);
+				sbContentSaver.frameList[i].document.addEventListener("click",     this.handleEvent, true);
+			}
 			if ( this.enabled ) {
 				var estyle = "* { cursor: crosshair; }\n"
 				           + "#scrapbook-eraser-tooltip { -moz-appearance: tooltip;"
@@ -438,7 +474,7 @@ var sbDOMEraser = {
 		var onMarker = (tagName == "SPAN" && elem.getAttribute("class") == "linemarker-marked-line");
 		if ( aEvent.type == "mouseover" || aEvent.type == "mousemove" )
 		{
-			if ( aEvent.type == "mousemove" && ++this.verbose % 3 != 0 ) return;
+			if ( aEvent.type == "mousemove" && ++sbDOMEraser.verbose % 3 != 0 ) return;
 			var tooltip = elem.ownerDocument.getElementById("scrapbook-eraser-tooltip");
 			if ( !tooltip )
 			{
@@ -471,7 +507,7 @@ var sbDOMEraser = {
 				sbPageEditor.allowUndo(elem.ownerDocument);
 				if ( aEvent.shiftKey || aEvent.button == 2 )
 				{
-					this.isolateNode(elem);
+					sbDOMEraser.isolateNode(elem);
 				}
 				else
 				{
@@ -512,33 +548,36 @@ var sbAnnotationService = {
 
 	DEFAULT_WIDTH  : 250,
 	DEFAULT_HEIGHT : 100,
-	startX : 0,
-	startY : 0,
+	offsetX : 0,
+	offsetY : 0,
+	isMove  : true,
+	target  : null,
 
-	handleMouseDown : function(aEvent)
+	handleEvent : function(aEvent)
 	{
 		if ( sbDOMEraser.enabled ) return;
-		switch ( aEvent.originalTarget.getAttribute("class") )
+		if ( aEvent.type == "mousedown" )
 		{
-			case "scrapbook-sticky" :
-			case "scrapbook-sticky scrapbook-sticky-relative" :
-				if ( aEvent.originalTarget.childNodes.length != 4 )
-					this.editSticky(aEvent.originalTarget);
-				break;
-			case "scrapbook-block-comment" :
-				this.createSticky([aEvent.originalTarget.previousSibling, aEvent.originalTarget.firstChild.data]);
-				aEvent.originalTarget.parentNode.removeChild(aEvent.originalTarget);
-				break;
-			case "scrapbook-inline" : case "scrapbook-inline-comment" :
-				this.editInline(aEvent.originalTarget);
-				break;
-			case "scrapbook-sticky-header" :
-				this.startDrag(aEvent.originalTarget.parentNode, aEvent, "move");
-				break;
-			case "scrapbook-sticky-resizer" :
-				this.startDrag(aEvent.originalTarget.parentNode, aEvent, "resize");
-				break;
+			switch ( aEvent.originalTarget.className )
+			{
+				case "scrapbook-sticky" : case "scrapbook-sticky scrapbook-sticky-relative" :
+					if ( aEvent.originalTarget.childNodes.length != 2 ) return;
+					sbAnnotationService.editSticky(aEvent.originalTarget);
+					break;
+				case "scrapbook-block-comment" :
+					sbAnnotationService.createSticky([aEvent.originalTarget.previousSibling, aEvent.originalTarget.firstChild.data]);
+					aEvent.originalTarget.parentNode.removeChild(aEvent.originalTarget);
+					break;
+				case "scrapbook-inline" : case "scrapbook-inline-comment" :
+					sbAnnotationService.editInline(aEvent.originalTarget);
+					break;
+				case "scrapbook-sticky-header" : case "scrapbook-sticky-footer" :
+					sbAnnotationService.startDrag(aEvent);
+					break;
+			}
 		}
+		else if ( aEvent.type == "mousemove" ) sbAnnotationService.onDrag(aEvent);
+		else if ( aEvent.type == "mouseup"   ) sbAnnotationService.stopDrag(aEvent);
 	},
 
 	createSticky : function(aPreset)
@@ -584,80 +623,72 @@ var sbAnnotationService = {
 
 	editSticky : function(oldElem)
 	{
-		var newElem = this.duplicateElement(!(oldElem.parentNode instanceof HTMLBodyElement), true, parseInt(oldElem.style.left, 10), parseInt(oldElem.style.top, 10), parseInt(oldElem.style.width, 10), parseInt(oldElem.style.height, 10));
-		newElem.firstChild.nextSibling.appendChild(document.createTextNode(oldElem.lastChild.data || ""));
+		var newElem = this.duplicateElement(
+			!(oldElem.parentNode instanceof HTMLBodyElement), true, 
+			parseInt(oldElem.style.left, 10), parseInt(oldElem.style.top, 10), 
+			parseInt(oldElem.style.width, 10), parseInt(oldElem.style.height, 10)
+		);
+		newElem.firstChild.nextSibling.appendChild(
+			newElem.ownerDocument.createTextNode(oldElem.lastChild.data || "")
+		);
 		oldElem.parentNode.replaceChild(newElem, oldElem);
 		this.adjustTextArea(newElem);
 		setTimeout(function(){ newElem.firstChild.nextSibling.focus(); }, 100);
 		sbPageEditor.changed1 = true;
 	},
 
-	startDrag : function(aTargetDiv, aEvent, aAction)
+	startDrag : function(aEvent)
 	{
-		this.escape(aEvent);
-		aEvent.view.onmousemove = function(aEvent){ sbAnnotationService.onDragGesture(aTargetDiv, aEvent, aAction); };
-		aEvent.view.onmouseup   = function(aEvent){ aEvent.view.onmousemove = null; };
-	},
-
-	onDragGesture : function(aTargetDiv, aEvent, aAction)
-	{
-		if ( aAction == "move" )
-		{
-			var x = parseInt(aTargetDiv.style.left || 0, 10) + (aEvent.clientX - this.startX); if ( x < 0 ) x = 0;
-			var y = parseInt(aTargetDiv.style.top  || 0, 10)  + (aEvent.clientY - this.startY); if ( y < 0 ) y = 0;
-			aTargetDiv.style.left = x + "px";
-			aTargetDiv.style.top  = y + "px";
-		}
-		else if ( aAction == "resize" )
-		{
-			var x = parseInt(aTargetDiv.style.width  || 0, 10) + (aEvent.clientX - this.startX); if ( x < 100 ) x = 100;
-			var y = parseInt(aTargetDiv.style.height || 0, 10) + (aEvent.clientY - this.startY); if ( y < 32 ) y = 32;
-			aTargetDiv.style.width  = x + "px";
-			aTargetDiv.style.height = y + "px";
-			if ( aTargetDiv.firstChild.nextSibling instanceof HTMLTextAreaElement ) this.adjustTextArea(aTargetDiv);
-		}
+		this.target = aEvent.originalTarget.parentNode;
+		this.isMove = aEvent.originalTarget.className == "scrapbook-sticky-header";
+		this.offsetX = aEvent.clientX - parseInt(this.target.style[this.isMove ? "left" : "width" ], 10);
+		this.offsetY = aEvent.clientY - parseInt(this.target.style[this.isMove ? "top"  : "height"], 10);
+		aEvent.view.document.addEventListener("mousemove", this.handleEvent, true);
+		aEvent.view.document.addEventListener("mouseup",   this.handleEvent, true);
 		sbPageEditor.changed1 = true;
-		this.escape(aEvent);
 	},
 
-	adjustTextArea : function(aDivElem)
+	onDrag : function(aEvent)
 	{
-		var h = parseInt(aDivElem.style.height, 10) - 10 - 16;
-		aDivElem.firstChild.nextSibling.style.height = (h > 32 ? h : 32) + "px";
+		if ( !this.target || this.target.className.indexOf("scrapbook-sticky") < 0 ) return;
+		var x = aEvent.clientX - this.offsetX; if ( x < 0 ) x = 0; this.target.style[this.isMove ? "left" : "width" ] = x + "px";
+		var y = aEvent.clientY - this.offsetY; if ( y < 0 ) y = 0; this.target.style[this.isMove ? "top"  : "height"] = y + "px";
+		if ( !this.isMove && this.target.firstChild.nextSibling instanceof HTMLTextAreaElement ) this.adjustTextArea(this.target);
 	},
 
-	escape : function(aEvent)
+	stopDrag : function(aEvent)
 	{
-		this.startX = aEvent.clientX;
-		this.startY = aEvent.clientY;
+		this.target = null;
+		aEvent.view.document.removeEventListener("mousemove", this.handleEvent, true);
+		aEvent.view.document.removeEventListener("mouseup",   this.handleEvent, true);
+	},
+
+	adjustTextArea : function(aTarget)
+	{
+		var h = parseInt(aTarget.style.height, 10) - 10 - 16; if ( h < 0 ) h = 0;
+		aTarget.firstChild.nextSibling.style.height = h + "px";
 	},
 
 	duplicateElement : function(isRelative, isEditable, aLeft, aTop, aWidth, aHeight)
 	{
-		var mainDiv = window._content.document.createElement("DIV");
-		var headDiv = window._content.document.createElement("DIV");
-		var resizer = window._content.document.createElement("DIV");
-		headDiv.onmousedown = function(aEvent){ sbAnnotationService.startDrag(mainDiv, aEvent, "move"); };
-		resizer.onmousedown = function(aEvent){ sbAnnotationService.startDrag(mainDiv, aEvent, "resize"); };
-		headDiv.setAttribute("class", "scrapbook-sticky-header");
-		resizer.setAttribute("class", "scrapbook-sticky-resizer");
+		var mainDiv = window.content.document.createElement("DIV");
+		var headDiv = window.content.document.createElement("DIV");
+		headDiv.className = "scrapbook-sticky-header";
 		mainDiv.appendChild(headDiv);
 		if ( isEditable )
 		{
-			var textArea = window._content.document.createElement("TEXTAREA");
-			var footDiv  = window._content.document.createElement("DIV");
-			var button1  = window._content.document.createElement("INPUT");
-			var button2  = window._content.document.createElement("INPUT");
+			var textArea = window.content.document.createElement("TEXTAREA");
+			var footDiv  = window.content.document.createElement("DIV");
+			var button1  = window.content.document.createElement("INPUT");
+			var button2  = window.content.document.createElement("INPUT");
 			button1.setAttribute("type", "image"); button1.setAttribute("src", "chrome://scrapbook/skin/sticky_save.png");
 			button2.setAttribute("type", "image"); button2.setAttribute("src", "chrome://scrapbook/skin/sticky_delete.png");
 			button1.setAttribute("onclick", "this.parentNode.parentNode.appendChild(document.createTextNode(this.parentNode.previousSibling.value));this.parentNode.parentNode.removeChild(this.parentNode.previousSibling);this.parentNode.parentNode.removeChild(this.parentNode);");
 			button2.setAttribute("onclick", "this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);");
-			footDiv.setAttribute("class", "scrapbook-sticky-footer");
+			footDiv.className = "scrapbook-sticky-footer";
 			footDiv.appendChild(button1); footDiv.appendChild(button2);
 			mainDiv.appendChild(textArea); mainDiv.appendChild(footDiv);
-			if ( isRelative ) footDiv.onmousedown = function(aEvent){ sbAnnotationService.startDrag(mainDiv, aEvent, "resize"); };
 		}
-		mainDiv.appendChild(resizer);
 		if ( !isRelative )
 		{
 			mainDiv.style.left = aLeft + "px";
@@ -666,7 +697,7 @@ var sbAnnotationService = {
 		}
 		mainDiv.style.width  = (aWidth  || this.DEFAULT_WIDTH)  + "px";
 		mainDiv.style.height = (aHeight || this.DEFAULT_HEIGHT) + "px";
-		mainDiv.setAttribute("class" , "scrapbook-sticky" + (isRelative ? " scrapbook-sticky-relative" : ""));
+		mainDiv.className = "scrapbook-sticky" + (isRelative ? " scrapbook-sticky-relative" : "");
 		return mainDiv;
 	},
 
@@ -679,10 +710,7 @@ var sbAnnotationService = {
 		var ret = {};
 		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbBrowserOverlay.STRING.getFormattedString("EDIT_INLINE", [sbCommonUtils.crop(sel.toString(), 32)]), ret, null, {}) ) return;
 		if ( !ret.value ) return;
-		var attr = {};
-		attr["style"] = "border-bottom: 2px dotted #FF3333; cursor: help;"
-		attr["class"] = "scrapbook-inline";
-		attr["title"] = ret.value;
+		var attr = { style : "border-bottom: 2px dotted #FF3333; cursor: help;", class : "scrapbook-inline", title : ret.value };
 		sbHighlighter.set(sbPageEditor.focusedWindow, sel, "span", attr);
 		sbPageEditor.changed1 = true;
 	},
@@ -805,7 +833,7 @@ var sbInfoViewer = {
 	{
 		var id = sbBrowserOverlay.getID();
 		if ( !id ) return;
-		var fileName = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(window._content.location.href))[0];
+		var fileName = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(window.content.location.href))[0];
 		var source = fileName == "index" ? sbDataSource.getProperty(sbBrowserOverlay.resource, "source") : "";
 		top.window.openDialog(
 			"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",

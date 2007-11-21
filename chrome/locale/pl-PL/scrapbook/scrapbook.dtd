@@ -1,8 +1,9 @@
 <!ENTITY sb.new.folder "Nowy folder">
+<!ENTITY sb.new.separator "Nowy separator">
 <!ENTITY sb.new.note "Nowa notatka">
-<!ENTITY sb.toggle.all "Rozwiń/Zwiń wszystkie foldery">
+<!ENTITY sb.toggle.all "Otwórz/Zamknij wszystkie foldery">
 <!ENTITY sb.tools "Narzędzia">
-<!ENTITY sb.tools.settings "Ustawienia">
+<!ENTITY sb.tools.options "Ustawienia">
 <!ENTITY sb.tools.manage "Zarządzanie">
 <!ENTITY sb.tools.combine "Łączenie stron">
 <!ENTITY sb.tools.trade "Import / Eksport">
@@ -10,11 +11,9 @@
 <!ENTITY sb.tools.directory "Katalog główny ScrapBooka">
 <!ENTITY sb.tools.calculate "Oblicz zajmowaną powierzchnię">
 <!ENTITY sb.tools.sorttree "Sortuj całe drzewo">
-<!ENTITY sb.tools.output "Zapisz dane jako dokument HTML">
+<!ENTITY sb.tools.output "Utwórz drzewo jako dokument HTML">
 <!ENTITY sb.tools.repair "Naprawa uszkodzeń">
 <!ENTITY sb.tools.addons "Funkcje dodatkowe">
-<!ENTITY sb.tools.tips "Podpowiedzi online">
 <!ENTITY sb.tools.homepage "Strona domowa">
-<!ENTITY sb.tools.about "O rozszerzeniu">
 <!ENTITY sb.note.opentab "Otwórz w karcie">
 <!ENTITY sb.note.close "Zamknij">

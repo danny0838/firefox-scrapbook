@@ -1,9 +1,7 @@
 <?xml version="1.0" ?>
 
-<!--skin-->
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 
-<!--window-->
 <window id="sbCacheWindow"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         onload="SB_initFT('CACHE');"
@@ -12,12 +10,10 @@
         persist="screenX screenY"
         windowtype="scrapbook">
 
-	<!--script-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/fulltext.js" />
 
-	<!--stringbundle-->
 	<stringbundle id="sbCacheString" src="chrome://scrapbook/locale/fulltext.properties" />
 
 	<vbox id="sbCacheStatus" style="padding:2px;">

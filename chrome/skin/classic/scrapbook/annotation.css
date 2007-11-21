@@ -48,15 +48,11 @@ div.scrapbook-sticky input:focus {
 	border: 1px solid dodgerblue;
 }
 
-div.scrapbook-sticky .scrapbook-sticky-resizer {
-	position: absolute;
-	bottom: 0px;
-	right: 0px;
-	width:  16px;
-	height: 16px;
-	border: 0px;
+div.scrapbook-sticky div.scrapbook-sticky-footer {
 	cursor: se-resize;
 	background-image: url('chrome://scrapbook/skin/sticky_resizer.png');
+	background-position: right bottom;
+	background-repeat: no-repeat;
 }
 
 
@@ -66,19 +62,6 @@ div.scrapbook-sticky .scrapbook-sticky-resizer {
 
 div.scrapbook-sticky-relative {
 	margin: 16px 10px;
-}
-
-/* XXX I don't know how to put the resizer at left bottom in the relative box. */
-div.scrapbook-sticky-relative .scrapbook-sticky-resizer {
-	display: none;
-}
-
-/* XXX A work-around for the problem. We can resize by DND footer when editing a relative sticky annotation. */
-div.scrapbook-sticky-relative div.scrapbook-sticky-footer {
-	cursor: se-resize;
-	background-image: url('chrome://scrapbook/skin/sticky_resizer.png');
-	background-position: right bottom;
-	background-repeat: no-repeat;
 }
 
 /* We can't move a relative sticky annotation */

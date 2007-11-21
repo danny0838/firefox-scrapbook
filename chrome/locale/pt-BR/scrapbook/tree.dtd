@@ -14,11 +14,11 @@
 <!ENTITY sb.prop.title "Título">
 <!ENTITY sb.prop.comment "Comentário">
 <!ENTITY sb.prop.id.date "ID (Data)">
-<!ENTITY sb.folder.toggle "Expandir/Recolher">
 <!ENTITY sb.folder.combine "Visualização Combinada">
 <!ENTITY sb.folder.openall "Abrir Tudo em Abas">
-<!ENTITY sb.folder.manage "Gerenciar Pasta...">
-<!ENTITY sb.new.folder "Nova Pasta...">
+<!ENTITY sb.folder.manage "Gerenciar Pasta">
+<!ENTITY sb.new.folder "Nova Pasta">
+<!ENTITY sb.new.separator "New Separator">
 <!ENTITY sb.new.note "Nova Nota">
 <!ENTITY sb.sort.folder "Ordenar Pasta">
 <!ENTITY sb.search "Pesquisa">
@@ -29,5 +29,5 @@
 <!ENTITY sb.search.cache "Atualizar Cache para a Pesquisa Completa de Texto">
 <!ENTITY sb.search.clear "Limpar Histórico de Pesquisas">
 <!ENTITY sb.search.days "Filtrar por Dias">
-<!ENTITY mb.configure "Configurar">
+<!ENTITY mb.manage "Manage">
 <!ENTITY mb.profileFolder "Pasta do Perfil">

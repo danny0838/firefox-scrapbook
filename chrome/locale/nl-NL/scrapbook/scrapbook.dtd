@@ -1,20 +1,19 @@
-<!ENTITY sb.new.folder "Nieuwe map...">
+<!ENTITY sb.new.folder "Nieuwe map">
+<!ENTITY sb.new.separator "New Separator">
 <!ENTITY sb.new.note "Nieuwe notitie">
-<!ENTITY sb.toggle.all "Alle mappen uitvouwen/inklappen">
+<!ENTITY sb.toggle.all "Open/close All Folders">
 <!ENTITY sb.tools "Opties">
-<!ENTITY sb.tools.settings "Instellingen">
+<!ENTITY sb.tools.options "Instellingen">
 <!ENTITY sb.tools.manage "Beheer">
 <!ENTITY sb.tools.combine "Combine Wizard">
 <!ENTITY sb.tools.trade "Importeren / Exporteren">
-<!ENTITY sb.tools.multiple "Meerdere URL's bewaren">
+<!ENTITY sb.tools.multiple "Meerdere URL&apos;s bewaren">
 <!ENTITY sb.tools.directory "ScrapBookmap">
 <!ENTITY sb.tools.calculate "Bestandsgrootte berekenen">
 <!ENTITY sb.tools.sorttree "Volledige mappenstructuur sorteren">
 <!ENTITY sb.tools.output "Mappenstructuur als HTML exporteren">
 <!ENTITY sb.tools.repair "Noodreparatie">
 <!ENTITY sb.tools.addons "Add-on Functions">
-<!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Homepage">
-<!ENTITY sb.tools.about "Over...">
 <!ENTITY sb.note.opentab "In tabblad openen">
 <!ENTITY sb.note.close "Sluiten">

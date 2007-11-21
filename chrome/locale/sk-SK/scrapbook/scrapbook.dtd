@@ -1,8 +1,9 @@
-<!ENTITY sb.new.folder "Nový priečinok...">
+<!ENTITY sb.new.folder "Nový priečinok">
+<!ENTITY sb.new.separator "New Separator">
 <!ENTITY sb.new.note "Nová poznámka">
-<!ENTITY sb.toggle.all "Rozbaliť/Zbaliť všetky priečinky">
+<!ENTITY sb.toggle.all "Open/close All Folders">
 <!ENTITY sb.tools "Nástroje">
-<!ENTITY sb.tools.settings "Nastavenia...">
+<!ENTITY sb.tools.options "Nastavenia">
 <!ENTITY sb.tools.manage "Spravovať">
 <!ENTITY sb.tools.combine "Zlúčiť">
 <!ENTITY sb.tools.trade "Importovať/Exportovať">
@@ -13,8 +14,6 @@
 <!ENTITY sb.tools.output "Exportovať všetko ako HTML">
 <!ENTITY sb.tools.repair "Núdzová oprava">
 <!ENTITY sb.tools.addons "Doplnky">
-<!ENTITY sb.tools.tips "Tipy online">
 <!ENTITY sb.tools.homepage "Domovská stránka">
-<!ENTITY sb.tools.about "O rozšírení ScrapBook">
 <!ENTITY sb.note.opentab "Otvoriť v karte">
 <!ENTITY sb.note.close "Zavrieť">

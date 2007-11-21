@@ -13,12 +13,12 @@
 <!ENTITY sb.listview "リストビュー">
 <!ENTITY sb.prop.title "タイトル">
 <!ENTITY sb.prop.comment "コメント">
-<!ENTITY sb.prop.id.date "ID（日時）">
-<!ENTITY sb.folder.toggle "展開／収縮">
+<!ENTITY sb.prop.id.date "ID (日時)">
 <!ENTITY sb.folder.combine "結合ビュー">
 <!ENTITY sb.folder.openall "すべてタブで開く">
-<!ENTITY sb.folder.manage "フォルダの管理...">
-<!ENTITY sb.new.folder "新しいフォルダ...">
+<!ENTITY sb.folder.manage "フォルダの管理">
+<!ENTITY sb.new.folder "新しいフォルダ">
+<!ENTITY sb.new.separator "新しい区切り">
 <!ENTITY sb.new.note "新しいノート">
 <!ENTITY sb.sort.folder "フォルダ内をソート">
 <!ENTITY sb.search "検索">
@@ -29,5 +29,5 @@
 <!ENTITY sb.search.cache "全文検索用キャッシュを更新">
 <!ENTITY sb.search.clear "入力履歴のクリア">
 <!ENTITY sb.search.days "日数でフィルタリング">
-<!ENTITY mb.configure "設定">
+<!ENTITY mb.manage "管理">
 <!ENTITY mb.profileFolder "プロファイルフォルダ">

@@ -1,8 +1,9 @@
-<!ENTITY sb.new.folder "新建文件夹...">
+<!ENTITY sb.new.folder "新建文件夹">
+<!ENTITY sb.new.separator "新建分隔线">
 <!ENTITY sb.new.note "新建便签">
-<!ENTITY sb.toggle.all "展开/折叠所有文件夹">
+<!ENTITY sb.toggle.all "打开 / 关闭全部文件夹">
 <!ENTITY sb.tools "工具">
-<!ENTITY sb.tools.settings "选项">
+<!ENTITY sb.tools.options "选项">
 <!ENTITY sb.tools.manage "管理项目">
 <!ENTITY sb.tools.combine "合并向导">
 <!ENTITY sb.tools.trade "导入和导出">
@@ -13,8 +14,6 @@
 <!ENTITY sb.tools.output "导出项目列表">
 <!ENTITY sb.tools.repair "紧急修复">
 <!ENTITY sb.tools.addons "附加功能">
-<!ENTITY sb.tools.tips "在线提示">
 <!ENTITY sb.tools.homepage "主页">
-<!ENTITY sb.tools.about "关于">
 <!ENTITY sb.note.opentab "在标签页中打开">
 <!ENTITY sb.note.close "关闭">

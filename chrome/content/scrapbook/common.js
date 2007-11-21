@@ -100,6 +100,7 @@ var sbCommonUtils = {
 	loadURL : function(aURL, tabbed)
 	{
 		var win = this.WINDOW.getMostRecentWindow("navigator:browser");
+		if ( !win ) return;
 		var browser = win.document.getElementById("content");
 		if ( tabbed ) {
 			browser.selectedTab = browser.addTab(aURL);
@@ -329,7 +330,7 @@ var sbCommonUtils = {
 	getFocusedWindow : function()
 	{
 		var win = document.commandDispatcher.focusedWindow;
-		if ( !win || win == window || win instanceof Components.interfaces.nsIDOMChromeWindow ) win = window._content;
+		if ( !win || win == window || win instanceof Components.interfaces.nsIDOMChromeWindow ) win = window.content;
 		return win;
 	},
 
@@ -347,8 +348,38 @@ var sbCommonUtils = {
 	{
 		try {
 			return this.PREF.getBoolPref(aName);
-		} catch(ex) {
+		}
+		catch(ex) {
 			return aDefVal;
+		}
+	},
+
+	setBoolPref: function(aPrefName, aPrefValue)
+	{
+		try {
+			this.PREF.setBoolPref(aPrefName, aPrefValue);
+		}
+		catch (ex) {}
+	},
+
+	setUnicharPref: function (aPrefName, aPrefValue)
+	{
+		try {
+			var str = Components.classes["@mozilla.org/supports-string;1"]
+			          .createInstance(Components.interfaces.nsISupportsString);
+			str.data = aPrefValue;
+			this.PREF.setComplexValue(aPrefName, Components.interfaces.nsISupportsString, str);
+		}
+		catch (ex) {}
+	},
+
+	copyUnicharPref: function (aPrefName, aDefVal)
+	{
+		try {
+			return this.PREF.getComplexValue(aPrefName, Components.interfaces.nsISupportsString).data;
+		}
+		catch (ex) {
+			return aDefVal != undefined ? aDefVal : null;
 		}
 	},
 

@@ -6,12 +6,13 @@
 <!ENTITY sb.capture.frame.as "프레임 상세 캡처">
 <!ENTITY sb.capture.target "링크 캡처">
 <!ENTITY sb.capture.target.as "링크 상세 캡처">
-<!ENTITY sb.capture.folder.root "루트 폴더">
-<!ENTITY sb.capture.folder.select "폴더 선택">
 <!ENTITY sb.capture.alltabs "모든 탭 캡처">
 <!ENTITY sb.capture.bookmark "ScrapBook으로 북마크">
+<!ENTITY sb.sidebar "슬라이드바에 보이기">
+<!ENTITY sb.menu "메뉴">
 <!ENTITY sb.editbefore "캡처하기 전에 편집하기">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">
 <!ENTITY sb.key.capture.as "K">
+<!ENTITY sb.key.bookmark "J">

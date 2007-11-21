@@ -1,3 +1,3 @@
-<!ENTITY sb.output.option.all "Easp&#243;rt&#225;il Crann Ioml&#225;n">
-<!ENTITY sb.output.option.frame "Easp&#243;rt&#225;il mar HTML le Fr&#225;ma">
-<!ENTITY sb.output.option.open "Oscail HTML Easp&#243;rt&#225;laithe i Brabhsla">
+<!ENTITY sb.output.option.all "Output whole tree">
+<!ENTITY sb.output.option.frame "Output with frame">
+<!ENTITY sb.output.option.open "After outputting, open it in browser">

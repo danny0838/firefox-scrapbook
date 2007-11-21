@@ -1,9 +1,9 @@
-<!ENTITY sb.toolbar.edit "Barra d'eines d'edició">
-<!ENTITY sb.toolbar.info "Barra d'informació">
-<!ENTITY sb.edit.eraser "Esborrador DOM: Una eina per a suprimir elements d'una pàgina web.">
+<!ENTITY sb.toolbar.edit "Barra d&apos;eines d&apos;edició">
+<!ENTITY sb.toolbar.info "Barra d&apos;informació">
+<!ENTITY sb.edit.eraser "Esborrador DOM: Una eina per a suprimir elements d&apos;una pàgina web.">
 <!ENTITY sb.edit.undo "Desfés">
 <!ENTITY sb.edit.save "Desa els canvis">
-<!ENTITY sb.edit.comment "Expandeix/Redueix l'àrea de comentaris">
+<!ENTITY sb.edit.comment "Expandeix/Redueix l&apos;àrea de comentaris">
 <!ENTITY sb.edit.sticky "Nota adhesiva">
 <!ENTITY sb.edit.sticky.create "Crea una nota adhesiva">
 <!ENTITY sb.edit.inline.add "Afegeix una anotació a la selecció">
@@ -15,9 +15,9 @@
 <!ENTITY sb.highlighter "Ressaltat">
 <!ENTITY sb.highlighter.remove "Suprimeix els ressaltats de la selecció">
 <!ENTITY sb.highlighter.remove.all "Suprimeix tots els ressaltats">
-<!ENTITY sb.source "Obre l'URL font">
+<!ENTITY sb.source "Obre l&apos;URL font">
 <!ENTITY sb.renew "Torna a capturar-ho">
-<!ENTITY sb.locate "Selecciona-ho a l'arbre de la barra lateral">
-<!ENTITY sb.indicators "Mostra els indicadors d'enllaços">
+<!ENTITY sb.locate "Selecciona-ho a l&apos;arbre de la barra lateral">
+<!ENTITY sb.indicators "Mostra els indicadors d&apos;enllaços">
 <!ENTITY sb.info.home "Inici">
 <!ENTITY sb.info.sitemap "Mapa web">

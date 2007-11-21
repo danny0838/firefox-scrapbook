@@ -4,11 +4,14 @@ tree {
 	-moz-appearance: listbox;
 }
 
-tree#sbTradeTree treechildren::-moz-tree-image(sbTradeTreeColTitle)
-{
+tree#sbTradeTree treechildren::-moz-tree-image(sbTradeTreeColTitle) {
 	-moz-image-region: auto !important;
 	width: 16px; height: 16px;
 	margin-right: 3px;
+}
+
+tree#sbTradeTree treechildren::-moz-tree-cell-text(separator) {
+	color: GrayText;
 }
 
 #sbTradeLog {
@@ -19,7 +22,7 @@ tree#sbTradeTree treechildren::-moz-tree-image(sbTradeTreeColTitle)
 #sbTradeIcon {
 	width: 16px;
 	height: 16px;
-	margin-left:5px;
+	margin-left: 5px;
 }
 
 

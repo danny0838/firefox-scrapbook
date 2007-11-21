@@ -6,12 +6,13 @@
 <!ENTITY sb.capture.frame.as "Kaappaa kehys nimellä">
 <!ENTITY sb.capture.target "Kaappaa kohde">
 <!ENTITY sb.capture.target.as "Kaappaa kohde nimellä">
-<!ENTITY sb.capture.folder.root "Juurikansio">
-<!ENTITY sb.capture.folder.select "Valitse kansio">
 <!ENTITY sb.capture.alltabs "Kaappaa kaikki välilehdet">
 <!ENTITY sb.capture.bookmark "Lisää kirjanmerkki ScrapBookiin">
+<!ENTITY sb.sidebar "Show in Sidebar">
+<!ENTITY sb.menu "Menu">
 <!ENTITY sb.editbefore "Muokkaa ennen kaappausta">
 <!ENTITY sb.key.sidebar "C">
 <!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">
 <!ENTITY sb.key.capture.as "K">
+<!ENTITY sb.key.bookmark "J">

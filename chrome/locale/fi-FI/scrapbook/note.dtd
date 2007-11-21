@@ -10,3 +10,10 @@
 <!ENTITY sb.note.help "Ohje">
 <!ENTITY sb.note.print "Tulosta">
 <!ENTITY sb.note.exit "Lopeta">
+<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "N">
+<!ENTITY sb.note.tools.accesskey "T">
+<!ENTITY sb.note.fontsize.accesskey "F">
+<!ENTITY sb.note.print.accesskey "P">
+<!ENTITY sb.note.exit.accesskey "X">

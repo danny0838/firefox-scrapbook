@@ -1,155 +1,154 @@
 
-var gArguments;
-var gCustomCheckbox;
-var gInDepthLevel = 0;
-var gRenewResource;
+var sbCaptureOptions = {
 
+	get CUSTOM_UI() { return document.getElementById("sbDetailCustom"); },
+	get WARNING_UI(){ return document.getElementById("sbDetailWarnAboutScript"); },
 
-
-function SB_initDetail()
-{
-	if ( !window.arguments || !("sbContentSaver" in window.opener) ) window.close();
-	gArguments = window.arguments[0];
-	gCustomCheckbox = document.getElementById("sbDetailCustom");
-	SB_toggleLinkedCustom();
-	gCustomCheckbox.nextSibling.value = nsPreferences.copyUnicharPref("scrapbook.detail.custom", "pdf, doc");
-	document.documentElement.getButton("accept").label = document.getElementById("sbMainString").getString("CAPTURE_OK_BUTTON");
-	document.documentElement.getButton("accept").accesskey = "C";
-	SB_fillTitleList();
-	if ( window.opener.sbContentSaver.item.source.indexOf("http://mail.google.com/") == 0 )
-	{
-		document.getElementById("sbDetailOptionScript").disabled = true;
-	}
-	sbDetailWarnService.init();
-	if ( gArguments.context == "renew" || gArguments.context == "renew-deep" )
-	{
-		document.getElementById("sbDetailFolderRow").collapsed = true;
-		document.getElementById("sbDetailWarnAboutRenew").hidden = false;
-		if ( gArguments.context == "renew-deep" )
-		{
-			document.getElementById("sbDetailInDepthBox").collapsed = true;
-		}
-		return;
-	}
-	setTimeout(function(){ sbFolderSelector.init(); }, 100);
-	document.getElementById("sbDetailComment").value = window.opener.sbContentSaver.item.comment.replace(/ __BR__ /g, "\n");
-}
-
-
-function SB_toggleLinkedCustom()
-{
-	gCustomCheckbox.nextSibling.disabled = !gCustomCheckbox.checked;
-}
-
-
-var sbDetailWarnService = {
-
-	get ELEMENT(){ return document.getElementById("sbDetailWarnAboutScript"); },
-	offset : 0,
+	param : null,
+	inDepth : 0,
 
 	init : function()
 	{
-		this.offset = this.ELEMENT.boxObject.height;
-		if ( !this.offset ) this.offset = 32;
-		this.ELEMENT.hidden = true;
-	},
-
-	toggle : function ()
-	{
-		this.ELEMENT.hidden = !this.ELEMENT.hidden;
-		this.ELEMENT.hidden ? window.outerHeight -= this.offset : window.outerHeight += this.offset;
-	},
-};
-
-
-function SB_promptForDepth()
-{
-	var depth = window.prompt(
-		document.getElementById("sbDetailInDepthLabel").value, gInDepthLevel, document.getElementById("sbDetailInDepthBox").firstChild.label
-	);
-	if ( depth && !isNaN(depth) && depth >= 0 && depth < 100 )
-	{
-		gInDepthLevel = parseInt(depth, 10);
-		if ( gInDepthLevel <= 3 )
-			document.getElementById("sbDetailInDepthRadioGroup").selectedIndex = gInDepthLevel;
+		if ( !window.arguments || !("sbContentSaver" in window.opener) ) window.close();
+		this.param = window.arguments[0];
+		this.toggleCustomUI();
+		this.CUSTOM_UI.nextSibling.value = sbCommonUtils.copyUnicharPref("scrapbook.detail.custom", "pdf, doc");
+		if ( this.param.context == "bookmark" )
+		{
+			document.title = "ScrapBook - " + window.opener.document.getElementById("ScrapBookContextMenuB").label.replace("...","");
+		}
 		else
-			document.getElementById("sbDetailInDepthRadioGroup").selectedItem.setAttribute("selected", false);
-	}
-}
+		{
+			document.documentElement.getButton("accept").label = document.getElementById("sbMainString").getString("CAPTURE_OK_BUTTON");
+			document.documentElement.getButton("accept").accesskey = "C";
+		}
+		this.fillTitleList();
+		if ( this.param.item.source.indexOf("://mail.google.com/") > 0 )
+		{
+			document.getElementById("sbDetailOptionScript").disabled = true;
+		}
+		var offset = this.WARNING_UI.boxObject.height || 32;
+		this.WARNING_UI.setAttribute("offset", offset);
+		this.WARNING_UI.hidden = true;
+		if ( this.param.context == "bookmark" )
+		{
+			var elts = document.getElementsByAttribute("group", "capture-options");
+			for ( var i = 0; i < elts.length; i++ ) elts[i].collapsed = true;
+		}
+		else if ( this.param.context == "capture-again" || this.param.context == "capture-again-deep" )
+		{
+			document.getElementById("sbDetailFolderRow").collapsed = true;
+			document.getElementById("sbDetailWarnAboutRenew").hidden = false;
+			document.getElementById("sbDetailComment").collapsed = true;
+			if ( this.param.context == "capture-again-deep" )
+			{
+				document.getElementById("sbDetailInDepthBox").collapsed = true;
+			}
+			return;
+		}
+		setTimeout(function(){ sbFolderSelector.init(); }, 100);
+		document.getElementById("sbDetailComment").value = this.param.item.comment.replace(/ __BR__ /g, "\n");
+	},
 
-
-function SB_fillTitleList()
-{
-	var isPartial = (gArguments.titleList.length > 1);
-	var listXUL = document.getElementById("sbDetailTitle");
-	if ( gArguments.context == "renew" )
+	toggleCustomUI : function()
 	{
-		sbDataSource.init();
-		gRenewResource = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + window.opener.sbContentSaver.item.id);
-		listXUL.appendItem(sbDataSource.getProperty(gRenewResource, "title"));
-	}
-	for ( var i = 0; i < gArguments.titleList.length; i++ )
+		this.CUSTOM_UI.nextSibling.disabled = !this.CUSTOM_UI.checked;
+	},
+
+	toggleWarningUI : function()
 	{
-		listXUL.appendItem(gArguments.titleList[i]);
-		if ( i == 0 && gArguments.titleList.length > 1 ) listXUL.firstChild.appendChild(document.createElement("menuseparator"));
-	}
-	listXUL.selectedIndex = isPartial ? 2 : 0;
-}
+		var offset = parseInt(this.WARNING_UI.getAttribute("offset"), 10);
+		this.WARNING_UI.hidden = !this.WARNING_UI.hidden;
+		this.WARNING_UI.hidden ? window.outerHeight -= offset : window.outerHeight += offset;
+	},
 
-
-function SB_acceptDetail()
-{
-	window.opener.sbContentSaver.item.comment      = sbCommonUtils.escapeComment(document.getElementById("sbDetailComment").value);
-	window.opener.sbContentSaver.item.title        = document.getElementById("sbDetailTitle").value;
-	window.opener.sbContentSaver.option["images"]  = document.getElementById("sbDetailOptionImages").checked;
-	window.opener.sbContentSaver.option["styles"]  = document.getElementById("sbDetailOptionStyles").checked;
-	window.opener.sbContentSaver.option["script"]  = document.getElementById("sbDetailOptionScript").checked;
-	window.opener.sbContentSaver.option["dlimg"]   = document.getElementById("sbDetailImage").checked;
-	window.opener.sbContentSaver.option["dlsnd"]   = document.getElementById("sbDetailSound").checked;
-	window.opener.sbContentSaver.option["dlmov"]   = document.getElementById("sbDetailMovie").checked;
-	window.opener.sbContentSaver.option["dlarc"]   = document.getElementById("sbDetailArchive").checked;
-	window.opener.sbContentSaver.option["inDepth"] = gInDepthLevel;
-	window.opener.sbContentSaver.option["custom"] = "";
-	if ( gCustomCheckbox.checked )
+	fillTitleList : function()
 	{
-		window.opener.sbContentSaver.option["custom"] = gCustomCheckbox.nextSibling.value.replace(/[^0-9a-zA-Z,\|]/g, "").replace(/[,\|]/g, ", ");
-		nsPreferences.setUnicharPref("scrapbook.detail.custom", window.opener.sbContentSaver.option["custom"]);
-	}
-	if ( gArguments.context == "renew" )
+		var isPartial = this.param.titles.length > 1;
+		var list = document.getElementById("sbDetailTitle");
+		if ( this.param.context == "capture-again" )
+		{
+			sbDataSource.init();
+			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
+			list.appendItem(sbDataSource.getProperty(res, "title"));
+		}
+		for ( var i = 0; i < this.param.titles.length; i++ )
+		{
+			list.appendItem(this.param.titles[i]);
+			if ( i == 0 && this.param.titles.length > 1 ) list.firstChild.appendChild(document.createElement("menuseparator"));
+		}
+		list.selectedIndex = isPartial ? 2 : 0;
+	},
+
+	promptInDepth : function()
 	{
-		sbDataSource.setProperty(gRenewResource, "title", document.getElementById("sbDetailTitle").value);
-	}
-}
+		var ret = window.prompt(
+			document.getElementById("sbDetailInDepthLabel").value, this.inDepth, document.getElementById("sbDetailInDepthBox").firstChild.label
+		);
+		if ( ret && !isNaN(ret) && ret >= 0 && ret < 100 )
+		{
+			this.inDepth = parseInt(ret, 10);
+			if ( this.inDepth <= 3 )
+				document.getElementById("sbDetailInDepthRadioGroup").selectedIndex = this.inDepth;
+			else
+				document.getElementById("sbDetailInDepthRadioGroup").selectedItem.setAttribute("selected", false);
+		}
+	},
 
+	accept : function()
+	{
+		this.param.item.comment      = sbCommonUtils.escapeComment(document.getElementById("sbDetailComment").value);
+		this.param.item.title        = document.getElementById("sbDetailTitle").value;
+		this.param.option["images"]  = document.getElementById("sbDetailOptionImages").checked;
+		this.param.option["styles"]  = document.getElementById("sbDetailOptionStyles").checked;
+		this.param.option["script"]  = document.getElementById("sbDetailOptionScript").checked;
+		this.param.option["dlimg"]   = document.getElementById("sbDetailImage").checked;
+		this.param.option["dlsnd"]   = document.getElementById("sbDetailSound").checked;
+		this.param.option["dlmov"]   = document.getElementById("sbDetailMovie").checked;
+		this.param.option["dlarc"]   = document.getElementById("sbDetailArchive").checked;
+		this.param.option["inDepth"] = this.inDepth;
+		this.param.option["custom"] = "";
+		if ( this.CUSTOM_UI.checked )
+		{
+			this.param.option["custom"] = this.CUSTOM_UI.nextSibling.value.replace(/[^0-9a-zA-Z,\|]/g, "").replace(/[,\|]/g, ", ");
+			sbCommonUtils.setUnicharPref("scrapbook.detail.custom", this.param.option["custom"]);
+		}
+		if ( this.param.context == "capture-again" )
+		{
+			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
+			sbDataSource.setProperty(res, "title", document.getElementById("sbDetailTitle").value);
+		}
+	},
 
-function SB_cancelDetail()
-{
-	gArguments.cancel = true;
-}
+	cancel : function()
+	{
+		this.param.result = 0;
+	},
+
+};
 
 
 
 
 var sbFolderSelector = {
 
-	get STRING()     { return document.getElementById("sbMainString"); },
 	get MENU_LIST()  { return document.getElementById("sbFolderList"); },
 	get MENU_POPUP() { return document.getElementById("sbFolderPopup"); },
 
-	depth : 0,
+	nest : 0,
 
 	init : function()
 	{
 		if ( !sbDataSource.data ) sbDataSource.init();
-		if ( !gArguments.resName ) gArguments.resName = "urn:scrapbook:root";
-		this.refresh(gArguments.resName, true);
+		if ( !sbCaptureOptions.param.resURI ) sbCaptureOptions.param.resURI = "urn:scrapbook:root";
+		this.refresh(sbCaptureOptions.param.resURI);
 	},
 
-	refresh : function(aResID, shouldUpdate)
+	refresh : function(aResID)
 	{
-		if ( shouldUpdate )
+		if ( document.getElementById(aResID) == null )
 		{
-			this.depth = 0;
+			this.nest = 0;
 			this.clear();
 			this.processRecent();
 			this.processRoot();
@@ -173,37 +172,41 @@ var sbFolderSelector = {
 		var item = document.createElement("menuitem");
 		item.setAttribute("id",    aID);
 		item.setAttribute("label", aTitle);
-		item.setAttribute("depth", this.depth);
+		item.setAttribute("nest", this.nest);
 		item.setAttribute("class", "menuitem-iconic folder-icon");
-		item.setAttribute("style", "padding-left:" + (20 * this.depth + 3) + "px;");
+		item.setAttribute("style", "padding-left:" + (20 * this.nest + 3) + "px;");
 		this.MENU_POPUP.appendChild(item);
 	},
 
 	processRoot : function()
 	{
-		this.fill("urn:scrapbook:root", this.STRING.getString("ROOT_FOLDER"));
+		this.fill("urn:scrapbook:root", document.getElementById("sbMainString").getString("ROOT_FOLDER"));
 		this.MENU_POPUP.appendChild(document.createElement("menuseparator"));
 	},
 
-	processRecent : function()
+	processRecent: function()
 	{
-		var ids = nsPreferences.copyUnicharPref("scrapbook.tree.folderList", "");
+		var ids = sbCommonUtils.copyUnicharPref("scrapbook.ui.folderList", "");
 		ids = ids ? ids.split("|") : [];
-		var flag = false;
-		for ( var i = 0; i < ids.length; i++ )
+		var shownItems = 0;
+		for (var i = 0; i < ids.length; i++)
 		{
-			if ( ids[i].length != 14 ) continue;
+			if (ids[i].length != 14)
+				continue;
 			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + ids[i]);
-			if ( !sbDataSource.exists(res) ) continue;
-			flag = true;
+			if (!sbDataSource.exists(res))
+				continue;
 			this.fill(res.Value, sbDataSource.getProperty(res, "title"));
+			if (++shownItems >= 7)
+				break;
 		}
-		if ( flag ) this.MENU_POPUP.appendChild(document.createElement("menuseparator"));
+		if (shownItems > 0)
+			this.MENU_POPUP.appendChild(document.createElement("menuseparator"));
 	},
 
 	processRecursive : function(aContRes)
 	{
-		this.depth++;
+		this.nest++;
 		var resList = sbDataSource.flattenResources(aContRes, 1, false);
 		resList.shift();
 		for ( var i = 0; i < resList.length; i++ )
@@ -212,16 +215,16 @@ var sbFolderSelector = {
 			this.fill(res.Value, sbDataSource.getProperty(res, "title"));
 			this.processRecursive(res);
 		}
-		this.depth--;
+		this.nest--;
 	},
 
 	createFolder : function()
 	{
 		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
 		var newItem = sbCommonUtils.newItem(newID);
-		newItem.title = this.STRING.getString("DEFAULT_FOLDER");
+		newItem.title = document.getElementById("sbMainString").getString("DEFAULT_FOLDER");
 		newItem.type = "folder";
-		var tarResName = this.MENU_LIST.selectedItem.getAttribute("depth") > 0 ? this.MENU_LIST.selectedItem.id : "urn:scrapbook:root";
+		var tarResName = this.MENU_LIST.selectedItem.getAttribute("nest") > 0 ? this.MENU_LIST.selectedItem.id : "urn:scrapbook:root";
 		var newRes = sbDataSource.addItem(newItem, tarResName, 0);
 		sbDataSource.createEmptySeq(newRes.Value);
 		var result = {};
@@ -233,60 +236,31 @@ var sbFolderSelector = {
 		}
 		else
 		{
-			this.refresh(newRes.Value, true);
-			this.onSelect(newRes.Value);
+			this.refresh(newRes.Value);
+			this.onChange(newRes.Value);
 		}
 	},
 
-	onSelect : function(aResID)
+	onChange : function(aResURI)
 	{
-		gArguments.resName = aResID;
-		gArguments.change  = true;
+		sbCaptureOptions.param.resURI = aResURI;
+		sbCaptureOptions.param.result = 2;
 	},
 
-	selectTop : function()
+	onMiddleClick : function()
 	{
 		this.MENU_LIST.selectedIndex = 0;
-		this.onSelect(this.MENU_LIST.selectedItem.id);
+		this.onChange(this.MENU_LIST.selectedItem.id);
 	},
 
-	openFolderPicker : function()
+	pick : function()
 	{
-		var result = {};
-		window.openDialog('chrome://scrapbook/content/folderPicker.xul','','modal,chrome,centerscreen,resizable=yes',result);
-		if ( result.target )
+		var ret = {};
+		window.openDialog('chrome://scrapbook/content/folderPicker.xul','','modal,chrome,centerscreen,resizable=yes', ret, sbCaptureOptions.param.resURI);
+		if ( ret.resource )
 		{
-			this.refresh(result.target.Value, result.shouldUpdate);
-			this.onSelect(result.target.Value);
-		}
-	},
-
-};
-
-
-
-
-var sbFolderSelector2 = {
-
-	get STRING()     { return document.getElementById("sbMainString"); },
-	get TEXTBOX()    { return document.getElementById("sbFolderTextbox"); },
-	get selection()  { return this.TEXTBOX.getAttribute("folder"); },
-
-	init : function()
-	{
-		if ( !sbDataSource.data ) sbDataSource.init();
-		this.TEXTBOX.value = this.STRING.getString("ROOT_FOLDER");
-		this.TEXTBOX.setAttribute("folder", "urn:scrapbook:root");
-	},
-
-	openFolderPicker : function()
-	{
-		var result = {};
-		window.openDialog('chrome://scrapbook/content/folderPicker.xul','','modal,chrome,centerscreen,resizable=yes',result);
-		if ( result.target )
-		{
-			this.TEXTBOX.value = result.target.Value == "urn:scrapbook:root" ? this.STRING.getString("ROOT_FOLDER") : sbDataSource.getProperty(result.target, "title");
-			this.TEXTBOX.setAttribute("folder", result.target.Value);
+			this.refresh(ret.resource.Value);
+			this.onChange(ret.resource.Value);
 		}
 	},
 

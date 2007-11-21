@@ -4,77 +4,61 @@
 
 /* ::::: MAIN TOOLBAR BUTTON ::::: */
 
+#scrapbook-menu,
 #scrapbook-button {
 	list-style-image: url("chrome://scrapbook/skin/main_24.png");
 }
 
+toolbar#toolbar-menubar #scrapbook-menu,
+toolbar#PersonalToolbar #scrapbook-menu,
+toolbar[iconsize="small"] #scrapbook-menu,
 toolbar[iconsize="small"] #scrapbook-button {
 	list-style-image: url("chrome://scrapbook/skin/main_16.png");
+}
+
+toolbar > #scrapbook-menu > label {
+	display: none;
 }
 
 
 /* ::::: CONTEXT_MENU ::::: */
 
-menuitem.sb-capture-partial,
-    menu#ScrapBookContextMenu1 { list-style-image: url('chrome://scrapbook/skin/capture_partial.png'); }
-menuitem.sb-capture-partial-as,
-menuitem#ScrapBookContextMenu2 { list-style-image: url('chrome://scrapbook/skin/capture_partial_as.png'); }
-menuitem.sb-capture-entire,
-    menu#ScrapBookContextMenu3 { list-style-image: url('chrome://scrapbook/skin/capture_entire.png'); }
-menuitem.sb-capture-entire-as,
-menuitem#ScrapBookMenubarItem3,
-menuitem#ScrapBookContextMenu4 { list-style-image: url('chrome://scrapbook/skin/capture_entire_as.png'); }
-    menu#ScrapBookContextMenu5 { list-style-image: url('chrome://scrapbook/skin/capture_frame.png'); }
-menuitem#ScrapBookContextMenu6 { list-style-image: url('chrome://scrapbook/skin/capture_frame_as.png'); }
-menuitem#ScrapBookStatusPopupR,
-    menu#ScrapBookContextMenu7 { list-style-image: url('chrome://scrapbook/skin/capture_target.png'); }
-menuitem#ScrapBookStatusPopupA,
-menuitem#ScrapBookContextMenu8 { list-style-image: url('chrome://scrapbook/skin/capture_target_as.png'); }
+.sb-capture-partial { list-style-image: url('chrome://scrapbook/skin/capture_partial.png'); }
+.sb-capture-entire  { list-style-image: url('chrome://scrapbook/skin/capture_entire.png'); }
+.sb-capture-target  { list-style-image: url('chrome://scrapbook/skin/capture_target.png'); }
+.sb-capture-frame   { list-style-image: url('chrome://scrapbook/skin/capture_frame.png'); }
 
-    menu#ScrapBookContextMenu1 > .menu-iconic-left image,
-    menu#ScrapBookContextMenu3 > .menu-iconic-left image,
-    menu#ScrapBookContextMenu5 > .menu-iconic-left image,
-    menu#ScrapBookContextMenu7 > .menu-iconic-left image,
-menuitem#ScrapBookContextMenu2   .menu-iconic-icon,
-menuitem#ScrapBookContextMenu4   .menu-iconic-icon,
-menuitem#ScrapBookContextMenu6   .menu-iconic-icon,
-menuitem#ScrapBookContextMenu8   .menu-iconic-icon,
-menuitem#ScrapBookMenubarItem1   .menu-iconic-icon,
-menuitem#ScrapBookMenubarItem2   .menu-iconic-icon,
-menuitem#ScrapBookMenubarItem3   .menu-iconic-icon,
-menuitem#ScrapBookStatusPopupR   .menu-iconic-icon,
-menuitem#ScrapBookStatusPopupA   .menu-iconic-icon {
-	width : 13px !important;
-	height: 13px !important;
-}
+.sb-capture-partial > .menu-iconic-left image,
+.sb-capture-entire  > .menu-iconic-left image,
+.sb-capture-target  > .menu-iconic-left image,
+.sb-capture-frame   > .menu-iconic-left image { width : 13px !important; height: 13px !important; }
 
 
 /* ::::: MENUBAR ::::: */
 
-menu#ScrapBookMenu menuitem {
+#scrapbook-menu menuitem {
 	max-width: 250px;
 }
 
-menu#ScrapBookMenu menuitem.sb-item {
+#scrapbook-menu menuitem.sb-item {
 	list-style-image: url('chrome://scrapbook/skin/treeitem.png') !important;
 }
 
-menu#ScrapBookMenu menuitem.sb-item[sbtype="note"] {
+#scrapbook-menu menuitem.sb-item[sbtype="note"] {
 	list-style-image: url('chrome://scrapbook/skin/treenote.png') !important;
 }
 
-menu#ScrapBookMenu menuitem.sb-item[sbtype="marked"] {
+#scrapbook-menu menuitem.sb-item[sbtype="marked"] {
 	font-weight: bold;
 }
 
-menu#ScrapBookMenu menuitem.sb-item[sbtype="combine"] {
+#scrapbook-menu menuitem.sb-item[sbtype="combine"] {
 	color: blue;
 }
 
-menu#ScrapBookMenu menuitem.sb-item[sbtype="bookmark"] {
+#scrapbook-menu menuitem.sb-item[sbtype="bookmark"] {
 	color: rgb(32,192,32);
 }
-
 
 
 /* ::::: EDITOR / INFOBAR ::::: */
@@ -98,7 +82,7 @@ toolbox#ScrapBookToolbox toolbarbutton[type="menu-button"] .toolbarbutton-icon {
 }
 
 toolbox#ScrapBookToolbox textbox {
-	height: 1.9em;
+	min-height: 2em;
 }
 
 
@@ -127,6 +111,7 @@ toolbar#ScrapBookEditor #ScrapBookHighlighter menupopup {
 toolbar#ScrapBookInfobar {
 	background-color: InfoBackground;
 	padding-left: 8px;
+	border-top: 1px solid ThreeDShadow !important;
 }
 
 toolbar#ScrapBookInfobar label {

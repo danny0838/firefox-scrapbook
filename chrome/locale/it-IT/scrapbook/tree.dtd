@@ -12,22 +12,22 @@
 <!ENTITY sb.property "Proprietà">
 <!ENTITY sb.listview "Visualizza la lista">
 <!ENTITY sb.prop.title "Titolo">
-<!ENTITY sb.prop.comment "Commento">
+<!ENTITY sb.prop.comment "Commenti">
 <!ENTITY sb.prop.id.date "ID (Data/ora)">
-<!ENTITY sb.folder.toggle "Espandi/Contrai">
 <!ENTITY sb.folder.combine "Visualizzazione combinata">
 <!ENTITY sb.folder.openall "Apri tutto in schede">
-<!ENTITY sb.folder.manage "Gestisci cartella...">
-<!ENTITY sb.new.folder "Nuova cartella...">
+<!ENTITY sb.folder.manage "Gestisci cartella">
+<!ENTITY sb.new.folder "Nuova cartella">
+<!ENTITY sb.new.separator "Nuovo separatore">
 <!ENTITY sb.new.note "Nuova nota">
 <!ENTITY sb.sort.folder "Ordina la cartella">
 <!ENTITY sb.search "Cerca">
 <!ENTITY sb.search.fulltext "Cerca parole intere">
 <!ENTITY sb.search.all "Tutto">
-<!ENTITY sb.search.re "Usa le espressioni regolari">
-<!ENTITY sb.search.cs "Maiuscolo/minuscolo">
+<!ENTITY sb.search.re "Utilizza le espressioni regolari">
+<!ENTITY sb.search.cs "Maiuscole/minuscole">
 <!ENTITY sb.search.cache "Aggiorna cache per la ricerca testo pieno">
 <!ENTITY sb.search.clear "Elimina cronologia moduli">
 <!ENTITY sb.search.days "Filtra in base ai giorni">
-<!ENTITY mb.configure "Configura">
+<!ENTITY mb.manage "Gestione">
 <!ENTITY mb.profileFolder "Cartella del profilo">

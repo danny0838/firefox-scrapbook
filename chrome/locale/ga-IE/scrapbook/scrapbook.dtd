@@ -1,8 +1,9 @@
-<!ENTITY sb.new.folder "Comhadlann Nua...">
+<!ENTITY sb.new.folder "Comhadlann Nua">
+<!ENTITY sb.new.separator "New Separator">
 <!ENTITY sb.new.note "N&#243;ta Nua">
-<!ENTITY sb.toggle.all "Leathnaigh/Leacaigh gach Comhadlann">
+<!ENTITY sb.toggle.all "Open/close All Folders">
 <!ENTITY sb.tools "Uirlis&#237;">
-<!ENTITY sb.tools.settings "Socraithe">
+<!ENTITY sb.tools.options "Socraithe">
 <!ENTITY sb.tools.manage "Bainist&#237;ocht">
 <!ENTITY sb.tools.combine "Combine Wizard">
 <!ENTITY sb.tools.trade "Iomp&#243;rt&#225;il / Easport&#225;il">
@@ -13,8 +14,6 @@
 <!ENTITY sb.tools.output "Easp&#243;rt&#225;il Crann mar HTML">
 <!ENTITY sb.tools.repair "Deisi&#250; &#233;igeand&#225;la">
 <!ENTITY sb.tools.addons "Add-on Functions">
-<!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Bunleathanach">
-<!ENTITY sb.tools.about "Eolas">
 <!ENTITY sb.note.opentab "Oscail i T&#225;b">
 <!ENTITY sb.note.close "D&#250;n">

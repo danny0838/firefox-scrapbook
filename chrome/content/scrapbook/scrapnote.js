@@ -57,7 +57,7 @@ var sbNoteService = {
 		this.TEXTBOX.mInputField.focus();
 		try { this.TEXTBOX.editor.transactionManager.clear(); } catch(ex) {}
 		document.getElementById("sbNoteLabel").value = sbDataSource.getProperty(this.resource, "title");
-		if ( !this.sidebarContext ) sbNoteService2.refresh();
+		if ( !this.sidebarContext ) setTimeout(function(){ sbNoteService2.refreshTab(); }, 0);
 	},
 
 	save : function()
@@ -91,9 +91,9 @@ var sbNoteService = {
 	open : function(aRes, aTabbed)
 	{
 		if ( !("gBrowser" in window.top) ) aTabbed = true;
-		if ( !aTabbed && window.top._content.sbNoteService )
+		if ( !aTabbed && window.top.content.sbNoteService )
 		{
-			window.top._content.sbNoteService.edit(aRes);
+			window.top.content.sbNoteService.edit(aRes);
 		}
 		else
 		{

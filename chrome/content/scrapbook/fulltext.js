@@ -42,9 +42,7 @@ var sbSearchResult =
 
 	exec : function()
 	{
-		var qs = document.location.href.match(/result\.xul\?(.*)$/);
-		qs = RegExp.$1;
-		var qa = qs.split("&");
+		var qa = document.location.search.substring(1).split("&");
 		for ( var i = 0; i < qa.length; i++ )
 		{
 			this.QueryStrings[qa[i].split("=")[0]] = qa[i].split("=")[1];
@@ -270,7 +268,7 @@ var sbSearchResult =
 			case "P" : window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome" ,id); break;
 			case "L" : 
 				var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + sbSearchResult.CURRENT_TREEITEM[5]);
-				sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser").sbBrowserOverlay.locate(res);
+				sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser").sbBrowserOverlay.execLocate(res);
 				break;
 			default  : document.getElementById("sbBrowser").loadURI(url); break;
 		}
@@ -425,7 +423,7 @@ var sbCacheService = {
 
 	convertHTML2Text : function(aStr)
 	{
-		var	FORMAT_CONVERTER = Components.classes['@mozilla.org/widget/htmlformatconverter;1'].createInstance(Components.interfaces.nsIFormatConverter);
+		var FORMAT_CONVERTER = Components.classes['@mozilla.org/widget/htmlformatconverter;1'].createInstance(Components.interfaces.nsIFormatConverter);
 		var fromStr = Components.classes['@mozilla.org/supports-string;1'].createInstance(Components.interfaces.nsISupportsString);
 		var toStr   = { value: null };
 		fromStr.data = aStr;

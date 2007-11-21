@@ -1,14 +1,18 @@
 
 var gID;
 var gRes;
+var sbDataSource;
 
 
 
 function SB_initView()
 {
-	gID = document.location.href.match(/\?id\=(\d{14})$/);
+	document.location.search.match(/\?id\=(\d{14})$/);
 	gID = RegExp.$1;
-	sbDataSource.init();
+	if ( !gID ) return;
+	var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
+	if ( !win ) return;
+	sbDataSource = win.sbDataSource;
 	gRes = sbCommonUtils.RDF.GetResource(gID ? "urn:scrapbook:item" + gID : "urn:scrapbook:root");
 	if ( !sbDataSource.isContainer(gRes) )
 	{

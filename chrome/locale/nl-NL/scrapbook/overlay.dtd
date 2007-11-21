@@ -6,12 +6,13 @@
 <!ENTITY sb.capture.frame.as "Deelvenster bewaren als">
 <!ENTITY sb.capture.target "Koppeling bewaren">
 <!ENTITY sb.capture.target.as "Koppeling bewaren als">
-<!ENTITY sb.capture.folder.root "Hoofdmap">
-<!ENTITY sb.capture.folder.select "Map kiezen">
 <!ENTITY sb.capture.alltabs "Capture All Tabs">
 <!ENTITY sb.capture.bookmark "Bookmark with ScrapBook">
+<!ENTITY sb.sidebar "Show in Sidebar">
+<!ENTITY sb.menu "Menu">
 <!ENTITY sb.editbefore "Edit Before Capture">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">
 <!ENTITY sb.key.capture.as "K">
+<!ENTITY sb.key.bookmark "J">

@@ -14,11 +14,11 @@
 <!ENTITY sb.prop.title "标题">
 <!ENTITY sb.prop.comment "注释">
 <!ENTITY sb.prop.id.date "ID (时间)">
-<!ENTITY sb.folder.toggle "展开/折叠文件夹">
 <!ENTITY sb.folder.combine "合并在同一标签页中打开">
 <!ENTITY sb.folder.openall "在标签页中打开所有项目">
-<!ENTITY sb.folder.manage "管理文件夹...">
-<!ENTITY sb.new.folder "新建文件夹...">
+<!ENTITY sb.folder.manage "管理文件夹">
+<!ENTITY sb.new.folder "新建文件夹">
+<!ENTITY sb.new.separator "新建分隔线">
 <!ENTITY sb.new.note "新建便签">
 <!ENTITY sb.sort.folder "排列项目列表">
 <!ENTITY sb.search "搜索">
@@ -29,5 +29,5 @@
 <!ENTITY sb.search.cache "更新全文搜索缓存">
 <!ENTITY sb.search.clear "清空搜索历史记录">
 <!ENTITY sb.search.days "按时间段过滤查寻">
-<!ENTITY mb.configure "设置">
+<!ENTITY mb.manage "管理">
 <!ENTITY mb.profileFolder "配置文件夹">

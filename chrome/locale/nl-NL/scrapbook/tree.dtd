@@ -14,11 +14,11 @@
 <!ENTITY sb.prop.title "Titel">
 <!ENTITY sb.prop.comment "Commentaar">
 <!ENTITY sb.prop.id.date "ID (Tijd)">
-<!ENTITY sb.folder.toggle "Uitvouwen/Inklappen">
 <!ENTITY sb.folder.combine "Gecombineerd scherm">
 <!ENTITY sb.folder.openall "Alles in tabbladen openen">
-<!ENTITY sb.folder.manage "Map Beheren...">
-<!ENTITY sb.new.folder "Nieuwe map...">
+<!ENTITY sb.folder.manage "Map Beheren">
+<!ENTITY sb.new.folder "Nieuwe map">
+<!ENTITY sb.new.separator "New Separator">
 <!ENTITY sb.new.note "Nieuwe notitie">
 <!ENTITY sb.sort.folder "Map sorteren">
 <!ENTITY sb.search "Zoeken">
@@ -29,5 +29,5 @@
 <!ENTITY sb.search.cache "Buffer voor doorzoeken volledige tekst bijwerken">
 <!ENTITY sb.search.clear "Formulierengeschiedenis wissen">
 <!ENTITY sb.search.days "Op dagen filteren">
-<!ENTITY mb.configure "Configure">
+<!ENTITY mb.manage "Manage">
 <!ENTITY mb.profileFolder "Profile Folder">

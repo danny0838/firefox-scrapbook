@@ -6,12 +6,13 @@
 <!ENTITY sb.capture.frame.as "Cattura riquadro con nome">
 <!ENTITY sb.capture.target "Cattura link">
 <!ENTITY sb.capture.target.as "Cattura link con nome">
-<!ENTITY sb.capture.folder.root "Cartella principale">
-<!ENTITY sb.capture.folder.select "Seleziona cartella">
 <!ENTITY sb.capture.alltabs "Cattura tutte le schede">
 <!ENTITY sb.capture.bookmark "Nei segnalibri con ScrapBook">
+<!ENTITY sb.sidebar "Mostra nella barra laterale">
+<!ENTITY sb.menu "Menu">
 <!ENTITY sb.editbefore "Modifica prima di catturare">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "B">
 <!ENTITY sb.key.capture "C">
 <!ENTITY sb.key.capture.as "O">
+<!ENTITY sb.key.bookmark "J">

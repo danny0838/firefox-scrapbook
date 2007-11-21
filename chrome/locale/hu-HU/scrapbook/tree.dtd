@@ -14,11 +14,11 @@
 <!ENTITY sb.prop.title "Név">
 <!ENTITY sb.prop.comment "Megjegyzés">
 <!ENTITY sb.prop.id.date "ID (idő)">
-<!ENTITY sb.folder.toggle "Kibontás/Összecsukás">
 <!ENTITY sb.folder.combine "Kombinált nézetben">
 <!ENTITY sb.folder.openall "Az összes megnyitása füleken">
-<!ENTITY sb.folder.manage "Mappa kezelése...">
-<!ENTITY sb.new.folder "Új mappa...">
+<!ENTITY sb.folder.manage "Mappa kezelése">
+<!ENTITY sb.new.folder "Új mappa">
+<!ENTITY sb.new.separator "New Separator">
 <!ENTITY sb.new.note "Új jegyzet">
 <!ENTITY sb.sort.folder "Mappa rendezése">
 <!ENTITY sb.search "Keresés">
@@ -29,5 +29,5 @@
 <!ENTITY sb.search.cache "A gyorsítótár frissítése a teljes szövegben kereséshez">
 <!ENTITY sb.search.clear "Törlés az előzményekből">
 <!ENTITY sb.search.days "Szűrés napok alapján">
-<!ENTITY mb.configure "Beállítások">
+<!ENTITY mb.manage "Manage">
 <!ENTITY mb.profileFolder "Profil mappa">

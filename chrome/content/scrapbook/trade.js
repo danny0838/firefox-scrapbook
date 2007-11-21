@@ -11,29 +11,6 @@ var sbTradeService = {
 	locked : false,
 	treeItems : [],
 
-	dragDropObserver : 
-	{
-		onDragStart : function(event, transferData, action)
-		{
-			if ( event.originalTarget.localName != "treechildren" ) return;
-			transferData.data = new TransferData();
-			transferData.data.addDataForFlavour("sb/tradeitem", sbTradeService.TREE.view.selection);
-		},
-		getSupportedFlavours : function()
-		{
-			var flavours = new FlavourSet();
-			flavours.appendFlavour("moz/rdfitem");
-			return flavours;
-		},
-		onDragOver : function(event, flavour, session) {},
-		onDragExit : function(event, session) {},
-		onDrop     : function(event, transferData, session)
-		{
-			if ( sbTradeService.locked ) return;
-			sbExportService.exec();
-		},
-	},
-
 
 	init : function()
 	{
@@ -63,7 +40,7 @@ var sbTradeService = {
 
 	prepareRightDir : function(aQuickMode)
 	{
-		var dirPath = nsPreferences.copyUnicharPref("scrapbook.trade.path", "");
+		var dirPath = sbCommonUtils.copyUnicharPref("scrapbook.trade.path", "");
 		if ( !dirPath )
 		{
 			this.lock(1);
@@ -72,7 +49,8 @@ var sbTradeService = {
 				this.prepareRightDir(aQuickMode);
 				return;
 			}
-			if ( aQuickMode ) window.close();
+			if (aQuickMode)
+				window.setTimeout(function() { window.close(); }, 0);
 			return;
 		}
 		this.rightDir = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
@@ -89,7 +67,8 @@ var sbTradeService = {
 		{
 			this.lock(1);
 			alert(this.STRING.getString("ERROR_INVALID_FILEPATH") + "\n" + dirPath);
-			if ( aQuickMode ) window.close();
+			if (aQuickMode)
+				window.setTimeout(function() { window.close(); }, 0);
 			return;
 		}
 		if ( aQuickMode )
@@ -99,8 +78,9 @@ var sbTradeService = {
 		else
 		{
 			if ( this.locked ) this.lock(0);
-			document.getElementById("sbTradePath").value = dirPath;
-			document.getElementById("sbTradeIcon").src = "moz-icon://" + sbCommonUtils.convertFilePathToURL(dirPath) + "?size=16";
+			var fileField = document.getElementById("sbTradePath");
+			fileField.file = this.rightDir;
+			fileField.label = dirPath;
 			this.refreshTree();
 		}
 	},
@@ -112,7 +92,7 @@ var sbTradeService = {
 		if ( this.rightDir ) picker.displayDirectory = this.rightDir;
 		var answer = picker.show();
 		if ( answer == picker.returnOK ) {
-			nsPreferences.setUnicharPref("scrapbook.trade.path", picker.file.path);
+			sbCommonUtils.setUnicharPref("scrapbook.trade.path", picker.file.path);
 			return true;
 		}
 		return false;
@@ -159,17 +139,21 @@ var sbTradeService = {
 			"sbTradeTreeColFolder",
 		];
 		var treeView = new sbCustomTreeView(colIDs, this.treeItems);
-		treeView.getImageSrc = function(row, col)
-		{
-			if ( col.index == 0 ) return this._items[row][4];
+		treeView.getImageSrc = function(row, col) {
+			if (this._items[row][7] == "separator")
+				return;
+			if (col.index == 0)
+				return this._items[row][4];
 		};
-		treeView.getCellProperties = function(row, col, properties)
-		{
-			if ( col.index == 0 ) properties.AppendElement(ATOM_SERVICE.getAtom(this._items[row][7]));
+		treeView.getCellProperties = function(row, col, properties) {
+			if (col.index == 0)
+				properties.AppendElement(ATOM_SERVICE.getAtom(this._items[row][7]));
 		};
-		treeView.cycleHeader = function(col)
-		{
+		treeView.cycleHeader = function(col) {
 			sbCustomTreeUtil.sortItems(sbTradeService, col.element);
+		};
+		treeView.isSeparator = function(row) {
+			return (this._items[row][7] == "separator");
 		};
 		this.TREE.view = treeView;
 	},
@@ -262,8 +246,14 @@ var sbTradeService = {
 
 	open : function(aTabbed)
 	{
-		if ( this.treeItems[sbCustomTreeUtil.getSelection(this.TREE)[0]][7] == "bookmark" ) return;
-		sbCommonUtils.loadURL(sbCommonUtils.convertFilePathToURL(this.rightDir.path) + this.getCurrentDirName() + "/index.html", aTabbed);
+		var idx = sbCustomTreeUtil.getSelection(this.TREE)[0];
+		var type = this.treeItems[idx][7];
+		if (type == "bookmark" || type == "separator")
+			return;
+		sbCommonUtils.loadURL(
+			sbCommonUtils.convertFilePathToURL(this.rightDir.path) + this.getCurrentDirName() + "/index.html",
+			aTabbed
+		);
 	},
 
 	browse : function()
@@ -277,7 +267,7 @@ var sbTradeService = {
 	{
 		var idxList = sbCustomTreeUtil.getSelection(this.TREE);
 		if ( idxList.length < 1 ) return;
-		if ( !nsPreferences.getBoolPref("scrapbook.tree.quickdelete", false) )
+		if ( !sbCommonUtils.getBoolPref("scrapbook.tree.quickdelete", false) )
 		{
 			if ( !window.confirm( window.top.sbMainService.STRING.getString("CONFIRM_DELETE") ) ) return;
 		}
@@ -441,7 +431,8 @@ var sbExportService = {
 				throw "Failed to copy files.";
 			}
 		}
-		if ( item.type == "bookmark" ) sbCommonUtils.removeDirSafety(srcDir);
+		if (item.type == "bookmark" || item.type == "separator")
+			sbCommonUtils.removeDirSafety(srcDir);
 	},
 
 };
@@ -530,7 +521,7 @@ var sbImportService = {
 		var destDir = sbTradeService.leftDir.clone();
 		if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) ) item.icon = "resource://scrapbook/data/" + item.id + "/" + item.icon;
 		if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(item.type);
-		if ( item.type == "bookmark" )
+		if ( item.type == "bookmark" || item.type == "separator" )
 		{
 			if ( document.getElementById("sbTradeOptionRemove").checked ) sbCommonUtils.removeDirSafety(srcDir, false);
 		}
@@ -585,5 +576,29 @@ var sbImportService = {
 
 };
 
+
+
+var gDragDropObserver = {
+
+	onDragStart: function(event, transferData, action) {
+		if (event.originalTarget.localName != "treechildren")
+			return;
+		transferData.data = new TransferData();
+		transferData.data.addDataForFlavour("sb/tradeitem", sbTradeService.TREE.view.selection);
+	},
+	getSupportedFlavours: function() {
+		var flavours = new FlavourSet();
+		flavours.appendFlavour("moz/rdfitem");
+		return flavours;
+	},
+	onDragOver: function(event, flavour, session) {},
+	onDragExit: function(event, session) {},
+	onDrop: function(event, transferData, session) {
+		if (sbTradeService.locked)
+			return;
+		sbExportService.exec();
+	},
+
+};
 
 

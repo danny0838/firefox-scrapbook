@@ -14,11 +14,11 @@
 <!ENTITY sb.prop.title "Tytuł">
 <!ENTITY sb.prop.comment "Komentarz">
 <!ENTITY sb.prop.id.date "ID (data i czas)">
-<!ENTITY sb.folder.toggle "Rozwiń/zwiń">
 <!ENTITY sb.folder.combine "Połączony widok">
 <!ENTITY sb.folder.openall "Otwórz wszystko w nowych kartach">
 <!ENTITY sb.folder.manage "Zarządzanie katalogami">
 <!ENTITY sb.new.folder "Nowy katalog">
+<!ENTITY sb.new.separator "Nowy separator">
 <!ENTITY sb.new.note "Nowa notatka">
 <!ENTITY sb.sort.folder "Sortuj katalog">
 <!ENTITY sb.search "Szukaj">
@@ -26,8 +26,8 @@
 <!ENTITY sb.search.all "Wszystko">
 <!ENTITY sb.search.re "Użyj RegExp (wyrażeń regularnych)">
 <!ENTITY sb.search.cs "Uwzględnij wielkość liter">
-<!ENTITY sb.search.cache "Szukanie wszystkich słów - uaktualnij pamięć podręczną">
+<!ENTITY sb.search.cache "Uaktualnij pamięć podręczną dla szukania wszystkich słów">
 <!ENTITY sb.search.clear "Wyczyść formularz historii">
-<!ENTITY sb.search.days "Filtrowanie wg. dni">
-<!ENTITY mb.configure "Konfiguruj">
+<!ENTITY sb.search.days "Filtrowanie wg dni">
+<!ENTITY mb.manage "Zarządzaj">
 <!ENTITY mb.profileFolder "Folder profilu">

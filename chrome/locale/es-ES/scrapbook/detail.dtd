@@ -13,5 +13,5 @@
 <!ENTITY sb.detail.linked.page "Captura de enlaces en varios niveles">
 <!ENTITY sb.detail.linked.page.depth "Nivel de profundidad de enlaces">
 <!ENTITY sb.detail.linked.page.text "Después de completar las capturas, todas las páginas estarán enlazadas entre ellas, y será creado un mapa del sitio.">
-<!ENTITY sb.detail.warnAboutRenew "NOTICE: 'Capture Again' overwrites the previously saved page.">
+<!ENTITY sb.detail.warnAboutRenew "NOTICE: &apos;Capture Again&apos; overwrites the previously saved page.">
 <!ENTITY sb.detail.warnAboutScript "NOTICE: JavaScript puede causar muchos problemas.">

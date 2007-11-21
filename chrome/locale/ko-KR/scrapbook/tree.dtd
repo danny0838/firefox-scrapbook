@@ -14,11 +14,11 @@
 <!ENTITY sb.prop.title "제목">
 <!ENTITY sb.prop.comment "주석">
 <!ENTITY sb.prop.id.date "ID (날짜)">
-<!ENTITY sb.folder.toggle "보이기/감추기">
 <!ENTITY sb.folder.combine "결합 결과">
 <!ENTITY sb.folder.openall "모두 탭으로 열기">
-<!ENTITY sb.folder.manage "폴더 관리...">
-<!ENTITY sb.new.folder "새 폴더...">
+<!ENTITY sb.folder.manage "폴더 관리">
+<!ENTITY sb.new.folder "새 폴더">
+<!ENTITY sb.new.separator "새 분리자">
 <!ENTITY sb.new.note "새 노트">
 <!ENTITY sb.sort.folder "폴더 정렬">
 <!ENTITY sb.search "검색">
@@ -29,5 +29,5 @@
 <!ENTITY sb.search.cache "전체 검색 캐시 갱신하기">
 <!ENTITY sb.search.clear "입력 목록 비우기">
 <!ENTITY sb.search.days "날짜로 필터링">
-<!ENTITY mb.configure "설정">
+<!ENTITY mb.manage "관리">
 <!ENTITY mb.profileFolder "프로필 폴더">

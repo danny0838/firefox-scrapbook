@@ -1,5 +1,5 @@
 <!ENTITY sb.sort "Ordenació">
-<!ENTITY sb.sort.reverse "Inverteix l'ordre">
+<!ENTITY sb.sort.reverse "Inverteix l&apos;ordre">
 <!ENTITY sb.sort.title.asc "Ordena per títol (A &gt; Z)">
 <!ENTITY sb.sort.title.desc "Ordena per títol (Z &gt; A)">
 <!ENTITY sb.sort.date.asc "Ordena per ordre cronològic">

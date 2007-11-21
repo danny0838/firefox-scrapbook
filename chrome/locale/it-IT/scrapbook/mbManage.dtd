@@ -1,0 +1,6 @@
+<!ENTITY mb.manager "Gestione">
+<!ENTITY mb.prop.name "Nome">
+<!ENTITY mb.prop.path "Percorso">
+<!ENTITY mb.button.add "Aggiungi">
+<!ENTITY mb.button.edit "Modifica">
+<!ENTITY mb.button.remove "Elimina">

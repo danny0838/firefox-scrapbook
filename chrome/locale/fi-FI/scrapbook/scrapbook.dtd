@@ -1,8 +1,9 @@
-<!ENTITY sb.new.folder "Uusi kansio...">
+<!ENTITY sb.new.folder "Uusi kansio">
+<!ENTITY sb.new.separator "New Separator">
 <!ENTITY sb.new.note "Uusi muistilappu">
-<!ENTITY sb.toggle.all "Laajenna/Supista kaikki kansiot">
+<!ENTITY sb.toggle.all "Open/close All Folders">
 <!ENTITY sb.tools "Työkalut">
-<!ENTITY sb.tools.settings "Asetukset">
+<!ENTITY sb.tools.options "Asetukset">
 <!ENTITY sb.tools.manage "Muokkaa">
 <!ENTITY sb.tools.combine "Combine Wizard">
 <!ENTITY sb.tools.trade "Tuo tai vie">
@@ -13,8 +14,6 @@
 <!ENTITY sb.tools.output "Tulosta kansiopuu HTML:nä">
 <!ENTITY sb.tools.repair "Hätäkorjaus">
 <!ENTITY sb.tools.addons "Lisäosien toiminnot">
-<!ENTITY sb.tools.tips "Vinkkisivu [en]">
 <!ENTITY sb.tools.homepage "Kotisivu">
-<!ENTITY sb.tools.about "Tietoja">
 <!ENTITY sb.note.opentab "Avaa välilehdessä">
 <!ENTITY sb.note.close "Sulje">

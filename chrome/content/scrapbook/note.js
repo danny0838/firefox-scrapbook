@@ -8,7 +8,7 @@ var sbNoteService2 = {
 
 	init : function()
 	{
-		window.location.href.match(/\?id\=(\d{14})$/);
+		window.location.search.match(/\?id\=(\d{14})$/);
 		var id = RegExp.$1;
 		sbNoteService.sidebarContext = false;
 		sbDataSource.init();
@@ -17,23 +17,22 @@ var sbNoteService2 = {
 		sbNoteService.edit(res);
 		sbNoteTemplate.init();
 		this.initFontSize();
-		if ( nsPreferences.getBoolPref("scrapbook.note.linefeed", true) )
+		if ( sbCommonUtils.getBoolPref("scrapbook.note.linefeed", true) )
 		{
 			document.getElementById("sbNoteToolbarL").setAttribute("checked", true);
 		}
-		if ( nsPreferences.getBoolPref("scrapbook.note.preview", false) ) this.initHTMLView();
+		if ( sbCommonUtils.getBoolPref("scrapbook.note.preview", false) ) this.initHTMLView();
 	},
 
-	refresh : function()
+	refreshTab : function()
 	{
 		var icon = sbCommonUtils.getDefaultIcon("note");
 		document.getElementById("sbNoteImage").setAttribute("src", icon);
-		if ( !this.BROWSER.collapsed ) this.initHTMLView();
 		var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
-		if ( "sbNoteService" in win._content && win._content == window )
+		if ( win.content.location.href.indexOf(sbNoteService.resource.Value.substring(18)) > 0 )
 		{
-			win.getBrowser().selectedTab.label = sbDataSource.getProperty(sbNoteService.resource, "title");
-			win.getBrowser().selectedTab.setAttribute("image", icon);
+			win.gBrowser.selectedTab.label = sbDataSource.getProperty(sbNoteService.resource, "title");
+			win.gBrowser.selectedTab.setAttribute("image", icon);
 		}
 	},
 
@@ -41,9 +40,9 @@ var sbNoteService2 = {
 	{
 		window.onunload = null;
 		sbNoteService.save(window);
-		nsPreferences.setBoolPref("scrapbook.note.preview",  this.enabledHTMLView);
-		nsPreferences.setIntPref("scrapbook.note.fontsize",  this.fontSize);
-		nsPreferences.setBoolPref("scrapbook.note.linefeed", document.getElementById("sbNoteToolbarL").getAttribute("checked") ? true : false);
+		sbCommonUtils.setBoolPref("scrapbook.note.preview",  this.enabledHTMLView);
+		sbCommonUtils.setBoolPref("scrapbook.note.linefeed", document.getElementById("sbNoteToolbarL").getAttribute("checked") ? true : false);
+		sbCommonUtils.PREF.setIntPref("scrapbook.note.fontsize",  this.fontSize);
 		if ( exit )
 		{
 			var browser = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser").getBrowser();
@@ -53,7 +52,12 @@ var sbNoteService2 = {
 
 	initFontSize : function()
 	{
-		this.fontSize = nsPreferences.getIntPref("scrapbook.note.fontsize", 16);
+		try {
+			this.fontSize = sbCommonUtils.PREF.getIntPref("scrapbook.note.fontsize");
+		}
+		catch (ex) {
+			this.fontSize = 16;
+		}
 		this.changeFontSize(this.fontSize);
 		document.getElementById("sbNoteToolbarF" + this.fontSize).setAttribute("checked", true)
 	},

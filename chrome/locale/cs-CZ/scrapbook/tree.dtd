@@ -14,11 +14,11 @@
 <!ENTITY sb.prop.title "Název">
 <!ENTITY sb.prop.comment "Komentář">
 <!ENTITY sb.prop.id.date "ID (čas)">
-<!ENTITY sb.folder.toggle "Rozbalit/Sbalit">
 <!ENTITY sb.folder.combine "Kombinovaný náhled">
 <!ENTITY sb.folder.openall "Otevřít vše v panelech">
-<!ENTITY sb.folder.manage "Správce složky...">
-<!ENTITY sb.new.folder "Nová složka...">
+<!ENTITY sb.folder.manage "Správce složky">
+<!ENTITY sb.new.folder "Nová složka">
+<!ENTITY sb.new.separator "New Separator">
 <!ENTITY sb.new.note "Nová poznámka">
 <!ENTITY sb.sort.folder "Seřadit složku">
 <!ENTITY sb.search "Hledat">
@@ -29,5 +29,5 @@
 <!ENTITY sb.search.cache "Aktualizovat cache pro fulltextové hledání">
 <!ENTITY sb.search.clear "Vymazat historii formuláře">
 <!ENTITY sb.search.days "Filtrovat podle dní">
-<!ENTITY mb.configure "Nastavit">
+<!ENTITY mb.manage "Manage">
 <!ENTITY mb.profileFolder "Složka ve vašem profilu">

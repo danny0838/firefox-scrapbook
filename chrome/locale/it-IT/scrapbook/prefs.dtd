@@ -1,0 +1,31 @@
+<!ENTITY sb.prefs.main "Generali">
+<!ENTITY sb.prefs.tabs "Schede">
+<!ENTITY sb.prefs.save "Salva">
+<!ENTITY sb.prefs.edit "Aspetto">
+<!ENTITY sb.prefs.organize "Gestione">
+<!ENTITY sb.prefs.advanced "Avanzate">
+<!ENTITY sb.prefs.ui.contextMenu "Mostra &apos;ScrapBook&apos; nel menu contestuale del browser">
+<!ENTITY sb.prefs.ui.contextSubMenu "Mostra come sottomenu (riavvio necessario)">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Mostra &apos;Nei segnalibri con ScrapBook&apos;">
+<!ENTITY sb.prefs.ui.toolsMenu "Mostra nel menu &quot;Strumenti&quot;">
+<!ENTITY sb.prefs.ui.statusBar "Mostra nella barra di stato">
+<!ENTITY sb.prefs.toolbarCustomize "Per aggiungere il pulsante [ScrapBook] oppure [ScrapBook Menu] fare clic con tasto destro del mouse nelle barre degli strumenti del browser e selezionare Personalizza...">
+<!ENTITY sb.prefs.tabs.tips "Le seguenti azioni verranno eseguite in nuove schede">
+<!ENTITY sb.prefs.tabs.note "Apri/modifica le note">
+<!ENTITY sb.prefs.data "Cartella dove conservare i dati">
+<!ENTITY sb.prefs.data.default "Predefinita (nella cartella del proprio profilo)">
+<!ENTITY sb.prefs.data.custom "(Da selezionare)">
+<!ENTITY sb.prefs.data.tips "Selezionare una cartella dove conservare i dati di ScrapBook">
+<!ENTITY sb.prefs.multibook.enabled "Attiva Multi-ScrapBook">
+<!ENTITY sb.prefs.multibook.tips "Permette di impostare molteplici cartelle dove conservare i dati e di selezionarne rapidamente una tramite apposita icona nella barra degli strumenti di ScrapBook">
+<!ENTITY sb.prefs.confirmDelete "Avvisa quando si eliminano elementi">
+<!ENTITY sb.prefs.tree.autoCollapse "Quando si espande una cartella nel diagramma, contrarre tutte le altre (come in IE)">
+<!ENTITY sb.prefs.showDetailOnDrop "Mostra la finestra di dialogo &apos;Dettagli cattura&apos; quando si cattura tramite trascinamento e rilascio nella barra laterale">
+<!ENTITY sb.prefs.notifyOnComplete "Mostra la finestra di notifica &apos;Cattura completata&apos; ">
+<!ENTITY sb.prefs.viewer "Applicazione per visualizzare i file">
+<!ENTITY sb.prefs.viewer.default "Predefinita">
+<!ENTITY sb.prefs.viewer.default.explorer "in ambiente Windows, solitamente Explorer">
+<!ENTITY sb.prefs.viewer.custom "Visualizza con">
+<!ENTITY sb.button.customize "Personalizza">
+<!ENTITY sb.button.browse "Sfoglia">
+<!ENTITY sb.button.show "Mostra i file">

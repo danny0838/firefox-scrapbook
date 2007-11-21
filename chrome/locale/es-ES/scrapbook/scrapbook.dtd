@@ -1,8 +1,9 @@
-<!ENTITY sb.new.folder "Nueva carpeta...">
+<!ENTITY sb.new.folder "Nueva carpeta">
+<!ENTITY sb.new.separator "Nuevo Separador">
 <!ENTITY sb.new.note "Nueva nota">
-<!ENTITY sb.toggle.all "Expandir/Colapsar todas las carpetas">
+<!ENTITY sb.toggle.all "Abrir/Cerrar todas las carpetas">
 <!ENTITY sb.tools "Opciones">
-<!ENTITY sb.tools.settings "Configuración">
+<!ENTITY sb.tools.options "Configuración">
 <!ENTITY sb.tools.manage "Administrar">
 <!ENTITY sb.tools.combine "Combine Wizard">
 <!ENTITY sb.tools.trade "Importar / Exportar">
@@ -13,8 +14,6 @@
 <!ENTITY sb.tools.output "Exportar como árbol HTML">
 <!ENTITY sb.tools.repair "Reparación de emergencia">
 <!ENTITY sb.tools.addons "Add-on Functions">
-<!ENTITY sb.tools.tips "Online Tips">
 <!ENTITY sb.tools.homepage "Página de inicio">
-<!ENTITY sb.tools.about "Acerca de">
 <!ENTITY sb.note.opentab "Abrir en pestaña">
 <!ENTITY sb.note.close "Cerrar">

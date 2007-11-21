@@ -1,8 +1,9 @@
-<!ENTITY sb.new.folder "Nouveau dossier...">
+<!ENTITY sb.new.folder "Nouveau dossier">
+<!ENTITY sb.new.separator "Nouveau séparateur">
 <!ENTITY sb.new.note "Nouvelle note">
-<!ENTITY sb.toggle.all "Déployer / Réduire tous les dossiers">
+<!ENTITY sb.toggle.all "Ouvrir/fermer tous les dossiers">
 <!ENTITY sb.tools "Outils">
-<!ENTITY sb.tools.settings "Paramètres">
+<!ENTITY sb.tools.options "Paramètres">
 <!ENTITY sb.tools.manage "Gestion">
 <!ENTITY sb.tools.combine "Assistant de combinaison">
 <!ENTITY sb.tools.trade "Importer / Exporter">
@@ -13,8 +14,6 @@
 <!ENTITY sb.tools.output "Arborescence comme HTML">
 <!ENTITY sb.tools.repair "Réparation d&apos;urgence">
 <!ENTITY sb.tools.addons "Fonctions additionnelles">
-<!ENTITY sb.tools.tips "Astuces en ligne (en)">
 <!ENTITY sb.tools.homepage "Site Web de ScrapBook">
-<!ENTITY sb.tools.about "À propos">
 <!ENTITY sb.note.opentab "Éditer dans un onglet">
 <!ENTITY sb.note.close "Fermer">

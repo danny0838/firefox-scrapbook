@@ -12,7 +12,7 @@ var sbOutputService = {
 		sbDataSource.init();
 		sbTreeHandler.init(true);
 		this.selectAllFolders();
-		if ( window.location.href.match(/\?auto/) )
+		if ( window.location.search == "?auto" )
 		{
 			document.getElementById("ScrapBookOutputOptionO").checked = false;
 			this.start();
@@ -44,7 +44,7 @@ var sbOutputService = {
 		this.optionFrame = document.getElementById("ScrapBookOutputOptionF").checked;
 		this.optionAll ? this.execAll() : this.exec();
 		sbTreeHandler.toggleAllFolders(true);
-		if ( window.location.href.match(/\?auto/) ) setTimeout(function(){ window.close(); }, 1000);
+		if ( window.location.search == "?auto" ) setTimeout(function(){ window.close(); }, 1000);
 	},
 
 	execAll : function()
@@ -110,11 +110,11 @@ var sbOutputService = {
 		var id = sbDataSource.getProperty(aContRes, "id") || "root";
 		this.content += '<ul id="folder-' + id + '">\n';
 		var resList = sbDataSource.flattenResources(aContRes, 0, false);
-		for ( var i = 1; i < resList.length; i++ )
-		{
+		for (var i = 1; i < resList.length; i++) {
 			this.content += '<li class="depth' + String(this.depth) + '">';
 			this.content += this.getHTMLBody(resList[i]);
-			if ( sbDataSource.isContainer(resList[i]) ) this.processRescursively(resList[i]);
+			if (sbDataSource.isContainer(resList[i]))
+				this.processRescursively(resList[i]);
 			this.content += "</li>\n";
 		}
 		this.content += "</ul>\n";
@@ -145,10 +145,6 @@ var sbOutputService = {
 			+ '	//--></script>\n'
 			+ '</head>\n\n'
 			+ '<body onload="toggleAll(false);">\n\n'
-			+ '<div id="header">\n'
-			+ '	<a href="#" onclick="toggleAll(true);">Expand</a>\n'
-			+ '	<a href="#" onclick="toggleAll(false);">Collapse</a>\n'
-			+ '</div>\n\n';
 		return HTML;
 	},
 
@@ -162,13 +158,25 @@ var sbOutputService = {
 		if ( !icon ) icon = sbCommonUtils.getFileName( sbCommonUtils.getDefaultIcon(type) );
 		title = title.replace(/</g, "&lt;");
 		title = title.replace(/>/g, "&gt;");
-		if ( type == "folder" ) {
-			return '<a class="folder" href="javascript:toggle(\'folder-' + id + '\');"><img src="./folder.png" width="16" height="16" alt="">' + title + '</a>\n';
-		} else {
-			var href   = type == "bookmark" ? sbDataSource.getProperty(aRes, "source") : "../data/" + id + "/index.html";
-			var target = this.optionFrame ? ' target="main"' : "";
-			return '<a href="' + href + '"' + target + ' class="' + type + '"><img src="' + icon + '" width="16" height="16" alt="">' + title + '</a>';
+		var ret;
+		switch (type) {
+			case "separator": 
+				ret = '<hr>\n';
+				break;
+			case "folder": 
+				ret = '<a class="folder" href="javascript:toggle(\'folder-' + id + '\');">'
+				    + '<img src="./folder.png" width="16" height="16" alt="">' + title + '</a>\n';
+				break;
+			default: 
+				var href = (type == "bookmark") ? 
+				           sbDataSource.getProperty(aRes, "source") : 
+				           "../data/" + id + "/index.html";
+				var target = this.optionFrame ? ' target="main"' : "";
+				ret = '<a href="' + href + '"' + target + ' class="' + type + '">'
+				    + '<img src="' + icon + '" width="16" height="16" alt="">' + title + '</a>';
+				break;
 		}
+		return ret;
 	},
 
 	getHTMLFoot : function()

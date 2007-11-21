@@ -113,6 +113,16 @@ var sbDataSource = {
 			this.data.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "comment"), sbCommonUtils.RDF.GetLiteral(aSBitem.comment), true);
 			this.data.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "icon"),    sbCommonUtils.RDF.GetLiteral(aSBitem.icon),    true);
 			this.data.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "source"),  sbCommonUtils.RDF.GetLiteral(aSBitem.source),  true);
+			if (aSBitem.type == "separator") {
+				const RDF_NS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+				const NC_NS  = "http://home.netscape.com/NC-rdf#";
+				this.data.Assert(
+					newRes,
+					sbCommonUtils.RDF.GetResource(RDF_NS + "type"),
+					sbCommonUtils.RDF.GetResource(NC_NS + "BookmarkSeparator"),
+					true
+				);
+			}
 			if ( this.unshifting )
 			{
 				if ( aIdx == 0 || aIdx == -1 ) aIdx = 1;
@@ -343,6 +353,7 @@ var sbDataSource = {
 			if ( res.Value == "urn:scrapbook:search" ) continue;
 			if ( sbCommonUtils.RDFCU.indexOf(this.data, res, aRes) != -1 ) return res;
 		}
+		return null;
 	},
 
 };

@@ -6,12 +6,13 @@
 <!ENTITY sb.capture.frame.as "Spara Frame i Scrapbook som">
 <!ENTITY sb.capture.target "Spara länk i Scrapbook">
 <!ENTITY sb.capture.target.as "Spara länk i Scrapbook som">
-<!ENTITY sb.capture.folder.root "Toppnivå">
-<!ENTITY sb.capture.folder.select "Välj Mapp">
 <!ENTITY sb.capture.alltabs "Capture All Tabs">
 <!ENTITY sb.capture.bookmark "Bookmark with ScrapBook">
+<!ENTITY sb.sidebar "Show in Sidebar">
+<!ENTITY sb.menu "Menu">
 <!ENTITY sb.editbefore "Edit Before Capture">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">
 <!ENTITY sb.key.capture.as "K">
+<!ENTITY sb.key.bookmark "J">

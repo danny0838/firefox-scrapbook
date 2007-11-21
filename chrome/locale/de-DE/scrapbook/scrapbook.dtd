@@ -1,8 +1,9 @@
-<!ENTITY sb.new.folder "Neuer Ordner...">
+<!ENTITY sb.new.folder "Neuer Ordner">
+<!ENTITY sb.new.separator "Neue Trennlinie">
 <!ENTITY sb.new.note "Neue Notiz">
 <!ENTITY sb.toggle.all "Alle Ordner aus-/einklappen">
 <!ENTITY sb.tools "Extras">
-<!ENTITY sb.tools.settings "Einstellungen">
+<!ENTITY sb.tools.options "Einstellungen">
 <!ENTITY sb.tools.manage "Ordner verwalten">
 <!ENTITY sb.tools.combine "Zusammenfassen">
 <!ENTITY sb.tools.trade "Importieren/Exportieren">
@@ -13,8 +14,6 @@
 <!ENTITY sb.tools.output "Ordnerliste als HTML ausgeben">
 <!ENTITY sb.tools.repair "Notfallreparatur durchführen">
 <!ENTITY sb.tools.addons "Erweiterte Funktionen">
-<!ENTITY sb.tools.tips "Online-Tipps (engl.)">
 <!ENTITY sb.tools.homepage "Homepage">
-<!ENTITY sb.tools.about "Über">
 <!ENTITY sb.note.opentab "In Tab öffnen">
 <!ENTITY sb.note.close "Schließen">

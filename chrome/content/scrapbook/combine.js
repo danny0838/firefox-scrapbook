@@ -70,8 +70,10 @@ var sbCombineService = {
 	{
 		if ( this.resList.indexOf(aRes) != -1 ) return;
 		var type = sbDataSource.getProperty(aRes, "type");
-		if ( type == "folder" ) return;
-		if ( type == "site" ) alert(this.STRING.getString("WARN_ABOUT_INDEPTH"));
+		if (type == "folder" || type == "separator")
+			return;
+		if (type == "site")
+			alert(this.STRING.getString("WARN_ABOUT_INDEPTH"));
 		var icon = sbDataSource.getProperty(aRes, "icon");
 		if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
 		var listItem = this.LISTBOX.appendItem(sbDataSource.getProperty(aRes, "title"));
@@ -159,7 +161,7 @@ var sbCombineService = {
 		this.WIZARD.getButton("finish").disabled = true;
 		this.toggleElements(true);
 		SB_trace(sbCaptureTask.STRING.getString("CAPTURE_START"));
-		setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.selection, 0, null); }, 0);
+		setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null); }, 0);
 	},
 
 	toggleElements : function(isProgressMode)
@@ -287,7 +289,7 @@ var sbPageCombiner = {
 		{
 			var nodeName  = childNodes[i].nodeName.toUpperCase();
 			if ( nodeName == "DIV" && childNodes[i].hasAttribute("class") && childNodes[i].getAttribute("class") == "scrapbook-sticky" )
-				childNodes[i].style.top = (parseInt(childNodes[i].style.top) + this.offsetTop) + "px";
+				childNodes[i].style.top = (parseInt(childNodes[i].style.top, 10) + this.offsetTop) + "px";
 			else if ( nodeName == "CITE" && childNodes[i].hasAttribute("class") && childNodes[i].getAttribute("class") == "scrapbook-header" ) continue;
 			else if ( nodeName == "DIV"  && childNodes[i].id.match(/^item\d{14}$/) ) continue;
 			divElem.insertBefore(childNodes[i], divElem.firstChild);
