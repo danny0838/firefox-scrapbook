@@ -40,10 +40,49 @@
 		<key id="key_ScrapBookCaptureAs"    key="&sb.key.capture.as;" modifiers="accel shift" oncommand="sbBrowserOverlay.execCapture(0, null, true , 'urn:scrapbook:root');" />
 		<key id="key_BookmarkWithScrapBook" key="&sb.key.bookmark;"   modifiers="accel shift" oncommand="sbBrowserOverlay.execBookmark('ScrapBookContextMenu3', 'urn:scrapbook:root', 0, null, true);" />
 	</keyset>
-	
+
 	<menupopup id="viewSidebarMenu">
 		<menuitem observes="viewScrapBookSidebar" key="key_openScrapBookSidebar" />
 	</menupopup>
+
+	<menubar id="main-menubar">
+		<menu id="ScrapBookMenu" label="ScrapBook"
+		      datasources="rdf:null" ref="urn:scrapbook:root" flags="dont-test-empty"
+		      insertafter="bookmarks-menu bookmarksMenu" accesskey="&sb.key.menubar;"
+		      oncommand="sbMenuHandler.onClick(event);"
+		      onclick="if (event.button == 1) sbMenuHandler.onClick(event);">
+			<menupopup onpopupshowing="sbMenuHandler.onPopupShowing(event, this);">
+				<menuitem id="ScrapBookMenubarItem1" key="key_ScrapBookCapture" />
+				<menuitem id="ScrapBookMenubarItem2" key="key_ScrapBookCaptureAs" />
+				<menuitem id="ScrapBookMenubarItem3" key="key_BookmarkWithScrapBook" label="&sb.capture.bookmark;..." oncommand="sbBrowserOverlay.execBookmark('ScrapBookContextPicking'); event.stopPropagation();" />
+				<menuitem id="ScrapBookMenubarItem4" label="&sb.capture.alltabs;..." oncommand="sbMenuHandler.execCaptureAllTabs(); event.stopPropagation();" />
+				<menuitem id="ScrapBookMenubarItem5" sblabel="&sb.sidebar;" observes="viewScrapBookSidebar" key="key_openScrapBookSidebar" />
+				<menuseparator />
+			</menupopup>
+			<template>
+				<rule iscontainer="true">
+					<menupopup>
+						<menu uri="rdf:*" class="menu-iconic bookmark-item" label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title">
+							<menupopup />
+						</menu>
+					</menupopup>
+				</rule>
+				<rule rdf:type="http://home.netscape.com/NC-rdf#BookmarkSeparator">
+					<menupopup>
+						<menuseparator uri="rdf:*" />
+					</menupopup>
+				</rule>
+				<rule>
+					<menupopup>
+						<menuitem uri="rdf:*" class="menuitem-iconic bookmark-item sb-item"
+						          label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title" 
+						          image="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon"
+						          sbtype="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
+					</menupopup>
+				</rule>
+			</template>
+		</menu>
+	</menubar>
 
 	<menupopup id="menu_ToolsPopup">
 		<menuitem id="ScrapBookToolsMenu" key="key_openScrapBookSidebar" observes="viewScrapBookSidebar" insertafter="devToolsSeparator" />
@@ -71,42 +110,6 @@
 		               observes="viewScrapBookSidebar"
 		               class="toolbarbutton-1"
 		               ondragover="toggleSidebar('viewScrapBookSidebar',true);" />
-		<toolbarbutton id="scrapbook-menu" type="menu"
-		               label="ScrapBook &sb.menu;"
-		               datasources="rdf:null" ref="urn:scrapbook:root" flags="dont-test-empty"
-		               oncommand="sbMenuHandler.onClick(event);"
-		               onclick="if (event.button == 1) sbMenuHandler.onClick(event);">
-			<menupopup onpopupshowing="sbMenuHandler.onPopupShowing(event, this);">
-				<menuitem id="scrapbook-menu-item1" key="key_ScrapBookCapture" />
-				<menuitem id="scrapbook-menu-item2" key="key_ScrapBookCaptureAs" />
-				<menuitem id="scrapbook-menu-item3" key="key_BookmarkWithScrapBook" label="&sb.capture.bookmark;..." oncommand="sbBrowserOverlay.execBookmark('ScrapBookContextPicking'); event.stopPropagation();" />
-				<menuitem id="scrapbook-menu-item4" label="&sb.capture.alltabs;..." oncommand="sbMenuHandler.execCaptureAllTabs(); event.stopPropagation();" />
-				<menuitem id="scrapbook-menu-item5" sblabel="&sb.sidebar;" observes="viewScrapBookSidebar" key="key_openScrapBookSidebar" />
-				<menuseparator />
-			</menupopup>
-			<template>
-				<rule iscontainer="true">
-					<menupopup>
-						<menu uri="rdf:*" class="menu-iconic bookmark-item" label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title">
-							<menupopup />
-						</menu>
-					</menupopup>
-				</rule>
-				<rule rdf:type="http://home.netscape.com/NC-rdf#BookmarkSeparator">
-					<menupopup>
-						<menuseparator uri="rdf:*" />
-					</menupopup>
-				</rule>
-				<rule>
-					<menupopup>
-						<menuitem uri="rdf:*" class="menuitem-iconic bookmark-item sb-item"
-						          label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title" 
-						          image="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon"
-						          sbtype="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
-					</menupopup>
-				</rule>
-			</template>
-		</toolbarbutton>
 	</toolbarpalette>
 
 	<vbox id="appcontent">

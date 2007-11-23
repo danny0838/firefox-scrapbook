@@ -7,9 +7,9 @@
 <!ENTITY sb.prefs.ui.contextMenu "Afficher dans le menu contextuel du navigateur">
 <!ENTITY sb.prefs.ui.contextSubMenu "Sous-menu (Changé au redémarrage)">
 <!ENTITY sb.prefs.ui.bookmarkMenu "Afficher le menu &apos;Marquer cette page avec ScrapBook&apos;">
+<!ENTITY sb.prefs.ui.menuBar "Show in menu bar">
 <!ENTITY sb.prefs.ui.toolsMenu "Afficher dans le menu &apos;Outils&apos;">
 <!ENTITY sb.prefs.ui.statusBar "Afficher dans la barre d&apos;état">
-<!ENTITY sb.prefs.toolbarCustomize "Pour ajouter un bouton [ScrapBook] ou un bouton [Menu ScrapBook], faites un clic droit sur la barre d&apos;outil et sélectionnez [Personnaliser]">
 <!ENTITY sb.prefs.tabs.tips "Ouvrir dans un onglet pour les opérations suivantes">
 <!ENTITY sb.prefs.tabs.note "Éditer une note">
 <!ENTITY sb.prefs.data "Emplacement de stockage des données">
@@ -20,6 +20,9 @@
 <!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook vous permet de configurer des emplacements multiples pour stocker vos données et de basculer rapidement de l&apos;un à l&apos;autre avec un bouton de la barre d&apos;outil.">
 <!ENTITY sb.prefs.confirmDelete "M&apos;alerter lors de la suppression d&apos;élément(s) de l&apos;arborescence">
 <!ENTITY sb.prefs.tree.autoCollapse "Lors de l&apos;ouverture d&apos;un dossier de l&apos;arborescence, fermer automatiquement les autres dossiers">
+<!ENTITY sb.prefs.tree.unshift "Put an item into">
+<!ENTITY sb.prefs.tree.unshift.top "the top of a folder">
+<!ENTITY sb.prefs.tree.unshift.bottom "the bottom of a folder">
 <!ENTITY sb.prefs.showDetailOnDrop "Afficher la boîte de dialogue &apos;Détail de la capture&apos; lors de la capture par un glisser-déposer dans le panneau latéral">
 <!ENTITY sb.prefs.notifyOnComplete "Afficher la notification &apos;Capture terminée&apos;">
 <!ENTITY sb.prefs.viewer "Application pour la navigation dans les fichiers">

@@ -29,6 +29,7 @@
 			<preference id="scrapbook.ui.contextMenu"    name="scrapbook.ui.contextMenu"    type="bool" />
 			<preference id="scrapbook.ui.contextSubMenu" name="scrapbook.ui.contextSubMenu" type="bool" />
 			<preference id="scrapbook.ui.bookmarkMenu"   name="scrapbook.ui.bookmarkMenu"   type="bool" />
+			<preference id="scrapbook.ui.menuBar"        name="scrapbook.ui.menuBar"        type="bool" />
 			<preference id="scrapbook.ui.toolsMenu"      name="scrapbook.ui.toolsMenu"      type="bool" />
 			<preference id="scrapbook.ui.statusBar"      name="scrapbook.ui.statusBar"      type="bool" />
 		</preferences>
@@ -36,9 +37,9 @@
 		          onsyncfrompreference="sbPrefWindow.updateContextMenuUI();" />
 		<checkbox preference="scrapbook.ui.contextSubMenu" label="&sb.prefs.ui.contextSubMenu;" class="indent" group="contextmenu" />
 		<checkbox preference="scrapbook.ui.bookmarkMenu"   label="&sb.prefs.ui.bookmarkMenu;"   class="indent" group="contextmenu" />
+		<checkbox preference="scrapbook.ui.menuBar"   label="&sb.prefs.ui.menuBar;" />
 		<checkbox preference="scrapbook.ui.toolsMenu" label="&sb.prefs.ui.toolsMenu;" />
 		<checkbox preference="scrapbook.ui.statusBar" label="&sb.prefs.ui.statusBar;" />
-		<description class="multiline">&sb.prefs.toolbarCustomize;</description>
 	</prefpane>
 
 	<prefpane id="tabsPane" label="&sb.prefs.tabs;" flex="1">
@@ -77,6 +78,7 @@
 			<preference id="scrapbook.multibook.enabled" name="scrapbook.multibook.enabled" type="bool" />
 			<preference id="scrapbook.confirmDelete"     name="scrapbook.confirmDelete"     type="bool" />
 			<preference id="scrapbook.tree.autoCollapse" name="scrapbook.tree.autoCollapse" type="bool" />
+			<preference id="scrapbook.tree.unshift"      name="scrapbook.tree.unshift"      type="bool" />
 		</preferences>
 		<groupbox>
 			<caption id="sbDataCaption" label="&sb.prefs.data;" />
@@ -101,6 +103,15 @@
 		</groupbox>
 		<checkbox preference="scrapbook.confirmDelete"     label="&sb.prefs.confirmDelete;" />
 		<checkbox preference="scrapbook.tree.autoCollapse" label="&sb.prefs.tree.autoCollapse;" />
+		<hbox align="center">
+			<label value="&sb.prefs.tree.unshift;" />
+			<menulist preference="scrapbook.tree.unshift">
+				<menupopup>
+					<menuitem value="true"  label="&sb.prefs.tree.unshift.top;" />
+					<menuitem value="false" label="&sb.prefs.tree.unshift.bottom;" />
+				</menupopup>
+			</menulist>
+		</hbox>
 	</prefpane>
 
 	<prefpane id="advancedPane" label="&sb.prefs.advanced;" flex="1">

@@ -68,6 +68,7 @@ var sbBrowserOverlay = {
 		this.dataTitle = "";
 		this.editMode = sbPageEditor.TOOLBAR.getAttribute("autoshow") == "true";
 		this.infoMode = sbInfoViewer.TOOLBAR.getAttribute("autoshow") == "true";
+		document.getElementById("ScrapBookMenu").hidden        = !this._prefBranch.getBoolPref("menuBar");
 		document.getElementById("ScrapBookStatusPanel").hidden = !this._prefBranch.getBoolPref("statusBar");
 		document.getElementById("ScrapBookToolsMenu").hidden   = !this._prefBranch.getBoolPref("toolsMenu");
 		sbDataSource.init(true);
@@ -351,7 +352,7 @@ var sbMenuHandler = {
 
 	_init: function()
 	{
-		this._menu = document.getElementById("scrapbook-menu");
+		this._menu = document.getElementById("ScrapBookMenu");
 		this.baseURL  = sbCommonUtils.getBaseHref(sbDataSource.data.URI);
 		var dsEnum = this._menu.database.GetDataSources();
 		while (dsEnum.hasMoreElements()) {
@@ -369,7 +370,7 @@ var sbMenuHandler = {
 			return document.getElementById(aID);
 		};
 		var initFlag = false;
-		var dsEnum = getElement("scrapbook-menu").database.GetDataSources();
+		var dsEnum = getElement("ScrapBookMenu").database.GetDataSources();
 		while (dsEnum.hasMoreElements()) {
 			var ds = dsEnum.getNext().QueryInterface(Ci.nsIRDFDataSource);
 			if (ds.URI == sbDataSource.data.URI)
@@ -379,11 +380,11 @@ var sbMenuHandler = {
 			this._init();
 		var selected = sbBrowserOverlay.isSelected();
 		if (event.target == aMenuPopup) {
-			getElement("scrapbook-menu-item1").label = document.getElementById("ScrapBookContextMenu" + (selected ? 1 : 3)).getAttribute("label");
-			getElement("scrapbook-menu-item2").label = document.getElementById("ScrapBookContextMenu" + (selected ? 2 : 4)).getAttribute("label");
-			getElement("scrapbook-menu-item1").className = "menuitem-iconic " + (selected ? "sb-capture-partial" : "sb-capture-entire");
-			getElement("scrapbook-menu-item2").className = "menuitem-iconic " + (selected ? "sb-capture-partial" : "sb-capture-entire");
-			getElement("scrapbook-menu-item5").label = getElement("scrapbook-menu-item5").getAttribute("sblabel");
+			getElement("ScrapBookMenubarItem1").label = document.getElementById("ScrapBookContextMenu" + (selected ? 1 : 3)).getAttribute("label");
+			getElement("ScrapBookMenubarItem2").label = document.getElementById("ScrapBookContextMenu" + (selected ? 2 : 4)).getAttribute("label");
+			getElement("ScrapBookMenubarItem1").className = "menuitem-iconic " + (selected ? "sb-capture-partial" : "sb-capture-entire");
+			getElement("ScrapBookMenubarItem2").className = "menuitem-iconic " + (selected ? "sb-capture-partial" : "sb-capture-entire");
+			getElement("ScrapBookMenubarItem5").label = getElement("ScrapBookMenubarItem5").getAttribute("sblabel");
 			if (!this.shouldRebuild)
 				return;
 			this.shouldRebuild = false;
@@ -391,14 +392,14 @@ var sbMenuHandler = {
 		}
 		else {
 			if (event.target.firstChild && event.target.firstChild.className.indexOf("sb-capture") >= 0) {
-				event.target.firstChild.label     = getElement("scrapbook-menu-item1").label;
-				event.target.firstChild.className = getElement("scrapbook-menu-item1").className;
+				event.target.firstChild.label     = getElement("ScrapBookMenubarItem1").label;
+				event.target.firstChild.className = getElement("ScrapBookMenubarItem1").className;
 				return;
 			}
 			var elt1 = document.createElement("menuseparator");
 			var elt2 = document.createElement("menuitem");
-			elt2.setAttribute("class", getElement("scrapbook-menu-item1").className);
-			elt2.setAttribute("label", getElement("scrapbook-menu-item1").label);
+			elt2.setAttribute("class", getElement("ScrapBookMenubarItem1").className);
+			elt2.setAttribute("label", getElement("ScrapBookMenubarItem1").label);
 			elt2.setAttribute("resuri", event.target.parentNode.resource.Value);
 			event.target.insertBefore(elt1, event.target.firstChild);
 			event.target.insertBefore(elt2, event.target.firstChild);
@@ -407,10 +408,10 @@ var sbMenuHandler = {
 
 	onClick: function(event)
 	{
-		if (event.target.id == "scrapbook-menu-item3" || event.target.id == "scrapbook-menu-item4")
+		if (event.target.id == "ScrapBookMenubarItem3" || event.target.id == "ScrapBookMenubarItem4")
 			return;
 		if (event.target.className.indexOf("sb-capture") >= 0) {
-			var aShowDetail = event.target.id == "scrapbook-menu-item2" || event.button == 1;
+			var aShowDetail = event.target.id == "ScrapBookMenubarItem2" || event.button == 1;
 			var resURI = event.target.hasAttribute("resuri") ? event.target.getAttribute("resuri") : "urn:scrapbook:root";
 			sbBrowserOverlay.execCapture(0, null, aShowDetail, resURI);
 			return;

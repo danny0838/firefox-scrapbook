@@ -7,9 +7,9 @@
 <!ENTITY sb.prefs.ui.contextMenu "ブラウザのコンテキストメニューに表示">
 <!ENTITY sb.prefs.ui.contextSubMenu "サブメニュー (再起動後有効)">
 <!ENTITY sb.prefs.ui.bookmarkMenu "&apos;ScrapBookにブックマーク&apos; メニューを表示">
+<!ENTITY sb.prefs.ui.menuBar "メニューバーに表示">
 <!ENTITY sb.prefs.ui.toolsMenu "&apos;ツール&apos; メニューに表示">
 <!ENTITY sb.prefs.ui.statusBar "ステータスバーに表示">
-<!ENTITY sb.prefs.toolbarCustomize "[ScrapBook] ボタンや [ScrapBook メニュー] ボタンをツールバーへ配置するには、ツールバーを右クリックして [カスタマイズ] を選択してください。">
 <!ENTITY sb.prefs.tabs.tips "次の操作を新しいタブで開く">
 <!ENTITY sb.prefs.tabs.note "ノートの編集">
 <!ENTITY sb.prefs.data "データ保存先">
@@ -20,6 +20,9 @@
 <!ENTITY sb.prefs.multibook.tips "複数のデータ保存先を設定し、ツールバーボタンから素早く切り替えることができます。">
 <!ENTITY sb.prefs.confirmDelete "削除確認をする">
 <!ENTITY sb.prefs.tree.autoCollapse "ツリーフォルダを開いたとき、他のフォルダを自動的に閉じる">
+<!ENTITY sb.prefs.tree.unshift "アイテムを追加する位置:">
+<!ENTITY sb.prefs.tree.unshift.top "フォルダの一番上">
+<!ENTITY sb.prefs.tree.unshift.bottom "フォルダの一番下">
 <!ENTITY sb.prefs.showDetailOnDrop "サイドバーへのドラッグ＆ドロップ時、詳細な取り込みをする">
 <!ENTITY sb.prefs.notifyOnComplete "取り込みが完了したら通知する">
 <!ENTITY sb.prefs.viewer "ファイルの表示に用いるアプリケーション">

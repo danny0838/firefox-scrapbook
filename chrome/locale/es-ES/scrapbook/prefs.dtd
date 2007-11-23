@@ -1,15 +1,15 @@
-<!ENTITY sb.prefs.main "Principal">
-<!ENTITY sb.prefs.tabs "Pestañas">
-<!ENTITY sb.prefs.save "Salvar">
-<!ENTITY sb.prefs.edit "Editar">
-<!ENTITY sb.prefs.organize "Organizar">
+<!ENTITY sb.prefs.main "Main">
+<!ENTITY sb.prefs.tabs "Tabs">
+<!ENTITY sb.prefs.save "Save">
+<!ENTITY sb.prefs.edit "Edit">
+<!ENTITY sb.prefs.organize "Organize">
 <!ENTITY sb.prefs.advanced "Advanced">
 <!ENTITY sb.prefs.ui.contextMenu "Show in browser context menu">
 <!ENTITY sb.prefs.ui.contextSubMenu "Submenu (Change after restart)">
 <!ENTITY sb.prefs.ui.bookmarkMenu "Show &apos;Bookmark with ScrapBook&apos; menu">
+<!ENTITY sb.prefs.ui.menuBar "Show in menu bar">
 <!ENTITY sb.prefs.ui.toolsMenu "Show in &apos;Tools&apos; menu">
 <!ENTITY sb.prefs.ui.statusBar "Show in status bar">
-<!ENTITY sb.prefs.toolbarCustomize "To add [ScrapBook] button or [ScrapBook Menu] button, right-click toolbar and select [Customize].">
 <!ENTITY sb.prefs.tabs.tips "Open in tab for the following operations">
 <!ENTITY sb.prefs.tabs.note "Edit Note">
 <!ENTITY sb.prefs.data "Location to Store Data">
@@ -20,6 +20,9 @@
 <!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook enables you to set up multiple locations to store data and switch between them quickly with toolbar button.">
 <!ENTITY sb.prefs.confirmDelete "Warn me when deleting tree item(s)">
 <!ENTITY sb.prefs.tree.autoCollapse "When opening a tree folder, automatically close other folders">
+<!ENTITY sb.prefs.tree.unshift "Put an item into">
+<!ENTITY sb.prefs.tree.unshift.top "the top of a folder">
+<!ENTITY sb.prefs.tree.unshift.bottom "the bottom of a folder">
 <!ENTITY sb.prefs.showDetailOnDrop "Show &apos;Capture Detail&apos; dialog when capturing by drag-and-drop into Sidebar">
 <!ENTITY sb.prefs.notifyOnComplete "Show &apos;Capture Completed&apos; notification">
 <!ENTITY sb.prefs.viewer "Application for File Browsing">

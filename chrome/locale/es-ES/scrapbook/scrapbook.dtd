@@ -1,7 +1,7 @@
 <!ENTITY sb.new.folder "Nueva carpeta">
-<!ENTITY sb.new.separator "Nuevo Separador">
+<!ENTITY sb.new.separator "New Separator">
 <!ENTITY sb.new.note "Nueva nota">
-<!ENTITY sb.toggle.all "Abrir/Cerrar todas las carpetas">
+<!ENTITY sb.toggle.all "Open/close All Folders">
 <!ENTITY sb.tools "Opciones">
 <!ENTITY sb.tools.options "Configuración">
 <!ENTITY sb.tools.manage "Administrar">
