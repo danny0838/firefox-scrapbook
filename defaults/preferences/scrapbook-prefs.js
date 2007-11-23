@@ -3,6 +3,7 @@ pref("extensions.{53A03D43-5363-4669-8190-99061B2DEBA5}.description", "chrome://
 pref("scrapbook.ui.contextMenu", true);
 pref("scrapbook.ui.contextSubMenu", false);
 pref("scrapbook.ui.bookmarkMenu", true);
+pref("scrapbook.ui.menuBar", true);
 pref("scrapbook.ui.toolsMenu", false);
 pref("scrapbook.ui.statusBar", true);
 pref("scrapbook.ui.folderList", "");
