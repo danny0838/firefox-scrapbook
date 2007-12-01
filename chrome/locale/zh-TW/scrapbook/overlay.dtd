@@ -8,8 +8,8 @@
 <!ENTITY sb.capture.target.as "擷取連結設定">
 <!ENTITY sb.capture.alltabs "擷取所有分頁">
 <!ENTITY sb.capture.bookmark "加入 ScrapBook 書籤">
-<!ENTITY sb.sidebar "Show in Sidebar">
-<!ENTITY sb.menu "Menu">
+<!ENTITY sb.sidebar "顯示於側邊欄中">
+<!ENTITY sb.menu "選單">
 <!ENTITY sb.editbefore "編輯後擷取">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "S">

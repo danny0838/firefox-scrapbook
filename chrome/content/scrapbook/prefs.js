@@ -28,11 +28,11 @@ var sbPrefWindow = {
 		sbMultiBookService.refreshGlobal();
 	},
 
-	updateContextMenuUI: function() {
-		var enableContext = document.getElementById("scrapbook.ui.contextMenu").value;
-		var elts = document.getElementsByAttribute("group", "contextmenu");
+	updateGroupedUI: function(aPrefName, aGroupName) {
+		var enable = document.getElementById(aPrefName).value;
+		var elts = document.getElementsByAttribute("group", aGroupName);
 		Array.forEach(elts, function(elt) {
-			elt.disabled = !enableContext;
+			elt.disabled = !enable;
 		});
 	},
 

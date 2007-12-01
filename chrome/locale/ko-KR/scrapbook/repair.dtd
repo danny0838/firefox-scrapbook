@@ -4,6 +4,6 @@
 <!ENTITY sb.repair.rdfFile.file "파일">
 <!ENTITY sb.repair.rdfFile.time "시간">
 <!ENTITY sb.repair.rdfFile.size "크기">
-<!ENTITY sb.repair.favicons "favicon 복원">
-<!ENTITY sb.repair.favicons.descript "ScrapBook 트리 안의 많은 favicon이 갑자기 표시되지 않으면 이 항목을 시도하십시오.">
+<!ENTITY sb.repair.favicons "북마크 아이콘 복원">
+<!ENTITY sb.repair.favicons.descript "ScrapBook 트리 안의 많은 북마크 아이콘이 갑자기 표시되지 않으면 이 항목을 시도하십시오.">
 <!ENTITY sb.repair.complete "완료.">

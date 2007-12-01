@@ -5,11 +5,13 @@
 <!ENTITY sb.prefs.organize "Organize">
 <!ENTITY sb.prefs.advanced "Advanced">
 <!ENTITY sb.prefs.ui.contextMenu "Show in browser context menu">
-<!ENTITY sb.prefs.ui.contextSubMenu "Submenu (Change after restart)">
+<!ENTITY sb.prefs.ui.contextSubMenu "Submenu">
 <!ENTITY sb.prefs.ui.bookmarkMenu "Show &apos;Bookmark with ScrapBook&apos; menu">
 <!ENTITY sb.prefs.ui.menuBar "Show in menu bar">
+<!ENTITY sb.prefs.ui.menuBar.icon "Icon">
 <!ENTITY sb.prefs.ui.toolsMenu "Show in &apos;Tools&apos; menu">
 <!ENTITY sb.prefs.ui.statusBar "Show in status bar">
+<!ENTITY sb.prefs.restart "Change requires Firefox restart.">
 <!ENTITY sb.prefs.tabs.tips "Open in tab for the following operations">
 <!ENTITY sb.prefs.tabs.note "Edit Note">
 <!ENTITY sb.prefs.data "Location to Store Data">

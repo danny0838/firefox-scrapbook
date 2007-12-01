@@ -19,7 +19,7 @@
 <prefwindow id="sbPrefWindow"
             xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
             title="ScrapBook &sb.tools.options;"
-            style="width: 40em; min-height: 30em;"
+            style="width: 40em;"
             onload="sbPrefWindow.init();"
             onchange="sbPrefWindow.changed = true;"
             onunload="sbPrefWindow.done();">
@@ -30,16 +30,20 @@
 			<preference id="scrapbook.ui.contextSubMenu" name="scrapbook.ui.contextSubMenu" type="bool" />
 			<preference id="scrapbook.ui.bookmarkMenu"   name="scrapbook.ui.bookmarkMenu"   type="bool" />
 			<preference id="scrapbook.ui.menuBar"        name="scrapbook.ui.menuBar"        type="bool" />
+			<preference id="scrapbook.ui.menuBar.icon"   name="scrapbook.ui.menuBar.icon"   type="bool" />
 			<preference id="scrapbook.ui.toolsMenu"      name="scrapbook.ui.toolsMenu"      type="bool" />
 			<preference id="scrapbook.ui.statusBar"      name="scrapbook.ui.statusBar"      type="bool" />
 		</preferences>
 		<checkbox preference="scrapbook.ui.contextMenu"    label="&sb.prefs.ui.contextMenu;"
-		          onsyncfrompreference="sbPrefWindow.updateContextMenuUI();" />
-		<checkbox preference="scrapbook.ui.contextSubMenu" label="&sb.prefs.ui.contextSubMenu;" class="indent" group="contextmenu" />
-		<checkbox preference="scrapbook.ui.bookmarkMenu"   label="&sb.prefs.ui.bookmarkMenu;"   class="indent" group="contextmenu" />
-		<checkbox preference="scrapbook.ui.menuBar"   label="&sb.prefs.ui.menuBar;" />
+		          onsyncfrompreference="sbPrefWindow.updateGroupedUI('scrapbook.ui.contextMenu', 'contextmenu');" />
+		<checkbox preference="scrapbook.ui.contextSubMenu" label="&sb.prefs.ui.contextSubMenu; *" class="indent" group="contextmenu" />
+		<checkbox preference="scrapbook.ui.bookmarkMenu"   label="&sb.prefs.ui.bookmarkMenu;"     class="indent" group="contextmenu" />
+		<checkbox preference="scrapbook.ui.menuBar"        label="&sb.prefs.ui.menuBar;"
+		          onsyncfrompreference="sbPrefWindow.updateGroupedUI('scrapbook.ui.menuBar', 'menubar');" />
+		<checkbox preference="scrapbook.ui.menuBar.icon"   label="&sb.prefs.ui.menuBar.icon; *"   class="indent" group="menubar" />
 		<checkbox preference="scrapbook.ui.toolsMenu" label="&sb.prefs.ui.toolsMenu;" />
 		<checkbox preference="scrapbook.ui.statusBar" label="&sb.prefs.ui.statusBar;" />
+		<description>* &sb.prefs.restart;</description>
 	</prefpane>
 
 	<prefpane id="tabsPane" label="&sb.prefs.tabs;" flex="1">
@@ -99,7 +103,7 @@
 			          preference="scrapbook.multibook.enabled"
 			          label="&sb.prefs.multibook.enabled;"
 			          onsyncfrompreference="sbPrefWindow.updateDataUI();" />
-			<description class="indent multiline">&sb.prefs.multibook.tips;</description>
+			<description class="indent">&sb.prefs.multibook.tips;</description>
 		</groupbox>
 		<checkbox preference="scrapbook.confirmDelete"     label="&sb.prefs.confirmDelete;" />
 		<checkbox preference="scrapbook.tree.autoCollapse" label="&sb.prefs.tree.autoCollapse;" />
@@ -112,6 +116,7 @@
 				</menupopup>
 			</menulist>
 		</hbox>
+		<spacer flex="1" height="50" />
 	</prefpane>
 
 	<prefpane id="advancedPane" label="&sb.prefs.advanced;" flex="1">

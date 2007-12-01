@@ -39,8 +39,8 @@ var sbSortService = {
 	exec : function()
 	{
 		this.WIZARD.getButton("cancel").hidden = true;
-		var recursive = document.getElementById("sbSortRecursive").getAttribute("checked");
-		this.contResList = sbDataSource.flattenResources(this.contResList[0], 1, recursive);
+		if (document.getElementById("sbSortRecursive").checked)
+			this.contResList = sbDataSource.flattenResources(this.contResList[0], 1, true);
 		switch ( this.RADIO_GROUP.selectedIndex )
 		{
 			case 0 : break;

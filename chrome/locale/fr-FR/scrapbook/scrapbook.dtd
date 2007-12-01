@@ -11,7 +11,7 @@
 <!ENTITY sb.tools.directory "Répertoire de ScrapBook">
 <!ENTITY sb.tools.calculate "Calcul de la taille">
 <!ENTITY sb.tools.sorttree "Classer l&apos;arborescence entière">
-<!ENTITY sb.tools.output "Arborescence comme HTML">
+<!ENTITY sb.tools.output "Arborescence en HTML">
 <!ENTITY sb.tools.repair "Réparation d&apos;urgence">
 <!ENTITY sb.tools.addons "Fonctions additionnelles">
 <!ENTITY sb.tools.homepage "Site Web de ScrapBook">

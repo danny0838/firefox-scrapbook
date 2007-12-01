@@ -55,6 +55,21 @@ var sbBrowserOverlay = {
 			};
 			window.setTimeout(callback, 1000);
 		}
+		if (this._prefBranch.getBoolPref("menuBar.icon")) {
+			var menu   = document.getElementById("ScrapBookMenu");
+			var button = document.createElement("toolbarbutton");
+			var attrs = menu.attributes;
+			for (var i = 0; i < attrs.length; i++)
+				button.setAttribute(attrs[i].nodeName, attrs[i].nodeValue);
+			while (menu.hasChildNodes())
+				button.appendChild(menu.firstChild);
+			button.removeAttribute("label");
+			button.setAttribute("type", "menu");
+			button.setAttribute("image", "chrome://scrapbook/skin/main_16.png");
+			var menubar = document.getElementById("main-menubar");
+			menubar.appendChild(button);
+			menubar.removeChild(menu);
+		}
 	},
 
 	destroy: function()

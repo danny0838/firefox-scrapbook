@@ -5,11 +5,13 @@
 <!ENTITY sb.prefs.organize "구성">
 <!ENTITY sb.prefs.advanced "고급">
 <!ENTITY sb.prefs.ui.contextMenu "브라우저 컨텍스트 메뉴에 보이기">
-<!ENTITY sb.prefs.ui.contextSubMenu "부메뉴(재시작 필요)">
+<!ENTITY sb.prefs.ui.contextSubMenu "부메뉴">
 <!ENTITY sb.prefs.ui.bookmarkMenu "&apos;ScrapBook으로 북마크&apos; 메뉴 표시">
-<!ENTITY sb.prefs.ui.menuBar "Show in menu bar">
+<!ENTITY sb.prefs.ui.menuBar "메뉴 도구 모음에 보이기">
+<!ENTITY sb.prefs.ui.menuBar.icon "아이콘">
 <!ENTITY sb.prefs.ui.toolsMenu "&apos;도구&apos; 메뉴에 보이기">
 <!ENTITY sb.prefs.ui.statusBar "상태 표시줄에 보이기">
+<!ENTITY sb.prefs.restart "변경된 내용을 적용하려면 Firefox를 재시작해야 합니다.">
 <!ENTITY sb.prefs.tabs.tips "다음 동작은 탭으로 열기">
 <!ENTITY sb.prefs.tabs.note "노트 편집">
 <!ENTITY sb.prefs.data "데이터 저장 위치">
@@ -20,10 +22,10 @@
 <!ENTITY sb.prefs.multibook.tips "멀티 ScrapBook을 사용하면 다중으로 데이터 저장 위치를 설정할 수 있으며, 도구 모음 버튼으로 그 위치를 빠르게 전환할 수 있습니다.">
 <!ENTITY sb.prefs.confirmDelete "트리 항목 삭제 시 경고하기">
 <!ENTITY sb.prefs.tree.autoCollapse "트리 폴더를 열 때, 자동으로 다른 폴더 닫기">
-<!ENTITY sb.prefs.tree.unshift "Put an item into">
-<!ENTITY sb.prefs.tree.unshift.top "the top of a folder">
-<!ENTITY sb.prefs.tree.unshift.bottom "the bottom of a folder">
-<!ENTITY sb.prefs.showDetailOnDrop "슬라이드바에 드래그앤드롭으로 캡처할 때 &apos;상세 캡처&apos; 창 보이기">
+<!ENTITY sb.prefs.tree.unshift "항목 저장 위치">
+<!ENTITY sb.prefs.tree.unshift.top "폴더 맨 위">
+<!ENTITY sb.prefs.tree.unshift.bottom "폴더 맨 아래">
+<!ENTITY sb.prefs.showDetailOnDrop "탐색 창으로 끌어다 놓기하여 캡처할 때 &apos;상세 캡처&apos; 창 보이기">
 <!ENTITY sb.prefs.notifyOnComplete "&apos;캡처 완료&apos; 알림 보이기">
 <!ENTITY sb.prefs.viewer "파일 탐색용 응용 프로그램">
 <!ENTITY sb.prefs.viewer.default "기본값">

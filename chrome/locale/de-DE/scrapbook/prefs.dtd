@@ -5,11 +5,13 @@
 <!ENTITY sb.prefs.organize "Organisieren">
 <!ENTITY sb.prefs.advanced "Erweitert">
 <!ENTITY sb.prefs.ui.contextMenu "ScrapBook-Einträge im Kontextmenü der Seite anzeigen">
-<!ENTITY sb.prefs.ui.contextSubMenu "Einträge in Untermenü zusammenfassen (Neustart erforderlich)">
+<!ENTITY sb.prefs.ui.contextSubMenu "Einträge in Untermenü zusammenfassen">
 <!ENTITY sb.prefs.ui.bookmarkMenu "Eintrag &quot;Lesezeichen mit ScrapBook erstellen&quot; anzeigen">
-<!ENTITY sb.prefs.ui.menuBar "Show in menu bar">
+<!ENTITY sb.prefs.ui.menuBar "ScrapBook-Eintrag in der Menüleiste anzeigen">
+<!ENTITY sb.prefs.ui.menuBar.icon "Icon">
 <!ENTITY sb.prefs.ui.toolsMenu "ScrapBook-Eintrag im Menü &quot;Extras&quot; anzeigen">
 <!ENTITY sb.prefs.ui.statusBar "Symbol in der Statusleiste anzeigen">
+<!ENTITY sb.prefs.restart "Change requires Firefox restart.">
 <!ENTITY sb.prefs.tabs.tips "Folgende Aktionen öffnen neue Tabs">
 <!ENTITY sb.prefs.tabs.note "Notiz bearbeiten">
 <!ENTITY sb.prefs.data "Zielordner für die Datenspeicherung">
@@ -20,9 +22,9 @@
 <!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook erlaubt das Einrichten unterschiedlicher Speicherorte, zwischen denen einfach mit einer Schaltfläche gewechselt werden kann.">
 <!ENTITY sb.prefs.confirmDelete "Vor dem Löschen von Listeneinträgen bestätigen">
 <!ENTITY sb.prefs.tree.autoCollapse "Beim Ausklappen eines Listenordners alle anderen Ordner einklappen">
-<!ENTITY sb.prefs.tree.unshift "Put an item into">
-<!ENTITY sb.prefs.tree.unshift.top "the top of a folder">
-<!ENTITY sb.prefs.tree.unshift.bottom "the bottom of a folder">
+<!ENTITY sb.prefs.tree.unshift "Einen Eintrag am">
+<!ENTITY sb.prefs.tree.unshift.top "Anfang eines Ordners erstellen">
+<!ENTITY sb.prefs.tree.unshift.bottom "Ende eines Ordners erstellen">
 <!ENTITY sb.prefs.showDetailOnDrop "Dialog &quot;Archivierungsdetails&quot; anzeigen, wenn eine Archivierung durch Ziehen mit der Maus in die Sidebar erfolgt">
 <!ENTITY sb.prefs.notifyOnComplete "Meldung nach Abschluss der Archivierung anzeigen">
 <!ENTITY sb.prefs.viewer "Datei-Manager">
