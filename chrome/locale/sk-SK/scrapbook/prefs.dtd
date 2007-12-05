@@ -1,22 +1,22 @@
-<!ENTITY sb.prefs.main "Main">
-<!ENTITY sb.prefs.tabs "Tabs">
-<!ENTITY sb.prefs.save "Save">
-<!ENTITY sb.prefs.edit "Edit">
-<!ENTITY sb.prefs.organize "Organize">
-<!ENTITY sb.prefs.advanced "Advanced">
+<!ENTITY sb.prefs.main "Hlavné">
+<!ENTITY sb.prefs.tabs "Karty">
+<!ENTITY sb.prefs.save "Uložiť">
+<!ENTITY sb.prefs.edit "Upraviť">
+<!ENTITY sb.prefs.organize "Usporiadať">
+<!ENTITY sb.prefs.advanced "Pokročilé">
 <!ENTITY sb.prefs.ui.contextMenu "Show in browser context menu">
-<!ENTITY sb.prefs.ui.contextSubMenu "Submenu">
+<!ENTITY sb.prefs.ui.contextSubMenu "Podponuka">
 <!ENTITY sb.prefs.ui.bookmarkMenu "Show &apos;Bookmark with ScrapBook&apos; menu">
-<!ENTITY sb.prefs.ui.menuBar "Show in menu bar">
-<!ENTITY sb.prefs.ui.menuBar.icon "Icon">
-<!ENTITY sb.prefs.ui.toolsMenu "Show in &apos;Tools&apos; menu">
-<!ENTITY sb.prefs.ui.statusBar "Show in status bar">
+<!ENTITY sb.prefs.ui.menuBar "Zobraziť v ponuke">
+<!ENTITY sb.prefs.ui.menuBar.icon "Ikona">
+<!ENTITY sb.prefs.ui.toolsMenu "Zobraziť v &apos;">
+<!ENTITY sb.prefs.ui.statusBar "Zobraziť v stavovom riadku">
 <!ENTITY sb.prefs.restart "Change requires Firefox restart.">
 <!ENTITY sb.prefs.tabs.tips "Open in tab for the following operations">
-<!ENTITY sb.prefs.tabs.note "Edit Note">
+<!ENTITY sb.prefs.tabs.note "Upraviť poznámku">
 <!ENTITY sb.prefs.data "Location to Store Data">
-<!ENTITY sb.prefs.data.default "Default (Profile Folder)">
-<!ENTITY sb.prefs.data.custom "Save data to">
+<!ENTITY sb.prefs.data.default "Predvolené">
+<!ENTITY sb.prefs.data.custom "Uložiť údaje do">
 <!ENTITY sb.prefs.data.tips "Choose a folder where to store the ScrapBook data.">
 <!ENTITY sb.prefs.multibook.enabled "Enable Multi-ScrapBook">
 <!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook enables you to set up multiple locations to store data and switch between them quickly with toolbar button.">
@@ -28,9 +28,9 @@
 <!ENTITY sb.prefs.showDetailOnDrop "Show &apos;Capture Detail&apos; dialog when capturing by drag-and-drop into Sidebar">
 <!ENTITY sb.prefs.notifyOnComplete "Show &apos;Capture Completed&apos; notification">
 <!ENTITY sb.prefs.viewer "Application for File Browsing">
-<!ENTITY sb.prefs.viewer.default "Default">
-<!ENTITY sb.prefs.viewer.default.explorer "Explorer">
-<!ENTITY sb.prefs.viewer.custom "Show files with">
-<!ENTITY sb.button.customize "Customize">
-<!ENTITY sb.button.browse "Browse">
-<!ENTITY sb.button.show "Show Files">
+<!ENTITY sb.prefs.viewer.default "Predvolené">
+<!ENTITY sb.prefs.viewer.default.explorer "Prieskumník">
+<!ENTITY sb.prefs.viewer.custom "Zobraziť súbory s">
+<!ENTITY sb.button.customize "Prispôsobiť">
+<!ENTITY sb.button.browse "Prehľadávať">
+<!ENTITY sb.button.show "Zobraziť súbory">

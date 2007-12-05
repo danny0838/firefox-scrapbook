@@ -549,7 +549,7 @@ var sbContentSaver = {
 	processCSSRecursively : function(aCSS)
 	{
 		var content = "";
-		if ( aCSS.disabled ) return "";
+		if ( !aCSS || aCSS.disabled ) return "";
 		var medium = aCSS.media.mediaText;
 		if ( medium != "" && medium.indexOf("screen") < 0 && medium.indexOf("all") < 0 )
 		{

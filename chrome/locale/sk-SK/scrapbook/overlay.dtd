@@ -8,8 +8,8 @@
 <!ENTITY sb.capture.target.as "Zachytiť odkaz ako...">
 <!ENTITY sb.capture.alltabs "Zachytiť všetky karty">
 <!ENTITY sb.capture.bookmark "Záložka ScrapBook">
-<!ENTITY sb.sidebar "Show in Sidebar">
-<!ENTITY sb.menu "Menu">
+<!ENTITY sb.sidebar "Zobraziť v bočnom paneli">
+<!ENTITY sb.menu "Ponuka">
 <!ENTITY sb.editbefore "Upraviť pred zachytením">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "B">

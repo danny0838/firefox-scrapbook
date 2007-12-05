@@ -18,7 +18,7 @@
 <!ENTITY sb.folder.openall "Otvoriť všetko v kartách">
 <!ENTITY sb.folder.manage "Správca priečinkov">
 <!ENTITY sb.new.folder "Nový priečinok">
-<!ENTITY sb.new.separator "New Separator">
+<!ENTITY sb.new.separator "Nový oddeľovač">
 <!ENTITY sb.new.note "Nová poznámka">
 <!ENTITY sb.sort.folder "Zoradiť priečinok">
 <!ENTITY sb.search "Hľadať">
@@ -29,5 +29,5 @@
 <!ENTITY sb.search.cache "Aktualizovať cache pre fulltextové hľadanie">
 <!ENTITY sb.search.clear "Vymazať históriu formulára">
 <!ENTITY sb.search.days "Filter podľa dní">
-<!ENTITY mb.manage "Manage">
+<!ENTITY mb.manage "Spravovať">
 <!ENTITY mb.profileFolder "Používateľský priečinok">

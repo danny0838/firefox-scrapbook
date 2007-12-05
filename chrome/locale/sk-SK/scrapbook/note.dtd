@@ -10,10 +10,10 @@
 <!ENTITY sb.note.help "Pomocník">
 <!ENTITY sb.note.print "Tlač">
 <!ENTITY sb.note.exit "Ukončiť">
-<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.save.accesskey "U">
 <!ENTITY sb.note.htmlview.accesskey "H">
-<!ENTITY sb.note.normalview.accesskey "N">
-<!ENTITY sb.note.tools.accesskey "T">
-<!ENTITY sb.note.fontsize.accesskey "F">
-<!ENTITY sb.note.print.accesskey "P">
-<!ENTITY sb.note.exit.accesskey "X">
+<!ENTITY sb.note.normalview.accesskey "B">
+<!ENTITY sb.note.tools.accesskey "N">
+<!ENTITY sb.note.fontsize.accesskey "V">
+<!ENTITY sb.note.print.accesskey "T">
+<!ENTITY sb.note.exit.accesskey "k">

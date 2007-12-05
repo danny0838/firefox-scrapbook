@@ -8,10 +8,10 @@
 <!ENTITY sb.prefs.ui.contextSubMenu "Einträge in Untermenü zusammenfassen">
 <!ENTITY sb.prefs.ui.bookmarkMenu "Eintrag &quot;Lesezeichen mit ScrapBook erstellen&quot; anzeigen">
 <!ENTITY sb.prefs.ui.menuBar "ScrapBook-Eintrag in der Menüleiste anzeigen">
-<!ENTITY sb.prefs.ui.menuBar.icon "Icon">
+<!ENTITY sb.prefs.ui.menuBar.icon "Symbol">
 <!ENTITY sb.prefs.ui.toolsMenu "ScrapBook-Eintrag im Menü &quot;Extras&quot; anzeigen">
 <!ENTITY sb.prefs.ui.statusBar "Symbol in der Statusleiste anzeigen">
-<!ENTITY sb.prefs.restart "Change requires Firefox restart.">
+<!ENTITY sb.prefs.restart "Änderung erfordert einen Firefox-Neustart.">
 <!ENTITY sb.prefs.tabs.tips "Folgende Aktionen öffnen neue Tabs">
 <!ENTITY sb.prefs.tabs.note "Notiz bearbeiten">
 <!ENTITY sb.prefs.data "Zielordner für die Datenspeicherung">
