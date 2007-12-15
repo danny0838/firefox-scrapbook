@@ -460,7 +460,8 @@ var sbTreeDNDHandler = {
 			var res = sbTreeHandler.TREE.builderView.getResourceAtIndex(idx);
 			transferData.data = new TransferData();
 			transferData.data.addDataForFlavour("moz/rdfitem", res.Value);
-			transferData.data.addDataForFlavour("text/x-moz-url", sbDataSource.getURL(res));
+			if (sbDataSource.getProperty(res, "type") != "separator")
+				transferData.data.addDataForFlavour("text/x-moz-url", sbDataSource.getURL(res));
 		},
 		getSupportedFlavours: function() {
 			var flavours = new FlavourSet();

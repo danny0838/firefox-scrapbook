@@ -426,13 +426,6 @@ var sbContentSaver = {
 					default:
 				}
 				break;
-			case "textarea": 
-				if (aNode.value) {
-					while (aNode.hasChildNodes())
-						aNode.removeChild(aNode.lastChild);
-					aNode.appendChild(aNode.ownerDocument.createTextNode(aNode.value));
-				}
-				break;
 			case "link" : 
 				if ( aNode.rel.toLowerCase() == "stylesheet" && (aNode.href.indexOf("chrome") != 0 || !this.option["styles"]) ) {
 					return this.removeNodeFromParent(aNode);
