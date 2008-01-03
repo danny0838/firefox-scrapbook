@@ -7,7 +7,7 @@
 <!ENTITY sb.capture.filter "Filtrage">
 <!ENTITY sb.capture.filter.domain "Limiter au domaine">
 <!ENTITY sb.capture.filter.level "Limiter au répertoire">
-<!ENTITY sb.capture.filter.string "Filtrer par chaîne...">
+<!ENTITY sb.capture.filter.string "Filtrer par chaîne…">
 <!ENTITY sb.capture.filter.checkon "Sélectionner tout">
 <!ENTITY sb.capture.filter.checkoff "Désélectionner tout">
 <!ENTITY sb.capture.filter.invert "Inverser la sélection">

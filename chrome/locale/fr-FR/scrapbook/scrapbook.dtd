@@ -4,7 +4,7 @@
 <!ENTITY sb.toggle.all "Ouvrir/fermer tous les dossiers">
 <!ENTITY sb.tools "Outils">
 <!ENTITY sb.tools.options "Paramètres">
-<!ENTITY sb.tools.manage "Gestion">
+<!ENTITY sb.tools.manage "Gérer">
 <!ENTITY sb.tools.combine "Assistant de combinaison">
 <!ENTITY sb.tools.trade "Importer / Exporter">
 <!ENTITY sb.tools.multiple "Capturer des URLs multiples">

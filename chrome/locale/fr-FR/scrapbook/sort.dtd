@@ -5,4 +5,4 @@
 <!ENTITY sb.sort.date.asc "Chronologique">
 <!ENTITY sb.sort.date.desc "Chronologique inverse">
 <!ENTITY sb.sort.recursive "Classer récursivement les sous-dossiers">
-<!ENTITY sb.sort.warning "Important : Vous ne pouvez pas annuler cette opération.">
+<!ENTITY sb.sort.warning "Important : vous ne pouvez pas annuler cette opération.">

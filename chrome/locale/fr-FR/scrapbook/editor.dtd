@@ -1,6 +1,6 @@
 <!ENTITY sb.toolbar.edit "Barre d&apos;outil d&apos;édition">
 <!ENTITY sb.toolbar.info "Barre d&apos;information">
-<!ENTITY sb.edit.eraser "DOM Eraser: un outil pour supprimer un bloc sélectionné.">
+<!ENTITY sb.edit.eraser "DOM Eraser : un outil pour supprimer un bloc sélectionné.">
 <!ENTITY sb.edit.undo "Annuler">
 <!ENTITY sb.edit.save "Sauvegarder les changements">
 <!ENTITY sb.edit.comment "Déployer la zone de commentaire">
