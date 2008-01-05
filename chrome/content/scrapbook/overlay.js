@@ -37,14 +37,15 @@ var sbBrowserOverlay = {
 	init: function()
 	{
 		document.getElementById("contentAreaContextMenu").addEventListener(
-			"popupshowing", sbBrowserOverlay.onPopupShowing, false
+			"popupshowing", this, false
 		);
 		this._prefBranch = Cc["@mozilla.org/preferences-service;1"]
 		                   .getService(Components.interfaces.nsIPrefService)
 		                   .getBranch("scrapbook.ui.");
 		this.refresh();
 		gBrowser.addProgressListener(this.webProgressListener);
-		if (this._prefBranch.getBoolPref("contextSubMenu")) {
+		if (this._prefBranch.getBoolPref("contextMenu") && 
+		    this._prefBranch.getBoolPref("contextSubMenu")) {
 			var callback = function() {
 				document.getElementById("ScrapBookContextSubmenu").hidden = false;
 				for (var i = 1; i <= 9; i++) {
@@ -305,6 +306,12 @@ var sbBrowserOverlay = {
 		return isSelected;
 	},
 
+	handleEvent: function(event)
+	{
+		if (event.type == "popupshowing")
+			this.onPopupShowing(event);
+	},
+
 	onPopupShowing : function(event)
 	{
 		if (event.originalTarget.id != "contentAreaContextMenu")
@@ -317,8 +324,8 @@ var sbBrowserOverlay = {
 			onInput  = gContextMenu.onTextInput;
 		}
 		catch(ex) {
-			selected = sbBrowserOverlay.isSelected();
-			onLink   = sbBrowserOverlay.getLinkURI() ? true : false;
+			selected = this.isSelected();
+			onLink   = this.getLinkURI() ? true : false;
 			inFrame  = document.popupNode.ownerDocument != window.content.document;
 			onInput  = document.popupNode instanceof HTMLTextAreaElement || 
 			           (document.popupNode instanceof HTMLInputElement && 
@@ -328,8 +335,8 @@ var sbBrowserOverlay = {
 		var getElement = function(aID) {
 			return document.getElementById(aID);
 		};
-		var prefContext  = sbBrowserOverlay._prefBranch.getBoolPref("contextMenu");
-		var prefBookmark = sbBrowserOverlay._prefBranch.getBoolPref("bookmarkMenu");
+		var prefContext  = this._prefBranch.getBoolPref("contextMenu");
+		var prefBookmark = this._prefBranch.getBoolPref("bookmarkMenu");
 		getElement("ScrapBookContextMenu0").hidden = !prefContext || onInput;
 		getElement("ScrapBookContextMenu1").hidden = !prefContext || !selected;
 		getElement("ScrapBookContextMenu2").hidden = !prefContext || !selected;
@@ -347,10 +354,10 @@ var sbBrowserOverlay = {
 		if (event.originalTarget.localName == "menu" || event.button != 1)
 			return;
 		switch (aFlag) {
-			case 1 : sbBrowserOverlay.execCapture(1, true, true , event.originalTarget.id); break;
-			case 3 : sbBrowserOverlay.execCapture(2, false,true , event.originalTarget.id); break;
-			case 5 : sbBrowserOverlay.execCapture(2, true, true , event.originalTarget.id); break;
-			case 7 : sbBrowserOverlay.execCaptureTarget(true,  event.originalTarget.id); break;
+			case 1 : this.execCapture(1, true, true , event.originalTarget.id); break;
+			case 3 : this.execCapture(2, false,true , event.originalTarget.id); break;
+			case 5 : this.execCapture(2, true, true , event.originalTarget.id); break;
+			case 7 : this.execCaptureTarget(true,  event.originalTarget.id); break;
 		}
 	},
 

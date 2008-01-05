@@ -1,5 +1,5 @@
 <!ENTITY sb.open "Ouvrir">
-<!ENTITY sb.open.tab "Éditer dans un onglet">
+<!ENTITY sb.open.tab "Ouvrir dans un onglet">
 <!ENTITY sb.open.newtab "Ouvrir dans un nouvel onglet">
 <!ENTITY sb.open.source "Ouvrir l&apos;URL de la source">
 <!ENTITY sb.tools "Outils">
@@ -22,11 +22,11 @@
 <!ENTITY sb.new.note "Nouvelle note">
 <!ENTITY sb.sort.folder "Classer le dossier">
 <!ENTITY sb.search "Recherche">
-<!ENTITY sb.search.fulltext "Rechercher dans le texte entier">
+<!ENTITY sb.search.fulltext "Recherche sur texte entier">
 <!ENTITY sb.search.all "Tout">
 <!ENTITY sb.search.re "Utiliser une expression régulière (RegExp)">
 <!ENTITY sb.search.cs "Respecter la casse">
-<!ENTITY sb.search.cache "Mettre à jour le cache pour la recherche du texte entier">
+<!ENTITY sb.search.cache "Mettre à jour le cache pour la recherche sur texte entier">
 <!ENTITY sb.search.clear "Nettoyer l&apos;historique">
 <!ENTITY sb.search.days "Filtre par jour">
 <!ENTITY mb.manage "Gérer">

@@ -1,5 +1,5 @@
 <!ENTITY sb.capture "Capture">
-<!ENTITY sb.capture.abort "Arrêter">
+<!ENTITY sb.capture.abort "Interrompre">
 <!ENTITY sb.capture.start "Démarrer">
 <!ENTITY sb.capture.retry "Réessayer">
 <!ENTITY sb.capture.skip "Ignorer">
