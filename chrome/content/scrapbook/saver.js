@@ -567,6 +567,9 @@ var sbContentSaver = {
 
 	inspectCSSText : function(aCSStext, aCSShref)
 	{
+		if (!aCSShref) {
+			aCSShref = this.refURLObj.spec;
+		}
 		if ( !aCSStext ) return "";
 		var re = new RegExp(/ url\(([^\'\)\s]+)\)/);
 		var i = 0;

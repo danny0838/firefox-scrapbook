@@ -194,7 +194,7 @@ var sbCommonUtils = {
 			var baseURLObj = this.convertURLToObject(aBaseURL);
 			return baseURLObj.resolve(aRelURL);
 		} catch(ex) {
-			alert("ScrapBook ERROR: Failed to resolve URL.\n" + aBaseURL + "\n" + aRelURL);
+			dump("*** ScrapBook ERROR: Failed to resolve URL: " + aBaseURL + "\t" + aRelURL + "\n");
 		}
 	},
 
