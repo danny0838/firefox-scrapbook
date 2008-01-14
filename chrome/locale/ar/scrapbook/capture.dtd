@@ -1,0 +1,13 @@
+<!ENTITY sb.capture "إلتقط">
+<!ENTITY sb.capture.abort "إلغاء">
+<!ENTITY sb.capture.start "إبدأ">
+<!ENTITY sb.capture.retry "إعادة">
+<!ENTITY sb.capture.skip "تجاوز">
+<!ENTITY sb.capture.pause "إيقاف مؤقت">
+<!ENTITY sb.capture.filter "تصفية">
+<!ENTITY sb.capture.filter.domain "تقييبد بنطاق الموقع">
+<!ENTITY sb.capture.filter.level "تقييد بالمجلد">
+<!ENTITY sb.capture.filter.string "تصفية بـ سترينغ...">
+<!ENTITY sb.capture.filter.checkon "تفعيل الكل">
+<!ENTITY sb.capture.filter.checkoff "تعطيل الكل">
+<!ENTITY sb.capture.filter.invert "عكس الاختيارات">

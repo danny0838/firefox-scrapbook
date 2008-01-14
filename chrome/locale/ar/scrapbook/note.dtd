@@ -1,0 +1,19 @@
+<!ENTITY sb.note.save "حفظ">
+<!ENTITY sb.note.close "إغلاق">
+<!ENTITY sb.note.tools "أدوات">
+<!ENTITY sb.note.htmlview "HTML عرض">
+<!ENTITY sb.note.normalview "عرض عادي">
+<!ENTITY sb.note.template "تحرير قالب HTML">
+<!ENTITY sb.note.autolinefeed "تلقائي-Linefeed">
+<!ENTITY sb.note.autolinefeed.t "إضافة &lt;br&gt; tag to the end-of-line at &sb.note.htmlview;">
+<!ENTITY sb.note.fontsize "حجم الخط">
+<!ENTITY sb.note.help "مساعدة">
+<!ENTITY sb.note.print "طباعة">
+<!ENTITY sb.note.exit "خروج">
+<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "N">
+<!ENTITY sb.note.tools.accesskey "T">
+<!ENTITY sb.note.fontsize.accesskey "F">
+<!ENTITY sb.note.print.accesskey "P">
+<!ENTITY sb.note.exit.accesskey "X">

@@ -1,0 +1,8 @@
+<!ENTITY sb.multiple.url "عنوان (ادخل العناوين واحدا تحت الآخر)">
+<!ENTITY sb.multiple.detector "كاشف العناوين">
+<!ENTITY sb.multiple.detector.plink "كل الارتباطات في الصفحة">
+<!ENTITY sb.multiple.detector.slink "كل الارتباطات في التحديد">
+<!ENTITY sb.multiple.detector.tabs "كل الالسنة المفتوحة في النافذة">
+<!ENTITY sb.multiple.detector.local "كل HTMLs المحلية في دليل ">
+<!ENTITY sb.multiple.detector.bookmarks "اشارات مرجعية">
+<!ENTITY sb.multiple.detector.clear "مسح">
