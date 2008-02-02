@@ -1,24 +1,24 @@
 <!ENTITY sb.open "Abrir">
 <!ENTITY sb.open.tab "Abrir en pestaña">
-<!ENTITY sb.open.newtab "Abrir en nueva pestaña">
+<!ENTITY sb.open.newtab "Abrir en una nueva pestaña">
 <!ENTITY sb.open.source "Abrir URL de origen">
 <!ENTITY sb.tools "Herramientas">
 <!ENTITY sb.show.files "Mostrar Ficheros">
-<!ENTITY sb.move "Move">
+<!ENTITY sb.move "Mover">
 <!ENTITY sb.move.into "Mover a carpeta">
-<!ENTITY sb.renew "Capture Again">
+<!ENTITY sb.renew "Capturar otra vez">
 <!ENTITY sb.export "Exportar">
 <!ENTITY sb.remove "Borrar">
 <!ENTITY sb.property "Propiedades">
-<!ENTITY sb.listview "List View">
+<!ENTITY sb.listview "Vista en modo lista">
 <!ENTITY sb.prop.title "Título">
 <!ENTITY sb.prop.comment "Comentario">
 <!ENTITY sb.prop.id.date "ID (Fecha)">
 <!ENTITY sb.folder.combine "Vista combinada">
 <!ENTITY sb.folder.openall "Abrir todo en pestañas">
 <!ENTITY sb.folder.manage "Administrar carpeta">
-<!ENTITY sb.new.folder "Nueva carpeta">
-<!ENTITY sb.new.separator "New Separator">
+<!ENTITY sb.new.folder "Nueva Carpeta">
+<!ENTITY sb.new.separator "Nuevo Separador">
 <!ENTITY sb.new.note "Nueva nota">
 <!ENTITY sb.sort.folder "Ordenar carpeta">
 <!ENTITY sb.search "Buscar">

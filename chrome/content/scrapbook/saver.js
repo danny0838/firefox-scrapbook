@@ -511,7 +511,6 @@ var sbContentSaver = {
 					var newFileName = this.saveDocumentInternal(this.frameList[this.frameNumber].document, this.name + "_" + this.frameNumber);
 					aNode.setAttribute("src", newFileName);
 				} catch(ex) {
-					alert("ScrapBook ERROR: Failed to get document in a frame.\n\n" + ex);
 				}
 				this.refURLObj = tmpRefURL;
 				break;

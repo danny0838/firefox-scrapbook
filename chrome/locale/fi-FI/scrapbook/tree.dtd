@@ -4,7 +4,7 @@
 <!ENTITY sb.open.source "Avaa lähde-URL">
 <!ENTITY sb.tools "Työkalut">
 <!ENTITY sb.show.files "Näytä tiedostot">
-<!ENTITY sb.move "Move">
+<!ENTITY sb.move "Siirrä">
 <!ENTITY sb.move.into "Siirrä kansioon">
 <!ENTITY sb.renew "Kaappaa uudestaan">
 <!ENTITY sb.export "Vie">
@@ -18,7 +18,7 @@
 <!ENTITY sb.folder.openall "Avaa kaikki välilehtiin">
 <!ENTITY sb.folder.manage "Muokkaa kansiota">
 <!ENTITY sb.new.folder "Uusi kansio">
-<!ENTITY sb.new.separator "New Separator">
+<!ENTITY sb.new.separator "Uusi erotin">
 <!ENTITY sb.new.note "Uusi muistilappu">
 <!ENTITY sb.sort.folder "Järjestä kansio">
 <!ENTITY sb.search "Etsi">
@@ -29,5 +29,5 @@
 <!ENTITY sb.search.cache "Päivitä välimuisti täydellistä tekstihakua varten">
 <!ENTITY sb.search.clear "Tyhjennä hakukentän muisti">
 <!ENTITY sb.search.days "Suodatus päivien mukaan">
-<!ENTITY mb.manage "Manage">
+<!ENTITY mb.manage "Hallinnoi">
 <!ENTITY mb.profileFolder "Profiilikansio">

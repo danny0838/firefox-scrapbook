@@ -1,11 +1,11 @@
 <!ENTITY sb.new.folder "Uusi kansio">
-<!ENTITY sb.new.separator "New Separator">
+<!ENTITY sb.new.separator "Uusi erotin">
 <!ENTITY sb.new.note "Uusi muistilappu">
-<!ENTITY sb.toggle.all "Open/close All Folders">
+<!ENTITY sb.toggle.all "Avaa tai sulje kaikki kansiot">
 <!ENTITY sb.tools "Työkalut">
 <!ENTITY sb.tools.options "Asetukset">
 <!ENTITY sb.tools.manage "Muokkaa">
-<!ENTITY sb.tools.combine "Combine Wizard">
+<!ENTITY sb.tools.combine "Yhdistämistoiminto">
 <!ENTITY sb.tools.trade "Tuo tai vie">
 <!ENTITY sb.tools.multiple "Kaappaa useita sivuja">
 <!ENTITY sb.tools.directory "ScrapBook-kansio">

@@ -4,8 +4,8 @@
 <!ENTITY sb.edit.undo "Deshacer">
 <!ENTITY sb.edit.save "Guardar">
 <!ENTITY sb.edit.comment "Expandir área de comentarios">
-<!ENTITY sb.edit.sticky "Sticky Annotation">
-<!ENTITY sb.edit.sticky.create "Create &sb.edit.sticky;">
+<!ENTITY sb.edit.sticky "Anotación Post-it">
+<!ENTITY sb.edit.sticky.create "Crear &sb.edit.sticky;">
 <!ENTITY sb.edit.inline.add "Añadir comentario a la selección">
 <!ENTITY sb.edit.attach.file "Anexar fichero a la selección">
 <!ENTITY sb.edit.attach.link "Anexar enlace a la selección">
@@ -16,8 +16,8 @@
 <!ENTITY sb.highlighter.remove "Limpiar marcas en la selección">
 <!ENTITY sb.highlighter.remove.all "Borrar todas las marcas">
 <!ENTITY sb.source "Abrir URL de origen">
-<!ENTITY sb.renew "Capture Again">
+<!ENTITY sb.renew "Capturar Otra vez">
 <!ENTITY sb.locate "Localizar en el árbol de la barra lateral">
-<!ENTITY sb.indicators "Show Link Indicators">
-<!ENTITY sb.info.home "Raiz">
+<!ENTITY sb.indicators "Mostrar Indicadores de enlaces">
+<!ENTITY sb.info.home "Raíz">
 <!ENTITY sb.info.sitemap "Mapa del Sitio">

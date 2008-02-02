@@ -8,6 +8,6 @@
 <!ENTITY sb.prop.icon "Icono">
 <!ENTITY sb.prop.icon.change "Cambiar">
 <!ENTITY sb.prop.icon.default "Por defecto">
-<!ENTITY sb.prop.icon.favicon "Selecionar favicon">
-<!ENTITY sb.prop.icon.custom "Selecionar icono">
+<!ENTITY sb.prop.icon.favicon "Seleccionar favicon">
+<!ENTITY sb.prop.icon.custom "Seleccionar icono">
 <!ENTITY sb.prop.mark "Marcar">

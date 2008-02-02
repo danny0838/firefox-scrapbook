@@ -6,11 +6,11 @@
 <!ENTITY sb.capture.frame.as "Capturar Marco como">
 <!ENTITY sb.capture.target "Capturar Enlace">
 <!ENTITY sb.capture.target.as "Capturar Enlace como">
-<!ENTITY sb.capture.alltabs "Capture All Tabs">
-<!ENTITY sb.capture.bookmark "Bookmark with ScrapBook">
-<!ENTITY sb.sidebar "Show in Sidebar">
-<!ENTITY sb.menu "Menu">
-<!ENTITY sb.editbefore "Edit Before Capture">
+<!ENTITY sb.capture.alltabs "Capturar todas las pestañas">
+<!ENTITY sb.capture.bookmark "Marcar con Scrapbook">
+<!ENTITY sb.sidebar "Mostrar en la barra lateral">
+<!ENTITY sb.menu "Menú">
+<!ENTITY sb.editbefore "Editar antes de capturar">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">

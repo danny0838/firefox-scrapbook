@@ -2,4 +2,4 @@
 <!ENTITY sb.trade.export "Exportar">
 <!ENTITY sb.trade.time "Fecha de Exportación">
 <!ENTITY sb.trade.restore "Importar con estructura de carpeta de restauración">
-<!ENTITY sb.trade.remove "Remove files after importing">
+<!ENTITY sb.trade.remove "Borrar ficheros después de importar">

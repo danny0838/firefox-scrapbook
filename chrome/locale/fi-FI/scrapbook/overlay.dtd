@@ -7,9 +7,9 @@
 <!ENTITY sb.capture.target "Kaappaa kohde">
 <!ENTITY sb.capture.target.as "Kaappaa kohde nimellä">
 <!ENTITY sb.capture.alltabs "Kaappaa kaikki välilehdet">
-<!ENTITY sb.capture.bookmark "Lisää kirjanmerkki ScrapBookiin">
-<!ENTITY sb.sidebar "Show in Sidebar">
-<!ENTITY sb.menu "Menu">
+<!ENTITY sb.capture.bookmark "Aseta kirjanmerkki ScrapBookiin">
+<!ENTITY sb.sidebar "Näytä sivupaneelissa">
+<!ENTITY sb.menu "Valikko">
 <!ENTITY sb.editbefore "Muokkaa ennen kaappausta">
 <!ENTITY sb.key.sidebar "C">
 <!ENTITY sb.key.menubar "S">
