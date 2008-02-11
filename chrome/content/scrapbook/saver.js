@@ -365,6 +365,7 @@ var sbContentSaver = {
 					if ( aNode.hasAttribute("onclick") ) aNode = this.normalizeJSLink(aNode, "onclick");
 					var aFileName = this.download(aNode.src);
 					if (aFileName) aNode.setAttribute("src", aFileName);
+					aNode.removeAttribute("livesrc");
 				} else {
 					return this.removeNodeFromParent(aNode);
 				}
@@ -535,6 +536,9 @@ var sbContentSaver = {
 			aNode.removeAttribute("onmouseout");
 			aNode.removeAttribute("onload");
 		}
+		if (aNode.hasAttribute("_base_href")) {
+			aNode.removeAttribute("_base_href");
+		}
 		return aNode;
 	},
 
@@ -650,6 +654,7 @@ var sbContentSaver = {
 			try {
 				var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
 				WBP.persistFlags |= WBP.PERSIST_FLAGS_FROM_CACHE;
+				WBP.persistFlags |= WBP.PERSIST_FLAGS_AUTODETECT_APPLY_CONVERSION;
 				WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile);
 				this.httpTask[this.item.id]++;
 				WBP.progressListener = new sbCaptureObserver(this.item, newFileName);

@@ -4,33 +4,33 @@
 <!ENTITY sb.prefs.edit "Upraviť">
 <!ENTITY sb.prefs.organize "Usporiadať">
 <!ENTITY sb.prefs.advanced "Pokročilé">
-<!ENTITY sb.prefs.ui.contextMenu "Show in browser context menu">
+<!ENTITY sb.prefs.ui.contextMenu "Zobraziť v kontextovej ponuke prehliadača">
 <!ENTITY sb.prefs.ui.contextSubMenu "Podponuka">
-<!ENTITY sb.prefs.ui.bookmarkMenu "Show &apos;Bookmark with ScrapBook&apos; menu">
-<!ENTITY sb.prefs.ui.menuBar "Zobraziť v ponuke">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Zobraziť ponuku &apos;Vytvoriť záložku&apos;">
+<!ENTITY sb.prefs.ui.menuBar "Zobraziť v ponukovej lište">
 <!ENTITY sb.prefs.ui.menuBar.icon "Ikona">
-<!ENTITY sb.prefs.ui.toolsMenu "Zobraziť v &apos;">
-<!ENTITY sb.prefs.ui.statusBar "Zobraziť v stavovom riadku">
-<!ENTITY sb.prefs.restart "Change requires Firefox restart.">
-<!ENTITY sb.prefs.tabs.tips "Open in tab for the following operations">
+<!ENTITY sb.prefs.ui.toolsMenu "Zobraziť v ponuke &apos;Nástroje&apos;">
+<!ENTITY sb.prefs.ui.statusBar "Zobraziť v stavovej lište">
+<!ENTITY sb.prefs.restart "Zmeny sa prejavia po reštarte Firefoxu.">
+<!ENTITY sb.prefs.tabs.tips "Nasledovné akcie otvoria nové karty">
 <!ENTITY sb.prefs.tabs.note "Upraviť poznámku">
-<!ENTITY sb.prefs.data "Location to Store Data">
+<!ENTITY sb.prefs.data "Umiestnenie pre ukladanie údajov">
 <!ENTITY sb.prefs.data.default "Predvolené">
 <!ENTITY sb.prefs.data.custom "Uložiť údaje do">
-<!ENTITY sb.prefs.data.tips "Choose a folder where to store the ScrapBook data.">
-<!ENTITY sb.prefs.multibook.enabled "Enable Multi-ScrapBook">
-<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook enables you to set up multiple locations to store data and switch between them quickly with toolbar button.">
-<!ENTITY sb.prefs.confirmDelete "Warn me when deleting tree item(s)">
-<!ENTITY sb.prefs.tree.autoCollapse "When opening a tree folder, automatically close other folders">
-<!ENTITY sb.prefs.tree.unshift "Put an item into">
-<!ENTITY sb.prefs.tree.unshift.top "the top of a folder">
-<!ENTITY sb.prefs.tree.unshift.bottom "the bottom of a folder">
-<!ENTITY sb.prefs.showDetailOnDrop "Show &apos;Capture Detail&apos; dialog when capturing by drag-and-drop into Sidebar">
-<!ENTITY sb.prefs.notifyOnComplete "Show &apos;Capture Completed&apos; notification">
-<!ENTITY sb.prefs.viewer "Application for File Browsing">
-<!ENTITY sb.prefs.viewer.default "Predvolené">
+<!ENTITY sb.prefs.data.tips "Zvoliť priečinok, kam ukladať ScrapBook údaje.">
+<!ENTITY sb.prefs.multibook.enabled "Povoliť Multi-ScrapBook">
+<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook umožní zvoliť si viaceré priečinky pre ukladanie údajov a jednoducho prepínať medzi nimi pomocou tlačidla na paneli nástrojov.">
+<!ENTITY sb.prefs.confirmDelete "Upozorniť pri odstránení položky">
+<!ENTITY sb.prefs.tree.autoCollapse "Pri otvorení priečinku automaticky zatvoriť ostatné priečinky">
+<!ENTITY sb.prefs.tree.unshift "Zaradiť položku">
+<!ENTITY sb.prefs.tree.unshift.top "na vrch v priečinku">
+<!ENTITY sb.prefs.tree.unshift.bottom "na spodok v priečinku">
+<!ENTITY sb.prefs.showDetailOnDrop "Zobraziť dialóg &apos;Detail zachytenia&apos;, keď sa zachytenie vykoná pomocou drag-and-drop do bočného panelu">
+<!ENTITY sb.prefs.notifyOnComplete "Zobraziť oznámenie &apos;Zachytenie dokončené&apos;">
+<!ENTITY sb.prefs.viewer "Súborový prehliadač">
+<!ENTITY sb.prefs.viewer.default "Predvolený">
 <!ENTITY sb.prefs.viewer.default.explorer "Prieskumník">
-<!ENTITY sb.prefs.viewer.custom "Zobraziť súbory s">
+<!ENTITY sb.prefs.viewer.custom "Súbory zobraziť pomocou">
 <!ENTITY sb.button.customize "Prispôsobiť">
 <!ENTITY sb.button.browse "Prehľadávať">
 <!ENTITY sb.button.show "Zobraziť súbory">
