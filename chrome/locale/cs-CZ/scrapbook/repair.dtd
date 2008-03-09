@@ -1,9 +1,9 @@
 <!ENTITY sb.repair.rdfFile "Obnovit scrapbook.rdf">
-<!ENTITY sb.repair.rdfFile.descript "Zkuste tehdy, zmizí-li vám najednou všechna uložená data.">
-<!ENTITY sb.repair.rdfFile.select "Vyberte soubor obsahující zálohovaná data.">
+<!ENTITY sb.repair.rdfFile.descript "Zkuste, pokud vám najednou zmizí všechna uložená data.">
+<!ENTITY sb.repair.rdfFile.select "Pro obnovení vyberte soubor obsahující zálohu.">
 <!ENTITY sb.repair.rdfFile.file "Soubor">
 <!ENTITY sb.repair.rdfFile.time "Čas">
 <!ENTITY sb.repair.rdfFile.size "Velikost">
-<!ENTITY sb.repair.favicons "Obnovit favikony">
-<!ENTITY sb.repair.favicons.descript "Zkuste tehdy, zmizí-li ze seznamu větší množství favikon.">
+<!ENTITY sb.repair.favicons "Obnovit favikony ve stromové struktuře">
+<!ENTITY sb.repair.favicons.descript "Zkuste, pokud zmizí ze ScrapBooku větší množství favikon.">
 <!ENTITY sb.repair.complete "Dokončeno.">
