@@ -10,7 +10,7 @@
 <!ENTITY sb.tools.multiple "Zachytit více adres URL">
 <!ENTITY sb.tools.directory "ScrapBook adresář">
 <!ENTITY sb.tools.calculate "Výpočet velikosti">
-<!ENTITY sb.tools.sorttree "Seřadit stromovou struktorou">
+<!ENTITY sb.tools.sorttree "Seřadit stromovou strukturou">
 <!ENTITY sb.tools.output "Exportovat strom jako HTML">
 <!ENTITY sb.tools.repair "Nouzová oprava">
 <!ENTITY sb.tools.addons "Přídavné funkce">

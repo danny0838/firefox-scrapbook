@@ -1,0 +1,13 @@
+<!ENTITY sb.capture "Optag">
+<!ENTITY sb.capture.abort "Afbryd">
+<!ENTITY sb.capture.start "Start">
+<!ENTITY sb.capture.retry "Forsøg igen">
+<!ENTITY sb.capture.skip "Udelad">
+<!ENTITY sb.capture.pause "Pauser">
+<!ENTITY sb.capture.filter "Filtre">
+<!ENTITY sb.capture.filter.domain "Restrict to Domain">
+<!ENTITY sb.capture.filter.level "Restrict to Directory">
+<!ENTITY sb.capture.filter.string "Filter by String...">
+<!ENTITY sb.capture.filter.checkon "Check All On">
+<!ENTITY sb.capture.filter.checkoff "Check All Off">
+<!ENTITY sb.capture.filter.invert "Invert Checks">

@@ -1,0 +1,19 @@
+<!ENTITY sb.new.folder "Ny mappe">
+<!ENTITY sb.new.separator "Ny Skillelinie">
+<!ENTITY sb.new.note "Ny Note">
+<!ENTITY sb.toggle.all "Åbn/luk alle mapper">
+<!ENTITY sb.tools "Værktøjer">
+<!ENTITY sb.tools.options "Indstillinger">
+<!ENTITY sb.tools.manage "Håndter">
+<!ENTITY sb.tools.combine "Combine Wizard">
+<!ENTITY sb.tools.trade "Importer/Eksporter">
+<!ENTITY sb.tools.multiple "Optag flere URL&apos;er">
+<!ENTITY sb.tools.directory "ScrapBook Destination">
+<!ENTITY sb.tools.calculate "Beregning af størrelse">
+<!ENTITY sb.tools.sorttree "Sort Entire Tree">
+<!ENTITY sb.tools.output "Output Tree as HTML">
+<!ENTITY sb.tools.repair "Emergency Repair">
+<!ENTITY sb.tools.addons "Add-on Functions">
+<!ENTITY sb.tools.homepage "Hjemmeside">
+<!ENTITY sb.note.opentab "Åbn i faneblad">
+<!ENTITY sb.note.close "Luk">

@@ -1,0 +1,20 @@
+<!ENTITY sb.hlCustom.preset "Preset Styles">
+<!ENTITY sb.hlCustom.background "Background">
+<!ENTITY sb.hlCustom.color "Color">
+<!ENTITY sb.hlCustom.text "Text">
+<!ENTITY sb.hlCustom.bold "Bold">
+<!ENTITY sb.hlCustom.italic "Italic">
+<!ENTITY sb.hlCustom.line "Line-through">
+<!ENTITY sb.hlCustom.border "Border">
+<!ENTITY sb.hlCustom.type "Type">
+<!ENTITY sb.hlCustom.box "Box">
+<!ENTITY sb.hlCustom.underline "Underline">
+<!ENTITY sb.hlCustom.style "Style">
+<!ENTITY sb.hlCustom.solid "Solid">
+<!ENTITY sb.hlCustom.dotted "Dotted">
+<!ENTITY sb.hlCustom.dashed "Dashed">
+<!ENTITY sb.hlCustom.double "Double">
+<!ENTITY sb.hlCustom.width "Width">
+<!ENTITY sb.hlCustom.thin "Thin">
+<!ENTITY sb.hlCustom.medium "Medium">
+<!ENTITY sb.hlCustom.thick "Thick">

@@ -1,0 +1,8 @@
+<!ENTITY sb.sort "Sort">
+<!ENTITY sb.sort.reverse "Reverse">
+<!ENTITY sb.sort.title.asc "Sort by Title (A &gt; Z)">
+<!ENTITY sb.sort.title.desc "Sort by Title (Z &gt; A)">
+<!ENTITY sb.sort.date.asc "Chronological">
+<!ENTITY sb.sort.date.desc "Reverse Chronological">
+<!ENTITY sb.sort.recursive "Sort Sub-folders Recursively">
+<!ENTITY sb.sort.warning "Notice: You can&apos;t undo this operation.">

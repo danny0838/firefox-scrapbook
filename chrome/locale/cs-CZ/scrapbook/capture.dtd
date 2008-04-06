@@ -10,4 +10,4 @@
 <!ENTITY sb.capture.filter.string "Filtr dle řetězce...">
 <!ENTITY sb.capture.filter.checkon "Zapnout vše">
 <!ENTITY sb.capture.filter.checkoff "Vypnout vše">
-<!ENTITY sb.capture.filter.invert "Obrátit výběr">
+<!ENTITY sb.capture.filter.invert "Invertovat výběr">

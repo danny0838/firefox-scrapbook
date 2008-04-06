@@ -1,0 +1,5 @@
+<!ENTITY sb.trade.import "Importer">
+<!ENTITY sb.trade.export "Exporter">
+<!ENTITY sb.trade.time "Exporterings tid">
+<!ENTITY sb.trade.restore "Importer med gendannet mappe struktur">
+<!ENTITY sb.trade.remove "Fjern filer efter importen">

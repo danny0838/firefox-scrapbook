@@ -1,0 +1,8 @@
+<!ENTITY sb.sort "Sortere">
+<!ENTITY sb.sort.reverse "Omvendt">
+<!ENTITY sb.sort.title.asc "Sorter efter titel (A &gt; Z)">
+<!ENTITY sb.sort.title.desc "Sorter efter titel (Z &gt; A)">
+<!ENTITY sb.sort.date.asc "Kronologisk">
+<!ENTITY sb.sort.date.desc "Omvendt kronologisk">
+<!ENTITY sb.sort.recursive "Sorter undermapper gentagende">
+<!ENTITY sb.sort.warning "Notits: Du kan fortryde denne indstilling.">

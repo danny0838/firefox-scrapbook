@@ -1,0 +1,13 @@
+<!ENTITY sb.capture "Capture">
+<!ENTITY sb.capture.abort "Abort">
+<!ENTITY sb.capture.start "Start">
+<!ENTITY sb.capture.retry "Retry">
+<!ENTITY sb.capture.skip "Skip">
+<!ENTITY sb.capture.pause "Pause">
+<!ENTITY sb.capture.filter "Filter">
+<!ENTITY sb.capture.filter.domain "Restrict to Domain">
+<!ENTITY sb.capture.filter.level "Restrict to Directory">
+<!ENTITY sb.capture.filter.string "Filter by String...">
+<!ENTITY sb.capture.filter.checkon "Check All On">
+<!ENTITY sb.capture.filter.checkoff "Check All Off">
+<!ENTITY sb.capture.filter.invert "Invert Checks">
