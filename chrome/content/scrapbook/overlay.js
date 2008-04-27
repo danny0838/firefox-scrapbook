@@ -17,8 +17,7 @@ var sbBrowserOverlay = {
 
 	webProgressListener: {
 		onLocationChange: function(aProgress, aRequest, aURI) {
-			if (aURI)
-				sbBrowserOverlay.onLocationChange(aURI.spec);
+			sbBrowserOverlay.onLocationChange(aURI ? aURI.spec : "about:blank");
 		},
 		onStateChange      : function(){},
 		onProgressChange   : function(){},

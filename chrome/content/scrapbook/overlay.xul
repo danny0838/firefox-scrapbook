@@ -125,7 +125,7 @@
 			    <image id="ScrapBookEditIcon" style="width:16px;height:16px;" />
 				<textbox id="ScrapBookEditTitle"   oninput="sbPageEditor.changed2 = true;" onkeypress="if (event.keyCode == 13) sbPageEditor.saveResource();" onclick="if (event.button == 1) sbPageEditor.selection2Title(this);" flex="1" style="padding:2px;max-width:220px;" />
 				<toolbarbutton image="chrome://scrapbook/skin/edit_comment.png" tooltiptext="&sb.edit.comment;" oncommand="sbPageEditor.toggleComment();" />
-				<textbox id="ScrapBookEditComment" oninput="sbPageEditor.onInputComment(this.value);" onkeypress="if (event.keyCode == 13) if (!sbPageEditor.multiline) sbPageEditor.saveResource();" flex="3" style="padding:2px;" />
+				<textbox id="ScrapBookEditComment" spellcheck="true" oninput="sbPageEditor.onInputComment(this.value);" onkeypress="if (event.keyCode == 13) if (!sbPageEditor.multiline) sbPageEditor.saveResource();" flex="3" style="padding:2px;" />
 				<spacer id="ScrapBookEditSpacer" flex="0" />
 				<toolbarbutton id="ScrapBookHighlighter" type="menu-button" persist="color" image="chrome://scrapbook/skin/edit_highlighter.png" tooltiptext="&sb.highlighter;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbPageEditor.highlight();" accesskey="Q">
 					<menupopup onpopupshowing="sbHighlighter.updatePopup();">

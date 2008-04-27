@@ -91,7 +91,7 @@
 				<description id="sbDetailWarnAboutScript" flex="1" style="color:red;">&sb.detail.warnAboutScript;</description>
 			</tabpanel>
 			<tabpanel>
-				<textbox id="sbDetailComment" multiline="true" flex="1" />
+				<textbox id="sbDetailComment" multiline="true" spellcheck="true" flex="1" />
 			</tabpanel>
 		</tabpanels>
 	</tabbox>
