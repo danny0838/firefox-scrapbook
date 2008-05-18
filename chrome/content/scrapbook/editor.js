@@ -76,7 +76,6 @@ var sbPageEditor = {
 		if ( aEvent.type == "keypress" )
 		{
 			if ( aEvent.altKey || aEvent.shiftKey || aEvent.ctrlKey || aEvent.metaKey ) return;
-			if ( "gFindBar" in window ? gFindBar.isFindBarVisible() : window.isFindBarVisible() ) return;
 			var idx = 0;
 			switch ( aEvent.charCode )
 			{
@@ -880,7 +879,11 @@ var sbInfoViewer = {
 
 	indicateLinks : function(aWindow)
 	{
-		sbPageEditor.applyStyle(aWindow, "scrapbook-indicator-style", "a[href]:not([href^=\"http\"]):not([href^=\"javascript\"]):not([href^=\"mailto\"]):before { content:url('chrome://scrapbook/skin/info_link1.png'); }");
+		var iconFile = sbCommonUtils.getScrapBookDir();
+		iconFile.append("icon");
+		iconFile.append("internal-link.png");
+		sbCommonUtils.saveTemplateFile("chrome://scrapbook/skin/info_link1.png", iconFile);
+		sbPageEditor.applyStyle(aWindow, "scrapbook-indicator-style", "a[href]:not([href^=\"http\"]):not([href^=\"javascript\"]):not([href^=\"mailto\"]):before { content:url('../../icon/internal-link.png'); }");
 	},
 
 	renew : function(showDetail)
