@@ -7,6 +7,8 @@
 <!ENTITY sb.prefs.ui.contextMenu "Wyświetl elementy rozszerzenia w głównym menu kontekstowym">
 <!ENTITY sb.prefs.ui.contextSubMenu "Wyświetl jako menu rozwijane">
 <!ENTITY sb.prefs.ui.bookmarkMenu "Wyświetl element &quot;Dodaj do zakładek używając ScrapBooka&quot;">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Show up to">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "recently used folders">
 <!ENTITY sb.prefs.ui.menuBar "Wyświetl na pasku menu">
 <!ENTITY sb.prefs.ui.menuBar.icon "Ikona">
 <!ENTITY sb.prefs.ui.toolsMenu "Wyświetl w menu &quot;Narzędzia&quot; element &quot;ScrapBook&quot;">

@@ -7,6 +7,8 @@
 <!ENTITY sb.prefs.ui.contextMenu "Show in browser context menu">
 <!ENTITY sb.prefs.ui.contextSubMenu "Submenu">
 <!ENTITY sb.prefs.ui.bookmarkMenu "Show &apos;Bookmark with ScrapBook&apos; menu">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Show up to">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "recently used folders">
 <!ENTITY sb.prefs.ui.menuBar "Show in menu bar">
 <!ENTITY sb.prefs.ui.menuBar.icon "Icon">
 <!ENTITY sb.prefs.ui.toolsMenu "Show in &apos;Tools&apos; menu">

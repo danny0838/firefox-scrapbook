@@ -7,6 +7,8 @@
 <!ENTITY sb.prefs.ui.contextMenu "ScrapBook-Einträge im Kontextmenü der Seite anzeigen">
 <!ENTITY sb.prefs.ui.contextSubMenu "Einträge in Untermenü zusammenfassen">
 <!ENTITY sb.prefs.ui.bookmarkMenu "Eintrag &quot;Lesezeichen mit ScrapBook erstellen&quot; anzeigen">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Show up to">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "recently used folders">
 <!ENTITY sb.prefs.ui.menuBar "ScrapBook-Eintrag in der Menüleiste anzeigen">
 <!ENTITY sb.prefs.ui.menuBar.icon "Symbol">
 <!ENTITY sb.prefs.ui.toolsMenu "ScrapBook-Eintrag im Menü &quot;Extras&quot; anzeigen">

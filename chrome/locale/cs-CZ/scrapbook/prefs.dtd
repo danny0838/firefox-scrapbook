@@ -7,6 +7,8 @@
 <!ENTITY sb.prefs.ui.contextMenu "Zobrazit v místní nabídce prohlížeče">
 <!ENTITY sb.prefs.ui.contextSubMenu "Podnabídka">
 <!ENTITY sb.prefs.ui.bookmarkMenu "Zobrazit nabídku &apos;Uložit do ScrapBooku&apos;">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Show up to">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "recently used folders">
 <!ENTITY sb.prefs.ui.menuBar "Zobrazit v liště nabídek">
 <!ENTITY sb.prefs.ui.menuBar.icon "Ikona">
 <!ENTITY sb.prefs.ui.toolsMenu "Zobrazit v nabídce položku &apos;Nástroje&apos;">

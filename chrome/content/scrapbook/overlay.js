@@ -151,7 +151,8 @@ var sbBrowserOverlay = {
 		var ids = this._prefBranch.getCharPref("folderList");
 		ids = ids ? ids.split("|") : [];
 		var shownItems = 0;
-		for (var i = 0; i < ids.length; i++) {
+		var maxEntries = this._prefBranch.getIntPref("folderList.maxEntries");
+		for (var i = 0; i < ids.length && shownItems < maxEntries; i++) {
 			if (ids[i].length != 14)
 				continue;
 			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + ids[i]);
@@ -162,8 +163,7 @@ var sbBrowserOverlay = {
 			menuItem.setAttribute("class", "menuitem-iconic bookmark-item");
 			menuItem.setAttribute("container", "true");
 			menuItem.setAttribute("label", sbDataSource.getProperty(res, "title"));
-			if (++shownItems >= 7)
-				break;
+			shownItems++;
 		}
 		if (shownItems > 0)
 			aPopup.appendChild(document.createElement("menuseparator"));
@@ -185,7 +185,7 @@ var sbBrowserOverlay = {
 		oldIDs = oldIDs ? oldIDs.split("|") : [];
 		var newIDs = [aResURI.substring(18,32)];
 		oldIDs.forEach(function(id){ if ( id != newIDs[0] ) newIDs.push(id); });
-		newIDs = newIDs.slice(0,8).join("|");
+		newIDs = newIDs.slice(0, this._prefBranch.getIntPref("folderList.maxEntries")).join("|");
 		this._prefBranch.setCharPref("folderList", newIDs);
 		var file = sbCommonUtils.getScrapBookDir().clone();
 		file.append("folders.txt");

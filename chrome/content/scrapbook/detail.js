@@ -189,7 +189,8 @@ var sbFolderSelector = {
 		var ids = sbCommonUtils.copyUnicharPref("scrapbook.ui.folderList", "");
 		ids = ids ? ids.split("|") : [];
 		var shownItems = 0;
-		for (var i = 0; i < ids.length; i++)
+		var maxEntries = sbCommonUtils.PREF.getIntPref("scrapbook.ui.folderList.maxEntries");
+		for (var i = 0; i < ids.length && shownItems < maxEntries; i++)
 		{
 			if (ids[i].length != 14)
 				continue;
@@ -197,8 +198,7 @@ var sbFolderSelector = {
 			if (!sbDataSource.exists(res))
 				continue;
 			this.fill(res.Value, sbDataSource.getProperty(res, "title"));
-			if (++shownItems >= 7)
-				break;
+			shownItems++;
 		}
 		if (shownItems > 0)
 			this.MENU_POPUP.appendChild(document.createElement("menuseparator"));

@@ -7,6 +7,8 @@
 <!ENTITY sb.prefs.ui.contextMenu "Mostra gli elementi di ScrapBook nel menu contestuale del browser">
 <!ENTITY sb.prefs.ui.contextSubMenu "Mostra gli elementi come sottomenu della voce &apos;ScrapBook&apos;">
 <!ENTITY sb.prefs.ui.bookmarkMenu "Mostra &apos;Nei segnalibri con ScrapBook&apos;">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Show up to">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "recently used folders">
 <!ENTITY sb.prefs.ui.menuBar "Mostra la voce &apos;ScrapBook&apos; nella barra dei menu">
 <!ENTITY sb.prefs.ui.menuBar.icon "Mostra come icona">
 <!ENTITY sb.prefs.ui.toolsMenu "Mostra la voce &apos;ScrapBook&apos; nel menu &quot;Strumenti&quot;">

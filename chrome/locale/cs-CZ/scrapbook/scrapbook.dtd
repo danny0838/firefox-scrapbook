@@ -1,18 +1,18 @@
 <!ENTITY sb.new.folder "Nová složka">
-<!ENTITY sb.new.separator "Nový oddělovač">
+<!ENTITY sb.new.separator "New Separator">
 <!ENTITY sb.new.note "Nová poznámka">
-<!ENTITY sb.toggle.all "Otevřít/zavřít všechny složky">
+<!ENTITY sb.toggle.all "Open/close All Folders">
 <!ENTITY sb.tools "Nástroje">
-<!ENTITY sb.tools.options "Možnosti">
-<!ENTITY sb.tools.manage "Správa">
+<!ENTITY sb.tools.options "Nastavení">
+<!ENTITY sb.tools.manage "Správa dat">
 <!ENTITY sb.tools.combine "Průvodce sloučením">
-<!ENTITY sb.tools.trade "Importovat/Exportovat">
-<!ENTITY sb.tools.multiple "Zachytit více adres URL">
-<!ENTITY sb.tools.directory "ScrapBook adresář">
+<!ENTITY sb.tools.trade "Import/Export">
+<!ENTITY sb.tools.multiple "Zachytit více odkazů">
+<!ENTITY sb.tools.directory "Adresář s uloženými daty">
 <!ENTITY sb.tools.calculate "Výpočet velikosti">
-<!ENTITY sb.tools.sorttree "Seřadit stromovou strukturou">
-<!ENTITY sb.tools.output "Exportovat strom jako HTML">
-<!ENTITY sb.tools.repair "Nouzová oprava">
+<!ENTITY sb.tools.sorttree "Seřadit obsah">
+<!ENTITY sb.tools.output "Exportovat vše jako HTML">
+<!ENTITY sb.tools.repair "Nouzový stav">
 <!ENTITY sb.tools.addons "Přídavné funkce">
 <!ENTITY sb.tools.homepage "Domovská stránka">
 <!ENTITY sb.note.opentab "Otevřít v panelu">

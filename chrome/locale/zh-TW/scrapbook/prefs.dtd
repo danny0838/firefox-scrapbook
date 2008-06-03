@@ -7,6 +7,8 @@
 <!ENTITY sb.prefs.ui.contextMenu "於快捷選單中顯示擷取選項">
 <!ENTITY sb.prefs.ui.contextSubMenu "以子選單方式顯示">
 <!ENTITY sb.prefs.ui.bookmarkMenu "顯示「加入 ScrapBook 書籤」">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Show up to">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "recently used folders">
 <!ENTITY sb.prefs.ui.menuBar "於 Firefox 功能表上顯示「ScrapBook」選單">
 <!ENTITY sb.prefs.ui.menuBar.icon "顯示圖示">
 <!ENTITY sb.prefs.ui.toolsMenu "在「工具」功能表中顯示選項">

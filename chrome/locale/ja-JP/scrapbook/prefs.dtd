@@ -7,6 +7,8 @@
 <!ENTITY sb.prefs.ui.contextMenu "ブラウザのコンテキストメニューに表示">
 <!ENTITY sb.prefs.ui.contextSubMenu "サブメニュー">
 <!ENTITY sb.prefs.ui.bookmarkMenu "&apos;ScrapBookにブックマーク&apos; メニューを表示">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "最近使用したフォルダを">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "個まで表示する">
 <!ENTITY sb.prefs.ui.menuBar "メニューバーに表示">
 <!ENTITY sb.prefs.ui.menuBar.icon "アイコン">
 <!ENTITY sb.prefs.ui.toolsMenu "&apos;ツール&apos; メニューに表示">

@@ -1,5 +1,5 @@
-<!ENTITY mb.manager "Správce">
-<!ENTITY mb.prop.name "Název">
+<!ENTITY mb.manager "Manager">
+<!ENTITY mb.prop.name "Jméno">
 <!ENTITY mb.prop.path "Cesta">
 <!ENTITY mb.button.add "Přidat">
 <!ENTITY mb.button.edit "Upravit">

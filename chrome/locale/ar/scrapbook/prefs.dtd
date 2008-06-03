@@ -7,6 +7,8 @@
 <!ENTITY sb.prefs.ui.contextMenu "عرض في قائمة النص في المتصفح">
 <!ENTITY sb.prefs.ui.contextSubMenu "قائمة فرعية">
 <!ENTITY sb.prefs.ui.bookmarkMenu "عرض قائمة&apos;اشارة مرجعية مع ScrapBook&apos; ">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Show up to">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "recently used folders">
 <!ENTITY sb.prefs.ui.menuBar "عرض في شريط القوائم">
 <!ENTITY sb.prefs.ui.menuBar.icon "رمز">
 <!ENTITY sb.prefs.ui.toolsMenu "عرض في قائمة &apos;الأدوات&apos;">
