@@ -5,4 +5,4 @@
 <!ENTITY sb.sort.date.asc "Rosnąco">
 <!ENTITY sb.sort.date.desc "Malejąco">
 <!ENTITY sb.sort.recursive "Sortuj subfoldery z całą zawartością">
-<!ENTITY sb.sort.warning "Uwaga: Tej operacji nie można cofnąć.">
+<!ENTITY sb.sort.warning "Uwaga: Tej operacji nie można odwrócić.">

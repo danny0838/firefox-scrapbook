@@ -7,8 +7,8 @@
 <!ENTITY sb.prefs.ui.contextMenu "Показывать в контекстном меню">
 <!ENTITY sb.prefs.ui.contextSubMenu "Использовать подменю">
 <!ENTITY sb.prefs.ui.bookmarkMenu "Показывать «Добавить в закладки Scrapbook» в меню">
-<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Show up to">
-<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "recently used folders">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Показывать">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "недавно использованных папок">
 <!ENTITY sb.prefs.ui.menuBar "Показывать в панели меню">
 <!ENTITY sb.prefs.ui.menuBar.icon "Значок">
 <!ENTITY sb.prefs.ui.toolsMenu "Показывать в меню «Инструменты»">

@@ -5,5 +5,5 @@
 <!ENTITY sb.repair.rdfFile.time "Data utworzenia">
 <!ENTITY sb.repair.rdfFile.size "Wielkość">
 <!ENTITY sb.repair.favicons "Odtwórz favicony w drzewie katalogów">
-<!ENTITY sb.repair.favicons.descript "Spróbuj tej opcji jeżeli nagle znikają favicony">
+<!ENTITY sb.repair.favicons.descript "Spróbuj tej opcji jeżeli favicony nagle znikają">
 <!ENTITY sb.repair.complete "Zakończono">

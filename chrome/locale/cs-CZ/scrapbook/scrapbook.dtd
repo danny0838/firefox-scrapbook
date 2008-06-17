@@ -1,7 +1,7 @@
 <!ENTITY sb.new.folder "Nová složka">
-<!ENTITY sb.new.separator "New Separator">
+<!ENTITY sb.new.separator "Nový oddělovač">
 <!ENTITY sb.new.note "Nová poznámka">
-<!ENTITY sb.toggle.all "Open/close All Folders">
+<!ENTITY sb.toggle.all "Otevřít/zavřít všechny složky">
 <!ENTITY sb.tools "Nástroje">
 <!ENTITY sb.tools.options "Nastavení">
 <!ENTITY sb.tools.manage "Správa dat">

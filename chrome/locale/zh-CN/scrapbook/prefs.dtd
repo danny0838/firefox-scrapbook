@@ -7,8 +7,8 @@
 <!ENTITY sb.prefs.ui.contextMenu "在浏览器中显示上下文菜单">
 <!ENTITY sb.prefs.ui.contextSubMenu "子菜单">
 <!ENTITY sb.prefs.ui.bookmarkMenu "显示 &apos;Bookmark with ScrapBook&apos; 菜单">
-<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Show up to">
-<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "recently used folders">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "突出显示于">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "最近使用的文件夹">
 <!ENTITY sb.prefs.ui.menuBar "在菜单栏中显示">
 <!ENTITY sb.prefs.ui.menuBar.icon "图标">
 <!ENTITY sb.prefs.ui.toolsMenu "在“工具”菜单显示">

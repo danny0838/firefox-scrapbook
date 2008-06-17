@@ -5,7 +5,7 @@
 <!ENTITY sb.note.normalview "Běžný náhled">
 <!ENTITY sb.note.template "Upravit šablonu HTML">
 <!ENTITY sb.note.autolinefeed "Automatické řádkování">
-<!ENTITY sb.note.autolinefeed.t "Přidat tag &lt;br&gt; na konec řádku v náhledu HTML">
+<!ENTITY sb.note.autolinefeed.t "Přidat tag &lt;br&gt; na konec řádku v &sb.note.htmlview;">
 <!ENTITY sb.note.fontsize "Velikost písma">
 <!ENTITY sb.note.help "Nápověda">
 <!ENTITY sb.note.print "Tisk">
@@ -13,7 +13,7 @@
 <!ENTITY sb.note.save.accesskey "S">
 <!ENTITY sb.note.htmlview.accesskey "H">
 <!ENTITY sb.note.normalview.accesskey "N">
-<!ENTITY sb.note.tools.accesskey "T">
-<!ENTITY sb.note.fontsize.accesskey "F">
-<!ENTITY sb.note.print.accesskey "P">
-<!ENTITY sb.note.exit.accesskey "X">
+<!ENTITY sb.note.tools.accesskey "o">
+<!ENTITY sb.note.fontsize.accesskey "p">
+<!ENTITY sb.note.print.accesskey "T">
+<!ENTITY sb.note.exit.accesskey "k">
