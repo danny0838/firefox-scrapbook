@@ -24,3 +24,4 @@ pref("scrapbook.tree.autoCollapse", false);
 pref("scrapbook.confirmDelete", true);
 pref("scrapbook.showDetailOnDrop", false);
 pref("scrapbook.notifyOnComplete", true);
+

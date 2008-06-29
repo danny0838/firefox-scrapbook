@@ -1,6 +1,7 @@
 
 overlay	chrome://browser/content/browser.xul	chrome://scrapbook/content/overlay.xul
 content	scrapbook	jar:chrome/scrapbook.jar!/content/scrapbook/
+content	scrapbook	jar:chrome/scrapbook.jar!/content/scrapbook/	contentaccessible=yes
 
 skin	scrapbook	classic/1.0	jar:chrome/scrapbook.jar!/skin/classic/scrapbook/
 style	chrome://browser/content/browser.xul	chrome://scrapbook/skin/overlay.css
