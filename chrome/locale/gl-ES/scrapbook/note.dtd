@@ -1,0 +1,19 @@
+<!ENTITY sb.note.save "Gardar">
+<!ENTITY sb.note.close "Pechar">
+<!ENTITY sb.note.tools "Ferramentas">
+<!ENTITY sb.note.htmlview "Vista HTML">
+<!ENTITY sb.note.normalview "Vista normal">
+<!ENTITY sb.note.template "Editar sobreplanta HTML">
+<!ENTITY sb.note.autolinefeed "Quebras de liña automáticas">
+<!ENTITY sb.note.autolinefeed.t "Engadir etiquetas &lt;br&gt; ao remate de cada liña en &sb.note.htmlview;">
+<!ENTITY sb.note.fontsize "Tamaño da fonte">
+<!ENTITY sb.note.help "Axuda">
+<!ENTITY sb.note.print "Imprimir">
+<!ENTITY sb.note.exit "Saír">
+<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "N">
+<!ENTITY sb.note.tools.accesskey "T">
+<!ENTITY sb.note.fontsize.accesskey "F">
+<!ENTITY sb.note.print.accesskey "P">
+<!ENTITY sb.note.exit.accesskey "X">

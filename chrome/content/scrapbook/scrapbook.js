@@ -485,13 +485,15 @@ var sbTreeDNDHandler = {
 			try {
 				var XferDataSet  = nsTransferable.get(
 					sbTreeDNDHandler.dragDropObserver.getSupportedFlavours(),
-					nsDragAndDrop.getDragData,
+					nsDragAndDrop.getDragData || this.getDragData,
 					true
 				);
 				var XferData     = XferDataSet.first.first;
 				var XferDataType = XferData.flavour.contentType;
 			}
-			catch(ex) {}
+			catch(ex) {
+				return;
+			}
 			if (XferDataType == "moz/rdfitem")
 				sbTreeDNDHandler.move(row, orient);
 			else if (XferDataType == "sb/tradeitem")
@@ -509,6 +511,18 @@ var sbTreeDNDHandler = {
 		onPerformAction      : function() {},
 		onPerformActionOnRow : function() {},
 		onPerformActionOnCell: function() {},
+		getDragData: function (aFlavourSet) {
+			var supportsArray = Components.classes["@mozilla.org/supports-array;1"].
+			                    createInstance(Components.interfaces.nsISupportsArray);
+			for (var i = 0; i < nsDragAndDrop.mDragSession.numDropItems; ++i) {
+				var trans = nsTransferable.createTransferable();
+				for (var j = 0; j < aFlavourSet.flavours.length; ++j)
+				trans.addDataFlavor(aFlavourSet.flavours[j].contentType);
+				nsDragAndDrop.mDragSession.getData(trans, i);
+				supportsArray.AppendElement(trans);
+			}
+			return supportsArray;
+		},
 	},
 
 	getModifiers: function(aEvent)

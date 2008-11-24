@@ -1,0 +1,19 @@
+<!ENTITY sb.new.folder "Novo cartafol">
+<!ENTITY sb.new.separator "Novo separador">
+<!ENTITY sb.new.note "Nova nota">
+<!ENTITY sb.toggle.all "Abrir/Pechar todos os cartafoles">
+<!ENTITY sb.tools "Ferramentas">
+<!ENTITY sb.tools.options "Opcións">
+<!ENTITY sb.tools.manage "Xestor">
+<!ENTITY sb.tools.combine "Combinar">
+<!ENTITY sb.tools.trade "Importar/Exportar">
+<!ENTITY sb.tools.multiple "Capturar múltiples URLs">
+<!ENTITY sb.tools.directory "Cartafol do ScrapBook">
+<!ENTITY sb.tools.calculate "Cálculo do tamaño">
+<!ENTITY sb.tools.sorttree "Ordenar a colección">
+<!ENTITY sb.tools.output "Vista como HTML">
+<!ENTITY sb.tools.repair "Reparación de urxencia">
+<!ENTITY sb.tools.addons "Funcións do complemento">
+<!ENTITY sb.tools.homepage "Páxina de Scrapbook">
+<!ENTITY sb.note.opentab "Abrir nunha pestana">
+<!ENTITY sb.note.close "Pechar">

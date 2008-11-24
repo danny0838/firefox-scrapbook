@@ -1,0 +1,13 @@
+<!ENTITY sb.capture "Збереження">
+<!ENTITY sb.capture.abort "Скасувати">
+<!ENTITY sb.capture.start "Розпочати">
+<!ENTITY sb.capture.retry "Повторити">
+<!ENTITY sb.capture.skip "Проруститти">
+<!ENTITY sb.capture.pause "Призупинити">
+<!ENTITY sb.capture.filter "Фільтр">
+<!ENTITY sb.capture.filter.domain "Обмеження за доменом">
+<!ENTITY sb.capture.filter.level "Обмеження за текою">
+<!ENTITY sb.capture.filter.string "Фільтр за рядком...">
+<!ENTITY sb.capture.filter.checkon "Вибрати усе">
+<!ENTITY sb.capture.filter.checkoff "Скачувати вибір">
+<!ENTITY sb.capture.filter.invert "Інвертувавти вибір">

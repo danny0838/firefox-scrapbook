@@ -99,7 +99,7 @@ var sbPrefWindow = {
 			return;
 		var fileField = document.getElementById(aEltID);
 		fileField.file = file;
-		if (file.isDirectory())
+		if (file.exists() && file.isDirectory())
 			fileField.label = file.path;
 	},
 
