@@ -703,14 +703,12 @@ sbHeaderSniffer.prototype = {
 		{
 			sbCaptureTask.contentType = "text/html";
 		}
-		if ( sbCaptureTask.contentType.match(/(text|html|xml)/i) )
-		{
-			sbCaptureTask.isDocument = true;
+		var func = function(val) { return sbCaptureTask.contentType.indexOf(val) >= 0; };
+		sbCaptureTask.isDocument = ["text/plain", "html", "xml"].some(func);
+		if (sbCaptureTask.isDocument) {
 			sbInvisibleBrowser.load(this.URLSpec);
 		}
-		else
-		{
-			sbCaptureTask.isDocument = false;
+		else {
 			if ( gContext == "indepth" ) {
 				sbCaptureTask.next(true);
 			} else {
