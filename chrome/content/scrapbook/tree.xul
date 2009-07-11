@@ -1,5 +1,8 @@
 <?xml version="1.0" ?>
 
+<!-- [Firefox3.1] -->
+<?xml-stylesheet href="chrome://browser/skin/places/places.css" type="text/css"?>
+
 <!DOCTYPE overlay SYSTEM "chrome://scrapbook/locale/tree.dtd">
 
 <overlay id="sbTreeOverlay"
@@ -110,7 +113,7 @@
 							<treecell id="sbTreeItem"
 							          label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title"
 							          src="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon"
-							          properties="Name rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
+							          properties="Name title rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
 						</treerow>
 					</treeitem>
 				</treechildren>

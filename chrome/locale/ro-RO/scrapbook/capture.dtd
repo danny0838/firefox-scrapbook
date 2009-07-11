@@ -1,0 +1,13 @@
+<!ENTITY sb.capture "Capturează">
+<!ENTITY sb.capture.abort "Întrerupe">
+<!ENTITY sb.capture.start "Porneşte">
+<!ENTITY sb.capture.retry "Reîncearcă">
+<!ENTITY sb.capture.skip "Ignoră">
+<!ENTITY sb.capture.pause "Suspendă">
+<!ENTITY sb.capture.filter "Filtrare">
+<!ENTITY sb.capture.filter.domain "Restricţionează la domeniu">
+<!ENTITY sb.capture.filter.level "Restricţionează la director">
+<!ENTITY sb.capture.filter.string "Filtrează după şir...">
+<!ENTITY sb.capture.filter.checkon "Selectează toate">
+<!ENTITY sb.capture.filter.checkoff "Deselectează toate">
+<!ENTITY sb.capture.filter.invert "Inversează selecţiile">

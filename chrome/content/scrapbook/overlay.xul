@@ -108,7 +108,7 @@
 		<toolbarbutton id="scrapbook-button"
 		               tooltiptext="ScrapBook"
 		               observes="viewScrapBookSidebar"
-		               class="toolbarbutton-1"
+		               class="toolbarbutton-1 chromeclass-toolbar-additional"
 		               ondragover="toggleSidebar('viewScrapBookSidebar',true);" />
 	</toolbarpalette>
 

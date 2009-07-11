@@ -1,0 +1,18 @@
+<!ENTITY sb.capture.partial "Seçimi Kaydet">
+<!ENTITY sb.capture.partial.as "Seçimi Farklı Kaydet">
+<!ENTITY sb.capture.entire "Sayfayı Kaydet">
+<!ENTITY sb.capture.entire.as "Sayfayı Farklı Kaydet">
+<!ENTITY sb.capture.frame "Çerçeveyi Kaydet">
+<!ENTITY sb.capture.frame.as "Çerçeveyi Farklı Kaydet">
+<!ENTITY sb.capture.target "Linki Kaydet">
+<!ENTITY sb.capture.target.as "Linki Farklı Kaydet">
+<!ENTITY sb.capture.alltabs "Tüm Sekmeleri Kaydet">
+<!ENTITY sb.capture.bookmark "ScrapBook+ ile Yer İmlerine Ekle">
+<!ENTITY sb.sidebar "Kenar Çubuğunda Göster">
+<!ENTITY sb.menu "Menü">
+<!ENTITY sb.editbefore "Kaydetmeden Önce Düzenle">
+<!ENTITY sb.key.sidebar "K">
+<!ENTITY sb.key.menubar "S">
+<!ENTITY sb.key.capture "L">
+<!ENTITY sb.key.capture.as "K">
+<!ENTITY sb.key.bookmark "J">

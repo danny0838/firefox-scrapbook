@@ -1,0 +1,13 @@
+<!ENTITY sb.prop.general "Genel Bilgi">
+<!ENTITY sb.prop.type "Tür">
+<!ENTITY sb.prop.date "Tarih">
+<!ENTITY sb.prop.encode "Kodlama">
+<!ENTITY sb.prop.size "Boyut">
+<!ENTITY sb.prop.content "İçerik">
+<!ENTITY sb.prop.folder "Klasör">
+<!ENTITY sb.prop.icon "Simge">
+<!ENTITY sb.prop.icon.change "Değiştir">
+<!ENTITY sb.prop.icon.default "Varsayılan">
+<!ENTITY sb.prop.icon.favicon "Site simgesi seç">
+<!ENTITY sb.prop.icon.custom "Kullanıcı tanımlı simge seç">
+<!ENTITY sb.prop.mark "İşaretle">

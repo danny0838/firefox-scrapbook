@@ -1,0 +1,13 @@
+<!ENTITY sb.capture "Kaydet">
+<!ENTITY sb.capture.abort "Vazgeç">
+<!ENTITY sb.capture.start "Başlat">
+<!ENTITY sb.capture.retry "Yeniden Dene">
+<!ENTITY sb.capture.skip "Atla">
+<!ENTITY sb.capture.pause "Duraklat">
+<!ENTITY sb.capture.filter "Filtre">
+<!ENTITY sb.capture.filter.domain "Domain&apos;le Sınırla">
+<!ENTITY sb.capture.filter.level "Dizinle Sınırla">
+<!ENTITY sb.capture.filter.string "Karakter Dizisine Göre Filtele...">
+<!ENTITY sb.capture.filter.checkon "Tümünü Aktif İşaretle">
+<!ENTITY sb.capture.filter.checkoff "Tümünü Pasif İşaretle">
+<!ENTITY sb.capture.filter.invert "İşaretleri Ters Çevir">
