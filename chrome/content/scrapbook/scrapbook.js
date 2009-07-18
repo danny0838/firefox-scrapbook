@@ -469,6 +469,7 @@ var sbTreeDNDHandler = {
 			flavours.appendFlavour("text/x-moz-url");
 			flavours.appendFlavour("text/html");
 			flavours.appendFlavour("sb/tradeitem");
+			flavours.appendFlavour("application/x-moz-tabbrowser-tab");
 			return flavours;
 		},
 		onDragOver: function() {},
@@ -482,24 +483,31 @@ var sbTreeDNDHandler = {
 			return true;
 		},
 		onDrop: function(row, orient) {
+			var XferType, XferData;
 			try {
 				var XferDataSet  = nsTransferable.get(
 					sbTreeDNDHandler.dragDropObserver.getSupportedFlavours(),
 					nsDragAndDrop.getDragData || this.getDragData,
 					true
 				);
-				var XferData     = XferDataSet.first.first;
-				var XferDataType = XferData.flavour.contentType;
+				XferData = XferDataSet.first.first.data;
+				XferType = XferDataSet.first.first.flavour.contentType;
 			}
 			catch(ex) {
-				return;
+				if (this.XferData) {
+					XferData = this.XferData;
+					XferType = "text/x-moz-url";
+				}
+				else {
+					return;
+				}
 			}
-			if (XferDataType == "moz/rdfitem")
+			if (XferType == "moz/rdfitem")
 				sbTreeDNDHandler.move(row, orient);
-			else if (XferDataType == "sb/tradeitem")
+			else if (XferType == "sb/tradeitem")
 				sbTreeDNDHandler.importData(row, orient);
 			else
-				sbTreeDNDHandler.capture(XferData.data, row, orient);
+				sbTreeDNDHandler.capture(XferData, row, orient);
 			sbController.rebuildLocal();
 		},
 		onToggleOpenState    : function() {},
@@ -523,12 +531,32 @@ var sbTreeDNDHandler = {
 			}
 			return supportsArray;
 		},
+		XferData: null,
 	},
 
 	getModifiers: function(aEvent)
 	{
 		this.modAlt   = aEvent.altKey;
 		this.modShift = aEvent.ctrlKey || aEvent.shiftKey;
+	},
+
+	onDragEnter: function(event) {
+		this.builderObserver.XferData = null;
+	},
+
+	onDrop: function(event) {
+		var dt = event.dataTransfer;
+		if (!dt.types.contains("application/x-moz-tabbrowser-tab"))
+			return;
+		var data = dt.mozGetDataAt("application/x-moz-tabbrowser-tab", 0);
+		if (data instanceof XULElement && data.localName == "tab" && 
+		    data.ownerDocument.defaultView instanceof ChromeWindow) {
+			var uri = data.linkedBrowser.currentURI;
+			var spec = uri ? uri.spec : "about:blank";
+			var title = data.label;
+			this.builderObserver.XferData = spec + "\n" + title;
+			event.preventDefault();
+		}
 	},
 
 	init: function()

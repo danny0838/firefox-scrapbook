@@ -73,6 +73,8 @@
 			      ondraggesture="nsDragAndDrop.startDrag(event,sbTreeDNDHandler.dragDropObserver);"
 			      ondragover="nsDragAndDrop.dragOver(event,sbTreeDNDHandler.dragDropObserver);"
 			      ondragdrop="sbTreeDNDHandler.getModifiers(event); nsDragAndDrop.drop(event,sbTreeDNDHandler.dragDropObserver);"
+			      ondragenter="sbTreeDNDHandler.onDragEnter(event); // [Firefox3.5]"
+			      ondrop="sbTreeDNDHandler.onDrop(event); // [Firefox3.5]"
 			      contextmenu="sbPopup"
 			      hidecolumnpicker="true"
 			      seltype="single"
