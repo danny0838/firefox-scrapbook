@@ -217,4 +217,7 @@ browser {
 	background-color: #FFFFFF;
 }
 
+textbox[class="plain"] {
+	background-color: -moz-Field;
+}
 
