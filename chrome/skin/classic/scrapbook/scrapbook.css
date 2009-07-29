@@ -92,8 +92,13 @@ richlistitem.bookmark .sblist-title {
 	color: rgb(32,192,32);
 }
 
+treechildren::-moz-tree-cell-text(separator),
 richlistitem.separator .sblist-title {
-	color: GrayText;
+	color: ThreeDShadow;
+}
+
+treechildren::-moz-tree-cell-text(separator) {
+	margin: 0px 5px;
 }
 
 richlistitem.separator image.sblist-icon {
