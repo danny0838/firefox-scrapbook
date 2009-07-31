@@ -85,12 +85,8 @@ toolbar#ScrapBookEditor #ScrapBookHighlighter menuitem[type="radio"] {
 	border: 1px solid transparent;
 }
 
-toolbar#ScrapBookEditor #ScrapBookHighlighter menuitem[type="radio"]:hover > * {
-	color: ThreeDHighlight !important;
-}
-
 toolbar#ScrapBookEditor #ScrapBookHighlighter menupopup {
-	min-width: 160px;
+	min-width: 200px;
 }
 
 

@@ -35,8 +35,9 @@ var sbHighlighter = {
 
 	decorateElement : function(aElement, aCssText)
 	{
-		aElement.setAttribute("style", aCssText);
-		aElement.setAttribute("tooltiptext", aCssText);
+		if (aElement.localName == "menuitem")
+			aElement = document.getAnonymousElementByAttribute(aElement, "class", "menu-iconic-text");
+		aElement.style.cssText = aCssText;
 	},
 
 	set : function(aWindow, aSelection, aNodeName, aAttributes)
