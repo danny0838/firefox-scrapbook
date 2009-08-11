@@ -14,6 +14,8 @@ var sbContentSaver = {
 	frameNumber  : 0,
 	selection    : null,
 	linkURLs     : [],
+	_fxVer35     : null,
+
 
 
 	flattenFrames : function(aWindow)
@@ -28,6 +30,11 @@ var sbContentSaver = {
 
 	init : function(aPresetData)
 	{
+		if (this._fxVer35 === null) {
+			var verComp = Components.classes["@mozilla.org/xpcom/version-comparator;1"].
+			              getService(Components.interfaces.nsIVersionComparator);
+			this._fxVer35 = verComp.compare(Application.version, "3.5") >= 0;
+		}
 		this.item = sbCommonUtils.newItem(sbDataSource.identify(sbCommonUtils.getTimeStamp()));
 		this.name = "index";
 		this.favicon = null;
@@ -226,7 +233,7 @@ var sbContentSaver = {
 			var myStyleSheets = aDocument.styleSheets;
 			for ( var i=0; i<myStyleSheets.length; i++ )
 			{
-				myCSS += this.processCSSRecursively(myStyleSheets[i]);
+				myCSS += this.processCSSRecursively(myStyleSheets[i], aDocument);
 			}
 			if ( myCSS )
 			{
@@ -527,7 +534,7 @@ var sbContentSaver = {
 		}
 		else if ( aNode.style && aNode.style.cssText )
 		{
-			var newCSStext = this.inspectCSSText(aNode.style.cssText, this.refURLObj.spec);
+			var newCSStext = this.inspectCSSText(aNode.style.cssText, this.refURLObj.spec, aNode.ownerDocument);
 			if ( newCSStext ) aNode.setAttribute("style", newCSStext);
 		}
 		if ( !this.option["script"] )
@@ -542,44 +549,96 @@ var sbContentSaver = {
 		return aNode;
 	},
 
-	processCSSRecursively : function(aCSS)
+	processCSSRecursively : function(aCSS, aDocument)
 	{
 		var content = "";
-		if ( !aCSS || aCSS.disabled ) return "";
-		var medium = aCSS.media.mediaText;
-		if ( medium != "" && medium.indexOf("screen") < 0 && medium.indexOf("all") < 0 )
-		{
+		if (!aCSS || aCSS.disabled) {
 			return "";
 		}
-		if ( aCSS.href && aCSS.href.indexOf("chrome") == 0 ) return "";
-		var flag = false;
-		for ( var i=0; i<aCSS.cssRules.length; i++ )
-		{
-			if ( aCSS.cssRules[i].type == 1 || aCSS.cssRules[i].type == 4 )
-			{
-				if ( !flag ) { content += "\n/* ::::: " + aCSS.href + " ::::: */\n\n"; flag = true; }
-				content += this.inspectCSSText(aCSS.cssRules[i].cssText, aCSS.href) + "\n";
-			}
-			else if ( aCSS.cssRules[i].type == 3 )
-			{
-				content += this.processCSSRecursively(aCSS.cssRules[i].styleSheet);
-			}
+		var cssMedia = aCSS.media.mediaText;
+		if (cssMedia && cssMedia.indexOf("screen") < 0 && cssMedia.indexOf("all") < 0) {
+			return "";
 		}
+		if (aCSS.href && aCSS.href.indexOf("chrome://") == 0) {
+			return "";
+		}
+		if (aCSS.href)
+			content += (content ? "\n" : "") + "/* ::::: " + aCSS.href + " ::::: */\n\n";
+		Array.forEach(aCSS.cssRules, function(cssRule) {
+			switch (cssRule.type) {
+				case Components.interfaces.nsIDOMCSSRule.STYLE_RULE: 
+					var cssText = this.inspectCSSText(cssRule.cssText, aCSS.href, aDocument);
+					if (cssText)
+						content += cssText + "\n";
+					break;
+				case Components.interfaces.nsIDOMCSSRule.IMPORT_RULE: 
+					content += this.processCSSRecursively(cssRule.styleSheet, aDocument);
+					break;
+				case Components.interfaces.nsIDOMCSSRule.MEDIA_RULE: 
+					if (/^@media ([^\{]+) \{/.test(cssRule.cssText)) {
+						var media = RegExp.$1;
+						if (media.indexOf("screen") < 0 && media.indexOf("all") < 0) {
+							break;
+						}
+					}
+					cssRule.cssText.split("\n").forEach(function(cssText) {
+						if (cssText.indexOf("@media ") == 0 || cssText == "}") {
+							content += cssText + "\n";
+						}
+						else {
+							cssText = cssText.replace(/^\s+|\s+$/g, "");
+							cssText = this.inspectCSSText(cssText, aCSS.href, aDocument);
+							if (cssText)
+								content += "\t" + cssText + "\n";
+						}
+					}, this);
+					break;
+				case Components.interfaces.nsIDOMCSSRule.FONT_FACE_RULE: 
+					cssRule.cssText.split("\n").forEach(function(cssText) {
+						if (cssText == "@font-face {" || cssText == "}") {
+							content += cssText + "\n";
+						}
+						else {
+							cssText = cssText.replace(/^\s+|\s+$/g, "");
+							cssText = this.inspectCSSText(cssText, aCSS.href, aDocument);
+							if (cssText)
+								content += "\t" + cssText + "\n";
+						}
+					}, this);
+					break;
+				default: 
+			}
+		}, this);
 		return content;
 	},
 
-	inspectCSSText : function(aCSStext, aCSShref)
+	inspectCSSText : function(aCSStext, aCSShref, aDocument)
 	{
 		if (!aCSShref) {
 			aCSShref = this.refURLObj.spec;
 		}
-		if ( !aCSStext ) return "";
+		if ( !aCSStext ) return;
+		if (this._fxVer35) {
+			if (/^([^\{]+)\s+\{/.test(aCSStext)) {
+				var selectors = RegExp.$1.trim();
+				selectors = selectors.replace(/:[a-z-]+/g, "");
+				try {
+					if (!aDocument.querySelector(selectors))
+						return;
+				}
+				catch (ex) {
+				}
+			}
+		}
 		var re = new RegExp(/ url\(([^\'\)\s]+)\)/);
 		var i = 0;
 		while ( aCSStext.match(re) )
 		{
 			if ( ++i > 10 ) break;
-			var imgURL  = sbCommonUtils.resolveURL(aCSShref, RegExp.$1);
+			var imgURL  = RegExp.$1;
+			if (/^[\'\"]([^\'\"]+)[\'\"]$/.test(imgURL))
+				imgURL = RegExp.$1;
+			imgURL  = sbCommonUtils.resolveURL(aCSShref, imgURL);
 			var imgFile = this.option["images"] ? this.download(imgURL) : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7";
 			aCSStext = aCSStext.replace(re, " url('" + imgFile + "')");
 		}
@@ -594,7 +653,7 @@ var sbContentSaver = {
 		}
 		if ( aCSStext.match(/ (quotes|voice-family): \"/) )
 		{
-			return "";
+			return;
 		}
 		if ( aCSStext.indexOf(" background: ") >= 0 )
 		{

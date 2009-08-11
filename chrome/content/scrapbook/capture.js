@@ -113,7 +113,7 @@ function SB_fireNotification(aItem)
 
 var sbCaptureTask = {
 
-	get INTERVAL() { return 3; },
+	get INTERVAL() { return 1; },
 	get LISTBOX()  { return document.getElementById("sbCaptureListbox"); },
 	get STRING()   { return document.getElementById("sbCaptureString"); },
 	get URL()      { return gURLs[this.index]; },
@@ -123,7 +123,7 @@ var sbCaptureTask = {
 	isDocument  : false,
 	canRefresh  : true,
 	sniffer     : null,
-	seconds     : 3,
+	seconds     : 1,
 	timerID     : 0,
 	forceExit   : 0,
 

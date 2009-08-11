@@ -24,7 +24,9 @@ var sbHighlighter = {
 
 	updatePopup : function()
 	{
-		var idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 4;
+		var idx = document.getElementById("ScrapBookHighlighter").getAttribute("color");
+		if (idx < 1 || idx > 4)
+			idx = 4;
 		document.getElementById("ScrapBookHighlighter" + idx).setAttribute("checked", "true");
 		for ( idx = 4; idx > 0; idx-- )
 		{
