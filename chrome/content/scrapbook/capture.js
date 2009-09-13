@@ -650,7 +650,8 @@ sbHeaderSniffer.prototype = {
 			this._channel = sbCommonUtils.IO.newChannelFromURI(this._URL).QueryInterface(Components.interfaces.nsIHttpChannel);
 			this._channel.loadFlags = this._channel.LOAD_BYPASS_CACHE;
 			this._channel.setRequestHeader("User-Agent", navigator.userAgent, false);
-			if ( this.refURLSpec ) this._channel.setRequestHeader("Referer", this.refURLSpec, false);
+			if (this.refURLSpec && this.refURLSpec.indexOf("http") == 0)
+				this._channel.setRequestHeader("Referer", this.refURLSpec, false);
 		} catch(ex) {
 			this.onHttpError("Invalid URL");
 		}

@@ -710,11 +710,12 @@ var sbContentSaver = {
 		{
 			var targetFile = this.contentDir.clone();
 			targetFile.append(newFileName);
+			var refURL = this.refURLObj.schemeIs("http") || this.refURLObj.schemeIs("https") ? this.refURLObj : null;
 			try {
 				var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
 				WBP.persistFlags |= WBP.PERSIST_FLAGS_FROM_CACHE;
 				WBP.persistFlags |= WBP.PERSIST_FLAGS_AUTODETECT_APPLY_CONVERSION;
-				WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile);
+				WBP.saveURI(aURL, null, refURL, null, null, targetFile);
 				this.httpTask[this.item.id]++;
 				WBP.progressListener = new sbCaptureObserver(this.item, newFileName);
 				this.file2URL[newFileName] = aURLSpec;
