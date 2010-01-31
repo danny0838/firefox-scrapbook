@@ -1,13 +1,13 @@
 <!ENTITY sb.capture "إلتقط">
-<!ENTITY sb.capture.abort "إلغاء">
+<!ENTITY sb.capture.abort "أجهض">
 <!ENTITY sb.capture.start "إبدأ">
 <!ENTITY sb.capture.retry "إعادة">
 <!ENTITY sb.capture.skip "تجاوز">
 <!ENTITY sb.capture.pause "إيقاف مؤقت">
+<!ENTITY sb.capture.finish "ألغ">
 <!ENTITY sb.capture.filter "تصفية">
-<!ENTITY sb.capture.filter.domain "تقييبد بنطاق الموقع">
-<!ENTITY sb.capture.filter.level "تقييد بالمجلد">
-<!ENTITY sb.capture.filter.string "تصفية بـ سترينغ...">
-<!ENTITY sb.capture.filter.checkon "تفعيل الكل">
-<!ENTITY sb.capture.filter.checkoff "تعطيل الكل">
-<!ENTITY sb.capture.filter.invert "عكس الاختيارات">
+<!ENTITY sb.capture.filter.column.one "أظهر/أخف">
+<!ENTITY sb.capture.filter.column.two "مرشح (تعبير نمطي)">
+<!ENTITY sbp.capture.column.one "الرابط">
+<!ENTITY sbp.capture.column.two "العنوان">
+<!ENTITY sbp.capture.column.three "الحالة">

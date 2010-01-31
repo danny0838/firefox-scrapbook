@@ -60,6 +60,7 @@
 	      ondraggesture="nsDragAndDrop.startDrag(event, gDragDropObserver);"
 	      ondragover="nsDragAndDrop.dragOver(event, gDragDropObserver);"
 	      ondragdrop="nsDragAndDrop.drop(event, gDragDropObserver);"
+		  ondrop="nsDragAndDrop.drop(event, gDragDropObserver);"
 	      class="plain" flex="1">
 		<treecols>
 			<treecol id="sbTradeTreeColTitle"  label="&sb.prop.title;"  sortIndex="0" flex="2" primary="true" />

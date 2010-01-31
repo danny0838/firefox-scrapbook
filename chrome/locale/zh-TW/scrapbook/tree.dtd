@@ -13,6 +13,7 @@
 <!ENTITY sb.listview "列表模式">
 <!ENTITY sb.prop.title "標題">
 <!ENTITY sb.prop.comment "文件評注">
+<!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID（日期）">
 <!ENTITY sb.folder.combine "合併檢視">
 <!ENTITY sb.folder.openall "以分頁開啟所有資料">

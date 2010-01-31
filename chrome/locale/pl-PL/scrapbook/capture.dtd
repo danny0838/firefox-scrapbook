@@ -4,10 +4,10 @@
 <!ENTITY sb.capture.retry "Spróbuj ponownie">
 <!ENTITY sb.capture.skip "Pomiń">
 <!ENTITY sb.capture.pause "Pauza">
+<!ENTITY sb.capture.finish "Anuluj">
 <!ENTITY sb.capture.filter "Filtrowanie">
-<!ENTITY sb.capture.filter.domain "Ogranicz do domeny">
-<!ENTITY sb.capture.filter.level "Ogranicz do katalogu">
-<!ENTITY sb.capture.filter.string "Filtruj używając ciągu znaków">
-<!ENTITY sb.capture.filter.checkon "Zaznacz wszystkie">
-<!ENTITY sb.capture.filter.checkoff "Odznacz wszystkie">
-<!ENTITY sb.capture.filter.invert "Odwróć zaznaczenie">
+<!ENTITY sb.capture.filter.column.one "Pokaż/Ukryj">
+<!ENTITY sb.capture.filter.column.two "Filtr (wyrażenie regularne)">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "Tytuł">
+<!ENTITY sbp.capture.column.three "Status">

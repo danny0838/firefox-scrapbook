@@ -1,33 +1,34 @@
 <!ENTITY sb.open "Oscail">
-<!ENTITY sb.open.tab "Oscail i T&#225;b">
-<!ENTITY sb.open.newtab "Oscail i T&#225;b Nua">
+<!ENTITY sb.open.tab "Oscail i Táb">
+<!ENTITY sb.open.newtab "Oscail i Táb Nua">
 <!ENTITY sb.open.source "Oscail URL Foinsithe">
-<!ENTITY sb.tools "Uirlis&#237;">
-<!ENTITY sb.show.files "Teasp&#225;inn Comhaid">
+<!ENTITY sb.tools "Uirlisí">
+<!ENTITY sb.show.files "Teaspáinn Comhaid">
 <!ENTITY sb.move "Move">
 <!ENTITY sb.move.into "Bog go Comhadlann">
-<!ENTITY sb.renew "Ath-Ghabh&#225;il">
-<!ENTITY sb.export "Easport&#225;il">
+<!ENTITY sb.renew "Ath-Ghabháil">
+<!ENTITY sb.export "Easportáil">
 <!ENTITY sb.remove "Scrios">
 <!ENTITY sb.property "Treithe">
 <!ENTITY sb.listview "Amharc Mar Liosta">
 <!ENTITY sb.prop.title "Teideal">
-<!ENTITY sb.prop.comment "L&#233;iri&#250;">
+<!ENTITY sb.prop.comment "Léiriú">
+<!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID (Am)">
 <!ENTITY sb.folder.combine "Amharc Teaglamaithe">
-<!ENTITY sb.folder.openall "Oscail Gach Ceann i dT&#225;ba">
+<!ENTITY sb.folder.openall "Oscail Gach Ceann i dTába">
 <!ENTITY sb.folder.manage "Riaraidh Comhadlann">
 <!ENTITY sb.new.folder "Comhadlann Nua">
 <!ENTITY sb.new.separator "New Separator">
-<!ENTITY sb.new.note "N&#243;ta Nua">
-<!ENTITY sb.sort.folder "S&#243;rt&#225;il an Comhadlann">
+<!ENTITY sb.new.note "Nóta Nua">
+<!ENTITY sb.sort.folder "Sórtáil an Comhadlann">
 <!ENTITY sb.search "Cuardaigh">
-<!ENTITY sb.search.fulltext "Cuardach T&#233;acs Ioml&#225;n">
+<!ENTITY sb.search.fulltext "Cuardach Téacs Iomlán">
 <!ENTITY sb.search.all "Gach Rud">
-<!ENTITY sb.search.re "&#218;s&#225;id RegExp">
-<!ENTITY sb.search.cs "Triail C&#225;s a Macasamhail">
-<!ENTITY sb.search.cache "Athnuacha Taisce do Cuardach T&#233;acs Ioml&#225;n">
+<!ENTITY sb.search.re "Úsáid RegExp">
+<!ENTITY sb.search.cs "Triail Cás a Macasamhail">
+<!ENTITY sb.search.cache "Athnuacha Taisce do Cuardach Téacs Iomlán">
 <!ENTITY sb.search.clear "Glan Stair na Foirmeacha">
-<!ENTITY sb.search.days "Scagadh f&#233; Laethanta">
+<!ENTITY sb.search.days "Scagadh fé Laethanta">
 <!ENTITY mb.manage "Manage">
-<!ENTITY mb.profileFolder "Comhadlann Pr&#225;if&#237;l">
+<!ENTITY mb.profileFolder "Comhadlann Práifíl">

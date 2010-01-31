@@ -18,7 +18,7 @@
 <!--dialog-->
 <dialog id="ScrapBookOutputDialog"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        title="&sb.tools.output; - ScrapBook"
+        title="&sb.tools.output; - ScrapBook Plus"
         width="380" height="400"
         onload="sbOutputService.init();"
         ondialogaccept="sbOutputService.start();"

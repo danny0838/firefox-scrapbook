@@ -7,7 +7,7 @@
 <!ENTITY sb.capture.target "Захватить ссылку">
 <!ENTITY sb.capture.target.as "Захватить ссылку как">
 <!ENTITY sb.capture.alltabs "Захватить все вкладки">
-<!ENTITY sb.capture.bookmark "Добавить в закладки ScrapBook">
+<!ENTITY sb.capture.bookmark "Добавить в закладки ScrapBook+">
 <!ENTITY sb.sidebar "Показать в боковой панели">
 <!ENTITY sb.menu "Меню">
 <!ENTITY sb.editbefore "Редактирование перед сохранением">

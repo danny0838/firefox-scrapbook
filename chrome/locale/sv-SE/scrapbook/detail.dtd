@@ -1,3 +1,5 @@
+<!ENTITY sb.detail.linked.timeout "Timeout (in seconds)">
+<!ENTITY sb.detail.linked.charset "Character set">
 <!ENTITY sb.detail "Spara i Scrapbook">
 <!ENTITY sb.detail.new.folder "Ny Mapp">
 <!ENTITY sb.detail.select.folder "Välj Mapp">

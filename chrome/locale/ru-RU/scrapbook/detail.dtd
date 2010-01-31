@@ -1,3 +1,5 @@
+<!ENTITY sb.detail.linked.timeout "Задержка (в сек)">
+<!ENTITY sb.detail.linked.charset "Кодировка">
 <!ENTITY sb.detail "Настройки сохранения веб-страницы">
 <!ENTITY sb.detail.new.folder "Новый каталог">
 <!ENTITY sb.detail.select.folder "Выбрать каталог">

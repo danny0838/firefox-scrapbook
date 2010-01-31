@@ -1,0 +1,29 @@
+<!ENTITY sb.toolbar.edit "Панель редагування">
+<!ENTITY sb.toolbar.info "Інформаційна панель">
+<!ENTITY sb.edit.eraser "Очищення DOM: інструмент для вилучення зайвих елементів сторінки">
+<!ENTITY sb.edit.undo "Повернути">
+<!ENTITY sb.edit.save "Зберегти зміни">
+<!ENTITY sb.edit.comment "Збільшити форму коментування">
+<!ENTITY sb.edit.sticky "Пересувна нотатка">
+<!ENTITY sb.edit.sticky.create "Створити пересувну нотатку">
+<!ENTITY sb.edit.inline.add "Додати приховану нотатку до обраного">
+<!ENTITY sb.edit.attach.file "Додати файл до обраного">
+<!ENTITY sb.edit.attach.link "Додати посилання до обраного">
+<!ENTITY sb.edit.cutter "Вилучити обране">
+<!ENTITY sb.edit.remove.iframe "Вилучити усі мітки IFRAME">
+<!ENTITY sb.edit.remove.script "Вилучити усі мітки SCRIPT">
+<!ENTITY sb.highlighter "Підсвічування">
+<!ENTITY sb.highlighter.remove "Вилучити підсвічування обраного">
+<!ENTITY sb.highlighter.remove.all "Вилучити усі підсвічування">
+<!ENTITY sbp.highlighter.stil1 "Стиль 1">
+<!ENTITY sbp.highlighter.stil2 "Стиль 2">
+<!ENTITY sbp.highlighter.stil3 "Стиль 3">
+<!ENTITY sbp.highlighter.stil4 "Стиль 4">
+<!ENTITY sbp.highlighter.stil5 "Стиль 5">
+<!ENTITY sbp.highlighter.stil6 "Стиль 6">
+<!ENTITY sb.source "Відкрити початкову адресу">
+<!ENTITY sb.renew "Зберегти знову">
+<!ENTITY sb.locate "Показати розташування у Бічній панелі">
+<!ENTITY sb.indicators "Відображати індикатори посилань">
+<!ENTITY sb.info.home "На головну">
+<!ENTITY sb.info.sitemap "Карта сайту">

@@ -13,6 +13,7 @@
 <!ENTITY sb.listview "List View">
 <!ENTITY sb.prop.title "Titel">
 <!ENTITY sb.prop.comment "Commentaar">
+<!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID (Tijd)">
 <!ENTITY sb.folder.combine "Gecombineerd scherm">
 <!ENTITY sb.folder.openall "Alles in tabbladen openen">

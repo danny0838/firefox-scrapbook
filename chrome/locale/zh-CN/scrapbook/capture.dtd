@@ -4,10 +4,10 @@
 <!ENTITY sb.capture.retry "重试">
 <!ENTITY sb.capture.skip "忽略">
 <!ENTITY sb.capture.pause "暂停">
+<!ENTITY sb.capture.finish "取消">
 <!ENTITY sb.capture.filter "过滤器">
-<!ENTITY sb.capture.filter.domain "限定域名">
-<!ENTITY sb.capture.filter.level "限定目录">
-<!ENTITY sb.capture.filter.string "按字符串过滤...">
-<!ENTITY sb.capture.filter.checkon "选择全部项目">
-<!ENTITY sb.capture.filter.checkoff "取消所有选择">
-<!ENTITY sb.capture.filter.invert "反向选择">
+<!ENTITY sb.capture.filter.column.one "显示/隐藏">
+<!ENTITY sb.capture.filter.column.two "过滤规则（正则表达式）">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "标题">
+<!ENTITY sbp.capture.column.three "状态">

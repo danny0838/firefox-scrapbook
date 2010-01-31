@@ -1,13 +1,13 @@
 <!ENTITY sb.capture "Zachycení">
 <!ENTITY sb.capture.abort "Zrušit">
 <!ENTITY sb.capture.start "Začít">
-<!ENTITY sb.capture.retry "Začít znovu">
+<!ENTITY sb.capture.retry "Opakovat">
 <!ENTITY sb.capture.skip "Přeskočit">
 <!ENTITY sb.capture.pause "Pozastavit">
+<!ENTITY sb.capture.finish "Zrušit">
 <!ENTITY sb.capture.filter "Filtr">
-<!ENTITY sb.capture.filter.domain "Omezit na doménu">
-<!ENTITY sb.capture.filter.level "Omezit na adresář">
-<!ENTITY sb.capture.filter.string "Filtr dle řetězce...">
-<!ENTITY sb.capture.filter.checkon "Zapnout vše">
-<!ENTITY sb.capture.filter.checkoff "Vypnout vše">
-<!ENTITY sb.capture.filter.invert "Obrátit výběr">
+<!ENTITY sb.capture.filter.column.one "Zobrazit/Skrýt">
+<!ENTITY sb.capture.filter.column.two "Filtrovat (regulární výrazy)">
+<!ENTITY sbp.capture.column.one "Adresa URL">
+<!ENTITY sbp.capture.column.two "Název">
+<!ENTITY sbp.capture.column.three "Stav">

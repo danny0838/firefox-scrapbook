@@ -1,3 +1,10 @@
+<!ENTITY sb.multiple.filter "Filtr">
+<!ENTITY sbp.multiple.titleofwebsite "Tytuł witryny">
+<!ENTITY sbp.multiple.titleoflink "Tytuł odnośnika">
+<!ENTITY sb.multiple.title "Tytuł">
+<!ENTITY sb.multiple.timeout "Limit czasu">
+<!ENTITY sbp.multiple.downloadmethod "Metoda">
+<!ENTITY sb.multiple.charset "Zestaw znaków">
 <!ENTITY sb.multiple.url "URL (wprowadzaj adresy URL linia po linii)">
 <!ENTITY sb.multiple.detector "Wykrywacz adresów URL">
 <!ENTITY sb.multiple.detector.plink "Wszystkie odnośniki na tej stronie">
@@ -6,3 +13,4 @@
 <!ENTITY sb.multiple.detector.local "Wszystkie lokalne strony w katalogu">
 <!ENTITY sb.multiple.detector.bookmarks "Zakładki">
 <!ENTITY sb.multiple.detector.clear "Wyczyść">
+<!ENTITY sbp.multiple.exclude "Ignoruj już istniejące adresy w folderze docelowym">

@@ -1,19 +1,19 @@
 <!ENTITY sb.new.folder "Új mappa">
-<!ENTITY sb.new.separator "New Separator">
+<!ENTITY sb.new.separator "Új elválasztó">
 <!ENTITY sb.new.note "Új jegyzet">
-<!ENTITY sb.toggle.all "Open/close All Folders">
+<!ENTITY sb.toggle.all "Összes mappa kinyitása/becsukása">
 <!ENTITY sb.tools "Eszközök">
 <!ENTITY sb.tools.options "Beállítások">
 <!ENTITY sb.tools.manage "Kezelés">
-<!ENTITY sb.tools.combine "Combine Wizard">
-<!ENTITY sb.tools.trade "Importálás / Exportálás">
+<!ENTITY sb.tools.combine "Összefűzés Varázsló">
+<!ENTITY sb.tools.trade "Importálás/Exportálás">
 <!ENTITY sb.tools.multiple "Több webcím rögzítése">
 <!ENTITY sb.tools.directory "Dosszié mappa">
 <!ENTITY sb.tools.calculate "Méret kiszámítása">
 <!ENTITY sb.tools.sorttree "Teljes fa rendezése">
 <!ENTITY sb.tools.output "Fa exportálása HTML-ként">
 <!ENTITY sb.tools.repair "Vészhelyzet javítása">
-<!ENTITY sb.tools.addons "Add-on Functions">
+<!ENTITY sb.tools.addons "Kibővített funkciók">
 <!ENTITY sb.tools.homepage "Honlap">
 <!ENTITY sb.note.opentab "Megnyitás fülön">
 <!ENTITY sb.note.close "Bezárás">

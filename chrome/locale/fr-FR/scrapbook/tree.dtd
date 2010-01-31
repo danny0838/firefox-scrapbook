@@ -13,6 +13,7 @@
 <!ENTITY sb.listview "Vue de la liste">
 <!ENTITY sb.prop.title "Titre">
 <!ENTITY sb.prop.comment "Commentaire">
+<!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID (DateHeure)">
 <!ENTITY sb.folder.combine "Vue combinée">
 <!ENTITY sb.folder.openall "Tout ouvrir dans des onglets">

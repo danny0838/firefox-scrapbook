@@ -1,19 +1,19 @@
 <!ENTITY sb.new.folder "Comhadlann Nua">
 <!ENTITY sb.new.separator "New Separator">
-<!ENTITY sb.new.note "N&#243;ta Nua">
+<!ENTITY sb.new.note "Nóta Nua">
 <!ENTITY sb.toggle.all "Open/close All Folders">
-<!ENTITY sb.tools "Uirlis&#237;">
+<!ENTITY sb.tools "Uirlisí">
 <!ENTITY sb.tools.options "Socraithe">
-<!ENTITY sb.tools.manage "Bainist&#237;ocht">
+<!ENTITY sb.tools.manage "Bainistíocht">
 <!ENTITY sb.tools.combine "Combine Wizard">
-<!ENTITY sb.tools.trade "Iomp&#243;rt&#225;il / Easport&#225;il">
-<!ENTITY sb.tools.multiple "Ilghabh&#225;il URL">
-<!ENTITY sb.tools.directory "Comhadlann Leabhar Gearrth&#225;n">
+<!ENTITY sb.tools.trade "Iompórtáil / Easportáil">
+<!ENTITY sb.tools.multiple "Ilghabháil URL">
+<!ENTITY sb.tools.directory "Comhadlann Leabhar Gearrthán">
 <!ENTITY sb.tools.calculate "Toirt Measta">
-<!ENTITY sb.tools.sorttree "S&#243;rtil an Chrann ar Fad">
-<!ENTITY sb.tools.output "Easp&#243;rt&#225;il Crann mar HTML">
-<!ENTITY sb.tools.repair "Deisi&#250; &#233;igeand&#225;la">
+<!ENTITY sb.tools.sorttree "Sórtil an Chrann ar Fad">
+<!ENTITY sb.tools.output "Easpórtáil Crann mar HTML">
+<!ENTITY sb.tools.repair "Deisiú éigeandála">
 <!ENTITY sb.tools.addons "Add-on Functions">
 <!ENTITY sb.tools.homepage "Bunleathanach">
-<!ENTITY sb.note.opentab "Oscail i T&#225;b">
-<!ENTITY sb.note.close "D&#250;n">
+<!ENTITY sb.note.opentab "Oscail i Táb">
+<!ENTITY sb.note.close "Dún">

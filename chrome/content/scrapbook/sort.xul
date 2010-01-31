@@ -11,8 +11,9 @@
 
 <wizard id="sbSortWizard"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        title="&sb.sort; - ScrapBook"
+        title="&sb.sort; - ScrapBook Plus"
         onload="sbSortService.init();"
+		onwizardcancel="sbSortService.showTree();"
         windowtype="scrapbook">
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />

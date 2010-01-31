@@ -15,7 +15,7 @@
 ]>
 
 <window id="sbManageWindow"
-        title="&sb.tools.manage; - ScrapBook"
+        title="&sb.tools.manage; - ScrapBook Plus"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         xmlns:SB="http://amb.vis.ne.jp/mozilla/scrapbook-rdf#"
         width="720" height="540" persist="width height screenX screenY"
@@ -68,6 +68,7 @@
 				      onclick="sbTreeHandler.onClick(event, 1);"
 				      ondblclick="sbTreeHandler.onDblClick(event);"
 				      onkeypress="sbTreeHandler.onKeyPress(event);"
+					  ondragenter="sbTreeDNDHandler.currentDataTransfer=event.dataTransfer;"
 				      ondraggesture="if (event.originalTarget.localName == 'treechildren') nsDragAndDrop.startDrag(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
 				      ondragover="nsDragAndDrop.dragOver(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
 				      ondragdrop="nsDragAndDrop.drop(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
@@ -81,7 +82,7 @@
 							class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title"
 							persist="width hidden ordinal" />
 						<splitter class="tree-splitter" />
-						<treecol id="sbTreeColSource" flex="2" label="URL"
+						<treecol id="sbTreeColSource" flex="2" label="&sbp.prop.url;"
 							class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#source"
 							persist="width hidden ordinal" />
 						<splitter class="tree-splitter" />
@@ -117,7 +118,7 @@
 										<treecell id="sbTreeItem"
 										          label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title"
 										          src="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon"
-										          properties="Name rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
+										          properties="Name title rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
 										<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#source" />
 										<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
 										<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon" />
@@ -135,7 +136,7 @@
 			<vbox id="sbListOuter" flex="1" persist="height" hidden="true" style="height:200px;" />
 		</vbox>
 		<splitter id="sbPaneSplitter" hidden="true" />
-		<browser id="sbRightPaneBrowser" onload="event.stopPropagation();" flex="5" hidden="true" persist="width" />
+		<browser id="sbRightPaneBrowser" onload="event.stopPropagation();" flex="5" hidden="true" persist="width" disablehistory="true" />
 	</hbox>
 
 	<statusbar id="status-bar" class="chromeclass-status">

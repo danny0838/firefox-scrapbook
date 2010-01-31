@@ -2,3 +2,7 @@
 <!ENTITY sb.combine.preview "Podgląd">
 <!ENTITY sb.combine.preview.d "Po weryfikacji podglądu naciśnij przycisk &quot;Połącz&quot;.">
 <!ENTITY sb.combine.option.remove "Po zakończeniu łączenia usuń oryginalne strony">
+<!ENTITY sbp.combine.up "przesuń elementy do góry">
+<!ENTITY sbp.combine.down "przesuń elementy w dół">
+<!ENTITY sbp.combine.remove "usuń elementy">
+<!ENTITY sbp.combine.newTitle "nowy tytuł">

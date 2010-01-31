@@ -1,3 +1,5 @@
+<!ENTITY sb.detail.linked.timeout "المهلة (ثواني)">
+<!ENTITY sb.detail.linked.charset "ضبط المحارف">
 <!ENTITY sb.detail "تفاصيل الالتقاط">
 <!ENTITY sb.detail.new.folder "مجلد جديد">
 <!ENTITY sb.detail.select.folder "حدد مجلد">
@@ -14,4 +16,4 @@
 <!ENTITY sb.detail.linked.page.depth "عمق الارتباطات">
 <!ENTITY sb.detail.linked.page.text "بعد إتمام الالتقاط, سيتم ربط الصفحات مع بعضها و عمل خريطة الموقع.">
 <!ENTITY sb.detail.warnAboutRenew "لاحظ: &apos;الالتقاط مجدداً&apos; يكتب فوق الصفحات المحفوظة.">
-<!ENTITY sb.detail.warnAboutScript "لاحظ: نصوص الجافا  قد تؤدي الى بعض المشاكل.">
+<!ENTITY sb.detail.warnAboutScript "لاحظ: نصوص-الجافا  قد تؤدي الى بعض المشاكل.">

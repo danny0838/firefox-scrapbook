@@ -4,10 +4,10 @@
 <!ENTITY sb.capture.retry "Ponovno pokušaj">
 <!ENTITY sb.capture.skip "Preskoči">
 <!ENTITY sb.capture.pause "Pauziraj">
+<!ENTITY sb.capture.finish "Cancel">
 <!ENTITY sb.capture.filter "Filter">
-<!ENTITY sb.capture.filter.domain "Ograniči na domenu">
-<!ENTITY sb.capture.filter.level "Ograniči na direktorij">
-<!ENTITY sb.capture.filter.string "Filtriraj po oznaci...">
-<!ENTITY sb.capture.filter.checkon "Sve označi">
-<!ENTITY sb.capture.filter.checkoff "Sve odznači">
-<!ENTITY sb.capture.filter.invert "Obrni oznake">
+<!ENTITY sb.capture.filter.column.one "Show/Hide">
+<!ENTITY sb.capture.filter.column.two "Filter (regular expression)">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "Title">
+<!ENTITY sbp.capture.column.three "Status">

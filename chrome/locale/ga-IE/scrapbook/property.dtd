@@ -1,13 +1,13 @@
-<!ENTITY sb.prop.general "Eolas Ginear&#225;lta">
+<!ENTITY sb.prop.general "Eolas Ginearálta">
 <!ENTITY sb.prop.type "Saghas">
-<!ENTITY sb.prop.date "D&#225;ta">
-<!ENTITY sb.prop.encode "C&#243;d&#225;il">
+<!ENTITY sb.prop.date "Dáta">
+<!ENTITY sb.prop.encode "Códáil">
 <!ENTITY sb.prop.size "Toirt">
-<!ENTITY sb.prop.content "&#193;bhar">
+<!ENTITY sb.prop.content "Ábhar">
 <!ENTITY sb.prop.folder "Comhadlann">
-<!ENTITY sb.prop.icon "Deilbh&#237;n">
+<!ENTITY sb.prop.icon "Deilbhín">
 <!ENTITY sb.prop.icon.change "Aistrigh">
-<!ENTITY sb.prop.icon.default "R&#233;amhshocraithe">
+<!ENTITY sb.prop.icon.default "Réamhshocraithe">
 <!ENTITY sb.prop.icon.favicon "Roghnaigh favicon">
-<!ENTITY sb.prop.icon.custom "Roghnaigh deilbh&#237;n an &#250;s&#225;ideoir">
-<!ENTITY sb.prop.mark "Marc&#225;il">
+<!ENTITY sb.prop.icon.custom "Roghnaigh deilbhín an úsáideoir">
+<!ENTITY sb.prop.mark "Marcáil">

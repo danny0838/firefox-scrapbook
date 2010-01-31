@@ -160,7 +160,7 @@ var sbPropService = {
 	setIconURL : function()
 	{
 		var ret = { value : this.getIconURL() };
-		if ( !sbCommonUtils.PROMPT.prompt(window, document.getElementById("sbPropIconMenu").label, "URL:", ret, null, {}) ) return;
+		if ( !sbCommonUtils.PROMPT.prompt(window, document.getElementById("sbPropIconMenu").label, this.STRING.getString("ADDRESS")+":", ret, null, {}) ) return;
 		if ( ret.value ) this.ICON.src = ret.value;
 	},
 

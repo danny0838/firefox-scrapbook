@@ -36,3 +36,4 @@
 <!ENTITY sb.button.customize "Изменить">
 <!ENTITY sb.button.browse "Обзор">
 <!ENTITY sb.button.show "Показать файлы">
+<!ENTITY sbp.prefs.useDropDownList "использовать альтернативный выбор вида маркера">

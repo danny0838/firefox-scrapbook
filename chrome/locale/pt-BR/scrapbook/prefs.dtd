@@ -36,3 +36,4 @@
 <!ENTITY sb.button.customize "Customize">
 <!ENTITY sb.button.browse "Browse">
 <!ENTITY sb.button.show "Show Files">
+<!ENTITY sbp.prefs.useDropDownList "use drop-down choice list instead of buttons for highlighter">

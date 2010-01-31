@@ -38,7 +38,7 @@ var sbPrefWindow = {
 
 	hlInitUI: function() {
 		var tmpElt = document.getElementById("hlTemplate");
-		for (var num = 1; num <= 4; num++) {
+		for (var num = 1; num <= 6; num++) {
 			var elt = tmpElt.cloneNode(true);
 			tmpElt.parentNode.insertBefore(elt, tmpElt);
 			elt.firstChild.setAttribute("value", num + ":");
@@ -51,7 +51,7 @@ var sbPrefWindow = {
 
 	hlUpdateUI: function() {
 		var prefBranch = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefBranch);
-		for (var num = 4; num > 0; num--) {
+		for (var num = 6; num > 0; num--) {
 			var prefVal = null;
 			var prefName = "scrapbook.highlighter.style." + num;
 			try {
@@ -99,7 +99,7 @@ var sbPrefWindow = {
 			return;
 		var fileField = document.getElementById(aEltID);
 		fileField.file = file;
-		if (file.isDirectory())
+		if (file.exists() && file.isDirectory())
 			fileField.label = file.path;
 	},
 

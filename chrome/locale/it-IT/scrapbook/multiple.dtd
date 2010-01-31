@@ -1,4 +1,11 @@
-<!ENTITY sb.multiple.url "URL (Inserire più URL linea per linea)">
+<!ENTITY sb.multiple.filter "Filtro">
+<!ENTITY sbp.multiple.titleofwebsite "Titolo del sito">
+<!ENTITY sbp.multiple.titleoflink "Titolo del link">
+<!ENTITY sb.multiple.title "Titolo">
+<!ENTITY sb.multiple.timeout "Timeout">
+<!ENTITY sbp.multiple.downloadmethod "Metodo">
+<!ENTITY sb.multiple.charset "Codifica">
+<!ENTITY sb.multiple.url "URL (inserire ogni URL per linea)">
 <!ENTITY sb.multiple.detector "Rilevatore URL">
 <!ENTITY sb.multiple.detector.plink "Tutti i link nella pagina">
 <!ENTITY sb.multiple.detector.slink "Tutti i link nella selezione">
@@ -6,3 +13,4 @@
 <!ENTITY sb.multiple.detector.local "Tutti i file HTML locali sotto la cartella">
 <!ENTITY sb.multiple.detector.bookmarks "Segnalibri">
 <!ENTITY sb.multiple.detector.clear "Svuota">
+<!ENTITY sbp.multiple.exclude "Ignora gli indirizzi web già esistenti nella cartella di destinazione">

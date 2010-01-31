@@ -13,6 +13,7 @@
 <!ENTITY sb.listview "Pogled s popisom">
 <!ENTITY sb.prop.title "Naslov">
 <!ENTITY sb.prop.comment "Komentar">
+<!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID (Vrijeme)">
 <!ENTITY sb.folder.combine "Kombinirani pogled">
 <!ENTITY sb.folder.openall "Otvori sve u karticama">

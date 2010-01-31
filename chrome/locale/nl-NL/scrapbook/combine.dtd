@@ -2,3 +2,7 @@
 <!ENTITY sb.combine.preview "Voorbeeld">
 <!ENTITY sb.combine.preview.d "Op de &apos;Samenvoegen&apos;-knop drukken,na controle van het voorbeeld.">
 <!ENTITY sb.combine.option.remove "Na voltooiing van het samenvoegen, de originele pagina&apos;s verwijderen.">
+<!ENTITY sbp.combine.up "move item upwards">
+<!ENTITY sbp.combine.down "move item downwards">
+<!ENTITY sbp.combine.remove "remove item">
+<!ENTITY sbp.combine.newTitle "new title">

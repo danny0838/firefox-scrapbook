@@ -4,10 +4,10 @@
 <!ENTITY sb.capture.retry "Reštartovať">
 <!ENTITY sb.capture.skip "Preskočiť">
 <!ENTITY sb.capture.pause "Pauza">
+<!ENTITY sb.capture.finish "Zrušiť">
 <!ENTITY sb.capture.filter "Filter">
-<!ENTITY sb.capture.filter.domain "Obmedziť na oblasť">
-<!ENTITY sb.capture.filter.level "Obmedziť na priečinok">
-<!ENTITY sb.capture.filter.string "Filter podľa reťazca...">
-<!ENTITY sb.capture.filter.checkon "Všetko zapnúť">
-<!ENTITY sb.capture.filter.checkoff "Všetko vypnúť">
-<!ENTITY sb.capture.filter.invert "Obrátiť výber">
+<!ENTITY sb.capture.filter.column.one "Zobraziť/Skryť">
+<!ENTITY sb.capture.filter.column.two "Filter (regulárny výraz)">
+<!ENTITY sbp.capture.column.one "Adresa URL">
+<!ENTITY sbp.capture.column.two "Názov">
+<!ENTITY sbp.capture.column.three "Stav">

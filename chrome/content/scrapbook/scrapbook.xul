@@ -34,11 +34,12 @@
 					<menuitem class="menuitem-iconic sb-create" label="&sb.new.note;"      oncommand="sbMainService.createNote();" />
 				</menupopup>
 			</toolbarbutton>
-			<toolbarbutton id="sbToolbarToggle"   tooltiptext="&sb.toggle.all;" oncommand="sbTreeHandler.toggleAllFolders();" />
-			<toolbarbutton id="sbToolbarListView" observes="sbToggleListView"   oncommand="sbListHandler.toggle();" />
+			<toolbarbutton id="sbToolbarToggle"   tooltiptext="&sb.toggle.all;"   oncommand="sbTreeHandler.toggleAllFolders();" />
+			<toolbarbutton id="sbToolbarListView" observes="sbToggleListView"     oncommand="sbListHandler.toggle();" />
+			<toolbarbutton id="sbToolbarManage"   tooltiptext="&sb.tools.manage;" oncommand="sbCommonUtils.openManageWindow(null,null);" />
 			<toolbarbutton id="mbToolbarButton" />
 			<spacer flex="1" />
-			<toolbarbutton type="menu" label="&sb.tools;">
+			<toolbarbutton type="menu" label="&sb.tools; ">
 				<menupopup id="sbToolsMenuPopup">
 					<menuitem label="&sb.tools.options;..."   oncommand="sbMainService.openPrefWindow();" />
 					<menuseparator />
@@ -54,7 +55,7 @@
 					<menuitem label="&sb.tools.output;"    oncommand="window.openDialog('chrome://scrapbook/content/output.xul','ScrapBook:Output','chrome,centerscreen,modal,resizable');" />
 					<menuitem label="&sb.tools.repair;"    oncommand="window.openDialog('chrome://scrapbook/content/repair.xul','ScrapBook:Repair','chrome,centerscreen,all,modal,resizable,dialog=no');" />
 					<menuseparator />
-					<menuitem label="&sb.tools.homepage;"  oncommand="sbCommonUtils.loadURL('http://amb.vis.ne.jp/mozilla/scrapbook/',true);" />
+					<menuitem label="&sb.tools.homepage;"  oncommand="sbCommonUtils.loadURL('https://addons.mozilla.org/firefox/addon/8186',true);" />
 				</menupopup>
 			</toolbarbutton>
 		</toolbar>
@@ -70,6 +71,7 @@
 			<tree id="sbTree"
 			      onclick="sbTreeHandler.onClick(event, 2);"
 			      onkeypress="sbTreeHandler.onKeyPress(event);"
+				  ondragenter="sbTreeDNDHandler.currentDataTransfer=event.dataTransfer;"
 			      ondraggesture="nsDragAndDrop.startDrag(event,sbTreeDNDHandler.dragDropObserver);"
 			      ondragover="nsDragAndDrop.dragOver(event,sbTreeDNDHandler.dragDropObserver);"
 			      ondragdrop="sbTreeDNDHandler.getModifiers(event); nsDragAndDrop.drop(event,sbTreeDNDHandler.dragDropObserver);"

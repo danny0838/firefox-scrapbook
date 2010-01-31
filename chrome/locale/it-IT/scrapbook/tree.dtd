@@ -7,12 +7,13 @@
 <!ENTITY sb.move "Sposta">
 <!ENTITY sb.move.into "Sposta nella cartella">
 <!ENTITY sb.renew "Cattura ancora">
-<!ENTITY sb.export "Esporta">
+<!ENTITY sb.export "Esporta…">
 <!ENTITY sb.remove "Elimina">
-<!ENTITY sb.property "Proprietà">
+<!ENTITY sb.property "Proprietà…">
 <!ENTITY sb.listview "Visualizza la lista">
 <!ENTITY sb.prop.title "Titolo">
 <!ENTITY sb.prop.comment "Commenti">
+<!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID (Data/ora)">
 <!ENTITY sb.folder.combine "Visualizzazione combinata">
 <!ENTITY sb.folder.openall "Apri tutto in schede">

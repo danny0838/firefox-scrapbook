@@ -4,10 +4,10 @@
 <!ENTITY sb.capture.retry "再試行">
 <!ENTITY sb.capture.skip "スキップ">
 <!ENTITY sb.capture.pause "一時停止">
+<!ENTITY sb.capture.finish "Cancel">
 <!ENTITY sb.capture.filter "フィルタ">
-<!ENTITY sb.capture.filter.domain "ドメインで制限">
-<!ENTITY sb.capture.filter.level "ディレクトリで制限">
-<!ENTITY sb.capture.filter.string "文字列でフィルタ...">
-<!ENTITY sb.capture.filter.checkon "すべてチェックオン">
-<!ENTITY sb.capture.filter.checkoff "すべてチェックオフ">
-<!ENTITY sb.capture.filter.invert "チェックの反転">
+<!ENTITY sb.capture.filter.column.one "Show/Hide">
+<!ENTITY sb.capture.filter.column.two "Filter (regular expression)">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "Title">
+<!ENTITY sbp.capture.column.three "Status">

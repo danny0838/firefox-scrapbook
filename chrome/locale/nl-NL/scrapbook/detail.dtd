@@ -1,3 +1,5 @@
+<!ENTITY sb.detail.linked.timeout "Timeout (in seconds)">
+<!ENTITY sb.detail.linked.charset "Character set">
 <!ENTITY sb.detail "Geavanceerd bewaren">
 <!ENTITY sb.detail.new.folder "Nieuwe map">
 <!ENTITY sb.detail.select.folder "Map kiezen">

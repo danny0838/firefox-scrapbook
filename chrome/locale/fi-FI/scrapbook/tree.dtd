@@ -13,6 +13,7 @@
 <!ENTITY sb.listview "Listanäkymä">
 <!ENTITY sb.prop.title "Otsikko">
 <!ENTITY sb.prop.comment "Kommentti">
+<!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "Tunnus (Aika)">
 <!ENTITY sb.folder.combine "Yhdistetty näkymä">
 <!ENTITY sb.folder.openall "Avaa kaikki välilehtiin">

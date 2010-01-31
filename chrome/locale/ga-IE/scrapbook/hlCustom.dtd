@@ -1,20 +1,20 @@
-<!ENTITY sb.hlCustom.preset "St&#237;leanna R&#233;amhshocraithe">
-<!ENTITY sb.hlCustom.background "C&#250;lra">
+<!ENTITY sb.hlCustom.preset "Stíleanna Réamhshocraithe">
+<!ENTITY sb.hlCustom.background "Cúlra">
 <!ENTITY sb.hlCustom.color "Dath">
 <!ENTITY sb.hlCustom.text "Teacs">
 <!ENTITY sb.hlCustom.bold "Trom">
-<!ENTITY sb.hlCustom.italic "Iod&#225;lach">
-<!ENTITY sb.hlCustom.line "L&#237;ne-tr&#237;">
-<!ENTITY sb.hlCustom.border "Iml&#237;ne">
-<!ENTITY sb.hlCustom.type "Cl&#243;scr&#237;obh">
+<!ENTITY sb.hlCustom.italic "Iodálach">
+<!ENTITY sb.hlCustom.line "Líne-trí">
+<!ENTITY sb.hlCustom.border "Imlíne">
+<!ENTITY sb.hlCustom.type "Clóscríobh">
 <!ENTITY sb.hlCustom.box "Bosca">
-<!ENTITY sb.hlCustom.underline "Fol&#237;ne">
-<!ENTITY sb.hlCustom.style "St&#237;l">
+<!ENTITY sb.hlCustom.underline "Folíne">
+<!ENTITY sb.hlCustom.style "Stíl">
 <!ENTITY sb.hlCustom.solid "Daingean">
 <!ENTITY sb.hlCustom.dotted "Briste">
 <!ENTITY sb.hlCustom.dashed "Daiseanna">
-<!ENTITY sb.hlCustom.double "D&#250;bailte">
+<!ENTITY sb.hlCustom.double "Dúbailte">
 <!ENTITY sb.hlCustom.width "Leithead">
-<!ENTITY sb.hlCustom.thin "Tana&#237;">
-<!ENTITY sb.hlCustom.medium "Me&#225;n">
+<!ENTITY sb.hlCustom.thin "Tanaí">
+<!ENTITY sb.hlCustom.medium "Meán">
 <!ENTITY sb.hlCustom.thick "Tiubh">

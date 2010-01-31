@@ -15,6 +15,12 @@
 <!ENTITY sb.highlighter "Marcador">
 <!ENTITY sb.highlighter.remove "Limpiar marcas en la selección">
 <!ENTITY sb.highlighter.remove.all "Borrar todas las marcas">
+<!ENTITY sbp.highlighter.stil1 "Estilo 1">
+<!ENTITY sbp.highlighter.stil2 "Estilo 2">
+<!ENTITY sbp.highlighter.stil3 "Estilo 3">
+<!ENTITY sbp.highlighter.stil4 "Estilo 4">
+<!ENTITY sbp.highlighter.stil5 "Estilo 5">
+<!ENTITY sbp.highlighter.stil6 "Estilo 6">
 <!ENTITY sb.source "Abrir URL de origen">
 <!ENTITY sb.renew "Capturar Otra vez">
 <!ENTITY sb.locate "Localizar en el árbol de la barra lateral">

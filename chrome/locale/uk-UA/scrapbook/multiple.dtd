@@ -1,0 +1,16 @@
+<!ENTITY sb.multiple.filter "Фільтр">
+<!ENTITY sbp.multiple.titleofwebsite "Заголовок сайта">
+<!ENTITY sbp.multiple.titleoflink "Заголовок посилання">
+<!ENTITY sb.multiple.title "Заголовок">
+<!ENTITY sb.multiple.timeout "Затримка">
+<!ENTITY sbp.multiple.downloadmethod "Метод">
+<!ENTITY sb.multiple.charset "Кодування">
+<!ENTITY sb.multiple.url "Адреса (один рядок — одна адреса)">
+<!ENTITY sb.multiple.detector "Шукач адрес">
+<!ENTITY sb.multiple.detector.plink "Усі посилання на сторінці">
+<!ENTITY sb.multiple.detector.slink "Усі посилання з обраного">
+<!ENTITY sb.multiple.detector.tabs "Усі відкриті вкладки у вікні">
+<!ENTITY sb.multiple.detector.local "Усі локальні сторінці у теці">
+<!ENTITY sb.multiple.detector.bookmarks "Закладки">
+<!ENTITY sb.multiple.detector.clear "Очистити">
+<!ENTITY sbp.multiple.exclude "ігнорувати вже існуючі адреси в теці призначення">

@@ -36,3 +36,4 @@
 <!ENTITY sb.button.customize "カスタマイズ">
 <!ENTITY sb.button.browse "参照">
 <!ENTITY sb.button.show "ファイルを表示">
+<!ENTITY sbp.prefs.useDropDownList "use drop-down choice list instead of buttons for highlighter">

@@ -1,0 +1,8 @@
+<!ENTITY sb.combine.dragdrop "Додавайте необхідні сторінки з дерева сторінок перетягуванням. Ви можете перетягувати одразу декілька сторінок.">
+<!ENTITY sb.combine.preview "Попередній перегляд">
+<!ENTITY sb.combine.preview.d "Натисніть кнопку 'Об’єднати' після перегляду попереднього перегляду.">
+<!ENTITY sb.combine.option.remove "Вилучити вихідні сторінки після закінчення об’єднання">
+<!ENTITY sbp.combine.up "перемістити вище">
+<!ENTITY sbp.combine.down "перемістити нижче">
+<!ENTITY sbp.combine.remove "вилучити">
+<!ENTITY sbp.combine.newTitle "нова назва">

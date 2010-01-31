@@ -1,0 +1,29 @@
+<!ENTITY sb.toolbar.edit "Araç Çubuğunu Düzenle">
+<!ENTITY sb.toolbar.info "Bilgi Çubuğu">
+<!ENTITY sb.edit.eraser "DOM Eraser: Tıklanan elementleri Web sayfasından kaldırmak için bir araç">
+<!ENTITY sb.edit.undo "Geri Al">
+<!ENTITY sb.edit.save "Değişiklikleri Kaydet">
+<!ENTITY sb.edit.comment "Yorum Bölgesini Genişlet">
+<!ENTITY sb.edit.sticky "Kalıcı Dipnot">
+<!ENTITY sb.edit.sticky.create "&sb.edit.sticky; Oluştur">
+<!ENTITY sb.edit.inline.add "Seçime Satır-Arası Dipnot Ekle">
+<!ENTITY sb.edit.attach.file "Seçime Dosya Ekle">
+<!ENTITY sb.edit.attach.link "Seçime Link Ekle">
+<!ENTITY sb.edit.cutter "Seçimi Kaldır">
+<!ENTITY sb.edit.remove.iframe "Tüm IFRAME Etiketlerini Kaldır">
+<!ENTITY sb.edit.remove.script "Tüm SCRIPT Etiketlerini Kaldır">
+<!ENTITY sb.highlighter "Vurgulayıcı">
+<!ENTITY sb.highlighter.remove "Seçimden Vurguları Temizle">
+<!ENTITY sb.highlighter.remove.all "Tüm Vurguları Temizle">
+<!ENTITY sbp.highlighter.stil1 "Stil 1">
+<!ENTITY sbp.highlighter.stil2 "Stil 2">
+<!ENTITY sbp.highlighter.stil3 "Stil 3">
+<!ENTITY sbp.highlighter.stil4 "Stil 4">
+<!ENTITY sbp.highlighter.stil5 "Stil 5">
+<!ENTITY sbp.highlighter.stil6 "Stil 6">
+<!ENTITY sb.source "Kaynak URL&apos;yi Aç">
+<!ENTITY sb.renew "Yeniden Kaydet">
+<!ENTITY sb.locate "Kenar Çubuğu Ağacında Konumla">
+<!ENTITY sb.indicators "Link Belirteçlerini Göster">
+<!ENTITY sb.info.home "Ana Sayfa">
+<!ENTITY sb.info.sitemap "Site Haritası">

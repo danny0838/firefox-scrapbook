@@ -8,7 +8,7 @@
 <!ENTITY sb.tools.combine "Configurazione guidata di unione pagine">
 <!ENTITY sb.tools.trade "Importazione/esportazione">
 <!ENTITY sb.tools.multiple "Cattura più URL">
-<!ENTITY sb.tools.directory "Apri la cartella di ScrapBook">
+<!ENTITY sb.tools.directory "Apri la cartella di ScrapBook+">
 <!ENTITY sb.tools.calculate "Calcola la dimensione">
 <!ENTITY sb.tools.sorttree "Ordina diagramma delle cartelle">
 <!ENTITY sb.tools.output "Esporta diagramma delle cartelle come file HTML">

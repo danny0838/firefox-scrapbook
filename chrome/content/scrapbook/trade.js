@@ -186,9 +186,9 @@ var sbTradeService = {
 		listbox.ensureIndexIsVisible(listbox.getRowCount() - 1);
 		switch ( aColor )
 		{
-			case "R" : aColor = "#FF0000;"; break;
-			case "G" : aColor = "#00AA33;"; break;
-			case "B" : aColor = "#0000FF;"; break;
+			case "R" : aColor = "#FF0000"; break;
+			case "G" : aColor = "#00AA33"; break;
+			case "B" : aColor = "#0000FF"; break;
 		}
 		if ( aColor ) listitem.style.color = aColor;
 		if ( aBold  ) listitem.style.fontWeight = "bold";
@@ -376,7 +376,7 @@ var sbExportService = {
 				sbTradeService.log(sbTradeService.STRING.getString("FAILED") + ' "' + ex + '"' + rate + title, "R", true);
 			}
 			window.top.document.getElementById("sbManageProgress").value = Math.round( (this.count + 1) / this.resList.length * 100);
-			setTimeout(function(){ sbExportService.next(); }, 500);
+			setTimeout(function(){ sbExportService.next(); }, 0);
 		}
 		else
 		{
@@ -495,7 +495,7 @@ var sbImportService = {
 				sbTradeService.log(sbTradeService.STRING.getString("FAILED") + ' "' + ex + '"' + rate + title, "R", true);
 			}
 			window.top.document.getElementById("sbManageProgress").value = Math.round(num / this.idxList.length * 100);
-			setTimeout(function(){ sbImportService.next(); }, 500);
+			setTimeout(function(){ sbImportService.next(); }, 0);
 		}
 		else
 		{

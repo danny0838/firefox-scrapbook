@@ -54,15 +54,15 @@
 		<treecols>
 			<treecol id="sbTreeColTitle"   label="&sb.prop.title;"   flex="3" /><splitter class="tree-splitter" />
 			<treecol id="sbTreeColContent" label="&sb.prop.content;" flex="5" /><splitter class="tree-splitter" />
-			<treecol id="sbTreeColComment" label="&sb.prop.comment;" flex="2" /><splitter class="tree-splitter" />
-			<treecol id="sbTreeColFolder"  label="&sb.prop.folder;"  flex="1" />
-			<treecol id="sbTreeColName"    label="HTML" flex="1" hidden="true" />
+			<treecol id="sbTreeColComment" label="&sb.prop.comment;" flex="2" persist="hidden" /><splitter class="tree-splitter" />
+			<treecol id="sbTreeColFolder"  label="&sb.prop.folder;"  flex="1" persist="hidden" />
+			<treecol id="sbTreeColName"    label="HTML" flex="1" hidden="true" persist="hidden" />
 		</treecols>
 		<treechildren />
 	</tree>
 
 	<splitter />
 
-	<browser id="sbBrowser" type="content-primary" flex="1" onload="sbSearchResult.onDocumentLoad(event);" />
+	<browser id="sbBrowser" type="content-primary" disablehistory="true" flex="1" onload="sbSearchResult.onDocumentLoad(event);" />
 
 </window>

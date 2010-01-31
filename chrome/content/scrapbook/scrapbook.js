@@ -305,7 +305,7 @@ var sbController = {
 			"chrome://scrapbook/content/capture.xul", "",
 			"chrome,centerscreen,all,resizable,dialog=no",
 			[sbDataSource.getProperty(aRes, "source")], null,
-			aShowDetail, null, 0, null, null, null, preset
+			aShowDetail, null, 0, null, null, null, preset, "SB"
 		);
 	},
 
@@ -373,7 +373,7 @@ var sbController = {
 				sbCommonUtils.execProgram(path, [aDir.path]);
 			}
 			catch (ex) {
-				alert("ScrapBook ERROR: Failed to execute program.\n" + ex);
+				alert("ScrapBook Plus ERROR: Failed to execute program.\n" + ex);
 			}
 		}
 	},
@@ -409,7 +409,7 @@ var sbController = {
 			}
 			if (!sbDataSource.exists(aResList[i]) || 
 			    sbDataSource.getRelativeIndex(aParResList[i], aResList[i]) < 0) {
-				alert("ScrapBook ERROR: Failed to remove resource.\n" + aResList[i].Value);
+				alert("ScrapBook Plus ERROR: Failed to remove resource.\n" + aResList[i].Value);
 				continue;
 			}
 			rmIDs = rmIDs.concat(sbDataSource.deleteItemDescending(aResList[i], aParResList[i]));
@@ -450,6 +450,7 @@ var sbTreeDNDHandler = {
 	orient   : 0,
 	modAlt   : false,
 	modShift : false,
+	currentDataTransfer : null,
 
 	dragDropObserver: 
 	{
@@ -465,6 +466,7 @@ var sbTreeDNDHandler = {
 		},
 		getSupportedFlavours: function() {
 			var flavours = new FlavourSet();
+			flavours.appendFlavour("application/x-moz-tabbrowser-tab");
 			flavours.appendFlavour("moz/rdfitem");
 			flavours.appendFlavour("text/x-moz-url");
 			flavours.appendFlavour("text/html");
@@ -482,22 +484,43 @@ var sbTreeDNDHandler = {
 			return true;
 		},
 		onDrop: function(row, orient) {
-			try {
+			var XferData, XferType;
+			var odAppInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
+			if (odAppInfo.version.match(/^3.5/) &&
+			    (sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0) == "application/x-moz-tabbrowser-tab" ||
+				 sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0) == "sb/tradeitem"))
+			{
+				switch (sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0))
+				{
+					case "application/x-moz-tabbrowser-tab":
+					{
+						XferData = sbTreeDNDHandler.currentDataTransfer.getData(sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(1))+"\n"+document.commandDispatcher.focusedWindow.document.title;
+						break;
+					}
+					case "sb/tradeitem":
+					{
+						XferType = "sb/tradeitem";
+						break;
+					}
+					default:
+						alert("Unsupported XferType:\n---\n"+sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0));
+				}
+			} else
+			{
 				var XferDataSet  = nsTransferable.get(
 					sbTreeDNDHandler.dragDropObserver.getSupportedFlavours(),
-					nsDragAndDrop.getDragData,
+					nsDragAndDrop.getDragData || this.getDragData,
 					true
 				);
-				var XferData     = XferDataSet.first.first;
-				var XferDataType = XferData.flavour.contentType;
+				XferData = XferDataSet.first.first.data;
+				XferType = XferDataSet.first.first.flavour.contentType;
 			}
-			catch(ex) {}
-			if (XferDataType == "moz/rdfitem")
+			if (XferType == "moz/rdfitem")
 				sbTreeDNDHandler.move(row, orient);
-			else if (XferDataType == "sb/tradeitem")
+			else if (XferType == "sb/tradeitem")
 				sbTreeDNDHandler.importData(row, orient);
 			else
-				sbTreeDNDHandler.capture(XferData.data, row, orient);
+				sbTreeDNDHandler.capture(XferData, row, orient);
 			sbController.rebuildLocal();
 		},
 		onToggleOpenState    : function() {},
@@ -509,6 +532,18 @@ var sbTreeDNDHandler = {
 		onPerformAction      : function() {},
 		onPerformActionOnRow : function() {},
 		onPerformActionOnCell: function() {},
+		getDragData: function (aFlavourSet) {
+			var supportsArray = Components.classes["@mozilla.org/supports-array;1"].
+			                    createInstance(Components.interfaces.nsISupportsArray);
+			for (var i = 0; i < nsDragAndDrop.mDragSession.numDropItems; ++i) {
+				var trans = nsTransferable.createTransferable();
+				for (var j = 0; j < aFlavourSet.flavours.length; ++j)
+				trans.addDataFlavor(aFlavourSet.flavours[j].contentType);
+				nsDragAndDrop.mDragSession.getData(trans, i);
+				supportsArray.AppendElement(trans);
+			}
+			return supportsArray;
+		},
 	},
 
 	getModifiers: function(aEvent)
@@ -543,6 +578,8 @@ var sbTreeDNDHandler = {
 
 	moveSingle: function()
 	{
+		//Für Firefox 3.5 notwendig, da sonst ein Fehler ausgegeben wird
+		if ( this.row == -1 ) return;
 		var curIdx = sbTreeHandler.TREE.currentIndex;
 		var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
 		var curPar = sbTreeHandler.getParentResource(curIdx);
@@ -565,6 +602,15 @@ var sbTreeDNDHandler = {
 			tarResList.push(sbTreeHandler.TREE.builderView.getResourceAtIndex(this.row));
 			tarParList.push((this.orient == 0) ? tarResList[i] : sbTreeHandler.getParentResource(this.row));
 		}
+		//RDF-Datenquelle vom tree entfernen
+		var mmDatei = sbCommonUtils.getScrapBookDir();
+		mmDatei.append("scrapbook.rdf");
+		var mmDateiURL = sbCommonUtils.IO.newFileURI(mmDatei).spec;
+		var mmDaten = sbCommonUtils.RDF.GetDataSourceBlocking(mmDateiURL);
+		var mmSidebarTreeObj = window.opener.document.getElementById("sbTree");
+		if ( mmSidebarTreeObj ) mmSidebarTreeObj.database.RemoveDataSource(mmDaten);
+		var mmTreeObj = document.getElementById("sbTree");
+		mmTreeObj.database.RemoveDataSource(mmDaten);
 		if (this.orient == 1) {
 			for (i = idxList.length - 1; i >= 0 ; i--)
 				this.moveAfterChecking(curResList[i], curParList[i], tarResList[i], tarParList[i]);
@@ -573,6 +619,9 @@ var sbTreeDNDHandler = {
 			for (i = 0; i < idxList.length; i++)
 				this.moveAfterChecking(curResList[i], curParList[i], tarResList[i], tarParList[i]);
 		}
+		//RDF-Datenquelle dem tree hinzufügen
+		if ( mmSidebarTreeObj ) mmSidebarTreeObj.database.AddDataSource(mmDaten);
+		mmTreeObj.database.AddDataSource(mmDaten);
 		sbDataSource.flush();
 	},
 
@@ -654,7 +703,7 @@ var sbTreeDNDHandler = {
 				"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
 				[url], win.location.href,
 				sbMainService.prefs.showDetailOnDrop || this.modShift,
-				res[0], res[1], null, null, null
+				res[0], res[1], null, null, null, null, "SB"
 			);
 		}
 		else if (url.indexOf("file://") == 0) {

@@ -7,7 +7,7 @@
 <!ENTITY sb.capture.target "Spara länk i Scrapbook">
 <!ENTITY sb.capture.target.as "Spara länk i Scrapbook som">
 <!ENTITY sb.capture.alltabs "Capture All Tabs">
-<!ENTITY sb.capture.bookmark "Bookmark with ScrapBook">
+<!ENTITY sb.capture.bookmark "Bookmark with ScrapBook+">
 <!ENTITY sb.sidebar "Show in Sidebar">
 <!ENTITY sb.menu "Menu">
 <!ENTITY sb.editbefore "Edit Before Capture">

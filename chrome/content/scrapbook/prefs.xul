@@ -18,7 +18,7 @@
 
 <prefwindow id="sbPrefWindow"
             xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-            title="ScrapBook &sb.tools.options;"
+            title="ScrapBook Plus &sb.tools.options;"
             style="width: 40em;"
             onload="sbPrefWindow.init();"
             onchange="sbPrefWindow.changed = true;"
@@ -79,6 +79,8 @@
 				        oncommand="sbPrefWindow.hlCustomize(this.getAttribute('hlnumber'));" />
 			</hbox>
 		</groupbox>
+		<spacer height="10" />
+		<checkbox preference="extensions.scrapbookplus.useDropDownList" label="&sbp.prefs.useDropDownList;" />
 	</prefpane>
 
 	<prefpane id="organizePane" label="&sb.prefs.organize;" flex="1">
@@ -131,6 +133,7 @@
 			<preference id="scrapbook.notifyOnComplete"   name="scrapbook.notifyOnComplete"   type="bool" />
 			<preference id="scrapbook.fileViewer.default" name="scrapbook.fileViewer.default" type="bool" />
 			<preference id="scrapbook.fileViewer.path"    name="scrapbook.fileViewer.path"    type="file" />
+			<preference id="extensions.scrapbookplus.useDropDownList"  name="extensions.scrapbookplus.useDropDownList"    type="bool" />
 		</preferences>
 		<checkbox preference="scrapbook.showDetailOnDrop" label="&sb.prefs.showDetailOnDrop;" />
 		<checkbox preference="scrapbook.notifyOnComplete" label="&sb.prefs.notifyOnComplete;" />

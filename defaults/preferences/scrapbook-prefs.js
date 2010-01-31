@@ -1,4 +1,4 @@
-pref("extensions.{53A03D43-5363-4669-8190-99061B2DEBA5}.description", "chrome://scrapbook/locale/about.properties");
+pref("extensions.scrapbookplus@addons.mozilla.org.description", "chrome://scrapbook/locale/about.properties");
 
 pref("scrapbook.ui.contextMenu", true);
 pref("scrapbook.ui.contextSubMenu", false);
@@ -24,4 +24,5 @@ pref("scrapbook.tree.autoCollapse", false);
 pref("scrapbook.confirmDelete", true);
 pref("scrapbook.showDetailOnDrop", false);
 pref("scrapbook.notifyOnComplete", true);
+pref("extensions.scrapbookplus.useDropDownList", false);
 

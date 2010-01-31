@@ -1,0 +1,13 @@
+<!ENTITY sb.capture "Збереження">
+<!ENTITY sb.capture.abort "Зупинити">
+<!ENTITY sb.capture.start "Розпочати">
+<!ENTITY sb.capture.retry "Повторити">
+<!ENTITY sb.capture.skip "Пропустити">
+<!ENTITY sb.capture.pause "Призупинити">
+<!ENTITY sb.capture.finish "Скасувати">
+<!ENTITY sb.capture.filter "Фільтр">
+<!ENTITY sb.capture.filter.column.one "Показати/Сховати">
+<!ENTITY sb.capture.filter.column.two "Фільтр (регулярний вираз)">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "Заголовок">
+<!ENTITY sbp.capture.column.three "Статус">

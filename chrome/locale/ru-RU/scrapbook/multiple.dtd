@@ -1,3 +1,10 @@
+<!ENTITY sb.multiple.filter "Фильтр">
+<!ENTITY sbp.multiple.titleofwebsite "Заголовок веб-сайта">
+<!ENTITY sbp.multiple.titleoflink "Заголовок ссылки">
+<!ENTITY sb.multiple.title "Заголовок">
+<!ENTITY sb.multiple.timeout "Задержка">
+<!ENTITY sbp.multiple.downloadmethod "Метод">
+<!ENTITY sb.multiple.charset "Кодировка">
 <!ENTITY sb.multiple.url "URL (В одной строке должен быть один адрес)">
 <!ENTITY sb.multiple.detector "URL детектор">
 <!ENTITY sb.multiple.detector.plink "Все ссылки на странице">
@@ -6,3 +13,4 @@
 <!ENTITY sb.multiple.detector.local "Все веб-страницы в каталоге">
 <!ENTITY sb.multiple.detector.bookmarks "Закладки">
 <!ENTITY sb.multiple.detector.clear "Очистить">
+<!ENTITY sbp.multiple.exclude "игнорировать уже созданные адреса в папке назначения">

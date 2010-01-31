@@ -45,6 +45,9 @@ var sbCombineService = {
 
 	init : function()
 	{
+		//Block wird benötigt, um Korrekturen bei fehlerhafter Zusammenstellung zu erlauben
+		this.toggleElements(true);
+		//Ende Block
 		gOption = { "script" : true, "images" : true };
 		if ( window.top.location.href != "chrome://scrapbook/content/manage.xul" )
 		{
@@ -56,8 +59,11 @@ var sbCombineService = {
 		sbDataSource  = window.top.sbDataSource;
 		this.index = 0;
 		sbFolderSelector2.init();
-		this.WIZARD.getButton("back").onclick = function(){ sbCombineService.undo(); };
-		this.WIZARD.getButton("cancel").hidden = true;
+//		this.WIZARD.getButton("back").onclick = function(){ sbCombineService.undo(); };
+		this.WIZARD.getButton("back").hidden = true;
+//		this.WIZARD.getButton("cancel").hidden = true;
+		this.WIZARD.getButton("cancel").onclick = function(){ sbCombineService.abort(); };
+		this.toggleButtons();
 		this.updateButtons();
 	},
 
@@ -82,9 +88,10 @@ var sbCombineService = {
 		this.idList.push(sbDataSource.getProperty(aRes, "id"));
 		this.resList.push(aRes);
 		this.parList.push(aParRes);
+		this.toggleButtons();
 		this.updateButtons();
 	},
-
+/*
 	undo : function()
 	{
 		if ( this.idList.length == 0 ) return;
@@ -94,7 +101,7 @@ var sbCombineService = {
 		this.parList.pop();
 		this.updateButtons();
 	},
-
+*/
 	updateButtons : function()
 	{
 		this.WIZARD.canRewind  = this.idList.length > 0;
@@ -103,12 +110,22 @@ var sbCombineService = {
 
 	initPreview : function()
 	{
-		this.WIZARD.canRewind = false;
+//		this.WIZARD.canRewind = false;
 		this.WIZARD.canAdvance = false;
-		this.WIZARD.getButton("back").onclick = null;
+//		this.WIZARD.getButton("back").onclick = null;
+		this.WIZARD.getButton("back").hidden = false;
+		this.WIZARD.getButton("back").disabled = true;
 		this.WIZARD.getButton("finish").label = this.STRING.getString("FINISH_BUTTON_LABEL");
 		this.WIZARD.getButton("finish").disabled = true;
+		this.WIZARD.getButton("cancel").hidden = false;
+		this.WIZARD.getButton("cancel").disabled = true;
+//		this.WIZARD.getButton("cancel").onclick = function(){ sbCombineService.abort(); };
 		this.option["R"] = document.getElementById("sbCombineOptionRemove").checked;
+		//Werte müssen initialisiert werden, damit es beim erneuten Laden nicht zu doppelt geladenem Inhalt kommt
+		sbPageCombiner.htmlSrc = "";
+		sbPageCombiner.cssText = "";
+		sbPageCombiner.offsetTop = 0;
+		sbPageCombiner.isTargetCombined = false;
 		sbInvisibleBrowser.init();
 		sbInvisibleBrowser.ELEMENT.removeEventListener("load", sbInvisibleBrowser.onload, true);
 		sbInvisibleBrowser.onload = function(){ sbPageCombiner.exec(); };
@@ -124,9 +141,12 @@ var sbCombineService = {
 			this.postfix = sbDataSource.getProperty(this.resList[this.index], "title");
 			var type = sbDataSource.getProperty(this.resList[this.index], "type");
 			if  ( type == "file" || type == "bookmark" )
+			{
 				sbPageCombiner.exec(type);
-			else
+			} else
+			{
 				sbInvisibleBrowser.load(sbCommonUtils.getBaseHref(sbDataSource.data.URI) + "data/" + this.curID + "/index.html");
+			}
 		}
 		else
 		{
@@ -152,16 +172,38 @@ var sbCombineService = {
 	{
 		this.toggleElements(false);
 		sbInvisibleBrowser.ELEMENT.onclick = function(aEvent){ aEvent.preventDefault(); };
+		this.WIZARD.getButton("back").disabled = false;
 		this.WIZARD.getButton("finish").disabled = false;
 		this.WIZARD.getButton("finish").onclick = function(){ sbCombineService.finish(); };
+		this.WIZARD.getButton("cancel").disabled = false;
+	},
+
+	abort : function()
+	{
+		this.WIZARD.getButton("back").disabled = true;
+		this.WIZARD.getButton("finish").disabled = true;
+		this.WIZARD.getButton("cancel").disabled = true;
+		setTimeout(function()
+		{
+			window.top.sbManageService.toggleRightPane("sbToolbarCombine");
+		}, 500);
 	},
 
 	finish : function()
 	{
 		this.WIZARD.getButton("finish").disabled = true;
+		this.WIZARD.getButton("cancel").disabled = true;
+		this.option["R"] = document.getElementById("sbCombineOptionRemove").checked;
 		this.toggleElements(true);
 		SB_trace(sbCaptureTask.STRING.getString("CAPTURE_START"));
-		setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null); }, 0);
+//alert("--"+document.getElementById("sbpTitleTextbox").value+"--");
+		if ( document.getElementById("sbpTitleTextbox").value == "" )
+		{
+			setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null); }, 0);
+		} else
+		{
+			setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null, null, document.getElementById("sbpTitleTextbox").value); }, 0);
+		}
 	},
 
 	toggleElements : function(isProgressMode)
@@ -188,6 +230,127 @@ var sbCombineService = {
 		return newRes;
 	},
 
+	deleteItem : function()
+	{
+		//Index festhalten
+		var diIndex = this.LISTBOX.selectedIndex;
+		var diCount = this.LISTBOX.getRowCount();
+		var diVorher = "";
+		var diNachhr = "";
+		//Eintrag aus Listbox entfernen
+		this.LISTBOX.removeItemAt(diIndex);
+		//this.idList aktualisieren
+		this.idList.splice(diIndex, 1);
+		//this.resList aktualisieren
+		this.resList.splice(diIndex, 1);
+		//this.parList aktualisieren
+		this.parList.splice(diIndex, 1);
+		this.toggleButtons();
+		this.updateButtons();
+	},
+
+	moveDown : function()
+	{
+		var mdIndex = this.LISTBOX.selectedIndex;
+		//Reihenfolge ändern
+		var mdPuffer = this.idList[mdIndex];
+		this.idList[mdIndex] = this.idList[mdIndex+1];
+		this.idList[mdIndex+1] = mdPuffer;
+		var mdPuffer = this.resList[mdIndex];
+		this.resList[mdIndex] = this.resList[mdIndex+1];
+		this.resList[mdIndex+1] = mdPuffer;
+		var mdPuffer = this.parList[mdIndex];
+		this.parList[mdIndex] = this.parList[mdIndex+1];
+		this.parList[mdIndex+1] = mdPuffer;
+		var mdItem = this.LISTBOX.removeItemAt(mdIndex);
+		var mdNewItem = this.LISTBOX.insertItemAt( mdIndex+1, mdItem.getAttribute("label") );
+		this.LISTBOX.selectItem(mdNewItem);
+		mdNewItem.setAttribute("class", "listitem-iconic");
+		mdNewItem.setAttribute("image", mdItem.getAttribute("image"));
+		this.toggleButtons();
+	},
+
+	moveUp : function()
+	{
+		//Index bestimmen
+		var muIndex = this.LISTBOX.selectedIndex;
+		//Reihenfolge ändern
+		var muPuffer = this.idList[muIndex];
+		this.idList[muIndex] = this.idList[muIndex-1];
+		this.idList[muIndex-1] = muPuffer;
+		var muPuffer = this.resList[muIndex];
+		this.resList[muIndex] = this.resList[muIndex-1];
+		this.resList[muIndex-1] = muPuffer;
+		var muPuffer = this.parList[muIndex];
+		this.parList[muIndex] = this.parList[muIndex-1];
+		this.parList[muIndex-1] = muPuffer;
+		var muItem = this.LISTBOX.removeItemAt(muIndex);
+		var muNewItem = this.LISTBOX.insertItemAt( muIndex-1, muItem.getAttribute("label") );
+		this.LISTBOX.selectItem(muNewItem);
+		muNewItem.setAttribute("class", "listitem-iconic");
+		muNewItem.setAttribute("image", muItem.getAttribute("image"));
+		this.toggleButtons();
+	},
+
+	toggleButtons : function()
+	{
+		var tbIndex = this.LISTBOX.selectedIndex;
+		var tbEintraege = this.LISTBOX.getRowCount();
+		if ( tbEintraege>1 )
+		{
+			switch ( tbIndex )
+			{
+				case -1:
+					document.getElementById("sbpUp").disabled = true;
+					document.getElementById("sbpDown").disabled = true;
+					document.getElementById("sbpDelete").disabled = true;
+					document.getElementById("sbpUp").setAttribute("image", "chrome://scrapbook/skin/sbpExtra/expander_up_dis.png");
+					document.getElementById("sbpDown").setAttribute("image", "chrome://scrapbook/skin/sbpExtra/expander_down_dis.png");
+					document.getElementById("sbpDelete").setAttribute("image", "chrome://scrapbook/skin/sbpExtra/menu_remove_dis.png");
+					break;
+				case 0:
+					document.getElementById("sbpUp").disabled = true;
+					document.getElementById("sbpDown").disabled = false;
+					document.getElementById("sbpDelete").disabled = false;
+					document.getElementById("sbpUp").setAttribute("image", "chrome://scrapbook/skin/sbpExtra/expander_up_dis.png");
+					document.getElementById("sbpDown").setAttribute("image", "chrome://scrapbook/skin/expander_down.png");
+					document.getElementById("sbpDelete").setAttribute("image", "chrome://scrapbook/skin/menu_remove.png");
+					break;
+				case tbEintraege-1:
+					document.getElementById("sbpUp").disabled = false;
+					document.getElementById("sbpDown").disabled = true;
+					document.getElementById("sbpDelete").disabled = false;
+					document.getElementById("sbpUp").setAttribute("image", "chrome://scrapbook/skin/expander_up.png");
+					document.getElementById("sbpDown").setAttribute("image", "chrome://scrapbook/skin/sbpExtra/expander_down_dis.png");
+					document.getElementById("sbpDelete").setAttribute("image", "chrome://scrapbook/skin/menu_remove.png");
+					break;
+				default:
+					document.getElementById("sbpUp").disabled = false;
+					document.getElementById("sbpDown").disabled = false;
+					document.getElementById("sbpDelete").disabled = false;
+					document.getElementById("sbpUp").setAttribute("image", "chrome://scrapbook/skin/expander_up.png");
+					document.getElementById("sbpDown").setAttribute("image", "chrome://scrapbook/skin/expander_down.png");
+					document.getElementById("sbpDelete").setAttribute("image", "chrome://scrapbook/skin/menu_remove.png");
+					break;
+			}
+		} else
+		{
+			//Da keine Einträge vorhanden sind, kann auch nichts gemacht werden. Daher können sämtliche Knöpfe deaktiviert werden
+			document.getElementById("sbpUp").disabled = true;
+			document.getElementById("sbpDown").disabled = true;
+			document.getElementById("sbpUp").setAttribute("image", "chrome://scrapbook/skin/sbpExtra/expander_up_dis.png");
+			document.getElementById("sbpDown").setAttribute("image", "chrome://scrapbook/skin/sbpExtra/expander_down_dis.png");
+			if ( tbIndex > -1 )
+			{
+				document.getElementById("sbpDelete").disabled = false;
+				document.getElementById("sbpDelete").setAttribute("image", "chrome://scrapbook/skin/menu_remove.png");
+			} else
+			{
+				document.getElementById("sbpDelete").disabled = true;
+				document.getElementById("sbpDelete").setAttribute("image", "chrome://scrapbook/skin/sbpExtra/menu_remove_dis.png");
+			}
+		}
+	},
 };
 
 
@@ -205,6 +368,7 @@ var sbPageCombiner = {
 
 	exec : function(aType)
 	{
+//alert("htmlSrc - "+this.htmlSrc.length+"\ncssText - "+this.cssText.length+"\noffsetTop - "+this.offsetTop+"\nisTargetCombined - "+this.isTargetCombined);
 		this.isTargetCombined = false;
 		if ( sbCombineService.index == 0 )
 		{

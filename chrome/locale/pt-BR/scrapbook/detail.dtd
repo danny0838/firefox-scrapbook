@@ -1,3 +1,5 @@
+<!ENTITY sb.detail.linked.timeout "Timeout (in seconds)">
+<!ENTITY sb.detail.linked.charset "Character set">
 <!ENTITY sb.detail "Detalhe da Captura">
 <!ENTITY sb.detail.new.folder "Nova Pasta">
 <!ENTITY sb.detail.select.folder "Selecionar Pasta">

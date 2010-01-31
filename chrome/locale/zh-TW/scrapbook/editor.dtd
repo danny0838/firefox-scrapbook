@@ -15,6 +15,12 @@
 <!ENTITY sb.highlighter "標示">
 <!ENTITY sb.highlighter.remove "刪除選取區內標示">
 <!ENTITY sb.highlighter.remove.all "刪除所有標示">
+<!ENTITY sbp.highlighter.stil1 "   Style 1   ">
+<!ENTITY sbp.highlighter.stil2 "   Style 2   ">
+<!ENTITY sbp.highlighter.stil3 "   Style 3   ">
+<!ENTITY sbp.highlighter.stil4 "   Style 4   ">
+<!ENTITY sbp.highlighter.stil5 "   Style 5   ">
+<!ENTITY sbp.highlighter.stil6 "   Style 6   ">
 <!ENTITY sb.source "開啟原始網址">
 <!ENTITY sb.renew "重新擷取">
 <!ENTITY sb.locate "於側邊欄中顯示此檔位置">

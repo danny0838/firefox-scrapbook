@@ -23,6 +23,10 @@ toolbarbutton#sbToolbarListView {
 	list-style-image: url('chrome://scrapbook/skin/toolbar_listview.png');
 }
 
+toolbarbutton#sbToolbarManage {
+	list-style-image: url('chrome://scrapbook/skin/sbpExtra/toolbar_manage.png');
+}
+
 toolbarbutton#sbToolbarMove {
 	list-style-image: url('chrome://scrapbook/skin/toolbar_move.png');
 }
@@ -218,3 +222,8 @@ browser {
 }
 
 
+/* ::::: NOTE (Fix for Firefox 3.5) ::::: */
+
+textbox[class="plain"] {
+	background-color: -moz-Field;
+}

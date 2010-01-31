@@ -13,6 +13,7 @@
 <!ENTITY sb.listview "Visualització com a llista">
 <!ENTITY sb.prop.title "Títol">
 <!ENTITY sb.prop.comment "Comentari">
+<!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID (Data i hora)">
 <!ENTITY sb.folder.combine "Visualització combinada">
 <!ENTITY sb.folder.openall "Obre&apos;ls tots en pestanyes">

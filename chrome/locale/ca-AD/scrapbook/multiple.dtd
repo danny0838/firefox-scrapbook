@@ -1,3 +1,10 @@
+<!ENTITY sb.multiple.filter "Filter">
+<!ENTITY sbp.multiple.titleofwebsite "Title of website">
+<!ENTITY sbp.multiple.titleoflink "Title of link">
+<!ENTITY sb.multiple.title "Title">
+<!ENTITY sb.multiple.timeout "Timeout">
+<!ENTITY sbp.multiple.downloadmethod "Method">
+<!ENTITY sb.multiple.charset "Charset">
 <!ENTITY sb.multiple.url "URL (Introduïu només un URL per a cada línia):">
 <!ENTITY sb.multiple.detector "Detector d&apos;URL">
 <!ENTITY sb.multiple.detector.plink "Tots els enllaços de la pàgina">
@@ -6,3 +13,4 @@
 <!ENTITY sb.multiple.detector.local "Tots els fitxers HTML de la carpeta">
 <!ENTITY sb.multiple.detector.bookmarks "Bookmarks">
 <!ENTITY sb.multiple.detector.clear "Buida">
+<!ENTITY sbp.multiple.exclude "ignore already existing addresses in destination folder">

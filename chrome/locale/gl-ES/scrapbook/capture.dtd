@@ -1,0 +1,13 @@
+<!ENTITY sb.capture "Capturar">
+<!ENTITY sb.capture.abort "Abortar">
+<!ENTITY sb.capture.start "Comezar">
+<!ENTITY sb.capture.retry "Reintentar">
+<!ENTITY sb.capture.skip "Saltar">
+<!ENTITY sb.capture.pause "Pausar">
+<!ENTITY sb.capture.finish "Cancelar">
+<!ENTITY sb.capture.filter "Filtro">
+<!ENTITY sb.capture.filter.column.one "Amosar/Agochar">
+<!ENTITY sb.capture.filter.column.two "Filtro (expresión regular)">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "Título">
+<!ENTITY sbp.capture.column.three "Estado">

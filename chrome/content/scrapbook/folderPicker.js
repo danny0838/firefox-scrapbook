@@ -10,10 +10,13 @@ var sbFolderPicker = {
 		document.getElementById("sbFolderPickerRoot").label = sbMainService.STRING.getString("ROOT_FOLDER");
 		if ( window.arguments.length == 2 )
 		{
-			if ( typeof(window.arguments[1]) == "string" ) window.arguments[1] = sbCommonUtils.RDF.GetResource(window.arguments[1]);
-			if ( window.arguments[1].Value != "urn:scrapbook:root" )
+			if ( window.arguments[1] )
 			{
-				sbTreeHandler.locateInternal(window.arguments[1]);
+				if ( typeof(window.arguments[1]) == "string" ) window.arguments[1] = sbCommonUtils.RDF.GetResource(window.arguments[1]);
+				if ( window.arguments[1].Value != "urn:scrapbook:root" )
+				{
+					sbTreeHandler.locateInternal(window.arguments[1]);
+				}
 			}
 		}
 	},
@@ -55,11 +58,18 @@ var sbFolderSelector2 = {
 	pick : function()
 	{
 		var ret = {};
-		window.openDialog('chrome://scrapbook/content/folderPicker.xul','','modal,chrome,centerscreen,resizable=yes', ret, this.RES_URI);
+		//this.RES_URI durch this.resURI ersetzt
+		window.openDialog('chrome://scrapbook/content/folderPicker.xul','','modal,chrome,centerscreen,resizable=yes', ret, this.resURI);
 		if ( ret.resource )
 		{
 			this.TEXTBOX.value = ret.title;
 			this.TEXTBOX.setAttribute("resuri", ret.resource.Value);
+			if ( document.getElementById("sbpCounter") )
+			{
+				sbMultipleService.currentID = this.resURI;
+				if ( sbMultipleService.currentID != sbMultipleService.lastID ) sbMultipleService.detectExistingLinks();
+				sbMultipleService.updateSelection();
+			}
 		}
 	},
 

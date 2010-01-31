@@ -36,3 +36,4 @@
 <!ENTITY sb.button.customize "定制">
 <!ENTITY sb.button.browse "浏览">
 <!ENTITY sb.button.show "显示文件">
+<!ENTITY sbp.prefs.useDropDownList "为高亮显示使用下拉选择列表替代按钮">

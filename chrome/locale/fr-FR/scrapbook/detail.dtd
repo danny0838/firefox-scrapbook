@@ -1,3 +1,5 @@
+<!ENTITY sb.detail.linked.timeout "Temporisation (en secondes)">
+<!ENTITY sb.detail.linked.charset "Jeu de caractères">
 <!ENTITY sb.detail "Détail de la capture">
 <!ENTITY sb.detail.new.folder "Nouveau dossier">
 <!ENTITY sb.detail.select.folder "Sélectionner le dossier">

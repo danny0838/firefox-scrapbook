@@ -12,16 +12,44 @@ var sbMultiBookService = {
 
 	showTitle: function()
 	{
-		if (!this.enabled)
-			return;
-		var win = "sbBrowserOverlay" in window.top ? window.top : sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
-		var title = win.sbBrowserOverlay.dataTitle;
-		if (!title) {
-			title = sbCommonUtils.copyUnicharPref("scrapbook.data.title", "");
-			win.sbBrowserOverlay.dataTitle = title;
+//Hier werden Änderungen fällig
+		//Dieser Block ist notwendig, da MultiSidebar verwendet Fehler verursachen würde
+		var stSidebarId = "sidebar";
+		var stSidebarTitleId = "sidebar-title";
+		var stSidebarSplitterId = "sidebar-splitter";
+		var stSidebarBoxId = "sidebar-box";
+		var stPrefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
+		var stPosition;
+
+		if ( stPrefs.prefHasUserValue("extensions.multisidebar.viewScrapBookSidebar") )
+		{
+			stPosition = stPrefs.getIntPref("extensions.multisidebar.viewScrapBookSidebar");
+		} else
+		{
+			stPosition = 1;
 		}
-		if (title)
-			win.document.getElementById("sidebar-title").value = "ScrapBook [" + title + "]";
+		if ( stPosition > 1)
+		{
+			stSidebarId = "sidebar-" + stPosition;
+			stSidebarTitleId = "sidebar-" + stPosition + "-title";
+			stSidebarSplitterId = "sidebar-" + stPosition + "-splitter";
+			stSidebarBoxId = "sidebar-" + stPosition + "-box";
+		}
+		//Ende Block
+		var win = "sbBrowserOverlay" in window.top ? window.top : sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
+		if (!this.enabled)
+		{
+			win.document.getElementById("sidebar-title").value = "ScrapBook Plus";
+		} else
+		{
+			var title = win.sbBrowserOverlay.dataTitle;
+			if (!title) {
+				title = sbCommonUtils.copyUnicharPref("scrapbook.data.title", "");
+				win.sbBrowserOverlay.dataTitle = title;
+			}
+			if (title)
+				win.document.getElementById(stSidebarTitleId).value = "ScrapBook Plus [" + title + "]";
+		}
 	},
 
 	initMenu : function()
@@ -109,6 +137,30 @@ var sbMultiBookService = {
 
 	refreshGlobal: function()
 	{
+//Hier werden Änderungen fällig
+		//Dieser Block ist notwendig, da MultiSidebar verwendet Fehler verursachen würde
+		var rgSidebarId = "sidebar";
+		var rgSidebarTitleId = "sidebar-title";
+		var rgSidebarSplitterId = "sidebar-splitter";
+		var rgSidebarBoxId = "sidebar-box";
+		var rgPrefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
+		var rgPosition;
+
+		if ( rgPrefs.prefHasUserValue("extensions.multisidebar.viewScrapBookSidebar") )
+		{
+			rgPosition = rgPrefs.getIntPref("extensions.multisidebar.viewScrapBookSidebar");
+		} else
+		{
+			rgPosition = 1;
+		}
+		if ( rgPosition > 1)
+		{
+			rgSidebarId = "sidebar-" + rgPosition;
+			rgSidebarTitleId = "sidebar-" + rgPosition + "-title";
+			rgSidebarSplitterId = "sidebar-" + rgPosition + "-splitter";
+			rgSidebarBoxId = "sidebar-" + rgPosition + "-box";
+		}
+		//Ende Block
 		const Cc = Components.classes;
 		const Ci = Components.interfaces;
 		var winEnum = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator)
@@ -118,7 +170,7 @@ var sbMultiBookService = {
 			try {
 				win.sbBrowserOverlay.refresh();
 				win.sbBrowserOverlay.onLocationChange(win.gBrowser.currentURI.spec);
-				win.document.getElementById("sidebar").contentWindow.sbMainService.refresh();
+				win.document.getElementById(rgSidebarId).contentWindow.sbMainService.refresh();
 			}
 			catch (ex) {
 			}

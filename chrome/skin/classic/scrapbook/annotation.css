@@ -6,13 +6,14 @@ div.scrapbook-sticky {
 	background-color: #FAFAFA;
 	border: 1px solid #CCCCCC;
 	color: #202020;
+	white-space: pre-wrap;
 	white-space: -moz-pre-wrap;
 	cursor: pointer;
 	font-size: small;
 	font-weight: normal;
 	font-style: normal;
 	text-decoration: none;
-	-moz-opacity: 0.85;
+	opacity: 0.85;
 }
 
 div.scrapbook-sticky * {

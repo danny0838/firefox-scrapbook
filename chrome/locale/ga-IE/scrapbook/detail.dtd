@@ -1,17 +1,19 @@
-<!ENTITY sb.detail "Sonr&#250; Gabh&#225;ile">
+<!ENTITY sb.detail.linked.timeout "Timeout (in seconds)">
+<!ENTITY sb.detail.linked.charset "Character set">
+<!ENTITY sb.detail "Sonrú Gabháile">
 <!ENTITY sb.detail.new.folder "Comhadlann Nua">
 <!ENTITY sb.detail.select.folder "Roghnaigh Cohmadlann">
 <!ENTITY sb.detail.option "Roghnaithe">
-<!ENTITY sb.detail.option.images "Iomh&#225;nna">
-<!ENTITY sb.detail.option.styles "St&#237;leanna">
-<!ENTITY sb.detail.linked.file "&#237;osl&#243;d&#225;il ar Chomhaid Nascaithe">
-<!ENTITY sb.detail.linked.image "Iomh&#225;">
+<!ENTITY sb.detail.option.images "Iomhánna">
+<!ENTITY sb.detail.option.styles "Stíleanna">
+<!ENTITY sb.detail.linked.file "íoslódáil ar Chomhaid Nascaithe">
+<!ENTITY sb.detail.linked.image "Iomhá">
 <!ENTITY sb.detail.linked.sound "Fuaim">
-<!ENTITY sb.detail.linked.movie "Scann&#225;in">
+<!ENTITY sb.detail.linked.movie "Scannáin">
 <!ENTITY sb.detail.linked.archive "Cartlann">
 <!ENTITY sb.detail.linked.custom "Saincheaptha">
-<!ENTITY sb.detail.linked.page "Grinn na Gabh&#225;ile">
-<!ENTITY sb.detail.linked.page.depth "Doimhne chun Nascanna a Lean&#250;int">
-<!ENTITY sb.detail.linked.page.text "Tar eis Gabh&#225;il a chr&#237;ochn&#250;, nascfar gach leathanach le ch&#233;ile agus t&#243;gfar mapa-su&#237;omha.">
-<!ENTITY sb.detail.warnAboutRenew "N&#211;TA: Deannan &apos;Ath-Ghabh&#225;il&apos; Forscr&#237;obh ar aon leathanach S&#225;bh&#225;ilte cheanna.">
-<!ENTITY sb.detail.warnAboutScript "N&#211;TA: Is feidir le JavaScript an-chuid faidhbeanna a chruth&#250;.">
+<!ENTITY sb.detail.linked.page "Grinn na Gabháile">
+<!ENTITY sb.detail.linked.page.depth "Doimhne chun Nascanna a Leanúint">
+<!ENTITY sb.detail.linked.page.text "Tar eis Gabháil a chríochnú, nascfar gach leathanach le chéile agus tógfar mapa-suíomha.">
+<!ENTITY sb.detail.warnAboutRenew "NÓTA: Deannan &apos;Ath-Ghabháil&apos; Forscríobh ar aon leathanach Sábháilte cheanna.">
+<!ENTITY sb.detail.warnAboutScript "NÓTA: Is feidir le JavaScript an-chuid faidhbeanna a chruthú.">

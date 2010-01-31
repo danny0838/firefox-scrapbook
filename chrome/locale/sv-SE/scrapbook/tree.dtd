@@ -13,6 +13,7 @@
 <!ENTITY sb.listview "List View">
 <!ENTITY sb.prop.title "Titel">
 <!ENTITY sb.prop.comment "Kommentar">
+<!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID (Tid)">
 <!ENTITY sb.folder.combine "Combined View">
 <!ENTITY sb.folder.openall "Öppna alla i nya flikar">

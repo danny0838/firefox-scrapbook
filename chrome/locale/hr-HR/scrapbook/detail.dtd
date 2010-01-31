@@ -1,3 +1,5 @@
+<!ENTITY sb.detail.linked.timeout "Timeout (in seconds)">
+<!ENTITY sb.detail.linked.charset "Character set">
 <!ENTITY sb.detail "Detalji hvatanja">
 <!ENTITY sb.detail.new.folder "Nova mapa">
 <!ENTITY sb.detail.select.folder "Odaberite mapu">

@@ -4,10 +4,10 @@
 <!ENTITY sb.capture.retry "Reintentar">
 <!ENTITY sb.capture.skip "Saltar">
 <!ENTITY sb.capture.pause "Pausa">
+<!ENTITY sb.capture.finish "Cancelar">
 <!ENTITY sb.capture.filter "Filtro">
-<!ENTITY sb.capture.filter.domain "Restringir al dominio">
-<!ENTITY sb.capture.filter.level "Restringir al directorio">
-<!ENTITY sb.capture.filter.string "Filtrar por cadena...">
-<!ENTITY sb.capture.filter.checkon "Activar todo">
-<!ENTITY sb.capture.filter.checkoff "Desactivar todo">
-<!ENTITY sb.capture.filter.invert "Invertir selección">
+<!ENTITY sb.capture.filter.column.one "Mostrar/Ocultar">
+<!ENTITY sb.capture.filter.column.two "Filtro (expresión patrón)">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "Título">
+<!ENTITY sbp.capture.column.three "Estado">

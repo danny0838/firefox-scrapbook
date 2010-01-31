@@ -1,0 +1,34 @@
+<!ENTITY sb.open "Aç">
+<!ENTITY sb.open.tab "Sekmede Aç">
+<!ENTITY sb.open.newtab "Yeni Sekmede Aç">
+<!ENTITY sb.open.source "Kaynak URL&apos;yi Aç">
+<!ENTITY sb.tools "Araçlar">
+<!ENTITY sb.show.files "Dosyaları Göster">
+<!ENTITY sb.move "Taşı">
+<!ENTITY sb.move.into "Klasöre Taşı">
+<!ENTITY sb.renew "Yeniden Kaydet">
+<!ENTITY sb.export "Dışa Aktar">
+<!ENTITY sb.remove "Sil">
+<!ENTITY sb.property "Özellikler">
+<!ENTITY sb.listview "Liste Görünümü">
+<!ENTITY sb.prop.title "Başlık">
+<!ENTITY sb.prop.comment "Yorum">
+<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.id.date "ID (Zaman)">
+<!ENTITY sb.folder.combine "Birleşik Görünüm">
+<!ENTITY sb.folder.openall "Tümünü Sekmelerde Aç">
+<!ENTITY sb.folder.manage "Klasörü Düzenle">
+<!ENTITY sb.new.folder "Yeni Klasör">
+<!ENTITY sb.new.separator "Yeni Ayraç">
+<!ENTITY sb.new.note "Yeni Not">
+<!ENTITY sb.sort.folder "Klasörü Sırala">
+<!ENTITY sb.search "Ara">
+<!ENTITY sb.search.fulltext "Tam Metin Arama">
+<!ENTITY sb.search.all "Tümü">
+<!ENTITY sb.search.re "RegExp Kullan">
+<!ENTITY sb.search.cs "Büyük-Küçük Harf Eşleştir">
+<!ENTITY sb.search.cache "Tam Metin Arama İçin Belleği Güncelle">
+<!ENTITY sb.search.clear "Geçmişten Temizle">
+<!ENTITY sb.search.days "Güne Göre Filteleme">
+<!ENTITY mb.manage "Yönet">
+<!ENTITY mb.profileFolder "Profil Klasörü">

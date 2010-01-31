@@ -2,3 +2,7 @@
 <!ENTITY sb.combine.preview "Visualització prèvia">
 <!ENTITY sb.combine.preview.d "Un cop hagueu verificat la visualització prèvia premeu el botó Uneix.">
 <!ENTITY sb.combine.option.remove "Un cop unides, suprimeix les pàgines originals">
+<!ENTITY sbp.combine.up "move item upwards">
+<!ENTITY sbp.combine.down "move item downwards">
+<!ENTITY sbp.combine.remove "remove item">
+<!ENTITY sbp.combine.newTitle "new title">

@@ -28,10 +28,6 @@ toolbar[iconsize="small"] #scrapbook-button {
 
 /* ::::: MENUBAR ::::: */
 
-#ScrapBookMenu menuitem {
-	max-width: 250px;
-}
-
 #ScrapBookMenu menuitem.sb-item {
 	list-style-image: url('chrome://scrapbook/skin/treeitem.png') !important;
 }
@@ -87,10 +83,6 @@ toolbar#ScrapBookEditor #ScrapBookHighlighter menuitem[type="radio"] {
 
 toolbar#ScrapBookEditor #ScrapBookHighlighter menuitem[type="radio"] {
 	border: 1px solid transparent;
-}
-
-toolbar#ScrapBookEditor #ScrapBookHighlighter menuitem[type="radio"]:hover > * {
-	color: ThreeDHighlight !important;
 }
 
 toolbar#ScrapBookEditor #ScrapBookHighlighter menupopup {

@@ -13,6 +13,7 @@
 <!ENTITY sb.listview "목록 보기">
 <!ENTITY sb.prop.title "제목">
 <!ENTITY sb.prop.comment "주석">
+<!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID (시간)">
 <!ENTITY sb.folder.combine "결합 결과">
 <!ENTITY sb.folder.openall "모두 탭으로 열기">

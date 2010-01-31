@@ -2,3 +2,7 @@
 <!ENTITY sb.combine.preview "Pregled">
 <!ENTITY sb.combine.preview.d "Pritisnite gumb &apos;Spoji&apos; nakon provjere pregleda.">
 <!ENTITY sb.combine.option.remove "Nakon dovršetka spajanja, uklonite originalne stranice">
+<!ENTITY sbp.combine.up "move item upwards">
+<!ENTITY sbp.combine.down "move item downwards">
+<!ENTITY sbp.combine.remove "remove item">
+<!ENTITY sbp.combine.newTitle "new title">

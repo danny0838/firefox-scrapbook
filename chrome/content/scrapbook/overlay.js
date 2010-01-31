@@ -47,7 +47,7 @@ var sbBrowserOverlay = {
 		    this._prefBranch.getBoolPref("contextSubMenu")) {
 			var callback = function() {
 				document.getElementById("ScrapBookContextSubmenu").hidden = false;
-				for (var i = 1; i <= 9; i++) {
+				for (var i = 1; i <= 10; i++) {
 					document.getElementById("ScrapBookContextSubmenu").firstChild.appendChild(
 						document.getElementById("ScrapBookContextMenu" + i)
 					);
@@ -234,7 +234,24 @@ var sbBrowserOverlay = {
 		if ( !linkURL ) return;
 		window.openDialog(
 			"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
-			[linkURL], document.popupNode.ownerDocument.location.href, aShowDetail, aTargetID, 0, null, null, null
+			[linkURL], document.popupNode.ownerDocument.location.href, aShowDetail, aTargetID, 0, null, null, null, null, "SB"
+		);
+	},
+
+	execCaptureTargetISO : function(aShowDetail, aTargetID)
+	{
+		aTargetID = this.verifyTargetID(aTargetID);
+		if ( !aTargetID ) return;
+		var linkURL;
+		try {
+			linkURL = gContextMenu.getLinkURL();
+		} catch(ex) {
+			linkURL = this.getLinkURI();
+		}
+		if ( !linkURL ) return;
+		window.openDialog(
+			"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
+			[linkURL], document.popupNode.ownerDocument.location.href, aShowDetail, aTargetID, 0, null, null, null, null, "SB", "ISO-8859-1"
 		);
 	},
 
@@ -263,6 +280,30 @@ var sbBrowserOverlay = {
 
 	execLocate: function(aRes)
 	{
+//Hier werden Änderungen fällig
+		//Dieser Block ist notwendig, da MultiSidebar verwendet Fehler verursachen würde
+		var elSidebarId = "sidebar";
+		var elSidebarTitleId = "sidebar-title";
+		var elSidebarSplitterId = "sidebar-splitter";
+		var elSidebarBoxId = "sidebar-box";
+		var elPrefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
+		var elPosition;
+
+		if ( elPrefs.prefHasUserValue("extensions.multisidebar.viewScrapBookSidebar") )
+		{
+			elPosition = elPrefs.getIntPref("extensions.multisidebar.viewScrapBookSidebar");
+		} else
+		{
+			elPosition = 1;
+		}
+		if ( elPosition > 1)
+		{
+			elSidebarId = "sidebar-" + elPosition;
+			elSidebarTitleId = "sidebar-" + elPosition + "-title";
+			elSidebarSplitterId = "sidebar-" + elPosition + "-splitter";
+			elSidebarBoxId = "sidebar-" + elPosition + "-box";
+		}
+		//Ende Block
 		if (!aRes)
 			return;
 		if (!sbDataSource.exists(aRes)) {
@@ -270,7 +311,7 @@ var sbBrowserOverlay = {
 			return;
 		}
 		if (document.getElementById("viewScrapBookSidebar").getAttribute("checked"))
-			document.getElementById("sidebar").contentWindow.sbMainService.locate(aRes);
+			document.getElementById(elSidebarId).contentWindow.sbMainService.locate(aRes);
 		else {
 			this.locateMe = aRes;
 			toggleSidebar("viewScrapBookSidebar");
@@ -345,6 +386,7 @@ var sbBrowserOverlay = {
 		getElement("ScrapBookContextMenu6").hidden = !prefContext || isActive || !inFrame;
 		getElement("ScrapBookContextMenu7").hidden = !prefContext || selected || !onLink;
 		getElement("ScrapBookContextMenu8").hidden = !prefContext || selected || !onLink;
+		getElement("ScrapBookContextMenu10").hidden = !prefContext || selected || !onLink;
 		getElement("ScrapBookContextMenu9").hidden = !prefContext || isActive || !prefBookmark;
 	},
 
@@ -401,8 +443,8 @@ var sbMenuHandler = {
 			this._init();
 		var selected = sbBrowserOverlay.isSelected();
 		if (event.target == aMenuPopup) {
-			getElement("ScrapBookMenubarItem1").label = document.getElementById("ScrapBookContextMenu" + (selected ? 1 : 3)).getAttribute("label");
-			getElement("ScrapBookMenubarItem2").label = document.getElementById("ScrapBookContextMenu" + (selected ? 2 : 4)).getAttribute("label");
+			getElement("ScrapBookMenubarItem1").setAttribute("label", document.getElementById("ScrapBookContextMenu" + (selected ? 1 : 3)).getAttribute("label"));
+			getElement("ScrapBookMenubarItem2").setAttribute("label", document.getElementById("ScrapBookContextMenu" + (selected ? 2 : 4)).getAttribute("label"));
 			getElement("ScrapBookMenubarItem1").className = "menuitem-iconic " + (selected ? "sb-capture-partial" : "sb-capture-entire");
 			getElement("ScrapBookMenubarItem2").className = "menuitem-iconic " + (selected ? "sb-capture-partial" : "sb-capture-entire");
 			getElement("ScrapBookMenubarItem5").label = getElement("ScrapBookMenubarItem5").getAttribute("sblabel");

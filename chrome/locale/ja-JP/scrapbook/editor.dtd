@@ -15,6 +15,12 @@
 <!ENTITY sb.highlighter "マーカー">
 <!ENTITY sb.highlighter.remove "選択範囲のマーカーをクリア">
 <!ENTITY sb.highlighter.remove.all "すべてのマーカーをクリア">
+<!ENTITY sbp.highlighter.stil1 "   Style 1   ">
+<!ENTITY sbp.highlighter.stil2 "   Style 2   ">
+<!ENTITY sbp.highlighter.stil3 "   Style 3   ">
+<!ENTITY sbp.highlighter.stil4 "   Style 4   ">
+<!ENTITY sbp.highlighter.stil5 "   Style 5   ">
+<!ENTITY sbp.highlighter.stil6 "   Style 6   ">
 <!ENTITY sb.source "ソースURLを開く">
 <!ENTITY sb.renew "再取り込み">
 <!ENTITY sb.locate "サイドバーのツリー上で位置を特定">

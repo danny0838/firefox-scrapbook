@@ -15,6 +15,12 @@
 <!ENTITY sb.highlighter "Highlighter">
 <!ENTITY sb.highlighter.remove "Avlägsna färgmarkeringar i markeringen">
 <!ENTITY sb.highlighter.remove.all "Avlägsna alla färgmarkeringar">
+<!ENTITY sbp.highlighter.stil1 "   Style 1   ">
+<!ENTITY sbp.highlighter.stil2 "   Style 2   ">
+<!ENTITY sbp.highlighter.stil3 "   Style 3   ">
+<!ENTITY sbp.highlighter.stil4 "   Style 4   ">
+<!ENTITY sbp.highlighter.stil5 "   Style 5   ">
+<!ENTITY sbp.highlighter.stil6 "   Style 6   ">
 <!ENTITY sb.source "Öppna URL som posten sparades från">
 <!ENTITY sb.renew "Capture Again">
 <!ENTITY sb.locate "Synkronisera med träd i sidofönstret">

@@ -11,8 +11,60 @@ var sbPageEditor = {
 	focusedWindow : null,
 	savedBody : null,
 
+	get STRING() {
+		if (!this._stringBundle)
+			this._stringBundle = document.getElementById("ScrapBookOverlayString");
+		return this._stringBundle;
+	},
+	_stringBundle: null,
+
 	init : function(aID)
 	{
+		//Vorschau für Hervorhebungsstufe aktualisieren
+			//fuer Auswahlliste
+		var idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 6;
+		var cssText = sbCommonUtils.copyUnicharPref("scrapbook.highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);
+		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighterPreview"), cssText);
+			//fuer Knoepfe
+		var cssText = "";
+		cssText = sbCommonUtils.copyUnicharPref("scrapbook.highlighter.style.1", sbHighlighter.PRESET_STYLES[1]);
+		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter1"), cssText);
+		cssText = sbCommonUtils.copyUnicharPref("scrapbook.highlighter.style.2", sbHighlighter.PRESET_STYLES[2]);
+		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter2"), cssText);
+		cssText = sbCommonUtils.copyUnicharPref("scrapbook.highlighter.style.3", sbHighlighter.PRESET_STYLES[3]);
+		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter3"), cssText);
+		cssText = sbCommonUtils.copyUnicharPref("scrapbook.highlighter.style.4", sbHighlighter.PRESET_STYLES[4]);
+		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter4"), cssText);
+		cssText = sbCommonUtils.copyUnicharPref("scrapbook.highlighter.style.5", sbHighlighter.PRESET_STYLES[5]);
+		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter5"), cssText);
+		cssText = sbCommonUtils.copyUnicharPref("scrapbook.highlighter.style.6", sbHighlighter.PRESET_STYLES[6]);
+		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter6"), cssText);
+			//
+		var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
+		prefs = prefs.getBranch("extensions.scrapbookplus.");
+		var value = prefs.getBoolPref("useDropDownList");
+		if ( value == false )
+		{
+			document.getElementById("ScrapBookHighlighterPreview").hidden = true;
+			document.getElementById("ScrapBookHighlighter").hidden = true;
+			document.getElementById("ScrapBookHighlighter1").hidden = false;
+			document.getElementById("ScrapBookHighlighter2").hidden = false;
+			document.getElementById("ScrapBookHighlighter3").hidden = false;
+			document.getElementById("ScrapBookHighlighter4").hidden = false;
+			document.getElementById("ScrapBookHighlighter5").hidden = false;
+			document.getElementById("ScrapBookHighlighter6").hidden = false;
+		} else
+		{
+			document.getElementById("ScrapBookHighlighterPreview").hidden = false;
+			document.getElementById("ScrapBookHighlighter").hidden = false;
+			document.getElementById("ScrapBookHighlighter1").hidden = true;
+			document.getElementById("ScrapBookHighlighter2").hidden = true;
+			document.getElementById("ScrapBookHighlighter3").hidden = true;
+			document.getElementById("ScrapBookHighlighter4").hidden = true;
+			document.getElementById("ScrapBookHighlighter5").hidden = true;
+			document.getElementById("ScrapBookHighlighter6").hidden = true;
+		}
+		//Ende
 		if ( aID )
 		{
 			if ( aID != sbBrowserOverlay.getID() ) return;
@@ -49,10 +101,31 @@ var sbPageEditor = {
 		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
 		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
 		{
-			sbContentSaver.frameList[i].document.removeEventListener("mousedown", sbAnnotationService.handleEvent, true);
+			try
+			{
+				sbContentSaver.frameList[i].document.removeEventListener("mousedown", sbAnnotationService.handleEvent, true);
+			} catch(ex) {}
 			sbContentSaver.frameList[i].document.addEventListener("mousedown",    sbAnnotationService.handleEvent, true);
 			sbContentSaver.frameList[i].document.removeEventListener("keypress", this.handleEvent, true);
 			sbContentSaver.frameList[i].document.addEventListener("keypress",    this.handleEvent, true);
+/*
+			try
+			{
+				sbContentSaver.frameList[i].document.removeEventListener("mousedown", sbAnnotationService.handleEvent, true);
+			} catch (ex) {}
+			try
+			{
+				sbContentSaver.frameList[i].document.addEventListener("mousedown",    sbAnnotationService.handleEvent, true);
+			} catch (ex) {}
+			try
+			{
+				sbContentSaver.frameList[i].document.removeEventListener("keypress", this.handleEvent, true);
+			} catch (ex) {}
+			try
+			{
+				sbContentSaver.frameList[i].document.addEventListener("keypress",    this.handleEvent, true);
+			} catch (ex) {}
+*/
 			if ( aID && document.getElementById("ScrapBookStatusPopupD").getAttribute("checked") ) sbInfoViewer.indicateLinks(sbContentSaver.frameList[i]);
 		}
 		if ( aID )
@@ -98,10 +171,12 @@ var sbPageEditor = {
 		this.COMMENT.setAttribute("multiline", this.multiline);
 		this.COMMENT.setAttribute("style", this.multiline ? "height:100px;" : "padding:2px;");
 		if ( this.multiline ) {
+			document.getElementById("ScrapBookToggleComment").setAttribute("tooltiptext", this.STRING.getString("MIN_COMMENT"));
 			document.getElementById("ScrapBookToolbox").appendChild(this.COMMENT);
 			val = val.replace(/\t/g, "\n");
 		} else {
-			this.TOOLBAR.insertBefore(this.COMMENT, document.getElementById("ScrapBookHighlighter"));
+			document.getElementById("ScrapBookToggleComment").setAttribute("tooltiptext", this.STRING.getString("MAX_COMMENT"));
+			this.TOOLBAR.insertBefore(this.COMMENT, document.getElementById("ScrapBookHighlighterPreview"));
 			val = val.replace(/\n/g, "\t");
 		}
 		document.getElementById("ScrapBookEditSpacer").setAttribute("flex", this.multiline ? 1 : 0);
@@ -141,14 +216,15 @@ var sbPageEditor = {
 
 	highlight : function(idx)
 	{
-		if ( !idx ) idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 4;
+		if ( !idx ) idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 6;	//DropDownList
 		document.getElementById("ScrapBookHighlighter").setAttribute("color", idx);
+		var attr = {};
+		attr["style"] = sbCommonUtils.copyUnicharPref("scrapbook.highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);	//DropDownList
+		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighterPreview"), attr["style"]);	//DropDownList
 		var sel = this.getSelection();
 		if ( !sel ) return;
 		this.allowUndo(this.focusedWindow.document);
-		var attr = {};
 		attr["class"] = "linemarker-marked-line";
-		attr["style"] = sbCommonUtils.copyUnicharPref("scrapbook.highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);
 		sbHighlighter.set(this.focusedWindow, sel, "span", attr);
 		this.changed1 = true;
 	},
@@ -297,7 +373,7 @@ var sbPageEditor = {
 		var curURL = window.content.location.href;
 		if ( curURL.indexOf("file://") != 0 || !curURL.match(/\/data\/(\d{14})\/(.+)$/) || RegExp.$1 != this.item.id || RegExp.$2 == "index.dat" || RegExp.$2 == "sitemap.xml" )
 		{
-			alert("ScrapBook ERROR: Cannot save file '" + RegExp.$2 + "'.");
+			alert("ScrapBook Plus ERROR: Cannot save file '" + RegExp.$2 + "'.");
 			return;
 		}
 		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
@@ -309,7 +385,7 @@ var sbPageEditor = {
 			var doc = sbContentSaver.frameList[i].document;
 			if ( doc.contentType != "text/html" )
 			{
-				alert("ScrapBook ERROR: Cannot modify " + doc.contentType + " content.");
+				alert("ScrapBook Plus ERROR: Cannot modify " + doc.contentType + " content.");
 				continue;
 			}
 			var rootNode = doc.getElementsByTagName("html")[0];
@@ -354,9 +430,13 @@ var sbPageEditor = {
 			this.item.comment = newComment;
 			sbCommonUtils.writeIndexDat(this.item);
 		}
-		var ss = Components.classes['@mozilla.org/browser/sessionstore;1']
-			.getService(Components.interfaces.nsISessionStore);
-		ss.deleteTabValue(gBrowser.mCurrentTab, "scrapbook-comment");
+		var aValue = document.getElementById("ScrapBookEditComment").value;
+		if ( aValue )
+		{
+			var ss = Cc['@mozilla.org/browser/sessionstore;1'].getService(Ci.nsISessionStore);
+			ss.setTabValue(gBrowser.mCurrentTab, "scrapbook-comment", aValue);
+			ss.deleteTabValue(gBrowser.mCurrentTab, "scrapbook-comment");
+		}
 		this.changed2 = false;
 	},
 
@@ -436,7 +516,13 @@ var sbDOMEraser = {
 		this.enabled = (aStateFlag == 1);
 		document.getElementById("ScrapBookEditEraser").checked = this.enabled;
 		if ( aStateFlag == 0 ) return;
-		document.getElementById("ScrapBookHighlighter").disabled = this.enabled;
+		document.getElementById("ScrapBookHighlighter").disabled = this.enabled;	//DropDownList
+		document.getElementById("ScrapBookHighlighter1").disabled = this.enabled;
+		document.getElementById("ScrapBookHighlighter2").disabled = this.enabled;
+		document.getElementById("ScrapBookHighlighter3").disabled = this.enabled;
+		document.getElementById("ScrapBookHighlighter4").disabled = this.enabled;
+		document.getElementById("ScrapBookHighlighter5").disabled = this.enabled;
+		document.getElementById("ScrapBookHighlighter6").disabled = this.enabled;
 		document.getElementById("ScrapBookEditAnnotation").disabled = this.enabled;
 		document.getElementById("ScrapBookEditCutter").disabled  = this.enabled;
 		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
@@ -735,7 +821,7 @@ var sbAnnotationService = {
 		if ( aFlag == "L" )
 		{
 			var ret = {};
-			if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook - " + aLabel, "URL:", ret, null, {}) ) return;
+			if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook - " + aLabel, sbPageEditor.STRING.getString("ADDRESS")+":", ret, null, {}) ) return;
 			if ( !ret.value ) return;
 			attr["href"] = ret.value;
 		}
@@ -836,7 +922,7 @@ var sbInfoViewer = {
 		var source = fileName == "index" ? sbDataSource.getProperty(sbBrowserOverlay.resource, "source") : "";
 		top.window.openDialog(
 			"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
-			[source], null, showDetail, null, 0, null, null, {}, [id, fileName, null, null, 0]
+			[source], null, showDetail, null, 0, null, null, {}, [id, fileName, null, null, 0], "SB"
 		);
 	},
 
@@ -848,6 +934,41 @@ var sbInfoViewer = {
 
 	loadFile : function(aFileName)
 	{
+		var lfURL = gBrowser.currentURI.resolve(aFileName);
+		var lfFileSitemapXml = sbCommonUtils.convertURLToFile(lfURL);
+		//data-Verzeichnis des ScrapBook bestimmen
+		var lfFolderString = "";
+		var lfID = "";
+		var lfSplit = lfFileSitemapXml.path.split("\\");
+		for ( var lfI=0; lfI<lfSplit.length-4; lfI++ )
+		{
+			lfFolderString += lfSplit[lfI]+"\\";
+		}
+		lfFolderString += lfSplit[lfSplit.length-4];
+		lfID = lfSplit[lfSplit.length-2];
+		//nach sitemap.xsl im Ordner des Eintrags suchen (ist die Datei nicht vorhanden, muss sitemap.xml gepatcht werden)
+		var lfFileSitemapXsl = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
+		lfFileSitemapXsl.initWithPath(lfFolderString);
+		lfFileSitemapXsl.append("data");
+		lfFileSitemapXsl.append(lfID);
+		lfFileSitemapXsl.append("sitemap.xsl");
+		if ( !lfFileSitemapXsl.exists() )
+		{
+			var lfData = sbCommonUtils.readFile(lfFileSitemapXml);
+			lfData = sbCommonUtils.convertToUnicode(lfData, "UTF-8");
+			lfData = lfData.replace(/"\.\.\/\.\.\/sitemap.xsl"/, "\"sitemap.xsl\"");
+			lfFileSitemapXml.remove(false);
+			sbCommonUtils.writeFile(lfFileSitemapXml, lfData, "UTF-8");
+		} else
+		{
+			lfFileSitemapXsl.remove(false);
+		}
+		//sitemap.xsl von übergeordnetem Verzeichnis kopieren
+		lfFileSitemapXsl = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
+		lfFileSitemapXsl.initWithPath(lfFolderString);
+		lfFileSitemapXsl.append("sitemap.xsl");
+		lfFileSitemapXsl.copyTo(lfFileSitemapXml.parent, "sitemap.xsl");
+		//gepatchte sitemap.xml laden
 		gBrowser.loadURI(gBrowser.currentURI.resolve(aFileName), null, null);
 	},
 

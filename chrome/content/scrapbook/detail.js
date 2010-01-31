@@ -39,7 +39,7 @@ var sbCaptureOptions = {
 		{
 			document.getElementById("sbDetailFolderRow").collapsed = true;
 			document.getElementById("sbDetailWarnAboutRenew").hidden = false;
-			document.getElementById("sbDetailComment").collapsed = true;
+			document.getElementById("sbDetailTabComment").hidden = true;
 			if ( this.param.context == "capture-again-deep" )
 			{
 				document.getElementById("sbDetailInDepthBox").collapsed = true;
@@ -108,6 +108,8 @@ var sbCaptureOptions = {
 		this.param.option["dlarc"]   = document.getElementById("sbDetailArchive").checked;
 		this.param.option["inDepth"] = this.inDepth;
 		this.param.option["custom"] = "";
+		this.param.poption["timeout"]= document.getElementById("sbDetailTimeoutRadioGroup").selectedItem.label;
+		this.param.poption["charset"]= document.getElementById("sbDetailCharsetRadioGroup").selectedItem.label;
 		if ( this.CUSTOM_UI.checked )
 		{
 			this.param.option["custom"] = this.CUSTOM_UI.nextSibling.value.replace(/[^0-9a-zA-Z,\|]/g, "").replace(/[,\|]/g, ", ");

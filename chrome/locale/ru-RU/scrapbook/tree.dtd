@@ -13,6 +13,7 @@
 <!ENTITY sb.listview "Список">
 <!ENTITY sb.prop.title "Заголовок">
 <!ENTITY sb.prop.comment "Комментарий">
+<!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID (Время)">
 <!ENTITY sb.folder.combine "Комбинированный вид">
 <!ENTITY sb.folder.openall "Открыть всё во вкладках">

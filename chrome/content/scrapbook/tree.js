@@ -87,7 +87,7 @@ var sbTreeHandler = {
 			if ( parRes.Value == "urn:scrapbook:search" )
 			{
 				parRes = sbDataSource.findParentResource(curRes);
-				if ( sbCommonUtils.RDFCU.indexOf(sbDataSource.data, parRes, curRes) == -1 ) { alert("ScrapBook FATAL ERROR."); return; }
+				if ( sbCommonUtils.RDFCU.indexOf(sbDataSource.data, parRes, curRes) == -1 ) { alert("ScrapBook Plus FATAL ERROR."); return; }
 			}
 			resList.push(curRes);
 			parList.push(parRes);

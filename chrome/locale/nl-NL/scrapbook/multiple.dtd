@@ -1,3 +1,10 @@
+<!ENTITY sb.multiple.filter "Filter">
+<!ENTITY sbp.multiple.titleofwebsite "Title of website">
+<!ENTITY sbp.multiple.titleoflink "Title of link">
+<!ENTITY sb.multiple.title "Title">
+<!ENTITY sb.multiple.timeout "Timeout">
+<!ENTITY sbp.multiple.downloadmethod "Method">
+<!ENTITY sb.multiple.charset "Charset">
 <!ENTITY sb.multiple.url "URL (URL&apos;s regel-voor-regel invoeren)">
 <!ENTITY sb.multiple.detector "URL-zoeker">
 <!ENTITY sb.multiple.detector.plink "Alle koppelingen in de pagina">
@@ -6,3 +13,4 @@
 <!ENTITY sb.multiple.detector.local "Alle lokale HTML&apos;s in de map">
 <!ENTITY sb.multiple.detector.bookmarks "Bookmarks">
 <!ENTITY sb.multiple.detector.clear "Wissen">
+<!ENTITY sbp.multiple.exclude "ignore already existing addresses in destination folder">

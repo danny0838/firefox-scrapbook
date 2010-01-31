@@ -1,3 +1,5 @@
+<!ENTITY sb.detail.linked.timeout "Timeout (in seconds)">
+<!ENTITY sb.detail.linked.charset "Character set">
 <!ENTITY sb.detail "Kaappauksen yksityiskohdat">
 <!ENTITY sb.detail.new.folder "Uusi kansio">
 <!ENTITY sb.detail.select.folder "Valitse kansio">

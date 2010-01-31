@@ -2,3 +2,7 @@
 <!ENTITY sb.combine.preview "Esikatsele">
 <!ENTITY sb.combine.preview.d "Napsauta Yhdistä-painiketta esikatselun jälkeen.">
 <!ENTITY sb.combine.option.remove "Poista alkuperäiset sivut yhdistämisen jälkeen">
+<!ENTITY sbp.combine.up "move item upwards">
+<!ENTITY sbp.combine.down "move item downwards">
+<!ENTITY sbp.combine.remove "remove item">
+<!ENTITY sbp.combine.newTitle "new title">

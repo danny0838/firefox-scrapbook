@@ -31,7 +31,7 @@
 	<tabbox flex="1">
 		<tabs orient="horizontal">
 			<tab label="&sb.prop.general;" />
-			<tab label="&sb.prop.comment;" />
+			<tab label="&sb.prop.comment;" id="sbDetailTabComment" />
 		</tabs>
 		<tabpanels flex="1">
 			<tabpanel orient="vertical">
@@ -87,6 +87,26 @@
 						<toolbarbutton class="plain" image="chrome://scrapbook/skin/expander.png" style="-moz-appearance:none;" oncommand="sbCaptureOptions.promptInDepth();" />
 					</hbox>
 					<!--<description flex="1">&sb.detail.linked.page.text;</description>-->
+				</groupbox>
+				<groupbox id="sbDetailTimeoutBox" group="capture-options">
+					<caption label="&sb.detail.linked.timeout;" />
+					<hbox align="center">
+						<radiogroup id="sbDetailTimeoutRadioGroup" orient="horizontal">
+							<radio label="0" selected="true" />
+							<radio label="1" />
+							<radio label="2" />
+							<radio label="3" />
+						</radiogroup>
+					</hbox>
+				</groupbox>
+				<groupbox id="sbDetailTimeoutBox" group="capture-options">
+					<caption label="&sb.detail.linked.charset;" />
+					<hbox align="center">
+						<radiogroup id="sbDetailCharsetRadioGroup" orient="horizontal">
+							<radio label="ISO-8859-1" />
+							<radio label="UTF-8" selected="true" />
+						</radiogroup>
+					</hbox>
 				</groupbox>
 				<description id="sbDetailWarnAboutRenew"  flex="1" style="color:red;" hidden="true">&sb.detail.warnAboutRenew;</description>
 				<description id="sbDetailWarnAboutScript" flex="1" style="color:red;">&sb.detail.warnAboutScript;</description>

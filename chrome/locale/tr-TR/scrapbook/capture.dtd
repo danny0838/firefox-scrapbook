@@ -1,0 +1,13 @@
+<!ENTITY sb.capture "Kaydet">
+<!ENTITY sb.capture.abort "Vazgeç">
+<!ENTITY sb.capture.start "Başlat">
+<!ENTITY sb.capture.retry "Yeniden Dene">
+<!ENTITY sb.capture.skip "Atla">
+<!ENTITY sb.capture.pause "Duraklat">
+<!ENTITY sb.capture.finish "İptal Et">
+<!ENTITY sb.capture.filter "Filtre">
+<!ENTITY sb.capture.filter.column.one "Göster/Gizle">
+<!ENTITY sb.capture.filter.column.two "Filtre (regex)">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "Başlık">
+<!ENTITY sbp.capture.column.three "Durum">

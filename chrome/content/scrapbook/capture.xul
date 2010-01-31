@@ -2,13 +2,14 @@
 
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 <?xml-stylesheet href="chrome://scrapbook/skin/capture.css" type="text/css" ?>
+<?xml-stylesheet href="chrome://scrapbook/skin/sbpExtra/sbpCapture.css" type="text/css" ?>
 
 <!DOCTYPE window SYSTEM "chrome://scrapbook/locale/capture.dtd">
 
 <window id="sbCaptureWindow"
-        title="&sb.capture; - ScrapBook"
+        title="&sb.capture; - ScrapBook Plus"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        style="width: 360px;"
+        style="width: 800px; height: 600px;"
         onload="SB_initCapture();"
         onclose="event.preventDefault();sbCaptureTask.abort();"
         windowtype="scrapbook">
@@ -23,30 +24,87 @@
 		<stringbundle id="sbOverlayString" src="chrome://scrapbook/locale/overlay.properties" />
 	</stringbundleset>
 
-	<textbox id="sbCaptureTextbox" readonly="true" />
+	<hbox>
+		<textbox id="sbpCaptureProgress" readonly="true" width="100"/>
+		<textbox id="sbCaptureTextbox"   readonly="true" flex="1"/>
+	</hbox>
 
-	<listbox id="sbCaptureListbox" rows="1" flex="1" />
+	<tree
+		id="sbpURLList"
+		rows="1"
+		flex="1"
+		context="popup"
+		seltype="multiple"
+		enableColumnDrag="true"
+		style="margin:0px;"
+		editable="true"
+		autostretch="always"
+	>
+		<treecols>
+			<treecol type="checkbox" fixed="true" editable="true" ignoreincolumnpicker="true" />
+			<splitter class="tree-splitter"/>
+			<treecol label="&sbp.capture.column.one;" flex="35" editable="true" crop="right" persist="width hidden" />
+			<splitter class="tree-splitter"/>
+			<treecol label="&sbp.capture.column.two;" flex="9" editable="true" persist="width hidden" />
+			<splitter class="tree-splitter"/>
+			<treecol label="&sbp.capture.column.three;" flex="5" editable="true" persist="width hidden"/>
+		</treecols>
+		<treechildren/>
+	</tree>
 
-	<browser id="sbCaptureBrowser" collapsed="true" />
+	<browser id="sbCaptureBrowser" collapsed="true" disablehistory="true" />
+
+	<spacer style="height:5px" />
+	<hbox>
+		<checkbox id="sbpChkFilter" label="&sb.capture.filter;" checked="false" oncommand="sbCaptureTask.toggleFilterBox(event);" />
+		<spacer flex="1" />
+	</hbox>
+	<spacer style="height:7px" />
+	<vbox id="sbpFilterBox" hidden="true" style="border: 1px solid black; padding:4px">
+		<hbox>
+			<menulist id="sbpMnuIncExc">
+				<menupopup>
+					<menuitem label="Include" />
+					<menuitem label="Exclude" />
+				</menupopup>
+			</menulist>
+			<textbox id="sbpTextboxFilter"
+					 autocompletesearch="form-history"
+					 autocompletesearchparam="sbSearchHistory"
+					 enablehistory="true"
+					 flex="1"
+					 oninput="sbpFilter.input();"
+					 ontextentered="sbpFilter.add();"
+					 tabscrolling="true"
+					 type="autocomplete" />
+			<button id="sbpBtnAccept" label="OK" disabled="true" tooltiptext="Wert uebernehmen/Wert aendern" oncommand="sbpFilter.add();" />
+			<button id="sbpBtnCancel" label="Abbrechen" disabled="true" tooltiptext="Editieren abbrechen" oncommand="sbpFilter.cancel();" />
+			<button id="sbpBtnDel" label="Entfernen" disabled="true" tooltiptext="Filter aus der Liste entfernen" oncommand="sbpFilter.del();" />
+		</hbox>
+		<tree id="sbpTreeFilter"
+			  autostrech="always"
+			  flex="1"
+			  onclick="sbpFilter.editFilter();"
+			  rows="5"
+			  seltype="single"
+			  style="margin:0px;"
+		>
+			<treecols>
+				<treecol label="&sb.capture.filter.column.one;" flex="1" editable="true" crop="right" persist="width hidden" />
+				<splitter class="tree-splitter" />
+				<treecol label="&sb.capture.filter.column.two;" flex="10" editable="true" crop="right" persist="width hidden" />
+			</treecols>
+			<treechildren/>
+		</tree>
+	</vbox>
 
 	<hbox>
-		<toolbarbutton id="sbCaptureFilterButton" type="menu" label="&sb.capture.filter;" hidden="true">
-			<menupopup>
-				<menuitem type="radio" label="&sb.capture.filter.domain;"   oncommand="sbCaptureTask.applyFilter('D');" />
-				<menuitem type="radio" label="&sb.capture.filter.level;"    oncommand="sbCaptureTask.applyFilter('L');" />
-				<menuitem type="radio" label="&sb.capture.filter.string;"   oncommand="sbCaptureTask.applyFilter('S');" />
-				<menuitem type="radio" label="&sb.capture.filter.checkon;"  oncommand="sbCaptureTask.applyFilter('N');" checked="true" />
-				<menuitem type="radio" label="&sb.capture.filter.checkoff;" oncommand="sbCaptureTask.applyFilter('F');" />
-				<menuseparator />
-				<menuitem label="&sb.capture.filter.invert;" oncommand="sbCaptureTask.applyFilter('I');" />
-			</menupopup>
-		</toolbarbutton>
-		<toolbarseparator hidden="true" />
-		<button id="sbCapturePauseButton" label="&sb.capture.pause;" oncommand="sbCaptureTask.pause();" />
-		<button id="sbCaptureStartButton" label="&sb.capture.start;" oncommand="sbCaptureTask.activate();" hidden="true" />
 		<button id="sbCaptureSkipButton"  label="&sb.capture.skip;"  oncommand="sbCaptureTask.next(true);" disabled="true" />
 		<spacer flex="1" />
-		<button label="&sb.capture.abort;" oncommand="sbCaptureTask.abort();" />
+		<button id="sbCapturePauseButton" label="&sb.capture.pause;" oncommand="sbCaptureTask.pause();" />
+		<button id="sbCaptureStartButton" label="&sb.capture.start;" oncommand="sbCaptureTask.activate();" hidden="true" />
+		<button id="sbCaptureCancelButton" label="&sb.capture.abort;" oncommand="sbCaptureTask.abort();" />
+		<button id="sbCaptureFinishButton" label="&sb.capture.finish;" oncommand="sbCaptureTask.closeWindow();" hidden="true" />
 	</hbox>
 
 </window>

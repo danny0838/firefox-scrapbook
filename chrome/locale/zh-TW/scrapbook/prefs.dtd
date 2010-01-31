@@ -36,3 +36,4 @@
 <!ENTITY sb.button.customize "自訂">
 <!ENTITY sb.button.browse "瀏覽">
 <!ENTITY sb.button.show "顯示檔案">
+<!ENTITY sbp.prefs.useDropDownList "use drop-down choice list instead of buttons for highlighter">

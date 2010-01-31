@@ -1,3 +1,5 @@
+<!ENTITY sb.detail.linked.timeout "超时 (秒)">
+<!ENTITY sb.detail.linked.charset "字符集">
 <!ENTITY sb.detail "详细信息">
 <!ENTITY sb.detail.new.folder "新建文件夹">
 <!ENTITY sb.detail.select.folder "选择文件夹">

@@ -36,3 +36,4 @@
 <!ENTITY sb.button.customize "Muokkaa">
 <!ENTITY sb.button.browse "Selaa">
 <!ENTITY sb.button.show "Näytä tiedostot">
+<!ENTITY sbp.prefs.useDropDownList "use drop-down choice list instead of buttons for highlighter">

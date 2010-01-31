@@ -13,6 +13,7 @@
 <!ENTITY sb.listview "عرض قائمة">
 <!ENTITY sb.prop.title "العنونة">
 <!ENTITY sb.prop.comment "التعليق">
+<!ENTITY sbp.prop.url "العنوان">
 <!ENTITY sb.prop.id.date "المعرف (الوقت)">
 <!ENTITY sb.folder.combine "عرض مجموع">
 <!ENTITY sb.folder.openall "فتح الجميع في ألسنة">

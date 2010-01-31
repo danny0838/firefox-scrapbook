@@ -1,3 +1,5 @@
+<!ENTITY sb.detail.linked.timeout "Timeout (in secondi)">
+<!ENTITY sb.detail.linked.charset "Codifica">
 <!ENTITY sb.detail "Dettagli cattura ">
 <!ENTITY sb.detail.new.folder "Nuova cartella">
 <!ENTITY sb.detail.select.folder "Seleziona cartella">

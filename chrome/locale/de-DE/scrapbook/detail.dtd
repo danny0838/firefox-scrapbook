@@ -1,3 +1,5 @@
+<!ENTITY sb.detail.linked.timeout "Wartezeit (in Sekunden)">
+<!ENTITY sb.detail.linked.charset "Zeichensatz">
 <!ENTITY sb.detail "Archivierungsdetails">
 <!ENTITY sb.detail.new.folder "Neuer Ordner">
 <!ENTITY sb.detail.select.folder "Ordner auswählen">

@@ -1,3 +1,10 @@
+<!ENTITY sb.multiple.filter "Filter">
+<!ENTITY sbp.multiple.titleofwebsite "Title of website">
+<!ENTITY sbp.multiple.titleoflink "Title of link">
+<!ENTITY sb.multiple.title "Title">
+<!ENTITY sb.multiple.timeout "Timeout">
+<!ENTITY sbp.multiple.downloadmethod "Method">
+<!ENTITY sb.multiple.charset "Charset">
 <!ENTITY sb.multiple.url "URL (每行一個 URL)">
 <!ENTITY sb.multiple.detector "自動偵測 URL">
 <!ENTITY sb.multiple.detector.plink "本頁所有連結">
@@ -6,3 +13,4 @@
 <!ENTITY sb.multiple.detector.local "某目錄下所有的 HTML 檔">
 <!ENTITY sb.multiple.detector.bookmarks "書籤">
 <!ENTITY sb.multiple.detector.clear "清除">
+<!ENTITY sbp.multiple.exclude "ignore already existing addresses in destination folder">

@@ -1,0 +1,20 @@
+<!ENTITY sb.hlCustom.preset "Hazır Stiller">
+<!ENTITY sb.hlCustom.background "Arka Plan">
+<!ENTITY sb.hlCustom.color "Renk">
+<!ENTITY sb.hlCustom.text "Metin">
+<!ENTITY sb.hlCustom.bold "Kalın">
+<!ENTITY sb.hlCustom.italic "İtalik">
+<!ENTITY sb.hlCustom.line "Üzerini Çiz">
+<!ENTITY sb.hlCustom.border "Çerçeve">
+<!ENTITY sb.hlCustom.type "Tür">
+<!ENTITY sb.hlCustom.box "Kutu">
+<!ENTITY sb.hlCustom.underline "Altını Çiz">
+<!ENTITY sb.hlCustom.style "Stil">
+<!ENTITY sb.hlCustom.solid "Tam">
+<!ENTITY sb.hlCustom.dotted "Noktalı">
+<!ENTITY sb.hlCustom.dashed "Parçalı">
+<!ENTITY sb.hlCustom.double "Çift">
+<!ENTITY sb.hlCustom.width "Genişlik">
+<!ENTITY sb.hlCustom.thin "İnce">
+<!ENTITY sb.hlCustom.medium "Orta">
+<!ENTITY sb.hlCustom.thick "Kalın">

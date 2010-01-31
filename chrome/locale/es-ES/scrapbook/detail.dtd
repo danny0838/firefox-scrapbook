@@ -1,3 +1,5 @@
+<!ENTITY sb.detail.linked.timeout "Desconexión (en segundos)">
+<!ENTITY sb.detail.linked.charset "Juego de Caracteres">
 <!ENTITY sb.detail "Detalles de la captura">
 <!ENTITY sb.detail.new.folder "Nueva carpeta">
 <!ENTITY sb.detail.select.folder "Seleccionar Carpeta">

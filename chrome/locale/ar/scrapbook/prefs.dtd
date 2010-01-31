@@ -36,3 +36,4 @@
 <!ENTITY sb.button.customize "تخصيص">
 <!ENTITY sb.button.browse "استعراض">
 <!ENTITY sb.button.show "عرض الملفات">
+<!ENTITY sbp.prefs.useDropDownList "استخدم خيار القائمة المنسدلة للإضاءة بدلا من الأزرار">

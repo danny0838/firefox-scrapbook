@@ -59,7 +59,7 @@ var sbCommonUtils = {
 	{
 		if ( !aID || aID.length != 14 )
 		{
-			alert("ScrapBook FATAL ERROR: Failed to get directory '" + aID + "'.");
+			alert("ScrapBook Plus FATAL ERROR: Failed to get directory '" + aID + "'.");
 			return null;
 		}
 		var dir = this.getScrapBookDir().clone();
@@ -92,7 +92,7 @@ var sbCommonUtils = {
 			if ( aDir.isDirectory() ) aDir.remove(false);
 			return true;
 		} catch(ex) {
-			alert("ScrapBook ERROR: Failed to remove file '" + file.leafName + "'.\n" + ex);
+			alert("ScrapBook Plus ERROR: Failed to remove file '" + file.leafName + "'.\n" + ex);
 			return false;
 		}
 	},
@@ -111,14 +111,38 @@ var sbCommonUtils = {
 
 	rebuildGlobal : function()
 	{
+//Hier werden Änderungen fällig
+		//Dieser Block ist notwendig, da MultiSidebar verwendet Fehler verursachen würde
+		var rgSidebarId = "sidebar";
+		var rgSidebarTitleId = "sidebar-title";
+		var rgSidebarSplitterId = "sidebar-splitter";
+		var rgSidebarBoxId = "sidebar-box";
+		var rgPrefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
+		var rgPosition;
+
+		if ( rgPrefs.prefHasUserValue("extensions.multisidebar.viewScrapBookSidebar") )
+		{
+			rgPosition = rgPrefs.getIntPref("extensions.multisidebar.viewScrapBookSidebar");
+		} else
+		{
+			rgPosition = 1;
+		}
+		if ( rgPosition > 1)
+		{
+			rgSidebarId = "sidebar-" + rgPosition;
+			rgSidebarTitleId = "sidebar-" + rgPosition + "-title";
+			rgSidebarSplitterId = "sidebar-" + rgPosition + "-splitter";
+			rgSidebarBoxId = "sidebar-" + rgPosition + "-box";
+		}
+		//Ende Block
 		var winEnum = this.WINDOW.getEnumerator("navigator:browser");
 		while ( winEnum.hasMoreElements() )
 		{
 			var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
 			try {
 				win.sbMenuHandler.shouldRebuild = true;
-				win.document.getElementById("sidebar").contentWindow.sbTreeHandler.TREE.builder.rebuild();
-				win.document.getElementById("sidebar").contentWindow.sbListHandler.LIST.builder.rebuild();
+				win.document.getElementById(rgSidebarId).contentWindow.sbTreeHandler.TREE.builder.rebuild();
+				win.document.getElementById(rgSidebarId).contentWindow.sbListHandler.LIST.builder.rebuild();
 			} catch(ex) {
 			}
 		}
@@ -192,9 +216,11 @@ var sbCommonUtils = {
 	{
 		try {
 			var baseURLObj = this.convertURLToObject(aBaseURL);
+			//" entfernen aus aRelURL
+			aRelURL = aRelURL.replace(/\"/g, "");
 			return baseURLObj.resolve(aRelURL);
 		} catch(ex) {
-			dump("*** ScrapBook ERROR: Failed to resolve URL: " + aBaseURL + "\t" + aRelURL + "\n");
+			dump("*** ScrapBook Plus ERROR: Failed to resolve URL: " + aBaseURL + "\t" + aRelURL + "\n");
 		}
 	},
 
@@ -237,7 +263,7 @@ var sbCommonUtils = {
 		}
 		catch(ex)
 		{
-			alert("ScrapBook ERROR: Failed to write file: " + aFile.leafName);
+			alert("ScrapBook Plus ERROR: Failed to write file: " + aFile.leafName);
 		}
 	},
 
@@ -317,13 +343,13 @@ var sbCommonUtils = {
 		try {
 			execfile.initWithPath(aExecFilePath);
 			if ( !execfile.exists() ) {
-				alert("ScrapBook ERROR: File does not exist.\n" + aExecFilePath);
+				alert("ScrapBook Plus ERROR: File does not exist.\n" + aExecFilePath);
 				return;
 			}
 			process.init(execfile);
 			process.run(false, args, args.length);
 		} catch (ex) {
-			alert("ScrapBook ERROR: File is not executable.\n" + aExecFilePath);
+			alert("ScrapBook Plus ERROR: File is not executable.\n" + aExecFilePath);
 		}
 	},
 
@@ -358,6 +384,8 @@ var sbCommonUtils = {
 	{
 		try {
 			this.PREF.setBoolPref(aPrefName, aPrefValue);
+			var sbpPrefService = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
+			sbpPrefService.savePrefFile(null);
 		}
 		catch (ex) {}
 	},
@@ -369,6 +397,8 @@ var sbCommonUtils = {
 			          .createInstance(Components.interfaces.nsISupportsString);
 			str.data = aPrefValue;
 			this.PREF.setComplexValue(aPrefName, Components.interfaces.nsISupportsString, str);
+			var supPrefService = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
+			supPrefService.savePrefFile(null);
 		}
 		catch (ex) {}
 	},

@@ -1,3 +1,5 @@
+<!ENTITY sb.detail.linked.timeout "Limit czasu (s)">
+<!ENTITY sb.detail.linked.charset "Zestaw znaków">
 <!ENTITY sb.detail "Szczegóły przechwytywania">
 <!ENTITY sb.detail.new.folder "Nowy folder">
 <!ENTITY sb.detail.select.folder "Wybierz folder">

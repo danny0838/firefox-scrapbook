@@ -1,3 +1,10 @@
+<!ENTITY sb.multiple.filter "Filter">
+<!ENTITY sbp.multiple.titleofwebsite "Title of website">
+<!ENTITY sbp.multiple.titleoflink "Title of link">
+<!ENTITY sb.multiple.title "Title">
+<!ENTITY sb.multiple.timeout "Timeout">
+<!ENTITY sbp.multiple.downloadmethod "Method">
+<!ENTITY sb.multiple.charset "Charset">
 <!ENTITY sb.multiple.url "URL (Kirjoita URLit riveittäin)">
 <!ENTITY sb.multiple.detector "URL-tunnistin">
 <!ENTITY sb.multiple.detector.plink "Kaikki sivun linkit">
@@ -6,3 +13,4 @@
 <!ENTITY sb.multiple.detector.local "Kaikki kansiossa olevat paikalliset HTML:t">
 <!ENTITY sb.multiple.detector.bookmarks "Kirjanmerkit">
 <!ENTITY sb.multiple.detector.clear "Tyhjennä">
+<!ENTITY sbp.multiple.exclude "ignore already existing addresses in destination folder">

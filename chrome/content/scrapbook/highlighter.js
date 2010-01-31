@@ -24,18 +24,19 @@ var sbHighlighter = {
 
 	updatePopup : function()
 	{
-		var idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 4;
-		document.getElementById("ScrapBookHighlighter" + idx).setAttribute("checked", "true");
-		for ( idx = 4; idx > 0; idx-- )
+		var idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 6;
+		document.getElementById("ScrapBookHighlighterM" + idx).setAttribute("checked", "true");
+		for ( idx = 6; idx > 0; idx-- )
 		{
 			var cssText = sbCommonUtils.copyUnicharPref("scrapbook.highlighter.style." + idx, this.PRESET_STYLES[idx]);
-			this.decorateElement(document.getElementById("ScrapBookHighlighter" + idx), cssText);
+			this.decorateElement(document.getElementById("ScrapBookHighlighterM" + idx), cssText);
 		}
 	},
 
 	decorateElement : function(aElement, aCssText)
 	{
-		aElement.setAttribute("style", aCssText);
+		if (aElement.localName == "menuitem") aElement = document.getAnonymousElementByAttribute(aElement, "class", "menu-iconic-text");
+		aElement.style.cssText = aCssText;
 		aElement.setAttribute("tooltiptext", aCssText);
 	},
 
@@ -49,92 +50,70 @@ var sbHighlighter = {
 			var endC	= range.endContainer;
 			var sOffset	= range.startOffset;
 			var eOffset	= range.endOffset;
-
 			var sameNode = ( startC == endC );
-
+//alert("startC - "+startC+"\nendC - "+endC+"\nsOffset - "+sOffset+"\neOffset - "+eOffset);
 			if ( aNodeName == "a" && !sameNode )
 			{
-				alert("ScrapBook ERROR: Can't attach link across tags."); return;
+				alert("ScrapBook Plus ERROR: Can't attach link across tags."); return;
 			}
-
-			if ( ! sameNode || ! this._isTextNode( startC ) ) { 
-
-				var nodeWalker 
-					= doc.createTreeWalker(
-							range.commonAncestorContainer,
-							NodeFilter.SHOW_TEXT,
-							this._acceptNode,
-							false
-					  );
-
-				nodeWalker.currentNode = startC; 
-
-				for ( var txtNode = nodeWalker.nextNode(); 
-					  txtNode && txtNode != endC; 
-					  txtNode = nodeWalker.nextNode() 
-					) {
-
-					nodeWalker.currentNode 
-						= this._wrapTextNodeWithSpan(
-								doc,
-								txtNode,
-								this._createNode( 
-									aWindow, 
-									aNodeName, 
-									aAttributes, 
-									this.nodePositionInRange.MIDDLE 
-								)
-						); 
+			//Ersatz fuer fehlerhafte Originalfunktion
+			var nodeWalker = doc.createTreeWalker(range.commonAncestorContainer,NodeFilter.SHOW_TEXT,this._acceptNode,false);
+			nodeWalker.currentNode = startC;
+			var txtNode = startC;
+			var ende = 1;
+			if ( txtNode.nodeType == 1 )
+			{
+				txtNode = nodeWalker.nextNode();
+				if ( txtNode )
+				{
+					while ( ende == 1 )
+					{
+						if ( range.isPointInRange(txtNode,0) )
+						{
+							ende = 0;
+						} else
+						{
+							txtNode = nodeWalker.nextNode();
+						}
+					}
+					ende = 1;
 				}
 			}
-
-			if ( this._isTextNode( endC ) ) 
-				endC.splitText( eOffset );
-			
-			if ( ! sameNode) 
-				this._wrapTextNodeWithSpan(
-						doc,
-						endC,
-						this._createNode( 
-							aWindow, 
-							aNodeName, 
-							aAttributes,
-							this.nodePositionInRange.END
-						)
-				); 
-
-			if ( this._isTextNode( startC ) ) { 
-				var secondHalf = startC.splitText( sOffset );
-				if ( sameNode ) {
-					this._wrapTextNodeWithSpan(
-							doc,
-							secondHalf,
-							this._createNode( 
-								aWindow, 
-								aNodeName, 
-								aAttributes,
-								this.nodePositionInRange.SINGLE
-							)
-					);
+			while ( ende == 1 )
+			{
+				if ( txtNode )
+				{
+					if ( txtNode == endC )
+					{
+						if ( this._isTextNode( endC ) ) endC.splitText( eOffset );
+						ende = 0;
+					}
+					if ( txtNode == startC )
+					{
+						if ( this._isTextNode( startC ) ) txtNode = startC.splitText( sOffset );
+					}
+					if ( txtNode.nodeType != 1 ) nodeWalker.currentNode = this._wrapTextNodeWithSpan(doc,txtNode,this._createNode(aWindow,aNodeName,aAttributes));
+					txtNode = nodeWalker.nextNode();
+					if ( txtNode )
+					{
+						if ( txtNode.nodeType != 1 )
+						{
+							if ( !range.isPointInRange(txtNode,0) )
+							{
+								ende = 0;
+							}
+						}
+					}
+				} else
+				{
+					ende = 0;
 				}
-				else {
-					this._wrapTextNodeWithSpan(
-							doc,
-							secondHalf,
-							this._createNode( 
-								aWindow, 
-								aNodeName, 
-								aAttributes,
-								this.nodePositionInRange.START
-							)
-					);
-				}
-			} 
-
+			}
+			//Ersatz Ende
+			nodeWalker.currentNode = startC;
 			range.collapse( true ); 
-
+			range.detach();
 		}
-
 	},
 
 	_isTextNode : function( aNode ) 
