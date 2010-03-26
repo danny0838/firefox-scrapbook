@@ -311,6 +311,25 @@ var sbBrowserOverlay = {
 			this.onPopupShowing(event);
 	},
 
+	_dragStartTime: null,
+
+	handleDragEvents: function(event)
+	{
+		event.preventDefault();
+		switch (event.type) {
+			case "dragenter": 
+				this._dragStartTime = Date.now();
+				break;
+			case "dragover": 
+				if (this._dragStartTime && Date.now() - this._dragStartTime > 1000) {
+					this._dragStartTime = null;
+					event.target.doCommand();
+				}
+				break;
+			default: 
+		}
+	},
+
 	onPopupShowing : function(event)
 	{
 		if (event.originalTarget.id != "contentAreaContextMenu")

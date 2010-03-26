@@ -109,7 +109,8 @@
 		               tooltiptext="ScrapBook"
 		               observes="viewScrapBookSidebar"
 		               class="toolbarbutton-1 chromeclass-toolbar-additional"
-		               ondragover="toggleSidebar('viewScrapBookSidebar',true);" />
+		               ondragenter="sbBrowserOverlay.handleDragEvents(event);"
+		               ondragover="sbBrowserOverlay.handleDragEvents(event);" />
 	</toolbarpalette>
 
 	<vbox id="appcontent">

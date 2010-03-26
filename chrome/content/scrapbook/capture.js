@@ -123,7 +123,7 @@ var sbCaptureTask = {
 	isDocument  : false,
 	canRefresh  : true,
 	sniffer     : null,
-	seconds     : 1,
+	seconds     : 5,
 	timerID     : 0,
 	forceExit   : 0,
 
