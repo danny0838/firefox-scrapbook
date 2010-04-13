@@ -15,31 +15,9 @@ var sbContentSaver = {
 	frameNumber  : 0,
 	selection    : null,
 	linkURLs     : [],
+	_fxVer3      : null,
+	_fxVer35     : null,
 
-	//CSS-Verarbeitung
-	CSSURL       : [],
-	CSSFilename  : [],
-	CSSLocalFilename : [],
-	CSSCache     : [],
-	CSSCacheURL  : [],
-
-	//Bild-Verarbeitung
-	IMGURL       : [],
-	IMGFilename  : [],
-	IMGLocalFilename : [],
-	IMGCache     : [],
-	IMGCacheURL  : [],
-	IMGCacheAufr : [],
-
-	//Frame-Verarbeitung
-	FrameURL     : [],
-	FrameFilename: [],
-	FrameLocalFilename : [],
-
-	//sonstige Dateien
-	allURL       : [],
-	allFilename  : [],
-	allLocalFilename : [],
 
 
 	flattenFrames : function(aWindow)
@@ -54,6 +32,13 @@ var sbContentSaver = {
 
 	init : function(aPresetData)
 	{
+		if ( this._fxVer3 == null )
+		{
+			var iAppInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
+			var iVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
+			this._fxVer3 = iVerComparator.compare(iAppInfo.version, "3.0")>=0;
+			this._fxVer35 = iVerComparator.compare(iAppInfo.version, "3.5")>=0;
+		}
 		this.item = sbCommonUtils.newItem(sbDataSource.identify(sbCommonUtils.getTimeStamp()));
 		this.name = "index";
 		this.favicon = null;
@@ -83,29 +68,23 @@ var sbContentSaver = {
 		//Favicon der angezeigten Seite bestimmen (Unterscheidung zwischen FF2 und FF3 notwendig!)
 		if ( "gBrowser" in window && aRootWindow == gBrowser.contentWindow )
 		{
-			var appInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
-			if (appInfo.name.match(/^Firefox/))
+			if ( this._fxVer3 )
 			{
-				if (appInfo.version.match(/^3/))
+				//FF3+ gefunden
+				var faviconService = Components.classes["@mozilla.org/browser/favicon-service;1"].getService(Components.interfaces.nsIFaviconService);
+				var myURI = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
+				myURI.spec = aRootWindow.document.URL;
+				try
 				{
-					//FF3 gefunden
-					var faviconService = Components.classes["@mozilla.org/browser/favicon-service;1"].getService(Components.interfaces.nsIFaviconService);
-					var myURI = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
-					myURI.spec = aRootWindow.document.URL;
-					try
-					{
-						var myImage = faviconService.getFaviconForPage(myURI);
-						this.item.icon = myImage.spec;
-					} catch(ex)
-					{
-						this.item.icon = null;
-					}
-				}
-				if (appInfo.version.match(/^2/))
+					var myImage = faviconService.getFaviconForPage(myURI);
+					this.item.icon = myImage.spec;
+				} catch(ex)
 				{
-					//FF2 gefunden
-					this.item.icon = gBrowser.mCurrentBrowser.mIconURL;
+					this.item.icon = null;
 				}
+			} else
+			{
+				this.item.icon = gBrowser.mCurrentBrowser.mIconURL;
 			}
 		}
 		this.frameList = this.flattenFrames(aRootWindow);
@@ -279,7 +258,7 @@ var sbContentSaver = {
 			var myStyleSheets = aDocument.styleSheets;
 			for ( var i=0; i<myStyleSheets.length; i++ )
 			{
-				myCSS += this.processCSSRecursively(myStyleSheets[i]);
+				myCSS += this.processCSSRecursively(myStyleSheets[i], aDocument);
 			}
 			if ( myCSS )
 			{
@@ -319,338 +298,6 @@ var sbContentSaver = {
 			sbCommonUtils.writeFile(myCSSFile, myCSS, this.item.chars);
 		}
 		return myHTMLFile.leafName;
-	},
-
-	baueURL : function(buURLPath, buString)
-	{
-		var buParts = [];
-		var buURL = "";
-		var buRWert = [];
-//alert("baueURL - "+buURLPath+" - "+buString);
-		buParts = buString.match(/(href=|src=|background=|background-image|\/).*?(\.css|\.htm|\.html|\.gif|\.jpg|\.jpeg|\.png|\.tiff|\.tif).*?(\"|\'|>)/gi);
-//alert("buString - "+buString+"\n\nbuParts - "+buParts);
-		if ( buParts )
-		{
-			buURL = buParts[0].replace(/(href=|src=|background=|background-image:url\()/gi, "");
-		} else
-		{
-			buURL = buString.replace(/(href=|src=|background=|background-image:url\()/gi, "");
-		}
-		buURL = buURL.replace(/(\"|\'|>|\)|background-image: url\(|\);)/gi, "");
-		//part1 und part2 bestimmen
-		buParts = buString.split(buURL);
-//alert("buString - "+buString+"\n\nbuURL - "+buURL+"\n\nbuParts - "+buParts);
-		//Die nächste Verarbeitung findet nur statt, wenn die URL unvollständig ist!
-		if ( !buURL.match(/^http\:\/\//i) )
-		{
-			//root aufteilen
-			var buEbenen = buURLPath.split("/");
-//alert("buEbenen - "+buEbenen);
-			//Wie viele Verzeichnisse muss ausgehend von buURLPath zurückgegangen werden?
-//alert("buURL - "+buURL);
-			var buVerzeichnisse = buURL.split("/");
-			var buVerzeichnisseZurueck = 0;
-			for ( var buI=0; buI<buVerzeichnisse.length; buI++ )
-			{
-				if ( buVerzeichnisse[buI].match(/\.\./) | buVerzeichnisse[buI] == "" ) buVerzeichnisseZurueck++;
-			}
-//alert("buVerzeichnisseZurueck - "+buVerzeichnisseZurueck);
-			//neuen buURLPath bestimmen
-			if ( buEbenen.length > 3 )
-			{
-				//Der Bau in zwei Schritten ist notwendig, da auf manchen Seite zu viele Ebenen zurückgegangen wird!
-				buURLPath = "";
-				for ( var buI=0; buI<3; buI++ )
-				{
-					buURLPath += buEbenen[buI].concat("\/");
-				}
-				if ( buEbenen.length-1-buVerzeichnisseZurueck > 3 )
-				{
-					for ( var buI=3; buI<buEbenen.length-1-buVerzeichnisseZurueck; buI++ )
-					{
-						if ( !(buEbenen[buI]=="") ) buURLPath += buEbenen[buI].concat("\/");
-					}
-				}
-			}
-//alert("buURLPath - "+buURLPath);
-			//Neue URL bauen
-			var buVersuch = buURLPath;
-			for ( var buI=buVerzeichnisseZurueck; buI<buVerzeichnisse.length; buI++ )
-			{
-				buVersuch += buVerzeichnisse[buI].concat("\/");
-			}
-			buVersuch = buVersuch.substring(0,buVersuch.length-1);
-//alert("buURL - "+buURL+"\n\nbuParts - "+buParts+"\n\nbuURLPath - "+buURLPath+"\n\nbuVersuch - "+buVersuch+"\nbuVerzeichnisseZurueck - "+buVerzeichnisseZurueck);
-			buRWert.push(buVersuch);
-		} else
-		{
-			buRWert.push(buURL);
-		}
-//alert("buURLPath - "+buURLPath+"\nbuString - "+buString+"\nbuURL - "+buURL+"\nbuParts[0] - "+buParts[0]+"\nbuParts[1] - "+buParts[1]);
-		//Rückgabewert zusammenstellen
-		if ( buParts )
-		{
-			buRWert.push(buParts[0]);
-			if ( buParts.length > 2 )
-			{
-				var buZeile = ""
-				for ( var buI=1; buI<buParts.length; buI++ )
-				{
-					buZeile += buParts[buI];
-					if ( buI<buParts.length-1 ) buZeile += buURL;
-				}
-				buRWert.push(buZeile);
-			} else
-			{
-				buRWert.push(buParts[1]);
-			}
-		}
-		//Erstellte URL zurückgeben
-//alert(buRWert);
-		return buRWert;
-	},
-
-	downSaveFile : function(dsfFileURL, dsfDestination, dsfDownloadInternalFiles)
-	{
-		//Prüfung, ob URL schon im Cache vorhanden ist
-			//Dateityp bestimmen
-		var dsfDateityp = "";
-		var dsfCSSGefunden = 0;
-		var dsfIMGGefunden = 0;
-		if ( dsfFileURL.match(/(\.gif|\.jpg|\.jpeg|\.png|\.tiff|\.tif)/i) )
-		{
-			dsfDateityp = "img";
-		} else
-		{
-			if ( dsfFileURL.match(/\.css/i) )
-			{
-				dsfDateityp = "css";
-			} else
-			{
-				alert("Unbekannter Dateityp - "+dsfFileURL);
-			}
-		}
-//alert("dsfFileURL - "+dsfFileURL+"\nDateityp - "+dsfDateityp);
-			//Cache durchsuchen!
-		if ( dsfDateityp == "img" )
-		{
-//alert("Bild suchen");
-			for ( var dsfI=0; dsfI<this.IMGCacheURL.length; dsfI++ )
-			{
-				if ( dsfFileURL == this.IMGCacheURL[dsfI] )
-				{
-//alert("img gefunden");
-					dsfIMGGefunden = dsfI;
-					dsfI = this.IMGCacheURL.length;
-				}
-			}
-		} else
-		{
-			if ( dsfDateityp == "css" )
-			{
-//alert("Style suchen");
-				for ( var dsfI=0; dsfI<this.CSSCacheURL.length; dsfI++ )
-				{
-					if ( dsfFileURL == this.CSSCacheURL[dsfI] )
-					{
-//alert("css gefunden");
-						dsfCSSGefunden = dsfI;
-						dsfI = this.CSSCacheURL.length;
-					}
-				}
-			}
-		}
-//alert("dsfCSSGefunden - "+dsfCSSGefunden+"\ndsfIMGGefunden - "+dsfIMGGefunden);
-		//Datei aus dem Internet herunterladen, wenn nicht im Cache vorhanden
-		if ( dsfCSSGefunden==0 && dsfIMGGefunden==0 )
-		{
-			//Laed dsfFileURL und speichert die Daten unter dsfDestination ab
-			var dsfioserv = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
-			var dsfchannel = dsfioserv.newChannel(dsfFileURL, 0, null);
-			var dsfstream = dsfchannel.open();
-			if (dsfchannel instanceof Components.interfaces.nsIHttpChannel && dsfchannel.responseStatus != 200)
-			{
-//alert(dsfchannel.responseStatus);
-				return "";
-			}
-
-			var dsfbstream = Components.classes["@mozilla.org/binaryinputstream;1"].createInstance(Components.interfaces.nsIBinaryInputStream);
-			dsfbstream.setInputStream(dsfstream);
-			var dsfsize = 0;
-			var dsffile_data = "";
-			while(dsfsize = dsfbstream.available())
-			{
-				dsffile_data += dsfbstream.readBytes(dsfsize);
-			}
-			//Daten werden im unveraenderten Zustand gesichert, um sicherzustellen, das enthaltene Verweise korrekt verarbeitet werden
-//alert(dsfDateityp+" -- "+dsfFileURL);
-			if ( dsfDateityp == "img" )
-			{
-				//Es werden maximal 100 Bilder im Cache vorgehalten. Ist die Grenze erreicht, wird das Bild mit den niedrigsten Aufrufen überschrieben
-				if ( this.IMGCache.length == 100 )
-				{
-					var dsfRaus = [];
-					dsfRaus[0] = -1;
-					dsfRaus[1] = 1000;
-					for ( var dsfI=0; dsfI<100; dsfI++ )
-					{
-						if ( dsfRaus[1] > this.IMGCacheAufr[dsfI] )
-						{
-							dsfRaus[0] = dsfI;
-							dsfRaus[1] = this.IMGCacheAufr[dsfI];
-						}
-					}
-//alert("Entferne "+dsfRaus[0]+". Eintrag "+this.IMGCacheURL[dsfRaus[0]]+" mit "+this.IMGCacheAufr[dsfRaus[0]]+" Anfragen.");
-					this.IMGCache.splice(dsfRaus[0],dsfRaus[0]+1);
-					this.IMGCacheURL.splice(dsfRaus[0],dsfRaus[0]+1);
-					this.IMGCacheAufr.splice(dsfRaus[0],dsfRaus[0]+1);
-				}
-				this.IMGCache.push(dsffile_data);
-				this.IMGCacheURL.push(dsfFileURL);
-				this.IMGCacheAufr.push(1);
-			} else
-			{
-				this.CSSCache.push(dsffile_data);
-				this.CSSCacheURL.push(dsfFileURL);
-			}
-		} else
-		{
-			//Datei wird aus dem Cache bezogen
-			var dsffile_data = "";
-			if ( dsfCSSGefunden > 0 )
-			{
-				dsffile_data = this.CSSCache[dsfCSSGefunden];
-			} else
-			{
-				dsffile_data = this.IMGCache[dsfIMGGefunden];
-				this.IMGCacheAufr[dsfIMGGefunden]++;
-			}
-		}
-//alert("Bestanden");
-			//Falls erwuenscht, werden enthaltene Verweise auf andere Dateien ebenfalls heruntergeladen und die Datei angepasst
-			if ( dsfDownloadInternalFiles )
-			{
-				var dsfLinks = dsffile_data.match(/url.*?\)/gi);
-				if ( dsfLinks )
-				{
-					//Variablen deklarieren
-					var dsfIMGURL = [];		//enthält die komplette URL des Bildes
-					var dsfIMGTag = [];		//enthält String im HTML-Code
-					var dsfIMGFile = [];	//enthält den Original Dateinamen
-					var dsfIMGDestination = null;
-					var dsfAnzahl = 0;
-					var dsfVorhanden = 0;
-					var dsfLocalFilenameNr = 0;
-					var dsfNeu = 0;
-					var dsfURLPath = "";
-					var dsfParts = dsfFileURL.split("\/");
-					for ( var dsfI=0; dsfI<dsfParts.length-1; dsfI++ )
-					{
-						if ( !(dsfParts[dsfI].length == 0) ) dsfURLPath += dsfParts[dsfI]+"\/";
-					}
-//alert("dsfURLPath - "+dsfURLPath);
-					for ( var dsfI=0; dsfI<dsfLinks.length; dsfI++ )
-					{
-						var dsfURL = dsfLinks[dsfI].replace(/url/, "");
-						dsfURL = dsfURL.replace(/\(/, "");
-						dsfURL = dsfURL.replace(/\)/, "");
-//alert("dsfURL - "+dsfURL);
-						//URL der zu speichernden Datei wird bestimmt
-						var dsfKompletteURL = this.baueURL(dsfURLPath,dsfURL);
-//alert("dsfURLPath - "+dsfURLPath+" und dsfURL - "+dsfURL+" wird zu\n\ndsfKompletteURL - "+dsfKompletteURL);
-						//URL wander in Speicher
-						dsfIMGURL.push(dsfKompletteURL[0]);
-						//Original Dateinamen bestimmen
-						var dsfEinzelteile = dsfIMGURL[dsfI].split("/");
-						if ( dsfEinzelteile )
-						{
-							dsfIMGFile.push(dsfEinzelteile[dsfEinzelteile.length-1]);
-						} else
-						{
-							dsfIMGFile.push(dsfIMGURL[dsfI]);
-						}
-						//Überprüfen,  ob URL schon bekannt ist
-						dsfAnzahl = 0;
-						dsfVorhanden = 0;
-						dsfLocalFilenameNr = 0;
-						dsfNeu = 0;
-						for ( var dsfJ=0; dsfJ<this.IMGURL.length; dsfJ++ )
-						{
-							if ( this.IMGURL[dsfJ].match(dsfIMGURL[dsfI]))
-							{
-								dsfVorhanden = 1;
-								dsfLocalFilenameNr = dsfJ;
-								dsfJ = this.IMGURL.length;
-							}
-						}
-//alert("dsfVorhanden - "+dsfVorhanden);
-						//Lokalen Dateinamen bestimmen
-						if ( dsfVorhanden == 0 )
-						{
-							for ( var dsfJ=0; dsfJ<this.IMGURL.length; dsfJ++ )
-							{
-								if ( this.IMGFilename[dsfJ].match(dsfIMGFile[dsfI]) ) dsfAnzahl++;
-							}
-							//Daten hinzufügen, da es sich um eine neue Datei handelt
-							this.IMGURL.push(dsfIMGURL[dsfI]);
-							this.IMGFilename.push(dsfIMGFile[dsfI]);
-							if ( dsfAnzahl == 0 )
-							{
-								this.IMGLocalFilename.push(dsfIMGFile[dsfI]);
-							} else
-							{
-								var dsfTemp = "";
-								dsfTemp = dsfIMGFile[dsfI].substring(0,dsfIMGFile[dsfI].length-4).concat("_" + anzahl).concat(dsfIMGFile[dsfI].substring(dsfIMGFile[dsfI].length-4,dsfIMGFile[dsfI].length));
-								this.IMGLocalFilename.push(dsfTemp);
-							}
-							//dsfLocalFilenameNr bestimmen
-							dsfLocalFilenameNr = this.IMGLocalFilename.length-1;
-							dsfNeu = 1;
-						}
-//alert("Dateiname - "+this.IMGLocalFilename[dsfLocalFilenameNr]);
-						//Verweise in dsffile_data aktualisieren
-						var dsfNeuerTag = dsfKompletteURL[1]+this.IMGLocalFilename[dsfLocalFilenameNr];
-						for ( var dsfJ=2; dsfJ<dsfKompletteURL.length; dsfJ++ )
-						{
-							dsfNeuerTag += dsfKompletteURL[dsfJ];
-						}
-							//regulaeren Suchbegriff zusammensetzen
-						var dsfSchritt1 = dsfURL;
-						dsfSchritt1 = dsfSchritt1.replace(/\//g, "\\/");
-						dsfSchritt1 = dsfSchritt1.replace(/\"/g, "\\\"");
-						dsfSchritt1 = dsfSchritt1.replace(/\'/g, "\\\'");
-						dsfSchritt1 = dsfSchritt1.replace(/\./g, "\\.");
-						dsfSchritt1 = dsfSchritt1.replace(/\(/g, "\\(");
-						dsfSchritt1 = dsfSchritt1.replace(/\)/g, "\\)");
-						dsfSchritt1 = dsfSchritt1.replace(/\?/g, "\\?");
-						dsfSchritt1 = dsfSchritt1.replace(/\&/g, "\\&");
-						dsfSchritt1 = dsfSchritt1.replace(/\r/g, "\\r&");
-						dsfSchritt1 = dsfSchritt1.replace(/\n/g, "\\n");
-						var dsfSuchbegriff = new RegExp(dsfSchritt1, "gi");
-//alert("dsfNeuerTag - "+dsfNeuerTag+"\n\ndsfSuchbegriff - "+dsfSuchbegriff);
-						dsffile_data = dsffile_data.replace(dsfSuchbegriff, dsfNeuerTag);
-						//Datei herunterladen, falls erforderlich
-						if ( dsfNeu == 1 )
-						{
-							dsfIMGDestination = this.contentDir.clone();
-							dsfIMGDestination.append(this.IMGLocalFilename[dsfLocalFilenameNr]);
-//alert("Speichere "+dsfKompletteURL[0]+" nach "+dsfIMGDestination.target);
-							this.downSaveFile(dsfKompletteURL[0],dsfIMGDestination.target,false);
-						}
-					}
-				}
-			}
-		//geladene Daten auf Datenträger schreiben
-		var dsfFile = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-		dsfFile.initWithPath( dsfDestination );
-		// use 0x02 | 0x10 to open file for appending.
-		var dsffoStream = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance(Components.interfaces.nsIFileOutputStream);
-		dsffoStream.init(dsfFile, 0x02 | 0x08 | 0x20, 0666, 0); 
-		// write, create, truncate
-		// In a c file operation, we have no need to set file mode with or operation,
-		// directly using "r" or "w" usually.
-		dsffoStream.write(dsffile_data, dsffile_data.length);
-		dsffoStream.close();
 	},
 
 	saveFileInternal : function(aFileURL, aFileKey, aCaptureType)
@@ -917,7 +564,7 @@ var sbContentSaver = {
 		}
 		else if ( aNode.style && aNode.style.cssText )
 		{
-			var newCSStext = this.inspectCSSText(aNode.style.cssText, this.refURLObj.spec);
+			var newCSStext = this.inspectCSSText(aNode.style.cssText, this.refURLObj.spec, aNode.ownerDocument);
 			if ( newCSStext ) aNode.setAttribute("style", newCSStext);
 		}
 		if ( !this.option["script"] )
@@ -932,33 +579,30 @@ var sbContentSaver = {
 		return aNode;
 	},
 
-	processCSSRecursively : function(aCSS)
+	processCSSRecursively : function(aCSS, aDocument)
 	{
 		var content = "";
 		if ( !aCSS || aCSS.disabled ) return "";
 		var medium = aCSS.media.mediaText;
-		if ( medium != "" && medium.indexOf("screen") < 0 && medium.indexOf("all") < 0 )
-		{
-			return "";
-		}
+		if ( medium != "" && medium.indexOf("screen") < 0 && medium.indexOf("all") < 0 ) return "";
 		if ( aCSS.href && aCSS.href.indexOf("chrome") == 0 ) return "";
-		var flag = false;
+		if ( aCSS.href ) { content += (content ? "\n" : "") + "/* ::::: " + aCSS.href + " ::::: */\n\n"; flag = true; }
 		for ( var i=0; i<aCSS.cssRules.length; i++ )
 		{
 			if ( aCSS.cssRules[i].type == 1 || aCSS.cssRules[i].type == 4 || aCSS.cssRules[i].type == 5 )
 			{
-				if ( !flag ) { content += "\n/* ::::: " + aCSS.href + " ::::: */\n\n"; flag = true; }
-				content += this.inspectCSSText(aCSS.cssRules[i].cssText, aCSS.href) + "\n";
+				var cssText = this.inspectCSSText(aCSS.cssRules[i].cssText, aCSS.href, aDocument);
+				if ( cssText ) content += cssText+"\n";
 			}
 			else if ( aCSS.cssRules[i].type == 3 )
 			{
-				content += this.processCSSRecursively(aCSS.cssRules[i].styleSheet);
+				content += this.processCSSRecursively(aCSS.cssRules[i].styleSheet, aDocument);
 			}
 		}
 		return content;
 	},
 
-	inspectCSSText : function(aCSStext, aCSShref)
+	inspectCSSText : function(aCSStext, aCSShref, aDocument)
 	{
 		if ( aCSStext.match(/webchunks/i) )
 		{
@@ -970,6 +614,20 @@ var sbContentSaver = {
 				aCSShref = this.refURLObj.spec;
 			}
 			if ( !aCSStext ) return "";
+			if ( this._fxVer35 )
+			{
+				if ( aCSStext.indexOf("{")>-1 )
+				{
+					var selectors = aCSStext.substring(0,aCSStext.indexOf("{")).trim();
+					selectors = selectors.replace(/:[a-z-]+/g, "");
+					try
+					{
+						if ( !aDocument.querySelector(selectors) ) return "";
+					} catch (ex)
+					{
+					}
+				}
+			}
 			var re = new RegExp(/ url\(([^\'\)\s]+)\)/);
 			var i = 0;
 			while ( aCSStext.match(re) )

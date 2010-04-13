@@ -15,17 +15,13 @@ var sbDataSource = {
 			this.file.append("scrapbook.rdf");
 			if ( !this.file.exists() )
 			{
-				this.file.create(this.file.NORMAL_FILE_TYPE, 0666);
-				var fileURL = sbCommonUtils.IO.newFileURI(this.file).spec;
-				this.data = sbCommonUtils.RDF.GetDataSourceBlocking(fileURL);
-				this.createEmptySeq("urn:scrapbook:root");
-				this.flush();
+				var iDS = Cc["@mozilla.org/rdf/datasource;1?name=xml-datasource"].createInstance(Ci.nsIRDFDataSource);
+				sbCommonUtils.RDFCU.MakeSeq(iDS, sbCommonUtils.RDF.GetResource("urn:scrapbook:root"));
+				var iFileUrl = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService).newFileURI(this.file);
+				iDS.QueryInterface(Ci.nsIRDFRemoteDataSource).FlushTo(iFileUrl.spec);
 			}
-			else
-			{
-				var fileURL = sbCommonUtils.IO.newFileURI(this.file).spec;
-				this.data = sbCommonUtils.RDF.GetDataSourceBlocking(fileURL);
-			}
+			var fileURL = sbCommonUtils.IO.newFileURI(this.file).spec;
+			this.data = sbCommonUtils.RDF.GetDataSourceBlocking(fileURL);
 		}
 		catch(ex) {
 			if ( !aQuietWarning ) alert("ScrapBook Plus ERROR: Failed to initialize datasource.\n\n" + ex);

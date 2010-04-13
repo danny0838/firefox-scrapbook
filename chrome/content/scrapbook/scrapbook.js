@@ -486,7 +486,8 @@ var sbTreeDNDHandler = {
 		onDrop: function(row, orient) {
 			var XferData, XferType;
 			var odAppInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
-			if (odAppInfo.version.match(/^3.5/) &&
+			var odVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
+			if (odVerComparator.compare(odAppInfo.version, "3.5")>=0 &&
 			    (sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0) == "application/x-moz-tabbrowser-tab" ||
 				 sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0) == "sb/tradeitem"))
 			{

@@ -325,7 +325,10 @@ var sbCacheService = {
 				this.folders.push(contResList[i].Value);
 			}
 		}
-		this.processAsync();
+		if ( this.resList.length>0 )
+			this.processAsync();
+		else
+			sbCacheService.finalize();
 	},
 
 	processAsync : function()
@@ -449,7 +452,12 @@ var sbCacheSource = {
 
 	init : function()
 	{
-		if ( !gCacheFile.exists() ) gCacheFile.create(gCacheFile.NORMAL_FILE_TYPE, 0666);
+		if ( !gCacheFile.exists() ) {
+			var iDS = Components.classes["@mozilla.org/rdf/datasource;1?name=xml-datasource"].createInstance(Components.interfaces.nsIRDFDataSource);
+			sbCommonUtils.RDFCU.MakeSeq(iDS, sbCommonUtils.RDF.GetResource("urn:scrapbook:cache"));
+			var iFileUrl = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newFileURI(gCacheFile);
+			iDS.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).FlushTo(iFileUrl.spec);
+		}
 		var filePath = sbCommonUtils.IO.newFileURI(gCacheFile).spec;
 		this.dataSource = sbCommonUtils.RDF.GetDataSourceBlocking(filePath);
 		this.container = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);

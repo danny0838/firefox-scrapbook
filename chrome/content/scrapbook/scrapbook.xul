@@ -75,6 +75,7 @@
 			      ondraggesture="nsDragAndDrop.startDrag(event,sbTreeDNDHandler.dragDropObserver);"
 			      ondragover="nsDragAndDrop.dragOver(event,sbTreeDNDHandler.dragDropObserver);"
 			      ondragdrop="sbTreeDNDHandler.getModifiers(event); nsDragAndDrop.drop(event,sbTreeDNDHandler.dragDropObserver);"
+				  ondrop="sbTreeDNDHandler.getModifiers(event);"
 			      contextmenu="sbPopup"
 			      hidecolumnpicker="true"
 			      seltype="single"
