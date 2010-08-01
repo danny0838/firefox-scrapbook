@@ -31,7 +31,6 @@
 
 	<tree
 		id="sbpURLList"
-		rows="1"
 		flex="1"
 		context="popup"
 		seltype="multiple"
@@ -52,7 +51,7 @@
 		<treechildren/>
 	</tree>
 
-	<browser id="sbCaptureBrowser" collapsed="true" disablehistory="true" />
+	<browser id="sbCaptureBrowser" collapsed="true" disablehistory="true" type="chrome" />
 
 	<spacer style="height:5px" />
 	<hbox>
@@ -83,7 +82,6 @@
 		</hbox>
 		<tree id="sbpTreeFilter"
 			  autostrech="always"
-			  flex="1"
 			  onclick="sbpFilter.editFilter();"
 			  rows="5"
 			  seltype="single"

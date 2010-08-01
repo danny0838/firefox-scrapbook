@@ -136,7 +136,7 @@
 			<vbox id="sbListOuter" flex="1" persist="height" hidden="true" style="height:200px;" />
 		</vbox>
 		<splitter id="sbPaneSplitter" hidden="true" />
-		<browser id="sbRightPaneBrowser" onload="event.stopPropagation();" flex="5" hidden="true" persist="width" disablehistory="true" />
+		<browser id="sbRightPaneBrowser" onload="event.stopPropagation();" flex="5" hidden="true" persist="width" disablehistory="true" type="chrome" />
 	</hbox>
 
 	<statusbar id="status-bar" class="chromeclass-status">
