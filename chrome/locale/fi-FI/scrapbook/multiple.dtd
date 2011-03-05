@@ -1,8 +1,0 @@
-<!ENTITY sb.multiple.url "URL (Kirjoita URLit riveittäin)">
-<!ENTITY sb.multiple.detector "URL-tunnistin">
-<!ENTITY sb.multiple.detector.plink "Kaikki sivun linkit">
-<!ENTITY sb.multiple.detector.slink "Kaikki valinnan linkit">
-<!ENTITY sb.multiple.detector.tabs "Kaikki ikkunan välilehdet">
-<!ENTITY sb.multiple.detector.local "Kaikki kansiossa olevat paikalliset HTML:t">
-<!ENTITY sb.multiple.detector.bookmarks "Kirjanmerkit">
-<!ENTITY sb.multiple.detector.clear "Tyhjennä">

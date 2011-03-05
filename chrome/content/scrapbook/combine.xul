@@ -18,15 +18,13 @@
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         onunload="sbCombineService.done();">
 
-	<script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
-	<script type="application/x-javascript" src="chrome://global/content/nsTransferable.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/saver.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/capture.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/folderPicker.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/combine.js" />
 
 	<stringbundleset>
-		<stringbundle id="sbMainString"    src="chrome://scrapbook/locale/scrapbook.properties" />
 		<stringbundle id="sbCaptureString" src="chrome://scrapbook/locale/capture.properties" />
 		<stringbundle id="sbCombineString" src="chrome://scrapbook/locale/combine.properties" />
 		<stringbundle id="sbOverlayString" src="chrome://scrapbook/locale/overlay.properties" />
@@ -44,8 +42,8 @@
 			</hbox>
 			<description style="margin-bottom: 8px;">&sb.combine.dragdrop;</description>
 			<listbox id="sbCombineListbox"
-			         ondragover="nsDragAndDrop.dragOver(event,sbCombineService.dropObserver);"
-			         ondragdrop="nsDragAndDrop.drop(event,sbCombineService.dropObserver);"
+			         ondragover="sbCombineService.onDragOver(event);"
+			         ondrop="sbCombineService.onDrop(event);"
 			         flex="1" style="margin-bottom: 12px;" />
 			<checkbox id="sbCombineOptionRemove" label="&sb.combine.option.remove;" style="color: red;" />
 		</vbox>
@@ -56,7 +54,7 @@
 	            description="&sb.combine.preview.d;"
 	            onpageshow="sbCombineService.initPreview();">
 		<textbox id="sbCaptureTextbox" readonly="true" />
-		<browser id="sbCaptureBrowser" collapsed="true" flex="1" style="border: 1px solid ThreeDShadow;" onload="event.stopPropagation();" />
+		<browser id="sbCaptureBrowser" type="content" collapsed="true" flex="1" style="border: 1px solid ThreeDShadow;" onload="event.stopPropagation();" />
 	</wizardpage>
 
 </wizard>

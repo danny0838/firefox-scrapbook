@@ -11,27 +11,26 @@ var sbNoteService2 = {
 		window.location.search.match(/\?id\=(\d{14})$/);
 		var id = RegExp.$1;
 		sbNoteService.sidebarContext = false;
-		sbDataSource.init();
-		var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
-		if ( !sbDataSource.exists(res) ) return window.location.href = "about:blank";
+		var res = ScrapBookUtils.RDF.GetResource("urn:scrapbook:item" + id);
+		if ( !ScrapBookData.exists(res) ) return window.location.href = "about:blank";
 		sbNoteService.edit(res);
 		sbNoteTemplate.init();
 		this.initFontSize();
-		if ( sbCommonUtils.getBoolPref("scrapbook.note.linefeed", true) )
+		if ( ScrapBookUtils.getPref("note.linefeed") )
 		{
 			document.getElementById("sbNoteToolbarL").setAttribute("checked", true);
 		}
-		if ( sbCommonUtils.getBoolPref("scrapbook.note.preview", false) ) this.initHTMLView();
+		if ( ScrapBookUtils.getPref("note.preview") ) this.initHTMLView();
 	},
 
 	refreshTab : function()
 	{
-		var icon = sbCommonUtils.getDefaultIcon("note");
+		var icon = ScrapBookUtils.getDefaultIcon("note");
 		document.getElementById("sbNoteImage").setAttribute("src", icon);
-		var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
+		var win = ScrapBookUtils.getBrowserWindow();
 		if ( win.content.location.href.indexOf(sbNoteService.resource.Value.substring(18)) > 0 )
 		{
-			win.gBrowser.selectedTab.label = sbDataSource.getProperty(sbNoteService.resource, "title");
+			win.gBrowser.selectedTab.label = ScrapBookData.getProperty(sbNoteService.resource, "title");
 			win.gBrowser.selectedTab.setAttribute("image", icon);
 		}
 	},
@@ -40,24 +39,16 @@ var sbNoteService2 = {
 	{
 		window.onunload = null;
 		sbNoteService.save(window);
-		sbCommonUtils.setBoolPref("scrapbook.note.preview",  this.enabledHTMLView);
-		sbCommonUtils.setBoolPref("scrapbook.note.linefeed", document.getElementById("sbNoteToolbarL").getAttribute("checked") ? true : false);
-		sbCommonUtils.PREF.setIntPref("scrapbook.note.fontsize",  this.fontSize);
+		ScrapBookUtils.setPref("note.preview",  this.enabledHTMLView);
+		ScrapBookUtils.setPref("note.linefeed", document.getElementById("sbNoteToolbarL").getAttribute("checked") ? true : false);
+		ScrapBookUtils.setPref("note.fontsize",  this.fontSize);
 		if ( exit )
-		{
-			var browser = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser").getBrowser();
-			browser.mTabContainer.childNodes.length > 1 ? window.close() : browser.loadURI("about:blank");
-		}
+			ScrapBookUtils.getBrowserWindow().gBrowser.removeCurrentTab();
 	},
 
 	initFontSize : function()
 	{
-		try {
-			this.fontSize = sbCommonUtils.PREF.getIntPref("scrapbook.note.fontsize");
-		}
-		catch (ex) {
-			this.fontSize = 16;
-		}
+		this.fontSize = ScrapBookUtils.getPref("note.fontsize");
 		this.changeFontSize(this.fontSize);
 		document.getElementById("sbNoteToolbarF" + this.fontSize).setAttribute("checked", true)
 	},
@@ -90,11 +81,11 @@ var sbNoteService2 = {
 		if ( document.getElementById("sbNoteToolbarL").getAttribute("checked") ) content = content.replace(/([^>])$/mg, "$1<br>");
 		source = source.replace(/<%NOTE_TITLE%>/g,   title);
 		source = source.replace(/<%NOTE_CONTENT%>/g, content);
-		var htmlFile = sbCommonUtils.getScrapBookDir().clone();
+		var htmlFile = ScrapBookUtils.getScrapBookDir().clone();
 		htmlFile.append("note.html");
-		sbCommonUtils.writeFile(htmlFile, source, "UTF-8");
+		ScrapBookUtils.writeFile(htmlFile, source, "UTF-8");
 		this.toggleHTMLView(true);
-		this.BROWSER.loadURI(sbCommonUtils.convertFilePathToURL(htmlFile.path));
+		this.BROWSER.loadURI(ScrapBookUtils.convertFilePathToURL(htmlFile.path));
 		this.enabledHTMLView = true;
 	},
 
@@ -120,9 +111,9 @@ var sbNoteTemplate = {
 
 	init : function()
 	{
-		this.file = sbCommonUtils.getScrapBookDir().clone();
+		this.file = ScrapBookUtils.getScrapBookDir().clone();
 		this.file.append("note_template.html");
-		if ( !this.file.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/template.html", this.file);
+		if ( !this.file.exists() ) ScrapBookUtils.saveTemplateFile("chrome://scrapbook/content/template.html", this.file);
 	},
 
 	show : function(willShow)
@@ -134,8 +125,8 @@ var sbNoteTemplate = {
 
 	getTemplate : function()
 	{
-		var template = sbCommonUtils.readFile(this.file);
-		template = sbCommonUtils.convertToUnicode(template, "UTF-8");
+		var template = ScrapBookUtils.readFile(this.file);
+		template = ScrapBookUtils.convertToUnicode(template, "UTF-8");
 		return template;
 	},
 
@@ -150,9 +141,9 @@ var sbNoteTemplate = {
 	save : function()
 	{
 		if ( !this.shouldSave ) return;
-		var myCSS = sbCommonUtils.getScrapBookDir().clone();
+		var myCSS = ScrapBookUtils.getScrapBookDir().clone();
 		myCSS.append("note_template.html");
-		sbCommonUtils.writeFile(myCSS, this.TEXTBOX.value, "UTF-8");
+		ScrapBookUtils.writeFile(myCSS, this.TEXTBOX.value, "UTF-8");
 		this.change(false);
 	},
 

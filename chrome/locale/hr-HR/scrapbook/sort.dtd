@@ -1,8 +1,0 @@
-<!ENTITY sb.sort "Razvrstaj">
-<!ENTITY sb.sort.reverse "Okreni">
-<!ENTITY sb.sort.title.asc "Rasvrstaj po imenu (A &gt; Z)">
-<!ENTITY sb.sort.title.desc "Rasvrstaj po imenu (Z &gt; A)">
-<!ENTITY sb.sort.date.asc "Kronološki">
-<!ENTITY sb.sort.date.desc "Obrnuto kronološki">
-<!ENTITY sb.sort.recursive "Razvrstaj podmape unatrag">
-<!ENTITY sb.sort.warning "Napomena: Ovu operaciju ne možete poništiti.">

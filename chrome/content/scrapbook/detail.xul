@@ -23,10 +23,7 @@
         ondialogcancel="sbCaptureOptions.cancel();">
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/detail.js" />
-
-	<stringbundle id="sbMainString" src="chrome://scrapbook/locale/scrapbook.properties" />
 
 	<tabbox flex="1">
 		<tabs orient="horizontal">

@@ -1,8 +1,0 @@
-<!ENTITY sb.sort "Järjestä">
-<!ENTITY sb.sort.reverse "Käänteinen">
-<!ENTITY sb.sort.title.asc "Järjestä otsikon mukaan (A-Ö)">
-<!ENTITY sb.sort.title.desc "Järjestä otsikon mukaan (Ö-A)">
-<!ENTITY sb.sort.date.asc "Aikajärjestys">
-<!ENTITY sb.sort.date.desc "Käänteinen aikajärjestys">
-<!ENTITY sb.sort.recursive "Järjestä alakansioiden sisältö">
-<!ENTITY sb.sort.warning "Huom: Tätä toimintoa ei voi kumota.">

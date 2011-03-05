@@ -1,5 +1,5 @@
 
-const ATOM_SERVICE = Components.classes['@mozilla.org/atom-service;1'].getService(Components.interfaces.nsIAtomService);
+const ATOM_SERVICE = Cc['@mozilla.org/atom-service;1'].getService(Ci.nsIAtomService);
 
 function sbCustomTreeView(aColIDs, aItems)
 {
@@ -37,8 +37,6 @@ sbCustomTreeView.prototype =
 	isSeparator : function(row){},
 	isSorted : function(row){},
 	canDrop : function(index, orient){},
-	canDropOn : function(index){},
-	canDropBeforeAfter : function(index, before){},
 	drop : function(index, orient){},
 	getParentIndex : function getParentIndex(index){ return -1; },
 	hasNextSibling : function(index, afterIndex){},

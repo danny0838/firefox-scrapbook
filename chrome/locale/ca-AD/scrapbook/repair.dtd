@@ -1,9 +1,0 @@
-<!ENTITY sb.repair.rdfFile "Restaura el fitxer scrapbook.rdf">
-<!ENTITY sb.repair.rdfFile.descript "Proveu-ho si l&apos;arbre de l&apos;ScrapBook ha desaparegut.">
-<!ENTITY sb.repair.rdfFile.select "Seleccioneu la còpia de seguretat que voleu restablir.">
-<!ENTITY sb.repair.rdfFile.file "Fitxer">
-<!ENTITY sb.repair.rdfFile.time "Data">
-<!ENTITY sb.repair.rdfFile.size "Mida">
-<!ENTITY sb.repair.favicons "Restaura les icones de l&apos;arbre">
-<!ENTITY sb.repair.favicons.descript "Proveu-ho si han desaparegut bastantes icones de l&apos;arbre.">
-<!ENTITY sb.repair.complete "La restauració ha acabat.">

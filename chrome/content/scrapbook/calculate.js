@@ -15,14 +15,13 @@ var sbCalcService = {
 
 	exec : function()
 	{
-		sbDataSource.init();
-		var resEnum = sbDataSource.data.GetAllResources();
+		var resEnum = ScrapBookData.dataSource.GetAllResources();
 		while ( resEnum.hasMoreElements() )
 		{
 			var res = resEnum.getNext();
-			if ( !sbDataSource.isContainer(res) ) this.total++;
+			if ( !ScrapBookData.isContainer(res) ) this.total++;
 		}
-		var dataDir = sbCommonUtils.getScrapBookDir().clone();
+		var dataDir = ScrapBookUtils.getScrapBookDir().clone();
 		dataDir.append("data");
 		this.dirEnum = dataDir.directoryEntries;
 		this.processAsync();
@@ -36,20 +35,20 @@ var sbCalcService = {
 			return;
 		}
 		this.count++;
-		var dir = this.dirEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
+		var dir = this.dirEnum.getNext().QueryInterface(Ci.nsIFile);
 		if ( dir.isDirectory() )
 		{
 			var id = dir.leafName;
 			var bytes = sbPropService.getTotalFileSize(id)[0];
 			this.grandSum += bytes;
-			var res   = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
-			var valid = sbDataSource.exists(res);
-			var icon  = sbDataSource.getProperty(res, "icon");
-			if ( !icon ) icon = sbCommonUtils.getDefaultIcon(sbDataSource.getProperty(res, "type"));
+			var res   = ScrapBookUtils.RDF.GetResource("urn:scrapbook:item" + id);
+			var valid = ScrapBookData.exists(res);
+			var icon  = ScrapBookData.getProperty(res, "icon");
+			if ( !icon ) icon = ScrapBookUtils.getDefaultIcon(ScrapBookData.getProperty(res, "type"));
 			this.treeItems.push([
 				id,
-				sbDataSource.getProperty(res, "type"),
-				sbDataSource.getProperty(res, "title"),
+				ScrapBookData.getProperty(res, "type"),
+				ScrapBookData.getProperty(res, "title"),
 				icon,
 				bytes,
 				sbPropService.formatFileSize(bytes),
@@ -113,14 +112,14 @@ var sbCalcService = {
 	checkDoubleEntries : function()
 	{
 		var hashTable = {};
-		var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"), 0, true);
+		var resList = ScrapBookData.flattenResources(ScrapBookUtils.RDF.GetResource("urn:scrapbook:root"), 0, true);
 		for ( var i = 0; i < resList.length; i++ )
 		{
 			if ( resList[i].Value in hashTable )
 			{
-				alert("ScrapBook WARNING: Found double entries.\n" + sbDataSource.getProperty(resList[i], "title"));
-				var parRes = sbDataSource.findParentResource(resList[i]);
-				if ( parRes ) sbDataSource.removeFromContainer(parRes.Value, resList[i]);
+				ScrapBookUtils.alert("WARNING: Found double entries.\n" + ScrapBookData.getProperty(resList[i], "title"));
+				var parRes = ScrapBookData.findParentResource(resList[i]);
+				if ( parRes ) ScrapBookData.removeFromContainer(parRes.Value, resList[i]);
 			}
 			hashTable[resList[i].Value] = true;
 		}
@@ -152,8 +151,8 @@ var sbCalcController = {
 
 	open : function(tabbed)
 	{
-		var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.CURRENT_TREEITEM[0]);
-		sbCommonUtils.loadURL(sbDataSource.getURL(res), tabbed);
+		var res = ScrapBookUtils.RDF.GetResource("urn:scrapbook:item" + this.CURRENT_TREEITEM[0]);
+		ScrapBookUtils.loadURL(ScrapBookData.getURL(res), tabbed);
 	},
 
 	remove : function()
@@ -161,7 +160,7 @@ var sbCalcController = {
 		if ( this.CURRENT_TREEITEM[6] ) return;
 		var id = this.CURRENT_TREEITEM[0];
 		if ( id.length != 14 ) return;
-		if ( sbCommonUtils.removeDirSafety(sbCommonUtils.getContentDir(id), true) )
+		if ( ScrapBookUtils.removeDirSafety(ScrapBookUtils.getContentDir(id), true) )
 		{
 			sbCalcService.treeItems.splice(sbCalcService.TREE.currentIndex, 1);
 			sbCalcService.initTree();
@@ -174,7 +173,7 @@ var sbCalcController = {
 		switch ( aCommand )
 		{
 			case "P" : window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome" ,id); break;
-			case "L" : sbController.launch(sbCommonUtils.getContentDir(id));
+			case "L" : sbController.launch(ScrapBookUtils.getContentDir(id));
 			default  : break;
 		}
 	},

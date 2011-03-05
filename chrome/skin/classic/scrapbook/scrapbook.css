@@ -193,16 +193,17 @@ sidebarheader toolbarbutton image,
 #sbSearchImage {
 	max-width : 24px !important;
 	max-height: 16px !important;
-	margin : 2px !important;
-	padding: 0px !important;
+	-moz-margin-end : 3px;
 	background-image: url('chrome://scrapbook/skin/dropdown.png');
+	cursor: default;
 }
 
 
 /* ::::: COMMON ::::: */
 
 treechildren::-moz-tree-drop-feedback {
-	width: 80px;
+	width: 10000px;
+	margin-left: -100px;
 }
 
 tab {

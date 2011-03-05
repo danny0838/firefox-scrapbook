@@ -23,14 +23,12 @@
         buttonlabelextra2="&sb.capture.alltabs;"
         onload="sbMultipleService.init();"
         ondialogaccept="sbMultipleService.done();"
-        ondialogextra2="window.opener.top.sbMenuHandler.execCaptureAllTabs(sbFolderSelector2.resURI); window.close();"
+        ondialogextra2="window.opener.top.ScrapBookMenuHandler.execCaptureAllTabs(sbFolderSelector2.resURI); window.close();"
         windowtype="scrapbook">
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/folderPicker.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/multiple.js" />
-
-	<stringbundle id="sbMainString" src="chrome://scrapbook/locale/scrapbook.properties" />
 
 	<grid style="margin-top:3px;">
 		<columns>

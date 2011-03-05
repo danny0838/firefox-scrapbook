@@ -1,5 +1,0 @@
-<!ENTITY sb.trade.import "Importa">
-<!ENTITY sb.trade.export "Exporta">
-<!ENTITY sb.trade.time "Data d&apos;exportació">
-<!ENTITY sb.trade.restore "Restaura l&apos;estructura de les carpetes">
-<!ENTITY sb.trade.remove "Suprimeix els fitxers després de la importació">

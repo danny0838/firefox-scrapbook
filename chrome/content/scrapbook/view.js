@@ -1,7 +1,6 @@
 
 var gID;
 var gRes;
-var sbDataSource;
 
 
 
@@ -10,38 +9,35 @@ function SB_initView()
 	document.location.search.match(/\?id\=(\d{14})$/);
 	gID = RegExp.$1;
 	if ( !gID ) return;
-	var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
-	if ( !win ) return;
-	sbDataSource = win.sbDataSource;
-	gRes = sbCommonUtils.RDF.GetResource(gID ? "urn:scrapbook:item" + gID : "urn:scrapbook:root");
-	if ( !sbDataSource.isContainer(gRes) )
+	gRes = ScrapBookUtils.RDF.GetResource(gID ? "urn:scrapbook:item" + gID : "urn:scrapbook:root");
+	if ( !ScrapBookData.isContainer(gRes) )
 	{
-		window.location.href = sbDataSource.getURL(gRes);
+		window.location.href = ScrapBookData.getURL(gRes);
 		return;
 	}
 
 
-	var src = SB_getHTMLHead(sbDataSource.getProperty(gRes, "title"));
+	var src = SB_getHTMLHead(ScrapBookData.getProperty(gRes, "title"));
 
-	var resList = sbDataSource.flattenResources(gRes, 2, false);
+	var resList = ScrapBookData.flattenResources(gRes, 2, false);
 	for ( var i = 0; i < resList.length; i++ )
 	{
 		var res = resList[i];
-		if (sbDataSource.getProperty(res, "type") == "separator")
+		if (ScrapBookData.getProperty(res, "type") == "separator")
 			continue;
-		var item = sbCommonUtils.newItem();
-		for ( var prop in item ) item[prop] = sbDataSource.getProperty(res, prop);
-		if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(sbDataSource.getProperty(res, "type"));
+		var item = ScrapBookData.newItem(null);
+		for ( var prop in item ) item[prop] = ScrapBookData.getProperty(res, prop);
+		if ( !item.icon ) item.icon = ScrapBookUtils.getDefaultIcon(ScrapBookData.getProperty(res, "type"));
 		src += SB_getHTMLBody(item);
 	}
 
 	src += SB_getHTMLFoot();
 
-	var file = sbCommonUtils.getScrapBookDir().clone();
+	var file = ScrapBookUtils.getScrapBookDir().clone();
 	file.append("collection.html");
 	if ( !file.exists() ) file.create(file.NORMAL_FILE_TYPE, 0666);
-	sbCommonUtils.writeFile(file, src, "UTF-8");
-	var filePath = sbCommonUtils.IO.newFileURI(file).spec;
+	ScrapBookUtils.writeFile(file, src, "UTF-8");
+	var filePath = ScrapBookUtils.IO.newFileURI(file).spec;
 	window.location.href = filePath;
 }
 
@@ -65,8 +61,8 @@ function SB_getHTMLBody(aItem)
 {
 	var src = "";
 	src += '<cite class="scrapbook-header">\n';
-	src += '\t<img src="' + (aItem.icon ? aItem.icon : sbCommonUtils.getDefaultIcon(aItem.type)) + '" width="16" height="16">\n';
-	src += '\t<a href="' + aItem.source + '" target="_top">' + sbCommonUtils.crop(aItem.title, 100) + '</a>\n';
+	src += '\t<img src="' + (aItem.icon ? aItem.icon : ScrapBookUtils.getDefaultIcon(aItem.type)) + '" width="16" height="16">\n';
+	src += '\t<a href="' + aItem.source + '" target="_top">' + ScrapBookUtils.crop(aItem.title, 100) + '</a>\n';
 	src += '</cite>\n';
 	if ( aItem.type != "bookmark" ) src += '<iframe class="scrapbook-iframe" src="./data/' + aItem.id + '/index.html" onload="this.setAttribute(\'style\', \'height:\' + (this.contentDocument.height || 600 + 30));"></iframe>\n';
 	return src;

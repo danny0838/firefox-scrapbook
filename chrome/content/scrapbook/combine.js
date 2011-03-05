@@ -1,7 +1,4 @@
 
-var sbCommonUtils;
-var sbDataSource;
-
 var sbCombineService = {
 
 
@@ -20,28 +17,6 @@ var sbCombineService = {
 	prefix  : "",
 	postfix : "",
 
-	dropObserver : 
-	{
-		getSupportedFlavours : function()
-		{
-			var flavours = new FlavourSet();
-			flavours.appendFlavour("moz/rdfitem");
-			return flavours;
-		},
-		onDragOver : function(event, flavour, session) {},
-		onDragExit : function(event, session) {},
-		onDrop     : function(event, transferData, session)
-		{
-			var idxList = window.top.sbTreeHandler.getSelection(false, 2);
-			idxList.forEach(function(aIdx)
-			{
-				var res    = window.top.sbTreeHandler.TREE.builderView.getResourceAtIndex(aIdx);
-				var parRes = window.top.sbTreeHandler.getParentResource(aIdx);
-				sbCombineService.add(res, parRes);
-			});
-		},
-	},
-
 
 	init : function()
 	{
@@ -52,8 +27,6 @@ var sbCombineService = {
 			return;
 		}
 		window.top.document.getElementById("mbToolbarButton").disabled = true;
-		sbCommonUtils = window.top.sbCommonUtils;
-		sbDataSource  = window.top.sbDataSource;
 		this.index = 0;
 		sbFolderSelector2.init();
 		this.WIZARD.getButton("back").onclick = function(){ sbCombineService.undo(); };
@@ -69,17 +42,17 @@ var sbCombineService = {
 	add : function(aRes, aParRes)
 	{
 		if ( this.resList.indexOf(aRes) != -1 ) return;
-		var type = sbDataSource.getProperty(aRes, "type");
+		var type = ScrapBookData.getProperty(aRes, "type");
 		if (type == "folder" || type == "separator")
 			return;
 		if (type == "site")
-			alert(this.STRING.getString("WARN_ABOUT_INDEPTH"));
-		var icon = sbDataSource.getProperty(aRes, "icon");
-		if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
-		var listItem = this.LISTBOX.appendItem(sbDataSource.getProperty(aRes, "title"));
+			ScrapBookUtils.alert(this.STRING.getString("WARN_ABOUT_INDEPTH"));
+		var icon = ScrapBookData.getProperty(aRes, "icon");
+		if ( !icon ) icon = ScrapBookUtils.getDefaultIcon(type);
+		var listItem = this.LISTBOX.appendItem(ScrapBookData.getProperty(aRes, "title"));
 		listItem.setAttribute("class", "listitem-iconic");
 		listItem.setAttribute("image", icon);
-		this.idList.push(sbDataSource.getProperty(aRes, "id"));
+		this.idList.push(ScrapBookData.getProperty(aRes, "id"));
 		this.resList.push(aRes);
 		this.parList.push(aParRes);
 		this.updateButtons();
@@ -121,12 +94,12 @@ var sbCombineService = {
 		if ( this.index < this.idList.length )
 		{
 			this.prefix  = "(" + (this.index + 1) + "/" + this.idList.length + ") ";
-			this.postfix = sbDataSource.getProperty(this.resList[this.index], "title");
-			var type = sbDataSource.getProperty(this.resList[this.index], "type");
+			this.postfix = ScrapBookData.getProperty(this.resList[this.index], "title");
+			var type = ScrapBookData.getProperty(this.resList[this.index], "type");
 			if  ( type == "file" || type == "bookmark" )
 				sbPageCombiner.exec(type);
 			else
-				sbInvisibleBrowser.load(sbCommonUtils.getBaseHref(sbDataSource.data.URI) + "data/" + this.curID + "/index.html");
+				sbInvisibleBrowser.load(ScrapBookUtils.getBaseHref(ScrapBookData.dataSource.URI) + "data/" + this.curID + "/index.html");
 		}
 		else
 		{
@@ -138,14 +111,14 @@ var sbCombineService = {
 
 	donePreview : function()
 	{
-		var htmlFile = sbCommonUtils.getScrapBookDir();
+		var htmlFile = ScrapBookUtils.getScrapBookDir();
 		htmlFile.append("combine.html");
-		sbCommonUtils.writeFile(htmlFile, sbPageCombiner.htmlSrc, "UTF-8");
-		var cssFile = sbCommonUtils.getScrapBookDir();
+		ScrapBookUtils.writeFile(htmlFile, sbPageCombiner.htmlSrc, "UTF-8");
+		var cssFile = ScrapBookUtils.getScrapBookDir();
 		cssFile.append("combine.css");
-		sbCommonUtils.writeFile(cssFile, sbPageCombiner.cssText, "UTF-8");
+		ScrapBookUtils.writeFile(cssFile, sbPageCombiner.cssText, "UTF-8");
 		sbInvisibleBrowser.refreshEvent(function(){ sbCombineService.showBrowser(); });
-		sbInvisibleBrowser.load(sbCommonUtils.convertFilePathToURL(htmlFile.path));
+		sbInvisibleBrowser.load(ScrapBookUtils.convertFilePathToURL(htmlFile.path));
 	},
 
 	showBrowser : function()
@@ -172,20 +145,37 @@ var sbCombineService = {
 
 	onCombineComplete : function(aItem)
 	{
-		var newRes = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id);
-		sbDataSource.setProperty(newRes, "type", "combine");
-		sbDataSource.setProperty(newRes, "source", sbDataSource.getProperty(this.resList[0], "source"));
-		var newIcon = sbDataSource.getProperty(this.resList[0], "icon");
-		if ( newIcon.match(/\d{14}/) ) newIcon = "resource://scrapbook/data/" + aItem.id + "/" + sbCommonUtils.getFileName(newIcon);
-		sbDataSource.setProperty(newRes, "icon", newIcon);
+		var newRes = ScrapBookUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id);
+		ScrapBookData.setProperty(newRes, "type", "combine");
+		ScrapBookData.setProperty(newRes, "source", ScrapBookData.getProperty(this.resList[0], "source"));
+		var newIcon = ScrapBookData.getProperty(this.resList[0], "icon");
+		if ( newIcon.match(/\d{14}/) ) newIcon = "resource://scrapbook/data/" + aItem.id + "/" + ScrapBookUtils.getFileName(newIcon);
+		ScrapBookData.setProperty(newRes, "icon", newIcon);
 		var newComment = "";
 		for ( var i = 0; i < this.resList.length; i++ )
 		{
-			var comment = sbDataSource.getProperty(this.resList[i], "comment");
+			var comment = ScrapBookData.getProperty(this.resList[i], "comment");
 			if ( comment ) newComment += comment + " __BR__ ";
 		}
-		if ( newComment ) sbDataSource.setProperty(newRes, "comment", newComment);
+		if ( newComment ) ScrapBookData.setProperty(newRes, "comment", newComment);
 		return newRes;
+	},
+
+	onDragOver: function(event) {
+		if (event.dataTransfer.types.contains("moz/rdfitem"))
+			event.preventDefault();
+	},
+
+	onDrop: function(event) {
+		event.preventDefault();
+		if (!event.dataTransfer.types.contains("moz/rdfitem"))
+			return;
+		var idxs = window.top.sbTreeUI.getSelection(false, 2);
+		idxs.forEach(function(idx) {
+			var res    = window.top.sbTreeUI.TREE.builderView.getResourceAtIndex(idx);
+			var parRes = window.top.sbTreeUI.getParentResource(idx);
+			sbCombineService.add(res, parRes);
+		});
 	},
 
 };
@@ -212,7 +202,7 @@ var sbPageCombiner = {
 			this.htmlSrc += '<html><head>';
 			this.htmlSrc += '<meta http-equiv="Content-Type" content="text/html;Charset=UTF-8">';
 			this.htmlSrc += '<meta http-equiv="Content-Style-Type" content="text/css">';
-			this.htmlSrc += '<title>' + sbDataSource.getProperty(sbCombineService.curRes, "title") + '</title>';
+			this.htmlSrc += '<title>' + ScrapBookData.getProperty(sbCombineService.curRes, "title") + '</title>';
 			this.htmlSrc += '<link rel="stylesheet" href="combine.css" media="all">';
 			this.htmlSrc += '<link rel="stylesheet" href="chrome://scrapbook/skin/combine.css" media="all">';
 			this.htmlSrc += '<link rel="stylesheet" href="chrome://scrapbook/skin/annotation.css" media="all">';
@@ -241,26 +231,26 @@ var sbPageCombiner = {
 	getCiteHTML : function(aType)
 	{
 		var src   = '\n<!--' + sbCombineService.postfix + '-->\n';
-		var title = sbCommonUtils.crop(sbDataSource.getProperty(sbCombineService.curRes, "title") , 100);
+		var title = ScrapBookUtils.crop(ScrapBookData.getProperty(sbCombineService.curRes, "title") , 100);
 		var linkURL = "";
 		switch ( aType )
 		{
 			case "file" :
-				var htmlFile = sbCommonUtils.getContentDir(sbCombineService.curID);
+				var htmlFile = ScrapBookUtils.getContentDir(sbCombineService.curID);
 				htmlFile.append("index.html");
-				var isMatch = sbCommonUtils.readFile(htmlFile).match(/URL=\.\/([^\"]+)\"/);
+				var isMatch = ScrapBookUtils.readFile(htmlFile).match(/URL=\.\/([^\"]+)\"/);
 				if ( isMatch ) linkURL = "./data/" + sbCombineService.curID + "/" + RegExp.$1;
 				break;
 			case "note" :
 				linkURL = ""; break;
 			default :
-				linkURL = sbDataSource.getProperty(sbCombineService.curRes, "source"); break;
+				linkURL = ScrapBookData.getProperty(sbCombineService.curRes, "source"); break;
 		}
-		var icon = sbDataSource.getProperty(sbCombineService.curRes, "icon");
-		if ( !icon ) icon = sbCommonUtils.getDefaultIcon(aType);
+		var icon = ScrapBookData.getProperty(sbCombineService.curRes, "icon");
+		if ( !icon ) icon = ScrapBookUtils.getDefaultIcon(aType);
 		if ( icon.indexOf("resource://") == 0 && icon.indexOf(sbCombineService.curID) > 0 )
 		{
-			icon = "./data/" + sbCombineService.curID + "/" + sbCommonUtils.getFileName(icon);
+			icon = "./data/" + sbCombineService.curID + "/" + ScrapBookUtils.getFileName(icon);
 		}
 		src += '<cite class="scrapbook-header' + '">\n';
 		src += '\t<img src="' + icon + '" width="16" height="16">\n';
@@ -273,7 +263,10 @@ var sbPageCombiner = {
 	{
 		if ( this.BODY.localName.toUpperCase() != "BODY" )
 		{
-			alert(sbCombineService.STRING.getString("CANNOT_COMBINE_FRAMES") + "\n" + sbDataSource.getProperty(sbCombineService.curRes, "title"));
+			ScrapBookUtils.alert(
+				sbCombineService.STRING.getString("CANNOT_COMBINE_FRAMES") + "\n" + 
+				ScrapBookData.getProperty(sbCombineService.curRes, "title")
+			);
 			this.BROWSER.stop();
 			window.location.reload();
 		}
@@ -386,7 +379,7 @@ var sbPageCombiner = {
 	{
 		if ( aNode.getAttribute(aAttr) )
 		{
-			aNode.setAttribute(aAttr, sbCommonUtils.resolveURL(this.BROWSER.currentURI.spec, aNode.getAttribute(aAttr)));
+			aNode.setAttribute(aAttr, ScrapBookUtils.resolveURL(this.BROWSER.currentURI.spec, aNode.getAttribute(aAttr)));
 		}
 		return aNode;
 	},
@@ -403,20 +396,20 @@ sbCaptureObserverCallback.onCaptureComplete = function(aItem)
 	{
 		if ( sbCombineService.resList.length != sbCombineService.parList.length ) return;
 		var rmIDs = window.top.sbController.removeInternal(sbCombineService.resList, sbCombineService.parList);
-		if ( rmIDs ) SB_trace(window.top.sbMainService.STRING.getFormattedString("ITEMS_REMOVED", [rmIDs.length]));
+		if ( rmIDs ) SB_trace(ScrapBookUtils.getLocaleString("ITEMS_REMOVED", [rmIDs.length]));
 	}
 	SB_fireNotification(aItem);
 	setTimeout(function()
 	{
-		window.top.sbManageService.toggleRightPane("sbToolbarCombine");
-		window.top.sbMainService.locate(newRes);
+		window.top.sbManageUI.toggleRightPane("sbToolbarCombine");
+		window.top.sbMainUI.locate(newRes);
 	}, 500);
 }
 
 
 sbInvisibleBrowser.onStateChange = function(aWebProgress, aRequest, aStateFlags, aStatus)
 {
-	if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
+	if ( aStateFlags & Ci.nsIWebProgressListener.STATE_START )
 	{
 		SB_trace(sbCaptureTask.STRING.getString("LOADING") + "... " + sbCombineService.prefix + (++this.fileCount) + " " + sbCombineService.postfix);
 	}

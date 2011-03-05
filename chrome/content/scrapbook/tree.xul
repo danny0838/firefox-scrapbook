@@ -1,6 +1,5 @@
 <?xml version="1.0" ?>
 
-<!-- [Firefox3.1] -->
 <?xml-stylesheet href="chrome://browser/skin/places/places.css" type="text/css"?>
 
 <!DOCTYPE overlay SYSTEM "chrome://scrapbook/locale/tree.dtd">
@@ -8,38 +7,26 @@
 <overlay id="sbTreeOverlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-	<script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapbook.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/tree.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/mbService.js" />
 
-	<broadcasterset id="sbBroadcasters">
-		<broadcaster id="sbToggleListView" type="checkbox" autoCheck="false" persist="checked lastRef" tooltiptext="&sb.listview;" />
-	</broadcasterset>
-
-	<keyset id="sbGenericKeys">
-		<key keycode="VK_ESCAPE" oncommand="window.close();"/>
-		<key keycode="VK_F5"     oncommand="window.location.reload();"/>
-	</keyset>
-
 	<popupset id="sbPopupSet">
-		<popup id="sbPopup" onpopupshowing="sbController.onPopupShowing(event);"
-		       onmouseover="if (event.originalTarget.getAttribute('nodelay')) document.getElementById('sbPopupToolsMenu').hidePopup();">
+		<menupopup id="sbPopup" onpopupshowing="sbController.onPopupShowing(event);"
+		           onmouseover="if (event.originalTarget.getAttribute('nodelay')) document.getElementById('sbPopupToolsMenu').hidePopup();">
 			<menuitem id="sbPopupOpen"       label="&sb.open;"        nodelay="true" oncommand="sbController.open(null,false);" default="true" />
 			<menuitem id="sbPopupOpenTab"    label="&sb.open.tab;"    nodelay="true" oncommand="sbController.open(null,true);" hidden="true" />
 			<menuitem id="sbPopupOpenNewTab" label="&sb.open.newtab;" nodelay="true" oncommand="sbController.open(null,true);" />
 			<menuitem id="sbPopupOpenSource" label="&sb.open.source;" nodelay="true" oncommand="sbController.forward(null,'S');"
 			          onclick="if (event.button != 1) return; this.parentNode.hidePopup(); sbController.forward(null,'S',true);" />
-			<menuitem id="sbPopupListView"     label="&sb.listview;"       oncommand="sbListHandler.init(null);"         hidden="true" />
 			<menuitem id="sbPopupCombinedView" label="&sb.folder.combine;" oncommand="sbController.forward(null,'C');"   hidden="true" />
 			<menuitem id="sbPopupOpenAllItems" label="&sb.folder.openall;" oncommand="sbController.openAllInTabs(null);" hidden="true" />
 			<menuseparator hidden="true" />
 			<menu id="sbPopupTools" label="&sb.tools;" onmouseover="event.stopPropagation();">
 				<menupopup id="sbPopupToolsMenu">
 					<menuitem id="sbPopupShowFiles" label="&sb.show.files;" oncommand="sbController.forward(null,'L');" />
-					<menuitem id="sbPopupSend"      label="&sb.move;..."    oncommand="sbController.isTreeContext ? sbTreeHandler.send() : sbListHandler.doCommand('send');" />
+					<menuitem id="sbPopupSend"      label="&sb.move;..."    oncommand="sbTreeUI.send()" />
 					<menuseparator />
 					<menuitem id="sbPopupRenew" class="menuitem-iconic" label="&sb.renew;..." oncommand="sbController.renew(null, true);" onclick="if (event.button == 1) sbController.renew(null, false);" />
 					<menuseparator />
@@ -49,52 +36,46 @@
 			<menuitem id="sbPopupManage" label="&sb.folder.manage;..." oncommand="sbController.forward(null,'M');" hidden="true" />
 			<menuitem id="sbPopupSort"   label="&sb.sort.folder;..."   oncommand="sbController.forward(null,'Z');" hidden="true" />
 			<menuseparator />
-			<menuitem id="sbPopupNewFolder"    class="menuitem-iconic sb-create" label="&sb.new.folder;..." oncommand="sbMainService.createFolder();" />
-			<menuitem id="sbPopupNewSeparator" class="menuitem-iconic sb-create" label="&sb.new.separator;" oncommand="sbMainService.createSeparator();" />
-			<menuitem id="sbPopupNewNote"      class="menuitem-iconic sb-create" label="&sb.new.note;"      oncommand="sbMainService.createNote();" />
+			<menuitem id="sbPopupNewFolder"    class="menuitem-iconic sb-create" label="&sb.new.folder;..." oncommand="sbMainUI.createFolder();" />
+			<menuitem id="sbPopupNewSeparator" class="menuitem-iconic sb-create" label="&sb.new.separator;" oncommand="sbMainUI.createSeparator();" />
+			<menuitem id="sbPopupNewNote"      class="menuitem-iconic sb-create" label="&sb.new.note;"      oncommand="sbMainUI.createNote();" />
 			<menuseparator />
-			<menuitem id="sbPopupRemove"    class="menuitem-iconic" label="&sb.remove;"   oncommand="sbController.isTreeContext ? sbTreeHandler.remove() : sbListHandler.doCommand('remove');" />
+			<menuitem id="sbPopupRemove"    class="menuitem-iconic" label="&sb.remove;"   oncommand="sbTreeUI.remove();" />
 			<menuseparator />
 			<menuitem id="sbPopupProperty"  class="menuitem-iconic" label="&sb.property;" oncommand="sbController.forward(null,'P');" />
-		</popup>
-		<popup id="sbSearchPopup" onpopupshowing="sbSearchService.populatePopup(); document.getElementById('sbSearchTextbox').select();" position="after_start">
-			<menuitem id="sbSearchPopupF" label="&sb.search.fulltext;" type="radio" oncommand="sbSearchService.change('fulltext');" />
+		</menupopup>
+		<menupopup id="sbSearchPopup" onpopupshowing="sbSearchUI.onPopupShowing(event);" position="after_start">
+			<menuitem label="&sb.search.fulltext;" type="radio" searchtype="fulltext" oncommand="sbSearchUI.changeType('fulltext');" />
 			<menuseparator />
-			<menuitem id="sbSearchPopupT" label="&sb.prop.title;"   type="radio" oncommand="sbSearchService.change('title');" />
-			<menuitem id="sbSearchPopupC" label="&sb.prop.comment;" type="radio" oncommand="sbSearchService.change('comment');" />
-			<menuitem id="sbSearchPopupS" label="URL"               type="radio" oncommand="sbSearchService.change('source');" />
-			<menuitem id="sbSearchPopupI" label="&sb.prop.id.date;" type="radio" oncommand="sbSearchService.change('id');" />
-			<menuitem id="sbSearchPopupA" label="&sb.search.all;"   type="radio" oncommand="sbSearchService.change('all');" />
+			<menuitem label="&sb.prop.title;"   type="radio" searchtype="title"   oncommand="sbSearchUI.changeType('title');" />
+			<menuitem label="&sb.prop.comment;" type="radio" searchtype="comment" oncommand="sbSearchUI.changeType('comment');" />
+			<menuitem label="URL"               type="radio" searchtype="source"  oncommand="sbSearchUI.changeType('source');" />
+			<menuitem label="&sb.prop.id.date;" type="radio" searchtype="id"      oncommand="sbSearchUI.changeType('id');" />
+			<menuitem label="&sb.search.all;"   type="radio" searchtype="all"     oncommand="sbSearchUI.changeType('all');" />
 			<menuseparator />
 			<menuitem id="sbSearchPopupOptionRE" label="&sb.search.re;" type="checkbox" persist="checked" />
 			<menuitem id="sbSearchPopupOptionCS" label="&sb.search.cs;" type="checkbox" persist="checked" />
 			<menuseparator />
 			<menu label="&sb.tools;">
 				<menupopup>
-					<menuitem label="&sb.search.days;..." oncommand="sbSearchService.filterByDays();" />
-					<menuitem label="&sb.search.cache;"   oncommand="sbSearchService.buildFT();" />
-					<menuitem label="&sb.search.clear;"   oncommand="sbSearchService.clearFormHistory();" />
+					<menuitem label="&sb.search.days;..." oncommand="sbSearchUI.promptForDaysFilter();" />
+					<menuitem label="&sb.search.cache;"   oncommand="sbSearchUI.updateCache();" />
 				</menupopup>
 			</menu>
-		</popup>
+		</menupopup>
 	</popupset>
 
 	<toolbar id="sbSearchToolbar" align="center">
 		<textbox id="sbSearchTextbox"
-		         type="autocomplete"
-		         autocompletesearch="form-history"
-		         autocompletesearchparam="sbSearchHistory"
-		         ontextentered="sbSearchService.enter(this.value);"
-		         enablehistory="true"
-		         tabscrolling="true"
+		         type="search"
+		         onkeypress="sbSearchUI.onKeyPress(event);"
+		         oncommand="sbSearchUI.onCommand(this.value);"
 		         accesskey="S"
 		         flex="1">
 			<image id="sbSearchImage"
-			       src="chrome://scrapbook/skin/search_fulltext.png"
-			       searchtype="fulltext"
 			       persist="searchtype"
 			       popup="sbSearchPopup"
-			       onclick="if ( event.button == 1 ) sbSearchService.enter(this.parentNode.value);" />
+			       onclick="if (event.button == 1) sbSearchUI.onCommand(this.parentNode.value);" />
 		</textbox>
 	</toolbar>
 
@@ -121,49 +102,12 @@
 		</template>
 	</tree>
 
-	<vbox id="sbListOuter">
-		<sidebarheader id="sbListHeader" align="center">
-			<label flex="1" crop="end" />
-			<spacer flex="1" />
-			<toolbarbutton id="sbListMoveUpButton" style="-moz-appearance:none;" oncommand="sbListHandler.goUpperLevel();" />
-			<toolbarbutton id="sbListPickerButton" style="-moz-appearance:none;" type="menu" oncommand="sbListHandler.refresh(true);" >
-				<menupopup id="sbListPickerMenuPopup">
-					<menuitem id="sbListToggleTitle"   label="&sb.prop.title;"   type="checkbox" checked="true" disabled="true" />
-					<menuitem id="sbListToggleComment" label="&sb.prop.comment;" type="checkbox" persist="checked" />
-					<menuitem id="sbListToggleSource"  label="URL"               type="checkbox" persist="checked" />
-				</menupopup>
-			</toolbarbutton>
-			<toolbarbutton class="sb-header-exit" oncommand="sbListHandler.quit(true);" />
-		</sidebarheader>
-		<richlistbox id="sbList"
-		             datasources="rdf:null"
-		             contextmenu="sbPopup"
-		             onclick="sbListHandler.onClick(event);"
-		             onkeypress="sbListHandler.onKeyPress(event);"
-		             flex="1">
-			<template>
-				<rule iscontainer="false">
-					<richlistitem uri="rdf:*" class="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type">
-						<vbox>
-							<image class="sblist-icon" src="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon" />
-						</vbox>
-						<vbox id="sbListTemplateBox">
-							<label id="sbListTemplateTitle"   class="sblist-title"   value="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title" />
-							<label id="sbListTemplateComment" class="sblist-comment" value="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#comment" />
-							<label id="sbListTemplateSource"  class="sblist-source"  value="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#source" />
-						</vbox>
-					</richlistitem>
-				</rule>
-			</template>
-		</richlistbox>
-	</vbox>
-
-	<toolbarbutton id="mbToolbarButton" type="menu" tooltiptext="Multi-ScrapBook" onpopupshowing="sbMultiBookService.initMenu();" hidden="true">
-		<menupopup id="mbMenuPopup" oncommand="sbMultiBookService.change(event.originalTarget);">
+	<toolbarbutton id="mbToolbarButton" type="menu" tooltiptext="Multi-ScrapBook" onpopupshowing="sbMultiBookUI.initMenu();" hidden="true">
+		<menupopup id="mbMenuPopup" oncommand="sbMultiBookUI.change(event.originalTarget);">
 			<menuitem id="mbMenuItem" type="radio" autocheck="false" hidden="true" />
 			<menuitem id="mbMenuItemDefault" label="&mb.profileFolder;" type="radio" autocheck="false" />
 			<menuseparator />
-			<menuitem label="&mb.manage;..." oncommand="sbMultiBookService.config(); event.stopPropagation();" />
+			<menuitem label="&mb.manage;..." oncommand="sbMultiBookUI.config(); event.stopPropagation();" />
 		</menupopup>
 	</toolbarbutton>
 

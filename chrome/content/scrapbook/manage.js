@@ -1,33 +1,21 @@
 
-var sbManageService = {
+var sbManageUI = {
 
 	moduleID : "",
 
 	treeColumnState : [],
 
-	init : function()
-	{
-		if ( window.arguments )
-		{
-			if ( window.arguments[0] )
-			{
-				sbTreeHandler.TREE.ref = window.arguments[0].Value;
-				document.title = sbDataSource.getProperty(window.arguments[0], "title");
-				sbSearchService.treeRef = sbTreeHandler.TREE.ref;
+	init: function() {
+		if (window.arguments) {
+			if (window.arguments[0]) {
+				document.getElementById("sbTree").setAttribute("ref", window.arguments[0].Value);
+				document.title = ScrapBookData.getProperty(window.arguments[0], "title");
 			}
-			if ( window.arguments[1] )
-			{
+			if (window.arguments[1])
 				this.toggleRightPane(window.arguments[1]);
-			}
 		}
 		document.getElementById("sbTreeColTitle").setAttribute("hideheader", "false");
 		window.focus();
-		document.getElementById("sbSearchTextbox").focus();
-	},
-
-	ensureContextIsTree : function()
-	{
-		return sbTreeHandler.TREE.treeBoxObject.focused && !sbListHandler.enabled;
 	},
 
 	toggleRightPane : function(aModuleElt)
@@ -59,11 +47,11 @@ var sbManageService = {
 	getTreeSelection : function()
 	{
 		var arg1 = [], arg2 = [];
-		var idxList = sbTreeHandler.getSelection(false, 2);
+		var idxList = sbTreeUI.getSelection(false, 2);
 		idxList.forEach(function(aIdx)
 		{
-			arg1.push(sbTreeHandler.TREE.builderView.getResourceAtIndex(aIdx));
-			arg2.push(sbTreeHandler.getParentResource(aIdx));
+			arg1.push(sbTreeUI.TREE.builderView.getResourceAtIndex(aIdx));
+			arg2.push(sbTreeUI.getParentResource(aIdx));
 		});
 		return [arg1, arg2];
 	},

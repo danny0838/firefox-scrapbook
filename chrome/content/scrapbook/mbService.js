@@ -1,33 +1,29 @@
 
-var sbMultiBookService = {
+var sbMultiBookUI = {
 
 	enabled: false,
 	file: null,
 
 	showButton: function()
 	{
-		this.enabled = sbCommonUtils.getBoolPref("scrapbook.multibook.enabled", false);
+		this.enabled = ScrapBookUtils.getPref("multibook.enabled");
 		document.getElementById("mbToolbarButton").hidden = !this.enabled;
 	},
 
-	showTitle: function()
+	showSidebarTitle: function()
 	{
-		if (!this.enabled)
+		var elt = window.top.document.getElementById("sidebar-title");
+		if (!elt)
 			return;
-		var win = "sbBrowserOverlay" in window.top ? window.top : sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
-		var title = win.sbBrowserOverlay.dataTitle;
-		if (!title) {
-			title = sbCommonUtils.copyUnicharPref("scrapbook.data.title", "");
-			win.sbBrowserOverlay.dataTitle = title;
-		}
-		if (title)
-			win.document.getElementById("sidebar-title").value = "ScrapBook [" + title + "]";
+		elt.value = this.enabled
+		          ? "ScrapBook [" + ScrapBookUtils.getPref("data.title") + "]"
+		          : "ScrapBook";
 	},
 
 	initMenu : function()
 	{
-		var isDefault = sbCommonUtils.getBoolPref("scrapbook.data.default", true);
-		var dataPath  = sbCommonUtils.copyUnicharPref("scrapbook.data.path", "");
+		var isDefault = ScrapBookUtils.getPref("data.default");
+		var dataPath  = ScrapBookUtils.getPref("data.path");
 		var popup = document.getElementById("mbMenuPopup");
 		if (!this.file) {
 			var items = this.initFile();
@@ -51,17 +47,17 @@ var sbMultiBookService = {
 
 	initFile : function()
 	{
-		this.file = sbCommonUtils.DIR.get("ProfD", Components.interfaces.nsIFile).clone();
+		this.file = ScrapBookUtils.DIR.get("ProfD", Ci.nsIFile).clone();
 		this.file.append("ScrapBook");
 		this.file.append("multibook.txt");
 		if (!this.file.exists()) {
 			this.file.create(this.file.NORMAL_FILE_TYPE, 0666);
-			var path = sbCommonUtils.copyUnicharPref("scrapbook.data.path", "");
+			var path = ScrapBookUtils.getPref("data.path");
 			if (path)
-				sbCommonUtils.writeFile(this.file, "My ScrapBook\t" + path + "\n", "UTF-8");
+				ScrapBookUtils.writeFile(this.file, "My ScrapBook\t" + path + "\n", "UTF-8");
 		}
 		var ret = [];
-		var lines = sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(this.file), "UTF-8").split("\n");
+		var lines = ScrapBookUtils.convertToUnicode(ScrapBookUtils.readFile(this.file), "UTF-8").split("\n");
 		for (var i = 0; i < lines.length; i++) {
 			var item = lines[i].replace(/\r|\n/g, "").split("\t");
 			if (item.length == 2)
@@ -76,53 +72,28 @@ var sbMultiBookService = {
 			return;
 		aItem.setAttribute("checked", true);
 		var path = aItem.getAttribute("path");
-		sbCommonUtils.setBoolPref("scrapbook.data.default", path == "");
+		ScrapBookUtils.setPref("data.default", path == "");
 		if (path != "")
-			sbCommonUtils.setUnicharPref("scrapbook.data.path", path);
-		sbCommonUtils.setUnicharPref("scrapbook.data.title", aItem.label);
-		try {
-			var refWin = "sbBrowserOverlay" in window.top ? window.top : window.opener.top;
-			refWin.sbBrowserOverlay.dataTitle = aItem.label;
-		} catch(ex) {
-		}
-		this.refreshGlobal();
-		sbMainService.refresh();
+			ScrapBookUtils.setPref("data.path", path);
+		ScrapBookUtils.setPref("data.title", aItem.label);
 	},
 
 
 	validateRefresh: function(aQuietWarning)
 	{
-		const Cc = Components.classes;
-		const Ci = Components.interfaces;
-		var winEnum = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator)
-		              .getEnumerator("scrapbook");
+		var winEnum = ScrapBookUtils.WINDOW.getEnumerator("scrapbook");
 		while (winEnum.hasMoreElements()) {
 			var win = winEnum.getNext().QueryInterface(Ci.nsIDOMWindow);
 			if (win != window) {
-				if (!aQuietWarning)
-					alert(document.getElementById("sbMainString").getString("MB_CLOSE_WINDOW") + "\n[" + win.title + "]");
+				if (!aQuietWarning) {
+					var text = ScrapBookUtils.getLocaleString("MB_CLOSE_WINDOW")
+					         + "\n[" + win.document.title + "]";
+					ScrapBookUtils.alert(text);
+				}
 				return false;
 			}
 		}
 		return true;
-	},
-
-	refreshGlobal: function()
-	{
-		const Cc = Components.classes;
-		const Ci = Components.interfaces;
-		var winEnum = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator)
-		              .getEnumerator("navigator:browser");
-		while (winEnum.hasMoreElements()) {
-			var win = winEnum.getNext().QueryInterface(Ci.nsIDOMWindow);
-			try {
-				win.sbBrowserOverlay.refresh();
-				win.sbBrowserOverlay.onLocationChange(win.gBrowser.currentURI.spec);
-				win.document.getElementById("sidebar").contentWindow.sbMainService.refresh();
-			}
-			catch (ex) {
-			}
-		}
 	},
 
 	config: function()

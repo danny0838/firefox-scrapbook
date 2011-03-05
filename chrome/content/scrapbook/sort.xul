@@ -16,10 +16,7 @@
         windowtype="scrapbook">
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/sort.js" />
-
-	<stringbundle id="sbMainString" src="chrome://scrapbook/locale/scrapbook.properties" />
 
 	<wizardpage pageid="sbSortStartPage" label="&sb.sort;">
 		<radiogroup id="sbSortRadioGroup" persist="sortIndex">

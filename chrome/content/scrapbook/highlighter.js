@@ -30,7 +30,7 @@ var sbHighlighter = {
 		document.getElementById("ScrapBookHighlighter" + idx).setAttribute("checked", "true");
 		for ( idx = 4; idx > 0; idx-- )
 		{
-			var cssText = sbCommonUtils.copyUnicharPref("scrapbook.highlighter.style." + idx, this.PRESET_STYLES[idx]);
+			var cssText = ScrapBookUtils.getPref("highlighter.style." + idx, this.PRESET_STYLES[idx]);
 			this.decorateElement(document.getElementById("ScrapBookHighlighter" + idx), cssText);
 		}
 	},
@@ -57,7 +57,7 @@ var sbHighlighter = {
 
 			if ( aNodeName == "a" && !sameNode )
 			{
-				alert("ScrapBook ERROR: Can't attach link across tags."); return;
+				ScrapBookUtils.alert("ERROR: Can't attach link across tags."); return;
 			}
 
 			if ( ! sameNode || ! this._isTextNode( startC ) ) { 

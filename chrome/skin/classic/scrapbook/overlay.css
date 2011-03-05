@@ -8,8 +8,10 @@
 	list-style-image: url("chrome://scrapbook/skin/main_24.png");
 }
 
-toolbar[iconsize="small"] #scrapbook-button {
+toolbar[iconsize="small"] #scrapbook-button > .toolbarbutton-icon {
 	list-style-image: url("chrome://scrapbook/skin/main_16.png");
+	width: 16px;
+	height: 16px;
 }
 
 

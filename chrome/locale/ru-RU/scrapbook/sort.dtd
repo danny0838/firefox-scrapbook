@@ -1,8 +1,0 @@
-<!ENTITY sb.sort "Сортировка каталогов">
-<!ENTITY sb.sort.reverse "В обратном порядке">
-<!ENTITY sb.sort.title.asc "По заголовкам (А &gt; Я)">
-<!ENTITY sb.sort.title.desc "По заголовкам (Я &gt; А)">
-<!ENTITY sb.sort.date.asc "В хронологическом порядке">
-<!ENTITY sb.sort.date.desc "В обратном хронологическом порядке">
-<!ENTITY sb.sort.recursive "Сортировать подкаталоги рекурсивно">
-<!ENTITY sb.sort.warning "Внимание: Выполнение данной операции отменить невозможно.">

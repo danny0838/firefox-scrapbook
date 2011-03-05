@@ -19,11 +19,10 @@ var sbPropService = {
 		this.id = window.arguments[0];
 		if (!this.id)
 			return;
-		sbDataSource.init();
-		this.item = sbCommonUtils.newItem();
-		this.resource = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.id);
+		this.item = ScrapBookData.newItem(this.id);
+		this.resource = ScrapBookUtils.RDF.GetResource("urn:scrapbook:item" + this.id);
 		for (var prop in this.item) {
-			this.item[prop] = sbDataSource.getProperty(this.resource, prop);
+			this.item[prop] = ScrapBookData.getProperty(this.resource, prop);
 		}
 		this.id.match(/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/);
 		var dd = new Date(
@@ -38,9 +37,9 @@ var sbPropService = {
 		document.getElementById("sbPropChars").value   = this.item.chars;
 		document.getElementById("sbPropComment").value = this.item.comment.replace(/ __BR__ /g, "\n");
 		document.getElementById("sbPropMark").setAttribute("checked", this.item.type == "marked");
-		this.ICON.src = this.item.icon ? this.item.icon : sbCommonUtils.getDefaultIcon(this.item.type);
+		this.ICON.src = this.item.icon ? this.item.icon : ScrapBookUtils.getDefaultIcon(this.item.type);
 		document.title = this.item.title;
-		if (sbDataSource.isContainer(this.resource))
+		if (ScrapBookData.isContainer(this.resource))
 			this.item.type = "folder";
 		var bundleName = "TYPE_PAGE";
 		switch (this.item.type) {
@@ -81,7 +80,7 @@ var sbPropService = {
 		var newVals = {
 			title   : document.getElementById("sbPropTitle").value,
 			source  : document.getElementById("sbPropSource").value,
-			comment : sbCommonUtils.escapeComment(document.getElementById("sbPropComment").value),
+			comment : ScrapBookUtils.escapeComment(document.getElementById("sbPropComment").value),
 			type    : this.item.type,
 			icon    : this.getIconURL()
 		};
@@ -97,11 +96,10 @@ var sbPropService = {
 		}
 		if (changed) {
 			for (var prop in this.item)  {
-				sbDataSource.setProperty(this.resource, prop, this.item[prop]);
+				ScrapBookData.setProperty(this.resource, prop, this.item[prop]);
 			}
 			if (!this.isTypeFolder && !this.isTypeBookmark && !this.isTypeSeparator)
-				sbCommonUtils.writeIndexDat(this.item);
-			sbDataSource.flush();
+				ScrapBookUtils.writeIndexDat(this.item);
 		}
 		if (window.arguments[1])
 			window.arguments[1].accept = true;
@@ -123,7 +121,7 @@ var sbPropService = {
 
 	setDefaultIcon : function()
 	{
-		this.ICON.src = sbCommonUtils.getDefaultIcon(this.item.type);
+		this.ICON.src = ScrapBookUtils.getDefaultIcon(this.item.type);
 	},
 
 	getIconURL : function()
@@ -136,14 +134,14 @@ var sbPropService = {
 	{
 		var dir;
 		if ( aCommand == "F" ) {
-			dir = sbCommonUtils.getContentDir(this.item.id, true);
+			dir = ScrapBookUtils.getContentDir(this.item.id, true);
 			if ( !dir ) return;
 		} else {
-			dir = sbCommonUtils.getScrapBookDir().clone();
+			dir = ScrapBookUtils.getScrapBookDir().clone();
 			dir.append("icon");
 			if ( !dir.exists() ) dir.create(dir.DIRECTORY_TYPE, 0700);
 		}
-		var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
+		var FP = Cc['@mozilla.org/filepicker;1'].createInstance(Ci.nsIFilePicker);
 		FP.init(window, aPickerLabel, FP.modeOpen);
 		FP.displayDirectory = dir;
 		FP.appendFilters(FP.filterImages);
@@ -152,7 +150,7 @@ var sbPropService = {
 			var iconURL;
 			if      ( aCommand == "F" && dir.contains(FP.file, false) ) iconURL = "resource://scrapbook/data/" + this.id + "/" + FP.file.leafName;
 			else if ( aCommand == "U" && dir.contains(FP.file, false) ) iconURL = "resource://scrapbook/icon/" + FP.file.leafName;
-			else iconURL = sbCommonUtils.convertFilePathToURL(FP.file.path);
+			else iconURL = ScrapBookUtils.convertFilePathToURL(FP.file.path);
 			this.ICON.src = iconURL;
 		}
 	},
@@ -160,7 +158,7 @@ var sbPropService = {
 	setIconURL : function()
 	{
 		var ret = { value : this.getIconURL() };
-		if ( !sbCommonUtils.PROMPT.prompt(window, document.getElementById("sbPropIconMenu").label, "URL:", ret, null, {}) ) return;
+		if ( !ScrapBookUtils.PROMPT.prompt(window, "[ScrapBook]", "URL:", ret, null, {}) ) return;
 		if ( ret.value ) this.ICON.src = ret.value;
 	},
 
@@ -175,10 +173,10 @@ var sbPropService = {
 
 	getHTMLTitle : function(aID, aChars)
 	{
-		var file  = sbCommonUtils.getContentDir(aID, true);
+		var file  = ScrapBookUtils.getContentDir(aID, true);
 		if ( !file ) return "";
 		file.append("index.html");
-		var content = sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(file), aChars);
+		var content = ScrapBookUtils.convertToUnicode(ScrapBookUtils.readFile(file), aChars);
 		return content.match(/<title>([^<]+?)<\/title>/im) ? RegExp.$1 : "";
 	},
 
@@ -186,12 +184,12 @@ var sbPropService = {
 	{
 		var totalSize = 0;
 		var totalFile = 0;
-		var dir = sbCommonUtils.getContentDir(aID, true);
+		var dir = ScrapBookUtils.getContentDir(aID, true);
 		if ( !dir || !dir.isDirectory() ) return [0, 0];
 		var fileEnum = dir.directoryEntries;
 		while ( fileEnum.hasMoreElements() )
 		{
-			var file = fileEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
+			var file = fileEnum.getNext().QueryInterface(Ci.nsIFile);
 			totalSize += file.fileSize;
 			totalFile++;
 		}
