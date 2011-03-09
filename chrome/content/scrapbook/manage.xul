@@ -125,7 +125,7 @@
 			</vbox>
 		</vbox>
 		<splitter id="sbPaneSplitter" hidden="true" />
-		<browser id="sbRightPaneBrowser" type="content" onload="event.stopPropagation();" flex="5" hidden="true" persist="width" />
+		<browser id="sbRightPaneBrowser" type="chrome" onload="event.stopPropagation();" flex="5" hidden="true" persist="width" />
 	</hbox>
 
 	<statusbar id="status-bar" class="chromeclass-status">
