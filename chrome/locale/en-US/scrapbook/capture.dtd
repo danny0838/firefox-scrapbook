@@ -1,4 +1,4 @@
-<!ENTITY sb.capture "Capture">
+<!ENTITY sb.capture "Save">
 <!ENTITY sb.capture.abort "Abort">
 <!ENTITY sb.capture.start "Start">
 <!ENTITY sb.capture.retry "Retry">

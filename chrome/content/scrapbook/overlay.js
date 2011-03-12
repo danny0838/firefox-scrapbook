@@ -102,7 +102,7 @@ var ScrapBookBrowserOverlay = {
 	{
 		if (!aURL)
 			aURL = gBrowser.currentURI ? gBrowser.currentURI.spec : "";
-		var editable = (aURL.indexOf("resource://scrapbook/data/") == 0 && aURL.match(/\/data\/(\d{14})\//));
+		var editable = (aURL.indexOf("file") == 0 && aURL.match(/\/data\/(\d{14})\//));
 		return editable ? RegExp.$1 : null;
 	},
 
@@ -110,7 +110,7 @@ var ScrapBookBrowserOverlay = {
 	{
 		if (aURL && aURL != (gBrowser.currentURI ? gBrowser.currentURI.spec : ""))
 			return;
-		if (aURL.indexOf("resource://scrapbook/data/") != 0 && aURL == this.lastLocation)
+		if (aURL.indexOf("file") != 0 && aURL == this.lastLocation)
 			return;
 		var id = this.getID(aURL);
 		document.getElementById("ScrapBookToolbox").hidden = id ? false : true;

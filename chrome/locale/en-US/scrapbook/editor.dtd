@@ -16,8 +16,8 @@
 <!ENTITY sb.highlighter.remove "Clear Highlights in the Selection">
 <!ENTITY sb.highlighter.remove.all "Clear All Highlights">
 <!ENTITY sb.source "Open Source URL">
-<!ENTITY sb.renew "Capture Again">
-<!ENTITY sb.locate "Locate in Sidebar Tree">
+<!ENTITY sb.renew "Save Again">
+<!ENTITY sb.locate "Locate in Sidebar">
 <!ENTITY sb.indicators "Show Link Indicators">
 <!ENTITY sb.info.home "Home">
 <!ENTITY sb.info.sitemap "SiteMap">

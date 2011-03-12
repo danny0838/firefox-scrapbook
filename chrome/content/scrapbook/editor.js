@@ -297,7 +297,7 @@ var sbPageEditor = {
 	{
 		if ( !ScrapBookData.exists(ScrapBookBrowserOverlay.resource) ) { this.disable(true); return; }
 		var curURL = window.content.location.href;
-		if ( curURL.indexOf("resource://scrapbook/data/") != 0 || !curURL.match(/\/data\/(\d{14})\/(.+)$/) || RegExp.$1 != this.item.id || RegExp.$2 == "index.dat" || RegExp.$2 == "sitemap.xml" )
+		if ( curURL.indexOf("file://") != 0 || !curURL.match(/\/data\/(\d{14})\/(.+)$/) || RegExp.$1 != this.item.id || RegExp.$2 == "index.dat" || RegExp.$2 == "sitemap.xml" )
 		{
 			ScrapBookUtils.alert("ERROR: Cannot save file '" + RegExp.$2 + "'.");
 			return;

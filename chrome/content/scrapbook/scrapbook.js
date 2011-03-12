@@ -94,6 +94,7 @@ var sbMainUI = {
 		var newRes = ScrapBookData.addItem(newItem, tarResName, tarRelIdx);
 		ScrapBookData.createEmptySeq(newRes.Value);
 		ScrapBookUtils.refreshGlobal(false);
+		sbMainUI.rebuild();
 		if (isRootPos)
 			sbTreeUI.TREE.treeBoxObject.scrollToRow(0);
 		var idx = sbTreeUI.TREE.builderView.getIndexOfResource(newRes);
@@ -239,7 +240,7 @@ var sbController = {
 				return;
 			default :
 				ScrapBookUtils.loadURL(
-					"resource://scrapbook/data/" + id + "/index.html",
+					ScrapBookData.getURL(aRes),
 					aInTab || ScrapBookUtils.getPref("tabs.open")
 				);
 		}
@@ -490,6 +491,8 @@ var sbSearchUI = {
 	},
 
 	reset: function() {
+		if (!document.getElementById("sbMainToolbar"))
+			return;
 		document.getElementById("sbMainToolbar").hidden = false;
 		document.getElementById("sbSearchTextbox").value = "";
 		if (sbTreeUI.TREE.ref != "urn:scrapbook:search")

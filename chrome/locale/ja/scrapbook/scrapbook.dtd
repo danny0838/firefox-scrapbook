@@ -7,11 +7,11 @@
 <!ENTITY sb.tools.manage "管理">
 <!ENTITY sb.tools.combine "結合ウィザード">
 <!ENTITY sb.tools.trade "インポート/エクスポート">
-<!ENTITY sb.tools.multiple "URL一括取り込み">
-<!ENTITY sb.tools.directory "ScrapBookフォルダ">
+<!ENTITY sb.tools.multiple "URL一括保存">
+<!ENTITY sb.tools.directory "データ保存先フォルダ">
 <!ENTITY sb.tools.calculate "データサイズ計算">
 <!ENTITY sb.tools.sorttree "ツリー全体をソート">
-<!ENTITY sb.tools.output "ツリーのHTML出力">
+<!ENTITY sb.tools.output "HTML出力">
 <!ENTITY sb.tools.repair "緊急時の修復ツール">
 <!ENTITY sb.tools.addons "アドオン機能">
 <!ENTITY sb.note.opentab "タブで開く">

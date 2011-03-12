@@ -1,16 +1,16 @@
-<!ENTITY sb.capture.partial "Capture Selection">
-<!ENTITY sb.capture.partial.as "Capture Selection As">
-<!ENTITY sb.capture.entire "Capture Page">
-<!ENTITY sb.capture.entire.as "Capture Page As">
-<!ENTITY sb.capture.frame "Capture Frame">
-<!ENTITY sb.capture.frame.as "Capture Frame As">
-<!ENTITY sb.capture.target "Capture Link">
-<!ENTITY sb.capture.target.as "Capture Link As">
-<!ENTITY sb.capture.alltabs "Capture All Tabs">
-<!ENTITY sb.capture.bookmark "Bookmark with ScrapBook">
+<!ENTITY sb.capture.partial "Save Selection">
+<!ENTITY sb.capture.partial.as "Save Selection As">
+<!ENTITY sb.capture.entire "Save Page">
+<!ENTITY sb.capture.entire.as "Save Page As">
+<!ENTITY sb.capture.frame "Save Frame">
+<!ENTITY sb.capture.frame.as "Save Frame As">
+<!ENTITY sb.capture.target "Save Link">
+<!ENTITY sb.capture.target.as "Save Link As">
+<!ENTITY sb.capture.alltabs "Save All Tabs">
+<!ENTITY sb.capture.bookmark "Save As Bookmark">
 <!ENTITY sb.sidebar "Show in Sidebar">
 <!ENTITY sb.menu "Menu">
-<!ENTITY sb.editbefore "Edit Before Capture">
+<!ENTITY sb.editbefore "Edit Before Save">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">

@@ -6,7 +6,7 @@
 <!ENTITY sb.show.files "ファイルを表示">
 <!ENTITY sb.move "移動">
 <!ENTITY sb.move.into "フォルダへ移動">
-<!ENTITY sb.renew "再取り込み">
+<!ENTITY sb.renew "再保存">
 <!ENTITY sb.export "エクスポート">
 <!ENTITY sb.remove "削除">
 <!ENTITY sb.property "プロパティ">

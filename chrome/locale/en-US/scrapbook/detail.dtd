@@ -1,4 +1,4 @@
-<!ENTITY sb.detail "Capture Detail">
+<!ENTITY sb.detail "Save Detail">
 <!ENTITY sb.detail.new.folder "New Folder">
 <!ENTITY sb.detail.select.folder "Select Folder">
 <!ENTITY sb.detail.option "Options">
@@ -10,8 +10,8 @@
 <!ENTITY sb.detail.linked.movie "Movie">
 <!ENTITY sb.detail.linked.archive "Archive">
 <!ENTITY sb.detail.linked.custom "Custom">
-<!ENTITY sb.detail.linked.page "In-depth Capture">
+<!ENTITY sb.detail.linked.page "In-depth Save">
 <!ENTITY sb.detail.linked.page.depth "Depth to follow links">
-<!ENTITY sb.detail.linked.page.text "After completing captures, all pages will be linked each other and sitemap will be created.">
-<!ENTITY sb.detail.warnAboutRenew "NOTICE: &apos;Capture Again&apos; overwrites the previously saved page.">
+<!ENTITY sb.detail.linked.page.text "After completing saves, all pages will be linked each other.">
+<!ENTITY sb.detail.warnAboutRenew "NOTICE: &apos;Save Again&apos; overwrites the previously saved page.">
 <!ENTITY sb.detail.warnAboutScript "NOTICE: JavaScript may cause some problems.">

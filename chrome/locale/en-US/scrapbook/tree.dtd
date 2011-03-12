@@ -6,7 +6,7 @@
 <!ENTITY sb.show.files "Show Files">
 <!ENTITY sb.move "Move">
 <!ENTITY sb.move.into "Move into Folder">
-<!ENTITY sb.renew "Capture Again">
+<!ENTITY sb.renew "Save Again">
 <!ENTITY sb.export "Export">
 <!ENTITY sb.remove "Delete">
 <!ENTITY sb.property "Properties">

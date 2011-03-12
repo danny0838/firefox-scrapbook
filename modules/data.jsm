@@ -406,7 +406,7 @@ var ScrapBookData = {
 			case "folder"  : return "chrome://scrapbook/content/view.xul?id=" + id;
 			case "note"    : return "chrome://scrapbook/content/note.xul?id=" + id;
 			case "bookmark": return this.getProperty(aRes, "source");
-			default        : return "resource://scrapbook/data/" + id + "/index.html";
+			default        : return ScrapBookUtils.getBaseHref(this._dataSource.URI) + "data/" + id + "/index.html";
 		}
 	},
 
