@@ -274,6 +274,8 @@ var sbTreeUI = {
 
 
 	canDrop: function(row, orient, dataTransfer) {
+		if (!dataTransfer.types.contains("moz/rdfitem"))
+			return true;
 		var idxs = this.getSelection(false, 0);
 		for (var i = 0; i < idxs.length; i++) {
 			var idx = idxs[i];
@@ -441,7 +443,7 @@ var sbTreeUI = {
 	},
 
 	_getInsertionPoint: function(row, orient) {
-		if (row == -1)
+		if (row == -1 || row == -128)
 			return [this.TREE.ref, 0];
 		var tarRes = this.TREE.builderView.getResourceAtIndex(row);
 		var tarPar = (orient == 0) ? tarRes : this.getParentResource(row);
