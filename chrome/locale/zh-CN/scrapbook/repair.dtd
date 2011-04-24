@@ -1,0 +1,9 @@
+<!ENTITY sb.repair.rdfFile "恢复项目列表">
+<!ENTITY sb.repair.rdfFile.descript "如果项目列表突然无法正常显示，请尝试此选项。">
+<!ENTITY sb.repair.rdfFile.select "请选择一个备份文件进行恢复">
+<!ENTITY sb.repair.rdfFile.file "文件">
+<!ENTITY sb.repair.rdfFile.time "时间">
+<!ENTITY sb.repair.rdfFile.size "大小">
+<!ENTITY sb.repair.favicons "恢复个性化图标">
+<!ENTITY sb.repair.favicons.descript "如果项目列表中有大量个性化图标丢失，请尝试此选项。">
+<!ENTITY sb.repair.complete "完成。">

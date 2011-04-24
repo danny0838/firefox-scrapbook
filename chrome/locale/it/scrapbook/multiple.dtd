@@ -1,0 +1,8 @@
+<!ENTITY sb.multiple.url "URL (Inserire più URL linea per linea)">
+<!ENTITY sb.multiple.detector "Rilevatore URL">
+<!ENTITY sb.multiple.detector.plink "Tutti i link nella pagina">
+<!ENTITY sb.multiple.detector.slink "Tutti i link nella selezione">
+<!ENTITY sb.multiple.detector.tabs "Tutte le schede aperte nella finestra">
+<!ENTITY sb.multiple.detector.local "Tutti i file HTML in una cartella da selezionare…">
+<!ENTITY sb.multiple.detector.bookmarks "Segnalibri">
+<!ENTITY sb.multiple.detector.clear "Svuota">

@@ -1,0 +1,8 @@
+<!ENTITY sb.sort "Ordenar">
+<!ENTITY sb.sort.reverse "Orden Inverso">
+<!ENTITY sb.sort.title.asc "Ordenar por Título (A &gt; Z)">
+<!ENTITY sb.sort.title.desc "Ordenar por Título (Z &gt; A)">
+<!ENTITY sb.sort.date.asc "Cronológicamente">
+<!ENTITY sb.sort.date.desc "Cronológicamente-orden inverso">
+<!ENTITY sb.sort.recursive "Ordenar sub-carpetas recursivamente">
+<!ENTITY sb.sort.warning "Nota: esta operación no puede deshacerse.">

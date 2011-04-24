@@ -36,7 +36,7 @@
 		<checkbox preference="scrapbook.ui.contextMenu"    label="&sb.prefs.ui.contextMenu;"
 		          onsyncfrompreference="sbPrefWindow.updateGroupedUI('scrapbook.ui.contextMenu', 'contextmenu');" />
 		<checkbox preference="scrapbook.ui.contextSubMenu" label="&sb.prefs.ui.contextSubMenu; *" class="indent" group="contextmenu" />
-		<checkbox preference="scrapbook.ui.bookmarkMenu"   label="&sb.prefs.ui.bookmarkMenu;"     class="indent" group="contextmenu" />
+		<checkbox preference="scrapbook.ui.bookmarkMenu"   label="&sb.prefs.ui.bookmark;" class="indent" group="contextmenu" />
 		<hbox align="center">
 			<label value="&sb.prefs.ui.folderList.maxEntries.1;" class="indent" />
 			<textbox preference="scrapbook.ui.folderList.maxEntries" type="number" size="2" max="99" />

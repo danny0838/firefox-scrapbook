@@ -736,7 +736,8 @@ var sbAnnotationService = {
 		if ( aFlag == "L" )
 		{
 			var ret = {};
-			if ( !ScrapBookUtils.PROMPT.prompt(window, "[ScrapBook]", "URL:", ret, null, {}) ) return;
+			var text = ScrapBookUtils.getLocaleString("URL") + ":";
+			if ( !ScrapBookUtils.PROMPT.prompt(window, "[ScrapBook]", text, ret, null, {}) ) return;
 			if ( !ret.value ) return;
 			attr["href"] = ret.value;
 		}

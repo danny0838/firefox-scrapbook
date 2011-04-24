@@ -1,0 +1,20 @@
+<!ENTITY sb.hlCustom.preset "Estilos predefinidos">
+<!ENTITY sb.hlCustom.background "Fondo">
+<!ENTITY sb.hlCustom.color "Cor">
+<!ENTITY sb.hlCustom.text "Texto">
+<!ENTITY sb.hlCustom.bold "Negra">
+<!ENTITY sb.hlCustom.italic "Cursiva">
+<!ENTITY sb.hlCustom.line "Riscado">
+<!ENTITY sb.hlCustom.border "Bordo">
+<!ENTITY sb.hlCustom.type "Tipo">
+<!ENTITY sb.hlCustom.box "Marco">
+<!ENTITY sb.hlCustom.underline "Subliñado">
+<!ENTITY sb.hlCustom.style "Estilo">
+<!ENTITY sb.hlCustom.solid "Contínuo">
+<!ENTITY sb.hlCustom.dotted "Punteado">
+<!ENTITY sb.hlCustom.dashed "Guións">
+<!ENTITY sb.hlCustom.double "Dobre">
+<!ENTITY sb.hlCustom.width "Largura">
+<!ENTITY sb.hlCustom.thin "Fino">
+<!ENTITY sb.hlCustom.medium "Medio">
+<!ENTITY sb.hlCustom.thick "Groso">

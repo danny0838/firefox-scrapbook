@@ -14,7 +14,7 @@
 ]>
 
 <dialog id="sbDetailDialog"
-        title="ScrapBook - &sb.detail;"
+        title="ScrapBook - &sb.detail.title;"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         style="width: 400px;"
         persist="screenX screenY"
@@ -72,7 +72,7 @@
 					</hbox>
 				</groupbox>
 				<groupbox id="sbDetailInDepthBox" group="capture-options">
-					<caption label="&sb.detail.linked.page;" />
+					<caption label="&sb.detail.linked.page2;" />
 					<hbox align="center">
 						<label id="sbDetailInDepthLabel" value="&sb.detail.linked.page.depth;:" />
 						<radiogroup id="sbDetailInDepthRadioGroup" orient="horizontal" onselect="sbCaptureOptions.inDepth = this.selectedIndex;">

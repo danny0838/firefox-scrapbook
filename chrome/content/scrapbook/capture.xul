@@ -6,7 +6,7 @@
 <!DOCTYPE window SYSTEM "chrome://scrapbook/locale/capture.dtd">
 
 <window id="sbCaptureWindow"
-        title="&sb.capture; - ScrapBook"
+        title="&sb.save; - ScrapBook"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         style="width: 360px;"
         onload="SB_initCapture();"
@@ -29,23 +29,23 @@
 	<browser id="sbCaptureBrowser" type="content" collapsed="true" />
 
 	<hbox>
-		<toolbarbutton id="sbCaptureFilterButton" type="menu" label="&sb.capture.filter;" hidden="true">
+		<toolbarbutton id="sbCaptureFilterButton" type="menu" label="&sb.save.filter;" hidden="true">
 			<menupopup>
-				<menuitem type="radio" label="&sb.capture.filter.domain;"   oncommand="sbCaptureTask.applyFilter('D');" />
-				<menuitem type="radio" label="&sb.capture.filter.level;"    oncommand="sbCaptureTask.applyFilter('L');" />
-				<menuitem type="radio" label="&sb.capture.filter.string;"   oncommand="sbCaptureTask.applyFilter('S');" />
-				<menuitem type="radio" label="&sb.capture.filter.checkon;"  oncommand="sbCaptureTask.applyFilter('N');" checked="true" />
-				<menuitem type="radio" label="&sb.capture.filter.checkoff;" oncommand="sbCaptureTask.applyFilter('F');" />
+				<menuitem type="radio" label="&sb.save.filter.domain;"   oncommand="sbCaptureTask.applyFilter('D');" />
+				<menuitem type="radio" label="&sb.save.filter.level;"    oncommand="sbCaptureTask.applyFilter('L');" />
+				<menuitem type="radio" label="&sb.save.filter.string;"   oncommand="sbCaptureTask.applyFilter('S');" />
+				<menuitem type="radio" label="&sb.save.filter.checkon;"  oncommand="sbCaptureTask.applyFilter('N');" checked="true" />
+				<menuitem type="radio" label="&sb.save.filter.checkoff;" oncommand="sbCaptureTask.applyFilter('F');" />
 				<menuseparator />
-				<menuitem label="&sb.capture.filter.invert;" oncommand="sbCaptureTask.applyFilter('I');" />
+				<menuitem label="&sb.save.filter.invert;" oncommand="sbCaptureTask.applyFilter('I');" />
 			</menupopup>
 		</toolbarbutton>
 		<toolbarseparator hidden="true" />
-		<button id="sbCapturePauseButton" label="&sb.capture.pause;" oncommand="sbCaptureTask.pause();" />
-		<button id="sbCaptureStartButton" label="&sb.capture.start;" oncommand="sbCaptureTask.activate();" hidden="true" />
-		<button id="sbCaptureSkipButton"  label="&sb.capture.skip;"  oncommand="sbCaptureTask.next(true);" disabled="true" />
+		<button id="sbCapturePauseButton" label="&sb.save.pause;" oncommand="sbCaptureTask.pause();" />
+		<button id="sbCaptureStartButton" label="&sb.save.start;" oncommand="sbCaptureTask.activate();" hidden="true" />
+		<button id="sbCaptureSkipButton"  label="&sb.save.skip;"  oncommand="sbCaptureTask.next(true);" disabled="true" />
 		<spacer flex="1" />
-		<button label="&sb.capture.abort;" oncommand="sbCaptureTask.abort();" />
+		<button label="&sb.save.abort;" oncommand="sbCaptureTask.abort();" />
 	</hbox>
 
 </window>

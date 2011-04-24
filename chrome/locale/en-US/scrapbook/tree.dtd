@@ -11,6 +11,7 @@
 <!ENTITY sb.remove "Delete">
 <!ENTITY sb.property "Properties">
 <!ENTITY sb.prop.title "Title">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.comment "Comment">
 <!ENTITY sb.prop.id.date "ID (Time)">
 <!ENTITY sb.folder.combine "Combined View">

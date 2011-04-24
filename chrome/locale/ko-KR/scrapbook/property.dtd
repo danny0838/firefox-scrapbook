@@ -1,0 +1,13 @@
+<!ENTITY sb.prop.general "일반">
+<!ENTITY sb.prop.type "형식">
+<!ENTITY sb.prop.date "날짜">
+<!ENTITY sb.prop.encode "인코딩">
+<!ENTITY sb.prop.size "크기">
+<!ENTITY sb.prop.content "본문">
+<!ENTITY sb.prop.folder "폴더">
+<!ENTITY sb.prop.icon "아이콘">
+<!ENTITY sb.prop.icon.change "아이콘 변경">
+<!ENTITY sb.prop.icon.default "초기값">
+<!ENTITY sb.prop.icon.favicon "북마크 아이콘 선택">
+<!ENTITY sb.prop.icon.custom "사용자 아이콘 선택">
+<!ENTITY sb.prop.mark "표시">

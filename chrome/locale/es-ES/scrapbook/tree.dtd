@@ -1,0 +1,33 @@
+<!ENTITY sb.open "Abrir">
+<!ENTITY sb.open.tab "Abrir en pestaña">
+<!ENTITY sb.open.newtab "Abrir en una nueva pestaña">
+<!ENTITY sb.open.source "Abrir URL de origen">
+<!ENTITY sb.tools "Herramientas">
+<!ENTITY sb.show.files "Mostrar Ficheros">
+<!ENTITY sb.move "Mover">
+<!ENTITY sb.move.into "Mover a carpeta">
+<!ENTITY sb.renew "Capturar otra vez">
+<!ENTITY sb.export "Exportar">
+<!ENTITY sb.remove "Borrar">
+<!ENTITY sb.property "Propiedades">
+<!ENTITY sb.prop.title "Título">
+<!ENTITY sb.prop.url "URL">
+<!ENTITY sb.prop.comment "Comentario">
+<!ENTITY sb.prop.id.date "ID (Fecha)">
+<!ENTITY sb.folder.combine "Vista combinada">
+<!ENTITY sb.folder.openall "Abrir todo en pestañas">
+<!ENTITY sb.folder.manage "Administrar carpeta">
+<!ENTITY sb.new.folder "Nueva Carpeta">
+<!ENTITY sb.new.separator "Nuevo Separador">
+<!ENTITY sb.new.note "Nueva nota">
+<!ENTITY sb.sort.folder "Ordenar carpeta">
+<!ENTITY sb.search "Buscar">
+<!ENTITY sb.search.fulltext "Buscar en todo el texto">
+<!ENTITY sb.search.all "Todo">
+<!ENTITY sb.search.re "Usar RegExp">
+<!ENTITY sb.search.cs "Mayúsculas/minúsculas">
+<!ENTITY sb.search.cache "Actualizar caché al buscar en todo el texto">
+<!ENTITY sb.search.clear "Limpiar historial de búsqueda">
+<!ENTITY sb.search.days "Filtrar por días">
+<!ENTITY mb.manage "Manage">
+<!ENTITY mb.profileFolder "Carpeta de Perfiles">

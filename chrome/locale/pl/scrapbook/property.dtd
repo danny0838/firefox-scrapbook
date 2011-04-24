@@ -1,0 +1,13 @@
+<!ENTITY sb.prop.general "Informacje podstawowe">
+<!ENTITY sb.prop.type "Typ">
+<!ENTITY sb.prop.date "Data">
+<!ENTITY sb.prop.encode "Kodowanie">
+<!ENTITY sb.prop.size "Wielkość">
+<!ENTITY sb.prop.content "Zawartość">
+<!ENTITY sb.prop.folder "Folder">
+<!ENTITY sb.prop.icon "Ikona">
+<!ENTITY sb.prop.icon.change "Zmień">
+<!ENTITY sb.prop.icon.default "Domyślna">
+<!ENTITY sb.prop.icon.favicon "Wybierz ikonę">
+<!ENTITY sb.prop.icon.custom "Wybierz własną ikonę">
+<!ENTITY sb.prop.mark "Zaznacz">

@@ -1,0 +1,18 @@
+<!ENTITY sb.save.partial "Salvează selecția">
+<!ENTITY sb.save.partial.as "Salvează selecția ca">
+<!ENTITY sb.save.entire "Salvează pagina">
+<!ENTITY sb.save.entire.as "Salvează pagina ca">
+<!ENTITY sb.save.frame "Salvează cadrul">
+<!ENTITY sb.save.frame.as "Salvează cadrul ca">
+<!ENTITY sb.save.target "Salvează legătura">
+<!ENTITY sb.save.target.as "Salvează legătura ca">
+<!ENTITY sb.save.alltabs "Salvează toate filele">
+<!ENTITY sb.save.bookmark "Salvează ca semn de carte">
+<!ENTITY sb.sidebar "Afișează în panoul lateral">
+<!ENTITY sb.menu "Meniu">
+<!ENTITY sb.editbefore "Editează înaintea salvării">
+<!ENTITY sb.key.sidebar "K">
+<!ENTITY sb.key.menubar "B">
+<!ENTITY sb.key.save "P">
+<!ENTITY sb.key.save.as "G">
+<!ENTITY sb.key.bookmark "C">

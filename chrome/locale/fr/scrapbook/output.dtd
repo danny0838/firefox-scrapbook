@@ -1,0 +1,3 @@
+<!ENTITY sb.output.option.all "Sortie de l&apos;arborescence complète">
+<!ENTITY sb.output.option.frame "Sortie avec cadre">
+<!ENTITY sb.output.option.open "Après la sortie, ouvrir dans le navigateur">

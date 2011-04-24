@@ -46,7 +46,7 @@ var sbCombineService = {
 		if (type == "folder" || type == "separator")
 			return;
 		if (type == "site")
-			ScrapBookUtils.alert(this.STRING.getString("WARN_ABOUT_INDEPTH"));
+			ScrapBookUtils.alert(this.STRING.getString("WARN_ABOUT_INDEPTH2"));
 		var icon = ScrapBookData.getProperty(aRes, "icon");
 		if ( !icon ) icon = ScrapBookUtils.getDefaultIcon(type);
 		var listItem = this.LISTBOX.appendItem(ScrapBookData.getProperty(aRes, "title"));
@@ -133,7 +133,7 @@ var sbCombineService = {
 	{
 		this.WIZARD.getButton("finish").disabled = true;
 		this.toggleElements(true);
-		SB_trace(sbCaptureTask.STRING.getString("CAPTURE_START"));
+		SB_trace(sbCaptureTask.STRING.getString("SAVE_START"));
 		setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null); }, 0);
 	},
 

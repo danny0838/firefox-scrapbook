@@ -1,0 +1,13 @@
+<!ENTITY sb.save "Tallenna">
+<!ENTITY sb.save.abort "Keskeytä">
+<!ENTITY sb.save.start "Aloita">
+<!ENTITY sb.save.retry "Yritä uudelleen">
+<!ENTITY sb.save.skip "Ohita">
+<!ENTITY sb.save.pause "Pysäytä">
+<!ENTITY sb.save.filter "Suodata">
+<!ENTITY sb.save.filter.domain "Rajoita domainiin">
+<!ENTITY sb.save.filter.level "Rajoita kansioon">
+<!ENTITY sb.save.filter.string "Suodata merkkijonolla...">
+<!ENTITY sb.save.filter.checkon "Kaikki mukaan">
+<!ENTITY sb.save.filter.checkoff "Kaikki pois">
+<!ENTITY sb.save.filter.invert "Merkitse käänteisesti">

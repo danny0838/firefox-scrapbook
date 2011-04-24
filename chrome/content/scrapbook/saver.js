@@ -823,12 +823,12 @@ var sbCaptureObserverCallback = {
 
 	onDownloadComplete : function(aItem)
 	{
-		this.trace(this.getString("CAPTURE") + "... (" + sbContentSaver.httpTask[aItem.id] + ") " + aItem.title);
+		this.trace(this.getString("SAVE") + "... (" + sbContentSaver.httpTask[aItem.id] + ") " + aItem.title);
 	},
 
 	onAllDownloadsComplete : function(aItem)
 	{
-		this.trace(this.getString("CAPTURE_COMPLETE") + ": " + aItem.title);
+		this.trace(this.getString("SAVE_COMPLETE") + ": " + aItem.title);
 		this.onCaptureComplete(aItem);
 	},
 
@@ -844,7 +844,7 @@ var sbCaptureObserverCallback = {
 		{
 			var icon = aItem.icon ? "resource://scrapbook/data/" + aItem.id + "/" + aItem.icon
 			         : ScrapBookUtils.getDefaultIcon();
-			var title = "ScrapBook: " + this.getString("CAPTURE_COMPLETE");
+			var title = "ScrapBook: " + this.getString("SAVE_COMPLETE");
 			var text = ScrapBookUtils.crop(aItem.title, 40);
 			var listener = {
 				observe: function(subject, topic, data) {

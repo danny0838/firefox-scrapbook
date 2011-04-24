@@ -50,7 +50,7 @@ var sbPropService = {
 			case "file"     : 
 			case "image"    : this.isTypeFile      = true; bundleName = "TYPE_FILE";      break;
 			case "combine"  : this.isTypeSite      = true; bundleName = "TYPE_COMBINE";   break;
-			case "site"     : this.isTypeSite      = true; bundleName = "TYPE_INDEPTH";   break;
+			case "site"     : this.isTypeSite      = true; bundleName = "TYPE_INDEPTH2";  break;
 		}
 		document.getElementById("sbPropType").value = this.STRING.getString(bundleName);
 		document.getElementById("sbPropSourceRow").hidden = this.isTypeFolder || this.isTypeNote || this.isTypeSeparator;
@@ -158,7 +158,8 @@ var sbPropService = {
 	setIconURL : function()
 	{
 		var ret = { value : this.getIconURL() };
-		if ( !ScrapBookUtils.PROMPT.prompt(window, "[ScrapBook]", "URL:", ret, null, {}) ) return;
+		var text = ScrapBookUtils.getLocaleString("URL") +":";
+		if ( !ScrapBookUtils.PROMPT.prompt(window, "[ScrapBook]", text, ret, null, {}) ) return;
 		if ( ret.value ) this.ICON.src = ret.value;
 	},
 

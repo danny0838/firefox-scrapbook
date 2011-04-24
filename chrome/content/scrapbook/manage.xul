@@ -73,7 +73,7 @@
 							class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title"
 							persist="width hidden ordinal" />
 						<splitter class="tree-splitter" />
-						<treecol id="sbTreeColSource" flex="2" label="URL"
+						<treecol id="sbTreeColSource" flex="2" label="&sb.prop.url;"
 							class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#source"
 							persist="width hidden ordinal" />
 						<splitter class="tree-splitter" />

@@ -1,4 +1,4 @@
-<!ENTITY sb.detail "保存の詳細">
+<!ENTITY sb.detail.title "保存の詳細">
 <!ENTITY sb.detail.new.folder "新しいフォルダ">
 <!ENTITY sb.detail.select.folder "フォルダの選択">
 <!ENTITY sb.detail.option "オプション">
@@ -10,7 +10,7 @@
 <!ENTITY sb.detail.linked.movie "ムービー">
 <!ENTITY sb.detail.linked.archive "アーカイブ">
 <!ENTITY sb.detail.linked.custom "カスタム">
-<!ENTITY sb.detail.linked.page "掘り下げ保存">
+<!ENTITY sb.detail.linked.page2 "掘り下げ保存">
 <!ENTITY sb.detail.linked.page.depth "リンクをたどる深さ">
 <!ENTITY sb.detail.linked.page.text "保存完了後、すべてのページは相互にリンクされ、サイトマップが生成されます。">
 <!ENTITY sb.detail.warnAboutRenew "注意: 再保存を行うと元のページに上書きされます。">

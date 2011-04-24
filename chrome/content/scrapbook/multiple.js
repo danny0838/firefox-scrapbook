@@ -7,7 +7,7 @@ var sbMultipleService = {
 	init : function()
 	{
 		document.documentElement.buttons = "accept,cancel,extra2";
-		document.documentElement.getButton("accept").label = ScrapBookUtils.getLocaleString("CAPTURE_OK_BUTTON");
+		document.documentElement.getButton("accept").label = ScrapBookUtils.getLocaleString("SAVE_OK_BUTTON");
 		document.documentElement.getButton("accept").accesskey = "C";
 		this.TEXTBOX.focus();
 		sbFolderSelector2.init();

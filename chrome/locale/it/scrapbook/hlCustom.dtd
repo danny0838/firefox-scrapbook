@@ -1,0 +1,20 @@
+<!ENTITY sb.hlCustom.preset "Preimposta gli stili">
+<!ENTITY sb.hlCustom.background "Sfondo">
+<!ENTITY sb.hlCustom.color "Colore">
+<!ENTITY sb.hlCustom.text "Testo">
+<!ENTITY sb.hlCustom.bold "Grassetto">
+<!ENTITY sb.hlCustom.italic "Corsivo">
+<!ENTITY sb.hlCustom.line "Barrato">
+<!ENTITY sb.hlCustom.border "Bordo">
+<!ENTITY sb.hlCustom.type "Tipo">
+<!ENTITY sb.hlCustom.box "Riquadro">
+<!ENTITY sb.hlCustom.underline "Sottolineato">
+<!ENTITY sb.hlCustom.style "Stile">
+<!ENTITY sb.hlCustom.solid "Solido">
+<!ENTITY sb.hlCustom.dotted "Punteggiato">
+<!ENTITY sb.hlCustom.dashed "Tratteggiato">
+<!ENTITY sb.hlCustom.double "Doppio">
+<!ENTITY sb.hlCustom.width "Larghezza">
+<!ENTITY sb.hlCustom.thin "Sottile">
+<!ENTITY sb.hlCustom.medium "Media">
+<!ENTITY sb.hlCustom.thick "Spessa">

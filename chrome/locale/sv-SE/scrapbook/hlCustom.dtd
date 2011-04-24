@@ -1,0 +1,20 @@
+<!ENTITY sb.hlCustom.preset "Förinställt format">
+<!ENTITY sb.hlCustom.background "Bakgrund">
+<!ENTITY sb.hlCustom.color "Färg">
+<!ENTITY sb.hlCustom.text "Text">
+<!ENTITY sb.hlCustom.bold "Fet">
+<!ENTITY sb.hlCustom.italic "Kursiv">
+<!ENTITY sb.hlCustom.line "Genomstruken">
+<!ENTITY sb.hlCustom.border "Kantlinje">
+<!ENTITY sb.hlCustom.type "Typ">
+<!ENTITY sb.hlCustom.box "Inramning">
+<!ENTITY sb.hlCustom.underline "Understrykning">
+<!ENTITY sb.hlCustom.style "Format">
+<!ENTITY sb.hlCustom.solid "Heldragen">
+<!ENTITY sb.hlCustom.dotted "Prickad">
+<!ENTITY sb.hlCustom.dashed "Streckad">
+<!ENTITY sb.hlCustom.double "Dubbel linje">
+<!ENTITY sb.hlCustom.width "Bredd">
+<!ENTITY sb.hlCustom.thin "Tunn">
+<!ENTITY sb.hlCustom.medium "Medeltjock">
+<!ENTITY sb.hlCustom.thick "Tjock">

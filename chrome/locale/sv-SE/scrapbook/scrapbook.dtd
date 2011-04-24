@@ -1,0 +1,18 @@
+<!ENTITY sb.new.folder "Ny mapp">
+<!ENTITY sb.new.separator "Ny avgränsare">
+<!ENTITY sb.new.note "Ny anteckning">
+<!ENTITY sb.toggle.all "Öppna/Stäng alla mappar">
+<!ENTITY sb.tools "Verktyg">
+<!ENTITY sb.tools.options "Inställningar">
+<!ENTITY sb.tools.manage "Hantera">
+<!ENTITY sb.tools.combine "Kombineringsguiden">
+<!ENTITY sb.tools.trade "Importera/Exportera">
+<!ENTITY sb.tools.multiple "Spara flera URL:er">
+<!ENTITY sb.tools.directory "Öppna ScrapBook-mappen">
+<!ENTITY sb.tools.calculate "Beräkning av storlek">
+<!ENTITY sb.tools.sorttree "Sortera hela trädet">
+<!ENTITY sb.tools.output "Formatera utgående träddata som HTML">
+<!ENTITY sb.tools.repair "Nödreparation">
+<!ENTITY sb.tools.addons "Tilläggsfunktioner">
+<!ENTITY sb.note.opentab "Öppna in flik">
+<!ENTITY sb.note.close "Stäng">

@@ -1,0 +1,9 @@
+<!ENTITY sb.repair.rdfFile "Restaurează „scrapbook.rdf”">
+<!ENTITY sb.repair.rdfFile.descript "Încercați această procedură dacă arborele de dosare ScrapBook dispare brusc.">
+<!ENTITY sb.repair.rdfFile.select "Selectați un fișier arhivă pentru restaurare.">
+<!ENTITY sb.repair.rdfFile.file "Fișier">
+<!ENTITY sb.repair.rdfFile.time "Data modificării">
+<!ENTITY sb.repair.rdfFile.size "Dimensiune">
+<!ENTITY sb.repair.favicons "Restaurează pictogramele favicon în arborele de dosare">
+<!ENTITY sb.repair.favicons.descript "Încercați această procedură dacă mai multe pictograme favicon din arborele de dosare ScrapBook au dispărut.">
+<!ENTITY sb.repair.complete "Procedura a fost finalizată.">

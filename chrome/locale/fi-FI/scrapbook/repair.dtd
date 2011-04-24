@@ -1,0 +1,9 @@
+<!ENTITY sb.repair.rdfFile "Palauta scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript "Tämä toiminto voi auttaa, jos sivupuu yhtäkkiä häviää.">
+<!ENTITY sb.repair.rdfFile.select "Valitse varmuuskopiotiedosto, josta palautetaan.">
+<!ENTITY sb.repair.rdfFile.file "Tiedosto">
+<!ENTITY sb.repair.rdfFile.time "Päiväys">
+<!ENTITY sb.repair.rdfFile.size "Koko">
+<!ENTITY sb.repair.favicons "Palauta puun suosikkikuvakkeet">
+<!ENTITY sb.repair.favicons.descript "Tämä toiminto voi auttaa, jos useita suosikkikuvakkeita puuttuu sivupuusta.">
+<!ENTITY sb.repair.complete "Valmis.">

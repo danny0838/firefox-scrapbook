@@ -1,0 +1,13 @@
+<!ENTITY sb.save "저장">
+<!ENTITY sb.save.abort "취소">
+<!ENTITY sb.save.start "시작">
+<!ENTITY sb.save.retry "재시도">
+<!ENTITY sb.save.skip "건너뛰기">
+<!ENTITY sb.save.pause "일시정지">
+<!ENTITY sb.save.filter "필터">
+<!ENTITY sb.save.filter.domain "도메인 제한">
+<!ENTITY sb.save.filter.level "디렉토리 제한">
+<!ENTITY sb.save.filter.string "문자열 필터...">
+<!ENTITY sb.save.filter.checkon "모두 선택">
+<!ENTITY sb.save.filter.checkoff "모두 해제">
+<!ENTITY sb.save.filter.invert "선택 반전">

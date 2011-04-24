@@ -1,0 +1,33 @@
+<!ENTITY sb.open "Deschide">
+<!ENTITY sb.open.tab "Deschide într-o filă">
+<!ENTITY sb.open.newtab "Deschide într-o filă nouă">
+<!ENTITY sb.open.source "Deschide adresa sursei">
+<!ENTITY sb.tools "Unelte">
+<!ENTITY sb.show.files "Afișează fișierele">
+<!ENTITY sb.move "Mută">
+<!ENTITY sb.move.into "Mută în dosar">
+<!ENTITY sb.renew "Salvează din nou">
+<!ENTITY sb.export "Exportă">
+<!ENTITY sb.remove "Șterge">
+<!ENTITY sb.property "Proprietăți">
+<!ENTITY sb.prop.title "Denumire">
+<!ENTITY sb.prop.url "Adresă">
+<!ENTITY sb.prop.comment "Comentariu">
+<!ENTITY sb.prop.id.date "ID (Dată-oră)">
+<!ENTITY sb.folder.combine "Vizualizează combinat">
+<!ENTITY sb.folder.openall "Deschide totul în file">
+<!ENTITY sb.folder.manage "Gestionează dosarul">
+<!ENTITY sb.new.folder "Dosar nou">
+<!ENTITY sb.new.separator "Separator nou">
+<!ENTITY sb.new.note "Notă nouă">
+<!ENTITY sb.sort.folder "Sortează dosarul">
+<!ENTITY sb.search "Caută">
+<!ENTITY sb.search.fulltext "Caută în tot conținutul">
+<!ENTITY sb.search.all "Toate">
+<!ENTITY sb.search.re "Utilizează expresii regulate">
+<!ENTITY sb.search.cs "Ține cont de majuscule și minuscule">
+<!ENTITY sb.search.cache "Actualizează memoria cache pentru căutare în tot conținutul">
+<!ENTITY sb.search.clear "Șterge istoricul">
+<!ENTITY sb.search.days "Filtrează după zile">
+<!ENTITY mb.manage "Gestionează">
+<!ENTITY mb.profileFolder "Dosar profil">

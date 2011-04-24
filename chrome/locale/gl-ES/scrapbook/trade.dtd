@@ -1,0 +1,5 @@
+<!ENTITY sb.trade.import "Importar">
+<!ENTITY sb.trade.export "Exportar">
+<!ENTITY sb.trade.time "Data de exportación">
+<!ENTITY sb.trade.restore "Importar restaurando a estrutura do cartafol">
+<!ENTITY sb.trade.remove "Eliminar os ficheiros despois de os importar">

@@ -365,7 +365,7 @@ var sbInvisibleBrowser = {
 
 	execCapture : function()
 	{
-		SB_trace(sbCaptureTask.STRING.getString("CAPTURE_START"));
+		SB_trace(sbCaptureTask.STRING.getString("SAVE_START"));
 		document.getElementById("sbCapturePauseButton").disabled = true;
 		sbCaptureTask.toggleSkipButton(false);
 		var ret = null;
@@ -418,7 +418,7 @@ var sbInvisibleBrowser = {
 		else
 		{
 			if ( gShowDetail ) window.close();
-			SB_trace(sbCaptureTask.STRING.getString("CAPTURE_ABORT"));
+			SB_trace(sbCaptureTask.STRING.getString("SAVE_ABORT"));
 			sbCaptureTask.fail("");
 		}
 	},

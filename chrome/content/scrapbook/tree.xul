@@ -49,7 +49,7 @@
 			<menuseparator />
 			<menuitem label="&sb.prop.title;"   type="radio" searchtype="title"   oncommand="sbSearchUI.changeType('title');" />
 			<menuitem label="&sb.prop.comment;" type="radio" searchtype="comment" oncommand="sbSearchUI.changeType('comment');" />
-			<menuitem label="URL"               type="radio" searchtype="source"  oncommand="sbSearchUI.changeType('source');" />
+			<menuitem label="&sb.prop.url;"     type="radio" searchtype="source"  oncommand="sbSearchUI.changeType('source');" />
 			<menuitem label="&sb.prop.id.date;" type="radio" searchtype="id"      oncommand="sbSearchUI.changeType('id');" />
 			<menuitem label="&sb.search.all;"   type="radio" searchtype="all"     oncommand="sbSearchUI.changeType('all');" />
 			<menuseparator />

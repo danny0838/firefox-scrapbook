@@ -11,6 +11,7 @@
 <!ENTITY sb.remove "削除">
 <!ENTITY sb.property "プロパティ">
 <!ENTITY sb.prop.title "タイトル">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.comment "コメント">
 <!ENTITY sb.prop.id.date "ID (日時)">
 <!ENTITY sb.folder.combine "結合ビュー">

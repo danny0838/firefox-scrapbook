@@ -20,7 +20,7 @@
         title="&sb.tools.multiple; - ScrapBook"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         style="width:400px;"
-        buttonlabelextra2="&sb.capture.alltabs;"
+        buttonlabelextra2="&sb.save.alltabs;"
         onload="sbMultipleService.init();"
         ondialogaccept="sbMultipleService.done();"
         ondialogextra2="window.opener.top.ScrapBookMenuHandler.execCaptureAllTabs(sbFolderSelector2.resURI); window.close();"
