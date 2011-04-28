@@ -1,16 +1,16 @@
-<!ENTITY sb.capture.partial "Spara markering i Scrapbook">
-<!ENTITY sb.capture.partial.as "Spara markering i Scrapbook som">
-<!ENTITY sb.capture.entire "Spara sidan i Scrapbook">
-<!ENTITY sb.capture.entire.as "Spara sidan i Scrapbook som">
-<!ENTITY sb.capture.frame "Spara Frame i Scrapbook">
-<!ENTITY sb.capture.frame.as "Spara Frame i Scrapbook som">
-<!ENTITY sb.capture.target "Spara länk i Scrapbook">
-<!ENTITY sb.capture.target.as "Spara länk i Scrapbook som">
-<!ENTITY sb.capture.alltabs "Capture All Tabs">
-<!ENTITY sb.capture.bookmark "Bookmark with ScrapBook+">
-<!ENTITY sb.sidebar "Show in Sidebar">
-<!ENTITY sb.menu "Menu">
-<!ENTITY sb.editbefore "Edit Before Capture">
+<!ENTITY sb.capture.partial "Fånga in markering">
+<!ENTITY sb.capture.partial.as "Fånga in markering som">
+<!ENTITY sb.capture.entire "Fånga in sida">
+<!ENTITY sb.capture.entire.as "Fånga in sida som">
+<!ENTITY sb.capture.frame "Fånga in ram">
+<!ENTITY sb.capture.frame.as "Fånga in ram som">
+<!ENTITY sb.capture.target "Fånga in länk">
+<!ENTITY sb.capture.target.as "Fånga in länk som">
+<!ENTITY sb.capture.alltabs "Fånga in alla flikar">
+<!ENTITY sb.capture.bookmark "Bokmärk med ScrapBook+">
+<!ENTITY sb.sidebar "Visa i sidopanelen">
+<!ENTITY sb.menu "Meny">
+<!ENTITY sb.editbefore "Redigera innan infångst">
 <!ENTITY sb.key.sidebar "K">
 <!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">

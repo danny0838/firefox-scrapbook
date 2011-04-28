@@ -8,6 +8,12 @@
 <!ENTITY sb.capture.filter "تصفية">
 <!ENTITY sb.capture.filter.column.one "أظهر/أخف">
 <!ENTITY sb.capture.filter.column.two "مرشح (تعبير نمطي)">
+<!ENTITY sb.capture.filter.accept "إقبل">
+<!ENTITY sb.capture.filter.accept.tt "غير أو حرر القيمة">
+<!ENTITY sb.capture.filter.cancel "ألغ">
+<!ENTITY sb.capture.filter.cancel.tt "ألغ التحرير">
+<!ENTITY sb.capture.filter.delete "احذف">
+<!ENTITY sb.capture.filter.delete.tt "أزل المرشح من القائمة">
 <!ENTITY sbp.capture.column.one "الرابط">
 <!ENTITY sbp.capture.column.two "العنوان">
 <!ENTITY sbp.capture.column.three "الحالة">

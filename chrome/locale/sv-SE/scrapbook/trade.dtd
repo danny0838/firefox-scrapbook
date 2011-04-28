@@ -1,5 +1,5 @@
-<!ENTITY sb.trade.import "Importa">
-<!ENTITY sb.trade.export "Exporta">
-<!ENTITY sb.trade.time "Exportdatum">
-<!ENTITY sb.trade.restore "Import with restoring folder structure">
-<!ENTITY sb.trade.remove "Remove files after importing">
+<!ENTITY sb.trade.import "Importera">
+<!ENTITY sb.trade.export "Exportera">
+<!ENTITY sb.trade.time "Exporttidpunkt">
+<!ENTITY sb.trade.restore "Importera och återskapa mappstrukturen">
+<!ENTITY sb.trade.remove "Ta bort filer efter import">

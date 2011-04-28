@@ -1,9 +1,0 @@
-<!ENTITY sb.repair.rdfFile "Vrati scrapbook.rdf">
-<!ENTITY sb.repair.rdfFile.descript "Ovo pokušajte ako ScrapBook drvo iznenadno nestane.">
-<!ENTITY sb.repair.rdfFile.select "Odaberite datoteku kopije za vraćanje.">
-<!ENTITY sb.repair.rdfFile.file "Datoteka">
-<!ENTITY sb.repair.rdfFile.time "Vrijeme">
-<!ENTITY sb.repair.rdfFile.size "Veličina">
-<!ENTITY sb.repair.favicons "Vrati ikone zabilješki u drvu">
-<!ENTITY sb.repair.favicons.descript "Ovo pokušajte ako nestane puno ikona zabilješki u ScrapBook drvu.">
-<!ENTITY sb.repair.complete "Dovršeno.">

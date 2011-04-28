@@ -4,6 +4,6 @@
 <!ENTITY sb.repair.rdfFile.file "Tiedosto">
 <!ENTITY sb.repair.rdfFile.time "Päiväys">
 <!ENTITY sb.repair.rdfFile.size "Koko">
-<!ENTITY sb.repair.favicons "Palauta puun sivustokuvakkeet">
-<!ENTITY sb.repair.favicons.descript "Tämä toiminto voi auttaa, jos useita sivustokuvakkeita puuttuu sivupuusta.">
+<!ENTITY sb.repair.favicons "Palauta puun suosikkikuvakkeet">
+<!ENTITY sb.repair.favicons.descript "Tämä toiminto voi auttaa, jos useita suosikkikuvakkeita puuttuu sivupuusta.">
 <!ENTITY sb.repair.complete "Valmis.">

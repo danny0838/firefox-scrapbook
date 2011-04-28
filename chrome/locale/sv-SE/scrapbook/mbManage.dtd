@@ -1,6 +1,6 @@
-<!ENTITY mb.manager "Manager">
-<!ENTITY mb.prop.name "Name">
-<!ENTITY mb.prop.path "Path">
-<!ENTITY mb.button.add "Add">
-<!ENTITY mb.button.edit "Edit">
-<!ENTITY mb.button.remove "Remove">
+<!ENTITY mb.manager "Hanterare">
+<!ENTITY mb.prop.name "Namn">
+<!ENTITY mb.prop.path "Sökväg">
+<!ENTITY mb.button.add "Lägg till">
+<!ENTITY mb.button.edit "Redigera">
+<!ENTITY mb.button.remove "Ta bort">

@@ -1,0 +1,19 @@
+<!ENTITY sb.note.save "Salva">
+<!ENTITY sb.note.close "Chiudi">
+<!ENTITY sb.note.tools "Strumenti">
+<!ENTITY sb.note.htmlview "Anteprima HTML">
+<!ENTITY sb.note.normalview "Visualizzazione normale">
+<!ENTITY sb.note.template "Modifica modello HTML">
+<!ENTITY sb.note.autolinefeed "Tag automatico a fine riga">
+<!ENTITY sb.note.autolinefeed.t "Aggiungi il tag &lt;br&gt; a fine riga nell&apos;anteprima HTML">
+<!ENTITY sb.note.fontsize "Grandezza carattere">
+<!ENTITY sb.note.help "Contenuti guida">
+<!ENTITY sb.note.print "Stampa">
+<!ENTITY sb.note.exit "Esci">
+<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "n">
+<!ENTITY sb.note.tools.accesskey "t">
+<!ENTITY sb.note.fontsize.accesskey "G">
+<!ENTITY sb.note.print.accesskey "a">
+<!ENTITY sb.note.exit.accesskey "E">

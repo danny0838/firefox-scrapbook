@@ -203,16 +203,22 @@ var sbMainService = {
 
 var sbController = {
 
-	get isTreeContext()
+	isTreeContext : function(itcEvent)
 	{
-		return document.popupNode.nodeName == "treechildren";
+		var itcAppInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
+		var itcVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
+		if ( itcVerComparator.compare(itcAppInfo.version, "4.0")<0 ) {
+			return document.popupNode.nodeName == "treechildren";
+		}else {
+			return itcEvent.originalTarget.triggerNode.nodeName == "treechildren";
+		}
 	},
 
 	onPopupShowing : function(aEvent)
 	{
-		if (aEvent.originalTarget.localName != "popup")
+		if (aEvent.originalTarget.localName != "menupopup")
 			return;
-		var res = this.isTreeContext ? sbTreeHandler.resource : sbListHandler.resource;
+		var res = this.isTreeContext(aEvent) ? sbTreeHandler.resource : sbListHandler.resource;
 		if (!res) {
 			aEvent.preventDefault();
 			return;

@@ -1,9 +1,0 @@
-<!ENTITY sb.repair.rdfFile "Cuir ar ais an comhad scrapbook.rdf">
-<!ENTITY sb.repair.rdfFile.descript "Triail é seo má theann crann an Leabhar Gearrthán as radharc go tobann.">
-<!ENTITY sb.repair.rdfFile.select "Roghnaigh Comhad Cúltaca don Chuir ar Ais.">
-<!ENTITY sb.repair.rdfFile.file "Comhad">
-<!ENTITY sb.repair.rdfFile.time "Am">
-<!ENTITY sb.repair.rdfFile.size "Toirt">
-<!ENTITY sb.repair.favicons "Cuir ar Ais favicons sa chrann">
-<!ENTITY sb.repair.favicons.descript "Triail é seo má theann an-chuid favicons sa chrann Leabhar Gearrthán as radharc.">
-<!ENTITY sb.repair.complete "Deannta.">

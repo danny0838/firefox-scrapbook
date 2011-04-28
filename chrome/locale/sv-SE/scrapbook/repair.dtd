@@ -1,9 +1,9 @@
-<!ENTITY sb.repair.rdfFile "Restore scrapbook.rdf">
-<!ENTITY sb.repair.rdfFile.descript "Try this if ScrapBook tree disappears suddenly.">
-<!ENTITY sb.repair.rdfFile.select "Select a backup file for the restoration.">
-<!ENTITY sb.repair.rdfFile.file "File">
-<!ENTITY sb.repair.rdfFile.time "Time">
-<!ENTITY sb.repair.rdfFile.size "Size">
-<!ENTITY sb.repair.favicons "Restore favicons in tree">
-<!ENTITY sb.repair.favicons.descript "Try this if many favicons in ScrapBook tree disappear.">
-<!ENTITY sb.repair.complete "Completed.">
+<!ENTITY sb.repair.rdfFile "Återställ scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript "Prova detta ifall ScrapBook-trädet plötsligt försvinner.">
+<!ENTITY sb.repair.rdfFile.select "Välj en säkerhetskopiefil till återställningen.">
+<!ENTITY sb.repair.rdfFile.file "Fil">
+<!ENTITY sb.repair.rdfFile.time "Tid">
+<!ENTITY sb.repair.rdfFile.size "Storlek">
+<!ENTITY sb.repair.favicons "Återställ sajtikoner i trädet">
+<!ENTITY sb.repair.favicons.descript "Prova detta ifall många sajtikoner i ScrapBook-trädet försvinner.">
+<!ENTITY sb.repair.complete "Slutförd.">

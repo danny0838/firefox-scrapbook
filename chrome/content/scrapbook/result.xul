@@ -28,13 +28,13 @@
 	</stringbundleset>
 
 	<popupset>
-		<popup id="sbPopup">
+		<menupopup id="sbPopup">
 			<menuitem id="sbPopupOpen"       label="&sb.open;"        oncommand="sbSearchResult.forward('O');" />
 			<menuitem id="sbPopupOpenNewTab" label="&sb.open.newtab;" oncommand="sbSearchResult.forward('T');" />
 			<menuitem id="sbPopupOpenLocate" label="&sb.locate;"      oncommand="sbSearchResult.forward('L');" />
 			<menuseparator />
 			<menuitem id="sbPopupProperty" class="menuitem-iconic" label="&sb.property;" oncommand="sbSearchResult.forward('P');" />
-		</popup>
+		</menupopup>
 	</popupset>
 
 	<hbox id="sbResultHeader" class="sb-header" align="center">

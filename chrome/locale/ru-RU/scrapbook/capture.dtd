@@ -8,6 +8,12 @@
 <!ENTITY sb.capture.filter "Фильтр">
 <!ENTITY sb.capture.filter.column.one "Показать/Скрыть">
 <!ENTITY sb.capture.filter.column.two "Фильтр (регулярные выражения)">
+<!ENTITY sb.capture.filter.accept "Применить">
+<!ENTITY sb.capture.filter.accept.tt "изменить значение">
+<!ENTITY sb.capture.filter.cancel "Отмена">
+<!ENTITY sb.capture.filter.cancel.tt "отменить редактирование">
+<!ENTITY sb.capture.filter.delete "Удалить">
+<!ENTITY sb.capture.filter.delete.tt "удалить фильтр из списка">
 <!ENTITY sbp.capture.column.one "Адрес">
 <!ENTITY sbp.capture.column.two "Заголовок">
 <!ENTITY sbp.capture.column.three "Статус">

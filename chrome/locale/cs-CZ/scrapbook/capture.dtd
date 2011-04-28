@@ -8,6 +8,12 @@
 <!ENTITY sb.capture.filter "Filtr">
 <!ENTITY sb.capture.filter.column.one "Zobrazit/Skrýt">
 <!ENTITY sb.capture.filter.column.two "Filtrovat (regulární výrazy)">
+<!ENTITY sb.capture.filter.accept "Přijmout">
+<!ENTITY sb.capture.filter.accept.tt "změní nebo upraví hodnotu">
+<!ENTITY sb.capture.filter.cancel "Zrušit">
+<!ENTITY sb.capture.filter.cancel.tt "zruší úpravy">
+<!ENTITY sb.capture.filter.delete "Smazat">
+<!ENTITY sb.capture.filter.delete.tt "vyjme filtr ze seznamu">
 <!ENTITY sbp.capture.column.one "Adresa URL">
 <!ENTITY sbp.capture.column.two "Název">
 <!ENTITY sbp.capture.column.three "Stav">

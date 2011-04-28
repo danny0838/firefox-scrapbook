@@ -1,0 +1,8 @@
+<!ENTITY sb.combine.dragdrop "Adăugați elemente din arbore prin glisare și fixare, în ordinea în care doriți să le combinați. Puteți glisa și fixa mai multe articole o dată.">
+<!ENTITY sb.combine.preview "Previzualizare">
+<!ENTITY sb.combine.preview.d "Apăsați butonul „Combină” după ce verificați rezultatul.">
+<!ENTITY sb.combine.option.remove "Elimină paginile originale după finalizarea combinării">
+<!ENTITY sbp.combine.up "Mută elementul în sus">
+<!ENTITY sbp.combine.down "Mută elementul în jos">
+<!ENTITY sbp.combine.remove "Elimină elementul">
+<!ENTITY sbp.combine.newTitle "Denumire nouă">

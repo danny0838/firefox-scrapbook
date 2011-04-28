@@ -1,8 +1,8 @@
-<!ENTITY sb.combine.dragdrop "Add items by drag-and-drop from the tree in the order you want to combine. You can drag-and-drop multiple items at once.">
-<!ENTITY sb.combine.preview "Förhandsvisa">
-<!ENTITY sb.combine.preview.d "Tryck Kombinera-knappen efter att ha granskat förhandsvisningen.">
-<!ENTITY sb.combine.option.remove "Radera originalsidorna när de kombinerats.">
-<!ENTITY sbp.combine.up "move item upwards">
-<!ENTITY sbp.combine.down "move item downwards">
-<!ENTITY sbp.combine.remove "remove item">
-<!ENTITY sbp.combine.newTitle "new title">
+<!ENTITY sb.combine.dragdrop "Lägg till objekt genom att dra och släppa från trädet i den ordning du vill kombinera dem. Du kan dra och släppa flera objekt samtidigt.">
+<!ENTITY sb.combine.preview "Förhandsgranska">
+<!ENTITY sb.combine.preview.d "Klicka på knappen &quot;Kombinera&quot; när du har godkänt förhandsgranskningen.">
+<!ENTITY sb.combine.option.remove "Ta bort originalsidorna efter slutförd kombinering">
+<!ENTITY sbp.combine.up "Flytta objekt uppåt">
+<!ENTITY sbp.combine.down "Flytta objekt nedåt">
+<!ENTITY sbp.combine.remove "Ta bort objekt">
+<!ENTITY sbp.combine.newTitle "Ny rubrik">

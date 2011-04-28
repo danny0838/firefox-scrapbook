@@ -1,29 +1,29 @@
 <!ENTITY sb.toolbar.edit "Muokkauspalkki">
 <!ENTITY sb.toolbar.info "Infopalkki">
-<!ENTITY sb.edit.eraser "DOM-poistaja: Poistaa napsautetun lohkoelementin.">
+<!ENTITY sb.edit.eraser "DOM-poistaja: Poistaa napsautetut osat sivulta">
 <!ENTITY sb.edit.undo "Kumoa">
 <!ENTITY sb.edit.save "Tallenna muutokset">
 <!ENTITY sb.edit.comment "Laajenna kommenttialuetta">
-<!ENTITY sb.edit.sticky "muistilappu">
+<!ENTITY sb.edit.sticky "Muistilappu">
 <!ENTITY sb.edit.sticky.create "Luo &sb.edit.sticky;">
 <!ENTITY sb.edit.inline.add "Lisää valinnan tekstiin huomautus">
 <!ENTITY sb.edit.attach.file "Liitä tiedosto valintaan">
 <!ENTITY sb.edit.attach.link "Liitä linkki valintaan">
 <!ENTITY sb.edit.cutter "Poista valinta">
 <!ENTITY sb.edit.remove.iframe "Poista kaikki IFRAME-tunnukset">
-<!ENTITY sb.edit.remove.script "Poista kaikki SCRIPT-tunnukset">
+<!ENTITY sb.edit.remove.script "Poista kaikki komentosarjatunnisteet">
 <!ENTITY sb.highlighter "Korostin">
 <!ENTITY sb.highlighter.remove "Poista korostukset valinnasta">
 <!ENTITY sb.highlighter.remove.all "Poista kaikki korostukset">
-<!ENTITY sbp.highlighter.stil1 "   Style 1   ">
-<!ENTITY sbp.highlighter.stil2 "   Style 2   ">
-<!ENTITY sbp.highlighter.stil3 "   Style 3   ">
-<!ENTITY sbp.highlighter.stil4 "   Style 4   ">
-<!ENTITY sbp.highlighter.stil5 "   Style 5   ">
-<!ENTITY sbp.highlighter.stil6 "   Style 6   ">
+<!ENTITY sbp.highlighter.stil1 "Tyyli 1">
+<!ENTITY sbp.highlighter.stil2 "Tyyli 2">
+<!ENTITY sbp.highlighter.stil3 "Tyyli 3">
+<!ENTITY sbp.highlighter.stil4 "Tyyli 4">
+<!ENTITY sbp.highlighter.stil5 "Tyyli 5">
+<!ENTITY sbp.highlighter.stil6 "Tyyli 6">
 <!ENTITY sb.source "Avaa lähde-URL">
-<!ENTITY sb.renew "Kaappaa uudestaan">
-<!ENTITY sb.locate "Synkronoi sivupaneelin sivupuun kanssa">
+<!ENTITY sb.renew "Tallenna uudestaan">
+<!ENTITY sb.locate "Paikanna sivupalkissa">
 <!ENTITY sb.indicators "Näytä linkkitunnukset">
 <!ENTITY sb.info.home "Etusivu">
 <!ENTITY sb.info.sitemap "Sivustokartta">

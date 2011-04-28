@@ -1,0 +1,18 @@
+<!ENTITY sb.capture.partial "Capturează selecția">
+<!ENTITY sb.capture.partial.as "Capturează selecția ca">
+<!ENTITY sb.capture.entire "Capturează pagina">
+<!ENTITY sb.capture.entire.as "Capturează pagina ca">
+<!ENTITY sb.capture.frame "Capturează cadrul">
+<!ENTITY sb.capture.frame.as "Capturează cadrul ca">
+<!ENTITY sb.capture.target "Capturează legătura">
+<!ENTITY sb.capture.target.as "Capturează legătura ca">
+<!ENTITY sb.capture.alltabs "Capturează din toate filele">
+<!ENTITY sb.capture.bookmark "Pune semn de carte ScrapBook+">
+<!ENTITY sb.sidebar "Afișează în panoul lateral">
+<!ENTITY sb.menu "Meniu">
+<!ENTITY sb.editbefore "Editează înaintea capturării">
+<!ENTITY sb.key.sidebar "K">
+<!ENTITY sb.key.menubar "B">
+<!ENTITY sb.key.capture "L">
+<!ENTITY sb.key.capture.as "K">
+<!ENTITY sb.key.bookmark "A">

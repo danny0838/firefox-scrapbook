@@ -34,7 +34,7 @@
 	</keyset>
 
 	<popupset>
-		<popup id="sbTradeTreePopup">
+		<menupopup id="sbTradeTreePopup">
 			<menuitem label="&sb.open;"        oncommand="sbTradeService.open(false);" default="true" />
 			<menuitem label="&sb.open.newtab;" oncommand="sbTradeService.open(true);"  />
 			<menuitem label="&sb.show.files;"  oncommand="sbTradeService.browse();" />
@@ -42,7 +42,7 @@
 			<menuitem class="menuitem-iconic" label="&sb.remove;"   src="chrome://scrapbook/skin/menu_remove.png"   oncommand="sbTradeService.remove();" />
 			<menuseparator />
 			<menuitem class="menuitem-iconic" label="&sb.property;" src="chrome://scrapbook/skin/menu_property.png" oncommand="sbTradeService.showProperties();" />
-		</popup>
+		</menupopup>
 	</popupset>
 
 	<toolbar id="sbTradeHeader" align="center" class="plain" style="padding:3px 1px;">

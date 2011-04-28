@@ -1,0 +1,20 @@
+<!ENTITY sb.hlCustom.preset "Stil predefinit:">
+<!ENTITY sb.hlCustom.background "Fundal">
+<!ENTITY sb.hlCustom.color "Culoare">
+<!ENTITY sb.hlCustom.text "Text">
+<!ENTITY sb.hlCustom.bold "Aldin">
+<!ENTITY sb.hlCustom.italic "Cursiv">
+<!ENTITY sb.hlCustom.line "Tăiat">
+<!ENTITY sb.hlCustom.border "Chenar">
+<!ENTITY sb.hlCustom.type "Tip">
+<!ENTITY sb.hlCustom.box "Casetă">
+<!ENTITY sb.hlCustom.underline "Subliniere">
+<!ENTITY sb.hlCustom.style "Stil">
+<!ENTITY sb.hlCustom.solid "Solid">
+<!ENTITY sb.hlCustom.dotted "Punctat">
+<!ENTITY sb.hlCustom.dashed "Întrerupt">
+<!ENTITY sb.hlCustom.double "Dublu">
+<!ENTITY sb.hlCustom.width "Grosime">
+<!ENTITY sb.hlCustom.thin "Subțire">
+<!ENTITY sb.hlCustom.medium "Mediu">
+<!ENTITY sb.hlCustom.thick "Gros">

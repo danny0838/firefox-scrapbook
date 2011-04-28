@@ -25,7 +25,7 @@
 	</keyset>
 
 	<popupset id="sbPopupSet">
-		<popup id="sbPopup" onpopupshowing="sbController.onPopupShowing(event);"
+		<menupopup id="sbPopup" onpopupshowing="sbController.onPopupShowing(event);"
 		       onmouseover="if (event.originalTarget.getAttribute('nodelay')) document.getElementById('sbPopupToolsMenu').hidePopup();">
 			<menuitem id="sbPopupOpen"       label="&sb.open;"        nodelay="true" oncommand="sbController.open(null,false);" default="true" />
 			<menuitem id="sbPopupOpenTab"    label="&sb.open.tab;"    nodelay="true" oncommand="sbController.open(null,true);" hidden="true" />
@@ -56,8 +56,8 @@
 			<menuitem id="sbPopupRemove"    class="menuitem-iconic" label="&sb.remove;"   oncommand="sbController.isTreeContext ? sbTreeHandler.remove() : sbListHandler.doCommand('remove');" />
 			<menuseparator />
 			<menuitem id="sbPopupProperty"  class="menuitem-iconic" label="&sb.property;" oncommand="sbController.forward(null,'P');" />
-		</popup>
-		<popup id="sbSearchPopup" onpopupshowing="sbSearchService.populatePopup(); document.getElementById('sbSearchTextbox').select();" position="after_start">
+		</menupopup>
+		<menupopup id="sbSearchPopup" onpopupshowing="sbSearchService.populatePopup(); document.getElementById('sbSearchTextbox').select();" position="after_start">
 			<menuitem id="sbSearchPopupF" label="&sb.search.fulltext;" type="radio" oncommand="sbSearchService.change('fulltext');" />
 			<menuseparator />
 			<menuitem id="sbSearchPopupT" label="&sb.prop.title;"   type="radio" oncommand="sbSearchService.change('title');" />
@@ -76,7 +76,7 @@
 					<menuitem label="&sb.search.clear;"   oncommand="sbSearchService.clearFormHistory();" />
 				</menupopup>
 			</menu>
-		</popup>
+		</menupopup>
 	</popupset>
 
 	<toolbar id="sbSearchToolbar" align="center">

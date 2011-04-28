@@ -6,8 +6,8 @@
 <!ENTITY sb.prop.content "Innehåll">
 <!ENTITY sb.prop.folder "Mapp">
 <!ENTITY sb.prop.icon "Ikon">
-<!ENTITY sb.prop.icon.change "Ändra">
+<!ENTITY sb.prop.icon.change "Byt">
 <!ENTITY sb.prop.icon.default "Standard">
-<!ENTITY sb.prop.icon.favicon "Välj favoriticon">
-<!ENTITY sb.prop.icon.custom "Välj annan ikon">
-<!ENTITY sb.prop.mark "Markera">
+<!ENTITY sb.prop.icon.favicon "Välj sajtikon">
+<!ENTITY sb.prop.icon.custom "Välj användarikon">
+<!ENTITY sb.prop.mark "Märk">

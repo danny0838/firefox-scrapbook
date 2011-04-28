@@ -76,9 +76,9 @@
 					 ontextentered="sbpFilter.add();"
 					 tabscrolling="true"
 					 type="autocomplete" />
-			<button id="sbpBtnAccept" label="OK" disabled="true" tooltiptext="Wert uebernehmen/Wert aendern" oncommand="sbpFilter.add();" />
-			<button id="sbpBtnCancel" label="Abbrechen" disabled="true" tooltiptext="Editieren abbrechen" oncommand="sbpFilter.cancel();" />
-			<button id="sbpBtnDel" label="Entfernen" disabled="true" tooltiptext="Filter aus der Liste entfernen" oncommand="sbpFilter.del();" />
+			<button id="sbpBtnAccept" label="&sb.capture.filter.accept;" disabled="true" tooltiptext="&sb.capture.filter.accept.tt;" oncommand="sbpFilter.add();" />
+			<button id="sbpBtnCancel" label="&sb.capture.filter.cancel;" disabled="true" tooltiptext="&sb.capture.filter.cancel.tt;" oncommand="sbpFilter.cancel();" />
+			<button id="sbpBtnDel" label="&sb.capture.filter.delete;" disabled="true" tooltiptext="&sb.capture.filter.delete.tt;" oncommand="sbpFilter.del();" />
 		</hbox>
 		<tree id="sbpTreeFilter"
 			  autostrech="always"

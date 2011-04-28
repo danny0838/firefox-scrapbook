@@ -8,6 +8,12 @@
 <!ENTITY sb.capture.filter "Фільтр">
 <!ENTITY sb.capture.filter.column.one "Показати/сховати">
 <!ENTITY sb.capture.filter.column.two "Фільтр (регулярний вираз)">
+<!ENTITY sb.capture.filter.accept "Прийняти">
+<!ENTITY sb.capture.filter.accept.tt "змінити чи редагувати значення">
+<!ENTITY sb.capture.filter.cancel "Скасувати">
+<!ENTITY sb.capture.filter.cancel.tt "відмінити редагування">
+<!ENTITY sb.capture.filter.delete "Видалити">
+<!ENTITY sb.capture.filter.delete.tt "Вилучити фільтр зі списку">
 <!ENTITY sbp.capture.column.one "Адреса">
 <!ENTITY sbp.capture.column.two "Назва">
 <!ENTITY sbp.capture.column.three "Статус">

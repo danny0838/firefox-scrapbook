@@ -1,19 +1,19 @@
-<!ENTITY sb.detail.linked.timeout "Timeout (in seconds)">
-<!ENTITY sb.detail.linked.charset "Character set">
-<!ENTITY sb.detail "Spara i Scrapbook">
-<!ENTITY sb.detail.new.folder "Ny Mapp">
-<!ENTITY sb.detail.select.folder "Välj Mapp">
-<!ENTITY sb.detail.option "Options">
-<!ENTITY sb.detail.option.images "Images">
-<!ENTITY sb.detail.option.styles "Styles">
-<!ENTITY sb.detail.linked.file "Ladda ned länkar">
-<!ENTITY sb.detail.linked.image "Bilder">
+<!ENTITY sb.detail.linked.timeout "Tidsgräns (s)">
+<!ENTITY sb.detail.linked.charset "Teckenuppsättning">
+<!ENTITY sb.detail "Infångstinformation">
+<!ENTITY sb.detail.new.folder "Ny mapp">
+<!ENTITY sb.detail.select.folder "Välj mapp">
+<!ENTITY sb.detail.option "Inställningar">
+<!ENTITY sb.detail.option.images "Bilder">
+<!ENTITY sb.detail.option.styles "Format">
+<!ENTITY sb.detail.linked.file "Ladda ner länkade filer">
+<!ENTITY sb.detail.linked.image "Bild">
 <!ENTITY sb.detail.linked.sound "Ljud">
-<!ENTITY sb.detail.linked.movie "Filmer">
-<!ENTITY sb.detail.linked.archive "Filarkiv">
-<!ENTITY sb.detail.linked.custom "Annan">
-<!ENTITY sb.detail.linked.page "Spara i Scrapbook på djupet">
-<!ENTITY sb.detail.linked.page.depth "Antal nivåer länkar ska följas">
-<!ENTITY sb.detail.linked.page.text "När allt gar sparats i Scrapbook, kommer alla sidor vara länkade sinsemellan och en översiktsbild skapas.">
-<!ENTITY sb.detail.warnAboutRenew "NOTICE: &apos;Capture Again&apos; overwrites the previously saved page.">
-<!ENTITY sb.detail.warnAboutScript "NOTICE: JavaScript may cause some problems.">
+<!ENTITY sb.detail.linked.movie "Video">
+<!ENTITY sb.detail.linked.archive "Arkiv">
+<!ENTITY sb.detail.linked.custom "Egna…">
+<!ENTITY sb.detail.linked.page "Djupgående infångst">
+<!ENTITY sb.detail.linked.page.depth "Siddjup">
+<!ENTITY sb.detail.linked.page.text "När infångsterna har slutförts, så kommer alla sidor att vara länkade till varandra och en webbplatskarta kommer att skapas.">
+<!ENTITY sb.detail.warnAboutRenew "OBS: &quot;Fånga in igen&quot; ersätter den tidigare sparade sidan.">
+<!ENTITY sb.detail.warnAboutScript "OBS: JavaScript kan orsaka vissa problem.">

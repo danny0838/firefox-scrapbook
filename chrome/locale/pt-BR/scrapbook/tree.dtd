@@ -19,7 +19,7 @@
 <!ENTITY sb.folder.openall "Abrir Tudo em Abas">
 <!ENTITY sb.folder.manage "Gerenciar Pasta">
 <!ENTITY sb.new.folder "Nova Pasta">
-<!ENTITY sb.new.separator "New Separator">
+<!ENTITY sb.new.separator "Novo Separador">
 <!ENTITY sb.new.note "Nova Nota">
 <!ENTITY sb.sort.folder "Ordenar Pasta">
 <!ENTITY sb.search "Pesquisa">
@@ -30,5 +30,5 @@
 <!ENTITY sb.search.cache "Atualizar Cache para a Pesquisa Completa de Texto">
 <!ENTITY sb.search.clear "Limpar Histórico de Pesquisas">
 <!ENTITY sb.search.days "Filtrar por Dias">
-<!ENTITY mb.manage "Manage">
+<!ENTITY mb.manage "Gerenciar">
 <!ENTITY mb.profileFolder "Pasta do Perfil">

@@ -4,10 +4,16 @@
 <!ENTITY sb.capture.retry "Tentar novamente">
 <!ENTITY sb.capture.skip "Pular">
 <!ENTITY sb.capture.pause "Pausar">
-<!ENTITY sb.capture.finish "Cancel">
+<!ENTITY sb.capture.finish "Cancelar">
 <!ENTITY sb.capture.filter "Filtrar">
-<!ENTITY sb.capture.filter.column.one "Show/Hide">
-<!ENTITY sb.capture.filter.column.two "Filter (regular expression)">
+<!ENTITY sb.capture.filter.column.one "Mostrar/Ocultar">
+<!ENTITY sb.capture.filter.column.two "Filtro (expressão regular)">
+<!ENTITY sb.capture.filter.accept "Aceitar">
+<!ENTITY sb.capture.filter.accept.tt "mudar ou editar valor">
+<!ENTITY sb.capture.filter.cancel "Cancelar">
+<!ENTITY sb.capture.filter.cancel.tt "abortar edição">
+<!ENTITY sb.capture.filter.delete "Apagar">
+<!ENTITY sb.capture.filter.delete.tt "remover filtro da lista">
 <!ENTITY sbp.capture.column.one "URL">
-<!ENTITY sbp.capture.column.two "Title">
+<!ENTITY sbp.capture.column.two "Título">
 <!ENTITY sbp.capture.column.three "Status">

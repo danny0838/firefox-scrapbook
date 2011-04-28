@@ -1,0 +1,19 @@
+<!ENTITY sb.capture "Archivierung">
+<!ENTITY sb.capture.abort "Abbrechen">
+<!ENTITY sb.capture.start "Starten">
+<!ENTITY sb.capture.retry "Wiederholen">
+<!ENTITY sb.capture.skip "Überspringen">
+<!ENTITY sb.capture.pause "Anhalten">
+<!ENTITY sb.capture.finish "Beenden">
+<!ENTITY sb.capture.filter "Filter">
+<!ENTITY sb.capture.filter.column.one "Ein-/Ausblenden">
+<!ENTITY sb.capture.filter.column.two "Filter (regulärer Ausdruck)">
+<!ENTITY sb.capture.filter.accept "OK">
+<!ENTITY sb.capture.filter.accept.tt "Wert übernehmen/Wert ändern">
+<!ENTITY sb.capture.filter.cancel "Abbrechen">
+<!ENTITY sb.capture.filter.cancel.tt "Editieren abbreche">
+<!ENTITY sb.capture.filter.delete "Entfernen">
+<!ENTITY sb.capture.filter.delete.tt "Filter aus der Liste entfernen">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "Titel">
+<!ENTITY sbp.capture.column.three "Status">

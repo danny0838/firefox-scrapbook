@@ -1,19 +1,19 @@
-<!ENTITY sb.detail.linked.timeout "Timeout (in seconds)">
-<!ENTITY sb.detail.linked.charset "Character set">
+<!ENTITY sb.detail.linked.timeout "Timeout (em segundos)">
+<!ENTITY sb.detail.linked.charset "Conjunto de caracteres">
 <!ENTITY sb.detail "Detalhe da Captura">
 <!ENTITY sb.detail.new.folder "Nova Pasta">
 <!ENTITY sb.detail.select.folder "Selecionar Pasta">
 <!ENTITY sb.detail.option "Opções">
 <!ENTITY sb.detail.option.images "Imagens">
 <!ENTITY sb.detail.option.styles "Estilos">
-<!ENTITY sb.detail.linked.file "Download de links">
+<!ENTITY sb.detail.linked.file "Download de arquivos anexos">
 <!ENTITY sb.detail.linked.image "Imagem">
 <!ENTITY sb.detail.linked.sound "Som">
-<!ENTITY sb.detail.linked.movie "Filme">
+<!ENTITY sb.detail.linked.movie "Vídeo">
 <!ENTITY sb.detail.linked.archive "Arquivo">
 <!ENTITY sb.detail.linked.custom "Personalizado">
 <!ENTITY sb.detail.linked.page "Captura em Nível">
 <!ENTITY sb.detail.linked.page.depth "Profundidade para seguir os links">
 <!ENTITY sb.detail.linked.page.text "Após completar as capturas, todas as páginas serão ligadas umas às outras e o mapa do site será criado.">
-<!ENTITY sb.detail.warnAboutRenew "AVISO: &apos;Capturar Novamente&apos; substitui a página salva anteriormente.">
-<!ENTITY sb.detail.warnAboutScript "AVISO: Muitos problemas serão causados pelo JavaScript.">
+<!ENTITY sb.detail.warnAboutRenew "AVISO: 'Capturar Novamente' substitui a página salva anteriormente.">
+<!ENTITY sb.detail.warnAboutScript "AVISO: O JavaScript pode causar alguns problemas.">

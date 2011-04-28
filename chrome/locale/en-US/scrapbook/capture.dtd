@@ -8,6 +8,12 @@
 <!ENTITY sb.capture.filter "Filter">
 <!ENTITY sb.capture.filter.column.one "Show/Hide">
 <!ENTITY sb.capture.filter.column.two "Filter (regular expression)">
+<!ENTITY sb.capture.filter.accept "Accept">
+<!ENTITY sb.capture.filter.accept.tt "change or edit value">
+<!ENTITY sb.capture.filter.cancel "Cancel">
+<!ENTITY sb.capture.filter.cancel.tt "abort editing">
+<!ENTITY sb.capture.filter.delete "Delete">
+<!ENTITY sb.capture.filter.delete.tt "remove filter from the list">
 <!ENTITY sbp.capture.column.one "URL">
 <!ENTITY sbp.capture.column.two "Title">
 <!ENTITY sbp.capture.column.three "Status">

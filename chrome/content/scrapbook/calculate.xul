@@ -43,13 +43,13 @@
 
 	<!--popup-->
 	<popupset>
-		<popup id="sbCalcPopup" onpopupshowing="sbCalcController.createPopupMenu();">
+		<menupopup id="sbCalcPopup" onpopupshowing="sbCalcController.createPopupMenu();">
 			<menuitem label="&sb.open;"        oncommand="sbCalcController.open(false);" default="true" />
 			<menuitem label="&sb.open.newtab;" oncommand="sbCalcController.open(true);" />
 			<menuitem label="&sb.show.files;"  oncommand="sbCalcController.forward('L');" />
 			<menuseparator /><menuitem id="sbPopupRemove"   class="menuitem-iconic" label="&sb.remove;"   oncommand="sbCalcController.remove();" disbabled="true" />
 			<menuseparator /><menuitem id="sbPopupProperty" class="menuitem-iconic" label="&sb.property;" oncommand="sbCalcController.forward('P');" />
-		</popup>
+		</menupopup>
 	</popupset>
 
 	<grid style="margin:10px 10px 0px 10px;">

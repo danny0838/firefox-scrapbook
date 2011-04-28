@@ -7,33 +7,27 @@
 		<em:id>scrapbookplus@addons.mozilla.org</em:id>
 		<em:type>2</em:type>
 		<em:name>ScrapBook Plus</em:name>
-		<em:version>1.8.17.31</em:version>
+		<em:version>1.8.18.33</em:version>
 		<em:description>Helps you to save Web pages and organize the collection. This extension is a modification of ScrapBook by Gomita.</em:description>
 		<em:creator>haselnuss</em:creator>
-		<em:translator>趙柏強 (zh-TW)</em:translator>
-		<em:translator>MatrixIsAllOver (it-IT)</em:translator>
-		<em:translator>WowTIP (sv-SE)</em:translator>
-		<em:translator>Ville Pohjanheimo, villepyry (fi-FI)</em:translator>
-		<em:translator>mlok, ivosh, PetrTwo (cs-CZ)</em:translator>
-		<em:translator>Yury Merkulov aka RED, Modex (Alexander Sokolov) (ru-RU)</em:translator>
-		<em:translator>Eoin O'Cinneide (ga-IE)</em:translator>
-		<em:translator>Liesbeth (nl-NL)</em:translator>
-		<em:translator>Leszek(teo)Życzkowski (pl-PL)</em:translator>
-		<em:translator>Joan Sala Soler (ca-AD)</em:translator>
-		<em:translator>Andre Luiz (pt-BR)</em:translator>
-		<em:translator>Calimero 988 (fr-FR)</em:translator>
-		<em:translator>sushizang (ko-KR)</em:translator>
-		<em:translator>ReinekeFux (de-DE)</em:translator>
-		<em:translator>Jozsef Tamas Herczeg, kami (hu-HU)</em:translator>
-		<em:translator>Jose I. Plaza (es-ES)</em:translator>
-		<em:translator>George C. Tsoi, blackdire (zh-CN)</em:translator>
-		<em:translator>Krcko (hr-HR)</em:translator>
-		<em:translator>igor_r (sk-SK)</em:translator>
 		<em:translator>ua_bz (ar)</em:translator>
+		<em:translator>mlok, ivosh, PetrTwo (cs-CZ)</em:translator>
+		<em:translator>ReinekeFux (de)</em:translator>
+		<em:translator>Jose I. Plaza (es-ES)</em:translator>
+		<em:translator>lexitec (fi-FI)</em:translator>
+		<em:translator>Calimero 988 (fr)</em:translator>
 		<em:translator>lois (gl-ES)</em:translator>
-		<em:translator>Anıl Yıldız (tr-TR)</em:translator>
-		<em:translator>Cătălin ZAMFIRESCU (x10firefox) (ro-RO)</em:translator>
-		<em:translator>tymofiy (uk-UA)</em:translator>
+		<em:translator>Jozsef Tamas Herczeg, kami (hu-HU)</em:translator>
+		<em:translator>MatrixIsAllOver, Luana (it)</em:translator>
+		<em:translator>sushizang (ko-KR)</em:translator>
+		<em:translator>Leszek(teo)Życzkowski (pl)</em:translator>
+		<em:translator>Gutierrez PS (pt-BR)</em:translator>
+		<em:translator>Cătălin ZAMFIRESCU (x10firefox) (ro)</em:translator>
+		<em:translator>Yury Merkulov aka RED, Modex (Alexander Sokolov) (ru-RU)</em:translator>
+		<em:translator>igor_r (sk-SK)</em:translator>
+		<em:translator>Lakrits (sv-SE)</em:translator>
+		<em:translator>Sergiy Khoruzhin (uk)</em:translator>
+		<em:translator>George C. Tsoi, blackdire (zh-CN)</em:translator>
 		<em:contributor>Joe Antao</em:contributor>
 		<em:contributor>Michael Brüggemann</em:contributor>
 		<em:contributor>Gomita</em:contributor>
@@ -43,7 +37,7 @@
 			<Description>
 				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
 				<em:minVersion>2.0</em:minVersion>
-				<em:maxVersion>3.7a1pre</em:maxVersion>
+				<em:maxVersion>4.0.*</em:maxVersion>
 			</Description>
 		</em:targetApplication>
 	</Description>

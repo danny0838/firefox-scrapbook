@@ -1,8 +1,0 @@
-<!ENTITY sb.sort "Sortáil">
-<!ENTITY sb.sort.reverse "Iompaigh">
-<!ENTITY sb.sort.title.asc "Sórtáil fé Teideal (A &gt; Z)">
-<!ENTITY sb.sort.title.desc "Sórtáil fé Teideal (Z &gt; A)">
-<!ENTITY sb.sort.date.asc "Croineolaíoch">
-<!ENTITY sb.sort.date.desc "Croineolaíoch Aisiompaithe">
-<!ENTITY sb.sort.recursive "Sórtáil Athfhillteanach na Fothchomhadlainn">
-<!ENTITY sb.sort.warning "Fógra: Ní feidir leat an obraid seo a chealla.">

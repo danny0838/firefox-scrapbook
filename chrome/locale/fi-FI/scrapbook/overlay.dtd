@@ -1,16 +1,16 @@
-<!ENTITY sb.capture.partial "Kaappaa valinta">
-<!ENTITY sb.capture.partial.as "Kaappaa valinta nimellä">
-<!ENTITY sb.capture.entire "Kaappaa sivu">
-<!ENTITY sb.capture.entire.as "Kaappaa sivu nimellä">
-<!ENTITY sb.capture.frame "Kaappaa kehys">
-<!ENTITY sb.capture.frame.as "Kaappaa kehys nimellä">
-<!ENTITY sb.capture.target "Kaappaa kohde">
-<!ENTITY sb.capture.target.as "Kaappaa kohde nimellä">
-<!ENTITY sb.capture.alltabs "Kaappaa kaikki välilehdet">
-<!ENTITY sb.capture.bookmark "Aseta kirjanmerkki ScrapBook+iin">
+<!ENTITY sb.capture.partial "Tallenna valinta">
+<!ENTITY sb.capture.partial.as "Tallennna valinta nimellä">
+<!ENTITY sb.capture.entire "Tallenna sivu">
+<!ENTITY sb.capture.entire.as "Tallenna sivu nimellä">
+<!ENTITY sb.capture.frame "Tallenna kehys">
+<!ENTITY sb.capture.frame.as "Tallenna kehys nimellä">
+<!ENTITY sb.capture.target "Tallenna linkki">
+<!ENTITY sb.capture.target.as "Tallenna linkki nimellä">
+<!ENTITY sb.capture.alltabs "Tallenna kaikki välilehdet">
+<!ENTITY sb.capture.bookmark "Tallenna kirjanmerkki">
 <!ENTITY sb.sidebar "Näytä sivupaneelissa">
 <!ENTITY sb.menu "Valikko">
-<!ENTITY sb.editbefore "Muokkaa ennen kaappausta">
+<!ENTITY sb.editbefore "Muokkaa ennen tallennusta">
 <!ENTITY sb.key.sidebar "C">
 <!ENTITY sb.key.menubar "S">
 <!ENTITY sb.key.capture "L">

@@ -1,0 +1,29 @@
+<!ENTITY sb.toolbar.edit "Barre d&apos;outils d&apos;édition">
+<!ENTITY sb.toolbar.info "Barre d&apos;information">
+<!ENTITY sb.edit.eraser "Effaceur DOM : un outil pour supprimer des éléments cliqués dans une page Web.">
+<!ENTITY sb.edit.undo "Annuler">
+<!ENTITY sb.edit.save "Sauvegarder les changements">
+<!ENTITY sb.edit.comment "Déployer la zone de commentaire">
+<!ENTITY sb.edit.sticky "Note collante">
+<!ENTITY sb.edit.sticky.create "Créer une &sb.edit.sticky;">
+<!ENTITY sb.edit.inline.add "Ajouter une annotation à la sélection">
+<!ENTITY sb.edit.attach.file "Attacher un fichier à la sélection">
+<!ENTITY sb.edit.attach.link "Attacher un lien à la sélection">
+<!ENTITY sb.edit.cutter "Supprimer la sélection">
+<!ENTITY sb.edit.remove.iframe "Supprimer toutes les balises IFRAME">
+<!ENTITY sb.edit.remove.script "Supprimer toutes les balises SCRIPT">
+<!ENTITY sb.highlighter "Surligneur">
+<!ENTITY sb.highlighter.remove "Supprimer les surlignements dans la sélection">
+<!ENTITY sb.highlighter.remove.all "Supprimer tous les surlignements">
+<!ENTITY sbp.highlighter.stil1 "Style 1">
+<!ENTITY sbp.highlighter.stil2 "Style 2">
+<!ENTITY sbp.highlighter.stil3 "Style 3">
+<!ENTITY sbp.highlighter.stil4 "Style 4">
+<!ENTITY sbp.highlighter.stil5 "Style 5">
+<!ENTITY sbp.highlighter.stil6 "Style 6">
+<!ENTITY sb.source "Ouvrir l&apos;URL source">
+<!ENTITY sb.renew "Capturer à nouveau">
+<!ENTITY sb.locate "Synchroniser avec l&apos;arborescence de la barre latérale">
+<!ENTITY sb.indicators "Montrer les indicateurs de lien">
+<!ENTITY sb.info.home "Origine">
+<!ENTITY sb.info.sitemap "Plan du site">

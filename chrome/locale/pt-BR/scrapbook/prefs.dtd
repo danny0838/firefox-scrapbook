@@ -1,39 +1,39 @@
-<!ENTITY sb.prefs.main "Main">
-<!ENTITY sb.prefs.tabs "Tabs">
-<!ENTITY sb.prefs.save "Save">
-<!ENTITY sb.prefs.edit "Edit">
-<!ENTITY sb.prefs.organize "Organize">
-<!ENTITY sb.prefs.advanced "Advanced">
-<!ENTITY sb.prefs.ui.contextMenu "Show in browser context menu">
+<!ENTITY sb.prefs.main "Principal">
+<!ENTITY sb.prefs.tabs "Abas">
+<!ENTITY sb.prefs.save "Salvar">
+<!ENTITY sb.prefs.edit "Editar">
+<!ENTITY sb.prefs.organize "Organizar">
+<!ENTITY sb.prefs.advanced "Avançado">
+<!ENTITY sb.prefs.ui.contextMenu "Mostrar no menu de contexto do navegador">
 <!ENTITY sb.prefs.ui.contextSubMenu "Submenu">
-<!ENTITY sb.prefs.ui.bookmarkMenu "Show &apos;Bookmark with ScrapBook&apos; menu">
-<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Show up to">
-<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "recently used folders">
-<!ENTITY sb.prefs.ui.menuBar "Show in menu bar">
-<!ENTITY sb.prefs.ui.menuBar.icon "Icon">
-<!ENTITY sb.prefs.ui.toolsMenu "Show in &apos;Tools&apos; menu">
-<!ENTITY sb.prefs.ui.statusBar "Show in status bar">
-<!ENTITY sb.prefs.restart "Change requires Firefox restart.">
-<!ENTITY sb.prefs.tabs.tips "Open in tab for the following operations">
-<!ENTITY sb.prefs.tabs.note "Edit Note">
-<!ENTITY sb.prefs.data "Location to Store Data">
-<!ENTITY sb.prefs.data.default "Default (Profile Folder)">
-<!ENTITY sb.prefs.data.custom "Save data to">
-<!ENTITY sb.prefs.data.tips "Choose a folder where to store the ScrapBook data.">
-<!ENTITY sb.prefs.multibook.enabled "Enable Multi-ScrapBook">
-<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook enables you to set up multiple locations to store data and switch between them quickly with toolbar button.">
-<!ENTITY sb.prefs.confirmDelete "Warn me when deleting tree item(s)">
-<!ENTITY sb.prefs.tree.autoCollapse "When opening a tree folder, automatically close other folders">
-<!ENTITY sb.prefs.tree.unshift "Put an item into">
-<!ENTITY sb.prefs.tree.unshift.top "the top of a folder">
-<!ENTITY sb.prefs.tree.unshift.bottom "the bottom of a folder">
-<!ENTITY sb.prefs.showDetailOnDrop "Show &apos;Capture Detail&apos; dialog when capturing by drag-and-drop into Sidebar">
-<!ENTITY sb.prefs.notifyOnComplete "Show &apos;Capture Completed&apos; notification">
-<!ENTITY sb.prefs.viewer "Application for File Browsing">
-<!ENTITY sb.prefs.viewer.default "Default">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Mostrar menu &apos;Criar Favorito no ScrapBook&apos;">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Mostrar até">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "pastas usadas recentemente">
+<!ENTITY sb.prefs.ui.menuBar "Mostrar na barra de menus">
+<!ENTITY sb.prefs.ui.menuBar.icon "Ícone">
+<!ENTITY sb.prefs.ui.toolsMenu "Mostrar no menu &apos;Ferramentas&apos;">
+<!ENTITY sb.prefs.ui.statusBar "Mostrar na barra de status">
+<!ENTITY sb.prefs.restart "A mudança requer o reinício do Firefox.">
+<!ENTITY sb.prefs.tabs.tips "Abrir numa aba para as seguintes operações">
+<!ENTITY sb.prefs.tabs.note "Editar Nota">
+<!ENTITY sb.prefs.data "Localização para Armazenar Dados">
+<!ENTITY sb.prefs.data.default "Padrão (Pasta do Perfil)">
+<!ENTITY sb.prefs.data.custom "Saltar dados em">
+<!ENTITY sb.prefs.data.tips "Escolha uma pasta para salvar os dados do ScrapBook.">
+<!ENTITY sb.prefs.multibook.enabled "Habilitar Multi-ScrapBook">
+<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook lhe permite determinar múltiplos lugares para salvar os dados e mudar entre eles rapidamente com o botão da barra de ferramentas.">
+<!ENTITY sb.prefs.confirmDelete "Avisar quando for apagar item(ns) da árvore">
+<!ENTITY sb.prefs.tree.autoCollapse "Ao abrir uma pasta da árvore, fechar automaticamente outras pastas">
+<!ENTITY sb.prefs.tree.unshift "Colocar um item dentro do">
+<!ENTITY sb.prefs.tree.unshift.top "topo da pasta">
+<!ENTITY sb.prefs.tree.unshift.bottom "rodapé da pasta">
+<!ENTITY sb.prefs.showDetailOnDrop "Mostrar janela &apos;Detalhe de Captura&apos; quando capturando via arrastar e soltar na barra lateral">
+<!ENTITY sb.prefs.notifyOnComplete "Mostrar notificação &apos;Captura Completa&apos;">
+<!ENTITY sb.prefs.viewer "Aplicação para Navegação de Arquivo">
+<!ENTITY sb.prefs.viewer.default "Padrão">
 <!ENTITY sb.prefs.viewer.default.explorer "Explorer">
-<!ENTITY sb.prefs.viewer.custom "Show files with">
-<!ENTITY sb.button.customize "Customize">
-<!ENTITY sb.button.browse "Browse">
-<!ENTITY sb.button.show "Show Files">
-<!ENTITY sbp.prefs.useDropDownList "use drop-down choice list instead of buttons for highlighter">
+<!ENTITY sb.prefs.viewer.custom "Mostrar arquivos com">
+<!ENTITY sb.button.customize "Personalizar">
+<!ENTITY sb.button.browse "Caminho">
+<!ENTITY sb.button.show "Mostrar arquivos">
+<!ENTITY sbp.prefs.useDropDownList "usar lista de escolha drop-down ao invés de botões para realçador">

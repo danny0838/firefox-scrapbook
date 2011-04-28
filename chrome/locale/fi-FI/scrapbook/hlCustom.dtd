@@ -10,11 +10,11 @@
 <!ENTITY sb.hlCustom.box "Laatikko">
 <!ENTITY sb.hlCustom.underline "Alleviivattu">
 <!ENTITY sb.hlCustom.style "Tyyli">
-<!ENTITY sb.hlCustom.solid "Normaali">
+<!ENTITY sb.hlCustom.solid "Kiinteä">
 <!ENTITY sb.hlCustom.dotted "Pisteviiva">
 <!ENTITY sb.hlCustom.dashed "Katkoviiva">
-<!ENTITY sb.hlCustom.double "Tuplapaksu">
+<!ENTITY sb.hlCustom.double "Kaksinkertainen">
 <!ENTITY sb.hlCustom.width "Leveys">
 <!ENTITY sb.hlCustom.thin "Ohut">
-<!ENTITY sb.hlCustom.medium "Keskipaksu">
+<!ENTITY sb.hlCustom.medium "Keskivahvuinen">
 <!ENTITY sb.hlCustom.thick "Paksu">

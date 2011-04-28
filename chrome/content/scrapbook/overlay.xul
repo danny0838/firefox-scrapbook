@@ -88,7 +88,7 @@
 		<menuitem id="ScrapBookToolsMenu" key="key_openScrapBookSidebar" observes="viewScrapBookSidebar" insertafter="devToolsSeparator" />
 	</menupopup>
 
-	<popup id="contentAreaContextMenu">
+	<menupopup id="contentAreaContextMenu">
 		<menuseparator id="ScrapBookContextMenu0" />
 		<menu     id="ScrapBookContextMenu1" class="menu-iconic     sb-capture-partial" label="&sb.capture.partial;"       oncommand="sbBrowserOverlay.execCapture(1, true , false, event.originalTarget.id);" onclick="sbBrowserOverlay.onMiddleClick(event,1);"><menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this);" onpopuphiding="sbBrowserOverlay.destroyPopup(this);" /></menu>
 		<menuitem id="ScrapBookContextMenu2" class="menuitem-iconic sb-capture-partial" label="&sb.capture.partial.as;..." oncommand="sbBrowserOverlay.execCapture(1, true , true , event.originalTarget.id);" />
@@ -103,7 +103,7 @@
 		<menu id="ScrapBookContextMenu9" label="&sb.capture.bookmark;" oncommand="sbBrowserOverlay.execBookmark(event.originalTarget.id);">
 			<menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this);" onpopuphiding="sbBrowserOverlay.destroyPopup(this);" />
 		</menu>
-	</popup>
+	</menupopup>
 
 	<toolbarpalette id="BrowserToolbarPalette">
 		<toolbarbutton id="scrapbook-button"

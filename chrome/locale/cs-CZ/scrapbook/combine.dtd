@@ -1,6 +1,6 @@
 <!ENTITY sb.combine.dragdrop "Přetažením ze seznamu přidejte položky v pořadí, ve kterém je chcete sloučit. Můžete také přetáhnout více položek najednou.">
 <!ENTITY sb.combine.preview "Náhled">
-<!ENTITY sb.combine.preview.d "Po ověření správnosti v náhledu klepněte na tlačítko &apos;Sloučit&apos;.">
+<!ENTITY sb.combine.preview.d "Po ověření správnosti v náhledu klepněte na tlačítko &quot;Sloučit&quot;.">
 <!ENTITY sb.combine.option.remove "Odstranit původní stránky po dokončení sloučení">
 <!ENTITY sbp.combine.up "posunout položku výše">
 <!ENTITY sbp.combine.down "posunout položku níže">

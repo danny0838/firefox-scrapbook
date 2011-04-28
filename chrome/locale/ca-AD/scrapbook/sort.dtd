@@ -1,8 +1,0 @@
-<!ENTITY sb.sort "Ordenació">
-<!ENTITY sb.sort.reverse "Inverteix l&apos;ordre">
-<!ENTITY sb.sort.title.asc "Ordena per títol (A &gt; Z)">
-<!ENTITY sb.sort.title.desc "Ordena per títol (Z &gt; A)">
-<!ENTITY sb.sort.date.asc "Ordena per ordre cronològic">
-<!ENTITY sb.sort.date.desc "Ordena per ordre cronològic invers">
-<!ENTITY sb.sort.recursive "Ordena recursivament les subcarpetes">
-<!ENTITY sb.sort.warning "Avís: No podreu desfer aquesta operació.">
