@@ -1,0 +1,19 @@
+<!ENTITY sb.capture "取り込み">
+<!ENTITY sb.capture.abort "中止">
+<!ENTITY sb.capture.start "開始">
+<!ENTITY sb.capture.retry "再試行">
+<!ENTITY sb.capture.skip "スキップ">
+<!ENTITY sb.capture.pause "一時停止">
+<!ENTITY sb.capture.finish "キャンセル">
+<!ENTITY sb.capture.filter "フィルタ">
+<!ENTITY sb.capture.filter.column.one "含む/除外">
+<!ENTITY sb.capture.filter.column.two "フィルタ (正規表現)">
+<!ENTITY sb.capture.filter.accept "適用">
+<!ENTITY sb.capture.filter.accept.tt "値を変更または編集する">
+<!ENTITY sb.capture.filter.cancel "キャンセル">
+<!ENTITY sb.capture.filter.cancel.tt "編集を中止する">
+<!ENTITY sb.capture.filter.delete "削除">
+<!ENTITY sb.capture.filter.delete.tt "リストからフィルタを削除する">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "タイトル">
+<!ENTITY sbp.capture.column.three "状態">

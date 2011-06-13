@@ -1,0 +1,19 @@
+<!ENTITY sb.new.folder "開新資料夾">
+<!ENTITY sb.new.separator "新增分隔線">
+<!ENTITY sb.new.note "新增筆記">
+<!ENTITY sb.toggle.all "開啟/收合所有資料夾">
+<!ENTITY sb.tools "工具">
+<!ENTITY sb.tools.options "設定">
+<!ENTITY sb.tools.manage "管理擷取資料">
+<!ENTITY sb.tools.combine "文件合併精靈">
+<!ENTITY sb.tools.trade "匯入 / 匯出">
+<!ENTITY sb.tools.multiple "擷取多重 URL">
+<!ENTITY sb.tools.directory "開啟 ScrapBook 目錄">
+<!ENTITY sb.tools.calculate "計算資料容量">
+<!ENTITY sb.tools.sorttree "所有資料排序">
+<!ENTITY sb.tools.output "將資料列表匯出為 HTML">
+<!ENTITY sb.tools.repair "緊急救援">
+<!ENTITY sb.tools.addons "附加元件功能">
+<!ENTITY sb.tools.homepage "套件首頁">
+<!ENTITY sb.note.opentab "開啟於新分頁中">
+<!ENTITY sb.note.close "關閉">

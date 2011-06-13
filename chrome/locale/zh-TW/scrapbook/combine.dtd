@@ -1,0 +1,8 @@
+<!ENTITY sb.combine.dragdrop "請以滑鼠將要合併的檔案從樹狀列表中拖曳至此，並依合併順序排列。一次可以拖曳多個檔案。">
+<!ENTITY sb.combine.preview "預覽">
+<!ENTITY sb.combine.preview.d "確認預覽結果後，請按下「合併」鈕。">
+<!ENTITY sb.combine.option.remove "合併後刪除原頁面">
+<!ENTITY sbp.combine.up "檔案上移">
+<!ENTITY sbp.combine.down "檔案下移">
+<!ENTITY sbp.combine.remove "移除檔案">
+<!ENTITY sbp.combine.newTitle "新標題">

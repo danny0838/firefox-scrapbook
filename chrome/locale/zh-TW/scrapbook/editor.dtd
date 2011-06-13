@@ -1,0 +1,29 @@
+<!ENTITY sb.toolbar.edit "編輯工具列">
+<!ENTITY sb.toolbar.info "顯示資訊列">
+<!ENTITY sb.edit.eraser "DOM Eraser: 將點選的區塊刪除，或可刪除單一標示。">
+<!ENTITY sb.edit.undo "復原">
+<!ENTITY sb.edit.save "存檔">
+<!ENTITY sb.edit.comment "展開文件評注欄">
+<!ENTITY sb.edit.sticky "自由註解">
+<!ENTITY sb.edit.sticky.create "添增&sb.edit.sticky;">
+<!ENTITY sb.edit.inline.add "為選取區添增註腳">
+<!ENTITY sb.edit.attach.file "為選取區附加檔案">
+<!ENTITY sb.edit.attach.link "為選取區附加連結">
+<!ENTITY sb.edit.cutter "刪除選取區">
+<!ENTITY sb.edit.remove.iframe "移除所有 IFRAME 標籤">
+<!ENTITY sb.edit.remove.script "移除所有 SCRIPT 標籤">
+<!ENTITY sb.highlighter "標示">
+<!ENTITY sb.highlighter.remove "刪除選取區內標示">
+<!ENTITY sb.highlighter.remove.all "刪除所有標示">
+<!ENTITY sbp.highlighter.stil1 "樣式 1">
+<!ENTITY sbp.highlighter.stil2 "樣式 2">
+<!ENTITY sbp.highlighter.stil3 "樣式 3">
+<!ENTITY sbp.highlighter.stil4 "樣式 4">
+<!ENTITY sbp.highlighter.stil5 "樣式 5">
+<!ENTITY sbp.highlighter.stil6 "樣式 6">
+<!ENTITY sb.source "開啟原始網址">
+<!ENTITY sb.renew "重新擷取">
+<!ENTITY sb.locate "於側邊欄中顯示此檔位置">
+<!ENTITY sb.indicators "顯示連結標記">
+<!ENTITY sb.info.home "首頁">
+<!ENTITY sb.info.sitemap "網站導覽">

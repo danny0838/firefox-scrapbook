@@ -1,0 +1,16 @@
+<!ENTITY sb.multiple.filter "フィルタ（正規表現）">
+<!ENTITY sbp.multiple.titleofwebsite "ウェブサイトのタイトル">
+<!ENTITY sbp.multiple.titleoflink "リンクのタイトル">
+<!ENTITY sb.multiple.title "タイトル">
+<!ENTITY sb.multiple.timeout "タイムアウト">
+<!ENTITY sbp.multiple.downloadmethod "メソッド">
+<!ENTITY sb.multiple.charset "文字セット">
+<!ENTITY sb.multiple.url "URL （改行して複数入力可）">
+<!ENTITY sb.multiple.detector "URL検出ツール">
+<!ENTITY sb.multiple.detector.plink "ページ内のすべてのリンク">
+<!ENTITY sb.multiple.detector.slink "選択範囲内のすべてのリンク">
+<!ENTITY sb.multiple.detector.tabs "現在のウィンドウに開かれたすべてのタブ">
+<!ENTITY sb.multiple.detector.local "指定したフォルダ以下のローカルHTML">
+<!ENTITY sb.multiple.detector.bookmarks "ブックマーク">
+<!ENTITY sb.multiple.detector.clear "クリア">
+<!ENTITY sbp.multiple.exclude "保存先フォルダにすでに存在するアドレスは無視する">

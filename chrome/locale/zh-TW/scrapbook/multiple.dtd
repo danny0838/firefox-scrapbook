@@ -1,0 +1,16 @@
+<!ENTITY sb.multiple.filter "篩選條件（使用規則運算式）">
+<!ENTITY sbp.multiple.titleofwebsite "網站標題">
+<!ENTITY sbp.multiple.titleoflink "連結標題">
+<!ENTITY sb.multiple.title "標題">
+<!ENTITY sb.multiple.timeout "逾時">
+<!ENTITY sbp.multiple.downloadmethod "方式">
+<!ENTITY sb.multiple.charset "字元集">
+<!ENTITY sb.multiple.url "URL (每行一個 URL)">
+<!ENTITY sb.multiple.detector "自動偵測 URL">
+<!ENTITY sb.multiple.detector.plink "本頁所有連結">
+<!ENTITY sb.multiple.detector.slink "選取區中所有連結">
+<!ENTITY sb.multiple.detector.tabs "此視窗中所有的分頁">
+<!ENTITY sb.multiple.detector.local "某目錄下所有的 HTML 檔">
+<!ENTITY sb.multiple.detector.bookmarks "書籤">
+<!ENTITY sb.multiple.detector.clear "清除">
+<!ENTITY sbp.multiple.exclude "略過已存在於目標資料夾的位址">

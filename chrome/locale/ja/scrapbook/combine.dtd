@@ -1,0 +1,8 @@
+<!ENTITY sb.combine.dragdrop "結合したいページを順番にツリーからドラッグ＆ドロップして追加してください。複数のアイテムを一度にドラッグ＆ドロップして追加することも可能です。">
+<!ENTITY sb.combine.preview "プレビュー">
+<!ENTITY sb.combine.preview.d "プレビューを確認して、よろしければ結合ボタンを押してください。">
+<!ENTITY sb.combine.option.remove "結合完了後、結合された元のページを削除する">
+<!ENTITY sbp.combine.up "上へ">
+<!ENTITY sbp.combine.down "下へ">
+<!ENTITY sbp.combine.remove "削除">
+<!ENTITY sbp.combine.newTitle "新しいタイトル">

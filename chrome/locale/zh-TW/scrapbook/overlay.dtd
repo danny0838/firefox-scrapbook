@@ -1,0 +1,18 @@
+<!ENTITY sb.capture.partial "擷取選擇區域">
+<!ENTITY sb.capture.partial.as "擷取選擇區域設定">
+<!ENTITY sb.capture.entire "擷取網頁">
+<!ENTITY sb.capture.entire.as "擷取網頁設定">
+<!ENTITY sb.capture.frame "擷取頁框">
+<!ENTITY sb.capture.frame.as "擷取頁框設定">
+<!ENTITY sb.capture.target "擷取連結">
+<!ENTITY sb.capture.target.as "擷取連結設定">
+<!ENTITY sb.capture.alltabs "擷取所有分頁">
+<!ENTITY sb.capture.bookmark "加入 ScrapBook+ 書籤">
+<!ENTITY sb.sidebar "顯示於側邊欄中">
+<!ENTITY sb.menu "選單">
+<!ENTITY sb.editbefore "編輯後擷取">
+<!ENTITY sb.key.sidebar "K">
+<!ENTITY sb.key.menubar "S">
+<!ENTITY sb.key.capture "L">
+<!ENTITY sb.key.capture.as "K">
+<!ENTITY sb.key.bookmark "J">
