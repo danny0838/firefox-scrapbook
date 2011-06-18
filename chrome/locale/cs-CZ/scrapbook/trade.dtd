@@ -1,0 +1,5 @@
+<!ENTITY sb.trade.import "Importovat">
+<!ENTITY sb.trade.export "Exportovat">
+<!ENTITY sb.trade.time "Vyexportováno">
+<!ENTITY sb.trade.restore "Při importu zároveň obnovit strukturu složky">
+<!ENTITY sb.trade.remove "Po dokončení importování odstranit původní soubory">

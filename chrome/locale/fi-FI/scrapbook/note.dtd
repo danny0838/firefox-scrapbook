@@ -5,7 +5,7 @@
 <!ENTITY sb.note.normalview "Normaali näkymä">
 <!ENTITY sb.note.template "Muokkaa HTML-pohjaa">
 <!ENTITY sb.note.autolinefeed "Automaattinen rivinvaihto">
-<!ENTITY sb.note.autolinefeed.t "Lisää <br> -koodin &sb.note.htmlview; rivin loppuun.">
+<!ENTITY sb.note.autolinefeed.t "Lisää &lt;br&gt; -koodin &sb.note.htmlview; rivin loppuun.">
 <!ENTITY sb.note.fontsize "Kirjasinkoko">
 <!ENTITY sb.note.help "Ohje">
 <!ENTITY sb.note.print "Tulosta">

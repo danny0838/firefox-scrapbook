@@ -5,7 +5,7 @@
 <!ENTITY sb.note.normalview "Widok normalny">
 <!ENTITY sb.note.template "Edycja szablonu dokumentu HTML">
 <!ENTITY sb.note.autolinefeed "Autouzupełnianie">
-<!ENTITY sb.note.autolinefeed.t "Dodaj znacznik <br> na końcu linii w podglądzie dokumentu HTML">
+<!ENTITY sb.note.autolinefeed.t "Dodaj znacznik &lt;br&gt; na końcu linii w podglądzie dokumentu HTML">
 <!ENTITY sb.note.fontsize "Wielkość czcionki">
 <!ENTITY sb.note.help "Pomoc">
 <!ENTITY sb.note.print "Drukuj">

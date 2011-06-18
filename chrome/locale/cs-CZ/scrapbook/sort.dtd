@@ -1,0 +1,8 @@
+<!ENTITY sb.sort "Seřadit">
+<!ENTITY sb.sort.reverse "Obráceně">
+<!ENTITY sb.sort.title.asc "Seřadit podle názvu (A &gt; Z)">
+<!ENTITY sb.sort.title.desc "Seřadit podle názvu (Z &gt; A)">
+<!ENTITY sb.sort.date.asc "Chronologicky">
+<!ENTITY sb.sort.date.desc "Od nejnovějšího k nejstaršímu">
+<!ENTITY sb.sort.recursive "Seřadit podsložky">
+<!ENTITY sb.sort.warning "Poznámka: Tuto operaci NELZE vrátit zpět.">

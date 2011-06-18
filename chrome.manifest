@@ -8,6 +8,7 @@ style	chrome://global/content/customizeToolbar.xul	chrome://scrapbook/skin/overl
 
 locale	scrapbook	en-US	jar:chrome/scrapbook.jar!/locale/en-US/scrapbook/
 locale	scrapbook	ja	jar:chrome/scrapbook.jar!/locale/ja/scrapbook/
+locale	scrapbook	cs-CZ	jar:chrome/scrapbook.jar!/locale/cs-CZ/scrapbook/
 locale	scrapbook	de	jar:chrome/scrapbook.jar!/locale/de/scrapbook/
 locale	scrapbook	es-ES	jar:chrome/scrapbook.jar!/locale/es-ES/scrapbook/
 locale	scrapbook	fi-FI	jar:chrome/scrapbook.jar!/locale/fi-FI/scrapbook/
