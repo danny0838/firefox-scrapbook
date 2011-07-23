@@ -36,9 +36,9 @@
 
 	<keyset id="mainKeyset">
 		<key id="key_openScrapBookSidebar"  key="&sb.key.sidebar;"    modifiers="alt" command="viewScrapBookSidebar" />
-		<key id="key_ScrapBookCapture"      key="&sb.key.capture;"    modifiers="accel shift" oncommand="sbBrowserOverlay.execCapture(0, null, false, 'urn:scrapbook:root');" />
-		<key id="key_ScrapBookCaptureAs"    key="&sb.key.capture.as;" modifiers="accel shift" oncommand="sbBrowserOverlay.execCapture(0, null, true , 'urn:scrapbook:root');" />
-		<key id="key_BookmarkWithScrapBook" key="&sb.key.bookmark;"   modifiers="accel shift" oncommand="sbBrowserOverlay.execBookmark('ScrapBookContextMenu3', 'urn:scrapbook:root', 0, null, true);" />
+		<key id="key_ScrapBookCapture"      key="&sb.key.capture;"    modifiers="accel alt" oncommand="sbBrowserOverlay.execCapture(0, null, false, 'urn:scrapbook:root');" />
+		<key id="key_ScrapBookCaptureAs"    key="&sb.key.capture.as;" modifiers="accel alt" oncommand="sbBrowserOverlay.execCapture(0, null, true , 'urn:scrapbook:root');" />
+		<key id="key_BookmarkWithScrapBook" key="&sb.key.bookmark;"   modifiers="accel alt" oncommand="sbBrowserOverlay.execBookmark('ScrapBookContextMenu3', 'urn:scrapbook:root', 0, null, true);" />
 	</keyset>
 
 	<menupopup id="viewSidebarMenu">
