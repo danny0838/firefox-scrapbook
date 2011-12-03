@@ -1,0 +1,85 @@
+<?xml version="1.0" ?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+<?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
+
+<!DOCTYPE window [
+<!ENTITY % mainDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+%mainDTD;
+<!ENTITY % treeDTD SYSTEM "chrome://scrapbook/locale/tree.dtd" >
+%treeDTD;
+<!ENTITY % propDTD SYSTEM "chrome://scrapbook/locale/property.dtd" >
+%propDTD;
+<!ENTITY % calcDTD SYSTEM "chrome://scrapbook/locale/calculate.dtd" >
+%calcDTD;
+]>
+
+<window id="sbCalcWindow"
+        title="&sb.tools.calculate; - ScrapBook"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        width="500" height="450"
+        persist="screenX screenY"
+        onload="setTimeout(function(){ sbCalcService.exec(); }, 0);"
+        windowtype="scrapbook">
+
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/calculate.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/property.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapbook.js" />
+
+	<stringbundle id="sbPropString" src="chrome://scrapbook/locale/property.properties" />
+
+	<keyset>
+		<key keycode="VK_ESCAPE" oncommand="window.close();" />
+		<key keycode="VK_F5"     oncommand="window.location.reload();" />
+	</keyset>
+
+	<popupset>
+		<menupopup id="sbCalcPopup" onpopupshowing="sbCalcController.createPopupMenu();">
+			<menuitem label="&sb.open;"        oncommand="sbCalcController.open(false);" default="true" />
+			<menuitem label="&sb.open.newtab;" oncommand="sbCalcController.open(true);" />
+			<menuitem label="&sb.show.files;"  oncommand="sbCalcController.forward('L');" />
+			<menuseparator /><menuitem id="sbPopupRemove"   class="menuitem-iconic" label="&sb.remove;"   oncommand="sbCalcController.remove();" disbabled="true" />
+			<menuseparator /><menuitem id="sbPopupProperty" class="menuitem-iconic" label="&sb.property;" oncommand="sbCalcController.forward('P');" />
+		</menupopup>
+	</popupset>
+
+	<grid style="margin:10px 10px 0px 10px;">
+		<columns>
+			<column />
+			<column flex="1" />
+		</columns>
+		<rows>
+			<row align="center">
+				<label value="&sb.calc.total.size;:" />
+				<textbox id="sbCalcTotalSize" readonly="true" />
+			</row>
+			<row align="center">
+				<label value="&sb.calc.diagnosis;:" />
+				<textbox id="sbCalcDiagnosis" readonly="true" />
+			</row>
+		</rows>
+	</grid>
+
+	<tree id="sbTree"
+	      context="sbCalcPopup"
+	      seltype="single"
+	      ondblclick="sbCalcController.onDblClick(event);"
+	      onkeypress="if ( event.keyCode == 46 ) sbCalcController.remove();"
+	      style="margin:12px;"
+	      flex="1">
+		<treecols>
+			<treecol id="sbTreeColTitle" label="&sb.prop.title;"     flex="7" sortIndex="2" primary="true" />
+			<treecol id="sbTreeColSize"  label="&sb.prop.size;"      flex="2" sortIndex="4" sortDirection="descending" />
+			<treecol id="sbTreeColState" label="&sb.calc.diagnosis;" flex="1" sortIndex="6" style="max-width:120px;" />
+		</treecols>
+		<treechildren />
+	</tree>
+
+	<statusbar style="border-top: 1px solid ThreeDShadow;" align="center">
+		<statusbarpanel id="sbCalcMessage" class="plain" flex="1" />
+		<progressmeter id="sbCalcProgress" mode="determined" value="0" width="160" />
+	</statusbar>
+
+</window>

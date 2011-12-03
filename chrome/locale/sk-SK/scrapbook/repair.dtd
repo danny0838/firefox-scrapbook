@@ -1,0 +1,9 @@
+<!ENTITY sb.repair.rdfFile "Obnoviť scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript "Skúste, keď sa vám stratia ScrapBook údaje.">
+<!ENTITY sb.repair.rdfFile.select "Vyberte zálohu, ktorú obnoviť.">
+<!ENTITY sb.repair.rdfFile.file "Súbor">
+<!ENTITY sb.repair.rdfFile.time "Čas">
+<!ENTITY sb.repair.rdfFile.size "Veľkosť">
+<!ENTITY sb.repair.favicons "Obnoviť favikony">
+<!ENTITY sb.repair.favicons.descript "Skúste, pokiaľ ste stratili favikony.">
+<!ENTITY sb.repair.complete "Hotovo.">

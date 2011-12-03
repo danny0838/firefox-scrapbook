@@ -1,0 +1,19 @@
+<!ENTITY sb.note.save "Salvează">
+<!ENTITY sb.note.close "Închide">
+<!ENTITY sb.note.tools "Unelte">
+<!ENTITY sb.note.htmlview "Vizualizează ca HTML">
+<!ENTITY sb.note.normalview "Vizualizează normal">
+<!ENTITY sb.note.template "Editează șablonul HTML">
+<!ENTITY sb.note.autolinefeed "Avans automat de linie">
+<!ENTITY sb.note.autolinefeed.t "Adaugă eticheta &lt;br&gt; la sfârșitul liniei în modul &sb.note.htmlview;">
+<!ENTITY sb.note.fontsize "Dimensiune font">
+<!ENTITY sb.note.help "Ajutor">
+<!ENTITY sb.note.print "Imprimă">
+<!ENTITY sb.note.exit "Termină">
+<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "V">
+<!ENTITY sb.note.tools.accesskey "I">
+<!ENTITY sb.note.fontsize.accesskey "f">
+<!ENTITY sb.note.print.accesskey "p">
+<!ENTITY sb.note.exit.accesskey "T">

@@ -1,0 +1,13 @@
+<!ENTITY sb.prop.general "常规">
+<!ENTITY sb.prop.type "类型">
+<!ENTITY sb.prop.date "日期">
+<!ENTITY sb.prop.encode "编码">
+<!ENTITY sb.prop.size "大小">
+<!ENTITY sb.prop.content "内容">
+<!ENTITY sb.prop.folder "文件夹">
+<!ENTITY sb.prop.icon "图标">
+<!ENTITY sb.prop.icon.change "更改">
+<!ENTITY sb.prop.icon.default "默认">
+<!ENTITY sb.prop.icon.favicon "选择个性化图标">
+<!ENTITY sb.prop.icon.custom "选择自定义图标">
+<!ENTITY sb.prop.mark "标记">

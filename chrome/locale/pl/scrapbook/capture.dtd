@@ -1,0 +1,13 @@
+<!ENTITY sb.save "Przechwyć">
+<!ENTITY sb.save.abort "Usuń">
+<!ENTITY sb.save.start "Start">
+<!ENTITY sb.save.retry "Spróbuj ponownie">
+<!ENTITY sb.save.skip "Pomiń">
+<!ENTITY sb.save.pause "Pauza">
+<!ENTITY sb.save.filter "Filtrowanie">
+<!ENTITY sb.save.filter.domain "Ogranicz do domeny">
+<!ENTITY sb.save.filter.level "Ogranicz do katalogu">
+<!ENTITY sb.save.filter.string "Filtruj używając ciągu znaków…">
+<!ENTITY sb.save.filter.checkon "Zaznacz wszystkie">
+<!ENTITY sb.save.filter.checkoff "Odznacz wszystkie">
+<!ENTITY sb.save.filter.invert "Odwróć zaznaczenie">

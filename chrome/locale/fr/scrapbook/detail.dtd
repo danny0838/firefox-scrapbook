@@ -1,0 +1,17 @@
+<!ENTITY sb.detail.title "Détail de l'enregistrement">
+<!ENTITY sb.detail.new.folder "Nouveau dossier">
+<!ENTITY sb.detail.select.folder "Sélectionner le dossier">
+<!ENTITY sb.detail.option "Options">
+<!ENTITY sb.detail.option.images "Images">
+<!ENTITY sb.detail.option.styles "Styles">
+<!ENTITY sb.detail.linked.file "Capturer les fichiers liés">
+<!ENTITY sb.detail.linked.image "Image">
+<!ENTITY sb.detail.linked.sound "Son">
+<!ENTITY sb.detail.linked.movie "Vidéo">
+<!ENTITY sb.detail.linked.archive "Archive">
+<!ENTITY sb.detail.linked.custom "Personnalisé">
+<!ENTITY sb.detail.linked.page2 "Enregistrement en profondeur">
+<!ENTITY sb.detail.linked.page.depth "Profondeur d'enregistrement des liens">
+<!ENTITY sb.detail.linked.page.text "Une fois les enregistrements terminés, toutes les pages seront liées entre elles et un plan du site sera créé.">
+<!ENTITY sb.detail.warnAboutRenew "IMPORTANT : 'Enregitrer à nouveau' remplace la page sauvegardée précédemment.">
+<!ENTITY sb.detail.warnAboutScript "IMPORTANT : JavaScript peut causer des problèmes.">

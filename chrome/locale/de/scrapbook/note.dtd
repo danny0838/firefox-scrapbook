@@ -1,0 +1,19 @@
+<!ENTITY sb.note.save "Speichern">
+<!ENTITY sb.note.close "Schließen">
+<!ENTITY sb.note.tools "Extras">
+<!ENTITY sb.note.htmlview "HTML-Vorschau">
+<!ENTITY sb.note.normalview "Normale Ansicht">
+<!ENTITY sb.note.template "HTML-Vorlage bearbeiten">
+<!ENTITY sb.note.autolinefeed "Automatischer Zeilenvorschub">
+<!ENTITY sb.note.autolinefeed.t "&lt;br&gt;-Tag am Zeilenende der HTML-Vorschau einfügen">
+<!ENTITY sb.note.fontsize "Schriftgröße">
+<!ENTITY sb.note.help "Hilfe">
+<!ENTITY sb.note.print "Drucken">
+<!ENTITY sb.note.exit "Beenden">
+<!ENTITY sb.note.save.accesskey "p">
+<!ENTITY sb.note.htmlview.accesskey "V">
+<!ENTITY sb.note.normalview.accesskey "o">
+<!ENTITY sb.note.tools.accesskey "r">
+<!ENTITY sb.note.fontsize.accesskey "i">
+<!ENTITY sb.note.print.accesskey "u">
+<!ENTITY sb.note.exit.accesskey "n">

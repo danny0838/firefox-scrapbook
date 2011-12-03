@@ -1,0 +1,17 @@
+<!ENTITY sb.detail.title "Archivierungsdetails">
+<!ENTITY sb.detail.new.folder "Neuer Ordner">
+<!ENTITY sb.detail.select.folder "Ordner auswählen">
+<!ENTITY sb.detail.option "Einschließen">
+<!ENTITY sb.detail.option.images "Grafiken">
+<!ENTITY sb.detail.option.styles "Webseiten-Stile">
+<!ENTITY sb.detail.linked.file "Verlinkte Dateien herunterladen">
+<!ENTITY sb.detail.linked.image "Grafiken">
+<!ENTITY sb.detail.linked.sound "Audio">
+<!ENTITY sb.detail.linked.movie "Filme">
+<!ENTITY sb.detail.linked.archive "Archive">
+<!ENTITY sb.detail.linked.custom "Benutzerdefiniert">
+<!ENTITY sb.detail.linked.page2 "Ausführliche Archivierung">
+<!ENTITY sb.detail.linked.page.depth "Links folgen bis zu einer Tiefe von">
+<!ENTITY sb.detail.linked.page.text "Nach Abschluss der Archivierung werden alle Seiten untereinander verlinkt.">
+<!ENTITY sb.detail.warnAboutRenew "HINWEIS: &quot;Erneut archivieren&quot; überschreibt zuvor gespeicherte Seiten.">
+<!ENTITY sb.detail.warnAboutScript "HINWEIS: JavaScript kann eine Reihe von Problemen verursachen.">

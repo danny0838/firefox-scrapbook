@@ -1,0 +1,66 @@
+/**
+ * You can edit this CSS for 'Output Tree as HTML' feature.
+ * If you want to reset to default, remove this file.
+ */
+
+body {
+	margin: 0px;
+	padding: 0px;
+}
+
+/* ::::: header ::::: */
+
+div#header {
+	padding: 2px 8px;
+	border: 1px solid ThreeDShadow;
+	background-color: InfoBackground;
+	font-family:"MS UI Gothic", sans-serif;
+	font-size:9pt;
+}
+
+div#header a {
+	color: #666666;
+}
+
+div#header a:before {
+	content: url('./toggle.png');
+	vertical-align: middle;
+}
+
+/* ::::: list ::::: */
+ul {
+	margin-left :  0px;
+	padding-left : 0px;
+}
+
+/* ::::: list items ::::: */
+li {
+	list-style-type: none;
+	margin:2px 20px;
+	white-space: nowrap;
+	font-family:"MS UI Gothic", sans-serif;
+	font-size:9pt;
+}
+
+a {
+	text-decoration: none;
+	color: #000000;
+}
+
+a:active {
+	background-color:#000000;
+	color:#FFFFFF;
+}
+
+/* ::::: type ::::: */
+a.marked   { font-weight: bold; }
+a.combine  { color: blue; }
+a.bookmark { color: limegreen; }
+
+/* ::::: icon ::::: */
+li img {
+	border: none;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+

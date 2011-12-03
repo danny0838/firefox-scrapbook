@@ -1,0 +1,17 @@
+<!ENTITY sb.detail.title "Yksityiskohdan tallennus">
+<!ENTITY sb.detail.new.folder "Uusi kansio">
+<!ENTITY sb.detail.select.folder "Valitse kansio">
+<!ENTITY sb.detail.option "Asetukset">
+<!ENTITY sb.detail.option.images "Kuvat">
+<!ENTITY sb.detail.option.styles "Tyylit">
+<!ENTITY sb.detail.linked.file "Lataa linkitetyt tiedostot">
+<!ENTITY sb.detail.linked.image "Kuva">
+<!ENTITY sb.detail.linked.sound "Ääni">
+<!ENTITY sb.detail.linked.movie "Video">
+<!ENTITY sb.detail.linked.archive "Paketti">
+<!ENTITY sb.detail.linked.custom "Oma">
+<!ENTITY sb.detail.linked.page2 "Syvätallennus">
+<!ENTITY sb.detail.linked.page.depth "Linkkien seuraussyvyys">
+<!ENTITY sb.detail.linked.page.text "Tallennusten valmistuttua kaikki sivut linkitetään toisiinsa.">
+<!ENTITY sb.detail.warnAboutRenew "HUOM.: &quot;Tallenna uudestaan&quot; korvaa aiemman version.">
+<!ENTITY sb.detail.warnAboutScript "HUOM.: JavaScript voi aiheuttaa ongelmia.">

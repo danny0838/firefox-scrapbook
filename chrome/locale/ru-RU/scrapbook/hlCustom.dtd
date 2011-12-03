@@ -1,0 +1,20 @@
+<!ENTITY sb.hlCustom.preset "Предустановленные стили">
+<!ENTITY sb.hlCustom.background "Фон">
+<!ENTITY sb.hlCustom.color "Цвет">
+<!ENTITY sb.hlCustom.text "Текст">
+<!ENTITY sb.hlCustom.bold "Полужирный">
+<!ENTITY sb.hlCustom.italic "Курсив">
+<!ENTITY sb.hlCustom.line "Зачёркнутый">
+<!ENTITY sb.hlCustom.border "Граница">
+<!ENTITY sb.hlCustom.type "Тип">
+<!ENTITY sb.hlCustom.box "Текст в рамке">
+<!ENTITY sb.hlCustom.underline "Подчёркнутый">
+<!ENTITY sb.hlCustom.style "Стиль">
+<!ENTITY sb.hlCustom.solid "Сплошной">
+<!ENTITY sb.hlCustom.dotted "Точками">
+<!ENTITY sb.hlCustom.dashed "Чёрточками">
+<!ENTITY sb.hlCustom.double "Двойной">
+<!ENTITY sb.hlCustom.width "Ширина">
+<!ENTITY sb.hlCustom.thin "Узкий">
+<!ENTITY sb.hlCustom.medium "Средний">
+<!ENTITY sb.hlCustom.thick "Толстый">

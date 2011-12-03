@@ -1,0 +1,19 @@
+<!ENTITY sb.note.save "Uložiť">
+<!ENTITY sb.note.close "Zavrieť">
+<!ENTITY sb.note.tools "Nástroje">
+<!ENTITY sb.note.htmlview "HTML náhľad">
+<!ENTITY sb.note.normalview "Bežný náhľad">
+<!ENTITY sb.note.template "Upraviť HTML šablónu">
+<!ENTITY sb.note.autolinefeed "Automatické riadkovanie">
+<!ENTITY sb.note.autolinefeed.t "Pridať &lt;br&gt; tag na koniec riadka v HTML náhľade">
+<!ENTITY sb.note.fontsize "Veľkosť písma">
+<!ENTITY sb.note.help "Pomocník">
+<!ENTITY sb.note.print "Tlač">
+<!ENTITY sb.note.exit "Ukončiť">
+<!ENTITY sb.note.save.accesskey "U">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "B">
+<!ENTITY sb.note.tools.accesskey "N">
+<!ENTITY sb.note.fontsize.accesskey "V">
+<!ENTITY sb.note.print.accesskey "T">
+<!ENTITY sb.note.exit.accesskey "k">

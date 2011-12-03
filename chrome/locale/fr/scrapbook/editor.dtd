@@ -1,0 +1,23 @@
+<!ENTITY sb.toolbar.edit "Barre d'outil d'édition">
+<!ENTITY sb.toolbar.info "Barre d'information">
+<!ENTITY sb.edit.eraser "DOM Eraser : un outil pour supprimer des éléments sélectionnés dans une page Web.">
+<!ENTITY sb.edit.undo "Annuler">
+<!ENTITY sb.edit.save "Sauvegarder les changements">
+<!ENTITY sb.edit.comment "Déployer la zone de commentaire">
+<!ENTITY sb.edit.sticky "Note collante">
+<!ENTITY sb.edit.sticky.create "Créer une &sb.edit.sticky;">
+<!ENTITY sb.edit.inline.add "Ajouter une annotation en ligne à la sélection">
+<!ENTITY sb.edit.attach.file "Attacher un fichier à la sélection">
+<!ENTITY sb.edit.attach.link "Attacher un lien à la sélection">
+<!ENTITY sb.edit.cutter "Supprimer la sélection">
+<!ENTITY sb.edit.remove.iframe "Supprimer toutes les balises IFRAME">
+<!ENTITY sb.edit.remove.script "Supprimer toutes les balises SCRIPT">
+<!ENTITY sb.highlighter "Surligneur">
+<!ENTITY sb.highlighter.remove "Supprimer les surlignements dans la sélection">
+<!ENTITY sb.highlighter.remove.all "Supprimer tous les surlignements">
+<!ENTITY sb.source "Ouvrir l'URL source">
+<!ENTITY sb.renew "Capturer à nouveau">
+<!ENTITY sb.locate "Localiser dans l'arborescence de la barre latérale">
+<!ENTITY sb.indicators "Montrer les indicateurs de lien">
+<!ENTITY sb.info.home "Origine">
+<!ENTITY sb.info.sitemap "Plan du site">

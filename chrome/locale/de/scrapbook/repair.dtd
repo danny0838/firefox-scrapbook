@@ -1,0 +1,9 @@
+<!ENTITY sb.repair.rdfFile "Datei scrapbook.rdf wiederherstellen">
+<!ENTITY sb.repair.rdfFile.descript "Wählen Sie diese Option, falls die Ordnerliste plötzlich nicht mehr dargestellt werden sollte.">
+<!ENTITY sb.repair.rdfFile.select "Eine Sicherungsdatei für die Wiederherstellung auswählen.">
+<!ENTITY sb.repair.rdfFile.file "Datei">
+<!ENTITY sb.repair.rdfFile.time "Datum">
+<!ENTITY sb.repair.rdfFile.size "Größe">
+<!ENTITY sb.repair.favicons "Favicons in der Ordnerliste wiederherstellen">
+<!ENTITY sb.repair.favicons.descript "Wählen Sie diese Option, falls Favicons in der ScrapBook-Ordnerliste nicht mehr angezeigt werden sollten.">
+<!ENTITY sb.repair.complete "Wiederherstellung abgeschlossen.">

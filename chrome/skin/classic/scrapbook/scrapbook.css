@@ -1,0 +1,229 @@
+/* ::::: SAVE_DETAIL ::::: */
+
+@import url('chrome://browser/skin/bookmarks/addBookmark.css');
+
+
+/* ::::: TOOLBAR ::::: */
+
+toolbarbutton#sbToolbarNewFolder {
+	list-style-image: url('chrome://scrapbook/skin/toolbar_create.png');
+}
+
+/*
+toolbarbutton#sbToolbarNewFolder dropmarker {
+	display: none;
+}
+*/
+
+toolbarbutton#sbToolbarToggle {
+	list-style-image: url('chrome://scrapbook/skin/toolbar_toggle.png');
+}
+
+toolbarbutton#sbToolbarListView {
+	list-style-image: url('chrome://scrapbook/skin/toolbar_listview.png');
+}
+
+toolbarbutton#sbToolbarMove {
+	list-style-image: url('chrome://scrapbook/skin/toolbar_move.png');
+}
+
+toolbarbutton#mbToolbarButton {
+	list-style-image: url('chrome://scrapbook/skin/main_16.png');
+}
+
+.sb-create .menu-iconic-icon,
+menuitem#sbPopupRenew    .menu-iconic-icon,
+menuitem#sbPopupRemove   .menu-iconic-icon,
+menuitem#sbPopupProperty .menu-iconic-icon {
+	width : 13px !important;
+	height: 13px !important;
+}
+
+.sb-create {
+	list-style-image: url('chrome://scrapbook/skin/menu_create.png');
+}
+
+
+/* ::::: POPUP ::::: */
+
+menuitem#sbPopupRemove,
+toolbarbutton#sbToolbarRemove {
+	list-style-image: url('chrome://scrapbook/skin/menu_remove.png');
+}
+
+menuitem#sbPopupProperty,
+toolbarbutton#sbToolbarProperty {
+	list-style-image: url('chrome://scrapbook/skin/menu_property.png');
+}
+
+menuitem#sbPopupRenew { list-style-image: url('chrome://scrapbook/skin/capture_target_as.png'); }
+
+menuitem[type="radio"][checked="true"] {
+	font-weight: bold;
+}
+
+
+/* ::::: TREE/LIST ::::: */
+
+treechildren::-moz-tree-image(sbTreeColTitle, leaf),
+richlistitem image.sblist-icon {
+	-moz-image-region: auto !important;
+	list-style-image: url('chrome://scrapbook/skin/treeitem.png') !important;
+	width: 16px; height: 16px;
+}
+
+treechildren::-moz-tree-image(sbTreeColTitle, note),
+richlistitem.note image.sblist-icon {
+	list-style-image: url('chrome://scrapbook/skin/treenote.png') !important;
+}
+
+treechildren::-moz-tree-cell-text(marked),
+richlistitem.marked .sblist-title {
+	font-weight: bold;
+}
+
+treechildren::-moz-tree-cell-text(combine),
+richlistitem.combine .sblist-title {
+	color: blue;
+}
+
+treechildren::-moz-tree-cell-text(bookmark),
+richlistitem.bookmark .sblist-title {
+	color: rgb(32,192,32);
+}
+
+treechildren::-moz-tree-cell-text(separator),
+richlistitem.separator .sblist-title {
+	color: ThreeDShadow;
+}
+
+treechildren::-moz-tree-cell-text(separator) {
+	margin: 0px 5px;
+}
+
+richlistitem.separator image.sblist-icon {
+	display: none;
+}
+
+treechildren::-moz-tree-cell-text(invalid) {
+	color: red;
+	font-weight: bold;
+}
+
+
+/* ::::: LIST ::::: */
+
+richlistitem {
+	border-bottom: 1px dotted ThreeDShadow;
+	padding: 3px 2px;
+}
+
+richlistitem[selected="true"] {
+	background-color: transparent;
+	background-image: url('chrome://scrapbook/skin/list_selected.png');
+}
+
+richlistitem .sblist-source {
+	color: #707070;
+}
+
+richlistitem .sblist-comment {
+	margin-top: 3px;
+}
+
+richlistitem .sblist-comment[value=""] {
+	display: none;
+}
+
+#sbListHeader toolbarbutton#sbListMoveUpButton {
+	list-style-image: url('chrome://scrapbook/skin/expander_up.png');
+}
+
+#sbListHeader toolbarbutton#sbListPickerButton {
+	list-style-image: url('chrome://scrapbook/skin/list_picker.png');
+}
+
+#sbListHeader toolbarbutton[type="menu"] dropmarker {
+	display: none;
+}
+
+
+/* ::::: HEADER ::::: */
+
+sidebarheader {
+	padding: 3px;
+}
+
+.sb-header {
+	color: InfoText;
+	background-color: InfoBackground;
+	border: 1px solid ThreeDShadow;
+	padding: 3px;
+}
+
+sidebarheader toolbarbutton,
+.sb-header toolbarbutton {
+	padding: 0px;
+	margin: 0px;
+	-moz-appearance: none;
+}
+
+sidebarheader toolbarbutton image,
+.sb-header toolbarbutton image {
+	padding: 0px 1px;
+	margin: 0px;
+}
+
+.sb-header-exit {
+	list-style-image: url('chrome://scrapbook/skin/exit.png');
+}
+
+.sb-header-locate {
+	list-style-image: url('chrome://scrapbook/skin/expander_left.png');
+}
+
+.sb-header-red {
+	background-color: #FFE4C7;
+	border: 1px solid #FF8099;
+}
+
+
+/* ::::: SEARCH_BUTTON ::::: */
+
+#sbSearchImage {
+	max-width : 24px !important;
+	max-height: 16px !important;
+	-moz-margin-end : 3px;
+	background-image: url('chrome://scrapbook/skin/dropdown.png');
+	cursor: default;
+}
+
+
+/* ::::: COMMON ::::: */
+
+treechildren::-moz-tree-drop-feedback {
+	width: 10000px;
+	margin-left: -100px;
+}
+
+tab {
+	min-width: 80px;
+	text-align: center;
+}
+
+listbox .listcell-icon {
+	width: 16px; height: 16px;
+}
+
+listbox .text-right {
+	text-align:right; padding-right:10px;
+}
+
+browser {
+	background-color: #FFFFFF;
+}
+
+textbox[class="plain"] {
+	background-color: -moz-Field;
+}
+

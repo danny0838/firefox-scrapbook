@@ -1,27 +1,27 @@
 overlay	chrome://browser/content/browser.xul	chrome://scrapbook/content/overlay.xul
-content	scrapbook	jar:chrome/scrapbook.jar!/content/scrapbook/
-content	scrapbook	jar:chrome/scrapbook.jar!/content/scrapbook/	contentaccessible=yes
+content	scrapbook	chrome/content/scrapbook/
+content	scrapbook	chrome/content/scrapbook/	contentaccessible=yes
 
-skin	scrapbook	classic/1.0	jar:chrome/scrapbook.jar!/skin/classic/scrapbook/
+skin	scrapbook	classic/1.0	chrome/skin/classic/scrapbook/
 style	chrome://browser/content/browser.xul	chrome://scrapbook/skin/overlay.css
 style	chrome://global/content/customizeToolbar.xul	chrome://scrapbook/skin/overlay.css
 
-locale	scrapbook	en-US	jar:chrome/scrapbook.jar!/locale/en-US/scrapbook/
-locale	scrapbook	ja	jar:chrome/scrapbook.jar!/locale/ja/scrapbook/
-locale	scrapbook	cs-CZ	jar:chrome/scrapbook.jar!/locale/cs-CZ/scrapbook/
-locale	scrapbook	de	jar:chrome/scrapbook.jar!/locale/de/scrapbook/
-locale	scrapbook	es-ES	jar:chrome/scrapbook.jar!/locale/es-ES/scrapbook/
-locale	scrapbook	fi-FI	jar:chrome/scrapbook.jar!/locale/fi-FI/scrapbook/
-locale	scrapbook	fr	jar:chrome/scrapbook.jar!/locale/fr/scrapbook/
-locale	scrapbook	gl-ES	jar:chrome/scrapbook.jar!/locale/gl-ES/scrapbook/
-locale	scrapbook	it	jar:chrome/scrapbook.jar!/locale/it/scrapbook/
-locale	scrapbook	ko-KR	jar:chrome/scrapbook.jar!/locale/ko-KR/scrapbook/
-locale	scrapbook	pl	jar:chrome/scrapbook.jar!/locale/pl/scrapbook/
-locale	scrapbook	ro	jar:chrome/scrapbook.jar!/locale/ro/scrapbook/
-locale	scrapbook	ru-RU	jar:chrome/scrapbook.jar!/locale/ru-RU/scrapbook/
-locale	scrapbook	sk-SK	jar:chrome/scrapbook.jar!/locale/sk-SK/scrapbook/
-locale	scrapbook	sv-SE	jar:chrome/scrapbook.jar!/locale/sv-SE/scrapbook/
-locale	scrapbook	zh-CN	jar:chrome/scrapbook.jar!/locale/zh-CN/scrapbook/
+locale	scrapbook	en-US	chrome/locale/en-US/scrapbook/
+locale	scrapbook	ja	chrome/locale/ja/scrapbook/
+locale	scrapbook	cs-CZ	chrome/locale/cs-CZ/scrapbook/
+locale	scrapbook	de	chrome/locale/de/scrapbook/
+locale	scrapbook	es-ES	chrome/locale/es-ES/scrapbook/
+locale	scrapbook	fi	chrome/locale/fi/scrapbook/
+locale	scrapbook	fr	chrome/locale/fr/scrapbook/
+locale	scrapbook	gl-ES	chrome/locale/gl-ES/scrapbook/
+locale	scrapbook	it	chrome/locale/it/scrapbook/
+locale	scrapbook	ko-KR	chrome/locale/ko-KR/scrapbook/
+locale	scrapbook	pl	chrome/locale/pl/scrapbook/
+locale	scrapbook	ro	chrome/locale/ro/scrapbook/
+locale	scrapbook	ru-RU	chrome/locale/ru-RU/scrapbook/
+locale	scrapbook	sk-SK	chrome/locale/sk-SK/scrapbook/
+locale	scrapbook	sv-SE	chrome/locale/sv-SE/scrapbook/
+locale	scrapbook	zh-CN	chrome/locale/zh-CN/scrapbook/
 
 resource	scrapbook-modules	modules/
 

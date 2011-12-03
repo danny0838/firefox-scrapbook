@@ -1,0 +1,34 @@
+<!ENTITY sb.prefs.main "Yleiset">
+<!ENTITY sb.prefs.tabs "Välilehdet">
+<!ENTITY sb.prefs.save "Tallenna">
+<!ENTITY sb.prefs.edit "Muokkaa">
+<!ENTITY sb.prefs.organize "Järjestä">
+<!ENTITY sb.prefs.advanced "Lisäasetukset">
+<!ENTITY sb.prefs.ui.contextMenu "Näytä selaimen ponnahdusvalikossa">
+<!ENTITY sb.prefs.ui.contextSubMenu "Alavalikko">
+<!ENTITY sb.prefs.ui.bookmark "Näytä &apos;Tallenna kirjanmerkkinä&apos; -valikko">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Näytä">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "viimeksi käytettyä kansiota">
+<!ENTITY sb.prefs.ui.menuBar "Näytä valikkopalkissa">
+<!ENTITY sb.prefs.ui.menuBar.icon "Kuvake">
+<!ENTITY sb.prefs.ui.toolsMenu "Näytä Työkalut-valikossa">
+<!ENTITY sb.prefs.ui.statusBar "Näytä tilarivillä">
+<!ENTITY sb.prefs.restart "Muutokset saatetaan voimaan, kun Firefox käynnistetään uudelleen.">
+<!ENTITY sb.prefs.tabs.tips "Avaa välilehtiin seuraavilla toiminnoilla">
+<!ENTITY sb.prefs.tabs.note "Muokkaa muistilappua">
+<!ENTITY sb.prefs.data "Tietojen tallennussijainti">
+<!ENTITY sb.prefs.data.default "Oletus (profiilikansio)">
+<!ENTITY sb.prefs.data.custom "Tallenna tiedot kohteeseen">
+<!ENTITY sb.prefs.data.tips "Valitse kansio, johon tallennetaan ScrapBookin tiedot.">
+<!ENTITY sb.prefs.multibook.enabled "Ota käyttöön Multi-ScrapBook">
+<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBookilla voit tallentaa sivuja moneen paikkaan ja vaihdella paikkoja työkalupalkin painikkeella.">
+<!ENTITY sb.prefs.confirmDelete "Varoita kohteiden poistamisesta puusta">
+<!ENTITY sb.prefs.tree.autoCollapse "Kun puun kansio avataan, sulje automaattisesti muut kansiot">
+<!ENTITY sb.prefs.tree.unshift "Aseta kohde">
+<!ENTITY sb.prefs.tree.unshift.top "kansion ylimmäksi merkinnäksi">
+<!ENTITY sb.prefs.tree.unshift.bottom "kansion alimmaksi merkinnäksi">
+<!ENTITY sb.prefs.showDetailOnDrop "Näytä Tallennuksen tiedot -ikkuna kun sivu tallennetaan vetämällä sivupaneeliin">
+<!ENTITY sb.prefs.notifyOnComplete "Näytä Tallennus valmis -huomautus">
+<!ENTITY sb.button.customize "Muokkaa">
+<!ENTITY sb.button.browse "Selaa">
+<!ENTITY sb.button.show "Näytä tiedostot">

@@ -1,0 +1,33 @@
+<!ENTITY sb.open "Öppna">
+<!ENTITY sb.open.tab "Öppna i flik">
+<!ENTITY sb.open.newtab "Öppna i ny flik">
+<!ENTITY sb.open.source "Öppna käll-URL">
+<!ENTITY sb.tools "Verktyg">
+<!ENTITY sb.show.files "Visa filer">
+<!ENTITY sb.move "Flytta">
+<!ENTITY sb.move.into "Flytta till mapp">
+<!ENTITY sb.renew "Spara igen">
+<!ENTITY sb.export "Exportera">
+<!ENTITY sb.remove "Ta bort">
+<!ENTITY sb.property "Egenskaper">
+<!ENTITY sb.prop.title "Rubrik">
+<!ENTITY sb.prop.url "URL">
+<!ENTITY sb.prop.comment "Kommentar">
+<!ENTITY sb.prop.id.date "ID (tid)">
+<!ENTITY sb.folder.combine "Kombinerad vy">
+<!ENTITY sb.folder.openall "Öppna alla i flikar">
+<!ENTITY sb.folder.manage "Hantera mapp">
+<!ENTITY sb.new.folder "Ny mapp">
+<!ENTITY sb.new.separator "Ny avgränsare">
+<!ENTITY sb.new.note "Ny anteckning">
+<!ENTITY sb.sort.folder "Sortera mapp">
+<!ENTITY sb.search "Sök">
+<!ENTITY sb.search.fulltext "Fulltextsökning">
+<!ENTITY sb.search.all "Alla">
+<!ENTITY sb.search.re "Använd RegExp">
+<!ENTITY sb.search.cs "Skiftlägeskänslig">
+<!ENTITY sb.search.cache "Uppdatera cachen för fulltextsökning">
+<!ENTITY sb.search.clear "Rensa formulärhistorik">
+<!ENTITY sb.search.days "Filtrera efter dagar">
+<!ENTITY mb.manage "Hantera">
+<!ENTITY mb.profileFolder "Profilmapp">

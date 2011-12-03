@@ -1,0 +1,20 @@
+<!ENTITY sb.hlCustom.preset "기본 설정 선택">
+<!ENTITY sb.hlCustom.background "배경">
+<!ENTITY sb.hlCustom.color "색상">
+<!ENTITY sb.hlCustom.text "글자">
+<!ENTITY sb.hlCustom.bold "굵게">
+<!ENTITY sb.hlCustom.italic "기울임">
+<!ENTITY sb.hlCustom.line "취소선">
+<!ENTITY sb.hlCustom.border "테두리">
+<!ENTITY sb.hlCustom.type "종류">
+<!ENTITY sb.hlCustom.box "상자">
+<!ENTITY sb.hlCustom.underline "밑줄">
+<!ENTITY sb.hlCustom.style "모양">
+<!ENTITY sb.hlCustom.solid "실선">
+<!ENTITY sb.hlCustom.dotted "점선">
+<!ENTITY sb.hlCustom.dashed "파선">
+<!ENTITY sb.hlCustom.double "이중선">
+<!ENTITY sb.hlCustom.width "굵기">
+<!ENTITY sb.hlCustom.thin "가늘게">
+<!ENTITY sb.hlCustom.medium "중간">
+<!ENTITY sb.hlCustom.thick "두껍게">

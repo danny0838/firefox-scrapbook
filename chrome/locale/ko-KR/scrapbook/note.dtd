@@ -1,0 +1,19 @@
+<!ENTITY sb.note.save "저장">
+<!ENTITY sb.note.close "닫기">
+<!ENTITY sb.note.tools "도구">
+<!ENTITY sb.note.htmlview "HTML 보기">
+<!ENTITY sb.note.normalview "기본 모양 보기">
+<!ENTITY sb.note.template "탬플릿 HTML 편집">
+<!ENTITY sb.note.autolinefeed "자동 줄바꿈">
+<!ENTITY sb.note.autolinefeed.t "HTML 보기 시 행 끝에 &lt;br&gt; 태그 자동으로 붙이기">
+<!ENTITY sb.note.fontsize "글꼴 크기">
+<!ENTITY sb.note.help "도움말">
+<!ENTITY sb.note.print "인쇄">
+<!ENTITY sb.note.exit "종료">
+<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "N">
+<!ENTITY sb.note.tools.accesskey "T">
+<!ENTITY sb.note.fontsize.accesskey "F">
+<!ENTITY sb.note.print.accesskey "P">
+<!ENTITY sb.note.exit.accesskey "X">

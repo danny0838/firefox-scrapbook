@@ -1,0 +1,19 @@
+<!ENTITY sb.note.save "保存">
+<!ENTITY sb.note.close "关闭">
+<!ENTITY sb.note.tools "工具">
+<!ENTITY sb.note.htmlview "预览">
+<!ENTITY sb.note.normalview "常规视图">
+<!ENTITY sb.note.template "编辑 HTML 模板">
+<!ENTITY sb.note.autolinefeed "自动换行">
+<!ENTITY sb.note.autolinefeed.t "预览时在每行结尾自动添加 &lt;br&gt; 标记。">
+<!ENTITY sb.note.fontsize "字体大小">
+<!ENTITY sb.note.help "帮助">
+<!ENTITY sb.note.print "打印">
+<!ENTITY sb.note.exit "退出">
+<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "N">
+<!ENTITY sb.note.tools.accesskey "T">
+<!ENTITY sb.note.fontsize.accesskey "F">
+<!ENTITY sb.note.print.accesskey "P">
+<!ENTITY sb.note.exit.accesskey "X">

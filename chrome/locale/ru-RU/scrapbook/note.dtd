@@ -1,0 +1,19 @@
+<!ENTITY sb.note.save "Сохранить">
+<!ENTITY sb.note.close "Закрыть">
+<!ENTITY sb.note.tools "Инструменты">
+<!ENTITY sb.note.htmlview "В виде веб-документа">
+<!ENTITY sb.note.normalview "Обычный вид">
+<!ENTITY sb.note.template "Изменить шаблон HTML">
+<!ENTITY sb.note.autolinefeed "Автоперенос строк">
+<!ENTITY sb.note.autolinefeed.t "Добавлять тег &lt;br&gt; в конец каждой строки при просмотре «В виде веб-документа»">
+<!ENTITY sb.note.fontsize "Размер шрифта">
+<!ENTITY sb.note.help "Помощь">
+<!ENTITY sb.note.print "Печать">
+<!ENTITY sb.note.exit "Выход">
+<!ENTITY sb.note.save.accesskey "о">
+<!ENTITY sb.note.htmlview.accesskey "и">
+<!ENTITY sb.note.normalview.accesskey "ы">
+<!ENTITY sb.note.tools.accesskey "с">
+<!ENTITY sb.note.fontsize.accesskey "а">
+<!ENTITY sb.note.print.accesskey "е">
+<!ENTITY sb.note.exit.accesskey "х">

@@ -1,0 +1,19 @@
+<!ENTITY sb.note.save "Zapisz">
+<!ENTITY sb.note.close "Zamknij">
+<!ENTITY sb.note.tools "Narzędzia">
+<!ENTITY sb.note.htmlview "Podgląd dokumentu HTML">
+<!ENTITY sb.note.normalview "Widok normalny">
+<!ENTITY sb.note.template "Edycja szablonu dokumentu HTML">
+<!ENTITY sb.note.autolinefeed "Autouzupełnianie">
+<!ENTITY sb.note.autolinefeed.t "Dodaj znacznik &lt;br&gt; na końcu linii w podglądzie dokumentu HTML">
+<!ENTITY sb.note.fontsize "Wielkość czcionki">
+<!ENTITY sb.note.help "Pomoc">
+<!ENTITY sb.note.print "Drukuj">
+<!ENTITY sb.note.exit "Zakończ">
+<!ENTITY sb.note.save.accesskey "A">
+<!ENTITY sb.note.htmlview.accesskey "L">
+<!ENTITY sb.note.normalview.accesskey "R">
+<!ENTITY sb.note.tools.accesskey "D">
+<!ENTITY sb.note.fontsize.accesskey "O">
+<!ENTITY sb.note.print.accesskey "U">
+<!ENTITY sb.note.exit.accesskey "Z">

@@ -1,0 +1,6 @@
+<!ENTITY mb.manager "Správce">
+<!ENTITY mb.prop.name "Jméno">
+<!ENTITY mb.prop.path "Cesta">
+<!ENTITY mb.button.add "Přidat">
+<!ENTITY mb.button.edit "Upravit">
+<!ENTITY mb.button.remove "Odebrat">

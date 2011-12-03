@@ -1,0 +1,19 @@
+<!ENTITY sb.note.save "Save">
+<!ENTITY sb.note.close "Close">
+<!ENTITY sb.note.tools "Tools">
+<!ENTITY sb.note.htmlview "HTML View">
+<!ENTITY sb.note.normalview "Normal View">
+<!ENTITY sb.note.template "Edit Template HTML">
+<!ENTITY sb.note.autolinefeed "Auto-Linefeed">
+<!ENTITY sb.note.autolinefeed.t "Add &lt;br&gt; tag to the end-of-line at &sb.note.htmlview;">
+<!ENTITY sb.note.fontsize "Font Size">
+<!ENTITY sb.note.help "Help">
+<!ENTITY sb.note.print "Print">
+<!ENTITY sb.note.exit "Exit">
+<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "N">
+<!ENTITY sb.note.tools.accesskey "T">
+<!ENTITY sb.note.fontsize.accesskey "F">
+<!ENTITY sb.note.print.accesskey "P">
+<!ENTITY sb.note.exit.accesskey "X">

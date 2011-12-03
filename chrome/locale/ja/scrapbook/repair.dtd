@@ -1,0 +1,9 @@
+<!ENTITY sb.repair.rdfFile "scrapbook.rdf の復元">
+<!ENTITY sb.repair.rdfFile.descript "ScrapBookツリーが突然表示されなくなった場合はこちらを試してください。backupフォルダにバックアップされた scrapbook.rdf からツリー構造を復元します。">
+<!ENTITY sb.repair.rdfFile.select "バックアップ元のファイルを選択してください。">
+<!ENTITY sb.repair.rdfFile.file "ファイル">
+<!ENTITY sb.repair.rdfFile.time "日時">
+<!ENTITY sb.repair.rdfFile.size "サイズ">
+<!ENTITY sb.repair.favicons "favicon（ツリーのアイコン）を復元">
+<!ENTITY sb.repair.favicons.descript "ScrapBookツリーのfaviconが突然表示されなくなった場合はこちらを試してください。データ保存先フォルダを移動した際などに狂いが生じたfaviconのパスを再変換します。">
+<!ENTITY sb.repair.complete "完了しました。">

@@ -1,0 +1,23 @@
+<!ENTITY sb.toolbar.edit "Mostra la barra di modifica">
+<!ENTITY sb.toolbar.info "Mostra la barra delle informazioni">
+<!ENTITY sb.edit.eraser "Elimina i blocchi selezionati con DOM Eraser">
+<!ENTITY sb.edit.undo "Annulla">
+<!ENTITY sb.edit.save "Salva">
+<!ENTITY sb.edit.comment "Espandi/contrai l&apos;area per il commento">
+<!ENTITY sb.edit.sticky "Annotazione">
+<!ENTITY sb.edit.sticky.create "Crea annotazione">
+<!ENTITY sb.edit.inline.add "Aggiungi annotazione in linea alla selezione">
+<!ENTITY sb.edit.attach.file "Allega file alla selezione">
+<!ENTITY sb.edit.attach.link "Allega link alla selezione">
+<!ENTITY sb.edit.cutter "Elimina la selezione">
+<!ENTITY sb.edit.remove.iframe "Elimina tutti gli IFRAME">
+<!ENTITY sb.edit.remove.script "Elimina tutti gli SCRIPT">
+<!ENTITY sb.highlighter "Evidenziatura ">
+<!ENTITY sb.highlighter.remove "Annulla evidenziatura nella selezione">
+<!ENTITY sb.highlighter.remove.all "Annulla tutte le evidenziature">
+<!ENTITY sb.source "Apri l&apos;indirizzo web sorgente">
+<!ENTITY sb.renew "Cattura ancora">
+<!ENTITY sb.locate "Sincronizza con il diagramma delle cartelle nel pannello">
+<!ENTITY sb.indicators "Mostra indicatori dei link">
+<!ENTITY sb.info.home "Pagina iniziale">
+<!ENTITY sb.info.sitemap "Mappa del sito">

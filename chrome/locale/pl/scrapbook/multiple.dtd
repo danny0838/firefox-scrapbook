@@ -1,0 +1,8 @@
+<!ENTITY sb.multiple.url "URL (wprowadzaj adresy URL linia po linii)">
+<!ENTITY sb.multiple.detector "Wykrywacz adresów URL">
+<!ENTITY sb.multiple.detector.plink "Wszystkie odnośniki na tej stronie">
+<!ENTITY sb.multiple.detector.slink "Wszystkie odnośniki w zaznaczeniu">
+<!ENTITY sb.multiple.detector.tabs "Wszystkie otwarte karty w oknie">
+<!ENTITY sb.multiple.detector.local "Wszystkie lokalne strony w katalogu">
+<!ENTITY sb.multiple.detector.bookmarks "Zakładki">
+<!ENTITY sb.multiple.detector.clear "Wyczyść">

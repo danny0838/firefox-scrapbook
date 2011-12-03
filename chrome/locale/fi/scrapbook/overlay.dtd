@@ -1,0 +1,18 @@
+<!ENTITY sb.save.partial "Tallenna valinta">
+<!ENTITY sb.save.partial.as "Tallennna valinta nimellä">
+<!ENTITY sb.save.entire "Tallenna sivu">
+<!ENTITY sb.save.entire.as "Tallenna sivu nimellä">
+<!ENTITY sb.save.frame "Tallenna kehys">
+<!ENTITY sb.save.frame.as "Tallenna kehys nimellä">
+<!ENTITY sb.save.target "Tallenna linkki">
+<!ENTITY sb.save.target.as "Tallenna linkki nimellä">
+<!ENTITY sb.save.alltabs "Tallenna kaikki välilehdet">
+<!ENTITY sb.save.bookmark "Tallenna kirjanmerkkinä">
+<!ENTITY sb.sidebar "Näytä sivupaneelissa">
+<!ENTITY sb.menu "Valikko">
+<!ENTITY sb.editbefore "Muokkaa ennen kaappausta">
+<!ENTITY sb.key.sidebar "C">
+<!ENTITY sb.key.menubar "S">
+<!ENTITY sb.key.save "L">
+<!ENTITY sb.key.save.as "K">
+<!ENTITY sb.key.bookmark "J">
