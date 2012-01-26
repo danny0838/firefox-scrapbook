@@ -399,8 +399,6 @@ var sbpFilter = {
 		//2. Filter in Tabelle aufnehmen, sofern noch nicht vorhanden
 		if ( aFilterVorhanden == -1 )
 		{
-			this.sfFilterIncExc.push(aFilterIncExcNeu);
-			this.sfFilter.push(aFilterNeu);
 			try
 			{
 				var aTree = document.getElementById("sbpTreeFilter");
@@ -410,6 +408,8 @@ var sbpFilter = {
 					{
 						if ( this.sfFilterEdit == -1 )
 						{
+							this.sfFilterIncExc.push(aFilterIncExcNeu);
+							this.sfFilter.push(aFilterNeu);
 							var aTchild = aTree.childNodes[aI];
 							var aTrow = document.createElement("treerow");
 							var aTcell0 = document.createElement("treecell");
@@ -427,6 +427,7 @@ var sbpFilter = {
 							aTree.childNodes[aI].childNodes[0].childNodes[this.sfFilterEdit].childNodes[1].setAttribute("label", aFilterNeu);
 							this.sfFilterIncExc[this.sfFilterEdit] = aFilterIncExcNeu;
 							this.sfFilter[this.sfFilterEdit] = aFilterNeu;
+							this.sfFilterEdit = -1;
 						}
 					}
 				}

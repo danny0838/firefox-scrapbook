@@ -474,9 +474,16 @@ var sbMenuHandler = {
 		if (event.target.id == "ScrapBookMenubarItem3" || event.target.id == "ScrapBookMenubarItem4")
 			return;
 		if (event.target.className.indexOf("sb-capture") >= 0) {
+			var ds = null;
+			var dsEnum = document.getElementById("ScrapBookMenu").database.GetDataSources();
+			while (dsEnum.hasMoreElements()) {
+				ds = dsEnum.getNext().QueryInterface(Ci.nsIRDFDataSource);
+				document.getElementById("ScrapBookMenu").database.RemoveDataSource(ds);
+			}
 			var aShowDetail = event.target.id == "ScrapBookMenubarItem2" || event.button == 1;
 			var resURI = event.target.hasAttribute("resuri") ? event.target.getAttribute("resuri") : "urn:scrapbook:root";
 			sbBrowserOverlay.execCapture(0, null, aShowDetail, resURI);
+			document.getElementById("ScrapBookMenu").database.AddDataSource(ds);
 			return;
 		}
 		if (event.button == 1)

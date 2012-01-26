@@ -814,28 +814,34 @@ var sbCaptureObserverCallback = {
 
 	getString : function(aBundleName){ return sbBrowserOverlay.STRING.getString(aBundleName); },
 
-	trace : function(aText)
+	trace : function(aText, aMillisec)
 	{
 		try {
 			document.getElementById("statusbar-display").label = aText;
+			if ( aMillisec>0 ) {
+				var callback = function() {
+					if (document.getElementById("statusbar-display").label == aText) document.getElementById("statusbar-display").label = "";
+				};
+				window.setTimeout(callback, aMillisec);
+			}
 		} catch(ex) {
 		}
 	},
 
 	onDownloadComplete : function(aItem)
 	{
-		this.trace(this.getString("CAPTURE") + "... (" + sbContentSaver.httpTask[aItem.id] + ") " + aItem.title);
+		this.trace(this.getString("CAPTURE") + "... (" + sbContentSaver.httpTask[aItem.id] + ") " + aItem.title, 0);
 	},
 
 	onAllDownloadsComplete : function(aItem)
 	{
-		this.trace(this.getString("CAPTURE_COMPLETE") + ": " + aItem.title);
+		this.trace(this.getString("CAPTURE_COMPLETE") + ": " + aItem.title, 5000);
 		this.onCaptureComplete(aItem);
 	},
 
 	onDownloadProgress : function(aItem, aFileName, aProgress)
 	{
-		this.trace(this.getString("TRANSFER_DATA") + "... (" + aProgress + ") " + aFileName);
+		this.trace(this.getString("TRANSFER_DATA") + "... (" + aProgress + ") " + aFileName, 0);
 	},
 
 	onCaptureComplete : function(aItem)

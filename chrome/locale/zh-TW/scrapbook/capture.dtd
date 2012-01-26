@@ -5,7 +5,7 @@
 <!ENTITY sb.capture.skip "略過">
 <!ENTITY sb.capture.pause "暫停">
 <!ENTITY sb.capture.finish "取消">
-<!ENTITY sb.capture.filter "篩選條件">
+<!ENTITY sb.capture.filter "過濾">
 <!ENTITY sb.capture.filter.column.one "顯示/隱藏">
 <!ENTITY sb.capture.filter.column.two "篩選條件（使用規則運算式）">
 <!ENTITY sb.capture.filter.accept "確認">
