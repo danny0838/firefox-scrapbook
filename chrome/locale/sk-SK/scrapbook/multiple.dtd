@@ -1,8 +1,0 @@
-<!ENTITY sb.multiple.url "URL (Vložte URL adresy riadok po riadku)">
-<!ENTITY sb.multiple.detector "URL detektor">
-<!ENTITY sb.multiple.detector.plink "Všetky odkazy na stránke">
-<!ENTITY sb.multiple.detector.slink "Všetky odkazy vo výbere">
-<!ENTITY sb.multiple.detector.tabs "Všetky otvorené panely v okne">
-<!ENTITY sb.multiple.detector.local "Všetky lokálne HTML dokumenty v priečinku">
-<!ENTITY sb.multiple.detector.bookmarks "Záložky">
-<!ENTITY sb.multiple.detector.clear "Vyčistiť">

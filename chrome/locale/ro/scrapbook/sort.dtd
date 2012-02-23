@@ -1,8 +1,0 @@
-<!ENTITY sb.sort "Sortare">
-<!ENTITY sb.sort.reverse "Inversează ordinea">
-<!ENTITY sb.sort.title.asc "Sortează după denumire (A -&gt; Z)">
-<!ENTITY sb.sort.title.desc "Sortează după denumire (Z -&gt; A)">
-<!ENTITY sb.sort.date.asc "Sortează cronologic">
-<!ENTITY sb.sort.date.desc "Sortează invers cronologic">
-<!ENTITY sb.sort.recursive "Sortează recursiv în subdosare">
-<!ENTITY sb.sort.warning "Notă: Nu puteți anula această operațiune.">

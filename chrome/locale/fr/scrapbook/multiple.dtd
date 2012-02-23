@@ -1,8 +1,0 @@
-<!ENTITY sb.multiple.url "URL (entrer les URL ligne par ligne)">
-<!ENTITY sb.multiple.detector "Détecteur d'URL">
-<!ENTITY sb.multiple.detector.plink "Tous les liens de la page">
-<!ENTITY sb.multiple.detector.slink "Tous les liens de la sélection">
-<!ENTITY sb.multiple.detector.tabs "Tous les onglets ouverts dans la fenêtre">
-<!ENTITY sb.multiple.detector.local "Tous les HTML locaux dans un répertoire">
-<!ENTITY sb.multiple.detector.bookmarks "Marque-pages">
-<!ENTITY sb.multiple.detector.clear "Effacer">

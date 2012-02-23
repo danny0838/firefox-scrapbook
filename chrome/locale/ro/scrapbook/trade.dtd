@@ -1,5 +1,0 @@
-<!ENTITY sb.trade.import "Importă">
-<!ENTITY sb.trade.export "Exportă">
-<!ENTITY sb.trade.time "Data exportului">
-<!ENTITY sb.trade.restore "Importă refăcând structura dosarelor">
-<!ENTITY sb.trade.remove "Elimină fișierele după import">

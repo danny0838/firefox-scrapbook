@@ -1,8 +1,0 @@
-<!ENTITY sb.multiple.url "URL:er (ange en URL per rad)">
-<!ENTITY sb.multiple.detector "URL-identifiering">
-<!ENTITY sb.multiple.detector.plink "Alla länkar på sidan">
-<!ENTITY sb.multiple.detector.slink "Alla länkar i markeringen">
-<!ENTITY sb.multiple.detector.tabs "Alla öppna flikar i fönstret">
-<!ENTITY sb.multiple.detector.local "Alla lokala HTML-filer i en mapp">
-<!ENTITY sb.multiple.detector.bookmarks "Bokmärken">
-<!ENTITY sb.multiple.detector.clear "Rensa">
