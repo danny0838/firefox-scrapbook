@@ -1,0 +1,8 @@
+<!ENTITY sb.sort "Classement">
+<!ENTITY sb.sort.reverse "Inverser">
+<!ENTITY sb.sort.title.asc "Classer par titre (A &gt; Z)">
+<!ENTITY sb.sort.title.desc "Classer par titre (Z &gt; A)">
+<!ENTITY sb.sort.date.asc "Chronologique">
+<!ENTITY sb.sort.date.desc "Chronologique inverse">
+<!ENTITY sb.sort.recursive "Classer récursivement les sous-dossiers">
+<!ENTITY sb.sort.warning "Important : vous ne pouvez pas annuler cette opération.">

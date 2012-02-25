@@ -1,0 +1,13 @@
+<!ENTITY sb.save.partial "Spara markering">
+<!ENTITY sb.save.partial.as "Spara markering som">
+<!ENTITY sb.save.entire "Spara sida">
+<!ENTITY sb.save.entire.as "Spara sida som">
+<!ENTITY sb.save.frame "Spara ram">
+<!ENTITY sb.save.frame.as "Spara ram som">
+<!ENTITY sb.save.target "Spara länk">
+<!ENTITY sb.save.target.as "Spara länk som">
+<!ENTITY sb.save.alltabs "Spara alla flikar">
+<!ENTITY sb.save.bookmark "Spara som bokmärke">
+<!ENTITY sb.sidebar "Visa i sidopanelen">
+<!ENTITY sb.menubar "Menyfält">
+<!ENTITY sb.editbefore "Redigera innan objekt sparas">

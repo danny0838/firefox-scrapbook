@@ -1,0 +1,13 @@
+<!ENTITY sb.save "Guardar">
+<!ENTITY sb.save.abort "Abortar">
+<!ENTITY sb.save.start "Comenzar">
+<!ENTITY sb.save.retry "Reintentar">
+<!ENTITY sb.save.skip "Saltar">
+<!ENTITY sb.save.pause "Pausa">
+<!ENTITY sb.save.filter "Filtro">
+<!ENTITY sb.save.filter.domain "Restringir al dominio">
+<!ENTITY sb.save.filter.level "Restringir al directorio">
+<!ENTITY sb.save.filter.string "Filtrar por cadena...">
+<!ENTITY sb.save.filter.checkon "Activar todo">
+<!ENTITY sb.save.filter.checkoff "Desactivar todo">
+<!ENTITY sb.save.filter.invert "Invertir selección">

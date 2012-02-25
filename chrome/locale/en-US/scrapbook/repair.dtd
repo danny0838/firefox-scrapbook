@@ -1,0 +1,9 @@
+<!ENTITY sb.repair.rdfFile "Restore scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript "Try this if ScrapBook tree disappears suddenly.">
+<!ENTITY sb.repair.rdfFile.select "Select a backup file for the restoration.">
+<!ENTITY sb.repair.rdfFile.file "File">
+<!ENTITY sb.repair.rdfFile.time "Time">
+<!ENTITY sb.repair.rdfFile.size "Size">
+<!ENTITY sb.repair.favicons "Restore favicons in tree">
+<!ENTITY sb.repair.favicons.descript "Try this if many favicons in ScrapBook tree disappear.">
+<!ENTITY sb.repair.complete "Completed.">

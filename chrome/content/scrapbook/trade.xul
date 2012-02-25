@@ -1,0 +1,89 @@
+<?xml version="1.0" ?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+<?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
+<?xml-stylesheet href="chrome://scrapbook/skin/trade.css" type="text/css" ?>
+<?xml-stylesheet href="chrome://mozapps/content/preferences/preferences.css"?>
+<?xml-stylesheet href="chrome://browser/skin/preferences/preferences.css"?>
+
+<!DOCTYPE window [
+	<!ENTITY % treeDTD  SYSTEM "chrome://scrapbook/locale/tree.dtd" >
+	%treeDTD;
+	<!ENTITY % propDTD  SYSTEM "chrome://scrapbook/locale/property.dtd" >
+	%propDTD;
+	<!ENTITY % prefDTD  SYSTEM "chrome://scrapbook/locale/prefs.dtd" >
+	%prefDTD;
+	<!ENTITY % tradeDTD SYSTEM "chrome://scrapbook/locale/trade.dtd" >
+	%tradeDTD;
+]>
+
+<window id="sbTradeWindow"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        onload="sbTradeService.init();">
+
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/trade.js" />
+
+	<stringbundle id="sbTradeString" src="chrome://scrapbook/locale/trade.properties" />
+
+	<keyset>
+		<key key="a" modifiers="accel" oncommand="sbTradeService.TREE.focus();sbTradeService.TREE.view.selection.selectAll();" />
+	</keyset>
+
+	<popupset>
+		<menupopup id="sbTradeTreePopup">
+			<menuitem label="&sb.open;"        oncommand="sbTradeService.open(false);" default="true" />
+			<menuitem label="&sb.open.newtab;" oncommand="sbTradeService.open(true);"  />
+			<menuitem label="&sb.show.files;"  oncommand="sbTradeService.browse();" />
+			<menuseparator />
+			<menuitem class="menuitem-iconic" label="&sb.remove;"   src="chrome://scrapbook/skin/menu_remove.png"   oncommand="sbTradeService.remove();" />
+			<menuseparator />
+			<menuitem class="menuitem-iconic" label="&sb.property;" src="chrome://scrapbook/skin/menu_property.png" oncommand="sbTradeService.showProperties();" />
+		</menupopup>
+	</popupset>
+
+	<toolbar id="sbTradeHeader" align="center" class="plain" style="padding:3px 1px;">
+		<filefield id="sbTradePath" flex="1" />
+		<button id="sbTradeBrowseButton" label="&sb.button.browse;..." oncommand="if ( sbTradeService.selectDir() ) sbTradeService.prepareRightDir(false);" />
+		<button group="lockTarget" label="&sb.button.show;" oncommand="window.top.sbController.launch(sbTradeService.rightDir);" />
+	</toolbar>
+
+	<tree id="sbTradeTree"
+	      seltype="multiple"
+	      contextmenu="sbTradeTreePopup"
+	      onclick="if (event.button == 1) sbTradeService.open(true);"
+	      ondblclick="sbTradeService.onDblClick(event);"
+	      onkeypress="sbTradeService.onKeyPress(event);"
+	      ondragstart="sbTradeService.onDragStart(event);"
+	      ondragover="sbTradeService.onDragOver(event);"
+	      ondrop="sbTradeService.onDrop(event);"
+	      class="plain" flex="1">
+		<treecols>
+			<treecol id="sbTradeTreeColTitle"  label="&sb.prop.title;"  sortIndex="0" flex="2" primary="true" />
+			<splitter class="tree-splitter" />
+			<treecol id="sbTradeTreeColDate"   label="&sb.trade.time;"  sortIndex="5" flex="1" sortDirection="ascending" />
+			<splitter class="tree-splitter" />
+			<treecol id="sbTradeTreeColFolder" label="&sb.prop.folder;" sortIndex="2" flex="1" />
+		</treecols>
+		<treechildren flex="1" />
+	</tree>
+
+	<toolbar id="sbTradeToolbar" class="plain" style="padding-top:2px;">
+		<hbox align="center">
+			<button id="sbTradeExportButton" label="&sb.trade.export;" group="lockTarget" oncommand="sbExportService.exec();"        image="chrome://scrapbook/skin/expander.png" />
+			<button id="sbTradeImportButton" label="&sb.trade.import;" group="lockTarget" oncommand="sbImportService.exec(-128,-1);" image="chrome://scrapbook/skin/expander_left.png" />
+		</hbox>
+		<vbox>
+			<checkbox id="sbTradeOptionRestore" label="&sb.trade.restore;" group="lockTarget" checked="true" />
+			<checkbox id="sbTradeOptionRemove"  label="&sb.trade.remove; " group="lockTarget" checked="false" persist="checked" />
+		</vbox>
+	</toolbar>
+
+	<listbox id="sbTradeLog" class="plain" />
+
+	<vbox id="sbTradeQuickStatus" hidden="true">
+		<textbox id="sbTradeQuickStatusText" flex="1" readonly="true" width="250" />
+	</vbox>
+
+</window>

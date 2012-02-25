@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+
+<window id="sbCacheWindow"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        onload="SB_initFT('CACHE');"
+        style="width: 320px;"
+        screenX="20" screenY="20"
+        persist="screenX screenY"
+        windowtype="scrapbook">
+
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/fulltext.js" />
+
+	<stringbundle id="sbCacheString" src="chrome://scrapbook/locale/fulltext.properties" />
+
+	<vbox id="sbCacheStatus" style="padding:2px;">
+		<textbox id="sbCacheStatusLabel" flex="1" readonly="true" />
+		<progressmeter id="sbCacheStatusProgress" flex="1" mode="determined" value="0" />
+	</vbox>
+
+</window>

@@ -1,0 +1,20 @@
+<!ENTITY sb.hlCustom.preset "Predvolené štýly">
+<!ENTITY sb.hlCustom.background "Pozadie">
+<!ENTITY sb.hlCustom.color "Farba">
+<!ENTITY sb.hlCustom.text "Text">
+<!ENTITY sb.hlCustom.bold "Tučné">
+<!ENTITY sb.hlCustom.italic "Kurzíva">
+<!ENTITY sb.hlCustom.line "Prečiarknuté">
+<!ENTITY sb.hlCustom.border "Rámček">
+<!ENTITY sb.hlCustom.type "Typ">
+<!ENTITY sb.hlCustom.box "Box">
+<!ENTITY sb.hlCustom.underline "Podčiarknutie">
+<!ENTITY sb.hlCustom.style "Štýl">
+<!ENTITY sb.hlCustom.solid "Plný">
+<!ENTITY sb.hlCustom.dotted "Bodkovaný">
+<!ENTITY sb.hlCustom.dashed "Čiarkovaný">
+<!ENTITY sb.hlCustom.double "Dvojitý">
+<!ENTITY sb.hlCustom.width "Hrúbka">
+<!ENTITY sb.hlCustom.thin "Tenký">
+<!ENTITY sb.hlCustom.medium "Stredný">
+<!ENTITY sb.hlCustom.thick "Tučný">

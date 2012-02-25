@@ -1,0 +1,5 @@
+<!ENTITY sb.trade.import "Importer">
+<!ENTITY sb.trade.export "Exporter">
+<!ENTITY sb.trade.time "Date d&apos;exportation">
+<!ENTITY sb.trade.restore "Importer avec la structure du dossier à restaurer">
+<!ENTITY sb.trade.remove "Supprimer les fichiers après l&apos;importation">

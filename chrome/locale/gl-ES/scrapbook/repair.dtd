@@ -1,0 +1,9 @@
+<!ENTITY sb.repair.rdfFile "Restaurar scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript "Inténteo se a colección de ScrapBook desapareceu de repente.">
+<!ENTITY sb.repair.rdfFile.select "Escolla unha copia de seguridade para a restauración.">
+<!ENTITY sb.repair.rdfFile.file "Ficheiro">
+<!ENTITY sb.repair.rdfFile.time "Tempo">
+<!ENTITY sb.repair.rdfFile.size "Tamaño">
+<!ENTITY sb.repair.favicons "Restaurar os favicóns da colección">
+<!ENTITY sb.repair.favicons.descript "Inténteo se desapareceron algúns favicóns da colección.">
+<!ENTITY sb.repair.complete "Completado">

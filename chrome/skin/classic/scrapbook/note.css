@@ -1,0 +1,25 @@
+/* ::::: NOTE ::::: */
+
+toolbar#sbNoteToolbar {
+	border-top: 1px solid ThreeDShadow;
+	padding: 1px;
+}
+
+toolbarbutton#sbNoteToolbarS {
+	list-style-image: url('chrome://scrapbook/skin/edit_save.png');
+}
+
+toolbarbutton#sbNoteToolbarH {
+	list-style-image: url('chrome://scrapbook/skin/note_htmlview1.png');
+}
+
+toolbarbutton#sbNoteToolbarN {
+	list-style-image: url('chrome://scrapbook/skin/note_htmlview0.png');
+}
+
+image#sbNoteImage {
+	width: 16px;
+	height: 16px;
+	margin-left: 3px;
+}
+

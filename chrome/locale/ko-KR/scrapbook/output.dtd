@@ -1,0 +1,3 @@
+<!ENTITY sb.output.option.all "전체 트리 출력">
+<!ENTITY sb.output.option.frame "프레임 출력">
+<!ENTITY sb.output.option.open "출력 후, 브라우저로 열기">

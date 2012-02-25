@@ -1,0 +1,13 @@
+<!ENTITY sb.save.partial "Auswahl archivieren">
+<!ENTITY sb.save.partial.as "Auswahl archivieren als">
+<!ENTITY sb.save.entire "Seite archivieren">
+<!ENTITY sb.save.entire.as "Seite archivieren als">
+<!ENTITY sb.save.frame "Frame archivieren">
+<!ENTITY sb.save.frame.as "Frame archivieren als">
+<!ENTITY sb.save.target "Link archivieren">
+<!ENTITY sb.save.target.as "Link archivieren als">
+<!ENTITY sb.save.alltabs "Alle Tabs archivieren">
+<!ENTITY sb.save.bookmark "Als Lesezeichen archivieren">
+<!ENTITY sb.sidebar "ScrapBook-Sidebar öffnen">
+<!ENTITY sb.menubar "Menubar">
+<!ENTITY sb.editbefore "Vor dem Archivieren bearbeiten">

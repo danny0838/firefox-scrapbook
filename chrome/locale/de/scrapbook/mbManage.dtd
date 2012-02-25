@@ -1,0 +1,6 @@
+<!ENTITY mb.manager "verwalten">
+<!ENTITY mb.prop.name "Name">
+<!ENTITY mb.prop.path "Speicherort">
+<!ENTITY mb.button.add "Hinzufügen">
+<!ENTITY mb.button.edit "Bearbeiten">
+<!ENTITY mb.button.remove "Entfernen">

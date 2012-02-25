@@ -1,0 +1,13 @@
+<!ENTITY sb.save "Сохранить">
+<!ENTITY sb.save.abort "Отменить">
+<!ENTITY sb.save.start "Начать">
+<!ENTITY sb.save.retry "Повторить">
+<!ENTITY sb.save.skip "Пропустить">
+<!ENTITY sb.save.pause "Приостановить">
+<!ENTITY sb.save.filter "Фильтровать">
+<!ENTITY sb.save.filter.domain "Ограничить доменом">
+<!ENTITY sb.save.filter.level "Ограничить каталогом">
+<!ENTITY sb.save.filter.string "Фильтр по строке…">
+<!ENTITY sb.save.filter.checkon "Отметить всё">
+<!ENTITY sb.save.filter.checkoff "Снять отметки">
+<!ENTITY sb.save.filter.invert "Инвертировать">

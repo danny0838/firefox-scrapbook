@@ -1,0 +1,33 @@
+<!ENTITY sb.open "Otvoriť">
+<!ENTITY sb.open.tab "Otvoriť v karte">
+<!ENTITY sb.open.newtab "Otvoriť v novej karte">
+<!ENTITY sb.open.source "Otvoriť zdroj URL">
+<!ENTITY sb.tools "Nástroje">
+<!ENTITY sb.show.files "Zobraziť súbory">
+<!ENTITY sb.move "Presunúť">
+<!ENTITY sb.move.into "Presunúť do priečinka">
+<!ENTITY sb.renew "Znovuzachytenie">
+<!ENTITY sb.export "Exportovať">
+<!ENTITY sb.remove "Odstrániť">
+<!ENTITY sb.property "Vlastnosti">
+<!ENTITY sb.prop.title "Názov">
+<!ENTITY sb.prop.url "URL">
+<!ENTITY sb.prop.comment "Komentár">
+<!ENTITY sb.prop.id.date "ID (Čas)">
+<!ENTITY sb.folder.combine "Otvoriť v kombinovanom náhľade">
+<!ENTITY sb.folder.openall "Otvoriť všetko v kartách">
+<!ENTITY sb.folder.manage "Správca priečinkov">
+<!ENTITY sb.new.folder "Nový priečinok">
+<!ENTITY sb.new.separator "Nový oddeľovač">
+<!ENTITY sb.new.note "Nová poznámka">
+<!ENTITY sb.sort.folder "Zoradiť priečinok">
+<!ENTITY sb.search "Hľadať">
+<!ENTITY sb.search.fulltext "Fulltextové hľadanie">
+<!ENTITY sb.search.all "Všetko">
+<!ENTITY sb.search.re "Použiť regulárne výrazy">
+<!ENTITY sb.search.cs "Porovnať podľa dôležitosti">
+<!ENTITY sb.search.cache "Aktualizovať cache pre fulltextové hľadanie">
+<!ENTITY sb.search.clear "Vymazať históriu formulára">
+<!ENTITY sb.search.days "Filter podľa dní">
+<!ENTITY mb.manage "Spravovať">
+<!ENTITY mb.profileFolder "Používateľský priečinok">

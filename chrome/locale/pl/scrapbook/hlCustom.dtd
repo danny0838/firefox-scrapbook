@@ -1,0 +1,20 @@
+<!ENTITY sb.hlCustom.preset "Predefiniowane style">
+<!ENTITY sb.hlCustom.background "Tło">
+<!ENTITY sb.hlCustom.color "Kolor">
+<!ENTITY sb.hlCustom.text "Tekst">
+<!ENTITY sb.hlCustom.bold "pogrubiony">
+<!ENTITY sb.hlCustom.italic "pochylony">
+<!ENTITY sb.hlCustom.line "przekreślony">
+<!ENTITY sb.hlCustom.border "Obramowanie">
+<!ENTITY sb.hlCustom.type "Typ">
+<!ENTITY sb.hlCustom.box "pole">
+<!ENTITY sb.hlCustom.underline "podkreślenie">
+<!ENTITY sb.hlCustom.style "Styl">
+<!ENTITY sb.hlCustom.solid "linia">
+<!ENTITY sb.hlCustom.dotted "kropki">
+<!ENTITY sb.hlCustom.dashed "kreski">
+<!ENTITY sb.hlCustom.double "podwójna linia">
+<!ENTITY sb.hlCustom.width "Grubość">
+<!ENTITY sb.hlCustom.thin "cienka">
+<!ENTITY sb.hlCustom.medium "średnia">
+<!ENTITY sb.hlCustom.thick "gruba">

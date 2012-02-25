@@ -1,0 +1,13 @@
+<!ENTITY sb.save.partial "Save Selection">
+<!ENTITY sb.save.partial.as "Save Selection As">
+<!ENTITY sb.save.entire "Save Page">
+<!ENTITY sb.save.entire.as "Save Page As">
+<!ENTITY sb.save.frame "Save Frame">
+<!ENTITY sb.save.frame.as "Save Frame As">
+<!ENTITY sb.save.target "Save Link">
+<!ENTITY sb.save.target.as "Save Link As">
+<!ENTITY sb.save.alltabs "Save All Tabs">
+<!ENTITY sb.save.bookmark "Save As Bookmark">
+<!ENTITY sb.sidebar "Show in Sidebar">
+<!ENTITY sb.menubar "Menubar">
+<!ENTITY sb.editbefore "Edit Before Save">

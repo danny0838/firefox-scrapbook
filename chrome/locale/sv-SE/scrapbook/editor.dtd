@@ -1,0 +1,23 @@
+<!ENTITY sb.toolbar.edit "Redigeringsfältet">
+<!ENTITY sb.toolbar.info "Informationsfältet">
+<!ENTITY sb.edit.eraser "DOM-radergummi: Ett verktyg som tar bort klickade element på webbsidor">
+<!ENTITY sb.edit.undo "Ångra">
+<!ENTITY sb.edit.save "Spara ändringar">
+<!ENTITY sb.edit.comment "Visa kommenteringsområdet">
+<!ENTITY sb.edit.sticky "Klisterlapp">
+<!ENTITY sb.edit.sticky.create "Skapa klisterlapp">
+<!ENTITY sb.edit.inline.add "Lägg till infogad anteckning i markering">
+<!ENTITY sb.edit.attach.file "Bifoga fil till markering">
+<!ENTITY sb.edit.attach.link "Bifoga länk till markering">
+<!ENTITY sb.edit.cutter "Ta bort markering">
+<!ENTITY sb.edit.remove.iframe "Ta bort alla IFRAME-taggar">
+<!ENTITY sb.edit.remove.script "Ta bort alla SCRIPT-taggar">
+<!ENTITY sb.highlighter "Överstrykningspenna">
+<!ENTITY sb.highlighter.remove "Rensa färgöverstrykningar i markering">
+<!ENTITY sb.highlighter.remove.all "Rensa alla färgöverstrykningar">
+<!ENTITY sb.source "Öppna käll-URL">
+<!ENTITY sb.renew "Spara igen">
+<!ENTITY sb.locate "Hitta i sidopanelsträdet">
+<!ENTITY sb.indicators "Visa länkindikatorer">
+<!ENTITY sb.info.home "Hem">
+<!ENTITY sb.info.sitemap "Webbplatskarta">

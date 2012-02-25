@@ -1,0 +1,23 @@
+<!ENTITY sb.toolbar.edit "Edit Toolbar">
+<!ENTITY sb.toolbar.info "Info Toolbar">
+<!ENTITY sb.edit.eraser "DOM Eraser: A tool for removing clicked elements in Web page">
+<!ENTITY sb.edit.undo "Undo">
+<!ENTITY sb.edit.save "Save Changes">
+<!ENTITY sb.edit.comment "Expand Comment Area">
+<!ENTITY sb.edit.sticky "Sticky Annotation">
+<!ENTITY sb.edit.sticky.create "Create &sb.edit.sticky;">
+<!ENTITY sb.edit.inline.add "Add Inline Annotation to Selection">
+<!ENTITY sb.edit.attach.file "Attach File to Selection">
+<!ENTITY sb.edit.attach.link "Attach Link to Selection">
+<!ENTITY sb.edit.cutter "Remove the Selection">
+<!ENTITY sb.edit.remove.iframe "Remove All IFRAME Tags">
+<!ENTITY sb.edit.remove.script "Remove All SCRIPT Tags">
+<!ENTITY sb.highlighter "Highlighter">
+<!ENTITY sb.highlighter.remove "Clear Highlights in the Selection">
+<!ENTITY sb.highlighter.remove.all "Clear All Highlights">
+<!ENTITY sb.source "Open Source URL">
+<!ENTITY sb.renew "Save Again">
+<!ENTITY sb.locate "Locate in Sidebar">
+<!ENTITY sb.indicators "Show Link Indicators">
+<!ENTITY sb.info.home "Home">
+<!ENTITY sb.info.sitemap "SiteMap">

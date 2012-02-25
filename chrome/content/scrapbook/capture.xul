@@ -1,0 +1,51 @@
+<?xml version="1.0" ?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+<?xml-stylesheet href="chrome://scrapbook/skin/capture.css" type="text/css" ?>
+
+<!DOCTYPE window SYSTEM "chrome://scrapbook/locale/capture.dtd">
+
+<window id="sbCaptureWindow"
+        title="&sb.save; - ScrapBook"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        style="width: 360px;"
+        onload="SB_initCapture();"
+        onclose="event.preventDefault();sbCaptureTask.abort();"
+        windowtype="scrapbook">
+
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/saver.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/capture.js" />
+
+	<stringbundleset>
+		<stringbundle id="sbCaptureString" src="chrome://scrapbook/locale/capture.properties" />
+		<stringbundle id="sbOverlayString" src="chrome://scrapbook/locale/overlay.properties" />
+	</stringbundleset>
+
+	<textbox id="sbCaptureTextbox" readonly="true" />
+
+	<listbox id="sbCaptureListbox" rows="1" flex="1" />
+
+	<browser id="sbCaptureBrowser" type="content" collapsed="true" />
+
+	<hbox>
+		<toolbarbutton id="sbCaptureFilterButton" type="menu" label="&sb.save.filter;" hidden="true">
+			<menupopup>
+				<menuitem type="radio" label="&sb.save.filter.domain;"   oncommand="sbCaptureTask.applyFilter('D');" />
+				<menuitem type="radio" label="&sb.save.filter.level;"    oncommand="sbCaptureTask.applyFilter('L');" />
+				<menuitem type="radio" label="&sb.save.filter.string;"   oncommand="sbCaptureTask.applyFilter('S');" />
+				<menuitem type="radio" label="&sb.save.filter.checkon;"  oncommand="sbCaptureTask.applyFilter('N');" checked="true" />
+				<menuitem type="radio" label="&sb.save.filter.checkoff;" oncommand="sbCaptureTask.applyFilter('F');" />
+				<menuseparator />
+				<menuitem label="&sb.save.filter.invert;" oncommand="sbCaptureTask.applyFilter('I');" />
+			</menupopup>
+		</toolbarbutton>
+		<toolbarseparator hidden="true" />
+		<button id="sbCapturePauseButton" label="&sb.save.pause;" oncommand="sbCaptureTask.pause();" />
+		<button id="sbCaptureStartButton" label="&sb.save.start;" oncommand="sbCaptureTask.activate();" hidden="true" />
+		<button id="sbCaptureSkipButton"  label="&sb.save.skip;"  oncommand="sbCaptureTask.next(true);" disabled="true" />
+		<spacer flex="1" />
+		<button label="&sb.save.abort;" oncommand="sbCaptureTask.abort();" />
+	</hbox>
+
+</window>

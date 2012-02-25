@@ -1,0 +1,20 @@
+<!ENTITY sb.hlCustom.preset "プリセットスタイル">
+<!ENTITY sb.hlCustom.background "背景">
+<!ENTITY sb.hlCustom.color "色">
+<!ENTITY sb.hlCustom.text "文字">
+<!ENTITY sb.hlCustom.bold "太字">
+<!ENTITY sb.hlCustom.italic "斜体">
+<!ENTITY sb.hlCustom.line "取り消し線">
+<!ENTITY sb.hlCustom.border "枠">
+<!ENTITY sb.hlCustom.type "種類">
+<!ENTITY sb.hlCustom.box "囲み線">
+<!ENTITY sb.hlCustom.underline "下線">
+<!ENTITY sb.hlCustom.style "形式">
+<!ENTITY sb.hlCustom.solid "実線 (Solid)">
+<!ENTITY sb.hlCustom.dotted "点線 (Dotted)">
+<!ENTITY sb.hlCustom.dashed "破線 (Dashed)">
+<!ENTITY sb.hlCustom.double "二重線 (Double)">
+<!ENTITY sb.hlCustom.width "太さ">
+<!ENTITY sb.hlCustom.thin "細い">
+<!ENTITY sb.hlCustom.medium "中">
+<!ENTITY sb.hlCustom.thick "太い">

@@ -1,0 +1,13 @@
+<!ENTITY sb.save.partial "Uložiť výber">
+<!ENTITY sb.save.partial.as "Uložiť výber ako">
+<!ENTITY sb.save.entire "Uložiť stránku">
+<!ENTITY sb.save.entire.as "Uložiť stránku ako">
+<!ENTITY sb.save.frame "Uložiť rámec">
+<!ENTITY sb.save.frame.as "Uložiť rámec ako">
+<!ENTITY sb.save.target "Uložiť odkaz">
+<!ENTITY sb.save.target.as "Uložiť odkaz ako">
+<!ENTITY sb.save.alltabs "Uložiť všetky karty">
+<!ENTITY sb.save.bookmark "Uložiť ako záložku">
+<!ENTITY sb.sidebar "Zobraziť v bočnom paneli">
+<!ENTITY sb.menubar "Menubar">
+<!ENTITY sb.editbefore "Upraviť pred zachytením">

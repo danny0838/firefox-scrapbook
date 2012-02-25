@@ -1,0 +1,13 @@
+<!ENTITY sb.save.partial "Guardar selección">
+<!ENTITY sb.save.partial.as "Guardar selección como">
+<!ENTITY sb.save.entire "Guardar página">
+<!ENTITY sb.save.entire.as "Guardar página como">
+<!ENTITY sb.save.frame "Guardar marco">
+<!ENTITY sb.save.frame.as "Guardar marco como">
+<!ENTITY sb.save.target "Guardar enlaces">
+<!ENTITY sb.save.target.as "Guardar enlaces como">
+<!ENTITY sb.save.alltabs "Guardar todas las pestañas">
+<!ENTITY sb.save.bookmark "Guardar como marcador">
+<!ENTITY sb.sidebar "Mostrar en la barra lateral">
+<!ENTITY sb.menubar "Menubar">
+<!ENTITY sb.editbefore "Editar antes de capturar">

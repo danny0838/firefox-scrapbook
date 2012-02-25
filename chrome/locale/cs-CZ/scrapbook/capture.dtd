@@ -1,0 +1,13 @@
+<!ENTITY sb.save "Uložit">
+<!ENTITY sb.save.abort "Zrušit">
+<!ENTITY sb.save.start "Spustit">
+<!ENTITY sb.save.retry "Opakovat">
+<!ENTITY sb.save.skip "Přeskočit">
+<!ENTITY sb.save.pause "Pozastavit">
+<!ENTITY sb.save.filter "Filtrovat">
+<!ENTITY sb.save.filter.domain "Omezit na doménu">
+<!ENTITY sb.save.filter.level "Omezit na adresář">
+<!ENTITY sb.save.filter.string "Filtrovat podle...">
+<!ENTITY sb.save.filter.checkon "Vše zaškrtnout">
+<!ENTITY sb.save.filter.checkoff "Vše odškrtnout">
+<!ENTITY sb.save.filter.invert "Invertovat zaškrtnutí">

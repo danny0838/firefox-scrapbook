@@ -1,0 +1,13 @@
+<!ENTITY sb.save "Spara">
+<!ENTITY sb.save.abort "Avbryt">
+<!ENTITY sb.save.start "Starta">
+<!ENTITY sb.save.retry "Försök igen">
+<!ENTITY sb.save.skip "Hoppa över">
+<!ENTITY sb.save.pause "Pausa">
+<!ENTITY sb.save.filter "Filtrera">
+<!ENTITY sb.save.filter.domain "Begränsa till domän">
+<!ENTITY sb.save.filter.level "Begränsa till mapp">
+<!ENTITY sb.save.filter.string "Filtrera efter sträng…">
+<!ENTITY sb.save.filter.checkon "Markera alla &quot;På&quot;">
+<!ENTITY sb.save.filter.checkoff "Markera alla &quot;Av&quot;">
+<!ENTITY sb.save.filter.invert "Invertera markeringar">

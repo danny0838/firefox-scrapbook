@@ -1,0 +1,8 @@
+<!ENTITY sb.multiple.url "URL (Insira unha URL por liña)">
+<!ENTITY sb.multiple.detector "Detector de URLs">
+<!ENTITY sb.multiple.detector.plink "Todas as ligazóns da páxina">
+<!ENTITY sb.multiple.detector.slink "Todas as ligazóns da selección">
+<!ENTITY sb.multiple.detector.tabs "Todas as pestanas abertas na ventá">
+<!ENTITY sb.multiple.detector.local "Todos os HTMLs locais dun cartafol">
+<!ENTITY sb.multiple.detector.bookmarks "Marcadores">
+<!ENTITY sb.multiple.detector.clear "Limpar">

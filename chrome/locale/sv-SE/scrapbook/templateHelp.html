@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+
+<html>
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="Content-Style-Type" content="text/css">
+	<title>ScrapBooks HTML-mallshjälp</title>
+	<style type="text/css"><!--
+	body {
+		margin: 10px 50px;
+	}
+	div.container {
+		background-color: #F9F9F0;
+		border:1px dotted #E0E0E0;
+		padding: 20px;
+	}
+	h1 {
+		color: #FF9900;
+		font: bold 1.5em Arial, Verdana, Helvetica, Sans-serif;
+		margin : 0;
+	}
+	h2 {
+		font: bold 1.2em Arial, Verdana, Helvetica, Sans-serif;
+		margin-top: 30px;
+		border-bottom: 1px dotted #909090;
+	}
+	td {
+		font-family: Arial;
+		font-size  : 1.0em;
+		line-height: 1.5em;
+		padding-right: 10px;
+	}
+	pre {
+		font-family: monospace;
+		font-size  : 0.8em;
+	}
+	table, pre {
+		margin-left: 10px;
+	}
+	--></style>
+</head>
+
+<body>
+
+<div class="container">
+
+	<h1>ScrapBooks HTML-mallshjälp</h1>
+
+	<h2>Två specialtaggar</h2>
+	<table>
+		<tr>
+			<td><strong>&lt;%NOTE_TITLE%&gt;</strong></td>
+			<td>Rubriken (den första raden) i anteckningen</td>
+		</tr>
+		<tr>
+			<td><strong>&lt;%NOTE_CONTENT%&gt;</strong></td>
+			<td>Innehållet (den andra raden eller senare) i anteckningen</td>
+		</tr>
+	</table>
+
+	<h2>Förinställd mall</h2>
+	<pre style="overflow:auto;">
+&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;
+
+&lt;html&gt;
+
+&lt;head&gt;
+	&lt;meta http-equiv="Content-Type" content="text/html; charset=UTF-8"&gt;
+	&lt;meta http-equiv="Content-Style-Type" content="text/css"&gt;
+	&lt;title&gt;&lt;%NOTE_TITLE%&gt;&lt;/title&gt;
+	&lt;style type="text/css"&gt;&lt;!--
+	body {
+		margin: 10px 50px;
+	}
+	div.container {
+		background-color: #F9F9F0;
+		border:1px dotted #E0E0E0;
+		padding: 20px;
+	}
+	h1 {
+		color: #FF9900;
+		font: bold 1.2em Arial, Verdana, Helvetica, Sans-serif;
+		margin : 0;
+		padding: 0;
+	}
+	p, li, td, blockquote, pre {
+		font-size  : 0.8em;
+		line-height: 1.5em;
+	}
+	--&gt;&lt;/style&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+
+&lt;div class="container"&gt;
+	&lt;h1&gt;&lt;%NOTE_TITLE%&gt;&lt;/h1&gt;
+	&lt;p&gt;&lt;%NOTE_CONTENT%&gt;&lt;/p&gt;
+&lt;/div&gt;
+
+&lt;/body&gt;
+
+&lt;/html&gt;
+</pre>
+</div>
+
+</body>
+
+</html>
