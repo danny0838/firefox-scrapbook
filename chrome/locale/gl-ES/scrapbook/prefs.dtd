@@ -14,7 +14,7 @@
 <!ENTITY sb.prefs.ui.menuBar.icon "Icona">
 <!ENTITY sb.prefs.ui.toolsMenu "Amosar no menú &apos;Ferramentas&apos;">
 <!ENTITY sb.prefs.ui.statusBar "Amosar na barra de estado">
-<!ENTITY sb.prefs.restart "�� necesario reiniciar o Firefox despois dos cambios.">
+<!ENTITY sb.prefs.restart "É necesario reiniciar o Firefox despois dos cambios.">
 <!ENTITY sb.prefs.tabs.tips "Para as seguintes operacións abrirase unha pestana">
 <!ENTITY sb.prefs.tabs.note "Editar aviso">
 <!ENTITY sb.prefs.data "Localización dos datos">

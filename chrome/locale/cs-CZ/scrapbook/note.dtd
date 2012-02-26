@@ -5,7 +5,7 @@
 <!ENTITY sb.note.normalview "Běžný náhled">
 <!ENTITY sb.note.template "Upravit šablonu HTML">
 <!ENTITY sb.note.autolinefeed "Automatické řádkování">
-<!ENTITY sb.note.autolinefeed.t "Přidat tag <br> na konec řádku v &sb.note.htmlview;">
+<!ENTITY sb.note.autolinefeed.t "Přidat tag &lt;br&gt; na konec řádku v &sb.note.htmlview;">
 <!ENTITY sb.note.fontsize "Velikost písma">
 <!ENTITY sb.note.help "Nápověda">
 <!ENTITY sb.note.print "Tisk">

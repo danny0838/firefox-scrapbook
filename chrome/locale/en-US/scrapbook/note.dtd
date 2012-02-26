@@ -5,7 +5,7 @@
 <!ENTITY sb.note.normalview "Normal View">
 <!ENTITY sb.note.template "Edit Template HTML">
 <!ENTITY sb.note.autolinefeed "Auto-Linefeed">
-<!ENTITY sb.note.autolinefeed.t "Add <br> tag to the end-of-line at &sb.note.htmlview;">
+<!ENTITY sb.note.autolinefeed.t "Add &lt;br&gt; tag to the end-of-line at &sb.note.htmlview;">
 <!ENTITY sb.note.fontsize "Font Size">
 <!ENTITY sb.note.help "Help">
 <!ENTITY sb.note.print "Print">
