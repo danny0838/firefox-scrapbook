@@ -8,66 +8,24 @@ radio[pane="mainPane"] {
 	-moz-image-region: rect(0px, 32px, 32px, 0px)
 }
 
-radio[pane="mainPane"]:hover,
-radio[pane="mainPane"][selected="true"] {
-	-moz-image-region: rect(32px, 32px, 64px, 0px)
-}
-
 radio[pane="keysPane"] {
-	list-style-image: url("chrome://scrapbook/skin/keys.png");
-	opacity: 0.8;
-}
-
-radio[pane="keysPane"]:hover,
-radio[pane="keysPane"][selected="true"] {
-	opacity: 1.0;
-}
-
-radio[pane="tabsPane"] {
 	-moz-image-region: rect(0px, 64px, 32px, 32px)
 }
 
-radio[pane="tabsPane"]:hover,
-radio[pane="tabsPane"][selected="true"] {
-	-moz-image-region: rect(32px, 64px, 64px, 32px)
-}
-
-/*
-radio[pane="savePane"] {
+radio[pane="tabsPane"] {
 	-moz-image-region: rect(0px, 96px, 32px, 64px)
 }
 
-radio[pane="savePane"]:hover,
-radio[pane="savePane"][selected="true"] {
-	-moz-image-region: rect(32px, 96px, 64px, 64px)
-}
-*/
-
 radio[pane="editPane"] {
 	-moz-image-region: rect(0px, 128px, 32px, 96px)
-}
-
-radio[pane="editPane"]:hover,
-radio[pane="editPane"][selected="true"] {
-	-moz-image-region: rect(32px, 128px, 64px, 96px)
 }
 
 radio[pane="organizePane"] {
 	-moz-image-region: rect(0px, 160px, 32px, 128px)
 }
 
-radio[pane="organizePane"]:hover,
-radio[pane="organizePane"][selected="true"] {
-	-moz-image-region: rect(32px, 160px, 64px, 128px)
-}
-
 radio[pane="advancedPane"] {
 	-moz-image-region: rect(0px, 192px, 32px, 160px)
-}
-
-radio[pane="advancedPane"]:hover,
-radio[pane="advancedPane"][selected="true"] {
-	-moz-image-region: rect(32px, 192px, 64px, 160px)
 }
 
 prefpane > checkbox,
