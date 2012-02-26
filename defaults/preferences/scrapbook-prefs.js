@@ -1,4 +1,4 @@
-pref("extensions.scrapbookplus@addons.mozilla.org.description", "chrome://scrapbook/locale/about.properties");
+pref("extensions.scrapbookplus.description", "chrome://scrapbook/locale/about.properties");
 
 pref("scrapbook.ui.contextMenu", true);
 pref("scrapbook.ui.contextSubMenu", false);

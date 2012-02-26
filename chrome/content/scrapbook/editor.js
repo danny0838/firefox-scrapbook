@@ -198,7 +198,7 @@ var sbPageEditor = {
 		var sel = selText.QueryInterface(Components.interfaces.nsISelectionPrivate);
 		var isSelected = false;
 		try {
-			isSelected = ( sel.anchorNode.isSameNode(sel.focusNode) && sel.anchorOffset == sel.focusOffset ) ? false : true;
+			isSelected = ( sel.anchorNode == sel.focusNode && sel.anchorOffset == sel.focusOffset ) ? false : true;
 		} catch(ex) {
 			isSelected = false;
 		}

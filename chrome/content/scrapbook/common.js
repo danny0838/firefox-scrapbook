@@ -432,22 +432,3 @@ var sbCommonUtils = {
 
 
 };
-
-
-
-
-function dumpObj(aObj, aLimit)
-{
-	dump("\n\n----------------[DUMP_OBJECT]----------------\n\n");
-	for ( var i in aObj )
-	{
-		try {
-			dump(i + (aLimit ? "" : " -> " + aObj[i]) + "\n");
-		} catch(ex) {
-			dump("XXXXXXXXXX ERROR XXXXXXXXXX\n" + ex + "\n");
-		}
-	}
-	dump("\n\n");
-}
-
-

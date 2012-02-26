@@ -682,7 +682,7 @@ var sbTreeDNDHandler = {
 		var sel = win.getSelection();
 		var isSelected = false;
 		try {
-			isSelected = !(sel.anchorNode.isSameNode(sel.focusNode) && sel.anchorOffset == sel.focusOffset);
+			isSelected = !(sel.anchorNode == sel.focusNode && sel.anchorOffset == sel.focusOffset);
 		}
 		catch (ex) {
 		}

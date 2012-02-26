@@ -340,7 +340,7 @@ var sbBrowserOverlay = {
 		var sel = sbCommonUtils.getFocusedWindow().getSelection().QueryInterface(Ci.nsISelectionPrivate);
 		var isSelected = false;
 		try {
-			isSelected = !(sel.anchorNode.isSameNode(sel.focusNode) && sel.anchorOffset == sel.focusOffset);
+			isSelected = !(sel.anchorNode == sel.focusNode && sel.anchorOffset == sel.focusOffset);
 		}
 		catch(ex) {}
 		return isSelected;
