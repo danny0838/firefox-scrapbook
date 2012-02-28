@@ -1,0 +1,13 @@
+<!ENTITY sb.prop.general "一般資訊">
+<!ENTITY sb.prop.type "型態">
+<!ENTITY sb.prop.date "日期">
+<!ENTITY sb.prop.encode "字集">
+<!ENTITY sb.prop.size "文件大小">
+<!ENTITY sb.prop.content "內容">
+<!ENTITY sb.prop.folder "資料夾">
+<!ENTITY sb.prop.icon "圖示">
+<!ENTITY sb.prop.icon.change "更換">
+<!ENTITY sb.prop.icon.default "預設圖示">
+<!ENTITY sb.prop.icon.favicon "選擇網站圖示">
+<!ENTITY sb.prop.icon.custom "選擇自訂圖示">
+<!ENTITY sb.prop.mark "標示">

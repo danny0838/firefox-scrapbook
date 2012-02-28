@@ -1,0 +1,13 @@
+<!ENTITY sb.save "擷取">
+<!ENTITY sb.save.abort "中止">
+<!ENTITY sb.save.start "開始">
+<!ENTITY sb.save.retry "重試">
+<!ENTITY sb.save.skip "略過">
+<!ENTITY sb.save.pause "暫停">
+<!ENTITY sb.save.filter "過濾">
+<!ENTITY sb.save.filter.domain "限定於網域中">
+<!ENTITY sb.save.filter.level "限定於目錄中">
+<!ENTITY sb.save.filter.string "以字串過濾…">
+<!ENTITY sb.save.filter.checkon "全部選擇">
+<!ENTITY sb.save.filter.checkoff "全部取消">
+<!ENTITY sb.save.filter.invert "反向選擇">

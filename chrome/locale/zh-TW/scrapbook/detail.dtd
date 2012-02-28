@@ -1,0 +1,17 @@
+<!ENTITY sb.detail.title "擷取資訊">
+<!ENTITY sb.detail.new.folder "開新資料夾">
+<!ENTITY sb.detail.select.folder "選取資料夾">
+<!ENTITY sb.detail.option "選項">
+<!ENTITY sb.detail.option.images "圖片">
+<!ENTITY sb.detail.option.styles "樣式">
+<!ENTITY sb.detail.linked.file "下載連結">
+<!ENTITY sb.detail.linked.image "圖片">
+<!ENTITY sb.detail.linked.sound "音樂">
+<!ENTITY sb.detail.linked.movie "影片">
+<!ENTITY sb.detail.linked.archive "壓縮檔">
+<!ENTITY sb.detail.linked.custom "自訂">
+<!ENTITY sb.detail.linked.page2 "多層擷取">
+<!ENTITY sb.detail.linked.page.depth "擷取連結層數">
+<!ENTITY sb.detail.linked.page.text "（擷取完畢後，網頁連結會自動依硬碟中位置更新。）">
+<!ENTITY sb.detail.warnAboutRenew "請注意：「重新擷取」將覆蓋之前擷取的頁面。">
+<!ENTITY sb.detail.warnAboutScript "請注意：則 JavaScript 可能會引發許多問題。">
