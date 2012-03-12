@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+
+<!DOCTYPE overlay [
+	<!ENTITY % overlayDTD SYSTEM "chrome://scrapbook/locale/overlay.dtd">
+	%overlayDTD;
+	<!ENTITY % editorDTD  SYSTEM "chrome://scrapbook/locale/editor.dtd">
+	%editorDTD;
+]>
+
+<overlay
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/sbmaf.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/sbmht.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/placesOverlay.js" />
+
+	<stringbundleset id="stringbundleset">
+		<stringbundle id="ScrapBookOverlayString" src="chrome://scrapbook/locale/overlay.properties" />
+	</stringbundleset>
+
+    <!-- bookmark context menu -->
+    <menupopup id="placesContext">
+        <menu label="Scrapbook Lite" id="ScrapbookStorage" insertbefore="placesContext_open">
+            <menupopup>
+                  <menuitem  label="直接访问" oncommand="sbContext.openDirect2(event)"/>
+                  <menuitem  label="打开文件目录" oncommand="sbContext.openFile(event)"/>
+                  <menuitem  label="导出 maf" oncommand="sbContext.exportMaf(event)"/>
+                  <menuitem  label="导出 mht" oncommand="sbContext.exportMht(event)"/>
+                  <menuitem  label="更新" oncommand="sbContext.reSave(event)"/>
+            </menupopup>
+        </menu>
+        <menuseparator id="ScrapbookStorageSep"  insertbefore="placesContext_open"/>
+    </menupopup>
+    
+
+
+
+
+</overlay>

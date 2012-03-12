@@ -1,0 +1,11 @@
+overlay	chrome://browser/content/browser.xul	chrome://scrapbook/content/overlay.xul
+overlay	chrome://browser/content/places/placesOverlay.xul	chrome://scrapbook/content/placesOverlay.xul
+content	scrapbook	chrome/content/scrapbook/
+content	scrapbook	chrome/content/scrapbook/	contentaccessible=yes
+
+skin	scrapbook	classic/1.0	chrome/skin/default/scrapbook/
+style	chrome://browser/content/browser.xul	chrome://scrapbook/skin/overlay.css
+style	chrome://global/content/customizeToolbar.xul	chrome://scrapbook/skin/overlay.css
+
+locale	scrapbook	en-US	chrome/locale/en-US/scrapbook/
+locale	scrapbook	zh-CN	chrome/locale/zh-CN/scrapbook/

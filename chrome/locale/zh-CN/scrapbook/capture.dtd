@@ -1,0 +1,13 @@
+<!ENTITY sb.capture "获取">
+<!ENTITY sb.capture.abort "中止">
+<!ENTITY sb.capture.start "开始">
+<!ENTITY sb.capture.retry "重试">
+<!ENTITY sb.capture.skip "忽略">
+<!ENTITY sb.capture.pause "暂停">
+<!ENTITY sb.capture.filter "过滤器">
+<!ENTITY sb.capture.filter.domain "限定域名">
+<!ENTITY sb.capture.filter.level "限定目录">
+<!ENTITY sb.capture.filter.string "按字符串过滤...">
+<!ENTITY sb.capture.filter.checkon "选择全部项目">
+<!ENTITY sb.capture.filter.checkoff "取消所有选择">
+<!ENTITY sb.capture.filter.invert "反向选择">

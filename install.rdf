@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+     xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+
+  <Description about="urn:mozilla:install-manifest">
+  
+    <em:id>scrapbooklite@slimx.com</em:id>
+    <em:name>Scrapbook Lite</em:name>
+    <em:version>1.2.0</em:version>
+    <em:creator>slimx</em:creator>
+    <em:type>2</em:type> <!-- type=extension --> 
+	<em:unpack>false</em:unpack>
+    
+    <!-- Firefox -->
+    <em:targetApplication>
+      <Description>
+        <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+        <em:minVersion>4.0.*</em:minVersion>
+        <em:maxVersion>14.0a1</em:maxVersion>
+      </Description>
+    </em:targetApplication>
+        
+  </Description>
+</RDF>

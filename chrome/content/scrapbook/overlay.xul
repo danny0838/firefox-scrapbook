@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://scrapbook/skin/overlay.css" type="text/css"?>
+
+<!DOCTYPE overlay [
+	<!ENTITY % overlayDTD SYSTEM "chrome://scrapbook/locale/overlay.dtd">
+	%overlayDTD;
+	<!ENTITY % editorDTD  SYSTEM "chrome://scrapbook/locale/editor.dtd">
+	%editorDTD;
+]>
+
+<overlay id="scrapbooktasksOverlay"
+         xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/saver.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/sbmaf.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/sbmht.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/overlay.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/aardvark.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/aardvarkDBox.js" />
+
+
+	<stringbundleset id="stringbundleset">
+		<stringbundle id="ScrapBookOverlayString" src="chrome://scrapbook/locale/overlay.properties" />
+	</stringbundleset>
+
+	<menupopup id="contentAreaContextMenu">
+		<menuseparator id="ScrapBookContextMenu0" />
+        <!--slimx todo 暂时禁用高级获取-->
+		<menuitem id="ScrapBookContextMenu1" class="menuitem-iconic     sb-capture-partial" label="&sb.capture.partial;"       oncommand="sbBrowserOverlay.execCapture(1, true , false,'urn:scrapbook:root' );" />
+		<menuitem id="ScrapBookContextMenu2" style="display: none;" class="menuitem-iconic sb-capture-partial" label="&sb.capture.partial.as;..." oncommand="sbBrowserOverlay.execCapture(1, true , true , event.originalTarget.id);" />
+		<menuitem     id="ScrapBookContextMenu3" class="menuitem-iconic     sb-capture-entire"  label="&sb.capture.entire;"        oncommand="sbBrowserOverlay.execCapture(2, false, false,'urn:scrapbook:root');" />
+		<menuitem id="ScrapBookContextMenu4" style="display: none;" class="menuitem-iconic sb-capture-entire"  label="&sb.capture.entire.as;..."  oncommand="sbBrowserOverlay.execCapture(2, false, true , event.originalTarget.id);" />
+		<menuitem     id="ScrapBookContextMenu5" class="menuitem-iconic     sb-capture-frame"   label="&sb.capture.frame;"         oncommand="sbBrowserOverlay.execCapture(2, true , false, 'urn:scrapbook:root');" />
+		<menuitem id="ScrapBookContextMenu6" style="display: none;" class="menuitem-iconic sb-capture-frame"   label="&sb.capture.frame.as;..."   oncommand="sbBrowserOverlay.execCapture(2, true , true , event.originalTarget.id);" />
+		<menuitem     id="ScrapBookContextMenu7" class="menuitem-iconic     sb-capture-target"  label="&sb.capture.target;"        oncommand="sbBrowserOverlay.execCaptureTarget(false,'urn:scrapbook:root');"/>
+		<menuitem id="ScrapBookContextMenu8" style="display: none;" class="menuitem-iconic sb-capture-target"  label="&sb.capture.target.as;..."  oncommand="sbBrowserOverlay.execCaptureTarget(true,  event.originalTarget.id);"     />
+		<menu     id="ScrapBookContextSubmenu" label="ScrapBook" hidden="true"><menupopup /></menu>
+
+		<menu id="ScrapBookContextMenu9"  label="&sb.capture.bookmark;" oncommand="sbBrowserOverlay.execBookmark(event.originalTarget.value);">
+			<menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this,event);"/>
+		</menu>
+        <menuitem id="ScrapBookContextMenu11" class="menuitem-iconic sb-capture-entire"  label="获取全部页面"
+                      oncommand="sbMenuHandler.execCaptureAllTabs('urn:scrapbook:root');" />
+
+        <menu label="Scrapbook Lite">
+            <menupopup>
+                        <menuitem id="ScrapBookContextMenu12" label="剪辑页面"
+                      oncommand="aardvark.main.start();" />
+                <menuseparator/>
+                                        <menuitem id="ScrapBookContextMenu12" label="另存为..."
+                      oncommand="sbContext.saveAsMht()" />
+            </menupopup>
+        </menu>
+
+	</menupopup>
+
+    <!-- bookmark context menu -->
+    <menupopup id="placesContext">
+        <menu label="Scrapbook Lite" id="ScrapbookStorage" insertbefore="placesContext_open">
+            <menupopup>
+                  <menuitem  label="直接访问" oncommand="sbContext.openDirect2(event)"/>
+                  <menuitem  label="打开文件目录" oncommand="sbContext.openFile(event)"/>
+                  <menuseparator/>
+                  <menuitem  label="导出 maf" oncommand="sbContext.exportMaf(event)"/>
+                  <menuitem  label="导出 mht" oncommand="sbContext.exportMht(event)"/>
+                  <menuseparator/>
+                  <menuitem  label="更新" oncommand="sbContext.reSave(event)"/>
+            </menupopup>
+        </menu>
+        <menuseparator id="ScrapbookStorageSep" insertbefore="placesContext_open"/>
+    </menupopup>
+</overlay>
