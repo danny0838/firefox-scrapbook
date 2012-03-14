@@ -157,6 +157,7 @@ var sbContentSaver = {
 			}
 		}
 		this.addResource(aResName, aResIndex);
+		this.frameList = null;
 		return [this.name, this.file2URL];
 	},
 
@@ -586,7 +587,7 @@ var sbContentSaver = {
 		var medium = aCSS.media.mediaText;
 		if ( medium != "" && medium.indexOf("screen") < 0 && medium.indexOf("all") < 0 ) return "";
 		if ( aCSS.href && aCSS.href.indexOf("chrome") == 0 ) return "";
-		if ( aCSS.href ) { content += (content ? "\n" : "") + "/* ::::: " + aCSS.href + " ::::: */\n\n"; flag = true; }
+		if ( aCSS.href ) { content += (content ? "\n" : "") + "/* ::::: " + aCSS.href + " ::::: */\n\n"; }
 		for ( var i=0; i<aCSS.cssRules.length; i++ )
 		{
 			if ( aCSS.cssRules[i].type == 1 || aCSS.cssRules[i].type == 4 || aCSS.cssRules[i].type == 5 )
