@@ -444,6 +444,10 @@ var sbPageEditor = {
 	{
 		window.setTimeout(function() { sbPageEditor.disable(true);  }, 0);
 		window.setTimeout(function() { sbPageEditor.disable(false); }, msec);
+		//Verhindert das Zurückbleiben von "ZombieCompartments"
+		sbContentSaver.frameList = null;
+		this.focusedWindow = null;
+		this.savedBody = null;
 	},
 
 	disable : function(aBool)
@@ -468,6 +472,10 @@ var sbPageEditor = {
 		this.TOOLBAR.hidden = !willShow;
 		willShow ? this.TOOLBAR.setAttribute("moz-collapsed", "false") : this.TOOLBAR.removeAttribute("moz-collapsed");
 		sbInfoViewer.optimize();
+		//Verhindert das Zurückbleiben von "ZombieCompartments"
+		sbContentSaver.frameList = null;
+		this.focusedWindow = null;
+		this.savedBody = null;
 	},
 
 

@@ -120,6 +120,10 @@ var sbBrowserOverlay = {
 
 	onLocationChange: function(aURL)
 	{
+		//Verhindert das Zurückbleiben von "ZombieCompartments"
+		sbContentSaver.frameList = null;
+		sbPageEditor.focusedWindow = null;
+		sbPageEditor.savedBody = null;
 		if (aURL && aURL != (gBrowser.currentURI ? gBrowser.currentURI.spec : ""))
 			return;
 		if (aURL.indexOf("file") != 0 && aURL == this.lastLocation)
