@@ -7,7 +7,7 @@
 		<em:id>{53A03D43-5363-4669-8190-99061B2DEBA5}</em:id>
 		<em:type>2</em:type>
 		<em:name>ScrapBook</em:name>
-		<em:version>1.5.3</em:version>
+		<em:version>1.5.4</em:version>
 		<em:description>Helps you to save Web pages and organize the collection.</em:description>
 		<em:creator>Gomita</em:creator>
 		<em:localized>
@@ -178,7 +178,7 @@
 			<Description>
 				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
 				<em:minVersion>4.0</em:minVersion>
-				<em:maxVersion>12.*</em:maxVersion>
+				<em:maxVersion>13.*</em:maxVersion>
 			</Description>
 		</em:targetApplication>
 	</Description>
