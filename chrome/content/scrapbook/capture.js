@@ -16,8 +16,6 @@ var gNode = null;
 
 
 
-
-
 function SB_trace(aMessage)
 {
 	document.getElementById("sbCaptureTextbox").value = aMessage;
@@ -35,8 +33,8 @@ function SB_initCapture()
 	gOption     = window.arguments[6];
 	gFile2URL   = window.arguments[7];
 	gPreset     = window.arguments[8];
-    gNode = window.arguments[9];
 
+    gNode = window.arguments[9];
 	if ( gReferItem )
 	{
 		gContext = "indepth";
@@ -47,20 +45,20 @@ function SB_initCapture()
 		gContext = gPreset[1] == "index" ? "capture-again" : "capture-again-deep";
 		if ( gContext == "capture-again-deep" )
 		{
-			var contDir = sbCommonUtils.getContentDir(gPreset[0]);
+			var contDir = ScrapBookUtils.getContentDir(gPreset[0]);
 			var file = contDir.clone();
 			file.append("sb-file2url.txt");
-			if ( !file.exists() ) { alert("ScrapBook ERROR: Could not find 'sb-file2url.txt'."); window.close(); }
-			var lines = sbCommonUtils.readFile(file).split("\n");
+			if ( !file.exists() ) { ScrapBookUtils.alert("ERROR: Could not find 'sb-file2url.txt'."); window.close(); }
+			var lines = ScrapBookUtils.readFile(file).split("\n");
 			for ( var i = 0; i < lines.length; i++ )
 			{
 				var arr = lines[i].split("\t");
 				if ( arr.length == 2 ) gFile2URL[arr[0]] = arr[1];
 			}
-			file = sbCommonUtils.getContentDir(gPreset[0]).clone();
+			file = ScrapBookUtils.getContentDir(gPreset[0]).clone();
 			file.append("sb-url2name.txt");
-			if ( !file.exists() ) { alert("ScrapBook ERROR: Could not find 'sb-url2name.txt'."); window.close(); }
-			lines = sbCommonUtils.readFile(file).split("\n");
+			if ( !file.exists() ) { ScrapBookUtils.alert("ERROR: Could not find 'sb-url2name.txt'."); window.close(); }
+			lines = ScrapBookUtils.readFile(file).split("\n");
 			for ( i = 0; i < lines.length; i++ )
 			{
 				var arr = lines[i].split("\t");
@@ -71,7 +69,7 @@ function SB_initCapture()
 				}
 			}
 			gPreset[3] = gFile2URL;
-			if ( !myURLs[0] ) { alert("ScrapBook ERROR: Could not find the source URL for " + gPreset[1] + ".html."); window.close(); }
+			if ( !myURLs[0] ) { ScrapBookUtils.alert("ERROR: Could not find the source URL for " + gPreset[1] + ".html."); window.close(); }
 		}
 	}
 	else gContext = "link";
@@ -80,18 +78,9 @@ function SB_initCapture()
 	if ( !("images" in gOption ) ) gOption["images"] = true;
 	sbInvisibleBrowser.init();
 	sbCaptureTask.init(myURLs);
-    //slimx edit ȡ���Զ�����
-	//gURLs.length == 1 ? sbCaptureTask.start() : sbCaptureTask.countDown();
-    if(gURLs.length==1)
-    {
-        sbCaptureTask.start();//ֻ��һ��λ�,����ȴ�,�Զ�����.
-    }else
-    {
-        sbCaptureTask.seconds = -1;//�����ʼ֮ǰ�εȴ�ʱ��.
-        sbCaptureTask.toggleStartPause(false);//����˵�״̬.��ʵҲû��̫��α�Ҫ��.
-    }
-
+	gURLs.length == 1 ? sbCaptureTask.start() : sbCaptureTask.countDown();
 }
+
 
 function SB_splitByAnchor(aURL)
 {
@@ -102,14 +91,14 @@ function SB_splitByAnchor(aURL)
 
 function SB_suggestName(aURL)
 {
-	var baseName = sbCommonUtils.validateFileName(sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aURL))[0]);
+	var baseName = ScrapBookUtils.validateFileName(ScrapBookUtils.splitFileName(ScrapBookUtils.getFileName(aURL))[0]);
 	baseName = baseName.toLowerCase();
 	if ( baseName == "index" ) baseName = "default";
 	if ( !baseName ) baseName = "default";
 	var name = baseName + ".html";
 	var seq = 0;
 	while ( gFile2URL[name] ) name = baseName + "_" + sbContentSaver.leftZeroPad3(++seq) + ".html";
-	name = sbCommonUtils.splitFileName(name)[0];
+	name = ScrapBookUtils.splitFileName(name)[0];
 	gFile2URL[name + ".html"] = aURL;
 	gFile2URL[name + ".css"]  = true;
 	return name;
@@ -118,16 +107,15 @@ function SB_suggestName(aURL)
 
 function SB_fireNotification(aItem)
 {
-	var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
-	win.sbCaptureObserverCallback.onCaptureComplete(aItem);
+	ScrapBookUtils.getBrowserWindow().sbCaptureObserverCallback.onCaptureComplete(aItem);
 }
 
 
 
 
 var sbCaptureTask = {
-    //slimx edit �޸�Scrapbook������һ�����ݵĵȴ�ʱ��
-	get INTERVAL() { return 1; },//����
+
+	get INTERVAL() { return 1; },
 	get LISTBOX()  { return document.getElementById("sbCaptureListbox"); },
 	get STRING()   { return document.getElementById("sbCaptureString"); },
 	get URL()      { return gURLs[this.index]; },
@@ -137,7 +125,7 @@ var sbCaptureTask = {
 	isDocument  : false,
 	canRefresh  : true,
 	sniffer     : null,
-	seconds     : 3,
+	seconds     : 3,//slimx edit
 	timerID     : 0,
 	forceExit   : 0,
 
@@ -158,8 +146,8 @@ var sbCaptureTask = {
 			var button = document.getElementById("sbCaptureFilterButton");
 			button.hidden = false;
 			button.nextSibling.hidden = false;
-			button.firstChild.firstChild.label += " (" + sbCommonUtils.getRootHref(gReferItem.source) + ")" ;
-			button.firstChild.firstChild.nextSibling.label += " (" + sbCommonUtils.getBaseHref(gReferItem.source) + ")";
+			button.firstChild.firstChild.label += " (" + ScrapBookUtils.getRootHref(gReferItem.source) + ")" ;
+			button.firstChild.firstChild.nextSibling.label += " (" + ScrapBookUtils.getBaseHref(gReferItem.source) + ")";
 		}
 		for ( var i = 0; i < myURLs.length; i++ ) this.add(myURLs[i], 1);
 	},
@@ -320,17 +308,15 @@ var sbCaptureTask = {
 		return true;
 	},
 
-    //slimx todo�� ����һЩ���ˤη���.����û�������.
 	applyFilter : function(type)
 	{
 		switch ( type )
 		{
-        //slimx todo ֱ�Ӥ�ip��ַ���������?��Ҫ�޸�
-			case "D" : var ref = sbCommonUtils.getRootHref(gReferItem.source).toLowerCase(); this.filter = function(i){ return gURLs[i].toLowerCase().indexOf(ref) == 0; }; break;
-			case "L" : var ref = sbCommonUtils.getBaseHref(gReferItem.source).toLowerCase(); this.filter = function(i){ return gURLs[i].toLowerCase().indexOf(ref) == 0; }; break;
+			case "D" : var ref = ScrapBookUtils.getRootHref(gReferItem.source).toLowerCase(); this.filter = function(i){ return gURLs[i].toLowerCase().indexOf(ref) == 0; }; break;
+			case "L" : var ref = ScrapBookUtils.getBaseHref(gReferItem.source).toLowerCase(); this.filter = function(i){ return gURLs[i].toLowerCase().indexOf(ref) == 0; }; break;
 			case "S" : 
 				var ret = { value : "" };
-				if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", this.STRING.getString("FILTER_BY_STRING"), ret, null, {}) ) return;
+				if ( !ScrapBookUtils.PROMPT.prompt(window, "[ScrapBook]", this.STRING.getString("FILTER_BY_STRING"), ret, null, {}) ) return;
 				if ( ret.value ) this.filter = function(i){ return gURLs[i].toLowerCase().indexOf(ret.value.toLowerCase()) != -1; };
 				break;
 			case "N" : this.filter = function(i){ return true;  }; break;
@@ -340,14 +326,11 @@ var sbCaptureTask = {
 		}
 		for ( var i = this.index; i < gURLs.length; i++ )
 		{
-			var item = this.LISTBOX.getItemAtIndex(i);
-//            ���ַ������ܻ�������,����set�ȽϿɿ�,������Ȼ����Ҫ���Ե�.
-//            sbCommonUtils.log(i+":"+item.checked);
-//            item.checked = this.filter(i);
-            item.setAttribute("checked", this.filter(i));
-//            sbCommonUtils.log(i+":"+item.checked);
+			this.LISTBOX.getItemAtIndex(i).checked = this.filter(i);
+            //sth error,necessary?
+            this.LISTBOX.getItemAtIndex(i).setAttribute("checked", this.filter(i));
 		}
-	}
+	},
 
 };
 
@@ -363,7 +346,7 @@ var sbInvisibleBrowser = {
 
 	init : function()
 	{
-		this.ELEMENT.webProgress.addProgressListener(this, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
+		this.ELEMENT.webProgress.addProgressListener(this, Ci.nsIWebProgress.NOTIFY_ALL);
 		this.onload = function(){ sbInvisibleBrowser.execCapture(); };
 		this.ELEMENT.addEventListener("load", sbInvisibleBrowser.onload, true);
 	},
@@ -381,17 +364,14 @@ var sbInvisibleBrowser = {
 		this.ELEMENT.docShell.allowJavascript = gOption["script"];
 		this.ELEMENT.docShell.allowImages     = gOption["images"];
 		this.ELEMENT.docShell.allowMetaRedirects = false;
-		this.ELEMENT.docShell.QueryInterface(Components.interfaces.nsIDocShellHistory).useGlobalHistory = false;
-        //slimx todo �Ҳ���ȷ��,�Ƿ��Ǳ��뵼�¤�����,ֻ��ʵ��һ����.�ƺ��Ǻ�һЩ��.
-        var charset = null;
-        if(aURL.search(/cnbeta\.com/i)>-1){charset="gb2312";}
-        this.ELEMENT.loadURI(aURL, null, charset);//url,referrer,charset,���Ǹ��첽�β���,������Ӥμ�������load����֮��ִ��
-
-    },
+		this.ELEMENT.docShell.QueryInterface(Ci.nsIDocShellHistory).useGlobalHistory = false;
+        //3 is charset,but no use
+		this.ELEMENT.loadURI(aURL, null, null);
+	},
 
 	execCapture : function()
 	{
-		SB_trace(sbCaptureTask.STRING.getString("CAPTURE_START"));
+		SB_trace(sbCaptureTask.STRING.getString("SAVE_START"));
 		document.getElementById("sbCapturePauseButton").disabled = true;
 		sbCaptureTask.toggleSkipButton(false);
 		var ret = null;
@@ -406,7 +386,7 @@ var sbInvisibleBrowser = {
 				     metaElems[i].getAttribute("http-equiv").toLowerCase() == "refresh" && 
 				     metaElems[i].getAttribute("content").match(/URL\=(.*)$/i) )
 				{
-					var newURL = sbCommonUtils.resolveURL(sbCaptureTask.URL, RegExp.$1);
+					var newURL = ScrapBookUtils.resolveURL(sbCaptureTask.URL, RegExp.$1);
 					if ( newURL != sbCaptureTask.URL && sbCaptureTask.canRefresh )
 					{
 						gURLs[sbCaptureTask.index] = newURL;
@@ -416,7 +396,6 @@ var sbInvisibleBrowser = {
 					}
 				}
 			}
-
 			ret = sbContentSaver.captureWindow(this.ELEMENT.contentWindow, false, gShowDetail, gResName, gResIdx, preset, gContext,gNode);
 		}
 		else
@@ -434,35 +413,35 @@ var sbInvisibleBrowser = {
 			else if ( gContext == "capture-again-deep" )
 			{
 				gFile2URL = ret[1];
-				var contDir = sbCommonUtils.getContentDir(gPreset[0]);
+				var contDir = ScrapBookUtils.getContentDir(gPreset[0]);
 				var txtFile = contDir.clone();
 				txtFile.append("sb-file2url.txt");
 				var txt = "";
 				for ( var f in gFile2URL ) txt += f + "\t" + gFile2URL[f] + "\n";
-				sbCommonUtils.writeFile(txtFile, txt, "UTF-8");
+				ScrapBookUtils.writeFile(txtFile, txt, "UTF-8");
 			}
 		}
 		else
 		{
 			if ( gShowDetail ) window.close();
-			SB_trace(sbCaptureTask.STRING.getString("CAPTURE_ABORT"));
+			SB_trace(sbCaptureTask.STRING.getString("SAVE_ABORT"));
 			sbCaptureTask.fail("");
 		}
 	},
 
 	QueryInterface : function(aIID)
 	{
-		if (aIID.equals(Components.interfaces.nsIWebProgressListener) ||
-			aIID.equals(Components.interfaces.nsISupportsWeakReference) ||
-			aIID.equals(Components.interfaces.nsIXULBrowserWindow) ||
-			aIID.equals(Components.interfaces.nsISupports))
+		if (aIID.equals(Ci.nsIWebProgressListener) ||
+			aIID.equals(Ci.nsISupportsWeakReference) ||
+			aIID.equals(Ci.nsIXULBrowserWindow) ||
+			aIID.equals(Ci.nsISupports))
 			return this;
 		throw Components.results.NS_NOINTERFACE;
 	},
 
 	onStateChange : function(aWebProgress, aRequest, aStateFlags, aStatus)
 	{
-		if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
+		if ( aStateFlags & Ci.nsIWebProgressListener.STATE_START )
 		{
 			SB_trace(sbCaptureTask.STRING.getString("LOADING") + "... " + (++this.fileCount) + " " + (sbCaptureTask.URL ? sbCaptureTask.URL : this.ELEMENT.contentDocument.title));
 		}
@@ -499,20 +478,18 @@ var sbCrossLinker = {
 
 	invoke : function()
 	{
-		if ( !sbDataSource.data ) sbDataSource.init();
-		sbDataSource.setProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gReferItem.id), "type", "site");
-		sbDataSource.flush();
+		ScrapBookData.setProperty(ScrapBookUtils.RDF.GetResource("urn:scrapbook:item" + gReferItem.id), "type", "site");
 		sbInvisibleBrowser.refreshEvent(function(){ sbCrossLinker.exec(); });
 		this.ELEMENT.docShell.allowImages = false;
 		sbInvisibleBrowser.onStateChange = function(aWebProgress, aRequest, aStateFlags, aStatus)
 		{
-			if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
+			if ( aStateFlags & Ci.nsIWebProgressListener.STATE_START )
 			{
 				SB_trace(sbCaptureTask.STRING.getFormattedString("REBUILD_LINKS", [sbCrossLinker.index + 1, sbCrossLinker.nameList.length]) + "... "
 					+ ++sbInvisibleBrowser.fileCount + " : " + sbCrossLinker.nameList[sbCrossLinker.index] + ".html");
 			}
 		};
-		this.baseURL = sbCommonUtils.IO.newFileURI(sbCommonUtils.getContentDir(gReferItem.id)).spec;
+		this.baseURL = ScrapBookUtils.IO.newFileURI(ScrapBookUtils.getContentDir(gReferItem.id)).spec;
 		this.nameList.push("index");
 		for ( var url in gURL2Name )
 		{
@@ -549,11 +526,11 @@ var sbCrossLinker = {
 		if ( !this.nodeHash[this.nameList[this.index]] )
 		{
 			this.nodeHash[this.nameList[this.index]] = this.createNode(this.nameList[this.index], gReferItem.title);
-			this.nodeHash[this.nameList[this.index]].setAttribute("title", sbDataSource.sanitize(this.ELEMENT.contentTitle));
+			this.nodeHash[this.nameList[this.index]].setAttribute("title", ScrapBookData.sanitize(this.ELEMENT.contentTitle));
 		}
 		else
 		{
-			this.nodeHash[this.nameList[this.index]].setAttribute("title", sbDataSource.sanitize(this.ELEMENT.contentTitle));
+			this.nodeHash[this.nameList[this.index]].setAttribute("title", ScrapBookData.sanitize(this.ELEMENT.contentTitle));
 		}
 		for ( var f = 0; f < sbContentSaver.frameList.length; f++ )
 		{
@@ -586,9 +563,9 @@ var sbCrossLinker = {
 				var src = "";
 				src = sbContentSaver.surroundByTags(rootNode, rootNode.innerHTML);
 				src = sbContentSaver.doctypeToString(doc.doctype) + src;
-				var file = sbCommonUtils.getContentDir(gReferItem.id);
-				file.append(sbCommonUtils.getFileName(doc.location.href));
-				sbCommonUtils.writeFile(file, src, doc.characterSet);
+				var file = ScrapBookUtils.getContentDir(gReferItem.id);
+				file.append(ScrapBookUtils.getFileName(doc.location.href));
+				ScrapBookUtils.writeFile(file, src, doc.characterSet);
 			}
 		}
 		this.forceReloading(gReferItem.id, this.nameList[this.index]);
@@ -597,10 +574,10 @@ var sbCrossLinker = {
 
 	createNode : function(aName, aText)
 	{
-		aText = sbCommonUtils.crop(aText, 100);
+		aText = ScrapBookUtils.crop(aText, 100);
 		var node = this.XML.createElement("page");
 		node.setAttribute("file", aName + ".html");
-		node.setAttribute("text", sbDataSource.sanitize(aText));
+		node.setAttribute("text", ScrapBookData.sanitize(aText));
 		return node;
 	},
 
@@ -613,29 +590,29 @@ var sbCrossLinker = {
 		src += '<?xml-stylesheet href="../../sitemap.xsl" type="text/xsl" media="all"?>\n';
 		src += (new XMLSerializer()).serializeToString(this.XML).replace(/></g, ">\n<");
 		src += '\n';
-		var xslFile = sbCommonUtils.getScrapBookDir().clone();
+		var xslFile = ScrapBookUtils.getScrapBookDir().clone();
 		xslFile.append("sitemap.xsl");
-		if ( !xslFile.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/skin/sitemap.xsl", xslFile);
-		var contDir = sbCommonUtils.getContentDir(gReferItem.id);
+		if ( !xslFile.exists() ) ScrapBookUtils.saveTemplateFile("chrome://scrapbook/skin/sitemap.xsl", xslFile);
+		var contDir = ScrapBookUtils.getContentDir(gReferItem.id);
 		var xmlFile = contDir.clone();
 		xmlFile.append("sitemap.xml");
-		sbCommonUtils.writeFile(xmlFile, src, "UTF-8");
+		ScrapBookUtils.writeFile(xmlFile, src, "UTF-8");
 		var txt = "";
 		var txtFile1 = contDir.clone();
 		txtFile1.append("sb-file2url.txt");
 		for ( var f in gFile2URL ) txt += f + "\t" + gFile2URL[f] + "\n";
-		sbCommonUtils.writeFile(txtFile1, txt, "UTF-8");
+		ScrapBookUtils.writeFile(txtFile1, txt, "UTF-8");
 		txt = "";
 		var txtFile2 = contDir.clone();
 		txtFile2.append("sb-url2name.txt");
 		for ( var u in gURL2Name ) txt += u + "\t" + gURL2Name[u] + "\n";
-		sbCommonUtils.writeFile(txtFile2, txt, "UTF-8");
+		ScrapBookUtils.writeFile(txtFile2, txt, "UTF-8");
 	},
 
 	forceReloading : function(aID, aName)
 	{
 		try {
-			var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
+			var win = ScrapBookUtils.getBrowserWindow();
 			var nodes = win.gBrowser.mTabContainer.childNodes;
 			for ( var i = 0; i < nodes.length; i++ )
 			{
@@ -663,7 +640,7 @@ function sbHeaderSniffer(aURLSpec, aRefURLSpec)
 
 sbHeaderSniffer.prototype = {
 
-	_URL     : Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL),
+	_URL     : Cc['@mozilla.org/network/standard-url;1'].createInstance(Ci.nsIURL),
 	_channel : null,
 	_headers : null,
 
@@ -673,10 +650,11 @@ sbHeaderSniffer.prototype = {
 		this._headers = {};
 		try {
 			this._URL.spec = this.URLSpec;
-			this._channel = sbCommonUtils.IO.newChannelFromURI(this._URL).QueryInterface(Components.interfaces.nsIHttpChannel);
+			this._channel = ScrapBookUtils.IO.newChannelFromURI(this._URL).QueryInterface(Ci.nsIHttpChannel);
 			this._channel.loadFlags = this._channel.LOAD_BYPASS_CACHE;
 			this._channel.setRequestHeader("User-Agent", navigator.userAgent, false);
-			if ( this.refURLSpec ) this._channel.setRequestHeader("Referer", this.refURLSpec, false);
+			if (this.refURLSpec && this.refURLSpec.indexOf("http") == 0)
+				this._channel.setRequestHeader("Referer", this.refURLSpec, false);
 		} catch(ex) {
 			this.onHttpError("Invalid URL");
 		}
@@ -769,14 +747,11 @@ sbCaptureObserverCallback.onCaptureComplete = function(aItem)
 	if ( gContext == "capture-again" || gContext == "capture-again-deep" )
 	{
 		sbCrossLinker.forceReloading(gPreset[0], gPreset[1]);
-		sbDataSource.init();
-		var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gPreset[0]);
-		sbDataSource.setProperty(res, "chars", aItem.chars);
-		if ( gPreset[5] ) sbDataSource.setProperty(res, "type", "");
+		var res = ScrapBookUtils.RDF.GetResource("urn:scrapbook:item" + gPreset[0]);
+		ScrapBookData.setProperty(res, "chars", aItem.chars);
+		if ( gPreset[5] ) ScrapBookData.setProperty(res, "type", "");
 	}
 	sbCaptureTask.succeed();
-
-
 };
 
 

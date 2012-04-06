@@ -9,3 +9,4 @@ style	chrome://global/content/customizeToolbar.xul	chrome://scrapbook/skin/overl
 
 locale	scrapbook	en-US	chrome/locale/en-US/scrapbook/
 locale	scrapbook	zh-CN	chrome/locale/zh-CN/scrapbook/
+resource	scrapbook-modules	modules/

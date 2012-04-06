@@ -62,7 +62,7 @@ var sbMafService = {
         let f,result;
         if(mark)
         {
-            f = sbCommonUtils.getScrapBookDir();
+            f = ScrapBookUtils.getScrapBookDir();
             f.append("data");
             f.append(node.itemId);
             f.append("index.html");
@@ -70,19 +70,19 @@ var sbMafService = {
         }else
         {
                 let des = PlacesUtils.annotations.getItemAnnotation(node.itemId, "bookmarkProperties/description");
-                f = sbCommonUtils.getLocalFileFromNativePathOrUrl(des);
-                let dateNum = sbCommonUtils.bmsvc.getItemLastModified(node.itemId);
+                f = ScrapBookUtils.getLocalFileFromNativePathOrUrl(des);
+                let dateNum = ScrapBookUtils.bmsvc.getItemLastModified(node.itemId);
                 this.dateTime = new Date(dateNum / 1000);
 
         }
 
-        if(sbCommonUtils.getType(f)==1)
+        if(ScrapBookUtils.getType(f)==1)
         {
             let fileOutput = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
             fileOutput.initWithPath(path.path);
-            result = this.IsNewFileOrCanOverwrite(path.path, sbCommonUtils.validateFileName(node.title + ".maff"));
+            result = this.IsNewFileOrCanOverwrite(path.path, ScrapBookUtils.validateFileName(node.title + ".maff"));
             if (!result) {
-                sbCommonUtils.log("can't export");
+                ScrapBookUtils.log("can't export");
                 return false;
             }
             if(result.exists()) result.remove(true);
@@ -101,11 +101,11 @@ var sbMafService = {
                 path.remove(true);
         }else
         {
-            result = this.IsNewFileOrCanOverwrite(path.path, sbCommonUtils.validateFileName(this.entryTitle + ".maff"));
+            result = this.IsNewFileOrCanOverwrite(path.path, ScrapBookUtils.validateFileName(this.entryTitle + ".maff"));
         }
 
         if (!result) {
-            sbCommonUtils.log("can't export");
+            ScrapBookUtils.log("can't export");
             return false;
         }
 
@@ -125,7 +125,7 @@ var sbMafService = {
             } catch (e) {
                 this.HandleError(e);
             }
-            this.ReportCompletion("导出成功");
+            this.ReportCompletion(this.strings.GetStringFromName("export_completed"));
         } catch (e) {
             return false;
         }
@@ -135,7 +135,7 @@ var sbMafService = {
 
     //直接保存
     exec2:function (node) {
-        let file = sbCommonUtils.getScrapBookDir();
+        let file = ScrapBookUtils.getScrapBookDir();
         file.append("data");
 
         let file2 = file.clone();
@@ -176,8 +176,8 @@ var sbMafService = {
         txtContent += "         xmlns:NC=\"http://home.netscape.com/NC-rdf#\"\n";
         txtContent += "         xmlns:RDF=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\">\n";
         txtContent += "  <RDF:Description RDF:about=\"urn:root\">\n";
-        txtContent += "    <MAF:originalurl RDF:resource=\"" + sbCommonUtils.formatText(node.uri.toString()) + "\"/>\n";
-        txtContent += "    <MAF:title RDF:resource=\"" + sbCommonUtils.formatText(node.title) + "\"/>\n";
+        txtContent += "    <MAF:originalurl RDF:resource=\"" + ScrapBookUtils.formatText(node.uri.toString()) + "\"/>\n";
+        txtContent += "    <MAF:title RDF:resource=\"" + ScrapBookUtils.formatText(node.title) + "\"/>\n";
         txtContent += "    <MAF:archivetime RDF:resource=\"" + this.dateTime + "\"/>\n";
         txtContent += "    <MAF:indexfilename RDF:resource=\"index.html\"/>\n";
         txtContent += "    <MAF:charset RDF:resource=\"UTF-8\"/>\n";
@@ -187,7 +187,7 @@ var sbMafService = {
         this.fileRDF = this.contentDir.clone();
         this.fileRDF.append("index.rdf");
 
-        sbCommonUtils.writeFile(this.fileRDF, txtContent, "UTF-8");
+        ScrapBookUtils.writeFile(this.fileRDF, txtContent, "UTF-8");
     },
 
     CreateZip:function (pathOutput) {
@@ -247,8 +247,8 @@ var sbMafService = {
     //处理错误
     HandleError:function(e)
     {
-        this.ReportCompletion("发生错误");
-        sbCommonUtils.log(e);
+        this.ReportCompletion(this.strings.GetStringFromName("export_error"));
+        ScrapBookUtils.log(e);
         throw "stop";
     },
 
@@ -268,8 +268,8 @@ var sbMafService = {
                     prompts.BUTTON_POS_1 * prompts.BUTTON_TITLE_CANCEL +
                     prompts.BUTTON_POS_2 * prompts.BUTTON_TITLE_IS_STRING;
 
-            var button = prompts.confirmEx(null, "确认", fileOutput.path + " " + promptOverwrite1,
-                    flags, "替换", "", "重命名", null, check);
+            var button = prompts.confirmEx(null, this.strings.GetStringFromName("export_confirm"), fileOutput.path + " " + promptOverwrite1,
+                    flags, this.strings.GetStringFromName("export_replace"), "", this.strings.GetStringFromName("export_rename"), null, check);
 
             if(button==2)
             {

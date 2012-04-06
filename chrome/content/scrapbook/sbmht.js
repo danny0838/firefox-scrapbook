@@ -5,7 +5,7 @@ var sbMhtService = {
         try {
             fstream.init(mhtFile, 0x02 | 0x08 | 0x20, 0664, 0);
         } catch (e) {
-            sbCommonUtils.log(e)
+            ScrapBookUtils.log(e)
             return false;
         }
 
@@ -138,7 +138,7 @@ var sbMhtService = {
         let des = "index.html";
         if(mark)
         {
-            file = sbCommonUtils.getScrapBookDir();
+            file = ScrapBookUtils.getScrapBookDir();
             file.append("data");
             file.append(node.itemId);
             file.append("index.html");
@@ -146,13 +146,13 @@ var sbMhtService = {
         }else
         {
             let _des = PlacesUtils.annotations.getItemAnnotation(node.itemId, "bookmarkProperties/description");
-            file = sbCommonUtils.getLocalFileFromNativePathOrUrl(_des);
+            file = ScrapBookUtils.getLocalFileFromNativePathOrUrl(_des);
         }
 
-        if(sbCommonUtils.getType(file)==1)
+        if(ScrapBookUtils.getType(file)==1)
         {
             //todo maf到mht
-            alert("不支持maf转换为mht");
+            alert("can't export mht to maff");
             return;
         }
 
@@ -161,7 +161,7 @@ var sbMhtService = {
         var dirname = "";
         var targetFiles = [];
 
-        if (dir) {
+        if (dir && file.exists()) {
             dirname = dir.leafName;
             var entries = dir.directoryEntries;
             while (entries.hasMoreElements()) {
@@ -190,7 +190,7 @@ var sbMhtService = {
             }else
             {
 
-                let fileName = sbCommonUtils.validateFileName(node.title + ".mht");
+                let fileName = ScrapBookUtils.validateFileName(node.title + ".mht");
                 result = sbMafService.IsNewFileOrCanOverwrite(path.path, fileName);
 
             }
@@ -199,7 +199,7 @@ var sbMhtService = {
                 result.remove(true);
 
             if (!result) {
-                sbCommonUtils.log("can't export");
+                ScrapBookUtils.log("can't export");
                 return false;
             }
             sbMhtService.convertFile(result, targetFiles, node.title, dirname,des);

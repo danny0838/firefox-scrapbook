@@ -8,6 +8,18 @@
 <!ENTITY sb.capture.target.as "Capture Link As">
 <!ENTITY sb.capture.alltabs "Capture All Tabs">
 <!ENTITY sb.capture.bookmark "Capture Page To">
+
+<!ENTITY sb.ext.direct "Open Original Link">
+<!ENTITY sb.ext.open "Open Local folder">
+<!ENTITY sb.ext.mht "Export to Mht">
+<!ENTITY sb.ext.maff "Export to Maff">
+
+<!ENTITY sb.ext.saveAs "Save As...">
+<!ENTITY sb.ext.eidtPage "Edit Page">
+<!ENTITY sb.ext.captureAll "Capture All Tabs">
+<!ENTITY sb.ext.delete "Delete">
+
+
 <!ENTITY sb.sidebar "Show in Sidebar">
 <!ENTITY sb.menu "Menu">
 <!ENTITY sb.editbefore "Edit Before Capture">
@@ -16,3 +28,5 @@
 <!ENTITY sb.key.capture "L">
 <!ENTITY sb.key.capture.as "K">
 <!ENTITY sb.key.bookmark "J">
+
+

@@ -12,14 +12,14 @@ var sbCaptureOptions = {
 		if ( !window.arguments || !("sbContentSaver" in window.opener) ) window.close();
 		this.param = window.arguments[0];
 		this.toggleCustomUI();
-		this.CUSTOM_UI.nextSibling.value = sbCommonUtils.copyUnicharPref("scrapbook.detail.custom", "pdf, doc");
+		this.CUSTOM_UI.nextSibling.value = ScrapBookUtils.getPref("detail.custom");
 		if ( this.param.context == "bookmark" )
 		{
 			document.title = "ScrapBook - " + window.opener.document.getElementById("ScrapBookContextMenuB").label.replace("...","");
 		}
 		else
 		{
-			document.documentElement.getButton("accept").label = document.getElementById("sbMainString").getString("CAPTURE_OK_BUTTON");
+			document.documentElement.getButton("accept").label = ScrapBookUtils.getLocaleString("SAVE_OK_BUTTON");
 			document.documentElement.getButton("accept").accesskey = "C";
 		}
 		this.fillTitleList();
@@ -68,9 +68,8 @@ var sbCaptureOptions = {
 		var list = document.getElementById("sbDetailTitle");
 		if ( this.param.context == "capture-again" )
 		{
-			sbDataSource.init();
-			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
-			list.appendItem(sbDataSource.getProperty(res, "title"));
+			var res = ScrapBookUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
+			list.appendItem(ScrapBookData.getProperty(res, "title"));
 		}
 		for ( var i = 0; i < this.param.titles.length; i++ )
 		{
@@ -97,7 +96,7 @@ var sbCaptureOptions = {
 
 	accept : function()
 	{
-		this.param.item.comment      = sbCommonUtils.escapeComment(document.getElementById("sbDetailComment").value);
+		this.param.item.comment      = ScrapBookUtils.escapeComment(document.getElementById("sbDetailComment").value);
 		this.param.item.title        = document.getElementById("sbDetailTitle").value;
 		this.param.option["images"]  = document.getElementById("sbDetailOptionImages").checked;
 		this.param.option["styles"]  = document.getElementById("sbDetailOptionStyles").checked;
@@ -111,12 +110,12 @@ var sbCaptureOptions = {
 		if ( this.CUSTOM_UI.checked )
 		{
 			this.param.option["custom"] = this.CUSTOM_UI.nextSibling.value.replace(/[^0-9a-zA-Z,\|]/g, "").replace(/[,\|]/g, ", ");
-			sbCommonUtils.setUnicharPref("scrapbook.detail.custom", this.param.option["custom"]);
+			ScrapBookUtils.setPref("detail.custom", this.param.option["custom"]);
 		}
 		if ( this.param.context == "capture-again" )
 		{
-			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
-			sbDataSource.setProperty(res, "title", document.getElementById("sbDetailTitle").value);
+			var res = ScrapBookUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
+			ScrapBookData.setProperty(res, "title", document.getElementById("sbDetailTitle").value);
 		}
 	},
 
@@ -139,7 +138,6 @@ var sbFolderSelector = {
 
 	init : function()
 	{
-		if ( !sbDataSource.data ) sbDataSource.init();
 		if ( !sbCaptureOptions.param.resURI ) sbCaptureOptions.param.resURI = "urn:scrapbook:root";
 		this.refresh(sbCaptureOptions.param.resURI);
 	},
@@ -152,7 +150,7 @@ var sbFolderSelector = {
 			this.clear();
 			this.processRecent();
 			this.processRoot();
-			this.processRecursive(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"));
+			this.processRecursive(ScrapBookUtils.RDF.GetResource("urn:scrapbook:root"));
 		}
 		this.MENU_LIST.selectedItem = document.getElementById(aResID);
 		this.MENU_LIST.disabled = false;
@@ -180,24 +178,24 @@ var sbFolderSelector = {
 
 	processRoot : function()
 	{
-		this.fill("urn:scrapbook:root", document.getElementById("sbMainString").getString("ROOT_FOLDER"));
+		this.fill("urn:scrapbook:root", ScrapBookUtils.getLocaleString("ROOT_FOLDER"));
 		this.MENU_POPUP.appendChild(document.createElement("menuseparator"));
 	},
 
 	processRecent: function()
 	{
-		var ids = sbCommonUtils.copyUnicharPref("scrapbook.ui.folderList", "");
+		var ids = ScrapBookUtils.getPref("ui.folderList", "");
 		ids = ids ? ids.split("|") : [];
 		var shownItems = 0;
-		var maxEntries = sbCommonUtils.PREF.getIntPref("scrapbook.ui.folderList.maxEntries");
+		var maxEntries = ScrapBookUtils.getPref("ui.folderList.maxEntries");
 		for (var i = 0; i < ids.length && shownItems < maxEntries; i++)
 		{
 			if (ids[i].length != 14)
 				continue;
-			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + ids[i]);
-			if (!sbDataSource.exists(res))
+			var res = ScrapBookUtils.RDF.GetResource("urn:scrapbook:item" + ids[i]);
+			if (!ScrapBookData.exists(res))
 				continue;
-			this.fill(res.Value, sbDataSource.getProperty(res, "title"));
+			this.fill(res.Value, ScrapBookData.getProperty(res, "title"));
 			shownItems++;
 		}
 		if (shownItems > 0)
@@ -207,12 +205,12 @@ var sbFolderSelector = {
 	processRecursive : function(aContRes)
 	{
 		this.nest++;
-		var resList = sbDataSource.flattenResources(aContRes, 1, false);
+		var resList = ScrapBookData.flattenResources(aContRes, 1, false);
 		resList.shift();
 		for ( var i = 0; i < resList.length; i++ )
 		{
 			var res = resList[i];
-			this.fill(res.Value, sbDataSource.getProperty(res, "title"));
+			this.fill(res.Value, ScrapBookData.getProperty(res, "title"));
 			this.processRecursive(res);
 		}
 		this.nest--;
@@ -220,19 +218,17 @@ var sbFolderSelector = {
 
 	createFolder : function()
 	{
-		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
-		var newItem = sbCommonUtils.newItem(newID);
-		newItem.title = document.getElementById("sbMainString").getString("DEFAULT_FOLDER");
+		var newItem = ScrapBookData.newItem();
+		newItem.title = ScrapBookUtils.getLocaleString("DEFAULT_FOLDER");
 		newItem.type = "folder";
-        var tarResName = this.MENU_LIST.selectedItem.getAttribute("nest") > 0 ? this.MENU_LIST.selectedItem.id : "urn:scrapbook:root";
-		var newRes = sbDataSource.addItem(newItem, tarResName, 0);
-		sbDataSource.createEmptySeq(newRes.Value);
+		var tarResName = this.MENU_LIST.selectedItem.getAttribute("nest") > 0 ? this.MENU_LIST.selectedItem.id : "urn:scrapbook:root";
+		var newRes = ScrapBookData.addItem(newItem, tarResName, 0);
+		ScrapBookData.createEmptySeq(newRes.Value);
 		var result = {};
 		window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome", newItem.id, result);
 		if ( !result.accept )
 		{
-			sbDataSource.deleteItemDescending(newRes, sbCommonUtils.RDF.GetResource(tarResName));
-			sbDataSource.flush();
+			ScrapBookData.deleteItemDescending(newRes, ScrapBookUtils.RDF.GetResource(tarResName));
 		}
 		else
 		{
@@ -240,7 +236,6 @@ var sbFolderSelector = {
 			this.onChange(newRes.Value);
 		}
 	},
-
 
 	onChange : function(aResURI)
 	{

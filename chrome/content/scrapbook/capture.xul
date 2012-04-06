@@ -14,7 +14,6 @@
         windowtype="scrapbook">
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/saver.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/capture.js" />
 
@@ -27,7 +26,7 @@
 
 	<listbox id="sbCaptureListbox" rows="1" flex="1" />
 
-	<browser id="sbCaptureBrowser" collapsed="true" />
+	<browser id="sbCaptureBrowser" type="content" collapsed="true" />
 
 	<hbox>
 		<toolbarbutton id="sbCaptureFilterButton" type="menu" label="&sb.capture.filter;" hidden="true">
@@ -42,8 +41,8 @@
 			</menupopup>
 		</toolbarbutton>
 		<toolbarseparator hidden="true" />
-		<button id="sbCapturePauseButton" label="&sb.capture.pause;" oncommand="sbCaptureTask.pause();" hidden="true"/>
-		<button id="sbCaptureStartButton" label="&sb.capture.start;" oncommand="sbCaptureTask.activate();" />
+		<button id="sbCapturePauseButton" label="&sb.capture.pause;" oncommand="sbCaptureTask.pause();" />
+		<button id="sbCaptureStartButton" label="&sb.capture.start;" oncommand="sbCaptureTask.activate();" hidden="true"/>
 		<button id="sbCaptureSkipButton"  label="&sb.capture.skip;"  oncommand="sbCaptureTask.next(true);" disabled="true" />
 		<spacer flex="1" />
 		<button label="&sb.capture.abort;" oncommand="sbCaptureTask.abort();" />

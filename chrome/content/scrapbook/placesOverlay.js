@@ -7,7 +7,7 @@ function sbPlacesOverlayInit() {
             if(node)
             {
                 //必须是书签，而且在sb目录
-                let inSb = sbCommonUtils.inScrapbook(node.itemId) && node.type==0;
+                let inSb = ScrapBookUtils.inScrapbook(node.itemId) && node.type==0;
                 document.getElementById("ScrapbookStorage").hidden = !inSb;
                 document.getElementById("ScrapbookStorageSep").hidden = !inSb;
             }else
@@ -15,7 +15,7 @@ function sbPlacesOverlayInit() {
                 let nodes = this._view.selectedNodes;
                 let test = nodes.some(function(n){
                     //如果有一个不是书签，或者不在sb目录，就不显示了。
-                    return n.type!=0 || !sbCommonUtils.inScrapbook(n.itemId);
+                    return n.type!=0 || !ScrapBookUtils.inScrapbook(n.itemId);
                 });
                 document.getElementById("ScrapbookStorage").hidden = test;
                 document.getElementById("ScrapbookStorageSep").hidden = test;

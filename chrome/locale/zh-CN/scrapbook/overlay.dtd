@@ -16,3 +16,14 @@
 <!ENTITY sb.key.capture "L">
 <!ENTITY sb.key.capture.as "K">
 <!ENTITY sb.key.bookmark "J">
+
+<!ENTITY sb.ext.direct "打开原始链接">
+<!ENTITY sb.ext.open "打开本地目录">
+<!ENTITY sb.ext.mht "导出为 Mht">
+<!ENTITY sb.ext.maff "导出为 Maff">
+
+<!ENTITY sb.ext.saveAs "另存为">
+<!ENTITY sb.ext.eidtPage "剪辑页面">
+<!ENTITY sb.ext.captureAll "获取所有标签页">
+<!ENTITY sb.ext.delete "删除">
+

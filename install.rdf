@@ -6,7 +6,7 @@
   
     <em:id>scrapbooklite@slimx.com</em:id>
     <em:name>Scrapbook Lite</em:name>
-    <em:version>1.2.0</em:version>
+    <em:version>1.4.0</em:version>
     <em:creator>slimx</em:creator>
     <em:type>2</em:type> <!-- type=extension --> 
 	<em:unpack>false</em:unpack>
