@@ -1,5 +1,4 @@
 overlay	chrome://browser/content/browser.xul	chrome://scrapbook/content/overlay.xul
-content	scrapbook	chrome/content/scrapbook/
 content	scrapbook	chrome/content/scrapbook/	contentaccessible=yes
 
 skin	scrapbook	classic/1.0	chrome/skin/classic/scrapbook/
