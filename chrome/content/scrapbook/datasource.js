@@ -33,7 +33,7 @@ var sbDataSource = {
 	{
 		var bDir = sbCommonUtils.getScrapBookDir();
 		bDir.append("backup");
-		if ( !bDir.exists() ) bDir.create(bDir.DIRECTORY_TYPE, 0700);
+		if ( !bDir.exists() ) bDir.create(bDir.DIRECTORY_TYPE, parseInt("0700", 8));
 		var bFileName = "scrapbook_" + sbCommonUtils.getTimeStamp().substring(0,8) + ".rdf";
 		try {
 			this.file.copyTo(bDir, bFileName);

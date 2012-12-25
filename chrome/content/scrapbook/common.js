@@ -50,7 +50,7 @@ var sbCommonUtils = {
 		}
 		if ( !dir.exists() )
 		{
-			dir.create(dir.DIRECTORY_TYPE, 0700);
+			dir.create(dir.DIRECTORY_TYPE, parseInt("0700", 8));
 		}
 		return dir;
 	},
@@ -64,7 +64,7 @@ var sbCommonUtils = {
 		}
 		var dir = this.getScrapBookDir().clone();
 		dir.append("data");
-		if ( !dir.exists() ) dir.create(dir.DIRECTORY_TYPE, 0700);
+		if ( !dir.exists() ) dir.create(dir.DIRECTORY_TYPE, parseInt("0700", 8));
 		dir.append(aID);
 		if ( !dir.exists() )
 		{
@@ -72,7 +72,7 @@ var sbCommonUtils = {
 			{
 				return null;
 			}
-			dir.create(dir.DIRECTORY_TYPE, 0700);
+			dir.create(dir.DIRECTORY_TYPE, parseInt("0700", 8));
 		}
 		return dir;
 	},
@@ -253,7 +253,7 @@ var sbCommonUtils = {
 	{
 		if ( aFile.exists() ) aFile.remove(false);
 		try {
-			aFile.create(aFile.NORMAL_FILE_TYPE, 0666);
+			aFile.create(aFile.NORMAL_FILE_TYPE, parseInt("0666", 8));
 			this.UNICODE.charset = aChars;
 			aContent = this.UNICODE.ConvertFromUnicode(aContent);
 			var ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);

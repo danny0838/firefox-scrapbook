@@ -7,9 +7,15 @@ var sbPrefWindow = {
 	changed: false,
 
 	init: function() {
+		//Checkbox zum Aktivieren des Status-Bar Icons ausblenden, falls FF>=4
+		var iffVersion = Cc["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
+		var iVerComparator = Cc["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
+		if ( iVerComparator.compare(iffVersion.version, "4.0")>=0 ) document.getElementById("sbPrefStatsBarIcon").hidden = true;
+		//Ende
 		this.updateDataPath();
 		this.updateViewerPath();
 		this.hlInitUI();
+		this._updateFileField("sbDataPath", "scrapbook.data.path");
 		if (!sbMultiBookService.validateRefresh(true)) {
 			var elts = document.getElementById("sbDataDefault").getElementsByTagName("*");
 			Array.forEach(elts, function(elt) {

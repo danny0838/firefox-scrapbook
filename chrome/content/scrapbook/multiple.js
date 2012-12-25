@@ -133,7 +133,10 @@ var sbMultipleService = {
 		try
 		{
 			var clip  = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
+			if ( !clip ) return false;
 			var trans = Components.classes["@mozilla.org/widget/transferable;1"].createInstance(Components.interfaces.nsITransferable);
+			if ( !trans ) return false;
+			if ( 'init' in trans ) trans.init(null);
 			trans.addDataFlavor("text/unicode");
 			clip.getData(trans, clip.kGlobalClipboard);
 			var str = new Object();

@@ -586,14 +586,14 @@ var sbDOMEraser = {
 					if ( elem.id ) tooltip.textContent += ' id="' + elem.id + '"';
 					if ( elem.className ) tooltip.textContent += ' class="' + elem.className + '"';
 				}
-				elem.style.MozOutline = onMarker ? "2px dashed #0000FF" : "2px solid #FF0000";
+				elem.style.outline = onMarker ? "2px dashed #0000FF" : "2px solid #FF0000";
 			}
 		}
 		else if ( aEvent.type == "mouseout" || aEvent.type == "click" )
 		{
 			var tooltip = elem.ownerDocument.getElementById("scrapbook-eraser-tooltip");
 			if ( tooltip ) elem.ownerDocument.body.removeChild(tooltip);
-			elem.style.MozOutline = "";
+			elem.style.outline = "";
 			if ( !elem.getAttribute("style") ) elem.removeAttribute("style");
 			if ( aEvent.type == "click" )
 			{
