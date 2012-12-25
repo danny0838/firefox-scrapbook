@@ -1,5 +1,7 @@
 
-overlay	chrome://browser/content/browser.xul	chrome://scrapbook/content/overlay.xul
+overlay	chrome://browser/content/browser.xul	chrome://scrapbook/content/overlay3.xul application={ec8030f7-c20a-464f-9b0e-13a3a9e97384} appversion<4.0
+overlay	chrome://browser/content/browser.xul	chrome://scrapbook/content/overlay4.xul application={ec8030f7-c20a-464f-9b0e-13a3a9e97384} appversion>=4.0
+
 content	scrapbook	jar:chrome/scrapbook.jar!/content/scrapbook/
 content	scrapbook	jar:chrome/scrapbook.jar!/content/scrapbook/	contentaccessible=yes
 
