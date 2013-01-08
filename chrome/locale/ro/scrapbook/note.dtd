@@ -5,7 +5,7 @@
 <!ENTITY sb.note.normalview "Vizualizează normal">
 <!ENTITY sb.note.template "Editează șablonul HTML">
 <!ENTITY sb.note.autolinefeed "Avans automat de linie">
-<!ENTITY sb.note.autolinefeed.t "Adaugă eticheta <br> la sfârșitul liniei în modul &sb.note.htmlview;">
+<!ENTITY sb.note.autolinefeed.t "Adaugă eticheta &lt;br&gt; la sfârșitul liniei în modul &sb.note.htmlview;">
 <!ENTITY sb.note.fontsize "Dimensiune font">
 <!ENTITY sb.note.help "Ajutor">
 <!ENTITY sb.note.print "Imprimă">
