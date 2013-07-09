@@ -17,6 +17,7 @@ var sbContentSaver = {
 	linkURLs     : [],
 	_fxVer3      : null,
 	_fxVer35     : null,
+	_fxVer18     : null,
 
 
 
@@ -38,6 +39,7 @@ var sbContentSaver = {
 			var iVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
 			this._fxVer3 = iVerComparator.compare(iAppInfo.version, "3.0")>=0;
 			this._fxVer35 = iVerComparator.compare(iAppInfo.version, "3.5")>=0;
+			this._fxVer18 = iVerComparator.compare(iAppInfo.version, "18.0")>=0;
 		}
 		this.item = sbCommonUtils.newItem(sbDataSource.identify(sbCommonUtils.getTimeStamp()));
 		this.name = "index";
@@ -713,7 +715,11 @@ var sbContentSaver = {
 				var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
 				WBP.persistFlags |= WBP.PERSIST_FLAGS_FROM_CACHE;
 				WBP.persistFlags |= WBP.PERSIST_FLAGS_AUTODETECT_APPLY_CONVERSION;
-				WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile);
+				if ( this._fxVer18 ) {
+					WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile, null);
+				} else {
+					WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile);
+				}
 				this.httpTask[this.item.id]++;
 				WBP.progressListener = new sbCaptureObserver(this.item, newFileName);
 				this.file2URL[newFileName] = aURLSpec;

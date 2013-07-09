@@ -26,6 +26,7 @@ var sbCommonUtils = {
 	get PROMPT()  { return Components.classes['@mozilla.org/embedcomp/prompt-service;1'].getService(Components.interfaces.nsIPromptService); },
 	get PREF()    { return Components.classes['@mozilla.org/preferences;1'].getService(Components.interfaces.nsIPrefBranch); },
 
+	_fxVer18 : null,
 
 
 	newItem : function(aID)
@@ -285,9 +286,20 @@ var sbCommonUtils = {
 	saveTemplateFile : function(aURISpec, aFile)
 	{
 		if ( aFile.exists() ) return;
+		if ( this._fxVer18 == null )
+		{
+			var iAppInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
+			var iVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
+			this._fxVer18 = iVerComparator.compare(iAppInfo.version, "18.0")>=0;
+		}
 		var uri = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
 		uri.spec = aURISpec;
 		var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
+		if ( this._fxVer18 ) {
+			WBP.saveURI(uri, null, null, null, null, aFile, null);
+		} else {
+			WBP.saveURI(uri, null, null, null, null, aFile);
+		}
 		WBP.saveURI(uri, null, null, null, null, aFile);
 	},
 
