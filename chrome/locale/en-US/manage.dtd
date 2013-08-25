@@ -1,0 +1,58 @@
+﻿<!ENTITY sbp2.title						"Manage">
+
+<!ENTITY sbp2.context.showfiles			"Show files">
+<!ENTITY sbp2.context.newfolder			"New folder">
+<!ENTITY sbp2.context.newseparator		"New separator">
+<!ENTITY sbp2.context.newnote			"New note">
+<!ENTITY sbp2.context.delete			"Delete">
+<!ENTITY sbp2.context.props				"Properties">
+
+<!ENTITY sbp2.tab.impexp				"Manage / Import / Export">
+<!ENTITY sbp2.tab.impexp.tt				"Organization, import and export of items">
+<!ENTITY sbp2.tab.tags					"Tags">
+<!ENTITY sbp2.tab.stats					"Stats">
+<!ENTITY sbp2.tab.multibook				"Multibook">
+<!ENTITY sbp2.tab.multibook.tt			"Verwaltung von ScrapBook-Archiven">
+
+<!ENTITY sbp2.data.tc.title				"Name">
+<!ENTITY sbp2.data.tc.date				"Datum des Exports">
+<!ENTITY sbp2.data.tc.fld				"Directory">
+<!ENTITY sbp2.data.sort					"Sort">
+<!ENTITY sbp2.data.sort.asc				"alphabetical order (A-Z)">
+<!ENTITY sbp2.data.sort.desc			"alphabetical order (Z-A)">
+<!ENTITY sbp2.data.sort.subdir			"include sub-directories">
+
+<!ENTITY sbp2.impexp.btn.imp			"Import">
+<!ENTITY sbp2.impexp.btn.imp.tt			"Import of selected entries">
+<!ENTITY sbp2.impexp.btn.exp			"Export">
+<!ENTITY sbp2.impexp.btn.exp.tt			"Export of selected entries">
+<!ENTITY sbp2.impexp.btn.cd				"...">
+<!ENTITY sbp2.impexp.btn.cd.tt			"change the destination directory for imports and exports">
+<!ENTITY sbp2.impexp.cbx.redir			"keep folder structure">
+
+<!ENTITY sbp2.tag.new					"create tag">
+<!ENTITY sbp2.tag.rename				"rename">
+<!ENTITY sbp2.tag.remove				"delete">
+
+<!ENTITY sbp2.tag.tt.new				"New tag">
+<!ENTITY sbp2.tag.tt.del				"Delete tag(s)">
+<!ENTITY sbp2.tag.tt.ren				"Rename tag">
+<!ENTITY sbp2.tag.tt.tagadd				"Use selected tags for selected items">
+<!ENTITY sbp2.tag.tt.tagrem				"Remove selected tags from selected items">
+
+<!ENTITY sbp2.stats.btn.ref				"Refresh">
+<!ENTITY sbp2.stats.btn.ref.tt			"Liest die Daten erneut ein und aktualisiert die Ansicht.">
+<!ENTITY sbp2.stats.btn.rep				"Repair">
+<!ENTITY sbp2.stats.btn.rep.tt			"Delete empty directories">
+<!ENTITY sbp2.stats.tc.title			"Title">
+<!ENTITY sbp2.stats.tc.size				"Size">
+<!ENTITY sbp2.stats.tc.sizeb			"Size (in bytes)">
+<!ENTITY sbp2.stats.tc.diagnostics		"Diagnostics">
+
+<!ENTITY sbp2.multibook.tc.title		"Title">
+<!ENTITY sbp2.multibook.tc.fld			"Directory">
+<!ENTITY sbp2.multibook.btn.add			"Add">
+<!ENTITY sbp2.multibook.btn.edit		"Edit">
+<!ENTITY sbp2.multibook.btn.remove		"Remove">
+<!ENTITY sbp2.multibook.btn.up			"Ascending">
+<!ENTITY sbp2.multibook.btn.down		"Descending">

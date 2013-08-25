@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet type="text/css" href="chrome://global/skin/" ?>
+
+<!DOCTYPE dialog SYSTEM "chrome://scrapbookplus2/locale/properties.dtd">
+
+<dialog id="sbp2PropertiesDialog"
+		title="ScrapBook Plus 2 - &sbp2.title;"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        buttons="accept,cancel"
+		style="width: 450px; height: 400px;"
+        onload="sbp2Properties.init();"
+        ondialogaccept="sbp2Properties.exit();"
+        ondialogcancel="">
+
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2DataSource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Prefs.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Properties.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Tags.js" />
+
+	<stringbundleset id="sbp2StringBundles">
+		<stringbundle id="sbp2CommonString" src="chrome://scrapbookplus2/locale/common.properties" />
+		<stringbundle id="sbp2TagString"    src="chrome://scrapbookplus2/locale/tag.properties" />
+	</stringbundleset>
+
+	<popupset>
+		<menupopup id="sbp2PropPopupTag" onpopupshowing="sbp2Tags.populatePopup('sbp2PropTagTree', event);">
+			<menuitem id="sbp2PropPopupTagRename"	label="&sbp2.tag.ren;"	oncommand="sbp2Tags.itemRename('sbp2PropTagTree');" />
+			<menuitem id="sbp2PropPopupTagRemove"	label="&sbp2.tag.del;"	oncommand="sbp2Tags.itemRemove('sbp2PropTagTree');" />
+			<menuseparator id="sbp2PropPopupTagSeparator" />
+			<menuitem id="sbp2PropPopupTagNew"		label="&sbp2.tag.new;"	oncommand="sbp2Tags.itemAdd('',sbp2Properties.pItem.id);" />
+		</menupopup>
+	</popupset>
+
+	<tabbox>
+		<tabs>
+			<tab                label="&sbp2.tab.one;" />
+			<tab id="sbp2PDesc" label="&sbp2.tab.two;" />
+			<tab id="sbp2PTags" label="&sbp2.tab.three;" onclick="sbp2Properties.tagsShow();" />
+		</tabs>
+		<tabpanels>
+			<tabpanel>
+				<grid flex="1">
+					<columns>
+						<column />
+						<column flex="1" />
+					</columns>
+					<rows id="sbp2PropRows">
+						<row style="margin:8px;" >
+							<label value="&sbp2.prop.title;:" />
+							<textbox id="sbp2PropTitle" oninput="sbp2Properties.pModified = true;" value="" />
+						</row>
+						<row id="sbp2PropAddressRow" style="margin:8px;" >
+							<label value="&sbp2.prop.address;:" />
+							<textbox id="sbp2PropAddress" oninput="sbp2Properties.pModified = true;" value="" />
+						</row>
+						<row style="margin:8px;" align="center">
+							<label value="&sbp2.prop.favicon;:" />
+							<hbox align="center">
+								<image id="sbp2PropFavicon" style="width:16px;height:16px;" />
+							</hbox>
+						</row>
+						<separator class="groove" style="margin:8px;" />
+						<row style="margin:8px;" >
+							<label value="&sbp2.prop.id;:" />
+							<label id="sbp2PropID" readonly="true" />
+						</row>
+						<row style="margin:8px;" >
+							<label value="&sbp2.prop.date;:" />
+							<label id="sbp2PropDate" readonly="true" />
+						</row>
+						<row style="margin:8px;" >
+							<label value="&sbp2.prop.type;:" />
+							<label id="sbp2PropType" readonly="true" />
+						</row>
+						<row style="margin:8px;" >
+							<label value="&sbp2.prop.charset;:" />
+							<label id="sbp2PropCharset" readonly="true" />
+						</row>
+						<row style="margin:8px;" >
+							<label value="&sbp2.prop.size;:" />
+							<label id="sbp2PropSize" readonly="true" />
+						</row>
+					</rows>
+				</grid>
+			</tabpanel>
+			<tabpanel>
+				<textbox id="sbp2PropDescription" flex="1" multiline="true" oninput="sbp2Properties.pModified = true;" />
+			</tabpanel>
+			<tabpanel>
+				<hbox flex="1">
+					<tree id="sbp2PropTagTree"
+						  contextmenu="sbp2PropPopupTag"
+						  datasources="rdf:null"
+						  ref="urn:scrapbook:root"
+						  flags="dont-build-content"
+						  flex="1"
+						  hidecolumnpicker="true"
+						  ondraggesture=""
+						  ondragover=""
+						  ondragdrop=""
+						  onclick="sbp2Tags.onClickProp(event);"
+						  ondblclick=""
+						  onkeypress="sbp2Tags.onKeyPress(event, 'sbp2PropTagTree');"
+						  seltype="multiple">
+						<treecols id="sbp2MT2Cols">
+							<treecol id="sbp2PropTagTreeColTitle" hideheader="true" primary="true" flex="1" />
+						</treecols>
+						<template>
+							<rule id="sbp2PropTagTreeRule">
+								<treechildren flex="1">
+									<treeitem uri="rdf:*">
+										<treerow>
+											<treecell id="sbp2PropTagTreeItem"
+													  label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title"
+													  src="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon"
+													  properties="Name title rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
+										</treerow>
+									</treeitem>
+								</treechildren>
+							</rule>
+						</template>
+					</tree>
+					<vbox>
+						<button                 id="sbp2PropTagNew" label="&sbp2.tag.new;" oncommand="sbp2Tags.itemAdd('',sbp2Properties.pItem.id);" />
+						<button disabled="true" id="sbp2PropTagRen" label="&sbp2.tag.ren;" oncommand="sbp2Tags.itemRename('sbp2PropTagTree');" />
+						<button disabled="true" id="sbp2PropTagDel" label="&sbp2.tag.del;" oncommand="sbp2Tags.itemRemoveFromEntriesProperties();" />
+					</vbox>
+				</hbox>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+
+</dialog>

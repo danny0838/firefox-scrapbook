@@ -1,0 +1,99 @@
+
+@namespace html url("http://www.w3.org/1999/xhtml");
+
+/*
+Kontextmenü über rechte Maustaste wird angezeigt
+*/
+#sbp2-highlightnode-container {
+	pointer-events: none;
+}
+
+/*
+outline-container und outline sind beide erforderlich, damit der Rahmen korrekt angezeigt wird
+*/
+#sbp2-highlightnode-outline-container {
+	overflow: hidden;
+	position: relative;
+}
+
+/*
+roter Rahmen mit geschlossener Linie
+*/
+#sbp2-highlightnode-outline {
+	outline: 2px solid red;
+	position: absolute;
+}
+
+#sbp2-highlightnode-controls {
+	position: absolute;
+}
+
+/*
+Node Infobar
+*/
+
+#sbp2-highlightnode-nodeinfobar-container {
+	position: absolute;
+	max-width: 95%;
+}
+
+.sbp2-highlightnode-nodeinfobar-arrow {
+	display: none;
+}
+
+#sbp2-highlightnode-nodeinfobar-container[position="top"]:not([hide-arrow]) > #sbp2-highlightnode-nodeinfobar-arrow-bottom {
+	display: block;
+}
+
+#sbp2-highlightnode-nodeinfobar-container[position="bottom"]:not([hide-arrow]) > #sbp2-highlightnode-nodeinfobar-arrow-top {
+	display: block;
+}
+
+/*
+highlightnode - Node Infobar
+*/
+
+#sbp2-highlightnode-nodeinfobar {
+	border: 1px solid black;
+	border-radius: 3px;
+	background: -moz-linear-gradient(black, black) no-repeat padding-box;
+	line-height:30px;
+}
+
+/*
+highlightnode - Node Infobar - text
+*/
+
+html|*#sbp2-highlightnode-nodeinfobar-tagname {
+	color: white;
+}
+
+/*
+highlightnode - Node Infobar - arrow
+*/
+
+.sbp2-highlightnode-nodeinfobar-arrow {
+	width: 14px;
+	height: 14px;
+	-moz-margin-start: calc(50% - 7px);
+	transform: rotate(-45deg);
+	border: 1px solid transparent;
+	background-clip: padding-box;
+	background-repeat: no-repeat;
+}
+
+#sbp2-highlightnode-nodeinfobar-arrow-top {
+	margin-bottom: -8px;
+	margin-top: 8px;
+	border-right-color: black;
+	border-top-color: black;
+	background-image: -moz-linear-gradient(bottom left, transparent 50%, black 50%);
+}
+
+#sbp2-highlightnode-nodeinfobar-arrow-bottom {
+	margin-top: -8px;
+	margin-bottom: 8px;
+	border-left-color: black;
+	border-bottom-color: black;
+	background-image: -moz-linear-gradient(top right, transparent 50%, black 50%);
+}

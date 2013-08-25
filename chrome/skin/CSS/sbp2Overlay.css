@@ -1,0 +1,24 @@
+/* ::::: sbp2Overlay.css ::::: */
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+
+/* Icon für StatusPanel */
+
+#sbp2StatusPanel {
+	list-style-image: url("chrome://scrapbookplus2/skin/1.png");
+}
+
+toolbar[iconsize="small"] #sbp2StatusPanel {
+	list-style-image: url("chrome://scrapbookplus2/skin/1.png");
+}
+
+/* Editor */
+
+toolbox#sbp2Toolbox {
+	height: 32px;
+}
+
+toolbox#sbp2Toolbox toolbarbutton .toolbarbutton-icon {
+	margin-left : 2px;
+	margin-right: 2px;
+}

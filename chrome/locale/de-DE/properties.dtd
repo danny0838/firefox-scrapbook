@@ -1,0 +1,18 @@
+﻿<!ENTITY sbp2.title			"Eigenschaften">
+
+<!ENTITY sbp2.tab.one		"Allgemeine Informationen">
+<!ENTITY sbp2.tab.two		"Beschreibung">
+<!ENTITY sbp2.tab.three		"Tags">
+
+<!ENTITY sbp2.prop.title	"Name">
+<!ENTITY sbp2.prop.address	"Adresse">
+<!ENTITY sbp2.prop.favicon	"Favicon">
+<!ENTITY sbp2.prop.id		"ID">
+<!ENTITY sbp2.prop.date		"Datum">
+<!ENTITY sbp2.prop.type		"Typ">
+<!ENTITY sbp2.prop.charset	"Kodierung">
+<!ENTITY sbp2.prop.size		"Größe">
+
+<!ENTITY sbp2.tag.new		"Neues Tag">
+<!ENTITY sbp2.tag.ren		"Umbenennen">
+<!ENTITY sbp2.tag.del		"Entfernen">

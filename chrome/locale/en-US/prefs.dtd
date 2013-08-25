@@ -1,0 +1,8 @@
+﻿<!ENTITY sbp2.prefs.keys						"keyboard shortcut">
+<!ENTITY sbp2.prefs.keys.tip					"Change requires a restart of the browser.">
+<!ENTITY sbp2.prefs.keys.sidebar				"Open sidebar">
+<!ENTITY sbp2.prefs.keys.save					"Capture page">
+<!ENTITY sbp2.prefs.keys.saveas					"Capture page as">
+<!ENTITY sbp2.prefs.keys.bookmark				"Create bookmark">
+<!ENTITY sbp2.prefs.keys.tabs					"Capture all tabs">
+<!ENTITY sbp2.prefs.keys.btn.reset				"Reset">

@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet type="text/css" href="chrome://scrapbookplus2/skin/CSS/sbp2Overlay.css" ?>
+<?xml-stylesheet type="text/css" href="chrome://scrapbookplus2/skin/CSS/sbp2HighlightNode.css" ?>
+
+<!DOCTYPE overlay [
+	<!ENTITY % sbp2EditorDTD SYSTEM "chrome://scrapbookplus2/locale/editor.dtd">
+	%sbp2EditorDTD;
+	<!ENTITY % sbp2OverlayDTD SYSTEM "chrome://scrapbookplus2/locale/overlay.dtd">
+	%sbp2OverlayDTD;
+]>
+
+<overlay id="sbp2SidebarOverlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2CaptureSaver.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2DataSource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Editor.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2HighlightNode.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Overlay.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Prefs.js" />
+
+	<menupopup id="viewSidebarMenu">
+		<menuitem key="key_opensbp2Sidebar" observes="sbp2ViewSidebar" />
+	</menupopup>
+
+	<menubar id="main-menubar">
+		<menu id="sbp2Menu"
+			  label="SBP"
+			  insertafter="bookmarks-menu bookmarksMenu">
+			<menupopup>
+				<menuitem id="sbp2MenuItem1" key="key_sbp2SiteCapture"		label="&sbp2.menubar.save;"		oncommand="" />
+				<menuitem id="sbp2MenuItem2" key="key_sbp2SiteCaptureAs"	label="&sbp2.menubar.saveas;"	oncommand="" />
+				<menuitem id="sbp2MenuItem3" key="key_sbp2SiteBookmark"		label="&sbp2.menubar.bookmark;"	oncommand="" />
+				<menuitem id="sbp2MenuItem4" key="key_sbp2TabsCapture"		label="&sbp2.menubar.alltabs;"	oncommand="" />
+				<menuitem id="sbp2MenuItem5" label="&sbp2.menubar.sidebar;" observes="sbp2ViewSidebar" key="key_opensbp2Sidebar" />
+			</menupopup>
+		</menu>
+	</menubar>
+
+	<keyset id="mainKeyset">
+		<key id="key_opensbp2Sidebar"	command="sbp2ViewSidebar" />
+		<key id="key_sbp2SiteCapture"	oncommand=""/>
+		<key id="key_sbp2SiteCaptureAs"	oncommand="" />
+		<key id="key_sbp2SiteBookmark"	oncommand="" />
+		<key id="key_sbp2TabsCapture"	oncommand="" />
+	</keyset>
+
+	<broadcasterset id="mainBroadcasterSet"> 
+		<broadcaster id="sbp2ViewSidebar" 
+					 autoCheck="false"
+					 label="&sbp2.menubar.sidebar;"
+					 group="sidebar"
+					 sidebarurl="chrome://scrapbookplus2/content/sbp2Sidebar.xul"
+					 sidebartitle="ScrapBook Plus 2"
+					 type="checkbox"
+					 oncommand="toggleSidebar('sbp2ViewSidebar');" />
+	</broadcasterset>
+
+	<popup id="contentAreaContextMenu">
+		<menuseparator />
+		<menuitem	id="sbp2ContextMenu1"  class="menuitem-iconic sb-capture-partial" label="&sbp2.context.selection;"		oncommand="" />
+		<menuitem	id="sbp2ContextMenu2"  class="menuitem-iconic sb-capture-partial" label="&sbp2.context.selectionas;"	oncommand="" />
+		<menuitem	id="sbp2ContextMenu3"  class="menuitem-iconic sb-capture-partial" label="&sbp2.context.save;"			oncommand="sbp2Common.captureTab(window.content.location.href, document.getElementById('content').selectedTab.label, null, null, false);" />
+		<menuitem	id="sbp2ContextMenu4"  class="menuitem-iconic sb-capture-partial" label="&sbp2.context.saveas;"			oncommand="sbp2Common.captureTab(window.content.location.href, document.getElementById('content').selectedTab.label, null, null, true);" />
+		<menuitem	id="sbp2ContextMenu5"  class="menuitem-iconic sb-capture-partial" label="&sbp2.context.frame;"			oncommand="" />
+		<menuitem	id="sbp2ContextMenu6"  class="menuitem-iconic sb-capture-partial" label="&sbp2.context.frameas;"		oncommand="" />
+		<menuitem	id="sbp2ContextMenu7"  class="menuitem-iconic sb-capture-partial" label="&sbp2.context.link;"			oncommand="" />
+		<menuitem	id="sbp2ContextMenu8"  class="menuitem-iconic sb-capture-partial" label="&sbp2.context.linkas;"			oncommand="" />
+		<menuitem	id="sbp2ContextMenu9"  class="menuitem-iconic sb-capture-partial" label="&sbp2.context.linktoproject;"	oncommand="" />
+		<menuitem	id="sbp2ContextMenu10" class="menuitem-iconic sb-capture-partial" label="&sbp2.context.bm;" 			oncommand="sbp2Common.captureBookmark(window.content.location.href, document.getElementById('content').selectedTab.label);" />
+		<menuitem	id="sbp2ContextMenu11" class="menuitem-iconic sb-capture-partial" label="&sbp2.context.bm-frame;"		oncommand="sbp2Common.captureBookmark(document.commandDispatcher.focusedWindow.location.href, document.commandDispatcher.focusedWindow.document.title);" />
+		<menuitem	id="sbp2ContextMenu12" class="menuitem-iconic sb-capture-partial" label="&sbp2.context.bm-link;"		oncommand="sbp2Common.captureBookmark(gContextMenu.target.href, gContextMenu.target.text);" />
+		<menuitem	id="sbp2ContextMenu13" class="menuitem-iconic sb-capture-partial" label="&sbp2.context.picture-frame;"	oncommand="" />
+		<menuitem	id="sbp2ContextMenu14" class="menuitem-iconic sb-capture-partial" label="&sbp2.context.picture-page;"	oncommand="" />
+	</popup>
+
+	<popupset id="mainPopupSet">
+		<menupopup id="sbp2StatusPopup">
+			<menuitem id="sbp2StatusPopupE" label="&sbp2.status.editor;" type="checkbox" oncommand="sbp2Editor.toggle();" />
+		</menupopup>
+	</popupset>
+
+	<vbox id="appcontent">
+		<toolbox id="sbp2Toolbox" hidden="true">
+			<toolbar id="sbp2Editor" align="center" hidden="false">
+				<spacer flex="1" />
+				<toolbarbutton  id="sbp2EditorDOMEraser" image="chrome://scrapbookplus2/skin/edit_domeraser.png" type="checkbox" oncommand="sbp2HighlightNode.init();" />
+				<toolbarbutton	id="sbp2EditorSave"      image="chrome://scrapbookplus2/skin/edit_save.png" tooltiptext="&sbp2.editor.save.tt;" oncommand="sbp2Editor.sSave();" />
+			</toolbar>
+		</toolbox>
+	</vbox>
+
+	<toolbarpalette id="BrowserToolbarPalette">
+		<toolbarbutton id="sbp2StatusPanel"
+					   class="toolbarbutton-1 chromeclass-toolbar-additional"
+					   context="sbp2StatusPopup"
+					   label="ScrapBook Plus 2"
+					   observes="sbp2ViewSidebar"
+					   ondragover="toggleSidebar('sbp2ViewSidebar',true);"
+					   tooltiptext="ScrapBook Plus 2"
+					   >
+		</toolbarbutton>
+	</toolbarpalette>
+
+</overlay>

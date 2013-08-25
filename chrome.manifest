@@ -1,0 +1,12 @@
+
+overlay	chrome://browser/content/browser.xul			chrome://scrapbookplus2/content/sbp2Overlay.xul
+
+content	scrapbookplus2	chrome/content/	contentaccessible=yes
+
+locale	scrapbookplus2	en-US							chrome/locale/en-US/
+locale	scrapbookplus2	de-DE							chrome/locale/de-DE/
+
+skin	scrapbookplus2	classic/1.0						chrome/skin/
+
+style	chrome://browser/content/browser.xul			chrome://scrapbookplus2/skin/CSS/sbp2Overlay.css
+style	chrome://global/content/customizeToolbar.xul	chrome://scrapbookplus2/skin/CSS/sbp2Overlay.css

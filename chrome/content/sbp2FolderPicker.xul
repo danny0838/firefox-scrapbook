@@ -1,0 +1,47 @@
+<?xml version="1.0" ?>
+
+<?xml-stylesheet type="text/css" href="chrome://global/skin/" ?>
+
+<!DOCTYPE dialog SYSTEM "chrome://scrapbookplus2/locale/folderpicker.dtd">
+
+<dialog id="sbp2FolderPicker"
+		ondialogaccept="sbp2FolderPicker.accept();"
+		ondialogcancel="sbp2FolderPicker.cancel();"
+        onload="sbp2FolderPicker.init();"
+        style="height: 360px; width: 380px;"
+        title="ScrapBook Plus 2 - &sbp2.title;"
+		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+		>
+
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2DataSource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2FolderPicker.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Prefs.js" />
+
+	<tree id="sbp2FPTree"
+		  class="plain"
+		  datasources="rdf:null"
+		  flags="dont-build-content"
+		  flex="1"
+		  hidecolumnpicker="true"
+		  ref="urn:sbp2:root"
+		  seltype="single">
+		<treecols id="sbp2FPTreeCols">
+			<treecol id="sbp2FPTreeColTitle" hideheader="true" primary="true" flex="1" />
+		</treecols>
+		<template>
+			<rule id="sbp2FPTreeRule">
+				<treechildren flex="1">
+					<treeitem uri="rdf:*">
+						<treerow>
+							<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title"
+									  src="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon"
+									  properties="Name title rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
+						</treerow>
+					</treeitem>
+				</treechildren>
+			</rule>
+		</template>
+	</tree>
+
+</dialog>

@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet type="text/css" href="chrome://browser/skin/places/places.css" ?>
+<?xml-stylesheet type="text/css" href="chrome://global/skin/" ?>
+<?xml-stylesheet type="text/css" href="chrome://scrapbookplus2/skin/CSS/sbp2Sidebar.css" ?>
+
+<!DOCTYPE dialog SYSTEM "chrome://scrapbookplus2/locale/sidebar.dtd">
+
+<page id="sbp2Sidebar"
+		title="ScrapBook Plus 2"
+		onload="sbp2Sidebar.init();"
+		onunload=""
+		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2CaptureSaver.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2DataSource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Manage.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2NoteSidebar.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Prefs.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2SDragAndDropObserver.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Search.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2SearchCache.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Sidebar.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Tags.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2TreeHandle.js" />
+
+	<stringbundleset>
+		<stringbundle id="sbp2CommonString" src="chrome://scrapbookplus2/locale/common.properties" />
+		<stringbundle id="sbp2TagString"    src="chrome://scrapbookplus2/locale/tag.properties" />
+	</stringbundleset>
+
+	<toolbox class="plain">
+		<toolbar id="sbp2SidebarMTB" class="plain">
+			<toolbarbutton id="sbp2SidebarBTools"	image="chrome://scrapbookplus2/skin/toolbar_foldernew.png" oncommand="sbp2Common.createItem('sbp2Tree', 'folder');"  tooltiptext="&sbp2.sidebar.new.tooltiptext;" type="menu-button">
+				<menupopup>
+					<menuitem label="&sbp2.sidebar.newseparator;"	oncommand="sbp2Common.createItem('sbp2Tree', 'separator');event.stopPropagation();" />
+					<menuitem label="&sbp2.sidebar.newnote;"		oncommand="sbp2Common.createItem('sbp2Tree', 'note');event.stopPropagation();" />
+				</menupopup>
+			</toolbarbutton>
+			<toolbarbutton id="sbp2SidebarBToggle"	image="chrome://scrapbookplus2/skin/toolbar_toggle.png" tooltiptext="&sbp2.sidebar.collapse;"	oncommand="sbp2TreeHandle.changeFolderState();" />
+			<toolbarbutton id="sbp2SidebarBManage"	image="chrome://scrapbookplus2/skin/toolbar_manage.png" tooltiptext="&sbp2.sidebar.manage;"		oncommand="window.openDialog('chrome://scrapbookplus2/content/sbp2Manage.xul', 'ScrapBookPlus:Manage', 'chrome,centerscreen,all,resizable,dialog=no', 'impexp');" />
+			<toolbarbutton id="sbp2SidebarBSwitch"	image="chrome://scrapbookplus2/skin/toolbar_multi.png"  tooltiptext="&sbp2.sidebar.multisb;" type="menu"	onpopupshowing="sbp2Manage.mbUpdatePopup();">
+				<menupopup id="sbp2SidebarBSwitchMPopup" oncommand="sbp2Common.loadScrapbook(event.originalTarget);">
+					<menuitem id="sbp2SidebarBSwitchMItem" type="radio" autocheck="false" hidden="true" />
+					<menuitem id="sbp2SidebarBSwitchMItemDefault" label="&sbp2.sidebar.profilefolder;" type="radio" autocheck="false" />
+					<menuseparator />
+					<menuitem id="sbp2SidebarBSwitchMItemManage" label="&sbp2.sidebar.manage;..." oncommand="window.openDialog('chrome://scrapbookplus2/content/sbp2Manage.xul', 'ScrapBookPlus:Manage', 'chrome,centerscreen,all,resizable,dialog=no','multibook');" />
+				</menupopup>
+			</toolbarbutton>
+			<spacer flex="1" />
+			<toolbarbutton type="menu" label="&sbp2.sidebar.tools;">
+				<menupopup id="">
+					<menuitem label="&sbp2.sidebar.tools.settings;"		oncommand="sbp2Common.openPrefWindow();" />
+					<menuseparator />
+					<menuitem label="&sbp2.sidebar.tools.sbpfopen;"		oncommand="sbp2Common.directoryShow();" />
+				</menupopup>
+			</toolbarbutton>
+		</toolbar>
+	</toolbox>
+
+	<popupset>
+		<menupopup id="sbp2SidebarPopup" onpopupshowing="sbp2TreeHandle.populatePopup('sbp2Tree', event);">
+			<menuitem id="sbp2Open"			label="&sbp2.sidebar.context.open;"			oncommand="sbp2TreeHandle.itemShow(document.getElementById('sbp2Tree'), false );" />
+			<menuitem id="sbp2OpenInTab"	label="&sbp2.sidebar.context.openintab;"	oncommand="sbp2TreeHandle.itemShow(document.getElementById('sbp2Tree'), true );" />
+			<menuitem id="sbp2OpenURL"		label="&sbp2.sidebar.context.opensrc;"		oncommand="" />
+			<menuseparator id="sbp2Separator1" />
+			<menuitem id="sbp2Update"		label="&sbp2.sidebar.context.update;"		oncommand="" />
+			<menuseparator id="sbp2Separator2" />
+			<menuitem id="sbp2ShowFiles"	label="&sbp2.sidebar.context.showfiles;"	oncommand="sbp2Common.directoryShow('sbp2Tree', true);" />
+			<menuseparator id="sbp2Separator3" />
+			<menuitem id="sbp2NewFolder"	label="&sbp2.sidebar.newfolder;"			oncommand="sbp2Common.createItem('sbp2Tree', 'folder');" />
+			<menuitem id="sbp2NewSeparator"	label="&sbp2.sidebar.newseparator;"			oncommand="sbp2Common.createItem('sbp2Tree', 'separator');" />
+			<menuitem id="sbp2NewNote"		label="&sbp2.sidebar.newnote;"				oncommand="sbp2Common.createItem('sbp2Tree', 'note');" />
+			<menuseparator id="sbp2Separator4" />
+			<menuitem id="sbp2Delete"		label="&sbp2.sidebar.context.delete;"		oncommand="sbp2TreeHandle.itemDelete('sbp2Tree', sbp2DataSource.dbData, null);" />
+			<menuseparator id="sbp2Separator7" />
+			<menuitem id="sbp2CaptureTabs"	label="&sbp2.sidebar.context.capttabs;"		oncommand="" />
+			<menuseparator id="sbp2Separator5" />
+			<menuitem id="sbp2Props"		label="&sbp2.sidebar.context.props;"		oncommand="window.openDialog('chrome://scrapbookplus2/content/sbp2Properties.xul', 'ScrapBook Plus 2', 'chrome,centerscreen,modal', document.getElementById('sbp2Tree'));" />
+		</menupopup>
+		<menupopup id="sbp2SidebarPopupSearch">
+			<menuitem id="sbp2SidebarPopupSearchF" label="&sbp2.sidebar.search.fulltext;"	type="radio" oncommand="sbp2Search.searchModeChange('fulltext');" />
+			<menuseparator />
+			<menuitem id="sbp2SidebarPopupSearchG" label="&sbp2.sidebar.search.tag;"		type="radio" oncommand="sbp2Search.searchModeChange('tag');" />
+			<menuseparator />
+			<menuitem id="sbp2SidebarPopupSearchT" label="&sbp2.sidebar.search.title;"		type="radio" oncommand="sbp2Search.searchModeChange('title');" />
+			<menuitem id="sbp2SidebarPopupSearchC" label="&sbp2.sidebar.search.descr;"		type="radio" oncommand="sbp2Search.searchModeChange('comment');" />
+			<menuitem id="sbp2SidebarPopupSearchS" label="&sbp2.sidebar.search.url;"		type="radio" oncommand="sbp2Search.searchModeChange('source');" />
+			<menuitem id="sbp2SidebarPopupSearchI" label="&sbp2.sidebar.search.id;"			type="radio" oncommand="sbp2Search.searchModeChange('id');" />
+			<!-- menuitem id="sbp2SidebarPopupSearchA" label="&sbp2.sidebar.search.all;"		type="radio" oncommand="sbp2Search.searchModeChange('all');" /-->
+			<menuseparator />
+			<menuitem id="sbp2SidebarPopupSearchOptionUC" label="&sbp2.sidebar.search.uppercase;"	type="checkbox" persist="checked" />
+			<menuitem id="sbp2SidebarPopupSearchOptionWW" label="&sbp2.sidebar.search.wholeword;"	type="checkbox" persist="checked" />
+			<menuitem id="sbp2SidebarPopupSearchOptionRE" label="&sbp2.sidebar.search.regexp;"		type="checkbox" persist="checked" />
+			<menuseparator />
+			<menuitem 						label="&sbp2.sidebar.search.cache;" oncommand="" />
+			<menu label="Extras">
+				<menupopup>
+					<menuitem label="&sbp2.sidebar.search.chronik;" oncommand="" />
+				</menupopup>
+			</menu>
+		</menupopup>
+		<menupopup id="sbp2SidebarPopupTag" onpopupshowing="sbp2Tags.populatePopup('sbp2TreeTag', event);">
+			<menuitem id="sbp2SidebarPopupTagRename"	label="&sbp2.sidebar.tag.rename;"	oncommand="sbp2Tags.itemRename('sbp2TreeTag');" />
+			<menuitem id="sbp2SidebarPopupTagRemove"	label="&sbp2.sidebar.tag.remove;"	oncommand="sbp2Tags.itemDelete('sbp2TreeTag');" />
+		</menupopup>
+	</popupset>
+
+	<toolbox id="sbp2SidebarToolboxSearch">
+		<toolbar id="sbp2SidebarSTB" align="center">
+			<textbox id="sbp2SearchTextbox"
+					 autocompletesearch="form-history"
+					 autocompletesearchparam="sbp2SearchHistory"
+					 enablehistory="true"
+					 flex="1"
+					 ontextentered="sbp2Search.searchBegin();"
+					 tabscrolling="true"
+					 type="autocomplete"
+					 >
+					 <image id="sbp2SearchImage"
+					 onclick=""
+					 persist="searchtype"
+					 popup="sbp2SidebarPopupSearch"
+					 searchtype="fulltext"
+					 src="chrome://scrapbookplus2/skin/search_fulltext.png"
+					 />
+			</textbox>
+		</toolbar>
+	</toolbox>
+	<hbox id="sbp2SidebarHeader" align="center" class="sbp2-search-header" hidden="true">
+		<label  flex="1" crop="end" />
+		<spacer flex="1" />
+		<toolbarbutton class="sbp2-search-header-exit" image="chrome://scrapbookplus2/skin/exit.png" oncommand="sbp2Search.exit();" />
+	</hbox>
+
+	<tree id="sbp2TreeTag"
+		  class="plain"
+		  contextmenu="sbp2SidebarPopupTag"
+		  datasources="rdf:null"
+		  ref="urn:scrapbook:tags"
+		  flags="dont-build-content"
+		  flex="1"
+		  hidecolumnpicker="true"
+		  ondraggesture="dump('ondraggesture\n');"
+		  ondragover="dump('ondragover\n');"
+		  ondragdrop="dump('ondragdrop\n');"
+		  ondblclick="sbp2Search.searchForTags(event);"
+		  onkeypress="sbp2Tags.onKeyPress(event, 'sbp2TreeTag');"
+		  seltype="multiple">
+		<treecols id="sbp2TreeTagCols">
+			<treecol id="sbp2TreeTagColTitle" hideheader="true" primary="true" flex="1" />
+		</treecols>
+		<template>
+			<rule id="sbp2TreeTagRule">
+				<treechildren flex="1">
+					<treeitem uri="rdf:*">
+						<treerow>
+							<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title"
+									  src="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon"
+									  properties="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
+						</treerow>
+					</treeitem>
+				</treechildren>
+			</rule>
+		</template>
+	</tree>
+	<splitter id="sbp2SplitterTag" resizeafter="farthest" collapse="before" state="open" persist="state">
+		<grippy style="display: -moz-box !important; min-height: 5px; min-width: 50px; cursor: pointer; background-image: url(data:image/gif;base64,R0lGODlhMgAFAOdaAAAAAAEBAQICAgMDAwQEBAUFBQYGBgcHBwgICAkJCQoKCgsLCwwMDA0NDQ4ODg8PDxAQEBERERISEhMTExQUFBUVFRYWFhcXFxgYGBkZGRoaGhsbGxwcHB0dHR4eHh8fHyAgICEhISIiIiMjIyQkJCUlJSYmJicnJygoKCkpKSoqKisrKywsLC0tLS4uLi8vLzAwMDExMTIyMjMzMzQ0NDU1NTY2Njc3Nzg4ODk5OTo6Ojs7Ozw8PD09PT4%2BPj8%2FP0BAQEFBQUJCQkNDQ0REREVFRUZGRkdHR0hISElJSUpKSktLS0xMTE1NTU5OTk9PT1BQUFFRUVJSUlNTU1RUVFVVVVZWVldXV1hYWFlZWVpaWltbW1xcXF1dXV5eXl9fX2BgYGFhYWJiYmNjY2RkZGVlZWZmZmdnZ2hoaGlpaWpqamtra2xsbG1tbW5ubm9vb3BwcHFxcXJycnNzc3R0dHV1dXZ2dnd3d3h4eHl5eXp6ent7e3x8fH19fX5%2Bfn9%2Ff4CAgIGBgYKCgoODg4SEhIWFhYaGhoeHh4iIiImJiYqKiouLi4yMjI2NjY6Ojo%2BPj5CQkJGRkZKSkpOTk5SUlJWVlZaWlpeXl5iYmJmZmZqampubm5ycnJ2dnZ6enp%2Bfn6CgoKGhoaKioqOjo6SkpKWlpaampqenp6ioqKmpqaqqqqurq6ysrK2tra6urq%2Bvr7CwsLGxsbKysrOzs7S0tLW1tba2tre3t7i4uLm5ubq6uru7u7y8vL29vb6%2Bvr%2B%2Fv8DAwMHBwcLCwsPDw8TExMXFxcbGxsfHx8jIyMnJycrKysvLy8zMzM3Nzc7Ozs%2FPz9DQ0NHR0dLS0tPT09TU1NXV1dbW1tfX19jY2NnZ2dra2tvb29zc3N3d3d7e3t%2Ff3%2BDg4OHh4eLi4uPj4%2BTk5OXl5ebm5ufn5%2Bjo6Onp6erq6uvr6%2Bzs7O3t7e7u7u%2Fv7%2FDw8PHx8fLy8vPz8%2FT09PX19fb29vf39%2Fj4%2BPn5%2Bfr6%2Bvv7%2B%2Fz8%2FP39%2Ff7%2B%2Fv%2F%2F%2FywAAAAAMgAFAAAIPgDJCRxIsKDBgwgTFjRUKlQoT4YWGppIsaLFixYXNnQYkZyhU6A6KhxJkuBHUSI9phyIsaVLigcnlpxJc2RAADs%3D);" />
+	</splitter>
+	<tree id="sbp2Tree"
+		  class="plain"
+		  contextmenu="sbp2SidebarPopup"
+		  datasources="rdf:null"
+		  flags="dont-build-content"
+		  flex="1"
+		  hidecolumnpicker="true"
+		  onclick="sbp2TreeHandle.onClick(document.getElementById('sbp2Tree'),event);"
+		  ondragover="sbp2SDragAndDropObserver.doDragOver(event);"
+		  ondragstart="sbp2SDragAndDropObserver.doDragStart(event);"
+		  ondrop="sbp2SDragAndDropObserver.doDrop(event);"
+		  onkeypress="sbp2TreeHandle.onKeyPress(document.getElementById('sbp2Tree'),event);"
+		  ref="urn:scrapbook:root"
+		  seltype="single">
+		<treecols id="sbp2TreeCols">
+			<treecol id="sbp2TreeColTitle" hideheader="true" primary="true" flex="1" />
+		</treecols>
+		<template>
+			<rule id="sbp2TreeRule">
+				<treechildren flex="1">
+					<treeitem uri="rdf:*">
+						<treerow>
+							<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title"
+									  src="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon"
+									  properties="Name title rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
+						</treerow>
+					</treeitem>
+				</treechildren>
+			</rule>
+		</template>
+	</tree>
+	<splitter id="sbp2SplitterNoteSB" hidden="true" />
+	<vbox id="sbp2NoteSBVB" flex="1" hidden="true">
+		<hbox id="sbp2NoteSBHBHeader" align="center">
+			<label id="sbp2NoteSBLabel" crop="end" flex="1" />
+			<spacer flex="1" />
+			<toolbarbutton id="sbp2NoteSBSave"  image="chrome://scrapbookplus2/skin/note_save_dis.png"	tooltiptext="&sbp2.sidebar.note.save;"		oncommand="sbp2NoteSidebar.save();" disabled="true" />
+			<toolbarbutton id="sbp2NoteSBTab"   image="chrome://scrapbookplus2/skin/note_Tab.png"		tooltiptext="&sbp2.sidebar.note.openintab;"	oncommand="sbp2NoteSidebar.tab();" />
+			<toolbarbutton id="sbp2NoteSBClose" image="chrome://scrapbookplus2/skin/exit.png"			tooltiptext="&sbp2.sidebar.note.close;"		oncommand="sbp2NoteSidebar.close();" />
+		</hbox>
+		<textbox id="sbp2NoteSBTextbox" class="plain" flex="1" multiline="true" oninput="sbp2NoteSidebar.onInput();" value="1" />
+	</vbox>
+
+</page>

@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+
+<?xml-stylesheet type="text/css" href="chrome://global/skin/" ?>
+
+<!-- notwendig für filefield -->
+<?xml-stylesheet href="chrome://mozapps/content/preferences/preferences.css"?>
+<?xml-stylesheet href="chrome://browser/skin/preferences/preferences.css"?>
+<!-- Ende -->
+
+<!DOCTYPE dialog SYSTEM "chrome://scrapbookplus2/locale/mbedit.dtd">
+
+<dialog id="sbp2MBEditDialog"
+		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+		title="ScrapBook Plus 2 - &sbp2.title;"
+		onload="sbp2MBEdit.mbeInit();"
+		style="width: 36em;">
+
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2MBEdit.js" />
+
+	<grid flex="1">
+		<columns>
+			<column />
+			<column flex="1" />
+		</columns>
+		<rows>
+			<row align="center">
+				<label value="&sbp2.lbl.title;" />
+				<textbox id="sbp2Name" oninput="sbp2MBEdit.mbeCheckValues();" />
+			</row>
+			<spacer height="5" />
+			<row align="center">
+				<label control="sbp2VZ" value="&sbp2.lbl.fld;" />
+				<hbox>
+					<filefield id="sbp2VZ" flex="1" />
+					<button label="&sbp2.btn.selectfld;" oncommand="sbp2MBEdit.mbeChangeDirectory('Test');" />
+				</hbox>
+			</row>
+		</rows>
+	</grid>
+
+</dialog>

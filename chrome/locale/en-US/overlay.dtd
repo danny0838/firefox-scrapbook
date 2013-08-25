@@ -1,0 +1,22 @@
+﻿<!ENTITY sbp2.menubar.save			"Capture page">
+<!ENTITY sbp2.menubar.saveas		"Capture page as">
+<!ENTITY sbp2.menubar.bookmark		"Create bookmark with ScrapBook Plus 2">
+<!ENTITY sbp2.menubar.alltabs		"Capture all tabs">
+<!ENTITY sbp2.menubar.sidebar		"Open sidebar">
+
+<!ENTITY sbp2.status.editor			"Show editor">
+
+<!ENTITY sbp2.context.selection		"Capture selection">
+<!ENTITY sbp2.context.selectionas	"Capture selection as...">
+<!ENTITY sbp2.context.save			"Capture page">
+<!ENTITY sbp2.context.saveas		"Capture page as...">
+<!ENTITY sbp2.context.frame			"Capture frame">
+<!ENTITY sbp2.context.frameas		"Capture frame as...">
+<!ENTITY sbp2.context.link			"Capture link">
+<!ENTITY sbp2.context.linkas		"Capture link as...">
+<!ENTITY sbp2.context.linktoproject	"Add link to project">
+<!ENTITY sbp2.context.bm			"Create bookmark with ScrapBook Plus 2">
+<!ENTITY sbp2.context.bm-frame		"Create bookmark for frame with ScrapBook Plus 2">
+<!ENTITY sbp2.context.bm-link		"Create bookmark for link with ScrapBook Plus 2">
+<!ENTITY sbp2.context.picture-frame	"Capture frame as image...">
+<!ENTITY sbp2.context.picture-page	"Capture page as image...">

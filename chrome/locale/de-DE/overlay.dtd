@@ -1,0 +1,22 @@
+﻿<!ENTITY sbp2.menubar.save			"Seite archivieren">
+<!ENTITY sbp2.menubar.saveas		"Seite archivieren als...">
+<!ENTITY sbp2.menubar.bookmark		"Lesezeichen mit ScrapBook Plus 2 erstellen">
+<!ENTITY sbp2.menubar.alltabs		"Alle Tabs archivieren">
+<!ENTITY sbp2.menubar.sidebar		"ScrapBook Plus 2-Sidebar öffnen">
+
+<!ENTITY sbp2.status.editor			"Werkzeugleiste anzeigen">
+
+<!ENTITY sbp2.context.selection		"Auswahl archivieren">
+<!ENTITY sbp2.context.selectionas	"Auswahl archivieren als...">
+<!ENTITY sbp2.context.save			"Seite archivieren">
+<!ENTITY sbp2.context.saveas		"Seite archivieren als...">
+<!ENTITY sbp2.context.frame			"Frame archivieren">
+<!ENTITY sbp2.context.frameas		"Frame archivieren als...">
+<!ENTITY sbp2.context.link			"Link archivieren">
+<!ENTITY sbp2.context.linkas		"Link archivieren als...">
+<!ENTITY sbp2.context.linktoproject	"Link zu Projekt hinzufügen">
+<!ENTITY sbp2.context.bm			"Lesezeichen mit SBP2 erstellen">
+<!ENTITY sbp2.context.bm-frame		"Lesezeichen für Frame mit SBP2 erstellen">
+<!ENTITY sbp2.context.bm-link		"Lesezeichen für Link mit SBP2 erstellen">
+<!ENTITY sbp2.context.picture-frame	"Frame als Bild speichern...">
+<!ENTITY sbp2.context.picture-page	"Seite als Bild speichern...">

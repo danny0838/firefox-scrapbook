@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+<?xml-stylesheet type="text/css" href="chrome://scrapbookplus2/skin/CSS/sbp2Note.css" ?>
+
+<!DOCTYPE window SYSTEM "chrome://scrapbookplus2/locale/note.dtd">
+
+<window id="sbp2NoteBrowser"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+		onload="sbp2NoteBrowser.open();"
+        onunload="sbp2NoteBrowser.close();">
+
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2DataSource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2NoteBrowser.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Prefs.js" />
+
+	<stringbundleset id="sbp2StringBundles">
+		<stringbundle id="sbp2CommonString" src="chrome://scrapbookplus2/locale/common.properties" />
+	</stringbundleset>
+
+	<hbox id="sbp2NoteBHeader" class="sb-header" align="center">
+		<image id="sbp2NoteBImage" />
+		<label id="sbp2NoteBLabel" flex="1" />
+	</hbox>
+	<textbox id="sbp2NoteBTextbox" class="plain" flex="1" oninput="sbp2NoteBrowser.onInput();" multiline="true" />
+	<toolbar id="sbp2NoteBToolbar" align="center">
+		<toolbarbutton id="sbp2NoteBSave"  image="chrome://scrapbookplus2/skin/note_save_dis.png" disabled="true" tooltiptext="&sbp2.note.save;" oncommand="sbp2NoteBrowser.save();" />
+		<spacer flex="1" />
+		<toolbarbutton id="sbp2NoteBClose" image="chrome://scrapbookplus2/skin/exit.png" style="-moz-appearance:none;" tooltiptext="&sbp2.note.close;" oncommand="sbp2NoteBrowser.close();" />
+	</toolbar>
+</window>

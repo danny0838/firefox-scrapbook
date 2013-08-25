@@ -1,0 +1,22 @@
+/* ::::: sbp2Manage.css ::::: */
+
+/* Formatierung der Einträge im Tree */
+
+treechildren::-moz-tree-image() {
+	margin-right : 3px;
+}
+
+treechildren::-moz-tree-cell-text(bookmark) {
+	color: rgb(32,192,32);
+}
+
+treechildren::-moz-tree-image(note) {
+	list-style-image: url('chrome://scrapbookplus2/skin/treenote.png');
+}
+
+/* Formatierung der Icons im Statistik-Tab */
+
+#sbp2MSTree treechildren::-moz-tree-image {
+	height: 16px;
+	width: 16px;
+}

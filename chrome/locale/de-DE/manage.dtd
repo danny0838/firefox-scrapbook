@@ -1,0 +1,58 @@
+﻿<!ENTITY sbp2.title						"Verwalten">
+
+<!ENTITY sbp2.context.showfiles			"Dateien anzeigen">
+<!ENTITY sbp2.context.newfolder			"neuer Ordner">
+<!ENTITY sbp2.context.newseparator		"neue Trennlinie">
+<!ENTITY sbp2.context.newnote			"neue Notiz">
+<!ENTITY sbp2.context.delete			"Löschen">
+<!ENTITY sbp2.context.props				"Eigenschaften">
+
+<!ENTITY sbp2.tab.impexp				"Verwalten / Import / Export">
+<!ENTITY sbp2.tab.impexp.tt				"Organisieren, Importieren und Exportieren von Daten">
+<!ENTITY sbp2.tab.tags					"Stichwörter">
+<!ENTITY sbp2.tab.stats					"Statistik">
+<!ENTITY sbp2.tab.multibook				"Multibook">
+<!ENTITY sbp2.tab.multibook.tt			"Verwaltung von ScrapBook-Archiven">
+
+<!ENTITY sbp2.data.tc.title				"Name">
+<!ENTITY sbp2.data.tc.date				"Datum des Exports">
+<!ENTITY sbp2.data.tc.fld				"Verzeichnis">
+<!ENTITY sbp2.data.sort					"Sortieren">
+<!ENTITY sbp2.data.sort.asc				"Alphabetisch (A-Z)">
+<!ENTITY sbp2.data.sort.desc			"Alphabetisch (Z-A)">
+<!ENTITY sbp2.data.sort.subdir			"Unterordner mit einbeziehen">
+
+<!ENTITY sbp2.impexp.btn.imp			"Importieren">
+<!ENTITY sbp2.impexp.btn.imp.tt			"selektierte Einträge Importieren">
+<!ENTITY sbp2.impexp.btn.exp			"Exportieren">
+<!ENTITY sbp2.impexp.btn.exp.tt			"selektierte Einträge Exportieren">
+<!ENTITY sbp2.impexp.btn.cd				"...">
+<!ENTITY sbp2.impexp.btn.cd.tt			"Import/Export-Verzeichnis ändern">
+<!ENTITY sbp2.impexp.cbx.redir			"Importieren unter Beibehaltung der Ordnerstruktur">
+
+<!ENTITY sbp2.tag.new					"Neues Tag">
+<!ENTITY sbp2.tag.rename				"Umbenennen">
+<!ENTITY sbp2.tag.remove				"Entfernen">
+
+<!ENTITY sbp2.tag.tt.new				"Stichwörter erstellen">
+<!ENTITY sbp2.tag.tt.del				"Stichwörter löschen">
+<!ENTITY sbp2.tag.tt.ren				"Stichwort umbenennen">
+<!ENTITY sbp2.tag.tt.tagadd				"selektierte Stichwörter für selektierte Einträge aufnehmen">
+<!ENTITY sbp2.tag.tt.tagrem				"selektierte Stichwörter für selektierte Einträge entfernen">
+
+<!ENTITY sbp2.stats.btn.ref				"Refresh">
+<!ENTITY sbp2.stats.btn.ref.tt			"Liest die Daten erneut ein und aktualisiert die Ansicht.">
+<!ENTITY sbp2.stats.btn.rep				"Reparieren">
+<!ENTITY sbp2.stats.btn.rep.tt			"Löscht leere Verzeichnisse.">
+<!ENTITY sbp2.stats.tc.title			"Name">
+<!ENTITY sbp2.stats.tc.size				"Größe">
+<!ENTITY sbp2.stats.tc.sizeb			"Größe (in Bytes)">
+<!ENTITY sbp2.stats.tc.diagnostics		"Diagnose">
+
+<!ENTITY sbp2.multibook.tc.title		"Name">
+<!ENTITY sbp2.multibook.tc.fld			"Verzeichnis">
+<!ENTITY sbp2.multibook.btn.add			"Hinzufügen">
+<!ENTITY sbp2.multibook.btn.edit		"Bearbeiten">
+<!ENTITY sbp2.multibook.btn.remove		"Entfernen">
+<!ENTITY sbp2.multibook.btn.up			"Aufsteigend">
+<!ENTITY sbp2.multibook.btn.down		"Absteigend">

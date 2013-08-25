@@ -1,0 +1,11 @@
+pref("extensions.scrapbookplus2.data.path", "");
+pref("extensions.scrapbookplus2.key.a.1", "alt");
+pref("extensions.scrapbookplus2.key.a.2", "K");
+pref("extensions.scrapbookplus2.key.b.1", "accel shift");
+pref("extensions.scrapbookplus2.key.b.2", "L");
+pref("extensions.scrapbookplus2.key.c.1", "accel shift");
+pref("extensions.scrapbookplus2.key.c.2", "K");
+pref("extensions.scrapbookplus2.key.d.1", "accel shift");
+pref("extensions.scrapbookplus2.key.d.2", "J");
+pref("extensions.scrapbookplus2.key.e.1", "accel shift");
+pref("extensions.scrapbookplus2.key.e.2", "H");

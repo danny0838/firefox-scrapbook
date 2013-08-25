@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+
+<?xml-stylesheet type="text/css" href="chrome://global/skin/" ?>
+<?xml-stylesheet type="text/css" href="chrome://mozapps/content/preferences/preferences.css"?>
+<?xml-stylesheet type="text/css" href="chrome://browser/skin/preferences/preferences.css"?>
+
+<!DOCTYPE dialog SYSTEM "chrome://scrapbookplus2/locale/prefs.dtd">
+
+<prefwindow id="sbp2PrefWindow"
+			xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+			onchange=""
+			onload="sbp2Preferences.keysInit();"
+			onunload="sbp2Preferences.keysAccept();"
+			style="height: 35em; width: 40em;"
+			title="ScrapBook Plus 2 - Einstellungen">
+
+	<prefpane id="sbp2PrefKeys" label="&sbp2.prefs.keys;" flex="1">
+		<preferences>
+			<preference id="extensions.scrapbookplus2.key.a.1"				name="extensions.scrapbookplus2.key.a.1"			type="string" />
+			<preference id="extensions.scrapbookplus2.key.a.2"				name="extensions.scrapbookplus2.key.a.2"			type="string" />
+			<preference id="extensions.scrapbookplus2.key.a.3"				name="extensions.scrapbookplus2.key.a.3"			type="string" />
+			<preference id="extensions.scrapbookplus2.key.b.1"				name="extensions.scrapbookplus2.key.b.1"			type="string" />
+			<preference id="extensions.scrapbookplus2.key.b.2"				name="extensions.scrapbookplus2.key.b.2"			type="string" />
+			<preference id="extensions.scrapbookplus2.key.b.3"				name="extensions.scrapbookplus2.key.b.3"			type="string" />
+			<preference id="extensions.scrapbookplus2.key.c.1"				name="extensions.scrapbookplus2.key.c.1"			type="string" />
+			<preference id="extensions.scrapbookplus2.key.c.2"				name="extensions.scrapbookplus2.key.c.2"			type="string" />
+			<preference id="extensions.scrapbookplus2.key.c.3"				name="extensions.scrapbookplus2.key.c.3"			type="string" />
+			<preference id="extensions.scrapbookplus2.key.d.1"				name="extensions.scrapbookplus2.key.d.1"			type="string" />
+			<preference id="extensions.scrapbookplus2.key.d.2"				name="extensions.scrapbookplus2.key.d.2"			type="string" />
+			<preference id="extensions.scrapbookplus2.key.d.3"				name="extensions.scrapbookplus2.key.d.3"			type="string" />
+			<preference id="extensions.scrapbookplus2.key.e.1"				name="extensions.scrapbookplus2.key.e.1"			type="string" />
+			<preference id="extensions.scrapbookplus2.key.e.2"				name="extensions.scrapbookplus2.key.e.2"			type="string" />
+			<preference id="extensions.scrapbookplus2.key.e.3"				name="extensions.scrapbookplus2.key.e.3"			type="string" />
+		</preferences>
+		<hbox>
+			<label align="left" flex="1" value="&sbp2.prefs.keys.sidebar;" />
+			<textbox id="sbp2PrefKey1" width="200" onkeydown="sbp2Preferences.keysOnKeyDown(this, event);" />
+		</hbox>
+		<hbox>
+			<label align="left" flex="1" value="&sbp2.prefs.keys.save;" />
+			<textbox id="sbp2PrefKey2" width="200" onkeydown="sbp2Preferences.keysOnKeyDown(this, event);" />
+		</hbox>
+		<hbox>
+			<label align="left" flex="1" value="&sbp2.prefs.keys.saveas;" />
+			<textbox id="sbp2PrefKey3" width="200" onkeydown="sbp2Preferences.keysOnKeyDown(this, event);" />
+		</hbox>
+		<hbox>
+			<label align="left" flex="1" value="&sbp2.prefs.keys.bookmark;" />
+			<textbox id="sbp2PrefKey4" width="200" onkeydown="sbp2Preferences.keysOnKeyDown(this, event);" />
+		</hbox>
+		<hbox>
+			<label align="left" flex="1" value="&sbp2.prefs.keys.tabs;" />
+			<textbox id="sbp2PrefKey5" width="200" onkeydown="sbp2Preferences.keysOnKeyDown(this, event);" />
+		</hbox>
+		<spacer height="10" />
+		<hbox align="right">
+			<button disabled="true" id="sbp2PrefKeyReset" label="&sbp2.prefs.keys.btn.reset;" oncommand="sbp2Preferences.resetKeys();" />
+		</hbox>
+		<spacer height="20" />
+		<description>&sbp2.prefs.keys.tip;</description>
+	</prefpane>
+
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Preferences.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Prefs.js" />
+
+	<stringbundleset id="stringbundleset">
+		<stringbundle id="sbp2PreferencesString" src="chrome://scrapbookplus2/locale/prefs.properties" />
+	</stringbundleset>
+
+</prefwindow>

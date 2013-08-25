@@ -1,0 +1,27 @@
+<RDF xmlns="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+	 xmlns:em="http://www.mozilla.org/2004/em-rdf#">
+	<Description about="urn:mozilla:install-manifest">
+		<em:id>scrapbookplus2@addons.mozilla.org</em:id>
+		<em:type>2</em:type>
+		<em:name>ScrapBook Plus 2</em:name>
+		<em:version>2.0.0.0a1</em:version>
+		<em:creator>haselnuss</em:creator>
+		<em:description>Save web pages and organize them.</em:description>
+		<em:localized>
+			<Description>
+				<em:locale>de</em:locale>
+				<em:name>ScrapBook Plus 2</em:name>
+				<em:description>Erlaubt das Speichern von Webseiten sowie die Organisation der gespeicherten Seiten.</em:description>
+				<em:creator>haselnuss</em:creator>
+			</Description>
+		</em:localized>
+		<em:optionsURL>chrome://scrapbookplus2/content/sbp2Preferences.xul</em:optionsURL>
+		<em:targetApplication>
+			<Description>
+				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+				<em:minVersion>17.0</em:minVersion>
+				<em:maxVersion>23.*</em:maxVersion>
+			</Description>
+		</em:targetApplication>
+	</Description>
+</RDF>

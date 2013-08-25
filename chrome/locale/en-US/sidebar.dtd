@@ -1,0 +1,44 @@
+﻿<!ENTITY sbp2.sidebar.new.tooltiptext	"Create a new folder.">
+<!ENTITY sbp2.sidebar.newfolder			"New folder">
+<!ENTITY sbp2.sidebar.newseparator		"New separator">
+<!ENTITY sbp2.sidebar.newnote			"New note">
+
+<!ENTITY sbp2.sidebar.collapse			"Alle Ordner ein-/ausklappen">
+<!ENTITY sbp2.sidebar.manage			"Manage">
+<!ENTITY sbp2.sidebar.multisb			"Multi-ScrapBook">
+
+<!ENTITY sbp2.sidebar.profilefolder		"Profile folder">
+
+<!ENTITY sbp2.sidebar.tools				"Tools">
+<!ENTITY sbp2.sidebar.tools.settings	"Settings">
+<!ENTITY sbp2.sidebar.tools.sbpfopen	"ScrapBook-Ordner öffnen">
+
+<!ENTITY sbp2.sidebar.search.fulltext	"Full text search">
+<!ENTITY sbp2.sidebar.search.title		"Title">
+<!ENTITY sbp2.sidebar.search.descr		"Description">
+<!ENTITY sbp2.sidebar.search.url		"URL">
+<!ENTITY sbp2.sidebar.search.id			"ID">
+<!ENTITY sbp2.sidebar.search.all		"All">
+<!ENTITY sbp2.sidebar.search.tag		"Tag">
+<!ENTITY sbp2.sidebar.search.uppercase	"Match case">
+<!ENTITY sbp2.sidebar.search.wholeword	"Match whole word only">
+<!ENTITY sbp2.sidebar.search.regexp		"Regular expression">
+<!ENTITY sbp2.sidebar.search.cache		"Update cache for full text search">
+<!ENTITY sbp2.sidebar.search.chronik	"Clear form history">
+
+<!ENTITY sbp2.sidebar.context.open		"Open">
+<!ENTITY sbp2.sidebar.context.openintab	"Open in new tab">
+<!ENTITY sbp2.sidebar.context.opensrc	"Open source URL">
+<!ENTITY sbp2.sidebar.context.update	"Update">
+<!ENTITY sbp2.sidebar.context.showfiles	"Show files">
+<!ENTITY sbp2.sidebar.context.delete	"Delete">
+<!ENTITY sbp2.sidebar.context.capttabs	"Capture all tabs">
+<!ENTITY sbp2.sidebar.context.props		"Properties">
+
+<!ENTITY sbp2.sidebar.tag.rename		"Rename">
+<!ENTITY sbp2.sidebar.tag.remove		"Delete">
+<!ENTITY sbp2.sidebar.tag.new			"New tag">
+
+<!ENTITY sbp2.sidebar.note.save			"Save">
+<!ENTITY sbp2.sidebar.note.openintab	"Open in tab">
+<!ENTITY sbp2.sidebar.note.close		"Close">

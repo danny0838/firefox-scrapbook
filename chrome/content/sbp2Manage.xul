@@ -1,0 +1,314 @@
+<?xml version="1.0" ?>
+
+<!-- Firefox 3.5 -->
+<?xml-stylesheet type="text/css" href="chrome://browser/skin/places/places.css" ?>
+<!-- Common -->
+<?xml-stylesheet type="text/css" href="chrome://global/skin/" ?>
+<?xml-stylesheet type="text/css" href="chrome://scrapbookplus2/skin/CSS/sbp2Manage.css" ?>
+
+<!DOCTYPE window SYSTEM "chrome://scrapbookplus2/locale/manage.dtd">
+
+<window id="sbp2ManageWindow"
+		title="ScrapBook Plus 2 - &sbp2.title;"
+		xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+		xmlns:SB="http:/amb.vis.ne.jp/mozilla/scrapbook-rdf#"
+		width="800" height="540" persist="width height screenX screenY"
+		onload="sbp2Manage.mainLoad();"
+		onunload="sbp2Manage.mainUnload();"
+		windowtype="scrapbookplus2">
+
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2DataSource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Manage.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2MDragAndDropImpExp.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Prefs.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Tags.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2ToolsZip.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2TreeHandle.js" />
+
+	<stringbundleset id="sbp2StringBundles">
+		<stringbundle id="sbp2CommonString" src="chrome://scrapbookplus2/locale/common.properties" />
+		<stringbundle id="sbp2ManageString" src="chrome://scrapbookplus2/locale/manage.properties" />
+	</stringbundleset>
+
+	<keyset id="sbp2ManageKeys">
+		<key key="a" modifiers="accel" oncommand="sbp2Manage.selectAll();" />
+	</keyset>
+
+	<popupset>
+		<menupopup id="sbp2MIEPopupL" onpopupshowing="sbp2TreeHandle.populatePopupIEL(event);">
+			<menuitem id="sbp2ShowFiles"	label="&sbp2.context.showfiles;"	oncommand="sbp2Common.directoryShow('sbp2MIETree1', true);" />
+			<menuseparator id="sbp2Separator3" />
+			<menuitem id="sbp2NewFolder"	label="&sbp2.context.newfolder;"	oncommand="sbp2Common.createItem('sbp2MIETree1', 'folder');" />
+			<menuitem id="sbp2NewSeparator"	label="&sbp2.context.newseparator;"	oncommand="sbp2Common.createItem('sbp2MIETree1', 'separator');" />
+			<menuitem id="sbp2NewNote"		label="&sbp2.context.newnote;"		oncommand="sbp2Common.createItem('sbp2MIETree1', 'note');" />
+			<menuseparator id="sbp2Separator4" />
+			<menuitem id="sbp2Delete"		label="&sbp2.context.delete;"		oncommand="sbp2Manage.ieItemDeleteL();" />
+			<menuseparator id="sbp2Separator5" />
+			<menuitem id="sbp2Props"		label="&sbp2.context.props;"		oncommand="window.openDialog('chrome://scrapbookplus2/content/sbp2Properties.xul', 'ScrapBook Plus 2', 'chrome,centerscreen,modal', document.getElementById('sbp2MIETree1'));" />
+		</menupopup>
+		<menupopup id="sbp2MIEPopupR" onpopupshowing="sbp2TreeHandle.populatePopupIER(event);">
+			<menuitem id="sbp2MIEShowFiles"	label="&sbp2.context.showfiles;"	oncommand="sbp2Manage.ieItemShowFiles();" />
+			<menuseparator id="sbp2Separator6" />
+			<menuitem id="sbp2MIEDelete"	label="&sbp2.context.delete;"		oncommand="sbp2Manage.ieItemDeleteR();" />
+		</menupopup>
+		<menupopup id="sbp2MTPopupL" onpopupshowing="sbp2Tag.populatePopup('sbp2MTTree1', event);">
+			<menuitem id="sbp2MTagPopupLNew"	label="&sbp2.tag.new;"		oncommand="sbp2Tag.itemTag('sbp2MTTree1');" />
+		</menupopup>
+		<menupopup id="sbp2MTPopupR" onpopupshowing="sbp2Tag.populatePopup('sbp2MTTree2', event);">
+			<menuitem id="sbp2MTPopupRRename"	label="&sbp2.tag.rename;"	oncommand="sbp2Tag.itemRename('sbp2MTTree2');" />
+			<menuitem id="sbp2MTPopupRRemove"	label="&sbp2.tag.remove;"	oncommand="sbp2Tag.itemDelete('sbp2MTTree2');" />
+		</menupopup>
+		<menupopup id="sbp2MSPopup" onpopupshowing="sbp2TreeHandle.populatePopupS(event);">
+			<menuitem id="sbp2MSShowFiles"	label="&sbp2.context.showfiles;"	oncommand="sbp2Manage.statsDirectoryShow();" />
+		</menupopup>
+	</popupset>
+
+	<tabbox flex="1">
+		<tabs id="sbp2MTabs">
+			<tab label="&sbp2.tab.impexp;"		onclick="sbp2Manage.mainChangeTab('impexp');"		tooltiptext="&sbp2.tab.impexp.tt;" />
+			<tab label="&sbp2.tab.tags;"		onclick="sbp2Manage.mainChangeTab('tags');"			/>
+			<tab label="&sbp2.tab.stats;"		onclick="sbp2Manage.mainChangeTab('stats');"		/>
+			<tab label="&sbp2.tab.multibook;"	onclick="sbp2Manage.mainChangeTab('multibook');"	tooltiptext="&sbp2.tab.multibook.tt;" />
+		</tabs>
+		<tabpanels flex="1">
+			<tabpanel>
+				<vbox flex="1">
+					<toolbox class="plain">
+						<toolbar id="sbp2MIEToolbar" class="plain">
+							<toolbarbutton type="menu" label="&sbp2.data.sort;">
+								<menupopup id="">
+									<menuitem label="&sbp2.data.sort.asc;"			oncommand="sbp2Manage.mSort(sbp2Common.RDF.GetResource('urn:scrapbook:root'), 0, document.getElementById('sbp2MIESortSubDirInc').getAttribute('checked'));" />
+									<menuitem label="&sbp2.data.sort.desc;"			oncommand="sbp2Manage.mSort(sbp2Common.RDF.GetResource('urn:scrapbook:root'), 1, document.getElementById('sbp2MIESortSubDirInc').getAttribute('checked'));" />
+									<menuseparator />
+									<menuitem id="sbp2MIESortSubDirInc" label="&sbp2.data.sort.subdir;" type="checkbox" persist="checked" />
+								</menupopup>
+							</toolbarbutton>
+							<toolbarbutton id="sbp2MIEBtnChangeDirectory"			label="&sbp2.impexp.btn.cd;"	tooltiptext="&sbp2.impexp.btn.cd.tt;"  oncommand="sbp2Manage.ieChangeDirectory();" />
+							<checkbox      id="sbp2MIECbRestoreDirectory"           label="&sbp2.impexp.cbx.redir;" checked="true" />
+						</toolbar>
+					</toolbox>
+					<hbox flex="1">
+						<tree id="sbp2MIETree1"
+							  class="plain"
+							  contextmenu="sbp2MIEPopupL"
+							  datasources="rdf:null"
+							  ref="urn:scrapbook:root"
+							  flags="dont-build-content"
+							  flex="1"
+							  hidecolumnpicker="true"
+							  ondragenter="event.preventDefault();"
+							  ondraggesture=""
+							  ondragover="event.preventDefault();"
+							  ondragstart="sbp2MDragAndDropImpExp.ddOnDragStartExport(event);"
+							  ondragdrop=""
+							  ondrop=""
+							  onclick=""
+							  onkeypress="sbp2Manage.ieOnKeyPress(event);"
+							  seltype="multiple">
+							<treecols id="sbp2MIECols1">
+								<treecol id="sbp2MIEColTitle1" hideheader="true" primary="true" flex="1" />
+							</treecols>
+							<template>
+								<rule id="sbp2MIERule1">
+									<treechildren flex="1">
+										<treeitem uri="rdf:*">
+											<treerow>
+												<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title"
+														  src="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon"
+														  properties="Name title rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
+											</treerow>
+										</treeitem>
+									</treechildren>
+								</rule>
+							</template>
+						</tree>
+<!--splitter id="sbp2MIESplitter" hidden="false" /-->
+						<vbox>
+							<spacer flex="1" />
+							<button id="sbp2MIEBtnImport" oncommand="sbp2Manage.ieItemImport();" style="height:30px;" />
+							<button id="sbp2MIEBtnExport" oncommand="sbp2Manage.ieItemExport();" style="margin-top:20px; height:30px;" />
+							<spacer flex="1" />
+						</vbox>
+						<tree id="sbp2MIETree2"
+							  class="plain"
+							  contextmenu="sbp2MIEPopupR"
+							  datasources="rdf:null"
+							  ref="urn:scrapbook:root"
+							  flags="dont-build-content"
+							  flex="1"
+							  hidecolumnpicker="true"
+							  ondragover="sbp2MDragAndDropImpExp.ddOnDragOverImport(event);"
+							  ondragstart="sbp2MDragAndDropImpExp.ddOnDragStartImport(event);"
+							  ondrop="sbp2Manage.ieItemExport();"
+							  onkeypress=""
+							  seltype="multiple">
+							<treecols id="sbp2MIECols2">
+								<treecol id="sbp2MIEColTitle2"	label="&sbp2.data.tc.title;"	flex="4" class="sortDirectionIndicator" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title" />
+								<splitter class="tree-splitter" />
+								<treecol id="sbp2MIEColDate2"	label="&sbp2.data.tc.date;"		flex="1" class="sortDirectionIndicator" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#date" />
+								<splitter class="tree-splitter" />
+								<treecol id="sbp2MIEColFolder2"	label="&sbp2.data.tc.fld;"		flex="1" class="sortDirectionIndicator" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#folder"/>
+							</treecols>
+							<template>
+								<rule id="sbp2MIERule2">
+									<treechildren flex="1">
+										<treeitem uri="rdf:*">
+											<treerow>
+												<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title"
+														  src="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon"
+														  properties="Name title rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
+												<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#date" />
+												<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#folder" />
+											</treerow>
+										</treeitem>
+									</treechildren>
+								</rule>
+							</template>
+							<treechildren flex="1" />
+						</tree>
+					</hbox>
+				</vbox>
+			</tabpanel>
+			<tabpanel>
+				<vbox flex="1">
+					<toolbox class="plain">
+						<toolbar id="sbp2MTToolbar" class="plain">
+						</toolbar>
+					</toolbox>
+					<hbox flex="1">
+						<tree id="sbp2MTTree1"
+							  class="plain"
+							  contextmenu=""
+							  datasources="rdf:null"
+							  ref="urn:scrapbook:root"
+							  flags="dont-build-content"
+							  flex="1"
+							  hidecolumnpicker="true"
+							  ondragenter=""
+							  ondraggesture=""
+							  ondragover=""
+							  ondragstart=""
+							  ondragdrop=""
+							  ondrop=""
+							  onclick="sbp2Manage.tCheckButtons(1, 'sbp2MTTree1');"
+							  onkeypress=""
+							  seltype="multiple">
+							<treecols id="sbp2MTCols1">
+								<treecol id="sbp2MTColTitle1" hideheader="true" primary="true" flex="1" />
+							</treecols>
+							<template>
+								<rule id="sbp2MTRule1">
+									<treechildren flex="1">
+										<treeitem uri="rdf:*">
+											<treerow>
+												<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title"
+														  src="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon"
+														  properties="Name title rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
+											</treerow>
+										</treeitem>
+									</treechildren>
+								</rule>
+							</template>
+						</tree>
+						<vbox>
+							<spacer flex="1" />
+							<button id="sbp2MTBtnTagNew" disabled="true" tooltiptext="&sbp2.tag.tt.new;" oncommand="sbp2Tags.itemAdd('sbp2MTTree1',null);" style="height:30px;" />
+							<button id="sbp2MTBtnTagAdd" disabled="true" tooltiptext="&sbp2.tag.tt.tagadd;" oncommand="sbp2Tags.itemTagToItem();" style="margin-top:10px; height:30px;" />
+							<button id="sbp2MTBtnTagSub" disabled="true" tooltiptext="&sbp2.tag.tt.tagrem;" oncommand="sbp2Tags.itemRemoveFromEntriesManage();" style="margin-top:10px; height:30px;" />
+							<button id="sbp2MTBtnTagDel" disabled="true" tooltiptext="&sbp2.tag.tt.del;" oncommand="sbp2Tags.itemDelete('sbp2MTTree2');" style="margin-top:10px; height:30px;" />
+							<button id="sbp2MTBtnTagRen" disabled="true" tooltiptext="&sbp2.tag.tt.ren;" oncommand="sbp2Tags.itemRename('sbp2MTTree2');" style="margin-top:10px; height:30px;" />
+							<spacer flex="1" />
+						</vbox>
+						<tree id="sbp2MTTree2"
+							  class="plain"
+							  contextmenu=""
+							  datasources="rdf:null"
+							  ref="urn:scrapbook:tags"
+							  flags="dont-build-content"
+							  flex="1"
+							  hidecolumnpicker="true"
+							  onclick="sbp2Manage.tCheckButtons(2, 'sbp2MTTree2');"
+							  ondragover=""
+							  ondragstart=""
+							  ondrop=""
+							  onkeypress="sbp2Tags.onKeyPress(event, 'sbp2MTTree2');"
+							  seltype="multiple">
+							<treecols id="sbp2MT2Cols">
+								<treecol id="sbp2MT2ColTitle" hideheader="true" primary="true" flex="1" />
+							</treecols>
+							<template>
+								<rule id="sbp2MT2Rule">
+									<treechildren flex="1">
+										<treeitem uri="rdf:*">
+											<treerow>
+												<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title"
+														  src="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon"
+														  properties="Name title rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
+											</treerow>
+										</treeitem>
+									</treechildren>
+								</rule>
+							</template>
+						</tree>
+					</hbox>
+				</vbox>
+			</tabpanel>
+			<tabpanel>
+				<vbox flex="1">
+					<toolbox class="plain">
+						<toolbar id="sbp2MSToolbar" class="plain">
+							<toolbarbutton id="sbp2MSBtnRefresh"			label="&sbp2.stats.btn.ref;"	tooltiptext="&sbp2.stats.btn.ref.tt;"  oncommand="sbp2Manage.statsUpdate();" />
+							<toolbarbutton id="sbp2MSBtnRepair"				label="&sbp2.stats.btn.rep;"	tooltiptext="&sbp2.stats.btn.rep.tt;"  oncommand="sbp2Manage.statsRepair();" />
+						</toolbar>
+					</toolbox>
+					<tree id="sbp2MSTree"
+						  class="plain"
+						  contextmenu="sbp2MSPopup"
+						  flex="1"
+						  onkeypress=""
+						  seltype="multiple">
+						<treecols>
+							<treecol id="sbp2MSColTitle"	label="&sbp2.stats.tc.title;"		flex="2"	onclick="sbp2Manage.statsSort(this)" class="sortDirectionIndicator" />
+							<splitter class="tree-splitter" />
+							<treecol id="sbp2MSColSize"		label="&sbp2.stats.tc.size;"		flex="1"	onclick="sbp2Manage.statsSort(this)" class="sortDirectionIndicator" style="text-align: right" />
+							<splitter class="tree-splitter" />
+							<treecol id="sbp2MSColSizeB"	label="&sbp2.stats.tc.sizeb;"		flex="1"	onclick="sbp2Manage.statsSort(this)" class="sortDirectionIndicator" style="text-align: right" hidden="true" />
+							<splitter class="tree-splitter" />
+							<treecol id="sbp2MSColState"	label="&sbp2.stats.tc.diagnostics;"	flex="2"	onclick="sbp2Manage.statsSort(this)" class="sortDirectionIndicator" />
+						</treecols>
+						<treechildren />
+					</tree>
+				</vbox>
+			</tabpanel>
+			<tabpanel>
+				<vbox flex="1">
+					<toolbox class="plain">
+						<toolbar id="sbp2MMBToolbar" class="plain">
+							<toolbarbutton id="sbp2MMBBtnAdd"						image="chrome://scrapbookplus2/skin/manage_mbadd.png"        tooltiptext="&sbp2.multibook.btn.add;" oncommand="sbp2Manage.mbAdd();" />
+							<toolbarbutton id="sbp2MMBBtnEdit"		disabled="true" image="chrome://scrapbookplus2/skin/manage_mbedit_dis.png"   tooltiptext="&sbp2.multibook.btn.edit;" oncommand="sbp2Manage.mbEdit();" />
+							<toolbarbutton id="sbp2MMBBtnDel"		disabled="true" image="chrome://scrapbookplus2/skin/manage_mbdel_dis.png"    tooltiptext="&sbp2.multibook.btn.remove;" oncommand="sbp2Manage.mbDel();" />
+							<toolbarbutton id="sbp2MMBBtnSortUp"	disabled="true" image="chrome://scrapbookplus2/skin/manage_sortup_dis.png"   tooltiptext="&sbp2.multibook.btn.up;" oncommand="sbp2Manage.mbSort(0);" />
+							<toolbarbutton id="sbp2MMBBtnSortDown"	disabled="true" image="chrome://scrapbookplus2/skin/manage_sortdown_dis.png" tooltiptext="&sbp2.multibook.btn.down;" oncommand="sbp2Manage.mbSort(1);" />
+						</toolbar>
+					</toolbox>
+					<tree id="sbp2MMBTree"
+						  class="plain"
+						  flex="1"
+						  hidecolumnpicker="true"
+						  onclick="sbp2Manage.mbSelected();"
+						  onkeypress="sbp2Manage.mbOnKeyPress(event);"
+						  seltype="single">
+						<treecols>
+							<treecol id="sbp2MMBColTitle"	label="&sbp2.multibook.tc.title;"	flex="1" />
+							<splitter class="tree-splitter" />
+							<treecol id="sbp2MMBColFolder"	label="&sbp2.multibook.tc.fld;"		flex="2" />
+						</treecols>
+						<treechildren />
+					</tree>
+				</vbox>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+
+</window>
