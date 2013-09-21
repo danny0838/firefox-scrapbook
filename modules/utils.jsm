@@ -229,7 +229,9 @@ const ScrapBookUtils = {
 		uri.spec = aURLSpec;
 		var persist = Cc["@mozilla.org/embedding/browser/nsWebBrowserPersist;1"].
 		              createInstance(Ci.nsIWebBrowserPersist);
-		persist.saveURI(uri, null, null, null, null, aFile);
+		var privacyContext = this.getBrowserWindow().QueryInterface(Ci.nsIInterfaceRequestor).
+		                     getInterface(Ci.nsIWebNavigation).QueryInterface(Ci.nsILoadContext);
+		persist.saveURI(uri, null, null, null, null, aFile, privacyContext); 
 	},
 
 	convertToUnicode: function SBU_convertToUnicode(aString, aCharset) {
