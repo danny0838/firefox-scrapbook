@@ -7,7 +7,7 @@
 		<em:id>scrapbookplus@addons.mozilla.org</em:id>
 		<em:type>2</em:type>
 		<em:name>ScrapBook Plus</em:name>
-		<em:version>1.9.24.40b1</em:version>
+		<em:version>1.9.24.40b2</em:version>
 		<em:description>Helps you to save Web pages and organize the collection. This extension is a modification of ScrapBook by Gomita.</em:description>
 		<em:creator>haselnuss</em:creator>
 		<em:translator>ua_bz (ar)</em:translator>
@@ -39,7 +39,7 @@
 			<Description>
 				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
 				<em:minVersion>3.0</em:minVersion>
-				<em:maxVersion>22.*</em:maxVersion>
+				<em:maxVersion>25.*</em:maxVersion>
 			</Description>
 		</em:targetApplication>
 	</Description>

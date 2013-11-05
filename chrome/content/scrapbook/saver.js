@@ -15,7 +15,6 @@ var sbContentSaver = {
 	frameNumber  : 0,
 	selection    : null,
 	linkURLs     : [],
-	_fxVer3      : null,
 	_fxVer35     : null,
 	_fxVer18     : null,
 
@@ -33,11 +32,10 @@ var sbContentSaver = {
 
 	init : function(aPresetData)
 	{
-		if ( this._fxVer3 == null )
+		if ( this._fxVer35 == null )
 		{
 			var iAppInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
 			var iVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
-			this._fxVer3 = iVerComparator.compare(iAppInfo.version, "3.0")>=0;
 			this._fxVer35 = iVerComparator.compare(iAppInfo.version, "3.5")>=0;
 			this._fxVer18 = iVerComparator.compare(iAppInfo.version, "18.0")>=0;
 		}
@@ -70,24 +68,7 @@ var sbContentSaver = {
 		//Favicon der angezeigten Seite bestimmen (Unterscheidung zwischen FF2 und FF3 notwendig!)
 		if ( "gBrowser" in window && aRootWindow == gBrowser.contentWindow )
 		{
-			if ( this._fxVer3 )
-			{
-				//FF3+ gefunden
-				var faviconService = Components.classes["@mozilla.org/browser/favicon-service;1"].getService(Components.interfaces.nsIFaviconService);
-				var myURI = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
-				myURI.spec = aRootWindow.document.URL;
-				try
-				{
-					var myImage = faviconService.getFaviconForPage(myURI);
-					this.item.icon = myImage.spec;
-				} catch(ex)
-				{
-					this.item.icon = null;
-				}
-			} else
-			{
-				this.item.icon = gBrowser.mCurrentBrowser.mIconURL;
-			}
+			this.item.icon = gBrowser.mCurrentBrowser.mIconURL;
 		}
 		this.frameList = this.flattenFrames(aRootWindow);
 		var titles = aRootWindow.document.title ? [aRootWindow.document.title] : [this.item.source];
