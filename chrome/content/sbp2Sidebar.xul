@@ -30,40 +30,11 @@
 		<stringbundle id="sbp2TagString"    src="chrome://scrapbookplus2/locale/tag.properties" />
 	</stringbundleset>
 
-	<toolbox class="plain">
-		<toolbar id="sbp2SidebarMTB" class="plain">
-			<toolbarbutton id="sbp2SidebarBTools"	image="chrome://scrapbookplus2/skin/toolbar_foldernew.png" oncommand="sbp2Common.createItem('sbp2Tree', 'folder');"  tooltiptext="&sbp2.sidebar.new.tooltiptext;" type="menu-button">
-				<menupopup>
-					<menuitem label="&sbp2.sidebar.newseparator;"	oncommand="sbp2Common.createItem('sbp2Tree', 'separator');event.stopPropagation();" />
-					<menuitem label="&sbp2.sidebar.newnote;"		oncommand="sbp2Common.createItem('sbp2Tree', 'note');event.stopPropagation();" />
-				</menupopup>
-			</toolbarbutton>
-			<toolbarbutton id="sbp2SidebarBToggle"	image="chrome://scrapbookplus2/skin/toolbar_toggle.png" tooltiptext="&sbp2.sidebar.collapse;"	oncommand="sbp2TreeHandle.changeFolderState();" />
-			<toolbarbutton id="sbp2SidebarBManage"	image="chrome://scrapbookplus2/skin/toolbar_manage.png" tooltiptext="&sbp2.sidebar.manage;"		oncommand="window.openDialog('chrome://scrapbookplus2/content/sbp2Manage.xul', 'ScrapBookPlus:Manage', 'chrome,centerscreen,all,resizable,dialog=no', 'impexp');" />
-			<toolbarbutton id="sbp2SidebarBSwitch"	image="chrome://scrapbookplus2/skin/toolbar_multi.png"  tooltiptext="&sbp2.sidebar.multisb;" type="menu"	onpopupshowing="sbp2Manage.mbUpdatePopup();">
-				<menupopup id="sbp2SidebarBSwitchMPopup" oncommand="sbp2Common.loadScrapbook(event.originalTarget);">
-					<menuitem id="sbp2SidebarBSwitchMItem" type="radio" autocheck="false" hidden="true" />
-					<menuitem id="sbp2SidebarBSwitchMItemDefault" label="&sbp2.sidebar.profilefolder;" type="radio" autocheck="false" />
-					<menuseparator />
-					<menuitem id="sbp2SidebarBSwitchMItemManage" label="&sbp2.sidebar.manage;..." oncommand="window.openDialog('chrome://scrapbookplus2/content/sbp2Manage.xul', 'ScrapBookPlus:Manage', 'chrome,centerscreen,all,resizable,dialog=no','multibook');" />
-				</menupopup>
-			</toolbarbutton>
-			<spacer flex="1" />
-			<toolbarbutton type="menu" label="&sbp2.sidebar.tools;">
-				<menupopup id="">
-					<menuitem label="&sbp2.sidebar.tools.settings;"		oncommand="sbp2Common.openPrefWindow();" />
-					<menuseparator />
-					<menuitem label="&sbp2.sidebar.tools.sbpfopen;"		oncommand="sbp2Common.directoryShow();" />
-				</menupopup>
-			</toolbarbutton>
-		</toolbar>
-	</toolbox>
-
 	<popupset>
 		<menupopup id="sbp2SidebarPopup" onpopupshowing="sbp2TreeHandle.populatePopup('sbp2Tree', event);">
 			<menuitem id="sbp2Open"			label="&sbp2.sidebar.context.open;"			oncommand="sbp2TreeHandle.itemShow(document.getElementById('sbp2Tree'), false );" />
 			<menuitem id="sbp2OpenInTab"	label="&sbp2.sidebar.context.openintab;"	oncommand="sbp2TreeHandle.itemShow(document.getElementById('sbp2Tree'), true );" />
-			<menuitem id="sbp2OpenURL"		label="&sbp2.sidebar.context.opensrc;"		oncommand="" />
+			<menuitem id="sbp2OpenURL"		label="&sbp2.sidebar.context.opensrc;"		oncommand="sbp2Common.loadURL(sbp2DataSource.propertyGet(sbp2DataSource.dbData, document.getElementById('sbp2Tree').builderView.getResourceAtIndex(document.getElementById('sbp2Tree').currentIndex), 'source'), event.ctrlKey);" />
 			<menuseparator id="sbp2Separator1" />
 			<menuitem id="sbp2Update"		label="&sbp2.sidebar.context.update;"		oncommand="" />
 			<menuseparator id="sbp2Separator2" />
@@ -107,27 +78,55 @@
 		</menupopup>
 	</popupset>
 
-	<toolbox id="sbp2SidebarToolboxSearch">
-		<toolbar id="sbp2SidebarSTB" align="center">
-			<textbox id="sbp2SearchTextbox"
-					 autocompletesearch="form-history"
-					 autocompletesearchparam="sbp2SearchHistory"
-					 enablehistory="true"
-					 flex="1"
-					 ontextentered="sbp2Search.searchBegin();"
-					 tabscrolling="true"
-					 type="autocomplete"
-					 >
-					 <image id="sbp2SearchImage"
-					 onclick=""
-					 persist="searchtype"
-					 popup="sbp2SidebarPopupSearch"
-					 searchtype="fulltext"
-					 src="chrome://scrapbookplus2/skin/search_fulltext.png"
-					 />
-			</textbox>
+	<toolbox id="sbp2SidebarTBX" class="plain">
+		<toolbar id="sbp2SidebarMTB" class="plain">
+			<toolbarbutton id="sbp2SidebarBTools"	image="chrome://scrapbookplus2/skin/toolbar_foldernew.png" oncommand="sbp2Common.createItem('sbp2Tree', 'folder');"  tooltiptext="&sbp2.sidebar.new.tooltiptext;" type="menu-button">
+				<menupopup>
+					<menuitem label="&sbp2.sidebar.newseparator;"	oncommand="sbp2Common.createItem('sbp2Tree', 'separator');event.stopPropagation();" />
+					<menuitem label="&sbp2.sidebar.newnote;"		oncommand="sbp2Common.createItem('sbp2Tree', 'note');event.stopPropagation();" />
+				</menupopup>
+			</toolbarbutton>
+			<toolbarbutton id="sbp2SidebarBToggle"	image="chrome://scrapbookplus2/skin/toolbar_toggle.png" tooltiptext="&sbp2.sidebar.collapse;"	oncommand="sbp2TreeHandle.changeFolderState();" />
+			<toolbarbutton id="sbp2SidebarBManage"	image="chrome://scrapbookplus2/skin/toolbar_manage.png" tooltiptext="&sbp2.sidebar.manage;"		oncommand="window.openDialog('chrome://scrapbookplus2/content/sbp2Manage.xul', 'ScrapBookPlus:Manage', 'chrome,centerscreen,all,resizable,dialog=no', 'impexp');" />
+			<toolbarbutton id="sbp2SidebarBSwitch"	image="chrome://scrapbookplus2/skin/toolbar_multi.png"  tooltiptext="&sbp2.sidebar.multisb;" type="menu"	onpopupshowing="sbp2Manage.mbUpdatePopup();">
+				<menupopup id="sbp2SidebarBSwitchMPopup" oncommand="sbp2Common.loadScrapbook(event.originalTarget);">
+					<menuitem id="sbp2SidebarBSwitchMItem" type="radio" autocheck="false" hidden="true" />
+					<menuitem id="sbp2SidebarBSwitchMItemDefault" label="&sbp2.sidebar.profilefolder;" type="radio" autocheck="false" />
+					<menuseparator />
+					<menuitem id="sbp2SidebarBSwitchMItemManage" label="&sbp2.sidebar.manage;..." oncommand="window.openDialog('chrome://scrapbookplus2/content/sbp2Manage.xul', 'ScrapBookPlus:Manage', 'chrome,centerscreen,all,resizable,dialog=no','multibook');" />
+				</menupopup>
+			</toolbarbutton>
+			<spacer flex="1" />
+			<toolbarbutton type="menu" label="&sbp2.sidebar.tools;">
+				<menupopup id="">
+					<menuitem label="&sbp2.sidebar.tools.settings;"		oncommand="sbp2Common.openPrefWindow();" />
+					<menuseparator />
+					<menuitem label="&sbp2.sidebar.tools.sbpfopen;"		oncommand="sbp2Common.directoryShow();" />
+				</menupopup>
+			</toolbarbutton>
 		</toolbar>
 	</toolbox>
+
+	<hbox id="sbp2SidebarHboxSearch" align="center">
+		<textbox id="sbp2SearchTextbox"
+				 autocompletesearch="form-history"
+				 autocompletesearchparam="sbp2SearchHistory"
+				 enablehistory="true"
+				 flex="1"
+				 ontextentered="sbp2Search.searchBegin();"
+				 tabscrolling="true"
+				 type="autocomplete"
+				 >
+				 <image id="sbp2SearchImage"
+				 onclick=""
+				 persist="searchtype"
+				 popup="sbp2SidebarPopupSearch"
+				 searchtype="fulltext"
+				 src="chrome://scrapbookplus2/skin/search_fulltext.png"
+				 />
+		</textbox>
+	</hbox>
+
 	<hbox id="sbp2SidebarHeader" align="center" class="sbp2-search-header" hidden="true">
 		<label  flex="1" crop="end" />
 		<spacer flex="1" />
@@ -178,7 +177,7 @@
 		  onclick="sbp2TreeHandle.onClick(document.getElementById('sbp2Tree'),event);"
 		  ondragover="sbp2SDragAndDropObserver.doDragOver(event);"
 		  ondragstart="sbp2SDragAndDropObserver.doDragStart(event);"
-		  ondrop="sbp2SDragAndDropObserver.doDrop(event);"
+		  ondrop="sbp2SDragAndDropObserver.modifiersGet(event);"
 		  onkeypress="sbp2TreeHandle.onKeyPress(document.getElementById('sbp2Tree'),event);"
 		  ref="urn:scrapbook:root"
 		  seltype="single">

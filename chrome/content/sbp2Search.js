@@ -116,11 +116,16 @@ var sbp2Search = {
 
 	searchStartFulltext : function()
 	{
-		//
+		//Durchsuchen des Cache nach dem eingegebenen Suchbegriff
 		//
 		//Ablauf:
 		//1. Variablen initialisieren
 		//2. Prüfe, ob Cache aktualisiert werden muss und gegebenenfalls aktualisieren
+		//3. Alle Einträge aus searchcache.rdf in ssfResList speichern
+		//4. Suchbegriff zusammensetzen
+		//5. Eintraege nach Begriff durchsuchen
+		//6. Funde in einem seperatem Tree ausgeben
+		//8. Scope ändern
 
 		//1. Variablen initialisieren
 		this.ssSearchFound = [];
@@ -150,10 +155,10 @@ return;
 				sbp2SearchCache.cacheUpdate();
 			}
 		}
-		//3.
+		//3. Alle Einträge aus searchcache.rdf in ssfResList speichern
 		var ssfResList = [];
 		sbp2DataSource.containerGetAllItems(ssfDataSearchCache, sbp2Common.RDF.GetResource("urn:scrapbook:searchcache"), ssfResList, true);
-		//4.
+		//4. Suchbegriff zusammensetzen
 		var ssfParameters = "";
 		if ( !document.getElementById("sbp2SidebarPopupSearchOptionUC").getAttribute("checked") ) ssfParameters = "i";
 		var ssfRegExp = new RegExp(this.ssSearchString, ssfParameters);
@@ -167,7 +172,7 @@ return;
 				this.ssSearchFoundStartPos.push(ssfPos);
 			}
 		}
-		//4. Funde in einem seperatem Tree ausgeben
+		//6. Funde in einem seperatem Tree ausgeben
 		sbp2DataSource.initSearch();
 		sbp2DataSource.containerRemoveAllEntries(sbp2DataSource.dbDataSearch, "urn:scrapbook:search", true);
 		for ( var ssfI=0; ssfI<this.ssSearchFound.length; ssfI++ )
@@ -191,9 +196,9 @@ return;
 			sbp2DataSource.itemAddSearch(ssfRes.Value, ssfID+"#"+ssfSplit[1], ssfText, "cache", ssfSource, "");
 		}
 		sbp2DataSource.dsFlush(sbp2DataSource.dbDataSearch);
-		//6. Historie der Suchbegriffe aktualisieren
+		//7. Historie der Suchbegriffe aktualisieren
 //		this.FORM_HISTORY.addEntry("sbp2SearchHistory", this.ssSearchString);
-		//7. Scope ändern
+		//8. Scope ändern
 		var ssfTree = document.getElementById("sbp2Tree");
 			//alte RDF-Datenquelle vom tree entfernen
 		sbp2DataSource.dsRemoveFromTree(ssfTree);

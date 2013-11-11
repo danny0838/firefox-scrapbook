@@ -3,7 +3,22 @@ var sbp2Sidebar = {
 
 	init : function()
 	{
-		//wird beim Öffnen der Sidebar aufgerufen oder beim Wechseln des Scrapbooks
+		//Wird beim Öffnen der Sidebar aufgerufen.
+		//
+		//Ablauf:
+		//1. Hinzufügen eines Observer, damit Drag & Drop funktioniert
+		//2. Laden des zuletzt geöffneten ScrapBook
+
+		//1. Hinzufügen eines Observer, damit Drag & Drop funktioniert
+		var iTree = document.getElementById("sbp2Tree");
+		iTree.builderView.addObserver(sbp2SDragAndDropObserver.ddTreeBuilderObserver);
+		//2. Laden des zuletzt geöffneten ScrapBook
+		this.scrapbookLoad();
+	},
+
+	scrapbookLoad : function()
+	{
+		//Wird beim Öffnen der Sidebar aufgerufen oder beim Wechseln des Scrapbooks.
 		//
 		//Ablauf:
 		//1. SBP2-Verzeichnis im Profilordner anlegen, falls erforderlich
@@ -19,27 +34,23 @@ var sbp2Sidebar = {
 		//1. SBP2-Verzeichnis im Profilordner anlegen, falls erforderlich
 		var iProfilVZ = sbp2Common.PVZ.get("ProfD", Components.interfaces.nsIFile);
 		iProfilVZ.append("ScrapBookPlus2");
-		if ( !iProfilVZ.exists() )
-		{
+		if ( !iProfilVZ.exists() ) {
 			//Das Verzeichnis 'ScrapBookPlus2' muss angelegt werden
 			iProfilVZ.create(iProfilVZ.DIRECTORY_TYPE, parseInt("0700", 8));
 		}
 		//2. SBP2-Daten-Verzeichnis im Profilordner anlegen, falls erforderlich
 		iProfilVZ.append("data");
-		if ( !iProfilVZ.exists() )
-		{
+		if ( !iProfilVZ.exists() ) {
 			//Das Verzeichnis 'data' muss angelegt werden
 			iProfilVZ.create(iProfilVZ.DIRECTORY_TYPE, parseInt("0700", 8));
 		}
 		//3. SBP2-Grundeinstellungen setzen
 		var iDataFolder = sbp2Prefs.getUnicharPref("extensions.scrapbookplus2.data.path");
-		if ( iDataFolder == null )
-		{
+		if ( iDataFolder == null ) {
 			sbp2Prefs.setUnicharPref("extensions.scrapbookplus2.data.path", "");
 		}
 		var iTitle = sbp2Prefs.getUnicharPref("extensions.scrapbookplus2.data.title");
-		if ( iTitle == null )
-		{
+		if ( iTitle == null ) {
 			sbp2Prefs.setUnicharPref("extensions.scrapbookplus2.data.title", document.getElementById("sbp2CommonString").getString("PROFILEFOLDER"));
 		}
 		//5. SBP2-Datenquellen laden
@@ -67,8 +78,6 @@ var sbp2Sidebar = {
 		iTree.database.AddDataSource(sbp2DataSource.dbData);
 			//Der rebuild() ist notwendig, da sonst immer noch nichts angezeigt wird!
 		iTree.builder.rebuild();
-			//Der observer ist notwendig, damit die Einträge verschoben werden können
-		iTree.builderView.addObserver(sbp2SDragAndDropObserver.ddTreeBuilderObserver);
 		//10. Verknüpfen der Tag-Datenquelle mit dem Tree in der Sidebar
 		iTree = document.getElementById("sbp2TreeTag");
 		iTree.database.AddDataSource(sbp2DataSource.dbDataTag);
@@ -80,6 +89,7 @@ var sbp2Sidebar = {
 
 	showTitle : function()
 	{
+//Wird derzeit nur von sbp2Sidebar.scrapbookLoad() aufgerufen.
 		//Zeigt die Bezeichnung des geöffneten Archivs im Titel der Sidebar an
 		var stWin = "sbp2Overlay" in window.top ? window.top : window.opener.top;
 		var stTitle = sbp2Prefs.getUnicharPref("extensions.scrapbookplus2.data.title", "");

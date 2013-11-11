@@ -163,29 +163,30 @@ var sbp2SearchCache = {
 			if ( iaFile.exists() ) {
 				//Inhalt auslesen
 				var iaData = sbp2Common.fileRead(iaFile);
-				//Frames berücksichtigen
+				//Frames extrahieren
 				var iaFrames = iaData.match(/<frame( |\r|\n).*>/gi);
+				//Text aus HTML-Seiten extrahieren
+				var iaData = sbp2Common.convertToUnicode(iaData, sbp2DataSource.propertyGet(sbp2DataSource.dbData, iaRes, "chars"));
+				var iaDataAll = this.convertHTML2Text(iaData);
 				if ( iaFrames ) {
 					for ( var iaJ=0; iaJ<iaFrames.length; iaJ++ )
 					{
 						//Dateiname bestimmen
-						var iaFilename = iaFrames[iaJ].match(/src=\S+/i);
-						iaFilename[0] = iaFilename[0].replace(/"/g, "");
-						iaFilename[0] = iaFilename[0].replace(/src=/g, "");
-						//
+						var iaFilename = iaFrames[iaJ].match(/src=\S+"/i);
+						iaFilename = iaFilename[0].substring(5, iaFilename[0].length-1);
+						//Inhalt der Datei laden und nur den Text übernehmen
 						var iaFileFrame = iaDirectory.clone();
 						iaFileFrame.append(iaID);
 						iaFileFrame.append(iaFilename);
-						var iaContentFrame = sbp2Common.fileRead(iaFileFrame);
-						iaData += iaContentFrame;
+						iaData = sbp2Common.fileRead(iaFileFrame);
+						iaData = sbp2Common.convertToUnicode(iaData, sbp2DataSource.propertyGet(sbp2DataSource.dbData, iaRes, "chars"));
+						iaDataAll += this.convertHTML2Text(iaData);
 					}
 				}
-				//Inhalt aufbereiten
-				iaData = sbp2Common.convertToUnicode(iaData, sbp2DataSource.propertyGet(sbp2DataSource.dbData, iaRes, "chars"));
-				iaData = this.convertHTML2Text(iaData);
-				iaData = iaData.replace(/[\x00-\x1F\x7F]/g, " ").replace(/\s+/g, " ");	//<- ???
+				//Steuerzeichen entfernen
+				iaDataAll = iaDataAll.replace(/[\x00-\x1F\x7F]/g, " ").replace(/\s+/g, " ");	//<- ???
 				//Eintrag anlegen
-				sbp2DataSource.itemAddSearchCache(sbp2DataSource.dbDataSearchCache, iaID, iaFilenames[iaI], iaData);
+				sbp2DataSource.itemAddSearchCache(sbp2DataSource.dbDataSearchCache, iaID, iaFilenames[iaI], iaDataAll);
 			} else {
 alert("sbp2SearchCache.itemAdd\n---\nsb-file2url.txt contains an unknown file - "+iaFile.path+"\n");
 			}

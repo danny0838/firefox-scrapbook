@@ -126,8 +126,8 @@
 <!--splitter id="sbp2MIESplitter" hidden="false" /-->
 						<vbox>
 							<spacer flex="1" />
-							<button id="sbp2MIEBtnImport" oncommand="sbp2Manage.ieItemImport();" style="height:30px;" />
-							<button id="sbp2MIEBtnExport" oncommand="sbp2Manage.ieItemExport();" style="margin-top:20px; height:30px;" />
+							<button id="sbp2MIEBtnImport" image="chrome://scrapbookplus2/skin/manage_ieimp.png" oncommand="sbp2Manage.ieItemImport();" style="height:30px;" />
+							<button id="sbp2MIEBtnExport" image="chrome://scrapbookplus2/skin/manage_ieexp.png" oncommand="sbp2Manage.ieItemExport();" style="margin-top:20px; height:30px;" />
 							<spacer flex="1" />
 						</vbox>
 						<tree id="sbp2MIETree2"
@@ -213,11 +213,11 @@
 						</tree>
 						<vbox>
 							<spacer flex="1" />
-							<button id="sbp2MTBtnTagNew" disabled="true" tooltiptext="&sbp2.tag.tt.new;" oncommand="sbp2Tags.itemAdd('sbp2MTTree1',null);" style="height:30px;" />
-							<button id="sbp2MTBtnTagAdd" disabled="true" tooltiptext="&sbp2.tag.tt.tagadd;" oncommand="sbp2Tags.itemTagToItem();" style="margin-top:10px; height:30px;" />
-							<button id="sbp2MTBtnTagSub" disabled="true" tooltiptext="&sbp2.tag.tt.tagrem;" oncommand="sbp2Tags.itemRemoveFromEntriesManage();" style="margin-top:10px; height:30px;" />
-							<button id="sbp2MTBtnTagDel" disabled="true" tooltiptext="&sbp2.tag.tt.del;" oncommand="sbp2Tags.itemDelete('sbp2MTTree2');" style="margin-top:10px; height:30px;" />
-							<button id="sbp2MTBtnTagRen" disabled="true" tooltiptext="&sbp2.tag.tt.ren;" oncommand="sbp2Tags.itemRename('sbp2MTTree2');" style="margin-top:10px; height:30px;" />
+							<button id="sbp2MTBtnTagNew" disabled="true" image="chrome://scrapbookplus2/skin/manage_tagnew_dis.png" tooltiptext="&sbp2.tag.tt.new;" oncommand="sbp2Tags.itemAdd('sbp2MTTree1',null);" style="height:30px;" />
+							<button id="sbp2MTBtnTagAdd" disabled="true" image="chrome://scrapbookplus2/skin/manage_tagadd_dis.png" tooltiptext="&sbp2.tag.tt.tagadd;" oncommand="sbp2Tags.itemTagToItem();" style="margin-top:10px; height:30px;" />
+							<button id="sbp2MTBtnTagSub" disabled="true" image="chrome://scrapbookplus2/skin/manage_tagrem_dis.png" tooltiptext="&sbp2.tag.tt.tagrem;" oncommand="sbp2Tags.itemRemoveFromEntriesManage();" style="margin-top:10px; height:30px;" />
+							<button id="sbp2MTBtnTagDel" disabled="true" image="chrome://scrapbookplus2/skin/manage_tagdel_dis.png" tooltiptext="&sbp2.tag.tt.del;" oncommand="sbp2Tags.itemDelete('sbp2MTTree2');" style="margin-top:10px; height:30px;" />
+							<button id="sbp2MTBtnTagRen" disabled="true" image="chrome://scrapbookplus2/skin/manage_tagren_dis.png" tooltiptext="&sbp2.tag.tt.ren;" oncommand="sbp2Tags.itemRename('sbp2MTTree2');" style="margin-top:10px; height:30px;" />
 							<spacer flex="1" />
 						</vbox>
 						<tree id="sbp2MTTree2"

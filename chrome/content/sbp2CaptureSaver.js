@@ -1,10 +1,16 @@
 
+Components.utils.import("resource://gre/modules/PrivateBrowsingUtils.jsm");
+
+const STATE_STOP = Components.interfaces.nsIWebProgressListener.STATE_STOP;
+
 var sbp2CaptureSaver = {
 
 	//Die globale Definition dieser Variablen vereinfacht die Handhabung
+	scsItem				: { id: "", type: "", title: "", chars: "", icon: "", source: "", comment: "" },
+	scsPosition			: null,
+	scsResCont			: null,
+
 	scsDirectoryDst		: null,
-	scsFrameList		: [],
-	scsFrameListNr		: 0,
 	scsEmbeddedImages	: false,
 	scsEmbeddedScript	: false,
 	scsEmbeddedStyles	: false,
@@ -13,20 +19,34 @@ var sbp2CaptureSaver = {
 	scsLinkedCustom		: false,
 	scsLinkedImages		: false,
 	scsLinkedMovies		: false,
-	scsIcon				: null,
+	scsURL				: [],	//enthält für jedes Frame die baseURL
 
-	scsURL				: [],
-	scsURLHash			: {},
-	scsURLDownloadStatus: [],
-	scsURLFilename		: [],
+	scsStyleSheetFilename : [],	//enthält die Dateinamen der StyleSheets im Verzeichnis des Eintrags
+	scsStyleSheetRules	: [],	//enthält Platz für alle verfügbaren Regeln eines StyleSheets; mit Text vorhanden sind aber nur die tatsächlich genutzten Regeln
 
-	scsURLObj			: null,
+	scsWindowURLSource	: null,	//wird für PrivacyMode in downSaveFile benötigt
+
+	scsCaptureRunning	: 0,
+	scsDLProgress		: [0, 0],	//1. Zahl: fertig verarbeitete Dateien, 2. Zahl: Dateien insgesamt
+
+	scsDLAsyncProjectNr	: [],
+	scsDLAsyncURL		: [],
+	scsDLAsyncFilename	: [],
+	scsDLAsyncStatus	: [],
+
+	scsArrayURL			: [],	//enthält Dateiname
+	scsArrayURLHTML		: [],	//enthält Dateiname
+	scsArrayURLHTMLStyles	: [],	//Wert gibt an, wie viele Style-Blöcke in der aktuellen HTML-Seite schon bearbeitet worden sind
+	scsArrayURLHTMLNr	: 0,
+	scsHashURL			: {},	//enthält Dateiname
+	scsHashURLHTML		: {},	//enthält Dateiname
+	scsHashFilename		: {},	//enthält 0
 
 	scsFxVer18			: null,
 
 	buildURL : function(buURLPath, buString)
 	{
-//wird von sbp2CaptureSaver.downSaveFile aufgerufen
+//wird von this.downSaveFile aufgerufen
 		//Bestimmung, ob vollständige URI, absolute Pfadangabe oder relative Pfadangabe vorliegen.
 		//Die URI wird je nach Situation aufbereitet. An die aufrufende Funktion wird immer eine
 		//vollständige URI zurückgegeben.
@@ -49,7 +69,9 @@ var sbp2CaptureSaver = {
 		var buStart = buSplit[1].length;
 		var buEnd = buSplit[0].length-buSplit[2].length;
 		if ( buSplit[0].substring(buStart, buStart+1) == "'" ) buStart++;
+		if ( buSplit[0].substring(buStart, buStart+1) == "\"" ) buStart++;
 		if ( buSplit[0].substring(buEnd-1, buEnd) == "'" ) buEnd--;
+		if ( buSplit[0].substring(buEnd-1, buEnd) == "\"" ) buEnd--;
 		buSplit[0] = buSplit[0].substring(buStart, buEnd);
 		//3. Adresse vervollständigen
 //		buSplit[0] = buURLPath.resolve(buSplit[0]);
@@ -66,23 +88,19 @@ var sbp2CaptureSaver = {
 					buSplit[0] = buURLPath + buString;
 				}
 			} else {
-//alert("relative Pfadangabe");
 				//relative Pfadangabe gefunden
 				var buLevels = buSplit[0].split("\/");
 				var buHasDirectoryBack = 0;
 				var buHasDirectoryCurrent = false;
 				buSplit[0] = buURLPath + "\/" + buSplit[0];
 				if ( buLevels[0] == "\.\." ) {
-//alert("eventuell zurueck in buURLPath");
 					while ( buLevels[buHasDirectoryBack] == "\.\." ) {
 						buHasDirectoryBack++;
 					}
 				} else if ( buLevels[0] == "\." ) {
-//alert("Ausgang buURLPath");
 					buHasDirectoryCurrent = true;
 				}
 				if ( buHasDirectoryBack>0 ) {
-//alert("zurueck in buURLPath - anpassen Path");
 					//buURLPath muss verkürzt werden
 					var buURLPathSplit = buURLPath.split("\/");
 					var buNr = buURLPathSplit.length - buHasDirectoryBack;
@@ -100,7 +118,6 @@ var sbp2CaptureSaver = {
 					buNr = buHasDirectoryBack;
 				}
 				//
-//alert(buURLPath+"\n---\n"+buLevels+"\n---\n"+buNr);
 				for ( var buI=buNr; buI<buLevels.length; buI++ )
 				{
 					buURLPath = buURLPath + "\/" + buLevels[buI];
@@ -109,41 +126,70 @@ var sbp2CaptureSaver = {
 			}
 		}
 		//4.
-//alert(buSplit);
 		return buSplit;
 	},
 
-	capture : function(cRootWindow, cFilename, cNewID, ctOptions)
+	capture : function(cRootWindow, cFilename, cOptions)
 	{
 //wird von sbp2Common.captureTab aufgerufen
 		//Archiviert den Inhalt des selektierten Tab (cRootWindow)
 		//
 		//Ablauf:
+		//0. Funktion verlassen, falls schon eine Archivierung läuft
 		//1. Variablen initialisieren
 		//2. Liste mit Frames erstellen
-		//3. Inhalte archivieren
-		//4. Falls in Schritt 3 kein Icon gefunden wurde, wird jetzt versucht, eines zu bestimmen
-		//5. Dateiname vom Icon zurück an aufrufende Funktion
+		//3. Seiteninhalt archivieren
+		//4. URL der Seite merken, damit diese in sbp2-url2filename.txt ohne zusätzliche Arbeiten abgelegt werden kann
+		//5. CSS-Seiten schreiben, falls dies gewünscht ist
+		//6. Falls in Schritt 3 kein Icon gefunden wurde, wird jetzt versucht, eines zu bestimmen
+		//7. erstellen von sbp2-html2filename.txt und sbp2.url2filename.txt
+		//8. Ende Verarbeitung erreicht
 
+		//0. Funktion verlassen, falls schon eine Archivierung läuft
+		if ( this.scsCaptureRunning == 1 ) return null;
 		//1. Variablen initialisieren
-		this.scsFrameList = [];
-		this.scsFrameListNr = 0;
-		this.scsEmbeddedImages = ctOptions.embeddedImages;
-		this.scsEmbeddedScript = ctOptions.embeddedScript;
-		this.scsEmbeddedStyles = ctOptions.embeddedStyles;
-		this.scsLinkedArchives = ctOptions.linkedArchives;
-		this.scsLinkedAudio = ctOptions.linkedAudio;
-		this.scsLinkedCustom = ctOptions.linkedCustom;
-		this.scsLinkedImages = ctOptions.linkedImages;
-		this.scsLinkedMovies = ctOptions.linkedMovies;
-		this.scsIcon = null;
+		this.scsItem.id = cOptions.id;
+		this.scsItem.type = cOptions.type;
+		this.scsItem.title = cOptions.title;
+		this.scsItem.chars = cOptions.charset;
+		this.scsItem.icon = cOptions.icon;
+		this.scsItem.source = cOptions.source;
+		this.scsItem.comment = cOptions.comment;
+		this.scsPosition = cOptions.position;
+		this.scsResCont = cOptions.resCont;
+
+		this.scsWindowURLSource = cRootWindow;
+
+		this.scsCaptureRunning = 1;
+		this.scsArrayURL = [];
+		this.scsArrayURLHTML = [];
+		this.scsArrayURLHTMLStyles = [];
+		this.scsArrayURLHTMLNr = 0;
+		this.scsEmbeddedImages = cOptions.embeddedImages;
+		this.scsEmbeddedScript = cOptions.embeddedScript;
+		this.scsEmbeddedStyles = cOptions.embeddedStyles;
+		this.scsLinkedArchives = cOptions.linkedArchives;
+		this.scsLinkedAudio = cOptions.linkedAudio;
+		this.scsLinkedCustom = cOptions.linkedCustom;
+		this.scsLinkedImages = cOptions.linkedImages;
+		this.scsLinkedMovies = cOptions.linkedMovies;
 		this.scsURL = [];
-		this.scsURLHash = {};
-		this.scsURLDownloadStatus= [];
-		this.scsURLFilename = [];
+		this.scsHashURL = {};
+		this.scsHashURLHTML = {};
+		this.scsHashFilename = {};
+		this.scsStyleSheetFilename = [];
+		this.scsStyleSheetRules = [];
+
+		this.scsDLProgress[0] = 0;
+		this.scsDLProgress[1] = 0;
+		this.scsDLAsyncProjectNr = [];
+		this.scsDLAsyncURL = [];
+		this.scsDLAsyncFilename = [];
+		this.scsDLAsyncStatus = [];
+
 		this.scsDirectoryDst = sbp2Common.getBuchVZ();
 		this.scsDirectoryDst.append("data");
-		this.scsDirectoryDst.append(cNewID);
+		this.scsDirectoryDst.append(cOptions.id);
 		if ( this.scsFxVer18 == null )
 		{
 			var cAppInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
@@ -151,12 +197,42 @@ var sbp2CaptureSaver = {
 			this.scsFxVer18 = cVerComparator.compare(cAppInfo.version, "18.0")>=0;
 		}
 		//2. Liste mit Frames erstellen
-		this.scsFrameList = sbp2Common.getFrameList(cRootWindow);
-		//3. Inhalte archivieren
+		this.scsArrayURLHTML = sbp2Common.getFrameList(cRootWindow);
+		for ( var cI=0; cI<this.scsArrayURLHTML.length; cI++ )
+		{
+			this.scsArrayURLHTMLStyles.push(1);
+		}
+		this.scsDLProgress[1] = this.scsArrayURLHTML.length;
+		//3. Seiteninhalt archivieren
 		this.saveDocumentInternal(cRootWindow.document, cFilename);
-		//4. Falls in Schritt 3 kein Icon gefunden wurde, wird jetzt versucht, eines zu bestimmen
+		//4. URL der Seite merken, damit diese in sbp2-url2filename.txt ohne zusätzliche Arbeiten abgelegt werden kann
+		this.scsHashURLHTML[cRootWindow.location.href] = cFilename;
+		//5. CSS-Seiten schreiben, falls dies gewünscht ist
+		if ( this.scsEmbeddedStyles ) {
+			var cData = "";
+			for ( var cI=0; cI<this.scsStyleSheetFilename.length; cI++ )
+			{
+				if ( this.scsStyleSheetFilename[cI].length > 0 ) {
+					cData = "";
+					//genutzte Rules zusammenstellen
+					for ( var cJ=0; cJ<this.scsStyleSheetRules[cI].length; cJ++ )
+					{
+						if ( this.scsStyleSheetRules[cI][cJ].length > 0 ) {
+							cData = cData + "\n" + this.scsStyleSheetRules[cI][cJ] + "\n";
+						}
+					}
+					//Datei erstellen, falls Daten vorhanden sind
+					if ( cData.length>0 ) {
+						var cFileDst = this.scsDirectoryDst.clone();
+						cFileDst.append(this.scsStyleSheetFilename[cI]);
+						sbp2Common.fileWrite(cFileDst, cData, "UTF-8");
+					}
+				}
+			}
+		}
+		//6. Falls in Schritt 3 kein Icon gefunden wurde, wird jetzt versucht, eines zu bestimmen
 		//(nsIFaviconService funktioniert nicht, wenn Firefox im Private Modus läuft. Daher dieser Weg.)
-		if ( this.scsIcon == null ) {
+		if ( this.scsItem.icon == null ) {
 			var cMainWindow = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
 							  .getInterface(Components.interfaces.nsIWebNavigation)
 							  .QueryInterface(Components.interfaces.nsIDocShellTreeItem)
@@ -165,18 +241,51 @@ var sbp2CaptureSaver = {
 							  .getInterface(Components.interfaces.nsIDOMWindow);
 			var cURL = cMainWindow.gBrowser.selectedTab.getAttribute("image");
 			if ( cURL != "" ) {
-				this.scsIcon = this.downSaveFile(cMainWindow.gBrowser.selectedTab.getAttribute("image"), true);
+				this.scsItem.icon = this.downSaveFile(cMainWindow.gBrowser.selectedTab.getAttribute("image"), false);
 			} else {
-				this.scsIcon = "";
+				this.scsItem.icon = "";
 			}
 		}
-		//5. Dateiname vom Icon zurück an aufrufende Funktion
-		return this.scsIcon;
+		//7. erstellen von sbp2-html2filename.txt und sbp2.url2filename.txt
+		//(stellt ein Abbild des Hash dar und wird für this.captureAddWebsite verwendet)
+		var cData = "";
+		var cFile = sbp2CaptureSaver.scsDirectoryDst.clone();
+		cFile.append("sbp2-html2filename.txt");
+		for ( var u in this.scsHashURLHTML ) cData += u + "\t" + this.scsHashURLHTML[u] + "\n";
+		sbp2Common.fileWrite(cFile, cData, "UTF-8");
+		cData = "";
+		cFile = sbp2CaptureSaver.scsDirectoryDst.clone();
+		cFile.append("sbp2-url2filename.txt");
+		for ( var u in this.scsHashURL ) cData += u + "\t" + this.scsHashURL[u] + "\n";
+		sbp2Common.fileWrite(cFile, cData, "UTF-8");
+		//8. Ende Verarbeitung erreicht
+		this.captureCompleteCheck();
+	},
+
+	captureAddWebsite : function(cawRootWindow, cawFilename, cawNewID, cawOptions)
+	{
+alert("sbp2CaptureSaver.captureAddWebsite - Out of order.");
+	},
+
+	captureCompleteCheck : function()
+	{
+		//Hier wird geprüft, ob alle zu speichernden Dateien schon auf der Platte liegen. (HTML und asynchrone Downloads)
+		//
+		//Ablauf:
+		//1. Anzahl abgeschlossener Downloads um 1 erhöhen
+		//2. Prüfen, ob alle Arbeiten abgeschlossen sind -> sbp2Common.captureTabFinish aufrufen
+
+		//1. Anzahl abgeschlossener Downloads um 1 erhöhen
+		this.scsDLProgress[0]++;
+		//2. Prüfen, ob alle Arbeiten abgeschlossen sind -> sbp2Common.captureTabFinish aufrufen
+		if ( this.scsDLProgress[0] == this.scsDLProgress[1] ) {
+			sbp2Common.captureTabFinish(this.scsItem, this.scsResCont, this.scsPosition);
+		}
 	},
 
 	convertURLToObject : function(cutoURLString)
 	{
-//wird momentan von this.saveDocumentInternal aufgerufen
+//wird von this.inspectNode aufgerufen
 		var cutoURL = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURI);
 		cutoURL.spec = cutoURLString;
 		return cutoURL;
@@ -184,21 +293,21 @@ var sbp2CaptureSaver = {
 
 	saveDocumentInternal : function(sdiDocument, sdiFilename)
 	{
-//wird momentan von this.capture und this.inspectNode aufgerufen
+//wird von this.capture und this.inspectNode aufgerufen
 		//Erstellt eine Kopie der Seite im Speicher und modifiziert den Inhalt der Kopie so, dass die Seite lokal abrufbar ist, ohne Daten aus dem Internet nachladen zu müssen.
 		//Stylesheets werden normalerweise übernommen, JavaScript-Code entfernt. Beides ist über den "Capture As"-Dialog auch steuerbar.
 		//
 		//Ablauf:
 		//1. Variablen initialisieren
 		//2. Kopie der geladenen Seite im Speicher erstellen
-		//3. Verweise anpassen
+		//3. Inhalt prüfen und gegebenenfalls anpassen
 		//4. HTML-Code zusammenstellen
-		//5. Schreiben der finalen Datei
+		//5. HTML-Code in Datei ablegen
 
 		//1. Variablen initialisieren
-		var sdiHTML			= "";
-		var sdiNodeList		= [];
-		this.scsURLObj		= this.convertURLToObject(sdiDocument.URL);
+		var sdiHTML = "";
+		var sdiNodeList = [];
+		this.scsURL.push(sdiDocument.URL);
 		//2. Kopie der geladenen Seite im Speicher erstellen
 		sdiNodeList.unshift(sdiDocument.body.cloneNode(true));			//Sinn unklar!
 		var sdiRootNode = sdiDocument.getElementsByTagName("html")[0].cloneNode(false);
@@ -207,12 +316,12 @@ var sbp2CaptureSaver = {
 		sdiRootNode.appendChild(sdiDocument.createTextNode("\n"));
 		sdiRootNode.appendChild(sdiNodeList[0]);
 		sdiRootNode.appendChild(sdiDocument.createTextNode("\n"));
-		//3. Verweise anpassen
+		//3. Inhalt prüfen und gegebenenfalls anpassen
 		this.processDOMRecursively(sdiRootNode, sdiFilename);
 		//4. HTML-Code zusammenstellen
 		var sdiHTML = this.addHTMLTag(sdiRootNode, sdiRootNode.innerHTML);
 		if ( sdiDocument.doctype ) sdiHTML = this.addHTMLDocType(sdiDocument.doctype) + sdiHTML;
-		//5. Schreiben der finalen Datei
+		//5. HTML-Code in Datei ablegen
 		var sdiFileDst = this.scsDirectoryDst.clone();
 		sdiFileDst.append(sdiFilename);
 		sbp2Common.fileWrite(sdiFileDst, sdiHTML, sdiDocument.characterSet);
@@ -220,7 +329,7 @@ var sbp2CaptureSaver = {
 
 	processDOMRecursively : function(pdrRootNode, pdrFilename)
 	{
-//wird momentan nur von this.saveDocumentInternal aufgerufen
+//wird von this.saveDocumentInternal aufgerufen
 		for ( var pdrCurNode=pdrRootNode.firstChild; pdrCurNode!=null; pdrCurNode=pdrCurNode.nextSibling )
 		{
 			if ( pdrCurNode.nodeName == "#text" || pdrCurNode.nodeName == "#comment" ) continue;
@@ -231,16 +340,16 @@ var sbp2CaptureSaver = {
 
 	fileGetExtension : function(fgeFileString)
 	{
-//wird momentan nur von this.fileGetExtension aufgerufen
+//wird von this.inspectNode und this.url2filestring aufgerufen
 		var fgePos = fgeFileString.lastIndexOf(".");
-		var fgeReturnCode = null;
+		var fgeReturnCode = "";
 		if ( fgePos > -1 ) fgeReturnCode = fgeFileString.substring(fgePos+1,fgeFileString.length);
 		return fgeReturnCode;
 	},
 
 	inspectNode : function(inCurNode, inFilename)
 	{
-//wird momentan nur von this.processDOMRecursively aufgerufen
+//wird von this.processDOMRecursively aufgerufen
 		switch ( inCurNode.nodeName.toUpperCase() )
 		{
 			case "A":
@@ -249,9 +358,9 @@ var sbp2CaptureSaver = {
 				if ( inCurNode.getAttribute("href").charAt(0) == "#" ) break;
 				if ( inCurNode.hasAttribute("style") ) {
 					if ( this.scsEmbeddedStyles ) {
-//alert("a style - "+inCurNode);
+//Hier fehlt noch Code
+alert("a style - "+inCurNode);
 					} else {
-//						return this.removeNodeFromParent(inCurNode);
 						inCurNode = this.removeNodeFromParent(inCurNode);
 					}
 				}
@@ -266,12 +375,15 @@ var sbp2CaptureSaver = {
 						case "zip" : case "lzh"  : case "rar" : case "jar" : case "xpi"  : inDownload = this.scsLinkedArchives; break;
 					}
 					if ( inDownload ) {
-						var inFileDst = this.downSaveFile(inCurNode.href, false);
+						var inFileDst = this.downSaveFile(inCurNode.href);
 						inCurNode.setAttribute("href", inFileDst);
 					}
 				} else {
 					inCurNode.setAttribute("href", inCurNode.href);
 				}
+				break;
+			case "BASE":
+alert("BASE found. Contact the developer.");
 				break;
 			case "FORM":
 /*
@@ -282,59 +394,63 @@ var sbp2CaptureSaver = {
 					alert("sbp2CaptureSaver.inspectNode\n---\n\nURL is incomplete -- "+inCurNode.action+". Contact the developer.");
 				}
 */
-		try {
-			var aBaseURL = this.scsURLObj.spec;
-			var aRelURL = inCurNode.action;
-			var baseURLObj = this.convertURLToObject(aBaseURL);
-			//" entfernen aus aRelURL
-			aRelURL = aRelURL.replace(/\"/g, "");
-			inCurNode.setAttribute("action", baseURLObj.resolve(aRelURL));
-		} catch(ex) {
-			dump("*** ScrapBook Plus ERROR: Failed to resolve URL: " + aBaseURL + "\t" + aRelURL + "\n");
-		}
+				try {
+					var inURLBase = this.scsURL[this.scsArrayURLHTMLNr];
+					var inURLObj = this.convertURLToObject(inURLBase);
+					var inURLRel = inCurNode.action;
+					//" entfernen aus inURLRel
+					inURLRel = inURLRel.replace(/\"/g, "");
+					inCurNode.setAttribute("action", inURLObj.resolve(inURLRel));
+				} catch(ex) {
+					dump("sbp2CaptureSaver.inspectNode\n---\nFailed to resolve URL: " + inURLBase + "\t" + inURLRel + "\n");
+				}
 				break;
 			case "FRAME":
 			case "IFRAME":
 				var inFileString = this.url2filestring(inCurNode.src);
-				this.scsFrameListNr++;
-				this.saveDocumentInternal(this.scsFrameList[this.scsFrameListNr].document, inFileString);
+				this.scsArrayURLHTMLNr++;
+				this.saveDocumentInternal(this.scsArrayURLHTML[this.scsArrayURLHTMLNr].document, inFileString);
+				this.scsHashURLHTML[this.scsArrayURLHTML[this.scsArrayURLHTMLNr].document.location.href] = inFileString;
 				inCurNode.src = inFileString;
+				this.scsDLProgress[0]++;
 				break;
 			case "IMG":
 				//Bild herunterladen oder ganz entfernen
 				if ( this.scsEmbeddedImages ) {
-					var inURL = inCurNode.src;
-					var inFileDst = this.downSaveImage(inURL);
+					var inFileDst = this.downSaveFile(inCurNode.src);
 					if ( inFileDst ) {
 						inCurNode.setAttribute("src", inFileDst);
 					} else {
-						inCurNode.setAttribute("src", inURL);
+						inCurNode.setAttribute("src", inCurNode.src);
 					}
 				} else {
 //					return this.removeNodeFromParent(inCurNode);
 					inCurNode = this.removeNodeFromParent(inCurNode);
 				}
 				break;
+			case "INPUT" : 
+				if ( inCurNode.type.toLowerCase() ) {
+					inCurNode.setAttribute("value", inCurNode.value);
+				}
+				break;
 			case "LINK":
 				if ( inCurNode.rel.toLowerCase() == "stylesheet" ) {
 					if ( this.scsEmbeddedStyles ) {
-						var inURL = inCurNode.href;
-						var inFileDst = this.downSaveFile(inURL, true);
+						var inFileDst = this.inspectStyleSheet(inCurNode, 2);
 						if ( inFileDst ) {
 							inCurNode.setAttribute("href", inFileDst);
 						} else {
-							inCurNode.setAttribute("href", inURL);
+							inCurNode.setAttribute("href", inCurNode.href);
 						}
 					} else {
 //						return this.removeNodeFromParent(inCurNode);
 						inCurNode = this.removeNodeFromParent(inCurNode);
 					}
 				} else if ( inCurNode.rel.toLowerCase() == "shortcut icon" ) {
-					var inURL = inCurNode.href;
-					var inFileDst = this.downSaveFile(inURL);
+					var inFileDst = this.downSaveFile(inCurNode.href);
 					if ( inFileDst ) {
 						inCurNode.setAttribute("href", inFileDst);
-						this.scsIcon = inFileDst;
+						this.scsItem.icon = inFileDst;
 					} else {
 						inCurNode.setAttribute("href", inCurNode.href);
 					}
@@ -352,218 +468,221 @@ var sbp2CaptureSaver = {
 				break;
 			case "STYLE":
 				if ( this.scsEmbeddedStyles ) {
-//alert("style");
+					this.inspectStyleSheet(inCurNode, 1);
 				} else {
 //					return this.removeNodeFromParent(inCurNode);
 					inCurNode = this.removeNodeFromParent(inCurNode);
 				}
 				break;
 			default:
-				dump(inCurNode.nodeName+"\n");
+//				dump(inCurNode.nodeName+"\n");
 				break;
 		}
 		return inCurNode;
 	},
 
-	downSaveFile : function(dsfURLSpec, dsfIsStyleSheet)
+	inspectStyleSheet : function(issNode, issMode)
 	{
-		//Läd das Dokument hinter dsfURLSpec herunter und speichert es unverändert nach dsfDirectory als dsfFileString
+//wird von this.inspectNode aufgerufen
+		//Erstellt eine Zeichenkette, die die tatsächlich genutzten cssRules enthält.
+		//Die Überprüfung erfolgt mit querySelector.
+		//Ist issNode ein style-tag aus der Website, wird issNode.cssText aktualisiert.
+		//Ist issNode ein link-tag aus der Website, wird eine lokale Datei erzeugt.
 		//
 		//Ablauf:
 		//1. Variablen initialisieren
-		//2. dsfURLPath bestimmen
-		//3. Falls URL bekannt ist, vorhandene Informationen prüfen und passenden Dateinamen zurück an aufrufende Funktion geben
-		//4. Dateiinhalt herunterladen
-		//5. Datei schreiben
-		//6. Dateiname an aufrufende Funktion zurückgeben
+		//2. StyleSheet-Nummer suchen
+		//3. nur Regeln übernehmen, die auch in Verwendung sind
+		//4. verlinkte Dateien suchen und herunterladen
+		//5. issNode.cssText aktualisieren oder issNode.href schreiben
+		//
+		//		issMode = 1		=> eingebettete Styles
+		//		issMode = 2		=> externes StyleSheet
+
+		//1. Variablen initialisieren
+		var issDocument = issNode.ownerDocument;
+		var issStyleSheet = null;
+		var issStyleSheetNr = 0;
+		var issStyleSheetANr = -1;
+		//2. StyleSheet-Nummer suchen
+		if ( issMode == 1 ) {
+			//passende Listen-Nummer suchen
+			var issI=0;
+			issStyleSheetNr = -1;
+			while ( issI < this.scsArrayURLHTMLStyles[this.scsArrayURLHTMLNr] )
+			{
+				issStyleSheetNr++;
+				if ( issDocument.styleSheets[issStyleSheetNr].href == null ) {
+					issI++;
+				}
+			}
+			//Dateiname bestimmen
+			this.scsStyleSheetFilename.push("");
+			issStyleSheetANr = this.scsStyleSheetFilename.length-1;
+			//Platzhalter für Regeln des aktuellen StyleSheet in this.scsStyleSheetRules erstellen
+			var issRules = [];
+			for ( var issI=0; issI<issDocument.styleSheets[issStyleSheetNr].cssRules.length; issI++ )
+			{
+				issRules[issI] = "";
+			}
+			this.scsStyleSheetRules.push(issRules);
+			//vermerken, dass ein Style-Block in der aktuellen HTML-Seite bearbeitet worden ist
+			this.scsArrayURLHTMLStyles[this.scsArrayURLHTMLNr]++;
+		} else {
+			//passende Listen-Nummer suchen
+			while ( issDocument.styleSheets[issStyleSheetNr].href != issNode.href )
+			{
+				issStyleSheetNr++;
+			}
+			//Dateiname bestimmen, falls das StyleSheet zuvor noch nicht bearbeitet worden ist.
+			if ( this.scsHashURL[issNode.href] ) {
+				for ( var issI=0; issI<this.scsStyleSheetFilename.length; issI++ )
+				{
+					if ( this.scsHashURL[issNode.href] == this.scsStyleSheetFilename[issI] ) {
+						issStyleSheetANr = issI;
+						issI = this.scsStyleSheetFilename.length;
+					}
+				}
+			} else {
+				var issFileString = this.url2filestring(issNode.href);
+				this.scsStyleSheetFilename.push(issFileString);
+				issStyleSheetANr = this.scsStyleSheetFilename.length-1;
+				//Platzhalter für Regeln des aktuellen StyleSheet in this.scsStyleSheetRules erstellen
+				var issRules = [];
+				for ( var issI=0; issI<issDocument.styleSheets[issStyleSheetNr].cssRules.length; issI++ )
+				{
+					issRules[issI] = "";
+				}
+				this.scsStyleSheetRules.push(issRules);
+			}
+		}
+		//5. nur Regeln übernehmen, die auch in Verwendung sind
+		for ( var issI=0; issI<issDocument.styleSheets[issStyleSheetNr].cssRules.length; issI++ ) {
+			if ( issDocument.styleSheets[issStyleSheetNr].cssRules[0].type == 1 ) {
+				if ( issDocument.querySelector(issDocument.styleSheets[issStyleSheetNr].cssRules[issI].selectorText) ) {
+					//5.1 Regel übernehmen
+					this.scsStyleSheetRules[issStyleSheetANr][issI] = issDocument.styleSheets[issStyleSheetNr].cssRules[issI].selectorText + " { " +
+																	  issDocument.styleSheets[issStyleSheetNr].cssRules[issI].style.cssText + " }";
+					//5.2 Regel nach verlinkter Datei durchsuchen und diese herunterladen
+					var issLinks = this.scsStyleSheetRules[issStyleSheetANr][issI].match(/url\(.*?\)/gi);
+					if ( issLinks ) {
+						var issURLPath = this.scsURL[this.scsArrayURLHTMLNr].substring(0, this.scsURL[this.scsArrayURLHTMLNr].lastIndexOf("\/"));
+						//doppelte Links und chrome://... entfernen
+						var issHash = {};
+						for ( var issJ=0; issJ<issLinks.length; issJ++ )
+						{
+							issHash[issLinks[issJ]] = 0;
+						}
+						issLinks = [];
+						for ( var issItem in issHash )
+						{
+							if ( issItem.indexOf("chrome:\/\/") > -1 ) continue;
+							issLinks.push(issItem);
+						}
+						//alle verbliebenen Links durcharbeiten
+						for ( var issJ=0; issJ<issLinks.length; issJ++ )
+						{
+							var issURLImage = issLinks[issJ];
+							var issSplit = this.buildURL(issURLPath, issURLImage);
+							var issFile = this.downSaveFile(issSplit[0]);
+							//Gefundenes Tag im Code austauschen
+							if ( issFile != "" ) {
+								this.scsHashURL[issURLPath] = issFile;
+								issURLImage = issURLImage.replace(/\(/g, "\\(");
+								issURLImage = issURLImage.replace(/\)/g, "\\)");
+								issURLImage = issURLImage.replace(/\?/g, "\\?");
+								var issSearchterm = new RegExp(issURLImage, "g");
+								this.scsStyleSheetRules[issStyleSheetANr][issI] = this.scsStyleSheetRules[issStyleSheetANr][issI].replace(issSearchterm,issSplit[1]+issFile+issSplit[2]);
+							}
+						}
+					}
+				}
+			} else {
+				//Alle Regeln abgesehen vom Typ STYLE_RULE werden unbesehen übernommen
+				this.scsStyleSheetRules[issStyleSheetANr][issI] = issDocument.styleSheets[issStyleSheetNr].cssRules[issI].cssText;
+			}
+		}
+		//7. issNode.cssText aktualisieren oder Dateiname zurückgeben
+		if ( issMode == 1 ) {
+			//issNode.cssText aktualisieren
+			var cssData = "";
+			for ( var issI=0; issI<this.scsStyleSheetRules[issStyleSheetANr].length; issI++ )
+			{
+				if ( this.scsStyleSheetRules[issStyleSheetANr][issI].length>0 ) {
+					cssData = cssData + "\n" + this.scsStyleSheetRules[issStyleSheetANr][issI];
+				}
+			}
+			issNode.innerHTML = cssData + "\n";
+		} else {
+			//5.3 Daten in Speicher aufnehmen
+			this.scsArrayURL.push(issNode.href);
+			this.scsHashURL[issNode.href] = this.scsStyleSheetFilename[issStyleSheetANr];
+			//Dateiname zurückgeben
+			return this.scsStyleSheetFilename[issStyleSheetANr];
+		}
+	},
+
+	downSaveFile : function(dsfURLSpec)
+	{
+//wird von this.capture und inspectNode
+		//Läd das Dokument hinter dsfURLSpec herunter und speichert es unverändert nach this.scsDirectoryDs als dsfFileString.
+		//
+		//Ablauf:
+		//1. Prüfen, ob Datei schon heruntergeladen wird
+		//2. Variablen initialisieren/anpassen
+		//3. lokalen Dateinamen bestimmen
+		//4. Datei herunterladen
+		//5. wichtige Informationen im globalen Speicherbereich merken
+		//6. Dateiname zurück an aufrufende Funktion
 
 if ( !dsfURLSpec ) {
 	alert("sbp2CaptureSaver.downSaveFile\n---\ndsfURLSpec nicht angegeben.");
 	return;
 }
-		//1. Variablen initialisieren
-		var dsfData = "";
-		var dsfFileString = "";
-		var dsfURLPath = "";
-		//2. dsfURLPath bestimmen (eventuell werden nicht alle Fälle abgedeckt, ist aber schneller als die alte Version)
-		var dsfLastPosition = dsfURLSpec.lastIndexOf("\/");
-		dsfURLPath = dsfURLSpec.substring(0,dsfLastPosition);
-		//3. Falls URL bekannt ist, vorhandene Informationen prüfen und passenden Dateinamen zurück an aufrufende Funktion geben
-		if ( this.scsURLHash[dsfURLSpec] ) {
-			switch ( this.scsURLDownloadStatus[this.scsURLHash[dsfURLSpec]] )
-			{
-				case -1:
-					//Datei konnte nicht heruntergeladen werden -> Originaladresse muss eingetragen werden im Code
-					return "";
-					break;
-				case 0:
-					alert("sbp2CaptureSaver.downSaveFile\n---\nungültiger Wert für scsURLDownloadStatus - 0");
-					break;
-				case 1:
-					//Datei konnte heruntergeladen werden -> Dateiname ist schon bekannt und kann eingetragen werden im Code
-					return this.scsURLFilename[this.scsURLHash[dsfURLSpec]];
-					break;
-				default:
-					alert("sbp2CaptureSaver.downSaveFile\n---\nungültiger Wert für scsURLDownloadStatus - "+this.scsURLDownloadStatus[this.scsURLHash[dsfURLSpec]]);
-					break;
-			}
+		//1. Prüfen, ob Datei schon heruntergeladen wird
+		if ( this.scsHashURL[dsfURLSpec] ) {
+			//Datei wurde schon heruntergeladen -> Dateiname zurückgeben
+			return this.scsHashURL[dsfURLSpec];
 		}
-		//4. Dateiinhalt herunterladen
-		var dsfStatus = 1;
-		//4.2 Daten vom Server holen
-		//4.2.1 Verbindung zum Server aufbauen
-		var dsfioserv = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService);
-		var dsfChannel = dsfioserv.newChannel(dsfURLSpec, 0, null);
-		var dsfStream = null;
-		try {
-			dsfStream = dsfChannel.open();
-		} catch(dsfEx) {
-dump("sbp2CaptureSaver.downSaveFile\n---\n"+dsfURLSpec+" konnte nicht geoeffnet werden.");
-			dsfStatus = -1;
-		}
-		//4.2.2 Serverantwort überprüfen
-		if ( dsfStatus == 1 ) {
-			if ( dsfChannel instanceof Components.interfaces.nsIHttpChannel ) {
-				try {
-					if ( dsfChannel.responseStatus != 200 ) return "";
-				} catch(dsfEx) {
-					dsfStatus = -1;
+		//2. Variablen initialisieren/anpassen
+		this.scsDLProgress[1]++;
+		//3. lokalen Dateinamen bestimmen
+		var dsfFileString = this.url2filestring(dsfURLSpec);
+		//4. Datei herunterladen
+		var dsfFile = this.scsDirectoryDst.clone();
+		dsfFile.append(dsfFileString);
+		var dsfURIObj = sbp2Common.IO.newURI(dsfURLSpec, null, null);
+		var dsfWBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);;
+		dsfWBP.progressListener = {
+			onProgressChange : function(aWebProgress, aRequest, aCurSelfProgress, aMaxSelfProgress, aCurTotalProgress, aMaxTotalProgress) {
+//				var dsfPercentComplete = Math.round((aCurTotalProgress / aMaxTotalProgress) * 100);
+			},
+			onStateChange : function(aWebProgress, aRequest, aStateFlags, aStatus) {
+//				if ( aStateFlags & STATE_START ) {
+//					// This fires when the load event is initiated
+//					alert("start");
+//				} else if ( aStateFlags & STATE_STOP ) {
+				if ( aStateFlags & STATE_STOP ) {
+					// This fires when the load finishes
+					sbp2CaptureSaver.captureCompleteCheck();
 				}
 			}
 		}
-		//4.2.3 Daten in Speicher holen
-		if ( dsfStatus == 1 ) {
-			//4.2.3.1 Daten laden
-			var dsfBStream = Components.classes["@mozilla.org/binaryinputstream;1"].createInstance(Components.interfaces.nsIBinaryInputStream);
-			dsfBStream.setInputStream(dsfStream);
-			var dsfSize = 0;
-//Syntax so korrekt = anstatt == ???
-			while ( dsfSize = dsfBStream.available() )
-			{
-				dsfData += dsfBStream.readBytes(dsfSize);
-			}
-			//4.2.3.2 Der Inhalt eines StyleSheet muß geprüft werden auf verlinkte Dateien (i.d.R. Bilder)
-			if ( dsfIsStyleSheet ) {
-				//verlinkte Dateien suchen
-				var dsfLinks = dsfData.match(/url\(.*?\)/gi);
-				if ( dsfLinks ) {
-					//doppelte Links und chrome://... entfernen
-					var dsfHash = {};
-					for ( var dsfI=0; dsfI<dsfLinks.length; dsfI++ )
-					{
-						dsfHash[dsfLinks[dsfI]] = 0;
-					}
-					dsfLinks = [];
-					for ( var dsfItem in dsfHash )
-					{
-						if ( dsfItem.indexOf("chrome:\/\/") > -1 ) continue;
-						dsfLinks.push(dsfItem);
-					}
-					//alle verbliebenen Links durcharbeiten
-					for ( var dsfI=0; dsfI<dsfLinks.length; dsfI++ )
-					{
-						var dsfURLImage = dsfLinks[dsfI];
-						var dsfSplit = this.buildURL(dsfURLPath, dsfURLImage);
-						var dsfFile = this.downSaveFile(dsfSplit[0]);
-						//Gefundenes Tag im Code austauschen
-						if ( dsfFile != "" ) {
-							dsfURLImage = dsfURLImage.replace(/\(/g, "\\(");
-							dsfURLImage = dsfURLImage.replace(/\)/g, "\\)");
-							dsfURLImage = dsfURLImage.replace(/\?/g, "\\?");
-							var dsfSearchterm = new RegExp(dsfURLImage, "g");
-							dsfData = dsfData.replace(dsfSearchterm,dsfSplit[1]+dsfFile+dsfSplit[2]);
-						}
-					}
-				}
-			}
-			//5. Datei schreiben
-			//5.1 lokalen Dateinamen bestimmen
-			dsfFileString = this.url2filestring(dsfURLSpec);
-			//5.2 neue Datei auf den Datenträger schreiben
-			var dsfDirectory = this.scsDirectoryDst.clone();
-			dsfDirectory.append(dsfFileString);
-			var dsffoStream = Components.classes["@mozilla.org/network/file-output-stream;1"].createInstance(Components.interfaces.nsIFileOutputStream);
-			dsffoStream.init(dsfDirectory, 0x02 | 0x08 | 0x20, parseInt("0666", 8), 0);
-			dsffoStream.write(dsfData, dsfData.length);
-			dsffoStream.close();
-			//5.3 Daten in Speicher aufnehmen
-			var dsfArrayPos = sbp2CaptureSaver.scsURL.length;
-			sbp2CaptureSaver.scsURL.push(dsfURLSpec);
-			sbp2CaptureSaver.scsURLFilename.push(dsfFileString);
-			sbp2CaptureSaver.scsURLDownloadStatus.push(1);
-			sbp2CaptureSaver.scsURLHash[dsfURLSpec] = dsfArrayPos;
-		}
-		//6. Dateiname an aufrufende Funktion zurückgeben
-		return dsfFileString;
-	},
-
-	downSaveImage : function(dsiURLSpec)
-	{
-		//Ablauf:
-		//1. Falls URL bekannt ist, vorhandene Informationen prüfen und passenden Dateinamen zurück an aufrufende Funktion geben
-		//2. Falls URL noch unbekannt ist, Bild herunterladen
-		//3. Dateiname des Bildes zurück an aufrufende Funktion geben
-
-		//1. Falls URL bekannt ist, vorhandene Informationen prüfen und passenden Dateinamen zurück an aufrufende Funktion geben
-		if ( this.scsURLHash[dsiURLSpec] ) {
-			switch ( this.scsURLDownloadStatus[this.scsURLHash[dsiURLSpec]] ) {
-				case -1:
-					//Datei konnte nicht heruntergeladen werden -> Originaladresse muss eingetragen werden im Code
-					return "";
-					break;
-				case 0:
-					alert("sbp2CaptureSaver.downSaveImage\n---\nungültiger Wert für scsURLDownloadStatus - 0");
-					break;
-				case 1:
-					//Datei konnte heruntergeladen werden -> Dateiname ist schon bekannt und kann eingetragen werden in Code
-					return this.scsURLFilename[this.scsURLHash[dsiURLSpec]];
-					break;
-				default:
-					alert("sbp2CaptureSaver.downSaveImage\n---\nungültiger Wert für scsURLDownloadStatus - "+this.scsURLDownloadStatus[this.scsURLHash[dsiURLSpec]]);
-					break;
-			}
-		}
-		//2. Falls URL noch unbekannt ist, Bild herunterladen
-		var dsiURL = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
-		try {
-			dsiURL.spec = dsiURLSpec;
-		} catch(ex) {
-			alert("sbp2CaptureSaver.downSaveImage\n---\nBild konnte nicht heruntergeladen werden "+dsiURLSpec);
-			return "";
-		}
-		var dsiFileString = this.url2filestring(dsiURLSpec);
-		var dsiFile = this.scsDirectoryDst.clone();
-		dsiFile.append(dsiFileString);
-		if ( dsiURL.schemeIs("http") || dsiURL.schemeIs("https") || dsiURL.schemeIs("ftp") ) {
-			try {
-				//Bild herunterladen
-				var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
-				WBP.persistFlags |= WBP.PERSIST_FLAGS_FROM_CACHE;
-				WBP.persistFlags |= WBP.PERSIST_FLAGS_AUTODETECT_APPLY_CONVERSION;
-				if ( this.scsFxVer18 ) {
-					WBP.saveURI(dsiURL, null, null, null, null, dsiFile, null);
-				} else {
-					WBP.saveURI(dsiURL, null, null, null, null, dsiFile);
-				}
-				//Daten in Speicher aufnehmen
-				var dsiArrayPos = sbp2CaptureSaver.scsURL.length;
-				sbp2CaptureSaver.scsURL.push(dsiURLSpec);
-				sbp2CaptureSaver.scsURLFilename.push(dsiFileString);
-				sbp2CaptureSaver.scsURLDownloadStatus.push(1);
-				sbp2CaptureSaver.scsURLHash[dsiURLSpec] = dsiArrayPos;
-			} catch(dsiEx) {
-				alert(dsiEx);
-			}
+		if ( this.scsFxVer18 ) {
+			var dsfPrivacy = PrivateBrowsingUtils.privacyContextFromWindow(this.scsWindowURLSource);
+			dsfWBP.saveURI(dsfURIObj, null, null, null, "", dsfFile, dsfPrivacy);
 		} else {
-			alert("sbp2CaptureSaver.downSaveImage\n---\nunbekannter URL-Typ - "+dsiURLSpec);
+			dsfWBP.saveURI(dsfURIObj, null, null, null, "", dsfFile);
 		}
-		//3. Dateiname des Bildes zurück an aufrufende Funktion geben
-		return dsiFileString;
+		//5. wichtige Informationen im globalen Speicherbereich merken
+		this.scsHashURL[dsfURLSpec] = dsfFileString;
+		//6. Dateiname zurück an aufrufende Funktion
+		return dsfFileString;
 	},
 
 	addHTMLDocType : function(ahdtDocType)
 	{
-//wird nur von this.capture aufgerufen
+//wird von this.capture aufgerufen
 		//Erstellt eine Zeile mit Angaben zum Dokumenttyp
 		var ahdtLine = "<!DOCTYPE " + ahdtDocType.name.toUpperCase();
 		if ( ahdtDocType.publicId ) ahdtLine += " PUBLIC \"" + ahdtDocType.publicId + "\"";
@@ -574,7 +693,7 @@ dump("sbp2CaptureSaver.downSaveFile\n---\n"+dsfURLSpec+" konnte nicht geoeffnet 
 
 	addHTMLTag : function(ahtNode, ahtContent)
 	{
-//wird nur von this.capture aufgerufen
+//wird von this.capture aufgerufen
 		//Fügt das HTML-Tag ein und ergänzt dabei zusätzliche Attribute, falls vorhanden
 		var ahtTag = "<" + ahtNode.nodeName.toLowerCase();
 		for ( var ahtI=0; ahtI<ahtNode.attributes.length; ahtI++ )
@@ -587,7 +706,7 @@ dump("sbp2CaptureSaver.downSaveFile\n---\n"+dsfURLSpec+" konnte nicht geoeffnet 
 
 	removeNodeFromParent : function(rnfpNode)
 	{
-//wird nur von this.inspectNode aufgerufen
+//wird von this.inspectNode aufgerufen
 		//Ersetzt die Node rnfpNode durch "nichts"
 		var rnfpNodeNew = rnfpNode.ownerDocument.createTextNode("");
 		rnfpNode.parentNode.replaceChild(rnfpNodeNew, rnfpNode);
@@ -597,40 +716,17 @@ dump("sbp2CaptureSaver.downSaveFile\n---\n"+dsfURLSpec+" konnte nicht geoeffnet 
 
 	url2filestring : function(u2fFileString)
 	{
-//wird momentan nur von this.downSaveFile, this.downSaveImage und this.inspectNode aufgerufen
+//wird von this.downSaveFile, this.inspectNode und this.inspectStyleSheet aufgerufen
 		//Bestimmt anhand der übergebenen Adresse einen sinnvollen Dateinamen und gibt diesen an die aufrufende Funktion zurück.
 		//
 		//Ablauf:
 		//1. Variablen initialisieren
 		//2. Zeichenkette nach dem letzten / bestimmen
 		//3. Zeichenkette vor dem ersten ? bestimmen
-		//4. Dateinamen an aufrufende Funktion zurückliefern
-/*
-		u2fFileString = u2fFileString.substring(u2fFileString.lastIndexOf("/")+1, u2fFileString.length);
-		if ( u2fFileString.substring(u2fFileString.length-1, u2fFileString.length).match(/\//) )
-			u2fFileString = u2fFileString.substring(0, u2fFileString.length-1);
-		if ( u2fFileString.search(/\?/)>0 ) {
-			u2fFileString = u2fFileString.substring(0, u2fFileString.search(/\?/));
-		} else if ( u2fFileString.search(/\?/)==0 ) {
-			u2fFileString = u2fFileString.substring(1, u2fFileString.length);
-		}
-		u2fFileString = u2fFileString.replace(/:/g, "-");
-		u2fFileString = u2fFileString.replace(/%20/g, " ");
-		var u2fFileStringSplit = u2fFileString.split(".");
-		var u2fCount = 0;
-		var u2fExtension = "";
-		var u2fContinue = 1;
-		//Warnung wegen ungültiger Referenz lässt sich so umgehen
-		while ( u2fContinue==1 )
-		{
-			if ( sbpCapture.scFilenameHash[u2fFileString]==undefined ) {
-				u2fContinue = 0;
-			} else {
-				u2fCount++;
-				u2fFileString = u2fFileStringSplit[0]+"_"+u2fCount+"."+u2fFileStringSplit[1];
-			}
-		}
-*/
+		//4. Nächster gültiger Dateiname suchen
+		//5. Dateiname in Hash aufnehmen
+		//6. Dateinamen an aufrufende Funktion zurückliefern
+
 		//1. Variablen initialisieren
 		var u2fPos = -2;
 		//2. Zeichenkette nach dem letzten / bestimmen
@@ -640,7 +736,26 @@ dump("sbp2CaptureSaver.downSaveFile\n---\n"+dsfURLSpec+" konnte nicht geoeffnet 
 		if ( u2fPos > -1 ) {
 			u2fFileString = u2fFileString.substring(0, u2fPos);
 		}
-		//4. Dateinamen an aufrufende Funktion zurückliefern
+		//4. Nächster gültiger Dateiname suchen
+		if ( this.scsHashFilename[u2fFileString] != undefined ) {
+			if ( this.scsHashFilename[u2fFileString] == 0 ) {
+				var u2fCounter = 0;
+				var u2fExtension = this.fileGetExtension(u2fFileString);
+				var u2fName = u2fFileString.substring(0, u2fFileString.length-u2fExtension.length-1);
+				while ( this.scsHashFilename[u2fFileString] == 0 )
+				{
+					u2fCounter++;
+					if ( u2fCounter>10) {
+						u2fFileString = u2fName+"_0"+u2fCounter+"."+u2fExtension;
+					} else {
+						u2fFileString = u2fName+"_0"+u2fCounter+"."+u2fExtension;
+					}
+				}
+			}
+		}
+		//5. Dateiname in Hash aufnehmen
+		this.scsHashFilename[u2fFileString] = 0;
+		//6. Dateinamen an aufrufende Funktion zurückliefern
 		return u2fFileString;
 	},
 

@@ -235,18 +235,23 @@ var sbp2Manage = {
 		this.dbData.Assert(ieiaNewRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#" + "title"),   sbp2Common.RDF.GetLiteral(ieiaItem.title), true);
 		this.dbData.Assert(ieiaNewRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#" + "chars"),   sbp2Common.RDF.GetLiteral(ieiaItem.chars), true);
 		this.dbData.Assert(ieiaNewRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#" + "comment"), sbp2Common.RDF.GetLiteral(ieiaItem.comment), true);
-		if ( ieiaItem.icon != "" &&
-			 ieiaItem.icon.indexOf("file:\/\/\/") != 0 ) {
-			var ieiaTemp = "file:///"+ieiaFolder.path.replace(/\\/g, "\/");
-			if ( ieiaTemp.lastIndexOf("\/") != ieiaTemp.length-1 ) ieiaTemp += "/";
-			ieiaItem.icon = ieiaTemp + ieiaItem.icon;
+		if ( ieiaItem.isZip == 1 ) {
+			this.dbData.Assert(ieiaNewRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#" + "icon"),    sbp2Common.RDF.GetLiteral(""), true);
+		} else {
+			if ( ieiaItem.icon != "" &&
+				 ieiaItem.icon.indexOf("file:\/\/\/") != 0 ) {
+				var ieiaTemp = "file:///"+ieiaFolder.path.replace(/\\/g, "\/");
+				if ( ieiaTemp.lastIndexOf("\/") != ieiaTemp.length-1 ) ieiaTemp += "/";
+				ieiaItem.icon = ieiaTemp + ieiaItem.icon;
+			}
+			this.dbData.Assert(ieiaNewRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#" + "icon"),    sbp2Common.RDF.GetLiteral(ieiaItem.icon), true);
 		}
-		this.dbData.Assert(ieiaNewRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#" + "icon"),    sbp2Common.RDF.GetLiteral(ieiaItem.icon), true);
 		this.dbData.Assert(ieiaNewRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#" + "source"),  sbp2Common.RDF.GetLiteral(ieiaItem.source), true);
 		this.dbData.Assert(ieiaNewRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#" + "date"),    sbp2Common.RDF.GetLiteral((new Date(ieiaFolder.lastModifiedTime)).toLocaleString()), true);
 		this.dbData.Assert(ieiaNewRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#" + "folder"),  sbp2Common.RDF.GetLiteral(ieiaItem.folder.replace(/\t/g, "\/")), true);
 		this.dbData.Assert(ieiaNewRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#" + "localfld"), sbp2Common.RDF.GetLiteral(ieiaFolder.path), true);
 		this.dbData.Assert(ieiaNewRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#" + "isZip"),   sbp2Common.RDF.GetLiteral(ieiaItem.isZip), true);
+		this.dbData.Assert(ieiaNewRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#" + "localicon"), sbp2Common.RDF.GetLiteral(ieiaItem.icon), true);
 		ieiaCont.AppendElement(ieiaNewRes);
 	},
 
@@ -371,21 +376,21 @@ var sbp2Manage = {
 		{
 			//3.1 Titel bestimmen
 			var iieRes = iieResList[iieI];
-			var iieTitel = sbp2DataSource.propertyGet(sbp2DataSource.dbData, iieRes, "title");
+			var iieFilename = sbp2DataSource.propertyGet(sbp2DataSource.dbData, iieRes, "title");
+			var iieFileextension = ".zip";
 			//3.2 Name der ZIP-Datei anhand des Titels festlegen
 			var iieZIPFile = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
 			iieZIPFile.initWithPath(this.ieExportDir);
-			iieTitel = iieTitel.replace(/\"/g, "'");		//ungültiges Zeichen für Verzeichnisse ersetzen
-			iieTitel = iieTitel.replace(/\|/g, "");			//ungültiges Zeichen für Verzeichnisse ersetzen
-			iieTitel = iieTitel + ".zip";
-			iieZIPFile.append(iieTitel);
-			var iieZaehler = 0;
+			iieFilename = iieFilename.replace(/\"/g, "'");		//ungültiges Zeichen für Verzeichnisse ersetzen
+			iieFilename = iieFilename.replace(/\|/g, "");		//ungültiges Zeichen für Verzeichnisse ersetzen
+			iieZIPFile.append(iieFilename+iieFileextension);
+			var iieCounter = 0;
 			while ( iieZIPFile.exists() )
 			{
-				iieZaehler++;
+				iieCounter++;
 				iieZIPFile = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
 				iieZIPFile.initWithPath(this.ieExportDir);
-				iieZIPFile.append(iieTitel+"-"+iieZaehler);
+				iieZIPFile.append(iieFilename+"-"+iieCounter+iieFileextension);
 			}
 //			iieZielDir.create(iieZielDir.DIRECTORY_TYPE, parseInt("0700", 8));
 /*
@@ -491,7 +496,7 @@ var sbp2Manage = {
 			//3.6 Eintrag einfügen
 			var iieContRoot = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
 			iieContRoot.Init(this.dbData, iieResRoot);
-			this.ieItemAdd(iieContRoot.GetCount(), iieItem, iieContRoot, iieZielDir);
+			this.ieItemAdd(iieContRoot.GetCount(), iieItem, iieContRoot, iieZIPFile);
 			iieZTree.builder.rebuild();
 		}
 	},
@@ -561,6 +566,7 @@ var sbp2Manage = {
 				//4. neue ID bestimmen (es wird die alte verwendet, falls dies möglich ist)
 				var iiiResNew = sbp2Common.RDF.GetResource("urn:scrapbook:item" + iiiDir);
 				if ( sbp2DataSource.propertyGet(sbp2DataSource.dbData, iiiResNew, "id") != "" ) {
+//Übersetzung fehlt.
 					alert("Schon benutzt! Eintrag wird nicht importiert.");
 				} else {
 					//5. Daten für Eintrag und index.dat sammeln
@@ -569,9 +575,9 @@ var sbp2Manage = {
 					iiiItem.type	= sbp2DataSource.propertyGet(this.dbData, iiiRes, "type");
 					iiiItem.title	= sbp2DataSource.propertyGet(this.dbData, iiiRes, "title");
 					iiiItem.chars	= sbp2DataSource.propertyGet(this.dbData, iiiRes, "chars");
-					var iiiTemp	= sbp2DataSource.propertyGet(this.dbData, iiiRes, "icon");
-					if ( iiiTemp.match(/^file:\/\/\//) ) iiiTemp = iiiTemp.substring(iiiTemp.lastIndexOf("/"), iiiTemp.length);
 					iiiItem.comment = sbp2DataSource.propertyGet(this.dbData, iiiRes, "comment");
+					var iiiTemp	= sbp2DataSource.propertyGet(this.dbData, iiiRes, "localicon");
+					if ( iiiTemp.match(/^file:\/\/\//) ) iiiTemp = iiiTemp.substring(iiiTemp.lastIndexOf("/"), iiiTemp.length);
 					iiiItem.icon	= iiiTemp;
 					iiiItem.source	= sbp2DataSource.propertyGet(this.dbData, iiiRes, "source");
 					//6. Dateien kopieren, sofern kein "bookmark" importiert werden soll
@@ -730,7 +736,6 @@ var sbp2Manage = {
 							ierItem[keyVal.shift()] = keyVal.join("\t");
 						}
 					}
-					ierItem.icon = "";
 				} else {
 					continue;
 				}
@@ -1031,6 +1036,30 @@ var sbp2Manage = {
 		document.getElementById("sbp2MTBtnTagSub").disabled = !( this.tLSelectedOK && this.tRSelectedOK );
 		document.getElementById("sbp2MTBtnTagDel").disabled = !this.tRSelectedOK;
 		document.getElementById("sbp2MTBtnTagRen").disabled = !this.tRSelectedOne;
+		if ( this.tLSelectedOK ) {
+			document.getElementById("sbp2MTBtnTagNew").image = "chrome://scrapbookplus2/skin/manage_tagnew.png";
+			if ( this.tRSelectedOK ) {
+				document.getElementById("sbp2MTBtnTagDel").image = "chrome://scrapbookplus2/skin/manage_tagadd.png";
+				document.getElementById("sbp2MTBtnTagDel").image = "chrome://scrapbookplus2/skin/manage_tagrem.png";
+			} else {
+				document.getElementById("sbp2MTBtnTagDel").image = "chrome://scrapbookplus2/skin/manage_tagadd_dis.png";
+				document.getElementById("sbp2MTBtnTagDel").image = "chrome://scrapbookplus2/skin/manage_tagrem_dis.png";
+			}
+		} else {
+			document.getElementById("sbp2MTBtnTagNew").image = "chrome://scrapbookplus2/skin/manage_tagnew_dis.png";
+			document.getElementById("sbp2MTBtnTagAdd").image = "chrome://scrapbookplus2/skin/manage_tagadd_dis.png";
+			document.getElementById("sbp2MTBtnTagSub").image = "chrome://scrapbookplus2/skin/manage_tagrem_dis.png";
+		}
+		if ( this.tRSelectedOK ) {
+			document.getElementById("sbp2MTBtnTagDel").image = "chrome://scrapbookplus2/skin/manage_tagdel.png";
+		} else {
+			document.getElementById("sbp2MTBtnTagDel").image = "chrome://scrapbookplus2/skin/manage_tagdel_dis.png";
+		}
+		if ( this.tRSelectedOne ) {
+			document.getElementById("sbp2MTBtnTagRen").image = "chrome://scrapbookplus2/skin/manage_tagren.png";
+		} else {
+			document.getElementById("sbp2MTBtnTagRen").image = "chrome://scrapbookplus2/skin/manage_tagren_dis.png";
+		}
 	},
 
 	manageSort : function()

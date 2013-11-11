@@ -36,15 +36,15 @@ var sbp2Overlay = {
 			heElement("sbp2ContextMenu2").hidden = !heSelected;							//Auswahl archivieren als...
 			heElement("sbp2ContextMenu3").hidden = heLink || heSelected;				//Seite archivieren
 			heElement("sbp2ContextMenu4").hidden = heLink || heSelected;				//Seite archivieren als...
-			heElement("sbp2ContextMenu5").hidden = heLink || !heFrame;					//Frame archivieren
-			heElement("sbp2ContextMenu6").hidden = heLink || !heFrame;					//Frame archivieren als...
-			heElement("sbp2ContextMenu7").hidden = !heLink;								//Link archivieren
-			heElement("sbp2ContextMenu8").hidden = !heLink;								//Link archivieren als...
-			heElement("sbp2ContextMenu10").hidden = heLink || heSelected;				//Lesezeichen
-			heElement("sbp2ContextMenu11").hidden = heLink || !heFrame;					//Lesezeichen für Frame
-			heElement("sbp2ContextMenu12").hidden = !heLink || heSelected;				//Lesezeichen für Link
-			heElement("sbp2ContextMenu13").hidden = heLink || heSelected || !heFrame;	//Screengrab Frame
-			heElement("sbp2ContextMenu14").hidden = heLink || heSelected || heFrame;	//Screengrab Page
+			heElement("sbp2ContextMenu6").hidden = heLink || !heFrame;					//Frame archivieren
+			heElement("sbp2ContextMenu7").hidden = heLink || !heFrame;					//Frame archivieren als...
+			heElement("sbp2ContextMenu8").hidden = !heLink;								//Link archivieren
+			heElement("sbp2ContextMenu9").hidden = !heLink;								//Link archivieren als...
+			heElement("sbp2ContextMenu11").hidden = heLink || heSelected;				//Lesezeichen
+			heElement("sbp2ContextMenu12").hidden = heLink || !heFrame;					//Lesezeichen für Frame
+			heElement("sbp2ContextMenu13").hidden = !heLink || heSelected;				//Lesezeichen für Link
+			heElement("sbp2ContextMenu14").hidden = heLink || heSelected || !heFrame;	//Screengrab Frame
+			heElement("sbp2ContextMenu15").hidden = heLink || heSelected || heFrame;	//Screengrab Page
 			//"Link zu Projekt hinzufügen" nur dann einblenden, wenn es Sinn macht
 //			if ( heLink ) {
 //				var heBool = false;
@@ -61,12 +61,12 @@ var sbp2Overlay = {
 //					//Link gehört schon eines Eintrags an, daher Eintrag ausblenden
 //					heBool = true;
 //				}
-//				heElement("sbp2ContextMenu9").hidden = heBool;
+//				heElement("sbp2ContextMenu10").hidden = heBool;
 //			} else {
-//				heElement("sbp2ContextMenu9").hidden = true;
+//				heElement("sbp2ContextMenu10").hidden = true;
 //			}
 //Zeile ersetzt momentan den Code für die 19 Zeilen darüber
-heElement("sbp2ContextMenu9").hidden = true;
+heElement("sbp2ContextMenu10").hidden = true;
 		}
 	},
 
@@ -83,7 +83,7 @@ heElement("sbp2ContextMenu9").hidden = true;
 		//3. Tastenkürzel zuordnen
 		var iElements = [document.getElementById("key_opensbp2Sidebar"),document.getElementById("key_sbp2SiteCapture"),document.getElementById("key_sbp2SiteCaptureAs"),document.getElementById("key_sbp2SiteBookmark"),document.getElementById("key_sbp2TabsCapture")];
 		var iPrefs = ["extensions.scrapbookplus2.key.a.","extensions.scrapbookplus2.key.b.","extensions.scrapbookplus2.key.c.","extensions.scrapbookplus2.key.d.","extensions.scrapbookplus2.key.e."];
-		for ( var iI=0; iI<5; iI++ )
+		for ( var iI=0; iI<4; iI++ )
 		{
 			iElements[iI].setAttribute("modifiers",	sbp2Prefs.getUnicharPref(iPrefs[iI]+(1), ""));
 			iElements[iI].setAttribute("key",		sbp2Prefs.getUnicharPref(iPrefs[iI]+(2), ""));
