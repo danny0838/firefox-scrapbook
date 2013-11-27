@@ -621,7 +621,11 @@ var sbInvisibleBrowser = {
 		this.ELEMENT.docShell.allowJavascript = gOption["script"];
 		this.ELEMENT.docShell.allowImages     = gOption["images"];
 		this.ELEMENT.docShell.allowMetaRedirects = false;
-		this.ELEMENT.docShell.QueryInterface(Components.interfaces.nsIDocShellHistory).useGlobalHistory = false;
+		if ( Components.interfaces.nsIDocShellHistory ) {
+			this.ELEMENT.docShell.QueryInterface(Components.interfaces.nsIDocShellHistory).useGlobalHistory = false;
+		} else {
+			this.ELEMENT.docShell.useGlobalHistory = false;
+		}
 		//gCharset = "ISO-8859-1" oder UTF-8;
 		var browserObj = document.commandDispatcher.focusedWindow.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebNavigation);
 		browserObj.QueryInterface(Components.interfaces.nsIDocShell).QueryInterface(Components.interfaces.nsIDocCharset).charset = gCharset;

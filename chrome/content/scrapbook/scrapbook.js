@@ -62,15 +62,18 @@ var sbMainService = {
 	trace: function(aText, aMillisec)
 	{
 		var status = top.window.document.getElementById("statusbar-display");
+		if ( !status ) return;
 		status.label = aText;
-		var callback = function() {
+		var callback = function(self) {
+			self._traceTimer = null;
 			if (status.label == aText)
 				status.label = "";
 			status = null;
 		};
-		window.setTimeout(callback, aMillisec || 5000);
+		this._traceTimer = window.setTimeout(callback, aMillisec || 5000, this);
 	},
 
+	_traceTimer: null,
 
 	locate: function(aRes)
 	{

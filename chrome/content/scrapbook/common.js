@@ -300,7 +300,6 @@ var sbCommonUtils = {
 		} else {
 			WBP.saveURI(uri, null, null, null, null, aFile);
 		}
-		WBP.saveURI(uri, null, null, null, null, aFile);
 	},
 
 	convertToUnicode : function(aString, aCharset)

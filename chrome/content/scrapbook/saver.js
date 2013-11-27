@@ -804,15 +804,14 @@ var sbCaptureObserverCallback = {
 
 	trace : function(aText, aMillisec)
 	{
-		try {
-			document.getElementById("statusbar-display").label = aText;
-			if ( aMillisec>0 ) {
-				var callback = function() {
-					if (document.getElementById("statusbar-display").label == aText) document.getElementById("statusbar-display").label = "";
-				};
-				window.setTimeout(callback, aMillisec);
-			}
-		} catch(ex) {
+		var status = top.window.document.getElementById("statusbar-display");
+		if ( !status ) return;
+		status.label = aText;
+		if ( aMillisec>0 ) {
+			var callback = function() {
+				if ( status.label == aText) status.label = "";
+			};
+			window.setTimeout(callback, aMillisec);
 		}
 	},
 
