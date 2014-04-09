@@ -20,6 +20,7 @@ locale	scrapbook	ro	chrome/locale/ro/scrapbook/
 locale	scrapbook	ru-RU	chrome/locale/ru-RU/scrapbook/
 locale	scrapbook	sk-SK	chrome/locale/sk-SK/scrapbook/
 locale	scrapbook	sv-SE	chrome/locale/sv-SE/scrapbook/
+locale	scrapbook	tr	chrome/locale/tr/scrapbook/
 locale	scrapbook	zh-CN	chrome/locale/zh-CN/scrapbook/
 locale	scrapbook	zh-TW	chrome/locale/zh-TW/scrapbook/
 

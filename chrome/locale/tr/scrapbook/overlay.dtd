@@ -1,0 +1,13 @@
+<!ENTITY sb.save.partial "Seçimi Kaydet">
+<!ENTITY sb.save.partial.as "Seçim olarak Kaydet">
+<!ENTITY sb.save.entire "Sayfayı Kaydet">
+<!ENTITY sb.save.entire.as "Sayfa olarak Kaydet">
+<!ENTITY sb.save.frame "Çerçeve Kaydet">
+<!ENTITY sb.save.frame.as "Çerçeve olarak Kaydet">
+<!ENTITY sb.save.target "Bağlantı Kaydet">
+<!ENTITY sb.save.target.as "Bağlantı olarak Kaydet">
+<!ENTITY sb.save.alltabs "Tüm Sekmeleri Kaydet">
+<!ENTITY sb.save.bookmark "Yerimi olarak kaydet">
+<!ENTITY sb.sidebar "Kenar Çubuğunda Göster">
+<!ENTITY sb.menubar "Menü Çubuğu">
+<!ENTITY sb.editbefore "Kaydetmeden Önce Düzenle">

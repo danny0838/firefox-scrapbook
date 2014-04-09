@@ -1,0 +1,9 @@
+<!ENTITY sb.repair.rdfFile "Scrapbook.rdf&apos;yi geri yükle">
+<!ENTITY sb.repair.rdfFile.descript "ScrapBook ağacı aniden kaybolursa bunu deneyin.">
+<!ENTITY sb.repair.rdfFile.select "Geri yükleme için bir yedekleme dosyası seçin.">
+<!ENTITY sb.repair.rdfFile.file "Dosya">
+<!ENTITY sb.repair.rdfFile.time "Zaman">
+<!ENTITY sb.repair.rdfFile.size "Boyut">
+<!ENTITY sb.repair.favicons "Ağaç görünümünde site simgelerini geri yükle">
+<!ENTITY sb.repair.favicons.descript "Eğer ScrapBook ağaç görünümününde birden çok site simgesi kaybolursa bunu deneyin.">
+<!ENTITY sb.repair.complete "Tamamlandı.">
