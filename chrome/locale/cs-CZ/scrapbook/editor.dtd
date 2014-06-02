@@ -7,6 +7,7 @@
 <!ENTITY sb.edit.sticky "Nálepka">
 <!ENTITY sb.edit.sticky.create "Vytvořit nálepku">
 <!ENTITY sb.edit.inline.add "Přidat poznámku k výběru">
+<!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "Připojit k výběru soubor">
 <!ENTITY sb.edit.attach.link "Připojit k výběru odkaz">
 <!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">

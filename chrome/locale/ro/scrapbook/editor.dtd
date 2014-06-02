@@ -7,6 +7,7 @@
 <!ENTITY sb.edit.sticky "notă adezivă">
 <!ENTITY sb.edit.sticky.create "Creează o &sb.edit.sticky;">
 <!ENTITY sb.edit.inline.add "Adaugă o adnotare la selecție">
+<!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "Atașează un fișier la selecție">
 <!ENTITY sb.edit.attach.link "Atașează o legătură la selecție">
 <!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">

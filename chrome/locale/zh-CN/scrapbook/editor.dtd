@@ -7,6 +7,7 @@
 <!ENTITY sb.edit.sticky "即时贴">
 <!ENTITY sb.edit.sticky.create "创建即时贴">
 <!ENTITY sb.edit.inline.add "为所选内容添加提示">
+<!ENTITY sb.edit.annotation.add "在所选内容后添加 HTML 提示">
 <!ENTITY sb.edit.attach.file "为所选内容附加文件">
 <!ENTITY sb.edit.attach.link "为所选内容附加链接">
 <!ENTITY sb.edit.attach.innerlink "为所选内容附加内部链接">

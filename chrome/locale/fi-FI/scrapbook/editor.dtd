@@ -7,6 +7,7 @@
 <!ENTITY sb.edit.sticky "Muistilappu">
 <!ENTITY sb.edit.sticky.create "Luo &sb.edit.sticky;">
 <!ENTITY sb.edit.inline.add "Lisää valinnan tekstiin huomautus">
+<!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "Liitä tiedosto valintaan">
 <!ENTITY sb.edit.attach.link "Liitä linkki valintaan">
 <!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">

@@ -7,6 +7,7 @@
 <!ENTITY sb.edit.sticky "Пересувна нотатка">
 <!ENTITY sb.edit.sticky.create "Створити пересувну нотатку">
 <!ENTITY sb.edit.inline.add "Додати приховану нотатку до обраного">
+<!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "Додати файл до обраного">
 <!ENTITY sb.edit.attach.link "Додати посилання до обраного">
 <!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">

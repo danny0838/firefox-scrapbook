@@ -7,6 +7,7 @@
 <!ENTITY sb.edit.sticky "Ragadós megjegyzések">
 <!ENTITY sb.edit.sticky.create "&sb.edit.sticky; elem beszúrása">
 <!ENTITY sb.edit.inline.add "Megjegyzés hozzáadása a kiválasztáshoz">
+<!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "Fájl csatolása a kijelöléshez">
 <!ENTITY sb.edit.attach.link "Hivatkozás csatolása a kijelöléshez">
 <!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">

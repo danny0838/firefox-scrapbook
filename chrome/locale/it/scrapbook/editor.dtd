@@ -7,6 +7,7 @@
 <!ENTITY sb.edit.sticky "Annotazione">
 <!ENTITY sb.edit.sticky.create "Crea annotazione">
 <!ENTITY sb.edit.inline.add "Aggiungi annotazione in linea alla selezione">
+<!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "Allega file alla selezione">
 <!ENTITY sb.edit.attach.link "Allega link alla selezione">
 <!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">

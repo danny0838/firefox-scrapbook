@@ -7,6 +7,7 @@
 <!ENTITY sb.edit.sticky "Быстрое примечание">
 <!ENTITY sb.edit.sticky.create "Создать быстрое примечание">
 <!ENTITY sb.edit.inline.add "Присоединить файл к выделенному фрагменту">
+<!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "Присоединить файл к выделенному">
 <!ENTITY sb.edit.attach.link "Присоединить ссылку к выделенному фрагменту">
 <!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
