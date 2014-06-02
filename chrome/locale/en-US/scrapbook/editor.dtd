@@ -1,6 +1,6 @@
 <!ENTITY sb.toolbar.edit "Edit Toolbar">
 <!ENTITY sb.toolbar.info "Info Toolbar">
-<!ENTITY sb.edit.eraser "DOM Eraser: A tool for removing clicked elements in Web page">
+<!ENTITY sb.edit.eraser "DOM Eraser: Removes the clicked block element or Scrapbook annotation">
 <!ENTITY sb.edit.undo "Undo">
 <!ENTITY sb.edit.save "Save Changes">
 <!ENTITY sb.edit.comment "Expand Comment Area">
