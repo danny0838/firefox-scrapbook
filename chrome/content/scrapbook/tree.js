@@ -146,7 +146,6 @@ var sbTreeUI = {
 		if ( this.TREE.view.selection.count > 1 )
 		{
 			var idxList = this.getSelection(false, 2);
-			if ( idxList.length < 1 ) return;
 			if ( this.validateMultipleSelection(idxList) == false ) return;
 			for ( var i = 0; i < idxList.length; i++ )
 			{
