@@ -38,13 +38,13 @@ var sbPageEditor = {
 		document.getElementById("ScrapBookEditIcon").src    = (aID ? this.item.icon  : gBrowser.selectedTab.getAttribute("image")) || ScrapBookUtils.getDefaultIcon();
 		try { document.getElementById("ScrapBookEditTitle").editor.transactionManager.clear(); } catch(ex) {}
 		this.COMMENT.value = aID ? this.item.comment.replace(/ __BR__ /g, this.multiline ? "\n" : "\t") : "";
+		this.refreshUndo();
 		try { this.COMMENT.editor.transactionManager.clear(); } catch(ex) {}
 		if ( aID && gBrowser.currentURI.spec.indexOf("index.html") > 0 )
 		{
 			gBrowser.selectedTab.label = this.item.title;
 			gBrowser.selectedTab.setAttribute("image", this.item.icon);
 		}
-		sbPageEditor.allowUndo();
 		sbDOMEraser.init(0);
 		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
 		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
@@ -275,8 +275,7 @@ var sbPageEditor = {
 			if (!this.savedBody) this.savedBody = [];
 			this.savedBody.push(aTargetDocument.body.cloneNode(true));
 		}
-		else
-			delete this.savedBody;
+		this.refreshUndo();
 	},
 
 	undo : function()
@@ -284,8 +283,19 @@ var sbPageEditor = {
 		if ( this.savedBody && this.savedBody.length ) {
 			var prevBody = this.savedBody.pop();
 			prevBody.ownerDocument.body.parentNode.replaceChild(prevBody, prevBody.ownerDocument.body);
-		} else {
-			this.restore();
+		}
+		this.refreshUndo();
+	},
+
+	refreshUndo : function()
+	{
+		if ( this.savedBody && this.savedBody.length ) {
+			document.getElementById("ScrapBookEditUndo").disabled = false;
+			document.getElementById("ScrapBookEditUndo").image = "chrome://scrapbook/skin/edit_undo.png";
+		}
+		else {
+			document.getElementById("ScrapBookEditUndo").disabled = true;
+			document.getElementById("ScrapBookEditUndo").image = "chrome://scrapbook/skin/edit_undo_disable.png";
 		}
 	},
 
@@ -688,12 +698,18 @@ var sbAnnotationService = {
 			headNode.appendChild(linkNode);
 			headNode.appendChild(win.document.createTextNode("\n"));
 		}
-		this.editSticky(div);
+		this._editSticky(div);
 		sbPageEditor.changed1 = true;
 		sbPageEditor.disableTemporary(500);
 	},
 
 	editSticky : function(oldElem)
+	{
+		sbPageEditor.allowUndo(sbPageEditor.focusedWindow.document);
+		this._editSticky(oldElem);
+	},
+
+	_editSticky : function(oldElem)
 	{
 		var newElem = this.duplicateElement(
 			!(oldElem.parentNode instanceof HTMLBodyElement), true, 
@@ -711,6 +727,7 @@ var sbAnnotationService = {
 
 	startDrag : function(aEvent)
 	{
+		sbPageEditor.allowUndo(sbPageEditor.focusedWindow.document);
 		this.target = aEvent.originalTarget.parentNode;
 		this.isMove = aEvent.originalTarget.className == "scrapbook-sticky-header";
 		this.offsetX = aEvent.clientX - parseInt(this.target.style[this.isMove ? "left" : "width" ], 10);
@@ -790,6 +807,7 @@ var sbAnnotationService = {
 
 	editInline : function(aElement)
 	{
+		sbPageEditor.allowUndo(sbPageEditor.focusedWindow.document);
 		var ret = { value : aElement.getAttribute("title") };
 		if ( !ScrapBookUtils.PROMPT.prompt(window, "[ScrapBook]", ScrapBookBrowserOverlay.STRING.getFormattedString("EDIT_INLINE", [ScrapBookUtils.crop(aElement.textContent, 32)]), ret, null, {}) ) return;
 		if ( ret.value )
