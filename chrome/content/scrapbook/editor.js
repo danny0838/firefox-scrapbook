@@ -176,43 +176,23 @@ var sbPageEditor = {
 				node = node.nextSibling;
 			}
 		}
-		for ( var i = 0, len = nodeToDel.length; i < len; ++i ) this.stripNode(nodeToDel[i]);
+		for ( var i = 0, len = nodeToDel.length; i < len; ++i ) this.removeSbObj(nodeToDel[i]);
 		this.changed1 = true;
 	},
 
-	removeAllMarks : function()
+	removeSbObjects : function()
 	{
 		this.allowUndo(this.focusedWindow.document);
 		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
 		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
 		{
-			var elems = sbContentSaver.frameList[i].document.getElementsByTagName("span");
+			var elems = sbContentSaver.frameList[i].document.getElementsByTagName("*");
 			for ( var j = 0; j < elems.length; j++ )
 			{
 				if ( this._getSbObjectType(elems[j]) !== false )
 				{
 					// elems gets shortened when elems[j] is removed, minus j afterwards to prevent skipping
-					this.stripNode(elems[j]);
-					j--;
-				}
-			}
-			var elems = sbContentSaver.frameList[i].document.getElementsByTagName("a");
-			for ( var j = 0; j < elems.length; j++ )
-			{
-				if ( this._getSbObjectType(elems[j]) !== false )
-				{
-					// elems gets shortened when elems[j] is removed, minus j afterwards to prevent skipping
-					this.stripNode(elems[j]);
-					j--;
-				}
-			}
-			var elems = sbContentSaver.frameList[i].document.getElementsByTagName("div");
-			for ( var j = 0; j < elems.length; j++ )
-			{
-				if ( this._getSbObjectType(elems[j]) !== false )
-				{
-					// elems gets shortened when elems[j] is removed, minus j afterwards to prevent skipping
-					this.stripNode(elems[j]);
+					this.removeSbObj(elems[j]);
 					j--;
 				}
 			}
@@ -241,7 +221,23 @@ var sbPageEditor = {
 		}
 	},
 
-	stripNode : function(aNode)
+	removeSbObj : function(aNode)
+	{
+		switch (this._getSbObjectType(aNode)) {
+			case "linemarker" :
+			case "inline" :
+			case "link-url" :
+			case "link-file" :
+				this.unwrapNode(aNode);
+				break;
+			case "sticky" :
+			case "stylesheet" :
+			default:
+				aNode.parentNode.removeChild(aNode);
+		}
+	},
+
+	unwrapNode : function(aNode)
 	{
 		var childs = aNode.childNodes;
 		var parent = aNode.parentNode;
@@ -456,10 +452,7 @@ var sbPageEditor = {
 		 * inline (span)
 		 * link-url (a)
 		 * link-file (a)
-		 * sticky-absolute (div)
-		 * sticky-relative (div)
-		 * sticky-header
-		 * sticky-footer
+		 * sticky (div)
 		 * block-comment (?)
 		 * stylesheet
 		 */
@@ -472,13 +465,8 @@ var sbPageEditor = {
 			case "scrapbook-inline":
 				return "inline";
 			case "scrapbook-sticky":
-				return "sticky-absolute";
 			case "scrapbook-sticky scrapbook-sticky-relative":
-				return "sticky-relative";
-			case "scrapbook-sticky-header" :
-				return "sticky-header";
-			case "scrapbook-sticky-footer" :
-				return "sticky-footer";
+				return "sticky";
 			case "scrapbook-block-comment":
 				return "block-comment";
 		}
@@ -540,7 +528,7 @@ var sbDOMEraser = {
 		var elem = aEvent.target;
 		var tagName = elem.localName.toUpperCase();
 		if ( aEvent.type != "keypress" && ["SCROLLBAR","HTML","BODY","FRAME","FRAMESET"].indexOf(tagName) >= 0 ) return;
-		var onMarker = sbPageEditor._getSbObjectType(elem);
+		var onSbObj = sbPageEditor._getSbObjectType(elem);
 		if ( aEvent.type == "mouseover" || aEvent.type == "mousemove" )
 		{
 			if ( aEvent.type == "mousemove" && ++sbDOMEraser.verbose % 3 != 0 ) return;
@@ -555,14 +543,15 @@ var sbDOMEraser = {
 			tooltip.style.top  = aEvent.pageY + "px";
 			if ( aEvent.type == "mouseover" )
 			{
-				if ( onMarker ) {
+				if ( onSbObj ) {
 					tooltip.textContent = ScrapBookBrowserOverlay.STRING.getString("EDIT_REMOVE_HIGHLIGHT");
+					sbDOMEraser._setOutline(elem, "2px dashed #0000FF");
 				} else {
 					tooltip.textContent = elem.localName;
 					if ( elem.id ) tooltip.textContent += ' id="' + elem.id + '"';
 					if ( elem.className ) tooltip.textContent += ' class="' + elem.className + '"';
+					sbDOMEraser._setOutline(elem, "2px solid #FF0000");
 				}
-				sbDOMEraser._setOutline(elem, onMarker ? "2px dashed #0000FF" : "2px solid #FF0000");
 			}
 		}
 		else if ( aEvent.type == "mouseout" || aEvent.type == "click" )
@@ -579,8 +568,8 @@ var sbDOMEraser = {
 				}
 				else
 				{
-					if ( onMarker )
-						sbPageEditor.stripNode(elem);
+					if ( onSbObj )
+						sbPageEditor.removeSbObj(elem);
 					else
 						elem.parentNode.removeChild(elem);
 				}
@@ -640,12 +629,9 @@ var sbAnnotationService = {
 		{
 			switch ( sbPageEditor._getSbObjectType(aEvent.originalTarget) )
 			{
-				case "sticky-absolute" : case "sticky-relative" :
+				case "sticky" :
 					if ( aEvent.originalTarget.childNodes.length != 2 ) return;
 					sbAnnotationService.editSticky(aEvent.originalTarget);
-					break;
-				case "sticky-header" : case "sticky-footer" :
-					sbAnnotationService.startDrag(aEvent);
 					break;
 				case "inline" :
 					sbAnnotationService.editInline(aEvent.originalTarget);
@@ -654,6 +640,11 @@ var sbAnnotationService = {
 					sbAnnotationService.createSticky([aEvent.originalTarget.previousSibling, aEvent.originalTarget.firstChild.data]);
 					aEvent.originalTarget.parentNode.removeChild(aEvent.originalTarget);
 					break;
+				default :
+					var cName = aEvent.originalTarget.className;
+					if (cName == 'scrapbook-sticky-header' || cName == 'scrapbook-sticky-footer') {
+						sbAnnotationService.startDrag(aEvent);
+					}
 			}
 		}
 		else if ( aEvent.type == "mousemove" ) sbAnnotationService.onDrag(aEvent);
@@ -754,7 +745,6 @@ var sbAnnotationService = {
 	{
 		var mainDiv = window.content.document.createElement("DIV");
 		var headDiv = window.content.document.createElement("DIV");
-		headDiv.setAttribute("data-sb-obj", "sticky-header");
 		headDiv.className = "scrapbook-sticky-header";
 		mainDiv.appendChild(headDiv);
 		if ( isEditable )
@@ -767,7 +757,6 @@ var sbAnnotationService = {
 			button2.setAttribute("type", "image"); button2.setAttribute("src", "chrome://scrapbook/skin/sticky_delete.png");
 			button1.setAttribute("onclick", "this.parentNode.parentNode.appendChild(document.createTextNode(this.parentNode.previousSibling.value));this.parentNode.parentNode.removeChild(this.parentNode.previousSibling);this.parentNode.parentNode.removeChild(this.parentNode);");
 			button2.setAttribute("onclick", "this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);");
-			footDiv.setAttribute("data-sb-obj", "sticky-footer");
 			footDiv.className = "scrapbook-sticky-footer";
 			footDiv.appendChild(button1); footDiv.appendChild(button2);
 			mainDiv.appendChild(textArea); mainDiv.appendChild(footDiv);
@@ -780,7 +769,7 @@ var sbAnnotationService = {
 		}
 		mainDiv.style.width  = (aWidth  || this.DEFAULT_WIDTH)  + "px";
 		mainDiv.style.height = (aHeight || this.DEFAULT_HEIGHT) + "px";
-		mainDiv.setAttribute("data-sb-obj", (isRelative ? "sticky-relative" : "sticky-absolute"));
+		mainDiv.setAttribute("data-sb-obj", "sticky");
 		mainDiv.className = "scrapbook-sticky" + (isRelative ? " scrapbook-sticky-relative" : "");  // for compatibility
 		return mainDiv;
 	},
@@ -806,7 +795,7 @@ var sbAnnotationService = {
 		if ( ret.value )
 			aElement.setAttribute("title", ret.value);
 		else
-			sbPageEditor.stripNode(aElement);
+			sbPageEditor.removeSbObj(aElement);
 		sbPageEditor.changed1 = true;
 	},
 
