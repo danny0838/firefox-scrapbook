@@ -397,7 +397,7 @@ var sbInvisibleBrowser = {
 					{
 						gURLs[sbCaptureTask.index] = newURL;
 						sbCaptureTask.canRefresh = false;
-						this.ELEMENT.loadURI(newURL, null, null);
+						sbCaptureTask.start(newURL);
 						return;
 					}
 				}
