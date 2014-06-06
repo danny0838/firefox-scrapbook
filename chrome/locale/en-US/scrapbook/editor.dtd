@@ -1,6 +1,6 @@
 <!ENTITY sb.toolbar.edit "Edit Toolbar">
 <!ENTITY sb.toolbar.info "Info Toolbar">
-<!ENTITY sb.edit.eraser "DOM Eraser: Removes the clicked block element or Scrapbook annotation">
+<!ENTITY sb.edit.eraser "DOM Eraser: A tool for removing clicked elements in Web page">
 <!ENTITY sb.edit.undo "Undo">
 <!ENTITY sb.edit.save "Save Changes">
 <!ENTITY sb.edit.comment "Expand Comment Area">
@@ -14,7 +14,7 @@
 <!ENTITY sb.edit.remove.script "Remove All SCRIPT Tags">
 <!ENTITY sb.highlighter "Highlighter">
 <!ENTITY sb.highlighter.remove "Clear Highlights in the Selection">
-<!ENTITY sb.highlighter.remove.all "Clear All Scrapbook Annotations">
+<!ENTITY sb.highlighter.remove.all "Clear All Highlights">
 <!ENTITY sb.source "Open Source URL">
 <!ENTITY sb.renew "Save Again">
 <!ENTITY sb.locate "Locate in Sidebar">

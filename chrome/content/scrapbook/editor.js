@@ -148,7 +148,7 @@ var sbPageEditor = {
 		this.changed1 = true;
 	},
 
-	removeHighlights : function()
+	removeSbObjectsSelected : function()
 	{
 		var sel = this.getSelection();
 		if ( !sel ) return;
@@ -164,7 +164,7 @@ var sbPageEditor = {
 			if ( nodeRange.compareBoundaryPoints(Range.START_TO_END, selRange) > -1 )
 			{
 				if ( nodeRange.compareBoundaryPoints(Range.END_TO_START, selRange) > 0 ) break;
-				else if ( node.nodeName.toUpperCase() == "SPAN" && this._getSbObjectType(node) == "linemarker" )
+				else if ( node.nodeType === 1 && this._getSbObjectType(node) )
 				{
 					nodeToDel.push(node);
 				}
@@ -189,7 +189,7 @@ var sbPageEditor = {
 			var elems = sbContentSaver.frameList[i].document.getElementsByTagName("*");
 			for ( var j = 0; j < elems.length; j++ )
 			{
-				if ( this._getSbObjectType(elems[j]) !== false )
+				if ( this._getSbObjectType(elems[j]) )
 				{
 					// elems gets shortened when elems[j] is removed, minus j afterwards to prevent skipping
 					this.removeSbObj(elems[j]);
@@ -471,11 +471,6 @@ var sbPageEditor = {
 				return "block-comment";
 		}
 		return false;
-	},
-
-	_isSbObject : function(aNode)
-	{
-		return (_getSbObjectType(aNode) !== false);
 	},
 	
 };
