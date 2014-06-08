@@ -185,14 +185,25 @@ var sbPropService = {
 	{
 		var totalSize = 0;
 		var totalFile = 0;
-		var dir = ScrapBookUtils.getContentDir(aID, true);
-		if ( !dir || !dir.isDirectory() ) return [0, 0];
-		var fileEnum = dir.directoryEntries;
-		while ( fileEnum.hasMoreElements() )
-		{
-			var file = fileEnum.getNext().QueryInterface(Ci.nsIFile);
-			totalSize += file.fileSize;
-			totalFile++;
+		var dir = [ScrapBookUtils.getContentDir(aID, true)];
+		for (var i=0; i<dir.length; i++) {
+			var fileEnum = dir[i].directoryEntries;
+			while ( fileEnum.hasMoreElements() )
+			{
+				try {
+					var file = fileEnum.getNext().QueryInterface(Ci.nsIFile);
+					if (file.isDirectory()) {
+						dir.push(file);
+					}
+					else {
+						totalSize += file.fileSize;
+						totalFile++;
+					}
+				}
+				catch (ex) {
+					alert("ERROR: cannot read file size (possibility due to improper file name): " + file.path);
+				}
+			}
 		}
 		return [totalSize, totalFile];
 	},
