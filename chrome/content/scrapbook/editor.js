@@ -88,8 +88,13 @@ var sbPageEditor = {
 		}
 		else if ( aEvent.type == "beforeunload" )
 		{
-			if (aEvent.target == ScrapBookUtils.getFocusedWindow().document) {
-				sbPageEditor.confirmSave();
+			// ScrapBookUtils.getFocusedWindow() could be null in some situation
+			try {
+				if (aEvent.target == ScrapBookUtils.getFocusedWindow().document) {
+					sbPageEditor.confirmSave();
+				}
+			}
+			catch(ex) {
 			}
 		}
 	},
