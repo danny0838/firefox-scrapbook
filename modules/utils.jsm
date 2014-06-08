@@ -148,12 +148,12 @@ const ScrapBookUtils = {
 
 	validateFileName: function SBU_validateFileName(aFileName) {
 		aFileName = aFileName.replace(/[\"\?!~`]+/g, "");
-		aFileName = aFileName.replace(/[\*\&]+/g, "+");
-		aFileName = aFileName.replace(/[\\\/\|\:;]+/g, "-");
-		aFileName = aFileName.replace(/[\<]+/g, "(");
-		aFileName = aFileName.replace(/[\>]+/g, ")");
-		aFileName = aFileName.replace(/[\s]+/g, "_");
-		aFileName = aFileName.replace(/[%]+/g, "@");
+		aFileName = aFileName.replace(/[\*\&]/g, "+");
+		aFileName = aFileName.replace(/[\\\/\|\:;]/g, "-");
+		aFileName = aFileName.replace(/[\<]/g, "(");
+		aFileName = aFileName.replace(/[\>]/g, ")");
+		aFileName = aFileName.replace(/[\s]/g, "_");
+		aFileName = aFileName.replace(/[%]/g, "@");
 		return aFileName;
 	},
 
