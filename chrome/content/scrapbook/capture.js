@@ -35,7 +35,7 @@ function SB_initCapture()
 	if ( gReferItem )
 	{
 		gContext = "indepth";
-		gURL2Name[unescape(gReferItem.source)] = "index";
+		gURL2Name[gReferItem.source] = "index";
 	}
 	else if ( gPreset )
 	{
@@ -539,7 +539,7 @@ var sbCrossLinker = {
 			var linkList = doc.links;
 			for ( var i = 0; i < linkList.length; i++ )
 			{
-				var urlLR = SB_splitByAnchor(unescape(linkList[i].href));
+				var urlLR = SB_splitByAnchor(linkList[i].href);
 				if ( gURL2Name[urlLR[0]] )
 				{
 					var name = gURL2Name[urlLR[0]];
