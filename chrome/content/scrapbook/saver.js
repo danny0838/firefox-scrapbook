@@ -7,10 +7,12 @@ var sbContentSaver = {
 	contentDir   : null,
 	httpTask     : {},
 	file2URL     : {},
+	file2Doc     : {},
 	option       : {},
 	refURLObj    : null,
 	favicon      : null,
 	frameList    : [],
+	frames      : [],
 	isMainFrame  : true,
 	selection    : null,
 	linkURLs     : [],
@@ -177,12 +179,12 @@ var sbContentSaver = {
 		// HTML document: save the current DOM
 		this.refURLObj = ScrapBookUtils.convertURLToObject(aDocument.location.href);
 
-		var arr = this.getUniqueFileName(aFileKey + ".html", this.refURLObj.spec);
+		var arr = this.getUniqueFileName(aFileKey + ".html", this.refURLObj.spec, aDocument);
 		var myHTMLFileName = arr[0];
 		var myHTMLFileDone = arr[1];
 		if (myHTMLFileDone) return myHTMLFileName;
 
-		var arr = this.getUniqueFileName(aFileKey + ".css", this.refURLObj.spec);
+		var arr = this.getUniqueFileName(aFileKey + ".css", this.refURLObj.spec, aDocument);
 		var myCSSFileName = arr[0];
 
 		// construct the tree, especially for capture of partial selection
@@ -193,6 +195,26 @@ var sbContentSaver = {
 			var curNode = myRange.commonAncestorContainer;
 			if ( curNode.nodeName == "#text" ) curNode = curNode.parentNode;
 		}
+		// cloned frames has contentDocument = null
+		// give all frames an unique id for later retrieving
+		var htmlNode = aDocument.getElementsByTagName("html")[0];
+		var frames = htmlNode.getElementsByTagName("frame");
+		for (var i=0, len=frames.length; i<len; i++) {
+			var frame = frames[i];
+			var idx = this.frames.length;
+			this.frames[idx] = frame;
+			frame.setAttribute("data-sb-frame-id", idx);
+			if (frame.src == this.refURLObj.spec) frame.setAttribute("data-sb-frame-id", idx);
+		}
+		var frames = htmlNode.getElementsByTagName("iframe");
+		for (var i=0, len=frames.length; i<len; i++) {
+			var frame = frames[i];
+			var idx = this.frames.length;
+			this.frames[idx] = frame;
+			frame.setAttribute("data-sb-frame-id", idx);
+			if (frame.src == this.refURLObj.spec) frame.setAttribute("data-sb-frame-id", idx);
+		}
+		// now make the clone
 		var tmpNodeList = [];
 		if ( this.selection )
 		{
@@ -206,7 +228,7 @@ var sbContentSaver = {
 		{
 			tmpNodeList.unshift(aDocument.body.cloneNode(true));
 		}
-		var rootNode = aDocument.getElementsByTagName("html")[0].cloneNode(false);
+		var rootNode = htmlNode.cloneNode(false);
 		try {
 			var headNode = aDocument.getElementsByTagName("head")[0].cloneNode(true);
 			rootNode.appendChild(headNode);
@@ -525,16 +547,11 @@ var sbContentSaver = {
 				this.isMainFrame = false;
 				if ( this.selection ) this.selection = null;
 				var tmpRefURL = this.refURLObj;
-				try {
-					// cannot access aNode.contentDocument directly so use this dirty trick...
-					for (var i=0,len=this.frameList.length;i<len;++i) {
-						if (aNode.src == this.frameList[i].document.location.href) {
-							var newFileName = this.saveDocumentInternal(this.frameList[i].document, this.name);
-							aNode.setAttribute("src", newFileName);
-						}
-					}
-				} catch(ex) {
-				}
+				// retrieve contentDocument from the corresponding real frame
+				var idx = aNode.getAttribute("data-sb-frame-id");
+				var newFileName = this.saveDocumentInternal(this.frames[idx].contentDocument, this.name);
+				aNode.setAttribute("src", newFileName);
+				aNode.removeAttribute("data-sb-frame-id");
 				this.refURLObj = tmpRefURL;
 				break;
 			case "xmp" : 
@@ -773,13 +790,9 @@ var sbContentSaver = {
 	},
 
 	/**
-	 * @return  [newFileName, state]
-	 *
-	 *   state:
-	 *     true: already downloaded
-	 *     false: not downloaded
+	 * @return  [(string) newFileName, (bool) isDuplicated]
 	 */
-	getUniqueFileName: function(newFileName, aURLSpec)
+	getUniqueFileName: function(newFileName, aURLSpec, aDocumentSpec)
 	{
 		if ( !newFileName ) newFileName = "untitled";
 		newFileName = decodeURI(newFileName);
@@ -788,29 +801,16 @@ var sbContentSaver = {
 		fileLR[0] = ScrapBookUtils.crop(fileLR[0], 100);
 		if ( !fileLR[1] ) fileLR[1] = "dat";
 		newFileName = fileLR[0] + "." + fileLR[1];
-		if ( this.file2URL[newFileName] == undefined )
-		{
-			this.file2URL[newFileName] = aURLSpec;
-			return [newFileName, false];
-		}
-		else if ( this.file2URL[newFileName] != aURLSpec )
-		{
-			var seq = 1;
-			var fileLR = ScrapBookUtils.splitFileName(newFileName);
-			if ( !fileLR[1] ) fileLR[1] = "dat";
-			newFileName = fileLR[0] + "_" + this.leftZeroPad3(seq) + "." + fileLR[1];
-			while ( this.file2URL[newFileName] != undefined )
-			{
-				if ( this.file2URL[newFileName] == aURLSpec )
-				{
-					return [newFileName, false];
-				}
-				newFileName = fileLR[0] + "_" + this.leftZeroPad3(++seq) + "." + fileLR[1];
+		var seq = 0;
+		while ( this.file2URL[newFileName] != undefined ) {
+			if (this.file2URL[newFileName] == aURLSpec && this.file2Doc[newFileName] == aDocumentSpec) {
+				return [newFileName, true];
 			}
-			this.file2URL[newFileName] = aURLSpec;
-			return [newFileName, false];
+			newFileName = fileLR[0] + "_" + this.leftZeroPad3(++seq) + "." + fileLR[1];
 		}
-		return [newFileName, true];
+		this.file2URL[newFileName] = aURLSpec;
+		this.file2Doc[newFileName] = aDocumentSpec;
+		return [newFileName, false];
 	},
 
 };
