@@ -88,14 +88,12 @@ function SB_splitByAnchor(aURL)
 
 function SB_suggestName(aURL)
 {
-	var baseName = ScrapBookUtils.validateFileName(ScrapBookUtils.splitFileName(ScrapBookUtils.getFileName(aURL))[0]);
-	baseName = baseName.toLowerCase();
-	if ( baseName == "index" ) baseName = "default";
-	if ( !baseName ) baseName = "default";
-	var name = baseName + ".html";
+	var fileLR = ScrapBookUtils.splitFileName(ScrapBookUtils.validateFileName(ScrapBookUtils.getFileName(decodeURI(aURL))));
+	fileLR[0] = fileLR[0].toLowerCase();
+	if ( !fileLR[0] || fileLR[0] == "index" ) fileLR[0] = "default";
+	var name = fileLR[0];
 	var seq = 0;
-	while ( gFile2URL[name] ) name = baseName + "_" + sbContentSaver.leftZeroPad3(++seq) + ".html";
-	name = ScrapBookUtils.splitFileName(name)[0];
+	while ( gFile2URL[name] ) name = fileLR[0] + "_" + sbContentSaver.leftZeroPad3(++seq);
 	gFile2URL[name + ".html"] = aURL;
 	gFile2URL[name + ".css"]  = true;
 	return name;
@@ -413,7 +411,7 @@ var sbInvisibleBrowser = {
 		{
 			if ( gContext == "indepth" )
 			{
-				gURL2Name[unescape(sbCaptureTask.URL)] = ret[0];
+				gURL2Name[sbCaptureTask.URL] = ret[0];
 				gFile2URL = ret[1];
 			}
 			else if ( gContext == "capture-again-deep" )

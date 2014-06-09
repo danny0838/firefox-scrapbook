@@ -58,7 +58,7 @@ var sbContentSaver = {
 			this.item.icon = gBrowser.mCurrentTab.image;
 		}
 		this.frameList = this.flattenFrames(aRootWindow);
-		var titles = aRootWindow.document.title ? [aRootWindow.document.title] : [this.item.source];
+		var titles = aRootWindow.document.title ? [aRootWindow.document.title] : decodeURI([this.item.source]);
 		if ( aIsPartial )
 		{
 			this.selection = aRootWindow.getSelection();
@@ -132,7 +132,7 @@ var sbContentSaver = {
 	captureFile : function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext)
 	{
 		this.init(aPresetData);
-		this.item.title  = ScrapBookUtils.getFileName(aSourceURL);
+		this.item.title  = decodeURI(ScrapBookUtils.getFileName(aSourceURL));
 		this.item.icon   = "moz-icon://" + this.item.title + "?size=16";
 		this.item.source = aSourceURL;
 		this.item.type   = aType;
@@ -314,7 +314,7 @@ var sbContentSaver = {
 		if ( aCaptureType == "image" ) {
 			var myHTML = '<html><body><img src="' + newFileName + '"></body></html>';
 		} else {
-			var myHTML = '<html><head><meta http-equiv="refresh" content="0;URL=./' + newFileName + '"></head><body></body></html>';
+			var myHTML = '<html><head><meta http-equiv="Content-Type" content="text/html; Charset=UTF-8"><meta http-equiv="refresh" content="0;URL=./' + newFileName + '"></head><body></body></html>';
 		}
 		var myHTMLFile = this.contentDir.clone();
 		myHTMLFile.append(aFileKey + ".html");
@@ -782,6 +782,7 @@ var sbContentSaver = {
 	getUniqueFileName: function(newFileName, aURLSpec)
 	{
 		if ( !newFileName ) newFileName = "untitled";
+		newFileName = decodeURI(newFileName);
 		newFileName = ScrapBookUtils.validateFileName(newFileName);
 		var fileLR = ScrapBookUtils.splitFileName(newFileName);
 		fileLR[0] = ScrapBookUtils.crop(fileLR[0], 100);
