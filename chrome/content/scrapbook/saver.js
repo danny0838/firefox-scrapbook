@@ -783,6 +783,10 @@ var sbContentSaver = {
 	{
 		if ( !newFileName ) newFileName = "untitled";
 		newFileName = ScrapBookUtils.validateFileName(newFileName);
+		var fileLR = ScrapBookUtils.splitFileName(newFileName);
+		fileLR[0] = ScrapBookUtils.crop(fileLR[0], 100);
+		if ( !fileLR[1] ) fileLR[1] = "dat";
+		newFileName = fileLR[0] + "." + fileLR[1];
 		if ( this.file2URL[newFileName] == undefined )
 		{
 			this.file2URL[newFileName] = aURLSpec;

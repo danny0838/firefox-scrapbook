@@ -167,7 +167,7 @@ const ScrapBookUtils = {
 	},
 
 	crop: function SBU_crop(aString, aMaxLength) {
-		return aString.length > aMaxLength ? aString.substring(0, aMaxLength) + "..." : aString;
+		return aString.length > aMaxLength ? aString.substr(0, aMaxLength) + "..." : aString;
 	},
 
 
