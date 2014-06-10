@@ -601,6 +601,15 @@ var sbContentSaver = {
 		}
 		if (aCSS.href)
 			content += (content ? "\n" : "") + "/* ::::: " + aCSS.href + " ::::: */\n\n";
+		// sometimes <link> cannot access remote css
+		// and aCSS.cssRules fires an error (instead of returing undefined)...
+		try {
+			if (!aCSS.cssRules) return content;
+		}
+		catch(ex) {
+			console.warn("CSS cannot be read from '" + aCSS.href + "' in page '" + aDocument.location.href + "' \n" + ex);
+			return content;
+		}
 		Array.forEach(aCSS.cssRules, function(cssRule) {
 			switch (cssRule.type) {
 				case Ci.nsIDOMCSSRule.STYLE_RULE: 
