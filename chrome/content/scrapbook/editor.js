@@ -151,6 +151,7 @@ var sbPageEditor = {
 	{
 		var sel = this.getSelection();
 		if ( !sel ) return;
+		this.allowUndo(this.focusedWindow.document);
 		var selRange  = sel.getRangeAt(0);
 		var node = selRange.startContainer;
 		if ( node.nodeName == "#text" ) node = node.parentNode;
@@ -180,6 +181,7 @@ var sbPageEditor = {
 
 	removeAllSpan : function(aClassName)
 	{
+		this.allowUndo(this.focusedWindow.document);
 		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
 		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
 		{
@@ -195,11 +197,11 @@ var sbPageEditor = {
 			}
 		}
 		this.changed1 = true;
-		this.allowUndo();
 	},
 
 	removeElementsByTagName : function(aTagName)
 	{
+		this.allowUndo(this.focusedWindow.document);
 		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
 		var shouldSave = false;
 		for ( var i = sbContentSaver.frameList.length - 1; i >= 0; i-- )
@@ -215,7 +217,6 @@ var sbPageEditor = {
 		if ( shouldSave )
 		{
 			this.changed1 = true;
-			this.allowUndo();
 		}
 	},
 
@@ -260,16 +261,19 @@ var sbPageEditor = {
 	allowUndo : function(aTargetDocument)
 	{
 		if ( aTargetDocument )
-			this.savedBody = aTargetDocument.body.cloneNode(true);
+		{
+			if (!this.savedBody) this.savedBody = [];
+			this.savedBody.push(aTargetDocument.body.cloneNode(true));
+		}
 		else
 			delete this.savedBody;
 	},
 
 	undo : function()
 	{
-		if ( this.savedBody ) {
-			this.savedBody.ownerDocument.body.parentNode.replaceChild(this.savedBody, this.savedBody.ownerDocument.body);
-			this.allowUndo();
+		if ( this.savedBody && this.savedBody.length ) {
+			var prevBody = this.savedBody.pop();
+			prevBody.ownerDocument.body.parentNode.replaceChild(prevBody, prevBody.ownerDocument.body);
 		} else {
 			this.restore();
 		}
