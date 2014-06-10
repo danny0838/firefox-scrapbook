@@ -151,7 +151,7 @@
 						<menuitem label="&sb.edit.remove.iframe;" oncommand="sbPageEditor.removeElementsByTagName('iframe');" />
 						<menuseparator />
 						<menuitem label="&sb.highlighter.remove.all;" oncommand="sbPageEditor.removeSbObjects();" />
-						<menuitem label="&sb.highlighter.remove;"     oncommand="sbPageEditor.removeHighlights();" />
+						<menuitem label="&sb.highlighter.remove;"     oncommand="sbPageEditor.removeSbObjectsSelected();" />
 						<menuseparator />
 						<menuitem label="&sb.edit.cutter;" oncommand="sbPageEditor.cutter();" />
 					</menupopup>
