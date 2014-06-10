@@ -531,18 +531,14 @@ var sbCrossLinker = {
 		if ( !this.nodeHash[this.nameList[this.index]] )
 		{
 			this.nodeHash[this.nameList[this.index]] = this.createNode(this.nameList[this.index], gReferItem.title);
-			this.nodeHash[this.nameList[this.index]].setAttribute("title", ScrapBookData.sanitize(this.ELEMENT.contentTitle));
 		}
-		else
-		{
-			this.nodeHash[this.nameList[this.index]].setAttribute("title", ScrapBookData.sanitize(this.ELEMENT.contentTitle));
-		}
+		this.nodeHash[this.nameList[this.index]].setAttribute("title", ScrapBookData.sanitize(this.ELEMENT.contentTitle));
 		for ( var f = 0; f < sbContentSaver.frameList.length; f++ )
 		{
 			var doc = sbContentSaver.frameList[f].document;
-			if ( !doc.links ) continue;
-			var shouldSave = false;
 			var linkList = doc.links;
+			if ( !linkList ) continue;
+			var shouldSave = false;
 			for ( var i = 0; i < linkList.length; i++ )
 			{
 				var urlLR = SB_splitByAnchor(linkList[i].href);
