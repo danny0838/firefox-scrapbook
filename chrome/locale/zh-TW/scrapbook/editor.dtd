@@ -1,6 +1,6 @@
 <!ENTITY sb.toolbar.edit "編輯工具列">
 <!ENTITY sb.toolbar.info "顯示資訊列">
-<!ENTITY sb.edit.eraser "DOM Eraser: 將點選的區塊或 ScrapBook 附加註記刪除。">
+<!ENTITY sb.edit.eraser "DOM Eraser: 將點選的區塊刪除，或可刪除單一標示。">
 <!ENTITY sb.edit.undo "復原">
 <!ENTITY sb.edit.save "存檔">
 <!ENTITY sb.edit.comment "展開文件評注欄">
@@ -13,8 +13,8 @@
 <!ENTITY sb.edit.remove.iframe "移除所有 IFRAME 標籤">
 <!ENTITY sb.edit.remove.script "移除所有 SCRIPT 標籤">
 <!ENTITY sb.highlighter "標示">
-<!ENTITY sb.highlighter.remove.all "刪除所有 ScrapBook 附加註記">
 <!ENTITY sb.highlighter.remove "刪除選取區內標示">
+<!ENTITY sb.highlighter.remove.all "刪除所有標示">
 <!ENTITY sb.source "開啟原始網址">
 <!ENTITY sb.renew "重新擷取">
 <!ENTITY sb.locate "於側邊欄中顯示此檔位置">
