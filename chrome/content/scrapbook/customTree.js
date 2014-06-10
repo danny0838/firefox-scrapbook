@@ -28,9 +28,9 @@ sbCustomTreeView.prototype =
 		this._treeBox = tree;
 	},
 	cycleHeader : function(colID, elem){},
-	getRowProperties : function(index, properties){},
-	getCellProperties : function(row, colID, properties){},
-	getColumnProperties : function(colID, colElem, properties){},
+	getRowProperties : function(index){},
+	getCellProperties : function(row, colID){},
+	getColumnProperties : function(colID, colElem){},
 	isContainer : function(row){},
 	isContainerOpen : function(row){},
 	isContainerEmpty : function(row){},

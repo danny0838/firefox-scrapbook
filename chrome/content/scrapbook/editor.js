@@ -5,11 +5,15 @@ var sbPageEditor = {
 	get COMMENT() { return document.getElementById("ScrapBookEditComment"); },
 
 	item : {},
-	changed1 : false,
-	changed2 : false,
 	multiline : false,
 	focusedWindow : null,
-	savedBody : null,
+
+	documentDataArray : {
+		document : [],
+		histories : [],
+		changed1 : [],
+		changed2 : [],
+	},
 
 	init : function(aID)
 	{
@@ -18,8 +22,6 @@ var sbPageEditor = {
 			if ( aID != ScrapBookBrowserOverlay.getID() ) return;
 			if ( !ScrapBookData.exists(ScrapBookBrowserOverlay.resource) ) { this.disable(true); return; }
 		}
-		this.changed1 = false;
-		this.changed2 = false;
 		if ( aID ) {
 			this.item = ScrapBookData.newItem(aID);
 			for ( var prop in this.item ) this.item[prop] = ScrapBookData.getProperty(ScrapBookBrowserOverlay.resource, prop);
@@ -38,7 +40,6 @@ var sbPageEditor = {
 		document.getElementById("ScrapBookEditIcon").src    = (aID ? this.item.icon  : gBrowser.selectedTab.getAttribute("image")) || ScrapBookUtils.getDefaultIcon();
 		try { document.getElementById("ScrapBookEditTitle").editor.transactionManager.clear(); } catch(ex) {}
 		this.COMMENT.value = aID ? this.item.comment.replace(/ __BR__ /g, this.multiline ? "\n" : "\t") : "";
-		this.refreshUndo();
 		try { this.COMMENT.editor.transactionManager.clear(); } catch(ex) {}
 		if ( aID && gBrowser.currentURI.spec.indexOf("index.html") > 0 )
 		{
@@ -87,7 +88,14 @@ var sbPageEditor = {
 		}
 		else if ( aEvent.type == "beforeunload" )
 		{
-			sbPageEditor.confirmSave();
+			// ScrapBookUtils.getFocusedWindow() could be null in some situation
+			try {
+				if (aEvent.target == ScrapBookUtils.getFocusedWindow().document) {
+					sbPageEditor.confirmSave();
+				}
+			}
+			catch(ex) {
+			}
 		}
 	},
 
@@ -113,7 +121,7 @@ var sbPageEditor = {
 	{
 		var ss = Cc["@mozilla.org/browser/sessionstore;1"].getService(Ci.nsISessionStore);
 		ss.setTabValue(gBrowser.mCurrentTab, "scrapbook-comment", aValue);
-		this.changed2 = true; 
+		this._dataChanged2(true);
 	},
 
 	getSelection : function()
@@ -128,9 +136,8 @@ var sbPageEditor = {
 	{
 		var sel = this.getSelection();
 		if ( !sel ) return;
-		this.allowUndo(this.focusedWindow.document);
+		this.allowUndo();
 		sel.deleteFromDocument();
-		this.changed1 = true;
 	},
 
 	highlight : function(idx)
@@ -139,20 +146,19 @@ var sbPageEditor = {
 		document.getElementById("ScrapBookHighlighter").setAttribute("color", idx);
 		var sel = this.getSelection();
 		if ( !sel ) return;
-		this.allowUndo(this.focusedWindow.document);
+		this.allowUndo();
 		var attr = {};
 		attr["data-sb-obj"] = "linemarker";
 		attr["class"] = "linemarker-marked-line";
 		attr["style"] = ScrapBookUtils.getPref("highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);
 		sbHighlighter.set(this.focusedWindow, sel, "span", attr);
-		this.changed1 = true;
 	},
 
-	removeHighlights : function()
+	removeSbObjectsSelected : function()
 	{
 		var sel = this.getSelection();
 		if ( !sel ) return;
-		this.allowUndo(this.focusedWindow.document);
+		this.allowUndo();
 		var selRange  = sel.getRangeAt(0);
 		var node = selRange.startContainer;
 		if ( node.nodeName == "#text" ) node = node.parentNode;
@@ -164,7 +170,7 @@ var sbPageEditor = {
 			if ( nodeRange.compareBoundaryPoints(Range.START_TO_END, selRange) > -1 )
 			{
 				if ( nodeRange.compareBoundaryPoints(Range.END_TO_START, selRange) > 0 ) break;
-				else if ( node.nodeName.toUpperCase() == "SPAN" && this._getSbObjectType(node) == "linemarker" )
+				else if ( node.nodeType === 1 && this._getSbObjectType(node) )
 				{
 					nodeToDel.push(node);
 				}
@@ -182,14 +188,14 @@ var sbPageEditor = {
 
 	removeSbObjects : function()
 	{
-		this.allowUndo(this.focusedWindow.document);
+		this.allowUndo();
 		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
 		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
 		{
 			var elems = sbContentSaver.frameList[i].document.getElementsByTagName("*");
 			for ( var j = 0; j < elems.length; j++ )
 			{
-				if ( this._getSbObjectType(elems[j]) !== false )
+				if ( this._getSbObjectType(elems[j]) )
 				{
 					// elems gets shortened when elems[j] is removed, minus j afterwards to prevent skipping
 					this.removeSbObj(elems[j]);
@@ -202,7 +208,7 @@ var sbPageEditor = {
 
 	removeElementsByTagName : function(aTagName)
 	{
-		this.allowUndo(this.focusedWindow.document);
+		this.allowUndo();
 		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
 		var shouldSave = false;
 		for ( var i = sbContentSaver.frameList.length - 1; i >= 0; i-- )
@@ -252,7 +258,7 @@ var sbPageEditor = {
 		if ( !sel ) return;
 		aElement.value = ScrapBookUtils.crop(sel.toString().replace(/[\r\n\t\s]+/g, " "), 100);
 		sel.removeAllRanges();
-		this.changed2 = true;
+		this._dataChanged2(true);
 	},
 
 	restore : function()
@@ -268,47 +274,41 @@ var sbPageEditor = {
 		this.showHide(false);
 	},
 
-	allowUndo : function(aTargetDocument)
+	allowUndo : function()
 	{
-		if ( aTargetDocument )
-		{
-			if (!this.savedBody) this.savedBody = [];
-			this.savedBody.push(aTargetDocument.body.cloneNode(true));
-		}
-		this.refreshUndo();
+		var doc = ScrapBookUtils.getFocusedWindow().document;
+		var histories = this._documentData(doc, "histories");
+		histories.push(doc.body.cloneNode(true));
+		this._documentData(doc, "histories", histories);
+		this._dataChanged1(true);
 	},
 
 	undo : function()
 	{
-		if ( this.savedBody && this.savedBody.length ) {
-			var prevBody = this.savedBody.pop();
-			prevBody.ownerDocument.body.parentNode.replaceChild(prevBody, prevBody.ownerDocument.body);
+		var doc = ScrapBookUtils.getFocusedWindow().document;
+		var histories = this._documentData(doc, "histories");
+		while ( histories.length ) {
+			var prevBody = histories.pop();
+			if (!this._isDeadObject(prevBody)) {
+				this._dataChanged1(true);
+				prevBody.ownerDocument.body.parentNode.replaceChild(prevBody, prevBody.ownerDocument.body);
+				return true;
+			}
 		}
-		this.refreshUndo();
-	},
-
-	refreshUndo : function()
-	{
-		if ( this.savedBody && this.savedBody.length ) {
-			document.getElementById("ScrapBookEditUndo").disabled = false;
-			document.getElementById("ScrapBookEditUndo").image = "chrome://scrapbook/skin/edit_undo.png";
-		}
-		else {
-			document.getElementById("ScrapBookEditUndo").disabled = true;
-			document.getElementById("ScrapBookEditUndo").image = "chrome://scrapbook/skin/edit_undo_disable.png";
-		}
+		this._documentData(doc, "histories", histories);
+		ScrapBookUtils.alert( ScrapBookBrowserOverlay.STRING.getString("EDIT_UNDO_LAST") );
+		return false;
 	},
 
 	confirmSave : function()
 	{
-		if ( this.changed2 ) this.saveResource();
-		if ( !this.changed1 ) return 0;
+		if ( this._dataChanged2() ) this.saveResource();
+		if ( !this._dataChanged1() ) return 0;
 		var button = ScrapBookUtils.PROMPT.BUTTON_TITLE_SAVE      * ScrapBookUtils.PROMPT.BUTTON_POS_0
 		           + ScrapBookUtils.PROMPT.BUTTON_TITLE_DONT_SAVE * ScrapBookUtils.PROMPT.BUTTON_POS_1;
 		var text = ScrapBookBrowserOverlay.STRING.getFormattedString("EDIT_SAVE_CHANGES", [ScrapBookUtils.crop(this.item.title, 32)]);
 		var ret = ScrapBookUtils.PROMPT.confirmEx(window, "[ScrapBook]", text, button, null, null, null, null, {});
 		if ( ret == 0 ) this.savePage();
-		this.changed1 = false;
 		return ret;
 	},
 
@@ -367,7 +367,7 @@ var sbPageEditor = {
 				sbInfoViewer.indicateLinks(sbContentSaver.frameList[i]);
 			}
 		}
-		this.changed1 = false;
+		this._dataChanged1(false);
 		window.setTimeout(function() { window.content.stop(); sbPageEditor.disable(false); }, 500);
 	},
 
@@ -389,7 +389,7 @@ var sbPageEditor = {
 		var ss = Cc['@mozilla.org/browser/sessionstore;1']
 			.getService(Ci.nsISessionStore);
 		ss.deleteTabValue(gBrowser.mCurrentTab, "scrapbook-comment");
-		this.changed2 = false;
+		this._dataChanged2(false);
 	},
 
 	disableTemporary : function(msec)
@@ -453,6 +453,54 @@ var sbPageEditor = {
 		}
 	},
 
+	_dataChanged1 : function(aNewValue) {
+		return this._documentData( ScrapBookUtils.getFocusedWindow().document, "changed1", aNewValue );
+	},
+
+	_dataChanged2 : function(aNewValue) {
+		return this._documentData( ScrapBookUtils.getFocusedWindow().document, "changed2", aNewValue );
+	},
+
+	_documentData : function(aDocument, aKey, aNewValue)
+	{
+		var hash = this.documentDataArray;
+		// try to lookup the index of the specific document
+		var idx = false;
+		var firstEmptyIdx = false;
+		for (var i=0, len=hash.document.length; i<len ; i++) {
+			if (this._isDeadObject(hash.document[i])) {
+				if (firstEmptyIdx === false) firstEmptyIdx = i;
+				continue;
+			}
+			if (hash.document[i] == aDocument) { idx = i; break; }
+		}
+		// if the document is not in index, add one
+		// if there is an index left empty, use it
+		if (idx === false) {
+			if (firstEmptyIdx !== false) idx = firstEmptyIdx;
+			else idx = hash.document.length;
+			hash.document[idx] = aDocument;
+			hash.histories[idx] = [];
+			hash.changed1[idx] = false;
+			hash.changed2[idx] = false;
+		}
+		// if given a new value, set it
+		if (aNewValue !== undefined) {
+			hash[aKey][idx] = aNewValue;
+			return;
+		}
+		return hash[aKey][idx];
+	},
+
+	// check if an object is dead (eg. closed window)
+	_isDeadObject : function(aObject)
+	{
+		var dead = false;
+		try { var x = aObject.__proto__; }
+		catch(ex) { dead = true; }
+		return dead;
+	},
+
 	_getSbObjectType : function(aNode)
 	{
 		/**
@@ -481,11 +529,6 @@ var sbPageEditor = {
 				return "block-comment";
 		}
 		return false;
-	},
-
-	_isSbObject : function(aNode)
-	{
-		return (_getSbObjectType(aNode) !== false);
 	},
 	
 };
@@ -571,7 +614,7 @@ var sbDOMEraser = {
 			sbDOMEraser._clearOutline(elem);
 			if ( aEvent.type == "click" )
 			{
-				sbPageEditor.allowUndo(elem.ownerDocument);
+				sbPageEditor.allowUndo();
 				if ( aEvent.shiftKey || aEvent.button == 2 )
 				{
 					sbDOMEraser.isolateNode(elem);
@@ -583,7 +626,6 @@ var sbDOMEraser = {
 					else
 						elem.parentNode.removeChild(elem);
 				}
-				sbPageEditor.changed1 = true;
 			}
 		}
 	},
@@ -665,7 +707,7 @@ var sbAnnotationService = {
 	{
 		var win = ScrapBookUtils.getFocusedWindow();
 		if ( win.document.body instanceof HTMLFrameSetElement ) win = win.frames[0];
-		sbPageEditor.allowUndo(win.document);
+		sbPageEditor.allowUndo();
 		var targetNode;
 		if ( aPreset ) {
 			targetNode = aPreset[0];
@@ -699,13 +741,12 @@ var sbAnnotationService = {
 			headNode.appendChild(win.document.createTextNode("\n"));
 		}
 		this._editSticky(div);
-		sbPageEditor.changed1 = true;
 		sbPageEditor.disableTemporary(500);
 	},
 
 	editSticky : function(oldElem)
 	{
-		sbPageEditor.allowUndo(sbPageEditor.focusedWindow.document);
+		sbPageEditor.allowUndo();
 		this._editSticky(oldElem);
 	},
 
@@ -722,19 +763,17 @@ var sbAnnotationService = {
 		oldElem.parentNode.replaceChild(newElem, oldElem);
 		this.adjustTextArea(newElem);
 		setTimeout(function(){ newElem.firstChild.nextSibling.focus(); }, 100);
-		sbPageEditor.changed1 = true;
 	},
 
 	startDrag : function(aEvent)
 	{
-		sbPageEditor.allowUndo(sbPageEditor.focusedWindow.document);
+		sbPageEditor.allowUndo();
 		this.target = aEvent.originalTarget.parentNode;
 		this.isMove = aEvent.originalTarget.className == "scrapbook-sticky-header";
 		this.offsetX = aEvent.clientX - parseInt(this.target.style[this.isMove ? "left" : "width" ], 10);
 		this.offsetY = aEvent.clientY - parseInt(this.target.style[this.isMove ? "top"  : "height"], 10);
 		aEvent.view.document.addEventListener("mousemove", this.handleEvent, true);
 		aEvent.view.document.addEventListener("mouseup",   this.handleEvent, true);
-		sbPageEditor.changed1 = true;
 	},
 
 	onDrag : function(aEvent)
@@ -796,25 +835,23 @@ var sbAnnotationService = {
 	{
 		var sel = sbPageEditor.getSelection();
 		if ( !sel ) return;
-		sbPageEditor.allowUndo(sbPageEditor.focusedWindow.document);
+		sbPageEditor.allowUndo();
 		var ret = {};
 		if ( !ScrapBookUtils.PROMPT.prompt(window, "[ScrapBook]", ScrapBookBrowserOverlay.STRING.getFormattedString("EDIT_INLINE", [ScrapBookUtils.crop(sel.toString(), 32)]), ret, null, {}) ) return;
 		if ( !ret.value ) return;
 		var attr = { style : "border-bottom: 2px dotted #FF3333; cursor: help;", "data-sb-obj" : "inline" , class : "scrapbook-inline", title : ret.value };
 		sbHighlighter.set(sbPageEditor.focusedWindow, sel, "span", attr);
-		sbPageEditor.changed1 = true;
 	},
 
 	editInline : function(aElement)
 	{
-		sbPageEditor.allowUndo(sbPageEditor.focusedWindow.document);
+		sbPageEditor.allowUndo();
 		var ret = { value : aElement.getAttribute("title") };
 		if ( !ScrapBookUtils.PROMPT.prompt(window, "[ScrapBook]", ScrapBookBrowserOverlay.STRING.getFormattedString("EDIT_INLINE", [ScrapBookUtils.crop(aElement.textContent, 32)]), ret, null, {}) ) return;
 		if ( ret.value )
 			aElement.setAttribute("title", ret.value);
 		else
 			sbPageEditor.removeSbObj(aElement);
-		sbPageEditor.changed1 = true;
 	},
 
 
@@ -822,7 +859,7 @@ var sbAnnotationService = {
 	{
 		var sel = sbPageEditor.getSelection();
 		if ( !sel ) return;
-		sbPageEditor.allowUndo(sbPageEditor.focusedWindow.document);
+		sbPageEditor.allowUndo();
 		var attr = {};
 		if ( aFlag == "L" )
 		{
@@ -855,7 +892,6 @@ var sbAnnotationService = {
 			attr["data-sb-obj"] = "link-file";
 		}
 		sbHighlighter.set(sbPageEditor.focusedWindow, sel, "a", attr);
-		sbPageEditor.changed1 = true;
 	},
 
 };
