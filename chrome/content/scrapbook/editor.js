@@ -457,7 +457,7 @@ var sbPageEditor = {
 	{
 		// defined types:
 		// linemarker (span)
-		// underline (span)
+		// inline (span)
 		// link-url (a)
 		// link-file (a)
 		// sticky-absolute (div)
@@ -472,7 +472,7 @@ var sbPageEditor = {
 			case "linemarker-marked-line":
 				return "linemarker";
 			case "scrapbook-inline":
-				return "underline";
+				return "inline";
 			case "scrapbook-sticky":
 				return "sticky-absolute";
 			case "scrapbook-sticky scrapbook-sticky-relative":
@@ -638,7 +638,7 @@ var sbAnnotationService = {
 				case "sticky-header" : case "sticky-footer" :
 					sbAnnotationService.startDrag(aEvent);
 					break;
-				case "underline" :
+				case "inline" :
 					sbAnnotationService.editInline(aEvent.originalTarget);
 					break;
 				case "block-comment" :
@@ -784,7 +784,7 @@ var sbAnnotationService = {
 		var ret = {};
 		if ( !ScrapBookUtils.PROMPT.prompt(window, "[ScrapBook]", ScrapBookBrowserOverlay.STRING.getFormattedString("EDIT_INLINE", [ScrapBookUtils.crop(sel.toString(), 32)]), ret, null, {}) ) return;
 		if ( !ret.value ) return;
-		var attr = { style : "border-bottom: 2px dotted #FF3333; cursor: help;", "data-sb-mark" : "underline" , class : "scrapbook-inline", title : ret.value };
+		var attr = { style : "border-bottom: 2px dotted #FF3333; cursor: help;", "data-sb-mark" : "inline" , class : "scrapbook-inline", title : ret.value };
 		sbHighlighter.set(sbPageEditor.focusedWindow, sel, "span", attr);
 		sbPageEditor.changed1 = true;
 	},
