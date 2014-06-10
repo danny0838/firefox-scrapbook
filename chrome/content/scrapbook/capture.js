@@ -88,14 +88,9 @@ function SB_splitByAnchor(aURL)
 
 function SB_suggestName(aURL)
 {
-	var fileLR = ScrapBookUtils.splitFileName(ScrapBookUtils.validateFileName(ScrapBookUtils.getFileName(decodeURI(aURL))));
-	fileLR[0] = fileLR[0].toLowerCase();
-	if ( !fileLR[0] || fileLR[0] == "index" ) fileLR[0] = "default";
-	var name = fileLR[0];
-	var seq = 0;
-	while ( gFile2URL[name] ) name = fileLR[0] + "_" + sbContentSaver.leftZeroPad3(++seq);
-	gFile2URL[name + ".html"] = aURL;
-	gFile2URL[name + ".css"]  = true;
+	var name = ScrapBookUtils.splitFileName(ScrapBookUtils.validateFileName(ScrapBookUtils.getFileName(decodeURI(aURL))))[0];
+	name = name.toLowerCase();
+	if ( !name || name == "index" ) name = "default";
 	return name;
 }
 
