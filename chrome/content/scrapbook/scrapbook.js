@@ -359,8 +359,10 @@ var sbController = {
 					continue;
 				ScrapBookData.removeFromContainer("urn:scrapbook:search", aResList[i]);
 			}
-			if (!ScrapBookData.exists(aResList[i]) || 
-			    ScrapBookData.getRelativeIndex(aParResList[i], aResList[i]) < 0) {
+			if (!ScrapBookData.exists(aResList[i])) {
+				continue;
+			}
+			else if (ScrapBookData.getRelativeIndex(aParResList[i], aResList[i]) < 0) {
 				ScrapBookUtils.alert("ERROR: Failed to remove resource.\n" + aResList[i].Value);
 				continue;
 			}
