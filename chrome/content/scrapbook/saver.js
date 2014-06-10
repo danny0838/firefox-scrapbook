@@ -312,7 +312,7 @@ var sbContentSaver = {
 		}
 		var newFileName = this.download(aFileURL);
 		if ( aCaptureType == "image" ) {
-			var myHTML = '<html><body><img src="' + newFileName + '"></body></html>';
+			var myHTML = '<html><head><meta http-equiv="Content-Type" content="text/html; Charset=UTF-8"></head><body><img src="' + newFileName + '"></body></html>';
 		} else {
 			var myHTML = '<html><head><meta http-equiv="Content-Type" content="text/html; Charset=UTF-8"><meta http-equiv="refresh" content="0;URL=./' + newFileName + '"></head><body></body></html>';
 		}
