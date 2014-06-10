@@ -53,10 +53,8 @@ const ScrapBookUtils = {
 			var fileEnum = aDir.directoryEntries;
 			while (fileEnum.hasMoreElements()) {
 				file = fileEnum.getNext().QueryInterface(Ci.nsIFile);
-				if (file.isFile())
-					file.remove(false);
+				file.remove(true);
 			}
-			file = aDir;
 			if (aDir.isDirectory())
 				aDir.remove(false);
 			return true;

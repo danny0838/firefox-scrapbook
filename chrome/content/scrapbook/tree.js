@@ -145,9 +145,7 @@ var sbTreeUI = {
 		var parList = [];
 		if ( this.TREE.view.selection.count > 1 )
 		{
-			var idxList = this.getSelection(false, 2);
-			if ( idxList.length < 1 ) return;
-			if ( this.validateMultipleSelection(idxList) == false ) return;
+			var idxList = this.getSelection(false, null);
 			for ( var i = 0; i < idxList.length; i++ )
 			{
 				resList.push( this.TREE.builderView.getResourceAtIndex(idxList[i]) );
@@ -214,16 +212,6 @@ var sbTreeUI = {
 			}
 		}
 		return ret;
-	},
-
-	validateMultipleSelection : function(aIdxList)
-	{
-		if ( aIdxList.length != this.TREE.view.selection.count )
-		{
-			ScrapBookUtils.alert(ScrapBookUtils.getLocaleString("ERROR_MULTIPLE_SELECTION"));
-			return false;
-		}
-		return true;
 	},
 
 	toggleFolder : function(aIdx)
