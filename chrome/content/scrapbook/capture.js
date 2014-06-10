@@ -549,7 +549,7 @@ var sbCrossLinker = {
 				{
 					var name = gURL2Name[urlLR[0]];
 					linkList[i].href = name + ".html" + urlLR[1];
-					linkList[i].setAttribute("indepth", "true");
+					linkList[i].setAttribute("data-sb-indepth", "true");
 					if ( !this.nodeHash[name] )
 					{
 						var text = linkList[i].text ? linkList[i].text.replace(/\r|\n|\t/g, " ") : "";
