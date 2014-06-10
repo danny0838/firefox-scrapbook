@@ -344,8 +344,8 @@ var sbInvisibleBrowser = {
 		this.onload = function(){
 			// onload may be fired many times when a document is loaded
 			// (loading of a frame may fire)
-			// so we need this dirty workaround...
-			if (!sbInvisibleBrowser.loading) return;
+			// we need this check to allow only the desired url and only fire once...
+			if (sbInvisibleBrowser.ELEMENT.currentURI.spec !== sbInvisibleBrowser.loading) return;
 			sbInvisibleBrowser.loading = false;
 			sbInvisibleBrowser.execCapture();
 		};
@@ -369,7 +369,7 @@ var sbInvisibleBrowser = {
 			this.ELEMENT.docShell.QueryInterface(Ci.nsIDocShellHistory).useGlobalHistory = false;
 		else
 			this.ELEMENT.docShell.useGlobalHistory = false;
-		this.loading = true;
+		this.loading = aURL;
 		this.ELEMENT.loadURI(aURL, null, null);
 	},
 
