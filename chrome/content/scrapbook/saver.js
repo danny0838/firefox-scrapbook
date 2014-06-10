@@ -549,7 +549,7 @@ var sbContentSaver = {
 				var tmpRefURL = this.refURLObj;
 				// retrieve contentDocument from the corresponding real frame
 				var idx = aNode.getAttribute("data-sb-frame-id");
-				var newFileName = this.saveDocumentInternal(this.frames[idx].contentDocument, this.name);
+				var newFileName = this.saveDocumentInternal(this.frames[idx].contentDocument, this.name + "_" + (parseInt(idx)+1));
 				aNode.setAttribute("src", newFileName);
 				aNode.removeAttribute("data-sb-frame-id");
 				this.refURLObj = tmpRefURL;
