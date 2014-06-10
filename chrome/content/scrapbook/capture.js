@@ -489,7 +489,6 @@ var sbCrossLinker = {
 			}
 		};
 		this.baseURL = ScrapBookUtils.IO.newFileURI(ScrapBookUtils.getContentDir(gReferItem.id)).spec;
-		this.nameList.push("index");
 		for ( var url in gURL2Name )
 		{
 			this.nameList.push(gURL2Name[url]);
