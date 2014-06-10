@@ -185,6 +185,7 @@ var sbContentSaver = {
 		var arr = this.getUniqueFileName(aFileKey + ".css", this.refURLObj.spec);
 		var myCSSFileName = arr[0];
 
+		// construct the tree, especially for capture of partial selection
 		if ( this.selection )
 		{
 			var myRange = this.selection.getRangeAt(0);
@@ -227,10 +228,10 @@ var sbContentSaver = {
 			this.addCommentTag(tmpNodeList[tmpNodeList.length-1], "/DOCUMENT_FRAGMENT");
 		}
 
-
+		// process HTML DOM
 		this.processDOMRecursively(rootNode);
 
-
+		// process all inline and link CSS, will merge them into index.css later
 		var myCSS = "";
 		if ( this.option["styles"] )
 		{
@@ -253,16 +254,36 @@ var sbContentSaver = {
 			}
 		}
 
-
+		// change the charset to UTF-8
+		// also change the meta tag; generate one if none found
 		this.item.chars = "UTF-8";
-		var metaNode = aDocument.createElement("meta");
-		metaNode.setAttribute("content", aDocument.contentType + "; charset=" + this.item.chars);
-		metaNode.setAttribute("http-equiv", "Content-Type");
-		rootNode.firstChild.insertBefore(aDocument.createTextNode("\n"), rootNode.firstChild.firstChild);
-		rootNode.firstChild.insertBefore(metaNode, rootNode.firstChild.firstChild);
-		rootNode.firstChild.insertBefore(aDocument.createTextNode("\n"), rootNode.firstChild.firstChild);
+		var metas = rootNode.getElementsByTagName("meta"), meta, hasmeta = false;
+		for (var i=0, len=metas.length; i<len; ++i) {
+			meta = metas[i];
+			if (meta.hasAttribute("http-equiv") && meta.hasAttribute("content") &&
+				meta.getAttribute("http-equiv").toLowerCase() == "content-type" && 
+				meta.getAttribute("content").match(/^[^;]*;\s*charset=(.*)$/i) )
+			{
+				hasmeta = true;
+				meta.setAttribute("content", "text/html; charset=UTF-8");
+			}
+			else if ( meta.hasAttribute("charset") )
+			{
+				hasmeta = true;
+				meta.setAttribute("charset", "UTF-8");
+			}
+		}
+		if (!hasmeta) {
+			// use older version for better compatibility
+			var metaNode = aDocument.createElement("meta");
+			metaNode.setAttribute("content", aDocument.contentType + "; charset=" + this.item.chars);
+			metaNode.setAttribute("http-equiv", "Content-Type");
+			rootNode.firstChild.insertBefore(aDocument.createTextNode("\n"), rootNode.firstChild.firstChild);
+			rootNode.firstChild.insertBefore(metaNode, rootNode.firstChild.firstChild);
+			rootNode.firstChild.insertBefore(aDocument.createTextNode("\n"), rootNode.firstChild.firstChild);
+		}
 
-
+		// generate the HTML and CSS file and save
 		var myHTML;
 		myHTML = this.surroundByTags(rootNode, rootNode.innerHTML);
 		myHTML = this.doctypeToString(aDocument.doctype) + myHTML;
@@ -498,14 +519,6 @@ var sbContentSaver = {
 				break;
 			case "form" : 
 				aNode.setAttribute("action", ScrapBookUtils.resolveURL(this.refURLObj.spec, aNode.action));
-				break;
-			case "meta" : 
-				if ( aNode.hasAttribute("http-equiv") && aNode.hasAttribute("content") &&
-				     aNode.getAttribute("http-equiv").toLowerCase() == "content-type" && 
-				     aNode.getAttribute("content").match(/charset\=/i) )
-				{
-					return this.removeNodeFromParent(aNode);
-				}
 				break;
 			case "frame"  : 
 			case "iframe" : 
