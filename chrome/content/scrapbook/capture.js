@@ -342,7 +342,15 @@ var sbInvisibleBrowser = {
 	init : function()
 	{
 		this.ELEMENT.webProgress.addProgressListener(this, Ci.nsIWebProgress.NOTIFY_ALL);
-		this.onload = function(){ sbInvisibleBrowser.execCapture(); };
+		this.loading = false;
+		this.onload = function(){
+			// onload may be fired many times when a document is loaded
+			// (loading of a frame may fire)
+			// so we need this dirty workaround...
+			if (!sbInvisibleBrowser.loading) return;
+			sbInvisibleBrowser.loading = false;
+			sbInvisibleBrowser.execCapture();
+		};
 		this.ELEMENT.addEventListener("load", sbInvisibleBrowser.onload, true);
 	},
 
@@ -363,6 +371,7 @@ var sbInvisibleBrowser = {
 			this.ELEMENT.docShell.QueryInterface(Ci.nsIDocShellHistory).useGlobalHistory = false;
 		else
 			this.ELEMENT.docShell.useGlobalHistory = false;
+		this.loading = true;
 		this.ELEMENT.loadURI(aURL, null, null);
 	},
 
