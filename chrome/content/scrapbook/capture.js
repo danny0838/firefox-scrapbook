@@ -504,7 +504,9 @@ var sbCrossLinker = {
 		if ( ++this.index < this.nameList.length )
 		{
 			sbInvisibleBrowser.fileCount = 0;
-			this.ELEMENT.loadURI(this.baseURL + this.nameList[this.index] + ".html", null, null);
+			var url = this.baseURL + this.nameList[this.index] + ".html";
+			sbInvisibleBrowser.loading = url;
+			this.ELEMENT.loadURI(url, null, null);
 		}
 		else
 		{
@@ -517,6 +519,10 @@ var sbCrossLinker = {
 
 	exec : function()
 	{
+		// onload may be fired many times when a document is loaded
+		// we need this check to prevent
+		if (this.ELEMENT.currentURI.spec !== sbInvisibleBrowser.loading) return;
+		sbInvisibleBrowser.loading = false;
 		if ( this.ELEMENT.currentURI.scheme != "file" )
 		{
 			return;
