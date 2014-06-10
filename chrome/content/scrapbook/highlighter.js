@@ -60,8 +60,8 @@ var sbHighlighter = {
 				ScrapBookUtils.alert("ERROR: Can't attach link across tags."); return;
 			}
 
-			if ( ! sameNode || ! this._isTextNode( startC ) ) { 
-
+			// manage nodes between startC and endC
+			if ( ! sameNode || ! this._isTextNode( startC ) ) {
 				var nodeWalker 
 					= doc.createTreeWalker(
 							range.commonAncestorContainer,
@@ -91,22 +91,24 @@ var sbHighlighter = {
 				}
 			}
 
-			if ( this._isTextNode( endC ) ) 
+			// manage endC
+			if ( this._isTextNode( endC ) && eOffset != 0 ) {
 				endC.splitText( eOffset );
-			
-			if ( ! sameNode) 
-				this._wrapTextNodeWithSpan(
-						doc,
-						endC,
-						this._createNode( 
-							aWindow, 
-							aNodeName, 
-							aAttributes,
-							this.nodePositionInRange.END
-						)
-				); 
+				if ( ! sameNode) 
+					this._wrapTextNodeWithSpan(
+							doc,
+							endC,
+							this._createNode( 
+								aWindow, 
+								aNodeName, 
+								aAttributes,
+								this.nodePositionInRange.END
+							)
+					); 
+			}
 
-			if ( this._isTextNode( startC ) ) { 
+			// managge startC
+			if ( this._isTextNode( startC ) && sOffset != startC.length ) { 
 				var secondHalf = startC.splitText( sOffset );
 				if ( sameNode ) {
 					this._wrapTextNodeWithSpan(
@@ -167,13 +169,9 @@ var sbHighlighter = {
 
 	_wrapTextNodeWithSpan : function( aDoc, aTextNode, aSpanNode ) 
 	{
-		var clonedTextNode = aTextNode.cloneNode( false );
-		var nodeParent	 = aTextNode.parentNode;	
-
-		aSpanNode.appendChild( clonedTextNode );
-		nodeParent.replaceChild( aSpanNode, aTextNode );
-
-		return clonedTextNode;
+		aTextNode.parentNode.insertBefore(aSpanNode, aTextNode);
+		aSpanNode.appendChild( aTextNode );
+		return aTextNode;
 	},
 
 };

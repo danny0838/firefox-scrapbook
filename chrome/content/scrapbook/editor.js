@@ -155,6 +155,7 @@ var sbPageEditor = {
 		var node = selRange.startContainer;
 		if ( node.nodeName == "#text" ) node = node.parentNode;
 		var nodeRange = window.content.document.createRange();
+		var nodeToDel = [];
 		traceTree : while ( true )
 		{
 			nodeRange.selectNode(node);
@@ -163,7 +164,7 @@ var sbPageEditor = {
 				if ( nodeRange.compareBoundaryPoints(Range.END_TO_START, selRange) > 0 ) break;
 				else if ( node.nodeName.toUpperCase() == "SPAN" && node.getAttribute("class") == "linemarker-marked-line" )
 				{
-					this.stripAttributes(node);
+					nodeToDel.push(node);
 				}
 			}
 			if ( node.hasChildNodes() ) node = node.firstChild;
@@ -173,6 +174,7 @@ var sbPageEditor = {
 				node = node.nextSibling;
 			}
 		}
+		for ( var i = 0, len = nodeToDel.length; i < len; ++i ) this.stripNode(nodeToDel[i]);
 		this.changed1 = true;
 	},
 
@@ -186,7 +188,9 @@ var sbPageEditor = {
 			{
 				if ( elems[j].getAttribute("class") == aClassName )
 				{
-					this.stripAttributes(elems[j]);
+					// elems gets shortened when elems[j] is removed, minus j afterwards to prevent skipping
+					this.stripNode(elems[j]);
+					j--;
 				}
 			}
 		}
@@ -220,6 +224,15 @@ var sbPageEditor = {
 		aElement.removeAttribute("style");
 		aElement.removeAttribute("class");
 		aElement.removeAttribute("title");
+	},
+
+	stripNode : function(node)
+	{
+		var childs = node.childNodes;
+		var parent = node.parentNode;
+		while ( childs.length ) parent.insertBefore(childs[0], node);
+		parent.removeChild(node);
+		parent.normalize();
 	},
 
 	selection2Title : function(aElement)
