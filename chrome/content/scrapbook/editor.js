@@ -241,13 +241,6 @@ var sbPageEditor = {
 		}
 	},
 
-	stripAttributes : function(aElement)
-	{
-		aElement.removeAttribute("style");
-		aElement.removeAttribute("class");
-		aElement.removeAttribute("title");
-	},
-
 	stripNode : function(aNode)
 	{
 		var childs = aNode.childNodes;
@@ -542,7 +535,7 @@ var sbDOMEraser = {
 		var elem = aEvent.target;
 		var tagName = elem.localName.toUpperCase();
 		if ( aEvent.type != "keypress" && ["SCROLLBAR","HTML","BODY","FRAME","FRAMESET"].indexOf(tagName) >= 0 ) return;
-		var onMarker = (tagName == "SPAN" && elem.getAttribute("class") == "linemarker-marked-line");
+		var onMarker = sbPageEditor._getSbObjectType(elem);
 		if ( aEvent.type == "mouseover" || aEvent.type == "mousemove" )
 		{
 			if ( aEvent.type == "mousemove" && ++sbDOMEraser.verbose % 3 != 0 ) return;
@@ -564,15 +557,14 @@ var sbDOMEraser = {
 					if ( elem.id ) tooltip.textContent += ' id="' + elem.id + '"';
 					if ( elem.className ) tooltip.textContent += ' class="' + elem.className + '"';
 				}
-				elem.style.outline = onMarker ? "2px dashed #0000FF" : "2px solid #FF0000";
+				sbDOMEraser._setOutline(elem, onMarker ? "2px dashed #0000FF" : "2px solid #FF0000");
 			}
 		}
 		else if ( aEvent.type == "mouseout" || aEvent.type == "click" )
 		{
 			var tooltip = elem.ownerDocument.getElementById("scrapbook-eraser-tooltip");
 			if ( tooltip ) elem.ownerDocument.body.removeChild(tooltip);
-			elem.style.outline = "";
-			if ( !elem.getAttribute("style") ) elem.removeAttribute("style");
+			sbDOMEraser._clearOutline(elem);
 			if ( aEvent.type == "click" )
 			{
 				sbPageEditor.allowUndo(elem.ownerDocument);
@@ -583,7 +575,7 @@ var sbDOMEraser = {
 				else
 				{
 					if ( onMarker )
-						sbPageEditor.stripAttributes(elem);
+						sbPageEditor.stripNode(elem);
 					else
 						elem.parentNode.removeChild(elem);
 				}
@@ -611,6 +603,18 @@ var sbDOMEraser = {
 		}
 	},
 
+	_setOutline : function(aElement, outline)
+	{
+		aElement.setAttribute("data-sb-old-outline", aElement.style.outline);
+		aElement.style.outline = outline;
+	},
+
+	_clearOutline : function(aElement)
+	{
+		aElement.style.outline = aElement.getAttribute("data-sb-old-outline");
+		if ( !aElement.getAttribute("style") ) aElement.removeAttribute("style");
+		aElement.removeAttribute("data-sb-old-outline");
+	}
 };
 
 
@@ -796,7 +800,7 @@ var sbAnnotationService = {
 		if ( ret.value )
 			aElement.setAttribute("title", ret.value);
 		else
-			sbPageEditor.stripAttributes(aElement);
+			sbPageEditor.stripNode(aElement);
 		sbPageEditor.changed1 = true;
 	},
 
