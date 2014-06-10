@@ -38,6 +38,7 @@ var sbContentSaver = {
 		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "styles" : true, "script" : false };
 		this.linkURLs = [];
 		this.frameList = [];
+		this.frames = [];
 		this.isMainFrame = true;
 		if ( aPresetData )
 		{
