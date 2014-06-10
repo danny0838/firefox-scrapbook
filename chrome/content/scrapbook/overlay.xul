@@ -150,7 +150,7 @@
 						<menuitem label="&sb.edit.remove.script;" oncommand="sbPageEditor.removeElementsByTagName('script');" />
 						<menuitem label="&sb.edit.remove.iframe;" oncommand="sbPageEditor.removeElementsByTagName('iframe');" />
 						<menuseparator />
-						<menuitem label="&sb.highlighter.remove.all;" oncommand="sbPageEditor.removeAllSpan('linemarker-marked-line');" />
+						<menuitem label="&sb.highlighter.remove.all;" oncommand="sbPageEditor.removeSbObjects();" />
 						<menuitem label="&sb.highlighter.remove;"     oncommand="sbPageEditor.removeHighlights();" />
 						<menuseparator />
 						<menuitem label="&sb.edit.cutter;" oncommand="sbPageEditor.cutter();" />
