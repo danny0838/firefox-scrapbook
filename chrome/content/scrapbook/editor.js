@@ -341,6 +341,7 @@ var sbPageEditor = {
 		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
 		{
 			this.removeAllStyles(sbContentSaver.frameList[i]);
+			this.saveAllSticky(sbContentSaver.frameList[i]);
 			var doc = sbContentSaver.frameList[i].document;
 			if ( doc.contentType != "text/html" )
 			{
@@ -452,6 +453,18 @@ var sbPageEditor = {
 		for ( var i = nodes.length - 1; i >= 0 ; i-- )
 		{
 			if ( nodes[i].id.indexOf("scrapbook-") == 0 ) sbContentSaver.removeNodeFromParent(nodes[i]);
+		}
+	},
+
+	saveAllSticky : function(aWindow)
+	{
+		var nodes = aWindow.document.getElementsByTagName("div");
+		for ( var i = nodes.length - 1; i >= 0 ; i-- )
+		{
+			var node = nodes[i];
+			if (sbPageEditor._getSbObjectType(node) == "sticky" && node.getAttribute("data-sb-active")) {
+				sbAnnotationService.saveSticky(node);
+			}
 		}
 	},
 
@@ -693,7 +706,10 @@ var sbAnnotationService = {
 					break;
 				case "sticky-header" :
 				case "sticky-footer" :
-					sbAnnotationService.startDrag(aEvent);
+					var sticky = aEvent.originalTarget.parentNode;
+					if (sticky.getAttribute("data-sb-active")==="1") {
+						sbAnnotationService.startDrag(aEvent);
+					}
 					break;
 				case "inline" :
 					sbAnnotationService.editInline(aEvent.originalTarget);
@@ -711,10 +727,10 @@ var sbAnnotationService = {
 			switch ( sbPageEditor._getSbObjectType(aEvent.originalTarget) )
 			{
 				case "sticky-save" :
-					sbAnnotationService.saveSticky(aEvent.originalTarget);
+					sbAnnotationService.saveSticky(aEvent.originalTarget.parentNode.parentNode);
 					break;
 				case "sticky-delete" :
-					sbAnnotationService.deleteSticky(aEvent.originalTarget);
+					sbAnnotationService.deleteSticky(aEvent.originalTarget.parentNode.parentNode);
 					break;
 			}
 		}
@@ -782,23 +798,24 @@ var sbAnnotationService = {
 		setTimeout(function(){ newElem.firstChild.nextSibling.focus(); }, 100);
 	},
 
-	saveSticky : function(aElem)
+	saveSticky : function(sticky)
 	{
-		sbPageEditor.allowUndo();
-		aElem.parentNode.parentNode.appendChild(document.createTextNode(aElem.parentNode.previousSibling.value));
-		aElem.parentNode.parentNode.removeChild(aElem.parentNode.previousSibling);
-		aElem.parentNode.parentNode.removeChild(aElem.parentNode);
+		var header = sticky.firstChild;
+		var textarea = header.nextSibling;
+		var footer = sticky.lastChild;
+		sticky.replaceChild(sticky.ownerDocument.createTextNode(textarea.value), textarea);
+		sticky.removeChild(footer);
+		sticky.removeAttribute("data-sb-active");
+		header.removeAttribute("data-sb-active");
 	},
 
-	deleteSticky : function(aElem)
+	deleteSticky : function(sticky)
 	{
-		sbPageEditor.allowUndo();
-		aElem.parentNode.parentNode.parentNode.removeChild(aElem.parentNode.parentNode);
+		sticky.parentNode.removeChild(sticky);
 	},
 
 	startDrag : function(aEvent)
 	{
-		sbPageEditor.allowUndo();
 		this.target = aEvent.originalTarget.parentNode;
 		this.isMove = aEvent.originalTarget.className == "scrapbook-sticky-header";
 		this.offsetX = aEvent.clientX - parseInt(this.target.style[this.isMove ? "left" : "width" ], 10);
@@ -837,6 +854,8 @@ var sbAnnotationService = {
 		mainDiv.appendChild(headDiv);
 		if ( isEditable )
 		{
+			mainDiv.setAttribute("data-sb-active", "1");
+			if ( !isRelative ) headDiv.setAttribute("data-sb-active", "1");
 			var textArea = window.content.document.createElement("TEXTAREA");
 			var footDiv  = window.content.document.createElement("DIV");
 			var button1  = window.content.document.createElement("INPUT");
@@ -847,6 +866,7 @@ var sbAnnotationService = {
 			button2.setAttribute("data-sb-obj", "sticky-delete");
 			footDiv.className = "scrapbook-sticky-footer";
 			footDiv.setAttribute("data-sb-obj", "sticky-footer");
+			footDiv.setAttribute("data-sb-active", "1");
 			footDiv.appendChild(button1); footDiv.appendChild(button2);
 			mainDiv.appendChild(textArea); mainDiv.appendChild(footDiv);
 		}
