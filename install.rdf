@@ -6,10 +6,17 @@
 	<Description about="urn:mozilla:install-manifest">
 		<em:id>scrapbookx@addons.mozilla.org</em:id>
 		<em:type>2</em:type>
+		<em:version>1.6.1</em:version>
+
 		<em:name>ScrapBook X</em:name>
-		<em:version>1.6.0a1</em:version>
 		<em:description>Helps you to save Web pages and organize the collection.</em:description>
 		<em:creator>Danny Lin</em:creator>
+		<em:developer>Gomita</em:developer>
+		<em:developer>haselnuss</em:developer>
+		<em:contributor>Joe Antao</em:contributor>
+		<em:contributor>Michael Brüggemann</em:contributor>
+		<em:homepageURL>https://github.com/danny0838/firefox-scrapbook</em:homepageURL>
+
 		<em:localized>
 			<Description>
 				<em:locale>ja</em:locale>
@@ -19,6 +26,7 @@
 				<em:homepageURL>https://github.com/danny0838/firefox-scrapbook</em:homepageURL>
 			</Description>
 		</em:localized>
+
 		<em:localized>
 			<Description>
 				<em:locale>cs-CZ</em:locale>
@@ -29,6 +37,7 @@
 				<em:homepageURL>https://github.com/danny0838/firefox-scrapbook</em:homepageURL>
 			</Description>
 		</em:localized>
+
 		<em:localized>
 			<Description>
 				<em:locale>de</em:locale>
@@ -39,6 +48,7 @@
 				<em:homepageURL>https://github.com/danny0838/firefox-scrapbook</em:homepageURL>
 			</Description>
 		</em:localized>
+
 		<em:localized>
 			<Description>
 				<em:locale>es-ES</em:locale>
@@ -49,6 +59,7 @@
 				<em:homepageURL>https://github.com/danny0838/firefox-scrapbook</em:homepageURL>
 			</Description>
 		</em:localized>
+
 		<em:localized>
 			<Description>
 				<em:locale>fi</em:locale>
@@ -59,6 +70,7 @@
 				<em:homepageURL>https://github.com/danny0838/firefox-scrapbook</em:homepageURL>
 			</Description>
 		</em:localized>
+
 		<em:localized>
 			<Description>
 				<em:locale>fr</em:locale>
@@ -69,6 +81,7 @@
 				<em:homepageURL>https://github.com/danny0838/firefox-scrapbook</em:homepageURL>
 			</Description>
 		</em:localized>
+
 		<em:localized>
 			<Description>
 				<em:locale>gl-ES</em:locale>
@@ -79,6 +92,7 @@
 				<em:homepageURL>https://github.com/danny0838/firefox-scrapbook</em:homepageURL>
 			</Description>
 		</em:localized>
+
 		<em:localized>
 			<Description>
 				<em:locale>it</em:locale>
@@ -89,6 +103,7 @@
 				<em:homepageURL>https://github.com/danny0838/firefox-scrapbook</em:homepageURL>
 			</Description>
 		</em:localized>
+
 		<em:localized>
 			<Description>
 				<em:locale>ko-KR</em:locale>
@@ -99,6 +114,7 @@
 				<em:homepageURL>https://github.com/danny0838/firefox-scrapbook</em:homepageURL>
 			</Description>
 		</em:localized>
+
 		<em:localized>
 			<Description>
 				<em:locale>pl</em:locale>
@@ -109,6 +125,7 @@
 				<em:homepageURL>https://github.com/danny0838/firefox-scrapbook</em:homepageURL>
 			</Description>
 		</em:localized>
+
 		<em:localized>
 			<Description>
 				<em:locale>ro</em:locale>
@@ -119,6 +136,7 @@
 				<em:homepageURL>https://github.com/danny0838/firefox-scrapbook</em:homepageURL>
 			</Description>
 		</em:localized>
+
 		<em:localized>
 			<Description>
 				<em:locale>ru-RU</em:locale>
@@ -129,6 +147,7 @@
 				<em:homepageURL>https://github.com/danny0838/firefox-scrapbook</em:homepageURL>
 			</Description>
 		</em:localized>
+
 		<em:localized>
 			<Description>
 				<em:locale>sk-SK</em:locale>
@@ -139,6 +158,7 @@
 				<em:homepageURL>https://github.com/danny0838/firefox-scrapbook</em:homepageURL>
 			</Description>
 		</em:localized>
+
 		<em:localized>
 			<Description>
 				<em:locale>sv-SE</em:locale>
@@ -149,6 +169,7 @@
 				<em:homepageURL>https://github.com/danny0838/firefox-scrapbook</em:homepageURL>
 			</Description>
 		</em:localized>
+
 		<em:localized>
 			<Description>
 				<em:locale>tr</em:locale>
@@ -159,6 +180,7 @@
 				<em:homepageURL>https://github.com/danny0838/firefox-scrapbook</em:homepageURL>
 			</Description>
 		</em:localized>
+
 		<em:localized>
 			<Description>
 				<em:locale>zh-CN</em:locale>
@@ -169,6 +191,7 @@
 				<em:homepageURL>https://github.com/danny0838/firefox-scrapbook</em:homepageURL>
 			</Description>
 		</em:localized>
+
 		<em:localized>
 			<Description>
 				<em:locale>zh-TW</em:locale>
@@ -179,13 +202,9 @@
 				<em:homepageURL>https://github.com/danny0838/firefox-scrapbook</em:homepageURL>
 			</Description>
 		</em:localized>
-		<em:contributor>Gomita</em:contributor>
-		<em:contributor>haselnuss</em:contributor>
-		<em:contributor>Joe Antao</em:contributor>
-		<em:contributor>Michael Brüggemann</em:contributor>
+
 		<em:iconURL>chrome://scrapbook/skin/main_32.png</em:iconURL>
 		<em:optionsURL>chrome://scrapbook/content/prefs.xul</em:optionsURL>
-		<em:homepageURL>https://github.com/danny0838/firefox-scrapbook</em:homepageURL>
 		<em:targetApplication>
 			<Description>
 				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
