@@ -52,6 +52,8 @@ var sbPageEditor = {
 		{
 			sbContentSaver.frameList[i].document.removeEventListener("mousedown", sbAnnotationService.handleEvent, true);
 			sbContentSaver.frameList[i].document.addEventListener("mousedown",    sbAnnotationService.handleEvent, true);
+			sbContentSaver.frameList[i].document.removeEventListener("click", sbAnnotationService.handleEvent, true);
+			sbContentSaver.frameList[i].document.addEventListener("click",    sbAnnotationService.handleEvent, true);
 			sbContentSaver.frameList[i].document.removeEventListener("keypress", this.handleEvent, true);
 			sbContentSaver.frameList[i].document.addEventListener("keypress",    this.handleEvent, true);
 			if ( aID && document.getElementById("ScrapBookStatusPopupD").getAttribute("checked") ) sbInfoViewer.indicateLinks(sbContentSaver.frameList[i]);
@@ -511,6 +513,10 @@ var sbPageEditor = {
 		 * link-url (a)
 		 * link-file (a)
 		 * sticky (div)
+		 * sticky-header
+		 * sticky-footer
+		 * sticky-save
+		 * sticky-delete
 		 * block-comment (?)
 		 * stylesheet
 		 */
@@ -685,6 +691,10 @@ var sbAnnotationService = {
 					if ( aEvent.originalTarget.childNodes.length != 2 ) return;
 					sbAnnotationService.editSticky(aEvent.originalTarget);
 					break;
+				case "sticky-header" :
+				case "sticky-footer" :
+					sbAnnotationService.startDrag(aEvent);
+					break;
 				case "inline" :
 					sbAnnotationService.editInline(aEvent.originalTarget);
 					break;
@@ -692,15 +702,22 @@ var sbAnnotationService = {
 					sbAnnotationService.createSticky([aEvent.originalTarget.previousSibling, aEvent.originalTarget.firstChild.data]);
 					aEvent.originalTarget.parentNode.removeChild(aEvent.originalTarget);
 					break;
-				default :
-					var cName = aEvent.originalTarget.className;
-					if (cName == 'scrapbook-sticky-header' || cName == 'scrapbook-sticky-footer') {
-						sbAnnotationService.startDrag(aEvent);
-					}
 			}
 		}
 		else if ( aEvent.type == "mousemove" ) sbAnnotationService.onDrag(aEvent);
 		else if ( aEvent.type == "mouseup"   ) sbAnnotationService.stopDrag(aEvent);
+		else if ( aEvent.type == "click" )
+		{
+			switch ( sbPageEditor._getSbObjectType(aEvent.originalTarget) )
+			{
+				case "sticky-save" :
+					sbAnnotationService.saveSticky(aEvent.originalTarget);
+					break;
+				case "sticky-delete" :
+					sbAnnotationService.deleteSticky(aEvent.originalTarget);
+					break;
+			}
+		}
 	},
 
 	createSticky : function(aPreset)
@@ -765,6 +782,20 @@ var sbAnnotationService = {
 		setTimeout(function(){ newElem.firstChild.nextSibling.focus(); }, 100);
 	},
 
+	saveSticky : function(aElem)
+	{
+		sbPageEditor.allowUndo();
+		aElem.parentNode.parentNode.appendChild(document.createTextNode(aElem.parentNode.previousSibling.value));
+		aElem.parentNode.parentNode.removeChild(aElem.parentNode.previousSibling);
+		aElem.parentNode.parentNode.removeChild(aElem.parentNode);
+	},
+
+	deleteSticky : function(aElem)
+	{
+		sbPageEditor.allowUndo();
+		aElem.parentNode.parentNode.parentNode.removeChild(aElem.parentNode.parentNode);
+	},
+
 	startDrag : function(aEvent)
 	{
 		sbPageEditor.allowUndo();
@@ -802,6 +833,7 @@ var sbAnnotationService = {
 		var mainDiv = window.content.document.createElement("DIV");
 		var headDiv = window.content.document.createElement("DIV");
 		headDiv.className = "scrapbook-sticky-header";
+		headDiv.setAttribute("data-sb-obj", "sticky-header");
 		mainDiv.appendChild(headDiv);
 		if ( isEditable )
 		{
@@ -810,10 +842,11 @@ var sbAnnotationService = {
 			var button1  = window.content.document.createElement("INPUT");
 			var button2  = window.content.document.createElement("INPUT");
 			button1.setAttribute("type", "image"); button1.setAttribute("src", "chrome://scrapbook/skin/sticky_save.png");
+			button1.setAttribute("data-sb-obj", "sticky-save");
 			button2.setAttribute("type", "image"); button2.setAttribute("src", "chrome://scrapbook/skin/sticky_delete.png");
-			button1.setAttribute("onclick", "this.parentNode.parentNode.appendChild(document.createTextNode(this.parentNode.previousSibling.value));this.parentNode.parentNode.removeChild(this.parentNode.previousSibling);this.parentNode.parentNode.removeChild(this.parentNode);");
-			button2.setAttribute("onclick", "this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);");
+			button2.setAttribute("data-sb-obj", "sticky-delete");
 			footDiv.className = "scrapbook-sticky-footer";
+			footDiv.setAttribute("data-sb-obj", "sticky-footer");
 			footDiv.appendChild(button1); footDiv.appendChild(button2);
 			mainDiv.appendChild(textArea); mainDiv.appendChild(footDiv);
 		}
