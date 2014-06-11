@@ -360,8 +360,8 @@ var sbInvisibleBrowser = {
 		this.ELEMENT.docShell.allowJavascript = gOption["script"];
 		this.ELEMENT.docShell.allowImages     = gOption["images"];
 		this.ELEMENT.docShell.allowMetaRedirects = false;
-		if (Ci.nsIDocShellHistory)
-			this.ELEMENT.docShell.QueryInterface(Ci.nsIDocShellHistory).useGlobalHistory = false;
+		if (Ci.nsIDocShell)
+			this.ELEMENT.docShell.QueryInterface(Ci.nsIDocShell).useGlobalHistory = false;
 		else
 			this.ELEMENT.docShell.useGlobalHistory = false;
 		this.loading = aURL;
