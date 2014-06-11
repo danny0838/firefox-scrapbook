@@ -35,7 +35,7 @@ function SB_initCapture()
 	if ( gReferItem )
 	{
 		gContext = "indepth";
-		gURL2Name[unescape(gReferItem.source)] = "index";
+		gURL2Name[gReferItem.source] = "index";
 	}
 	else if ( gPreset )
 	{
@@ -489,7 +489,6 @@ var sbCrossLinker = {
 			}
 		};
 		this.baseURL = ScrapBookUtils.IO.newFileURI(ScrapBookUtils.getContentDir(gReferItem.id)).spec;
-		this.nameList.push("index");
 		for ( var url in gURL2Name )
 		{
 			this.nameList.push(gURL2Name[url]);
@@ -504,7 +503,9 @@ var sbCrossLinker = {
 		if ( ++this.index < this.nameList.length )
 		{
 			sbInvisibleBrowser.fileCount = 0;
-			this.ELEMENT.loadURI(this.baseURL + this.nameList[this.index] + ".html", null, null);
+			var url = this.baseURL + this.nameList[this.index] + ".html";
+			sbInvisibleBrowser.loading = url;
+			this.ELEMENT.loadURI(url, null, null);
 		}
 		else
 		{
@@ -517,6 +518,10 @@ var sbCrossLinker = {
 
 	exec : function()
 	{
+		// onload may be fired many times when a document is loaded
+		// we need this check to prevent
+		if (this.ELEMENT.currentURI.spec !== sbInvisibleBrowser.loading) return;
+		sbInvisibleBrowser.loading = false;
 		if ( this.ELEMENT.currentURI.scheme != "file" )
 		{
 			return;
@@ -525,21 +530,17 @@ var sbCrossLinker = {
 		if ( !this.nodeHash[this.nameList[this.index]] )
 		{
 			this.nodeHash[this.nameList[this.index]] = this.createNode(this.nameList[this.index], gReferItem.title);
-			this.nodeHash[this.nameList[this.index]].setAttribute("title", ScrapBookData.sanitize(this.ELEMENT.contentTitle));
 		}
-		else
-		{
-			this.nodeHash[this.nameList[this.index]].setAttribute("title", ScrapBookData.sanitize(this.ELEMENT.contentTitle));
-		}
+		this.nodeHash[this.nameList[this.index]].setAttribute("title", ScrapBookData.sanitize(this.ELEMENT.contentTitle));
 		for ( var f = 0; f < sbContentSaver.frameList.length; f++ )
 		{
 			var doc = sbContentSaver.frameList[f].document;
-			if ( !doc.links ) continue;
-			var shouldSave = false;
 			var linkList = doc.links;
+			if ( !linkList ) continue;
+			var shouldSave = false;
 			for ( var i = 0; i < linkList.length; i++ )
 			{
-				var urlLR = SB_splitByAnchor(unescape(linkList[i].href));
+				var urlLR = SB_splitByAnchor(linkList[i].href);
 				if ( gURL2Name[urlLR[0]] )
 				{
 					var name = gURL2Name[urlLR[0]];

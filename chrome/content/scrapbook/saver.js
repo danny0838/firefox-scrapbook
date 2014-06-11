@@ -97,7 +97,7 @@ var sbContentSaver = {
 			if ( ret.result == 2 ) { aResName = ret.resURI; aResIndex = 0; }
 		}
 		this.contentDir = ScrapBookUtils.getContentDir(this.item.id);
-		this.saveDocumentInternal(aRootWindow.document, this.name);
+		var newName = this.saveDocumentInternal(aRootWindow.document, this.name);
 		if ( this.item.icon && this.item.type != "image" && this.item.type != "file" )
 		{
 			var iconFileName = this.download(this.item.icon);
@@ -129,7 +129,7 @@ var sbContentSaver = {
 			}
 		}
 		this.addResource(aResName, aResIndex);
-		return [this.name, this.file2URL];
+		return [ScrapBookUtils.splitFileName(newName)[0], this.file2URL];
 	},
 
 	captureFile : function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext)
@@ -147,9 +147,9 @@ var sbContentSaver = {
 		}
 		this.contentDir = ScrapBookUtils.getContentDir(this.item.id);
 		this.refURLObj  = ScrapBookUtils.convertURLToObject(aReferURL);
-		this.saveFileInternal(aSourceURL, this.name, aType);
+		var newName = this.saveFileInternal(aSourceURL, this.name, aType);
 		this.addResource(aResName, aResIndex);
-		return [this.name, this.file2URL];
+		return [ScrapBookUtils.splitFileName(newName)[0], this.file2URL];
 	},
 
 	showDetailDialog : function(aTitles, aResURI, aContext)
@@ -601,6 +601,15 @@ var sbContentSaver = {
 		}
 		if (aCSS.href)
 			content += (content ? "\n" : "") + "/* ::::: " + aCSS.href + " ::::: */\n\n";
+		// sometimes <link> cannot access remote css
+		// and aCSS.cssRules fires an error (instead of returing undefined)...
+		try {
+			if (!aCSS.cssRules) return content;
+		}
+		catch(ex) {
+			console.warn("CSS cannot be read from '" + aCSS.href + "' in page '" + aDocument.location.href + "' \n" + ex);
+			return content;
+		}
 		Array.forEach(aCSS.cssRules, function(cssRule) {
 			switch (cssRule.type) {
 				case Ci.nsIDOMCSSRule.STYLE_RULE: 
