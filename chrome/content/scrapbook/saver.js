@@ -7,11 +7,13 @@ var sbContentSaver = {
 	contentDir   : null,
 	httpTask     : {},
 	file2URL     : {},
+	file2Doc     : {},
 	option       : {},
 	refURLObj    : null,
 	favicon      : null,
 	frameList    : [],
-	frameNumber  : 0,
+	frames      : [],
+	isMainFrame  : true,
 	selection    : null,
 	linkURLs     : [],
 
@@ -32,11 +34,12 @@ var sbContentSaver = {
 		this.item = ScrapBookData.newItem();
 		this.name = "index";
 		this.favicon = null;
-		this.file2URL = { "index.html" : true, "index.css" : true, "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
+		this.file2URL = { "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
 		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "styles" : true, "script" : false };
 		this.linkURLs = [];
 		this.frameList = [];
-		this.frameNumber = 0;
+		this.frames = [];
+		this.isMainFrame = true;
 		if ( aPresetData )
 		{
 			if ( aPresetData[0] ) this.item.id  = aPresetData[0];
@@ -58,7 +61,7 @@ var sbContentSaver = {
 			this.item.icon = gBrowser.mCurrentTab.image;
 		}
 		this.frameList = this.flattenFrames(aRootWindow);
-		var titles = aRootWindow.document.title ? [aRootWindow.document.title] : [this.item.source];
+		var titles = aRootWindow.document.title ? [aRootWindow.document.title] : decodeURI([this.item.source]);
 		if ( aIsPartial )
 		{
 			this.selection = aRootWindow.getSelection();
@@ -94,7 +97,7 @@ var sbContentSaver = {
 			if ( ret.result == 2 ) { aResName = ret.resURI; aResIndex = 0; }
 		}
 		this.contentDir = ScrapBookUtils.getContentDir(this.item.id);
-		this.saveDocumentInternal(aRootWindow.document, this.name);
+		var newName = this.saveDocumentInternal(aRootWindow.document, this.name);
 		if ( this.item.icon && this.item.type != "image" && this.item.type != "file" )
 		{
 			var iconFileName = this.download(this.item.icon);
@@ -126,13 +129,13 @@ var sbContentSaver = {
 			}
 		}
 		this.addResource(aResName, aResIndex);
-		return [this.name, this.file2URL];
+		return [ScrapBookUtils.splitFileName(newName)[0], this.file2URL];
 	},
 
 	captureFile : function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext)
 	{
 		this.init(aPresetData);
-		this.item.title  = ScrapBookUtils.getFileName(aSourceURL);
+		this.item.title  = decodeURI(ScrapBookUtils.getFileName(aSourceURL));
 		this.item.icon   = "moz-icon://" + this.item.title + "?size=16";
 		this.item.source = aSourceURL;
 		this.item.type   = aType;
@@ -144,9 +147,9 @@ var sbContentSaver = {
 		}
 		this.contentDir = ScrapBookUtils.getContentDir(this.item.id);
 		this.refURLObj  = ScrapBookUtils.convertURLToObject(aReferURL);
-		this.saveFileInternal(aSourceURL, this.name, aType);
+		var newName = this.saveFileInternal(aSourceURL, this.name, aType);
 		this.addResource(aResName, aResIndex);
-		return [this.name, this.file2URL];
+		return [ScrapBookUtils.splitFileName(newName)[0], this.file2URL];
 	},
 
 	showDetailDialog : function(aTitles, aResURI, aContext)
@@ -165,14 +168,27 @@ var sbContentSaver = {
 
 	saveDocumentInternal : function(aDocument, aFileKey)
 	{
+		// non-HTML document: process as file saving
 		if ( !aDocument.body || !aDocument.contentType.match(/html|xml/i) )
 		{
 			var captureType = (aDocument.contentType.substring(0,5) == "image") ? "image" : "file";
-			if ( this.frameNumber == 0 ) this.item.type = captureType;
+			if ( this.isMainFrame ) this.item.type = captureType;
 			var newLeafName = this.saveFileInternal(aDocument.location.href, aFileKey, captureType);
 			return newLeafName;
 		}
+
+		// HTML document: save the current DOM
 		this.refURLObj = ScrapBookUtils.convertURLToObject(aDocument.location.href);
+
+		var arr = this.getUniqueFileName(aFileKey + ".html", this.refURLObj.spec, aDocument);
+		var myHTMLFileName = arr[0];
+		var myHTMLFileDone = arr[1];
+		if (myHTMLFileDone) return myHTMLFileName;
+
+		var arr = this.getUniqueFileName(aFileKey + ".css", this.refURLObj.spec, aDocument);
+		var myCSSFileName = arr[0];
+
+		// construct the tree, especially for capture of partial selection
 		if ( this.selection )
 		{
 			var myRange = this.selection.getRangeAt(0);
@@ -180,6 +196,26 @@ var sbContentSaver = {
 			var curNode = myRange.commonAncestorContainer;
 			if ( curNode.nodeName == "#text" ) curNode = curNode.parentNode;
 		}
+		// cloned frames has contentDocument = null
+		// give all frames an unique id for later retrieving
+		var htmlNode = aDocument.getElementsByTagName("html")[0];
+		var frames = htmlNode.getElementsByTagName("frame");
+		for (var i=0, len=frames.length; i<len; i++) {
+			var frame = frames[i];
+			var idx = this.frames.length;
+			this.frames[idx] = frame;
+			frame.setAttribute("data-sb-frame-id", idx);
+			if (frame.src == this.refURLObj.spec) frame.setAttribute("data-sb-frame-id", idx);
+		}
+		var frames = htmlNode.getElementsByTagName("iframe");
+		for (var i=0, len=frames.length; i<len; i++) {
+			var frame = frames[i];
+			var idx = this.frames.length;
+			this.frames[idx] = frame;
+			frame.setAttribute("data-sb-frame-id", idx);
+			if (frame.src == this.refURLObj.spec) frame.setAttribute("data-sb-frame-id", idx);
+		}
+		// now make the clone
 		var tmpNodeList = [];
 		if ( this.selection )
 		{
@@ -193,7 +229,7 @@ var sbContentSaver = {
 		{
 			tmpNodeList.unshift(aDocument.body.cloneNode(true));
 		}
-		var rootNode = aDocument.getElementsByTagName("html")[0].cloneNode(false);
+		var rootNode = htmlNode.cloneNode(false);
 		try {
 			var headNode = aDocument.getElementsByTagName("head")[0].cloneNode(true);
 			rootNode.appendChild(headNode);
@@ -215,10 +251,10 @@ var sbContentSaver = {
 			this.addCommentTag(tmpNodeList[tmpNodeList.length-1], "/DOCUMENT_FRAGMENT");
 		}
 
-
+		// process HTML DOM
 		this.processDOMRecursively(rootNode);
 
-
+		// process all inline and link CSS, will merge them into index.css later
 		var myCSS = "";
 		if ( this.option["styles"] )
 		{
@@ -231,7 +267,7 @@ var sbContentSaver = {
 			{
 				var newLinkNode = aDocument.createElement("link");
 				newLinkNode.setAttribute("media", "all");
-				newLinkNode.setAttribute("href", aFileKey + ".css");
+				newLinkNode.setAttribute("href", myCSSFileName);
 				newLinkNode.setAttribute("type", "text/css");
 				newLinkNode.setAttribute("rel", "stylesheet");
 				rootNode.firstChild.appendChild(aDocument.createTextNode("\n"));
@@ -241,27 +277,47 @@ var sbContentSaver = {
 			}
 		}
 
-
+		// change the charset to UTF-8
+		// also change the meta tag; generate one if none found
 		this.item.chars = "UTF-8";
-		var metaNode = aDocument.createElement("meta");
-		metaNode.setAttribute("content", aDocument.contentType + "; charset=" + this.item.chars);
-		metaNode.setAttribute("http-equiv", "Content-Type");
-		rootNode.firstChild.insertBefore(aDocument.createTextNode("\n"), rootNode.firstChild.firstChild);
-		rootNode.firstChild.insertBefore(metaNode, rootNode.firstChild.firstChild);
-		rootNode.firstChild.insertBefore(aDocument.createTextNode("\n"), rootNode.firstChild.firstChild);
+		var metas = rootNode.getElementsByTagName("meta"), meta, hasmeta = false;
+		for (var i=0, len=metas.length; i<len; ++i) {
+			meta = metas[i];
+			if (meta.hasAttribute("http-equiv") && meta.hasAttribute("content") &&
+				meta.getAttribute("http-equiv").toLowerCase() == "content-type" && 
+				meta.getAttribute("content").match(/^[^;]*;\s*charset=(.*)$/i) )
+			{
+				hasmeta = true;
+				meta.setAttribute("content", "text/html; charset=UTF-8");
+			}
+			else if ( meta.hasAttribute("charset") )
+			{
+				hasmeta = true;
+				meta.setAttribute("charset", "UTF-8");
+			}
+		}
+		if (!hasmeta) {
+			// use older version for better compatibility
+			var metaNode = aDocument.createElement("meta");
+			metaNode.setAttribute("content", aDocument.contentType + "; charset=" + this.item.chars);
+			metaNode.setAttribute("http-equiv", "Content-Type");
+			rootNode.firstChild.insertBefore(aDocument.createTextNode("\n"), rootNode.firstChild.firstChild);
+			rootNode.firstChild.insertBefore(metaNode, rootNode.firstChild.firstChild);
+			rootNode.firstChild.insertBefore(aDocument.createTextNode("\n"), rootNode.firstChild.firstChild);
+		}
 
-
+		// generate the HTML and CSS file and save
 		var myHTML;
 		myHTML = this.surroundByTags(rootNode, rootNode.innerHTML);
 		myHTML = this.doctypeToString(aDocument.doctype) + myHTML;
 		myHTML = myHTML.replace(/\x00/g, " ");
 		var myHTMLFile = this.contentDir.clone();
-		myHTMLFile.append(aFileKey + ".html");
+		myHTMLFile.append(myHTMLFileName);
 		ScrapBookUtils.writeFile(myHTMLFile, myHTML, this.item.chars);
 		if ( myCSS )
 		{
 			var myCSSFile = this.contentDir.clone();
-			myCSSFile.append(aFileKey + ".css");
+			myCSSFile.append(myCSSFileName);
 			ScrapBookUtils.writeFile(myCSSFile, myCSS, this.item.chars);
 		}
 		return myHTMLFile.leafName;
@@ -271,7 +327,7 @@ var sbContentSaver = {
 	{
 		if ( !aFileKey ) aFileKey = "file" + Math.random().toString();
 		if ( !this.refURLObj ) this.refURLObj = ScrapBookUtils.convertURLToObject(aFileURL);
-		if ( this.frameNumber == 0 )
+		if ( this.isMainFrame )
 		{
 			this.item.icon  = "moz-icon://" + ScrapBookUtils.getFileName(aFileURL) + "?size=16";
 			this.item.type  = aCaptureType;
@@ -279,9 +335,9 @@ var sbContentSaver = {
 		}
 		var newFileName = this.download(aFileURL);
 		if ( aCaptureType == "image" ) {
-			var myHTML = '<html><body><img src="' + newFileName + '"></body></html>';
+			var myHTML = '<html><head><meta http-equiv="Content-Type" content="text/html; Charset=UTF-8"></head><body><img src="' + newFileName + '"></body></html>';
 		} else {
-			var myHTML = '<html><head><meta http-equiv="refresh" content="0;URL=./' + newFileName + '"></head><body></body></html>';
+			var myHTML = '<html><head><meta http-equiv="Content-Type" content="text/html; Charset=UTF-8"><meta http-equiv="refresh" content="0;URL=./' + newFileName + '"></head><body></body></html>';
 		}
 		var myHTMLFile = this.contentDir.clone();
 		myHTMLFile.append(aFileKey + ".html");
@@ -432,7 +488,7 @@ var sbContentSaver = {
 				} else if ( aNode.rel.toLowerCase() == "shortcut icon" || aNode.rel.toLowerCase() == "icon" ) {
 					var aFileName = this.download(aNode.href);
 					if (aFileName) aNode.setAttribute("href", aFileName);
-					if ( this.frameNumber == 0 && !this.favicon ) this.favicon = aFileName;
+					if ( this.isMainFrame && !this.favicon ) this.favicon = aFileName;
 				} else {
 					aNode.setAttribute("href", aNode.href);
 				}
@@ -487,31 +543,16 @@ var sbContentSaver = {
 			case "form" : 
 				aNode.setAttribute("action", ScrapBookUtils.resolveURL(this.refURLObj.spec, aNode.action));
 				break;
-			case "meta" : 
-				if ( aNode.hasAttribute("http-equiv") && aNode.hasAttribute("content") &&
-				     aNode.getAttribute("http-equiv").toLowerCase() == "content-type" && 
-				     aNode.getAttribute("content").match(/charset\=/i) )
-				{
-					return this.removeNodeFromParent(aNode);
-				}
-				break;
 			case "frame"  : 
 			case "iframe" : 
-				if ( this.selection ) {
-					this.selection = null;
-					for ( var fn = this.frameNumber; fn < this.frameList.length; fn++ )
-					{
-						if ( aNode.src == this.frameList[fn].location.href ) { this.frameNumber = fn; break; }
-					}
-					this.frameNumber--;
-				}
+				this.isMainFrame = false;
+				if ( this.selection ) this.selection = null;
 				var tmpRefURL = this.refURLObj;
-				this.frameNumber++
-				try {
-					var newFileName = this.saveDocumentInternal(this.frameList[this.frameNumber].document, this.name + "_" + this.frameNumber);
-					aNode.setAttribute("src", newFileName);
-				} catch(ex) {
-				}
+				// retrieve contentDocument from the corresponding real frame
+				var idx = aNode.getAttribute("data-sb-frame-id");
+				var newFileName = this.saveDocumentInternal(this.frames[idx].contentDocument, this.name + "_" + (parseInt(idx)+1));
+				aNode.setAttribute("src", newFileName);
+				aNode.removeAttribute("data-sb-frame-id");
 				this.refURLObj = tmpRefURL;
 				break;
 			case "xmp" : 
@@ -560,6 +601,15 @@ var sbContentSaver = {
 		}
 		if (aCSS.href)
 			content += (content ? "\n" : "") + "/* ::::: " + aCSS.href + " ::::: */\n\n";
+		// sometimes <link> cannot access remote css
+		// and aCSS.cssRules fires an error (instead of returing undefined)...
+		try {
+			if (!aCSS.cssRules) return content;
+		}
+		catch(ex) {
+			console.warn("CSS cannot be read from '" + aCSS.href + "' in page '" + aDocument.location.href + "' \n" + ex);
+			return content;
+		}
 		Array.forEach(aCSS.cssRules, function(cssRule) {
 			switch (cssRule.type) {
 				case Ci.nsIDOMCSSRule.STYLE_RULE: 
@@ -674,31 +724,12 @@ var sbContentSaver = {
 			ScrapBookUtils.alert("ERROR: Failed to download: " + aURLSpec);
 			return;
 		}
-		var newFileName = aURL.fileName.toLowerCase();
-		if ( !newFileName ) newFileName = "untitled";
-		newFileName = ScrapBookUtils.validateFileName(newFileName);
-		if ( this.file2URL[newFileName] == undefined )
-		{
-		}
-		else if ( this.file2URL[newFileName] != aURLSpec )
-		{
-			var seq = 1;
-			var fileLR = ScrapBookUtils.splitFileName(newFileName);
-			if ( !fileLR[1] ) fileLR[1] = "dat";
-			newFileName = fileLR[0] + "_" + this.leftZeroPad3(seq) + "." + fileLR[1];
-			while ( this.file2URL[newFileName] != undefined )
-			{
-				if ( this.file2URL[newFileName] == aURLSpec )
-				{
-					return newFileName;
-				}
-				newFileName = fileLR[0] + "_" + this.leftZeroPad3(++seq) + "." + fileLR[1];
-			}
-		}
-		else
-		{
-			return newFileName;
-		}
+
+		var arr = this.getUniqueFileName(aURL.fileName.toLowerCase(), aURLSpec);
+		var newFileName = arr[0];
+		var hasDownloaded = arr[1];
+		if (hasDownloaded) return newFileName;
+
 		if ( aURL.schemeIs("http") || aURL.schemeIs("https") || aURL.schemeIs("ftp") )
 		{
 			var targetFile = this.contentDir.clone();
@@ -711,7 +742,6 @@ var sbContentSaver = {
 				WBP.saveURI(aURL, null, refURL, null, null, targetFile, null);
 				this.httpTask[this.item.id]++;
 				WBP.progressListener = new sbCaptureObserver(this.item, newFileName);
-				this.file2URL[newFileName] = aURLSpec;
 				return newFileName;
 			}
 			catch(ex) {
@@ -727,7 +757,6 @@ var sbContentSaver = {
 				var orgFile = ScrapBookUtils.convertURLToFile(aURLSpec);
 				if ( !orgFile.isFile() ) return;
 				orgFile.copyTo(targetDir, newFileName);
-				this.file2URL[newFileName] = aURLSpec;
 				return newFileName;
 			}
 			catch(ex) {
@@ -768,6 +797,30 @@ var sbContentSaver = {
 			}
 		}
 		return aNode;
+	},
+
+	/**
+	 * @return  [(string) newFileName, (bool) isDuplicated]
+	 */
+	getUniqueFileName: function(newFileName, aURLSpec, aDocumentSpec)
+	{
+		if ( !newFileName ) newFileName = "untitled";
+		newFileName = decodeURI(newFileName);
+		newFileName = ScrapBookUtils.validateFileName(newFileName);
+		var fileLR = ScrapBookUtils.splitFileName(newFileName);
+		fileLR[0] = ScrapBookUtils.crop(fileLR[0], 100);
+		if ( !fileLR[1] ) fileLR[1] = "dat";
+		newFileName = fileLR[0] + "." + fileLR[1];
+		var seq = 0;
+		while ( this.file2URL[newFileName] != undefined ) {
+			if (this.file2URL[newFileName] == aURLSpec && this.file2Doc[newFileName] == aDocumentSpec) {
+				return [newFileName, true];
+			}
+			newFileName = fileLR[0] + "_" + this.leftZeroPad3(++seq) + "." + fileLR[1];
+		}
+		this.file2URL[newFileName] = aURLSpec;
+		this.file2Doc[newFileName] = aDocumentSpec;
+		return [newFileName, false];
 	},
 
 };

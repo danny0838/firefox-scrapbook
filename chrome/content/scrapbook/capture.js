@@ -35,7 +35,7 @@ function SB_initCapture()
 	if ( gReferItem )
 	{
 		gContext = "indepth";
-		gURL2Name[unescape(gReferItem.source)] = "index";
+		gURL2Name[gReferItem.source] = "index";
 	}
 	else if ( gPreset )
 	{
@@ -88,16 +88,9 @@ function SB_splitByAnchor(aURL)
 
 function SB_suggestName(aURL)
 {
-	var baseName = ScrapBookUtils.validateFileName(ScrapBookUtils.splitFileName(ScrapBookUtils.getFileName(aURL))[0]);
-	baseName = baseName.toLowerCase();
-	if ( baseName == "index" ) baseName = "default";
-	if ( !baseName ) baseName = "default";
-	var name = baseName + ".html";
-	var seq = 0;
-	while ( gFile2URL[name] ) name = baseName + "_" + sbContentSaver.leftZeroPad3(++seq) + ".html";
-	name = ScrapBookUtils.splitFileName(name)[0];
-	gFile2URL[name + ".html"] = aURL;
-	gFile2URL[name + ".css"]  = true;
+	var name = ScrapBookUtils.splitFileName(ScrapBookUtils.validateFileName(ScrapBookUtils.getFileName(decodeURI(aURL))))[0];
+	name = name.toLowerCase();
+	if ( !name || name == "index" ) name = "default";
 	return name;
 }
 
@@ -342,7 +335,15 @@ var sbInvisibleBrowser = {
 	init : function()
 	{
 		this.ELEMENT.webProgress.addProgressListener(this, Ci.nsIWebProgress.NOTIFY_ALL);
-		this.onload = function(){ sbInvisibleBrowser.execCapture(); };
+		this.loading = false;
+		this.onload = function(){
+			// onload may be fired many times when a document is loaded
+			// (loading of a frame may fire)
+			// we need this check to allow only the desired url and only fire once...
+			if (sbInvisibleBrowser.ELEMENT.currentURI.spec !== sbInvisibleBrowser.loading) return;
+			sbInvisibleBrowser.loading = false;
+			sbInvisibleBrowser.execCapture();
+		};
 		this.ELEMENT.addEventListener("load", sbInvisibleBrowser.onload, true);
 	},
 
@@ -363,6 +364,7 @@ var sbInvisibleBrowser = {
 			this.ELEMENT.docShell.QueryInterface(Ci.nsIDocShellHistory).useGlobalHistory = false;
 		else
 			this.ELEMENT.docShell.useGlobalHistory = false;
+		this.loading = aURL;
 		this.ELEMENT.loadURI(aURL, null, null);
 	},
 
@@ -388,7 +390,7 @@ var sbInvisibleBrowser = {
 					{
 						gURLs[sbCaptureTask.index] = newURL;
 						sbCaptureTask.canRefresh = false;
-						this.ELEMENT.loadURI(newURL, null, null);
+						sbCaptureTask.start(newURL);
 						return;
 					}
 				}
@@ -404,7 +406,7 @@ var sbInvisibleBrowser = {
 		{
 			if ( gContext == "indepth" )
 			{
-				gURL2Name[unescape(sbCaptureTask.URL)] = ret[0];
+				gURL2Name[sbCaptureTask.URL] = ret[0];
 				gFile2URL = ret[1];
 			}
 			else if ( gContext == "capture-again-deep" )
@@ -487,7 +489,6 @@ var sbCrossLinker = {
 			}
 		};
 		this.baseURL = ScrapBookUtils.IO.newFileURI(ScrapBookUtils.getContentDir(gReferItem.id)).spec;
-		this.nameList.push("index");
 		for ( var url in gURL2Name )
 		{
 			this.nameList.push(gURL2Name[url]);
@@ -502,7 +503,9 @@ var sbCrossLinker = {
 		if ( ++this.index < this.nameList.length )
 		{
 			sbInvisibleBrowser.fileCount = 0;
-			this.ELEMENT.loadURI(this.baseURL + this.nameList[this.index] + ".html", null, null);
+			var url = this.baseURL + this.nameList[this.index] + ".html";
+			sbInvisibleBrowser.loading = url;
+			this.ELEMENT.loadURI(url, null, null);
 		}
 		else
 		{
@@ -515,6 +518,10 @@ var sbCrossLinker = {
 
 	exec : function()
 	{
+		// onload may be fired many times when a document is loaded
+		// we need this check to prevent
+		if (this.ELEMENT.currentURI.spec !== sbInvisibleBrowser.loading) return;
+		sbInvisibleBrowser.loading = false;
 		if ( this.ELEMENT.currentURI.scheme != "file" )
 		{
 			return;
@@ -523,26 +530,22 @@ var sbCrossLinker = {
 		if ( !this.nodeHash[this.nameList[this.index]] )
 		{
 			this.nodeHash[this.nameList[this.index]] = this.createNode(this.nameList[this.index], gReferItem.title);
-			this.nodeHash[this.nameList[this.index]].setAttribute("title", ScrapBookData.sanitize(this.ELEMENT.contentTitle));
 		}
-		else
-		{
-			this.nodeHash[this.nameList[this.index]].setAttribute("title", ScrapBookData.sanitize(this.ELEMENT.contentTitle));
-		}
+		this.nodeHash[this.nameList[this.index]].setAttribute("title", ScrapBookData.sanitize(this.ELEMENT.contentTitle));
 		for ( var f = 0; f < sbContentSaver.frameList.length; f++ )
 		{
 			var doc = sbContentSaver.frameList[f].document;
-			if ( !doc.links ) continue;
-			var shouldSave = false;
 			var linkList = doc.links;
+			if ( !linkList ) continue;
+			var shouldSave = false;
 			for ( var i = 0; i < linkList.length; i++ )
 			{
-				var urlLR = SB_splitByAnchor(unescape(linkList[i].href));
+				var urlLR = SB_splitByAnchor(linkList[i].href);
 				if ( gURL2Name[urlLR[0]] )
 				{
 					var name = gURL2Name[urlLR[0]];
 					linkList[i].href = name + ".html" + urlLR[1];
-					linkList[i].setAttribute("indepth", "true");
+					linkList[i].setAttribute("data-sb-indepth", "true");
 					if ( !this.nodeHash[name] )
 					{
 						var text = linkList[i].text ? linkList[i].text.replace(/\r|\n|\t/g, " ") : "";

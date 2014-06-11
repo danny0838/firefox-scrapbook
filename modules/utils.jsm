@@ -53,10 +53,8 @@ const ScrapBookUtils = {
 			var fileEnum = aDir.directoryEntries;
 			while (fileEnum.hasMoreElements()) {
 				file = fileEnum.getNext().QueryInterface(Ci.nsIFile);
-				if (file.isFile())
-					file.remove(false);
+				file.remove(true);
 			}
-			file = aDir;
 			if (aDir.isDirectory())
 				aDir.remove(false);
 			return true;
@@ -150,12 +148,12 @@ const ScrapBookUtils = {
 
 	validateFileName: function SBU_validateFileName(aFileName) {
 		aFileName = aFileName.replace(/[\"\?!~`]+/g, "");
-		aFileName = aFileName.replace(/[\*\&]+/g, "+");
-		aFileName = aFileName.replace(/[\\\/\|\:;]+/g, "-");
-		aFileName = aFileName.replace(/[\<]+/g, "(");
-		aFileName = aFileName.replace(/[\>]+/g, ")");
-		aFileName = aFileName.replace(/[\s]+/g, "_");
-		aFileName = aFileName.replace(/[%]+/g, "@");
+		aFileName = aFileName.replace(/[\*\&]/g, "+");
+		aFileName = aFileName.replace(/[\\\/\|\:;]/g, "-");
+		aFileName = aFileName.replace(/[\<]/g, "(");
+		aFileName = aFileName.replace(/[\>]/g, ")");
+		aFileName = aFileName.replace(/[\s]/g, "_");
+		aFileName = aFileName.replace(/[%]/g, "@");
 		return aFileName;
 	},
 
@@ -169,7 +167,7 @@ const ScrapBookUtils = {
 	},
 
 	crop: function SBU_crop(aString, aMaxLength) {
-		return aString.length > aMaxLength ? aString.substring(0, aMaxLength) + "..." : aString;
+		return aString.length > aMaxLength ? aString.substr(0, aMaxLength) + "..." : aString;
 	},
 
 

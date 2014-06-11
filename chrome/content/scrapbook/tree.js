@@ -47,7 +47,8 @@ var sbTreeUI = {
 
 	onClick : function(aEvent, aType)
 	{
-		if ( aEvent.button != 0 && aEvent.button != 1 ) return;
+		if ( aEvent.button != 0 && aEvent.button != 1 ) return;  // skip right click
+		if (aEvent.ctrlKey || aEvent.shiftKey) return;  // skip if ctrl or shift key is pressed (for multiple selection)
 		var obj = {};
 		this.TREE.treeBoxObject.getCellAt(aEvent.clientX, aEvent.clientY, {}, {}, obj);
 		if ( !obj.value || obj.value == "twisty" ) return;
@@ -59,7 +60,7 @@ var sbTreeUI = {
 		else
 		{
 			if ( aType < 2 && aEvent.button != 1 ) return;
-			sbController.open(this.resource, aEvent.button == 1 || aEvent.ctrlKey || aEvent.shiftKey);
+			sbController.open(this.resource, aEvent.button == 1);
 		}
 	},
 
@@ -145,9 +146,7 @@ var sbTreeUI = {
 		var parList = [];
 		if ( this.TREE.view.selection.count > 1 )
 		{
-			var idxList = this.getSelection(false, 2);
-			if ( idxList.length < 1 ) return;
-			if ( this.validateMultipleSelection(idxList) == false ) return;
+			var idxList = this.getSelection(false, null);
 			for ( var i = 0; i < idxList.length; i++ )
 			{
 				resList.push( this.TREE.builderView.getResourceAtIndex(idxList[i]) );
@@ -214,16 +213,6 @@ var sbTreeUI = {
 			}
 		}
 		return ret;
-	},
-
-	validateMultipleSelection : function(aIdxList)
-	{
-		if ( aIdxList.length != this.TREE.view.selection.count )
-		{
-			ScrapBookUtils.alert(ScrapBookUtils.getLocaleString("ERROR_MULTIPLE_SELECTION"));
-			return false;
-		}
-		return true;
 	},
 
 	toggleFolder : function(aIdx)
