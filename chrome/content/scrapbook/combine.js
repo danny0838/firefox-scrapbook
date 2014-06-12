@@ -299,7 +299,7 @@ var sbPageCombiner = {
 		var ret = "";
 		for ( var i = 0; i < this.BROWSER.contentDocument.styleSheets.length; i++ )
 		{
-			if ( this.BROWSER.contentDocument.styleSheets[i].href.indexOf("chrome") == 0 ) continue;
+			if ( this.BROWSER.contentDocument.styleSheets[i].href && this.BROWSER.contentDocument.styleSheets[i].href.indexOf("chrome://") == 0 ) continue;
 			var cssRules = this.BROWSER.contentDocument.styleSheets[i].cssRules;
 			for ( var j = 0; j < cssRules.length; j++ )
 			{
