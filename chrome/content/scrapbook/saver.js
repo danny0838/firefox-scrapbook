@@ -61,7 +61,7 @@ var sbContentSaver = {
 			this.item.icon = gBrowser.mCurrentTab.image;
 		}
 		this.frameList = this.flattenFrames(aRootWindow);
-		var titles = aRootWindow.document.title ? [aRootWindow.document.title] : decodeURI([this.item.source]);
+		var titles = aRootWindow.document.title ? [aRootWindow.document.title] : [decodeURI(this.item.source)];
 		if ( aIsPartial )
 		{
 			this.selection = aRootWindow.getSelection();
