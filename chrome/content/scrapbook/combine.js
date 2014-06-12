@@ -325,12 +325,11 @@ var sbPageCombiner = {
 
 	inspectCSSText : function(aCSSText)
 	{
-		var i = 0;
-		var RE = new RegExp(/ url\(([^\'\)]+)\)/);
-		while ( aCSSText.match(RE) && ++i < 10 )
-		{
-			aCSSText = aCSSText.replace(RE, " url('./data/" + sbCombineService.curID + "/" + RegExp.$1 + "')");
-		}
+		// CSS get by cssText is always url("double-quoted-with-\"quote\"-escaped")
+		aCSSText = aCSSText.replace(/ url\(\"((?:\\.|[^"])+)\"\)/g, function() {
+			// redirect the files to the original folder so we can capture them later on (and will rewrite the CSS)
+			return ' url("./data/' + sbCombineService.curID + '/' + arguments[1] + '")';
+		});
 		return aCSSText;
 	},
 
