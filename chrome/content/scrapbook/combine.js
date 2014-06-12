@@ -195,7 +195,6 @@ var sbPageCombiner = {
 
 	htmlSrc : "",
 	cssText : "",
-	offsetTop : 0,
 	isTargetCombined : false,
 
 	exec : function(aType)
@@ -223,7 +222,6 @@ var sbPageCombiner = {
 			if ( !this.isTargetCombined ) this.htmlSrc += this.getCiteHTML(aType);
 			this.htmlSrc += this.surroundDOM();
 			this.cssText += this.surroundCSS();
-			this.offsetTop += this.BROWSER.contentDocument.body.offsetHeight;
 		}
 		if ( sbCombineService.index == sbCombineService.idList.length - 1 )
 		{
@@ -280,15 +278,14 @@ var sbPageCombiner = {
 		if ( this.BODY.hasAttribute("class") ) divElem.setAttribute("class", this.BODY.getAttribute("class"));
 		if ( this.BODY.hasAttribute("bgcolor") ) bodyStyle += "background-color: " + this.BODY.getAttribute("bgcolor") + ";";
 		if ( this.BODY.background ) bodyStyle += "background-image: url('" + this.BODY.background + "');";
-		if ( bodyStyle ) divElem.setAttribute("style", bodyStyle);
+		bodyStyle += "position: relative;";
+		divElem.setAttribute("style", bodyStyle);
 		this.BROWSER.contentDocument.body.appendChild(divElem);
 		var childNodes = this.BODY.childNodes;
 		for ( var i = childNodes.length - 2; i >= 0; i-- )
 		{
 			var nodeName  = childNodes[i].nodeName.toUpperCase();
-			if ( nodeName == "DIV" && childNodes[i].hasAttribute("class") && childNodes[i].getAttribute("class") == "scrapbook-sticky" )
-				childNodes[i].style.top = (parseInt(childNodes[i].style.top, 10) + this.offsetTop) + "px";
-			else if ( nodeName == "CITE" && childNodes[i].hasAttribute("class") && childNodes[i].getAttribute("class") == "scrapbook-header" ) continue;
+			if ( nodeName == "CITE" && childNodes[i].hasAttribute("class") && childNodes[i].getAttribute("class") == "scrapbook-header" ) continue;
 			else if ( nodeName == "DIV"  && childNodes[i].id.match(/^item\d{14}$/) ) continue;
 			divElem.insertBefore(childNodes[i], divElem.firstChild);
 		}
@@ -312,7 +309,6 @@ var sbPageCombiner = {
 					cssText = cssText.replace(/^html /,  "");
 					cssText = cssText.replace(/^body /,  "");
 					cssText = cssText.replace(/^body, /, ", ");
-					cssText = cssText.replace(/position: absolute; /, "position: relative; ");
 					cssText = "div#item" + sbCombineService.curID + " " + cssText;
 				}
 				var blanketLR = cssText.split("{");
