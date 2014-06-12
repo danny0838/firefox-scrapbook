@@ -887,6 +887,7 @@ var sbCaptureObserverCallback = {
 
 	onCaptureComplete : function(aItem)
 	{
+		if (!aItem) return;
 		if ( aItem && ScrapBookData.getProperty(ScrapBookUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id), "type") == "marked" ) return;
 		if ( ScrapBookUtils.getPref("notifyOnComplete", true) )
 		{
