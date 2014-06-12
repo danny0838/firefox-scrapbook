@@ -84,7 +84,12 @@ var sbCombineService = {
 		this.option["R"] = document.getElementById("sbCombineOptionRemove").checked;
 		sbInvisibleBrowser.init();
 		sbInvisibleBrowser.ELEMENT.removeEventListener("load", sbInvisibleBrowser.onload, true);
-		sbInvisibleBrowser.onload = function(){ sbPageCombiner.exec(); };
+		sbInvisibleBrowser.onload = function(){
+			// onload may be fired many times when a document is loaded
+			if (sbInvisibleBrowser.ELEMENT.currentURI.spec !== sbInvisibleBrowser.loading) return;
+			sbInvisibleBrowser.loading = false;
+			sbPageCombiner.exec();
+		};
 		sbInvisibleBrowser.ELEMENT.addEventListener("load", sbInvisibleBrowser.onload, true);
 		this.next();
 	},
