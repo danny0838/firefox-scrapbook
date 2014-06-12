@@ -303,19 +303,19 @@ var sbPageCombiner = {
 			var cssRules = this.BROWSER.contentDocument.styleSheets[i].cssRules;
 			for ( var j = 0; j < cssRules.length; j++ )
 			{
-				var cssText = cssRules[j].cssText;
-				if ( !this.isTargetCombined )
-				{
-					cssText = cssText.replace(/^html /,  "");
-					cssText = cssText.replace(/^body /,  "");
-					cssText = cssText.replace(/^body, /, ", ");
-					cssText = "div#item" + sbCombineService.curID + " " + cssText;
+				var cssRule = cssRules[j];
+				var cssText = "";
+				if (cssRule.type == Ci.nsIDOMCSSRule.STYLE_RULE && !this.isTargetCombined) {
+					// split the selector with "," with the exception of leading "\"
+					var selectors = cssRule.selectorText.match(/(\\.|[^,])+/gi);
+					for ( var k = 0; k < selectors.length; k++ ) {
+						// remove leading "html" and "body", add this div as head
+						selectors[k] = "div#item" + sbCombineService.curID + " " + selectors[k].replace(/^(\s+|\s*\bhtml\b\s*|\s*\bbody\b\s*)+/gi, "");
+					}
+					cssText = selectors.join(", ") + "{" + cssRule.style.cssText + "}";
 				}
-				var blanketLR = cssText.split("{");
-				if ( blanketLR[0].indexOf(",") > 0 )
-				{
-					blanketLR[0] = blanketLR[0].replace(/,/g, ", div#item" + sbCombineService.curID);
-					cssText = blanketLR.join("{");
+				else {
+					cssText = cssRule.cssText;
 				}
 				ret += this.inspectCSSText(cssText) + "\n";
 			}
