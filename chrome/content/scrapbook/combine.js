@@ -84,7 +84,12 @@ var sbCombineService = {
 		this.option["R"] = document.getElementById("sbCombineOptionRemove").checked;
 		sbInvisibleBrowser.init();
 		sbInvisibleBrowser.ELEMENT.removeEventListener("load", sbInvisibleBrowser.onload, true);
-		sbInvisibleBrowser.onload = function(){ sbPageCombiner.exec(); };
+		sbInvisibleBrowser.onload = function(){
+			// onload may be fired many times when a document is loaded
+			if (sbInvisibleBrowser.ELEMENT.currentURI.spec !== sbInvisibleBrowser.loading) return;
+			sbInvisibleBrowser.loading = false;
+			sbPageCombiner.exec();
+		};
 		sbInvisibleBrowser.ELEMENT.addEventListener("load", sbInvisibleBrowser.onload, true);
 		this.next();
 	},
@@ -190,7 +195,6 @@ var sbPageCombiner = {
 
 	htmlSrc : "",
 	cssText : "",
-	offsetTop : 0,
 	isTargetCombined : false,
 
 	exec : function(aType)
@@ -218,7 +222,6 @@ var sbPageCombiner = {
 			if ( !this.isTargetCombined ) this.htmlSrc += this.getCiteHTML(aType);
 			this.htmlSrc += this.surroundDOM();
 			this.cssText += this.surroundCSS();
-			this.offsetTop += this.BROWSER.contentDocument.body.offsetHeight;
 		}
 		if ( sbCombineService.index == sbCombineService.idList.length - 1 )
 		{
@@ -275,15 +278,14 @@ var sbPageCombiner = {
 		if ( this.BODY.hasAttribute("class") ) divElem.setAttribute("class", this.BODY.getAttribute("class"));
 		if ( this.BODY.hasAttribute("bgcolor") ) bodyStyle += "background-color: " + this.BODY.getAttribute("bgcolor") + ";";
 		if ( this.BODY.background ) bodyStyle += "background-image: url('" + this.BODY.background + "');";
-		if ( bodyStyle ) divElem.setAttribute("style", bodyStyle);
+		bodyStyle += "position: relative;";
+		divElem.setAttribute("style", bodyStyle);
 		this.BROWSER.contentDocument.body.appendChild(divElem);
 		var childNodes = this.BODY.childNodes;
 		for ( var i = childNodes.length - 2; i >= 0; i-- )
 		{
 			var nodeName  = childNodes[i].nodeName.toUpperCase();
-			if ( nodeName == "DIV" && childNodes[i].hasAttribute("class") && childNodes[i].getAttribute("class") == "scrapbook-sticky" )
-				childNodes[i].style.top = (parseInt(childNodes[i].style.top, 10) + this.offsetTop) + "px";
-			else if ( nodeName == "CITE" && childNodes[i].hasAttribute("class") && childNodes[i].getAttribute("class") == "scrapbook-header" ) continue;
+			if ( nodeName == "CITE" && childNodes[i].hasAttribute("class") && childNodes[i].getAttribute("class") == "scrapbook-header" ) continue;
 			else if ( nodeName == "DIV"  && childNodes[i].id.match(/^item\d{14}$/) ) continue;
 			divElem.insertBefore(childNodes[i], divElem.firstChild);
 		}
@@ -297,24 +299,23 @@ var sbPageCombiner = {
 		var ret = "";
 		for ( var i = 0; i < this.BROWSER.contentDocument.styleSheets.length; i++ )
 		{
-			if ( this.BROWSER.contentDocument.styleSheets[i].href.indexOf("chrome") == 0 ) continue;
+			if ( this.BROWSER.contentDocument.styleSheets[i].href && this.BROWSER.contentDocument.styleSheets[i].href.indexOf("chrome://") == 0 ) continue;
 			var cssRules = this.BROWSER.contentDocument.styleSheets[i].cssRules;
 			for ( var j = 0; j < cssRules.length; j++ )
 			{
-				var cssText = cssRules[j].cssText;
-				if ( !this.isTargetCombined )
-				{
-					cssText = cssText.replace(/^html /,  "");
-					cssText = cssText.replace(/^body /,  "");
-					cssText = cssText.replace(/^body, /, ", ");
-					cssText = cssText.replace(/position: absolute; /, "position: relative; ");
-					cssText = "div#item" + sbCombineService.curID + " " + cssText;
+				var cssRule = cssRules[j];
+				var cssText = "";
+				if (cssRule.type == Ci.nsIDOMCSSRule.STYLE_RULE && !this.isTargetCombined) {
+					// split the selector with "," with the exception of leading "\"
+					var selectors = cssRule.selectorText.match(/(\\.|[^,])+/gi);
+					for ( var k = 0; k < selectors.length; k++ ) {
+						// remove leading "html" and "body", add this div as head
+						selectors[k] = "div#item" + sbCombineService.curID + " " + selectors[k].replace(/^(\s+|\s*\bhtml\b\s*|\s*\bbody\b\s*)+/gi, "");
+					}
+					cssText = selectors.join(", ") + "{" + cssRule.style.cssText + "}";
 				}
-				var blanketLR = cssText.split("{");
-				if ( blanketLR[0].indexOf(",") > 0 )
-				{
-					blanketLR[0] = blanketLR[0].replace(/,/g, ", div#item" + sbCombineService.curID);
-					cssText = blanketLR.join("{");
+				else {
+					cssText = cssRule.cssText;
 				}
 				ret += this.inspectCSSText(cssText) + "\n";
 			}
@@ -324,12 +325,11 @@ var sbPageCombiner = {
 
 	inspectCSSText : function(aCSSText)
 	{
-		var i = 0;
-		var RE = new RegExp(/ url\(([^\'\)]+)\)/);
-		while ( aCSSText.match(RE) && ++i < 10 )
-		{
-			aCSSText = aCSSText.replace(RE, " url('./data/" + sbCombineService.curID + "/" + RegExp.$1 + "')");
-		}
+		// CSS get by cssText is always url("double-quoted-with-\"quote\"-escaped")
+		aCSSText = aCSSText.replace(/ url\(\"((?:\\.|[^"])+)\"\)/g, function() {
+			// redirect the files to the original folder so we can capture them later on (and will rewrite the CSS)
+			return ' url("./data/' + sbCombineService.curID + '/' + arguments[1] + '")';
+		});
 		return aCSSText;
 	},
 
