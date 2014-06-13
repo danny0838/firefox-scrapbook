@@ -588,7 +588,7 @@ var sbTreeDNDHandler = {
 
 	moveSingle: function()
 	{
-		//Für Firefox 3.5 notwendig, da sonst ein Fehler ausgegeben wird
+		//FÃ¼r Firefox 3.5 notwendig, da sonst ein Fehler ausgegeben wird
 		if ( this.row == -1 ) return;
 		var curIdx = sbTreeHandler.TREE.currentIndex;
 		var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
@@ -629,7 +629,7 @@ var sbTreeDNDHandler = {
 			for (i = 0; i < idxList.length; i++)
 				this.moveAfterChecking(curResList[i], curParList[i], tarResList[i], tarParList[i]);
 		}
-		//RDF-Datenquelle dem tree hinzufügen
+		//RDF-Datenquelle dem tree hinzufÃ¼gen
 		if ( mmSidebarTreeObj ) mmSidebarTreeObj.database.AddDataSource(mmDaten);
 		mmTreeObj.database.AddDataSource(mmDaten);
 		sbDataSource.flush();

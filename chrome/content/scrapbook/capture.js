@@ -369,11 +369,11 @@ var sbpFilter = {
 	sfRegularExpression : 0,
 	sfFilter : [],
 	sfFilterIncExc : [],
-	sfFilterEdit : -1,			//enthält den Index des zu editierenden Filters
+	sfFilterEdit : -1,			//enthÃ¤lt den Index des zu editierenden Filters
 
 	add : function()
 	{
-		//Nimmt einen neuen Filter auf oder ändert einen bestehenden
+		//Nimmt einen neuen Filter auf oder Ã¤ndert einen bestehenden
 		//
 		//Ablauf
 		//1. Filterliste durchsuchen nach identischem Eintrag
@@ -447,7 +447,7 @@ var sbpFilter = {
 
 	cancel : function()
 	{
-		//Das Editieren des ausgewählten Eintrags wird vom Benutzer abgebrochen
+		//Das Editieren des ausgewÃ¤hlten Eintrags wird vom Benutzer abgebrochen
 
 		this.sfFilterEdit = -1;
 		document.getElementById("sbpTextboxFilter").value = "";
@@ -458,7 +458,7 @@ var sbpFilter = {
 
 	del : function()
 	{
-		//Löscht den selektierten Filter
+		//LÃ¶scht den selektierten Filter
 		//
 		//Ablauf:
 		//1. Eintrag aus Array entfernen
@@ -493,11 +493,11 @@ var sbpFilter = {
 
 	editFilter : function()
 	{
-		//Vorbereiten zum Editieren oder Löschen eines Filters
+		//Vorbereiten zum Editieren oder LÃ¶schen eines Filters
 		//
 		//Ablauf:
 		//1. Bestimmen der Position des selektierten Eintrags
-		//2. Wurde ein Eintrag ausgewählt, wird das Editieren dieses Eintrags ermöglicht
+		//2. Wurde ein Eintrag ausgewÃ¤hlt, wird das Editieren dieses Eintrags ermÃ¶glicht
 
 		//1.
 		this.sfFilterEdit = document.getElementById("sbpTreeFilter").currentIndex;
@@ -520,12 +520,12 @@ var sbpFilter = {
 
 	filter : function(fURL)
 	{
-		//Wendet die gesetzten Filter auf die übergebene URL an und liefert true oder false zurück
+		//Wendet die gesetzten Filter auf die Ã¼bergebene URL an und liefert true oder false zurÃ¼ck
 		//
 		//Ablauf:
 		//1. Suchbegriff(e) in URL finden
 		//2. fRWert bestimmen
-		//3. true oder false an aufrufende Funktion zurückgegeben
+		//3. true oder false an aufrufende Funktion zurÃ¼ckgegeben
 
 		//1. Suchbegriff(e) in URL finden
 		var fAufnehmen = 0;
@@ -545,7 +545,7 @@ var sbpFilter = {
 		{
 			fRWert = true;
 		}
-		//3. true oder false an aufrufende Funktion zurückgegeben
+		//3. true oder false an aufrufende Funktion zurÃ¼ckgegeben
 		return fRWert;
 	},
 
@@ -800,8 +800,8 @@ var sbCrossLinker = {
 		sbContentSaver.frameList = sbContentSaver.flattenFrames(this.ELEMENT.contentWindow);
 		if ( !this.nodeHash[this.nameList[this.index]] )
 		{
-			//Fehlermeldung wurde über Abfrage abgefangen.
-			//Allerdings kann der Abbruch an dieser Stelle auch erwünscht sein (Nachforschungen!)
+			//Fehlermeldung wurde Ã¼ber Abfrage abgefangen.
+			//Allerdings kann der Abbruch an dieser Stelle auch erwÃ¼nscht sein (Nachforschungen!)
 			this.nodeHash[this.nameList[this.index]] = this.createNode(this.nameList[this.index], (gReferItem) ? gReferItem.title : "");
 			this.nodeHash[this.nameList[this.index]].setAttribute("title", sbDataSource.sanitize(this.ELEMENT.contentTitle));
 		}
@@ -852,8 +852,8 @@ var sbCrossLinker = {
 	createNode : function(aName, aText)
 	{
 		aText = sbCommonUtils.crop(aText, 100);
-		//Fehlermeldung könnte über Abfrage abgefangen werden.
-		//Allerdings kann der Abbruch an dieser Stelle auch erwünscht sein (Nachforschungen!)
+		//Fehlermeldung kÃ¶nnte Ã¼ber Abfrage abgefangen werden.
+		//Allerdings kann der Abbruch an dieser Stelle auch erwÃ¼nscht sein (Nachforschungen!)
 		var node = this.XML.createElement("page");
 		node.setAttribute("file", aName + ".html");
 		node.setAttribute("text", sbDataSource.sanitize(aText));

@@ -45,7 +45,7 @@ var sbCombineService = {
 
 	init : function()
 	{
-		//Block wird benötigt, um Korrekturen bei fehlerhafter Zusammenstellung zu erlauben
+		//Block wird benÃ¶tigt, um Korrekturen bei fehlerhafter Zusammenstellung zu erlauben
 		this.toggleElements(true);
 		//Ende Block
 		gOption = { "script" : true, "images" : true };
@@ -121,7 +121,7 @@ var sbCombineService = {
 		this.WIZARD.getButton("cancel").disabled = true;
 //		this.WIZARD.getButton("cancel").onclick = function(){ sbCombineService.abort(); };
 		this.option["R"] = document.getElementById("sbCombineOptionRemove").checked;
-		//Werte müssen initialisiert werden, damit es beim erneuten Laden nicht zu doppelt geladenem Inhalt kommt
+		//Werte mÃ¼ssen initialisiert werden, damit es beim erneuten Laden nicht zu doppelt geladenem Inhalt kommt
 		sbPageCombiner.htmlSrc = "";
 		sbPageCombiner.cssText = "";
 		sbPageCombiner.offsetTop = 0;
@@ -252,7 +252,7 @@ var sbCombineService = {
 	moveDown : function()
 	{
 		var mdIndex = this.LISTBOX.selectedIndex;
-		//Reihenfolge ändern
+		//Reihenfolge Ã¤ndern
 		var mdPuffer = this.idList[mdIndex];
 		this.idList[mdIndex] = this.idList[mdIndex+1];
 		this.idList[mdIndex+1] = mdPuffer;
@@ -274,7 +274,7 @@ var sbCombineService = {
 	{
 		//Index bestimmen
 		var muIndex = this.LISTBOX.selectedIndex;
-		//Reihenfolge ändern
+		//Reihenfolge Ã¤ndern
 		var muPuffer = this.idList[muIndex];
 		this.idList[muIndex] = this.idList[muIndex-1];
 		this.idList[muIndex-1] = muPuffer;
@@ -335,7 +335,7 @@ var sbCombineService = {
 			}
 		} else
 		{
-			//Da keine Einträge vorhanden sind, kann auch nichts gemacht werden. Daher können sämtliche Knöpfe deaktiviert werden
+			//Da keine EintrÃ¤ge vorhanden sind, kann auch nichts gemacht werden. Daher kÃ¶nnen sÃ¤mtliche KnÃ¶pfe deaktiviert werden
 			document.getElementById("sbpUp").disabled = true;
 			document.getElementById("sbpDown").disabled = true;
 			document.getElementById("sbpUp").setAttribute("image", "chrome://scrapbook/skin/sbpExtra/expander_up_dis.png");

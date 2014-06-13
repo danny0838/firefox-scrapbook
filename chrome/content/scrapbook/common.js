@@ -112,8 +112,8 @@ var sbCommonUtils = {
 
 	rebuildGlobal : function()
 	{
-//Hier werden Änderungen fällig
-		//Dieser Block ist notwendig, da MultiSidebar verwendet Fehler verursachen würde
+//Hier werden Ã„nderungen fÃ¤llig
+		//Dieser Block ist notwendig, da MultiSidebar verwendet Fehler verursachen wÃ¼rde
 		var rgSidebarId = "sidebar";
 		var rgSidebarTitleId = "sidebar-title";
 		var rgSidebarSplitterId = "sidebar-splitter";

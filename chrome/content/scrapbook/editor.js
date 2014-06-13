@@ -20,7 +20,7 @@ var sbPageEditor = {
 
 	init : function(aID)
 	{
-		//Vorschau für Hervorhebungsstufe aktualisieren
+		//Vorschau fÃ¼r Hervorhebungsstufe aktualisieren
 			//fuer Auswahlliste
 		var idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 6;
 		var cssText = sbCommonUtils.copyUnicharPref("scrapbook.highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);
@@ -444,7 +444,7 @@ var sbPageEditor = {
 	{
 		window.setTimeout(function() { sbPageEditor.disable(true);  }, 0);
 		window.setTimeout(function() { sbPageEditor.disable(false); }, msec);
-		//Verhindert das Zurückbleiben von "ZombieCompartments"
+		//Verhindert das ZurÃ¼ckbleiben von "ZombieCompartments"
 		sbContentSaver.frameList = null;
 		this.focusedWindow = null;
 		this.savedBody = null;
@@ -472,7 +472,7 @@ var sbPageEditor = {
 		this.TOOLBAR.hidden = !willShow;
 		willShow ? this.TOOLBAR.setAttribute("moz-collapsed", "false") : this.TOOLBAR.removeAttribute("moz-collapsed");
 		sbInfoViewer.optimize();
-		//Verhindert das Zurückbleiben von "ZombieCompartments"
+		//Verhindert das ZurÃ¼ckbleiben von "ZombieCompartments"
 		sbContentSaver.frameList = null;
 		this.focusedWindow = null;
 		this.savedBody = null;
@@ -971,7 +971,7 @@ var sbInfoViewer = {
 		{
 			lfFileSitemapXsl.remove(false);
 		}
-		//sitemap.xsl von übergeordnetem Verzeichnis kopieren
+		//sitemap.xsl von Ã¼bergeordnetem Verzeichnis kopieren
 		lfFileSitemapXsl = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
 		lfFileSitemapXsl.initWithPath(lfFolderString);
 		lfFileSitemapXsl.append("sitemap.xsl");

@@ -82,7 +82,7 @@ var sbMultipleService = {
 		}
 		if ( auCount > 0 )
 		{
-			//Vergleichen mit Ausschluﬂliste und Co
+			//Vergleichen mit Ausschlu√üliste und Co
 			this.currentID = sbFolderSelector2.resURI;
 			if ( this.currentID != this.lastID ) this.detectExistingLinks();
 			for ( var auI=0; auI<this.allURLs.length; auI++ )
@@ -256,7 +256,7 @@ var sbMultipleService = {
 
 	detectExistingLinks : function()
 	{
-		//Funktion ermittelt die Links der vorhandenen Eintr‰ge im aktuell gew‰hlten Zielverzeichnis
+		//Funktion ermittelt die Links der vorhandenen Eintr√§ge im aktuell gew√§hlten Zielverzeichnis
 		var delResource = null;
 		var delRDFCont = null;
 		var delResEnum = [];

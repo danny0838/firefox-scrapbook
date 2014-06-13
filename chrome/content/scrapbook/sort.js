@@ -134,7 +134,7 @@ var sbSortService = {
 			{
 				dataIDX1[i] = dataIDX0[i];
 			}
-			//getauscht muss größer 0 sein, da sonst nichts gemacht wird
+			//getauscht muss grÃ¶ÃŸer 0 sein, da sonst nichts gemacht wird
 			getauscht = 1;
 		}
 		else
@@ -168,7 +168,7 @@ var sbSortService = {
 					}
 				}
 			}
-			//Zusammenführen von dataIDX0-2
+			//ZusammenfÃ¼hren von dataIDX0-2
 			dataIDX.push(dataIDX0);
 			dataIDX.push(dataIDX1);
 			dataIDX.push(dataIDX2);
@@ -317,7 +317,7 @@ var sbSortService = {
 					getauscht++;
 				}
 			}
-			//RDF-Datenquelle dem tree hinzufügen
+			//RDF-Datenquelle dem tree hinzufÃ¼gen
 			treeObj.database.AddDataSource(daten);
 		}
 //		alert("Es wurden insgesamt "+getauscht+" Eintraege verschoben.");

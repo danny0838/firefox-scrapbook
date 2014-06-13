@@ -126,7 +126,7 @@ var sbBrowserOverlay = {
 
 	onLocationChange: function(aURL)
 	{
-		//Verhindert das Zurückbleiben von "ZombieCompartments"
+		//Verhindert das ZurÃ¼ckbleiben von "ZombieCompartments"
 		sbContentSaver.frameList = null;
 		sbPageEditor.focusedWindow = null;
 		sbPageEditor.savedBody = null;
@@ -290,8 +290,8 @@ var sbBrowserOverlay = {
 
 	execLocate: function(aRes)
 	{
-//Hier werden Änderungen fällig
-		//Dieser Block ist notwendig, da MultiSidebar verwendet Fehler verursachen würde
+//Hier werden Ã„nderungen fÃ¤llig
+		//Dieser Block ist notwendig, da MultiSidebar verwendet Fehler verursachen wÃ¼rde
 		var elSidebarId = "sidebar";
 		var elSidebarTitleId = "sidebar-title";
 		var elSidebarSplitterId = "sidebar-splitter";
