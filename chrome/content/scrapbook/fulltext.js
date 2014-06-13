@@ -308,7 +308,7 @@ var sbCacheService = {
 
 	build : function()
 	{
-		document.title = gCacheString.getString("BUILD_CACHE") + " - ScrapBook Plus";
+		document.title = gCacheString.getString("BUILD_CACHE") + " - ScrapBook";
 		gCacheStatus.firstChild.value = gCacheString.getString("BUILD_CACHE_INIT");
 		sbCacheSource.refreshEntries();
 		this.dataDir = sbCommonUtils.getScrapBookDir().clone();

@@ -60,7 +60,7 @@ var sbCommonUtils = {
 	{
 		if ( !aID || aID.length != 14 )
 		{
-			alert("ScrapBook Plus FATAL ERROR: Failed to get directory '" + aID + "'.");
+			alert("ScrapBook FATAL ERROR: Failed to get directory '" + aID + "'.");
 			return null;
 		}
 		var dir = this.getScrapBookDir().clone();
@@ -93,7 +93,7 @@ var sbCommonUtils = {
 			if ( aDir.isDirectory() ) aDir.remove(false);
 			return true;
 		} catch(ex) {
-			alert("ScrapBook Plus ERROR: Failed to remove file '" + file.leafName + "'.\n" + ex);
+			alert("ScrapBook ERROR: Failed to remove file '" + file.leafName + "'.\n" + ex);
 			return false;
 		}
 	},
@@ -221,7 +221,7 @@ var sbCommonUtils = {
 			aRelURL = aRelURL.replace(/\"/g, "");
 			return baseURLObj.resolve(aRelURL);
 		} catch(ex) {
-			dump("*** ScrapBook Plus ERROR: Failed to resolve URL: " + aBaseURL + "\t" + aRelURL + "\n");
+			dump("*** ScrapBook ERROR: Failed to resolve URL: " + aBaseURL + "\t" + aRelURL + "\n");
 		}
 	},
 
@@ -264,7 +264,7 @@ var sbCommonUtils = {
 		}
 		catch(ex)
 		{
-			alert("ScrapBook Plus ERROR: Failed to write file: " + aFile.leafName);
+			alert("ScrapBook ERROR: Failed to write file: " + aFile.leafName);
 		}
 	},
 
@@ -354,13 +354,13 @@ var sbCommonUtils = {
 		try {
 			execfile.initWithPath(aExecFilePath);
 			if ( !execfile.exists() ) {
-				alert("ScrapBook Plus ERROR: File does not exist.\n" + aExecFilePath);
+				alert("ScrapBook ERROR: File does not exist.\n" + aExecFilePath);
 				return;
 			}
 			process.init(execfile);
 			process.run(false, args, args.length);
 		} catch (ex) {
-			alert("ScrapBook Plus ERROR: File is not executable.\n" + aExecFilePath);
+			alert("ScrapBook ERROR: File is not executable.\n" + aExecFilePath);
 		}
 	},
 

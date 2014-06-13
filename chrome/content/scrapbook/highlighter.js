@@ -54,7 +54,7 @@ var sbHighlighter = {
 //alert("startC - "+startC+"\nendC - "+endC+"\nsOffset - "+sOffset+"\neOffset - "+eOffset);
 			if ( aNodeName == "a" && !sameNode )
 			{
-				alert("ScrapBook Plus ERROR: Can't attach link across tags."); return;
+				alert("ScrapBook ERROR: Can't attach link across tags."); return;
 			}
 			//Ersatz fuer fehlerhafte Originalfunktion
 			var nodeWalker = doc.createTreeWalker(range.commonAncestorContainer,NodeFilter.SHOW_TEXT,this._acceptNode,false);

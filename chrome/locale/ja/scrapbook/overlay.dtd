@@ -7,7 +7,7 @@
 <!ENTITY sb.capture.target "リンク先の取り込み">
 <!ENTITY sb.capture.target.as "リンク先の詳細な取り込み">
 <!ENTITY sb.capture.alltabs "すべてのタブを取り込み">
-<!ENTITY sb.capture.bookmark "ScrapBook+にブックマーク">
+<!ENTITY sb.capture.bookmark "ScrapBookにブックマーク">
 <!ENTITY sb.sidebar "サイドバーに表示">
 <!ENTITY sb.menu "メニュー">
 <!ENTITY sb.editbefore "取り込み前編集モード">

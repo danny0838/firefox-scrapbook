@@ -18,7 +18,7 @@
 
 <!--window-->
 <window id="sbCalcWindow"
-        title="&sb.tools.calculate; - ScrapBook Plus"
+        title="&sb.tools.calculate; - ScrapBook"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         width="500" height="450"
         persist="screenX screenY"

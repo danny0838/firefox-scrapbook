@@ -15,7 +15,7 @@
 ]>
 
 <window id="sbManageWindow"
-        title="&sb.tools.manage; - ScrapBook Plus"
+        title="&sb.tools.manage; - ScrapBook"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         xmlns:SB="http://amb.vis.ne.jp/mozilla/scrapbook-rdf#"
         width="720" height="540" persist="width height screenX screenY"

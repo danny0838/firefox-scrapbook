@@ -659,7 +659,7 @@ var sbContentSaver = {
 			var aURL = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
 			aURL.spec = aURLSpec;
 		} catch(ex) {
-			alert("ScrapBook Plus ERROR: Failed to download: " + aURLSpec);
+			alert("ScrapBook ERROR: Failed to download: " + aURLSpec);
 			return;
 		}
 		var newFileName = aURL.fileName.toLowerCase();

@@ -382,7 +382,7 @@ var sbController = {
 				sbCommonUtils.execProgram(path, [aDir.path]);
 			}
 			catch (ex) {
-				alert("ScrapBook Plus ERROR: Failed to execute program.\n" + ex);
+				alert("ScrapBook ERROR: Failed to execute program.\n" + ex);
 			}
 		}
 	},
@@ -418,7 +418,7 @@ var sbController = {
 			}
 			if (!sbDataSource.exists(aResList[i]) || 
 			    sbDataSource.getRelativeIndex(aParResList[i], aResList[i]) < 0) {
-				alert("ScrapBook Plus ERROR: Failed to remove resource.\n" + aResList[i].Value);
+				alert("ScrapBook ERROR: Failed to remove resource.\n" + aResList[i].Value);
 				continue;
 			}
 			rmIDs = rmIDs.concat(sbDataSource.deleteItemDescending(aResList[i], aParResList[i]));

@@ -24,7 +24,7 @@ var sbDataSource = {
 			this.data = sbCommonUtils.RDF.GetDataSourceBlocking(fileURL);
 		}
 		catch(ex) {
-			if ( !aQuietWarning ) alert("ScrapBook Plus ERROR: Failed to initialize datasource.\n\n" + ex);
+			if ( !aQuietWarning ) alert("ScrapBook ERROR: Failed to initialize datasource.\n\n" + ex);
 		}
 		this.unshifting = sbCommonUtils.getBoolPref("scrapbook.tree.unshift", false);
 	},
@@ -131,7 +131,7 @@ var sbDataSource = {
 			this.flush();
 			return newRes;
 		} catch(ex) {
-			alert("ScrapBook Plus ERROR: Failed to add resource to datasource.\n\n" + ex);
+			alert("ScrapBook ERROR: Failed to add resource to datasource.\n\n" + ex);
 			return false;
 		}
 	},
@@ -142,7 +142,7 @@ var sbDataSource = {
 			sbCommonUtils.RDFC.Init(this.data, curPar);
 			sbCommonUtils.RDFC.RemoveElement(curRes, true);
 		} catch(ex) {
-			alert("ScrapBook Plus ERROR: Failed to move element at datasource (1).\n\n" + ex);
+			alert("ScrapBook ERROR: Failed to move element at datasource (1).\n\n" + ex);
 			return;
 		}
 		if ( this.unshifting )
@@ -157,7 +157,7 @@ var sbDataSource = {
 				sbCommonUtils.RDFC.AppendElement(curRes);
 			}
 		} catch(ex) {
-			alert("ScrapBook Plus ERROR: Failed to move element at datasource (2).\n\n" + ex);
+			alert("ScrapBook ERROR: Failed to move element at datasource (2).\n\n" + ex);
 			sbCommonUtils.RDFC.Init(this.data, sbCommonUtils.RDF.GetResource("urn:scrapbook:root"));
 			sbCommonUtils.RDFC.AppendElement(curRes, true);
 		}
@@ -198,7 +198,7 @@ var sbDataSource = {
 				}
 			}
 		} catch(ex) {
-			alert("ScrapBook Plus ERROR: Failed to clean up datasource.\n" + ex);
+			alert("ScrapBook ERROR: Failed to clean up datasource.\n" + ex);
 		}
 		return rmIDs;
 	},

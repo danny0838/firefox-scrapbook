@@ -11,7 +11,7 @@
 
 <wizard id="sbRepairWizard"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        title="&sb.tools.repair; - ScrapBook Plus"
+        title="&sb.tools.repair; - ScrapBook"
         windowtype="scrapbook">
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />

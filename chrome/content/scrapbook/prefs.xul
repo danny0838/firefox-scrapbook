@@ -18,7 +18,7 @@
 
 <prefwindow id="sbPrefWindow"
             xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-            title="ScrapBook Plus &sb.tools.options;"
+            title="ScrapBook &sb.tools.options;"
             style="width: 40em;"
             onload="sbPrefWindow.init();"
             onchange="sbPrefWindow.changed = true;"

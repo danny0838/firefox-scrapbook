@@ -6,7 +6,7 @@
 <!ENTITY sb.prefs.advanced "Avancerat">
 <!ENTITY sb.prefs.ui.contextMenu "Visa i webbläsarens snabbmeny">
 <!ENTITY sb.prefs.ui.contextSubMenu "Visa som en undermeny">
-<!ENTITY sb.prefs.ui.bookmarkMenu "Visa menyn &quot;Bokmärk med ScrapBook+&quot;">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Visa menyn &quot;Bokmärk med ScrapBook&quot;">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Visa upp till">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "nyligen använda mappar">
 <!ENTITY sb.prefs.ui.menuBar "Visa i menyraden">

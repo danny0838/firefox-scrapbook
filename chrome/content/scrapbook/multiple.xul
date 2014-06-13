@@ -17,7 +17,7 @@
 ]>
 
 <dialog id="sbMultipleDialog"
-        title="&sb.tools.multiple; - ScrapBook Plus"
+        title="&sb.tools.multiple; - ScrapBook"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         style="width:400px;"
         buttonlabelextra2="&sb.capture.alltabs;"

@@ -27,8 +27,8 @@
 	<broadcasterset id="mainBroadcasterSet">
 		<broadcaster id="viewScrapBookSidebar"
 		             type="checkbox" autoCheck="false"
-		             label="ScrapBook Plus"
-		             group="sidebar" sidebartitle="ScrapBook Plus"
+		             label="ScrapBook X"
+		             group="sidebar" sidebartitle="ScrapBook X"
 		             sidebarurl="chrome://scrapbook/content/scrapbook.xul"
 		             onclick="if (event.button == 1) sbCommonUtils.openManageWindow();"
 		             oncommand="toggleSidebar('viewScrapBookSidebar');" />
@@ -46,7 +46,7 @@
 	</menupopup>
 
 	<menubar id="main-menubar">
-		<menu id="ScrapBookMenu" label="ScrapBook Plus"
+		<menu id="ScrapBookMenu" label="ScrapBook X"
 		      datasources="rdf:null" ref="urn:scrapbook:root" flags="dont-test-empty"
 		      insertafter="bookmarks-menu bookmarksMenu" accesskey="&sb.key.menubar;"
 		      oncommand="sbMenuHandler.onClick(event);"
@@ -183,10 +183,10 @@
 		<toolbarbutton id="ScrapBookStatusPanel"
 					   class="toolbarbutton-1 chromeclass-toolbar-additional"
 					   context="ScrapBookStatusPopup"
-					   label="ScrapBook Plus"
+					   label="ScrapBook X"
 					   observes="viewScrapBookSidebar"
 					   ondragover="toggleSidebar('viewScrapBookSidebar',true);"
-					   tooltiptext="ScrapBook Plus"
+					   tooltiptext="ScrapBook X"
 					   >
 		</toolbarbutton>
 	</toolbarpalette>

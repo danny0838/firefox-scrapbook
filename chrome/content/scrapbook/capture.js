@@ -57,7 +57,7 @@ function SB_initCapture()
 			var contDir = sbCommonUtils.getContentDir(gPreset[0]);
 			var file = contDir.clone();
 			file.append("sb-file2url.txt");
-			if ( !file.exists() ) { alert("ScrapBook Plus ERROR: Could not find 'sb-file2url.txt'."); window.close(); }
+			if ( !file.exists() ) { alert("ScrapBook ERROR: Could not find 'sb-file2url.txt'."); window.close(); }
 			var lines = sbCommonUtils.readFile(file).split("\n");
 			for ( var i = 0; i < lines.length; i++ )
 			{
@@ -66,7 +66,7 @@ function SB_initCapture()
 			}
 			file = sbCommonUtils.getContentDir(gPreset[0]).clone();
 			file.append("sb-url2name.txt");
-			if ( !file.exists() ) { alert("ScrapBook Plus ERROR: Could not find 'sb-url2name.txt'."); window.close(); }
+			if ( !file.exists() ) { alert("ScrapBook ERROR: Could not find 'sb-url2name.txt'."); window.close(); }
 			lines = sbCommonUtils.readFile(file).split("\n");
 			for ( i = 0; i < lines.length; i++ )
 			{
@@ -78,7 +78,7 @@ function SB_initCapture()
 				}
 			}
 			gPreset[3] = gFile2URL;
-			if ( !myURLs[0] ) { alert("ScrapBook Plus ERROR: Could not find the source URL for " + gPreset[1] + ".html."); window.close(); }
+			if ( !myURLs[0] ) { alert("ScrapBook ERROR: Could not find the source URL for " + gPreset[1] + ".html."); window.close(); }
 		}
 	}
 	else gContext = "link";

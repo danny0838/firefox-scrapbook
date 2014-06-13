@@ -373,7 +373,7 @@ var sbPageEditor = {
 		var curURL = window.content.location.href;
 		if ( curURL.indexOf("file://") != 0 || !curURL.match(/\/data\/(\d{14})\/(.+)$/) || RegExp.$1 != this.item.id || RegExp.$2 == "index.dat" || RegExp.$2 == "sitemap.xml" )
 		{
-			alert("ScrapBook Plus ERROR: Cannot save file '" + RegExp.$2 + "'.");
+			alert("ScrapBook ERROR: Cannot save file '" + RegExp.$2 + "'.");
 			return;
 		}
 		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
@@ -385,7 +385,7 @@ var sbPageEditor = {
 			var doc = sbContentSaver.frameList[i].document;
 			if ( doc.contentType != "text/html" )
 			{
-				alert("ScrapBook Plus ERROR: Cannot modify " + doc.contentType + " content.");
+				alert("ScrapBook ERROR: Cannot modify " + doc.contentType + " content.");
 				continue;
 			}
 			var rootNode = doc.getElementsByTagName("html")[0];
