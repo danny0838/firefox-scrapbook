@@ -293,7 +293,7 @@ const ScrapBookUtils = {
 	},
 
 	getFocusedWindow: function SBU_getFocusedWindow() {
-		var topWin = this.WINDOW.getMostRecentWindow(null);
+		var topWin = this.WINDOW.getMostRecentWindow("navigator:browser");
 		var win = topWin.document.commandDispatcher.focusedWindow;
 		if (!win || win == topWin || win instanceof Ci.nsIDOMChromeWindow)
 			win = topWin.content;

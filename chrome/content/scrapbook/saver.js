@@ -61,7 +61,7 @@ var sbContentSaver = {
 			this.item.icon = gBrowser.mCurrentTab.image;
 		}
 		this.frameList = this.flattenFrames(aRootWindow);
-		var titles = aRootWindow.document.title ? [aRootWindow.document.title] : decodeURI([this.item.source]);
+		var titles = aRootWindow.document.title ? [aRootWindow.document.title] : [decodeURI(this.item.source)];
 		if ( aIsPartial )
 		{
 			this.selection = aRootWindow.getSelection();
@@ -887,6 +887,7 @@ var sbCaptureObserverCallback = {
 
 	onCaptureComplete : function(aItem)
 	{
+		if (!aItem) return;
 		if ( aItem && ScrapBookData.getProperty(ScrapBookUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id), "type") == "marked" ) return;
 		if ( ScrapBookUtils.getPref("notifyOnComplete", true) )
 		{
