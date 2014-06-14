@@ -19,7 +19,7 @@ var hlCustomizer = {
 		gColorIndex = window.arguments[0];
 		gPreviewUI  = getElement("hlCustomPreview");
 		gPrefBranch = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefBranch);
-		gPrefName   = "scrapbook.highlighter.style." + gColorIndex;
+		gPrefName   = "extensions.scrapbook.highlighter.style." + gColorIndex;
 		var prefVal = null;
 		try {
 			prefVal = gPrefBranch.getComplexValue(gPrefName, Ci.nsISupportsString).data;

@@ -4,7 +4,7 @@ const Ci = Components.interfaces;
 const Cr = Components.results;
 
 const FLUSH_DELAY = 10000;
-const PREF_DOMAIN = "scrapbook.";
+const PREF_DOMAIN = "extensions.scrapbook.";
 
 Components.utils.import("resource://scrapbook-modules/utils.jsm");
 
