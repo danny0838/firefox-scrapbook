@@ -571,7 +571,7 @@ var sbContentSaver = {
 		}
 		else if ( aNode.style && aNode.style.cssText )
 		{
-			var newCSStext = this.inspectCSSText(aNode.style.cssText, this.refURLObj.spec, aNode.ownerDocument);
+			var newCSStext = this.inspectCSSText(aNode.style.cssText, this.refURLObj.spec, true);
 			if ( newCSStext ) aNode.setAttribute("style", newCSStext);
 		}
 		if ( !this.option["script"] )
@@ -586,127 +586,74 @@ var sbContentSaver = {
 		return aNode;
 	},
 
-	processCSSRecursively : function(aCSS, aDocument)
+	processCSSRecursively : function(aCSS, aDocument, isImport)
 	{
+		if (!aCSS || aCSS.disabled) return "";
+		if (aCSS.href && aCSS.href.indexOf("chrome://") == 0) return "";
 		var content = "";
-		if (!aCSS || aCSS.disabled) {
-			return "";
+		if (aCSS.href) {
+			if (isImport) {
+				content += "/* ::::: " + "(import) " + aCSS.href + " ::::: */\n";
+			}
+			else {
+				content += "/* ::::: " + aCSS.href + " ::::: */\n\n";
+			}
 		}
-		var cssMedia = aCSS.media.mediaText;
-		if (cssMedia && cssMedia.indexOf("screen") < 0 && cssMedia.indexOf("all") < 0) {
-			return "";
-		}
-		if (aCSS.href && aCSS.href.indexOf("chrome://") == 0) {
-			return "";
-		}
-		if (aCSS.href)
-			content += (content ? "\n" : "") + "/* ::::: " + aCSS.href + " ::::: */\n\n";
 		// sometimes <link> cannot access remote css
-		// and aCSS.cssRules fires an error (instead of returing undefined)...
+		// and aCSS.cssRules fires an error (instead of returning undefined)...
+		// we need this try block to catch that
+		var skip = false;
 		try {
-			if (!aCSS.cssRules) return content;
+			if (!aCSS.cssRules) skip = true;
 		}
 		catch(ex) {
-			console.warn("CSS cannot be read from '" + aCSS.href + "' in page '" + aDocument.location.href + "' \n" + ex);
-			return content;
+			console.warn("Unable to access CSS from '" + aCSS.href + "' in page '" + aDocument.location.href + "' \n" + ex);
+				content += "/* ERROR: Unable to access this CSS */\n\n";
+			skip = true;
 		}
-		Array.forEach(aCSS.cssRules, function(cssRule) {
-			switch (cssRule.type) {
-				case Ci.nsIDOMCSSRule.STYLE_RULE: 
-					var cssText = this.inspectCSSText(cssRule.cssText, aCSS.href, aDocument);
-					if (cssText)
-						content += cssText + "\n";
-					break;
-				case Ci.nsIDOMCSSRule.IMPORT_RULE: 
-					content += this.processCSSRecursively(cssRule.styleSheet, aDocument);
-					break;
-				case Ci.nsIDOMCSSRule.MEDIA_RULE: 
-					if (/^@media ([^\{]+) \{/.test(cssRule.cssText)) {
-						var media = RegExp.$1;
-						if (media.indexOf("screen") < 0 && media.indexOf("all") < 0) {
-							break;
-						}
-					}
-					cssRule.cssText.split("\n").forEach(function(cssText) {
-						if (cssText.indexOf("@media ") == 0 || cssText == "}") {
-							content += cssText + "\n";
-						}
-						else {
-							cssText = cssText.replace(/^\s+|\s+$/g, "");
-							cssText = this.inspectCSSText(cssText, aCSS.href, aDocument);
-							if (cssText)
-								content += "\t" + cssText + "\n";
-						}
-					}, this);
-					break;
-				case Ci.nsIDOMCSSRule.FONT_FACE_RULE: 
-					cssRule.cssText.split("\n").forEach(function(cssText) {
-						if (cssText == "@font-face {" || cssText == "}") {
-							content += cssText + "\n";
-						}
-						else {
-							cssText = cssText.replace(/^\s+|\s+$/g, "");
-							cssText = this.inspectCSSText(cssText, aCSS.href, aDocument);
-							if (cssText)
-								content += "\t" + cssText + "\n";
-						}
-					}, this);
-					break;
-				default: 
-			}
-		}, this);
+		if (!skip) {
+			Array.forEach(aCSS.cssRules, function(cssRule) {
+				switch (cssRule.type) {
+					case Ci.nsIDOMCSSRule.IMPORT_RULE: 
+						content += this.processCSSRecursively(cssRule.styleSheet, aDocument, true);
+						break;
+					case Ci.nsIDOMCSSRule.FONT_FACE_RULE: 
+						var cssText = this.inspectCSSText(cssRule.cssText, aCSS.href);
+						if (cssText) content += cssText + "\n";
+						break;
+					case Ci.nsIDOMCSSRule.STYLE_RULE: 
+					case Ci.nsIDOMCSSRule.MEDIA_RULE: 
+					default: 
+						var cssText = this.inspectCSSText(cssRule.cssText, aCSS.href, true);
+						if (cssText) content += cssText + "\n";
+						break;
+				}
+			}, this);
+		}
+		if (isImport) {
+			content += "/* ::::: " + "(end import)" + " ::::: */\n";
+		}
 		return content;
 	},
 
-	inspectCSSText : function(aCSStext, aCSShref, aDocument)
+	inspectCSSText : function(aCSStext, aCSShref, isImage)
 	{
-		if (!aCSShref) {
-			aCSShref = this.refURLObj.spec;
-		}
-		if ( !aCSStext ) return;
-		if (/^([^\{]+)\s+\{/.test(aCSStext)) {
-			var selectors = RegExp.$1.trim();
-			selectors = selectors.replace(/:[a-z-]+/g, "");
-			try {
-				if (!aDocument.querySelector(selectors))
-					return;
+		if (!aCSShref) aCSShref = this.refURLObj.spec;
+		// CSS get by .cssText is always url("something-with-\"double-quote\"-escaped")
+		// and no CSS comment is in
+		// so we can parse it safely with this RegExp
+		aCSStext = aCSStext.replace(/ url\(\"((?:\\.|[^"])+)\"\)/g, function() {
+			var dataURL = arguments[1];
+			if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
+			dataURL = ScrapBookUtils.resolveURL(aCSShref, dataURL);
+			if (isImage) {
+				var dataFile = sbContentSaver.option["images"] ? sbContentSaver.download(dataURL) : dataURL;
 			}
-			catch (ex) {}
-		}
-		var re = new RegExp(/ url\(([^\'\)\s]+)\)/);
-		var i = 0;
-		while ( aCSStext.match(re) )
-		{
-			if ( ++i > 10 ) break;
-			var imgURL  = RegExp.$1;
-			if (/^[\'\"]([^\'\"]+)[\'\"]$/.test(imgURL))
-				imgURL = RegExp.$1;
-			imgURL  = ScrapBookUtils.resolveURL(aCSShref, imgURL);
-			var imgFile = this.option["images"] ? this.download(imgURL) : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7";
-			aCSStext = aCSStext.replace(re, " url('" + imgFile + "')");
-		}
-		aCSStext = aCSStext.replace(/([^\{\}])(\r|\n)/g, "$1\\A");
-		re = new RegExp(/ content: \"(.*?)\"; /);
-		if ( aCSStext.match(re) )
-		{
-			var innerQuote = RegExp.$1;
-			innerQuote = innerQuote.replace(/\"/g, '\\"');
-			innerQuote = innerQuote.replace(/\\\" attr\(([^\)]+)\) \\\"/g, '" attr($1) "');
-			aCSStext = aCSStext.replace(re, ' content: "' + innerQuote + '"; ');
-		}
-		if ( aCSStext.match(/ (quotes|voice-family): \"/) )
-		{
-			return;
-		}
-		if ( aCSStext.indexOf(" background: ") >= 0 )
-		{
-			aCSStext = aCSStext.replace(/ -moz-background-[^:]+: -moz-[^;]+;/g, "");
-			aCSStext = aCSStext.replace(/ scroll 0(?:pt|px|%);/g, ";");
-		}
-		if ( aCSStext.indexOf(" background-position: 0") >= 0 )
-		{
-			aCSStext = aCSStext.replace(/ background-position: 0(?:pt|px|%);/, " background-position: 0 0;");
-		}
+			else {
+				var dataFile = sbContentSaver.download(dataURL);
+			}
+			return ' url("' + dataFile + '")';
+		});
 		return aCSStext;
 	},
 
