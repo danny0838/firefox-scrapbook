@@ -1,0 +1,20 @@
+<!ENTITY sb.hlCustom.preset "Наявні стилі">
+<!ENTITY sb.hlCustom.background "Тло">
+<!ENTITY sb.hlCustom.color "Колір">
+<!ENTITY sb.hlCustom.text "Текст">
+<!ENTITY sb.hlCustom.bold "Жирний">
+<!ENTITY sb.hlCustom.italic "Курсив">
+<!ENTITY sb.hlCustom.line "Закреслений">
+<!ENTITY sb.hlCustom.border "Межа">
+<!ENTITY sb.hlCustom.type "Тип">
+<!ENTITY sb.hlCustom.box "У рамці">
+<!ENTITY sb.hlCustom.underline "Підкреслений">
+<!ENTITY sb.hlCustom.style "Стиль">
+<!ENTITY sb.hlCustom.solid "Рискою">
+<!ENTITY sb.hlCustom.dotted "Крапками">
+<!ENTITY sb.hlCustom.dashed "Рисками">
+<!ENTITY sb.hlCustom.double "Подвійною">
+<!ENTITY sb.hlCustom.width "Ширина">
+<!ENTITY sb.hlCustom.thin "Тонкий">
+<!ENTITY sb.hlCustom.medium "Середній">
+<!ENTITY sb.hlCustom.thick "Товстий">

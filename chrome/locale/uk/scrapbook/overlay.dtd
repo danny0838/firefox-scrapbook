@@ -1,0 +1,13 @@
+<!ENTITY sb.save.partial "Зберегти обране">
+<!ENTITY sb.save.partial.as "Зберегти обране як">
+<!ENTITY sb.save.entire "Зберегти сторінку">
+<!ENTITY sb.save.entire.as "Зберегти сторінку як">
+<!ENTITY sb.save.frame "Зберегти фрейм">
+<!ENTITY sb.save.frame.as "Зберегти фрейм як">
+<!ENTITY sb.save.target "Зберегти посилання">
+<!ENTITY sb.save.target.as "Зберегти посилання як">
+<!ENTITY sb.save.alltabs "Зберегти усі вкладки">
+<!ENTITY sb.save.bookmark "Додати до закладок у ScrapBook">
+<!ENTITY sb.sidebar "Відобразити у бічній панелі">
+<!ENTITY sb.menubar "Меню">
+<!ENTITY sb.editbefore "Редагувати перед збереженням">

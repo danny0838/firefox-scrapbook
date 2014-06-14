@@ -200,6 +200,17 @@
 
 		<em:localized>
 			<Description>
+				<em:locale>uk</em:locale>
+				<em:name>ScrapBook X</em:name>
+				<em:description>Helps you save web pages and organize the collection.</em:description>
+				<em:creator>Danny Lin</em:creator>
+				<em:translator>Sergiy Khoruzhin</em:translator>
+				<em:homepageURL>https://addons.mozilla.org/firefox/addon/scrapbook-x/</em:homepageURL>
+			</Description>
+		</em:localized>
+
+		<em:localized>
+			<Description>
 				<em:locale>zh-CN</em:locale>
 				<em:name>ScrapBook X</em:name>
 				<em:description>迅捷精准地储存网页，并能良好地组织、注记及搜寻。</em:description>

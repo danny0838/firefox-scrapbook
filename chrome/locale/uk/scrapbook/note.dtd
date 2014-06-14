@@ -1,0 +1,19 @@
+<!ENTITY sb.note.save "Зберегти">
+<!ENTITY sb.note.close "Закрити">
+<!ENTITY sb.note.tools "Інструменти">
+<!ENTITY sb.note.htmlview "У вигляді HTML">
+<!ENTITY sb.note.normalview "Звичайний вигляд">
+<!ENTITY sb.note.template "Редагувати шаблон HTML">
+<!ENTITY sb.note.autolinefeed "Автоматичне перенесення рядків">
+<!ENTITY sb.note.autolinefeed.t "Додавати мітку &lt;br&gt; до кожного рядка при перегляді у HTML">
+<!ENTITY sb.note.fontsize "Розмір шрифту">
+<!ENTITY sb.note.help "Допомога">
+<!ENTITY sb.note.print "Друк">
+<!ENTITY sb.note.exit "Вихід">
+<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "N">
+<!ENTITY sb.note.tools.accesskey "T">
+<!ENTITY sb.note.fontsize.accesskey "F">
+<!ENTITY sb.note.print.accesskey "P">
+<!ENTITY sb.note.exit.accesskey "X">
