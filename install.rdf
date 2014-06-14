@@ -98,6 +98,17 @@
 
 		<em:localized>
 			<Description>
+				<em:locale>hu</em:locale>
+				<em:name>ScrapBook X</em:name>
+				<em:description>Helps you save web pages and organize the collection.</em:description>
+				<em:creator>Danny Lin</em:creator>
+				<em:translator>Jozsef Tamas Herczeg, kami</em:translator>
+				<em:homepageURL>https://addons.mozilla.org/firefox/addon/scrapbook-x/</em:homepageURL>
+			</Description>
+		</em:localized>
+
+		<em:localized>
+			<Description>
 				<em:locale>it</em:locale>
 				<em:name>ScrapBook X</em:name>
 				<em:description>Helps you save web pages and organize the collection.</em:description>

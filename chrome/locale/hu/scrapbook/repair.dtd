@@ -1,0 +1,9 @@
+<!ENTITY sb.repair.rdfFile "A scrapbook.rdf visszaállítása">
+<!ENTITY sb.repair.rdfFile.descript "Ezzel akkor próbálkozzon, ha hirtelen eltűnik a dossziéfa.">
+<!ENTITY sb.repair.rdfFile.select "Válassza ki a biztonsági mentés fájlját a visszaállításhoz.">
+<!ENTITY sb.repair.rdfFile.file "Fájl">
+<!ENTITY sb.repair.rdfFile.time "Idő">
+<!ENTITY sb.repair.rdfFile.size "Méret">
+<!ENTITY sb.repair.favicons "A Faviconok visszaállítása a fában">
+<!ENTITY sb.repair.favicons.descript "Ezt akkor próbálja meg, ha az dossziéfa Faviconjai közül sok eltűnik.">
+<!ENTITY sb.repair.complete "Elkészült.">
