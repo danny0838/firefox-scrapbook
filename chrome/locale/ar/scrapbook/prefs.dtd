@@ -1,0 +1,35 @@
+<!ENTITY sb.prefs.main "الرئيسية">
+<!ENTITY sb.prefs.keys "Keys">
+<!ENTITY sb.prefs.tabs "الألسنة">
+<!ENTITY sb.prefs.save "حفظ">
+<!ENTITY sb.prefs.edit "تحرير">
+<!ENTITY sb.prefs.organize "تنظيم">
+<!ENTITY sb.prefs.advanced "متقدم">
+<!ENTITY sb.prefs.ui.contextMenu "عرض في قائمة النص في المتصفح">
+<!ENTITY sb.prefs.ui.contextSubMenu "قائمة فرعية">
+<!ENTITY sb.prefs.ui.bookmark "عرض قائمة&apos;اشارة مرجعية مع ScrapBook&apos;">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "إعرض حتى">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "دليل مستخدم  مؤخراً">
+<!ENTITY sb.prefs.ui.menuBar "عرض في شريط القوائم">
+<!ENTITY sb.prefs.ui.menuBar.icon "رمز">
+<!ENTITY sb.prefs.ui.toolsMenu "عرض في قائمة &apos;الأدوات&apos;">
+<!ENTITY sb.prefs.ui.statusBar "عرض في شريط الحالة">
+<!ENTITY sb.prefs.restart "التغيير يتطلب إعادة تشغيل فيرفوكس.">
+<!ENTITY sb.prefs.tabs.tips "فتح في لسان للعمليات التالية">
+<!ENTITY sb.prefs.tabs.note "تحرير ملاحظة">
+<!ENTITY sb.prefs.data "مكان تخزين البيانات">
+<!ENTITY sb.prefs.data.default "الافتراضي (مجلد profile)">
+<!ENTITY sb.prefs.data.custom "حفظ البيانات إلى">
+<!ENTITY sb.prefs.data.tips "إختر مجلدا لتخزين بيانات ScrapBook.">
+<!ENTITY sb.prefs.multibook.enabled "تمكين ScrapBook متعدد">
+<!ENTITY sb.prefs.multibook.tips "ScrapBook متعدد يمكن من اعداد مواقع متعددة لتخزين البيانات و التبديل بينها بسرعة بزر شريط الأدوات.">
+<!ENTITY sb.prefs.confirmDelete "نبهني عند ازالة عناصر الشجرة">
+<!ENTITY sb.prefs.tree.autoCollapse "عند فتح مجلد في الشجرة, تلقائيا أغلق المجلدات الاخرى">
+<!ENTITY sb.prefs.tree.unshift "وضع عنصر في">
+<!ENTITY sb.prefs.tree.unshift.top "أعلى المجلد">
+<!ENTITY sb.prefs.tree.unshift.bottom "أسفل المجلد">
+<!ENTITY sb.prefs.showDetailOnDrop "عرض مربع&apos;تفاصيل الإلتقاط&apos; عند الإلتقاط بالسحب و الإفلات داخل الشريط الجانبي">
+<!ENTITY sb.prefs.notifyOnComplete "عرض تنبيه &apos;تم الإلتقاط&apos;">
+<!ENTITY sb.button.customize "تخصيص">
+<!ENTITY sb.button.browse "استعراض">
+<!ENTITY sb.button.show "عرض الملفات">
