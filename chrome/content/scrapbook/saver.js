@@ -88,7 +88,6 @@ var sbContentSaver = {
 				this.item.title = modTitle;
 			}
 			this.item.comment = ScrapBookUtils.escapeComment(sbPageEditor.COMMENT.value);
-			for ( var i = 0; i < this.frameList.length; i++ ) { sbPageEditor.removeAllStyles(this.frameList[i]); }
 		}
 		if ( aShowDetail )
 		{
@@ -273,7 +272,6 @@ var sbContentSaver = {
 				rootNode.firstChild.appendChild(aDocument.createTextNode("\n"));
 				rootNode.firstChild.appendChild(newLinkNode);
 				rootNode.firstChild.appendChild(aDocument.createTextNode("\n"));
-				myCSS = myCSS.replace(/\*\|/g, "");
 			}
 		}
 
@@ -307,10 +305,7 @@ var sbContentSaver = {
 		}
 
 		// generate the HTML and CSS file and save
-		var myHTML;
-		myHTML = this.surroundByTags(rootNode, rootNode.innerHTML);
-		myHTML = this.doctypeToString(aDocument.doctype) + myHTML;
-		myHTML = myHTML.replace(/\x00/g, " ");
+		var myHTML = this.doctypeToString(aDocument.doctype) + rootNode.outerHTML;
 		var myHTMLFile = this.contentDir.clone();
 		myHTMLFile.append(myHTMLFileName);
 		ScrapBookUtils.writeFile(myHTMLFile, myHTML, this.item.chars);
@@ -362,17 +357,6 @@ var sbContentSaver = {
 		if ( "ScrapBookBrowserOverlay" in window ) ScrapBookBrowserOverlay.updateFolderPref(aResName);
 	},
 
-
-	surroundByTags : function(aNode, aContent)
-	{
-		var tag = "<" + aNode.nodeName.toLowerCase();
-		for ( var i=0; i<aNode.attributes.length; i++ )
-		{
-			tag += ' ' + aNode.attributes[i].name + '="' + aNode.attributes[i].value + '"';
-		}
-		tag += ">\n";
-		return tag + aContent + "</" + aNode.nodeName.toLowerCase() + ">\n";
-	},
 
 	addCommentTag : function(targetNode, aComment)
 	{
