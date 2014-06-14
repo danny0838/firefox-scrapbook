@@ -1,0 +1,5 @@
+<!ENTITY sb.trade.import "استيراد">
+<!ENTITY sb.trade.export "تصدير">
+<!ENTITY sb.trade.time "وقت التصدير">
+<!ENTITY sb.trade.restore "استيراد مع استرجاع بنية المجلد">
+<!ENTITY sb.trade.remove "إزالة الملفات بعد الاستيراد">

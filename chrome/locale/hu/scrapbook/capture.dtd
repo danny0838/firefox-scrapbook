@@ -1,0 +1,13 @@
+<!ENTITY sb.save "Rögzítés">
+<!ENTITY sb.save.abort "Mégse">
+<!ENTITY sb.save.start "Indítás">
+<!ENTITY sb.save.retry "Ismét">
+<!ENTITY sb.save.skip "Kihagyás">
+<!ENTITY sb.save.pause "Szünet">
+<!ENTITY sb.save.filter "Szűrés">
+<!ENTITY sb.save.filter.domain "Restrict to Domain">
+<!ENTITY sb.save.filter.level "Restrict to Directory">
+<!ENTITY sb.save.filter.string "Filter by String...">
+<!ENTITY sb.save.filter.checkon "Check All On">
+<!ENTITY sb.save.filter.checkoff "Check All Off">
+<!ENTITY sb.save.filter.invert "Invert Checks">
