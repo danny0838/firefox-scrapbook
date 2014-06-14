@@ -155,6 +155,17 @@
 
 		<em:localized>
 			<Description>
+				<em:locale>pt-BR</em:locale>
+				<em:name>ScrapBook X</em:name>
+				<em:description>Helps you save web pages and organize the collection.</em:description>
+				<em:creator>Danny Lin</em:creator>
+				<em:translator>Gutierrez PS</em:translator>
+				<em:homepageURL>https://addons.mozilla.org/firefox/addon/scrapbook-x/</em:homepageURL>
+			</Description>
+		</em:localized>
+
+		<em:localized>
+			<Description>
 				<em:locale>ro</em:locale>
 				<em:name>ScrapBook X</em:name>
 				<em:description>Ajută la salvarea paginilor web și la organizarea colecției de pagini web.</em:description>
