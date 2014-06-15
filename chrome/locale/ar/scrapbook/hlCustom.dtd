@@ -1,0 +1,20 @@
+<!ENTITY sb.hlCustom.preset "النمط الاساسي">
+<!ENTITY sb.hlCustom.background "الخلفية">
+<!ENTITY sb.hlCustom.color "اللون">
+<!ENTITY sb.hlCustom.text "النص">
+<!ENTITY sb.hlCustom.bold "عريض">
+<!ENTITY sb.hlCustom.italic "مائل">
+<!ENTITY sb.hlCustom.line "خط في المنتصف">
+<!ENTITY sb.hlCustom.border "الحدود">
+<!ENTITY sb.hlCustom.type "النوغ">
+<!ENTITY sb.hlCustom.box "صندوق">
+<!ENTITY sb.hlCustom.underline "خط تحت السطر">
+<!ENTITY sb.hlCustom.style "التنسيق">
+<!ENTITY sb.hlCustom.solid "ثابت">
+<!ENTITY sb.hlCustom.dotted "منقط">
+<!ENTITY sb.hlCustom.dashed "شحطات">
+<!ENTITY sb.hlCustom.double "مضاعف">
+<!ENTITY sb.hlCustom.width "عرض">
+<!ENTITY sb.hlCustom.thin "رفيع">
+<!ENTITY sb.hlCustom.medium "متوسط">
+<!ENTITY sb.hlCustom.thick "ثخين">

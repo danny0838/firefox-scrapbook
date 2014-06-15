@@ -1,0 +1,13 @@
+<!ENTITY sb.save.partial "Capturar Seleção">
+<!ENTITY sb.save.partial.as "Capturar Seleção Como">
+<!ENTITY sb.save.entire "Capturar Página">
+<!ENTITY sb.save.entire.as "Capturar Página Como">
+<!ENTITY sb.save.frame "Capturar Frame">
+<!ENTITY sb.save.frame.as "Capturar Frame Como">
+<!ENTITY sb.save.target "Capturar Link">
+<!ENTITY sb.save.target.as "Capturar Link Como">
+<!ENTITY sb.save.alltabs "Capturar Todas as Abas">
+<!ENTITY sb.save.bookmark "Criar Favorito no ScrapBook">
+<!ENTITY sb.sidebar "Mostrar na Barra Lateral">
+<!ENTITY sb.menubar "Menu">
+<!ENTITY sb.editbefore "Editar Antes de Capturar">

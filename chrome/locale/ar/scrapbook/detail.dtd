@@ -1,0 +1,17 @@
+<!ENTITY sb.detail.title "Save Detail">
+<!ENTITY sb.detail.new.folder "مجلد جديد">
+<!ENTITY sb.detail.select.folder "حدد مجلد">
+<!ENTITY sb.detail.option "خيارات">
+<!ENTITY sb.detail.option.images "صور">
+<!ENTITY sb.detail.option.styles "الهيئة">
+<!ENTITY sb.detail.linked.file "تحميل الملفات المرتبطة">
+<!ENTITY sb.detail.linked.image "صور">
+<!ENTITY sb.detail.linked.sound "صوت">
+<!ENTITY sb.detail.linked.movie "أفلام">
+<!ENTITY sb.detail.linked.archive "مضغوطة">
+<!ENTITY sb.detail.linked.custom "مخصصة">
+<!ENTITY sb.detail.linked.page "إلتقاط في العمق">
+<!ENTITY sb.detail.linked.page.depth "عمق الارتباطات">
+<!ENTITY sb.detail.linked.page.text "بعد إتمام الالتقاط, سيتم ربط الصفحات مع بعضها و عمل خريطة الموقع.">
+<!ENTITY sb.detail.warnAboutRenew "لاحظ: &apos;الالتقاط مجدداً&apos; يكتب فوق الصفحات المحفوظة.">
+<!ENTITY sb.detail.warnAboutScript "لاحظ: نصوص-الجافا  قد تؤدي الى بعض المشاكل.">

@@ -1,0 +1,19 @@
+<!ENTITY sb.note.save "Mentés">
+<!ENTITY sb.note.close "Bezárás">
+<!ENTITY sb.note.tools "Eszközök">
+<!ENTITY sb.note.htmlview "HTML nézet">
+<!ENTITY sb.note.normalview "Normál nézet">
+<!ENTITY sb.note.template "A sablon HTML szerkesztése">
+<!ENTITY sb.note.autolinefeed "Automatikus soremelés">
+<!ENTITY sb.note.autolinefeed.t "A &lt;br&gt; kódelem hozzáadása a sorvéghez a &sb.note.htmlview; hatására">
+<!ENTITY sb.note.fontsize "Betűméret">
+<!ENTITY sb.note.help "Súgó">
+<!ENTITY sb.note.print "Nyomtatás">
+<!ENTITY sb.note.exit "Kilépés">
+<!ENTITY sb.note.save.accesskey "M">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "N">
+<!ENTITY sb.note.tools.accesskey "E">
+<!ENTITY sb.note.fontsize.accesskey "B">
+<!ENTITY sb.note.print.accesskey "N">
+<!ENTITY sb.note.exit.accesskey "K">

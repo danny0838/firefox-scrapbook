@@ -88,7 +88,6 @@ var sbContentSaver = {
 				this.item.title = modTitle;
 			}
 			this.item.comment = ScrapBookUtils.escapeComment(sbPageEditor.COMMENT.value);
-			for ( var i = 0; i < this.frameList.length; i++ ) { sbPageEditor.removeAllStyles(this.frameList[i]); }
 		}
 		if ( aShowDetail )
 		{
@@ -273,7 +272,6 @@ var sbContentSaver = {
 				rootNode.firstChild.appendChild(aDocument.createTextNode("\n"));
 				rootNode.firstChild.appendChild(newLinkNode);
 				rootNode.firstChild.appendChild(aDocument.createTextNode("\n"));
-				myCSS = myCSS.replace(/\*\|/g, "");
 			}
 		}
 
@@ -307,10 +305,7 @@ var sbContentSaver = {
 		}
 
 		// generate the HTML and CSS file and save
-		var myHTML;
-		myHTML = this.surroundByTags(rootNode, rootNode.innerHTML);
-		myHTML = this.doctypeToString(aDocument.doctype) + myHTML;
-		myHTML = myHTML.replace(/\x00/g, " ");
+		var myHTML = this.doctypeToString(aDocument.doctype) + rootNode.outerHTML;
 		var myHTMLFile = this.contentDir.clone();
 		myHTMLFile.append(myHTMLFileName);
 		ScrapBookUtils.writeFile(myHTMLFile, myHTML, this.item.chars);
@@ -363,17 +358,6 @@ var sbContentSaver = {
 	},
 
 
-	surroundByTags : function(aNode, aContent)
-	{
-		var tag = "<" + aNode.nodeName.toLowerCase();
-		for ( var i=0; i<aNode.attributes.length; i++ )
-		{
-			tag += ' ' + aNode.attributes[i].name + '="' + aNode.attributes[i].value + '"';
-		}
-		tag += ">\n";
-		return tag + aContent + "</" + aNode.nodeName.toLowerCase() + ">\n";
-	},
-
 	addCommentTag : function(targetNode, aComment)
 	{
 		targetNode.appendChild(targetNode.ownerDocument.createTextNode("\n"));
@@ -416,88 +400,93 @@ var sbContentSaver = {
 		{
 			case "img" : 
 			case "embed" : 
-				if ( this.option["images"] ) {
-					if ( aNode.hasAttribute("onclick") ) aNode = this.normalizeJSLink(aNode, "onclick");
-					var aFileName = this.download(aNode.src);
-					if (aFileName) aNode.setAttribute("src", aFileName);
-					aNode.removeAttribute("livesrc");
-				} else {
-					return this.removeNodeFromParent(aNode);
+			case "source":  // in <audio> and <vedio>
+				if ( aNode.hasAttribute("src") ) {
+					if ( this.option["images"] ) {
+						var aFileName = this.download(aNode.src);
+						if (aFileName) aNode.setAttribute("src", aFileName);
+					} else {
+						aNode.setAttribute("src", aNode.src);
+					}
 				}
 				break;
 			case "object" : 
-				if ( this.option["images"] ) {
-					var aFileName = this.download(aNode.data);
-					if (aFileName) aNode.setAttribute("data", aFileName);
-				} else {
-					return this.removeNodeFromParent(aNode);
+				if ( aNode.hasAttribute("data") ) {
+					if ( this.option["images"] ) {
+						var aFileName = this.download(aNode.data);
+						if (aFileName) aNode.setAttribute("data", aFileName);
+					} else {
+						aNode.setAttribute("data", aNode.src);
+					}
+				}
+				break;
+			case "track" :  // in <audio> and <vedio>
+				if ( aNode.hasAttribute("src") ) {
+					aNode.setAttribute("src", aNode.src);
 				}
 				break;
 			case "body" : 
-				if ( this.option["images"] ) {
-					var aFileName = this.download(aNode.background);
-					if (aFileName) aNode.setAttribute("background", aFileName);
-				} else {
-					aNode.removeAttribute("background");
-					aNode.removeAttribute("bgcolor");
-					aNode.removeAttribute("text");
-				}
-				break;
 			case "table" : 
 			case "tr" : 
 			case "th" : 
 			case "td" : 
-				if ( this.option["images"] ) {
-					var aFileName = this.download(aNode.getAttribute("background"));
-					if (aFileName) aNode.setAttribute("background", aFileName);
-				} else {
-					aNode.removeAttribute("background");
-					aNode.removeAttribute("bgcolor");
+				// handle "background" attribute (HTML5 deprecated)
+				if ( aNode.hasAttribute("background") ) {
+					var url = ScrapBookUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("background"));
+					if ( this.option["images"] ) {
+						var aFileName = this.download(url);
+						if (aFileName) aNode.setAttribute("background", aFileName);
+					} else {
+						aNode.setAttribute("background", url);
+					}
 				}
 				break;
 			case "input" : 
 				switch (aNode.type.toLowerCase()) {
 					case "image": 
-						if (this.option["images"]) {
-							var aFileName = this.download(aNode.src);
-							if (aFileName) aNode.setAttribute("src", aFileName);
-						}
-						else {
-							aNode.removeAttribute("src");
-							aNode.setAttribute("type", "button");
-							if (aNode.hasAttribute("alt"))
-								aNode.setAttribute("value", aNode.getAttribute("alt"));
+						if ( aNode.hasAttribute("src") ) {
+							if ( this.option["images"] ) {
+								var aFileName = this.download(aNode.src);
+								if (aFileName) aNode.setAttribute("src", aFileName);
+							} else {
+								aNode.setAttribute("src", aNode.src);
+							}
 						}
 						break;
-					case "text": 
-						aNode.setAttribute("value", aNode.value);
-						break;
-					case "checkbox": 
-					case "radio": 
-						if (aNode.checked)
-							aNode.setAttribute("checked", "checked");
-						else
-							aNode.removeAttribute("checked");
-						break;
-					default:
 				}
 				break;
 			case "link" : 
-				if ( aNode.rel.toLowerCase() == "stylesheet" && (aNode.href.indexOf("chrome") != 0 || !this.option["styles"]) ) {
-					return this.removeNodeFromParent(aNode);
-				} else if ( aNode.rel.toLowerCase() == "shortcut icon" || aNode.rel.toLowerCase() == "icon" ) {
-					var aFileName = this.download(aNode.href);
-					if (aFileName) aNode.setAttribute("href", aFileName);
-					if ( this.isMainFrame && !this.favicon ) this.favicon = aFileName;
-				} else {
-					aNode.setAttribute("href", aNode.href);
+				// gets "" if rel attribute not defined
+				switch ( aNode.rel.toLowerCase() ) {
+					case "stylesheet" :
+						if ( aNode.href.indexOf("chrome://") != 0 || !this.option["styles"] ) {
+							return this.removeNodeFromParent(aNode);
+						}
+						break;
+					case "shortcut icon" :
+					case "icon" :
+						if ( aNode.hasAttribute("href") ) {
+							var aFileName = this.download(aNode.href);
+							if (aFileName) {
+								aNode.setAttribute("href", aFileName);
+								if ( this.isMainFrame && !this.favicon ) this.favicon = aFileName;
+							}
+						}
+						break;
+					default :
+						if ( aNode.hasAttribute("href") ) {
+							aNode.setAttribute("href", aNode.href);
+						}
+						break;
 				}
 				break;
 			case "base" : 
-				aNode.removeAttribute("href");
-				if ( !aNode.hasAttribute("target") ) return this.removeNodeFromParent(aNode);
+				if ( aNode.hasAttribute("href") ) {
+					aNode.setAttribute("href", "");
+				}
 				break;
 			case "style" : 
+				// CSS in the page will be handled in another way, so remove them here
 				return this.removeNodeFromParent(aNode);
 				break;
 			case "script" : 
@@ -513,11 +502,20 @@ var sbContentSaver = {
 				break;
 			case "a" : 
 			case "area" : 
-				if ( aNode.hasAttribute("onclick") ) aNode = this.normalizeJSLink(aNode, "onclick");
-				if ( !aNode.hasAttribute("href") ) return aNode;
-				if ( aNode.target == "_blank" ) aNode.setAttribute("target", "_top");
-				if ( aNode.href.match(/^javascript:/i) ) aNode = this.normalizeJSLink(aNode, "href");
-				if ( !this.selection && aNode.getAttribute("href").charAt(0) == "#" ) return aNode;
+				if ( !aNode.href ) {
+					break;
+				}
+				else if ( aNode.href.match(/^javascript:/i) && !this.option["script"] ) {
+					aNode.removeAttribute("href");
+					break;
+				}
+				// Relative links to self need not be parsed
+				// If has selection (i.e. partial capture), the captured page is incomplete,
+				// do the subsequent URL rewrite so that it is targeting the source page
+				else if ( !this.selection && aNode.getAttribute("href").match(/^(?:#|$)/) ) {
+					break;
+				}
+				// determine whether to download (copy) the link target file
 				var ext = ScrapBookUtils.splitFileName(ScrapBookUtils.getFileName(aNode.href))[1].toLowerCase();
 				var flag = false;
 				switch ( ext )
@@ -526,13 +524,18 @@ var sbContentSaver = {
 					case "mp3" : case "wav"  : case "ram" : case "rm"  : case "wma"  : flag = this.option["dlsnd"]; break;
 					case "mpg" : case "mpeg" : case "avi" : case "mov" : case "wmv"  : flag = this.option["dlmov"]; break;
 					case "zip" : case "lzh"  : case "rar" : case "jar" : case "xpi"  : flag = this.option["dlarc"]; break;
-					default : if ( this.option["inDepth"] > 0 ) this.linkURLs.push(aNode.href);
+					default : 
+						// copy files with custom defined extensions
+						if ( ext && this.option["custom"] &&
+							( (", " + this.option["custom"] + ", ").indexOf(", " + ext + ", ") != -1 ) ) {
+							flag = true;
+						}
+						// do not copy, but add to the link list if it's a work of deep capture
+						else {
+							if ( this.option["inDepth"] > 0 ) this.linkURLs.push(aNode.href);
+						}
 				}
-				if ( !flag && ext && this.option["custom"] )
-				{
-					if ( (", " + this.option["custom"] + ", ").indexOf(", " + ext + ", ") != -1 ) flag = true;
-				}
-				if ( aNode.href.indexOf("file://") == 0 && !aNode.href.match(/\.html(?:#.*)?$/) ) flag = true;
+				// do the copy or URL rewrite
 				if ( flag ) {
 					var aFileName = this.download(aNode.href);
 					if (aFileName) aNode.setAttribute("href", aFileName);
@@ -541,7 +544,41 @@ var sbContentSaver = {
 				}
 				break;
 			case "form" : 
-				aNode.setAttribute("action", ScrapBookUtils.resolveURL(this.refURLObj.spec, aNode.action));
+				if ( aNode.hasAttribute("action") ) {
+					aNode.setAttribute("action", aNode.action);
+				}
+				break;
+			case "meta" : 
+				if ( aNode.hasAttribute("property") ) {
+					switch ( aNode.getAttribute("property").toLowerCase() ) {
+						case "og:image" :
+						case "og:image:url" :
+						case "og:image:secure_url" :
+						case "og:audio" :
+						case "og:audio:url" :
+						case "og:audio:secure_url" :
+						case "og:video" :
+						case "og:video:url" :
+						case "og:video:secure_url" :
+							if ( aNode.hasAttribute("content") ) {
+								var url = ScrapBookUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
+								if ( this.option["images"] ) {
+									var aFileName = this.download(url);
+									if (aFileName) aNode.setAttribute("content", aFileName);
+								}
+								else {
+									aNode.setAttribute("content", url);
+								}
+							}
+							break;
+						case "og:url" :
+							if ( aNode.hasAttribute("content") ) {
+								var url = ScrapBookUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
+								aNode.setAttribute("content", url);
+							}
+							break;
+					}
+				}
 				break;
 			case "frame"  : 
 			case "iframe" : 
@@ -555,158 +592,103 @@ var sbContentSaver = {
 				aNode.removeAttribute("data-sb-frame-id");
 				this.refURLObj = tmpRefURL;
 				break;
+			// Deprecated, like <pre> but inner contents are escaped to be plain text
+			// Replace with <pre> since it breaks ScrapBook highlights
 			case "xmp" : 
 				var pre = aNode.ownerDocument.createElement("pre");
 				pre.appendChild(aNode.firstChild);
 				aNode.parentNode.replaceChild(pre, aNode);
 				break;
-			case "source": 
-				if (aNode.src)
-					aNode.setAttribute("src", aNode.src);
-				break;
 		}
-		if ( !this.option["styles"] )
+		if ( aNode.style && aNode.style.cssText )
 		{
-			aNode.removeAttribute("style");
-		}
-		else if ( aNode.style && aNode.style.cssText )
-		{
-			var newCSStext = this.inspectCSSText(aNode.style.cssText, this.refURLObj.spec, aNode.ownerDocument);
+			var newCSStext = this.inspectCSSText(aNode.style.cssText, this.refURLObj.spec, true);
 			if ( newCSStext ) aNode.setAttribute("style", newCSStext);
 		}
 		if ( !this.option["script"] )
 		{
-			aNode.removeAttribute("onmouseover");
-			aNode.removeAttribute("onmouseout");
-			aNode.removeAttribute("onload");
-		}
-		if (aNode.hasAttribute("_base_href")) {
-			aNode.removeAttribute("_base_href");
+			// general: remove on* attributes
+			var attrs = aNode.attributes;
+			for (var i = 0; i < attrs.length; i++) {
+				if (attrs[i].name.toLowerCase().indexOf("on") == 0) {
+					aNode.removeAttribute(attrs[i].name);
+					i--;  // removing an attribute shrinks the list
+				}
+			}
+			// other specific
+			aNode.removeAttribute("contextmenu");
 		}
 		return aNode;
 	},
 
-	processCSSRecursively : function(aCSS, aDocument)
+	processCSSRecursively : function(aCSS, aDocument, isImport)
 	{
+		if (!aCSS || aCSS.disabled) return "";
+		if (aCSS.href && aCSS.href.indexOf("chrome://") == 0) return "";
 		var content = "";
-		if (!aCSS || aCSS.disabled) {
-			return "";
+		if (aCSS.href) {
+			if (isImport) {
+				content += "/* ::::: " + "(import) " + aCSS.href + " ::::: */\n";
+			}
+			else {
+				content += "/* ::::: " + aCSS.href + " ::::: */\n\n";
+			}
 		}
-		var cssMedia = aCSS.media.mediaText;
-		if (cssMedia && cssMedia.indexOf("screen") < 0 && cssMedia.indexOf("all") < 0) {
-			return "";
-		}
-		if (aCSS.href && aCSS.href.indexOf("chrome://") == 0) {
-			return "";
-		}
-		if (aCSS.href)
-			content += (content ? "\n" : "") + "/* ::::: " + aCSS.href + " ::::: */\n\n";
 		// sometimes <link> cannot access remote css
-		// and aCSS.cssRules fires an error (instead of returing undefined)...
+		// and aCSS.cssRules fires an error (instead of returning undefined)...
+		// we need this try block to catch that
+		var skip = false;
 		try {
-			if (!aCSS.cssRules) return content;
+			if (!aCSS.cssRules) skip = true;
 		}
 		catch(ex) {
-			console.warn("CSS cannot be read from '" + aCSS.href + "' in page '" + aDocument.location.href + "' \n" + ex);
-			return content;
+			console.warn("Unable to access CSS from '" + aCSS.href + "' in page '" + aDocument.location.href + "' \n" + ex);
+				content += "/* ERROR: Unable to access this CSS */\n\n";
+			skip = true;
 		}
-		Array.forEach(aCSS.cssRules, function(cssRule) {
-			switch (cssRule.type) {
-				case Ci.nsIDOMCSSRule.STYLE_RULE: 
-					var cssText = this.inspectCSSText(cssRule.cssText, aCSS.href, aDocument);
-					if (cssText)
-						content += cssText + "\n";
-					break;
-				case Ci.nsIDOMCSSRule.IMPORT_RULE: 
-					content += this.processCSSRecursively(cssRule.styleSheet, aDocument);
-					break;
-				case Ci.nsIDOMCSSRule.MEDIA_RULE: 
-					if (/^@media ([^\{]+) \{/.test(cssRule.cssText)) {
-						var media = RegExp.$1;
-						if (media.indexOf("screen") < 0 && media.indexOf("all") < 0) {
-							break;
-						}
-					}
-					cssRule.cssText.split("\n").forEach(function(cssText) {
-						if (cssText.indexOf("@media ") == 0 || cssText == "}") {
-							content += cssText + "\n";
-						}
-						else {
-							cssText = cssText.replace(/^\s+|\s+$/g, "");
-							cssText = this.inspectCSSText(cssText, aCSS.href, aDocument);
-							if (cssText)
-								content += "\t" + cssText + "\n";
-						}
-					}, this);
-					break;
-				case Ci.nsIDOMCSSRule.FONT_FACE_RULE: 
-					cssRule.cssText.split("\n").forEach(function(cssText) {
-						if (cssText == "@font-face {" || cssText == "}") {
-							content += cssText + "\n";
-						}
-						else {
-							cssText = cssText.replace(/^\s+|\s+$/g, "");
-							cssText = this.inspectCSSText(cssText, aCSS.href, aDocument);
-							if (cssText)
-								content += "\t" + cssText + "\n";
-						}
-					}, this);
-					break;
-				default: 
-			}
-		}, this);
+		if (!skip) {
+			Array.forEach(aCSS.cssRules, function(cssRule) {
+				switch (cssRule.type) {
+					case Ci.nsIDOMCSSRule.IMPORT_RULE: 
+						content += this.processCSSRecursively(cssRule.styleSheet, aDocument, true);
+						break;
+					case Ci.nsIDOMCSSRule.FONT_FACE_RULE: 
+						var cssText = this.inspectCSSText(cssRule.cssText, aCSS.href);
+						if (cssText) content += cssText + "\n";
+						break;
+					case Ci.nsIDOMCSSRule.STYLE_RULE: 
+					case Ci.nsIDOMCSSRule.MEDIA_RULE: 
+					default: 
+						var cssText = this.inspectCSSText(cssRule.cssText, aCSS.href, true);
+						if (cssText) content += cssText + "\n";
+						break;
+				}
+			}, this);
+		}
+		if (isImport) {
+			content += "/* ::::: " + "(end import)" + " ::::: */\n";
+		}
 		return content;
 	},
 
-	inspectCSSText : function(aCSStext, aCSShref, aDocument)
+	inspectCSSText : function(aCSStext, aCSShref, isImage)
 	{
-		if (!aCSShref) {
-			aCSShref = this.refURLObj.spec;
-		}
-		if ( !aCSStext ) return;
-		if (/^([^\{]+)\s+\{/.test(aCSStext)) {
-			var selectors = RegExp.$1.trim();
-			selectors = selectors.replace(/:[a-z-]+/g, "");
-			try {
-				if (!aDocument.querySelector(selectors))
-					return;
+		if (!aCSShref) aCSShref = this.refURLObj.spec;
+		// CSS get by .cssText is always url("something-with-\"double-quote\"-escaped")
+		// and no CSS comment is in
+		// so we can parse it safely with this RegExp
+		aCSStext = aCSStext.replace(/ url\(\"((?:\\.|[^"])+)\"\)/g, function() {
+			var dataURL = arguments[1];
+			if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
+			dataURL = ScrapBookUtils.resolveURL(aCSShref, dataURL);
+			if (isImage) {
+				var dataFile = sbContentSaver.option["images"] ? sbContentSaver.download(dataURL) : dataURL;
 			}
-			catch (ex) {}
-		}
-		var re = new RegExp(/ url\(([^\'\)\s]+)\)/);
-		var i = 0;
-		while ( aCSStext.match(re) )
-		{
-			if ( ++i > 10 ) break;
-			var imgURL  = RegExp.$1;
-			if (/^[\'\"]([^\'\"]+)[\'\"]$/.test(imgURL))
-				imgURL = RegExp.$1;
-			imgURL  = ScrapBookUtils.resolveURL(aCSShref, imgURL);
-			var imgFile = this.option["images"] ? this.download(imgURL) : "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAEALAAAAAABAAEAAAIBTAA7";
-			aCSStext = aCSStext.replace(re, " url('" + imgFile + "')");
-		}
-		aCSStext = aCSStext.replace(/([^\{\}])(\r|\n)/g, "$1\\A");
-		re = new RegExp(/ content: \"(.*?)\"; /);
-		if ( aCSStext.match(re) )
-		{
-			var innerQuote = RegExp.$1;
-			innerQuote = innerQuote.replace(/\"/g, '\\"');
-			innerQuote = innerQuote.replace(/\\\" attr\(([^\)]+)\) \\\"/g, '" attr($1) "');
-			aCSStext = aCSStext.replace(re, ' content: "' + innerQuote + '"; ');
-		}
-		if ( aCSStext.match(/ (quotes|voice-family): \"/) )
-		{
-			return;
-		}
-		if ( aCSStext.indexOf(" background: ") >= 0 )
-		{
-			aCSStext = aCSStext.replace(/ -moz-background-[^:]+: -moz-[^;]+;/g, "");
-			aCSStext = aCSStext.replace(/ scroll 0(?:pt|px|%);/g, ";");
-		}
-		if ( aCSStext.indexOf(" background-position: 0") >= 0 )
-		{
-			aCSStext = aCSStext.replace(/ background-position: 0(?:pt|px|%);/, " background-position: 0 0;");
-		}
+			else {
+				var dataFile = sbContentSaver.download(dataURL);
+			}
+			return ' url("' + dataFile + '")';
+		});
 		return aCSStext;
 	},
 
@@ -769,34 +751,6 @@ var sbContentSaver = {
 	leftZeroPad3 : function(num)
 	{
 		if ( num < 10 ) { return "00" + num; } else if ( num < 100 ) { return "0" + num; } else { return num; }
-	},
-
-	normalizeJSLink : function(aNode, aAttr)
-	{
-		var val = aNode.getAttribute(aAttr);
-		if ( !val.match(/\(\'([^\']+)\'/) ) return aNode;
-		val = RegExp.$1;
-		if ( val.indexOf("/") == -1 && val.indexOf(".") == -1 ) return aNode;
-		val = ScrapBookUtils.resolveURL(this.refURLObj.spec, val);
-		if ( aNode.nodeName.toLowerCase() == "img" )
-		{
-			if ( aNode.parentNode.nodeName.toLowerCase() == "a" ) {
-				aNode.parentNode.setAttribute("href", val);
-				aNode.removeAttribute("onclick");
-			} else {
-				val = "window.open('" + val + "');";
-				aNode.setAttribute(aAttr, val);
-			}
-		}
-		else
-		{
-			if ( aNode.hasAttribute("href") && aNode.getAttribute("href").indexOf("http://") != 0 )
-			{
-				aNode.setAttribute("href", val);
-				aNode.removeAttribute("onclick");
-			}
-		}
-		return aNode;
 	},
 
 	/**

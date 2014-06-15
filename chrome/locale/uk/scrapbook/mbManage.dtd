@@ -1,0 +1,6 @@
+<!ENTITY mb.manager "Керування">
+<!ENTITY mb.prop.name "Назва">
+<!ENTITY mb.prop.path "Шлях">
+<!ENTITY mb.button.add "Додати">
+<!ENTITY mb.button.edit "Редагувати">
+<!ENTITY mb.button.remove "Вилучити">

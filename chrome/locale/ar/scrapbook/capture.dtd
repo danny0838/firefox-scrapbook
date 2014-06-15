@@ -1,0 +1,13 @@
+<!ENTITY sb.save "إلتقط">
+<!ENTITY sb.save.abort "أجهض">
+<!ENTITY sb.save.start "إبدأ">
+<!ENTITY sb.save.retry "إعادة">
+<!ENTITY sb.save.skip "تجاوز">
+<!ENTITY sb.save.pause "إيقاف مؤقت">
+<!ENTITY sb.save.filter "تصفية">
+<!ENTITY sb.save.filter.domain "Restrict to Domain">
+<!ENTITY sb.save.filter.level "Restrict to Directory">
+<!ENTITY sb.save.filter.string "Filter by String...">
+<!ENTITY sb.save.filter.checkon "Check All On">
+<!ENTITY sb.save.filter.checkoff "Check All Off">
+<!ENTITY sb.save.filter.invert "Invert Checks">

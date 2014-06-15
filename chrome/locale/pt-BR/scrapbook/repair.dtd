@@ -1,0 +1,9 @@
+<!ENTITY sb.repair.rdfFile "Restaurar scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript "Tente isto se a árvore de arquivos do ScrapBook desaparecer.">
+<!ENTITY sb.repair.rdfFile.select "Selecione um arquivo de backup para a restauração.">
+<!ENTITY sb.repair.rdfFile.file "Arquivo">
+<!ENTITY sb.repair.rdfFile.time "Hora">
+<!ENTITY sb.repair.rdfFile.size "Tamanho">
+<!ENTITY sb.repair.favicons "Restaurar favicons na árvore">
+<!ENTITY sb.repair.favicons.descript "Tente isto se muitos favicons na árvore do ScrapBook desaparecerem.">
+<!ENTITY sb.repair.complete "Finalizado.">

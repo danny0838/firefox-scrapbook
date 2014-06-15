@@ -1,0 +1,23 @@
+<!ENTITY sb.toolbar.edit "شريط التحرير">
+<!ENTITY sb.toolbar.info "شريط المعلومات">
+<!ENTITY sb.edit.eraser "ماسح دووم: أداة لإزالة العناصر المنقورة من صفحة وب">
+<!ENTITY sb.edit.undo "تراجع">
+<!ENTITY sb.edit.save "حفظ التغييرات">
+<!ENTITY sb.edit.comment "توسيع مكان التعليق">
+<!ENTITY sb.edit.sticky "حاشية ملتصقة">
+<!ENTITY sb.edit.sticky.create "إعمل &sb.edit.sticky;">
+<!ENTITY sb.edit.inline.add "إضافة حاشية مضمنة">
+<!ENTITY sb.edit.attach.file "إرفاق ملف بالمحدد">
+<!ENTITY sb.edit.attach.link "إرفاق وصلة بالمحدد">
+<!ENTITY sb.edit.cutter "أزل المحدد">
+<!ENTITY sb.edit.remove.iframe "إزالة جميع وسوم IFRAME">
+<!ENTITY sb.edit.remove.script "إزالة جميع وسوم السكربت">
+<!ENTITY sb.highlighter "المضيء">
+<!ENTITY sb.highlighter.remove "إزالة الإضاءة من المحدد">
+<!ENTITY sb.highlighter.remove.all "إزالة كل الإضاءات">
+<!ENTITY sb.source "فتح الموقع المصدر">
+<!ENTITY sb.renew "التقط مجددا">
+<!ENTITY sb.locate "أوجد في شجرة الشريط الجانبي">
+<!ENTITY sb.indicators "عرض مؤشر الارتباط">
+<!ENTITY sb.info.home "البيت">
+<!ENTITY sb.info.sitemap "خريطة الموقع">

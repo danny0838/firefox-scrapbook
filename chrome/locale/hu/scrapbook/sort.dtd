@@ -1,0 +1,8 @@
+<!ENTITY sb.sort "Rendezés">
+<!ENTITY sb.sort.reverse "Visszafelé">
+<!ENTITY sb.sort.title.asc "Cím szerinti rendezés (A → Z)">
+<!ENTITY sb.sort.title.desc "Cím szerinti rendezés (Z → A)">
+<!ENTITY sb.sort.date.asc "Időrend">
+<!ENTITY sb.sort.date.desc "Fordított időrend">
+<!ENTITY sb.sort.recursive "Almappák rekurzív rendezése">
+<!ENTITY sb.sort.warning "Megjegyzés: Ez a művelet visszavonhatatlan.">

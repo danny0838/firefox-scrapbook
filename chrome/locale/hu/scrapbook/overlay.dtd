@@ -1,0 +1,13 @@
+<!ENTITY sb.save.partial "Kijelölés rögzítése">
+<!ENTITY sb.save.partial.as "Kijelölés rögzítése másként">
+<!ENTITY sb.save.entire "Oldal rögzítése">
+<!ENTITY sb.save.entire.as "Oldal rögzítése másként">
+<!ENTITY sb.save.frame "Keret rögzítése">
+<!ENTITY sb.save.frame.as "Keret rögzítése másként">
+<!ENTITY sb.save.target "Hivatkozás rögzítése">
+<!ENTITY sb.save.target.as "Hivatkozás rögzítése másként">
+<!ENTITY sb.save.alltabs "Összes lap rögzítése">
+<!ENTITY sb.save.bookmark "Könyvjelző a Dossziéba">
+<!ENTITY sb.sidebar "Megjelenítés az Oldalsávon">
+<!ENTITY sb.menubar "Menü">
+<!ENTITY sb.editbefore "Szerkesztés rögzítés előtt">

@@ -51,7 +51,7 @@ var sbPrefWindow = {
 		var prefBranch = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefBranch);
 		for (var num = 4; num > 0; num--) {
 			var prefVal = null;
-			var prefName = "scrapbook.highlighter.style." + num;
+			var prefName = "extensions.scrapbook.highlighter.style." + num;
 			try {
 				prefVal = prefBranch.getComplexValue(prefName, Ci.nsISupportsString).data;
 			}
@@ -70,15 +70,15 @@ var sbPrefWindow = {
 	},
 
 	updateDataUI: function() {
-		var isDefault = document.getElementById("scrapbook.data.default").value;
-		var mbEnabled = document.getElementById("scrapbook.multibook.enabled").value;
+		var isDefault = document.getElementById("extensions.scrapbook.data.default").value;
+		var mbEnabled = document.getElementById("extensions.scrapbook.multibook.enabled").value;
 		document.getElementById("sbDataDefault").disabled = mbEnabled;
 		document.getElementById("sbDataPath").disabled    = isDefault || mbEnabled;
 		document.getElementById("sbDataButton").disabled  = isDefault || mbEnabled;
 	},
 
 	updateDataPath: function() {
-		this._updateFileField("sbDataPath", "scrapbook.data.path");
+		this._updateFileField("sbDataPath", "extensions.scrapbook.data.path");
 	},
 
 	_updateFileField: function(aEltID, aPrefID) {
@@ -92,13 +92,13 @@ var sbPrefWindow = {
 	},
 
 	selectFolder: function(aPickerTitle) {
-		var file = document.getElementById("scrapbook.data.path").value;
+		var file = document.getElementById("extensions.scrapbook.data.path").value;
 		var fp = Cc["@mozilla.org/filepicker;1"].createInstance(Ci.nsIFilePicker);
 		if (file)
 			fp.displayDirectory = file;
 		fp.init(window, aPickerTitle, fp.modeGetFolder);
 		if (fp.show() == fp.returnOK) {
-			document.getElementById("scrapbook.data.path").value = fp.file;
+			document.getElementById("extensions.scrapbook.data.path").value = fp.file;
 			this.updateDataPath();
 		}
 	},

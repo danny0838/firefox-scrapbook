@@ -313,7 +313,7 @@ const ScrapBookUtils = {
 		delete this.prefBranch;
 		return this.prefBranch = Cc["@mozilla.org/preferences-service;1"].
 		                         getService(Ci.nsIPrefService).
-		                         getBranch("scrapbook.");
+		                         getBranch("extensions.scrapbook.");
 	},
 
 	getPref: function SBU_getPref(aName, aDefaultValue, aInterface) {
