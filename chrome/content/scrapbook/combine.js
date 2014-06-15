@@ -220,8 +220,8 @@ var sbPageCombiner = {
 		{
 			this.processDOMRecursively(this.BODY);
 			if ( !this.isTargetCombined ) this.htmlSrc += this.getCiteHTML(aType);
-			this.htmlSrc += this.surroundDOM();
 			this.cssText += this.surroundCSS();
+			this.htmlSrc += this.surroundDOM();
 		}
 		if ( sbCombineService.index == sbCombineService.idList.length - 1 )
 		{
@@ -339,14 +339,26 @@ var sbPageCombiner = {
 		for ( var curNode = rootNode.firstChild; curNode != null; curNode = curNode.nextSibling )
 		{
 			if ( curNode.nodeName == "#text" || curNode.nodeName == "#comment" ) continue;
-			this.processDOMRecursively(curNode);
+			curNode = this.processDOMRecursively(curNode);
 		}
+		return rootNode;
 	},
 
 	inspectNode : function(aNode)
 	{
 		switch ( aNode.nodeName.toLowerCase() )
 		{
+			case "link" : 
+				// bad manner of link in the body
+				// styles should already be parsed, remove the node to prevent scope leak
+				if ( aNode.rel.toLowerCase() == "stylesheet" && aNode.href.indexOf("chrome://") != 0 ) 
+				return sbContentSaver.removeNodeFromParent(aNode);
+				break;
+			case "style" :
+				// bad manner of style in the body
+				// styles should already be parsed, remove the node to prevent scope leak
+				return sbContentSaver.removeNodeFromParent(aNode);
+				break;
 			case "body" : 
 				// move body specific attributes into inline styles so that it can be transfered to div
 				// inline style takes precedence than the corresponding HTML attribute
