@@ -1,3 +1,9 @@
+Scrapbook X 1.7.2
+----------------
+
+- Further fix wrong locales.
+
+
 Scrapbook X 1.7.1
 ----------------
 
