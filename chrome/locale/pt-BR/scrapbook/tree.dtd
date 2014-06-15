@@ -11,8 +11,8 @@
 <!ENTITY sb.remove "Apagar">
 <!ENTITY sb.property "Propriedades">
 <!ENTITY sb.prop.title "Título">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.comment "Comentário">
-<!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID (Data)">
 <!ENTITY sb.folder.combine "Visualização Combinada">
 <!ENTITY sb.folder.openall "Abrir Tudo em Abas">

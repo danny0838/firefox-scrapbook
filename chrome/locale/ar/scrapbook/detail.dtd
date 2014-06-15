@@ -10,7 +10,7 @@
 <!ENTITY sb.detail.linked.movie "أفلام">
 <!ENTITY sb.detail.linked.archive "مضغوطة">
 <!ENTITY sb.detail.linked.custom "مخصصة">
-<!ENTITY sb.detail.linked.page "إلتقاط في العمق">
+<!ENTITY sb.detail.linked.page2 "إلتقاط في العمق">
 <!ENTITY sb.detail.linked.page.depth "عمق الارتباطات">
 <!ENTITY sb.detail.linked.page.text "بعد إتمام الالتقاط, سيتم ربط الصفحات مع بعضها و عمل خريطة الموقع.">
 <!ENTITY sb.detail.warnAboutRenew "لاحظ: &apos;الالتقاط مجدداً&apos; يكتب فوق الصفحات المحفوظة.">
