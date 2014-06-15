@@ -218,7 +218,7 @@ var sbPageCombiner = {
 		}
 		else
 		{
-			this.processDOMRecursively(this.BROWSER.contentDocument.body);
+			this.processDOMRecursively(this.BODY);
 			if ( !this.isTargetCombined ) this.htmlSrc += this.getCiteHTML(aType);
 			this.htmlSrc += this.surroundDOM();
 			this.cssText += this.surroundCSS();
@@ -274,18 +274,16 @@ var sbPageCombiner = {
 			window.location.reload();
 		}
 		var divElem = this.BROWSER.contentDocument.createElement("DIV");
-		var bodyStyle = "";
-		if ( this.BODY.hasAttribute("class") ) divElem.setAttribute("class", this.BODY.getAttribute("class"));
-		if ( this.BODY.hasAttribute("bgcolor") ) bodyStyle += "background-color: " + this.BODY.getAttribute("bgcolor") + ";";
-		if ( this.BODY.background ) bodyStyle += "background-image: url('" + this.BODY.background + "');";
-		bodyStyle += "position: relative;";
-		divElem.setAttribute("style", bodyStyle);
-		this.BROWSER.contentDocument.body.appendChild(divElem);
+		var attrs = this.BODY.attributes;
+		for (var i = 0; i < attrs.length; i++) {
+			divElem.setAttribute(attrs[i].name, attrs[i].nodeValue);
+		}
+		this.BODY.appendChild(divElem);
 		var childNodes = this.BODY.childNodes;
 		for ( var i = childNodes.length - 2; i >= 0; i-- )
 		{
 			var nodeName  = childNodes[i].nodeName.toUpperCase();
-			if ( nodeName == "CITE" && childNodes[i].hasAttribute("class") && childNodes[i].getAttribute("class") == "scrapbook-header" ) continue;
+			if ( nodeName == "CITE" && childNodes[i].className == "scrapbook-header" ) continue;
 			else if ( nodeName == "DIV"  && childNodes[i].id.match(/^item\d{14}$/) ) continue;
 			divElem.insertBefore(childNodes[i], divElem.firstChild);
 		}
@@ -337,36 +335,53 @@ var sbPageCombiner = {
 
 	processDOMRecursively : function(rootNode)
 	{
+		rootNode = this.inspectNode(rootNode);
 		for ( var curNode = rootNode.firstChild; curNode != null; curNode = curNode.nextSibling )
 		{
 			if ( curNode.nodeName == "#text" || curNode.nodeName == "#comment" ) continue;
-			curNode = this.inspectNode(curNode);
 			this.processDOMRecursively(curNode);
 		}
 	},
 
 	inspectNode : function(aNode)
 	{
-		switch ( aNode.nodeName.toUpperCase() )
+		switch ( aNode.nodeName.toLowerCase() )
 		{
-			case "IMG" : case "EMBED" : case "IFRAME" : 
+			case "body" : 
+				// move body specific attributes into inline styles so that it can be transfered to div
+				// inline style takes precedence than the corresponding HTML attribute
+				if ( aNode.hasAttribute("background") ) {
+					if (!aNode.style.backgroundImage) aNode.style.backgroundImage = 'url("' + aNode.getAttribute("background") + '")';
+					aNode.removeAttribute("background");
+				}
+				if ( aNode.hasAttribute("bgcolor") ) {
+					if (!aNode.style.backgroundColor) aNode.style.backgroundColor = aNode.getAttribute("bgcolor");
+					aNode.removeAttribute("bgcolor");
+				}
+				if ( aNode.hasAttribute("text") ) {
+					if (!aNode.style.color) aNode.style.color = aNode.getAttribute("text");
+					aNode.removeAttribute("text");
+				}
+				// always set position:relative to make position:absolute in the pages to be combined to look right
+				aNode.style.position = "relative";
+				break;
+			case "img" : case "embed" : case "source" : case "iframe" : 
 				if ( aNode.src ) aNode.setAttribute("src", aNode.src);
 				break;
-			case "OBJECT" : 
+			case "object" : 
 				if ( aNode.data ) aNode.setAttribute("data", aNode.data);
 				break;
-			case "BODY" : case "TABLE" : case "TD" : 
+			case "table" :  case "tr" :  case "th" : case "td" : 
 				aNode = this.setAbsoluteURL(aNode, "background");
 				break;
-			case "INPUT" : 
-				if ( aNode.type.toLowerCase() == "image" ) aNode = this.setAbsoluteURL(aNode, "src");
+			case "input" : 
+				if ( aNode.type.toLowerCase() == "image" ) aNode.setAttribute("src", aNode.src);
 				break;
-			case "A" : 
-			case "AREA" : 
+			case "a" : case "area" : 
 				if ( aNode.href.indexOf("file://") == 0 ) aNode.setAttribute("href", aNode.href);
 				break;
-			case "CITE" : 
-				if ( aNode.hasAttribute("class") && aNode.getAttribute("class") == "scrapbook-header" ) this.isTargetCombined = true;
+			case "cite" : 
+				if ( aNode.className == "scrapbook-header" ) this.isTargetCombined = true;
 				break;
 		}
 		if ( aNode.style && aNode.style.cssText )
