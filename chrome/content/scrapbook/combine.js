@@ -297,28 +297,41 @@ var sbPageCombiner = {
 		var ret = "";
 		for ( var i = 0; i < this.BROWSER.contentDocument.styleSheets.length; i++ )
 		{
-			if ( this.BROWSER.contentDocument.styleSheets[i].href && this.BROWSER.contentDocument.styleSheets[i].href.indexOf("chrome://") == 0 ) continue;
-			var cssRules = this.BROWSER.contentDocument.styleSheets[i].cssRules;
-			for ( var j = 0; j < cssRules.length; j++ )
-			{
-				var cssRule = cssRules[j];
-				var cssText = "";
-				if (cssRule.type == Ci.nsIDOMCSSRule.STYLE_RULE && !this.isTargetCombined) {
-					// split the selector with "," with the exception of leading "\"
-					var selectors = cssRule.selectorText.match(/(\\.|[^,])+/gi);
-					for ( var k = 0; k < selectors.length; k++ ) {
-						// remove leading "html" and "body", add this div as head
-						selectors[k] = "div#item" + sbCombineService.curID + " " + selectors[k].replace(/^(\s+|\s*\bhtml\b\s*|\s*\bbody\b\s*)+/gi, "");
-					}
-					cssText = selectors.join(", ") + "{" + cssRule.style.cssText + "}";
-				}
-				else {
-					cssText = cssRule.cssText;
-				}
-				ret += this.inspectCSSText(cssText) + "\n";
-			}
+			ret += this.processCSSRecursively(this.BROWSER.contentDocument.styleSheets[i]);
 		}
 		return ret + "\n\n";
+	},
+
+	processCSSRecursively : function(aCSS)
+	{
+		var ret = "";
+		if ( aCSS.href && aCSS.href.indexOf("chrome://") == 0 ) return ret;
+		var cssRules = aCSS.cssRules;
+		for ( var i = 0; i < cssRules.length; i++ )
+		{
+			var cssRule = cssRules[i];
+			var cssText = "";
+			if (this.isTargetCombined) {
+				cssText = cssRule.cssText;
+			}
+			else if (cssRule.type == Ci.nsIDOMCSSRule.STYLE_RULE) {
+				// split the selector with "," with the exception of leading "\"
+				var selectors = cssRule.selectorText.match(/(\\.|[^,])+/gi);
+				for ( var j = 0; j < selectors.length; j++ ) {
+					// remove leading "html" and "body", add this div as head
+					selectors[j] = "div#item" + sbCombineService.curID + " " + selectors[j].replace(/^(\s+|\bhtml\b|\bbody\b)+/gi, "");
+				}
+				cssText = selectors.join(", ") + "{" + cssRule.style.cssText + "}";
+			}
+			else if (cssRule.type == Ci.nsIDOMCSSRule.MEDIA_RULE) {
+				cssText = "@media " + cssRule.conditionText + "{\n" + this.processCSSRecursively(cssRule) + "\n}";
+			}
+			else {
+				cssText = cssRule.cssText;
+			}
+			ret += this.inspectCSSText(cssText) + "\n";
+		}
+		return ret;
 	},
 
 	inspectCSSText : function(aCSSText)
