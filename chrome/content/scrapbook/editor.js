@@ -340,7 +340,6 @@ var sbPageEditor = {
 		sbDOMEraser.init(2);
 		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
 		{
-			this.removeAllStyles(sbContentSaver.frameList[i]);
 			this.saveAllSticky(sbContentSaver.frameList[i]);
 			var doc = sbContentSaver.frameList[i].document;
 			if ( doc.contentType != "text/html" )
@@ -348,20 +347,12 @@ var sbPageEditor = {
 				ScrapBookUtils.alert("ERROR: Cannot modify " + doc.contentType + " content.");
 				continue;
 			}
-			var rootNode = doc.getElementsByTagName("html")[0];
-			var src = "";
-			src = sbContentSaver.surroundByTags(rootNode, rootNode.innerHTML);
-			src = sbContentSaver.doctypeToString(doc.doctype) + src;
-			src = src.replace(/ -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;\">/g, '">');
-			src = src.replace(/<span>([^<]*)<\/span>/g, "$1");
-			src = src.replace(/<head>\n+/, "<head>\n");
 			var charset = doc.characterSet;
-			if ( src.indexOf("scrapbook-sticky") > 0 && charset != "UTF-8" )
-			{
-				ScrapBookData.setProperty(ScrapBookBrowserOverlay.resource, "chars", "UTF-8");
-				src = src.replace(/ charset=[^\"]+\">/i, ' charset=UTF-8">');
-				charset = "UTF-8";
+			if (charset != "UTF-8") {
+				ScrapBookUtils.alert("NOTICE: '" + doc.location.href + "' is not UTF-8 encoded, some content may lose.");
 			}
+			var rootNode = doc.getElementsByTagName("html")[0];
+			var src = sbContentSaver.doctypeToString(doc.doctype) + rootNode.outerHTML;
 			var file = ScrapBookUtils.getContentDir(this.item.id).clone();
 			file.append(ScrapBookUtils.getFileName(doc.location.href));
 			ScrapBookUtils.writeFile(file, src, charset);
@@ -445,15 +436,6 @@ var sbPageEditor = {
 	removeStyle : function(aWindow, aID)
 	{
 		try { sbContentSaver.removeNodeFromParent(aWindow.document.getElementById(aID)); } catch(ex) {}
-	},
-
-	removeAllStyles : function(aWindow)
-	{
-		var nodes = aWindow.document.getElementsByTagName("style");
-		for ( var i = nodes.length - 1; i >= 0 ; i-- )
-		{
-			if ( nodes[i].id.indexOf("scrapbook-") == 0 ) sbContentSaver.removeNodeFromParent(nodes[i]);
-		}
 	},
 
 	saveAllSticky : function(aWindow)

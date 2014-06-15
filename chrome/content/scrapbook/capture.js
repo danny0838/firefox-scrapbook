@@ -560,9 +560,7 @@ var sbCrossLinker = {
 			if ( shouldSave )
 			{
 				var rootNode = doc.getElementsByTagName("html")[0];
-				var src = "";
-				src = sbContentSaver.surroundByTags(rootNode, rootNode.innerHTML);
-				src = sbContentSaver.doctypeToString(doc.doctype) + src;
+				var src = sbContentSaver.doctypeToString(doc.doctype) + rootNode.outerHTML;
 				var file = ScrapBookUtils.getContentDir(gReferItem.id);
 				file.append(ScrapBookUtils.getFileName(doc.location.href));
 				ScrapBookUtils.writeFile(file, src, doc.characterSet);

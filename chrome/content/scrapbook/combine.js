@@ -218,10 +218,10 @@ var sbPageCombiner = {
 		}
 		else
 		{
-			this.processDOMRecursively(this.BROWSER.contentDocument.body);
+			this.processDOMRecursively(this.BODY);
 			if ( !this.isTargetCombined ) this.htmlSrc += this.getCiteHTML(aType);
-			this.htmlSrc += this.surroundDOM();
 			this.cssText += this.surroundCSS();
+			this.htmlSrc += this.surroundDOM();
 		}
 		if ( sbCombineService.index == sbCombineService.idList.length - 1 )
 		{
@@ -274,18 +274,16 @@ var sbPageCombiner = {
 			window.location.reload();
 		}
 		var divElem = this.BROWSER.contentDocument.createElement("DIV");
-		var bodyStyle = "";
-		if ( this.BODY.hasAttribute("class") ) divElem.setAttribute("class", this.BODY.getAttribute("class"));
-		if ( this.BODY.hasAttribute("bgcolor") ) bodyStyle += "background-color: " + this.BODY.getAttribute("bgcolor") + ";";
-		if ( this.BODY.background ) bodyStyle += "background-image: url('" + this.BODY.background + "');";
-		bodyStyle += "position: relative;";
-		divElem.setAttribute("style", bodyStyle);
-		this.BROWSER.contentDocument.body.appendChild(divElem);
+		var attrs = this.BODY.attributes;
+		for (var i = 0; i < attrs.length; i++) {
+			divElem.setAttribute(attrs[i].name, attrs[i].nodeValue);
+		}
+		this.BODY.appendChild(divElem);
 		var childNodes = this.BODY.childNodes;
 		for ( var i = childNodes.length - 2; i >= 0; i-- )
 		{
 			var nodeName  = childNodes[i].nodeName.toUpperCase();
-			if ( nodeName == "CITE" && childNodes[i].hasAttribute("class") && childNodes[i].getAttribute("class") == "scrapbook-header" ) continue;
+			if ( nodeName == "CITE" && childNodes[i].className == "scrapbook-header" ) continue;
 			else if ( nodeName == "DIV"  && childNodes[i].id.match(/^item\d{14}$/) ) continue;
 			divElem.insertBefore(childNodes[i], divElem.firstChild);
 		}
@@ -299,72 +297,116 @@ var sbPageCombiner = {
 		var ret = "";
 		for ( var i = 0; i < this.BROWSER.contentDocument.styleSheets.length; i++ )
 		{
-			if ( this.BROWSER.contentDocument.styleSheets[i].href && this.BROWSER.contentDocument.styleSheets[i].href.indexOf("chrome://") == 0 ) continue;
-			var cssRules = this.BROWSER.contentDocument.styleSheets[i].cssRules;
-			for ( var j = 0; j < cssRules.length; j++ )
-			{
-				var cssRule = cssRules[j];
-				var cssText = "";
-				if (cssRule.type == Ci.nsIDOMCSSRule.STYLE_RULE && !this.isTargetCombined) {
-					// split the selector with "," with the exception of leading "\"
-					var selectors = cssRule.selectorText.match(/(\\.|[^,])+/gi);
-					for ( var k = 0; k < selectors.length; k++ ) {
-						// remove leading "html" and "body", add this div as head
-						selectors[k] = "div#item" + sbCombineService.curID + " " + selectors[k].replace(/^(\s+|\s*\bhtml\b\s*|\s*\bbody\b\s*)+/gi, "");
-					}
-					cssText = selectors.join(", ") + "{" + cssRule.style.cssText + "}";
-				}
-				else {
-					cssText = cssRule.cssText;
-				}
-				ret += this.inspectCSSText(cssText) + "\n";
-			}
+			ret += this.processCSSRecursively(this.BROWSER.contentDocument.styleSheets[i]);
 		}
 		return ret + "\n\n";
+	},
+
+	processCSSRecursively : function(aCSS)
+	{
+		var ret = "";
+		if ( aCSS.href && aCSS.href.indexOf("chrome://") == 0 ) return ret;
+		var cssRules = aCSS.cssRules;
+		for ( var i = 0; i < cssRules.length; i++ )
+		{
+			var cssRule = cssRules[i];
+			var cssText = "";
+			if (this.isTargetCombined) {
+				cssText = cssRule.cssText;
+			}
+			else if (cssRule.type == Ci.nsIDOMCSSRule.STYLE_RULE) {
+				// split the selector with "," with the exception of leading "\"
+				var selectors = cssRule.selectorText.match(/(\\.|[^,])+/gi);
+				for ( var j = 0; j < selectors.length; j++ ) {
+					// remove leading "html" and "body", add this div as head
+					selectors[j] = "div#item" + sbCombineService.curID + " " + selectors[j].replace(/^(\s+|\bhtml\b|\bbody\b)+/gi, "");
+				}
+				cssText = selectors.join(", ") + "{" + cssRule.style.cssText + "}";
+			}
+			else if (cssRule.type == Ci.nsIDOMCSSRule.MEDIA_RULE) {
+				cssText = "@media " + cssRule.conditionText + "{\n" + this.processCSSRecursively(cssRule) + "\n}";
+			}
+			else {
+				cssText = cssRule.cssText;
+			}
+			ret += this.inspectCSSText(cssText) + "\n";
+		}
+		return ret;
 	},
 
 	inspectCSSText : function(aCSSText)
 	{
 		// CSS get by cssText is always url("double-quoted-with-\"quote\"-escaped")
 		aCSSText = aCSSText.replace(/ url\(\"((?:\\.|[^"])+)\"\)/g, function() {
+			var dataURL = arguments[1];
+			if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
 			// redirect the files to the original folder so we can capture them later on (and will rewrite the CSS)
-			return ' url("./data/' + sbCombineService.curID + '/' + arguments[1] + '")';
+			return ' url("./data/' + sbCombineService.curID + '/' + dataURL + '")';
 		});
 		return aCSSText;
 	},
 
 	processDOMRecursively : function(rootNode)
 	{
+		rootNode = this.inspectNode(rootNode);
 		for ( var curNode = rootNode.firstChild; curNode != null; curNode = curNode.nextSibling )
 		{
 			if ( curNode.nodeName == "#text" || curNode.nodeName == "#comment" ) continue;
-			curNode = this.inspectNode(curNode);
-			this.processDOMRecursively(curNode);
+			curNode = this.processDOMRecursively(curNode);
 		}
+		return rootNode;
 	},
 
 	inspectNode : function(aNode)
 	{
-		switch ( aNode.nodeName.toUpperCase() )
+		switch ( aNode.nodeName.toLowerCase() )
 		{
-			case "IMG" : case "EMBED" : case "IFRAME" : 
+			case "link" : 
+				// bad manner of link in the body
+				// styles should already be parsed, remove the node to prevent scope leak
+				if ( aNode.rel.toLowerCase() == "stylesheet" && aNode.href.indexOf("chrome://") != 0 ) 
+				return sbContentSaver.removeNodeFromParent(aNode);
+				break;
+			case "style" :
+				// bad manner of style in the body
+				// styles should already be parsed, remove the node to prevent scope leak
+				return sbContentSaver.removeNodeFromParent(aNode);
+				break;
+			case "body" : 
+				// move body specific attributes into inline styles so that it can be transfered to div
+				// inline style takes precedence than the corresponding HTML attribute
+				if ( aNode.hasAttribute("background") ) {
+					if (!aNode.style.backgroundImage) aNode.style.backgroundImage = 'url("' + aNode.getAttribute("background") + '")';
+					aNode.removeAttribute("background");
+				}
+				if ( aNode.hasAttribute("bgcolor") ) {
+					if (!aNode.style.backgroundColor) aNode.style.backgroundColor = aNode.getAttribute("bgcolor");
+					aNode.removeAttribute("bgcolor");
+				}
+				if ( aNode.hasAttribute("text") ) {
+					if (!aNode.style.color) aNode.style.color = aNode.getAttribute("text");
+					aNode.removeAttribute("text");
+				}
+				// always set position:relative to make position:absolute in the pages to be combined to look right
+				aNode.style.position = "relative";
+				break;
+			case "img" : case "embed" : case "source" : case "iframe" : 
 				if ( aNode.src ) aNode.setAttribute("src", aNode.src);
 				break;
-			case "OBJECT" : 
+			case "object" : 
 				if ( aNode.data ) aNode.setAttribute("data", aNode.data);
 				break;
-			case "BODY" : case "TABLE" : case "TD" : 
+			case "table" :  case "tr" :  case "th" : case "td" : 
 				aNode = this.setAbsoluteURL(aNode, "background");
 				break;
-			case "INPUT" : 
-				if ( aNode.type.toLowerCase() == "image" ) aNode = this.setAbsoluteURL(aNode, "src");
+			case "input" : 
+				if ( aNode.type.toLowerCase() == "image" ) aNode.setAttribute("src", aNode.src);
 				break;
-			case "A" : 
-			case "AREA" : 
+			case "a" : case "area" : 
 				if ( aNode.href.indexOf("file://") == 0 ) aNode.setAttribute("href", aNode.href);
 				break;
-			case "CITE" : 
-				if ( aNode.hasAttribute("class") && aNode.getAttribute("class") == "scrapbook-header" ) this.isTargetCombined = true;
+			case "cite" : 
+				if ( aNode.className == "scrapbook-header" ) this.isTargetCombined = true;
 				break;
 		}
 		if ( aNode.style && aNode.style.cssText )
