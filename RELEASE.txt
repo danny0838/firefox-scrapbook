@@ -1,3 +1,9 @@
+Scrapbook X 1.7.1
+----------------
+
+- Fix wrong locales and remove error inserted files.
+
+
 Scrapbook X 1.7.0
 ----------------
 

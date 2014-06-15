@@ -10,8 +10,8 @@
 <!ENTITY sb.export "Exportálás">
 <!ENTITY sb.remove "Törlés">
 <!ENTITY sb.property "Tulajdonságok">
-<!ENTITY sb.listview "Utolsó megtekintés">
 <!ENTITY sb.prop.title "Név">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.comment "Megjegyzés">
 <!ENTITY sb.prop.id.date "ID (idő)">
 <!ENTITY sb.folder.combine "Összefűzés nézet">
