@@ -7,10 +7,6 @@ skin	scrapbook	classic/1.0	chrome/skin/classic/scrapbook/
 style	chrome://browser/content/browser.xul	chrome://scrapbook/skin/overlay.css
 style	chrome://global/content/customizeToolbar.xul	chrome://scrapbook/skin/overlay.css
 
-<<<<<<< HEAD
-locale	scrapbook	en-US	chrome/locale/en-US/scrapbook/
-=======
->>>>>>> master
 locale	scrapbook	ar	chrome/locale/ar/scrapbook/
 locale	scrapbook	cs-CZ	chrome/locale/cs-CZ/scrapbook/
 locale	scrapbook	de	chrome/locale/de/scrapbook/
@@ -19,11 +15,7 @@ locale	scrapbook	es-ES	chrome/locale/es-ES/scrapbook/
 locale	scrapbook	fi-FI	chrome/locale/fi-FI/scrapbook/
 locale	scrapbook	fr	chrome/locale/fr/scrapbook/
 locale	scrapbook	gl-ES	chrome/locale/gl-ES/scrapbook/
-<<<<<<< HEAD
 locale	scrapbook	hu-HU	chrome/locale/hu-HU/scrapbook/
-=======
-locale	scrapbook	hu	chrome/locale/hu/scrapbook/
->>>>>>> master
 locale	scrapbook	it	chrome/locale/it/scrapbook/
 locale	scrapbook	ja	chrome/locale/ja/scrapbook/
 locale	scrapbook	ko-KR	chrome/locale/ko-KR/scrapbook/
