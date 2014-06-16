@@ -87,9 +87,8 @@ var sbCommonUtils = {
 			while ( fileEnum.hasMoreElements() )
 			{
 				file = fileEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
-				if ( file.isFile() ) file.remove(false);
+				file.remove(true);
 			}
-			file = aDir;
 			if ( aDir.isDirectory() ) aDir.remove(false);
 			return true;
 		} catch(ex) {
@@ -184,7 +183,7 @@ var sbCommonUtils = {
 		name = ( (pos = aURI.indexOf("?")) != -1 ) ? aURI.substring(0, pos) : aURI;
 		name = ( (pos = name.indexOf("#")) != -1 ) ? name.substring(0, pos) : name;
 		name = ( (pos = name.lastIndexOf("/")) != -1 ) ? name.substring(++pos) : name;
-		return name;
+		return decodeURI(name);
 	},
 
 	splitFileName : function(aFileName)
@@ -204,12 +203,12 @@ var sbCommonUtils = {
 	validateFileName : function(aFileName)
 	{
 		aFileName = aFileName.replace(/[\"\?!~`]+/g, "");
-		aFileName = aFileName.replace(/[\*\&]+/g, "+");
-		aFileName = aFileName.replace(/[\\\/\|\:;]+/g, "-");
-		aFileName = aFileName.replace(/[\<]+/g, "(");
-		aFileName = aFileName.replace(/[\>]+/g, ")");
-		aFileName = aFileName.replace(/[\s]+/g, "_");
-		aFileName = aFileName.replace(/[%]+/g, "@");
+		aFileName = aFileName.replace(/[\*\&]/g, "+");
+		aFileName = aFileName.replace(/[\\\/\|\:;]/g, "-");
+		aFileName = aFileName.replace(/[\<]/g, "(");
+		aFileName = aFileName.replace(/[\>]/g, ")");
+		aFileName = aFileName.replace(/[\s]/g, "_");
+		aFileName = aFileName.replace(/[%]/g, "@");
 		return aFileName;
 	},
 
@@ -227,7 +226,7 @@ var sbCommonUtils = {
 
 	crop : function(aString, aMaxLength)
 	{
-		return aString.length > aMaxLength ? aString.substring(0, aMaxLength) + "..." : aString;
+		return aString.length > aMaxLength ? aString.substr(0, aMaxLength) + "..." : aString;
 	},
 
 
