@@ -49,7 +49,6 @@
 					<menuitem label="&sb.tools.multiple;"  oncommand="window.top.openDialog('chrome://scrapbook/content/multiple.xul','','chrome,centerscreen,all,resizable,dialog=no');" />
 					<menuitem label="&sb.tools.directory;" oncommand="sbController.launch(sbCommonUtils.getScrapBookDir());" />
 					<menuseparator />
-					<menu id="sbAddOns" label="&sb.tools.addons;"><menupopup id="sbAddOnsPopup" /></menu>
 					<menuitem label="&sb.tools.calculate;" oncommand="window.openDialog('chrome://scrapbook/content/calculate.xul','ScrapBook:Calculate','chrome,centerscreen,all,resizable,dialog=no');" />
 					<menuitem label="&sb.tools.sorttree;"  oncommand="window.openDialog('chrome://scrapbook/content/sort.xul','','chrome,centerscreen,modal');" />
 					<menuitem label="&sb.tools.output;"    oncommand="window.openDialog('chrome://scrapbook/content/output.xul','ScrapBook:Output','chrome,centerscreen,modal,resizable');" />
