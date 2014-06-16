@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 <!ENTITY sb.detail.linked.timeout "Час очікування (секунд)">
 <!ENTITY sb.detail.linked.charset "Кодування">
 <!ENTITY sb.detail "Подробиці збереження">
-=======
-<!ENTITY sb.detail.title "Save Detail">
->>>>>>> master
 <!ENTITY sb.detail.new.folder "Нова тека">
 <!ENTITY sb.detail.select.folder "Оберіть теку">
 <!ENTITY sb.detail.option "Параметри">
@@ -16,11 +12,7 @@
 <!ENTITY sb.detail.linked.movie "Відео файли">
 <!ENTITY sb.detail.linked.archive "Архіви">
 <!ENTITY sb.detail.linked.custom "Особисті">
-<<<<<<< HEAD
 <!ENTITY sb.detail.linked.page "Глибоке збереження">
-=======
-<!ENTITY sb.detail.linked.page2 "Глибоке збереження">
->>>>>>> master
 <!ENTITY sb.detail.linked.page.depth "Глибина збереження">
 <!ENTITY sb.detail.linked.page.text "Після завершення збереження усі сторінки будуть пов’язані між собою та буде створена карта сайту.">
 <!ENTITY sb.detail.warnAboutRenew "Увага: Функція „Зберегти знову“ перезаписує раніше збережену сторінку.">

@@ -15,15 +15,12 @@
 <!ENTITY sb.highlighter "Підсвічування">
 <!ENTITY sb.highlighter.remove "Вилучити підсвічування обраного">
 <!ENTITY sb.highlighter.remove.all "Вилучити усі підсвічування">
-<<<<<<< HEAD
 <!ENTITY sbp.highlighter.stil1 "Стиль 1">
 <!ENTITY sbp.highlighter.stil2 "Стиль 2">
 <!ENTITY sbp.highlighter.stil3 "Стиль 3">
 <!ENTITY sbp.highlighter.stil4 "Стиль 4">
 <!ENTITY sbp.highlighter.stil5 "Стиль 5">
 <!ENTITY sbp.highlighter.stil6 "Стиль 6">
-=======
->>>>>>> master
 <!ENTITY sb.source "Відкрити початкову адресу">
 <!ENTITY sb.renew "Зберегти знову">
 <!ENTITY sb.locate "Показати розташування у Бічній панелі">

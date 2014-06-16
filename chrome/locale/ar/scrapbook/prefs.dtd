@@ -1,8 +1,4 @@
 <!ENTITY sb.prefs.main "الرئيسية">
-<<<<<<< HEAD
-=======
-<!ENTITY sb.prefs.keys "Keys">
->>>>>>> master
 <!ENTITY sb.prefs.tabs "الألسنة">
 <!ENTITY sb.prefs.save "حفظ">
 <!ENTITY sb.prefs.edit "تحرير">
@@ -10,11 +6,7 @@
 <!ENTITY sb.prefs.advanced "متقدم">
 <!ENTITY sb.prefs.ui.contextMenu "عرض في قائمة النص في المتصفح">
 <!ENTITY sb.prefs.ui.contextSubMenu "قائمة فرعية">
-<<<<<<< HEAD
 <!ENTITY sb.prefs.ui.bookmarkMenu "عرض قائمة&apos;اشارة مرجعية مع ScrapBook&apos;">
-=======
-<!ENTITY sb.prefs.ui.bookmark "عرض قائمة&apos;اشارة مرجعية مع ScrapBook&apos;">
->>>>>>> master
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "إعرض حتى">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "دليل مستخدم  مؤخراً">
 <!ENTITY sb.prefs.ui.menuBar "عرض في شريط القوائم">
@@ -37,7 +29,6 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "أسفل المجلد">
 <!ENTITY sb.prefs.showDetailOnDrop "عرض مربع&apos;تفاصيل الإلتقاط&apos; عند الإلتقاط بالسحب و الإفلات داخل الشريط الجانبي">
 <!ENTITY sb.prefs.notifyOnComplete "عرض تنبيه &apos;تم الإلتقاط&apos;">
-<<<<<<< HEAD
 <!ENTITY sb.prefs.viewer "تطبيق استعراض الملفات">
 <!ENTITY sb.prefs.viewer.default "الإفتراضي">
 <!ENTITY sb.prefs.viewer.default.explorer "Explorer">
@@ -46,8 +37,3 @@
 <!ENTITY sb.button.browse "استعراض">
 <!ENTITY sb.button.show "عرض الملفات">
 <!ENTITY sbp.prefs.useDropDownList "استخدم خيار القائمة المنسدلة للإضاءة بدلا من الأزرار">
-=======
-<!ENTITY sb.button.customize "تخصيص">
-<!ENTITY sb.button.browse "استعراض">
-<!ENTITY sb.button.show "عرض الملفات">
->>>>>>> master

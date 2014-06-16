@@ -2,10 +2,7 @@
 <!ENTITY sb.combine.preview "Pré-visualização">
 <!ENTITY sb.combine.preview.d "Pressione o botão &apos;Combinar&apos; após verificar a pré-visualização.">
 <!ENTITY sb.combine.option.remove "Após terminar de combinar, remover as páginas originais">
-<<<<<<< HEAD
 <!ENTITY sbp.combine.up "mover item para cima">
 <!ENTITY sbp.combine.down "mover item para baixo">
 <!ENTITY sbp.combine.remove "remover item">
 <!ENTITY sbp.combine.newTitle "novo título">
-=======
->>>>>>> master

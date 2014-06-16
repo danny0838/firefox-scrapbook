@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 <!ENTITY sb.detail.linked.timeout "المهلة (ثواني)">
 <!ENTITY sb.detail.linked.charset "ضبط المحارف">
 <!ENTITY sb.detail "تفاصيل الالتقاط">
-=======
-<!ENTITY sb.detail.title "Save Detail">
->>>>>>> master
 <!ENTITY sb.detail.new.folder "مجلد جديد">
 <!ENTITY sb.detail.select.folder "حدد مجلد">
 <!ENTITY sb.detail.option "خيارات">
@@ -16,11 +12,7 @@
 <!ENTITY sb.detail.linked.movie "أفلام">
 <!ENTITY sb.detail.linked.archive "مضغوطة">
 <!ENTITY sb.detail.linked.custom "مخصصة">
-<<<<<<< HEAD
 <!ENTITY sb.detail.linked.page "إلتقاط في العمق">
-=======
-<!ENTITY sb.detail.linked.page2 "إلتقاط في العمق">
->>>>>>> master
 <!ENTITY sb.detail.linked.page.depth "عمق الارتباطات">
 <!ENTITY sb.detail.linked.page.text "بعد إتمام الالتقاط, سيتم ربط الصفحات مع بعضها و عمل خريطة الموقع.">
 <!ENTITY sb.detail.warnAboutRenew "لاحظ: &apos;الالتقاط مجدداً&apos; يكتب فوق الصفحات المحفوظة.">

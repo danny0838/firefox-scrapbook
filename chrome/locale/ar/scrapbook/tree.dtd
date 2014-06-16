@@ -10,16 +10,10 @@
 <!ENTITY sb.export "تصدير">
 <!ENTITY sb.remove "إزالة">
 <!ENTITY sb.property "خصائص">
-<<<<<<< HEAD
 <!ENTITY sb.listview "عرض قائمة">
 <!ENTITY sb.prop.title "العنونة">
 <!ENTITY sb.prop.comment "التعليق">
 <!ENTITY sbp.prop.url "العنوان">
-=======
-<!ENTITY sb.prop.title "العنونة">
-<!ENTITY sb.prop.url "URL">
-<!ENTITY sb.prop.comment "التعليق">
->>>>>>> master
 <!ENTITY sb.prop.id.date "المعرف (الوقت)">
 <!ENTITY sb.folder.combine "عرض مجموع">
 <!ENTITY sb.folder.openall "فتح الجميع في ألسنة">
