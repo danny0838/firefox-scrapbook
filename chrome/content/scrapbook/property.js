@@ -186,23 +186,13 @@ var sbPropService = {
 	{
 		var totalSize = 0;
 		var totalFile = 0;
-<<<<<<< HEAD
-		var dir = sbCommonUtils.getContentDir(aID, true);
-		if ( !dir || !dir.isDirectory() ) return [0, 0];
-		var fileEnum = dir.directoryEntries;
-		while ( fileEnum.hasMoreElements() )
-		{
-			var file = fileEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
-			totalSize += file.fileSize;
-			totalFile++;
-=======
-		var dir = [ScrapBookUtils.getContentDir(aID, true)];
+		var dir = [sbCommonUtils.getContentDir(aID, true)];
 		for (var i=0; i<dir.length; i++) {
 			var fileEnum = dir[i].directoryEntries;
 			while ( fileEnum.hasMoreElements() )
 			{
 				try {
-					var file = fileEnum.getNext().QueryInterface(Ci.nsIFile);
+					var file = fileEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
 					if (file.isDirectory()) {
 						dir.push(file);
 					}
@@ -215,7 +205,6 @@ var sbPropService = {
 					alert("ERROR: cannot read file size (possibility due to improper file name): " + file.path);
 				}
 			}
->>>>>>> master
 		}
 		return [totalSize, totalFile];
 	},

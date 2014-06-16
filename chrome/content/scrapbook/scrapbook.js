@@ -416,17 +416,11 @@ var sbController = {
 					continue;
 				sbDataSource.removeFromContainer("urn:scrapbook:search", aResList[i]);
 			}
-<<<<<<< HEAD
-			if (!sbDataSource.exists(aResList[i]) || 
-			    sbDataSource.getRelativeIndex(aParResList[i], aResList[i]) < 0) {
-				alert("ScrapBook ERROR: Failed to remove resource.\n" + aResList[i].Value);
-=======
-			if (!ScrapBookData.exists(aResList[i])) {
+			if (!sbDataSource.exists(aResList[i])) {
 				continue;
 			}
-			else if (ScrapBookData.getRelativeIndex(aParResList[i], aResList[i]) < 0) {
-				ScrapBookUtils.alert("ERROR: Failed to remove resource.\n" + aResList[i].Value);
->>>>>>> master
+			else if (sbDataSource.getRelativeIndex(aParResList[i], aResList[i]) < 0) {
+				alert("ERROR: Failed to remove resource.\n" + aResList[i].Value);
 				continue;
 			}
 			rmIDs = rmIDs.concat(sbDataSource.deleteItemDescending(aResList[i], aParResList[i]));
@@ -610,7 +604,6 @@ var sbTreeDNDHandler = {
 	moveMultiple: function()
 	{
 		var idxList = sbTreeHandler.getSelection(false, 2);
-		if ( sbTreeHandler.validateMultipleSelection(idxList) == false ) return;
 		var i = 0;
 		var curResList = []; var curParList = [];
 		var tarResList = []; var tarParList = [];

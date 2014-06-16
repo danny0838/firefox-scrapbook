@@ -77,7 +77,6 @@ var sbTreeHandler = {
 	{
 		var idxList = this.getSelection(false, 2);
 		if ( idxList.length < 1 ) return;
-		if ( this.validateMultipleSelection(idxList) == false ) return;
 		var i = 0;
 		var resList = [];
 		var parList = [];
@@ -173,19 +172,7 @@ var sbTreeHandler = {
 		return ret;
 	},
 
-<<<<<<< HEAD
-	validateMultipleSelection : function(aIdxList)
-	{
-		if ( aIdxList.length != this.TREE.view.selection.count )
-		{
-			alert(sbMainService.STRING.getString("ERROR_MULTIPLE_SELECTION"));
-			return false;
-		}
-		return true;
-	},
 
-=======
->>>>>>> master
 	toggleFolder : function(aIdx)
 	{
 		if ( !aIdx ) aIdx = this.TREE.currentIndex;

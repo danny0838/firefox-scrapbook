@@ -102,22 +102,9 @@ function SB_splitByAnchor(aURL)
 
 function SB_suggestName(aURL)
 {
-<<<<<<< HEAD
-	var baseName = sbCommonUtils.validateFileName(sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aURL))[0]);
-	baseName = baseName.toLowerCase();
-	if ( baseName == "index" ) baseName = "default";
-	if ( !baseName ) baseName = "default";
-	var name = baseName + ".html";
-	var seq = 0;
-	while ( gFile2URL[name] ) name = baseName + "_" + sbContentSaver.leftZeroPad3(++seq) + ".html";
-	name = sbCommonUtils.splitFileName(name)[0];
-	gFile2URL[name + ".html"] = aURL;
-	gFile2URL[name + ".css"]  = true;
-=======
-	var name = ScrapBookUtils.splitFileName(ScrapBookUtils.validateFileName(ScrapBookUtils.getFileName(aURL)))[0];
+	var name = sbCommonUtils.splitFileName(sbCommonUtils.validateFileName(sbCommonUtils.getFileName(decodeURI(aURL))))[0];
 	name = name.toLowerCase();
 	if ( !name || name == "index" ) name = "default";
->>>>>>> master
 	return name;
 }
 
@@ -601,19 +588,11 @@ var sbInvisibleBrowser = {
 
 	init : function()
 	{
-<<<<<<< HEAD
-		//Dieser try-catch-Block entfernt einen eventuell vorhandenen ProgressListener. Dieser Block wurde notwendig, um
-		//beim Zusammenfassen-Assistent Fehler zu vermeiden, wenn eine fertig geladene Vorschau korrigiert werden soll.
-		try
-		{
+		try {
 			this.ELEMENT.webProgress.removeProgressListener(this, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
-		} catch(ex)
-		{
+		} catch(ex) {
 		}
 		this.ELEMENT.webProgress.addProgressListener(this, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
-		this.onload = function(){ sbInvisibleBrowser.execCapture(); };
-=======
-		this.ELEMENT.webProgress.addProgressListener(this, Ci.nsIWebProgress.NOTIFY_ALL);
 		this.loading = false;
 		this.onload = function(){
 			// onload may be fired many times when a document is loaded
@@ -623,7 +602,6 @@ var sbInvisibleBrowser = {
 			sbInvisibleBrowser.loading = false;
 			sbInvisibleBrowser.execCapture();
 		};
->>>>>>> master
 		this.ELEMENT.addEventListener("load", sbInvisibleBrowser.onload, true);
 	},
 
@@ -640,22 +618,15 @@ var sbInvisibleBrowser = {
 		this.ELEMENT.docShell.allowJavascript = gOption["script"];
 		this.ELEMENT.docShell.allowImages     = gOption["images"];
 		this.ELEMENT.docShell.allowMetaRedirects = false;
-<<<<<<< HEAD
-		if ( Components.interfaces.nsIDocShellHistory ) {
-			this.ELEMENT.docShell.QueryInterface(Components.interfaces.nsIDocShellHistory).useGlobalHistory = false;
+		if ( Components.interfaces.nsIDocShell ) {
+			this.ELEMENT.docShell.QueryInterface(Components.interfaces.nsIDocShell).useGlobalHistory = false;
 		} else {
 			this.ELEMENT.docShell.useGlobalHistory = false;
 		}
-		//gCharset = "ISO-8859-1" oder UTF-8;
+		//gCharset = "ISO-8859-1" or UTF-8;
 		var browserObj = document.commandDispatcher.focusedWindow.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebNavigation);
 		browserObj.QueryInterface(Components.interfaces.nsIDocShell).QueryInterface(Components.interfaces.nsIDocCharset).charset = gCharset;
-=======
-		if (Ci.nsIDocShell)
-			this.ELEMENT.docShell.QueryInterface(Ci.nsIDocShell).useGlobalHistory = false;
-		else
-			this.ELEMENT.docShell.useGlobalHistory = false;
 		this.loading = aURL;
->>>>>>> master
 		this.ELEMENT.loadURI(aURL, null, null);
 	},
 
@@ -781,12 +752,7 @@ var sbCrossLinker = {
 					+ ++sbInvisibleBrowser.fileCount + " : " + sbCrossLinker.nameList[sbCrossLinker.index] + ".html");
 			}
 		};
-<<<<<<< HEAD
 		this.baseURL = sbCommonUtils.IO.newFileURI(sbCommonUtils.getContentDir(gReferItem.id)).spec;
-		this.nameList.push("index");
-=======
-		this.baseURL = ScrapBookUtils.IO.newFileURI(ScrapBookUtils.getContentDir(gReferItem.id)).spec;
->>>>>>> master
 		for ( var url in gURL2Name )
 		{
 			this.nameList.push(gURL2Name[url]);
@@ -801,7 +767,7 @@ var sbCrossLinker = {
 		if ( ++this.index < this.nameList.length )
 		{
 			sbInvisibleBrowser.fileCount = 0;
-			var url = this.baseURL + encodeURI(this.nameList[this.index]) + ".html";
+			var url = this.baseURL + this.nameList[this.index] + ".html";
 			sbInvisibleBrowser.loading = url;
 			this.ELEMENT.loadURI(url, null, null);
 		}
@@ -837,20 +803,11 @@ var sbCrossLinker = {
 		sbContentSaver.frameList = sbContentSaver.flattenFrames(this.ELEMENT.contentWindow);
 		if ( !this.nodeHash[this.nameList[this.index]] )
 		{
-<<<<<<< HEAD
-			//Fehlermeldung wurde über Abfrage abgefangen.
-			//Allerdings kann der Abbruch an dieser Stelle auch erwünscht sein (Nachforschungen!)
+			// Error message could be intercepted using query. 
+			// However, the demolition at this point may also be desirable (Research!)
 			this.nodeHash[this.nameList[this.index]] = this.createNode(this.nameList[this.index], (gReferItem) ? gReferItem.title : "");
-			this.nodeHash[this.nameList[this.index]].setAttribute("title", sbDataSource.sanitize(this.ELEMENT.contentTitle));
 		}
-		else
-		{
-			this.nodeHash[this.nameList[this.index]].setAttribute("title", sbDataSource.sanitize(this.ELEMENT.contentTitle));
-=======
-			this.nodeHash[this.nameList[this.index]] = this.createNode(this.nameList[this.index], gReferItem.title);
->>>>>>> master
-		}
-		this.nodeHash[this.nameList[this.index]].setAttribute("title", ScrapBookData.sanitize(this.ELEMENT.contentTitle));
+		this.nodeHash[this.nameList[this.index]].setAttribute("title", sbDataSource.sanitize(this.ELEMENT.contentTitle));
 		for ( var f = 0; f < sbContentSaver.frameList.length; f++ )
 		{
 			var doc = sbContentSaver.frameList[f].document;
@@ -879,19 +836,10 @@ var sbCrossLinker = {
 			if ( shouldSave )
 			{
 				var rootNode = doc.getElementsByTagName("html")[0];
-<<<<<<< HEAD
-				var src = "";
-				src = sbContentSaver.surroundByTags(rootNode, rootNode.innerHTML);
-				src = sbContentSaver.doctypeToString(doc.doctype) + src;
+				var src = sbContentSaver.doctypeToString(doc.doctype) + rootNode.outerHTML;
 				var file = sbCommonUtils.getContentDir(gReferItem.id);
 				file.append(sbCommonUtils.getFileName(doc.location.href));
 				sbCommonUtils.writeFile(file, src, doc.characterSet);
-=======
-				var src = sbContentSaver.doctypeToString(doc.doctype) + rootNode.outerHTML;
-				var file = ScrapBookUtils.getContentDir(gReferItem.id);
-				file.append(ScrapBookUtils.getFileName(doc.location.href));
-				ScrapBookUtils.writeFile(file, src, doc.characterSet);
->>>>>>> master
 			}
 		}
 		this.forceReloading(gReferItem.id, this.nameList[this.index]);

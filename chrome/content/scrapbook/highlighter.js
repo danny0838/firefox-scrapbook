@@ -56,59 +56,6 @@ var sbHighlighter = {
 			{
 				alert("ScrapBook ERROR: Can't attach link across tags."); return;
 			}
-<<<<<<< HEAD
-			//Ersatz fuer fehlerhafte Originalfunktion
-			var nodeWalker = doc.createTreeWalker(range.commonAncestorContainer,NodeFilter.SHOW_TEXT,this._acceptNode,false);
-			nodeWalker.currentNode = startC;
-			var txtNode = startC;
-			var ende = 1;
-			if ( txtNode.nodeType == 1 )
-			{
-				txtNode = nodeWalker.nextNode();
-				if ( txtNode )
-				{
-					while ( ende == 1 )
-					{
-						if ( range.isPointInRange(txtNode,0) )
-						{
-							ende = 0;
-						} else
-						{
-							txtNode = nodeWalker.nextNode();
-						}
-					}
-					ende = 1;
-				}
-			}
-			while ( ende == 1 )
-			{
-				if ( txtNode )
-				{
-					if ( txtNode == endC )
-					{
-						if ( this._isTextNode( endC ) ) endC.splitText( eOffset );
-						ende = 0;
-					}
-					if ( txtNode == startC )
-					{
-						if ( this._isTextNode( startC ) ) txtNode = startC.splitText( sOffset );
-					}
-					if ( txtNode.nodeType != 1 ) nodeWalker.currentNode = this._wrapTextNodeWithSpan(doc,txtNode,this._createNode(aWindow,aNodeName,aAttributes));
-					txtNode = nodeWalker.nextNode();
-					if ( txtNode )
-					{
-						if ( txtNode.nodeType != 1 )
-						{
-							if ( !range.isPointInRange(txtNode,0) )
-							{
-								ende = 0;
-							}
-						}
-					}
-				} else
-				{
-					ende = 0;
-=======
 
 			// manage nodes between startC and endC
 			if ( ! sameNode || ! this._isTextNode( startC ) ) {
@@ -183,13 +130,9 @@ var sbHighlighter = {
 								this.nodePositionInRange.START
 							)
 					);
->>>>>>> master
 				}
 			}
-			//Ersatz Ende
-			nodeWalker.currentNode = startC;
-			range.collapse( true ); 
-			range.detach();
+			range.collapse( true );
 		}
 	},
 

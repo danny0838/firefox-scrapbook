@@ -43,7 +43,7 @@ var sbBrowserOverlay = {
 		);
 		this._prefBranch = Cc["@mozilla.org/preferences-service;1"]
 		                   .getService(Components.interfaces.nsIPrefService)
-		                   .getBranch("scrapbook.ui.");
+		                   .getBranch("extensions.scrapbook.ui.");
 		this.refresh();
 		gBrowser.addProgressListener(this.webProgressListener);
 		if (this._prefBranch.getBoolPref("contextMenu") && 
@@ -515,7 +515,7 @@ var sbMenuHandler = {
 			case "bookmark" : url = sbDataSource.getProperty(res, "source");        break;
 			default         : url = this.baseURL + "data/" + id + "/index.html";
 		}
-		var openInTab = sbCommonUtils.PREF.getBoolPref("scrapbook.tabs.open");
+		var openInTab = sbCommonUtils.PREF.getBoolPref("extensions.scrapbook.tabs.open");
 		sbCommonUtils.loadURL(url, openInTab || event.button == 1 || event.ctrlKey || event.shiftKey);
 		event.stopPropagation();
 	},

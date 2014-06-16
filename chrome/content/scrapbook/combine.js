@@ -485,7 +485,7 @@ var sbPageCombiner = {
 			if (this.isTargetCombined) {
 				cssText = cssRule.cssText;
 			}
-			else if (cssRule.type == Ci.nsIDOMCSSRule.STYLE_RULE) {
+			else if (cssRule.type == Components.interfaces.nsIDOMCSSRule.STYLE_RULE) {
 				// split the selector with "," with the exception of leading "\"
 				var selectors = cssRule.selectorText.match(/(\\.|[^,])+/gi);
 				for ( var j = 0; j < selectors.length; j++ ) {
@@ -494,7 +494,7 @@ var sbPageCombiner = {
 				}
 				cssText = selectors.join(", ") + "{" + cssRule.style.cssText + "}";
 			}
-			else if (cssRule.type == Ci.nsIDOMCSSRule.MEDIA_RULE) {
+			else if (cssRule.type == Components.interfaces.nsIDOMCSSRule.MEDIA_RULE) {
 				cssText = "@media " + cssRule.conditionText + "{\n" + this.processCSSRecursively(cssRule) + "\n}";
 			}
 			else {
