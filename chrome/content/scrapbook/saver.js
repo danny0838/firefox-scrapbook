@@ -134,7 +134,7 @@ var sbContentSaver = {
 	captureFile : function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext)
 	{
 		this.init(aPresetData);
-		this.item.title  = decodeURI(ScrapBookUtils.getFileName(aSourceURL));
+		this.item.title  = ScrapBookUtils.getFileName(aSourceURL);
 		this.item.icon   = "moz-icon://" + this.item.title + "?size=16";
 		this.item.source = aSourceURL;
 		this.item.type   = aType;

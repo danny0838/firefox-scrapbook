@@ -1,0 +1,97 @@
+Scrapbook X 1.7.4
+----------------
+
+- Fixed the min compatible Firefox version.
+
+
+Scrapbook X 1.7.3
+----------------
+
+- Fixed an issue that web pages with non-ASCII name cause the link rebuilding process to freeze.
+
+
+Scrapbook X 1.7.2
+----------------
+
+- Further fix wrong locales.
+
+
+Scrapbook X 1.7.1
+----------------
+
+- Fix wrong locales and remove error inserted files.
+
+
+Scrapbook X 1.7.0
+----------------
+
+Basic:
+- Move preference settings to "extensions.scrapbook" from "scrapbook" to fit Firefox standard policy.
+- Updated some basic info of this addon.
+- Integrated Arabic, Hungarian, Portuguese (Brazil), and Ukrainian localization.
+
+Major Features:
+- Redefined capture options:
+  - "Images": if not checked, the resources linked by <img>, <embed>, <source>, etc, are linked to the original source instead of being removed.
+  - "Styles": if not checked, global external (linked) styles and internal (style) styles are removed. Inline styles of elements are preserved from now on.
+  - "JavaScript": if not checked, all javascript triggering attributes such as "onclick", "onkeydown", etc, in the page are removed.
+- Minimized the source code reprocessing on capturing, saving, or combinding a page.
+- Improved the support of HTML5 standard.
+- No more record the current form status on capturing for privacy concerns.
+
+Bug fixes:
+- Fixed error processing of "background", "bgcolor", "text", etc, attributes for <body>, <table>, etc, elements on page capture.
+- Fixed error CSS processing, particularly those with "content:" value and URL with data URI scheme.
+- Fixed an issue that some CSS settings may become whole body wide after page combine.
+- Linked files to be download no more be added to the list in deep capture mode.
+
+
+Scrapbook X 1.6.3
+----------------
+
+- Fixed an issue capturing a local file gets a bad title.
+- Fixed an issue that the dialog does not close at the end of a multiple-capture process.
+- Fixed an issue that the "All Links in the Selection" URL detector in "Save Multiple URLs" doesn't work.
+- Fixed issues about the combiner:
+  - That the combiner may combine pages incorrectly and results in only one page.
+  - That sticky annotations and pages with "position: absolute" style are messed up after combined.
+  - That non-link style sheets cause the combiner to freeze.
+  - That some files linked by a page get lost after combined.
+
+
+Scrapbook X 1.6.2
+----------------
+
+- Adjusts handling of sticky annotations. They are now draggable only in the edit mode, have undo history saved only once at the pre-edit, and are automatically saved on page saving.
+- Updatea a component interface for better compatibility.
+
+
+
+ScrapBook X 1.6.1
+----------------
+
+Bug fixes:
+- Fixed an issue that frame pages are messed up after capture and that some of them are not captured.
+- Fixed an issue that deep capture process frequently freezes.
+- Fixed an issue that re-capture prompts multiples dialogs.
+
+Improve the editor:
+- Delete and DOMEraser can now delete all ScrapBook additions, including highlights, inline annotation, sticky annotations, attached links, etc.
+- Removing a highlight no longer leaves an empty span tag.
+- No longer creates an empty span at the end of the previous paragraph or at the start of the next paragraph it no contents are in them.
+
+Improve the undo function:
+- Now all ScrapBook edit actions are undo-able and no longer asks for saving. (Note: linking to another page or moving a tab to another window still purges the action history)
+- Undos are now infinite, instead of only once.
+- Correctly separates the undo action across different tabs.
+
+Improve file name support:
+- Non-ASCII chars in the file name can now be preserved. Long file names are truncated to prevent potential issues.
+
+Support subfolders:
+- Allow subfolders in under each data entry (directory). Correctly calculates size of files in subfolders and no errors on deleting a data with subfolder in it. (ScrapBook doesn't create subfolders on capturing data, but you can add them manually, to embed web data from other sources)
+
+Others:
+- No longer opens the item clicked if Shift or Ctrl key is down for multiple selection.
+- All highlights and annotations are added "data-sb-obj" attribute for better scripting or automation.
+
