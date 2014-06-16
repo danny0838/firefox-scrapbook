@@ -88,7 +88,7 @@ function SB_splitByAnchor(aURL)
 
 function SB_suggestName(aURL)
 {
-	var name = ScrapBookUtils.splitFileName(ScrapBookUtils.validateFileName(ScrapBookUtils.getFileName(decodeURI(aURL))))[0];
+	var name = ScrapBookUtils.splitFileName(ScrapBookUtils.validateFileName(ScrapBookUtils.getFileName(aURL)))[0];
 	name = name.toLowerCase();
 	if ( !name || name == "index" ) name = "default";
 	return name;
@@ -503,7 +503,7 @@ var sbCrossLinker = {
 		if ( ++this.index < this.nameList.length )
 		{
 			sbInvisibleBrowser.fileCount = 0;
-			var url = this.baseURL + this.nameList[this.index] + ".html";
+			var url = this.baseURL + encodeURI(this.nameList[this.index]) + ".html";
 			sbInvisibleBrowser.loading = url;
 			this.ELEMENT.loadURI(url, null, null);
 		}
