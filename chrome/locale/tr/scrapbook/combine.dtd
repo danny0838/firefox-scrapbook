@@ -2,3 +2,7 @@
 <!ENTITY sb.combine.preview "Ön İzleme">
 <!ENTITY sb.combine.preview.d "Ön izlemeyi doğruladıktan sonra &apos;Kaydet&apos; düğmesine basın.">
 <!ENTITY sb.combine.option.remove "Birleştirme tamamlandıktan sonra önceki sayfaları kaldır">
+<!ENTITY sbp.combine.up "move item upwards">
+<!ENTITY sbp.combine.down "move item downwards">
+<!ENTITY sbp.combine.remove "remove item">
+<!ENTITY sbp.combine.newTitle "new title">
