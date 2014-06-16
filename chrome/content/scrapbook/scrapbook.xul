@@ -53,8 +53,6 @@
 					<menuitem label="&sb.tools.sorttree;"  oncommand="window.openDialog('chrome://scrapbook/content/sort.xul','','chrome,centerscreen,modal');" />
 					<menuitem label="&sb.tools.output;"    oncommand="window.openDialog('chrome://scrapbook/content/output.xul','ScrapBook:Output','chrome,centerscreen,modal,resizable');" />
 					<menuitem label="&sb.tools.repair;"    oncommand="window.openDialog('chrome://scrapbook/content/repair.xul','ScrapBook:Repair','chrome,centerscreen,all,modal,resizable,dialog=no');" />
-					<menuseparator />
-					<menuitem label="&sb.tools.homepage;"  oncommand="sbCommonUtils.loadURL('https://addons.mozilla.org/firefox/addon/scrapbook-x/',true);" />
 				</menupopup>
 			</toolbarbutton>
 		</toolbar>
