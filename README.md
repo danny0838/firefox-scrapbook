@@ -18,4 +18,4 @@ Developer's Note
 
 The source repository is available at [GitHub](https://github.com/danny0838/firefox-scrapbook). Any issue or feedback can be reported here, and any contribution is wellcome. 
 
-Note that every branch prefixed "dev" is under development and could be unstable, and that every branch prefixed "test" is for temporary reference and testing purpose, and is likely to be removed or rewritten in the future.
+Generally we follow the [git flow](http://nvie.com/posts/a-successful-git-branching-model/) model in developing. We have "master" as the main branch, "devel" as the developing branch, "release-*" and "hotfix-*" as supportive branches, and added a "test-*" for temporary testing purpose, which could be changed or removed in the future. Other branches are feature branches.

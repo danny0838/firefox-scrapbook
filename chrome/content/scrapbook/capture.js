@@ -47,7 +47,7 @@ function SB_initCapture()
 	if ( gReferItem )
 	{
 		gContext = "indepth";
-		gURL2Name[unescape(gReferItem.source)] = "index";
+		gURL2Name[gReferItem.source] = "index";
 	}
 	else if ( gPreset )
 	{
@@ -102,6 +102,7 @@ function SB_splitByAnchor(aURL)
 
 function SB_suggestName(aURL)
 {
+<<<<<<< HEAD
 	var baseName = sbCommonUtils.validateFileName(sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aURL))[0]);
 	baseName = baseName.toLowerCase();
 	if ( baseName == "index" ) baseName = "default";
@@ -112,6 +113,11 @@ function SB_suggestName(aURL)
 	name = sbCommonUtils.splitFileName(name)[0];
 	gFile2URL[name + ".html"] = aURL;
 	gFile2URL[name + ".css"]  = true;
+=======
+	var name = ScrapBookUtils.splitFileName(ScrapBookUtils.validateFileName(ScrapBookUtils.getFileName(aURL)))[0];
+	name = name.toLowerCase();
+	if ( !name || name == "index" ) name = "default";
+>>>>>>> master
 	return name;
 }
 
@@ -595,6 +601,7 @@ var sbInvisibleBrowser = {
 
 	init : function()
 	{
+<<<<<<< HEAD
 		//Dieser try-catch-Block entfernt einen eventuell vorhandenen ProgressListener. Dieser Block wurde notwendig, um
 		//beim Zusammenfassen-Assistent Fehler zu vermeiden, wenn eine fertig geladene Vorschau korrigiert werden soll.
 		try
@@ -605,6 +612,18 @@ var sbInvisibleBrowser = {
 		}
 		this.ELEMENT.webProgress.addProgressListener(this, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
 		this.onload = function(){ sbInvisibleBrowser.execCapture(); };
+=======
+		this.ELEMENT.webProgress.addProgressListener(this, Ci.nsIWebProgress.NOTIFY_ALL);
+		this.loading = false;
+		this.onload = function(){
+			// onload may be fired many times when a document is loaded
+			// (loading of a frame may fire)
+			// we need this check to allow only the desired url and only fire once...
+			if (sbInvisibleBrowser.ELEMENT.currentURI.spec !== sbInvisibleBrowser.loading) return;
+			sbInvisibleBrowser.loading = false;
+			sbInvisibleBrowser.execCapture();
+		};
+>>>>>>> master
 		this.ELEMENT.addEventListener("load", sbInvisibleBrowser.onload, true);
 	},
 
@@ -621,6 +640,7 @@ var sbInvisibleBrowser = {
 		this.ELEMENT.docShell.allowJavascript = gOption["script"];
 		this.ELEMENT.docShell.allowImages     = gOption["images"];
 		this.ELEMENT.docShell.allowMetaRedirects = false;
+<<<<<<< HEAD
 		if ( Components.interfaces.nsIDocShellHistory ) {
 			this.ELEMENT.docShell.QueryInterface(Components.interfaces.nsIDocShellHistory).useGlobalHistory = false;
 		} else {
@@ -629,6 +649,13 @@ var sbInvisibleBrowser = {
 		//gCharset = "ISO-8859-1" oder UTF-8;
 		var browserObj = document.commandDispatcher.focusedWindow.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebNavigation);
 		browserObj.QueryInterface(Components.interfaces.nsIDocShell).QueryInterface(Components.interfaces.nsIDocCharset).charset = gCharset;
+=======
+		if (Ci.nsIDocShell)
+			this.ELEMENT.docShell.QueryInterface(Ci.nsIDocShell).useGlobalHistory = false;
+		else
+			this.ELEMENT.docShell.useGlobalHistory = false;
+		this.loading = aURL;
+>>>>>>> master
 		this.ELEMENT.loadURI(aURL, null, null);
 	},
 
@@ -654,7 +681,7 @@ var sbInvisibleBrowser = {
 					{
 						gURLs[sbCaptureTask.index] = newURL;
 						sbCaptureTask.canRefresh = false;
-						this.ELEMENT.loadURI(newURL, null, null);
+						sbCaptureTask.start(newURL);
 						return;
 					}
 				}
@@ -670,7 +697,7 @@ var sbInvisibleBrowser = {
 		{
 			if ( gContext == "indepth" )
 			{
-				gURL2Name[unescape(sbCaptureTask.URL)] = ret[0];
+				gURL2Name[sbCaptureTask.URL] = ret[0];
 				gFile2URL = ret[1];
 			}
 			else if ( gContext == "capture-again-deep" )
@@ -754,8 +781,12 @@ var sbCrossLinker = {
 					+ ++sbInvisibleBrowser.fileCount + " : " + sbCrossLinker.nameList[sbCrossLinker.index] + ".html");
 			}
 		};
+<<<<<<< HEAD
 		this.baseURL = sbCommonUtils.IO.newFileURI(sbCommonUtils.getContentDir(gReferItem.id)).spec;
 		this.nameList.push("index");
+=======
+		this.baseURL = ScrapBookUtils.IO.newFileURI(ScrapBookUtils.getContentDir(gReferItem.id)).spec;
+>>>>>>> master
 		for ( var url in gURL2Name )
 		{
 			this.nameList.push(gURL2Name[url]);
@@ -770,7 +801,9 @@ var sbCrossLinker = {
 		if ( ++this.index < this.nameList.length )
 		{
 			sbInvisibleBrowser.fileCount = 0;
-			this.ELEMENT.loadURI(this.baseURL + this.nameList[this.index] + ".html", null, null);
+			var url = this.baseURL + encodeURI(this.nameList[this.index]) + ".html";
+			sbInvisibleBrowser.loading = url;
+			this.ELEMENT.loadURI(url, null, null);
 		}
 		else
 		{
@@ -793,6 +826,10 @@ var sbCrossLinker = {
 
 	exec : function()
 	{
+		// onload may be fired many times when a document is loaded
+		// we need this check to prevent
+		if (this.ELEMENT.currentURI.spec !== sbInvisibleBrowser.loading) return;
+		sbInvisibleBrowser.loading = false;
 		if ( this.ELEMENT.currentURI.scheme != "file" )
 		{
 			return;
@@ -800,6 +837,7 @@ var sbCrossLinker = {
 		sbContentSaver.frameList = sbContentSaver.flattenFrames(this.ELEMENT.contentWindow);
 		if ( !this.nodeHash[this.nameList[this.index]] )
 		{
+<<<<<<< HEAD
 			//Fehlermeldung wurde über Abfrage abgefangen.
 			//Allerdings kann der Abbruch an dieser Stelle auch erwünscht sein (Nachforschungen!)
 			this.nodeHash[this.nameList[this.index]] = this.createNode(this.nameList[this.index], (gReferItem) ? gReferItem.title : "");
@@ -808,21 +846,25 @@ var sbCrossLinker = {
 		else
 		{
 			this.nodeHash[this.nameList[this.index]].setAttribute("title", sbDataSource.sanitize(this.ELEMENT.contentTitle));
+=======
+			this.nodeHash[this.nameList[this.index]] = this.createNode(this.nameList[this.index], gReferItem.title);
+>>>>>>> master
 		}
+		this.nodeHash[this.nameList[this.index]].setAttribute("title", ScrapBookData.sanitize(this.ELEMENT.contentTitle));
 		for ( var f = 0; f < sbContentSaver.frameList.length; f++ )
 		{
 			var doc = sbContentSaver.frameList[f].document;
-			if ( !doc.links ) continue;
-			var shouldSave = false;
 			var linkList = doc.links;
+			if ( !linkList ) continue;
+			var shouldSave = false;
 			for ( var i = 0; i < linkList.length; i++ )
 			{
-				var urlLR = SB_splitByAnchor(unescape(linkList[i].href));
+				var urlLR = SB_splitByAnchor(linkList[i].href);
 				if ( gURL2Name[urlLR[0]] )
 				{
 					var name = gURL2Name[urlLR[0]];
 					linkList[i].href = name + ".html" + urlLR[1];
-					linkList[i].setAttribute("indepth", "true");
+					linkList[i].setAttribute("data-sb-indepth", "true");
 					if ( !this.nodeHash[name] )
 					{
 						var text = linkList[i].text ? linkList[i].text.replace(/\r|\n|\t/g, " ") : "";
@@ -837,12 +879,19 @@ var sbCrossLinker = {
 			if ( shouldSave )
 			{
 				var rootNode = doc.getElementsByTagName("html")[0];
+<<<<<<< HEAD
 				var src = "";
 				src = sbContentSaver.surroundByTags(rootNode, rootNode.innerHTML);
 				src = sbContentSaver.doctypeToString(doc.doctype) + src;
 				var file = sbCommonUtils.getContentDir(gReferItem.id);
 				file.append(sbCommonUtils.getFileName(doc.location.href));
 				sbCommonUtils.writeFile(file, src, doc.characterSet);
+=======
+				var src = sbContentSaver.doctypeToString(doc.doctype) + rootNode.outerHTML;
+				var file = ScrapBookUtils.getContentDir(gReferItem.id);
+				file.append(ScrapBookUtils.getFileName(doc.location.href));
+				ScrapBookUtils.writeFile(file, src, doc.characterSet);
+>>>>>>> master
 			}
 		}
 		this.forceReloading(gReferItem.id, this.nameList[this.index]);

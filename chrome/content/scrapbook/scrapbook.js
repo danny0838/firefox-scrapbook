@@ -416,9 +416,17 @@ var sbController = {
 					continue;
 				sbDataSource.removeFromContainer("urn:scrapbook:search", aResList[i]);
 			}
+<<<<<<< HEAD
 			if (!sbDataSource.exists(aResList[i]) || 
 			    sbDataSource.getRelativeIndex(aParResList[i], aResList[i]) < 0) {
 				alert("ScrapBook ERROR: Failed to remove resource.\n" + aResList[i].Value);
+=======
+			if (!ScrapBookData.exists(aResList[i])) {
+				continue;
+			}
+			else if (ScrapBookData.getRelativeIndex(aParResList[i], aResList[i]) < 0) {
+				ScrapBookUtils.alert("ERROR: Failed to remove resource.\n" + aResList[i].Value);
+>>>>>>> master
 				continue;
 			}
 			rmIDs = rmIDs.concat(sbDataSource.deleteItemDescending(aResList[i], aParResList[i]));

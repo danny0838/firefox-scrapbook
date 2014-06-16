@@ -98,10 +98,10 @@ var sbCalcService = {
 		{
 			if ( col.index == 0 ) return this._items[row][3];
 		};
-		treeView.getCellProperties = function(row, col, properties)
+		treeView.getCellProperties = function(row, col)
 		{
 			if ( this._items[row][6] && col.index != 0 ) return;
-			properties.AppendElement(ATOM_SERVICE.getAtom(!this._items[row][6] ? "invalid" : this._items[row][1]));
+			return !this._items[row][6] ? "invalid" : this._items[row][1];
 		};
 		treeView.cycleHeader = function(col)
 		{

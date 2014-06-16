@@ -56,6 +56,7 @@ var sbHighlighter = {
 			{
 				alert("ScrapBook ERROR: Can't attach link across tags."); return;
 			}
+<<<<<<< HEAD
 			//Ersatz fuer fehlerhafte Originalfunktion
 			var nodeWalker = doc.createTreeWalker(range.commonAncestorContainer,NodeFilter.SHOW_TEXT,this._acceptNode,false);
 			nodeWalker.currentNode = startC;
@@ -107,6 +108,82 @@ var sbHighlighter = {
 				} else
 				{
 					ende = 0;
+=======
+
+			// manage nodes between startC and endC
+			if ( ! sameNode || ! this._isTextNode( startC ) ) {
+				var nodeWalker 
+					= doc.createTreeWalker(
+							range.commonAncestorContainer,
+							NodeFilter.SHOW_TEXT,
+							this._acceptNode,
+							false
+					  );
+
+				nodeWalker.currentNode = startC; 
+
+				for ( var txtNode = nodeWalker.nextNode(); 
+					  txtNode && txtNode != endC; 
+					  txtNode = nodeWalker.nextNode() 
+					) {
+
+					nodeWalker.currentNode 
+						= this._wrapTextNodeWithSpan(
+								doc,
+								txtNode,
+								this._createNode( 
+									aWindow, 
+									aNodeName, 
+									aAttributes, 
+									this.nodePositionInRange.MIDDLE 
+								)
+						); 
+				}
+			}
+
+			// manage endC
+			if ( this._isTextNode( endC ) && eOffset != 0 ) {
+				endC.splitText( eOffset );
+				if ( ! sameNode) 
+					this._wrapTextNodeWithSpan(
+							doc,
+							endC,
+							this._createNode( 
+								aWindow, 
+								aNodeName, 
+								aAttributes,
+								this.nodePositionInRange.END
+							)
+					); 
+			}
+
+			// managge startC
+			if ( this._isTextNode( startC ) && sOffset != startC.length ) { 
+				var secondHalf = startC.splitText( sOffset );
+				if ( sameNode ) {
+					this._wrapTextNodeWithSpan(
+							doc,
+							secondHalf,
+							this._createNode( 
+								aWindow, 
+								aNodeName, 
+								aAttributes,
+								this.nodePositionInRange.SINGLE
+							)
+					);
+				}
+				else {
+					this._wrapTextNodeWithSpan(
+							doc,
+							secondHalf,
+							this._createNode( 
+								aWindow, 
+								aNodeName, 
+								aAttributes,
+								this.nodePositionInRange.START
+							)
+					);
+>>>>>>> master
 				}
 			}
 			//Ersatz Ende
@@ -143,13 +220,9 @@ var sbHighlighter = {
 
 	_wrapTextNodeWithSpan : function( aDoc, aTextNode, aSpanNode ) 
 	{
-		var clonedTextNode = aTextNode.cloneNode( false );
-		var nodeParent	 = aTextNode.parentNode;	
-
-		aSpanNode.appendChild( clonedTextNode );
-		nodeParent.replaceChild( aSpanNode, aTextNode );
-
-		return clonedTextNode;
+		aTextNode.parentNode.insertBefore(aSpanNode, aTextNode);
+		aSpanNode.appendChild( aTextNode );
+		return aTextNode;
 	},
 
 };

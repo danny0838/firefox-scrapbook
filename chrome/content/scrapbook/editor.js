@@ -5,11 +5,15 @@ var sbPageEditor = {
 	get COMMENT() { return document.getElementById("ScrapBookEditComment"); },
 
 	item : {},
-	changed1 : false,
-	changed2 : false,
 	multiline : false,
 	focusedWindow : null,
-	savedBody : null,
+
+	documentDataArray : {
+		document : [],
+		histories : [],
+		changed1 : [],
+		changed2 : [],
+	},
 
 	get STRING() {
 		if (!this._stringBundle)
@@ -70,8 +74,6 @@ var sbPageEditor = {
 			if ( aID != sbBrowserOverlay.getID() ) return;
 			if ( !sbDataSource.exists(sbBrowserOverlay.resource) ) { this.disable(true); return; }
 		}
-		this.changed1 = false;
-		this.changed2 = false;
 		if ( aID ) {
 			this.item = sbCommonUtils.newItem(aID);
 			for ( var prop in this.item ) this.item[prop] = sbDataSource.getProperty(sbBrowserOverlay.resource, prop);
@@ -96,7 +98,6 @@ var sbPageEditor = {
 			gBrowser.selectedTab.label = this.item.title;
 			gBrowser.selectedTab.setAttribute("image", this.item.icon);
 		}
-		sbPageEditor.allowUndo();
 		sbDOMEraser.init(0);
 		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
 		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
@@ -106,6 +107,8 @@ var sbPageEditor = {
 				sbContentSaver.frameList[i].document.removeEventListener("mousedown", sbAnnotationService.handleEvent, true);
 			} catch(ex) {}
 			sbContentSaver.frameList[i].document.addEventListener("mousedown",    sbAnnotationService.handleEvent, true);
+			sbContentSaver.frameList[i].document.removeEventListener("click", sbAnnotationService.handleEvent, true);
+			sbContentSaver.frameList[i].document.addEventListener("click",    sbAnnotationService.handleEvent, true);
 			sbContentSaver.frameList[i].document.removeEventListener("keypress", this.handleEvent, true);
 			sbContentSaver.frameList[i].document.addEventListener("keypress",    this.handleEvent, true);
 /*
@@ -160,7 +163,14 @@ var sbPageEditor = {
 		}
 		else if ( aEvent.type == "beforeunload" )
 		{
-			sbPageEditor.confirmSave();
+			// ScrapBookUtils.getFocusedWindow() could be null in some situation
+			try {
+				if (aEvent.target == ScrapBookUtils.getFocusedWindow().document) {
+					sbPageEditor.confirmSave();
+				}
+			}
+			catch(ex) {
+			}
 		}
 	},
 
@@ -188,7 +198,7 @@ var sbPageEditor = {
 	{
 		var ss = Cc["@mozilla.org/browser/sessionstore;1"].getService(Ci.nsISessionStore);
 		ss.setTabValue(gBrowser.mCurrentTab, "scrapbook-comment", aValue);
-		this.changed2 = true; 
+		this._dataChanged2(true);
 	},
 
 	getSelection : function()
@@ -209,9 +219,8 @@ var sbPageEditor = {
 	{
 		var sel = this.getSelection();
 		if ( !sel ) return;
-		this.allowUndo(this.focusedWindow.document);
+		this.allowUndo();
 		sel.deleteFromDocument();
-		this.changed1 = true;
 	},
 
 	highlight : function(idx)
@@ -223,29 +232,36 @@ var sbPageEditor = {
 		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighterPreview"), attr["style"]);	//DropDownList
 		var sel = this.getSelection();
 		if ( !sel ) return;
+<<<<<<< HEAD
 		this.allowUndo(this.focusedWindow.document);
+=======
+		this.allowUndo();
+		var attr = {};
+		attr["data-sb-obj"] = "linemarker";
+>>>>>>> master
 		attr["class"] = "linemarker-marked-line";
 		sbHighlighter.set(this.focusedWindow, sel, "span", attr);
-		this.changed1 = true;
 	},
 
-	removeHighlights : function()
+	removeSbObjectsSelected : function()
 	{
 		var sel = this.getSelection();
 		if ( !sel ) return;
+		this.allowUndo();
 		var selRange  = sel.getRangeAt(0);
 		var node = selRange.startContainer;
 		if ( node.nodeName == "#text" ) node = node.parentNode;
 		var nodeRange = window.content.document.createRange();
+		var nodeToDel = [];
 		traceTree : while ( true )
 		{
 			nodeRange.selectNode(node);
 			if ( nodeRange.compareBoundaryPoints(Range.START_TO_END, selRange) > -1 )
 			{
 				if ( nodeRange.compareBoundaryPoints(Range.END_TO_START, selRange) > 0 ) break;
-				else if ( node.nodeName.toUpperCase() == "SPAN" && node.getAttribute("class") == "linemarker-marked-line" )
+				else if ( node.nodeType === 1 && this._getSbObjectType(node) )
 				{
-					this.stripAttributes(node);
+					nodeToDel.push(node);
 				}
 			}
 			if ( node.hasChildNodes() ) node = node.firstChild;
@@ -255,29 +271,33 @@ var sbPageEditor = {
 				node = node.nextSibling;
 			}
 		}
+		for ( var i = 0, len = nodeToDel.length; i < len; ++i ) this.removeSbObj(nodeToDel[i]);
 		this.changed1 = true;
 	},
 
-	removeAllSpan : function(aClassName)
+	removeSbObjects : function()
 	{
+		this.allowUndo();
 		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
 		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
 		{
-			var elems = sbContentSaver.frameList[i].document.getElementsByTagName("span");
+			var elems = sbContentSaver.frameList[i].document.getElementsByTagName("*");
 			for ( var j = 0; j < elems.length; j++ )
 			{
-				if ( elems[j].getAttribute("class") == aClassName )
+				if ( this._getSbObjectType(elems[j]) )
 				{
-					this.stripAttributes(elems[j]);
+					// elems gets shortened when elems[j] is removed, minus j afterwards to prevent skipping
+					this.removeSbObj(elems[j]);
+					j--;
 				}
 			}
 		}
 		this.changed1 = true;
-		this.allowUndo();
 	},
 
 	removeElementsByTagName : function(aTagName)
 	{
+		this.allowUndo();
 		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
 		var shouldSave = false;
 		for ( var i = sbContentSaver.frameList.length - 1; i >= 0; i-- )
@@ -293,15 +313,32 @@ var sbPageEditor = {
 		if ( shouldSave )
 		{
 			this.changed1 = true;
-			this.allowUndo();
 		}
 	},
 
-	stripAttributes : function(aElement)
+	removeSbObj : function(aNode)
 	{
-		aElement.removeAttribute("style");
-		aElement.removeAttribute("class");
-		aElement.removeAttribute("title");
+		switch (this._getSbObjectType(aNode)) {
+			case "linemarker" :
+			case "inline" :
+			case "link-url" :
+			case "link-file" :
+				this.unwrapNode(aNode);
+				break;
+			case "sticky" :
+			case "stylesheet" :
+			default:
+				aNode.parentNode.removeChild(aNode);
+		}
+	},
+
+	unwrapNode : function(aNode)
+	{
+		var childs = aNode.childNodes;
+		var parent = aNode.parentNode;
+		while ( childs.length ) parent.insertBefore(childs[0], aNode);
+		parent.removeChild(aNode);
+		parent.normalize();
 	},
 
 	selection2Title : function(aElement)
@@ -310,7 +347,7 @@ var sbPageEditor = {
 		if ( !sel ) return;
 		aElement.value = sbCommonUtils.crop(sel.toString().replace(/[\r\n\t\s]+/g, " "), 100);
 		sel.removeAllRanges();
-		this.changed2 = true;
+		this._dataChanged2(true);
 	},
 
 	restore : function()
@@ -326,32 +363,48 @@ var sbPageEditor = {
 		this.showHide(false);
 	},
 
-	allowUndo : function(aTargetDocument)
+	allowUndo : function()
 	{
-		if ( aTargetDocument )
-			this.savedBody = aTargetDocument.body.cloneNode(true);
-		else
-			delete this.savedBody;
+		var doc = ScrapBookUtils.getFocusedWindow().document;
+		var histories = this._documentData(doc, "histories");
+		histories.push(doc.body.cloneNode(true));
+		this._documentData(doc, "histories", histories);
+		this._dataChanged1(true);
 	},
 
 	undo : function()
 	{
-		if ( this.savedBody ) {
-			this.savedBody.ownerDocument.body.parentNode.replaceChild(this.savedBody, this.savedBody.ownerDocument.body);
-			this.allowUndo();
-		} else {
-			this.restore();
+		var doc = ScrapBookUtils.getFocusedWindow().document;
+		var histories = this._documentData(doc, "histories");
+		while ( histories.length ) {
+			var prevBody = histories.pop();
+			if (!this._isDeadObject(prevBody)) {
+				this._dataChanged1(true);
+				prevBody.ownerDocument.body.parentNode.replaceChild(prevBody, prevBody.ownerDocument.body);
+				return true;
+			}
 		}
+		this._documentData(doc, "histories", histories);
+		ScrapBookUtils.alert( ScrapBookBrowserOverlay.STRING.getString("EDIT_UNDO_LAST") );
+		return false;
 	},
 
 	confirmSave : function()
 	{
+<<<<<<< HEAD
 		if ( this.changed2 ) this.saveResource();
 		if ( !this.changed1 ) return 0;
 		var button = sbCommonUtils.PROMPT.BUTTON_TITLE_SAVE * sbCommonUtils.PROMPT.BUTTON_POS_0 + sbCommonUtils.PROMPT.BUTTON_TITLE_DONT_SAVE * sbCommonUtils.PROMPT.BUTTON_POS_1;
 		var ret = sbCommonUtils.PROMPT.confirmEx(window, "ScrapBook", sbBrowserOverlay.STRING.getFormattedString("EDIT_SAVE_CHANGES", [sbCommonUtils.crop(this.item.title, 32)]), button, null, null, null, null, {});
+=======
+		if ( this._dataChanged2() ) this.saveResource();
+		if ( !this._dataChanged1() ) return 0;
+		var button = ScrapBookUtils.PROMPT.BUTTON_TITLE_SAVE      * ScrapBookUtils.PROMPT.BUTTON_POS_0
+		           + ScrapBookUtils.PROMPT.BUTTON_TITLE_DONT_SAVE * ScrapBookUtils.PROMPT.BUTTON_POS_1;
+		var text = ScrapBookBrowserOverlay.STRING.getFormattedString("EDIT_SAVE_CHANGES", [ScrapBookUtils.crop(this.item.title, 32)]);
+		var ret = ScrapBookUtils.PROMPT.confirmEx(window, "[ScrapBook]", text, button, null, null, null, null, {});
+>>>>>>> master
 		if ( ret == 0 ) this.savePage();
-		this.changed1 = false;
 		return ret;
 	},
 
@@ -381,21 +434,15 @@ var sbPageEditor = {
 		sbDOMEraser.init(2);
 		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
 		{
-			this.removeAllStyles(sbContentSaver.frameList[i]);
+			this.saveAllSticky(sbContentSaver.frameList[i]);
 			var doc = sbContentSaver.frameList[i].document;
 			if ( doc.contentType != "text/html" )
 			{
 				alert("ScrapBook ERROR: Cannot modify " + doc.contentType + " content.");
 				continue;
 			}
-			var rootNode = doc.getElementsByTagName("html")[0];
-			var src = "";
-			src = sbContentSaver.surroundByTags(rootNode, rootNode.innerHTML);
-			src = sbContentSaver.doctypeToString(doc.doctype) + src;
-			src = src.replace(/ -moz-background-clip: initial; -moz-background-origin: initial; -moz-background-inline-policy: initial;\">/g, '">');
-			src = src.replace(/<span>([^<]*)<\/span>/g, "$1");
-			src = src.replace(/<head>\n+/, "<head>\n");
 			var charset = doc.characterSet;
+<<<<<<< HEAD
 			if ( src.indexOf("scrapbook-sticky") > 0 && charset != "UTF-8" )
 			{
 				sbDataSource.setProperty(sbBrowserOverlay.resource, "chars", "UTF-8");
@@ -405,12 +452,22 @@ var sbPageEditor = {
 			var file = sbCommonUtils.getContentDir(this.item.id).clone();
 			file.append(sbCommonUtils.getFileName(doc.location.href));
 			sbCommonUtils.writeFile(file, src, charset);
+=======
+			if (charset != "UTF-8") {
+				ScrapBookUtils.alert("NOTICE: '" + doc.location.href + "' is not UTF-8 encoded, some content may lose.");
+			}
+			var rootNode = doc.getElementsByTagName("html")[0];
+			var src = sbContentSaver.doctypeToString(doc.doctype) + rootNode.outerHTML;
+			var file = ScrapBookUtils.getContentDir(this.item.id).clone();
+			file.append(ScrapBookUtils.getFileName(doc.location.href));
+			ScrapBookUtils.writeFile(file, src, charset);
+>>>>>>> master
 			if ( document.getElementById("ScrapBookStatusPopupD").getAttribute("checked") )
 			{
 				sbInfoViewer.indicateLinks(sbContentSaver.frameList[i]);
 			}
 		}
-		this.changed1 = false;
+		this._dataChanged1(false);
 		window.setTimeout(function() { window.content.stop(); sbPageEditor.disable(false); }, 500);
 	},
 
@@ -437,7 +494,14 @@ var sbPageEditor = {
 			ss.setTabValue(gBrowser.mCurrentTab, "scrapbook-comment", aValue);
 			ss.deleteTabValue(gBrowser.mCurrentTab, "scrapbook-comment");
 		}
+<<<<<<< HEAD
 		this.changed2 = false;
+=======
+		var ss = Cc['@mozilla.org/browser/sessionstore;1']
+			.getService(Ci.nsISessionStore);
+		ss.deleteTabValue(gBrowser.mCurrentTab, "scrapbook-comment");
+		this._dataChanged2(false);
+>>>>>>> master
 	},
 
 	disableTemporary : function(msec)
@@ -486,6 +550,7 @@ var sbPageEditor = {
 			return;
 		}
 		var newNode = aWindow.document.createElement("style");
+		newNode.setAttribute("data-sb-obj", "stylesheet");
 		newNode.setAttribute("media", "screen");
 		newNode.setAttribute("type", "text/css");
 		newNode.setAttribute("id", aID);
@@ -499,15 +564,100 @@ var sbPageEditor = {
 		try { sbContentSaver.removeNodeFromParent(aWindow.document.getElementById(aID)); } catch(ex) {}
 	},
 
-	removeAllStyles : function(aWindow)
+	saveAllSticky : function(aWindow)
 	{
-		var nodes = aWindow.document.getElementsByTagName("style");
+		var nodes = aWindow.document.getElementsByTagName("div");
 		for ( var i = nodes.length - 1; i >= 0 ; i-- )
 		{
-			if ( nodes[i].id.indexOf("scrapbook-") == 0 ) sbContentSaver.removeNodeFromParent(nodes[i]);
+			var node = nodes[i];
+			if (sbPageEditor._getSbObjectType(node) == "sticky" && node.getAttribute("data-sb-active")) {
+				sbAnnotationService.saveSticky(node);
+			}
 		}
 	},
 
+	_dataChanged1 : function(aNewValue) {
+		return this._documentData( ScrapBookUtils.getFocusedWindow().document, "changed1", aNewValue );
+	},
+
+	_dataChanged2 : function(aNewValue) {
+		return this._documentData( ScrapBookUtils.getFocusedWindow().document, "changed2", aNewValue );
+	},
+
+	_documentData : function(aDocument, aKey, aNewValue)
+	{
+		var hash = this.documentDataArray;
+		// try to lookup the index of the specific document
+		var idx = false;
+		var firstEmptyIdx = false;
+		for (var i=0, len=hash.document.length; i<len ; i++) {
+			if (this._isDeadObject(hash.document[i])) {
+				if (firstEmptyIdx === false) firstEmptyIdx = i;
+				continue;
+			}
+			if (hash.document[i] == aDocument) { idx = i; break; }
+		}
+		// if the document is not in index, add one
+		// if there is an index left empty, use it
+		if (idx === false) {
+			if (firstEmptyIdx !== false) idx = firstEmptyIdx;
+			else idx = hash.document.length;
+			hash.document[idx] = aDocument;
+			hash.histories[idx] = [];
+			hash.changed1[idx] = false;
+			hash.changed2[idx] = false;
+		}
+		// if given a new value, set it
+		if (aNewValue !== undefined) {
+			hash[aKey][idx] = aNewValue;
+			return;
+		}
+		return hash[aKey][idx];
+	},
+
+	// check if an object is dead (eg. closed window)
+	_isDeadObject : function(aObject)
+	{
+		var dead = false;
+		try { var x = aObject.__proto__; }
+		catch(ex) { dead = true; }
+		return dead;
+	},
+
+	_getSbObjectType : function(aNode)
+	{
+		/**
+		 * defined types:
+		 *
+		 * linemarker (span)
+		 * inline (span)
+		 * link-url (a)
+		 * link-file (a)
+		 * sticky (div)
+		 * sticky-header
+		 * sticky-footer
+		 * sticky-save
+		 * sticky-delete
+		 * block-comment (?)
+		 * stylesheet
+		 */
+		var type = aNode.getAttribute("data-sb-obj");
+		if (type) return type;
+		// className is for compatibility
+		switch (aNode.className) {
+			case "linemarker-marked-line":
+				return "linemarker";
+			case "scrapbook-inline":
+				return "inline";
+			case "scrapbook-sticky":
+			case "scrapbook-sticky scrapbook-sticky-relative":
+				return "sticky";
+			case "scrapbook-block-comment":
+				return "block-comment";
+		}
+		return false;
+	},
+	
 };
 
 
@@ -564,7 +714,7 @@ var sbDOMEraser = {
 		var elem = aEvent.target;
 		var tagName = elem.localName.toUpperCase();
 		if ( aEvent.type != "keypress" && ["SCROLLBAR","HTML","BODY","FRAME","FRAMESET"].indexOf(tagName) >= 0 ) return;
-		var onMarker = (tagName == "SPAN" && elem.getAttribute("class") == "linemarker-marked-line");
+		var onSbObj = sbPageEditor._getSbObjectType(elem);
 		if ( aEvent.type == "mouseover" || aEvent.type == "mousemove" )
 		{
 			if ( aEvent.type == "mousemove" && ++sbDOMEraser.verbose % 3 != 0 ) return;
@@ -579,37 +729,41 @@ var sbDOMEraser = {
 			tooltip.style.top  = aEvent.pageY + "px";
 			if ( aEvent.type == "mouseover" )
 			{
+<<<<<<< HEAD
 				if ( onMarker ) {
 					tooltip.textContent = sbBrowserOverlay.STRING.getString("EDIT_REMOVE_HIGHLIGHT");
+=======
+				if ( onSbObj ) {
+					tooltip.textContent = ScrapBookBrowserOverlay.STRING.getString("EDIT_REMOVE_HIGHLIGHT");
+					sbDOMEraser._setOutline(elem, "2px dashed #0000FF");
+>>>>>>> master
 				} else {
 					tooltip.textContent = elem.localName;
 					if ( elem.id ) tooltip.textContent += ' id="' + elem.id + '"';
 					if ( elem.className ) tooltip.textContent += ' class="' + elem.className + '"';
+					sbDOMEraser._setOutline(elem, "2px solid #FF0000");
 				}
-				elem.style.outline = onMarker ? "2px dashed #0000FF" : "2px solid #FF0000";
 			}
 		}
 		else if ( aEvent.type == "mouseout" || aEvent.type == "click" )
 		{
 			var tooltip = elem.ownerDocument.getElementById("scrapbook-eraser-tooltip");
 			if ( tooltip ) elem.ownerDocument.body.removeChild(tooltip);
-			elem.style.outline = "";
-			if ( !elem.getAttribute("style") ) elem.removeAttribute("style");
+			sbDOMEraser._clearOutline(elem);
 			if ( aEvent.type == "click" )
 			{
-				sbPageEditor.allowUndo(elem.ownerDocument);
+				sbPageEditor.allowUndo();
 				if ( aEvent.shiftKey || aEvent.button == 2 )
 				{
 					sbDOMEraser.isolateNode(elem);
 				}
 				else
 				{
-					if ( onMarker )
-						sbPageEditor.stripAttributes(elem);
+					if ( onSbObj )
+						sbPageEditor.removeSbObj(elem);
 					else
 						elem.parentNode.removeChild(elem);
 				}
-				sbPageEditor.changed1 = true;
 			}
 		}
 	},
@@ -633,6 +787,18 @@ var sbDOMEraser = {
 		}
 	},
 
+	_setOutline : function(aElement, outline)
+	{
+		aElement.setAttribute("data-sb-old-outline", aElement.style.outline);
+		aElement.style.outline = outline;
+	},
+
+	_clearOutline : function(aElement)
+	{
+		aElement.style.outline = aElement.getAttribute("data-sb-old-outline");
+		if ( !aElement.getAttribute("style") ) aElement.removeAttribute("style");
+		aElement.removeAttribute("data-sb-old-outline");
+	}
 };
 
 
@@ -651,33 +817,49 @@ var sbAnnotationService = {
 		if ( sbDOMEraser.enabled ) return;
 		if ( aEvent.type == "mousedown" )
 		{
-			switch ( aEvent.originalTarget.className )
+			switch ( sbPageEditor._getSbObjectType(aEvent.originalTarget) )
 			{
-				case "scrapbook-sticky" : case "scrapbook-sticky scrapbook-sticky-relative" :
+				case "sticky" :
 					if ( aEvent.originalTarget.childNodes.length != 2 ) return;
 					sbAnnotationService.editSticky(aEvent.originalTarget);
 					break;
-				case "scrapbook-block-comment" :
-					sbAnnotationService.createSticky([aEvent.originalTarget.previousSibling, aEvent.originalTarget.firstChild.data]);
-					aEvent.originalTarget.parentNode.removeChild(aEvent.originalTarget);
+				case "sticky-header" :
+				case "sticky-footer" :
+					var sticky = aEvent.originalTarget.parentNode;
+					if (sticky.getAttribute("data-sb-active")==="1") {
+						sbAnnotationService.startDrag(aEvent);
+					}
 					break;
-				case "scrapbook-inline" : case "scrapbook-inline-comment" :
+				case "inline" :
 					sbAnnotationService.editInline(aEvent.originalTarget);
 					break;
-				case "scrapbook-sticky-header" : case "scrapbook-sticky-footer" :
-					sbAnnotationService.startDrag(aEvent);
+				case "block-comment" :
+					sbAnnotationService.createSticky([aEvent.originalTarget.previousSibling, aEvent.originalTarget.firstChild.data]);
+					aEvent.originalTarget.parentNode.removeChild(aEvent.originalTarget);
 					break;
 			}
 		}
 		else if ( aEvent.type == "mousemove" ) sbAnnotationService.onDrag(aEvent);
 		else if ( aEvent.type == "mouseup"   ) sbAnnotationService.stopDrag(aEvent);
+		else if ( aEvent.type == "click" )
+		{
+			switch ( sbPageEditor._getSbObjectType(aEvent.originalTarget) )
+			{
+				case "sticky-save" :
+					sbAnnotationService.saveSticky(aEvent.originalTarget.parentNode.parentNode);
+					break;
+				case "sticky-delete" :
+					sbAnnotationService.deleteSticky(aEvent.originalTarget.parentNode.parentNode);
+					break;
+			}
+		}
 	},
 
 	createSticky : function(aPreset)
 	{
 		var win = sbCommonUtils.getFocusedWindow();
 		if ( win.document.body instanceof HTMLFrameSetElement ) win = win.frames[0];
-		sbPageEditor.allowUndo(win.document);
+		sbPageEditor.allowUndo();
 		var targetNode;
 		if ( aPreset ) {
 			targetNode = aPreset[0];
@@ -698,6 +880,7 @@ var sbAnnotationService = {
 		if ( !win.document.getElementById("scrapbook-sticky-css") )
 		{
 			var linkNode = win.document.createElement("link");
+			linkNode.setAttribute("data-sb-obj", "stylesheet");
 			linkNode.setAttribute("media", "all");
 			linkNode.setAttribute("href", "chrome://scrapbook/skin/annotation.css");
 			linkNode.setAttribute("type", "text/css");
@@ -709,12 +892,17 @@ var sbAnnotationService = {
 			headNode.appendChild(linkNode);
 			headNode.appendChild(win.document.createTextNode("\n"));
 		}
-		this.editSticky(div);
-		sbPageEditor.changed1 = true;
+		this._editSticky(div);
 		sbPageEditor.disableTemporary(500);
 	},
 
 	editSticky : function(oldElem)
+	{
+		sbPageEditor.allowUndo();
+		this._editSticky(oldElem);
+	},
+
+	_editSticky : function(oldElem)
 	{
 		var newElem = this.duplicateElement(
 			!(oldElem.parentNode instanceof HTMLBodyElement), true, 
@@ -727,7 +915,22 @@ var sbAnnotationService = {
 		oldElem.parentNode.replaceChild(newElem, oldElem);
 		this.adjustTextArea(newElem);
 		setTimeout(function(){ newElem.firstChild.nextSibling.focus(); }, 100);
-		sbPageEditor.changed1 = true;
+	},
+
+	saveSticky : function(sticky)
+	{
+		var header = sticky.firstChild;
+		var textarea = header.nextSibling;
+		var footer = sticky.lastChild;
+		sticky.replaceChild(sticky.ownerDocument.createTextNode(textarea.value), textarea);
+		sticky.removeChild(footer);
+		sticky.removeAttribute("data-sb-active");
+		header.removeAttribute("data-sb-active");
+	},
+
+	deleteSticky : function(sticky)
+	{
+		sticky.parentNode.removeChild(sticky);
 	},
 
 	startDrag : function(aEvent)
@@ -738,7 +941,6 @@ var sbAnnotationService = {
 		this.offsetY = aEvent.clientY - parseInt(this.target.style[this.isMove ? "top"  : "height"], 10);
 		aEvent.view.document.addEventListener("mousemove", this.handleEvent, true);
 		aEvent.view.document.addEventListener("mouseup",   this.handleEvent, true);
-		sbPageEditor.changed1 = true;
 	},
 
 	onDrag : function(aEvent)
@@ -767,18 +969,23 @@ var sbAnnotationService = {
 		var mainDiv = window.content.document.createElement("DIV");
 		var headDiv = window.content.document.createElement("DIV");
 		headDiv.className = "scrapbook-sticky-header";
+		headDiv.setAttribute("data-sb-obj", "sticky-header");
 		mainDiv.appendChild(headDiv);
 		if ( isEditable )
 		{
+			mainDiv.setAttribute("data-sb-active", "1");
+			if ( !isRelative ) headDiv.setAttribute("data-sb-active", "1");
 			var textArea = window.content.document.createElement("TEXTAREA");
 			var footDiv  = window.content.document.createElement("DIV");
 			var button1  = window.content.document.createElement("INPUT");
 			var button2  = window.content.document.createElement("INPUT");
 			button1.setAttribute("type", "image"); button1.setAttribute("src", "chrome://scrapbook/skin/sticky_save.png");
+			button1.setAttribute("data-sb-obj", "sticky-save");
 			button2.setAttribute("type", "image"); button2.setAttribute("src", "chrome://scrapbook/skin/sticky_delete.png");
-			button1.setAttribute("onclick", "this.parentNode.parentNode.appendChild(document.createTextNode(this.parentNode.previousSibling.value));this.parentNode.parentNode.removeChild(this.parentNode.previousSibling);this.parentNode.parentNode.removeChild(this.parentNode);");
-			button2.setAttribute("onclick", "this.parentNode.parentNode.parentNode.removeChild(this.parentNode.parentNode);");
+			button2.setAttribute("data-sb-obj", "sticky-delete");
 			footDiv.className = "scrapbook-sticky-footer";
+			footDiv.setAttribute("data-sb-obj", "sticky-footer");
+			footDiv.setAttribute("data-sb-active", "1");
 			footDiv.appendChild(button1); footDiv.appendChild(button2);
 			mainDiv.appendChild(textArea); mainDiv.appendChild(footDiv);
 		}
@@ -790,7 +997,8 @@ var sbAnnotationService = {
 		}
 		mainDiv.style.width  = (aWidth  || this.DEFAULT_WIDTH)  + "px";
 		mainDiv.style.height = (aHeight || this.DEFAULT_HEIGHT) + "px";
-		mainDiv.className = "scrapbook-sticky" + (isRelative ? " scrapbook-sticky-relative" : "");
+		mainDiv.setAttribute("data-sb-obj", "sticky");
+		mainDiv.className = "scrapbook-sticky" + (isRelative ? " scrapbook-sticky-relative" : "");  // for compatibility
 		return mainDiv;
 	},
 
@@ -799,24 +1007,23 @@ var sbAnnotationService = {
 	{
 		var sel = sbPageEditor.getSelection();
 		if ( !sel ) return;
-		sbPageEditor.allowUndo(sbPageEditor.focusedWindow.document);
+		sbPageEditor.allowUndo();
 		var ret = {};
 		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbBrowserOverlay.STRING.getFormattedString("EDIT_INLINE", [sbCommonUtils.crop(sel.toString(), 32)]), ret, null, {}) ) return;
 		if ( !ret.value ) return;
-		var attr = { style : "border-bottom: 2px dotted #FF3333; cursor: help;", class : "scrapbook-inline", title : ret.value };
+		var attr = { style : "border-bottom: 2px dotted #FF3333; cursor: help;", "data-sb-obj" : "inline" , class : "scrapbook-inline", title : ret.value };
 		sbHighlighter.set(sbPageEditor.focusedWindow, sel, "span", attr);
-		sbPageEditor.changed1 = true;
 	},
 
 	editInline : function(aElement)
 	{
+		sbPageEditor.allowUndo();
 		var ret = { value : aElement.getAttribute("title") };
 		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbBrowserOverlay.STRING.getFormattedString("EDIT_INLINE", [sbCommonUtils.crop(aElement.textContent, 32)]), ret, null, {}) ) return;
 		if ( ret.value )
 			aElement.setAttribute("title", ret.value);
 		else
-			sbPageEditor.stripAttributes(aElement);
-		sbPageEditor.changed1 = true;
+			sbPageEditor.removeSbObj(aElement);
 	},
 
 
@@ -824,7 +1031,7 @@ var sbAnnotationService = {
 	{
 		var sel = sbPageEditor.getSelection();
 		if ( !sel ) return;
-		sbPageEditor.allowUndo(sbPageEditor.focusedWindow.document);
+		sbPageEditor.allowUndo();
 		var attr = {};
 		if ( aFlag == "L" )
 		{
@@ -832,6 +1039,7 @@ var sbAnnotationService = {
 			if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook - " + aLabel, sbPageEditor.STRING.getString("ADDRESS")+":", ret, null, {}) ) return;
 			if ( !ret.value ) return;
 			attr["href"] = ret.value;
+			attr["data-sb-obj"] = "link-url";
 		}
 		else
 		{
@@ -850,10 +1058,14 @@ var sbAnnotationService = {
 			} catch(ex) {
 				return;
 			}
+<<<<<<< HEAD
 			attr["href"] = sbCommonUtils.getFileName(sbCommonUtils.IO.newFileURI(FP.file).spec);
+=======
+			attr["href"] = ScrapBookUtils.getFileName(ScrapBookUtils.IO.newFileURI(FP.file).spec);
+			attr["data-sb-obj"] = "link-file";
+>>>>>>> master
 		}
 		sbHighlighter.set(sbPageEditor.focusedWindow, sel, "a", attr);
-		sbPageEditor.changed1 = true;
 	},
 
 };

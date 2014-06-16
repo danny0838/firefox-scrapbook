@@ -145,9 +145,9 @@ var sbTradeService = {
 			if (col.index == 0)
 				return this._items[row][4];
 		};
-		treeView.getCellProperties = function(row, col, properties) {
-			if (col.index == 0)
-				properties.AppendElement(ATOM_SERVICE.getAtom(this._items[row][7]));
+		treeView.getCellProperties = function(row, col) {
+			if (col.index != 0) return
+			return ATOM_SERVICE.getAtom(this._items[row][7]);
 		};
 		treeView.cycleHeader = function(col) {
 			sbCustomTreeUtil.sortItems(sbTradeService, col.element);

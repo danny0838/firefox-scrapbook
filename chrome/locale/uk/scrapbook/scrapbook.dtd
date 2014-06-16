@@ -14,6 +14,9 @@
 <!ENTITY sb.tools.output "Відображення дерева у HTML">
 <!ENTITY sb.tools.repair "Аварійне відновлення">
 <!ENTITY sb.tools.addons "Додаткові функції">
+<<<<<<< HEAD
 <!ENTITY sb.tools.homepage "Домашня сторінка">
+=======
+>>>>>>> master
 <!ENTITY sb.note.opentab "Відкрити у вкладці">
 <!ENTITY sb.note.close "Закрити">

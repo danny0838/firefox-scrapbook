@@ -209,10 +209,10 @@ var sbSearchResult =
 		{
 			if ( col.index == 0 ) return this._items[row][7];
 		};
-		treeView.getCellProperties = function(row, col, properties)
+		treeView.getCellProperties = function(row, col)
 		{
-			if ( col.index != 0 ) return;
-			properties.AppendElement(ATOM_SERVICE.getAtom(this._items[row][6]));
+			if ( col.index != 0 ) return "";
+			return ATOM_SERVICE.getAtom(this._items[row][6]);
 		};
 		document.getElementById("sbTree").view = treeView;
 		var headerLabel1 = gCacheString.getFormattedString("RESULTS_FOUND", [this.hit] );

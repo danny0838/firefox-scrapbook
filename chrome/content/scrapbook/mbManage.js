@@ -178,14 +178,14 @@ MultiBookTreeView.prototype = {
 		return this._data.length;
 	},
 	selection: null,
-	getRowProperties: function(index, properties) {},
-	getCellProperties: function(row, col, properties) {
+	getRowProperties: function(index) {},
+	getCellProperties: function(row, col) {
 		if (this._data[row][kActiveCol]) {
 			var atomSvc = Cc["@mozilla.org/atom-service;1"].getService(Ci.nsIAtomService);
-			properties.AppendElement(atomSvc.getAtom("active"));
+			return atomSvc.getAtom("active");
 		}
 	},
-	getColumnProperties: function(col, properties) {},
+	getColumnProperties: function(col) {},
 	isContainer: function(index) { return false; },
 	isContainerOpen: function(index) { return false; },
 	isContainerEmpty: function(index) { return false; },

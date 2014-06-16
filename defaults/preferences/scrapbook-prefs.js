@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 pref("extensions.scrapbookplus.description", "chrome://scrapbook/locale/about.properties");
 
 pref("scrapbook.ui.contextMenu", true);
@@ -26,3 +27,39 @@ pref("scrapbook.showDetailOnDrop", false);
 pref("scrapbook.notifyOnComplete", true);
 pref("extensions.scrapbookplus.useDropDownList", false);
 
+=======
+pref("extensions.scrapbook.ui.contextMenu", true);
+pref("extensions.scrapbook.ui.contextSubMenu", false);
+pref("extensions.scrapbook.ui.bookmarkMenu", true);
+pref("extensions.scrapbook.ui.menuBar", true);
+pref("extensions.scrapbook.ui.menuBar.icon", false);
+pref("extensions.scrapbook.ui.toolsMenu", false);
+pref("extensions.scrapbook.ui.statusBar", true);
+pref("extensions.scrapbook.ui.folderList", "");
+pref("extensions.scrapbook.ui.folderList.maxEntries", 5);
+pref("extensions.scrapbook.tabs.open", false);
+pref("extensions.scrapbook.tabs.openSource", false);
+pref("extensions.scrapbook.tabs.combinedView", true);
+pref("extensions.scrapbook.tabs.searchResult", true);
+pref("extensions.scrapbook.tabs.note", false);
+pref("extensions.scrapbook.data.default", true);
+pref("extensions.scrapbook.data.path", "");
+pref("extensions.scrapbook.data.title", "");
+pref("extensions.scrapbook.detail.custom", "pdf, doc");
+pref("extensions.scrapbook.multibook.enabled", false);
+pref("extensions.scrapbook.note.fontsize", 16);
+pref("extensions.scrapbook.note.linefeed", true);
+pref("extensions.scrapbook.note.preview", false);
+pref("extensions.scrapbook.trade.path", "");
+pref("extensions.scrapbook.tree.unshift", false);
+pref("extensions.scrapbook.tree.autoCollapse", false);
+pref("extensions.scrapbook.confirmDelete", true);
+pref("extensions.scrapbook.showDetailOnDrop", false);
+pref("extensions.scrapbook.notifyOnComplete", true);
+pref("extensions.scrapbook.key.menubar", "C");
+pref("extensions.scrapbook.key.sidebar", "K");
+pref("extensions.scrapbook.key.save", "");
+pref("extensions.scrapbook.key.saveAs", "");
+pref("extensions.scrapbook.key.saveAllTabs", "");
+pref("extensions.scrapbook.key.bookmark", "");
+>>>>>>> master
