@@ -1,3 +1,9 @@
+Scrapbook X 1.7.4
+----------------
+
+- Fixed the min compatible Firefox version.
+
+
 Scrapbook X 1.7.3
 ----------------
 
