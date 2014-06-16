@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!ENTITY sb.capture.partial "Capture Selection">
 <!ENTITY sb.capture.partial.as "Capture Selection As">
 <!ENTITY sb.capture.entire "Capture Page">
@@ -17,18 +16,3 @@
 <!ENTITY sb.key.capture "L">
 <!ENTITY sb.key.capture.as "K">
 <!ENTITY sb.key.bookmark "J">
-=======
-<!ENTITY sb.save.partial "Save Selection">
-<!ENTITY sb.save.partial.as "Save Selection As">
-<!ENTITY sb.save.entire "Save Page">
-<!ENTITY sb.save.entire.as "Save Page As">
-<!ENTITY sb.save.frame "Save Frame">
-<!ENTITY sb.save.frame.as "Save Frame As">
-<!ENTITY sb.save.target "Save Link">
-<!ENTITY sb.save.target.as "Save Link As">
-<!ENTITY sb.save.alltabs "Save All Tabs">
-<!ENTITY sb.save.bookmark "Save As Bookmark">
-<!ENTITY sb.sidebar "Show in Sidebar">
-<!ENTITY sb.menubar "Menubar">
-<!ENTITY sb.editbefore "Edit Before Save">
->>>>>>> release-1.6.0.a1

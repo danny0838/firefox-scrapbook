@@ -1,10 +1,5 @@
 <!ENTITY sb.trade.import "Import">
 <!ENTITY sb.trade.export "Export">
-<<<<<<< HEAD
 <!ENTITY sb.trade.time "Exported Time">
 <!ENTITY sb.trade.restore "Import with restoring folder structure">
-=======
-<!ENTITY sb.trade.time "Exported">
-<!ENTITY sb.trade.restore "Import and restore folder structure">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.trade.remove "Remove files after importing">

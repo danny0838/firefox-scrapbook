@@ -24,37 +24,20 @@ var sbHighlighter = {
 
 	updatePopup : function()
 	{
-<<<<<<< HEAD
 		var idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 6;
 		document.getElementById("ScrapBookHighlighterM" + idx).setAttribute("checked", "true");
 		for ( idx = 6; idx > 0; idx-- )
 		{
 			var cssText = sbCommonUtils.copyUnicharPref("scrapbook.highlighter.style." + idx, this.PRESET_STYLES[idx]);
 			this.decorateElement(document.getElementById("ScrapBookHighlighterM" + idx), cssText);
-=======
-		var idx = document.getElementById("ScrapBookHighlighter").getAttribute("color");
-		if (idx < 1 || idx > 4)
-			idx = 4;
-		document.getElementById("ScrapBookHighlighter" + idx).setAttribute("checked", "true");
-		for ( idx = 4; idx > 0; idx-- )
-		{
-			var cssText = ScrapBookUtils.getPref("highlighter.style." + idx, this.PRESET_STYLES[idx]);
-			this.decorateElement(document.getElementById("ScrapBookHighlighter" + idx), cssText);
->>>>>>> release-1.6.0.a1
 		}
 	},
 
 	decorateElement : function(aElement, aCssText)
 	{
-<<<<<<< HEAD
 		if (aElement.localName == "menuitem") aElement = document.getAnonymousElementByAttribute(aElement, "class", "menu-iconic-text");
 		aElement.style.cssText = aCssText;
 		aElement.setAttribute("tooltiptext", aCssText);
-=======
-		if (aElement.localName == "menuitem")
-			aElement = document.getAnonymousElementByAttribute(aElement, "class", "menu-iconic-text");
-		aElement.style.cssText = aCssText;
->>>>>>> release-1.6.0.a1
 	},
 
 	set : function(aWindow, aSelection, aNodeName, aAttributes)
@@ -67,7 +50,6 @@ var sbHighlighter = {
 			var endC	= range.endContainer;
 			var sOffset	= range.startOffset;
 			var eOffset	= range.endOffset;
-<<<<<<< HEAD
 			var sameNode = ( startC == endC );
 //alert("startC - "+startC+"\nendC - "+endC+"\nsOffset - "+sOffset+"\neOffset - "+eOffset);
 			if ( aNodeName == "a" && !sameNode )
@@ -132,94 +114,6 @@ var sbHighlighter = {
 			range.collapse( true ); 
 			range.detach();
 		}
-=======
-
-			var sameNode = ( startC == endC );
-
-			if ( aNodeName == "a" && !sameNode )
-			{
-				ScrapBookUtils.alert("ERROR: Can't attach link across tags."); return;
-			}
-
-			if ( ! sameNode || ! this._isTextNode( startC ) ) { 
-
-				var nodeWalker 
-					= doc.createTreeWalker(
-							range.commonAncestorContainer,
-							NodeFilter.SHOW_TEXT,
-							this._acceptNode,
-							false
-					  );
-
-				nodeWalker.currentNode = startC; 
-
-				for ( var txtNode = nodeWalker.nextNode(); 
-					  txtNode && txtNode != endC; 
-					  txtNode = nodeWalker.nextNode() 
-					) {
-
-					nodeWalker.currentNode 
-						= this._wrapTextNodeWithSpan(
-								doc,
-								txtNode,
-								this._createNode( 
-									aWindow, 
-									aNodeName, 
-									aAttributes, 
-									this.nodePositionInRange.MIDDLE 
-								)
-						); 
-				}
-			}
-
-			if ( this._isTextNode( endC ) ) 
-				endC.splitText( eOffset );
-			
-			if ( ! sameNode) 
-				this._wrapTextNodeWithSpan(
-						doc,
-						endC,
-						this._createNode( 
-							aWindow, 
-							aNodeName, 
-							aAttributes,
-							this.nodePositionInRange.END
-						)
-				); 
-
-			if ( this._isTextNode( startC ) ) { 
-				var secondHalf = startC.splitText( sOffset );
-				if ( sameNode ) {
-					this._wrapTextNodeWithSpan(
-							doc,
-							secondHalf,
-							this._createNode( 
-								aWindow, 
-								aNodeName, 
-								aAttributes,
-								this.nodePositionInRange.SINGLE
-							)
-					);
-				}
-				else {
-					this._wrapTextNodeWithSpan(
-							doc,
-							secondHalf,
-							this._createNode( 
-								aWindow, 
-								aNodeName, 
-								aAttributes,
-								this.nodePositionInRange.START
-							)
-					);
-				}
-			} 
-
-			range.collapse( true ); 
-
-		}
-
->>>>>>> release-1.6.0.a1
 	},
 
 	_isTextNode : function( aNode ) 

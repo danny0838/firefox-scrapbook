@@ -1,8 +1,4 @@
 <!ENTITY sb.prefs.main "Allgemein">
-<<<<<<< HEAD
-=======
-<!ENTITY sb.prefs.keys "Tasten">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.prefs.tabs "Tabs">
 <!ENTITY sb.prefs.save "Archivieren">
 <!ENTITY sb.prefs.edit "Bearbeiten">
@@ -10,11 +6,7 @@
 <!ENTITY sb.prefs.advanced "Erweitert">
 <!ENTITY sb.prefs.ui.contextMenu "ScrapBook-Einträge im Kontextmenü der Seite anzeigen">
 <!ENTITY sb.prefs.ui.contextSubMenu "Einträge in Untermenü zusammenfassen">
-<<<<<<< HEAD
 <!ENTITY sb.prefs.ui.bookmarkMenu "Eintrag &quot;Lesezeichen mit ScrapBook erstellen&quot; anzeigen">
-=======
-<!ENTITY sb.prefs.ui.bookmark "Eintrag &quot;Als Lesezeichen archivieren&quot; anzeigen">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Bis zu">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "zuletzt verwendete Ordner anzeigen">
 <!ENTITY sb.prefs.ui.menuBar "ScrapBook-Eintrag in der Menüleiste anzeigen">
@@ -37,7 +29,6 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "Ende eines Ordners erstellen">
 <!ENTITY sb.prefs.showDetailOnDrop "Dialog &quot;Archivierungsdetails&quot; anzeigen, wenn eine Archivierung durch Ziehen mit der Maus in die Sidebar erfolgt">
 <!ENTITY sb.prefs.notifyOnComplete "Meldung nach Abschluss der Archivierung anzeigen">
-<<<<<<< HEAD
 <!ENTITY sb.prefs.viewer "Datei-Manager">
 <!ENTITY sb.prefs.viewer.default "Standard">
 <!ENTITY sb.prefs.viewer.default.explorer "Explorer">
@@ -46,8 +37,3 @@
 <!ENTITY sb.button.browse "Durchsuchen">
 <!ENTITY sb.button.show "Dateien anzeigen">
 <!ENTITY sbp.prefs.useDropDownList "verwende DropDownListe anstelle der Knöpfe für die Hervorhebungsstufen">
-=======
-<!ENTITY sb.button.customize "Anpassen">
-<!ENTITY sb.button.browse "Durchsuchen">
-<!ENTITY sb.button.show "Dateien anzeigen">
->>>>>>> release-1.6.0.a1

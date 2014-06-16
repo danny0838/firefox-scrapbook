@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 <!ENTITY sb.detail.linked.timeout "超时 (秒)">
 <!ENTITY sb.detail.linked.charset "字符集">
 <!ENTITY sb.detail "详细信息">
-=======
-<!ENTITY sb.detail.title "保存详细">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.detail.new.folder "新建文件夹">
 <!ENTITY sb.detail.select.folder "选择文件夹">
 <!ENTITY sb.detail.option "选项">
@@ -16,11 +12,7 @@
 <!ENTITY sb.detail.linked.movie "视频">
 <!ENTITY sb.detail.linked.archive "压缩文件">
 <!ENTITY sb.detail.linked.custom "自定义">
-<<<<<<< HEAD
 <!ENTITY sb.detail.linked.page "深层获取">
-=======
-<!ENTITY sb.detail.linked.page2 "深入保存">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.detail.linked.page.depth "获取链接层数">
 <!ENTITY sb.detail.linked.page.text "全部获取完成后，所有页面将保持彼此的链接并创建网站地图。">
 <!ENTITY sb.detail.warnAboutRenew "注意: “重新获取” 会覆盖以前保存的页面。">

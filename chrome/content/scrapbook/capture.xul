@@ -2,32 +2,20 @@
 
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 <?xml-stylesheet href="chrome://scrapbook/skin/capture.css" type="text/css" ?>
-<<<<<<< HEAD
 <?xml-stylesheet href="chrome://scrapbook/skin/sbpExtra/sbpCapture.css" type="text/css" ?>
-=======
->>>>>>> release-1.6.0.a1
 
 <!DOCTYPE window SYSTEM "chrome://scrapbook/locale/capture.dtd">
 
 <window id="sbCaptureWindow"
-<<<<<<< HEAD
         title="&sb.capture; - ScrapBook"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         style="width: 800px; height: 600px;"
-=======
-        title="&sb.save; - ScrapBook"
-        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        style="width: 360px;"
->>>>>>> release-1.6.0.a1
         onload="SB_initCapture();"
         onclose="event.preventDefault();sbCaptureTask.abort();"
         windowtype="scrapbook">
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-<<<<<<< HEAD
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
-=======
->>>>>>> release-1.6.0.a1
 	<script type="application/x-javascript" src="chrome://scrapbook/content/saver.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/capture.js" />
 
@@ -36,7 +24,6 @@
 		<stringbundle id="sbOverlayString" src="chrome://scrapbook/locale/overlay.properties" />
 	</stringbundleset>
 
-<<<<<<< HEAD
 	<hbox>
 		<textbox id="sbpCaptureProgress" readonly="true" width="100"/>
 		<textbox id="sbCaptureTextbox"   readonly="true" flex="1"/>
@@ -116,32 +103,6 @@
 		<button id="sbCaptureStartButton" label="&sb.capture.start;" oncommand="sbCaptureTask.activate();" hidden="true" />
 		<button id="sbCaptureCancelButton" label="&sb.capture.abort;" oncommand="sbCaptureTask.abort();" />
 		<button id="sbCaptureFinishButton" label="&sb.capture.finish;" oncommand="sbCaptureTask.closeWindow();" hidden="true" />
-=======
-	<textbox id="sbCaptureTextbox" readonly="true" />
-
-	<listbox id="sbCaptureListbox" rows="1" flex="1" />
-
-	<browser id="sbCaptureBrowser" type="content" collapsed="true" />
-
-	<hbox>
-		<toolbarbutton id="sbCaptureFilterButton" type="menu" label="&sb.save.filter;" hidden="true">
-			<menupopup>
-				<menuitem type="radio" label="&sb.save.filter.domain;"   oncommand="sbCaptureTask.applyFilter('D');" />
-				<menuitem type="radio" label="&sb.save.filter.level;"    oncommand="sbCaptureTask.applyFilter('L');" />
-				<menuitem type="radio" label="&sb.save.filter.string;"   oncommand="sbCaptureTask.applyFilter('S');" />
-				<menuitem type="radio" label="&sb.save.filter.checkon;"  oncommand="sbCaptureTask.applyFilter('N');" checked="true" />
-				<menuitem type="radio" label="&sb.save.filter.checkoff;" oncommand="sbCaptureTask.applyFilter('F');" />
-				<menuseparator />
-				<menuitem label="&sb.save.filter.invert;" oncommand="sbCaptureTask.applyFilter('I');" />
-			</menupopup>
-		</toolbarbutton>
-		<toolbarseparator hidden="true" />
-		<button id="sbCapturePauseButton" label="&sb.save.pause;" oncommand="sbCaptureTask.pause();" />
-		<button id="sbCaptureStartButton" label="&sb.save.start;" oncommand="sbCaptureTask.activate();" hidden="true" />
-		<button id="sbCaptureSkipButton"  label="&sb.save.skip;"  oncommand="sbCaptureTask.next(true);" disabled="true" />
-		<spacer flex="1" />
-		<button label="&sb.save.abort;" oncommand="sbCaptureTask.abort();" />
->>>>>>> release-1.6.0.a1
 	</hbox>
 
 </window>

@@ -14,11 +14,7 @@
 ]>
 
 <dialog id="sbDetailDialog"
-<<<<<<< HEAD
         title="ScrapBook - &sb.detail;"
-=======
-        title="ScrapBook - &sb.detail.title;"
->>>>>>> release-1.6.0.a1
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         style="width: 400px;"
         persist="screenX screenY"
@@ -27,7 +23,6 @@
         ondialogcancel="sbCaptureOptions.cancel();">
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-<<<<<<< HEAD
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/detail.js" />
 
@@ -37,14 +32,6 @@
 		<tabs orient="horizontal">
 			<tab label="&sb.prop.general;" />
 			<tab label="&sb.prop.comment;" id="sbDetailTabComment" />
-=======
-	<script type="application/x-javascript" src="chrome://scrapbook/content/detail.js" />
-
-	<tabbox flex="1">
-		<tabs orient="horizontal">
-			<tab label="&sb.prop.general;" />
-			<tab label="&sb.prop.comment;" />
->>>>>>> release-1.6.0.a1
 		</tabs>
 		<tabpanels flex="1">
 			<tabpanel orient="vertical">
@@ -88,11 +75,7 @@
 					</hbox>
 				</groupbox>
 				<groupbox id="sbDetailInDepthBox" group="capture-options">
-<<<<<<< HEAD
 					<caption label="&sb.detail.linked.page;" />
-=======
-					<caption label="&sb.detail.linked.page2;" />
->>>>>>> release-1.6.0.a1
 					<hbox align="center">
 						<label id="sbDetailInDepthLabel" value="&sb.detail.linked.page.depth;:" />
 						<radiogroup id="sbDetailInDepthRadioGroup" orient="horizontal" onselect="sbCaptureOptions.inDepth = this.selectedIndex;">
@@ -105,7 +88,6 @@
 					</hbox>
 					<!--<description flex="1">&sb.detail.linked.page.text;</description>-->
 				</groupbox>
-<<<<<<< HEAD
 				<groupbox id="sbDetailTimeoutBox" group="capture-options">
 					<caption label="&sb.detail.linked.timeout;" />
 					<hbox align="center">
@@ -126,8 +108,6 @@
 						</radiogroup>
 					</hbox>
 				</groupbox>
-=======
->>>>>>> release-1.6.0.a1
 				<description id="sbDetailWarnAboutRenew"  flex="1" style="color:red;" hidden="true">&sb.detail.warnAboutRenew;</description>
 				<description id="sbDetailWarnAboutScript" flex="1" style="color:red;">&sb.detail.warnAboutScript;</description>
 			</tabpanel>

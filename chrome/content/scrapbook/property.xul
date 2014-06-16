@@ -19,10 +19,7 @@
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/property.js" />
-<<<<<<< HEAD
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
-=======
->>>>>>> release-1.6.0.a1
 
 	<stringbundle id="sbPropString" src="chrome://scrapbook/locale/property.properties" />
 
@@ -48,11 +45,7 @@
 							</hbox>
 						</row>
 						<row id="sbPropSourceRow" align="center">
-<<<<<<< HEAD
 							<label control="sbPropSource" value="&sbp.prop.url;:" />
-=======
-							<label control="sbPropSource" value="&sb.prop.url;:" />
->>>>>>> release-1.6.0.a1
 							<textbox id="sbPropSource" />
 						</row>
 						<row id="sbPropIconRow" align="center">
@@ -64,11 +57,7 @@
 										<menuitem label="&sb.prop.icon.default;"    oncommand="sbPropService.setDefaultIcon();" />
 										<menuitem label="&sb.prop.icon.favicon;..." oncommand="sbPropService.pickupIcon('F',this.label);" />
 										<menuitem label="&sb.prop.icon.custom;..."  oncommand="sbPropService.pickupIcon('U',this.label);" />
-<<<<<<< HEAD
 										<menuitem label="&sbp.prop.url;..." oncommand="sbPropService.setIconURL();" />
-=======
-										<menuitem label="&sb.prop.url;..." oncommand="sbPropService.setIconURL();" />
->>>>>>> release-1.6.0.a1
 									</menupopup>
 								</toolbarbutton>
 								<spacer flex="1" />

@@ -2,10 +2,7 @@
 <!ENTITY sb.combine.preview "預覽">
 <!ENTITY sb.combine.preview.d "確認預覽結果後，請按下「合併」鈕。">
 <!ENTITY sb.combine.option.remove "合併後刪除原頁面">
-<<<<<<< HEAD
 <!ENTITY sbp.combine.up "檔案上移">
 <!ENTITY sbp.combine.down "檔案下移">
 <!ENTITY sbp.combine.remove "移除檔案">
 <!ENTITY sbp.combine.newTitle "新標題">
-=======
->>>>>>> release-1.6.0.a1

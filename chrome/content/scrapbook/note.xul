@@ -12,18 +12,11 @@
         onunload="sbNoteService2.finalize(false);">
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-<<<<<<< HEAD
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapnote.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/note.js" />
 
 	<browser id="sbNoteBrowser" type="content-primary" flex="3" collapsed="true" disablehistory="true" onload="event.stopPropagation();" />
-=======
-	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapnote.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/note.js" />
-
-	<browser id="sbNoteBrowser" type="content-primary" flex="3" collapsed="true" onload="event.stopPropagation();" />
->>>>>>> release-1.6.0.a1
 	<splitter id="sbSplitter" class="plain" collapsed="true" />
 	<vbox id="sbNoteEditor" flex="2">
 		<hbox id="sbNoteHeader" class="sb-header" align="center">
@@ -56,11 +49,7 @@
 		<toolbarbutton id="sbNoteToolbarN" accesskey="&sb.note.normalview.accesskey;" label="&sb.note.normalview;" disabled="true" oncommand="sbNoteService2.toggleHTMLView(false);" />
 		<toolbarbutton type="menu" label="&sb.note.tools;" accesskey="&sb.note.tools.accesskey;">
 			<menupopup>
-<<<<<<< HEAD
 				<menuitem label="&sb.note.help;" oncommand="sbCommonUtils.loadURL('chrome://scrapbook/locale/templateHelp.html', true);" />
-=======
-				<menuitem label="&sb.note.help;" oncommand="ScrapBookUtils.loadURL('chrome://scrapbook/locale/templateHelp.html', true);" />
->>>>>>> release-1.6.0.a1
 				<menuseparator />
 				<menuitem id="sbNoteToolbarL" type="checkbox" label="&sb.note.autolinefeed;" tooltiptext="&sb.note.autolinefeed.t;" />
 				<menuitem id="sbNoteToolbarT" type="checkbox" label="&sb.note.template;" oncommand="this.getAttribute('checked') ? sbNoteTemplate.load() : sbNoteTemplate.exit(false);" />
@@ -79,11 +68,7 @@
 		</toolbarbutton>
 		<toolbarbutton id="sbNoteToolbarP" accesskey="&sb.note.print.accesskey;" label="&sb.note.print;" oncommand="sbNoteService2.initHTMLView(); sbNoteService2.BROWSER.contentWindow.print();" />
 		<spacer flex="1" />
-<<<<<<< HEAD
 		<toolbarbutton class="sb-header-locate" oncommand="sbCommonUtils.WINDOW.getMostRecentWindow('navigator:browser').sbBrowserOverlay.execLocate(sbNoteService.resource);" />
-=======
-		<toolbarbutton class="sb-header-locate" oncommand="ScrapBookUtils.getBrowserWindow().ScrapBookBrowserOverlay.execLocate(sbNoteService.resource);" />
->>>>>>> release-1.6.0.a1
 		<toolbarbutton class="sb-header-exit" id="sbNoteToolbarX" accesskey="&sb.note.exit.accesskey;" tooltiptext="&sb.note.exit;" oncommand="sbNoteService2.finalize(true);" />
 	</toolbar>
 

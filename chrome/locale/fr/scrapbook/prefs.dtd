@@ -1,8 +1,4 @@
 <!ENTITY sb.prefs.main "Général">
-<<<<<<< HEAD
-=======
-<!ENTITY sb.prefs.keys "Touches">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.prefs.tabs "Onglets">
 <!ENTITY sb.prefs.save "Sauvegarder">
 <!ENTITY sb.prefs.edit "Éditer">
@@ -10,7 +6,6 @@
 <!ENTITY sb.prefs.advanced "Avancés">
 <!ENTITY sb.prefs.ui.contextMenu "Afficher dans le menu contextuel du navigateur">
 <!ENTITY sb.prefs.ui.contextSubMenu "Sous-menu">
-<<<<<<< HEAD
 <!ENTITY sb.prefs.ui.bookmarkMenu "Afficher le menu &apos;Marquer cette page avec ScrapBook&apos;">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Afficher jusqu&apos;à">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "dossiers récents">
@@ -19,22 +14,11 @@
 <!ENTITY sb.prefs.ui.toolsMenu "Afficher dans le menu &apos;Outils&apos;">
 <!ENTITY sb.prefs.ui.statusBar "Afficher dans la barre d&apos;état">
 <!ENTITY sb.prefs.restart "La modification nécessite un redémarrage de Firefox">
-=======
-<!ENTITY sb.prefs.ui.bookmark "Afficher le menu 'Enregistrer cette page avec ScrapBook'">
-<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Afficher jusqu'à">
-<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "dossiers récents">
-<!ENTITY sb.prefs.ui.menuBar "Afficher dans la barre des menus">
-<!ENTITY sb.prefs.ui.menuBar.icon "Icône">
-<!ENTITY sb.prefs.ui.toolsMenu "Afficher dans le menu 'Outils'">
-<!ENTITY sb.prefs.ui.statusBar "Afficher dans la barre d'état">
-<!ENTITY sb.prefs.restart "La modification nécessite un redémarrage de Firefox.">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.prefs.tabs.tips "Ouvrir dans un nouvel onglet pour les opérations suivantes">
 <!ENTITY sb.prefs.tabs.note "Éditer une note">
 <!ENTITY sb.prefs.data "Emplacement de stockage des données">
 <!ENTITY sb.prefs.data.default "Par défaut (dossier du profil)">
 <!ENTITY sb.prefs.data.custom "Enregistrer les données dans">
-<<<<<<< HEAD
 <!ENTITY sb.prefs.data.tips "Choisissez un répertoire où stocker les données ScrapBook">
 <!ENTITY sb.prefs.multibook.enabled "Activer Multi-ScrapBook">
 <!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook vous permet de configurer des emplacements multiples pour stocker vos données et de basculer rapidement de l&apos;un à l&apos;autre avec un bouton de la barre d&apos;outil.">
@@ -53,18 +37,3 @@
 <!ENTITY sb.button.browse "Parcourir">
 <!ENTITY sb.button.show "Afficher les fichiers">
 <!ENTITY sbp.prefs.useDropDownList "Utiliser la liste déroulante de choix au lieu des boutons pour le surligneur">
-=======
-<!ENTITY sb.prefs.data.tips "Choisissez un répertoire où stocker les données ScrapBook.">
-<!ENTITY sb.prefs.multibook.enabled "Activer Multi-ScrapBook">
-<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook vous permet de configurer des emplacements multiples pour stocker vos données et de basculer rapidement de l'un à l'autre avec un bouton de la barre d'outil.">
-<!ENTITY sb.prefs.confirmDelete "M'alerter lors de la suppression d'élément(s) de l'arborescence">
-<!ENTITY sb.prefs.tree.autoCollapse "Lors de l'ouverture d'un dossier de l'arborescence, fermer automatiquement les autres dossiers">
-<!ENTITY sb.prefs.tree.unshift "Placer un nouvel élément dans">
-<!ENTITY sb.prefs.tree.unshift.top "le haut d'un dossier">
-<!ENTITY sb.prefs.tree.unshift.bottom "le bas d'un dossier">
-<!ENTITY sb.prefs.showDetailOnDrop "Lors d'un glisser-déposer dans le panneau latéral, afficher la boîte de dialogue 'Détail de l'enregistrement'">
-<!ENTITY sb.prefs.notifyOnComplete "Afficher la notification 'Enregistrement terminé'">
-<!ENTITY sb.button.customize "Personnaliser">
-<!ENTITY sb.button.browse "Parcourir">
-<!ENTITY sb.button.show "Afficher les fichiers">
->>>>>>> release-1.6.0.a1

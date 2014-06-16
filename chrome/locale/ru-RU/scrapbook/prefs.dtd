@@ -1,8 +1,4 @@
 <!ENTITY sb.prefs.main "Основные">
-<<<<<<< HEAD
-=======
-<!ENTITY sb.prefs.keys "Сочетания клавиш">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.prefs.tabs "Вкладки">
 <!ENTITY sb.prefs.save "Сохранение">
 <!ENTITY sb.prefs.edit "Изменение">
@@ -10,22 +6,14 @@
 <!ENTITY sb.prefs.advanced "Дополнительно">
 <!ENTITY sb.prefs.ui.contextMenu "Показывать в контекстном меню">
 <!ENTITY sb.prefs.ui.contextSubMenu "Использовать подменю">
-<<<<<<< HEAD
 <!ENTITY sb.prefs.ui.bookmarkMenu "Показывать «Добавить в закладки Scrapbook» в меню">
-=======
-<!ENTITY sb.prefs.ui.bookmark "Показывать меню &apos;Сохранить как закладку&apos;">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Показывать">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "недавно использованных папок">
 <!ENTITY sb.prefs.ui.menuBar "Показывать в панели меню">
 <!ENTITY sb.prefs.ui.menuBar.icon "Значок">
 <!ENTITY sb.prefs.ui.toolsMenu "Показывать в меню «Инструменты»">
 <!ENTITY sb.prefs.ui.statusBar "Показывать в строке состояния">
-<<<<<<< HEAD
 <!ENTITY sb.prefs.restart "Изменения требуют перезапуска Firefox&apos;а">
-=======
-<!ENTITY sb.prefs.restart "Изменения требуют перезапуска Firefox'а">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.prefs.tabs.tips "Открывать в новых вкладках следующие операции">
 <!ENTITY sb.prefs.tabs.note "Изменить заметку">
 <!ENTITY sb.prefs.data "Расположение сохраняемой информации">
@@ -41,7 +29,6 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "конец каталога">
 <!ENTITY sb.prefs.showDetailOnDrop "Показывать диалог «Настройки сохранения страницы» при захвате перетаскиванием на боковую панель">
 <!ENTITY sb.prefs.notifyOnComplete "Показывать сообщение «Сохранение завершено»">
-<<<<<<< HEAD
 <!ENTITY sb.prefs.viewer "Приложение для просмотра файлов">
 <!ENTITY sb.prefs.viewer.default "По умолчанию">
 <!ENTITY sb.prefs.viewer.default.explorer "Explorer">
@@ -50,8 +37,3 @@
 <!ENTITY sb.button.browse "Обзор">
 <!ENTITY sb.button.show "Показать файлы">
 <!ENTITY sbp.prefs.useDropDownList "использовать альтернативный выбор вида маркера">
-=======
-<!ENTITY sb.button.customize "Изменить">
-<!ENTITY sb.button.browse "Обзор">
-<!ENTITY sb.button.show "Показать файлы">
->>>>>>> release-1.6.0.a1

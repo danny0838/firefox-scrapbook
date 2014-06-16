@@ -14,9 +14,6 @@
 <!ENTITY sb.tools.output "导出项目列表">
 <!ENTITY sb.tools.repair "紧急修复">
 <!ENTITY sb.tools.addons "附加功能">
-<<<<<<< HEAD
 <!ENTITY sb.tools.homepage "主页">
-=======
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.note.opentab "在标签页中打开">
 <!ENTITY sb.note.close "关闭">

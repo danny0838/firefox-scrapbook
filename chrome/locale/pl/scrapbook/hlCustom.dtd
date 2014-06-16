@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 <!ENTITY sb.hlCustom.preset "Style predefiniowane">
-=======
-<!ENTITY sb.hlCustom.preset "Predefiniowane style">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.hlCustom.background "Tło">
 <!ENTITY sb.hlCustom.color "Kolor">
 <!ENTITY sb.hlCustom.text "Tekst">

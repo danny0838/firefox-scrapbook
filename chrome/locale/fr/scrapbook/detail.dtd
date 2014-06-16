@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 <!ENTITY sb.detail.linked.timeout "Temporisation (en secondes)">
 <!ENTITY sb.detail.linked.charset "Jeu de caractères">
 <!ENTITY sb.detail "Détail de la capture">
-=======
-<!ENTITY sb.detail.title "Détail de l'enregistrement">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.detail.new.folder "Nouveau dossier">
 <!ENTITY sb.detail.select.folder "Sélectionner le dossier">
 <!ENTITY sb.detail.option "Options">
@@ -16,15 +12,8 @@
 <!ENTITY sb.detail.linked.movie "Vidéo">
 <!ENTITY sb.detail.linked.archive "Archive">
 <!ENTITY sb.detail.linked.custom "Personnalisé">
-<<<<<<< HEAD
 <!ENTITY sb.detail.linked.page "Capture en profondeur">
 <!ENTITY sb.detail.linked.page.depth "Profondeur de capture des liens">
 <!ENTITY sb.detail.linked.page.text "Une fois les captures terminées, toutes les pages seront liées entre elles et un plan du site sera créé.">
 <!ENTITY sb.detail.warnAboutRenew "IMPORTANT : &apos;Capturer à nouveau&apos; remplace la page sauvegardée précédemment.">
-=======
-<!ENTITY sb.detail.linked.page2 "Enregistrement en profondeur">
-<!ENTITY sb.detail.linked.page.depth "Profondeur d'enregistrement des liens">
-<!ENTITY sb.detail.linked.page.text "Une fois les enregistrements terminés, toutes les pages seront liées entre elles et un plan du site sera créé.">
-<!ENTITY sb.detail.warnAboutRenew "IMPORTANT : 'Enregitrer à nouveau' remplace la page sauvegardée précédemment.">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.detail.warnAboutScript "IMPORTANT : JavaScript peut causer des problèmes.">

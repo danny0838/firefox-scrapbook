@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!ENTITY sb.capture.partial "Cattura selezione">
 <!ENTITY sb.capture.partial.as "Cattura selezione con nome">
 <!ENTITY sb.capture.entire "Cattura pagina">
@@ -17,18 +16,3 @@
 <!ENTITY sb.key.capture "C">
 <!ENTITY sb.key.capture.as "o">
 <!ENTITY sb.key.bookmark "S">
-=======
-<!ENTITY sb.save.partial "Cattura selezione">
-<!ENTITY sb.save.partial.as "Cattura selezione con nome">
-<!ENTITY sb.save.entire "Cattura pagina">
-<!ENTITY sb.save.entire.as "Cattura pagina con nome">
-<!ENTITY sb.save.frame "Cattura riquadro">
-<!ENTITY sb.save.frame.as "Cattura riquadro con nome">
-<!ENTITY sb.save.target "Cattura link">
-<!ENTITY sb.save.target.as "Cattura link con nome">
-<!ENTITY sb.save.alltabs "Cattura tutte le schede">
-<!ENTITY sb.save.bookmark "Nei segnalibri con ScrapBook">
-<!ENTITY sb.sidebar "Mostra nella barra laterale">
-<!ENTITY sb.menubar "Barra dei menu">
-<!ENTITY sb.editbefore "Modifica prima di catturare">
->>>>>>> release-1.6.0.a1

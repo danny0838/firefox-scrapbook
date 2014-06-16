@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 <!ENTITY sb.detail.linked.timeout "逾時（秒數）">
 <!ENTITY sb.detail.linked.charset "字元編碼">
 <!ENTITY sb.detail "擷取資訊">
-=======
-<!ENTITY sb.detail.title "擷取資訊">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.detail.new.folder "開新資料夾">
 <!ENTITY sb.detail.select.folder "選取資料夾">
 <!ENTITY sb.detail.option "選項">
@@ -16,11 +12,7 @@
 <!ENTITY sb.detail.linked.movie "影片">
 <!ENTITY sb.detail.linked.archive "壓縮檔">
 <!ENTITY sb.detail.linked.custom "自訂">
-<<<<<<< HEAD
 <!ENTITY sb.detail.linked.page "多層擷取">
-=======
-<!ENTITY sb.detail.linked.page2 "多層擷取">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.detail.linked.page.depth "擷取連結層數">
 <!ENTITY sb.detail.linked.page.text "（擷取完畢後，網頁連結會自動依硬碟中位置更新。）">
 <!ENTITY sb.detail.warnAboutRenew "請注意：「重新擷取」將覆蓋之前擷取的頁面。">

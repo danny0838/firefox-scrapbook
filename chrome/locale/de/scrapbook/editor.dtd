@@ -12,7 +12,6 @@
 <!ENTITY sb.edit.cutter "Ausgewählten Bereich entfernen">
 <!ENTITY sb.edit.remove.iframe "Alle IFRAME-Tags entfernen">
 <!ENTITY sb.edit.remove.script "Alle SCRIPT-Tags entfernen">
-<<<<<<< HEAD
 <!ENTITY sb.highlighter "Hervorhebung">
 <!ENTITY sb.highlighter.remove "Hervorhebungen innerhalb der Auswahl entfernen">
 <!ENTITY sb.highlighter.remove.all "Alle Hervorhebungen entfernen">
@@ -22,11 +21,6 @@
 <!ENTITY sbp.highlighter.stil4 "   Stil 4    ">
 <!ENTITY sbp.highlighter.stil5 "   Stil 5    ">
 <!ENTITY sbp.highlighter.stil6 "   Stil 6    ">
-=======
-<!ENTITY sb.highlighter "Hervorhebung ">
-<!ENTITY sb.highlighter.remove "Hervorhebungen innerhalb der Auswahl entfernen">
-<!ENTITY sb.highlighter.remove.all "Alle Hervorhebungen entfernen">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.source "Ursprungs-URL öffnen">
 <!ENTITY sb.renew "Erneut archivieren">
 <!ENTITY sb.locate "Innerhalb der Ordnerliste lokalisieren">

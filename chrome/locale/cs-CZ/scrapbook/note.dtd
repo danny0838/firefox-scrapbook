@@ -8,11 +8,7 @@
 <!ENTITY sb.note.autolinefeed.t "Přidat tag &lt;br&gt; na konec řádku v &sb.note.htmlview;">
 <!ENTITY sb.note.fontsize "Velikost písma">
 <!ENTITY sb.note.help "Nápověda">
-<<<<<<< HEAD
 <!ENTITY sb.note.print "Tisknout">
-=======
-<!ENTITY sb.note.print "Tisk">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.note.exit "Ukončit">
 <!ENTITY sb.note.save.accesskey "S">
 <!ENTITY sb.note.htmlview.accesskey "H">

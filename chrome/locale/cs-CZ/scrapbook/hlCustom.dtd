@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 <!ENTITY sb.hlCustom.preset "Připravené styly">
-=======
-<!ENTITY sb.hlCustom.preset "Předvolené styly">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.hlCustom.background "Pozadí">
 <!ENTITY sb.hlCustom.color "Barva">
 <!ENTITY sb.hlCustom.text "Text">

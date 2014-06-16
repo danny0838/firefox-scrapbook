@@ -1,10 +1,6 @@
-<<<<<<< HEAD
 <!ENTITY sb.detail.linked.timeout "Wartezeit (in Sekunden)">
 <!ENTITY sb.detail.linked.charset "Zeichensatz">
 <!ENTITY sb.detail "Archivierungsdetails">
-=======
-<!ENTITY sb.detail.title "Archivierungsdetails">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.detail.new.folder "Neuer Ordner">
 <!ENTITY sb.detail.select.folder "Ordner auswählen">
 <!ENTITY sb.detail.option "Einschließen">
@@ -16,14 +12,8 @@
 <!ENTITY sb.detail.linked.movie "Filme">
 <!ENTITY sb.detail.linked.archive "Archive">
 <!ENTITY sb.detail.linked.custom "Benutzerdefiniert">
-<<<<<<< HEAD
 <!ENTITY sb.detail.linked.page "Archivierungstiefe">
 <!ENTITY sb.detail.linked.page.depth "Verzeichnistiefe der Links">
 <!ENTITY sb.detail.linked.page.text "Nach Abschluss der Archivierung werden alle Seiten untereinander verlinkt und es wird eine Sitemap erstellt.">
-=======
-<!ENTITY sb.detail.linked.page2 "Ausführliche Archivierung">
-<!ENTITY sb.detail.linked.page.depth "Links folgen bis zu einer Tiefe von">
-<!ENTITY sb.detail.linked.page.text "Nach Abschluss der Archivierung werden alle Seiten untereinander verlinkt.">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.detail.warnAboutRenew "HINWEIS: &quot;Erneut archivieren&quot; überschreibt zuvor gespeicherte Seiten.">
 <!ENTITY sb.detail.warnAboutScript "HINWEIS: JavaScript kann eine Reihe von Problemen verursachen.">

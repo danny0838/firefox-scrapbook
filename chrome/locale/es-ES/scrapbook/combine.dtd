@@ -2,10 +2,7 @@
 <!ENTITY sb.combine.preview "Previsualización">
 <!ENTITY sb.combine.preview.d "Pulsar el botón &apos;Combinar&apos; después de verificar la previsualización.">
 <!ENTITY sb.combine.option.remove "Después de completar la combinación, borrar las páginas originales">
-<<<<<<< HEAD
 <!ENTITY sbp.combine.up "subir elemento">
 <!ENTITY sbp.combine.down "bajar elemento">
 <!ENTITY sbp.combine.remove "borrar elemento">
 <!ENTITY sbp.combine.newTitle "nuevo título">
-=======
->>>>>>> release-1.6.0.a1

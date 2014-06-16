@@ -12,10 +12,7 @@
         ondialogaccept="gMultiBookManager.done();"
         style="width: 40em;">
 
-<<<<<<< HEAD
 	<script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
-=======
->>>>>>> release-1.6.0.a1
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/mbService.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/mbManage.js" />
@@ -28,11 +25,7 @@
 			<splitter class="tree-splitter" />
 			<treecol label="&mb.prop.path;" flex="3" />
 		</treecols>
-<<<<<<< HEAD
 		<treechildren ondraggesture="nsDragAndDrop.startDrag(event, gDragDropObserver);" />
-=======
-		<treechildren ondragstart="gMultiBookManager.handleDragStart(event);" />
->>>>>>> release-1.6.0.a1
 	</tree>
 	<spacer height="10" />
 	<hbox>

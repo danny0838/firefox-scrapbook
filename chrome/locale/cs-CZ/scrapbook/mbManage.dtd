@@ -1,14 +1,6 @@
 <!ENTITY mb.manager "Správce">
-<<<<<<< HEAD
 <!ENTITY mb.prop.name "Název">
 <!ENTITY mb.prop.path "Cesta">
 <!ENTITY mb.button.add "Přidat">
 <!ENTITY mb.button.edit "Upravit">
 <!ENTITY mb.button.remove "Odstranit">
-=======
-<!ENTITY mb.prop.name "Jméno">
-<!ENTITY mb.prop.path "Cesta">
-<!ENTITY mb.button.add "Přidat">
-<!ENTITY mb.button.edit "Upravit">
-<!ENTITY mb.button.remove "Odebrat">
->>>>>>> release-1.6.0.a1

@@ -20,7 +20,6 @@
         title="&sb.tools.multiple; - ScrapBook"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         style="width:400px;"
-<<<<<<< HEAD
         buttonlabelextra2="&sb.capture.alltabs;"
         onload="sbMultipleService.init();"
         ondialogaccept="sbMultipleService.done();"
@@ -34,18 +33,6 @@
 
 	<stringbundle id="sbMainString" src="chrome://scrapbook/locale/scrapbook.properties" />
 
-=======
-        buttonlabelextra2="&sb.save.alltabs;"
-        onload="sbMultipleService.init();"
-        ondialogaccept="sbMultipleService.done();"
-        ondialogextra2="window.opener.top.ScrapBookMenuHandler.execCaptureAllTabs(sbFolderSelector2.resURI); window.close();"
-        windowtype="scrapbook">
-
-	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/folderPicker.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/multiple.js" />
-
->>>>>>> release-1.6.0.a1
 	<grid style="margin-top:3px;">
 		<columns>
 			<column />
@@ -57,7 +44,6 @@
 				<textbox id="sbFolderTextbox" readonly="true" flex="1" />
 				<toolbarbutton id="sbToolbarMove" tooltiptext="&sb.detail.select.folder;..." oncommand="sbFolderSelector2.pick();" />
 			</row>
-<<<<<<< HEAD
 			<row align="center" style="margin-bottom:8px;">
 				<label value="&sb.multiple.filter;:" />
 				<textbox id="sbFilter" flex="1" oninput="sbMultipleService.updateSelection();"/>
@@ -91,13 +77,10 @@
 					</menupopup>
 				</menulist>
 			</row>
-=======
->>>>>>> release-1.6.0.a1
 		</rows>
 	</grid>
 
 	<description>&sb.multiple.url;:</description>
-<<<<<<< HEAD
 	<hbox>
 		<vbox flex="1">
 			<label id="sbpCounter" flex="1" value="" />
@@ -119,23 +102,6 @@
 	</hbox>
 	<textbox id="ScrapBookTextbox" multiline="true" rows="15" flex="1" />
 	<checkbox id="sbpExcludeExistingAddresses" label="&sbp.multiple.exclude;" checked="true" onclick="sbMultipleService.updateSelection(event);" />
-=======
-	<hbox align="right">
-		<button type="menu" label="&sb.multiple.detector;">
-			<menupopup>
-				<menuitem label="&sb.multiple.detector.plink;" oncommand="sbMultipleService.detectURLsInPage();" />
-				<menuitem label="&sb.multiple.detector.slink;" oncommand="sbMultipleService.detectURLsInSelection();" />
-				<menuitem label="&sb.multiple.detector.tabs;"  oncommand="sbMultipleService.detectURLsOfTabs();" />
-				<menuitem label="&sb.multiple.detector.local;" oncommand="sbURLDetector1.run();" />
-				<menuitem label="&sb.multiple.detector.bookmarks; (bookmarks.html)" oncommand="sbURLDetector2.run('B');" />
-				<menuitem label="WeBoX (default.html)"         oncommand="sbURLDetector2.run('W');" />
-				<menuseparator />
-				<menuitem label="&sb.multiple.detector.clear;"    oncommand="sbMultipleService.clear();" />
-			</menupopup>
-		</button>
-	</hbox>
-	<textbox id="ScrapBookTextbox" multiline="true" rows="15" flex="1" />
->>>>>>> release-1.6.0.a1
 	<label id="sbStatus" crop="end" value="" />
 
 </dialog>

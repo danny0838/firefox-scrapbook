@@ -15,15 +15,12 @@
 <!ENTITY sb.highlighter "강조자">
 <!ENTITY sb.highlighter.remove "선택 부분 강조 해제">
 <!ENTITY sb.highlighter.remove.all "모든 강조 해제">
-<<<<<<< HEAD
 <!ENTITY sbp.highlighter.stil1 "스타일 1">
 <!ENTITY sbp.highlighter.stil2 "스타일 2">
 <!ENTITY sbp.highlighter.stil3 "스타일 3">
 <!ENTITY sbp.highlighter.stil4 "스타일 4">
 <!ENTITY sbp.highlighter.stil5 "스타일 5">
 <!ENTITY sbp.highlighter.stil6 "스타일 6">
-=======
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.source "소스 URL 열기">
 <!ENTITY sb.renew "다시 캡처">
 <!ENTITY sb.locate "탐색 창 트리와 동기화">

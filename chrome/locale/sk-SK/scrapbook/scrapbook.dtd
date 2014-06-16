@@ -14,9 +14,6 @@
 <!ENTITY sb.tools.output "Exportovať všetko ako HTML">
 <!ENTITY sb.tools.repair "Núdzová oprava">
 <!ENTITY sb.tools.addons "Doplnky">
-<<<<<<< HEAD
 <!ENTITY sb.tools.homepage "Domovská stránka">
-=======
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.note.opentab "Otvoriť v karte">
 <!ENTITY sb.note.close "Zavrieť">

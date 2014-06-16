@@ -1,8 +1,4 @@
 <!ENTITY sb.prefs.main "Wyświetlanie">
-<<<<<<< HEAD
-=======
-<!ENTITY sb.prefs.keys "Skróty">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.prefs.tabs "Karty">
 <!ENTITY sb.prefs.save "Zapisz">
 <!ENTITY sb.prefs.edit "Edycja">
@@ -10,20 +6,12 @@
 <!ENTITY sb.prefs.advanced "Zaawansowane">
 <!ENTITY sb.prefs.ui.contextMenu "Wyświetlaj elementy rozszerzenia w głównym menu kontekstowym">
 <!ENTITY sb.prefs.ui.contextSubMenu "Wyświetlaj jako menu rozwijane">
-<<<<<<< HEAD
 <!ENTITY sb.prefs.ui.bookmarkMenu "Wyświetlaj element „Dodaj do zakładek używając ScrapBooka”">
-=======
-<!ENTITY sb.prefs.ui.bookmark "Wyświetlaj menu zapisz jako zakładkę">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Wyświetlaj do">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "ostatnio używanych folderów">
 <!ENTITY sb.prefs.ui.menuBar "Wyświetlaj na pasku menu">
 <!ENTITY sb.prefs.ui.menuBar.icon "Ikona">
-<<<<<<< HEAD
 <!ENTITY sb.prefs.ui.toolsMenu "Wyświetlaj w menu „Narzędzia” element „ScrapBook”">
-=======
-<!ENTITY sb.prefs.ui.toolsMenu "Wyświetlaj w menu Narzędzia element ScrapBook">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.prefs.ui.statusBar "Wyświetlaj ikonę rozszerzenia na pasku stanu">
 <!ENTITY sb.prefs.restart "Zmiana wymaga ponownego uruchomienia Firefoksa">
 <!ENTITY sb.prefs.tabs.tips "Otwieraj w karcie wynik następujących poleceń">
@@ -33,17 +21,12 @@
 <!ENTITY sb.prefs.data.custom "Zapisz dane w">
 <!ENTITY sb.prefs.data.tips "Wybierz folder, w którym będą zapisywane dane ScrapBooka">
 <!ENTITY sb.prefs.multibook.enabled "Włącz Multi-ScrapBook">
-<<<<<<< HEAD
 <!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook pozwala na określenie wielu lokalizacji folderu zapisu danych i szybkie przełączanie pomiędzy nimi za pomocą przycisku narzędziowego.">
-=======
-<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook umożliwia określenie wielu lokalizacji folderu zapisu danych i szybkie przełączanie pomiędzy nimi za pomocą przycisku narzędziowego.">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.prefs.confirmDelete "Ostrzegaj, gdy jest usuwane drzewo elementów">
 <!ENTITY sb.prefs.tree.autoCollapse "Otwierając folder drzewa automatycznie zamykaj inne foldery">
 <!ENTITY sb.prefs.tree.unshift "Umieść element">
 <!ENTITY sb.prefs.tree.unshift.top "na górze folderu">
 <!ENTITY sb.prefs.tree.unshift.bottom "na dole folderu">
-<<<<<<< HEAD
 <!ENTITY sb.prefs.showDetailOnDrop "Wyświetlaj okno dialogowe „Szczegóły przechwytywania” podczas przechwytywania za pomocą przeciągania do panelu bocznego">
 <!ENTITY sb.prefs.notifyOnComplete "Wyświetlaj powiadomienie o zakończeniu przechwytywania">
 <!ENTITY sb.prefs.viewer "Przeglądarka plików">
@@ -54,10 +37,3 @@
 <!ENTITY sb.button.browse "Przeglądaj">
 <!ENTITY sb.button.show "Wyświetl pliki">
 <!ENTITY sbp.prefs.useDropDownList "użyj dla wyboru podświetlania listy rozwijanej zamiast przycisków">
-=======
-<!ENTITY sb.prefs.showDetailOnDrop "Wyświetlaj okno dialogowe Szczegóły przechwytywania podczas przechwytywania za pomocą przeciągania do panelu bocznego">
-<!ENTITY sb.prefs.notifyOnComplete "Wyświetlaj powiadomienie o zakończeniu przechwytywania">
-<!ENTITY sb.button.customize "Dostosuj">
-<!ENTITY sb.button.browse "Przeglądaj">
-<!ENTITY sb.button.show "Wyświetl pliki">
->>>>>>> release-1.6.0.a1

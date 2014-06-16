@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!ENTITY sb.capture "Przechwyć">
 <!ENTITY sb.capture.abort "Usuń">
 <!ENTITY sb.capture.start "Start">
@@ -18,18 +17,3 @@
 <!ENTITY sbp.capture.column.one "URL">
 <!ENTITY sbp.capture.column.two "Tytuł">
 <!ENTITY sbp.capture.column.three "Status">
-=======
-<!ENTITY sb.save "Przechwyć">
-<!ENTITY sb.save.abort "Usuń">
-<!ENTITY sb.save.start "Start">
-<!ENTITY sb.save.retry "Spróbuj ponownie">
-<!ENTITY sb.save.skip "Pomiń">
-<!ENTITY sb.save.pause "Pauza">
-<!ENTITY sb.save.filter "Filtrowanie">
-<!ENTITY sb.save.filter.domain "Ogranicz do domeny">
-<!ENTITY sb.save.filter.level "Ogranicz do katalogu">
-<!ENTITY sb.save.filter.string "Filtruj używając ciągu znaków…">
-<!ENTITY sb.save.filter.checkon "Zaznacz wszystkie">
-<!ENTITY sb.save.filter.checkoff "Odznacz wszystkie">
-<!ENTITY sb.save.filter.invert "Odwróć zaznaczenie">
->>>>>>> release-1.6.0.a1

@@ -1,15 +1,10 @@
 
-<<<<<<< HEAD
 var sbManageService = {
-=======
-var sbManageUI = {
->>>>>>> release-1.6.0.a1
 
 	moduleID : "",
 
 	treeColumnState : [],
 
-<<<<<<< HEAD
 	init : function()
 	{
 		if ( window.arguments )
@@ -33,19 +28,6 @@ var sbManageUI = {
 	ensureContextIsTree : function()
 	{
 		return sbTreeHandler.TREE.treeBoxObject.focused && !sbListHandler.enabled;
-=======
-	init: function() {
-		if (window.arguments) {
-			if (window.arguments[0]) {
-				document.getElementById("sbTree").setAttribute("ref", window.arguments[0].Value);
-				document.title = ScrapBookData.getProperty(window.arguments[0], "title");
-			}
-			if (window.arguments[1])
-				this.toggleRightPane(window.arguments[1]);
-		}
-		document.getElementById("sbTreeColTitle").setAttribute("hideheader", "false");
-		window.focus();
->>>>>>> release-1.6.0.a1
 	},
 
 	toggleRightPane : function(aModuleElt)
@@ -77,19 +59,11 @@ var sbManageUI = {
 	getTreeSelection : function()
 	{
 		var arg1 = [], arg2 = [];
-<<<<<<< HEAD
 		var idxList = sbTreeHandler.getSelection(false, 2);
 		idxList.forEach(function(aIdx)
 		{
 			arg1.push(sbTreeHandler.TREE.builderView.getResourceAtIndex(aIdx));
 			arg2.push(sbTreeHandler.getParentResource(aIdx));
-=======
-		var idxList = sbTreeUI.getSelection(false, 2);
-		idxList.forEach(function(aIdx)
-		{
-			arg1.push(sbTreeUI.TREE.builderView.getResourceAtIndex(aIdx));
-			arg2.push(sbTreeUI.getParentResource(aIdx));
->>>>>>> release-1.6.0.a1
 		});
 		return [arg1, arg2];
 	},

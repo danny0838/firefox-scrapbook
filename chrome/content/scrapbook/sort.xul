@@ -13,7 +13,6 @@
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         title="&sb.sort; - ScrapBook"
         onload="sbSortService.init();"
-<<<<<<< HEAD
 		onwizardcancel="sbSortService.showTree();"
         windowtype="scrapbook">
 
@@ -23,13 +22,6 @@
 
 	<stringbundle id="sbMainString" src="chrome://scrapbook/locale/scrapbook.properties" />
 
-=======
-        windowtype="scrapbook">
-
-	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/sort.js" />
-
->>>>>>> release-1.6.0.a1
 	<wizardpage pageid="sbSortStartPage" label="&sb.sort;">
 		<radiogroup id="sbSortRadioGroup" persist="sortIndex">
 			<radio label="&sb.sort.reverse;" />

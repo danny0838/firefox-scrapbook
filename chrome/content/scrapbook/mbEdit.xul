@@ -19,10 +19,6 @@
         ondialogcancel="mbEditDialog.cancel();"
         style="width: 36em;">
 
-<<<<<<< HEAD
-=======
-	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
->>>>>>> release-1.6.0.a1
 	<script type="application/x-javascript" src="chrome://scrapbook/content/mbEdit.js" />
 
 	<grid flex="1">

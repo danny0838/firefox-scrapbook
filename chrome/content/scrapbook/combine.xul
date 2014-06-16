@@ -18,25 +18,16 @@
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         onunload="sbCombineService.done();">
 
-<<<<<<< HEAD
 	<script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
 	<script type="application/x-javascript" src="chrome://global/content/nsTransferable.js" />
-=======
-	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
->>>>>>> release-1.6.0.a1
 	<script type="application/x-javascript" src="chrome://scrapbook/content/saver.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/capture.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/folderPicker.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/combine.js" />
-<<<<<<< HEAD
 	<script type="application/x-javascript" src="chrome://scrapbook/content/multiple.js" />
 
 	<stringbundleset>
 		<stringbundle id="sbMainString"    src="chrome://scrapbook/locale/scrapbook.properties" />
-=======
-
-	<stringbundleset>
->>>>>>> release-1.6.0.a1
 		<stringbundle id="sbCaptureString" src="chrome://scrapbook/locale/capture.properties" />
 		<stringbundle id="sbCombineString" src="chrome://scrapbook/locale/combine.properties" />
 		<stringbundle id="sbOverlayString" src="chrome://scrapbook/locale/overlay.properties" />
@@ -47,22 +38,16 @@
 	            label="&sb.tools.combine;"
 	            onpageshow="sbCombineService.init();">
 		<vbox flex="1">
-<<<<<<< HEAD
 			<hbox align="center">
 				<label value="&sbp.combine.newTitle;:" width="60" />
 				<textbox id="sbpTitleTextbox" flex="1" />
 			</hbox>
 			<hbox align="center" style="margin-bottom: 12px;">
 				<label value="&sb.prop.folder;:" width="60" />
-=======
-			<hbox align="center" style="margin-bottom: 12px;">
-				<label value="&sb.prop.folder;:" />
->>>>>>> release-1.6.0.a1
 				<textbox id="sbFolderTextbox" readonly="true" flex="1" onfocus="this.blur();" />
 				<toolbarbutton id="sbToolbarMove" tooltiptext="&sb.detail.select.folder;..." oncommand="sbFolderSelector2.pick();" />
 			</hbox>
 			<description style="margin-bottom: 8px;">&sb.combine.dragdrop;</description>
-<<<<<<< HEAD
 			<hbox>
 				<listbox id="sbCombineListbox"
 						ondragover="nsDragAndDrop.dragOver(event,sbCombineService.dropObserver);"
@@ -75,32 +60,18 @@
 					<button id="sbpDelete" disabled="true" style="height: 25px;" image="chrome://scrapbook/skin/menu_remove.png" tooltiptext="&sbp.combine.remove;" oncommand="sbCombineService.deleteItem();" />
 				</vbox>
 			</hbox>
-=======
-			<listbox id="sbCombineListbox"
-			         ondragover="sbCombineService.onDragOver(event);"
-			         ondrop="sbCombineService.onDrop(event);"
-			         flex="1" style="margin-bottom: 12px;" />
-			<checkbox id="sbCombineOptionRemove" label="&sb.combine.option.remove;" style="color: red;" />
->>>>>>> release-1.6.0.a1
 		</vbox>
 	</wizardpage>
 
 	<wizardpage id="sbCombinePreviewPage" pageid="sbCombinePreviewPage"
-<<<<<<< HEAD
 				back="sbCombineStartPage"
-=======
->>>>>>> release-1.6.0.a1
 	            label="&sb.combine.preview;"
 	            description="&sb.combine.preview.d;"
 	            onpageshow="sbCombineService.initPreview();">
 		<textbox id="sbCaptureTextbox" readonly="true" />
-<<<<<<< HEAD
 		<browser id="sbCaptureBrowser" collapsed="true" flex="30" style="border: 1px solid ThreeDShadow;" disablehistory="true" onload="event.stopPropagation();" type="content" />
 		<spacer flex="1" />
 		<checkbox id="sbCombineOptionRemove" label="&sb.combine.option.remove;" style="color: red;" />
-=======
-		<browser id="sbCaptureBrowser" type="content" collapsed="true" flex="1" style="border: 1px solid ThreeDShadow;" onload="event.stopPropagation();" />
->>>>>>> release-1.6.0.a1
 	</wizardpage>
 
 </wizard>

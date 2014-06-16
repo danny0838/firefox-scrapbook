@@ -1,16 +1,10 @@
 <?xml version="1.0" ?>
 
-<<<<<<< HEAD
 <!--skin-->
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 <?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
 
 <!--locale-->
-=======
-<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
-<?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
-
->>>>>>> release-1.6.0.a1
 <!DOCTYPE window [
 <!ENTITY % mainDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
 %mainDTD;
@@ -22,10 +16,7 @@
 %calcDTD;
 ]>
 
-<<<<<<< HEAD
 <!--window-->
-=======
->>>>>>> release-1.6.0.a1
 <window id="sbCalcWindow"
         title="&sb.tools.calculate; - ScrapBook"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
@@ -34,7 +25,6 @@
         onload="setTimeout(function(){ sbCalcService.exec(); }, 0);"
         windowtype="scrapbook">
 
-<<<<<<< HEAD
 	<!--script-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/calculate.js" />
@@ -44,14 +34,6 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapbook.js" />
 
 	<!--stringbundle-->
-=======
-	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/calculate.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/property.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapbook.js" />
-
->>>>>>> release-1.6.0.a1
 	<stringbundle id="sbPropString" src="chrome://scrapbook/locale/property.properties" />
 
 	<keyset>
@@ -59,10 +41,7 @@
 		<key keycode="VK_F5"     oncommand="window.location.reload();" />
 	</keyset>
 
-<<<<<<< HEAD
 	<!--popup-->
-=======
->>>>>>> release-1.6.0.a1
 	<popupset>
 		<menupopup id="sbCalcPopup" onpopupshowing="sbCalcController.createPopupMenu();">
 			<menuitem label="&sb.open;"        oncommand="sbCalcController.open(false);" default="true" />

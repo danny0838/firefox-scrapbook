@@ -1,9 +1,6 @@
 <?xml version="1.0" ?>
 
-<<<<<<< HEAD
 <!-- Firefox 3.5 -->
-=======
->>>>>>> release-1.6.0.a1
 <?xml-stylesheet href="chrome://browser/skin/places/places.css" type="text/css"?>
 
 <!DOCTYPE overlay SYSTEM "chrome://scrapbook/locale/tree.dtd">
@@ -11,18 +8,13 @@
 <overlay id="sbTreeOverlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-<<<<<<< HEAD
 	<script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
-=======
-	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
->>>>>>> release-1.6.0.a1
 	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapbook.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/tree.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/mbService.js" />
 
-<<<<<<< HEAD
 	<broadcasterset id="sbBroadcasters">
 		<broadcaster id="sbToggleListView" type="checkbox" autoCheck="false" persist="checked lastRef" tooltiptext="&sb.listview;" />
 	</broadcasterset>
@@ -35,31 +27,19 @@
 	<popupset id="sbPopupSet">
 		<menupopup id="sbPopup" onpopupshowing="sbController.onPopupShowing(event);"
 		       onmouseover="if (event.originalTarget.getAttribute('nodelay')) document.getElementById('sbPopupToolsMenu').hidePopup();">
-=======
-	<popupset id="sbPopupSet">
-		<menupopup id="sbPopup" onpopupshowing="sbController.onPopupShowing(event);"
-		           onmouseover="if (event.originalTarget.getAttribute('nodelay')) document.getElementById('sbPopupToolsMenu').hidePopup();">
->>>>>>> release-1.6.0.a1
 			<menuitem id="sbPopupOpen"       label="&sb.open;"        nodelay="true" oncommand="sbController.open(null,false);" default="true" />
 			<menuitem id="sbPopupOpenTab"    label="&sb.open.tab;"    nodelay="true" oncommand="sbController.open(null,true);" hidden="true" />
 			<menuitem id="sbPopupOpenNewTab" label="&sb.open.newtab;" nodelay="true" oncommand="sbController.open(null,true);" />
 			<menuitem id="sbPopupOpenSource" label="&sb.open.source;" nodelay="true" oncommand="sbController.forward(null,'S');"
 			          onclick="if (event.button != 1) return; this.parentNode.hidePopup(); sbController.forward(null,'S',true);" />
-<<<<<<< HEAD
 			<menuitem id="sbPopupListView"     label="&sb.listview;"       oncommand="sbListHandler.init(null);"         hidden="true" />
-=======
->>>>>>> release-1.6.0.a1
 			<menuitem id="sbPopupCombinedView" label="&sb.folder.combine;" oncommand="sbController.forward(null,'C');"   hidden="true" />
 			<menuitem id="sbPopupOpenAllItems" label="&sb.folder.openall;" oncommand="sbController.openAllInTabs(null);" hidden="true" />
 			<menuseparator hidden="true" />
 			<menu id="sbPopupTools" label="&sb.tools;" onmouseover="event.stopPropagation();">
 				<menupopup id="sbPopupToolsMenu">
 					<menuitem id="sbPopupShowFiles" label="&sb.show.files;" oncommand="sbController.forward(null,'L');" />
-<<<<<<< HEAD
 					<menuitem id="sbPopupSend"      label="&sb.move;..."    oncommand="sbController.isTreeContext ? sbTreeHandler.send() : sbListHandler.doCommand('send');" />
-=======
-					<menuitem id="sbPopupSend"      label="&sb.move;..."    oncommand="sbTreeUI.send()" />
->>>>>>> release-1.6.0.a1
 					<menuseparator />
 					<menuitem id="sbPopupRenew" class="menuitem-iconic" label="&sb.renew;..." oncommand="sbController.renew(null, true);" onclick="if (event.button == 1) sbController.renew(null, false);" />
 					<menuseparator />
@@ -69,7 +49,6 @@
 			<menuitem id="sbPopupManage" label="&sb.folder.manage;..." oncommand="sbController.forward(null,'M');" hidden="true" />
 			<menuitem id="sbPopupSort"   label="&sb.sort.folder;..."   oncommand="sbController.forward(null,'Z');" hidden="true" />
 			<menuseparator />
-<<<<<<< HEAD
 			<menuitem id="sbPopupNewFolder"    class="menuitem-iconic sb-create" label="&sb.new.folder;..." oncommand="sbMainService.createFolder();" />
 			<menuitem id="sbPopupNewSeparator" class="menuitem-iconic sb-create" label="&sb.new.separator;" oncommand="sbMainService.createSeparator();" />
 			<menuitem id="sbPopupNewNote"      class="menuitem-iconic sb-create" label="&sb.new.note;"      oncommand="sbMainService.createNote();" />
@@ -86,38 +65,15 @@
 			<menuitem id="sbSearchPopupS" label="&sbp.prop.url;"    type="radio" oncommand="sbSearchService.change('source');" />
 			<menuitem id="sbSearchPopupI" label="&sb.prop.id.date;" type="radio" oncommand="sbSearchService.change('id');" />
 			<menuitem id="sbSearchPopupA" label="&sb.search.all;"   type="radio" oncommand="sbSearchService.change('all');" />
-=======
-			<menuitem id="sbPopupNewFolder"    class="menuitem-iconic sb-create" label="&sb.new.folder;..." oncommand="sbMainUI.createFolder();" />
-			<menuitem id="sbPopupNewSeparator" class="menuitem-iconic sb-create" label="&sb.new.separator;" oncommand="sbMainUI.createSeparator();" />
-			<menuitem id="sbPopupNewNote"      class="menuitem-iconic sb-create" label="&sb.new.note;"      oncommand="sbMainUI.createNote();" />
-			<menuseparator />
-			<menuitem id="sbPopupRemove"    class="menuitem-iconic" label="&sb.remove;"   oncommand="sbTreeUI.remove();" />
-			<menuseparator />
-			<menuitem id="sbPopupProperty"  class="menuitem-iconic" label="&sb.property;" oncommand="sbController.forward(null,'P');" />
-		</menupopup>
-		<menupopup id="sbSearchPopup" onpopupshowing="sbSearchUI.onPopupShowing(event);" position="after_start">
-			<menuitem label="&sb.search.fulltext;" type="radio" searchtype="fulltext" oncommand="sbSearchUI.changeType('fulltext');" />
-			<menuseparator />
-			<menuitem label="&sb.prop.title;"   type="radio" searchtype="title"   oncommand="sbSearchUI.changeType('title');" />
-			<menuitem label="&sb.prop.comment;" type="radio" searchtype="comment" oncommand="sbSearchUI.changeType('comment');" />
-			<menuitem label="&sb.prop.url;"     type="radio" searchtype="source"  oncommand="sbSearchUI.changeType('source');" />
-			<menuitem label="&sb.prop.id.date;" type="radio" searchtype="id"      oncommand="sbSearchUI.changeType('id');" />
-			<menuitem label="&sb.search.all;"   type="radio" searchtype="all"     oncommand="sbSearchUI.changeType('all');" />
->>>>>>> release-1.6.0.a1
 			<menuseparator />
 			<menuitem id="sbSearchPopupOptionRE" label="&sb.search.re;" type="checkbox" persist="checked" />
 			<menuitem id="sbSearchPopupOptionCS" label="&sb.search.cs;" type="checkbox" persist="checked" />
 			<menuseparator />
 			<menu label="&sb.tools;">
 				<menupopup>
-<<<<<<< HEAD
 					<menuitem label="&sb.search.days;..." oncommand="sbSearchService.filterByDays();" />
 					<menuitem label="&sb.search.cache;"   oncommand="sbSearchService.buildFT();" />
 					<menuitem label="&sb.search.clear;"   oncommand="sbSearchService.clearFormHistory();" />
-=======
-					<menuitem label="&sb.search.days;..." oncommand="sbSearchUI.promptForDaysFilter();" />
-					<menuitem label="&sb.search.cache;"   oncommand="sbSearchUI.updateCache();" />
->>>>>>> release-1.6.0.a1
 				</menupopup>
 			</menu>
 		</menupopup>
@@ -125,7 +81,6 @@
 
 	<toolbar id="sbSearchToolbar" align="center">
 		<textbox id="sbSearchTextbox"
-<<<<<<< HEAD
 		         type="autocomplete"
 		         autocompletesearch="form-history"
 		         autocompletesearchparam="sbSearchHistory"
@@ -140,17 +95,6 @@
 			       persist="searchtype"
 			       popup="sbSearchPopup"
 			       onclick="if ( event.button == 1 ) sbSearchService.enter(this.parentNode.value);" />
-=======
-		         type="search"
-		         onkeypress="sbSearchUI.onKeyPress(event);"
-		         oncommand="sbSearchUI.onCommand(this.value);"
-		         accesskey="S"
-		         flex="1">
-			<image id="sbSearchImage"
-			       persist="searchtype"
-			       popup="sbSearchPopup"
-			       onclick="if (event.button == 1) sbSearchUI.onCommand(this.parentNode.value);" />
->>>>>>> release-1.6.0.a1
 		</textbox>
 	</toolbar>
 
@@ -177,7 +121,6 @@
 		</template>
 	</tree>
 
-<<<<<<< HEAD
 	<vbox id="sbListOuter">
 		<sidebarheader id="sbListHeader" align="center">
 			<label flex="1" crop="end" />
@@ -221,14 +164,6 @@
 			<menuitem id="mbMenuItemDefault" label="&mb.profileFolder;" type="radio" autocheck="false" />
 			<menuseparator />
 			<menuitem label="&mb.manage;..." oncommand="sbMultiBookService.config(); event.stopPropagation();" />
-=======
-	<toolbarbutton id="mbToolbarButton" type="menu" tooltiptext="Multi-ScrapBook" onpopupshowing="sbMultiBookUI.initMenu();" hidden="true">
-		<menupopup id="mbMenuPopup" oncommand="sbMultiBookUI.change(event.originalTarget);">
-			<menuitem id="mbMenuItem" type="radio" autocheck="false" hidden="true" />
-			<menuitem id="mbMenuItemDefault" label="&mb.profileFolder;" type="radio" autocheck="false" />
-			<menuseparator />
-			<menuitem label="&mb.manage;..." oncommand="sbMultiBookUI.config(); event.stopPropagation();" />
->>>>>>> release-1.6.0.a1
 		</menupopup>
 	</toolbarbutton>
 

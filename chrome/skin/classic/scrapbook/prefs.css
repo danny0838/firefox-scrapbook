@@ -8,7 +8,6 @@ radio[pane="mainPane"] {
 	-moz-image-region: rect(0px, 32px, 32px, 0px)
 }
 
-<<<<<<< HEAD
 radio[pane="mainPane"]:hover,
 radio[pane="mainPane"][selected="true"] {
 	-moz-image-region: rect(32px, 32px, 64px, 0px)
@@ -34,52 +33,33 @@ radio[pane="savePane"][selected="true"] {
 }
 */
 
-=======
-radio[pane="keysPane"] {
-	-moz-image-region: rect(0px, 64px, 32px, 32px)
-}
-
-radio[pane="tabsPane"] {
-	-moz-image-region: rect(0px, 96px, 32px, 64px)
-}
-
->>>>>>> release-1.6.0.a1
 radio[pane="editPane"] {
 	-moz-image-region: rect(0px, 128px, 32px, 96px)
 }
 
-<<<<<<< HEAD
 radio[pane="editPane"]:hover,
 radio[pane="editPane"][selected="true"] {
 	-moz-image-region: rect(32px, 128px, 64px, 96px)
 }
 
-=======
->>>>>>> release-1.6.0.a1
 radio[pane="organizePane"] {
 	-moz-image-region: rect(0px, 160px, 32px, 128px)
 }
 
-<<<<<<< HEAD
 radio[pane="organizePane"]:hover,
 radio[pane="organizePane"][selected="true"] {
 	-moz-image-region: rect(32px, 160px, 64px, 128px)
 }
 
-=======
->>>>>>> release-1.6.0.a1
 radio[pane="advancedPane"] {
 	-moz-image-region: rect(0px, 192px, 32px, 160px)
 }
 
-<<<<<<< HEAD
 radio[pane="advancedPane"]:hover,
 radio[pane="advancedPane"][selected="true"] {
 	-moz-image-region: rect(32px, 192px, 64px, 160px)
 }
 
-=======
->>>>>>> release-1.6.0.a1
 prefpane > checkbox,
 prefpane > groupbox,
 prefpane > description {

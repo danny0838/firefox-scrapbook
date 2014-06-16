@@ -1,19 +1,14 @@
 
-<<<<<<< HEAD
 var sbMainService = {
 
 	get STRING() { return document.getElementById("sbMainString"); },
 
 	baseURL: "",
 	prefs  : {},
-=======
-var sbMainUI = {
->>>>>>> release-1.6.0.a1
 
 
 	init: function()
 	{
-<<<<<<< HEAD
 		sbMultiBookService.showButton();
 		sbDataSource.init();
 		sbTreeHandler.init(false);
@@ -23,18 +18,10 @@ var sbMainUI = {
 		this.initPrefs();
 		sbSearchService.init();
 		setTimeout(function() { sbMainService.delayedInit(); }, 0);
-=======
-		sbMultiBookUI.showButton();
-		sbTreeUI.init(false);
-		sbTreeUI.enableDragDrop(true);
-		sbSearchUI.init();
-		setTimeout(function(self) { self.delayedInit(); }, 0, this);
->>>>>>> release-1.6.0.a1
 	},
 
 	delayedInit: function()
 	{
-<<<<<<< HEAD
 		sbMultiBookService.showTitle();
 		if ("sbBrowserOverlay" in window.top && window.top.sbBrowserOverlay.locateMe)
 			this.locate(null);
@@ -49,39 +36,20 @@ var sbMainUI = {
 		this.prefs.tabsSearchResult = sbCommonUtils.getBoolPref("scrapbook.tabs.searchResult", true);
 		this.prefs.tabsCombinedView = sbCommonUtils.getBoolPref("scrapbook.tabs.combinedView", true);
 		this.prefs.tabsNote         = sbCommonUtils.getBoolPref("scrapbook.tabs.note",         false);
-=======
-		if ("ScrapBookBrowserOverlay" in window.top == false)
-			return;
-		sbMultiBookUI.showSidebarTitle();
-		if (window.top.ScrapBookBrowserOverlay.locateMe)
-			this.locate(null);
-		if (!document.getElementById("sbAddOnsPopup").firstChild)
-			document.getElementById("sbAddOns").hidden = true;
-	},
-
-	rebuild: function()
-	{
-		sbTreeUI.TREE.builder.rebuild();
->>>>>>> release-1.6.0.a1
 	},
 
 	refresh: function()
 	{
-<<<<<<< HEAD
 		sbListHandler.quit();
 		sbListHandler.exit();
 		sbTreeHandler.exit();
 		sbTreeDNDHandler.quit();
-=======
-		sbTreeUI.uninit();
->>>>>>> release-1.6.0.a1
 		this.init();
 	},
 
 	done: function()
 	{
 		sbNoteService.save();
-<<<<<<< HEAD
 	},
 
 
@@ -89,23 +57,12 @@ var sbMainUI = {
 	{
 		document.getElementById("sbHeader").hidden = !aWillShow;
 		document.getElementById("sbHeader").firstChild.value = aLabel;
-=======
-		sbSearchUI.uninit();
-		sbTreeUI.uninit();
-		if (this._traceTimer)
-			window.clearTimeout(this._traceTimer)
->>>>>>> release-1.6.0.a1
 	},
 
 	trace: function(aText, aMillisec)
 	{
 		var status = top.window.document.getElementById("statusbar-display");
-<<<<<<< HEAD
 		if ( !status ) return;
-=======
-		if (!status)
-			return;
->>>>>>> release-1.6.0.a1
 		status.label = aText;
 		var callback = function(self) {
 			self._traceTimer = null;
@@ -118,7 +75,6 @@ var sbMainUI = {
 
 	_traceTimer: null,
 
-<<<<<<< HEAD
 	locate: function(aRes)
 	{
 		if (!aRes)
@@ -131,24 +87,10 @@ var sbMainUI = {
 		if (!sbDataSource.isContainer(aRes))
 			sbListHandler.quit();
 		sbTreeHandler.locateInternal(aRes);
-=======
-
-	locate: function(aRes)
-	{
-		if (!aRes)
-			aRes = window.top.ScrapBookBrowserOverlay.locateMe;
-		if ("ScrapBookBrowserOverlay" in window.top)
-			window.top.ScrapBookBrowserOverlay.locateMe = null;
-		if (aRes.Value == "urn:scrapbook:root")
-			return;
-		sbSearchUI.reset();
-		sbTreeUI.locateInternal(aRes);
->>>>>>> release-1.6.0.a1
 	},
 
 	createFolder: function()
 	{
-<<<<<<< HEAD
 		sbSearchService.exit();
 		sbListHandler.quit();
 		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
@@ -161,24 +103,11 @@ var sbMainUI = {
 			var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
 			var curPar = sbTreeHandler.getParentResource(curIdx);
 			var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
-=======
-		sbSearchUI.reset();
-		var newItem = ScrapBookData.newItem();
-		newItem.title = ScrapBookUtils.getLocaleString("DEFAULT_FOLDER");
-		newItem.type = "folder";
-		var tarResName, tarRelIdx, isRootPos;
-		try {
-			var curIdx = sbTreeUI.TREE.currentIndex;
-			var curRes = sbTreeUI.TREE.builderView.getResourceAtIndex(curIdx);
-			var curPar = sbTreeUI.getParentResource(curIdx);
-			var curRelIdx = ScrapBookData.getRelativeIndex(curPar, curRes);
->>>>>>> release-1.6.0.a1
 			tarResName = curPar.Value;
 			tarRelIdx  = curRelIdx;
 			isRootPos  = false;
 		}
 		catch(ex) {
-<<<<<<< HEAD
 			tarResName = sbTreeHandler.TREE.ref;
 			tarRelIdx  = 1;
 			isRootPos  = true;
@@ -192,33 +121,14 @@ var sbMainUI = {
 		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(newRes);
 		sbTreeHandler.TREE.view.selection.select(idx);
 		sbTreeHandler.TREE.focus();
-=======
-			tarResName = sbTreeUI.TREE.ref;
-			tarRelIdx  = 1;
-			isRootPos  = true;
-		}
-		var newRes = ScrapBookData.addItem(newItem, tarResName, tarRelIdx);
-		ScrapBookData.createEmptySeq(newRes.Value);
-		ScrapBookUtils.refreshGlobal(false);
-		sbMainUI.rebuild();
-		if (isRootPos)
-			sbTreeUI.TREE.treeBoxObject.scrollToRow(0);
-		var idx = sbTreeUI.TREE.builderView.getIndexOfResource(newRes);
-		sbTreeUI.TREE.view.selection.select(idx);
-		sbTreeUI.TREE.focus();
->>>>>>> release-1.6.0.a1
 		var result = {};
 		window.openDialog(
 			"chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome",
 			newItem.id, result
 		);
 		if (!result.accept) {
-<<<<<<< HEAD
 			sbDataSource.deleteItemDescending(newRes, sbCommonUtils.RDF.GetResource(tarResName));
 			sbDataSource.flush();
-=======
-			ScrapBookData.deleteItemDescending(newRes, ScrapBookUtils.RDF.GetResource(tarResName));
->>>>>>> release-1.6.0.a1
 			return false;
 		}
 		return true;
@@ -226,7 +136,6 @@ var sbMainUI = {
 
 	createSeparator: function()
 	{
-<<<<<<< HEAD
 		sbSearchService.exit();
 		sbListHandler.quit();
 		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
@@ -238,23 +147,11 @@ var sbMainUI = {
 			var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
 			var curPar = sbTreeHandler.getParentResource(curIdx);
 			var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
-=======
-		sbSearchUI.reset();
-		var newItem = ScrapBookData.newItem();
-		newItem.type = "separator";
-		var tarResName, tarRelIdx, isRootPos;
-		try {
-			var curIdx = sbTreeUI.TREE.currentIndex;
-			var curRes = sbTreeUI.TREE.builderView.getResourceAtIndex(curIdx);
-			var curPar = sbTreeUI.getParentResource(curIdx);
-			var curRelIdx = ScrapBookData.getRelativeIndex(curPar, curRes);
->>>>>>> release-1.6.0.a1
 			tarResName = curPar.Value;
 			tarRelIdx  = curRelIdx;
 			isRootPos  = false;
 		}
 		catch(ex) {
-<<<<<<< HEAD
 			tarResName = sbTreeHandler.TREE.ref;
 			tarRelIdx  = 0;
 			isRootPos  = true;
@@ -264,22 +161,10 @@ var sbMainUI = {
 		sbTreeHandler.TREE.view.selection.clearSelection();
 		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(newRes);
 		sbTreeHandler.TREE.treeBoxObject.ensureRowIsVisible(idx);
-=======
-			tarResName = sbTreeUI.TREE.ref;
-			tarRelIdx  = 0;
-			isRootPos  = true;
-		}
-		var newRes = ScrapBookData.addItem(newItem, tarResName, tarRelIdx);
-		ScrapBookUtils.refreshGlobal(false);
-		sbTreeUI.TREE.view.selection.clearSelection();
-		var idx = sbTreeUI.TREE.builderView.getIndexOfResource(newRes);
-		sbTreeUI.TREE.treeBoxObject.ensureRowIsVisible(idx);
->>>>>>> release-1.6.0.a1
 	},
 
 	createNote: function(aInTab)
 	{
-<<<<<<< HEAD
 		sbSearchService.exit();
 		sbListHandler.quit();
 		var tarResName, tarRelIdx, isRootPos;
@@ -288,50 +173,26 @@ var sbMainUI = {
 			var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
 			var curPar = sbTreeHandler.getParentResource(curIdx);
 			var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
-=======
-		sbSearchUI.reset();
-		var tarResName, tarRelIdx, isRootPos;
-		try {
-			var curIdx = sbTreeUI.TREE.currentIndex;
-			var curRes = sbTreeUI.TREE.builderView.getResourceAtIndex(curIdx);
-			var curPar = sbTreeUI.getParentResource(curIdx);
-			var curRelIdx = ScrapBookData.getRelativeIndex(curPar, curRes);
->>>>>>> release-1.6.0.a1
 			tarResName = curPar.Value;
 			tarRelIdx  = curRelIdx;
 			isRootPos  = false;
 		}
 		catch(ex) {
-<<<<<<< HEAD
 			tarResName = sbTreeHandler.TREE.ref;
-=======
-			tarResName = sbTreeUI.TREE.ref;
->>>>>>> release-1.6.0.a1
 			tarRelIdx  = 0;
 			isRootPos  = true;
 		}
 		sbNoteService.create(tarResName, tarRelIdx, aInTab);
-<<<<<<< HEAD
 		sbController.rebuildLocal();
 		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(sbNoteService.resource);
 		sbTreeHandler.TREE.view.selection.select(idx);
 		if (isRootPos)
 			sbTreeHandler.TREE.treeBoxObject.scrollByLines(sbTreeHandler.TREE.view.rowCount);
-=======
-		var idx = sbTreeUI.TREE.builderView.getIndexOfResource(sbNoteService.resource);
-		sbTreeUI.TREE.view.selection.select(idx);
-		if (isRootPos)
-			sbTreeUI.TREE.treeBoxObject.scrollByLines(sbTreeUI.TREE.view.rowCount);
->>>>>>> release-1.6.0.a1
 	},
 
 	openPrefWindow : function()
 	{
-<<<<<<< HEAD
 		var instantApply = sbCommonUtils.getBoolPref("browser.preferences.instantApply", false);
-=======
-		var instantApply = window.top.gPrefService.getBoolPref("browser.preferences.instantApply");
->>>>>>> release-1.6.0.a1
 		window.top.openDialog(
 			"chrome://scrapbook/content/prefs.xul", "ScrapBook:Options",
 			"chrome,titlebar,toolbar,centerscreen," + (instantApply ? "dialog=no" : "modal")
@@ -345,7 +206,6 @@ var sbMainUI = {
 
 var sbController = {
 
-<<<<<<< HEAD
 	isTreeContext : function(itcEvent)
 	{
 		var itcAppInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
@@ -362,13 +222,6 @@ var sbController = {
 		if (aEvent.originalTarget.localName != "menupopup")
 			return;
 		var res = this.isTreeContext(aEvent) ? sbTreeHandler.resource : sbListHandler.resource;
-=======
-	onPopupShowing : function(aEvent)
-	{
-		if (aEvent.originalTarget.id != "sbPopup")
-			return;
-		var res = sbTreeUI.resource;
->>>>>>> release-1.6.0.a1
 		if (!res) {
 			aEvent.preventDefault();
 			return;
@@ -377,11 +230,7 @@ var sbController = {
 		var isFolder = false;
 		var isBookmark = false;
 		var isSeparator = false;
-<<<<<<< HEAD
 		switch (sbDataSource.getProperty(res, "type")) {
-=======
-		switch (ScrapBookData.getProperty(res, "type")) {
->>>>>>> release-1.6.0.a1
 			case "note"     : isNote      = true; break;
 			case "folder"   : isFolder    = true; break;
 			case "bookmark" : isBookmark  = true; break;
@@ -394,10 +243,7 @@ var sbController = {
 		getElement("sbPopupOpenTab").hidden      = !isNote   || isSeparator;
 		getElement("sbPopupOpenNewTab").hidden   = isFolder  || isNote || isSeparator;
 		getElement("sbPopupOpenSource").hidden   = isFolder  || isNote || isSeparator;
-<<<<<<< HEAD
 		getElement("sbPopupListView").hidden     = !isFolder || isSeparator;
-=======
->>>>>>> release-1.6.0.a1
 		getElement("sbPopupCombinedView").hidden = !isFolder || isSeparator;
 		getElement("sbPopupOpenAllItems").hidden = !isFolder || isSeparator;
 		getElement("sbPopupOpenAllItems").nextSibling.hidden = !isFolder || isSeparator;
@@ -412,7 +258,6 @@ var sbController = {
 	open: function(aRes, aInTab)
 	{
 		if (!aRes)
-<<<<<<< HEAD
 			aRes = this.isTreeContext ? sbTreeHandler.resource : sbListHandler.resource;
 		if (!aRes)
 			return;
@@ -427,36 +272,14 @@ var sbController = {
 				sbCommonUtils.loadURL(
 					sbDataSource.getProperty(aRes, "source"),
 					aInTab || sbMainService.prefs.tabsOpen
-=======
-			aRes = sbTreeUI.resource;
-		if (!aRes)
-			return;
-		var id = ScrapBookData.getProperty(aRes, "id");
-		if (!id)
-			return;
-		switch (ScrapBookData.getProperty(aRes, "type")) {
-			case "note" :
-				sbNoteService.open(aRes, aInTab || ScrapBookUtils.getPref("tabs.note"));
-				break;
-			case "bookmark" :
-				ScrapBookUtils.loadURL(
-					ScrapBookData.getProperty(aRes, "source"),
-					aInTab || ScrapBookUtils.getPref("tabs.open")
->>>>>>> release-1.6.0.a1
 				);
 				break;
 			case "separator": 
 				return;
 			default :
-<<<<<<< HEAD
 				sbCommonUtils.loadURL(
 					sbMainService.baseURL + "data/" + id + "/index.html",
 					aInTab || sbMainService.prefs.tabsOpen
-=======
-				ScrapBookUtils.loadURL(
-					ScrapBookData.getURL(aRes),
-					aInTab || ScrapBookUtils.getPref("tabs.open")
->>>>>>> release-1.6.0.a1
 				);
 		}
 	},
@@ -464,77 +287,44 @@ var sbController = {
 	openAllInTabs: function(aRes)
 	{
 		if (!aRes)
-<<<<<<< HEAD
 			aRes = this.isTreeContext ? sbTreeHandler.resource : sbListHandler.resource;
 		if (!aRes)
 			return;
 		var resList = sbDataSource.flattenResources(aRes, 2, false);
 		resList.forEach(function(res) {
 			sbCommonUtils.loadURL(sbDataSource.getURL(res), true);
-=======
-			aRes = sbTreeUI.resource;
-		if (!aRes)
-			return;
-		var resList = ScrapBookData.flattenResources(aRes, 2, false);
-		resList.forEach(function(res) {
-			ScrapBookUtils.loadURL(ScrapBookData.getURL(res), true);
->>>>>>> release-1.6.0.a1
 		});
 	},
 
 	renew: function(aRes, aShowDetail)
 	{
 		if (!aRes)
-<<<<<<< HEAD
 			aRes = this.isTreeContext ? sbTreeHandler.resource : sbListHandler.resource;
 		if (!aRes)
 			return;
 		var preset = [
 			sbDataSource.getProperty(aRes, "id"),
-=======
-			aRes = sbTreeUI.resource;
-		if (!aRes)
-			return;
-		var preset = [
-			ScrapBookData.getProperty(aRes, "id"),
->>>>>>> release-1.6.0.a1
 			"index",
 			null,
 			null,
 			0,
-<<<<<<< HEAD
 			sbDataSource.getProperty(aRes, "type") == "bookmark"
-=======
-			ScrapBookData.getProperty(aRes, "type") == "bookmark"
->>>>>>> release-1.6.0.a1
 		];
 		window.top.openDialog(
 			"chrome://scrapbook/content/capture.xul", "",
 			"chrome,centerscreen,all,resizable,dialog=no",
-<<<<<<< HEAD
 			[sbDataSource.getProperty(aRes, "source")], null,
 			aShowDetail, null, 0, null, null, null, preset, "SB"
-=======
-			[ScrapBookData.getProperty(aRes, "source")], null,
-			aShowDetail, null, 0, null, null, null, preset
->>>>>>> release-1.6.0.a1
 		);
 	},
 
 	forward: function(aRes, aCommand, aParam)
 	{
 		if (!aRes)
-<<<<<<< HEAD
 			aRes = this.isTreeContext ? sbTreeHandler.resource : sbListHandler.resource;
 		if (!aRes)
 			return;
 		var id = sbDataSource.getProperty(aRes, "id");
-=======
-			aRes = sbTreeUI.resource;
-		if (!aRes)
-			return;
-		var id = ScrapBookData.getProperty(aRes, "id");
->>>>>>> release-1.6.0.a1
 		if (!id)
 			return;
 		switch (aCommand) {
@@ -542,17 +332,12 @@ var sbController = {
 				window.openDialog("chrome://scrapbook/content/property.xul", "", "chrome,centerscreen,modal", id);
 				break;
 			case "M": 
-<<<<<<< HEAD
 				sbCommonUtils.openManageWindow(aRes, null);
-=======
-				ScrapBookUtils.openManageWindow(aRes, null);
->>>>>>> release-1.6.0.a1
 				break;
 			case "Z": 
 				window.openDialog('chrome://scrapbook/content/sort.xul','','chrome,centerscreen,modal', aRes);
 				break;
 			case "C": 
-<<<<<<< HEAD
 				sbCommonUtils.loadURL(
 					"chrome://scrapbook/content/view.xul?id=" + sbDataSource.getProperty(aRes, "id"),
 					sbMainService.prefs.tabsCombinedView
@@ -566,21 +351,6 @@ var sbController = {
 				break;
 			case "L": 
 				this.launch(sbCommonUtils.getContentDir(id));
-=======
-				ScrapBookUtils.loadURL(
-					"chrome://scrapbook/content/view.xul?id=" + ScrapBookData.getProperty(aRes, "id"),
-					ScrapBookUtils.getPref("tabs.combinedView")
-				);
-				break;
-			case "S": 
-				ScrapBookUtils.loadURL(
-					ScrapBookData.getProperty(aRes, "source"),
-					ScrapBookUtils.getPref("tabs.openSource") || aParam
-				);
-				break;
-			case "L": 
-				this.launch(ScrapBookUtils.getContentDir(id));
->>>>>>> release-1.6.0.a1
 				break;
 			case "E": 
 				window.openDialog(
@@ -594,7 +364,6 @@ var sbController = {
 
 	launch: function(aDir)
 	{
-<<<<<<< HEAD
 		const Ci = Components.interfaces;
 		if (sbCommonUtils.getBoolPref("scrapbook.fileViewer.default", true)) {
 			try {
@@ -616,10 +385,6 @@ var sbController = {
 				alert("ScrapBook ERROR: Failed to execute program.\n" + ex);
 			}
 		}
-=======
-		aDir = aDir.QueryInterface(Ci.nsILocalFile);
-		aDir.launch();
->>>>>>> release-1.6.0.a1
 	},
 
 	sendInternal: function(aResList, aParResList)
@@ -634,17 +399,11 @@ var sbController = {
 			return;
 		var tarRes = result.resource;
 		for (var i = 0; i < aResList.length; i++)  {
-<<<<<<< HEAD
 			sbDataSource.moveItem(aResList[i], aParResList[i], tarRes, -1);
 		}
 		if (sbDataSource.unshifting)
 			this.rebuildLocal();
 		sbDataSource.flush();
-=======
-			ScrapBookData.moveItem(aResList[i], aParResList[i], tarRes, -1);
-		}
-		ScrapBookUtils.refreshGlobal(false);
->>>>>>> release-1.6.0.a1
 	},
 
 	removeInternal: function(aResList, aParResList, aBypassConfirm)
@@ -652,7 +411,6 @@ var sbController = {
 		var rmIDs = [];
 		for (var i = 0; i < aResList.length; i++) {
 			if (aParResList[i].Value == "urn:scrapbook:search") {
-<<<<<<< HEAD
 				aParResList[i] = sbDataSource.findParentResource(aResList[i]);
 				if (!aParResList[i])
 					continue;
@@ -690,46 +448,11 @@ var sbController = {
 		sbCommonUtils.rebuildGlobal();
 	},
 
-=======
-				aParResList[i] = ScrapBookData.findParentResource(aResList[i]);
-				if (!aParResList[i])
-					continue;
-				ScrapBookData.removeFromContainer("urn:scrapbook:search", aResList[i]);
-			}
-			if (!ScrapBookData.exists(aResList[i]) || 
-			    ScrapBookData.getRelativeIndex(aParResList[i], aResList[i]) < 0) {
-				ScrapBookUtils.alert("ERROR: Failed to remove resource.\n" + aResList[i].Value);
-				continue;
-			}
-			rmIDs = rmIDs.concat(ScrapBookData.deleteItemDescending(aResList[i], aParResList[i]));
-		}
-		for (var i = 0; i < rmIDs.length; i++) {
-			var myDir = ScrapBookUtils.getContentDir(rmIDs[i], true);
-			if (myDir && rmIDs[i].length == 14)
-				ScrapBookUtils.removeDirSafety(myDir, true);
-		}
-		ScrapBookUtils.refreshGlobal(false);
-		return rmIDs;
-	},
-
-	confirmBeforeRemoving: function(aRes)
-	{
-		if (ScrapBookData.isContainer(aRes) || ScrapBookUtils.getPref("confirmDelete")) {
-			var text = ScrapBookUtils.getLocaleString("CONFIRM_DELETE");
-			var ok = ScrapBookUtils.PROMPT.confirm(window, "[ScrapBook]", text);
-			if (!ok)
-				return false;
-		}
-		return true;
-	},
-
->>>>>>> release-1.6.0.a1
 };
 
 
 
 
-<<<<<<< HEAD
 var sbTreeDNDHandler = {
 
 	row      : 0,
@@ -1114,175 +837,10 @@ var sbSearchService = {
 		var shouldBuild = false;
 		if (!cache.exists() || cache.fileSize < 1024 * 32) {
 			shouldBuild = true;
-=======
-var sbSearchUI = {
-
-	get validTypes() { return ["fulltext", "title", "comment", "source", "id", "all"]; },
-
-	_searchImage: null,
-
-	_searchType: null,
-
-	_treeRef: null,
-
-
-	init: function() {
-		this._treeRef = sbTreeUI.TREE.ref;
-		this._searchImage = document.getElementById("sbSearchImage");
-		this.changeType(this._searchImage.getAttribute("searchtype"));
-	},
-
-	uninit: function() {
-		this._searchImage = null;
-		this._searchType = null;
-		this._treeRef = null;
-	},
-
-	onPopupShowing: function(event) {
-		if (event.target.id != "sbSearchPopup")
-			return;
-		Array.forEach(event.target.childNodes, function(elt) {
-			var type = elt.getAttribute("searchtype");
-			if (!type)
-				return;
-			elt.setAttribute("checked", (type == this._searchType).toString());
-		}, this);
-	},
-
-	changeType: function(aType) {
-		if (this.validTypes.indexOf(aType) < 0)
-			aType = "fulltext";
-		this._searchType = aType;
-		this._searchImage.setAttribute("searchtype", aType);
-		this._searchImage.src = "chrome://scrapbook/skin/search_" + aType + ".png";
-		var textbox = document.getElementById("sbSearchTextbox");
-		textbox.setAttribute("searchbutton", (aType == "fulltext").toString());
-		var elt = document.getElementById("sbSearchPopup").querySelector("[searchtype=" + aType + "]");
-		textbox.emptyText   = elt.getAttribute("label");
-		textbox.placeholder = elt.getAttribute("label");
-		textbox.focus();
-	},
-
-	onKeyPress: function(event) {
-		var ctrl  = event.ctrlKey;
-		var meta  = event.metaKey;
-		var shift = event.shiftKey;
-		var alt   = event.altKey;
-		var code  = event.keyCode;
-		if ((ctrl || meta) && !shift && !alt && code == event.DOM_VK_UP) {
-			var num = this.validTypes.indexOf(this._searchType);
-			num = Math.max(--num, 0);
-			this.changeType(this.validTypes[num]);
-			return;
-		}
-		if ((ctrl || meta) && !shift && !alt && code == event.DOM_VK_DOWN) {
-			var num = this.validTypes.indexOf(this._searchType);
-			num = Math.min(++num, this.validTypes.length - 1);
-			this.changeType(this.validTypes[num]);
-			return;
-		}
-		if (!ctrl && !meta && !shift && alt && code == event.DOM_VK_DOWN) {
-			var popup = document.getElementById("sbSearchPopup");
-			popup.openPopup(this._searchImage, "after_start", 0, 0, false, false);
-		}
-		if (code != event.DOM_VK_RETURN)
-			return;
-		var val = event.target.value;
-		if (val.length != 1)
-			return;
-		val = val.toLowerCase().replace("u", "s");
-			this.validTypes.forEach(function(type) {
-			if (type.charAt(0) == val) {
-					this.changeType(type);
-				this.reset();
-			}
-		}, this);
-	},
-
-	onCommand: function(aValue) {
-		if (!aValue) {
-			this.reset();
-			return;
-		}
-		else if (/^\w$/.test(aValue)) {
-			return;
-		}
-		else if (this._searchType == "fulltext") {
-			this._doFullTextSearch(aValue);
-		}
-		else if (/^days:(\d+)$/i.test(aValue)) {
-			aValue = parseInt(RegExp.$1, 10);
-			var ymdList = [];
-			var date = new Date();
-			do {
-				var y = date.getFullYear().toString();
-				var m = ("0" + (date.getMonth() + 1).toString()).slice(-2);
-				var d = ("0" +  date.getDate()      .toString()).slice(-2);
-				ymdList.push(y + m + d);
-				date.setTime(date.getTime() - 1000 * 60 * 60 * 24);
-			}
-			while (--aValue > 0);
-			var tmpType = this._searchType;
-			this._searchType = "id";
-			this._doFilteringSearch(new RegExp("^(?:" + ymdList.join("|") + ")"));
-			this._searchType = tmpType;
-		}
-		else {
-			var re = document.getElementById("sbSearchPopupOptionRE").getAttribute("checked");
-			var cs = document.getElementById("sbSearchPopupOptionCS").getAttribute("checked");
-			this._doFilteringSearch(new RegExp(
-				re == "true" ? aValue : aValue.replace(/([\*\+\?\.\|\[\]\{\}\^\/\$\\])/g, "\\$1"), 
-				cs == "true" ? "m" : "mi"
-			));
-		}
-	},
-
-	reset: function() {
-		if (!document.getElementById("sbMainToolbar"))
-			return;
-		document.getElementById("sbMainToolbar").hidden = false;
-		document.getElementById("sbSearchTextbox").value = "";
-		if (sbTreeUI.TREE.ref != "urn:scrapbook:search")
-			return;
-		sbTreeUI.TREE.ref = this._treeRef;
-		sbTreeUI.TREE.builder.rebuild();
-		sbTreeUI.enableDragDrop(true);
-		ScrapBookData.clearContainer("urn:scrapbook:search");
-	},
-
-	promptForDaysFilter: function() {
-		var ret = { value: null };
-		var title = ScrapBookUtils.getLocaleString("FILTER_BY_DAYS");
-		if (!ScrapBookUtils.PROMPT.prompt(window, "[ScrapBook]", title, ret, null, {}))
-			return;
-		var days = ret.value;
-		if (isNaN(days) || days <= 0)
-			return;
-		var textbox = document.getElementById("sbSearchTextbox");
-		textbox.focus();
-		textbox.value = "days:" + days.toString();
-		textbox.doCommand();
-	},
-
-	updateCache: function(aRefURL) {
-		window.openDialog(
-			"chrome://scrapbook/content/cache.xul", "ScrapBook:Cache", "chrome,dialog=no", aRefURL
-		);
-	},
-
-
-	_doFullTextSearch: function(aValue) {
-		var cache = ScrapBookUtils.getScrapBookDir().clone();
-		cache.append("cache.rdf");
-		var shouldRebuild = false;
-		if (!cache.exists() || cache.fileSize < 1024 * 32) {
-			shouldRebuild = true;
->>>>>>> release-1.6.0.a1
 		}
 		else {
 			var modTime = cache.lastModifiedTime;
 			if (modTime && ((new Date()).getTime() - modTime) > 1000 * 60 * 60 * 24 * 5)
-<<<<<<< HEAD
 				shouldBuild = true;
 		}
 		var uri = "chrome://scrapbook/content/result.xul";
@@ -1296,38 +854,10 @@ var sbSearchUI = {
 			var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
 			var inTab = (win.content.location.href.indexOf(uri) == 0) ? false : sbMainService.prefs.tabsSearchResult;
 			sbCommonUtils.loadURL(uri + query, inTab);
-=======
-				shouldRebuild = true;
-		}
-		var url = "chrome://scrapbook/content/result.xul";
-		var query = "?q=" + aValue;
-		if (document.getElementById("sbSearchPopupOptionRE").getAttribute("checked") == "true")
-			query += "&re=true";
-		if (document.getElementById("sbSearchPopupOptionRE").getAttribute("checked") == "true")
-			query += "&cs=true";
-		if (this._treeRef != "urn:scrapbook:root")
-			query += "&ref=" + this._treeRef;
-		if (shouldRebuild) {
-			this.updateCache(url + query);
-		}
-		else {
-			var win = ScrapBookUtils.getBrowserWindow();
-			for (var i = 0; i < win.gBrowser.browsers.length; i++) {
-				var browser = win.gBrowser.browsers[i];
-				if (browser.currentURI.spec.indexOf(url) == 0) {
-					win.focus();
-					win.gBrowser.tabContainer.selectedIndex = i;
-					win.gBrowser.loadURI(url + query);
-					return;
-				}
-			}
-			ScrapBookUtils.loadURL(url + query, ScrapBookUtils.getPref("tabs.searchResult"));
->>>>>>> release-1.6.0.a1
 			win.focus();
 		}
 	},
 
-<<<<<<< HEAD
 	buildFT: function(aResURI)
 	{
 		window.openDialog('chrome://scrapbook/content/cache.xul','ScrapBook:Cache','chrome,dialog=no', aResURI);
@@ -1406,32 +936,6 @@ var sbSearchUI = {
 		this.FORM_HISTORY.removeEntriesForName("sbSearchHistory");
 	}
 
-=======
-	_doFilteringSearch: function(aRegex) {
-		ScrapBookData.clearContainer("urn:scrapbook:search");
-		var container = ScrapBookData.getContainer("urn:scrapbook:search", true);
-		var rootRes = ScrapBookUtils.RDF.GetResource(this._treeRef);
-		var resList = ScrapBookData.flattenResources(rootRes, 2, true);
-		resList.forEach(function(res) {
-			if (ScrapBookData.getProperty(res, "type") == "separator")
-				return;
-			var val;
-			if (this._searchType != "all")
-				val = ScrapBookData.getProperty(res, this._searchType);
-			else
-				var val = ["title", "comment", "source", "id"].map(function(prop) {
-					return ScrapBookData.getProperty(res, prop);
-				}).join("\n");
-			if (val && aRegex.test(val))
-				container.AppendElement(res);
-		}, this);
-		sbTreeUI.TREE.ref = "urn:scrapbook:search";
-		sbTreeUI.TREE.builder.rebuild();
-		sbTreeUI.enableDragDrop(false);
-		document.getElementById("sbMainToolbar").hidden = true;
-	},
-
->>>>>>> release-1.6.0.a1
 };
 
 

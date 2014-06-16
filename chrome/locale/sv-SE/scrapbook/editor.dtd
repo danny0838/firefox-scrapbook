@@ -15,7 +15,6 @@
 <!ENTITY sb.highlighter "Överstrykningspenna">
 <!ENTITY sb.highlighter.remove "Rensa färgöverstrykningar i markering">
 <!ENTITY sb.highlighter.remove.all "Rensa alla färgöverstrykningar">
-<<<<<<< HEAD
 <!ENTITY sbp.highlighter.stil1 "   Format 1   ">
 <!ENTITY sbp.highlighter.stil2 "   Format 2   ">
 <!ENTITY sbp.highlighter.stil3 "   Format 3   ">
@@ -24,10 +23,6 @@
 <!ENTITY sbp.highlighter.stil6 "   Format 6   ">
 <!ENTITY sb.source "Öppna käll-URL">
 <!ENTITY sb.renew "Fånga in igen">
-=======
-<!ENTITY sb.source "Öppna käll-URL">
-<!ENTITY sb.renew "Spara igen">
->>>>>>> release-1.6.0.a1
 <!ENTITY sb.locate "Hitta i sidopanelsträdet">
 <!ENTITY sb.indicators "Visa länkindikatorer">
 <!ENTITY sb.info.home "Hem">
