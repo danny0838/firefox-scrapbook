@@ -2,7 +2,8 @@
 <!ENTITY sb.open.tab "Deschide într-o filă">
 <!ENTITY sb.open.newtab "Deschide într-o filă nouă">
 <!ENTITY sb.open.source "Deschide adresa sursei">
-<!ENTITY sb.tools "Instrumente">
+<!ENTITY sb.multi "Multi-ScrapBook">
+<!ENTITY sb.tools "Unelte">
 <!ENTITY sb.show.files "Afișează fișierele">
 <!ENTITY sb.move "Mută">
 <!ENTITY sb.move.into "Mută în dosar">

@@ -7,7 +7,7 @@
 
 <dialog id="mbManagerDialog"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        title="Multi-ScrapBook &mb.manager;"
+        title="&mb.manager;"
         onload="gMultiBookManager.init();"
         ondialogaccept="gMultiBookManager.done();"
         style="width: 40em;">
