@@ -29,10 +29,6 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "in fondo alla cartella">
 <!ENTITY sb.prefs.showDetailOnDrop "Mostra la finestra di dialogo &apos;Dettagli cattura&apos; quando si cattura tramite trascinamento e rilascio nella barra laterale">
 <!ENTITY sb.prefs.notifyOnComplete "Mostra la finestra di notifica &apos;Cattura completata&apos;">
-<!ENTITY sb.prefs.viewer "Applicazione per visualizzare i file">
-<!ENTITY sb.prefs.viewer.default "Predefinita">
-<!ENTITY sb.prefs.viewer.default.explorer "in ambiente Windows, solitamente Explorer">
-<!ENTITY sb.prefs.viewer.custom "Visualizza con">
 <!ENTITY sb.button.customize "Personalizza">
 <!ENTITY sb.button.browse "Sfoglia">
 <!ENTITY sb.button.show "Mostra i file">

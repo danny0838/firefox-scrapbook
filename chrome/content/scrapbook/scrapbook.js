@@ -364,27 +364,8 @@ var sbController = {
 
 	launch: function(aDir)
 	{
-		const Ci = Components.interfaces;
-		if (sbCommonUtils.getBoolPref("extensions.scrapbook.fileViewer.default", true)) {
-			try {
-				aDir = aDir.QueryInterface(Ci.nsILocalFile);
-				aDir.launch();
-			}
-			catch (ex) {
-				sbCommonUtils.loadURL(sbCommonUtils.convertFilePathToURL(aDir.path), false);
-			}
-		}
-		else {
-			try {
-				var path = sbCommonUtils.PREF.getComplexValue(
-					"extensions.scrapbook.fileViewer.path", Ci.nsIPrefLocalizedString
-				).data;
-				sbCommonUtils.execProgram(path, [aDir.path]);
-			}
-			catch (ex) {
-				alert("ScrapBook ERROR: Failed to execute program.\n" + ex);
-			}
-		}
+		aDir = aDir.QueryInterface(Components.interfaces.nsILocalFile);
+		aDir.launch();
 	},
 
 	sendInternal: function(aResList, aParResList)

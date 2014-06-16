@@ -29,10 +29,6 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "наприкінці теки">
 <!ENTITY sb.prefs.showDetailOnDrop "Відображати діалог „Налаштування збереження“ при збереженні перетягуванням на бічну панель">
 <!ENTITY sb.prefs.notifyOnComplete "Показувати інформацію „Збереження виконано“">
-<!ENTITY sb.prefs.viewer "Програма перегляду файлів">
-<!ENTITY sb.prefs.viewer.default "Типова">
-<!ENTITY sb.prefs.viewer.default.explorer "Провідник">
-<!ENTITY sb.prefs.viewer.custom "Переглядати за допомогою:">
 <!ENTITY sb.button.customize "Змінити">
 <!ENTITY sb.button.browse "Вибрати">
 <!ENTITY sb.button.show "Показати файли">

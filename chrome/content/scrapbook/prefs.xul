@@ -137,24 +137,6 @@
 		</preferences>
 		<checkbox preference="extensions.scrapbook.showDetailOnDrop" label="&sb.prefs.showDetailOnDrop;" />
 		<checkbox preference="extensions.scrapbook.notifyOnComplete" label="&sb.prefs.notifyOnComplete;" />
-		<groupbox>
-			<caption id="sbViewerCaption" label="&sb.prefs.viewer;" />
-			<radiogroup id="sbViewer"
-			            preference="extensions.scrapbook.fileViewer.default"
-			            onsyncfrompreference="sbPrefWindow.updateViewerUI();">
-				<radio id="sbViewerDefault"
-				       label="&sb.prefs.viewer.default;"
-				       label2="&sb.prefs.viewer.default.explorer;"
-				       value="true" />
-				<hbox>
-					<radio label="&sb.prefs.viewer.custom;" value="false" />
-					<filefield id="sbViewerPath" flex="1" />
-					<button id="sbViewerButton"
-					        label="&sb.button.browse;..."
-					        oncommand="sbPrefWindow.selectViewer();" />
-				</hbox>
-			</radiogroup>
-		</groupbox>
 	</prefpane>
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/prefs.js" />

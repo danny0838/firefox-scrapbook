@@ -29,10 +29,6 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "le bas d&apos;un dossier">
 <!ENTITY sb.prefs.showDetailOnDrop "Afficher la boîte de dialogue &apos;Détail de la capture&apos; lors de la capture par un glisser-déposer dans le panneau latéral">
 <!ENTITY sb.prefs.notifyOnComplete "Afficher la notification &apos;Capture terminée&apos;">
-<!ENTITY sb.prefs.viewer "Application pour explorer les fichiers">
-<!ENTITY sb.prefs.viewer.default "Par défaut">
-<!ENTITY sb.prefs.viewer.default.explorer "Explorateur">
-<!ENTITY sb.prefs.viewer.custom "Afficher les fichiers avec">
 <!ENTITY sb.button.customize "Personnaliser">
 <!ENTITY sb.button.browse "Parcourir">
 <!ENTITY sb.button.show "Afficher les fichiers">

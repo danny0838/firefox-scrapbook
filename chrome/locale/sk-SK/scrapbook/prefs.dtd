@@ -29,10 +29,6 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "posledné miesto v priečinku">
 <!ENTITY sb.prefs.showDetailOnDrop "Zobraziť dialóg &apos;Detail zachytenia&apos;, keď sa zachytenie vykoná pomocou drag-and-drop do bočného panelu">
 <!ENTITY sb.prefs.notifyOnComplete "Zobraziť oznámenie &apos;Zachytenie dokončené&apos;">
-<!ENTITY sb.prefs.viewer "Súborový prehliadač">
-<!ENTITY sb.prefs.viewer.default "Predvolený">
-<!ENTITY sb.prefs.viewer.default.explorer "Prieskumník">
-<!ENTITY sb.prefs.viewer.custom "Súbory zobraziť pomocou">
 <!ENTITY sb.button.customize "Prispôsobiť">
 <!ENTITY sb.button.browse "Prehľadávať">
 <!ENTITY sb.button.show "Zobraziť súbory">

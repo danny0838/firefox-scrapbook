@@ -29,10 +29,6 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "конец каталога">
 <!ENTITY sb.prefs.showDetailOnDrop "Показывать диалог «Настройки сохранения страницы» при захвате перетаскиванием на боковую панель">
 <!ENTITY sb.prefs.notifyOnComplete "Показывать сообщение «Сохранение завершено»">
-<!ENTITY sb.prefs.viewer "Приложение для просмотра файлов">
-<!ENTITY sb.prefs.viewer.default "По умолчанию">
-<!ENTITY sb.prefs.viewer.default.explorer "Explorer">
-<!ENTITY sb.prefs.viewer.custom "Использовать">
 <!ENTITY sb.button.customize "Изменить">
 <!ENTITY sb.button.browse "Обзор">
 <!ENTITY sb.button.show "Показать файлы">

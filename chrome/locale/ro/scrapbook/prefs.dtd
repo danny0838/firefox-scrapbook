@@ -29,10 +29,6 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "la sfârșitul arborelui">
 <!ENTITY sb.prefs.showDetailOnDrop "Afișează caseta „Detalii capturare” când se capturează prin glisare și fixare în panoul lateral">
 <!ENTITY sb.prefs.notifyOnComplete "Afișează notificarea „Capturare finalizată”">
-<!ENTITY sb.prefs.viewer "Aplicație pentru explorarea fișierelor">
-<!ENTITY sb.prefs.viewer.default "Implicit">
-<!ENTITY sb.prefs.viewer.default.explorer "Explorator">
-<!ENTITY sb.prefs.viewer.custom "Afișează fișierele utilizând">
 <!ENTITY sb.button.customize "Personalizează">
 <!ENTITY sb.button.browse "Răsfoiește">
 <!ENTITY sb.button.show "Afișează fișierele">
