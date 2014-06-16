@@ -17,7 +17,7 @@ var gMultiBookManager = {
 		if (!window.opener)
 			throw Components.results.NS_ERROR_UNEXPECTED;
 		var data = sbMultiBookService.initFile();
-		var currentPath = sbCommonUtils.copyUnicharPref("scrapbook.data.path", "");
+		var currentPath = sbCommonUtils.copyUnicharPref("extensions.scrapbook.data.path", "");
 		data.forEach(function(item) {
 			item[kActiveCol] = (item[kPathCol] == currentPath);
 		});
@@ -33,8 +33,8 @@ var gMultiBookManager = {
 		if (this._activeItemChanged) {
 			gMultiBookTreeView._data.forEach(function(item) {
 				if (item[kActiveCol]) {
-					sbCommonUtils.setUnicharPref("scrapbook.data.title", item[kNameCol]);
-					sbCommonUtils.setUnicharPref("scrapbook.data.path", item[kPathCol]);
+					sbCommonUtils.setUnicharPref("extensions.scrapbook.data.title", item[kNameCol]);
+					sbCommonUtils.setUnicharPref("extensions.scrapbook.data.path", item[kPathCol]);
 					window.opener.top.sbBrowserOverlay.dataTitle = item[kNameCol];
 				}
 			});

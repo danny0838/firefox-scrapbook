@@ -28,7 +28,7 @@ var sbHighlighter = {
 		document.getElementById("ScrapBookHighlighterM" + idx).setAttribute("checked", "true");
 		for ( idx = 6; idx > 0; idx-- )
 		{
-			var cssText = sbCommonUtils.copyUnicharPref("scrapbook.highlighter.style." + idx, this.PRESET_STYLES[idx]);
+			var cssText = sbCommonUtils.copyUnicharPref("extensions.scrapbook.highlighter.style." + idx, this.PRESET_STYLES[idx]);
 			this.decorateElement(document.getElementById("ScrapBookHighlighterM" + idx), cssText);
 		}
 	},

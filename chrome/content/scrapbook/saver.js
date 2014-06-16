@@ -869,7 +869,7 @@ var sbCaptureObserverCallback = {
 	onCaptureComplete : function(aItem)
 	{
 		if ( aItem && sbDataSource.getProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id), "type") == "marked" ) return;
-		if ( sbCommonUtils.getBoolPref("scrapbook.notifyOnComplete", true) )
+		if ( sbCommonUtils.getBoolPref("extensions.scrapbook.notifyOnComplete", true) )
 		{
 			window.openDialog("chrome://scrapbook/content/notify.xul", "", "chrome,dialog=yes,titlebar=no,popup=yes", aItem);
 		}

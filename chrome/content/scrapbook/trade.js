@@ -40,7 +40,7 @@ var sbTradeService = {
 
 	prepareRightDir : function(aQuickMode)
 	{
-		var dirPath = sbCommonUtils.copyUnicharPref("scrapbook.trade.path", "");
+		var dirPath = sbCommonUtils.copyUnicharPref("extensions.scrapbook.trade.path", "");
 		if ( !dirPath )
 		{
 			this.lock(1);
@@ -92,7 +92,7 @@ var sbTradeService = {
 		if ( this.rightDir ) picker.displayDirectory = this.rightDir;
 		var answer = picker.show();
 		if ( answer == picker.returnOK ) {
-			sbCommonUtils.setUnicharPref("scrapbook.trade.path", picker.file.path);
+			sbCommonUtils.setUnicharPref("extensions.scrapbook.trade.path", picker.file.path);
 			return true;
 		}
 		return false;
@@ -267,7 +267,7 @@ var sbTradeService = {
 	{
 		var idxList = sbCustomTreeUtil.getSelection(this.TREE);
 		if ( idxList.length < 1 ) return;
-		if ( !sbCommonUtils.getBoolPref("scrapbook.tree.quickdelete", false) )
+		if ( !sbCommonUtils.getBoolPref("extensions.scrapbook.tree.quickdelete", false) )
 		{
 			if ( !window.confirm( window.top.sbMainService.STRING.getString("CONFIRM_DELETE") ) ) return;
 		}

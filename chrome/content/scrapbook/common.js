@@ -38,8 +38,8 @@ var sbCommonUtils = {
 	{
 		var dir;
 		try {
-			var isDefault = this.PREF.getBoolPref("scrapbook.data.default");
-			dir = this.PREF.getComplexValue("scrapbook.data.path", Components.interfaces.nsIPrefLocalizedString).data;
+			var isDefault = this.PREF.getBoolPref("extensions.scrapbook.data.default");
+			dir = this.PREF.getComplexValue("extensions.scrapbook.data.path", Components.interfaces.nsIPrefLocalizedString).data;
 			dir = this.convertPathToFile(dir);
 		} catch(ex) {
 			isDefault = true;

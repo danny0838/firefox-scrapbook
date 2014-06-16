@@ -6,7 +6,7 @@ var sbMultiBookService = {
 
 	showButton: function()
 	{
-		this.enabled = sbCommonUtils.getBoolPref("scrapbook.multibook.enabled", false);
+		this.enabled = sbCommonUtils.getBoolPref("extensions.scrapbook.multibook.enabled", false);
 		document.getElementById("mbToolbarButton").hidden = !this.enabled;
 	},
 
@@ -44,7 +44,7 @@ var sbMultiBookService = {
 		{
 			var title = win.sbBrowserOverlay.dataTitle;
 			if (!title) {
-				title = sbCommonUtils.copyUnicharPref("scrapbook.data.title", "");
+				title = sbCommonUtils.copyUnicharPref("extensions.scrapbook.data.title", "");
 				win.sbBrowserOverlay.dataTitle = title;
 			}
 			if (title)
@@ -54,8 +54,8 @@ var sbMultiBookService = {
 
 	initMenu : function()
 	{
-		var isDefault = sbCommonUtils.getBoolPref("scrapbook.data.default", true);
-		var dataPath  = sbCommonUtils.copyUnicharPref("scrapbook.data.path", "");
+		var isDefault = sbCommonUtils.getBoolPref("extensions.scrapbook.data.default", true);
+		var dataPath  = sbCommonUtils.copyUnicharPref("extensions.scrapbook.data.path", "");
 		var popup = document.getElementById("mbMenuPopup");
 		if (!this.file) {
 			var items = this.initFile();
@@ -84,7 +84,7 @@ var sbMultiBookService = {
 		this.file.append("multibook.txt");
 		if (!this.file.exists()) {
 			this.file.create(this.file.NORMAL_FILE_TYPE, parseInt("0666", 8));
-			var path = sbCommonUtils.copyUnicharPref("scrapbook.data.path", "");
+			var path = sbCommonUtils.copyUnicharPref("extensions.scrapbook.data.path", "");
 			if (path)
 				sbCommonUtils.writeFile(this.file, "My ScrapBook\t" + path + "\n", "UTF-8");
 		}
@@ -104,10 +104,10 @@ var sbMultiBookService = {
 			return;
 		aItem.setAttribute("checked", true);
 		var path = aItem.getAttribute("path");
-		sbCommonUtils.setBoolPref("scrapbook.data.default", path == "");
+		sbCommonUtils.setBoolPref("extensions.scrapbook.data.default", path == "");
 		if (path != "")
-			sbCommonUtils.setUnicharPref("scrapbook.data.path", path);
-		sbCommonUtils.setUnicharPref("scrapbook.data.title", aItem.label);
+			sbCommonUtils.setUnicharPref("extensions.scrapbook.data.path", path);
+		sbCommonUtils.setUnicharPref("extensions.scrapbook.data.title", aItem.label);
 		try {
 			var refWin = "sbBrowserOverlay" in window.top ? window.top : window.opener.top;
 			refWin.sbBrowserOverlay.dataTitle = aItem.label;

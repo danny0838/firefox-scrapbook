@@ -15,7 +15,7 @@ var sbPrefWindow = {
 		this.updateDataPath();
 		this.updateViewerPath();
 		this.hlInitUI();
-		this._updateFileField("sbDataPath", "scrapbook.data.path");
+		this._updateFileField("sbDataPath", "extensions.scrapbook.data.path");
 		if (!sbMultiBookService.validateRefresh(true)) {
 			var elts = document.getElementById("sbDataDefault").getElementsByTagName("*");
 			Array.forEach(elts, function(elt) {
@@ -86,7 +86,7 @@ var sbPrefWindow = {
 	},
 
 	updateViewerUI: function() {
-		var isDefault = document.getElementById("scrapbook.fileViewer.default").value;
+		var isDefault = document.getElementById("extensions.scrapbook.fileViewer.default").value;
 		document.getElementById("sbViewerPath").disabled   = isDefault;
 		document.getElementById("sbViewerButton").disabled = isDefault;
 	},
@@ -96,7 +96,7 @@ var sbPrefWindow = {
 	},
 
 	updateViewerPath: function() {
-		this._updateFileField("sbViewerPath", "scrapbook.fileViewer.path");
+		this._updateFileField("sbViewerPath", "extensions.scrapbook.fileViewer.path");
 	},
 
 	_updateFileField: function(aEltID, aPrefID) {
@@ -127,7 +127,7 @@ var sbPrefWindow = {
 		fp.init(window, title, fp.modeOpen);
 		fp.appendFilters(fp.filterApps);
 		if (fp.show() == fp.returnOK) {
-			document.getElementById("scrapbook.fileViewer.path").value = fp.file;
+			document.getElementById("extensions.scrapbook.fileViewer.path").value = fp.file;
 			this.updateViewerPath();
 		}
 	},

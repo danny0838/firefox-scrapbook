@@ -29,13 +29,13 @@ var sbMainService = {
 
 	initPrefs: function()
 	{
-		this.prefs.showDetailOnDrop = sbCommonUtils.getBoolPref("scrapbook.showDetailOnDrop",  false);
-		this.prefs.confirmDelete    = sbCommonUtils.getBoolPref("scrapbook.confirmDelete",     true);
-		this.prefs.tabsOpen         = sbCommonUtils.getBoolPref("scrapbook.tabs.open",         false);
-		this.prefs.tabsOpenSource   = sbCommonUtils.getBoolPref("scrapbook.tabs.openSource",   false);
-		this.prefs.tabsSearchResult = sbCommonUtils.getBoolPref("scrapbook.tabs.searchResult", true);
-		this.prefs.tabsCombinedView = sbCommonUtils.getBoolPref("scrapbook.tabs.combinedView", true);
-		this.prefs.tabsNote         = sbCommonUtils.getBoolPref("scrapbook.tabs.note",         false);
+		this.prefs.showDetailOnDrop = sbCommonUtils.getBoolPref("extensions.scrapbook.showDetailOnDrop",  false);
+		this.prefs.confirmDelete    = sbCommonUtils.getBoolPref("extensions.scrapbook.confirmDelete",     true);
+		this.prefs.tabsOpen         = sbCommonUtils.getBoolPref("extensions.scrapbook.tabs.open",         false);
+		this.prefs.tabsOpenSource   = sbCommonUtils.getBoolPref("extensions.scrapbook.tabs.openSource",   false);
+		this.prefs.tabsSearchResult = sbCommonUtils.getBoolPref("extensions.scrapbook.tabs.searchResult", true);
+		this.prefs.tabsCombinedView = sbCommonUtils.getBoolPref("extensions.scrapbook.tabs.combinedView", true);
+		this.prefs.tabsNote         = sbCommonUtils.getBoolPref("extensions.scrapbook.tabs.note",         false);
 	},
 
 	refresh: function()
@@ -365,7 +365,7 @@ var sbController = {
 	launch: function(aDir)
 	{
 		const Ci = Components.interfaces;
-		if (sbCommonUtils.getBoolPref("scrapbook.fileViewer.default", true)) {
+		if (sbCommonUtils.getBoolPref("extensions.scrapbook.fileViewer.default", true)) {
 			try {
 				aDir = aDir.QueryInterface(Ci.nsILocalFile);
 				aDir.launch();
@@ -377,7 +377,7 @@ var sbController = {
 		else {
 			try {
 				var path = sbCommonUtils.PREF.getComplexValue(
-					"scrapbook.fileViewer.path", Ci.nsIPrefLocalizedString
+					"extensions.scrapbook.fileViewer.path", Ci.nsIPrefLocalizedString
 				).data;
 				sbCommonUtils.execProgram(path, [aDir.path]);
 			}
@@ -615,7 +615,7 @@ var sbTreeDNDHandler = {
 		}
 		//RDF-Datenquelle vom tree entfernen
 		var mmDatei = sbCommonUtils.getScrapBookDir();
-		mmDatei.append("scrapbook.rdf");
+		mmDatei.append("extensions.scrapbook.rdf");
 		var mmDateiURL = sbCommonUtils.IO.newFileURI(mmDatei).spec;
 		var mmDaten = sbCommonUtils.RDF.GetDataSourceBlocking(mmDateiURL);
 		var mmSidebarTreeObj = window.opener.document.getElementById("sbTree");

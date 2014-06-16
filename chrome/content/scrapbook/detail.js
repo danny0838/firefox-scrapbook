@@ -113,7 +113,7 @@ var sbCaptureOptions = {
 		if ( this.CUSTOM_UI.checked )
 		{
 			this.param.option["custom"] = this.CUSTOM_UI.nextSibling.value.replace(/[^0-9a-zA-Z,\|]/g, "").replace(/[,\|]/g, ", ");
-			sbCommonUtils.setUnicharPref("scrapbook.detail.custom", this.param.option["custom"]);
+			sbCommonUtils.setUnicharPref("extensions.scrapbook.detail.custom", this.param.option["custom"]);
 		}
 		if ( this.param.context == "capture-again" )
 		{
@@ -188,10 +188,10 @@ var sbFolderSelector = {
 
 	processRecent: function()
 	{
-		var ids = sbCommonUtils.copyUnicharPref("scrapbook.ui.folderList", "");
+		var ids = sbCommonUtils.copyUnicharPref("extensions.scrapbook.ui.folderList", "");
 		ids = ids ? ids.split("|") : [];
 		var shownItems = 0;
-		var maxEntries = sbCommonUtils.PREF.getIntPref("scrapbook.ui.folderList.maxEntries");
+		var maxEntries = sbCommonUtils.PREF.getIntPref("extensions.scrapbook.ui.folderList.maxEntries");
 		for (var i = 0; i < ids.length && shownItems < maxEntries; i++)
 		{
 			if (ids[i].length != 14)
