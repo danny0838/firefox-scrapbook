@@ -1,4 +1,8 @@
 <!ENTITY sb.prefs.main "Hlavné">
+<<<<<<< HEAD
+=======
+<!ENTITY sb.prefs.keys "Klávesy">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.prefs.tabs "Karty">
 <!ENTITY sb.prefs.save "Uložiť">
 <!ENTITY sb.prefs.edit "Upraviť">
@@ -6,12 +10,21 @@
 <!ENTITY sb.prefs.advanced "Pokročilé">
 <!ENTITY sb.prefs.ui.contextMenu "Zobraziť v kontextovej ponuke prehliadača">
 <!ENTITY sb.prefs.ui.contextSubMenu "Podponuka">
+<<<<<<< HEAD
 <!ENTITY sb.prefs.ui.bookmarkMenu "Zobraziť ponuku &apos;Vytvoriť záložku&apos;">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Zobraziť maximálne">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "posledných použitých priečinkov">
 <!ENTITY sb.prefs.ui.menuBar "Zobraziť v ponukovej lište">
 <!ENTITY sb.prefs.ui.menuBar.icon "Ikona">
 <!ENTITY sb.prefs.ui.toolsMenu "Zobraziť v ponuke &apos;Nástroje&apos;">
+=======
+<!ENTITY sb.prefs.ui.bookmark "Zobraziť ponuku &apos;Uložiť ako záložku&apos;">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Zobraziť">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "posledných použitých priečinkov">
+<!ENTITY sb.prefs.ui.menuBar "Zobraziť v ponukovej lište">
+<!ENTITY sb.prefs.ui.menuBar.icon "Ikona">
+<!ENTITY sb.prefs.ui.toolsMenu "Zobraziť v ponuke 'Nástroje'">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.prefs.ui.statusBar "Zobraziť v stavovej lište">
 <!ENTITY sb.prefs.restart "Zmeny sa prejavia po reštarte Firefoxu.">
 <!ENTITY sb.prefs.tabs.tips "Nasledovné akcie otvoria nové karty">
@@ -24,6 +37,7 @@
 <!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook umožní zvoliť si viaceré priečinky pre ukladanie údajov a jednoducho prepínať medzi nimi pomocou tlačidla na paneli nástrojov.">
 <!ENTITY sb.prefs.confirmDelete "Upozorniť pri odstránení položky">
 <!ENTITY sb.prefs.tree.autoCollapse "Pri otvorení priečinku automaticky zatvoriť ostatné priečinky">
+<<<<<<< HEAD
 <!ENTITY sb.prefs.tree.unshift "Zaradiť položku na">
 <!ENTITY sb.prefs.tree.unshift.top "prvé miesto v priečinku">
 <!ENTITY sb.prefs.tree.unshift.bottom "posledné miesto v priečinku">
@@ -37,3 +51,13 @@
 <!ENTITY sb.button.browse "Prehľadávať">
 <!ENTITY sb.button.show "Zobraziť súbory">
 <!ENTITY sbp.prefs.useDropDownList "Použite rozbaľovací zoznam namiesto tlačidiel pre zvýrazňovač">
+=======
+<!ENTITY sb.prefs.tree.unshift "Zaradiť položku">
+<!ENTITY sb.prefs.tree.unshift.top "na vrch v priečinku">
+<!ENTITY sb.prefs.tree.unshift.bottom "na spodok v priečinku">
+<!ENTITY sb.prefs.showDetailOnDrop "Zobraziť dialóg 'Detail zachytenia', keď sa zachytenie vykoná pomocou drag-and-drop do bočného panelu">
+<!ENTITY sb.prefs.notifyOnComplete "Zobraziť oznámenie 'Zachytenie dokončené'">
+<!ENTITY sb.button.customize "Prispôsobiť">
+<!ENTITY sb.button.browse "Prehľadávať">
+<!ENTITY sb.button.show "Zobraziť súbory">
+>>>>>>> release-1.6.0.a1

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!ENTITY sb.capture.partial "選択範囲の取り込み">
 <!ENTITY sb.capture.partial.as "選択範囲の詳細な取り込み">
 <!ENTITY sb.capture.entire "ページの取り込み">
@@ -16,3 +17,18 @@
 <!ENTITY sb.key.capture "L">
 <!ENTITY sb.key.capture.as "K">
 <!ENTITY sb.key.bookmark "J">
+=======
+<!ENTITY sb.save.partial "選択範囲を保存">
+<!ENTITY sb.save.partial.as "選択範囲を詳細に保存">
+<!ENTITY sb.save.entire "ページを保存">
+<!ENTITY sb.save.entire.as "ページを詳細に保存">
+<!ENTITY sb.save.frame "フレームを保存">
+<!ENTITY sb.save.frame.as "フレームを詳細に保存">
+<!ENTITY sb.save.target "リンク先を保存">
+<!ENTITY sb.save.target.as "リンク先を詳細に保存">
+<!ENTITY sb.save.alltabs "すべてのタブを保存">
+<!ENTITY sb.save.bookmark "ブックマーク形式で保存">
+<!ENTITY sb.sidebar "サイドバーで表示">
+<!ENTITY sb.menubar "メニューバー">
+<!ENTITY sb.editbefore "保存前編集モード">
+>>>>>>> release-1.6.0.a1

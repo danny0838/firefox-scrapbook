@@ -6,6 +6,7 @@
 <!ENTITY sb.show.files "Visa filer">
 <!ENTITY sb.move "Flytta">
 <!ENTITY sb.move.into "Flytta till mapp">
+<<<<<<< HEAD
 <!ENTITY sb.renew "Fånga in igen">
 <!ENTITY sb.export "Exportera">
 <!ENTITY sb.remove "Ta bort">
@@ -14,6 +15,15 @@
 <!ENTITY sb.prop.title "Rubrik">
 <!ENTITY sb.prop.comment "Kommentar">
 <!ENTITY sbp.prop.url "URL">
+=======
+<!ENTITY sb.renew "Spara igen">
+<!ENTITY sb.export "Exportera">
+<!ENTITY sb.remove "Ta bort">
+<!ENTITY sb.property "Egenskaper">
+<!ENTITY sb.prop.title "Rubrik">
+<!ENTITY sb.prop.url "URL">
+<!ENTITY sb.prop.comment "Kommentar">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.prop.id.date "ID (tid)">
 <!ENTITY sb.folder.combine "Kombinerad vy">
 <!ENTITY sb.folder.openall "Öppna alla i flikar">

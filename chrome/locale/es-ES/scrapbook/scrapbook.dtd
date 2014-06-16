@@ -14,6 +14,9 @@
 <!ENTITY sb.tools.output "Exportar como árbol HTML">
 <!ENTITY sb.tools.repair "Reparación de emergencia">
 <!ENTITY sb.tools.addons "Funciones Añadidas">
+<<<<<<< HEAD
 <!ENTITY sb.tools.homepage "Página de inicio">
+=======
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.note.opentab "Abrir en pestaña">
 <!ENTITY sb.note.close "Cerrar">

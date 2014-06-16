@@ -6,6 +6,7 @@
 <!ENTITY sb.show.files "ファイルを表示">
 <!ENTITY sb.move "移動">
 <!ENTITY sb.move.into "フォルダへ移動">
+<<<<<<< HEAD
 <!ENTITY sb.renew "再取り込み">
 <!ENTITY sb.export "エクスポート">
 <!ENTITY sb.remove "削除">
@@ -14,6 +15,15 @@
 <!ENTITY sb.prop.title "タイトル">
 <!ENTITY sb.prop.comment "コメント">
 <!ENTITY sbp.prop.url "URL">
+=======
+<!ENTITY sb.renew "再保存">
+<!ENTITY sb.export "エクスポート">
+<!ENTITY sb.remove "削除">
+<!ENTITY sb.property "プロパティ">
+<!ENTITY sb.prop.title "タイトル">
+<!ENTITY sb.prop.url "URL">
+<!ENTITY sb.prop.comment "コメント">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.prop.id.date "ID (日時)">
 <!ENTITY sb.folder.combine "結合ビュー">
 <!ENTITY sb.folder.openall "すべてタブで開く">

@@ -1,4 +1,5 @@
 
+<<<<<<< HEAD
 const NS_SCRAPBOOK = "http://amb.vis.ne.jp/mozilla/scrapbook-rdf#";
 
 function ScrapBookItem(aID)
@@ -443,3 +444,14 @@ var sbCommonUtils = {
 
 
 };
+=======
+if ("Cc" in window == false) {
+	window.Cc = Components.classes;
+	window.Ci = Components.interfaces;
+}
+
+Components.utils.import("resource://scrapbook-modules/utils.jsm");
+Components.utils.import("resource://scrapbook-modules/data.jsm");
+
+
+>>>>>>> release-1.6.0.a1

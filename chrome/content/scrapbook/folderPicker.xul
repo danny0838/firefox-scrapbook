@@ -14,6 +14,7 @@
         buttonlabelextra2="&sb.detail.new.folder;..."
         onload="sbFolderPicker.init();"
         ondialogaccept="sbFolderPicker.accept();"
+<<<<<<< HEAD
         ondialogextra2="sbMainService.createFolder();">
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/folderPicker.js" />
@@ -24,11 +25,22 @@
 	<broadcasterset id="sbBroadcasters" />
 
 	<checkbox id="sbFolderPickerRoot" checked="true" oncommand="sbTreeHandler.TREE.view.selection.clearSelection();" style="margin-bottom: 10px;" />
+=======
+        ondialogextra2="sbMainUI.createFolder();">
+
+	<script type="application/x-javascript" src="chrome://scrapbook/content/folderPicker.js" />
+
+	<checkbox id="sbFolderPickerRoot" checked="true" oncommand="sbTreeUI.TREE.view.selection.clearSelection();" style="margin-bottom: 10px;" />
+>>>>>>> release-1.6.0.a1
 
 	<tree id="sbTree"
 	      seltype="single"
 	      hidecolumnpicker="true"
+<<<<<<< HEAD
 	      onclick="sbTreeHandler.onClick(event, 0);"
+=======
+	      onclick="sbTreeUI.onClick(event, 0);"
+>>>>>>> release-1.6.0.a1
 	      onkeypress="event.stopPropagation();"
 	      onselect="sbFolderPicker.update();"
 	      style="-moz-appearance: listbox;"

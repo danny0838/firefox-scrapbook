@@ -2,7 +2,10 @@
 <!ENTITY sb.combine.preview "Náhľad">
 <!ENTITY sb.combine.preview.d "Stlačením tlačidla &apos;Zlúčenie&apos; skontrolujte ukážku.">
 <!ENTITY sb.combine.option.remove "Po dokončení zlúčenia, odstrániť originálne stránky">
+<<<<<<< HEAD
 <!ENTITY sbp.combine.up "move item upwards">
 <!ENTITY sbp.combine.down "move item downwards">
 <!ENTITY sbp.combine.remove "remove item">
 <!ENTITY sbp.combine.newTitle "nový názov">
+=======
+>>>>>>> release-1.6.0.a1

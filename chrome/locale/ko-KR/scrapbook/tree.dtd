@@ -10,10 +10,16 @@
 <!ENTITY sb.export "가져오기">
 <!ENTITY sb.remove "삭제">
 <!ENTITY sb.property "속성">
+<<<<<<< HEAD
 <!ENTITY sb.listview "목록 보기">
 <!ENTITY sb.prop.title "제목">
 <!ENTITY sb.prop.comment "주석">
 <!ENTITY sbp.prop.url "URL">
+=======
+<!ENTITY sb.prop.title "제목">
+<!ENTITY sb.prop.url "URL">
+<!ENTITY sb.prop.comment "주석">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.prop.id.date "ID (시간)">
 <!ENTITY sb.folder.combine "결합 결과">
 <!ENTITY sb.folder.openall "모두 탭으로 열기">

@@ -5,7 +5,11 @@
 <!ENTITY sb.note.normalview "Vue normale">
 <!ENTITY sb.note.template "Éditer le modèle HTML">
 <!ENTITY sb.note.autolinefeed "Retour à la ligne automatique">
+<<<<<<< HEAD
 <!ENTITY sb.note.autolinefeed.t "Ajouter les balises &lt;br&gt; en fin de ligne en mode &amp;sb.note.htmlview ;">
+=======
+<!ENTITY sb.note.autolinefeed.t "Ajouter une balise &lt;br&gt; en fin de ligne en mode &sb.note.htmlview;">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.note.fontsize "Taille de police">
 <!ENTITY sb.note.help "Aide">
 <!ENTITY sb.note.print "Imprimer">
@@ -14,6 +18,11 @@
 <!ENTITY sb.note.htmlview.accesskey "H">
 <!ENTITY sb.note.normalview.accesskey "N">
 <!ENTITY sb.note.tools.accesskey "O">
+<<<<<<< HEAD
 <!ENTITY sb.note.fontsize.accesskey "T">
 <!ENTITY sb.note.print.accesskey "P">
+=======
+<!ENTITY sb.note.fontsize.accesskey "P">
+<!ENTITY sb.note.print.accesskey "I">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.note.exit.accesskey "X">

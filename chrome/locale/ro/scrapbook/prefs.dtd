@@ -1,4 +1,8 @@
 <!ENTITY sb.prefs.main "Principal">
+<<<<<<< HEAD
+=======
+<!ENTITY sb.prefs.keys "Comenzi rapide">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.prefs.tabs "File">
 <!ENTITY sb.prefs.save "Salvare">
 <!ENTITY sb.prefs.edit "Editare">
@@ -6,14 +10,22 @@
 <!ENTITY sb.prefs.advanced "Complex">
 <!ENTITY sb.prefs.ui.contextMenu "Afișează în meniul contextual al navigatorului">
 <!ENTITY sb.prefs.ui.contextSubMenu "Afișează ca submeniu">
+<<<<<<< HEAD
 <!ENTITY sb.prefs.ui.bookmarkMenu "Afișează opțiunea „Semne de carte ScrapBook”">
+=======
+<!ENTITY sb.prefs.ui.bookmark "Afișează opțiunea „Salvare ca semn de carte”">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Afișează ultimele">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "dosare deschise">
 <!ENTITY sb.prefs.ui.menuBar "Afișează în meniul principal">
 <!ENTITY sb.prefs.ui.menuBar.icon "Afișează doar pictograma">
 <!ENTITY sb.prefs.ui.toolsMenu "Afișează în meniul „Unelte”">
 <!ENTITY sb.prefs.ui.statusBar "Afișează în bara de stare">
+<<<<<<< HEAD
 <!ENTITY sb.prefs.restart "Modificările sunt efective după repornirea navigatorului.">
+=======
+<!ENTITY sb.prefs.restart "Modificările devin efective după repornirea navigatorului.">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.prefs.tabs.tips "Deschide în file pentru următoarele operații">
 <!ENTITY sb.prefs.tabs.note "Editează note">
 <!ENTITY sb.prefs.data "Locație stocare date">
@@ -27,6 +39,7 @@
 <!ENTITY sb.prefs.tree.unshift "Pune noile elemente">
 <!ENTITY sb.prefs.tree.unshift.top "la începutul arborelui">
 <!ENTITY sb.prefs.tree.unshift.bottom "la sfârșitul arborelui">
+<<<<<<< HEAD
 <!ENTITY sb.prefs.showDetailOnDrop "Afișează caseta „Detalii capturare” când se capturează prin glisare și fixare în panoul lateral">
 <!ENTITY sb.prefs.notifyOnComplete "Afișează notificarea „Capturare finalizată”">
 <!ENTITY sb.prefs.viewer "Aplicație pentru explorarea fișierelor">
@@ -37,3 +50,10 @@
 <!ENTITY sb.button.browse "Răsfoiește">
 <!ENTITY sb.button.show "Afișează fișierele">
 <!ENTITY sbp.prefs.useDropDownList "Folosește pentru evidențiere lista derulantă în locul butoanelor">
+=======
+<!ENTITY sb.prefs.showDetailOnDrop "Afișează caseta „Detalii de salvare” la salvarea prin glisare și fixare în panoul lateral">
+<!ENTITY sb.prefs.notifyOnComplete "Afișează notificarea „Salvare finalizată”">
+<!ENTITY sb.button.customize "Personalizează">
+<!ENTITY sb.button.browse "Răsfoiește">
+<!ENTITY sb.button.show "Afișează fișierele">
+>>>>>>> release-1.6.0.a1

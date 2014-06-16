@@ -7,13 +7,20 @@
 <!ENTITY sb.tools.manage "Hantera">
 <!ENTITY sb.tools.combine "Kombineringsguiden">
 <!ENTITY sb.tools.trade "Importera/Exportera">
+<<<<<<< HEAD
 <!ENTITY sb.tools.multiple "Fånga in flera URL:er">
+=======
+<!ENTITY sb.tools.multiple "Spara flera URL:er">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.tools.directory "Öppna ScrapBook-mappen">
 <!ENTITY sb.tools.calculate "Beräkning av storlek">
 <!ENTITY sb.tools.sorttree "Sortera hela trädet">
 <!ENTITY sb.tools.output "Formatera utgående träddata som HTML">
 <!ENTITY sb.tools.repair "Nödreparation">
 <!ENTITY sb.tools.addons "Tilläggsfunktioner">
+<<<<<<< HEAD
 <!ENTITY sb.tools.homepage "Webbplats">
+=======
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.note.opentab "Öppna in flik">
 <!ENTITY sb.note.close "Stäng">

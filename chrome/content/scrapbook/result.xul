@@ -18,13 +18,19 @@
         onload="SB_initFT('SEARCH');">
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+<<<<<<< HEAD
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
+=======
+>>>>>>> release-1.6.0.a1
 	<script type="application/x-javascript" src="chrome://scrapbook/content/fulltext.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
 
 	<stringbundleset>
 		<stringbundle id="sbCacheString" src="chrome://scrapbook/locale/fulltext.properties" />
+<<<<<<< HEAD
 		<stringbundle id="sbMainString"  src="chrome://scrapbook/locale/scrapbook.properties" />
+=======
+>>>>>>> release-1.6.0.a1
 	</stringbundleset>
 
 	<popupset>
@@ -54,15 +60,25 @@
 		<treecols>
 			<treecol id="sbTreeColTitle"   label="&sb.prop.title;"   flex="3" /><splitter class="tree-splitter" />
 			<treecol id="sbTreeColContent" label="&sb.prop.content;" flex="5" /><splitter class="tree-splitter" />
+<<<<<<< HEAD
 			<treecol id="sbTreeColComment" label="&sb.prop.comment;" flex="2" persist="hidden" /><splitter class="tree-splitter" />
 			<treecol id="sbTreeColFolder"  label="&sb.prop.folder;"  flex="1" persist="hidden" />
 			<treecol id="sbTreeColName"    label="HTML" flex="1" hidden="true" persist="hidden" />
+=======
+			<treecol id="sbTreeColComment" label="&sb.prop.comment;" flex="2" /><splitter class="tree-splitter" />
+			<treecol id="sbTreeColFolder"  label="&sb.prop.folder;"  flex="1" />
+			<treecol id="sbTreeColName"    label="HTML" flex="1" hidden="true" />
+>>>>>>> release-1.6.0.a1
 		</treecols>
 		<treechildren />
 	</tree>
 
 	<splitter />
 
+<<<<<<< HEAD
 	<browser id="sbBrowser" type="content-primary" disablehistory="true" flex="1" onload="sbSearchResult.onDocumentLoad(event);" />
+=======
+	<browser id="sbBrowser" type="content-primary" flex="1" onload="sbSearchResult.onDocumentLoad(event);" />
+>>>>>>> release-1.6.0.a1
 
 </window>

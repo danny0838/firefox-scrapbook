@@ -15,12 +15,15 @@
 <!ENTITY sb.highlighter "Evidenziatura ">
 <!ENTITY sb.highlighter.remove "Annulla evidenziatura nella selezione">
 <!ENTITY sb.highlighter.remove.all "Annulla tutte le evidenziature">
+<<<<<<< HEAD
 <!ENTITY sbp.highlighter.stil1 "   Stile 1   ">
 <!ENTITY sbp.highlighter.stil2 "   Stile 2   ">
 <!ENTITY sbp.highlighter.stil3 "   Stile 3   ">
 <!ENTITY sbp.highlighter.stil4 "   Stile 4   ">
 <!ENTITY sbp.highlighter.stil5 "   Stile 5   ">
 <!ENTITY sbp.highlighter.stil6 "   Stile 6   ">
+=======
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.source "Apri l&apos;indirizzo web sorgente">
 <!ENTITY sb.renew "Cattura ancora">
 <!ENTITY sb.locate "Sincronizza con il diagramma delle cartelle nel pannello">

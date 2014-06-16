@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!ENTITY sb.multiple.filter "Filtr (regulární výrazy)">
 <!ENTITY sbp.multiple.titleofwebsite "Název webové stránky">
 <!ENTITY sbp.multiple.titleoflink "Název odkazu">
@@ -14,3 +15,13 @@
 <!ENTITY sb.multiple.detector.bookmarks "Záložky">
 <!ENTITY sb.multiple.detector.clear "Vyčistit">
 <!ENTITY sbp.multiple.exclude "ignorovat již existující adresy v cílové složce">
+=======
+<!ENTITY sb.multiple.url "URL (odkazy pište každý zvlášť na jeden řádek)">
+<!ENTITY sb.multiple.detector "Detektor URL">
+<!ENTITY sb.multiple.detector.plink "Všechny odkazy na stránce">
+<!ENTITY sb.multiple.detector.slink "Všechny odkazy ve výběru">
+<!ENTITY sb.multiple.detector.tabs "Všechny otevřené panely v okně">
+<!ENTITY sb.multiple.detector.local "Všechny lokální dokumenty HTML ve složce">
+<!ENTITY sb.multiple.detector.bookmarks "Záložky">
+<!ENTITY sb.multiple.detector.clear "Vyčistit">
+>>>>>>> release-1.6.0.a1

@@ -15,6 +15,7 @@ var sbCalcService = {
 
 	exec : function()
 	{
+<<<<<<< HEAD
 		sbDataSource.init();
 		var resEnum = sbDataSource.data.GetAllResources();
 		while ( resEnum.hasMoreElements() )
@@ -23,6 +24,15 @@ var sbCalcService = {
 			if ( !sbDataSource.isContainer(res) ) this.total++;
 		}
 		var dataDir = sbCommonUtils.getScrapBookDir().clone();
+=======
+		var resEnum = ScrapBookData.dataSource.GetAllResources();
+		while ( resEnum.hasMoreElements() )
+		{
+			var res = resEnum.getNext();
+			if ( !ScrapBookData.isContainer(res) ) this.total++;
+		}
+		var dataDir = ScrapBookUtils.getScrapBookDir().clone();
+>>>>>>> release-1.6.0.a1
 		dataDir.append("data");
 		this.dirEnum = dataDir.directoryEntries;
 		this.processAsync();
@@ -36,12 +46,17 @@ var sbCalcService = {
 			return;
 		}
 		this.count++;
+<<<<<<< HEAD
 		var dir = this.dirEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
+=======
+		var dir = this.dirEnum.getNext().QueryInterface(Ci.nsIFile);
+>>>>>>> release-1.6.0.a1
 		if ( dir.isDirectory() )
 		{
 			var id = dir.leafName;
 			var bytes = sbPropService.getTotalFileSize(id)[0];
 			this.grandSum += bytes;
+<<<<<<< HEAD
 			var res   = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
 			var valid = sbDataSource.exists(res);
 			var icon  = sbDataSource.getProperty(res, "icon");
@@ -50,6 +65,16 @@ var sbCalcService = {
 				id,
 				sbDataSource.getProperty(res, "type"),
 				sbDataSource.getProperty(res, "title"),
+=======
+			var res   = ScrapBookUtils.RDF.GetResource("urn:scrapbook:item" + id);
+			var valid = ScrapBookData.exists(res);
+			var icon  = ScrapBookData.getProperty(res, "icon");
+			if ( !icon ) icon = ScrapBookUtils.getDefaultIcon(ScrapBookData.getProperty(res, "type"));
+			this.treeItems.push([
+				id,
+				ScrapBookData.getProperty(res, "type"),
+				ScrapBookData.getProperty(res, "title"),
+>>>>>>> release-1.6.0.a1
 				icon,
 				bytes,
 				sbPropService.formatFileSize(bytes),
@@ -113,14 +138,24 @@ var sbCalcService = {
 	checkDoubleEntries : function()
 	{
 		var hashTable = {};
+<<<<<<< HEAD
 		var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"), 0, true);
+=======
+		var resList = ScrapBookData.flattenResources(ScrapBookUtils.RDF.GetResource("urn:scrapbook:root"), 0, true);
+>>>>>>> release-1.6.0.a1
 		for ( var i = 0; i < resList.length; i++ )
 		{
 			if ( resList[i].Value in hashTable )
 			{
+<<<<<<< HEAD
 				alert("ScrapBook WARNING: Found double entries.\n" + sbDataSource.getProperty(resList[i], "title"));
 				var parRes = sbDataSource.findParentResource(resList[i]);
 				if ( parRes ) sbDataSource.removeFromContainer(parRes.Value, resList[i]);
+=======
+				ScrapBookUtils.alert("WARNING: Found double entries.\n" + ScrapBookData.getProperty(resList[i], "title"));
+				var parRes = ScrapBookData.findParentResource(resList[i]);
+				if ( parRes ) ScrapBookData.removeFromContainer(parRes.Value, resList[i]);
+>>>>>>> release-1.6.0.a1
 			}
 			hashTable[resList[i].Value] = true;
 		}
@@ -152,8 +187,13 @@ var sbCalcController = {
 
 	open : function(tabbed)
 	{
+<<<<<<< HEAD
 		var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.CURRENT_TREEITEM[0]);
 		sbCommonUtils.loadURL(sbDataSource.getURL(res), tabbed);
+=======
+		var res = ScrapBookUtils.RDF.GetResource("urn:scrapbook:item" + this.CURRENT_TREEITEM[0]);
+		ScrapBookUtils.loadURL(ScrapBookData.getURL(res), tabbed);
+>>>>>>> release-1.6.0.a1
 	},
 
 	remove : function()
@@ -161,7 +201,11 @@ var sbCalcController = {
 		if ( this.CURRENT_TREEITEM[6] ) return;
 		var id = this.CURRENT_TREEITEM[0];
 		if ( id.length != 14 ) return;
+<<<<<<< HEAD
 		if ( sbCommonUtils.removeDirSafety(sbCommonUtils.getContentDir(id), true) )
+=======
+		if ( ScrapBookUtils.removeDirSafety(ScrapBookUtils.getContentDir(id), true) )
+>>>>>>> release-1.6.0.a1
 		{
 			sbCalcService.treeItems.splice(sbCalcService.TREE.currentIndex, 1);
 			sbCalcService.initTree();
@@ -174,7 +218,11 @@ var sbCalcController = {
 		switch ( aCommand )
 		{
 			case "P" : window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome" ,id); break;
+<<<<<<< HEAD
 			case "L" : sbController.launch(sbCommonUtils.getContentDir(id));
+=======
+			case "L" : sbController.launch(ScrapBookUtils.getContentDir(id));
+>>>>>>> release-1.6.0.a1
 			default  : break;
 		}
 	},

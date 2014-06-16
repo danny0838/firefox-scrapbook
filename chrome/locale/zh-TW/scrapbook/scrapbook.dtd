@@ -14,6 +14,9 @@
 <!ENTITY sb.tools.output "將資料列表匯出為 HTML">
 <!ENTITY sb.tools.repair "緊急救援">
 <!ENTITY sb.tools.addons "附加元件功能">
+<<<<<<< HEAD
 <!ENTITY sb.tools.homepage "套件首頁">
+=======
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.note.opentab "開啟於新分頁中">
 <!ENTITY sb.note.close "關閉">

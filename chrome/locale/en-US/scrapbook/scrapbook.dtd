@@ -7,6 +7,7 @@
 <!ENTITY sb.tools.manage "Manage">
 <!ENTITY sb.tools.combine "Combine Wizard">
 <!ENTITY sb.tools.trade "Import / Export">
+<<<<<<< HEAD
 <!ENTITY sb.tools.multiple "Capture Multiple URLs">
 <!ENTITY sb.tools.directory "ScrapBook Directory">
 <!ENTITY sb.tools.calculate "Calculation of Size">
@@ -15,5 +16,14 @@
 <!ENTITY sb.tools.repair "Emergency Repair">
 <!ENTITY sb.tools.addons "Add-on Functions">
 <!ENTITY sb.tools.homepage "Home Page">
+=======
+<!ENTITY sb.tools.multiple "Save Multiple URLs">
+<!ENTITY sb.tools.directory "Open Data Folder">
+<!ENTITY sb.tools.calculate "Size Calculation">
+<!ENTITY sb.tools.sorttree "Sort Entire Tree">
+<!ENTITY sb.tools.output "Output As HTML">
+<!ENTITY sb.tools.repair "Emergency Repair">
+<!ENTITY sb.tools.addons "Add-on Functions">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.note.opentab "Open in Tab">
 <!ENTITY sb.note.close "Close">

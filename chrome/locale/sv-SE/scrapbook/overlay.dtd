@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!ENTITY sb.capture.partial "Fånga in markering">
 <!ENTITY sb.capture.partial.as "Fånga in markering som">
 <!ENTITY sb.capture.entire "Fånga in sida">
@@ -16,3 +17,18 @@
 <!ENTITY sb.key.capture "L">
 <!ENTITY sb.key.capture.as "K">
 <!ENTITY sb.key.bookmark "J">
+=======
+<!ENTITY sb.save.partial "Spara markering">
+<!ENTITY sb.save.partial.as "Spara markering som">
+<!ENTITY sb.save.entire "Spara sida">
+<!ENTITY sb.save.entire.as "Spara sida som">
+<!ENTITY sb.save.frame "Spara ram">
+<!ENTITY sb.save.frame.as "Spara ram som">
+<!ENTITY sb.save.target "Spara länk">
+<!ENTITY sb.save.target.as "Spara länk som">
+<!ENTITY sb.save.alltabs "Spara alla flikar">
+<!ENTITY sb.save.bookmark "Spara som bokmärke">
+<!ENTITY sb.sidebar "Visa i sidopanelen">
+<!ENTITY sb.menubar "Menyfält">
+<!ENTITY sb.editbefore "Redigera innan objekt sparas">
+>>>>>>> release-1.6.0.a1

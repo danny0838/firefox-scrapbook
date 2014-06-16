@@ -2,7 +2,10 @@
 <!ENTITY sb.combine.preview "Previzualizare">
 <!ENTITY sb.combine.preview.d "Apăsați butonul „Combină” după ce verificați rezultatul.">
 <!ENTITY sb.combine.option.remove "Elimină paginile originale după finalizarea combinării">
+<<<<<<< HEAD
 <!ENTITY sbp.combine.up "Mută elementul în sus">
 <!ENTITY sbp.combine.down "Mută elementul în jos">
 <!ENTITY sbp.combine.remove "Elimină elementul">
 <!ENTITY sbp.combine.newTitle "Denumire nouă">
+=======
+>>>>>>> release-1.6.0.a1

@@ -1,5 +1,6 @@
 <!ENTITY sb.toolbar.edit "Editační lišta">
 <!ENTITY sb.toolbar.info "Informační lišta">
+<<<<<<< HEAD
 <!ENTITY sb.edit.eraser "DOM Eraser: Nástroj na odstranění vybraných objektů na webové stránce">
 <!ENTITY sb.edit.undo "Zpět">
 <!ENTITY sb.edit.save "Uložit změny">
@@ -9,10 +10,22 @@
 <!ENTITY sb.edit.inline.add "Přidat poznámku k výběru">
 <!ENTITY sb.edit.attach.file "Připojit k výběru soubor">
 <!ENTITY sb.edit.attach.link "Připojit k výběru odkaz">
+=======
+<!ENTITY sb.edit.eraser "Zmizík: Nástroj pro odstranění vybraných položek ze stránky.">
+<!ENTITY sb.edit.undo "Vrátit zpět">
+<!ENTITY sb.edit.save "Uložit změny">
+<!ENTITY sb.edit.comment "Zobrazit pole pro komentář">
+<!ENTITY sb.edit.sticky "Nálepka">
+<!ENTITY sb.edit.sticky.create "Vytvořit nálepku">
+<!ENTITY sb.edit.inline.add "Zadat poznámku k výběru">
+<!ENTITY sb.edit.attach.file "Připojit soubor k výběru">
+<!ENTITY sb.edit.attach.link "Připojit odkaz k výběru">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.edit.cutter "Odstranit výběr">
 <!ENTITY sb.edit.remove.iframe "Odstranit VŠECHNY tagy IFRAME">
 <!ENTITY sb.edit.remove.script "Odstranit VŠECHNY tagy SCRIPT">
 <!ENTITY sb.highlighter "Zvýrazňovač">
+<<<<<<< HEAD
 <!ENTITY sb.highlighter.remove "Zrušit zvýraznění výběru">
 <!ENTITY sb.highlighter.remove.all "Zrušit všechna zvýraznění">
 <!ENTITY sbp.highlighter.stil1 "Styl 1">
@@ -22,6 +35,11 @@
 <!ENTITY sbp.highlighter.stil5 "Styl 5">
 <!ENTITY sbp.highlighter.stil6 "Styl 6">
 <!ENTITY sb.source "Otevřít zdrojovou adresu URL">
+=======
+<!ENTITY sb.highlighter.remove "Odstranit zvýraznění výběru">
+<!ENTITY sb.highlighter.remove.all "Odstranit všechna zvýraznění">
+<!ENTITY sb.source "Otevřít zdroj odkazu">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.renew "Zachytit znovu">
 <!ENTITY sb.locate "Zobrazit v postranní liště">
 <!ENTITY sb.indicators "Zobrazit ukazatele typů odkazů">

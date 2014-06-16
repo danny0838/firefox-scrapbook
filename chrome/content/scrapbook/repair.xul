@@ -15,7 +15,10 @@
         windowtype="scrapbook">
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+<<<<<<< HEAD
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
+=======
+>>>>>>> release-1.6.0.a1
 	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/repair.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/trade.js" />

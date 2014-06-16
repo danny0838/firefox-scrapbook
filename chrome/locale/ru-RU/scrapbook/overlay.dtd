@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!ENTITY sb.capture.partial "Захватить выделенное">
 <!ENTITY sb.capture.partial.as "Захватить выделенное как">
 <!ENTITY sb.capture.entire "Захватить веб-страницу">
@@ -16,3 +17,18 @@
 <!ENTITY sb.key.capture "L">
 <!ENTITY sb.key.capture.as "K">
 <!ENTITY sb.key.bookmark "J">
+=======
+<!ENTITY sb.save.partial "Сохранить выделенное">
+<!ENTITY sb.save.partial.as "Сохранить выделенное как…">
+<!ENTITY sb.save.entire "Сохранить страницу">
+<!ENTITY sb.save.entire.as "Сохранить страницу как…">
+<!ENTITY sb.save.frame "Сохранить фрейм">
+<!ENTITY sb.save.frame.as "Сохранить фрейм как…">
+<!ENTITY sb.save.target "Сохранить ссылку">
+<!ENTITY sb.save.target.as "Сохранить ссылку как…">
+<!ENTITY sb.save.alltabs "Сохранить все вкладки">
+<!ENTITY sb.save.bookmark "Сохранить как закладку">
+<!ENTITY sb.sidebar "Показать в боковой панели">
+<!ENTITY sb.menubar "Панель инструментов">
+<!ENTITY sb.editbefore "Редактирование перед сохранением">
+>>>>>>> release-1.6.0.a1

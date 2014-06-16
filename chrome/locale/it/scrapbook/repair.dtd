@@ -1,9 +1,17 @@
 <!ENTITY sb.repair.rdfFile "Ripristina scrapbook.rdf">
+<<<<<<< HEAD
 <!ENTITY sb.repair.rdfFile.descript "Prova questa opzione se il diagramma delle cartelle di ScrapBook scompare improvvisamente">
+=======
+<!ENTITY sb.repair.rdfFile.descript "Prova questa opzione se il diagramma delle cartelle di ScrapBook+ scompare improvvisamente">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.repair.rdfFile.select "Seleziona un file di backup da rispristinare">
 <!ENTITY sb.repair.rdfFile.file "File">
 <!ENTITY sb.repair.rdfFile.time "Data">
 <!ENTITY sb.repair.rdfFile.size "Dimensione">
 <!ENTITY sb.repair.favicons "Ripristina le favicon nel diagramma">
+<<<<<<< HEAD
 <!ENTITY sb.repair.favicons.descript "Prova questa opzione se molte favicon nel diagramma delle cartelle di ScrapBook scompaiono">
+=======
+<!ENTITY sb.repair.favicons.descript "Prova questa opzione se molte favicon nel diagramma delle cartelle di ScrapBook+ scompaiono">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.repair.complete "Ripristino completato">

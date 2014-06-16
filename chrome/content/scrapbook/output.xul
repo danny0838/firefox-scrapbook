@@ -1,5 +1,6 @@
 <?xml version="1.0" ?>
 
+<<<<<<< HEAD
 <!--skin-->
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 <?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
@@ -16,6 +17,20 @@
 ]>
 
 <!--dialog-->
+=======
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+<?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
+
+<?xul-overlay href="chrome://scrapbook/content/tree.xul"?>
+
+<!DOCTYPE dialog [
+	<!ENTITY % mainDTD   SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+	%mainDTD;
+	<!ENTITY % outputDTD SYSTEM "chrome://scrapbook/locale/output.dtd" >
+	%outputDTD;
+]>
+
+>>>>>>> release-1.6.0.a1
 <dialog id="ScrapBookOutputDialog"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         title="&sb.tools.output; - ScrapBook"
@@ -24,6 +39,7 @@
         ondialogaccept="sbOutputService.start();"
         windowtype="scrapbook">
 
+<<<<<<< HEAD
 	<!--script-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/output.js" />
 
@@ -34,6 +50,10 @@
 	<broadcasterset id="sbBroadcasters" />
 
 	<!--tree-->
+=======
+	<script type="application/x-javascript" src="chrome://scrapbook/content/output.js" />
+
+>>>>>>> release-1.6.0.a1
 	<tree id="sbTree" hidecolumnpicker="true" onclick="sbOutputService.toggleAllSelection();" flex="1" />
 
 	<checkbox id="ScrapBookOutputOptionA" label="&sb.output.option.all;"   style="margin-top:12px;" oncommand="sbOutputService.selectAllFolders();" checked="true" />

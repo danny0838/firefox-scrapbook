@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 <!ENTITY sb.detail.linked.timeout "시간 제한 (초)">
 <!ENTITY sb.detail.linked.charset "문자셋">
 <!ENTITY sb.detail "캡처 상세 설정">
+=======
+<!ENTITY sb.detail.title "상세 저장">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.detail.new.folder "새 폴더">
 <!ENTITY sb.detail.select.folder "폴더 선택">
 <!ENTITY sb.detail.option "설정">
@@ -12,7 +16,11 @@
 <!ENTITY sb.detail.linked.movie "영화">
 <!ENTITY sb.detail.linked.archive "압축">
 <!ENTITY sb.detail.linked.custom "사용자 설정">
+<<<<<<< HEAD
 <!ENTITY sb.detail.linked.page "상세 캡처">
+=======
+<!ENTITY sb.detail.linked.page2 "단계 저장">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.detail.linked.page.depth "연결 링크 단계">
 <!ENTITY sb.detail.linked.page.text "캡처 완료 후 모든 페이지는 상호 링크되어 사이트 맵이 생성됩니다.">
 <!ENTITY sb.detail.warnAboutRenew "알림: &apos;다시 캡처하기&apos; 기능은 이전에 저장된 페이지에 덮어씁니다.">

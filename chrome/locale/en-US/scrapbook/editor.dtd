@@ -15,6 +15,7 @@
 <!ENTITY sb.highlighter "Highlighter">
 <!ENTITY sb.highlighter.remove "Clear Highlights in the Selection">
 <!ENTITY sb.highlighter.remove.all "Clear All Highlights">
+<<<<<<< HEAD
 <!ENTITY sbp.highlighter.stil1 "   Style 1   ">
 <!ENTITY sbp.highlighter.stil2 "   Style 2   ">
 <!ENTITY sbp.highlighter.stil3 "   Style 3   ">
@@ -24,6 +25,11 @@
 <!ENTITY sb.source "Open Source URL">
 <!ENTITY sb.renew "Capture Again">
 <!ENTITY sb.locate "Locate in Sidebar Tree">
+=======
+<!ENTITY sb.source "Open Source URL">
+<!ENTITY sb.renew "Save Again">
+<!ENTITY sb.locate "Locate in Sidebar">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.indicators "Show Link Indicators">
 <!ENTITY sb.info.home "Home">
 <!ENTITY sb.info.sitemap "SiteMap">

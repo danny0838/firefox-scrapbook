@@ -1,19 +1,35 @@
+<<<<<<< HEAD
 <!ENTITY sb.detail.linked.timeout "Časový limit (v sekundách)">
 <!ENTITY sb.detail.linked.charset "Znaková sada">
 <!ENTITY sb.detail "Detail zachycení">
+=======
+<!ENTITY sb.detail.title "Uložit detail">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.detail.new.folder "Nová složka">
 <!ENTITY sb.detail.select.folder "Vybrat složku">
 <!ENTITY sb.detail.option "Možnosti">
 <!ENTITY sb.detail.option.images "Obrázky">
 <!ENTITY sb.detail.option.styles "Styly">
+<<<<<<< HEAD
 <!ENTITY sb.detail.linked.file "Stáhnout odkazované soubory">
+=======
+<!ENTITY sb.detail.linked.file "Stáhnout související soubory">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.detail.linked.image "Obrázky">
 <!ENTITY sb.detail.linked.sound "Zvuky">
 <!ENTITY sb.detail.linked.movie "Videa">
 <!ENTITY sb.detail.linked.archive "Archívy">
 <!ENTITY sb.detail.linked.custom "Vlastní">
+<<<<<<< HEAD
 <!ENTITY sb.detail.linked.page "Hloubkové zachycení">
 <!ENTITY sb.detail.linked.page.depth "Hloubkově procházet odkazy">
 <!ENTITY sb.detail.linked.page.text "Po dokončení zachycení budou všechny stránky vzájemně propojeny a dojde k vytvoření mapy stránek.">
 <!ENTITY sb.detail.warnAboutRenew "POZNÁMKA: &apos;Zachytit znovu&apos; přepíše předchozí uloženou stránku.">
 <!ENTITY sb.detail.warnAboutScript "POZNÁMKA: JavaScript může způsobit některé problémy.">
+=======
+<!ENTITY sb.detail.linked.page2 "Hloubkové uložení">
+<!ENTITY sb.detail.linked.page.depth "Hloubkově procházet odkazy">
+<!ENTITY sb.detail.linked.page.text "Po dokončení zachycení budou všechny stránky vzájemně propojeny a bude vytvořena mapa stránek.">
+<!ENTITY sb.detail.warnAboutRenew "UPOZORNĚNÍ: 'Zachytit znovu' přepíše předchozí uloženou stránku.">
+<!ENTITY sb.detail.warnAboutScript "UPOZORNĚNÍ: JavaScript může způsobovat nesprávné chování.">
+>>>>>>> release-1.6.0.a1

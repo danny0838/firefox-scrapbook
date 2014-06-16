@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!ENTITY sb.capture "获取">
 <!ENTITY sb.capture.abort "中止">
 <!ENTITY sb.capture.start "开始">
@@ -17,3 +18,18 @@
 <!ENTITY sbp.capture.column.one "URL">
 <!ENTITY sbp.capture.column.two "标题">
 <!ENTITY sbp.capture.column.three "状态">
+=======
+<!ENTITY sb.save "保存">
+<!ENTITY sb.save.abort "中止">
+<!ENTITY sb.save.start "开始">
+<!ENTITY sb.save.retry "重试">
+<!ENTITY sb.save.skip "跳过">
+<!ENTITY sb.save.pause "暂停">
+<!ENTITY sb.save.filter "过滤">
+<!ENTITY sb.save.filter.domain "限制域">
+<!ENTITY sb.save.filter.level "限制目录">
+<!ENTITY sb.save.filter.string "过滤字符串...">
+<!ENTITY sb.save.filter.checkon "全部选用">
+<!ENTITY sb.save.filter.checkoff "全部不选用">
+<!ENTITY sb.save.filter.invert "反向选用">
+>>>>>>> release-1.6.0.a1

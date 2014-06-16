@@ -2,7 +2,10 @@
 <!ENTITY sb.combine.preview "Preview">
 <!ENTITY sb.combine.preview.d "Press &apos;Combine&apos; button after verifying the preview.">
 <!ENTITY sb.combine.option.remove "After completing combine, remove original pages">
+<<<<<<< HEAD
 <!ENTITY sbp.combine.up "move item upwards">
 <!ENTITY sbp.combine.down "move item downwards">
 <!ENTITY sbp.combine.remove "remove item">
 <!ENTITY sbp.combine.newTitle "new title">
+=======
+>>>>>>> release-1.6.0.a1

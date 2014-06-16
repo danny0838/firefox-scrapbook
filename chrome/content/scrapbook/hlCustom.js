@@ -1,7 +1,10 @@
 
+<<<<<<< HEAD
 const Cc = Components.classes;
 const Ci = Components.interfaces;
 
+=======
+>>>>>>> release-1.6.0.a1
 var gPrefBranch;
 var gPrefName;
 var gPreviewUI;

@@ -1,4 +1,5 @@
 <!ENTITY sb.repair.rdfFile "Restaurer scrapbook.rdf">
+<<<<<<< HEAD
 <!ENTITY sb.repair.rdfFile.descript "Essayez cela si l&apos;arborescence de ScrapBook disparaît brutalement.">
 <!ENTITY sb.repair.rdfFile.select "Selectionnez un fichier de sauvegarde pour la restauration.">
 <!ENTITY sb.repair.rdfFile.file "Fichier">
@@ -6,4 +7,13 @@
 <!ENTITY sb.repair.rdfFile.size "Taille">
 <!ENTITY sb.repair.favicons "Restaurer les favicônes dans l&apos;arborescence">
 <!ENTITY sb.repair.favicons.descript "Essayez cela si plusieurs favicônes disparaissent de l&apos;arborescence de ScrapBook.">
+=======
+<!ENTITY sb.repair.rdfFile.descript "Essayez cela si l'arborescence de ScrapBook disparaît brutalement.">
+<!ENTITY sb.repair.rdfFile.select "Sélectionnez un fichier de sauvegarde pour la restauration.">
+<!ENTITY sb.repair.rdfFile.file "Fichier">
+<!ENTITY sb.repair.rdfFile.time "Date/Heure">
+<!ENTITY sb.repair.rdfFile.size "Taille">
+<!ENTITY sb.repair.favicons "Restaurer les favicônes dans l'arborescence">
+<!ENTITY sb.repair.favicons.descript "Essayez cela si plusieurs favicônes disparaissent de l'arborescence de ScrapBook.">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.repair.complete "Terminé.">

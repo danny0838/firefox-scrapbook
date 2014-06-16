@@ -1,4 +1,8 @@
 <!ENTITY sb.prefs.main "Principal">
+<<<<<<< HEAD
+=======
+<!ENTITY sb.prefs.keys "Teclas">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.prefs.tabs "Pestanas">
 <!ENTITY sb.prefs.save "Gardar">
 <!ENTITY sb.prefs.edit "Editar">
@@ -6,7 +10,11 @@
 <!ENTITY sb.prefs.advanced "Avanzado">
 <!ENTITY sb.prefs.ui.contextMenu "Amosar no menú contextual">
 <!ENTITY sb.prefs.ui.contextSubMenu "Submenú">
+<<<<<<< HEAD
 <!ENTITY sb.prefs.ui.bookmarkMenu "Amosar o menú &apos;Marcar co ScrapBook&apos;">
+=======
+<!ENTITY sb.prefs.ui.bookmark "Amosar o menú &apos;Gardar como marcador&apos;">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Amosar até">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "cartafoles usados recentemente">
 <!ENTITY sb.prefs.ui.menuBar "Amosar na barra do menú">
@@ -29,6 +37,7 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "na parte inferior do cartafol">
 <!ENTITY sb.prefs.showDetailOnDrop "Amosar o diálogo &apos;Detalles da captura&apos; cando se capture arrastrando e soltando sobre o panel lateral">
 <!ENTITY sb.prefs.notifyOnComplete "Amosar o aviso de &apos;Captura completada&apos;">
+<<<<<<< HEAD
 <!ENTITY sb.prefs.viewer "Aplicación para visualizar ficheiros">
 <!ENTITY sb.prefs.viewer.default "Predeterminada">
 <!ENTITY sb.prefs.viewer.default.explorer "Explorador">
@@ -37,3 +46,8 @@
 <!ENTITY sb.button.browse "Procurar">
 <!ENTITY sb.button.show "Amosar ficheiros">
 <!ENTITY sbp.prefs.useDropDownList "Empregar listaxe despregable de opción no canto de botóns para resaltar">
+=======
+<!ENTITY sb.button.customize "Personalizar">
+<!ENTITY sb.button.browse "Procurar">
+<!ENTITY sb.button.show "Amosar ficheiros">
+>>>>>>> release-1.6.0.a1

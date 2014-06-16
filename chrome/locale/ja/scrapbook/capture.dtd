@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!ENTITY sb.capture "取り込み">
 <!ENTITY sb.capture.abort "中止">
 <!ENTITY sb.capture.start "開始">
@@ -17,3 +18,18 @@
 <!ENTITY sbp.capture.column.one "URL">
 <!ENTITY sbp.capture.column.two "タイトル">
 <!ENTITY sbp.capture.column.three "状態">
+=======
+<!ENTITY sb.save "保存">
+<!ENTITY sb.save.abort "中止">
+<!ENTITY sb.save.start "開始">
+<!ENTITY sb.save.retry "再試行">
+<!ENTITY sb.save.skip "スキップ">
+<!ENTITY sb.save.pause "一時停止">
+<!ENTITY sb.save.filter "フィルタ">
+<!ENTITY sb.save.filter.domain "ドメインで制限">
+<!ENTITY sb.save.filter.level "ディレクトリで制限">
+<!ENTITY sb.save.filter.string "文字列でフィルタ...">
+<!ENTITY sb.save.filter.checkon "すべてチェックオン">
+<!ENTITY sb.save.filter.checkoff "すべてチェックオフ">
+<!ENTITY sb.save.filter.invert "チェックの反転">
+>>>>>>> release-1.6.0.a1

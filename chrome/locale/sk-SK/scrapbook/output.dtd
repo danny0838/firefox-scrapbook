@@ -1,3 +1,8 @@
+<<<<<<< HEAD
 <!ENTITY sb.output.option.all "Exportovať celý strom">
 <!ENTITY sb.output.option.frame "Exportovať rám">
+=======
+<!ENTITY sb.output.option.all "Zvoliť všetko pre výstup">
+<!ENTITY sb.output.option.frame "Výstup ako HTML s Frame">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.output.option.open "HTML výstup otvoriť v prehliadači">

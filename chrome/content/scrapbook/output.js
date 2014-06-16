@@ -8,9 +8,14 @@ var sbOutputService = {
 
 	init : function()
 	{
+<<<<<<< HEAD
 		document.documentElement.getButton("accept").label = document.getElementById("sbMainString").getString("START_BUTTON");
 		sbDataSource.init();
 		sbTreeHandler.init(true);
+=======
+		document.documentElement.getButton("accept").label = ScrapBookUtils.getLocaleString("START_BUTTON");
+		sbTreeUI.init(true);
+>>>>>>> release-1.6.0.a1
 		this.selectAllFolders();
 		if ( window.location.search == "?auto" )
 		{
@@ -23,9 +28,15 @@ var sbOutputService = {
 	{
 		if ( document.getElementById('ScrapBookOutputOptionA').checked )
 		{
+<<<<<<< HEAD
 			sbTreeHandler.toggleAllFolders(true);
 			sbTreeHandler.TREE.view.selection.selectAll();
 			sbTreeHandler.TREE.treeBoxObject.focused = true;
+=======
+			sbTreeUI.toggleAllFolders(true);
+			sbTreeUI.TREE.view.selection.selectAll();
+			sbTreeUI.TREE.treeBoxObject.focused = true;
+>>>>>>> release-1.6.0.a1
 		}
 		this.optionAll = true;
 	},
@@ -43,21 +54,33 @@ var sbOutputService = {
 	{
 		this.optionFrame = document.getElementById("ScrapBookOutputOptionF").checked;
 		this.optionAll ? this.execAll() : this.exec();
+<<<<<<< HEAD
 		sbTreeHandler.toggleAllFolders(true);
+=======
+		sbTreeUI.toggleAllFolders(true);
+>>>>>>> release-1.6.0.a1
 		if ( window.location.search == "?auto" ) setTimeout(function(){ window.close(); }, 1000);
 	},
 
 	execAll : function()
 	{
 		this.content = this.getHTMLHead();
+<<<<<<< HEAD
 		this.processRescursively(sbTreeHandler.TREE.resource);
+=======
+		this.processRescursively(sbTreeUI.TREE.resource);
+>>>>>>> release-1.6.0.a1
 		this.finalize();
 	},
 
 	exec : function()
 	{
 		this.content = this.getHTMLHead();
+<<<<<<< HEAD
 		var selResList = sbTreeHandler.getSelection(true, 1);
+=======
+		var selResList = sbTreeUI.getSelection(true, 1);
+>>>>>>> release-1.6.0.a1
 		this.content += "<ul>\n";
 		for ( var i = 0; i < selResList.length; i++ )
 		{
@@ -72,7 +95,11 @@ var sbOutputService = {
 
 	finalize : function()
 	{
+<<<<<<< HEAD
 		var dir = sbCommonUtils.getScrapBookDir().clone();
+=======
+		var dir = ScrapBookUtils.getScrapBookDir().clone();
+>>>>>>> release-1.6.0.a1
 		dir.append("tree");
 		if ( !dir.exists() ) dir.create(dir.DIRECTORY_TYPE, 0700);
 		var urlHash = {
@@ -86,27 +113,44 @@ var sbOutputService = {
 		{
 			var destFile = dir.clone();
 			destFile.append(urlHash[url]);
+<<<<<<< HEAD
 			sbCommonUtils.saveTemplateFile(url, destFile);
+=======
+			ScrapBookUtils.saveTemplateFile(url, destFile);
+>>>>>>> release-1.6.0.a1
 		}
 		var frameFile = dir.clone();
 		frameFile.append("frame.html");
 		if ( !frameFile.exists() ) frameFile.create(frameFile.NORMAL_FILE_TYPE, 0666);
+<<<<<<< HEAD
 		sbCommonUtils.writeFile(frameFile, this.getHTMLFrame(), "UTF-8");
+=======
+		ScrapBookUtils.writeFile(frameFile, this.getHTMLFrame(), "UTF-8");
+>>>>>>> release-1.6.0.a1
 		var indexFile = dir.clone();
 		indexFile.append("index.html");
 		if ( !indexFile.exists() ) indexFile.create(indexFile.NORMAL_FILE_TYPE, 0666);
 		this.content += this.getHTMLFoot();
+<<<<<<< HEAD
 		sbCommonUtils.writeFile(indexFile, this.content, "UTF-8");
 		var fileName = this.optionFrame ? "frame.html" : "index.html";
 		if ( document.getElementById("ScrapBookOutputOptionO").checked )
 		{
 			sbCommonUtils.loadURL(sbCommonUtils.convertFilePathToURL(dir.path) + fileName, true);
+=======
+		ScrapBookUtils.writeFile(indexFile, this.content, "UTF-8");
+		var fileName = this.optionFrame ? "frame.html" : "index.html";
+		if ( document.getElementById("ScrapBookOutputOptionO").checked )
+		{
+			ScrapBookUtils.loadURL(ScrapBookUtils.convertFilePathToURL(dir.path) + fileName, true);
+>>>>>>> release-1.6.0.a1
 		}
 	},
 
 	processRescursively : function(aContRes)
 	{
 		this.depth++;
+<<<<<<< HEAD
 		var id = sbDataSource.getProperty(aContRes, "id") || "root";
 		this.content += '<ul id="folder-' + id + '">\n';
 		var resList = sbDataSource.flattenResources(aContRes, 0, false);
@@ -114,6 +158,15 @@ var sbOutputService = {
 			this.content += '<li class="depth' + String(this.depth) + '">';
 			this.content += this.getHTMLBody(resList[i]);
 			if (sbDataSource.isContainer(resList[i]))
+=======
+		var id = ScrapBookData.getProperty(aContRes, "id") || "root";
+		this.content += '<ul id="folder-' + id + '">\n';
+		var resList = ScrapBookData.flattenResources(aContRes, 0, false);
+		for (var i = 1; i < resList.length; i++) {
+			this.content += '<li class="depth' + String(this.depth) + '">';
+			this.content += this.getHTMLBody(resList[i]);
+			if (ScrapBookData.isContainer(resList[i]))
+>>>>>>> release-1.6.0.a1
 				this.processRescursively(resList[i]);
 			this.content += "</li>\n";
 		}
@@ -150,12 +203,21 @@ var sbOutputService = {
 
 	getHTMLBody : function(aRes)
 	{
+<<<<<<< HEAD
 		var id    = sbDataSource.getProperty(aRes, "id");
 		var title = sbDataSource.getProperty(aRes, "title");
 		var icon  = sbDataSource.getProperty(aRes, "icon");
 		var type  = sbDataSource.getProperty(aRes, "type");
 		if ( icon.match(/(\/data\/\d{14}\/.*$)/) ) icon = ".." + RegExp.$1;
 		if ( !icon ) icon = sbCommonUtils.getFileName( sbCommonUtils.getDefaultIcon(type) );
+=======
+		var id    = ScrapBookData.getProperty(aRes, "id");
+		var title = ScrapBookData.getProperty(aRes, "title");
+		var icon  = ScrapBookData.getProperty(aRes, "icon");
+		var type  = ScrapBookData.getProperty(aRes, "type");
+		if ( icon.match(/(\/data\/\d{14}\/.*$)/) ) icon = ".." + RegExp.$1;
+		if ( !icon ) icon = ScrapBookUtils.getFileName( ScrapBookUtils.getDefaultIcon(type) );
+>>>>>>> release-1.6.0.a1
 		title = title.replace(/</g, "&lt;");
 		title = title.replace(/>/g, "&gt;");
 		var ret;
@@ -169,7 +231,11 @@ var sbOutputService = {
 				break;
 			default: 
 				var href = (type == "bookmark") ? 
+<<<<<<< HEAD
 				           sbDataSource.getProperty(aRes, "source") : 
+=======
+				           ScrapBookData.getProperty(aRes, "source") : 
+>>>>>>> release-1.6.0.a1
 				           "../data/" + id + "/index.html";
 				var target = this.optionFrame ? ' target="main"' : "";
 				ret = '<a href="' + href + '"' + target + ' class="' + type + '">'

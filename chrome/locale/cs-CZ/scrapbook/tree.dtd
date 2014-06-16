@@ -1,7 +1,11 @@
 <!ENTITY sb.open "Otevřít">
 <!ENTITY sb.open.tab "Otevřít v panelu">
 <!ENTITY sb.open.newtab "Otevřít v novém panelu">
+<<<<<<< HEAD
 <!ENTITY sb.open.source "Otevřít zdrojovou adresu URL">
+=======
+<!ENTITY sb.open.source "Otevřít zdrojovou adresu">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.tools "Nástroje">
 <!ENTITY sb.show.files "Zobrazit soubory">
 <!ENTITY sb.move "Přesunout">
@@ -10,10 +14,16 @@
 <!ENTITY sb.export "Exportovat">
 <!ENTITY sb.remove "Odstranit">
 <!ENTITY sb.property "Vlastnosti">
+<<<<<<< HEAD
 <!ENTITY sb.listview "Seznam">
 <!ENTITY sb.prop.title "Název">
 <!ENTITY sb.prop.comment "Komentář">
 <!ENTITY sbp.prop.url "Adresa URL">
+=======
+<!ENTITY sb.prop.title "Název">
+<!ENTITY sb.prop.url "Adresa">
+<!ENTITY sb.prop.comment "Komentář">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.prop.id.date "ID (čas)">
 <!ENTITY sb.folder.combine "Kombinovaný náhled">
 <!ENTITY sb.folder.openall "Otevřít vše v panelech">
@@ -27,7 +37,11 @@
 <!ENTITY sb.search.all "Vše">
 <!ENTITY sb.search.re "Použít regulární výrazy">
 <!ENTITY sb.search.cs "Rozlišovat malá/VELKÁ">
+<<<<<<< HEAD
 <!ENTITY sb.search.cache "Aktualizovat vyrovnávací paměť pro fulltextové vyhledávání">
+=======
+<!ENTITY sb.search.cache "Aktualizovat vyrovnávací paměť pro fulltextové hledání">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.search.clear "Vymazat historii formuláře">
 <!ENTITY sb.search.days "Filtrovat podle dní">
 <!ENTITY mb.manage "Spravovat">

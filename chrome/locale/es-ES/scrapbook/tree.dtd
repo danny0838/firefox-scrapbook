@@ -10,10 +10,16 @@
 <!ENTITY sb.export "Exportar">
 <!ENTITY sb.remove "Borrar">
 <!ENTITY sb.property "Propiedades">
+<<<<<<< HEAD
 <!ENTITY sb.listview "Vista en modo lista">
 <!ENTITY sb.prop.title "Título">
 <!ENTITY sb.prop.comment "Comentario">
 <!ENTITY sbp.prop.url "URL">
+=======
+<!ENTITY sb.prop.title "Título">
+<!ENTITY sb.prop.url "URL">
+<!ENTITY sb.prop.comment "Comentario">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.prop.id.date "ID (Fecha)">
 <!ENTITY sb.folder.combine "Vista combinada">
 <!ENTITY sb.folder.openall "Abrir todo en pestañas">
@@ -25,10 +31,18 @@
 <!ENTITY sb.search "Buscar">
 <!ENTITY sb.search.fulltext "Buscar en todo el texto">
 <!ENTITY sb.search.all "Todo">
+<<<<<<< HEAD
 <!ENTITY sb.search.re "Usar Patrón">
+=======
+<!ENTITY sb.search.re "Usar RegExp">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.search.cs "Mayúsculas/minúsculas">
 <!ENTITY sb.search.cache "Actualizar caché al buscar en todo el texto">
 <!ENTITY sb.search.clear "Limpiar historial de búsqueda">
 <!ENTITY sb.search.days "Filtrar por días">
+<<<<<<< HEAD
 <!ENTITY mb.manage "Administrar">
+=======
+<!ENTITY mb.manage "Manage">
+>>>>>>> release-1.6.0.a1
 <!ENTITY mb.profileFolder "Carpeta de Perfiles">

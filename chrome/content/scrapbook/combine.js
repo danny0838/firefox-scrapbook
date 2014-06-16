@@ -1,7 +1,10 @@
 
+<<<<<<< HEAD
 var sbCommonUtils;
 var sbDataSource;
 
+=======
+>>>>>>> release-1.6.0.a1
 var sbCombineService = {
 
 
@@ -20,6 +23,7 @@ var sbCombineService = {
 	prefix  : "",
 	postfix : "",
 
+<<<<<<< HEAD
 	dropObserver : 
 	{
 		getSupportedFlavours : function()
@@ -48,6 +52,11 @@ var sbCombineService = {
 		//Block wird benötigt, um Korrekturen bei fehlerhafter Zusammenstellung zu erlauben
 		this.toggleElements(true);
 		//Ende Block
+=======
+
+	init : function()
+	{
+>>>>>>> release-1.6.0.a1
 		gOption = { "script" : true, "images" : true };
 		if ( window.top.location.href != "chrome://scrapbook/content/manage.xul" )
 		{
@@ -55,6 +64,7 @@ var sbCombineService = {
 			return;
 		}
 		window.top.document.getElementById("mbToolbarButton").disabled = true;
+<<<<<<< HEAD
 		sbCommonUtils = window.top.sbCommonUtils;
 		sbDataSource  = window.top.sbDataSource;
 		this.index = 0;
@@ -64,6 +74,12 @@ var sbCombineService = {
 //		this.WIZARD.getButton("cancel").hidden = true;
 		this.WIZARD.getButton("cancel").onclick = function(){ sbCombineService.abort(); };
 		this.toggleButtons();
+=======
+		this.index = 0;
+		sbFolderSelector2.init();
+		this.WIZARD.getButton("back").onclick = function(){ sbCombineService.undo(); };
+		this.WIZARD.getButton("cancel").hidden = true;
+>>>>>>> release-1.6.0.a1
 		this.updateButtons();
 	},
 
@@ -75,6 +91,7 @@ var sbCombineService = {
 	add : function(aRes, aParRes)
 	{
 		if ( this.resList.indexOf(aRes) != -1 ) return;
+<<<<<<< HEAD
 		var type = sbDataSource.getProperty(aRes, "type");
 		if (type == "folder" || type == "separator")
 			return;
@@ -92,6 +109,24 @@ var sbCombineService = {
 		this.updateButtons();
 	},
 /*
+=======
+		var type = ScrapBookData.getProperty(aRes, "type");
+		if (type == "folder" || type == "separator")
+			return;
+		if (type == "site")
+			ScrapBookUtils.alert(this.STRING.getString("WARN_ABOUT_INDEPTH2"));
+		var icon = ScrapBookData.getProperty(aRes, "icon");
+		if ( !icon ) icon = ScrapBookUtils.getDefaultIcon(type);
+		var listItem = this.LISTBOX.appendItem(ScrapBookData.getProperty(aRes, "title"));
+		listItem.setAttribute("class", "listitem-iconic");
+		listItem.setAttribute("image", icon);
+		this.idList.push(ScrapBookData.getProperty(aRes, "id"));
+		this.resList.push(aRes);
+		this.parList.push(aParRes);
+		this.updateButtons();
+	},
+
+>>>>>>> release-1.6.0.a1
 	undo : function()
 	{
 		if ( this.idList.length == 0 ) return;
@@ -101,7 +136,11 @@ var sbCombineService = {
 		this.parList.pop();
 		this.updateButtons();
 	},
+<<<<<<< HEAD
 */
+=======
+
+>>>>>>> release-1.6.0.a1
 	updateButtons : function()
 	{
 		this.WIZARD.canRewind  = this.idList.length > 0;
@@ -110,6 +149,7 @@ var sbCombineService = {
 
 	initPreview : function()
 	{
+<<<<<<< HEAD
 //		this.WIZARD.canRewind = false;
 		this.WIZARD.canAdvance = false;
 //		this.WIZARD.getButton("back").onclick = null;
@@ -126,6 +166,14 @@ var sbCombineService = {
 		sbPageCombiner.cssText = "";
 		sbPageCombiner.offsetTop = 0;
 		sbPageCombiner.isTargetCombined = false;
+=======
+		this.WIZARD.canRewind = false;
+		this.WIZARD.canAdvance = false;
+		this.WIZARD.getButton("back").onclick = null;
+		this.WIZARD.getButton("finish").label = this.STRING.getString("FINISH_BUTTON_LABEL");
+		this.WIZARD.getButton("finish").disabled = true;
+		this.option["R"] = document.getElementById("sbCombineOptionRemove").checked;
+>>>>>>> release-1.6.0.a1
 		sbInvisibleBrowser.init();
 		sbInvisibleBrowser.ELEMENT.removeEventListener("load", sbInvisibleBrowser.onload, true);
 		sbInvisibleBrowser.onload = function(){ sbPageCombiner.exec(); };
@@ -138,6 +186,7 @@ var sbCombineService = {
 		if ( this.index < this.idList.length )
 		{
 			this.prefix  = "(" + (this.index + 1) + "/" + this.idList.length + ") ";
+<<<<<<< HEAD
 			this.postfix = sbDataSource.getProperty(this.resList[this.index], "title");
 			var type = sbDataSource.getProperty(this.resList[this.index], "type");
 			if  ( type == "file" || type == "bookmark" )
@@ -147,6 +196,14 @@ var sbCombineService = {
 			{
 				sbInvisibleBrowser.load(sbCommonUtils.getBaseHref(sbDataSource.data.URI) + "data/" + this.curID + "/index.html");
 			}
+=======
+			this.postfix = ScrapBookData.getProperty(this.resList[this.index], "title");
+			var type = ScrapBookData.getProperty(this.resList[this.index], "type");
+			if  ( type == "file" || type == "bookmark" )
+				sbPageCombiner.exec(type);
+			else
+				sbInvisibleBrowser.load(ScrapBookUtils.getBaseHref(ScrapBookData.dataSource.URI) + "data/" + this.curID + "/index.html");
+>>>>>>> release-1.6.0.a1
 		}
 		else
 		{
@@ -158,6 +215,7 @@ var sbCombineService = {
 
 	donePreview : function()
 	{
+<<<<<<< HEAD
 		var htmlFile = sbCommonUtils.getScrapBookDir();
 		htmlFile.append("combine.html");
 		sbCommonUtils.writeFile(htmlFile, sbPageCombiner.htmlSrc, "UTF-8");
@@ -166,12 +224,23 @@ var sbCombineService = {
 		sbCommonUtils.writeFile(cssFile, sbPageCombiner.cssText, "UTF-8");
 		sbInvisibleBrowser.refreshEvent(function(){ sbCombineService.showBrowser(); });
 		sbInvisibleBrowser.load(sbCommonUtils.convertFilePathToURL(htmlFile.path));
+=======
+		var htmlFile = ScrapBookUtils.getScrapBookDir();
+		htmlFile.append("combine.html");
+		ScrapBookUtils.writeFile(htmlFile, sbPageCombiner.htmlSrc, "UTF-8");
+		var cssFile = ScrapBookUtils.getScrapBookDir();
+		cssFile.append("combine.css");
+		ScrapBookUtils.writeFile(cssFile, sbPageCombiner.cssText, "UTF-8");
+		sbInvisibleBrowser.refreshEvent(function(){ sbCombineService.showBrowser(); });
+		sbInvisibleBrowser.load(ScrapBookUtils.convertFilePathToURL(htmlFile.path));
+>>>>>>> release-1.6.0.a1
 	},
 
 	showBrowser : function()
 	{
 		this.toggleElements(false);
 		sbInvisibleBrowser.ELEMENT.onclick = function(aEvent){ aEvent.preventDefault(); };
+<<<<<<< HEAD
 		this.WIZARD.getButton("back").disabled = false;
 		this.WIZARD.getButton("finish").disabled = false;
 		this.WIZARD.getButton("finish").onclick = function(){ sbCombineService.finish(); };
@@ -187,11 +256,16 @@ var sbCombineService = {
 		{
 			window.top.sbManageService.toggleRightPane("sbToolbarCombine");
 		}, 500);
+=======
+		this.WIZARD.getButton("finish").disabled = false;
+		this.WIZARD.getButton("finish").onclick = function(){ sbCombineService.finish(); };
+>>>>>>> release-1.6.0.a1
 	},
 
 	finish : function()
 	{
 		this.WIZARD.getButton("finish").disabled = true;
+<<<<<<< HEAD
 		this.WIZARD.getButton("cancel").disabled = true;
 		this.option["R"] = document.getElementById("sbCombineOptionRemove").checked;
 		this.toggleElements(true);
@@ -204,6 +278,11 @@ var sbCombineService = {
 		{
 			setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null, null, document.getElementById("sbpTitleTextbox").value); }, 0);
 		}
+=======
+		this.toggleElements(true);
+		SB_trace(sbCaptureTask.STRING.getString("SAVE_START"));
+		setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null); }, 0);
+>>>>>>> release-1.6.0.a1
 	},
 
 	toggleElements : function(isProgressMode)
@@ -214,6 +293,7 @@ var sbCombineService = {
 
 	onCombineComplete : function(aItem)
 	{
+<<<<<<< HEAD
 		var newRes = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id);
 		sbDataSource.setProperty(newRes, "type", "combine");
 		sbDataSource.setProperty(newRes, "source", sbDataSource.getProperty(this.resList[0], "source"));
@@ -351,6 +431,41 @@ var sbCombineService = {
 			}
 		}
 	},
+=======
+		var newRes = ScrapBookUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id);
+		ScrapBookData.setProperty(newRes, "type", "combine");
+		ScrapBookData.setProperty(newRes, "source", ScrapBookData.getProperty(this.resList[0], "source"));
+		var newIcon = ScrapBookData.getProperty(this.resList[0], "icon");
+		if ( newIcon.match(/\d{14}/) ) newIcon = "resource://scrapbook/data/" + aItem.id + "/" + ScrapBookUtils.getFileName(newIcon);
+		ScrapBookData.setProperty(newRes, "icon", newIcon);
+		var newComment = "";
+		for ( var i = 0; i < this.resList.length; i++ )
+		{
+			var comment = ScrapBookData.getProperty(this.resList[i], "comment");
+			if ( comment ) newComment += comment + " __BR__ ";
+		}
+		if ( newComment ) ScrapBookData.setProperty(newRes, "comment", newComment);
+		return newRes;
+	},
+
+	onDragOver: function(event) {
+		if (event.dataTransfer.types.contains("moz/rdfitem"))
+			event.preventDefault();
+	},
+
+	onDrop: function(event) {
+		event.preventDefault();
+		if (!event.dataTransfer.types.contains("moz/rdfitem"))
+			return;
+		var idxs = window.top.sbTreeUI.getSelection(false, 2);
+		idxs.forEach(function(idx) {
+			var res    = window.top.sbTreeUI.TREE.builderView.getResourceAtIndex(idx);
+			var parRes = window.top.sbTreeUI.getParentResource(idx);
+			sbCombineService.add(res, parRes);
+		});
+	},
+
+>>>>>>> release-1.6.0.a1
 };
 
 
@@ -368,7 +483,10 @@ var sbPageCombiner = {
 
 	exec : function(aType)
 	{
+<<<<<<< HEAD
 //alert("htmlSrc - "+this.htmlSrc.length+"\ncssText - "+this.cssText.length+"\noffsetTop - "+this.offsetTop+"\nisTargetCombined - "+this.isTargetCombined);
+=======
+>>>>>>> release-1.6.0.a1
 		this.isTargetCombined = false;
 		if ( sbCombineService.index == 0 )
 		{
@@ -376,7 +494,11 @@ var sbPageCombiner = {
 			this.htmlSrc += '<html><head>';
 			this.htmlSrc += '<meta http-equiv="Content-Type" content="text/html;Charset=UTF-8">';
 			this.htmlSrc += '<meta http-equiv="Content-Style-Type" content="text/css">';
+<<<<<<< HEAD
 			this.htmlSrc += '<title>' + sbDataSource.getProperty(sbCombineService.curRes, "title") + '</title>';
+=======
+			this.htmlSrc += '<title>' + ScrapBookData.getProperty(sbCombineService.curRes, "title") + '</title>';
+>>>>>>> release-1.6.0.a1
 			this.htmlSrc += '<link rel="stylesheet" href="combine.css" media="all">';
 			this.htmlSrc += '<link rel="stylesheet" href="chrome://scrapbook/skin/combine.css" media="all">';
 			this.htmlSrc += '<link rel="stylesheet" href="chrome://scrapbook/skin/annotation.css" media="all">';
@@ -405,19 +527,30 @@ var sbPageCombiner = {
 	getCiteHTML : function(aType)
 	{
 		var src   = '\n<!--' + sbCombineService.postfix + '-->\n';
+<<<<<<< HEAD
 		var title = sbCommonUtils.crop(sbDataSource.getProperty(sbCombineService.curRes, "title") , 100);
+=======
+		var title = ScrapBookUtils.crop(ScrapBookData.getProperty(sbCombineService.curRes, "title") , 100);
+>>>>>>> release-1.6.0.a1
 		var linkURL = "";
 		switch ( aType )
 		{
 			case "file" :
+<<<<<<< HEAD
 				var htmlFile = sbCommonUtils.getContentDir(sbCombineService.curID);
 				htmlFile.append("index.html");
 				var isMatch = sbCommonUtils.readFile(htmlFile).match(/URL=\.\/([^\"]+)\"/);
+=======
+				var htmlFile = ScrapBookUtils.getContentDir(sbCombineService.curID);
+				htmlFile.append("index.html");
+				var isMatch = ScrapBookUtils.readFile(htmlFile).match(/URL=\.\/([^\"]+)\"/);
+>>>>>>> release-1.6.0.a1
 				if ( isMatch ) linkURL = "./data/" + sbCombineService.curID + "/" + RegExp.$1;
 				break;
 			case "note" :
 				linkURL = ""; break;
 			default :
+<<<<<<< HEAD
 				linkURL = sbDataSource.getProperty(sbCombineService.curRes, "source"); break;
 		}
 		var icon = sbDataSource.getProperty(sbCombineService.curRes, "icon");
@@ -425,6 +558,15 @@ var sbPageCombiner = {
 		if ( icon.indexOf("resource://") == 0 && icon.indexOf(sbCombineService.curID) > 0 )
 		{
 			icon = "./data/" + sbCombineService.curID + "/" + sbCommonUtils.getFileName(icon);
+=======
+				linkURL = ScrapBookData.getProperty(sbCombineService.curRes, "source"); break;
+		}
+		var icon = ScrapBookData.getProperty(sbCombineService.curRes, "icon");
+		if ( !icon ) icon = ScrapBookUtils.getDefaultIcon(aType);
+		if ( icon.indexOf("resource://") == 0 && icon.indexOf(sbCombineService.curID) > 0 )
+		{
+			icon = "./data/" + sbCombineService.curID + "/" + ScrapBookUtils.getFileName(icon);
+>>>>>>> release-1.6.0.a1
 		}
 		src += '<cite class="scrapbook-header' + '">\n';
 		src += '\t<img src="' + icon + '" width="16" height="16">\n';
@@ -437,7 +579,14 @@ var sbPageCombiner = {
 	{
 		if ( this.BODY.localName.toUpperCase() != "BODY" )
 		{
+<<<<<<< HEAD
 			alert(sbCombineService.STRING.getString("CANNOT_COMBINE_FRAMES") + "\n" + sbDataSource.getProperty(sbCombineService.curRes, "title"));
+=======
+			ScrapBookUtils.alert(
+				sbCombineService.STRING.getString("CANNOT_COMBINE_FRAMES") + "\n" + 
+				ScrapBookData.getProperty(sbCombineService.curRes, "title")
+			);
+>>>>>>> release-1.6.0.a1
 			this.BROWSER.stop();
 			window.location.reload();
 		}
@@ -550,7 +699,11 @@ var sbPageCombiner = {
 	{
 		if ( aNode.getAttribute(aAttr) )
 		{
+<<<<<<< HEAD
 			aNode.setAttribute(aAttr, sbCommonUtils.resolveURL(this.BROWSER.currentURI.spec, aNode.getAttribute(aAttr)));
+=======
+			aNode.setAttribute(aAttr, ScrapBookUtils.resolveURL(this.BROWSER.currentURI.spec, aNode.getAttribute(aAttr)));
+>>>>>>> release-1.6.0.a1
 		}
 		return aNode;
 	},
@@ -567,20 +720,33 @@ sbCaptureObserverCallback.onCaptureComplete = function(aItem)
 	{
 		if ( sbCombineService.resList.length != sbCombineService.parList.length ) return;
 		var rmIDs = window.top.sbController.removeInternal(sbCombineService.resList, sbCombineService.parList);
+<<<<<<< HEAD
 		if ( rmIDs ) SB_trace(window.top.sbMainService.STRING.getFormattedString("ITEMS_REMOVED", [rmIDs.length]));
+=======
+		if ( rmIDs ) SB_trace(ScrapBookUtils.getLocaleString("ITEMS_REMOVED", [rmIDs.length]));
+>>>>>>> release-1.6.0.a1
 	}
 	SB_fireNotification(aItem);
 	setTimeout(function()
 	{
+<<<<<<< HEAD
 		window.top.sbManageService.toggleRightPane("sbToolbarCombine");
 		window.top.sbMainService.locate(newRes);
+=======
+		window.top.sbManageUI.toggleRightPane("sbToolbarCombine");
+		window.top.sbMainUI.locate(newRes);
+>>>>>>> release-1.6.0.a1
 	}, 500);
 }
 
 
 sbInvisibleBrowser.onStateChange = function(aWebProgress, aRequest, aStateFlags, aStatus)
 {
+<<<<<<< HEAD
 	if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
+=======
+	if ( aStateFlags & Ci.nsIWebProgressListener.STATE_START )
+>>>>>>> release-1.6.0.a1
 	{
 		SB_trace(sbCaptureTask.STRING.getString("LOADING") + "... " + sbCombineService.prefix + (++this.fileCount) + " " + sbCombineService.postfix);
 	}

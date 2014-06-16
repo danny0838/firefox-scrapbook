@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 <!ENTITY sb.detail.linked.timeout "Задержка (в сек)">
 <!ENTITY sb.detail.linked.charset "Кодировка">
 <!ENTITY sb.detail "Настройки сохранения веб-страницы">
+=======
+<!ENTITY sb.detail.title "Подробности сохранения">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.detail.new.folder "Новый каталог">
 <!ENTITY sb.detail.select.folder "Выбрать каталог">
 <!ENTITY sb.detail.option "Составные части страницы">
@@ -12,7 +16,11 @@
 <!ENTITY sb.detail.linked.movie "Видеофайлы">
 <!ENTITY sb.detail.linked.archive "Архивы">
 <!ENTITY sb.detail.linked.custom "Другие файлы">
+<<<<<<< HEAD
 <!ENTITY sb.detail.linked.page "Многоуровневый захват">
+=======
+<!ENTITY sb.detail.linked.page2 "Глубокое сохранение">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.detail.linked.page.depth "Уровень глубины захвата ссылок">
 <!ENTITY sb.detail.linked.page.text "После завершения сохранения веб-страниц они будут связаны между собой.">
 <!ENTITY sb.detail.warnAboutRenew "Примечание: При использовании функции «Захватить снова» сохранённая страница будет перезаписана.">

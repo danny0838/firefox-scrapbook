@@ -1,7 +1,10 @@
 
+<<<<<<< HEAD
 const Cc = Components.classes;
 const Ci = Components.interfaces;
 
+=======
+>>>>>>> release-1.6.0.a1
 const kNameCol = 0;
 const kPathCol = 1;
 const kActiveCol = 2;
@@ -16,8 +19,13 @@ var gMultiBookManager = {
 	init: function() {
 		if (!window.opener)
 			throw Components.results.NS_ERROR_UNEXPECTED;
+<<<<<<< HEAD
 		var data = sbMultiBookService.initFile();
 		var currentPath = sbCommonUtils.copyUnicharPref("scrapbook.data.path", "");
+=======
+		var data = sbMultiBookUI.initFile();
+		var currentPath = ScrapBookUtils.getPref("data.path");
+>>>>>>> release-1.6.0.a1
 		data.forEach(function(item) {
 			item[kActiveCol] = (item[kPathCol] == currentPath);
 		});
@@ -33,9 +41,14 @@ var gMultiBookManager = {
 		if (this._activeItemChanged) {
 			gMultiBookTreeView._data.forEach(function(item) {
 				if (item[kActiveCol]) {
+<<<<<<< HEAD
 					sbCommonUtils.setUnicharPref("scrapbook.data.title", item[kNameCol]);
 					sbCommonUtils.setUnicharPref("scrapbook.data.path", item[kPathCol]);
 					window.opener.top.sbBrowserOverlay.dataTitle = item[kNameCol];
+=======
+					ScrapBookUtils.setPref("data.title", item[kNameCol]);
+					ScrapBookUtils.setPref("data.path", item[kPathCol]);
+>>>>>>> release-1.6.0.a1
 				}
 			});
 		}
@@ -43,7 +56,11 @@ var gMultiBookManager = {
 		gMultiBookTreeView._data.forEach(function(item) {
 			content += item[kNameCol] + "\t" + item[kPathCol] + "\n";
 		});
+<<<<<<< HEAD
 		sbCommonUtils.writeFile(sbMultiBookService.file, content, "UTF-8");
+=======
+		ScrapBookUtils.writeFile(sbMultiBookUI.file, content, "UTF-8");
+>>>>>>> release-1.6.0.a1
 		window.opener.location.reload();
 	},
 
@@ -101,6 +118,7 @@ var gMultiBookManager = {
 		this.edit();
 	},
 
+<<<<<<< HEAD
 };
 
 
@@ -120,6 +138,15 @@ var gDragDropObserver = {
 	onDragExit: function (aEvent, aDragSession) {},
 	onDragOver: function (aEvent, aFlavour, aDragSession) {},
 	getSupportedFlavours: function() { return null; }
+=======
+	handleDragStart: function(event) {
+		if (gMultiBookTreeView.selection.count != 1)
+			return;
+		var sourceIndex = gMultiBookTreeView.selection.currentIndex;
+		event.dataTransfer.setData("text/x-moz-tree-index", sourceIndex);
+		event.dataTransfer.dropEffect = "move";
+	}
+>>>>>>> release-1.6.0.a1
 
 };
 
@@ -191,7 +218,13 @@ MultiBookTreeView.prototype = {
 	isContainerEmpty: function(index) { return false; },
 	isSeparator: function(index) { return false; },
 	isSorted: function() { return false; },
+<<<<<<< HEAD
 	canDrop: function(targetIndex, orientation) {
+=======
+	canDrop: function(targetIndex, orientation, dataTransfer) {
+		if (!dataTransfer.types.contains("text/x-moz-tree-index"))
+			return false;
+>>>>>>> release-1.6.0.a1
 		if (this.selection.count != 1)
 			return false;
 		var sourceIndex = this.selection.currentIndex;
@@ -201,9 +234,15 @@ MultiBookTreeView.prototype = {
 			sourceIndex != (targetIndex + orientation)
 		);
 	},
+<<<<<<< HEAD
 	drop: function(targetIndex, orientation) {
 		if (this.selection.count != 1)
 			return false;
+=======
+	drop: function(targetIndex, orientation, dataTransfer) {
+		if (!this.canDrop(targetIndex, orientation, dataTransfer))
+			return;
+>>>>>>> release-1.6.0.a1
 		var sourceIndex = this.selection.currentIndex;
 		if (sourceIndex < targetIndex) {
 			if (orientation == Ci.nsITreeView.DROP_BEFORE)

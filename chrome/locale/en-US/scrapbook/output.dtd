@@ -1,3 +1,7 @@
 <!ENTITY sb.output.option.all "Output whole tree">
 <!ENTITY sb.output.option.frame "Output with frame">
+<<<<<<< HEAD
 <!ENTITY sb.output.option.open "After outputting, open it in browser">
+=======
+<!ENTITY sb.output.option.open "When the process done, open the HTML file">
+>>>>>>> release-1.6.0.a1

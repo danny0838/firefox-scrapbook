@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!ENTITY sb.capture.partial "擷取選擇區域">
 <!ENTITY sb.capture.partial.as "擷取選擇區域設定">
 <!ENTITY sb.capture.entire "擷取網頁">
@@ -16,3 +17,18 @@
 <!ENTITY sb.key.capture "L">
 <!ENTITY sb.key.capture.as "K">
 <!ENTITY sb.key.bookmark "J">
+=======
+<!ENTITY sb.save.partial "擷取選擇區域">
+<!ENTITY sb.save.partial.as "擷取選擇區域設定">
+<!ENTITY sb.save.entire "擷取網頁">
+<!ENTITY sb.save.entire.as "擷取網頁設定">
+<!ENTITY sb.save.frame "擷取頁框">
+<!ENTITY sb.save.frame.as "擷取頁框設定">
+<!ENTITY sb.save.target "擷取連結">
+<!ENTITY sb.save.target.as "擷取連結設定">
+<!ENTITY sb.save.alltabs "擷取所有分頁">
+<!ENTITY sb.save.bookmark "加入 ScrapBook 書籤">
+<!ENTITY sb.sidebar "顯示於側邊欄中">
+<!ENTITY sb.menubar "選單列">
+<!ENTITY sb.editbefore "編輯後擷取">
+>>>>>>> release-1.6.0.a1

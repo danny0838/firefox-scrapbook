@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 <!ENTITY sb.detail.linked.timeout "Limit czasu (s)">
 <!ENTITY sb.detail.linked.charset "Zestaw znaków">
 <!ENTITY sb.detail "Szczegóły przechwytywania">
+=======
+<!ENTITY sb.detail.title "Szczegóły przechwytywania">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.detail.new.folder "Nowy folder">
 <!ENTITY sb.detail.select.folder "Wybierz folder">
 <!ENTITY sb.detail.option "Opcje">
@@ -12,8 +16,15 @@
 <!ENTITY sb.detail.linked.movie "filmu">
 <!ENTITY sb.detail.linked.archive "archiwów">
 <!ENTITY sb.detail.linked.custom "Inne">
+<<<<<<< HEAD
 <!ENTITY sb.detail.linked.page "Przechwytywanie szczegółowe">
 <!ENTITY sb.detail.linked.page.depth "Głębokość podążania za odnośnikami">
 <!ENTITY sb.detail.linked.page.text "Po zakończeniu przechwytywania wszystkie strony będą powiązane ze sobą i zostanie utworzona mapa stron.">
 <!ENTITY sb.detail.warnAboutRenew "Uwaga: Opcja &quot;Przechwyć ponownie&quot; nadpisze poprzednio zapisaną stronę">
+=======
+<!ENTITY sb.detail.linked.page2 "Przechwytywanie szczegółowe">
+<!ENTITY sb.detail.linked.page.depth "Głębokość podążania za odnośnikami">
+<!ENTITY sb.detail.linked.page.text "Po zakończeniu przechwytywania wszystkie strony będą powiązane ze sobą i zostanie utworzona mapa stron.">
+<!ENTITY sb.detail.warnAboutRenew "Uwaga: Opcja „Przechwyć ponownie” powoduje zastąpienie poprzednio zapisanej strony.">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.detail.warnAboutScript "Uwaga: JavaScript może powodować problemy.">

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!ENTITY sb.multiple.filter "Filtro">
 <!ENTITY sbp.multiple.titleofwebsite "Título de la página WEB">
 <!ENTITY sbp.multiple.titleoflink "Título del enlace">
@@ -5,6 +6,8 @@
 <!ENTITY sb.multiple.timeout "Desconexión">
 <!ENTITY sbp.multiple.downloadmethod "Método">
 <!ENTITY sb.multiple.charset "Juego de Caracteres">
+=======
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.multiple.url "URL (Introduzca URLs línea por línea)">
 <!ENTITY sb.multiple.detector "Detector URL">
 <!ENTITY sb.multiple.detector.plink "Todos los enlaces en la página">
@@ -13,4 +16,7 @@
 <!ENTITY sb.multiple.detector.local "Todos los HTMLs locales en un directorio">
 <!ENTITY sb.multiple.detector.bookmarks "Marcadores">
 <!ENTITY sb.multiple.detector.clear "Limpiar">
+<<<<<<< HEAD
 <!ENTITY sbp.multiple.exclude "ignorar direcciones ya existentes en la carpeta de destino">
+=======
+>>>>>>> release-1.6.0.a1

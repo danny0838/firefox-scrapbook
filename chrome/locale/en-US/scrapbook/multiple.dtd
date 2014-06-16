@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!ENTITY sb.multiple.filter "Filter (regular expression)">
 <!ENTITY sbp.multiple.titleofwebsite "Title of website">
 <!ENTITY sbp.multiple.titleoflink "Title of link">
@@ -5,6 +6,8 @@
 <!ENTITY sb.multiple.timeout "Timeout">
 <!ENTITY sbp.multiple.downloadmethod "Method">
 <!ENTITY sb.multiple.charset "Charset">
+=======
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.multiple.url "URL (Enter URLs line-by-line)">
 <!ENTITY sb.multiple.detector "URL Detector">
 <!ENTITY sb.multiple.detector.plink "All Links in the Page">
@@ -13,4 +16,7 @@
 <!ENTITY sb.multiple.detector.local "All Local HTMLs in a Directory">
 <!ENTITY sb.multiple.detector.bookmarks "Bookmarks">
 <!ENTITY sb.multiple.detector.clear "Clear">
+<<<<<<< HEAD
 <!ENTITY sbp.multiple.exclude "ignore already existing addresses in destination folder">
+=======
+>>>>>>> release-1.6.0.a1

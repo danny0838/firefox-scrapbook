@@ -10,10 +10,16 @@
 <!ENTITY sb.export "匯出">
 <!ENTITY sb.remove "刪除">
 <!ENTITY sb.property "文件屬性">
+<<<<<<< HEAD
 <!ENTITY sb.listview "列表模式">
 <!ENTITY sb.prop.title "標題">
 <!ENTITY sb.prop.comment "文件評註">
 <!ENTITY sbp.prop.url "URL">
+=======
+<!ENTITY sb.prop.title "標題">
+<!ENTITY sb.prop.url "網址">
+<!ENTITY sb.prop.comment "文件評註">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.prop.id.date "ID （日期）">
 <!ENTITY sb.folder.combine "合併檢視">
 <!ENTITY sb.folder.openall "以分頁開啟所有資料">

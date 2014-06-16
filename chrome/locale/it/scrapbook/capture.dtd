@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!ENTITY sb.capture "Cattura">
 <!ENTITY sb.capture.abort "Interrompi">
 <!ENTITY sb.capture.start "Avvia">
@@ -17,3 +18,18 @@
 <!ENTITY sbp.capture.column.one "URL">
 <!ENTITY sbp.capture.column.two "Titolo">
 <!ENTITY sbp.capture.column.three "Stato">
+=======
+<!ENTITY sb.save "Cattura">
+<!ENTITY sb.save.abort "Interrompi">
+<!ENTITY sb.save.start "Avvia">
+<!ENTITY sb.save.retry "Ritenta">
+<!ENTITY sb.save.skip "Salta">
+<!ENTITY sb.save.pause "Pausa">
+<!ENTITY sb.save.filter "Filtra">
+<!ENTITY sb.save.filter.domain "Filtra per dominii">
+<!ENTITY sb.save.filter.level "Filtra per cartelle">
+<!ENTITY sb.save.filter.string "Filtra per stringhe">
+<!ENTITY sb.save.filter.checkon "Seleziona tutti i filtri">
+<!ENTITY sb.save.filter.checkoff "Deseleziona tutti i filtri">
+<!ENTITY sb.save.filter.invert "Inverti la selezione">
+>>>>>>> release-1.6.0.a1

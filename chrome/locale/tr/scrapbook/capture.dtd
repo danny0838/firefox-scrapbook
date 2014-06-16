@@ -1,0 +1,13 @@
+<!ENTITY sb.save "Kaydet">
+<!ENTITY sb.save.abort "İptal Et">
+<!ENTITY sb.save.start "Başla">
+<!ENTITY sb.save.retry "Yeniden Dene">
+<!ENTITY sb.save.skip "Atla">
+<!ENTITY sb.save.pause "Duraklat">
+<!ENTITY sb.save.filter "Filtre">
+<!ENTITY sb.save.filter.domain "Domain Sınırla">
+<!ENTITY sb.save.filter.level "Dizin Sınırla">
+<!ENTITY sb.save.filter.string "Dizeye göre Filtrele">
+<!ENTITY sb.save.filter.checkon "Tümünü Seç">
+<!ENTITY sb.save.filter.checkoff "Tüm Seçilenleri Kaldır">
+<!ENTITY sb.save.filter.invert "Seçimleri Ters Çevir">

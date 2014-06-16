@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!ENTITY sb.capture.partial "Capture de la sélection">
 <!ENTITY sb.capture.partial.as "Capture de la sélection dans">
 <!ENTITY sb.capture.entire "Capture de la page">
@@ -16,3 +17,18 @@
 <!ENTITY sb.key.capture "L">
 <!ENTITY sb.key.capture.as "K">
 <!ENTITY sb.key.bookmark "J">
+=======
+<!ENTITY sb.save.partial "Enregistrer la sélection">
+<!ENTITY sb.save.partial.as "Enregistrer la sélection sous">
+<!ENTITY sb.save.entire "Enregistrer la page">
+<!ENTITY sb.save.entire.as "Enregistrer la page sous">
+<!ENTITY sb.save.frame "Enregistrer le cadre">
+<!ENTITY sb.save.frame.as "Enregistrer le cadre sous">
+<!ENTITY sb.save.target "Enregistrer le lien">
+<!ENTITY sb.save.target.as "Enregistrer le lien sous">
+<!ENTITY sb.save.alltabs "Enregistrer tous les onglets">
+<!ENTITY sb.save.bookmark "Marquer la page">
+<!ENTITY sb.sidebar "Afficher dans le panneau latéral">
+<!ENTITY sb.menubar "Barre de menu">
+<!ENTITY sb.editbefore "Éditer avant la capture">
+>>>>>>> release-1.6.0.a1

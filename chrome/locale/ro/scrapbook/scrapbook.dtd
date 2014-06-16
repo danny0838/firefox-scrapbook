@@ -2,18 +2,29 @@
 <!ENTITY sb.new.separator "Separator nou">
 <!ENTITY sb.new.note "Notă nouă">
 <!ENTITY sb.toggle.all "Expandează/Restrânge toate dosarele">
+<<<<<<< HEAD
 <!ENTITY sb.tools "Instrumente ">
+=======
+<!ENTITY sb.tools "Unelte">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.tools.options "Opțiuni">
 <!ENTITY sb.tools.manage "Configurare">
 <!ENTITY sb.tools.combine "Asistent combinare">
 <!ENTITY sb.tools.trade "Import/Export">
+<<<<<<< HEAD
 <!ENTITY sb.tools.multiple "Capturare adrese multiple">
+=======
+<!ENTITY sb.tools.multiple "Salvează adrese multiple">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.tools.directory "Dosar ScrapBook">
 <!ENTITY sb.tools.calculate "Calculator dimensiuni">
 <!ENTITY sb.tools.sorttree "Sortare arbore de dosare">
 <!ENTITY sb.tools.output "Scriere arbore ca HTML">
 <!ENTITY sb.tools.repair "Reparare de urgență">
 <!ENTITY sb.tools.addons "Funcții adiționale">
+<<<<<<< HEAD
 <!ENTITY sb.tools.homepage "Pagină gazdă ScrapBook">
+=======
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.note.opentab "Deschide într-o filă">
 <!ENTITY sb.note.close "Închide">

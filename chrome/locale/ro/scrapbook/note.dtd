@@ -1,6 +1,10 @@
 <!ENTITY sb.note.save "Salvează">
 <!ENTITY sb.note.close "Închide">
+<<<<<<< HEAD
 <!ENTITY sb.note.tools "Instrumente">
+=======
+<!ENTITY sb.note.tools "Unelte">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.note.htmlview "Vizualizează ca HTML">
 <!ENTITY sb.note.normalview "Vizualizează normal">
 <!ENTITY sb.note.template "Editează șablonul HTML">

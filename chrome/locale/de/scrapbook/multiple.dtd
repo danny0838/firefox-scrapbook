@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!ENTITY sb.multiple.filter "Filter (regulärer Ausdruck)">
 <!ENTITY sbp.multiple.titleofwebsite "Webseitentitel">
 <!ENTITY sbp.multiple.titleoflink "Verweistext">
@@ -5,6 +6,8 @@
 <!ENTITY sb.multiple.timeout "Timeout">
 <!ENTITY sbp.multiple.downloadmethod "Methode">
 <!ENTITY sb.multiple.charset "Zeichensatz">
+=======
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.multiple.url "Zu archivierende URLs zeilenweise eingeben">
 <!ENTITY sb.multiple.detector "URLs automatisch ermitteln">
 <!ENTITY sb.multiple.detector.plink "Alle Links innerhalb der Seite">
@@ -13,4 +16,7 @@
 <!ENTITY sb.multiple.detector.local "Alle lokalen HTML-Dateien in einem Verzeichnis">
 <!ENTITY sb.multiple.detector.bookmarks "Lesezeichen">
 <!ENTITY sb.multiple.detector.clear "Löschen">
+<<<<<<< HEAD
 <!ENTITY sbp.multiple.exclude "vorhandene Adressen im Zielordner ignorieren">
+=======
+>>>>>>> release-1.6.0.a1

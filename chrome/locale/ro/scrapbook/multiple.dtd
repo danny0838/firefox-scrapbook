@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!ENTITY sb.multiple.filter "Filtru">
 <!ENTITY sbp.multiple.titleofwebsite "Denumire sait web">
 <!ENTITY sbp.multiple.titleoflink "Denumire legătură">
@@ -5,6 +6,8 @@
 <!ENTITY sb.multiple.timeout "Temporizare">
 <!ENTITY sbp.multiple.downloadmethod "Metodă">
 <!ENTITY sb.multiple.charset "Codare">
+=======
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.multiple.url "Adrese (furnizați adresele câte una pe linie)">
 <!ENTITY sb.multiple.detector "Detector de adrese">
 <!ENTITY sb.multiple.detector.plink "Toate legăturile din pagină">
@@ -13,4 +16,7 @@
 <!ENTITY sb.multiple.detector.local "Toate paginile HTML locale din dosar">
 <!ENTITY sb.multiple.detector.bookmarks "Semne de carte">
 <!ENTITY sb.multiple.detector.clear "Șterge">
+<<<<<<< HEAD
 <!ENTITY sbp.multiple.exclude "Ignoră adresele deja existente în dosarul destinație">
+=======
+>>>>>>> release-1.6.0.a1

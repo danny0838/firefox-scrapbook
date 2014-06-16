@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 /* ::::: CAPTURE_DETAIL ::::: */
+=======
+/* ::::: SAVE_DETAIL ::::: */
+>>>>>>> release-1.6.0.a1
 
 @import url('chrome://browser/skin/bookmarks/addBookmark.css');
 
@@ -19,6 +23,7 @@ toolbarbutton#sbToolbarToggle {
 	list-style-image: url('chrome://scrapbook/skin/toolbar_toggle.png');
 }
 
+<<<<<<< HEAD
 toolbarbutton#sbToolbarListView {
 	list-style-image: url('chrome://scrapbook/skin/toolbar_listview.png');
 }
@@ -27,6 +32,8 @@ toolbarbutton#sbToolbarManage {
 	list-style-image: url('chrome://scrapbook/skin/sbpExtra/toolbar_manage.png');
 }
 
+=======
+>>>>>>> release-1.6.0.a1
 toolbarbutton#sbToolbarMove {
 	list-style-image: url('chrome://scrapbook/skin/toolbar_move.png');
 }
@@ -67,15 +74,22 @@ menuitem[type="radio"][checked="true"] {
 }
 
 
+<<<<<<< HEAD
 /* ::::: TREE/LIST ::::: */
 
 treechildren::-moz-tree-image(sbTreeColTitle, leaf),
 richlistitem image.sblist-icon {
+=======
+/* ::::: TREE ::::: */
+
+treechildren::-moz-tree-image(sbTreeColTitle, leaf)  {
+>>>>>>> release-1.6.0.a1
 	-moz-image-region: auto !important;
 	list-style-image: url('chrome://scrapbook/skin/treeitem.png') !important;
 	width: 16px; height: 16px;
 }
 
+<<<<<<< HEAD
 treechildren::-moz-tree-image(sbTreeColTitle, note),
 richlistitem.note image.sblist-icon {
 	list-style-image: url('chrome://scrapbook/skin/treenote.png') !important;
@@ -102,6 +116,30 @@ richlistitem.separator .sblist-title {
 
 richlistitem.separator image.sblist-icon {
 	display: none;
+=======
+treechildren::-moz-tree-image(sbTreeColTitle, note)  {
+	list-style-image: url('chrome://scrapbook/skin/treenote.png') !important;
+}
+
+treechildren::-moz-tree-cell-text(marked) {
+	font-weight: bold;
+}
+
+treechildren::-moz-tree-cell-text(combine) {
+	color: blue;
+}
+
+treechildren::-moz-tree-cell-text(bookmark) {
+	color: rgb(32,192,32);
+}
+
+treechildren::-moz-tree-cell-text(separator) {
+	color: ThreeDShadow;
+}
+
+treechildren::-moz-tree-cell-text(separator) {
+	margin: 0px 5px;
+>>>>>>> release-1.6.0.a1
 }
 
 treechildren::-moz-tree-cell-text(invalid) {
@@ -110,6 +148,7 @@ treechildren::-moz-tree-cell-text(invalid) {
 }
 
 
+<<<<<<< HEAD
 /* ::::: LIST ::::: */
 
 richlistitem {
@@ -147,6 +186,8 @@ richlistitem .sblist-comment[value=""] {
 }
 
 
+=======
+>>>>>>> release-1.6.0.a1
 /* ::::: HEADER ::::: */
 
 sidebarheader {
@@ -192,16 +233,27 @@ sidebarheader toolbarbutton image,
 #sbSearchImage {
 	max-width : 24px !important;
 	max-height: 16px !important;
+<<<<<<< HEAD
 	margin : 2px !important;
 	padding: 0px !important;
 	background-image: url('chrome://scrapbook/skin/dropdown.png');
+=======
+	-moz-margin-end : 3px;
+	background-image: url('chrome://scrapbook/skin/dropdown.png');
+	cursor: default;
+>>>>>>> release-1.6.0.a1
 }
 
 
 /* ::::: COMMON ::::: */
 
 treechildren::-moz-tree-drop-feedback {
+<<<<<<< HEAD
 	width: 80px;
+=======
+	width: 10000px;
+	margin-left: -100px;
+>>>>>>> release-1.6.0.a1
 }
 
 tab {
@@ -221,9 +273,16 @@ browser {
 	background-color: #FFFFFF;
 }
 
+<<<<<<< HEAD
 
 /* ::::: NOTE (Fix for Firefox 3.5) ::::: */
 
 textbox[class="plain"] {
 	background-color: -moz-Field;
 }
+=======
+textbox[class="plain"] {
+	background-color: -moz-Field;
+}
+
+>>>>>>> release-1.6.0.a1

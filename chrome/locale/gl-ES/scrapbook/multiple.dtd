@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!ENTITY sb.multiple.filter "Filtro">
 <!ENTITY sbp.multiple.titleofwebsite "Título do sitio web">
 <!ENTITY sbp.multiple.titleoflink "Título da ligazón">
@@ -5,6 +6,8 @@
 <!ENTITY sb.multiple.timeout "Temporizador">
 <!ENTITY sbp.multiple.downloadmethod "Método">
 <!ENTITY sb.multiple.charset "Xogo de caracteres">
+=======
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.multiple.url "URL (Insira unha URL por liña)">
 <!ENTITY sb.multiple.detector "Detector de URLs">
 <!ENTITY sb.multiple.detector.plink "Todas as ligazóns da páxina">
@@ -13,4 +16,7 @@
 <!ENTITY sb.multiple.detector.local "Todos os HTMLs locais dun cartafol">
 <!ENTITY sb.multiple.detector.bookmarks "Marcadores">
 <!ENTITY sb.multiple.detector.clear "Limpar">
+<<<<<<< HEAD
 <!ENTITY sbp.multiple.exclude "ignorar enderezos que xa existen no cartafol de destino">
+=======
+>>>>>>> release-1.6.0.a1

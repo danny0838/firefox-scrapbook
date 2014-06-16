@@ -1,6 +1,10 @@
+<<<<<<< HEAD
 <!ENTITY sb.detail.linked.timeout "Timeout (in secondi)">
 <!ENTITY sb.detail.linked.charset "Codifica">
 <!ENTITY sb.detail "Dettagli cattura ">
+=======
+<!ENTITY sb.detail.title "Dettagli della cattura">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.detail.new.folder "Nuova cartella">
 <!ENTITY sb.detail.select.folder "Seleziona cartella">
 <!ENTITY sb.detail.option "Opzioni">
@@ -12,8 +16,16 @@
 <!ENTITY sb.detail.linked.movie "Filmati">
 <!ENTITY sb.detail.linked.archive "Archivi">
 <!ENTITY sb.detail.linked.custom "Personalizzati:">
+<<<<<<< HEAD
 <!ENTITY sb.detail.linked.page "Livello di cattura dei link presenti nelle pagine web">
 <!ENTITY sb.detail.linked.page.depth "Cattura fino al seguente livello">
 <!ENTITY sb.detail.linked.page.text "Dopo aver completato la cattura, tutte le pagine verranno elencate e verrà creata una mappa del sito">
 <!ENTITY sb.detail.warnAboutRenew "AVVISO: l&apos;opzione &apos;Cattura ancora&apos; sovrascrive le pagine precedentemente salvate">
 <!ENTITY sb.detail.warnAboutScript "AVVISO: gli JavaScript potrebbero causare problemi">
+=======
+<!ENTITY sb.detail.linked.page2 "Cattura in profondità">
+<!ENTITY sb.detail.linked.page.depth "Cattura fino al seguente livello">
+<!ENTITY sb.detail.linked.page.text "Dopo aver completato la cattura, tutte le pagine verranno elencate e verrà creata una mappa del sito">
+<!ENTITY sb.detail.warnAboutRenew "Avviso: l'opzione 'Cattura ancora' sovrascrive le pagine precedentemente salvate">
+<!ENTITY sb.detail.warnAboutScript "Avviso: gli JavaScript potrebbero causare problemi">
+>>>>>>> release-1.6.0.a1

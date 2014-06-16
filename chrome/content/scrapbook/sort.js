@@ -1,7 +1,10 @@
 
 var sbSortService = {
 
+<<<<<<< HEAD
 	get STRING()      { return document.getElementById("sbMainString"); },
+=======
+>>>>>>> release-1.6.0.a1
 	get WIZARD()      { return document.getElementById("sbSortWizard"); },
 	get RADIO_GROUP() { return document.getElementById("sbSortRadioGroup"); },
 
@@ -18,11 +21,15 @@ var sbSortService = {
 		this.WIZARD.getButton("next").removeAttribute("accesskey");
 		this.WIZARD.canAdvance = false;
 		this.RADIO_GROUP.selectedIndex = this.RADIO_GROUP.getAttribute("sortIndex");
+<<<<<<< HEAD
 		sbDataSource.init();
+=======
+>>>>>>> release-1.6.0.a1
 		if ( window.arguments ) {
 			this.contResList = [window.arguments[0]];
 			this.waitTime = 2;
 		} else {
+<<<<<<< HEAD
 			this.contResList = [sbCommonUtils.RDF.GetResource("urn:scrapbook:root")];
 			this.waitTime = 6;
 		}
@@ -30,11 +37,22 @@ var sbSortService = {
 		//tree verstecken
 		var liste = window.opener.document.getElementById("sbTreeOuter");
 		liste.hidden = true;
+=======
+			this.contResList = [ScrapBookUtils.RDF.GetResource("urn:scrapbook:root")];
+			this.waitTime = 6;
+		}
+		sbSortService.countDown();
+>>>>>>> release-1.6.0.a1
 	},
 
 	countDown : function()
 	{
+<<<<<<< HEAD
 		this.WIZARD.getButton("next").label = this.STRING.getString("START_BUTTON") + (this.waitTime > 0 ? " (" + this.waitTime + ")" : "");
+=======
+		this.WIZARD.getButton("next").label = ScrapBookUtils.getLocaleString("START_BUTTON")
+		                                    + (this.waitTime > 0 ? " (" + this.waitTime + ")" : "");
+>>>>>>> release-1.6.0.a1
 		this.WIZARD.canAdvance = this.waitTime == 0;
 		if ( this.waitTime-- ) setTimeout(function(){ sbSortService.countDown() }, 500);
 	},
@@ -43,7 +61,11 @@ var sbSortService = {
 	{
 		this.WIZARD.getButton("cancel").hidden = true;
 		if (document.getElementById("sbSortRecursive").checked)
+<<<<<<< HEAD
 			this.contResList = sbDataSource.flattenResources(this.contResList[0], 1, true);
+=======
+			this.contResList = ScrapBookData.flattenResources(this.contResList[0], 1, true);
+>>>>>>> release-1.6.0.a1
 		switch ( this.RADIO_GROUP.selectedIndex )
 		{
 			case 0 : break;
@@ -58,6 +80,7 @@ var sbSortService = {
 	next : function()
 	{
 		if ( ++this.index < this.contResList.length ) {
+<<<<<<< HEAD
 			document.getElementById("sbSortTextbox").value = "(" + (this.index + 1) + "/" + this.contResList.length + ")... " + sbDataSource.getProperty(this.contResList[this.index], "title");
 			this.process(this.contResList[this.index]);
 		} else {
@@ -68,11 +91,20 @@ var sbSortService = {
 			//tree wieder anzeigen
 			var liste = window.opener.document.getElementById("sbTreeOuter");
 			liste.hidden = false;
+=======
+			document.getElementById("sbSortTextbox").value = "(" + (this.index + 1) + "/" + this.contResList.length + ")... " + ScrapBookData.getProperty(this.contResList[this.index], "title");
+			this.process(this.contResList[this.index]);
+		} else {
+			ScrapBookData.flush();
+			this.RADIO_GROUP.setAttribute("sortIndex", this.RADIO_GROUP.selectedIndex);
+			window.close();
+>>>>>>> release-1.6.0.a1
 		}
 	},
 
 	process : function(aContRes)
 	{
+<<<<<<< HEAD
 		//Variablen
 			//fuer Bubble Sort
 		var		tausch					= 0;
@@ -110,10 +142,17 @@ var sbSortService = {
 		rdfCont.Init(sbDataSource.data, aContRes);
 		var resEnum = rdfCont.GetElements();
 		//ueberarbeiteter Code
+=======
+		var rdfCont = Cc['@mozilla.org/rdf/container;1'].createInstance(Ci.nsIRDFContainer);
+		rdfCont.Init(ScrapBookData.dataSource, aContRes);
+		var resEnum = rdfCont.GetElements();
+		var resListF = [], resListI = [], resListN = [];
+>>>>>>> release-1.6.0.a1
 		if ( !this.key )
 		{
 			while ( resEnum.hasMoreElements() )
 			{
+<<<<<<< HEAD
 				var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
 				resListcount++;
 				resList.push(res);
@@ -136,11 +175,18 @@ var sbSortService = {
 			}
 			//getauscht muss größer 0 sein, da sonst nichts gemacht wird
 			getauscht = 1;
+=======
+				var res = resEnum.getNext().QueryInterface(Ci.nsIRDFResource);
+				resListF.push(res);
+			}
+			resListF.reverse();
+>>>>>>> release-1.6.0.a1
 		}
 		else
 		{
 			while ( resEnum.hasMoreElements() )
 			{
+<<<<<<< HEAD
 				var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
 				if ( sbDataSource.isContainer(res) )
 				{
@@ -342,6 +388,31 @@ var sbSortService = {
 	{
 		var a = sbDataSource.getProperty(resA, sbSortService.key).toUpperCase();
 		var b = sbDataSource.getProperty(resB, sbSortService.key).toUpperCase();
+=======
+				var res = resEnum.getNext().QueryInterface(Ci.nsIRDFResource);
+				if ( ScrapBookData.isContainer(res) )
+					resListF.push(res);
+				else
+					( ScrapBookData.getProperty(res, "type") == "note" ? resListN : resListI ).push(res);
+			}
+			resListF.sort(this.compare); if ( !this.ascending ) resListF.reverse();
+			resListI.sort(this.compare); if ( !this.ascending ) resListI.reverse();
+			resListN.sort(this.compare); if ( !this.ascending ) resListN.reverse();
+			resListF = resListF.concat(resListI).concat(resListN);
+		}
+		for ( var i = 0; i < resListF.length; i++ )
+		{
+			rdfCont.RemoveElement(resListF[i], true);
+			rdfCont.AppendElement(resListF[i]);
+		}
+		setTimeout(function(){ sbSortService.next(res); }, 0);
+	},
+
+	compare : function(resA, resB)
+	{
+		var a = ScrapBookData.getProperty(resA, sbSortService.key).toUpperCase();
+		var b = ScrapBookData.getProperty(resB, sbSortService.key).toUpperCase();
+>>>>>>> release-1.6.0.a1
 		if ( a > b ) return 1;
 		if ( a < b ) return -1;
 		return 0;

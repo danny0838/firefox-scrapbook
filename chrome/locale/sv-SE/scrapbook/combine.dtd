@@ -2,7 +2,10 @@
 <!ENTITY sb.combine.preview "Förhandsgranska">
 <!ENTITY sb.combine.preview.d "Klicka på knappen &quot;Kombinera&quot; när du har godkänt förhandsgranskningen.">
 <!ENTITY sb.combine.option.remove "Ta bort originalsidorna efter slutförd kombinering">
+<<<<<<< HEAD
 <!ENTITY sbp.combine.up "Flytta objekt uppåt">
 <!ENTITY sbp.combine.down "Flytta objekt nedåt">
 <!ENTITY sbp.combine.remove "Ta bort objekt">
 <!ENTITY sbp.combine.newTitle "Ny rubrik">
+=======
+>>>>>>> release-1.6.0.a1

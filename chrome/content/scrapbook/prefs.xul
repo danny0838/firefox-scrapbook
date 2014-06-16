@@ -14,15 +14,24 @@
 	%prefDTD;
 	<!ENTITY % editDTD SYSTEM "chrome://scrapbook/locale/editor.dtd">
 	%editDTD;
+<<<<<<< HEAD
+=======
+	<!ENTITY % overlayDTD SYSTEM "chrome://scrapbook/locale/overlay.dtd">
+	%overlayDTD;
+>>>>>>> release-1.6.0.a1
 ]>
 
 <prefwindow id="sbPrefWindow"
             xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
             title="ScrapBook &sb.tools.options;"
             style="width: 40em;"
+<<<<<<< HEAD
             onload="sbPrefWindow.init();"
             onchange="sbPrefWindow.changed = true;"
             onunload="sbPrefWindow.done();">
+=======
+            onload="sbPrefWindow.init();">
+>>>>>>> release-1.6.0.a1
 
 	<prefpane id="mainPane" label="&sb.prefs.main;" flex="1">
 		<preferences>
@@ -38,7 +47,11 @@
 		<checkbox preference="scrapbook.ui.contextMenu"    label="&sb.prefs.ui.contextMenu;"
 		          onsyncfrompreference="sbPrefWindow.updateGroupedUI('scrapbook.ui.contextMenu', 'contextmenu');" />
 		<checkbox preference="scrapbook.ui.contextSubMenu" label="&sb.prefs.ui.contextSubMenu; *" class="indent" group="contextmenu" />
+<<<<<<< HEAD
 		<checkbox preference="scrapbook.ui.bookmarkMenu"   label="&sb.prefs.ui.bookmarkMenu;"     class="indent" group="contextmenu" />
+=======
+		<checkbox preference="scrapbook.ui.bookmarkMenu"   label="&sb.prefs.ui.bookmark;" class="indent" group="contextmenu" />
+>>>>>>> release-1.6.0.a1
 		<hbox align="center">
 			<label value="&sb.prefs.ui.folderList.maxEntries.1;" class="indent" />
 			<textbox preference="scrapbook.ui.folderList.maxEntries" type="number" size="2" max="99" />
@@ -48,10 +61,79 @@
 		          onsyncfrompreference="sbPrefWindow.updateGroupedUI('scrapbook.ui.menuBar', 'menubar');" />
 		<checkbox preference="scrapbook.ui.menuBar.icon"   label="&sb.prefs.ui.menuBar.icon; *"   class="indent" group="menubar" />
 		<checkbox preference="scrapbook.ui.toolsMenu" label="&sb.prefs.ui.toolsMenu;" />
+<<<<<<< HEAD
 		<checkbox id="sbPrefStatsBarIcon" preference="scrapbook.ui.statusBar" label="&sb.prefs.ui.statusBar;" />
 		<description>* &sb.prefs.restart;</description>
 	</prefpane>
 
+=======
+		<checkbox preference="scrapbook.ui.statusBar" label="&sb.prefs.ui.statusBar;" />
+		<description>* &sb.prefs.restart;</description>
+	</prefpane>
+
+	<prefpane id="keysPane" label="&sb.prefs.keys;" flex="1">
+		<preferences>
+			<preference id="scrapbook.key.menubar"     name="scrapbook.key.menubar"     type="string" />
+			<preference id="scrapbook.key.sidebar"     name="scrapbook.key.sidebar"     type="string" />
+			<preference id="scrapbook.key.save"        name="scrapbook.key.save"        type="string" />
+			<preference id="scrapbook.key.saveAs"      name="scrapbook.key.saveAs"      type="string" />
+			<preference id="scrapbook.key.saveAllTabs" name="scrapbook.key.saveAllTabs" type="string" />
+			<preference id="scrapbook.key.bookmark"    name="scrapbook.key.bookmark"    type="string" />
+		</preferences>
+		<grid>
+			<columns>
+				<column />
+				<column flex="1" />
+			</columns>
+			<rows oninput="sbPrefWindow.onInputKey(event);">
+				<row id="sbKeysMenubar" align="center">
+					<label value="&sb.menubar;:" group="menubar" />
+					<hbox align="center">
+						<label value="Alt+" group="menubar" />
+						<textbox size="1" maxlength="1" preference="scrapbook.key.menubar" group="menubar" />
+					</hbox>
+				</row>
+				<row align="center">
+					<label value="&sb.sidebar;:" />
+					<hbox align="center">
+						<label value="Alt+" />
+						<textbox size="1" maxlength="1" preference="scrapbook.key.sidebar" />
+					</hbox>
+				</row>
+				<row align="center">
+					<label value="&sb.save.entire;:" />
+					<hbox align="center">
+						<label value="Ctrl+Shift+" />
+						<textbox size="1" maxlength="1" preference="scrapbook.key.save" />
+					</hbox>
+				</row>
+				<row align="center">
+					<label value="&sb.save.entire.as;:" />
+					<hbox align="center">
+						<label value="Ctrl+Shift+" />
+						<textbox size="1" maxlength="1" preference="scrapbook.key.saveAs" />
+					</hbox>
+				</row>
+				<row align="center">
+					<label value="&sb.save.alltabs;:" />
+					<hbox align="center">
+						<label value="Ctrl+Shift+" />
+						<textbox size="1" maxlength="1" preference="scrapbook.key.saveAllTabs" />
+					</hbox>
+				</row>
+				<row align="center">
+					<label value="&sb.save.bookmark;:" />
+					<hbox align="center">
+						<label value="Ctrl+Shift+" />
+						<textbox size="1" maxlength="1" preference="scrapbook.key.bookmark" />
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+		<description style="margin-top: 1em;">&sb.prefs.restart;</description>
+	</prefpane>
+
+>>>>>>> release-1.6.0.a1
 	<prefpane id="tabsPane" label="&sb.prefs.tabs;" flex="1">
 		<preferences>
 			<preference id="scrapbook.tabs.open"         name="scrapbook.tabs.open"         type="bool" />
@@ -79,8 +161,11 @@
 				        oncommand="sbPrefWindow.hlCustomize(this.getAttribute('hlnumber'));" />
 			</hbox>
 		</groupbox>
+<<<<<<< HEAD
 		<spacer height="10" />
 		<checkbox preference="extensions.scrapbookplus.useDropDownList" label="&sbp.prefs.useDropDownList;" />
+=======
+>>>>>>> release-1.6.0.a1
 	</prefpane>
 
 	<prefpane id="organizePane" label="&sb.prefs.organize;" flex="1">
@@ -131,6 +216,7 @@
 		<preferences>
 			<preference id="scrapbook.showDetailOnDrop"   name="scrapbook.showDetailOnDrop"   type="bool" />
 			<preference id="scrapbook.notifyOnComplete"   name="scrapbook.notifyOnComplete"   type="bool" />
+<<<<<<< HEAD
 			<preference id="scrapbook.fileViewer.default" name="scrapbook.fileViewer.default" type="bool" />
 			<preference id="scrapbook.fileViewer.path"    name="scrapbook.fileViewer.path"    type="file" />
 			<preference id="extensions.scrapbookplus.useDropDownList"  name="extensions.scrapbookplus.useDropDownList"    type="bool" />
@@ -157,6 +243,14 @@
 		</groupbox>
 	</prefpane>
 
+=======
+		</preferences>
+		<checkbox preference="scrapbook.showDetailOnDrop" label="&sb.prefs.showDetailOnDrop;" />
+		<checkbox preference="scrapbook.notifyOnComplete" label="&sb.prefs.notifyOnComplete;" />
+	</prefpane>
+
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+>>>>>>> release-1.6.0.a1
 	<script type="application/x-javascript" src="chrome://scrapbook/content/prefs.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/highlighter.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/mbService.js" />

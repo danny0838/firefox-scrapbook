@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!ENTITY sb.capture "Capturează">
 <!ENTITY sb.capture.abort "Întrerupe">
 <!ENTITY sb.capture.start "Pornește">
@@ -17,3 +18,18 @@
 <!ENTITY sbp.capture.column.one "Adresă">
 <!ENTITY sbp.capture.column.two "Denumire">
 <!ENTITY sbp.capture.column.three "Stare">
+=======
+<!ENTITY sb.save "Salvează">
+<!ENTITY sb.save.abort "Renunță">
+<!ENTITY sb.save.start "Pornește">
+<!ENTITY sb.save.retry "Reîncearcă">
+<!ENTITY sb.save.skip "Ignoră">
+<!ENTITY sb.save.pause "Întrerupe">
+<!ENTITY sb.save.filter "Filtrare">
+<!ENTITY sb.save.filter.domain "Restricționează la domeniu">
+<!ENTITY sb.save.filter.level "Restricționează la dosar">
+<!ENTITY sb.save.filter.string "Filtrează după șir…">
+<!ENTITY sb.save.filter.checkon "Marchează tot">
+<!ENTITY sb.save.filter.checkoff "Demarchează tot">
+<!ENTITY sb.save.filter.invert "Inversează marcajele">
+>>>>>>> release-1.6.0.a1

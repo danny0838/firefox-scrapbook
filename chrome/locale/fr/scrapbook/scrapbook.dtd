@@ -7,6 +7,7 @@
 <!ENTITY sb.tools.manage "Gérer">
 <!ENTITY sb.tools.combine "Assistant de combinaison">
 <!ENTITY sb.tools.trade "Importer / Exporter">
+<<<<<<< HEAD
 <!ENTITY sb.tools.multiple "Capturer des URLs multiples">
 <!ENTITY sb.tools.directory "Répertoire de ScrapBook">
 <!ENTITY sb.tools.calculate "Calcul de la taille">
@@ -15,5 +16,14 @@
 <!ENTITY sb.tools.repair "Réparation d&apos;urgence">
 <!ENTITY sb.tools.addons "Fonctions additionnelles">
 <!ENTITY sb.tools.homepage "Site Web de ScrapBook">
+=======
+<!ENTITY sb.tools.multiple "Capturer des URL multiples">
+<!ENTITY sb.tools.directory "Répertoire de ScrapBook">
+<!ENTITY sb.tools.calculate "Calcul de la taille">
+<!ENTITY sb.tools.sorttree "Classer l'arborescence entière">
+<!ENTITY sb.tools.output "Arborescence en HTML">
+<!ENTITY sb.tools.repair "Réparation d'urgence">
+<!ENTITY sb.tools.addons "Fonctions additionnelles">
+>>>>>>> release-1.6.0.a1
 <!ENTITY sb.note.opentab "Éditer dans un onglet">
 <!ENTITY sb.note.close "Fermer">

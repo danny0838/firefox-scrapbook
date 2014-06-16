@@ -1,3 +1,7 @@
 <!ENTITY sb.output.option.all "Scrie arborele complet">
 <!ENTITY sb.output.option.frame "Scrie și cadrele">
+<<<<<<< HEAD
 <!ENTITY sb.output.option.open "După scriere, deschide fișierul în navigator">
+=======
+<!ENTITY sb.output.option.open "După încheierea procesului, deschide fișierul HTML">
+>>>>>>> release-1.6.0.a1
