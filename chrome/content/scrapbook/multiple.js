@@ -351,7 +351,11 @@ var sbURLDetector1 = {
 			if ( entry.isDirectory() ) {
 				this.inspectDirectoryWithDelay(entry, ++this.index);
 			} else {
-				if ( entry.leafName.match(/\.(html|htm)$/i) ) sbMultipleService.addURL(sbCommonUtils.convertFilePathToURL(entry.path));
+				if ( entry.leafName.match(/\.(html|htm)$/i) ) {
+					var hash = {};
+					hash[sbCommonUtils.convertFilePathToURL(entry.path)] = "";
+					sbMultipleService.addURL(hash);
+				}
 			}
 		}
 		if ( curIdx == this.index ) sbMultipleService.STATUS.value = "";
