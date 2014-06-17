@@ -415,13 +415,26 @@ var sbController = {
 		return rmIDs;
 	},
 
-	confirmRemovingFor: function(aRes)
+	confirmRemovingFor: function(aResList)
 	{
-		if (sbDataSource.isContainer(aRes) || sbMainService.prefs.confirmDelete)
-			return window.confirm( sbMainService.STRING.getString("CONFIRM_DELETE") );
+		if (sbMainService.prefs.confirmDelete) {
+			return this.confirmRemovingPrompt();
+		}
+		for ( var i = 0; i < aResList.length; i++ ) {
+			if ( sbDataSource.isContainer(aResList[i]) ) {
+				return this.confirmRemovingPrompt();
+			}
+		}
 		return true;
 	},
 
+	confirmRemovingPrompt: function() {
+		var button = sbCommonUtils.PROMPT.STD_YES_NO_BUTTONS + sbCommonUtils.PROMPT.BUTTON_POS_1_DEFAULT;
+		var text = sbMainService.STRING.getString("CONFIRM_DELETE");
+		// pressing default button or closing the prompt returns 1
+		// reverse it to mean "no" by default
+		return !sbCommonUtils.PROMPT.confirmEx(null, "[ScrapBook]", text, button, null, null, null, null, {});
+	},
 
 	rebuildLocal: function()
 	{

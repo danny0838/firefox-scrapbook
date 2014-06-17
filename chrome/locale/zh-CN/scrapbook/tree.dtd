@@ -2,6 +2,7 @@
 <!ENTITY sb.open.tab "在标签页中打开">
 <!ENTITY sb.open.newtab "在新标签页中打开">
 <!ENTITY sb.open.source "打开原始链接">
+<!ENTITY sb.multi "多重 ScrapBook">
 <!ENTITY sb.tools "工具">
 <!ENTITY sb.show.files "查看文件">
 <!ENTITY sb.move "移动">

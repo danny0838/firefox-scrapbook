@@ -2,6 +2,7 @@
 <!ENTITY sb.open.tab "Otwórz w karcie">
 <!ENTITY sb.open.newtab "Otwórz w nowej karcie">
 <!ENTITY sb.open.source "Pokaż stronę źródłową">
+<!ENTITY sb.multi "Multi-ScrapBook">
 <!ENTITY sb.tools "Narzędzia">
 <!ENTITY sb.show.files "Pokaż pliki">
 <!ENTITY sb.move "Przenieś">

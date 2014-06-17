@@ -2,6 +2,7 @@
 <!ENTITY sb.open.tab "タブで開く">
 <!ENTITY sb.open.newtab "新しいタブで開く">
 <!ENTITY sb.open.source "ソースURLを開く">
+<!ENTITY sb.multi "Multi-ScrapBook">
 <!ENTITY sb.tools "ツール">
 <!ENTITY sb.show.files "ファイルを表示">
 <!ENTITY sb.move "移動">

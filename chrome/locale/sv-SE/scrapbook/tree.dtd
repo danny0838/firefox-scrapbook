@@ -2,6 +2,7 @@
 <!ENTITY sb.open.tab "Öppna i flik">
 <!ENTITY sb.open.newtab "Öppna i ny flik">
 <!ENTITY sb.open.source "Öppna käll-URL">
+<!ENTITY sb.multi "Multi-ScrapBook">
 <!ENTITY sb.tools "Verktyg">
 <!ENTITY sb.show.files "Visa filer">
 <!ENTITY sb.move "Flytta">
