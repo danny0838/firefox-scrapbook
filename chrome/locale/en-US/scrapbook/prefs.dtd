@@ -29,10 +29,6 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "the bottom of a folder">
 <!ENTITY sb.prefs.showDetailOnDrop "Show &apos;Capture Detail&apos; dialog when capturing by drag-and-drop into Sidebar">
 <!ENTITY sb.prefs.notifyOnComplete "Show &apos;Capture Completed&apos; notification">
-<!ENTITY sb.prefs.viewer "Application for File Browsing">
-<!ENTITY sb.prefs.viewer.default "Default">
-<!ENTITY sb.prefs.viewer.default.explorer "Explorer">
-<!ENTITY sb.prefs.viewer.custom "Show files with">
 <!ENTITY sb.button.customize "Customize">
 <!ENTITY sb.button.browse "Browse">
 <!ENTITY sb.button.show "Show Files">

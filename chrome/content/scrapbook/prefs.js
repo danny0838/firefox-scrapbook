@@ -13,7 +13,6 @@ var sbPrefWindow = {
 		if ( iVerComparator.compare(iffVersion.version, "4.0")>=0 ) document.getElementById("sbPrefStatsBarIcon").hidden = true;
 		//Ende
 		this.updateDataPath();
-		this.updateViewerPath();
 		this.hlInitUI();
 		this._updateFileField("sbDataPath", "extensions.scrapbook.data.path");
 		if (!sbMultiBookService.validateRefresh(true)) {
@@ -21,10 +20,6 @@ var sbPrefWindow = {
 			Array.forEach(elts, function(elt) {
 				elt.disabled = true;
 			});
-		}
-		if (navigator.platform.indexOf("Win") == 0) {
-			var elt = document.getElementById("sbViewerDefault");
-			elt.label += " (" + elt.getAttribute("label2") + ")";
 		}
 	},
 
@@ -85,18 +80,8 @@ var sbPrefWindow = {
 		document.getElementById("sbDataButton").disabled  = isDefault || mbEnabled;
 	},
 
-	updateViewerUI: function() {
-		var isDefault = document.getElementById("extensions.scrapbook.fileViewer.default").value;
-		document.getElementById("sbViewerPath").disabled   = isDefault;
-		document.getElementById("sbViewerButton").disabled = isDefault;
-	},
-
 	updateDataPath: function() {
 		this._updateFileField("sbDataPath", "extensions.scrapbook.data.path");
-	},
-
-	updateViewerPath: function() {
-		this._updateFileField("sbViewerPath", "extensions.scrapbook.fileViewer.path");
 	},
 
 	_updateFileField: function(aEltID, aPrefID) {
@@ -118,17 +103,6 @@ var sbPrefWindow = {
 		if (fp.show() == fp.returnOK) {
 			document.getElementById("extensions.scrapbook.data.path").value = fp.file;
 			this.updateDataPath();
-		}
-	},
-
-	selectViewer: function() {
-		var title = document.getElementById("sbViewerCaption").label;
-		var fp = Cc["@mozilla.org/filepicker;1"].createInstance(Ci.nsIFilePicker);
-		fp.init(window, title, fp.modeOpen);
-		fp.appendFilters(fp.filterApps);
-		if (fp.show() == fp.returnOK) {
-			document.getElementById("extensions.scrapbook.fileViewer.path").value = fp.file;
-			this.updateViewerPath();
 		}
 	},
 

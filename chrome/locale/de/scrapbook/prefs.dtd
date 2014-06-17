@@ -29,10 +29,6 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "Ende eines Ordners erstellen">
 <!ENTITY sb.prefs.showDetailOnDrop "Dialog &quot;Archivierungsdetails&quot; anzeigen, wenn eine Archivierung durch Ziehen mit der Maus in die Sidebar erfolgt">
 <!ENTITY sb.prefs.notifyOnComplete "Meldung nach Abschluss der Archivierung anzeigen">
-<!ENTITY sb.prefs.viewer "Datei-Manager">
-<!ENTITY sb.prefs.viewer.default "Standard">
-<!ENTITY sb.prefs.viewer.default.explorer "Explorer">
-<!ENTITY sb.prefs.viewer.custom "Dateien anzeigen mit">
 <!ENTITY sb.button.customize "Anpassen">
 <!ENTITY sb.button.browse "Durchsuchen">
 <!ENTITY sb.button.show "Dateien anzeigen">

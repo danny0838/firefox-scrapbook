@@ -13,6 +13,5 @@
 <!ENTITY sb.tools.sorttree "Tüm Ağacı Sırala">
 <!ENTITY sb.tools.output "Ağacı HTML Olarak Çıkart">
 <!ENTITY sb.tools.repair "Acil Durum Onarımı">
-<!ENTITY sb.tools.addons "Eklenti İşlevleri">
 <!ENTITY sb.note.opentab "Sekmede Aç">
 <!ENTITY sb.note.close "Kapat">

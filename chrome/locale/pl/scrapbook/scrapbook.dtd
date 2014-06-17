@@ -13,7 +13,5 @@
 <!ENTITY sb.tools.sorttree "Sortuj całe drzewo">
 <!ENTITY sb.tools.output "Utwórz drzewo jako dokument HTML">
 <!ENTITY sb.tools.repair "Naprawa uszkodzeń">
-<!ENTITY sb.tools.addons "Funkcje dodatkowe">
-<!ENTITY sb.tools.homepage "Strona domowa">
 <!ENTITY sb.note.opentab "Otwórz w karcie">
 <!ENTITY sb.note.close "Zamknij">

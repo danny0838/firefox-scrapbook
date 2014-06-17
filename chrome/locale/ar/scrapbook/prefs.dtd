@@ -29,10 +29,6 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "أسفل المجلد">
 <!ENTITY sb.prefs.showDetailOnDrop "عرض مربع&apos;تفاصيل الإلتقاط&apos; عند الإلتقاط بالسحب و الإفلات داخل الشريط الجانبي">
 <!ENTITY sb.prefs.notifyOnComplete "عرض تنبيه &apos;تم الإلتقاط&apos;">
-<!ENTITY sb.prefs.viewer "تطبيق استعراض الملفات">
-<!ENTITY sb.prefs.viewer.default "الإفتراضي">
-<!ENTITY sb.prefs.viewer.default.explorer "Explorer">
-<!ENTITY sb.prefs.viewer.custom "عرض الملفات بإستخدام">
 <!ENTITY sb.button.customize "تخصيص">
 <!ENTITY sb.button.browse "استعراض">
 <!ENTITY sb.button.show "عرض الملفات">

@@ -13,7 +13,5 @@
 <!ENTITY sb.tools.sorttree "Järjestä koko puu">
 <!ENTITY sb.tools.output "Tulosta kansiopuu HTML:nä">
 <!ENTITY sb.tools.repair "Hätäkorjaus">
-<!ENTITY sb.tools.addons "Lisäosien toiminnot">
-<!ENTITY sb.tools.homepage "Kotisivu">
 <!ENTITY sb.note.opentab "Avaa välilehdessä">
 <!ENTITY sb.note.close "Sulje">

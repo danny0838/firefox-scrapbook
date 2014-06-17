@@ -29,10 +29,6 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "mappa végére">
 <!ENTITY sb.prefs.showDetailOnDrop "A „Rögzítés részletek” ablak megjelenítése, ha a felvételt húzd és ejtsd módon kezdeményezik az Oldalsávon">
 <!ENTITY sb.prefs.notifyOnComplete "A „Rögzítés kész” értesítés megjelenítése">
-<!ENTITY sb.prefs.viewer "Fájlböngészés programja">
-<!ENTITY sb.prefs.viewer.default "Alapértelmezett">
-<!ENTITY sb.prefs.viewer.default.explorer "Intéző">
-<!ENTITY sb.prefs.viewer.custom "Fájlok megjelenítése a következővel">
 <!ENTITY sb.button.customize "Testreszabás">
 <!ENTITY sb.button.browse "Tallózás">
 <!ENTITY sb.button.show "Fájlok megjelenítése">
