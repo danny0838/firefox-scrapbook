@@ -415,13 +415,22 @@ var sbController = {
 		return rmIDs;
 	},
 
-	confirmRemovingFor: function(aRes)
+	confirmRemovingFor: function(aResList)
 	{
-		if (sbDataSource.isContainer(aRes) || sbMainService.prefs.confirmDelete)
-			return window.confirm( sbMainService.STRING.getString("CONFIRM_DELETE") );
+		if (sbMainService.prefs.confirmDelete) {
+			return this.confirmRemovingPrompt();
+		}
+		for ( var i = 0; i < aResList.length; i++ ) {
+			if ( sbDataSource.isContainer(aResList[i]) ) {
+				return this.confirmRemovingPrompt();
+			}
+		}
 		return true;
 	},
 
+	confirmRemovingPrompt: function() {
+		return window.confirm( sbMainService.STRING.getString("CONFIRM_DELETE") );
+	},
 
 	rebuildLocal: function()
 	{

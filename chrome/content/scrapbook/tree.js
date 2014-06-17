@@ -97,7 +97,6 @@ var sbTreeHandler = {
 	remove : function()
 	{
 		if ( this.TREE.view.selection.count == 0 ) return;
-		if ( !sbController.confirmRemovingFor(this.resource) ) return;
 		var resList = [];
 		var parList = [];
 		if ( this.TREE.view.selection.count > 1 )
@@ -117,6 +116,7 @@ var sbTreeHandler = {
 			resList.push(curRes);
 			parList.push(parRes);
 		}
+		if ( !sbController.confirmRemovingFor(resList) ) return;
 		var rmIDs = sbController.removeInternal(resList, parList, false);
 		if ( rmIDs )
 		{
@@ -355,7 +355,7 @@ var sbListHandler = {
 				sbController.sendInternal([this.resource], [this.LIST.resource]);
 				break;
 			case "remove" :
-				if ( !sbController.confirmRemovingFor(this.resource) ) return;
+				if ( !sbController.confirmRemovingFor([this.resource]) ) return;
 				sbController.removeInternal([this.resource], [this.LIST.resource], false);
 				break;
 		}
