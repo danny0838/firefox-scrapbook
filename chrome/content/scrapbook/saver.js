@@ -565,6 +565,7 @@ var sbContentSaver = {
 				}
 				break;
 			case "meta" : 
+				if ( !aNode.hasAttribute("content") ) break;
 				if ( aNode.hasAttribute("property") ) {
 					switch ( aNode.getAttribute("property").toLowerCase() ) {
 						case "og:image" :
@@ -576,21 +577,27 @@ var sbContentSaver = {
 						case "og:video" :
 						case "og:video:url" :
 						case "og:video:secure_url" :
-							if ( aNode.hasAttribute("content") ) {
-								var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
-								if ( this.option["images"] ) {
-									var aFileName = this.download(url);
-									if (aFileName) aNode.setAttribute("content", aFileName);
-								}
-								else {
-									aNode.setAttribute("content", url);
-								}
+							var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
+							if ( this.option["images"] ) {
+								var aFileName = this.download(url);
+								if (aFileName) aNode.setAttribute("content", aFileName);
+							}
+							else {
+								aNode.setAttribute("content", url);
 							}
 							break;
 						case "og:url" :
-							if ( aNode.hasAttribute("content") ) {
-								var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
-								aNode.setAttribute("content", url);
+							var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
+							aNode.setAttribute("content", url);
+							break;
+					}
+				}
+				if ( aNode.hasAttribute("http-equiv") ) {
+					switch ( aNode.getAttribute("http-equiv").toLowerCase() ) {
+						case "refresh" :
+							if ( aNode.getAttribute("content").match(/^(\d+;\s*url=)(.*)$/i) ) {
+								var url = sbCommonUtils.resolveURL(this.refURLObj.spec, RegExp.$2);
+								aNode.setAttribute("content", RegExp.$1 + url);
 							}
 							break;
 					}
