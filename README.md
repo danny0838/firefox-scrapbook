@@ -1,7 +1,7 @@
 ScrapBook X
 =================
 
-Mozilla Firefox extension ScrapBook X is a branch of [ScrapBook](https://addons.mozilla.org/firefox/addon/scrapbook/).
+Mozilla Firefox extension [ScrapBook X](https://addons.mozilla.org/firefox/addon/scrapbook-x/) is a branch of [ScrapBook](https://addons.mozilla.org/firefox/addon/scrapbook/).
 
 There are bugs fixes, new features additions, performance improvements, and code optimizations in it. 
 Several features of [ScrapBook Plus](https://addons.mozilla.org/firefox/addon/scrapbook-plus/) are also included.
