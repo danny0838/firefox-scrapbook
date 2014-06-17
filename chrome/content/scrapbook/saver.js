@@ -598,6 +598,8 @@ var sbContentSaver = {
 							if ( aNode.getAttribute("content").match(/^(\d+;\s*url=)(.*)$/i) ) {
 								var url = sbCommonUtils.resolveURL(this.refURLObj.spec, RegExp.$2);
 								aNode.setAttribute("content", RegExp.$1 + url);
+								// add to the link list if it's a work of deep capture
+								if ( this.option["inDepth"] > 0 ) this.linkURLs.push(url);
 							}
 							break;
 					}
