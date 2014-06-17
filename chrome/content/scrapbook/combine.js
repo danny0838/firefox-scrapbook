@@ -447,7 +447,7 @@ var sbPageCombiner = {
 		var divElem = this.BROWSER.contentDocument.createElement("DIV");
 		var attrs = this.BODY.attributes;
 		for (var i = 0; i < attrs.length; i++) {
-			divElem.setAttribute(attrs[i].name, attrs[i].nodeValue);
+			divElem.setAttribute(attrs[i].name, attrs[i].value);
 		}
 		this.BODY.appendChild(divElem);
 		var childNodes = this.BODY.childNodes;

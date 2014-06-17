@@ -640,23 +640,6 @@ var sbInvisibleBrowser = {
 		if ( gPreset ) preset = gPreset;
 		if ( this.ELEMENT.contentDocument.body && sbCaptureTask.isDocument )
 		{
-			var metaElems = this.ELEMENT.contentDocument.getElementsByTagName("meta");
-			for ( var i = 0; i < metaElems.length; i++ )
-			{
-				if ( metaElems[i].hasAttribute("http-equiv") && metaElems[i].hasAttribute("content") &&
-				     metaElems[i].getAttribute("http-equiv").toLowerCase() == "refresh" && 
-				     metaElems[i].getAttribute("content").match(/URL\=(.*)$/i) )
-				{
-					var newURL = sbCommonUtils.resolveURL(sbCaptureTask.URL, RegExp.$1);
-					if ( newURL != sbCaptureTask.URL && sbCaptureTask.canRefresh )
-					{
-						gURLs[sbCaptureTask.index] = newURL;
-						sbCaptureTask.canRefresh = false;
-						sbCaptureTask.start(newURL);
-						return;
-					}
-				}
-			}
 			ret = sbContentSaver.captureWindow(this.ELEMENT.contentWindow, false, gShowDetail, gResName, gResIdx, preset, gContext, gTitle);
 		}
 		else
@@ -811,9 +794,8 @@ var sbCrossLinker = {
 		for ( var f = 0; f < sbContentSaver.frameList.length; f++ )
 		{
 			var doc = sbContentSaver.frameList[f].document;
-			var linkList = doc.links;
-			if ( !linkList ) continue;
 			var shouldSave = false;
+			var linkList = doc.links;
 			for ( var i = 0; i < linkList.length; i++ )
 			{
 				var urlLR = SB_splitByAnchor(linkList[i].href);
@@ -831,6 +813,31 @@ var sbCrossLinker = {
 						this.nodeHash[this.nameList[this.index]].appendChild(this.nodeHash[name]);
 					}
 					shouldSave = true;
+				}
+			}
+			var metaList = doc.getElementsByTagName("meta");
+			for ( var i = 0; i < metaList.length; i++ )
+			{
+				var meta = metaList[i];
+				if ( meta.hasAttribute("http-equiv") && meta.hasAttribute("content") &&
+					meta.getAttribute("http-equiv").toLowerCase() == "refresh" && 
+					meta.getAttribute("content").match(/(\d+;\s*url=)(.*)$/i) ) {
+					var urlLR = SB_splitByAnchor(sbCommonUtils.resolveURL(this.ELEMENT.currentURI.spec, RegExp.$2));
+					if ( gURL2Name[urlLR[0]] )
+					{
+						var name = gURL2Name[urlLR[0]];
+						meta.setAttribute("content", RegExp.$1 + name + ".html" + urlLR[1]);
+						meta.setAttribute("data-sb-indepth", "true");
+						if ( !this.nodeHash[name] )
+						{
+							var text = meta.text ? meta.text.replace(/\r|\n|\t/g, " ") : "";
+							if ( text.replace(/\s/g, "") == "" ) text = "";
+							this.nodeHash[name] = this.createNode(name, text);
+							if ( !this.nodeHash[name] ) this.nodeHash[name] = name;
+							this.nodeHash[this.nameList[this.index]].appendChild(this.nodeHash[name]);
+						}
+						shouldSave = true;
+					}
 				}
 			}
 			if ( shouldSave )
