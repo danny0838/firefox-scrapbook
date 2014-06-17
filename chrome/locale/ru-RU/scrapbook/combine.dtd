@@ -2,3 +2,7 @@
 <!ENTITY sb.combine.preview "Предварительный просмотр">
 <!ENTITY sb.combine.preview.d "Для запуска операции объединения нажмите кнопку «Начать объединение».">
 <!ENTITY sb.combine.option.remove "После окончания операции объединения удалить исходные страницы из веб-альбома ScrapBook">
+<!ENTITY sbp.combine.up "переместить выше">
+<!ENTITY sbp.combine.down "переместить ниже">
+<!ENTITY sbp.combine.remove "удалить">
+<!ENTITY sbp.combine.newTitle "новый заголовок">

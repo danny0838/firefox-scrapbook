@@ -1,5 +1,4 @@
 <!ENTITY sb.prefs.main "一般">
-<!ENTITY sb.prefs.keys "キー">
 <!ENTITY sb.prefs.tabs "タブ">
 <!ENTITY sb.prefs.save "保存">
 <!ENTITY sb.prefs.edit "編集">
@@ -7,12 +6,12 @@
 <!ENTITY sb.prefs.advanced "詳細">
 <!ENTITY sb.prefs.ui.contextMenu "ブラウザのコンテキストメニューに表示">
 <!ENTITY sb.prefs.ui.contextSubMenu "サブメニュー">
-<!ENTITY sb.prefs.ui.bookmark "&apos;ブックマーク形式で保存&apos; メニューを表示">
+<!ENTITY sb.prefs.ui.bookmarkMenu "'ScrapBookにブックマーク' メニューを表示">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "最近使用したフォルダを">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "個まで表示する">
 <!ENTITY sb.prefs.ui.menuBar "メニューバーに表示">
 <!ENTITY sb.prefs.ui.menuBar.icon "アイコン">
-<!ENTITY sb.prefs.ui.toolsMenu "&apos;ツール&apos; メニューに表示">
+<!ENTITY sb.prefs.ui.toolsMenu "'ツール' メニューに表示">
 <!ENTITY sb.prefs.ui.statusBar "ステータスバーに表示">
 <!ENTITY sb.prefs.restart "変更は Firefox 再起動後に反映されます。">
 <!ENTITY sb.prefs.tabs.tips "次の操作を新しいタブで開く">
@@ -28,8 +27,13 @@
 <!ENTITY sb.prefs.tree.unshift "アイテムを追加する位置:">
 <!ENTITY sb.prefs.tree.unshift.top "フォルダの一番上">
 <!ENTITY sb.prefs.tree.unshift.bottom "フォルダの一番下">
-<!ENTITY sb.prefs.showDetailOnDrop "サイドバーへのドラッグ＆ドロップ時、詳細な保存をする">
-<!ENTITY sb.prefs.notifyOnComplete "保存が完了したら通知する">
+<!ENTITY sb.prefs.showDetailOnDrop "サイドバーへのドラッグ＆ドロップ時、詳細な取り込みをする">
+<!ENTITY sb.prefs.notifyOnComplete "取り込みが完了したら通知する">
+<!ENTITY sb.prefs.viewer "ファイルの表示に用いるアプリケーション">
+<!ENTITY sb.prefs.viewer.default "デフォルト">
+<!ENTITY sb.prefs.viewer.default.explorer "エクスプローラ">
+<!ENTITY sb.prefs.viewer.custom "次のプログラム">
 <!ENTITY sb.button.customize "カスタマイズ">
 <!ENTITY sb.button.browse "参照">
 <!ENTITY sb.button.show "ファイルを表示">
+<!ENTITY sbp.prefs.useDropDownList "ハイライトボタンの代わりにドロップダウン選択リストを使用する">

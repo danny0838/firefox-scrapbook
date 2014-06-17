@@ -1,13 +1,19 @@
-<!ENTITY sb.save "إلتقط">
-<!ENTITY sb.save.abort "أجهض">
-<!ENTITY sb.save.start "إبدأ">
-<!ENTITY sb.save.retry "إعادة">
-<!ENTITY sb.save.skip "تجاوز">
-<!ENTITY sb.save.pause "إيقاف مؤقت">
-<!ENTITY sb.save.filter "تصفية">
-<!ENTITY sb.save.filter.domain "Restrict to Domain">
-<!ENTITY sb.save.filter.level "Restrict to Directory">
-<!ENTITY sb.save.filter.string "Filter by String...">
-<!ENTITY sb.save.filter.checkon "Check All On">
-<!ENTITY sb.save.filter.checkoff "Check All Off">
-<!ENTITY sb.save.filter.invert "Invert Checks">
+<!ENTITY sb.capture "إلتقط">
+<!ENTITY sb.capture.abort "أجهض">
+<!ENTITY sb.capture.start "إبدأ">
+<!ENTITY sb.capture.retry "إعادة">
+<!ENTITY sb.capture.skip "تجاوز">
+<!ENTITY sb.capture.pause "إيقاف مؤقت">
+<!ENTITY sb.capture.finish "ألغ">
+<!ENTITY sb.capture.filter "تصفية">
+<!ENTITY sb.capture.filter.column.one "أظهر/أخف">
+<!ENTITY sb.capture.filter.column.two "مرشح (تعبير نمطي)">
+<!ENTITY sb.capture.filter.accept "إقبل">
+<!ENTITY sb.capture.filter.accept.tt "غير أو حرر القيمة">
+<!ENTITY sb.capture.filter.cancel "ألغ">
+<!ENTITY sb.capture.filter.cancel.tt "ألغ التحرير">
+<!ENTITY sb.capture.filter.delete "احذف">
+<!ENTITY sb.capture.filter.delete.tt "أزل المرشح من القائمة">
+<!ENTITY sbp.capture.column.one "الرابط">
+<!ENTITY sbp.capture.column.two "العنوان">
+<!ENTITY sbp.capture.column.three "الحالة">

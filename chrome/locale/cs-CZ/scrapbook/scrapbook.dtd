@@ -14,5 +14,6 @@
 <!ENTITY sb.tools.output "Exportovat vše jako HTML">
 <!ENTITY sb.tools.repair "Nouzový stav">
 <!ENTITY sb.tools.addons "Přídavné funkce">
+<!ENTITY sb.tools.homepage "Domovská stránka">
 <!ENTITY sb.note.opentab "Otevřít v panelu">
 <!ENTITY sb.note.close "Zavřít">

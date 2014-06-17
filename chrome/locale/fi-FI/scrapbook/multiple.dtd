@@ -1,0 +1,16 @@
+<!ENTITY sb.multiple.filter "Suodatin (RegExp)">
+<!ENTITY sbp.multiple.titleofwebsite "Verkkopaikan otsikko">
+<!ENTITY sbp.multiple.titleoflink "Otsikon linkki">
+<!ENTITY sb.multiple.title "Otsikko">
+<!ENTITY sb.multiple.timeout "Aikaraja">
+<!ENTITY sbp.multiple.downloadmethod "Menetelmä">
+<!ENTITY sb.multiple.charset "Merkistö">
+<!ENTITY sb.multiple.url "URL (Kukin URL omalle rivilleen)">
+<!ENTITY sb.multiple.detector "URL-tunnistin">
+<!ENTITY sb.multiple.detector.plink "Kaikki sivun linkit">
+<!ENTITY sb.multiple.detector.slink "Kaikki valinnan linkit">
+<!ENTITY sb.multiple.detector.tabs "Kaikki ikkunan avoimet välilehdet">
+<!ENTITY sb.multiple.detector.local "Kansion kaikki paikalliset HTML:t">
+<!ENTITY sb.multiple.detector.bookmarks "Kirjanmerkit">
+<!ENTITY sb.multiple.detector.clear "Tyhjennä">
+<!ENTITY sbp.multiple.exclude "Älä ota huomioon olemassaolevia osoitteita kohdekansiossa">

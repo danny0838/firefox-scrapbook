@@ -1,0 +1,18 @@
+<!ENTITY sb.capture.partial "Kijelölés rögzítése">
+<!ENTITY sb.capture.partial.as "Kijelölés rögzítése másként">
+<!ENTITY sb.capture.entire "Oldal rögzítése">
+<!ENTITY sb.capture.entire.as "Oldal rögzítése másként">
+<!ENTITY sb.capture.frame "Keret rögzítése">
+<!ENTITY sb.capture.frame.as "Keret rögzítése másként">
+<!ENTITY sb.capture.target "Hivatkozás rögzítése">
+<!ENTITY sb.capture.target.as "Hivatkozás rögzítése másként">
+<!ENTITY sb.capture.alltabs "Összes lap rögzítése">
+<!ENTITY sb.capture.bookmark "Könyvjelző a Dossziéba">
+<!ENTITY sb.sidebar "Megjelenítés az Oldalsávon">
+<!ENTITY sb.menu "Menü">
+<!ENTITY sb.editbefore "Szerkesztés rögzítés előtt">
+<!ENTITY sb.key.sidebar "O">
+<!ENTITY sb.key.menubar "M">
+<!ENTITY sb.key.capture "R">
+<!ENTITY sb.key.capture.as "m">
+<!ENTITY sb.key.bookmark "K">

@@ -1,13 +1,19 @@
-<!ENTITY sb.save "Сохранить">
-<!ENTITY sb.save.abort "Отменить">
-<!ENTITY sb.save.start "Начать">
-<!ENTITY sb.save.retry "Повторить">
-<!ENTITY sb.save.skip "Пропустить">
-<!ENTITY sb.save.pause "Приостановить">
-<!ENTITY sb.save.filter "Фильтровать">
-<!ENTITY sb.save.filter.domain "Ограничить доменом">
-<!ENTITY sb.save.filter.level "Ограничить каталогом">
-<!ENTITY sb.save.filter.string "Фильтр по строке…">
-<!ENTITY sb.save.filter.checkon "Отметить всё">
-<!ENTITY sb.save.filter.checkoff "Снять отметки">
-<!ENTITY sb.save.filter.invert "Инвертировать">
+<!ENTITY sb.capture "Сохранение">
+<!ENTITY sb.capture.abort "Прервать">
+<!ENTITY sb.capture.start "Старт">
+<!ENTITY sb.capture.retry "Повтор">
+<!ENTITY sb.capture.skip "Пропустить">
+<!ENTITY sb.capture.pause "Пауза">
+<!ENTITY sb.capture.finish "Отменить">
+<!ENTITY sb.capture.filter "Фильтр">
+<!ENTITY sb.capture.filter.column.one "Показать/Скрыть">
+<!ENTITY sb.capture.filter.column.two "Фильтр (регулярные выражения)">
+<!ENTITY sb.capture.filter.accept "Применить">
+<!ENTITY sb.capture.filter.accept.tt "изменить значение">
+<!ENTITY sb.capture.filter.cancel "Отмена">
+<!ENTITY sb.capture.filter.cancel.tt "отменить редактирование">
+<!ENTITY sb.capture.filter.delete "Удалить">
+<!ENTITY sb.capture.filter.delete.tt "удалить фильтр из списка">
+<!ENTITY sbp.capture.column.one "Адрес">
+<!ENTITY sbp.capture.column.two "Заголовок">
+<!ENTITY sbp.capture.column.three "Статус">

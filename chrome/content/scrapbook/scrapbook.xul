@@ -10,59 +10,79 @@
 <window id="ScrapBookWindow"
         title="ScrapBook"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        onload="sbMainUI.init();"
-        onunload="sbMainUI.done();"
+        onload="sbMainService.init();"
+        onunload="sbMainService.done();"
         windowtype="scrapbook">
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapnote.js" />
 
+	<stringbundleset id="sbStringBundles">
+		<stringbundle id="sbMainString" src="chrome://scrapbook/locale/scrapbook.properties" />
+	</stringbundleset>
+
+	<broadcasterset id="sbBroadcasters" />
+
 	<popupset id="sbPopupSet" />
 
-	<toolbox id="sbMainToolbox">
-		<toolbar id="sbSearchToolbar" />
-		<toolbar id="sbMainToolbar">
+	<toolbox id="sbMainToolbox" class="plain">
+		<toolbar id="sbSearchToolbar" class="plain" />
+		<toolbar id="sbMainToolbar" class="plain">
 			<toolbarbutton id="sbToolbarNewFolder" type="menu">
 				<menupopup>
-					<menuitem class="menuitem-iconic sb-create" label="&sb.new.folder;..." oncommand="sbMainUI.createFolder();" />
-					<menuitem class="menuitem-iconic sb-create" label="&sb.new.separator;" oncommand="sbMainUI.createSeparator();" />
-					<menuitem class="menuitem-iconic sb-create" label="&sb.new.note;"      oncommand="sbMainUI.createNote();" />
+					<menuitem class="menuitem-iconic sb-create" label="&sb.new.folder;..." oncommand="sbMainService.createFolder();" />
+					<menuitem class="menuitem-iconic sb-create" label="&sb.new.separator;" oncommand="sbMainService.createSeparator();" />
+					<menuitem class="menuitem-iconic sb-create" label="&sb.new.note;"      oncommand="sbMainService.createNote();" />
 				</menupopup>
 			</toolbarbutton>
-			<toolbarbutton id="sbToolbarToggle"   tooltiptext="&sb.toggle.all;" oncommand="sbTreeUI.toggleAllFolders();" />
+			<toolbarbutton id="sbToolbarToggle"   tooltiptext="&sb.toggle.all;"   oncommand="sbTreeHandler.toggleAllFolders();" />
+			<toolbarbutton id="sbToolbarListView" observes="sbToggleListView"     oncommand="sbListHandler.toggle();" />
+			<toolbarbutton id="sbToolbarManage"   tooltiptext="&sb.tools.manage;" oncommand="sbCommonUtils.openManageWindow(null,null);" />
 			<toolbarbutton id="mbToolbarButton" />
 			<spacer flex="1" />
-			<toolbarbutton type="menu" label="&sb.tools;">
+			<toolbarbutton type="menu" label="&sb.tools; ">
 				<menupopup id="sbToolsMenuPopup">
-					<menuitem label="&sb.tools.options;..."   oncommand="sbMainUI.openPrefWindow();" />
+					<menuitem label="&sb.tools.options;..."   oncommand="sbMainService.openPrefWindow();" />
 					<menuseparator />
-					<menuitem label="&sb.tools.manage;..." oncommand="ScrapBookUtils.openManageWindow(null,null);" />
-					<menuitem label="&sb.tools.combine;"   oncommand="ScrapBookUtils.openManageWindow(null,'sbToolbarCombine');" />
-					<menuitem label="&sb.tools.trade;"     oncommand="ScrapBookUtils.openManageWindow(null,'sbToolbarTrade');" />
+					<menuitem label="&sb.tools.manage;..." oncommand="sbCommonUtils.openManageWindow(null,null);" />
+					<menuitem label="&sb.tools.combine;"   oncommand="sbCommonUtils.openManageWindow(null,'sbToolbarCombine');" />
+					<menuitem label="&sb.tools.trade;"     oncommand="sbCommonUtils.openManageWindow(null,'sbToolbarTrade');" />
 					<menuitem label="&sb.tools.multiple;"  oncommand="window.top.openDialog('chrome://scrapbook/content/multiple.xul','','chrome,centerscreen,all,resizable,dialog=no');" />
-					<menuitem label="&sb.tools.directory;" oncommand="sbController.launch(ScrapBookUtils.getScrapBookDir());" />
+					<menuitem label="&sb.tools.directory;" oncommand="sbController.launch(sbCommonUtils.getScrapBookDir());" />
 					<menuseparator />
 					<menu id="sbAddOns" label="&sb.tools.addons;"><menupopup id="sbAddOnsPopup" /></menu>
 					<menuitem label="&sb.tools.calculate;" oncommand="window.openDialog('chrome://scrapbook/content/calculate.xul','ScrapBook:Calculate','chrome,centerscreen,all,resizable,dialog=no');" />
 					<menuitem label="&sb.tools.sorttree;"  oncommand="window.openDialog('chrome://scrapbook/content/sort.xul','','chrome,centerscreen,modal');" />
 					<menuitem label="&sb.tools.output;"    oncommand="window.openDialog('chrome://scrapbook/content/output.xul','ScrapBook:Output','chrome,centerscreen,modal,resizable');" />
 					<menuitem label="&sb.tools.repair;"    oncommand="window.openDialog('chrome://scrapbook/content/repair.xul','ScrapBook:Repair','chrome,centerscreen,all,modal,resizable,dialog=no');" />
+					<menuseparator />
+					<menuitem label="&sb.tools.homepage;"  oncommand="sbCommonUtils.loadURL('https://addons.mozilla.org/firefox/addon/scrapbook-x/',true);" />
 				</menupopup>
 			</toolbarbutton>
 		</toolbar>
 	</toolbox>
 
 	<vbox id="sbOuterBox" flex="1">
+		<hbox id="sbHeader" class="sb-header" align="center" hidden="true">
+			<label flex="1" crop="end" />
+			<spacer flex="1" />
+			<toolbarbutton class="sb-header-exit" oncommand="sbSearchService.exit();" />
+		</hbox>
 		<vbox id="sbTreeOuter" flex="2" persist="height">
 			<tree id="sbTree"
-			      onclick="sbTreeUI.onClick(event, 2);"
-			      onkeypress="sbTreeUI.onKeyPress(event);"
-			      ondragstart="sbTreeUI.onDragStart(event);"
-			      ondragover="sbTreeUI.onDragOver(event);"
+			      onclick="sbTreeHandler.onClick(event, 2);"
+			      onkeypress="sbTreeHandler.onKeyPress(event);"
+				  ondragenter="sbTreeDNDHandler.currentDataTransfer=event.dataTransfer;"
+			      ondraggesture="nsDragAndDrop.startDrag(event,sbTreeDNDHandler.dragDropObserver);"
+			      ondragover="nsDragAndDrop.dragOver(event,sbTreeDNDHandler.dragDropObserver);"
+			      ondragdrop="sbTreeDNDHandler.getModifiers(event); nsDragAndDrop.drop(event,sbTreeDNDHandler.dragDropObserver);"
+				  ondrop="sbTreeDNDHandler.getModifiers(event);"
 			      contextmenu="sbPopup"
 			      hidecolumnpicker="true"
-			      seltype="multiple"
+			      seltype="single"
 			      class="plain" flex="1" />
 		</vbox>
+		<splitter id="sbListSplitter" class="plain" hidden="true" />
+		<vbox id="sbListOuter" flex="1" persist="height" hidden="true" style="height: 200px;" />
 		<splitter id="sbNoteSplitter" class="plain" hidden="true" />
 		<vbox id="sbNoteOuter" flex="1" persist="height" hidden="true">
 			<hbox id="sbNoteHeader" class="sb-header" align="center">

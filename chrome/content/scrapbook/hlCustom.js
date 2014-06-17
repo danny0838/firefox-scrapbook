@@ -1,4 +1,7 @@
 
+const Cc = Components.classes;
+const Ci = Components.interfaces;
+
 var gPrefBranch;
 var gPrefName;
 var gPreviewUI;

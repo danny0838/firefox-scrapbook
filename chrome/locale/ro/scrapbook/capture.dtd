@@ -1,13 +1,19 @@
-<!ENTITY sb.save "Salvează">
-<!ENTITY sb.save.abort "Renunță">
-<!ENTITY sb.save.start "Pornește">
-<!ENTITY sb.save.retry "Reîncearcă">
-<!ENTITY sb.save.skip "Ignoră">
-<!ENTITY sb.save.pause "Întrerupe">
-<!ENTITY sb.save.filter "Filtrare">
-<!ENTITY sb.save.filter.domain "Restricționează la domeniu">
-<!ENTITY sb.save.filter.level "Restricționează la dosar">
-<!ENTITY sb.save.filter.string "Filtrează după șir…">
-<!ENTITY sb.save.filter.checkon "Marchează tot">
-<!ENTITY sb.save.filter.checkoff "Demarchează tot">
-<!ENTITY sb.save.filter.invert "Inversează marcajele">
+<!ENTITY sb.capture "Capturează">
+<!ENTITY sb.capture.abort "Întrerupe">
+<!ENTITY sb.capture.start "Pornește">
+<!ENTITY sb.capture.retry "Reîncearcă">
+<!ENTITY sb.capture.skip "Ignoră">
+<!ENTITY sb.capture.pause "Întrerupe">
+<!ENTITY sb.capture.finish "Renunță">
+<!ENTITY sb.capture.filter "Filtrare">
+<!ENTITY sb.capture.filter.column.one "Afișează/ascunde">
+<!ENTITY sb.capture.filter.column.two "Filtrare (expresie regulată)">
+<!ENTITY sb.capture.filter.accept "Acceptă">
+<!ENTITY sb.capture.filter.accept.tt "Modifică sau editează valoarea">
+<!ENTITY sb.capture.filter.cancel "Renunță">
+<!ENTITY sb.capture.filter.cancel.tt "Abandonează editarea">
+<!ENTITY sb.capture.filter.delete "Șterge">
+<!ENTITY sb.capture.filter.delete.tt "Elimină filtrul din listă">
+<!ENTITY sbp.capture.column.one "Adresă">
+<!ENTITY sbp.capture.column.two "Denumire">
+<!ENTITY sbp.capture.column.three "Stare">

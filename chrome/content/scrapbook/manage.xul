@@ -19,50 +19,59 @@
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         xmlns:SB="http://amb.vis.ne.jp/mozilla/scrapbook-rdf#"
         width="720" height="540" persist="width height screenX screenY"
-        onload="sbManageUI.init(); sbMainUI.init();"
-        onunload="sbMainUI.done();"
+        onload="sbMainService.init();sbManageService.init();"
         windowtype="scrapbook">
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/manage.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapnote.js" />
 
-	<keyset>
-		<key key="a" modifiers="accel" oncommand="sbTreeUI.TREE.focus();sbTreeUI.TREE.view.selection.selectAll();" />
-		<key key="w" modifiers="accel" oncommand="window.close();" />
-		<key keycode="VK_ESCAPE" oncommand="window.close();" />
+	<stringbundle id="sbMainString" src="chrome://scrapbook/locale/scrapbook.properties" />
+
+	<broadcasterset id="sbBroadcasters" />
+
+	<keyset id="sbGenericKeys">
+		<key key="a" modifiers="accel" oncommand="sbTreeHandler.TREE.focus();sbTreeHandler.TREE.view.selection.selectAll();" />
 	</keyset>
 
 	<popupset id="sbPopupSet" />
 
-	<toolbox id="sbMainToolbox">
+	<toolbox id="sbMainToolbox" class="plain">
 		<toolbar id="sbSearchToolbar" />
 		<toolbar id="sbMainToolbar">
 			<toolbarbutton id="sbToolbarNewFolder" type="menu">
 				<menupopup>
-					<menuitem class="menuitem-iconic sb-create" label="&sb.new.folder;..." oncommand="sbMainUI.createFolder();" />
-					<menuitem class="menuitem-iconic sb-create" label="&sb.new.separator;" oncommand="sbMainUI.createSeparator();" />
-					<menuitem class="menuitem-iconic sb-create" label="&sb.new.note;"      oncommand="sbMainUI.createNote();" />
+					<menuitem class="menuitem-iconic sb-create" label="&sb.new.folder;..." oncommand="sbMainService.createFolder();" />
+					<menuitem class="menuitem-iconic sb-create" label="&sb.new.separator;" oncommand="sbMainService.createSeparator();" />
+					<menuitem class="menuitem-iconic sb-create" label="&sb.new.note;"      oncommand="sbMainService.createNote();" />
 				</menupopup>
 			</toolbarbutton>
-			<toolbarbutton id="sbToolbarToggle"   tooltiptext="&sb.toggle.all;" oncommand="sbTreeUI.toggleAllFolders();" />
+			<toolbarbutton id="sbToolbarToggle"   tooltiptext="&sb.toggle.all;" oncommand="sbTreeHandler.toggleAllFolders();" />
+			<toolbarbutton id="sbToolbarListView" observes="sbToggleListView"   oncommand="sbListHandler.toggle();" />
 			<toolbarbutton id="mbToolbarButton" />
-			<toolbarseparator /><toolbarbutton id="sbToolbarMove"   label="&sb.move;..." oncommand="sbTreeUI.send();" />
-			<toolbarseparator /><toolbarbutton id="sbToolbarRemove" label="&sb.remove;"  oncommand="sbTreeUI.remove();" />
+			<toolbarseparator /><toolbarbutton id="sbToolbarMove"   label="&sb.move;..." oncommand="if ( sbManageService.ensureContextIsTree() ) sbTreeHandler.send();" />
+			<toolbarseparator /><toolbarbutton id="sbToolbarRemove" label="&sb.remove;"  oncommand="if ( sbManageService.ensureContextIsTree() ) sbTreeHandler.remove();" />
 			<spacer flex="1" />
-			<toolbarseparator /><toolbarbutton id="sbToolbarCombine" label="&sb.tools.combine;" type="checkbox" autoCheck="false" group="module" moduleurl="chrome://scrapbook/content/combine.xul" oncommand="sbManageUI.toggleRightPane(this);" />
-			<toolbarseparator /><toolbarbutton id="sbToolbarTrade"   label="&sb.tools.trade;"   type="checkbox" autoCheck="false" group="module" moduleurl="chrome://scrapbook/content/trade.xul"   oncommand="sbManageUI.toggleRightPane(this);" />
+			<toolbarseparator /><toolbarbutton id="sbToolbarCombine" label="&sb.tools.combine;" type="checkbox" autoCheck="false" group="module" moduleurl="chrome://scrapbook/content/combine.xul" oncommand="sbManageService.toggleRightPane(this);" />
+			<toolbarseparator /><toolbarbutton id="sbToolbarTrade"   label="&sb.tools.trade;"   type="checkbox" autoCheck="false" group="module" moduleurl="chrome://scrapbook/content/trade.xul"   oncommand="sbManageService.toggleRightPane(this);" />
 		</toolbar>
 	</toolbox>
 
 	<hbox flex="1">
 		<vbox id="sbLeftPane" flex="2" persist="width">
+			<hbox id="sbHeader" class="sb-header" align="center" hidden="true">
+				<label flex="1" crop="end" />
+				<spacer flex="1" />
+				<toolbarbutton class="sb-header-exit" oncommand="sbSearchService.exit();" />
+			</hbox>
 			<vbox id="sbTreeOuter" flex="2" persist="height">
 				<tree id="sbTree"
-				      onclick="sbTreeUI.onClick(event, 1);"
-				      ondblclick="sbTreeUI.onDblClick(event);"
-				      onkeypress="sbTreeUI.onKeyPress(event);"
-				      ondragstart="sbTreeUI.onDragStart(event);"
-				      ondragover="sbTreeUI.onDragOver(event);"
+				      onclick="sbTreeHandler.onClick(event, 1);"
+				      ondblclick="sbTreeHandler.onDblClick(event);"
+				      onkeypress="sbTreeHandler.onKeyPress(event);"
+					  ondragenter="sbTreeDNDHandler.currentDataTransfer=event.dataTransfer;"
+				      ondraggesture="if (event.originalTarget.localName == 'treechildren') nsDragAndDrop.startDrag(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
+				      ondragover="nsDragAndDrop.dragOver(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
+				      ondragdrop="nsDragAndDrop.drop(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
 				      contextmenu="sbPopup"
 				      hidecolumnpicker="false"
 				      enableColumnDrag="true"
@@ -73,7 +82,7 @@
 							class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title"
 							persist="width hidden ordinal" />
 						<splitter class="tree-splitter" />
-						<treecol id="sbTreeColSource" flex="2" label="&sb.prop.url;"
+						<treecol id="sbTreeColSource" flex="2" label="&sbp.prop.url;"
 							class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#source"
 							persist="width hidden ordinal" />
 						<splitter class="tree-splitter" />
@@ -123,9 +132,11 @@
 					</template>
 				</tree>
 			</vbox>
+			<splitter id="sbListSplitter" class="plain" hidden="true" />
+			<vbox id="sbListOuter" flex="1" persist="height" hidden="true" style="height:200px;" />
 		</vbox>
 		<splitter id="sbPaneSplitter" hidden="true" />
-		<browser id="sbRightPaneBrowser" type="chrome" onload="event.stopPropagation();" flex="5" hidden="true" persist="width" />
+		<browser id="sbRightPaneBrowser" onload="event.stopPropagation();" flex="5" hidden="true" persist="width" disablehistory="true" type="chrome" />
 	</hbox>
 
 	<statusbar id="status-bar" class="chromeclass-status">

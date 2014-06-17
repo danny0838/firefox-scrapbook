@@ -1,5 +1,4 @@
 <!ENTITY sb.prefs.main "Genel">
-<!ENTITY sb.prefs.keys "Tuşlar">
 <!ENTITY sb.prefs.tabs "Sekmeler">
 <!ENTITY sb.prefs.save "Kaydet">
 <!ENTITY sb.prefs.edit "Düzenle">
@@ -7,7 +6,7 @@
 <!ENTITY sb.prefs.advanced "Gelişmiş">
 <!ENTITY sb.prefs.ui.contextMenu "Tarayıcı sağ-tık menüsünde göster">
 <!ENTITY sb.prefs.ui.contextSubMenu "Alt menü">
-<!ENTITY sb.prefs.ui.bookmark "Yerimi&amp;apos Farklı kaydet menüsünde; &amp;apos Göster">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Yerimi&amp;apos Farklı kaydet menüsünde; &amp;apos Göster">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Son kullanılan">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "klasörü göster">
 <!ENTITY sb.prefs.ui.menuBar "Menü çubuğunda göster">
@@ -33,3 +32,4 @@
 <!ENTITY sb.button.customize "Özelleştir">
 <!ENTITY sb.button.browse "Gözat">
 <!ENTITY sb.button.show "Dosyaları Göster">
+<!ENTITY sbp.prefs.useDropDownList "use drop-down choice list instead of buttons for highlighter">

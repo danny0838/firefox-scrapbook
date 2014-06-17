@@ -1,7 +1,7 @@
 <!ENTITY sb.open "Ouvrir">
 <!ENTITY sb.open.tab "Ouvrir dans un onglet">
 <!ENTITY sb.open.newtab "Ouvrir dans un nouvel onglet">
-<!ENTITY sb.open.source "Ouvrir l'URL de la source">
+<!ENTITY sb.open.source "Ouvrir l&apos;URL de la source">
 <!ENTITY sb.tools "Outils">
 <!ENTITY sb.show.files "Afficher les fichiers">
 <!ENTITY sb.move "Déplacer">
@@ -10,9 +10,10 @@
 <!ENTITY sb.export "Exporter">
 <!ENTITY sb.remove "Supprimer">
 <!ENTITY sb.property "Propriétés">
+<!ENTITY sb.listview "Vue de la liste">
 <!ENTITY sb.prop.title "Titre">
-<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.comment "Commentaire">
+<!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID (DateHeure)">
 <!ENTITY sb.folder.combine "Vue combinée">
 <!ENTITY sb.folder.openall "Tout ouvrir dans des onglets">
@@ -27,7 +28,7 @@
 <!ENTITY sb.search.re "Utiliser une expression régulière (RegExp)">
 <!ENTITY sb.search.cs "Respecter la casse">
 <!ENTITY sb.search.cache "Mettre à jour le cache pour la recherche sur texte entier">
-<!ENTITY sb.search.clear "Nettoyer l'historique">
+<!ENTITY sb.search.clear "Nettoyer l&apos;historique">
 <!ENTITY sb.search.days "Filtre par jour">
 <!ENTITY mb.manage "Gérer">
 <!ENTITY mb.profileFolder "Dossier du profil">

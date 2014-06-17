@@ -1,13 +1,18 @@
-<!ENTITY sb.save.partial "Guardar selección">
-<!ENTITY sb.save.partial.as "Guardar selección como">
-<!ENTITY sb.save.entire "Guardar página">
-<!ENTITY sb.save.entire.as "Guardar página como">
-<!ENTITY sb.save.frame "Guardar marco">
-<!ENTITY sb.save.frame.as "Guardar marco como">
-<!ENTITY sb.save.target "Guardar enlaces">
-<!ENTITY sb.save.target.as "Guardar enlaces como">
-<!ENTITY sb.save.alltabs "Guardar todas las pestañas">
-<!ENTITY sb.save.bookmark "Guardar como marcador">
+<!ENTITY sb.capture.partial "Capturar Selección">
+<!ENTITY sb.capture.partial.as "Capturar Selección como">
+<!ENTITY sb.capture.entire "Capturar Página">
+<!ENTITY sb.capture.entire.as "Capturar Página como">
+<!ENTITY sb.capture.frame "Capturar Marco">
+<!ENTITY sb.capture.frame.as "Capturar Marco como">
+<!ENTITY sb.capture.target "Capturar Enlace">
+<!ENTITY sb.capture.target.as "Capturar Enlace como">
+<!ENTITY sb.capture.alltabs "Capturar todas las pestañas">
+<!ENTITY sb.capture.bookmark "Marcar con Scrapbook">
 <!ENTITY sb.sidebar "Mostrar en la barra lateral">
-<!ENTITY sb.menubar "Barra de menú">
+<!ENTITY sb.menu "Menú">
 <!ENTITY sb.editbefore "Editar antes de capturar">
+<!ENTITY sb.key.sidebar "K">
+<!ENTITY sb.key.menubar "S">
+<!ENTITY sb.key.capture "L">
+<!ENTITY sb.key.capture.as "K">
+<!ENTITY sb.key.bookmark "J">

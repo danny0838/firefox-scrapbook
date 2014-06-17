@@ -1,0 +1,39 @@
+<!ENTITY sb.prefs.main "Fő">
+<!ENTITY sb.prefs.tabs "Lapok">
+<!ENTITY sb.prefs.save "Mentés">
+<!ENTITY sb.prefs.edit "Szerkesztés">
+<!ENTITY sb.prefs.organize "Rendezés">
+<!ENTITY sb.prefs.advanced "Haladó">
+<!ENTITY sb.prefs.ui.contextMenu "Megjelenítés a böngésző helyi menüjében">
+<!ENTITY sb.prefs.ui.contextSubMenu "Almenü">
+<!ENTITY sb.prefs.ui.bookmarkMenu "„Könyvjelző a dossziéba” menü megjelenítése">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Legfeljebb">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "legutóbb használt mappa megjelenítése">
+<!ENTITY sb.prefs.ui.menuBar "Megjelenítés a menüben">
+<!ENTITY sb.prefs.ui.menuBar.icon "Ikon">
+<!ENTITY sb.prefs.ui.toolsMenu "Megjelenítés az „Eszközök” menüben">
+<!ENTITY sb.prefs.ui.statusBar "Megjelenítés az állapotsorban">
+<!ENTITY sb.prefs.restart "A változtatások érvényre jutásához a Firefox újraindítása szükséges">
+<!ENTITY sb.prefs.tabs.tips "Lap nyitása a következő műveletekhez">
+<!ENTITY sb.prefs.tabs.note "Jegyzet szerkesztése">
+<!ENTITY sb.prefs.data "Adattárolás helye">
+<!ENTITY sb.prefs.data.default "Alapértelmezett (Profil mappa)">
+<!ENTITY sb.prefs.data.custom "Mentés a következő helyre">
+<!ENTITY sb.prefs.data.tips "Válassza ki a mappát, ahová a Dosszié-adatok kerülnek">
+<!ENTITY sb.prefs.multibook.enabled "Többszörös dossziék engedélyezése">
+<!ENTITY sb.prefs.multibook.tips "Többszörös dossziék segítségével lehetőség van a dosszié-adatok több helyen történő tárolására. A tárolás helyének megváltoztatásához az eszköztár ikonra kell kattintani.">
+<!ENTITY sb.prefs.confirmDelete "Figyelmeztetés a dosszié-struktúra elemeinek törlése előtt">
+<!ENTITY sb.prefs.tree.autoCollapse "Mappa megnyitásakor a többi mappa automatikusan bezárásra kerül">
+<!ENTITY sb.prefs.tree.unshift "Elem elhelyezése a(z)">
+<!ENTITY sb.prefs.tree.unshift.top "mappába elejére">
+<!ENTITY sb.prefs.tree.unshift.bottom "mappa végére">
+<!ENTITY sb.prefs.showDetailOnDrop "A „Rögzítés részletek” ablak megjelenítése, ha a felvételt húzd és ejtsd módon kezdeményezik az Oldalsávon">
+<!ENTITY sb.prefs.notifyOnComplete "A „Rögzítés kész” értesítés megjelenítése">
+<!ENTITY sb.prefs.viewer "Fájlböngészés programja">
+<!ENTITY sb.prefs.viewer.default "Alapértelmezett">
+<!ENTITY sb.prefs.viewer.default.explorer "Intéző">
+<!ENTITY sb.prefs.viewer.custom "Fájlok megjelenítése a következővel">
+<!ENTITY sb.button.customize "Testreszabás">
+<!ENTITY sb.button.browse "Tallózás">
+<!ENTITY sb.button.show "Fájlok megjelenítése">
+<!ENTITY sbp.prefs.useDropDownList "Legördülőlista használata gombok helyet a kijelölésekhez">

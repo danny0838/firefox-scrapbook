@@ -1,13 +1,19 @@
-<!ENTITY sb.save "Save">
-<!ENTITY sb.save.abort "Abort">
-<!ENTITY sb.save.start "Start">
-<!ENTITY sb.save.retry "Retry">
-<!ENTITY sb.save.skip "Skip">
-<!ENTITY sb.save.pause "Pause">
-<!ENTITY sb.save.filter "Filter">
-<!ENTITY sb.save.filter.domain "Restrict to Domain">
-<!ENTITY sb.save.filter.level "Restrict to Directory">
-<!ENTITY sb.save.filter.string "Filter by String...">
-<!ENTITY sb.save.filter.checkon "Check All On">
-<!ENTITY sb.save.filter.checkoff "Check All Off">
-<!ENTITY sb.save.filter.invert "Invert Checks">
+<!ENTITY sb.capture "Capture">
+<!ENTITY sb.capture.abort "Abort">
+<!ENTITY sb.capture.start "Start">
+<!ENTITY sb.capture.retry "Retry">
+<!ENTITY sb.capture.skip "Skip">
+<!ENTITY sb.capture.pause "Pause">
+<!ENTITY sb.capture.finish "Cancel">
+<!ENTITY sb.capture.filter "Filter">
+<!ENTITY sb.capture.filter.column.one "Show/Hide">
+<!ENTITY sb.capture.filter.column.two "Filter (regular expression)">
+<!ENTITY sb.capture.filter.accept "Accept">
+<!ENTITY sb.capture.filter.accept.tt "change or edit value">
+<!ENTITY sb.capture.filter.cancel "Cancel">
+<!ENTITY sb.capture.filter.cancel.tt "abort editing">
+<!ENTITY sb.capture.filter.delete "Delete">
+<!ENTITY sb.capture.filter.delete.tt "remove filter from the list">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "Title">
+<!ENTITY sbp.capture.column.three "Status">

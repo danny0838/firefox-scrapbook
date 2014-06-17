@@ -1,4 +1,6 @@
-<!ENTITY sb.detail.title "Uložiť detail">
+<!ENTITY sb.detail.linked.timeout "Časový limit (v sekundách)">
+<!ENTITY sb.detail.linked.charset "Sada znakov">
+<!ENTITY sb.detail "Detail zachytenia">
 <!ENTITY sb.detail.new.folder "Nový priečinok">
 <!ENTITY sb.detail.select.folder "Vybrať priečinok">
 <!ENTITY sb.detail.option "Možnosti">
@@ -10,8 +12,8 @@
 <!ENTITY sb.detail.linked.movie "Video">
 <!ENTITY sb.detail.linked.archive "Archív">
 <!ENTITY sb.detail.linked.custom "Vlastný">
-<!ENTITY sb.detail.linked.page2 "Uložiť podrobne">
+<!ENTITY sb.detail.linked.page "Hĺbkové zachytenie">
 <!ENTITY sb.detail.linked.page.depth "Hĺbkovo prechádzať odkazy">
 <!ENTITY sb.detail.linked.page.text "Po dokončení zachytenia budú všetky stránky vzájomne prepojené a bude vytvorená mapa stránok.">
-<!ENTITY sb.detail.warnAboutRenew "UPOZORNENIE: 'Znovuzachytenie' prepíše naposledy uloženú stránku.">
+<!ENTITY sb.detail.warnAboutRenew "UPOZORNENIE: &apos;Znovuzachytenie&apos; prepíše naposledy uloženú stránku.">
 <!ENTITY sb.detail.warnAboutScript "UPOZORNENIE: JavaScript môže byť príčinou problémov.">

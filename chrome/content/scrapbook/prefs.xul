@@ -14,15 +14,15 @@
 	%prefDTD;
 	<!ENTITY % editDTD SYSTEM "chrome://scrapbook/locale/editor.dtd">
 	%editDTD;
-	<!ENTITY % overlayDTD SYSTEM "chrome://scrapbook/locale/overlay.dtd">
-	%overlayDTD;
 ]>
 
 <prefwindow id="sbPrefWindow"
             xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
             title="ScrapBook &sb.tools.options;"
             style="width: 40em;"
-            onload="sbPrefWindow.init();">
+            onload="sbPrefWindow.init();"
+            onchange="sbPrefWindow.changed = true;"
+            onunload="sbPrefWindow.done();">
 
 	<prefpane id="mainPane" label="&sb.prefs.main;" flex="1">
 		<preferences>
@@ -38,7 +38,7 @@
 		<checkbox preference="extensions.scrapbook.ui.contextMenu"    label="&sb.prefs.ui.contextMenu;"
 		          onsyncfrompreference="sbPrefWindow.updateGroupedUI('extensions.scrapbook.ui.contextMenu', 'contextmenu');" />
 		<checkbox preference="extensions.scrapbook.ui.contextSubMenu" label="&sb.prefs.ui.contextSubMenu; *" class="indent" group="contextmenu" />
-		<checkbox preference="extensions.scrapbook.ui.bookmarkMenu"   label="&sb.prefs.ui.bookmark;" class="indent" group="contextmenu" />
+		<checkbox preference="extensions.scrapbook.ui.bookmarkMenu"   label="&sb.prefs.ui.bookmarkMenu;"     class="indent" group="contextmenu" />
 		<hbox align="center">
 			<label value="&sb.prefs.ui.folderList.maxEntries.1;" class="indent" />
 			<textbox preference="extensions.scrapbook.ui.folderList.maxEntries" type="number" size="2" max="99" />
@@ -48,70 +48,8 @@
 		          onsyncfrompreference="sbPrefWindow.updateGroupedUI('extensions.scrapbook.ui.menuBar', 'menubar');" />
 		<checkbox preference="extensions.scrapbook.ui.menuBar.icon"   label="&sb.prefs.ui.menuBar.icon; *"   class="indent" group="menubar" />
 		<checkbox preference="extensions.scrapbook.ui.toolsMenu" label="&sb.prefs.ui.toolsMenu;" />
-		<checkbox preference="extensions.scrapbook.ui.statusBar" label="&sb.prefs.ui.statusBar;" />
+		<checkbox id="sbPrefStatsBarIcon" preference="extensions.scrapbook.ui.statusBar" label="&sb.prefs.ui.statusBar;" />
 		<description>* &sb.prefs.restart;</description>
-	</prefpane>
-
-	<prefpane id="keysPane" label="&sb.prefs.keys;" flex="1">
-		<preferences>
-			<preference id="extensions.scrapbook.key.menubar"     name="extensions.scrapbook.key.menubar"     type="string" />
-			<preference id="extensions.scrapbook.key.sidebar"     name="extensions.scrapbook.key.sidebar"     type="string" />
-			<preference id="extensions.scrapbook.key.save"        name="extensions.scrapbook.key.save"        type="string" />
-			<preference id="extensions.scrapbook.key.saveAs"      name="extensions.scrapbook.key.saveAs"      type="string" />
-			<preference id="extensions.scrapbook.key.saveAllTabs" name="extensions.scrapbook.key.saveAllTabs" type="string" />
-			<preference id="extensions.scrapbook.key.bookmark"    name="extensions.scrapbook.key.bookmark"    type="string" />
-		</preferences>
-		<grid>
-			<columns>
-				<column />
-				<column flex="1" />
-			</columns>
-			<rows oninput="sbPrefWindow.onInputKey(event);">
-				<row id="sbKeysMenubar" align="center">
-					<label value="&sb.menubar;:" group="menubar" />
-					<hbox align="center">
-						<label value="Alt+" group="menubar" />
-						<textbox size="1" maxlength="1" preference="extensions.scrapbook.key.menubar" group="menubar" />
-					</hbox>
-				</row>
-				<row align="center">
-					<label value="&sb.sidebar;:" />
-					<hbox align="center">
-						<label value="Alt+" />
-						<textbox size="1" maxlength="1" preference="extensions.scrapbook.key.sidebar" />
-					</hbox>
-				</row>
-				<row align="center">
-					<label value="&sb.save.entire;:" />
-					<hbox align="center">
-						<label value="Ctrl+Shift+" />
-						<textbox size="1" maxlength="1" preference="extensions.scrapbook.key.save" />
-					</hbox>
-				</row>
-				<row align="center">
-					<label value="&sb.save.entire.as;:" />
-					<hbox align="center">
-						<label value="Ctrl+Shift+" />
-						<textbox size="1" maxlength="1" preference="extensions.scrapbook.key.saveAs" />
-					</hbox>
-				</row>
-				<row align="center">
-					<label value="&sb.save.alltabs;:" />
-					<hbox align="center">
-						<label value="Ctrl+Shift+" />
-						<textbox size="1" maxlength="1" preference="extensions.scrapbook.key.saveAllTabs" />
-					</hbox>
-				</row>
-				<row align="center">
-					<label value="&sb.save.bookmark;:" />
-					<hbox align="center">
-						<label value="Ctrl+Shift+" />
-						<textbox size="1" maxlength="1" preference="extensions.scrapbook.key.bookmark" />
-					</hbox>
-				</row>
-			</rows>
-		</grid>
-		<description style="margin-top: 1em;">&sb.prefs.restart;</description>
 	</prefpane>
 
 	<prefpane id="tabsPane" label="&sb.prefs.tabs;" flex="1">
@@ -141,6 +79,8 @@
 				        oncommand="sbPrefWindow.hlCustomize(this.getAttribute('hlnumber'));" />
 			</hbox>
 		</groupbox>
+		<spacer height="10" />
+		<checkbox preference="extensions.scrapbookplus.useDropDownList" label="&sbp.prefs.useDropDownList;" />
 	</prefpane>
 
 	<prefpane id="organizePane" label="&sb.prefs.organize;" flex="1">
@@ -191,12 +131,32 @@
 		<preferences>
 			<preference id="extensions.scrapbook.showDetailOnDrop"   name="extensions.scrapbook.showDetailOnDrop"   type="bool" />
 			<preference id="extensions.scrapbook.notifyOnComplete"   name="extensions.scrapbook.notifyOnComplete"   type="bool" />
+			<preference id="extensions.scrapbook.fileViewer.default" name="extensions.scrapbook.fileViewer.default" type="bool" />
+			<preference id="extensions.scrapbook.fileViewer.path"    name="extensions.scrapbook.fileViewer.path"    type="file" />
+			<preference id="extensions.scrapbookplus.useDropDownList"  name="extensions.scrapbookplus.useDropDownList"    type="bool" />
 		</preferences>
 		<checkbox preference="extensions.scrapbook.showDetailOnDrop" label="&sb.prefs.showDetailOnDrop;" />
 		<checkbox preference="extensions.scrapbook.notifyOnComplete" label="&sb.prefs.notifyOnComplete;" />
+		<groupbox>
+			<caption id="sbViewerCaption" label="&sb.prefs.viewer;" />
+			<radiogroup id="sbViewer"
+			            preference="extensions.scrapbook.fileViewer.default"
+			            onsyncfrompreference="sbPrefWindow.updateViewerUI();">
+				<radio id="sbViewerDefault"
+				       label="&sb.prefs.viewer.default;"
+				       label2="&sb.prefs.viewer.default.explorer;"
+				       value="true" />
+				<hbox>
+					<radio label="&sb.prefs.viewer.custom;" value="false" />
+					<filefield id="sbViewerPath" flex="1" />
+					<button id="sbViewerButton"
+					        label="&sb.button.browse;..."
+					        oncommand="sbPrefWindow.selectViewer();" />
+				</hbox>
+			</radiogroup>
+		</groupbox>
 	</prefpane>
 
-	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/prefs.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/highlighter.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/mbService.js" />

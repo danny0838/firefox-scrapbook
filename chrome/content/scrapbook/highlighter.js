@@ -24,22 +24,20 @@ var sbHighlighter = {
 
 	updatePopup : function()
 	{
-		var idx = document.getElementById("ScrapBookHighlighter").getAttribute("color");
-		if (idx < 1 || idx > 4)
-			idx = 4;
-		document.getElementById("ScrapBookHighlighter" + idx).setAttribute("checked", "true");
-		for ( idx = 4; idx > 0; idx-- )
+		var idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 6;
+		document.getElementById("ScrapBookHighlighterM" + idx).setAttribute("checked", "true");
+		for ( idx = 6; idx > 0; idx-- )
 		{
-			var cssText = ScrapBookUtils.getPref("highlighter.style." + idx, this.PRESET_STYLES[idx]);
-			this.decorateElement(document.getElementById("ScrapBookHighlighter" + idx), cssText);
+			var cssText = sbCommonUtils.copyUnicharPref("extensions.scrapbook.highlighter.style." + idx, this.PRESET_STYLES[idx]);
+			this.decorateElement(document.getElementById("ScrapBookHighlighterM" + idx), cssText);
 		}
 	},
 
 	decorateElement : function(aElement, aCssText)
 	{
-		if (aElement.localName == "menuitem")
-			aElement = document.getAnonymousElementByAttribute(aElement, "class", "menu-iconic-text");
+		if (aElement.localName == "menuitem") aElement = document.getAnonymousElementByAttribute(aElement, "class", "menu-iconic-text");
 		aElement.style.cssText = aCssText;
+		aElement.setAttribute("tooltiptext", aCssText);
 	},
 
 	set : function(aWindow, aSelection, aNodeName, aAttributes)
@@ -52,12 +50,11 @@ var sbHighlighter = {
 			var endC	= range.endContainer;
 			var sOffset	= range.startOffset;
 			var eOffset	= range.endOffset;
-
 			var sameNode = ( startC == endC );
-
+//alert("startC - "+startC+"\nendC - "+endC+"\nsOffset - "+sOffset+"\neOffset - "+eOffset);
 			if ( aNodeName == "a" && !sameNode )
 			{
-				ScrapBookUtils.alert("ERROR: Can't attach link across tags."); return;
+				alert("ScrapBook ERROR: Can't attach link across tags."); return;
 			}
 
 			// manage nodes between startC and endC
@@ -134,12 +131,9 @@ var sbHighlighter = {
 							)
 					);
 				}
-			} 
-
-			range.collapse( true ); 
-
+			}
+			range.collapse( true );
 		}
-
 	},
 
 	_isTextNode : function( aNode ) 

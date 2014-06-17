@@ -1,29 +1,37 @@
 
+const Cc = Components.classes;
+const Ci = Components.interfaces;
+
 var sbPrefWindow = {
 
+	changed: false,
+
 	init: function() {
+		//Checkbox zum Aktivieren des Status-Bar Icons ausblenden, falls FF>=4
+		var iffVersion = Cc["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
+		var iVerComparator = Cc["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
+		if ( iVerComparator.compare(iffVersion.version, "4.0")>=0 ) document.getElementById("sbPrefStatsBarIcon").hidden = true;
+		//Ende
 		this.updateDataPath();
+		this.updateViewerPath();
 		this.hlInitUI();
-		if (!sbMultiBookUI.validateRefresh(true)) {
+		this._updateFileField("sbDataPath", "extensions.scrapbook.data.path");
+		if (!sbMultiBookService.validateRefresh(true)) {
 			var elts = document.getElementById("sbDataDefault").getElementsByTagName("*");
 			Array.forEach(elts, function(elt) {
 				elt.disabled = true;
 			});
 		}
-		if (navigator.platform.substr(0, 3) == "Mac") {
-			var modifiersMap = {
-				"Ctrl" : "command",
-				"Shift": "shift",
-				"Alt"  : "option",
-			};
-			for (let [win, mac] in Iterator(modifiersMap)) {
-				var elts = document.querySelectorAll("label[value*='" + win + "']");
-				Array.forEach(elts, function(elt) {
-					elt.value = elt.value.replace(win, mac);
-				});
-			}
-			document.getElementById("sbKeysMenubar").hidden = true;
+		if (navigator.platform.indexOf("Win") == 0) {
+			var elt = document.getElementById("sbViewerDefault");
+			elt.label += " (" + elt.getAttribute("label2") + ")";
 		}
+	},
+
+	done: function() {
+		if (!this.changed)
+			return;
+		sbMultiBookService.refreshGlobal();
 	},
 
 	updateGroupedUI: function(aPrefName, aGroupName) {
@@ -36,7 +44,7 @@ var sbPrefWindow = {
 
 	hlInitUI: function() {
 		var tmpElt = document.getElementById("hlTemplate");
-		for (var num = 1; num <= 4; num++) {
+		for (var num = 1; num <= 6; num++) {
 			var elt = tmpElt.cloneNode(true);
 			tmpElt.parentNode.insertBefore(elt, tmpElt);
 			elt.firstChild.setAttribute("value", num + ":");
@@ -49,7 +57,7 @@ var sbPrefWindow = {
 
 	hlUpdateUI: function() {
 		var prefBranch = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefBranch);
-		for (var num = 4; num > 0; num--) {
+		for (var num = 6; num > 0; num--) {
 			var prefVal = null;
 			var prefName = "extensions.scrapbook.highlighter.style." + num;
 			try {
@@ -77,8 +85,18 @@ var sbPrefWindow = {
 		document.getElementById("sbDataButton").disabled  = isDefault || mbEnabled;
 	},
 
+	updateViewerUI: function() {
+		var isDefault = document.getElementById("extensions.scrapbook.fileViewer.default").value;
+		document.getElementById("sbViewerPath").disabled   = isDefault;
+		document.getElementById("sbViewerButton").disabled = isDefault;
+	},
+
 	updateDataPath: function() {
 		this._updateFileField("sbDataPath", "extensions.scrapbook.data.path");
+	},
+
+	updateViewerPath: function() {
+		this._updateFileField("sbViewerPath", "extensions.scrapbook.fileViewer.path");
 	},
 
 	_updateFileField: function(aEltID, aPrefID) {
@@ -103,8 +121,15 @@ var sbPrefWindow = {
 		}
 	},
 
-	onInputKey: function(event) {
-		event.target.value = event.target.value.toUpperCase().replace(/[^A-Z]/g, '');
+	selectViewer: function() {
+		var title = document.getElementById("sbViewerCaption").label;
+		var fp = Cc["@mozilla.org/filepicker;1"].createInstance(Ci.nsIFilePicker);
+		fp.init(window, title, fp.modeOpen);
+		fp.appendFilters(fp.filterApps);
+		if (fp.show() == fp.returnOK) {
+			document.getElementById("extensions.scrapbook.fileViewer.path").value = fp.file;
+			this.updateViewerPath();
+		}
 	},
 
 };

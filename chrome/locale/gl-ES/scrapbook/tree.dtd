@@ -10,9 +10,10 @@
 <!ENTITY sb.export "Exportar">
 <!ENTITY sb.remove "Borrar">
 <!ENTITY sb.property "Propiedades">
+<!ENTITY sb.listview "Vista en listaxe">
 <!ENTITY sb.prop.title "Título">
-<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.comment "Comentario">
+<!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID (Data)">
 <!ENTITY sb.folder.combine "Vista combinada">
 <!ENTITY sb.folder.openall "Abrir todo en pestanas">

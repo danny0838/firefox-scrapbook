@@ -10,9 +10,10 @@
 <!ENTITY sb.export "Експорт">
 <!ENTITY sb.remove "Вилучити">
 <!ENTITY sb.property "Властивості">
+<!ENTITY sb.listview "Список">
 <!ENTITY sb.prop.title "Назва">
-<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.comment "Коментар">
+<!ENTITY sbp.prop.url "Адреса">
 <!ENTITY sb.prop.id.date "ID (час)">
 <!ENTITY sb.folder.combine "Комбінований вигляд">
 <!ENTITY sb.folder.openall "Відкрити усе у вкладках">

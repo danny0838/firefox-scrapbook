@@ -1,13 +1,19 @@
-<!ENTITY sb.save "Spara">
-<!ENTITY sb.save.abort "Avbryt">
-<!ENTITY sb.save.start "Starta">
-<!ENTITY sb.save.retry "Försök igen">
-<!ENTITY sb.save.skip "Hoppa över">
-<!ENTITY sb.save.pause "Pausa">
-<!ENTITY sb.save.filter "Filtrera">
-<!ENTITY sb.save.filter.domain "Begränsa till domän">
-<!ENTITY sb.save.filter.level "Begränsa till mapp">
-<!ENTITY sb.save.filter.string "Filtrera efter sträng…">
-<!ENTITY sb.save.filter.checkon "Markera alla &quot;På&quot;">
-<!ENTITY sb.save.filter.checkoff "Markera alla &quot;Av&quot;">
-<!ENTITY sb.save.filter.invert "Invertera markeringar">
+<!ENTITY sb.capture "Fånga in">
+<!ENTITY sb.capture.abort "Avbryt">
+<!ENTITY sb.capture.start "Starta">
+<!ENTITY sb.capture.retry "Försök igen">
+<!ENTITY sb.capture.skip "Hoppa över">
+<!ENTITY sb.capture.pause "Pausa">
+<!ENTITY sb.capture.finish "Avbryt">
+<!ENTITY sb.capture.filter "Filtrera">
+<!ENTITY sb.capture.filter.column.one "Visa/Dölj">
+<!ENTITY sb.capture.filter.column.two "Filter (reguljärt uttryck)">
+<!ENTITY sb.capture.filter.accept "Acceptera">
+<!ENTITY sb.capture.filter.accept.tt "Ändra eller redigera värde">
+<!ENTITY sb.capture.filter.cancel "Avbryt">
+<!ENTITY sb.capture.filter.cancel.tt "Avbryt redigering">
+<!ENTITY sb.capture.filter.delete "Ta bort">
+<!ENTITY sb.capture.filter.delete.tt "Ta bort filter från listan">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "Rubrik">
+<!ENTITY sbp.capture.column.three "Status">

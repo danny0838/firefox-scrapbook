@@ -1,5 +1,4 @@
 <!ENTITY sb.prefs.main "Generali">
-<!ENTITY sb.prefs.keys "Combinazioni">
 <!ENTITY sb.prefs.tabs "Schede">
 <!ENTITY sb.prefs.save "Salva">
 <!ENTITY sb.prefs.edit "Aspetto">
@@ -7,7 +6,7 @@
 <!ENTITY sb.prefs.advanced "Avanzate">
 <!ENTITY sb.prefs.ui.contextMenu "Mostra gli elementi di ScrapBook nel menu contestuale del browser">
 <!ENTITY sb.prefs.ui.contextSubMenu "Mostra gli elementi come sottomenu della voce &apos;ScrapBook&apos;">
-<!ENTITY sb.prefs.ui.bookmark "Mostra &apos;Nei segnalibri con ScrapBook&apos;">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Mostra &apos;Nei segnalibri con ScrapBook&apos;">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Cartelle recentemente utilizzate da mostrare:">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 " ">
 <!ENTITY sb.prefs.ui.menuBar "Mostra la voce &apos;ScrapBook&apos; nella barra dei menu">
@@ -30,6 +29,11 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "in fondo alla cartella">
 <!ENTITY sb.prefs.showDetailOnDrop "Mostra la finestra di dialogo &apos;Dettagli cattura&apos; quando si cattura tramite trascinamento e rilascio nella barra laterale">
 <!ENTITY sb.prefs.notifyOnComplete "Mostra la finestra di notifica &apos;Cattura completata&apos;">
+<!ENTITY sb.prefs.viewer "Applicazione per visualizzare i file">
+<!ENTITY sb.prefs.viewer.default "Predefinita">
+<!ENTITY sb.prefs.viewer.default.explorer "in ambiente Windows, solitamente Explorer">
+<!ENTITY sb.prefs.viewer.custom "Visualizza con">
 <!ENTITY sb.button.customize "Personalizza">
 <!ENTITY sb.button.browse "Sfoglia">
 <!ENTITY sb.button.show "Mostra i file">
+<!ENTITY sbp.prefs.useDropDownList "Utilizza il menu a discesa al posto dei pulsanti per l&apos;evidenziatura">

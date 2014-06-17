@@ -1,4 +1,7 @@
 
+const Cc = Components.classes;
+const Ci = Components.interfaces;
+
 const kNameCol = 0;
 const kPathCol = 1;
 const kActiveCol = 2;
@@ -13,8 +16,8 @@ var gMultiBookManager = {
 	init: function() {
 		if (!window.opener)
 			throw Components.results.NS_ERROR_UNEXPECTED;
-		var data = sbMultiBookUI.initFile();
-		var currentPath = ScrapBookUtils.getPref("data.path");
+		var data = sbMultiBookService.initFile();
+		var currentPath = sbCommonUtils.copyUnicharPref("extensions.scrapbook.data.path", "");
 		data.forEach(function(item) {
 			item[kActiveCol] = (item[kPathCol] == currentPath);
 		});
@@ -30,8 +33,9 @@ var gMultiBookManager = {
 		if (this._activeItemChanged) {
 			gMultiBookTreeView._data.forEach(function(item) {
 				if (item[kActiveCol]) {
-					ScrapBookUtils.setPref("data.title", item[kNameCol]);
-					ScrapBookUtils.setPref("data.path", item[kPathCol]);
+					sbCommonUtils.setUnicharPref("extensions.scrapbook.data.title", item[kNameCol]);
+					sbCommonUtils.setUnicharPref("extensions.scrapbook.data.path", item[kPathCol]);
+					window.opener.top.sbBrowserOverlay.dataTitle = item[kNameCol];
 				}
 			});
 		}
@@ -39,7 +43,7 @@ var gMultiBookManager = {
 		gMultiBookTreeView._data.forEach(function(item) {
 			content += item[kNameCol] + "\t" + item[kPathCol] + "\n";
 		});
-		ScrapBookUtils.writeFile(sbMultiBookUI.file, content, "UTF-8");
+		sbCommonUtils.writeFile(sbMultiBookService.file, content, "UTF-8");
 		window.opener.location.reload();
 	},
 
@@ -97,13 +101,25 @@ var gMultiBookManager = {
 		this.edit();
 	},
 
-	handleDragStart: function(event) {
+};
+
+
+
+var gDragDropObserver = {
+
+	onDragStart: function (aEvent, aXferData, aDragAction) {
 		if (gMultiBookTreeView.selection.count != 1)
 			return;
 		var sourceIndex = gMultiBookTreeView.selection.currentIndex;
-		event.dataTransfer.setData("text/x-moz-tree-index", sourceIndex);
-		event.dataTransfer.dropEffect = "move";
-	}
+		aXferData.data = new TransferData();
+		aXferData.data.addDataForFlavour("text/unicode", sourceIndex);
+		aDragAction.action = Ci.nsIDragService.DRAGDROP_ACTION_MOVE;
+	},
+
+	onDrop: function (aEvent, aXferData, aDragSession) {},
+	onDragExit: function (aEvent, aDragSession) {},
+	onDragOver: function (aEvent, aFlavour, aDragSession) {},
+	getSupportedFlavours: function() { return null; }
 
 };
 
@@ -175,9 +191,7 @@ MultiBookTreeView.prototype = {
 	isContainerEmpty: function(index) { return false; },
 	isSeparator: function(index) { return false; },
 	isSorted: function() { return false; },
-	canDrop: function(targetIndex, orientation, dataTransfer) {
-		if (!dataTransfer.types.contains("text/x-moz-tree-index"))
-			return false;
+	canDrop: function(targetIndex, orientation) {
 		if (this.selection.count != 1)
 			return false;
 		var sourceIndex = this.selection.currentIndex;
@@ -187,9 +201,9 @@ MultiBookTreeView.prototype = {
 			sourceIndex != (targetIndex + orientation)
 		);
 	},
-	drop: function(targetIndex, orientation, dataTransfer) {
-		if (!this.canDrop(targetIndex, orientation, dataTransfer))
-			return;
+	drop: function(targetIndex, orientation) {
+		if (this.selection.count != 1)
+			return false;
 		var sourceIndex = this.selection.currentIndex;
 		if (sourceIndex < targetIndex) {
 			if (orientation == Ci.nsITreeView.DROP_BEFORE)

@@ -1,5 +1,4 @@
 <!ENTITY sb.prefs.main "Загальні">
-<!ENTITY sb.prefs.keys "Keys">
 <!ENTITY sb.prefs.tabs "Вкладки">
 <!ENTITY sb.prefs.save "Зберегти">
 <!ENTITY sb.prefs.edit "Редагування">
@@ -7,7 +6,7 @@
 <!ENTITY sb.prefs.advanced "Додаткові">
 <!ENTITY sb.prefs.ui.contextMenu "Відображати у контекстному меню браузера">
 <!ENTITY sb.prefs.ui.contextSubMenu "Використовуючи підменю">
-<!ENTITY sb.prefs.ui.bookmark "Відображати „Додати до закладок ScrapBook“ у меню">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Відображати „Додати до закладок ScrapBook“ у меню">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Відображати">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "нещодавно використаних тек">
 <!ENTITY sb.prefs.ui.menuBar "Відображати у панелі меню">
@@ -30,6 +29,11 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "наприкінці теки">
 <!ENTITY sb.prefs.showDetailOnDrop "Відображати діалог „Налаштування збереження“ при збереженні перетягуванням на бічну панель">
 <!ENTITY sb.prefs.notifyOnComplete "Показувати інформацію „Збереження виконано“">
+<!ENTITY sb.prefs.viewer "Програма перегляду файлів">
+<!ENTITY sb.prefs.viewer.default "Типова">
+<!ENTITY sb.prefs.viewer.default.explorer "Провідник">
+<!ENTITY sb.prefs.viewer.custom "Переглядати за допомогою:">
 <!ENTITY sb.button.customize "Змінити">
 <!ENTITY sb.button.browse "Вибрати">
 <!ENTITY sb.button.show "Показати файли">
+<!ENTITY sbp.prefs.useDropDownList "обирати вигляд маркера використовуючи випадаючий список">

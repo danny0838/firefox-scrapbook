@@ -1,4 +1,6 @@
-<!ENTITY sb.detail.title "Detalii de salvare">
+<!ENTITY sb.detail.linked.timeout "Temporizare (secunde)">
+<!ENTITY sb.detail.linked.charset "Codare">
+<!ENTITY sb.detail "Detalii de capturare">
 <!ENTITY sb.detail.new.folder "Dosar nou">
 <!ENTITY sb.detail.select.folder "Selectează dosarul">
 <!ENTITY sb.detail.option "Opțiuni">
@@ -10,8 +12,8 @@
 <!ENTITY sb.detail.linked.movie "Video">
 <!ENTITY sb.detail.linked.archive "Arhive">
 <!ENTITY sb.detail.linked.custom "Alte tipuri">
-<!ENTITY sb.detail.linked.page2 "Salvare în profunzime">
+<!ENTITY sb.detail.linked.page "Capturare în profunzime">
 <!ENTITY sb.detail.linked.page.depth "Nivelul de urmărire a legăturilor (profunzimea)">
-<!ENTITY sb.detail.linked.page.text "După finalizarea salvării, paginile vor fi legate una de alta și se va construi harta saitului.">
-<!ENTITY sb.detail.warnAboutRenew "NOTĂ: Operațiunea „Salvează din nou” va suprascrie paginile salvate anterior.">
+<!ENTITY sb.detail.linked.page.text "După finalizarea capturării, paginile vor fi legate una de alta și se va construi harta saitului.">
+<!ENTITY sb.detail.warnAboutRenew "NOTĂ: Operațiunea „Capturează din nou” va suprascrie paginile salvate anterior.">
 <!ENTITY sb.detail.warnAboutScript "NOTĂ: JavaScript poate crea unele probleme.">

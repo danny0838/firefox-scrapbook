@@ -1,13 +1,19 @@
-<!ENTITY sb.save "Gardar">
-<!ENTITY sb.save.abort "Cancelar">
-<!ENTITY sb.save.start "Comezar">
-<!ENTITY sb.save.retry "Reintentar">
-<!ENTITY sb.save.skip "Saltar">
-<!ENTITY sb.save.pause "Pausar">
-<!ENTITY sb.save.filter "Filtro">
-<!ENTITY sb.save.filter.domain "Restrinxir ao dominio">
-<!ENTITY sb.save.filter.level "Restrinxir ao directorio">
-<!ENTITY sb.save.filter.string "Filtrar por cadea...">
-<!ENTITY sb.save.filter.checkon "Marcar todo">
-<!ENTITY sb.save.filter.checkoff "Desmarcar todo">
-<!ENTITY sb.save.filter.invert "Inverter as marcas">
+<!ENTITY sb.capture "Capturar">
+<!ENTITY sb.capture.abort "Abortar">
+<!ENTITY sb.capture.start "Comezar">
+<!ENTITY sb.capture.retry "Reintentar">
+<!ENTITY sb.capture.skip "Saltar">
+<!ENTITY sb.capture.pause "Pausar">
+<!ENTITY sb.capture.finish "Cancelar">
+<!ENTITY sb.capture.filter "Filtro">
+<!ENTITY sb.capture.filter.column.one "Amosar/Agochar">
+<!ENTITY sb.capture.filter.column.two "Filtro (expresión regular)">
+<!ENTITY sb.capture.filter.accept "Aceptar">
+<!ENTITY sb.capture.filter.accept.tt "cambiar ou editar o valor">
+<!ENTITY sb.capture.filter.cancel "Cancelar">
+<!ENTITY sb.capture.filter.cancel.tt "cancelar a edición">
+<!ENTITY sb.capture.filter.delete "Eliminar">
+<!ENTITY sb.capture.filter.delete.tt "eliminar o filtro da lista">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "Título">
+<!ENTITY sbp.capture.column.three "Estado">

@@ -1,0 +1,8 @@
+<!ENTITY sb.combine.dragdrop "Elemek hozzáadása húzd és ejtsd módszerrel a struktúrából, az összefűzés sorrendjének megfelelően. Egyszerre több elem is áthúzható a húzd és ejtsd módszerrel.">
+<!ENTITY sb.combine.preview "Előnézet">
+<!ENTITY sb.combine.preview.d "Nyomja meg az „Összefűzés” gombot az előnézet ellenőrzése után.">
+<!ENTITY sb.combine.option.remove "Távolítsa el az összefűzés befejezése után az eredeti oldalakat">
+<!ENTITY sbp.combine.up "Mozgatás felfelé">
+<!ENTITY sbp.combine.down "Mozgatás lefelé">
+<!ENTITY sbp.combine.remove "Elem eltávolítása">
+<!ENTITY sbp.combine.newTitle "új cím">

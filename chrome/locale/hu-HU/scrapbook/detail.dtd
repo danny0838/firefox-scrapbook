@@ -1,0 +1,19 @@
+<!ENTITY sb.detail.linked.timeout "Időtúllépés (másodpercben megadva)">
+<!ENTITY sb.detail.linked.charset "Karakterkészlet">
+<!ENTITY sb.detail "Rögzítés adatai">
+<!ENTITY sb.detail.new.folder "Új mappa">
+<!ENTITY sb.detail.select.folder "Mappa kiválasztása">
+<!ENTITY sb.detail.option "Beállítások">
+<!ENTITY sb.detail.option.images "Képek">
+<!ENTITY sb.detail.option.styles "Stílusok">
+<!ENTITY sb.detail.linked.file "Hivatkozott fájlok letöltése">
+<!ENTITY sb.detail.linked.image "Kép">
+<!ENTITY sb.detail.linked.sound "Hang">
+<!ENTITY sb.detail.linked.movie "Film">
+<!ENTITY sb.detail.linked.archive "Archívum">
+<!ENTITY sb.detail.linked.custom "Egyéni">
+<!ENTITY sb.detail.linked.page "Részletes rögzítés">
+<!ENTITY sb.detail.linked.page.depth "Hivatkozás-követés mélysége">
+<!ENTITY sb.detail.linked.page.text "A rögzítések befejezése után egymáshoz kapcsolja valamennyi oldalt, és elkészíti a webhely szerkezetét.">
+<!ENTITY sb.detail.warnAboutRenew "MEGJEGYZÉS: A „Rögzítés ismét” lehetőség felülírja a már elmentett oldalt.">
+<!ENTITY sb.detail.warnAboutScript "MEGJEGYZÉS: A JavaScript problémákat okozhat.">

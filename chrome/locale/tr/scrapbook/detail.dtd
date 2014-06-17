@@ -1,4 +1,6 @@
-<!ENTITY sb.detail.title "Detaylı Kaydet">
+<!ENTITY sb.detail.linked.timeout "Timeout (in seconds)">
+<!ENTITY sb.detail.linked.charset "Character set">
+<!ENTITY sb.detail "Capture Detail">
 <!ENTITY sb.detail.new.folder "Yeni Klasör">
 <!ENTITY sb.detail.select.folder "Klasör Seç">
 <!ENTITY sb.detail.option "Ayarlar">
@@ -10,7 +12,7 @@
 <!ENTITY sb.detail.linked.movie "Film">
 <!ENTITY sb.detail.linked.archive "Arşiv">
 <!ENTITY sb.detail.linked.custom "Özel">
-<!ENTITY sb.detail.linked.page2 "Derinlemesine Kaydet">
+<!ENTITY sb.detail.linked.page "Derinlemesine Kaydet">
 <!ENTITY sb.detail.linked.page.depth "Linkleri izleme derinliği">
 <!ENTITY sb.detail.linked.page.text "Kayıt etme işlemi tamamlandıktan sonra, tüm sayfalar birbirine bağlanacak ve site haritası oluşturulacak.">
 <!ENTITY sb.detail.warnAboutRenew "DİKKAT: &apos;Yeniden Kaydet&apos; önceden kaydedilmiş sayfanın üzerine yazar.">

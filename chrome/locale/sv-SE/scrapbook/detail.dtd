@@ -1,4 +1,6 @@
-<!ENTITY sb.detail.title "Information om objekt">
+<!ENTITY sb.detail.linked.timeout "Tidsgräns (s)">
+<!ENTITY sb.detail.linked.charset "Teckenuppsättning">
+<!ENTITY sb.detail "Infångstinformation">
 <!ENTITY sb.detail.new.folder "Ny mapp">
 <!ENTITY sb.detail.select.folder "Välj mapp">
 <!ENTITY sb.detail.option "Inställningar">
@@ -10,8 +12,8 @@
 <!ENTITY sb.detail.linked.movie "Video">
 <!ENTITY sb.detail.linked.archive "Arkiv">
 <!ENTITY sb.detail.linked.custom "Egna…">
-<!ENTITY sb.detail.linked.page2 "Djupgående infångst">
+<!ENTITY sb.detail.linked.page "Djupgående infångst">
 <!ENTITY sb.detail.linked.page.depth "Siddjup">
-<!ENTITY sb.detail.linked.page.text "När objekten har sparats, så kommer alla sidor att vara länkade till varandra och en webbplatskarta kommer att skapas.">
-<!ENTITY sb.detail.warnAboutRenew "OBS: &quot;Spara igen&quot; ersätter den tidigare sparade sidan.">
+<!ENTITY sb.detail.linked.page.text "När infångsterna har slutförts, så kommer alla sidor att vara länkade till varandra och en webbplatskarta kommer att skapas.">
+<!ENTITY sb.detail.warnAboutRenew "OBS: &quot;Fånga in igen&quot; ersätter den tidigare sparade sidan.">
 <!ENTITY sb.detail.warnAboutScript "OBS: JavaScript kan orsaka vissa problem.">

@@ -1,13 +1,18 @@
-<!ENTITY sb.save.partial "Зберегти обране">
-<!ENTITY sb.save.partial.as "Зберегти обране як">
-<!ENTITY sb.save.entire "Зберегти сторінку">
-<!ENTITY sb.save.entire.as "Зберегти сторінку як">
-<!ENTITY sb.save.frame "Зберегти фрейм">
-<!ENTITY sb.save.frame.as "Зберегти фрейм як">
-<!ENTITY sb.save.target "Зберегти посилання">
-<!ENTITY sb.save.target.as "Зберегти посилання як">
-<!ENTITY sb.save.alltabs "Зберегти усі вкладки">
-<!ENTITY sb.save.bookmark "Додати до закладок у ScrapBook">
+<!ENTITY sb.capture.partial "Зберегти обране">
+<!ENTITY sb.capture.partial.as "Зберегти обране як">
+<!ENTITY sb.capture.entire "Зберегти сторінку">
+<!ENTITY sb.capture.entire.as "Зберегти сторінку як">
+<!ENTITY sb.capture.frame "Зберегти фрейм">
+<!ENTITY sb.capture.frame.as "Зберегти фрейм як">
+<!ENTITY sb.capture.target "Зберегти посилання">
+<!ENTITY sb.capture.target.as "Зберегти посилання як">
+<!ENTITY sb.capture.alltabs "Зберегти усі вкладки">
+<!ENTITY sb.capture.bookmark "Додати до закладок у ScrapBook">
 <!ENTITY sb.sidebar "Відобразити у бічній панелі">
-<!ENTITY sb.menubar "Меню">
+<!ENTITY sb.menu "Меню">
 <!ENTITY sb.editbefore "Редагувати перед збереженням">
+<!ENTITY sb.key.sidebar "K">
+<!ENTITY sb.key.menubar "S">
+<!ENTITY sb.key.capture "L">
+<!ENTITY sb.key.capture.as "K">
+<!ENTITY sb.key.bookmark "J">

@@ -4,8 +4,16 @@
 
 /* ::::: MAIN TOOLBAR BUTTON ::::: */
 
+#ScrapBookStatusPanel {
+	list-style-image: url("chrome://scrapbook/skin/main_24.png");
+}
+
 #scrapbook-button {
 	list-style-image: url("chrome://scrapbook/skin/main_24.png");
+}
+
+toolbar[iconsize="small"] #ScrapBookStatusPanel {
+	list-style-image: url("chrome://scrapbook/skin/main_16.png");
 }
 
 toolbar[iconsize="small"] #scrapbook-button {
@@ -86,7 +94,7 @@ toolbar#ScrapBookEditor #ScrapBookHighlighter menuitem[type="radio"] {
 }
 
 toolbar#ScrapBookEditor #ScrapBookHighlighter menupopup {
-	min-width: 200px;
+	min-width: 160px;
 }
 
 
