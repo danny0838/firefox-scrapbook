@@ -45,7 +45,7 @@ var sbPageEditor = {
 		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter6"), cssText);
 			//
 		var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
-		prefs = prefs.getBranch("extensions.scrapbookplus.");
+		prefs = prefs.getBranch("extensions.scrapbook.");
 		var value = prefs.getBoolPref("useDropDownList");
 		if ( value == false )
 		{

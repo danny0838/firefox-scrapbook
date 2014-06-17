@@ -80,7 +80,7 @@
 			</hbox>
 		</groupbox>
 		<spacer height="10" />
-		<checkbox preference="extensions.scrapbookplus.useDropDownList" label="&sbp.prefs.useDropDownList;" />
+		<checkbox preference="extensions.scrapbook.useDropDownList" label="&sbp.prefs.useDropDownList;" />
 	</prefpane>
 
 	<prefpane id="organizePane" label="&sb.prefs.organize;" flex="1">
@@ -133,7 +133,7 @@
 			<preference id="extensions.scrapbook.notifyOnComplete"   name="extensions.scrapbook.notifyOnComplete"   type="bool" />
 			<preference id="extensions.scrapbook.fileViewer.default" name="extensions.scrapbook.fileViewer.default" type="bool" />
 			<preference id="extensions.scrapbook.fileViewer.path"    name="extensions.scrapbook.fileViewer.path"    type="file" />
-			<preference id="extensions.scrapbookplus.useDropDownList"  name="extensions.scrapbookplus.useDropDownList"    type="bool" />
+			<preference id="extensions.scrapbook.useDropDownList"  name="extensions.scrapbook.useDropDownList"    type="bool" />
 		</preferences>
 		<checkbox preference="extensions.scrapbook.showDetailOnDrop" label="&sb.prefs.showDetailOnDrop;" />
 		<checkbox preference="extensions.scrapbook.notifyOnComplete" label="&sb.prefs.notifyOnComplete;" />

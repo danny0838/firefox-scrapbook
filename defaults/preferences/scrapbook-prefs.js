@@ -1,6 +1,3 @@
-
-pref("extensions.scrapbookplus.description", "chrome://scrapbook/locale/about.properties");
-
 pref("extensions.scrapbook.ui.contextMenu", true);
 pref("extensions.scrapbook.ui.contextSubMenu", false);
 pref("extensions.scrapbook.ui.bookmarkMenu", true);
@@ -25,5 +22,4 @@ pref("extensions.scrapbook.tree.autoCollapse", false);
 pref("extensions.scrapbook.confirmDelete", true);
 pref("extensions.scrapbook.showDetailOnDrop", false);
 pref("extensions.scrapbook.notifyOnComplete", true);
-pref("extensions.scrapbookplus.useDropDownList", false);
-
+pref("extensions.scrapbook.useDropDownList", false);
