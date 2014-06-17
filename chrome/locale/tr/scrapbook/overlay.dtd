@@ -9,10 +9,5 @@
 <!ENTITY sb.capture.alltabs "Capture All Tabs">
 <!ENTITY sb.capture.bookmark "Bookmark with ScrapBook">
 <!ENTITY sb.sidebar "Kenar Çubuğunda Göster">
-<!ENTITY sb.menu "Menü Çubuğu">
+<!ENTITY sb.menubar "Menü Çubuğu">
 <!ENTITY sb.editbefore "Kaydetmeden Önce Düzenle">
-<!ENTITY sb.key.sidebar "K">
-<!ENTITY sb.key.menubar "S">
-<!ENTITY sb.key.capture "L">
-<!ENTITY sb.key.capture.as "K">
-<!ENTITY sb.key.bookmark "J">

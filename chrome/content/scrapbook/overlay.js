@@ -69,6 +69,26 @@ var sbBrowserOverlay = {
 			menubar.appendChild(button);
 			menubar.removeChild(menu);
 		}
+		var key = sbCommonUtils.getPref("key.menubar", "");
+		if (key.length == 1) {
+			var elt = document.getElementById("ScrapBookMenu");
+			elt.setAttribute("accesskey", key);
+		}
+		var keyMap = {
+			"key.sidebar"       : "key_openScrapBookSidebar",
+			"key.capture"       : "key_ScrapBookCapture",
+			"key.captureAs"     : "key_ScrapBookCaptureAs",
+			"key.captureAllTabs": "key_ScrapBookSaveAllTabs",
+			"key.bookmark"      : "key_BookmarkWithScrapBook",
+		};
+		for (let [pref, id] in Iterator(keyMap)) {
+			var key = sbCommonUtils.getPref(pref, "");
+			var elt = document.getElementById(id);
+			if (key.length == 1)
+				elt.setAttribute("key", key);
+			else
+				elt.parentNode.removeChild(elt);
+		}
 	},
 
 	destroy: function()

@@ -9,10 +9,5 @@
 <!ENTITY sb.capture.alltabs "擷取所有分頁">
 <!ENTITY sb.capture.bookmark "加入 ScrapBook 書籤">
 <!ENTITY sb.sidebar "顯示於側邊欄中">
-<!ENTITY sb.menu "選單">
+<!ENTITY sb.menubar "選單列">
 <!ENTITY sb.editbefore "編輯後擷取">
-<!ENTITY sb.key.sidebar "K">
-<!ENTITY sb.key.menubar "S">
-<!ENTITY sb.key.capture "L">
-<!ENTITY sb.key.capture.as "K">
-<!ENTITY sb.key.bookmark "J">

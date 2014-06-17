@@ -9,10 +9,5 @@
 <!ENTITY sb.capture.alltabs "Capture de tous les onglets">
 <!ENTITY sb.capture.bookmark "Marquer cette page avec ScrapBook">
 <!ENTITY sb.sidebar "Afficher dans le panneau latéral">
-<!ENTITY sb.menu "Menu">
+<!ENTITY sb.menubar "Menu">
 <!ENTITY sb.editbefore "Éditer avant la capture">
-<!ENTITY sb.key.sidebar "K">
-<!ENTITY sb.key.menubar "S">
-<!ENTITY sb.key.capture "L">
-<!ENTITY sb.key.capture.as "K">
-<!ENTITY sb.key.bookmark "J">

@@ -14,6 +14,8 @@
 	%prefDTD;
 	<!ENTITY % editDTD SYSTEM "chrome://scrapbook/locale/editor.dtd">
 	%editDTD;
+	<!ENTITY % overlayDTD SYSTEM "chrome://scrapbook/locale/overlay.dtd">
+	%overlayDTD;
 ]>
 
 <prefwindow id="sbPrefWindow"
@@ -50,6 +52,68 @@
 		<checkbox preference="extensions.scrapbook.ui.toolsMenu" label="&sb.prefs.ui.toolsMenu;" />
 		<checkbox id="sbPrefStatsBarIcon" preference="extensions.scrapbook.ui.statusBar" label="&sb.prefs.ui.statusBar;" />
 		<description>* &sb.prefs.restart;</description>
+	</prefpane>
+
+	<prefpane id="keysPane" label="&sb.prefs.keys;" flex="1">
+		<preferences>
+			<preference id="extensions.scrapbook.key.menubar"        name="extensions.scrapbook.key.menubar"        type="string" />
+			<preference id="extensions.scrapbook.key.sidebar"        name="extensions.scrapbook.key.sidebar"        type="string" />
+			<preference id="extensions.scrapbook.key.capture"        name="extensions.scrapbook.key.capture"        type="string" />
+			<preference id="extensions.scrapbook.key.captureAs"      name="extensions.scrapbook.key.captureAs"      type="string" />
+			<preference id="extensions.scrapbook.key.captureAllTabs" name="extensions.scrapbook.key.captureAllTabs" type="string" />
+			<preference id="extensions.scrapbook.key.bookmark"       name="extensions.scrapbook.key.bookmark"       type="string" />
+		</preferences>
+		<grid>
+			<columns>
+				<column />
+				<column flex="1" />
+			</columns>
+			<rows oninput="sbPrefWindow.onInputKey(event);">
+				<row id="sbKeysMenubar" align="center">
+					<label value="&sb.menubar;:" group="menubar" />
+					<hbox align="center">
+						<label value="Alt+" group="menubar" />
+						<textbox size="1" maxlength="1" preference="extensions.scrapbook.key.menubar" group="menubar" />
+					</hbox>
+				</row>
+				<row align="center">
+					<label value="&sb.sidebar;:" />
+					<hbox align="center">
+						<label value="Alt+" />
+						<textbox size="1" maxlength="1" preference="extensions.scrapbook.key.sidebar" />
+					</hbox>
+				</row>
+				<row align="center">
+					<label value="&sb.capture.entire;:" />
+					<hbox align="center">
+						<label value="Ctrl+Shift+" />
+						<textbox size="1" maxlength="1" preference="extensions.scrapbook.key.capture" />
+					</hbox>
+				</row>
+				<row align="center">
+					<label value="&sb.capture.entire.as;:" />
+					<hbox align="center">
+						<label value="Ctrl+Shift+" />
+						<textbox size="1" maxlength="1" preference="extensions.scrapbook.key.captureAs" />
+					</hbox>
+				</row>
+				<row align="center">
+					<label value="&sb.capture.alltabs;:" />
+					<hbox align="center">
+						<label value="Ctrl+Shift+" />
+						<textbox size="1" maxlength="1" preference="extensions.scrapbook.key.captureAllTabs" />
+					</hbox>
+				</row>
+				<row align="center">
+					<label value="&sb.capture.bookmark;:" />
+					<hbox align="center">
+						<label value="Ctrl+Shift+" />
+						<textbox size="1" maxlength="1" preference="extensions.scrapbook.key.bookmark" />
+					</hbox>
+				</row>
+			</rows>
+		</grid>
+		<description style="margin-top: 1em;">&sb.prefs.restart;</description>
 	</prefpane>
 
 	<prefpane id="tabsPane" label="&sb.prefs.tabs;" flex="1">

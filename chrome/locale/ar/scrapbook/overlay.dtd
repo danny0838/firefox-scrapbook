@@ -9,10 +9,5 @@
 <!ENTITY sb.capture.alltabs "التقاط كل الالسنة">
 <!ENTITY sb.capture.bookmark "علامة موقع بـ سكراببوك">
 <!ENTITY sb.sidebar "عرض في الشريط الجانبي">
-<!ENTITY sb.menu "الفائمة">
+<!ENTITY sb.menubar "الفائمة">
 <!ENTITY sb.editbefore "تحرير قبل الالتقاط">
-<!ENTITY sb.key.sidebar "K">
-<!ENTITY sb.key.menubar "S">
-<!ENTITY sb.key.capture "L">
-<!ENTITY sb.key.capture.as "K">
-<!ENTITY sb.key.bookmark "J">

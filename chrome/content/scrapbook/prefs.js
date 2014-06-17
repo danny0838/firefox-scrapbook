@@ -17,6 +17,20 @@ var sbPrefWindow = {
 				elt.disabled = true;
 			});
 		}
+		if (navigator.platform.substr(0, 3) == "Mac") {
+			var modifiersMap = {
+				"Ctrl" : "command",
+				"Shift": "shift",
+				"Alt"  : "option",
+			};
+			for (let [win, mac] in Iterator(modifiersMap)) {
+				var elts = document.querySelectorAll("label[value*='" + win + "']");
+				Array.forEach(elts, function(elt) {
+					elt.value = elt.value.replace(win, mac);
+				});
+			}
+			document.getElementById("sbKeysMenubar").hidden = true;
+		}
 	},
 
 	done: function() {
@@ -92,6 +106,10 @@ var sbPrefWindow = {
 			document.getElementById("extensions.scrapbook.data.path").value = fp.file;
 			this.updateDataPath();
 		}
+	},
+
+	onInputKey: function(event) {
+		event.target.value = event.target.value.toUpperCase().replace(/[^A-Z]/g, '');
 	},
 
 };
