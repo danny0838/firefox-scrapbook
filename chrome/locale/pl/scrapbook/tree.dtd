@@ -2,6 +2,7 @@
 <!ENTITY sb.open.tab "Otwórz w karcie">
 <!ENTITY sb.open.newtab "Otwórz w nowej karcie">
 <!ENTITY sb.open.source "Pokaż stronę źródłową">
+<!ENTITY sb.multi "Multi-ScrapBook">
 <!ENTITY sb.tools "Narzędzia">
 <!ENTITY sb.show.files "Pokaż pliki">
 <!ENTITY sb.move "Przenieś">
@@ -10,9 +11,10 @@
 <!ENTITY sb.export "Eksportuj">
 <!ENTITY sb.remove "Usuń">
 <!ENTITY sb.property "Właściwości katalogu">
+<!ENTITY sb.listview "Widok listy">
 <!ENTITY sb.prop.title "Tytuł">
-<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.comment "Komentarz">
+<!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID (data i czas)">
 <!ENTITY sb.folder.combine "Połączony widok">
 <!ENTITY sb.folder.openall "Otwórz wszystko w nowych kartach">

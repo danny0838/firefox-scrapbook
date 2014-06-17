@@ -2,6 +2,7 @@
 <!ENTITY sb.open.tab "In Tab öffnen">
 <!ENTITY sb.open.newtab "In neuem Tab öffnen">
 <!ENTITY sb.open.source "Ursprungs-URL öffnen">
+<!ENTITY sb.multi "Multi-ScrapBook">
 <!ENTITY sb.tools "Extras">
 <!ENTITY sb.show.files "Dateien anzeigen">
 <!ENTITY sb.move "Verschieben">
@@ -10,9 +11,10 @@
 <!ENTITY sb.export "Exportieren">
 <!ENTITY sb.remove "Löschen">
 <!ENTITY sb.property "Eigenschaften">
+<!ENTITY sb.listview "Geteilte Listenansicht">
 <!ENTITY sb.prop.title "Name">
-<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.comment "Beschreibung">
+<!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID (Datum/Zeit)">
 <!ENTITY sb.folder.combine "Zusammengefasste Ansicht öffnen">
 <!ENTITY sb.folder.openall "Alles in Tabs öffnen">

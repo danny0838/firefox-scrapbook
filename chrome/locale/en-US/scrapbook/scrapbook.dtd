@@ -7,12 +7,11 @@
 <!ENTITY sb.tools.manage "Manage">
 <!ENTITY sb.tools.combine "Combine Wizard">
 <!ENTITY sb.tools.trade "Import / Export">
-<!ENTITY sb.tools.multiple "Save Multiple URLs">
-<!ENTITY sb.tools.directory "Open Data Folder">
-<!ENTITY sb.tools.calculate "Size Calculation">
+<!ENTITY sb.tools.multiple "Capture Multiple URLs">
+<!ENTITY sb.tools.directory "ScrapBook Directory">
+<!ENTITY sb.tools.calculate "Calculation of Size">
 <!ENTITY sb.tools.sorttree "Sort Entire Tree">
-<!ENTITY sb.tools.output "Output As HTML">
+<!ENTITY sb.tools.output "Output Tree as HTML">
 <!ENTITY sb.tools.repair "Emergency Repair">
-<!ENTITY sb.tools.addons "Add-on Functions">
 <!ENTITY sb.note.opentab "Open in Tab">
 <!ENTITY sb.note.close "Close">

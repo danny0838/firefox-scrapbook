@@ -1,5 +1,4 @@
 <!ENTITY sb.prefs.main "메인">
-<!ENTITY sb.prefs.keys "키">
 <!ENTITY sb.prefs.tabs "탭">
 <!ENTITY sb.prefs.save "저장">
 <!ENTITY sb.prefs.edit "편집">
@@ -7,12 +6,12 @@
 <!ENTITY sb.prefs.advanced "고급">
 <!ENTITY sb.prefs.ui.contextMenu "브라우저 컨텍스트 메뉴에 보이기">
 <!ENTITY sb.prefs.ui.contextSubMenu "부메뉴">
-<!ENTITY sb.prefs.ui.bookmark "&apos;북마크로 저장&apos; 메뉴 보이기">
-<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "위로 보이기">
-<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "최근에 사용한 폴더">
+<!ENTITY sb.prefs.ui.bookmarkMenu "&apos;ScrapBook으로 북마크&apos; 메뉴 표시">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Show up to">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "recently used folders">
 <!ENTITY sb.prefs.ui.menuBar "메뉴 도구 모음에 보이기">
 <!ENTITY sb.prefs.ui.menuBar.icon "아이콘">
-<!ENTITY sb.prefs.ui.toolsMenu "'도구' 메뉴에 보이기">
+<!ENTITY sb.prefs.ui.toolsMenu "&apos;도구&apos; 메뉴에 보이기">
 <!ENTITY sb.prefs.ui.statusBar "상태 표시줄에 보이기">
 <!ENTITY sb.prefs.restart "표시 항목의 변경된 내용을 적용하려면 Firefox를 재시작해야 합니다.">
 <!ENTITY sb.prefs.tabs.tips "다음 동작은 탭으로 열기">
@@ -28,8 +27,9 @@
 <!ENTITY sb.prefs.tree.unshift "항목 저장 위치:">
 <!ENTITY sb.prefs.tree.unshift.top "폴더 맨 위">
 <!ENTITY sb.prefs.tree.unshift.bottom "폴더 맨 아래">
-<!ENTITY sb.prefs.showDetailOnDrop "탐색 창으로 끌어다 놓기하여 캡처할 때 '상세 캡처' 창 보이기">
-<!ENTITY sb.prefs.notifyOnComplete "'캡처 완료' 알림 보이기">
+<!ENTITY sb.prefs.showDetailOnDrop "탐색 창으로 끌어다 놓기하여 캡처할 때 &apos;상세 캡처&apos; 창 보이기">
+<!ENTITY sb.prefs.notifyOnComplete "&apos;캡처 완료&apos; 알림 보이기">
 <!ENTITY sb.button.customize "사용자 설정">
 <!ENTITY sb.button.browse "찾아보기">
 <!ENTITY sb.button.show "파일 보이기">
+<!ENTITY sbp.prefs.useDropDownList "강조자 버튼 대신 드롭-다운을 이용해 목록을 선택하십시오.">

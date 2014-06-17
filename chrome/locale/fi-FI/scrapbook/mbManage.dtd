@@ -1,0 +1,6 @@
+<!ENTITY mb.manager "Multi-ScrapBook Manager">
+<!ENTITY mb.prop.name "Nimi">
+<!ENTITY mb.prop.path "Polku">
+<!ENTITY mb.button.add "Lisää">
+<!ENTITY mb.button.edit "Muokkaa">
+<!ENTITY mb.button.remove "Poista">

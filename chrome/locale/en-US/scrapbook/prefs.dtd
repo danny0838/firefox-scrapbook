@@ -1,5 +1,4 @@
 <!ENTITY sb.prefs.main "Main">
-<!ENTITY sb.prefs.keys "Keys">
 <!ENTITY sb.prefs.tabs "Tabs">
 <!ENTITY sb.prefs.save "Save">
 <!ENTITY sb.prefs.edit "Edit">
@@ -7,7 +6,7 @@
 <!ENTITY sb.prefs.advanced "Advanced">
 <!ENTITY sb.prefs.ui.contextMenu "Show in browser context menu">
 <!ENTITY sb.prefs.ui.contextSubMenu "Submenu">
-<!ENTITY sb.prefs.ui.bookmark "Show &apos;Save As Bookmark&apos; menu">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Show &apos;Bookmark with ScrapBook&apos; menu">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Show up to">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "recently used folders">
 <!ENTITY sb.prefs.ui.menuBar "Show in menu bar">
@@ -28,8 +27,9 @@
 <!ENTITY sb.prefs.tree.unshift "Put an item into">
 <!ENTITY sb.prefs.tree.unshift.top "the top of a folder">
 <!ENTITY sb.prefs.tree.unshift.bottom "the bottom of a folder">
-<!ENTITY sb.prefs.showDetailOnDrop "When drag-and-drop on Sidebar, show 'Save Detail' dialog">
-<!ENTITY sb.prefs.notifyOnComplete "Show &apos;Save Completed&apos; notification">
+<!ENTITY sb.prefs.showDetailOnDrop "Show &apos;Capture Detail&apos; dialog when capturing by drag-and-drop into Sidebar">
+<!ENTITY sb.prefs.notifyOnComplete "Show &apos;Capture Completed&apos; notification">
 <!ENTITY sb.button.customize "Customize">
 <!ENTITY sb.button.browse "Browse">
 <!ENTITY sb.button.show "Show Files">
+<!ENTITY sbp.prefs.useDropDownList "use drop-down choice list instead of buttons for highlighter">

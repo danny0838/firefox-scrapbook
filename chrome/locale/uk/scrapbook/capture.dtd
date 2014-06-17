@@ -1,13 +1,19 @@
-<!ENTITY sb.save "Збереження">
-<!ENTITY sb.save.abort "Скасувати">
-<!ENTITY sb.save.start "Розпочати">
-<!ENTITY sb.save.retry "Повторити">
-<!ENTITY sb.save.skip "Пропустити">
-<!ENTITY sb.save.pause "Призупинити">
-<!ENTITY sb.save.filter "Фільтр">
-<!ENTITY sb.save.filter.domain "Restrict to Domain">
-<!ENTITY sb.save.filter.level "Restrict to Directory">
-<!ENTITY sb.save.filter.string "Filter by String...">
-<!ENTITY sb.save.filter.checkon "Check All On">
-<!ENTITY sb.save.filter.checkoff "Check All Off">
-<!ENTITY sb.save.filter.invert "Invert Checks">
+<!ENTITY sb.capture "Збереження">
+<!ENTITY sb.capture.abort "Скасувати">
+<!ENTITY sb.capture.start "Розпочати">
+<!ENTITY sb.capture.retry "Повторити">
+<!ENTITY sb.capture.skip "Пропустити">
+<!ENTITY sb.capture.pause "Призупинити">
+<!ENTITY sb.capture.finish "Скасувати">
+<!ENTITY sb.capture.filter "Фільтр">
+<!ENTITY sb.capture.filter.column.one "Показати/сховати">
+<!ENTITY sb.capture.filter.column.two "Фільтр (регулярний вираз)">
+<!ENTITY sb.capture.filter.accept "Прийняти">
+<!ENTITY sb.capture.filter.accept.tt "змінити чи редагувати значення">
+<!ENTITY sb.capture.filter.cancel "Скасувати">
+<!ENTITY sb.capture.filter.cancel.tt "відмінити редагування">
+<!ENTITY sb.capture.filter.delete "Видалити">
+<!ENTITY sb.capture.filter.delete.tt "Вилучити фільтр зі списку">
+<!ENTITY sbp.capture.column.one "Адреса">
+<!ENTITY sbp.capture.column.two "Назва">
+<!ENTITY sbp.capture.column.three "Статус">

@@ -18,15 +18,16 @@ var sbNoteService = {
 		this.locked = true;
 		setTimeout(function(){ sbNoteService.locked = false; }, 1000);
 		this.save();
-		var newItem = ScrapBookData.newItem();
+		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
+		var newItem = sbCommonUtils.newItem(newID);
 		newItem.type  = "note";
 		newItem.chars = "UTF-8";
-		this.resource = ScrapBookData.addItem(newItem, aTarResURI, aTarRelIdx);
-		this.notefile = ScrapBookUtils.getContentDir(ScrapBookData.getProperty(this.resource, "id")).clone();
+		this.resource = sbDataSource.addItem(newItem, aTarResURI, aTarRelIdx);
+		this.notefile = sbCommonUtils.getContentDir(sbDataSource.getProperty(this.resource, "id")).clone();
 		this.notefile.append("index.html");
-		ScrapBookUtils.writeFile(this.notefile, "", "UTF-8");
+		sbCommonUtils.writeFile(this.notefile, "", "UTF-8");
 		if ( !("gBrowser" in window.top) ) aForceTabbed = true;
-		(ScrapBookUtils.getPref("tabs.note") || aForceTabbed) ? this.open(this.resource, true) : this.edit(this.resource);
+		(sbMainService.prefs.tabsNote || aForceTabbed) ? this.open(this.resource, true) : this.edit(this.resource);
 	},
 
 	edit : function(aRes)
@@ -37,9 +38,10 @@ var sbNoteService = {
 			this.TEXTBOX.addEventListener("dragdrop", function(){ sbNoteService.change(true); }, true);
 		}
 		this.save();
-		if ( !ScrapBookData.exists(aRes) )
+		if ( !sbDataSource.exists(aRes) )
 		{
-			if ( !ScrapBookData.exists(aRes) ) return;
+			sbDataSource.init();
+			if ( !sbDataSource.exists(aRes) ) return;
 		}
 		this.resource = aRes;
 		this.changed = false;
@@ -48,29 +50,30 @@ var sbNoteService = {
 			document.getElementById("sbNoteSplitter").hidden = false;
 			document.getElementById("sbNoteOuter").hidden = false;
 		}
-		this.notefile = ScrapBookUtils.getContentDir(ScrapBookData.getProperty(this.resource, "id")).clone();
+		this.notefile = sbCommonUtils.getContentDir(sbDataSource.getProperty(this.resource, "id")).clone();
 		this.notefile.append("index.html");
 		this.TEXTBOX.value = "";
 		this.TEXTBOX.value = this.getContentFromFile(this.notefile);
 		this.TEXTBOX.mInputField.focus();
 		try { this.TEXTBOX.editor.transactionManager.clear(); } catch(ex) {}
-		document.getElementById("sbNoteLabel").value = ScrapBookData.getProperty(this.resource, "title");
+		document.getElementById("sbNoteLabel").value = sbDataSource.getProperty(this.resource, "title");
 		if ( !this.sidebarContext ) setTimeout(function(){ sbNoteService2.refreshTab(); }, 0);
 	},
 
 	save : function()
 	{
 		if ( !this.changed ) return;
-		if ( !ScrapBookData.exists(this.resource) ) return;
-		ScrapBookUtils.writeFile(this.notefile, this.HTML_HEAD + this.TEXTBOX.value + this.HTML_FOOT, "UTF-8");
+		if ( !sbDataSource.exists(this.resource) ) return;
+		sbCommonUtils.writeFile(this.notefile, this.HTML_HEAD + this.TEXTBOX.value + this.HTML_FOOT, "UTF-8");
 		this.saveResource();
 		this.change(false);
 	},
 
 	saveResource : function()
 	{
-		var title = ScrapBookUtils.crop(this.TEXTBOX.value.split("\n")[0].replace(/\t/g, " "), 50);
-		ScrapBookData.setProperty(this.resource, "title", title);
+		var title = sbCommonUtils.crop(this.TEXTBOX.value.split("\n")[0].replace(/\t/g, " "), 50);
+		sbDataSource.setProperty(this.resource, "title", title);
+		sbDataSource.flush();
 	},
 
 	exit : function()
@@ -96,7 +99,7 @@ var sbNoteService = {
 		{
 			if ( aTabbed ) {
 				if ( top.gBrowser && top.gBrowser.currentURI.spec == "about:blank" ) aTabbed = false;
-				ScrapBookUtils.loadURL("chrome://scrapbook/content/note.xul?id=" + ScrapBookData.getProperty(aRes, "id"), aTabbed);
+				sbCommonUtils.loadURL("chrome://scrapbook/content/note.xul?id=" + sbDataSource.getProperty(aRes, "id"), aTabbed);
 			} else {
 				sbNoteService.edit(aRes);
 			}
@@ -105,8 +108,8 @@ var sbNoteService = {
 
 	getContentFromFile : function(aFile)
 	{
-		var content = ScrapBookUtils.readFile(aFile);
-		content = ScrapBookUtils.convertToUnicode(content, "UTF-8");
+		var content = sbCommonUtils.readFile(aFile);
+		content = sbCommonUtils.convertToUnicode(content, "UTF-8");
 		content = content.replace(this.HTML_HEAD, "");
 		content = content.replace(this.HTML_FOOT, "");
 		return content;
@@ -141,8 +144,8 @@ var sbNoteService = {
 			var controller = document.commandDispatcher.getControllerForCommand(command);
 			if ( controller && controller.isCommandEnabled(command) )
 			{
-				controller = controller.QueryInterface(Ci.nsICommandController);
-				var params = Cc['@mozilla.org/embedcomp/command-params;1'].createInstance(Ci.nsICommandParams);
+				controller = controller.QueryInterface(Components.interfaces.nsICommandController);
+				var params = Components.classes['@mozilla.org/embedcomp/command-params;1'].createInstance(Components.interfaces.nsICommandParams);
 				params.setStringValue("state_data", str);
 				controller.doCommandWithParams(command, params);
 			}

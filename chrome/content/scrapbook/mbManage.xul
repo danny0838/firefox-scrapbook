@@ -7,11 +7,12 @@
 
 <dialog id="mbManagerDialog"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        title="Multi-ScrapBook &mb.manager;"
+        title="&mb.manager;"
         onload="gMultiBookManager.init();"
         ondialogaccept="gMultiBookManager.done();"
         style="width: 40em;">
 
+	<script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/mbService.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/mbManage.js" />
@@ -24,7 +25,7 @@
 			<splitter class="tree-splitter" />
 			<treecol label="&mb.prop.path;" flex="3" />
 		</treecols>
-		<treechildren ondragstart="gMultiBookManager.handleDragStart(event);" />
+		<treechildren ondraggesture="nsDragAndDrop.startDrag(event, gDragDropObserver);" />
 	</tree>
 	<spacer height="10" />
 	<hbox>

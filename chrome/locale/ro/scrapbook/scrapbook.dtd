@@ -2,17 +2,16 @@
 <!ENTITY sb.new.separator "Separator nou">
 <!ENTITY sb.new.note "Notă nouă">
 <!ENTITY sb.toggle.all "Expandează/Restrânge toate dosarele">
-<!ENTITY sb.tools "Unelte">
+<!ENTITY sb.tools "Instrumente ">
 <!ENTITY sb.tools.options "Opțiuni">
 <!ENTITY sb.tools.manage "Configurare">
 <!ENTITY sb.tools.combine "Asistent combinare">
 <!ENTITY sb.tools.trade "Import/Export">
-<!ENTITY sb.tools.multiple "Salvează adrese multiple">
+<!ENTITY sb.tools.multiple "Capturare adrese multiple">
 <!ENTITY sb.tools.directory "Dosar ScrapBook">
 <!ENTITY sb.tools.calculate "Calculator dimensiuni">
 <!ENTITY sb.tools.sorttree "Sortare arbore de dosare">
 <!ENTITY sb.tools.output "Scriere arbore ca HTML">
 <!ENTITY sb.tools.repair "Reparare de urgență">
-<!ENTITY sb.tools.addons "Funcții adiționale">
 <!ENTITY sb.note.opentab "Deschide într-o filă">
 <!ENTITY sb.note.close "Închide">

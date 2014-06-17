@@ -1,0 +1,16 @@
+<!ENTITY sb.multiple.filter "Szűrő">
+<!ENTITY sbp.multiple.titleofwebsite "Webhely címe">
+<!ENTITY sbp.multiple.titleoflink "Link címe">
+<!ENTITY sb.multiple.title "Cím">
+<!ENTITY sb.multiple.timeout "Időtúllépés">
+<!ENTITY sbp.multiple.downloadmethod "Eljárás">
+<!ENTITY sb.multiple.charset "Karakterkészlet">
+<!ENTITY sb.multiple.url "Webcím (Soronként írja be a webcímeket)">
+<!ENTITY sb.multiple.detector "Webcímérzékelő">
+<!ENTITY sb.multiple.detector.plink "Az oldalon lévő összes hivatkozás">
+<!ENTITY sb.multiple.detector.slink "A kijelölésben lévő összes hivatkozás">
+<!ENTITY sb.multiple.detector.tabs "Az ablakban megnyitott összes fül">
+<!ENTITY sb.multiple.detector.local "Az összes helyi HTML valamelyik mappában">
+<!ENTITY sb.multiple.detector.bookmarks "Könyvjelzők">
+<!ENTITY sb.multiple.detector.clear "Törlés">
+<!ENTITY sbp.multiple.exclude "A célmappában már létező címek figyelmen kívül hagyása.">

@@ -1,0 +1,8 @@
+<!ENTITY sb.combine.dragdrop "Lisää kohteita vetämällä yhdistämisjärjestyksessä sivupuusta. Voit lisätä useita kohteita samanaikaisesti.">
+<!ENTITY sb.combine.preview "Esikatsele">
+<!ENTITY sb.combine.preview.d "Napsauta Yhdistä-painiketta esikatselun jälkeen.">
+<!ENTITY sb.combine.option.remove "Poista alkuperäiset sivut yhdistämisen jälkeen">
+<!ENTITY sbp.combine.up "Siirrä kohdetta ylöspäin">
+<!ENTITY sbp.combine.down "Siirrä kohdetta alaspäin">
+<!ENTITY sbp.combine.remove "Poista kohde">
+<!ENTITY sbp.combine.newTitle "Uusi otsikko">

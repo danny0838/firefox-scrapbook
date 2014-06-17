@@ -1,13 +1,18 @@
-<!ENTITY sb.save.partial "Spara markering">
-<!ENTITY sb.save.partial.as "Spara markering som">
-<!ENTITY sb.save.entire "Spara sida">
-<!ENTITY sb.save.entire.as "Spara sida som">
-<!ENTITY sb.save.frame "Spara ram">
-<!ENTITY sb.save.frame.as "Spara ram som">
-<!ENTITY sb.save.target "Spara länk">
-<!ENTITY sb.save.target.as "Spara länk som">
-<!ENTITY sb.save.alltabs "Spara alla flikar">
-<!ENTITY sb.save.bookmark "Spara som bokmärke">
+<!ENTITY sb.capture.partial "Fånga in markering">
+<!ENTITY sb.capture.partial.as "Fånga in markering som">
+<!ENTITY sb.capture.entire "Fånga in sida">
+<!ENTITY sb.capture.entire.as "Fånga in sida som">
+<!ENTITY sb.capture.frame "Fånga in ram">
+<!ENTITY sb.capture.frame.as "Fånga in ram som">
+<!ENTITY sb.capture.target "Fånga in länk">
+<!ENTITY sb.capture.target.as "Fånga in länk som">
+<!ENTITY sb.capture.alltabs "Fånga in alla flikar">
+<!ENTITY sb.capture.bookmark "Bokmärk med ScrapBook">
 <!ENTITY sb.sidebar "Visa i sidopanelen">
-<!ENTITY sb.menubar "Menyfält">
-<!ENTITY sb.editbefore "Redigera innan objekt sparas">
+<!ENTITY sb.menu "Meny">
+<!ENTITY sb.editbefore "Redigera innan infångst">
+<!ENTITY sb.key.sidebar "K">
+<!ENTITY sb.key.menubar "S">
+<!ENTITY sb.key.capture "L">
+<!ENTITY sb.key.capture.as "K">
+<!ENTITY sb.key.bookmark "J">

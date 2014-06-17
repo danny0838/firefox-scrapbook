@@ -1,5 +1,4 @@
 <!ENTITY sb.prefs.main "Principal">
-<!ENTITY sb.prefs.keys "Teclas">
 <!ENTITY sb.prefs.tabs "Pestanas">
 <!ENTITY sb.prefs.save "Gardar">
 <!ENTITY sb.prefs.edit "Editar">
@@ -7,7 +6,7 @@
 <!ENTITY sb.prefs.advanced "Avanzado">
 <!ENTITY sb.prefs.ui.contextMenu "Amosar no menú contextual">
 <!ENTITY sb.prefs.ui.contextSubMenu "Submenú">
-<!ENTITY sb.prefs.ui.bookmark "Amosar o menú &apos;Gardar como marcador&apos;">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Amosar o menú &apos;Marcar co ScrapBook&apos;">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Amosar até">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "cartafoles usados recentemente">
 <!ENTITY sb.prefs.ui.menuBar "Amosar na barra do menú">
@@ -33,3 +32,4 @@
 <!ENTITY sb.button.customize "Personalizar">
 <!ENTITY sb.button.browse "Procurar">
 <!ENTITY sb.button.show "Amosar ficheiros">
+<!ENTITY sbp.prefs.useDropDownList "Empregar listaxe despregable de opción no canto de botóns para resaltar">

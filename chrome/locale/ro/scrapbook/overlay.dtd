@@ -1,13 +1,18 @@
-<!ENTITY sb.save.partial "Salvează selecția">
-<!ENTITY sb.save.partial.as "Salvează selecția ca">
-<!ENTITY sb.save.entire "Salvează pagina">
-<!ENTITY sb.save.entire.as "Salvează pagina ca">
-<!ENTITY sb.save.frame "Salvează cadrul">
-<!ENTITY sb.save.frame.as "Salvează cadrul ca">
-<!ENTITY sb.save.target "Salvează legătura">
-<!ENTITY sb.save.target.as "Salvează legătura ca">
-<!ENTITY sb.save.alltabs "Salvează toate filele">
-<!ENTITY sb.save.bookmark "Salvează ca semn de carte">
+<!ENTITY sb.capture.partial "Capturează selecția">
+<!ENTITY sb.capture.partial.as "Capturează selecția ca">
+<!ENTITY sb.capture.entire "Capturează pagina">
+<!ENTITY sb.capture.entire.as "Capturează pagina ca">
+<!ENTITY sb.capture.frame "Capturează cadrul">
+<!ENTITY sb.capture.frame.as "Capturează cadrul ca">
+<!ENTITY sb.capture.target "Capturează legătura">
+<!ENTITY sb.capture.target.as "Capturează legătura ca">
+<!ENTITY sb.capture.alltabs "Capturează din toate filele">
+<!ENTITY sb.capture.bookmark "Pune semn de carte ScrapBook">
 <!ENTITY sb.sidebar "Afișează în panoul lateral">
-<!ENTITY sb.menubar "Afișează meniul principal">
-<!ENTITY sb.editbefore "Editează înaintea salvării">
+<!ENTITY sb.menu "Meniu">
+<!ENTITY sb.editbefore "Editează înaintea capturării">
+<!ENTITY sb.key.sidebar "K">
+<!ENTITY sb.key.menubar "B">
+<!ENTITY sb.key.capture "L">
+<!ENTITY sb.key.capture.as "K">
+<!ENTITY sb.key.bookmark "A">

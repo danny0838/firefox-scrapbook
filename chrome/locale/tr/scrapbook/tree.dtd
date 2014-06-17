@@ -2,6 +2,7 @@
 <!ENTITY sb.open.tab "Sekmede Aç">
 <!ENTITY sb.open.newtab "Yeni Sekmede Aç">
 <!ENTITY sb.open.source "Kaynak URL&apos;yi Aç">
+<!ENTITY sb.multi "Multi-ScrapBook">
 <!ENTITY sb.tools "Araçlar">
 <!ENTITY sb.show.files "Dosyaları Göster">
 <!ENTITY sb.move "Taşı">
@@ -10,9 +11,11 @@
 <!ENTITY sb.export "Dışa Aktar">
 <!ENTITY sb.remove "Sil">
 <!ENTITY sb.property "Özellikler">
+<!ENTITY sb.listview "List View">
 <!ENTITY sb.prop.title "Başlık">
 <!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.comment "Yorum">
+<!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID (Zaman)">
 <!ENTITY sb.folder.combine "Birleşik Görünüm">
 <!ENTITY sb.folder.openall "Tümünü Sekmelerde Aç">

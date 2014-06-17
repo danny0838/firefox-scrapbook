@@ -1,13 +1,18 @@
-<!ENTITY sb.save.partial "التقاط المحدد">
-<!ENTITY sb.save.partial.as "التقاط المحدد كـ">
-<!ENTITY sb.save.entire "التقاط الصفحة">
-<!ENTITY sb.save.entire.as "التقاط الصفحة كـ">
-<!ENTITY sb.save.frame "التقاط الاطار">
-<!ENTITY sb.save.frame.as "التقاط الاطاركـ">
-<!ENTITY sb.save.target "التقاط الرابط">
-<!ENTITY sb.save.target.as "التقاط الرابط كـ">
-<!ENTITY sb.save.alltabs "التقاط كل الالسنة">
-<!ENTITY sb.save.bookmark "علامة موقع بـ سكراببوك +">
+<!ENTITY sb.capture.partial "التقاط المحدد">
+<!ENTITY sb.capture.partial.as "التقاط المحدد كـ">
+<!ENTITY sb.capture.entire "التقاط الصفحة">
+<!ENTITY sb.capture.entire.as "التقاط الصفحة كـ">
+<!ENTITY sb.capture.frame "التقاط الاطار">
+<!ENTITY sb.capture.frame.as "التقاط الاطاركـ">
+<!ENTITY sb.capture.target "التقاط الرابط">
+<!ENTITY sb.capture.target.as "التقاط الرابط كـ">
+<!ENTITY sb.capture.alltabs "التقاط كل الالسنة">
+<!ENTITY sb.capture.bookmark "علامة موقع بـ سكراببوك">
 <!ENTITY sb.sidebar "عرض في الشريط الجانبي">
-<!ENTITY sb.menubar "الفائمة">
+<!ENTITY sb.menu "الفائمة">
 <!ENTITY sb.editbefore "تحرير قبل الالتقاط">
+<!ENTITY sb.key.sidebar "K">
+<!ENTITY sb.key.menubar "S">
+<!ENTITY sb.key.capture "L">
+<!ENTITY sb.key.capture.as "K">
+<!ENTITY sb.key.bookmark "J">

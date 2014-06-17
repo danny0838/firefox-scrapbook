@@ -1,13 +1,18 @@
-<!ENTITY sb.save.partial "Uložit výběr">
-<!ENTITY sb.save.partial.as "Uložit výběr jako">
-<!ENTITY sb.save.entire "Uložit stránku">
-<!ENTITY sb.save.entire.as "Uložit stránku jako">
-<!ENTITY sb.save.frame "Uložit rámec">
-<!ENTITY sb.save.frame.as "Uložit rámec jako">
-<!ENTITY sb.save.target "Uložit odkaz">
-<!ENTITY sb.save.target.as "Uložit odkaz jako">
-<!ENTITY sb.save.alltabs "Uložit všechny panely">
-<!ENTITY sb.save.bookmark "Uložit jako záložku">
+<!ENTITY sb.capture.partial "Zachytit výběr">
+<!ENTITY sb.capture.partial.as "Zachytit výběr jako">
+<!ENTITY sb.capture.entire "Zachytit stránku">
+<!ENTITY sb.capture.entire.as "Zachytit stránku jako">
+<!ENTITY sb.capture.frame "Zachytit rám">
+<!ENTITY sb.capture.frame.as "Zachytit rám jako">
+<!ENTITY sb.capture.target "Zachytit odkaz">
+<!ENTITY sb.capture.target.as "Zachytit odkaz jako">
+<!ENTITY sb.capture.alltabs "Zachytit všechny panely">
+<!ENTITY sb.capture.bookmark "Přidat mezi záložky ve ScrapBook">
 <!ENTITY sb.sidebar "Zobrazit v postranní liště">
-<!ENTITY sb.menubar "Hlavní nabídka">
+<!ENTITY sb.menu "Nabídka">
 <!ENTITY sb.editbefore "Upravit před zachycením">
+<!ENTITY sb.key.sidebar "K">
+<!ENTITY sb.key.menubar "S">
+<!ENTITY sb.key.capture "L">
+<!ENTITY sb.key.capture.as "K">
+<!ENTITY sb.key.bookmark "J">

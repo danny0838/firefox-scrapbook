@@ -1,4 +1,11 @@
-<!ENTITY sb.multiple.url "URL (Enter URLs line-by-line)">
+<!ENTITY sb.multiple.filter "المرشح">
+<!ENTITY sbp.multiple.titleofwebsite "عنوان الموقع">
+<!ENTITY sbp.multiple.titleoflink "عنوان الرابط">
+<!ENTITY sb.multiple.title "العنوان">
+<!ENTITY sb.multiple.timeout "المهلة">
+<!ENTITY sbp.multiple.downloadmethod "الأسلوب">
+<!ENTITY sb.multiple.charset "المحارف">
+<!ENTITY sb.multiple.url "عنوان (ادخل العناوين واحدا تحت الآخر)">
 <!ENTITY sb.multiple.detector "كاشف العناوين">
 <!ENTITY sb.multiple.detector.plink "كل الارتباطات في الصفحة">
 <!ENTITY sb.multiple.detector.slink "كل الارتباطات في التحديد">
@@ -6,3 +13,4 @@
 <!ENTITY sb.multiple.detector.local "كل HTMLs المحلية في دليل">
 <!ENTITY sb.multiple.detector.bookmarks "علامات المواقع">
 <!ENTITY sb.multiple.detector.clear "مسح">
+<!ENTITY sbp.multiple.exclude "تجاهل العناوين الموجودة مسبقا في المجلد الوجهه">

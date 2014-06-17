@@ -1,13 +1,19 @@
-<!ENTITY sb.save "Kaydet">
-<!ENTITY sb.save.abort "İptal Et">
-<!ENTITY sb.save.start "Başla">
-<!ENTITY sb.save.retry "Yeniden Dene">
-<!ENTITY sb.save.skip "Atla">
-<!ENTITY sb.save.pause "Duraklat">
-<!ENTITY sb.save.filter "Filtre">
-<!ENTITY sb.save.filter.domain "Domain Sınırla">
-<!ENTITY sb.save.filter.level "Dizin Sınırla">
-<!ENTITY sb.save.filter.string "Dizeye göre Filtrele">
-<!ENTITY sb.save.filter.checkon "Tümünü Seç">
-<!ENTITY sb.save.filter.checkoff "Tüm Seçilenleri Kaldır">
-<!ENTITY sb.save.filter.invert "Seçimleri Ters Çevir">
+<!ENTITY sb.capture "Kaydet">
+<!ENTITY sb.capture.abort "İptal Et">
+<!ENTITY sb.capture.start "Başla">
+<!ENTITY sb.capture.retry "Yeniden Dene">
+<!ENTITY sb.capture.skip "Atla">
+<!ENTITY sb.capture.pause "Duraklat">
+<!ENTITY sb.capture.finish "Cancel">
+<!ENTITY sb.capture.filter "Filtre">
+<!ENTITY sb.capture.filter.column.one "Show/Hide">
+<!ENTITY sb.capture.filter.column.two "Filter (regular expression)">
+<!ENTITY sb.capture.filter.accept "Accept">
+<!ENTITY sb.capture.filter.accept.tt "change or edit value">
+<!ENTITY sb.capture.filter.cancel "Cancel">
+<!ENTITY sb.capture.filter.cancel.tt "abort editing">
+<!ENTITY sb.capture.filter.delete "Delete">
+<!ENTITY sb.capture.filter.delete.tt "remove filter from the list">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "Title">
+<!ENTITY sbp.capture.column.three "Status">

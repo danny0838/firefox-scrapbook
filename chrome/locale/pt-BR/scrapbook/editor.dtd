@@ -15,6 +15,12 @@
 <!ENTITY sb.highlighter "Realce">
 <!ENTITY sb.highlighter.remove "Remover Realces na Seleção">
 <!ENTITY sb.highlighter.remove.all "Remover Todos os Realces na Página">
+<!ENTITY sbp.highlighter.stil1 "Estilo 1">
+<!ENTITY sbp.highlighter.stil2 "Estilo 2">
+<!ENTITY sbp.highlighter.stil3 "Estilo 3">
+<!ENTITY sbp.highlighter.stil4 "Estilo 4">
+<!ENTITY sbp.highlighter.stil5 "Estilo 5">
+<!ENTITY sbp.highlighter.stil6 "Estilo 6">
 <!ENTITY sb.source "Abrir URL Fonte">
 <!ENTITY sb.renew "Capturar Novamente">
 <!ENTITY sb.locate "Sincronizar Com a Árvore do Painel">

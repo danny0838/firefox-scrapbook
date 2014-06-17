@@ -1,0 +1,19 @@
+<!ENTITY sb.capture "Tallenna">
+<!ENTITY sb.capture.abort "Keskeytä">
+<!ENTITY sb.capture.start "Aloita">
+<!ENTITY sb.capture.retry "Yritä uudelleen">
+<!ENTITY sb.capture.skip "Ohita">
+<!ENTITY sb.capture.pause "Pysäytä">
+<!ENTITY sb.capture.finish "Peruuta">
+<!ENTITY sb.capture.filter "Suodata">
+<!ENTITY sb.capture.filter.column.one "Näytä/Piilota">
+<!ENTITY sb.capture.filter.column.two "Suodata (RegExp)">
+<!ENTITY sb.capture.filter.accept "Hyväksy">
+<!ENTITY sb.capture.filter.accept.tt "Muuta tai muokkaa arvoa">
+<!ENTITY sb.capture.filter.cancel "Peruuta">
+<!ENTITY sb.capture.filter.cancel.tt "Keskeytä muokkaus">
+<!ENTITY sb.capture.filter.delete "Poista">
+<!ENTITY sb.capture.filter.delete.tt "Poista suodatin listasta">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "Otsikko">
+<!ENTITY sbp.capture.column.three "Tila">

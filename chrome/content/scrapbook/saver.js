@@ -9,6 +9,7 @@ var sbContentSaver = {
 	file2URL     : {},
 	file2Doc     : {},
 	option       : {},
+	plusoption   : {},
 	refURLObj    : null,
 	favicon      : null,
 	frameList    : [],
@@ -16,6 +17,8 @@ var sbContentSaver = {
 	isMainFrame  : true,
 	selection    : null,
 	linkURLs     : [],
+	_fxVer35     : null,
+	_fxVer18     : null,
 
 
 
@@ -31,11 +34,19 @@ var sbContentSaver = {
 
 	init : function(aPresetData)
 	{
-		this.item = ScrapBookData.newItem();
+		if ( this._fxVer35 == null )
+		{
+			var iAppInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
+			var iVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
+			this._fxVer35 = iVerComparator.compare(iAppInfo.version, "3.5")>=0;
+			this._fxVer18 = iVerComparator.compare(iAppInfo.version, "18.0")>=0;
+		}
+		this.item = sbCommonUtils.newItem(sbDataSource.identify(sbCommonUtils.getTimeStamp()));
 		this.name = "index";
 		this.favicon = null;
 		this.file2URL = { "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
 		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "styles" : true, "script" : false };
+		this.plusoption = { "method" : "SB", "timeout" : "0", "charset" : "UTF-8" }
 		this.linkURLs = [];
 		this.frameList = [];
 		this.frames = [];
@@ -51,17 +62,20 @@ var sbContentSaver = {
 		this.httpTask[this.item.id] = 0;
 	},
 
-	captureWindow : function(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData, aContext)
+	captureWindow : function(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData, aContext, aTitle)
 	{
+		if ( !sbDataSource.data ) sbDataSource.init();
 		this.init(aPresetData);
 		this.item.chars  = aRootWindow.document.characterSet;
 		this.item.source = aRootWindow.location.href;
+		//Favicon der angezeigten Seite bestimmen (Unterscheidung zwischen FF2 und FF3 notwendig!)
 		if ( "gBrowser" in window && aRootWindow == gBrowser.contentWindow )
 		{
-			this.item.icon = gBrowser.mCurrentTab.image;
+			this.item.icon = gBrowser.mCurrentBrowser.mIconURL;
 		}
 		this.frameList = this.flattenFrames(aRootWindow);
 		var titles = aRootWindow.document.title ? [aRootWindow.document.title] : [decodeURI(this.item.source)];
+		if ( aTitle ) titles[0] = aTitle;
 		if ( aIsPartial )
 		{
 			this.selection = aRootWindow.getSelection();
@@ -87,7 +101,7 @@ var sbContentSaver = {
 				titles.splice(1, 0, modTitle);
 				this.item.title = modTitle;
 			}
-			this.item.comment = ScrapBookUtils.escapeComment(sbPageEditor.COMMENT.value);
+			this.item.comment = sbCommonUtils.escapeComment(sbPageEditor.COMMENT.value);
 		}
 		if ( aShowDetail )
 		{
@@ -95,7 +109,7 @@ var sbContentSaver = {
 			if ( ret.result == 0 ) { return null; }
 			if ( ret.result == 2 ) { aResName = ret.resURI; aResIndex = 0; }
 		}
-		this.contentDir = ScrapBookUtils.getContentDir(this.item.id);
+		this.contentDir = sbCommonUtils.getContentDir(this.item.id);
 		var newName = this.saveDocumentInternal(aRootWindow.document, this.name);
 		if ( this.item.icon && this.item.type != "image" && this.item.type != "file" )
 		{
@@ -116,7 +130,7 @@ var sbContentSaver = {
 					"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no",
 					this.linkURLs, this.refURLObj.spec,
 					false, null, 0,
-					this.item, this.option, this.file2URL
+					this.item, this.option, this.file2URL, null, this.plusoption["method"], this.plusoption["charset"], this.plusoption["timeout"]
 				);
 			}
 			else
@@ -128,13 +142,14 @@ var sbContentSaver = {
 			}
 		}
 		this.addResource(aResName, aResIndex);
-		return [ScrapBookUtils.splitFileName(newName)[0], this.file2URL];
+		return [sbCommonUtils.splitFileName(newName)[0], this.file2URL];
 	},
 
 	captureFile : function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext)
 	{
+		if ( !sbDataSource.data ) sbDataSource.init();
 		this.init(aPresetData);
-		this.item.title  = ScrapBookUtils.getFileName(aSourceURL);
+		this.item.title  = sbCommonUtils.getFileName(aSourceURL);
 		this.item.icon   = "moz-icon://" + this.item.title + "?size=16";
 		this.item.source = aSourceURL;
 		this.item.type   = aType;
@@ -144,11 +159,11 @@ var sbContentSaver = {
 			if ( ret.result == 0 ) { return null; }
 			if ( ret.result == 2 ) { aResName = ret.resURI; aResIndex = 0; }
 		}
-		this.contentDir = ScrapBookUtils.getContentDir(this.item.id);
-		this.refURLObj  = ScrapBookUtils.convertURLToObject(aReferURL);
+		this.contentDir = sbCommonUtils.getContentDir(this.item.id);
+		this.refURLObj  = sbCommonUtils.convertURLToObject(aReferURL);
 		var newName = this.saveFileInternal(aSourceURL, this.name, aType);
 		this.addResource(aResName, aResIndex);
-		return [ScrapBookUtils.splitFileName(newName)[0], this.file2URL];
+		return [sbCommonUtils.splitFileName(newName)[0], this.file2URL];
 	},
 
 	showDetailDialog : function(aTitles, aResURI, aContext)
@@ -156,6 +171,7 @@ var sbContentSaver = {
 		var ret = {
 			item    : this.item,
 			option  : this.option,
+			poption : this.plusoption,
 			titles  : aTitles || [this.item.title],
 			resURI  : aResURI,
 			result  : 1,
@@ -177,7 +193,7 @@ var sbContentSaver = {
 		}
 
 		// HTML document: save the current DOM
-		this.refURLObj = ScrapBookUtils.convertURLToObject(aDocument.location.href);
+		this.refURLObj = sbCommonUtils.convertURLToObject(aDocument.location.href);
 
 		var arr = this.getUniqueFileName(aFileKey + ".html", this.refURLObj.spec, aDocument);
 		var myHTMLFileName = arr[0];
@@ -308,12 +324,12 @@ var sbContentSaver = {
 		var myHTML = this.doctypeToString(aDocument.doctype) + rootNode.outerHTML;
 		var myHTMLFile = this.contentDir.clone();
 		myHTMLFile.append(myHTMLFileName);
-		ScrapBookUtils.writeFile(myHTMLFile, myHTML, this.item.chars);
+		sbCommonUtils.writeFile(myHTMLFile, myHTML, this.item.chars);
 		if ( myCSS )
 		{
 			var myCSSFile = this.contentDir.clone();
 			myCSSFile.append(myCSSFileName);
-			ScrapBookUtils.writeFile(myCSSFile, myCSS, this.item.chars);
+			sbCommonUtils.writeFile(myCSSFile, myCSS, this.item.chars);
 		}
 		return myHTMLFile.leafName;
 	},
@@ -321,10 +337,10 @@ var sbContentSaver = {
 	saveFileInternal : function(aFileURL, aFileKey, aCaptureType)
 	{
 		if ( !aFileKey ) aFileKey = "file" + Math.random().toString();
-		if ( !this.refURLObj ) this.refURLObj = ScrapBookUtils.convertURLToObject(aFileURL);
+		if ( !this.refURLObj ) this.refURLObj = sbCommonUtils.convertURLToObject(aFileURL);
 		if ( this.isMainFrame )
 		{
-			this.item.icon  = "moz-icon://" + ScrapBookUtils.getFileName(aFileURL) + "?size=16";
+			this.item.icon  = "moz-icon://" + sbCommonUtils.getFileName(aFileURL) + "?size=16";
 			this.item.type  = aCaptureType;
 			this.item.chars = "";
 		}
@@ -336,25 +352,25 @@ var sbContentSaver = {
 		}
 		var myHTMLFile = this.contentDir.clone();
 		myHTMLFile.append(aFileKey + ".html");
-		ScrapBookUtils.writeFile(myHTMLFile, myHTML, "UTF-8");
+		sbCommonUtils.writeFile(myHTMLFile, myHTML, "UTF-8");
 		return myHTMLFile.leafName;
 	},
 
 	addResource : function(aResName, aResIndex)
 	{
 		if ( !aResName ) return;
-		var res = ScrapBookData.addItem(this.item, aResName, aResIndex);
-		ScrapBookUtils.refreshGlobal(false);
+		var res = sbDataSource.addItem(this.item, aResName, aResIndex);
+		sbCommonUtils.rebuildGlobal();
 		if ( this.favicon )
 		{
 			var iconURL = "resource://scrapbook/data/" + this.item.id + "/" + this.favicon;
 			setTimeout(function(){
-				ScrapBookData.setProperty(res, "icon", iconURL);
+				sbDataSource.setProperty(res, "icon", iconURL); sbDataSource.flush();
 			}, 500);
 			this.item.icon = this.favicon;
 		}
-		ScrapBookUtils.writeIndexDat(this.item);
-		if ( "ScrapBookBrowserOverlay" in window ) ScrapBookBrowserOverlay.updateFolderPref(aResName);
+		sbCommonUtils.writeIndexDat(this.item);
+		if ( "sbBrowserOverlay" in window ) sbBrowserOverlay.updateFolderPref(aResName);
 	},
 
 
@@ -432,7 +448,7 @@ var sbContentSaver = {
 			case "td" : 
 				// handle "background" attribute (HTML5 deprecated)
 				if ( aNode.hasAttribute("background") ) {
-					var url = ScrapBookUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("background"));
+					var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("background"));
 					if ( this.option["images"] ) {
 						var aFileName = this.download(url);
 						if (aFileName) aNode.setAttribute("background", aFileName);
@@ -516,7 +532,7 @@ var sbContentSaver = {
 					break;
 				}
 				// determine whether to download (copy) the link target file
-				var ext = ScrapBookUtils.splitFileName(ScrapBookUtils.getFileName(aNode.href))[1].toLowerCase();
+				var ext = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aNode.href))[1].toLowerCase();
 				var flag = false;
 				switch ( ext )
 				{
@@ -561,7 +577,7 @@ var sbContentSaver = {
 						case "og:video:url" :
 						case "og:video:secure_url" :
 							if ( aNode.hasAttribute("content") ) {
-								var url = ScrapBookUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
+								var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
 								if ( this.option["images"] ) {
 									var aFileName = this.download(url);
 									if (aFileName) aNode.setAttribute("content", aFileName);
@@ -573,7 +589,7 @@ var sbContentSaver = {
 							break;
 						case "og:url" :
 							if ( aNode.hasAttribute("content") ) {
-								var url = ScrapBookUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
+								var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
 								aNode.setAttribute("content", url);
 							}
 							break;
@@ -649,15 +665,15 @@ var sbContentSaver = {
 		if (!skip) {
 			Array.forEach(aCSS.cssRules, function(cssRule) {
 				switch (cssRule.type) {
-					case Ci.nsIDOMCSSRule.IMPORT_RULE: 
+					case Components.interfaces.nsIDOMCSSRule.IMPORT_RULE: 
 						content += this.processCSSRecursively(cssRule.styleSheet, aDocument, true);
 						break;
-					case Ci.nsIDOMCSSRule.FONT_FACE_RULE: 
+					case Components.interfaces.nsIDOMCSSRule.FONT_FACE_RULE: 
 						var cssText = this.inspectCSSText(cssRule.cssText, aCSS.href);
 						if (cssText) content += cssText + "\n";
 						break;
-					case Ci.nsIDOMCSSRule.STYLE_RULE: 
-					case Ci.nsIDOMCSSRule.MEDIA_RULE: 
+					case Components.interfaces.nsIDOMCSSRule.STYLE_RULE: 
+					case Components.interfaces.nsIDOMCSSRule.MEDIA_RULE: 
 					default: 
 						var cssText = this.inspectCSSText(cssRule.cssText, aCSS.href, true);
 						if (cssText) content += cssText + "\n";
@@ -680,7 +696,7 @@ var sbContentSaver = {
 		aCSStext = aCSStext.replace(/ url\(\"((?:\\.|[^"])+)\"\)/g, function() {
 			var dataURL = arguments[1];
 			if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
-			dataURL = ScrapBookUtils.resolveURL(aCSShref, dataURL);
+			dataURL = sbCommonUtils.resolveURL(aCSShref, dataURL);
 			if (isImage) {
 				var dataFile = sbContentSaver.option["images"] ? sbContentSaver.download(dataURL) : dataURL;
 			}
@@ -697,13 +713,13 @@ var sbContentSaver = {
 		if ( !aURLSpec ) return;
 		if ( aURLSpec.indexOf("://") < 0 )
 		{
-			aURLSpec = ScrapBookUtils.resolveURL(this.refURLObj.spec, aURLSpec);
+			aURLSpec = sbCommonUtils.resolveURL(this.refURLObj.spec, aURLSpec);
 		}
 		try {
-			var aURL = Cc['@mozilla.org/network/standard-url;1'].createInstance(Ci.nsIURL);
+			var aURL = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
 			aURL.spec = aURLSpec;
 		} catch(ex) {
-			ScrapBookUtils.alert("ERROR: Failed to download: " + aURLSpec);
+			alert("ScrapBook ERROR: Failed to download: " + aURLSpec);
 			return;
 		}
 
@@ -716,12 +732,16 @@ var sbContentSaver = {
 		{
 			var targetFile = this.contentDir.clone();
 			targetFile.append(newFileName);
-			var refURL = this.refURLObj.schemeIs("http") || this.refURLObj.schemeIs("https") ? this.refURLObj : null;
+//Der Try-Catch-Block wird auch bei einem alert innerhalb des Blocks weitergefuehrt!
 			try {
-				var WBP = Cc['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Ci.nsIWebBrowserPersist);
+				var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
 				WBP.persistFlags |= WBP.PERSIST_FLAGS_FROM_CACHE;
 				WBP.persistFlags |= WBP.PERSIST_FLAGS_AUTODETECT_APPLY_CONVERSION;
-				WBP.saveURI(aURL, null, refURL, null, null, targetFile, null);
+				if ( this._fxVer18 ) {
+					WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile, null);
+				} else {
+					WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile);
+				}
 				this.httpTask[this.item.id]++;
 				WBP.progressListener = new sbCaptureObserver(this.item, newFileName);
 				return newFileName;
@@ -736,7 +756,7 @@ var sbContentSaver = {
 		{
 			var targetDir = this.contentDir.clone();
 			try {
-				var orgFile = ScrapBookUtils.convertURLToFile(aURLSpec);
+				var orgFile = sbCommonUtils.convertURLToFile(aURLSpec);
 				if ( !orgFile.isFile() ) return;
 				orgFile.copyTo(targetDir, newFileName);
 				return newFileName;
@@ -760,9 +780,9 @@ var sbContentSaver = {
 	{
 		if ( !newFileName ) newFileName = "untitled";
 		newFileName = decodeURI(newFileName);
-		newFileName = ScrapBookUtils.validateFileName(newFileName);
-		var fileLR = ScrapBookUtils.splitFileName(newFileName);
-		fileLR[0] = ScrapBookUtils.crop(fileLR[0], 100);
+		newFileName = sbCommonUtils.validateFileName(newFileName);
+		var fileLR = sbCommonUtils.splitFileName(newFileName);
+		fileLR[0] = sbCommonUtils.crop(fileLR[0], 100);
 		if ( !fileLR[1] ) fileLR[1] = "dat";
 		newFileName = fileLR[0] + "." + fileLR[1];
 		var seq = 0;
@@ -792,7 +812,7 @@ sbCaptureObserver.prototype = {
 
 	onStateChange : function(aWebProgress, aRequest, aStateFlags, aStatus)
 	{
-		if ( aStateFlags & Ci.nsIWebProgressListener.STATE_STOP )
+		if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_STOP )
 		{
 			if ( --sbContentSaver.httpTask[this.item.id] == 0 ) {
 				this.callback.onAllDownloadsComplete(this.item);
@@ -815,48 +835,43 @@ sbCaptureObserver.prototype = {
 
 var sbCaptureObserverCallback = {
 
-	getString : function(aBundleName){ return ScrapBookBrowserOverlay.STRING.getString(aBundleName); },
+	getString : function(aBundleName){ return sbBrowserOverlay.STRING.getString(aBundleName); },
 
-	trace : function(aText)
+	trace : function(aText, aMillisec)
 	{
-		if (document.getElementById("statusbar-display"))
-			document.getElementById("statusbar-display").label = aText;
+		var status = top.window.document.getElementById("statusbar-display");
+		if ( !status ) return;
+		status.label = aText;
+		if ( aMillisec>0 ) {
+			var callback = function() {
+				if ( status.label == aText) status.label = "";
+			};
+			window.setTimeout(callback, aMillisec);
+		}
 	},
 
 	onDownloadComplete : function(aItem)
 	{
-		this.trace(this.getString("SAVE") + "... (" + sbContentSaver.httpTask[aItem.id] + ") " + aItem.title);
+		this.trace(this.getString("CAPTURE") + "... (" + sbContentSaver.httpTask[aItem.id] + ") " + aItem.title, 0);
 	},
 
 	onAllDownloadsComplete : function(aItem)
 	{
-		this.trace(this.getString("SAVE_COMPLETE") + ": " + aItem.title);
+		this.trace(this.getString("CAPTURE_COMPLETE") + ": " + aItem.title, 5000);
 		this.onCaptureComplete(aItem);
 	},
 
 	onDownloadProgress : function(aItem, aFileName, aProgress)
 	{
-		this.trace(this.getString("TRANSFER_DATA") + "... (" + aProgress + ") " + aFileName);
+		this.trace(this.getString("TRANSFER_DATA") + "... (" + aProgress + ") " + aFileName, 0);
 	},
 
 	onCaptureComplete : function(aItem)
 	{
-		if (!aItem) return;
-		if ( aItem && ScrapBookData.getProperty(ScrapBookUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id), "type") == "marked" ) return;
-		if ( ScrapBookUtils.getPref("notifyOnComplete", true) )
+		if ( aItem && sbDataSource.getProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id), "type") == "marked" ) return;
+		if ( sbCommonUtils.getBoolPref("extensions.scrapbook.notifyOnComplete", true) )
 		{
-			var icon = aItem.icon ? "resource://scrapbook/data/" + aItem.id + "/" + aItem.icon
-			         : ScrapBookUtils.getDefaultIcon();
-			var title = "ScrapBook: " + this.getString("SAVE_COMPLETE");
-			var text = ScrapBookUtils.crop(aItem.title, 40);
-			var listener = {
-				observe: function(subject, topic, data) {
-					if (topic == "alertclickcallback")
-						ScrapBookUtils.loadURL("chrome://scrapbook/content/view.xul?id=" + data, true);
-				}
-			};
-			var alertsSvc = Cc["@mozilla.org/alerts-service;1"].getService(Ci.nsIAlertsService);
-			alertsSvc.showAlertNotification(icon, title, text, true, aItem.id, listener);
+			window.openDialog("chrome://scrapbook/content/notify.xul", "", "chrome,dialog=yes,titlebar=no,popup=yes", aItem);
 		}
 		if ( aItem && aItem.id in sbContentSaver.httpTask ) delete sbContentSaver.httpTask[aItem.id];
 	},

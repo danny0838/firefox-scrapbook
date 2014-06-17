@@ -1,13 +1,18 @@
-<!ENTITY sb.save.partial "Сохранить выделенное">
-<!ENTITY sb.save.partial.as "Сохранить выделенное как…">
-<!ENTITY sb.save.entire "Сохранить страницу">
-<!ENTITY sb.save.entire.as "Сохранить страницу как…">
-<!ENTITY sb.save.frame "Сохранить фрейм">
-<!ENTITY sb.save.frame.as "Сохранить фрейм как…">
-<!ENTITY sb.save.target "Сохранить ссылку">
-<!ENTITY sb.save.target.as "Сохранить ссылку как…">
-<!ENTITY sb.save.alltabs "Сохранить все вкладки">
-<!ENTITY sb.save.bookmark "Сохранить как закладку">
+<!ENTITY sb.capture.partial "Захватить выделенное">
+<!ENTITY sb.capture.partial.as "Захватить выделенное как">
+<!ENTITY sb.capture.entire "Захватить веб-страницу">
+<!ENTITY sb.capture.entire.as "Захватить веб-страницу как">
+<!ENTITY sb.capture.frame "Захватить фрейм">
+<!ENTITY sb.capture.frame.as "Захватить фрейм как">
+<!ENTITY sb.capture.target "Захватить ссылку">
+<!ENTITY sb.capture.target.as "Захватить ссылку как">
+<!ENTITY sb.capture.alltabs "Захватить все вкладки">
+<!ENTITY sb.capture.bookmark "Добавить в закладки ScrapBook">
 <!ENTITY sb.sidebar "Показать в боковой панели">
-<!ENTITY sb.menubar "Панель инструментов">
+<!ENTITY sb.menu "Меню">
 <!ENTITY sb.editbefore "Редактирование перед сохранением">
+<!ENTITY sb.key.sidebar "K">
+<!ENTITY sb.key.menubar "S">
+<!ENTITY sb.key.capture "L">
+<!ENTITY sb.key.capture.as "K">
+<!ENTITY sb.key.bookmark "J">

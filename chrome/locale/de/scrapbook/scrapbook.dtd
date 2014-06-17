@@ -13,6 +13,5 @@
 <!ENTITY sb.tools.sorttree "Ordnerliste sortieren">
 <!ENTITY sb.tools.output "Ordnerliste als HTML ausgeben">
 <!ENTITY sb.tools.repair "Notfallreparatur durchführen">
-<!ENTITY sb.tools.addons "Erweiterte Funktionen">
 <!ENTITY sb.note.opentab "In Tab öffnen">
 <!ENTITY sb.note.close "Schließen">

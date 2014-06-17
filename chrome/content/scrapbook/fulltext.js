@@ -11,8 +11,9 @@ function SB_initFT(type)
 {
 	gCacheStatus = document.getElementById("sbCacheStatus");
 	gCacheString = document.getElementById("sbCacheString");
-	gCacheFile = ScrapBookUtils.getScrapBookDir().clone();
+	gCacheFile = sbCommonUtils.getScrapBookDir().clone();
 	gCacheFile.append("cache.rdf");
+	sbDataSource.init();
 	sbCacheSource.init();
 	switch ( type )
 	{
@@ -50,11 +51,11 @@ var sbSearchResult =
 
 		if ( this.QueryStrings['ref'].indexOf("urn:scrapbook:item") == 0 )
 		{
-			var refRes = ScrapBookUtils.RDF.GetResource(this.QueryStrings['ref']);
+			var refRes = sbCommonUtils.RDF.GetResource(this.QueryStrings['ref']);
 			var elt = document.getElementById("sbResultHeader").firstChild.nextSibling;
-			elt.value += ScrapBookData.getProperty(refRes, "title");
+			elt.value += sbDataSource.getProperty(refRes, "title");
 			elt.hidden = false;
-			this.targetFolders = ScrapBookData.flattenResources(refRes, 1, true);
+			this.targetFolders = sbDataSource.flattenResources(refRes, 1, true);
 			for ( var i = 0; i < this.targetFolders.length; i++ )
 			{
 				this.targetFolders[i] = this.targetFolders[i].Value;
@@ -117,7 +118,7 @@ var sbSearchResult =
 		{
 			if ( ++this.index % 100 == 0 ) {
 				setTimeout(function(){ sbSearchResult.process(); }, 0);
-				var msg = ScrapBookUtils.getLocaleString("SCANNING") + "... ("  + Math.round(this.index / this.count * 100) + " %)";
+				var msg = document.getElementById("sbMainString").getString("SCANNING") + "... ("  + Math.round(this.index / this.count * 100) + " %)";
 				document.title = document.getElementById("sbResultHeader").firstChild.value = msg;
 			} else {
 				this.process();
@@ -128,7 +129,7 @@ var sbSearchResult =
 
 	process : function()
 	{
-		var res = this.resEnum.getNext().QueryInterface(Ci.nsIRDFResource);
+		var res = this.resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
 		if ( res.Value == "urn:scrapbook:cache" ) return this.next();
 		var folder  = sbCacheSource.getProperty(res, "folder");
 		if ( this.targetFolders.length > 0 )
@@ -136,10 +137,9 @@ var sbSearchResult =
 			if ( folder && folder.indexOf("urn:scrapbook:item") != 0 )
 			{
 				try {
-					var target = ScrapBookUtils.RDF.GetLiteral(folder);
-					var prop   = ScrapBookData.dataSource.ArcLabelsIn(target).getNext().
-					             QueryInterface(Ci.nsIRDFResource);
-					var source = ScrapBookData.dataSource.GetSource(prop, target, true);
+					var target = sbCommonUtils.RDF.GetLiteral(folder);
+					var prop   = sbDataSource.data.ArcLabelsIn(target).getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+					var source = sbDataSource.data.GetSource(prop, target, true);
 					folder = source.Value;
 				} catch(ex) {
 				}
@@ -149,11 +149,11 @@ var sbSearchResult =
 		var content = sbCacheSource.getProperty(res, "content");
 		var resURI  = res.Value.split("#")[0];
 		var name    = res.Value.split("#")[1] || "index";
-		res = ScrapBookUtils.RDF.GetResource(resURI);
-		if ( !ScrapBookData.exists(res) ) return this.next();
-		var type    = ScrapBookData.getProperty(res, "type");
-		var title   = ScrapBookData.getProperty(res, "title");
-		var comment = ScrapBookData.getProperty(res, "comment");
+		res = sbCommonUtils.RDF.GetResource(resURI);
+		if ( !sbDataSource.exists(res) ) return this.next();
+		var type    = sbDataSource.getProperty(res, "type");
+		var title   = sbDataSource.getProperty(res, "title");
+		var comment = sbDataSource.getProperty(res, "comment");
 		if ( this.QueryStrings['re'] == "true" )
 		{
 			var re = new RegExp(this.QueryStrings['q'], this.RegExpModifier);
@@ -177,9 +177,9 @@ var sbSearchResult =
 		}
 		if ( isMatchT || isMatchM || isMatchC )
 		{
-			var icon = ScrapBookData.getProperty(res, "icon");
-			if ( !icon ) icon = ScrapBookUtils.getDefaultIcon(type);
-			if ( folder.indexOf("urn:scrapbook:") == 0 ) folder = ScrapBookData.getProperty(ScrapBookUtils.RDF.GetResource(folder), "title");
+			var icon = sbDataSource.getProperty(res, "icon");
+			if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
+			if ( folder.indexOf("urn:scrapbook:") == 0 ) folder = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(folder), "title");
 			sbSearchResult.treeItems.push([
 				title,
 				this.extractRightContext(content),
@@ -261,16 +261,14 @@ var sbSearchResult =
 	{
 		if ( !this.CURRENT_TREEITEM ) return;
 		var id   = this.CURRENT_TREEITEM[5];
-		var url  = this.CURRENT_TREEITEM[6] == "note" ? "chrome://scrapbook/content/note.xul?id=" + id
-		         : ScrapBookUtils.getBaseHref(ScrapBookData.dataSource.URI) + "data/" + id + "/" + 
-		           this.CURRENT_TREEITEM[4] + ".html";
+		var url  = this.CURRENT_TREEITEM[6] == "note" ? "chrome://scrapbook/content/note.xul?id=" + id : sbCommonUtils.getBaseHref(sbDataSource.data.URI) + "data/" + id + "/" + this.CURRENT_TREEITEM[4] + ".html";
 		switch ( key ) {
-			case "O" : ScrapBookUtils.loadURL(url, false); break;
-			case "T" : ScrapBookUtils.loadURL(url, true); break;
+			case "O" : sbCommonUtils.loadURL(url, false); break;
+			case "T" : sbCommonUtils.loadURL(url, true); break;
 			case "P" : window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome" ,id); break;
 			case "L" : 
-				var res = ScrapBookUtils.RDF.GetResource("urn:scrapbook:item" + sbSearchResult.CURRENT_TREEITEM[5]);
-				ScrapBookUtils.getBrowserWindow().ScrapBookBrowserOverlay.execLocate(res);
+				var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + sbSearchResult.CURRENT_TREEITEM[5]);
+				sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser").sbBrowserOverlay.execLocate(res);
 				break;
 			default  : document.getElementById("sbBrowser").loadURI(url); break;
 		}
@@ -313,39 +311,42 @@ var sbCacheService = {
 		document.title = gCacheString.getString("BUILD_CACHE") + " - ScrapBook";
 		gCacheStatus.firstChild.value = gCacheString.getString("BUILD_CACHE_INIT");
 		sbCacheSource.refreshEntries();
-		this.dataDir = ScrapBookUtils.getScrapBookDir().clone();
+		this.dataDir = sbCommonUtils.getScrapBookDir().clone();
 		this.dataDir.append("data");
-		var contResList = ScrapBookData.flattenResources(ScrapBookUtils.RDF.GetResource("urn:scrapbook:root"), 1, true);
+		var contResList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"), 1, true);
 		for ( var i = 0; i < contResList.length; i++ )
 		{
-			var resList = ScrapBookData.flattenResources(contResList[i], 2, false);
+			var resList = sbDataSource.flattenResources(contResList[i], 2, false);
 			for ( var j = 0; j < resList.length; j++ )
 			{
-				var type = ScrapBookData.getProperty(resList[j], "type");
+				var type = sbDataSource.getProperty(resList[j], "type");
 				if ( type == "image" || type == "file" || type == "bookmark" ) continue;
 				this.resList.push(resList[j]);
 				this.folders.push(contResList[i].Value);
 			}
 		}
-		this.processAsync();
+		if ( this.resList.length>0 )
+			this.processAsync();
+		else
+			sbCacheService.finalize();
 	},
 
 	processAsync : function()
 	{
 		var res = this.resList[this.index];
-		var id  = ScrapBookData.getProperty(res, "id");
+		var id  = sbDataSource.getProperty(res, "id");
 		var dir = this.dataDir.clone();
 		dir.append(id);
-		gCacheStatus.firstChild.value = gCacheString.getString("BUILD_CACHE_UPDATE") + " " + ScrapBookData.getProperty(res, "title");
+		gCacheStatus.firstChild.value = gCacheString.getString("BUILD_CACHE_UPDATE") + " " + sbDataSource.getProperty(res, "title");
 		gCacheStatus.lastChild.value  = Math.round((this.index + 1) / this.resList.length * 100);
 		this.inspectFile(dir, "index");
-		if ( ScrapBookData.getProperty(res, "type") == "site" )
+		if ( sbDataSource.getProperty(res, "type") == "site" )
 		{
 			var url2name = dir.clone();
 			url2name.append("sb-url2name.txt");
 			if ( url2name.exists() )
 			{
-				url2name = ScrapBookUtils.readFile(url2name).split("\n");
+				url2name = sbCommonUtils.readFile(url2name).split("\n");
 				for ( var i = 0; i < url2name.length; i++ )
 				{
 					if ( i > 256 ) break;
@@ -355,7 +356,7 @@ var sbCacheService = {
 				}
 			}
 		}
-		if ( this._curResURI != this.folders[this.index] ) document.title = ScrapBookData.getProperty(ScrapBookUtils.RDF.GetResource(this.folders[this.index]), "title") || gCacheString.getString("BUILD_CACHE");
+		if ( this._curResURI != this.folders[this.index] ) document.title = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(this.folders[this.index]), "title") || gCacheString.getString("BUILD_CACHE");
 		if ( ++this.index < this.resList.length )
 			setTimeout(function(){ sbCacheService.processAsync(); }, 0);
 		else
@@ -364,7 +365,7 @@ var sbCacheService = {
 
 	inspectFile : function(aDir, aName)
 	{
-		var resource = ScrapBookUtils.RDF.GetResource(this.resList[this.index].Value + "#" + aName);
+		var resource = sbCommonUtils.RDF.GetResource(this.resList[this.index].Value + "#" + aName);
 		var contents = [];
 		var num = 0;
 		do {
@@ -385,8 +386,8 @@ var sbCacheService = {
 					return;
 				}
 			}
-			var content = ScrapBookUtils.readFile(file);
-			content = ScrapBookUtils.convertToUnicode(content, ScrapBookData.getProperty(this.resList[this.index], "chars"));
+			var content = sbCommonUtils.readFile(file);
+			content = sbCommonUtils.convertToUnicode(content, sbDataSource.getProperty(this.resList[this.index], "chars"));
 			contents.push(this.convertHTML2Text(content));
 		}
 		while ( ++num < 10 );
@@ -411,33 +412,31 @@ var sbCacheService = {
 			if ( !this.uriHash[uri] && uri != "urn:scrapbook:cache" )
 			{
 				gCacheStatus.firstChild.value = gCacheString.getString("BUILD_CACHE_REMOVE") + " " + uri;
-				sbCacheSource.removeEntry(ScrapBookUtils.RDF.GetResource(uri));
+				sbCacheSource.removeEntry(sbCommonUtils.RDF.GetResource(uri));
 			}
 		}
 		gCacheStatus.firstChild.value = gCacheString.getString("BUILD_CACHE_UPDATE") + "cache.rdf";
 		sbCacheSource.flush();
 		try {
-			if ( window.arguments[0] ) ScrapBookUtils.loadURL(window.arguments[0], true);
+			if ( window.arguments[0] ) sbCommonUtils.loadURL(window.arguments[0], true);
 		} catch(ex) {
 		}
 		window.close();
 	},
 
-	convertHTML2Text : function(aHTML)
+	convertHTML2Text : function(aStr)
 	{
-		var html = Cc["@mozilla.org/supports-string;1"].
-		           createInstance(Ci.nsISupportsString);
-		html.data = aHTML;
-		var text = { value: null };
+		var FORMAT_CONVERTER = Components.classes['@mozilla.org/widget/htmlformatconverter;1'].createInstance(Components.interfaces.nsIFormatConverter);
+		var fromStr = Components.classes['@mozilla.org/supports-string;1'].createInstance(Components.interfaces.nsISupportsString);
+		var toStr   = { value: null };
+		fromStr.data = aStr;
 		try {
-			var converter = Cc["@mozilla.org/widget/htmlformatconverter;1"].
-			                createInstance(Ci.nsIFormatConverter);
-			converter.convert("text/html", html, html.toString().length, "text/unicode", text, {});
-			text = text.value.QueryInterface(Ci.nsISupportsString);
-			return text.toString();
+			FORMAT_CONVERTER.convert("text/html", fromStr, fromStr.toString().length, "text/unicode", toStr, {});
+			toStr = toStr.value.QueryInterface(Components.interfaces.nsISupportsString);
+			return toStr.toString();
 		}
-		catch (ex) {
-			return aHTML;
+		catch(ex) {
+			return aStr;
 		}
 	},
 
@@ -453,14 +452,19 @@ var sbCacheSource = {
 
 	init : function()
 	{
-		if ( !gCacheFile.exists() ) gCacheFile.create(gCacheFile.NORMAL_FILE_TYPE, 0666);
-		var filePath = ScrapBookUtils.IO.newFileURI(gCacheFile).spec;
-		this.dataSource = ScrapBookUtils.RDF.GetDataSourceBlocking(filePath);
-		this.container = Cc['@mozilla.org/rdf/container;1'].createInstance(Ci.nsIRDFContainer);
+		if ( !gCacheFile.exists() ) {
+			var iDS = Components.classes["@mozilla.org/rdf/datasource;1?name=xml-datasource"].createInstance(Components.interfaces.nsIRDFDataSource);
+			sbCommonUtils.RDFCU.MakeSeq(iDS, sbCommonUtils.RDF.GetResource("urn:scrapbook:cache"));
+			var iFileUrl = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newFileURI(gCacheFile);
+			iDS.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).FlushTo(iFileUrl.spec);
+		}
+		var filePath = sbCommonUtils.IO.newFileURI(gCacheFile).spec;
+		this.dataSource = sbCommonUtils.RDF.GetDataSourceBlocking(filePath);
+		this.container = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
 		try {
-			this.container.Init(this.dataSource, ScrapBookUtils.RDF.GetResource("urn:scrapbook:cache"));
+			this.container.Init(this.dataSource, sbCommonUtils.RDF.GetResource("urn:scrapbook:cache"));
 		} catch(ex) {
-			this.container = ScrapBookUtils.RDFCU.MakeSeq(this.dataSource, ScrapBookUtils.RDF.GetResource("urn:scrapbook:cache"));
+			this.container = sbCommonUtils.RDFCU.MakeSeq(this.dataSource, sbCommonUtils.RDF.GetResource("urn:scrapbook:cache"));
 		}
 	},
 
@@ -469,31 +473,29 @@ var sbCacheSource = {
 		var resEnum = this.dataSource.GetAllResources();
 		while ( resEnum.hasMoreElements() )
 		{
-			var res = resEnum.getNext().QueryInterface(Ci.nsIRDFResource);
+			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
 			if ( res.Value.indexOf("#") == -1 && res.Value != "urn:scrapbook:cache" )
 				this.removeEntry(res);
 			else
 				sbCacheService.uriHash[res.Value] = false;
 		}
-		this.container = ScrapBookUtils.RDFCU.MakeSeq(this.dataSource, ScrapBookUtils.RDF.GetResource("urn:scrapbook:cache"));
+		this.container = sbCommonUtils.RDFCU.MakeSeq(this.dataSource, sbCommonUtils.RDF.GetResource("urn:scrapbook:cache"));
 	},
 
 	addEntry : function(aRes, aContent)
 	{
-		aContent = ScrapBookData.sanitize(aContent);
+		aContent = sbDataSource.sanitize(aContent);
 		this.container.AppendElement(aRes);
-		var folder  = ScrapBookUtils.RDF.GetLiteral(sbCacheService.folders[sbCacheService.index]);
-		var content = ScrapBookUtils.RDF.GetLiteral(aContent);
-		this.dataSource.Assert(aRes, ScrapBookUtils.RDF.GetResource(ScrapBookUtils.namespace + "folder"),  folder,  true);
-		this.dataSource.Assert(aRes, ScrapBookUtils.RDF.GetResource(ScrapBookUtils.namespace + "content"), content, true);
+		this.dataSource.Assert(aRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "folder"),  sbCommonUtils.RDF.GetLiteral(sbCacheService.folders[sbCacheService.index]),  true);
+		this.dataSource.Assert(aRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "content"), sbCommonUtils.RDF.GetLiteral(aContent), true);
 	},
 
 	updateEntry : function(aRes, aProp, newVal)
 	{
-		newVal = ScrapBookData.sanitize(newVal);
-		aProp = ScrapBookUtils.RDF.GetResource(ScrapBookUtils.namespace + aProp);
-		var oldVal = this.dataSource.GetTarget(aRes, aProp, true).QueryInterface(Ci.nsIRDFLiteral);
-		newVal = ScrapBookUtils.RDF.GetLiteral(newVal);
+		newVal = sbDataSource.sanitize(newVal);
+		aProp = sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + aProp);
+		var oldVal = this.dataSource.GetTarget(aRes, aProp, true).QueryInterface(Components.interfaces.nsIRDFLiteral);
+		newVal = sbCommonUtils.RDF.GetLiteral(newVal);
 		this.dataSource.Change(aRes, aProp, oldVal, newVal);
 	},
 
@@ -503,7 +505,7 @@ var sbCacheSource = {
 		var names = this.dataSource.ArcLabelsOut(aRes);
 		while ( names.hasMoreElements() )
 		{
-			var name  = names.getNext().QueryInterface(Ci.nsIRDFResource);
+			var name  = names.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
 			var value = this.dataSource.GetTarget(aRes, name, true);
 			this.dataSource.Unassert(aRes, name, value);
 		}
@@ -512,9 +514,8 @@ var sbCacheSource = {
 	getProperty : function(aRes, aProp)
 	{
 		try {
-			var arc = ScrapBookUtils.RDF.GetResource(ScrapBookUtils.namespace + aProp);
-			var retVal = this.dataSource.GetTarget(aRes, arc, true);
-			return retVal.QueryInterface(Ci.nsIRDFLiteral).Value;
+			var retVal = this.dataSource.GetTarget(aRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + aProp), true);
+			return retVal.QueryInterface(Components.interfaces.nsIRDFLiteral).Value;
 		} catch(ex) {
 			return "";
 		}
@@ -527,7 +528,7 @@ var sbCacheSource = {
 
 	flush : function()
 	{
-		this.dataSource.QueryInterface(Ci.nsIRDFRemoteDataSource).Flush();
+		this.dataSource.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).Flush();
 	}
 
 };
@@ -584,7 +585,7 @@ var sbKeywordHighlighter = {
 			this.endPoint.setEnd(body, count);
 
 			var retRange = null;
-			var finder = Cc['@mozilla.org/embedcomp/rangefind;1'].createInstance().QueryInterface(Ci.nsIFind);
+			var finder = Components.classes['@mozilla.org/embedcomp/rangefind;1'].createInstance().QueryInterface(Components.interfaces.nsIFind);
 
 			while( (retRange = finder.Find(this.word, this.searchRange, this.startPoint, this.endPoint)) )
 			{

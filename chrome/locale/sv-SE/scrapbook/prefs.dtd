@@ -1,5 +1,4 @@
 <!ENTITY sb.prefs.main "Allmänt">
-<!ENTITY sb.prefs.keys "Tangenter">
 <!ENTITY sb.prefs.tabs "Flikar">
 <!ENTITY sb.prefs.save "Spara">
 <!ENTITY sb.prefs.edit "Redigera">
@@ -7,7 +6,7 @@
 <!ENTITY sb.prefs.advanced "Avancerat">
 <!ENTITY sb.prefs.ui.contextMenu "Visa i webbläsarens snabbmeny">
 <!ENTITY sb.prefs.ui.contextSubMenu "Visa som en undermeny">
-<!ENTITY sb.prefs.ui.bookmark "Visa menyn &quot;Spara som bokmärke&quot;">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Visa menyn &quot;Bokmärk med ScrapBook&quot;">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Visa upp till">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "nyligen använda mappar">
 <!ENTITY sb.prefs.ui.menuBar "Visa i menyraden">
@@ -28,8 +27,9 @@
 <!ENTITY sb.prefs.tree.unshift "Placera nya objekt">
 <!ENTITY sb.prefs.tree.unshift.top "överst i mappen">
 <!ENTITY sb.prefs.tree.unshift.bottom "nederst i mappen">
-<!ENTITY sb.prefs.showDetailOnDrop "Visa dialogen &quot;Information om objekt&quot; när du sparar via dra och släpp i sidofältet">
-<!ENTITY sb.prefs.notifyOnComplete "Visa meddelandet &quot;Alla objekt har sparats&quot;">
+<!ENTITY sb.prefs.showDetailOnDrop "Visa dialogen &quot;Infångstinformation&quot; vid infångst via dra och släpp i sidofältet">
+<!ENTITY sb.prefs.notifyOnComplete "Visa meddelandet &quot;Infångsten har slutförts&quot;">
 <!ENTITY sb.button.customize "Anpassa">
 <!ENTITY sb.button.browse "Bläddra">
 <!ENTITY sb.button.show "Visa filer">
+<!ENTITY sbp.prefs.useDropDownList "Använd en rullgardinsmeny istället för knappar för överstrykningspennorna">

@@ -1,9 +1,9 @@
 <!ENTITY sb.repair.rdfFile "Odtwórz plik scrapbook.rdf">
-<!ENTITY sb.repair.rdfFile.descript "Spróbuj tej opcji, jeżeli drzewo katalogów nagle znika.">
-<!ENTITY sb.repair.rdfFile.select "Wybierz plik kopi zapasowej do odtworzenia.">
+<!ENTITY sb.repair.rdfFile.descript "Spróbuj tej opcji jeżeli drzewo katalogów nagle znika">
+<!ENTITY sb.repair.rdfFile.select "Wybierz plik kopi zapasowej do odtworzenia">
 <!ENTITY sb.repair.rdfFile.file "Plik">
 <!ENTITY sb.repair.rdfFile.time "Data utworzenia">
 <!ENTITY sb.repair.rdfFile.size "Wielkość">
 <!ENTITY sb.repair.favicons "Odtwórz favicony w drzewie katalogów">
-<!ENTITY sb.repair.favicons.descript "Spróbuj tej opcji, jeżeli favicony nagle znikają.">
+<!ENTITY sb.repair.favicons.descript "Spróbuj tej opcji jeżeli favicony nagle znikają">
 <!ENTITY sb.repair.complete "Zakończono">

@@ -1,13 +1,18 @@
-<!ENTITY sb.save.partial "Seçimi Kaydet">
-<!ENTITY sb.save.partial.as "Seçim olarak Kaydet">
-<!ENTITY sb.save.entire "Sayfayı Kaydet">
-<!ENTITY sb.save.entire.as "Sayfa olarak Kaydet">
-<!ENTITY sb.save.frame "Çerçeve Kaydet">
-<!ENTITY sb.save.frame.as "Çerçeve olarak Kaydet">
-<!ENTITY sb.save.target "Bağlantı Kaydet">
-<!ENTITY sb.save.target.as "Bağlantı olarak Kaydet">
-<!ENTITY sb.save.alltabs "Tüm Sekmeleri Kaydet">
-<!ENTITY sb.save.bookmark "Yerimi olarak kaydet">
+<!ENTITY sb.capture.partial "Capture Selection">
+<!ENTITY sb.capture.partial.as "Capture Selection As">
+<!ENTITY sb.capture.entire "Capture Page">
+<!ENTITY sb.capture.entire.as "Capture Page As">
+<!ENTITY sb.capture.frame "Capture Frame">
+<!ENTITY sb.capture.frame.as "Capture Frame As">
+<!ENTITY sb.capture.target "Capture Link">
+<!ENTITY sb.capture.target.as "Capture Link As">
+<!ENTITY sb.capture.alltabs "Capture All Tabs">
+<!ENTITY sb.capture.bookmark "Bookmark with ScrapBook">
 <!ENTITY sb.sidebar "Kenar Çubuğunda Göster">
-<!ENTITY sb.menubar "Menü Çubuğu">
+<!ENTITY sb.menu "Menü Çubuğu">
 <!ENTITY sb.editbefore "Kaydetmeden Önce Düzenle">
+<!ENTITY sb.key.sidebar "K">
+<!ENTITY sb.key.menubar "S">
+<!ENTITY sb.key.capture "L">
+<!ENTITY sb.key.capture.as "K">
+<!ENTITY sb.key.bookmark "J">

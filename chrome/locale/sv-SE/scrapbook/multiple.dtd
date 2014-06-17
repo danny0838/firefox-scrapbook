@@ -1,3 +1,10 @@
+<!ENTITY sb.multiple.filter "Filter (reguljärt uttryck)">
+<!ENTITY sbp.multiple.titleofwebsite "Webbplatsrubrik">
+<!ENTITY sbp.multiple.titleoflink "Länkrubrik">
+<!ENTITY sb.multiple.title "Rubrik">
+<!ENTITY sb.multiple.timeout "Tidsgräns">
+<!ENTITY sbp.multiple.downloadmethod "Metod">
+<!ENTITY sb.multiple.charset "Teckenuppsättning">
 <!ENTITY sb.multiple.url "URL:er (ange en URL per rad)">
 <!ENTITY sb.multiple.detector "URL-identifiering">
 <!ENTITY sb.multiple.detector.plink "Alla länkar på sidan">
@@ -6,3 +13,4 @@
 <!ENTITY sb.multiple.detector.local "Alla lokala HTML-filer i en mapp">
 <!ENTITY sb.multiple.detector.bookmarks "Bokmärken">
 <!ENTITY sb.multiple.detector.clear "Rensa">
+<!ENTITY sbp.multiple.exclude "Ignorera redan befintliga adresser i målmappen">

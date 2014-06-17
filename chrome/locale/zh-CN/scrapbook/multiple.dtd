@@ -1,3 +1,10 @@
+<!ENTITY sb.multiple.filter "过滤器">
+<!ENTITY sbp.multiple.titleofwebsite "站点标题">
+<!ENTITY sbp.multiple.titleoflink "链接标题">
+<!ENTITY sb.multiple.title "标题">
+<!ENTITY sb.multiple.timeout "超时">
+<!ENTITY sbp.multiple.downloadmethod "方法">
+<!ENTITY sb.multiple.charset "字符集">
 <!ENTITY sb.multiple.url "URL (每行输入一个 URL)">
 <!ENTITY sb.multiple.detector "检测 URL">
 <!ENTITY sb.multiple.detector.plink "页面中包含的所有链接">
@@ -6,3 +13,4 @@
 <!ENTITY sb.multiple.detector.local "本地存储的 HTML 文件">
 <!ENTITY sb.multiple.detector.bookmarks "Bookmarks">
 <!ENTITY sb.multiple.detector.clear "清除">
+<!ENTITY sbp.multiple.exclude "忽略目的文件夹中已存在的地址">

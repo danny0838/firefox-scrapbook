@@ -2,6 +2,7 @@
 <!ENTITY sb.open.tab "Otvoriť v karte">
 <!ENTITY sb.open.newtab "Otvoriť v novej karte">
 <!ENTITY sb.open.source "Otvoriť zdroj URL">
+<!ENTITY sb.multi "Multi-ScrapBook">
 <!ENTITY sb.tools "Nástroje">
 <!ENTITY sb.show.files "Zobraziť súbory">
 <!ENTITY sb.move "Presunúť">
@@ -10,9 +11,10 @@
 <!ENTITY sb.export "Exportovať">
 <!ENTITY sb.remove "Odstrániť">
 <!ENTITY sb.property "Vlastnosti">
+<!ENTITY sb.listview "Zoznam">
 <!ENTITY sb.prop.title "Názov">
-<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.comment "Komentár">
+<!ENTITY sbp.prop.url "Adresa URL">
 <!ENTITY sb.prop.id.date "ID (Čas)">
 <!ENTITY sb.folder.combine "Otvoriť v kombinovanom náhľade">
 <!ENTITY sb.folder.openall "Otvoriť všetko v kartách">

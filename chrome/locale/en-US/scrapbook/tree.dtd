@@ -2,17 +2,19 @@
 <!ENTITY sb.open.tab "Open in Tab">
 <!ENTITY sb.open.newtab "Open in New Tab">
 <!ENTITY sb.open.source "Open Source URL">
+<!ENTITY sb.multi "Multi-ScrapBook">
 <!ENTITY sb.tools "Tools">
 <!ENTITY sb.show.files "Show Files">
 <!ENTITY sb.move "Move">
 <!ENTITY sb.move.into "Move into Folder">
-<!ENTITY sb.renew "Save Again">
+<!ENTITY sb.renew "Capture Again">
 <!ENTITY sb.export "Export">
 <!ENTITY sb.remove "Delete">
 <!ENTITY sb.property "Properties">
+<!ENTITY sb.listview "List View">
 <!ENTITY sb.prop.title "Title">
-<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.comment "Comment">
+<!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID (Time)">
 <!ENTITY sb.folder.combine "Combined View">
 <!ENTITY sb.folder.openall "Open All in Tabs">

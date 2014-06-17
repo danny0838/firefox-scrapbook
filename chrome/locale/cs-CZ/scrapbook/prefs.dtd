@@ -1,35 +1,35 @@
 <!ENTITY sb.prefs.main "Hlavní">
-<!ENTITY sb.prefs.keys "Klávesy">
 <!ENTITY sb.prefs.tabs "Panely">
 <!ENTITY sb.prefs.save "Uložit">
 <!ENTITY sb.prefs.edit "Úpravy">
-<!ENTITY sb.prefs.organize "Organizace">
+<!ENTITY sb.prefs.organize "Správa">
 <!ENTITY sb.prefs.advanced "Pokročilé">
 <!ENTITY sb.prefs.ui.contextMenu "Zobrazit v místní nabídce prohlížeče">
 <!ENTITY sb.prefs.ui.contextSubMenu "Podnabídka">
-<!ENTITY sb.prefs.ui.bookmark "Zobrazit nabídku &apos;Uložit jako záložku&apos;">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Zobrazit nabídku &apos;Uložit do ScrapBooku&apos;">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Zobrazit maximálně">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "posledních použitých složek">
 <!ENTITY sb.prefs.ui.menuBar "Zobrazit v liště nabídek">
 <!ENTITY sb.prefs.ui.menuBar.icon "Ikona">
-<!ENTITY sb.prefs.ui.toolsMenu "Zobrazit v nabídce položku 'Nástroje'">
+<!ENTITY sb.prefs.ui.toolsMenu "Zobrazit v nabídce položku &apos;Nástroje&apos;">
 <!ENTITY sb.prefs.ui.statusBar "Zobrazit ve stavové liště">
-<!ENTITY sb.prefs.restart "Změna vyžaduje restart Firefoxu.">
+<!ENTITY sb.prefs.restart "Změna vyžaduje restart aplikace Firefox.">
 <!ENTITY sb.prefs.tabs.tips "Otevřít v panelu pro následující operace">
 <!ENTITY sb.prefs.tabs.note "Upravit poznámku">
 <!ENTITY sb.prefs.data "Umístění pro ukládání dat">
 <!ENTITY sb.prefs.data.default "Výchozí (Složka s profilem)">
 <!ENTITY sb.prefs.data.custom "Uložit data do">
-<!ENTITY sb.prefs.data.tips "Zvolí složku, kam se budou data ScrapBooku ukládat.">
+<!ENTITY sb.prefs.data.tips "Zvolí složku, kam se budou data rozšíření ScrapBook ukládat.">
 <!ENTITY sb.prefs.multibook.enabled "Zapnout Multi-ScrapBook">
-<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook umožňuje nastavit více umístění, kam se budou data ukládat a rychle mezi nimi přepínat pomocí tlačítka v nástrojové liště.">
+<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook umožňuje nastavit více umístění, kam se budou data ukládat, a rychle mezi nimi přepínat pomocí tlačítka v nástrojové liště.">
 <!ENTITY sb.prefs.confirmDelete "Varovat při odstraňování uložených položek">
-<!ENTITY sb.prefs.tree.autoCollapse "Při otevírání stromové složky automaticky zavřít ostatní složky">
+<!ENTITY sb.prefs.tree.autoCollapse "Při otevírání stromu složek automaticky zavřít ostatní složky">
 <!ENTITY sb.prefs.tree.unshift "Umístit položku na">
-<!ENTITY sb.prefs.tree.unshift.top "první místo složky">
-<!ENTITY sb.prefs.tree.unshift.bottom "poslední místo složky">
-<!ENTITY sb.prefs.showDetailOnDrop "Zobrazit dialogové okno 'Zachytit detail' při zachycování metodou táhni-a-pusť do postranní lišty">
-<!ENTITY sb.prefs.notifyOnComplete "Zobrazit oznámení 'Zachycení dokončeno'">
+<!ENTITY sb.prefs.tree.unshift.top "první místo ve složce">
+<!ENTITY sb.prefs.tree.unshift.bottom "poslední místo ve složce">
+<!ENTITY sb.prefs.showDetailOnDrop "Zobrazit dialogové okno &apos;Zachytit detail&apos; při zachycování přetažením do postranní lišty">
+<!ENTITY sb.prefs.notifyOnComplete "Zobrazit oznámení &apos;Zachycení dokončeno&apos;">
 <!ENTITY sb.button.customize "Přizpůsobit">
 <!ENTITY sb.button.browse "Procházet">
 <!ENTITY sb.button.show "Zobrazit soubory">
+<!ENTITY sbp.prefs.useDropDownList "použijte rozbalovací seznam místo tlačítek pro zvýrazňovač">

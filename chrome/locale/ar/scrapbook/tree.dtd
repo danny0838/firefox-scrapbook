@@ -2,6 +2,7 @@
 <!ENTITY sb.open.tab "فتح في لسان">
 <!ENTITY sb.open.newtab "فتح في لسان جديد">
 <!ENTITY sb.open.source "فتح الموقع المصدر">
+<!ENTITY sb.multi "Multi-ScrapBook">
 <!ENTITY sb.tools "أدوات">
 <!ENTITY sb.show.files "عرض الملفات">
 <!ENTITY sb.move "نقل">
@@ -10,9 +11,10 @@
 <!ENTITY sb.export "تصدير">
 <!ENTITY sb.remove "إزالة">
 <!ENTITY sb.property "خصائص">
+<!ENTITY sb.listview "عرض قائمة">
 <!ENTITY sb.prop.title "العنونة">
-<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.comment "التعليق">
+<!ENTITY sbp.prop.url "العنوان">
 <!ENTITY sb.prop.id.date "المعرف (الوقت)">
 <!ENTITY sb.folder.combine "عرض مجموع">
 <!ENTITY sb.folder.openall "فتح الجميع في ألسنة">

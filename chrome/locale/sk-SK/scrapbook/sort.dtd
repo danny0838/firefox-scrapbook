@@ -3,6 +3,6 @@
 <!ENTITY sb.sort.title.asc "Zoradiť podľa názvu (A &gt; Z)">
 <!ENTITY sb.sort.title.desc "Zoradiť podľa názvu (Z &gt; A)">
 <!ENTITY sb.sort.date.asc "Chronologicky">
-<!ENTITY sb.sort.date.desc "Chronologicky-Otočiť">
-<!ENTITY sb.sort.recursive "Zoradiť podpriečinky rekurzívne">
-<!ENTITY sb.sort.warning "Upozornenie: Túto operáciu nemôžete vrátiť. Chcete zoradiť celý priečinok?">
+<!ENTITY sb.sort.date.desc "Od najnovšieho k najstaršiemu">
+<!ENTITY sb.sort.recursive "Zoradiť vrátane všetkých podpriečinkov">
+<!ENTITY sb.sort.warning "Upozornenie: Túto operáciu nieje možné vrátiť. Chcete zoradiť celý priečinok?">

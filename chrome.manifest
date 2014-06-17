@@ -1,4 +1,6 @@
-overlay	chrome://browser/content/browser.xul	chrome://scrapbook/content/overlay.xul
+overlay	chrome://browser/content/browser.xul	chrome://scrapbook/content/overlay3.xul application={ec8030f7-c20a-464f-9b0e-13a3a9e97384} appversion<4.0
+overlay	chrome://browser/content/browser.xul	chrome://scrapbook/content/overlay4.xul application={ec8030f7-c20a-464f-9b0e-13a3a9e97384} appversion>=4.0
+
 content	scrapbook	chrome/content/scrapbook/	contentaccessible=yes
 
 skin	scrapbook	classic/1.0	chrome/skin/classic/scrapbook/
@@ -10,10 +12,10 @@ locale	scrapbook	cs-CZ	chrome/locale/cs-CZ/scrapbook/
 locale	scrapbook	de	chrome/locale/de/scrapbook/
 locale	scrapbook	en-US	chrome/locale/en-US/scrapbook/
 locale	scrapbook	es-ES	chrome/locale/es-ES/scrapbook/
-locale	scrapbook	fi	chrome/locale/fi/scrapbook/
+locale	scrapbook	fi-FI	chrome/locale/fi-FI/scrapbook/
 locale	scrapbook	fr	chrome/locale/fr/scrapbook/
 locale	scrapbook	gl-ES	chrome/locale/gl-ES/scrapbook/
-locale	scrapbook	hu	chrome/locale/hu/scrapbook/
+locale	scrapbook	hu-HU	chrome/locale/hu-HU/scrapbook/
 locale	scrapbook	it	chrome/locale/it/scrapbook/
 locale	scrapbook	ja	chrome/locale/ja/scrapbook/
 locale	scrapbook	ko-KR	chrome/locale/ko-KR/scrapbook/
@@ -27,6 +29,3 @@ locale	scrapbook	tr	chrome/locale/tr/scrapbook/
 locale	scrapbook	uk	chrome/locale/uk/scrapbook/
 locale	scrapbook	zh-CN	chrome/locale/zh-CN/scrapbook/
 locale	scrapbook	zh-TW	chrome/locale/zh-TW/scrapbook/
-
-resource	scrapbook-modules	modules/
-

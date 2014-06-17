@@ -1,5 +1,4 @@
 <!ENTITY sb.prefs.main "Principal">
-<!ENTITY sb.prefs.keys "Teclas">
 <!ENTITY sb.prefs.tabs "Pestañas">
 <!ENTITY sb.prefs.save "Guardar">
 <!ENTITY sb.prefs.edit "Editar">
@@ -7,29 +6,30 @@
 <!ENTITY sb.prefs.advanced "Avanzado">
 <!ENTITY sb.prefs.ui.contextMenu "Mostrar en menú contextual del navegador">
 <!ENTITY sb.prefs.ui.contextSubMenu "Submenú">
-<!ENTITY sb.prefs.ui.bookmark "Mostrar menu &apos;Guardar como marcador&apos;">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Muestra el menú &apos;Marcar con Scrapbook&apos;">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Mostrar hasta">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "carpetas usadas recientemente">
 <!ENTITY sb.prefs.ui.menuBar "Mostrar en la barra de Menú">
 <!ENTITY sb.prefs.ui.menuBar.icon "Icono">
-<!ENTITY sb.prefs.ui.toolsMenu "Mostrar en el menú 'Herramientas'">
+<!ENTITY sb.prefs.ui.toolsMenu "Mostrar en el menú &apos;Herramientas&apos;">
 <!ENTITY sb.prefs.ui.statusBar "Mostrar en la barra de estado">
 <!ENTITY sb.prefs.restart "El cambio requiere reiniciar Firefox">
 <!ENTITY sb.prefs.tabs.tips "Abrir en pestañas al realizar las siguientes operaciones">
 <!ENTITY sb.prefs.tabs.note "Editar Nota">
-<!ENTITY sb.prefs.data "Lugar para almacenar los datos">
+<!ENTITY sb.prefs.data "Localización para almacenar los datos">
 <!ENTITY sb.prefs.data.default "Localización por defecto (Carpeta de Perfil)">
 <!ENTITY sb.prefs.data.custom "Guardar datos en:">
 <!ENTITY sb.prefs.data.tips "Elegir una carpeta donde guardar los datos de Scrapbook.">
 <!ENTITY sb.prefs.multibook.enabled "Habilitar Multi-Scrapbooks">
 <!ENTITY sb.prefs.multibook.tips "Esto le permite definir destinos múltiples para almacenar datos y moverse de uno a otro rápidamente usando botones de la barra de tareas.">
 <!ENTITY sb.prefs.confirmDelete "Avisarme cuando se borren elementos del árbol">
-<!ENTITY sb.prefs.tree.autoCollapse "Cuando abre una carpeta del árbol, automáticamente cierra otras carpetas">
+<!ENTITY sb.prefs.tree.autoCollapse "Cuando abra una carpeta del árbol, automáticamente cierra otras carpetas">
 <!ENTITY sb.prefs.tree.unshift "Poner un elemento en">
 <!ENTITY sb.prefs.tree.unshift.top "la parte alta de una carpeta">
 <!ENTITY sb.prefs.tree.unshift.bottom "la parte baja de una carpeta">
-<!ENTITY sb.prefs.showDetailOnDrop "Mostrar el diálogo 'Detalles de Captura' cuando se capture mediante 'arrastrar y soltar' en la barra lateral">
-<!ENTITY sb.prefs.notifyOnComplete "Mostrar notificación de 'Captura Finalizada'">
+<!ENTITY sb.prefs.showDetailOnDrop "Mostrar el diálogo &apos;Detalles de Captura&apos; cuando se capture mediante &apos;arrastrar y soltar&apos; en la barra lateral">
+<!ENTITY sb.prefs.notifyOnComplete "Mostrar notificación de &apos;Captura Finalizada&apos;">
 <!ENTITY sb.button.customize "Personalizar">
 <!ENTITY sb.button.browse "Buscar">
 <!ENTITY sb.button.show "Mostrar ficheros">
+<!ENTITY sbp.prefs.useDropDownList "usar lista desplegable en vez de los botones para elegir el marcador">

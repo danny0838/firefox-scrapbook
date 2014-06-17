@@ -1,0 +1,19 @@
+<!ENTITY sb.capture "Rögzítés">
+<!ENTITY sb.capture.abort "Mégse">
+<!ENTITY sb.capture.start "Indítás">
+<!ENTITY sb.capture.retry "Ismét">
+<!ENTITY sb.capture.skip "Kihagyás">
+<!ENTITY sb.capture.pause "Szünet">
+<!ENTITY sb.capture.finish "Mégse">
+<!ENTITY sb.capture.filter "Szűrés">
+<!ENTITY sb.capture.filter.column.one "Megjelenítés/elrejtés">
+<!ENTITY sb.capture.filter.column.two "Szűrő (reguláris kifejezés)">
+<!ENTITY sb.capture.filter.accept "Elfogadás">
+<!ENTITY sb.capture.filter.accept.tt "változtassa meg vagy adjon új értéket">
+<!ENTITY sb.capture.filter.cancel "Mégse">
+<!ENTITY sb.capture.filter.cancel.tt "szerkesztés megszakítása">
+<!ENTITY sb.capture.filter.delete "Törlés">
+<!ENTITY sb.capture.filter.delete.tt "szűrő eltávolítása a listáról">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "Cím">
+<!ENTITY sbp.capture.column.three "Állapot">

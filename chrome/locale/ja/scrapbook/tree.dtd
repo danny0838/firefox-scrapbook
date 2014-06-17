@@ -2,17 +2,19 @@
 <!ENTITY sb.open.tab "タブで開く">
 <!ENTITY sb.open.newtab "新しいタブで開く">
 <!ENTITY sb.open.source "ソースURLを開く">
+<!ENTITY sb.multi "Multi-ScrapBook">
 <!ENTITY sb.tools "ツール">
 <!ENTITY sb.show.files "ファイルを表示">
 <!ENTITY sb.move "移動">
 <!ENTITY sb.move.into "フォルダへ移動">
-<!ENTITY sb.renew "再保存">
+<!ENTITY sb.renew "再取り込み">
 <!ENTITY sb.export "エクスポート">
 <!ENTITY sb.remove "削除">
 <!ENTITY sb.property "プロパティ">
+<!ENTITY sb.listview "リストビュー">
 <!ENTITY sb.prop.title "タイトル">
-<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.comment "コメント">
+<!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID (日時)">
 <!ENTITY sb.folder.combine "結合ビュー">
 <!ENTITY sb.folder.openall "すべてタブで開く">

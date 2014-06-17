@@ -2,6 +2,7 @@
 <!ENTITY sb.open.tab "Відкрити у вкладці">
 <!ENTITY sb.open.newtab "Відкрити у новій вкладці">
 <!ENTITY sb.open.source "Відкрити початкову адресу">
+<!ENTITY sb.multi "Multi-ScrapBook">
 <!ENTITY sb.tools "Інструменти">
 <!ENTITY sb.show.files "Показати файли">
 <!ENTITY sb.move "Пересунути">
@@ -10,9 +11,10 @@
 <!ENTITY sb.export "Експорт">
 <!ENTITY sb.remove "Вилучити">
 <!ENTITY sb.property "Властивості">
+<!ENTITY sb.listview "Список">
 <!ENTITY sb.prop.title "Назва">
-<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.comment "Коментар">
+<!ENTITY sbp.prop.url "Адреса">
 <!ENTITY sb.prop.id.date "ID (час)">
 <!ENTITY sb.folder.combine "Комбінований вигляд">
 <!ENTITY sb.folder.openall "Відкрити усе у вкладках">

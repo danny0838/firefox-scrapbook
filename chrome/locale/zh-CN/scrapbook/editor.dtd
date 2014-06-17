@@ -15,6 +15,12 @@
 <!ENTITY sb.highlighter "高亮标记">
 <!ENTITY sb.highlighter.remove "取消所选高亮显示">
 <!ENTITY sb.highlighter.remove.all "取消所有高亮显示">
+<!ENTITY sbp.highlighter.stil1 "风格 1">
+<!ENTITY sbp.highlighter.stil2 "风格 2">
+<!ENTITY sbp.highlighter.stil3 "风格 3">
+<!ENTITY sbp.highlighter.stil4 "风格 4">
+<!ENTITY sbp.highlighter.stil5 "风格 5">
+<!ENTITY sbp.highlighter.stil6 "风格 6">
 <!ENTITY sb.source "打开原始链接">
 <!ENTITY sb.renew "重新获取">
 <!ENTITY sb.locate "与侧栏列表同步">
