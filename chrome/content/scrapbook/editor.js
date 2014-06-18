@@ -226,7 +226,7 @@ var sbPageEditor = {
 		if ( !idx ) idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 6;	//DropDownList
 		document.getElementById("ScrapBookHighlighter").setAttribute("color", idx);
 		var attr = {};
-		attr["style"] = sbCommonUtils.getPref("highlighter.style." + idx, "") || sbHighlighter.PRESET_STYLES[idx];	//DropDownList
+		attr["style"] = sbCommonUtils.getPref("highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);	//DropDownList
 		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighterPreview"), attr["style"]);	//DropDownList
 		var sel = this.getSelection();
 		if ( !sel ) return;

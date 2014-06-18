@@ -62,7 +62,7 @@ var sbPrefWindow = {
 
 	hlUpdateUI: function() {
 		for (var num = 6; num > 0; num--) {
-			var prefVal = sbCommonUtils.getPref("highlighter.style." + num, "") || sbHighlighter.PRESET_STYLES[num];
+			var prefVal = sbCommonUtils.getPref("highlighter.style." + num, sbHighlighter.PRESET_STYLES[num]);
 			sbHighlighter.decorateElement(document.getElementById("hlPrefLabel" + num), prefVal);
 		}
 	},
