@@ -372,19 +372,18 @@ var sbPageCombiner = {
 
 	exec : function(aType)
 	{
-//alert("htmlSrc - "+this.htmlSrc.length+"\ncssText - "+this.cssText.length+"\noffsetTop - "+this.offsetTop+"\nisTargetCombined - "+this.isTargetCombined);
 		this.isTargetCombined = false;
 		if ( sbCombineService.index == 0 )
 		{
-			this.htmlSrc += '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">';
-			this.htmlSrc += '<html><head>';
-			this.htmlSrc += '<meta http-equiv="Content-Type" content="text/html;Charset=UTF-8">';
-			this.htmlSrc += '<meta http-equiv="Content-Style-Type" content="text/css">';
-			this.htmlSrc += '<title>' + sbDataSource.getProperty(sbCombineService.curRes, "title") + '</title>';
-			this.htmlSrc += '<link rel="stylesheet" href="combine.css" media="all">';
-			this.htmlSrc += '<link rel="stylesheet" href="chrome://scrapbook/skin/combine.css" media="all">';
-			this.htmlSrc += '<link rel="stylesheet" href="chrome://scrapbook/skin/annotation.css" media="all">';
-			this.htmlSrc += '</head><body>\n';
+			this.htmlSrc += '<!DOCTYPE html>' + '\n' +
+				'<html>' + '\n' +
+				'<head>' + '\n' +
+				'<meta charset="UTF-8">' + '\n' +
+				'<title>' + sbDataSource.getProperty(sbCombineService.curRes, "title") + '</title>' + '\n' +
+				'<link rel="stylesheet" href="chrome://scrapbook/skin/combine.css" media="all">' + '\n' +
+				'<link rel="stylesheet" href="chrome://scrapbook/skin/annotation.css" media="all">' + '\n' +
+				'</head>' + '\n' +
+				'<body>' + '\n';
 		}
 		if ( aType == "file" || aType == "bookmark" )
 		{
