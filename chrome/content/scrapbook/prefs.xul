@@ -139,6 +139,7 @@
 		<checkbox preference="extensions.scrapbook.notifyOnComplete" label="&sb.prefs.notifyOnComplete;" />
 	</prefpane>
 
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/prefs.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/highlighter.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/mbService.js" />

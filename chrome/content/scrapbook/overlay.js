@@ -6,7 +6,6 @@ var sbBrowserOverlay = {
 	infoMode: false,
 	resource: null,
 	locateMe: null,
-	_prefBranch: null,
 	ffVersion: null,
 
 	get STRING() {
@@ -41,13 +40,10 @@ var sbBrowserOverlay = {
 		document.getElementById("contentAreaContextMenu").addEventListener(
 			"popupshowing", this, false
 		);
-		this._prefBranch = Components.classes["@mozilla.org/preferences-service;1"]
-		                   .getService(Components.interfaces.nsIPrefService)
-		                   .getBranch("extensions.scrapbook.ui.");
 		this.refresh();
 		gBrowser.addProgressListener(this.webProgressListener);
-		if (this._prefBranch.getBoolPref("contextMenu") && 
-		    this._prefBranch.getBoolPref("contextSubMenu")) {
+		if (sbCommonUtils.getPref("ui.contextMenu", false) && 
+		    sbCommonUtils.getPref("ui.contextSubMenu", false)) {
 			var callback = function() {
 				document.getElementById("ScrapBookContextSubmenu").hidden = false;
 				for (var i = 1; i <= 10; i++) {
@@ -58,7 +54,7 @@ var sbBrowserOverlay = {
 			};
 			window.setTimeout(callback, 1000);
 		}
-		if (this._prefBranch.getBoolPref("menuBar.icon")) {
+		if (sbCommonUtils.getPref("ui.menuBar.icon", false)) {
 			var menu   = document.getElementById("ScrapBookMenu");
 			var button = document.createElement("toolbarbutton");
 			var attrs = menu.attributes;
@@ -86,22 +82,22 @@ var sbBrowserOverlay = {
 		this.dataTitle = "";
 		this.editMode = sbPageEditor.TOOLBAR.getAttribute("autoshow") == "true";
 		this.infoMode = sbInfoViewer.TOOLBAR.getAttribute("autoshow") == "true";
-		document.getElementById("ScrapBookMenu").hidden        = !this._prefBranch.getBoolPref("menuBar");
+		document.getElementById("ScrapBookMenu").hidden        = !sbCommonUtils.getPref("ui.menuBar", false);
 		var rVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
 		if ( rVerComparator.compare(this.ffVersion.version, "4.0")<0 ) {
-			document.getElementById("ScrapBookStatusPanel").hidden = !this._prefBranch.getBoolPref("statusBar");
+			document.getElementById("ScrapBookStatusPanel").hidden = !sbCommonUtils.getPref("ui.statusBar", false);
 		}
-		document.getElementById("ScrapBookToolsMenu").hidden   = !this._prefBranch.getBoolPref("toolsMenu");
+		document.getElementById("ScrapBookToolsMenu").hidden   = !sbCommonUtils.getPref("ui.toolsMenu", false);
 		sbDataSource.init(true);
 		sbDataSource.backup();
 		this.setProtocolSubstitution();
 		var file = sbCommonUtils.getScrapBookDir().clone();
 		file.append("folders.txt");
 		if (file.exists()) {
-			this._prefBranch.setCharPref("folderList", sbCommonUtils.readFile(file));
+			sbCommonUtils.setPref("ui.folderList", sbCommonUtils.readFile(file));
 		}
 		else {
-			var ids = this._prefBranch.getCharPref("folderList");
+			var ids = sbCommonUtils.getPref("ui.folderList", "");
 			sbCommonUtils.writeFile(file, ids, "UTF-8");
 		}
 	},
@@ -158,10 +154,10 @@ var sbBrowserOverlay = {
 		menuItem.setAttribute("container", "true");
 		menuItem.setAttribute("label", this.STRING.getString("ROOT_FOLDER"));
 		aPopup.appendChild(document.createElement("menuseparator"));
-		var ids = this._prefBranch.getCharPref("folderList");
+		var ids = sbCommonUtils.getPref("ui.folderList", "");
 		ids = ids ? ids.split("|") : [];
 		var shownItems = 0;
-		var maxEntries = this._prefBranch.getIntPref("folderList.maxEntries");
+		var maxEntries = sbCommonUtils.getPref("ui.folderList.maxEntries", 5);
 		for (var i = 0; i < ids.length && shownItems < maxEntries; i++) {
 			if (ids[i].length != 14)
 				continue;
@@ -191,12 +187,12 @@ var sbBrowserOverlay = {
 	updateFolderPref : function(aResURI)
 	{
 		if ( aResURI == "urn:scrapbook:root" ) return;
-		var oldIDs = this._prefBranch.getCharPref("folderList");
+		var oldIDs = sbCommonUtils.getPref("ui.folderList", "");
 		oldIDs = oldIDs ? oldIDs.split("|") : [];
 		var newIDs = [aResURI.substring(18,32)];
 		oldIDs.forEach(function(id){ if ( id != newIDs[0] ) newIDs.push(id); });
-		newIDs = newIDs.slice(0, this._prefBranch.getIntPref("folderList.maxEntries")).join("|");
-		this._prefBranch.setCharPref("folderList", newIDs);
+		newIDs = newIDs.slice(0, sbCommonUtils.getPref("ui.folderList.maxEntries", 5)).join("|");
+		sbCommonUtils.setPref("ui.folderList", newIDs);
 		var file = sbCommonUtils.getScrapBookDir().clone();
 		file.append("folders.txt");
 		sbCommonUtils.writeFile(file, newIDs, "UTF-8");
@@ -296,16 +292,8 @@ var sbBrowserOverlay = {
 		var elSidebarTitleId = "sidebar-title";
 		var elSidebarSplitterId = "sidebar-splitter";
 		var elSidebarBoxId = "sidebar-box";
-		var elPrefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
-		var elPosition;
+		var elPosition = sbCommonUtils.getPref("extensions.multisidebar.viewScrapBookSidebar", 1, true);
 
-		if ( elPrefs.prefHasUserValue("extensions.multisidebar.viewScrapBookSidebar") )
-		{
-			elPosition = elPrefs.getIntPref("extensions.multisidebar.viewScrapBookSidebar");
-		} else
-		{
-			elPosition = 1;
-		}
 		if ( elPosition > 1)
 		{
 			elSidebarId = "sidebar-" + elPosition;
@@ -385,8 +373,8 @@ var sbBrowserOverlay = {
 		var getElement = function(aID) {
 			return document.getElementById(aID);
 		};
-		var prefContext  = this._prefBranch.getBoolPref("contextMenu");
-		var prefBookmark = this._prefBranch.getBoolPref("bookmarkMenu");
+		var prefContext  = sbCommonUtils.getPref("ui.contextMenu", false);
+		var prefBookmark = sbCommonUtils.getPref("ui.bookmarkMenu", false);
 		getElement("ScrapBookContextMenu0").hidden = !prefContext || onInput;
 		getElement("ScrapBookContextMenu1").hidden = !prefContext || !selected;
 		getElement("ScrapBookContextMenu2").hidden = !prefContext || !selected;
@@ -515,7 +503,7 @@ var sbMenuHandler = {
 			case "bookmark" : url = sbDataSource.getProperty(res, "source");        break;
 			default         : url = this.baseURL + "data/" + id + "/index.html";
 		}
-		var openInTab = sbCommonUtils.PREF.getBoolPref("extensions.scrapbook.tabs.open");
+		var openInTab = sbCommonUtils.getPref("tabs.open", false);
 		sbCommonUtils.loadURL(url, openInTab || event.button == 1 || event.ctrlKey || event.shiftKey);
 		event.stopPropagation();
 	},

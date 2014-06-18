@@ -26,7 +26,7 @@ var sbDataSource = {
 		catch(ex) {
 			if ( !aQuietWarning ) alert("ScrapBook ERROR: Failed to initialize datasource.\n\n" + ex);
 		}
-		this.unshifting = sbCommonUtils.getBoolPref("extensions.scrapbook.tree.unshift", false);
+		this.unshifting = sbCommonUtils.getPref("tree.unshift", false);
 	},
 
 	backup : function()

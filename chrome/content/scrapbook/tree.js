@@ -16,7 +16,7 @@ var sbTreeHandler = {
 	init : function(isContainer)
 	{
 		this.TREE.database.AddDataSource(sbDataSource.data);
-		this.autoCollapse = sbCommonUtils.getBoolPref("extensions.scrapbook.tree.autoCollapse", false);
+		this.autoCollapse = sbCommonUtils.getPref("tree.autoCollapse", false);
 		if ( isContainer ) document.getElementById("sbTreeRule").setAttribute("iscontainer", true);
 		this.TREE.builder.rebuild();
 	},
