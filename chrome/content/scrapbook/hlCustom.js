@@ -17,7 +17,7 @@ var hlCustomizer = {
 		gColorIndex = window.arguments[0];
 		gPreviewUI  = getElement("hlCustomPreview");
 		gPrefName   = "highlighter.style." + gColorIndex;
-		var prefVal = sbCommonUtils.getPref(gPrefName, "") || sbHighlighter.PRESET_STYLES[gColorIndex];
+		var prefVal = sbCommonUtils.getPref(gPrefName, sbHighlighter.PRESET_STYLES[gColorIndex]);
 		gPreviewUI.setAttribute("style", prefVal);
 		this.syncFromPreview();
 	},
