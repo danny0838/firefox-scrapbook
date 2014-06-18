@@ -435,7 +435,7 @@ var sbPageEditor = {
 			}
 			var rootNode = doc.getElementsByTagName("html")[0];
 			var src = sbContentSaver.doctypeToString(doc.doctype) + rootNode.outerHTML;
-			var file = sbCommonUtilsBookUtils.getContentDir(this.item.id).clone();
+			var file = sbCommonUtils.getContentDir(this.item.id).clone();
 			file.append(sbCommonUtils.getFileName(doc.location.href));
 			sbCommonUtils.writeFile(file, src, charset);
 			if ( document.getElementById("ScrapBookStatusPopupD").getAttribute("checked") )
