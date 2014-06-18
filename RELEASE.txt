@@ -1,3 +1,9 @@
+Scrapbook X 1.10.2
+----------------
+
+- Fixed an issue that pages cannot be saved.
+
+
 Scrapbook X 1.10.1
 ----------------
 
