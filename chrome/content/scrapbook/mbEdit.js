@@ -1,7 +1,3 @@
-
-const Cc = Components.classes;
-const Ci = Components.interfaces;
-
 var mbEditDialog = {
 
 	_nameTextbox: null,
@@ -15,7 +11,7 @@ var mbEditDialog = {
 		var ret = window.arguments[0];
 		this._nameTextbox.value = ret.value ? ret.value[0] : "";
 		if (ret.value && ret.value[1]) {
-			var file = Cc["@mozilla.org/file/local;1"].createInstance(Ci.nsILocalFile);
+			var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
 			file.initWithPath(ret.value[1]);
 			this._pathField.file = file;
 			this._pathField.label = file.path;
@@ -33,7 +29,7 @@ var mbEditDialog = {
 	},
 
 	selectFolder: function(aTitle) {
-		var fp = Cc["@mozilla.org/filepicker;1"].createInstance(Ci.nsIFilePicker);
+		var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
 		fp.init(window, aTitle, fp.modeGetFolder);
 		if (this._pathField.file)
 			fp.displayDirectory = this._pathField.file;

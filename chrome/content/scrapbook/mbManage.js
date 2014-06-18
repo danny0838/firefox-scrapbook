@@ -1,7 +1,3 @@
-
-const Cc = Components.classes;
-const Ci = Components.interfaces;
-
 const kNameCol = 0;
 const kPathCol = 1;
 const kActiveCol = 2;
@@ -113,7 +109,7 @@ var gDragDropObserver = {
 		var sourceIndex = gMultiBookTreeView.selection.currentIndex;
 		aXferData.data = new TransferData();
 		aXferData.data.addDataForFlavour("text/unicode", sourceIndex);
-		aDragAction.action = Ci.nsIDragService.DRAGDROP_ACTION_MOVE;
+		aDragAction.action = Components.interfaces.nsIDragService.DRAGDROP_ACTION_MOVE;
 	},
 
 	onDrop: function (aEvent, aXferData, aDragSession) {},
@@ -181,7 +177,7 @@ MultiBookTreeView.prototype = {
 	getRowProperties: function(index) {},
 	getCellProperties: function(row, col) {
 		if (this._data[row][kActiveCol]) {
-			var atomSvc = Cc["@mozilla.org/atom-service;1"].getService(Ci.nsIAtomService);
+			var atomSvc = Components.classes["@mozilla.org/atom-service;1"].getService(Components.interfaces.nsIAtomService);
 			return atomSvc.getAtom("active");
 		}
 	},
@@ -206,11 +202,11 @@ MultiBookTreeView.prototype = {
 			return false;
 		var sourceIndex = this.selection.currentIndex;
 		if (sourceIndex < targetIndex) {
-			if (orientation == Ci.nsITreeView.DROP_BEFORE)
+			if (orientation == Components.interfaces.nsITreeView.DROP_BEFORE)
 				targetIndex--;
 		}
 		else {
-			if (orientation == Ci.nsITreeView.DROP_AFTER)
+			if (orientation == Components.interfaces.nsITreeView.DROP_AFTER)
 				targetIndex++;
 		}
 		this.moveItem(sourceIndex, targetIndex);

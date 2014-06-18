@@ -1,7 +1,3 @@
-
-const Cc = Components.classes;
-const Ci = Components.interfaces;
-
 var gPrefBranch;
 var gPrefName;
 var gPreviewUI;
@@ -21,11 +17,11 @@ var hlCustomizer = {
 		}
 		gColorIndex = window.arguments[0];
 		gPreviewUI  = getElement("hlCustomPreview");
-		gPrefBranch = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefBranch);
+		gPrefBranch = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
 		gPrefName   = "extensions.scrapbook.highlighter.style." + gColorIndex;
 		var prefVal = null;
 		try {
-			prefVal = gPrefBranch.getComplexValue(gPrefName, Ci.nsISupportsString).data;
+			prefVal = gPrefBranch.getComplexValue(gPrefName, Components.interfaces.nsISupportsString).data;
 		}
 		catch (ex) {
 			prefVal = sbHighlighter.PRESET_STYLES[gColorIndex];
@@ -36,9 +32,9 @@ var hlCustomizer = {
 
 	done: function() 
 	{
-		var prefVal = Cc["@mozilla.org/supports-string;1"].createInstance(Ci.nsISupportsString);
+		var prefVal = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
 		prefVal.data = gPreviewUI.style.cssText;
-		gPrefBranch.setComplexValue(gPrefName, Ci.nsISupportsString, prefVal);
+		gPrefBranch.setComplexValue(gPrefName, Components.interfaces.nsISupportsString, prefVal);
 	},
 
 	syncFromPreview: function()

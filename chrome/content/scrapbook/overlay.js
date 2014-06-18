@@ -26,9 +26,9 @@ var sbBrowserOverlay = {
 		onSecurityChange   : function(){},
 		onLinkIconAvailable: function(){},
 		QueryInterface: function(aIID) {
-			if (aIID.equals(Ci.nsIWebProgressListener) ||
-			    aIID.equals(Ci.nsISupportsWeakReference) ||
-			    aIID.equals(Ci.nsISupports))
+			if (aIID.equals(Components.interfaces.nsIWebProgressListener) ||
+			    aIID.equals(Components.interfaces.nsISupportsWeakReference) ||
+			    aIID.equals(Components.interfaces.nsISupports))
 				return this;
 			throw Components.results.NS_NOINTERFACE;
 		},
@@ -37,11 +37,11 @@ var sbBrowserOverlay = {
 	init: function()
 	{
 		//Ermitteln der Firefox-Version
-		this.ffVersion = Cc["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
+		this.ffVersion = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
 		document.getElementById("contentAreaContextMenu").addEventListener(
 			"popupshowing", this, false
 		);
-		this._prefBranch = Cc["@mozilla.org/preferences-service;1"]
+		this._prefBranch = Components.classes["@mozilla.org/preferences-service;1"]
 		                   .getService(Components.interfaces.nsIPrefService)
 		                   .getBranch("extensions.scrapbook.ui.");
 		this.refresh();
@@ -87,7 +87,7 @@ var sbBrowserOverlay = {
 		this.editMode = sbPageEditor.TOOLBAR.getAttribute("autoshow") == "true";
 		this.infoMode = sbInfoViewer.TOOLBAR.getAttribute("autoshow") == "true";
 		document.getElementById("ScrapBookMenu").hidden        = !this._prefBranch.getBoolPref("menuBar");
-		var rVerComparator = Cc["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
+		var rVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
 		if ( rVerComparator.compare(this.ffVersion.version, "4.0")<0 ) {
 			document.getElementById("ScrapBookStatusPanel").hidden = !this._prefBranch.getBoolPref("statusBar");
 		}
@@ -110,7 +110,7 @@ var sbBrowserOverlay = {
 	{
 		var baseURL = sbCommonUtils.getBaseHref(sbDataSource.data.URI);
 		var RPH = sbCommonUtils.IO.getProtocolHandler("resource")
-		          .QueryInterface(Ci.nsIResProtocolHandler);
+		          .QueryInterface(Components.interfaces.nsIResProtocolHandler);
 		if (RPH.hasSubstitution("scrapbook") && (RPH.getSubstitution("scrapbook").spec == baseURL))
 			return;
 		RPH.setSubstitution("scrapbook", sbCommonUtils.convertURLToObject(baseURL));
@@ -347,7 +347,7 @@ var sbBrowserOverlay = {
 
 	isSelected : function()
 	{
-		var sel = sbCommonUtils.getFocusedWindow().getSelection().QueryInterface(Ci.nsISelectionPrivate);
+		var sel = sbCommonUtils.getFocusedWindow().getSelection().QueryInterface(Components.interfaces.nsISelectionPrivate);
 		var isSelected = false;
 		try {
 			isSelected = !(sel.anchorNode == sel.focusNode && sel.anchorOffset == sel.focusOffset);
@@ -429,7 +429,7 @@ var sbMenuHandler = {
 		this.baseURL  = sbCommonUtils.getBaseHref(sbDataSource.data.URI);
 		var dsEnum = this._menu.database.GetDataSources();
 		while (dsEnum.hasMoreElements()) {
-			var ds = dsEnum.getNext().QueryInterface(Ci.nsIRDFDataSource);
+			var ds = dsEnum.getNext().QueryInterface(Components.interfaces.nsIRDFDataSource);
 			this._menu.database.RemoveDataSource(ds);
 		}
 		this._menu.database.AddDataSource(sbDataSource.data);
@@ -445,7 +445,7 @@ var sbMenuHandler = {
 		var initFlag = false;
 		var dsEnum = getElement("ScrapBookMenu").database.GetDataSources();
 		while (dsEnum.hasMoreElements()) {
-			var ds = dsEnum.getNext().QueryInterface(Ci.nsIRDFDataSource);
+			var ds = dsEnum.getNext().QueryInterface(Components.interfaces.nsIRDFDataSource);
 			if (ds.URI == sbDataSource.data.URI)
 				initFlag = true;
 		}
@@ -487,7 +487,7 @@ var sbMenuHandler = {
 			var ds = null;
 			var dsEnum = document.getElementById("ScrapBookMenu").database.GetDataSources();
 			while (dsEnum.hasMoreElements()) {
-				ds = dsEnum.getNext().QueryInterface(Ci.nsIRDFDataSource);
+				ds = dsEnum.getNext().QueryInterface(Components.interfaces.nsIRDFDataSource);
 				document.getElementById("ScrapBookMenu").database.RemoveDataSource(ds);
 			}
 			var aShowDetail = event.target.id == "ScrapBookMenubarItem2" || event.button == 1;

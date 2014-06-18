@@ -120,12 +120,10 @@ var sbMultiBookService = {
 
 	validateRefresh: function(aQuietWarning)
 	{
-		const Cc = Components.classes;
-		const Ci = Components.interfaces;
-		var winEnum = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator)
+		var winEnum = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator)
 		              .getEnumerator("scrapbook");
 		while (winEnum.hasMoreElements()) {
-			var win = winEnum.getNext().QueryInterface(Ci.nsIDOMWindow);
+			var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
 			if (win != window) {
 				if (!aQuietWarning)
 					alert(document.getElementById("sbMainString").getString("MB_CLOSE_WINDOW") + "\n[" + win.title + "]");
@@ -161,12 +159,10 @@ var sbMultiBookService = {
 			rgSidebarBoxId = "sidebar-" + rgPosition + "-box";
 		}
 		//Ende Block
-		const Cc = Components.classes;
-		const Ci = Components.interfaces;
-		var winEnum = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator)
+		var winEnum = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator)
 		              .getEnumerator("navigator:browser");
 		while (winEnum.hasMoreElements()) {
-			var win = winEnum.getNext().QueryInterface(Ci.nsIDOMWindow);
+			var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
 			try {
 				win.sbBrowserOverlay.refresh();
 				win.sbBrowserOverlay.onLocationChange(win.gBrowser.currentURI.spec);
