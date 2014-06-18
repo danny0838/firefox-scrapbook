@@ -27,26 +27,24 @@ var sbPageEditor = {
 		//Vorschau für Hervorhebungsstufe aktualisieren
 			//fuer Auswahlliste
 		var idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 6;
-		var cssText = sbCommonUtils.copyUnicharPref("extensions.scrapbook.highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);
+		var cssText = sbCommonUtils.getPref("highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);
 		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighterPreview"), cssText);
 			//fuer Knoepfe
 		var cssText = "";
-		cssText = sbCommonUtils.copyUnicharPref("extensions.scrapbook.highlighter.style.1", sbHighlighter.PRESET_STYLES[1]);
+		cssText = sbCommonUtils.getPref("highlighter.style.1", sbHighlighter.PRESET_STYLES[1]);
 		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter1"), cssText);
-		cssText = sbCommonUtils.copyUnicharPref("extensions.scrapbook.highlighter.style.2", sbHighlighter.PRESET_STYLES[2]);
+		cssText = sbCommonUtils.getPref("highlighter.style.2", sbHighlighter.PRESET_STYLES[2]);
 		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter2"), cssText);
-		cssText = sbCommonUtils.copyUnicharPref("extensions.scrapbook.highlighter.style.3", sbHighlighter.PRESET_STYLES[3]);
+		cssText = sbCommonUtils.getPref("highlighter.style.3", sbHighlighter.PRESET_STYLES[3]);
 		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter3"), cssText);
-		cssText = sbCommonUtils.copyUnicharPref("extensions.scrapbook.highlighter.style.4", sbHighlighter.PRESET_STYLES[4]);
+		cssText = sbCommonUtils.getPref("highlighter.style.4", sbHighlighter.PRESET_STYLES[4]);
 		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter4"), cssText);
-		cssText = sbCommonUtils.copyUnicharPref("extensions.scrapbook.highlighter.style.5", sbHighlighter.PRESET_STYLES[5]);
+		cssText = sbCommonUtils.getPref("highlighter.style.5", sbHighlighter.PRESET_STYLES[5]);
 		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter5"), cssText);
-		cssText = sbCommonUtils.copyUnicharPref("extensions.scrapbook.highlighter.style.6", sbHighlighter.PRESET_STYLES[6]);
+		cssText = sbCommonUtils.getPref("highlighter.style.6", sbHighlighter.PRESET_STYLES[6]);
 		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter6"), cssText);
-			//
-		var prefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
-		prefs = prefs.getBranch("extensions.scrapbook.");
-		var value = prefs.getBoolPref("useDropDownList");
+
+		var value = sbCommonUtils.getPref("useDropDownList", false);
 		if ( value == false )
 		{
 			document.getElementById("ScrapBookHighlighterPreview").hidden = true;
@@ -139,7 +137,7 @@ var sbPageEditor = {
 			catch (ex) {}
 			window.content.addEventListener("beforeunload", this.handleEvent, true);
 		}
-		var ss = Cc["@mozilla.org/browser/sessionstore;1"].getService(Ci.nsISessionStore);
+		var ss = Components.classes["@mozilla.org/browser/sessionstore;1"].getService(Components.interfaces.nsISessionStore);
 		var restoredComment = ss.getTabValue(gBrowser.mCurrentTab, "scrapbook-comment");
 		if (restoredComment)
 			document.getElementById("ScrapBookEditComment").value = restoredComment;
@@ -196,7 +194,7 @@ var sbPageEditor = {
 
 	onInputComment: function(aValue)
 	{
-		var ss = Cc["@mozilla.org/browser/sessionstore;1"].getService(Ci.nsISessionStore);
+		var ss = Components.classes["@mozilla.org/browser/sessionstore;1"].getService(Components.interfaces.nsISessionStore);
 		ss.setTabValue(gBrowser.mCurrentTab, "scrapbook-comment", aValue);
 		this._dataChanged2(true);
 	},
@@ -228,7 +226,7 @@ var sbPageEditor = {
 		if ( !idx ) idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 6;	//DropDownList
 		document.getElementById("ScrapBookHighlighter").setAttribute("color", idx);
 		var attr = {};
-		attr["style"] = sbCommonUtils.copyUnicharPref("extensions.scrapbook.highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);	//DropDownList
+		attr["style"] = sbCommonUtils.getPref("highlighter.style." + idx, "") || sbHighlighter.PRESET_STYLES[idx];	//DropDownList
 		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighterPreview"), attr["style"]);	//DropDownList
 		var sel = this.getSelection();
 		if ( !sel ) return;
@@ -466,7 +464,7 @@ var sbPageEditor = {
 		var aValue = document.getElementById("ScrapBookEditComment").value;
 		if ( aValue )
 		{
-			var ss = Cc['@mozilla.org/browser/sessionstore;1'].getService(Ci.nsISessionStore);
+			var ss = Components.classes['@mozilla.org/browser/sessionstore;1'].getService(Components.interfaces.nsISessionStore);
 			ss.setTabValue(gBrowser.mCurrentTab, "scrapbook-comment", aValue);
 			ss.deleteTabValue(gBrowser.mCurrentTab, "scrapbook-comment");
 		}

@@ -24,7 +24,6 @@ var sbCommonUtils = {
 	get UNICODE() { return Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter); },
 	get WINDOW()  { return Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator); },
 	get PROMPT()  { return Components.classes['@mozilla.org/embedcomp/prompt-service;1'].getService(Components.interfaces.nsIPromptService); },
-	get PREF()    { return Components.classes['@mozilla.org/preferences;1'].getService(Components.interfaces.nsIPrefBranch); },
 
 	_fxVer18 : null,
 
@@ -38,8 +37,8 @@ var sbCommonUtils = {
 	{
 		var dir;
 		try {
-			var isDefault = this.PREF.getBoolPref("extensions.scrapbook.data.default");
-			dir = this.PREF.getComplexValue("extensions.scrapbook.data.path", Components.interfaces.nsIPrefLocalizedString).data;
+			var isDefault = sbCommonUtils.getPref("data.default", true);
+			dir = sbCommonUtils.getPref("data.path", "");
 			dir = this.convertPathToFile(dir);
 		} catch(ex) {
 			isDefault = true;
@@ -117,16 +116,8 @@ var sbCommonUtils = {
 		var rgSidebarTitleId = "sidebar-title";
 		var rgSidebarSplitterId = "sidebar-splitter";
 		var rgSidebarBoxId = "sidebar-box";
-		var rgPrefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
-		var rgPosition;
+		var rgPosition = sbCommonUtils.getPref("extensions.multisidebar.viewScrapBookSidebar", 1, true);
 
-		if ( rgPrefs.prefHasUserValue("extensions.multisidebar.viewScrapBookSidebar") )
-		{
-			rgPosition = rgPrefs.getIntPref("extensions.multisidebar.viewScrapBookSidebar");
-		} else
-		{
-			rgPosition = 1;
-		}
 		if ( rgPosition > 1)
 		{
 			rgSidebarId = "sidebar-" + rgPosition;
@@ -380,46 +371,92 @@ var sbCommonUtils = {
 		}
 	},
 
-	getBoolPref : function(aName, aDefVal)
+	get prefBranch()
 	{
-		try {
-			return this.PREF.getBoolPref(aName);
-		}
-		catch(ex) {
-			return aDefVal;
-		}
+		delete this.prefBranch;
+		// must specify a branch or we get an error on setting a pref
+		return this.prefBranch = Components.classes["@mozilla.org/preferences-service;1"].
+			getService(Components.interfaces.nsIPrefService).
+			getBranch("");
 	},
 
-	setBoolPref: function(aPrefName, aPrefValue)
+	getLocalPref: function (aName)
 	{
-		try {
-			this.PREF.setBoolPref(aPrefName, aPrefValue);
-			var sbpPrefService = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
-			sbpPrefService.savePrefFile(null);
-		}
-		catch (ex) {}
+		return "extensions.scrapbook." + aName;
 	},
-
-	setUnicharPref: function (aPrefName, aPrefValue)
+	
+	getPrefType: function (aName, aDefaultValue, isGlobal)
 	{
+		if (!isGlobal) aName = this.getLocalPref(aName);
 		try {
-			var str = Components.classes["@mozilla.org/supports-string;1"]
-			          .createInstance(Components.interfaces.nsISupportsString);
-			str.data = aPrefValue;
-			this.PREF.setComplexValue(aPrefName, Components.interfaces.nsISupportsString, str);
-			var supPrefService = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
-			supPrefService.savePrefFile(null);
-		}
-		catch (ex) {}
-	},
-
-	copyUnicharPref: function (aPrefName, aDefVal)
-	{
-		try {
-			return this.PREF.getComplexValue(aPrefName, Components.interfaces.nsISupportsString).data;
+			switch (typeof aDefaultValue) {
+				case "boolean":
+					return "boolean";
+				case "number":
+					return "number";
+				case "string":
+					return "string";
+			}
+			switch (this.prefBranch.getPrefType(aName)) {
+				case this.prefBranch.PREF_BOOL: 
+					return "boolean";
+				case this.prefBranch.PREF_INT: 
+					return "number";
+				case this.prefBranch.PREF_STRING: 
+					return "string";
+			}
 		}
 		catch (ex) {
-			return aDefVal != undefined ? aDefVal : null;
+			return "undefined";
+		}
+		return "undefined";
+	},
+
+	getPref: function (aName, aDefaultValue, isGlobal)
+	{
+		if (!isGlobal) aName = this.getLocalPref(aName);
+		try {
+			switch (this.getPrefType(aName, aDefaultValue, true)) {
+				case "boolean": 
+					return this.prefBranch.getBoolPref(aName);
+				case "number": 
+					return this.prefBranch.getIntPref(aName);
+				case "string": 
+					// using getCharPref may meet encoding problems
+					return this.prefBranch.getComplexValue(aName, Components.interfaces.nsISupportsString).data;
+				default: 
+					throw null;
+			}
+		}
+		catch (ex) {
+			return aDefaultValue != undefined ? aDefaultValue : null;
+		}
+	},
+
+	setPref: function (aName, aValue, isGlobal)
+	{
+		if (!isGlobal) aName = this.getLocalPref(aName);
+		try {
+			switch (this.getPrefType(aName, aValue, true)) {
+				case "boolean": 
+					this.prefBranch.setBoolPref(aName, aValue);
+					break;
+				case "number": 
+					this.prefBranch.setIntPref(aName, aValue);
+					break;
+				case "string":
+					// using getCharPref may meet encoding problems
+					var str = Components.classes["@mozilla.org/supports-string;1"].
+					          createInstance(Components.interfaces.nsISupportsString);
+					str.data = aValue;
+					this.prefBranch.setComplexValue(aName, Components.interfaces.nsISupportsString, str);
+					break;
+				default: 
+					throw null;
+			}
+		}
+		catch (ex) {
+			console.error("ERROR: unable to set a pref: " + aName);
 		}
 	},
 

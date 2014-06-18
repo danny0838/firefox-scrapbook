@@ -6,7 +6,7 @@ var sbMultiBookService = {
 
 	showButton: function()
 	{
-		this.enabled = sbCommonUtils.getBoolPref("extensions.scrapbook.multibook.enabled", false);
+		this.enabled = sbCommonUtils.getPref("multibook.enabled", false);
 		document.getElementById("mbToolbarButton").hidden = !this.enabled;
 	},
 
@@ -18,16 +18,8 @@ var sbMultiBookService = {
 		var stSidebarTitleId = "sidebar-title";
 		var stSidebarSplitterId = "sidebar-splitter";
 		var stSidebarBoxId = "sidebar-box";
-		var stPrefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
-		var stPosition;
+		var stPosition = sbCommonUtils.getPref("extensions.multisidebar.viewScrapBookSidebar", 1, true);
 
-		if ( stPrefs.prefHasUserValue("extensions.multisidebar.viewScrapBookSidebar") )
-		{
-			stPosition = stPrefs.getIntPref("extensions.multisidebar.viewScrapBookSidebar");
-		} else
-		{
-			stPosition = 1;
-		}
 		if ( stPosition > 1)
 		{
 			stSidebarId = "sidebar-" + stPosition;
@@ -44,7 +36,7 @@ var sbMultiBookService = {
 		{
 			var title = win.sbBrowserOverlay.dataTitle;
 			if (!title) {
-				title = sbCommonUtils.copyUnicharPref("extensions.scrapbook.data.title", "");
+				title = sbCommonUtils.getPref("data.title", "");
 				win.sbBrowserOverlay.dataTitle = title;
 			}
 			if (title)
@@ -54,8 +46,8 @@ var sbMultiBookService = {
 
 	initMenu : function()
 	{
-		var isDefault = sbCommonUtils.getBoolPref("extensions.scrapbook.data.default", true);
-		var dataPath  = sbCommonUtils.copyUnicharPref("extensions.scrapbook.data.path", "");
+		var isDefault = sbCommonUtils.getPref("data.default", true);
+		var dataPath  = sbCommonUtils.getPref("data.path", "");
 		var popup = document.getElementById("mbMenuPopup");
 		if (!this.file) {
 			var items = this.initFile();
@@ -84,7 +76,7 @@ var sbMultiBookService = {
 		this.file.append("multibook.txt");
 		if (!this.file.exists()) {
 			this.file.create(this.file.NORMAL_FILE_TYPE, parseInt("0666", 8));
-			var path = sbCommonUtils.copyUnicharPref("extensions.scrapbook.data.path", "");
+			var path = sbCommonUtils.getPref("data.path", "");
 			if (path)
 				sbCommonUtils.writeFile(this.file, "My ScrapBook\t" + path + "\n", "UTF-8");
 		}
@@ -104,10 +96,10 @@ var sbMultiBookService = {
 			return;
 		aItem.setAttribute("checked", true);
 		var path = aItem.getAttribute("path");
-		sbCommonUtils.setBoolPref("extensions.scrapbook.data.default", path == "");
+		sbCommonUtils.setPref("data.default", path == "");
 		if (path != "")
-			sbCommonUtils.setUnicharPref("extensions.scrapbook.data.path", path);
-		sbCommonUtils.setUnicharPref("extensions.scrapbook.data.title", aItem.label);
+			sbCommonUtils.setPref("data.path", path);
+		sbCommonUtils.setPref("data.title", aItem.label);
 		try {
 			var refWin = "sbBrowserOverlay" in window.top ? window.top : window.opener.top;
 			refWin.sbBrowserOverlay.dataTitle = aItem.label;
@@ -120,12 +112,10 @@ var sbMultiBookService = {
 
 	validateRefresh: function(aQuietWarning)
 	{
-		const Cc = Components.classes;
-		const Ci = Components.interfaces;
-		var winEnum = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator)
+		var winEnum = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator)
 		              .getEnumerator("scrapbook");
 		while (winEnum.hasMoreElements()) {
-			var win = winEnum.getNext().QueryInterface(Ci.nsIDOMWindow);
+			var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
 			if (win != window) {
 				if (!aQuietWarning)
 					alert(document.getElementById("sbMainString").getString("MB_CLOSE_WINDOW") + "\n[" + win.title + "]");
@@ -143,16 +133,8 @@ var sbMultiBookService = {
 		var rgSidebarTitleId = "sidebar-title";
 		var rgSidebarSplitterId = "sidebar-splitter";
 		var rgSidebarBoxId = "sidebar-box";
-		var rgPrefs = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
-		var rgPosition;
+		var rgPosition = sbCommonUtils.getPref("extensions.multisidebar.viewScrapBookSidebar", 1, true);
 
-		if ( rgPrefs.prefHasUserValue("extensions.multisidebar.viewScrapBookSidebar") )
-		{
-			rgPosition = rgPrefs.getIntPref("extensions.multisidebar.viewScrapBookSidebar");
-		} else
-		{
-			rgPosition = 1;
-		}
 		if ( rgPosition > 1)
 		{
 			rgSidebarId = "sidebar-" + rgPosition;
@@ -161,12 +143,10 @@ var sbMultiBookService = {
 			rgSidebarBoxId = "sidebar-" + rgPosition + "-box";
 		}
 		//Ende Block
-		const Cc = Components.classes;
-		const Ci = Components.interfaces;
-		var winEnum = Cc["@mozilla.org/appshell/window-mediator;1"].getService(Ci.nsIWindowMediator)
+		var winEnum = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator)
 		              .getEnumerator("navigator:browser");
 		while (winEnum.hasMoreElements()) {
-			var win = winEnum.getNext().QueryInterface(Ci.nsIDOMWindow);
+			var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
 			try {
 				win.sbBrowserOverlay.refresh();
 				win.sbBrowserOverlay.onLocationChange(win.gBrowser.currentURI.spec);

@@ -9,10 +9,5 @@
 <!ENTITY sb.capture.alltabs "Összes lap rögzítése">
 <!ENTITY sb.capture.bookmark "Könyvjelző a Dossziéba">
 <!ENTITY sb.sidebar "Megjelenítés az Oldalsávon">
-<!ENTITY sb.menu "Menü">
+<!ENTITY sb.menubar "Menü">
 <!ENTITY sb.editbefore "Szerkesztés rögzítés előtt">
-<!ENTITY sb.key.sidebar "O">
-<!ENTITY sb.key.menubar "M">
-<!ENTITY sb.key.capture "R">
-<!ENTITY sb.key.capture.as "m">
-<!ENTITY sb.key.bookmark "K">

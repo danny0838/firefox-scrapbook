@@ -9,10 +9,5 @@
 <!ENTITY sb.capture.alltabs "Tallenna kaikki välilehdet">
 <!ENTITY sb.capture.bookmark "Tallenna kirjanmerkki">
 <!ENTITY sb.sidebar "Näytä sivupaneelissa">
-<!ENTITY sb.menu "Valikko">
+<!ENTITY sb.menubar "Valikko">
 <!ENTITY sb.editbefore "Muokkaa ennen tallennusta">
-<!ENTITY sb.key.sidebar "C">
-<!ENTITY sb.key.menubar "S">
-<!ENTITY sb.key.capture "L">
-<!ENTITY sb.key.capture.as "K">
-<!ENTITY sb.key.bookmark "J">

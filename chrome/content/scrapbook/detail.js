@@ -12,7 +12,7 @@ var sbCaptureOptions = {
 		if ( !window.arguments || !("sbContentSaver" in window.opener) ) window.close();
 		this.param = window.arguments[0];
 		this.toggleCustomUI();
-		this.CUSTOM_UI.nextSibling.value = sbCommonUtils.copyUnicharPref("scrapbook.detail.custom", "pdf, doc");
+		this.CUSTOM_UI.nextSibling.value = sbCommonUtils.getPref("detail.custom", "pdf, doc");
 		if ( this.param.context == "bookmark" )
 		{
 			document.title = "ScrapBook - " + window.opener.document.getElementById("ScrapBookContextMenuB").label.replace("...","");
@@ -113,7 +113,7 @@ var sbCaptureOptions = {
 		if ( this.CUSTOM_UI.checked )
 		{
 			this.param.option["custom"] = this.CUSTOM_UI.nextSibling.value.replace(/[^0-9a-zA-Z,\|]/g, "").replace(/[,\|]/g, ", ");
-			sbCommonUtils.setUnicharPref("extensions.scrapbook.detail.custom", this.param.option["custom"]);
+			sbCommonUtils.setPref("detail.custom", this.param.option["custom"]);
 		}
 		if ( this.param.context == "capture-again" )
 		{
@@ -188,10 +188,10 @@ var sbFolderSelector = {
 
 	processRecent: function()
 	{
-		var ids = sbCommonUtils.copyUnicharPref("extensions.scrapbook.ui.folderList", "");
+		var ids = sbCommonUtils.getPref("ui.folderList", "");
 		ids = ids ? ids.split("|") : [];
 		var shownItems = 0;
-		var maxEntries = sbCommonUtils.PREF.getIntPref("extensions.scrapbook.ui.folderList.maxEntries");
+		var maxEntries = sbCommonUtils.getPref("ui.folderList.maxEntries", 5);
 		for (var i = 0; i < ids.length && shownItems < maxEntries; i++)
 		{
 			if (ids[i].length != 14)

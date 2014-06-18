@@ -29,13 +29,13 @@ var sbMainService = {
 
 	initPrefs: function()
 	{
-		this.prefs.showDetailOnDrop = sbCommonUtils.getBoolPref("extensions.scrapbook.showDetailOnDrop",  false);
-		this.prefs.confirmDelete    = sbCommonUtils.getBoolPref("extensions.scrapbook.confirmDelete",     true);
-		this.prefs.tabsOpen         = sbCommonUtils.getBoolPref("extensions.scrapbook.tabs.open",         false);
-		this.prefs.tabsOpenSource   = sbCommonUtils.getBoolPref("extensions.scrapbook.tabs.openSource",   false);
-		this.prefs.tabsSearchResult = sbCommonUtils.getBoolPref("extensions.scrapbook.tabs.searchResult", true);
-		this.prefs.tabsCombinedView = sbCommonUtils.getBoolPref("extensions.scrapbook.tabs.combinedView", true);
-		this.prefs.tabsNote         = sbCommonUtils.getBoolPref("extensions.scrapbook.tabs.note",         false);
+		this.prefs.showDetailOnDrop = sbCommonUtils.getPref("showDetailOnDrop",  false);
+		this.prefs.confirmDelete    = sbCommonUtils.getPref("confirmDelete",     true);
+		this.prefs.tabsOpen         = sbCommonUtils.getPref("tabs.open",         false);
+		this.prefs.tabsOpenSource   = sbCommonUtils.getPref("tabs.openSource",   false);
+		this.prefs.tabsSearchResult = sbCommonUtils.getPref("tabs.searchResult", true);
+		this.prefs.tabsCombinedView = sbCommonUtils.getPref("tabs.combinedView", true);
+		this.prefs.tabsNote         = sbCommonUtils.getPref("tabs.note",         false);
 	},
 
 	refresh: function()
@@ -192,7 +192,7 @@ var sbMainService = {
 
 	openPrefWindow : function()
 	{
-		var instantApply = sbCommonUtils.getBoolPref("browser.preferences.instantApply", false);
+		var instantApply = sbCommonUtils.getPref("browser.preferences.instantApply", false, true);
 		window.top.openDialog(
 			"chrome://scrapbook/content/prefs.xul", "ScrapBook:Options",
 			"chrome,titlebar,toolbar,centerscreen," + (instantApply ? "dialog=no" : "modal")
@@ -863,20 +863,17 @@ var sbSearchService = {
 		sbDataSource.clearContainer("urn:scrapbook:search");
 		this.container = sbDataSource.getContainer("urn:scrapbook:search", true);
 		var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource(this.treeRef), 2, true);
-		for (var i = 0; i < resList.length; i++) {
-			var val, res = resList[i];
+		resList.forEach(function(res) {
+			var val;
 			if (this.type != "all")
 				val = sbDataSource.getProperty(res, this.type);
 			else
-				val = [
-					sbDataSource.getProperty(res, "title"),
-					sbDataSource.getProperty(res, "comment"),
-					sbDataSource.getProperty(res, "source"),
-					sbDataSource.getProperty(res, "id")
-				].join("\n");
+				var val = ["title", "comment", "source", "id"].map(function(prop) {
+					return sbDataSource.getProperty(res, prop);
+				}).join("\n");
 			if (val && val.match(this.regex))
 				this.container.AppendElement(res);
-		}
+		}, this);
 		sbListHandler.quit();
 		sbTreeHandler.TREE.ref = "urn:scrapbook:search";
 		sbTreeHandler.TREE.builder.rebuild();
