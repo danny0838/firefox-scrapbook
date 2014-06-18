@@ -9,10 +9,5 @@
 <!ENTITY sb.capture.alltabs "Przechwyć wszystkie karty">
 <!ENTITY sb.capture.bookmark "Dodaj do zakładek używając ScrapBooka">
 <!ENTITY sb.sidebar "Wyświetl w panelu bocznym">
-<!ENTITY sb.menu "Menu">
+<!ENTITY sb.menubar "Menu">
 <!ENTITY sb.editbefore "Edytuj przed przechwyceniem">
-<!ENTITY sb.key.sidebar "K">
-<!ENTITY sb.key.menubar "S">
-<!ENTITY sb.key.capture "L">
-<!ENTITY sb.key.capture.as "K">
-<!ENTITY sb.key.bookmark "J">

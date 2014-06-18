@@ -35,10 +35,11 @@
 	</broadcasterset>
 
 	<keyset id="mainKeyset">
-		<key id="key_openScrapBookSidebar"  key="&sb.key.sidebar;"    modifiers="alt" command="viewScrapBookSidebar" />
-		<key id="key_ScrapBookCapture"      key="&sb.key.capture;"    modifiers="accel alt" oncommand="sbBrowserOverlay.execCapture(0, null, false, 'urn:scrapbook:root');" />
-		<key id="key_ScrapBookCaptureAs"    key="&sb.key.capture.as;" modifiers="accel alt" oncommand="sbBrowserOverlay.execCapture(0, null, true , 'urn:scrapbook:root');" />
-		<key id="key_BookmarkWithScrapBook" key="&sb.key.bookmark;"   modifiers="accel alt" oncommand="sbBrowserOverlay.execBookmark('ScrapBookContextMenu3', 'urn:scrapbook:root', 0, null, true);" />
+		<key id="key_openScrapBookSidebar"  modifiers="alt" command="viewScrapBookSidebar" />
+		<key id="key_ScrapBookCapture"      modifiers="accel shift" oncommand="sbBrowserOverlay.execCapture(0, null, false, 'urn:scrapbook:root');" />
+		<key id="key_ScrapBookCaptureAs"    modifiers="accel shift" oncommand="sbBrowserOverlay.execCapture(0, null, true , 'urn:scrapbook:root');" />
+		<key id="key_ScrapBookSaveAllTabs"  modifiers="accel shift" oncommand="sbMenuHandler.execCaptureAllTabs();" />
+		<key id="key_BookmarkWithScrapBook" modifiers="accel shift" oncommand="sbBrowserOverlay.execBookmark('ScrapBookContextPicking');" />
 	</keyset>
 
 	<menupopup id="viewSidebarMenu">
@@ -48,15 +49,15 @@
 	<menubar id="main-menubar">
 		<menu id="ScrapBookMenu" label="ScrapBook X"
 		      datasources="rdf:null" ref="urn:scrapbook:root" flags="dont-test-empty"
-		      insertafter="bookmarks-menu bookmarksMenu" accesskey="&sb.key.menubar;"
+		      insertafter="bookmarks-menu bookmarksMenu"
 		      oncommand="sbMenuHandler.onClick(event);"
 		      onclick="if (event.button == 1) sbMenuHandler.onClick(event);">
 			<menupopup onpopupshowing="sbMenuHandler.onPopupShowing(event, this);">
 				<menuitem id="ScrapBookMenubarItem1" key="key_ScrapBookCapture" />
 				<menuitem id="ScrapBookMenubarItem2" key="key_ScrapBookCaptureAs" />
 				<menuitem id="ScrapBookMenubarItem3" key="key_BookmarkWithScrapBook" label="&sb.capture.bookmark;..." oncommand="sbBrowserOverlay.execBookmark('ScrapBookContextPicking'); event.stopPropagation();" />
-				<menuitem id="ScrapBookMenubarItem4" label="&sb.capture.alltabs;..." oncommand="sbMenuHandler.execCaptureAllTabs(); event.stopPropagation();" />
-				<menuitem id="ScrapBookMenubarItem5" sblabel="&sb.sidebar;" observes="viewScrapBookSidebar" key="key_openScrapBookSidebar" />
+				<menuitem id="ScrapBookMenubarItem4" key="key_ScrapBookSaveAllTabs" label="&sb.capture.alltabs;..." oncommand="sbMenuHandler.execCaptureAllTabs(); event.stopPropagation();" />
+				<menuitem id="ScrapBookMenubarItem5" key="key_openScrapBookSidebar" sblabel="&sb.sidebar;" observes="viewScrapBookSidebar" />
 				<menuseparator />
 			</menupopup>
 			<template>

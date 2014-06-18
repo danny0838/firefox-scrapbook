@@ -1,4 +1,5 @@
 <!ENTITY sb.prefs.main "一般設定">
+<!ENTITY sb.prefs.keys "按鍵設定">
 <!ENTITY sb.prefs.tabs "分頁設定">
 <!ENTITY sb.prefs.save "儲存設定">
 <!ENTITY sb.prefs.edit "編輯設定">

@@ -9,10 +9,5 @@
 <!ENTITY sb.capture.alltabs "Capturar Todas as Abas">
 <!ENTITY sb.capture.bookmark "Criar Favorito no ScrapBook">
 <!ENTITY sb.sidebar "Mostrar na Barra Lateral">
-<!ENTITY sb.menu "Menu">
+<!ENTITY sb.menubar "Menu">
 <!ENTITY sb.editbefore "Editar Antes de Capturar">
-<!ENTITY sb.key.sidebar "K">
-<!ENTITY sb.key.menubar "S">
-<!ENTITY sb.key.capture "L">
-<!ENTITY sb.key.capture.as "K">
-<!ENTITY sb.key.bookmark "J">

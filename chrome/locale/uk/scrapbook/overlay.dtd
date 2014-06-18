@@ -9,10 +9,5 @@
 <!ENTITY sb.capture.alltabs "Зберегти усі вкладки">
 <!ENTITY sb.capture.bookmark "Додати до закладок у ScrapBook">
 <!ENTITY sb.sidebar "Відобразити у бічній панелі">
-<!ENTITY sb.menu "Меню">
+<!ENTITY sb.menubar "Меню">
 <!ENTITY sb.editbefore "Редагувати перед збереженням">
-<!ENTITY sb.key.sidebar "K">
-<!ENTITY sb.key.menubar "S">
-<!ENTITY sb.key.capture "L">
-<!ENTITY sb.key.capture.as "K">
-<!ENTITY sb.key.bookmark "J">

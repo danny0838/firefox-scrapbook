@@ -9,10 +9,5 @@
 <!ENTITY sb.capture.alltabs "すべてのタブを取り込み">
 <!ENTITY sb.capture.bookmark "ScrapBookにブックマーク">
 <!ENTITY sb.sidebar "サイドバーに表示">
-<!ENTITY sb.menu "メニュー">
+<!ENTITY sb.menubar "メニュー">
 <!ENTITY sb.editbefore "取り込み前編集モード">
-<!ENTITY sb.key.sidebar "K">
-<!ENTITY sb.key.menubar "S">
-<!ENTITY sb.key.capture "L">
-<!ENTITY sb.key.capture.as "K">
-<!ENTITY sb.key.bookmark "J">
