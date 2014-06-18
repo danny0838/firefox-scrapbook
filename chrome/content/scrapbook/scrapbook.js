@@ -863,20 +863,17 @@ var sbSearchService = {
 		sbDataSource.clearContainer("urn:scrapbook:search");
 		this.container = sbDataSource.getContainer("urn:scrapbook:search", true);
 		var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource(this.treeRef), 2, true);
-		for (var i = 0; i < resList.length; i++) {
-			var val, res = resList[i];
+		resList.forEach(function(res) {
+			var val;
 			if (this.type != "all")
 				val = sbDataSource.getProperty(res, this.type);
 			else
-				val = [
-					sbDataSource.getProperty(res, "title"),
-					sbDataSource.getProperty(res, "comment"),
-					sbDataSource.getProperty(res, "source"),
-					sbDataSource.getProperty(res, "id")
-				].join("\n");
+				var val = ["title", "comment", "source", "id"].map(function(prop) {
+					return sbDataSource.getProperty(res, prop);
+				}).join("\n");
 			if (val && val.match(this.regex))
 				this.container.AppendElement(res);
-		}
+		}, this);
 		sbListHandler.quit();
 		sbTreeHandler.TREE.ref = "urn:scrapbook:search";
 		sbTreeHandler.TREE.builder.rebuild();
