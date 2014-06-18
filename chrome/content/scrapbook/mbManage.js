@@ -1,7 +1,3 @@
-
-const Cc = Components.classes;
-const Ci = Components.interfaces;
-
 const kNameCol = 0;
 const kPathCol = 1;
 const kActiveCol = 2;
@@ -17,7 +13,7 @@ var gMultiBookManager = {
 		if (!window.opener)
 			throw Components.results.NS_ERROR_UNEXPECTED;
 		var data = sbMultiBookService.initFile();
-		var currentPath = sbCommonUtils.copyUnicharPref("extensions.scrapbook.data.path", "");
+		var currentPath = sbCommonUtils.getPref("data.path", "");
 		data.forEach(function(item) {
 			item[kActiveCol] = (item[kPathCol] == currentPath);
 		});
@@ -33,8 +29,8 @@ var gMultiBookManager = {
 		if (this._activeItemChanged) {
 			gMultiBookTreeView._data.forEach(function(item) {
 				if (item[kActiveCol]) {
-					sbCommonUtils.setUnicharPref("extensions.scrapbook.data.title", item[kNameCol]);
-					sbCommonUtils.setUnicharPref("extensions.scrapbook.data.path", item[kPathCol]);
+					sbCommonUtils.setPref("data.title", item[kNameCol]);
+					sbCommonUtils.setPref("data.path", item[kPathCol]);
 					window.opener.top.sbBrowserOverlay.dataTitle = item[kNameCol];
 				}
 			});
@@ -113,7 +109,7 @@ var gDragDropObserver = {
 		var sourceIndex = gMultiBookTreeView.selection.currentIndex;
 		aXferData.data = new TransferData();
 		aXferData.data.addDataForFlavour("text/unicode", sourceIndex);
-		aDragAction.action = Ci.nsIDragService.DRAGDROP_ACTION_MOVE;
+		aDragAction.action = Components.interfaces.nsIDragService.DRAGDROP_ACTION_MOVE;
 	},
 
 	onDrop: function (aEvent, aXferData, aDragSession) {},
@@ -181,7 +177,7 @@ MultiBookTreeView.prototype = {
 	getRowProperties: function(index) {},
 	getCellProperties: function(row, col) {
 		if (this._data[row][kActiveCol]) {
-			var atomSvc = Cc["@mozilla.org/atom-service;1"].getService(Ci.nsIAtomService);
+			var atomSvc = Components.classes["@mozilla.org/atom-service;1"].getService(Components.interfaces.nsIAtomService);
 			return atomSvc.getAtom("active");
 		}
 	},
@@ -206,11 +202,11 @@ MultiBookTreeView.prototype = {
 			return false;
 		var sourceIndex = this.selection.currentIndex;
 		if (sourceIndex < targetIndex) {
-			if (orientation == Ci.nsITreeView.DROP_BEFORE)
+			if (orientation == Components.interfaces.nsITreeView.DROP_BEFORE)
 				targetIndex--;
 		}
 		else {
-			if (orientation == Ci.nsITreeView.DROP_AFTER)
+			if (orientation == Components.interfaces.nsITreeView.DROP_AFTER)
 				targetIndex++;
 		}
 		this.moveItem(sourceIndex, targetIndex);

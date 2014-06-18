@@ -15,10 +15,10 @@ var sbDataSource = {
 			this.file.append("scrapbook.rdf");
 			if ( !this.file.exists() )
 			{
-				var iDS = Cc["@mozilla.org/rdf/datasource;1?name=xml-datasource"].createInstance(Ci.nsIRDFDataSource);
+				var iDS = Components.classes["@mozilla.org/rdf/datasource;1?name=xml-datasource"].createInstance(Components.interfaces.nsIRDFDataSource);
 				sbCommonUtils.RDFCU.MakeSeq(iDS, sbCommonUtils.RDF.GetResource("urn:scrapbook:root"));
-				var iFileUrl = Cc["@mozilla.org/network/io-service;1"].getService(Ci.nsIIOService).newFileURI(this.file);
-				iDS.QueryInterface(Ci.nsIRDFRemoteDataSource).FlushTo(iFileUrl.spec);
+				var iFileUrl = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newFileURI(this.file);
+				iDS.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).FlushTo(iFileUrl.spec);
 			}
 			var fileURL = sbCommonUtils.IO.newFileURI(this.file).spec;
 			this.data = sbCommonUtils.RDF.GetDataSourceBlocking(fileURL);
@@ -26,7 +26,7 @@ var sbDataSource = {
 		catch(ex) {
 			if ( !aQuietWarning ) alert("ScrapBook ERROR: Failed to initialize datasource.\n\n" + ex);
 		}
-		this.unshifting = sbCommonUtils.getBoolPref("extensions.scrapbook.tree.unshift", false);
+		this.unshifting = sbCommonUtils.getPref("tree.unshift", false);
 	},
 
 	backup : function()

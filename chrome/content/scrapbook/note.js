@@ -17,11 +17,11 @@ var sbNoteService2 = {
 		sbNoteService.edit(res);
 		sbNoteTemplate.init();
 		this.initFontSize();
-		if ( sbCommonUtils.getBoolPref("extensions.scrapbook.note.linefeed", true) )
+		if ( sbCommonUtils.getPref("note.linefeed", true) )
 		{
 			document.getElementById("sbNoteToolbarL").setAttribute("checked", true);
 		}
-		if ( sbCommonUtils.getBoolPref("extensions.scrapbook.note.preview", false) ) this.initHTMLView();
+		if ( sbCommonUtils.getPref("note.preview", false) ) this.initHTMLView();
 	},
 
 	refreshTab : function()
@@ -40,9 +40,9 @@ var sbNoteService2 = {
 	{
 		window.onunload = null;
 		sbNoteService.save(window);
-		sbCommonUtils.setBoolPref("extensions.scrapbook.note.preview",  this.enabledHTMLView);
-		sbCommonUtils.setBoolPref("extensions.scrapbook.note.linefeed", document.getElementById("sbNoteToolbarL").getAttribute("checked") ? true : false);
-		sbCommonUtils.PREF.setIntPref("extensions.scrapbook.note.fontsize",  this.fontSize);
+		sbCommonUtils.setPref("note.preview",  this.enabledHTMLView);
+		sbCommonUtils.setPref("note.linefeed", document.getElementById("sbNoteToolbarL").getAttribute("checked") ? true : false);
+		sbCommonUtils.setPref("note.fontsize",  this.fontSize);
 		if ( exit )
 		{
 			var browser = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser").getBrowser();
@@ -52,12 +52,7 @@ var sbNoteService2 = {
 
 	initFontSize : function()
 	{
-		try {
-			this.fontSize = sbCommonUtils.PREF.getIntPref("extensions.scrapbook.note.fontsize");
-		}
-		catch (ex) {
-			this.fontSize = 16;
-		}
+		this.fontSize = sbCommonUtils.getPref("note.fontsize", 16);
 		this.changeFontSize(this.fontSize);
 		document.getElementById("sbNoteToolbarF" + this.fontSize).setAttribute("checked", true)
 	},

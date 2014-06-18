@@ -1,15 +1,11 @@
-
-const Cc = Components.classes;
-const Ci = Components.interfaces;
-
 var sbPrefWindow = {
 
 	changed: false,
 
 	init: function() {
 		//Checkbox zum Aktivieren des Status-Bar Icons ausblenden, falls FF>=4
-		var iffVersion = Cc["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
-		var iVerComparator = Cc["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
+		var iffVersion = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
+		var iVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
 		if ( iVerComparator.compare(iffVersion.version, "4.0")>=0 ) document.getElementById("sbPrefStatsBarIcon").hidden = true;
 		//Ende
 		this.updateDataPath();
@@ -51,16 +47,8 @@ var sbPrefWindow = {
 	},
 
 	hlUpdateUI: function() {
-		var prefBranch = Cc["@mozilla.org/preferences-service;1"].getService(Ci.nsIPrefBranch);
 		for (var num = 6; num > 0; num--) {
-			var prefVal = null;
-			var prefName = "extensions.scrapbook.highlighter.style." + num;
-			try {
-				prefVal = prefBranch.getComplexValue(prefName, Ci.nsISupportsString).data;
-			}
-			catch (ex) {
-				prefVal = sbHighlighter.PRESET_STYLES[num];
-			}
+			var prefVal = sbCommonUtils.getPref("highlighter.style." + num, "") || sbHighlighter.PRESET_STYLES[num];
 			sbHighlighter.decorateElement(document.getElementById("hlPrefLabel" + num), prefVal);
 		}
 	},
@@ -96,7 +84,7 @@ var sbPrefWindow = {
 
 	selectFolder: function(aPickerTitle) {
 		var file = document.getElementById("extensions.scrapbook.data.path").value;
-		var fp = Cc["@mozilla.org/filepicker;1"].createInstance(Ci.nsIFilePicker);
+		var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
 		if (file)
 			fp.displayDirectory = file;
 		fp.init(window, aPickerTitle, fp.modeGetFolder);
