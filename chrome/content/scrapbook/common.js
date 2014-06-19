@@ -478,4 +478,48 @@ var sbCommonUtils = {
 	},
 
 
+	/**
+	 * DOM elements handling
+	 */
+
+	/**
+	 * DOM elements considered as ScrapBook additional
+	 *
+	 * linemarker (span)
+	 * inline (span)
+	 * link-url (a)
+	 * link-file (a)
+	 * sticky (div)
+	 * sticky-header
+	 * sticky-footer
+	 * sticky-save
+	 * sticky-delete
+	 * block-comment (?)
+	 * stylesheet
+	 */
+	getSbObjectType : function(aNode)
+	{
+		var type = aNode.getAttribute("data-sb-obj");
+		if (type) return type;
+		// below is for downward compatibility
+		switch (aNode.className) {
+			case "linemarker-marked-line":
+				return "linemarker";
+			case "scrapbook-inline":
+				return "inline";
+			case "scrapbook-sticky":
+			case "scrapbook-sticky scrapbook-sticky-relative":
+				return "sticky";
+			case "scrapbook-sticky-header":
+				return "sticky-header";
+			
+			case "scrapbook-block-comment":
+				return "block-comment";
+		}
+		if (aNode.id == "scrapbook-sticky-css") {
+			return "stylesheet";
+		}
+		return false;
+	},
+
 };

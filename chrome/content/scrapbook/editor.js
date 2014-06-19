@@ -231,7 +231,7 @@ var sbPageEditor = {
 			if ( nodeRange.compareBoundaryPoints(Range.START_TO_END, selRange) > -1 )
 			{
 				if ( nodeRange.compareBoundaryPoints(Range.END_TO_START, selRange) > 0 ) break;
-				else if ( node.nodeType === 1 && this._getSbObjectType(node) )
+				else if ( node.nodeType === 1 && sbCommonUtils.getSbObjectType(node) )
 				{
 					nodeToDel.push(node);
 				}
@@ -255,7 +255,7 @@ var sbPageEditor = {
 			var elems = sbContentSaver.frameList[i].document.getElementsByTagName("*");
 			for ( var j = 0; j < elems.length; j++ )
 			{
-				if ( this._getSbObjectType(elems[j]) )
+				if ( sbCommonUtils.getSbObjectType(elems[j]) )
 				{
 					// elems gets shortened when elems[j] is removed, minus j afterwards to prevent skipping
 					this.removeSbObj(elems[j]);
@@ -282,15 +282,13 @@ var sbPageEditor = {
 
 	removeSbObj : function(aNode)
 	{
-		switch (this._getSbObjectType(aNode)) {
+		switch (sbCommonUtils.getSbObjectType(aNode)) {
 			case "linemarker" :
 			case "inline" :
 			case "link-url" :
 			case "link-file" :
 				this.unwrapNode(aNode);
 				break;
-			case "sticky" :
-			case "stylesheet" :
 			default:
 				aNode.parentNode.removeChild(aNode);
 		}
@@ -508,7 +506,7 @@ var sbPageEditor = {
 		for ( var i = nodes.length - 1; i >= 0 ; i-- )
 		{
 			var node = nodes[i];
-			if (sbPageEditor._getSbObjectType(node) == "sticky" && node.getAttribute("data-sb-active")) {
+			if ( sbCommonUtils.getSbObjectType(node) == "sticky" && node.getAttribute("data-sb-active")) {
 				sbAnnotationService.saveSticky(node);
 			}
 		}
@@ -560,40 +558,6 @@ var sbPageEditor = {
 		try { var x = aObject.__proto__; }
 		catch(ex) { dead = true; }
 		return dead;
-	},
-
-	_getSbObjectType : function(aNode)
-	{
-		/**
-		 * defined types:
-		 *
-		 * linemarker (span)
-		 * inline (span)
-		 * link-url (a)
-		 * link-file (a)
-		 * sticky (div)
-		 * sticky-header
-		 * sticky-footer
-		 * sticky-save
-		 * sticky-delete
-		 * block-comment (?)
-		 * stylesheet
-		 */
-		var type = aNode.getAttribute("data-sb-obj");
-		if (type) return type;
-		// className is for compatibility
-		switch (aNode.className) {
-			case "linemarker-marked-line":
-				return "linemarker";
-			case "scrapbook-inline":
-				return "inline";
-			case "scrapbook-sticky":
-			case "scrapbook-sticky scrapbook-sticky-relative":
-				return "sticky";
-			case "scrapbook-block-comment":
-				return "block-comment";
-		}
-		return false;
 	},
 	
 };
@@ -652,7 +616,7 @@ var sbDOMEraser = {
 		var elem = aEvent.target;
 		var tagName = elem.localName.toUpperCase();
 		if ( aEvent.type != "keypress" && ["SCROLLBAR","HTML","BODY","FRAME","FRAMESET"].indexOf(tagName) >= 0 ) return;
-		var onSbObj = sbPageEditor._getSbObjectType(elem);
+		var onSbObj = sbCommonUtils.getSbObjectType(elem);
 		if ( aEvent.type == "mouseover" || aEvent.type == "mousemove" )
 		{
 			if ( aEvent.type == "mousemove" && ++sbDOMEraser.verbose % 3 != 0 ) return;
@@ -750,17 +714,28 @@ var sbAnnotationService = {
 		if ( sbDOMEraser.enabled ) return;
 		if ( aEvent.type == "mousedown" )
 		{
-			switch ( sbPageEditor._getSbObjectType(aEvent.originalTarget) )
+			switch ( sbCommonUtils.getSbObjectType(aEvent.originalTarget) )
 			{
 				case "sticky" :
-					if ( aEvent.originalTarget.childNodes.length != 2 ) return;
-					sbAnnotationService.editSticky(aEvent.originalTarget);
+					var sticky = aEvent.originalTarget;
+					if (!sticky.hasAttribute("data-sb-active")) {
+						sbAnnotationService.editSticky(sticky);
+					}
+					// for downward compatibility
+					else if ( sticky.childNodes.length == 2 ) {
+						sbAnnotationService.editSticky(sticky);
+					}
 					break;
 				case "sticky-header" :
+					var sticky = aEvent.originalTarget.parentNode;
+					if (sticky.getAttribute("data-sb-active")==="1") {
+						sbAnnotationService.startDrag(aEvent, true);
+					}
+					break;
 				case "sticky-footer" :
 					var sticky = aEvent.originalTarget.parentNode;
 					if (sticky.getAttribute("data-sb-active")==="1") {
-						sbAnnotationService.startDrag(aEvent);
+						sbAnnotationService.startDrag(aEvent, false);
 					}
 					break;
 				case "inline" :
@@ -772,11 +747,17 @@ var sbAnnotationService = {
 					break;
 			}
 		}
-		else if ( aEvent.type == "mousemove" ) sbAnnotationService.onDrag(aEvent);
-		else if ( aEvent.type == "mouseup"   ) sbAnnotationService.stopDrag(aEvent);
+		else if ( aEvent.type == "mousemove" )
+		{
+			if ( sbAnnotationService.target ) sbAnnotationService.onDrag(aEvent);
+		}
+		else if ( aEvent.type == "mouseup"   )
+		{
+			if ( sbAnnotationService.target ) sbAnnotationService.stopDrag(aEvent);
+		}
 		else if ( aEvent.type == "click" )
 		{
-			switch ( sbPageEditor._getSbObjectType(aEvent.originalTarget) )
+			switch ( sbCommonUtils.getSbObjectType(aEvent.originalTarget) )
 			{
 				case "sticky-save" :
 					sbAnnotationService.saveSticky(aEvent.originalTarget.parentNode.parentNode);
@@ -866,10 +847,10 @@ var sbAnnotationService = {
 		sticky.parentNode.removeChild(sticky);
 	},
 
-	startDrag : function(aEvent)
+	startDrag : function(aEvent, isMove)
 	{
 		this.target = aEvent.originalTarget.parentNode;
-		this.isMove = aEvent.originalTarget.className == "scrapbook-sticky-header";
+		this.isMove = isMove;
 		this.offsetX = aEvent.clientX - parseInt(this.target.style[this.isMove ? "left" : "width" ], 10);
 		this.offsetY = aEvent.clientY - parseInt(this.target.style[this.isMove ? "top"  : "height"], 10);
 		aEvent.view.document.addEventListener("mousemove", this.handleEvent, true);
@@ -878,7 +859,6 @@ var sbAnnotationService = {
 
 	onDrag : function(aEvent)
 	{
-		if ( !this.target || this.target.className.indexOf("scrapbook-sticky") < 0 ) return;
 		var x = aEvent.clientX - this.offsetX; if ( x < 0 ) x = 0; this.target.style[this.isMove ? "left" : "width" ] = x + "px";
 		var y = aEvent.clientY - this.offsetY; if ( y < 0 ) y = 0; this.target.style[this.isMove ? "top"  : "height"] = y + "px";
 		if ( !this.isMove && this.target.firstChild.nextSibling instanceof HTMLTextAreaElement ) this.adjustTextArea(this.target);
