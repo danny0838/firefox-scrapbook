@@ -24,12 +24,12 @@ var sbPageEditor = {
 
 	init : function(aID)
 	{
-		//Vorschau für Hervorhebungsstufe aktualisieren
-			//fuer Auswahlliste
+		// Update highlighter previewers
+			// for selection list
 		var idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 6;
 		var cssText = sbCommonUtils.getPref("highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);
 		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighterPreview"), cssText);
-			//fuer Knoepfe
+			// for buttons
 		var cssText = "";
 		cssText = sbCommonUtils.getPref("highlighter.style.1", sbHighlighter.PRESET_STYLES[1]);
 		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter1"), cssText);
@@ -66,7 +66,7 @@ var sbPageEditor = {
 			document.getElementById("ScrapBookHighlighter5").hidden = true;
 			document.getElementById("ScrapBookHighlighter6").hidden = true;
 		}
-		//Ende
+		// End
 		if ( aID )
 		{
 			if ( aID != sbBrowserOverlay.getID() ) return;
@@ -100,33 +100,12 @@ var sbPageEditor = {
 		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
 		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
 		{
-			try
-			{
-				sbContentSaver.frameList[i].document.removeEventListener("mousedown", sbAnnotationService.handleEvent, true);
-			} catch(ex) {}
+			try { sbContentSaver.frameList[i].document.removeEventListener("mousedown", sbAnnotationService.handleEvent, true); } catch(ex) {}
+			try { sbContentSaver.frameList[i].document.removeEventListener("click", sbAnnotationService.handleEvent, true); } catch(ex) {}
+			try { sbContentSaver.frameList[i].document.removeEventListener("keypress", this.handleEvent, true); } catch(ex) {}
 			sbContentSaver.frameList[i].document.addEventListener("mousedown",    sbAnnotationService.handleEvent, true);
-			sbContentSaver.frameList[i].document.removeEventListener("click", sbAnnotationService.handleEvent, true);
 			sbContentSaver.frameList[i].document.addEventListener("click",    sbAnnotationService.handleEvent, true);
-			sbContentSaver.frameList[i].document.removeEventListener("keypress", this.handleEvent, true);
 			sbContentSaver.frameList[i].document.addEventListener("keypress",    this.handleEvent, true);
-/*
-			try
-			{
-				sbContentSaver.frameList[i].document.removeEventListener("mousedown", sbAnnotationService.handleEvent, true);
-			} catch (ex) {}
-			try
-			{
-				sbContentSaver.frameList[i].document.addEventListener("mousedown",    sbAnnotationService.handleEvent, true);
-			} catch (ex) {}
-			try
-			{
-				sbContentSaver.frameList[i].document.removeEventListener("keypress", this.handleEvent, true);
-			} catch (ex) {}
-			try
-			{
-				sbContentSaver.frameList[i].document.addEventListener("keypress",    this.handleEvent, true);
-			} catch (ex) {}
-*/
 			if ( aID && document.getElementById("ScrapBookStatusPopupD").getAttribute("checked") ) sbInfoViewer.indicateLinks(sbContentSaver.frameList[i]);
 		}
 		if ( aID )
@@ -265,7 +244,6 @@ var sbPageEditor = {
 			}
 		}
 		for ( var i = 0, len = nodeToDel.length; i < len; ++i ) this.removeSbObj(nodeToDel[i]);
-		this.changed1 = true;
 	},
 
 	removeSbObjects : function()
@@ -285,14 +263,12 @@ var sbPageEditor = {
 				}
 			}
 		}
-		this.changed1 = true;
 	},
 
 	removeElementsByTagName : function(aTagName)
 	{
 		this.allowUndo();
 		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
-		var shouldSave = false;
 		for ( var i = sbContentSaver.frameList.length - 1; i >= 0; i-- )
 		{
 			var elems = sbContentSaver.frameList[i].document.getElementsByTagName(aTagName);
@@ -301,11 +277,6 @@ var sbPageEditor = {
 			{
 				sbContentSaver.removeNodeFromParent(elems[j]);
 			}
-			shouldSave = true;
-		}
-		if ( shouldSave )
-		{
-			this.changed1 = true;
 		}
 	},
 
