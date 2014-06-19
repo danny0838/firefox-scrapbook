@@ -380,6 +380,7 @@ var sbPageCombiner = {
 				'<head>' + '\n' +
 				'<meta charset="UTF-8">' + '\n' +
 				'<title>' + sbDataSource.getProperty(sbCombineService.curRes, "title") + '</title>' + '\n' +
+				'<link rel="stylesheet" href="combine.css" media="all">' +
 				'<link rel="stylesheet" href="chrome://scrapbook/skin/combine.css" media="all">' + '\n' +
 				'<link rel="stylesheet" href="chrome://scrapbook/skin/annotation.css" media="all">' + '\n' +
 				'</head>' + '\n' +
