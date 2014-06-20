@@ -211,7 +211,7 @@ var sbCommonUtils = {
 			aRelURL = aRelURL.replace(/\"/g, "");
 			return baseURLObj.resolve(aRelURL);
 		} catch(ex) {
-			dump("*** ScrapBook ERROR: Failed to resolve URL: " + aBaseURL + "\t" + aRelURL + "\n");
+			console.error("*** ScrapBook ERROR: Failed to resolve URL: " + aBaseURL + "\t" + aRelURL + "\n");
 		}
 	},
 

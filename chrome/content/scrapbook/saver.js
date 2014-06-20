@@ -756,7 +756,7 @@ var sbContentSaver = {
 				return newFileName;
 			}
 			catch(ex) {
-				dump("*** SCRAPBOOK_PERSIST_FAILURE: " + aURLSpec + "\n" + ex + "\n");
+				console.error("*** SCRAPBOOK_PERSIST_FAILURE: " + aURLSpec + "\n" + ex + "\n");
 				this.httpTask[this.item.id]--;
 				return "";
 			}
@@ -771,7 +771,7 @@ var sbContentSaver = {
 				return newFileName;
 			}
 			catch(ex) {
-				dump("*** SCRAPBOOK_COPY_FAILURE: " + aURLSpec + "\n" + ex + "\n");
+				console.error("*** SCRAPBOOK_COPY_FAILURE: " + aURLSpec + "\n" + ex + "\n");
 				return "";
 			}
 		}
