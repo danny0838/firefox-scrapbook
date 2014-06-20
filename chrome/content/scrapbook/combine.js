@@ -449,14 +449,26 @@ var sbPageCombiner = {
 			this.BROWSER.stop();
 			window.location.reload();
 		}
-		var divElem = this.BROWSER.contentDocument.createElement("DIV");
+		var divWrap = this.BROWSER.contentDocument.createElement("DIV");
+		divWrap.id = "item" + sbCombineService.curID;
+		var divHTML = this.BROWSER.contentDocument.createElement("DIV");
+		var attrs = this.BROWSER.contentDocument.getElementsByTagName("html")[0].attributes;
+		for (var i = 0; i < attrs.length; i++) {
+			divHTML.setAttribute(attrs[i].name, attrs[i].value);
+		}
+		divHTML.id = "item" + sbCombineService.curID + "html";
+		var divBody = this.BROWSER.contentDocument.createElement("DIV");
 		var attrs = this.BODY.attributes;
 		for (var i = 0; i < attrs.length; i++) {
-			divElem.setAttribute(attrs[i].name, attrs[i].value);
+			divBody.setAttribute(attrs[i].name, attrs[i].value);
 		}
-		divElem.id  = "item" + sbCombineService.curID;
-		divElem.innerHTML = this.BODY.innerHTML + "\n";
-		return sbCommonUtils.getOuterHTML(divElem);
+		divBody.id = "item" + sbCombineService.curID + "body";
+		divBody.innerHTML = this.BODY.innerHTML;
+		divHTML.appendChild(divBody);
+		divWrap.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
+		divWrap.appendChild(divHTML);
+		divWrap.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
+		return sbCommonUtils.getOuterHTML(divWrap);
 	},
 
 	surroundCSS : function()
@@ -486,7 +498,11 @@ var sbPageCombiner = {
 				var selectors = cssRule.selectorText.match(/(\\.|[^,])+/gi);
 				for ( var j = 0; j < selectors.length; j++ ) {
 					// remove leading "html" and "body", add this div as head
-					selectors[j] = "div#item" + sbCombineService.curID + " " + selectors[j].replace(/^(\s+|\bhtml\b|\bbody\b)+/gi, "");
+					var selector = selectors[j].replace(/(^|\s+)(?:(html)|(body))(?=[^0-9A-Za-z\-\_\u00A0-\uFFFF\\]|$)/gi, function(whole, prefix, html, body){
+						var ret = html ? "#item" + sbCombineService.curID + "html" : "#item" + sbCombineService.curID + "body";
+						return prefix + ret;
+					});
+					selectors[j] = "#item" + sbCombineService.curID + " " + selector;
 				}
 				cssText = selectors.join(", ") + "{" + cssRule.style.cssText + "}";
 			}
