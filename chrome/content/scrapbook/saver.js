@@ -534,22 +534,27 @@ var sbContentSaver = {
 				// determine whether to download (copy) the link target file
 				var ext = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aNode.href))[1].toLowerCase();
 				var flag = false;
-				switch ( ext )
-				{
-					case "jpg" : case "jpeg" : case "png" : case "gif" : case "tiff" : flag = this.option["dlimg"]; break;
-					case "mp3" : case "wav"  : case "ram" : case "rm"  : case "wma"  : flag = this.option["dlsnd"]; break;
-					case "mpg" : case "mpeg" : case "avi" : case "mov" : case "wmv"  : flag = this.option["dlmov"]; break;
-					case "zip" : case "lzh"  : case "rar" : case "jar" : case "xpi"  : flag = this.option["dlarc"]; break;
-					default : 
-						// copy files with custom defined extensions
-						if ( ext && this.option["custom"] &&
-							( (", " + this.option["custom"] + ", ").indexOf(", " + ext + ", ") != -1 ) ) {
-							flag = true;
-						}
-						// do not copy, but add to the link list if it's a work of deep capture
-						else {
+				// copy files with custom defined extensions
+				if ( ext && this.option["custom"] &&
+					( (", " + this.option["custom"] + ", ").indexOf(", " + ext + ", ") != -1 ) ) {
+					flag = true;
+				}
+				// download all non-HTML target of local file
+				// primarily to enable the combine wizard to capture all "file" data
+				else if ( aNode.href.indexOf("file://") == 0 && !ext.match(/html?/) ) {
+					flag = true;
+				}
+				else {
+					switch ( ext )
+					{
+						case "jpg" : case "jpeg" : case "png" : case "gif" : case "tiff" : flag = this.option["dlimg"]; break;
+						case "mp3" : case "wav"  : case "ram" : case "rm"  : case "wma"  : flag = this.option["dlsnd"]; break;
+						case "mpg" : case "mpeg" : case "avi" : case "mov" : case "wmv"  : flag = this.option["dlmov"]; break;
+						case "zip" : case "lzh"  : case "rar" : case "jar" : case "xpi"  : flag = this.option["dlarc"]; break;
+						default : 
+							// do not copy, but add to the link list if it's a work of deep capture
 							if ( this.option["inDepth"] > 0 ) this.linkURLs.push(aNode.href);
-						}
+					}
 				}
 				// do the copy or URL rewrite
 				if ( flag ) {
@@ -696,30 +701,34 @@ var sbContentSaver = {
 		return content;
 	},
 
-	inspectCSSText : function(aCSStext, aCSShref, isImage)
+	inspectCSSText : function(aCSSText, aCSSHref, isImage)
 	{
-		if (!aCSShref) aCSShref = this.refURLObj.spec;
+		if (!aCSSHref) aCSSHref = this.refURLObj.spec;
 		// CSS get by .cssText is always url("something-with-\"double-quote\"-escaped")
 		// and no CSS comment is in
 		// so we can parse it safely with this RegExp
-		aCSStext = aCSStext.replace(/ url\(\"((?:\\.|[^"])+)\"\)/g, function() {
+		aCSSText = aCSSText.replace(/ url\(\"((?:\\.|[^"])+)\"\)/g, function() {
 			var dataURL = arguments[1];
 			if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
-			dataURL = sbCommonUtils.resolveURL(aCSShref, dataURL);
-			if (isImage) {
-				var dataFile = sbContentSaver.option["images"] ? sbContentSaver.download(dataURL) : dataURL;
-			}
-			else {
+			dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);
+			if (sbContentSaver.option["images"] || !isImage) {
 				var dataFile = sbContentSaver.download(dataURL);
+				if (dataFile) dataURL = dataFile;
 			}
-			return ' url("' + dataFile + '")';
+			return ' url("' + dataURL + '")';
 		});
-		return aCSStext;
+		return aCSSText;
 	},
 
 	download : function(aURLSpec)
 	{
 		if ( !aURLSpec ) return;
+		// never download chrome:// resources
+		if ( aURLSpec.indexOf("chrome://") == 0 )
+		{
+			return "";
+		}
+		// resolve relative url
 		if ( aURLSpec.indexOf("://") < 0 )
 		{
 			aURLSpec = sbCommonUtils.resolveURL(this.refURLObj.spec, aURLSpec);
@@ -729,7 +738,7 @@ var sbContentSaver = {
 			aURL.spec = aURLSpec;
 		} catch(ex) {
 			alert("ScrapBook ERROR: Failed to download: " + aURLSpec);
-			return;
+			return "";
 		}
 
 		var arr = this.getUniqueFileName(aURL.fileName.toLowerCase(), aURLSpec);
@@ -756,7 +765,7 @@ var sbContentSaver = {
 				return newFileName;
 			}
 			catch(ex) {
-				dump("*** SCRAPBOOK_PERSIST_FAILURE: " + aURLSpec + "\n" + ex + "\n");
+				console.error("*** SCRAPBOOK_PERSIST_FAILURE: " + aURLSpec + "\n" + ex + "\n");
 				this.httpTask[this.item.id]--;
 				return "";
 			}
@@ -771,7 +780,7 @@ var sbContentSaver = {
 				return newFileName;
 			}
 			catch(ex) {
-				dump("*** SCRAPBOOK_COPY_FAILURE: " + aURLSpec + "\n" + ex + "\n");
+				console.error("*** SCRAPBOOK_COPY_FAILURE: " + aURLSpec + "\n" + ex + "\n");
 				return "";
 			}
 		}

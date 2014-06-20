@@ -380,6 +380,7 @@ var sbPageCombiner = {
 				'<head>' + '\n' +
 				'<meta charset="UTF-8">' + '\n' +
 				'<title>' + sbDataSource.getProperty(sbCombineService.curRes, "title") + '</title>' + '\n' +
+				'<link rel="stylesheet" href="combine.css" media="all">' +
 				'<link rel="stylesheet" href="chrome://scrapbook/skin/combine.css" media="all">' + '\n' +
 				'<link rel="stylesheet" href="chrome://scrapbook/skin/annotation.css" media="all">' + '\n' +
 				'</head>' + '\n' +
@@ -391,10 +392,15 @@ var sbPageCombiner = {
 		}
 		else
 		{
-			this.processDOMRecursively(this.BODY);
-			if ( !this.isTargetCombined ) this.htmlSrc += this.getCiteHTML(aType);
 			this.cssText += this.surroundCSS();
-			this.htmlSrc += this.surroundDOM();
+			this.processDOMRecursively(this.BODY);
+			if ( this.isTargetCombined ) {
+				this.htmlSrc += this.BODY.innerHTML;
+			}
+			else {
+				this.htmlSrc += this.getCiteHTML(aType);
+				this.htmlSrc += this.surroundDOM();
+			}
 		}
 		if ( sbCombineService.index == sbCombineService.idList.length - 1 )
 		{
@@ -448,18 +454,9 @@ var sbPageCombiner = {
 		for (var i = 0; i < attrs.length; i++) {
 			divElem.setAttribute(attrs[i].name, attrs[i].value);
 		}
-		this.BODY.appendChild(divElem);
-		var childNodes = this.BODY.childNodes;
-		for ( var i = childNodes.length - 2; i >= 0; i-- )
-		{
-			var nodeName  = childNodes[i].nodeName.toUpperCase();
-			if ( nodeName == "CITE" && childNodes[i].className == "scrapbook-header" ) continue;
-			else if ( nodeName == "DIV"  && childNodes[i].id.match(/^item\d{14}$/) ) continue;
-			divElem.insertBefore(childNodes[i], divElem.firstChild);
-		}
 		divElem.id  = "item" + sbCombineService.curID;
-		divElem.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
-		return this.BODY.innerHTML;
+		divElem.innerHTML = this.BODY.innerHTML + "\n";
+		return divElem.outerHTML;
 	},
 
 	surroundCSS : function()
@@ -499,19 +496,21 @@ var sbPageCombiner = {
 			else {
 				cssText = cssRule.cssText;
 			}
-			ret += this.inspectCSSText(cssText) + "\n";
+			ret += this.inspectCSSText(cssText, aCSS.href) + "\n";
 		}
 		return ret;
 	},
 
-	inspectCSSText : function(aCSSText)
+	inspectCSSText : function(aCSSText, aCSSHref)
 	{
+		if (!aCSSHref) aCSSHref = this.BROWSER.currentURI.spec;
 		// CSS get by cssText is always url("double-quoted-with-\"quote\"-escaped")
 		aCSSText = aCSSText.replace(/ url\(\"((?:\\.|[^"])+)\"\)/g, function() {
 			var dataURL = arguments[1];
 			if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
+			dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);
 			// redirect the files to the original folder so we can capture them later on (and will rewrite the CSS)
-			return ' url("./data/' + sbCombineService.curID + '/' + dataURL + '")';
+			return ' url("' + dataURL + '")';
 		});
 		return aCSSText;
 	},
