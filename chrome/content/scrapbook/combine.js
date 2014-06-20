@@ -392,13 +392,12 @@ var sbPageCombiner = {
 		}
 		else
 		{
+			this.cssText += this.surroundCSS();
 			this.processDOMRecursively(this.BODY);
 			if ( this.isTargetCombined ) {
-				this.cssText += this.surroundCSS();
 				this.htmlSrc += this.BODY.innerHTML;
 			}
 			else {
-				this.cssText += this.surroundCSS();
 				this.htmlSrc += this.getCiteHTML(aType);
 				this.htmlSrc += this.surroundDOM();
 			}
