@@ -534,22 +534,27 @@ var sbContentSaver = {
 				// determine whether to download (copy) the link target file
 				var ext = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aNode.href))[1].toLowerCase();
 				var flag = false;
-				switch ( ext )
-				{
-					case "jpg" : case "jpeg" : case "png" : case "gif" : case "tiff" : flag = this.option["dlimg"]; break;
-					case "mp3" : case "wav"  : case "ram" : case "rm"  : case "wma"  : flag = this.option["dlsnd"]; break;
-					case "mpg" : case "mpeg" : case "avi" : case "mov" : case "wmv"  : flag = this.option["dlmov"]; break;
-					case "zip" : case "lzh"  : case "rar" : case "jar" : case "xpi"  : flag = this.option["dlarc"]; break;
-					default : 
-						// copy files with custom defined extensions
-						if ( ext && this.option["custom"] &&
-							( (", " + this.option["custom"] + ", ").indexOf(", " + ext + ", ") != -1 ) ) {
-							flag = true;
-						}
-						// do not copy, but add to the link list if it's a work of deep capture
-						else {
+				// copy files with custom defined extensions
+				if ( ext && this.option["custom"] &&
+					( (", " + this.option["custom"] + ", ").indexOf(", " + ext + ", ") != -1 ) ) {
+					flag = true;
+				}
+				// download all non-HTML target of local file
+				// primarily to enable the combine wizard to capture all "file" data
+				else if ( aNode.href.indexOf("file://") == 0 && !ext.match(/html?/) ) {
+					flag = true;
+				}
+				else {
+					switch ( ext )
+					{
+						case "jpg" : case "jpeg" : case "png" : case "gif" : case "tiff" : flag = this.option["dlimg"]; break;
+						case "mp3" : case "wav"  : case "ram" : case "rm"  : case "wma"  : flag = this.option["dlsnd"]; break;
+						case "mpg" : case "mpeg" : case "avi" : case "mov" : case "wmv"  : flag = this.option["dlmov"]; break;
+						case "zip" : case "lzh"  : case "rar" : case "jar" : case "xpi"  : flag = this.option["dlarc"]; break;
+						default : 
+							// do not copy, but add to the link list if it's a work of deep capture
 							if ( this.option["inDepth"] > 0 ) this.linkURLs.push(aNode.href);
-						}
+					}
 				}
 				// do the copy or URL rewrite
 				if ( flag ) {
