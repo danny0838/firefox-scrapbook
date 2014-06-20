@@ -398,8 +398,8 @@ var sbPageCombiner = {
 				this.htmlSrc += this.BODY.innerHTML;
 			}
 			else {
-				this.htmlSrc += this.getCiteHTML(aType);
 				this.cssText += this.surroundCSS();
+				this.htmlSrc += this.getCiteHTML(aType);
 				this.htmlSrc += this.surroundDOM();
 			}
 		}
@@ -455,18 +455,9 @@ var sbPageCombiner = {
 		for (var i = 0; i < attrs.length; i++) {
 			divElem.setAttribute(attrs[i].name, attrs[i].value);
 		}
-		this.BODY.appendChild(divElem);
-		var childNodes = this.BODY.childNodes;
-		for ( var i = childNodes.length - 2; i >= 0; i-- )
-		{
-			var nodeName  = childNodes[i].nodeName.toUpperCase();
-			if ( nodeName == "CITE" && childNodes[i].className == "scrapbook-header" ) continue;
-			else if ( nodeName == "DIV"  && childNodes[i].id.match(/^item\d{14}$/) ) continue;
-			divElem.insertBefore(childNodes[i], divElem.firstChild);
-		}
 		divElem.id  = "item" + sbCombineService.curID;
-		divElem.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
-		return this.BODY.innerHTML;
+		divElem.innerHTML = this.BODY.innerHTML + "\n";
+		return divElem.outerHTML;
 	},
 
 	surroundCSS : function()
