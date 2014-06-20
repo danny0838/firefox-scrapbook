@@ -696,30 +696,34 @@ var sbContentSaver = {
 		return content;
 	},
 
-	inspectCSSText : function(aCSStext, aCSShref, isImage)
+	inspectCSSText : function(aCSSText, aCSSHref, isImage)
 	{
-		if (!aCSShref) aCSShref = this.refURLObj.spec;
+		if (!aCSSHref) aCSSHref = this.refURLObj.spec;
 		// CSS get by .cssText is always url("something-with-\"double-quote\"-escaped")
 		// and no CSS comment is in
 		// so we can parse it safely with this RegExp
-		aCSStext = aCSStext.replace(/ url\(\"((?:\\.|[^"])+)\"\)/g, function() {
+		aCSSText = aCSSText.replace(/ url\(\"((?:\\.|[^"])+)\"\)/g, function() {
 			var dataURL = arguments[1];
 			if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
-			dataURL = sbCommonUtils.resolveURL(aCSShref, dataURL);
-			if (isImage) {
-				var dataFile = sbContentSaver.option["images"] ? sbContentSaver.download(dataURL) : dataURL;
-			}
-			else {
+			dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);
+			if (sbContentSaver.option["images"] || !isImage) {
 				var dataFile = sbContentSaver.download(dataURL);
+				if (dataFile) dataURL = dataFile;
 			}
-			return ' url("' + dataFile + '")';
+			return ' url("' + dataURL + '")';
 		});
-		return aCSStext;
+		return aCSSText;
 	},
 
 	download : function(aURLSpec)
 	{
 		if ( !aURLSpec ) return;
+		// never download chrome:// resources
+		if ( aURLSpec.indexOf("chrome://") == 0 )
+		{
+			return "";
+		}
+		// resolve relative url
 		if ( aURLSpec.indexOf("://") < 0 )
 		{
 			aURLSpec = sbCommonUtils.resolveURL(this.refURLObj.spec, aURLSpec);
@@ -729,7 +733,7 @@ var sbContentSaver = {
 			aURL.spec = aURLSpec;
 		} catch(ex) {
 			alert("ScrapBook ERROR: Failed to download: " + aURLSpec);
-			return;
+			return "";
 		}
 
 		var arr = this.getUniqueFileName(aURL.fileName.toLowerCase(), aURLSpec);
