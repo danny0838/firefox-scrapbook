@@ -1,3 +1,16 @@
+Scrapbook X 1.10.5
+----------------
+
+- FIXED: resource files using chrome:// link can be lost after capture.
+- FIXED: urls targeting undownloadable file are messed up in the CSS.
+- FIXED: styles are missing after page combination.
+- FIXED: styles and links in the page body are totally ignored during page combination.
+- FIXED: elements in a combine page is messed up after combining again.
+- FIXED: absolute urls in the CSS are misprocessed during page combination.
+- FIXED: "file" data are merely linked instead of copied after combination.
+- FIXED: missing templateHelp.html of zh-TW locale.
+
+
 Scrapbook X 1.10.4
 ----------------
 
