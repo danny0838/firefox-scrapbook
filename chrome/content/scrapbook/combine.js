@@ -497,19 +497,21 @@ var sbPageCombiner = {
 			else {
 				cssText = cssRule.cssText;
 			}
-			ret += this.inspectCSSText(cssText) + "\n";
+			ret += this.inspectCSSText(cssText, aCSS.href) + "\n";
 		}
 		return ret;
 	},
 
-	inspectCSSText : function(aCSSText)
+	inspectCSSText : function(aCSSText, aCSSHref)
 	{
+		if (!aCSSHref) aCSSHref = this.BROWSER.currentURI.spec;
 		// CSS get by cssText is always url("double-quoted-with-\"quote\"-escaped")
 		aCSSText = aCSSText.replace(/ url\(\"((?:\\.|[^"])+)\"\)/g, function() {
 			var dataURL = arguments[1];
 			if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
+			dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);
 			// redirect the files to the original folder so we can capture them later on (and will rewrite the CSS)
-			return ' url("./data/' + sbCombineService.curID + '/' + dataURL + '")';
+			return ' url("' + dataURL + '")';
 		});
 		return aCSSText;
 	},
