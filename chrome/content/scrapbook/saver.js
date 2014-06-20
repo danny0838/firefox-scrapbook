@@ -720,6 +720,12 @@ var sbContentSaver = {
 	download : function(aURLSpec)
 	{
 		if ( !aURLSpec ) return;
+		// never download chrome:// resources
+		if ( aURLSpec.indexOf("chrome://") == 0 )
+		{
+			return "";
+		}
+		// resolve relative url
 		if ( aURLSpec.indexOf("://") < 0 )
 		{
 			aURLSpec = sbCommonUtils.resolveURL(this.refURLObj.spec, aURLSpec);
@@ -729,7 +735,7 @@ var sbContentSaver = {
 			aURL.spec = aURLSpec;
 		} catch(ex) {
 			alert("ScrapBook ERROR: Failed to download: " + aURLSpec);
-			return;
+			return "";
 		}
 
 		var arr = this.getUniqueFileName(aURL.fileName.toLowerCase(), aURLSpec);
