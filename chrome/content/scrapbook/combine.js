@@ -393,9 +393,15 @@ var sbPageCombiner = {
 		else
 		{
 			this.processDOMRecursively(this.BODY);
-			if ( !this.isTargetCombined ) this.htmlSrc += this.getCiteHTML(aType);
-			this.cssText += this.surroundCSS();
-			this.htmlSrc += this.surroundDOM();
+			if ( this.isTargetCombined ) {
+				this.cssText += this.surroundCSS();
+				this.htmlSrc += this.BODY.innerHTML;
+			}
+			else {
+				this.htmlSrc += this.getCiteHTML(aType);
+				this.cssText += this.surroundCSS();
+				this.htmlSrc += this.surroundDOM();
+			}
 		}
 		if ( sbCombineService.index == sbCombineService.idList.length - 1 )
 		{
