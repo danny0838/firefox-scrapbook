@@ -186,26 +186,15 @@ var sbPropService = {
 	{
 		var totalSize = 0;
 		var totalFile = 0;
-		var dir = [sbCommonUtils.getContentDir(aID, true)];
-		for (var i=0; i<dir.length; i++) {
-			var fileEnum = dir[i].directoryEntries;
-			while ( fileEnum.hasMoreElements() )
-			{
-				try {
-					var file = fileEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
-					if (file.isDirectory()) {
-						dir.push(file);
-					}
-					else {
-						totalSize += file.fileSize;
-						totalFile++;
-					}
-				}
-				catch (ex) {
-					alert("ERROR: cannot read file size (possibility due to improper file name): " + file.path);
-				}
+		sbCommonUtils.forEachFile(sbCommonUtils.getContentDir(aID, true), function(){
+			try {
+				totalSize += this.fileSize;
+				totalFile++;
 			}
-		}
+			catch (ex) {
+				alert("ERROR: cannot read file size (possibility due to improper file name): " + this.path);
+			}
+		});
 		return [totalSize, totalFile];
 	},
 
