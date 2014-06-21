@@ -221,6 +221,17 @@ var sbCommonUtils = {
 	},
 
 
+	forFile : function(aFolder, aCallback, aArgs)
+	{
+		var files = aFolder.directoryEntries;
+		while (files.hasMoreElements()) {
+			var file = files.getNext().QueryInterface(Components.interfaces.nsIFile);
+			if (!file.isDirectory()) {
+				aCallback.apply(file, aArgs);
+			}
+		}
+	},
+
 	forEachFile : function(aFolder, aCallback, aArgs)
 	{
 		var files = aFolder.directoryEntries;

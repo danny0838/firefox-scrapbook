@@ -341,11 +341,12 @@ var sbCacheService = {
 		gCacheStatus.firstChild.value = gCacheString.getString("BUILD_CACHE_UPDATE") + " " + sbDataSource.getProperty(res, "title");
 		gCacheStatus.lastChild.value  = Math.round((this.index + 1) / this.resList.length * 100);
 		sbCommonUtils.forEachFile(dir, function(){
-			var subpath = this.path.substring(basePathCut);
-			var name = this.leafName;
-			if (sbCommonUtils.splitFileName(name)[1].match(/^html?$/i)) {
-				sbCacheService.inspectFile(this, subpath);
-			}
+			// only process files with html extension
+			if ( !sbCommonUtils.splitFileName(this.leafName)[1].match(/^x?html?$/i) ) return;
+			// do not process frame files
+			if ( sbCacheService.isFrameFile(this) ) return;
+			// cache this file
+			sbCacheService.inspectFile(this, this.path.substring(basePathCut).replace(/\\/g, "/"));
 		});
 		if ( this._curResURI != this.folders[this.index] ) document.title = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(this.folders[this.index]), "title") || gCacheString.getString("BUILD_CACHE");
 		if ( ++this.index < this.resList.length )
@@ -354,9 +355,11 @@ var sbCacheService = {
 			setTimeout(function(){ sbCacheService.finalize(); }, 0);
 	},
 
-	inspectFile : function(aFile, aName)
+	inspectFile : function(aFile, aSubPath)
 	{
-		var resource = sbCommonUtils.RDF.GetResource(this.resList[this.index].Value + "#" + aName);
+		var resource = sbCommonUtils.RDF.GetResource(this.resList[this.index].Value + "#" + aSubPath);
+		// if cache is newer, skip the cache
+		// (only check update of the main page)
 		if ( sbCacheSource.exists(resource) ) {
 			if ( gCacheFile.lastModifiedTime > aFile.lastModifiedTime )
 			{
@@ -365,19 +368,88 @@ var sbCacheService = {
 				return;
 			}
 		}
-		var content = sbCommonUtils.readFile(aFile);
-		content = sbCommonUtils.convertToUnicode(content, sbDataSource.getProperty(this.resList[this.index], "chars"));
-		content = this.convertHTML2Text(content);
-		content = content.replace(/[\x00-\x1F\x7F]/g, " ").replace(/\s+/g, " ");
-
+		// cache text in the file and its frames
+		var contents = [];
+		addContent(aFile);
+		sbCacheService.checkFrameFiles(aFile, addContent);
+		contents = contents.join("\t").replace(/[\x00-\x1F\x7F]/g, " ").replace(/\s+/g, " ");
+		// update cache data
 		if ( sbCacheSource.exists(resource) ) {
 			sbCacheSource.updateEntry(resource, "folder",  this.folders[this.index]);
-			sbCacheSource.updateEntry(resource, "content", content);
+			sbCacheSource.updateEntry(resource, "content", contents);
 		}
 		else {
-			sbCacheSource.addEntry(resource, content);
+			sbCacheSource.addEntry(resource, contents);
 		}
 		this.uriHash[resource.Value] = true;
+
+		function addContent(aFile) {
+			var encoding = sbDataSource.getProperty(sbCacheService.resList[sbCacheService.index], "chars");
+			var content = sbCommonUtils.readFile(aFile);
+			content = sbCommonUtils.convertToUnicode(content, encoding);
+			contents.push(sbCacheService.convertHTML2Text(content));
+		}
+	},
+
+	checkFrameFiles : function(aFile, aCallback)
+	{
+		var dir = aFile.parent;
+		if (!dir) return;
+		var fileLR = sbCommonUtils.splitFileName(aFile.leafName);
+		// index.html => index_#.html  (ScrapBook style)
+		var i = 1;
+		while (true) {
+			var file1 = dir.clone();
+			file1.append(fileLR[0] + "_" + i + "." + fileLR[1]);
+			if (!file1.exists()) break;
+			aCallback(file1);
+			i++;
+		} 
+		// index.html => index.files/*  (IE archive style)
+		var dir1 = dir.clone();
+		dir1.append(fileLR[0] + ".files");
+		if (dir1.exists()) {
+			sbCommonUtils.forFile(dir1, function(){
+				if ( sbCommonUtils.splitFileName(this.leafName)[1].match(/^x?html?$/i) ) {
+					aCallback(this);
+				}
+			});
+		}
+		// index.html => index_files/*  (Firefox archive style)
+		var dir1 = dir.clone();
+		dir1.append(fileLR[0] + "_files");
+		if (dir1.exists()) {
+			sbCommonUtils.forFile(dir1, function(){
+				if ( sbCommonUtils.splitFileName(this.leafName)[1].match(/^x?html?$/i) ) {
+					aCallback(this);
+				}
+			});
+		}
+	},
+	
+	isFrameFile : function(aFile)
+	{
+		var dir = aFile.parent;
+		if (!dir) return;
+		// index.html => index_#.html
+		var fileLR = sbCommonUtils.splitFileName(aFile.leafName);
+		if (fileLR[0].match(/^(.+)_(\d+)$/i)) {
+			var base = RegExp.$1;
+			var file1 = dir.clone();
+			file1.append(base + "." + fileLR[1]);
+			if (file1.exists()) return true;
+		}
+		// index.html => index.files/* , index_files/*
+		if (dir.leafName.match(/^(.+)[._]files$/i)) {
+			var base = RegExp.$1;
+			var file1 = dir.parent.clone();
+			file1.append(base + ".html");
+			if (file1.exists()) return true;
+			var file1 = dir.parent.clone();
+			file1.append(base + ".htm");
+			if (file1.exists()) return true;
+		}
+		return false;
 	},
 
 	finalize : function()
