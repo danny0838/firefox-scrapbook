@@ -751,7 +751,7 @@ var sbCrossLinker = {
 		if ( ++this.index < this.nameList.length )
 		{
 			sbInvisibleBrowser.fileCount = 0;
-			var url = this.baseURL + this.nameList[this.index] + ".html";
+			var url = this.baseURL + encodeURI(this.nameList[this.index]) + ".html";
 			sbInvisibleBrowser.loading = url;
 			this.ELEMENT.loadURI(url, null, null);
 		}
