@@ -269,7 +269,7 @@ var sbTradeService = {
 		if ( idxList.length < 1 ) return;
 		if ( !sbCommonUtils.getPref("tree.quickdelete", false) )
 		{
-			if ( !window.confirm( window.top.sbMainService.STRING.getString("CONFIRM_DELETE") ) ) return;
+			if ( !this.confirmRemovingPrompt() ) return;
 		}
 		for ( var i = 0; i < idxList.length; i++ )
 		{
@@ -281,6 +281,14 @@ var sbTradeService = {
 			sbCommonUtils.removeDirSafety(dir, false);
 		}
 		this.refreshTree();
+	},
+
+	confirmRemovingPrompt: function() {
+		var button = sbCommonUtils.PROMPT.STD_YES_NO_BUTTONS + sbCommonUtils.PROMPT.BUTTON_POS_1_DEFAULT;
+		var text = window.top.sbMainService.STRING.getString("CONFIRM_DELETE");
+		// pressing default button or closing the prompt returns 1
+		// reverse it to mean "no" by default
+		return !sbCommonUtils.PROMPT.confirmEx(null, "[ScrapBook]", text, button, null, null, null, null, {});
 	},
 
 	showProperties : function()
