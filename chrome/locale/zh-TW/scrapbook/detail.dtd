@@ -4,8 +4,10 @@
 <!ENTITY sb.detail.new.folder "開新資料夾">
 <!ENTITY sb.detail.select.folder "選取資料夾">
 <!ENTITY sb.detail.option "選項">
+<!ENTITY sb.detail.option.capture "擷取">
 <!ENTITY sb.detail.option.images "圖片">
 <!ENTITY sb.detail.option.styles "樣式">
+<!ENTITY sb.detail.option.textAsHtml "純文字檔擷取為 HTML">
 <!ENTITY sb.detail.linked.file "下載連結">
 <!ENTITY sb.detail.linked.image "圖片">
 <!ENTITY sb.detail.linked.sound "音樂">

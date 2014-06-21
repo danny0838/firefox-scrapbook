@@ -4,8 +4,10 @@
 <!ENTITY sb.detail.new.folder "Nova Pasta">
 <!ENTITY sb.detail.select.folder "Selecionar Pasta">
 <!ENTITY sb.detail.option "Opções">
+<!ENTITY sb.detail.option.capture "Capture">
 <!ENTITY sb.detail.option.images "Imagens">
 <!ENTITY sb.detail.option.styles "Estilos">
+<!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
 <!ENTITY sb.detail.linked.file "Download de arquivos anexos">
 <!ENTITY sb.detail.linked.image "Imagem">
 <!ENTITY sb.detail.linked.sound "Som">

@@ -4,8 +4,10 @@
 <!ENTITY sb.detail.new.folder "Novo cartafol">
 <!ENTITY sb.detail.select.folder "Seleccione un cartafol">
 <!ENTITY sb.detail.option "Opcións">
+<!ENTITY sb.detail.option.capture "Capture">
 <!ENTITY sb.detail.option.images "Imaxes">
 <!ENTITY sb.detail.option.styles "Estilos">
+<!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
 <!ENTITY sb.detail.linked.file "Descargar ficheiros ligados">
 <!ENTITY sb.detail.linked.image "Imaxe">
 <!ENTITY sb.detail.linked.sound "Son">

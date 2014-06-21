@@ -4,8 +4,10 @@
 <!ENTITY sb.detail.new.folder "Nouveau dossier">
 <!ENTITY sb.detail.select.folder "Sélectionner le dossier">
 <!ENTITY sb.detail.option "Options">
+<!ENTITY sb.detail.option.capture "Capture">
 <!ENTITY sb.detail.option.images "Images">
 <!ENTITY sb.detail.option.styles "Styles">
+<!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
 <!ENTITY sb.detail.linked.file "Capturer les fichiers liés">
 <!ENTITY sb.detail.linked.image "Image">
 <!ENTITY sb.detail.linked.sound "Son">

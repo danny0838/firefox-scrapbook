@@ -4,8 +4,10 @@
 <!ENTITY sb.detail.new.folder "Ny mapp">
 <!ENTITY sb.detail.select.folder "Välj mapp">
 <!ENTITY sb.detail.option "Inställningar">
+<!ENTITY sb.detail.option.capture "Capture">
 <!ENTITY sb.detail.option.images "Bilder">
 <!ENTITY sb.detail.option.styles "Format">
+<!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
 <!ENTITY sb.detail.linked.file "Ladda ner länkade filer">
 <!ENTITY sb.detail.linked.image "Bild">
 <!ENTITY sb.detail.linked.sound "Ljud">

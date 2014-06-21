@@ -4,8 +4,10 @@
 <!ENTITY sb.detail.new.folder "Nuova cartella">
 <!ENTITY sb.detail.select.folder "Seleziona cartella">
 <!ENTITY sb.detail.option "Opzioni">
+<!ENTITY sb.detail.option.capture "Capture">
 <!ENTITY sb.detail.option.images "Immagini">
 <!ENTITY sb.detail.option.styles "Stili">
+<!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
 <!ENTITY sb.detail.linked.file "File da scaricare contenuti nei link delle pagine web da catturare">
 <!ENTITY sb.detail.linked.image "Immagini">
 <!ENTITY sb.detail.linked.sound "Suoni">

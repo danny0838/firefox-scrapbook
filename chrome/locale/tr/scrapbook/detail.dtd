@@ -4,8 +4,10 @@
 <!ENTITY sb.detail.new.folder "Yeni Klasör">
 <!ENTITY sb.detail.select.folder "Klasör Seç">
 <!ENTITY sb.detail.option "Ayarlar">
+<!ENTITY sb.detail.option.capture "Capture">
 <!ENTITY sb.detail.option.images "Resimler">
 <!ENTITY sb.detail.option.styles "Stiller">
+<!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
 <!ENTITY sb.detail.linked.file "Bağlantılı dosyaları indir">
 <!ENTITY sb.detail.linked.image "Resim">
 <!ENTITY sb.detail.linked.sound "Ses">

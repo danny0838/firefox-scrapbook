@@ -4,8 +4,10 @@
 <!ENTITY sb.detail.new.folder "Новый каталог">
 <!ENTITY sb.detail.select.folder "Выбрать каталог">
 <!ENTITY sb.detail.option "Составные части страницы">
+<!ENTITY sb.detail.option.capture "Capture">
 <!ENTITY sb.detail.option.images "Изображения">
 <!ENTITY sb.detail.option.styles "CSS-стили">
+<!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
 <!ENTITY sb.detail.linked.file "Загрузка содержимого по ссылкам на странице">
 <!ENTITY sb.detail.linked.image "Изображения">
 <!ENTITY sb.detail.linked.sound "Аудиофайлы">

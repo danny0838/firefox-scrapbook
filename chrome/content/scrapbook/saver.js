@@ -45,7 +45,7 @@ var sbContentSaver = {
 		this.name = "index";
 		this.favicon = null;
 		this.file2URL = { "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
-		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "styles" : true, "script" : false };
+		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "styles" : true, "script" : false, "textAsHtml" : false };
 		this.plusoption = { "method" : "SB", "timeout" : "0", "charset" : "UTF-8" }
 		this.linkURLs = [];
 		this.frameList = [];
@@ -183,12 +183,21 @@ var sbContentSaver = {
 
 	saveDocumentInternal : function(aDocument, aFileKey)
 	{
-		// non-HTML document: process as file saving
-		if ( !aDocument.body || !aDocument.contentType.match(/html|xml/i) )
+		// non-HTML: process as file saving
+		if ( !aDocument.body )
 		{
 			var captureType = (aDocument.contentType.substring(0,5) == "image") ? "image" : "file";
 			if ( this.isMainFrame ) this.item.type = captureType;
-			var newLeafName = this.saveFileInternal(aDocument.location.href, aFileKey, captureType);
+			var newLeafName = this.saveFileInternal(aDocument.location.href, aFileKey, captureType, aDocument.characterSet);
+			return newLeafName;
+		}
+
+		// text file: if not download as HTML, save as a text file
+		if ( aDocument.contentType != "text/html" && !this.option["textAsHtml"] )
+		{
+			var captureType = "file";
+			if ( this.isMainFrame ) this.item.type = captureType;
+			var newLeafName = this.saveFileInternal(aDocument.location.href, aFileKey, captureType, aDocument.characterSet);
 			return newLeafName;
 		}
 
@@ -334,7 +343,7 @@ var sbContentSaver = {
 		return myHTMLFile.leafName;
 	},
 
-	saveFileInternal : function(aFileURL, aFileKey, aCaptureType)
+	saveFileInternal : function(aFileURL, aFileKey, aCaptureType, aCharset)
 	{
 		if ( !aFileKey ) aFileKey = "file" + Math.random().toString();
 		if ( !this.refURLObj ) this.refURLObj = sbCommonUtils.convertURLToObject(aFileURL);
@@ -342,7 +351,7 @@ var sbContentSaver = {
 		{
 			this.item.icon  = "moz-icon://" + sbCommonUtils.getFileName(aFileURL) + "?size=16";
 			this.item.type  = aCaptureType;
-			this.item.chars = "";
+			this.item.chars = aCharset || "";
 		}
 		var newFileName = this.download(aFileURL);
 		if ( aCaptureType == "image" ) {

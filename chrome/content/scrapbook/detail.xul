@@ -57,12 +57,16 @@
 						</row>
 					</rows>
 				</grid>
-				<hbox group="capture-options" align="center">
-					<label value="&sb.detail.option;:" />
-					<checkbox id="sbDetailOptionImages" label="&sb.detail.option.images;" checked="true" />
-					<checkbox id="sbDetailOptionStyles" label="&sb.detail.option.styles;" checked="true" />
-					<checkbox id="sbDetailOptionScript" label="JavaScript" oncommand="sbCaptureOptions.toggleWarningUI();" />
-				</hbox>
+				<groupbox group="capture-options" style="margin-top:8px;">
+					<caption label="&sb.detail.option;" />
+					<hbox align="center">
+					<caption label="&sb.detail.option.capture;:" />
+						<checkbox id="sbDetailOptionImages" label="&sb.detail.option.images;" checked="true" />
+						<checkbox id="sbDetailOptionStyles" label="&sb.detail.option.styles;" checked="true" />
+						<checkbox id="sbDetailOptionScript" label="JavaScript" oncommand="sbCaptureOptions.toggleWarningUI();" />
+					</hbox>
+					<checkbox id="sbDetailOptionTextAsHtml" label="&sb.detail.option.textAsHtml;" />
+				</groupbox>
 				<groupbox group="capture-options" style="margin-top:8px;">
 					<caption label="&sb.detail.linked.file;" />
 					<checkbox id="sbDetailImage"   persist="checked" label="&sb.detail.linked.image; (jpg, png, gif, tiff)" />
@@ -74,7 +78,7 @@
 						<textbox flex="1" />
 					</hbox>
 				</groupbox>
-				<groupbox id="sbDetailInDepthBox" group="capture-options">
+				<groupbox group="capture-options" style="margin-top:8px;">
 					<caption label="&sb.detail.linked.page;" />
 					<hbox align="center">
 						<label id="sbDetailInDepthLabel" value="&sb.detail.linked.page.depth;:" />

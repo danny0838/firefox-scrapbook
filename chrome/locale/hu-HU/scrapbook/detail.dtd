@@ -4,8 +4,10 @@
 <!ENTITY sb.detail.new.folder "Új mappa">
 <!ENTITY sb.detail.select.folder "Mappa kiválasztása">
 <!ENTITY sb.detail.option "Beállítások">
+<!ENTITY sb.detail.option.capture "Capture">
 <!ENTITY sb.detail.option.images "Képek">
 <!ENTITY sb.detail.option.styles "Stílusok">
+<!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
 <!ENTITY sb.detail.linked.file "Hivatkozott fájlok letöltése">
 <!ENTITY sb.detail.linked.image "Kép">
 <!ENTITY sb.detail.linked.sound "Hang">

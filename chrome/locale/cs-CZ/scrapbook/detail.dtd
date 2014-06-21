@@ -4,8 +4,10 @@
 <!ENTITY sb.detail.new.folder "Nová složka">
 <!ENTITY sb.detail.select.folder "Vybrat složku">
 <!ENTITY sb.detail.option "Možnosti">
+<!ENTITY sb.detail.option.capture "Capture">
 <!ENTITY sb.detail.option.images "Obrázky">
 <!ENTITY sb.detail.option.styles "Styly">
+<!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
 <!ENTITY sb.detail.linked.file "Stáhnout odkazované soubory">
 <!ENTITY sb.detail.linked.image "Obrázky">
 <!ENTITY sb.detail.linked.sound "Zvuky">
