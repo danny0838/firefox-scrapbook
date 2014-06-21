@@ -30,6 +30,8 @@ var sbMultipleService = {
 		var namList = [];
 		var urlHash = {};
 		var lines = this.TEXTBOX.value.split("\n");
+		var charset = document.getElementById("sbCharset").value;
+		var timeout = parseInt("0" + document.getElementById("sbTimeout").value, 10);
 		for ( var i = 0; i < lines.length; i++ )
 		{
 			if ( lines[i].length > 5 ) urlHash[lines[i]] = true;
@@ -53,13 +55,13 @@ var sbMultipleService = {
 		{
 			window.openDialog(
 				"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
-				urlList, "", false, sbFolderSelector2.resURI, 0, null, null, null, null, "SB", document.getElementById("sbCharset").value, document.getElementById("sbTimeout").value
+				urlList, "", false, sbFolderSelector2.resURI, 0, null, null, null, null, "SB", charset, timeout
 				);
 		} else
 		{
 			window.openDialog(
 				"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
-				urlList, "", false, sbFolderSelector2.resURI, 0, null, null, null, null, "SB", document.getElementById("sbCharset").value, document.getElementById("sbTimeout").value, namList
+				urlList, "", false, sbFolderSelector2.resURI, 0, null, null, null, null, "SB", charset, timeout, namList
 				);
 		}
 	},
