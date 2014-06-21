@@ -320,7 +320,7 @@ var sbCacheService = {
 			for ( var j = 0; j < resList.length; j++ )
 			{
 				var type = sbDataSource.getProperty(resList[j], "type");
-				if ( type == "image" || type == "file" || type == "bookmark" ) continue;
+				if ( type == "image" || type == "file" || type == "bookmark" || type == "separator" ) continue;
 				this.resList.push(resList[j]);
 				this.folders.push(contResList[i].Value);
 			}
