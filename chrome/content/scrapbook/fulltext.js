@@ -130,7 +130,7 @@ var sbSearchResult =
 	process : function()
 	{
 		var res = this.resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-		if ( res.Value == "urn:scrapbook:cache" ) return this.next();
+		if ( res.ValueUTF8 == "urn:scrapbook:cache" ) return this.next();
 		var folder  = sbCacheSource.getProperty(res, "folder");
 		if ( this.targetFolders.length > 0 )
 		{
@@ -140,15 +140,15 @@ var sbSearchResult =
 					var target = sbCommonUtils.RDF.GetLiteral(folder);
 					var prop   = sbDataSource.data.ArcLabelsIn(target).getNext().QueryInterface(Components.interfaces.nsIRDFResource);
 					var source = sbDataSource.data.GetSource(prop, target, true);
-					folder = source.Value;
+					folder = source.ValueUTF8;
 				} catch(ex) {
 				}
 			}
 			if ( this.targetFolders.indexOf(folder) < 0 ) return this.next();
 		}
 		var content = sbCacheSource.getProperty(res, "content");
-		var resURI  = res.Value.split("#")[0];
-		var name    = res.Value.split("#")[1] || "index";
+		var resURI  = res.ValueUTF8.split("#")[0];
+		var name    = res.ValueUTF8.split("#")[1] || "index.html";
 		res = sbCommonUtils.RDF.GetResource(resURI);
 		if ( !sbDataSource.exists(res) ) return this.next();
 		var type    = sbDataSource.getProperty(res, "type");
@@ -261,7 +261,7 @@ var sbSearchResult =
 	{
 		if ( !this.CURRENT_TREEITEM ) return;
 		var id   = this.CURRENT_TREEITEM[5];
-		var url  = this.CURRENT_TREEITEM[6] == "note" ? "chrome://scrapbook/content/note.xul?id=" + id : sbCommonUtils.getBaseHref(sbDataSource.data.URI) + "data/" + id + "/" + this.CURRENT_TREEITEM[4] + ".html";
+		var url  = this.CURRENT_TREEITEM[6] == "note" ? "chrome://scrapbook/content/note.xul?id=" + id : sbCommonUtils.getBaseHref(sbDataSource.data.URI) + "data/" + id + "/" + encodeURI(this.CURRENT_TREEITEM[4]);
 		switch ( key ) {
 			case "O" : sbCommonUtils.loadURL(url, false); break;
 			case "T" : sbCommonUtils.loadURL(url, true); break;
@@ -337,25 +337,16 @@ var sbCacheService = {
 		var id  = sbDataSource.getProperty(res, "id");
 		var dir = this.dataDir.clone();
 		dir.append(id);
+		var basePathCut = dir.path.length + 1;
 		gCacheStatus.firstChild.value = gCacheString.getString("BUILD_CACHE_UPDATE") + " " + sbDataSource.getProperty(res, "title");
 		gCacheStatus.lastChild.value  = Math.round((this.index + 1) / this.resList.length * 100);
-		this.inspectFile(dir, "index");
-		if ( sbDataSource.getProperty(res, "type") == "site" )
-		{
-			var url2name = dir.clone();
-			url2name.append("sb-url2name.txt");
-			if ( url2name.exists() )
-			{
-				url2name = sbCommonUtils.readFile(url2name).split("\n");
-				for ( var i = 0; i < url2name.length; i++ )
-				{
-					if ( i > 256 ) break;
-					var line = url2name[i].split("\t");
-					if ( !line[1] || line[1] == "index" ) continue;
-					this.inspectFile(dir, line[1]);
-				}
+		sbCommonUtils.forEachFile(dir, function(){
+			var subpath = this.path.substring(basePathCut);
+			var name = this.leafName;
+			if (sbCommonUtils.splitFileName(name)[1].match(/^html?$/i)) {
+				sbCacheService.inspectFile(this, subpath);
 			}
-		}
+		});
 		if ( this._curResURI != this.folders[this.index] ) document.title = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(this.folders[this.index]), "title") || gCacheString.getString("BUILD_CACHE");
 		if ( ++this.index < this.resList.length )
 			setTimeout(function(){ sbCacheService.processAsync(); }, 0);
@@ -363,43 +354,28 @@ var sbCacheService = {
 			setTimeout(function(){ sbCacheService.finalize(); }, 0);
 	},
 
-	inspectFile : function(aDir, aName)
+	inspectFile : function(aFile, aName)
 	{
 		var resource = sbCommonUtils.RDF.GetResource(this.resList[this.index].Value + "#" + aName);
-		var contents = [];
-		var num = 0;
-		do {
-			var file;
-			var file1 = aDir.clone();
-			var file2 = aDir.clone();
-			file1.append(aName + ((num > 0) ? num : "") + ".html");
-			file2.append(aName + "_" + ((num > 0) ? num : "") + ".html");
-			if      ( file1.exists() ) file = file1;
-			else if ( file2.exists() ) file = file2;
-			else break;
-			if ( num == 0 && sbCacheSource.exists(resource) )
+		if ( sbCacheSource.exists(resource) ) {
+			if ( gCacheFile.lastModifiedTime > aFile.lastModifiedTime )
 			{
-				if ( gCacheFile.lastModifiedTime > file.lastModifiedTime )
-				{
-					this.uriHash[resource.Value] = true;
-					sbCacheSource.updateEntry(resource, "folder",  this.folders[this.index]);
-					return;
-				}
+				this.uriHash[resource.Value] = true;
+				sbCacheSource.updateEntry(resource, "folder",  this.folders[this.index]);
+				return;
 			}
-			var content = sbCommonUtils.readFile(file);
-			content = sbCommonUtils.convertToUnicode(content, sbDataSource.getProperty(this.resList[this.index], "chars"));
-			contents.push(this.convertHTML2Text(content));
 		}
-		while ( ++num < 10 );
-		contents = contents.join("\t").replace(/[\x00-\x1F\x7F]/g, " ").replace(/\s+/g, " ");
-		if ( sbCacheSource.exists(resource) )
-		{
+		var content = sbCommonUtils.readFile(aFile);
+		content = sbCommonUtils.convertToUnicode(content, sbDataSource.getProperty(this.resList[this.index], "chars"));
+		content = this.convertHTML2Text(content);
+		content = content.replace(/[\x00-\x1F\x7F]/g, " ").replace(/\s+/g, " ");
+
+		if ( sbCacheSource.exists(resource) ) {
 			sbCacheSource.updateEntry(resource, "folder",  this.folders[this.index]);
-			sbCacheSource.updateEntry(resource, "content", contents);
+			sbCacheSource.updateEntry(resource, "content", content);
 		}
-		else
-		{
-			sbCacheSource.addEntry(resource, contents);
+		else {
+			sbCacheSource.addEntry(resource, content);
 		}
 		this.uriHash[resource.Value] = true;
 	},
