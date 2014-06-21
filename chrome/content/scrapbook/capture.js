@@ -102,9 +102,10 @@ function SB_splitByAnchor(aURL)
 
 function SB_suggestName(aURL)
 {
-	var name = sbCommonUtils.splitFileName(sbCommonUtils.validateFileName(sbCommonUtils.getFileName(decodeURI(aURL))))[0];
-	name = name.toLowerCase();
-	if ( !name || name == "index" ) name = "default";
+	var tmpName = sbCommonUtils.splitFileName(sbCommonUtils.validateFileName(sbCommonUtils.getFileName(decodeURI(aURL))))[0].toLowerCase();
+	if ( !tmpName || tmpName == "index" ) tmpName = "default";
+	var name = tmpName, seq = 0;
+	while ( gFile2URL[name+".html"] ) name = tmpName + "_" + sbContentSaver.leftZeroPad3(++seq);
 	return name;
 }
 
