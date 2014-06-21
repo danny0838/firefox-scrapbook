@@ -42,7 +42,6 @@ function SB_initCapture()
 	gTimeout	= window.arguments[11];
 	gTitles		= window.arguments[12];
 
-	if ( !gCharset ) gCharset = "UTF-8";
 	if ( !gTimeout ) gTimeout = 0;
 	if ( gReferItem )
 	{
@@ -619,14 +618,12 @@ var sbInvisibleBrowser = {
 		this.ELEMENT.docShell.allowJavascript = gOption["script"];
 		this.ELEMENT.docShell.allowImages     = gOption["images"];
 		this.ELEMENT.docShell.allowMetaRedirects = false;
+		this.ELEMENT.docShell.charset = gCharset || null;
 		if ( Components.interfaces.nsIDocShell ) {
 			this.ELEMENT.docShell.QueryInterface(Components.interfaces.nsIDocShell).useGlobalHistory = false;
 		} else {
 			this.ELEMENT.docShell.useGlobalHistory = false;
 		}
-		//gCharset = "ISO-8859-1" or UTF-8;
-		var browserObj = document.commandDispatcher.focusedWindow.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebNavigation);
-		browserObj.QueryInterface(Components.interfaces.nsIDocShell).QueryInterface(Components.interfaces.nsIDocCharset).charset = gCharset;
 		this.loading = aURL;
 		this.ELEMENT.loadURI(aURL, null, null);
 	},
