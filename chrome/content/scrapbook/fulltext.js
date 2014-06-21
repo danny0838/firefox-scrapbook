@@ -79,7 +79,7 @@ var sbSearchResult =
 				if ( quotePos1 >= 1 && query.charAt(quotePos1-1) == '-' )
 				{
 					this.excludeWords.push(quotedStr);
-					this.RegExpExclude.push( new RegExp(quotedStr, this.RegExpModifier) );
+					this.RegExpExclude.push( new RegExp(this.escapeRegExpSpecialChars(quotedStr), this.RegExpModifier) );
 					replaceStr = "-" + replaceStr;
 				}
 				else if ( quotedStr.length > 0 )
@@ -320,7 +320,7 @@ var sbCacheService = {
 			for ( var j = 0; j < resList.length; j++ )
 			{
 				var type = sbDataSource.getProperty(resList[j], "type");
-				if ( type == "image" || type == "file" || type == "bookmark" ) continue;
+				if ( type == "image" || type == "file" || type == "bookmark" || type == "separator" ) continue;
 				this.resList.push(resList[j]);
 				this.folders.push(contResList[i].Value);
 			}
