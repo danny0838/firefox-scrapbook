@@ -321,7 +321,7 @@ var sbCacheService = {
 			for ( var j = 0; j < resList.length; j++ )
 			{
 				var type = sbDataSource.getProperty(resList[j], "type");
-				if ( type == "image" || type == "file" || type == "bookmark" || type == "separator" ) continue;
+				if ( type == "image" || type == "bookmark" || type == "separator" ) continue;
 				this.resList.push(resList[j]);
 				this.folders.push(contResList[i].Value);
 			}
@@ -342,9 +342,11 @@ var sbCacheService = {
 		var id  = sbDataSource.getProperty(res, "id");
 		var dir = this.dataDir.clone();
 		dir.append(id);
-		switch ( sbDataSource.getProperty(res, "type") ) {
+		var type = sbDataSource.getProperty(res, "type");
+		switch ( type ) {
 			case "":
 			case "marked":
+			case "note":
 				var file = dir.clone();
 				file.append("index.html");
 				if (!file.exists()) break;
@@ -361,6 +363,23 @@ var sbCacheService = {
 					sbCacheService.inspectFile(this, this.path.substring(basePathCut).replace(/\\/g, "/"));
 				});
 				break;
+			case "file":
+				if (!sbDataSource.getProperty(res, "chars")) break;
+				var file = dir.clone();
+				file.append("index.html");
+				if (!file.exists()) break;
+				if (!sbCommonUtils.readFile(file).match(/URL=\.\/([^\"]+)\"/)) break;
+				var leafname = RegExp.$1;
+				var file2 = dir.clone();
+				file2.append(leafname);
+				if (!file2.exists()) break;
+				var mime = sbCommonUtils.getFileMime(file2);
+				if ( !mime || !mime.match(/^text\//) ) break;
+				sbCacheService.inspectFile(file2, leafname, true);
+				break;
+			default:
+				console.error("ERROR: unknown data type: " + type);
+				break;
 		}
 		// update trace message
 		if ( this._curResURI != this.folders[this.index] ) document.title = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(this.folders[this.index]), "title") || gCacheString.getString("BUILD_CACHE");
@@ -371,7 +390,7 @@ var sbCacheService = {
 			setTimeout(function(){ sbCacheService.finalize(); }, 0);
 	},
 
-	inspectFile : function(aFile, aSubPath)
+	inspectFile : function(aFile, aSubPath, nonHTML)
 	{
 		var resource = sbCommonUtils.RDF.GetResource(this.resList[this.index].Value + "#" + aSubPath);
 		// if cache is newer, skip caching this file and its frames
@@ -388,7 +407,7 @@ var sbCacheService = {
 		// cache text in the file and its frames
 		var contents = [];
 		addContent(aFile);
-		sbCacheService.checkFrameFiles(aFile, addContent);
+		if (!nonHTML) sbCacheService.checkFrameFiles(aFile, addContent);
 		contents = contents.join("\t").replace(/[\x00-\x1F\x7F]/g, " ").replace(/\s+/g, " ");
 		// update cache data
 		if ( sbCacheSource.exists(resource) ) {
@@ -404,7 +423,12 @@ var sbCacheService = {
 			var encoding = sbDataSource.getProperty(sbCacheService.resList[sbCacheService.index], "chars");
 			var content = sbCommonUtils.readFile(aFile);
 			content = sbCommonUtils.convertToUnicode(content, encoding);
-			contents.push(sbCacheService.convertHTML2Text(content));
+			if (!nonHTML) {
+				contents.push(sbCacheService.convertHTML2Text(content));
+			}
+			else {
+				contents.push(content);
+			}
 		}
 	},
 	

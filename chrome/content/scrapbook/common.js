@@ -20,6 +20,7 @@ var sbCommonUtils = {
 	get RDFC()    { return Components.classes['@mozilla.org/rdf/container;1'].getService(Components.interfaces.nsIRDFContainer); },
 	get RDFCU()   { return Components.classes['@mozilla.org/rdf/container-utils;1'].getService(Components.interfaces.nsIRDFContainerUtils); },
 	get DIR()     { return Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties); },
+	get MIME()    { return Components.classes["@mozilla.org/mime;1"].getService(Components.interfaces.nsIMIMEService); },
 	get IO()      { return Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService); },
 	get UNICODE() { return Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter); },
 	get WINDOW()  { return Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator); },
@@ -250,6 +251,15 @@ var sbCommonUtils = {
 				}
 			}
 		}
+	},
+
+	getFileMime : function(aFile)
+	{
+		try {
+			return this.MIME.getTypeFromFile(aFile);
+		}
+		catch(ex) {}
+		return false;
 	},
 
 	readFile : function(aFile)
