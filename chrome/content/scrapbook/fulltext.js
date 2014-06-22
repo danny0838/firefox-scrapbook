@@ -305,7 +305,6 @@ var sbCacheService = {
 	folders : [],
 	uriHash : {},
 	skipFiles : {},
-	_curResURI : "",
 
 	build : function()
 	{
@@ -382,7 +381,7 @@ var sbCacheService = {
 				break;
 		}
 		// update trace message
-		if ( this._curResURI != this.folders[this.index] ) document.title = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(this.folders[this.index]), "title") || gCacheString.getString("BUILD_CACHE");
+		document.title = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(this.folders[this.index]), "title") || gCacheString.getString("BUILD_CACHE");
 		// next one
 		if ( ++this.index < this.resList.length )
 			setTimeout(function(){ sbCacheService.processAsync(); }, 0);
