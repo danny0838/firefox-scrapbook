@@ -59,9 +59,9 @@
 			</row>
 			<row align="center" style="margin-bottom:8px;">
 				<label value="&sb.multiple.timeout;:" />
-				<menulist id="sbTimeout" editable="false">
+				<menulist id="sbTimeout" editable="true">
 					<menupopup id="sbTimeoutitems">
-						<menuitem value="0" label="0"/>
+						<menuitem value="0" label="0" selected="true" />
 						<menuitem value="1" label="1"/>
 						<menuitem value="2" label="2"/>
 						<menuitem value="3" label="3"/>
@@ -70,10 +70,14 @@
 			</row>
 			<row align="center" style="margin-bottom:8px;">
 				<label value="&sb.multiple.charset;:" />
-				<menulist id="sbCharset" editable="false">
+				<menulist id="sbCharset" editable="true">
 					<menupopup id="sbCharsetitems">
-						<menuitem value="UTF-8"  label="UTF-8"/>
-						<menuitem value="ISO-8859-1" label="ISO-8859-1"/>
+						<menuitem value="" label="" selected="true" />
+						<menuitem value="BIG5" label="BIG5" />
+						<menuitem value="GBK" label="GBK" />
+						<menuitem value="ISO-8859-1" label="ISO-8859-1" />
+						<menuitem value="SHIFT-JIS" label="SHIFT_JIS" />
+						<menuitem value="UTF-8" label="UTF-8" />
 					</menupopup>
 				</menulist>
 			</row>

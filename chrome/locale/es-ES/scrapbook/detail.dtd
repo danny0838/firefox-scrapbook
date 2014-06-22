@@ -4,8 +4,12 @@
 <!ENTITY sb.detail.new.folder "Nueva carpeta">
 <!ENTITY sb.detail.select.folder "Seleccionar Carpeta">
 <!ENTITY sb.detail.option "Opciones">
+<!ENTITY sb.detail.option.capture "Capture">
 <!ENTITY sb.detail.option.images "Imágenes">
+<!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.styles "Estilos">
+<!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
+<!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
 <!ENTITY sb.detail.linked.file "Descargar ficheros enlazados">
 <!ENTITY sb.detail.linked.image "Imagen">
 <!ENTITY sb.detail.linked.sound "Sonido">

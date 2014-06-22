@@ -5,7 +5,6 @@ var sbCaptureOptions = {
 	get WARNING_UI(){ return document.getElementById("sbDetailWarnAboutScript"); },
 
 	param : null,
-	inDepth : 0,
 
 	init : function()
 	{
@@ -80,36 +79,24 @@ var sbCaptureOptions = {
 		list.selectedIndex = isPartial ? 2 : 0;
 	},
 
-	promptInDepth : function()
-	{
-		var ret = window.prompt(
-			document.getElementById("sbDetailInDepthLabel").value, this.inDepth, document.getElementById("sbDetailInDepthBox").firstChild.label
-		);
-		if ( ret && !isNaN(ret) && ret >= 0 && ret < 100 )
-		{
-			this.inDepth = parseInt(ret, 10);
-			if ( this.inDepth <= 3 )
-				document.getElementById("sbDetailInDepthRadioGroup").selectedIndex = this.inDepth;
-			else
-				document.getElementById("sbDetailInDepthRadioGroup").selectedItem.setAttribute("selected", false);
-		}
-	},
-
 	accept : function()
 	{
-		this.param.item.comment      = sbCommonUtils.escapeComment(document.getElementById("sbDetailComment").value);
-		this.param.item.title        = document.getElementById("sbDetailTitle").value;
-		this.param.option["images"]  = document.getElementById("sbDetailOptionImages").checked;
-		this.param.option["styles"]  = document.getElementById("sbDetailOptionStyles").checked;
-		this.param.option["script"]  = document.getElementById("sbDetailOptionScript").checked;
-		this.param.option["dlimg"]   = document.getElementById("sbDetailImage").checked;
-		this.param.option["dlsnd"]   = document.getElementById("sbDetailSound").checked;
-		this.param.option["dlmov"]   = document.getElementById("sbDetailMovie").checked;
-		this.param.option["dlarc"]   = document.getElementById("sbDetailArchive").checked;
-		this.param.option["inDepth"] = this.inDepth;
-		this.param.option["custom"] = "";
-		this.param.poption["timeout"]= document.getElementById("sbDetailTimeoutRadioGroup").selectedItem.label;
-		this.param.poption["charset"]= document.getElementById("sbDetailCharsetRadioGroup").selectedItem.label;
+		this.param.item.comment         = sbCommonUtils.escapeComment(document.getElementById("sbDetailComment").value);
+		this.param.item.title           = document.getElementById("sbDetailTitle").value;
+		this.param.option["images"]     = document.getElementById("sbDetailOptionImages").checked;
+		this.param.option["media"]      = document.getElementById("sbDetailOptionMedia").checked;
+		this.param.option["styles"]     = document.getElementById("sbDetailOptionStyles").checked;
+		this.param.option["script"]     = document.getElementById("sbDetailOptionScript").checked;
+		this.param.option["textAsHtml"] = document.getElementById("sbDetailOptionTextAsHtml").checked;
+		this.param.option["forceUtf8"]  = document.getElementById("sbDetailOptionForceUtf8").checked;
+		this.param.option["dlimg"]      = document.getElementById("sbDetailImage").checked;
+		this.param.option["dlsnd"]      = document.getElementById("sbDetailSound").checked;
+		this.param.option["dlmov"]      = document.getElementById("sbDetailMovie").checked;
+		this.param.option["dlarc"]      = document.getElementById("sbDetailArchive").checked;
+		this.param.option["inDepth"]    = parseInt("0" + document.getElementById("sbDetailInDepth").value, 10);
+		this.param.option["custom"]     = "";
+		this.param.poption["timeout"]   = parseInt("0" + document.getElementById("sbDetailTimeout").value, 10);
+		this.param.poption["charset"]   = document.getElementById("sbDetailCharset").value;
 		if ( this.CUSTOM_UI.checked )
 		{
 			this.param.option["custom"] = this.CUSTOM_UI.nextSibling.value.replace(/[^0-9a-zA-Z,\|]/g, "").replace(/[,\|]/g, ", ");

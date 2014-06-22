@@ -4,8 +4,12 @@
 <!ENTITY sb.detail.new.folder "新しいフォルダ">
 <!ENTITY sb.detail.select.folder "フォルダの選択">
 <!ENTITY sb.detail.option "オプション">
+<!ENTITY sb.detail.option.capture "Capture">
 <!ENTITY sb.detail.option.images "画像">
+<!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.styles "スタイル">
+<!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
+<!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
 <!ENTITY sb.detail.linked.file "リンク先ファイルのダウンロード">
 <!ENTITY sb.detail.linked.image "イメージ">
 <!ENTITY sb.detail.linked.sound "サウンド">

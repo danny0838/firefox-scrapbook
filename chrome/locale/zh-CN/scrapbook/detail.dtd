@@ -4,8 +4,12 @@
 <!ENTITY sb.detail.new.folder "新建文件夹">
 <!ENTITY sb.detail.select.folder "选择文件夹">
 <!ENTITY sb.detail.option "选项">
+<!ENTITY sb.detail.option.capture "撷取">
 <!ENTITY sb.detail.option.images "图片">
+<!ENTITY sb.detail.option.media "多媒体">
 <!ENTITY sb.detail.option.styles "样式">
+<!ENTITY sb.detail.option.textAsHtml "纯文字文件撷取为 HTML">
+<!ENTITY sb.detail.option.forceUtf8 "保存为 UTF-8 编码">
 <!ENTITY sb.detail.linked.file "下载链接的文件">
 <!ENTITY sb.detail.linked.image "图像">
 <!ENTITY sb.detail.linked.sound "音乐">

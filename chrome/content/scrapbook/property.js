@@ -55,7 +55,7 @@ var sbPropService = {
 		}
 		document.getElementById("sbPropType").value = this.STRING.getString(bundleName);
 		document.getElementById("sbPropSourceRow").hidden = this.isTypeFolder || this.isTypeNote || this.isTypeSeparator;
-		document.getElementById("sbPropCharsRow").hidden  = this.isTypeFolder || this.isTypeFile || this.isTypeBookmark || this.isTypeSeparator;
+		document.getElementById("sbPropCharsRow").hidden  = this.isTypeFolder || this.isTypeBookmark || this.isTypeSeparator;
 		document.getElementById("sbPropIconRow").hidden   = this.isTypeSeparator;
 		document.getElementById("sbPropIconMenu").hidden  = this.isTypeNote;
 		document.getElementById("sbPropSizeRow").hidden   = this.isTypeFolder || this.isTypeBookmark || this.isTypeSeparator;
