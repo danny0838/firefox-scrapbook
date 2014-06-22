@@ -221,27 +221,33 @@ var sbCommonUtils = {
 	},
 
 
-	forFile : function(aFolder, aCallback, aArgs)
-	{
-		var files = aFolder.directoryEntries;
-		while (files.hasMoreElements()) {
-			var file = files.getNext().QueryInterface(Components.interfaces.nsIFile);
-			if (!file.isDirectory()) {
-				aCallback.apply(file, aArgs);
-			}
-		}
-	},
-
+	/**
+	 * Walk over a folder and run a callback for each file or folder
+	 * Run order: level 1 files => level 1 folders => level 2 files, ...
+	 *
+	 * return values of the callback function:
+	 *   undefined: no function
+	 *   0: skip look in the folder
+	 *   1: skip look other files in the same folder level
+	 *   2: skip look all files
+	 */
 	forEachFile : function(aFolder, aCallback, aArgs)
 	{
-		var files = aFolder.directoryEntries;
-		while (files.hasMoreElements()) {
-			var file = files.getNext().QueryInterface(Components.interfaces.nsIFile);
-			if (file.isDirectory()) {
-				this.forEachFile(file, aCallback, aArgs);
-			}
-			else {
-				aCallback.apply(file, aArgs);
+		var dirs = [aFolder], ret;
+		all:
+		for (var i=0; i<dirs.length; i++) {
+			if (aCallback.apply(dirs[i], aArgs) === 0) continue;
+			var files = dirs[i].directoryEntries;
+			while (files.hasMoreElements()) {
+				var file = files.getNext().QueryInterface(Components.interfaces.nsIFile);
+				if (file.isDirectory()) {
+					dirs.push(file);
+				}
+				else {
+					ret = aCallback.apply(file, aArgs);
+					if (ret === 1) break;
+					else if (ret === 2) break all;
+				}
 			}
 		}
 	},

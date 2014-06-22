@@ -304,6 +304,7 @@ var sbCacheService = {
 	resList : [],
 	folders : [],
 	uriHash : {},
+	skipFiles : {},
 	_curResURI : "",
 
 	build : function()
@@ -341,10 +342,10 @@ var sbCacheService = {
 		gCacheStatus.firstChild.value = gCacheString.getString("BUILD_CACHE_UPDATE") + " " + sbDataSource.getProperty(res, "title");
 		gCacheStatus.lastChild.value  = Math.round((this.index + 1) / this.resList.length * 100);
 		sbCommonUtils.forEachFile(dir, function(){
-			// only process files with html extension
-			if ( !sbCommonUtils.splitFileName(this.leafName)[1].match(/^x?html?$/i) ) return;
-			// do not process frame files
-			if ( sbCacheService.isFrameFile(this) ) return;
+			// do not look in skipped files or folders
+			if ( sbCacheService.skipFiles[this.path] ) return 0;
+			// filter with common filter
+			if ( !sbCacheService.cacheFilter(this) ) return;
 			// cache this file
 			sbCacheService.inspectFile(this, this.path.substring(basePathCut).replace(/\\/g, "/"));
 		});
@@ -358,11 +359,12 @@ var sbCacheService = {
 	inspectFile : function(aFile, aSubPath)
 	{
 		var resource = sbCommonUtils.RDF.GetResource(this.resList[this.index].Value + "#" + aSubPath);
-		// if cache is newer, skip the cache
+		// if cache is newer, skip caching this file and its frames
 		// (only check update of the main page)
 		if ( sbCacheSource.exists(resource) ) {
 			if ( gCacheFile.lastModifiedTime > aFile.lastModifiedTime )
 			{
+				sbCacheService.checkFrameFiles(aFile, function(){return 0;});
 				this.uriHash[resource.Value] = true;
 				sbCacheSource.updateEntry(resource, "folder",  this.folders[this.index]);
 				return;
@@ -390,6 +392,17 @@ var sbCacheService = {
 			contents.push(sbCacheService.convertHTML2Text(content));
 		}
 	},
+	
+	cacheFilter : function(aFile)
+	{
+		// only process normal files
+		if ( !aFile.isFile() ) return false;
+		// only process files with html extension
+		if ( !aFile.leafName.match(/\.x?html?$/i) ) return false;
+		// skip unreadable or hidden files
+		if ( !aFile.isReadable() || aFile.leafName.charAt(0) === "." || aFile.isHidden() ) return false;
+		return true;
+	},
 
 	checkFrameFiles : function(aFile, aCallback)
 	{
@@ -402,54 +415,32 @@ var sbCacheService = {
 			var file1 = dir.clone();
 			file1.append(fileLR[0] + "_" + i + "." + fileLR[1]);
 			if (!file1.exists()) break;
+			sbCacheService.skipFiles[file1.path] = true;
 			aCallback(file1);
 			i++;
-		} 
+		}
 		// index.html => index.files/*  (IE archive style)
 		var dir1 = dir.clone();
 		dir1.append(fileLR[0] + ".files");
 		if (dir1.exists()) {
-			sbCommonUtils.forFile(dir1, function(){
-				if ( sbCommonUtils.splitFileName(this.leafName)[1].match(/^x?html?$/i) ) {
-					aCallback(this);
-				}
+			sbCacheService.skipFiles[dir1.path] = true;
+			sbCommonUtils.forEachFile(dir1, function(){
+				if ( !sbCacheService.cacheFilter(this) ) return;
+				sbCacheService.skipFiles[this.path] = true;
+				aCallback(this);
 			});
 		}
 		// index.html => index_files/*  (Firefox archive style)
 		var dir1 = dir.clone();
 		dir1.append(fileLR[0] + "_files");
 		if (dir1.exists()) {
-			sbCommonUtils.forFile(dir1, function(){
-				if ( sbCommonUtils.splitFileName(this.leafName)[1].match(/^x?html?$/i) ) {
-					aCallback(this);
-				}
+			sbCacheService.skipFiles[dir1.path] = true;
+			sbCommonUtils.forEachFile(dir1, function(){
+				if ( !sbCacheService.cacheFilter(this) ) return;
+				sbCacheService.skipFiles[this.path] = true;
+				aCallback(this);
 			});
 		}
-	},
-	
-	isFrameFile : function(aFile)
-	{
-		var dir = aFile.parent;
-		if (!dir) return;
-		// index.html => index_#.html
-		var fileLR = sbCommonUtils.splitFileName(aFile.leafName);
-		if (fileLR[0].match(/^(.+)_(\d+)$/i)) {
-			var base = RegExp.$1;
-			var file1 = dir.clone();
-			file1.append(base + "." + fileLR[1]);
-			if (file1.exists()) return true;
-		}
-		// index.html => index.files/* , index_files/*
-		if (dir.leafName.match(/^(.+)[._]files$/i)) {
-			var base = RegExp.$1;
-			var file1 = dir.parent.clone();
-			file1.append(base + ".html");
-			if (file1.exists()) return true;
-			var file1 = dir.parent.clone();
-			file1.append(base + ".htm");
-			if (file1.exists()) return true;
-		}
-		return false;
 	},
 
 	finalize : function()
