@@ -62,6 +62,7 @@
 					<hbox align="center">
 					<caption label="&sb.detail.option.capture;:" />
 						<checkbox id="sbDetailOptionImages" label="&sb.detail.option.images;" checked="true" />
+						<checkbox id="sbDetailOptionMedia" label="&sb.detail.option.media;" checked="true" />
 						<checkbox id="sbDetailOptionStyles" label="&sb.detail.option.styles;" checked="true" />
 						<checkbox id="sbDetailOptionScript" label="JavaScript" oncommand="sbCaptureOptions.toggleWarningUI();" />
 					</hbox>

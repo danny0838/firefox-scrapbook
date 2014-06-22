@@ -6,6 +6,7 @@
 <!ENTITY sb.detail.option "Beállítások">
 <!ENTITY sb.detail.option.capture "Capture">
 <!ENTITY sb.detail.option.images "Képek">
+<!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.styles "Stílusok">
 <!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
 <!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">

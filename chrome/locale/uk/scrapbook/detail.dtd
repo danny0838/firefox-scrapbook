@@ -6,6 +6,7 @@
 <!ENTITY sb.detail.option "Параметри">
 <!ENTITY sb.detail.option.capture "Capture">
 <!ENTITY sb.detail.option.images "Зображення">
+<!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.styles "Стилі">
 <!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
 <!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">

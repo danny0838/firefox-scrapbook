@@ -6,6 +6,7 @@
 <!ENTITY sb.detail.option "Ayarlar">
 <!ENTITY sb.detail.option.capture "Capture">
 <!ENTITY sb.detail.option.images "Resimler">
+<!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.styles "Stiller">
 <!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
 <!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">

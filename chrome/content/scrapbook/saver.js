@@ -45,7 +45,7 @@ var sbContentSaver = {
 		this.name = "index";
 		this.favicon = null;
 		this.file2URL = { "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
-		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "styles" : true, "script" : false, "textAsHtml" : false, "forceUtf8" : true };
+		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "styles" : true, "script" : false, "textAsHtml" : false, "forceUtf8" : true };
 		this.plusoption = { "method" : "SB", "timeout" : "0", "charset" : "UTF-8" }
 		this.linkURLs = [];
 		this.frameList = [];
@@ -426,8 +426,6 @@ var sbContentSaver = {
 		switch ( aNode.nodeName.toLowerCase() )
 		{
 			case "img" : 
-			case "embed" : 
-			case "source":  // in <audio> and <vedio>
 				if ( aNode.hasAttribute("src") ) {
 					if ( this.option["images"] ) {
 						var aFileName = this.download(aNode.src);
@@ -437,9 +435,20 @@ var sbContentSaver = {
 					}
 				}
 				break;
+			case "embed" : 
+			case "source":  // in <audio> and <vedio>
+				if ( aNode.hasAttribute("src") ) {
+					if ( this.option["media"] ) {
+						var aFileName = this.download(aNode.src);
+						if (aFileName) aNode.setAttribute("src", aFileName);
+					} else {
+						aNode.setAttribute("src", aNode.src);
+					}
+				}
+				break;
 			case "object" : 
 				if ( aNode.hasAttribute("data") ) {
-					if ( this.option["images"] ) {
+					if ( this.option["media"] ) {
 						var aFileName = this.download(aNode.data);
 						if (aFileName) aNode.setAttribute("data", aFileName);
 					} else {
@@ -587,6 +596,15 @@ var sbContentSaver = {
 						case "og:image" :
 						case "og:image:url" :
 						case "og:image:secure_url" :
+							var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
+							if ( this.option["images"] ) {
+								var aFileName = this.download(url);
+								if (aFileName) aNode.setAttribute("content", aFileName);
+							}
+							else {
+								aNode.setAttribute("content", url);
+							}
+							break;
 						case "og:audio" :
 						case "og:audio:url" :
 						case "og:audio:secure_url" :
@@ -594,7 +612,7 @@ var sbContentSaver = {
 						case "og:video:url" :
 						case "og:video:secure_url" :
 							var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
-							if ( this.option["images"] ) {
+							if ( this.option["media"] ) {
 								var aFileName = this.download(url);
 								if (aFileName) aNode.setAttribute("content", aFileName);
 							}
