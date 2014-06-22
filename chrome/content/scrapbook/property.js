@@ -55,12 +55,13 @@ var sbPropService = {
 		}
 		document.getElementById("sbPropType").value = this.STRING.getString(bundleName);
 		document.getElementById("sbPropSourceRow").hidden = this.isTypeFolder || this.isTypeNote || this.isTypeSeparator;
-		document.getElementById("sbPropCharsRow").hidden  = this.isTypeFolder || this.isTypeFile || this.isTypeBookmark || this.isTypeSeparator;
+		document.getElementById("sbPropCharsRow").hidden  = this.isTypeFolder || this.isTypeBookmark || this.isTypeSeparator;
 		document.getElementById("sbPropIconRow").hidden   = this.isTypeSeparator;
 		document.getElementById("sbPropIconMenu").hidden  = this.isTypeNote;
 		document.getElementById("sbPropSizeRow").hidden   = this.isTypeFolder || this.isTypeBookmark || this.isTypeSeparator;
 		document.getElementById("sbPropMark").hidden      = this.isTypeFolder || this.isTypeNote || this.isTypeFile || this.isTypeSite || this.isTypeBookmark;
 		document.getElementById("sbPropIconMenu").firstChild.firstChild.nextSibling.setAttribute("disabled", this.isTypeFolder || this.isTypeBookmark);
+		if (!this.item.chars) document.getElementById("sbPropChars").removeAttribute("readonly");
 		if (this.isTypeNote)
 			document.getElementById("sbPropTitle").removeAttribute("editable");
 		this.updateCommentTab(this.item.comment);
@@ -83,12 +84,13 @@ var sbPropService = {
 			source  : document.getElementById("sbPropSource").value,
 			comment : sbCommonUtils.escapeComment(document.getElementById("sbPropComment").value),
 			type    : this.item.type,
-			icon    : this.getIconURL()
+			icon    : this.getIconURL(),
+			chars   : document.getElementById("sbPropChars").value
 		};
 		if (!this.isTypeSeparator && !document.getElementById("sbPropMark").hidden)
 			newVals.type = document.getElementById("sbPropMark").checked ? "marked" : "";
 		var changed = false;
-		var props = ["title", "source", "comment", "type", "icon"];
+		var props = ["title", "source", "comment", "type", "icon", "chars"];
 		for (var i = 0; i < props.length; i++) {
 			if (this.item[props[i]] != newVals[props[i]]) {
 				this.item[props[i]] = newVals[props[i]];
@@ -187,6 +189,7 @@ var sbPropService = {
 		var totalSize = 0;
 		var totalFile = 0;
 		sbCommonUtils.forEachFile(sbCommonUtils.getContentDir(aID, true), function(){
+			if (!this.isFile()) return;
 			try {
 				totalSize += this.fileSize;
 				totalFile++;

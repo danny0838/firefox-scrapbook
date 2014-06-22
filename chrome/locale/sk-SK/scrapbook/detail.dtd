@@ -4,8 +4,12 @@
 <!ENTITY sb.detail.new.folder "Nový priečinok">
 <!ENTITY sb.detail.select.folder "Vybrať priečinok">
 <!ENTITY sb.detail.option "Možnosti">
+<!ENTITY sb.detail.option.capture "Capture">
 <!ENTITY sb.detail.option.images "Obrázky">
+<!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.styles "Štýly">
+<!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
+<!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
 <!ENTITY sb.detail.linked.file "Stiahnuť previazané súbory">
 <!ENTITY sb.detail.linked.image "Obrázok">
 <!ENTITY sb.detail.linked.sound "Zvuk">

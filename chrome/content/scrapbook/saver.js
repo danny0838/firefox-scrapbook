@@ -45,7 +45,7 @@ var sbContentSaver = {
 		this.name = "index";
 		this.favicon = null;
 		this.file2URL = { "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
-		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "styles" : true, "script" : false };
+		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "styles" : true, "script" : false, "textAsHtml" : false, "forceUtf8" : true };
 		this.plusoption = { "method" : "SB", "timeout" : "0", "charset" : "UTF-8" }
 		this.linkURLs = [];
 		this.frameList = [];
@@ -183,12 +183,21 @@ var sbContentSaver = {
 
 	saveDocumentInternal : function(aDocument, aFileKey)
 	{
-		// non-HTML document: process as file saving
-		if ( !aDocument.body || !aDocument.contentType.match(/html|xml/i) )
+		// non-HTML: process as file saving
+		if ( !aDocument.body )
 		{
 			var captureType = (aDocument.contentType.substring(0,5) == "image") ? "image" : "file";
 			if ( this.isMainFrame ) this.item.type = captureType;
-			var newLeafName = this.saveFileInternal(aDocument.location.href, aFileKey, captureType);
+			var newLeafName = this.saveFileInternal(aDocument.location.href, aFileKey, captureType, aDocument.characterSet);
+			return newLeafName;
+		}
+
+		// text file: if not download as HTML, save as a text file
+		if ( aDocument.contentType != "text/html" && !this.option["textAsHtml"] )
+		{
+			var captureType = "file";
+			if ( this.isMainFrame ) this.item.type = captureType;
+			var newLeafName = this.saveFileInternal(aDocument.location.href, aFileKey, captureType, aDocument.characterSet);
 			return newLeafName;
 		}
 
@@ -293,31 +302,33 @@ var sbContentSaver = {
 
 		// change the charset to UTF-8
 		// also change the meta tag; generate one if none found
-		this.item.chars = "UTF-8";
-		var metas = rootNode.getElementsByTagName("meta"), meta, hasmeta = false;
-		for (var i=0, len=metas.length; i<len; ++i) {
-			meta = metas[i];
-			if (meta.hasAttribute("http-equiv") && meta.hasAttribute("content") &&
-				meta.getAttribute("http-equiv").toLowerCase() == "content-type" && 
-				meta.getAttribute("content").match(/^[^;]*;\s*charset=(.*)$/i) )
-			{
-				hasmeta = true;
-				meta.setAttribute("content", "text/html; charset=UTF-8");
+		if ( this.option["forceUtf8"] )
+		{
+			this.item.chars = "UTF-8";
+			var metas = rootNode.getElementsByTagName("meta"), meta, hasmeta = false;
+			for (var i=0, len=metas.length; i<len; ++i) {
+				meta = metas[i];
+				if (meta.hasAttribute("http-equiv") && meta.hasAttribute("content") &&
+					meta.getAttribute("http-equiv").toLowerCase() == "content-type" && 
+					meta.getAttribute("content").match(/^[^;]*;\s*charset=(.*)$/i) )
+				{
+					hasmeta = true;
+					meta.setAttribute("content", "text/html; charset=UTF-8");
+				}
+				else if ( meta.hasAttribute("charset") )
+				{
+					hasmeta = true;
+					meta.setAttribute("charset", "UTF-8");
+				}
 			}
-			else if ( meta.hasAttribute("charset") )
-			{
-				hasmeta = true;
-				meta.setAttribute("charset", "UTF-8");
+			if (!hasmeta) {
+				// use older version for better compatibility
+				var metaNode = aDocument.createElement("meta");
+				metaNode.setAttribute("content", aDocument.contentType + "; charset=" + this.item.chars);
+				metaNode.setAttribute("http-equiv", "Content-Type");
+				rootNode.firstChild.insertBefore(metaNode, rootNode.firstChild.firstChild);
+				rootNode.firstChild.insertBefore(aDocument.createTextNode("\n"), rootNode.firstChild.firstChild);
 			}
-		}
-		if (!hasmeta) {
-			// use older version for better compatibility
-			var metaNode = aDocument.createElement("meta");
-			metaNode.setAttribute("content", aDocument.contentType + "; charset=" + this.item.chars);
-			metaNode.setAttribute("http-equiv", "Content-Type");
-			rootNode.firstChild.insertBefore(aDocument.createTextNode("\n"), rootNode.firstChild.firstChild);
-			rootNode.firstChild.insertBefore(metaNode, rootNode.firstChild.firstChild);
-			rootNode.firstChild.insertBefore(aDocument.createTextNode("\n"), rootNode.firstChild.firstChild);
 		}
 
 		// generate the HTML and CSS file and save
@@ -334,7 +345,7 @@ var sbContentSaver = {
 		return myHTMLFile.leafName;
 	},
 
-	saveFileInternal : function(aFileURL, aFileKey, aCaptureType)
+	saveFileInternal : function(aFileURL, aFileKey, aCaptureType, aCharset)
 	{
 		if ( !aFileKey ) aFileKey = "file" + Math.random().toString();
 		if ( !this.refURLObj ) this.refURLObj = sbCommonUtils.convertURLToObject(aFileURL);
@@ -342,7 +353,7 @@ var sbContentSaver = {
 		{
 			this.item.icon  = "moz-icon://" + sbCommonUtils.getFileName(aFileURL) + "?size=16";
 			this.item.type  = aCaptureType;
-			this.item.chars = "";
+			this.item.chars = aCharset || "";
 		}
 		var newFileName = this.download(aFileURL);
 		if ( aCaptureType == "image" ) {
@@ -415,8 +426,6 @@ var sbContentSaver = {
 		switch ( aNode.nodeName.toLowerCase() )
 		{
 			case "img" : 
-			case "embed" : 
-			case "source":  // in <audio> and <vedio>
 				if ( aNode.hasAttribute("src") ) {
 					if ( this.option["images"] ) {
 						var aFileName = this.download(aNode.src);
@@ -426,9 +435,20 @@ var sbContentSaver = {
 					}
 				}
 				break;
+			case "embed" : 
+			case "source":  // in <audio> and <vedio>
+				if ( aNode.hasAttribute("src") ) {
+					if ( this.option["media"] ) {
+						var aFileName = this.download(aNode.src);
+						if (aFileName) aNode.setAttribute("src", aFileName);
+					} else {
+						aNode.setAttribute("src", aNode.src);
+					}
+				}
+				break;
 			case "object" : 
 				if ( aNode.hasAttribute("data") ) {
-					if ( this.option["images"] ) {
+					if ( this.option["media"] ) {
 						var aFileName = this.download(aNode.data);
 						if (aFileName) aNode.setAttribute("data", aFileName);
 					} else {
@@ -576,6 +596,15 @@ var sbContentSaver = {
 						case "og:image" :
 						case "og:image:url" :
 						case "og:image:secure_url" :
+							var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
+							if ( this.option["images"] ) {
+								var aFileName = this.download(url);
+								if (aFileName) aNode.setAttribute("content", aFileName);
+							}
+							else {
+								aNode.setAttribute("content", url);
+							}
+							break;
 						case "og:audio" :
 						case "og:audio:url" :
 						case "og:audio:secure_url" :
@@ -583,7 +612,7 @@ var sbContentSaver = {
 						case "og:video:url" :
 						case "og:video:secure_url" :
 							var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
-							if ( this.option["images"] ) {
+							if ( this.option["media"] ) {
 								var aFileName = this.download(url);
 								if (aFileName) aNode.setAttribute("content", aFileName);
 							}

@@ -264,23 +264,6 @@ var sbBrowserOverlay = {
 		);
 	},
 
-	execCaptureTargetISO : function(aShowDetail, aTargetID)
-	{
-		aTargetID = this.verifyTargetID(aTargetID);
-		if ( !aTargetID ) return;
-		var linkURL;
-		try {
-			linkURL = gContextMenu.getLinkURL();
-		} catch(ex) {
-			linkURL = this.getLinkURI();
-		}
-		if ( !linkURL ) return;
-		window.openDialog(
-			"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
-			[linkURL], document.popupNode.ownerDocument.location.href, aShowDetail, aTargetID, 0, null, null, null, null, "SB", "ISO-8859-1"
-		);
-	},
-
 	execBookmark: function(aTargetID)
 	{
 		aTargetID = this.verifyTargetID(aTargetID);
@@ -404,7 +387,6 @@ var sbBrowserOverlay = {
 		getElement("ScrapBookContextMenu6").hidden = !prefContext || isActive || !inFrame;
 		getElement("ScrapBookContextMenu7").hidden = !prefContext || selected || !onLink;
 		getElement("ScrapBookContextMenu8").hidden = !prefContext || selected || !onLink;
-		getElement("ScrapBookContextMenu10").hidden = !prefContext || selected || !onLink;
 		getElement("ScrapBookContextMenu9").hidden = !prefContext || isActive || !prefBookmark;
 	},
 

@@ -4,8 +4,12 @@
 <!ENTITY sb.detail.new.folder "Dosar nou">
 <!ENTITY sb.detail.select.folder "Selectează dosarul">
 <!ENTITY sb.detail.option "Opțiuni">
+<!ENTITY sb.detail.option.capture "Capture">
 <!ENTITY sb.detail.option.images "Imagini">
+<!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.styles "Stiluri">
+<!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
+<!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
 <!ENTITY sb.detail.linked.file "Descărcare fișiere legate">
 <!ENTITY sb.detail.linked.image "Imagini">
 <!ENTITY sb.detail.linked.sound "Audio">
