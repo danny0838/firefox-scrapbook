@@ -20,6 +20,7 @@ var sbCommonUtils = {
 	get RDFC()    { return Components.classes['@mozilla.org/rdf/container;1'].getService(Components.interfaces.nsIRDFContainer); },
 	get RDFCU()   { return Components.classes['@mozilla.org/rdf/container-utils;1'].getService(Components.interfaces.nsIRDFContainerUtils); },
 	get DIR()     { return Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties); },
+	get MIME()    { return Components.classes["@mozilla.org/mime;1"].getService(Components.interfaces.nsIMIMEService); },
 	get IO()      { return Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService); },
 	get UNICODE() { return Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter); },
 	get WINDOW()  { return Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator); },
@@ -221,18 +222,44 @@ var sbCommonUtils = {
 	},
 
 
+	/**
+	 * Walk over a folder and run a callback for each file or folder
+	 * Run order: level 1 files => level 1 folders => level 2 files, ...
+	 *
+	 * return values of the callback function:
+	 *   undefined: no function
+	 *   0: skip look in the folder
+	 *   1: skip look other files in the same folder level
+	 *   2: skip look all files
+	 */
 	forEachFile : function(aFolder, aCallback, aArgs)
 	{
-		var files = aFolder.directoryEntries;
-		while (files.hasMoreElements()) {
-			var file = files.getNext().QueryInterface(Components.interfaces.nsIFile);
-			if (file.isDirectory()) {
-				this.forEachFile(file, aCallback, aArgs);
-			}
-			else {
-				aCallback.apply(file, aArgs);
+		var dirs = [aFolder], ret;
+		all:
+		for (var i=0; i<dirs.length; i++) {
+			if (aCallback.apply(dirs[i], aArgs) === 0) continue;
+			var files = dirs[i].directoryEntries;
+			while (files.hasMoreElements()) {
+				var file = files.getNext().QueryInterface(Components.interfaces.nsIFile);
+				if (file.isDirectory()) {
+					dirs.push(file);
+				}
+				else {
+					ret = aCallback.apply(file, aArgs);
+					if (ret === 1) break;
+					else if (ret === 2) break all;
+				}
 			}
 		}
+	},
+
+	getFileMime : function(aFile)
+	{
+		try {
+			return this.MIME.getTypeFromFile(aFile);
+		}
+		catch(ex) {}
+		return false;
 	},
 
 	readFile : function(aFile)
