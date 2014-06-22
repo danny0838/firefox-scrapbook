@@ -66,6 +66,7 @@
 						<checkbox id="sbDetailOptionScript" label="JavaScript" oncommand="sbCaptureOptions.toggleWarningUI();" />
 					</hbox>
 					<checkbox id="sbDetailOptionTextAsHtml" label="&sb.detail.option.textAsHtml;" />
+					<checkbox id="sbDetailOptionForceUtf8" label="&sb.detail.option.forceUtf8;" checked="true" />
 				</groupbox>
 				<groupbox group="capture-options" style="margin-top:8px;">
 					<caption label="&sb.detail.linked.file;" />

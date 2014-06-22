@@ -8,6 +8,7 @@
 <!ENTITY sb.detail.option.images "Képek">
 <!ENTITY sb.detail.option.styles "Stílusok">
 <!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
+<!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
 <!ENTITY sb.detail.linked.file "Hivatkozott fájlok letöltése">
 <!ENTITY sb.detail.linked.image "Kép">
 <!ENTITY sb.detail.linked.sound "Hang">

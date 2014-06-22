@@ -8,6 +8,7 @@
 <!ENTITY sb.detail.option.images "画像">
 <!ENTITY sb.detail.option.styles "スタイル">
 <!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
+<!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
 <!ENTITY sb.detail.linked.file "リンク先ファイルのダウンロード">
 <!ENTITY sb.detail.linked.image "イメージ">
 <!ENTITY sb.detail.linked.sound "サウンド">

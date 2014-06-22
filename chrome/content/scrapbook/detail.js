@@ -87,6 +87,7 @@ var sbCaptureOptions = {
 		this.param.option["styles"]     = document.getElementById("sbDetailOptionStyles").checked;
 		this.param.option["script"]     = document.getElementById("sbDetailOptionScript").checked;
 		this.param.option["textAsHtml"] = document.getElementById("sbDetailOptionTextAsHtml").checked;
+		this.param.option["forceUtf8"]  = document.getElementById("sbDetailOptionForceUtf8").checked;
 		this.param.option["dlimg"]      = document.getElementById("sbDetailImage").checked;
 		this.param.option["dlsnd"]      = document.getElementById("sbDetailSound").checked;
 		this.param.option["dlmov"]      = document.getElementById("sbDetailMovie").checked;

@@ -8,6 +8,7 @@
 <!ENTITY sb.detail.option.images "Kuvat">
 <!ENTITY sb.detail.option.styles "Tyylit">
 <!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
+<!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
 <!ENTITY sb.detail.linked.file "Lataa linkitetyt tiedostot">
 <!ENTITY sb.detail.linked.image "Kuva">
 <!ENTITY sb.detail.linked.sound "Ääni">

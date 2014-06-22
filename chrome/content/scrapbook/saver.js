@@ -45,7 +45,7 @@ var sbContentSaver = {
 		this.name = "index";
 		this.favicon = null;
 		this.file2URL = { "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
-		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "styles" : true, "script" : false, "textAsHtml" : false };
+		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "styles" : true, "script" : false, "textAsHtml" : false, "forceUtf8" : true };
 		this.plusoption = { "method" : "SB", "timeout" : "0", "charset" : "UTF-8" }
 		this.linkURLs = [];
 		this.frameList = [];
@@ -302,31 +302,33 @@ var sbContentSaver = {
 
 		// change the charset to UTF-8
 		// also change the meta tag; generate one if none found
-		this.item.chars = "UTF-8";
-		var metas = rootNode.getElementsByTagName("meta"), meta, hasmeta = false;
-		for (var i=0, len=metas.length; i<len; ++i) {
-			meta = metas[i];
-			if (meta.hasAttribute("http-equiv") && meta.hasAttribute("content") &&
-				meta.getAttribute("http-equiv").toLowerCase() == "content-type" && 
-				meta.getAttribute("content").match(/^[^;]*;\s*charset=(.*)$/i) )
-			{
-				hasmeta = true;
-				meta.setAttribute("content", "text/html; charset=UTF-8");
+		if ( this.option["forceUtf8"] )
+		{
+			this.item.chars = "UTF-8";
+			var metas = rootNode.getElementsByTagName("meta"), meta, hasmeta = false;
+			for (var i=0, len=metas.length; i<len; ++i) {
+				meta = metas[i];
+				if (meta.hasAttribute("http-equiv") && meta.hasAttribute("content") &&
+					meta.getAttribute("http-equiv").toLowerCase() == "content-type" && 
+					meta.getAttribute("content").match(/^[^;]*;\s*charset=(.*)$/i) )
+				{
+					hasmeta = true;
+					meta.setAttribute("content", "text/html; charset=UTF-8");
+				}
+				else if ( meta.hasAttribute("charset") )
+				{
+					hasmeta = true;
+					meta.setAttribute("charset", "UTF-8");
+				}
 			}
-			else if ( meta.hasAttribute("charset") )
-			{
-				hasmeta = true;
-				meta.setAttribute("charset", "UTF-8");
+			if (!hasmeta) {
+				// use older version for better compatibility
+				var metaNode = aDocument.createElement("meta");
+				metaNode.setAttribute("content", aDocument.contentType + "; charset=" + this.item.chars);
+				metaNode.setAttribute("http-equiv", "Content-Type");
+				rootNode.firstChild.insertBefore(metaNode, rootNode.firstChild.firstChild);
+				rootNode.firstChild.insertBefore(aDocument.createTextNode("\n"), rootNode.firstChild.firstChild);
 			}
-		}
-		if (!hasmeta) {
-			// use older version for better compatibility
-			var metaNode = aDocument.createElement("meta");
-			metaNode.setAttribute("content", aDocument.contentType + "; charset=" + this.item.chars);
-			metaNode.setAttribute("http-equiv", "Content-Type");
-			rootNode.firstChild.insertBefore(aDocument.createTextNode("\n"), rootNode.firstChild.firstChild);
-			rootNode.firstChild.insertBefore(metaNode, rootNode.firstChild.firstChild);
-			rootNode.firstChild.insertBefore(aDocument.createTextNode("\n"), rootNode.firstChild.firstChild);
 		}
 
 		// generate the HTML and CSS file and save

@@ -8,6 +8,7 @@
 <!ENTITY sb.detail.option.images "Зображення">
 <!ENTITY sb.detail.option.styles "Стилі">
 <!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
+<!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
 <!ENTITY sb.detail.linked.file "Завантаження файлів за посиланнями на сторінці">
 <!ENTITY sb.detail.linked.image "Зображення">
 <!ENTITY sb.detail.linked.sound "Звукові файли">
