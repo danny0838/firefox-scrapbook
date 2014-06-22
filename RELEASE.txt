@@ -1,3 +1,9 @@
+Scrapbook X 1.11.1
+----------------
+
+- FIXED: media attribute of stylesheet links are ignored on capture.
+
+
 Scrapbook X 1.11.0
 ----------------
 
