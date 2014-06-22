@@ -335,21 +335,36 @@ var sbCacheService = {
 	processAsync : function()
 	{
 		var res = this.resList[this.index];
+		// update trace message
+		gCacheStatus.firstChild.value = gCacheString.getString("BUILD_CACHE_UPDATE") + " " + sbDataSource.getProperty(res, "title");
+		gCacheStatus.lastChild.value  = Math.round((this.index + 1) / this.resList.length * 100);
+		// inspect the data and do the cache
 		var id  = sbDataSource.getProperty(res, "id");
 		var dir = this.dataDir.clone();
 		dir.append(id);
-		var basePathCut = dir.path.length + 1;
-		gCacheStatus.firstChild.value = gCacheString.getString("BUILD_CACHE_UPDATE") + " " + sbDataSource.getProperty(res, "title");
-		gCacheStatus.lastChild.value  = Math.round((this.index + 1) / this.resList.length * 100);
-		sbCommonUtils.forEachFile(dir, function(){
-			// do not look in skipped files or folders
-			if ( sbCacheService.skipFiles[this.path] ) return 0;
-			// filter with common filter
-			if ( !sbCacheService.cacheFilter(this) ) return;
-			// cache this file
-			sbCacheService.inspectFile(this, this.path.substring(basePathCut).replace(/\\/g, "/"));
-		});
+		switch ( sbDataSource.getProperty(res, "type") ) {
+			case "":
+			case "marked":
+				var file = dir.clone();
+				file.append("index.html");
+				if (!file.exists()) break;
+				sbCacheService.inspectFile(file, "index.html");
+				break;
+			case "site":
+				var basePathCut = dir.path.length + 1;
+				sbCommonUtils.forEachFile(dir, function(){
+					// do not look in skipped files or folders
+					if ( sbCacheService.skipFiles[this.path] ) return 0;
+					// filter with common filter
+					if ( !sbCacheService.cacheFilter(this) ) return;
+					// cache this file
+					sbCacheService.inspectFile(this, this.path.substring(basePathCut).replace(/\\/g, "/"));
+				});
+				break;
+		}
+		// update trace message
 		if ( this._curResURI != this.folders[this.index] ) document.title = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(this.folders[this.index]), "title") || gCacheString.getString("BUILD_CACHE");
+		// next one
 		if ( ++this.index < this.resList.length )
 			setTimeout(function(){ sbCacheService.processAsync(); }, 0);
 		else
