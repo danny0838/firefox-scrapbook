@@ -685,14 +685,6 @@ var sbContentSaver = {
 		if (!aCSS || aCSS.disabled) return "";
 		if (aCSS.href && aCSS.href.indexOf("chrome://") == 0) return "";
 		var content = "";
-		if (aCSS.href) {
-			if (isImport) {
-				content += "/* ::::: " + "(import) " + aCSS.href + " ::::: */\n";
-			}
-			else {
-				content += "/* ::::: " + aCSS.href + " ::::: */\n\n";
-			}
-		}
 		// sometimes <link> cannot access remote css
 		// and aCSS.cssRules fires an error (instead of returning undefined)...
 		// we need this try block to catch that
@@ -724,8 +716,24 @@ var sbContentSaver = {
 				}
 			}, this);
 		}
-		if (isImport) {
-			content += "/* ::::: " + "(end import)" + " ::::: */\n";
+		var media = aCSS.media.mediaText;
+		if (media) {
+			// omit "all" since it's defined in the link tag
+			if (media !== "all") {
+				content = "@media " + media + " {\n" + content + "}\n";
+			}
+			media = " (@media " + media + ")";
+		}
+		if (aCSS.href) {
+			if (!isImport) {
+				content = "/* ::::: " + aCSS.href + media + " ::::: */\n\n" + content;
+			}
+			else {
+				content = "/* ::::: " + "(import) " + aCSS.href + media + " ::::: */\n" + content + "/* ::::: " + "(end import)" + " ::::: */\n";
+			}
+		}
+		else {
+			content = "/* ::::: " + "[internal]" + media + " ::::: */\n\n" + content;
 		}
 		return content;
 	},
