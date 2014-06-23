@@ -1,33 +1,76 @@
-
 const NS_SCRAPBOOK = "http://amb.vis.ne.jp/mozilla/scrapbook-rdf#";
-
-function ScrapBookItem(aID)
-{
-	this.id      = aID;
-	this.type    = "";
-	this.title   = "";
-	this.chars   = "";
-	this.icon    = "";
-	this.source  = "";
-	this.comment = "";
-}
-
 
 var sbCommonUtils = {
 
+	/**
+	 * Frequently used objects
+	 */
+	get RDF() {
+		delete this.RDF;
+		return this.RDF = Components.classes['@mozilla.org/rdf/rdf-service;1'].getService(Components.interfaces.nsIRDFService);
+	},
+	get RDFC() {
+		delete this.RDFC;
+		return this.RDFC = Components.classes['@mozilla.org/rdf/container;1'].getService(Components.interfaces.nsIRDFContainer);
+	},
+	get RDFCU() {
+		delete this.RDFCU;
+		return this.RDFCU = Components.classes['@mozilla.org/rdf/container-utils;1'].getService(Components.interfaces.nsIRDFContainerUtils);
+	},
+	get DIR() {
+		delete this.DIR;
+		return this.DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
+	},
+	get MIME() {
+		delete this.MIME;
+		return this.MIME = Components.classes["@mozilla.org/mime;1"].getService(Components.interfaces.nsIMIMEService);
+	},
+	get IO() {
+		delete this.IO;
+		return this.IO = Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService);
+	},
+	get UNICODE() {
+		delete this.UNICODE;
+		return this.UNICODE = Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter);
+	},
+	get WINDOW() {
+		delete this.WINDOW;
+		return this.WINDOW = Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator);
+	},
+	get PROMPT() {
+		delete this.PROMPT;
+		return this.PROMPT = Components.classes['@mozilla.org/embedcomp/prompt-service;1'].getService(Components.interfaces.nsIPromptService);
+	},
 
-	get RDF()     { return Components.classes['@mozilla.org/rdf/rdf-service;1'].getService(Components.interfaces.nsIRDFService); },
-	get RDFC()    { return Components.classes['@mozilla.org/rdf/container;1'].getService(Components.interfaces.nsIRDFContainer); },
-	get RDFCU()   { return Components.classes['@mozilla.org/rdf/container-utils;1'].getService(Components.interfaces.nsIRDFContainerUtils); },
-	get DIR()     { return Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties); },
-	get MIME()    { return Components.classes["@mozilla.org/mime;1"].getService(Components.interfaces.nsIMIMEService); },
-	get IO()      { return Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService); },
-	get UNICODE() { return Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter); },
-	get WINDOW()  { return Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator); },
-	get PROMPT()  { return Components.classes['@mozilla.org/embedcomp/prompt-service;1'].getService(Components.interfaces.nsIPromptService); },
+	get _fxVer3_5() {
+		delete this._fxVer3_5;
+		return this._fxVer3_5 = (this.checkFirefoxVersion("3.5") >=0);
+	},
+	get _fxVer4() {
+		delete this._fxVer4;
+		return this._fxVer4 = (this.checkFirefoxVersion("4.0") >=0);
+	},
+	get _fxVer11() {
+		delete this._fxVer11;
+		return this._fxVer11 = (this.checkFirefoxVersion("11.0") >=0);
+	},
+	get _fxVer18() {
+		delete this._fxVer18;
+		return this._fxVer18 = (this.checkFirefoxVersion("18.0") >=0);
+	},
+	get _fxVer22() {
+		delete this._fxVer22;
+		return this._fxVer22 = (this.checkFirefoxVersion("22.0") >=0);
+	},
 
-	_fxVer18 : null,
-
+	/**
+	 * return >= 0 if current version >= given version
+	 */
+	checkFirefoxVersion : function(ver) {
+		var iVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
+		var iAppInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
+		return iVerComparator.compare(iAppInfo.version, ver);
+	},
 
 	newItem : function(aID)
 	{
@@ -316,12 +359,6 @@ var sbCommonUtils = {
 	saveTemplateFile : function(aURISpec, aFile)
 	{
 		if ( aFile.exists() ) return;
-		if ( this._fxVer18 == null )
-		{
-			var iAppInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
-			var iVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
-			this._fxVer18 = iVerComparator.compare(iAppInfo.version, "18.0")>=0;
-		}
 		var uri = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
 		uri.spec = aURISpec;
 		var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
@@ -521,6 +558,17 @@ var sbCommonUtils = {
 	/**
 	 * DOM elements handling
 	 */
+
+	getOuterHTML : function(aNode)
+	{
+		if (this._fxVer11) return aNode.outerHTML;
+		var tag = "<" + aNode.nodeName.toLowerCase();
+		for ( var i=0; i<aNode.attributes.length; i++ ) {
+			tag += ' ' + aNode.attributes[i].name + '="' + aNode.attributes[i].value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;") + '"';
+		}
+		tag += ">\n";
+		return tag + aNode.innerHTML + "</" + aNode.nodeName.toLowerCase() + ">\n";
+	},
 
 	/**
 	 * DOM elements considered as ScrapBook additional

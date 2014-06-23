@@ -6,7 +6,6 @@ var sbBrowserOverlay = {
 	infoMode: false,
 	resource: null,
 	locateMe: null,
-	ffVersion: null,
 
 	get STRING() {
 		if (!this._stringBundle)
@@ -35,8 +34,6 @@ var sbBrowserOverlay = {
 
 	init: function()
 	{
-		//Ermitteln der Firefox-Version
-		this.ffVersion = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
 		document.getElementById("contentAreaContextMenu").addEventListener(
 			"popupshowing", this, false
 		);
@@ -103,8 +100,7 @@ var sbBrowserOverlay = {
 		this.editMode = sbPageEditor.TOOLBAR.getAttribute("autoshow") == "true";
 		this.infoMode = sbInfoViewer.TOOLBAR.getAttribute("autoshow") == "true";
 		document.getElementById("ScrapBookMenu").hidden        = !sbCommonUtils.getPref("ui.menuBar", false);
-		var rVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
-		if ( rVerComparator.compare(this.ffVersion.version, "4.0")<0 ) {
+		if ( !sbCommonUtils._fxVer4 ) {
 			document.getElementById("ScrapBookStatusPanel").hidden = !sbCommonUtils.getPref("ui.statusBar", false);
 		}
 		document.getElementById("ScrapBookToolsMenu").hidden   = !sbCommonUtils.getPref("ui.toolsMenu", false);
