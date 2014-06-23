@@ -145,9 +145,11 @@ var sbTradeService = {
 			if (col.index == 0)
 				return this._items[row][4];
 		};
-		treeView.getCellProperties = function(row, col) {
-			if (col.index != 0) return
-			return ATOM_SERVICE.getAtom(this._items[row][7]);
+		treeView.getCellProperties = function(row, col, properties) {
+			if (col.index != 0) return "";
+			var val = this._items[row][7];
+			if (sbCommonUtils._fxVer22) return val;
+			else properties.AppendElement(ATOM_SERVICE.getAtom(val));
 		};
 		treeView.cycleHeader = function(col) {
 			sbCustomTreeUtil.sortItems(sbTradeService, col.element);
