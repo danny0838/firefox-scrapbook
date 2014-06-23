@@ -372,6 +372,11 @@ var sbPageEditor = {
 			this.saveResource();
 		} else {
 			sbDOMEraser.init(2);
+			sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
+			for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
+			{
+				this.saveAllSticky(sbContentSaver.frameList[i]);
+			}
 			var ret = sbBrowserOverlay.execCapture(0, null, !aBypassDialog, "urn:scrapbook:root");
 			if ( ret ) this.exit(true);
 		}
