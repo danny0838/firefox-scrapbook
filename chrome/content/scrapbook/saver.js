@@ -684,7 +684,7 @@ var sbContentSaver = {
 			if (!aCSS.cssRules) skip = true;
 		}
 		catch(ex) {
-			console.warn("Unable to access CSS from '" + aCSS.href + "' in page '" + aDocument.location.href + "' \n" + ex);
+			sbCommonUtils.warn("Unable to access CSS from '" + aCSS.href + "' in page '" + aDocument.location.href + "' \n" + ex);
 				content += "/* ERROR: Unable to access this CSS */\n\n";
 			skip = true;
 		}
@@ -793,7 +793,7 @@ var sbContentSaver = {
 				return newFileName;
 			}
 			catch(ex) {
-				console.error("*** SCRAPBOOK_PERSIST_FAILURE: " + aURLSpec + "\n" + ex + "\n");
+				sbCommonUtils.error("*** SCRAPBOOK_PERSIST_FAILURE: " + aURLSpec + "\n" + ex + "\n");
 				this.httpTask[this.item.id]--;
 				return "";
 			}
@@ -808,7 +808,7 @@ var sbContentSaver = {
 				return newFileName;
 			}
 			catch(ex) {
-				console.error("*** SCRAPBOOK_COPY_FAILURE: " + aURLSpec + "\n" + ex + "\n");
+				sbCommonUtils.error("*** SCRAPBOOK_COPY_FAILURE: " + aURLSpec + "\n" + ex + "\n");
 				return "";
 			}
 		}

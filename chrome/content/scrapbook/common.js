@@ -37,6 +37,10 @@ var sbCommonUtils = {
 		delete this.WINDOW;
 		return this.WINDOW = Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator);
 	},
+	get CONSOLE() {
+		delete this.CONSOLE;
+		return this.CONSOLE = Components.classes['@mozilla.org/consoleservice;1'].getService(Components.interfaces.nsIConsoleService);
+	},
 	get PROMPT() {
 		delete this.PROMPT;
 		return this.PROMPT = Components.classes['@mozilla.org/embedcomp/prompt-service;1'].getService(Components.interfaces.nsIPromptService);
@@ -61,6 +65,10 @@ var sbCommonUtils = {
 	get _fxVer22() {
 		delete this._fxVer22;
 		return this._fxVer22 = (this.checkFirefoxVersion("22.0") >=0);
+	},
+	get _fxVer30() {
+		delete this._fxVer30;
+		return this._fxVer30 = (this.checkFirefoxVersion("30.0") >=0);
 	},
 
 	/**
@@ -255,7 +263,7 @@ var sbCommonUtils = {
 			aRelURL = aRelURL.replace(/\"/g, "");
 			return baseURLObj.resolve(aRelURL);
 		} catch(ex) {
-			console.error("*** ScrapBook ERROR: Failed to resolve URL: " + aBaseURL + "\t" + aRelURL + "\n");
+			sbCommonUtils.error("*** ScrapBook ERROR: Failed to resolve URL: " + aBaseURL + "\t" + aRelURL + "\n");
 		}
 	},
 
@@ -533,7 +541,7 @@ var sbCommonUtils = {
 			}
 		}
 		catch (ex) {
-			console.error("ERROR: unable to set a pref: " + aName);
+			sbCommonUtils.error("ERROR: unable to set a pref: " + aName);
 		}
 	},
 
@@ -548,10 +556,48 @@ var sbCommonUtils = {
 		window.openDialog("chrome://scrapbook/content/manage.xul", "ScrapBook:Manage", "chrome,centerscreen,all,resizable,dialog=no", aRes, aModEltID);
 	},
 
-	log : function(aMsg, aOpen)
+	log : function(aMsg)
 	{
-		const CONSOLE = Components.classes['@mozilla.org/consoleservice;1'].getService(Components.interfaces.nsIConsoleService);
-		CONSOLE.logStringMessage(aMsg);
+		if (this._fxVer30) {
+			// Support started since Firefox 4.0
+			// However, older versions may not see the message.
+			// The least version known work is Firefox 30.0
+			console.log(aMsg);
+		}
+		else {
+			// does not record the script line and is not suitable for tracing...
+			this.CONSOLE.logStringMessage(aMsg);
+		}
+	},
+
+	warn : function(aMsg)
+	{
+		if (this._fxVer30) {
+			// Support started since Firefox 4.0
+			// However, older versions may not see the message.
+			// The least version known work is Firefox 30.0
+			console.warn(aMsg);
+		}
+		else {
+			// set javascript.options.showInConsole to true in the about:config to see it
+			// default true since Firefox 4.0
+			Components.utils.reportError(aMsg);
+		}
+	},
+
+	error : function(aMsg)
+	{
+		if (this._fxVer30) {
+			// Support started since Firefox 4.0
+			// However, older versions may not see the message.
+			// The least version known work is Firefox 30.0
+			console.error(aMsg);
+		}
+		else {
+			// set javascript.options.showInConsole to true in the about:config to see it
+			// default true since Firefox 4.0
+			Components.utils.reportError(aMsg);
+		}
 	},
 
 
