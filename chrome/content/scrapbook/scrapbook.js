@@ -208,9 +208,7 @@ var sbController = {
 
 	isTreeContext : function(itcEvent)
 	{
-		var itcAppInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
-		var itcVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
-		if ( itcVerComparator.compare(itcAppInfo.version, "4.0")<0 ) {
+		if ( !sbCommonUtils._fxVer4 ) {
 			return document.popupNode.nodeName == "treechildren";
 		}else {
 			return itcEvent.originalTarget.triggerNode.nodeName == "treechildren";
@@ -490,9 +488,7 @@ var sbTreeDNDHandler = {
 		},
 		onDrop: function(row, orient) {
 			var XferData, XferType;
-			var odAppInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
-			var odVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
-			if (odVerComparator.compare(odAppInfo.version, "3.5")>=0 &&
+			if (!sbCommonUtils._fxVer3_5 &&
 			    (sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0) == "application/x-moz-tabbrowser-tab" ||
 				 sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0) == "sb/tradeitem"))
 			{

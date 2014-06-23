@@ -26,8 +26,27 @@ var sbCommonUtils = {
 	get WINDOW()  { return Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator); },
 	get PROMPT()  { return Components.classes['@mozilla.org/embedcomp/prompt-service;1'].getService(Components.interfaces.nsIPromptService); },
 
-	_fxVer18 : null,
+	get _fxVer3_5() {
+		delete this._fxVer3_5;
+		return this._fxVer3_5 = (this.checkFirefoxVersion("3.5") >=0);
+	},
+	get _fxVer4() {
+		delete this._fxVer4;
+		return this._fxVer4 = (this.checkFirefoxVersion("4.0") >=0);
+	},
+	get _fxVer18() {
+		delete this._fxVer18;
+		return this._fxVer18 = (this.checkFirefoxVersion("18.0") >=0);
+	},
 
+	/**
+	 * return >= 0 if current version >= given version
+	 */
+	checkFirefoxVersion : function(ver) {
+		var iVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
+		var iAppInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
+		return iVerComparator.compare(iAppInfo.version, ver);
+	},
 
 	newItem : function(aID)
 	{
@@ -316,12 +335,6 @@ var sbCommonUtils = {
 	saveTemplateFile : function(aURISpec, aFile)
 	{
 		if ( aFile.exists() ) return;
-		if ( this._fxVer18 == null )
-		{
-			var iAppInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
-			var iVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
-			this._fxVer18 = iVerComparator.compare(iAppInfo.version, "18.0")>=0;
-		}
 		var uri = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
 		uri.spec = aURISpec;
 		var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);

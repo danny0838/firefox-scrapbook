@@ -17,8 +17,6 @@ var sbContentSaver = {
 	isMainFrame  : true,
 	selection    : null,
 	linkURLs     : [],
-	_fxVer35     : null,
-	_fxVer18     : null,
 
 
 
@@ -34,13 +32,6 @@ var sbContentSaver = {
 
 	init : function(aPresetData)
 	{
-		if ( this._fxVer35 == null )
-		{
-			var iAppInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
-			var iVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
-			this._fxVer35 = iVerComparator.compare(iAppInfo.version, "3.5")>=0;
-			this._fxVer18 = iVerComparator.compare(iAppInfo.version, "18.0")>=0;
-		}
 		this.item = sbCommonUtils.newItem(sbDataSource.identify(sbCommonUtils.getTimeStamp()));
 		this.name = "index";
 		this.favicon = null;
@@ -792,7 +783,7 @@ var sbContentSaver = {
 				var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
 				WBP.persistFlags |= WBP.PERSIST_FLAGS_FROM_CACHE;
 				WBP.persistFlags |= WBP.PERSIST_FLAGS_AUTODETECT_APPLY_CONVERSION;
-				if ( this._fxVer18 ) {
+				if ( sbCommonUtils._fxVer18 ) {
 					WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile, null);
 				} else {
 					WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile);
