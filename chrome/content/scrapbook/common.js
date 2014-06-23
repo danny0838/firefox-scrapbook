@@ -50,6 +50,10 @@ var sbCommonUtils = {
 		delete this._fxVer4;
 		return this._fxVer4 = (this.checkFirefoxVersion("4.0") >=0);
 	},
+	get _fxVer11() {
+		delete this._fxVer11;
+		return this._fxVer11 = (this.checkFirefoxVersion("11.0") >=0);
+	},
 	get _fxVer18() {
 		delete this._fxVer18;
 		return this._fxVer18 = (this.checkFirefoxVersion("18.0") >=0);
@@ -550,6 +554,17 @@ var sbCommonUtils = {
 	/**
 	 * DOM elements handling
 	 */
+
+	getOuterHTML : function(aNode)
+	{
+		if (this._fxVer11) return aNode.outerHTML;
+		var tag = "<" + aNode.nodeName.toLowerCase();
+		for ( var i=0; i<aNode.attributes.length; i++ ) {
+			tag += ' ' + aNode.attributes[i].name + '="' + aNode.attributes[i].value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;") + '"';
+		}
+		tag += ">\n";
+		return tag + aNode.innerHTML + "</" + aNode.nodeName.toLowerCase() + ">\n";
+	},
 
 	/**
 	 * DOM elements considered as ScrapBook additional

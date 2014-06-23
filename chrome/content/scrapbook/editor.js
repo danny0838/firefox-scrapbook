@@ -408,7 +408,7 @@ var sbPageEditor = {
 				alert("NOTICE: '" + doc.location.href + "' is not UTF-8 encoded, some content may lose.");
 			}
 			var rootNode = doc.getElementsByTagName("html")[0];
-			var src = sbContentSaver.doctypeToString(doc.doctype) + rootNode.outerHTML;
+			var src = sbContentSaver.doctypeToString(doc.doctype) + sbCommonUtils.getOuterHTML(rootNode);
 			var file = sbCommonUtils.getContentDir(this.item.id).clone();
 			file.append(sbCommonUtils.getFileName(doc.location.href));
 			sbCommonUtils.writeFile(file, src, charset);
