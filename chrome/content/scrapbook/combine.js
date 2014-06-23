@@ -456,7 +456,7 @@ var sbPageCombiner = {
 		}
 		divElem.id  = "item" + sbCombineService.curID;
 		divElem.innerHTML = this.BODY.innerHTML + "\n";
-		return divElem.outerHTML;
+		return sbCommonUtils.getOuterHTML(divElem);
 	},
 
 	surroundCSS : function()

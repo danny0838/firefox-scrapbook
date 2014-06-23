@@ -3,11 +3,7 @@ var sbPrefWindow = {
 	changed: false,
 
 	init: function() {
-		//Checkbox zum Aktivieren des Status-Bar Icons ausblenden, falls FF>=4
-		var iffVersion = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
-		var iVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
-		if ( iVerComparator.compare(iffVersion.version, "4.0")>=0 ) document.getElementById("sbPrefStatsBarIcon").hidden = true;
-		//Ende
+		if ( sbCommonUtils._fxVer4 ) document.getElementById("sbPrefStatsBarIcon").hidden = true;
 		this.updateDataPath();
 		this.hlInitUI();
 		this._updateFileField("sbDataPath", "extensions.scrapbook.data.path");

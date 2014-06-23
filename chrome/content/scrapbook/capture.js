@@ -618,10 +618,22 @@ var sbInvisibleBrowser = {
 		this.ELEMENT.docShell.allowJavascript = gOption["script"];
 		this.ELEMENT.docShell.allowImages     = gOption["images"];
 		this.ELEMENT.docShell.allowMetaRedirects = false;
-		this.ELEMENT.docShell.charset = gCharset || null;
-		if ( Components.interfaces.nsIDocShell ) {
+		// older version of Firefox gets error on setting charset
+		try {
+			if (gCharset) this.ELEMENT.docShell.charset = gCharset;
+		}
+		catch (ex) {
+			alert("ERROR: Your browser does not support setting input charset.\n\n" + ex);
+		}
+		// nsIDocShellHistory is deprecated in newer version of Firefox
+		// nsIDocShell in the old version doesn't work
+		if ( Components.interfaces.nsIDocShellHistory ) {
+			this.ELEMENT.docShell.QueryInterface(Components.interfaces.nsIDocShellHistory).useGlobalHistory = false;
+		}
+		else if ( Components.interfaces.nsIDocShell ) {
 			this.ELEMENT.docShell.QueryInterface(Components.interfaces.nsIDocShell).useGlobalHistory = false;
-		} else {
+		}
+		else {
 			this.ELEMENT.docShell.useGlobalHistory = false;
 		}
 		this.loading = aURL;
@@ -841,7 +853,7 @@ var sbCrossLinker = {
 			if ( shouldSave )
 			{
 				var rootNode = doc.getElementsByTagName("html")[0];
-				var src = sbContentSaver.doctypeToString(doc.doctype) + rootNode.outerHTML;
+				var src = sbContentSaver.doctypeToString(doc.doctype) + sbCommonUtils.getOuterHTML(rootNode);
 				var file = sbCommonUtils.getContentDir(gReferItem.id);
 				file.append(sbCommonUtils.getFileName(doc.location.href));
 				sbCommonUtils.writeFile(file, src, doc.characterSet);
