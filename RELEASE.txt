@@ -1,3 +1,9 @@
+Scrapbook X 1.11.3
+----------------
+
+- UPDATE: extends compatibility down to Firefox 3.0.
+
+
 Scrapbook X 1.11.2
 ----------------
 
