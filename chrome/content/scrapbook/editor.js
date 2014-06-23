@@ -134,6 +134,8 @@ var sbPageEditor = {
 				case aEvent.DOM_VK_2 : idx = 2; break;
 				case aEvent.DOM_VK_3 : idx = 3; break;
 				case aEvent.DOM_VK_4 : idx = 4; break;
+				case aEvent.DOM_VK_5 : idx = 5; break;
+				case aEvent.DOM_VK_6 : idx = 6; break;
 				default : return;
 			}
 			if ( idx > 0 ) sbPageEditor.highlight(idx);
@@ -370,6 +372,11 @@ var sbPageEditor = {
 			this.saveResource();
 		} else {
 			sbDOMEraser.init(2);
+			sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
+			for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
+			{
+				this.saveAllSticky(sbContentSaver.frameList[i]);
+			}
 			var ret = sbBrowserOverlay.execCapture(0, null, !aBypassDialog, "urn:scrapbook:root");
 			if ( ret ) this.exit(true);
 		}
