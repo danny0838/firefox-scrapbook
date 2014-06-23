@@ -1,6 +1,7 @@
 <!ENTITY sb.new.folder "Новый каталог">
 <!ENTITY sb.new.separator "Новый разделитель">
 <!ENTITY sb.new.note "Создать заметку">
+<!ENTITY sb.new.notex "New Note Page">
 <!ENTITY sb.toggle.all "Открыть/закрыть все каталоги">
 <!ENTITY sb.tools "Инструменты">
 <!ENTITY sb.tools.options "Настройки расширения">

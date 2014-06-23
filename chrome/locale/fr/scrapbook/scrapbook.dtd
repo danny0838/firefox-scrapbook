@@ -1,6 +1,7 @@
 <!ENTITY sb.new.folder "Nouveau dossier">
 <!ENTITY sb.new.separator "Nouveau séparateur">
 <!ENTITY sb.new.note "Nouvelle note">
+<!ENTITY sb.new.notex "New Note Page">
 <!ENTITY sb.toggle.all "Ouvrir/fermer tous les dossiers">
 <!ENTITY sb.tools "Outils">
 <!ENTITY sb.tools.options "Paramètres">

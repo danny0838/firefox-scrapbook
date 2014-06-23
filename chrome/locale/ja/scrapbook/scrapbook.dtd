@@ -1,6 +1,7 @@
 <!ENTITY sb.new.folder "新しいフォルダ">
 <!ENTITY sb.new.separator "新しい区切り">
 <!ENTITY sb.new.note "新しいノート">
+<!ENTITY sb.new.notex "新しいノートページ">
 <!ENTITY sb.toggle.all "すべてのフォルダを開く／閉じる">
 <!ENTITY sb.tools "ツール">
 <!ENTITY sb.tools.options "設定">

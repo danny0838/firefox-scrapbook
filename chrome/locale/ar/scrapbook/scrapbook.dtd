@@ -1,7 +1,8 @@
 <!ENTITY sb.new.folder "مجلد جديد">
 <!ENTITY sb.new.separator "فاصل جديد">
 <!ENTITY sb.new.note "ملاحظة جديدة">
-<!ENTITY sb.toggle.all "فتح \ إغلاق جميع المجلدات">
+<!ENTITY sb.new.notex "New Note Page">
+<!ENTITY sb.toggle.all "فتح  إغلاق جميع المجلدات">
 <!ENTITY sb.tools "أدوات">
 <!ENTITY sb.tools.options "خيارات">
 <!ENTITY sb.tools.manage "إدارة">

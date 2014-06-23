@@ -1,6 +1,7 @@
 <!ENTITY sb.new.folder "Novo cartafol">
 <!ENTITY sb.new.separator "Novo separador">
 <!ENTITY sb.new.note "Nova nota">
+<!ENTITY sb.new.notex "New Note Page">
 <!ENTITY sb.toggle.all "Abrir/Pechar todos os cartafoles">
 <!ENTITY sb.tools "Ferramentas">
 <!ENTITY sb.tools.options "Opcións">

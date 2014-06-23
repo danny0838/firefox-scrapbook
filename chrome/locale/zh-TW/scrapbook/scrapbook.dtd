@@ -1,6 +1,7 @@
 <!ENTITY sb.new.folder "開新資料夾">
 <!ENTITY sb.new.separator "新增分隔線">
 <!ENTITY sb.new.note "新增筆記">
+<!ENTITY sb.new.notex "新增筆記頁面">
 <!ENTITY sb.toggle.all "開啟/收合所有資料夾">
 <!ENTITY sb.tools "工具">
 <!ENTITY sb.tools.options "設定">

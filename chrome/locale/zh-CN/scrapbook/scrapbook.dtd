@@ -1,6 +1,7 @@
 <!ENTITY sb.new.folder "新建文件夹">
 <!ENTITY sb.new.separator "新建分隔线">
 <!ENTITY sb.new.note "新建便签">
+<!ENTITY sb.new.notex "新建便签页面">
 <!ENTITY sb.toggle.all "打开 / 关闭全部文件夹">
 <!ENTITY sb.tools "工具">
 <!ENTITY sb.tools.options "选项">

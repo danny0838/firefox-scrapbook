@@ -23,6 +23,7 @@
 <!ENTITY sb.new.folder "開新資料夾">
 <!ENTITY sb.new.separator "新增分隔線">
 <!ENTITY sb.new.note "新增筆記">
+<!ENTITY sb.new.notex "新增筆記頁面">
 <!ENTITY sb.sort.folder "資料夾文件排序">
 <!ENTITY sb.search "搜尋">
 <!ENTITY sb.search.fulltext "全文搜尋">

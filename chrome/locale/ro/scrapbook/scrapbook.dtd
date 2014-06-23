@@ -1,6 +1,7 @@
 <!ENTITY sb.new.folder "Dosar nou">
 <!ENTITY sb.new.separator "Separator nou">
 <!ENTITY sb.new.note "Notă nouă">
+<!ENTITY sb.new.notex "New Note Page">
 <!ENTITY sb.toggle.all "Expandează/Restrânge toate dosarele">
 <!ENTITY sb.tools "Instrumente ">
 <!ENTITY sb.tools.options "Opțiuni">

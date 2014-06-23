@@ -23,6 +23,7 @@
 <!ENTITY sb.new.folder "Novo cartafol">
 <!ENTITY sb.new.separator "Novo separador">
 <!ENTITY sb.new.note "Nova nota">
+<!ENTITY sb.new.notex "New Note Page">
 <!ENTITY sb.sort.folder "Ordenar cartafol">
 <!ENTITY sb.search "Procurar">
 <!ENTITY sb.search.fulltext "Procurar texto completo">

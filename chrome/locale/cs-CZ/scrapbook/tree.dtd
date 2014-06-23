@@ -23,6 +23,7 @@
 <!ENTITY sb.new.folder "Nová složka">
 <!ENTITY sb.new.separator "Nový oddělovač">
 <!ENTITY sb.new.note "Nová poznámka">
+<!ENTITY sb.new.notex "New Note Page">
 <!ENTITY sb.sort.folder "Seřadit složku">
 <!ENTITY sb.search "Hledat">
 <!ENTITY sb.search.fulltext "Fulltextové vyhledávání">
