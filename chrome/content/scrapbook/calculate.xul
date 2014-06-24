@@ -33,9 +33,6 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapbook.js" />
 
-	<!--stringbundle-->
-	<stringbundle id="sbPropString" src="chrome://scrapbook/locale/property.properties" />
-
 	<keyset>
 		<key keycode="VK_ESCAPE" oncommand="window.close();" />
 		<key keycode="VK_F5"     oncommand="window.location.reload();" />

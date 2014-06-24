@@ -122,7 +122,6 @@ var sbCaptureTask = {
 
 	get INTERVAL() { return gTimeout; },
 	get TREE()     { return document.getElementById("sbpURLList"); },
-	get STRING()   { return document.getElementById("sbCaptureString"); },
 	get URL()      { return gURLs[this.index]; },
 
 	index       : 0,
@@ -204,7 +203,7 @@ var sbCaptureTask = {
 		this.canRefresh = true;
 		var url = aOverriddenURL || gURLs[this.index];
 		if ( gTitles ) gTitle = gTitles[this.index];
-		SB_trace(this.STRING.getString("CONNECT") + "... " + url);
+		SB_trace(sbCommonUtils.lang("capture", "CONNECT") + "... " + url);
 		if ( gMethod != "SB" ) alert(gMethod+" unknown");
 		if ( url.indexOf("file://") == 0 ) {
 			sbInvisibleBrowser.load(url);
@@ -267,7 +266,7 @@ var sbCaptureTask = {
 
 	countDown : function()
 	{
-		SB_trace(this.STRING.getFormattedString("WAITING", [sbCaptureTask.seconds]) + "...");
+		SB_trace(sbCommonUtils.lang("capture", "WAITING", [sbCaptureTask.seconds]) + "...");
 		if ( --this.seconds > 0 )
 			this.timerID = window.setTimeout(function(){ sbCaptureTask.countDown(); }, 1000);
 		else
@@ -642,7 +641,7 @@ var sbInvisibleBrowser = {
 
 	execCapture : function()
 	{
-		SB_trace(sbCaptureTask.STRING.getString("CAPTURE_START"));
+		SB_trace(sbCommonUtils.lang("capture", "CAPTURE_START"));
 		document.getElementById("sbCapturePauseButton").disabled = true;
 		sbCaptureTask.toggleSkipButton(false);
 		var ret = null;
@@ -678,7 +677,7 @@ var sbInvisibleBrowser = {
 		else
 		{
 			if ( gShowDetail ) window.close();
-			SB_trace(sbCaptureTask.STRING.getString("CAPTURE_ABORT"));
+			SB_trace(sbCommonUtils.lang("capture", "CAPTURE_ABORT"));
 			sbCaptureTask.fail("");
 		}
 	},
@@ -697,7 +696,7 @@ var sbInvisibleBrowser = {
 	{
 		if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
 		{
-			SB_trace(sbCaptureTask.STRING.getString("LOADING") + "... " + (++this.fileCount) + " " + (sbCaptureTask.URL ? sbCaptureTask.URL : this.ELEMENT.contentDocument.title));
+			SB_trace(sbCommonUtils.lang("capture", "LOADING") + "... " + (++this.fileCount) + " " + (sbCaptureTask.URL ? sbCaptureTask.URL : this.ELEMENT.contentDocument.title));
 		}
 	},
 
@@ -705,7 +704,7 @@ var sbInvisibleBrowser = {
 	{
 		if ( aCurTotalProgress != aMaxTotalProgress )
 		{
-			SB_trace(sbCaptureObserverCallback.getString("TRANSFER_DATA") + "... (" + aCurTotalProgress + " Bytes)");
+			SB_trace(sbCommonUtils.lang("overlay", "TRANSFER_DATA") + "... (" + aCurTotalProgress + " Bytes)");
 		}
 	},
 
@@ -741,7 +740,7 @@ var sbCrossLinker = {
 		{
 			if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
 			{
-				SB_trace(sbCaptureTask.STRING.getFormattedString("REBUILD_LINKS", [sbCrossLinker.index + 1, sbCrossLinker.nameList.length]) + "... "
+				SB_trace(sbCommonUtils.lang("capture", "REBUILD_LINKS", [sbCrossLinker.index + 1, sbCrossLinker.nameList.length]) + "... "
 					+ ++sbInvisibleBrowser.fileCount + " : " + sbCrossLinker.nameList[sbCrossLinker.index] + ".html");
 			}
 		};
@@ -766,7 +765,7 @@ var sbCrossLinker = {
 		}
 		else
 		{
-			SB_trace(sbCaptureTask.STRING.getString("REBUILD_LINKS_COMPLETE"));
+			SB_trace(sbCommonUtils.lang("capture", "REBUILD_LINKS_COMPLETE"));
 			this.flushXML();
 			SB_fireNotification(gReferItem);
 			//Fenster wird nur geschlossen, wenn alle ausgewaehlten Seiten heruntergeladen werden konnten
@@ -981,11 +980,11 @@ sbHeaderSniffer.prototype = {
 	{
 		sbCaptureTask.contentType = this.getHeader("Content-Type");
 		var httpStatus = this.getStatus();
-		SB_trace(sbCaptureTask.STRING.getString("CONNECT_SUCCESS") + " (Content-Type: " + sbCaptureTask.contentType + ")");
+		SB_trace(sbCommonUtils.lang("capture", "CONNECT_SUCCESS") + " (Content-Type: " + sbCaptureTask.contentType + ")");
 		switch ( httpStatus )
 		{
-			case 404 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCaptureTask.STRING.getString("HTTP_STATUS_404") + " (404 Not Found)"); return;
-			case 403 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCaptureTask.STRING.getString("HTTP_STATUS_403") + " (403 Forbidden)"); return;
+			case 404 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCommonUtils.lang("capture", "HTTP_STATUS_404") + " (404 Not Found)"); return;
+			case 403 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCommonUtils.lang("capture", "HTTP_STATUS_403") + " (403 Forbidden)"); return;
 			case 500 : sbCaptureTask.failed++;sbCaptureTask.fail("500 Internal Server Error"); return;
 		}
 		var redirectURL = this.getHeader("Location");
@@ -1017,18 +1016,13 @@ sbHeaderSniffer.prototype = {
 	{
 		//Ermitteln, wann der Wert this.failed erhoeht werden muss
 		sbCaptureTask.failed++;
-		sbCaptureTask.fail(sbCaptureTask.STRING.getString("CONNECT_FAILURE") + " (" + aErrorMsg + ")");
+		sbCaptureTask.fail(sbCommonUtils.lang("capture", "CONNECT_FAILURE") + " (" + aErrorMsg + ")");
 	},
 
 };
 
 
 
-
-sbCaptureObserverCallback.getString = function(aBundleName)
-{
-	return document.getElementById("sbOverlayString").getString(aBundleName);
-},
 
 sbCaptureObserverCallback.trace = function(aText)
 {

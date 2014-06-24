@@ -1,7 +1,4 @@
-
 var gCacheStatus;
-var gCacheString;
-
 var gCacheFile;
 
 
@@ -10,7 +7,6 @@ var gCacheFile;
 function SB_initFT(type)
 {
 	gCacheStatus = document.getElementById("sbCacheStatus");
-	gCacheString = document.getElementById("sbCacheString");
 	gCacheFile = sbCommonUtils.getScrapBookDir().clone();
 	gCacheFile.append("cache.rdf");
 	sbDataSource.init();
@@ -118,7 +114,7 @@ var sbSearchResult =
 		{
 			if ( ++this.index % 100 == 0 ) {
 				setTimeout(function(){ sbSearchResult.process(); }, 0);
-				var msg = document.getElementById("sbMainString").getString("SCANNING") + "... ("  + Math.round(this.index / this.count * 100) + " %)";
+				var msg = sbCommonUtils.lang("fulltext", "SCANNING") + "... ("  + Math.round(this.index / this.count * 100) + " %)";
 				document.title = document.getElementById("sbResultHeader").firstChild.value = msg;
 			} else {
 				this.process();
@@ -217,10 +213,10 @@ var sbSearchResult =
 			else properties.AppendElement(ATOM_SERVICE.getAtom(val));
 		};
 		document.getElementById("sbTree").view = treeView;
-		var headerLabel1 = gCacheString.getFormattedString("RESULTS_FOUND", [this.hit] );
+		var headerLabel1 = sbCommonUtils.lang("fulltext", "RESULTS_FOUND", [this.hit] );
 		if ( this.QueryStrings['re'] == "true" )
 		{
-			var headerLabel2 = gCacheString.getFormattedString("MATCHING", [ this.localizedQuotation(this.QueryStrings['q']) ]);
+			var headerLabel2 = sbCommonUtils.lang("fulltext", "MATCHING", [ this.localizedQuotation(this.QueryStrings['q']) ]);
 		}
 		else
 		{
@@ -228,12 +224,12 @@ var sbSearchResult =
 			for ( var x = 0; x < this.includeWords.length; x++ ) {
 				includeQuoted.push(this.localizedQuotation(this.includeWords[x]));
 			}
-			if ( includeQuoted.length > 0 ) includeQuoted = gCacheString.getFormattedString("INCLUDING", [includeQuoted.join(" ")]);
+			if ( includeQuoted.length > 0 ) includeQuoted = sbCommonUtils.lang("fulltext", "INCLUDING", [includeQuoted.join(" ")]);
 			var excludeQuoted = [];
 			for ( var x = 0; x < this.excludeWords.length; x++ ) {
 				excludeQuoted.push(this.localizedQuotation(this.excludeWords[x]));
 			}
-			if ( excludeQuoted.length > 0 ) excludeQuoted = gCacheString.getFormattedString("EXCLUDING", [excludeQuoted.join(" ")]);
+			if ( excludeQuoted.length > 0 ) excludeQuoted = sbCommonUtils.lang("fulltext", "EXCLUDING", [excludeQuoted.join(" ")]);
 			var headerLabel2 = includeQuoted + " " + excludeQuoted;
 		}
 		document.title = document.getElementById("sbResultHeader").firstChild.value = headerLabel1 + " : " + headerLabel2;
@@ -256,7 +252,7 @@ var sbSearchResult =
 
 	localizedQuotation : function(aString)
 	{
-		return gCacheString.getFormattedString("QUOTATION", [aString]);
+		return sbCommonUtils.lang("fulltext", "QUOTATION", [aString]);
 	},
 
 	forward : function(key)
@@ -310,8 +306,8 @@ var sbCacheService = {
 
 	build : function()
 	{
-		document.title = gCacheString.getString("BUILD_CACHE") + " - ScrapBook";
-		gCacheStatus.firstChild.value = gCacheString.getString("BUILD_CACHE_INIT");
+		document.title = sbCommonUtils.lang("fulltext", "BUILD_CACHE") + " - ScrapBook";
+		gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_INIT");
 		sbCacheSource.refreshEntries();
 		this.dataDir = sbCommonUtils.getScrapBookDir().clone();
 		this.dataDir.append("data");
@@ -337,7 +333,7 @@ var sbCacheService = {
 	{
 		var res = this.resList[this.index];
 		// update trace message
-		gCacheStatus.firstChild.value = gCacheString.getString("BUILD_CACHE_UPDATE") + " " + sbDataSource.getProperty(res, "title");
+		gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_UPDATE") + " " + sbDataSource.getProperty(res, "title");
 		gCacheStatus.lastChild.value  = Math.round((this.index + 1) / this.resList.length * 100);
 		// inspect the data and do the cache
 		var id  = sbDataSource.getProperty(res, "id");
@@ -383,7 +379,7 @@ var sbCacheService = {
 				break;
 		}
 		// update trace message
-		document.title = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(this.folders[this.index]), "title") || gCacheString.getString("BUILD_CACHE");
+		document.title = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(this.folders[this.index]), "title") || sbCommonUtils.lang("fulltext", "BUILD_CACHE");
 		// next one
 		if ( ++this.index < this.resList.length )
 			setTimeout(function(){ sbCacheService.processAsync(); }, 0);
@@ -485,16 +481,16 @@ var sbCacheService = {
 
 	finalize : function()
 	{
-		document.title = gCacheString.getString("BUILD_CACHE_UPDATE");
+		document.title = sbCommonUtils.lang("fulltext", "BUILD_CACHE_UPDATE");
 		for ( var uri in this.uriHash )
 		{
 			if ( !this.uriHash[uri] && uri != "urn:scrapbook:cache" )
 			{
-				gCacheStatus.firstChild.value = gCacheString.getString("BUILD_CACHE_REMOVE") + " " + uri;
+				gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_REMOVE") + " " + uri;
 				sbCacheSource.removeEntry(sbCommonUtils.RDF.GetResource(uri));
 			}
 		}
-		gCacheStatus.firstChild.value = gCacheString.getString("BUILD_CACHE_UPDATE") + "cache.rdf";
+		gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_UPDATE") + "cache.rdf";
 		sbCacheSource.flush();
 		try {
 			if ( window.arguments[0] ) sbCommonUtils.loadURL(window.arguments[0], true);

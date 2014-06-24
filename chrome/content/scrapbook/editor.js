@@ -15,13 +15,6 @@ var sbPageEditor = {
 		changed2 : [],
 	},
 
-	get STRING() {
-		if (!this._stringBundle)
-			this._stringBundle = document.getElementById("ScrapBookOverlayString");
-		return this._stringBundle;
-	},
-	_stringBundle: null,
-
 	init : function(aID)
 	{
 		// Update highlighter previewers
@@ -160,11 +153,11 @@ var sbPageEditor = {
 		this.COMMENT.setAttribute("multiline", this.multiline);
 		this.COMMENT.setAttribute("style", this.multiline ? "height:100px;" : "padding:2px;");
 		if ( this.multiline ) {
-			document.getElementById("ScrapBookToggleComment").setAttribute("tooltiptext", this.STRING.getString("MIN_COMMENT"));
+			document.getElementById("ScrapBookToggleComment").setAttribute("tooltiptext", sbCommonUtils.lang("overlay", "MIN_COMMENT"));
 			document.getElementById("ScrapBookToolbox").appendChild(this.COMMENT);
 			val = val.replace(/\t/g, "\n");
 		} else {
-			document.getElementById("ScrapBookToggleComment").setAttribute("tooltiptext", this.STRING.getString("MAX_COMMENT"));
+			document.getElementById("ScrapBookToggleComment").setAttribute("tooltiptext", sbCommonUtils.lang("overlay", "MAX_COMMENT"));
 			this.TOOLBAR.insertBefore(this.COMMENT, document.getElementById("ScrapBookHighlighterPreview"));
 			val = val.replace(/\n/g, "\t");
 		}
@@ -349,7 +342,7 @@ var sbPageEditor = {
 			}
 		}
 		this._documentData(doc, "histories", histories);
-		alert( sbBrowserOverlay.STRING.getString("EDIT_UNDO_LAST") );
+		alert( sbCommonUtils.lang("overlay", "EDIT_UNDO_LAST") );
 		return false;
 	},
 
@@ -359,7 +352,7 @@ var sbPageEditor = {
 		if ( !this._dataChanged1() ) return 0;
 		var button = sbCommonUtils.PROMPT.BUTTON_TITLE_SAVE      * sbCommonUtils.PROMPT.BUTTON_POS_0
 		           + sbCommonUtils.PROMPT.BUTTON_TITLE_DONT_SAVE * sbCommonUtils.PROMPT.BUTTON_POS_1;
-		var text = sbBrowserOverlay.STRING.getFormattedString("EDIT_SAVE_CHANGES", [sbCommonUtils.crop(this.item.title, 32)]);
+		var text = sbCommonUtils.lang("overlay", "EDIT_SAVE_CHANGES", [sbCommonUtils.crop(this.item.title, 32)]);
 		var ret = sbCommonUtils.PROMPT.confirmEx(window, "[ScrapBook]", text, button, null, null, null, null, {});
 		if ( ret == 0 ) this.savePage();
 		return ret;
@@ -639,7 +632,7 @@ var sbDOMEraser = {
 			if ( aEvent.type == "mouseover" )
 			{
 				if ( onSbObj ) {
-					tooltip.textContent = sbBrowserOverlay.STRING.getString("EDIT_REMOVE_HIGHLIGHT");
+					tooltip.textContent = sbCommonUtils.lang("overlay", "EDIT_REMOVE_HIGHLIGHT");
 					sbDOMEraser._setOutline(elem, "2px dashed #0000FF");
 				} else {
 					tooltip.textContent = elem.localName;
@@ -929,7 +922,7 @@ var sbAnnotationService = {
 		if ( !sel ) return;
 		sbPageEditor.allowUndo();
 		var ret = {};
-		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbBrowserOverlay.STRING.getFormattedString("EDIT_INLINE", [sbCommonUtils.crop(sel.toString(), 32)]), ret, null, {}) ) return;
+		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("overlay", "EDIT_INLINE", [sbCommonUtils.crop(sel.toString(), 32)]), ret, null, {}) ) return;
 		if ( !ret.value ) return;
 		var attr = { style : "border-bottom: 2px dotted #FF3333; cursor: help;", "data-sb-obj" : "inline" , class : "scrapbook-inline", title : ret.value };
 		sbHighlighter.set(sbPageEditor.focusedWindow, sel, "span", attr);
@@ -939,7 +932,7 @@ var sbAnnotationService = {
 	{
 		sbPageEditor.allowUndo();
 		var ret = { value : aElement.getAttribute("title") };
-		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbBrowserOverlay.STRING.getFormattedString("EDIT_INLINE", [sbCommonUtils.crop(aElement.textContent, 32)]), ret, null, {}) ) return;
+		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("overlay", "EDIT_INLINE", [sbCommonUtils.crop(aElement.textContent, 32)]), ret, null, {}) ) return;
 		if ( ret.value )
 			aElement.setAttribute("title", ret.value);
 		else
@@ -956,7 +949,7 @@ var sbAnnotationService = {
 		if ( aFlag == "L" )
 		{
 			var ret = {};
-			if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook - " + aLabel, sbPageEditor.STRING.getString("ADDRESS")+":", ret, null, {}) ) return;
+			if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook - " + aLabel, sbCommonUtils.lang("overlay", "ADDRESS")+":", ret, null, {}) ) return;
 			if ( !ret.value ) return;
 			attr["href"] = ret.value;
 			attr["data-sb-obj"] = "link-url";

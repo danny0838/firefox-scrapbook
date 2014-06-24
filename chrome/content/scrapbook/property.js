@@ -1,7 +1,6 @@
 
 var sbPropService = {
 
-	get STRING() { return document.getElementById("sbPropString"); },
 	get ICON()   { return document.getElementById("sbPropIcon"); },
 
 	id       : null,
@@ -53,7 +52,7 @@ var sbPropService = {
 			case "combine"  : this.isTypeSite      = true; bundleName = "TYPE_COMBINE";   break;
 			case "site"     : this.isTypeSite      = true; bundleName = "TYPE_INDEPTH";   break;
 		}
-		document.getElementById("sbPropType").value = this.STRING.getString(bundleName);
+		document.getElementById("sbPropType").value = sbCommonUtils.lang("property", bundleName);
 		document.getElementById("sbPropSourceRow").hidden = this.isTypeFolder || this.isTypeNote || this.isTypeSeparator;
 		document.getElementById("sbPropCharsRow").hidden  = this.isTypeFolder || this.isTypeBookmark || this.isTypeSeparator;
 		document.getElementById("sbPropIconRow").hidden   = this.isTypeSeparator;
@@ -73,7 +72,7 @@ var sbPropService = {
 	{
 		var sizeCount = this.getTotalFileSize(this.id);
 		var txt = sbPropService.formatFileSize(sizeCount[0]);
-		txt += "  " + this.STRING.getFormattedString("FILES_COUNT", [sizeCount[1]]);
+		txt += "  " + sbCommonUtils.lang("property", "FILES_COUNT", [sizeCount[1]]);
 		document.getElementById("sbPropSize").value = txt;
 	},
 
@@ -162,7 +161,7 @@ var sbPropService = {
 	setIconURL : function()
 	{
 		var ret = { value : this.getIconURL() };
-		if ( !sbCommonUtils.PROMPT.prompt(window, document.getElementById("sbPropIconMenu").label, this.STRING.getString("ADDRESS")+":", ret, null, {}) ) return;
+		if ( !sbCommonUtils.PROMPT.prompt(window, document.getElementById("sbPropIconMenu").label, sbCommonUtils.lang("property", "ADDRESS")+":", ret, null, {}) ) return;
 		if ( ret.value ) this.ICON.src = ret.value;
 	},
 

@@ -27,8 +27,6 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/trade.js" />
 
-	<stringbundle id="sbTradeString" src="chrome://scrapbook/locale/trade.properties" />
-
 	<keyset>
 		<key key="a" modifiers="accel" oncommand="sbTradeService.TREE.focus();sbTradeService.TREE.view.selection.selectAll();" />
 	</keyset>

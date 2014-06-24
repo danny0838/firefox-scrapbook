@@ -1,8 +1,6 @@
 
 var sbMainService = {
 
-	get STRING() { return document.getElementById("sbMainString"); },
-
 	baseURL: "",
 	prefs  : {},
 
@@ -95,7 +93,7 @@ var sbMainService = {
 		sbListHandler.quit();
 		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
 		var newItem = sbCommonUtils.newItem(newID);
-		newItem.title = this.STRING.getString("DEFAULT_FOLDER");
+		newItem.title = sbCommonUtils.lang("scrapbook", "DEFAULT_FOLDER");
 		newItem.type = "folder";
 		var tarResName, tarRelIdx, isRootPos;
 		try {
@@ -428,7 +426,7 @@ var sbController = {
 
 	confirmRemovingPrompt: function() {
 		var button = sbCommonUtils.PROMPT.STD_YES_NO_BUTTONS + sbCommonUtils.PROMPT.BUTTON_POS_1_DEFAULT;
-		var text = sbMainService.STRING.getString("CONFIRM_DELETE");
+		var text = sbCommonUtils.lang("scrapbook", "CONFIRM_DELETE");
 		// pressing default button or closing the prompt returns 1
 		// reverse it to mean "no" by default
 		return !sbCommonUtils.PROMPT.confirmEx(null, "[ScrapBook]", text, button, null, null, null, null, {});
@@ -714,7 +712,7 @@ var sbTreeDNDHandler = {
 			);
 		}
 		else {
-			alert(sbMainService.STRING.getString("ERROR_INVALID_URL") + "\n" + url);
+			alert(sbCommonUtils.lang("scrapbook", "ERROR_INVALID_URL") + "\n" + url);
 		}
 	},
 
@@ -876,14 +874,14 @@ var sbSearchService = {
 		sbTreeDNDHandler.quit();
 		sbMainService.toggleHeader(
 			true,
-			sbMainService.STRING.getFormattedString("SEARCH_RESULTS_FOUND", [this.container.GetCount()])
+			sbCommonUtils.lang("scrapbook", "SEARCH_RESULTS_FOUND", [this.container.GetCount()])
 		);
 	},
 
 	filterByDays : function()
 	{
 		var ret = { value: "1" };
-		var title = sbMainService.STRING.getString("FILTER_BY_DAYS");
+		var title = sbCommonUtils.lang("scrapbook", "FILTER_BY_DAYS");
 		if (!sbCommonUtils.PROMPT.prompt(window, "ScrapBook", title, ret, null, {}))
 			return;
 		var days = ret.value;
