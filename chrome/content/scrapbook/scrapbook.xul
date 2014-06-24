@@ -16,10 +16,6 @@
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapnote.js" />
 
-	<stringbundleset id="sbStringBundles">
-		<stringbundle id="sbMainString" src="chrome://scrapbook/locale/scrapbook.properties" />
-	</stringbundleset>
-
 	<broadcasterset id="sbBroadcasters" />
 
 	<popupset id="sbPopupSet" />

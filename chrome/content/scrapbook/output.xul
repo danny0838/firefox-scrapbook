@@ -27,9 +27,6 @@
 	<!--script-->
 	<script type="application/x-javascript" src="chrome://scrapbook/content/output.js" />
 
-	<!--stringbundle-->
-	<stringbundle id="sbMainString" src="chrome://scrapbook/locale/scrapbook.properties" />
-
 	<!--broadcaster-->
 	<broadcasterset id="sbBroadcasters" />
 

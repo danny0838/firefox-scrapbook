@@ -19,8 +19,6 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/folderPicker.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/multiple.js" />
 
-	<stringbundle id="sbMainString" src="chrome://scrapbook/locale/scrapbook.properties" />
-
 	<broadcasterset id="sbBroadcasters" />
 
 	<checkbox id="sbFolderPickerRoot" checked="true" oncommand="sbTreeHandler.TREE.view.selection.clearSelection();" style="margin-bottom: 10px;" />

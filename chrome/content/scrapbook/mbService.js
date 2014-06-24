@@ -118,7 +118,7 @@ var sbMultiBookService = {
 			var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
 			if (win != window) {
 				if (!aQuietWarning)
-					alert(document.getElementById("sbMainString").getString("MB_CLOSE_WINDOW") + "\n[" + win.title + "]");
+					alert(sbCommonUtils.lang("scrapbook", "MB_CLOSE_WINDOW") + "\n[" + win.title + "]");
 				return false;
 			}
 		}

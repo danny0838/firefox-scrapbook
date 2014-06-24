@@ -1,7 +1,6 @@
 
 var sbSortService = {
 
-	get STRING()      { return document.getElementById("sbMainString"); },
 	get WIZARD()      { return document.getElementById("sbSortWizard"); },
 	get RADIO_GROUP() { return document.getElementById("sbSortRadioGroup"); },
 
@@ -34,7 +33,7 @@ var sbSortService = {
 
 	countDown : function()
 	{
-		this.WIZARD.getButton("next").label = this.STRING.getString("START_BUTTON") + (this.waitTime > 0 ? " (" + this.waitTime + ")" : "");
+		this.WIZARD.getButton("next").label = sbCommonUtils.lang("scrapbook", "START_BUTTON") + (this.waitTime > 0 ? " (" + this.waitTime + ")" : "");
 		this.WIZARD.canAdvance = this.waitTime == 0;
 		if ( this.waitTime-- ) setTimeout(function(){ sbSortService.countDown() }, 500);
 	},
