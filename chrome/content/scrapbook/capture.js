@@ -660,7 +660,6 @@ var sbInvisibleBrowser = {
 					var newURL = sbCommonUtils.resolveURL(sbCaptureTask.URL, RegExp.$1);
 					if ( newURL != sbCaptureTask.URL && sbCaptureTask.canRefresh )
 					{
-						gURLs[sbCaptureTask.index] = newURL;
 						sbCaptureTask.canRefresh = false;
 						sbCaptureTask.start(newURL);
 						return;
