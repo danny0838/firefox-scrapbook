@@ -704,7 +704,7 @@ var sbInvisibleBrowser = {
 	{
 		if ( aCurTotalProgress != aMaxTotalProgress )
 		{
-			SB_trace(sbCommonUtils.lang("overlay", "TRANSFER_DATA") + "... (" + aCurTotalProgress + " Bytes)");
+			SB_trace(sbCommonUtils.lang("overlay", "TRANSFER_DATA", [aCurTotalProgress]));
 		}
 	},
 

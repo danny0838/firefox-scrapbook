@@ -907,7 +907,7 @@ var sbCaptureObserverCallback = {
 
 	onDownloadProgress : function(aItem, aFileName, aProgress)
 	{
-		this.trace(sbCommonUtils.lang("overlay", "TRANSFER_DATA") + "... (" + aProgress + ") " + aFileName, 0);
+		this.trace(sbCommonUtils.lang("overlay", "DOWNLOAD_DATA", [aProgress, aFileName]), 0);
 	},
 
 	onCaptureComplete : function(aItem)
