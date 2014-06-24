@@ -22,11 +22,6 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/fulltext.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
 
-	<stringbundleset>
-		<stringbundle id="sbCacheString" src="chrome://scrapbook/locale/fulltext.properties" />
-		<stringbundle id="sbMainString"  src="chrome://scrapbook/locale/scrapbook.properties" />
-	</stringbundleset>
-
 	<popupset>
 		<menupopup id="sbPopup">
 			<menuitem id="sbPopupOpen"       label="&sb.open;"        oncommand="sbSearchResult.forward('O');" />
