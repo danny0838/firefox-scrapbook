@@ -56,37 +56,37 @@ var sbHighlighter = {
 			{
 				alert("ScrapBook ERROR: Can't attach link across tags."); return;
 			}
-			//Ersatz fuer fehlerhafte Originalfunktion
+			// Replace faulty original function
 			var nodeWalker = doc.createTreeWalker(range.commonAncestorContainer,NodeFilter.SHOW_TEXT,this._acceptNode,false);
 			nodeWalker.currentNode = startC;
 			var txtNode = startC;
-			var ende = 1;
+			var end = 1;
 			if ( txtNode.nodeType == 1 )
 			{
 				txtNode = nodeWalker.nextNode();
 				if ( txtNode )
 				{
-					while ( ende == 1 )
+					while ( end == 1 )
 					{
 						if ( range.isPointInRange(txtNode,0) )
 						{
-							ende = 0;
+							end = 0;
 						} else
 						{
 							txtNode = nodeWalker.nextNode();
 						}
 					}
-					ende = 1;
+					end = 1;
 				}
 			}
-			while ( ende == 1 )
+			while ( end == 1 )
 			{
 				if ( txtNode )
 				{
 					if ( txtNode == endC )
 					{
 						if ( this._isTextNode( endC ) ) endC.splitText( eOffset );
-						ende = 0;
+						end = 0;
 					}
 					if ( txtNode == startC )
 					{
@@ -100,16 +100,16 @@ var sbHighlighter = {
 						{
 							if ( !range.isPointInRange(txtNode,0) )
 							{
-								ende = 0;
+								end = 0;
 							}
 						}
 					}
 				} else
 				{
-					ende = 0;
+					end = 0;
 				}
 			}
-			//Ersatz Ende
+			// End replace
 			nodeWalker.currentNode = startC;
 			range.collapse( true ); 
 			range.detach();
