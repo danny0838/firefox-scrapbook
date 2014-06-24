@@ -740,8 +740,8 @@ var sbCrossLinker = {
 		{
 			if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
 			{
-				SB_trace(sbCommonUtils.lang("capture", "REBUILD_LINKS", [sbCrossLinker.index + 1, sbCrossLinker.nameList.length]) + "... "
-					+ ++sbInvisibleBrowser.fileCount + " : " + sbCrossLinker.nameList[sbCrossLinker.index] + ".html");
+				SB_trace(sbCommonUtils.lang("capture", "REBUILD_LINKS", 
+					[sbCrossLinker.index + 1, sbCrossLinker.nameList.length, ++sbInvisibleBrowser.fileCount, sbCrossLinker.nameList[sbCrossLinker.index] + ".html"]));
 			}
 		};
 		this.baseURL = sbCommonUtils.IO.newFileURI(sbCommonUtils.getContentDir(gReferItem.id)).spec;
