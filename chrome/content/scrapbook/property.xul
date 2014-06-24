@@ -21,8 +21,6 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/property.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 
-	<stringbundle id="sbPropString" src="chrome://scrapbook/locale/property.properties" />
-
 	<tabbox>
 		<tabs orient="horizontal">
 			<tab label="&sb.prop.general;" />
