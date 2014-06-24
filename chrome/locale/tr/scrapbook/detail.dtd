@@ -8,6 +8,7 @@
 <!ENTITY sb.detail.option.images "Resimler">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.styles "Stiller">
+<!ENTITY sb.detail.option.scripts "Scripts">
 <!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
 <!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
 <!ENTITY sb.detail.linked.file "Bağlantılı dosyaları indir">

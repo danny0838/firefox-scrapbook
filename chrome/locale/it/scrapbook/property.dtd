@@ -4,6 +4,7 @@
 <!ENTITY sb.prop.encode "Codifica">
 <!ENTITY sb.prop.size "Dimensione">
 <!ENTITY sb.prop.content "Contenuto">
+<!ENTITY sb.prop.file "File">
 <!ENTITY sb.prop.folder "Cartella">
 <!ENTITY sb.prop.icon "Icona">
 <!ENTITY sb.prop.icon.change "Cambia">

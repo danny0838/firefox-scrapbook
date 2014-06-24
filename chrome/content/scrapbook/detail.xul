@@ -64,7 +64,7 @@
 						<checkbox id="sbDetailOptionImages" label="&sb.detail.option.images;" checked="true" />
 						<checkbox id="sbDetailOptionMedia" label="&sb.detail.option.media;" checked="true" />
 						<checkbox id="sbDetailOptionStyles" label="&sb.detail.option.styles;" checked="true" />
-						<checkbox id="sbDetailOptionScript" label="JavaScript" oncommand="sbCaptureOptions.toggleWarningUI();" />
+						<checkbox id="sbDetailOptionScript" label="&sb.detail.option.scripts;" oncommand="sbCaptureOptions.toggleWarningUI();" />
 					</hbox>
 					<checkbox id="sbDetailOptionTextAsHtml" label="&sb.detail.option.textAsHtml;" />
 					<checkbox id="sbDetailOptionForceUtf8" label="&sb.detail.option.forceUtf8;" checked="true" />

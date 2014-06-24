@@ -4,6 +4,7 @@
 <!ENTITY sb.prop.encode "Merkistökoodaus">
 <!ENTITY sb.prop.size "Koko">
 <!ENTITY sb.prop.content "Sisältö">
+<!ENTITY sb.prop.file "File">
 <!ENTITY sb.prop.folder "Kansio">
 <!ENTITY sb.prop.icon "Kuvake">
 <!ENTITY sb.prop.icon.change "Vaihda">
