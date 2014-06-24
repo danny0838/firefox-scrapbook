@@ -333,7 +333,7 @@ var sbCacheService = {
 	{
 		var res = this.resList[this.index];
 		// update trace message
-		gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_UPDATE") + " " + sbDataSource.getProperty(res, "title");
+		gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_UPDATE", [sbDataSource.getProperty(res, "title")]);
 		gCacheStatus.lastChild.value  = Math.round((this.index + 1) / this.resList.length * 100);
 		// inspect the data and do the cache
 		var id  = sbDataSource.getProperty(res, "id");
@@ -490,7 +490,7 @@ var sbCacheService = {
 				sbCacheSource.removeEntry(sbCommonUtils.RDF.GetResource(uri));
 			}
 		}
-		gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_UPDATE") + "cache.rdf";
+		gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_UPDATE", ["cache.rdf"]);
 		sbCacheSource.flush();
 		try {
 			if ( window.arguments[0] ) sbCommonUtils.loadURL(window.arguments[0], true);
