@@ -114,7 +114,7 @@ var sbSearchResult =
 		{
 			if ( ++this.index % 100 == 0 ) {
 				setTimeout(function(){ sbSearchResult.process(); }, 0);
-				var msg = sbCommonUtils.lang("fulltext", "SCANNING") + "... ("  + Math.round(this.index / this.count * 100) + " %)";
+				var msg = sbCommonUtils.lang("fulltext", "SCANNING", [Math.round(this.index / this.count * 100) + " %"]);
 				document.title = document.getElementById("sbResultHeader").firstChild.value = msg;
 			} else {
 				this.process();
