@@ -494,17 +494,7 @@ var sbPageCombiner = {
 				cssText = cssRule.cssText;
 			}
 			else if (cssRule.type == Components.interfaces.nsIDOMCSSRule.STYLE_RULE) {
-				// split the selector with "," with the exception of leading "\"
-				var selectors = cssRule.selectorText.match(/(\\.|[^,])+/gi);
-				for ( var j = 0; j < selectors.length; j++ ) {
-					// remove leading "html" and "body", add this div as head
-					var selector = selectors[j].replace(/(^|\s+)(?:(html)|(body))(?=[^0-9A-Za-z\-\_\u00A0-\uFFFF\\]|$)/gi, function(whole, prefix, html, body){
-						var ret = html ? "#item" + sbCombineService.curID + "html" : "#item" + sbCombineService.curID + "body";
-						return prefix + ret;
-					});
-					selectors[j] = "#item" + sbCombineService.curID + " " + selector;
-				}
-				cssText = selectors.join(", ") + "{" + cssRule.style.cssText + "}";
+				cssText = this.remapCSSSelector(cssRule.selectorText) + "{" + cssRule.style.cssText + "}";
 			}
 			else if (cssRule.type == Components.interfaces.nsIDOMCSSRule.MEDIA_RULE) {
 				cssText = "@media " + cssRule.conditionText + "{\n" + this.processCSSRecursively(cssRule) + "\n}";
@@ -514,6 +504,50 @@ var sbPageCombiner = {
 			}
 			ret += this.inspectCSSText(cssText, aCSS.href) + "\n";
 		}
+		return ret;
+	},
+
+	remapCSSSelector : function(selectorText)
+	{
+		var id = "#item" + sbCombineService.curID;
+		var canFollowElement = true;
+		var ret = id + " " + selectorText.replace(
+			/(,\s+)|(\s+)|((?:[\-0-9A-Za-z_\u00A0-\uFFFF]|\\[0-9A-Fa-f]{1,6} ?|\\.)+)|(\[(?:"(?:\\.|[^"])*"|\\.|[^\]])*\])|(.)/g,
+			function(){
+				// a new selector, add prefix
+				if (arguments[1]) {
+					canFollowElement = true;
+					return arguments[1] + id + " ";
+				}
+				// spaces, can follow element
+				else if (arguments[2]) {
+					canFollowElement = true;
+					return arguments[2];
+				}
+				// element-like
+				else if (arguments[3]) {
+					if (canFollowElement) {
+						if (arguments[3].toLowerCase() == "html") {
+							return id + "html";
+						}
+						else if (arguments[3].toLowerCase() == "body") {
+							return id + "body";
+						}
+					}
+					canFollowElement = false;
+					return arguments[3];
+				}
+				// bracket enclosed, eg. [class="html"]
+				else if (arguments[4]) {
+					canFollowElement = false;
+					return arguments[4];
+				}
+				// other chars, may be "#", ".", ":", " > ", " + ", " ~ ", etc
+				else if (arguments[5]) {
+					canFollowElement = false;
+					return arguments[5];
+				}
+		});
 		return ret;
 	},
 
