@@ -397,7 +397,7 @@ var sbController = {
 				continue;
 			}
 			else if (sbDataSource.getRelativeIndex(aParResList[i], aResList[i]) < 0) {
-				alert("ERROR: Failed to remove resource.\n" + aResList[i].Value);
+				alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_RESOURCE", [aResList[i].Value]));
 				continue;
 			}
 			rmIDs = rmIDs.concat(sbDataSource.deleteItemDescending(aResList[i], aParResList[i]));

@@ -375,7 +375,7 @@ var sbCacheService = {
 				sbCacheService.inspectFile(file2, leafname, true);
 				break;
 			default:
-				sbCommonUtils.error("ERROR: unknown data type: " + type);
+				sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_UNKNOWN_DATA_TYPE", [type]));
 				break;
 		}
 		// update trace message

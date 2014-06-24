@@ -194,7 +194,7 @@ var sbPropService = {
 				totalFile++;
 			}
 			catch (ex) {
-				alert("ERROR: cannot read file size (possibility due to improper file name): " + this.path);
+			    alert(sbCommonUtils.lang("scrapbook", "MSG_CANT_MODIFY", [this.path]));
 			}
 		});
 		return [totalSize, totalFile];
