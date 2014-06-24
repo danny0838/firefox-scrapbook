@@ -486,7 +486,7 @@ var sbCacheService = {
 		{
 			if ( !this.uriHash[uri] && uri != "urn:scrapbook:cache" )
 			{
-				gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_REMOVE") + " " + uri;
+				gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_REMOVE", [uri]);
 				sbCacheSource.removeEntry(sbCommonUtils.RDF.GetResource(uri));
 			}
 		}
