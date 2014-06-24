@@ -696,7 +696,7 @@ var sbInvisibleBrowser = {
 	{
 		if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
 		{
-			SB_trace(sbCommonUtils.lang("capture", "LOADING") + "... " + (++this.fileCount) + " " + (sbCaptureTask.URL ? sbCaptureTask.URL : this.ELEMENT.contentDocument.title));
+			SB_trace(sbCommonUtils.lang("capture", "LOADING", [++this.fileCount, (sbCaptureTask.URL ? sbCaptureTask.URL : this.ELEMENT.contentDocument.title)]));
 		}
 	},
 

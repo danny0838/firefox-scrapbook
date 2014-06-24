@@ -621,7 +621,7 @@ sbInvisibleBrowser.onStateChange = function(aWebProgress, aRequest, aStateFlags,
 {
 	if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
 	{
-		SB_trace(sbCommonUtils.lang("capture", "LOADING") + "... " + sbCombineService.prefix + (++this.fileCount) + " " + sbCombineService.postfix);
+		SB_trace(sbCommonUtils.lang("capture", "LOADING", [sbCombineService.prefix + (++this.fileCount), sbCombineService.postfix]));
 	}
 };
 
