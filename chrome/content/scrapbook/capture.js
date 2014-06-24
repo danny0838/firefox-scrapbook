@@ -266,7 +266,7 @@ var sbCaptureTask = {
 
 	countDown : function()
 	{
-		SB_trace(sbCommonUtils.lang("capture", "WAITING", [sbCaptureTask.seconds]) + "...");
+		SB_trace(sbCommonUtils.lang("capture", "WAITING", [sbCaptureTask.seconds]));
 		if ( --this.seconds > 0 )
 			this.timerID = window.setTimeout(function(){ sbCaptureTask.countDown(); }, 1000);
 		else
