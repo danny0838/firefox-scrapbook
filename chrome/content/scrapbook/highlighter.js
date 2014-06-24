@@ -92,7 +92,11 @@ var sbHighlighter = {
 					{
 						if ( this._isTextNode( startC ) ) txtNode = startC.splitText( sOffset );
 					}
-					if ( txtNode.nodeType != 1 ) nodeWalker.currentNode = this._wrapTextNodeWithSpan(doc,txtNode,this._createNode(aWindow,aNodeName,aAttributes));
+					if ( txtNode.nodeType != 1 ) {
+						if ( /[^\t\n\r ]/.test( txtNode.nodeValue ) ) {
+							nodeWalker.currentNode = this._wrapTextNodeWithSpan(doc,txtNode,this._createNode(aWindow,aNodeName,aAttributes));
+						}
+					}
 					txtNode = nodeWalker.nextNode();
 					if ( txtNode )
 					{
