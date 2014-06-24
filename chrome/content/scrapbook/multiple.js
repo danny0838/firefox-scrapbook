@@ -345,7 +345,7 @@ var sbURLDetector1 = {
 
 	inspectDirectory : function(aDir, curIdx)
 	{
-		sbMultipleService.STATUS.value = sbCommonUtils.lang("scrapbook", "SCANNING") + " (" + curIdx + "/" + this.index + ")... " + aDir.path;
+		sbMultipleService.STATUS.value = sbCommonUtils.lang("scrapbook", "SCANNING_DIR", [curIdx, this.index, aDir.path]);
 		var entries = aDir.directoryEntries;
 		while ( entries.hasMoreElements() )
 		{
