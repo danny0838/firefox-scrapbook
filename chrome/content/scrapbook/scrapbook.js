@@ -712,7 +712,7 @@ var sbTreeDNDHandler = {
 			);
 		}
 		else {
-			alert(sbCommonUtils.lang("scrapbook", "ERROR_INVALID_URL") + "\n" + url);
+			alert(sbCommonUtils.lang("scrapbook", "ERROR_INVALID_URL", [url]));
 		}
 	},
 
