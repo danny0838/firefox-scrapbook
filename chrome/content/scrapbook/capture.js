@@ -1016,7 +1016,7 @@ sbHeaderSniffer.prototype = {
 	{
 		//Ermitteln, wann der Wert this.failed erhoeht werden muss
 		sbCaptureTask.failed++;
-		sbCaptureTask.fail(sbCommonUtils.lang("capture", "CONNECT_FAILURE") + " (" + aErrorMsg + ")");
+		sbCaptureTask.fail(sbCommonUtils.lang("capture", "CONNECT_FAILURE", [aErrorMsg]));
 	},
 
 };
