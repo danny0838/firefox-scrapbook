@@ -983,9 +983,9 @@ sbHeaderSniffer.prototype = {
 		SB_trace(sbCommonUtils.lang("capture", "CONNECT_SUCCESS") + " (Content-Type: " + sbCaptureTask.contentType + ")");
 		switch ( httpStatus )
 		{
-			case 404 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCommonUtils.lang("capture", "HTTP_STATUS_404") + " (404 Not Found)"); return;
-			case 403 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCommonUtils.lang("capture", "HTTP_STATUS_403") + " (403 Forbidden)"); return;
-			case 500 : sbCaptureTask.failed++;sbCaptureTask.fail("500 Internal Server Error"); return;
+			case 404 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCommonUtils.lang("capture", "HTTP_STATUS_404")); return;
+			case 403 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCommonUtils.lang("capture", "HTTP_STATUS_403")); return;
+			case 500 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCommonUtils.lang("capture", "HTTP_STATUS_500")); return;
 		}
 		var redirectURL = this.getHeader("Location");
 		if ( redirectURL )
