@@ -184,7 +184,7 @@ var sbBrowserOverlay = {
 			aPopup.appendChild(document.createElement("menuseparator"));
 		menuItem = aPopup.appendChild(document.createElement("menuitem"));
 		menuItem.id = "ScrapBookContextPicking";
-		menuItem.setAttribute("label", sbCommonUtils.lang("overlay", "SELECT_FOLDER") + "...");
+		menuItem.setAttribute("label", sbCommonUtils.lang("overlay", "SELECT_FOLDER"));
 	},
 
 	destroyPopup: function(aPopup)
