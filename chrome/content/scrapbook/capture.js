@@ -622,7 +622,7 @@ var sbInvisibleBrowser = {
 			if (gCharset) this.ELEMENT.docShell.charset = gCharset;
 		}
 		catch (ex) {
-			alert(sbCommonUtils.lang("scrapbook", "ERR_FILE_CHANGE_CHARSET"));
+			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_CHANGE_CHARSET"));
 		}
 		// nsIDocShellHistory is deprecated in newer version of Firefox
 		// nsIDocShell in the old version doesn't work

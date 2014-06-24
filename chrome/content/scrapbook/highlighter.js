@@ -54,7 +54,7 @@ var sbHighlighter = {
 //alert("startC - "+startC+"\nendC - "+endC+"\nsOffset - "+sOffset+"\neOffset - "+eOffset);
 			if ( aNodeName == "a" && !sameNode )
 			{
-			    alert(sbCommonUtils.lang("scrapbook", "ERR_ATTACH_ACROSS_TAGS"));
+			    alert(sbCommonUtils.lang("scrapbook", "MSG_ATTACH_ACROSS_TAGS"));
 				return;
 			}
 

@@ -393,12 +393,12 @@ var sbPageEditor = {
 			var doc = sbContentSaver.frameList[i].document;
 			if ( doc.contentType != "text/html" )
 			{
-			    alert(sbCommonUtils.lang("scrapbook", "ERR_CANT_MODIFY", [doc.contentType]));
+			    alert(sbCommonUtils.lang("scrapbook", "MSG_CANT_MODIFY", [doc.contentType]));
 				continue;
 			}
 			var charset = doc.characterSet;
 			if (charset != "UTF-8") {
-			    alert(sbCommonUtils.lang("scrapbook", "ERR_NOT_UTF8", [doc.location.href]));
+			    alert(sbCommonUtils.lang("scrapbook", "MSG_NOT_UTF8", [doc.location.href]));
 			}
 			var rootNode = doc.getElementsByTagName("html")[0];
 			var src = sbContentSaver.doctypeToString(doc.doctype) + sbCommonUtils.getOuterHTML(rootNode);
