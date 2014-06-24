@@ -18,7 +18,7 @@ var sbCaptureOptions = {
 		}
 		else
 		{
-			document.documentElement.getButton("accept").label = document.getElementById("sbMainString").getString("CAPTURE_OK_BUTTON");
+			document.documentElement.getButton("accept").label = sbCommonUtils.lang("scrapbook", "CAPTURE_OK_BUTTON");
 			document.documentElement.getButton("accept").accesskey = "C";
 		}
 		this.fillTitleList();
@@ -169,7 +169,7 @@ var sbFolderSelector = {
 
 	processRoot : function()
 	{
-		this.fill("urn:scrapbook:root", document.getElementById("sbMainString").getString("ROOT_FOLDER"));
+		this.fill("urn:scrapbook:root", sbCommonUtils.lang("scrapbook", "ROOT_FOLDER"));
 		this.MENU_POPUP.appendChild(document.createElement("menuseparator"));
 	},
 
@@ -211,7 +211,7 @@ var sbFolderSelector = {
 	{
 		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
 		var newItem = sbCommonUtils.newItem(newID);
-		newItem.title = document.getElementById("sbMainString").getString("DEFAULT_FOLDER");
+		newItem.title = sbCommonUtils.lang("scrapbook", "DEFAULT_FOLDER");
 		newItem.type = "folder";
 		var tarResName = this.MENU_LIST.selectedItem.getAttribute("nest") > 0 ? this.MENU_LIST.selectedItem.id : "urn:scrapbook:root";
 		var newRes = sbDataSource.addItem(newItem, tarResName, 0);
