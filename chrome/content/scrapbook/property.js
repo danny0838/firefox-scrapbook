@@ -99,7 +99,6 @@ var sbPropService = {
 			}
 			if (!this.isTypeFolder && !this.isTypeBookmark && !this.isTypeSeparator)
 				sbCommonUtils.writeIndexDat(this.item);
-			sbDataSource.flush();
 		}
 		if (window.arguments[1])
 			window.arguments[1].accept = true;

@@ -219,7 +219,6 @@ var sbFolderSelector = {
 		if ( !result.accept )
 		{
 			sbDataSource.deleteItemDescending(newRes, sbCommonUtils.RDF.GetResource(tarResName));
-			sbDataSource.flush();
 		}
 		else
 		{

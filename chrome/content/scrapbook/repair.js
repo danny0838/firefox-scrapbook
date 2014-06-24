@@ -93,12 +93,11 @@ var sbRepair = {
 				if ( icon != newIcon )
 				{
 					sbDataSource.setProperty(res, "icon", newIcon);
-					shouldFlush = true;
 				}
 			}
 		}
 		document.getElementById("sbRepairFaviconsTextbox").value = document.getElementById("sbRepairRDF2Label").value;
-		if ( shouldFlush ) { sbDataSource.flush(); window.opener.reload(); }
+		window.opener.reload();
 	},
 
 };

@@ -365,7 +365,7 @@ var sbContentSaver = {
 		{
 			var iconURL = "resource://scrapbook/data/" + this.item.id + "/" + this.favicon;
 			setTimeout(function(){
-				sbDataSource.setProperty(res, "icon", iconURL); sbDataSource.flush();
+				sbDataSource.setProperty(res, "icon", iconURL);
 			}, 500);
 			this.item.icon = this.favicon;
 		}

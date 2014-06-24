@@ -732,7 +732,6 @@ var sbCrossLinker = {
 	invoke : function()
 	{
 		sbDataSource.setProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gReferItem.id), "type", "site");
-		sbDataSource.flush();
 		sbInvisibleBrowser.refreshEvent(function(){ sbCrossLinker.exec(); });
 		this.ELEMENT.docShell.allowImages = false;
 		sbInvisibleBrowser.onStateChange = function(aWebProgress, aRequest, aStateFlags, aStatus)

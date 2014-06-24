@@ -60,7 +60,6 @@ var sbSortService = {
 			this.process(this.contResList[this.index]);
 		} else {
 			//Sortieren beendet
-			sbDataSource.flush();
 			this.RADIO_GROUP.setAttribute("sortIndex", this.RADIO_GROUP.selectedIndex);
 			window.close();
 			//tree wieder anzeigen

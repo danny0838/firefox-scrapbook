@@ -125,7 +125,6 @@ var sbMainService = {
 		);
 		if (!result.accept) {
 			sbDataSource.deleteItemDescending(newRes, sbCommonUtils.RDF.GetResource(tarResName));
-			sbDataSource.flush();
 			return false;
 		}
 		return true;
@@ -379,7 +378,6 @@ var sbController = {
 		}
 		if (sbDataSource.unshifting)
 			this.rebuildLocal();
-		sbDataSource.flush();
 	},
 
 	removeInternal: function(aResList, aParResList, aBypassConfirm)
@@ -401,7 +399,6 @@ var sbController = {
 			}
 			rmIDs = rmIDs.concat(sbDataSource.deleteItemDescending(aResList[i], aParResList[i]));
 		}
-		sbDataSource.flush();
 		for (var i = 0; i < rmIDs.length; i++) {
 			var myDir = sbCommonUtils.getContentDir(rmIDs[i], true);
 			if (myDir && rmIDs[i].length == 14)
@@ -585,7 +582,6 @@ var sbTreeDNDHandler = {
 		var tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(this.row);
 		var tarPar = (this.orient == 0) ? tarRes : sbTreeHandler.getParentResource(this.row);
 		this.moveAfterChecking(curRes, curPar, tarRes, tarPar);
-		sbDataSource.flush();
 	},
 
 	moveMultiple: function()
@@ -620,7 +616,6 @@ var sbTreeDNDHandler = {
 		//RDF-Datenquelle dem tree hinzufügen
 		if ( mmSidebarTreeObj ) mmSidebarTreeObj.database.AddDataSource(mmDaten);
 		mmTreeObj.database.AddDataSource(mmDaten);
-		sbDataSource.flush();
 	},
 
 	moveAfterChecking: function(curRes, curPar, tarRes, tarPar)
