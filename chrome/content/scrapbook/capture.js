@@ -128,7 +128,6 @@ var sbCaptureTask = {
 	index       : 0,
 	contentType : "",
 	isDocument  : false,
-	canRefresh  : true,
 	sniffer     : null,
 	seconds     : 3,
 	timerID     : 0,
@@ -201,7 +200,6 @@ var sbCaptureTask = {
 		}
 		this.contentType = "";
 		this.isDocument = true;
-		this.canRefresh = true;
 		var url = aOverriddenURL || gURLs[this.index];
 		if ( gTitles ) gTitle = gTitles[this.index];
 		SB_trace(this.STRING.getString("CONNECT") + "... " + url);
@@ -658,9 +656,8 @@ var sbInvisibleBrowser = {
 				     metaElems[i].getAttribute("content").match(/URL\=(.*)$/i) )
 				{
 					var newURL = sbCommonUtils.resolveURL(sbCaptureTask.URL, RegExp.$1);
-					if ( newURL != sbCaptureTask.URL && sbCaptureTask.canRefresh )
+					if ( newURL != sbCaptureTask.URL )
 					{
-						sbCaptureTask.canRefresh = false;
 						sbCaptureTask.start(newURL);
 						return;
 					}
