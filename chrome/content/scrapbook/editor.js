@@ -381,7 +381,7 @@ var sbPageEditor = {
 		var curURL = window.content.location.href;
 		if ( curURL.indexOf("file://") != 0 || !curURL.match(/\/data\/(\d{14})\/(.+)$/) || RegExp.$1 != this.item.id || RegExp.$2 == "index.dat" || RegExp.$2 == "sitemap.xml" )
 		{
-			alert("ScrapBook ERROR: Cannot save file '" + RegExp.$2 + "'.");
+			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SAVE_FILE", [RegExp.$2]));
 			return;
 		}
 		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
@@ -393,12 +393,12 @@ var sbPageEditor = {
 			var doc = sbContentSaver.frameList[i].document;
 			if ( doc.contentType != "text/html" )
 			{
-				alert("ScrapBook ERROR: Cannot modify " + doc.contentType + " content.");
+			    alert(sbCommonUtils.lang("scrapbook", "ERR_CANT_MODIFY", [doc.contentType]));
 				continue;
 			}
 			var charset = doc.characterSet;
 			if (charset != "UTF-8") {
-				alert("NOTICE: '" + doc.location.href + "' is not UTF-8 encoded, some content may lose.");
+			    alert(sbCommonUtils.lang("scrapbook", "ERR_NOT_UTF8", [doc.location.href]));
 			}
 			var rootNode = doc.getElementsByTagName("html")[0];
 			var src = sbContentSaver.doctypeToString(doc.doctype) + sbCommonUtils.getOuterHTML(rootNode);

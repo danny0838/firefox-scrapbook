@@ -198,7 +198,7 @@ var sbTradeService = {
 
 	parseIndexDat : function(aFile)
 	{
-		if ( !(aFile instanceof Components.interfaces.nsILocalFile) ) return alert("Invalid agurments in sbTradeService::parseIndexDat.");
+		if ( !(aFile instanceof Components.interfaces.nsILocalFile) ) return alert(sbCommonUtils.lang("scrapbook", "ERR_TRADE_INVALID_ARGS"));
 		var data = sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(aFile), "UTF-8");
 		data = data.split("\n");
 		if ( data.length < 2 ) return;

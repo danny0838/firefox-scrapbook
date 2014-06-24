@@ -54,7 +54,8 @@ var sbHighlighter = {
 //alert("startC - "+startC+"\nendC - "+endC+"\nsOffset - "+sOffset+"\neOffset - "+eOffset);
 			if ( aNodeName == "a" && !sameNode )
 			{
-				alert("ScrapBook ERROR: Can't attach link across tags."); return;
+			    alert(sbCommonUtils.lang("scrapbook", "ERR_ATTACH_ACROSS_TAGS"));
+				return;
 			}
 
 			// manage nodes between startC and endC

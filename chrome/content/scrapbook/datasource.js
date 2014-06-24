@@ -131,7 +131,7 @@ var sbDataSource = {
 			this.flush();
 			return newRes;
 		} catch(ex) {
-			alert("ScrapBook ERROR: Failed to add resource to datasource.\n\n" + ex);
+			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_ADD_RESOURCE", [ex]));
 			return false;
 		}
 	},
@@ -142,7 +142,7 @@ var sbDataSource = {
 			sbCommonUtils.RDFC.Init(this.data, curPar);
 			sbCommonUtils.RDFC.RemoveElement(curRes, true);
 		} catch(ex) {
-			alert("ScrapBook ERROR: Failed to move element at datasource (1).\n\n" + ex);
+			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_ADD_RESOURCE1", [ex]));
 			return;
 		}
 		if ( this.unshifting )
@@ -157,7 +157,7 @@ var sbDataSource = {
 				sbCommonUtils.RDFC.AppendElement(curRes);
 			}
 		} catch(ex) {
-			alert("ScrapBook ERROR: Failed to move element at datasource (2).\n\n" + ex);
+			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_ADD_RESOURCE2", [ex]));
 			sbCommonUtils.RDFC.Init(this.data, sbCommonUtils.RDF.GetResource("urn:scrapbook:root"));
 			sbCommonUtils.RDFC.AppendElement(curRes, true);
 		}
@@ -198,7 +198,7 @@ var sbDataSource = {
 				}
 			}
 		} catch(ex) {
-			alert("ScrapBook ERROR: Failed to clean up datasource.\n" + ex);
+			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_CLEAN_DATASOURCE", [ex]));
 		}
 		return rmIDs;
 	},

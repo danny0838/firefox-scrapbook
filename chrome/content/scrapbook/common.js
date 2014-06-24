@@ -117,7 +117,7 @@ var sbCommonUtils = {
 	{
 		if ( !aID || aID.length != 14 )
 		{
-			alert("ScrapBook FATAL ERROR: Failed to get directory '" + aID + "'.");
+			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_GET_DIR", [aID]));
 			return null;
 		}
 		var dir = this.getScrapBookDir().clone();
@@ -149,7 +149,7 @@ var sbCommonUtils = {
 			if ( aDir.isDirectory() ) aDir.remove(false);
 			return true;
 		} catch(ex) {
-			alert("ScrapBook ERROR: Failed to remove file '" + file.leafName + "'.\n" + ex);
+			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_FILE", [file.path, ex]));
 			return false;
 		}
 	},
@@ -269,7 +269,7 @@ var sbCommonUtils = {
 			aRelURL = aRelURL.replace(/\"/g, "");
 			return baseURLObj.resolve(aRelURL);
 		} catch(ex) {
-			sbCommonUtils.error("*** ScrapBook ERROR: Failed to resolve URL: " + aBaseURL + "\t" + aRelURL + "\n");
+			sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_RESOLVE_URL", [aBaseURL, aRelURL]));
 		}
 	},
 
@@ -351,7 +351,7 @@ var sbCommonUtils = {
 		}
 		catch(ex)
 		{
-			alert("ScrapBook ERROR: Failed to write file: " + aFile.leafName);
+			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_WRITE_FILE", [aFile.path, ex]));
 		}
 	},
 
@@ -435,13 +435,13 @@ var sbCommonUtils = {
 		try {
 			execfile.initWithPath(aExecFilePath);
 			if ( !execfile.exists() ) {
-				alert("ScrapBook ERROR: File does not exist.\n" + aExecFilePath);
+				alert(sbCommonUtils.lang("scrapbook", "ERR_FILE_NOT_EXIST", [aExecFilePath]));
 				return;
 			}
 			process.init(execfile);
 			process.run(false, args, args.length);
 		} catch (ex) {
-			alert("ScrapBook ERROR: File is not executable.\n" + aExecFilePath);
+			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_EXEC_FILE", [aExecFilePath]));
 		}
 	},
 
@@ -547,7 +547,7 @@ var sbCommonUtils = {
 			}
 		}
 		catch (ex) {
-			sbCommonUtils.error("ERROR: unable to set a pref: " + aName);
+			sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SET_PREF", [aName]));
 		}
 	},
 
@@ -571,7 +571,7 @@ var sbCommonUtils = {
 
 	escapeComment : function(aStr)
 	{
-		if ( aStr.length > 10000 ) alert("NOTICE: Too long comment makes ScrapBook slow.");
+		if ( aStr.length > 10000 ) alert(sbCommonUtils.lang("scrapbook", "MSG_LARGE_COMMENT"));
 		return aStr.replace(/\r|\n|\t/g, " __BR__ ");
 	},
 

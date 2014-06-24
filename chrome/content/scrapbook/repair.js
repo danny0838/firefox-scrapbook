@@ -25,7 +25,7 @@ var sbRepair = {
 		backupDir.append("backup");
 		if ( !backupDir.exists() )
 		{
-			alert("No backup files found.");
+			alert(sbCommonUtils.lang("scrapbook", "ERR_NO_BACKUP_FILES"));
 			return;
 		}
 		var fileEnum = backupDir.directoryEntries;

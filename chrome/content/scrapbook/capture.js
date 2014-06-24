@@ -56,7 +56,7 @@ function SB_initCapture()
 			var contDir = sbCommonUtils.getContentDir(gPreset[0]);
 			var file = contDir.clone();
 			file.append("sb-file2url.txt");
-			if ( !file.exists() ) { alert("ScrapBook ERROR: Could not find 'sb-file2url.txt'."); window.close(); }
+			if ( !file.exists() ) { alert(sbCommonUtils.lang("scrapbook", "ERR_NO_FILE2URL")); window.close(); }
 			var lines = sbCommonUtils.readFile(file).split("\n");
 			for ( var i = 0; i < lines.length; i++ )
 			{
@@ -65,7 +65,7 @@ function SB_initCapture()
 			}
 			file = sbCommonUtils.getContentDir(gPreset[0]).clone();
 			file.append("sb-url2name.txt");
-			if ( !file.exists() ) { alert("ScrapBook ERROR: Could not find 'sb-url2name.txt'."); window.close(); }
+			if ( !file.exists() ) { alert(sbCommonUtils.lang("scrapbook", "ERR_NO_URL2NAME")); window.close(); }
 			lines = sbCommonUtils.readFile(file).split("\n");
 			for ( i = 0; i < lines.length; i++ )
 			{
@@ -77,7 +77,7 @@ function SB_initCapture()
 				}
 			}
 			gPreset[3] = gFile2URL;
-			if ( !myURLs[0] ) { alert("ScrapBook ERROR: Could not find the source URL for " + gPreset[1] + ".html."); window.close(); }
+			if ( !myURLs[0] ) { alert(sbCommonUtils.lang("scrapbook", "ERR_NO_SOURCE_URL", [gPreset[1] + ".html."])); window.close(); }
 		}
 	}
 	else gContext = "link";
@@ -204,7 +204,7 @@ var sbCaptureTask = {
 		var url = aOverriddenURL || gURLs[this.index];
 		if ( gTitles ) gTitle = gTitles[this.index];
 		SB_trace(sbCommonUtils.lang("capture", "CONNECT") + "... " + url);
-		if ( gMethod != "SB" ) alert(gMethod+" unknown");
+		if ( gMethod != "SB" ) alert(sbCommonUtils.lang("scrapbook", "ERR_FILE_NOT_EXIST", [gMethod]));
 		if ( url.indexOf("file://") == 0 ) {
 			sbInvisibleBrowser.load(url);
 		} else {
@@ -425,7 +425,7 @@ var sbpFilter = {
 				}
 			} catch(aEx)
 			{
-				alert("Das sollte nicht vorkommen\n---\n"+aEx);
+				alert("This shouldn't happen\n---\n"+aEx);
 			}
 		}
 		//3. Selektion aktualisieren
@@ -622,7 +622,7 @@ var sbInvisibleBrowser = {
 			if (gCharset) this.ELEMENT.docShell.charset = gCharset;
 		}
 		catch (ex) {
-			alert("ERROR: Your browser does not support setting input charset.\n\n" + ex);
+			alert(sbCommonUtils.lang("scrapbook", "ERR_FILE_CHANGE_CHARSET"));
 		}
 		// nsIDocShellHistory is deprecated in newer version of Firefox
 		// nsIDocShell in the old version doesn't work
