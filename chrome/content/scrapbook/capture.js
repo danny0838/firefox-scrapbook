@@ -644,7 +644,7 @@ var sbInvisibleBrowser = {
 		document.getElementById("sbCapturePauseButton").disabled = true;
 		sbCaptureTask.toggleSkipButton(false);
 		var ret = null;
-		var preset = gReferItem ? [gReferItem.id, SB_suggestName(sbCaptureTask.URL), gOption, gFile2URL, gDepths[sbCaptureTask.index]] : null;
+		var preset = gReferItem ? [gReferItem.id, SB_suggestName(this.ELEMENT.currentURI.spec), gOption, gFile2URL, gDepths[sbCaptureTask.index]] : null;
 		if ( gPreset ) preset = gPreset;
 		if ( this.ELEMENT.contentDocument.body && sbCaptureTask.isDocument )
 		{
