@@ -55,7 +55,6 @@ var sbContentSaver = {
 
 	captureWindow : function(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData, aContext, aTitle)
 	{
-		if ( !sbDataSource.data ) sbDataSource.init();
 		this.init(aPresetData);
 		this.item.chars  = aRootWindow.document.characterSet;
 		this.item.source = aRootWindow.location.href;
@@ -138,7 +137,6 @@ var sbContentSaver = {
 
 	captureFile : function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext)
 	{
-		if ( !sbDataSource.data ) sbDataSource.init();
 		this.init(aPresetData);
 		this.item.title  = sbCommonUtils.getFileName(aSourceURL);
 		this.item.icon   = "moz-icon://" + this.item.title + "?size=16";

@@ -9,7 +9,6 @@ var sbOutputService = {
 	init : function()
 	{
 		document.documentElement.getButton("accept").label = sbCommonUtils.lang("scrapbook", "START_BUTTON");
-		sbDataSource.init();
 		sbTreeHandler.init(true);
 		this.selectAllFolders();
 		if ( window.location.search == "?auto" )

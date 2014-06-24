@@ -9,7 +9,6 @@ function SB_initFT(type)
 	gCacheStatus = document.getElementById("sbCacheStatus");
 	gCacheFile = sbCommonUtils.getScrapBookDir().clone();
 	gCacheFile.append("cache.rdf");
-	sbDataSource.init();
 	sbCacheSource.init();
 	switch ( type )
 	{

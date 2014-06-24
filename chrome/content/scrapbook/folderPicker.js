@@ -3,7 +3,6 @@ var sbFolderPicker = {
 
 	init : function()
 	{
-		sbDataSource.init();
 		sbTreeHandler.init(true);
 		document.documentElement.buttons = "accept,cancel,extra2";
 		document.documentElement.getButton("extra2").className += " sb-create";

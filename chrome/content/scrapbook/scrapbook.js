@@ -8,7 +8,6 @@ var sbMainService = {
 	init: function()
 	{
 		sbMultiBookService.showButton();
-		sbDataSource.init();
 		sbTreeHandler.init(false);
 		sbTreeDNDHandler.init();
 		sbListHandler.restoreLastState();

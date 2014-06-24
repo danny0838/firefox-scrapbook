@@ -264,7 +264,6 @@ var sbMultipleService = {
 		var delResEnum = [];
 		this.vorhLinks = [];
 		this.lastID = this.currentID;
-		if ( !sbDataSource.data ) sbDataSource.init();
 		delResource = sbCommonUtils.RDF.GetResource(this.currentID);
 		delRDFCont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
 		delRDFCont.Init(sbDataSource.data, delResource);

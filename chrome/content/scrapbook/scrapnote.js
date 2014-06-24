@@ -40,7 +40,6 @@ var sbNoteService = {
 		this.save();
 		if ( !sbDataSource.exists(aRes) )
 		{
-			sbDataSource.init();
 			if ( !sbDataSource.exists(aRes) ) return;
 		}
 		this.resource = aRes;

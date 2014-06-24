@@ -67,7 +67,6 @@ var sbCaptureOptions = {
 		var list = document.getElementById("sbDetailTitle");
 		if ( this.param.context == "capture-again" )
 		{
-			sbDataSource.init();
 			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
 			list.appendItem(sbDataSource.getProperty(res, "title"));
 		}
@@ -128,7 +127,6 @@ var sbFolderSelector = {
 
 	init : function()
 	{
-		if ( !sbDataSource.data ) sbDataSource.init();
 		if ( !sbCaptureOptions.param.resURI ) sbCaptureOptions.param.resURI = "urn:scrapbook:root";
 		this.refresh(sbCaptureOptions.param.resURI);
 	},

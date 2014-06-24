@@ -348,7 +348,6 @@ var sbExportService = {
 	execQuick : function(aRes)
 	{
 		this.QUICK_STATUS.value = document.getElementById("sbTradeExportButton").label;
-		window.top.sbDataSource.init();
 		sbTradeService.prepareLeftDir();
 		var title = window.top.sbDataSource.getProperty(aRes, "title");
 		try {

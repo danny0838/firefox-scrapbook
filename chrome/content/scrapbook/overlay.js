@@ -97,7 +97,6 @@ var sbBrowserOverlay = {
 			document.getElementById("ScrapBookStatusPanel").hidden = !sbCommonUtils.getPref("ui.statusBar", false);
 		}
 		document.getElementById("ScrapBookToolsMenu").hidden   = !sbCommonUtils.getPref("ui.toolsMenu", false);
-		sbDataSource.init(true);
 		sbDataSource.backup();
 		this.setProtocolSubstitution();
 		var file = sbCommonUtils.getScrapBookDir().clone();

@@ -17,7 +17,6 @@ var sbSortService = {
 		this.WIZARD.getButton("next").removeAttribute("accesskey");
 		this.WIZARD.canAdvance = false;
 		this.RADIO_GROUP.selectedIndex = this.RADIO_GROUP.getAttribute("sortIndex");
-		sbDataSource.init();
 		if ( window.arguments ) {
 			this.contResList = [window.arguments[0]];
 			this.waitTime = 2;

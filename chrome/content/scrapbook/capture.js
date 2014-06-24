@@ -731,7 +731,6 @@ var sbCrossLinker = {
 
 	invoke : function()
 	{
-		if ( !sbDataSource.data ) sbDataSource.init();
 		sbDataSource.setProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gReferItem.id), "type", "site");
 		sbDataSource.flush();
 		sbInvisibleBrowser.refreshEvent(function(){ sbCrossLinker.exec(); });
@@ -1035,7 +1034,6 @@ sbCaptureObserverCallback.onCaptureComplete = function(aItem)
 	if ( gContext == "capture-again" || gContext == "capture-again-deep" )
 	{
 		sbCrossLinker.forceReloading(gPreset[0], gPreset[1]);
-		sbDataSource.init();
 		var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gPreset[0]);
 		sbDataSource.setProperty(res, "chars", aItem.chars);
 		if ( gPreset[5] ) sbDataSource.setProperty(res, "type", "");
