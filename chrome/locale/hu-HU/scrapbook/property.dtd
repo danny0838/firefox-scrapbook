@@ -4,6 +4,7 @@
 <!ENTITY sb.prop.encode "Kódolás">
 <!ENTITY sb.prop.size "Méret">
 <!ENTITY sb.prop.content "Tartalom">
+<!ENTITY sb.prop.file "File">
 <!ENTITY sb.prop.folder "Mappa">
 <!ENTITY sb.prop.icon "Ikon">
 <!ENTITY sb.prop.icon.change "Csere">

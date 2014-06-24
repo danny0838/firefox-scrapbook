@@ -4,6 +4,7 @@
 <!ENTITY sb.prop.encode "Kodlama">
 <!ENTITY sb.prop.size "Boyut">
 <!ENTITY sb.prop.content "İçerik">
+<!ENTITY sb.prop.file "File">
 <!ENTITY sb.prop.folder "Klasör">
 <!ENTITY sb.prop.icon "Simge">
 <!ENTITY sb.prop.icon.change "Değiştir">

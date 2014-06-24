@@ -4,6 +4,7 @@
 <!ENTITY sb.prop.encode "Kodning">
 <!ENTITY sb.prop.size "Storlek">
 <!ENTITY sb.prop.content "Innehåll">
+<!ENTITY sb.prop.file "File">
 <!ENTITY sb.prop.folder "Mapp">
 <!ENTITY sb.prop.icon "Ikon">
 <!ENTITY sb.prop.icon.change "Byt">

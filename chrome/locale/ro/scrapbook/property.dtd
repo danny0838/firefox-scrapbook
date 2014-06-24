@@ -4,6 +4,7 @@
 <!ENTITY sb.prop.encode "Codare">
 <!ENTITY sb.prop.size "Dimensiune">
 <!ENTITY sb.prop.content "Conținut">
+<!ENTITY sb.prop.file "File">
 <!ENTITY sb.prop.folder "Dosar">
 <!ENTITY sb.prop.icon "Pictogramă">
 <!ENTITY sb.prop.icon.change "Modifică ">

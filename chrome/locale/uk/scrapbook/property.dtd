@@ -4,6 +4,7 @@
 <!ENTITY sb.prop.encode "Кодування">
 <!ENTITY sb.prop.size "Розмір">
 <!ENTITY sb.prop.content "Вміст">
+<!ENTITY sb.prop.file "File">
 <!ENTITY sb.prop.folder "Тека">
 <!ENTITY sb.prop.icon "Значок">
 <!ENTITY sb.prop.icon.change "Змінити">
