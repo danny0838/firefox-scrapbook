@@ -71,9 +71,7 @@ var sbPropService = {
 	delayedInit : function()
 	{
 		var sizeCount = this.getTotalFileSize(this.id);
-		var txt = sbPropService.formatFileSize(sizeCount[0]);
-		txt += "  " + sbCommonUtils.lang("property", "FILES_COUNT", [sizeCount[1]]);
-		document.getElementById("sbPropSize").value = txt;
+		document.getElementById("sbPropSize").value = sbCommonUtils.lang("property", "FILES_COUNT", [sbPropService.formatFileSize(sizeCount[0]), sizeCount[1]]);
 	},
 
 	accept : function()
