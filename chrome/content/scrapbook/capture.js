@@ -980,7 +980,7 @@ sbHeaderSniffer.prototype = {
 	{
 		sbCaptureTask.contentType = this.getHeader("Content-Type");
 		var httpStatus = this.getStatus();
-		SB_trace(sbCommonUtils.lang("capture", "CONNECT_SUCCESS") + " (Content-Type: " + sbCaptureTask.contentType + ")");
+		SB_trace(sbCommonUtils.lang("capture", "CONNECT_SUCCESS", [sbCaptureTask.contentType]));
 		switch ( httpStatus )
 		{
 			case 404 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCommonUtils.lang("capture", "HTTP_STATUS_404")); return;
