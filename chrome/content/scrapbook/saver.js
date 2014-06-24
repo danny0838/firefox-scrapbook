@@ -901,7 +901,7 @@ var sbCaptureObserverCallback = {
 
 	onAllDownloadsComplete : function(aItem)
 	{
-		this.trace(sbCommonUtils.lang("overlay", "CAPTURE_COMPLETE") + ": " + aItem.title, 5000);
+		this.trace(sbCommonUtils.lang("overlay", "CAPTURE_COMPLETE", [aItem.title]), 5000);
 		this.onCaptureComplete(aItem);
 	},
 
