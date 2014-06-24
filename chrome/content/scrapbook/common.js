@@ -2,6 +2,8 @@ const NS_SCRAPBOOK = "http://amb.vis.ne.jp/mozilla/scrapbook-rdf#";
 
 var sbCommonUtils = {
 
+	_stringBundles : [],
+
 	/**
 	 * Frequently used objects
 	 */
@@ -44,6 +46,10 @@ var sbCommonUtils = {
 	get PROMPT() {
 		delete this.PROMPT;
 		return this.PROMPT = Components.classes['@mozilla.org/embedcomp/prompt-service;1'].getService(Components.interfaces.nsIPromptService);
+	},
+	get BUNDLE() {
+		delete this.BUNDLE;
+		return this.BUNDLE = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
 	},
 
 	get _fxVer3_5() {
@@ -543,6 +549,24 @@ var sbCommonUtils = {
 		catch (ex) {
 			sbCommonUtils.error("ERROR: unable to set a pref: " + aName);
 		}
+	},
+
+	lang : function(aBundle, aName, aArgs)
+	{
+		var bundle = this._stringBundles[aBundle];
+		if (!bundle) {
+			var uri = "chrome://scrapbook/locale/%s.properties".replace("%s", aBundle);
+			bundle = this._stringBundles[aBundle] = this.BUNDLE.createBundle(uri);
+		}
+		try {
+			if (!aArgs)
+				return bundle.GetStringFromName(aName);
+			else
+			    return bundle.formatStringFromName(aName, aArgs, aArgs.length);
+		}
+		catch (ex) {
+		}
+		return aName;
 	},
 
 	escapeComment : function(aStr)
