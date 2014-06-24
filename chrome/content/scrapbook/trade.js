@@ -65,7 +65,7 @@ var sbTradeService = {
 		if ( invalid )
 		{
 			this.lock(1);
-			alert(sbCommonUtils.lang("trade", "ERROR_INVALID_FILEPATH") + "\n" + dirPath);
+			alert(sbCommonUtils.lang("trade", "ERROR_INVALID_FILEPATH", [dirPath]));
 			if (aQuickMode)
 				window.setTimeout(function() { window.close(); }, 0);
 			return;
