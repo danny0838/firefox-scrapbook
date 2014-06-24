@@ -6,7 +6,6 @@ var sbCombineService = {
 
 
 	get WIZARD()  { return document.getElementById("sbCombineWizard"); },
-	get STRING()  { return document.getElementById("sbCombineString"); },
 	get LISTBOX() { return document.getElementById("sbCombineListbox"); },
 	get curID()   { return this.idList[this.index]; },
 	get curRes()  { return this.resList[this.index]; },
@@ -79,7 +78,7 @@ var sbCombineService = {
 		if (type == "folder" || type == "separator")
 			return;
 		if (type == "site")
-			alert(this.STRING.getString("WARN_ABOUT_INDEPTH"));
+			alert(sbCommonUtils.lang("combine", "WARN_ABOUT_INDEPTH"));
 		var icon = sbDataSource.getProperty(aRes, "icon");
 		if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
 		var listItem = this.LISTBOX.appendItem(sbDataSource.getProperty(aRes, "title"));
@@ -115,7 +114,7 @@ var sbCombineService = {
 //		this.WIZARD.getButton("back").onclick = null;
 		this.WIZARD.getButton("back").hidden = false;
 		this.WIZARD.getButton("back").disabled = true;
-		this.WIZARD.getButton("finish").label = this.STRING.getString("FINISH_BUTTON_LABEL");
+		this.WIZARD.getButton("finish").label = sbCommonUtils.lang("combine", "FINISH_BUTTON_LABEL");
 		this.WIZARD.getButton("finish").disabled = true;
 		this.WIZARD.getButton("cancel").hidden = false;
 		this.WIZARD.getButton("cancel").disabled = true;
@@ -200,7 +199,7 @@ var sbCombineService = {
 		this.WIZARD.getButton("cancel").disabled = true;
 		this.option["R"] = document.getElementById("sbCombineOptionRemove").checked;
 		this.toggleElements(true);
-		SB_trace(sbCaptureTask.STRING.getString("CAPTURE_START"));
+		SB_trace(sbCommonUtils.lang("capture", "CAPTURE_START"));
 //alert("--"+document.getElementById("sbpTitleTextbox").value+"--");
 		if ( document.getElementById("sbpTitleTextbox").value == "" )
 		{
@@ -445,7 +444,7 @@ var sbPageCombiner = {
 	{
 		if ( this.BODY.localName.toUpperCase() != "BODY" )
 		{
-			alert(sbCombineService.STRING.getString("CANNOT_COMBINE_FRAMES") + "\n" + sbDataSource.getProperty(sbCombineService.curRes, "title"));
+			alert(sbCommonUtils.lang("combine", "CANNOT_COMBINE_FRAMES") + "\n" + sbDataSource.getProperty(sbCombineService.curRes, "title"));
 			this.BROWSER.stop();
 			window.location.reload();
 		}
@@ -607,7 +606,7 @@ sbCaptureObserverCallback.onCaptureComplete = function(aItem)
 	{
 		if ( sbCombineService.resList.length != sbCombineService.parList.length ) return;
 		var rmIDs = window.top.sbController.removeInternal(sbCombineService.resList, sbCombineService.parList);
-		if ( rmIDs ) SB_trace(window.top.sbMainService.STRING.getFormattedString("ITEMS_REMOVED", [rmIDs.length]));
+		if ( rmIDs ) SB_trace(sbCommonUtils.lang("scrapbook", "ITEMS_REMOVED", [rmIDs.length]));
 	}
 	SB_fireNotification(aItem);
 	setTimeout(function()
@@ -622,7 +621,7 @@ sbInvisibleBrowser.onStateChange = function(aWebProgress, aRequest, aStateFlags,
 {
 	if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
 	{
-		SB_trace(sbCaptureTask.STRING.getString("LOADING") + "... " + sbCombineService.prefix + (++this.fileCount) + " " + sbCombineService.postfix);
+		SB_trace(sbCommonUtils.lang("capture", "LOADING") + "... " + sbCombineService.prefix + (++this.fileCount) + " " + sbCombineService.postfix);
 	}
 };
 
