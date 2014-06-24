@@ -203,7 +203,7 @@ var sbCaptureTask = {
 		this.canRefresh = true;
 		var url = aOverriddenURL || gURLs[this.index];
 		if ( gTitles ) gTitle = gTitles[this.index];
-		SB_trace(sbCommonUtils.lang("capture", "CONNECT") + "... " + url);
+		SB_trace(sbCommonUtils.lang("capture", "CONNECT", [url]));
 		if ( gMethod != "SB" ) alert(sbCommonUtils.lang("scrapbook", "ERR_FILE_NOT_EXIST", [gMethod]));
 		if ( url.indexOf("file://") == 0 ) {
 			sbInvisibleBrowser.load(url);
