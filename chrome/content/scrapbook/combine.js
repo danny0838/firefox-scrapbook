@@ -414,7 +414,8 @@ var sbPageCombiner = {
 
 	getCiteHTML : function(aType)
 	{
-		var src   = '\n<!--' + sbCombineService.postfix + '-->\n';
+		// add a thin space between "--" in the comment to prevent exploits
+		var src   = '\n<!--' + sbCombineService.postfix.replace(/--/g, "- -") + '-->\n';
 		var title = sbCommonUtils.crop(sbDataSource.getProperty(sbCombineService.curRes, "title") , 100);
 		var linkURL = "";
 		switch ( aType )
