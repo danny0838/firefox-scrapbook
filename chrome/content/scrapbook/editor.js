@@ -1064,7 +1064,7 @@ var sbInfoViewer = {
 	{
 		var lfURL = gBrowser.currentURI.resolve(aFileName);
 		var lfFileSitemapXml = sbCommonUtils.convertURLToFile(lfURL);
-		//data-Verzeichnis des ScrapBook bestimmen
+		// Determine the data directory of the ScrapBook
 		var lfFolderString = "";
 		var lfID = "";
 		var lfSplit = lfFileSitemapXml.path.split("\\");
@@ -1074,7 +1074,7 @@ var sbInfoViewer = {
 		}
 		lfFolderString += lfSplit[lfSplit.length-4];
 		lfID = lfSplit[lfSplit.length-2];
-		//nach sitemap.xsl im Ordner des Eintrags suchen (ist die Datei nicht vorhanden, muss sitemap.xml gepatcht werden)
+		// search for sitemap.xsl in the entry folder (if not exist, must patch sitemap.xml)
 		var lfFileSitemapXsl = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
 		lfFileSitemapXsl.initWithPath(lfFolderString);
 		lfFileSitemapXsl.append("data");
@@ -1091,12 +1091,12 @@ var sbInfoViewer = {
 		{
 			lfFileSitemapXsl.remove(false);
 		}
-		//sitemap.xsl von übergeordnetem Verzeichnis kopieren
+		// copy sitemap.xsl from the parent directory
 		lfFileSitemapXsl = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
 		lfFileSitemapXsl.initWithPath(lfFolderString);
 		lfFileSitemapXsl.append("sitemap.xsl");
 		lfFileSitemapXsl.copyTo(lfFileSitemapXml.parent, "sitemap.xsl");
-		//gepatchte sitemap.xml laden
+		// load the patched sitemap.xml
 		gBrowser.loadURI(gBrowser.currentURI.resolve(aFileName), null, null);
 	},
 
