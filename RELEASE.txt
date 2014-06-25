@@ -1,3 +1,10 @@
+Scrapbook X 1.11.6
+----------------
+
+- FIXED: Sitemap sometimes become empty after re-capture.
+- FIXED: The title column in multiple capture and deep capture now updates as it ought to.
+
+
 Scrapbook X 1.11.5
 ----------------
 
