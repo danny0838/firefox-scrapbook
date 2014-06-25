@@ -26,13 +26,6 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/combine.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/multiple.js" />
 
-	<stringbundleset>
-		<stringbundle id="sbMainString"    src="chrome://scrapbook/locale/scrapbook.properties" />
-		<stringbundle id="sbCaptureString" src="chrome://scrapbook/locale/capture.properties" />
-		<stringbundle id="sbCombineString" src="chrome://scrapbook/locale/combine.properties" />
-		<stringbundle id="sbOverlayString" src="chrome://scrapbook/locale/overlay.properties" />
-	</stringbundleset>
-
 	<wizardpage id="sbCombineStartPage" pageid="sbCombineStartPage"
 	            next="sbCombinePreviewPage"
 	            label="&sb.tools.combine;"

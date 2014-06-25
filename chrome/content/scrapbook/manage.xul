@@ -25,8 +25,6 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/manage.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapnote.js" />
 
-	<stringbundle id="sbMainString" src="chrome://scrapbook/locale/scrapbook.properties" />
-
 	<broadcasterset id="sbBroadcasters" />
 
 	<keyset id="sbGenericKeys">

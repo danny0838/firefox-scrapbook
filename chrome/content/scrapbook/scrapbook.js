@@ -1,8 +1,6 @@
 
 var sbMainService = {
 
-	get STRING() { return document.getElementById("sbMainString"); },
-
 	baseURL: "",
 	prefs  : {},
 
@@ -10,7 +8,6 @@ var sbMainService = {
 	init: function()
 	{
 		sbMultiBookService.showButton();
-		sbDataSource.init();
 		sbTreeHandler.init(false);
 		sbTreeDNDHandler.init();
 		sbListHandler.restoreLastState();
@@ -95,7 +92,7 @@ var sbMainService = {
 		sbListHandler.quit();
 		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
 		var newItem = sbCommonUtils.newItem(newID);
-		newItem.title = this.STRING.getString("DEFAULT_FOLDER");
+		newItem.title = sbCommonUtils.lang("scrapbook", "DEFAULT_FOLDER");
 		newItem.type = "folder";
 		var tarResName, tarRelIdx, isRootPos;
 		try {
@@ -128,7 +125,6 @@ var sbMainService = {
 		);
 		if (!result.accept) {
 			sbDataSource.deleteItemDescending(newRes, sbCommonUtils.RDF.GetResource(tarResName));
-			sbDataSource.flush();
 			return false;
 		}
 		return true;
@@ -382,7 +378,6 @@ var sbController = {
 		}
 		if (sbDataSource.unshifting)
 			this.rebuildLocal();
-		sbDataSource.flush();
 	},
 
 	removeInternal: function(aResList, aParResList, aBypassConfirm)
@@ -399,12 +394,11 @@ var sbController = {
 				continue;
 			}
 			else if (sbDataSource.getRelativeIndex(aParResList[i], aResList[i]) < 0) {
-				alert("ERROR: Failed to remove resource.\n" + aResList[i].Value);
+				alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_RESOURCE", [aResList[i].Value]));
 				continue;
 			}
 			rmIDs = rmIDs.concat(sbDataSource.deleteItemDescending(aResList[i], aParResList[i]));
 		}
-		sbDataSource.flush();
 		for (var i = 0; i < rmIDs.length; i++) {
 			var myDir = sbCommonUtils.getContentDir(rmIDs[i], true);
 			if (myDir && rmIDs[i].length == 14)
@@ -428,7 +422,7 @@ var sbController = {
 
 	confirmRemovingPrompt: function() {
 		var button = sbCommonUtils.PROMPT.STD_YES_NO_BUTTONS + sbCommonUtils.PROMPT.BUTTON_POS_1_DEFAULT;
-		var text = sbMainService.STRING.getString("CONFIRM_DELETE");
+		var text = sbCommonUtils.lang("scrapbook", "CONFIRM_DELETE");
 		// pressing default button or closing the prompt returns 1
 		// reverse it to mean "no" by default
 		return !sbCommonUtils.PROMPT.confirmEx(null, "[ScrapBook]", text, button, null, null, null, null, {});
@@ -588,7 +582,6 @@ var sbTreeDNDHandler = {
 		var tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(this.row);
 		var tarPar = (this.orient == 0) ? tarRes : sbTreeHandler.getParentResource(this.row);
 		this.moveAfterChecking(curRes, curPar, tarRes, tarPar);
-		sbDataSource.flush();
 	},
 
 	moveMultiple: function()
@@ -623,7 +616,6 @@ var sbTreeDNDHandler = {
 		//RDF-Datenquelle dem tree hinzufügen
 		if ( mmSidebarTreeObj ) mmSidebarTreeObj.database.AddDataSource(mmDaten);
 		mmTreeObj.database.AddDataSource(mmDaten);
-		sbDataSource.flush();
 	},
 
 	moveAfterChecking: function(curRes, curPar, tarRes, tarPar)
@@ -714,7 +706,7 @@ var sbTreeDNDHandler = {
 			);
 		}
 		else {
-			alert(sbMainService.STRING.getString("ERROR_INVALID_URL") + "\n" + url);
+			alert(sbCommonUtils.lang("scrapbook", "ERROR_INVALID_URL", [url]));
 		}
 	},
 
@@ -876,14 +868,14 @@ var sbSearchService = {
 		sbTreeDNDHandler.quit();
 		sbMainService.toggleHeader(
 			true,
-			sbMainService.STRING.getFormattedString("SEARCH_RESULTS_FOUND", [this.container.GetCount()])
+			sbCommonUtils.lang("scrapbook", "SEARCH_RESULTS_FOUND", [this.container.GetCount()])
 		);
 	},
 
 	filterByDays : function()
 	{
 		var ret = { value: "1" };
-		var title = sbMainService.STRING.getString("FILTER_BY_DAYS");
+		var title = sbCommonUtils.lang("scrapbook", "FILTER_BY_DAYS");
 		if (!sbCommonUtils.PROMPT.prompt(window, "ScrapBook", title, ret, null, {}))
 			return;
 		var days = ret.value;

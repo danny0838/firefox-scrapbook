@@ -8,6 +8,7 @@
 <!ENTITY sb.detail.option.images "Obrazki">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.styles "Style">
+<!ENTITY sb.detail.option.scripts "Scripts">
 <!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
 <!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
 <!ENTITY sb.detail.linked.file "Pobierz odnośniki do">

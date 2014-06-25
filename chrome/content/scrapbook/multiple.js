@@ -16,7 +16,7 @@ var sbMultipleService = {
 	init : function()
 	{
 		document.documentElement.buttons = "accept,cancel,extra2";
-		document.documentElement.getButton("accept").label = document.getElementById("sbMainString").getString("CAPTURE_OK_BUTTON");
+		document.documentElement.getButton("accept").label = sbCommonUtils.lang("scrapbook", "CAPTURE_OK_BUTTON");
 		document.documentElement.getButton("accept").accesskey = "C";
 		this.TEXTBOX.focus();
 		sbFolderSelector2.init();
@@ -264,7 +264,6 @@ var sbMultipleService = {
 		var delResEnum = [];
 		this.vorhLinks = [];
 		this.lastID = this.currentID;
-		if ( !sbDataSource.data ) sbDataSource.init();
 		delResource = sbCommonUtils.RDF.GetResource(this.currentID);
 		delRDFCont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
 		delRDFCont.Init(sbDataSource.data, delResource);
@@ -345,7 +344,7 @@ var sbURLDetector1 = {
 
 	inspectDirectory : function(aDir, curIdx)
 	{
-		sbMultipleService.STATUS.value = document.getElementById("sbMainString").getString("SCANNING") + " (" + curIdx + "/" + this.index + ")... " + aDir.path;
+		sbMultipleService.STATUS.value = sbCommonUtils.lang("scrapbook", "SCANNING_DIR", [curIdx, this.index, aDir.path]);
 		var entries = aDir.directoryEntries;
 		while ( entries.hasMoreElements() )
 		{
@@ -407,7 +406,7 @@ var sbURLDetector2 = {
 
 	inspect : function()
 	{
-		sbMultipleService.STATUS.value = document.getElementById("sbMainString").getString("SCANNING") + "... (" + this.index + "/" + (this.lines.length-1) + ")";
+		sbMultipleService.STATUS.value = sbCommonUtils.lang("scrapbook", "SCANNING", [this.index, (this.lines.length-1)]);
 		this.result += "\n";
 		if ( this.type == "W" ) {
 			if ( this.lines[this.index].match(/ LOCALFILE\=\"([^\"]+)\" /) )

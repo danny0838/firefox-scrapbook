@@ -22,11 +22,6 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/fulltext.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
 
-	<stringbundleset>
-		<stringbundle id="sbCacheString" src="chrome://scrapbook/locale/fulltext.properties" />
-		<stringbundle id="sbMainString"  src="chrome://scrapbook/locale/scrapbook.properties" />
-	</stringbundleset>
-
 	<popupset>
 		<menupopup id="sbPopup">
 			<menuitem id="sbPopupOpen"       label="&sb.open;"        oncommand="sbSearchResult.forward('O');" />
@@ -56,7 +51,7 @@
 			<treecol id="sbTreeColContent" label="&sb.prop.content;" flex="5" /><splitter class="tree-splitter" />
 			<treecol id="sbTreeColComment" label="&sb.prop.comment;" flex="2" persist="hidden" /><splitter class="tree-splitter" />
 			<treecol id="sbTreeColFolder"  label="&sb.prop.folder;"  flex="1" persist="hidden" />
-			<treecol id="sbTreeColName"    label="HTML" flex="1" hidden="true" persist="hidden" />
+			<treecol id="sbTreeColName"    label="&sb.prop.file;" flex="1" hidden="true" persist="hidden" />
 		</treecols>
 		<treechildren />
 	</tree>

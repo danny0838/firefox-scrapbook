@@ -86,7 +86,7 @@ var sbTreeHandler = {
 			if ( parRes.Value == "urn:scrapbook:search" )
 			{
 				parRes = sbDataSource.findParentResource(curRes);
-				if ( sbCommonUtils.RDFCU.indexOf(sbDataSource.data, parRes, curRes) == -1 ) { alert("ScrapBook FATAL ERROR."); return; }
+				if ( sbCommonUtils.RDFCU.indexOf(sbDataSource.data, parRes, curRes) == -1 ) { alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SEND")); return; }
 			}
 			resList.push(curRes);
 			parList.push(parRes);
@@ -120,7 +120,7 @@ var sbTreeHandler = {
 		var rmIDs = sbController.removeInternal(resList, parList, false);
 		if ( rmIDs )
 		{
-			sbMainService.trace(sbMainService.STRING.getFormattedString("ITEMS_REMOVED", [rmIDs.length]));
+			sbMainService.trace(sbCommonUtils.lang("scrapbook", "ITEMS_REMOVED", [rmIDs.length]));
 			if ( "sbNoteService" in window && sbNoteService.resource && sbNoteService.resource.Value.substring(18,32) == rmIDs[0] ) sbNoteService.exit(false);
 		}
 	},
@@ -256,7 +256,7 @@ var sbListHandler = {
 		if ( aRes.Value == "urn:scrapbook:search" ) return;
 		document.getElementById("sbTreeRule").setAttribute("iscontainer", "true");
 		sbTreeHandler.TREE.builder.rebuild();
-		var title = aRes.Value == "urn:scrapbook:root" ? sbMainService.STRING.getString("ROOT_FOLDER") : sbDataSource.getProperty(aRes, "title");
+		var title = aRes.Value == "urn:scrapbook:root" ? sbCommonUtils.lang("scrapbook", "ROOT_FOLDER") : sbDataSource.getProperty(aRes, "title");
 		document.getElementById("sbListHeader").firstChild.value = title;
 		document.getElementById("sbListMoveUpButton").hidden = aRes.Value == "urn:scrapbook:root";
 		this.LIST.parentNode.hidden = false;

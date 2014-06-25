@@ -55,7 +55,6 @@ var sbContentSaver = {
 
 	captureWindow : function(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData, aContext, aTitle)
 	{
-		if ( !sbDataSource.data ) sbDataSource.init();
 		this.init(aPresetData);
 		this.item.chars  = aRootWindow.document.characterSet;
 		this.item.source = aRootWindow.location.href;
@@ -138,7 +137,6 @@ var sbContentSaver = {
 
 	captureFile : function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext)
 	{
-		if ( !sbDataSource.data ) sbDataSource.init();
 		this.init(aPresetData);
 		this.item.title  = sbCommonUtils.getFileName(aSourceURL);
 		this.item.icon   = "moz-icon://" + this.item.title + "?size=16";
@@ -367,7 +365,7 @@ var sbContentSaver = {
 		{
 			var iconURL = "resource://scrapbook/data/" + this.item.id + "/" + this.favicon;
 			setTimeout(function(){
-				sbDataSource.setProperty(res, "icon", iconURL); sbDataSource.flush();
+				sbDataSource.setProperty(res, "icon", iconURL);
 			}, 500);
 			this.item.icon = this.favicon;
 		}
@@ -684,7 +682,7 @@ var sbContentSaver = {
 			if (!aCSS.cssRules) skip = true;
 		}
 		catch(ex) {
-			sbCommonUtils.warn("Unable to access CSS from '" + aCSS.href + "' in page '" + aDocument.location.href + "' \n" + ex);
+			sbCommonUtils.warn(sbCommonUtils.lang("scrapbook", "ERR_FAIL_GET_CSS", [aCSS.href, aDocument.location.href, ex]));
 				content += "/* ERROR: Unable to access this CSS */\n\n";
 			skip = true;
 		}
@@ -793,7 +791,7 @@ var sbContentSaver = {
 				return newFileName;
 			}
 			catch(ex) {
-				sbCommonUtils.error("*** SCRAPBOOK_PERSIST_FAILURE: " + aURLSpec + "\n" + ex + "\n");
+				sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_DOWNLOAD_FILE", [aURLSpec, ex]));
 				this.httpTask[this.item.id]--;
 				return "";
 			}
@@ -808,7 +806,7 @@ var sbContentSaver = {
 				return newFileName;
 			}
 			catch(ex) {
-				sbCommonUtils.error("*** SCRAPBOOK_COPY_FAILURE: " + aURLSpec + "\n" + ex + "\n");
+				sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_COPY_FILE", [aURLSpec, ex]));
 				return "";
 			}
 		}
@@ -881,8 +879,6 @@ sbCaptureObserver.prototype = {
 
 var sbCaptureObserverCallback = {
 
-	getString : function(aBundleName){ return sbBrowserOverlay.STRING.getString(aBundleName); },
-
 	trace : function(aText, aMillisec)
 	{
 		var status = top.window.document.getElementById("statusbar-display");
@@ -898,18 +894,18 @@ var sbCaptureObserverCallback = {
 
 	onDownloadComplete : function(aItem)
 	{
-		this.trace(this.getString("CAPTURE") + "... (" + sbContentSaver.httpTask[aItem.id] + ") " + aItem.title, 0);
+		this.trace(sbCommonUtils.lang("overlay", "CAPTURE", [sbContentSaver.httpTask[aItem.id], aItem.title]), 0);
 	},
 
 	onAllDownloadsComplete : function(aItem)
 	{
-		this.trace(this.getString("CAPTURE_COMPLETE") + ": " + aItem.title, 5000);
+		this.trace(sbCommonUtils.lang("overlay", "CAPTURE_COMPLETE", [aItem.title]), 5000);
 		this.onCaptureComplete(aItem);
 	},
 
 	onDownloadProgress : function(aItem, aFileName, aProgress)
 	{
-		this.trace(this.getString("TRANSFER_DATA") + "... (" + aProgress + ") " + aFileName, 0);
+		this.trace(sbCommonUtils.lang("overlay", "DOWNLOAD_DATA", [aProgress, aFileName]), 0);
 	},
 
 	onCaptureComplete : function(aItem)

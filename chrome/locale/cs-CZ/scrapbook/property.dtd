@@ -4,6 +4,7 @@
 <!ENTITY sb.prop.encode "Kódování">
 <!ENTITY sb.prop.size "Velikost">
 <!ENTITY sb.prop.content "Obsah">
+<!ENTITY sb.prop.file "File">
 <!ENTITY sb.prop.folder "Složka">
 <!ENTITY sb.prop.icon "Ikona">
 <!ENTITY sb.prop.icon.change "Změnit">

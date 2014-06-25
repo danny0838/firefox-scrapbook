@@ -6,7 +6,6 @@ var sbCombineService = {
 
 
 	get WIZARD()  { return document.getElementById("sbCombineWizard"); },
-	get STRING()  { return document.getElementById("sbCombineString"); },
 	get LISTBOX() { return document.getElementById("sbCombineListbox"); },
 	get curID()   { return this.idList[this.index]; },
 	get curRes()  { return this.resList[this.index]; },
@@ -79,7 +78,7 @@ var sbCombineService = {
 		if (type == "folder" || type == "separator")
 			return;
 		if (type == "site")
-			alert(this.STRING.getString("WARN_ABOUT_INDEPTH"));
+			alert(sbCommonUtils.lang("combine", "WARN_ABOUT_INDEPTH"));
 		var icon = sbDataSource.getProperty(aRes, "icon");
 		if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
 		var listItem = this.LISTBOX.appendItem(sbDataSource.getProperty(aRes, "title"));
@@ -115,7 +114,7 @@ var sbCombineService = {
 //		this.WIZARD.getButton("back").onclick = null;
 		this.WIZARD.getButton("back").hidden = false;
 		this.WIZARD.getButton("back").disabled = true;
-		this.WIZARD.getButton("finish").label = this.STRING.getString("FINISH_BUTTON_LABEL");
+		this.WIZARD.getButton("finish").label = sbCommonUtils.lang("combine", "FINISH_BUTTON_LABEL");
 		this.WIZARD.getButton("finish").disabled = true;
 		this.WIZARD.getButton("cancel").hidden = false;
 		this.WIZARD.getButton("cancel").disabled = true;
@@ -200,7 +199,7 @@ var sbCombineService = {
 		this.WIZARD.getButton("cancel").disabled = true;
 		this.option["R"] = document.getElementById("sbCombineOptionRemove").checked;
 		this.toggleElements(true);
-		SB_trace(sbCaptureTask.STRING.getString("CAPTURE_START"));
+		SB_trace(sbCommonUtils.lang("capture", "CAPTURE_START"));
 //alert("--"+document.getElementById("sbpTitleTextbox").value+"--");
 		if ( document.getElementById("sbpTitleTextbox").value == "" )
 		{
@@ -369,6 +368,8 @@ var sbPageCombiner = {
 	htmlSrc : "",
 	cssText : "",
 	isTargetCombined : false,
+	htmlId: "",
+	bodyId: "",
 
 	exec : function(aType)
 	{
@@ -412,7 +413,8 @@ var sbPageCombiner = {
 
 	getCiteHTML : function(aType)
 	{
-		var src   = '\n<!--' + sbCombineService.postfix + '-->\n';
+		// add a thin space between "--" in the comment to prevent exploits
+		var src   = '\n<!--' + sbCombineService.postfix.replace(/--/g, "- -") + '-->\n';
 		var title = sbCommonUtils.crop(sbDataSource.getProperty(sbCombineService.curRes, "title") , 100);
 		var linkURL = "";
 		switch ( aType )
@@ -445,22 +447,36 @@ var sbPageCombiner = {
 	{
 		if ( this.BODY.localName.toUpperCase() != "BODY" )
 		{
-			alert(sbCombineService.STRING.getString("CANNOT_COMBINE_FRAMES") + "\n" + sbDataSource.getProperty(sbCombineService.curRes, "title"));
+			alert(sbCommonUtils.lang("combine", "CANNOT_COMBINE_FRAMES", [sbDataSource.getProperty(sbCombineService.curRes, "title")]));
 			this.BROWSER.stop();
 			window.location.reload();
 		}
-		var divElem = this.BROWSER.contentDocument.createElement("DIV");
+		var divWrap = this.BROWSER.contentDocument.createElement("DIV");
+		divWrap.id = "item" + sbCombineService.curID;
+		var divHTML = this.BROWSER.contentDocument.createElement("DIV");
+		var attrs = this.BROWSER.contentDocument.getElementsByTagName("html")[0].attributes;
+		for (var i = 0; i < attrs.length; i++) {
+			divHTML.setAttribute(attrs[i].name, attrs[i].value);
+		}
+		divHTML.id = "item" + sbCombineService.curID + "html";
+		var divBody = this.BROWSER.contentDocument.createElement("DIV");
 		var attrs = this.BODY.attributes;
 		for (var i = 0; i < attrs.length; i++) {
-			divElem.setAttribute(attrs[i].name, attrs[i].value);
+			divBody.setAttribute(attrs[i].name, attrs[i].value);
 		}
-		divElem.id  = "item" + sbCombineService.curID;
-		divElem.innerHTML = this.BODY.innerHTML + "\n";
-		return sbCommonUtils.getOuterHTML(divElem);
+		divBody.id = "item" + sbCombineService.curID + "body";
+		divBody.innerHTML = this.BODY.innerHTML;
+		divHTML.appendChild(divBody);
+		divWrap.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
+		divWrap.appendChild(divHTML);
+		divWrap.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
+		return sbCommonUtils.getOuterHTML(divWrap);
 	},
 
 	surroundCSS : function()
 	{
+		this.htmlId = this.BROWSER.contentDocument.getElementsByTagName("html")[0].id;
+		this.bodyId = this.BODY.id;
 		var ret = "";
 		for ( var i = 0; i < this.BROWSER.contentDocument.styleSheets.length; i++ )
 		{
@@ -482,13 +498,7 @@ var sbPageCombiner = {
 				cssText = cssRule.cssText;
 			}
 			else if (cssRule.type == Components.interfaces.nsIDOMCSSRule.STYLE_RULE) {
-				// split the selector with "," with the exception of leading "\"
-				var selectors = cssRule.selectorText.match(/(\\.|[^,])+/gi);
-				for ( var j = 0; j < selectors.length; j++ ) {
-					// remove leading "html" and "body", add this div as head
-					selectors[j] = "div#item" + sbCombineService.curID + " " + selectors[j].replace(/^(\s+|\bhtml\b|\bbody\b)+/gi, "");
-				}
-				cssText = selectors.join(", ") + "{" + cssRule.style.cssText + "}";
+				cssText = this.remapCSSSelector(cssRule.selectorText) + "{" + cssRule.style.cssText + "}";
 			}
 			else if (cssRule.type == Components.interfaces.nsIDOMCSSRule.MEDIA_RULE) {
 				cssText = "@media " + cssRule.conditionText + "{\n" + this.processCSSRecursively(cssRule) + "\n}";
@@ -498,6 +508,76 @@ var sbPageCombiner = {
 			}
 			ret += this.inspectCSSText(cssText, aCSS.href) + "\n";
 		}
+		return ret;
+	},
+
+	remapCSSSelector : function(selectorText)
+	{
+		var htmlId = this.htmlId;
+		var bodyId = this.bodyId;
+		var id = "item" + sbCombineService.curID;
+		var canBeElement = true;
+		var canBeId = false;
+		var ret = "#" + id + " " + selectorText.replace(
+			/(,\s+)|(\s+)|((?:[\-0-9A-Za-z_\u00A0-\uFFFF]|\\[0-9A-Fa-f]{1,6} ?|\\.)+)|(\[(?:"(?:\\.|[^"])*"|\\.|[^\]])*\])|(.)/g,
+			function(){
+				var ret = "";
+				// a new selector, add prefix
+				if (arguments[1]) {
+					ret = arguments[1] + "#" + id + " ";
+					canBeElement = true;
+					canBeId = false;
+				}
+				// spaces, can follow element
+				else if (arguments[2]) {
+					ret = arguments[2];
+					canBeElement = true;
+					canBeId = false;
+				}
+				// element-like, check whether to replace
+				else if (arguments[3]) {
+					if (canBeElement) {
+						if (arguments[3].toLowerCase() == "html") {
+							ret = "#" + id + "html";
+						}
+						else if (arguments[3].toLowerCase() == "body") {
+							ret = "#" + id + "body";
+						}
+						else {
+							ret = arguments[3];
+						}
+					}
+					else if (canBeId) {
+						if (arguments[3] == htmlId) {
+							ret = id + "html";
+						}
+						else if (arguments[3] == bodyId) {
+							ret = id + "body";
+						}
+						else {
+							ret = arguments[3];
+						}
+					}
+					else {
+						ret = arguments[3];
+					}
+					canBeElement = false;
+					canBeId = false;
+				}
+				// bracket enclosed, eg. [class="html"]
+				else if (arguments[4]) {
+					ret = arguments[4];
+					canBeElement = false;
+					canBeId = false;
+				}
+				// other chars, may come from "#", ".", ":", " > ", " + ", " ~ ", etc
+				else if (arguments[5]) {
+					ret = arguments[5];
+					canBeElement = false;
+					canBeId = (arguments[5] == "#");
+				}
+				return ret;
+		});
 		return ret;
 	},
 
@@ -607,7 +687,7 @@ sbCaptureObserverCallback.onCaptureComplete = function(aItem)
 	{
 		if ( sbCombineService.resList.length != sbCombineService.parList.length ) return;
 		var rmIDs = window.top.sbController.removeInternal(sbCombineService.resList, sbCombineService.parList);
-		if ( rmIDs ) SB_trace(window.top.sbMainService.STRING.getFormattedString("ITEMS_REMOVED", [rmIDs.length]));
+		if ( rmIDs ) SB_trace(sbCommonUtils.lang("scrapbook", "ITEMS_REMOVED", [rmIDs.length]));
 	}
 	SB_fireNotification(aItem);
 	setTimeout(function()
@@ -622,7 +702,7 @@ sbInvisibleBrowser.onStateChange = function(aWebProgress, aRequest, aStateFlags,
 {
 	if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
 	{
-		SB_trace(sbCaptureTask.STRING.getString("LOADING") + "... " + sbCombineService.prefix + (++this.fileCount) + " " + sbCombineService.postfix);
+		SB_trace(sbCommonUtils.lang("capture", "LOADING", [sbCombineService.prefix + (++this.fileCount), sbCombineService.postfix]));
 	}
 };
 

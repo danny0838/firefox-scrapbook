@@ -19,11 +19,6 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/saver.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/capture.js" />
 
-	<stringbundleset>
-		<stringbundle id="sbCaptureString" src="chrome://scrapbook/locale/capture.properties" />
-		<stringbundle id="sbOverlayString" src="chrome://scrapbook/locale/overlay.properties" />
-	</stringbundleset>
-
 	<hbox>
 		<textbox id="sbpCaptureProgress" readonly="true" width="100"/>
 		<textbox id="sbCaptureTextbox"   readonly="true" flex="1"/>

@@ -4,6 +4,7 @@
 <!ENTITY sb.prop.encode "编码">
 <!ENTITY sb.prop.size "大小">
 <!ENTITY sb.prop.content "内容">
+<!ENTITY sb.prop.file "文件">
 <!ENTITY sb.prop.folder "文件夹">
 <!ENTITY sb.prop.icon "图标">
 <!ENTITY sb.prop.icon.change "更改">

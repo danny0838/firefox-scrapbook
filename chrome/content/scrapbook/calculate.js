@@ -2,7 +2,6 @@
 var sbCalcService = {
 
 	get TREE()     { return document.getElementById("sbTree"); },
-	get STRING()   { return document.getElementById("sbPropString"); },
 	get STATUS()   { return document.getElementById("sbCalcMessage"); },
 	get PROGRESS() { return document.getElementById("sbCalcProgress"); },
 
@@ -15,7 +14,6 @@ var sbCalcService = {
 
 	exec : function()
 	{
-		sbDataSource.init();
 		var resEnum = sbDataSource.data.GetAllResources();
 		while ( resEnum.hasMoreElements() )
 		{
@@ -56,7 +54,7 @@ var sbCalcService = {
 				valid,
 			]);
 			if ( !valid ) this.invalidCount++;
-			this.STATUS.label   = this.STRING.getString("CALCULATING") + "... (" + this.count + "/" + this.total + ")";
+			this.STATUS.label   = sbCommonUtils.lang("property", "CALCULATING", [this.count, this.total]);
 			this.PROGRESS.value = Math.round(this.count / this.total * 100);
 		}
 		setTimeout(function() { sbCalcService.processAsync(); }, 0);
@@ -70,9 +68,9 @@ var sbCalcService = {
 		this.STATUS.label = "";
 		this.PROGRESS.hidden = true;
 		var msg = sbPropService.formatFileSize(this.grandSum);
-		msg += "  " + this.STRING.getFormattedString("ITEMS_COUNT", [this.count]);
+		msg += "  " + sbCommonUtils.lang("property", "ITEMS_COUNT", [this.count]);
 		document.getElementById("sbCalcTotalSize").value = msg;
-		msg = ( this.invalidCount == 0 ) ? this.STRING.getString("DIAGNOSIS_OK") : this.STRING.getFormattedString("DIAGNOSIS_NG", [this.invalidCount]);
+		msg = ( this.invalidCount == 0 ) ? sbCommonUtils.lang("property", "DIAGNOSIS_OK") : sbCommonUtils.lang("property", "DIAGNOSIS_NG", [this.invalidCount]);
 		document.getElementById("sbCalcDiagnosis").value = msg;
 		this.checkDoubleEntries();
 	},
@@ -91,7 +89,7 @@ var sbCalcService = {
 			{
 				case 0 : return this._items[row][2]; break;
 				case 1 : return this._items[row][5]; break;
-				case 2 : return this._items[row][6] ? "" : sbCalcService.STRING.getString("INVALID"); break;
+				case 2 : return this._items[row][6] ? "" : sbCommonUtils.lang("property", "INVALID"); break;
 			}
 		};
 		treeView.getImageSrc = function(row, col)
@@ -120,7 +118,7 @@ var sbCalcService = {
 		{
 			if ( resList[i].Value in hashTable )
 			{
-				alert("ScrapBook WARNING: Found double entries.\n" + sbDataSource.getProperty(resList[i], "title"));
+				alert(sbCommonUtils.lang("scrapbook", "WARN_DOUBLE_ENTRY", [sbDataSource.getProperty(resList[i], "title")]));
 				var parRes = sbDataSource.findParentResource(resList[i]);
 				if ( parRes ) sbDataSource.removeFromContainer(parRes.Value, resList[i]);
 			}

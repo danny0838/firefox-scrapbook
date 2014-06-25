@@ -4,6 +4,7 @@
 <!ENTITY sb.prop.encode "Encodage">
 <!ENTITY sb.prop.size "Taille">
 <!ENTITY sb.prop.content "Contenu">
+<!ENTITY sb.prop.file "File">
 <!ENTITY sb.prop.folder "Dossier">
 <!ENTITY sb.prop.icon "Icône">
 <!ENTITY sb.prop.icon.change "Modifier">

@@ -7,13 +7,6 @@ var sbBrowserOverlay = {
 	resource: null,
 	locateMe: null,
 
-	get STRING() {
-		if (!this._stringBundle)
-			this._stringBundle = document.getElementById("ScrapBookOverlayString");
-		return this._stringBundle;
-	},
-	_stringBundle: null,
-
 	webProgressListener: {
 		onLocationChange: function(aProgress, aRequest, aURI) {
 			sbBrowserOverlay.onLocationChange(aURI ? aURI.spec : "about:blank");
@@ -104,7 +97,6 @@ var sbBrowserOverlay = {
 			document.getElementById("ScrapBookStatusPanel").hidden = !sbCommonUtils.getPref("ui.statusBar", false);
 		}
 		document.getElementById("ScrapBookToolsMenu").hidden   = !sbCommonUtils.getPref("ui.toolsMenu", false);
-		sbDataSource.init(true);
 		sbDataSource.backup();
 		this.setProtocolSubstitution();
 		var file = sbCommonUtils.getScrapBookDir().clone();
@@ -168,7 +160,7 @@ var sbBrowserOverlay = {
 		menuItem.id = "urn:scrapbook:root";
 		menuItem.setAttribute("class", "menuitem-iconic bookmark-item");
 		menuItem.setAttribute("container", "true");
-		menuItem.setAttribute("label", this.STRING.getString("ROOT_FOLDER"));
+		menuItem.setAttribute("label", sbCommonUtils.lang("overlay", "ROOT_FOLDER"));
 		aPopup.appendChild(document.createElement("menuseparator"));
 		var ids = sbCommonUtils.getPref("ui.folderList", "");
 		ids = ids ? ids.split("|") : [];
@@ -191,7 +183,7 @@ var sbBrowserOverlay = {
 			aPopup.appendChild(document.createElement("menuseparator"));
 		menuItem = aPopup.appendChild(document.createElement("menuitem"));
 		menuItem.id = "ScrapBookContextPicking";
-		menuItem.setAttribute("label", this.STRING.getString("SELECT_FOLDER") + "...");
+		menuItem.setAttribute("label", sbCommonUtils.lang("overlay", "SELECT_FOLDER"));
 	},
 
 	destroyPopup: function(aPopup)

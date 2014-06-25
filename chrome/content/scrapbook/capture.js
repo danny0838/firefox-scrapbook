@@ -56,7 +56,7 @@ function SB_initCapture()
 			var contDir = sbCommonUtils.getContentDir(gPreset[0]);
 			var file = contDir.clone();
 			file.append("sb-file2url.txt");
-			if ( !file.exists() ) { alert("ScrapBook ERROR: Could not find 'sb-file2url.txt'."); window.close(); }
+			if ( !file.exists() ) { alert(sbCommonUtils.lang("scrapbook", "ERR_NO_FILE2URL")); window.close(); }
 			var lines = sbCommonUtils.readFile(file).split("\n");
 			for ( var i = 0; i < lines.length; i++ )
 			{
@@ -65,7 +65,7 @@ function SB_initCapture()
 			}
 			file = sbCommonUtils.getContentDir(gPreset[0]).clone();
 			file.append("sb-url2name.txt");
-			if ( !file.exists() ) { alert("ScrapBook ERROR: Could not find 'sb-url2name.txt'."); window.close(); }
+			if ( !file.exists() ) { alert(sbCommonUtils.lang("scrapbook", "ERR_NO_URL2NAME")); window.close(); }
 			lines = sbCommonUtils.readFile(file).split("\n");
 			for ( i = 0; i < lines.length; i++ )
 			{
@@ -77,7 +77,7 @@ function SB_initCapture()
 				}
 			}
 			gPreset[3] = gFile2URL;
-			if ( !myURLs[0] ) { alert("ScrapBook ERROR: Could not find the source URL for " + gPreset[1] + ".html."); window.close(); }
+			if ( !myURLs[0] ) { alert(sbCommonUtils.lang("scrapbook", "ERR_NO_SOURCE_URL", [gPreset[1] + ".html."])); window.close(); }
 		}
 	}
 	else gContext = "link";
@@ -122,13 +122,11 @@ var sbCaptureTask = {
 
 	get INTERVAL() { return gTimeout; },
 	get TREE()     { return document.getElementById("sbpURLList"); },
-	get STRING()   { return document.getElementById("sbCaptureString"); },
 	get URL()      { return gURLs[this.index]; },
 
 	index       : 0,
 	contentType : "",
 	isDocument  : false,
-	canRefresh  : true,
 	sniffer     : null,
 	seconds     : 3,
 	timerID     : 0,
@@ -201,11 +199,10 @@ var sbCaptureTask = {
 		}
 		this.contentType = "";
 		this.isDocument = true;
-		this.canRefresh = true;
 		var url = aOverriddenURL || gURLs[this.index];
 		if ( gTitles ) gTitle = gTitles[this.index];
-		SB_trace(this.STRING.getString("CONNECT") + "... " + url);
-		if ( gMethod != "SB" ) alert(gMethod+" unknown");
+		SB_trace(sbCommonUtils.lang("capture", "CONNECT", [url]));
+		if ( gMethod != "SB" ) alert(sbCommonUtils.lang("scrapbook", "ERR_FILE_NOT_EXIST", [gMethod]));
 		if ( url.indexOf("file://") == 0 ) {
 			sbInvisibleBrowser.load(url);
 		} else {
@@ -267,7 +264,7 @@ var sbCaptureTask = {
 
 	countDown : function()
 	{
-		SB_trace(this.STRING.getFormattedString("WAITING", [sbCaptureTask.seconds]) + "...");
+		SB_trace(sbCommonUtils.lang("capture", "WAITING", [sbCaptureTask.seconds]));
 		if ( --this.seconds > 0 )
 			this.timerID = window.setTimeout(function(){ sbCaptureTask.countDown(); }, 1000);
 		else
@@ -426,7 +423,7 @@ var sbpFilter = {
 				}
 			} catch(aEx)
 			{
-				alert("Das sollte nicht vorkommen\n---\n"+aEx);
+				alert("This shouldn't happen\n---\n"+aEx);
 			}
 		}
 		//3. Selektion aktualisieren
@@ -623,7 +620,7 @@ var sbInvisibleBrowser = {
 			if (gCharset) this.ELEMENT.docShell.charset = gCharset;
 		}
 		catch (ex) {
-			alert("ERROR: Your browser does not support setting input charset.\n\n" + ex);
+			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_CHANGE_CHARSET"));
 		}
 		// nsIDocShellHistory is deprecated in newer version of Firefox
 		// nsIDocShell in the old version doesn't work
@@ -642,14 +639,29 @@ var sbInvisibleBrowser = {
 
 	execCapture : function()
 	{
-		SB_trace(sbCaptureTask.STRING.getString("CAPTURE_START"));
+		SB_trace(sbCommonUtils.lang("capture", "CAPTURE_START"));
 		document.getElementById("sbCapturePauseButton").disabled = true;
 		sbCaptureTask.toggleSkipButton(false);
 		var ret = null;
-		var preset = gReferItem ? [gReferItem.id, SB_suggestName(sbCaptureTask.URL), gOption, gFile2URL, gDepths[sbCaptureTask.index]] : null;
+		var preset = gReferItem ? [gReferItem.id, SB_suggestName(this.ELEMENT.currentURI.spec), gOption, gFile2URL, gDepths[sbCaptureTask.index]] : null;
 		if ( gPreset ) preset = gPreset;
 		if ( this.ELEMENT.contentDocument.body && sbCaptureTask.isDocument )
 		{
+			var metaElems = this.ELEMENT.contentDocument.getElementsByTagName("meta");
+			for ( var i = 0; i < metaElems.length; i++ )
+			{
+				if ( metaElems[i].hasAttribute("http-equiv") && metaElems[i].hasAttribute("content") &&
+				     metaElems[i].getAttribute("http-equiv").toLowerCase() == "refresh" && 
+				     metaElems[i].getAttribute("content").match(/URL\=(.*)$/i) )
+				{
+					var newURL = sbCommonUtils.resolveURL(sbCaptureTask.URL, RegExp.$1);
+					if ( newURL != sbCaptureTask.URL )
+					{
+						sbCaptureTask.start(newURL);
+						return;
+					}
+				}
+			}
 			ret = sbContentSaver.captureWindow(this.ELEMENT.contentWindow, false, gShowDetail, gResName, gResIdx, preset, gContext, gTitle);
 		}
 		else
@@ -678,7 +690,7 @@ var sbInvisibleBrowser = {
 		else
 		{
 			if ( gShowDetail ) window.close();
-			SB_trace(sbCaptureTask.STRING.getString("CAPTURE_ABORT"));
+			SB_trace(sbCommonUtils.lang("capture", "CAPTURE_ABORT"));
 			sbCaptureTask.fail("");
 		}
 	},
@@ -697,7 +709,7 @@ var sbInvisibleBrowser = {
 	{
 		if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
 		{
-			SB_trace(sbCaptureTask.STRING.getString("LOADING") + "... " + (++this.fileCount) + " " + (sbCaptureTask.URL ? sbCaptureTask.URL : this.ELEMENT.contentDocument.title));
+			SB_trace(sbCommonUtils.lang("capture", "LOADING", [++this.fileCount, (sbCaptureTask.URL ? sbCaptureTask.URL : this.ELEMENT.contentDocument.title)]));
 		}
 	},
 
@@ -705,7 +717,7 @@ var sbInvisibleBrowser = {
 	{
 		if ( aCurTotalProgress != aMaxTotalProgress )
 		{
-			SB_trace(sbCaptureObserverCallback.getString("TRANSFER_DATA") + "... (" + aCurTotalProgress + " Bytes)");
+			SB_trace(sbCommonUtils.lang("overlay", "TRANSFER_DATA", [aCurTotalProgress]));
 		}
 	},
 
@@ -732,17 +744,15 @@ var sbCrossLinker = {
 
 	invoke : function()
 	{
-		if ( !sbDataSource.data ) sbDataSource.init();
 		sbDataSource.setProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gReferItem.id), "type", "site");
-		sbDataSource.flush();
 		sbInvisibleBrowser.refreshEvent(function(){ sbCrossLinker.exec(); });
 		this.ELEMENT.docShell.allowImages = false;
 		sbInvisibleBrowser.onStateChange = function(aWebProgress, aRequest, aStateFlags, aStatus)
 		{
 			if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
 			{
-				SB_trace(sbCaptureTask.STRING.getFormattedString("REBUILD_LINKS", [sbCrossLinker.index + 1, sbCrossLinker.nameList.length]) + "... "
-					+ ++sbInvisibleBrowser.fileCount + " : " + sbCrossLinker.nameList[sbCrossLinker.index] + ".html");
+				SB_trace(sbCommonUtils.lang("capture", "REBUILD_LINKS", 
+					[sbCrossLinker.index + 1, sbCrossLinker.nameList.length, ++sbInvisibleBrowser.fileCount, sbCrossLinker.nameList[sbCrossLinker.index] + ".html"]));
 			}
 		};
 		this.baseURL = sbCommonUtils.IO.newFileURI(sbCommonUtils.getContentDir(gReferItem.id)).spec;
@@ -766,7 +776,7 @@ var sbCrossLinker = {
 		}
 		else
 		{
-			SB_trace(sbCaptureTask.STRING.getString("REBUILD_LINKS_COMPLETE"));
+			SB_trace(sbCommonUtils.lang("capture", "REBUILD_LINKS_COMPLETE"));
 			this.flushXML();
 			SB_fireNotification(gReferItem);
 			//Fenster wird nur geschlossen, wenn alle ausgewaehlten Seiten heruntergeladen werden konnten
@@ -804,8 +814,9 @@ var sbCrossLinker = {
 		for ( var f = 0; f < sbContentSaver.frameList.length; f++ )
 		{
 			var doc = sbContentSaver.frameList[f].document;
-			var shouldSave = false;
 			var linkList = doc.links;
+			if ( !linkList ) continue;
+			var shouldSave = false;
 			for ( var i = 0; i < linkList.length; i++ )
 			{
 				var urlLR = SB_splitByAnchor(linkList[i].href);
@@ -823,31 +834,6 @@ var sbCrossLinker = {
 						this.nodeHash[this.nameList[this.index]].appendChild(this.nodeHash[name]);
 					}
 					shouldSave = true;
-				}
-			}
-			var metaList = doc.getElementsByTagName("meta");
-			for ( var i = 0; i < metaList.length; i++ )
-			{
-				var meta = metaList[i];
-				if ( meta.hasAttribute("http-equiv") && meta.hasAttribute("content") &&
-					meta.getAttribute("http-equiv").toLowerCase() == "refresh" && 
-					meta.getAttribute("content").match(/(\d+;\s*url=)(.*)$/i) ) {
-					var urlLR = SB_splitByAnchor(sbCommonUtils.resolveURL(this.ELEMENT.currentURI.spec, RegExp.$2));
-					if ( gURL2Name[urlLR[0]] )
-					{
-						var name = gURL2Name[urlLR[0]];
-						meta.setAttribute("content", RegExp.$1 + name + ".html" + urlLR[1]);
-						meta.setAttribute("data-sb-indepth", "true");
-						if ( !this.nodeHash[name] )
-						{
-							var text = meta.text ? meta.text.replace(/\r|\n|\t/g, " ") : "";
-							if ( text.replace(/\s/g, "") == "" ) text = "";
-							this.nodeHash[name] = this.createNode(name, text);
-							if ( !this.nodeHash[name] ) this.nodeHash[name] = name;
-							this.nodeHash[this.nameList[this.index]].appendChild(this.nodeHash[name]);
-						}
-						shouldSave = true;
-					}
 				}
 			}
 			if ( shouldSave )
@@ -981,12 +967,12 @@ sbHeaderSniffer.prototype = {
 	{
 		sbCaptureTask.contentType = this.getHeader("Content-Type");
 		var httpStatus = this.getStatus();
-		SB_trace(sbCaptureTask.STRING.getString("CONNECT_SUCCESS") + " (Content-Type: " + sbCaptureTask.contentType + ")");
+		SB_trace(sbCommonUtils.lang("capture", "CONNECT_SUCCESS", [sbCaptureTask.contentType]));
 		switch ( httpStatus )
 		{
-			case 404 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCaptureTask.STRING.getString("HTTP_STATUS_404") + " (404 Not Found)"); return;
-			case 403 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCaptureTask.STRING.getString("HTTP_STATUS_403") + " (403 Forbidden)"); return;
-			case 500 : sbCaptureTask.failed++;sbCaptureTask.fail("500 Internal Server Error"); return;
+			case 404 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCommonUtils.lang("capture", "HTTP_STATUS_404")); return;
+			case 403 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCommonUtils.lang("capture", "HTTP_STATUS_403")); return;
+			case 500 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCommonUtils.lang("capture", "HTTP_STATUS_500")); return;
 		}
 		var redirectURL = this.getHeader("Location");
 		if ( redirectURL )
@@ -1017,18 +1003,13 @@ sbHeaderSniffer.prototype = {
 	{
 		//Ermitteln, wann der Wert this.failed erhoeht werden muss
 		sbCaptureTask.failed++;
-		sbCaptureTask.fail(sbCaptureTask.STRING.getString("CONNECT_FAILURE") + " (" + aErrorMsg + ")");
+		sbCaptureTask.fail(sbCommonUtils.lang("capture", "CONNECT_FAILURE", [aErrorMsg]));
 	},
 
 };
 
 
 
-
-sbCaptureObserverCallback.getString = function(aBundleName)
-{
-	return document.getElementById("sbOverlayString").getString(aBundleName);
-},
 
 sbCaptureObserverCallback.trace = function(aText)
 {
@@ -1041,7 +1022,6 @@ sbCaptureObserverCallback.onCaptureComplete = function(aItem)
 	if ( gContext == "capture-again" || gContext == "capture-again-deep" )
 	{
 		sbCrossLinker.forceReloading(gPreset[0], gPreset[1]);
-		sbDataSource.init();
 		var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gPreset[0]);
 		sbDataSource.setProperty(res, "chars", aItem.chars);
 		if ( gPreset[5] ) sbDataSource.setProperty(res, "type", "");

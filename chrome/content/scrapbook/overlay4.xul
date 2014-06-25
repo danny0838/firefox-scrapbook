@@ -20,10 +20,6 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/highlighter.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/overlay.js" />
 
-	<stringbundleset id="stringbundleset">
-		<stringbundle id="ScrapBookOverlayString" src="chrome://scrapbook/locale/overlay.properties" />
-	</stringbundleset>
-
 	<broadcasterset id="mainBroadcasterSet">
 		<broadcaster id="viewScrapBookSidebar"
 		             type="checkbox" autoCheck="false"

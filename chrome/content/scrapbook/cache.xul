@@ -14,8 +14,6 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/fulltext.js" />
 
-	<stringbundle id="sbCacheString" src="chrome://scrapbook/locale/fulltext.properties" />
-
 	<vbox id="sbCacheStatus" style="padding:2px;">
 		<textbox id="sbCacheStatusLabel" flex="1" readonly="true" />
 		<progressmeter id="sbCacheStatusProgress" flex="1" mode="determined" value="0" />

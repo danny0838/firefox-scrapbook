@@ -40,7 +40,6 @@ var sbNoteService = {
 		this.save();
 		if ( !sbDataSource.exists(aRes) )
 		{
-			sbDataSource.init();
 			if ( !sbDataSource.exists(aRes) ) return;
 		}
 		this.resource = aRes;
@@ -73,7 +72,6 @@ var sbNoteService = {
 	{
 		var title = sbCommonUtils.crop(this.TEXTBOX.value.split("\n")[0].replace(/\t/g, " "), 50);
 		sbDataSource.setProperty(this.resource, "title", title);
-		sbDataSource.flush();
 	},
 
 	exit : function()

@@ -11,7 +11,6 @@ var sbNoteService2 = {
 		window.location.search.match(/\?id\=(\d{14})$/);
 		var id = RegExp.$1;
 		sbNoteService.sidebarContext = false;
-		sbDataSource.init();
 		var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
 		if ( !sbDataSource.exists(res) ) return window.location.href = "about:blank";
 		sbNoteService.edit(res);

@@ -4,6 +4,7 @@
 <!ENTITY sb.prop.encode "الترميز">
 <!ENTITY sb.prop.size "الحجم">
 <!ENTITY sb.prop.content "المحتوى">
+<!ENTITY sb.prop.file "File">
 <!ENTITY sb.prop.folder "المجلد">
 <!ENTITY sb.prop.icon "الأيقونة">
 <!ENTITY sb.prop.icon.change "تغيير">

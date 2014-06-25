@@ -1,7 +1,6 @@
 
 var sbSortService = {
 
-	get STRING()      { return document.getElementById("sbMainString"); },
 	get WIZARD()      { return document.getElementById("sbSortWizard"); },
 	get RADIO_GROUP() { return document.getElementById("sbSortRadioGroup"); },
 
@@ -18,7 +17,6 @@ var sbSortService = {
 		this.WIZARD.getButton("next").removeAttribute("accesskey");
 		this.WIZARD.canAdvance = false;
 		this.RADIO_GROUP.selectedIndex = this.RADIO_GROUP.getAttribute("sortIndex");
-		sbDataSource.init();
 		if ( window.arguments ) {
 			this.contResList = [window.arguments[0]];
 			this.waitTime = 2;
@@ -34,7 +32,7 @@ var sbSortService = {
 
 	countDown : function()
 	{
-		this.WIZARD.getButton("next").label = this.STRING.getString("START_BUTTON") + (this.waitTime > 0 ? " (" + this.waitTime + ")" : "");
+		this.WIZARD.getButton("next").label = sbCommonUtils.lang("scrapbook", "START_BUTTON") + (this.waitTime > 0 ? " (" + this.waitTime + ")" : "");
 		this.WIZARD.canAdvance = this.waitTime == 0;
 		if ( this.waitTime-- ) setTimeout(function(){ sbSortService.countDown() }, 500);
 	},
@@ -62,7 +60,6 @@ var sbSortService = {
 			this.process(this.contResList[this.index]);
 		} else {
 			//Sortieren beendet
-			sbDataSource.flush();
 			this.RADIO_GROUP.setAttribute("sortIndex", this.RADIO_GROUP.selectedIndex);
 			window.close();
 			//tree wieder anzeigen
