@@ -132,7 +132,7 @@ var sbContentSaver = {
 			}
 		}
 		this.addResource(aResName, aResIndex);
-		return [sbCommonUtils.splitFileName(newName)[0], this.file2URL];
+		return [sbCommonUtils.splitFileName(newName)[0], this.file2URL, this.item.title];
 	},
 
 	captureFile : function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext)
@@ -152,7 +152,7 @@ var sbContentSaver = {
 		this.refURLObj  = sbCommonUtils.convertURLToObject(aReferURL);
 		var newName = this.saveFileInternal(aSourceURL, this.name, aType);
 		this.addResource(aResName, aResIndex);
-		return [sbCommonUtils.splitFileName(newName)[0], this.file2URL];
+		return [sbCommonUtils.splitFileName(newName)[0], this.file2URL, this.item.title];
 	},
 
 	showDetailDialog : function(aTitles, aResURI, aContext)

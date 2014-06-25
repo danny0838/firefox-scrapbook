@@ -220,6 +220,7 @@ var sbCaptureTask = {
 		treecell.setAttribute("properties", "success");
 		this.TREE.childNodes[1].childNodes[this.index].childNodes[0].appendChild(treecell);
 		this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "finished");
+		this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[2].setAttribute("label", gTitles[this.index] || "");
 		this.next(false);
 	},
 
@@ -687,6 +688,7 @@ var sbInvisibleBrowser = {
 				for ( var f in gFile2URL ) txt += f + "\t" + gFile2URL[f] + "\n";
 				sbCommonUtils.writeFile(txtFile, txt, "UTF-8");
 			}
+			gTitles[sbCaptureTask.index] = ret[2];
 		}
 		else
 		{
