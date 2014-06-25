@@ -345,7 +345,7 @@ var sbURLDetector1 = {
 
 	inspectDirectory : function(aDir, curIdx)
 	{
-		sbMultipleService.STATUS.value = sbCommonUtils.lang("scrapbook", "SCANNING") + " (" + curIdx + "/" + this.index + ")... " + aDir.path;
+		sbMultipleService.STATUS.value = sbCommonUtils.lang("scrapbook", "SCANNING_DIR", [curIdx, this.index, aDir.path]);
 		var entries = aDir.directoryEntries;
 		while ( entries.hasMoreElements() )
 		{
@@ -407,7 +407,7 @@ var sbURLDetector2 = {
 
 	inspect : function()
 	{
-		sbMultipleService.STATUS.value = sbCommonUtils.lang("scrapbook", "SCANNING") + "... (" + this.index + "/" + (this.lines.length-1) + ")";
+		sbMultipleService.STATUS.value = sbCommonUtils.lang("scrapbook", "SCANNING", [this.index, (this.lines.length-1)]);
 		this.result += "\n";
 		if ( this.type == "W" ) {
 			if ( this.lines[this.index].match(/ LOCALFILE\=\"([^\"]+)\" /) )

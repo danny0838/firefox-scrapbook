@@ -203,7 +203,7 @@ var sbCaptureTask = {
 		this.canRefresh = true;
 		var url = aOverriddenURL || gURLs[this.index];
 		if ( gTitles ) gTitle = gTitles[this.index];
-		SB_trace(sbCommonUtils.lang("capture", "CONNECT") + "... " + url);
+		SB_trace(sbCommonUtils.lang("capture", "CONNECT", [url]));
 		if ( gMethod != "SB" ) alert(sbCommonUtils.lang("scrapbook", "ERR_FILE_NOT_EXIST", [gMethod]));
 		if ( url.indexOf("file://") == 0 ) {
 			sbInvisibleBrowser.load(url);
@@ -266,7 +266,7 @@ var sbCaptureTask = {
 
 	countDown : function()
 	{
-		SB_trace(sbCommonUtils.lang("capture", "WAITING", [sbCaptureTask.seconds]) + "...");
+		SB_trace(sbCommonUtils.lang("capture", "WAITING", [sbCaptureTask.seconds]));
 		if ( --this.seconds > 0 )
 			this.timerID = window.setTimeout(function(){ sbCaptureTask.countDown(); }, 1000);
 		else
@@ -696,7 +696,7 @@ var sbInvisibleBrowser = {
 	{
 		if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
 		{
-			SB_trace(sbCommonUtils.lang("capture", "LOADING") + "... " + (++this.fileCount) + " " + (sbCaptureTask.URL ? sbCaptureTask.URL : this.ELEMENT.contentDocument.title));
+			SB_trace(sbCommonUtils.lang("capture", "LOADING", [++this.fileCount, (sbCaptureTask.URL ? sbCaptureTask.URL : this.ELEMENT.contentDocument.title)]));
 		}
 	},
 
@@ -704,7 +704,7 @@ var sbInvisibleBrowser = {
 	{
 		if ( aCurTotalProgress != aMaxTotalProgress )
 		{
-			SB_trace(sbCommonUtils.lang("overlay", "TRANSFER_DATA") + "... (" + aCurTotalProgress + " Bytes)");
+			SB_trace(sbCommonUtils.lang("overlay", "TRANSFER_DATA", [aCurTotalProgress]));
 		}
 	},
 
@@ -740,8 +740,8 @@ var sbCrossLinker = {
 		{
 			if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
 			{
-				SB_trace(sbCommonUtils.lang("capture", "REBUILD_LINKS", [sbCrossLinker.index + 1, sbCrossLinker.nameList.length]) + "... "
-					+ ++sbInvisibleBrowser.fileCount + " : " + sbCrossLinker.nameList[sbCrossLinker.index] + ".html");
+				SB_trace(sbCommonUtils.lang("capture", "REBUILD_LINKS", 
+					[sbCrossLinker.index + 1, sbCrossLinker.nameList.length, ++sbInvisibleBrowser.fileCount, sbCrossLinker.nameList[sbCrossLinker.index] + ".html"]));
 			}
 		};
 		this.baseURL = sbCommonUtils.IO.newFileURI(sbCommonUtils.getContentDir(gReferItem.id)).spec;
@@ -980,12 +980,12 @@ sbHeaderSniffer.prototype = {
 	{
 		sbCaptureTask.contentType = this.getHeader("Content-Type");
 		var httpStatus = this.getStatus();
-		SB_trace(sbCommonUtils.lang("capture", "CONNECT_SUCCESS") + " (Content-Type: " + sbCaptureTask.contentType + ")");
+		SB_trace(sbCommonUtils.lang("capture", "CONNECT_SUCCESS", [sbCaptureTask.contentType]));
 		switch ( httpStatus )
 		{
-			case 404 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCommonUtils.lang("capture", "HTTP_STATUS_404") + " (404 Not Found)"); return;
-			case 403 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCommonUtils.lang("capture", "HTTP_STATUS_403") + " (403 Forbidden)"); return;
-			case 500 : sbCaptureTask.failed++;sbCaptureTask.fail("500 Internal Server Error"); return;
+			case 404 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCommonUtils.lang("capture", "HTTP_STATUS_404")); return;
+			case 403 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCommonUtils.lang("capture", "HTTP_STATUS_403")); return;
+			case 500 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCommonUtils.lang("capture", "HTTP_STATUS_500")); return;
 		}
 		var redirectURL = this.getHeader("Location");
 		if ( redirectURL )
@@ -1016,7 +1016,7 @@ sbHeaderSniffer.prototype = {
 	{
 		//Ermitteln, wann der Wert this.failed erhoeht werden muss
 		sbCaptureTask.failed++;
-		sbCaptureTask.fail(sbCommonUtils.lang("capture", "CONNECT_FAILURE") + " (" + aErrorMsg + ")");
+		sbCaptureTask.fail(sbCommonUtils.lang("capture", "CONNECT_FAILURE", [aErrorMsg]));
 	},
 
 };

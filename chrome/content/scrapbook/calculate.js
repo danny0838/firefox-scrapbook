@@ -55,7 +55,7 @@ var sbCalcService = {
 				valid,
 			]);
 			if ( !valid ) this.invalidCount++;
-			this.STATUS.label   = sbCommonUtils.lang("property", "CALCULATING") + "... (" + this.count + "/" + this.total + ")";
+			this.STATUS.label   = sbCommonUtils.lang("property", "CALCULATING", [this.count, this.total]);
 			this.PROGRESS.value = Math.round(this.count / this.total * 100);
 		}
 		setTimeout(function() { sbCalcService.processAsync(); }, 0);
