@@ -636,8 +636,8 @@ var sbCommonUtils = {
 		for ( var i=0; i<aNode.attributes.length; i++ ) {
 			tag += ' ' + aNode.attributes[i].name + '="' + aNode.attributes[i].value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;") + '"';
 		}
-		tag += ">\n";
-		return tag + aNode.innerHTML + "</" + aNode.nodeName.toLowerCase() + ">\n";
+		tag += ">";
+		return tag + aNode.innerHTML + "</" + aNode.nodeName.toLowerCase() + ">";
 	},
 
 	/**
