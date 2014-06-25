@@ -369,6 +369,8 @@ var sbPageCombiner = {
 	htmlSrc : "",
 	cssText : "",
 	isTargetCombined : false,
+	htmlId: "",
+	bodyId: "",
 
 	exec : function(aType)
 	{
@@ -473,6 +475,8 @@ var sbPageCombiner = {
 
 	surroundCSS : function()
 	{
+		this.htmlId = this.BROWSER.contentDocument.getElementsByTagName("html")[0].id;
+		this.bodyId = this.BODY.id;
 		var ret = "";
 		for ( var i = 0; i < this.BROWSER.contentDocument.styleSheets.length; i++ )
 		{
@@ -509,44 +513,70 @@ var sbPageCombiner = {
 
 	remapCSSSelector : function(selectorText)
 	{
-		var id = "#item" + sbCombineService.curID;
-		var canFollowElement = true;
-		var ret = id + " " + selectorText.replace(
+		var htmlId = this.htmlId;
+		var bodyId = this.bodyId;
+		var id = "item" + sbCombineService.curID;
+		var canBeElement = true;
+		var canBeId = false;
+		var ret = "#" + id + " " + selectorText.replace(
 			/(,\s+)|(\s+)|((?:[\-0-9A-Za-z_\u00A0-\uFFFF]|\\[0-9A-Fa-f]{1,6} ?|\\.)+)|(\[(?:"(?:\\.|[^"])*"|\\.|[^\]])*\])|(.)/g,
 			function(){
+				var ret = "";
 				// a new selector, add prefix
 				if (arguments[1]) {
-					canFollowElement = true;
-					return arguments[1] + id + " ";
+					ret = arguments[1] + "#" + id + " ";
+					canBeElement = true;
+					canBeId = false;
 				}
 				// spaces, can follow element
 				else if (arguments[2]) {
-					canFollowElement = true;
-					return arguments[2];
+					ret = arguments[2];
+					canBeElement = true;
+					canBeId = false;
 				}
-				// element-like
+				// element-like, check whether to replace
 				else if (arguments[3]) {
-					if (canFollowElement) {
+					if (canBeElement) {
 						if (arguments[3].toLowerCase() == "html") {
-							return id + "html";
+							ret = "#" + id + "html";
 						}
 						else if (arguments[3].toLowerCase() == "body") {
-							return id + "body";
+							ret = "#" + id + "body";
+						}
+						else {
+							ret = arguments[3];
 						}
 					}
-					canFollowElement = false;
-					return arguments[3];
+					else if (canBeId) {
+						if (arguments[3] == htmlId) {
+							ret = id + "html";
+						}
+						else if (arguments[3] == bodyId) {
+							ret = id + "body";
+						}
+						else {
+							ret = arguments[3];
+						}
+					}
+					else {
+						ret = arguments[3];
+					}
+					canBeElement = false;
+					canBeId = false;
 				}
 				// bracket enclosed, eg. [class="html"]
 				else if (arguments[4]) {
-					canFollowElement = false;
-					return arguments[4];
+					ret = arguments[4];
+					canBeElement = false;
+					canBeId = false;
 				}
-				// other chars, may be "#", ".", ":", " > ", " + ", " ~ ", etc
+				// other chars, may come from "#", ".", ":", " > ", " + ", " ~ ", etc
 				else if (arguments[5]) {
-					canFollowElement = false;
-					return arguments[5];
+					ret = arguments[5];
+					canBeElement = false;
+					canBeId = (arguments[5] == "#");
 				}
+				return ret;
 		});
 		return ret;
 	},
