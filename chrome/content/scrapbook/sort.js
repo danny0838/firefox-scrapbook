@@ -17,7 +17,6 @@ var sbSortService = {
 		this.WIZARD.getButton("next").removeAttribute("accesskey");
 		this.WIZARD.canAdvance = false;
 		this.RADIO_GROUP.selectedIndex = this.RADIO_GROUP.getAttribute("sortIndex");
-		sbDataSource.init();
 		if ( window.arguments ) {
 			this.contResList = [window.arguments[0]];
 			this.waitTime = 2;
@@ -61,7 +60,6 @@ var sbSortService = {
 			this.process(this.contResList[this.index]);
 		} else {
 			//Sortieren beendet
-			sbDataSource.flush();
 			this.RADIO_GROUP.setAttribute("sortIndex", this.RADIO_GROUP.selectedIndex);
 			window.close();
 			//tree wieder anzeigen

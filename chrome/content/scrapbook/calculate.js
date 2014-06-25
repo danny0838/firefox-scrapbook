@@ -14,7 +14,6 @@ var sbCalcService = {
 
 	exec : function()
 	{
-		sbDataSource.init();
 		var resEnum = sbDataSource.data.GetAllResources();
 		while ( resEnum.hasMoreElements() )
 		{

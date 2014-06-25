@@ -425,7 +425,6 @@ var sbPageEditor = {
 			this.disableTemporary(500);
 			sbDataSource.setProperty(sbBrowserOverlay.resource, "title",   newTitle);
 			sbDataSource.setProperty(sbBrowserOverlay.resource, "comment", newComment);
-			sbDataSource.flush();
 			this.item.title   = newTitle;
 			this.item.comment = newComment;
 			sbCommonUtils.writeIndexDat(this.item);

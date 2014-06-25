@@ -5,7 +5,7 @@ var sbDataSource = {
 	data : null,
 	file : null,
 	unshifting : false,
-
+	flushTimer : null,
 
 
 	init : function(aQuietWarning)
@@ -63,6 +63,15 @@ var sbDataSource = {
 	flush : function()
 	{
 		this.data.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).Flush();
+	},
+
+	flushWithDelay : function()
+	{
+		if (this.flushTimer) return;
+		this.flushTimer = setTimeout(function(){
+			sbDataSource.flushTimer = null;
+			sbDataSource.flush();
+		}, 100 );
 	},
 
 	unregister : function()
@@ -128,7 +137,7 @@ var sbDataSource = {
 			} else {
 				cont.AppendElement(newRes);
 			}
-			this.flush();
+			this.flushWithDelay();
 			return newRes;
 		} catch(ex) {
 			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_ADD_RESOURCE", [ex]));
@@ -161,12 +170,14 @@ var sbDataSource = {
 			sbCommonUtils.RDFC.Init(this.data, sbCommonUtils.RDF.GetResource("urn:scrapbook:root"));
 			sbCommonUtils.RDFC.AppendElement(curRes, true);
 		}
+		this.flushWithDelay();
 	},
 
 	createEmptySeq : function(aResName)
 	{
 		if ( !this.validateURI(aResName) ) return;
 		sbCommonUtils.RDFCU.MakeSeq(this.data, sbCommonUtils.RDF.GetResource(aResName));
+		this.flushWithDelay();
 	},
 
 	deleteItemDescending : function(aRes, aParRes)
@@ -181,6 +192,7 @@ var sbDataSource = {
 			rmIDs = rmIDs.concat(addIDs);
 		}
 		while( addIDs.length > 0 && ++depth < 100 );
+		this.flushWithDelay();
 		return rmIDs;
 	},
 
@@ -216,6 +228,7 @@ var sbDataSource = {
 			} catch(ex) {
 			}
 		}
+		this.flushWithDelay();
 		return rmID;
 	},
 
@@ -245,12 +258,14 @@ var sbDataSource = {
 		{
 			ccCont.RemoveElementAt(ccI, true);
 		}
+		this.flushWithDelay();
 	},
 
 	removeFromContainer : function(aResURI, aRes)
 	{
 		var cont = this.getContainer(aResURI, true);
 		if ( cont ) cont.RemoveElement(aRes, true);
+		this.flushWithDelay();
 	},
 
 
@@ -275,6 +290,7 @@ var sbDataSource = {
 			oldVal = oldVal.QueryInterface(Components.interfaces.nsIRDFLiteral);
 			newVal = sbCommonUtils.RDF.GetLiteral(newVal);
 			this.data.Change(aRes, aProp, oldVal, newVal);
+			this.flushWithDelay();
 		} catch(ex) {
 		}
 	},
@@ -356,4 +372,4 @@ var sbDataSource = {
 
 };
 
-
+sbDataSource.init();

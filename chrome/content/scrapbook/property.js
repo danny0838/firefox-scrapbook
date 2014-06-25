@@ -18,7 +18,6 @@ var sbPropService = {
 		this.id = window.arguments[0];
 		if (!this.id)
 			return;
-		sbDataSource.init();
 		this.item = sbCommonUtils.newItem();
 		this.resource = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.id);
 		for (var prop in this.item) {
@@ -100,7 +99,6 @@ var sbPropService = {
 			}
 			if (!this.isTypeFolder && !this.isTypeBookmark && !this.isTypeSeparator)
 				sbCommonUtils.writeIndexDat(this.item);
-			sbDataSource.flush();
 		}
 		if (window.arguments[1])
 			window.arguments[1].accept = true;
