@@ -56,6 +56,10 @@ var sbCommonUtils = {
 		delete this._fxVer3_5;
 		return this._fxVer3_5 = (this.checkFirefoxVersion("3.5") >=0);
 	},
+	get _fxVer3_6() {
+		delete this._fxVer3_6;
+		return this._fxVer3_6 = (this.checkFirefoxVersion("3.6") >=0);
+	},
 	get _fxVer4() {
 		delete this._fxVer4;
 		return this._fxVer4 = (this.checkFirefoxVersion("4.0") >=0);
