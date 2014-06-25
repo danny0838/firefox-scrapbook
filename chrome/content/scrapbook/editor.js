@@ -1062,42 +1062,37 @@ var sbInfoViewer = {
 
 	loadFile : function(aFileName)
 	{
-		var lfURL = gBrowser.currentURI.resolve(aFileName);
-		var lfFileSitemapXml = sbCommonUtils.convertURLToFile(lfURL);
-		// Determine the data directory of the ScrapBook
-		var lfFolderString = "";
-		var lfID = "";
-		var lfSplit = lfFileSitemapXml.path.split("\\");
-		for ( var lfI=0; lfI<lfSplit.length-4; lfI++ )
-		{
-			lfFolderString += lfSplit[lfI]+"\\";
+		var url = gBrowser.currentURI.resolve(aFileName);
+		var dataXml = sbCommonUtils.convertURLToFile(url);
+		// later Firefox version doesn't allow loading .xsl in the upper directory
+		// if it's requested, patch it
+		if (dataXml.leafName == "sitemap.xml" && dataXml.exists()) {
+			var dataDir = dataXml.parent;
+			var dataXsl = dataDir.clone(); dataXsl.append("sitemap.xsl");
+			var dataU2N = dataDir.clone(); dataU2N.append("sb-url2name.txt");
+			var bookXsl = dataDir.parent.parent; bookXsl.append("sitemap.xsl");
+
+			// dataXml is flushed earlier than dataU2N in a new capture
+			// if it has newer lastModifiedTime, treat as already patched
+			if ( !dataU2N.exists() || dataXml.lastModifiedTime < dataU2N.lastModifiedTime ) {
+				var lfData = sbCommonUtils.readFile(dataXml);
+				lfData = sbCommonUtils.convertToUnicode(lfData, "UTF-8");
+				lfData = lfData.replace('<?xml-stylesheet href="../../sitemap.xsl"', '<?xml-stylesheet href="sitemap.xsl"');
+				dataXml.remove(false);
+				sbCommonUtils.writeFile(dataXml, lfData, "UTF-8");
+			}
+
+			// copy dataXsl from the book directory whenever there's a new version
+			// copy = same lastModifiedTime
+			if ( bookXsl.exists() ) {
+				if ( !dataXsl.exists() || dataXsl.lastModifiedTime < bookXsl.lastModifiedTime ) {
+					if (dataXsl.exists()) dataXsl.remove();
+					bookXsl.copyTo(dataDir, "sitemap.xsl");
+				}
+			}
 		}
-		lfFolderString += lfSplit[lfSplit.length-4];
-		lfID = lfSplit[lfSplit.length-2];
-		// search for sitemap.xsl in the entry folder (if not exist, must patch sitemap.xml)
-		var lfFileSitemapXsl = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
-		lfFileSitemapXsl.initWithPath(lfFolderString);
-		lfFileSitemapXsl.append("data");
-		lfFileSitemapXsl.append(lfID);
-		lfFileSitemapXsl.append("sitemap.xsl");
-		if ( !lfFileSitemapXsl.exists() )
-		{
-			var lfData = sbCommonUtils.readFile(lfFileSitemapXml);
-			lfData = sbCommonUtils.convertToUnicode(lfData, "UTF-8");
-			lfData = lfData.replace(/"\.\.\/\.\.\/sitemap.xsl"/, "\"sitemap.xsl\"");
-			lfFileSitemapXml.remove(false);
-			sbCommonUtils.writeFile(lfFileSitemapXml, lfData, "UTF-8");
-		} else
-		{
-			lfFileSitemapXsl.remove(false);
-		}
-		// copy sitemap.xsl from the parent directory
-		lfFileSitemapXsl = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
-		lfFileSitemapXsl.initWithPath(lfFolderString);
-		lfFileSitemapXsl.append("sitemap.xsl");
-		lfFileSitemapXsl.copyTo(lfFileSitemapXml.parent, "sitemap.xsl");
-		// load the patched sitemap.xml
-		gBrowser.loadURI(gBrowser.currentURI.resolve(aFileName), null, null);
+		// load the request URL
+		gBrowser.loadURI(url, null, null);
 	},
 
 	optimize : function()
