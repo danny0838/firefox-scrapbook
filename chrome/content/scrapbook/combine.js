@@ -368,6 +368,8 @@ var sbPageCombiner = {
 	htmlSrc : "",
 	cssText : "",
 	isTargetCombined : false,
+	htmlId: "",
+	bodyId: "",
 
 	exec : function(aType)
 	{
@@ -411,7 +413,8 @@ var sbPageCombiner = {
 
 	getCiteHTML : function(aType)
 	{
-		var src   = '\n<!--' + sbCombineService.postfix + '-->\n';
+		// add a thin space between "--" in the comment to prevent exploits
+		var src   = '\n<!--' + sbCombineService.postfix.replace(/--/g, "- -") + '-->\n';
 		var title = sbCommonUtils.crop(sbDataSource.getProperty(sbCombineService.curRes, "title") , 100);
 		var linkURL = "";
 		switch ( aType )
@@ -448,18 +451,32 @@ var sbPageCombiner = {
 			this.BROWSER.stop();
 			window.location.reload();
 		}
-		var divElem = this.BROWSER.contentDocument.createElement("DIV");
+		var divWrap = this.BROWSER.contentDocument.createElement("DIV");
+		divWrap.id = "item" + sbCombineService.curID;
+		var divHTML = this.BROWSER.contentDocument.createElement("DIV");
+		var attrs = this.BROWSER.contentDocument.getElementsByTagName("html")[0].attributes;
+		for (var i = 0; i < attrs.length; i++) {
+			divHTML.setAttribute(attrs[i].name, attrs[i].value);
+		}
+		divHTML.id = "item" + sbCombineService.curID + "html";
+		var divBody = this.BROWSER.contentDocument.createElement("DIV");
 		var attrs = this.BODY.attributes;
 		for (var i = 0; i < attrs.length; i++) {
-			divElem.setAttribute(attrs[i].name, attrs[i].value);
+			divBody.setAttribute(attrs[i].name, attrs[i].value);
 		}
-		divElem.id  = "item" + sbCombineService.curID;
-		divElem.innerHTML = this.BODY.innerHTML + "\n";
-		return sbCommonUtils.getOuterHTML(divElem);
+		divBody.id = "item" + sbCombineService.curID + "body";
+		divBody.innerHTML = this.BODY.innerHTML;
+		divHTML.appendChild(divBody);
+		divWrap.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
+		divWrap.appendChild(divHTML);
+		divWrap.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
+		return sbCommonUtils.getOuterHTML(divWrap);
 	},
 
 	surroundCSS : function()
 	{
+		this.htmlId = this.BROWSER.contentDocument.getElementsByTagName("html")[0].id;
+		this.bodyId = this.BODY.id;
 		var ret = "";
 		for ( var i = 0; i < this.BROWSER.contentDocument.styleSheets.length; i++ )
 		{
@@ -481,13 +498,7 @@ var sbPageCombiner = {
 				cssText = cssRule.cssText;
 			}
 			else if (cssRule.type == Components.interfaces.nsIDOMCSSRule.STYLE_RULE) {
-				// split the selector with "," with the exception of leading "\"
-				var selectors = cssRule.selectorText.match(/(\\.|[^,])+/gi);
-				for ( var j = 0; j < selectors.length; j++ ) {
-					// remove leading "html" and "body", add this div as head
-					selectors[j] = "div#item" + sbCombineService.curID + " " + selectors[j].replace(/^(\s+|\bhtml\b|\bbody\b)+/gi, "");
-				}
-				cssText = selectors.join(", ") + "{" + cssRule.style.cssText + "}";
+				cssText = this.remapCSSSelector(cssRule.selectorText) + "{" + cssRule.style.cssText + "}";
 			}
 			else if (cssRule.type == Components.interfaces.nsIDOMCSSRule.MEDIA_RULE) {
 				cssText = "@media " + cssRule.conditionText + "{\n" + this.processCSSRecursively(cssRule) + "\n}";
@@ -497,6 +508,76 @@ var sbPageCombiner = {
 			}
 			ret += this.inspectCSSText(cssText, aCSS.href) + "\n";
 		}
+		return ret;
+	},
+
+	remapCSSSelector : function(selectorText)
+	{
+		var htmlId = this.htmlId;
+		var bodyId = this.bodyId;
+		var id = "item" + sbCombineService.curID;
+		var canBeElement = true;
+		var canBeId = false;
+		var ret = "#" + id + " " + selectorText.replace(
+			/(,\s+)|(\s+)|((?:[\-0-9A-Za-z_\u00A0-\uFFFF]|\\[0-9A-Fa-f]{1,6} ?|\\.)+)|(\[(?:"(?:\\.|[^"])*"|\\.|[^\]])*\])|(.)/g,
+			function(){
+				var ret = "";
+				// a new selector, add prefix
+				if (arguments[1]) {
+					ret = arguments[1] + "#" + id + " ";
+					canBeElement = true;
+					canBeId = false;
+				}
+				// spaces, can follow element
+				else if (arguments[2]) {
+					ret = arguments[2];
+					canBeElement = true;
+					canBeId = false;
+				}
+				// element-like, check whether to replace
+				else if (arguments[3]) {
+					if (canBeElement) {
+						if (arguments[3].toLowerCase() == "html") {
+							ret = "#" + id + "html";
+						}
+						else if (arguments[3].toLowerCase() == "body") {
+							ret = "#" + id + "body";
+						}
+						else {
+							ret = arguments[3];
+						}
+					}
+					else if (canBeId) {
+						if (arguments[3] == htmlId) {
+							ret = id + "html";
+						}
+						else if (arguments[3] == bodyId) {
+							ret = id + "body";
+						}
+						else {
+							ret = arguments[3];
+						}
+					}
+					else {
+						ret = arguments[3];
+					}
+					canBeElement = false;
+					canBeId = false;
+				}
+				// bracket enclosed, eg. [class="html"]
+				else if (arguments[4]) {
+					ret = arguments[4];
+					canBeElement = false;
+					canBeId = false;
+				}
+				// other chars, may come from "#", ".", ":", " > ", " + ", " ~ ", etc
+				else if (arguments[5]) {
+					ret = arguments[5];
+					canBeElement = false;
+					canBeId = (arguments[5] == "#");
+				}
+				return ret;
+		});
 		return ret;
 	},
 
