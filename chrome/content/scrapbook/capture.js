@@ -139,10 +139,11 @@ var sbCaptureTask = {
 		{
 			document.getElementById("sbCaptureSkipButton").hidden = true;
 		}
-		for ( var i = 0; i < myURLs.length; i++ ) this.add(myURLs[i], 1);
+		if (!gTitles) gTitles = [];
+		for ( var i = 0; i < myURLs.length; i++ ) this.add(myURLs[i], 1, gTitles[i]);
 	},
 
-	add : function(aURL, aDepth)
+	add : function(aURL, aDepth, aTitle)
 	{
 		if ( !aURL.match(/^(http|https|ftp|file):\/\//i) ) return;
 		if ( gContext == "indepth" )
@@ -172,7 +173,7 @@ var sbCaptureTask = {
 					aTcell1.setAttribute("label", aDepth + " [" + (gURLs.length - 1) + "] " + aURL);
 					aTrow.appendChild(aTcell1);
 					var aTcell2 = document.createElement("treecell");
-					aTcell2.setAttribute("label", "ScrapBook");
+					aTcell2.setAttribute("label", aTitle || "");
 					aTrow.appendChild(aTcell2);
 					var aTitem = document.createElement("treeitem");
 					aTitem.appendChild(aTrow);
