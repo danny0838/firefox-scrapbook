@@ -63,6 +63,10 @@ var sbDataSource = {
 	flush : function()
 	{
 		this.data.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).Flush();
+		if (this.flushTimer) {
+			clearTimeout(this.flushTimer);
+			this.flushTimer = null;
+		}
 	},
 
 	flushWithDelay : function()

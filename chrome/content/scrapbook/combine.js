@@ -585,7 +585,9 @@ var sbPageCombiner = {
 	{
 		if (!aCSSHref) aCSSHref = this.BROWSER.currentURI.spec;
 		// CSS get by cssText is always url("double-quoted-with-\"quote\"-escaped")
-		aCSSText = aCSSText.replace(/ url\(\"((?:\\.|[^"])+)\"\)/g, function() {
+		// or url(something) in Firefox < 3.6
+		var regex = (sbCommonUtils._fxVer3_6) ? / url\(\"((?:\\.|[^"])+)\"\)/g : / url\(((?:\\.|[^)])+)\)/g;
+		aCSSText = aCSSText.replace(regex, function() {
 			var dataURL = arguments[1];
 			if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
 			dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);

@@ -56,6 +56,10 @@ var sbCommonUtils = {
 		delete this._fxVer3_5;
 		return this._fxVer3_5 = (this.checkFirefoxVersion("3.5") >=0);
 	},
+	get _fxVer3_6() {
+		delete this._fxVer3_6;
+		return this._fxVer3_6 = (this.checkFirefoxVersion("3.6") >=0);
+	},
 	get _fxVer4() {
 		delete this._fxVer4;
 		return this._fxVer4 = (this.checkFirefoxVersion("4.0") >=0);
@@ -636,8 +640,8 @@ var sbCommonUtils = {
 		for ( var i=0; i<aNode.attributes.length; i++ ) {
 			tag += ' ' + aNode.attributes[i].name + '="' + aNode.attributes[i].value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;") + '"';
 		}
-		tag += ">\n";
-		return tag + aNode.innerHTML + "</" + aNode.nodeName.toLowerCase() + ">\n";
+		tag += ">";
+		return tag + aNode.innerHTML + "</" + aNode.nodeName.toLowerCase() + ">";
 	},
 
 	/**
