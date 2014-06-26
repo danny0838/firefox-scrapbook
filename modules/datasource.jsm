@@ -6,7 +6,6 @@ var sbDataSource = {
 
 	data : null,
 	file : null,
-	unshifting : false,
 	flushTimer : null,
 
 
@@ -28,7 +27,6 @@ var sbDataSource = {
 		catch(ex) {
 			if ( !aQuietWarning ) alert("ScrapBook ERROR: Failed to initialize datasource.\n\n" + ex);
 		}
-		this.unshifting = sbCommonUtils.getPref("tree.unshift", false);
 	},
 
 	backup : function()
@@ -134,7 +132,7 @@ var sbDataSource = {
 					true
 				);
 			}
-			if ( this.unshifting )
+			if ( sbCommonUtils.getPref("tree.unshift", false) )
 			{
 				if ( aIdx == 0 || aIdx == -1 ) aIdx = 1;
 			}
@@ -160,7 +158,7 @@ var sbDataSource = {
 			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_ADD_RESOURCE1", [ex]));
 			return;
 		}
-		if ( this.unshifting )
+		if ( sbCommonUtils.getPref("tree.unshift", false) )
 		{
 			if ( tarRelIdx == 0 || tarRelIdx == -1 ) tarRelIdx = 1;
 		}
