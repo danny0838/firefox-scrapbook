@@ -113,6 +113,7 @@ var sbBrowserOverlay = {
 			var ids = sbCommonUtils.getPref("ui.folderList", "");
 			sbCommonUtils.writeFile(file, ids, "UTF-8");
 		}
+		this.onLocationChange(gBrowser.currentURI.spec);
 	},
 
 	setProtocolSubstitution: function()

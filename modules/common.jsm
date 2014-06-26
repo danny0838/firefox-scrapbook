@@ -221,7 +221,6 @@ var sbCommonUtils = {
 			var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
 			try {
 				win.sbBrowserOverlay.refresh();
-				win.sbBrowserOverlay.onLocationChange(win.gBrowser.currentURI.spec);
 				win.document.getElementById(rgSidebarId).contentWindow.sbMainService.refresh();
 			}
 			catch (ex) {
