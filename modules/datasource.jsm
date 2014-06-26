@@ -41,6 +41,14 @@ var sbDataSource = {
 		this.file = null;
 	},
 
+	// when data source change (mostly due to changing pref)
+	refresh : function()
+	{
+		this._uninit();
+		this._init();
+		sbCommonUtils.refreshGlobal();
+	},
+
 	backup : function()
 	{
 		var bDir = sbCommonUtils.getScrapBookDir();

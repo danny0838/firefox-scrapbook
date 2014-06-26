@@ -70,9 +70,7 @@ var sbRepair = {
 			document.getElementById("sbRepairRDF2Label").value = "ERROR: " + ex;
 			return;
 		}
-		sbCommonUtils.RDF.UnregisterDataSource(sbDataSource.data);
-		sbDataSource.init();
-		sbCommonUtils.refreshGlobal();
+		sbDataSource.refresh();
 	},
 
 	restoreFavicons : function()
