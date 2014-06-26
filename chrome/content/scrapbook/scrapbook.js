@@ -35,6 +35,12 @@ var sbMainService = {
 		this.prefs.tabsNote         = sbCommonUtils.getPref("tabs.note",         false);
 	},
 
+	rebuild: function()
+	{
+		sbTreeHandler.TREE.builder.rebuild();
+		sbListHandler.LIST.builder.rebuild();
+	},
+
 	refresh: function()
 	{
 		sbListHandler.quit();
@@ -110,9 +116,8 @@ var sbMainService = {
 			isRootPos  = true;
 		}
 		var newRes = sbDataSource.addItem(newItem, tarResName, tarRelIdx);
-		sbTreeHandler.TREE.builder.rebuild();
 		sbDataSource.createEmptySeq(newRes.Value);
-		sbController.rebuildLocal();
+		sbCommonUtils.rebuildGlobal();
 		if (isRootPos)
 			sbTreeHandler.TREE.treeBoxObject.scrollToRow(0);
 		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(newRes);
@@ -179,7 +184,6 @@ var sbMainService = {
 			isRootPos  = true;
 		}
 		sbNoteService.create(tarResName, tarRelIdx, aInTab);
-		sbController.rebuildLocal();
 		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(sbNoteService.resource);
 		sbTreeHandler.TREE.view.selection.select(idx);
 		if (isRootPos)
@@ -376,8 +380,7 @@ var sbController = {
 		for (var i = 0; i < aResList.length; i++)  {
 			sbDataSource.moveItem(aResList[i], aParResList[i], tarRes, -1);
 		}
-		if (sbDataSource.unshifting)
-			this.rebuildLocal();
+		sbCommonUtils.rebuildGlobal();
 	},
 
 	removeInternal: function(aResList, aParResList, aBypassConfirm)
@@ -426,14 +429,6 @@ var sbController = {
 		// pressing default button or closing the prompt returns 1
 		// reverse it to mean "no" by default
 		return !sbCommonUtils.PROMPT.confirmEx(null, "[ScrapBook]", text, button, null, null, null, null, {});
-	},
-
-	rebuildLocal: function()
-	{
-		sbTreeHandler.TREE.builder.rebuild();
-		if (sbListHandler.LIST)
-			sbListHandler.LIST.builder.rebuild();
-		sbCommonUtils.rebuildGlobal();
 	},
 
 };

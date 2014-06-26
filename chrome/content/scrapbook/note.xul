@@ -12,7 +12,6 @@
         onunload="sbNoteService2.finalize(false);">
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapnote.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/note.js" />
 

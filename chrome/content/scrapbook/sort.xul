@@ -17,7 +17,6 @@
         windowtype="scrapbook">
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/sort.js" />
 
 	<wizardpage pageid="sbSortStartPage" label="&sb.sort;">
