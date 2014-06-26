@@ -86,6 +86,11 @@ var sbBrowserOverlay = {
 		gBrowser.removeProgressListener(this.webProgressListener);
 	},
 
+	rebuild: function()
+	{
+		sbMenuHandler.shouldRebuild = true;
+	},
+
 	refresh: function()
 	{
 		this.lastLocation = "";

@@ -191,9 +191,8 @@ var sbCommonUtils = {
 		{
 			var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
 			try {
-				win.sbMenuHandler.shouldRebuild = true;
-				win.document.getElementById(rgSidebarId).contentWindow.sbTreeHandler.TREE.builder.rebuild();
-				win.document.getElementById(rgSidebarId).contentWindow.sbListHandler.LIST.builder.rebuild();
+				win.sbBrowserOverlay.rebuild();
+				win.document.getElementById(rgSidebarId).contentWindow.sbMainService.rebuild();
 			} catch(ex) {
 			}
 		}
