@@ -1,32 +1,69 @@
+const NS_SCRAPBOOK = "http://amb.vis.ne.jp/mozilla/scrapbook-rdf#";
+Components.utils.import("resource://scrapbook-modules/common.jsm");
 
 var sbDataSource = {
 
+	_firstInit : true,
+	_flushTimer : null,
+	_dataObj : null,
+	_dataFile : null,
+	_prefs : {},
 
-	data : null,
-	file : null,
-	unshifting : false,
-	flushTimer : null,
-
-
-	init : function(aQuietWarning)
+	get data()
 	{
+		if (!this._dataObj) this._init();
+		return this._dataObj;
+	},
+
+	_init : function(aQuietWarning)
+	{
+		if (this._firstInit) {
+			this._firstInit = false;
+			var obs = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
+			obs.addObserver(this, "quit-application", false);
+		}
 		try {
-			this.file = sbCommonUtils.getScrapBookDir();
-			this.file.append("scrapbook.rdf");
-			if ( !this.file.exists() )
+			this._dataFile = sbCommonUtils.getScrapBookDir();
+			this._dataFile.append("scrapbook.rdf");
+			if ( !this._dataFile.exists() )
 			{
 				var iDS = Components.classes["@mozilla.org/rdf/datasource;1?name=xml-datasource"].createInstance(Components.interfaces.nsIRDFDataSource);
 				sbCommonUtils.RDFCU.MakeSeq(iDS, sbCommonUtils.RDF.GetResource("urn:scrapbook:root"));
-				var iFileUrl = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newFileURI(this.file);
+				var iFileUrl = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newFileURI(this._dataFile);
 				iDS.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).FlushTo(iFileUrl.spec);
 			}
-			var fileURL = sbCommonUtils.IO.newFileURI(this.file).spec;
-			this.data = sbCommonUtils.RDF.GetDataSourceBlocking(fileURL);
+			var fileURL = sbCommonUtils.IO.newFileURI(this._dataFile).spec;
+			this._dataObj = sbCommonUtils.RDF.GetDataSourceBlocking(fileURL);
+			// record these prefs for change check
+			this._prefs["data.default"] = sbCommonUtils.getPref("data.default", true);
+			this._prefs["data.path"] = sbCommonUtils.getPref("data.path", "");
+			this._prefs["multibook.enabled"] = sbCommonUtils.getPref("multibook.enabled", false);
 		}
 		catch(ex) {
-			if ( !aQuietWarning ) alert("ScrapBook ERROR: Failed to initialize datasource.\n\n" + ex);
+			if ( !aQuietWarning ) sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_INIT_DATASOURCE", [ex]));
 		}
-		this.unshifting = sbCommonUtils.getPref("tree.unshift", false);
+	},
+
+	_uninit : function()
+	{
+		if (this._flushTimer) this.flush();
+		sbCommonUtils.RDF.UnregisterDataSource(this._dataObj);
+		this._dataObj = null;
+		this._dataFile = null;
+	},
+
+	// when data source change (mostly due to changing pref)
+	checkRefresh : function(aNoCheck)
+	{
+		if (!aNoCheck) {
+			if ( this._prefs["data.default"] === sbCommonUtils.getPref("data.default", true) &&
+				this._prefs["data.path"] === sbCommonUtils.getPref("data.path", "") &&
+				this._prefs["multibook.enabled"] === sbCommonUtils.getPref("multibook.enabled", false)
+			) return;
+		}
+		this._uninit();
+		this._init();
+		sbCommonUtils.refreshGlobal();
 	},
 
 	backup : function()
@@ -36,7 +73,7 @@ var sbDataSource = {
 		if ( !bDir.exists() ) bDir.create(bDir.DIRECTORY_TYPE, parseInt("0700", 8));
 		var bFileName = "scrapbook_" + sbCommonUtils.getTimeStamp().substring(0,8) + ".rdf";
 		try {
-			this.file.copyTo(bDir, bFileName);
+			this._dataFile.copyTo(bDir, bFileName);
 			setTimeout(function(){ sbDataSource.cleanUpBackups(bDir); }, 1000);
 		} catch(ex) {
 		}
@@ -62,25 +99,37 @@ var sbDataSource = {
 
 	flush : function()
 	{
-		this.data.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).Flush();
-		if (this.flushTimer) {
-			clearTimeout(this.flushTimer);
-			this.flushTimer = null;
+		this._dataObj.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).Flush();
+		if (this._flushTimer) {
+			this._flushTimer.cancel();
+			this._flushTimer = null;
 		}
 	},
 
-	flushWithDelay : function()
+	_flushWithDelay : function()
 	{
-		if (this.flushTimer) return;
-		this.flushTimer = setTimeout(function(){
-			sbDataSource.flushTimer = null;
-			sbDataSource.flush();
-		}, 100 );
+		if (this._flushTimer) return;
+		this._flushTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
+		// this.observe is called when time's up
+		this._flushTimer.init(this, 10000, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+	},
+
+	observe : function(aSubject, aTopic, aData)
+	{
+		switch (aTopic) {
+			case "timer-callback": 
+				this.flush();
+				break;
+			case "quit-application": 
+				this._uninit();
+				break;
+			default: 
+		}
 	},
 
 	unregister : function()
 	{
-		sbCommonUtils.RDF.UnregisterDataSource(this.data);
+		sbCommonUtils.RDF.UnregisterDataSource(this._dataObj);
 	},
 
 
@@ -115,24 +164,24 @@ var sbDataSource = {
 				aIdx = 0;
 			}
 			var newRes = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aSBitem.id);
-			this.data.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "id"),      sbCommonUtils.RDF.GetLiteral(aSBitem.id),      true);
-			this.data.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "type"),    sbCommonUtils.RDF.GetLiteral(aSBitem.type),    true);
-			this.data.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "title"),   sbCommonUtils.RDF.GetLiteral(aSBitem.title),   true);
-			this.data.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "chars"),   sbCommonUtils.RDF.GetLiteral(aSBitem.chars),   true);
-			this.data.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "comment"), sbCommonUtils.RDF.GetLiteral(aSBitem.comment), true);
-			this.data.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "icon"),    sbCommonUtils.RDF.GetLiteral(aSBitem.icon),    true);
-			this.data.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "source"),  sbCommonUtils.RDF.GetLiteral(aSBitem.source),  true);
+			this._dataObj.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "id"),      sbCommonUtils.RDF.GetLiteral(aSBitem.id),      true);
+			this._dataObj.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "type"),    sbCommonUtils.RDF.GetLiteral(aSBitem.type),    true);
+			this._dataObj.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "title"),   sbCommonUtils.RDF.GetLiteral(aSBitem.title),   true);
+			this._dataObj.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "chars"),   sbCommonUtils.RDF.GetLiteral(aSBitem.chars),   true);
+			this._dataObj.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "comment"), sbCommonUtils.RDF.GetLiteral(aSBitem.comment), true);
+			this._dataObj.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "icon"),    sbCommonUtils.RDF.GetLiteral(aSBitem.icon),    true);
+			this._dataObj.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "source"),  sbCommonUtils.RDF.GetLiteral(aSBitem.source),  true);
 			if (aSBitem.type == "separator") {
 				const RDF_NS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
 				const NC_NS  = "http://home.netscape.com/NC-rdf#";
-				this.data.Assert(
+				this._dataObj.Assert(
 					newRes,
 					sbCommonUtils.RDF.GetResource(RDF_NS + "type"),
 					sbCommonUtils.RDF.GetResource(NC_NS + "BookmarkSeparator"),
 					true
 				);
 			}
-			if ( this.unshifting )
+			if ( sbCommonUtils.getPref("tree.unshift", false) )
 			{
 				if ( aIdx == 0 || aIdx == -1 ) aIdx = 1;
 			}
@@ -141,10 +190,10 @@ var sbDataSource = {
 			} else {
 				cont.AppendElement(newRes);
 			}
-			this.flushWithDelay();
+			this._flushWithDelay();
 			return newRes;
 		} catch(ex) {
-			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_ADD_RESOURCE", [ex]));
+			sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_ADD_RESOURCE", [ex]));
 			return false;
 		}
 	},
@@ -152,41 +201,41 @@ var sbDataSource = {
 	moveItem : function(curRes, curPar, tarPar, tarRelIdx)
 	{
 		try {
-			sbCommonUtils.RDFC.Init(this.data, curPar);
+			sbCommonUtils.RDFC.Init(this._dataObj, curPar);
 			sbCommonUtils.RDFC.RemoveElement(curRes, true);
 		} catch(ex) {
-			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_ADD_RESOURCE1", [ex]));
+			sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_ADD_RESOURCE1", [ex]));
 			return;
 		}
-		if ( this.unshifting )
+		if ( sbCommonUtils.getPref("tree.unshift", false) )
 		{
 			if ( tarRelIdx == 0 || tarRelIdx == -1 ) tarRelIdx = 1;
 		}
 		try {
-			sbCommonUtils.RDFC.Init(this.data, tarPar);
+			sbCommonUtils.RDFC.Init(this._dataObj, tarPar);
 			if ( tarRelIdx > 0 ) {
 				sbCommonUtils.RDFC.InsertElementAt(curRes, tarRelIdx, true);
 			} else {
 				sbCommonUtils.RDFC.AppendElement(curRes);
 			}
 		} catch(ex) {
-			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_ADD_RESOURCE2", [ex]));
-			sbCommonUtils.RDFC.Init(this.data, sbCommonUtils.RDF.GetResource("urn:scrapbook:root"));
+			sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_ADD_RESOURCE2", [ex]));
+			sbCommonUtils.RDFC.Init(this._dataObj, sbCommonUtils.RDF.GetResource("urn:scrapbook:root"));
 			sbCommonUtils.RDFC.AppendElement(curRes, true);
 		}
-		this.flushWithDelay();
+		this._flushWithDelay();
 	},
 
 	createEmptySeq : function(aResName)
 	{
 		if ( !this.validateURI(aResName) ) return;
-		sbCommonUtils.RDFCU.MakeSeq(this.data, sbCommonUtils.RDF.GetResource(aResName));
-		this.flushWithDelay();
+		sbCommonUtils.RDFCU.MakeSeq(this._dataObj, sbCommonUtils.RDF.GetResource(aResName));
+		this._flushWithDelay();
 	},
 
 	deleteItemDescending : function(aRes, aParRes)
 	{
-		sbCommonUtils.RDFC.Init(this.data, aParRes);
+		sbCommonUtils.RDFC.Init(this._dataObj, aParRes);
 		sbCommonUtils.RDFC.RemoveElement(aRes, true);
 		var addIDs = [];
 		var rmIDs = [];
@@ -196,7 +245,7 @@ var sbDataSource = {
 			rmIDs = rmIDs.concat(addIDs);
 		}
 		while( addIDs.length > 0 && ++depth < 100 );
-		this.flushWithDelay();
+		this._flushWithDelay();
 		return rmIDs;
 	},
 
@@ -204,35 +253,35 @@ var sbDataSource = {
 	{
 		var rmIDs = [];
 		try {
-			var resEnum = this.data.GetAllResources();
+			var resEnum = this._dataObj.GetAllResources();
 			while ( resEnum.hasMoreElements() )
 			{
 				var aRes = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-				if ( aRes.Value != "urn:scrapbook:root" && aRes.Value != "urn:scrapbook:search" && !this.data.ArcLabelsIn(aRes).hasMoreElements() )
+				if ( aRes.Value != "urn:scrapbook:root" && aRes.Value != "urn:scrapbook:search" && !this._dataObj.ArcLabelsIn(aRes).hasMoreElements() )
 				{
 					rmIDs.push( this.removeResource(aRes) );
 				}
 			}
 		} catch(ex) {
-			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_CLEAN_DATASOURCE", [ex]));
+			sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_CLEAN_DATASOURCE", [ex]));
 		}
 		return rmIDs;
 	},
 
 	removeResource : function(aRes)
 	{
-		var names = this.data.ArcLabelsOut(aRes);
+		var names = this._dataObj.ArcLabelsOut(aRes);
 		var rmID = this.getProperty(aRes, "id");
 		while ( names.hasMoreElements() )
 		{
 			try {
 				var name  = names.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-				var value = this.data.GetTarget(aRes, name, true);
-				this.data.Unassert(aRes, name, value);
+				var value = this._dataObj.GetTarget(aRes, name, true);
+				this._dataObj.Unassert(aRes, name, value);
 			} catch(ex) {
 			}
 		}
-		this.flushWithDelay();
+		this._flushWithDelay();
 		return rmID;
 	},
 
@@ -242,11 +291,11 @@ var sbDataSource = {
 	{
 		var cont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
 		try {
-			cont.Init(this.data, sbCommonUtils.RDF.GetResource(aResURI));
+			cont.Init(this._dataObj, sbCommonUtils.RDF.GetResource(aResURI));
 		} catch(ex) {
 			if ( force ) {
 				if ( !this.validateURI(aResURI) ) return null;
-				return sbCommonUtils.RDFCU.MakeSeq(this.data, sbCommonUtils.RDF.GetResource(aResURI));
+				return sbCommonUtils.RDFCU.MakeSeq(this._dataObj, sbCommonUtils.RDF.GetResource(aResURI));
 			} else {
 				return null;
 			}
@@ -262,14 +311,14 @@ var sbDataSource = {
 		{
 			ccCont.RemoveElementAt(ccI, true);
 		}
-		this.flushWithDelay();
+		this._flushWithDelay();
 	},
 
 	removeFromContainer : function(aResURI, aRes)
 	{
 		var cont = this.getContainer(aResURI, true);
 		if ( cont ) cont.RemoveElement(aRes, true);
-		this.flushWithDelay();
+		this._flushWithDelay();
 	},
 
 
@@ -278,7 +327,7 @@ var sbDataSource = {
 	{
 		if ( aRes.Value == "urn:scrapbook:root" ) return "";
 		try {
-			var retVal = this.data.GetTarget(aRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + aProp), true);
+			var retVal = this._dataObj.GetTarget(aRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + aProp), true);
 			return retVal.QueryInterface(Components.interfaces.nsIRDFLiteral).Value;
 		} catch(ex) {
 			return "";
@@ -290,11 +339,11 @@ var sbDataSource = {
 		newVal = this.sanitize(newVal);
 		aProp = sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + aProp);
 		try {
-			var oldVal = this.data.GetTarget(aRes, aProp, true);
+			var oldVal = this._dataObj.GetTarget(aRes, aProp, true);
 			oldVal = oldVal.QueryInterface(Components.interfaces.nsIRDFLiteral);
 			newVal = sbCommonUtils.RDF.GetLiteral(newVal);
-			this.data.Change(aRes, aProp, oldVal, newVal);
-			this.flushWithDelay();
+			this._dataObj.Change(aRes, aProp, oldVal, newVal);
+			this._flushWithDelay();
 		} catch(ex) {
 		}
 	},
@@ -307,7 +356,7 @@ var sbDataSource = {
 			case "folder"   : return "chrome://scrapbook/content/view.xul?id=" + id; break;
 			case "note"     : return "chrome://scrapbook/content/note.xul?id=" + id; break;
 			case "bookmark" : return this.getProperty(aRes, "source"); break;
-			default         : return sbCommonUtils.getBaseHref(this.data.URI) + "data/" + id + "/index.html";
+			default         : return sbCommonUtils.getBaseHref(this._dataObj.URI) + "data/" + id + "/index.html";
 		}
 	},
 
@@ -317,12 +366,12 @@ var sbDataSource = {
 		{
 			aRes = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aRes);
 		}
-		return this.data.ArcLabelsOut(aRes).hasMoreElements();
+		return this._dataObj.ArcLabelsOut(aRes).hasMoreElements();
 	},
 
 	isContainer : function(aRes)
 	{
-		return sbCommonUtils.RDFCU.IsContainer(this.data, aRes);
+		return sbCommonUtils.RDFCU.IsContainer(this._dataObj, aRes);
 	},
 
 	identify : function(aID)
@@ -337,14 +386,14 @@ var sbDataSource = {
 
 	getRelativeIndex : function(aParRes, aRes)
 	{
-		return sbCommonUtils.RDFCU.indexOf(this.data, aParRes, aRes);
+		return sbCommonUtils.RDFCU.indexOf(this._dataObj, aParRes, aRes);
 	},
 
 	flattenResources : function(aContRes, aRule, aRecursive)
 	{
 		var resList = [];
 		if ( aRule != 2 ) resList.push(aContRes);
-		sbCommonUtils.RDFC.Init(this.data, aContRes);
+		sbCommonUtils.RDFC.Init(this._dataObj, aContRes);
 		var resEnum = sbCommonUtils.RDFC.GetElements();
 		while ( resEnum.hasMoreElements() )
 		{
@@ -363,17 +412,17 @@ var sbDataSource = {
 
 	findParentResource : function(aRes)
 	{
-		var resEnum = this.data.GetAllResources();
+		var resEnum = this._dataObj.GetAllResources();
 		while ( resEnum.hasMoreElements() )
 		{
 			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
 			if ( !this.isContainer(res) ) continue;
 			if ( res.Value == "urn:scrapbook:search" ) continue;
-			if ( sbCommonUtils.RDFCU.indexOf(this.data, res, aRes) != -1 ) return res;
+			if ( sbCommonUtils.RDFCU.indexOf(this._dataObj, res, aRes) != -1 ) return res;
 		}
 		return null;
 	},
 
 };
 
-sbDataSource.init();
+var EXPORTED_SYMBOLS = ["sbDataSource"];

@@ -23,7 +23,6 @@
 
 	<script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/trade.js" />
 

@@ -70,8 +70,7 @@ var sbRepair = {
 			document.getElementById("sbRepairRDF2Label").value = "ERROR: " + ex;
 			return;
 		}
-		sbCommonUtils.RDF.UnregisterDataSource(sbDataSource.data);
-		sbMultiBookService.refreshGlobal();
+		sbDataSource.checkRefresh(true);
 	},
 
 	restoreFavicons : function()
