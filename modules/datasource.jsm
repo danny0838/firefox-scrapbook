@@ -7,6 +7,7 @@ var sbDataSource = {
 	_flushTimer : null,
 	_dataObj : null,
 	_dataFile : null,
+	_prefs : {},
 
 	get data()
 	{
@@ -33,6 +34,10 @@ var sbDataSource = {
 			}
 			var fileURL = sbCommonUtils.IO.newFileURI(this._dataFile).spec;
 			this._dataObj = sbCommonUtils.RDF.GetDataSourceBlocking(fileURL);
+			// record these prefs for change check
+			this._prefs["data.default"] = sbCommonUtils.getPref("data.default", true);
+			this._prefs["data.path"] = sbCommonUtils.getPref("data.path", "");
+			this._prefs["multibook.enabled"] = sbCommonUtils.getPref("multibook.enabled", false);
 		}
 		catch(ex) {
 			if ( !aQuietWarning ) alert("ScrapBook ERROR: Failed to initialize datasource.\n\n" + ex);
@@ -48,8 +53,14 @@ var sbDataSource = {
 	},
 
 	// when data source change (mostly due to changing pref)
-	refresh : function()
+	checkRefresh : function(aNoCheck)
 	{
+		if (!aNoCheck) {
+			if ( this._prefs["data.default"] === sbCommonUtils.getPref("data.default", true) &&
+				this._prefs["data.path"] === sbCommonUtils.getPref("data.path", "") &&
+				this._prefs["multibook.enabled"] === sbCommonUtils.getPref("multibook.enabled", false)
+			) return;
+		}
 		this._uninit();
 		this._init();
 		sbCommonUtils.refreshGlobal();

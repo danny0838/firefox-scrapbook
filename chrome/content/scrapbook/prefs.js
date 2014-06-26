@@ -32,7 +32,7 @@ var sbPrefWindow = {
 	done: function() {
 		if (!this.changed)
 			return;
-		sbDataSource.refresh();
+		sbDataSource.checkRefresh();
 	},
 
 	updateGroupedUI: function(aPrefName, aGroupName) {
