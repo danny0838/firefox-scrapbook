@@ -40,7 +40,7 @@ var sbDataSource = {
 			this._prefs["multibook.enabled"] = sbCommonUtils.getPref("multibook.enabled", false);
 		}
 		catch(ex) {
-			if ( !aQuietWarning ) sbCommonUtils.alert("ScrapBook ERROR: Failed to initialize datasource.\n\n" + ex);
+			if ( !aQuietWarning ) sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_INIT_DATASOURCE", [ex]));
 		}
 	},
 
