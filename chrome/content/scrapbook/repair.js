@@ -71,6 +71,7 @@ var sbRepair = {
 			return;
 		}
 		sbCommonUtils.RDF.UnregisterDataSource(sbDataSource.data);
+		sbDataSource.init();
 		sbCommonUtils.refreshGlobal();
 	},
 

@@ -32,6 +32,7 @@ var sbPrefWindow = {
 	done: function() {
 		if (!this.changed)
 			return;
+		sbDataSource.init();
 		sbCommonUtils.refreshGlobal();
 	},
 
