@@ -40,7 +40,7 @@ var sbDataSource = {
 			this._prefs["multibook.enabled"] = sbCommonUtils.getPref("multibook.enabled", false);
 		}
 		catch(ex) {
-			if ( !aQuietWarning ) alert("ScrapBook ERROR: Failed to initialize datasource.\n\n" + ex);
+			if ( !aQuietWarning ) sbCommonUtils.alert("ScrapBook ERROR: Failed to initialize datasource.\n\n" + ex);
 		}
 	},
 
@@ -193,7 +193,7 @@ var sbDataSource = {
 			this._flushWithDelay();
 			return newRes;
 		} catch(ex) {
-			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_ADD_RESOURCE", [ex]));
+			sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_ADD_RESOURCE", [ex]));
 			return false;
 		}
 	},
@@ -204,7 +204,7 @@ var sbDataSource = {
 			sbCommonUtils.RDFC.Init(this._dataObj, curPar);
 			sbCommonUtils.RDFC.RemoveElement(curRes, true);
 		} catch(ex) {
-			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_ADD_RESOURCE1", [ex]));
+			sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_ADD_RESOURCE1", [ex]));
 			return;
 		}
 		if ( sbCommonUtils.getPref("tree.unshift", false) )
@@ -219,7 +219,7 @@ var sbDataSource = {
 				sbCommonUtils.RDFC.AppendElement(curRes);
 			}
 		} catch(ex) {
-			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_ADD_RESOURCE2", [ex]));
+			sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_ADD_RESOURCE2", [ex]));
 			sbCommonUtils.RDFC.Init(this._dataObj, sbCommonUtils.RDF.GetResource("urn:scrapbook:root"));
 			sbCommonUtils.RDFC.AppendElement(curRes, true);
 		}
@@ -263,7 +263,7 @@ var sbDataSource = {
 				}
 			}
 		} catch(ex) {
-			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_CLEAN_DATASOURCE", [ex]));
+			sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_CLEAN_DATASOURCE", [ex]));
 		}
 		return rmIDs;
 	},
