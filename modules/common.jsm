@@ -170,38 +170,17 @@ var sbCommonUtils = {
 
 	rebuildGlobal : function()
 	{
-//Hier werden Änderungen fällig
-		//Dieser Block ist notwendig, da MultiSidebar verwendet Fehler verursachen würde
-		var rgSidebarId = "sidebar";
-		var rgSidebarTitleId = "sidebar-title";
-		var rgSidebarSplitterId = "sidebar-splitter";
-		var rgSidebarBoxId = "sidebar-box";
-		var rgPosition = sbCommonUtils.getPref("extensions.multisidebar.viewScrapBookSidebar", 1, true);
-
-		if ( rgPosition > 1)
-		{
-			rgSidebarId = "sidebar-" + rgPosition;
-			rgSidebarTitleId = "sidebar-" + rgPosition + "-title";
-			rgSidebarSplitterId = "sidebar-" + rgPosition + "-splitter";
-			rgSidebarBoxId = "sidebar-" + rgPosition + "-box";
-		}
-		//Ende Block
-		var winEnum = this.WINDOW.getEnumerator("navigator:browser");
-		while ( winEnum.hasMoreElements() )
-		{
-			var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
-			try {
-				win.sbBrowserOverlay.rebuild();
-				win.document.getElementById(rgSidebarId).contentWindow.sbMainService.rebuild();
-			} catch(ex) {
-			}
-		}
+		this._refresh(false);
 	},
 
 	refreshGlobal: function()
 	{
-//Hier werden Änderungen fällig
-		//Dieser Block ist notwendig, da MultiSidebar verwendet Fehler verursachen würde
+		this._refresh(true);
+	},
+
+	_refresh: function(aDSChanged)
+	{
+		// This block is necessary or using MultiSidebar can cause errors
 		var rgSidebarId = "sidebar";
 		var rgSidebarTitleId = "sidebar-title";
 		var rgSidebarSplitterId = "sidebar-splitter";
@@ -215,15 +194,23 @@ var sbCommonUtils = {
 			rgSidebarSplitterId = "sidebar-" + rgPosition + "-splitter";
 			rgSidebarBoxId = "sidebar-" + rgPosition + "-box";
 		}
-		//Ende Block
+		//End Block
 		var winEnum = this.WINDOW.getEnumerator("navigator:browser");
+		// refresh/rebuild main browser windows and their sidebars
 		while (winEnum.hasMoreElements()) {
-			var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
-			try {
-				win.sbBrowserOverlay.refresh();
-				win.document.getElementById(rgSidebarId).contentWindow.sbMainService.refresh();
+			var win = winEnum.getNext();
+			aDSChanged ? win.sbBrowserOverlay.refresh() : win.sbBrowserOverlay.rebuild();
+			var win = win.document.getElementById(rgSidebarId).contentWindow;
+			if (win.sbMainService) {
+				aDSChanged ? win.sbMainService.refresh() : win.sbMainService.rebuild();
 			}
-			catch (ex) {
+		}
+		// refresh/rebuild other scrapbook windows
+		var winEnum = this.WINDOW.getEnumerator("scrapbook");
+		while (winEnum.hasMoreElements()) {
+			var win = winEnum.getNext();
+			if (win.sbMainService) {
+				aDSChanged ? win.sbMainService.refresh() : win.sbMainService.rebuild();
 			}
 		}
 	},
