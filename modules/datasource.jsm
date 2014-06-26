@@ -3,14 +3,18 @@ Components.utils.import("resource://scrapbook-modules/common.jsm");
 
 var sbDataSource = {
 
-
+	_firstInit : true,
+	_flushTimer : null,
 	data : null,
 	file : null,
-	flushTimer : null,
-
 
 	init : function(aQuietWarning)
 	{
+		if (this._firstInit) {
+			this._firstInit = false;
+			var obs = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
+			obs.addObserver(this, "quit-application", false);
+		}
 		try {
 			this.file = sbCommonUtils.getScrapBookDir();
 			this.file.append("scrapbook.rdf");
@@ -27,6 +31,14 @@ var sbDataSource = {
 		catch(ex) {
 			if ( !aQuietWarning ) alert("ScrapBook ERROR: Failed to initialize datasource.\n\n" + ex);
 		}
+	},
+
+	_uninit : function()
+	{
+		if (this._flushTimer) this.flush();
+		sbCommonUtils.RDF.UnregisterDataSource(this.data);
+		this.data = null;
+		this.file = null;
 	},
 
 	backup : function()
@@ -63,19 +75,31 @@ var sbDataSource = {
 	flush : function()
 	{
 		this.data.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).Flush();
-		if (this.flushTimer) {
-			clearTimeout(this.flushTimer);
-			this.flushTimer = null;
+		if (this._flushTimer) {
+			this._flushTimer.cancel();
+			this._flushTimer = null;
 		}
 	},
 
-	flushWithDelay : function()
+	_flushWithDelay : function()
 	{
-		if (this.flushTimer) return;
-		this.flushTimer = setTimeout(function(){
-			sbDataSource.flushTimer = null;
-			sbDataSource.flush();
-		}, 100 );
+		if (this._flushTimer) return;
+		this._flushTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
+		// this.observe is called when time's up
+		this._flushTimer.init(this, 10000, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
+	},
+
+	observe : function(aSubject, aTopic, aData)
+	{
+		switch (aTopic) {
+			case "timer-callback": 
+				this.flush();
+				break;
+			case "quit-application": 
+				this._uninit();
+				break;
+			default: 
+		}
 	},
 
 	unregister : function()
@@ -141,7 +165,7 @@ var sbDataSource = {
 			} else {
 				cont.AppendElement(newRes);
 			}
-			this.flushWithDelay();
+			this._flushWithDelay();
 			return newRes;
 		} catch(ex) {
 			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_ADD_RESOURCE", [ex]));
@@ -174,14 +198,14 @@ var sbDataSource = {
 			sbCommonUtils.RDFC.Init(this.data, sbCommonUtils.RDF.GetResource("urn:scrapbook:root"));
 			sbCommonUtils.RDFC.AppendElement(curRes, true);
 		}
-		this.flushWithDelay();
+		this._flushWithDelay();
 	},
 
 	createEmptySeq : function(aResName)
 	{
 		if ( !this.validateURI(aResName) ) return;
 		sbCommonUtils.RDFCU.MakeSeq(this.data, sbCommonUtils.RDF.GetResource(aResName));
-		this.flushWithDelay();
+		this._flushWithDelay();
 	},
 
 	deleteItemDescending : function(aRes, aParRes)
@@ -196,7 +220,7 @@ var sbDataSource = {
 			rmIDs = rmIDs.concat(addIDs);
 		}
 		while( addIDs.length > 0 && ++depth < 100 );
-		this.flushWithDelay();
+		this._flushWithDelay();
 		return rmIDs;
 	},
 
@@ -232,7 +256,7 @@ var sbDataSource = {
 			} catch(ex) {
 			}
 		}
-		this.flushWithDelay();
+		this._flushWithDelay();
 		return rmID;
 	},
 
@@ -262,14 +286,14 @@ var sbDataSource = {
 		{
 			ccCont.RemoveElementAt(ccI, true);
 		}
-		this.flushWithDelay();
+		this._flushWithDelay();
 	},
 
 	removeFromContainer : function(aResURI, aRes)
 	{
 		var cont = this.getContainer(aResURI, true);
 		if ( cont ) cont.RemoveElement(aRes, true);
-		this.flushWithDelay();
+		this._flushWithDelay();
 	},
 
 
@@ -294,7 +318,7 @@ var sbDataSource = {
 			oldVal = oldVal.QueryInterface(Components.interfaces.nsIRDFLiteral);
 			newVal = sbCommonUtils.RDF.GetLiteral(newVal);
 			this.data.Change(aRes, aProp, oldVal, newVal);
-			this.flushWithDelay();
+			this._flushWithDelay();
 		} catch(ex) {
 		}
 	},
