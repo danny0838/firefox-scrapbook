@@ -29,3 +29,5 @@ locale	scrapbook	tr	chrome/locale/tr/scrapbook/
 locale	scrapbook	uk	chrome/locale/uk/scrapbook/
 locale	scrapbook	zh-CN	chrome/locale/zh-CN/scrapbook/
 locale	scrapbook	zh-TW	chrome/locale/zh-TW/scrapbook/
+
+resource	scrapbook-modules	modules/

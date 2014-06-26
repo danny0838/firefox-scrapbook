@@ -1,3 +1,4 @@
+Components.utils.import("resource://scrapbook-modules/common.jsm");
 
 var sbDataSource = {
 
@@ -377,3 +378,5 @@ var sbDataSource = {
 };
 
 sbDataSource.init();
+
+var EXPORTED_SYMBOLS = ["sbDataSource"];

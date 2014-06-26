@@ -1,0 +1,1 @@
+Components.utils.import("resource://scrapbook-modules/datasource.jsm");

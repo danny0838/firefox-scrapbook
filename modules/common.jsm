@@ -685,3 +685,5 @@ var sbCommonUtils = {
 	},
 
 };
+
+var EXPORTED_SYMBOLS = ["sbCommonUtils"];
