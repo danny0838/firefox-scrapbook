@@ -18,7 +18,6 @@
         onload="SB_initFT('SEARCH');">
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/datasource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/fulltext.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
 
