@@ -1,5 +1,3 @@
-const NS_SCRAPBOOK = "http://amb.vis.ne.jp/mozilla/scrapbook-rdf#";
-
 var sbCommonUtils = {
 
 	_stringBundles : [],
@@ -121,7 +119,7 @@ var sbCommonUtils = {
 	{
 		if ( !aID || aID.length != 14 )
 		{
-			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_GET_DIR", [aID]));
+			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_GET_DIR", [aID]));
 			return null;
 		}
 		var dir = this.getScrapBookDir().clone();
@@ -153,7 +151,7 @@ var sbCommonUtils = {
 			if ( aDir.isDirectory() ) aDir.remove(false);
 			return true;
 		} catch(ex) {
-			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_FILE", [file.path, ex]));
+			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_FILE", [file.path, ex]));
 			return false;
 		}
 	},
@@ -162,7 +160,7 @@ var sbCommonUtils = {
 	{
 		var win = this.WINDOW.getMostRecentWindow("navigator:browser");
 		if ( !win ) return;
-		var browser = win.document.getElementById("content");
+		var browser = win.gBrowser;
 		if ( tabbed ) {
 			browser.selectedTab = browser.addTab(aURL);
 		} else {
@@ -355,7 +353,7 @@ var sbCommonUtils = {
 		}
 		catch(ex)
 		{
-			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_WRITE_FILE", [aFile.path, ex]));
+			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_WRITE_FILE", [aFile.path, ex]));
 		}
 	},
 
@@ -439,19 +437,20 @@ var sbCommonUtils = {
 		try {
 			execfile.initWithPath(aExecFilePath);
 			if ( !execfile.exists() ) {
-				alert(sbCommonUtils.lang("scrapbook", "ERR_FILE_NOT_EXIST", [aExecFilePath]));
+				this.alert(sbCommonUtils.lang("scrapbook", "ERR_FILE_NOT_EXIST", [aExecFilePath]));
 				return;
 			}
 			process.init(execfile);
 			process.run(false, args, args.length);
 		} catch (ex) {
-			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_EXEC_FILE", [aExecFilePath]));
+			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_EXEC_FILE", [aExecFilePath]));
 		}
 	},
 
 	getFocusedWindow : function()
 	{
-		var win = document.commandDispatcher.focusedWindow;
+		var window = this.WINDOW.getMostRecentWindow("navigator:browser");
+		var win = window.document.commandDispatcher.focusedWindow;
 		if ( !win || win == window || win instanceof Components.interfaces.nsIDOMChromeWindow ) win = window.content;
 		return win;
 	},
@@ -575,13 +574,18 @@ var sbCommonUtils = {
 
 	escapeComment : function(aStr)
 	{
-		if ( aStr.length > 10000 ) alert(sbCommonUtils.lang("scrapbook", "MSG_LARGE_COMMENT"));
+		if ( aStr.length > 10000 ) this.alert(sbCommonUtils.lang("scrapbook", "MSG_LARGE_COMMENT"));
 		return aStr.replace(/\r|\n|\t/g, " __BR__ ");
 	},
 
 	openManageWindow : function(aRes, aModEltID)
 	{
+		var window = this.WINDOW.getMostRecentWindow("navigator:browser");
 		window.openDialog("chrome://scrapbook/content/manage.xul", "ScrapBook:Manage", "chrome,centerscreen,all,resizable,dialog=no", aRes, aModEltID);
+	},
+
+	alert: function(aText) {
+		this.PROMPT.alert(null, "[ScrapBook]", aText);
 	},
 
 	log : function(aMsg)
@@ -590,7 +594,8 @@ var sbCommonUtils = {
 			// Support started since Firefox 4.0
 			// However, older versions may not see the message.
 			// The least version known work is Firefox 30.0
-			console.log(aMsg);
+			var window = this.WINDOW.getMostRecentWindow("navigator:browser");
+			window.console.log(aMsg);
 		}
 		else {
 			// does not record the script line and is not suitable for tracing...
@@ -604,7 +609,8 @@ var sbCommonUtils = {
 			// Support started since Firefox 4.0
 			// However, older versions may not see the message.
 			// The least version known work is Firefox 30.0
-			console.warn(aMsg);
+			var window = this.WINDOW.getMostRecentWindow("navigator:browser");
+			window.console.warn(aMsg);
 		}
 		else {
 			// set javascript.options.showInConsole to true in the about:config to see it
@@ -619,7 +625,8 @@ var sbCommonUtils = {
 			// Support started since Firefox 4.0
 			// However, older versions may not see the message.
 			// The least version known work is Firefox 30.0
-			console.error(aMsg);
+			var window = this.WINDOW.getMostRecentWindow("navigator:browser");
+			window.console.error(aMsg);
 		}
 		else {
 			// set javascript.options.showInConsole to true in the about:config to see it

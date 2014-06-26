@@ -1,3 +1,4 @@
+const NS_SCRAPBOOK = "http://amb.vis.ne.jp/mozilla/scrapbook-rdf#";
 Components.utils.import("resource://scrapbook-modules/common.jsm");
 
 var sbDataSource = {
