@@ -9,6 +9,7 @@
 <!ENTITY sb.edit.inline.add "Přidat poznámku k výběru">
 <!ENTITY sb.edit.attach.file "Připojit k výběru soubor">
 <!ENTITY sb.edit.attach.link "Připojit k výběru odkaz">
+<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
 <!ENTITY sb.edit.cutter "Odstranit výběr">
 <!ENTITY sb.edit.remove.iframe "Odstranit VŠECHNY tagy IFRAME">
 <!ENTITY sb.edit.remove.script "Odstranit VŠECHNY tagy SCRIPT">

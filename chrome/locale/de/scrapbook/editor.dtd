@@ -9,6 +9,7 @@
 <!ENTITY sb.edit.inline.add "Zeilenkommentar für Auswahl anlegen">
 <!ENTITY sb.edit.attach.file "Auswahl mit Datei verknüpfen">
 <!ENTITY sb.edit.attach.link "Auswahl mit Link verknüpfen">
+<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
 <!ENTITY sb.edit.cutter "Ausgewählten Bereich entfernen">
 <!ENTITY sb.edit.remove.iframe "Alle IFRAME-Tags entfernen">
 <!ENTITY sb.edit.remove.script "Alle SCRIPT-Tags entfernen">

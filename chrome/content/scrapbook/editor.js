@@ -242,6 +242,7 @@ var sbPageEditor = {
 			case "linemarker" :
 			case "inline" :
 			case "link-url" :
+			case "link-inner" :
 			case "link-file" :
 				this.unwrapNode(aNode);
 				break;
@@ -912,6 +913,50 @@ var sbAnnotationService = {
 			if ( !ret.value ) return;
 			attr["href"] = ret.value;
 			attr["data-sb-obj"] = "link-url";
+		}
+		else if ( aFlag == "I" )
+		{
+			// if the sidebar is closed, we may get an error
+			try {
+				var sidebarId = sbCommonUtils.getSidebarId("sidebar");
+				var res = document.getElementById(sidebarId).contentWindow.sbTreeHandler.getSelection(true, 2);
+			}
+			catch (ex) {
+			}
+			// check the selected resource
+			if (res && res.length) {
+				res = res[0];
+				var type = sbDataSource.getProperty(res, "type");
+				if ( ["folder", "separator"].indexOf(type) === -1 ) {
+					var id = sbDataSource.getProperty(res, "id");
+				}
+			}
+			// if unavailable, let the user input an id
+			if (!id) {
+				var ret = {};
+				if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook - " + aLabel, sbCommonUtils.lang("overlay", "ADD_INNERLINK"), ret, null, {}) ) return;
+				var id = ret.value;
+				var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
+				if ( sbDataSource.exists(res) ) {
+					var type = sbDataSource.getProperty(res, "type");
+					if ( ["folder", "separator"].indexOf(type) !== -1 ) {
+						res = null;
+					}
+				}
+				else res = null;
+				// if it's invalid, alert and quit
+				if (!res) {
+					sbCommonUtils.PROMPT.alert(window, "ScrapBook - " + aLabel, sbCommonUtils.lang("overlay", "ADD_INNERLINK_INVALID", [id]));
+					return;
+				}
+			}
+			// attach the link
+			var title = sbDataSource.getProperty(res, "title");
+			attr["href"] = (type == "bookmark") ?
+				sbDataSource.getProperty(res, "source") :
+				"../" + id + "/index.html";
+			attr["title"] = title;
+			attr["data-sb-obj"] = "link-inner";
 		}
 		else
 		{
