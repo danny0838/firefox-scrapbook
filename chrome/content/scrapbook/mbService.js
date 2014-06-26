@@ -105,7 +105,7 @@ var sbMultiBookService = {
 			refWin.sbBrowserOverlay.dataTitle = aItem.label;
 		} catch(ex) {
 		}
-		sbDataSource.init();
+		sbDataSource._init();
 		sbCommonUtils.refreshGlobal();
 		sbMainService.refresh();
 	},

@@ -8,7 +8,7 @@ var sbDataSource = {
 	data : null,
 	file : null,
 
-	init : function(aQuietWarning)
+	_init : function(aQuietWarning)
 	{
 		if (this._firstInit) {
 			this._firstInit = false;
@@ -400,6 +400,6 @@ var sbDataSource = {
 
 };
 
-sbDataSource.init();
+sbDataSource._init();
 
 var EXPORTED_SYMBOLS = ["sbDataSource"];
