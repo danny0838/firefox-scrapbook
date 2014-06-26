@@ -113,8 +113,7 @@ var sbMultiBookService = {
 
 	validateRefresh: function(aQuietWarning)
 	{
-		var winEnum = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator)
-		              .getEnumerator("scrapbook");
+		var winEnum = sbCommonUtils.WINDOW.getEnumerator("scrapbook");
 		while (winEnum.hasMoreElements()) {
 			var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
 			if (win != window) {

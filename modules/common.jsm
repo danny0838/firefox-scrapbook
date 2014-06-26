@@ -216,8 +216,7 @@ var sbCommonUtils = {
 			rgSidebarBoxId = "sidebar-" + rgPosition + "-box";
 		}
 		//Ende Block
-		var winEnum = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator)
-		              .getEnumerator("navigator:browser");
+		var winEnum = this.WINDOW.getEnumerator("navigator:browser");
 		while (winEnum.hasMoreElements()) {
 			var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
 			try {
