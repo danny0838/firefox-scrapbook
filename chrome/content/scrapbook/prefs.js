@@ -32,7 +32,7 @@ var sbPrefWindow = {
 	done: function() {
 		if (!this.changed)
 			return;
-		sbMultiBookService.refreshGlobal();
+		sbCommonUtils.refreshGlobal();
 	},
 
 	updateGroupedUI: function(aPrefName, aGroupName) {

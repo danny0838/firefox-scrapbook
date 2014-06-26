@@ -71,7 +71,7 @@ var sbRepair = {
 			return;
 		}
 		sbCommonUtils.RDF.UnregisterDataSource(sbDataSource.data);
-		sbMultiBookService.refreshGlobal();
+		sbCommonUtils.refreshGlobal();
 	},
 
 	restoreFavicons : function()

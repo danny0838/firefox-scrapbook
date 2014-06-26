@@ -106,7 +106,7 @@ var sbMultiBookService = {
 		} catch(ex) {
 		}
 		sbDataSource.init();
-		this.refreshGlobal();
+		sbCommonUtils.refreshGlobal();
 		sbMainService.refresh();
 	},
 
@@ -124,38 +124,6 @@ var sbMultiBookService = {
 			}
 		}
 		return true;
-	},
-
-	refreshGlobal: function()
-	{
-//Hier werden Änderungen fällig
-		//Dieser Block ist notwendig, da MultiSidebar verwendet Fehler verursachen würde
-		var rgSidebarId = "sidebar";
-		var rgSidebarTitleId = "sidebar-title";
-		var rgSidebarSplitterId = "sidebar-splitter";
-		var rgSidebarBoxId = "sidebar-box";
-		var rgPosition = sbCommonUtils.getPref("extensions.multisidebar.viewScrapBookSidebar", 1, true);
-
-		if ( rgPosition > 1)
-		{
-			rgSidebarId = "sidebar-" + rgPosition;
-			rgSidebarTitleId = "sidebar-" + rgPosition + "-title";
-			rgSidebarSplitterId = "sidebar-" + rgPosition + "-splitter";
-			rgSidebarBoxId = "sidebar-" + rgPosition + "-box";
-		}
-		//Ende Block
-		var winEnum = Components.classes["@mozilla.org/appshell/window-mediator;1"].getService(Components.interfaces.nsIWindowMediator)
-		              .getEnumerator("navigator:browser");
-		while (winEnum.hasMoreElements()) {
-			var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
-			try {
-				win.sbBrowserOverlay.refresh();
-				win.sbBrowserOverlay.onLocationChange(win.gBrowser.currentURI.spec);
-				win.document.getElementById(rgSidebarId).contentWindow.sbMainService.refresh();
-			}
-			catch (ex) {
-			}
-		}
 	},
 
 	config: function()
