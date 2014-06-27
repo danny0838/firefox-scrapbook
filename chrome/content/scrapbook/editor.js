@@ -971,6 +971,7 @@ var sbAnnotationService = {
 				return;
 			}
 			attr["href"] = sbCommonUtils.getFileName(sbCommonUtils.IO.newFileURI(FP.file).spec);
+			attr["title"] = FP.file.leafName;
 			attr["data-sb-obj"] = "link-file";
 		}
 		sbHighlighter.set(sbPageEditor.focusedWindow, sel, "a", attr);
