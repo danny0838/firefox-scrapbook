@@ -41,11 +41,11 @@ var sbMultipleService = {
 		//Verbliebene Links trennen
 		for ( var i = 0; i < allURLs.length; i++ )
 		{
-			lines = allURLs[i].split(";");
-			urlList[i] = lines[0];
-			if ( lines.length == 2 )
+			lines = allURLs[i].split("|");
+			urlList[i] = lines.shift();
+			if ( lines.length )
 			{
-				namList[i] = lines[1];
+				namList[i] = lines.join("|");
 			} else
 			{
 				namList[i] = "";
@@ -109,7 +109,7 @@ var sbMultipleService = {
 						auSelected++;
 						this.selURLs.push(this.allURLs[auI]);
 						this.selTitles.push(this.allTitles[auI]);
-						auAll += this.allURLs[auI]+";"+this.allTitles[auI]+"\n";
+						auAll += this.allURLs[auI]+"|"+this.allTitles[auI]+"\n";
 					}
 				}
 			}
