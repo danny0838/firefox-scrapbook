@@ -78,6 +78,7 @@ var sbOutputService = {
 			"chrome://scrapbook/skin/output.css"     : "output.css",
 			"chrome://scrapbook/skin/treeitem.png"   : "treeitem.png",
 			"chrome://scrapbook/skin/treenote.png"   : "treenote.png",
+			"chrome://scrapbook/skin/treenotex.png"  : "treenotex.png",
 			"chrome://scrapbook/skin/treefolder.png" : "folder.png",
 			"chrome://scrapbook/skin/toolbar_toggle.png" : "toggle.png",
 		};

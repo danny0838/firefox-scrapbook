@@ -46,7 +46,7 @@ var sbPageEditor = {
 			gBrowser.selectedTab.setAttribute("image", this.item.icon);
 		}
 		// -- icon
-		document.getElementById("ScrapBookEditIcon").src = (aID ? this.item.icon  : gBrowser.selectedTab.getAttribute("image")) || sbCommonUtils.getDefaultIcon();
+		document.getElementById("ScrapBookEditIcon").src = (aID ? this.item.icon  : gBrowser.selectedTab.getAttribute("image")) || sbCommonUtils.getDefaultIcon(this.item.type);
 		// -- title
 		document.getElementById("ScrapBookEditTitle").value =  aID ? this.item.title : gBrowser.selectedTab.label;
 		try { document.getElementById("ScrapBookEditTitle").editor.transactionManager.clear(); } catch(ex) {}
