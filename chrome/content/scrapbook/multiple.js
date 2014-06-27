@@ -41,7 +41,7 @@ var sbMultipleService = {
 		//Verbliebene Links trennen
 		for ( var i = 0; i < allURLs.length; i++ )
 		{
-			lines = allURLs[i].split(";");
+			lines = allURLs[i].split("|");
 			urlList[i] = lines[0];
 			if ( lines.length == 2 )
 			{
@@ -109,7 +109,7 @@ var sbMultipleService = {
 						auSelected++;
 						this.selURLs.push(this.allURLs[auI]);
 						this.selTitles.push(this.allTitles[auI]);
-						auAll += this.allURLs[auI]+";"+this.allTitles[auI]+"\n";
+						auAll += this.allURLs[auI]+"|"+this.allTitles[auI]+"\n";
 					}
 				}
 			}
