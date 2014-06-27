@@ -311,10 +311,8 @@ var sbContentSaver = {
 				}
 			}
 			if (!hasmeta) {
-				// use older version for better compatibility
 				var metaNode = aDocument.createElement("meta");
-				metaNode.setAttribute("content", aDocument.contentType + "; charset=" + this.item.chars);
-				metaNode.setAttribute("http-equiv", "Content-Type");
+				metaNode.setAttribute("charset", this.item.chars);
 				rootNode.firstChild.insertBefore(metaNode, rootNode.firstChild.firstChild);
 				rootNode.firstChild.insertBefore(aDocument.createTextNode("\n"), rootNode.firstChild.firstChild);
 			}

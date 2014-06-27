@@ -283,22 +283,7 @@ var sbBrowserOverlay = {
 
 	execLocate: function(aRes)
 	{
-//Hier werden Änderungen fällig
-		//Dieser Block ist notwendig, da MultiSidebar verwendet Fehler verursachen würde
-		var elSidebarId = "sidebar";
-		var elSidebarTitleId = "sidebar-title";
-		var elSidebarSplitterId = "sidebar-splitter";
-		var elSidebarBoxId = "sidebar-box";
-		var elPosition = sbCommonUtils.getPref("extensions.multisidebar.viewScrapBookSidebar", 1, true);
-
-		if ( elPosition > 1)
-		{
-			elSidebarId = "sidebar-" + elPosition;
-			elSidebarTitleId = "sidebar-" + elPosition + "-title";
-			elSidebarSplitterId = "sidebar-" + elPosition + "-splitter";
-			elSidebarBoxId = "sidebar-" + elPosition + "-box";
-		}
-		//Ende Block
+		var sidebarId = sbCommonUtils.getSidebarId("sidebar");
 		if (!aRes)
 			return;
 		if (!sbDataSource.exists(aRes)) {
@@ -306,7 +291,7 @@ var sbBrowserOverlay = {
 			return;
 		}
 		if (document.getElementById("viewScrapBookSidebar").getAttribute("checked"))
-			document.getElementById(elSidebarId).contentWindow.sbMainService.locate(aRes);
+			document.getElementById(sidebarId).contentWindow.sbMainService.locate(aRes);
 		else {
 			this.locateMe = aRes;
 			toggleSidebar("viewScrapBookSidebar");

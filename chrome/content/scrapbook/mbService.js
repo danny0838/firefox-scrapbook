@@ -12,26 +12,11 @@ var sbMultiBookService = {
 
 	showTitle: function()
 	{
-//Hier werden Änderungen fällig
-		//Dieser Block ist notwendig, da MultiSidebar verwendet Fehler verursachen würde
-		var stSidebarId = "sidebar";
-		var stSidebarTitleId = "sidebar-title";
-		var stSidebarSplitterId = "sidebar-splitter";
-		var stSidebarBoxId = "sidebar-box";
-		var stPosition = sbCommonUtils.getPref("extensions.multisidebar.viewScrapBookSidebar", 1, true);
-
-		if ( stPosition > 1)
-		{
-			stSidebarId = "sidebar-" + stPosition;
-			stSidebarTitleId = "sidebar-" + stPosition + "-title";
-			stSidebarSplitterId = "sidebar-" + stPosition + "-splitter";
-			stSidebarBoxId = "sidebar-" + stPosition + "-box";
-		}
-		//Ende Block
+		var sidebarTitleId = sbCommonUtils.getSidebarId("sidebar-title");
 		var win = "sbBrowserOverlay" in window.top ? window.top : sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
 		if (!this.enabled)
 		{
-			win.document.getElementById("sidebar-title").value = "ScrapBook X";
+			win.document.getElementById(sidebarTitleId).value = "ScrapBook X";
 		} else
 		{
 			var title = win.sbBrowserOverlay.dataTitle;
@@ -40,7 +25,7 @@ var sbMultiBookService = {
 				win.sbBrowserOverlay.dataTitle = title;
 			}
 			if (title)
-				win.document.getElementById(stSidebarTitleId).value = "ScrapBook X [" + title + "]";
+				win.document.getElementById(sidebarTitleId).value = "ScrapBook X [" + title + "]";
 		}
 	},
 
