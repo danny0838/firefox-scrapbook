@@ -2,6 +2,8 @@ var sbCommonUtils = {
 
 	_stringBundles : [],
 
+	get namespace() { return "http://amb.vis.ne.jp/mozilla/scrapbook-rdf#"; },
+
 	/**
 	 * Frequently used objects
 	 */
