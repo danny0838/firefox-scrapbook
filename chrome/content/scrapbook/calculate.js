@@ -67,11 +67,8 @@ var sbCalcService = {
 		this.initTree();
 		this.STATUS.label = "";
 		this.PROGRESS.hidden = true;
-		var msg = sbPropService.formatFileSize(this.grandSum);
-		msg += "  " + sbCommonUtils.lang("property", "ITEMS_COUNT", [this.count]);
-		document.getElementById("sbCalcTotalSize").value = msg;
-		msg = ( this.invalidCount == 0 ) ? sbCommonUtils.lang("property", "DIAGNOSIS_OK") : sbCommonUtils.lang("property", "DIAGNOSIS_NG", [this.invalidCount]);
-		document.getElementById("sbCalcDiagnosis").value = msg;
+		document.getElementById("sbCalcTotalSize").value = sbCommonUtils.lang("property", "ITEMS_COUNT", [sbPropService.formatFileSize(this.grandSum), this.count]);
+		document.getElementById("sbCalcDiagnosis").value = ( this.invalidCount == 0 ) ? sbCommonUtils.lang("property", "DIAGNOSIS_OK") : sbCommonUtils.lang("property", "DIAGNOSIS_NG", [this.invalidCount]);
 		this.checkDoubleEntries();
 	},
 
