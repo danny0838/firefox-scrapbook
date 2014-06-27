@@ -70,7 +70,7 @@ var sbPropService = {
 	delayedInit : function()
 	{
 		var sizeCount = this.getTotalFileSize(this.id);
-		document.getElementById("sbPropSize").value = sbCommonUtils.lang("property", "FILES_COUNT", [sbPropService.formatFileSize(sizeCount[0]), sizeCount[1]]);
+		document.getElementById("sbPropSize").value = sbCommonUtils.lang("property", "FILES_COUNT", [sbPropService.formatFileSize(sizeCount[0]), sizeCount[1], sizeCount[2]]);
 	},
 
 	accept : function()
@@ -184,17 +184,21 @@ var sbPropService = {
 	{
 		var totalSize = 0;
 		var totalFile = 0;
+		var totalDir  = 0;
 		sbCommonUtils.forEachFile(sbCommonUtils.getContentDir(aID, true), function(){
+			if (this.isDirectory()) {
+				totalDir++;
+			}
 			if (!this.isFile()) return;
 			try {
 				totalSize += this.fileSize;
 				totalFile++;
 			}
 			catch (ex) {
-			    alert(sbCommonUtils.lang("scrapbook", "MSG_CANT_MODIFY", [this.path]));
+			    alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_READ_FILE_SIZE", [this.path]));
 			}
 		});
-		return [totalSize, totalFile];
+		return [totalSize, totalFile, totalDir];
 	},
 
 	formatFileSize : function(aBytes)

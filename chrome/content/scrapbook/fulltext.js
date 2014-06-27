@@ -342,6 +342,7 @@ var sbCacheService = {
 		switch ( type ) {
 			case "":
 			case "marked":
+			case "combine":
 			case "note":
 				var file = dir.clone();
 				file.append("index.html");
