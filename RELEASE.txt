@@ -1,3 +1,12 @@
+Scrapbook X 1.11.8
+----------------
+
+- NEW: Output Tree with frame now provides an URL hash for explicity targeting the current viewed page.
+- UPDATE: Output Tree now outputs the latest version of HTML format.
+- UPDATE: Captured page now uses latest version of meta tag for charset if none has found.
+- FIXED: Entities in the title gets decoded in the Output Tree.
+
+
 Scrapbook X 1.11.7
 ----------------
 
