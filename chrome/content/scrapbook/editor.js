@@ -470,7 +470,8 @@ var sbPageEditor = {
 
 	documentBeforeEdit : function(aDoc)
 	{
-		if ( this.item && document.getElementById("ScrapBookStatusPopupD").getAttribute("checked") ) {
+		if (this.item && document.getElementById("ScrapBookStatusPopupD").getAttribute("checked") && 
+			this.item.type != "notex") {
 			sbInfoViewer.indicateLinks(aDoc.defaultView);
 		}
 	},
@@ -1734,6 +1735,9 @@ var sbInfoViewer = {
 			document.getElementById("ScrapBookStatusPopupE").setAttribute("checked",  sbBrowserOverlay.editMode);
 			document.getElementById("ScrapBookStatusPopupI").setAttribute("checked",  sbBrowserOverlay.infoMode);
 			document.getElementById("ScrapBookStatusPopupM").setAttribute("disabled", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") != "site");
+			document.getElementById("ScrapBookStatusPopupR").setAttribute("disabled", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "notex");
+			document.getElementById("ScrapBookStatusPopupD").setAttribute("disabled", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "notex");
+			document.getElementById("ScrapBookStatusPopupI").setAttribute("disabled", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "notex");
 		} else {
 			aEvent.originalTarget.lastChild.setAttribute("checked", !(sbPageEditor.TOOLBAR.hidden || document.getElementById("ScrapBookToolbox").hidden));
 		}
@@ -1742,7 +1746,11 @@ var sbInfoViewer = {
 	init : function(aID)
 	{
 		if ( aID != sbBrowserOverlay.getID() ) return;
-		if ( !sbDataSource.exists(sbBrowserOverlay.resource) ) { this.TOOLBAR.hidden = true; return; }
+		if (!sbDataSource.exists(sbBrowserOverlay.resource) || 
+			sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "notex") {
+			this.TOOLBAR.hidden = true;
+			return;
+		}
 		this.TOOLBAR.hidden = false;
 		var isTypeSite = (sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "site");
 		document.getElementById("ScrapBookInfoHome").disabled = !isTypeSite;

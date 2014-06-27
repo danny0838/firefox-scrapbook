@@ -269,11 +269,13 @@ var sbController = {
 			return;
 		}
 		var isNote = false;
+		var isNotex = false;
 		var isFolder = false;
 		var isBookmark = false;
 		var isSeparator = false;
 		switch (sbDataSource.getProperty(res, "type")) {
 			case "note"     : isNote      = true; break;
+			case "notex"    : isNotex     = true; break;
 			case "folder"   : isFolder    = true; break;
 			case "bookmark" : isBookmark  = true; break;
 			case "separator": isSeparator = true; break;
@@ -293,7 +295,7 @@ var sbController = {
 		getElement("sbPopupManage").hidden = !isFolder || isSeparator;
 		getElement("sbPopupNewFolder").previousSibling.hidden = isSeparator;
 		getElement("sbPopupTools").hidden   = isFolder || isSeparator;
-		getElement("sbPopupRenew").setAttribute("disabled", isNote.toString());
+		getElement("sbPopupRenew").setAttribute("disabled", (isNote || isNotex).toString());
 		getElement("sbPopupShowFiles").setAttribute("disabled", isBookmark.toString());
 	},
 
