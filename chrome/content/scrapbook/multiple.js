@@ -42,10 +42,10 @@ var sbMultipleService = {
 		for ( var i = 0; i < allURLs.length; i++ )
 		{
 			lines = allURLs[i].split("|");
-			urlList[i] = lines[0];
-			if ( lines.length == 2 )
+			urlList[i] = lines.shift();
+			if ( lines.length )
 			{
-				namList[i] = lines[1];
+				namList[i] = lines.join("|");
 			} else
 			{
 				namList[i] = "";
