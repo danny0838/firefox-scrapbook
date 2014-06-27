@@ -1,4 +1,3 @@
-const NS_SCRAPBOOK = "http://amb.vis.ne.jp/mozilla/scrapbook-rdf#";
 Components.utils.import("resource://scrapbook-modules/common.jsm");
 
 var sbDataSource = {
@@ -164,13 +163,13 @@ var sbDataSource = {
 				aIdx = 0;
 			}
 			var newRes = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aSBitem.id);
-			this._dataObj.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "id"),      sbCommonUtils.RDF.GetLiteral(aSBitem.id),      true);
-			this._dataObj.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "type"),    sbCommonUtils.RDF.GetLiteral(aSBitem.type),    true);
-			this._dataObj.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "title"),   sbCommonUtils.RDF.GetLiteral(aSBitem.title),   true);
-			this._dataObj.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "chars"),   sbCommonUtils.RDF.GetLiteral(aSBitem.chars),   true);
-			this._dataObj.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "comment"), sbCommonUtils.RDF.GetLiteral(aSBitem.comment), true);
-			this._dataObj.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "icon"),    sbCommonUtils.RDF.GetLiteral(aSBitem.icon),    true);
-			this._dataObj.Assert(newRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "source"),  sbCommonUtils.RDF.GetLiteral(aSBitem.source),  true);
+			this._dataObj.Assert(newRes, sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + "id"),      sbCommonUtils.RDF.GetLiteral(aSBitem.id),      true);
+			this._dataObj.Assert(newRes, sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + "type"),    sbCommonUtils.RDF.GetLiteral(aSBitem.type),    true);
+			this._dataObj.Assert(newRes, sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + "title"),   sbCommonUtils.RDF.GetLiteral(aSBitem.title),   true);
+			this._dataObj.Assert(newRes, sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + "chars"),   sbCommonUtils.RDF.GetLiteral(aSBitem.chars),   true);
+			this._dataObj.Assert(newRes, sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + "comment"), sbCommonUtils.RDF.GetLiteral(aSBitem.comment), true);
+			this._dataObj.Assert(newRes, sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + "icon"),    sbCommonUtils.RDF.GetLiteral(aSBitem.icon),    true);
+			this._dataObj.Assert(newRes, sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + "source"),  sbCommonUtils.RDF.GetLiteral(aSBitem.source),  true);
 			if (aSBitem.type == "separator") {
 				const RDF_NS = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
 				const NC_NS  = "http://home.netscape.com/NC-rdf#";
@@ -327,7 +326,7 @@ var sbDataSource = {
 	{
 		if ( aRes.Value == "urn:scrapbook:root" ) return "";
 		try {
-			var retVal = this._dataObj.GetTarget(aRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + aProp), true);
+			var retVal = this._dataObj.GetTarget(aRes, sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + aProp), true);
 			return retVal.QueryInterface(Components.interfaces.nsIRDFLiteral).Value;
 		} catch(ex) {
 			return "";
@@ -337,7 +336,7 @@ var sbDataSource = {
 	setProperty : function(aRes, aProp, newVal)
 	{
 		newVal = this.sanitize(newVal);
-		aProp = sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + aProp);
+		aProp = sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + aProp);
 		try {
 			var oldVal = this._dataObj.GetTarget(aRes, aProp, true);
 			oldVal = oldVal.QueryInterface(Components.interfaces.nsIRDFLiteral);
