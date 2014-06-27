@@ -948,7 +948,7 @@ var sbAnnotationService = {
 		if ( aFlag == "L" )
 		{
 			var ret = {};
-			if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook - " + aLabel, sbCommonUtils.lang("overlay", "ADDRESS")+":", ret, null, {}) ) return;
+			if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook - " + aLabel, sbCommonUtils.lang("overlay", "ADDRESS"), ret, null, {}) ) return;
 			if ( !ret.value ) return;
 			attr["href"] = ret.value;
 			attr["data-sb-obj"] = "link-url";
@@ -962,7 +962,7 @@ var sbAnnotationService = {
 			var destFile = sbCommonUtils.getContentDir(sbPageEditor.item.id).clone();
 			destFile.append(FP.file.leafName);
 			if ( destFile.exists() && destFile.isFile() ) {
-				if ( !sbCommonUtils.PROMPT.confirm(window, "ScrapBook", "Would you like to overwrite the file '" + FP.file.leafName + "'?") ) return;
+				if ( !sbCommonUtils.PROMPT.confirm(window, "ScrapBook - " + aLabel, sbCommonUtils.lang("overlay", "OVERWRITE_FILE", [FP.file.leafName])) ) return;
 				destFile.remove(false);
 			}
 			try {
