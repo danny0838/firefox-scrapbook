@@ -122,15 +122,30 @@ var sbOutputService = {
 
 	getHTMLHead : function()
 	{
-		var HTML = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">\n\n'
+		var HTML = '<!DOCTYPE html>\n\n'
 			+ '<html>\n\n'
 			+ '<head>\n'
-			+ '	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">\n'
-			+ '	<meta http-equiv="Content-Style-Type" content="text/css">\n'
-			+ '	<meta http-equiv="Content-Script-Type" content="text/javascript">\n'
+			+ '	<meta charset="UTF-8">\n'
 			+ '	<title>' + document.title + '</title>\n'
 			+ '	<link rel="stylesheet" type="text/css" href="./output.css" media="all">\n'
-			+ '	<script type="text/javascript" language="JavaScript"><!--\n'
+			+ '	<script>\n'
+			+ '	function init() {\n'
+			+ '		loadHash();\n'
+			+ '		registerRenewHash();\n'
+			+ '		toggleAll(false);\n'
+			+ '	}\n'
+			+ '	function loadHash() {\n'
+			+ '		var hash = top.location.hash;\n'
+			+ '		if (hash) top.frames[1].location = hash.substring(1);\n'
+			+ '	}\n'
+			+ '	function registerRenewHash() {\n'
+			+ '		var aElems = document.getElementsByTagName("A");\n'
+			+ '		for ( var i = 1; i < aElems.length; i++ ) {\n'
+			+ '			if (aElems[i].className != "folder") {\n'
+			+ '				aElems[i].onclick = function() { if (self != top) top.location.hash = this.getAttribute("href"); };\n'
+			+ '			}\n'
+			+ '		}\n'
+			+ '	}\n'
 			+ '	function toggle(aID) {\n'
 			+ '		var listElt = document.getElementById(aID);\n'
 			+ '		listElt.style.display = ( listElt.style.display == "none" ) ? "block" : "none";\n'
@@ -141,9 +156,9 @@ var sbOutputService = {
 			+ '			ulElems[i].style.display = willOpen ? "block" : "none";\n'
 			+ '		}\n'
 			+ '	}\n'
-			+ '	//--></script>\n'
+			+ '	</script>\n'
 			+ '</head>\n\n'
-			+ '<body onload="toggleAll(false);">\n\n'
+			+ '<body onload="init();">\n\n'
 		return HTML;
 	},
 
@@ -155,6 +170,7 @@ var sbOutputService = {
 		var type  = sbDataSource.getProperty(aRes, "type");
 		if ( icon.match(/(\/data\/\d{14}\/.*$)/) ) icon = ".." + RegExp.$1;
 		if ( !icon ) icon = sbCommonUtils.getFileName( sbCommonUtils.getDefaultIcon(type) );
+		title = title.replace(/&/g, "&amp;");
 		title = title.replace(/</g, "&lt;");
 		title = title.replace(/>/g, "&gt;");
 		var ret;
