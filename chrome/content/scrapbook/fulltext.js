@@ -560,14 +560,14 @@ var sbCacheSource = {
 	{
 		aContent = sbDataSource.sanitize(aContent);
 		this.container.AppendElement(aRes);
-		this.dataSource.Assert(aRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "folder"),  sbCommonUtils.RDF.GetLiteral(sbCacheService.folders[sbCacheService.index]),  true);
-		this.dataSource.Assert(aRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + "content"), sbCommonUtils.RDF.GetLiteral(aContent), true);
+		this.dataSource.Assert(aRes, sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + "folder"),  sbCommonUtils.RDF.GetLiteral(sbCacheService.folders[sbCacheService.index]),  true);
+		this.dataSource.Assert(aRes, sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + "content"), sbCommonUtils.RDF.GetLiteral(aContent), true);
 	},
 
 	updateEntry : function(aRes, aProp, newVal)
 	{
 		newVal = sbDataSource.sanitize(newVal);
-		aProp = sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + aProp);
+		aProp = sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + aProp);
 		var oldVal = this.dataSource.GetTarget(aRes, aProp, true).QueryInterface(Components.interfaces.nsIRDFLiteral);
 		newVal = sbCommonUtils.RDF.GetLiteral(newVal);
 		this.dataSource.Change(aRes, aProp, oldVal, newVal);
@@ -588,7 +588,7 @@ var sbCacheSource = {
 	getProperty : function(aRes, aProp)
 	{
 		try {
-			var retVal = this.dataSource.GetTarget(aRes, sbCommonUtils.RDF.GetResource(NS_SCRAPBOOK + aProp), true);
+			var retVal = this.dataSource.GetTarget(aRes, sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + aProp), true);
 			return retVal.QueryInterface(Components.interfaces.nsIRDFLiteral).Value;
 		} catch(ex) {
 			return "";
