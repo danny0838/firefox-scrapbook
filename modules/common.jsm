@@ -180,27 +180,13 @@ var sbCommonUtils = {
 
 	_refresh: function(aDSChanged)
 	{
-		// This block is necessary or using MultiSidebar can cause errors
-		var rgSidebarId = "sidebar";
-		var rgSidebarTitleId = "sidebar-title";
-		var rgSidebarSplitterId = "sidebar-splitter";
-		var rgSidebarBoxId = "sidebar-box";
-		var rgPosition = sbCommonUtils.getPref("extensions.multisidebar.viewScrapBookSidebar", 1, true);
-
-		if ( rgPosition > 1)
-		{
-			rgSidebarId = "sidebar-" + rgPosition;
-			rgSidebarTitleId = "sidebar-" + rgPosition + "-title";
-			rgSidebarSplitterId = "sidebar-" + rgPosition + "-splitter";
-			rgSidebarBoxId = "sidebar-" + rgPosition + "-box";
-		}
-		//End Block
+		var sidebarId = this.getSidebarId("sidebar");
 		var winEnum = this.WINDOW.getEnumerator("navigator:browser");
 		// refresh/rebuild main browser windows and their sidebars
 		while (winEnum.hasMoreElements()) {
 			var win = winEnum.getNext();
 			aDSChanged ? win.sbBrowserOverlay.refresh() : win.sbBrowserOverlay.rebuild();
-			var win = win.document.getElementById(rgSidebarId).contentWindow;
+			var win = win.document.getElementById(sidebarId).contentWindow;
 			if (win.sbMainService) {
 				aDSChanged ? win.sbMainService.refresh() : win.sbMainService.rebuild();
 			}
@@ -469,6 +455,26 @@ var sbCommonUtils = {
 		var win = window.document.commandDispatcher.focusedWindow;
 		if ( !win || win == window || win instanceof Components.interfaces.nsIDOMChromeWindow ) win = window.content;
 		return win;
+	},
+	
+	getSidebarId : function(id)
+	{
+		// Need this or MultiSidebar can cause errors
+		var rgPosition = sbCommonUtils.getPref("extensions.multisidebar.viewScrapBookSidebar", 1, true);
+		if ( rgPosition > 1)
+		{
+			switch (id) {
+				case "sidebar" :
+					return "sidebar-" + rgPosition;
+				case "sidebar-title" :
+					return "sidebar-" + rgPosition + "-title";
+				case "sidebar-splitter" :
+					return "sidebar-" + rgPosition + "-splitter";
+				case "sidebar-box" :
+					return "sidebar-" + rgPosition + "-box";
+			}
+		}
+		return id;
 	},
 
 	getDefaultIcon : function(type)
