@@ -31,7 +31,7 @@ var sbMultiBookService = {
 		var win = "sbBrowserOverlay" in window.top ? window.top : sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
 		if (!this.enabled)
 		{
-			win.document.getElementById("sidebar-title").value = "ScrapBook X";
+			win.document.getElementById(stSidebarTitleId).value = "ScrapBook X";
 		} else
 		{
 			var title = win.sbBrowserOverlay.dataTitle;
