@@ -962,7 +962,7 @@ var sbAnnotationService = {
 			var destFile = sbCommonUtils.getContentDir(sbPageEditor.item.id).clone();
 			destFile.append(FP.file.leafName);
 			if ( destFile.exists() && destFile.isFile() ) {
-				if ( !sbCommonUtils.PROMPT.confirm(window, "ScrapBook", "Would you like to overwrite the file '" + FP.file.leafName + "'?") ) return;
+				if ( !sbCommonUtils.PROMPT.confirm(window, "ScrapBook", sbCommonUtils.lang("overlay", "OVERWRITE_FILE", [FP.file.leafName])) ) return;
 				destFile.remove(false);
 			}
 			try {
