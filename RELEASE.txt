@@ -1,3 +1,9 @@
+Scrapbook X 1.11.9
+----------------
+
+- FIXED: Cannot rebuild fulltext cache.
+
+
 Scrapbook X 1.11.8
 ----------------
 
