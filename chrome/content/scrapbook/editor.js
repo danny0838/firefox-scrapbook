@@ -89,7 +89,7 @@ var sbPageEditor = {
 			win.document.addEventListener("mousedown", sbAnnotationService.handleEvent, true);
 			win.document.addEventListener("click", sbAnnotationService.handleEvent, true);
 			win.document.addEventListener("keypress", this.handleEvent, true);
-			if ( aID && document.getElementById("ScrapBookStatusPopupD").getAttribute("checked") ) sbInfoViewer.indicateLinks(win);
+			this.documentBeforeEdit(win.document);
 		}, this);
 		if ( aID )
 		{
@@ -356,10 +356,16 @@ var sbPageEditor = {
 		else {
 			sbDOMEraser.init(2);
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
-				this.clearArbitrary(win.document);
+				this.documentBeforeSave(win.document);
 			}, this);
 			var ret = sbBrowserOverlay.execCapture(0, null, !aBypassDialog, "urn:scrapbook:root");
-			if ( ret ) this.exit(true);
+			if ( ret ) {
+				this.exit(true);
+				return;
+			}
+			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
+				this.documentAfterSave(win.document);
+			}, this);
 		}
 	},
 
@@ -384,16 +390,14 @@ var sbPageEditor = {
 			if (charset != "UTF-8") {
 			    alert(sbCommonUtils.lang("scrapbook", "MSG_NOT_UTF8", [doc.location.href]));
 			}
-			this.clearArbitrary(doc);
+			this.documentBeforeSave(doc);
 			var rootNode = doc.getElementsByTagName("html")[0];
 			var src = sbContentSaver.doctypeToString(doc.doctype) + sbCommonUtils.getOuterHTML(rootNode);
 			var file = sbCommonUtils.getContentDir(this.item.id).clone();
 			file.append(sbCommonUtils.getFileName(doc.location.href));
 			sbCommonUtils.writeFile(file, src, charset);
+			this.documentAfterSave(doc);
 			sbCommonUtils.documentData(doc, "changed", false);
-			if ( document.getElementById("ScrapBookStatusPopupD").getAttribute("checked") ) {
-				sbInfoViewer.indicateLinks(win);
-			}
 		}, this);
 		window.setTimeout(function() { window.content.stop(); sbPageEditor.disable(false); }, 500);
 	},
@@ -469,8 +473,14 @@ var sbPageEditor = {
 		try { sbContentSaver.removeNodeFromParent(aWindow.document.getElementById(aID)); } catch(ex) {}
 	},
 
-	// remove something that should not be saved
-	clearArbitrary : function(aDoc)
+	documentBeforeEdit : function(aDoc)
+	{
+		if ( this.item && document.getElementById("ScrapBookStatusPopupD").getAttribute("checked") ) {
+			sbInfoViewer.indicateLinks(aDoc.defaultView);
+		}
+	},
+
+	documentBeforeSave : function(aDoc)
 	{
 		// save all sticky
 		var nodes = aDoc.getElementsByTagName("div");
@@ -490,6 +500,10 @@ var sbPageEditor = {
 		}
 	},
 
+	documentAfterSave : function(aDoc)
+	{
+		this.documentBeforeEdit(aDoc);
+	},
 };
 
 
