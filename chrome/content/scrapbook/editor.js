@@ -164,10 +164,9 @@ var sbPageEditor = {
 		this.propertyChanged = true;
 	},
 
-	getSelection : function()
+	getSelection : function(aDocOrWindow)
 	{
-		this.focusedWindow = sbCommonUtils.getFocusedWindow();
-		var selText = this.focusedWindow.getSelection();
+		var selText = aDocOrWindow.getSelection();
 		var sel = selText.QueryInterface(Components.interfaces.nsISelectionPrivate);
 		var isSelected = false;
 		try {
