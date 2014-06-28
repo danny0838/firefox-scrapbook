@@ -409,12 +409,7 @@ var sbPageEditor = {
 			this.item.comment = newComment;
 			sbCommonUtils.writeIndexDat(this.item);
 		}
-		var aValue = document.getElementById("ScrapBookEditComment").value;
-		if ( aValue )
-		{
-			sbCommonUtils.SESSION.setTabValue(gBrowser.mCurrentTab, "scrapbook-comment", aValue);
-			sbCommonUtils.SESSION.deleteTabValue(gBrowser.mCurrentTab, "scrapbook-comment");
-		}
+		sbCommonUtils.SESSION.deleteTabValue(gBrowser.mCurrentTab, "scrapbook-comment");
 		this.propertyChanged = false;
 	},
 
