@@ -37,10 +37,6 @@ var sbCommonUtils = {
 		delete this.UNICODE;
 		return this.UNICODE = Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter);
 	},
-	get SESSION() {
-		delete this.SESSION;
-		return this.SESSION = Components.classes["@mozilla.org/browser/sessionstore;1"].getService(Components.interfaces.nsISessionStore);
-	},
 	get WINDOW() {
 		delete this.WINDOW;
 		return this.WINDOW = Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator);

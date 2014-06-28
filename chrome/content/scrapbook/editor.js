@@ -6,7 +6,6 @@ var sbPageEditor = {
 
 	item : {},
 	multiline : false,
-	propertyChanged : false,
 
 	init : function(aID)
 	{
@@ -100,10 +99,9 @@ var sbPageEditor = {
 			catch (ex) {}
 			window.content.addEventListener("beforeunload", this.handleEvent, true);
 		}
-		var restoredComment = sbCommonUtils.SESSION.getTabValue(gBrowser.mCurrentTab, "scrapbook-comment");
+		var restoredComment = sbCommonUtils.documentData(window.content.document, "comment");
 		if (restoredComment)
 			document.getElementById("ScrapBookEditComment").value = restoredComment;
-		this.propertyChanged = false;
 	},
 
 	handleEvent : function(aEvent)
@@ -159,8 +157,8 @@ var sbPageEditor = {
 
 	onInputComment: function(aValue)
 	{
-		sbCommonUtils.SESSION.setTabValue(gBrowser.mCurrentTab, "scrapbook-comment", aValue);
-		this.propertyChanged = true;
+		sbCommonUtils.documentData(window.content.document, "comment", aValue);
+		sbCommonUtils.documentData(window.content.document, "propertyChanged", true);
 	},
 
 	getSelection : function(aDocOrWindow)
@@ -291,7 +289,7 @@ var sbPageEditor = {
 		if ( !sel ) return;
 		aElement.value = sbCommonUtils.crop(sel.toString().replace(/[\r\n\t\s]+/g, " "), 100);
 		sel.removeAllRanges();
-		this.propertyChanged = true;
+		sbCommonUtils.documentData(window.content.document, "propertyChanged", true);
 	},
 
 	restore : function()
@@ -335,7 +333,7 @@ var sbPageEditor = {
 
 	confirmSave : function()
 	{
-		if ( this.propertyChanged ) this.saveResource();
+		if ( sbCommonUtils.documentData(window.content.document, "propertyChanged") ) this.saveResource();
 		var changed = false;
 		sbContentSaver.flattenFrames(window.content).forEach(function(win) {
 			if (sbCommonUtils.documentData(win.document, "changed")) changed = true;
@@ -419,8 +417,8 @@ var sbPageEditor = {
 			this.item.comment = newComment;
 			sbCommonUtils.writeIndexDat(this.item);
 		}
-		sbCommonUtils.SESSION.deleteTabValue(gBrowser.mCurrentTab, "scrapbook-comment");
-		this.propertyChanged = false;
+		sbCommonUtils.documentData(window.content.document, "comment", null);
+		sbCommonUtils.documentData(window.content.document, "propertyChanged", false);
 	},
 
 	disableTemporary : function(msec)
