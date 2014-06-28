@@ -309,7 +309,7 @@ var sbPageEditor = {
 		var histories = sbCommonUtils.documentData(doc, "histories");
 		if (!histories) sbCommonUtils.documentData(doc, "histories", histories = []);
 		histories.push(doc.body.cloneNode(true));
-		this._dataChanged1(true);
+		sbCommonUtils.documentData(doc, "changed", true);
 	},
 
 	undo : function()
@@ -320,7 +320,7 @@ var sbPageEditor = {
 		while ( histories.length ) {
 			var prevBody = histories.pop();
 			if (!sbCommonUtils.isDeadObject(prevBody)) {
-				this._dataChanged1(true);
+				sbCommonUtils.documentData(doc, "changed", true);
 				prevBody.ownerDocument.body.parentNode.replaceChild(prevBody, prevBody.ownerDocument.body);
 				return true;
 			}
@@ -332,7 +332,11 @@ var sbPageEditor = {
 	confirmSave : function()
 	{
 		if ( this.propertyChanged ) this.saveResource();
-		if ( !this._dataChanged1() ) return 0;
+		var changed = false;
+		sbContentSaver.flattenFrames(window.content).forEach(function(win) {
+			if (sbCommonUtils.documentData(win.document, "changed")) changed = true;
+		}, this);
+		if ( !changed ) return 0;
 		var button = sbCommonUtils.PROMPT.BUTTON_TITLE_SAVE      * sbCommonUtils.PROMPT.BUTTON_POS_0
 		           + sbCommonUtils.PROMPT.BUTTON_TITLE_DONT_SAVE * sbCommonUtils.PROMPT.BUTTON_POS_1;
 		var text = sbCommonUtils.lang("overlay", "EDIT_SAVE_CHANGES", [sbCommonUtils.crop(this.item.title, 32)]);
@@ -383,8 +387,8 @@ var sbPageEditor = {
 			var file = sbCommonUtils.getContentDir(this.item.id).clone();
 			file.append(sbCommonUtils.getFileName(doc.location.href));
 			sbCommonUtils.writeFile(file, src, charset);
+			sbCommonUtils.documentData(doc, "changed", false);
 		}, this);
-		this._dataChanged1(false);
 		window.setTimeout(function() { window.content.stop(); sbPageEditor.disable(false); }, 500);
 	},
 
@@ -476,10 +480,6 @@ var sbPageEditor = {
 				sbAnnotationService.saveSticky(node);
 			}
 		}
-	},
-
-	_dataChanged1 : function(aNewValue) {
-		return sbCommonUtils.documentData( sbCommonUtils.getFocusedWindow().document, "changed1", aNewValue );
 	},
 
 };
