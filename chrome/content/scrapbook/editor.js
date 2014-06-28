@@ -303,25 +303,25 @@ var sbPageEditor = {
 		this.showHide(false);
 	},
 
-	allowUndo : function()
+	allowUndo : function(aDoc)
 	{
-		var doc = sbCommonUtils.getFocusedWindow().document;
-		var histories = sbCommonUtils.documentData(doc, "histories");
-		if (!histories) sbCommonUtils.documentData(doc, "histories", histories = []);
-		histories.push(doc.body.cloneNode(true));
-		sbCommonUtils.documentData(doc, "changed", true);
+		aDoc = aDoc || sbCommonUtils.getFocusedWindow().document;
+		var histories = sbCommonUtils.documentData(aDoc, "histories");
+		if (!histories) sbCommonUtils.documentData(aDoc, "histories", histories = []);
+		histories.push(aDoc.body.cloneNode(true));
+		sbCommonUtils.documentData(aDoc, "changed", true);
 	},
 
-	undo : function()
+	undo : function(aDoc)
 	{
-		var doc = sbCommonUtils.getFocusedWindow().document;
-		var histories = sbCommonUtils.documentData(doc, "histories");
-		if (!histories) sbCommonUtils.documentData(doc, "histories", histories = []);
+		aDoc = aDoc || sbCommonUtils.getFocusedWindow().document;
+		var histories = sbCommonUtils.documentData(aDoc, "histories");
+		if (!histories) sbCommonUtils.documentData(aDoc, "histories", histories = []);
 		while ( histories.length ) {
 			var prevBody = histories.pop();
 			if (!sbCommonUtils.isDeadObject(prevBody)) {
-				sbCommonUtils.documentData(doc, "changed", true);
-				prevBody.ownerDocument.body.parentNode.replaceChild(prevBody, prevBody.ownerDocument.body);
+				sbCommonUtils.documentData(aDoc, "changed", true);
+				aDoc.body.parentNode.replaceChild(prevBody, aDoc.body);
 				return true;
 			}
 		}
