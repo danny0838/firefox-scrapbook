@@ -405,10 +405,6 @@ var sbPageEditor = {
 			var file = sbCommonUtils.getContentDir(this.item.id).clone();
 			file.append(sbCommonUtils.getFileName(doc.location.href));
 			sbCommonUtils.writeFile(file, src, charset);
-			if ( document.getElementById("ScrapBookStatusPopupD").getAttribute("checked") )
-			{
-				sbInfoViewer.indicateLinks(sbContentSaver.frameList[i]);
-			}
 		}
 		this._dataChanged1(false);
 		window.setTimeout(function() { window.content.stop(); sbPageEditor.disable(false); }, 500);
