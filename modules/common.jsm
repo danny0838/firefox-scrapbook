@@ -460,6 +460,16 @@ var sbCommonUtils = {
 		if ( !win || win == window || win instanceof Components.interfaces.nsIDOMChromeWindow ) win = window.content;
 		return win;
 	},
+
+	flattenFrames : function(aWindow)
+	{
+		var ret = [aWindow];
+		for ( var i = 0; i < aWindow.frames.length; i++ )
+		{
+			ret = ret.concat(this.flattenFrames(aWindow.frames[i]));
+		}
+		return ret;
+	},
 	
 	getSidebarId : function(id)
 	{

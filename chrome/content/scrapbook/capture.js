@@ -811,10 +811,10 @@ var sbCrossLinker = {
 			this.nodeHash[this.nameList[this.index]] = this.createNode(this.nameList[this.index], (gReferItem) ? gReferItem.title : "");
 		}
 		this.nodeHash[this.nameList[this.index]].setAttribute("title", sbDataSource.sanitize(this.ELEMENT.contentTitle));
-		sbContentSaver.flattenFrames(this.ELEMENT.contentWindow).forEach(function(win) {
+		sbCommonUtils.flattenFrames(this.ELEMENT.contentWindow).forEach(function(win) {
 			var doc = win.document;
 			var linkList = doc.links;
-			if ( !linkList ) continue;
+			if ( !linkList ) return;
 			var shouldSave = false;
 			for ( var i = 0; i < linkList.length; i++ ) {
 				var urlLR = SB_splitByAnchor(linkList[i].href);
