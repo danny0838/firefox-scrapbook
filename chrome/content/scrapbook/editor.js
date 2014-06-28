@@ -398,6 +398,9 @@ var sbPageEditor = {
 			sbCommonUtils.writeFile(file, src, charset);
 			this.undo(doc);
 			sbCommonUtils.documentData(doc, "changed", false);
+			if ( document.getElementById("ScrapBookStatusPopupD").getAttribute("checked") ) {
+				sbInfoViewer.indicateLinks(win);
+			}
 		}, this);
 		window.setTimeout(function() { window.content.stop(); sbPageEditor.disable(false); }, 500);
 	},
