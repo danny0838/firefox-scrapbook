@@ -802,34 +802,27 @@ var sbCrossLinker = {
 		// we need this check to prevent
 		if (this.ELEMENT.currentURI.spec !== sbInvisibleBrowser.loading) return;
 		sbInvisibleBrowser.loading = false;
-		if ( this.ELEMENT.currentURI.scheme != "file" )
-		{
+		if ( this.ELEMENT.currentURI.scheme != "file" ) {
 			return;
 		}
-		sbContentSaver.frameList = sbContentSaver.flattenFrames(this.ELEMENT.contentWindow);
-		if ( !this.nodeHash[this.nameList[this.index]] )
-		{
+		if ( !this.nodeHash[this.nameList[this.index]] ) {
 			// Error message could be intercepted using query. 
 			// However, the demolition at this point may also be desirable (Research!)
 			this.nodeHash[this.nameList[this.index]] = this.createNode(this.nameList[this.index], (gReferItem) ? gReferItem.title : "");
 		}
 		this.nodeHash[this.nameList[this.index]].setAttribute("title", sbDataSource.sanitize(this.ELEMENT.contentTitle));
-		for ( var f = 0; f < sbContentSaver.frameList.length; f++ )
-		{
-			var doc = sbContentSaver.frameList[f].document;
+		sbContentSaver.flattenFrames(this.ELEMENT.contentWindow).forEach(function(win) {
+			var doc = win.document;
 			var linkList = doc.links;
 			if ( !linkList ) continue;
 			var shouldSave = false;
-			for ( var i = 0; i < linkList.length; i++ )
-			{
+			for ( var i = 0; i < linkList.length; i++ ) {
 				var urlLR = SB_splitByAnchor(linkList[i].href);
-				if ( gURL2Name[urlLR[0]] )
-				{
+				if ( gURL2Name[urlLR[0]] ) {
 					var name = gURL2Name[urlLR[0]];
 					linkList[i].href = name + ".html" + urlLR[1];
 					linkList[i].setAttribute("data-sb-indepth", "true");
-					if ( !this.nodeHash[name] )
-					{
+					if ( !this.nodeHash[name] ) {
 						var text = linkList[i].text ? linkList[i].text.replace(/\r|\n|\t/g, " ") : "";
 						if ( text.replace(/\s/g, "") == "" ) text = "";
 						this.nodeHash[name] = this.createNode(name, text);
@@ -839,15 +832,14 @@ var sbCrossLinker = {
 					shouldSave = true;
 				}
 			}
-			if ( shouldSave )
-			{
+			if ( shouldSave ) {
 				var rootNode = doc.getElementsByTagName("html")[0];
 				var src = sbContentSaver.doctypeToString(doc.doctype) + sbCommonUtils.getOuterHTML(rootNode);
 				var file = sbCommonUtils.getContentDir(gReferItem.id);
 				file.append(sbCommonUtils.getFileName(doc.location.href));
 				sbCommonUtils.writeFile(file, src, doc.characterSet);
 			}
-		}
+		}, this);
 		this.forceReloading(gReferItem.id, this.nameList[this.index]);
 		this.start();
 	},
