@@ -359,13 +359,7 @@ var sbPageEditor = {
 				this.clearArbitrary(win.document);
 			}, this);
 			var ret = sbBrowserOverlay.execCapture(0, null, !aBypassDialog, "urn:scrapbook:root");
-			if ( ret ) {
-				this.exit(true);
-				return
-			}
-			sbContentSaver.flattenFrames(window.content).forEach(function(win) {
-				this.undo(win.document);
-			}, this);
+			if ( ret ) this.exit(true);
 		}
 	},
 
@@ -396,7 +390,6 @@ var sbPageEditor = {
 			var file = sbCommonUtils.getContentDir(this.item.id).clone();
 			file.append(sbCommonUtils.getFileName(doc.location.href));
 			sbCommonUtils.writeFile(file, src, charset);
-			this.undo(doc);
 			sbCommonUtils.documentData(doc, "changed", false);
 			if ( document.getElementById("ScrapBookStatusPopupD").getAttribute("checked") ) {
 				sbInfoViewer.indicateLinks(win);
@@ -479,7 +472,6 @@ var sbPageEditor = {
 	// remove something that should not be saved
 	clearArbitrary : function(aDoc)
 	{
-		this.allowUndo(aDoc);
 		// save all sticky
 		var nodes = aDoc.getElementsByTagName("div");
 		for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
