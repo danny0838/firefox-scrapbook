@@ -9,12 +9,6 @@ var sbPageEditor = {
 	focusedWindow : null,
 	propertyChanged : false,
 
-	documentDataArray : {
-		document : [],
-		histories : [],
-		changed1 : [],
-	},
-
 	init : function(aID)
 	{
 		// Update highlighter previewers
@@ -312,16 +306,16 @@ var sbPageEditor = {
 	allowUndo : function()
 	{
 		var doc = sbCommonUtils.getFocusedWindow().document;
-		var histories = this._documentData(doc, "histories");
+		var histories = sbCommonUtils.documentData(doc, "histories");
 		histories.push(doc.body.cloneNode(true));
-		this._documentData(doc, "histories", histories);
+		sbCommonUtils.documentData(doc, "histories", histories);
 		this._dataChanged1(true);
 	},
 
 	undo : function()
 	{
 		var doc = sbCommonUtils.getFocusedWindow().document;
-		var histories = this._documentData(doc, "histories");
+		var histories = sbCommonUtils.documentData(doc, "histories");
 		while ( histories.length ) {
 			var prevBody = histories.pop();
 			if (!this._isDeadObject(prevBody)) {
@@ -330,7 +324,7 @@ var sbPageEditor = {
 				return true;
 			}
 		}
-		this._documentData(doc, "histories", histories);
+		sbCommonUtils.documentData(doc, "histories", histories);
 		alert( sbCommonUtils.lang("overlay", "EDIT_UNDO_LAST") );
 		return false;
 	},
@@ -485,48 +479,9 @@ var sbPageEditor = {
 	},
 
 	_dataChanged1 : function(aNewValue) {
-		return this._documentData( sbCommonUtils.getFocusedWindow().document, "changed1", aNewValue );
+		return sbCommonUtils.documentData( sbCommonUtils.getFocusedWindow().document, "changed1", aNewValue );
 	},
 
-	_documentData : function(aDocument, aKey, aNewValue)
-	{
-		var hash = this.documentDataArray;
-		// try to lookup the index of the specific document
-		var idx = false;
-		var firstEmptyIdx = false;
-		for (var i=0, len=hash.document.length; i<len ; i++) {
-			if (this._isDeadObject(hash.document[i])) {
-				if (firstEmptyIdx === false) firstEmptyIdx = i;
-				continue;
-			}
-			if (hash.document[i] == aDocument) { idx = i; break; }
-		}
-		// if the document is not in index, add one
-		// if there is an index left empty, use it
-		if (idx === false) {
-			if (firstEmptyIdx !== false) idx = firstEmptyIdx;
-			else idx = hash.document.length;
-			hash.document[idx] = aDocument;
-			hash.histories[idx] = [];
-			hash.changed1[idx] = false;
-		}
-		// if given a new value, set it
-		if (aNewValue !== undefined) {
-			hash[aKey][idx] = aNewValue;
-			return;
-		}
-		return hash[aKey][idx];
-	},
-
-	// check if an object is dead (eg. closed window)
-	_isDeadObject : function(aObject)
-	{
-		var dead = false;
-		try { var x = aObject.__proto__; }
-		catch(ex) { dead = true; }
-		return dead;
-	},
-	
 };
 
 
