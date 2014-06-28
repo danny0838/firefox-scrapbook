@@ -354,7 +354,7 @@ var sbPageEditor = {
 		} else {
 			sbDOMEraser.init(2);
 			sbContentSaver.flattenFrames(window.content).forEach(function(win) {
-				this.saveAllSticky(win);
+				this.saveAllSticky(win.document);
 			}, this);
 			var ret = sbBrowserOverlay.execCapture(0, null, !aBypassDialog, "urn:scrapbook:root");
 			if ( ret ) this.exit(true);
@@ -373,7 +373,6 @@ var sbPageEditor = {
 		this.disable(true);
 		sbDOMEraser.init(2);
 		sbContentSaver.flattenFrames(window.content).forEach(function(win) {
-			this.saveAllSticky(win);
 			var doc = win.document;
 			if ( doc.contentType != "text/html" ) {
 			    alert(sbCommonUtils.lang("scrapbook", "MSG_CANT_MODIFY", [doc.contentType]));
@@ -383,6 +382,7 @@ var sbPageEditor = {
 			if (charset != "UTF-8") {
 			    alert(sbCommonUtils.lang("scrapbook", "MSG_NOT_UTF8", [doc.location.href]));
 			}
+			this.saveAllSticky(doc);
 			var rootNode = doc.getElementsByTagName("html")[0];
 			var src = sbContentSaver.doctypeToString(doc.doctype) + sbCommonUtils.getOuterHTML(rootNode);
 			var file = sbCommonUtils.getContentDir(this.item.id).clone();
@@ -477,11 +477,10 @@ var sbPageEditor = {
 		try { sbContentSaver.removeNodeFromParent(aWindow.document.getElementById(aID)); } catch(ex) {}
 	},
 
-	saveAllSticky : function(aWindow)
+	saveAllSticky : function(aDoc)
 	{
-		var nodes = aWindow.document.getElementsByTagName("div");
-		for ( var i = nodes.length - 1; i >= 0 ; i-- )
-		{
+		var nodes = aDoc.getElementsByTagName("div");
+		for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
 			var node = nodes[i];
 			if ( sbCommonUtils.getSbObjectType(node) == "sticky" && node.getAttribute("data-sb-active")) {
 				sbAnnotationService.saveSticky(node);
