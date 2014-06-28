@@ -354,13 +354,20 @@ var sbPageEditor = {
 		if ( sbBrowserOverlay.getID() ) {
 			this.savePage();
 			this.saveResource();
-		} else {
+		}
+		else {
 			sbDOMEraser.init(2);
 			sbContentSaver.flattenFrames(window.content).forEach(function(win) {
-				this.saveAllSticky(win.document);
+				this.clearArbitrary(win.document);
 			}, this);
 			var ret = sbBrowserOverlay.execCapture(0, null, !aBypassDialog, "urn:scrapbook:root");
-			if ( ret ) this.exit(true);
+			if ( ret ) {
+				this.exit(true);
+				return
+			}
+			sbContentSaver.flattenFrames(window.content).forEach(function(win) {
+				this.undo(win.document);
+			}, this);
 		}
 	},
 
@@ -385,12 +392,13 @@ var sbPageEditor = {
 			if (charset != "UTF-8") {
 			    alert(sbCommonUtils.lang("scrapbook", "MSG_NOT_UTF8", [doc.location.href]));
 			}
-			this.saveAllSticky(doc);
+			this.clearArbitrary(doc);
 			var rootNode = doc.getElementsByTagName("html")[0];
 			var src = sbContentSaver.doctypeToString(doc.doctype) + sbCommonUtils.getOuterHTML(rootNode);
 			var file = sbCommonUtils.getContentDir(this.item.id).clone();
 			file.append(sbCommonUtils.getFileName(doc.location.href));
 			sbCommonUtils.writeFile(file, src, charset);
+			this.undo(doc);
 			sbCommonUtils.documentData(doc, "changed", false);
 		}, this);
 		window.setTimeout(function() { window.content.stop(); sbPageEditor.disable(false); }, 500);
@@ -467,13 +475,24 @@ var sbPageEditor = {
 		try { sbContentSaver.removeNodeFromParent(aWindow.document.getElementById(aID)); } catch(ex) {}
 	},
 
-	saveAllSticky : function(aDoc)
+	// remove something that should not be saved
+	clearArbitrary : function(aDoc)
 	{
+		this.allowUndo(aDoc);
+		// save all sticky
 		var nodes = aDoc.getElementsByTagName("div");
 		for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
 			var node = nodes[i];
 			if ( sbCommonUtils.getSbObjectType(node) == "sticky" && node.getAttribute("data-sb-active")) {
 				sbAnnotationService.saveSticky(node);
+			}
+		}
+		// remove all scrapbook inserted styles
+		var nodes = aDoc.getElementsByTagName("style");
+		for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
+			var node = nodes[i];
+			if ( sbCommonUtils.getSbObjectType(node) == "stylesheet") {
+				sbContentSaver.removeNodeFromParent(node);
 			}
 		}
 	},
