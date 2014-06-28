@@ -109,8 +109,7 @@ var sbPageEditor = {
 			catch (ex) {}
 			window.content.addEventListener("beforeunload", this.handleEvent, true);
 		}
-		var ss = Components.classes["@mozilla.org/browser/sessionstore;1"].getService(Components.interfaces.nsISessionStore);
-		var restoredComment = ss.getTabValue(gBrowser.mCurrentTab, "scrapbook-comment");
+		var restoredComment = sbCommonUtils.SESSION.getTabValue(gBrowser.mCurrentTab, "scrapbook-comment");
 		if (restoredComment)
 			document.getElementById("ScrapBookEditComment").value = restoredComment;
 	},
@@ -168,8 +167,7 @@ var sbPageEditor = {
 
 	onInputComment: function(aValue)
 	{
-		var ss = Components.classes["@mozilla.org/browser/sessionstore;1"].getService(Components.interfaces.nsISessionStore);
-		ss.setTabValue(gBrowser.mCurrentTab, "scrapbook-comment", aValue);
+		sbCommonUtils.SESSION.setTabValue(gBrowser.mCurrentTab, "scrapbook-comment", aValue);
 		this._dataChanged2(true);
 	},
 
@@ -428,9 +426,8 @@ var sbPageEditor = {
 		var aValue = document.getElementById("ScrapBookEditComment").value;
 		if ( aValue )
 		{
-			var ss = Components.classes['@mozilla.org/browser/sessionstore;1'].getService(Components.interfaces.nsISessionStore);
-			ss.setTabValue(gBrowser.mCurrentTab, "scrapbook-comment", aValue);
-			ss.deleteTabValue(gBrowser.mCurrentTab, "scrapbook-comment");
+			sbCommonUtils.SESSION.setTabValue(gBrowser.mCurrentTab, "scrapbook-comment", aValue);
+			sbCommonUtils.SESSION.deleteTabValue(gBrowser.mCurrentTab, "scrapbook-comment");
 		}
 		this._dataChanged2(false);
 	},
