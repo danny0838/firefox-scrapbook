@@ -307,8 +307,8 @@ var sbPageEditor = {
 	{
 		var doc = sbCommonUtils.getFocusedWindow().document;
 		var histories = sbCommonUtils.documentData(doc, "histories");
+		if (!histories) sbCommonUtils.documentData(doc, "histories", histories = []);
 		histories.push(doc.body.cloneNode(true));
-		sbCommonUtils.documentData(doc, "histories", histories);
 		this._dataChanged1(true);
 	},
 
@@ -316,15 +316,15 @@ var sbPageEditor = {
 	{
 		var doc = sbCommonUtils.getFocusedWindow().document;
 		var histories = sbCommonUtils.documentData(doc, "histories");
+		if (!histories) sbCommonUtils.documentData(doc, "histories", histories = []);
 		while ( histories.length ) {
 			var prevBody = histories.pop();
-			if (!this._isDeadObject(prevBody)) {
+			if (!sbCommonUtils.isDeadObject(prevBody)) {
 				this._dataChanged1(true);
 				prevBody.ownerDocument.body.parentNode.replaceChild(prevBody, prevBody.ownerDocument.body);
 				return true;
 			}
 		}
-		sbCommonUtils.documentData(doc, "histories", histories);
 		alert( sbCommonUtils.lang("overlay", "EDIT_UNDO_LAST") );
 		return false;
 	},
