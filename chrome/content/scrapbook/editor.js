@@ -6,14 +6,6 @@ var sbPageEditor = {
 
 	item : {},
 	multiline : false,
-	focusedWindow : null,
-
-	documentDataArray : {
-		document : [],
-		histories : [],
-		changed1 : [],
-		changed2 : [],
-	},
 
 	init : function(aID)
 	{
@@ -90,17 +82,15 @@ var sbPageEditor = {
 			gBrowser.selectedTab.setAttribute("image", this.item.icon);
 		}
 		sbDOMEraser.init(0);
-		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
-		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
-		{
-			try { sbContentSaver.frameList[i].document.removeEventListener("mousedown", sbAnnotationService.handleEvent, true); } catch(ex) {}
-			try { sbContentSaver.frameList[i].document.removeEventListener("click", sbAnnotationService.handleEvent, true); } catch(ex) {}
-			try { sbContentSaver.frameList[i].document.removeEventListener("keypress", this.handleEvent, true); } catch(ex) {}
-			sbContentSaver.frameList[i].document.addEventListener("mousedown",    sbAnnotationService.handleEvent, true);
-			sbContentSaver.frameList[i].document.addEventListener("click",    sbAnnotationService.handleEvent, true);
-			sbContentSaver.frameList[i].document.addEventListener("keypress",    this.handleEvent, true);
-			if ( aID && document.getElementById("ScrapBookStatusPopupD").getAttribute("checked") ) sbInfoViewer.indicateLinks(sbContentSaver.frameList[i]);
-		}
+		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
+			try { win.document.removeEventListener("mousedown", sbAnnotationService.handleEvent, true); } catch(ex) {}
+			try { win.document.removeEventListener("click", sbAnnotationService.handleEvent, true); } catch(ex) {}
+			try { win.document.removeEventListener("keypress", this.handleEvent, true); } catch(ex) {}
+			win.document.addEventListener("mousedown", sbAnnotationService.handleEvent, true);
+			win.document.addEventListener("click", sbAnnotationService.handleEvent, true);
+			win.document.addEventListener("keypress", this.handleEvent, true);
+			if ( aID && document.getElementById("ScrapBookStatusPopupD").getAttribute("checked") ) sbInfoViewer.indicateLinks(win);
+		}, this);
 		if ( aID )
 		{
 			try {
@@ -109,8 +99,7 @@ var sbPageEditor = {
 			catch (ex) {}
 			window.content.addEventListener("beforeunload", this.handleEvent, true);
 		}
-		var ss = Components.classes["@mozilla.org/browser/sessionstore;1"].getService(Components.interfaces.nsISessionStore);
-		var restoredComment = ss.getTabValue(gBrowser.mCurrentTab, "scrapbook-comment");
+		var restoredComment = sbCommonUtils.documentData(window.content.document, "comment");
 		if (restoredComment)
 			document.getElementById("ScrapBookEditComment").value = restoredComment;
 	},
@@ -168,15 +157,13 @@ var sbPageEditor = {
 
 	onInputComment: function(aValue)
 	{
-		var ss = Components.classes["@mozilla.org/browser/sessionstore;1"].getService(Components.interfaces.nsISessionStore);
-		ss.setTabValue(gBrowser.mCurrentTab, "scrapbook-comment", aValue);
-		this._dataChanged2(true);
+		sbCommonUtils.documentData(window.content.document, "comment", aValue);
+		sbCommonUtils.documentData(window.content.document, "propertyChanged", true);
 	},
 
-	getSelection : function()
+	getSelection : function(aDocOrWindow)
 	{
-		this.focusedWindow = sbCommonUtils.getFocusedWindow();
-		var selText = this.focusedWindow.getSelection();
+		var selText = aDocOrWindow.getSelection();
 		var sel = selText.QueryInterface(Components.interfaces.nsISelectionPrivate);
 		var isSelected = false;
 		try {
@@ -189,9 +176,10 @@ var sbPageEditor = {
 
 	cutter : function()
 	{
-		var sel = this.getSelection();
+		var doc = sbCommonUtils.getFocusedWindow().document;
+		var sel = this.getSelection(doc);
 		if ( !sel ) return;
-		this.allowUndo();
+		this.allowUndo(doc);
 		sel.deleteFromDocument();
 	},
 
@@ -202,23 +190,25 @@ var sbPageEditor = {
 		var attr = {};
 		attr["style"] = sbCommonUtils.getPref("highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);	//DropDownList
 		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighterPreview"), attr["style"]);	//DropDownList
-		var sel = this.getSelection();
+		var win = sbCommonUtils.getFocusedWindow();
+		var sel = this.getSelection(win);
 		if ( !sel ) return;
-		this.allowUndo();
+		this.allowUndo(win.document);
 		attr["data-sb-obj"] = "linemarker";
 		attr["class"] = "linemarker-marked-line";
-		sbHighlighter.set(this.focusedWindow, sel, "span", attr);
+		sbHighlighter.set(win, sel, "span", attr);
 	},
 
 	removeSbObjectsSelected : function()
 	{
-		var sel = this.getSelection();
+		var win = sbCommonUtils.getFocusedWindow();
+		var sel = this.getSelection(win);
 		if ( !sel ) return;
-		this.allowUndo();
+		this.allowUndo(win.document);
 		var selRange  = sel.getRangeAt(0);
 		var node = selRange.startContainer;
 		if ( node.nodeName == "#text" ) node = node.parentNode;
-		var nodeRange = window.content.document.createRange();
+		var nodeRange = win.document.createRange();
 		var nodeToDel = [];
 		traceTree : while ( true )
 		{
@@ -243,36 +233,30 @@ var sbPageEditor = {
 
 	removeSbObjects : function()
 	{
-		this.allowUndo();
-		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
-		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
-		{
-			var elems = sbContentSaver.frameList[i].document.getElementsByTagName("*");
-			for ( var j = 0; j < elems.length; j++ )
-			{
-				if ( sbCommonUtils.getSbObjectType(elems[j]) )
-				{
-					// elems gets shortened when elems[j] is removed, minus j afterwards to prevent skipping
-					this.removeSbObj(elems[j]);
-					j--;
+		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
+			var doc = win.document;
+			this.allowUndo(doc);
+			var elems = doc.getElementsByTagName("*");
+			for ( var i = 0; i < elems.length; i++ ) {
+				if ( sbCommonUtils.getSbObjectType(elems[i]) ) {
+					// elems gets shortened when elems[i] is removed, minus i afterwards to prevent skipping
+					this.removeSbObj(elems[i]);
+					i--;
 				}
 			}
-		}
+		}, this);
 	},
 
 	removeElementsByTagName : function(aTagName)
 	{
-		this.allowUndo();
-		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
-		for ( var i = sbContentSaver.frameList.length - 1; i >= 0; i-- )
-		{
-			var elems = sbContentSaver.frameList[i].document.getElementsByTagName(aTagName);
-			if ( elems.length < 1 ) continue;
-			for ( var j = elems.length - 1; j >= 0; j-- )
-			{
-				sbContentSaver.removeNodeFromParent(elems[j]);
+		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
+			var doc = win.document;
+			this.allowUndo(doc);
+			var elems = doc.getElementsByTagName(aTagName), todo = [];
+			for ( var i = 0; i < elems.length; i++ ) {
+				sbContentSaver.removeNodeFromParent(elems[i]);
 			}
-		}
+		}, this);
 	},
 
 	removeSbObj : function(aNode)
@@ -300,11 +284,12 @@ var sbPageEditor = {
 
 	selection2Title : function(aElement)
 	{
-		var sel = this.getSelection();
+		var win = sbCommonUtils.getFocusedWindow();
+		var sel = this.getSelection(win);
 		if ( !sel ) return;
 		aElement.value = sbCommonUtils.crop(sel.toString().replace(/[\r\n\t\s]+/g, " "), 100);
 		sel.removeAllRanges();
-		this._dataChanged2(true);
+		sbCommonUtils.documentData(window.content.document, "propertyChanged", true);
 	},
 
 	restore : function()
@@ -320,36 +305,40 @@ var sbPageEditor = {
 		this.showHide(false);
 	},
 
-	allowUndo : function()
+	allowUndo : function(aDoc)
 	{
-		var doc = sbCommonUtils.getFocusedWindow().document;
-		var histories = this._documentData(doc, "histories");
-		histories.push(doc.body.cloneNode(true));
-		this._documentData(doc, "histories", histories);
-		this._dataChanged1(true);
+		aDoc = aDoc || sbCommonUtils.getFocusedWindow().document;
+		var histories = sbCommonUtils.documentData(aDoc, "histories");
+		if (!histories) sbCommonUtils.documentData(aDoc, "histories", histories = []);
+		histories.push(aDoc.body.cloneNode(true));
+		sbCommonUtils.documentData(aDoc, "changed", true);
 	},
 
-	undo : function()
+	undo : function(aDoc)
 	{
-		var doc = sbCommonUtils.getFocusedWindow().document;
-		var histories = this._documentData(doc, "histories");
+		aDoc = aDoc || sbCommonUtils.getFocusedWindow().document;
+		var histories = sbCommonUtils.documentData(aDoc, "histories");
+		if (!histories) sbCommonUtils.documentData(aDoc, "histories", histories = []);
 		while ( histories.length ) {
 			var prevBody = histories.pop();
-			if (!this._isDeadObject(prevBody)) {
-				this._dataChanged1(true);
-				prevBody.ownerDocument.body.parentNode.replaceChild(prevBody, prevBody.ownerDocument.body);
+			if (!sbCommonUtils.isDeadObject(prevBody)) {
+				sbCommonUtils.documentData(aDoc, "changed", true);
+				aDoc.body.parentNode.replaceChild(prevBody, aDoc.body);
 				return true;
 			}
 		}
-		this._documentData(doc, "histories", histories);
 		alert( sbCommonUtils.lang("overlay", "EDIT_UNDO_LAST") );
 		return false;
 	},
 
 	confirmSave : function()
 	{
-		if ( this._dataChanged2() ) this.saveResource();
-		if ( !this._dataChanged1() ) return 0;
+		if ( sbCommonUtils.documentData(window.content.document, "propertyChanged") ) this.saveResource();
+		var changed = false;
+		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
+			if (sbCommonUtils.documentData(win.document, "changed")) changed = true;
+		}, this);
+		if ( !changed ) return 0;
 		var button = sbCommonUtils.PROMPT.BUTTON_TITLE_SAVE      * sbCommonUtils.PROMPT.BUTTON_POS_0
 		           + sbCommonUtils.PROMPT.BUTTON_TITLE_DONT_SAVE * sbCommonUtils.PROMPT.BUTTON_POS_1;
 		var text = sbCommonUtils.lang("overlay", "EDIT_SAVE_CHANGES", [sbCommonUtils.crop(this.item.title, 32)]);
@@ -363,13 +352,12 @@ var sbPageEditor = {
 		if ( sbBrowserOverlay.getID() ) {
 			this.savePage();
 			this.saveResource();
-		} else {
+		}
+		else {
 			sbDOMEraser.init(2);
-			sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
-			for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
-			{
-				this.saveAllSticky(sbContentSaver.frameList[i]);
-			}
+			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
+				this.clearArbitrary(win.document);
+			}, this);
 			var ret = sbBrowserOverlay.execCapture(0, null, !aBypassDialog, "urn:scrapbook:root");
 			if ( ret ) this.exit(true);
 		}
@@ -384,33 +372,29 @@ var sbPageEditor = {
 			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SAVE_FILE", [RegExp.$2]));
 			return;
 		}
-		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
 		this.disable(true);
 		sbDOMEraser.init(2);
-		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
-		{
-			this.saveAllSticky(sbContentSaver.frameList[i]);
-			var doc = sbContentSaver.frameList[i].document;
-			if ( doc.contentType != "text/html" )
-			{
+		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
+			var doc = win.document;
+			if ( doc.contentType != "text/html" ) {
 			    alert(sbCommonUtils.lang("scrapbook", "MSG_CANT_MODIFY", [doc.contentType]));
-				continue;
+				return;
 			}
 			var charset = doc.characterSet;
 			if (charset != "UTF-8") {
 			    alert(sbCommonUtils.lang("scrapbook", "MSG_NOT_UTF8", [doc.location.href]));
 			}
+			this.clearArbitrary(doc);
 			var rootNode = doc.getElementsByTagName("html")[0];
 			var src = sbContentSaver.doctypeToString(doc.doctype) + sbCommonUtils.getOuterHTML(rootNode);
 			var file = sbCommonUtils.getContentDir(this.item.id).clone();
 			file.append(sbCommonUtils.getFileName(doc.location.href));
 			sbCommonUtils.writeFile(file, src, charset);
-			if ( document.getElementById("ScrapBookStatusPopupD").getAttribute("checked") )
-			{
-				sbInfoViewer.indicateLinks(sbContentSaver.frameList[i]);
+			sbCommonUtils.documentData(doc, "changed", false);
+			if ( document.getElementById("ScrapBookStatusPopupD").getAttribute("checked") ) {
+				sbInfoViewer.indicateLinks(win);
 			}
-		}
-		this._dataChanged1(false);
+		}, this);
 		window.setTimeout(function() { window.content.stop(); sbPageEditor.disable(false); }, 500);
 	},
 
@@ -429,24 +413,14 @@ var sbPageEditor = {
 			this.item.comment = newComment;
 			sbCommonUtils.writeIndexDat(this.item);
 		}
-		var aValue = document.getElementById("ScrapBookEditComment").value;
-		if ( aValue )
-		{
-			var ss = Components.classes['@mozilla.org/browser/sessionstore;1'].getService(Components.interfaces.nsISessionStore);
-			ss.setTabValue(gBrowser.mCurrentTab, "scrapbook-comment", aValue);
-			ss.deleteTabValue(gBrowser.mCurrentTab, "scrapbook-comment");
-		}
-		this._dataChanged2(false);
+		sbCommonUtils.documentData(window.content.document, "comment", null);
+		sbCommonUtils.documentData(window.content.document, "propertyChanged", false);
 	},
 
 	disableTemporary : function(msec)
 	{
 		window.setTimeout(function() { sbPageEditor.disable(true);  }, 0);
 		window.setTimeout(function() { sbPageEditor.disable(false); }, msec);
-		//Verhindert das Zurückbleiben von "ZombieCompartments"
-		sbContentSaver.frameList = null;
-		this.focusedWindow = null;
-		this.savedBody = null;
 	},
 
 	disable : function(aBool)
@@ -471,10 +445,6 @@ var sbPageEditor = {
 		this.TOOLBAR.hidden = !willShow;
 		willShow ? this.TOOLBAR.setAttribute("moz-collapsed", "false") : this.TOOLBAR.removeAttribute("moz-collapsed");
 		sbInfoViewer.optimize();
-		//Verhindert das Zurückbleiben von "ZombieCompartments"
-		sbContentSaver.frameList = null;
-		this.focusedWindow = null;
-		this.savedBody = null;
 	},
 
 
@@ -499,66 +469,27 @@ var sbPageEditor = {
 		try { sbContentSaver.removeNodeFromParent(aWindow.document.getElementById(aID)); } catch(ex) {}
 	},
 
-	saveAllSticky : function(aWindow)
+	// remove something that should not be saved
+	clearArbitrary : function(aDoc)
 	{
-		var nodes = aWindow.document.getElementsByTagName("div");
-		for ( var i = nodes.length - 1; i >= 0 ; i-- )
-		{
+		// save all sticky
+		var nodes = aDoc.getElementsByTagName("div");
+		for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
 			var node = nodes[i];
 			if ( sbCommonUtils.getSbObjectType(node) == "sticky" && node.getAttribute("data-sb-active")) {
 				sbAnnotationService.saveSticky(node);
 			}
 		}
-	},
-
-	_dataChanged1 : function(aNewValue) {
-		return this._documentData( sbCommonUtils.getFocusedWindow().document, "changed1", aNewValue );
-	},
-
-	_dataChanged2 : function(aNewValue) {
-		return this._documentData( sbCommonUtils.getFocusedWindow().document, "changed2", aNewValue );
-	},
-
-	_documentData : function(aDocument, aKey, aNewValue)
-	{
-		var hash = this.documentDataArray;
-		// try to lookup the index of the specific document
-		var idx = false;
-		var firstEmptyIdx = false;
-		for (var i=0, len=hash.document.length; i<len ; i++) {
-			if (this._isDeadObject(hash.document[i])) {
-				if (firstEmptyIdx === false) firstEmptyIdx = i;
-				continue;
+		// remove all scrapbook inserted styles
+		var nodes = aDoc.getElementsByTagName("style");
+		for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
+			var node = nodes[i];
+			if ( sbCommonUtils.getSbObjectType(node) == "stylesheet") {
+				sbContentSaver.removeNodeFromParent(node);
 			}
-			if (hash.document[i] == aDocument) { idx = i; break; }
 		}
-		// if the document is not in index, add one
-		// if there is an index left empty, use it
-		if (idx === false) {
-			if (firstEmptyIdx !== false) idx = firstEmptyIdx;
-			else idx = hash.document.length;
-			hash.document[idx] = aDocument;
-			hash.histories[idx] = [];
-			hash.changed1[idx] = false;
-			hash.changed2[idx] = false;
-		}
-		// if given a new value, set it
-		if (aNewValue !== undefined) {
-			hash[aKey][idx] = aNewValue;
-			return;
-		}
-		return hash[aKey][idx];
 	},
 
-	// check if an object is dead (eg. closed window)
-	_isDeadObject : function(aObject)
-	{
-		var dead = false;
-		try { var x = aObject.__proto__; }
-		catch(ex) { dead = true; }
-		return dead;
-	},
-	
 };
 
 
@@ -584,29 +515,28 @@ var sbDOMEraser = {
 		document.getElementById("ScrapBookHighlighter6").disabled = this.enabled;
 		document.getElementById("ScrapBookEditAnnotation").disabled = this.enabled;
 		document.getElementById("ScrapBookEditCutter").disabled  = this.enabled;
-		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
-		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
-		{
-			sbContentSaver.frameList[i].document.removeEventListener("mouseover", this.handleEvent, true);
-			sbContentSaver.frameList[i].document.removeEventListener("mousemove", this.handleEvent, true);
-			sbContentSaver.frameList[i].document.removeEventListener("mouseout",  this.handleEvent, true);
-			sbContentSaver.frameList[i].document.removeEventListener("click",     this.handleEvent, true);
+		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
+			win.document.removeEventListener("mouseover", this.handleEvent, true);
+			win.document.removeEventListener("mousemove", this.handleEvent, true);
+			win.document.removeEventListener("mouseout",  this.handleEvent, true);
+			win.document.removeEventListener("click",     this.handleEvent, true);
 			if ( this.enabled ) {
-				sbContentSaver.frameList[i].document.addEventListener("mouseover", this.handleEvent, true);
-				sbContentSaver.frameList[i].document.addEventListener("mousemove", this.handleEvent, true);
-				sbContentSaver.frameList[i].document.addEventListener("mouseout",  this.handleEvent, true);
-				sbContentSaver.frameList[i].document.addEventListener("click",     this.handleEvent, true);
+				win.document.addEventListener("mouseover", this.handleEvent, true);
+				win.document.addEventListener("mousemove", this.handleEvent, true);
+				win.document.addEventListener("mouseout",  this.handleEvent, true);
+				win.document.addEventListener("click",     this.handleEvent, true);
 			}
 			if ( this.enabled ) {
 				var estyle = "* { cursor: crosshair; }\n"
 				           + "#scrapbook-eraser-tooltip { -moz-appearance: tooltip;"
 				           + " position: absolute; z-index: 10000; margin-top: 32px; padding: 2px 3px; max-width: 40em;"
 				           + " border: 1px solid InfoText; background-color: InfoBackground; color: InfoText; font: message-box; }";
-				sbPageEditor.applyStyle(sbContentSaver.frameList[i], "scrapbook-eraser-style", estyle);
-			} else {
-				sbPageEditor.removeStyle(sbContentSaver.frameList[i], "scrapbook-eraser-style");
+				sbPageEditor.applyStyle(win, "scrapbook-eraser-style", estyle);
 			}
-		}
+			else {
+				sbPageEditor.removeStyle(win, "scrapbook-eraser-style");
+			}
+		}, this);
 	},
 
 	handleEvent : function(aEvent)
@@ -648,7 +578,7 @@ var sbDOMEraser = {
 			sbDOMEraser._clearOutline(elem);
 			if ( aEvent.type == "click" )
 			{
-				sbPageEditor.allowUndo();
+				sbPageEditor.allowUndo(elem.ownerDocument);
 				if ( aEvent.shiftKey || aEvent.button == 2 )
 				{
 					sbDOMEraser.isolateNode(elem);
@@ -772,13 +702,14 @@ var sbAnnotationService = {
 	{
 		var win = sbCommonUtils.getFocusedWindow();
 		if ( win.document.body instanceof HTMLFrameSetElement ) win = win.frames[0];
-		sbPageEditor.allowUndo();
+		sbPageEditor.allowUndo(win.document);
 		var targetNode;
 		if ( aPreset ) {
 			targetNode = aPreset[0];
-		} else {
-			var sel = win.getSelection().QueryInterface(Components.interfaces.nsISelectionPrivate);
-			targetNode = sel.toString() ? sel.anchorNode : win.document.body;
+		}
+		else {
+			var sel = sbPageEditor.getSelection(win);
+			targetNode = sel ? sel.anchorNode : win.document.body;
 		}
 		if ( targetNode instanceof Text ) targetNode = targetNode.parentNode;
 		if ( targetNode instanceof HTMLAnchorElement ) targetNode = targetNode.parentNode;
@@ -811,7 +742,7 @@ var sbAnnotationService = {
 
 	editSticky : function(oldElem)
 	{
-		sbPageEditor.allowUndo();
+		sbPageEditor.allowUndo(oldElem.ownerDocument);
 		this._editSticky(oldElem);
 	},
 
@@ -917,19 +848,21 @@ var sbAnnotationService = {
 
 	addInline : function()
 	{
-		var sel = sbPageEditor.getSelection();
+		var win = sbCommonUtils.getFocusedWindow();
+		var sel = sbPageEditor.getSelection(win);
 		if ( !sel ) return;
-		sbPageEditor.allowUndo();
+		sbPageEditor.allowUndo(win.document);
 		var ret = {};
 		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("overlay", "EDIT_INLINE", [sbCommonUtils.crop(sel.toString(), 32)]), ret, null, {}) ) return;
 		if ( !ret.value ) return;
 		var attr = { style : "border-bottom: 2px dotted #FF3333; cursor: help;", "data-sb-obj" : "inline" , class : "scrapbook-inline", title : ret.value };
-		sbHighlighter.set(sbPageEditor.focusedWindow, sel, "span", attr);
+		sbHighlighter.set(win, sel, "span", attr);
 	},
 
 	editInline : function(aElement)
 	{
-		sbPageEditor.allowUndo();
+		var win = sbCommonUtils.getFocusedWindow();
+		sbPageEditor.allowUndo(win.document);
 		var ret = { value : aElement.getAttribute("title") };
 		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("overlay", "EDIT_INLINE", [sbCommonUtils.crop(aElement.textContent, 32)]), ret, null, {}) ) return;
 		if ( ret.value )
@@ -941,9 +874,9 @@ var sbAnnotationService = {
 
 	attach : function(aFlag, aLabel)
 	{
-		var sel = sbPageEditor.getSelection();
+		var win = sbCommonUtils.getFocusedWindow();
+		var sel = sbPageEditor.getSelection(win);
 		if ( !sel ) return;
-		sbPageEditor.allowUndo();
 		var attr = {};
 		if ( aFlag == "L" )
 		{
@@ -974,7 +907,8 @@ var sbAnnotationService = {
 			attr["title"] = FP.file.leafName;
 			attr["data-sb-obj"] = "link-file";
 		}
-		sbHighlighter.set(sbPageEditor.focusedWindow, sel, "a", attr);
+		sbPageEditor.allowUndo(win.document);
+		sbHighlighter.set(win, sel, "a", attr);
 	},
 
 };
@@ -1029,13 +963,12 @@ var sbInfoViewer = {
 
 	toggleIndicator : function(willEnable)
 	{
-		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
-		{
+		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			if ( willEnable )
-				this.indicateLinks(sbContentSaver.frameList[i]);
+				this.indicateLinks(win);
 			else
-				sbPageEditor.removeStyle(sbContentSaver.frameList[i], "scrapbook-indicator-style");
-		}
+				sbPageEditor.removeStyle(win, "scrapbook-indicator-style");
+		}, this);
 	},
 
 	indicateLinks : function(aWindow)
