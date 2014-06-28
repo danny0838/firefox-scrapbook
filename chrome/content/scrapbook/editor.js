@@ -7,12 +7,12 @@ var sbPageEditor = {
 	item : {},
 	multiline : false,
 	focusedWindow : null,
+	propertyChanged : false,
 
 	documentDataArray : {
 		document : [],
 		histories : [],
 		changed1 : [],
-		changed2 : [],
 	},
 
 	init : function(aID)
@@ -110,6 +110,7 @@ var sbPageEditor = {
 		var restoredComment = sbCommonUtils.SESSION.getTabValue(gBrowser.mCurrentTab, "scrapbook-comment");
 		if (restoredComment)
 			document.getElementById("ScrapBookEditComment").value = restoredComment;
+		this.propertyChanged = false;
 	},
 
 	handleEvent : function(aEvent)
@@ -166,7 +167,7 @@ var sbPageEditor = {
 	onInputComment: function(aValue)
 	{
 		sbCommonUtils.SESSION.setTabValue(gBrowser.mCurrentTab, "scrapbook-comment", aValue);
-		this._dataChanged2(true);
+		this.propertyChanged = true;
 	},
 
 	getSelection : function()
@@ -292,7 +293,7 @@ var sbPageEditor = {
 		if ( !sel ) return;
 		aElement.value = sbCommonUtils.crop(sel.toString().replace(/[\r\n\t\s]+/g, " "), 100);
 		sel.removeAllRanges();
-		this._dataChanged2(true);
+		this.propertyChanged = true;
 	},
 
 	restore : function()
@@ -336,7 +337,7 @@ var sbPageEditor = {
 
 	confirmSave : function()
 	{
-		if ( this._dataChanged2() ) this.saveResource();
+		if ( this.propertyChanged ) this.saveResource();
 		if ( !this._dataChanged1() ) return 0;
 		var button = sbCommonUtils.PROMPT.BUTTON_TITLE_SAVE      * sbCommonUtils.PROMPT.BUTTON_POS_0
 		           + sbCommonUtils.PROMPT.BUTTON_TITLE_DONT_SAVE * sbCommonUtils.PROMPT.BUTTON_POS_1;
@@ -414,7 +415,7 @@ var sbPageEditor = {
 			sbCommonUtils.SESSION.setTabValue(gBrowser.mCurrentTab, "scrapbook-comment", aValue);
 			sbCommonUtils.SESSION.deleteTabValue(gBrowser.mCurrentTab, "scrapbook-comment");
 		}
-		this._dataChanged2(false);
+		this.propertyChanged = false;
 	},
 
 	disableTemporary : function(msec)
@@ -492,10 +493,6 @@ var sbPageEditor = {
 		return this._documentData( sbCommonUtils.getFocusedWindow().document, "changed1", aNewValue );
 	},
 
-	_dataChanged2 : function(aNewValue) {
-		return this._documentData( sbCommonUtils.getFocusedWindow().document, "changed2", aNewValue );
-	},
-
 	_documentData : function(aDocument, aKey, aNewValue)
 	{
 		var hash = this.documentDataArray;
@@ -517,7 +514,6 @@ var sbPageEditor = {
 			hash.document[idx] = aDocument;
 			hash.histories[idx] = [];
 			hash.changed1[idx] = false;
-			hash.changed2[idx] = false;
 		}
 		// if given a new value, set it
 		if (aNewValue !== undefined) {
