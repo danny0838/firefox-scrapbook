@@ -179,9 +179,10 @@ var sbPageEditor = {
 
 	cutter : function()
 	{
-		var sel = this.getSelection();
+		var doc = sbCommonUtils.getFocusedWindow().document;
+		var sel = this.getSelection(doc);
 		if ( !sel ) return;
-		this.allowUndo();
+		this.allowUndo(doc);
 		sel.deleteFromDocument();
 	},
 
@@ -192,23 +193,25 @@ var sbPageEditor = {
 		var attr = {};
 		attr["style"] = sbCommonUtils.getPref("highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);	//DropDownList
 		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighterPreview"), attr["style"]);	//DropDownList
-		var sel = this.getSelection();
+		var win = sbCommonUtils.getFocusedWindow();
+		var sel = this.getSelection(win);
 		if ( !sel ) return;
-		this.allowUndo();
+		this.allowUndo(win.document);
 		attr["data-sb-obj"] = "linemarker";
 		attr["class"] = "linemarker-marked-line";
-		sbHighlighter.set(this.focusedWindow, sel, "span", attr);
+		sbHighlighter.set(win, sel, "span", attr);
 	},
 
 	removeSbObjectsSelected : function()
 	{
-		var sel = this.getSelection();
+		var win = sbCommonUtils.getFocusedWindow();
+		var sel = this.getSelection(win);
 		if ( !sel ) return;
-		this.allowUndo();
+		this.allowUndo(win.document);
 		var selRange  = sel.getRangeAt(0);
 		var node = selRange.startContainer;
 		if ( node.nodeName == "#text" ) node = node.parentNode;
-		var nodeRange = window.content.document.createRange();
+		var nodeRange = win.document.createRange();
 		var nodeToDel = [];
 		traceTree : while ( true )
 		{
@@ -233,9 +236,10 @@ var sbPageEditor = {
 
 	removeSbObjects : function()
 	{
-		this.allowUndo();
 		sbContentSaver.flattenFrames(window.content).forEach(function(win) {
-			var elems = win.document.getElementsByTagName("*");
+			var doc = win.document;
+			this.allowUndo(doc);
+			var elems = doc.getElementsByTagName("*");
 			for ( var i = 0; i < elems.length; i++ ) {
 				if ( sbCommonUtils.getSbObjectType(elems[i]) ) {
 					// elems gets shortened when elems[i] is removed, minus i afterwards to prevent skipping
@@ -248,9 +252,10 @@ var sbPageEditor = {
 
 	removeElementsByTagName : function(aTagName)
 	{
-		this.allowUndo();
 		sbContentSaver.flattenFrames(window.content).forEach(function(win) {
-			var elems = win.document.getElementsByTagName(aTagName), todo = [];
+			var doc = win.document;
+			this.allowUndo(doc);
+			var elems = doc.getElementsByTagName(aTagName), todo = [];
 			for ( var i = 0; i < elems.length; i++ ) {
 				sbContentSaver.removeNodeFromParent(elems[i]);
 			}
@@ -282,7 +287,8 @@ var sbPageEditor = {
 
 	selection2Title : function(aElement)
 	{
-		var sel = this.getSelection();
+		var win = sbCommonUtils.getFocusedWindow();
+		var sel = this.getSelection(win);
 		if ( !sel ) return;
 		aElement.value = sbCommonUtils.crop(sel.toString().replace(/[\r\n\t\s]+/g, " "), 100);
 		sel.removeAllRanges();
@@ -569,7 +575,7 @@ var sbDOMEraser = {
 			sbDOMEraser._clearOutline(elem);
 			if ( aEvent.type == "click" )
 			{
-				sbPageEditor.allowUndo();
+				sbPageEditor.allowUndo(elem.ownerDocument);
 				if ( aEvent.shiftKey || aEvent.button == 2 )
 				{
 					sbDOMEraser.isolateNode(elem);
@@ -693,13 +699,14 @@ var sbAnnotationService = {
 	{
 		var win = sbCommonUtils.getFocusedWindow();
 		if ( win.document.body instanceof HTMLFrameSetElement ) win = win.frames[0];
-		sbPageEditor.allowUndo();
+		sbPageEditor.allowUndo(win.document);
 		var targetNode;
 		if ( aPreset ) {
 			targetNode = aPreset[0];
-		} else {
-			var sel = win.getSelection().QueryInterface(Components.interfaces.nsISelectionPrivate);
-			targetNode = sel.toString() ? sel.anchorNode : win.document.body;
+		}
+		else {
+			var sel = sbPageEditor.getSelection(win);
+			targetNode = sel ? sel.anchorNode : win.document.body;
 		}
 		if ( targetNode instanceof Text ) targetNode = targetNode.parentNode;
 		if ( targetNode instanceof HTMLAnchorElement ) targetNode = targetNode.parentNode;
@@ -732,7 +739,7 @@ var sbAnnotationService = {
 
 	editSticky : function(oldElem)
 	{
-		sbPageEditor.allowUndo();
+		sbPageEditor.allowUndo(oldElem.ownerDocument);
 		this._editSticky(oldElem);
 	},
 
@@ -838,19 +845,21 @@ var sbAnnotationService = {
 
 	addInline : function()
 	{
-		var sel = sbPageEditor.getSelection();
+		var win = sbCommonUtils.getFocusedWindow();
+		var sel = sbPageEditor.getSelection(win);
 		if ( !sel ) return;
-		sbPageEditor.allowUndo();
+		sbPageEditor.allowUndo(win.document);
 		var ret = {};
 		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("overlay", "EDIT_INLINE", [sbCommonUtils.crop(sel.toString(), 32)]), ret, null, {}) ) return;
 		if ( !ret.value ) return;
 		var attr = { style : "border-bottom: 2px dotted #FF3333; cursor: help;", "data-sb-obj" : "inline" , class : "scrapbook-inline", title : ret.value };
-		sbHighlighter.set(sbPageEditor.focusedWindow, sel, "span", attr);
+		sbHighlighter.set(win, sel, "span", attr);
 	},
 
 	editInline : function(aElement)
 	{
-		sbPageEditor.allowUndo();
+		var win = sbCommonUtils.getFocusedWindow();
+		sbPageEditor.allowUndo(win.document);
 		var ret = { value : aElement.getAttribute("title") };
 		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("overlay", "EDIT_INLINE", [sbCommonUtils.crop(aElement.textContent, 32)]), ret, null, {}) ) return;
 		if ( ret.value )
@@ -862,9 +871,9 @@ var sbAnnotationService = {
 
 	attach : function(aFlag, aLabel)
 	{
-		var sel = sbPageEditor.getSelection();
+		var win = sbCommonUtils.getFocusedWindow();
+		var sel = sbPageEditor.getSelection(win);
 		if ( !sel ) return;
-		sbPageEditor.allowUndo();
 		var attr = {};
 		if ( aFlag == "L" )
 		{
@@ -895,7 +904,8 @@ var sbAnnotationService = {
 			attr["title"] = FP.file.leafName;
 			attr["data-sb-obj"] = "link-file";
 		}
-		sbHighlighter.set(sbPageEditor.focusedWindow, sel, "a", attr);
+		sbPageEditor.allowUndo(win.document);
+		sbHighlighter.set(win, sel, "a", attr);
 	},
 
 };
