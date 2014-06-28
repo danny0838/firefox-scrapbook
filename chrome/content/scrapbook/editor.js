@@ -90,17 +90,15 @@ var sbPageEditor = {
 			gBrowser.selectedTab.setAttribute("image", this.item.icon);
 		}
 		sbDOMEraser.init(0);
-		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
-		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
-		{
-			try { sbContentSaver.frameList[i].document.removeEventListener("mousedown", sbAnnotationService.handleEvent, true); } catch(ex) {}
-			try { sbContentSaver.frameList[i].document.removeEventListener("click", sbAnnotationService.handleEvent, true); } catch(ex) {}
-			try { sbContentSaver.frameList[i].document.removeEventListener("keypress", this.handleEvent, true); } catch(ex) {}
-			sbContentSaver.frameList[i].document.addEventListener("mousedown",    sbAnnotationService.handleEvent, true);
-			sbContentSaver.frameList[i].document.addEventListener("click",    sbAnnotationService.handleEvent, true);
-			sbContentSaver.frameList[i].document.addEventListener("keypress",    this.handleEvent, true);
-			if ( aID && document.getElementById("ScrapBookStatusPopupD").getAttribute("checked") ) sbInfoViewer.indicateLinks(sbContentSaver.frameList[i]);
-		}
+		sbContentSaver.flattenFrames(window.content).forEach(function(win) {
+			try { win.document.removeEventListener("mousedown", sbAnnotationService.handleEvent, true); } catch(ex) {}
+			try { win.document.removeEventListener("click", sbAnnotationService.handleEvent, true); } catch(ex) {}
+			try { win.document.removeEventListener("keypress", this.handleEvent, true); } catch(ex) {}
+			win.document.addEventListener("mousedown", sbAnnotationService.handleEvent, true);
+			win.document.addEventListener("click", sbAnnotationService.handleEvent, true);
+			win.document.addEventListener("keypress", this.handleEvent, true);
+			if ( aID && document.getElementById("ScrapBookStatusPopupD").getAttribute("checked") ) sbInfoViewer.indicateLinks(win);
+		}, this);
 		if ( aID )
 		{
 			try {
@@ -242,35 +240,27 @@ var sbPageEditor = {
 	removeSbObjects : function()
 	{
 		this.allowUndo();
-		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
-		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
-		{
-			var elems = sbContentSaver.frameList[i].document.getElementsByTagName("*");
-			for ( var j = 0; j < elems.length; j++ )
-			{
-				if ( sbCommonUtils.getSbObjectType(elems[j]) )
-				{
-					// elems gets shortened when elems[j] is removed, minus j afterwards to prevent skipping
-					this.removeSbObj(elems[j]);
-					j--;
+		sbContentSaver.flattenFrames(window.content).forEach(function(win) {
+			var elems = win.document.getElementsByTagName("*");
+			for ( var i = 0; i < elems.length; i++ ) {
+				if ( sbCommonUtils.getSbObjectType(elems[i]) ) {
+					// elems gets shortened when elems[i] is removed, minus i afterwards to prevent skipping
+					this.removeSbObj(elems[i]);
+					i--;
 				}
 			}
-		}
+		}, this);
 	},
 
 	removeElementsByTagName : function(aTagName)
 	{
 		this.allowUndo();
-		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
-		for ( var i = sbContentSaver.frameList.length - 1; i >= 0; i-- )
-		{
-			var elems = sbContentSaver.frameList[i].document.getElementsByTagName(aTagName);
-			if ( elems.length < 1 ) continue;
-			for ( var j = elems.length - 1; j >= 0; j-- )
-			{
-				sbContentSaver.removeNodeFromParent(elems[j]);
+		sbContentSaver.flattenFrames(window.content).forEach(function(win) {
+			var elems = win.document.getElementsByTagName(aTagName), todo = [];
+			for ( var i = 0; i < elems.length; i++ ) {
+				sbContentSaver.removeNodeFromParent(elems[i]);
 			}
-		}
+		}, this);
 	},
 
 	removeSbObj : function(aNode)
@@ -363,11 +353,9 @@ var sbPageEditor = {
 			this.saveResource();
 		} else {
 			sbDOMEraser.init(2);
-			sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
-			for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
-			{
-				this.saveAllSticky(sbContentSaver.frameList[i]);
-			}
+			sbContentSaver.flattenFrames(window.content).forEach(function(win) {
+				this.saveAllSticky(win);
+			}, this);
 			var ret = sbBrowserOverlay.execCapture(0, null, !aBypassDialog, "urn:scrapbook:root");
 			if ( ret ) this.exit(true);
 		}
@@ -382,17 +370,14 @@ var sbPageEditor = {
 			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SAVE_FILE", [RegExp.$2]));
 			return;
 		}
-		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
 		this.disable(true);
 		sbDOMEraser.init(2);
-		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
-		{
-			this.saveAllSticky(sbContentSaver.frameList[i]);
-			var doc = sbContentSaver.frameList[i].document;
-			if ( doc.contentType != "text/html" )
-			{
+		sbContentSaver.flattenFrames(window.content).forEach(function(win) {
+			this.saveAllSticky(win);
+			var doc = win.document;
+			if ( doc.contentType != "text/html" ) {
 			    alert(sbCommonUtils.lang("scrapbook", "MSG_CANT_MODIFY", [doc.contentType]));
-				continue;
+				return;
 			}
 			var charset = doc.characterSet;
 			if (charset != "UTF-8") {
@@ -403,7 +388,7 @@ var sbPageEditor = {
 			var file = sbCommonUtils.getContentDir(this.item.id).clone();
 			file.append(sbCommonUtils.getFileName(doc.location.href));
 			sbCommonUtils.writeFile(file, src, charset);
-		}
+		}, this);
 		this._dataChanged1(false);
 		window.setTimeout(function() { window.content.stop(); sbPageEditor.disable(false); }, 500);
 	},
@@ -577,29 +562,28 @@ var sbDOMEraser = {
 		document.getElementById("ScrapBookHighlighter6").disabled = this.enabled;
 		document.getElementById("ScrapBookEditAnnotation").disabled = this.enabled;
 		document.getElementById("ScrapBookEditCutter").disabled  = this.enabled;
-		sbContentSaver.frameList = sbContentSaver.flattenFrames(window.content);
-		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
-		{
-			sbContentSaver.frameList[i].document.removeEventListener("mouseover", this.handleEvent, true);
-			sbContentSaver.frameList[i].document.removeEventListener("mousemove", this.handleEvent, true);
-			sbContentSaver.frameList[i].document.removeEventListener("mouseout",  this.handleEvent, true);
-			sbContentSaver.frameList[i].document.removeEventListener("click",     this.handleEvent, true);
+		sbContentSaver.flattenFrames(window.content).forEach(function(win) {
+			win.document.removeEventListener("mouseover", this.handleEvent, true);
+			win.document.removeEventListener("mousemove", this.handleEvent, true);
+			win.document.removeEventListener("mouseout",  this.handleEvent, true);
+			win.document.removeEventListener("click",     this.handleEvent, true);
 			if ( this.enabled ) {
-				sbContentSaver.frameList[i].document.addEventListener("mouseover", this.handleEvent, true);
-				sbContentSaver.frameList[i].document.addEventListener("mousemove", this.handleEvent, true);
-				sbContentSaver.frameList[i].document.addEventListener("mouseout",  this.handleEvent, true);
-				sbContentSaver.frameList[i].document.addEventListener("click",     this.handleEvent, true);
+				win.document.addEventListener("mouseover", this.handleEvent, true);
+				win.document.addEventListener("mousemove", this.handleEvent, true);
+				win.document.addEventListener("mouseout",  this.handleEvent, true);
+				win.document.addEventListener("click",     this.handleEvent, true);
 			}
 			if ( this.enabled ) {
 				var estyle = "* { cursor: crosshair; }\n"
 				           + "#scrapbook-eraser-tooltip { -moz-appearance: tooltip;"
 				           + " position: absolute; z-index: 10000; margin-top: 32px; padding: 2px 3px; max-width: 40em;"
 				           + " border: 1px solid InfoText; background-color: InfoBackground; color: InfoText; font: message-box; }";
-				sbPageEditor.applyStyle(sbContentSaver.frameList[i], "scrapbook-eraser-style", estyle);
-			} else {
-				sbPageEditor.removeStyle(sbContentSaver.frameList[i], "scrapbook-eraser-style");
+				sbPageEditor.applyStyle(win, "scrapbook-eraser-style", estyle);
 			}
-		}
+			else {
+				sbPageEditor.removeStyle(win, "scrapbook-eraser-style");
+			}
+		}, this);
 	},
 
 	handleEvent : function(aEvent)
@@ -1022,13 +1006,12 @@ var sbInfoViewer = {
 
 	toggleIndicator : function(willEnable)
 	{
-		for ( var i = 0; i < sbContentSaver.frameList.length; i++ )
-		{
+		sbContentSaver.flattenFrames(window.content).forEach(function(win) {
 			if ( willEnable )
-				this.indicateLinks(sbContentSaver.frameList[i]);
+				this.indicateLinks(win);
 			else
-				sbPageEditor.removeStyle(sbContentSaver.frameList[i], "scrapbook-indicator-style");
-		}
+				sbPageEditor.removeStyle(win, "scrapbook-indicator-style");
+		}, this);
 	},
 
 	indicateLinks : function(aWindow)
