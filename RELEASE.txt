@@ -1,3 +1,10 @@
+Scrapbook X 1.11.12
+----------------
+
+- FIXED: Several preference change do not take effect immediately.
+- FIXED: Minor internal code fix.
+
+
 Scrapbook X 1.11.11
 ----------------
 
