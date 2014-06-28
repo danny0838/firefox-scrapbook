@@ -85,6 +85,7 @@ var sbPageEditor = {
 	{
 		if ( aEvent.type == "keypress" )
 		{
+			if ( sbHtmlEditor.isEditable(aEvent.originalTarget.ownerDocument.body) ) return;
 			if ( aEvent.altKey || aEvent.shiftKey || aEvent.ctrlKey || aEvent.metaKey ) return;
 			var idx = 0;
 			switch ( aEvent.charCode )
@@ -470,6 +471,8 @@ var sbPageEditor = {
 				sbContentSaver.removeNodeFromParent(node);
 			}
 		}
+		// revert editable state
+		sbHtmlEditor.revertEditable(aDoc.body);
 	},
 
 	documentAfterSave : function(aDoc)
@@ -478,6 +481,77 @@ var sbPageEditor = {
 	},
 };
 
+
+
+var sbHtmlEditor = {
+
+	smart : function()
+	{
+		this.switchBodyEditable();
+	},
+
+	switchBodyEditable : function()
+	{
+		var body = sbCommonUtils.getFocusedWindow().document.body;
+		this.setEditable(body);
+	},
+
+	isEditable : function(aBody)
+	{
+		return aBody.hasAttribute("contentEditable");
+	},
+
+	setEditable : function(aBody, aState)
+	{
+		// backup the original state if not recorded
+		if ( !aBody.hasAttribute("data-sb-old-contentEditable") ) {
+			aBody.setAttribute("data-sb-old-contentEditable", aBody.hasAttribute("contentEditable") || "");
+		}
+		// if no define, auto-detect
+		if ( aState === undefined ) {
+			if ( aBody.hasAttribute("contentEditable") ) {
+				sbPageEditor.allowUndo(aBody.ownerDocument);
+				aBody.removeAttribute("contentEditable");
+				document.getElementById("ScrapBookEditHTMLSwitch").removeAttribute("checked");
+			}
+			else {
+				sbPageEditor.allowUndo(aBody.ownerDocument);
+				aBody.setAttribute("contentEditable", true);
+				document.getElementById("ScrapBookEditHTMLSwitch").setAttribute("checked", true);
+			}
+		}
+		// force turn off
+		else if ( aState == false ) {
+			if ( aBody.hasAttribute("contentEditable") ) {
+				sbPageEditor.allowUndo(aBody.ownerDocument);
+				aBody.removeAttribute("contentEditable");
+				document.getElementById("ScrapBookEditHTMLSwitch").removeAttribute("checked");
+			}
+		}
+		// force turn on
+		else {
+			if ( !aBody.hasAttribute("contentEditable") ) {
+				sbPageEditor.allowUndo(aBody.ownerDocument);
+				aBody.setAttribute("contentEditable", true);
+				document.getElementById("ScrapBookEditHTMLSwitch").setAttribute("checked", true);
+			}
+		}
+	},
+
+	revertEditable : function(aBody)
+	{
+		if ( aBody.hasAttribute("data-sb-old-contentEditable") ) {
+			sbPageEditor.allowUndo(aBody.ownerDocument);
+			var val = aBody.getAttribute("data-sb-old-contentEditable");
+			if (val) aBody.setAttribute("contentEditable", true);
+			else aBody.removeAttribute("contentEditable");
+			aBody.removeAttribute("data-sb-old-contentEditable");
+			return true;
+		}
+		return false;
+	},
+	
+};
 
 
 
@@ -497,6 +571,7 @@ var sbDOMEraser = {
 		document.getElementById("ScrapBookEditEraser").checked = this.enabled;
 		document.getElementById("ScrapBookHighlighter").disabled = this.enabled;
 		document.getElementById("ScrapBookEditAnnotation").disabled = this.enabled;
+		document.getElementById("ScrapBookEditHTML").disabled  = this.enabled;
 		document.getElementById("ScrapBookEditCutter").disabled  = this.enabled;
 		if (sbDOMEraser.lastTarget) {
 			sbDOMEraser._clearOutline(sbDOMEraser.lastTarget);
