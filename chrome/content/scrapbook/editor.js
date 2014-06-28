@@ -861,8 +861,8 @@ var sbAnnotationService = {
 
 	editInline : function(aElement)
 	{
-		var win = sbCommonUtils.getFocusedWindow();
-		sbPageEditor.allowUndo(win.document);
+		var doc = aElement.ownerDocument;
+		sbPageEditor.allowUndo(doc);
 		var ret = { value : aElement.getAttribute("title") };
 		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("overlay", "EDIT_INLINE", [sbCommonUtils.crop(aElement.textContent, 32)]), ret, null, {}) ) return;
 		if ( ret.value )
