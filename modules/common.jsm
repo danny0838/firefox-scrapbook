@@ -1,6 +1,8 @@
 var sbCommonUtils = {
 
 	_stringBundles : [],
+	_documentArray : [],
+	_documentDataArray : [],
 
 	get namespace() { return "http://amb.vis.ne.jp/mozilla/scrapbook-rdf#"; },
 
@@ -715,6 +717,57 @@ var sbCommonUtils = {
 		return false;
 	},
 
+	/**
+	 * Data Store
+	 */
+	_getDocumentIndex : function(aDocument)
+	{
+		// try to lookup the index of the specific document
+		var idx = false;
+		var firstEmptyIdx = false;
+		for (var i=0, len=this._documentArray.length; i<len ; i++) {
+			if (this.isDeadObject(this._documentArray[i])) {
+				if (firstEmptyIdx === false) firstEmptyIdx = i;
+				continue;
+			}
+			if (this._documentArray[i] == aDocument) {
+				idx = i;
+				break;
+			}
+		}
+		// if the document is not in index, add one
+		// if there is an index left empty, use it
+		if (idx === false) {
+			idx = (firstEmptyIdx !== false) ? firstEmptyIdx : this._documentArray.length;
+			this._documentArray[idx] = aDocument;
+			this._documentDataArray[idx] = {};
+		}
+		return idx;
+	},
+
+	documentData : function(aDocument, aKey, aValue)
+	{
+		var idx = this._getDocumentIndex(aDocument);
+		// if given a new value, set it
+		if (aValue !== undefined) {
+			this._documentDataArray[idx][aKey] = aValue;
+			return;
+		}
+		// else return the current value
+		return this._documentDataArray[idx][aKey];
+	},
+
+	// check if an object is dead (eg. window/document closed)
+	isDeadObject : function(aObject)
+	{
+		try {
+			var x = aObject.body;
+		}
+		catch(ex) {
+			return true;
+		}
+		return false;
+	},
 };
 
 var EXPORTED_SYMBOLS = ["sbCommonUtils"];
