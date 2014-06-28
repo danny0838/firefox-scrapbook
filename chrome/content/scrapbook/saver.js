@@ -12,23 +12,12 @@ var sbContentSaver = {
 	plusoption   : {},
 	refURLObj    : null,
 	favicon      : null,
-	frameList    : [],
 	frames      : [],
 	isMainFrame  : true,
 	selection    : null,
 	linkURLs     : [],
 
 
-
-	flattenFrames : function(aWindow)
-	{
-		var ret = [aWindow];
-		for ( var i = 0; i < aWindow.frames.length; i++ )
-		{
-			ret = ret.concat(this.flattenFrames(aWindow.frames[i]));
-		}
-		return ret;
-	},
 
 	init : function(aPresetData)
 	{
@@ -39,7 +28,6 @@ var sbContentSaver = {
 		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "styles" : true, "script" : false, "textAsHtml" : false, "forceUtf8" : true };
 		this.plusoption = { "method" : "SB", "timeout" : "0", "charset" : "UTF-8" }
 		this.linkURLs = [];
-		this.frameList = [];
 		this.frames = [];
 		this.isMainFrame = true;
 		if ( aPresetData )
@@ -63,7 +51,6 @@ var sbContentSaver = {
 		{
 			this.item.icon = gBrowser.mCurrentBrowser.mIconURL;
 		}
-		this.frameList = this.flattenFrames(aRootWindow);
 		var titles = aRootWindow.document.title ? [aRootWindow.document.title] : [decodeURI(this.item.source)];
 		if ( aTitle ) titles[0] = aTitle;
 		if ( aIsPartial )

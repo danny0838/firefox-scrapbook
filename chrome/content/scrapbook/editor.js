@@ -82,7 +82,7 @@ var sbPageEditor = {
 			gBrowser.selectedTab.setAttribute("image", this.item.icon);
 		}
 		sbDOMEraser.init(0);
-		sbContentSaver.flattenFrames(window.content).forEach(function(win) {
+		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			try { win.document.removeEventListener("mousedown", sbAnnotationService.handleEvent, true); } catch(ex) {}
 			try { win.document.removeEventListener("click", sbAnnotationService.handleEvent, true); } catch(ex) {}
 			try { win.document.removeEventListener("keypress", this.handleEvent, true); } catch(ex) {}
@@ -233,7 +233,7 @@ var sbPageEditor = {
 
 	removeSbObjects : function()
 	{
-		sbContentSaver.flattenFrames(window.content).forEach(function(win) {
+		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			var doc = win.document;
 			this.allowUndo(doc);
 			var elems = doc.getElementsByTagName("*");
@@ -249,7 +249,7 @@ var sbPageEditor = {
 
 	removeElementsByTagName : function(aTagName)
 	{
-		sbContentSaver.flattenFrames(window.content).forEach(function(win) {
+		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			var doc = win.document;
 			this.allowUndo(doc);
 			var elems = doc.getElementsByTagName(aTagName), todo = [];
@@ -335,7 +335,7 @@ var sbPageEditor = {
 	{
 		if ( sbCommonUtils.documentData(window.content.document, "propertyChanged") ) this.saveResource();
 		var changed = false;
-		sbContentSaver.flattenFrames(window.content).forEach(function(win) {
+		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			if (sbCommonUtils.documentData(win.document, "changed")) changed = true;
 		}, this);
 		if ( !changed ) return 0;
@@ -355,7 +355,7 @@ var sbPageEditor = {
 		}
 		else {
 			sbDOMEraser.init(2);
-			sbContentSaver.flattenFrames(window.content).forEach(function(win) {
+			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 				this.clearArbitrary(win.document);
 			}, this);
 			var ret = sbBrowserOverlay.execCapture(0, null, !aBypassDialog, "urn:scrapbook:root");
@@ -374,7 +374,7 @@ var sbPageEditor = {
 		}
 		this.disable(true);
 		sbDOMEraser.init(2);
-		sbContentSaver.flattenFrames(window.content).forEach(function(win) {
+		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			var doc = win.document;
 			if ( doc.contentType != "text/html" ) {
 			    alert(sbCommonUtils.lang("scrapbook", "MSG_CANT_MODIFY", [doc.contentType]));
@@ -515,7 +515,7 @@ var sbDOMEraser = {
 		document.getElementById("ScrapBookHighlighter6").disabled = this.enabled;
 		document.getElementById("ScrapBookEditAnnotation").disabled = this.enabled;
 		document.getElementById("ScrapBookEditCutter").disabled  = this.enabled;
-		sbContentSaver.flattenFrames(window.content).forEach(function(win) {
+		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			win.document.removeEventListener("mouseover", this.handleEvent, true);
 			win.document.removeEventListener("mousemove", this.handleEvent, true);
 			win.document.removeEventListener("mouseout",  this.handleEvent, true);
@@ -963,7 +963,7 @@ var sbInfoViewer = {
 
 	toggleIndicator : function(willEnable)
 	{
-		sbContentSaver.flattenFrames(window.content).forEach(function(win) {
+		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			if ( willEnable )
 				this.indicateLinks(win);
 			else

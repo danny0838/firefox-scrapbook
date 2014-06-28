@@ -614,31 +614,17 @@ var sbCacheSource = {
 var sbKeywordHighlighter = {
 
 	word : "",
-	frameList : [],
 	searchRange : null,
 	startPoint : null,
 	endPoint : null,
-
-	flattenFrames : function(aWindow)
-	{
-		var ret = [aWindow];
-		for ( var i = 0; i < aWindow.frames.length; i++ )
-		{
-			ret = ret.concat(this.flattenFrames(aWindow.frames[i]));
-		}
-		return ret;
-	},
 
 	exec : function(color, word)
 	{
 		this.word = word;
 
 		var rootWin = document.getElementById("sbBrowser").contentWindow;
-		this.frameList = this.flattenFrames(rootWin);
-
-		for ( var i = 0; i < this.frameList.length; i++ )
-		{
-			var doc = this.frameList[i].document;
+		sbCommonUtils.flattenFrames(rootWin).forEach(function(win) {
+			var doc = win.document;
 			var body = doc.body;
 			if ( !body ) return;
 
@@ -670,7 +656,7 @@ var sbKeywordHighlighter = {
 				this.startPoint.setStart(node, node.childNodes.length);
 				this.startPoint.setEnd(node, node.childNodes.length);
 			}
-		}
+		}, this);
 	},
 
 	highlightNode : function(range, node)
