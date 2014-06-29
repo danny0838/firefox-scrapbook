@@ -512,7 +512,7 @@ var sbTreeDNDHandler = {
 				sbTreeDNDHandler.importData(row, orient);
 			else
 				sbTreeDNDHandler.capture(XferData, row, orient);
-			sbController.rebuildLocal();
+			sbCommonUtils.rebuildGlobal();
 		},
 		onToggleOpenState    : function() {},
 		onCycleHeader        : function() {},

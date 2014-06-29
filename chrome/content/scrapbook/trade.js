@@ -509,7 +509,7 @@ var sbImportService = {
 		{
 			sbTradeService.refreshTree();
 			sbTradeService.lock(0);
-			window.top.sbController.rebuildLocal();
+			sbCommonUtils.rebuildGlobal();
 		}
 	},
 
