@@ -131,16 +131,10 @@ var sbPageEditor = {
 		}
 		else if ( aEvent.type == "beforeunload" )
 		{
-			// sbCommonUtils.getFocusedWindow() could be null in some situation
-			try {
-				// Save page requires variables in sbPageEditor and sbBrowserOverlay,
-				// which are loaded only when the user views the item.
-				// Currently we can only handle saving for the current tab.
-				if (aEvent.target == sbCommonUtils.getFocusedWindow().document) {
-					sbPageEditor.confirmSave();
-				}
-			}
-			catch(ex) {
+			if (sbPageEditor.checkModify()) {
+				// The message only work for Firefox 3.*
+				// Else it only fires a default prompt to confirm whether to exit
+				aEvent.returnValue = sbCommonUtils.lang("overlay", "EDIT_SAVE_CHANGES");
 			}
 		}
 	},
@@ -305,14 +299,15 @@ var sbPageEditor = {
 	restore : function()
 	{
 		window.sbBrowserOverlay.lastLocation = "";
+		// this will then fire the beforeunload event and enter the event handler
 		window.content.location.reload();
 	},
 
 	exit : function(forceExit)
 	{
-		if ( !forceExit && this.confirmSave() == 1 ) this.restore();
 		if ( sbDOMEraser.enabled ) sbDOMEraser.init(2);
 		this.showHide(false);
+		if ( !forceExit ) this.restore();
 	},
 
 	allowUndo : function(aDoc)
@@ -341,20 +336,14 @@ var sbPageEditor = {
 		return false;
 	},
 
-	confirmSave : function()
+	checkModify : function()
 	{
 		if ( sbCommonUtils.documentData(window.content.document, "propertyChanged") ) this.saveResource();
 		var changed = false;
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			if (sbCommonUtils.documentData(win.document, "changed")) changed = true;
 		}, this);
-		if ( !changed ) return 0;
-		var button = sbCommonUtils.PROMPT.BUTTON_TITLE_SAVE      * sbCommonUtils.PROMPT.BUTTON_POS_0
-		           + sbCommonUtils.PROMPT.BUTTON_TITLE_DONT_SAVE * sbCommonUtils.PROMPT.BUTTON_POS_1;
-		var text = sbCommonUtils.lang("overlay", "EDIT_SAVE_CHANGES", [sbCommonUtils.crop(this.item.title, 32)]);
-		var ret = sbCommonUtils.PROMPT.confirmEx(window, "[ScrapBook]", text, button, null, null, null, null, {});
-		if ( ret == 0 ) this.savePage();
-		return ret;
+		return changed;
 	},
 
 	saveOrCapture : function(aBypassDialog)
