@@ -70,6 +70,11 @@ var sbPageEditor = {
 			this.initEvent(win, 1);
 			this.documentBeforeEdit(win.document);
 		}, this);
+		if (this.item && this.item.type == "notex" && sbCommonUtils.getPref("edit.autoEditNoteX", true)) {
+			var _changed = sbCommonUtils.documentData(window.content.document, "changed");
+			sbHtmlEditor.init(window.content.document, 1);
+			if (!_changed) sbCommonUtils.documentData(window.content.document, "changed", false);
+		}
 	},
 
 	// aStateFlag
