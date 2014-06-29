@@ -85,7 +85,7 @@ var sbPageEditor = {
 	{
 		if ( aEvent.type == "keypress" )
 		{
-			if ( sbHtmlEditor.isEditable(aEvent.originalTarget.ownerDocument) ) return;
+			if ( aEvent.originalTarget.ownerDocument.designMode == "on" ) return;
 			if ( aEvent.altKey || aEvent.shiftKey || aEvent.ctrlKey || aEvent.metaKey ) return;
 			var idx = 0;
 			switch ( aEvent.charCode )
@@ -471,8 +471,6 @@ var sbPageEditor = {
 				sbContentSaver.removeNodeFromParent(node);
 			}
 		}
-		// revert editable state
-		sbHtmlEditor.revertEditable(aDoc);
 	},
 
 	documentAfterSave : function(aDoc)
@@ -496,65 +494,37 @@ var sbHtmlEditor = {
 		this.setEditable(doc);
 	},
 
-	isEditable : function(aDoc)
-	{
-		var body = aDoc.body;
-		if (!body) return false;
-		return body.hasAttribute("contentEditable");
-	},
-
 	setEditable : function(aDoc, aState)
 	{
-		var body = aDoc.body;
-		if (!body) return false;
-		// backup the original state if not recorded
-		if ( !body.hasAttribute("data-sb-old-contentEditable") ) {
-			body.setAttribute("data-sb-old-contentEditable", body.hasAttribute("contentEditable") || "");
-		}
 		// if no define, auto-detect
 		if ( aState === undefined ) {
-			if ( body.hasAttribute("contentEditable") ) {
+			if ( aDoc.designMode == "on" ) {
 				sbPageEditor.allowUndo(aDoc);
-				body.removeAttribute("contentEditable");
+				aDoc.designMode = "off";
 				document.getElementById("ScrapBookEditHTMLSwitch").removeAttribute("checked");
 			}
 			else {
 				sbPageEditor.allowUndo(aDoc);
-				body.setAttribute("contentEditable", true);
+				aDoc.designMode = "on";
 				document.getElementById("ScrapBookEditHTMLSwitch").setAttribute("checked", true);
 			}
 		}
 		// force turn off
 		else if ( aState == false ) {
-			if ( body.hasAttribute("contentEditable") ) {
+			if ( aDoc.designMode == "on" ) {
 				sbPageEditor.allowUndo(aDoc);
-				body.removeAttribute("contentEditable");
+				aDoc.designMode = "off";
 				document.getElementById("ScrapBookEditHTMLSwitch").removeAttribute("checked");
 			}
 		}
 		// force turn on
 		else {
-			if ( !body.hasAttribute("contentEditable") ) {
+			if ( aDoc.designMode != "on" ) {
 				sbPageEditor.allowUndo(aDoc);
-				body.setAttribute("contentEditable", true);
+				aDoc.designMode = "on";
 				document.getElementById("ScrapBookEditHTMLSwitch").setAttribute("checked", true);
 			}
 		}
-	},
-
-	revertEditable : function(aDoc)
-	{
-		var body = aDoc.body;
-		if (!body) return false;
-		if ( body.hasAttribute("data-sb-old-contentEditable") ) {
-			sbPageEditor.allowUndo(aDoc);
-			var val = body.getAttribute("data-sb-old-contentEditable");
-			if (val) body.setAttribute("contentEditable", true);
-			else body.removeAttribute("contentEditable");
-			body.removeAttribute("data-sb-old-contentEditable");
-			return true;
-		}
-		return false;
 	},
 	
 };
