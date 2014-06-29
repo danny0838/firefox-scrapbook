@@ -477,7 +477,7 @@ var sbTreeDNDHandler = {
 		},
 		onDrop: function(row, orient) {
 			var XferData, XferType;
-			if (!sbCommonUtils._fxVer3_5 &&
+			if (sbCommonUtils._fxVer3_5 &&
 			    (sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0) == "application/x-moz-tabbrowser-tab" ||
 				 sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0) == "sb/tradeitem"))
 			{
