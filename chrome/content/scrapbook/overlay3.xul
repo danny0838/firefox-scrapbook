@@ -149,7 +149,7 @@
 				</toolbarbutton>
 				<toolbarbutton id="ScrapBookEditHTML" type="menu-button" tooltiptext="&sb.edit.html;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbHtmlEditor.smart();">
 					<menupopup>
-						<menuitem id="ScrapBookEditHTMLSwitch" label="&sb.edit.html.edit;" type="checkbox" oncommand="sbHtmlEditor.switchBodyEditable();" />
+						<menuitem id="ScrapBookEditHTMLSwitch" label="&sb.edit.html.edit;" type="checkbox" oncommand="sbHtmlEditor.switchEditable();" />
 					</menupopup>
 				</toolbarbutton>
 				<toolbarbutton id="ScrapBookEditCutter" type="menu-button" tooltiptext="&sb.edit.cutter;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbPageEditor.cutter();">

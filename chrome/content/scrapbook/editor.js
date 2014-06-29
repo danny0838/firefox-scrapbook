@@ -85,7 +85,7 @@ var sbPageEditor = {
 	{
 		if ( aEvent.type == "keypress" )
 		{
-			if ( sbHtmlEditor.isEditable(aEvent.originalTarget.ownerDocument.body) ) return;
+			if ( sbHtmlEditor.isEditable(aEvent.originalTarget.ownerDocument) ) return;
 			if ( aEvent.altKey || aEvent.shiftKey || aEvent.ctrlKey || aEvent.metaKey ) return;
 			var idx = 0;
 			switch ( aEvent.charCode )
@@ -472,7 +472,7 @@ var sbPageEditor = {
 			}
 		}
 		// revert editable state
-		sbHtmlEditor.revertEditable(aDoc.body);
+		sbHtmlEditor.revertEditable(aDoc);
 	},
 
 	documentAfterSave : function(aDoc)
@@ -487,65 +487,71 @@ var sbHtmlEditor = {
 
 	smart : function()
 	{
-		this.switchBodyEditable();
+		this.switchEditable();
 	},
 
-	switchBodyEditable : function()
+	switchEditable : function()
 	{
-		var body = sbCommonUtils.getFocusedWindow().document.body;
-		this.setEditable(body);
+		var doc = sbCommonUtils.getFocusedWindow().document;
+		this.setEditable(doc);
 	},
 
-	isEditable : function(aBody)
+	isEditable : function(aDoc)
 	{
-		return aBody.hasAttribute("contentEditable");
+		var body = aDoc.body;
+		if (!body) return false;
+		return body.hasAttribute("contentEditable");
 	},
 
-	setEditable : function(aBody, aState)
+	setEditable : function(aDoc, aState)
 	{
+		var body = aDoc.body;
+		if (!body) return false;
 		// backup the original state if not recorded
-		if ( !aBody.hasAttribute("data-sb-old-contentEditable") ) {
-			aBody.setAttribute("data-sb-old-contentEditable", aBody.hasAttribute("contentEditable") || "");
+		if ( !body.hasAttribute("data-sb-old-contentEditable") ) {
+			body.setAttribute("data-sb-old-contentEditable", body.hasAttribute("contentEditable") || "");
 		}
 		// if no define, auto-detect
 		if ( aState === undefined ) {
-			if ( aBody.hasAttribute("contentEditable") ) {
-				sbPageEditor.allowUndo(aBody.ownerDocument);
-				aBody.removeAttribute("contentEditable");
+			if ( body.hasAttribute("contentEditable") ) {
+				sbPageEditor.allowUndo(aDoc);
+				body.removeAttribute("contentEditable");
 				document.getElementById("ScrapBookEditHTMLSwitch").removeAttribute("checked");
 			}
 			else {
-				sbPageEditor.allowUndo(aBody.ownerDocument);
-				aBody.setAttribute("contentEditable", true);
+				sbPageEditor.allowUndo(aDoc);
+				body.setAttribute("contentEditable", true);
 				document.getElementById("ScrapBookEditHTMLSwitch").setAttribute("checked", true);
 			}
 		}
 		// force turn off
 		else if ( aState == false ) {
-			if ( aBody.hasAttribute("contentEditable") ) {
-				sbPageEditor.allowUndo(aBody.ownerDocument);
-				aBody.removeAttribute("contentEditable");
+			if ( body.hasAttribute("contentEditable") ) {
+				sbPageEditor.allowUndo(aDoc);
+				body.removeAttribute("contentEditable");
 				document.getElementById("ScrapBookEditHTMLSwitch").removeAttribute("checked");
 			}
 		}
 		// force turn on
 		else {
-			if ( !aBody.hasAttribute("contentEditable") ) {
-				sbPageEditor.allowUndo(aBody.ownerDocument);
-				aBody.setAttribute("contentEditable", true);
+			if ( !body.hasAttribute("contentEditable") ) {
+				sbPageEditor.allowUndo(aDoc);
+				body.setAttribute("contentEditable", true);
 				document.getElementById("ScrapBookEditHTMLSwitch").setAttribute("checked", true);
 			}
 		}
 	},
 
-	revertEditable : function(aBody)
+	revertEditable : function(aDoc)
 	{
-		if ( aBody.hasAttribute("data-sb-old-contentEditable") ) {
-			sbPageEditor.allowUndo(aBody.ownerDocument);
-			var val = aBody.getAttribute("data-sb-old-contentEditable");
-			if (val) aBody.setAttribute("contentEditable", true);
-			else aBody.removeAttribute("contentEditable");
-			aBody.removeAttribute("data-sb-old-contentEditable");
+		var body = aDoc.body;
+		if (!body) return false;
+		if ( body.hasAttribute("data-sb-old-contentEditable") ) {
+			sbPageEditor.allowUndo(aDoc);
+			var val = body.getAttribute("data-sb-old-contentEditable");
+			if (val) body.setAttribute("contentEditable", true);
+			else body.removeAttribute("contentEditable");
+			body.removeAttribute("data-sb-old-contentEditable");
 			return true;
 		}
 		return false;
