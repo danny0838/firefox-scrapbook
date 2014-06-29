@@ -834,7 +834,7 @@ var sbCrossLinker = {
 			}
 			if ( shouldSave ) {
 				var rootNode = doc.getElementsByTagName("html")[0];
-				var src = sbContentSaver.doctypeToString(doc.doctype) + sbCommonUtils.getOuterHTML(rootNode);
+				var src = sbContentSaver.doctypeToString(doc.doctype) + sbCommonUtils.getOuterHTML(rootNode, true);
 				var file = sbCommonUtils.getContentDir(gReferItem.id);
 				file.append(sbCommonUtils.getFileName(doc.location.href));
 				sbCommonUtils.writeFile(file, src, doc.characterSet);

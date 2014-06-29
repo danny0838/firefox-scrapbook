@@ -466,11 +466,12 @@ var sbPageCombiner = {
 		}
 		divBody.id = "item" + sbCombineService.curID + "body";
 		divBody.innerHTML = this.BODY.innerHTML;
+		divHTML.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
 		divHTML.appendChild(divBody);
-		divWrap.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
+		divHTML.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
 		divWrap.appendChild(divHTML);
 		divWrap.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
-		return sbCommonUtils.getOuterHTML(divWrap);
+		return sbCommonUtils.getOuterHTML(divWrap, true);
 	},
 
 	surroundCSS : function()

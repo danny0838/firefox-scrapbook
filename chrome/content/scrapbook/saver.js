@@ -306,7 +306,7 @@ var sbContentSaver = {
 		}
 
 		// generate the HTML and CSS file and save
-		var myHTML = this.doctypeToString(aDocument.doctype) + sbCommonUtils.getOuterHTML(rootNode);
+		var myHTML = this.doctypeToString(aDocument.doctype) + sbCommonUtils.getOuterHTML(rootNode, true);
 		var myHTMLFile = this.contentDir.clone();
 		myHTMLFile.append(myHTMLFileName);
 		sbCommonUtils.writeFile(myHTMLFile, myHTML, this.item.chars);
