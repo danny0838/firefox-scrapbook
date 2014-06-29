@@ -351,14 +351,14 @@ var sbCacheService = {
 				break;
 			case "site":
 				var basePathCut = dir.path.length + 1;
-				sbCommonUtils.forEachFile(dir, function(){
+				sbCommonUtils.forEachFile(dir, function(file){
 					// do not look in skipped files or folders
-					if ( sbCacheService.skipFiles[this.path] ) return 0;
+					if ( sbCacheService.skipFiles[file.path] ) return 0;
 					// filter with common filter
-					if ( !sbCacheService.cacheFilter(this) ) return;
+					if ( !sbCacheService.cacheFilter(file) ) return;
 					// cache this file
-					sbCacheService.inspectFile(this, this.path.substring(basePathCut).replace(/\\/g, "/"));
-				});
+					sbCacheService.inspectFile(file, file.path.substring(basePathCut).replace(/\\/g, "/"));
+				}, this);
 				break;
 			case "file":
 				if (!sbDataSource.getProperty(res, "chars")) break;
@@ -460,22 +460,22 @@ var sbCacheService = {
 		dir1.append(fileLR[0] + ".files");
 		if (dir1.exists()) {
 			sbCacheService.skipFiles[dir1.path] = true;
-			sbCommonUtils.forEachFile(dir1, function(){
-				if ( !sbCacheService.cacheFilter(this) ) return;
-				sbCacheService.skipFiles[this.path] = true;
-				aCallback(this);
-			});
+			sbCommonUtils.forEachFile(dir1, function(file){
+				if ( !sbCacheService.cacheFilter(file) ) return;
+				sbCacheService.skipFiles[file.path] = true;
+				aCallback(file);
+			}, this);
 		}
 		// index.html => index_files/*  (Firefox archive style)
 		var dir1 = dir.clone();
 		dir1.append(fileLR[0] + "_files");
 		if (dir1.exists()) {
 			sbCacheService.skipFiles[dir1.path] = true;
-			sbCommonUtils.forEachFile(dir1, function(){
-				if ( !sbCacheService.cacheFilter(this) ) return;
-				sbCacheService.skipFiles[this.path] = true;
-				aCallback(this);
-			});
+			sbCommonUtils.forEachFile(dir1, function(file){
+				if ( !sbCacheService.cacheFilter(file) ) return;
+				sbCacheService.skipFiles[file.path] = true;
+				aCallback(file);
+			}, this);
 		}
 	},
 

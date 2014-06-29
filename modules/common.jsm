@@ -297,12 +297,12 @@ var sbCommonUtils = {
 	 *   1: skip look other files in the same folder level
 	 *   2: skip look all files
 	 */
-	forEachFile : function(aFolder, aCallback, aArgs)
+	forEachFile : function(aFolder, aCallback, aThisArg, aArgs)
 	{
 		var dirs = [aFolder], ret;
 		all:
 		for (var i=0; i<dirs.length; i++) {
-			if (aCallback.apply(dirs[i], aArgs) === 0) continue;
+			if (aCallback.call(aThisArg, dirs[i], aArgs) === 0) continue;
 			var files = dirs[i].directoryEntries;
 			while (files.hasMoreElements()) {
 				var file = files.getNext().QueryInterface(Components.interfaces.nsIFile);
@@ -310,7 +310,7 @@ var sbCommonUtils = {
 					dirs.push(file);
 				}
 				else {
-					ret = aCallback.apply(file, aArgs);
+					ret = aCallback.call(aThisArg, file, aArgs);
 					if (ret === 1) break;
 					else if (ret === 2) break all;
 				}
