@@ -9,12 +9,28 @@ var sbPageEditor = {
 
 	init : function(aID)
 	{
+		// check if the given ID is valid
+		if ( aID ) {
+			if ( aID != sbBrowserOverlay.getID() ) return;
+			if ( !sbDataSource.exists(sbBrowserOverlay.resource) ) { this.disable(true); return; }
+		}
+
+		// record item and resource
+		if ( aID ) {
+			this.item = sbCommonUtils.newItem(aID);
+			for ( var prop in this.item ) this.item[prop] = sbDataSource.getProperty(sbBrowserOverlay.resource, prop);
+		}
+		else {
+			this.item = null;
+			sbBrowserOverlay.resource = null;
+		}
+
 		// Update highlighter previewers
-			// for selection list
+		// -- for dropdown list
 		var idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 6;
 		var cssText = sbCommonUtils.getPref("highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);
 		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighterPreview"), cssText);
-			// for buttons
+		// -- for buttons
 		var cssText = "";
 		cssText = sbCommonUtils.getPref("highlighter.style.1", sbHighlighter.PRESET_STYLES[1]);
 		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter1"), cssText);
@@ -28,10 +44,9 @@ var sbPageEditor = {
 		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter5"), cssText);
 		cssText = sbCommonUtils.getPref("highlighter.style.6", sbHighlighter.PRESET_STYLES[6]);
 		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter6"), cssText);
-
+		// decide whether dropdown list
 		var value = sbCommonUtils.getPref("useDropDownList", false);
-		if ( value == false )
-		{
+		if ( value == false ) {
 			document.getElementById("ScrapBookHighlighterPreview").hidden = true;
 			document.getElementById("ScrapBookHighlighter").hidden = true;
 			document.getElementById("ScrapBookHighlighter1").hidden = false;
@@ -40,8 +55,8 @@ var sbPageEditor = {
 			document.getElementById("ScrapBookHighlighter4").hidden = false;
 			document.getElementById("ScrapBookHighlighter5").hidden = false;
 			document.getElementById("ScrapBookHighlighter6").hidden = false;
-		} else
-		{
+		}
+		else {
 			document.getElementById("ScrapBookHighlighterPreview").hidden = false;
 			document.getElementById("ScrapBookHighlighter").hidden = false;
 			document.getElementById("ScrapBookHighlighter1").hidden = true;
@@ -51,57 +66,49 @@ var sbPageEditor = {
 			document.getElementById("ScrapBookHighlighter5").hidden = true;
 			document.getElementById("ScrapBookHighlighter6").hidden = true;
 		}
-		// End
-		if ( aID )
-		{
-			if ( aID != sbBrowserOverlay.getID() ) return;
-			if ( !sbDataSource.exists(sbBrowserOverlay.resource) ) { this.disable(true); return; }
-		}
-		if ( aID ) {
-			this.item = sbCommonUtils.newItem(aID);
-			for ( var prop in this.item ) this.item[prop] = sbDataSource.getProperty(sbBrowserOverlay.resource, prop);
-		} else {
-			this.item = null;
-			sbBrowserOverlay.resource = null;
-		}
+
+		// show and enable the edit toolbar, with several settings
 		this.disable(false);
 		this.showHide(true);
-		if ( !aID )
-		{
+		// -- edit before
+		if ( !aID ) {
+			// if not a ScrapBook item, init is called by clicking "Edit Before"
+			// show the whole toolbox
 			document.getElementById("ScrapBookToolbox").hidden = false;
 			sbInfoViewer.TOOLBAR.hidden = true;
 		}
-		document.getElementById("ScrapBookEditTitle").value =  aID ? this.item.title : gBrowser.selectedTab.label;
-		document.getElementById("ScrapBookEditIcon").src    = (aID ? this.item.icon  : gBrowser.selectedTab.getAttribute("image")) || sbCommonUtils.getDefaultIcon();
-		try { document.getElementById("ScrapBookEditTitle").editor.transactionManager.clear(); } catch(ex) {}
-		this.COMMENT.value = aID ? this.item.comment.replace(/ __BR__ /g, this.multiline ? "\n" : "\t") : "";
-		try { this.COMMENT.editor.transactionManager.clear(); } catch(ex) {}
-		if ( aID && gBrowser.currentURI.spec.indexOf("index.html") > 0 )
-		{
+		// -- current browser tab
+		if ( aID && gBrowser.currentURI.spec.indexOf("index.html") > 0 ) {
 			gBrowser.selectedTab.label = this.item.title;
 			gBrowser.selectedTab.setAttribute("image", this.item.icon);
 		}
+		// -- icon
+		document.getElementById("ScrapBookEditIcon").src = (aID ? this.item.icon  : gBrowser.selectedTab.getAttribute("image")) || sbCommonUtils.getDefaultIcon();
+		// -- title
+		document.getElementById("ScrapBookEditTitle").value =  aID ? this.item.title : gBrowser.selectedTab.label;
+		try { document.getElementById("ScrapBookEditTitle").editor.transactionManager.clear(); } catch(ex) {}
+		// -- comment
+		this.COMMENT.value = aID ? this.item.comment.replace(/ __BR__ /g, this.multiline ? "\n" : "\t") : "";
+		var restoredComment = sbCommonUtils.documentData(window.content.document, "comment");
+		if (restoredComment) this.COMMENT.value = restoredComment;
+		try { this.COMMENT.editor.transactionManager.clear(); } catch(ex) {}
+		// -- deactivate the DOMEraser
 		sbDOMEraser.init(0);
+		// -- window
+		if ( aID ) {
+			try { window.content.removeEventListener("beforeunload", this.handleEvent, true); } catch(ex){}
+			window.content.addEventListener("beforeunload", this.handleEvent, true);
+		}
+		// -- document
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
-			try { win.document.removeEventListener("mousedown", sbAnnotationService.handleEvent, true); } catch(ex) {}
-			try { win.document.removeEventListener("click", sbAnnotationService.handleEvent, true); } catch(ex) {}
-			try { win.document.removeEventListener("keypress", this.handleEvent, true); } catch(ex) {}
+			try { win.document.removeEventListener("mousedown", sbAnnotationService.handleEvent, true); } catch(ex){}
+			try { win.document.removeEventListener("click", sbAnnotationService.handleEvent, true); } catch(ex){}
+			try { win.document.removeEventListener("keypress", this.handleEvent, true); } catch(ex){}
 			win.document.addEventListener("mousedown", sbAnnotationService.handleEvent, true);
 			win.document.addEventListener("click", sbAnnotationService.handleEvent, true);
 			win.document.addEventListener("keypress", this.handleEvent, true);
 			this.documentBeforeEdit(win.document);
 		}, this);
-		if ( aID )
-		{
-			try {
-				window.content.removeEventListener("beforeunload", this.handleEvent, true);
-			}
-			catch (ex) {}
-			window.content.addEventListener("beforeunload", this.handleEvent, true);
-		}
-		var restoredComment = sbCommonUtils.documentData(window.content.document, "comment");
-		if (restoredComment)
-			document.getElementById("ScrapBookEditComment").value = restoredComment;
 	},
 
 	handleEvent : function(aEvent)
@@ -126,6 +133,9 @@ var sbPageEditor = {
 		{
 			// sbCommonUtils.getFocusedWindow() could be null in some situation
 			try {
+				// Save page requires variables in sbPageEditor and sbBrowserOverlay,
+				// which are loaded only when the user views the item.
+				// Currently we can only handle saving for the current tab.
 				if (aEvent.target == sbCommonUtils.getFocusedWindow().document) {
 					sbPageEditor.confirmSave();
 				}
