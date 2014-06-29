@@ -676,15 +676,16 @@ var sbCommonUtils = {
 	 * DOM elements handling
 	 */
 
-	getOuterHTML : function(aNode)
+	getOuterHTML : function(aNode, aAddBr)
 	{
-		if (this._fxVer11) return aNode.outerHTML;
+		if (!aAddBr && this._fxVer11) return aNode.outerHTML;
+		var br = aAddBr ? "\n" : "";
 		var tag = "<" + aNode.nodeName.toLowerCase();
 		for ( var i=0; i<aNode.attributes.length; i++ ) {
 			tag += ' ' + aNode.attributes[i].name + '="' + aNode.attributes[i].value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;") + '"';
 		}
-		tag += ">";
-		return tag + aNode.innerHTML + "</" + aNode.nodeName.toLowerCase() + ">";
+		tag += ">" + br;
+		return tag + aNode.innerHTML + "</" + aNode.nodeName.toLowerCase() + ">" + br;
 	},
 
 	/**

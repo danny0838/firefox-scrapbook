@@ -477,7 +477,7 @@ var sbTreeDNDHandler = {
 		},
 		onDrop: function(row, orient) {
 			var XferData, XferType;
-			if (!sbCommonUtils._fxVer3_5 &&
+			if (sbCommonUtils._fxVer3_5 &&
 			    (sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0) == "application/x-moz-tabbrowser-tab" ||
 				 sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0) == "sb/tradeitem"))
 			{
@@ -512,7 +512,7 @@ var sbTreeDNDHandler = {
 				sbTreeDNDHandler.importData(row, orient);
 			else
 				sbTreeDNDHandler.capture(XferData, row, orient);
-			sbController.rebuildLocal();
+			sbCommonUtils.rebuildGlobal();
 		},
 		onToggleOpenState    : function() {},
 		onCycleHeader        : function() {},
