@@ -185,19 +185,19 @@ var sbPropService = {
 		var totalSize = 0;
 		var totalFile = 0;
 		var totalDir  = 0;
-		sbCommonUtils.forEachFile(sbCommonUtils.getContentDir(aID, true), function(){
-			if (this.isDirectory()) {
+		sbCommonUtils.forEachFile(sbCommonUtils.getContentDir(aID, true), function(file){
+			if (file.isDirectory()) {
 				totalDir++;
 			}
-			if (!this.isFile()) return;
+			if (!file.isFile()) return;
 			try {
-				totalSize += this.fileSize;
+				totalSize += file.fileSize;
 				totalFile++;
 			}
 			catch (ex) {
-			    alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_READ_FILE_SIZE", [this.path]));
+			    alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_READ_FILE_SIZE", [file.path]));
 			}
-		});
+		}, this);
 		return [totalSize, totalFile, totalDir];
 	},
 
