@@ -1,3 +1,17 @@
+Scrapbook X 1.11.14
+----------------
+
+- UPDATE: Adjust linefeeds between <html> and <head>, and after </html>.
+- FIXED: Drag and drop in the export manager doesn't work.
+
+
+Scrapbook X 1.11.13
+----------------
+
+- UPDATE: Replace save confirm before exit with exit confirm, and it works for all unsaved pages.
+- FIXED: Minor internal code fix.
+
+
 Scrapbook X 1.11.12
 ----------------
 
