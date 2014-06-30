@@ -478,6 +478,10 @@ var sbDOMEraser = {
 	enabled : false,
 	verbose : 0,
 
+	// aStateFlag
+	//   0: disable, update button
+	//   1: enable, update button, disable toolbar, register events, add styles
+	//   2: disable, update button, enable toolbar, unregister events, remove styles
 	init : function(aStateFlag)
 	{
 		this.verbose = 0;
