@@ -278,7 +278,7 @@ var sbPageEditor = {
 
 	exit : function(forceExit)
 	{
-		if ( sbDOMEraser.enabled ) sbDOMEraser.init(2);
+		if ( sbDOMEraser.enabled ) sbDOMEraser.init(0);
 		this.showHide(false);
 		if ( !forceExit ) this.restore();
 	},
@@ -326,7 +326,7 @@ var sbPageEditor = {
 			this.saveResource();
 		}
 		else {
-			sbDOMEraser.init(2);
+			sbDOMEraser.init(0);
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 				this.documentBeforeSave(win.document);
 			}, this);
@@ -351,7 +351,7 @@ var sbPageEditor = {
 			return;
 		}
 		this.disable(true);
-		sbDOMEraser.init(2);
+		sbDOMEraser.init(0);
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			var doc = win.document;
 			if ( doc.contentType != "text/html" ) {
@@ -487,15 +487,13 @@ var sbDOMEraser = {
 	verbose : 0,
 
 	// aStateFlag
-	//   0: disable, update button
-	//   1: enable, update button, disable toolbar, register events, add styles
-	//   2: disable, update button, enable toolbar, unregister events, remove styles
+	//   0: disable
+	//   1: enable
 	init : function(aStateFlag)
 	{
 		this.verbose = 0;
 		this.enabled = (aStateFlag == 1);
 		document.getElementById("ScrapBookEditEraser").checked = this.enabled;
-		if ( aStateFlag == 0 ) return;
 		document.getElementById("ScrapBookHighlighter").disabled = this.enabled;
 		document.getElementById("ScrapBookEditAnnotation").disabled = this.enabled;
 		document.getElementById("ScrapBookEditCutter").disabled  = this.enabled;
