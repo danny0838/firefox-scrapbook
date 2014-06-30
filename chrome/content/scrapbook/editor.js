@@ -500,8 +500,18 @@ var sbDOMEraser = {
 		document.getElementById("ScrapBookEditAnnotation").disabled = this.enabled;
 		document.getElementById("ScrapBookEditCutter").disabled  = this.enabled;
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
-			this.initEvent(win, aStateFlag);
-			this.initStyle(win, aStateFlag);
+			if (aStateFlag == 1) {
+				this.initEvent(win, 1);
+				this.initStyle(win, 1);
+				sbAnnotationService.initEvent(win, 0);
+				sbPageEditor.initEvent(win, 0);
+			}
+			else {
+				this.initEvent(win, 0);
+				this.initStyle(win, 0);
+				sbAnnotationService.initEvent(win, 1);
+				sbPageEditor.initEvent(win, 1);
+			}
 		}, this);
 	},
 
@@ -643,11 +653,14 @@ var sbAnnotationService = {
 			aWindow.document.addEventListener("mousedown", this.handleEvent, true);
 			aWindow.document.addEventListener("click", this.handleEvent, true);
 		}
+		else {
+			aWindow.document.removeEventListener("mousemove", this.handleEvent, true);
+			aWindow.document.removeEventListener("mouseup",   this.handleEvent, true);
+		}
 	},
 
 	handleEvent : function(aEvent)
 	{
-		if ( sbDOMEraser.enabled ) return;
 		if ( aEvent.type == "mousedown" )
 		{
 			switch ( sbCommonUtils.getSbObjectType(aEvent.originalTarget) )
