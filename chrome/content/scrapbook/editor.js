@@ -64,14 +64,21 @@ var sbPageEditor = {
 		}
 		// -- document
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
-			try { win.document.removeEventListener("mousedown", sbAnnotationService.handleEvent, true); } catch(ex){}
-			try { win.document.removeEventListener("click", sbAnnotationService.handleEvent, true); } catch(ex){}
-			try { win.document.removeEventListener("keypress", this.handleEvent, true); } catch(ex){}
-			win.document.addEventListener("mousedown", sbAnnotationService.handleEvent, true);
-			win.document.addEventListener("click", sbAnnotationService.handleEvent, true);
-			win.document.addEventListener("keypress", this.handleEvent, true);
+			sbAnnotationService.initEvent(win, 1);
+			this.initEvent(win, 1);
 			this.documentBeforeEdit(win.document);
 		}, this);
+	},
+
+	// aStateFlag
+	//   0: disable
+	//   1: enable
+	initEvent : function(aWindow, aStateFlag)
+	{
+		try { aWindow.document.removeEventListener("keypress", this.handleEvent, true); } catch(ex){}
+		if (aStateFlag == 1) {
+			aWindow.document.addEventListener("keypress", this.handleEvent, true);
+		}
 	},
 
 	handleEvent : function(aEvent)
@@ -623,6 +630,19 @@ var sbAnnotationService = {
 	offsetY : 0,
 	isMove  : true,
 	target  : null,
+
+	// aStateFlag
+	//  0: disable
+	//  1: enable
+	initEvent : function(aWindow, aStateFlag)
+	{
+		aWindow.document.removeEventListener("mousedown", this.handleEvent, true);
+		aWindow.document.removeEventListener("click", this.handleEvent, true);
+		if (aStateFlag == 1) {
+			aWindow.document.addEventListener("mousedown", this.handleEvent, true);
+			aWindow.document.addEventListener("click", this.handleEvent, true);
+		}
+	},
 
 	handleEvent : function(aEvent)
 	{
