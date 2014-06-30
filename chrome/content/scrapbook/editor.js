@@ -55,7 +55,8 @@ var sbPageEditor = {
 		var restoredComment = sbCommonUtils.documentData(window.content.document, "comment");
 		if (restoredComment) this.COMMENT.value = restoredComment;
 		try { this.COMMENT.editor.transactionManager.clear(); } catch(ex) {}
-		// -- deactivate the DOMEraser
+		// -- deactivate the HtmlEditor and DOMEraser
+		sbHtmlEditor.init(null, 0);
 		sbDOMEraser.init(0);
 		// -- window
 		if ( aID ) {
@@ -85,7 +86,6 @@ var sbPageEditor = {
 	{
 		if ( aEvent.type == "keypress" )
 		{
-			if ( aEvent.originalTarget.ownerDocument.designMode == "on" ) return;
 			if ( aEvent.altKey || aEvent.shiftKey || aEvent.ctrlKey || aEvent.metaKey ) return;
 			var idx = 0;
 			switch ( aEvent.charCode )
@@ -483,38 +483,43 @@ var sbPageEditor = {
 
 var sbHtmlEditor = {
 
-	smart : function()
-	{
-		this.switchEditable();
-	},
-
-	switchEditable : function()
-	{
-		var doc = sbCommonUtils.getFocusedWindow().document;
-		this.setEditable(doc);
-	},
+	enabled : false,
 
 	// aStateFlag
-	//   0: disable
-	//   1: enable
-	setEditable : function(aDoc, aStateFlag)
+	//   0: disable (for all window documents)
+	//   1: enable (for a specific window document)
+	init : function(aDoc, aStateFlag)
 	{
-		if ( aStateFlag === undefined ) aStateFlag = (aDoc.designMode == "on") ? 0 : 1;
-		document.getElementById("ScrapBookEditHTML").checked = (aStateFlag == 1);
+		aDoc = aDoc || sbCommonUtils.getFocusedWindow().document;
+		if ( aStateFlag === undefined ) aStateFlag = !this.enabled;
+		this.enabled = (aStateFlag == 1);
+		document.getElementById("ScrapBookEditHTML").checked = this.enabled;
+		document.getElementById("ScrapBookHighlighter").disabled = this.enabled;
+		document.getElementById("ScrapBookEditAnnotation").disabled = this.enabled;
+		document.getElementById("ScrapBookEditCutter").disabled = this.enabled;
+		document.getElementById("ScrapBookEditEraser").disabled = this.enabled;
+		document.getElementById("ScrapBookEditUndo").disabled = this.enabled;
 		if ( aStateFlag == 1 ) {
 			if ( aDoc.designMode != "on" ) {
 				sbPageEditor.allowUndo(aDoc);
 				aDoc.designMode = "on";
 			}
+			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
+				sbAnnotationService.initEvent(win, 0);
+				sbPageEditor.initEvent(win, 0);
+			}, this);
 		}
 		else {
-			if ( aDoc.designMode != "off" ) {
-				sbPageEditor.allowUndo(aDoc);
-				aDoc.designMode = "off";
-			}
+			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
+				if ( win.document.designMode != "off" ) {
+					win.document.designMode = "off";
+				}
+				sbAnnotationService.initEvent(win, 1);
+				sbPageEditor.initEvent(win, 1);
+			}, this);
 		}
 	},
-	
+
 };
 
 
