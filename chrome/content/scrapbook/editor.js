@@ -552,7 +552,11 @@ var sbHtmlEditor = {
 		var node = range.commonAncestorContainer;
 		if (node.nodeName == "#text") node = node.parentNode;
 		var data = { value: node.innerHTML };
-		if (sbCommonUtils.PROMPT.prompt(window, "[ScrapBook]", "Edit HTML source", data, null, {}) ) {
+		window.top.openDialog(
+			"chrome://scrapbook/content/source.xul", "ScrapBook:EditSource", "chrome,modal,centerscreen,resizable", 
+			data
+		);
+		if (data.result) {
 			node.innerHTML = data.value;
 		}
 	},
