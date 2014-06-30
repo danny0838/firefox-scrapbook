@@ -484,6 +484,7 @@ var sbPageEditor = {
 var sbHtmlEditor = {
 
 	enabled : false,
+	currentDocument : null,
 
 	// aStateFlag
 	//   0: disable (for all window documents)
@@ -500,11 +501,13 @@ var sbHtmlEditor = {
 		document.getElementById("ScrapBookEditEraser").disabled = this.enabled;
 		document.getElementById("ScrapBookEditUndo").disabled = this.enabled;
 		if ( aStateFlag == 1 ) {
+			this.currentDocument = aDoc;
 			if ( aDoc.designMode != "on" ) {
 				sbPageEditor.allowUndo(aDoc);
 				aDoc.designMode = "on";
 			}
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
+				this.initEvent(win, 1);
 				sbAnnotationService.initEvent(win, 0);
 				sbPageEditor.initEvent(win, 0);
 			}, this);
@@ -514,9 +517,43 @@ var sbHtmlEditor = {
 				if ( win.document.designMode != "off" ) {
 					win.document.designMode = "off";
 				}
+				this.initEvent(win, 0);
 				sbAnnotationService.initEvent(win, 1);
 				sbPageEditor.initEvent(win, 1);
 			}, this);
+		}
+	},
+
+	initEvent : function(aWindow, aStateFlag)
+	{
+		aWindow.document.removeEventListener("keypress", this.handleEvent, true);
+		if (aStateFlag == 1) {
+			aWindow.document.addEventListener("keypress", this.handleEvent, true);
+		}
+	},
+
+	handleEvent : function(aEvent)
+	{
+		if ( aEvent.type == "keypress" )
+		{
+			// Ctrl+Alt+I
+			if (String.fromCharCode(aEvent.charCode).toUpperCase() == "I" &&
+				aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+				sbHtmlEditor.insertSource(sbHtmlEditor.currentDocument);
+			}
+		}
+	},
+	
+	insertSource : function(aDoc)
+	{
+		var sel = sbPageEditor.getSelection(aDoc.defaultView);
+		if (!sel) return;
+		var range = sel.getRangeAt(0);
+		var node = range.commonAncestorContainer;
+		if (node.nodeName == "#text") node = node.parentNode;
+		var data = { value: node.innerHTML };
+		if (sbCommonUtils.PROMPT.prompt(window, "[ScrapBook]", "Edit HTML source", data, null, {}) ) {
+			node.innerHTML = data.value;
 		}
 	},
 
