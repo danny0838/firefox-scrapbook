@@ -84,6 +84,18 @@ var sbPageEditor = {
 
 	handleKeyEvent : function(aEvent)
 	{
+		// F9
+		if (aEvent.keyCode == aEvent.DOM_VK_F9 &&
+			!aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbDOMEraser.init(1);
+			return;
+		}
+		// F10
+		if (aEvent.keyCode == aEvent.DOM_VK_F10 &&
+			!aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.init(null, 1);
+			return;
+		}
 		// 1-8 or Alt + 1-8
 		var idx = aEvent.charCode - (aEvent.DOM_VK_1 - 1);
 		if ((idx >= 1) && (idx <= 8) &&
@@ -532,6 +544,12 @@ var sbHtmlEditor = {
 
 	handleKeyEvent : function(aEvent)
 	{
+		// F10
+		if (aEvent.keyCode == aEvent.DOM_VK_F10 &&
+			!aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.init(null, 0);
+			return;
+		}
 		// Ctrl+Alt+I
 		if (String.fromCharCode(aEvent.charCode).toUpperCase() == "I" &&
 			aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
@@ -639,11 +657,13 @@ var sbDOMEraser = {
 		aWindow.document.removeEventListener("mousemove", this.handleEvent, true);
 		aWindow.document.removeEventListener("mouseout",  this.handleEvent, true);
 		aWindow.document.removeEventListener("click",     this.handleEvent, true);
+		aWindow.document.removeEventListener("keypress",  this.handleKeyEvent, true);
 		if ( aStateFlag == 1 ) {
 			aWindow.document.addEventListener("mouseover", this.handleEvent, true);
 			aWindow.document.addEventListener("mousemove", this.handleEvent, true);
 			aWindow.document.addEventListener("mouseout",  this.handleEvent, true);
 			aWindow.document.addEventListener("click",     this.handleEvent, true);
+			aWindow.document.addEventListener("keypress",  this.handleKeyEvent, true);
 		}
 	},
 
@@ -658,6 +678,16 @@ var sbDOMEraser = {
 		}
 		else {
 			sbPageEditor.removeStyle(aWindow, "scrapbook-eraser-style");
+		}
+	},
+
+	handleKeyEvent : function(aEvent)
+	{
+		// F9
+		if (aEvent.keyCode == aEvent.DOM_VK_F9 &&
+			!aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbDOMEraser.init(0);
+			return;
 		}
 	},
 
