@@ -15,12 +15,6 @@
 <!ENTITY sb.highlighter "Hervorhebung">
 <!ENTITY sb.highlighter.remove "Hervorhebungen innerhalb der Auswahl entfernen">
 <!ENTITY sb.highlighter.remove.all "Alle Hervorhebungen entfernen">
-<!ENTITY sbp.highlighter.stil1 "   Stil 1    ">
-<!ENTITY sbp.highlighter.stil2 "   Stil 2    ">
-<!ENTITY sbp.highlighter.stil3 "   Stil 3    ">
-<!ENTITY sbp.highlighter.stil4 "   Stil 4    ">
-<!ENTITY sbp.highlighter.stil5 "   Stil 5    ">
-<!ENTITY sbp.highlighter.stil6 "   Stil 6    ">
 <!ENTITY sb.source "Ursprungs-URL öffnen">
 <!ENTITY sb.renew "Erneut archivieren">
 <!ENTITY sb.locate "Innerhalb der Ordnerliste lokalisieren">

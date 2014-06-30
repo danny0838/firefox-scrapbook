@@ -15,12 +15,6 @@
 <!ENTITY sb.highlighter "Korostin">
 <!ENTITY sb.highlighter.remove "Poista korostukset valinnasta">
 <!ENTITY sb.highlighter.remove.all "Poista kaikki korostukset">
-<!ENTITY sbp.highlighter.stil1 "Tyyli 1">
-<!ENTITY sbp.highlighter.stil2 "Tyyli 2">
-<!ENTITY sbp.highlighter.stil3 "Tyyli 3">
-<!ENTITY sbp.highlighter.stil4 "Tyyli 4">
-<!ENTITY sbp.highlighter.stil5 "Tyyli 5">
-<!ENTITY sbp.highlighter.stil6 "Tyyli 6">
 <!ENTITY sb.source "Avaa lähde-URL">
 <!ENTITY sb.renew "Tallenna uudestaan">
 <!ENTITY sb.locate "Paikanna sivupalkissa">

@@ -15,12 +15,6 @@
 <!ENTITY sb.highlighter "Podświetlanie">
 <!ENTITY sb.highlighter.remove "Usuń podświetlenie w zaznaczeniu">
 <!ENTITY sb.highlighter.remove.all "Usuń wszystkie podświetlone komentarze">
-<!ENTITY sbp.highlighter.stil1 "Styl 1">
-<!ENTITY sbp.highlighter.stil2 "Styl 2">
-<!ENTITY sbp.highlighter.stil3 "Styl 3">
-<!ENTITY sbp.highlighter.stil4 "Styl 4">
-<!ENTITY sbp.highlighter.stil5 "Styl 5">
-<!ENTITY sbp.highlighter.stil6 "Styl 6">
 <!ENTITY sb.source "Pokaż stronę źródłową">
 <!ENTITY sb.renew "Przechwyć ponownie">
 <!ENTITY sb.locate "Zlokalizuj w drzewie katalogów w panelu bocznym">

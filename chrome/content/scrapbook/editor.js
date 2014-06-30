@@ -26,46 +26,9 @@ var sbPageEditor = {
 		}
 
 		// Update highlighter previewers
-		// -- for dropdown list
 		var idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 6;
 		var cssText = sbCommonUtils.getPref("highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);
 		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighterPreview"), cssText);
-		// -- for buttons
-		var cssText = "";
-		cssText = sbCommonUtils.getPref("highlighter.style.1", sbHighlighter.PRESET_STYLES[1]);
-		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter1"), cssText);
-		cssText = sbCommonUtils.getPref("highlighter.style.2", sbHighlighter.PRESET_STYLES[2]);
-		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter2"), cssText);
-		cssText = sbCommonUtils.getPref("highlighter.style.3", sbHighlighter.PRESET_STYLES[3]);
-		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter3"), cssText);
-		cssText = sbCommonUtils.getPref("highlighter.style.4", sbHighlighter.PRESET_STYLES[4]);
-		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter4"), cssText);
-		cssText = sbCommonUtils.getPref("highlighter.style.5", sbHighlighter.PRESET_STYLES[5]);
-		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter5"), cssText);
-		cssText = sbCommonUtils.getPref("highlighter.style.6", sbHighlighter.PRESET_STYLES[6]);
-		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighter6"), cssText);
-		// decide whether dropdown list
-		var value = sbCommonUtils.getPref("useDropDownList", false);
-		if ( value == false ) {
-			document.getElementById("ScrapBookHighlighterPreview").hidden = true;
-			document.getElementById("ScrapBookHighlighter").hidden = true;
-			document.getElementById("ScrapBookHighlighter1").hidden = false;
-			document.getElementById("ScrapBookHighlighter2").hidden = false;
-			document.getElementById("ScrapBookHighlighter3").hidden = false;
-			document.getElementById("ScrapBookHighlighter4").hidden = false;
-			document.getElementById("ScrapBookHighlighter5").hidden = false;
-			document.getElementById("ScrapBookHighlighter6").hidden = false;
-		}
-		else {
-			document.getElementById("ScrapBookHighlighterPreview").hidden = false;
-			document.getElementById("ScrapBookHighlighter").hidden = false;
-			document.getElementById("ScrapBookHighlighter1").hidden = true;
-			document.getElementById("ScrapBookHighlighter2").hidden = true;
-			document.getElementById("ScrapBookHighlighter3").hidden = true;
-			document.getElementById("ScrapBookHighlighter4").hidden = true;
-			document.getElementById("ScrapBookHighlighter5").hidden = true;
-			document.getElementById("ScrapBookHighlighter6").hidden = true;
-		}
 
 		// show and enable the edit toolbar, with several settings
 		this.disable(false);
@@ -519,13 +482,7 @@ var sbDOMEraser = {
 		this.enabled = (aStateFlag == 1);
 		document.getElementById("ScrapBookEditEraser").checked = this.enabled;
 		if ( aStateFlag == 0 ) return;
-		document.getElementById("ScrapBookHighlighter").disabled = this.enabled;	//DropDownList
-		document.getElementById("ScrapBookHighlighter1").disabled = this.enabled;
-		document.getElementById("ScrapBookHighlighter2").disabled = this.enabled;
-		document.getElementById("ScrapBookHighlighter3").disabled = this.enabled;
-		document.getElementById("ScrapBookHighlighter4").disabled = this.enabled;
-		document.getElementById("ScrapBookHighlighter5").disabled = this.enabled;
-		document.getElementById("ScrapBookHighlighter6").disabled = this.enabled;
+		document.getElementById("ScrapBookHighlighter").disabled = this.enabled;
 		document.getElementById("ScrapBookEditAnnotation").disabled = this.enabled;
 		document.getElementById("ScrapBookEditCutter").disabled  = this.enabled;
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {

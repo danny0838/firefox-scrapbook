@@ -134,12 +134,6 @@
 						<menuitem id="ScrapBookHighlighterM6" type="radio" label="&sb.highlighter;6" oncommand="sbPageEditor.highlight(6);" />
 					</menupopup>
 				</toolbarbutton>
-				<toolbarbutton id="ScrapBookHighlighter1" label="&sbp.highlighter.stil1;" oncommand="sbPageEditor.highlight(1);" accesskey="1" />
-				<toolbarbutton id="ScrapBookHighlighter2" label="&sbp.highlighter.stil2;" oncommand="sbPageEditor.highlight(2);" accesskey="2" />
-				<toolbarbutton id="ScrapBookHighlighter3" label="&sbp.highlighter.stil3;" oncommand="sbPageEditor.highlight(3);" accesskey="3" />
-				<toolbarbutton id="ScrapBookHighlighter4" label="&sbp.highlighter.stil4;" oncommand="sbPageEditor.highlight(4);" accesskey="4" />
-				<toolbarbutton id="ScrapBookHighlighter5" label="&sbp.highlighter.stil5;" oncommand="sbPageEditor.highlight(5);" accesskey="5" />
-				<toolbarbutton id="ScrapBookHighlighter6" label="&sbp.highlighter.stil6;" oncommand="sbPageEditor.highlight(6);" accesskey="6" />
 				<toolbarbutton id="ScrapBookEditAnnotation" type="menu-button" tooltiptext="&sb.edit.sticky.create;" image="chrome://scrapbook/skin/edit_annotation.png" accesskey="A" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbAnnotationService.createSticky();">
 					<menupopup onpopupshowing="this.firstChild.nextSibling.setAttribute('disabled', !sbPageEditor.item);">
 						<menuitem label="&sb.edit.attach.link;" oncommand="sbAnnotationService.attach('L',this.label);" />
