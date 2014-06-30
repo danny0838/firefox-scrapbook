@@ -492,27 +492,37 @@ var sbDOMEraser = {
 		document.getElementById("ScrapBookEditAnnotation").disabled = this.enabled;
 		document.getElementById("ScrapBookEditCutter").disabled  = this.enabled;
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
-			win.document.removeEventListener("mouseover", this.handleEvent, true);
-			win.document.removeEventListener("mousemove", this.handleEvent, true);
-			win.document.removeEventListener("mouseout",  this.handleEvent, true);
-			win.document.removeEventListener("click",     this.handleEvent, true);
-			if ( this.enabled ) {
-				win.document.addEventListener("mouseover", this.handleEvent, true);
-				win.document.addEventListener("mousemove", this.handleEvent, true);
-				win.document.addEventListener("mouseout",  this.handleEvent, true);
-				win.document.addEventListener("click",     this.handleEvent, true);
-			}
-			if ( this.enabled ) {
-				var estyle = "* { cursor: crosshair; }\n"
-				           + "#scrapbook-eraser-tooltip { -moz-appearance: tooltip;"
-				           + " position: absolute; z-index: 10000; margin-top: 32px; padding: 2px 3px; max-width: 40em;"
-				           + " border: 1px solid InfoText; background-color: InfoBackground; color: InfoText; font: message-box; }";
-				sbPageEditor.applyStyle(win, "scrapbook-eraser-style", estyle);
-			}
-			else {
-				sbPageEditor.removeStyle(win, "scrapbook-eraser-style");
-			}
+			this.initEvent(win, aStateFlag);
+			this.initStyle(win, aStateFlag);
 		}, this);
+	},
+
+	initEvent : function(aWindow, aStateFlag)
+	{
+		aWindow.document.removeEventListener("mouseover", this.handleEvent, true);
+		aWindow.document.removeEventListener("mousemove", this.handleEvent, true);
+		aWindow.document.removeEventListener("mouseout",  this.handleEvent, true);
+		aWindow.document.removeEventListener("click",     this.handleEvent, true);
+		if ( aStateFlag == 1 ) {
+			aWindow.document.addEventListener("mouseover", this.handleEvent, true);
+			aWindow.document.addEventListener("mousemove", this.handleEvent, true);
+			aWindow.document.addEventListener("mouseout",  this.handleEvent, true);
+			aWindow.document.addEventListener("click",     this.handleEvent, true);
+		}
+	},
+
+	initStyle : function(aWindow, aStateFlag)
+	{
+		if ( aStateFlag == 1 ) {
+			var estyle = "* { cursor: crosshair; }\n"
+					   + "#scrapbook-eraser-tooltip { -moz-appearance: tooltip;"
+					   + " position: absolute; z-index: 10000; margin-top: 32px; padding: 2px 3px; max-width: 40em;"
+					   + " border: 1px solid InfoText; background-color: InfoBackground; color: InfoText; font: message-box; }";
+			sbPageEditor.applyStyle(aWindow, "scrapbook-eraser-style", estyle);
+		}
+		else {
+			sbPageEditor.removeStyle(aWindow, "scrapbook-eraser-style");
+		}
 	},
 
 	handleEvent : function(aEvent)
