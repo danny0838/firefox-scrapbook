@@ -59,8 +59,8 @@ var sbPageEditor = {
 		sbDOMEraser.init(0);
 		// -- window
 		if ( aID ) {
-			try { window.content.removeEventListener("beforeunload", this.handleEvent, true); } catch(ex){}
-			window.content.addEventListener("beforeunload", this.handleEvent, true);
+			try { window.content.removeEventListener("beforeunload", this.handleUnloadEvent, true); } catch(ex){}
+			window.content.addEventListener("beforeunload", this.handleUnloadEvent, true);
 		}
 		// -- document
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
@@ -101,13 +101,14 @@ var sbPageEditor = {
 			}
 			if ( idx > 0 ) sbPageEditor.highlight(idx);
 		}
-		else if ( aEvent.type == "beforeunload" )
-		{
-			if (sbPageEditor.checkModify()) {
-				// The message only work for Firefox 3.*
-				// Else it only fires a default prompt to confirm whether to exit
-				aEvent.returnValue = sbCommonUtils.lang("overlay", "EDIT_SAVE_CHANGES");
-			}
+	},
+
+	handleUnloadEvent : function(aEvent)
+	{
+		if (sbPageEditor.checkModify()) {
+			// The message only work for Firefox 3.*
+			// Else it only fires a default prompt to confirm whether to exit
+			aEvent.returnValue = sbCommonUtils.lang("overlay", "EDIT_SAVE_CHANGES");
 		}
 	},
 
