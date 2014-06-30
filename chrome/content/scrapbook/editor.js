@@ -548,16 +548,35 @@ var sbHtmlEditor = {
 	{
 		var sel = sbPageEditor.getSelection(aDoc.defaultView);
 		if (!sel) return;
+		// backup original selection ranges
+		var ranges = [];
+		for (var i=0, len=sel.rangeCount; i<len; i++) {
+			ranges.push(sel.getRangeAt(i))
+		}
+		// reset selection to the common ancestor container of the first range
 		var range = sel.getRangeAt(0);
 		var node = range.commonAncestorContainer;
 		if (node.nodeName == "#text") node = node.parentNode;
 		var data = { value: node.innerHTML };
+		range = aDoc.createRange();
+		range.selectNodeContents(node);
+		sel.removeAllRanges();
+		sel.addRange(range);
+		// prompt the dialog for user input
 		window.top.openDialog(
 			"chrome://scrapbook/content/source.xul", "ScrapBook:EditSource", "chrome,modal,centerscreen,resizable", 
 			data
 		);
+		// accepted, do the modify
 		if (data.result) {
-			node.innerHTML = data.value;
+			aDoc.execCommand("insertHTML", false, data.value);
+		}
+		// cancled, restore the original selection
+		else {
+			sel.removeAllRanges();
+			for (var i=0, len=ranges.length; i<len; i++) {
+				sel.addRange(ranges[i]);
+			}
 		}
 	},
 
