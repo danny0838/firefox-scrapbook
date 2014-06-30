@@ -24,9 +24,9 @@ var sbHighlighter = {
 
 	updatePopup : function()
 	{
-		var idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 6;
+		var idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 8;
 		document.getElementById("ScrapBookHighlighterM" + idx).setAttribute("checked", "true");
-		for ( idx = 6; idx > 0; idx-- )
+		for ( idx = 8; idx > 0; idx-- )
 		{
 			var cssText = sbCommonUtils.getPref("highlighter.style." + idx, "") || this.PRESET_STYLES[idx];
 			this.decorateElement(document.getElementById("ScrapBookHighlighterM" + idx), cssText);

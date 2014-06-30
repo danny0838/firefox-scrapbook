@@ -26,7 +26,7 @@ var sbPageEditor = {
 		}
 
 		// Update highlighter previewers
-		var idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 6;
+		var idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 8;
 		var cssText = sbCommonUtils.getPref("highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);
 		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighterPreview"), cssText);
 
@@ -88,6 +88,8 @@ var sbPageEditor = {
 				case aEvent.DOM_VK_4 : idx = 4; break;
 				case aEvent.DOM_VK_5 : idx = 5; break;
 				case aEvent.DOM_VK_6 : idx = 6; break;
+				case aEvent.DOM_VK_7 : idx = 7; break;
+				case aEvent.DOM_VK_8 : idx = 8; break;
 				default : return;
 			}
 			if ( idx > 0 ) sbPageEditor.highlight(idx);
@@ -152,7 +154,7 @@ var sbPageEditor = {
 
 	highlight : function(idx)
 	{
-		if ( !idx ) idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 6;	//DropDownList
+		if ( !idx ) idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 8;	//DropDownList
 		document.getElementById("ScrapBookHighlighter").setAttribute("color", idx);
 		var attr = {};
 		attr["style"] = sbCommonUtils.getPref("highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);	//DropDownList
