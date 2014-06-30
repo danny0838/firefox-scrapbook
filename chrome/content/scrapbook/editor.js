@@ -76,23 +76,20 @@ var sbPageEditor = {
 	//   1: enable
 	initEvent : function(aWindow, aStateFlag)
 	{
-		try { aWindow.document.removeEventListener("keypress", this.handleEvent, true); } catch(ex){}
+		try { aWindow.document.removeEventListener("keypress", this.handleKeyEvent, true); } catch(ex){}
 		if (aStateFlag == 1) {
-			aWindow.document.addEventListener("keypress", this.handleEvent, true);
+			aWindow.document.addEventListener("keypress", this.handleKeyEvent, true);
 		}
 	},
 
-	handleEvent : function(aEvent)
+	handleKeyEvent : function(aEvent)
 	{
-		if ( aEvent.type == "keypress" )
-		{
-			// 1-8 or Alt + 1-8
-			if (!(aEvent.shiftKey || aEvent.ctrlKey || aEvent.metaKey)) {
-				var idx = aEvent.charCode - (aEvent.DOM_VK_1 - 1);
-				if ((idx >= 1) && (idx <= 8)) {
-					sbPageEditor.highlight(idx);
-				}
-			}
+		// 1-8 or Alt + 1-8
+		var idx = aEvent.charCode - (aEvent.DOM_VK_1 - 1);
+		if ((idx >= 1) && (idx <= 8) &&
+			!aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbPageEditor.highlight(idx);
+			return;
 		}
 	},
 
@@ -527,21 +524,19 @@ var sbHtmlEditor = {
 
 	initEvent : function(aWindow, aStateFlag)
 	{
-		aWindow.document.removeEventListener("keypress", this.handleEvent, true);
+		aWindow.document.removeEventListener("keypress", this.handleKeyEvent, true);
 		if (aStateFlag == 1) {
-			aWindow.document.addEventListener("keypress", this.handleEvent, true);
+			aWindow.document.addEventListener("keypress", this.handleKeyEvent, true);
 		}
 	},
 
-	handleEvent : function(aEvent)
+	handleKeyEvent : function(aEvent)
 	{
-		if ( aEvent.type == "keypress" )
-		{
-			// Ctrl+Alt+I
-			if (String.fromCharCode(aEvent.charCode).toUpperCase() == "I" &&
-				aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-				sbHtmlEditor.insertSource(sbHtmlEditor.currentDocument);
-			}
+		// Ctrl+Alt+I
+		if (String.fromCharCode(aEvent.charCode).toUpperCase() == "I" &&
+			aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.insertSource(sbHtmlEditor.currentDocument);
+			return;
 		}
 	},
 	
