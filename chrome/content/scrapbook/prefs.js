@@ -64,9 +64,11 @@ var sbPrefWindow = {
 	},
 
 	hlCustomize: function(aNumber) {
+		var ret = {index: aNumber};
 		document.documentElement.openSubDialog(
-			"chrome://scrapbook/content/hlCustom.xul", "modal,centerscreen,chrome", aNumber
+			"chrome://scrapbook/content/hlCustom.xul", "modal,centerscreen,chrome", ret
 		);
+		if (ret.result == 1) this.changed = true;
 		this.hlUpdateUI();
 	},
 
