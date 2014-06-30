@@ -494,35 +494,23 @@ var sbHtmlEditor = {
 		this.setEditable(doc);
 	},
 
-	setEditable : function(aDoc, aState)
+	// aStateFlag
+	//   0: disable
+	//   1: enable
+	setEditable : function(aDoc, aStateFlag)
 	{
-		// if no define, auto-detect
-		if ( aState === undefined ) {
-			if ( aDoc.designMode == "on" ) {
-				sbPageEditor.allowUndo(aDoc);
-				aDoc.designMode = "off";
-				document.getElementById("ScrapBookEditHTMLSwitch").removeAttribute("checked");
-			}
-			else {
-				sbPageEditor.allowUndo(aDoc);
-				aDoc.designMode = "on";
-				document.getElementById("ScrapBookEditHTMLSwitch").setAttribute("checked", true);
-			}
-		}
-		// force turn off
-		else if ( aState == false ) {
-			if ( aDoc.designMode == "on" ) {
-				sbPageEditor.allowUndo(aDoc);
-				aDoc.designMode = "off";
-				document.getElementById("ScrapBookEditHTMLSwitch").removeAttribute("checked");
-			}
-		}
-		// force turn on
-		else {
+		if ( aStateFlag === undefined ) aStateFlag = (aDoc.designMode == "on") ? 0 : 1;
+		document.getElementById("ScrapBookEditHTML").checked = (aStateFlag == 1);
+		if ( aStateFlag == 1 ) {
 			if ( aDoc.designMode != "on" ) {
 				sbPageEditor.allowUndo(aDoc);
 				aDoc.designMode = "on";
-				document.getElementById("ScrapBookEditHTMLSwitch").setAttribute("checked", true);
+			}
+		}
+		else {
+			if ( aDoc.designMode != "off" ) {
+				sbPageEditor.allowUndo(aDoc);
+				aDoc.designMode = "off";
 			}
 		}
 	},
