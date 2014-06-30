@@ -485,6 +485,7 @@ var sbDOMEraser = {
 
 	enabled : false,
 	verbose : 0,
+	lastTarget : null,
 
 	// aStateFlag
 	//   0: disable
@@ -497,11 +498,13 @@ var sbDOMEraser = {
 		document.getElementById("ScrapBookHighlighter").disabled = this.enabled;
 		document.getElementById("ScrapBookEditAnnotation").disabled = this.enabled;
 		document.getElementById("ScrapBookEditCutter").disabled  = this.enabled;
+		if (sbDOMEraser.lastTarget) {
+			sbDOMEraser._clearOutline(sbDOMEraser.lastTarget);
+			sbDOMEraser.lastTarget = null;
+		}
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			var tooltip = win.document.getElementById("scrapbook-eraser-tooltip");
 			if ( tooltip ) tooltip.parentNode.removeChild(tooltip);
-			var lastTarget = sbCommonUtils.documentData(win.document, "lastDOMEraserTarget");
-			if ( lastTarget ) sbDOMEraser._clearOutline(lastTarget);
 			if (aStateFlag == 1) {
 				this.initEvent(win, 1);
 				this.initStyle(win, 1);
@@ -577,7 +580,7 @@ var sbDOMEraser = {
 					sbDOMEraser._setOutline(elem, "2px solid #FF0000");
 				}
 			}
-			sbCommonUtils.documentData(elem.ownerDocument, "lastDOMEraserTarget", elem);
+			sbDOMEraser.lastTarget = elem;
 		}
 		else if ( aEvent.type == "mouseout" || aEvent.type == "click" )
 		{
@@ -599,7 +602,7 @@ var sbDOMEraser = {
 						elem.parentNode.removeChild(elem);
 				}
 			}
-			sbCommonUtils.documentData(elem.ownerDocument, "lastDOMEraserTarget", null);
+			sbDOMEraser.lastTarget = null;
 		}
 	},
 
