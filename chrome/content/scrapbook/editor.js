@@ -86,21 +86,13 @@ var sbPageEditor = {
 	{
 		if ( aEvent.type == "keypress" )
 		{
-			if ( aEvent.altKey || aEvent.shiftKey || aEvent.ctrlKey || aEvent.metaKey ) return;
-			var idx = 0;
-			switch ( aEvent.charCode )
-			{
-				case aEvent.DOM_VK_1 : idx = 1; break;
-				case aEvent.DOM_VK_2 : idx = 2; break;
-				case aEvent.DOM_VK_3 : idx = 3; break;
-				case aEvent.DOM_VK_4 : idx = 4; break;
-				case aEvent.DOM_VK_5 : idx = 5; break;
-				case aEvent.DOM_VK_6 : idx = 6; break;
-				case aEvent.DOM_VK_7 : idx = 7; break;
-				case aEvent.DOM_VK_8 : idx = 8; break;
-				default : return;
+			// 1-8 or Alt + 1-8
+			if (!(aEvent.shiftKey || aEvent.ctrlKey || aEvent.metaKey)) {
+				var idx = aEvent.charCode - (aEvent.DOM_VK_1 - 1);
+				if ((idx >= 1) && (idx <= 8)) {
+					sbPageEditor.highlight(idx);
+				}
 			}
-			if ( idx > 0 ) sbPageEditor.highlight(idx);
 		}
 	},
 
