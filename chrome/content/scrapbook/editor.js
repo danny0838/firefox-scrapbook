@@ -403,7 +403,6 @@ var sbPageEditor = {
 	{
 		var elems = this.TOOLBAR.childNodes;
 		for ( var i = 0; i < elems.length; i++ ) elems[i].disabled = aBool;
-		this.COMMENT.disabled = aBool;
 	},
 
 	toggle : function()

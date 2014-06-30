@@ -120,11 +120,11 @@
 			<toolbar id="ScrapBookEditor" align="center" hidden="true" autoshow="true" persist="autoshow" style="background-attachment: scroll !important;">
 			    <image id="ScrapBookEditIcon" style="width:16px;height:16px;" />
 				<textbox id="ScrapBookEditTitle"   oninput="sbPageEditor.changed2 = true;" onkeypress="if (event.keyCode == 13) sbPageEditor.saveResource();" onclick="if (event.button == 1) sbPageEditor.selection2Title(this);" flex="1" style="padding:2px;max-width:220px;" />
-				<toolbarbutton id="ScrapBookToggleComment" image="chrome://scrapbook/skin/edit_comment.png" tooltiptext="&sb.edit.comment;" oncommand="sbPageEditor.toggleComment();" />
+				<toolbarbutton id="ScrapBookToggleComment" tooltiptext="&sb.edit.comment;" oncommand="sbPageEditor.toggleComment();" />
 				<textbox id="ScrapBookEditComment" spellcheck="true" oninput="sbPageEditor.onInputComment(this.value);" onkeypress="if (event.keyCode == 13) if (!sbPageEditor.multiline) sbPageEditor.saveResource();" flex="3" style="padding:2px;" />
 				<spacer id="ScrapBookEditSpacer" flex="0" />
 				<label id="ScrapBookHighlighterPreview" value="&sb.highlighter;" />
-				<toolbarbutton id="ScrapBookHighlighter" type="menu-button" persist="color" image="chrome://scrapbook/skin/edit_highlighter.png" tooltiptext="&sb.highlighter;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbPageEditor.highlight();" accesskey="Q">
+				<toolbarbutton id="ScrapBookHighlighter" type="menu-button" persist="color" tooltiptext="&sb.highlighter;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbPageEditor.highlight();" accesskey="Q">
 					<menupopup onpopupshowing="sbHighlighter.updatePopup();">
 						<menuitem id="ScrapBookHighlighterM1" type="radio" label="&sb.highlighter;1" oncommand="sbPageEditor.highlight(1);" />
 						<menuitem id="ScrapBookHighlighterM2" type="radio" label="&sb.highlighter;2" oncommand="sbPageEditor.highlight(2);" />
@@ -136,7 +136,7 @@
 						<menuitem id="ScrapBookHighlighterM8" type="radio" label="&sb.highlighter;8" oncommand="sbPageEditor.highlight(8);" />
 					</menupopup>
 				</toolbarbutton>
-				<toolbarbutton id="ScrapBookEditAnnotation" type="menu-button" tooltiptext="&sb.edit.sticky.create;" image="chrome://scrapbook/skin/edit_annotation.png" accesskey="A" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbAnnotationService.createSticky();">
+				<toolbarbutton id="ScrapBookEditAnnotation" type="menu-button" tooltiptext="&sb.edit.sticky.create;" accesskey="A" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbAnnotationService.createSticky();">
 					<menupopup onpopupshowing="this.firstChild.nextSibling.setAttribute('disabled', !sbPageEditor.item);">
 						<menuitem label="&sb.edit.attach.link;" oncommand="sbAnnotationService.attach('L',this.label);" />
 						<menuitem label="&sb.edit.attach.file;" oncommand="sbAnnotationService.attach('F',this.label);" />
@@ -145,7 +145,7 @@
 						<menuitem label="&sb.edit.sticky.create;"  oncommand="sbAnnotationService.createSticky();" />
 					</menupopup>
 				</toolbarbutton>
-				<toolbarbutton id="ScrapBookEditCutter" type="menu-button" image="chrome://scrapbook/skin/edit_cutter.png" tooltiptext="&sb.edit.cutter;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbPageEditor.cutter();">
+				<toolbarbutton id="ScrapBookEditCutter" type="menu-button" tooltiptext="&sb.edit.cutter;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbPageEditor.cutter();">
 					<menupopup>
 						<menuitem label="&sb.edit.remove.script;" oncommand="sbPageEditor.removeElementsByTagName('script');" />
 						<menuitem label="&sb.edit.remove.iframe;" oncommand="sbPageEditor.removeElementsByTagName('iframe');" />
@@ -156,9 +156,9 @@
 						<menuitem label="&sb.edit.cutter;" oncommand="sbPageEditor.cutter();" />
 					</menupopup>
 				</toolbarbutton>
-				<toolbarbutton id="ScrapBookEditEraser" tooltiptext="&sb.edit.eraser;" image="chrome://scrapbook/skin/edit_eraser.png" oncommand="sbDOMEraser.init(this.checked ? 2 : 1);" type="checkbox" autoCheck="false" />
-				<toolbarbutton id="ScrapBookEditUndo"   tooltiptext="&sb.edit.undo;"   image="chrome://scrapbook/skin/edit_undo.png"   oncommand="sbPageEditor.undo();" accesskey="Z" />
-				<toolbarbutton id="ScrapBookEditSave"   tooltiptext="&sb.edit.save;"   image="chrome://scrapbook/skin/edit_save.png"   oncommand="sbPageEditor.saveOrCapture();" onclick="if (event.button == 1) sbPageEditor.saveOrCapture(true);" accesskey="S" />
+				<toolbarbutton id="ScrapBookEditEraser" tooltiptext="&sb.edit.eraser;" oncommand="sbDOMEraser.init(this.checked ? 2 : 1);" type="checkbox" autoCheck="false" />
+				<toolbarbutton id="ScrapBookEditUndo"   tooltiptext="&sb.edit.undo;"   oncommand="sbPageEditor.undo();" accesskey="Z" />
+				<toolbarbutton id="ScrapBookEditSave"   tooltiptext="&sb.edit.save;"   oncommand="sbPageEditor.saveOrCapture();" onclick="if (event.button == 1) sbPageEditor.saveOrCapture(true);" accesskey="S" />
 				<toolbarbutton image="chrome://scrapbook/skin/expander_left.png" tooltiptext="&sb.locate;" oncommand="sbBrowserOverlay.execLocate(sbBrowserOverlay.resource);" />
 			</toolbar>
 		</toolbox>
