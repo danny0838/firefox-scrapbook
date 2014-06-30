@@ -545,8 +545,8 @@ var sbDOMEraser = {
 	{
 		aEvent.preventDefault();
 		var elem = aEvent.target;
-		var tagName = elem.localName.toUpperCase();
-		if ( aEvent.type != "keypress" && ["SCROLLBAR","HTML","BODY","FRAME","FRAMESET"].indexOf(tagName) >= 0 ) return;
+		var tagName = elem.nodeName.toLowerCase();
+		if ( ["#document","scrollbar","html","body","frame","frameset"].indexOf(tagName) >= 0 ) return;
 		var onSbObj = sbCommonUtils.getSbObjectType(elem);
 		if ( aEvent.type == "mouseover" || aEvent.type == "mousemove" )
 		{
@@ -566,7 +566,7 @@ var sbDOMEraser = {
 					tooltip.textContent = sbCommonUtils.lang("overlay", "EDIT_REMOVE_HIGHLIGHT");
 					sbDOMEraser._setOutline(elem, "2px dashed #0000FF");
 				} else {
-					tooltip.textContent = elem.localName;
+					tooltip.textContent = tagName;
 					if ( elem.id ) tooltip.textContent += ' id="' + elem.id + '"';
 					if ( elem.className ) tooltip.textContent += ' class="' + elem.className + '"';
 					sbDOMEraser._setOutline(elem, "2px solid #FF0000");
