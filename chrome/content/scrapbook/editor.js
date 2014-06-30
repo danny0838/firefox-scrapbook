@@ -498,6 +498,10 @@ var sbDOMEraser = {
 		document.getElementById("ScrapBookEditAnnotation").disabled = this.enabled;
 		document.getElementById("ScrapBookEditCutter").disabled  = this.enabled;
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
+			var tooltip = win.document.getElementById("scrapbook-eraser-tooltip");
+			if ( tooltip ) tooltip.parentNode.removeChild(tooltip);
+			var lastTarget = sbCommonUtils.documentData(win.document, "lastDOMEraserTarget");
+			if ( lastTarget ) sbDOMEraser._clearOutline(lastTarget);
 			if (aStateFlag == 1) {
 				this.initEvent(win, 1);
 				this.initStyle(win, 1);
@@ -554,13 +558,14 @@ var sbDOMEraser = {
 			var tooltip = elem.ownerDocument.getElementById("scrapbook-eraser-tooltip");
 			if ( !tooltip )
 			{
+				var newtooltip = true;
 				tooltip = elem.ownerDocument.createElement("DIV");
 				tooltip.id = "scrapbook-eraser-tooltip";
 				elem.ownerDocument.body.appendChild(tooltip);
 			}
 			tooltip.style.left = aEvent.pageX + "px";
 			tooltip.style.top  = aEvent.pageY + "px";
-			if ( aEvent.type == "mouseover" )
+			if ( aEvent.type == "mouseover" || newtooltip )
 			{
 				if ( onSbObj ) {
 					tooltip.textContent = sbCommonUtils.lang("overlay", "EDIT_REMOVE_HIGHLIGHT");
@@ -572,6 +577,7 @@ var sbDOMEraser = {
 					sbDOMEraser._setOutline(elem, "2px solid #FF0000");
 				}
 			}
+			sbCommonUtils.documentData(elem.ownerDocument, "lastDOMEraserTarget", elem);
 		}
 		else if ( aEvent.type == "mouseout" || aEvent.type == "click" )
 		{
@@ -593,6 +599,7 @@ var sbDOMEraser = {
 						elem.parentNode.removeChild(elem);
 				}
 			}
+			sbCommonUtils.documentData(elem.ownerDocument, "lastDOMEraserTarget", null);
 		}
 	},
 
