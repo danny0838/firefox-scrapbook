@@ -545,9 +545,17 @@ var sbHtmlEditor = {
 	initEvent : function(aWindow, aStateFlag)
 	{
 		aWindow.document.removeEventListener("keypress", this.handleKeyEvent, true);
+		aWindow.document.removeEventListener("input", this.handleInputEvent, true);
 		if (aStateFlag == 1) {
 			aWindow.document.addEventListener("keypress", this.handleKeyEvent, true);
+			aWindow.document.addEventListener("input", this.handleInputEvent, true);
 		}
+	},
+
+	handleInputEvent : function(aEvent)
+	{
+		var doc = aEvent.originalTarget.ownerDocument;
+		sbCommonUtils.documentData(doc, "changed", true);
 	},
 
 	handleKeyEvent : function(aEvent)
