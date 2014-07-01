@@ -574,6 +574,186 @@ var sbHtmlEditor = {
 
 	handleKeyEvent : function(aEvent)
 	{
+		/* general */
+		// Ctrl+K
+		if (aEvent.keyCode == aEvent.DOM_VK_K &&
+			aEvent.ctrlKey && !aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "removeFormat");
+			aEvent.preventDefault();
+			return;
+		}
+		// Ctrl+B
+		if (aEvent.keyCode == aEvent.DOM_VK_B &&
+			aEvent.ctrlKey && !aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "bold");
+			aEvent.preventDefault();
+			return;
+		}
+		// Ctrl+I
+		if (aEvent.keyCode == aEvent.DOM_VK_I &&
+			aEvent.ctrlKey && !aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "italic");
+			aEvent.preventDefault();
+			return;
+		}
+		// Ctrl+U
+		if (aEvent.keyCode == aEvent.DOM_VK_U &&
+			aEvent.ctrlKey && !aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "underline");
+			aEvent.preventDefault();
+			return;
+		}
+		// Ctrl+S
+		if (aEvent.keyCode == aEvent.DOM_VK_S &&
+			aEvent.ctrlKey && !aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "strikeThrough");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+↑
+		if (aEvent.keyCode == aEvent.DOM_VK_UP &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "increaseFontSize");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+↓
+		if (aEvent.keyCode == aEvent.DOM_VK_DOWN &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "decreaseFontSize");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+K
+		if (aEvent.keyCode == aEvent.DOM_VK_K &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "superscript");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+J
+		if (aEvent.keyCode == aEvent.DOM_VK_J &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "subscript");
+			aEvent.preventDefault();
+			return;
+		}
+
+		/* block */
+		// Alt+0
+		if (aEvent.keyCode == aEvent.DOM_VK_0 &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "formatblock", "p");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+1
+		if (aEvent.keyCode == aEvent.DOM_VK_1 &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "formatblock", "h1");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+2
+		if (aEvent.keyCode == aEvent.DOM_VK_2 &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "formatblock", "h2");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+3
+		if (aEvent.keyCode == aEvent.DOM_VK_3 &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "formatblock", "h3");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+4
+		if (aEvent.keyCode == aEvent.DOM_VK_4 &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "formatblock", "h4");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+5
+		if (aEvent.keyCode == aEvent.DOM_VK_5 &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "formatblock", "h5");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+6
+		if (aEvent.keyCode == aEvent.DOM_VK_6 &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "formatblock", "h6");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+7
+		if (aEvent.keyCode == aEvent.DOM_VK_7 &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "formatblock", "blockquote");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+8
+		if (aEvent.keyCode == aEvent.DOM_VK_8 &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "formatblock", "pre");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+U
+		if (aEvent.keyCode == aEvent.DOM_VK_U &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "insertUnorderedList");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+O
+		if (aEvent.keyCode == aEvent.DOM_VK_O &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "insertOrderedList");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+[
+		if (aEvent.keyCode == aEvent.DOM_VK_OPEN_BRACKET &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "outdent");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+]
+		if (aEvent.keyCode == aEvent.DOM_VK_CLOSE_BRACKET &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "indent");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+,
+		if (aEvent.keyCode == aEvent.DOM_VK_COMMA &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "justifyLeft");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+.
+		if (aEvent.keyCode == aEvent.DOM_VK_PERIOD &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "justifyRight");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+M
+		if (aEvent.keyCode == aEvent.DOM_VK_M &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "justifyCenter");
+			aEvent.preventDefault();
+			return;
+		}
+		
+		/* special */
 		// F10
 		if (aEvent.keyCode == aEvent.DOM_VK_F10 &&
 			!aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
@@ -588,6 +768,11 @@ var sbHtmlEditor = {
 			aEvent.preventDefault();
 			return;
 		}
+	},
+
+	simpleCommand : function(aDoc, aCommand, aArg)
+	{
+		aDoc.execCommand(aCommand, false, aArg);
 	},
 	
 	insertSource : function(aDoc)
