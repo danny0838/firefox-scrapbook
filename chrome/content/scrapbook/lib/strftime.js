@@ -95,10 +95,10 @@ The default will be based on the lang attribute of the HTML tag of your document
 */
 Date.prototype.locale = 'en-GB';
 //! \cond FALSE
-if(document.getElementsByTagName('html') && document.getElementsByTagName('html')[0].lang)
-{
-	Date.prototype.locale = document.getElementsByTagName('html')[0].lang;
-}
+// if(document.getElementsByTagName('html') && document.getElementsByTagName('html')[0].lang)
+// {
+	// Date.prototype.locale = document.getElementsByTagName('html')[0].lang;
+// }
 //! \endcond
 
 /**
