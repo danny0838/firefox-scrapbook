@@ -889,31 +889,7 @@ var sbHtmlEditor = {
 	{
         var d = new Date();
 		var fmt = sbCommonUtils.getPref("edit.insertDateFormat", "") || "%Y-%m-%d %H:%M:%S";
-		var text = fmt.replace(/%Y|%m|%d|%H|%M|%S/g, function(m){
-			switch (m) {
-				case "%Y":
-					return d.getFullYear();
-				case "%m":
-					return pad(d.getMonth(), 2);
-				case "%d":
-					return pad(d.getDate(), 2);
-				case "%H":
-					return pad(d.getHours(), 2);
-				case "%M":
-					return pad(d.getMinutes(), 2);
-				case "%S":
-					return pad(d.getSeconds(), 2);
-				default:
-					return m;
-			}
-		});
-		aDoc.execCommand("insertHTML", false, text);
-		
-		function pad(n, width, z) {
-			z = z || '0';
-			n = n + '';
-			return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
-		}
+		aDoc.execCommand("insertHTML", false, d.strftime(fmt));
 	},
 	
 	insertSource : function(aDoc)
