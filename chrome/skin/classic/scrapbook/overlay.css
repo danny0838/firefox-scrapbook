@@ -46,6 +46,7 @@ toolbar[iconsize="small"] #scrapbook-button {
 
 #ScrapBookMenu menuitem.sb-item[sbtype="notex"] {
 	list-style-image: url('chrome://scrapbook/skin/treenotex.png') !important;
+	color: rgb(80,0,32);
 }
 
 #ScrapBookMenu menuitem.sb-item[sbtype="marked"] {
