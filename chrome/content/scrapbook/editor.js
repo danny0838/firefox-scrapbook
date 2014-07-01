@@ -782,6 +782,13 @@ var sbHtmlEditor = {
 			aEvent.preventDefault();
 			return;
 		}
+		// Ctrl+Shift+K
+		if (aEvent.keyCode == aEvent.DOM_VK_K &&
+			aEvent.ctrlKey && !aEvent.altKey && aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "unlink");
+			aEvent.preventDefault();
+			return;
+		}
 		// Alt+D
 		if (aEvent.keyCode == aEvent.DOM_VK_D &&
 			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
