@@ -135,6 +135,7 @@
 	<prefpane id="editPane" label="&sb.prefs.edit;" flex="1">
 		<preferences>
 			<preference id="extensions.scrapbook.edit.extendSourceEdit" name="extensions.scrapbook.edit.extendSourceEdit" type="bool" />
+			<preference id="extensions.scrapbook.edit.insertDateFormat" name="extensions.scrapbook.edit.insertDateFormat" type="string" />
 		</preferences>
 		<groupbox>
 			<caption label="&sb.highlighter;" />
@@ -189,6 +190,10 @@
 		</groupbox>
 		<spacer height="10" />
 		<checkbox preference="extensions.scrapbook.edit.extendSourceEdit" label="&sbx.prefs.edit.extendSourceEdit;" />
+		<hbox>
+			<label value="&sbx.prefs.edit.insertDateFormat;" />
+			<textbox preference="extensions.scrapbook.edit.insertDateFormat" placeholder="eg. %Y-%m-%d %H:%M:%S" flex="1" />
+		</hbox>
 	</prefpane>
 
 	<prefpane id="organizePane" label="&sb.prefs.organize;" flex="1">

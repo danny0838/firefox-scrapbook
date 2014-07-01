@@ -18,6 +18,7 @@
 <!ENTITY sb.prefs.tabs.tips "Abrir numa aba para as seguintes operações">
 <!ENTITY sb.prefs.tabs.note "Editar Nota">
 <!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
+<!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sb.prefs.data "Localização para Armazenar Dados">
 <!ENTITY sb.prefs.data.default "Padrão (Pasta do Perfil)">
 <!ENTITY sb.prefs.data.custom "Saltar dados em">

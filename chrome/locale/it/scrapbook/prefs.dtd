@@ -18,6 +18,7 @@
 <!ENTITY sb.prefs.tabs.tips "Azioni che verranno eseguite in nuove schede">
 <!ENTITY sb.prefs.tabs.note "Apri/modifica le note">
 <!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
+<!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sb.prefs.data "Cartella dove conservare i dati">
 <!ENTITY sb.prefs.data.default "Predefinita (nella cartella del proprio profilo)">
 <!ENTITY sb.prefs.data.custom "(Da selezionare)">

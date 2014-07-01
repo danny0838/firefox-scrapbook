@@ -782,6 +782,13 @@ var sbHtmlEditor = {
 			aEvent.preventDefault();
 			return;
 		}
+		// Alt+D
+		if (aEvent.keyCode == aEvent.DOM_VK_D &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.insertDate(sbHtmlEditor.currentDocument);
+			aEvent.preventDefault();
+			return;
+		}
 		// Ctrl+Alt+I
 		if (aEvent.keyCode == aEvent.DOM_VK_I &&
 			aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
@@ -876,6 +883,37 @@ var sbHtmlEditor = {
 		var url = FP.file.leafName;
 		var html = '<a href="' + url + '" title="' + title + '">' + content + '</a>';
 		aDoc.execCommand("insertHTML", false, html);
+	},
+
+	insertDate : function(aDoc)
+	{
+        var d = new Date();
+		var fmt = sbCommonUtils.getPref("edit.insertDateFormat", "") || "%Y-%m-%d %H:%M:%S";
+		var text = fmt.replace(/%Y|%m|%d|%H|%M|%S/g, function(m){
+			switch (m) {
+				case "%Y":
+					return d.getFullYear();
+				case "%m":
+					return pad(d.getMonth(), 2);
+				case "%d":
+					return pad(d.getDate(), 2);
+				case "%H":
+					return pad(d.getHours(), 2);
+				case "%M":
+					return pad(d.getMinutes(), 2);
+				case "%S":
+					return pad(d.getSeconds(), 2);
+				default:
+					return m;
+			}
+		});
+		aDoc.execCommand("insertHTML", false, text);
+		
+		function pad(n, width, z) {
+			z = z || '0';
+			n = n + '';
+			return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+		}
 	},
 	
 	insertSource : function(aDoc)

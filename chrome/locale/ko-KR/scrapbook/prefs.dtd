@@ -18,6 +18,7 @@
 <!ENTITY sb.prefs.tabs.tips "다음 동작은 탭으로 열기">
 <!ENTITY sb.prefs.tabs.note "노트 편집">
 <!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
+<!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sb.prefs.data "데이터 저장 위치">
 <!ENTITY sb.prefs.data.default "기본값 (프로필 폴더)">
 <!ENTITY sb.prefs.data.custom "다음에 저장:">
