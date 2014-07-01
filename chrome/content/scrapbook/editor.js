@@ -519,8 +519,21 @@ var sbHtmlEditor = {
 		if ( aStateFlag == 1 ) {
 			this.currentDocument = aDoc;
 			if ( aDoc.designMode != "on" ) {
+				var sel = aDoc.defaultView.getSelection();
+				// backup original selection ranges
+				var ranges = [];
+				for (var i=0, len=sel.rangeCount; i<len; i++) {
+					ranges.push(sel.getRangeAt(i))
+				}
+				// backup and switch design mode on (will clear select)
 				sbPageEditor.allowUndo(aDoc);
 				aDoc.designMode = "on";
+				// restore the selection
+				var sel = aDoc.defaultView.getSelection();
+				sel.removeAllRanges();
+				for (var i=0, len=ranges.length; i<len; i++) {
+					sel.addRange(ranges[i]);
+				}
 			}
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 				this.initEvent(win, 1);
