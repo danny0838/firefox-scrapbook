@@ -828,7 +828,7 @@ var sbHtmlEditor = {
 		}
 		// if unavailable, let the user input an id
 		var ret = {value: id || ""};
-		if ( !sbCommonUtils.PROMPT.prompt(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("overlay", "ADD_INNERLINK"), ret, null, {}) ) return;
+		if ( !sbCommonUtils.PROMPT.prompt(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_ENTER"), ret, null, {}) ) return;
 		var id = ret.value;
 		var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
 		if ( sbDataSource.exists(res) ) {
@@ -840,7 +840,7 @@ var sbHtmlEditor = {
 		else res = null;
 		// if it's invalid, alert and quit
 		if (!res) {
-			sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("overlay", "ADD_INNERLINK_INVALID", [id]));
+			sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_INVALID", [id]));
 			return;
 		}
 		// attach the link
@@ -864,7 +864,7 @@ var sbHtmlEditor = {
 		var destFile = sbCommonUtils.getContentDir(sbPageEditor.item.id).clone();
 		destFile.append(FP.file.leafName);
 		if ( destFile.exists() && destFile.isFile() ) {
-			if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "OVERWRITE_FILE", [FP.file.leafName])) ) return;
+			if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [FP.file.leafName])) ) return;
 			destFile.remove(false);
 		}
 		try {
@@ -1434,7 +1434,7 @@ var sbAnnotationService = {
 			}
 			// if unavailable, let the user input an id
 			var ret = {value: id || ""};
-			if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook - " + aLabel, sbCommonUtils.lang("overlay", "ADD_INNERLINK"), ret, null, {}) ) return;
+			if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook - " + aLabel, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_ENTER"), ret, null, {}) ) return;
 			var id = ret.value;
 			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
 			if ( sbDataSource.exists(res) ) {
@@ -1446,7 +1446,7 @@ var sbAnnotationService = {
 			else res = null;
 			// if it's invalid, alert and quit
 			if (!res) {
-				sbCommonUtils.PROMPT.alert(window, "ScrapBook - " + aLabel, sbCommonUtils.lang("overlay", "ADD_INNERLINK_INVALID", [id]));
+				sbCommonUtils.PROMPT.alert(window, "ScrapBook - " + aLabel, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_INVALID", [id]));
 				return;
 			}
 			// attach the link
@@ -1466,7 +1466,7 @@ var sbAnnotationService = {
 			var destFile = sbCommonUtils.getContentDir(sbPageEditor.item.id).clone();
 			destFile.append(FP.file.leafName);
 			if ( destFile.exists() && destFile.isFile() ) {
-				if ( !sbCommonUtils.PROMPT.confirm(window, "ScrapBook - " + aLabel, sbCommonUtils.lang("overlay", "OVERWRITE_FILE", [FP.file.leafName])) ) return;
+				if ( !sbCommonUtils.PROMPT.confirm(window, "ScrapBook - " + aLabel, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [FP.file.leafName])) ) return;
 				destFile.remove(false);
 			}
 			try {
