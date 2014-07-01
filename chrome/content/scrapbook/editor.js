@@ -394,7 +394,6 @@ var sbPageEditor = {
 		var newComment = sbCommonUtils.escapeComment(this.COMMENT.value);
 		if ( newTitle != this.item.title || newComment != this.item.comment )
 		{
-			this.disableTemporary(500);
 			sbDataSource.setProperty(sbBrowserOverlay.resource, "title",   newTitle);
 			sbDataSource.setProperty(sbBrowserOverlay.resource, "comment", newComment);
 			this.item.title   = newTitle;
@@ -405,16 +404,23 @@ var sbPageEditor = {
 		sbCommonUtils.documentData(window.content.document, "propertyChanged", false);
 	},
 
-	disableTemporary : function(msec)
-	{
-		window.setTimeout(function() { sbPageEditor.disable(true);  }, 0);
-		window.setTimeout(function() { sbPageEditor.disable(false); }, msec);
-	},
-
 	disable : function(aBool)
 	{
-		var elems = this.TOOLBAR.childNodes;
-		for ( var i = 0; i < elems.length; i++ ) elems[i].disabled = aBool;
+		if (aBool) {
+			var elems = this.TOOLBAR.childNodes;
+			for ( var i = 0; i < elems.length; i++ ) {
+				// this will store "true" or "false"
+				elems[i].setAttribute("was-disabled", elems[i].disabled);
+				elems[i].disabled = true;
+			}
+		}
+		else {
+			var elems = this.TOOLBAR.childNodes;
+			for ( var i = 0; i < elems.length; i++ ) {
+				elems[i].disabled = (elems[i].getAttribute("was-disabled") == "true");
+				elems[i].removeAttribute("was-disabled");
+			}
+		}
 	},
 
 	toggle : function()
