@@ -969,23 +969,21 @@ var sbAnnotationService = {
 				}
 			}
 			// if unavailable, let the user input an id
-			if (!id) {
-				var ret = {};
-				if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook - " + aLabel, sbCommonUtils.lang("overlay", "ADD_INNERLINK"), ret, null, {}) ) return;
-				var id = ret.value;
-				var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
-				if ( sbDataSource.exists(res) ) {
-					var type = sbDataSource.getProperty(res, "type");
-					if ( ["folder", "separator"].indexOf(type) !== -1 ) {
-						res = null;
-					}
+			var ret = {value: id || ""};
+			if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook - " + aLabel, sbCommonUtils.lang("overlay", "ADD_INNERLINK"), ret, null, {}) ) return;
+			var id = ret.value;
+			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
+			if ( sbDataSource.exists(res) ) {
+				var type = sbDataSource.getProperty(res, "type");
+				if ( ["folder", "separator"].indexOf(type) !== -1 ) {
+					res = null;
 				}
-				else res = null;
-				// if it's invalid, alert and quit
-				if (!res) {
-					sbCommonUtils.PROMPT.alert(window, "ScrapBook - " + aLabel, sbCommonUtils.lang("overlay", "ADD_INNERLINK_INVALID", [id]));
-					return;
-				}
+			}
+			else res = null;
+			// if it's invalid, alert and quit
+			if (!res) {
+				sbCommonUtils.PROMPT.alert(window, "ScrapBook - " + aLabel, sbCommonUtils.lang("overlay", "ADD_INNERLINK_INVALID", [id]));
+				return;
 			}
 			// attach the link
 			var title = sbDataSource.getProperty(res, "title");
