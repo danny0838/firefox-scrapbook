@@ -17,6 +17,7 @@ pref("extensions.scrapbook.data.path", "");
 pref("extensions.scrapbook.multibook.enabled", false);
 pref("extensions.scrapbook.edit.extendSourceEdit", true);
 pref("extensions.scrapbook.edit.insertDateFormat", "%Y-%m-%d %H:%M:%S");
+pref("extensions.scrapbook.edit.wrapperFormat", "<code>{THIS}</code>");
 pref("extensions.scrapbook.fileViewer.default", true);
 pref("extensions.scrapbook.fileViewer.path", "");
 pref("extensions.scrapbook.tree.unshift", false);

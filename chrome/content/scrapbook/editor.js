@@ -789,6 +789,13 @@ var sbHtmlEditor = {
 			aEvent.preventDefault();
 			return;
 		}
+		// Alt+Z
+		if (aEvent.keyCode == aEvent.DOM_VK_Z &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.wrapHTML(sbHtmlEditor.currentDocument);
+			aEvent.preventDefault();
+			return;
+		}
 		// Ctrl+Alt+I
 		if (aEvent.keyCode == aEvent.DOM_VK_I &&
 			aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
@@ -890,6 +897,15 @@ var sbHtmlEditor = {
         var d = new Date();
 		var fmt = sbCommonUtils.getPref("edit.insertDateFormat", "") || "%Y-%m-%d %H:%M:%S";
 		aDoc.execCommand("insertHTML", false, d.strftime(fmt));
+	},
+
+	wrapHTML : function(aDoc)
+	{
+		var sel = aDoc.defaultView.getSelection();
+		var html = sbPageEditor.getSelectionHTML(sel);
+		var wrapper = sbCommonUtils.getPref("edit.wrapperFormat", "") || "<code>{THIS}</code>";
+		html = wrapper.replace(/{THIS}/g, html);
+		aDoc.execCommand("insertHTML", false, html);
 	},
 	
 	insertSource : function(aDoc)

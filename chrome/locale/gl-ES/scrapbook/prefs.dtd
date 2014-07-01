@@ -19,6 +19,7 @@
 <!ENTITY sb.prefs.tabs.note "Editar aviso">
 <!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
 <!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format:">
 <!ENTITY sb.prefs.data "Localización dos datos">
 <!ENTITY sb.prefs.data.default "Predeterminada (Cartafol do perfil)">
 <!ENTITY sb.prefs.data.custom "Gardar os datos en">

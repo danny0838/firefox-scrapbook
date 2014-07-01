@@ -19,6 +19,7 @@
 <!ENTITY sb.prefs.tabs.note "Notu Düzenle">
 <!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
 <!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format:">
 <!ENTITY sb.prefs.data "Veri Saklama Konumu">
 <!ENTITY sb.prefs.data.default "Varsayılan (Profil Klasörü)">
 <!ENTITY sb.prefs.data.custom "Kaydetme konumu">
