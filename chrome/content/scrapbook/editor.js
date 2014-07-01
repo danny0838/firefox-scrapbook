@@ -509,9 +509,7 @@ var sbHtmlEditor = {
 	{
 		aDoc = aDoc || sbCommonUtils.getFocusedWindow().document;
 		if ( aStateFlag === undefined ) aStateFlag = !this.enabled;
-		var enable = (aStateFlag == 1);
-		if (this.enabled == enable) return;
-		this.enabled = enable;
+		this.enabled = (aStateFlag == 1);
 		document.getElementById("ScrapBookEditHTML").checked = this.enabled;
 		document.getElementById("ScrapBookHighlighter").disabled = this.enabled;
 		document.getElementById("ScrapBookEditAnnotation").disabled = this.enabled;
@@ -638,10 +636,8 @@ var sbDOMEraser = {
 	//   1: enable
 	init : function(aStateFlag)
 	{
-		var enable = (aStateFlag == 1);
-		if (this.enabled == enable) return;
-		this.enabled = enable;
 		this.verbose = 0;
+		this.enabled = (aStateFlag == 1);
 		document.getElementById("ScrapBookEditEraser").checked = this.enabled;
 		document.getElementById("ScrapBookHighlighter").disabled = this.enabled;
 		document.getElementById("ScrapBookEditAnnotation").disabled = this.enabled;
