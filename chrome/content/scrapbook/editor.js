@@ -362,8 +362,8 @@ var sbPageEditor = {
 			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SAVE_FILE", [RegExp.$2]));
 			return;
 		}
-		this.disable(true);
 		sbDOMEraser.init(0);
+		this.disable(true);
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			var doc = win.document;
 			if ( doc.contentType != "text/html" ) {
