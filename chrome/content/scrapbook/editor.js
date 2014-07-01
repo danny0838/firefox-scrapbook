@@ -152,6 +152,15 @@ var sbPageEditor = {
 		return isSelected ? sel : false;
 	},
 
+	getSelectionHTML : function(aSelection)
+	{
+		var range = aSelection.getRangeAt(0);
+		var content = range.cloneContents();
+		var elem = aSelection.anchorNode.ownerDocument.createElement("DIV");
+		elem.appendChild(content);
+		return elem.innerHTML;
+	},
+
 	cutter : function()
 	{
 		var win = sbCommonUtils.getFocusedWindow();
@@ -555,15 +564,25 @@ var sbHtmlEditor = {
 			for (var i=0, len=sel.rangeCount; i<len; i++) {
 				ranges.push(sel.getRangeAt(i))
 			}
-			// reset selection to the common ancestor container of the first range
-			var range = sel.getRangeAt(0);
-			var node = range.commonAncestorContainer;
-			if (node.nodeName == "#text") node = node.parentNode;
-			data.value = node.innerHTML;
-			range = aDoc.createRange();
-			range.selectNodeContents(node);
-			sel.removeAllRanges();
-			sel.addRange(range);
+			// get selection area to edit
+			if (sbCommonUtils.getPref("edit.extendSourceEdit", true)) {
+				// reset selection to the common ancestor container of the first range
+				var node = ranges[0].commonAncestorContainer;
+				if (node.nodeName == "#text") node = node.parentNode;
+				var range = aDoc.createRange();
+				range.selectNodeContents(node);
+				sel.removeAllRanges();
+				sel.addRange(range);			
+				// set data
+				data.value = node.innerHTML;
+			}
+			else {
+				// reset selection to the first range
+				sel.removeAllRanges();
+				sel.addRange(ranges[0]);
+				// set data
+				data.value = sbPageEditor.getSelectionHTML(sel);
+			}
 		}
 		// prompt the dialog for user input
 		window.top.openDialog(

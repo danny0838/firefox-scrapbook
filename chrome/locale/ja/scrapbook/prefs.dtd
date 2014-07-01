@@ -17,6 +17,7 @@
 <!ENTITY sb.prefs.restart "変更は Firefox 再起動後に反映されます。">
 <!ENTITY sb.prefs.tabs.tips "次の操作を新しいタブで開く">
 <!ENTITY sb.prefs.tabs.note "ノートの編集">
+<!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
 <!ENTITY sb.prefs.data "データ保存先">
 <!ENTITY sb.prefs.data.default "デフォルト (プロファイルフォルダ下)">
 <!ENTITY sb.prefs.data.custom "次のフォルダ">

@@ -17,6 +17,7 @@
 <!ENTITY sb.prefs.restart "需重新啟動 Firefox 方能生效。">
 <!ENTITY sb.prefs.tabs.tips "操作下列項目時，以分頁開啟">
 <!ENTITY sb.prefs.tabs.note "編輯筆記">
+<!ENTITY sbx.prefs.edit.extendSourceEdit "編輯 HTML 原始碼時自動擴大選取範圍">
 <!ENTITY sb.prefs.data "擷取資料存放處">
 <!ENTITY sb.prefs.data.default "預設（在您的個人設定檔資料夾中）">
 <!ENTITY sb.prefs.data.custom "存放至">

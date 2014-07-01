@@ -17,6 +17,7 @@
 <!ENTITY sb.prefs.restart "Zmeny sa prejavia po reštarte Firefoxu.">
 <!ENTITY sb.prefs.tabs.tips "Nasledovné akcie otvoria nové karty">
 <!ENTITY sb.prefs.tabs.note "Upraviť poznámku">
+<!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
 <!ENTITY sb.prefs.data "Umiestnenie pre ukladanie údajov">
 <!ENTITY sb.prefs.data.default "Predvolené">
 <!ENTITY sb.prefs.data.custom "Uložiť údaje do">

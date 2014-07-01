@@ -17,6 +17,7 @@
 <!ENTITY sb.prefs.restart "Değişiklikler Firefox&apos;u yeniden başlatmanızı gerektirir.">
 <!ENTITY sb.prefs.tabs.tips "Aşağıdaki eylemleri sekmede aç">
 <!ENTITY sb.prefs.tabs.note "Notu Düzenle">
+<!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
 <!ENTITY sb.prefs.data "Veri Saklama Konumu">
 <!ENTITY sb.prefs.data.default "Varsayılan (Profil Klasörü)">
 <!ENTITY sb.prefs.data.custom "Kaydetme konumu">

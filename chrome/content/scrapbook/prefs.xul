@@ -133,6 +133,9 @@
 	</prefpane>
 
 	<prefpane id="editPane" label="&sb.prefs.edit;" flex="1">
+		<preferences>
+			<preference id="extensions.scrapbook.edit.extendSourceEdit" name="extensions.scrapbook.edit.extendSourceEdit" type="bool" />
+		</preferences>
 		<groupbox>
 			<caption label="&sb.highlighter;" />
 			<hbox align="center">
@@ -185,6 +188,7 @@
 			</hbox>
 		</groupbox>
 		<spacer height="10" />
+		<checkbox preference="extensions.scrapbook.edit.extendSourceEdit" label="&sbx.prefs.edit.extendSourceEdit;" />
 	</prefpane>
 
 	<prefpane id="organizePane" label="&sb.prefs.organize;" flex="1">

@@ -17,6 +17,7 @@
 <!ENTITY sb.prefs.restart "Modificările sunt efective după repornirea navigatorului.">
 <!ENTITY sb.prefs.tabs.tips "Deschide în file pentru următoarele operații">
 <!ENTITY sb.prefs.tabs.note "Editează note">
+<!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
 <!ENTITY sb.prefs.data "Locație stocare date">
 <!ENTITY sb.prefs.data.default "Implicit (dosarul profilului)">
 <!ENTITY sb.prefs.data.custom "Dosarul:">
