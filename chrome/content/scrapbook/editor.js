@@ -76,9 +76,9 @@ var sbPageEditor = {
 	//   1: enable
 	initEvent : function(aWindow, aStateFlag)
 	{
-		try { aWindow.document.removeEventListener("keypress", this.handleKeyEvent, true); } catch(ex){}
+		try { aWindow.document.removeEventListener("keydown", this.handleKeyEvent, true); } catch(ex){}
 		if (aStateFlag == 1) {
-			aWindow.document.addEventListener("keypress", this.handleKeyEvent, true);
+			aWindow.document.addEventListener("keydown", this.handleKeyEvent, true);
 		}
 	},
 
@@ -99,7 +99,7 @@ var sbPageEditor = {
 			return;
 		}
 		// 1-8 or Alt + 1-8
-		var idx = aEvent.charCode - (aEvent.DOM_VK_1 - 1);
+		var idx = aEvent.keyCode - (aEvent.DOM_VK_1 - 1);
 		if ((idx >= 1) && (idx <= 8) &&
 			!aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
 			sbPageEditor.highlight(idx);
@@ -558,10 +558,10 @@ var sbHtmlEditor = {
 
 	initEvent : function(aWindow, aStateFlag)
 	{
-		aWindow.document.removeEventListener("keypress", this.handleKeyEvent, true);
+		aWindow.document.removeEventListener("keydown", this.handleKeyEvent, true);
 		aWindow.document.removeEventListener("input", this.handleInputEvent, true);
 		if (aStateFlag == 1) {
-			aWindow.document.addEventListener("keypress", this.handleKeyEvent, true);
+			aWindow.document.addEventListener("keydown", this.handleKeyEvent, true);
 			aWindow.document.addEventListener("input", this.handleInputEvent, true);
 		}
 	},
@@ -582,7 +582,7 @@ var sbHtmlEditor = {
 			return;
 		}
 		// Ctrl+Alt+I
-		if (String.fromCharCode(aEvent.charCode).toUpperCase() == "I" &&
+		if (aEvent.keyCode == aEvent.DOM_VK_I &&
 			aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
 			sbHtmlEditor.insertSource(sbHtmlEditor.currentDocument);
 			aEvent.preventDefault();
@@ -689,13 +689,13 @@ var sbDOMEraser = {
 		aWindow.document.removeEventListener("mousemove", this.handleEvent, true);
 		aWindow.document.removeEventListener("mouseout",  this.handleEvent, true);
 		aWindow.document.removeEventListener("click",     this.handleEvent, true);
-		aWindow.document.removeEventListener("keypress",  this.handleKeyEvent, true);
+		aWindow.document.removeEventListener("keydown",   this.handleKeyEvent, true);
 		if ( aStateFlag == 1 ) {
 			aWindow.document.addEventListener("mouseover", this.handleEvent, true);
 			aWindow.document.addEventListener("mousemove", this.handleEvent, true);
 			aWindow.document.addEventListener("mouseout",  this.handleEvent, true);
 			aWindow.document.addEventListener("click",     this.handleEvent, true);
-			aWindow.document.addEventListener("keypress",  this.handleKeyEvent, true);
+			aWindow.document.addEventListener("keydown",   this.handleKeyEvent, true);
 		}
 	},
 
