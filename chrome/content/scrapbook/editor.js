@@ -88,12 +88,14 @@ var sbPageEditor = {
 		if (aEvent.keyCode == aEvent.DOM_VK_F9 &&
 			!aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
 			sbDOMEraser.init(1);
+			aEvent.preventDefault();
 			return;
 		}
 		// F10
 		if (aEvent.keyCode == aEvent.DOM_VK_F10 &&
 			!aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
 			sbHtmlEditor.init(null, 1);
+			aEvent.preventDefault();
 			return;
 		}
 		// 1-8 or Alt + 1-8
@@ -101,6 +103,7 @@ var sbPageEditor = {
 		if ((idx >= 1) && (idx <= 8) &&
 			!aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
 			sbPageEditor.highlight(idx);
+			aEvent.preventDefault();
 			return;
 		}
 	},
@@ -575,12 +578,14 @@ var sbHtmlEditor = {
 		if (aEvent.keyCode == aEvent.DOM_VK_F10 &&
 			!aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
 			sbHtmlEditor.init(null, 0);
+			aEvent.preventDefault();
 			return;
 		}
 		// Ctrl+Alt+I
 		if (String.fromCharCode(aEvent.charCode).toUpperCase() == "I" &&
 			aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
 			sbHtmlEditor.insertSource(sbHtmlEditor.currentDocument);
+			aEvent.preventDefault();
 			return;
 		}
 	},
@@ -714,6 +719,7 @@ var sbDOMEraser = {
 		if (aEvent.keyCode == aEvent.DOM_VK_F9 &&
 			!aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
 			sbDOMEraser.init(0);
+			aEvent.preventDefault();
 			return;
 		}
 	},
