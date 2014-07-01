@@ -138,9 +138,9 @@ var sbPageEditor = {
 		sbCommonUtils.documentData(window.content.document, "propertyChanged", true);
 	},
 
-	getSelection : function(aDocOrWindow)
+	getSelection : function(aWindow)
 	{
-		var selText = aDocOrWindow.getSelection();
+		var selText = aWindow.getSelection();
 		var sel = selText.QueryInterface(Components.interfaces.nsISelectionPrivate);
 		var isSelected = false;
 		try {
@@ -153,10 +153,10 @@ var sbPageEditor = {
 
 	cutter : function()
 	{
-		var doc = sbCommonUtils.getFocusedWindow().document;
-		var sel = this.getSelection(doc);
+		var win = sbCommonUtils.getFocusedWindow();
+		var sel = this.getSelection(win);
 		if ( !sel ) return;
-		this.allowUndo(doc);
+		this.allowUndo(win.document);
 		sel.deleteFromDocument();
 	},
 
