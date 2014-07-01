@@ -7,6 +7,7 @@
 <!ENTITY sb.show.files "Afișează fișierele">
 <!ENTITY sb.move "Mută">
 <!ENTITY sb.move.into "Mută în dosar">
+<!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Capturează din nou">
 <!ENTITY sb.export "Exportă">
 <!ENTITY sb.remove "Șterge">

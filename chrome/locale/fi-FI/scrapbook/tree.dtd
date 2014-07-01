@@ -7,6 +7,7 @@
 <!ENTITY sb.show.files "Näytä tiedostot">
 <!ENTITY sb.move "Siirrä">
 <!ENTITY sb.move.into "Siirrä kansioon">
+<!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Kaappaa uudestaan">
 <!ENTITY sb.export "Vie">
 <!ENTITY sb.remove "Poista">

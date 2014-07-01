@@ -7,6 +7,7 @@
 <!ENTITY sb.show.files "Файлы веб-страницы">
 <!ENTITY sb.move "Переместить">
 <!ENTITY sb.move.into "Переместить в каталог">
+<!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Захватить снова">
 <!ENTITY sb.export "Экспортировать">
 <!ENTITY sb.remove "Удалить">

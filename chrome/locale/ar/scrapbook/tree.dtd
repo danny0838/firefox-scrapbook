@@ -7,6 +7,7 @@
 <!ENTITY sb.show.files "عرض الملفات">
 <!ENTITY sb.move "نقل">
 <!ENTITY sb.move.into "نقل إلى مجلد">
+<!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "إلتقاط مجدداً">
 <!ENTITY sb.export "تصدير">
 <!ENTITY sb.remove "إزالة">

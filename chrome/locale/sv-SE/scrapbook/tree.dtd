@@ -7,6 +7,7 @@
 <!ENTITY sb.show.files "Visa filer">
 <!ENTITY sb.move "Flytta">
 <!ENTITY sb.move.into "Flytta till mapp">
+<!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Fånga in igen">
 <!ENTITY sb.export "Exportera">
 <!ENTITY sb.remove "Ta bort">

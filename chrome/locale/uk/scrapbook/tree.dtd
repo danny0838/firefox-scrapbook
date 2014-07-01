@@ -7,6 +7,7 @@
 <!ENTITY sb.show.files "Показати файли">
 <!ENTITY sb.move "Пересунути">
 <!ENTITY sb.move.into "Пересунути у теку">
+<!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Зберегти знову">
 <!ENTITY sb.export "Експорт">
 <!ENTITY sb.remove "Вилучити">

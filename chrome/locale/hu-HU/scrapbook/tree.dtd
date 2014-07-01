@@ -7,6 +7,7 @@
 <!ENTITY sb.show.files "Fájlok megjelenítése">
 <!ENTITY sb.move "Áthelyezés">
 <!ENTITY sb.move.into "Áthelyezés mappába">
+<!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Rögzítés ismét">
 <!ENTITY sb.export "Exportálás">
 <!ENTITY sb.remove "Törlés">

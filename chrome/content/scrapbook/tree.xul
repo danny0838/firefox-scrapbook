@@ -39,6 +39,7 @@
 				<menupopup id="sbPopupToolsMenu">
 					<menuitem id="sbPopupShowFiles" label="&sb.show.files;" oncommand="sbController.forward(null,'L');" />
 					<menuitem id="sbPopupSend"      label="&sb.move;..."    oncommand="sbController.isTreeContext ? sbTreeHandler.send() : sbListHandler.doCommand('send');" />
+					<menuitem id="sbPopupCopy"      label="&sb.copy;..."    oncommand="sbController.isTreeContext ? sbTreeHandler.copy() : sbListHandler.doCommand('copy');" />
 					<menuseparator />
 					<menuitem id="sbPopupRenew" class="menuitem-iconic" label="&sb.renew;..." oncommand="sbController.renew(null, true);" onclick="if (event.button == 1) sbController.renew(null, false);" />
 					<menuseparator />

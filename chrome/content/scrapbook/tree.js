@@ -94,6 +94,30 @@ var sbTreeHandler = {
 		sbController.sendInternal(resList, parList);
 	},
 
+
+	copy : function()
+	{
+		var idxList = this.getSelection(false, 2);
+		if ( idxList.length < 1 ) return;
+		var i = 0;
+		var resList = [];
+		var parList = [];
+		for ( i = 0; i < idxList.length; i++ )
+		{
+			var curRes = this.TREE.builderView.getResourceAtIndex(idxList[i]);
+			var parRes = this.getParentResource(idxList[i]);
+			if ( parRes.Value == "urn:scrapbook:search" )
+			{
+				parRes = sbDataSource.findParentResource(curRes);
+				if ( sbCommonUtils.RDFCU.indexOf(sbDataSource.data, parRes, curRes) == -1 ) { alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SEND")); return; }
+			}
+			resList.push(curRes);
+			parList.push(parRes);
+		}
+		sbController.copyInternal(resList, parList);
+	},
+
+
 	remove : function()
 	{
 		if ( this.TREE.view.selection.count == 0 ) return;
@@ -353,6 +377,9 @@ var sbListHandler = {
 		{
 			case "send" :
 				sbController.sendInternal([this.resource], [this.LIST.resource]);
+				break;
+			case "copy" :
+				sbController.copyInternal([this.resource], [this.LIST.resource]);
 				break;
 			case "remove" :
 				if ( !sbController.confirmRemovingFor([this.resource]) ) return;
