@@ -16,7 +16,7 @@
         onload="init();"
         ondialogaccept="accept();">
 
-	<script type="application/x-javascript" src="chrome://scrapbook/content/source.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/editor_source.js" />
 
 	<textbox id="ScrapBookEditSource" multiline="true" rows="25" flex="1" />
 
