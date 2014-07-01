@@ -761,6 +761,27 @@ var sbHtmlEditor = {
 			aEvent.preventDefault();
 			return;
 		}
+		// Ctrl+L
+		if (aEvent.keyCode == aEvent.DOM_VK_L &&
+			aEvent.ctrlKey && !aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.attachLink(sbHtmlEditor.currentDocument);
+			aEvent.preventDefault();
+			return;
+		}
+		// Ctrl+Shift+L
+		if (aEvent.keyCode == aEvent.DOM_VK_L &&
+			aEvent.ctrlKey && !aEvent.altKey && aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.attachInnerLink(sbHtmlEditor.currentDocument);
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+I
+		if (aEvent.keyCode == aEvent.DOM_VK_I &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.attachFile(sbHtmlEditor.currentDocument);
+			aEvent.preventDefault();
+			return;
+		}
 		// Ctrl+Alt+I
 		if (aEvent.keyCode == aEvent.DOM_VK_I &&
 			aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
@@ -773,6 +794,88 @@ var sbHtmlEditor = {
 	simpleCommand : function(aDoc, aCommand, aArg)
 	{
 		aDoc.execCommand(aCommand, false, aArg);
+	},
+
+	attachLink : function(aDoc)
+	{
+		var sel = sbPageEditor.getSelection(aDoc.defaultView);
+		if ( !sel ) return;
+		var ret = {};
+		if ( !sbCommonUtils.PROMPT.prompt(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_LINK_TITLE"), sbCommonUtils.lang("overlay", "ADDRESS"), ret, null, {}) ) return;
+		if ( !ret.value ) return;
+		aDoc.execCommand("createLink", false, ret.value);
+	},
+
+	attachInnerLink : function(aDoc)
+	{
+		var sel = sbPageEditor.getSelection(aDoc.defaultView);
+		if ( !sel ) return;
+		var content = sbPageEditor.getSelectionHTML(sel);
+		// if the sidebar is closed, we may get an error
+		try {
+			var sidebarId = sbCommonUtils.getSidebarId("sidebar");
+			var res = document.getElementById(sidebarId).contentWindow.sbTreeHandler.getSelection(true, 2);
+		}
+		catch (ex) {
+		}
+		// check the selected resource
+		if (res && res.length) {
+			res = res[0];
+			var type = sbDataSource.getProperty(res, "type");
+			if ( ["folder", "separator"].indexOf(type) === -1 ) {
+				var id = sbDataSource.getProperty(res, "id");
+			}
+		}
+		// if unavailable, let the user input an id
+		var ret = {value: id || ""};
+		if ( !sbCommonUtils.PROMPT.prompt(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("overlay", "ADD_INNERLINK"), ret, null, {}) ) return;
+		var id = ret.value;
+		var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
+		if ( sbDataSource.exists(res) ) {
+			var type = sbDataSource.getProperty(res, "type");
+			if ( ["folder", "separator"].indexOf(type) !== -1 ) {
+				res = null;
+			}
+		}
+		else res = null;
+		// if it's invalid, alert and quit
+		if (!res) {
+			sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("overlay", "ADD_INNERLINK_INVALID", [id]));
+			return;
+		}
+		// attach the link
+		var title = sbDataSource.getProperty(res, "title");
+		var url = (type == "bookmark") ?
+			sbDataSource.getProperty(res, "source") :
+			"../" + id + "/index.html";
+		var html = '<a href="' + url + '" title="' + title + '">' + content + '</a>';
+		aDoc.execCommand("insertHTML", false, html);
+	},
+
+	attachFile : function(aDoc)
+	{
+		var sel = sbPageEditor.getSelection(aDoc.defaultView);
+		if ( !sel ) return;
+		var content = sbPageEditor.getSelectionHTML(sel);
+		var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
+		FP.init(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), FP.modeOpen);
+		var ret = FP.show();
+		if ( ret != FP.returnOK ) return;
+		var destFile = sbCommonUtils.getContentDir(sbPageEditor.item.id).clone();
+		destFile.append(FP.file.leafName);
+		if ( destFile.exists() && destFile.isFile() ) {
+			if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "OVERWRITE_FILE", [FP.file.leafName])) ) return;
+			destFile.remove(false);
+		}
+		try {
+			FP.file.copyTo(destFile.parent, FP.file.leafName);
+		} catch(ex) {
+			return;
+		}
+		var title = FP.file.leafName;
+		var url = FP.file.leafName;
+		var html = '<a href="' + url + '" title="' + title + '">' + content + '</a>';
+		aDoc.execCommand("insertHTML", false, html);
 	},
 	
 	insertSource : function(aDoc)
