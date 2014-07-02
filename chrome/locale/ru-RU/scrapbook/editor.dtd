@@ -15,12 +15,6 @@
 <!ENTITY sb.highlighter "Маркер">
 <!ENTITY sb.highlighter.remove "Удалить подсветку в выделенном">
 <!ENTITY sb.highlighter.remove.all "Удалить все типы подсветок">
-<!ENTITY sbp.highlighter.stil1 "Стиль 1">
-<!ENTITY sbp.highlighter.stil2 "Стиль 2">
-<!ENTITY sbp.highlighter.stil3 "Стиль 3">
-<!ENTITY sbp.highlighter.stil4 "Стиль 4">
-<!ENTITY sbp.highlighter.stil5 "Стиль 5">
-<!ENTITY sbp.highlighter.stil6 "Стиль 6">
 <!ENTITY sb.source "Открыть URL сохранённого сайта">
 <!ENTITY sb.renew "Произвести сохранение страницы снова">
 <!ENTITY sb.locate "Синхронизировать с деревом боковой панели">

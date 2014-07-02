@@ -33,4 +33,3 @@
 <!ENTITY sb.button.customize "Personnaliser">
 <!ENTITY sb.button.browse "Parcourir">
 <!ENTITY sb.button.show "Afficher les fichiers">
-<!ENTITY sbp.prefs.useDropDownList "Utiliser la liste déroulante de choix au lieu des boutons pour le surligneur">

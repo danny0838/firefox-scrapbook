@@ -15,12 +15,6 @@
 <!ENTITY sb.highlighter "Resaltador">
 <!ENTITY sb.highlighter.remove "Limpar os resaltes da selección">
 <!ENTITY sb.highlighter.remove.all "Limpar todos os resaltes">
-<!ENTITY sbp.highlighter.stil1 "Estilo 1">
-<!ENTITY sbp.highlighter.stil2 "Estilo 2">
-<!ENTITY sbp.highlighter.stil3 "Estilo 3">
-<!ENTITY sbp.highlighter.stil4 "Estilo 4">
-<!ENTITY sbp.highlighter.stil5 "Estilo 5">
-<!ENTITY sbp.highlighter.stil6 "Estilo 6">
 <!ENTITY sb.source "Abrir a URL fonte">
 <!ENTITY sb.renew "Capturar outra vez">
 <!ENTITY sb.locate "Localizar na colección do panel lateral">

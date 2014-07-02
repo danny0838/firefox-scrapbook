@@ -15,12 +15,6 @@
 <!ENTITY sb.highlighter "Zvýrazňovač">
 <!ENTITY sb.highlighter.remove "Zrušit zvýraznění výběru">
 <!ENTITY sb.highlighter.remove.all "Zrušit všechna zvýraznění">
-<!ENTITY sbp.highlighter.stil1 "Styl 1">
-<!ENTITY sbp.highlighter.stil2 "Styl 2">
-<!ENTITY sbp.highlighter.stil3 "Styl 3">
-<!ENTITY sbp.highlighter.stil4 "Styl 4">
-<!ENTITY sbp.highlighter.stil5 "Styl 5">
-<!ENTITY sbp.highlighter.stil6 "Styl 6">
 <!ENTITY sb.source "Otevřít zdrojovou adresu URL">
 <!ENTITY sb.renew "Zachytit znovu">
 <!ENTITY sb.locate "Zobrazit v postranní liště">

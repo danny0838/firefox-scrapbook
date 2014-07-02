@@ -33,4 +33,3 @@
 <!ENTITY sb.button.customize "Özelleştir">
 <!ENTITY sb.button.browse "Gözat">
 <!ENTITY sb.button.show "Dosyaları Göster">
-<!ENTITY sbp.prefs.useDropDownList "use drop-down choice list instead of buttons for highlighter">

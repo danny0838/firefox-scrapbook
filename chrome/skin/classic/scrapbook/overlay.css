@@ -82,7 +82,23 @@ toolbox#ScrapBookToolbox textbox {
 }
 
 
-/* ::::: HIGHLIGHTER ::::: */
+/* ::::: EDITOR ::::: */
+
+toolbar#ScrapBookEditor #ScrapBookToggleComment {
+	list-style-image: url('chrome://scrapbook/skin/edit_comment.png');
+}
+
+toolbar#ScrapBookEditor #ScrapBookToggleComment[disabled="true"] {
+	list-style-image: url('chrome://scrapbook/skin/edit_comment_disable.png');
+}
+
+toolbar#ScrapBookEditor #ScrapBookHighlighter {
+	list-style-image: url('chrome://scrapbook/skin/edit_highlighter.png');
+}
+
+toolbar#ScrapBookEditor #ScrapBookHighlighter[disabled="true"] {
+	list-style-image: url('chrome://scrapbook/skin/edit_highlighter_disable.png');
+}
 
 toolbar#ScrapBookEditor #ScrapBookHighlighter menuitem[type="radio"] {
 	padding: 2px;
@@ -95,6 +111,46 @@ toolbar#ScrapBookEditor #ScrapBookHighlighter menuitem[type="radio"] {
 
 toolbar#ScrapBookEditor #ScrapBookHighlighter menupopup {
 	min-width: 160px;
+}
+
+toolbar#ScrapBookEditor #ScrapBookEditAnnotation {
+	list-style-image: url('chrome://scrapbook/skin/edit_annotation.png');
+}
+
+toolbar#ScrapBookEditor #ScrapBookEditAnnotation[disabled="true"] {
+	list-style-image: url('chrome://scrapbook/skin/edit_annotation_disable.png');
+}
+
+toolbar#ScrapBookEditor #ScrapBookEditCutter {
+	list-style-image: url('chrome://scrapbook/skin/edit_cutter.png');
+}
+
+toolbar#ScrapBookEditor #ScrapBookEditCutter[disabled="true"] {
+	list-style-image: url('chrome://scrapbook/skin/edit_cutter_disable.png');
+}
+
+toolbar#ScrapBookEditor #ScrapBookEditEraser {
+	list-style-image: url('chrome://scrapbook/skin/edit_eraser.png');
+}
+
+toolbar#ScrapBookEditor #ScrapBookEditEraser[disabled="true"] {
+	list-style-image: url('chrome://scrapbook/skin/edit_eraser_disable.png');
+}
+
+toolbar#ScrapBookEditor #ScrapBookEditUndo {
+	list-style-image: url('chrome://scrapbook/skin/edit_undo.png');
+}
+
+toolbar#ScrapBookEditor #ScrapBookEditUndo[disabled="true"] {
+	list-style-image: url('chrome://scrapbook/skin/edit_undo_disable.png');
+}
+
+toolbar#ScrapBookEditor #ScrapBookEditSave {
+	list-style-image: url('chrome://scrapbook/skin/edit_save.png');
+}
+
+toolbar#ScrapBookEditor #ScrapBookEditSave[disabled="true"] {
+	list-style-image: url('chrome://scrapbook/skin/edit_save_disable.png');
 }
 
 
