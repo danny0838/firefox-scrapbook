@@ -289,8 +289,10 @@ var sbPageEditor = {
 		aDoc = aDoc || sbCommonUtils.getFocusedWindow().document;
 		var histories = sbCommonUtils.documentData(aDoc, "histories");
 		if (!histories) sbCommonUtils.documentData(aDoc, "histories", histories = []);
-		histories.push(aDoc.body.cloneNode(true));
-		sbCommonUtils.documentData(aDoc, "changed", true);
+		if (aDoc.body) {
+			histories.push(aDoc.body.cloneNode(true));
+			sbCommonUtils.documentData(aDoc, "changed", true);
+		}
 	},
 
 	undo : function(aDoc)
