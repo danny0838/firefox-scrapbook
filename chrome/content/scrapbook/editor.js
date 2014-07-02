@@ -782,6 +782,13 @@ var sbHtmlEditor = {
 			aEvent.preventDefault();
 			return;
 		}
+		// Alt+D
+		if (aEvent.keyCode == aEvent.DOM_VK_D &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.insertDate(sbHtmlEditor.currentDocument);
+			aEvent.preventDefault();
+			return;
+		}
 		// Ctrl+Alt+I
 		if (aEvent.keyCode == aEvent.DOM_VK_I &&
 			aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
@@ -876,6 +883,13 @@ var sbHtmlEditor = {
 		var url = FP.file.leafName;
 		var html = '<a href="' + url + '" title="' + title + '">' + content + '</a>';
 		aDoc.execCommand("insertHTML", false, html);
+	},
+
+	insertDate : function(aDoc)
+	{
+        var d = new Date();
+		var fmt = sbCommonUtils.getPref("edit.insertDateFormat", "") || "%Y-%m-%d %H:%M:%S";
+		aDoc.execCommand("insertHTML", false, d.strftime(fmt));
 	},
 	
 	insertSource : function(aDoc)

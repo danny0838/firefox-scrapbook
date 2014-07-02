@@ -18,6 +18,7 @@
 <!ENTITY sb.prefs.tabs.tips "随后的操作在标签页中打开">
 <!ENTITY sb.prefs.tabs.note "编辑笔记">
 <!ENTITY sbx.prefs.edit.extendSourceEdit "编辑 HTML 源代码时自动扩大选择范围">
+<!ENTITY sbx.prefs.edit.insertDateFormat "插入日期格式 (strftime):">
 <!ENTITY sb.prefs.data "定位到存储数据的位置">
 <!ENTITY sb.prefs.data.default "默认">
 <!ENTITY sb.prefs.data.custom "保存数据至">
