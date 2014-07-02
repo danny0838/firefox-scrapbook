@@ -16,6 +16,9 @@
 <!ENTITY sb.edit.html.color.forText "設定文字顏色:">
 <!ENTITY sb.edit.html.color.forBg "設定背景顏色:">
 <!ENTITY sb.edit.html.source "編輯 HTML 原始碼">
+<!ENTITY sb.edit.html.file "插入檔案">
+<!ENTITY sb.edit.html.file.pick "選擇檔案:">
+<!ENTITY sb.edit.html.file.format "指定插入格式:">
 <!ENTITY sb.edit.cutter "刪除選取區">
 <!ENTITY sb.edit.remove.iframe "移除所有 IFRAME 標籤">
 <!ENTITY sb.edit.remove.script "移除所有 SCRIPT 標籤">

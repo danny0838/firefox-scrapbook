@@ -16,6 +16,9 @@
 <!ENTITY sb.edit.html.color.forText "Set text color:">
 <!ENTITY sb.edit.html.color.forBg "Set background color:">
 <!ENTITY sb.edit.html.source "Edit HTML Source">
+<!ENTITY sb.edit.html.file "Insert File">
+<!ENTITY sb.edit.html.file.pick "Select file:">
+<!ENTITY sb.edit.html.file.format "Select insert format:">
 <!ENTITY sb.edit.cutter "選択範囲をカット">
 <!ENTITY sb.edit.remove.iframe "すべてのIFRAMEタグを削除">
 <!ENTITY sb.edit.remove.script "すべてのSCRIPTタグを削除">

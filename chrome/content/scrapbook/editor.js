@@ -910,28 +910,39 @@ var sbHtmlEditor = {
 
 	attachFile : function(aDoc)
 	{
-		var sel = sbPageEditor.getSelection(aDoc.defaultView);
-		if ( !sel ) return;
-		var content = sbPageEditor.getSelectionHTML(sel);
-		var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-		FP.init(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), FP.modeOpen);
-		var ret = FP.show();
-		if ( ret != FP.returnOK ) return;
+		var sel = aDoc.defaultView.getSelection();
+		var data = {};
+		// prompt the dialog for user input
+		var accepted = window.top.openDialog(
+			"chrome://scrapbook/content/editor_file.xul", "ScrapBook:AttachFile", "chrome,modal,centerscreen", 
+			data
+		);
+		if (data.result != 1) return;
+		// copy the selected file
 		var destFile = sbCommonUtils.getContentDir(sbPageEditor.item.id).clone();
-		destFile.append(FP.file.leafName);
+		destFile.append(data.file.leafName);
 		if ( destFile.exists() && destFile.isFile() ) {
-			if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [FP.file.leafName])) ) return;
+			if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [data.file.leafName])) ) return;
 			destFile.remove(false);
 		}
 		try {
-			FP.file.copyTo(destFile.parent, FP.file.leafName);
+			data.file.copyTo(destFile.parent, data.file.leafName);
 		} catch(ex) {
 			return;
 		}
-		var title = FP.file.leafName;
-		var url = FP.file.leafName;
-		var html = '<a href="' + url + '" title="' + title + '">' + content + '</a>';
-		aDoc.execCommand("insertHTML", false, html);
+		// insert to the document
+		if (data.format) {
+			var FILE = data.file.leafName;
+			var THIS = sel.isCollapsed ? FILE : sbPageEditor.getSelectionHTML(sel);
+			var html = data.format.replace(/{(FILE|THIS)}/g, function(){
+				switch (arguments[1]) {
+					case "FILE": return FILE;
+					case "THIS": return THIS;
+				}
+				return "";
+			});
+			aDoc.execCommand("insertHTML", false, html);
+		}
 	},
 
 	insertDate : function(aDoc)
