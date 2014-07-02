@@ -784,13 +784,6 @@ var sbHtmlEditor = {
 			aEvent.preventDefault();
 			return;
 		}
-		// Ctrl+Shift+L
-		if (aEvent.keyCode == aEvent.DOM_VK_L &&
-			aEvent.ctrlKey && !aEvent.altKey && aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.attachInnerLink(sbHtmlEditor.currentDocument());
-			aEvent.preventDefault();
-			return;
-		}
 		// Alt+I
 		if (aEvent.keyCode == aEvent.DOM_VK_I &&
 			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
@@ -932,52 +925,6 @@ var sbHtmlEditor = {
 				aDoc.execCommand("insertHTML", false, html);
 			}
 		}
-	},
-
-	attachInnerLink : function(aDoc)
-	{
-		var sel = sbPageEditor.getSelection(aDoc.defaultView);
-		if ( !sel ) return;
-		var content = sbPageEditor.getSelectionHTML(sel);
-		// if the sidebar is closed, we may get an error
-		try {
-			var sidebarId = sbCommonUtils.getSidebarId("sidebar");
-			var res = document.getElementById(sidebarId).contentWindow.sbTreeHandler.getSelection(true, 2);
-		}
-		catch (ex) {
-		}
-		// check the selected resource
-		if (res && res.length) {
-			res = res[0];
-			var type = sbDataSource.getProperty(res, "type");
-			if ( ["folder", "separator"].indexOf(type) === -1 ) {
-				var id = sbDataSource.getProperty(res, "id");
-			}
-		}
-		// if unavailable, let the user input an id
-		var ret = {value: id || ""};
-		if ( !sbCommonUtils.PROMPT.prompt(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_ENTER"), ret, null, {}) ) return;
-		var id = ret.value;
-		var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
-		if ( sbDataSource.exists(res) ) {
-			var type = sbDataSource.getProperty(res, "type");
-			if ( ["folder", "separator"].indexOf(type) !== -1 ) {
-				res = null;
-			}
-		}
-		else res = null;
-		// if it's invalid, alert and quit
-		if (!res) {
-			sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_INVALID", [id]));
-			return;
-		}
-		// attach the link
-		var title = sbDataSource.getProperty(res, "title");
-		var url = (type == "bookmark") ?
-			sbDataSource.getProperty(res, "source") :
-			"../" + id + "/index.html";
-		var html = '<a href="' + url + '" title="' + title + '">' + content + '</a>';
-		aDoc.execCommand("insertHTML", false, html);
 	},
 
 	attachFile : function(aDoc)
