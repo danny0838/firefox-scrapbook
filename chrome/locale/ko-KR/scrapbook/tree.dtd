@@ -7,6 +7,7 @@
 <!ENTITY sb.show.files "파일 보이기">
 <!ENTITY sb.move "이동">
 <!ENTITY sb.move.into "폴더로 이동">
+<!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "다시 캡처하기">
 <!ENTITY sb.export "가져오기">
 <!ENTITY sb.remove "삭제">

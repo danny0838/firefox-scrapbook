@@ -7,6 +7,7 @@
 <!ENTITY sb.show.files "Amosar ficheiros">
 <!ENTITY sb.move "Mover">
 <!ENTITY sb.move.into "Mover para o cartafol">
+<!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Capturar outra vez">
 <!ENTITY sb.export "Exportar">
 <!ENTITY sb.remove "Borrar">
