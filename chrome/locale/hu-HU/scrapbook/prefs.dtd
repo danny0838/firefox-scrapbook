@@ -17,6 +17,9 @@
 <!ENTITY sb.prefs.restart "A változtatások érvényre jutásához a Firefox újraindítása szükséges">
 <!ENTITY sb.prefs.tabs.tips "Lap nyitása a következő műveletekhez">
 <!ENTITY sb.prefs.tabs.note "Jegyzet szerkesztése">
+<!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
+<!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format:">
 <!ENTITY sb.prefs.data "Adattárolás helye">
 <!ENTITY sb.prefs.data.default "Alapértelmezett (Profil mappa)">
 <!ENTITY sb.prefs.data.custom "Mentés a következő helyre">

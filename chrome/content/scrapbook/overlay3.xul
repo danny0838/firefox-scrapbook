@@ -13,6 +13,7 @@
          xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
+	<script type="application/x-javascript" src="chrome://scrapbook/content/lib/strftime.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/saver.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/editor.js" />
@@ -138,9 +139,9 @@
 				</toolbarbutton>
 				<toolbarbutton id="ScrapBookEditAnnotation" type="menu-button" tooltiptext="&sb.edit.sticky.create;" accesskey="A" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbAnnotationService.createSticky();">
 					<menupopup onpopupshowing="this.firstChild.nextSibling.setAttribute('disabled', !sbPageEditor.item);">
-						<menuitem label="&sb.edit.attach.link;" oncommand="sbAnnotationService.attach('L',this.label);" />
-						<menuitem label="&sb.edit.attach.innerlink;" oncommand="sbAnnotationService.attach('I',this.label);" />
-						<menuitem label="&sb.edit.attach.file;" oncommand="sbAnnotationService.attach('F',this.label);" />
+						<menuitem label="&sb.edit.attach.link;" oncommand="sbAnnotationService.attach('L');" />
+						<menuitem label="&sb.edit.attach.innerlink;" oncommand="sbAnnotationService.attach('I');" />
+						<menuitem label="&sb.edit.attach.file;" oncommand="sbAnnotationService.attach('F');" />
 						<menuitem label="&sb.edit.inline.add;"  oncommand="sbAnnotationService.addInline();" />
 						<menuitem label="&sb.edit.annotation.add;"  oncommand="sbAnnotationService.addAnnotation();" />
 						<menuseparator />

@@ -76,31 +76,35 @@ var sbPageEditor = {
 	//   1: enable
 	initEvent : function(aWindow, aStateFlag)
 	{
-		try { aWindow.document.removeEventListener("keypress", this.handleEvent, true); } catch(ex){}
+		try { aWindow.document.removeEventListener("keydown", this.handleKeyEvent, true); } catch(ex){}
 		if (aStateFlag == 1) {
-			aWindow.document.addEventListener("keypress", this.handleEvent, true);
+			aWindow.document.addEventListener("keydown", this.handleKeyEvent, true);
 		}
 	},
 
-	handleEvent : function(aEvent)
+	handleKeyEvent : function(aEvent)
 	{
-		if ( aEvent.type == "keypress" )
-		{
-			if ( aEvent.altKey || aEvent.shiftKey || aEvent.ctrlKey || aEvent.metaKey ) return;
-			var idx = 0;
-			switch ( aEvent.charCode )
-			{
-				case aEvent.DOM_VK_1 : idx = 1; break;
-				case aEvent.DOM_VK_2 : idx = 2; break;
-				case aEvent.DOM_VK_3 : idx = 3; break;
-				case aEvent.DOM_VK_4 : idx = 4; break;
-				case aEvent.DOM_VK_5 : idx = 5; break;
-				case aEvent.DOM_VK_6 : idx = 6; break;
-				case aEvent.DOM_VK_7 : idx = 7; break;
-				case aEvent.DOM_VK_8 : idx = 8; break;
-				default : return;
-			}
-			if ( idx > 0 ) sbPageEditor.highlight(idx);
+		// F9
+		if (aEvent.keyCode == aEvent.DOM_VK_F9 &&
+			!aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbDOMEraser.init(1);
+			aEvent.preventDefault();
+			return;
+		}
+		// F10
+		if (aEvent.keyCode == aEvent.DOM_VK_F10 &&
+			!aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.init(null, 1);
+			aEvent.preventDefault();
+			return;
+		}
+		// 1-8 or Alt + 1-8
+		var idx = aEvent.keyCode - (aEvent.DOM_VK_1 - 1);
+		if ((idx >= 1) && (idx <= 8) &&
+			!aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbPageEditor.highlight(idx);
+			aEvent.preventDefault();
+			return;
 		}
 	},
 
@@ -150,6 +154,15 @@ var sbPageEditor = {
 			isSelected = false;
 		}
 		return isSelected ? sel : false;
+	},
+
+	getSelectionHTML : function(aSelection)
+	{
+		var range = aSelection.getRangeAt(0);
+		var content = range.cloneContents();
+		var elem = aSelection.anchorNode.ownerDocument.createElement("DIV");
+		elem.appendChild(content);
+		return elem.innerHTML;
 	},
 
 	cutter : function()
@@ -352,8 +365,8 @@ var sbPageEditor = {
 			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SAVE_FILE", [RegExp.$2]));
 			return;
 		}
-		this.disable(true);
 		sbDOMEraser.init(0);
+		this.disable(true);
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			var doc = win.document;
 			if ( doc.contentType != "text/html" ) {
@@ -384,7 +397,6 @@ var sbPageEditor = {
 		var newComment = sbCommonUtils.escapeComment(this.COMMENT.value);
 		if ( newTitle != this.item.title || newComment != this.item.comment )
 		{
-			this.disableTemporary(500);
 			sbDataSource.setProperty(sbBrowserOverlay.resource, "title",   newTitle);
 			sbDataSource.setProperty(sbBrowserOverlay.resource, "comment", newComment);
 			this.item.title   = newTitle;
@@ -395,16 +407,23 @@ var sbPageEditor = {
 		sbCommonUtils.documentData(window.content.document, "propertyChanged", false);
 	},
 
-	disableTemporary : function(msec)
-	{
-		window.setTimeout(function() { sbPageEditor.disable(true);  }, 0);
-		window.setTimeout(function() { sbPageEditor.disable(false); }, msec);
-	},
-
 	disable : function(aBool)
 	{
-		var elems = this.TOOLBAR.childNodes;
-		for ( var i = 0; i < elems.length; i++ ) elems[i].disabled = aBool;
+		if (aBool) {
+			var elems = this.TOOLBAR.childNodes;
+			for ( var i = 0; i < elems.length; i++ ) {
+				// this will store "true" or "false"
+				elems[i].setAttribute("was-disabled", elems[i].disabled);
+				elems[i].disabled = true;
+			}
+		}
+		else {
+			var elems = this.TOOLBAR.childNodes;
+			for ( var i = 0; i < elems.length; i++ ) {
+				elems[i].disabled = (elems[i].getAttribute("was-disabled") == "true");
+				elems[i].removeAttribute("was-disabled");
+			}
+		}
 	},
 
 	toggle : function()
@@ -484,6 +503,7 @@ var sbPageEditor = {
 var sbHtmlEditor = {
 
 	enabled : false,
+	currentDocument : null,
 
 	// aStateFlag
 	//   0: disable (for all window documents)
@@ -500,11 +520,26 @@ var sbHtmlEditor = {
 		document.getElementById("ScrapBookEditEraser").disabled = this.enabled;
 		document.getElementById("ScrapBookEditUndo").disabled = this.enabled;
 		if ( aStateFlag == 1 ) {
+			this.currentDocument = aDoc;
 			if ( aDoc.designMode != "on" ) {
+				var sel = aDoc.defaultView.getSelection();
+				// backup original selection ranges
+				var ranges = [];
+				for (var i=0, len=sel.rangeCount; i<len; i++) {
+					ranges.push(sel.getRangeAt(i))
+				}
+				// backup and switch design mode on (will clear select)
 				sbPageEditor.allowUndo(aDoc);
 				aDoc.designMode = "on";
+				// restore the selection
+				var sel = aDoc.defaultView.getSelection();
+				sel.removeAllRanges();
+				for (var i=0, len=ranges.length; i<len; i++) {
+					sel.addRange(ranges[i]);
+				}
 			}
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
+				this.initEvent(win, 1);
 				sbAnnotationService.initEvent(win, 0);
 				sbPageEditor.initEvent(win, 0);
 			}, this);
@@ -514,9 +549,418 @@ var sbHtmlEditor = {
 				if ( win.document.designMode != "off" ) {
 					win.document.designMode = "off";
 				}
+				this.initEvent(win, 0);
 				sbAnnotationService.initEvent(win, 1);
 				sbPageEditor.initEvent(win, 1);
 			}, this);
+		}
+	},
+
+	initEvent : function(aWindow, aStateFlag)
+	{
+		aWindow.document.removeEventListener("keydown", this.handleKeyEvent, true);
+		aWindow.document.removeEventListener("input", this.handleInputEvent, true);
+		if (aStateFlag == 1) {
+			aWindow.document.addEventListener("keydown", this.handleKeyEvent, true);
+			aWindow.document.addEventListener("input", this.handleInputEvent, true);
+		}
+	},
+
+	handleInputEvent : function(aEvent)
+	{
+		var doc = aEvent.originalTarget.ownerDocument;
+		sbCommonUtils.documentData(doc, "changed", true);
+	},
+
+	handleKeyEvent : function(aEvent)
+	{
+		/* general */
+		// Ctrl+K
+		if (aEvent.keyCode == aEvent.DOM_VK_K &&
+			aEvent.ctrlKey && !aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "removeFormat");
+			aEvent.preventDefault();
+			return;
+		}
+		// Ctrl+B
+		if (aEvent.keyCode == aEvent.DOM_VK_B &&
+			aEvent.ctrlKey && !aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "bold");
+			aEvent.preventDefault();
+			return;
+		}
+		// Ctrl+I
+		if (aEvent.keyCode == aEvent.DOM_VK_I &&
+			aEvent.ctrlKey && !aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "italic");
+			aEvent.preventDefault();
+			return;
+		}
+		// Ctrl+U
+		if (aEvent.keyCode == aEvent.DOM_VK_U &&
+			aEvent.ctrlKey && !aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "underline");
+			aEvent.preventDefault();
+			return;
+		}
+		// Ctrl+S
+		if (aEvent.keyCode == aEvent.DOM_VK_S &&
+			aEvent.ctrlKey && !aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "strikeThrough");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+↑
+		if (aEvent.keyCode == aEvent.DOM_VK_UP &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "increaseFontSize");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+↓
+		if (aEvent.keyCode == aEvent.DOM_VK_DOWN &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "decreaseFontSize");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+K
+		if (aEvent.keyCode == aEvent.DOM_VK_K &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "superscript");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+J
+		if (aEvent.keyCode == aEvent.DOM_VK_J &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "subscript");
+			aEvent.preventDefault();
+			return;
+		}
+
+		/* block */
+		// Alt+0
+		if (aEvent.keyCode == aEvent.DOM_VK_0 &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "formatblock", "p");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+1
+		if (aEvent.keyCode == aEvent.DOM_VK_1 &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "formatblock", "h1");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+2
+		if (aEvent.keyCode == aEvent.DOM_VK_2 &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "formatblock", "h2");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+3
+		if (aEvent.keyCode == aEvent.DOM_VK_3 &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "formatblock", "h3");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+4
+		if (aEvent.keyCode == aEvent.DOM_VK_4 &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "formatblock", "h4");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+5
+		if (aEvent.keyCode == aEvent.DOM_VK_5 &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "formatblock", "h5");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+6
+		if (aEvent.keyCode == aEvent.DOM_VK_6 &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "formatblock", "h6");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+7
+		if (aEvent.keyCode == aEvent.DOM_VK_7 &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "formatblock", "blockquote");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+8
+		if (aEvent.keyCode == aEvent.DOM_VK_8 &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "formatblock", "pre");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+U
+		if (aEvent.keyCode == aEvent.DOM_VK_U &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "insertUnorderedList");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+O
+		if (aEvent.keyCode == aEvent.DOM_VK_O &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "insertOrderedList");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+[
+		if (aEvent.keyCode == aEvent.DOM_VK_OPEN_BRACKET &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "outdent");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+]
+		if (aEvent.keyCode == aEvent.DOM_VK_CLOSE_BRACKET &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "indent");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+,
+		if (aEvent.keyCode == aEvent.DOM_VK_COMMA &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "justifyLeft");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+.
+		if (aEvent.keyCode == aEvent.DOM_VK_PERIOD &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "justifyRight");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+M
+		if (aEvent.keyCode == aEvent.DOM_VK_M &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "justifyCenter");
+			aEvent.preventDefault();
+			return;
+		}
+		
+		/* special */
+		// F10
+		if (aEvent.keyCode == aEvent.DOM_VK_F10 &&
+			!aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.init(null, 0);
+			aEvent.preventDefault();
+			return;
+		}
+		// Ctrl+L
+		if (aEvent.keyCode == aEvent.DOM_VK_L &&
+			aEvent.ctrlKey && !aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.attachLink(sbHtmlEditor.currentDocument);
+			aEvent.preventDefault();
+			return;
+		}
+		// Ctrl+Shift+L
+		if (aEvent.keyCode == aEvent.DOM_VK_L &&
+			aEvent.ctrlKey && !aEvent.altKey && aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.attachInnerLink(sbHtmlEditor.currentDocument);
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+I
+		if (aEvent.keyCode == aEvent.DOM_VK_I &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.attachFile(sbHtmlEditor.currentDocument);
+			aEvent.preventDefault();
+			return;
+		}
+		// Ctrl+Shift+K
+		if (aEvent.keyCode == aEvent.DOM_VK_K &&
+			aEvent.ctrlKey && !aEvent.altKey && aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument, "unlink");
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+D
+		if (aEvent.keyCode == aEvent.DOM_VK_D &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.insertDate(sbHtmlEditor.currentDocument);
+			aEvent.preventDefault();
+			return;
+		}
+		// Alt+Z
+		if (aEvent.keyCode == aEvent.DOM_VK_Z &&
+			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.wrapHTML(sbHtmlEditor.currentDocument);
+			aEvent.preventDefault();
+			return;
+		}
+		// Ctrl+Alt+I
+		if (aEvent.keyCode == aEvent.DOM_VK_I &&
+			aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.insertSource(sbHtmlEditor.currentDocument);
+			aEvent.preventDefault();
+			return;
+		}
+	},
+
+	simpleCommand : function(aDoc, aCommand, aArg)
+	{
+		aDoc.execCommand(aCommand, false, aArg);
+	},
+
+	attachLink : function(aDoc)
+	{
+		var sel = sbPageEditor.getSelection(aDoc.defaultView);
+		if ( !sel ) return;
+		var ret = {};
+		if ( !sbCommonUtils.PROMPT.prompt(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_LINK_TITLE"), sbCommonUtils.lang("overlay", "ADDRESS"), ret, null, {}) ) return;
+		if ( !ret.value ) return;
+		aDoc.execCommand("createLink", false, ret.value);
+	},
+
+	attachInnerLink : function(aDoc)
+	{
+		var sel = sbPageEditor.getSelection(aDoc.defaultView);
+		if ( !sel ) return;
+		var content = sbPageEditor.getSelectionHTML(sel);
+		// if the sidebar is closed, we may get an error
+		try {
+			var sidebarId = sbCommonUtils.getSidebarId("sidebar");
+			var res = document.getElementById(sidebarId).contentWindow.sbTreeHandler.getSelection(true, 2);
+		}
+		catch (ex) {
+		}
+		// check the selected resource
+		if (res && res.length) {
+			res = res[0];
+			var type = sbDataSource.getProperty(res, "type");
+			if ( ["folder", "separator"].indexOf(type) === -1 ) {
+				var id = sbDataSource.getProperty(res, "id");
+			}
+		}
+		// if unavailable, let the user input an id
+		var ret = {value: id || ""};
+		if ( !sbCommonUtils.PROMPT.prompt(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_ENTER"), ret, null, {}) ) return;
+		var id = ret.value;
+		var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
+		if ( sbDataSource.exists(res) ) {
+			var type = sbDataSource.getProperty(res, "type");
+			if ( ["folder", "separator"].indexOf(type) !== -1 ) {
+				res = null;
+			}
+		}
+		else res = null;
+		// if it's invalid, alert and quit
+		if (!res) {
+			sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_INVALID", [id]));
+			return;
+		}
+		// attach the link
+		var title = sbDataSource.getProperty(res, "title");
+		var url = (type == "bookmark") ?
+			sbDataSource.getProperty(res, "source") :
+			"../" + id + "/index.html";
+		var html = '<a href="' + url + '" title="' + title + '">' + content + '</a>';
+		aDoc.execCommand("insertHTML", false, html);
+	},
+
+	attachFile : function(aDoc)
+	{
+		var sel = sbPageEditor.getSelection(aDoc.defaultView);
+		if ( !sel ) return;
+		var content = sbPageEditor.getSelectionHTML(sel);
+		var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
+		FP.init(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), FP.modeOpen);
+		var ret = FP.show();
+		if ( ret != FP.returnOK ) return;
+		var destFile = sbCommonUtils.getContentDir(sbPageEditor.item.id).clone();
+		destFile.append(FP.file.leafName);
+		if ( destFile.exists() && destFile.isFile() ) {
+			if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [FP.file.leafName])) ) return;
+			destFile.remove(false);
+		}
+		try {
+			FP.file.copyTo(destFile.parent, FP.file.leafName);
+		} catch(ex) {
+			return;
+		}
+		var title = FP.file.leafName;
+		var url = FP.file.leafName;
+		var html = '<a href="' + url + '" title="' + title + '">' + content + '</a>';
+		aDoc.execCommand("insertHTML", false, html);
+	},
+
+	insertDate : function(aDoc)
+	{
+        var d = new Date();
+		var fmt = sbCommonUtils.getPref("edit.insertDateFormat", "") || "%Y-%m-%d %H:%M:%S";
+		aDoc.execCommand("insertHTML", false, d.strftime(fmt));
+	},
+
+	wrapHTML : function(aDoc)
+	{
+		var sel = aDoc.defaultView.getSelection();
+		var html = sbPageEditor.getSelectionHTML(sel);
+		var wrapper = sbCommonUtils.getPref("edit.wrapperFormat", "") || "<code>{THIS}</code>";
+		html = wrapper.replace(/{THIS}/g, html);
+		aDoc.execCommand("insertHTML", false, html);
+	},
+	
+	insertSource : function(aDoc)
+	{
+		var sel = aDoc.defaultView.getSelection();
+		var collapsed = sel.isCollapsed;
+		var data = {value:""};
+		if (!collapsed) {
+			// backup original selection ranges
+			var ranges = [];
+			for (var i=0, len=sel.rangeCount; i<len; i++) {
+				ranges.push(sel.getRangeAt(i))
+			}
+			// get selection area to edit
+			if (sbCommonUtils.getPref("edit.extendSourceEdit", true)) {
+				// reset selection to the common ancestor container of the first range
+				var node = ranges[0].commonAncestorContainer;
+				if (node.nodeName == "#text") node = node.parentNode;
+				var range = aDoc.createRange();
+				range.selectNodeContents(node);
+				sel.removeAllRanges();
+				sel.addRange(range);			
+				// set data
+				data.value = node.innerHTML;
+			}
+			else {
+				// reset selection to the first range
+				sel.removeAllRanges();
+				sel.addRange(ranges[0]);
+				// set data
+				data.value = sbPageEditor.getSelectionHTML(sel);
+			}
+		}
+		// prompt the dialog for user input
+		window.top.openDialog(
+			"chrome://scrapbook/content/editor_source.xul", "ScrapBook:EditSource", "chrome,modal,centerscreen,resizable", 
+			data
+		);
+		// accepted, do the modify
+		if (data.result) {
+			aDoc.execCommand("insertHTML", false, data.value);
+		}
+		// cancled, restore the original selection if previously modified
+		else if (!collapsed) {
+			sel.removeAllRanges();
+			for (var i=0, len=ranges.length; i<len; i++) {
+				sel.addRange(ranges[i]);
+			}
 		}
 	},
 
@@ -570,11 +1014,13 @@ var sbDOMEraser = {
 		aWindow.document.removeEventListener("mousemove", this.handleEvent, true);
 		aWindow.document.removeEventListener("mouseout",  this.handleEvent, true);
 		aWindow.document.removeEventListener("click",     this.handleEvent, true);
+		aWindow.document.removeEventListener("keydown",   this.handleKeyEvent, true);
 		if ( aStateFlag == 1 ) {
 			aWindow.document.addEventListener("mouseover", this.handleEvent, true);
 			aWindow.document.addEventListener("mousemove", this.handleEvent, true);
 			aWindow.document.addEventListener("mouseout",  this.handleEvent, true);
 			aWindow.document.addEventListener("click",     this.handleEvent, true);
+			aWindow.document.addEventListener("keydown",   this.handleKeyEvent, true);
 		}
 	},
 
@@ -589,6 +1035,17 @@ var sbDOMEraser = {
 		}
 		else {
 			sbPageEditor.removeStyle(aWindow, "scrapbook-eraser-style");
+		}
+	},
+
+	handleKeyEvent : function(aEvent)
+	{
+		// F9
+		if (aEvent.keyCode == aEvent.DOM_VK_F9 &&
+			!aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbDOMEraser.init(0);
+			aEvent.preventDefault();
+			return;
 		}
 	},
 
@@ -981,7 +1438,7 @@ var sbAnnotationService = {
 	},
 
 
-	attach : function(aFlag, aLabel)
+	attach : function(aFlag)
 	{
 		var win = sbCommonUtils.getFocusedWindow();
 		var sel = sbPageEditor.getSelection(win);
@@ -990,7 +1447,7 @@ var sbAnnotationService = {
 		if ( aFlag == "L" )
 		{
 			var ret = {};
-			if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook - " + aLabel, sbCommonUtils.lang("overlay", "ADDRESS"), ret, null, {}) ) return;
+			if ( !sbCommonUtils.PROMPT.prompt(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_LINK_TITLE"), sbCommonUtils.lang("overlay", "ADDRESS"), ret, null, {}) ) return;
 			if ( !ret.value ) return;
 			attr["href"] = ret.value;
 			attr["data-sb-obj"] = "link-url";
@@ -1014,7 +1471,7 @@ var sbAnnotationService = {
 			}
 			// if unavailable, let the user input an id
 			var ret = {value: id || ""};
-			if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook - " + aLabel, sbCommonUtils.lang("overlay", "ADD_INNERLINK"), ret, null, {}) ) return;
+			if ( !sbCommonUtils.PROMPT.prompt(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_ENTER"), ret, null, {}) ) return;
 			var id = ret.value;
 			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
 			if ( sbDataSource.exists(res) ) {
@@ -1026,7 +1483,7 @@ var sbAnnotationService = {
 			else res = null;
 			// if it's invalid, alert and quit
 			if (!res) {
-				sbCommonUtils.PROMPT.alert(window, "ScrapBook - " + aLabel, sbCommonUtils.lang("overlay", "ADD_INNERLINK_INVALID", [id]));
+				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_INVALID", [id]));
 				return;
 			}
 			// attach the link
@@ -1040,13 +1497,13 @@ var sbAnnotationService = {
 		else
 		{
 			var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-			FP.init(window, aLabel, FP.modeOpen);
+			FP.init(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), FP.modeOpen);
 			var ret = FP.show();
 			if ( ret != FP.returnOK ) return;
 			var destFile = sbCommonUtils.getContentDir(sbPageEditor.item.id).clone();
 			destFile.append(FP.file.leafName);
 			if ( destFile.exists() && destFile.isFile() ) {
-				if ( !sbCommonUtils.PROMPT.confirm(window, "ScrapBook - " + aLabel, sbCommonUtils.lang("overlay", "OVERWRITE_FILE", [FP.file.leafName])) ) return;
+				if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [FP.file.leafName])) ) return;
 				destFile.remove(false);
 			}
 			try {

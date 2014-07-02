@@ -12,6 +12,7 @@
 <!ENTITY sb.edit.attach.link "Auswahl mit Link verknüpfen">
 <!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
 <!ENTITY sb.edit.html "HTML Editor">
+<!ENTITY sb.edit.html.source "Edit HTML Source">
 <!ENTITY sb.edit.cutter "Ausgewählten Bereich entfernen">
 <!ENTITY sb.edit.remove.iframe "Alle IFRAME-Tags entfernen">
 <!ENTITY sb.edit.remove.script "Alle SCRIPT-Tags entfernen">
