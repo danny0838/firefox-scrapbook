@@ -17,6 +17,7 @@
 <!ENTITY sb.prefs.restart "Потребує перезавантаження Firefox.">
 <!ENTITY sb.prefs.tabs.tips "Відкривати у нових вкладках наступні дії">
 <!ENTITY sb.prefs.tabs.note "Редагувати нотатку">
+<!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
 <!ENTITY sb.prefs.data "Місце збереження даних">
 <!ENTITY sb.prefs.data.default "Типово (тека профілю)">
 <!ENTITY sb.prefs.data.custom "Зберігати дані у">

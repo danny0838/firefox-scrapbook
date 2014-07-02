@@ -17,6 +17,7 @@
 <!ENTITY sb.prefs.restart "Change requires Firefox restart.">
 <!ENTITY sb.prefs.tabs.tips "Open in tab for the following operations">
 <!ENTITY sb.prefs.tabs.note "Edit Note">
+<!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
 <!ENTITY sb.prefs.data "Location to Store Data">
 <!ENTITY sb.prefs.data.default "Default (Profile Folder)">
 <!ENTITY sb.prefs.data.custom "Save data to">

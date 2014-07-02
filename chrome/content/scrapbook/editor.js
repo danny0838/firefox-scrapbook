@@ -152,6 +152,15 @@ var sbPageEditor = {
 		return isSelected ? sel : false;
 	},
 
+	getSelectionHTML : function(aSelection)
+	{
+		var range = aSelection.getRangeAt(0);
+		var content = range.cloneContents();
+		var elem = aSelection.anchorNode.ownerDocument.createElement("DIV");
+		elem.appendChild(content);
+		return elem.innerHTML;
+	},
+
 	cutter : function()
 	{
 		var win = sbCommonUtils.getFocusedWindow();
@@ -484,6 +493,7 @@ var sbPageEditor = {
 var sbHtmlEditor = {
 
 	enabled : false,
+	currentDocument : null,
 
 	// aStateFlag
 	//   0: disable (for all window documents)
@@ -500,11 +510,13 @@ var sbHtmlEditor = {
 		document.getElementById("ScrapBookEditEraser").disabled = this.enabled;
 		document.getElementById("ScrapBookEditUndo").disabled = this.enabled;
 		if ( aStateFlag == 1 ) {
+			this.currentDocument = aDoc;
 			if ( aDoc.designMode != "on" ) {
 				sbPageEditor.allowUndo(aDoc);
 				aDoc.designMode = "on";
 			}
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
+				this.initEvent(win, 1);
 				sbAnnotationService.initEvent(win, 0);
 				sbPageEditor.initEvent(win, 0);
 			}, this);
@@ -514,9 +526,79 @@ var sbHtmlEditor = {
 				if ( win.document.designMode != "off" ) {
 					win.document.designMode = "off";
 				}
+				this.initEvent(win, 0);
 				sbAnnotationService.initEvent(win, 1);
 				sbPageEditor.initEvent(win, 1);
 			}, this);
+		}
+	},
+
+	initEvent : function(aWindow, aStateFlag)
+	{
+		aWindow.document.removeEventListener("keypress", this.handleEvent, true);
+		if (aStateFlag == 1) {
+			aWindow.document.addEventListener("keypress", this.handleEvent, true);
+		}
+	},
+
+	handleEvent : function(aEvent)
+	{
+		if ( aEvent.type == "keypress" )
+		{
+			// Ctrl+Alt+I
+			if (String.fromCharCode(aEvent.charCode).toUpperCase() == "I" &&
+				aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+				sbHtmlEditor.insertSource(sbHtmlEditor.currentDocument);
+			}
+		}
+	},
+	
+	insertSource : function(aDoc)
+	{
+		var sel = aDoc.defaultView.getSelection();
+		var collapsed = sel.isCollapsed;
+		var data = {value:""};
+		if (!collapsed) {
+			// backup original selection ranges
+			var ranges = [];
+			for (var i=0, len=sel.rangeCount; i<len; i++) {
+				ranges.push(sel.getRangeAt(i))
+			}
+			// get selection area to edit
+			if (sbCommonUtils.getPref("edit.extendSourceEdit", true)) {
+				// reset selection to the common ancestor container of the first range
+				var node = ranges[0].commonAncestorContainer;
+				if (node.nodeName == "#text") node = node.parentNode;
+				var range = aDoc.createRange();
+				range.selectNodeContents(node);
+				sel.removeAllRanges();
+				sel.addRange(range);			
+				// set data
+				data.value = node.innerHTML;
+			}
+			else {
+				// reset selection to the first range
+				sel.removeAllRanges();
+				sel.addRange(ranges[0]);
+				// set data
+				data.value = sbPageEditor.getSelectionHTML(sel);
+			}
+		}
+		// prompt the dialog for user input
+		window.top.openDialog(
+			"chrome://scrapbook/content/source.xul", "ScrapBook:EditSource", "chrome,modal,centerscreen,resizable", 
+			data
+		);
+		// accepted, do the modify
+		if (data.result) {
+			aDoc.execCommand("insertHTML", false, data.value);
+		}
+		// cancled, restore the original selection if previously modified
+		else if (!collapsed) {
+			sel.removeAllRanges();
+			for (var i=0, len=ranges.length; i<len; i++) {
+				sel.addRange(ranges[i]);
+			}
 		}
 	},
 

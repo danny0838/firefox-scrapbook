@@ -17,6 +17,7 @@
 <!ENTITY sb.prefs.restart "Изменения требуют перезапуска Firefox&apos;а">
 <!ENTITY sb.prefs.tabs.tips "Открывать в новых вкладках следующие операции">
 <!ENTITY sb.prefs.tabs.note "Изменить заметку">
+<!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
 <!ENTITY sb.prefs.data "Расположение сохраняемой информации">
 <!ENTITY sb.prefs.data.default "По умолчанию (каталог профиля)">
 <!ENTITY sb.prefs.data.custom "Сохранить информацию в">

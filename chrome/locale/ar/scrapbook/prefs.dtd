@@ -17,6 +17,7 @@
 <!ENTITY sb.prefs.restart "التغيير يتطلب إعادة تشغيل فيرفوكس.">
 <!ENTITY sb.prefs.tabs.tips "فتح في لسان للعمليات التالية">
 <!ENTITY sb.prefs.tabs.note "تحرير ملاحظة">
+<!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
 <!ENTITY sb.prefs.data "مكان تخزين البيانات">
 <!ENTITY sb.prefs.data.default "الافتراضي (مجلد profile)">
 <!ENTITY sb.prefs.data.custom "حفظ البيانات إلى">
