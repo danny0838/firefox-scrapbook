@@ -45,7 +45,7 @@ var sbPrefWindow = {
 
 	hlInitUI: function() {
 		var tmpElt = document.getElementById("hlTemplate");
-		for (var num = 1; num <= 6; num++) {
+		for (var num = 1; num <= 8; num++) {
 			var elt = tmpElt.cloneNode(true);
 			tmpElt.parentNode.insertBefore(elt, tmpElt);
 			elt.firstChild.setAttribute("value", num + ":");
@@ -57,16 +57,18 @@ var sbPrefWindow = {
 	},
 
 	hlUpdateUI: function() {
-		for (var num = 6; num > 0; num--) {
+		for (var num = 8; num > 0; num--) {
 			var prefVal = sbCommonUtils.getPref("highlighter.style." + num, sbHighlighter.PRESET_STYLES[num]);
 			sbHighlighter.decorateElement(document.getElementById("hlPrefLabel" + num), prefVal);
 		}
 	},
 
 	hlCustomize: function(aNumber) {
+		var ret = {index: aNumber};
 		document.documentElement.openSubDialog(
-			"chrome://scrapbook/content/hlCustom.xul", "modal,centerscreen,chrome", aNumber
+			"chrome://scrapbook/content/hlCustom.xul", "modal,centerscreen,chrome", ret
 		);
+		if (ret.result == 1) this.changed = true;
 		this.hlUpdateUI();
 	},
 

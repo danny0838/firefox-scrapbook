@@ -15,12 +15,6 @@
 <!ENTITY sb.highlighter "المضيء">
 <!ENTITY sb.highlighter.remove "إزالة الإضاءة من المحدد">
 <!ENTITY sb.highlighter.remove.all "إزالة كل الإضاءات">
-<!ENTITY sbp.highlighter.stil1 "أسلوب ١">
-<!ENTITY sbp.highlighter.stil2 "أسلوب ٢">
-<!ENTITY sbp.highlighter.stil3 "أسلوب ٣">
-<!ENTITY sbp.highlighter.stil4 "أسلوب ٤">
-<!ENTITY sbp.highlighter.stil5 "أسلوب ٥">
-<!ENTITY sbp.highlighter.stil6 "أسلوب ٦">
 <!ENTITY sb.source "فتح الموقع المصدر">
 <!ENTITY sb.renew "التقط مجددا">
 <!ENTITY sb.locate "أوجد في شجرة الشريط الجانبي">

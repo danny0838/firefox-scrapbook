@@ -15,12 +15,6 @@
 <!ENTITY sb.highlighter "Szövegkiemelő">
 <!ENTITY sb.highlighter.remove "Kiemelések eltávolítása a kijelölésből">
 <!ENTITY sb.highlighter.remove.all "Összes kijelölés törlése">
-<!ENTITY sbp.highlighter.stil1 "Stílus 1">
-<!ENTITY sbp.highlighter.stil2 "Stílus 2">
-<!ENTITY sbp.highlighter.stil3 "Stílus 3">
-<!ENTITY sbp.highlighter.stil4 "Stílus 4">
-<!ENTITY sbp.highlighter.stil5 "Stílus 5">
-<!ENTITY sbp.highlighter.stil6 "Stílus 6">
 <!ENTITY sb.source "Forráswebhely megnyitása">
 <!ENTITY sb.renew "Rögzítés ismét">
 <!ENTITY sb.locate "Hely meghatározása az Oldalsávban">

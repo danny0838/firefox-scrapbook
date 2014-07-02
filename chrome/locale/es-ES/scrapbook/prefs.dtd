@@ -33,4 +33,3 @@
 <!ENTITY sb.button.customize "Personalizar">
 <!ENTITY sb.button.browse "Buscar">
 <!ENTITY sb.button.show "Mostrar ficheros">
-<!ENTITY sbp.prefs.useDropDownList "usar lista desplegable en vez de los botones para elegir el marcador">

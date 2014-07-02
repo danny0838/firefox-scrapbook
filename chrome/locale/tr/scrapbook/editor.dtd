@@ -15,12 +15,6 @@
 <!ENTITY sb.highlighter "Vurgulayıcı">
 <!ENTITY sb.highlighter.remove "Seçimden Vurguları Temizle">
 <!ENTITY sb.highlighter.remove.all "Tüm Vurguları Temizle">
-<!ENTITY sbp.highlighter.stil1 "   Style 1   ">
-<!ENTITY sbp.highlighter.stil2 "   Style 2   ">
-<!ENTITY sbp.highlighter.stil3 "   Style 3   ">
-<!ENTITY sbp.highlighter.stil4 "   Style 4   ">
-<!ENTITY sbp.highlighter.stil5 "   Style 5   ">
-<!ENTITY sbp.highlighter.stil6 "   Style 6   ">
 <!ENTITY sb.source "Kaynak URL&apos;yi Aç">
 <!ENTITY sb.renew "Yeniden Kaydet">
 <!ENTITY sb.locate "Kenar Çubuğu Ağacında Konumla">

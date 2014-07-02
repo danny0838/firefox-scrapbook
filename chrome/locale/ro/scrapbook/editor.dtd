@@ -15,12 +15,6 @@
 <!ENTITY sb.highlighter "Evidențiere">
 <!ENTITY sb.highlighter.remove "Elimină evidențierile din selecție">
 <!ENTITY sb.highlighter.remove.all "Elimină toate evidențierile">
-<!ENTITY sbp.highlighter.stil1 "Stil 1">
-<!ENTITY sbp.highlighter.stil2 "Stil 2">
-<!ENTITY sbp.highlighter.stil3 "Stil 3">
-<!ENTITY sbp.highlighter.stil4 "Stil 4">
-<!ENTITY sbp.highlighter.stil5 "Stil 5">
-<!ENTITY sbp.highlighter.stil6 "Stil 6">
 <!ENTITY sb.source "Deschide adresa sursă">
 <!ENTITY sb.renew "Capturează din nou">
 <!ENTITY sb.locate "Localizează în arborele lateral">
