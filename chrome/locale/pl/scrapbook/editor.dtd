@@ -7,8 +7,10 @@
 <!ENTITY sb.edit.sticky "Przyklejona notatka">
 <!ENTITY sb.edit.sticky.create "Utwórz przyklejoną notatkę">
 <!ENTITY sb.edit.inline.add "Dodaj komentarz w linii zaznaczenia">
+<!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "Dołącz plik do zaznaczenia">
 <!ENTITY sb.edit.attach.link "Dołącz odnośnik do zaznaczenia">
+<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
 <!ENTITY sb.edit.cutter "Usuń zaznaczenie">
 <!ENTITY sb.edit.remove.iframe "Usuń wszystkie znaczniki &lt;iframe&gt;">
 <!ENTITY sb.edit.remove.script "Usuń wszystkie znaczniki &lt;script&gt;">

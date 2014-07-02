@@ -7,8 +7,10 @@
 <!ENTITY sb.edit.sticky "自由註解">
 <!ENTITY sb.edit.sticky.create "添增&sb.edit.sticky;">
 <!ENTITY sb.edit.inline.add "為選取區添增註腳">
+<!ENTITY sb.edit.annotation.add "在選取區後添增 HTML 註解">
 <!ENTITY sb.edit.attach.file "為選取區附加檔案">
 <!ENTITY sb.edit.attach.link "為選取區附加連結">
+<!ENTITY sb.edit.attach.innerlink "為選取區附加內部連結">
 <!ENTITY sb.edit.cutter "刪除選取區">
 <!ENTITY sb.edit.remove.iframe "移除所有 IFRAME 標籤">
 <!ENTITY sb.edit.remove.script "移除所有 SCRIPT 標籤">

@@ -7,8 +7,10 @@
 <!ENTITY sb.edit.sticky "付箋アノテーション">
 <!ENTITY sb.edit.sticky.create "&sb.edit.sticky;を作成">
 <!ENTITY sb.edit.inline.add "選択範囲にインライン注釈を入力">
+<!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "選択範囲にファイルを添付">
 <!ENTITY sb.edit.attach.link "選択範囲にリンクを追加">
+<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
 <!ENTITY sb.edit.cutter "選択範囲をカット">
 <!ENTITY sb.edit.remove.iframe "すべてのIFRAMEタグを削除">
 <!ENTITY sb.edit.remove.script "すべてのSCRIPTタグを削除">

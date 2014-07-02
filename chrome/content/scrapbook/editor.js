@@ -242,6 +242,7 @@ var sbPageEditor = {
 			case "linemarker" :
 			case "inline" :
 			case "link-url" :
+			case "link-inner" :
 			case "link-file" :
 				this.unwrapNode(aNode);
 				break;
@@ -697,6 +698,9 @@ var sbAnnotationService = {
 				case "inline" :
 					sbAnnotationService.editInline(aEvent.originalTarget);
 					break;
+				case "annotation" :
+					sbAnnotationService.editAnnotation(aEvent.originalTarget);
+					break;
 				case "block-comment" :
 					sbAnnotationService.createSticky([aEvent.originalTarget.previousSibling, aEvent.originalTarget.firstChild.data]);
 					aEvent.originalTarget.parentNode.removeChild(aEvent.originalTarget);
@@ -899,6 +903,40 @@ var sbAnnotationService = {
 	},
 
 
+	addAnnotation : function()
+	{
+		var win = sbCommonUtils.getFocusedWindow();
+		var sel = sbPageEditor.getSelection(win);
+		if ( !sel ) return;
+		sbPageEditor.allowUndo(win.document);
+		var ret = {};
+		if ( !sbCommonUtils.PROMPT.prompt(window, "[ScrapBook]", sbCommonUtils.lang("overlay", "EDIT_ANNOTATION"), ret, null, {}) ) return;
+		if ( !ret.value ) return;
+		var range = sel.getRangeAt(0);
+		var endC = range.endContainer;
+		var eOffset	= range.endOffset;
+		if (eOffset < endC.length - 1) endC.splitText( eOffset );
+		var annote = endC.ownerDocument.createElement("span");
+		annote.style = "font-size: small; border-bottom: 1px solid #FF3333; background: linen; cursor: help;";
+		annote.setAttribute("data-sb-obj", "annotation");
+		annote.innerHTML = ret.value;
+		endC.parentNode.insertBefore(annote, endC);
+		endC.parentNode.insertBefore(endC, annote);
+	},
+
+	editAnnotation : function(aElement)
+	{
+		var doc = aElement.ownerDocument;
+		sbPageEditor.allowUndo(doc);
+		var ret = { value : aElement.textContent };
+		if ( !sbCommonUtils.PROMPT.prompt(window, "[ScrapBook]", sbCommonUtils.lang("overlay", "EDIT_ANNOTATION"), ret, null, {}) ) return;
+		if ( ret.value )
+			aElement.innerHTML = ret.value;
+		else
+			sbPageEditor.removeSbObj(aElement);
+	},
+
+
 	attach : function(aFlag, aLabel)
 	{
 		var win = sbCommonUtils.getFocusedWindow();
@@ -912,6 +950,48 @@ var sbAnnotationService = {
 			if ( !ret.value ) return;
 			attr["href"] = ret.value;
 			attr["data-sb-obj"] = "link-url";
+		}
+		else if ( aFlag == "I" )
+		{
+			// if the sidebar is closed, we may get an error
+			try {
+				var sidebarId = sbCommonUtils.getSidebarId("sidebar");
+				var res = document.getElementById(sidebarId).contentWindow.sbTreeHandler.getSelection(true, 2);
+			}
+			catch (ex) {
+			}
+			// check the selected resource
+			if (res && res.length) {
+				res = res[0];
+				var type = sbDataSource.getProperty(res, "type");
+				if ( ["folder", "separator"].indexOf(type) === -1 ) {
+					var id = sbDataSource.getProperty(res, "id");
+				}
+			}
+			// if unavailable, let the user input an id
+			var ret = {value: id || ""};
+			if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook - " + aLabel, sbCommonUtils.lang("overlay", "ADD_INNERLINK"), ret, null, {}) ) return;
+			var id = ret.value;
+			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
+			if ( sbDataSource.exists(res) ) {
+				var type = sbDataSource.getProperty(res, "type");
+				if ( ["folder", "separator"].indexOf(type) !== -1 ) {
+					res = null;
+				}
+			}
+			else res = null;
+			// if it's invalid, alert and quit
+			if (!res) {
+				sbCommonUtils.PROMPT.alert(window, "ScrapBook - " + aLabel, sbCommonUtils.lang("overlay", "ADD_INNERLINK_INVALID", [id]));
+				return;
+			}
+			// attach the link
+			var title = sbDataSource.getProperty(res, "title");
+			attr["href"] = (type == "bookmark") ?
+				sbDataSource.getProperty(res, "source") :
+				"../" + id + "/index.html";
+			attr["title"] = title;
+			attr["data-sb-obj"] = "link-inner";
 		}
 		else
 		{

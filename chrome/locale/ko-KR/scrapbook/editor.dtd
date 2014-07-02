@@ -7,8 +7,10 @@
 <!ENTITY sb.edit.sticky "주석">
 <!ENTITY sb.edit.sticky.create "&sb.edit.sticky; 만들기">
 <!ENTITY sb.edit.inline.add "선택 부분에 인라인 주석 추가">
+<!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "선택 부분에 파일 첨부">
 <!ENTITY sb.edit.attach.link "선택 부분에 링크 추가">
+<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
 <!ENTITY sb.edit.cutter "선택 부분 삭제">
 <!ENTITY sb.edit.remove.iframe "모든 IFRAME 태그 삭제">
 <!ENTITY sb.edit.remove.script "모든 SCRIPT 태그 삭제">

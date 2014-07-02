@@ -7,8 +7,10 @@
 <!ENTITY sb.edit.sticky "Sticky Annotation">
 <!ENTITY sb.edit.sticky.create "Create &sb.edit.sticky;">
 <!ENTITY sb.edit.inline.add "Add Inline Annotation to Selection">
+<!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "Attach File to Selection">
 <!ENTITY sb.edit.attach.link "Attach Link to Selection">
+<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
 <!ENTITY sb.edit.cutter "Remove the Selection">
 <!ENTITY sb.edit.remove.iframe "Remove All IFRAME Tags">
 <!ENTITY sb.edit.remove.script "Remove All SCRIPT Tags">

@@ -7,8 +7,10 @@
 <!ENTITY sb.edit.sticky "حاشية ملتصقة">
 <!ENTITY sb.edit.sticky.create "إعمل &sb.edit.sticky;">
 <!ENTITY sb.edit.inline.add "إضافة حاشية مضمنة">
+<!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "إرفاق ملف بالمحدد">
 <!ENTITY sb.edit.attach.link "إرفاق وصلة بالمحدد">
+<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
 <!ENTITY sb.edit.cutter "أزل المحدد">
 <!ENTITY sb.edit.remove.iframe "إزالة جميع وسوم IFRAME">
 <!ENTITY sb.edit.remove.script "إزالة جميع وسوم السكربت">
