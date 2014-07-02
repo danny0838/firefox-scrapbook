@@ -144,9 +144,9 @@
 				</toolbarbutton>
 				<toolbarbutton id="ScrapBookEditAnnotation" type="menu-button" tooltiptext="&sb.edit.sticky.create;" accesskey="A" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbAnnotationService.createSticky();">
 					<menupopup onpopupshowing="this.firstChild.nextSibling.setAttribute('disabled', !sbPageEditor.item);">
-						<menuitem label="&sb.edit.attach.link;" oncommand="sbAnnotationService.attach('L',this.label);" />
-						<menuitem label="&sb.edit.attach.innerlink;" oncommand="sbAnnotationService.attach('I',this.label);" />
-						<menuitem label="&sb.edit.attach.file;" oncommand="sbAnnotationService.attach('F',this.label);" />
+						<menuitem label="&sb.edit.attach.link;" oncommand="sbAnnotationService.attach('L');" />
+						<menuitem label="&sb.edit.attach.innerlink;" oncommand="sbAnnotationService.attach('I');" />
+						<menuitem label="&sb.edit.attach.file;" oncommand="sbAnnotationService.attach('F');" />
 						<menuitem label="&sb.edit.inline.add;"  oncommand="sbAnnotationService.addInline();" />
 						<menuitem label="&sb.edit.annotation.add;"  oncommand="sbAnnotationService.addAnnotation();" />
 						<menuseparator />
