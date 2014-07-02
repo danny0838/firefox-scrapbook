@@ -359,10 +359,9 @@ var sbDataSource = {
 
 	identify : function(aID)
 	{
-		var i = 0;
-		while ( this.exists(aID) && i < 100 )
+		while ( this.exists(aID) )
 		{
-			aID = sbCommonUtils.getTimeStamp(--i);
+			aID = (parseInt(aID, 10) + 1).toString();
 		}
 		return aID;
 	},
