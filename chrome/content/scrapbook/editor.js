@@ -854,12 +854,84 @@ var sbHtmlEditor = {
 
 	attachLink : function(aDoc)
 	{
-		var sel = sbPageEditor.getSelection(aDoc.defaultView);
-		if ( !sel ) return;
-		var ret = {};
-		if ( !sbCommonUtils.PROMPT.prompt(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_LINK_TITLE"), sbCommonUtils.lang("overlay", "ADDRESS"), ret, null, {}) ) return;
-		if ( !ret.value ) return;
-		aDoc.execCommand("createLink", false, ret.value);
+		var sel = aDoc.defaultView.getSelection();
+		var data = {};
+		// retrieve selected id from sidebar
+		// -- if the sidebar is closed, we may get an error
+		try {
+			var sidebarId = sbCommonUtils.getSidebarId("sidebar");
+			var res = document.getElementById(sidebarId).contentWindow.sbTreeHandler.getSelection(true, 2);
+		}
+		catch (ex) {
+		}
+		// -- check the selected resource
+		if (res && res.length) {
+			res = res[0];
+			var type = sbDataSource.getProperty(res, "type");
+			if ( ["folder", "separator"].indexOf(type) === -1 ) {
+				var id = sbDataSource.getProperty(res, "id");
+			}
+		}
+		data.id = id;
+		// prompt the dialog for user input
+		var accepted = window.top.openDialog(
+			"chrome://scrapbook/content/editor_link.xul", "ScrapBook:AttachFile", "chrome,modal,centerscreen,resizable", 
+			data
+		);
+		if (data.result != 1) return;
+		// insert link?
+		if (data.url_use) {
+			// attach the link
+			if (data.format) {
+				var URL = data.url;
+				var THIS = sel.isCollapsed ? URL : sbPageEditor.getSelectionHTML(sel);
+				var TITLE = "";
+				var html = data.format.replace(/{(TITLE|URL|THIS)}/g, function(){
+					switch (arguments[1]) {
+						case "TITLE": return TITLE;
+						case "URL": return URL;
+						case "THIS": return THIS;
+					}
+					return "";
+				});
+				aDoc.execCommand("insertHTML", false, html);
+			}
+		}
+		// insert inner link?
+		else if (data.id_use) {
+			var id = data.id;
+			// check the specified id
+			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
+			if ( sbDataSource.exists(res) ) {
+				var type = sbDataSource.getProperty(res, "type");
+				if ( ["folder", "separator"].indexOf(type) !== -1 ) {
+					res = null;
+				}
+			}
+			else res = null;
+			// if it's invalid, alert and quit
+			if (!res) {
+				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_INVALID", [id]));
+				return;
+			}
+			// attach the link
+			if (data.format) {
+				var TITLE = sbDataSource.getProperty(res, "title");
+				var URL = (type == "bookmark") ?
+				sbDataSource.getProperty(res, "source") :
+				"../" + id + "/index.html";
+				var THIS = sel.isCollapsed ? TITLE : sbPageEditor.getSelectionHTML(sel);
+				var html = data.format.replace(/{(TITLE|URL|THIS)}/g, function(){
+					switch (arguments[1]) {
+						case "TITLE": return TITLE;
+						case "URL": return URL;
+						case "THIS": return THIS;
+					}
+					return "";
+				});
+				aDoc.execCommand("insertHTML", false, html);
+			}
+		}
 	},
 
 	attachInnerLink : function(aDoc)

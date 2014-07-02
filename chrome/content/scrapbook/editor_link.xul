@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+
+<!DOCTYPE dialog [
+	<!ENTITY % prefDTD SYSTEM "chrome://scrapbook/locale/prefs.dtd">
+	%prefDTD;
+	<!ENTITY % editorDTD SYSTEM "chrome://scrapbook/locale/editor.dtd" >
+	%editorDTD;
+]>
+
+<dialog id="sbLinkDialog"
+		title="&sb.edit.html.link;"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        buttons="accept,cancel"
+        style="width: 400px;"
+        persist="width height"
+        onload="init();"
+        ondialogaccept="accept();">
+
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/editor_link.js" />
+
+	<radiogroup id="sbLinkSelector">
+		<hbox>
+			<radio id="sbLinkURLUse" label="&sb.edit.html.link.url;"/>
+			<textbox id="sbLinkURL" flex="1" oninput="pick('sbLinkURLUse')" />
+		</hbox>
+		<hbox>
+			<radio id="sbLinkIDUse" label="&sb.edit.html.link.id;"/>
+			<textbox id="sbLinkID" flex="1" oninput="pick('sbLinkIDUse')" />
+		</hbox>
+	</radiogroup>
+	<separator />
+	<hbox>
+		<label value="&sb.edit.html.link.format;" />
+		<menulist id="sbLinkFormat" editable="true" flex="1">
+			<menupopup>
+				<menuitem label='&lt;a href="{URL}">{THIS}&lt;/a>' />
+				<menuitem label='&lt;a href="{URL}" title="{TITLE}">{THIS}&lt;/a>' selected="true" />
+			</menupopup>
+		</menulist>
+	</hbox>
+</dialog>
