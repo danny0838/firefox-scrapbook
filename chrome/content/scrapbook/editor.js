@@ -948,7 +948,7 @@ var sbHtmlEditor = {
 		}
 		// prompt the dialog for user input
 		window.top.openDialog(
-			"chrome://scrapbook/content/source.xul", "ScrapBook:EditSource", "chrome,modal,centerscreen,resizable", 
+			"chrome://scrapbook/content/editor_source.xul", "ScrapBook:EditSource", "chrome,modal,centerscreen,resizable", 
 			data
 		);
 		// accepted, do the modify
