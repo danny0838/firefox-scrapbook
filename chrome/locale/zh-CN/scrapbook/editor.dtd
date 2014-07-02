@@ -12,6 +12,9 @@
 <!ENTITY sb.edit.attach.link "为所选内容附加链接">
 <!ENTITY sb.edit.attach.innerlink "为所选内容附加内部链接">
 <!ENTITY sb.edit.html "HTML 编辑器">
+<!ENTITY sb.edit.html.color "编辑颜色">
+<!ENTITY sb.edit.html.color.forText "设定文字颜色:">
+<!ENTITY sb.edit.html.color.forBg "设定背景颜色:">
 <!ENTITY sb.edit.html.source "编辑 HTML 源代码">
 <!ENTITY sb.edit.cutter "删除所选内容">
 <!ENTITY sb.edit.remove.iframe "删除所有 IFRAME 标签">
