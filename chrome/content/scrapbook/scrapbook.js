@@ -383,6 +383,23 @@ var sbController = {
 		sbCommonUtils.rebuildGlobal();
 	},
 
+	copyInternal: function(aResList, aParResList)
+	{
+		var result = {};
+		var preset = aParResList[0];
+		window.openDialog(
+			"chrome://scrapbook/content/folderPicker.xul", "",
+			"modal,chrome,centerscreen,resizable=yes", result, preset
+		);
+		if (!result.resource)
+			return;
+		var tarRes = result.resource;
+		for (var i = 0; i < aResList.length; i++)  {
+			sbDataSource.copyItem(aResList[i], tarRes, -1);
+		}
+		sbCommonUtils.rebuildGlobal();
+	},
+
 	removeInternal: function(aResList, aParResList, aBypassConfirm)
 	{
 		var rmIDs = [];

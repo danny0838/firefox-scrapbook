@@ -7,6 +7,7 @@
 <!ENTITY sb.show.files "Visualizza i file">
 <!ENTITY sb.move "Sposta">
 <!ENTITY sb.move.into "Sposta nella cartella">
+<!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Cattura ancora">
 <!ENTITY sb.export "Esporta…">
 <!ENTITY sb.remove "Elimina">

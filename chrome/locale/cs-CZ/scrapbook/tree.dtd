@@ -7,6 +7,7 @@
 <!ENTITY sb.show.files "Zobrazit soubory">
 <!ENTITY sb.move "Přesunout">
 <!ENTITY sb.move.into "Přesunout do složky">
+<!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Zachytit znovu">
 <!ENTITY sb.export "Exportovat">
 <!ENTITY sb.remove "Odstranit">

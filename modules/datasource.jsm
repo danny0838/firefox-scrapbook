@@ -209,6 +209,30 @@ var sbDataSource = {
 		this._flushWithDelay();
 	},
 
+	copyItem : function(curRes, tarPar, tarRelIdx)
+	{
+		var oldID = this.getProperty(curRes, "id");
+		var newID = this.identify(oldID);
+		// copy content
+		var oldDir = sbCommonUtils.getContentDir(oldID);
+		var newDir = sbCommonUtils.getContentDir(newID);
+		oldDir.copyTo(newDir.parent, newID);
+		// create new item
+		var newItem = sbCommonUtils.newItem(newID);
+		for (var prop in newItem) {
+			newItem[prop] = this.getProperty(curRes, prop);
+		}
+		newItem.id = newID;
+		sbCommonUtils.writeIndexDat(newItem);
+		// add to resource
+		if ( sbCommonUtils.getPref("tree.unshift", false) )
+		{
+			if ( tarRelIdx == 0 || tarRelIdx == -1 ) tarRelIdx = 1;
+		}
+		var newRes = this.addItem(newItem, tarPar.Value, tarRelIdx);
+		this._flushWithDelay();
+	},
+
 	createEmptySeq : function(aResName)
 	{
 		if ( !this.validateURI(aResName) ) return;
@@ -359,10 +383,9 @@ var sbDataSource = {
 
 	identify : function(aID)
 	{
-		var i = 0;
-		while ( this.exists(aID) && i < 100 )
+		while ( this.exists(aID) )
 		{
-			aID = sbCommonUtils.getTimeStamp(--i);
+			aID = (parseInt(aID, 10) + 1).toString();
 		}
 		return aID;
 	},
