@@ -12,7 +12,7 @@
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         buttons="accept,cancel"
         style="width: 400px;"
-        persist="screenX screenY width height"
+        persist="width height"
         onload="init();"
         ondialogaccept="accept();">
 
