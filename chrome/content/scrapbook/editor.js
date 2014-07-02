@@ -59,19 +59,26 @@ var sbPageEditor = {
 		sbDOMEraser.init(0);
 		// -- window
 		if ( aID ) {
-			try { window.content.removeEventListener("beforeunload", this.handleEvent, true); } catch(ex){}
-			window.content.addEventListener("beforeunload", this.handleEvent, true);
+			try { window.content.removeEventListener("beforeunload", this.handleUnloadEvent, true); } catch(ex){}
+			window.content.addEventListener("beforeunload", this.handleUnloadEvent, true);
 		}
 		// -- document
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
-			try { win.document.removeEventListener("mousedown", sbAnnotationService.handleEvent, true); } catch(ex){}
-			try { win.document.removeEventListener("click", sbAnnotationService.handleEvent, true); } catch(ex){}
-			try { win.document.removeEventListener("keypress", this.handleEvent, true); } catch(ex){}
-			win.document.addEventListener("mousedown", sbAnnotationService.handleEvent, true);
-			win.document.addEventListener("click", sbAnnotationService.handleEvent, true);
-			win.document.addEventListener("keypress", this.handleEvent, true);
+			sbAnnotationService.initEvent(win, 1);
+			this.initEvent(win, 1);
 			this.documentBeforeEdit(win.document);
 		}, this);
+	},
+
+	// aStateFlag
+	//   0: disable
+	//   1: enable
+	initEvent : function(aWindow, aStateFlag)
+	{
+		try { aWindow.document.removeEventListener("keypress", this.handleEvent, true); } catch(ex){}
+		if (aStateFlag == 1) {
+			aWindow.document.addEventListener("keypress", this.handleEvent, true);
+		}
 	},
 
 	handleEvent : function(aEvent)
@@ -94,13 +101,14 @@ var sbPageEditor = {
 			}
 			if ( idx > 0 ) sbPageEditor.highlight(idx);
 		}
-		else if ( aEvent.type == "beforeunload" )
-		{
-			if (sbPageEditor.checkModify()) {
-				// The message only work for Firefox 3.*
-				// Else it only fires a default prompt to confirm whether to exit
-				aEvent.returnValue = sbCommonUtils.lang("overlay", "EDIT_SAVE_CHANGES");
-			}
+	},
+
+	handleUnloadEvent : function(aEvent)
+	{
+		if (sbPageEditor.checkModify()) {
+			// The message only work for Firefox 3.*
+			// Else it only fires a default prompt to confirm whether to exit
+			aEvent.returnValue = sbCommonUtils.lang("overlay", "EDIT_SAVE_CHANGES");
 		}
 	},
 
@@ -270,7 +278,7 @@ var sbPageEditor = {
 
 	exit : function(forceExit)
 	{
-		if ( sbDOMEraser.enabled ) sbDOMEraser.init(2);
+		if ( sbDOMEraser.enabled ) sbDOMEraser.init(0);
 		this.showHide(false);
 		if ( !forceExit ) this.restore();
 	},
@@ -318,7 +326,7 @@ var sbPageEditor = {
 			this.saveResource();
 		}
 		else {
-			sbDOMEraser.init(2);
+			sbDOMEraser.init(0);
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 				this.documentBeforeSave(win.document);
 			}, this);
@@ -343,7 +351,7 @@ var sbPageEditor = {
 			return;
 		}
 		this.disable(true);
-		sbDOMEraser.init(2);
+		sbDOMEraser.init(0);
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			var doc = win.document;
 			if ( doc.contentType != "text/html" ) {
@@ -477,46 +485,75 @@ var sbDOMEraser = {
 
 	enabled : false,
 	verbose : 0,
+	lastTarget : null,
 
+	// aStateFlag
+	//   0: disable
+	//   1: enable
 	init : function(aStateFlag)
 	{
 		this.verbose = 0;
 		this.enabled = (aStateFlag == 1);
 		document.getElementById("ScrapBookEditEraser").checked = this.enabled;
-		if ( aStateFlag == 0 ) return;
 		document.getElementById("ScrapBookHighlighter").disabled = this.enabled;
 		document.getElementById("ScrapBookEditAnnotation").disabled = this.enabled;
 		document.getElementById("ScrapBookEditCutter").disabled  = this.enabled;
+		if (sbDOMEraser.lastTarget) {
+			sbDOMEraser._clearOutline(sbDOMEraser.lastTarget);
+			sbDOMEraser.lastTarget = null;
+		}
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
-			win.document.removeEventListener("mouseover", this.handleEvent, true);
-			win.document.removeEventListener("mousemove", this.handleEvent, true);
-			win.document.removeEventListener("mouseout",  this.handleEvent, true);
-			win.document.removeEventListener("click",     this.handleEvent, true);
-			if ( this.enabled ) {
-				win.document.addEventListener("mouseover", this.handleEvent, true);
-				win.document.addEventListener("mousemove", this.handleEvent, true);
-				win.document.addEventListener("mouseout",  this.handleEvent, true);
-				win.document.addEventListener("click",     this.handleEvent, true);
-			}
-			if ( this.enabled ) {
-				var estyle = "* { cursor: crosshair; }\n"
-				           + "#scrapbook-eraser-tooltip { -moz-appearance: tooltip;"
-				           + " position: absolute; z-index: 10000; margin-top: 32px; padding: 2px 3px; max-width: 40em;"
-				           + " border: 1px solid InfoText; background-color: InfoBackground; color: InfoText; font: message-box; }";
-				sbPageEditor.applyStyle(win, "scrapbook-eraser-style", estyle);
+			var tooltip = win.document.getElementById("scrapbook-eraser-tooltip");
+			if ( tooltip ) tooltip.parentNode.removeChild(tooltip);
+			if (aStateFlag == 1) {
+				this.initEvent(win, 1);
+				this.initStyle(win, 1);
+				sbAnnotationService.initEvent(win, 0);
+				sbPageEditor.initEvent(win, 0);
 			}
 			else {
-				sbPageEditor.removeStyle(win, "scrapbook-eraser-style");
+				this.initEvent(win, 0);
+				this.initStyle(win, 0);
+				sbAnnotationService.initEvent(win, 1);
+				sbPageEditor.initEvent(win, 1);
 			}
 		}, this);
+	},
+
+	initEvent : function(aWindow, aStateFlag)
+	{
+		aWindow.document.removeEventListener("mouseover", this.handleEvent, true);
+		aWindow.document.removeEventListener("mousemove", this.handleEvent, true);
+		aWindow.document.removeEventListener("mouseout",  this.handleEvent, true);
+		aWindow.document.removeEventListener("click",     this.handleEvent, true);
+		if ( aStateFlag == 1 ) {
+			aWindow.document.addEventListener("mouseover", this.handleEvent, true);
+			aWindow.document.addEventListener("mousemove", this.handleEvent, true);
+			aWindow.document.addEventListener("mouseout",  this.handleEvent, true);
+			aWindow.document.addEventListener("click",     this.handleEvent, true);
+		}
+	},
+
+	initStyle : function(aWindow, aStateFlag)
+	{
+		if ( aStateFlag == 1 ) {
+			var estyle = "* { cursor: crosshair; }\n"
+					   + "#scrapbook-eraser-tooltip { -moz-appearance: tooltip;"
+					   + " position: absolute; z-index: 10000; margin-top: 32px; padding: 2px 3px; max-width: 40em;"
+					   + " border: 1px solid InfoText; background-color: InfoBackground; color: InfoText; font: message-box; }";
+			sbPageEditor.applyStyle(aWindow, "scrapbook-eraser-style", estyle);
+		}
+		else {
+			sbPageEditor.removeStyle(aWindow, "scrapbook-eraser-style");
+		}
 	},
 
 	handleEvent : function(aEvent)
 	{
 		aEvent.preventDefault();
 		var elem = aEvent.target;
-		var tagName = elem.localName.toUpperCase();
-		if ( aEvent.type != "keypress" && ["SCROLLBAR","HTML","BODY","FRAME","FRAMESET"].indexOf(tagName) >= 0 ) return;
+		var tagName = elem.nodeName.toLowerCase();
+		if ( ["#document","scrollbar","html","body","frame","frameset"].indexOf(tagName) >= 0 ) return;
 		var onSbObj = sbCommonUtils.getSbObjectType(elem);
 		if ( aEvent.type == "mouseover" || aEvent.type == "mousemove" )
 		{
@@ -524,24 +561,26 @@ var sbDOMEraser = {
 			var tooltip = elem.ownerDocument.getElementById("scrapbook-eraser-tooltip");
 			if ( !tooltip )
 			{
+				var newtooltip = true;
 				tooltip = elem.ownerDocument.createElement("DIV");
 				tooltip.id = "scrapbook-eraser-tooltip";
 				elem.ownerDocument.body.appendChild(tooltip);
 			}
 			tooltip.style.left = aEvent.pageX + "px";
 			tooltip.style.top  = aEvent.pageY + "px";
-			if ( aEvent.type == "mouseover" )
+			if ( aEvent.type == "mouseover" || newtooltip )
 			{
 				if ( onSbObj ) {
 					tooltip.textContent = sbCommonUtils.lang("overlay", "EDIT_REMOVE_HIGHLIGHT");
 					sbDOMEraser._setOutline(elem, "2px dashed #0000FF");
 				} else {
-					tooltip.textContent = elem.localName;
+					tooltip.textContent = tagName;
 					if ( elem.id ) tooltip.textContent += ' id="' + elem.id + '"';
 					if ( elem.className ) tooltip.textContent += ' class="' + elem.className + '"';
 					sbDOMEraser._setOutline(elem, "2px solid #FF0000");
 				}
 			}
+			sbDOMEraser.lastTarget = elem;
 		}
 		else if ( aEvent.type == "mouseout" || aEvent.type == "click" )
 		{
@@ -563,6 +602,7 @@ var sbDOMEraser = {
 						elem.parentNode.removeChild(elem);
 				}
 			}
+			sbDOMEraser.lastTarget = null;
 		}
 	},
 
@@ -610,9 +650,25 @@ var sbAnnotationService = {
 	isMove  : true,
 	target  : null,
 
+	// aStateFlag
+	//  0: disable
+	//  1: enable
+	initEvent : function(aWindow, aStateFlag)
+	{
+		aWindow.document.removeEventListener("mousedown", this.handleEvent, true);
+		aWindow.document.removeEventListener("click", this.handleEvent, true);
+		if (aStateFlag == 1) {
+			aWindow.document.addEventListener("mousedown", this.handleEvent, true);
+			aWindow.document.addEventListener("click", this.handleEvent, true);
+		}
+		else {
+			aWindow.document.removeEventListener("mousemove", this.handleEvent, true);
+			aWindow.document.removeEventListener("mouseup",   this.handleEvent, true);
+		}
+	},
+
 	handleEvent : function(aEvent)
 	{
-		if ( sbDOMEraser.enabled ) return;
 		if ( aEvent.type == "mousedown" )
 		{
 			switch ( sbCommonUtils.getSbObjectType(aEvent.originalTarget) )
