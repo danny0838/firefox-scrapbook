@@ -1638,7 +1638,7 @@ var sbInfoViewer = {
 
 			// dataXml is flushed earlier than dataU2N in a new capture
 			// if it has newer lastModifiedTime, treat as already patched
-			if ( !dataU2N.exists() || dataXml.lastModifiedTime < dataU2N.lastModifiedTime ) {
+			if ( !dataU2N.exists() || dataXml.lastModifiedTime <= dataU2N.lastModifiedTime ) {
 				var lfData = sbCommonUtils.readFile(dataXml);
 				lfData = sbCommonUtils.convertToUnicode(lfData, "UTF-8");
 				lfData = lfData.replace('<?xml-stylesheet href="../../sitemap.xsl"', '<?xml-stylesheet href="sitemap.xsl"');

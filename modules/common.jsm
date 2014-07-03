@@ -614,6 +614,15 @@ var sbCommonUtils = {
 		return aStr.replace(/\r|\n|\t/g, " __BR__ ");
 	},
 
+	escapeHTML : function(aStr, aNoDoubleQuotes, aSingleQuotes, aNoAmp)
+	{
+		if (!aNoAmp) aStr = aStr.replace(/&/g, "&amp;");
+		aStr = aStr.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+		if (!aNoDoubleQuotes) aStr = aStr.replace(/"/g, "&quot;");
+		if (aSingleQuotes) aStr = aStr.replace(/'/g, "&apos;");
+		return aStr;
+	},
+
 	openManageWindow : function(aRes, aModEltID)
 	{
 		var window = this.WINDOW.getMostRecentWindow("navigator:browser");
@@ -682,7 +691,7 @@ var sbCommonUtils = {
 		var br = aAddBr ? "\n" : "";
 		var tag = "<" + aNode.nodeName.toLowerCase();
 		for ( var i=0; i<aNode.attributes.length; i++ ) {
-			tag += ' ' + aNode.attributes[i].name + '="' + aNode.attributes[i].value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;") + '"';
+			tag += ' ' + aNode.attributes[i].name + '="' + this.escapeHTML(aNode.attributes[i].value) + '"';
 		}
 		tag += ">" + br;
 		return tag + aNode.innerHTML + "</" + aNode.nodeName.toLowerCase() + ">" + br;
