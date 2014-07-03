@@ -1000,6 +1000,13 @@ var sbDOMEraser = {
 
 	_shortcut_table : {
 		"F9" : "quit",
+		"Escape" : "quit",
+		"Return" : "remove",
+		"Space" : "remove",
+		"R" : "remove",
+		"I" : "isolate",
+		"U" : "undo",
+		"Q" : "quit",
 	},
 
 	// aStateFlag
@@ -1161,6 +1168,11 @@ var sbDOMEraser = {
 			}
 			aNode = parent;
 		}
+	},
+
+	undo : function(aNode)
+	{
+		sbPageEditor.undo();
 	},
 
 	_selectNode : function(aNode)
