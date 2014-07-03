@@ -998,6 +998,10 @@ var sbDOMEraser = {
 	lastY : 0,
 	lastTarget : null,
 
+	_shortcut_table : {
+		"F9" : "quit",
+	},
+
 	// aStateFlag
 	//   0: disable
 	//   1: enable
@@ -1064,13 +1068,23 @@ var sbDOMEraser = {
 
 	handleKeyEvent : function(aEvent)
 	{
-		// F9
-		if (aEvent.keyCode == aEvent.DOM_VK_F9 &&
-			!aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbDOMEraser.init(0);
-			aEvent.preventDefault();
-			return;
-		}
+		// set variables and check whether it's a defined hotkey combination
+		var shortcut = Shortcut.fromEvent(aEvent);
+		var key = shortcut.toString();
+		var callback_name = sbDOMEraser._shortcut_table[key];
+		if (!callback_name) return;
+
+		// now we are sure we have the hotkey
+		var callback = sbDOMEraser[callback_name];
+
+		// The original key effect could not be blocked completely
+		// if the command has a prompt or modal window that blocks.
+		// Therefore we call the callback command using an async workaround.
+		setTimeout(function(){
+			callback.call(sbDOMEraser, sbDOMEraser.lastTarget);
+		}, 0);
+
+		aEvent.preventDefault();
 	},
 
 	handleEvent : function(aEvent)
@@ -1109,6 +1123,11 @@ var sbDOMEraser = {
 				sbDOMEraser.remove(elem);
 			}
 		}
+	},
+
+	quit : function(aNode)
+	{
+		this.init(0);
 	},
 
 	remove : function(aNode)
