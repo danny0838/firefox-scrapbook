@@ -1265,6 +1265,7 @@ var sbDOMEraser = {
 			var html = "<b>" + sbCommonUtils.escapeHTML(aNode.nodeName.toLowerCase(), false) + "</b>";
 			if ( aNode.id ) html += ' id="' + sbCommonUtils.escapeHTML(aNode.id, false) + '"';
 			if ( aNode.className ) html += ' class="' + sbCommonUtils.escapeHTML(aNode.className, false) + '"';
+			if ( aNode.hasAttribute("style") ) html += '<br/>style="' + sbCommonUtils.escapeHTML(aNode.getAttribute("style"), false) + '"';
 			tooltip.innerHTML = html;
 			sbDOMEraser._setOutline(aNode, "2px solid #FF0000");
 		}
