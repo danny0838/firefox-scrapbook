@@ -28,12 +28,16 @@ function init() {
 	}
 	gColorTextChecker = document.getElementById("sbColorText");
 	gColorBgChecker = document.getElementById("sbColorBg");
-	// restore last picked color
-	gColorTextPicker[gColorType] = sbCommonUtils.getPref("edit.lastPickedTextColor", "#000000");
-	gColorBgPicker[gColorType] = sbCommonUtils.getPref("edit.lastPickedBgColor", "#FFFFFF");
+	// restore last selection
+	gColorTextChecker.checked = sbCommonUtils.getPref("edit.color.lastPickedText", true);
+	gColorBgChecker.checked = sbCommonUtils.getPref("edit.color.lastPickedBg", false);
+	gColorTextPicker[gColorType] = sbCommonUtils.getPref("edit.color.lastPickedTextColor", "#000000");
+	gColorBgPicker[gColorType] = sbCommonUtils.getPref("edit.color.lastPickedBgColor", "#FFFFFF");
 }
 
 function accept() {
+	sbCommonUtils.setPref("edit.color.lastPickedText", gColorTextChecker.checked);
+	sbCommonUtils.setPref("edit.color.lastPickedBg", gColorBgChecker.checked);
 	gData.result = (gColorTextChecker.checked || gColorBgChecker.checked) ? 1 : 0;
 	gData.textColor = gColorTextChecker.checked ? gColorTextPicker[gColorType] : null;
 	gData.bgColor = gColorBgChecker.checked ? gColorBgPicker[gColorType] : null;
@@ -41,10 +45,10 @@ function accept() {
 
 function pick(aElem, aIDToCheck) {
 	if (aElem == gColorTextPicker) {
-		sbCommonUtils.setPref("edit.lastPickedTextColor", aElem[gColorType]);
+		sbCommonUtils.setPref("edit.color.lastPickedTextColor", aElem[gColorType]);
 	}
 	else if (aElem == gColorBgPicker) {
-		sbCommonUtils.setPref("edit.lastPickedBgColor", aElem[gColorType]);
+		sbCommonUtils.setPref("edit.color.lastPickedBgColor", aElem[gColorType]);
 	}
 	document.getElementById(aIDToCheck).checked = true;
 }
