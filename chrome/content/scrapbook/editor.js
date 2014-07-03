@@ -1154,7 +1154,11 @@ var sbDOMEraser = {
 	wider : function(aNode)
 	{
 		var parent = aNode.parentNode;
-		if ( !parent || parent == aNode.ownerDocument.body ) return false;
+		if ( !parent ) return false;
+		if ( parent == aNode.ownerDocument.body ) {
+			parent = this._getParentFrameNode(aNode);
+			if (!parent) return false;
+		}
 		if (!this.widerStack) this.widerStack = [];
 		this.widerStack.push(aNode);
 		this._selectNode(parent);
@@ -1231,6 +1235,25 @@ var sbDOMEraser = {
 	undo : function(aNode)
 	{
 		sbPageEditor.undo();
+	},
+
+	_getParentFrameNode : function(aNode)
+	{
+		var parentWindow = aNode.ownerDocument.defaultView.parent;
+		if (!parentWindow) return null;
+		var frames = parentWindow.document.getElementsByTagName("IFRAME");
+		for (var i=0; i<frames.length; i++) {
+			if (frames[i].contentDocument == aNode.ownerDocument) {
+				return frames[i];
+			}
+		}
+		var frames = parentWindow.document.getElementsByTagName("FRAME");
+		for (var i=0; i<frames.length; i++) {
+			if (frames[i].contentDocument == aNode.ownerDocument) {
+				return frames[i];
+			}
+		}
+		return null;
 	},
 
 	_selectNode : function(aNode)
