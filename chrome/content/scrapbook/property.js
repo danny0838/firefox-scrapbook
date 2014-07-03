@@ -46,6 +46,7 @@ var sbPropService = {
 			case "bookmark" : this.isTypeBookmark  = true; bundleName = "TYPE_BOOKMARK";  break;
 			case "folder"   : this.isTypeFolder    = true; bundleName = "TYPE_FOLDER";    break;
 			case "note"     : this.isTypeNote      = true; bundleName = "TYPE_NOTE";      break;
+			case "notex"    : this.isTypeNotex     = true; bundleName = "TYPE_NOTEX";      break;
 			case "file"     : 
 			case "image"    : this.isTypeFile      = true; bundleName = "TYPE_FILE";      break;
 			case "combine"  : this.isTypeSite      = true; bundleName = "TYPE_COMBINE";   break;
@@ -57,7 +58,7 @@ var sbPropService = {
 		document.getElementById("sbPropIconRow").hidden   = this.isTypeSeparator;
 		document.getElementById("sbPropIconMenu").hidden  = this.isTypeNote;
 		document.getElementById("sbPropSizeRow").hidden   = this.isTypeFolder || this.isTypeBookmark || this.isTypeSeparator;
-		document.getElementById("sbPropMark").hidden      = this.isTypeFolder || this.isTypeNote || this.isTypeFile || this.isTypeSite || this.isTypeBookmark;
+		document.getElementById("sbPropMark").hidden      = this.isTypeFolder || this.isTypeNote || this.isTypeNotex || this.isTypeFile || this.isTypeSite || this.isTypeBookmark;
 		document.getElementById("sbPropIconMenu").firstChild.firstChild.nextSibling.setAttribute("disabled", this.isTypeFolder || this.isTypeBookmark);
 		if (!this.item.chars) document.getElementById("sbPropChars").removeAttribute("readonly");
 		if (this.isTypeNote)

@@ -1,6 +1,7 @@
 <!ENTITY sb.new.folder "새 폴더">
 <!ENTITY sb.new.separator "새 분리자">
 <!ENTITY sb.new.note "새 노트">
+<!ENTITY sb.new.notex "New Note Page">
 <!ENTITY sb.toggle.all "모든 폴더 열기/닫기">
 <!ENTITY sb.tools "도구">
 <!ENTITY sb.tools.options "설정">

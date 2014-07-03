@@ -23,6 +23,7 @@
 <!ENTITY sb.new.folder "Dosar nou">
 <!ENTITY sb.new.separator "Separator nou">
 <!ENTITY sb.new.note "Notă nouă">
+<!ENTITY sb.new.notex "New Note Page">
 <!ENTITY sb.sort.folder "Sortează dosarul">
 <!ENTITY sb.search "Caută">
 <!ENTITY sb.search.fulltext "Întregul conținut">

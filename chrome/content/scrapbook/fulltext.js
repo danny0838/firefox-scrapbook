@@ -349,6 +349,7 @@ var sbCacheService = {
 				if (!file.exists()) break;
 				sbCacheService.inspectFile(file, "index.html");
 				break;
+			case "notex":
 			case "site":
 				var basePathCut = dir.path.length + 1;
 				sbCommonUtils.forEachFile(dir, function(file){

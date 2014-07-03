@@ -497,6 +497,7 @@ var sbCommonUtils = {
 		{
 			case "folder" : return "chrome://scrapbook/skin/treefolder.png"; break;
 			case "note"   : return "chrome://scrapbook/skin/treenote.png";   break;
+			case "notex"  : return "chrome://scrapbook/skin/treenotex.png";  break;
 			default       : return "chrome://scrapbook/skin/treeitem.png";   break;
 		}
 	},

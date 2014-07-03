@@ -44,6 +44,11 @@ toolbar[iconsize="small"] #scrapbook-button {
 	list-style-image: url('chrome://scrapbook/skin/treenote.png') !important;
 }
 
+#ScrapBookMenu menuitem.sb-item[sbtype="notex"] {
+	list-style-image: url('chrome://scrapbook/skin/treenotex.png') !important;
+	color: rgb(80,0,32);
+}
+
 #ScrapBookMenu menuitem.sb-item[sbtype="marked"] {
 	font-weight: bold;
 }

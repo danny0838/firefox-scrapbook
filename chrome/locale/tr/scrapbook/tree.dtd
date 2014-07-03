@@ -24,6 +24,7 @@
 <!ENTITY sb.new.folder "Yeni Klasör">
 <!ENTITY sb.new.separator "Yeni Ayraç">
 <!ENTITY sb.new.note "Yeni Not">
+<!ENTITY sb.new.notex "New Note Page">
 <!ENTITY sb.sort.folder "Klasörü Sırala">
 <!ENTITY sb.search "Ara">
 <!ENTITY sb.search.fulltext "Tam Metin Arama">

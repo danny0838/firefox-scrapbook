@@ -1,6 +1,7 @@
 <!ENTITY sb.new.folder "Nova Pasta">
 <!ENTITY sb.new.separator "Novo Separador">
 <!ENTITY sb.new.note "Nova Nota">
+<!ENTITY sb.new.notex "New Note Page">
 <!ENTITY sb.toggle.all "Abrir/fechar Todas as Pastas">
 <!ENTITY sb.tools "Ferramentas">
 <!ENTITY sb.tools.options "Preferências">

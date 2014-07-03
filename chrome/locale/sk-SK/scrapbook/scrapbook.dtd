@@ -1,6 +1,7 @@
 <!ENTITY sb.new.folder "Nový priečinok">
 <!ENTITY sb.new.separator "Nový oddeľovač">
 <!ENTITY sb.new.note "Nová poznámka">
+<!ENTITY sb.new.notex "New Note Page">
 <!ENTITY sb.toggle.all "Otvoriť/zavrieť všetky priečinky">
 <!ENTITY sb.tools "Nástroje">
 <!ENTITY sb.tools.options "Nastavenia">

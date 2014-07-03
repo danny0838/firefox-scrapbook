@@ -1,6 +1,7 @@
 <!ENTITY sb.new.folder "Neuer Ordner">
 <!ENTITY sb.new.separator "Neue Trennlinie">
 <!ENTITY sb.new.note "Neue Notiz">
+<!ENTITY sb.new.notex "New Note Page">
 <!ENTITY sb.toggle.all "Alle Ordner aus-/einklappen">
 <!ENTITY sb.tools "Extras">
 <!ENTITY sb.tools.options "Einstellungen">

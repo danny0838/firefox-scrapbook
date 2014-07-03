@@ -18,6 +18,7 @@
 <!ENTITY sb.prefs.tabs.tips "Otwieraj w karcie wynik następujących poleceń">
 <!ENTITY sb.prefs.tabs.note "Edytuj notatkę">
 <!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
+<!ENTITY sbx.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format:">
 <!ENTITY sb.prefs.data "Lokalizacja folderu zapisu danych">

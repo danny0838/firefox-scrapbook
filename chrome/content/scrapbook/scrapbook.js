@@ -190,6 +190,50 @@ var sbMainService = {
 			sbTreeHandler.TREE.treeBoxObject.scrollByLines(sbTreeHandler.TREE.view.rowCount);
 	},
 
+	createNoteX: function()
+	{
+		sbSearchService.exit();
+		sbListHandler.quit();
+		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
+		var newItem = sbCommonUtils.newItem(newID);
+		newItem.title = sbCommonUtils.lang("scrapbook", "DEFAULT_NOTEX");
+		newItem.type = "notex";
+		newItem.chars = "UTF-8";
+		// check the template file, create one if not exist
+		var template = sbCommonUtils.getScrapBookDir().clone();
+		template.append("notex_template.html");
+		if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/notex_template.html", template);
+		// create content
+		var dir = sbCommonUtils.getContentDir(newID);
+		var html = dir.clone();
+		html.append("index.html");
+		var content = sbCommonUtils.readFile(template);
+		content = sbCommonUtils.convertToUnicode(content, "UTF-8");
+		sbCommonUtils.writeFile(html, content, newItem.chars);
+		sbCommonUtils.writeIndexDat(newItem);
+		// add resource
+		var tarResName, tarRelIdx, isRootPos;
+		try {
+			var curIdx = sbTreeHandler.TREE.currentIndex;
+			var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
+			var curPar = sbTreeHandler.getParentResource(curIdx);
+			var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
+			tarResName = curPar.Value;
+			tarRelIdx  = curRelIdx;
+			isRootPos  = false;
+		}
+		catch(ex) {
+			tarResName = sbTreeHandler.TREE.ref;
+			tarRelIdx  = 0;
+			isRootPos  = true;
+		}
+		var newRes = sbDataSource.addItem(newItem, tarResName, tarRelIdx);
+		sbTreeHandler.TREE.builder.rebuild();
+		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(newRes);
+		sbTreeHandler.TREE.view.selection.select(idx);
+		sbController.open(newRes, false);
+	},
+
 	openPrefWindow : function()
 	{
 		var instantApply = sbCommonUtils.getPref("browser.preferences.instantApply", false, true);
@@ -225,11 +269,13 @@ var sbController = {
 			return;
 		}
 		var isNote = false;
+		var isNotex = false;
 		var isFolder = false;
 		var isBookmark = false;
 		var isSeparator = false;
 		switch (sbDataSource.getProperty(res, "type")) {
 			case "note"     : isNote      = true; break;
+			case "notex"    : isNotex     = true; break;
 			case "folder"   : isFolder    = true; break;
 			case "bookmark" : isBookmark  = true; break;
 			case "separator": isSeparator = true; break;
@@ -249,7 +295,7 @@ var sbController = {
 		getElement("sbPopupManage").hidden = !isFolder || isSeparator;
 		getElement("sbPopupNewFolder").previousSibling.hidden = isSeparator;
 		getElement("sbPopupTools").hidden   = isFolder || isSeparator;
-		getElement("sbPopupRenew").setAttribute("disabled", isNote.toString());
+		getElement("sbPopupRenew").setAttribute("disabled", (isNote || isNotex).toString());
 		getElement("sbPopupShowFiles").setAttribute("disabled", isBookmark.toString());
 	},
 

@@ -1,6 +1,7 @@
 <!ENTITY sb.new.folder "Ny mapp">
 <!ENTITY sb.new.separator "Ny avgränsare">
 <!ENTITY sb.new.note "Ny anteckning">
+<!ENTITY sb.new.notex "New Note Page">
 <!ENTITY sb.toggle.all "Öppna/Stäng alla mappar">
 <!ENTITY sb.tools "Verktyg">
 <!ENTITY sb.tools.options "Inställningar">

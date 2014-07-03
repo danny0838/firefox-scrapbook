@@ -23,6 +23,7 @@
 <!ENTITY sb.new.folder "Nuova cartella">
 <!ENTITY sb.new.separator "Nuovo separatore">
 <!ENTITY sb.new.note "Nuova nota">
+<!ENTITY sb.new.notex "New Note Page">
 <!ENTITY sb.sort.folder "Ordina la cartella">
 <!ENTITY sb.search "Cerca">
 <!ENTITY sb.search.fulltext "Cerca parole intere">

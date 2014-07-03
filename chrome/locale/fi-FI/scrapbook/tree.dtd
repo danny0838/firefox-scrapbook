@@ -23,6 +23,7 @@
 <!ENTITY sb.new.folder "Uusi kansio">
 <!ENTITY sb.new.separator "Uusi erotin">
 <!ENTITY sb.new.note "Uusi muistilappu">
+<!ENTITY sb.new.notex "New Note Page">
 <!ENTITY sb.sort.folder "Järjestä kansio">
 <!ENTITY sb.search "Etsi">
 <!ENTITY sb.search.fulltext "Täydellinen tekstihaku">

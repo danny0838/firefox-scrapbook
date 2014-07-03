@@ -23,6 +23,7 @@
 <!ENTITY sb.new.folder "Нова тека">
 <!ENTITY sb.new.separator "Новий роздільник">
 <!ENTITY sb.new.note "Нова нотатка">
+<!ENTITY sb.new.notex "New Note Page">
 <!ENTITY sb.sort.folder "Сортувати у теці">
 <!ENTITY sb.search "Пошук">
 <!ENTITY sb.search.fulltext "Повнотекстовий пошук">
