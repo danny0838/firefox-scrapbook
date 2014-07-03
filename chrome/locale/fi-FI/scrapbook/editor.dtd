@@ -16,6 +16,13 @@
 <!ENTITY sb.edit.html.color.forText "Set text color:">
 <!ENTITY sb.edit.html.color.forBg "Set background color:">
 <!ENTITY sb.edit.html.source "Edit HTML Source">
+<!ENTITY sb.edit.html.link "Insert Link">
+<!ENTITY sb.edit.html.link.url "Target URL:">
+<!ENTITY sb.edit.html.link.id "Item ID:">
+<!ENTITY sb.edit.html.link.format "Select insert format:">
+<!ENTITY sb.edit.html.file "Insert File">
+<!ENTITY sb.edit.html.file.pick "Select file:">
+<!ENTITY sb.edit.html.file.format "Select insert format:">
 <!ENTITY sb.edit.cutter "Poista valinta">
 <!ENTITY sb.edit.remove.iframe "Poista kaikki IFRAME-tunnukset">
 <!ENTITY sb.edit.remove.script "Poista kaikki komentosarjatunnisteet">

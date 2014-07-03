@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
+
+<!DOCTYPE dialog [
+	<!ENTITY % prefDTD SYSTEM "chrome://scrapbook/locale/prefs.dtd">
+	%prefDTD;
+	<!ENTITY % editorDTD SYSTEM "chrome://scrapbook/locale/editor.dtd" >
+	%editorDTD;
+]>
+
+<dialog id="sbFileDialog"
+		title="&sb.edit.html.file;"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        buttons="accept,cancel"
+        style="width: 400px;"
+        persist="width height"
+        onload="init();"
+        ondialogaccept="accept();">
+
+	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/editor_file.js" />
+
+	<hbox>
+		<label value="&sb.edit.html.file.pick;" />
+		<filefield id="sbFilePath" flex="1" />
+		<button id="sbFilePicker" label="&sb.button.browse;..." oncommand="pickFile();" />
+	</hbox>
+	<separator />
+	<hbox>
+		<label value="&sb.edit.html.file.format;" />
+		<menulist id="sbFileFormat" editable="true" flex="1">
+			<menupopup>
+				<menuitem label='&lt;a href="{FILE}">{THIS}&lt;/a>' />
+				<menuitem label='&lt;a href="{FILE}" title="{FILE}">{THIS}&lt;/a>' selected="true" />
+				<menuitem label='&lt;img src="{FILE}" />' />
+				<menuitem label='&lt;img src="{FILE}" alt="{THIS}" title="{THIS}" />' />
+				<menuitem label='&lt;img width="500" src="{FILE}" alt="{THIS}" title="{THIS}" />' />
+			</menupopup>
+		</menulist>
+	</hbox>
+</dialog>
