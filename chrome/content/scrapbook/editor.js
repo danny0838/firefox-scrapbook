@@ -1173,9 +1173,10 @@ var sbDOMEraser = {
 			sbDOMEraser._setOutline(aNode, "2px dashed #0000FF");
 		}
 		else {
-			tooltip.textContent = aNode.nodeName.toLowerCase();
-			if ( aNode.id ) tooltip.textContent += ' id="' + aNode.id + '"';
-			if ( aNode.className ) tooltip.textContent += ' class="' + aNode.className + '"';
+			var html = "<b>" + sbCommonUtils.escapeHTML(aNode.nodeName.toLowerCase(), false) + "</b>";
+			if ( aNode.id ) html += ' id="' + sbCommonUtils.escapeHTML(aNode.id, false) + '"';
+			if ( aNode.className ) html += ' class="' + sbCommonUtils.escapeHTML(aNode.className, false) + '"';
+			tooltip.innerHTML = html;
 			sbDOMEraser._setOutline(aNode, "2px solid #FF0000");
 		}
 	},
