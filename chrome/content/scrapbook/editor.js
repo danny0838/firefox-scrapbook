@@ -1156,7 +1156,7 @@ var sbDOMEraser = {
 
 	_clearOutline : function(aElement)
 	{
-		aElement.style.outline = aElement.getAttribute("data-sb-old-outline");
+		aElement.style.outline = aElement.getAttribute("data-sb-old-outline") || "";
 		if ( !aElement.getAttribute("style") ) aElement.removeAttribute("style");
 		aElement.removeAttribute("data-sb-old-outline");
 	}
