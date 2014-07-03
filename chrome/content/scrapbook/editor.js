@@ -997,12 +997,19 @@ var sbDOMEraser = {
 	lastX : 0,
 	lastY : 0,
 	lastTarget : null,
+	widerStack : null,
 
 	_shortcut_table : {
 		"F9" : "quit",
 		"Escape" : "quit",
 		"Return" : "remove",
 		"Space" : "remove",
+		"Add" : "wider",
+		"Subtract" : "narrower",
+		"Shift+Equals" : "wider",
+		"Hyphen_Minus" : "narrower",
+		"W" : "wider",
+		"N" : "narrower",
 		"R" : "remove",
 		"I" : "isolate",
 		"U" : "undo",
@@ -1104,6 +1111,7 @@ var sbDOMEraser = {
 		sbDOMEraser.lastY = aEvent.pageY;
 		if ( aEvent.type == "mouseover" ) {
 			if (sbDOMEraser.lastTarget != elem) {
+				sbDOMEraser.widerStack = null;
 				sbDOMEraser._selectNode(elem);
 			}
 			else {
@@ -1113,6 +1121,7 @@ var sbDOMEraser = {
 		else if ( aEvent.type == "mousemove" ) {
 			if ( ++sbDOMEraser.verbose % 3 != 0 ) return;
 			if (sbDOMEraser.lastTarget != elem) {
+				sbDOMEraser.widerStack = null;
 				sbDOMEraser._selectNode(elem);
 			}
 			else {
@@ -1123,11 +1132,14 @@ var sbDOMEraser = {
 			sbDOMEraser._deselectNode();
 		}
 		else if ( aEvent.type == "click" ) {
-			if ( aEvent.shiftKey || aEvent.button == 2 ){
-				sbDOMEraser.isolate(elem);
-			}
-			else {
-				sbDOMEraser.remove(elem);
+			var elem = sbDOMEraser.lastTarget;
+			if (elem) {
+				if ( aEvent.shiftKey || aEvent.button == 2 ){
+					sbDOMEraser.isolate(elem);
+				}
+				else {
+					sbDOMEraser.remove(elem);
+				}
 			}
 		}
 	},
@@ -1135,6 +1147,22 @@ var sbDOMEraser = {
 	quit : function(aNode)
 	{
 		this.init(0);
+	},
+
+	wider : function(aNode)
+	{
+		var parent = aNode.parentNode;
+		if ( !parent || parent == aNode.ownerDocument.body ) return false;
+		if (!this.widerStack) this.widerStack = [];
+		this.widerStack.push(aNode);
+		this._selectNode(parent);
+	},
+
+	narrower : function(aNode)
+	{
+		if (!this.widerStack || !this.widerStack.length) return false;
+		var child = this.widerStack.pop();
+		this._selectNode(child);
 	},
 
 	remove : function(aNode)
