@@ -12,7 +12,17 @@
 <!ENTITY sb.edit.attach.link "Dołącz odnośnik do zaznaczenia">
 <!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
 <!ENTITY sb.edit.html "HTML Editor">
+<!ENTITY sb.edit.html.color "Edit Color">
+<!ENTITY sb.edit.html.color.forText "Set text color:">
+<!ENTITY sb.edit.html.color.forBg "Set background color:">
 <!ENTITY sb.edit.html.source "Edit HTML Source">
+<!ENTITY sb.edit.html.link "Insert Link">
+<!ENTITY sb.edit.html.link.url "Target URL:">
+<!ENTITY sb.edit.html.link.id "Item ID:">
+<!ENTITY sb.edit.html.link.format "Select insert format:">
+<!ENTITY sb.edit.html.file "Insert File">
+<!ENTITY sb.edit.html.file.pick "Select file:">
+<!ENTITY sb.edit.html.file.format "Select insert format:">
 <!ENTITY sb.edit.cutter "Usuń zaznaczenie">
 <!ENTITY sb.edit.remove.iframe "Usuń wszystkie znaczniki &lt;iframe&gt;">
 <!ENTITY sb.edit.remove.script "Usuń wszystkie znaczniki &lt;script&gt;">

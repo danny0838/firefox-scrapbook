@@ -502,7 +502,48 @@ var sbPageEditor = {
 
 
 var sbHtmlEditor = {
-	
+
+	_shortcut_table : {
+		"F10" : "quit",
+
+		"Ctrl+K" : "removeFormat",
+		"Ctrl+B" : "bold",
+		"Ctrl+I" : "italic",
+		"Ctrl+U" : "underline",
+		"Ctrl+S" : "strikeThrough",
+		"Ctrl+E" : "setColor",
+		"Alt+Up" : "increaseFontSize",
+		"Alt+Down" : "decreaseFontSize",
+		"Alt+K" : "superscript",
+		"Alt+J" : "subscript",
+
+		"Alt+0" : "formatblock_p",
+		"Alt+1" : "formatblock_h1",
+		"Alt+2" : "formatblock_h2",
+		"Alt+3" : "formatblock_h3",
+		"Alt+4" : "formatblock_h4",
+		"Alt+5" : "formatblock_h5",
+		"Alt+6" : "formatblock_h6",
+		"Alt+7" : "formatblock_blockquote",
+		"Alt+8" : "formatblock_pre",
+
+		"Alt+U" : "insertUnorderedList",
+		"Alt+O" : "insertOrderedList",
+		"Alt+Open_Bracket" : "outdent",
+		"Alt+Close_Bracket" : "indent",
+		"Alt+Comma" : "justifyLeft",
+		"Alt+Period" : "justifyRight",
+		"Alt+M" : "justifyCenter",
+
+		"Ctrl+Shift+K" : "unlink",
+		"Ctrl+L" : "attachLink",
+		"Alt+I" : "attachFile",
+
+		"Alt+D" : "insertDate",
+		"Alt+Z" : "wrapHTML",
+		"Ctrl+Alt+I" : "insertSource",
+	},
+
 	currentDocument : function(aMainDoc)
 	{
 		if (!aMainDoc) aMainDoc = window.content.document;
@@ -515,8 +556,8 @@ var sbHtmlEditor = {
 	//   2: refresh (updates toolbar)
 	init : function(aDoc, aStateFlag)
 	{
-		aDoc = aDoc || window.content.document;
-		var enabled = sbCommonUtils.documentData(aDoc, "sbHtmlEditor.enabled") || false;
+		aDoc = aDoc || sbCommonUtils.getFocusedWindow().document;
+		var enabled = sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled") || false;
 		if ( aStateFlag === undefined ) aStateFlag = enabled ? 0 : 1;
 		enabled = (aStateFlag === 2) ? enabled : (aStateFlag == 1);
 		document.getElementById("ScrapBookEditHTML").checked = enabled;
@@ -526,8 +567,16 @@ var sbHtmlEditor = {
 		document.getElementById("ScrapBookEditEraser").disabled = enabled;
 		document.getElementById("ScrapBookEditUndo").disabled = enabled;
 		if ( aStateFlag == 1 ) {
-			sbCommonUtils.documentData(aDoc, "sbHtmlEditor.enabled", true);
-			sbCommonUtils.documentData(aDoc, "sbHtmlEditor.document", aDoc);
+			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled", true);
+			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.document", aDoc);
+			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
+				if ( win.document.designMode != "off" && win.document != aDoc ) {
+					win.document.designMode = "off";
+				}
+				this.initEvent(win, 1);
+				sbAnnotationService.initEvent(win, 0);
+				sbPageEditor.initEvent(win, 0);
+			}, this);
 			if ( aDoc.designMode != "on" ) {
 				var sel = aDoc.defaultView.getSelection();
 				// backup original selection ranges
@@ -545,15 +594,10 @@ var sbHtmlEditor = {
 					sel.addRange(ranges[i]);
 				}
 			}
-			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
-				this.initEvent(win, 1);
-				sbAnnotationService.initEvent(win, 0);
-				sbPageEditor.initEvent(win, 0);
-			}, this);
 		}
 		else if ( aStateFlag == 0 ) {
-			sbCommonUtils.documentData(aDoc, "sbHtmlEditor.enabled", false);
-			sbCommonUtils.documentData(aDoc, "sbHtmlEditor.document", null);
+			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled", false);
+			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.document", null);
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 				if ( win.document.designMode != "off" ) {
 					win.document.designMode = "off";
@@ -583,272 +627,192 @@ var sbHtmlEditor = {
 
 	handleKeyEvent : function(aEvent)
 	{
-		/* general */
-		// Ctrl+K
-		if (aEvent.keyCode == aEvent.DOM_VK_K &&
-			aEvent.ctrlKey && !aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "removeFormat");
-			aEvent.preventDefault();
-			return;
-		}
-		// Ctrl+B
-		if (aEvent.keyCode == aEvent.DOM_VK_B &&
-			aEvent.ctrlKey && !aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "bold");
-			aEvent.preventDefault();
-			return;
-		}
-		// Ctrl+I
-		if (aEvent.keyCode == aEvent.DOM_VK_I &&
-			aEvent.ctrlKey && !aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "italic");
-			aEvent.preventDefault();
-			return;
-		}
-		// Ctrl+U
-		if (aEvent.keyCode == aEvent.DOM_VK_U &&
-			aEvent.ctrlKey && !aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "underline");
-			aEvent.preventDefault();
-			return;
-		}
-		// Ctrl+S
-		if (aEvent.keyCode == aEvent.DOM_VK_S &&
-			aEvent.ctrlKey && !aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "strikeThrough");
-			aEvent.preventDefault();
-			return;
-		}
-		// Alt+↑
-		if (aEvent.keyCode == aEvent.DOM_VK_UP &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "increaseFontSize");
-			aEvent.preventDefault();
-			return;
-		}
-		// Alt+↓
-		if (aEvent.keyCode == aEvent.DOM_VK_DOWN &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "decreaseFontSize");
-			aEvent.preventDefault();
-			return;
-		}
-		// Alt+K
-		if (aEvent.keyCode == aEvent.DOM_VK_K &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "superscript");
-			aEvent.preventDefault();
-			return;
-		}
-		// Alt+J
-		if (aEvent.keyCode == aEvent.DOM_VK_J &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "subscript");
-			aEvent.preventDefault();
-			return;
-		}
+		// set variables and check whether it's a defined hotkey combination
+		var shortcut = Shortcut.fromEvent(aEvent);
+		var key = shortcut.toString();
+		var callback_name = sbHtmlEditor._shortcut_table[key];
+		if (!callback_name) return;
 
-		/* block */
-		// Alt+0
-		if (aEvent.keyCode == aEvent.DOM_VK_0 &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "formatblock", "p");
-			aEvent.preventDefault();
-			return;
-		}
-		// Alt+1
-		if (aEvent.keyCode == aEvent.DOM_VK_1 &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "formatblock", "h1");
-			aEvent.preventDefault();
-			return;
-		}
-		// Alt+2
-		if (aEvent.keyCode == aEvent.DOM_VK_2 &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "formatblock", "h2");
-			aEvent.preventDefault();
-			return;
-		}
-		// Alt+3
-		if (aEvent.keyCode == aEvent.DOM_VK_3 &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "formatblock", "h3");
-			aEvent.preventDefault();
-			return;
-		}
-		// Alt+4
-		if (aEvent.keyCode == aEvent.DOM_VK_4 &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "formatblock", "h4");
-			aEvent.preventDefault();
-			return;
-		}
-		// Alt+5
-		if (aEvent.keyCode == aEvent.DOM_VK_5 &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "formatblock", "h5");
-			aEvent.preventDefault();
-			return;
-		}
-		// Alt+6
-		if (aEvent.keyCode == aEvent.DOM_VK_6 &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "formatblock", "h6");
-			aEvent.preventDefault();
-			return;
-		}
-		// Alt+7
-		if (aEvent.keyCode == aEvent.DOM_VK_7 &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "formatblock", "blockquote");
-			aEvent.preventDefault();
-			return;
-		}
-		// Alt+8
-		if (aEvent.keyCode == aEvent.DOM_VK_8 &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "formatblock", "pre");
-			aEvent.preventDefault();
-			return;
-		}
-		// Alt+U
-		if (aEvent.keyCode == aEvent.DOM_VK_U &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "insertUnorderedList");
-			aEvent.preventDefault();
-			return;
-		}
-		// Alt+O
-		if (aEvent.keyCode == aEvent.DOM_VK_O &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "insertOrderedList");
-			aEvent.preventDefault();
-			return;
-		}
-		// Alt+[
-		if (aEvent.keyCode == aEvent.DOM_VK_OPEN_BRACKET &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "outdent");
-			aEvent.preventDefault();
-			return;
-		}
-		// Alt+]
-		if (aEvent.keyCode == aEvent.DOM_VK_CLOSE_BRACKET &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "indent");
-			aEvent.preventDefault();
-			return;
-		}
-		// Alt+,
-		if (aEvent.keyCode == aEvent.DOM_VK_COMMA &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "justifyLeft");
-			aEvent.preventDefault();
-			return;
-		}
-		// Alt+.
-		if (aEvent.keyCode == aEvent.DOM_VK_PERIOD &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "justifyRight");
-			aEvent.preventDefault();
-			return;
-		}
-		// Alt+M
-		if (aEvent.keyCode == aEvent.DOM_VK_M &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "justifyCenter");
-			aEvent.preventDefault();
-			return;
-		}
-		
-		/* special */
-		// F10
-		if (aEvent.keyCode == aEvent.DOM_VK_F10 &&
-			!aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.init(null, 0);
-			aEvent.preventDefault();
-			return;
-		}
-		// Ctrl+L
-		if (aEvent.keyCode == aEvent.DOM_VK_L &&
-			aEvent.ctrlKey && !aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.attachLink(sbHtmlEditor.currentDocument());
-			aEvent.preventDefault();
-			return;
-		}
-		// Ctrl+Shift+L
-		if (aEvent.keyCode == aEvent.DOM_VK_L &&
-			aEvent.ctrlKey && !aEvent.altKey && aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.attachInnerLink(sbHtmlEditor.currentDocument());
-			aEvent.preventDefault();
-			return;
-		}
-		// Alt+I
-		if (aEvent.keyCode == aEvent.DOM_VK_I &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.attachFile(sbHtmlEditor.currentDocument());
-			aEvent.preventDefault();
-			return;
-		}
-		// Ctrl+Shift+K
-		if (aEvent.keyCode == aEvent.DOM_VK_K &&
-			aEvent.ctrlKey && !aEvent.altKey && aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.simpleCommand(sbHtmlEditor.currentDocument(), "unlink");
-			aEvent.preventDefault();
-			return;
-		}
-		// Alt+D
-		if (aEvent.keyCode == aEvent.DOM_VK_D &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.insertDate(sbHtmlEditor.currentDocument());
-			aEvent.preventDefault();
-			return;
-		}
-		// Alt+Z
-		if (aEvent.keyCode == aEvent.DOM_VK_Z &&
-			!aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.wrapHTML(sbHtmlEditor.currentDocument());
-			aEvent.preventDefault();
-			return;
-		}
-		// Ctrl+Alt+I
-		if (aEvent.keyCode == aEvent.DOM_VK_I &&
-			aEvent.ctrlKey && aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
-			sbHtmlEditor.insertSource(sbHtmlEditor.currentDocument());
-			aEvent.preventDefault();
-			return;
-		}
+		// now we are sure we have the hotkey
+		var callback = sbHtmlEditor[callback_name];
+
+		// The original key effect could not be blocked completely
+		// if the command has a prompt or modal window that blocks.
+		// Therefore we call the callback command using an async workaround.
+		setTimeout(function(){
+			callback.call(sbHtmlEditor, sbHtmlEditor.currentDocument());
+		}, 0);
+
+		aEvent.preventDefault();
 	},
 
-	simpleCommand : function(aDoc, aCommand, aArg)
+	quit : function(aDoc)
 	{
-		aDoc.execCommand(aCommand, false, aArg);
+		sbHtmlEditor.init(null, 0);
+	},
+
+	removeFormat : function(aDoc)
+	{
+		aDoc.execCommand("removeFormat", false, null);
+	},
+
+	bold : function(aDoc)
+	{
+		aDoc.execCommand("bold", false, null);
+	},
+
+	italic : function(aDoc)
+	{
+		aDoc.execCommand("italic", false, null);
+	},
+
+	underline : function(aDoc)
+	{
+		aDoc.execCommand("underline", false, null);
+	},
+
+	strikeThrough : function(aDoc)
+	{
+		aDoc.execCommand("strikeThrough", false, null);
+	},
+
+	setColor : function(aDoc)
+	{
+		var data = {};
+		// prompt the dialog for user input
+		var accepted = window.top.openDialog(
+			"chrome://scrapbook/content/editor_color.xul", "ScrapBook:PickColor", "chrome,modal,centerscreen", 
+			data
+		);
+		if (data.result != 1) return;
+		aDoc.execCommand("styleWithCSS", false, true);
+		if (data.textColor) {
+			aDoc.execCommand("foreColor", false, data.textColor);
+		}
+		if (data.bgColor) {
+			aDoc.execCommand("hiliteColor", false, data.bgColor);
+		}
+		aDoc.execCommand("styleWithCSS", false, false);
+	},
+
+	increaseFontSize : function(aDoc)
+	{
+		aDoc.execCommand("increaseFontSize", false, null);
+	},
+
+	decreaseFontSize : function(aDoc)
+	{
+		aDoc.execCommand("decreaseFontSize", false, null);
+	},
+
+	superscript : function(aDoc)
+	{
+		aDoc.execCommand("superscript", false, null);
+	},
+
+	subscript : function(aDoc)
+	{
+		aDoc.execCommand("subscript", false, null);
+	},
+
+	formatblock_p : function(aDoc)
+	{
+		aDoc.execCommand("formatblock", false, "p");
+	},
+
+	formatblock_h1 : function(aDoc)
+	{
+		aDoc.execCommand("formatblock", false, "h1");
+	},
+
+	formatblock_h2 : function(aDoc)
+	{
+		aDoc.execCommand("formatblock", false, "h2");
+	},
+
+	formatblock_h3 : function(aDoc)
+	{
+		aDoc.execCommand("formatblock", false, "h3");
+	},
+
+	formatblock_h4 : function(aDoc)
+	{
+		aDoc.execCommand("formatblock", false, "h4");
+	},
+
+	formatblock_h5 : function(aDoc)
+	{
+		aDoc.execCommand("formatblock", false, "h5");
+	},
+
+	formatblock_h6 : function(aDoc)
+	{
+		aDoc.execCommand("formatblock", false, "h6");
+	},
+
+	formatblock_blockquote : function(aDoc)
+	{
+		aDoc.execCommand("formatblock", false, "blockquote");
+	},
+
+	formatblock_pre : function(aDoc)
+	{
+		aDoc.execCommand("formatblock", false, "pre");
+	},
+
+	insertUnorderedList : function(aDoc)
+	{
+		aDoc.execCommand("insertUnorderedList", false, null);
+	},
+
+	insertOrderedList : function(aDoc)
+	{
+		aDoc.execCommand("insertOrderedList", false, null);
+	},
+
+	outdent : function(aDoc)
+	{
+		aDoc.execCommand("outdent", false, null);
+	},
+
+	indent : function(aDoc)
+	{
+		aDoc.execCommand("indent", false, null);
+	},
+
+	justifyLeft : function(aDoc)
+	{
+		aDoc.execCommand("justifyLeft", false, null);
+	},
+
+	justifyRight : function(aDoc)
+	{
+		aDoc.execCommand("justifyRight", false, null);
+	},
+
+	justifyCenter : function(aDoc)
+	{
+		aDoc.execCommand("justifyCenter", false, null);
+	},
+
+	unlink : function(aDoc)
+	{
+		aDoc.execCommand("unlink", false, null);
 	},
 
 	attachLink : function(aDoc)
 	{
-		var sel = sbPageEditor.getSelection(aDoc.defaultView);
-		if ( !sel ) return;
-		var ret = {};
-		if ( !sbCommonUtils.PROMPT.prompt(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_LINK_TITLE"), sbCommonUtils.lang("overlay", "ADDRESS"), ret, null, {}) ) return;
-		if ( !ret.value ) return;
-		aDoc.execCommand("createLink", false, ret.value);
-	},
-
-	attachInnerLink : function(aDoc)
-	{
-		var sel = sbPageEditor.getSelection(aDoc.defaultView);
-		if ( !sel ) return;
-		var content = sbPageEditor.getSelectionHTML(sel);
-		// if the sidebar is closed, we may get an error
+		var sel = aDoc.defaultView.getSelection();
+		var data = {};
+		// retrieve selected id from sidebar
+		// -- if the sidebar is closed, we may get an error
 		try {
 			var sidebarId = sbCommonUtils.getSidebarId("sidebar");
 			var res = document.getElementById(sidebarId).contentWindow.sbTreeHandler.getSelection(true, 2);
 		}
 		catch (ex) {
 		}
-		// check the selected resource
+		// -- check the selected resource
 		if (res && res.length) {
 			res = res[0];
 			var type = sbDataSource.getProperty(res, "type");
@@ -856,56 +820,103 @@ var sbHtmlEditor = {
 				var id = sbDataSource.getProperty(res, "id");
 			}
 		}
-		// if unavailable, let the user input an id
-		var ret = {value: id || ""};
-		if ( !sbCommonUtils.PROMPT.prompt(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_ENTER"), ret, null, {}) ) return;
-		var id = ret.value;
-		var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
-		if ( sbDataSource.exists(res) ) {
-			var type = sbDataSource.getProperty(res, "type");
-			if ( ["folder", "separator"].indexOf(type) !== -1 ) {
-				res = null;
+		data.id = id;
+		// prompt the dialog for user input
+		var accepted = window.top.openDialog(
+			"chrome://scrapbook/content/editor_link.xul", "ScrapBook:AttachFile", "chrome,modal,centerscreen,resizable", 
+			data
+		);
+		if (data.result != 1) return;
+		// insert link?
+		if (data.url_use) {
+			// attach the link
+			if (data.format) {
+				var URL = data.url;
+				var THIS = sel.isCollapsed ? URL : sbPageEditor.getSelectionHTML(sel);
+				var TITLE = "";
+				var html = data.format.replace(/{(TITLE|URL|THIS)}/g, function(){
+					switch (arguments[1]) {
+						case "TITLE": return TITLE;
+						case "URL": return URL;
+						case "THIS": return THIS;
+					}
+					return "";
+				});
+				aDoc.execCommand("insertHTML", false, html);
 			}
 		}
-		else res = null;
-		// if it's invalid, alert and quit
-		if (!res) {
-			sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_INVALID", [id]));
-			return;
+		// insert inner link?
+		else if (data.id_use) {
+			var id = data.id;
+			// check the specified id
+			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
+			if ( sbDataSource.exists(res) ) {
+				var type = sbDataSource.getProperty(res, "type");
+				if ( ["folder", "separator"].indexOf(type) !== -1 ) {
+					res = null;
+				}
+			}
+			else res = null;
+			// if it's invalid, alert and quit
+			if (!res) {
+				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_INVALID", [id]));
+				return;
+			}
+			// attach the link
+			if (data.format) {
+				var TITLE = sbDataSource.getProperty(res, "title");
+				var URL = (type == "bookmark") ?
+				sbDataSource.getProperty(res, "source") :
+				"../" + id + "/index.html";
+				var THIS = sel.isCollapsed ? TITLE : sbPageEditor.getSelectionHTML(sel);
+				var html = data.format.replace(/{(TITLE|URL|THIS)}/g, function(){
+					switch (arguments[1]) {
+						case "TITLE": return TITLE;
+						case "URL": return URL;
+						case "THIS": return THIS;
+					}
+					return "";
+				});
+				aDoc.execCommand("insertHTML", false, html);
+			}
 		}
-		// attach the link
-		var title = sbDataSource.getProperty(res, "title");
-		var url = (type == "bookmark") ?
-			sbDataSource.getProperty(res, "source") :
-			"../" + id + "/index.html";
-		var html = '<a href="' + url + '" title="' + title + '">' + content + '</a>';
-		aDoc.execCommand("insertHTML", false, html);
 	},
 
 	attachFile : function(aDoc)
 	{
-		var sel = sbPageEditor.getSelection(aDoc.defaultView);
-		if ( !sel ) return;
-		var content = sbPageEditor.getSelectionHTML(sel);
-		var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-		FP.init(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), FP.modeOpen);
-		var ret = FP.show();
-		if ( ret != FP.returnOK ) return;
+		var sel = aDoc.defaultView.getSelection();
+		var data = {};
+		// prompt the dialog for user input
+		var accepted = window.top.openDialog(
+			"chrome://scrapbook/content/editor_file.xul", "ScrapBook:AttachFile", "chrome,modal,centerscreen", 
+			data
+		);
+		if (data.result != 1) return;
+		// copy the selected file
 		var destFile = sbCommonUtils.getContentDir(sbPageEditor.item.id).clone();
-		destFile.append(FP.file.leafName);
+		destFile.append(data.file.leafName);
 		if ( destFile.exists() && destFile.isFile() ) {
-			if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [FP.file.leafName])) ) return;
+			if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [data.file.leafName])) ) return;
 			destFile.remove(false);
 		}
 		try {
-			FP.file.copyTo(destFile.parent, FP.file.leafName);
+			data.file.copyTo(destFile.parent, data.file.leafName);
 		} catch(ex) {
 			return;
 		}
-		var title = FP.file.leafName;
-		var url = FP.file.leafName;
-		var html = '<a href="' + url + '" title="' + title + '">' + content + '</a>';
-		aDoc.execCommand("insertHTML", false, html);
+		// insert to the document
+		if (data.format) {
+			var FILE = data.file.leafName;
+			var THIS = sel.isCollapsed ? FILE : sbPageEditor.getSelectionHTML(sel);
+			var html = data.format.replace(/{(FILE|THIS)}/g, function(){
+				switch (arguments[1]) {
+					case "FILE": return FILE;
+					case "THIS": return THIS;
+				}
+				return "";
+			});
+			aDoc.execCommand("insertHTML", false, html);
+		}
 	},
 
 	insertDate : function(aDoc)
