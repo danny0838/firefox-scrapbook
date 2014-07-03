@@ -1302,11 +1302,10 @@ var sbDOMEraser = {
 			sbDOMEraser._setOutline(aNode, "2px dashed #0000FF");
 		}
 		else {
-			var html = "<b>" + sbCommonUtils.escapeHTML(aNode.nodeName.toLowerCase(), false) + "</b>";
-			if ( aNode.id ) html += ' id="' + sbCommonUtils.escapeHTML(aNode.id, false) + '"';
-			if ( aNode.className ) html += ' class="' + sbCommonUtils.escapeHTML(aNode.className, false) + '"';
-			if ( aNode.hasAttribute("style") ) html += '<br/>style="' + sbCommonUtils.escapeHTML(aNode.getAttribute("style"), false) + '"';
-			tooltip.innerHTML = html;
+			var text = aNode.nodeName.toLowerCase();
+			if ( aNode.id ) text += ' id="' + aNode.id + '"';
+			if ( aNode.className ) text += ' class="' + aNode.className + '"';
+			tooltip.textContent = text;
 			sbDOMEraser._setOutline(aNode, "2px solid #FF0000");
 		}
 	},
