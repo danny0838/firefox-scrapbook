@@ -556,8 +556,8 @@ var sbHtmlEditor = {
 	//   2: refresh (updates toolbar)
 	init : function(aDoc, aStateFlag)
 	{
-		aDoc = aDoc || window.content.document;
-		var enabled = sbCommonUtils.documentData(aDoc, "sbHtmlEditor.enabled") || false;
+		aDoc = aDoc || sbCommonUtils.getFocusedWindow().document;
+		var enabled = sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled") || false;
 		if ( aStateFlag === undefined ) aStateFlag = enabled ? 0 : 1;
 		enabled = (aStateFlag === 2) ? enabled : (aStateFlag == 1);
 		document.getElementById("ScrapBookEditHTML").checked = enabled;
@@ -567,8 +567,16 @@ var sbHtmlEditor = {
 		document.getElementById("ScrapBookEditEraser").disabled = enabled;
 		document.getElementById("ScrapBookEditUndo").disabled = enabled;
 		if ( aStateFlag == 1 ) {
-			sbCommonUtils.documentData(aDoc, "sbHtmlEditor.enabled", true);
-			sbCommonUtils.documentData(aDoc, "sbHtmlEditor.document", aDoc);
+			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled", true);
+			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.document", aDoc);
+			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
+				if ( win.document.designMode != "off" && win.document != aDoc ) {
+					win.document.designMode = "off";
+				}
+				this.initEvent(win, 1);
+				sbAnnotationService.initEvent(win, 0);
+				sbPageEditor.initEvent(win, 0);
+			}, this);
 			if ( aDoc.designMode != "on" ) {
 				var sel = aDoc.defaultView.getSelection();
 				// backup original selection ranges
@@ -586,15 +594,10 @@ var sbHtmlEditor = {
 					sel.addRange(ranges[i]);
 				}
 			}
-			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
-				this.initEvent(win, 1);
-				sbAnnotationService.initEvent(win, 0);
-				sbPageEditor.initEvent(win, 0);
-			}, this);
 		}
 		else if ( aStateFlag == 0 ) {
-			sbCommonUtils.documentData(aDoc, "sbHtmlEditor.enabled", false);
-			sbCommonUtils.documentData(aDoc, "sbHtmlEditor.document", null);
+			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled", false);
+			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.document", null);
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 				if ( win.document.designMode != "off" ) {
 					win.document.designMode = "off";
