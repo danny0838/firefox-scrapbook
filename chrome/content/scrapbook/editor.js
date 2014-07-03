@@ -997,6 +997,7 @@ var sbDOMEraser = {
 	lastX : 0,
 	lastY : 0,
 	lastTarget : null,
+	mouseTarget : null,
 	widerStack : null,
 
 	_shortcut_table : {
@@ -1112,6 +1113,7 @@ var sbDOMEraser = {
 		sbDOMEraser.lastX = aEvent.pageX;
 		sbDOMEraser.lastY = aEvent.pageY;
 		if ( aEvent.type == "mouseover" ) {
+			sbDOMEraser.mouseTarget = elem;
 			if (sbDOMEraser.lastTarget != elem) {
 				sbDOMEraser.widerStack = null;
 				sbDOMEraser._selectNode(elem);
@@ -1121,6 +1123,7 @@ var sbDOMEraser = {
 			}
 		}
 		else if ( aEvent.type == "mousemove" ) {
+			sbDOMEraser.mouseTarget = elem;
 			if ( ++sbDOMEraser.verbose % 3 != 0 ) return;
 			if (sbDOMEraser.lastTarget != elem) {
 				sbDOMEraser.widerStack = null;
@@ -1131,9 +1134,11 @@ var sbDOMEraser = {
 			}
 		}
 		else if ( aEvent.type == "mouseout" ) {
+			sbDOMEraser.mouseTarget = null;
 			sbDOMEraser._deselectNode();
 		}
 		else if ( aEvent.type == "click" ) {
+			sbDOMEraser.mouseTarget = elem;
 			var elem = sbDOMEraser.lastTarget;
 			if (elem) {
 				if ( aEvent.shiftKey || aEvent.button == 2 ){
@@ -1276,12 +1281,13 @@ var sbDOMEraser = {
 
 	_addTooltip : function(aNode)
 	{
-		var tooltip = aNode.ownerDocument.getElementById("scrapbook-eraser-tooltip");
+		var doc = (this.mouseTarget) ? this.mouseTarget.ownerDocument : aNode.ownerDocument;
+		var tooltip = doc.getElementById("scrapbook-eraser-tooltip");
 		if ( !tooltip ) {
 			var newtooltip = true;
-			tooltip = aNode.ownerDocument.createElement("DIV");
+			tooltip = doc.createElement("DIV");
 			tooltip.id = "scrapbook-eraser-tooltip";
-			aNode.ownerDocument.body.appendChild(tooltip);
+			doc.body.appendChild(tooltip);
 		}
 		tooltip.style.left = this.lastX + "px";
 		tooltip.style.top  = this.lastY + "px";
