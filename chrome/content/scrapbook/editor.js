@@ -1005,6 +1005,7 @@ var sbDOMEraser = {
 	lastTarget : null,
 	mouseTarget : null,
 	widerStack : null,
+	lastWindow : null,
 
 	_shortcut_table : {
 		"F9" : "quit",
@@ -1037,13 +1038,24 @@ var sbDOMEraser = {
 		document.getElementById("ScrapBookEditAnnotation").disabled = this.enabled;
 		document.getElementById("ScrapBookEditHTML").disabled  = this.enabled;
 		document.getElementById("ScrapBookEditCutter").disabled  = this.enabled;
+
+		// clear last selected target
 		if (sbDOMEraser.lastTarget) {
 			sbDOMEraser._deselectNode();
 			sbDOMEraser.lastTarget = null;
 		}
+
+		// if window changed, clear settings of last window
+		if (sbDOMEraser.lastWindow && sbDOMEraser.lastWindow != window.content) {
+			sbCommonUtils.flattenFrames(sbDOMEraser.lastWindow).forEach(function(win) {
+				this.initEvent(win, 0);
+				this.initStyle(win, 0);
+			}, this);
+		}
+		sbDOMEraser.lastWindow = window.content;
+
+		// apply settings to the current window
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
-			var tooltip = win.document.getElementById("scrapbook-eraser-tooltip");
-			if ( tooltip ) tooltip.parentNode.removeChild(tooltip);
 			if (aStateFlag == 1) {
 				this.initEvent(win, 1);
 				this.initStyle(win, 1);
