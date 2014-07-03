@@ -121,6 +121,14 @@ toolbar#ScrapBookEditor #ScrapBookEditAnnotation[disabled="true"] {
 	list-style-image: url('chrome://scrapbook/skin/edit_annotation_disable.png');
 }
 
+toolbar#ScrapBookEditor #ScrapBookEditHTML {
+	list-style-image: url('chrome://scrapbook/skin/edit_html.png');
+}
+
+toolbar#ScrapBookEditor #ScrapBookEditHTML[disabled="true"] {
+	list-style-image: url('chrome://scrapbook/skin/edit_html_disable.png');
+}
+
 toolbar#ScrapBookEditor #ScrapBookEditCutter {
 	list-style-image: url('chrome://scrapbook/skin/edit_cutter.png');
 }

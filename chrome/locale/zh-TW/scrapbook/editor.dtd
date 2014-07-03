@@ -11,6 +11,18 @@
 <!ENTITY sb.edit.attach.file "為選取區附加檔案">
 <!ENTITY sb.edit.attach.link "為選取區附加連結">
 <!ENTITY sb.edit.attach.innerlink "為選取區附加內部連結">
+<!ENTITY sb.edit.html "HTML 編輯器">
+<!ENTITY sb.edit.html.color "編輯顏色">
+<!ENTITY sb.edit.html.color.forText "設定文字顏色:">
+<!ENTITY sb.edit.html.color.forBg "設定背景顏色:">
+<!ENTITY sb.edit.html.source "編輯 HTML 原始碼">
+<!ENTITY sb.edit.html.link "插入連結">
+<!ENTITY sb.edit.html.link.url "目標 URL:">
+<!ENTITY sb.edit.html.link.id "資源 ID:">
+<!ENTITY sb.edit.html.link.format "指定插入格式:">
+<!ENTITY sb.edit.html.file "插入檔案">
+<!ENTITY sb.edit.html.file.pick "選擇檔案:">
+<!ENTITY sb.edit.html.file.format "指定插入格式:">
 <!ENTITY sb.edit.cutter "刪除選取區">
 <!ENTITY sb.edit.remove.iframe "移除所有 IFRAME 標籤">
 <!ENTITY sb.edit.remove.script "移除所有 SCRIPT 標籤">
