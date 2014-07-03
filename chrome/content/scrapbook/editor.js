@@ -1012,6 +1012,8 @@ var sbDOMEraser = {
 		"N" : "narrower",
 		"R" : "remove",
 		"I" : "isolate",
+		"B" : "blackOnWhite",
+		"D" : "deWidthify",
 		"U" : "undo",
 		"Q" : "quit",
 	},
@@ -1195,6 +1197,34 @@ var sbDOMEraser = {
 				child = prevChild;
 			}
 			aNode = parent;
+		}
+	},
+
+	blackOnWhite : function(aNode)
+	{
+		this._deselectNode();
+		sbPageEditor.allowUndo(aNode.ownerDocument);
+		this._selectNode(aNode);
+		aNode.style.color = "#000";
+		aNode.style.backgroundColor = "#FFF";
+		aNode.style.backgroundImage = "";
+	},
+
+	deWidthify : function(aNode)
+	{
+		this._deselectNode();
+		sbPageEditor.allowUndo(aNode.ownerDocument);
+		this._selectNode(aNode);
+		removeWidth(aNode);
+
+		function removeWidth(aNode) {
+			if (aNode.nodeType != 1) return;
+			if (aNode.width) aNode.width = null;
+			if (aNode.style) aNode.style.width = 'auto';
+			var childs = aNode.childNodes;
+			for (var i=0; i<childs.length; i++) {
+				removeWidth(childs[i]);
+			}
 		}
 	},
 
