@@ -770,6 +770,13 @@ var sbHtmlEditor = {
 			aEvent.preventDefault();
 			return;
 		}
+		// Ctrl+E
+		if (aEvent.keyCode == aEvent.DOM_VK_E &&
+			aEvent.ctrlKey && !aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
+			sbHtmlEditor.setColor(sbHtmlEditor.currentDocument());
+			aEvent.preventDefault();
+			return;
+		}
 		// Ctrl+L
 		if (aEvent.keyCode == aEvent.DOM_VK_L &&
 			aEvent.ctrlKey && !aEvent.altKey && !aEvent.shiftKey && !aEvent.metaKey) {
@@ -824,6 +831,25 @@ var sbHtmlEditor = {
 	simpleCommand : function(aDoc, aCommand, aArg)
 	{
 		aDoc.execCommand(aCommand, false, aArg);
+	},
+	
+	setColor : function(aDoc)
+	{
+		var data = {};
+		// prompt the dialog for user input
+		var accepted = window.top.openDialog(
+			"chrome://scrapbook/content/editor_color.xul", "ScrapBook:PickColor", "chrome,modal,centerscreen", 
+			data
+		);
+		if (data.result != 1) return;
+		aDoc.execCommand("styleWithCSS", false, true);
+		if (data.textColor) {
+			aDoc.execCommand("foreColor", false, data.textColor);
+		}
+		if (data.bgColor) {
+			aDoc.execCommand("hiliteColor", false, data.bgColor);
+		}
+		aDoc.execCommand("styleWithCSS", false, false);
 	},
 
 	attachLink : function(aDoc)
