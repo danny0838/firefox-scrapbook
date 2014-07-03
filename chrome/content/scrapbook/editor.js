@@ -1153,6 +1153,7 @@ var sbDOMEraser = {
 
 	wider : function(aNode)
 	{
+		if (!aNode) return false;
 		var parent = aNode.parentNode;
 		if ( !parent ) return false;
 		if ( parent == aNode.ownerDocument.body ) {
@@ -1166,6 +1167,7 @@ var sbDOMEraser = {
 
 	narrower : function(aNode)
 	{
+		if (!aNode) return false;
 		if (!this.widerStack || !this.widerStack.length) return false;
 		var child = this.widerStack.pop();
 		this._selectNode(child);
@@ -1173,6 +1175,7 @@ var sbDOMEraser = {
 
 	remove : function(aNode)
 	{
+		if (!aNode) return false;
 		this._deselectNode();
 		sbPageEditor.allowUndo(aNode.ownerDocument);
 		if ( sbCommonUtils.getSbObjectType(aNode) ) {
@@ -1185,7 +1188,7 @@ var sbDOMEraser = {
 
 	isolate : function(aNode)
 	{
-		if ( !aNode || !aNode.ownerDocument.body ) return;
+		if ( !aNode || !aNode.ownerDocument.body ) return false;
 		this._deselectNode();
 		sbPageEditor.allowUndo(aNode.ownerDocument);
 		var i = 0;
@@ -1206,6 +1209,7 @@ var sbDOMEraser = {
 
 	blackOnWhite : function(aNode)
 	{
+		if (!aNode) return false;
 		this._deselectNode();
 		sbPageEditor.allowUndo(aNode.ownerDocument);
 		this._selectNode(aNode);
@@ -1216,6 +1220,7 @@ var sbDOMEraser = {
 
 	deWidthify : function(aNode)
 	{
+		if (!aNode) return false;
 		this._deselectNode();
 		sbPageEditor.allowUndo(aNode.ownerDocument);
 		this._selectNode(aNode);
