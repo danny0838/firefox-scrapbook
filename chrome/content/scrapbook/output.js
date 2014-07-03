@@ -170,9 +170,7 @@ var sbOutputService = {
 		var type  = sbDataSource.getProperty(aRes, "type");
 		if ( icon.match(/(\/data\/\d{14}\/.*$)/) ) icon = ".." + RegExp.$1;
 		if ( !icon ) icon = sbCommonUtils.getFileName( sbCommonUtils.getDefaultIcon(type) );
-		title = title.replace(/&/g, "&amp;");
-		title = title.replace(/</g, "&lt;");
-		title = title.replace(/>/g, "&gt;");
+		title = sbCommonUtils.escapeHTML(title, true);
 		var ret;
 		switch (type) {
 			case "separator": 
