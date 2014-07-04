@@ -606,7 +606,11 @@ var sbHtmlEditor = {
 				}
 				// backup and switch design mode on (will clear select)
 				sbPageEditor.allowUndo(aDoc);
-				aDoc.designMode = "on";
+				// we sometimes get an error doing this but the designMode is still turned on
+				// catch the error to prevent subsequent script skipping
+				try {
+					aDoc.designMode = "on";
+				} catch (ex) {}	
 				// restore the selection
 				var sel = aDoc.defaultView.getSelection();
 				sel.removeAllRanges();
