@@ -1033,43 +1033,39 @@ var sbDOMEraser = {
 		var wasEnabled = this.enabled;
 		this.enabled = (aStateFlag == 1);
 		if (this.enabled == wasEnabled) return;
-		this.verbose = 0;
 		document.getElementById("ScrapBookEditEraser").checked = this.enabled;
 		document.getElementById("ScrapBookHighlighter").disabled = this.enabled;
 		document.getElementById("ScrapBookEditAnnotation").disabled = this.enabled;
 		document.getElementById("ScrapBookEditHTML").disabled  = this.enabled;
 		document.getElementById("ScrapBookEditCutter").disabled  = this.enabled;
 
-		// clear last selected target
-		if (this.lastTarget) {
-			this._deselectNode();
-			this.lastTarget = null;
+		if (aStateFlag == 0) {
+			// revert last selected target
+			if (this.lastTarget) {
+				this._deselectNode();
+				this.lastTarget = null;
+			}
+			// revert settings of the last window
+			if (this.lastWindow) {
+				sbCommonUtils.flattenFrames(this.lastWindow).forEach(function(win) {
+					this.initEvent(win, 0);
+					this.initStyle(win, 0);
+					sbAnnotationService.initEvent(win, 1);
+					sbPageEditor.initEvent(win, 1);
+				}, this);
+			}
 		}
-
-		// if window changed, clear settings of last window
-		if (this.lastWindow && this.lastWindow != window.content) {
+		else if (aStateFlag == 1) {
+			this.lastWindow = window.content;
+			this.verbose = 0;
+			// apply settings to the current window
 			sbCommonUtils.flattenFrames(this.lastWindow).forEach(function(win) {
-				this.initEvent(win, 0);
-				this.initStyle(win, 0);
-			}, this);
-		}
-		this.lastWindow = window.content;
-
-		// apply settings to the current window
-		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
-			if (aStateFlag == 1) {
 				this.initEvent(win, 1);
 				this.initStyle(win, 1);
 				sbAnnotationService.initEvent(win, 0);
 				sbPageEditor.initEvent(win, 0);
-			}
-			else {
-				this.initEvent(win, 0);
-				this.initStyle(win, 0);
-				sbAnnotationService.initEvent(win, 1);
-				sbPageEditor.initEvent(win, 1);
-			}
-		}, this);
+			}, this);
+		}
 	},
 
 	initEvent : function(aWindow, aStateFlag)
