@@ -30,25 +30,17 @@ function SB_trace(aMessage)
  *
  * data:
  *   urls:        array    strings, each is a full URL to capture 
- *   refUrl:      string   reference URL to resolve link
+ *   refUrl:      string   reference URL, mainly to resolve relative links
  *   showDetail:  bool     show detail or not
- *   resName:     string   file name to save
- *   resIdx:      string   index to insert resource
- *   referItem:   string   (deep-capture, re-capture) the refer item, 
- *   option:      object   capture options
- *                           images:
- *                           media:
- *                           styles:
- *                           script:
- *                           textAsHtml:
- *                           forceUtf8:
- *                           dlimg:
- *                           dlsnd:
- *                           dlmov:
- *                           dlarc:
- *                           custom:
- *                           inDepth:
- *                           isPartial:
+ *   resName:     string   the resource name to add
+ *   resIdx:      string   the index to insert resource
+ *   referItem:   string   (deep-capture, re-capture) the refer item,
+                           determine where to save file and to set resource property
+ *   option:      object   capture options, such as:
+ *                           images:  media:  styles:  script:
+ *                           rewriteStyles:  forceUtf8:  textAsHtml: 
+ *                           dlimg:  dlsnd:  dlmov:  dlarc:  custom:
+ *                           inDepth:  isPartial:
  *   file2Url:    array    the file2URL data in saver.js from last capture,
  *                         will then pass to saver.js for next capture
  *   preset:      array    (re-capture) the preset data,
