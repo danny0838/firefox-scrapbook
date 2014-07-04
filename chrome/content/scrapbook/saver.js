@@ -210,7 +210,6 @@ var sbContentSaver = {
 			var idx = this.frames.length;
 			this.frames[idx] = frame;
 			frame.setAttribute("data-sb-frame-id", idx);
-			if (frame.src == this.refURLObj.spec) frame.setAttribute("data-sb-frame-id", idx);
 		}
 		var frames = htmlNode.getElementsByTagName("iframe");
 		for (var i=0, len=frames.length; i<len; i++) {
@@ -218,7 +217,6 @@ var sbContentSaver = {
 			var idx = this.frames.length;
 			this.frames[idx] = frame;
 			frame.setAttribute("data-sb-frame-id", idx);
-			if (frame.src == this.refURLObj.spec) frame.setAttribute("data-sb-frame-id", idx);
 		}
 		// now make the clone
 		var tmpNodeList = [];
