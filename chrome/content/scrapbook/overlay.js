@@ -261,6 +261,7 @@ var sbBrowserOverlay = {
 			charset: null,
 			timeout: null,
 			titles: null,
+			context: "link",
 		};
 		window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
 	},

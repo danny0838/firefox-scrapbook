@@ -1850,6 +1850,7 @@ var sbInfoViewer = {
 			charset: null,
 			timeout: null,
 			titles: null,
+			context: (fileName == "index") ? "capture-again" : "capture-again-deep",
 		};
 		top.window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
 	},

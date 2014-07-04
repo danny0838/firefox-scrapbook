@@ -64,6 +64,7 @@ var sbMultipleService = {
 			charset: charset,
 			timeout: timeout,
 			titles: (document.getElementById("sbLinktitle").value == "ScrapBook") ? null : namList,
+			context: "link",
 		};
 		window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
 	},

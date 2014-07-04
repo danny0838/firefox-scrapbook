@@ -367,6 +367,7 @@ var sbController = {
 			charset: null,
 			timeout: null,
 			titles: null,
+			context: "capture-again",
 		};
 		window.top.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
 	},

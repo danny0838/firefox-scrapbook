@@ -118,6 +118,7 @@ var sbContentSaver = {
 					charset: this.plusoption["charset"],
 					timeout: this.plusoption["timeout"],
 					titles: null,
+					context: "indepth",
 				};
 				window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no", data);
 			}

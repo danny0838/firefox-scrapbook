@@ -55,6 +55,15 @@ function SB_trace(aMessage)
  *   timeout:     string   (multi-capture, deep-capture) countdown seconds before next capture
  *   titles:      array    (multi-capture) strings, overwrite the resource title,
  *                         each entry corresponds with data.urls
+ *   context      string   the capture context, determines the behavior
+ *                           "bookmark": (seems unused, obsolete?)
+ *                           "capture": capture the browser window (not used here)
+ *                           "link": load a page to capture
+ *                           "indepth": capture a page and pages linked by
+ *                           "capture-again": capture a page and overwrite the current resource,
+ *                                            prompts a new capture.js in indepth if deep capture
+ *                           "capture-again-deep": capture a page other than index.html
+ *                                                 do not allow deep capture
  */
 function SB_initCapture()
 {
@@ -71,46 +80,41 @@ function SB_initCapture()
 	gCharset	= data.charset;
 	gTimeout	= data.timeout;
 	gTitles		= data.titles;
+	gContext    = data.context;
 
 	if ( !gTimeout ) gTimeout = 0;
-	if ( gReferItem )
+	if ( gContext == "indepth" )
 	{
-		gContext = "indepth";
 		gURL2Name[gReferItem.source] = "index";
 	}
-	else if ( gPreset )
+	else if ( gContext == "capture-again-deep" )
 	{
-		gContext = gPreset[1] == "index" ? "capture-again" : "capture-again-deep";
-		if ( gContext == "capture-again-deep" )
+		var contDir = sbCommonUtils.getContentDir(gPreset[0]);
+		var file = contDir.clone();
+		file.append("sb-file2url.txt");
+		if ( !file.exists() ) { alert(sbCommonUtils.lang("scrapbook", "ERR_NO_FILE2URL")); window.close(); }
+		var lines = sbCommonUtils.readFile(file).split("\n");
+		for ( var i = 0; i < lines.length; i++ )
 		{
-			var contDir = sbCommonUtils.getContentDir(gPreset[0]);
-			var file = contDir.clone();
-			file.append("sb-file2url.txt");
-			if ( !file.exists() ) { alert(sbCommonUtils.lang("scrapbook", "ERR_NO_FILE2URL")); window.close(); }
-			var lines = sbCommonUtils.readFile(file).split("\n");
-			for ( var i = 0; i < lines.length; i++ )
-			{
-				var arr = lines[i].split("\t");
-				if ( arr.length == 2 ) gFile2URL[arr[0]] = arr[1];
-			}
-			file = sbCommonUtils.getContentDir(gPreset[0]).clone();
-			file.append("sb-url2name.txt");
-			if ( !file.exists() ) { alert(sbCommonUtils.lang("scrapbook", "ERR_NO_URL2NAME")); window.close(); }
-			lines = sbCommonUtils.readFile(file).split("\n");
-			for ( i = 0; i < lines.length; i++ )
-			{
-				var arr = lines[i].split("\t");
-				if ( arr.length == 2 )
-				{
-					gURL2Name[arr[0]] = arr[1];
-					if ( arr[1] == gPreset[1] ) myURLs = [arr[0]];
-				}
-			}
-			gPreset[3] = gFile2URL;
-			if ( !myURLs[0] ) { alert(sbCommonUtils.lang("scrapbook", "ERR_NO_SOURCE_URL", [gPreset[1] + ".html."])); window.close(); }
+			var arr = lines[i].split("\t");
+			if ( arr.length == 2 ) gFile2URL[arr[0]] = arr[1];
 		}
+		file = sbCommonUtils.getContentDir(gPreset[0]).clone();
+		file.append("sb-url2name.txt");
+		if ( !file.exists() ) { alert(sbCommonUtils.lang("scrapbook", "ERR_NO_URL2NAME")); window.close(); }
+		lines = sbCommonUtils.readFile(file).split("\n");
+		for ( i = 0; i < lines.length; i++ )
+		{
+			var arr = lines[i].split("\t");
+			if ( arr.length == 2 )
+			{
+				gURL2Name[arr[0]] = arr[1];
+				if ( arr[1] == gPreset[1] ) myURLs = [arr[0]];
+			}
+		}
+		gPreset[3] = gFile2URL;
+		if ( !myURLs[0] ) { alert(sbCommonUtils.lang("scrapbook", "ERR_NO_SOURCE_URL", [gPreset[1] + ".html."])); window.close(); }
 	}
-	else gContext = "link";
 	if ( !gOption ) gOption = {};
 	if ( !("script" in gOption ) ) gOption["script"] = false;
 	if ( !("images" in gOption ) ) gOption["images"] = true;
