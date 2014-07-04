@@ -1041,19 +1041,19 @@ var sbDOMEraser = {
 		document.getElementById("ScrapBookEditCutter").disabled  = this.enabled;
 
 		// clear last selected target
-		if (sbDOMEraser.lastTarget) {
-			sbDOMEraser._deselectNode();
-			sbDOMEraser.lastTarget = null;
+		if (this.lastTarget) {
+			this._deselectNode();
+			this.lastTarget = null;
 		}
 
 		// if window changed, clear settings of last window
-		if (sbDOMEraser.lastWindow && sbDOMEraser.lastWindow != window.content) {
-			sbCommonUtils.flattenFrames(sbDOMEraser.lastWindow).forEach(function(win) {
+		if (this.lastWindow && this.lastWindow != window.content) {
+			sbCommonUtils.flattenFrames(this.lastWindow).forEach(function(win) {
 				this.initEvent(win, 0);
 				this.initStyle(win, 0);
 			}, this);
 		}
-		sbDOMEraser.lastWindow = window.content;
+		this.lastWindow = window.content;
 
 		// apply settings to the current window
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
