@@ -77,7 +77,7 @@
 						<textbox flex="1" />
 					</hbox>
 				</groupbox>
-				<groupbox group="capture-options" style="margin-top:8px;">
+				<groupbox id="sbDetailInDepthBox" group="capture-options" style="margin-top:8px;">
 					<caption label="&sb.detail.linked.page;" />
 					<hbox align="center">
 						<label id="sbDetailInDepthLabel" value="&sb.detail.linked.page.depth;:" />

@@ -99,6 +99,8 @@ var sbContentSaver = {
 		}
 		if ( this.option["inDepth"] > 0 && this.linkURLs.length > 0 )
 		{
+			// inDepth capture for "capture-again-deep" is pre-disallowed by hiding the options
+			// and should never occur here
 			if ( !aPresetData || aContext == "capture-again" )
 			{
 				this.item.type = "marked";
@@ -210,7 +212,6 @@ var sbContentSaver = {
 			var idx = this.frames.length;
 			this.frames[idx] = frame;
 			frame.setAttribute("data-sb-frame-id", idx);
-			if (frame.src == this.refURLObj.spec) frame.setAttribute("data-sb-frame-id", idx);
 		}
 		var frames = htmlNode.getElementsByTagName("iframe");
 		for (var i=0, len=frames.length; i<len; i++) {
@@ -218,7 +219,6 @@ var sbContentSaver = {
 			var idx = this.frames.length;
 			this.frames[idx] = frame;
 			frame.setAttribute("data-sb-frame-id", idx);
-			if (frame.src == this.refURLObj.spec) frame.setAttribute("data-sb-frame-id", idx);
 		}
 		// now make the clone
 		var tmpNodeList = [];
@@ -818,8 +818,18 @@ var sbContentSaver = {
 		newFileName = fileLR[0] + "." + fileLR[1];
 		var seq = 0;
 		while ( this.file2URL[newFileName] != undefined ) {
-			if (this.file2URL[newFileName] == aURLSpec && this.file2Doc[newFileName] == aDocumentSpec) {
-				return [newFileName, true];
+			if (this.file2URL[newFileName] == aURLSpec) {
+				// this.file2Doc is mainly to check for dynamic iframes without src attr
+				// they have exactly same url with the main page
+				if (this.file2Doc[newFileName] == aDocumentSpec) {
+					return [newFileName, true];
+				}
+				// if this.file2Doc[newFileName] has no document set,
+				// it should mean a preset url for the page and is safe to use
+				else if (!this.file2Doc[newFileName]) {
+					this.file2Doc[newFileName] = aDocumentSpec;
+					return [newFileName, false];
+				}
 			}
 			newFileName = fileLR[0] + "_" + sbCommonUtils.pad(++seq, 3) + "." + fileLR[1];
 		}
