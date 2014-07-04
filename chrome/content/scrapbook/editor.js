@@ -905,7 +905,8 @@ var sbHtmlEditor = {
 		);
 		if (data.result != 1) return;
 		// copy the selected file
-		var destFile = sbCommonUtils.getContentDir(sbPageEditor.item.id).clone();
+		var htmlFile = sbCommonUtils.convertURLToFile(aDoc.location.href);
+		var destFile = htmlFile.parent.clone();
 		destFile.append(data.file.leafName);
 		if ( destFile.exists() && destFile.isFile() ) {
 			if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [data.file.leafName])) ) return;
@@ -1714,7 +1715,8 @@ var sbAnnotationService = {
 			FP.init(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), FP.modeOpen);
 			var ret = FP.show();
 			if ( ret != FP.returnOK ) return;
-			var destFile = sbCommonUtils.getContentDir(sbPageEditor.item.id).clone();
+			var htmlFile = sbCommonUtils.convertURLToFile(win.location.href);
+			var destFile = htmlFile.parent.clone();
 			destFile.append(FP.file.leafName);
 			if ( destFile.exists() && destFile.isFile() ) {
 				if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [FP.file.leafName])) ) return;
