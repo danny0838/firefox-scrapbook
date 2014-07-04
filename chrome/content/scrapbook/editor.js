@@ -75,9 +75,17 @@ var sbPageEditor = {
 				this.documentBeforeEdit(win.document);
 			}, this);
 			if (this.item && this.item.type == "notex" && sbCommonUtils.getPref("edit.autoEditNoteX", true)) {
-				var _changed = sbCommonUtils.documentData(window.content.document, "changed");
-				sbHtmlEditor.init(window.content.document, 1);
-				if (!_changed) sbCommonUtils.documentData(window.content.document, "changed", false);
+				(function() {
+					// check document type and make sure it's a file
+					var doc = window.content.document;
+					if (doc.contentType != "text/html") return;
+					var file = sbCommonUtils.convertURLToFile(doc.location.href);
+					if (!file || !file.isFile()) return;
+					// turn on HTMLEditor, without marking as changed
+					var _changed = sbCommonUtils.documentData(doc, "changed");
+					sbHtmlEditor.init(window.content.document, 1);
+					if (!_changed) sbCommonUtils.documentData(doc, "changed", false);
+				})();
 			}
 		}
 	},
