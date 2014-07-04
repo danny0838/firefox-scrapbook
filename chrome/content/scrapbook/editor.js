@@ -1030,8 +1030,10 @@ var sbDOMEraser = {
 	//   1: enable
 	init : function(aStateFlag)
 	{
-		this.verbose = 0;
+		var wasEnabled = this.enabled;
 		this.enabled = (aStateFlag == 1);
+		if (this.enabled == wasEnabled) return;
+		this.verbose = 0;
 		document.getElementById("ScrapBookEditEraser").checked = this.enabled;
 		document.getElementById("ScrapBookHighlighter").disabled = this.enabled;
 		document.getElementById("ScrapBookEditAnnotation").disabled = this.enabled;
