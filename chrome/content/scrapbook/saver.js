@@ -799,11 +799,6 @@ var sbContentSaver = {
 		}
 	},
 
-	leftZeroPad3 : function(num)
-	{
-		if ( num < 10 ) { return "00" + num; } else if ( num < 100 ) { return "0" + num; } else { return num; }
-	},
-
 	/**
 	 * @return  [(string) newFileName, (bool) isDuplicated]
 	 */
@@ -821,7 +816,7 @@ var sbContentSaver = {
 			if (this.file2URL[newFileName] == aURLSpec && this.file2Doc[newFileName] == aDocumentSpec) {
 				return [newFileName, true];
 			}
-			newFileName = fileLR[0] + "_" + this.leftZeroPad3(++seq) + "." + fileLR[1];
+			newFileName = fileLR[0] + "_" + sbCommonUtils.pad(++seq, 3) + "." + fileLR[1];
 		}
 		this.file2URL[newFileName] = aURLSpec;
 		this.file2Doc[newFileName] = aDocumentSpec;

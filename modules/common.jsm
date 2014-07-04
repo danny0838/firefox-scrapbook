@@ -623,6 +623,13 @@ var sbCommonUtils = {
 		if (aSingleQuotes) aStr = aStr.replace(/'/g, "&apos;");
 		return aStr;
 	},
+		
+	pad : function(n, width, z)
+	{
+		z = z || '0';
+		n = n + '';
+		return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+	},
 
 	openManageWindow : function(aRes, aModEltID)
 	{

@@ -104,7 +104,7 @@ function SB_suggestName(aURL)
 	var tmpName = sbCommonUtils.splitFileName(sbCommonUtils.validateFileName(sbCommonUtils.getFileName(decodeURI(aURL))))[0].toLowerCase();
 	if ( !tmpName || tmpName == "index" ) tmpName = "default";
 	var name = tmpName, seq = 0;
-	while ( gFile2URL[name+".html"] ) name = tmpName + "_" + sbContentSaver.leftZeroPad3(++seq);
+	while ( gFile2URL[name+".html"] ) name = tmpName + "_" + sbCommonUtils.pad(++seq, 3);
 	return name;
 }
 
