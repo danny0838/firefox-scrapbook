@@ -25,7 +25,7 @@ var sbContentSaver = {
 		this.name = "index";
 		this.favicon = null;
 		this.file2URL = { "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
-		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "styles" : true, "script" : false, "textAsHtml" : false, "forceUtf8" : true };
+		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "styles" : true, "script" : false, "textAsHtml" : false, "forceUtf8" : true, "rewriteStyles" : true };
 		this.plusoption = { "method" : "SB", "timeout" : "0", "charset" : "UTF-8" }
 		this.linkURLs = [];
 		this.frames = [];
@@ -192,8 +192,10 @@ var sbContentSaver = {
 		var myHTMLFileDone = arr[1];
 		if (myHTMLFileDone) return myHTMLFileName;
 
-		var arr = this.getUniqueFileName(aFileKey + ".css", this.refURLObj.spec, aDocument);
-		var myCSSFileName = arr[0];
+		if ( this.option["rewriteStyles"] ) {
+			var arr = this.getUniqueFileName(aFileKey + ".css", this.refURLObj.spec, aDocument);
+			var myCSSFileName = arr[0];
+		}
 
 		// construct the tree, especially for capture of partial selection
 		if ( this.selection )
@@ -261,7 +263,7 @@ var sbContentSaver = {
 
 		// process all inline and link CSS, will merge them into index.css later
 		var myCSS = "";
-		if ( this.option["styles"] )
+		if ( this.option["styles"] && this.option["rewriteStyles"] )
 		{
 			var myStyleSheets = aDocument.styleSheets;
 			for ( var i=0; i<myStyleSheets.length; i++ )
@@ -474,7 +476,16 @@ var sbContentSaver = {
 				// gets "" if rel attribute not defined
 				switch ( aNode.rel.toLowerCase() ) {
 					case "stylesheet" :
-						if ( aNode.href.indexOf("chrome://") != 0 || !this.option["styles"] ) {
+						if ( !this.option["styles"] ) {
+							return this.removeNodeFromParent(aNode);
+						}
+						else if ( !this.option["rewriteStyles"] ) {
+							if ( aNode.hasAttribute("href") ) {
+								var aFileName = this.download(aNode.href);
+								if (aFileName) aNode.setAttribute("href", aFileName);
+							}
+						}
+						else if ( aNode.href.indexOf("chrome://") != 0 ) {
 							return this.removeNodeFromParent(aNode);
 						}
 						break;
@@ -501,8 +512,13 @@ var sbContentSaver = {
 				}
 				break;
 			case "style" : 
-				// CSS in the page will be handled in another way, so remove them here
-				return this.removeNodeFromParent(aNode);
+				if ( !this.option["styles"] ) {
+					return this.removeNodeFromParent(aNode);
+				}
+				else if ( this.option["rewriteStyles"] ) {
+					// CSS in the page will be handled in another way, so remove them here
+					return this.removeNodeFromParent(aNode);
+				}
 				break;
 			case "script" : 
 			case "noscript" : 

@@ -63,8 +63,9 @@
 						<checkbox id="sbDetailOptionStyles" label="&sb.detail.option.styles;" checked="true" />
 						<checkbox id="sbDetailOptionScript" label="&sb.detail.option.scripts;" oncommand="sbCaptureOptions.toggleWarningUI();" />
 					</hbox>
-					<checkbox id="sbDetailOptionTextAsHtml" label="&sb.detail.option.textAsHtml;" />
+					<checkbox id="sbDetailOptionRewriteStyles" label="&sb.detail.option.rewriteStyles;" checked="true" />
 					<checkbox id="sbDetailOptionForceUtf8" label="&sb.detail.option.forceUtf8;" checked="true" />
+					<checkbox id="sbDetailOptionTextAsHtml" label="&sb.detail.option.textAsHtml;" />
 				</groupbox>
 				<groupbox group="capture-options" style="margin-top:8px;">
 					<caption label="&sb.detail.linked.file;" />
