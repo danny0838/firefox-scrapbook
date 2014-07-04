@@ -25,7 +25,47 @@ function SB_trace(aMessage)
 	document.getElementById("sbCaptureTextbox").value = aMessage;
 }
 
-
+/**
+ * Receive data from other script opening capture.xul
+ *
+ * window.arguments:
+ *   [0]   array    strings, each is a full URL to capture 
+ *   [1]   string   reference URL to resolve link
+ *   [2]   bool     show detail or not
+ *   [3]   string   file name to save
+ *   [4]   string   index to insert resource
+ *   [5]   string   (deep-capture, re-capture) the refer item, 
+ *   [6]   object   capture options
+ *                    images:
+ *                    media:
+ *                    styles:
+ *                    script:
+ *                    textAsHtml:
+ *                    forceUtf8:
+ *                    dlimg:
+ *                    dlsnd:
+ *                    dlmov:
+ *                    dlarc:
+ *                    custom:
+ *                    inDepth:
+ *                    isPartial:
+ *   [7]   array    the file2URL data in saver.js from last capture,
+ *                  will then pass to saver.js for next capture
+ *   [8]   array    (re-capture) the preset data,
+ *                  will pass to saver.js for each capture,
+ *                  generally this will overwrite windows.arguments
+ *                    [0]   string   id of resource
+ *                    [1]   string   file name to save
+ *                    [2]   string   overwrites windows.arguments[6] if set
+ *                    [3]   array    overwrites windows.arguments[7] if set
+ *                    [4]   int      limits depth of capture
+ *                    [5]   bool     true if is a bookmark, will reset resource type to "" (page)
+ *   [9]   string   currently we used "SB" only
+ *   [10]  string   force using charset to read html, autodetect if not set                  
+ *   [11]  string   (multi-capture, deep-capture) countdown seconds before next capture
+ *   [12]  array    (multi-capture) strings, overwrite the resource title,
+ *                  each entry corresponds with window.arguments[0]
+ */
 function SB_initCapture()
 {
 	var myURLs  = window.arguments[0];
