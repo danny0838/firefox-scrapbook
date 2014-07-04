@@ -835,7 +835,7 @@ var sbHtmlEditor = {
 		data.id = id;
 		// prompt the dialog for user input
 		var accepted = window.top.openDialog(
-			"chrome://scrapbook/content/editor_link.xul", "ScrapBook:AttachFile", "chrome,modal,centerscreen,resizable", 
+			"chrome://scrapbook/content/editor_link.xul", "ScrapBook:AttachLink", "chrome,modal,centerscreen,resizable", 
 			data
 		);
 		if (data.result != 1) return;
