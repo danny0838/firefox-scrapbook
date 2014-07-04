@@ -61,7 +61,6 @@ var sbMultipleService = {
 			option: null,
 			file2Url: null,
 			preset: null,
-			method: "SB",
 			charset: charset,
 			timeout: timeout,
 			titles: (document.getElementById("sbLinktitle").value == "ScrapBook") ? null : namList,

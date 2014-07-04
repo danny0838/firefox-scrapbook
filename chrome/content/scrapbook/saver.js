@@ -26,7 +26,7 @@ var sbContentSaver = {
 		this.favicon = null;
 		this.file2URL = { "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
 		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "styles" : true, "script" : false, "textAsHtml" : false, "forceUtf8" : true, "rewriteStyles" : true };
-		this.plusoption = { "method" : "SB", "timeout" : "0", "charset" : "UTF-8" }
+		this.plusoption = { "timeout" : "0", "charset" : "UTF-8" }
 		this.linkURLs = [];
 		this.frames = [];
 		this.isMainFrame = true;
@@ -115,7 +115,6 @@ var sbContentSaver = {
 					option: this.option,
 					file2Url: this.file2URL,
 					preset: null,
-					method: this.plusoption["method"],
 					charset: this.plusoption["charset"],
 					timeout: this.plusoption["timeout"],
 					titles: null,

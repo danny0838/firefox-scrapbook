@@ -1847,7 +1847,6 @@ var sbInfoViewer = {
 			option: null,
 			file2Url: {},
 			preset: [id, fileName, null, null, 0],
-			method: "SB",
 			charset: null,
 			timeout: null,
 			titles: null,

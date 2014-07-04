@@ -11,7 +11,6 @@ var gFile2URL   = {};
 var gURL2Name   = {};
 var gPreset     = [];
 var gContext    = "";
-var gMethod     = "SB";
 var gCharset	= "";
 var gTitles		= [];
 var gTitle;
@@ -52,7 +51,6 @@ function SB_trace(aMessage)
  *                           [3]   array    overwrites data.file2Url if set
  *                           [4]   int      limits depth of capture
  *                           [5]   bool     true if is a bookmark, will reset resource type to "" (page)
- *   method:      string   currently we used "SB" only
  *   charset:     string   force using charset to read html, autodetect if not set                  
  *   timeout:     string   (multi-capture, deep-capture) countdown seconds before next capture
  *   titles:      array    (multi-capture) strings, overwrite the resource title,
@@ -70,7 +68,6 @@ function SB_initCapture()
 	gOption     = data.option;
 	gFile2URL   = data.file2Url;
 	gPreset     = data.preset;
-	gMethod     = data.method;
 	gCharset	= data.charset;
 	gTimeout	= data.timeout;
 	gTitles		= data.titles;
@@ -236,7 +233,6 @@ var sbCaptureTask = {
 		var url = aOverriddenURL || gURLs[this.index];
 		if ( gTitles ) gTitle = gTitles[this.index];
 		SB_trace(sbCommonUtils.lang("capture", "CONNECT", [url]));
-		if ( gMethod != "SB" ) alert(sbCommonUtils.lang("scrapbook", "ERR_FILE_NOT_EXIST", [gMethod]));
 		if ( url.indexOf("file://") == 0 ) {
 			sbInvisibleBrowser.load(url);
 		} else {

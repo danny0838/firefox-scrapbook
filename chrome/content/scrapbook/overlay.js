@@ -258,7 +258,6 @@ var sbBrowserOverlay = {
 			option: null,
 			file2Url: null,
 			preset: null,
-			method: "SB",
 			charset: null,
 			timeout: null,
 			titles: null,
