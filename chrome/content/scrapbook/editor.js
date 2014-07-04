@@ -55,6 +55,8 @@ var sbPageEditor = {
 		var restoredComment = sbCommonUtils.documentData(window.content.document, "comment");
 		if (restoredComment) this.COMMENT.value = restoredComment;
 		try { this.COMMENT.editor.transactionManager.clear(); } catch(ex) {}
+		// -- attach file button
+		document.getElementById("ScrapBookEditAnnotation").firstChild.childNodes[2].disabled = (aID == null);
 		// -- deactivate DOMEraser
 		sbDOMEraser.init(0);
 		// -- refresh HtmlEditor toolbar
