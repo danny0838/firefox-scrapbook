@@ -57,23 +57,28 @@ var sbPageEditor = {
 		try { this.COMMENT.editor.transactionManager.clear(); } catch(ex) {}
 		// -- deactivate DOMEraser
 		sbDOMEraser.init(0);
-		// -- refresh HtmlEditor
+		// -- refresh HtmlEditor toolbar
 		sbHtmlEditor.init(null, 2);
-		// -- window
-		if ( aID ) {
-			try { window.content.removeEventListener("beforeunload", this.handleUnloadEvent, true); } catch(ex){}
-			window.content.addEventListener("beforeunload", this.handleUnloadEvent, true);
-		}
-		// -- document
-		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
-			sbAnnotationService.initEvent(win, 1);
-			this.initEvent(win, 1);
-			this.documentBeforeEdit(win.document);
-		}, this);
-		if (this.item && this.item.type == "notex" && sbCommonUtils.getPref("edit.autoEditNoteX", true)) {
-			var _changed = sbCommonUtils.documentData(window.content.document, "changed");
-			sbHtmlEditor.init(window.content.document, 1);
-			if (!_changed) sbCommonUtils.documentData(window.content.document, "changed", false);
+
+		// settings for the page, only if it's first load
+		if ( !sbCommonUtils.documentData(window.content.document, "inited") ) {
+			sbCommonUtils.documentData(window.content.document, "inited", true);
+			// -- window
+			if ( aID ) {
+				try { window.content.removeEventListener("beforeunload", this.handleUnloadEvent, true); } catch(ex){}
+				window.content.addEventListener("beforeunload", this.handleUnloadEvent, true);
+			}
+			// -- document
+			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
+				sbAnnotationService.initEvent(win, 1);
+				this.initEvent(win, 1);
+				this.documentBeforeEdit(win.document);
+			}, this);
+			if (this.item && this.item.type == "notex" && sbCommonUtils.getPref("edit.autoEditNoteX", true)) {
+				var _changed = sbCommonUtils.documentData(window.content.document, "changed");
+				sbHtmlEditor.init(window.content.document, 1);
+				if (!_changed) sbCommonUtils.documentData(window.content.document, "changed", false);
+			}
 		}
 	},
 
