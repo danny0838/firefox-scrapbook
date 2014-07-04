@@ -90,6 +90,7 @@ function SB_initCapture()
 	else if ( gContext == "capture-again-deep" )
 	{
 		var contDir = sbCommonUtils.getContentDir(gPreset[0]);
+		// read sb-file2url.txt => gFile2URL for later usage
 		var file = contDir.clone();
 		file.append("sb-file2url.txt");
 		if ( !file.exists() ) { alert(sbCommonUtils.lang("scrapbook", "ERR_NO_FILE2URL")); window.close(); }
@@ -99,7 +100,8 @@ function SB_initCapture()
 			var arr = lines[i].split("\t");
 			if ( arr.length == 2 ) gFile2URL[arr[0]] = arr[1];
 		}
-		file = sbCommonUtils.getContentDir(gPreset[0]).clone();
+		// read sb-url2name.txt => gURL2Name and search for source URL of the current page
+		file = contDir.clone();
 		file.append("sb-url2name.txt");
 		if ( !file.exists() ) { alert(sbCommonUtils.lang("scrapbook", "ERR_NO_URL2NAME")); window.close(); }
 		lines = sbCommonUtils.readFile(file).split("\n");
