@@ -28,59 +28,60 @@ function SB_trace(aMessage)
 /**
  * Receive data from other script opening capture.xul
  *
- * window.arguments:
- *   [0]   array    strings, each is a full URL to capture 
- *   [1]   string   reference URL to resolve link
- *   [2]   bool     show detail or not
- *   [3]   string   file name to save
- *   [4]   string   index to insert resource
- *   [5]   string   (deep-capture, re-capture) the refer item, 
- *   [6]   object   capture options
- *                    images:
- *                    media:
- *                    styles:
- *                    script:
- *                    textAsHtml:
- *                    forceUtf8:
- *                    dlimg:
- *                    dlsnd:
- *                    dlmov:
- *                    dlarc:
- *                    custom:
- *                    inDepth:
- *                    isPartial:
- *   [7]   array    the file2URL data in saver.js from last capture,
- *                  will then pass to saver.js for next capture
- *   [8]   array    (re-capture) the preset data,
- *                  will pass to saver.js for each capture,
- *                  generally this will overwrite windows.arguments
- *                    [0]   string   id of resource
- *                    [1]   string   file name to save
- *                    [2]   string   overwrites windows.arguments[6] if set
- *                    [3]   array    overwrites windows.arguments[7] if set
- *                    [4]   int      limits depth of capture
- *                    [5]   bool     true if is a bookmark, will reset resource type to "" (page)
- *   [9]   string   currently we used "SB" only
- *   [10]  string   force using charset to read html, autodetect if not set                  
- *   [11]  string   (multi-capture, deep-capture) countdown seconds before next capture
- *   [12]  array    (multi-capture) strings, overwrite the resource title,
- *                  each entry corresponds with window.arguments[0]
+ * data:
+ *   urls:        array    strings, each is a full URL to capture 
+ *   refUrl:      string   reference URL to resolve link
+ *   showDetail:  bool     show detail or not
+ *   resName:     string   file name to save
+ *   resIdx:      string   index to insert resource
+ *   referItem:   string   (deep-capture, re-capture) the refer item, 
+ *   option:      object   capture options
+ *                           images:
+ *                           media:
+ *                           styles:
+ *                           script:
+ *                           textAsHtml:
+ *                           forceUtf8:
+ *                           dlimg:
+ *                           dlsnd:
+ *                           dlmov:
+ *                           dlarc:
+ *                           custom:
+ *                           inDepth:
+ *                           isPartial:
+ *   file2Url:    array    the file2URL data in saver.js from last capture,
+ *                         will then pass to saver.js for next capture
+ *   preset:      array    (re-capture) the preset data,
+ *                         will pass to saver.js for each capture,
+ *                         generally this will overwrite data
+ *                           [0]   string   id of resource
+ *                           [1]   string   file name to save
+ *                           [2]   string   overwrites data.option if set
+ *                           [3]   array    overwrites data.file2Url if set
+ *                           [4]   int      limits depth of capture
+ *                           [5]   bool     true if is a bookmark, will reset resource type to "" (page)
+ *   method:      string   currently we used "SB" only
+ *   charset:     string   force using charset to read html, autodetect if not set                  
+ *   timeout:     string   (multi-capture, deep-capture) countdown seconds before next capture
+ *   titles:      array    (multi-capture) strings, overwrite the resource title,
+ *                         each entry corresponds with data.urls
  */
 function SB_initCapture()
 {
-	var myURLs  = window.arguments[0];
-	gRefURL     = window.arguments[1];
-	gShowDetail = window.arguments[2];
-	gResName    = window.arguments[3];
-	gResIdx     = window.arguments[4];
-	gReferItem  = window.arguments[5];
-	gOption     = window.arguments[6];
-	gFile2URL   = window.arguments[7];
-	gPreset     = window.arguments[8];
-	gMethod     = window.arguments[9];
-	gCharset	= window.arguments[10];
-	gTimeout	= window.arguments[11];
-	gTitles		= window.arguments[12];
+	var data = window.arguments[0];
+	var myURLs  = data.urls;
+	gRefURL     = data.refUrl;
+	gShowDetail = data.showDetail;
+	gResName    = data.resName;
+	gResIdx     = data.resIdx;
+	gReferItem  = data.referItem;
+	gOption     = data.option;
+	gFile2URL   = data.file2Url;
+	gPreset     = data.preset;
+	gMethod     = data.method;
+	gCharset	= data.charset;
+	gTimeout	= data.timeout;
+	gTitles		= data.titles;
 
 	if ( !gTimeout ) gTimeout = 0;
 	if ( gReferItem )

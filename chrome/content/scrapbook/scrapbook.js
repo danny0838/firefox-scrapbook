@@ -354,12 +354,22 @@ var sbController = {
 			0,
 			sbDataSource.getProperty(aRes, "type") == "bookmark"
 		];
-		window.top.openDialog(
-			"chrome://scrapbook/content/capture.xul", "",
-			"chrome,centerscreen,all,resizable,dialog=no",
-			[sbDataSource.getProperty(aRes, "source")], null,
-			aShowDetail, null, 0, null, null, null, preset, "SB"
-		);
+		var data = {
+			urls: [sbDataSource.getProperty(aRes, "source")],
+			refUrl: null,
+			showDetail: aShowDetail,
+			resName: null,
+			resIdx: 0,
+			referItem: null,
+			option: null,
+			file2Url: null,
+			preset: preset,
+			method: "SB",
+			charset: null,
+			timeout: null,
+			titles: null,
+		};
+		window.top.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
 	},
 
 	forward: function(aRes, aCommand, aParam)
@@ -750,12 +760,22 @@ var sbTreeDNDHandler = {
 			);
 		}
 		else if (url.indexOf("http://") == 0 || url.indexOf("https://") == 0) {
-			top.window.openDialog(
-				"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
-				[url], win.location.href,
-				sbMainService.prefs.showDetailOnDrop || this.modShift,
-				res[0], res[1], null, null, null, null, "SB"
-			);
+			var data = {
+				urls: [url],
+				refUrl: win.location.href,
+				showDetail: sbMainService.prefs.showDetailOnDrop || this.modShift,
+				resName: res[0],
+				resIdx: res[1],
+				referItem: null,
+				option: null,
+				file2Url: null,
+				preset: null,
+				method: "SB",
+				charset: null,
+				timeout: null,
+				titles: null,
+			};
+			top.window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
 		}
 		else if (url.indexOf("file://") == 0) {
 			top.window.sbContentSaver.captureFile(

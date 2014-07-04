@@ -51,19 +51,22 @@ var sbMultipleService = {
 				namList[i] = "";
 			}
 		}
-		if (document.getElementById("sbLinktitle").value == "ScrapBook")
-		{
-			window.openDialog(
-				"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
-				urlList, "", false, sbFolderSelector2.resURI, 0, null, null, null, null, "SB", charset, timeout
-				);
-		} else
-		{
-			window.openDialog(
-				"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
-				urlList, "", false, sbFolderSelector2.resURI, 0, null, null, null, null, "SB", charset, timeout, namList
-				);
-		}
+		var data = {
+			urls: urlList,
+			refUrl: "",
+			showDetail: false,
+			resName: sbFolderSelector2.resURI,
+			resIdx: 0,
+			referItem: null,
+			option: null,
+			file2Url: null,
+			preset: null,
+			method: "SB",
+			charset: charset,
+			timeout: timeout,
+			titles: (document.getElementById("sbLinktitle").value == "ScrapBook") ? null : namList,
+		};
+		window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
 	},
 
 	addURL : function(auAllHash, auExclude)

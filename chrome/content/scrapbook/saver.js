@@ -105,12 +105,22 @@ var sbContentSaver = {
 			{
 				this.item.type = "marked";
 				this.option["isPartial"] = aIsPartial;
-				window.openDialog(
-					"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no",
-					this.linkURLs, this.refURLObj.spec,
-					false, null, 0,
-					this.item, this.option, this.file2URL, null, this.plusoption["method"], this.plusoption["charset"], this.plusoption["timeout"]
-				);
+				var data = {
+					urls: this.linkURLs,
+					refUrl: this.refURLObj.spec,
+					showDetail: false,
+					resName: null,
+					resIdx: 0,
+					referItem: this.item,
+					option: this.option,
+					file2Url: this.file2URL,
+					preset: null,
+					method: this.plusoption["method"],
+					charset: this.plusoption["charset"],
+					timeout: this.plusoption["timeout"],
+					titles: null,
+				};
+				window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no", data);
 			}
 			else
 			{

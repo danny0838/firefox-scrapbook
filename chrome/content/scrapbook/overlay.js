@@ -248,10 +248,22 @@ var sbBrowserOverlay = {
 			linkURL = this.getLinkURI();
 		}
 		if ( !linkURL ) return;
-		window.openDialog(
-			"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
-			[linkURL], document.popupNode.ownerDocument.location.href, aShowDetail, aTargetID, 0, null, null, null, null, "SB"
-		);
+		var data = {
+			urls: [linkURL],
+			refUrl: document.popupNode.ownerDocument.location.href,
+			showDetail: aShowDetail,
+			resName: aTargetID,
+			resIdx: 0,
+			referItem: null,
+			option: null,
+			file2Url: null,
+			preset: null,
+			method: "SB",
+			charset: null,
+			timeout: null,
+			titles: null,
+		};
+		window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
 	},
 
 	execBookmark: function(aTargetID)
