@@ -99,6 +99,8 @@ var sbContentSaver = {
 		}
 		if ( this.option["inDepth"] > 0 && this.linkURLs.length > 0 )
 		{
+			// inDepth capture for "capture-again-deep" is pre-disallowed by hiding the options
+			// and should never occur here
 			if ( !aPresetData || aContext == "capture-again" )
 			{
 				this.item.type = "marked";
