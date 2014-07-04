@@ -659,15 +659,18 @@ var sbHtmlEditor = {
 
 		// now we are sure we have the hotkey
 		var callback = sbHtmlEditor[callback_name];
+		aEvent.preventDefault();
+
+		// check the document is editable and set
+		var doc = sbHtmlEditor.currentDocument();
+		if (!doc.body || doc.designMode != "on") return;
 
 		// The original key effect could not be blocked completely
 		// if the command has a prompt or modal window that blocks.
 		// Therefore we call the callback command using an async workaround.
 		setTimeout(function(){
-			callback.call(sbHtmlEditor, sbHtmlEditor.currentDocument());
+			callback.call(sbHtmlEditor, doc);
 		}, 0);
-
-		aEvent.preventDefault();
 	},
 
 	quit : function(aDoc)
@@ -1129,6 +1132,7 @@ var sbDOMEraser = {
 
 		// now we are sure we have the hotkey
 		var callback = sbDOMEraser[callback_name];
+		aEvent.preventDefault();
 
 		// The original key effect could not be blocked completely
 		// if the command has a prompt or modal window that blocks.
@@ -1136,8 +1140,6 @@ var sbDOMEraser = {
 		setTimeout(function(){
 			callback.call(sbDOMEraser, sbDOMEraser.lastTarget);
 		}, 0);
-
-		aEvent.preventDefault();
 	},
 
 	handleEvent : function(aEvent)
