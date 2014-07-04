@@ -896,6 +896,10 @@ var sbHtmlEditor = {
 
 	attachFile : function(aDoc)
 	{
+		// check if the current page is local and get its path
+		var htmlFile = sbCommonUtils.convertURLToFile(aDoc.location.href);
+		if (!htmlFile) return;
+		// init
 		var sel = aDoc.defaultView.getSelection();
 		var data = {};
 		// prompt the dialog for user input
@@ -905,7 +909,6 @@ var sbHtmlEditor = {
 		);
 		if (data.result != 1) return;
 		// copy the selected file
-		var htmlFile = sbCommonUtils.convertURLToFile(aDoc.location.href);
 		var destFile = htmlFile.parent.clone();
 		destFile.append(data.file.leafName);
 		if ( destFile.exists() && destFile.isFile() ) {
@@ -1711,11 +1714,15 @@ var sbAnnotationService = {
 		}
 		else
 		{
+			// check if the page is local and get its path
+			var htmlFile = sbCommonUtils.convertURLToFile(win.location.href);
+			if (!htmlFile) return;
+			// prompt a window to select file
 			var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
 			FP.init(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), FP.modeOpen);
 			var ret = FP.show();
 			if ( ret != FP.returnOK ) return;
-			var htmlFile = sbCommonUtils.convertURLToFile(win.location.href);
+			// upload the file
 			var destFile = htmlFile.parent.clone();
 			destFile.append(FP.file.leafName);
 			if ( destFile.exists() && destFile.isFile() ) {
@@ -1727,6 +1734,7 @@ var sbAnnotationService = {
 			} catch(ex) {
 				return;
 			}
+			// attach the link
 			attr["href"] = sbCommonUtils.getFileName(sbCommonUtils.IO.newFileURI(FP.file).spec);
 			attr["title"] = FP.file.leafName;
 			attr["data-sb-obj"] = "link-file";
