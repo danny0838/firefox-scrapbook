@@ -181,7 +181,7 @@ var sbContentSaver = {
 		// image: use special captureType
 		else if ( aDocument.contentType.indexOf("image/") === 0 ) {
 			captureAsFile = true;
-			captureType = "image";
+			captureType = "file";
 		}
 		// text (parsable non-HTML): if not capture as HTML, save as file
 		else if ( aDocument.contentType != "text/html" && !this.option["textAsHtml"] ) {
