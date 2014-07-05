@@ -31,6 +31,7 @@
 <!ENTITY sb.highlighter.remove.all "Вилучити усі підсвічування">
 <!ENTITY sb.source "Відкрити початкову адресу">
 <!ENTITY sb.renew "Зберегти знову">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.locate "Показати розташування у Бічній панелі">
 <!ENTITY sb.indicators "Відображати індикатори посилань">
 <!ENTITY sb.info.home "На головну">

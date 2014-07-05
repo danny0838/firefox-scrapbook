@@ -9,6 +9,7 @@
 <!ENTITY sb.move.into "Переместить в каталог">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Захватить снова">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.export "Экспортировать">
 <!ENTITY sb.remove "Удалить">
 <!ENTITY sb.property "Свойства">

@@ -31,6 +31,7 @@
 <!ENTITY sb.highlighter.remove.all "取消所有高亮显示">
 <!ENTITY sb.source "打开原始链接">
 <!ENTITY sb.renew "重新获取">
+<!ENTITY sb.internalize "将内嵌的外部媒体存入资料目录">
 <!ENTITY sb.locate "与侧栏列表同步">
 <!ENTITY sb.indicators "显示链接指示器">
 <!ENTITY sb.info.home "主页">

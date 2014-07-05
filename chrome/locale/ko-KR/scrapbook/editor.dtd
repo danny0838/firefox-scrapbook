@@ -31,6 +31,7 @@
 <!ENTITY sb.highlighter.remove.all "모든 강조 해제">
 <!ENTITY sb.source "소스 URL 열기">
 <!ENTITY sb.renew "다시 캡처">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.locate "탐색 창 트리와 동기화">
 <!ENTITY sb.indicators "링크 지시자 보이기">
 <!ENTITY sb.info.home "홈">

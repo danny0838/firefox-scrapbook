@@ -9,6 +9,7 @@
 <!ENTITY sb.move.into "Move into Folder">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Capture Again">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.export "Export">
 <!ENTITY sb.remove "Delete">
 <!ENTITY sb.property "Properties">

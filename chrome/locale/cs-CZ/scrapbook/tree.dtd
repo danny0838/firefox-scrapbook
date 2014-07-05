@@ -9,6 +9,7 @@
 <!ENTITY sb.move.into "Přesunout do složky">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Zachytit znovu">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.export "Exportovat">
 <!ENTITY sb.remove "Odstranit">
 <!ENTITY sb.property "Vlastnosti">

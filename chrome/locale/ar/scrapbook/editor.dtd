@@ -31,6 +31,7 @@
 <!ENTITY sb.highlighter.remove.all "إزالة كل الإضاءات">
 <!ENTITY sb.source "فتح الموقع المصدر">
 <!ENTITY sb.renew "التقط مجددا">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.locate "أوجد في شجرة الشريط الجانبي">
 <!ENTITY sb.indicators "عرض مؤشر الارتباط">
 <!ENTITY sb.info.home "البيت">

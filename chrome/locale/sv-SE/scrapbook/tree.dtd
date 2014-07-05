@@ -9,6 +9,7 @@
 <!ENTITY sb.move.into "Flytta till mapp">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Fånga in igen">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.export "Exportera">
 <!ENTITY sb.remove "Ta bort">
 <!ENTITY sb.property "Egenskaper">

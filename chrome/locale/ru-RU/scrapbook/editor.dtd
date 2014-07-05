@@ -31,6 +31,7 @@
 <!ENTITY sb.highlighter.remove.all "Удалить все типы подсветок">
 <!ENTITY sb.source "Открыть URL сохранённого сайта">
 <!ENTITY sb.renew "Произвести сохранение страницы снова">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.locate "Синхронизировать с деревом боковой панели">
 <!ENTITY sb.indicators "Показывать индикаторы ссылок">
 <!ENTITY sb.info.home "К начальной странице">

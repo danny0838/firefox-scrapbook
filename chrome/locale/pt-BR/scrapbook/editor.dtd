@@ -24,6 +24,7 @@
 <!ENTITY sb.highlighter.remove.all "Remover Todos os Realces na Página">
 <!ENTITY sb.source "Abrir URL Fonte">
 <!ENTITY sb.renew "Capturar Novamente">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.locate "Sincronizar Com a Árvore do Painel">
 <!ENTITY sb.indicators "Mostrar Indicadores de Link">
 <!ENTITY sb.info.home "Página Inicial">
