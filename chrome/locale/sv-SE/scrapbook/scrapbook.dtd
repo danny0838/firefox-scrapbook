@@ -14,5 +14,6 @@
 <!ENTITY sb.tools.sorttree "Sortera hela trädet">
 <!ENTITY sb.tools.output "Formatera utgående träddata som HTML">
 <!ENTITY sb.tools.repair "Nödreparation">
+<!ENTITY sb.tools.addons "Tilläggsfunktioner">
 <!ENTITY sb.note.opentab "Öppna in flik">
 <!ENTITY sb.note.close "Stäng">
