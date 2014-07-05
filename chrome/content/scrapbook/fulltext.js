@@ -74,13 +74,13 @@ var sbSearchResult =
 				if ( quotePos1 >= 1 && query.charAt(quotePos1-1) == '-' )
 				{
 					this.excludeWords.push(quotedStr);
-					this.RegExpExclude.push( new RegExp(this.escapeRegExpSpecialChars(quotedStr), this.RegExpModifier) );
+					this.RegExpExclude.push( new RegExp(sbCommonUtils.escapeRegExp(quotedStr), this.RegExpModifier) );
 					replaceStr = "-" + replaceStr;
 				}
 				else if ( quotedStr.length > 0 )
 				{
 					this.includeWords.push(quotedStr);
-					this.RegExpInclude.push( new RegExp(this.escapeRegExpSpecialChars(quotedStr), this.RegExpModifier) );
+					this.RegExpInclude.push( new RegExp(sbCommonUtils.escapeRegExp(quotedStr), this.RegExpModifier) );
 				}
 				query = query.replace(replaceStr, "");
 			}
@@ -92,12 +92,12 @@ var sbSearchResult =
 				{
 					word = word.substring(1, word.length);
 					this.excludeWords.push(word);
-					this.RegExpExclude.push( new RegExp(this.escapeRegExpSpecialChars(word), this.RegExpModifier) );
+					this.RegExpExclude.push( new RegExp(sbCommonUtils.escapeRegExp(word), this.RegExpModifier) );
 				}
 				else if ( word.length > 0 )
 				{
 					this.includeWords.push(word);
-					this.RegExpInclude.push( new RegExp(this.escapeRegExpSpecialChars(word), this.RegExpModifier) );
+					this.RegExpInclude.push( new RegExp(sbCommonUtils.escapeRegExp(word), this.RegExpModifier) );
 				}
 			}
 			if ( this.RegExpInclude.length == 0 ) return;
@@ -242,11 +242,6 @@ var sbSearchResult =
 		var re = new RegExp("(" + pattern + ".*)", this.RegExpModifier);
 		var ret = aString.match(re) ? RegExp.$1 : aString;
 		return ( ret.length > 100 ) ? ret.substring(0, 100) : ret;
-	},
-
-	escapeRegExpSpecialChars : function(aString)
-	{
-		return aString.replace(/([\*\+\?\.\^\/\$\\\|\[\]\{\}\(\)])/g, "\\$1");
 	},
 
 	localizedQuotation : function(aString)

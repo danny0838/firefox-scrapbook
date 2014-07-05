@@ -624,6 +624,11 @@ var sbCommonUtils = {
 		if (aSingleQuotes) aStr = aStr.replace(/'/g, "&apos;");
 		return aStr;
 	},
+
+	escapeRegExp : function(aString)
+	{
+		return aString.replace(/([\*\+\?\.\^\/\$\\\|\[\]\{\}\(\)])/g, "\\$1");
+	},
 		
 	pad : function(n, width, z)
 	{
