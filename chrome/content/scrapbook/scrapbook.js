@@ -19,9 +19,12 @@ var sbMainService = {
 
 	delayedInit: function()
 	{
+		if ("sbBrowserOverlay" in window.top == false) return;
 		sbMultiBookService.showTitle();
-		if ("sbBrowserOverlay" in window.top && window.top.sbBrowserOverlay.locateMe)
+		if (window.top.sbBrowserOverlay.locateMe)
 			this.locate(null);
+		if (!document.getElementById("sbAddOnsPopup").firstChild)
+			document.getElementById("sbAddOns").hidden = true;
 	},
 
 	initPrefs: function()
