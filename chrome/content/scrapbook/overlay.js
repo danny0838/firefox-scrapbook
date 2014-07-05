@@ -128,9 +128,11 @@ var sbBrowserOverlay = {
 
 	getID: function(aURL)
 	{
-		if (!aURL)
-			aURL = gBrowser.currentURI ? gBrowser.currentURI.spec : "";
-		var editable = (aURL.indexOf("file") == 0 && aURL.match(/\/data\/(\d{14})\//));
+		if (!aURL) aURL = gBrowser.currentURI ? gBrowser.currentURI.spec : "";
+		var file = sbCommonUtils.convertURLToFile(aURL);
+		if (!file || !file.isFile()) return null;
+		var aURL = sbCommonUtils.convertFilePathToURL(file.path);
+		var editable = (aURL.indexOf("file:") == 0 && aURL.match(/\/data\/(\d{14})\//));
 		return editable ? RegExp.$1 : null;
 	},
 
