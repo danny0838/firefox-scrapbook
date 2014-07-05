@@ -12,3 +12,4 @@
 <!ENTITY sb.prop.icon.favicon "Значок из файлов страницы">
 <!ENTITY sb.prop.icon.custom "Установленный значок">
 <!ENTITY sb.prop.mark "Выделить страницу в веб-альбоме">
+<!ENTITY sb.prop.lock "Lock">

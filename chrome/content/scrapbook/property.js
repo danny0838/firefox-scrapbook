@@ -36,6 +36,7 @@ var sbPropService = {
 		document.getElementById("sbPropChars").value   = this.item.chars;
 		document.getElementById("sbPropComment").value = this.item.comment.replace(/ __BR__ /g, "\n");
 		document.getElementById("sbPropMark").setAttribute("checked", this.item.type == "marked");
+		document.getElementById("sbPropLock").setAttribute("checked", this.item.type == "notexl");
 		this.ICON.src = this.item.icon ? this.item.icon : sbCommonUtils.getDefaultIcon(this.item.type);
 		document.title = this.item.title;
 		if (sbDataSource.isContainer(this.resource))
@@ -46,7 +47,8 @@ var sbPropService = {
 			case "bookmark" : this.isTypeBookmark  = true; bundleName = "TYPE_BOOKMARK";  break;
 			case "folder"   : this.isTypeFolder    = true; bundleName = "TYPE_FOLDER";    break;
 			case "note"     : this.isTypeNote      = true; bundleName = "TYPE_NOTE";      break;
-			case "notex"    : this.isTypeNotex     = true; bundleName = "TYPE_NOTEX";      break;
+			case "notex"    :
+			case "notexl"   : this.isTypeNotex     = true; bundleName = "TYPE_NOTEX";     break;
 			case "file"     : 
 			case "image"    : this.isTypeFile      = true; bundleName = "TYPE_FILE";      break;
 			case "combine"  : this.isTypeSite      = true; bundleName = "TYPE_COMBINE";   break;
@@ -59,6 +61,7 @@ var sbPropService = {
 		document.getElementById("sbPropIconMenu").hidden  = this.isTypeNote;
 		document.getElementById("sbPropSizeRow").hidden   = this.isTypeFolder || this.isTypeBookmark || this.isTypeSeparator;
 		document.getElementById("sbPropMark").hidden      = this.isTypeFolder || this.isTypeNote || this.isTypeNotex || this.isTypeFile || this.isTypeSite || this.isTypeBookmark;
+		document.getElementById("sbPropLock").hidden      = !this.isTypeNotex;
 		document.getElementById("sbPropIconMenu").firstChild.firstChild.nextSibling.setAttribute("disabled", this.isTypeFolder || this.isTypeBookmark);
 		if (!this.item.chars) document.getElementById("sbPropChars").removeAttribute("readonly");
 		if (this.isTypeNote)
@@ -86,6 +89,8 @@ var sbPropService = {
 		};
 		if (!this.isTypeSeparator && !document.getElementById("sbPropMark").hidden)
 			newVals.type = document.getElementById("sbPropMark").checked ? "marked" : "";
+		if (!this.isTypeSeparator && !document.getElementById("sbPropLock").hidden)
+			newVals.type = document.getElementById("sbPropLock").checked ? "notexl" : "notex";
 		var changed = false;
 		var props = ["title", "source", "comment", "type", "icon", "chars"];
 		for (var i = 0; i < props.length; i++) {
