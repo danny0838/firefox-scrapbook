@@ -296,7 +296,7 @@ var sbController = {
 		getElement("sbPopupNewFolder").previousSibling.hidden  = isSeparator;
 		getElement("sbPopupTools").hidden                      = isFolder || isSeparator;
 		getElement("sbPopupRenew").disabled                    = isNote || isNotex;
-		getElement("sbPopupInternalize").disabled              = isBookmark;
+		getElement("sbPopupInternalize").hidden                = !isNotex;
 		getElement("sbPopupShowFiles").disabled                = isBookmark;
 	},
 
