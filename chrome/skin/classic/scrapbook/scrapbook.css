@@ -86,7 +86,17 @@ richlistitem.notex image.sblist-icon {
 	list-style-image: url('chrome://scrapbook/skin/treenotex.png') !important;
 }
 
+treechildren::-moz-tree-image(sbTreeColTitle, notexl),
+richlistitem.notexl image.sblist-icon {
+	list-style-image: url('chrome://scrapbook/skin/treenotex.png') !important;
+}
+
 treechildren::-moz-tree-cell-text(notex),
+richlistitem.marked .sblist-title {
+	color: rgb(80,0,32);
+}
+
+treechildren::-moz-tree-cell-text(notexl),
 richlistitem.marked .sblist-title {
 	color: rgb(80,0,32);
 }
