@@ -920,14 +920,21 @@ var sbCrossLinker = {
 
 	forceReloading : function(aID, aName)
 	{
+		var file = sbCommonUtils.getContentDir(aID);
+		file.append(aName + ".html");
+		var url = sbCommonUtils.convertFilePathToURL(file.path);
+		this.forceReloadingURL(url);
+	},
+
+	forceReloadingURL : function(aURL)
+	{
 		try {
 			var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
 			var nodes = win.gBrowser.mTabContainer.childNodes;
-			for ( var i = 0; i < nodes.length; i++ )
-			{
+			for ( var i = 0; i < nodes.length; i++ ) {
 				var uri = win.gBrowser.getBrowserForTab(nodes[i]).currentURI.spec;
-				if ( uri.indexOf("/data/" + aID + "/" + aName + ".html") > 0 )
-				{
+				uri = SB_splitByAnchor(uri)[0];
+				if ( uri == aURL ) {
 					win.gBrowser.getBrowserForTab(nodes[i]).reload();
 				}
 			}
@@ -1055,6 +1062,10 @@ sbCaptureObserverCallback.onCaptureComplete = function(aItem)
 		var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gPreset[0]);
 		sbDataSource.setProperty(res, "chars", aItem.chars);
 		if ( gPreset[5] ) sbDataSource.setProperty(res, "type", "");
+	}
+	else if ( gContext == "internalize" )
+	{
+		sbCrossLinker.forceReloadingURL(sbCommonUtils.convertFilePathToURL(gOption.internalize.path));
 	}
 	sbCaptureTask.succeed();
 };
