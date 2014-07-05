@@ -197,10 +197,12 @@ var sbContentSaver = {
 		// HTML document: save the current DOM
 		this.refURLObj = sbCommonUtils.convertURLToObject(aDocument.location.href);
 
-		var arr = this.getUniqueFileName(aFileKey + ".html", this.refURLObj.spec, aDocument);
-		var myHTMLFileName = arr[0];
-		var myHTMLFileDone = arr[1];
-		if (myHTMLFileDone) return myHTMLFileName;
+		if ( !this.option["internalize"] ) {
+			var arr = this.getUniqueFileName(aFileKey + ".html", this.refURLObj.spec, aDocument);
+			var myHTMLFileName = arr[0];
+			var myHTMLFileDone = arr[1];
+			if (myHTMLFileDone) return myHTMLFileName;
+		}
 
 		if ( this.option["rewriteStyles"] ) {
 			var arr = this.getUniqueFileName(aFileKey + ".css", this.refURLObj.spec, aDocument);
@@ -324,8 +326,13 @@ var sbContentSaver = {
 
 		// generate the HTML and CSS file and save
 		var myHTML = this.doctypeToString(aDocument.doctype) + sbCommonUtils.getOuterHTML(rootNode, true);
-		var myHTMLFile = this.contentDir.clone();
-		myHTMLFile.append(myHTMLFileName);
+		if ( this.option["internalize"] ) {
+			var myHTMLFile = this.option["internalize"];
+		}
+		else {
+			var myHTMLFile = this.contentDir.clone();
+			myHTMLFile.append(myHTMLFileName);
+		}
 		sbCommonUtils.writeFile(myHTMLFile, myHTML, this.item.chars);
 		if ( myCSS )
 		{
@@ -809,8 +816,14 @@ var sbContentSaver = {
 
 		if ( aURL.schemeIs("http") || aURL.schemeIs("https") || aURL.schemeIs("ftp") )
 		{
-			var targetFile = this.contentDir.clone();
-			targetFile.append(newFileName);
+			if ( this.option["internalize"] ) {
+				var targetFile = this.option["internalize"].parent;
+				targetFile.append(newFileName);
+			}
+			else {
+				var targetFile = this.contentDir.clone();
+				targetFile.append(newFileName);
+			}
 //Der Try-Catch-Block wird auch bei einem alert innerhalb des Blocks weitergefuehrt!
 			try {
 				var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
@@ -833,7 +846,12 @@ var sbContentSaver = {
 		}
 		else if ( aURL.schemeIs("file") )
 		{
-			var targetDir = this.contentDir.clone();
+			if ( this.option["internalize"] ) {
+				var targetDir = this.option["internalize"].parent;
+			}
+			else {
+				var targetDir = this.contentDir.clone();
+			}
 			try {
 				var orgFile = sbCommonUtils.convertURLToFile(aURLSpec);
 				if ( !orgFile.isFile() ) return;

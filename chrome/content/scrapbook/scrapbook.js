@@ -387,7 +387,6 @@ var sbController = {
 		var file2Url = {};
 		sbCommonUtils.forEachFile(refDir, function(file){
 			if (file.isDirectory() && file.equals(refDir)) return;
-			if (file.equals(refFile)) return;
 			file2Url[file.leafName] = true;
 			return 0;
 		}, this);

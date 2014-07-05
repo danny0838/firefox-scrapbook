@@ -1855,6 +1855,62 @@ var sbInfoViewer = {
 		top.window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
 	},
 
+	internalize : function()
+	{
+		var id = sbBrowserOverlay.getID();
+		if ( !id ) return;
+		if (window.content.document.contentType != "text/html") {
+			sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_NOT_INTERNALIZE_TYPE"));
+			return;
+		}
+		var refFile = sbCommonUtils.convertURLToFile(window.content.location.href);
+		var refDir = refFile.parent;
+
+		// pre-fill files in the same folder to prevent overwrite
+		var file2Url = {};
+		sbCommonUtils.forEachFile(refDir, function(file){
+			if (file.isDirectory() && file.equals(refDir)) return;
+			file2Url[file.leafName] = true;
+			return 0;
+		}, this);
+
+		var options = {
+			"isPartial" : false,
+			"images" : true,
+			"media" : true,
+			"styles" : true,
+			"script" : true,
+			"textAsHtml" : false,
+			"forceUtf8" : false,
+			"rewriteStyles" : false,
+			"internalize" : refFile,
+		};
+		var preset = [
+			id,
+			refFile.leafName,
+			options,
+			file2Url,
+			0,
+			false
+		];
+		var data = {
+			urls: [window.content.location.href],
+			refUrl: null,
+			showDetail: false,
+			resName: null,
+			resIdx: 0,
+			referItem: null,
+			option: options,
+			file2Url: file2Url,
+			preset: preset,
+			charset: null,
+			timeout: null,
+			titles: null,
+			context: "internalize",
+		};
+		top.window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
+	},
+
 	openSourceURL : function(tabbed)
 	{
 		if ( !sbBrowserOverlay.getID() ) return;
