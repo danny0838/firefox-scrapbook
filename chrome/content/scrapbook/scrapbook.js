@@ -296,6 +296,7 @@ var sbController = {
 		getElement("sbPopupNewFolder").previousSibling.hidden  = isSeparator;
 		getElement("sbPopupTools").hidden                      = isFolder || isSeparator;
 		getElement("sbPopupRenew").disabled                    = isNote || isNotex;
+		getElement("sbPopupInternalize").disabled              = isBookmark;
 		getElement("sbPopupShowFiles").disabled                = isBookmark;
 	},
 
@@ -368,6 +369,62 @@ var sbController = {
 			timeout: null,
 			titles: null,
 			context: "capture-again",
+		};
+		window.top.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
+	},
+
+	internalize: function(aRes)
+	{
+		if (!aRes)
+			aRes = this.isTreeContext ? sbTreeHandler.resource : sbListHandler.resource;
+		if (!aRes)
+			return;
+		var id = sbDataSource.getProperty(aRes, "id");
+		var refFile = sbCommonUtils.getContentDir(id); refFile.append("index.html");
+		var refDir = refFile.parent;
+
+		// pre-fill files in the same folder to prevent overwrite
+		var file2Url = {};
+		sbCommonUtils.forEachFile(refDir, function(file){
+			if (file.isDirectory() && file.equals(refDir)) return;
+			if (file.equals(refFile)) return;
+			file2Url[file.leafName] = true;
+			return 0;
+		}, this);
+
+		var options = {
+			"isPartial" : false,
+			"images" : true,
+			"media" : true,
+			"styles" : true,
+			"script" : true,
+			"textAsHtml" : false,
+			"forceUtf8" : false,
+			"rewriteStyles" : false,
+			"internalize" : refFile,
+		};
+		var preset = [
+			id,
+			"index",
+			options,
+			file2Url,
+			0,
+			false
+		];
+		var data = {
+			urls: [sbMainService.baseURL + "data/" + id + "/index.html"],
+			refUrl: null,
+			showDetail: false,
+			resName: null,
+			resIdx: 0,
+			referItem: null,
+			option: options,
+			file2Url: file2Url,
+			preset: preset,
+			charset: null,
+			timeout: null,
+			titles: [sbDataSource.getProperty(aRes, "title")],
+			context: "internalize",
 		};
 		window.top.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
 	},

@@ -42,6 +42,7 @@
 					<menuitem id="sbPopupCopy"      label="&sb.copy;..."    oncommand="sbController.isTreeContext ? sbTreeHandler.copy() : sbListHandler.doCommand('copy');" />
 					<menuseparator />
 					<menuitem id="sbPopupRenew" class="menuitem-iconic" label="&sb.renew;..." oncommand="sbController.renew(null, true);" onclick="if (event.button == 1) sbController.renew(null, false);" />
+					<menuitem id="sbPopupInternalize" class="menuitem-iconic" label="&sb.internalize;..." oncommand="sbController.internalize(null);" />
 					<menuseparator />
 					<menuitem id="sbPopupExport" label="&sb.export;" oncommand="sbController.forward(null,'E');" />
 				</menupopup>
