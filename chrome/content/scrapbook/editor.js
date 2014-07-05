@@ -538,12 +538,13 @@ var sbHtmlEditor = {
 
 	_shortcut_table : {
 		"F10" : "quit",
+		"Ctrl+S" : "save",
 
 		"Ctrl+K" : "removeFormat",
 		"Ctrl+B" : "bold",
 		"Ctrl+I" : "italic",
 		"Ctrl+U" : "underline",
-		"Ctrl+S" : "strikeThrough",
+		"Ctrl+T" : "strikeThrough",
 		"Ctrl+E" : "setColor",
 		"Alt+Up" : "increaseFontSize",
 		"Alt+Down" : "decreaseFontSize",
@@ -689,6 +690,11 @@ var sbHtmlEditor = {
 	quit : function(aDoc)
 	{
 		sbHtmlEditor.init(null, 0);
+	},
+
+	save : function(aDoc)
+	{
+		sbPageEditor.savePage();
 	},
 
 	removeFormat : function(aDoc)
