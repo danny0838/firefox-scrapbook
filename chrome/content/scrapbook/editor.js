@@ -1058,6 +1058,8 @@ var sbDOMEraser = {
 		"Escape" : "quit",
 		"Return" : "remove",
 		"Space" : "remove",
+		"Shift+Return" : "isolate",
+		"Shift+Space" : "isolate",
 		"Add" : "wider",
 		"Subtract" : "narrower",
 		"Shift+Equals" : "wider",
