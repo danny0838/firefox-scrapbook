@@ -543,7 +543,7 @@ var sbHtmlEditor = {
 		"Ctrl+B" : "bold",
 		"Ctrl+I" : "italic",
 		"Ctrl+U" : "underline",
-		"Ctrl+S" : "strikeThrough",
+		"Ctrl+T" : "strikeThrough",
 		"Ctrl+E" : "setColor",
 		"Alt+Up" : "increaseFontSize",
 		"Alt+Down" : "decreaseFontSize",
