@@ -93,7 +93,7 @@ function SB_initCapture()
 		// read sb-file2url.txt => gFile2URL for later usage
 		var file = contDir.clone();
 		file.append("sb-file2url.txt");
-		if ( !file.exists() ) { alert(sbCommonUtils.lang("scrapbook", "ERR_NO_FILE2URL")); window.close(); }
+		if ( !file.exists() ) { sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_NO_FILE2URL")); window.close(); }
 		var lines = sbCommonUtils.readFile(file).split("\n");
 		for ( var i = 0; i < lines.length; i++ )
 		{
@@ -103,7 +103,7 @@ function SB_initCapture()
 		// read sb-url2name.txt => gURL2Name and search for source URL of the current page
 		file = contDir.clone();
 		file.append("sb-url2name.txt");
-		if ( !file.exists() ) { alert(sbCommonUtils.lang("scrapbook", "ERR_NO_URL2NAME")); window.close(); }
+		if ( !file.exists() ) { sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_NO_URL2NAME")); window.close(); }
 		lines = sbCommonUtils.readFile(file).split("\n");
 		for ( i = 0; i < lines.length; i++ )
 		{
@@ -115,7 +115,7 @@ function SB_initCapture()
 			}
 		}
 		gPreset[3] = gFile2URL;
-		if ( !myURLs[0] ) { alert(sbCommonUtils.lang("scrapbook", "ERR_NO_SOURCE_URL", [gPreset[1] + ".html."])); window.close(); }
+		if ( !myURLs[0] ) { sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_NO_SOURCE_URL", [gPreset[1] + ".html."])); window.close(); }
 	}
 	if ( !gOption ) gOption = {};
 	if ( !("script" in gOption ) ) gOption["script"] = false;
