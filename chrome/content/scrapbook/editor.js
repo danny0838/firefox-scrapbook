@@ -65,21 +65,20 @@ var sbPageEditor = {
 		// settings for the page, only if it's first load
 		if ( !sbCommonUtils.documentData(window.content.document, "inited") ) {
 			sbCommonUtils.documentData(window.content.document, "inited", true);
-			// -- window
 			if ( aID ) {
 				try { window.content.removeEventListener("beforeunload", this.handleUnloadEvent, true); } catch(ex){}
 				window.content.addEventListener("beforeunload", this.handleUnloadEvent, true);
 			}
-			// -- document
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 				sbAnnotationService.initEvent(win, 1);
 				this.initEvent(win, 1);
-				this.documentBeforeEdit(win.document);
+				this.documentLoad(win.document, function(doc){
+					sbPageEditor.documentBeforeEdit(doc);
+				}, true);
 			}, this);
 			if (this.item && this.item.type == "notex" && sbCommonUtils.getPref("edit.autoEditNoteX", true)) {
-				(function() {
+				this.documentLoad(window.content.document, function(doc){
 					// check document type and make sure it's a file
-					var doc = window.content.document;
 					if (doc.contentType != "text/html") return;
 					var file = sbCommonUtils.convertURLToFile(doc.location.href);
 					if (!file || !file.isFile()) return;
@@ -87,9 +86,21 @@ var sbPageEditor = {
 					var _changed = sbCommonUtils.documentData(doc, "changed");
 					sbHtmlEditor.init(window.content.document, 1);
 					if (!_changed) sbCommonUtils.documentData(doc, "changed", false);
-				})();
+				}, true);
 			}
 		}
+	},
+
+	documentLoad : function(aDoc, aCallback, aThisArg)
+	{
+		if (aDoc.body) {
+			aCallback.call(aThisArg, aDoc);
+			return;
+		}
+		aDoc.defaultView.addEventListener("load", function(aEvent){
+			var doc = aEvent.originalTarget;
+			aCallback.call(aThisArg, doc);
+		}, true);
 	},
 
 	// aStateFlag
