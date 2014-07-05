@@ -7,7 +7,9 @@
 <!ENTITY sb.show.files "Dateien anzeigen">
 <!ENTITY sb.move "Verschieben">
 <!ENTITY sb.move.into "In Ordner verschieben">
+<!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Erneut archivieren">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.export "Exportieren">
 <!ENTITY sb.remove "Löschen">
 <!ENTITY sb.property "Eigenschaften">
@@ -22,6 +24,7 @@
 <!ENTITY sb.new.folder "Neuer Ordner">
 <!ENTITY sb.new.separator "Neue Trennlinie">
 <!ENTITY sb.new.note "Neue Notiz">
+<!ENTITY sb.new.notex "New Note Page">
 <!ENTITY sb.sort.folder "Ordner sortieren">
 <!ENTITY sb.search "Suchen">
 <!ENTITY sb.search.fulltext "Volltextsuche">

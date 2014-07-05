@@ -1,6 +1,7 @@
 <!ENTITY sb.new.folder "Új mappa">
 <!ENTITY sb.new.separator "Új elválasztó">
 <!ENTITY sb.new.note "Új jegyzet">
+<!ENTITY sb.new.notex "New Note Page">
 <!ENTITY sb.toggle.all "Összes mappa kinyitása/becsukása">
 <!ENTITY sb.tools "Eszközök">
 <!ENTITY sb.tools.options "Beállítások">

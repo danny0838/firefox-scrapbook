@@ -17,6 +17,10 @@
 <!ENTITY sb.prefs.restart "A mudança requer o reinício do Firefox.">
 <!ENTITY sb.prefs.tabs.tips "Abrir numa aba para as seguintes operações">
 <!ENTITY sb.prefs.tabs.note "Editar Nota">
+<!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
+<!ENTITY sbx.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format:">
 <!ENTITY sb.prefs.data "Localização para Armazenar Dados">
 <!ENTITY sb.prefs.data.default "Padrão (Pasta do Perfil)">
 <!ENTITY sb.prefs.data.custom "Saltar dados em">
@@ -33,4 +37,3 @@
 <!ENTITY sb.button.customize "Personalizar">
 <!ENTITY sb.button.browse "Caminho">
 <!ENTITY sb.button.show "Mostrar arquivos">
-<!ENTITY sbp.prefs.useDropDownList "usar lista de escolha drop-down ao invés de botões para realçador">

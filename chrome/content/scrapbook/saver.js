@@ -25,8 +25,8 @@ var sbContentSaver = {
 		this.name = "index";
 		this.favicon = null;
 		this.file2URL = { "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
-		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "styles" : true, "script" : false, "textAsHtml" : false, "forceUtf8" : true };
-		this.plusoption = { "method" : "SB", "timeout" : "0", "charset" : "UTF-8" }
+		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "styles" : true, "script" : false, "textAsHtml" : false, "forceUtf8" : true, "rewriteStyles" : true, "internalize" : false };
+		this.plusoption = { "timeout" : "0", "charset" : "UTF-8" }
 		this.linkURLs = [];
 		this.frames = [];
 		this.isMainFrame = true;
@@ -99,16 +99,28 @@ var sbContentSaver = {
 		}
 		if ( this.option["inDepth"] > 0 && this.linkURLs.length > 0 )
 		{
+			// inDepth capture for "capture-again-deep" is pre-disallowed by hiding the options
+			// and should never occur here
 			if ( !aPresetData || aContext == "capture-again" )
 			{
 				this.item.type = "marked";
 				this.option["isPartial"] = aIsPartial;
-				window.openDialog(
-					"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no",
-					this.linkURLs, this.refURLObj.spec,
-					false, null, 0,
-					this.item, this.option, this.file2URL, null, this.plusoption["method"], this.plusoption["charset"], this.plusoption["timeout"]
-				);
+				var data = {
+					urls: this.linkURLs,
+					refUrl: this.refURLObj.spec,
+					showDetail: false,
+					resName: null,
+					resIdx: 0,
+					referItem: this.item,
+					option: this.option,
+					file2Url: this.file2URL,
+					preset: null,
+					charset: this.plusoption["charset"],
+					timeout: this.plusoption["timeout"],
+					titles: null,
+					context: "indepth",
+				};
+				window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no", data);
 			}
 			else
 			{
@@ -159,19 +171,24 @@ var sbContentSaver = {
 
 	saveDocumentInternal : function(aDocument, aFileKey)
 	{
-		// non-HTML: process as file saving
-		if ( !aDocument.body )
-		{
-			var captureType = (aDocument.contentType.substring(0,5) == "image") ? "image" : "file";
-			if ( this.isMainFrame ) this.item.type = captureType;
-			var newLeafName = this.saveFileInternal(aDocument.location.href, aFileKey, captureType, aDocument.characterSet);
-			return newLeafName;
+		var captureAsFile = false;
+		var captureType = "";
+		// any file unparsable: process as file saving
+		if ( !aDocument.body ) {
+			captureAsFile = true;
+			captureType = "file";
 		}
-
-		// text file: if not download as HTML, save as a text file
-		if ( aDocument.contentType != "text/html" && !this.option["textAsHtml"] )
-		{
-			var captureType = "file";
+		// image: use special captureType
+		else if ( aDocument.contentType.indexOf("image/") === 0 ) {
+			captureAsFile = true;
+			captureType = "file";
+		}
+		// text (parsable non-HTML): if not capture as HTML, save as file
+		else if ( aDocument.contentType != "text/html" && !this.option["textAsHtml"] ) {
+			captureAsFile = true;
+			captureType = "file";
+		}
+		if ( captureAsFile ) {
 			if ( this.isMainFrame ) this.item.type = captureType;
 			var newLeafName = this.saveFileInternal(aDocument.location.href, aFileKey, captureType, aDocument.characterSet);
 			return newLeafName;
@@ -180,13 +197,17 @@ var sbContentSaver = {
 		// HTML document: save the current DOM
 		this.refURLObj = sbCommonUtils.convertURLToObject(aDocument.location.href);
 
-		var arr = this.getUniqueFileName(aFileKey + ".html", this.refURLObj.spec, aDocument);
-		var myHTMLFileName = arr[0];
-		var myHTMLFileDone = arr[1];
-		if (myHTMLFileDone) return myHTMLFileName;
+		if ( !this.option["internalize"] ) {
+			var arr = this.getUniqueFileName(aFileKey + ".html", this.refURLObj.spec, aDocument);
+			var myHTMLFileName = arr[0];
+			var myHTMLFileDone = arr[1];
+			if (myHTMLFileDone) return myHTMLFileName;
+		}
 
-		var arr = this.getUniqueFileName(aFileKey + ".css", this.refURLObj.spec, aDocument);
-		var myCSSFileName = arr[0];
+		if ( this.option["rewriteStyles"] ) {
+			var arr = this.getUniqueFileName(aFileKey + ".css", this.refURLObj.spec, aDocument);
+			var myCSSFileName = arr[0];
+		}
 
 		// construct the tree, especially for capture of partial selection
 		if ( this.selection )
@@ -205,7 +226,6 @@ var sbContentSaver = {
 			var idx = this.frames.length;
 			this.frames[idx] = frame;
 			frame.setAttribute("data-sb-frame-id", idx);
-			if (frame.src == this.refURLObj.spec) frame.setAttribute("data-sb-frame-id", idx);
 		}
 		var frames = htmlNode.getElementsByTagName("iframe");
 		for (var i=0, len=frames.length; i<len; i++) {
@@ -213,7 +233,6 @@ var sbContentSaver = {
 			var idx = this.frames.length;
 			this.frames[idx] = frame;
 			frame.setAttribute("data-sb-frame-id", idx);
-			if (frame.src == this.refURLObj.spec) frame.setAttribute("data-sb-frame-id", idx);
 		}
 		// now make the clone
 		var tmpNodeList = [];
@@ -256,7 +275,7 @@ var sbContentSaver = {
 
 		// process all inline and link CSS, will merge them into index.css later
 		var myCSS = "";
-		if ( this.option["styles"] )
+		if ( this.option["styles"] && this.option["rewriteStyles"] )
 		{
 			var myStyleSheets = aDocument.styleSheets;
 			for ( var i=0; i<myStyleSheets.length; i++ )
@@ -307,8 +326,13 @@ var sbContentSaver = {
 
 		// generate the HTML and CSS file and save
 		var myHTML = this.doctypeToString(aDocument.doctype) + sbCommonUtils.getOuterHTML(rootNode, true);
-		var myHTMLFile = this.contentDir.clone();
-		myHTMLFile.append(myHTMLFileName);
+		if ( this.option["internalize"] ) {
+			var myHTMLFile = this.option["internalize"];
+		}
+		else {
+			var myHTMLFile = this.contentDir.clone();
+			myHTMLFile.append(myHTMLFileName);
+		}
 		sbCommonUtils.writeFile(myHTMLFile, myHTML, this.item.chars);
 		if ( myCSS )
 		{
@@ -401,6 +425,7 @@ var sbContentSaver = {
 		{
 			case "img" : 
 				if ( aNode.hasAttribute("src") ) {
+					if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
 					if ( this.option["images"] ) {
 						var aFileName = this.download(aNode.src);
 						if (aFileName) aNode.setAttribute("src", aFileName);
@@ -412,6 +437,7 @@ var sbContentSaver = {
 			case "embed" : 
 			case "source":  // in <audio> and <vedio>
 				if ( aNode.hasAttribute("src") ) {
+					if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
 					if ( this.option["media"] ) {
 						var aFileName = this.download(aNode.src);
 						if (aFileName) aNode.setAttribute("src", aFileName);
@@ -422,6 +448,7 @@ var sbContentSaver = {
 				break;
 			case "object" : 
 				if ( aNode.hasAttribute("data") ) {
+					if ( this.option["internalize"] && aNode.getAttribute("data").indexOf("://") == -1 ) break;
 					if ( this.option["media"] ) {
 						var aFileName = this.download(aNode.data);
 						if (aFileName) aNode.setAttribute("data", aFileName);
@@ -432,6 +459,7 @@ var sbContentSaver = {
 				break;
 			case "track" :  // in <audio> and <vedio>
 				if ( aNode.hasAttribute("src") ) {
+					if ( this.option["internalize"] ) break;
 					aNode.setAttribute("src", aNode.src);
 				}
 				break;
@@ -442,6 +470,7 @@ var sbContentSaver = {
 			case "td" : 
 				// handle "background" attribute (HTML5 deprecated)
 				if ( aNode.hasAttribute("background") ) {
+					if ( this.option["internalize"] && aNode.getAttribute("background").indexOf("://") == -1 ) break;
 					var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("background"));
 					if ( this.option["images"] ) {
 						var aFileName = this.download(url);
@@ -455,6 +484,7 @@ var sbContentSaver = {
 				switch (aNode.type.toLowerCase()) {
 					case "image": 
 						if ( aNode.hasAttribute("src") ) {
+							if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
 							if ( this.option["images"] ) {
 								var aFileName = this.download(aNode.src);
 								if (aFileName) aNode.setAttribute("src", aFileName);
@@ -469,13 +499,24 @@ var sbContentSaver = {
 				// gets "" if rel attribute not defined
 				switch ( aNode.rel.toLowerCase() ) {
 					case "stylesheet" :
-						if ( aNode.href.indexOf("chrome://") != 0 || !this.option["styles"] ) {
+						if ( !this.option["styles"] ) {
+							return this.removeNodeFromParent(aNode);
+						}
+						else if ( !this.option["rewriteStyles"] ) {
+							if ( this.option["internalize"] ) break;
+							if ( aNode.hasAttribute("href") ) {
+								var aFileName = this.download(aNode.href);
+								if (aFileName) aNode.setAttribute("href", aFileName);
+							}
+						}
+						else if ( aNode.href.indexOf("chrome://") != 0 ) {
 							return this.removeNodeFromParent(aNode);
 						}
 						break;
 					case "shortcut icon" :
 					case "icon" :
 						if ( aNode.hasAttribute("href") ) {
+							if ( this.option["internalize"] ) break;
 							var aFileName = this.download(aNode.href);
 							if (aFileName) {
 								aNode.setAttribute("href", aFileName);
@@ -485,6 +526,7 @@ var sbContentSaver = {
 						break;
 					default :
 						if ( aNode.hasAttribute("href") ) {
+							if ( this.option["internalize"] ) break;
 							aNode.setAttribute("href", aNode.href);
 						}
 						break;
@@ -492,17 +534,24 @@ var sbContentSaver = {
 				break;
 			case "base" : 
 				if ( aNode.hasAttribute("href") ) {
+					if ( this.option["internalize"] ) break;
 					aNode.setAttribute("href", "");
 				}
 				break;
 			case "style" : 
-				// CSS in the page will be handled in another way, so remove them here
-				return this.removeNodeFromParent(aNode);
+				if ( !this.option["styles"] ) {
+					return this.removeNodeFromParent(aNode);
+				}
+				else if ( this.option["rewriteStyles"] ) {
+					// CSS in the page will be handled in another way, so remove them here
+					return this.removeNodeFromParent(aNode);
+				}
 				break;
 			case "script" : 
 			case "noscript" : 
 				if ( this.option["script"] ) {
 					if ( aNode.hasAttribute("src") ) {
+						if ( this.option["internalize"] ) break;
 						var aFileName = this.download(aNode.src);
 						if (aFileName) aNode.setAttribute("src", aFileName);
 					}
@@ -512,6 +561,7 @@ var sbContentSaver = {
 				break;
 			case "a" : 
 			case "area" : 
+				if ( this.option["internalize"] ) break;
 				if ( !aNode.href ) {
 					break;
 				}
@@ -560,12 +610,14 @@ var sbContentSaver = {
 				break;
 			case "form" : 
 				if ( aNode.hasAttribute("action") ) {
+					if ( this.option["internalize"] ) break;
 					aNode.setAttribute("action", aNode.action);
 				}
 				break;
 			case "meta" : 
 				if ( !aNode.hasAttribute("content") ) break;
 				if ( aNode.hasAttribute("property") ) {
+					if ( this.option["internalize"] ) break;
 					switch ( aNode.getAttribute("property").toLowerCase() ) {
 						case "og:image" :
 						case "og:image:url" :
@@ -615,6 +667,7 @@ var sbContentSaver = {
 				break;
 			case "frame"  : 
 			case "iframe" : 
+				if ( this.option["internalize"] ) break;
 				this.isMainFrame = false;
 				if ( this.selection ) this.selection = null;
 				var tmpRefURL = this.refURLObj;
@@ -628,6 +681,7 @@ var sbContentSaver = {
 			// Deprecated, like <pre> but inner contents are escaped to be plain text
 			// Replace with <pre> since it breaks ScrapBook highlights
 			case "xmp" : 
+				if ( this.option["internalize"] ) break;
 				var pre = aNode.ownerDocument.createElement("pre");
 				pre.appendChild(aNode.firstChild);
 				aNode.parentNode.replaceChild(pre, aNode);
@@ -723,6 +777,7 @@ var sbContentSaver = {
 		aCSSText = aCSSText.replace(regex, function() {
 			var dataURL = arguments[1];
 			if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
+			if ( sbContentSaver.option["internalize"] && dataURL .indexOf("://") == -1 ) return ' url("' + dataURL + '")';
 			dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);
 			if (sbContentSaver.option["images"] || !isImage) {
 				var dataFile = sbContentSaver.download(dataURL);
@@ -761,8 +816,14 @@ var sbContentSaver = {
 
 		if ( aURL.schemeIs("http") || aURL.schemeIs("https") || aURL.schemeIs("ftp") )
 		{
-			var targetFile = this.contentDir.clone();
-			targetFile.append(newFileName);
+			if ( this.option["internalize"] ) {
+				var targetFile = this.option["internalize"].parent;
+				targetFile.append(newFileName);
+			}
+			else {
+				var targetFile = this.contentDir.clone();
+				targetFile.append(newFileName);
+			}
 //Der Try-Catch-Block wird auch bei einem alert innerhalb des Blocks weitergefuehrt!
 			try {
 				var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
@@ -785,7 +846,12 @@ var sbContentSaver = {
 		}
 		else if ( aURL.schemeIs("file") )
 		{
-			var targetDir = this.contentDir.clone();
+			if ( this.option["internalize"] ) {
+				var targetDir = this.option["internalize"].parent;
+			}
+			else {
+				var targetDir = this.contentDir.clone();
+			}
 			try {
 				var orgFile = sbCommonUtils.convertURLToFile(aURLSpec);
 				if ( !orgFile.isFile() ) return;
@@ -797,11 +863,6 @@ var sbContentSaver = {
 				return "";
 			}
 		}
-	},
-
-	leftZeroPad3 : function(num)
-	{
-		if ( num < 10 ) { return "00" + num; } else if ( num < 100 ) { return "0" + num; } else { return num; }
 	},
 
 	/**
@@ -818,10 +879,20 @@ var sbContentSaver = {
 		newFileName = fileLR[0] + "." + fileLR[1];
 		var seq = 0;
 		while ( this.file2URL[newFileName] != undefined ) {
-			if (this.file2URL[newFileName] == aURLSpec && this.file2Doc[newFileName] == aDocumentSpec) {
-				return [newFileName, true];
+			if (this.file2URL[newFileName] == aURLSpec) {
+				// this.file2Doc is mainly to check for dynamic iframes without src attr
+				// they have exactly same url with the main page
+				if (this.file2Doc[newFileName] == aDocumentSpec) {
+					return [newFileName, true];
+				}
+				// if this.file2Doc[newFileName] has no document set,
+				// it should mean a preset url for the page and is safe to use
+				else if (!this.file2Doc[newFileName]) {
+					this.file2Doc[newFileName] = aDocumentSpec;
+					return [newFileName, false];
+				}
 			}
-			newFileName = fileLR[0] + "_" + this.leftZeroPad3(++seq) + "." + fileLR[1];
+			newFileName = fileLR[0] + "_" + sbCommonUtils.pad(++seq, 3) + "." + fileLR[1];
 		}
 		this.file2URL[newFileName] = aURLSpec;
 		this.file2Doc[newFileName] = aDocumentSpec;

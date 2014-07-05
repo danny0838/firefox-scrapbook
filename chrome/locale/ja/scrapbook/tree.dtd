@@ -7,7 +7,9 @@
 <!ENTITY sb.show.files "ファイルを表示">
 <!ENTITY sb.move "移動">
 <!ENTITY sb.move.into "フォルダへ移動">
+<!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "再取り込み">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.export "エクスポート">
 <!ENTITY sb.remove "削除">
 <!ENTITY sb.property "プロパティ">
@@ -22,6 +24,7 @@
 <!ENTITY sb.new.folder "新しいフォルダ">
 <!ENTITY sb.new.separator "新しい区切り">
 <!ENTITY sb.new.note "新しいノート">
+<!ENTITY sb.new.notex "新しいノートページ">
 <!ENTITY sb.sort.folder "フォルダ内をソート">
 <!ENTITY sb.search "検索">
 <!ENTITY sb.search.fulltext "全文検索">

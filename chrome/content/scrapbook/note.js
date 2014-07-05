@@ -78,9 +78,7 @@ var sbNoteService2 = {
 			title   = sbNoteService.TEXTBOX.value;
 			content = "";
 		}
-		title = title.replace(/</g, "&lt;");
-		title = title.replace(/>/g, "&gt;");
-		title = title.replace(/\"/g, "&quot;");
+		title = sbCommonUtils.escapeHTML(title, true, false, true);
 		if ( document.getElementById("sbNoteToolbarL").getAttribute("checked") ) content = content.replace(/([^>])$/mg, "$1<br>");
 		source = source.replace(/<%NOTE_TITLE%>/g,   title);
 		source = source.replace(/<%NOTE_CONTENT%>/g, content);
@@ -116,7 +114,7 @@ var sbNoteTemplate = {
 	{
 		this.file = sbCommonUtils.getScrapBookDir().clone();
 		this.file.append("note_template.html");
-		if ( !this.file.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/template.html", this.file);
+		if ( !this.file.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/note_template.html", this.file);
 	},
 
 	show : function(willShow)

@@ -133,18 +133,74 @@
 	</prefpane>
 
 	<prefpane id="editPane" label="&sb.prefs.edit;" flex="1">
+		<preferences>
+			<preference id="extensions.scrapbook.edit.extendSourceEdit" name="extensions.scrapbook.edit.extendSourceEdit" type="bool" />
+			<preference id="extensions.scrapbook.edit.autoEditNoteX" name="extensions.scrapbook.edit.autoEditNoteX" type="bool" />
+			<preference id="extensions.scrapbook.edit.insertDateFormat" name="extensions.scrapbook.edit.insertDateFormat" type="string" />
+			<preference id="extensions.scrapbook.edit.wrapperFormat" name="extensions.scrapbook.edit.wrapperFormat" type="string" />
+		</preferences>
 		<groupbox>
 			<caption label="&sb.highlighter;" />
-			<hbox id="hlTemplate" align="center">
-				<label />
-				<label value="Firefox, rediscover the web" />
+			<hbox align="center">
+				<label value="1:"/>
+				<label id="hlPrefLabel1" value="Firefox, rediscover the web" />
 				<spacer flex="1" />
-				<button label="&sb.button.customize;..." hlumber="0"
-				        oncommand="sbPrefWindow.hlCustomize(this.getAttribute('hlnumber'));" />
+				<button label="&sb.button.customize;..." oncommand="sbPrefWindow.hlCustomize(1);" />
+			</hbox>
+			<hbox align="center">
+				<label value="2:"/>
+				<label id="hlPrefLabel2" value="Firefox, rediscover the web" />
+				<spacer flex="1" />
+				<button label="&sb.button.customize;..." oncommand="sbPrefWindow.hlCustomize(2);" />
+			</hbox>
+			<hbox align="center">
+				<label value="3:"/>
+				<label id="hlPrefLabel3" value="Firefox, rediscover the web" />
+				<spacer flex="1" />
+				<button label="&sb.button.customize;..." oncommand="sbPrefWindow.hlCustomize(3);" />
+			</hbox>
+			<hbox align="center">
+				<label value="4:"/>
+				<label id="hlPrefLabel4" value="Firefox, rediscover the web" />
+				<spacer flex="1" />
+				<button label="&sb.button.customize;..." oncommand="sbPrefWindow.hlCustomize(4);" />
+			</hbox>
+			<hbox align="center">
+				<label value="5:"/>
+				<label id="hlPrefLabel5" value="Firefox, rediscover the web" />
+				<spacer flex="1" />
+				<button label="&sb.button.customize;..." oncommand="sbPrefWindow.hlCustomize(5);" />
+			</hbox>
+			<hbox align="center">
+				<label value="6:"/>
+				<label id="hlPrefLabel6" value="Firefox, rediscover the web" />
+				<spacer flex="1" />
+				<button label="&sb.button.customize;..." oncommand="sbPrefWindow.hlCustomize(6);" />
+			</hbox>
+			<hbox align="center">
+				<label value="7:"/>
+				<label id="hlPrefLabel7" value="Firefox, rediscover the web" />
+				<spacer flex="1" />
+				<button label="&sb.button.customize;..." oncommand="sbPrefWindow.hlCustomize(7);" />
+			</hbox>
+			<hbox align="center">
+				<label value="8:"/>
+				<label id="hlPrefLabel8" value="Firefox, rediscover the web" />
+				<spacer flex="1" />
+				<button label="&sb.button.customize;..." oncommand="sbPrefWindow.hlCustomize(8);" />
 			</hbox>
 		</groupbox>
 		<spacer height="10" />
-		<checkbox preference="extensions.scrapbook.useDropDownList" label="&sbp.prefs.useDropDownList;" />
+		<checkbox preference="extensions.scrapbook.edit.extendSourceEdit" label="&sbx.prefs.edit.extendSourceEdit;" />
+		<checkbox preference="extensions.scrapbook.edit.autoEditNoteX" label="&sbx.prefs.edit.autoEditNoteX;" />
+		<hbox>
+			<label value="&sbx.prefs.edit.insertDateFormat;" />
+			<textbox preference="extensions.scrapbook.edit.insertDateFormat" placeholder="eg. %Y-%m-%d %H:%M:%S" flex="1" />
+		</hbox>
+		<hbox>
+			<label value="&sbx.prefs.edit.wrapperFormat;" />
+			<textbox preference="extensions.scrapbook.edit.wrapperFormat" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
+		</hbox>
 	</prefpane>
 
 	<prefpane id="organizePane" label="&sb.prefs.organize;" flex="1">
@@ -197,7 +253,6 @@
 			<preference id="extensions.scrapbook.notifyOnComplete"   name="extensions.scrapbook.notifyOnComplete"   type="bool" />
 			<preference id="extensions.scrapbook.fileViewer.default" name="extensions.scrapbook.fileViewer.default" type="bool" />
 			<preference id="extensions.scrapbook.fileViewer.path"    name="extensions.scrapbook.fileViewer.path"    type="file" />
-			<preference id="extensions.scrapbook.useDropDownList"  name="extensions.scrapbook.useDropDownList"    type="bool" />
 		</preferences>
 		<checkbox preference="extensions.scrapbook.showDetailOnDrop" label="&sb.prefs.showDetailOnDrop;" />
 		<checkbox preference="extensions.scrapbook.notifyOnComplete" label="&sb.prefs.notifyOnComplete;" />

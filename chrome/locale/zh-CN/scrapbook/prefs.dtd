@@ -17,6 +17,10 @@
 <!ENTITY sb.prefs.restart "更改需要重启 Firefox。">
 <!ENTITY sb.prefs.tabs.tips "随后的操作在标签页中打开">
 <!ENTITY sb.prefs.tabs.note "编辑笔记">
+<!ENTITY sbx.prefs.edit.extendSourceEdit "编辑 HTML 源代码时自动扩大选择范围">
+<!ENTITY sbx.prefs.edit.autoEditNoteX "便签页面自动进入编辑模式">
+<!ENTITY sbx.prefs.edit.insertDateFormat "插入日期格式 (strftime):">
+<!ENTITY sbx.prefs.edit.wrapperFormat "HTML 包裹器格式:">
 <!ENTITY sb.prefs.data "定位到存储数据的位置">
 <!ENTITY sb.prefs.data.default "默认">
 <!ENTITY sb.prefs.data.custom "保存数据至">
@@ -33,4 +37,3 @@
 <!ENTITY sb.button.customize "定制">
 <!ENTITY sb.button.browse "浏览">
 <!ENTITY sb.button.show "显示文件">
-<!ENTITY sbp.prefs.useDropDownList "为高亮显示使用下拉选择列表替代按钮">

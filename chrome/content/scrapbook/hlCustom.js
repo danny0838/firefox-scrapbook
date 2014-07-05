@@ -1,3 +1,4 @@
+var gArg;
 var gPrefName;
 var gPreviewUI;
 var gColorIndex;
@@ -10,11 +11,11 @@ var hlCustomizer = {
 
 	init: function() 
 	{
-		if (!window.arguments || !window.arguments[0]) {
+		if (!window.arguments || !(gArg = window.arguments[0])) {
 			window.close();
 			return;
 		}
-		gColorIndex = window.arguments[0];
+		gColorIndex = gArg.index;
 		gPreviewUI  = getElement("hlCustomPreview");
 		gPrefName   = "highlighter.style." + gColorIndex;
 		var prefVal = sbCommonUtils.getPref(gPrefName, sbHighlighter.PRESET_STYLES[gColorIndex]);
@@ -25,6 +26,7 @@ var hlCustomizer = {
 	done: function() 
 	{
 		sbCommonUtils.setPref(gPrefName, gPreviewUI.style.cssText);
+		gArg.result = 1;
 	},
 
 	syncFromPreview: function()

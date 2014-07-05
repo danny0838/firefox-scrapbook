@@ -17,6 +17,10 @@
 <!ENTITY sb.prefs.restart "التغيير يتطلب إعادة تشغيل فيرفوكس.">
 <!ENTITY sb.prefs.tabs.tips "فتح في لسان للعمليات التالية">
 <!ENTITY sb.prefs.tabs.note "تحرير ملاحظة">
+<!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
+<!ENTITY sbx.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format:">
 <!ENTITY sb.prefs.data "مكان تخزين البيانات">
 <!ENTITY sb.prefs.data.default "الافتراضي (مجلد profile)">
 <!ENTITY sb.prefs.data.custom "حفظ البيانات إلى">
@@ -33,4 +37,3 @@
 <!ENTITY sb.button.customize "تخصيص">
 <!ENTITY sb.button.browse "استعراض">
 <!ENTITY sb.button.show "عرض الملفات">
-<!ENTITY sbp.prefs.useDropDownList "استخدم خيار القائمة المنسدلة للإضاءة بدلا من الأزرار">

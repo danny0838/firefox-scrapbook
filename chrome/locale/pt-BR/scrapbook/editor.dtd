@@ -7,22 +7,31 @@
 <!ENTITY sb.edit.sticky "Anotação">
 <!ENTITY sb.edit.sticky.create "Criar &sb.edit.sticky;">
 <!ENTITY sb.edit.inline.add "Adicionar Comentário à Seleção">
+<!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "Anexar um Arquivo à Seleção">
 <!ENTITY sb.edit.attach.link "Anexar um Link à Seleção">
+<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.html "HTML Editor">
+<!ENTITY sb.edit.html.color "Edit Color">
+<!ENTITY sb.edit.html.color.forText "Set text color:">
+<!ENTITY sb.edit.html.color.forBg "Set background color:">
+<!ENTITY sb.edit.html.source "Edit HTML Source">
+<!ENTITY sb.edit.html.link "Insert Link">
+<!ENTITY sb.edit.html.link.url "Target URL:">
+<!ENTITY sb.edit.html.link.id "Item ID:">
+<!ENTITY sb.edit.html.link.format "Select insert format:">
+<!ENTITY sb.edit.html.file "Insert File">
+<!ENTITY sb.edit.html.file.pick "Select file:">
+<!ENTITY sb.edit.html.file.format "Select insert format:">
 <!ENTITY sb.edit.cutter "Remover a Seleção">
 <!ENTITY sb.edit.remove.iframe "Remover todas as tags IFRAME">
 <!ENTITY sb.edit.remove.script "Remover todas as tags SCRIPT">
 <!ENTITY sb.highlighter "Realce">
 <!ENTITY sb.highlighter.remove "Remover Realces na Seleção">
 <!ENTITY sb.highlighter.remove.all "Remover Todos os Realces na Página">
-<!ENTITY sbp.highlighter.stil1 "Estilo 1">
-<!ENTITY sbp.highlighter.stil2 "Estilo 2">
-<!ENTITY sbp.highlighter.stil3 "Estilo 3">
-<!ENTITY sbp.highlighter.stil4 "Estilo 4">
-<!ENTITY sbp.highlighter.stil5 "Estilo 5">
-<!ENTITY sbp.highlighter.stil6 "Estilo 6">
 <!ENTITY sb.source "Abrir URL Fonte">
 <!ENTITY sb.renew "Capturar Novamente">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.locate "Sincronizar Com a Árvore do Painel">
 <!ENTITY sb.indicators "Mostrar Indicadores de Link">
 <!ENTITY sb.info.home "Página Inicial">

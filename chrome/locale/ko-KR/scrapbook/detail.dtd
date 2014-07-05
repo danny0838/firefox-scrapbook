@@ -9,6 +9,7 @@
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.styles "형식">
 <!ENTITY sb.detail.option.scripts "Scripts">
+<!ENTITY sb.detail.option.rewriteStyles "Reorganize Styles">
 <!ENTITY sb.detail.option.textAsHtml "Capture Text Files as HTML">
 <!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
 <!ENTITY sb.detail.linked.file "링크된 파일 다운로드">

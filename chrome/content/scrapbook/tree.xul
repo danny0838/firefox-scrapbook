@@ -39,8 +39,10 @@
 				<menupopup id="sbPopupToolsMenu">
 					<menuitem id="sbPopupShowFiles" label="&sb.show.files;" oncommand="sbController.forward(null,'L');" />
 					<menuitem id="sbPopupSend"      label="&sb.move;..."    oncommand="sbController.isTreeContext ? sbTreeHandler.send() : sbListHandler.doCommand('send');" />
+					<menuitem id="sbPopupCopy"      label="&sb.copy;..."    oncommand="sbController.isTreeContext ? sbTreeHandler.copy() : sbListHandler.doCommand('copy');" />
 					<menuseparator />
 					<menuitem id="sbPopupRenew" class="menuitem-iconic" label="&sb.renew;..." oncommand="sbController.renew(null, true);" onclick="if (event.button == 1) sbController.renew(null, false);" />
+					<menuitem id="sbPopupInternalize" class="menuitem-iconic" label="&sb.internalize;..." oncommand="sbController.internalize(null);" />
 					<menuseparator />
 					<menuitem id="sbPopupExport" label="&sb.export;" oncommand="sbController.forward(null,'E');" />
 				</menupopup>
@@ -51,6 +53,7 @@
 			<menuitem id="sbPopupNewFolder"    class="menuitem-iconic sb-create" label="&sb.new.folder;..." oncommand="sbMainService.createFolder();" />
 			<menuitem id="sbPopupNewSeparator" class="menuitem-iconic sb-create" label="&sb.new.separator;" oncommand="sbMainService.createSeparator();" />
 			<menuitem id="sbPopupNewNote"      class="menuitem-iconic sb-create" label="&sb.new.note;"      oncommand="sbMainService.createNote();" />
+			<menuitem id="sbPopupNewNotex"     class="menuitem-iconic sb-create" label="&sb.new.notex;"     oncommand="sbMainService.createNoteX();" />
 			<menuseparator />
 			<menuitem id="sbPopupRemove"    class="menuitem-iconic" label="&sb.remove;"   oncommand="sbController.isTreeContext ? sbTreeHandler.remove() : sbListHandler.doCommand('remove');" />
 			<menuseparator />

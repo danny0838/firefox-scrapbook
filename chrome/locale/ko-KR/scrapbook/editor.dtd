@@ -7,22 +7,31 @@
 <!ENTITY sb.edit.sticky "주석">
 <!ENTITY sb.edit.sticky.create "&sb.edit.sticky; 만들기">
 <!ENTITY sb.edit.inline.add "선택 부분에 인라인 주석 추가">
+<!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "선택 부분에 파일 첨부">
 <!ENTITY sb.edit.attach.link "선택 부분에 링크 추가">
+<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.html "HTML Editor">
+<!ENTITY sb.edit.html.color "Edit Color">
+<!ENTITY sb.edit.html.color.forText "Set text color:">
+<!ENTITY sb.edit.html.color.forBg "Set background color:">
+<!ENTITY sb.edit.html.source "Edit HTML Source">
+<!ENTITY sb.edit.html.link "Insert Link">
+<!ENTITY sb.edit.html.link.url "Target URL:">
+<!ENTITY sb.edit.html.link.id "Item ID:">
+<!ENTITY sb.edit.html.link.format "Select insert format:">
+<!ENTITY sb.edit.html.file "Insert File">
+<!ENTITY sb.edit.html.file.pick "Select file:">
+<!ENTITY sb.edit.html.file.format "Select insert format:">
 <!ENTITY sb.edit.cutter "선택 부분 삭제">
 <!ENTITY sb.edit.remove.iframe "모든 IFRAME 태그 삭제">
 <!ENTITY sb.edit.remove.script "모든 SCRIPT 태그 삭제">
 <!ENTITY sb.highlighter "강조자">
 <!ENTITY sb.highlighter.remove "선택 부분 강조 해제">
 <!ENTITY sb.highlighter.remove.all "모든 강조 해제">
-<!ENTITY sbp.highlighter.stil1 "스타일 1">
-<!ENTITY sbp.highlighter.stil2 "스타일 2">
-<!ENTITY sbp.highlighter.stil3 "스타일 3">
-<!ENTITY sbp.highlighter.stil4 "스타일 4">
-<!ENTITY sbp.highlighter.stil5 "스타일 5">
-<!ENTITY sbp.highlighter.stil6 "스타일 6">
 <!ENTITY sb.source "소스 URL 열기">
 <!ENTITY sb.renew "다시 캡처">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.locate "탐색 창 트리와 동기화">
 <!ENTITY sb.indicators "링크 지시자 보이기">
 <!ENTITY sb.info.home "홈">

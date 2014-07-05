@@ -41,6 +41,7 @@
 					<menuitem class="menuitem-iconic sb-create" label="&sb.new.folder;..." oncommand="sbMainService.createFolder();" />
 					<menuitem class="menuitem-iconic sb-create" label="&sb.new.separator;" oncommand="sbMainService.createSeparator();" />
 					<menuitem class="menuitem-iconic sb-create" label="&sb.new.note;"      oncommand="sbMainService.createNote();" />
+					<menuitem class="menuitem-iconic sb-create" label="&sb.new.notex;"     oncommand="sbMainService.createNoteX();" />
 				</menupopup>
 			</toolbarbutton>
 			<toolbarbutton id="sbToolbarToggle"   tooltiptext="&sb.toggle.all;" oncommand="sbTreeHandler.toggleAllFolders();" />

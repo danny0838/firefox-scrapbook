@@ -190,6 +190,50 @@ var sbMainService = {
 			sbTreeHandler.TREE.treeBoxObject.scrollByLines(sbTreeHandler.TREE.view.rowCount);
 	},
 
+	createNoteX: function()
+	{
+		sbSearchService.exit();
+		sbListHandler.quit();
+		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
+		var newItem = sbCommonUtils.newItem(newID);
+		newItem.title = sbCommonUtils.lang("scrapbook", "DEFAULT_NOTEX");
+		newItem.type = "notex";
+		newItem.chars = "UTF-8";
+		// check the template file, create one if not exist
+		var template = sbCommonUtils.getScrapBookDir().clone();
+		template.append("notex_template.html");
+		if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/notex_template.html", template);
+		// create content
+		var dir = sbCommonUtils.getContentDir(newID);
+		var html = dir.clone();
+		html.append("index.html");
+		var content = sbCommonUtils.readFile(template);
+		content = sbCommonUtils.convertToUnicode(content, "UTF-8");
+		sbCommonUtils.writeFile(html, content, newItem.chars);
+		sbCommonUtils.writeIndexDat(newItem);
+		// add resource
+		var tarResName, tarRelIdx, isRootPos;
+		try {
+			var curIdx = sbTreeHandler.TREE.currentIndex;
+			var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
+			var curPar = sbTreeHandler.getParentResource(curIdx);
+			var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
+			tarResName = curPar.Value;
+			tarRelIdx  = curRelIdx;
+			isRootPos  = false;
+		}
+		catch(ex) {
+			tarResName = sbTreeHandler.TREE.ref;
+			tarRelIdx  = 0;
+			isRootPos  = true;
+		}
+		var newRes = sbDataSource.addItem(newItem, tarResName, tarRelIdx);
+		sbTreeHandler.TREE.builder.rebuild();
+		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(newRes);
+		sbTreeHandler.TREE.view.selection.select(idx);
+		sbController.open(newRes, false);
+	},
+
 	openPrefWindow : function()
 	{
 		var instantApply = sbCommonUtils.getPref("browser.preferences.instantApply", false, true);
@@ -225,11 +269,15 @@ var sbController = {
 			return;
 		}
 		var isNote = false;
+		var isNotex = false;
+		var isNotexl = false;
 		var isFolder = false;
 		var isBookmark = false;
 		var isSeparator = false;
 		switch (sbDataSource.getProperty(res, "type")) {
 			case "note"     : isNote      = true; break;
+			case "notex"    : isNotex     = true; break;
+			case "notexl"   : isNotexl    = true; break;
 			case "folder"   : isFolder    = true; break;
 			case "bookmark" : isBookmark  = true; break;
 			case "separator": isSeparator = true; break;
@@ -237,20 +285,22 @@ var sbController = {
 		var getElement = function(aID) {
 			return document.getElementById(aID);
 		};
-		getElement("sbPopupOpen").hidden         = isFolder  || isSeparator;
-		getElement("sbPopupOpenTab").hidden      = !isNote   || isSeparator;
-		getElement("sbPopupOpenNewTab").hidden   = isFolder  || isNote || isSeparator;
-		getElement("sbPopupOpenSource").hidden   = isFolder  || isNote || isSeparator;
-		getElement("sbPopupListView").hidden     = !isFolder || isSeparator;
-		getElement("sbPopupCombinedView").hidden = !isFolder || isSeparator;
-		getElement("sbPopupOpenAllItems").hidden = !isFolder || isSeparator;
-		getElement("sbPopupOpenAllItems").nextSibling.hidden = !isFolder || isSeparator;
-		getElement("sbPopupSort").hidden   = !isFolder || isSeparator;
-		getElement("sbPopupManage").hidden = !isFolder || isSeparator;
-		getElement("sbPopupNewFolder").previousSibling.hidden = isSeparator;
-		getElement("sbPopupTools").hidden   = isFolder || isSeparator;
-		getElement("sbPopupRenew").setAttribute("disabled", isNote.toString());
-		getElement("sbPopupShowFiles").setAttribute("disabled", isBookmark.toString());
+		getElement("sbPopupOpen").hidden                       = isFolder  || isSeparator;
+		getElement("sbPopupOpenTab").hidden                    = !isNote   || isSeparator;
+		getElement("sbPopupOpenNewTab").hidden                 = isFolder  || isNote || isSeparator;
+		getElement("sbPopupOpenSource").hidden                 = isFolder  || isNote || isSeparator;
+		getElement("sbPopupListView").hidden                   = !isFolder || isSeparator;
+		getElement("sbPopupCombinedView").hidden               = !isFolder || isSeparator;
+		getElement("sbPopupOpenAllItems").hidden               = !isFolder || isSeparator;
+		getElement("sbPopupOpenAllItems").nextSibling.hidden   = !isFolder || isSeparator;
+		getElement("sbPopupSort").hidden                       = !isFolder || isSeparator;
+		getElement("sbPopupManage").hidden                     = !isFolder || isSeparator;
+		getElement("sbPopupNewFolder").previousSibling.hidden  = isSeparator;
+		getElement("sbPopupTools").hidden                      = isFolder || isSeparator;
+		getElement("sbPopupRenew").disabled                    = isNote || isNotex || isNotexl;
+		getElement("sbPopupInternalize").hidden                = !isNotex && !isNotexl;
+		getElement("sbPopupInternalize").disabled              = !isNotex;
+		getElement("sbPopupShowFiles").disabled                = isBookmark;
 	},
 
 	open: function(aRes, aInTab)
@@ -308,12 +358,77 @@ var sbController = {
 			0,
 			sbDataSource.getProperty(aRes, "type") == "bookmark"
 		];
-		window.top.openDialog(
-			"chrome://scrapbook/content/capture.xul", "",
-			"chrome,centerscreen,all,resizable,dialog=no",
-			[sbDataSource.getProperty(aRes, "source")], null,
-			aShowDetail, null, 0, null, null, null, preset, "SB"
-		);
+		var data = {
+			urls: [sbDataSource.getProperty(aRes, "source")],
+			refUrl: null,
+			showDetail: aShowDetail,
+			resName: null,
+			resIdx: 0,
+			referItem: null,
+			option: null,
+			file2Url: null,
+			preset: preset,
+			charset: null,
+			timeout: null,
+			titles: null,
+			context: "capture-again",
+		};
+		window.top.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
+	},
+
+	internalize: function(aRes)
+	{
+		if (!aRes)
+			aRes = this.isTreeContext ? sbTreeHandler.resource : sbListHandler.resource;
+		if (!aRes)
+			return;
+		var id = sbDataSource.getProperty(aRes, "id");
+		var refFile = sbCommonUtils.getContentDir(id); refFile.append("index.html");
+		var refDir = refFile.parent;
+
+		// pre-fill files in the same folder to prevent overwrite
+		var file2Url = {};
+		sbCommonUtils.forEachFile(refDir, function(file){
+			if (file.isDirectory() && file.equals(refDir)) return;
+			file2Url[file.leafName] = true;
+			return 0;
+		}, this);
+
+		var options = {
+			"isPartial" : false,
+			"images" : true,
+			"media" : true,
+			"styles" : true,
+			"script" : true,
+			"textAsHtml" : false,
+			"forceUtf8" : false,
+			"rewriteStyles" : false,
+			"internalize" : refFile,
+		};
+		var preset = [
+			id,
+			"index",
+			options,
+			file2Url,
+			0,
+			false
+		];
+		var data = {
+			urls: [sbMainService.baseURL + "data/" + id + "/index.html"],
+			refUrl: null,
+			showDetail: false,
+			resName: null,
+			resIdx: 0,
+			referItem: null,
+			option: options,
+			file2Url: file2Url,
+			preset: preset,
+			charset: null,
+			timeout: null,
+			titles: [sbDataSource.getProperty(aRes, "title")],
+			context: "internalize",
+		};
+		window.top.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
 	},
 
 	forward: function(aRes, aCommand, aParam)
@@ -379,6 +494,23 @@ var sbController = {
 		var tarRes = result.resource;
 		for (var i = 0; i < aResList.length; i++)  {
 			sbDataSource.moveItem(aResList[i], aParResList[i], tarRes, -1);
+		}
+		sbCommonUtils.rebuildGlobal();
+	},
+
+	copyInternal: function(aResList, aParResList)
+	{
+		var result = {};
+		var preset = aParResList[0];
+		window.openDialog(
+			"chrome://scrapbook/content/folderPicker.xul", "",
+			"modal,chrome,centerscreen,resizable=yes", result, preset
+		);
+		if (!result.resource)
+			return;
+		var tarRes = result.resource;
+		for (var i = 0; i < aResList.length; i++)  {
+			sbDataSource.copyItem(aResList[i], tarRes, -1);
 		}
 		sbCommonUtils.rebuildGlobal();
 	},
@@ -687,12 +819,21 @@ var sbTreeDNDHandler = {
 			);
 		}
 		else if (url.indexOf("http://") == 0 || url.indexOf("https://") == 0) {
-			top.window.openDialog(
-				"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
-				[url], win.location.href,
-				sbMainService.prefs.showDetailOnDrop || this.modShift,
-				res[0], res[1], null, null, null, null, "SB"
-			);
+			var data = {
+				urls: [url],
+				refUrl: win.location.href,
+				showDetail: sbMainService.prefs.showDetailOnDrop || this.modShift,
+				resName: res[0],
+				resIdx: res[1],
+				referItem: null,
+				option: null,
+				file2Url: null,
+				preset: null,
+				charset: null,
+				timeout: null,
+				titles: null,
+			};
+			top.window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
 		}
 		else if (url.indexOf("file://") == 0) {
 			top.window.sbContentSaver.captureFile(

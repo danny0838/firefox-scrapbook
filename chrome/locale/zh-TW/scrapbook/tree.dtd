@@ -7,7 +7,9 @@
 <!ENTITY sb.show.files "顯示相關檔案">
 <!ENTITY sb.move "移動">
 <!ENTITY sb.move.into "移到其他資料夾">
+<!ENTITY sb.copy "複製">
 <!ENTITY sb.renew "重新擷取">
+<!ENTITY sb.internalize "將內嵌的外部媒體存入資料目錄">
 <!ENTITY sb.export "匯出">
 <!ENTITY sb.remove "刪除">
 <!ENTITY sb.property "文件屬性">
@@ -22,6 +24,7 @@
 <!ENTITY sb.new.folder "開新資料夾">
 <!ENTITY sb.new.separator "新增分隔線">
 <!ENTITY sb.new.note "新增筆記">
+<!ENTITY sb.new.notex "新增筆記頁面">
 <!ENTITY sb.sort.folder "資料夾文件排序">
 <!ENTITY sb.search "搜尋">
 <!ENTITY sb.search.fulltext "全文搜尋">

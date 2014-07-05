@@ -7,22 +7,31 @@
 <!ENTITY sb.edit.sticky "付箋アノテーション">
 <!ENTITY sb.edit.sticky.create "&sb.edit.sticky;を作成">
 <!ENTITY sb.edit.inline.add "選択範囲にインライン注釈を入力">
+<!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "選択範囲にファイルを添付">
 <!ENTITY sb.edit.attach.link "選択範囲にリンクを追加">
+<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.html "HTML Editor">
+<!ENTITY sb.edit.html.color "Edit Color">
+<!ENTITY sb.edit.html.color.forText "Set text color:">
+<!ENTITY sb.edit.html.color.forBg "Set background color:">
+<!ENTITY sb.edit.html.source "Edit HTML Source">
+<!ENTITY sb.edit.html.link "Insert Link">
+<!ENTITY sb.edit.html.link.url "Target URL:">
+<!ENTITY sb.edit.html.link.id "Item ID:">
+<!ENTITY sb.edit.html.link.format "Select insert format:">
+<!ENTITY sb.edit.html.file "Insert File">
+<!ENTITY sb.edit.html.file.pick "Select file:">
+<!ENTITY sb.edit.html.file.format "Select insert format:">
 <!ENTITY sb.edit.cutter "選択範囲をカット">
 <!ENTITY sb.edit.remove.iframe "すべてのIFRAMEタグを削除">
 <!ENTITY sb.edit.remove.script "すべてのSCRIPTタグを削除">
 <!ENTITY sb.highlighter "マーカー">
 <!ENTITY sb.highlighter.remove "選択範囲のマーカーをクリア">
 <!ENTITY sb.highlighter.remove.all "すべてのマーカーをクリア">
-<!ENTITY sbp.highlighter.stil1 "マーカー 1">
-<!ENTITY sbp.highlighter.stil2 "マーカー 2">
-<!ENTITY sbp.highlighter.stil3 "マーカー 3">
-<!ENTITY sbp.highlighter.stil4 "マーカー 4">
-<!ENTITY sbp.highlighter.stil5 "マーカー 5">
-<!ENTITY sbp.highlighter.stil6 "マーカー 6">
 <!ENTITY sb.source "ソースURLを開く">
 <!ENTITY sb.renew "再取り込み">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.locate "サイドバーのツリー上で位置を特定">
 <!ENTITY sb.indicators "リンクインジケータを表示">
 <!ENTITY sb.info.home "ホーム">
