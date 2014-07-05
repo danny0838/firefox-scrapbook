@@ -31,6 +31,7 @@
 <!ENTITY sb.highlighter.remove.all "Poista kaikki korostukset">
 <!ENTITY sb.source "Avaa lähde-URL">
 <!ENTITY sb.renew "Tallenna uudestaan">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.locate "Paikanna sivupalkissa">
 <!ENTITY sb.indicators "Näytä linkkitunnukset">
 <!ENTITY sb.info.home "Etusivu">

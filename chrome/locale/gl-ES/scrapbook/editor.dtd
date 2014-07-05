@@ -31,6 +31,7 @@
 <!ENTITY sb.highlighter.remove.all "Limpar todos os resaltes">
 <!ENTITY sb.source "Abrir a URL fonte">
 <!ENTITY sb.renew "Capturar outra vez">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.locate "Localizar na colección do panel lateral">
 <!ENTITY sb.indicators "Amosar indicadores de ligazóns">
 <!ENTITY sb.info.home "Páxina de Scrapbook">

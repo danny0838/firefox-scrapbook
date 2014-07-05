@@ -9,6 +9,7 @@
 <!ENTITY sb.move.into "Siirrä kansioon">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Kaappaa uudestaan">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.export "Vie">
 <!ENTITY sb.remove "Poista">
 <!ENTITY sb.property "Ominaisuudet">

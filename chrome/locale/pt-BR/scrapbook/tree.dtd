@@ -9,6 +9,7 @@
 <!ENTITY sb.move.into "Mover para a Pasta">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Capturar Novamente">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.export "Exportar">
 <!ENTITY sb.remove "Apagar">
 <!ENTITY sb.property "Propriedades">

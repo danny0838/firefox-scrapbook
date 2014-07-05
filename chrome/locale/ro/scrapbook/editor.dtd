@@ -31,6 +31,7 @@
 <!ENTITY sb.highlighter.remove.all "Elimină toate evidențierile">
 <!ENTITY sb.source "Deschide adresa sursă">
 <!ENTITY sb.renew "Capturează din nou">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.locate "Localizează în arborele lateral">
 <!ENTITY sb.indicators "Afișează indicatorii de legături">
 <!ENTITY sb.info.home "Origine">

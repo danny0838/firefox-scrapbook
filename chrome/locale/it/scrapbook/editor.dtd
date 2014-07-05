@@ -31,6 +31,7 @@
 <!ENTITY sb.highlighter.remove.all "Annulla tutte le evidenziature">
 <!ENTITY sb.source "Apri l&apos;indirizzo web sorgente">
 <!ENTITY sb.renew "Cattura ancora">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.locate "Sincronizza con il diagramma delle cartelle nel pannello">
 <!ENTITY sb.indicators "Mostra indicatori dei link">
 <!ENTITY sb.info.home "Pagina iniziale">

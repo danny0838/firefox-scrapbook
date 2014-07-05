@@ -31,6 +31,7 @@
 <!ENTITY sb.highlighter.remove.all "Clear All Highlights">
 <!ENTITY sb.source "Open Source URL">
 <!ENTITY sb.renew "Capture Again">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.locate "Locate in Sidebar Tree">
 <!ENTITY sb.indicators "Show Link Indicators">
 <!ENTITY sb.info.home "Home">

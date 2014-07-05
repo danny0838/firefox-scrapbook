@@ -31,6 +31,7 @@
 <!ENTITY sb.highlighter.remove.all "Borrar todas las marcas">
 <!ENTITY sb.source "Abrir URL de origen">
 <!ENTITY sb.renew "Capturar Otra vez">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.locate "Localizar en el árbol de la barra lateral">
 <!ENTITY sb.indicators "Mostrar Indicadores de enlaces">
 <!ENTITY sb.info.home "Raíz">

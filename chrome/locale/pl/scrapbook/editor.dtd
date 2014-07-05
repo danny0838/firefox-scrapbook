@@ -31,6 +31,7 @@
 <!ENTITY sb.highlighter.remove.all "Usuń wszystkie podświetlone komentarze">
 <!ENTITY sb.source "Pokaż stronę źródłową">
 <!ENTITY sb.renew "Przechwyć ponownie">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.locate "Zlokalizuj w drzewie katalogów w panelu bocznym">
 <!ENTITY sb.indicators "Pokaż wskaźniki odnośników">
 <!ENTITY sb.info.home "Strona domowa">

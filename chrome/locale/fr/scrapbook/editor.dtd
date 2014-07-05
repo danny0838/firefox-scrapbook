@@ -31,6 +31,7 @@
 <!ENTITY sb.highlighter.remove.all "Supprimer tous les surlignements">
 <!ENTITY sb.source "Ouvrir l&apos;URL source">
 <!ENTITY sb.renew "Capturer à nouveau">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.locate "Synchroniser avec l&apos;arborescence de la barre latérale">
 <!ENTITY sb.indicators "Montrer les indicateurs de lien">
 <!ENTITY sb.info.home "Origine">

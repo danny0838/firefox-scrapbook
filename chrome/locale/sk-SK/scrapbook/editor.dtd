@@ -31,6 +31,7 @@
 <!ENTITY sb.highlighter.remove.all "Odstrániť všetky zvýraznenia">
 <!ENTITY sb.source "Otvoriť zdroj URL">
 <!ENTITY sb.renew "Znovu zachytenie">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.locate "Zobraziť v bočnom paneli">
 <!ENTITY sb.indicators "Ukázať odkaz">
 <!ENTITY sb.info.home "Domov">

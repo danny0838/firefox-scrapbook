@@ -9,6 +9,7 @@
 <!ENTITY sb.move.into "移到其他資料夾">
 <!ENTITY sb.copy "複製">
 <!ENTITY sb.renew "重新擷取">
+<!ENTITY sb.internalize "將內嵌的外部媒體存入資料目錄">
 <!ENTITY sb.export "匯出">
 <!ENTITY sb.remove "刪除">
 <!ENTITY sb.property "文件屬性">

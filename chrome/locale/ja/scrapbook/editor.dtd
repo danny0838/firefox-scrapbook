@@ -31,6 +31,7 @@
 <!ENTITY sb.highlighter.remove.all "すべてのマーカーをクリア">
 <!ENTITY sb.source "ソースURLを開く">
 <!ENTITY sb.renew "再取り込み">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.locate "サイドバーのツリー上で位置を特定">
 <!ENTITY sb.indicators "リンクインジケータを表示">
 <!ENTITY sb.info.home "ホーム">

@@ -9,6 +9,7 @@
 <!ENTITY sb.move.into "Klasöre Taşı">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Yeniden Kaydet">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.export "Dışa Aktar">
 <!ENTITY sb.remove "Sil">
 <!ENTITY sb.property "Özellikler">

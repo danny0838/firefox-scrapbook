@@ -9,6 +9,7 @@
 <!ENTITY sb.move.into "Áthelyezés mappába">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Rögzítés ismét">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.export "Exportálás">
 <!ENTITY sb.remove "Törlés">
 <!ENTITY sb.property "Tulajdonságok">

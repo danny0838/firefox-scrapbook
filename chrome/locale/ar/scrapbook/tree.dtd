@@ -9,6 +9,7 @@
 <!ENTITY sb.move.into "نقل إلى مجلد">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "إلتقاط مجدداً">
+<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.export "تصدير">
 <!ENTITY sb.remove "إزالة">
 <!ENTITY sb.property "خصائص">

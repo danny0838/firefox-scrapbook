@@ -25,7 +25,7 @@ var sbContentSaver = {
 		this.name = "index";
 		this.favicon = null;
 		this.file2URL = { "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
-		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "styles" : true, "script" : false, "textAsHtml" : false, "forceUtf8" : true, "rewriteStyles" : true };
+		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "styles" : true, "script" : false, "textAsHtml" : false, "forceUtf8" : true, "rewriteStyles" : true, "internalize" : false };
 		this.plusoption = { "timeout" : "0", "charset" : "UTF-8" }
 		this.linkURLs = [];
 		this.frames = [];
@@ -197,10 +197,12 @@ var sbContentSaver = {
 		// HTML document: save the current DOM
 		this.refURLObj = sbCommonUtils.convertURLToObject(aDocument.location.href);
 
-		var arr = this.getUniqueFileName(aFileKey + ".html", this.refURLObj.spec, aDocument);
-		var myHTMLFileName = arr[0];
-		var myHTMLFileDone = arr[1];
-		if (myHTMLFileDone) return myHTMLFileName;
+		if ( !this.option["internalize"] ) {
+			var arr = this.getUniqueFileName(aFileKey + ".html", this.refURLObj.spec, aDocument);
+			var myHTMLFileName = arr[0];
+			var myHTMLFileDone = arr[1];
+			if (myHTMLFileDone) return myHTMLFileName;
+		}
 
 		if ( this.option["rewriteStyles"] ) {
 			var arr = this.getUniqueFileName(aFileKey + ".css", this.refURLObj.spec, aDocument);
@@ -324,8 +326,13 @@ var sbContentSaver = {
 
 		// generate the HTML and CSS file and save
 		var myHTML = this.doctypeToString(aDocument.doctype) + sbCommonUtils.getOuterHTML(rootNode, true);
-		var myHTMLFile = this.contentDir.clone();
-		myHTMLFile.append(myHTMLFileName);
+		if ( this.option["internalize"] ) {
+			var myHTMLFile = this.option["internalize"];
+		}
+		else {
+			var myHTMLFile = this.contentDir.clone();
+			myHTMLFile.append(myHTMLFileName);
+		}
 		sbCommonUtils.writeFile(myHTMLFile, myHTML, this.item.chars);
 		if ( myCSS )
 		{
@@ -418,6 +425,7 @@ var sbContentSaver = {
 		{
 			case "img" : 
 				if ( aNode.hasAttribute("src") ) {
+					if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
 					if ( this.option["images"] ) {
 						var aFileName = this.download(aNode.src);
 						if (aFileName) aNode.setAttribute("src", aFileName);
@@ -429,6 +437,7 @@ var sbContentSaver = {
 			case "embed" : 
 			case "source":  // in <audio> and <vedio>
 				if ( aNode.hasAttribute("src") ) {
+					if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
 					if ( this.option["media"] ) {
 						var aFileName = this.download(aNode.src);
 						if (aFileName) aNode.setAttribute("src", aFileName);
@@ -439,6 +448,7 @@ var sbContentSaver = {
 				break;
 			case "object" : 
 				if ( aNode.hasAttribute("data") ) {
+					if ( this.option["internalize"] && aNode.getAttribute("data").indexOf("://") == -1 ) break;
 					if ( this.option["media"] ) {
 						var aFileName = this.download(aNode.data);
 						if (aFileName) aNode.setAttribute("data", aFileName);
@@ -449,6 +459,7 @@ var sbContentSaver = {
 				break;
 			case "track" :  // in <audio> and <vedio>
 				if ( aNode.hasAttribute("src") ) {
+					if ( this.option["internalize"] ) break;
 					aNode.setAttribute("src", aNode.src);
 				}
 				break;
@@ -459,6 +470,7 @@ var sbContentSaver = {
 			case "td" : 
 				// handle "background" attribute (HTML5 deprecated)
 				if ( aNode.hasAttribute("background") ) {
+					if ( this.option["internalize"] && aNode.getAttribute("background").indexOf("://") == -1 ) break;
 					var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("background"));
 					if ( this.option["images"] ) {
 						var aFileName = this.download(url);
@@ -472,6 +484,7 @@ var sbContentSaver = {
 				switch (aNode.type.toLowerCase()) {
 					case "image": 
 						if ( aNode.hasAttribute("src") ) {
+							if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
 							if ( this.option["images"] ) {
 								var aFileName = this.download(aNode.src);
 								if (aFileName) aNode.setAttribute("src", aFileName);
@@ -490,6 +503,7 @@ var sbContentSaver = {
 							return this.removeNodeFromParent(aNode);
 						}
 						else if ( !this.option["rewriteStyles"] ) {
+							if ( this.option["internalize"] ) break;
 							if ( aNode.hasAttribute("href") ) {
 								var aFileName = this.download(aNode.href);
 								if (aFileName) aNode.setAttribute("href", aFileName);
@@ -502,6 +516,7 @@ var sbContentSaver = {
 					case "shortcut icon" :
 					case "icon" :
 						if ( aNode.hasAttribute("href") ) {
+							if ( this.option["internalize"] ) break;
 							var aFileName = this.download(aNode.href);
 							if (aFileName) {
 								aNode.setAttribute("href", aFileName);
@@ -511,6 +526,7 @@ var sbContentSaver = {
 						break;
 					default :
 						if ( aNode.hasAttribute("href") ) {
+							if ( this.option["internalize"] ) break;
 							aNode.setAttribute("href", aNode.href);
 						}
 						break;
@@ -518,6 +534,7 @@ var sbContentSaver = {
 				break;
 			case "base" : 
 				if ( aNode.hasAttribute("href") ) {
+					if ( this.option["internalize"] ) break;
 					aNode.setAttribute("href", "");
 				}
 				break;
@@ -534,6 +551,7 @@ var sbContentSaver = {
 			case "noscript" : 
 				if ( this.option["script"] ) {
 					if ( aNode.hasAttribute("src") ) {
+						if ( this.option["internalize"] ) break;
 						var aFileName = this.download(aNode.src);
 						if (aFileName) aNode.setAttribute("src", aFileName);
 					}
@@ -543,6 +561,7 @@ var sbContentSaver = {
 				break;
 			case "a" : 
 			case "area" : 
+				if ( this.option["internalize"] ) break;
 				if ( !aNode.href ) {
 					break;
 				}
@@ -591,12 +610,14 @@ var sbContentSaver = {
 				break;
 			case "form" : 
 				if ( aNode.hasAttribute("action") ) {
+					if ( this.option["internalize"] ) break;
 					aNode.setAttribute("action", aNode.action);
 				}
 				break;
 			case "meta" : 
 				if ( !aNode.hasAttribute("content") ) break;
 				if ( aNode.hasAttribute("property") ) {
+					if ( this.option["internalize"] ) break;
 					switch ( aNode.getAttribute("property").toLowerCase() ) {
 						case "og:image" :
 						case "og:image:url" :
@@ -646,6 +667,7 @@ var sbContentSaver = {
 				break;
 			case "frame"  : 
 			case "iframe" : 
+				if ( this.option["internalize"] ) break;
 				this.isMainFrame = false;
 				if ( this.selection ) this.selection = null;
 				var tmpRefURL = this.refURLObj;
@@ -659,6 +681,7 @@ var sbContentSaver = {
 			// Deprecated, like <pre> but inner contents are escaped to be plain text
 			// Replace with <pre> since it breaks ScrapBook highlights
 			case "xmp" : 
+				if ( this.option["internalize"] ) break;
 				var pre = aNode.ownerDocument.createElement("pre");
 				pre.appendChild(aNode.firstChild);
 				aNode.parentNode.replaceChild(pre, aNode);
@@ -754,6 +777,7 @@ var sbContentSaver = {
 		aCSSText = aCSSText.replace(regex, function() {
 			var dataURL = arguments[1];
 			if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
+			if ( sbContentSaver.option["internalize"] && dataURL .indexOf("://") == -1 ) return ' url("' + dataURL + '")';
 			dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);
 			if (sbContentSaver.option["images"] || !isImage) {
 				var dataFile = sbContentSaver.download(dataURL);
@@ -792,8 +816,14 @@ var sbContentSaver = {
 
 		if ( aURL.schemeIs("http") || aURL.schemeIs("https") || aURL.schemeIs("ftp") )
 		{
-			var targetFile = this.contentDir.clone();
-			targetFile.append(newFileName);
+			if ( this.option["internalize"] ) {
+				var targetFile = this.option["internalize"].parent;
+				targetFile.append(newFileName);
+			}
+			else {
+				var targetFile = this.contentDir.clone();
+				targetFile.append(newFileName);
+			}
 //Der Try-Catch-Block wird auch bei einem alert innerhalb des Blocks weitergefuehrt!
 			try {
 				var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
@@ -816,7 +846,12 @@ var sbContentSaver = {
 		}
 		else if ( aURL.schemeIs("file") )
 		{
-			var targetDir = this.contentDir.clone();
+			if ( this.option["internalize"] ) {
+				var targetDir = this.option["internalize"].parent;
+			}
+			else {
+				var targetDir = this.contentDir.clone();
+			}
 			try {
 				var orgFile = sbCommonUtils.convertURLToFile(aURLSpec);
 				if ( !orgFile.isFile() ) return;
