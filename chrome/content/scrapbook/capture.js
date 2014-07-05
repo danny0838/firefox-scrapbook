@@ -11,7 +11,6 @@ var gFile2URL   = {};
 var gURL2Name   = {};
 var gPreset     = [];
 var gContext    = "";
-var gMethod     = "SB";
 var gCharset	= "";
 var gTitles		= [];
 var gTitle;
@@ -25,62 +24,99 @@ function SB_trace(aMessage)
 	document.getElementById("sbCaptureTextbox").value = aMessage;
 }
 
-
+/**
+ * Receive data from other script opening capture.xul
+ *
+ * data:
+ *   urls:        array    strings, each is a full URL to capture 
+ *   refUrl:      string   reference URL, mainly to resolve relative links
+ *   showDetail:  bool     show detail or not
+ *   resName:     string   the resource name to add
+ *   resIdx:      string   the index to insert resource
+ *   referItem:   string   (deep-capture, re-capture) the refer item,
+                           determine where to save file and to set resource property
+ *   option:      object   capture options, such as:
+ *                           images:  media:  styles:  script:
+ *                           rewriteStyles:  forceUtf8:  textAsHtml: 
+ *                           dlimg:  dlsnd:  dlmov:  dlarc:  custom:
+ *                           inDepth:  isPartial:
+ *   file2Url:    array    the file2URL data in saver.js from last capture,
+ *                         will then pass to saver.js for next capture
+ *   preset:      array    (re-capture) the preset data,
+ *                         will pass to saver.js for each capture,
+ *                         generally this will overwrite data
+ *                           [0]   string   id of resource
+ *                           [1]   string   file name to save
+ *                           [2]   string   overwrites data.option if set
+ *                           [3]   array    overwrites data.file2Url if set
+ *                           [4]   int      limits depth of capture
+ *                           [5]   bool     true if is a bookmark, will reset resource type to "" (page)
+ *   charset:     string   force using charset to read html, autodetect if not set                  
+ *   timeout:     string   (multi-capture, deep-capture) countdown seconds before next capture
+ *   titles:      array    (multi-capture) strings, overwrite the resource title,
+ *                         each entry corresponds with data.urls
+ *   context      string   the capture context, determines the behavior
+ *                           "bookmark": (seems unused, obsolete?)
+ *                           "capture": capture the browser window (not used here)
+ *                           "link": load a page to capture
+ *                           "indepth": capture a page and pages linked by
+ *                           "capture-again": capture a page and overwrite the current resource,
+ *                                            prompts a new capture.js in indepth if deep capture
+ *                           "capture-again-deep": capture a page other than index.html
+ *                                                 do not allow deep capture
+ */
 function SB_initCapture()
 {
-	var myURLs  = window.arguments[0];
-	gRefURL     = window.arguments[1];
-	gShowDetail = window.arguments[2];
-	gResName    = window.arguments[3];
-	gResIdx     = window.arguments[4];
-	gReferItem  = window.arguments[5];
-	gOption     = window.arguments[6];
-	gFile2URL   = window.arguments[7];
-	gPreset     = window.arguments[8];
-	gMethod     = window.arguments[9];
-	gCharset	= window.arguments[10];
-	gTimeout	= window.arguments[11];
-	gTitles		= window.arguments[12];
+	var data = window.arguments[0];
+	var myURLs  = data.urls;
+	gRefURL     = data.refUrl;
+	gShowDetail = data.showDetail;
+	gResName    = data.resName;
+	gResIdx     = data.resIdx;
+	gReferItem  = data.referItem;
+	gOption     = data.option;
+	gFile2URL   = data.file2Url;
+	gPreset     = data.preset;
+	gCharset	= data.charset;
+	gTimeout	= data.timeout;
+	gTitles		= data.titles;
+	gContext    = data.context;
 
 	if ( !gTimeout ) gTimeout = 0;
-	if ( gReferItem )
+	if ( gContext == "indepth" )
 	{
-		gContext = "indepth";
 		gURL2Name[gReferItem.source] = "index";
 	}
-	else if ( gPreset )
+	else if ( gContext == "capture-again-deep" )
 	{
-		gContext = gPreset[1] == "index" ? "capture-again" : "capture-again-deep";
-		if ( gContext == "capture-again-deep" )
+		var contDir = sbCommonUtils.getContentDir(gPreset[0]);
+		// read sb-file2url.txt => gFile2URL for later usage
+		var file = contDir.clone();
+		file.append("sb-file2url.txt");
+		if ( !file.exists() ) { sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_NO_FILE2URL")); window.close(); }
+		var lines = sbCommonUtils.readFile(file).split("\n");
+		for ( var i = 0; i < lines.length; i++ )
 		{
-			var contDir = sbCommonUtils.getContentDir(gPreset[0]);
-			var file = contDir.clone();
-			file.append("sb-file2url.txt");
-			if ( !file.exists() ) { alert(sbCommonUtils.lang("scrapbook", "ERR_NO_FILE2URL")); window.close(); }
-			var lines = sbCommonUtils.readFile(file).split("\n");
-			for ( var i = 0; i < lines.length; i++ )
-			{
-				var arr = lines[i].split("\t");
-				if ( arr.length == 2 ) gFile2URL[arr[0]] = arr[1];
-			}
-			file = sbCommonUtils.getContentDir(gPreset[0]).clone();
-			file.append("sb-url2name.txt");
-			if ( !file.exists() ) { alert(sbCommonUtils.lang("scrapbook", "ERR_NO_URL2NAME")); window.close(); }
-			lines = sbCommonUtils.readFile(file).split("\n");
-			for ( i = 0; i < lines.length; i++ )
-			{
-				var arr = lines[i].split("\t");
-				if ( arr.length == 2 )
-				{
-					gURL2Name[arr[0]] = arr[1];
-					if ( arr[1] == gPreset[1] ) myURLs = [arr[0]];
-				}
-			}
-			gPreset[3] = gFile2URL;
-			if ( !myURLs[0] ) { alert(sbCommonUtils.lang("scrapbook", "ERR_NO_SOURCE_URL", [gPreset[1] + ".html."])); window.close(); }
+			var arr = lines[i].split("\t");
+			if ( arr.length == 2 ) gFile2URL[arr[0]] = arr[1];
 		}
+		// read sb-url2name.txt => gURL2Name and search for source URL of the current page
+		file = contDir.clone();
+		file.append("sb-url2name.txt");
+		if ( !file.exists() ) { sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_NO_URL2NAME")); window.close(); }
+		lines = sbCommonUtils.readFile(file).split("\n");
+		for ( i = 0; i < lines.length; i++ )
+		{
+			var arr = lines[i].split("\t");
+			if ( arr.length == 2 )
+			{
+				gURL2Name[arr[0]] = arr[1];
+				if ( arr[1] == gPreset[1] ) myURLs = [arr[0]];
+			}
+		}
+		gPreset[3] = gFile2URL;
+		if ( !myURLs[0] ) { sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_NO_SOURCE_URL", [gPreset[1] + ".html."])); window.close(); }
 	}
-	else gContext = "link";
 	if ( !gOption ) gOption = {};
 	if ( !("script" in gOption ) ) gOption["script"] = false;
 	if ( !("images" in gOption ) ) gOption["images"] = true;
@@ -203,7 +239,6 @@ var sbCaptureTask = {
 		var url = aOverriddenURL || gURLs[this.index];
 		if ( gTitles ) gTitle = gTitles[this.index];
 		SB_trace(sbCommonUtils.lang("capture", "CONNECT", [url]));
-		if ( gMethod != "SB" ) alert(sbCommonUtils.lang("scrapbook", "ERR_FILE_NOT_EXIST", [gMethod]));
 		if ( url.indexOf("file://") == 0 ) {
 			sbInvisibleBrowser.load(url);
 		} else {

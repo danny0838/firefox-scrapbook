@@ -26,7 +26,7 @@ var sbContentSaver = {
 		this.favicon = null;
 		this.file2URL = { "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
 		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "styles" : true, "script" : false, "textAsHtml" : false, "forceUtf8" : true, "rewriteStyles" : true };
-		this.plusoption = { "method" : "SB", "timeout" : "0", "charset" : "UTF-8" }
+		this.plusoption = { "timeout" : "0", "charset" : "UTF-8" }
 		this.linkURLs = [];
 		this.frames = [];
 		this.isMainFrame = true;
@@ -105,12 +105,22 @@ var sbContentSaver = {
 			{
 				this.item.type = "marked";
 				this.option["isPartial"] = aIsPartial;
-				window.openDialog(
-					"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no",
-					this.linkURLs, this.refURLObj.spec,
-					false, null, 0,
-					this.item, this.option, this.file2URL, null, this.plusoption["method"], this.plusoption["charset"], this.plusoption["timeout"]
-				);
+				var data = {
+					urls: this.linkURLs,
+					refUrl: this.refURLObj.spec,
+					showDetail: false,
+					resName: null,
+					resIdx: 0,
+					referItem: this.item,
+					option: this.option,
+					file2Url: this.file2URL,
+					preset: null,
+					charset: this.plusoption["charset"],
+					timeout: this.plusoption["timeout"],
+					titles: null,
+					context: "indepth",
+				};
+				window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no", data);
 			}
 			else
 			{

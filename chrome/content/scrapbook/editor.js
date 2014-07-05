@@ -1837,10 +1837,22 @@ var sbInfoViewer = {
 		if ( !id ) return;
 		var fileName = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(window.content.location.href))[0];
 		var source = fileName == "index" ? sbDataSource.getProperty(sbBrowserOverlay.resource, "source") : "";
-		top.window.openDialog(
-			"chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
-			[source], null, showDetail, null, 0, null, null, {}, [id, fileName, null, null, 0], "SB"
-		);
+		var data = {
+			urls: [source],
+			refUrl: null,
+			showDetail: showDetail,
+			resName: null,
+			resIdx: 0,
+			referItem: null,
+			option: null,
+			file2Url: {},
+			preset: [id, fileName, null, null, 0],
+			charset: null,
+			timeout: null,
+			titles: null,
+			context: (fileName == "index") ? "capture-again" : "capture-again-deep",
+		};
+		top.window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
 	},
 
 	openSourceURL : function(tabbed)
