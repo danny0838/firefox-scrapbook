@@ -283,20 +283,20 @@ var sbController = {
 		var getElement = function(aID) {
 			return document.getElementById(aID);
 		};
-		getElement("sbPopupOpen").hidden         = isFolder  || isSeparator;
-		getElement("sbPopupOpenTab").hidden      = !isNote   || isSeparator;
-		getElement("sbPopupOpenNewTab").hidden   = isFolder  || isNote || isSeparator;
-		getElement("sbPopupOpenSource").hidden   = isFolder  || isNote || isSeparator;
-		getElement("sbPopupListView").hidden     = !isFolder || isSeparator;
-		getElement("sbPopupCombinedView").hidden = !isFolder || isSeparator;
-		getElement("sbPopupOpenAllItems").hidden = !isFolder || isSeparator;
-		getElement("sbPopupOpenAllItems").nextSibling.hidden = !isFolder || isSeparator;
-		getElement("sbPopupSort").hidden   = !isFolder || isSeparator;
-		getElement("sbPopupManage").hidden = !isFolder || isSeparator;
-		getElement("sbPopupNewFolder").previousSibling.hidden = isSeparator;
-		getElement("sbPopupTools").hidden   = isFolder || isSeparator;
-		getElement("sbPopupRenew").setAttribute("disabled", (isNote || isNotex).toString());
-		getElement("sbPopupShowFiles").setAttribute("disabled", isBookmark.toString());
+		getElement("sbPopupOpen").hidden                       = isFolder  || isSeparator;
+		getElement("sbPopupOpenTab").hidden                    = !isNote   || isSeparator;
+		getElement("sbPopupOpenNewTab").hidden                 = isFolder  || isNote || isSeparator;
+		getElement("sbPopupOpenSource").hidden                 = isFolder  || isNote || isSeparator;
+		getElement("sbPopupListView").hidden                   = !isFolder || isSeparator;
+		getElement("sbPopupCombinedView").hidden               = !isFolder || isSeparator;
+		getElement("sbPopupOpenAllItems").hidden               = !isFolder || isSeparator;
+		getElement("sbPopupOpenAllItems").nextSibling.hidden   = !isFolder || isSeparator;
+		getElement("sbPopupSort").hidden                       = !isFolder || isSeparator;
+		getElement("sbPopupManage").hidden                     = !isFolder || isSeparator;
+		getElement("sbPopupNewFolder").previousSibling.hidden  = isSeparator;
+		getElement("sbPopupTools").hidden                      = isFolder || isSeparator;
+		getElement("sbPopupRenew").disabled                    = isNote || isNotex;
+		getElement("sbPopupShowFiles").disabled                = isBookmark;
 	},
 
 	open: function(aRes, aInTab)
