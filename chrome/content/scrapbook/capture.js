@@ -68,6 +68,31 @@ function SB_trace(aMessage)
 function SB_initCapture()
 {
 	var data = window.arguments[0];
+
+	// deprecated, left for downward compatibility with old style call by addons
+	if (window.arguments.length > 1) {
+		var data = {
+			urls: window.arguments[0],
+			refUrl: window.arguments[1],
+			showDetail: window.arguments[2],
+			resName: window.arguments[3],
+			resIdx: window.arguments[4],
+			referItem: window.arguments[5],
+			option: window.arguments[6],
+			file2Url: window.arguments[7],
+			preset: window.arguments[8],
+			// method: window.arguments[9],  // we no more use this
+			charset: window.arguments[10],
+			timeout: window.arguments[11],
+			titles: window.arguments[12],
+		};
+		data.context = (function(){
+			if ( data.referItem ) return "indepth";
+			else if ( data.preset ) return data.preset[1] == "index" ? "capture-again" : "capture-again-deep";
+			return "link";
+		})();
+	}
+
 	var myURLs  = data.urls;
 	gRefURL     = data.refUrl;
 	gShowDetail = data.showDetail;
