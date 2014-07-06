@@ -16,6 +16,5 @@ function accept() {
 }
 
 function pick(aIDToCheck) {
-console.debug('input');
 	document.getElementById("sbLinkSelector").selectedItem = document.getElementById(aIDToCheck);
 }
