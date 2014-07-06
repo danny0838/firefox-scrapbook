@@ -337,6 +337,27 @@ var sbCacheService = {
 		switch ( type ) {
 			case "":
 			case "marked":
+				var file = dir.clone();
+				file.append("index.html");
+				if (!file.exists()) break;
+				// if the file is rather small, check for a possible meta refresh to the real html file
+				if (file.fileSize <= 512) {
+					// use a simple heuristic match for meta tag refresh
+					// should be enough for most cases
+					if (sbCommonUtils.readFile(file).match(/\s*content="\d+;URL=(?:\.\/)?([^"]+)"/i)) {
+						// found meta refresh, check further
+						var leafname = sbCommonUtils.convertToUnicode(RegExp.$1, "UTF-8");
+						var file2 = dir.clone(); file2.append(leafname);
+						if (!file2.exists()) break;
+						var mime = sbCommonUtils.getFileMime(file2);
+						if ( !mime || mime != "text/html" ) break;
+						sbCacheService.inspectFile(file2, leafname);
+						break;
+					}
+				}
+				// cache the file
+				sbCacheService.inspectFile(file, "index.html");
+				break;
 			case "combine":
 			case "note":
 				var file = dir.clone();
