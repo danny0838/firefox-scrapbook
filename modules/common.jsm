@@ -503,6 +503,9 @@ var sbCommonUtils = {
 		}
 	},
 
+	/**
+	 * Preference handling
+	 */
 	get prefBranch()
 	{
 		delete this.prefBranch;
@@ -616,6 +619,9 @@ var sbCommonUtils = {
 		return this.setPref(aName, aPrefValue, true);
 	},
 
+	/**
+	 * String handling
+	 */
 	lang : function(aBundle, aName, aArgs)
 	{
 		var bundle = this._stringBundles[aBundle];
@@ -661,6 +667,9 @@ var sbCommonUtils = {
 		return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 	},
 
+	/**
+	 * Window daemon
+	 */
 	openManageWindow : function(aRes, aModEltID)
 	{
 		var window = this.WINDOW.getMostRecentWindow("navigator:browser");
