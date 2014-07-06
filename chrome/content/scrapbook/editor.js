@@ -593,7 +593,7 @@ var sbHtmlEditor = {
 		if ( aStateFlag === undefined ) aStateFlag = enabled ? 0 : 1;
 		enabled = (aStateFlag === 2) ? enabled : (aStateFlag == 1);
 
-		if (sbPageEditor.item.type == "notexl" && enabled) {
+		if (enabled && sbPageEditor.item && sbPageEditor.item.type == "notexl") {
 			sbCommonUtils.alert(sbCommonUtils.lang("overlay", "EDIT_HTMLEDITOR_NOT_NOTEXL"));
 			return;
 		}
