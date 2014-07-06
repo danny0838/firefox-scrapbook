@@ -897,6 +897,8 @@ var sbHtmlEditor = {
 		}
 		// insert inner link?
 		else if (data.id_use) {
+			// we can construct inner link only for those with valid id
+			if (!sbPageEditor.item) return;
 			var id = data.id;
 			// check the specified id
 			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
@@ -943,6 +945,8 @@ var sbHtmlEditor = {
 
 	attachFile : function(aDoc)
 	{
+		// we can upload file only for those with valid id
+		if (!sbPageEditor.item) return;
 		// check if the current page is local and get its path
 		var htmlFile = sbCommonUtils.convertURLToFile(aDoc.location.href);
 		if (!htmlFile) return;
@@ -1720,6 +1724,8 @@ var sbAnnotationService = {
 		}
 		else if ( aFlag == "I" )
 		{
+			// we can construct inner link only for those with valid id
+			if (!sbPageEditor.item) return;
 			// if the sidebar is closed, we may get an error
 			try {
 				var sidebarId = sbCommonUtils.getSidebarId("sidebar");
@@ -1760,6 +1766,8 @@ var sbAnnotationService = {
 		}
 		else
 		{
+			// we can upload file only for those with valid id
+			if (!sbPageEditor.item) return;
 			// check if the page is local and get its path
 			var htmlFile = sbCommonUtils.convertURLToFile(win.location.href);
 			if (!htmlFile) return;
