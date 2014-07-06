@@ -915,9 +915,7 @@ var sbHtmlEditor = {
 			// attach the link
 			if (data.format) {
 				var TITLE = sbDataSource.getProperty(res, "title");
-				var URL = (type == "bookmark") ?
-				sbDataSource.getProperty(res, "source") :
-				"../" + id + "/index.html";
+				var URL = (type == "bookmark") ? sbDataSource.getProperty(res, "source") : makeRelativeLink(aDoc.location.href, sbPageEditor.item.id, id);
 				var THIS = sel.isCollapsed ? TITLE : sbPageEditor.getSelectionHTML(sel);
 				var html = data.format.replace(/{(TITLE|URL|THIS)}/g, function(){
 					switch (arguments[1]) {
@@ -929,6 +927,17 @@ var sbHtmlEditor = {
 				});
 				aDoc.execCommand("insertHTML", false, html);
 			}
+		}
+		
+		function makeRelativeLink(aBaseURL, aBaseId, aTargetId) {
+			var result = "";
+			var contDir = sbCommonUtils.getContentDir(aBaseId);
+			var checkFile = sbCommonUtils.convertURLToFile(aBaseURL);
+			while (!checkFile.equals(contDir)){
+				result += "../";
+				checkFile = checkFile.parent;
+			}
+			return result = result + aTargetId + "/index.html";
 		}
 	},
 
@@ -1745,9 +1754,7 @@ var sbAnnotationService = {
 			}
 			// attach the link
 			var title = sbDataSource.getProperty(res, "title");
-			attr["href"] = (type == "bookmark") ?
-				sbDataSource.getProperty(res, "source") :
-				"../" + id + "/index.html";
+			attr["href"] = (type == "bookmark") ? sbDataSource.getProperty(res, "source") : makeRelativeLink(win.location.href, sbPageEditor.item.id, id);
 			attr["title"] = title;
 			attr["data-sb-obj"] = "link-inner";
 		}
@@ -1780,6 +1787,17 @@ var sbAnnotationService = {
 		}
 		sbPageEditor.allowUndo(win.document);
 		sbHighlighter.set(win, sel, "a", attr);
+		
+		function makeRelativeLink(aBaseURL, aBaseId, aTargetId) {
+			var result = "";
+			var contDir = sbCommonUtils.getContentDir(aBaseId);
+			var checkFile = sbCommonUtils.convertURLToFile(aBaseURL);
+			while (!checkFile.equals(contDir)){
+				result += "../";
+				checkFile = checkFile.parent;
+			}
+			return result = result + aTargetId + "/index.html";
+		}
 	},
 
 };
