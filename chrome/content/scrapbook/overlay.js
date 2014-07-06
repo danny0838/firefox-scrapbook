@@ -132,8 +132,9 @@ var sbBrowserOverlay = {
 		var file = sbCommonUtils.convertURLToFile(aURL);
 		if (!file || !file.exists() || !file.isFile()) return null;
 		var aURL = sbCommonUtils.convertFilePathToURL(file.path);
-		var editable = (aURL.indexOf("file:") == 0 && aURL.match(/\/data\/(\d{14})\//));
-		return editable ? RegExp.$1 : null;
+		var sbDir = sbCommonUtils.convertFilePathToURL(sbCommonUtils.getScrapBookDir().path);
+		var sbPath = new RegExp("^" + sbCommonUtils.escapeRegExp(sbDir) + "data/(\\d{14})/");
+		return aURL.match(sbPath) ? RegExp.$1 : null;
 	},
 
 	onLocationChange: function(aURL)
