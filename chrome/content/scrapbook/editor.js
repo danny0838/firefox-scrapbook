@@ -740,10 +740,7 @@ var sbHtmlEditor = {
 	{
 		var data = {};
 		// prompt the dialog for user input
-		var accepted = window.top.openDialog(
-			"chrome://scrapbook/content/editor_color.xul", "ScrapBook:PickColor", "chrome,modal,centerscreen", 
-			data
-		);
+		var accepted = window.top.openDialog("chrome://scrapbook/content/editor_color.xul", "ScrapBook:PickColor", "chrome,modal,centerscreen", data);
 		if (data.result != 1) return;
 		aDoc.execCommand("styleWithCSS", false, true);
 		if (data.textColor) {
@@ -863,7 +860,6 @@ var sbHtmlEditor = {
 	attachLink : function(aDoc)
 	{
 		var sel = aDoc.defaultView.getSelection();
-		var data = {};
 		// retrieve selected id from sidebar
 		// -- if the sidebar is closed, we may get an error
 		try {
@@ -880,12 +876,12 @@ var sbHtmlEditor = {
 				var id = sbDataSource.getProperty(res, "id");
 			}
 		}
-		data.id = id;
 		// prompt the dialog for user input
-		var accepted = window.top.openDialog(
-			"chrome://scrapbook/content/editor_link.xul", "ScrapBook:AttachLink", "chrome,modal,centerscreen,resizable", 
-			data
-		);
+		var data = {
+			id: id,
+			item: sbPageEditor.item,
+		};
+		var accepted = window.top.openDialog("chrome://scrapbook/content/editor_link.xul", "ScrapBook:AttachLink", "chrome,modal,centerscreen,resizable", data);
 		if (data.result != 1) return;
 		// insert link?
 		if (data.url_use) {
@@ -962,12 +958,9 @@ var sbHtmlEditor = {
 		if (!htmlFile) return;
 		// init
 		var sel = aDoc.defaultView.getSelection();
-		var data = {};
 		// prompt the dialog for user input
-		var accepted = window.top.openDialog(
-			"chrome://scrapbook/content/editor_file.xul", "ScrapBook:AttachFile", "chrome,modal,centerscreen", 
-			data
-		);
+		var data = {};
+		var accepted = window.top.openDialog("chrome://scrapbook/content/editor_file.xul", "ScrapBook:AttachFile", "chrome,modal,centerscreen", data);
 		if (data.result != 1) return;
 		// copy the selected file
 		var destFile = htmlFile.parent.clone();
@@ -1044,10 +1037,7 @@ var sbHtmlEditor = {
 			}
 		}
 		// prompt the dialog for user input
-		window.top.openDialog(
-			"chrome://scrapbook/content/editor_source.xul", "ScrapBook:EditSource", "chrome,modal,centerscreen,resizable", 
-			data
-		);
+		window.top.openDialog("chrome://scrapbook/content/editor_source.xul", "ScrapBook:EditSource", "chrome,modal,centerscreen,resizable", data);
 		// accepted, do the modify
 		if (data.result) {
 			aDoc.execCommand("insertHTML", false, data.value);
