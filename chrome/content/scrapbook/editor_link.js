@@ -4,6 +4,10 @@ function init() {
 	if ( !window.arguments) window.close();
 	gData = window.arguments[0];
 	if (gData.id) document.getElementById("sbLinkID").value = gData.id;
+	if (!gData.item) {
+		document.getElementById("sbLinkIDUse").disabled = true;
+		document.getElementById("sbLinkID").disabled = true;
+	}
 }
 
 function accept() {

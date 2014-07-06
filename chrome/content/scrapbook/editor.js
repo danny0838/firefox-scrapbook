@@ -863,7 +863,6 @@ var sbHtmlEditor = {
 	attachLink : function(aDoc)
 	{
 		var sel = aDoc.defaultView.getSelection();
-		var data = {};
 		// retrieve selected id from sidebar
 		// -- if the sidebar is closed, we may get an error
 		try {
@@ -880,8 +879,11 @@ var sbHtmlEditor = {
 				var id = sbDataSource.getProperty(res, "id");
 			}
 		}
-		data.id = id;
 		// prompt the dialog for user input
+		var data = {
+			id: id,
+			item: sbPageEditor.item,
+		};
 		var accepted = window.top.openDialog(
 			"chrome://scrapbook/content/editor_link.xul", "ScrapBook:AttachLink", "chrome,modal,centerscreen,resizable", 
 			data
