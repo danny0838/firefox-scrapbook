@@ -592,6 +592,30 @@ var sbCommonUtils = {
 		}
 	},
 
+	// deprecated, use getPref instead (left for downward compatibility with addons)
+	getBoolPref : function(aName, aDefVal)
+	{
+		return this.getPref(aName, aDefVal, true);
+	},
+
+	// deprecated, use getPref instead (left for downward compatibility with addons)
+	copyUnicharPref : function(aPrefName, aDefVal)
+	{
+		return this.getPref(aName, aDefVal, true);
+	},
+
+	// deprecated, use setPref instead (left for downward compatibility with addons)
+	setBoolPref : function(aPrefName, aPrefValue)
+	{
+		return this.setPref(aName, aPrefValue, true);
+	},
+
+	// deprecated, use setPref instead (left for downward compatibility with addons)
+	setUnicharPref : function(aPrefName, aPrefValue)
+	{
+		return this.setPref(aName, aPrefValue, true);
+	},
+
 	lang : function(aBundle, aName, aArgs)
 	{
 		var bundle = this._stringBundles[aBundle];
