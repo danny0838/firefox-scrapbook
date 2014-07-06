@@ -41,9 +41,18 @@ var sbPageEditor = {
 			sbInfoViewer.TOOLBAR.hidden = true;
 		}
 		// -- current browser tab
-		if ( aID && gBrowser.currentURI.spec.indexOf("index.html") > 0 ) {
-			gBrowser.selectedTab.label = this.item.title;
-			gBrowser.selectedTab.setAttribute("image", this.item.icon);
+		if ( aID ) {
+			try {
+				// if the current page is the index page of the id, use the item title and item icon
+				var mainFile = sbCommonUtils.getContentDir(this.item.id); mainFile.append("index.html");
+				var curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
+				if (mainFile.equals(curFile)) {
+					gBrowser.selectedTab.label = this.item.title;
+					gBrowser.selectedTab.setAttribute("image", this.item.icon);
+				}
+			} catch(ex) {
+				sbCommonUtils.error(ex);
+			}
 		}
 		// -- icon
 		document.getElementById("ScrapBookEditIcon").src = (aID ? this.item.icon || sbCommonUtils.getDefaultIcon(this.item.type) : gBrowser.selectedTab.getAttribute("image"));
