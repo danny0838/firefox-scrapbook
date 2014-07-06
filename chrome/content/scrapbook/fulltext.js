@@ -369,7 +369,7 @@ var sbCacheService = {
 				var file2 = dir.clone(); file2.append(leafname);
 				if (!file2.exists()) break;
 				var mime = sbCommonUtils.getFileMime(file2);
-				if ( !mime || !mime.match(/^text\//) ) break;
+				if ( !mime || mime.indexOf("text/") != 0 ) break;
 				sbCacheService.inspectFile(file2, leafname, true);
 				break;
 			default:
