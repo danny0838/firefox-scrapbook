@@ -503,6 +503,9 @@ var sbCommonUtils = {
 		}
 	},
 
+	/**
+	 * Preference handling
+	 */
 	get prefBranch()
 	{
 		delete this.prefBranch;
@@ -592,6 +595,33 @@ var sbCommonUtils = {
 		}
 	},
 
+	// deprecated, use getPref instead (left for downward compatibility with addons)
+	getBoolPref : function(aName, aDefVal)
+	{
+		return this.getPref(aName, aDefVal, true);
+	},
+
+	// deprecated, use getPref instead (left for downward compatibility with addons)
+	copyUnicharPref : function(aPrefName, aDefVal)
+	{
+		return this.getPref(aName, aDefVal, true);
+	},
+
+	// deprecated, use setPref instead (left for downward compatibility with addons)
+	setBoolPref : function(aPrefName, aPrefValue)
+	{
+		return this.setPref(aName, aPrefValue, true);
+	},
+
+	// deprecated, use setPref instead (left for downward compatibility with addons)
+	setUnicharPref : function(aPrefName, aPrefValue)
+	{
+		return this.setPref(aName, aPrefValue, true);
+	},
+
+	/**
+	 * String handling
+	 */
 	lang : function(aBundle, aName, aArgs)
 	{
 		var bundle = this._stringBundles[aBundle];
@@ -624,6 +654,11 @@ var sbCommonUtils = {
 		if (aSingleQuotes) aStr = aStr.replace(/'/g, "&apos;");
 		return aStr;
 	},
+
+	escapeRegExp : function(aString)
+	{
+		return aString.replace(/([\*\+\?\.\^\/\$\\\|\[\]\{\}\(\)])/g, "\\$1");
+	},
 		
 	pad : function(n, width, z)
 	{
@@ -632,6 +667,9 @@ var sbCommonUtils = {
 		return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 	},
 
+	/**
+	 * Window daemon
+	 */
 	openManageWindow : function(aRes, aModEltID)
 	{
 		var window = this.WINDOW.getMostRecentWindow("navigator:browser");
@@ -796,6 +834,17 @@ var sbCommonUtils = {
 			return true;
 		}
 		return false;
+	},
+
+	/**
+	 * Object handling
+	 */
+	extendObject : function(aObject1, aObject2)
+	{
+		for (var i in aObject2) {
+			aObject1[i] = aObject2[i];
+		}
+		return aObject1;
 	},
 };
 

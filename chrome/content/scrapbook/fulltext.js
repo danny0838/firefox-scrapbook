@@ -74,13 +74,13 @@ var sbSearchResult =
 				if ( quotePos1 >= 1 && query.charAt(quotePos1-1) == '-' )
 				{
 					this.excludeWords.push(quotedStr);
-					this.RegExpExclude.push( new RegExp(this.escapeRegExpSpecialChars(quotedStr), this.RegExpModifier) );
+					this.RegExpExclude.push( new RegExp(sbCommonUtils.escapeRegExp(quotedStr), this.RegExpModifier) );
 					replaceStr = "-" + replaceStr;
 				}
 				else if ( quotedStr.length > 0 )
 				{
 					this.includeWords.push(quotedStr);
-					this.RegExpInclude.push( new RegExp(this.escapeRegExpSpecialChars(quotedStr), this.RegExpModifier) );
+					this.RegExpInclude.push( new RegExp(sbCommonUtils.escapeRegExp(quotedStr), this.RegExpModifier) );
 				}
 				query = query.replace(replaceStr, "");
 			}
@@ -92,12 +92,12 @@ var sbSearchResult =
 				{
 					word = word.substring(1, word.length);
 					this.excludeWords.push(word);
-					this.RegExpExclude.push( new RegExp(this.escapeRegExpSpecialChars(word), this.RegExpModifier) );
+					this.RegExpExclude.push( new RegExp(sbCommonUtils.escapeRegExp(word), this.RegExpModifier) );
 				}
 				else if ( word.length > 0 )
 				{
 					this.includeWords.push(word);
-					this.RegExpInclude.push( new RegExp(this.escapeRegExpSpecialChars(word), this.RegExpModifier) );
+					this.RegExpInclude.push( new RegExp(sbCommonUtils.escapeRegExp(word), this.RegExpModifier) );
 				}
 			}
 			if ( this.RegExpInclude.length == 0 ) return;
@@ -244,11 +244,6 @@ var sbSearchResult =
 		return ( ret.length > 100 ) ? ret.substring(0, 100) : ret;
 	},
 
-	escapeRegExpSpecialChars : function(aString)
-	{
-		return aString.replace(/([\*\+\?\.\^\/\$\\\|\[\]\{\}\(\)])/g, "\\$1");
-	},
-
 	localizedQuotation : function(aString)
 	{
 		return sbCommonUtils.lang("fulltext", "QUOTATION", [aString]);
@@ -392,10 +387,11 @@ var sbCacheService = {
 	inspectFile : function(aFile, aSubPath, nonHTML)
 	{
 		var resource = sbCommonUtils.RDF.GetResource(this.resList[this.index].Value + "#" + aSubPath);
+		var charset = sbDataSource.getProperty(sbCacheService.resList[sbCacheService.index], "chars");
 		// if cache is newer, skip caching this file and its frames
 		// (only check update of the main page)
 		if ( sbCacheSource.exists(resource) ) {
-			if ( gCacheFile.lastModifiedTime > aFile.lastModifiedTime )
+			if ( gCacheFile.lastModifiedTime > aFile.lastModifiedTime && charset == sbCacheSource.getProperty(resource, "charset") )
 			{
 				sbCacheService.checkFrameFiles(aFile, function(){return 0;});
 				this.uriHash[resource.Value] = true;
@@ -411,17 +407,17 @@ var sbCacheService = {
 		// update cache data
 		if ( sbCacheSource.exists(resource) ) {
 			sbCacheSource.updateEntry(resource, "folder",  this.folders[this.index]);
+			sbCacheSource.updateEntry(resource, "charset", charset);
 			sbCacheSource.updateEntry(resource, "content", contents);
 		}
 		else {
-			sbCacheSource.addEntry(resource, contents);
+			sbCacheSource.addEntry(resource, this.folders[this.index], charset, contents);
 		}
 		this.uriHash[resource.Value] = true;
 
 		function addContent(aFile) {
-			var encoding = sbDataSource.getProperty(sbCacheService.resList[sbCacheService.index], "chars");
 			var content = sbCommonUtils.readFile(aFile);
-			content = sbCommonUtils.convertToUnicode(content, encoding);
+			content = sbCommonUtils.convertToUnicode(content, charset);
 			if (!nonHTML) {
 				contents.push(sbCacheService.convertHTML2Text(content));
 			}
@@ -559,21 +555,27 @@ var sbCacheSource = {
 		this.container = sbCommonUtils.RDFCU.MakeSeq(this.dataSource, sbCommonUtils.RDF.GetResource("urn:scrapbook:cache"));
 	},
 
-	addEntry : function(aRes, aContent)
+	addEntry : function(aRes, aFolder, aCharset, aContent)
 	{
-		aContent = sbDataSource.sanitize(aContent);
 		this.container.AppendElement(aRes);
-		this.dataSource.Assert(aRes, sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + "folder"),  sbCommonUtils.RDF.GetLiteral(sbCacheService.folders[sbCacheService.index]),  true);
-		this.dataSource.Assert(aRes, sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + "content"), sbCommonUtils.RDF.GetLiteral(aContent), true);
+		this.updateEntry(aRes, "folder", aFolder);
+		this.updateEntry(aRes, "charset", aCharset);
+		this.updateEntry(aRes, "content", aContent);
 	},
 
 	updateEntry : function(aRes, aProp, newVal)
 	{
 		newVal = sbDataSource.sanitize(newVal);
 		aProp = sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + aProp);
-		var oldVal = this.dataSource.GetTarget(aRes, aProp, true).QueryInterface(Components.interfaces.nsIRDFLiteral);
-		newVal = sbCommonUtils.RDF.GetLiteral(newVal);
-		this.dataSource.Change(aRes, aProp, oldVal, newVal);
+		var oldVal = this.dataSource.GetTarget(aRes, aProp, true);
+		if (oldVal == sbCommonUtils.RDF.NS_RDF_NO_VALUE) {
+			this.dataSource.Assert(aRes, aProp, sbCommonUtils.RDF.GetLiteral(newVal), true);
+		}
+		else {
+			oldVal = oldVal.QueryInterface(Components.interfaces.nsIRDFLiteral);
+			newVal = sbCommonUtils.RDF.GetLiteral(newVal);
+			this.dataSource.Change(aRes, aProp, oldVal, newVal);
+		}
 	},
 
 	removeEntry : function(aRes)

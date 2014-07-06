@@ -77,7 +77,7 @@
 						</row>
 						<row id="sbPropCharsRow" align="center">
 							<label value="&sb.prop.encode;:" />
-							<textbox id="sbPropChars" readonly="true" />
+							<textbox id="sbPropChars" />
 						</row>
 						<row id="sbPropSizeRow" align="center">
 							<label value="&sb.prop.size;:" />

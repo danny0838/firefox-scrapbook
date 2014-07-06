@@ -14,5 +14,6 @@
 <!ENTITY sb.tools.sorttree "Ordenar Toda a Árvore">
 <!ENTITY sb.tools.output "Exportar Árvore como HTML">
 <!ENTITY sb.tools.repair "Reparo de Emergência">
+<!ENTITY sb.tools.addons "Recursos Extras">
 <!ENTITY sb.note.opentab "Abrir na Aba">
 <!ENTITY sb.note.close "Fechar">

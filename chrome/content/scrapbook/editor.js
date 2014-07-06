@@ -80,8 +80,6 @@ var sbPageEditor = {
 				this.documentLoad(window.content.document, function(doc){
 					// check document type and make sure it's a file
 					if (doc.contentType != "text/html") return;
-					var file = sbCommonUtils.convertURLToFile(doc.location.href);
-					if (!file || !file.isFile()) return;
 					// turn on HTMLEditor, without marking as changed
 					var _changed = sbCommonUtils.documentData(doc, "changed");
 					sbHtmlEditor.init(window.content.document, 1);
@@ -1060,6 +1058,8 @@ var sbDOMEraser = {
 		"Escape" : "quit",
 		"Return" : "remove",
 		"Space" : "remove",
+		"Shift+Return" : "isolate",
+		"Shift+Space" : "isolate",
 		"Add" : "wider",
 		"Subtract" : "narrower",
 		"Shift+Equals" : "wider",
