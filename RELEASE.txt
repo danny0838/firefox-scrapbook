@@ -1,4 +1,13 @@
-Scrapbook X 1.12.0a３
+Scrapbook X 1.12.0a4
+----------------
+
+- FIXED: Pages in a subdirectory attach inner link with wrong path.
+- FIXED: Disallow non-ScrapBook pages to insert inner links or files.
+- FIXED: Some non-ScrapBook pages are regarded as ScrapBook pages.
+- FIXED: Some non-main page URI are reguarded as the main page.
+
+
+Scrapbook X 1.12.0a3
 ----------------
 
 - FIXED: Initialization error of edit toolbar on "Edit Before Capture".
