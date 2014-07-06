@@ -55,7 +55,8 @@ var sbPageEditor = {
 		var restoredComment = sbCommonUtils.documentData(window.content.document, "comment");
 		if (restoredComment) this.COMMENT.value = restoredComment;
 		try { this.COMMENT.editor.transactionManager.clear(); } catch(ex) {}
-		// -- attach file button
+		// -- inner link and attach file button
+		document.getElementById("ScrapBookEditAnnotation").firstChild.childNodes[1].disabled = (aID == null);
 		document.getElementById("ScrapBookEditAnnotation").firstChild.childNodes[2].disabled = (aID == null);
 		// -- deactivate DOMEraser
 		sbDOMEraser.init(0);
@@ -897,6 +898,8 @@ var sbHtmlEditor = {
 		}
 		// insert inner link?
 		else if (data.id_use) {
+			// we can construct inner link only for those with valid id
+			if (!sbPageEditor.item) return;
 			var id = data.id;
 			// check the specified id
 			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
@@ -915,9 +918,7 @@ var sbHtmlEditor = {
 			// attach the link
 			if (data.format) {
 				var TITLE = sbDataSource.getProperty(res, "title");
-				var URL = (type == "bookmark") ?
-				sbDataSource.getProperty(res, "source") :
-				"../" + id + "/index.html";
+				var URL = (type == "bookmark") ? sbDataSource.getProperty(res, "source") : makeRelativeLink(aDoc.location.href, sbPageEditor.item.id, id);
 				var THIS = sel.isCollapsed ? TITLE : sbPageEditor.getSelectionHTML(sel);
 				var html = data.format.replace(/{(TITLE|URL|THIS)}/g, function(){
 					switch (arguments[1]) {
@@ -930,10 +931,23 @@ var sbHtmlEditor = {
 				aDoc.execCommand("insertHTML", false, html);
 			}
 		}
+		
+		function makeRelativeLink(aBaseURL, aBaseId, aTargetId) {
+			var result = "";
+			var contDir = sbCommonUtils.getContentDir(aBaseId);
+			var checkFile = sbCommonUtils.convertURLToFile(aBaseURL);
+			while (!checkFile.equals(contDir)){
+				result += "../";
+				checkFile = checkFile.parent;
+			}
+			return result = result + aTargetId + "/index.html";
+		}
 	},
 
 	attachFile : function(aDoc)
 	{
+		// we can upload file only for those with valid id
+		if (!sbPageEditor.item) return;
 		// check if the current page is local and get its path
 		var htmlFile = sbCommonUtils.convertURLToFile(aDoc.location.href);
 		if (!htmlFile) return;
@@ -1711,6 +1725,8 @@ var sbAnnotationService = {
 		}
 		else if ( aFlag == "I" )
 		{
+			// we can construct inner link only for those with valid id
+			if (!sbPageEditor.item) return;
 			// if the sidebar is closed, we may get an error
 			try {
 				var sidebarId = sbCommonUtils.getSidebarId("sidebar");
@@ -1745,14 +1761,14 @@ var sbAnnotationService = {
 			}
 			// attach the link
 			var title = sbDataSource.getProperty(res, "title");
-			attr["href"] = (type == "bookmark") ?
-				sbDataSource.getProperty(res, "source") :
-				"../" + id + "/index.html";
+			attr["href"] = (type == "bookmark") ? sbDataSource.getProperty(res, "source") : makeRelativeLink(win.location.href, sbPageEditor.item.id, id);
 			attr["title"] = title;
 			attr["data-sb-obj"] = "link-inner";
 		}
 		else
 		{
+			// we can upload file only for those with valid id
+			if (!sbPageEditor.item) return;
 			// check if the page is local and get its path
 			var htmlFile = sbCommonUtils.convertURLToFile(win.location.href);
 			if (!htmlFile) return;
@@ -1780,6 +1796,17 @@ var sbAnnotationService = {
 		}
 		sbPageEditor.allowUndo(win.document);
 		sbHighlighter.set(win, sel, "a", attr);
+		
+		function makeRelativeLink(aBaseURL, aBaseId, aTargetId) {
+			var result = "";
+			var contDir = sbCommonUtils.getContentDir(aBaseId);
+			var checkFile = sbCommonUtils.convertURLToFile(aBaseURL);
+			while (!checkFile.equals(contDir)){
+				result += "../";
+				checkFile = checkFile.parent;
+			}
+			return result = result + aTargetId + "/index.html";
+		}
 	},
 
 };
