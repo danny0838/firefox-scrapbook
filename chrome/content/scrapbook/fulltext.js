@@ -53,7 +53,7 @@ var sbSearchResult =
 			this.targetFolders = sbDataSource.flattenResources(refRes, 1, true);
 			for ( var i = 0; i < this.targetFolders.length; i++ )
 			{
-				this.targetFolders[i] = this.targetFolders[i].Value;
+				this.targetFolders[i] = this.targetFolders[i].ValueUTF8;
 			}
 		}
 
@@ -314,7 +314,7 @@ var sbCacheService = {
 				var type = sbDataSource.getProperty(resList[j], "type");
 				if ( type == "image" || type == "bookmark" || type == "separator" ) continue;
 				this.resList.push(resList[j]);
-				this.folders.push(contResList[i].Value);
+				this.folders.push(contResList[i].ValueUTF8);
 			}
 		}
 		if ( this.resList.length>0 )
@@ -415,7 +415,7 @@ var sbCacheService = {
 
 	inspectFile : function(aFile, aSubPath, nonHTML)
 	{
-		var resource = sbCommonUtils.RDF.GetResource(this.resList[this.index].Value + "#" + aSubPath);
+		var resource = sbCommonUtils.RDF.GetResource(this.resList[this.index].ValueUTF8 + "#" + aSubPath);
 		var charset = sbDataSource.getProperty(sbCacheService.resList[sbCacheService.index], "chars");
 		// if cache is newer, skip caching this file and its frames
 		// (only check update of the main page)
@@ -423,7 +423,7 @@ var sbCacheService = {
 			if ( gCacheFile.lastModifiedTime > aFile.lastModifiedTime && charset == sbCacheSource.getProperty(resource, "charset") )
 			{
 				sbCacheService.checkFrameFiles(aFile, function(){return 0;});
-				this.uriHash[resource.Value] = true;
+				this.uriHash[resource.ValueUTF8] = true;
 				sbCacheSource.updateEntry(resource, "folder",  this.folders[this.index]);
 				return;
 			}
@@ -442,7 +442,7 @@ var sbCacheService = {
 		else {
 			sbCacheSource.addEntry(resource, this.folders[this.index], charset, contents);
 		}
-		this.uriHash[resource.Value] = true;
+		this.uriHash[resource.ValueUTF8] = true;
 
 		function addContent(aFile) {
 			var content = sbCommonUtils.readFile(aFile);
@@ -576,10 +576,10 @@ var sbCacheSource = {
 		while ( resEnum.hasMoreElements() )
 		{
 			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-			if ( res.Value.indexOf("#") == -1 && res.Value != "urn:scrapbook:cache" )
+			if ( res.ValueUTF8.indexOf("#") == -1 && res.ValueUTF8 != "urn:scrapbook:cache" )
 				this.removeEntry(res);
 			else
-				sbCacheService.uriHash[res.Value] = false;
+				sbCacheService.uriHash[res.ValueUTF8] = false;
 		}
 		this.container = sbCommonUtils.RDFCU.MakeSeq(this.dataSource, sbCommonUtils.RDF.GetResource("urn:scrapbook:cache"));
 	},
@@ -623,7 +623,7 @@ var sbCacheSource = {
 	{
 		try {
 			var retVal = this.dataSource.GetTarget(aRes, sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + aProp), true);
-			return retVal.QueryInterface(Components.interfaces.nsIRDFLiteral).Value;
+			return retVal.QueryInterface(Components.interfaces.nsIRDFLiteral).ValueUTF8;
 		} catch(ex) {
 			return "";
 		}
