@@ -835,6 +835,17 @@ var sbCommonUtils = {
 		}
 		return false;
 	},
+
+	/**
+	 * Object handling
+	 */
+	extendObject : function(aObject1, aObject2)
+	{
+		for (var i in aObject2) {
+			aObject1[i] = aObject2[i];
+		}
+		return aObject1;
+	},
 };
 
 /**

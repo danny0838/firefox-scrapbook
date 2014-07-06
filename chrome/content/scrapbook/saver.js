@@ -34,7 +34,7 @@ var sbContentSaver = {
 		{
 			if ( aPresetData[0] ) this.item.id  = aPresetData[0];
 			if ( aPresetData[1] ) this.name     = aPresetData[1];
-			if ( aPresetData[2] ) this.option   = aPresetData[2];
+			if ( aPresetData[2] ) this.option   = sbCommonUtils.extendObject(this.option, aPresetData[2]);
 			if ( aPresetData[3] ) this.file2URL = aPresetData[3];
 			if ( aPresetData[4] >= this.option["inDepth"] ) this.option["inDepth"] = 0;
 		}
