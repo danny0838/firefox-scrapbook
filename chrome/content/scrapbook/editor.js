@@ -123,6 +123,7 @@ var sbPageEditor = {
 
 	handleKeyEvent : function(aEvent)
 	{
+		if (sbHtmlEditor.enabled || sbDOMEraser.enabled) return;
 		// F9
 		if (aEvent.keyCode == aEvent.DOM_VK_F9 &&
 			!aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
@@ -546,6 +547,7 @@ var sbPageEditor = {
 
 var sbHtmlEditor = {
 
+	enabled : false,
 	_shortcut_table : {
 		"F10" : "quit",
 		"Ctrl+S" : "save",
@@ -603,7 +605,7 @@ var sbHtmlEditor = {
 		aDoc = aDoc || sbCommonUtils.getFocusedWindow().document;
 		var enabled = sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled") || false;
 		if ( aStateFlag === undefined ) aStateFlag = enabled ? 0 : 1;
-		enabled = (aStateFlag === 2) ? enabled : (aStateFlag == 1);
+		this.enabled = enabled = (aStateFlag === 2) ? enabled : (aStateFlag == 1);
 		document.getElementById("ScrapBookEditHTML").checked = enabled;
 		document.getElementById("ScrapBookHighlighter").disabled = enabled;
 		document.getElementById("ScrapBookEditAnnotation").disabled = enabled;
@@ -619,7 +621,6 @@ var sbHtmlEditor = {
 				}
 				this.initEvent(win, 1);
 				sbAnnotationService.initEvent(win, 0);
-				sbPageEditor.initEvent(win, 0);
 			}, this);
 			if ( aDoc.designMode != "on" ) {
 				var sel = aDoc.defaultView.getSelection();
@@ -652,7 +653,6 @@ var sbHtmlEditor = {
 				}
 				this.initEvent(win, 0);
 				sbAnnotationService.initEvent(win, 1);
-				sbPageEditor.initEvent(win, 1);
 			}, this);
 		}
 	},
@@ -1109,7 +1109,6 @@ var sbDOMEraser = {
 					this.initEvent(win, 0);
 					this.initStyle(win, 0);
 					sbAnnotationService.initEvent(win, 1);
-					sbPageEditor.initEvent(win, 1);
 				}, this);
 			}
 		}
@@ -1121,7 +1120,6 @@ var sbDOMEraser = {
 				this.initEvent(win, 1);
 				this.initStyle(win, 1);
 				sbAnnotationService.initEvent(win, 0);
-				sbPageEditor.initEvent(win, 0);
 			}, this);
 		}
 	},
