@@ -710,7 +710,7 @@ var sbHtmlEditor = {
 
 	save : function(aDoc)
 	{
-		sbPageEditor.savePage();
+		sbPageEditor.saveOrCapture();
 	},
 
 	removeFormat : function(aDoc)
