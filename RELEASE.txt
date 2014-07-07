@@ -1,3 +1,25 @@
+Scrapbook X 1.12.0a6
+----------------
+
+- FIXED: Fulltext search does not work.
+
+
+Scrapbook X 1.12.0a5
+----------------
+
+- UPDATE: Redesign the lock function. Now pages, files, and note pages can be set locked, in which state they cannot be edited or saved.
+- UPDATE: Adjust the style and title of ScrapBook prompts.
+- UPDATE: Page items can use meta refresh in index.html to point the main html file, just like file items.
+- FIXED: HTML editor and keyboard shortcuts remain active after the editor toolbar is closed.
+- FIXED: Key 1-8 do not work when the user is inputing on a forms or a textarea.
+- FIXED: The editor toolbar doesn't update when the item property is changed.
+- FIXED: The save command of HTML editor now captures the page on non-ScrapBook pages.
+- FIXED: The insert link command of HTML Editor no more allows inserting inner link on non-ScrapBook pages.
+- FIXED: Files with non-ASCII file name cannot create fulltext index.
+- FIXED: The fulltext index are not purged for files with non-ASCII file name that are no longer available.
+- FIXED: The fulltext index do not work normally when a meta refresh in index.html points to a sub-directory.
+
+
 Scrapbook X 1.12.0a4
 ----------------
 
