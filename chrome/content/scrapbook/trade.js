@@ -65,7 +65,7 @@ var sbTradeService = {
 		if ( invalid )
 		{
 			this.lock(1);
-			alert(sbCommonUtils.lang("trade", "ERROR_INVALID_FILEPATH", [dirPath]));
+			sbCommonUtils.alert(sbCommonUtils.lang("trade", "ERROR_INVALID_FILEPATH", [dirPath]));
 			if (aQuickMode)
 				window.setTimeout(function() { window.close(); }, 0);
 			return;
@@ -198,7 +198,7 @@ var sbTradeService = {
 
 	parseIndexDat : function(aFile)
 	{
-		if ( !(aFile instanceof Components.interfaces.nsILocalFile) ) return alert(sbCommonUtils.lang("scrapbook", "ERR_TRADE_INVALID_ARGS"));
+		if ( !(aFile instanceof Components.interfaces.nsILocalFile) ) return sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_TRADE_INVALID_ARGS"));
 		var data = sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(aFile), "UTF-8");
 		data = data.split("\n");
 		if ( data.length < 2 ) return;
@@ -304,7 +304,7 @@ var sbTradeService = {
 		{
 			content += prop + " : " + item[prop] + "\n";
 		}
-		alert(content);
+		sbCommonUtils.alert(content);
 	},
 
 	onDblClick : function(aEvent)

@@ -36,7 +36,7 @@ var sbPropService = {
 		document.getElementById("sbPropChars").value   = this.item.chars;
 		document.getElementById("sbPropComment").value = this.item.comment.replace(/ __BR__ /g, "\n");
 		document.getElementById("sbPropMark").setAttribute("checked", this.item.type == "marked");
-		document.getElementById("sbPropLock").setAttribute("checked", this.item.type == "notexl");
+		document.getElementById("sbPropLock").setAttribute("checked", this.item.lock == "true");
 		this.ICON.src = this.item.icon ? this.item.icon : sbCommonUtils.getDefaultIcon(this.item.type);
 		document.title = this.item.title;
 		if (sbDataSource.isContainer(this.resource))
@@ -47,8 +47,7 @@ var sbPropService = {
 			case "bookmark" : this.isTypeBookmark  = true; bundleName = "TYPE_BOOKMARK";  break;
 			case "folder"   : this.isTypeFolder    = true; bundleName = "TYPE_FOLDER";    break;
 			case "note"     : this.isTypeNote      = true; bundleName = "TYPE_NOTE";      break;
-			case "notex"    :
-			case "notexl"   : this.isTypeNotex     = true; bundleName = "TYPE_NOTEX";     break;
+			case "notex"    : this.isTypeNotex     = true; bundleName = "TYPE_NOTEX";      break;
 			case "file"     : 
 			case "image"    : this.isTypeFile      = true; bundleName = "TYPE_FILE";      break;
 			case "combine"  : this.isTypeSite      = true; bundleName = "TYPE_COMBINE";   break;
@@ -61,7 +60,7 @@ var sbPropService = {
 		document.getElementById("sbPropIconMenu").hidden  = this.isTypeNote;
 		document.getElementById("sbPropSizeRow").hidden   = this.isTypeFolder || this.isTypeBookmark || this.isTypeSeparator;
 		document.getElementById("sbPropMark").hidden      = this.isTypeFolder || this.isTypeNote || this.isTypeNotex || this.isTypeFile || this.isTypeSite || this.isTypeBookmark;
-		document.getElementById("sbPropLock").hidden      = !this.isTypeNotex;
+		document.getElementById("sbPropLock").hidden      = this.isTypeFolder || this.isTypeNote || this.isTypeBookmark;
 		document.getElementById("sbPropIconMenu").firstChild.firstChild.nextSibling.setAttribute("disabled", this.isTypeFolder || this.isTypeBookmark);
 		if (this.isTypeNote)
 			document.getElementById("sbPropTitle").removeAttribute("editable");
@@ -89,9 +88,9 @@ var sbPropService = {
 		if (!this.isTypeSeparator && !document.getElementById("sbPropMark").hidden)
 			newVals.type = document.getElementById("sbPropMark").checked ? "marked" : "";
 		if (!this.isTypeSeparator && !document.getElementById("sbPropLock").hidden)
-			newVals.type = document.getElementById("sbPropLock").checked ? "notexl" : "notex";
+			newVals.lock = document.getElementById("sbPropLock").checked ? "true" : "";
 		var changed = false;
-		var props = ["title", "source", "comment", "type", "icon", "chars"];
+		var props = ["title", "source", "comment", "type", "icon", "chars", "lock"];
 		for (var i = 0; i < props.length; i++) {
 			if (this.item[props[i]] != newVals[props[i]]) {
 				this.item[props[i]] = newVals[props[i]];
@@ -102,9 +101,12 @@ var sbPropService = {
 			for (var prop in this.item)  {
 				sbDataSource.setProperty(this.resource, prop, this.item[prop]);
 			}
-			sbDataSource.flush();  // required since this window is immediately closed
 			if (!this.isTypeFolder && !this.isTypeBookmark && !this.isTypeSeparator)
 				sbCommonUtils.writeIndexDat(this.item);
+			// refresh the toolbar
+			// yes, we need to do large surgery to prevent inconsistency
+			// (eg. change property in window 2 and the window 1 shows old property)
+			sbCommonUtils.refreshGlobal();
 		}
 		if (window.arguments[1])
 			window.arguments[1].accept = true;
@@ -200,7 +202,7 @@ var sbPropService = {
 				totalFile++;
 			}
 			catch (ex) {
-			    alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_READ_FILE_SIZE", [file.path]));
+			    sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_READ_FILE_SIZE", [file.path]));
 			}
 		}, this);
 		return [totalSize, totalFile, totalDir];

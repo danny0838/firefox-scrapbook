@@ -150,8 +150,13 @@ var sbDataSource = {
 				cont = this.getContainer("urn:scrapbook:root", false);
 				aIdx = 0;
 			}
+			// create a new item and merge the props
+			var newItem = sbCommonUtils.newItem();
+			sbCommonUtils.extendObject(newItem, aSBitem);
+			var propList = sbCommonUtils.getKeys(newItem);
 			var newRes = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aSBitem.id);
-			["id", "type", "title", "chars", "comment", "icon", "source"].forEach(function(prop) {
+			propList.forEach(function(prop) {
+				if (prop == "folder") return;  // "folder" prop is specially handled and do not need to store
 				var arc = sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + prop);
 				var val = sbCommonUtils.RDF.GetLiteral(aSBitem[prop]);
 				this._dataObj.Assert(newRes, arc, val, true);
@@ -347,11 +352,17 @@ var sbDataSource = {
 		aProp = sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + aProp);
 		try {
 			var oldVal = this._dataObj.GetTarget(aRes, aProp, true);
-			oldVal = oldVal.QueryInterface(Components.interfaces.nsIRDFLiteral);
-			newVal = sbCommonUtils.RDF.GetLiteral(newVal);
-			this._dataObj.Change(aRes, aProp, oldVal, newVal);
+			if (oldVal == sbCommonUtils.RDF.NS_RDF_NO_VALUE) {
+				this._dataObj.Assert(aRes, aProp, sbCommonUtils.RDF.GetLiteral(newVal), true);
+			}
+			else {
+				oldVal = oldVal.QueryInterface(Components.interfaces.nsIRDFLiteral);
+				newVal = sbCommonUtils.RDF.GetLiteral(newVal);
+				this._dataObj.Change(aRes, aProp, oldVal, newVal);
+			}
 			this._flushWithDelay();
 		} catch(ex) {
+			sbCommonUtils.error(ex);
 		}
 	},
 

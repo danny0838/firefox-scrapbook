@@ -86,7 +86,7 @@ var sbTreeHandler = {
 			if ( parRes.Value == "urn:scrapbook:search" )
 			{
 				parRes = sbDataSource.findParentResource(curRes);
-				if ( sbCommonUtils.RDFCU.indexOf(sbDataSource.data, parRes, curRes) == -1 ) { alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SEND")); return; }
+				if ( sbCommonUtils.RDFCU.indexOf(sbDataSource.data, parRes, curRes) == -1 ) { sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SEND")); return; }
 			}
 			resList.push(curRes);
 			parList.push(parRes);
@@ -109,7 +109,7 @@ var sbTreeHandler = {
 			if ( parRes.Value == "urn:scrapbook:search" )
 			{
 				parRes = sbDataSource.findParentResource(curRes);
-				if ( sbCommonUtils.RDFCU.indexOf(sbDataSource.data, parRes, curRes) == -1 ) { alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SEND")); return; }
+				if ( sbCommonUtils.RDFCU.indexOf(sbDataSource.data, parRes, curRes) == -1 ) { sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SEND")); return; }
 			}
 			resList.push(curRes);
 			parList.push(parRes);

@@ -94,7 +94,7 @@ var sbCommonUtils = {
 
 	newItem : function(aID)
 	{
-		return { id : aID || "", type : "", title : "", chars : "", icon : "", source : "", comment : "" };
+		return { id : aID || "", type : "", title : "", chars : "", icon : "", source : "", comment : "", lock : "" };
 	},
 
 	getScrapBookDir : function()
@@ -498,7 +498,6 @@ var sbCommonUtils = {
 			case "folder" : return "chrome://scrapbook/skin/treefolder.png"; break;
 			case "note"   : return "chrome://scrapbook/skin/treenote.png";   break;
 			case "notex"  : return "chrome://scrapbook/skin/treenotex.png";  break;
-			case "notexl" : return "chrome://scrapbook/skin/treenotex.png";  break;
 			default       : return "chrome://scrapbook/skin/treeitem.png";   break;
 		}
 	},
@@ -845,6 +844,13 @@ var sbCommonUtils = {
 			aObject1[i] = aObject2[i];
 		}
 		return aObject1;
+	},
+
+	getKeys : function(aObject)
+	{
+		var ret = [];
+		for (var i in aObject) ret.push(i);
+		return ret;
 	},
 };
 

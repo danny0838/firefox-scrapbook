@@ -273,14 +273,12 @@ var sbController = {
 		}
 		var isNote = false;
 		var isNotex = false;
-		var isNotexl = false;
 		var isFolder = false;
 		var isBookmark = false;
 		var isSeparator = false;
 		switch (sbDataSource.getProperty(res, "type")) {
 			case "note"     : isNote      = true; break;
 			case "notex"    : isNotex     = true; break;
-			case "notexl"   : isNotexl    = true; break;
 			case "folder"   : isFolder    = true; break;
 			case "bookmark" : isBookmark  = true; break;
 			case "separator": isSeparator = true; break;
@@ -300,9 +298,8 @@ var sbController = {
 		getElement("sbPopupManage").hidden                     = !isFolder || isSeparator;
 		getElement("sbPopupNewFolder").previousSibling.hidden  = isSeparator;
 		getElement("sbPopupTools").hidden                      = isFolder || isSeparator;
-		getElement("sbPopupRenew").disabled                    = isNote || isNotex || isNotexl;
-		getElement("sbPopupInternalize").hidden                = !isNotex && !isNotexl;
-		getElement("sbPopupInternalize").disabled              = !isNotex;
+		getElement("sbPopupRenew").disabled                    = isNote || isNotex;
+		getElement("sbPopupInternalize").hidden                = !isNotex;
 		getElement("sbPopupShowFiles").disabled                = isBookmark;
 	},
 
@@ -532,7 +529,7 @@ var sbController = {
 				continue;
 			}
 			else if (sbDataSource.getRelativeIndex(aParResList[i], aResList[i]) < 0) {
-				alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_RESOURCE", [aResList[i].Value]));
+				sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_RESOURCE", [aResList[i].Value]));
 				continue;
 			}
 			rmIDs = rmIDs.concat(sbDataSource.deleteItemDescending(aResList[i], aParResList[i]));
@@ -629,7 +626,7 @@ var sbTreeDNDHandler = {
 						break;
 					}
 					default:
-						alert("Unsupported XferType:\n---\n"+sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0));
+						sbCommonUtils.alert("Unsupported XferType:\n---\n"+sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0));
 				}
 			} else
 			{
@@ -845,7 +842,7 @@ var sbTreeDNDHandler = {
 			);
 		}
 		else {
-			alert(sbCommonUtils.lang("scrapbook", "ERROR_INVALID_URL", [url]));
+			sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERROR_INVALID_URL", [url]));
 		}
 	},
 
