@@ -99,6 +99,12 @@ var sbPageEditor = {
 		}
 	},
 
+	uninit : function()
+	{
+		sbHtmlEditor.init(null, 0);
+		this.disable(true);
+	},
+
 	documentLoad : function(aDoc, aCallback, aThisArg)
 	{
 		if (aDoc.body) {

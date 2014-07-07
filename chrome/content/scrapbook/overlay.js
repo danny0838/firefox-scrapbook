@@ -154,6 +154,9 @@ var sbBrowserOverlay = {
 			if (this.infoMode)
 				window.setTimeout(function() { sbInfoViewer.init(id); }, 50);
 		}
+		else {
+			window.setTimeout(function() { sbPageEditor.uninit(); }, 0);
+		}
 		this.locateMe = null;
 		this.lastLocation = aURL;
 	},
