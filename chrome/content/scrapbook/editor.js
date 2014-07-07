@@ -47,7 +47,7 @@ var sbPageEditor = {
 				var curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
 				if (mainFile.equals(curFile)) {
 					gBrowser.selectedTab.label = this.item.title;
-					gBrowser.selectedTab.setAttribute("image", this.item.icon);
+					gBrowser.selectedTab.setAttribute("image", this.item.icon || sbCommonUtils.getDefaultIcon(this.item.type));
 				}
 			} catch(ex) {
 				sbCommonUtils.error(ex);
