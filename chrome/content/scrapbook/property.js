@@ -102,7 +102,6 @@ var sbPropService = {
 			for (var prop in this.item)  {
 				sbDataSource.setProperty(this.resource, prop, this.item[prop]);
 			}
-			sbDataSource.flush();  // required since this window is immediately closed
 			if (!this.isTypeFolder && !this.isTypeBookmark && !this.isTypeSeparator)
 				sbCommonUtils.writeIndexDat(this.item);
 		}
