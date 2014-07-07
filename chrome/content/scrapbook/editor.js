@@ -92,7 +92,7 @@ var sbPageEditor = {
 				this.initEvent(win, 1);
 				this.documentLoad(win.document, function(doc){
 					sbPageEditor.documentBeforeEdit(doc);
-				}, true);
+				}, this);
 			}, this);
 			if (this.item && this.item.lock != "true" && this.item.type == "notex" && sbCommonUtils.getPref("edit.autoEditNoteX", true)) {
 				this.documentLoad(window.content.document, function(doc){
@@ -102,7 +102,7 @@ var sbPageEditor = {
 					var _changed = sbCommonUtils.documentData(doc, "changed");
 					sbHtmlEditor.init(window.content.document, 1);
 					if (!_changed) sbCommonUtils.documentData(doc, "changed", false);
-				}, true);
+				}, this);
 			}
 		}
 	},
