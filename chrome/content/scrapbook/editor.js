@@ -86,7 +86,7 @@ var sbPageEditor = {
 					sbPageEditor.documentBeforeEdit(doc);
 				}, true);
 			}, this);
-			if (this.item && this.item.type == "notex" && sbCommonUtils.getPref("edit.autoEditNoteX", true)) {
+			if (this.item && this.item.lock != "true" && this.item.type == "notex" && sbCommonUtils.getPref("edit.autoEditNoteX", true)) {
 				this.documentLoad(window.content.document, function(doc){
 					// check document type and make sure it's a file
 					if (doc.contentType != "text/html") return;
@@ -406,6 +406,12 @@ var sbPageEditor = {
 		var curURL = window.content.location.href;
 		if (sbBrowserOverlay.getID(curURL) != this.item.id) {
 			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SAVE_FILE", [curURL]));
+			return;
+		}
+		// Do not allow locked items be saved
+		// use the newest value from datesource since the user could change it after loading this page
+		if (sbDataSource.getProperty(sbBrowserOverlay.resource, "lock") == "true") {
+			alert(sbCommonUtils.lang("scrapbook", "MSG_CANT_SAVE_LOCKED"));
 			return;
 		}
 		// check pass, exec the saving
