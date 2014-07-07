@@ -622,7 +622,7 @@ var sbCacheSource = {
 	{
 		try {
 			var retVal = this.dataSource.GetTarget(aRes, sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + aProp), true);
-			return retVal.QueryInterface(Components.interfaces.nsIRDFLiteral).ValueUTF8;
+			return retVal.QueryInterface(Components.interfaces.nsIRDFLiteral).Value;
 		} catch(ex) {
 			return "";
 		}

@@ -1,3 +1,9 @@
+Scrapbook X 1.12.0a6
+----------------
+
+- FIXED: Fulltext search does not work.
+
+
 Scrapbook X 1.12.0a5
 ----------------
 
