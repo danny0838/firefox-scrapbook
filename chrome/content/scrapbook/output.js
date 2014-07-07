@@ -153,13 +153,20 @@ var sbOutputService = {
 			+ '	}\n'
 			+ '	function toggleAll(willOpen) {\n'
 			+ '		var ulElems = document.getElementsByTagName("UL");\n'
+			+ '		if (willOpen === undefined) {\n'
+			+ '			willOpen = false;\n'
+			+ '			for ( var i = 1; i < ulElems.length; i++ ) {\n'
+			+ '				if (ulElems[i].style.display == "none") { willOpen = true; break; }\n'
+			+ '			}\n'
+			+ '		}\n'
 			+ '		for ( var i = 1; i < ulElems.length; i++ ) {\n'
 			+ '			ulElems[i].style.display = willOpen ? "block" : "none";\n'
 			+ '		}\n'
 			+ '	}\n'
 			+ '	</script>\n'
 			+ '</head>\n\n'
-			+ '<body onload="init();">\n\n'
+			+ '<body onload="init();">\n'
+			+ '<div id="header"><a href="javascript:toggleAll();">ScrapBook</a></div>\n'
 		return HTML;
 	},
 
