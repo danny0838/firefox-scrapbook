@@ -31,8 +31,6 @@ var sbPageEditor = {
 		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighterPreview"), cssText);
 
 		// show and enable the edit toolbar, with several settings
-		this.disable(false);
-		this.showHide(true);
 		// -- edit before
 		if ( !aID ) {
 			// if not a ScrapBook item, init is called by clicking "Edit Before"
@@ -67,10 +65,11 @@ var sbPageEditor = {
 		// -- inner link and attach file button
 		document.getElementById("ScrapBookEditAnnotation").firstChild.childNodes[1].disabled = (aID == null);
 		document.getElementById("ScrapBookEditAnnotation").firstChild.childNodes[2].disabled = (aID == null);
-		// -- deactivate DOMEraser
+		// -- refresh the toolbar
+		this.disable(false);
 		sbDOMEraser.init(0);
-		// -- refresh HtmlEditor toolbar
-		sbHtmlEditor.init(null, 2);
+		// sbHtmlEditor.init(null, 2);  // included in disable(false)
+		this.showHide(true);
 
 		// settings for the page, only if it's first load
 		if ( !sbCommonUtils.documentData(window.content.document, "inited") ) {
@@ -455,23 +454,19 @@ var sbPageEditor = {
 		sbCommonUtils.documentData(window.content.document, "propertyChanged", false);
 	},
 
+	// Currently we have 3 functions dealing with the toolbar state
+	//   1. disable
+	//   2. DOMEraser
+	//   3. HTMLEditor
+	// To prevent conflict:
+	//   - we should turn off DOMEraser before disable or it's effect will persist
+	//   - we should refresh HTMLEditor after since it may be on and should not get all disabled
 	disable : function(aBool)
 	{
-		if (aBool) {
-			var elems = this.TOOLBAR.childNodes;
-			for ( var i = 0; i < elems.length; i++ ) {
-				// this will store "true" or "false"
-				elems[i].setAttribute("was-disabled", elems[i].disabled);
-				elems[i].disabled = true;
-			}
-		}
-		else {
-			var elems = this.TOOLBAR.childNodes;
-			for ( var i = 0; i < elems.length; i++ ) {
-				elems[i].disabled = (elems[i].getAttribute("was-disabled") == "true");
-				elems[i].removeAttribute("was-disabled");
-			}
-		}
+		if (aBool) sbDOMEraser.init(0);
+		var elems = this.TOOLBAR.childNodes;
+		for ( var i = 0; i < elems.length; i++ ) elems[i].disabled = aBool;
+		if (!aBool) sbHtmlEditor.init(null, 2);
 	},
 
 	toggle : function()
