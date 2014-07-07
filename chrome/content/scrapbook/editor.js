@@ -67,9 +67,17 @@ var sbPageEditor = {
 		document.getElementById("ScrapBookEditAnnotation").firstChild.childNodes[1].disabled = (aID == null);
 		document.getElementById("ScrapBookEditAnnotation").firstChild.childNodes[2].disabled = (aID == null);
 		// -- refresh the toolbar
-		this.disable(false);
-		sbDOMEraser.init(0);
-		// sbHtmlEditor.init(null, 2);  // included in disable(false)
+		if ( aID && this.item.lock == "true" ) {
+			// locked items cannot be edited, simply show a disabled toolbar
+			// sbDOMEraser.init(0);  // included in disable(true)
+			sbHtmlEditor.init(null, 0);
+			this.disable(true);
+		}
+		else {
+			sbDOMEraser.init(0);
+			// sbHtmlEditor.init(null, 2);  // included in disable(false)
+			this.disable(false);
+		}
 		this.showHide(true);
 
 		// settings for the page, only if it's first load
