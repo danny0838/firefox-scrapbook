@@ -845,6 +845,13 @@ var sbCommonUtils = {
 		}
 		return aObject1;
 	},
+
+	getKeys : function(aObject)
+	{
+		var ret = [];
+		for (var i in aObject) ret.push(i);
+		return ret;
+	},
 };
 
 /**
