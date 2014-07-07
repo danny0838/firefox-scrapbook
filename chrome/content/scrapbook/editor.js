@@ -143,7 +143,6 @@ var sbPageEditor = {
 		if ((idx >= 1) && (idx <= 8) &&
 			!aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
 			sbPageEditor.highlight(idx);
-			aEvent.preventDefault();
 			return;
 		}
 	},
