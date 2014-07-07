@@ -51,10 +51,10 @@ var sbHighlighter = {
 			var sOffset	= range.startOffset;
 			var eOffset	= range.endOffset;
 			var sameNode = ( startC == endC );
-//alert("startC - "+startC+"\nendC - "+endC+"\nsOffset - "+sOffset+"\neOffset - "+eOffset);
+//sbCommonUtils.alert("startC - "+startC+"\nendC - "+endC+"\nsOffset - "+sOffset+"\neOffset - "+eOffset);
 			if ( aNodeName == "a" && !sameNode )
 			{
-			    alert(sbCommonUtils.lang("scrapbook", "MSG_ATTACH_ACROSS_TAGS"));
+			    sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_ATTACH_ACROSS_TAGS"));
 				return;
 			}
 			// Replace faulty original function

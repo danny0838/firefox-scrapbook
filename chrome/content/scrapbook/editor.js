@@ -361,7 +361,7 @@ var sbPageEditor = {
 				return true;
 			}
 		}
-		alert( sbCommonUtils.lang("overlay", "EDIT_UNDO_LAST") );
+		sbCommonUtils.alert( sbCommonUtils.lang("overlay", "EDIT_UNDO_LAST") );
 		return false;
 	},
 
@@ -404,13 +404,13 @@ var sbPageEditor = {
 		// acquires the id from current uri and check again for safe
 		var curURL = window.content.location.href;
 		if (sbBrowserOverlay.getID(curURL) != this.item.id) {
-			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SAVE_FILE", [curURL]));
+			sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SAVE_FILE", [curURL]));
 			return;
 		}
 		// Do not allow locked items be saved
 		// use the newest value from datesource since the user could change it after loading this page
 		if (sbDataSource.getProperty(sbBrowserOverlay.resource, "lock") == "true") {
-			alert(sbCommonUtils.lang("scrapbook", "MSG_CANT_SAVE_LOCKED"));
+			sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_CANT_SAVE_LOCKED"));
 			return;
 		}
 		// check pass, exec the saving
@@ -419,12 +419,12 @@ var sbPageEditor = {
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			var doc = win.document;
 			if ( doc.contentType != "text/html" ) {
-			    alert(sbCommonUtils.lang("scrapbook", "MSG_CANT_MODIFY", [doc.contentType]));
+			    sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_CANT_MODIFY", [doc.contentType]));
 				return;
 			}
 			var charset = doc.characterSet;
 			if (charset != "UTF-8") {
-			    alert(sbCommonUtils.lang("scrapbook", "MSG_NOT_UTF8", [doc.location.href]));
+			    sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_NOT_UTF8", [doc.location.href]));
 			}
 			this.documentBeforeSave(doc);
 			var rootNode = doc.getElementsByTagName("html")[0];

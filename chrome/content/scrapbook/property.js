@@ -198,7 +198,7 @@ var sbPropService = {
 				totalFile++;
 			}
 			catch (ex) {
-			    alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_READ_FILE_SIZE", [file.path]));
+			    sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_READ_FILE_SIZE", [file.path]));
 			}
 		}, this);
 		return [totalSize, totalFile, totalDir];

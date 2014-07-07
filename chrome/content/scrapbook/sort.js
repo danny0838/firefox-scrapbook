@@ -282,7 +282,7 @@ var sbSortService = {
 		stunden[1] = datum.getHours();
 		minuten[1] = datum.getMinutes();
 		sekundn[1] = datum.getSeconds();
-//		alert("Startzeit: "+stunden[0]+":"+minuten[0]+":"+sekundn[0]+"\r\nEndzeit:   "+stunden[1]+":"+minuten[1]+":"+sekundn[1])
+//		sbCommonUtils.alert("Startzeit: "+stunden[0]+":"+minuten[0]+":"+sekundn[0]+"\r\nEndzeit:   "+stunden[1]+":"+minuten[1]+":"+sekundn[1])
 		if (getauscht > 0)
 		{
 			//RDF-Datenquelle vom tree entfernen
@@ -317,14 +317,14 @@ var sbSortService = {
 			//RDF-Datenquelle dem tree hinzufügen
 			treeObj.database.AddDataSource(daten);
 		}
-//		alert("Es wurden insgesamt "+getauscht+" Eintraege verschoben.");
+//		sbCommonUtils.alert("Es wurden insgesamt "+getauscht+" Eintraege verschoben.");
 		//Endzeit festhalten
 		datum      = new Date();
 		stunden[3] = datum.getHours();
 		minuten[3] = datum.getMinutes();
 		sekundn[3] = datum.getSeconds();
 		//Start- und Endzeit ausgeben
-//		alert("Startzeit: "+stunden[0]+":"+minuten[0]+":"+sekundn[0]+"\r\nEndzeit:   "+stunden[3]+":"+minuten[3]+":"+sekundn[3]);
+//		sbCommonUtils.alert("Startzeit: "+stunden[0]+":"+minuten[0]+":"+sekundn[0]+"\r\nEndzeit:   "+stunden[3]+":"+minuten[3]+":"+sekundn[3]);
 		setTimeout(function(){ sbSortService.next(res); }, 0);
 	},
 
