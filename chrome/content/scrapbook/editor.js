@@ -4,6 +4,7 @@ var sbPageEditor = {
 	get TOOLBAR() { return document.getElementById("ScrapBookEditor"); },
 	get COMMENT() { return document.getElementById("ScrapBookEditComment"); },
 
+	enabled : true,
 	item : {},
 	multiline : false,
 
@@ -123,7 +124,7 @@ var sbPageEditor = {
 
 	handleKeyEvent : function(aEvent)
 	{
-		if (sbHtmlEditor.enabled || sbDOMEraser.enabled) return;
+		if (!sbPageEditor.enabled || sbHtmlEditor.enabled || sbDOMEraser.enabled) return;
 		// F9
 		if (aEvent.keyCode == aEvent.DOM_VK_F9 &&
 			!aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
@@ -464,6 +465,7 @@ var sbPageEditor = {
 	//   - we should refresh HTMLEditor after since it may be on and should not get all disabled
 	disable : function(aBool)
 	{
+		this.enabled = !aBool;
 		if (aBool) sbDOMEraser.init(0);
 		var elems = this.TOOLBAR.childNodes;
 		for ( var i = 0; i < elems.length; i++ ) elems[i].disabled = aBool;
