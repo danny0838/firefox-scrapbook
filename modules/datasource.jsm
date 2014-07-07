@@ -352,11 +352,17 @@ var sbDataSource = {
 		aProp = sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + aProp);
 		try {
 			var oldVal = this._dataObj.GetTarget(aRes, aProp, true);
-			oldVal = oldVal.QueryInterface(Components.interfaces.nsIRDFLiteral);
-			newVal = sbCommonUtils.RDF.GetLiteral(newVal);
-			this._dataObj.Change(aRes, aProp, oldVal, newVal);
+			if (oldVal == sbCommonUtils.RDF.NS_RDF_NO_VALUE) {
+				this._dataObj.Assert(aRes, aProp, sbCommonUtils.RDF.GetLiteral(newVal), true);
+			}
+			else {
+				oldVal = oldVal.QueryInterface(Components.interfaces.nsIRDFLiteral);
+				newVal = sbCommonUtils.RDF.GetLiteral(newVal);
+				this._dataObj.Change(aRes, aProp, oldVal, newVal);
+			}
 			this._flushWithDelay();
 		} catch(ex) {
+			sbCommonUtils.error(ex);
 		}
 	},
 
