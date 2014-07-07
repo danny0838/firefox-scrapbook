@@ -46,8 +46,13 @@ var sbPageEditor = {
 				var mainFile = sbCommonUtils.getContentDir(this.item.id); mainFile.append("index.html");
 				var curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
 				if (mainFile.equals(curFile)) {
-					gBrowser.selectedTab.label = this.item.title;
-					gBrowser.selectedTab.setAttribute("image", this.item.icon || sbCommonUtils.getDefaultIcon(this.item.type));
+					this.documentLoad(window.content.document, function(doc){
+						var that = this;
+						setTimeout(function(){
+							gBrowser.selectedTab.label = that.item.title;
+							gBrowser.selectedTab.setAttribute("image", that.item.icon || sbCommonUtils.getDefaultIcon(that.item.type));
+						}, 0);
+					}, this);
 				}
 			} catch(ex) {
 				sbCommonUtils.error(ex);
