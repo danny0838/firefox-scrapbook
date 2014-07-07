@@ -103,6 +103,10 @@ var sbPropService = {
 			}
 			if (!this.isTypeFolder && !this.isTypeBookmark && !this.isTypeSeparator)
 				sbCommonUtils.writeIndexDat(this.item);
+			// refresh the toolbar
+			// yes, we need to do large surgery to prevent inconsistency
+			// (eg. change property in window 2 and the window 1 shows old property)
+			sbCommonUtils.refreshGlobal();
 		}
 		if (window.arguments[1])
 			window.arguments[1].accept = true;
@@ -198,7 +202,7 @@ var sbPropService = {
 				totalFile++;
 			}
 			catch (ex) {
-			    alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_READ_FILE_SIZE", [file.path]));
+			    sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_READ_FILE_SIZE", [file.path]));
 			}
 		}, this);
 		return [totalSize, totalFile, totalDir];

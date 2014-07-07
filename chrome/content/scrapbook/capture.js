@@ -241,7 +241,7 @@ var sbCaptureTask = {
 					aTchild.appendChild(aTitem);
 				}
 			}
-		} catch(aEx) { alert("add\n---\n"+aEx); }
+		} catch(aEx) { sbCommonUtils.alert("add\n---\n"+aEx); }
 	},
 
 	start : function(aOverriddenURL)
@@ -485,7 +485,7 @@ var sbpFilter = {
 				}
 			} catch(aEx)
 			{
-				alert("This shouldn't happen\n---\n"+aEx);
+				sbCommonUtils.alert("This shouldn't happen\n---\n"+aEx);
 			}
 		}
 		//3. Selektion aktualisieren
@@ -682,7 +682,7 @@ var sbInvisibleBrowser = {
 			if (gCharset) this.ELEMENT.docShell.charset = gCharset;
 		}
 		catch (ex) {
-			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_CHANGE_CHARSET"));
+			sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_CHANGE_CHARSET"));
 		}
 		// nsIDocShellHistory is deprecated in newer version of Firefox
 		// nsIDocShell in the old version doesn't work

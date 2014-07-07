@@ -115,7 +115,7 @@ var sbCalcService = {
 		{
 			if ( resList[i].Value in hashTable )
 			{
-				alert(sbCommonUtils.lang("scrapbook", "WARN_DOUBLE_ENTRY", [sbDataSource.getProperty(resList[i], "title")]));
+				sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "WARN_DOUBLE_ENTRY", [sbDataSource.getProperty(resList[i], "title")]));
 				var parRes = sbDataSource.findParentResource(resList[i]);
 				if ( parRes ) sbDataSource.removeFromContainer(parRes.Value, resList[i]);
 			}

@@ -529,7 +529,7 @@ var sbController = {
 				continue;
 			}
 			else if (sbDataSource.getRelativeIndex(aParResList[i], aResList[i]) < 0) {
-				alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_RESOURCE", [aResList[i].Value]));
+				sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_RESOURCE", [aResList[i].Value]));
 				continue;
 			}
 			rmIDs = rmIDs.concat(sbDataSource.deleteItemDescending(aResList[i], aParResList[i]));
@@ -626,7 +626,7 @@ var sbTreeDNDHandler = {
 						break;
 					}
 					default:
-						alert("Unsupported XferType:\n---\n"+sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0));
+						sbCommonUtils.alert("Unsupported XferType:\n---\n"+sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0));
 				}
 			} else
 			{
@@ -842,7 +842,7 @@ var sbTreeDNDHandler = {
 			);
 		}
 		else {
-			alert(sbCommonUtils.lang("scrapbook", "ERROR_INVALID_URL", [url]));
+			sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERROR_INVALID_URL", [url]));
 		}
 	},
 

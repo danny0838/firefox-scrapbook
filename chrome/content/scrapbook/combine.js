@@ -78,7 +78,7 @@ var sbCombineService = {
 		if (type == "folder" || type == "separator")
 			return;
 		if (type == "site")
-			alert(sbCommonUtils.lang("combine", "WARN_ABOUT_INDEPTH"));
+			sbCommonUtils.alert(sbCommonUtils.lang("combine", "WARN_ABOUT_INDEPTH"));
 		var icon = sbDataSource.getProperty(aRes, "icon");
 		if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
 		var listItem = this.LISTBOX.appendItem(sbDataSource.getProperty(aRes, "title"));
@@ -200,7 +200,7 @@ var sbCombineService = {
 		this.option["R"] = document.getElementById("sbCombineOptionRemove").checked;
 		this.toggleElements(true);
 		SB_trace(sbCommonUtils.lang("capture", "CAPTURE_START"));
-//alert("--"+document.getElementById("sbpTitleTextbox").value+"--");
+//sbCommonUtils.alert("--"+document.getElementById("sbpTitleTextbox").value+"--");
 		if ( document.getElementById("sbpTitleTextbox").value == "" )
 		{
 			setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null); }, 0);
@@ -447,7 +447,7 @@ var sbPageCombiner = {
 	{
 		if ( this.BODY.localName.toUpperCase() != "BODY" )
 		{
-			alert(sbCommonUtils.lang("combine", "CANNOT_COMBINE_FRAMES", [sbDataSource.getProperty(sbCombineService.curRes, "title")]));
+			sbCommonUtils.alert(sbCommonUtils.lang("combine", "CANNOT_COMBINE_FRAMES", [sbDataSource.getProperty(sbCombineService.curRes, "title")]));
 			this.BROWSER.stop();
 			window.location.reload();
 		}
