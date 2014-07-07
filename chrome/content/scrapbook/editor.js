@@ -345,11 +345,11 @@ var sbPageEditor = {
 		window.content.location.reload();
 	},
 
-	exit : function(forceExit)
+	exit : function()
 	{
 		if ( sbDOMEraser.enabled ) sbDOMEraser.init(0);
 		this.showHide(false);
-		if ( !forceExit ) this.restore();
+		this.uninit();
 	},
 
 	allowUndo : function(aDoc)
@@ -403,7 +403,7 @@ var sbPageEditor = {
 			}, this);
 			var ret = sbBrowserOverlay.execCapture(0, null, !aBypassDialog, "urn:scrapbook:root");
 			if ( ret ) {
-				this.exit(true);
+				this.exit();
 				return;
 			}
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
