@@ -59,7 +59,6 @@
 								</toolbarbutton>
 								<spacer flex="1" />
 								<checkbox id="sbPropMark" label="&sb.prop.mark;" />
-								<checkbox id="sbPropLock" label="&sb.prop.lock;" />
 							</hbox>
 						</row>
 						<separator class="groove" style="margin:8px 0px;" />
