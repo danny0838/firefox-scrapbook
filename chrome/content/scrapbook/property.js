@@ -36,6 +36,7 @@ var sbPropService = {
 		document.getElementById("sbPropChars").value   = this.item.chars;
 		document.getElementById("sbPropComment").value = this.item.comment.replace(/ __BR__ /g, "\n");
 		document.getElementById("sbPropMark").setAttribute("checked", this.item.type == "marked");
+		document.getElementById("sbPropLock").setAttribute("checked", this.item.lock == "true");
 		this.ICON.src = this.item.icon ? this.item.icon : sbCommonUtils.getDefaultIcon(this.item.type);
 		document.title = this.item.title;
 		if (sbDataSource.isContainer(this.resource))
@@ -59,6 +60,7 @@ var sbPropService = {
 		document.getElementById("sbPropIconMenu").hidden  = this.isTypeNote;
 		document.getElementById("sbPropSizeRow").hidden   = this.isTypeFolder || this.isTypeBookmark || this.isTypeSeparator;
 		document.getElementById("sbPropMark").hidden      = this.isTypeFolder || this.isTypeNote || this.isTypeNotex || this.isTypeFile || this.isTypeSite || this.isTypeBookmark;
+		document.getElementById("sbPropLock").hidden      = this.isTypeFolder || this.isTypeNote || this.isTypeBookmark;
 		document.getElementById("sbPropIconMenu").firstChild.firstChild.nextSibling.setAttribute("disabled", this.isTypeFolder || this.isTypeBookmark);
 		if (this.isTypeNote)
 			document.getElementById("sbPropTitle").removeAttribute("editable");
@@ -85,8 +87,10 @@ var sbPropService = {
 		};
 		if (!this.isTypeSeparator && !document.getElementById("sbPropMark").hidden)
 			newVals.type = document.getElementById("sbPropMark").checked ? "marked" : "";
+		if (!this.isTypeSeparator && !document.getElementById("sbPropLock").hidden)
+			newVals.lock = document.getElementById("sbPropLock").checked ? "true" : "";
 		var changed = false;
-		var props = ["title", "source", "comment", "type", "icon", "chars"];
+		var props = ["title", "source", "comment", "type", "icon", "chars", "lock"];
 		for (var i = 0; i < props.length; i++) {
 			if (this.item[props[i]] != newVals[props[i]]) {
 				this.item[props[i]] = newVals[props[i]];

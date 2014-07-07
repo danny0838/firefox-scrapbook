@@ -94,7 +94,7 @@ var sbCommonUtils = {
 
 	newItem : function(aID)
 	{
-		return { id : aID || "", type : "", title : "", chars : "", icon : "", source : "", comment : "" };
+		return { id : aID || "", type : "", title : "", chars : "", icon : "", source : "", comment : "", lock : "" };
 	},
 
 	getScrapBookDir : function()
@@ -844,6 +844,13 @@ var sbCommonUtils = {
 			aObject1[i] = aObject2[i];
 		}
 		return aObject1;
+	},
+
+	getKeys : function(aObject)
+	{
+		var ret = [];
+		for (var i in aObject) ret.push(i);
+		return ret;
 	},
 };
 
