@@ -400,13 +400,15 @@ var sbPageEditor = {
 
 	savePage : function()
 	{
+		// if for some reason the item no longer exists, abort
 		if ( !sbDataSource.exists(sbBrowserOverlay.resource) ) { this.disable(true); return; }
+		// acquires the id from current uri and check again for safe
 		var curURL = window.content.location.href;
-		if ( curURL.indexOf("file://") != 0 || !curURL.match(/\/data\/(\d{14})\/(.+)$/) || RegExp.$1 != this.item.id || RegExp.$2 == "index.dat" || RegExp.$2 == "sitemap.xml" )
-		{
-			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SAVE_FILE", [RegExp.$2]));
+		if (sbBrowserOverlay.getID(curURL) != this.item.id) {
+			alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SAVE_FILE", [curURL]));
 			return;
 		}
+		// check pass, exec the saving
 		sbDOMEraser.init(0);
 		this.disable(true);
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
