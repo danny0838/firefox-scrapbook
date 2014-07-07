@@ -115,7 +115,7 @@ var sbPageEditor = {
 
 	documentLoad : function(aDoc, aCallback, aThisArg)
 	{
-		if (aDoc.body) {
+		if (aDoc.readyState === 'complete') {
 			aCallback.call(aThisArg, aDoc);
 			return;
 		}
