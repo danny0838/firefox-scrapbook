@@ -209,14 +209,6 @@ var sbContentSaver = {
 			var myCSSFileName = arr[0];
 		}
 
-		// construct the tree, especially for capture of partial selection
-		if ( this.selection )
-		{
-			var myRange = this.selection.getRangeAt(0);
-			var myDocFrag = myRange.cloneContents();
-			var curNode = myRange.commonAncestorContainer;
-			if ( curNode.nodeName == "#text" ) curNode = curNode.parentNode;
-		}
 		// cloned frames has contentDocument = null
 		// give all frames an unique id for later retrieving
 		var htmlNode = aDocument.getElementsByTagName("html")[0];
@@ -233,6 +225,14 @@ var sbContentSaver = {
 			var idx = this.frames.length;
 			this.frames[idx] = frame;
 			frame.setAttribute("data-sb-frame-id", idx);
+		}
+		// construct the tree, especially for capture of partial selection
+		if ( this.selection )
+		{
+			var myRange = this.selection.getRangeAt(0);
+			var myDocFrag = myRange.cloneContents();
+			var curNode = myRange.commonAncestorContainer;
+			if ( curNode.nodeName == "#text" ) curNode = curNode.parentNode;
 		}
 		// now make the clone
 		var tmpNodeList = [];
