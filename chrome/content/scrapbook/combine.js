@@ -423,8 +423,14 @@ var sbPageCombiner = {
 			case "file" :
 				var htmlFile = sbCommonUtils.getContentDir(sbCombineService.curID);
 				htmlFile.append("index.html");
-				var isMatch = sbCommonUtils.readFile(htmlFile).match(/URL=\.\/([^\"]+)\"/);
-				if ( isMatch ) linkURL = "./data/" + sbCombineService.curID + "/" + RegExp.$1;
+				if (sbCommonUtils.readFile(htmlFile).match(/\s*content="\d+;URL=([^"]+)"/i)) {
+					var file = sbCommonUtils.getContentDir(sbCombineService.curID); file.append("index.html");
+					var relURL = sbCommonUtils.convertToUnicode(RegExp.$1, "UTF-8");
+					var URI1 = sbCommonUtils.convertFilePathToURL(file.path);
+					var URI2 = sbCommonUtils.resolveURL(URI1, relURL);
+					var file2 = sbCommonUtils.convertURLToFile(URI2);
+					linkURL = sbCommonUtils.convertFilePathToURL(file2.path);
+				}
 				break;
 			case "note" :
 				linkURL = ""; break;
