@@ -716,7 +716,7 @@ var sbInvisibleBrowser = {
 				     metaElems[i].getAttribute("http-equiv").toLowerCase() == "refresh" && 
 				     metaElems[i].getAttribute("content").match(/URL\=(.*)$/i) )
 				{
-					var newURL = sbCommonUtils.resolveURL(sbCaptureTask.URL, RegExp.$1);
+					var newURL = encodeURI(sbCommonUtils.resolveURL(sbCaptureTask.URL, RegExp.$1));
 					if ( newURL != sbCaptureTask.URL )
 					{
 						sbCaptureTask.start(newURL);
