@@ -732,8 +732,7 @@ var sbInvisibleBrowser = {
 		}
 		else
 		{
-			var type = sbCaptureTask.contentType.match(/image/i) ? "image" : "file";
-			ret = sbContentSaver.captureFile(sbCaptureTask.URL, gRefURL ? gRefURL : sbCaptureTask.URL, type, gShowDetail, gResName, gResIdx, preset, gContext);
+			ret = sbContentSaver.captureFile(sbCaptureTask.URL, gRefURL ? gRefURL : sbCaptureTask.URL, "file", gShowDetail, gResName, gResIdx, preset, gContext);
 		}
 		if ( ret )
 		{
