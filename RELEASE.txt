@@ -1,3 +1,9 @@
+Scrapbook X 1.12.0a8
+----------------
+
+- FIXED: Capture selection does not work if frames are included.
+
+
 Scrapbook X 1.12.0a7
 ----------------
 
