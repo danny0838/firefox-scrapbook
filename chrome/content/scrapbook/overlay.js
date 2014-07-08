@@ -129,12 +129,7 @@ var sbBrowserOverlay = {
 	getID: function(aURL)
 	{
 		if (!aURL) aURL = gBrowser.currentURI ? gBrowser.currentURI.spec : "";
-		var file = sbCommonUtils.convertURLToFile(aURL);
-		if (!file || !file.exists() || !file.isFile()) return null;
-		var aURL = sbCommonUtils.convertFilePathToURL(file.path);
-		var sbDir = sbCommonUtils.convertFilePathToURL(sbCommonUtils.getScrapBookDir().path);
-		var sbPath = new RegExp("^" + sbCommonUtils.escapeRegExp(sbDir) + "data/(\\d{14})/");
-		return aURL.match(sbPath) ? RegExp.$1 : null;
+		return sbCommonUtils.convertURLToId(aURL);
 	},
 
 	onLocationChange: function(aURL)

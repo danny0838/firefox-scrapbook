@@ -146,16 +146,10 @@ var sbCommonUtils = {
 		var file;
 		try {
 			if ( check && !aDir.leafName.match(/^\d{14}$/) ) return;
-			var fileEnum = aDir.directoryEntries;
-			while ( fileEnum.hasMoreElements() )
-			{
-				file = fileEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
-				file.remove(true);
-			}
-			if ( aDir.isDirectory() ) aDir.remove(false);
+			aDir.remove(true);
 			return true;
 		} catch(ex) {
-			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_FILE", [file.path, ex]));
+			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_FILE", [aDir ? aDir.path : "", ex]));
 			return false;
 		}
 	},
@@ -434,6 +428,16 @@ var sbCommonUtils = {
 			return fileHandler.getFileFromURLSpec(aURLString);
 		} catch(ex) {
 		}
+	},
+
+	convertURLToId : function(aURL)
+	{
+		var file = sbCommonUtils.convertURLToFile(aURL);
+		if (!file || !file.exists() || !file.isFile()) return null;
+		var aURL = sbCommonUtils.convertFilePathToURL(file.path);
+		var sbDir = sbCommonUtils.convertFilePathToURL(sbCommonUtils.getScrapBookDir().path);
+		var sbPath = new RegExp("^" + sbCommonUtils.escapeRegExp(sbDir) + "data/(\\d{14})/");
+		return aURL.match(sbPath) ? RegExp.$1 : null;
 	},
 
 	execProgram : function(aExecFilePath, args)
