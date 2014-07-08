@@ -149,7 +149,7 @@ var sbOutputService = {
 			+ '	}\n'
 			+ '	function renewHash() {\n'
 			+ '		if (self == top) return;\n'
-			+ '		top.location.hash = this.getAttribute("href");\n'
+			+ '		top.location.hash = "#" + this.getAttribute("href");\n'
 			+ '		top.document.title = this.childNodes[1].nodeValue;\n'
 			+ '	}\n'
 			+ '	function toggle(aID) {\n'
