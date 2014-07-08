@@ -393,10 +393,11 @@ var sbPageCombiner = {
 		}
 		else
 		{
+			aType = sbDataSource.getProperty(sbCombineService.curRes, "type");
 			this.cssText += this.surroundCSS();
 			this.processDOMRecursively(this.BODY);
 			if ( this.isTargetCombined ) {
-				this.htmlSrc += this.BODY.innerHTML;
+				this.htmlSrc += this.surroundDOMCombined();
 			}
 			else {
 				this.htmlSrc += this.getCiteHTML(aType);
@@ -422,8 +423,14 @@ var sbPageCombiner = {
 			case "file" :
 				var htmlFile = sbCommonUtils.getContentDir(sbCombineService.curID);
 				htmlFile.append("index.html");
-				var isMatch = sbCommonUtils.readFile(htmlFile).match(/URL=\.\/([^\"]+)\"/);
-				if ( isMatch ) linkURL = "./data/" + sbCombineService.curID + "/" + RegExp.$1;
+				if (sbCommonUtils.readFile(htmlFile).match(/\s*content="\d+;URL=([^"]+)"/i)) {
+					var file = sbCommonUtils.getContentDir(sbCombineService.curID); file.append("index.html");
+					var relURL = sbCommonUtils.convertToUnicode(RegExp.$1, "UTF-8");
+					var URI1 = sbCommonUtils.convertFilePathToURL(file.path);
+					var URI2 = sbCommonUtils.resolveURL(URI1, relURL);
+					var file2 = sbCommonUtils.convertURLToFile(URI2);
+					linkURL = sbCommonUtils.convertFilePathToURL(file2.path);
+				}
 				break;
 			case "note" :
 				linkURL = ""; break;
@@ -438,7 +445,7 @@ var sbPageCombiner = {
 		}
 		src += '<cite class="scrapbook-header' + '">\n';
 		src += '\t<img src="' + icon + '" width="16" height="16">\n';
-		src += '\t' + (linkURL ? '<a href="' + linkURL + '">' + title + '</a>' : title) + '\n';
+		src += '\t<a class="' + aType + '"' + (linkURL ? ' href="' + linkURL + '"' : "") + '>' + title + '</a>\n';
 		src += '</cite>\n';
 		return src;
 	},
@@ -471,6 +478,14 @@ var sbPageCombiner = {
 		divHTML.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
 		divWrap.appendChild(divHTML);
 		divWrap.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
+		return sbCommonUtils.getOuterHTML(divWrap, true);
+	},
+
+	surroundDOMCombined : function()
+	{
+		var divWrap = this.BROWSER.contentDocument.createElement("DIV");
+		divWrap.id = "item" + sbCombineService.curID;
+		divWrap.innerHTML = this.BODY.innerHTML;
 		return sbCommonUtils.getOuterHTML(divWrap, true);
 	},
 
