@@ -146,16 +146,10 @@ var sbCommonUtils = {
 		var file;
 		try {
 			if ( check && !aDir.leafName.match(/^\d{14}$/) ) return;
-			var fileEnum = aDir.directoryEntries;
-			while ( fileEnum.hasMoreElements() )
-			{
-				file = fileEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
-				file.remove(true);
-			}
-			if ( aDir.isDirectory() ) aDir.remove(false);
+			aDir.remove(true);
 			return true;
 		} catch(ex) {
-			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_FILE", [file ? file.path : "", ex]));
+			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_FILE", [aDir ? aDir.path : "", ex]));
 			return false;
 		}
 	},
