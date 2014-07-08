@@ -397,7 +397,7 @@ var sbPageCombiner = {
 			this.cssText += this.surroundCSS();
 			this.processDOMRecursively(this.BODY);
 			if ( this.isTargetCombined ) {
-				this.htmlSrc += this.BODY.innerHTML;
+				this.htmlSrc += this.surroundDOMCombined();
 			}
 			else {
 				this.htmlSrc += this.getCiteHTML(aType);
@@ -478,6 +478,14 @@ var sbPageCombiner = {
 		divHTML.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
 		divWrap.appendChild(divHTML);
 		divWrap.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
+		return sbCommonUtils.getOuterHTML(divWrap, true);
+	},
+
+	surroundDOMCombined : function()
+	{
+		var divWrap = this.BROWSER.contentDocument.createElement("DIV");
+		divWrap.id = "item" + sbCombineService.curID;
+		divWrap.innerHTML = this.BODY.innerHTML;
 		return sbCommonUtils.getOuterHTML(divWrap, true);
 	},
 
