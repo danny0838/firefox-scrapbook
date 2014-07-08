@@ -46,8 +46,13 @@ var sbPageEditor = {
 				var mainFile = sbCommonUtils.getContentDir(this.item.id); mainFile.append("index.html");
 				var curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
 				if (mainFile.equals(curFile)) {
-					gBrowser.selectedTab.label = this.item.title;
-					gBrowser.selectedTab.setAttribute("image", this.item.icon);
+					this.documentLoad(window.content.document, function(doc){
+						var that = this;
+						setTimeout(function(){
+							gBrowser.selectedTab.label = that.item.title;
+							gBrowser.selectedTab.setAttribute("image", that.item.icon || sbCommonUtils.getDefaultIcon(that.item.type));
+						}, 0);
+					}, this);
 				}
 			} catch(ex) {
 				sbCommonUtils.error(ex);
@@ -92,7 +97,7 @@ var sbPageEditor = {
 				this.initEvent(win, 1);
 				this.documentLoad(win.document, function(doc){
 					sbPageEditor.documentBeforeEdit(doc);
-				}, true);
+				}, this);
 			}, this);
 			if (this.item && this.item.lock != "true" && this.item.type == "notex" && sbCommonUtils.getPref("edit.autoEditNoteX", true)) {
 				this.documentLoad(window.content.document, function(doc){
@@ -102,7 +107,7 @@ var sbPageEditor = {
 					var _changed = sbCommonUtils.documentData(doc, "changed");
 					sbHtmlEditor.init(window.content.document, 1);
 					if (!_changed) sbCommonUtils.documentData(doc, "changed", false);
-				}, true);
+				}, this);
 			}
 		}
 	},
@@ -115,7 +120,7 @@ var sbPageEditor = {
 
 	documentLoad : function(aDoc, aCallback, aThisArg)
 	{
-		if (aDoc.body) {
+		if (aDoc.readyState === 'complete') {
 			aCallback.call(aThisArg, aDoc);
 			return;
 		}
