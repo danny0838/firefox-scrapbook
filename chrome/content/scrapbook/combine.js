@@ -393,6 +393,7 @@ var sbPageCombiner = {
 		}
 		else
 		{
+			aType = sbDataSource.getProperty(sbCombineService.curRes, "type");
 			this.cssText += this.surroundCSS();
 			this.processDOMRecursively(this.BODY);
 			if ( this.isTargetCombined ) {
