@@ -149,6 +149,7 @@ var sbCombineService = {
 				sbPageCombiner.exec(type);
 			} else
 			{
+				sbPageCombiner.refreshHash = {};
 				sbInvisibleBrowser.load(sbCommonUtils.getBaseHref(sbDataSource.data.URI) + "data/" + this.curID + "/index.html");
 			}
 		}
@@ -370,9 +371,29 @@ var sbPageCombiner = {
 	isTargetCombined : false,
 	htmlId: "",
 	bodyId: "",
+	refreshHash : null,
 
 	exec : function(aType)
 	{
+		// check for meta refresh
+		var metaElems = this.BROWSER.contentDocument.getElementsByTagName("meta");
+		for ( var i = 0; i < metaElems.length; i++ )
+		{
+			if ( metaElems[i].hasAttribute("http-equiv") && metaElems[i].hasAttribute("content") &&
+				 metaElems[i].getAttribute("http-equiv").toLowerCase() == "refresh" && 
+				 metaElems[i].getAttribute("content").match(/URL\=(.*)$/i) )
+			{
+				var curURL = this.BROWSER.currentURI.spec;
+				var newURL = encodeURI(sbCommonUtils.resolveURL(curURL, RegExp.$1));
+				if ( newURL != curURL && !this.refreshHash[newURL] )
+				{
+					this.refreshHash[curURL] = true;
+					sbInvisibleBrowser.load(newURL);
+					return;
+				}
+			}
+		}
+
 		this.isTargetCombined = false;
 		if ( sbCombineService.index == 0 )
 		{
