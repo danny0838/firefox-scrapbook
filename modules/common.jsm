@@ -436,6 +436,16 @@ var sbCommonUtils = {
 		}
 	},
 
+	convertURLToId : function(aURL)
+	{
+		var file = sbCommonUtils.convertURLToFile(aURL);
+		if (!file || !file.exists() || !file.isFile()) return null;
+		var aURL = sbCommonUtils.convertFilePathToURL(file.path);
+		var sbDir = sbCommonUtils.convertFilePathToURL(sbCommonUtils.getScrapBookDir().path);
+		var sbPath = new RegExp("^" + sbCommonUtils.escapeRegExp(sbDir) + "data/(\\d{14})/");
+		return aURL.match(sbPath) ? RegExp.$1 : null;
+	},
+
 	execProgram : function(aExecFilePath, args)
 	{
 		var execfile = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
