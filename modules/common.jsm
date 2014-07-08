@@ -155,7 +155,7 @@ var sbCommonUtils = {
 			if ( aDir.isDirectory() ) aDir.remove(false);
 			return true;
 		} catch(ex) {
-			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_FILE", [file.path, ex]));
+			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_FILE", [file ? file.path : "", ex]));
 			return false;
 		}
 	},
