@@ -278,7 +278,7 @@ var sbCaptureTask = {
 	{
 		document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
 		var treecell = document.createElement("treecell");
-		treecell.setAttribute("label", "OK");
+		treecell.setAttribute("label", this.sniffer.getStatus().join(" "));
 		treecell.setAttribute("properties", "success");
 		this.TREE.childNodes[1].childNodes[this.index].childNodes[0].appendChild(treecell);
 		this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "finished");
