@@ -52,10 +52,15 @@ a:active {
 	color:#FFFFFF;
 }
 
+a:focus {
+	text-decoration: underline;
+}
+
 /* ::::: type ::::: */
 a.marked   { font-weight: bold; }
 a.combine  { color: blue; }
 a.bookmark { color: limegreen; }
+a.notex { color: rgb(80,0,32); }
 
 /* ::::: icon ::::: */
 li img {
