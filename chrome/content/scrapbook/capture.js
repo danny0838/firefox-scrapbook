@@ -1031,27 +1031,34 @@ sbHeaderSniffer.prototype = {
 
 	onHttpSuccess : function()
 	{
+		// show connect success
 		sbCaptureTask.contentType = this.getHeader("Content-Type");
-		var httpStatus = this.getStatus();
 		SB_trace(sbCommonUtils.lang("capture", "CONNECT_SUCCESS", [sbCaptureTask.contentType]));
+
+		// get and show http status
+		var httpStatus = this.getStatus();
 		if ( httpStatus[0] >= 400 && httpStatus[0] < 600 || httpStatus[0] == 305 ) {
 			sbCaptureTask.failed++;
 			sbCaptureTask.fail(httpStatus.join(" "));
 			return;
 		}
+
+		// manage redirect if defined
 		var redirectURL = this.getHeader("Location");
-		if ( redirectURL )
-		{
+		if ( redirectURL ) {
 			if ( redirectURL.indexOf("http") != 0 ) redirectURL = this._URL.resolve(redirectURL);
 			sbCaptureTask.start(redirectURL);
 			return;
 		}
-		if ( !sbCaptureTask.contentType )
-		{
+
+		// if no content, assume it's html
+		if ( !sbCaptureTask.contentType ) {
 			sbCaptureTask.contentType = "text/html";
 		}
-		var func = function(val) { return sbCaptureTask.contentType.indexOf(val) >= 0; };
-		sbCaptureTask.isDocument = ["text/plain", "html", "xml"].some(func);
+		// check type, load it if it's a document
+		sbCaptureTask.isDocument = ["text/plain", "html", "xml"].some(function(val) {
+			return sbCaptureTask.contentType.indexOf(val) >= 0;
+		});
 		if (sbCaptureTask.isDocument) {
 			sbInvisibleBrowser.load(this.URLSpec);
 		}
