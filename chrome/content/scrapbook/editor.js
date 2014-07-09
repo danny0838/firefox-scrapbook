@@ -1031,6 +1031,7 @@ var sbHtmlEditor = {
 			try {
 				data.file.copyTo(destFile.parent, data.file.leafName);
 			} catch(ex) {
+				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [data.file.leafName]));
 				return;
 			}
 			// insert to the document
