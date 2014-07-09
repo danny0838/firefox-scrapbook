@@ -1028,8 +1028,12 @@ var sbHtmlEditor = {
 		if (!htmlFile) return;
 		// init
 		var sel = aDoc.defaultView.getSelection();
+		var selText = sel.toString();
+		if (selText && selText.match(/^([^\t\n\r\v\f]*)/i)) {
+			var url = RegExp.$1;
+		}
 		// prompt the dialog for user input
-		var data = {};
+		var data = { url: url };
 		var accepted = window.top.openDialog("chrome://scrapbook/content/editor_file.xul", "ScrapBook:AttachFile", "chrome,modal,centerscreen", data);
 		if (data.result != 1) return;
 		// insert file ?
