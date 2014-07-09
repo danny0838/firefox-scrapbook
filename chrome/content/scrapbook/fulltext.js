@@ -100,7 +100,10 @@ var sbSearchResult =
 					this.RegExpInclude.push( new RegExp(sbCommonUtils.escapeRegExp(word), this.RegExpModifier) );
 				}
 			}
-			if ( this.RegExpInclude.length == 0 ) return;
+			if ( this.RegExpInclude.length == 0 ) {
+				document.getElementById("sbResultHeader").firstChild.value = sbCommonUtils.lang("fulltext", "ERR_NO_INCLUDE_WORD", [this.QueryStrings['q']] );
+				return;
+			}
 		}
 		this.resEnum = sbCacheSource.container.GetElements();
 		this.count = sbCacheSource.container.GetCount();
@@ -151,7 +154,12 @@ var sbSearchResult =
 		var comment = sbDataSource.getProperty(res, "comment");
 		if ( this.QueryStrings['re'] == "true" )
 		{
-			var re = new RegExp(this.QueryStrings['q'], this.RegExpModifier);
+			try {
+				var re = new RegExp(this.QueryStrings['q'], this.RegExpModifier);
+			} catch (ex) {
+				document.getElementById("sbResultHeader").firstChild.value = sbCommonUtils.lang("fulltext", "ERR_REGEXP_INAVLID", [this.QueryStrings['q']] );
+				return;
+			}
 			var isMatchT = title.match(re);
 			var isMatchM = comment.match(re);
 			var isMatchC = content.match(re);
