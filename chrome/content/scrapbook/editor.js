@@ -1019,30 +1019,70 @@ var sbHtmlEditor = {
 		var data = {};
 		var accepted = window.top.openDialog("chrome://scrapbook/content/editor_file.xul", "ScrapBook:AttachFile", "chrome,modal,centerscreen", data);
 		if (data.result != 1) return;
-		// copy the selected file
-		var destFile = htmlFile.parent.clone();
-		destFile.append(data.file.leafName);
-		if ( destFile.exists() && destFile.isFile() ) {
-			if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [data.file.leafName])) ) return;
-			destFile.remove(false);
+		// insert file ?
+		if (data.file_use) {
+			// copy the selected file
+			var destFile = htmlFile.parent.clone();
+			destFile.append(data.file.leafName);
+			if ( destFile.exists() && destFile.isFile() ) {
+				if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [data.file.leafName])) ) return;
+				destFile.remove(false);
+			}
+			try {
+				data.file.copyTo(destFile.parent, data.file.leafName);
+			} catch(ex) {
+				return;
+			}
+			// insert to the document
+			if (data.format) {
+				var FILE = data.file.leafName;
+				var THIS = sel.isCollapsed ? FILE : sbPageEditor.getSelectionHTML(sel);
+				var html = data.format.replace(/{(FILE|THIS)}/g, function(){
+					switch (arguments[1]) {
+						case "FILE": return FILE;
+						case "THIS": return THIS;
+					}
+					return "";
+				});
+				aDoc.execCommand("insertHTML", false, html);
+			}
 		}
-		try {
-			data.file.copyTo(destFile.parent, data.file.leafName);
-		} catch(ex) {
-			return;
-		}
-		// insert to the document
-		if (data.format) {
-			var FILE = data.file.leafName;
-			var THIS = sel.isCollapsed ? FILE : sbPageEditor.getSelectionHTML(sel);
-			var html = data.format.replace(/{(FILE|THIS)}/g, function(){
-				switch (arguments[1]) {
-					case "FILE": return FILE;
-					case "THIS": return THIS;
-				}
-				return "";
-			});
-			aDoc.execCommand("insertHTML", false, html);
+		// insert html ?
+		else if (data.html_use) {
+			var filename = data.html + ".html";
+			var destFile = htmlFile.parent.clone();
+			destFile.append(filename);
+			if ( destFile.exists() && destFile.isFile() && filename != "index.html" ) {
+				if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [filename])) ) return;
+				destFile.remove(false);
+			}
+			// check the template file, create one if not exist
+			var template = sbCommonUtils.getScrapBookDir().clone();
+			template.append("notex_template.html");
+			if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/notex_template.html", template);
+			// create content
+			var content = sbCommonUtils.readFile(template);
+			content = sbCommonUtils.convertToUnicode(content, "UTF-8");
+			try {
+				if (filename == "index.html") throw "";  // do not allow to overwrite index page
+				sbCommonUtils.writeFile(destFile, content, "UTF-8");
+			} catch(ex) {
+				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename]));
+				return;
+			}
+			// insert to the document
+			if (data.format) {
+				var FILE = filename;
+				var THIS = sel.isCollapsed ? FILE : sbPageEditor.getSelectionHTML(sel);
+				var html = data.format.replace(/{(FILE|THIS)}/g, function(){
+					switch (arguments[1]) {
+						case "FILE": return FILE;
+						case "THIS": return THIS;
+					}
+					return "";
+				});
+				aDoc.execCommand("insertHTML", false, html);
+			}
 		}
 	},
 
