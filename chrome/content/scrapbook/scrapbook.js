@@ -242,7 +242,7 @@ var sbMainService = {
 		var instantApply = sbCommonUtils.getPref("browser.preferences.instantApply", false, true);
 		window.top.openDialog(
 			"chrome://scrapbook/content/prefs.xul", "ScrapBook:Options",
-			"chrome,titlebar,toolbar,centerscreen," + (instantApply ? "dialog=no" : "modal")
+			"chrome,titlebar,toolbar,centerscreen,resizable," + (instantApply ? "dialog=no" : "modal")
 		);
 	},
 
