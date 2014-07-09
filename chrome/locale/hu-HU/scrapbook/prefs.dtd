@@ -20,7 +20,7 @@
 <!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
 <!ENTITY sbx.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
-<!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format:">
+<!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format">
 <!ENTITY sb.prefs.data "Adattárolás helye">
 <!ENTITY sb.prefs.data.default "Alapértelmezett (Profil mappa)">
 <!ENTITY sb.prefs.data.custom "Mentés a következő helyre">

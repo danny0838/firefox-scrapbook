@@ -636,7 +636,16 @@ var sbHtmlEditor = {
 		"Alt+D" : "insertDate",
 		"Ctrl+Shift+C" : "insertTodoBox",
 		"Ctrl+Alt+Shift+C" : "insertTodoBoxDone",
-		"Alt+Z" : "wrapHTML",
+		"Ctrl+Alt+1" : "wrapHTML1",
+		"Ctrl+Alt+2" : "wrapHTML2",
+		"Ctrl+Alt+3" : "wrapHTML3",
+		"Ctrl+Alt+4" : "wrapHTML4",
+		"Ctrl+Alt+5" : "wrapHTML5",
+		"Ctrl+Alt+6" : "wrapHTML6",
+		"Ctrl+Alt+7" : "wrapHTML7",
+		"Ctrl+Alt+8" : "wrapHTML8",
+		"Ctrl+Alt+9" : "wrapHTML9",
+		"Ctrl+Alt+0" : "wrapHTML0",
 		"Ctrl+Alt+I" : "insertSource",
 	},
 
@@ -1067,11 +1076,61 @@ var sbHtmlEditor = {
 		aDoc.execCommand("insertHTML", false, html);
 	},
 
-	wrapHTML : function(aDoc)
+	wrapHTML1 : function(aDoc)
+	{
+		this._wrapHTML(aDoc, 1);
+	},
+
+	wrapHTML2 : function(aDoc)
+	{
+		this._wrapHTML(aDoc, 2);
+	},
+
+	wrapHTML3 : function(aDoc)
+	{
+		this._wrapHTML(aDoc, 3);
+	},
+
+	wrapHTML4 : function(aDoc)
+	{
+		this._wrapHTML(aDoc, 4);
+	},
+
+	wrapHTML5 : function(aDoc)
+	{
+		this._wrapHTML(aDoc, 5);
+	},
+
+	wrapHTML6 : function(aDoc)
+	{
+		this._wrapHTML(aDoc, 6);
+	},
+
+	wrapHTML7 : function(aDoc)
+	{
+		this._wrapHTML(aDoc, 7);
+	},
+
+	wrapHTML8 : function(aDoc)
+	{
+		this._wrapHTML(aDoc, 8);
+	},
+
+	wrapHTML9 : function(aDoc)
+	{
+		this._wrapHTML(aDoc, 9);
+	},
+
+	wrapHTML0 : function(aDoc)
+	{
+		this._wrapHTML(aDoc, 0);
+	},
+
+	_wrapHTML : function(aDoc, aIdx)
 	{
 		var sel = aDoc.defaultView.getSelection();
-		var html = sbPageEditor.getSelectionHTML(sel);
-		var wrapper = sbCommonUtils.getPref("edit.wrapperFormat", "") || "<code>{THIS}</code>";
+		var html = sel.isCollapsed ? "{THIS}" : sbPageEditor.getSelectionHTML(sel);
+		var wrapper = sbCommonUtils.getPref("edit.wrapperFormat." + aIdx, "") || "<code>{THIS}</code>";
 		html = wrapper.replace(/{THIS}/g, html);
 		aDoc.execCommand("insertHTML", false, html);
 	},

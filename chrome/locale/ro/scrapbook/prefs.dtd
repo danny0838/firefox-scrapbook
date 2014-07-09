@@ -20,7 +20,7 @@
 <!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
 <!ENTITY sbx.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
-<!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format:">
+<!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format">
 <!ENTITY sb.prefs.data "Locație stocare date">
 <!ENTITY sb.prefs.data.default "Implicit (dosarul profilului)">
 <!ENTITY sb.prefs.data.custom "Dosarul:">
