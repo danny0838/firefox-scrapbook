@@ -21,11 +21,17 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/editor_file.js" />
 
-	<hbox>
-		<label value="&sb.edit.html.file.pick;" />
-		<filefield id="sbFilePath" flex="1" />
-		<button id="sbFilePicker" label="&sb.button.browse;..." oncommand="pickFile();" />
-	</hbox>
+	<radiogroup id="sbFileSelector">
+		<hbox>
+			<radio id="sbFileFileUse" label="&sb.edit.html.file.pick;" />
+			<filefield id="sbFilePath" flex="1" />
+			<button id="sbFilePicker" label="&sb.button.browse;..." oncommand="if (pickFile()) pick('sbFileFileUse');" />
+		</hbox>
+		<hbox>
+			<radio id="sbFileHTMLUse" label="&sb.edit.html.file.html;" />
+			<textbox id="sbLinkHTML" placeholder="eg. index2" flex="1" oninput="pick('sbFileHTMLUse');" />
+		</hbox>
+	</radiogroup>
 	<separator />
 	<hbox>
 		<label value="&sb.edit.html.file.format;" />
