@@ -289,7 +289,6 @@
 				</menupopup>
 			</menulist>
 		</hbox>
-		<spacer flex="1" height="50" />
 	</prefpane>
 
 	<prefpane id="advancedPane" label="&sb.prefs.advanced;" flex="1">
