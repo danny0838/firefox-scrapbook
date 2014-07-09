@@ -1129,7 +1129,7 @@ var sbHtmlEditor = {
 	_wrapHTML : function(aDoc, aIdx)
 	{
 		var sel = aDoc.defaultView.getSelection();
-		var html = sbPageEditor.getSelectionHTML(sel);
+		var html = sel.isCollapsed ? "{THIS}" : sbPageEditor.getSelectionHTML(sel);
 		var wrapper = sbCommonUtils.getPref("edit.wrapperFormat." + aIdx, "") || "<code>{THIS}</code>";
 		html = wrapper.replace(/{THIS}/g, html);
 		aDoc.execCommand("insertHTML", false, html);
