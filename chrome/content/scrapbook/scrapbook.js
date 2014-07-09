@@ -963,7 +963,7 @@ var sbSearchService = {
 				shouldBuild = true;
 		}
 		var uri = "chrome://scrapbook/content/result.xul";
-		var query = "?q=" + this.query + "&re=" + this.optionRE.toString() + "&cs=" + this.optionCS.toString();
+		var query = "?q=" + encodeURIComponent(this.query) + "&re=" + this.optionRE.toString() + "&cs=" + this.optionCS.toString();
 		if (this.treeRef != "urn:scrapbook:root")
 			query += "&ref=" + this.treeRef;
 		if (shouldBuild) {
