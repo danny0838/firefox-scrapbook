@@ -632,6 +632,7 @@ var sbHtmlEditor = {
 		"Ctrl+L" : "attachLink",
 		"Alt+I" : "attachFile",
 
+		"Alt+H" : "horizontalLine",
 		"Alt+D" : "insertDate",
 		"Ctrl+Shift+C" : "insertTodoBox",
 		"Ctrl+Alt+Shift+C" : "insertTodoBoxDone",
@@ -1032,6 +1033,12 @@ var sbHtmlEditor = {
 			});
 			aDoc.execCommand("insertHTML", false, html);
 		}
+	},
+
+	horizontalLine : function(aDoc)
+	{
+		var html = '<hr/>';
+		aDoc.execCommand("insertHTML", false, html);
 	},
 
 	insertDate : function(aDoc)
