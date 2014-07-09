@@ -1054,10 +1054,12 @@ var sbHtmlEditor = {
 			// insert to the document
 			if (data.format) {
 				var FILE = data.file.leafName;
+				var FILE_E = encodeURIComponent(FILE);
 				var THIS = sel.isCollapsed ? FILE : sbPageEditor.getSelectionHTML(sel);
-				var html = data.format.replace(/{(FILE|THIS)}/g, function(){
+				var html = data.format.replace(/{(FILE|FILE_E|THIS)}/g, function(){
 					switch (arguments[1]) {
 						case "FILE": return FILE;
+						case "FILE_E": return FILE_E;
 						case "THIS": return THIS;
 					}
 					return "";
@@ -1091,10 +1093,12 @@ var sbHtmlEditor = {
 			// insert to the document
 			if (data.format) {
 				var FILE = filename;
+				var FILE_E = encodeURIComponent(FILE);
 				var THIS = sel.isCollapsed ? FILE : sbPageEditor.getSelectionHTML(sel);
-				var html = data.format.replace(/{(FILE|THIS)}/g, function(){
+				var html = data.format.replace(/{(FILE|FILE_E|THIS)}/g, function(){
 					switch (arguments[1]) {
 						case "FILE": return FILE;
+						case "FILE_E": return FILE_E;
 						case "THIS": return THIS;
 					}
 					return "";
