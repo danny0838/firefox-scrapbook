@@ -266,7 +266,7 @@ var sbPageEditor = {
 			if ( nodeRange.compareBoundaryPoints(Range.START_TO_END, selRange) > -1 )
 			{
 				if ( nodeRange.compareBoundaryPoints(Range.END_TO_START, selRange) > 0 ) break;
-				else if ( node.nodeType === 1 && sbCommonUtils.getSbObjectType(node) )
+				else if ( node.nodeType === 1 && sbCommonUtils.getSbObjectRemoveType(node) != 0 )
 				{
 					nodeToDel.push(node);
 				}
@@ -283,18 +283,16 @@ var sbPageEditor = {
 
 	removeSbObjects : function()
 	{
+		var nodeToDel = [];
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			var doc = win.document;
 			this.allowUndo(doc);
 			var elems = doc.getElementsByTagName("*");
 			for ( var i = 0; i < elems.length; i++ ) {
-				if ( sbCommonUtils.getSbObjectType(elems[i]) ) {
-					// elems gets shortened when elems[i] is removed, minus i afterwards to prevent skipping
-					this.removeSbObj(elems[i]);
-					i--;
-				}
+				if ( sbCommonUtils.getSbObjectRemoveType(elems[i]) != 0 ) nodeToDel.push(elems[i]);
 			}
 		}, this);
+		for ( var i = 0, len = nodeToDel.length; i < len; ++i ) this.removeSbObj(nodeToDel[i]);
 	},
 
 	removeElementsByTagName : function(aTagName)
@@ -311,16 +309,13 @@ var sbPageEditor = {
 
 	removeSbObj : function(aNode)
 	{
-		switch (sbCommonUtils.getSbObjectType(aNode)) {
-			case "linemarker" :
-			case "inline" :
-			case "link-url" :
-			case "link-inner" :
-			case "link-file" :
+		switch (sbCommonUtils.getSbObjectRemoveType(aNode)) {
+			case 1:
+				aNode.parentNode.removeChild(aNode);
+				break;
+			case 2:
 				this.unwrapNode(aNode);
 				break;
-			default:
-				aNode.parentNode.removeChild(aNode);
 		}
 	},
 
@@ -1314,7 +1309,7 @@ var sbDOMEraser = {
 		if (!aNode) return false;
 		this._deselectNode();
 		sbPageEditor.allowUndo(aNode.ownerDocument);
-		if ( sbCommonUtils.getSbObjectType(aNode) ) {
+		if ( sbCommonUtils.getSbObjectRemoveType(aNode) != 0 ) {
 			sbPageEditor.removeSbObj(aNode);
 		}
 		else {
@@ -1422,7 +1417,7 @@ var sbDOMEraser = {
 		}
 		tooltip.style.left = this.lastX + "px";
 		tooltip.style.top  = this.lastY + "px";
-		if ( sbCommonUtils.getSbObjectType(aNode) ) {
+		if ( sbCommonUtils.getSbObjectRemoveType(aNode) != 0 ) {
 			tooltip.textContent = sbCommonUtils.lang("overlay", "EDIT_REMOVE_HIGHLIGHT");
 			sbDOMEraser._setOutline(aNode, "2px dashed #0000FF");
 		}
