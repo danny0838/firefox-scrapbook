@@ -713,7 +713,7 @@ var sbTreeDNDHandler = {
 
 	moveMultiple: function()
 	{
-		var idxList = sbTreeHandler.getSelection(false, 2);
+		var idxList = sbTreeHandler.getSelection(false, 0);
 		var i = 0;
 		var curResList = []; var curParList = [];
 		var tarResList = []; var tarParList = [];
