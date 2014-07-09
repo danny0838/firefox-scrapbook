@@ -1964,15 +1964,16 @@ var sbAnnotationService = {
 			var ret = FP.show();
 			if ( ret != FP.returnOK ) return;
 			// upload the file
-			var destFile = htmlFile.parent.clone();
-			destFile.append(FP.file.leafName);
-			if ( destFile.exists() && destFile.isFile() ) {
-				if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [FP.file.leafName])) ) return;
-				destFile.remove(false);
-			}
 			try {
+				var destFile = htmlFile.parent.clone();
+				destFile.append(FP.file.leafName);
+				if ( destFile.exists() && destFile.isFile() ) {
+					if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [FP.file.leafName])) ) return;
+					destFile.remove(false);
+				}
 				FP.file.copyTo(destFile.parent, FP.file.leafName);
 			} catch(ex) {
+				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [FP.file.leafName]));
 				return;
 			}
 			// attach the link
