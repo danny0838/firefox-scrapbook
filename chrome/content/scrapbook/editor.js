@@ -556,6 +556,32 @@ var sbPageEditor = {
 				sbContentSaver.removeNodeFromParent(node);
 			}
 		}
+		// record the status of todo form elements
+		var nodes = aDoc.getElementsByTagName("input");
+		for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
+			var node = nodes[i];
+			if ( sbCommonUtils.getSbObjectType(node) == "todo") {
+				switch (node.type.toLowerCase()) {
+					case "checkbox":
+					case "radio":
+						if (node.checked)
+							node.setAttribute("checked", "checked");
+						else
+							node.removeAttribute("checked");
+						break;
+					case "text":
+						node.setAttribute("value", node.value);
+						break;
+				}
+			}
+		}
+		var nodes = aDoc.getElementsByTagName("textarea");
+		for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
+			var node = nodes[i];
+			if ( sbCommonUtils.getSbObjectType(node) == "todo") {
+				node.innerHTML = sbCommonUtils.escapeHTML(node.value, true);
+			}
+		}
 	},
 
 	documentAfterSave : function(aDoc)
@@ -607,6 +633,8 @@ var sbHtmlEditor = {
 		"Alt+I" : "attachFile",
 
 		"Alt+D" : "insertDate",
+		"Ctrl+Shift+C" : "insertTodoBox",
+		"Ctrl+Alt+Shift+C" : "insertTodoBoxDone",
 		"Alt+Z" : "wrapHTML",
 		"Ctrl+Alt+I" : "insertSource",
 	},
@@ -1011,6 +1039,18 @@ var sbHtmlEditor = {
         var d = new Date();
 		var fmt = sbCommonUtils.getPref("edit.insertDateFormat", "") || "%Y-%m-%d %H:%M:%S";
 		aDoc.execCommand("insertHTML", false, d.strftime(fmt));
+	},
+
+	insertTodoBox : function(aDoc)
+	{
+		var html = '<input type="checkbox" data-sb-obj="todo" />';
+		aDoc.execCommand("insertHTML", false, html);
+	},
+
+	insertTodoBoxDone : function(aDoc)
+	{
+		var html = '<input type="checkbox" data-sb-obj="todo" checked="checked" />';
+		aDoc.execCommand("insertHTML", false, html);
 	},
 
 	wrapHTML : function(aDoc)
