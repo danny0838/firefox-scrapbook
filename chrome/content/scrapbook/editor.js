@@ -1038,14 +1038,14 @@ var sbHtmlEditor = {
 		if (data.result != 1) return;
 		// insert file ?
 		if (data.file_use) {
-			// copy the selected file
-			var destFile = htmlFile.parent.clone();
-			destFile.append(data.file.leafName);
-			if ( destFile.exists() && destFile.isFile() ) {
-				if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [data.file.leafName])) ) return;
-				destFile.remove(false);
-			}
 			try {
+				// copy the selected file
+				var destFile = htmlFile.parent.clone();
+				destFile.append(data.file.leafName);
+				if ( destFile.exists() && destFile.isFile() ) {
+					if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [data.file.leafName])) ) return;
+					destFile.remove(false);
+				}
 				data.file.copyTo(destFile.parent, data.file.leafName);
 			} catch(ex) {
 				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [data.file.leafName]));
