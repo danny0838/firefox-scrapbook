@@ -906,6 +906,12 @@ var sbHtmlEditor = {
 	attachLink : function(aDoc)
 	{
 		var sel = aDoc.defaultView.getSelection();
+		// fill the selection it looks like an URL
+		// use a very wide standard, which allows as many cases as may be used
+		var selText = sel.toString();
+		if (selText && selText.match(/^(\w+:[^\t\n\r\v\f]*)/i)) {
+			var url = RegExp.$1;
+		}
 		// retrieve selected id from sidebar
 		// -- if the sidebar is closed, we may get an error
 		try {
@@ -925,6 +931,7 @@ var sbHtmlEditor = {
 		// prompt the dialog for user input
 		var data = {
 			id: id,
+			url: url,
 			item: sbPageEditor.item,
 		};
 		var accepted = window.top.openDialog("chrome://scrapbook/content/editor_link.xul", "ScrapBook:AttachLink", "chrome,modal,centerscreen,resizable", data);
@@ -1778,7 +1785,13 @@ var sbAnnotationService = {
 		var attr = {};
 		if ( aFlag == "L" )
 		{
-			var ret = {};
+			// fill the selection it looks like an URL
+			// use a very wide standard, which allows as many cases as may be used
+			var selText = sel.toString();
+			if (selText && selText.match(/^(\w+:[^\t\n\r\v\f]*)/i)) {
+				var url = RegExp.$1;
+			}
+			var ret = { value: url || "" };
 			if ( !sbCommonUtils.PROMPT.prompt(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_LINK_TITLE"), sbCommonUtils.lang("overlay", "ADDRESS"), ret, null, {}) ) return;
 			if ( !ret.value ) return;
 			attr["href"] = ret.value;
