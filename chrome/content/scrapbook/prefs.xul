@@ -21,7 +21,8 @@
 <prefwindow id="sbPrefWindow"
             xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
             title="ScrapBook &sb.tools.options;"
-            style="width: 40em;"
+            style="width: 40em; height: 600px;"
+            persist="width height"
             onload="sbPrefWindow.init();"
             onchange="sbPrefWindow.changed = true;"
             onunload="sbPrefWindow.done();">
@@ -37,6 +38,7 @@
 			<preference id="extensions.scrapbook.ui.toolsMenu"      name="extensions.scrapbook.ui.toolsMenu"      type="bool" />
 			<preference id="extensions.scrapbook.ui.statusBar"      name="extensions.scrapbook.ui.statusBar"      type="bool" />
 		</preferences>
+		<vbox flex="1" style="overflow: auto;">
 		<checkbox preference="extensions.scrapbook.ui.contextMenu"    label="&sb.prefs.ui.contextMenu;"
 		          onsyncfrompreference="sbPrefWindow.updateGroupedUI('extensions.scrapbook.ui.contextMenu', 'contextmenu');" />
 		<checkbox preference="extensions.scrapbook.ui.contextSubMenu" label="&sb.prefs.ui.contextSubMenu; *" class="indent" group="contextmenu" />
@@ -52,6 +54,7 @@
 		<checkbox preference="extensions.scrapbook.ui.toolsMenu" label="&sb.prefs.ui.toolsMenu;" />
 		<checkbox id="sbPrefStatsBarIcon" preference="extensions.scrapbook.ui.statusBar" label="&sb.prefs.ui.statusBar;" />
 		<description>* &sb.prefs.restart;</description>
+		</vbox>
 	</prefpane>
 
 	<prefpane id="keysPane" label="&sb.prefs.keys;" flex="1">
@@ -63,6 +66,7 @@
 			<preference id="extensions.scrapbook.key.captureAllTabs" name="extensions.scrapbook.key.captureAllTabs" type="string" />
 			<preference id="extensions.scrapbook.key.bookmark"       name="extensions.scrapbook.key.bookmark"       type="string" />
 		</preferences>
+		<vbox flex="1" style="overflow: auto;">
 		<grid>
 			<columns>
 				<column />
@@ -114,6 +118,7 @@
 			</rows>
 		</grid>
 		<description style="margin-top: 1em;">&sb.prefs.restart;</description>
+		</vbox>
 	</prefpane>
 
 	<prefpane id="tabsPane" label="&sb.prefs.tabs;" flex="1">
@@ -124,12 +129,14 @@
 			<preference id="extensions.scrapbook.tabs.searchResult" name="extensions.scrapbook.tabs.searchResult" type="bool" />
 			<preference id="extensions.scrapbook.tabs.note"         name="extensions.scrapbook.tabs.note"         type="bool" />
 		</preferences>
+		<vbox flex="1" style="overflow: auto;">
 		<description value="&sb.prefs.tabs.tips;:" />
 		<checkbox preference="extensions.scrapbook.tabs.open"         label="&sb.open;" />
 		<checkbox preference="extensions.scrapbook.tabs.openSource"   label="&sb.open.source;" />
 		<checkbox preference="extensions.scrapbook.tabs.combinedView" label="&sb.folder.combine;" />
 		<checkbox preference="extensions.scrapbook.tabs.searchResult" label="&sb.search.fulltext;" />
 		<checkbox preference="extensions.scrapbook.tabs.note"         label="&sb.prefs.tabs.note;" />
+		</vbox>
 	</prefpane>
 
 	<prefpane id="editPane" label="&sb.prefs.edit;" flex="1">
@@ -137,8 +144,18 @@
 			<preference id="extensions.scrapbook.edit.extendSourceEdit" name="extensions.scrapbook.edit.extendSourceEdit" type="bool" />
 			<preference id="extensions.scrapbook.edit.autoEditNoteX" name="extensions.scrapbook.edit.autoEditNoteX" type="bool" />
 			<preference id="extensions.scrapbook.edit.insertDateFormat" name="extensions.scrapbook.edit.insertDateFormat" type="string" />
-			<preference id="extensions.scrapbook.edit.wrapperFormat" name="extensions.scrapbook.edit.wrapperFormat" type="string" />
+			<preference id="extensions.scrapbook.edit.wrapperFormat.1" name="extensions.scrapbook.edit.wrapperFormat.1" type="string" />
+			<preference id="extensions.scrapbook.edit.wrapperFormat.2" name="extensions.scrapbook.edit.wrapperFormat.2" type="string" />
+			<preference id="extensions.scrapbook.edit.wrapperFormat.3" name="extensions.scrapbook.edit.wrapperFormat.3" type="string" />
+			<preference id="extensions.scrapbook.edit.wrapperFormat.4" name="extensions.scrapbook.edit.wrapperFormat.4" type="string" />
+			<preference id="extensions.scrapbook.edit.wrapperFormat.5" name="extensions.scrapbook.edit.wrapperFormat.5" type="string" />
+			<preference id="extensions.scrapbook.edit.wrapperFormat.6" name="extensions.scrapbook.edit.wrapperFormat.6" type="string" />
+			<preference id="extensions.scrapbook.edit.wrapperFormat.7" name="extensions.scrapbook.edit.wrapperFormat.7" type="string" />
+			<preference id="extensions.scrapbook.edit.wrapperFormat.8" name="extensions.scrapbook.edit.wrapperFormat.8" type="string" />
+			<preference id="extensions.scrapbook.edit.wrapperFormat.9" name="extensions.scrapbook.edit.wrapperFormat.9" type="string" />
+			<preference id="extensions.scrapbook.edit.wrapperFormat.0" name="extensions.scrapbook.edit.wrapperFormat.0" type="string" />
 		</preferences>
+		<vbox flex="1" style="overflow: auto;">
 		<groupbox>
 			<caption label="&sb.highlighter;" />
 			<hbox align="center">
@@ -198,9 +215,46 @@
 			<textbox preference="extensions.scrapbook.edit.insertDateFormat" placeholder="eg. %Y-%m-%d %H:%M:%S" flex="1" />
 		</hbox>
 		<hbox>
-			<label value="&sbx.prefs.edit.wrapperFormat;" />
-			<textbox preference="extensions.scrapbook.edit.wrapperFormat" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
+			<label value="&sbx.prefs.edit.wrapperFormat; 1:" />
+			<textbox preference="extensions.scrapbook.edit.wrapperFormat.1" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
 		</hbox>
+		<hbox>
+			<label value="&sbx.prefs.edit.wrapperFormat; 2:" />
+			<textbox preference="extensions.scrapbook.edit.wrapperFormat.2" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
+		</hbox>
+		<hbox>
+			<label value="&sbx.prefs.edit.wrapperFormat; 3:" />
+			<textbox preference="extensions.scrapbook.edit.wrapperFormat.3" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
+		</hbox>
+		<hbox>
+			<label value="&sbx.prefs.edit.wrapperFormat; 4:" />
+			<textbox preference="extensions.scrapbook.edit.wrapperFormat.4" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
+		</hbox>
+		<hbox>
+			<label value="&sbx.prefs.edit.wrapperFormat; 5:" />
+			<textbox preference="extensions.scrapbook.edit.wrapperFormat.5" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
+		</hbox>
+		<hbox>
+			<label value="&sbx.prefs.edit.wrapperFormat; 6:" />
+			<textbox preference="extensions.scrapbook.edit.wrapperFormat.6" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
+		</hbox>
+		<hbox>
+			<label value="&sbx.prefs.edit.wrapperFormat; 7:" />
+			<textbox preference="extensions.scrapbook.edit.wrapperFormat.7" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
+		</hbox>
+		<hbox>
+			<label value="&sbx.prefs.edit.wrapperFormat; 8:" />
+			<textbox preference="extensions.scrapbook.edit.wrapperFormat.8" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
+		</hbox>
+		<hbox>
+			<label value="&sbx.prefs.edit.wrapperFormat; 9:" />
+			<textbox preference="extensions.scrapbook.edit.wrapperFormat.9" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
+		</hbox>
+		<hbox>
+			<label value="&sbx.prefs.edit.wrapperFormat; 0:" />
+			<textbox preference="extensions.scrapbook.edit.wrapperFormat.0" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
+		</hbox>
+		</vbox>
 	</prefpane>
 
 	<prefpane id="organizePane" label="&sb.prefs.organize;" flex="1">
@@ -212,6 +266,7 @@
 			<preference id="extensions.scrapbook.tree.autoCollapse" name="extensions.scrapbook.tree.autoCollapse" type="bool" />
 			<preference id="extensions.scrapbook.tree.unshift"      name="extensions.scrapbook.tree.unshift"      type="bool" />
 		</preferences>
+		<vbox flex="1" style="overflow: auto;">
 		<groupbox>
 			<caption id="sbDataCaption" label="&sb.prefs.data;" />
 			<radiogroup id="sbDataDefault"
@@ -244,7 +299,7 @@
 				</menupopup>
 			</menulist>
 		</hbox>
-		<spacer flex="1" height="50" />
+		</vbox>
 	</prefpane>
 
 	<prefpane id="advancedPane" label="&sb.prefs.advanced;" flex="1">
@@ -254,8 +309,10 @@
 			<preference id="extensions.scrapbook.fileViewer.default" name="extensions.scrapbook.fileViewer.default" type="bool" />
 			<preference id="extensions.scrapbook.fileViewer.path"    name="extensions.scrapbook.fileViewer.path"    type="file" />
 		</preferences>
+		<vbox flex="1" style="overflow: auto;">
 		<checkbox preference="extensions.scrapbook.showDetailOnDrop" label="&sb.prefs.showDetailOnDrop;" />
 		<checkbox preference="extensions.scrapbook.notifyOnComplete" label="&sb.prefs.notifyOnComplete;" />
+		</vbox>
 	</prefpane>
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />

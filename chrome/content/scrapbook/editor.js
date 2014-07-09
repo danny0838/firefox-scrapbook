@@ -266,7 +266,7 @@ var sbPageEditor = {
 			if ( nodeRange.compareBoundaryPoints(Range.START_TO_END, selRange) > -1 )
 			{
 				if ( nodeRange.compareBoundaryPoints(Range.END_TO_START, selRange) > 0 ) break;
-				else if ( node.nodeType === 1 && sbCommonUtils.getSbObjectType(node) )
+				else if ( node.nodeType === 1 && sbCommonUtils.getSbObjectRemoveType(node) != 0 )
 				{
 					nodeToDel.push(node);
 				}
@@ -283,18 +283,16 @@ var sbPageEditor = {
 
 	removeSbObjects : function()
 	{
+		var nodeToDel = [];
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			var doc = win.document;
 			this.allowUndo(doc);
 			var elems = doc.getElementsByTagName("*");
 			for ( var i = 0; i < elems.length; i++ ) {
-				if ( sbCommonUtils.getSbObjectType(elems[i]) ) {
-					// elems gets shortened when elems[i] is removed, minus i afterwards to prevent skipping
-					this.removeSbObj(elems[i]);
-					i--;
-				}
+				if ( sbCommonUtils.getSbObjectRemoveType(elems[i]) != 0 ) nodeToDel.push(elems[i]);
 			}
 		}, this);
+		for ( var i = 0, len = nodeToDel.length; i < len; ++i ) this.removeSbObj(nodeToDel[i]);
 	},
 
 	removeElementsByTagName : function(aTagName)
@@ -311,16 +309,13 @@ var sbPageEditor = {
 
 	removeSbObj : function(aNode)
 	{
-		switch (sbCommonUtils.getSbObjectType(aNode)) {
-			case "linemarker" :
-			case "inline" :
-			case "link-url" :
-			case "link-inner" :
-			case "link-file" :
+		switch (sbCommonUtils.getSbObjectRemoveType(aNode)) {
+			case 1:
+				aNode.parentNode.removeChild(aNode);
+				break;
+			case 2:
 				this.unwrapNode(aNode);
 				break;
-			default:
-				aNode.parentNode.removeChild(aNode);
 		}
 	},
 
@@ -556,6 +551,32 @@ var sbPageEditor = {
 				sbContentSaver.removeNodeFromParent(node);
 			}
 		}
+		// record the status of todo form elements
+		var nodes = aDoc.getElementsByTagName("input");
+		for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
+			var node = nodes[i];
+			if ( sbCommonUtils.getSbObjectType(node) == "todo") {
+				switch (node.type.toLowerCase()) {
+					case "checkbox":
+					case "radio":
+						if (node.checked)
+							node.setAttribute("checked", "checked");
+						else
+							node.removeAttribute("checked");
+						break;
+					case "text":
+						node.setAttribute("value", node.value);
+						break;
+				}
+			}
+		}
+		var nodes = aDoc.getElementsByTagName("textarea");
+		for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
+			var node = nodes[i];
+			if ( sbCommonUtils.getSbObjectType(node) == "todo") {
+				node.innerHTML = sbCommonUtils.escapeHTML(node.value, true);
+			}
+		}
 	},
 
 	documentAfterSave : function(aDoc)
@@ -606,8 +627,20 @@ var sbHtmlEditor = {
 		"Ctrl+L" : "attachLink",
 		"Alt+I" : "attachFile",
 
+		"Alt+H" : "horizontalLine",
 		"Alt+D" : "insertDate",
-		"Alt+Z" : "wrapHTML",
+		"Ctrl+Shift+C" : "insertTodoBox",
+		"Ctrl+Alt+Shift+C" : "insertTodoBoxDone",
+		"Ctrl+Alt+1" : "wrapHTML1",
+		"Ctrl+Alt+2" : "wrapHTML2",
+		"Ctrl+Alt+3" : "wrapHTML3",
+		"Ctrl+Alt+4" : "wrapHTML4",
+		"Ctrl+Alt+5" : "wrapHTML5",
+		"Ctrl+Alt+6" : "wrapHTML6",
+		"Ctrl+Alt+7" : "wrapHTML7",
+		"Ctrl+Alt+8" : "wrapHTML8",
+		"Ctrl+Alt+9" : "wrapHTML9",
+		"Ctrl+Alt+0" : "wrapHTML0",
 		"Ctrl+Alt+I" : "insertSource",
 	},
 
@@ -877,6 +910,12 @@ var sbHtmlEditor = {
 	attachLink : function(aDoc)
 	{
 		var sel = aDoc.defaultView.getSelection();
+		// fill the selection it looks like an URL
+		// use a very wide standard, which allows as many cases as may be used
+		var selText = sel.toString();
+		if (selText && selText.match(/^(\w+:[^\t\n\r\v\f]*)/i)) {
+			var url = RegExp.$1;
+		}
 		// retrieve selected id from sidebar
 		// -- if the sidebar is closed, we may get an error
 		try {
@@ -896,6 +935,7 @@ var sbHtmlEditor = {
 		// prompt the dialog for user input
 		var data = {
 			id: id,
+			url: url,
 			item: sbPageEditor.item,
 		};
 		var accepted = window.top.openDialog("chrome://scrapbook/content/editor_link.xul", "ScrapBook:AttachLink", "chrome,modal,centerscreen,resizable", data);
@@ -979,31 +1019,78 @@ var sbHtmlEditor = {
 		var data = {};
 		var accepted = window.top.openDialog("chrome://scrapbook/content/editor_file.xul", "ScrapBook:AttachFile", "chrome,modal,centerscreen", data);
 		if (data.result != 1) return;
-		// copy the selected file
-		var destFile = htmlFile.parent.clone();
-		destFile.append(data.file.leafName);
-		if ( destFile.exists() && destFile.isFile() ) {
-			if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [data.file.leafName])) ) return;
-			destFile.remove(false);
+		// insert file ?
+		if (data.file_use) {
+			// copy the selected file
+			var destFile = htmlFile.parent.clone();
+			destFile.append(data.file.leafName);
+			if ( destFile.exists() && destFile.isFile() ) {
+				if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [data.file.leafName])) ) return;
+				destFile.remove(false);
+			}
+			try {
+				data.file.copyTo(destFile.parent, data.file.leafName);
+			} catch(ex) {
+				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [data.file.leafName]));
+				return;
+			}
+			// insert to the document
+			if (data.format) {
+				var FILE = data.file.leafName;
+				var THIS = sel.isCollapsed ? FILE : sbPageEditor.getSelectionHTML(sel);
+				var html = data.format.replace(/{(FILE|THIS)}/g, function(){
+					switch (arguments[1]) {
+						case "FILE": return FILE;
+						case "THIS": return THIS;
+					}
+					return "";
+				});
+				aDoc.execCommand("insertHTML", false, html);
+			}
 		}
-		try {
-			data.file.copyTo(destFile.parent, data.file.leafName);
-		} catch(ex) {
-			return;
+		// insert html ?
+		else if (data.html_use) {
+			var filename = data.html + ".html";
+			var destFile = htmlFile.parent.clone();
+			destFile.append(filename);
+			if ( destFile.exists() && destFile.isFile() && filename != "index.html" ) {
+				if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [filename])) ) return;
+				destFile.remove(false);
+			}
+			// check the template file, create one if not exist
+			var template = sbCommonUtils.getScrapBookDir().clone();
+			template.append("notex_template.html");
+			if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/notex_template.html", template);
+			// create content
+			var content = sbCommonUtils.readFile(template);
+			content = sbCommonUtils.convertToUnicode(content, "UTF-8");
+			try {
+				if (filename == "index.html") throw "";  // do not allow to overwrite index page
+				sbCommonUtils.writeFile(destFile, content, "UTF-8");
+			} catch(ex) {
+				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename]));
+				return;
+			}
+			// insert to the document
+			if (data.format) {
+				var FILE = filename;
+				var THIS = sel.isCollapsed ? FILE : sbPageEditor.getSelectionHTML(sel);
+				var html = data.format.replace(/{(FILE|THIS)}/g, function(){
+					switch (arguments[1]) {
+						case "FILE": return FILE;
+						case "THIS": return THIS;
+					}
+					return "";
+				});
+				aDoc.execCommand("insertHTML", false, html);
+			}
 		}
-		// insert to the document
-		if (data.format) {
-			var FILE = data.file.leafName;
-			var THIS = sel.isCollapsed ? FILE : sbPageEditor.getSelectionHTML(sel);
-			var html = data.format.replace(/{(FILE|THIS)}/g, function(){
-				switch (arguments[1]) {
-					case "FILE": return FILE;
-					case "THIS": return THIS;
-				}
-				return "";
-			});
-			aDoc.execCommand("insertHTML", false, html);
-		}
+	},
+
+	horizontalLine : function(aDoc)
+	{
+		var html = '<hr/>';
+		aDoc.execCommand("insertHTML", false, html);
 	},
 
 	insertDate : function(aDoc)
@@ -1013,11 +1100,73 @@ var sbHtmlEditor = {
 		aDoc.execCommand("insertHTML", false, d.strftime(fmt));
 	},
 
-	wrapHTML : function(aDoc)
+	insertTodoBox : function(aDoc)
+	{
+		var html = '<input type="checkbox" data-sb-obj="todo" />';
+		aDoc.execCommand("insertHTML", false, html);
+	},
+
+	insertTodoBoxDone : function(aDoc)
+	{
+		var html = '<input type="checkbox" data-sb-obj="todo" checked="checked" />';
+		aDoc.execCommand("insertHTML", false, html);
+	},
+
+	wrapHTML1 : function(aDoc)
+	{
+		this._wrapHTML(aDoc, 1);
+	},
+
+	wrapHTML2 : function(aDoc)
+	{
+		this._wrapHTML(aDoc, 2);
+	},
+
+	wrapHTML3 : function(aDoc)
+	{
+		this._wrapHTML(aDoc, 3);
+	},
+
+	wrapHTML4 : function(aDoc)
+	{
+		this._wrapHTML(aDoc, 4);
+	},
+
+	wrapHTML5 : function(aDoc)
+	{
+		this._wrapHTML(aDoc, 5);
+	},
+
+	wrapHTML6 : function(aDoc)
+	{
+		this._wrapHTML(aDoc, 6);
+	},
+
+	wrapHTML7 : function(aDoc)
+	{
+		this._wrapHTML(aDoc, 7);
+	},
+
+	wrapHTML8 : function(aDoc)
+	{
+		this._wrapHTML(aDoc, 8);
+	},
+
+	wrapHTML9 : function(aDoc)
+	{
+		this._wrapHTML(aDoc, 9);
+	},
+
+	wrapHTML0 : function(aDoc)
+	{
+		this._wrapHTML(aDoc, 0);
+	},
+
+	_wrapHTML : function(aDoc, aIdx)
 	{
 		var sel = aDoc.defaultView.getSelection();
-		var html = sbPageEditor.getSelectionHTML(sel);
-		var wrapper = sbCommonUtils.getPref("edit.wrapperFormat", "") || "<code>{THIS}</code>";
+		var html = sel.isCollapsed ? "{THIS}" : sbPageEditor.getSelectionHTML(sel);
+		var wrapper = sbCommonUtils.getPref("edit.wrapperFormat." + aIdx, "") || "<code>{THIS}</code>";
 		html = wrapper.replace(/{THIS}/g, html);
 		aDoc.execCommand("insertHTML", false, html);
 	},
@@ -1274,7 +1423,7 @@ var sbDOMEraser = {
 		if (!aNode) return false;
 		this._deselectNode();
 		sbPageEditor.allowUndo(aNode.ownerDocument);
-		if ( sbCommonUtils.getSbObjectType(aNode) ) {
+		if ( sbCommonUtils.getSbObjectRemoveType(aNode) != 0 ) {
 			sbPageEditor.removeSbObj(aNode);
 		}
 		else {
@@ -1382,7 +1531,7 @@ var sbDOMEraser = {
 		}
 		tooltip.style.left = this.lastX + "px";
 		tooltip.style.top  = this.lastY + "px";
-		if ( sbCommonUtils.getSbObjectType(aNode) ) {
+		if ( sbCommonUtils.getSbObjectRemoveType(aNode) != 0 ) {
 			tooltip.textContent = sbCommonUtils.lang("overlay", "EDIT_REMOVE_HIGHLIGHT");
 			sbDOMEraser._setOutline(aNode, "2px dashed #0000FF");
 		}
@@ -1731,7 +1880,13 @@ var sbAnnotationService = {
 		var attr = {};
 		if ( aFlag == "L" )
 		{
-			var ret = {};
+			// fill the selection it looks like an URL
+			// use a very wide standard, which allows as many cases as may be used
+			var selText = sel.toString();
+			if (selText && selText.match(/^(\w+:[^\t\n\r\v\f]*)/i)) {
+				var url = RegExp.$1;
+			}
+			var ret = { value: url || "" };
 			if ( !sbCommonUtils.PROMPT.prompt(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_LINK_TITLE"), sbCommonUtils.lang("overlay", "ADDRESS"), ret, null, {}) ) return;
 			if ( !ret.value ) return;
 			attr["href"] = ret.value;

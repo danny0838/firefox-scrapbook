@@ -3,6 +3,7 @@ var gData;
 function init() {
 	if ( !window.arguments) window.close();
 	gData = window.arguments[0];
+	if (gData.url) document.getElementById("sbLinkURL").value = gData.url;
 	if (gData.id) document.getElementById("sbLinkID").value = gData.id;
 	if (!gData.item) {
 		document.getElementById("sbLinkIDUse").disabled = true;

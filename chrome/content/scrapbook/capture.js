@@ -278,7 +278,7 @@ var sbCaptureTask = {
 	{
 		document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
 		var treecell = document.createElement("treecell");
-		treecell.setAttribute("label", "OK");
+		treecell.setAttribute("label", this.sniffer.getStatus().join(" "));
 		treecell.setAttribute("properties", "success");
 		this.TREE.childNodes[1].childNodes[this.index].childNodes[0].appendChild(treecell);
 		this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "finished");
@@ -291,7 +291,7 @@ var sbCaptureTask = {
 		document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
 		if ( aErrorMsg ) SB_trace(aErrorMsg);
 		var treecell = document.createElement("treecell");
-		treecell.setAttribute("label", this.sniffer.getStatus());
+		treecell.setAttribute("label", this.sniffer.getStatus().join(" "));
 		treecell.setAttribute("properties", "failed");
 		this.TREE.childNodes[1].childNodes[this.index].childNodes[0].appendChild(treecell);
 		this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "finished");
@@ -732,8 +732,7 @@ var sbInvisibleBrowser = {
 		}
 		else
 		{
-			var type = sbCaptureTask.contentType.match(/image/i) ? "image" : "file";
-			ret = sbContentSaver.captureFile(sbCaptureTask.URL, gRefURL ? gRefURL : sbCaptureTask.URL, type, gShowDetail, gResName, gResIdx, preset, gContext);
+			ret = sbContentSaver.captureFile(sbCaptureTask.URL, gRefURL ? gRefURL : sbCaptureTask.URL, "file", gShowDetail, gResName, gResIdx, preset, gContext);
 		}
 		if ( ret )
 		{
@@ -1017,7 +1016,7 @@ sbHeaderSniffer.prototype = {
 
 	getStatus : function()
 	{
-		try { return this._channel.responseStatus; } catch(ex) { return ""; }
+		try { return [this._channel.responseStatus, this._channel.responseStatusText]; } catch(ex) { return [false, ""]; }
 	},
 
 	visitHeader : function(aHeader, aValue)
@@ -1031,28 +1030,34 @@ sbHeaderSniffer.prototype = {
 
 	onHttpSuccess : function()
 	{
+		// show connect success
 		sbCaptureTask.contentType = this.getHeader("Content-Type");
-		var httpStatus = this.getStatus();
 		SB_trace(sbCommonUtils.lang("capture", "CONNECT_SUCCESS", [sbCaptureTask.contentType]));
-		switch ( httpStatus )
-		{
-			case 404 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCommonUtils.lang("capture", "HTTP_STATUS_404")); return;
-			case 403 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCommonUtils.lang("capture", "HTTP_STATUS_403")); return;
-			case 500 : sbCaptureTask.failed++;sbCaptureTask.fail(sbCommonUtils.lang("capture", "HTTP_STATUS_500")); return;
+
+		// get and show http status
+		var httpStatus = this.getStatus();
+		if ( httpStatus[0] >= 400 && httpStatus[0] < 600 || httpStatus[0] == 305 ) {
+			sbCaptureTask.failed++;
+			sbCaptureTask.fail(httpStatus.join(" "));
+			return;
 		}
+
+		// manage redirect if defined
 		var redirectURL = this.getHeader("Location");
-		if ( redirectURL )
-		{
+		if ( redirectURL ) {
 			if ( redirectURL.indexOf("http") != 0 ) redirectURL = this._URL.resolve(redirectURL);
 			sbCaptureTask.start(redirectURL);
 			return;
 		}
-		if ( !sbCaptureTask.contentType )
-		{
+
+		// if no content, assume it's html
+		if ( !sbCaptureTask.contentType ) {
 			sbCaptureTask.contentType = "text/html";
 		}
-		var func = function(val) { return sbCaptureTask.contentType.indexOf(val) >= 0; };
-		sbCaptureTask.isDocument = ["text/plain", "html", "xml"].some(func);
+		// check type, load it if it's a document
+		sbCaptureTask.isDocument = ["text/plain", "html", "xml"].some(function(val) {
+			return sbCaptureTask.contentType.indexOf(val) >= 0;
+		});
 		if (sbCaptureTask.isDocument) {
 			sbInvisibleBrowser.load(this.URLSpec);
 		}
