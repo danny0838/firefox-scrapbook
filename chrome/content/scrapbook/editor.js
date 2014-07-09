@@ -1981,7 +1981,7 @@ var sbAnnotationService = {
 				return;
 			}
 			// attach the link
-			attr["href"] = sbCommonUtils.getFileName(sbCommonUtils.IO.newFileURI(FP.file).spec);
+			attr["href"] = encodeURIComponent(FP.file.leafName);
 			attr["title"] = FP.file.leafName;
 			attr["data-sb-obj"] = "link-file";
 		}
