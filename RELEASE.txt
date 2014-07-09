@@ -1,3 +1,17 @@
+Scrapbook X 1.12.0a9
+----------------
+
+- NEW: "Insert file" in HTML editor can create a sub-page.
+- NEW: HTML editor to insert horizonital line with Alt+H.
+- NEW: HTML editor to insert checkbox (checked) with Ctrl(+Alt)+Shift+C.
+- UPDATE: Replaced Alt+Z in the HTML editor with Ctrl+Alt+0 - Ctrl+Alt+9, wrapping the HTML with different wrapper.
+- UPDATE: Automatically insert {THIS} as placeholder if nothing selected when invoking an HTML wrapper.
+- UPDATE: The HTTP status in a capture window now shows more precise information.
+- UPDATE: The prefrernce window can now be resized.
+- FIXED: Some error HTTP status were regarded as normal.
+- FIXED: An image from "Capture Link" is not saved with type "file".
+
+
 Scrapbook X 1.12.0a8
 ----------------
 
