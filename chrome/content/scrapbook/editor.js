@@ -58,12 +58,17 @@ var sbPageEditor = {
 				sbCommonUtils.error(ex);
 			}
 		}
-		// -- icon --> link to folder
+		// -- icon --> link to parent folder
 		var icon = document.getElementById("ScrapBookEditIcon");
 		if (aID) {
 			icon.src = this.item.icon || sbCommonUtils.getDefaultIcon(this.item.type);
-			var url = sbCommonUtils.convertFilePathToURL(sbCommonUtils.getContentDir(aID).path);
-			icon.onclick = function(aEvent){ sbCommonUtils.loadURL(url, aEvent.button == 1); };
+			try {
+				var curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
+				var url = sbCommonUtils.convertFilePathToURL(curFile.parent.path);
+				icon.onclick = function(aEvent){ sbCommonUtils.loadURL(url, aEvent.button == 1); };
+			} catch(ex) {
+				sbCommonUtils.error(ex);
+			}
 		}
 		else {
 			icon.src = gBrowser.selectedTab.getAttribute("image");
@@ -2029,10 +2034,15 @@ var sbInfoViewer = {
 		document.getElementById("ScrapBookInfoSite").disabled = !isTypeSite;
 		document.getElementById("ScrapBookInfoHome").setAttribute("image", "chrome://scrapbook/skin/info_home" + (isTypeSite ? "1" : "0") +  ".png");
 		document.getElementById("ScrapBookInfoSite").setAttribute("image", "chrome://scrapbook/skin/info_link" + (isTypeSite ? "1" : "0") +  ".png");
-		// source image --> link to content directory
-		var url = sbCommonUtils.convertFilePathToURL(sbCommonUtils.getContentDir(aID).path);
-		var srcImage = document.getElementById("ScrapBookInfobar").firstChild;
-		srcImage.onclick = function(aEvent){ sbCommonUtils.loadURL(url, aEvent.button == 1); };
+		// source image --> link to parent directory
+		try {
+			var curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
+			var url = sbCommonUtils.convertFilePathToURL(curFile.parent.path);
+			var srcImage = document.getElementById("ScrapBookInfobar").firstChild;
+			srcImage.onclick = function(aEvent){ sbCommonUtils.loadURL(url, aEvent.button == 1); };
+		} catch(ex) {
+			sbCommonUtils.error(ex);
+		}
 		// source label --> link to source
 		var srcLabel = document.getElementById("ScrapBookInfoSource");
 		srcLabel.value = sbDataSource.getProperty(sbBrowserOverlay.resource, "source");
