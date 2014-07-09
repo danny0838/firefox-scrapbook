@@ -188,6 +188,7 @@ var sbCaptureTask = {
 	index       : 0,
 	contentType : "",
 	isDocument  : false,
+	isLocal     : false,
 	refreshHash  : null,
 	sniffer     : null,
 	seconds     : 3,
@@ -267,8 +268,10 @@ var sbCaptureTask = {
 		if ( gTitles ) gTitle = gTitles[this.index];
 		SB_trace(sbCommonUtils.lang("capture", "CONNECT", [url]));
 		if ( url.indexOf("file://") == 0 ) {
+			this.isLocal = true;
 			sbInvisibleBrowser.load(url);
 		} else {
+			this.isLocal = false;
 			this.sniffer = new sbHeaderSniffer(url, gRefURL);
 			this.sniffer.httpHead();
 		}
@@ -278,7 +281,7 @@ var sbCaptureTask = {
 	{
 		document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
 		var treecell = document.createElement("treecell");
-		treecell.setAttribute("label", this.sniffer.getStatus().join(" "));
+		treecell.setAttribute("label", this.isLocal ? "OK" : this.sniffer.getStatus().join(" "));
 		treecell.setAttribute("properties", "success");
 		this.TREE.childNodes[1].childNodes[this.index].childNodes[0].appendChild(treecell);
 		this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "finished");
@@ -291,7 +294,7 @@ var sbCaptureTask = {
 		document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
 		if ( aErrorMsg ) SB_trace(aErrorMsg);
 		var treecell = document.createElement("treecell");
-		treecell.setAttribute("label", this.sniffer.getStatus().join(" "));
+		treecell.setAttribute("label", this.isLocal ? "ERROR" : this.sniffer.getStatus().join(" "));
 		treecell.setAttribute("properties", "failed");
 		this.TREE.childNodes[1].childNodes[this.index].childNodes[0].appendChild(treecell);
 		this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "finished");
