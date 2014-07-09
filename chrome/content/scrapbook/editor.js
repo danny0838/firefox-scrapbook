@@ -1068,21 +1068,21 @@ var sbHtmlEditor = {
 		// insert html ?
 		else if (data.html_use) {
 			var filename = data.html + ".html";
-			var destFile = htmlFile.parent.clone();
-			destFile.append(filename);
-			if ( destFile.exists() && destFile.isFile() && filename != "index.html" ) {
-				if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [filename])) ) return;
-				destFile.remove(false);
-			}
-			// check the template file, create one if not exist
-			var template = sbCommonUtils.getScrapBookDir().clone();
-			template.append("notex_template.html");
-			if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/notex_template.html", template);
-			// create content
-			var content = sbCommonUtils.readFile(template);
-			content = sbCommonUtils.convertToUnicode(content, "UTF-8");
 			try {
 				if (filename == "index.html") throw "";  // do not allow to overwrite index page
+				var destFile = htmlFile.parent.clone();
+				destFile.append(filename);
+				if ( destFile.exists() && destFile.isFile() ) {
+					if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [filename])) ) return;
+					destFile.remove(false);
+				}
+				// check the template file, create one if not exist
+				var template = sbCommonUtils.getScrapBookDir().clone();
+				template.append("notex_template.html");
+				if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/notex_template.html", template);
+				// create content
+				var content = sbCommonUtils.readFile(template);
+				content = sbCommonUtils.convertToUnicode(content, "UTF-8");
 				sbCommonUtils.writeFile(destFile, content, "UTF-8");
 			} catch(ex) {
 				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename]));
