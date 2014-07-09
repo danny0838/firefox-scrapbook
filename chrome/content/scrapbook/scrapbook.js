@@ -941,7 +941,7 @@ var sbSearchService = {
 		 
 			else {
 				var regex1 = this.optionRE ? 
-				             this.query : this.query.replace(/([\*\+\?\.\|\[\]\{\}\^\/\$\\])/g, "\\$1");
+				             this.query : sbCommonUtils.escapeRegExp(this.query);
 				var regex2 = this.optionCS ? "m" : "mi";
 				this.regex = new RegExp(regex1, regex2)
 				this.exec(false);
