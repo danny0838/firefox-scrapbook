@@ -239,7 +239,7 @@ var sbSearchResult =
 	{
 		aString = aString.replace(/\r|\n|\t/g, " ");
 		pattern = ( this.QueryStrings['re'] == "true" ) ? this.QueryStrings['q'] : this.includeWords[0];
-		var re = new RegExp("(" + pattern + ".*)", this.RegExpModifier);
+		var re = new RegExp("(" + sbCommonUtils.escapeRegExp(pattern) + ".*)", this.RegExpModifier);
 		var ret = aString.match(re) ? RegExp.$1 : aString;
 		return ( ret.length > 100 ) ? ret.substring(0, 100) : ret;
 	},
