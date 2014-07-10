@@ -37,11 +37,11 @@
 		<label value="&sb.edit.html.file.format;" />
 		<menulist id="sbFileFormat" editable="true" flex="1">
 			<menupopup>
-				<menuitem label='&lt;a href="{FILE}">{THIS}&lt;/a>' />
-				<menuitem label='&lt;a href="{FILE}" title="{FILE}">{THIS}&lt;/a>' selected="true" />
-				<menuitem label='&lt;img src="{FILE}" />' />
-				<menuitem label='&lt;img src="{FILE}" alt="{THIS}" title="{THIS}" />' />
-				<menuitem label='&lt;img width="500" src="{FILE}" alt="{THIS}" title="{THIS}" />' />
+				<menuitem label='&lt;a href="{FILE_E}">{THIS}&lt;/a>' />
+				<menuitem label='&lt;a href="{FILE_E}" title="{FILE}">{THIS}&lt;/a>' selected="true" />
+				<menuitem label='&lt;img src="{FILE_E}" />' />
+				<menuitem label='&lt;img src="{FILE_E}" alt="{THIS}" title="{THIS}" />' />
+				<menuitem label='&lt;img width="500" src="{FILE_E}" alt="{THIS}" title="{THIS}" />' />
 			</menupopup>
 		</menulist>
 	</hbox>

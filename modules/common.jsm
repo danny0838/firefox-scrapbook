@@ -94,7 +94,7 @@ var sbCommonUtils = {
 
 	newItem : function(aID)
 	{
-		return { id : aID || "", type : "", title : "", chars : "", icon : "", source : "", comment : "", lock : "" };
+		return { id : aID || "", create : aID || "", modify : aID || "", type : "", title : "", chars : "", icon : "", source : "", comment : "", lock : "" };
 	},
 
 	getScrapBookDir : function()
@@ -661,6 +661,13 @@ var sbCommonUtils = {
 	escapeRegExp : function(aString)
 	{
 		return aString.replace(/([\*\+\?\.\^\/\$\\\|\[\]\{\}\(\)])/g, "\\$1");
+	},
+
+	// escape characters fully misleading in the URI
+	// preserve other chars for beauty
+	escapeFileName : function(aString)
+	{
+		return aString.replace(/[\x00-\x1f:/?#]+|(?:%[0-9A-Za-z]{2})+|^ /g, function(m){return encodeURIComponent(m);});
 	},
 		
 	pad : function(n, width, z)

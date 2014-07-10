@@ -1,6 +1,7 @@
 <!ENTITY sb.prop.general "Genel Bilgi">
 <!ENTITY sb.prop.type "Tür">
-<!ENTITY sb.prop.date "Tarih">
+<!ENTITY sb.prop.create "Create">
+<!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Kodlama">
 <!ENTITY sb.prop.size "Boyut">
 <!ENTITY sb.prop.content "İçerik">

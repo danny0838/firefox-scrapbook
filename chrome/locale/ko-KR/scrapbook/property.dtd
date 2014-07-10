@@ -1,6 +1,7 @@
 <!ENTITY sb.prop.general "일반">
 <!ENTITY sb.prop.type "형식">
-<!ENTITY sb.prop.date "날짜">
+<!ENTITY sb.prop.create "Create">
+<!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "인코딩">
 <!ENTITY sb.prop.size "크기">
 <!ENTITY sb.prop.content "본문">

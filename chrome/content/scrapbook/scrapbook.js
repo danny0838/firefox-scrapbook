@@ -570,8 +570,6 @@ var sbController = {
 
 var sbTreeDNDHandler = {
 
-	row      : 0,
-	orient   : 0,
 	modAlt   : false,
 	modShift : false,
 	currentDataTransfer : null,
@@ -688,104 +686,58 @@ var sbTreeDNDHandler = {
 		catch(ex) {
 		}
 	},
-
-	move: function(aRow, aOrient)
-	{
-		this.row = aRow;
-		this.orient = aOrient;
-		if (sbTreeHandler.TREE.view.selection.count == 1)
-			this.moveSingle()
-		else
-			this.moveMultiple();
-	},
-
-	moveSingle: function()
+	
+	// orient: -1 = drop before; 0 = drop on; 1 = drop after
+	move: function(row, orient)
 	{
 		//Für Firefox 3.5 notwendig, da sonst ein Fehler ausgegeben wird
-		if ( this.row == -1 ) return;
-		var curIdx = sbTreeHandler.TREE.currentIndex;
-		var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
-		var curPar = sbTreeHandler.getParentResource(curIdx);
-		var tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(this.row);
-		var tarPar = (this.orient == 0) ? tarRes : sbTreeHandler.getParentResource(this.row);
-		this.moveAfterChecking(curRes, curPar, tarRes, tarPar);
-	},
-
-	moveMultiple: function()
-	{
-		var idxList = sbTreeHandler.getSelection(false, 2);
-		var i = 0;
-		var curResList = []; var curParList = [];
-		var tarResList = []; var tarParList = [];
-		for (i = 0; i < idxList.length; i++) {
-			curResList.push(sbTreeHandler.TREE.builderView.getResourceAtIndex(idxList[i]));
-			curParList.push(sbTreeHandler.getParentResource(idxList[i]));
-			tarResList.push(sbTreeHandler.TREE.builderView.getResourceAtIndex(this.row));
-			tarParList.push((this.orient == 0) ? tarResList[i] : sbTreeHandler.getParentResource(this.row));
+		if ( row == -1 ) return;
+		var curResList = sbTreeHandler.getSelection(true, 0);
+		if (orient == 1) curResList.reverse();
+		var tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(row);
+		var tarPar = (orient == 0) ? tarRes : sbTreeHandler.getParentResource(row);
+		if (orient == 1 &&
+			sbTreeHandler.TREE.view.isContainer(row) &&
+			sbTreeHandler.TREE.view.isContainerOpen(row) &&
+			sbTreeHandler.TREE.view.isContainerEmpty(row) == false) {
+			tarPar = tarRes;
+			tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(row + 1);
 		}
-		//RDF-Datenquelle vom tree entfernen
-		var mmDatei = sbCommonUtils.getScrapBookDir();
-		mmDatei.append("extensions.scrapbook.rdf");
-		var mmDateiURL = sbCommonUtils.IO.newFileURI(mmDatei).spec;
-		var mmDaten = sbCommonUtils.RDF.GetDataSourceBlocking(mmDateiURL);
-		var mmSidebarTreeObj = window.opener.document.getElementById("sbTree");
-		if ( mmSidebarTreeObj ) mmSidebarTreeObj.database.RemoveDataSource(mmDaten);
-		var mmTreeObj = document.getElementById("sbTree");
-		mmTreeObj.database.RemoveDataSource(mmDaten);
-		if (this.orient == 1) {
-			for (i = idxList.length - 1; i >= 0 ; i--)
-				this.moveAfterChecking(curResList[i], curParList[i], tarResList[i], tarParList[i]);
-		}
-		else {
-			for (i = 0; i < idxList.length; i++)
-				this.moveAfterChecking(curResList[i], curParList[i], tarResList[i], tarParList[i]);
-		}
-		//RDF-Datenquelle dem tree hinzufügen
-		if ( mmSidebarTreeObj ) mmSidebarTreeObj.database.AddDataSource(mmDaten);
-		mmTreeObj.database.AddDataSource(mmDaten);
-	},
-
-	moveAfterChecking: function(curRes, curPar, tarRes, tarPar)
-	{
-		var curAbsIdx = sbTreeHandler.TREE.builderView.getIndexOfResource(curRes);
-		var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
-		var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
-		if (curAbsIdx == this.row)
-			return;
-		if (this.orient != 0) {
-			if (this.orient == 1)
+		curResList.forEach(function(curRes){
+			var curAbsIdx = sbTreeHandler.TREE.builderView.getIndexOfResource(curRes);
+			if (curAbsIdx == -1) {
+				// This is somehow dirty but for some reason we might be unable to get the right index
+				// rebuilding the tree solves the problem
+				// mostly happen when selecting A/B/C, A/B, A, D together and moving them to E
+				sbTreeHandler.TREE.builder.rebuild();
+				curAbsIdx = sbTreeHandler.TREE.builderView.getIndexOfResource(curRes);
+			}
+			var curPar = sbTreeHandler.getParentResource(curAbsIdx);
+			var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
+			var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
+			if (curRes.Value == tarRes.Value) return;
+			if (orient == 1)
 				tarRelIdx++;
-			if (curPar.Value == tarPar.Value && tarRelIdx > curRelIdx)
-				tarRelIdx--;
-			if (this.orient == 1 &&
-			    sbTreeHandler.TREE.view.isContainer(this.row) &&
-			    sbTreeHandler.TREE.view.isContainerOpen(this.row) &&
-			    sbTreeHandler.TREE.view.isContainerEmpty(this.row) == false) {
-				if (curAbsIdx == this.row) {
-					sbMainService.trace("can't drop folder after open container");
+			if (orient == -1 || orient == 1) {
+				if (curPar.Value == tarPar.Value && tarRelIdx > curRelIdx)
+					tarRelIdx--;
+				if (curPar.Value == tarPar.Value && curRelIdx == tarRelIdx)
 					return;
-				}
-				sbMainService.trace("drop after open container");
-				tarPar = tarRes;
-				tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(this.row + 1);
-				tarRelIdx = 1;
 			}
-			if (curPar.Value == tarPar.Value && curRelIdx == tarRelIdx)
-				return;
-		}
-		if (sbTreeHandler.TREE.view.isContainer(curAbsIdx)) {
-			var tmpIdx = this.row;
-			var tmpRes = tarRes;
-			while (tmpRes.Value != sbTreeHandler.TREE.ref && tmpIdx != -1) {
-				tmpRes = sbTreeHandler.getParentResource(tmpIdx);
-				tmpIdx = sbTreeHandler.TREE.builderView.getIndexOfResource(tmpRes);
-				if (tmpRes.Value == curRes.Value) {
-					sbMainService.trace("can't move folder into descendant level");
-					return;
+			if (sbTreeHandler.TREE.view.isContainer(curAbsIdx)) {
+				var tmpRes = tarRes;
+				var tmpIdx = sbTreeHandler.TREE.builderView.getIndexOfResource(tmpRes);
+				while (tmpRes.Value != sbTreeHandler.TREE.ref && tmpIdx != -1) {
+					tmpRes = sbTreeHandler.getParentResource(tmpIdx);
+					tmpIdx = sbTreeHandler.TREE.builderView.getIndexOfResource(tmpRes);
+					if (tmpRes.Value == curRes.Value) {
+						return;
+					}
 				}
 			}
-		}
-		sbDataSource.moveItem(curRes, curPar, tarPar, tarRelIdx);
+			sbDataSource.moveItem(curRes, curPar, tarPar, tarRelIdx);
+		}, this);
+		sbCommonUtils.rebuildGlobal();
 	},
 
 	capture: function(aXferString, aRow, aOrient)

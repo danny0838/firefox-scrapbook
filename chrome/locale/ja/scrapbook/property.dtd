@@ -1,6 +1,7 @@
 <!ENTITY sb.prop.general "一般情報">
 <!ENTITY sb.prop.type "形式">
-<!ENTITY sb.prop.date "日時">
+<!ENTITY sb.prop.create "Create">
+<!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "文字コード">
 <!ENTITY sb.prop.size "サイズ">
 <!ENTITY sb.prop.content "本文">

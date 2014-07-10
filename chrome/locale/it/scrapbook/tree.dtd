@@ -17,7 +17,7 @@
 <!ENTITY sb.prop.title "Titolo">
 <!ENTITY sb.prop.comment "Commenti">
 <!ENTITY sbp.prop.url "URL">
-<!ENTITY sb.prop.id.date "ID (Data/ora)">
+<!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.folder.combine "Visualizzazione combinata">
 <!ENTITY sb.folder.openall "Apri tutto in schede">
 <!ENTITY sb.folder.manage "Gestisci la cartella">
