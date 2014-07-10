@@ -722,15 +722,6 @@ var sbTreeDNDHandler = {
 		}
 		var tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(this.row);
 		var tarPar = (this.orient == 0) ? tarRes : sbTreeHandler.getParentResource(this.row);
-		//RDF-Datenquelle vom tree entfernen
-		var mmDatei = sbCommonUtils.getScrapBookDir();
-		mmDatei.append("extensions.scrapbook.rdf");
-		var mmDateiURL = sbCommonUtils.IO.newFileURI(mmDatei).spec;
-		var mmDaten = sbCommonUtils.RDF.GetDataSourceBlocking(mmDateiURL);
-		var mmSidebarTreeObj = window.opener.document.getElementById("sbTree");
-		if ( mmSidebarTreeObj ) mmSidebarTreeObj.database.RemoveDataSource(mmDaten);
-		var mmTreeObj = document.getElementById("sbTree");
-		mmTreeObj.database.RemoveDataSource(mmDaten);
 		if (this.orient == 1) {
 			for (i = idxList.length - 1; i >= 0 ; i--)
 				this.moveAfterChecking(curResList[i], curParList[i], tarRes, tarPar);
@@ -739,9 +730,6 @@ var sbTreeDNDHandler = {
 			for (i = 0; i < idxList.length; i++)
 				this.moveAfterChecking(curResList[i], curParList[i], tarRes, tarPar);
 		}
-		//RDF-Datenquelle dem tree hinzufügen
-		if ( mmSidebarTreeObj ) mmSidebarTreeObj.database.AddDataSource(mmDaten);
-		mmTreeObj.database.AddDataSource(mmDaten);
 	},
 
 	moveAfterChecking: function(curRes, curPar, tarRes, tarPar)
