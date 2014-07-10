@@ -692,13 +692,8 @@ var sbTreeDNDHandler = {
 	{
 		//Für Firefox 3.5 notwendig, da sonst ein Fehler ausgegeben wird
 		if ( row == -1 ) return;
-		var idxList = sbTreeHandler.getSelection(false, 0);
-		if (orient == 1) idxList.reverse();
-		var curResList = []; var curParList = [];
-		for (var i = 0; i < idxList.length; i++) {
-			curResList.push(sbTreeHandler.TREE.builderView.getResourceAtIndex(idxList[i]));
-			curParList.push(sbTreeHandler.getParentResource(idxList[i]));
-		}
+		var curResList = sbTreeHandler.getSelection(true, 0);
+		if (orient == 1) curResList.reverse();
 		var tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(row);
 		var tarPar = (orient == 0) ? tarRes : sbTreeHandler.getParentResource(row);
 		if (orient == 1 &&
@@ -708,9 +703,7 @@ var sbTreeDNDHandler = {
 			tarPar = tarRes;
 			tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(row + 1);
 		}
-		for (var i = 0; i < idxList.length; i++) {
-			var curRes = curResList[i];
-			var curPar = curParList[i];
+		curResList.forEach(function(curRes){
 			var curAbsIdx = sbTreeHandler.TREE.builderView.getIndexOfResource(curRes);
 			if (curAbsIdx == -1) {
 				// This is somehow dirty but for some reason we might be unable to get the right index
@@ -719,6 +712,7 @@ var sbTreeDNDHandler = {
 				sbTreeHandler.TREE.builder.rebuild();
 				curAbsIdx = sbTreeHandler.TREE.builderView.getIndexOfResource(curRes);
 			}
+			var curPar = sbTreeHandler.getParentResource(curAbsIdx);
 			var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
 			var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
 			if (curRes.Value == tarRes.Value) return;
@@ -737,13 +731,12 @@ var sbTreeDNDHandler = {
 					tmpRes = sbTreeHandler.getParentResource(tmpIdx);
 					tmpIdx = sbTreeHandler.TREE.builderView.getIndexOfResource(tmpRes);
 					if (tmpRes.Value == curRes.Value) {
-						sbMainService.trace("can't move folder into descendant level");
 						return;
 					}
 				}
 			}
 			sbDataSource.moveItem(curRes, curPar, tarPar, tarRelIdx);
-		}
+		}, this);
 		sbCommonUtils.rebuildGlobal();
 		sbTreeHandler.TREE.view.selection.clearSelection();
 		curResList.forEach(function(res) {
