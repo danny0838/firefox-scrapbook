@@ -714,22 +714,18 @@ var sbTreeDNDHandler = {
 	moveMultiple: function()
 	{
 		var idxList = sbTreeHandler.getSelection(false, 0);
-		var i = 0;
+		if (this.orient == 1) { // drop after
+			idxList.reverse();
+		}
 		var curResList = []; var curParList = [];
-		for (i = 0; i < idxList.length; i++) {
+		for (var i = 0; i < idxList.length; i++) {
 			curResList.push(sbTreeHandler.TREE.builderView.getResourceAtIndex(idxList[i]));
 			curParList.push(sbTreeHandler.getParentResource(idxList[i]));
 		}
 		var tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(this.row);
 		var tarPar = (this.orient == 0) ? tarRes : sbTreeHandler.getParentResource(this.row);
-		if (this.orient == 1) {
-			for (i = idxList.length - 1; i >= 0 ; i--)
-				this.moveAfterChecking(curResList[i], curParList[i], tarRes, tarPar);
-		}
-		else {
-			for (i = 0; i < idxList.length; i++)
-				this.moveAfterChecking(curResList[i], curParList[i], tarRes, tarPar);
-		}
+		for (var i = 0; i < idxList.length; i++)
+			this.moveAfterChecking(curResList[i], curParList[i], tarRes, tarPar);
 	},
 
 	moveAfterChecking: function(curRes, curPar, tarRes, tarPar)
