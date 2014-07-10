@@ -15,6 +15,7 @@ var sbPropService = {
 
 	init : function()
 	{
+		// get item and properties
 		this.id = window.arguments[0];
 		if (!this.id)
 			return;
@@ -23,16 +24,31 @@ var sbPropService = {
 		for (var prop in this.item) {
 			this.item[prop] = sbDataSource.getProperty(this.resource, prop);
 		}
-		this.id.match(/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/);
-		var dd = new Date(
-			parseInt(RegExp.$1, 10), parseInt(RegExp.$2, 10) - 1, parseInt(RegExp.$3, 10),
-			parseInt(RegExp.$4, 10), parseInt(RegExp.$5, 10), parseInt(RegExp.$6, 10)
-		);
-		var dateTime = dd.toLocaleString();
+		// parse dateTime
+		var date1 = this.item.create || this.id;
+		var dateTime = "";
+		if (date1.match(/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/)) {
+			var dd = new Date(
+				parseInt(RegExp.$1, 10), parseInt(RegExp.$2, 10) - 1, parseInt(RegExp.$3, 10),
+				parseInt(RegExp.$4, 10), parseInt(RegExp.$5, 10), parseInt(RegExp.$6, 10)
+			);
+			dateTime = dd.toLocaleString();
+		}
+		var date2 = this.item.modify;
+		var dateTime2 = "";
+		if (date2.match(/^(\d{4})(\d{2})(\d{2})(\d{2})(\d{2})(\d{2})$/)) {
+			var dd = new Date(
+				parseInt(RegExp.$1, 10), parseInt(RegExp.$2, 10) - 1, parseInt(RegExp.$3, 10),
+				parseInt(RegExp.$4, 10), parseInt(RegExp.$5, 10), parseInt(RegExp.$6, 10)
+			);
+			dateTime2 = dd.toLocaleString();
+		}
+		// fill data to the fields
 		document.getElementById("sbPropID").value      = this.item.id;
 		document.getElementById("sbPropTitle").value   = this.item.title;
 		document.getElementById("sbPropSource").value  = this.item.source;
 		document.getElementById("sbPropDate").value    = dateTime;
+		document.getElementById("sbPropModify").value  = dateTime2;
 		document.getElementById("sbPropChars").value   = this.item.chars;
 		document.getElementById("sbPropComment").value = this.item.comment.replace(/ __BR__ /g, "\n");
 		document.getElementById("sbPropMark").setAttribute("checked", this.item.type == "marked");

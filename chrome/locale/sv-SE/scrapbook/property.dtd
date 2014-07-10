@@ -1,6 +1,7 @@
 <!ENTITY sb.prop.general "Allmän information">
 <!ENTITY sb.prop.type "Typ">
-<!ENTITY sb.prop.date "Datum">
+<!ENTITY sb.prop.create "Create">
+<!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Kodning">
 <!ENTITY sb.prop.size "Storlek">
 <!ENTITY sb.prop.content "Innehåll">

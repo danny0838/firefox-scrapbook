@@ -1,6 +1,7 @@
 <!ENTITY sb.prop.general "معلومات عامة">
 <!ENTITY sb.prop.type "النوع">
-<!ENTITY sb.prop.date "التاريخ">
+<!ENTITY sb.prop.create "Create">
+<!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "الترميز">
 <!ENTITY sb.prop.size "الحجم">
 <!ENTITY sb.prop.content "المحتوى">

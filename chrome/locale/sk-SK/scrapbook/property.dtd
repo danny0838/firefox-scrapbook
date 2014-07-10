@@ -1,6 +1,7 @@
 <!ENTITY sb.prop.general "Všeobecné informácie">
 <!ENTITY sb.prop.type "Typ">
-<!ENTITY sb.prop.date "Dátum">
+<!ENTITY sb.prop.create "Create">
+<!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Kódovanie">
 <!ENTITY sb.prop.size "Veľkosť">
 <!ENTITY sb.prop.content "Obsah">

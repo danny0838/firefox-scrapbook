@@ -109,6 +109,16 @@
 							hidden="true"
 							persist="width hidden ordinal" />
 						<splitter class="tree-splitter" />
+						<treecol id="sbTreeColModify" flex="2" label="&sb.prop.create;"
+							class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#create"
+							hidden="true"
+							persist="width hidden ordinal" />
+						<splitter class="tree-splitter" />
+						<treecol id="sbTreeColModify" flex="2" label="&sb.prop.modify;"
+							class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#modify"
+							hidden="true"
+							persist="width hidden ordinal" />
+						<splitter class="tree-splitter" />
 						<treecol id="sbTreeColID" flex="1" label="&sb.prop.id.date;"
 							class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#id"
 							hidden="true"
@@ -129,6 +139,8 @@
 										<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#chars" />
 										<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#comment" />
 										<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#lock" />
+										<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#create" />
+										<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#modify" />
 										<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#id" />
 									</treerow>
 								</treeitem>
