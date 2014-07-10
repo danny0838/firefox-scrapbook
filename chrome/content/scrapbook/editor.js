@@ -1034,7 +1034,7 @@ var sbHtmlEditor = {
 		}
 		// prompt the dialog for user input
 		var data = { url: url };
-		var accepted = window.top.openDialog("chrome://scrapbook/content/editor_file.xul", "ScrapBook:AttachFile", "chrome,modal,centerscreen", data);
+		var accepted = window.top.openDialog("chrome://scrapbook/content/editor_file.xul", "ScrapBook:AttachFile", "chrome,modal,centerscreen,resizable", data);
 		if (data.result != 1) return;
 		// insert file ?
 		if (data.file_use) {
