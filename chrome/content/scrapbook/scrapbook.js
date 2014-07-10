@@ -693,26 +693,13 @@ var sbTreeDNDHandler = {
 	{
 		this.row = aRow;
 		this.orient = aOrient; // -1: drop before; 0: drop on; 1: drop after
-		if (sbTreeHandler.TREE.view.selection.count == 1)
-			this.moveSingle()
-		else
-			this.moveMultiple();
-	},
-
-	moveSingle: function()
-	{
-		//Für Firefox 3.5 notwendig, da sonst ein Fehler ausgegeben wird
-		if ( this.row == -1 ) return;
-		var curIdx = sbTreeHandler.TREE.currentIndex;
-		var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
-		var curPar = sbTreeHandler.getParentResource(curIdx);
-		var tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(this.row);
-		var tarPar = (this.orient == 0) ? tarRes : sbTreeHandler.getParentResource(this.row);
-		this.moveAfterChecking(curRes, curPar, tarRes, tarPar);
+		this.moveMultiple();
 	},
 
 	moveMultiple: function()
 	{
+		//Für Firefox 3.5 notwendig, da sonst ein Fehler ausgegeben wird
+		if ( this.row == -1 ) return;
 		var idxList = sbTreeHandler.getSelection(false, 0);
 		if (this.orient == 1) idxList.reverse();
 		var curResList = []; var curParList = [];
