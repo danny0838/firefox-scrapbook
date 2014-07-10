@@ -1071,7 +1071,10 @@ var sbHtmlEditor = {
 		else if (data.html_use) {
 			var filename = data.html + ".html";
 			try {
+				// handle special characters that are not allowed
 				if (filename == "index.html") throw "";  // do not allow to overwrite index page
+				// in Windows a nsIFile with leafName "foo:bar" will be remapped to "foo" and gets no error
+				if (filename.match(/:/)) throw "";
 				var destFile = htmlFile.parent.clone();
 				destFile.append(filename);
 				if ( destFile.exists() && destFile.isFile() ) {
