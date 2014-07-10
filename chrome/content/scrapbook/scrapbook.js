@@ -712,6 +712,13 @@ var sbTreeDNDHandler = {
 			var curRes = curResList[i];
 			var curPar = curParList[i];
 			var curAbsIdx = sbTreeHandler.TREE.builderView.getIndexOfResource(curRes);
+			if (curAbsIdx == -1) {
+				// This is somehow dirty but for some reason we might be unable to get the right index
+				// rebuilding the tree solves the problem
+				// mostly happen when selecting A/B/C, A/B, A, D together and moving them to E
+				sbTreeHandler.TREE.builder.rebuild();
+				curAbsIdx = sbTreeHandler.TREE.builderView.getIndexOfResource(curRes);
+			}
 			var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
 			var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
 			if (curRes.Value == tarRes.Value) return;
