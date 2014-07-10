@@ -692,7 +692,7 @@ var sbTreeDNDHandler = {
 	move: function(aRow, aOrient)
 	{
 		this.row = aRow;
-		this.orient = aOrient;
+		this.orient = aOrient; // -1: drop before; 0: drop on; 1: drop after
 		if (sbTreeHandler.TREE.view.selection.count == 1)
 			this.moveSingle()
 		else
@@ -714,9 +714,7 @@ var sbTreeDNDHandler = {
 	moveMultiple: function()
 	{
 		var idxList = sbTreeHandler.getSelection(false, 0);
-		if (this.orient == 1) { // drop after
-			idxList.reverse();
-		}
+		if (this.orient == 1) idxList.reverse();
 		var curResList = []; var curParList = [];
 		for (var i = 0; i < idxList.length; i++) {
 			curResList.push(sbTreeHandler.TREE.builderView.getResourceAtIndex(idxList[i]));
@@ -742,9 +740,9 @@ var sbTreeDNDHandler = {
 		var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
 		if (curAbsIdx == this.row)
 			return;
-		if (this.orient != 0) {
-			if (this.orient == 1)
-				tarRelIdx++;
+		if (this.orient == 1)
+			tarRelIdx++;
+		if (this.orient == -1 || this.orient == 1) {
 			if (curPar.Value == tarPar.Value && tarRelIdx > curRelIdx)
 				tarRelIdx--;
 			if (curPar.Value == tarPar.Value && curRelIdx == tarRelIdx)
