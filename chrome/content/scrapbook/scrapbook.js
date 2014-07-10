@@ -738,11 +738,6 @@ var sbTreeDNDHandler = {
 			sbDataSource.moveItem(curRes, curPar, tarPar, tarRelIdx);
 		}, this);
 		sbCommonUtils.rebuildGlobal();
-		sbTreeHandler.TREE.view.selection.clearSelection();
-		curResList.forEach(function(res) {
-			var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(res);
-			sbTreeHandler.TREE.view.selection.toggleSelect(idx);
-		}, this);
 	},
 
 	capture: function(aXferString, aRow, aOrient)
