@@ -1054,7 +1054,7 @@ var sbHtmlEditor = {
 			// insert to the document
 			if (data.format) {
 				var FILE = data.file.leafName;
-				var FILE_E = encodeURIComponent(FILE);
+				var FILE_E = sbCommonUtils.escapeFileName(FILE);
 				var THIS = sel.isCollapsed ? FILE : sbPageEditor.getSelectionHTML(sel);
 				var html = data.format.replace(/{(FILE|FILE_E|THIS)}/g, function(){
 					switch (arguments[1]) {
@@ -1093,7 +1093,7 @@ var sbHtmlEditor = {
 			// insert to the document
 			if (data.format) {
 				var FILE = filename;
-				var FILE_E = encodeURIComponent(FILE);
+				var FILE_E = sbCommonUtils.escapeFileName(FILE);
 				var THIS = sel.isCollapsed ? FILE : sbPageEditor.getSelectionHTML(sel);
 				var html = data.format.replace(/{(FILE|FILE_E|THIS)}/g, function(){
 					switch (arguments[1]) {
@@ -1981,7 +1981,7 @@ var sbAnnotationService = {
 				return;
 			}
 			// attach the link
-			attr["href"] = encodeURIComponent(FP.file.leafName);
+			attr["href"] = sbCommonUtils.escapeFileName(FP.file.leafName);
 			attr["title"] = FP.file.leafName;
 			attr["data-sb-obj"] = "link-file";
 		}
