@@ -17,7 +17,7 @@
 <!ENTITY sb.prop.title "Név">
 <!ENTITY sb.prop.comment "Megjegyzés">
 <!ENTITY sbp.prop.url "URL">
-<!ENTITY sb.prop.id.date "ID (idő)">
+<!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.folder.combine "Összefűzés nézet">
 <!ENTITY sb.folder.openall "Összes megnyitása füleken">
 <!ENTITY sb.folder.manage "Mappa kezelése">

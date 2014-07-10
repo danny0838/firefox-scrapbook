@@ -17,7 +17,7 @@
 <!ENTITY sb.prop.title "Denumire">
 <!ENTITY sb.prop.comment "Comentariu">
 <!ENTITY sbp.prop.url "Adresă">
-<!ENTITY sb.prop.id.date "ID (Dată-oră)">
+<!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.folder.combine "Vizualizează combinat">
 <!ENTITY sb.folder.openall "Deschide totul în file">
 <!ENTITY sb.folder.manage "Gestionează dosarul">
