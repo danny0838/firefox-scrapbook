@@ -18,7 +18,7 @@
 <!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.comment "Yorum">
 <!ENTITY sbp.prop.url "URL">
-<!ENTITY sb.prop.id.date "ID (Zaman)">
+<!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.folder.combine "Birleşik Görünüm">
 <!ENTITY sb.folder.openall "Tümünü Sekmelerde Aç">
 <!ENTITY sb.folder.manage "Klasörü Düzenle">

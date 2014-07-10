@@ -1,6 +1,7 @@
 <!ENTITY sb.prop.general "Allgemeine Informationen">
 <!ENTITY sb.prop.type "Typ">
-<!ENTITY sb.prop.date "Datum">
+<!ENTITY sb.prop.create "Create">
+<!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Kodierung">
 <!ENTITY sb.prop.size "Größe">
 <!ENTITY sb.prop.content "Inhalt">

@@ -17,7 +17,7 @@
 <!ENTITY sb.prop.title "Název">
 <!ENTITY sb.prop.comment "Komentář">
 <!ENTITY sbp.prop.url "Adresa URL">
-<!ENTITY sb.prop.id.date "ID (čas)">
+<!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.folder.combine "Kombinovaný náhled">
 <!ENTITY sb.folder.openall "Otevřít vše v panelech">
 <!ENTITY sb.folder.manage "Spravovat složku">

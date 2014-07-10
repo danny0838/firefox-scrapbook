@@ -1,6 +1,7 @@
 <!ENTITY sb.prop.general "Загальна інформація">
 <!ENTITY sb.prop.type "Тип">
-<!ENTITY sb.prop.date "Дата">
+<!ENTITY sb.prop.create "Create">
+<!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Кодування">
 <!ENTITY sb.prop.size "Розмір">
 <!ENTITY sb.prop.content "Вміст">

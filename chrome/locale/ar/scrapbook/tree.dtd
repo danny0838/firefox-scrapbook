@@ -17,7 +17,7 @@
 <!ENTITY sb.prop.title "العنونة">
 <!ENTITY sb.prop.comment "التعليق">
 <!ENTITY sbp.prop.url "العنوان">
-<!ENTITY sb.prop.id.date "المعرف (الوقت)">
+<!ENTITY sb.prop.id.date "المعرف">
 <!ENTITY sb.folder.combine "عرض مجموع">
 <!ENTITY sb.folder.openall "فتح الجميع في ألسنة">
 <!ENTITY sb.folder.manage "إدارةالمجلدات">

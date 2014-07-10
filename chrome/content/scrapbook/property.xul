@@ -68,8 +68,12 @@
 							<textbox id="sbPropID" readonly="true" />
 						</row>
 						<row align="center">
-							<label value="&sb.prop.date;:" />
+							<label value="&sb.prop.create;:" />
 							<textbox id="sbPropDate" readonly="true" />
+						</row>
+						<row align="center">
+							<label value="&sb.prop.modify;:" />
+							<textbox id="sbPropModify" readonly="true" />
 						</row>
 						<row align="center">
 							<label value="&sb.prop.type;:" />

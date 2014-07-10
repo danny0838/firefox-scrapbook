@@ -17,7 +17,7 @@
 <!ENTITY sb.prop.title "Name">
 <!ENTITY sb.prop.comment "Beschreibung">
 <!ENTITY sbp.prop.url "URL">
-<!ENTITY sb.prop.id.date "ID (Datum/Zeit)">
+<!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.folder.combine "Zusammengefasste Ansicht öffnen">
 <!ENTITY sb.folder.openall "Alles in Tabs öffnen">
 <!ENTITY sb.folder.manage "Ordner verwalten">

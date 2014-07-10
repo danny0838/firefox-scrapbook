@@ -1,6 +1,7 @@
 <!ENTITY sb.prop.general "Általános információ">
 <!ENTITY sb.prop.type "Típus">
-<!ENTITY sb.prop.date "Dátum">
+<!ENTITY sb.prop.create "Create">
+<!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Kódolás">
 <!ENTITY sb.prop.size "Méret">
 <!ENTITY sb.prop.content "Tartalom">

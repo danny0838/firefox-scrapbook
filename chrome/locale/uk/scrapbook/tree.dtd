@@ -17,7 +17,7 @@
 <!ENTITY sb.prop.title "Назва">
 <!ENTITY sb.prop.comment "Коментар">
 <!ENTITY sbp.prop.url "Адреса">
-<!ENTITY sb.prop.id.date "ID (час)">
+<!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.folder.combine "Комбінований вигляд">
 <!ENTITY sb.folder.openall "Відкрити усе у вкладках">
 <!ENTITY sb.folder.manage "Керування текою">

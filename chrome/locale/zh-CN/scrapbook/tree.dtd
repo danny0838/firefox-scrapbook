@@ -17,7 +17,7 @@
 <!ENTITY sb.prop.title "标题">
 <!ENTITY sb.prop.comment "注释">
 <!ENTITY sbp.prop.url "URL">
-<!ENTITY sb.prop.id.date "ID (时间)">
+<!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.folder.combine "合并在同一标签页中打开">
 <!ENTITY sb.folder.openall "在标签页中打开所有项目">
 <!ENTITY sb.folder.manage "管理文件夹">
