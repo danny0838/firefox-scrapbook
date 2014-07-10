@@ -473,10 +473,13 @@ var sbPageEditor = {
 		var newComment = sbCommonUtils.escapeComment(this.COMMENT.value);
 		if ( newTitle != this.item.title || newComment != this.item.comment )
 		{
+			var newModify  = sbCommonUtils.getTimeStamp();
 			sbDataSource.setProperty(sbBrowserOverlay.resource, "title",   newTitle);
 			sbDataSource.setProperty(sbBrowserOverlay.resource, "comment", newComment);
+			sbDataSource.setProperty(sbBrowserOverlay.resource, "modify", newModify);
 			this.item.title   = newTitle;
 			this.item.comment = newComment;
+			this.item.modify  = newModify;
 			sbCommonUtils.writeIndexDat(this.item);
 		}
 		sbCommonUtils.documentData(window.content.document, "comment", null);

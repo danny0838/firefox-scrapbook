@@ -114,6 +114,7 @@ var sbPropService = {
 			}
 		}
 		if (changed) {
+			this.item.modify = sbCommonUtils.getTimeStamp();
 			for (var prop in this.item)  {
 				sbDataSource.setProperty(this.resource, prop, this.item[prop]);
 			}
