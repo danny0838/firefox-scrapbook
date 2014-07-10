@@ -4,6 +4,8 @@ function init() {
 	if ( !window.arguments) window.close();
 	gData = window.arguments[0];
 	if (gData.url) document.getElementById("sbLinkHTML").value = gData.url;
+	var lastFormat = sbCommonUtils.getPref("edit.file.lastFormat", "");
+	if (lastFormat) document.getElementById("sbFileFormat").value = lastFormat;
 }
 
 function accept() {
@@ -13,6 +15,7 @@ function accept() {
 	gData.html = document.getElementById("sbLinkHTML").value;
 	gData.format = document.getElementById("sbFileFormat").value;
 	gData.result = ((gData.file_use && gData.file) || (gData.html_use && gData.html)) ? 1 : 0;
+	sbCommonUtils.setPref("edit.file.lastFormat", gData.format);
 }
 
 function pickFile() {

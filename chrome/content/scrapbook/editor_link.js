@@ -9,6 +9,8 @@ function init() {
 		document.getElementById("sbLinkIDUse").disabled = true;
 		document.getElementById("sbLinkID").disabled = true;
 	}
+	var lastFormat = sbCommonUtils.getPref("edit.link.lastFormat", "");
+	if (lastFormat) document.getElementById("sbLinkFormat").value = lastFormat;
 }
 
 function accept() {
@@ -18,6 +20,7 @@ function accept() {
 	gData.id = document.getElementById("sbLinkID").value;
 	gData.format = document.getElementById("sbLinkFormat").value;
 	gData.result = ((gData.url_use && gData.url) || (gData.id_use && gData.id)) ? 1 : 0;
+	sbCommonUtils.setPref("edit.link.lastFormat", gData.format);
 }
 
 function pick(aIDToCheck) {
