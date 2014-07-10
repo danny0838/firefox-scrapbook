@@ -716,13 +716,12 @@ var sbTreeDNDHandler = {
 		var idxList = sbTreeHandler.getSelection(false, 0);
 		var i = 0;
 		var curResList = []; var curParList = [];
-		var tarResList = []; var tarParList = [];
 		for (i = 0; i < idxList.length; i++) {
 			curResList.push(sbTreeHandler.TREE.builderView.getResourceAtIndex(idxList[i]));
 			curParList.push(sbTreeHandler.getParentResource(idxList[i]));
-			tarResList.push(sbTreeHandler.TREE.builderView.getResourceAtIndex(this.row));
-			tarParList.push((this.orient == 0) ? tarResList[i] : sbTreeHandler.getParentResource(this.row));
 		}
+		var tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(this.row);
+		var tarPar = (this.orient == 0) ? tarRes : sbTreeHandler.getParentResource(this.row);
 		//RDF-Datenquelle vom tree entfernen
 		var mmDatei = sbCommonUtils.getScrapBookDir();
 		mmDatei.append("extensions.scrapbook.rdf");
@@ -734,11 +733,11 @@ var sbTreeDNDHandler = {
 		mmTreeObj.database.RemoveDataSource(mmDaten);
 		if (this.orient == 1) {
 			for (i = idxList.length - 1; i >= 0 ; i--)
-				this.moveAfterChecking(curResList[i], curParList[i], tarResList[i], tarParList[i]);
+				this.moveAfterChecking(curResList[i], curParList[i], tarRes, tarPar);
 		}
 		else {
 			for (i = 0; i < idxList.length; i++)
-				this.moveAfterChecking(curResList[i], curParList[i], tarResList[i], tarParList[i]);
+				this.moveAfterChecking(curResList[i], curParList[i], tarRes, tarPar);
 		}
 		//RDF-Datenquelle dem tree hinzufügen
 		if ( mmSidebarTreeObj ) mmSidebarTreeObj.database.AddDataSource(mmDaten);
