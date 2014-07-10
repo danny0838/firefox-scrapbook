@@ -1028,20 +1028,24 @@ var sbHtmlEditor = {
 		if (!htmlFile) return;
 		// init
 		var sel = aDoc.defaultView.getSelection();
+		var selText = sel.toString();
+		if (selText && selText.match(/^([^\t\n\r\v\f]*)/i)) {
+			var url = RegExp.$1;
+		}
 		// prompt the dialog for user input
-		var data = {};
+		var data = { url: url };
 		var accepted = window.top.openDialog("chrome://scrapbook/content/editor_file.xul", "ScrapBook:AttachFile", "chrome,modal,centerscreen", data);
 		if (data.result != 1) return;
 		// insert file ?
 		if (data.file_use) {
-			// copy the selected file
-			var destFile = htmlFile.parent.clone();
-			destFile.append(data.file.leafName);
-			if ( destFile.exists() && destFile.isFile() ) {
-				if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [data.file.leafName])) ) return;
-				destFile.remove(false);
-			}
 			try {
+				// copy the selected file
+				var destFile = htmlFile.parent.clone();
+				destFile.append(data.file.leafName);
+				if ( destFile.exists() && destFile.isFile() ) {
+					if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [data.file.leafName])) ) return;
+					destFile.remove(false);
+				}
 				data.file.copyTo(destFile.parent, data.file.leafName);
 			} catch(ex) {
 				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [data.file.leafName]));
@@ -1050,10 +1054,12 @@ var sbHtmlEditor = {
 			// insert to the document
 			if (data.format) {
 				var FILE = data.file.leafName;
+				var FILE_E = sbCommonUtils.escapeFileName(FILE);
 				var THIS = sel.isCollapsed ? FILE : sbPageEditor.getSelectionHTML(sel);
-				var html = data.format.replace(/{(FILE|THIS)}/g, function(){
+				var html = data.format.replace(/{(FILE|FILE_E|THIS)}/g, function(){
 					switch (arguments[1]) {
 						case "FILE": return FILE;
+						case "FILE_E": return FILE_E;
 						case "THIS": return THIS;
 					}
 					return "";
@@ -1064,21 +1070,24 @@ var sbHtmlEditor = {
 		// insert html ?
 		else if (data.html_use) {
 			var filename = data.html + ".html";
-			var destFile = htmlFile.parent.clone();
-			destFile.append(filename);
-			if ( destFile.exists() && destFile.isFile() && filename != "index.html" ) {
-				if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [filename])) ) return;
-				destFile.remove(false);
-			}
-			// check the template file, create one if not exist
-			var template = sbCommonUtils.getScrapBookDir().clone();
-			template.append("notex_template.html");
-			if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/notex_template.html", template);
-			// create content
-			var content = sbCommonUtils.readFile(template);
-			content = sbCommonUtils.convertToUnicode(content, "UTF-8");
 			try {
+				// handle special characters that are not allowed
 				if (filename == "index.html") throw "";  // do not allow to overwrite index page
+				// in Windows a nsIFile with leafName "foo:bar" will be remapped to "foo" and gets no error
+				if (filename.match(/:/)) throw "";
+				var destFile = htmlFile.parent.clone();
+				destFile.append(filename);
+				if ( destFile.exists() && destFile.isFile() ) {
+					if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [filename])) ) return;
+					destFile.remove(false);
+				}
+				// check the template file, create one if not exist
+				var template = sbCommonUtils.getScrapBookDir().clone();
+				template.append("notex_template.html");
+				if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/notex_template.html", template);
+				// create content
+				var content = sbCommonUtils.readFile(template);
+				content = sbCommonUtils.convertToUnicode(content, "UTF-8");
 				sbCommonUtils.writeFile(destFile, content, "UTF-8");
 			} catch(ex) {
 				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename]));
@@ -1087,10 +1096,12 @@ var sbHtmlEditor = {
 			// insert to the document
 			if (data.format) {
 				var FILE = filename;
+				var FILE_E = sbCommonUtils.escapeFileName(FILE);
 				var THIS = sel.isCollapsed ? FILE : sbPageEditor.getSelectionHTML(sel);
-				var html = data.format.replace(/{(FILE|THIS)}/g, function(){
+				var html = data.format.replace(/{(FILE|FILE_E|THIS)}/g, function(){
 					switch (arguments[1]) {
 						case "FILE": return FILE;
+						case "FILE_E": return FILE_E;
 						case "THIS": return THIS;
 					}
 					return "";
@@ -1960,19 +1971,20 @@ var sbAnnotationService = {
 			var ret = FP.show();
 			if ( ret != FP.returnOK ) return;
 			// upload the file
-			var destFile = htmlFile.parent.clone();
-			destFile.append(FP.file.leafName);
-			if ( destFile.exists() && destFile.isFile() ) {
-				if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [FP.file.leafName])) ) return;
-				destFile.remove(false);
-			}
 			try {
+				var destFile = htmlFile.parent.clone();
+				destFile.append(FP.file.leafName);
+				if ( destFile.exists() && destFile.isFile() ) {
+					if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [FP.file.leafName])) ) return;
+					destFile.remove(false);
+				}
 				FP.file.copyTo(destFile.parent, FP.file.leafName);
 			} catch(ex) {
+				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [FP.file.leafName]));
 				return;
 			}
 			// attach the link
-			attr["href"] = sbCommonUtils.getFileName(sbCommonUtils.IO.newFileURI(FP.file).spec);
+			attr["href"] = sbCommonUtils.escapeFileName(FP.file.leafName);
 			attr["title"] = FP.file.leafName;
 			attr["data-sb-obj"] = "link-file";
 		}

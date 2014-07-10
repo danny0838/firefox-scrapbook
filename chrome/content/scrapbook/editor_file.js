@@ -3,6 +3,7 @@ var gData;
 function init() {
 	if ( !window.arguments) window.close();
 	gData = window.arguments[0];
+	if (gData.url) document.getElementById("sbLinkHTML").value = gData.url;
 }
 
 function accept() {
