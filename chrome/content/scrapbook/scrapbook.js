@@ -724,6 +724,13 @@ var sbTreeDNDHandler = {
 		}
 		var tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(this.row);
 		var tarPar = (this.orient == 0) ? tarRes : sbTreeHandler.getParentResource(this.row);
+		if (this.orient == 1 &&
+			sbTreeHandler.TREE.view.isContainer(this.row) &&
+			sbTreeHandler.TREE.view.isContainerOpen(this.row) &&
+			sbTreeHandler.TREE.view.isContainerEmpty(this.row) == false) {
+			tarPar = tarRes;
+			tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(this.row + 1);
+		}
 		for (var i = 0; i < idxList.length; i++)
 			this.moveAfterChecking(curResList[i], curParList[i], tarRes, tarPar);
 	},
@@ -740,19 +747,6 @@ var sbTreeDNDHandler = {
 				tarRelIdx++;
 			if (curPar.Value == tarPar.Value && tarRelIdx > curRelIdx)
 				tarRelIdx--;
-			if (this.orient == 1 &&
-			    sbTreeHandler.TREE.view.isContainer(this.row) &&
-			    sbTreeHandler.TREE.view.isContainerOpen(this.row) &&
-			    sbTreeHandler.TREE.view.isContainerEmpty(this.row) == false) {
-				if (curAbsIdx == this.row) {
-					sbMainService.trace("can't drop folder after open container");
-					return;
-				}
-				sbMainService.trace("drop after open container");
-				tarPar = tarRes;
-				tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(this.row + 1);
-				tarRelIdx = 1;
-			}
 			if (curPar.Value == tarPar.Value && curRelIdx == tarRelIdx)
 				return;
 		}
