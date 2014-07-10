@@ -716,38 +716,36 @@ var sbTreeDNDHandler = {
 			tarPar = tarRes;
 			tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(this.row + 1);
 		}
-		for (var i = 0; i < idxList.length; i++)
-			this.moveAfterChecking(curResList[i], curParList[i], tarRes, tarPar);
-	},
-
-	moveAfterChecking: function(curRes, curPar, tarRes, tarPar)
-	{
-		var curAbsIdx = sbTreeHandler.TREE.builderView.getIndexOfResource(curRes);
-		var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
-		var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
-		if (curAbsIdx == this.row)
-			return;
-		if (this.orient == 1)
-			tarRelIdx++;
-		if (this.orient == -1 || this.orient == 1) {
-			if (curPar.Value == tarPar.Value && tarRelIdx > curRelIdx)
-				tarRelIdx--;
-			if (curPar.Value == tarPar.Value && curRelIdx == tarRelIdx)
+		for (var i = 0; i < idxList.length; i++) {
+			var curRes = curResList[i];
+			var curPar = curParList[i];
+			var curAbsIdx = sbTreeHandler.TREE.builderView.getIndexOfResource(curRes);
+			var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
+			var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
+			if (curAbsIdx == this.row)
 				return;
-		}
-		if (sbTreeHandler.TREE.view.isContainer(curAbsIdx)) {
-			var tmpIdx = this.row;
-			var tmpRes = tarRes;
-			while (tmpRes.Value != sbTreeHandler.TREE.ref && tmpIdx != -1) {
-				tmpRes = sbTreeHandler.getParentResource(tmpIdx);
-				tmpIdx = sbTreeHandler.TREE.builderView.getIndexOfResource(tmpRes);
-				if (tmpRes.Value == curRes.Value) {
-					sbMainService.trace("can't move folder into descendant level");
+			if (this.orient == 1)
+				tarRelIdx++;
+			if (this.orient == -1 || this.orient == 1) {
+				if (curPar.Value == tarPar.Value && tarRelIdx > curRelIdx)
+					tarRelIdx--;
+				if (curPar.Value == tarPar.Value && curRelIdx == tarRelIdx)
 					return;
+			}
+			if (sbTreeHandler.TREE.view.isContainer(curAbsIdx)) {
+				var tmpIdx = this.row;
+				var tmpRes = tarRes;
+				while (tmpRes.Value != sbTreeHandler.TREE.ref && tmpIdx != -1) {
+					tmpRes = sbTreeHandler.getParentResource(tmpIdx);
+					tmpIdx = sbTreeHandler.TREE.builderView.getIndexOfResource(tmpRes);
+					if (tmpRes.Value == curRes.Value) {
+						sbMainService.trace("can't move folder into descendant level");
+						return;
+					}
 				}
 			}
+			sbDataSource.moveItem(curRes, curPar, tarPar, tarRelIdx);
 		}
-		sbDataSource.moveItem(curRes, curPar, tarPar, tarRelIdx);
 	},
 
 	capture: function(aXferString, aRow, aOrient)
