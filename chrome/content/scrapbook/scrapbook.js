@@ -570,8 +570,6 @@ var sbController = {
 
 var sbTreeDNDHandler = {
 
-	row      : 0,
-	orient   : 0,
 	modAlt   : false,
 	modShift : false,
 	currentDataTransfer : null,
@@ -688,33 +686,27 @@ var sbTreeDNDHandler = {
 		catch(ex) {
 		}
 	},
-
-	move: function(aRow, aOrient)
-	{
-		this.row = aRow;
-		this.orient = aOrient; // -1: drop before; 0: drop on; 1: drop after
-		this.moveMultiple();
-	},
-
-	moveMultiple: function()
+	
+	// orient: -1 = drop before; 0 = drop on; 1 = drop after
+	move: function(row, orient)
 	{
 		//Für Firefox 3.5 notwendig, da sonst ein Fehler ausgegeben wird
-		if ( this.row == -1 ) return;
+		if ( row == -1 ) return;
 		var idxList = sbTreeHandler.getSelection(false, 0);
-		if (this.orient == 1) idxList.reverse();
+		if (orient == 1) idxList.reverse();
 		var curResList = []; var curParList = [];
 		for (var i = 0; i < idxList.length; i++) {
 			curResList.push(sbTreeHandler.TREE.builderView.getResourceAtIndex(idxList[i]));
 			curParList.push(sbTreeHandler.getParentResource(idxList[i]));
 		}
-		var tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(this.row);
-		var tarPar = (this.orient == 0) ? tarRes : sbTreeHandler.getParentResource(this.row);
-		if (this.orient == 1 &&
-			sbTreeHandler.TREE.view.isContainer(this.row) &&
-			sbTreeHandler.TREE.view.isContainerOpen(this.row) &&
-			sbTreeHandler.TREE.view.isContainerEmpty(this.row) == false) {
+		var tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(row);
+		var tarPar = (orient == 0) ? tarRes : sbTreeHandler.getParentResource(row);
+		if (orient == 1 &&
+			sbTreeHandler.TREE.view.isContainer(row) &&
+			sbTreeHandler.TREE.view.isContainerOpen(row) &&
+			sbTreeHandler.TREE.view.isContainerEmpty(row) == false) {
 			tarPar = tarRes;
-			tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(this.row + 1);
+			tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(row + 1);
 		}
 		for (var i = 0; i < idxList.length; i++) {
 			var curRes = curResList[i];
@@ -722,18 +714,18 @@ var sbTreeDNDHandler = {
 			var curAbsIdx = sbTreeHandler.TREE.builderView.getIndexOfResource(curRes);
 			var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
 			var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
-			if (curAbsIdx == this.row)
+			if (curAbsIdx == row)
 				return;
-			if (this.orient == 1)
+			if (orient == 1)
 				tarRelIdx++;
-			if (this.orient == -1 || this.orient == 1) {
+			if (orient == -1 || orient == 1) {
 				if (curPar.Value == tarPar.Value && tarRelIdx > curRelIdx)
 					tarRelIdx--;
 				if (curPar.Value == tarPar.Value && curRelIdx == tarRelIdx)
 					return;
 			}
 			if (sbTreeHandler.TREE.view.isContainer(curAbsIdx)) {
-				var tmpIdx = this.row;
+				var tmpIdx = row;
 				var tmpRes = tarRes;
 				while (tmpRes.Value != sbTreeHandler.TREE.ref && tmpIdx != -1) {
 					tmpRes = sbTreeHandler.getParentResource(tmpIdx);
