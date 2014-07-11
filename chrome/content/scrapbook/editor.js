@@ -1069,7 +1069,8 @@ var sbHtmlEditor = {
 		}
 		// insert html ?
 		else if (data.html_use) {
-			var filename = data.html + ".html";
+			var title = data.html;
+			var filename = title + ".html";
 			try {
 				// handle special characters that are not allowed
 				if (filename == "index.html") throw "";  // do not allow to overwrite index page
@@ -1088,6 +1089,7 @@ var sbHtmlEditor = {
 				// create content
 				var content = sbCommonUtils.readFile(template);
 				content = sbCommonUtils.convertToUnicode(content, "UTF-8");
+				content = content.replace(/<%NOTE_TITLE%>/g, title);
 				sbCommonUtils.writeFile(destFile, content, "UTF-8");
 			} catch(ex) {
 				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename]));
