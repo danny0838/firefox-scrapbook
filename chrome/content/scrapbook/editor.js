@@ -608,14 +608,33 @@ var sbPageEditor = {
 			}
 		}
 		// flush title for the main page if it's notex
-		if (this.item && this.item.type == "notex" && this.isMainPage) {
-			var title = this.item.title;
+		if (this.item && this.item.type == "notex") {
+			var title = this.isMainPage ? this.item.title : gBrowser.selectedTab.label;
+			var titleNodes = [];
+			var titleSrcNodes = [];
 			var nodes = aDoc.getElementsByTagName("*");
-			for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
+			for ( var i = 0; i < nodes.length; i++ ) {
 				var node = nodes[i];
-				if ( sbCommonUtils.getSbObjectType(node) == "title") {
-					node.innerHTML = sbCommonUtils.escapeHTML(title, true);
+				switch (sbCommonUtils.getSbObjectType(node)) {
+					case "title": titleNodes.push(node); break;
+					case "title-src": titleSrcNodes.push(node); break;
 				}
+			}
+			if (titleSrcNodes.length) {
+				titleSrcNodes.forEach(function(node){
+					var text = node.textContent;
+					if (text) title = text;
+				});
+			}
+			titleNodes.forEach(function(node){
+				if (node.textContent != title) node.textContent = title;
+			});
+			titleSrcNodes.forEach(function(node){
+				if (node.textContent != title) node.textContent = title;
+			});
+			if (this.isMainPage && title != this.item.title) {
+				sbDataSource.setProperty(sbBrowserOverlay.resource, "title", title);
+				this.item.title = title;
 			}
 		}
 	},
@@ -1115,9 +1134,27 @@ var sbHtmlEditor = {
 				template.append("notex_template.html");
 				if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/notex_template.html", template);
 				// create content
+				var tpl = {
+					NOTE_TITLE: title,
+					SCRAPBOOK_DIR: (function(aBaseURL){
+						var result = "";
+						var sbDir = sbCommonUtils.getScrapBookDir();
+						var checkFile = sbCommonUtils.convertURLToFile(aBaseURL);
+						while (!checkFile.equals(sbDir)){
+							result += "../";
+							checkFile = checkFile.parent;
+						}
+						// remove trailing "/"
+						return result.substring(0, result.length -1);
+					})(aDoc.location.href),
+				};
 				var content = sbCommonUtils.readFile(template);
 				content = sbCommonUtils.convertToUnicode(content, "UTF-8");
-				content = content.replace(/<%NOTE_TITLE%>/g, title);
+				content = content.replace(/<%([\w_]+)%>/g, function(){
+					var label = arguments[1];
+					if (tpl[label]) return tpl[label];
+					return "";
+				});
 				sbCommonUtils.writeFile(destFile, content, "UTF-8", true);
 			} catch(ex) {
 				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename]));

@@ -766,7 +766,11 @@ var sbCommonUtils = {
 	 * sticky-save
 	 * sticky-delete
 	 * block-comment (?)
-	 * stylesheet
+	 *
+	 * title (*)
+	 * title-src (*)
+	 * stylesheet (link, style)
+	 * todo (input, textarea)
 	 */
 	getSbObjectType : function(aNode)
 	{
@@ -802,7 +806,7 @@ var sbCommonUtils = {
 	getSbObjectRemoveType : function(aNode)
 	{
 		var type = this.getSbObjectType(aNode);
-		if (!type || ["title", "todo"].indexOf(type) != -1) return 0;
+		if (!type || ["title", "title-src", "todo"].indexOf(type) != -1) return 0;
 		if (["linemarker", "inline", "link-url", "link-inner", "link-file"].indexOf(type) != -1) return 2;
 		return 1;
 	},
