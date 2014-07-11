@@ -533,7 +533,6 @@ var sbImportService = {
 		if ( window.top.sbDataSource.exists(item.id) ) throw sbCommonUtils.lang("trade", "ERROR_SAME_ID_EXISTS");
 		var destDir = sbTradeService.leftDir.clone();
 		if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) ) item.icon = "resource://scrapbook/data/" + item.id + "/" + item.icon;
-		if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(item.type);
 		if ( item.type == "folder" || item.type == "bookmark" || item.type == "separator" )
 		{
 			if ( document.getElementById("sbTradeOptionRemove").checked ) sbCommonUtils.removeDirSafety(srcDir, false);
