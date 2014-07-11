@@ -409,8 +409,8 @@ var sbPageEditor = {
 	saveOrCapture : function(aBypassDialog)
 	{
 		if ( sbBrowserOverlay.getID() ) {
-			this.savePage();
 			this.saveResource();
+			this.savePage();
 		}
 		else {
 			sbDOMEraser.init(0);
@@ -591,6 +591,15 @@ var sbPageEditor = {
 			var node = nodes[i];
 			if ( sbCommonUtils.getSbObjectType(node) == "todo") {
 				node.innerHTML = sbCommonUtils.escapeHTML(node.value, true);
+			}
+		}
+		// flush title for the main page if it's notex
+		if (this.item && this.item.type == "notex" && this.isMainPage) {
+			var title = this.item.title;
+			var nodes = aDoc.getElementsByTagName("title");
+			for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
+				var node = nodes[i];
+				node.innerHTML = sbCommonUtils.escapeHTML(title, true);
 			}
 		}
 	},
