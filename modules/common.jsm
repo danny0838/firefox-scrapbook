@@ -199,10 +199,9 @@ var sbCommonUtils = {
 		}
 	},
 
-	getTimeStamp : function(advance)
+	getTimeStamp : function(aDate)
 	{
-		var dd = new Date;
-		if ( advance ) dd.setTime(dd.getTime() + 1000 * advance);
+		var dd = aDate || new Date();
 		var y = dd.getFullYear();
 		var m = dd.getMonth() + 1; if ( m < 10 ) m = "0" + m;
 		var d = dd.getDate();      if ( d < 10 ) d = "0" + d;

@@ -44,9 +44,9 @@ var sbPageEditor = {
 		this.isMainPage = false;
 		if ( aID ) {
 			try {
-				// if the current page is the index page of the id, use the item title and item icon
 				var mainFile = sbCommonUtils.getContentDir(aID); mainFile.append("index.html");
 				var curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
+				// if the current page is the index page of the id, use the item title and item icon
 				if (mainFile.equals(curFile)) {
 					this.isMainPage = true;
 					this.documentLoad(window.content.document, function(doc){
@@ -56,6 +56,20 @@ var sbPageEditor = {
 							gBrowser.selectedTab.setAttribute("image", that.item.icon || sbCommonUtils.getDefaultIcon(that.item.type));
 						}, 0);
 					}, this);
+				}
+				// auto renew the date data
+				if (!this.item.create) {
+					this.item.create = aID;
+					sbDataSource.setProperty(sbBrowserOverlay.resource, "create", this.item.create);
+				}
+				if (!this.item.modify) {
+					this.item.modify = this.item.create;
+					sbDataSource.setProperty(sbBrowserOverlay.resource, "modify", this.item.modify);
+				}
+				var curFileTime = sbCommonUtils.getTimeStamp(new Date(curFile.lastModifiedTime));
+				if (curFileTime > this.item.modify) {
+					this.item.modify = curFileTime;
+					sbDataSource.setProperty(sbBrowserOverlay.resource, "modify", curFileTime);
 				}
 			} catch(ex) {
 				sbCommonUtils.error(ex);
