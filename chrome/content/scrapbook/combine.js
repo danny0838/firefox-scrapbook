@@ -466,7 +466,7 @@ var sbPageCombiner = {
 		}
 		src += '<cite class="scrapbook-header' + '">\n';
 		src += '\t<img src="' + icon + '" width="16" height="16">\n';
-		src += '\t<a class="' + aType + '"' + (linkURL ? ' href="' + linkURL + '"' : "") + '>' + title + '</a>\n';
+		src += '\t<a class="' + aType + '"' + (linkURL ? ' href="' + linkURL + '"' : "") + '>' + sbCommonUtils.escapeHTML(title, true) + '</a>\n';
 		src += '</cite>\n';
 		return src;
 	},
