@@ -437,7 +437,7 @@ var sbPageCombiner = {
 	{
 		// add a thin space between "--" in the comment to prevent exploits
 		var src   = '\n<!--' + sbCombineService.postfix.replace(/--/g, "- -") + '-->\n';
-		var title = sbCommonUtils.crop(sbDataSource.getProperty(sbCombineService.curRes, "title") , 100);
+		var title = sbDataSource.getProperty(sbCombineService.curRes, "title");
 		var linkURL = "";
 		switch ( aType )
 		{
