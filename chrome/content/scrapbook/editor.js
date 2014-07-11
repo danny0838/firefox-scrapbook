@@ -613,10 +613,10 @@ var sbPageEditor = {
 				});
 			}
 			titleNodes.forEach(function(node){
-				node.textContent = title;
+				if (node.textContent != title) node.textContent = title;
 			});
 			titleSrcNodes.forEach(function(node){
-				node.textContent = title;
+				if (node.textContent != title) node.textContent = title;
 			});
 			if (this.isMainPage && title != this.item.title) {
 				sbDataSource.setProperty(sbBrowserOverlay.resource, "title", title);
