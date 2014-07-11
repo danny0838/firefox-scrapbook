@@ -199,10 +199,9 @@ var sbCommonUtils = {
 		}
 	},
 
-	getTimeStamp : function(advance)
+	getTimeStamp : function(aDate)
 	{
-		var dd = new Date;
-		if ( advance ) dd.setTime(dd.getTime() + 1000 * advance);
+		var dd = aDate || new Date();
 		var y = dd.getFullYear();
 		var m = dd.getMonth() + 1; if ( m < 10 ) m = "0" + m;
 		var d = dd.getDate();      if ( d < 10 ) d = "0" + d;
@@ -339,7 +338,7 @@ var sbCommonUtils = {
 		}
 	},
 
-	writeFile : function(aFile, aContent, aChars)
+	writeFile : function(aFile, aContent, aChars, aNoCatch)
 	{
 		if ( aFile.exists() ) aFile.remove(false);
 		try {
@@ -351,9 +350,9 @@ var sbCommonUtils = {
 			ostream.write(aContent, aContent.length);
 			ostream.close();
 		}
-		catch(ex)
-		{
-			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_WRITE_FILE", [aFile.path, ex]));
+		catch(ex) {
+			if (aNoCatch) throw ex;
+			else this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_WRITE_FILE", [aFile.path, ex]));
 		}
 	},
 
@@ -767,7 +766,11 @@ var sbCommonUtils = {
 	 * sticky-save
 	 * sticky-delete
 	 * block-comment (?)
-	 * stylesheet
+	 *
+	 * title (*)
+	 * title-src (*)
+	 * stylesheet (link, style)
+	 * todo (input, textarea)
 	 */
 	getSbObjectType : function(aNode)
 	{
@@ -803,7 +806,7 @@ var sbCommonUtils = {
 	getSbObjectRemoveType : function(aNode)
 	{
 		var type = this.getSbObjectType(aNode);
-		if (!type || ["todo"].indexOf(type) != -1) return 0;
+		if (!type || ["title", "title-src", "todo"].indexOf(type) != -1) return 0;
 		if (["linemarker", "inline", "link-url", "link-inner", "link-file"].indexOf(type) != -1) return 2;
 		return 1;
 	},

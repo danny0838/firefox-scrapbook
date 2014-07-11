@@ -7,6 +7,7 @@ var sbPageEditor = {
 	enabled : true,
 	item : {},
 	multiline : false,
+	isMainPage : false,
 
 	init : function(aID)
 	{
@@ -40,12 +41,14 @@ var sbPageEditor = {
 			sbInfoViewer.TOOLBAR.hidden = true;
 		}
 		// -- current browser tab
+		this.isMainPage = false;
 		if ( aID ) {
 			try {
-				// if the current page is the index page of the id, use the item title and item icon
-				var mainFile = sbCommonUtils.getContentDir(this.item.id); mainFile.append("index.html");
+				var mainFile = sbCommonUtils.getContentDir(aID); mainFile.append("index.html");
 				var curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
+				// if the current page is the index page of the id, use the item title and item icon
 				if (mainFile.equals(curFile)) {
+					this.isMainPage = true;
 					this.documentLoad(window.content.document, function(doc){
 						var that = this;
 						setTimeout(function(){
@@ -53,6 +56,20 @@ var sbPageEditor = {
 							gBrowser.selectedTab.setAttribute("image", that.item.icon || sbCommonUtils.getDefaultIcon(that.item.type));
 						}, 0);
 					}, this);
+				}
+				// auto renew the date data
+				if (!this.item.create) {
+					this.item.create = aID;
+					sbDataSource.setProperty(sbBrowserOverlay.resource, "create", this.item.create);
+				}
+				if (!this.item.modify) {
+					this.item.modify = this.item.create;
+					sbDataSource.setProperty(sbBrowserOverlay.resource, "modify", this.item.modify);
+				}
+				var curFileTime = sbCommonUtils.getTimeStamp(new Date(curFile.lastModifiedTime));
+				if (curFileTime > this.item.modify) {
+					this.item.modify = curFileTime;
+					sbDataSource.setProperty(sbBrowserOverlay.resource, "modify", curFileTime);
 				}
 			} catch(ex) {
 				sbCommonUtils.error(ex);
@@ -406,8 +423,8 @@ var sbPageEditor = {
 	saveOrCapture : function(aBypassDialog)
 	{
 		if ( sbBrowserOverlay.getID() ) {
-			this.savePage();
 			this.saveResource();
+			this.savePage();
 		}
 		else {
 			sbDOMEraser.init(0);
@@ -588,6 +605,36 @@ var sbPageEditor = {
 			var node = nodes[i];
 			if ( sbCommonUtils.getSbObjectType(node) == "todo") {
 				node.innerHTML = sbCommonUtils.escapeHTML(node.value, true);
+			}
+		}
+		// flush title for the main page if it's notex
+		if (this.item && this.item.type == "notex") {
+			var title = this.isMainPage ? this.item.title : gBrowser.selectedTab.label;
+			var titleNodes = [];
+			var titleSrcNodes = [];
+			var nodes = aDoc.getElementsByTagName("*");
+			for ( var i = 0; i < nodes.length; i++ ) {
+				var node = nodes[i];
+				switch (sbCommonUtils.getSbObjectType(node)) {
+					case "title": titleNodes.push(node); break;
+					case "title-src": titleSrcNodes.push(node); break;
+				}
+			}
+			if (titleSrcNodes.length) {
+				titleSrcNodes.forEach(function(node){
+					var text = node.textContent;
+					if (text) title = text;
+				});
+			}
+			titleNodes.forEach(function(node){
+				if (node.textContent != title) node.textContent = title;
+			});
+			titleSrcNodes.forEach(function(node){
+				if (node.textContent != title) node.textContent = title;
+			});
+			if (this.isMainPage && title != this.item.title) {
+				sbDataSource.setProperty(sbBrowserOverlay.resource, "title", title);
+				this.item.title = title;
 			}
 		}
 	},
@@ -1069,7 +1116,8 @@ var sbHtmlEditor = {
 		}
 		// insert html ?
 		else if (data.html_use) {
-			var filename = data.html + ".html";
+			var title = data.html;
+			var filename = title + ".html";
 			try {
 				// handle special characters that are not allowed
 				if (filename == "index.html") throw "";  // do not allow to overwrite index page
@@ -1086,9 +1134,28 @@ var sbHtmlEditor = {
 				template.append("notex_template.html");
 				if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/notex_template.html", template);
 				// create content
+				var tpl = {
+					NOTE_TITLE: title,
+					SCRAPBOOK_DIR: (function(aBaseURL){
+						var result = "";
+						var sbDir = sbCommonUtils.getScrapBookDir();
+						var checkFile = sbCommonUtils.convertURLToFile(aBaseURL);
+						while (!checkFile.equals(sbDir)){
+							result += "../";
+							checkFile = checkFile.parent;
+						}
+						// remove trailing "/"
+						return result.substring(0, result.length -1);
+					})(aDoc.location.href),
+				};
 				var content = sbCommonUtils.readFile(template);
 				content = sbCommonUtils.convertToUnicode(content, "UTF-8");
-				sbCommonUtils.writeFile(destFile, content, "UTF-8");
+				content = content.replace(/<%([\w_]+)%>/g, function(){
+					var label = arguments[1];
+					if (tpl[label]) return tpl[label];
+					return "";
+				});
+				sbCommonUtils.writeFile(destFile, content, "UTF-8", true);
 			} catch(ex) {
 				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename]));
 				return;
