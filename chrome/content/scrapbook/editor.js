@@ -595,6 +595,7 @@ var sbPageEditor = {
 		}
 		// flush title for the main page if it's notex
 		if (this.item && this.item.type == "notex" && this.isMainPage) {
+			var title = this.item.title;
 			var titleNodes = [];
 			var titleSrcNodes = [];
 			var nodes = aDoc.getElementsByTagName("*");
@@ -606,19 +607,16 @@ var sbPageEditor = {
 				}
 			}
 			if (titleSrcNodes.length) {
-				var titles = [];
-				titleSrcNodes.forEach(function(titleSrcNode){
-					var text = titleSrcNode.textContent;
-					if (text) titles.push(text);
+				titleSrcNodes.forEach(function(node){
+					var text = node.textContent;
+					if (text) title = text;
 				});
-				var title = titles.join("\n");
 			}
-			else {
-				var title = this.item.title;
-			}
-			title = sbCommonUtils.escapeHTML(title, true);
-			titleNodes.forEach(function(titleNode){
-				titleNode.innerHTML = title;
+			titleNodes.forEach(function(node){
+				node.textContent = title;
+			});
+			titleSrcNodes.forEach(function(node){
+				node.textContent = title;
 			});
 		}
 	},
