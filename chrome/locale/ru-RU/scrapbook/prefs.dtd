@@ -34,6 +34,7 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "конец каталога">
 <!ENTITY sb.prefs.showDetailOnDrop "Показывать диалог «Настройки сохранения страницы» при захвате перетаскиванием на боковую панель">
 <!ENTITY sb.prefs.notifyOnComplete "Показывать сообщение «Сохранение завершено»">
+<!ENTITY sb.prefs.exportFolders "Allow exporting folder items">
 <!ENTITY sb.button.customize "Изменить">
 <!ENTITY sb.button.browse "Обзор">
 <!ENTITY sb.button.show "Показать файлы">
