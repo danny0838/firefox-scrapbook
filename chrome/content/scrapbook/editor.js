@@ -1120,9 +1120,27 @@ var sbHtmlEditor = {
 				template.append("notex_template.html");
 				if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/notex_template.html", template);
 				// create content
+				var tpl = {
+					NOTE_TITLE: title,
+					SCRAPBOOK_DIR: (function(aBaseURL){
+						var result = "";
+						var sbDir = sbCommonUtils.getScrapBookDir();
+						var checkFile = sbCommonUtils.convertURLToFile(aBaseURL);
+						while (!checkFile.equals(sbDir)){
+							result += "../";
+							checkFile = checkFile.parent;
+						}
+						// remove trailing "/"
+						return result.substring(0, result.length -1);
+					})(aDoc.location.href),
+				};
 				var content = sbCommonUtils.readFile(template);
 				content = sbCommonUtils.convertToUnicode(content, "UTF-8");
-				content = content.replace(/<%NOTE_TITLE%>/g, title);
+				content = content.replace(/<%([\w_]+)%>/g, function(){
+					var label = arguments[1];
+					if (tpl[label]) return tpl[label];
+					return "";
+				});
 				sbCommonUtils.writeFile(destFile, content, "UTF-8", true);
 			} catch(ex) {
 				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename]));

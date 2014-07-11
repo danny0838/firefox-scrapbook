@@ -210,9 +210,17 @@ var sbMainService = {
 		var dir = sbCommonUtils.getContentDir(newID);
 		var html = dir.clone();
 		html.append("index.html");
+		var tpl = {
+			NOTE_TITLE: newItem.title,
+			SCRAPBOOK_DIR: "../..",
+		};
 		var content = sbCommonUtils.readFile(template);
 		content = sbCommonUtils.convertToUnicode(content, "UTF-8");
-		content = content.replace(/<%NOTE_TITLE%>/g, newItem.title);
+		content = content.replace(/<%([\w_]+)%>/g, function(){
+			var label = arguments[1];
+			if (tpl[label]) return tpl[label];
+			return "";
+		});
 		sbCommonUtils.writeFile(html, content, newItem.chars);
 		sbCommonUtils.writeIndexDat(newItem);
 		// add resource
