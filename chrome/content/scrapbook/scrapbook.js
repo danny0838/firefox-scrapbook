@@ -212,7 +212,7 @@ var sbMainService = {
 		html.append("index.html");
 		var content = sbCommonUtils.readFile(template);
 		content = sbCommonUtils.convertToUnicode(content, "UTF-8");
-		content = content.replace(/<%NOTE_TITLE%>/g, "");
+		content = content.replace(/<%NOTE_TITLE%>/g, newItem.title);
 		sbCommonUtils.writeFile(html, content, newItem.chars);
 		sbCommonUtils.writeIndexDat(newItem);
 		// add resource
