@@ -306,8 +306,6 @@
 		<preferences>
 			<preference id="extensions.scrapbook.showDetailOnDrop"   name="extensions.scrapbook.showDetailOnDrop"   type="bool" />
 			<preference id="extensions.scrapbook.notifyOnComplete"   name="extensions.scrapbook.notifyOnComplete"   type="bool" />
-			<preference id="extensions.scrapbook.fileViewer.default" name="extensions.scrapbook.fileViewer.default" type="bool" />
-			<preference id="extensions.scrapbook.fileViewer.path"    name="extensions.scrapbook.fileViewer.path"    type="file" />
 		</preferences>
 		<vbox flex="1" style="overflow: auto;">
 		<checkbox preference="extensions.scrapbook.showDetailOnDrop" label="&sb.prefs.showDetailOnDrop;" />
