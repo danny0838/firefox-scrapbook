@@ -1090,7 +1090,7 @@ var sbHtmlEditor = {
 				var content = sbCommonUtils.readFile(template);
 				content = sbCommonUtils.convertToUnicode(content, "UTF-8");
 				content = content.replace(/<%NOTE_TITLE%>/g, title);
-				sbCommonUtils.writeFile(destFile, content, "UTF-8");
+				sbCommonUtils.writeFile(destFile, content, "UTF-8", true);
 			} catch(ex) {
 				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename]));
 				return;

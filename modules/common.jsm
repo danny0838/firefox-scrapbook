@@ -339,7 +339,7 @@ var sbCommonUtils = {
 		}
 	},
 
-	writeFile : function(aFile, aContent, aChars)
+	writeFile : function(aFile, aContent, aChars, aNoCatch)
 	{
 		if ( aFile.exists() ) aFile.remove(false);
 		try {
@@ -351,9 +351,9 @@ var sbCommonUtils = {
 			ostream.write(aContent, aContent.length);
 			ostream.close();
 		}
-		catch(ex)
-		{
-			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_WRITE_FILE", [aFile.path, ex]));
+		catch(ex) {
+			if (aNoCatch) throw ex;
+			else this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_WRITE_FILE", [aFile.path, ex]));
 		}
 	},
 
