@@ -1,3 +1,15 @@
+Scrapbook X 1.12.0a12
+----------------
+
+- NEW: Add a new option to the preference that allows exporting data items, which enables us to preserve and reconstruct the original data precisely (Note: must re-import with identical order, or the result could be messed up).
+- NEW: Automatically detect file status and renew the create and modify time properties of the data item.
+- NEW: Note page template can now use <%NOTE_TITLE%> and <%SCRAPBOOK_DIR%> to insert the title and the relative path of ScrapBook directory respectively on creating (remove the notex_template.html file under ScrapBook folder to renew it).
+- NEW: Add data-sb-obj="title" and data-sb-obj="title-obj" attributes. Value of the latter one (or page title if not found) is automatically filled into the former one on saving of a note page.
+- UPDATE: Increase the font size of the textarea of Insert Source.
+- FIXED: A data item shows an unexpected icon after importing if it's icon property hadn't been set a value.
+- FIXED: A link is created after inserting sub-page even though there has been an error during file creation.
+
+
 Scrapbook X 1.12.0a11
 ----------------
 
