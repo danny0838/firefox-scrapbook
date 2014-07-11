@@ -618,6 +618,10 @@ var sbPageEditor = {
 			titleSrcNodes.forEach(function(node){
 				node.textContent = title;
 			});
+			if (this.isMainPage && title != this.item.title) {
+				sbDataSource.setProperty(sbBrowserOverlay.resource, "title", title);
+				this.item.title = title;
+			}
 		}
 	},
 
