@@ -7,6 +7,7 @@ var sbPageEditor = {
 	enabled : true,
 	item : {},
 	multiline : false,
+	isMainPage : false,
 
 	init : function(aID)
 	{
@@ -40,12 +41,14 @@ var sbPageEditor = {
 			sbInfoViewer.TOOLBAR.hidden = true;
 		}
 		// -- current browser tab
+		this.isMainPage = false;
 		if ( aID ) {
 			try {
 				// if the current page is the index page of the id, use the item title and item icon
 				var mainFile = sbCommonUtils.getContentDir(this.item.id); mainFile.append("index.html");
 				var curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
 				if (mainFile.equals(curFile)) {
+					this.isMainPage = true;
 					this.documentLoad(window.content.document, function(doc){
 						var that = this;
 						setTimeout(function(){
