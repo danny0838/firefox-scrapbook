@@ -45,7 +45,7 @@ var sbPageEditor = {
 		if ( aID ) {
 			try {
 				// if the current page is the index page of the id, use the item title and item icon
-				var mainFile = sbCommonUtils.getContentDir(this.item.id); mainFile.append("index.html");
+				var mainFile = sbCommonUtils.getContentDir(aID); mainFile.append("index.html");
 				var curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
 				if (mainFile.equals(curFile)) {
 					this.isMainPage = true;
