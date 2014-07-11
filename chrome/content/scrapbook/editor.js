@@ -594,8 +594,8 @@ var sbPageEditor = {
 			}
 		}
 		// flush title for the main page if it's notex
-		if (this.item && this.item.type == "notex" && this.isMainPage) {
-			var title = this.item.title;
+		if (this.item && this.item.type == "notex") {
+			var title = this.isMainPage ? this.item.title : gBrowser.selectedTab.label;
 			var titleNodes = [];
 			var titleSrcNodes = [];
 			var nodes = aDoc.getElementsByTagName("*");
