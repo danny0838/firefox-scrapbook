@@ -25,6 +25,7 @@ pref("extensions.scrapbook.tree.autoCollapse", false);
 pref("extensions.scrapbook.confirmDelete", true);
 pref("extensions.scrapbook.showDetailOnDrop", false);
 pref("extensions.scrapbook.notifyOnComplete", true);
+pref("extensions.scrapbook.exportFolders", false);
 pref("extensions.scrapbook.key.menubar", "C");
 pref("extensions.scrapbook.key.sidebar", "K");
 pref("extensions.scrapbook.key.capture", "");

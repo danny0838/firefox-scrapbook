@@ -34,6 +34,7 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "the bottom of a folder">
 <!ENTITY sb.prefs.showDetailOnDrop "Show &apos;Capture Detail&apos; dialog when capturing by drag-and-drop into Sidebar">
 <!ENTITY sb.prefs.notifyOnComplete "Show &apos;Capture Completed&apos; notification">
+<!ENTITY sb.prefs.exportFolders "Allow exporting folder items">
 <!ENTITY sb.button.customize "Customize">
 <!ENTITY sb.button.browse "Browse">
 <!ENTITY sb.button.show "Show Files">
