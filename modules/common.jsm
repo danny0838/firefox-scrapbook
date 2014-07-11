@@ -767,7 +767,10 @@ var sbCommonUtils = {
 	 * sticky-save
 	 * sticky-delete
 	 * block-comment (?)
-	 * stylesheet
+	 *
+	 * title (*)
+	 * stylesheet (link, style)
+	 * todo (input, textarea)
 	 */
 	getSbObjectType : function(aNode)
 	{
