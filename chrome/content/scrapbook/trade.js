@@ -224,7 +224,7 @@ var sbTradeService = {
 		{
 			if ( window.top.sbDataSource.isContainer(selRes[i]) )
 			{
-				var childRes = window.top.sbDataSource.flattenResources(selRes[i], 2, true);
+				var childRes = window.top.sbDataSource.flattenResources(selRes[i], 0, true);
 				for ( var j = 0; j < childRes.length; j++ )
 				{
 					if ( uriList.indexOf(childRes[j].Value) < 0 ) { ret.push(childRes[j]); uriList.push(childRes[j].Value); }
@@ -444,7 +444,7 @@ var sbExportService = {
 				throw "Failed to copy files.";
 			}
 		}
-		if (item.type == "bookmark" || item.type == "separator")
+		if (item.type == "folder" || item.type == "bookmark" || item.type == "separator")
 			sbCommonUtils.removeDirSafety(srcDir);
 	},
 
@@ -534,7 +534,7 @@ var sbImportService = {
 		var destDir = sbTradeService.leftDir.clone();
 		if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) ) item.icon = "resource://scrapbook/data/" + item.id + "/" + item.icon;
 		if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(item.type);
-		if ( item.type == "bookmark" || item.type == "separator" )
+		if ( item.type == "folder" || item.type == "bookmark" || item.type == "separator" )
 		{
 			if ( document.getElementById("sbTradeOptionRemove").checked ) sbCommonUtils.removeDirSafety(srcDir, false);
 		}
@@ -583,7 +583,9 @@ var sbImportService = {
 			}
 			if ( this.tarResArray[0] != window.top.sbTreeHandler.TREE.ref ) folder = " [" + item.folder + "] ";
 		}
-		window.top.sbDataSource.addItem(item, this.tarResArray[0], this.tarResArray[1]);
+		var curRes = window.top.sbDataSource.addItem(item, this.tarResArray[0], this.tarResArray[1]);
+		if (item.type == "folder") window.top.sbDataSource.createEmptySeq(curRes.Value);
+		this.folderTable[item.title] = curRes.Value;
 		window.top.sbTreeHandler.TREE.builder.rebuild();
 	},
 
