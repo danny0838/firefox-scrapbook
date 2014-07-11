@@ -596,10 +596,12 @@ var sbPageEditor = {
 		// flush title for the main page if it's notex
 		if (this.item && this.item.type == "notex" && this.isMainPage) {
 			var title = this.item.title;
-			var nodes = aDoc.getElementsByTagName("title");
+			var nodes = aDoc.getElementsByTagName("*");
 			for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
 				var node = nodes[i];
-				node.innerHTML = sbCommonUtils.escapeHTML(title, true);
+				if ( sbCommonUtils.getSbObjectType(node) == "title") {
+					node.innerHTML = sbCommonUtils.escapeHTML(title, true);
+				}
 			}
 		}
 	},

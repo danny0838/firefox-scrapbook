@@ -803,7 +803,7 @@ var sbCommonUtils = {
 	getSbObjectRemoveType : function(aNode)
 	{
 		var type = this.getSbObjectType(aNode);
-		if (!type || ["todo"].indexOf(type) != -1) return 0;
+		if (!type || ["title", "todo"].indexOf(type) != -1) return 0;
 		if (["linemarker", "inline", "link-url", "link-inner", "link-file"].indexOf(type) != -1) return 2;
 		return 1;
 	},
