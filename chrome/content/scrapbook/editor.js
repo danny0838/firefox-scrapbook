@@ -7,6 +7,7 @@ var sbPageEditor = {
 	enabled : true,
 	item : {},
 	multiline : false,
+	isMainPage : false,
 
 	init : function(aID)
 	{
@@ -40,12 +41,14 @@ var sbPageEditor = {
 			sbInfoViewer.TOOLBAR.hidden = true;
 		}
 		// -- current browser tab
+		this.isMainPage = false;
 		if ( aID ) {
 			try {
 				// if the current page is the index page of the id, use the item title and item icon
-				var mainFile = sbCommonUtils.getContentDir(this.item.id); mainFile.append("index.html");
+				var mainFile = sbCommonUtils.getContentDir(aID); mainFile.append("index.html");
 				var curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
 				if (mainFile.equals(curFile)) {
+					this.isMainPage = true;
 					this.documentLoad(window.content.document, function(doc){
 						var that = this;
 						setTimeout(function(){
@@ -406,8 +409,8 @@ var sbPageEditor = {
 	saveOrCapture : function(aBypassDialog)
 	{
 		if ( sbBrowserOverlay.getID() ) {
-			this.savePage();
 			this.saveResource();
+			this.savePage();
 		}
 		else {
 			sbDOMEraser.init(0);
@@ -588,6 +591,17 @@ var sbPageEditor = {
 			var node = nodes[i];
 			if ( sbCommonUtils.getSbObjectType(node) == "todo") {
 				node.innerHTML = sbCommonUtils.escapeHTML(node.value, true);
+			}
+		}
+		// flush title for the main page if it's notex
+		if (this.item && this.item.type == "notex" && this.isMainPage) {
+			var title = this.item.title;
+			var nodes = aDoc.getElementsByTagName("*");
+			for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
+				var node = nodes[i];
+				if ( sbCommonUtils.getSbObjectType(node) == "title") {
+					node.innerHTML = sbCommonUtils.escapeHTML(title, true);
+				}
 			}
 		}
 	},
@@ -1069,7 +1083,8 @@ var sbHtmlEditor = {
 		}
 		// insert html ?
 		else if (data.html_use) {
-			var filename = data.html + ".html";
+			var title = data.html;
+			var filename = title + ".html";
 			try {
 				// handle special characters that are not allowed
 				if (filename == "index.html") throw "";  // do not allow to overwrite index page
@@ -1088,7 +1103,8 @@ var sbHtmlEditor = {
 				// create content
 				var content = sbCommonUtils.readFile(template);
 				content = sbCommonUtils.convertToUnicode(content, "UTF-8");
-				sbCommonUtils.writeFile(destFile, content, "UTF-8");
+				content = content.replace(/<%NOTE_TITLE%>/g, title);
+				sbCommonUtils.writeFile(destFile, content, "UTF-8", true);
 			} catch(ex) {
 				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename]));
 				return;

@@ -339,7 +339,7 @@ var sbCommonUtils = {
 		}
 	},
 
-	writeFile : function(aFile, aContent, aChars)
+	writeFile : function(aFile, aContent, aChars, aNoCatch)
 	{
 		if ( aFile.exists() ) aFile.remove(false);
 		try {
@@ -351,9 +351,9 @@ var sbCommonUtils = {
 			ostream.write(aContent, aContent.length);
 			ostream.close();
 		}
-		catch(ex)
-		{
-			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_WRITE_FILE", [aFile.path, ex]));
+		catch(ex) {
+			if (aNoCatch) throw ex;
+			else this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_WRITE_FILE", [aFile.path, ex]));
 		}
 	},
 
@@ -803,7 +803,7 @@ var sbCommonUtils = {
 	getSbObjectRemoveType : function(aNode)
 	{
 		var type = this.getSbObjectType(aNode);
-		if (!type || ["todo"].indexOf(type) != -1) return 0;
+		if (!type || ["title", "todo"].indexOf(type) != -1) return 0;
 		if (["linemarker", "inline", "link-url", "link-inner", "link-file"].indexOf(type) != -1) return 2;
 		return 1;
 	},
