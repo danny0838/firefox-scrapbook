@@ -1106,7 +1106,7 @@ var sbHtmlEditor = {
 					data.format,
 					{
 						FILE: sbCommonUtils.escapeHTML(filename),
-						FILE_E: sbCommonUtils.escapeHTML(filename2),
+						FILE_E: sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(filename2)),
 						THIS: sel.isCollapsed ? sbCommonUtils.escapeHTML(filename) : sbPageEditor.getSelectionHTML(sel),
 					},
 					/{([\w_]+)}/g
@@ -1163,7 +1163,7 @@ var sbHtmlEditor = {
 					data.format,
 					{
 						FILE: sbCommonUtils.escapeHTML(filename),
-						FILE_E: sbCommonUtils.escapeHTML(filename2),
+						FILE_E: sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(filename2)),
 						THIS: sel.isCollapsed ? sbCommonUtils.escapeHTML(filename) : sbPageEditor.getSelectionHTML(sel),
 					},
 					/{([\w_]+)}/g
@@ -2048,7 +2048,7 @@ var sbAnnotationService = {
 				return;
 			}
 			// attach the link
-			attr["href"] = filename2;
+			attr["href"] = sbCommonUtils.escapeFileName(filename2);
 			attr["title"] = filename;
 			attr["data-sb-obj"] = "link-file";
 		}
