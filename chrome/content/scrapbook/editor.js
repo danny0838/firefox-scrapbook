@@ -1101,17 +1101,15 @@ var sbHtmlEditor = {
 			}
 			// insert to the document
 			if (data.format) {
-				var FILE = filename;
-				var FILE_E = sbCommonUtils.escapeFileName(FILE);
-				var THIS = sel.isCollapsed ? FILE : sbPageEditor.getSelectionHTML(sel);
-				var html = data.format.replace(/{(FILE|FILE_E|THIS)}/g, function(){
-					switch (arguments[1]) {
-						case "FILE": return FILE;
-						case "FILE_E": return FILE_E;
-						case "THIS": return THIS;
-					}
-					return "";
-				});
+				var html = sbCommonUtils.stringTemplate(
+					data.format,
+					{
+						FILE: filename,
+						FILE_E: sbCommonUtils.escapeFileName(filename),
+						THIS: sel.isCollapsed ? filename : sbPageEditor.getSelectionHTML(sel),
+					},
+					/{([\w_]+)}/g
+				);
 				aDoc.execCommand("insertHTML", false, html);
 			}
 		}
@@ -1135,27 +1133,26 @@ var sbHtmlEditor = {
 				template.append("notex_template.html");
 				if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/notex_template.html", template);
 				// create content
-				var tpl = {
-					NOTE_TITLE: title,
-					SCRAPBOOK_DIR: (function(aBaseURL){
-						var result = "";
-						var sbDir = sbCommonUtils.getScrapBookDir();
-						var checkFile = sbCommonUtils.convertURLToFile(aBaseURL);
-						while (!checkFile.equals(sbDir)){
-							result += "../";
-							checkFile = checkFile.parent;
-						}
-						// remove trailing "/"
-						return result.substring(0, result.length -1);
-					})(aDoc.location.href),
-				};
 				var content = sbCommonUtils.readFile(template);
 				content = sbCommonUtils.convertToUnicode(content, "UTF-8");
-				content = content.replace(/<%([\w_]+)%>/g, function(){
-					var label = arguments[1];
-					if (tpl[label]) return tpl[label];
-					return "";
-				});
+				content = sbCommonUtils.stringTemplate(
+					content,
+					{
+						NOTE_TITLE: title,
+						SCRAPBOOK_DIR: (function(aBaseURL){
+							var result = "";
+							var sbDir = sbCommonUtils.getScrapBookDir();
+							var checkFile = sbCommonUtils.convertURLToFile(aBaseURL);
+							while (!checkFile.equals(sbDir)){
+								result += "../";
+								checkFile = checkFile.parent;
+							}
+							// remove trailing "/"
+							return result.substring(0, result.length -1);
+						})(aDoc.location.href),
+					},
+					/<%([\w_]+)%>/g
+				);
 				sbCommonUtils.writeFile(destFile, content, "UTF-8", true);
 			} catch(ex) {
 				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename]));
@@ -1163,17 +1160,15 @@ var sbHtmlEditor = {
 			}
 			// insert to the document
 			if (data.format) {
-				var FILE = filename;
-				var FILE_E = sbCommonUtils.escapeFileName(FILE);
-				var THIS = sel.isCollapsed ? FILE : sbPageEditor.getSelectionHTML(sel);
-				var html = data.format.replace(/{(FILE|FILE_E|THIS)}/g, function(){
-					switch (arguments[1]) {
-						case "FILE": return FILE;
-						case "FILE_E": return FILE_E;
-						case "THIS": return THIS;
-					}
-					return "";
-				});
+				var html = sbCommonUtils.stringTemplate(
+					data.format,
+					{
+						FILE: filename,
+						FILE_E: sbCommonUtils.escapeFileName(filename),
+						THIS: sel.isCollapsed ? filename : sbPageEditor.getSelectionHTML(sel),
+					},
+					/{([\w_]+)}/g
+				);
 				aDoc.execCommand("insertHTML", false, html);
 			}
 		}

@@ -668,6 +668,15 @@ var sbCommonUtils = {
 	{
 		return aString.replace(/[\x00-\x1f:/?#]+|(?:%[0-9A-Za-z]{2})+|^ /g, function(m){return encodeURIComponent(m);});
 	},
+
+	stringTemplate : function(aString, aTplArray, aTplRegExp)
+	{
+		var ret = aString.replace(aTplRegExp, function(match, label){
+			if (aTplArray[label]) return aTplArray[label];
+			return "";
+		});
+		return ret;
+	},
 		
 	pad : function(n, width, z)
 	{
