@@ -250,9 +250,11 @@ var sbCommonUtils = {
 		return ret;
 	},
 
+	// process filename to make safe
+	// see also: escapeFileName
 	validateFileName : function(aFileName)
 	{
-		aFileName = aFileName.replace(/[\"\?!~`]+/g, "");
+		aFileName = aFileName.replace(/[\x00-\x1f\"\?!~`]+/g, "");
 		aFileName = aFileName.replace(/[\*\&]/g, "+");
 		aFileName = aFileName.replace(/[\\\/\|\:;]/g, "-");
 		aFileName = aFileName.replace(/[\<]/g, "(");
@@ -662,11 +664,12 @@ var sbCommonUtils = {
 		return aString.replace(/([\*\+\?\.\^\/\$\\\|\[\]\{\}\(\)])/g, "\\$1");
 	},
 
-	// escape characters fully misleading in the URI
+	// escape valid filename characters that are misleading in the URI
 	// preserve other chars for beauty
+	// see also: validateFilename
 	escapeFileName : function(aString)
 	{
-		return aString.replace(/[\x00-\x1f:/?#]+|(?:%[0-9A-Za-z]{2})+|^ /g, function(m){return encodeURIComponent(m);});
+		return aString.replace(/[:/?#]+|(?:%[0-9A-Za-z]{2})+|^ /g, function(m){return encodeURIComponent(m);});
 	},
 
 	stringTemplate : function(aString, aTplArray, aTplRegExp)
