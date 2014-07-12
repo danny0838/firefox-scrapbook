@@ -1085,22 +1085,23 @@ var sbHtmlEditor = {
 		if (data.result != 1) return;
 		// insert file ?
 		if (data.file_use) {
+			var filename = data.file.leafName;
 			try {
 				// copy the selected file
 				var destFile = htmlFile.parent.clone();
-				destFile.append(data.file.leafName);
+				destFile.append(filename);
 				if ( destFile.exists() && destFile.isFile() ) {
-					if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [data.file.leafName])) ) return;
+					if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [filename])) ) return;
 					destFile.remove(false);
 				}
-				data.file.copyTo(destFile.parent, data.file.leafName);
+				data.file.copyTo(destFile.parent, filename);
 			} catch(ex) {
-				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [data.file.leafName]));
+				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename]));
 				return;
 			}
 			// insert to the document
 			if (data.format) {
-				var FILE = data.file.leafName;
+				var FILE = filename;
 				var FILE_E = sbCommonUtils.escapeFileName(FILE);
 				var THIS = sel.isCollapsed ? FILE : sbPageEditor.getSelectionHTML(sel);
 				var html = data.format.replace(/{(FILE|FILE_E|THIS)}/g, function(){
@@ -2038,21 +2039,22 @@ var sbAnnotationService = {
 			var ret = FP.show();
 			if ( ret != FP.returnOK ) return;
 			// upload the file
+			var filename = FP.file.leafName;
 			try {
 				var destFile = htmlFile.parent.clone();
-				destFile.append(FP.file.leafName);
+				destFile.append(filename);
 				if ( destFile.exists() && destFile.isFile() ) {
-					if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [FP.file.leafName])) ) return;
+					if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [filename])) ) return;
 					destFile.remove(false);
 				}
-				FP.file.copyTo(destFile.parent, FP.file.leafName);
+				FP.file.copyTo(destFile.parent, filename);
 			} catch(ex) {
-				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [FP.file.leafName]));
+				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename]));
 				return;
 			}
 			// attach the link
-			attr["href"] = sbCommonUtils.escapeFileName(FP.file.leafName);
-			attr["title"] = FP.file.leafName;
+			attr["href"] = sbCommonUtils.escapeFileName(filename);
+			attr["title"] = filename;
 			attr["data-sb-obj"] = "link-file";
 		}
 		sbPageEditor.allowUndo(win.document);
