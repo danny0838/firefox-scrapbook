@@ -1105,9 +1105,9 @@ var sbHtmlEditor = {
 				var html = sbCommonUtils.stringTemplate(
 					data.format,
 					{
-						FILE: filename,
-						FILE_E: filename2,
-						THIS: sel.isCollapsed ? filename : sbPageEditor.getSelectionHTML(sel),
+						FILE: sbCommonUtils.escapeHTML(filename),
+						FILE_E: sbCommonUtils.escapeHTML(filename2),
+						THIS: sel.isCollapsed ? sbCommonUtils.escapeHTML(filename) : sbPageEditor.getSelectionHTML(sel),
 					},
 					/{([\w_]+)}/g
 				);
@@ -1162,9 +1162,9 @@ var sbHtmlEditor = {
 				var html = sbCommonUtils.stringTemplate(
 					data.format,
 					{
-						FILE: filename,
-						FILE_E: filename2,
-						THIS: sel.isCollapsed ? filename : sbPageEditor.getSelectionHTML(sel),
+						FILE: sbCommonUtils.escapeHTML(filename),
+						FILE_E: sbCommonUtils.escapeHTML(filename2),
+						THIS: sel.isCollapsed ? sbCommonUtils.escapeHTML(filename) : sbPageEditor.getSelectionHTML(sel),
 					},
 					/{([\w_]+)}/g
 				);
