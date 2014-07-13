@@ -877,6 +877,7 @@ var sbContentSaver = {
 		fileLR[0] = sbCommonUtils.crop(fileLR[0], 100);
 		if ( !fileLR[1] ) fileLR[1] = "dat";
 		newFileName = fileLR[0] + "." + fileLR[1];
+		aURLSpec = sbCommonUtils.splitURLByAnchor(aURLSpec)[0];
 		var seq = 0;
 		while ( this.file2URL[newFileName] != undefined ) {
 			if (this.file2URL[newFileName] == aURLSpec) {
