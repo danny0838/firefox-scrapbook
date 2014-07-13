@@ -138,7 +138,7 @@ var sbContentSaver = {
 	{
 		this.init(aPresetData);
 		this.item.title  = sbCommonUtils.getFileName(aSourceURL);
-		this.item.icon   = "moz-icon://" + this.item.title + "?size=16";
+		this.item.icon   = "moz-icon://" + sbCommonUtils.escapeFileName(this.item.title) + "?size=16";
 		this.item.source = aSourceURL;
 		this.item.type   = aType;
 		if ( aShowDetail )
@@ -349,15 +349,15 @@ var sbContentSaver = {
 		if ( !this.refURLObj ) this.refURLObj = sbCommonUtils.convertURLToObject(aFileURL);
 		if ( this.isMainFrame )
 		{
-			this.item.icon  = "moz-icon://" + sbCommonUtils.getFileName(aFileURL) + "?size=16";
+			this.item.icon  = "moz-icon://" + sbCommonUtils.escapeFileName(sbCommonUtils.getFileName(aFileURL)) + "?size=16";
 			this.item.type  = aCaptureType;
 			this.item.chars = aCharset || "";
 		}
 		var newFileName = this.download(aFileURL);
 		if ( aCaptureType == "image" ) {
-			var myHTML = '<html><head><meta http-equiv="Content-Type" content="text/html; Charset=UTF-8"></head><body><img src="' + newFileName + '"></body></html>';
+			var myHTML = '<html><head><meta http-equiv="Content-Type" content="text/html; Charset=UTF-8"></head><body><img src="' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(newFileName)) + '"></body></html>';
 		} else {
-			var myHTML = '<html><head><meta http-equiv="Content-Type" content="text/html; Charset=UTF-8"><meta http-equiv="refresh" content="0;URL=./' + newFileName + '"></head><body></body></html>';
+			var myHTML = '<html><head><meta http-equiv="Content-Type" content="text/html; Charset=UTF-8"><meta http-equiv="refresh" content="0;URL=./' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(newFileName)) + '"></head><body></body></html>';
 		}
 		var myHTMLFile = this.contentDir.clone();
 		myHTMLFile.append(aFileKey + ".html");
@@ -372,11 +372,11 @@ var sbContentSaver = {
 		sbCommonUtils.rebuildGlobal();
 		if ( this.favicon )
 		{
-			var iconURL = "resource://scrapbook/data/" + this.item.id + "/" + this.favicon;
+			var iconURL = "resource://scrapbook/data/" + this.item.id + "/" + sbCommonUtils.escapeFileName(this.favicon);
 			setTimeout(function(){
 				sbDataSource.setProperty(res, "icon", iconURL);
 			}, 500);
-			this.item.icon = this.favicon;
+			this.item.icon = sbCommonUtils.escapeFileName(this.favicon);
 		}
 		sbCommonUtils.writeIndexDat(this.item);
 		if ( "sbBrowserOverlay" in window ) sbBrowserOverlay.updateFolderPref(aResName);
@@ -428,7 +428,7 @@ var sbContentSaver = {
 					if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
 					if ( this.option["images"] ) {
 						var aFileName = this.download(aNode.src);
-						if (aFileName) aNode.setAttribute("src", aFileName);
+						if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
 					} else {
 						aNode.setAttribute("src", aNode.src);
 					}
@@ -440,7 +440,7 @@ var sbContentSaver = {
 					if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
 					if ( this.option["media"] ) {
 						var aFileName = this.download(aNode.src);
-						if (aFileName) aNode.setAttribute("src", aFileName);
+						if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
 					} else {
 						aNode.setAttribute("src", aNode.src);
 					}
@@ -451,7 +451,7 @@ var sbContentSaver = {
 					if ( this.option["internalize"] && aNode.getAttribute("data").indexOf("://") == -1 ) break;
 					if ( this.option["media"] ) {
 						var aFileName = this.download(aNode.data);
-						if (aFileName) aNode.setAttribute("data", aFileName);
+						if (aFileName) aNode.setAttribute("data", sbCommonUtils.escapeFileName(aFileName));
 					} else {
 						aNode.setAttribute("data", aNode.src);
 					}
@@ -474,7 +474,7 @@ var sbContentSaver = {
 					var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("background"));
 					if ( this.option["images"] ) {
 						var aFileName = this.download(url);
-						if (aFileName) aNode.setAttribute("background", aFileName);
+						if (aFileName) aNode.setAttribute("background", sbCommonUtils.escapeFileName(aFileName));
 					} else {
 						aNode.setAttribute("background", url);
 					}
@@ -487,7 +487,7 @@ var sbContentSaver = {
 							if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
 							if ( this.option["images"] ) {
 								var aFileName = this.download(aNode.src);
-								if (aFileName) aNode.setAttribute("src", aFileName);
+								if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
 							} else {
 								aNode.setAttribute("src", aNode.src);
 							}
@@ -506,7 +506,7 @@ var sbContentSaver = {
 							if ( this.option["internalize"] ) break;
 							if ( aNode.hasAttribute("href") ) {
 								var aFileName = this.download(aNode.href);
-								if (aFileName) aNode.setAttribute("href", aFileName);
+								if (aFileName) aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
 							}
 						}
 						else if ( aNode.href.indexOf("chrome://") != 0 ) {
@@ -519,7 +519,7 @@ var sbContentSaver = {
 							if ( this.option["internalize"] ) break;
 							var aFileName = this.download(aNode.href);
 							if (aFileName) {
-								aNode.setAttribute("href", aFileName);
+								aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
 								if ( this.isMainFrame && !this.favicon ) this.favicon = aFileName;
 							}
 						}
@@ -553,7 +553,7 @@ var sbContentSaver = {
 					if ( aNode.hasAttribute("src") ) {
 						if ( this.option["internalize"] ) break;
 						var aFileName = this.download(aNode.src);
-						if (aFileName) aNode.setAttribute("src", aFileName);
+						if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
 					}
 				} else {
 					return this.removeNodeFromParent(aNode);
@@ -603,7 +603,7 @@ var sbContentSaver = {
 				// do the copy or URL rewrite
 				if ( flag ) {
 					var aFileName = this.download(aNode.href);
-					if (aFileName) aNode.setAttribute("href", aFileName);
+					if (aFileName) aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
 				} else {
 					aNode.setAttribute("href", aNode.href);
 				}
@@ -625,7 +625,7 @@ var sbContentSaver = {
 							var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
 							if ( this.option["images"] ) {
 								var aFileName = this.download(url);
-								if (aFileName) aNode.setAttribute("content", aFileName);
+								if (aFileName) aNode.setAttribute("content", sbCommonUtils.escapeFileName(aFileName));
 							}
 							else {
 								aNode.setAttribute("content", url);
@@ -640,7 +640,7 @@ var sbContentSaver = {
 							var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
 							if ( this.option["media"] ) {
 								var aFileName = this.download(url);
-								if (aFileName) aNode.setAttribute("content", aFileName);
+								if (aFileName) aNode.setAttribute("content", sbCommonUtils.escapeFileName(aFileName));
 							}
 							else {
 								aNode.setAttribute("content", url);
@@ -674,7 +674,7 @@ var sbContentSaver = {
 				// retrieve contentDocument from the corresponding real frame
 				var idx = aNode.getAttribute("data-sb-frame-id");
 				var newFileName = this.saveDocumentInternal(this.frames[idx].contentDocument, this.name + "_" + (parseInt(idx)+1));
-				aNode.setAttribute("src", newFileName);
+				aNode.setAttribute("src", sbCommonUtils.escapeFileName(newFileName));
 				aNode.removeAttribute("data-sb-frame-id");
 				this.refURLObj = tmpRefURL;
 				break;
@@ -781,7 +781,7 @@ var sbContentSaver = {
 			dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);
 			if (sbContentSaver.option["images"] || !isImage) {
 				var dataFile = sbContentSaver.download(dataURL);
-				if (dataFile) dataURL = dataFile;
+				if (dataFile) dataURL = sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(dataFile));
 			}
 			return ' url("' + dataURL + '")';
 		});

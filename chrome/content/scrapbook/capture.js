@@ -916,7 +916,7 @@ var sbCrossLinker = {
 		//Fehlermeldung könnte über Abfrage abgefangen werden.
 		//Allerdings kann der Abbruch an dieser Stelle auch erwünscht sein (Nachforschungen!)
 		var node = this.XML.createElement("page");
-		node.setAttribute("file", aName + ".html");
+		node.setAttribute("file", sbCommonUtils.escapeFileName(aName) + ".html");
 		node.setAttribute("text", sbDataSource.sanitize(aText));
 		return node;
 	},
