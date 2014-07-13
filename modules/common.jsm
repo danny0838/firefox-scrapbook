@@ -666,7 +666,7 @@ var sbCommonUtils = {
 	// see also: validateFilename
 	escapeFileName : function(aString)
 	{
-		return aString.replace(/[#]+|(?:%[0-9A-Za-z]{2})+/g, function(m){return encodeURIComponent(m);});
+		return aString.replace(/[#]+|(?:%[0-9A-Fa-f]{2})+/g, function(m){return encodeURIComponent(m);});
 	},
 
 	stringTemplate : function(aString, aTplArray, aTplRegExp)
