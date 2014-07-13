@@ -869,7 +869,7 @@ var sbCrossLinker = {
 			// However, the demolition at this point may also be desirable (Research!)
 			this.nodeHash[this.nameList[this.index]] = this.createNode(this.nameList[this.index], (gReferItem) ? gReferItem.title : "");
 		}
-		this.nodeHash[this.nameList[this.index]].setAttribute("title", sbDataSource.sanitize(this.ELEMENT.contentTitle));
+		this.nodeHash[this.nameList[this.index]].setAttribute("title", sbDataSource.sanitize(this.ELEMENT.contentTitle) || sbCommonUtils.getFileName(this.ELEMENT.currentURI.spec));
 		sbCommonUtils.flattenFrames(this.ELEMENT.contentWindow).forEach(function(win) {
 			var doc = win.document;
 			var linkList = doc.links;
