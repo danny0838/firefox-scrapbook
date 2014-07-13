@@ -258,7 +258,6 @@ var sbCommonUtils = {
 		aFileName = aFileName.replace(/[\"\?\*\\\/\|\:]/g, "_");
 		aFileName = aFileName.replace(/[\<]/g, "(");
 		aFileName = aFileName.replace(/[\>]/g, ")");
-		aFileName = aFileName.replace(/[%]/g, "@");
 		return aFileName;
 	},
 
