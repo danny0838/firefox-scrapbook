@@ -722,7 +722,7 @@ var sbInvisibleBrowser = {
 				     metaElems[i].getAttribute("content").match(/URL\=(.*)$/i) )
 				{
 					var curURL = this.ELEMENT.currentURI.spec;
-					var newURL = encodeURI(sbCommonUtils.resolveURL(this.ELEMENT.currentURI.spec, RegExp.$1));
+					var newURL = sbCommonUtils.resolveURL(this.ELEMENT.currentURI.spec, encodeURIComponent(decodeURIComponent(RegExp.$1)));
 					if ( newURL != curURL && !sbCaptureTask.refreshHash[newURL] )
 					{
 						sbCaptureTask.refreshHash[curURL] = true;
@@ -839,7 +839,7 @@ var sbCrossLinker = {
 		if ( ++this.index < this.nameList.length )
 		{
 			sbInvisibleBrowser.fileCount = 0;
-			var url = this.baseURL + encodeURI(this.nameList[this.index]) + ".html";
+			var url = this.baseURL + encodeURIComponent(this.nameList[this.index]) + ".html";
 			sbInvisibleBrowser.loading = url;
 			this.ELEMENT.loadURI(url, null, null);
 		}
@@ -886,7 +886,7 @@ var sbCrossLinker = {
 				var urlLR = SB_splitByAnchor(linkList[i].href);
 				if ( gURL2Name[urlLR[0]] ) {
 					var name = gURL2Name[urlLR[0]];
-					linkList[i].href = name + ".html" + urlLR[1];
+					linkList[i].href = encodeURIComponent(name) + ".html" + urlLR[1];
 					linkList[i].setAttribute("data-sb-indepth", "true");
 					if ( !this.nodeHash[name] ) {
 						var text = linkList[i].text ? linkList[i].text.replace(/\r|\n|\t/g, " ") : "";
