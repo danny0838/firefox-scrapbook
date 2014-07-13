@@ -233,7 +233,7 @@ var sbCommonUtils = {
 		name = ( (pos = aURI.indexOf("?")) != -1 ) ? aURI.substring(0, pos) : aURI;
 		name = ( (pos = name.indexOf("#")) != -1 ) ? name.substring(0, pos) : name;
 		name = ( (pos = name.lastIndexOf("/")) != -1 ) ? name.substring(++pos) : name;
-		return decodeURI(name);
+		return decodeURIComponent(name);
 	},
 
 	splitFileName : function(aFileName)
@@ -254,13 +254,10 @@ var sbCommonUtils = {
 	// see also: escapeFileName
 	validateFileName : function(aFileName)
 	{
-		aFileName = aFileName.replace(/[\x00-\x1F\x7F\"\?!~`]+/g, "");
-		aFileName = aFileName.replace(/[\*\&]/g, "+");
-		aFileName = aFileName.replace(/[\\\/\|\:;]/g, "-");
+		aFileName = aFileName.replace(/[\x00-\x1F\x7F]+|^ +/g, "");
+		aFileName = aFileName.replace(/[\"\?\*\\\/\|\:]/g, "_");
 		aFileName = aFileName.replace(/[\<]/g, "(");
 		aFileName = aFileName.replace(/[\>]/g, ")");
-		aFileName = aFileName.replace(/[\s]/g, "_");
-		aFileName = aFileName.replace(/[%]/g, "@");
 		return aFileName;
 	},
 
@@ -669,7 +666,7 @@ var sbCommonUtils = {
 	// see also: validateFilename
 	escapeFileName : function(aString)
 	{
-		return aString.replace(/[#]+|(?:%[0-9A-Za-z]{2})+/g, function(m){return encodeURIComponent(m);});
+		return aString.replace(/[#]+|(?:%[0-9A-Fa-f]{2})+/g, function(m){return encodeURIComponent(m);});
 	},
 
 	stringTemplate : function(aString, aTplArray, aTplRegExp)

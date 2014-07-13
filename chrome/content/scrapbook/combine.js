@@ -384,7 +384,7 @@ var sbPageCombiner = {
 				 metaElems[i].getAttribute("content").match(/URL\=(.*)$/i) )
 			{
 				var curURL = this.BROWSER.currentURI.spec;
-				var newURL = encodeURI(sbCommonUtils.resolveURL(curURL, RegExp.$1));
+				var newURL = sbCommonUtils.resolveURL(curURL, encodeURIComponent(decodeURIComponent(RegExp.$1)));
 				if ( newURL != curURL && !this.refreshHash[newURL] )
 				{
 					this.refreshHash[curURL] = true;

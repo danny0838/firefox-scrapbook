@@ -162,7 +162,7 @@ function SB_splitByAnchor(aURL)
 
 function SB_suggestName(aURL)
 {
-	var tmpName = sbCommonUtils.splitFileName(sbCommonUtils.validateFileName(sbCommonUtils.getFileName(decodeURI(aURL))))[0].toLowerCase();
+	var tmpName = sbCommonUtils.splitFileName(sbCommonUtils.validateFileName(sbCommonUtils.getFileName(aURL)))[0].toLowerCase();
 	if ( !tmpName || tmpName == "index" ) tmpName = "default";
 	var name = tmpName, seq = 0;
 	while ( gFile2URL[name+".html"] ) name = tmpName + "_" + sbCommonUtils.pad(++seq, 3);
@@ -722,7 +722,7 @@ var sbInvisibleBrowser = {
 				     metaElems[i].getAttribute("content").match(/URL\=(.*)$/i) )
 				{
 					var curURL = this.ELEMENT.currentURI.spec;
-					var newURL = encodeURI(sbCommonUtils.resolveURL(this.ELEMENT.currentURI.spec, RegExp.$1));
+					var newURL = sbCommonUtils.resolveURL(this.ELEMENT.currentURI.spec, encodeURIComponent(decodeURIComponent(RegExp.$1)));
 					if ( newURL != curURL && !sbCaptureTask.refreshHash[newURL] )
 					{
 						sbCaptureTask.refreshHash[curURL] = true;
@@ -839,7 +839,7 @@ var sbCrossLinker = {
 		if ( ++this.index < this.nameList.length )
 		{
 			sbInvisibleBrowser.fileCount = 0;
-			var url = this.baseURL + encodeURI(this.nameList[this.index]) + ".html";
+			var url = this.baseURL + encodeURIComponent(this.nameList[this.index]) + ".html";
 			sbInvisibleBrowser.loading = url;
 			this.ELEMENT.loadURI(url, null, null);
 		}
@@ -886,7 +886,7 @@ var sbCrossLinker = {
 				var urlLR = SB_splitByAnchor(linkList[i].href);
 				if ( gURL2Name[urlLR[0]] ) {
 					var name = gURL2Name[urlLR[0]];
-					linkList[i].href = name + ".html" + urlLR[1];
+					linkList[i].href = encodeURIComponent(name) + ".html" + urlLR[1];
 					linkList[i].setAttribute("data-sb-indepth", "true");
 					if ( !this.nodeHash[name] ) {
 						var text = linkList[i].text ? linkList[i].text.replace(/\r|\n|\t/g, " ") : "";
@@ -916,7 +916,7 @@ var sbCrossLinker = {
 		//Fehlermeldung könnte über Abfrage abgefangen werden.
 		//Allerdings kann der Abbruch an dieser Stelle auch erwünscht sein (Nachforschungen!)
 		var node = this.XML.createElement("page");
-		node.setAttribute("file", aName + ".html");
+		node.setAttribute("file", sbCommonUtils.escapeFileName(aName) + ".html");
 		node.setAttribute("text", sbDataSource.sanitize(aText));
 		return node;
 	},
