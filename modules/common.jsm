@@ -437,6 +437,12 @@ var sbCommonUtils = {
 		var sbPath = new RegExp("^" + sbCommonUtils.escapeRegExp(sbDir) + "data/(\\d{14})/");
 		return aURL.match(sbPath) ? RegExp.$1 : null;
 	},
+	
+	splitURLByAnchor : function(aURL)
+	{
+		var pos = 0;
+		return ( (pos = aURL.indexOf("#")) < 0 ) ? [aURL, ""] : [aURL.substring(0, pos), aURL.substring(pos, aURL.length)];
+	},
 
 	execProgram : function(aExecFilePath, args)
 	{

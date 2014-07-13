@@ -153,13 +153,6 @@ function SB_initCapture()
 }
 
 
-function SB_splitByAnchor(aURL)
-{
-	var pos = 0;
-	return ( (pos = aURL.indexOf("#")) < 0 ) ? [aURL, ""] : [aURL.substring(0, pos), aURL.substring(pos, aURL.length)];
-}
-
-
 function SB_suggestName(aURL)
 {
 	var tmpName = sbCommonUtils.splitFileName(sbCommonUtils.validateFileName(sbCommonUtils.getFileName(aURL)))[0].toLowerCase();
@@ -214,7 +207,7 @@ var sbCaptureTask = {
 			if ( aDepth > gOption["inDepth"] ) {
 				return;
 			}
-			aURL = SB_splitByAnchor(aURL)[0];
+			aURL = sbCommonUtils.splitURLByAnchor(aURL)[0];
 			if ( !gOption["isPartial"] && aURL == gReferItem.source ) return;
 			if ( gURLs.indexOf(aURL) != -1 ) return;
 		}
@@ -883,7 +876,7 @@ var sbCrossLinker = {
 			if ( !linkList ) return;
 			var shouldSave = false;
 			for ( var i = 0; i < linkList.length; i++ ) {
-				var urlLR = SB_splitByAnchor(linkList[i].href);
+				var urlLR = sbCommonUtils.splitURLByAnchor(linkList[i].href);
 				if ( gURL2Name[urlLR[0]] ) {
 					var name = gURL2Name[urlLR[0]];
 					linkList[i].href = encodeURIComponent(name) + ".html" + urlLR[1];
@@ -964,7 +957,7 @@ var sbCrossLinker = {
 			var nodes = win.gBrowser.mTabContainer.childNodes;
 			for ( var i = 0; i < nodes.length; i++ ) {
 				var uri = win.gBrowser.getBrowserForTab(nodes[i]).currentURI.spec;
-				uri = SB_splitByAnchor(uri)[0];
+				uri = sbCommonUtils.splitURLByAnchor(uri)[0];
 				if ( uri == aURL ) {
 					win.gBrowser.getBrowserForTab(nodes[i]).reload();
 				}
