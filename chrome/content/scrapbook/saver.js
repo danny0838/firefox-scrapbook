@@ -809,7 +809,7 @@ var sbContentSaver = {
 			return "";
 		}
 
-		var arr = this.getUniqueFileName(aURL.fileName.toLowerCase(), aURLSpec);
+		var arr = this.getUniqueFileName(decodeURIComponent(aURL.fileName).toLowerCase(), aURLSpec);
 		var newFileName = arr[0];
 		var hasDownloaded = arr[1];
 		if (hasDownloaded) return newFileName;
@@ -871,7 +871,7 @@ var sbContentSaver = {
 	getUniqueFileName: function(newFileName, aURLSpec, aDocumentSpec)
 	{
 		if ( !newFileName ) newFileName = "untitled";
-		newFileName = decodeURIComponent(newFileName);
+		newFileName = newFileName;
 		newFileName = sbCommonUtils.validateFileName(newFileName);
 		var fileLR = sbCommonUtils.splitFileName(newFileName);
 		fileLR[0] = sbCommonUtils.crop(fileLR[0], 100);
