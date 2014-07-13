@@ -715,7 +715,7 @@ var sbInvisibleBrowser = {
 				     metaElems[i].getAttribute("content").match(/URL\=(.*)$/i) )
 				{
 					var curURL = this.ELEMENT.currentURI.spec;
-					var newURL = sbCommonUtils.resolveURL(this.ELEMENT.currentURI.spec, encodeURIComponent(decodeURIComponent(RegExp.$1)));
+					var newURL = sbCommonUtils.resolveURL(this.ELEMENT.currentURI.spec, RegExp.$1);
 					if ( newURL != curURL && !sbCaptureTask.refreshHash[newURL] )
 					{
 						sbCaptureTask.refreshHash[curURL] = true;
