@@ -162,7 +162,7 @@ function SB_splitByAnchor(aURL)
 
 function SB_suggestName(aURL)
 {
-	var tmpName = sbCommonUtils.splitFileName(sbCommonUtils.validateFileName(sbCommonUtils.getFileName(decodeURI(aURL))))[0].toLowerCase();
+	var tmpName = sbCommonUtils.splitFileName(sbCommonUtils.validateFileName(sbCommonUtils.getFileName(aURL)))[0].toLowerCase();
 	if ( !tmpName || tmpName == "index" ) tmpName = "default";
 	var name = tmpName, seq = 0;
 	while ( gFile2URL[name+".html"] ) name = tmpName + "_" + sbCommonUtils.pad(++seq, 3);

@@ -871,7 +871,7 @@ var sbContentSaver = {
 	getUniqueFileName: function(newFileName, aURLSpec, aDocumentSpec)
 	{
 		if ( !newFileName ) newFileName = "untitled";
-		newFileName = decodeURI(newFileName);
+		newFileName = decodeURIComponent(newFileName);
 		newFileName = sbCommonUtils.validateFileName(newFileName);
 		var fileLR = sbCommonUtils.splitFileName(newFileName);
 		fileLR[0] = sbCommonUtils.crop(fileLR[0], 100);

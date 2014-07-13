@@ -233,7 +233,7 @@ var sbCommonUtils = {
 		name = ( (pos = aURI.indexOf("?")) != -1 ) ? aURI.substring(0, pos) : aURI;
 		name = ( (pos = name.indexOf("#")) != -1 ) ? name.substring(0, pos) : name;
 		name = ( (pos = name.lastIndexOf("/")) != -1 ) ? name.substring(++pos) : name;
-		return decodeURI(name);
+		return decodeURIComponent(name);
 	},
 
 	splitFileName : function(aFileName)
