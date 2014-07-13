@@ -254,12 +254,10 @@ var sbCommonUtils = {
 	// see also: escapeFileName
 	validateFileName : function(aFileName)
 	{
-		aFileName = aFileName.replace(/[\x00-\x1F\x7F\"\?]+/g, "");
-		aFileName = aFileName.replace(/[\*\&]/g, "+");
-		aFileName = aFileName.replace(/[\\\/\|\:]/g, "-");
+		aFileName = aFileName.replace(/[\x00-\x1F\x7F]+/g, "");
+		aFileName = aFileName.replace(/[\s\"\?\*\&\\\/\|\:]/g, "_");
 		aFileName = aFileName.replace(/[\<]/g, "(");
 		aFileName = aFileName.replace(/[\>]/g, ")");
-		aFileName = aFileName.replace(/[\s]/g, "_");
 		aFileName = aFileName.replace(/[%]/g, "@");
 		return aFileName;
 	},
