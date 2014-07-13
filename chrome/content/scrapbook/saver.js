@@ -809,7 +809,7 @@ var sbContentSaver = {
 			return "";
 		}
 
-		var arr = this.getUniqueFileName(decodeURIComponent(aURL.fileName).toLowerCase(), aURLSpec);
+		var arr = this.getUniqueFileName(decodeURIComponent(aURL.fileName), aURLSpec);
 		var newFileName = arr[0];
 		var hasDownloaded = arr[1];
 		if (hasDownloaded) return newFileName;
@@ -876,27 +876,29 @@ var sbContentSaver = {
 		var fileLR = sbCommonUtils.splitFileName(newFileName);
 		fileLR[0] = sbCommonUtils.crop(fileLR[0], 100);
 		if ( !fileLR[1] ) fileLR[1] = "dat";
-		newFileName = fileLR[0] + "." + fileLR[1];
 		aURLSpec = sbCommonUtils.splitURLByAnchor(aURLSpec)[0];
 		var seq = 0;
-		while ( this.file2URL[newFileName] != undefined ) {
-			if (this.file2URL[newFileName] == aURLSpec) {
+		newFileName = fileLR[0] + "." + fileLR[1];
+		var newFileNameCI = newFileName.toLowerCase();
+		while ( this.file2URL[newFileNameCI] != undefined ) {
+			if (this.file2URL[newFileNameCI] == aURLSpec) {
 				// this.file2Doc is mainly to check for dynamic iframes without src attr
 				// they have exactly same url with the main page
-				if (this.file2Doc[newFileName] == aDocumentSpec) {
+				if (this.file2Doc[newFileNameCI] == aDocumentSpec) {
 					return [newFileName, true];
 				}
 				// if this.file2Doc[newFileName] has no document set,
 				// it should mean a preset url for the page and is safe to use
-				else if (!this.file2Doc[newFileName]) {
-					this.file2Doc[newFileName] = aDocumentSpec;
+				else if (!this.file2Doc[newFileNameCI]) {
+					this.file2Doc[newFileNameCI] = aDocumentSpec;
 					return [newFileName, false];
 				}
 			}
 			newFileName = fileLR[0] + "_" + sbCommonUtils.pad(++seq, 3) + "." + fileLR[1];
+			newFileNameCI = newFileName.toLowerCase();
 		}
-		this.file2URL[newFileName] = aURLSpec;
-		this.file2Doc[newFileName] = aDocumentSpec;
+		this.file2URL[newFileNameCI] = aURLSpec;
+		this.file2Doc[newFileNameCI] = aDocumentSpec;
 		return [newFileName, false];
 	},
 

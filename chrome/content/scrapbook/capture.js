@@ -155,10 +155,10 @@ function SB_initCapture()
 
 function SB_suggestName(aURL)
 {
-	var tmpName = sbCommonUtils.splitFileName(sbCommonUtils.validateFileName(sbCommonUtils.getFileName(aURL)))[0].toLowerCase();
+	var tmpName = sbCommonUtils.splitFileName(sbCommonUtils.validateFileName(sbCommonUtils.getFileName(aURL)))[0];
 	if ( !tmpName || tmpName == "index" ) tmpName = "default";
 	var name = tmpName, seq = 0;
-	while ( gFile2URL[name+".html"] ) name = tmpName + "_" + sbCommonUtils.pad(++seq, 3);
+	while ( gFile2URL[(name+".html").toLowerCase()] ) name = tmpName + "_" + sbCommonUtils.pad(++seq, 3);
 	return name;
 }
 
