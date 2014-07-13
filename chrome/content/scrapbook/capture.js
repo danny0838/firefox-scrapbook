@@ -153,19 +153,12 @@ function SB_initCapture()
 }
 
 
-function SB_splitByAnchor(aURL)
-{
-	var pos = 0;
-	return ( (pos = aURL.indexOf("#")) < 0 ) ? [aURL, ""] : [aURL.substring(0, pos), aURL.substring(pos, aURL.length)];
-}
-
-
 function SB_suggestName(aURL)
 {
-	var tmpName = sbCommonUtils.splitFileName(sbCommonUtils.validateFileName(sbCommonUtils.getFileName(decodeURI(aURL))))[0].toLowerCase();
+	var tmpName = sbCommonUtils.splitFileName(sbCommonUtils.validateFileName(sbCommonUtils.getFileName(aURL)))[0];
 	if ( !tmpName || tmpName == "index" ) tmpName = "default";
 	var name = tmpName, seq = 0;
-	while ( gFile2URL[name+".html"] ) name = tmpName + "_" + sbCommonUtils.pad(++seq, 3);
+	while ( gFile2URL[(name+".html").toLowerCase()] ) name = tmpName + "_" + sbCommonUtils.pad(++seq, 3);
 	return name;
 }
 
@@ -214,7 +207,7 @@ var sbCaptureTask = {
 			if ( aDepth > gOption["inDepth"] ) {
 				return;
 			}
-			aURL = SB_splitByAnchor(aURL)[0];
+			aURL = sbCommonUtils.splitURLByAnchor(aURL)[0];
 			if ( !gOption["isPartial"] && aURL == gReferItem.source ) return;
 			if ( gURLs.indexOf(aURL) != -1 ) return;
 		}
@@ -722,7 +715,7 @@ var sbInvisibleBrowser = {
 				     metaElems[i].getAttribute("content").match(/URL\=(.*)$/i) )
 				{
 					var curURL = this.ELEMENT.currentURI.spec;
-					var newURL = encodeURI(sbCommonUtils.resolveURL(this.ELEMENT.currentURI.spec, RegExp.$1));
+					var newURL = sbCommonUtils.resolveURL(this.ELEMENT.currentURI.spec, encodeURIComponent(decodeURIComponent(RegExp.$1)));
 					if ( newURL != curURL && !sbCaptureTask.refreshHash[newURL] )
 					{
 						sbCaptureTask.refreshHash[curURL] = true;
@@ -839,7 +832,7 @@ var sbCrossLinker = {
 		if ( ++this.index < this.nameList.length )
 		{
 			sbInvisibleBrowser.fileCount = 0;
-			var url = this.baseURL + encodeURI(this.nameList[this.index]) + ".html";
+			var url = this.baseURL + encodeURIComponent(this.nameList[this.index]) + ".html";
 			sbInvisibleBrowser.loading = url;
 			this.ELEMENT.loadURI(url, null, null);
 		}
@@ -876,17 +869,17 @@ var sbCrossLinker = {
 			// However, the demolition at this point may also be desirable (Research!)
 			this.nodeHash[this.nameList[this.index]] = this.createNode(this.nameList[this.index], (gReferItem) ? gReferItem.title : "");
 		}
-		this.nodeHash[this.nameList[this.index]].setAttribute("title", sbDataSource.sanitize(this.ELEMENT.contentTitle));
+		this.nodeHash[this.nameList[this.index]].setAttribute("title", sbDataSource.sanitize(this.ELEMENT.contentTitle) || sbCommonUtils.getFileName(this.ELEMENT.currentURI.spec));
 		sbCommonUtils.flattenFrames(this.ELEMENT.contentWindow).forEach(function(win) {
 			var doc = win.document;
 			var linkList = doc.links;
 			if ( !linkList ) return;
 			var shouldSave = false;
 			for ( var i = 0; i < linkList.length; i++ ) {
-				var urlLR = SB_splitByAnchor(linkList[i].href);
+				var urlLR = sbCommonUtils.splitURLByAnchor(linkList[i].href);
 				if ( gURL2Name[urlLR[0]] ) {
 					var name = gURL2Name[urlLR[0]];
-					linkList[i].href = name + ".html" + urlLR[1];
+					linkList[i].href = encodeURIComponent(name) + ".html" + urlLR[1];
 					linkList[i].setAttribute("data-sb-indepth", "true");
 					if ( !this.nodeHash[name] ) {
 						var text = linkList[i].text ? linkList[i].text.replace(/\r|\n|\t/g, " ") : "";
@@ -916,7 +909,7 @@ var sbCrossLinker = {
 		//Fehlermeldung könnte über Abfrage abgefangen werden.
 		//Allerdings kann der Abbruch an dieser Stelle auch erwünscht sein (Nachforschungen!)
 		var node = this.XML.createElement("page");
-		node.setAttribute("file", aName + ".html");
+		node.setAttribute("file", sbCommonUtils.escapeFileName(aName) + ".html");
 		node.setAttribute("text", sbDataSource.sanitize(aText));
 		return node;
 	},
@@ -964,7 +957,7 @@ var sbCrossLinker = {
 			var nodes = win.gBrowser.mTabContainer.childNodes;
 			for ( var i = 0; i < nodes.length; i++ ) {
 				var uri = win.gBrowser.getBrowserForTab(nodes[i]).currentURI.spec;
-				uri = SB_splitByAnchor(uri)[0];
+				uri = sbCommonUtils.splitURLByAnchor(uri)[0];
 				if ( uri == aURL ) {
 					win.gBrowser.getBrowserForTab(nodes[i]).reload();
 				}

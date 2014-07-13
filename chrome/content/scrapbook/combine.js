@@ -384,7 +384,7 @@ var sbPageCombiner = {
 				 metaElems[i].getAttribute("content").match(/URL\=(.*)$/i) )
 			{
 				var curURL = this.BROWSER.currentURI.spec;
-				var newURL = encodeURI(sbCommonUtils.resolveURL(curURL, RegExp.$1));
+				var newURL = sbCommonUtils.resolveURL(curURL, encodeURIComponent(decodeURIComponent(RegExp.$1)));
 				if ( newURL != curURL && !this.refreshHash[newURL] )
 				{
 					this.refreshHash[curURL] = true;
@@ -437,7 +437,7 @@ var sbPageCombiner = {
 	{
 		// add a thin space between "--" in the comment to prevent exploits
 		var src   = '\n<!--' + sbCombineService.postfix.replace(/--/g, "- -") + '-->\n';
-		var title = sbCommonUtils.crop(sbDataSource.getProperty(sbCombineService.curRes, "title") , 100);
+		var title = sbDataSource.getProperty(sbCombineService.curRes, "title");
 		var linkURL = "";
 		switch ( aType )
 		{
@@ -466,7 +466,7 @@ var sbPageCombiner = {
 		}
 		src += '<cite class="scrapbook-header' + '">\n';
 		src += '\t<img src="' + icon + '" width="16" height="16">\n';
-		src += '\t<a class="' + aType + '"' + (linkURL ? ' href="' + linkURL + '"' : "") + '>' + title + '</a>\n';
+		src += '\t<a class="' + aType + '"' + (linkURL ? ' href="' + linkURL + '"' : "") + '>' + sbCommonUtils.escapeHTML(title, true) + '</a>\n';
 		src += '</cite>\n';
 		return src;
 	},

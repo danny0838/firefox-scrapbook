@@ -261,7 +261,7 @@ var sbSearchResult =
 	{
 		if ( !this.CURRENT_TREEITEM ) return;
 		var id   = this.CURRENT_TREEITEM[5];
-		var url  = this.CURRENT_TREEITEM[6] == "note" ? "chrome://scrapbook/content/note.xul?id=" + id : sbCommonUtils.getBaseHref(sbDataSource.data.URI) + "data/" + id + "/" + encodeURI(this.CURRENT_TREEITEM[4]);
+		var url  = this.CURRENT_TREEITEM[6] == "note" ? "chrome://scrapbook/content/note.xul?id=" + id : sbCommonUtils.getBaseHref(sbDataSource.data.URI) + "data/" + id + "/" + encodeURIComponent(this.CURRENT_TREEITEM[4]);
 		switch ( key ) {
 			case "O" : sbCommonUtils.loadURL(url, false); break;
 			case "T" : sbCommonUtils.loadURL(url, true); break;

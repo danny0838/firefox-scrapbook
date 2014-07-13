@@ -211,7 +211,7 @@ var sbOutputService = {
 				           "../data/" + id + "/index.html";
 				var target = this.optionFrame ? ' target="main"' : "";
 				ret = '<a href="' + href + '"' + target + ' class="' + type + '">'
-				    + '<img src="' + icon + '" width="16" height="16" alt="">' + title + '</a>';
+				    + '<img src="' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(icon)) + '" width="16" height="16" alt="">' + title + '</a>';
 				break;
 		}
 		return ret;

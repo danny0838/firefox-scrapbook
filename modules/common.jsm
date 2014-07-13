@@ -233,7 +233,7 @@ var sbCommonUtils = {
 		name = ( (pos = aURI.indexOf("?")) != -1 ) ? aURI.substring(0, pos) : aURI;
 		name = ( (pos = name.indexOf("#")) != -1 ) ? name.substring(0, pos) : name;
 		name = ( (pos = name.lastIndexOf("/")) != -1 ) ? name.substring(++pos) : name;
-		return decodeURI(name);
+		return decodeURIComponent(name);
 	},
 
 	splitFileName : function(aFileName)
@@ -250,15 +250,14 @@ var sbCommonUtils = {
 		return ret;
 	},
 
+	// process filename to make safe
+	// see also: escapeFileName
 	validateFileName : function(aFileName)
 	{
-		aFileName = aFileName.replace(/[\"\?!~`]+/g, "");
-		aFileName = aFileName.replace(/[\*\&]/g, "+");
-		aFileName = aFileName.replace(/[\\\/\|\:;]/g, "-");
+		aFileName = aFileName.replace(/[\x00-\x1F\x7F]+|^ +/g, "");
+		aFileName = aFileName.replace(/[\"\?\*\\\/\|\:]/g, "_");
 		aFileName = aFileName.replace(/[\<]/g, "(");
 		aFileName = aFileName.replace(/[\>]/g, ")");
-		aFileName = aFileName.replace(/[\s]/g, "_");
-		aFileName = aFileName.replace(/[%]/g, "@");
 		return aFileName;
 	},
 
@@ -437,6 +436,12 @@ var sbCommonUtils = {
 		var sbDir = sbCommonUtils.convertFilePathToURL(sbCommonUtils.getScrapBookDir().path);
 		var sbPath = new RegExp("^" + sbCommonUtils.escapeRegExp(sbDir) + "data/(\\d{14})/");
 		return aURL.match(sbPath) ? RegExp.$1 : null;
+	},
+	
+	splitURLByAnchor : function(aURL)
+	{
+		var pos = 0;
+		return ( (pos = aURL.indexOf("#")) < 0 ) ? [aURL, ""] : [aURL.substring(0, pos), aURL.substring(pos, aURL.length)];
 	},
 
 	execProgram : function(aExecFilePath, args)
@@ -662,11 +667,21 @@ var sbCommonUtils = {
 		return aString.replace(/([\*\+\?\.\^\/\$\\\|\[\]\{\}\(\)])/g, "\\$1");
 	},
 
-	// escape characters fully misleading in the URI
+	// escape valid filename characters that are misleading in the URI
 	// preserve other chars for beauty
+	// see also: validateFilename
 	escapeFileName : function(aString)
 	{
-		return aString.replace(/[\x00-\x1f:/?#]+|(?:%[0-9A-Za-z]{2})+|^ /g, function(m){return encodeURIComponent(m);});
+		return aString.replace(/[#]+|(?:%[0-9A-Fa-f]{2})+/g, function(m){return encodeURIComponent(m);});
+	},
+
+	stringTemplate : function(aString, aTplArray, aTplRegExp)
+	{
+		var ret = aString.replace(aTplRegExp, function(match, label){
+			if (aTplArray[label]) return aTplArray[label];
+			return "";
+		});
+		return ret;
 	},
 		
 	pad : function(n, width, z)
