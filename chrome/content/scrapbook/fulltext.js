@@ -145,8 +145,9 @@ var sbSearchResult =
 			if ( this.targetFolders.indexOf(folder) < 0 ) return this.next();
 		}
 		var content = sbCacheSource.getProperty(res, "content");
-		var resURI  = res.ValueUTF8.split("#")[0];
-		var name    = res.ValueUTF8.split("#")[1] || "index.html";
+		var nameLR = res.ValueUTF8.split("#");
+		var resURI  = nameLR.shift();
+		var name    = nameLR.join("#") || "index.html";
 		res = sbCommonUtils.RDF.GetResource(resURI);
 		if ( !sbDataSource.exists(res) ) return this.next();
 		var type    = sbDataSource.getProperty(res, "type");
