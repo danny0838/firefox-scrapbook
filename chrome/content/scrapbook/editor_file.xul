@@ -37,6 +37,7 @@
 		<label value="&sb.edit.html.file.format;" />
 		<menulist id="sbFileFormat" editable="true" flex="1">
 			<menupopup>
+				<menuitem label='' />
 				<menuitem label='&lt;a href="{FILE_E}">{THIS}&lt;/a>' />
 				<menuitem label='&lt;a href="{FILE_E}" title="{FILE}">{THIS}&lt;/a>' selected="true" />
 				<menuitem label='&lt;img src="{FILE_E}" />' />
