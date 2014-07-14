@@ -29,7 +29,7 @@
 		</hbox>
 		<hbox>
 			<radio id="sbFileHTMLUse" label="&sb.edit.html.file.html;" />
-			<textbox id="sbLinkHTML" placeholder="eg. index2" flex="1" oninput="pick('sbFileHTMLUse');" />
+			<textbox id="sbFileHTML" placeholder="eg. index2" flex="1" oninput="pick('sbFileHTMLUse');" />
 		</hbox>
 	</radiogroup>
 	<separator />
