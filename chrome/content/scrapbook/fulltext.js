@@ -145,8 +145,9 @@ var sbSearchResult =
 			if ( this.targetFolders.indexOf(folder) < 0 ) return this.next();
 		}
 		var content = sbCacheSource.getProperty(res, "content");
-		var resURI  = res.ValueUTF8.split("#")[0];
-		var name    = res.ValueUTF8.split("#")[1] || "index.html";
+		var nameLR = res.ValueUTF8.split("#");
+		var resURI  = nameLR.shift();
+		var name    = nameLR.join("#") || "index.html";
 		res = sbCommonUtils.RDF.GetResource(resURI);
 		if ( !sbDataSource.exists(res) ) return this.next();
 		var type    = sbDataSource.getProperty(res, "type");
@@ -261,7 +262,7 @@ var sbSearchResult =
 	{
 		if ( !this.CURRENT_TREEITEM ) return;
 		var id   = this.CURRENT_TREEITEM[5];
-		var url  = this.CURRENT_TREEITEM[6] == "note" ? "chrome://scrapbook/content/note.xul?id=" + id : sbCommonUtils.getBaseHref(sbDataSource.data.URI) + "data/" + id + "/" + encodeURIComponent(this.CURRENT_TREEITEM[4]);
+		var url  = this.CURRENT_TREEITEM[6] == "note" ? "chrome://scrapbook/content/note.xul?id=" + id : this.resPathToURL(id, this.CURRENT_TREEITEM[4]);
 		switch ( key ) {
 			case "O" : sbCommonUtils.loadURL(url, false); break;
 			case "T" : sbCommonUtils.loadURL(url, true); break;
@@ -272,6 +273,12 @@ var sbSearchResult =
 				break;
 			default  : document.getElementById("sbBrowser").loadURI(url); break;
 		}
+	},
+
+	resPathToURL : function(aID, aSubPath)
+	{
+		var parts = aSubPath.split("/").map(function(part){return encodeURIComponent(part);});
+		return sbCommonUtils.getBaseHref(sbDataSource.data.URI) + "data/" + aID + "/" + parts.join("/");
 	},
 
 	onDocumentLoad : function(aEvent)

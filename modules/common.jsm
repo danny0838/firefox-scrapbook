@@ -264,10 +264,10 @@ var sbCommonUtils = {
 	resolveURL : function(aBaseURL, aRelURL)
 	{
 		try {
+			// URLObj.spec is encoded and usable URI
 			var baseURLObj = this.convertURLToObject(aBaseURL);
-			//" entfernen aus aRelURL
-			aRelURL = aRelURL.replace(/\"/g, "");
-			return baseURLObj.resolve(aRelURL);
+			var relURLObj = this.convertURLToObject(aRelURL);
+			return baseURLObj.resolve(relURLObj.spec);
 		} catch(ex) {
 			sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_RESOLVE_URL", [aBaseURL, aRelURL]));
 		}

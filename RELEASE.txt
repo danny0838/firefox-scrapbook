@@ -1,3 +1,22 @@
+Scrapbook X 1.12.0a14
+----------------
+
+- FIXED: Deep capture and page combine doesn't work normally if the page contains a meta refresh containing some frequently used characters.
+- FIXED: Fulltext search result items which are in a sub-directory or with special chars cannot be opened correctly.
+
+
+Scrapbook X 1.12.0a13
+----------------
+
+- UPDATE: URLs that are only different in hash are not captured repeatedly.
+- UPDATE: Preserves the original filename case on capturing a page.
+- UPDATE: Preserves more special characters in the original filename on capturing a page.
+- UPDATE: Pages without title definition show their filename instead of blank in the sitemap.
+- UPDATE: Invalid filename characters are now automatically replaced instead of alerting an error on insertion of a sub-page.
+- UPDATE: Item titles are no more truncated in the combination page.
+- FIXED: Files that title has special characters cause abnormal output of the combination page.
+
+
 Scrapbook X 1.12.0a12
 ----------------
 
