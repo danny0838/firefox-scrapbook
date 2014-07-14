@@ -6,6 +6,12 @@ function init() {
 	if (gData.url) document.getElementById("sbFileHTML").value = gData.url;
 	pick( sbCommonUtils.getPref("edit.file.lastType", "sbFileFileUse") );
 	document.getElementById("sbFileInsert").checked = sbCommonUtils.getPref("edit.file.lastInsert", true);
+	if (document.getElementById("sbFileFileUse").selected) {
+		document.getElementById("sbFilePicker").focus();
+	}
+	else {
+		document.getElementById("sbFileHTML").focus();
+	}
 	var lastFormat = sbCommonUtils.getPref("edit.file.lastFormat", "");
 	if (lastFormat) document.getElementById("sbFileFormat").value = lastFormat;
 }

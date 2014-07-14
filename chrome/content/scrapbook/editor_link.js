@@ -10,6 +10,12 @@ function init() {
 		document.getElementById("sbLinkID").disabled = true;
 	}
 	pick( sbCommonUtils.getPref("edit.link.lastType", "sbLinkURLUse") );
+	if (document.getElementById("sbLinkURLUse").selected) {
+		document.getElementById("sbLinkURL").focus();
+	}
+	else {
+		document.getElementById("sbLinkID").focus();
+	}
 	var lastFormat = sbCommonUtils.getPref("edit.link.lastFormat", "");
 	if (lastFormat) document.getElementById("sbLinkFormat").value = lastFormat;
 }
