@@ -31,6 +31,10 @@
 			<radio id="sbFileHTMLUse" label="&sb.edit.html.file.html;" />
 			<textbox id="sbFileHTML" placeholder="eg. index2" flex="1" oninput="pick('sbFileHTMLUse');" />
 		</hbox>
+		<hbox>
+			<radio id="sbFileHistHTMLUse" label="&sb.edit.html.file.histHtml;" />
+			<textbox id="sbFileHistHTML" placeholder="some comment" flex="1" oninput="pick('sbFileHistHTMLUse');" />
+		</hbox>
 	</radiogroup>
 	<separator />
 	<hbox>
