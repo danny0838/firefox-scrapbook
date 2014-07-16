@@ -8,6 +8,12 @@ function init() {
 	var lastFormat = sbCommonUtils.getPref("edit.file.lastFormat", "");
 	if (lastFormat) document.getElementById("sbFileFormat").value = lastFormat;
 
+	// disable insert hist_html if the current file is not html
+	if ( sbCommonUtils.splitFileName(gData.filename)[1] != "html" ) {
+		document.getElementById("sbFileHistHTMLUse").disabled = true;
+		document.getElementById("sbFileHistHTML").disabled = true;
+	}
+
 	// pick the last picked type and focus the corresponding field
 	pick( sbCommonUtils.getPref("edit.file.lastType", "sbFileFileUse") );
 	if (document.getElementById("sbFileFileUse").selected) {
@@ -47,5 +53,6 @@ function pickFile() {
 }
 
 function pick(aIDToCheck) {
-	document.getElementById("sbFileSelector").selectedItem = document.getElementById(aIDToCheck);
+	var el = document.getElementById(aIDToCheck);
+	if (!el.disabled) document.getElementById("sbFileSelector").selectedItem = el;
 }

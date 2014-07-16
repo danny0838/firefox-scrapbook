@@ -1080,7 +1080,7 @@ var sbHtmlEditor = {
 			var url = RegExp.$1;
 		}
 		// prompt the dialog for user input
-		var data = { url: url };
+		var data = { url: url, filename: htmlFile.leafName };
 		var accepted = window.top.openDialog("chrome://scrapbook/content/editor_file.xul", "ScrapBook:AttachFile", "chrome,modal,centerscreen,resizable", data);
 		if (data.result != 1) return;
 		// insert file ?
