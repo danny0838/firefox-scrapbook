@@ -1174,7 +1174,7 @@ var sbHtmlEditor = {
 		// insert hist html ?
 		else if (data.hist_html_use) {
 			var title = data.hist_html;
-			var filename = "." + sbCommonUtils.splitFileName(htmlFile.leafName)[0] + "." + sbCommonUtils.getTimeStamp() + "." + title + ".htm";
+			var filename = "." + sbCommonUtils.splitFileName(htmlFile.leafName)[0] + "." + sbCommonUtils.getTimeStamp() + (title ? " " + title : "") + ".htm";
 			var filename2 = sbCommonUtils.validateFileName(filename);
 			try {
 				var destFile = htmlFile.parent.clone();
