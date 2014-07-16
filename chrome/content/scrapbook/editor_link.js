@@ -9,6 +9,10 @@ function init() {
 		document.getElementById("sbLinkIDUse").disabled = true;
 		document.getElementById("sbLinkID").disabled = true;
 	}
+	var lastFormat = sbCommonUtils.getPref("edit.link.lastFormat", "");
+	if (lastFormat) document.getElementById("sbLinkFormat").value = lastFormat;
+
+	// pick the last picked type and focus the corresponding field
 	pick( sbCommonUtils.getPref("edit.link.lastType", "sbLinkURLUse") );
 	if (document.getElementById("sbLinkURLUse").selected) {
 		document.getElementById("sbLinkURL").focus();
@@ -16,8 +20,6 @@ function init() {
 	else {
 		document.getElementById("sbLinkID").focus();
 	}
-	var lastFormat = sbCommonUtils.getPref("edit.link.lastFormat", "");
-	if (lastFormat) document.getElementById("sbLinkFormat").value = lastFormat;
 }
 
 function accept() {
