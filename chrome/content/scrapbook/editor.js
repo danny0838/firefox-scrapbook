@@ -1189,19 +1189,6 @@ var sbHtmlEditor = {
 				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename2]));
 				return;
 			}
-			// insert to the document
-			if (data.insert && data.format) {
-				var html = sbCommonUtils.stringTemplate(
-					data.format,
-					{
-						FILE: sbCommonUtils.escapeHTML(filename),
-						FILE_E: sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(filename2)),
-						THIS: sel.isCollapsed ? sbCommonUtils.escapeHTML(filename) : sbPageEditor.getSelectionHTML(sel),
-					},
-					/{([\w_]+)}/g
-				);
-				aDoc.execCommand("insertHTML", false, html);
-			}
 		}
 	},
 
