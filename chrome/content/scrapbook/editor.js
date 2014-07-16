@@ -131,9 +131,6 @@ var sbPageEditor = {
 			}, this);
 			if (this.item && this.item.lock != "true" && this.item.type == "notex" && sbCommonUtils.getPref("edit.autoEditNoteX", true)) {
 				this.documentLoad(window.content.document, function(doc){
-					// do not auto enter editor mode for non .html files, since they are probably not html or not ScrapBook generated
-					var file = sbCommonUtils.convertURLToFile(doc.location.href);
-					if (!file.leafName.match(/\.html$/)) return;
 					// check document type and make sure it's a file
 					if (doc.contentType != "text/html") return;
 					// turn on HTMLEditor, without marking as changed
