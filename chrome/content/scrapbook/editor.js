@@ -102,8 +102,8 @@ var sbPageEditor = {
 		document.getElementById("ScrapBookEditAnnotation").firstChild.childNodes[1].disabled = (aID == null);
 		document.getElementById("ScrapBookEditAnnotation").firstChild.childNodes[2].disabled = (aID == null);
 		// -- refresh the toolbar
-		if ( aID && this.item.lock == "true" ) {
-			// locked items cannot be edited, simply show a disabled toolbar
+		if ( aID && (this.item.lock == "true" || sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec).leafName.match(/^\./)) ) {
+			// locked items and hidden (history) HTML pages cannot be edited, simply show a disabled toolbar
 			// sbDOMEraser.init(0);  // included in disable(true)
 			sbHtmlEditor.init(null, 0);
 			this.disable(true);
