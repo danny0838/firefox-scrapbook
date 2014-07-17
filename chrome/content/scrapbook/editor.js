@@ -1789,7 +1789,6 @@ var sbAnnotationService = {
 			headNode.appendChild(win.document.createTextNode("\n"));
 		}
 		this._editSticky(div);
-		sbPageEditor.disableTemporary(500);
 	},
 
 	editSticky : function(oldElem)
