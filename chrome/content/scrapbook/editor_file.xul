@@ -29,12 +29,12 @@
 		</hbox>
 		<hbox>
 			<radio id="sbFileHTMLUse" label="&sb.edit.html.file.html;" />
-			<textbox id="sbLinkHTML" placeholder="eg. index2" flex="1" oninput="pick('sbFileHTMLUse');" />
+			<textbox id="sbFileHTML" placeholder="eg. index2" flex="1" oninput="pick('sbFileHTMLUse');" />
 		</hbox>
 	</radiogroup>
 	<separator />
 	<hbox>
-		<label value="&sb.edit.html.file.format;" />
+		<checkbox id="sbFileInsert" label="&sb.edit.html.file.format;" />
 		<menulist id="sbFileFormat" editable="true" flex="1">
 			<menupopup>
 				<menuitem label='&lt;a href="{FILE_E}">{THIS}&lt;/a>' />

@@ -1158,7 +1158,7 @@ var sbHtmlEditor = {
 				return;
 			}
 			// insert to the document
-			if (data.format) {
+			if (data.insert && data.format) {
 				var html = sbCommonUtils.stringTemplate(
 					data.format,
 					{
