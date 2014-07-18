@@ -49,24 +49,23 @@ function SB_initView()
 function SB_getHTMLHead(aTitle)
 {
 	var src = '<!DOCTYPE html>\n\n'
-	src += '<html>\n\n'
-	src += '<head>\n'
-	src += '	<meta charset="UTF-8">\n'
-	src += '	<title>' + sbCommonUtils.escapeHTML(aTitle, true) + '</title>\n'
-	src += '	<link rel="stylesheet" type="text/css" href="chrome://scrapbook/skin/combine.css" media="screen,print">\n'
-	src += '</head>\n\n'
-	src += '<body>\n\n';
+		+ '<html>\n\n'
+		+ '<head>\n'
+		+ '	<meta charset="UTF-8">\n'
+		+ '	<title>' + sbCommonUtils.escapeHTML(aTitle, true) + '</title>\n'
+		+ '	<link rel="stylesheet" type="text/css" href="chrome://scrapbook/skin/combine.css" media="screen,print">\n'
+		+ '</head>\n\n'
+		+ '<body>\n\n';
 	return src;
 }
 
 
 function SB_getHTMLBody(aItem)
 {
-	var src = "";
-	src += '<cite class="scrapbook-header">\n';
-	src += '\t<img src="' + sbCommonUtils.escapeHTML(aItem.icon ? aItem.icon : sbCommonUtils.getDefaultIcon(aItem.type)) + '" width="16" height="16">\n';
-	src += '\t<a href="' + sbCommonUtils.escapeHTML(aItem.source) + '" target="_top">' + sbCommonUtils.escapeHTML(sbCommonUtils.crop(aItem.title, 100)) + '</a>\n';
-	src += '</cite>\n';
+	var src = '<cite class="scrapbook-header">\n'
+		+ '\t<img src="' + sbCommonUtils.escapeHTML(aItem.icon ? aItem.icon : sbCommonUtils.getDefaultIcon(aItem.type)) + '" width="16" height="16">\n'
+		+ '\t<a href="' + sbCommonUtils.escapeHTML(aItem.source) + '" target="_top">' + sbCommonUtils.escapeHTML(sbCommonUtils.crop(aItem.title, 100)) + '</a>\n'
+		+ '</cite>\n';
 	if ( aItem.type != "bookmark" ) src += '<iframe class="scrapbook-iframe" src="./data/' + aItem.id + '/index.html" onload="this.setAttribute(\'style\', \'height:\' + (this.contentDocument.height || 600 + 30));"></iframe>\n';
 	return src;
 }
