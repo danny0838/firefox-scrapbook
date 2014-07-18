@@ -1,3 +1,10 @@
+Scrapbook X 1.12.0a15
+----------------
+
+- FIXED: Relative URLs with patterns like "//some.url" cannot be correctly resolved.
+- FIXED: An error message is generated when creating a sticky note.
+
+
 Scrapbook X 1.12.0a14
 ----------------
 
