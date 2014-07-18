@@ -48,14 +48,14 @@ function SB_initView()
 
 function SB_getHTMLHead(aTitle)
 {
-	var src = '<!DOCTYPE html>\n\n'
-		+ '<html>\n\n'
+	var src = '<!DOCTYPE html>\n'
+		+ '<html>\n'
 		+ '<head>\n'
 		+ '	<meta charset="UTF-8">\n'
 		+ '	<title>' + sbCommonUtils.escapeHTML(aTitle, true) + '</title>\n'
 		+ '	<link rel="stylesheet" type="text/css" href="chrome://scrapbook/skin/combine.css" media="screen,print">\n'
-		+ '</head>\n\n'
-		+ '<body>\n\n';
+		+ '</head>\n'
+		+ '<body>\n';
 	return src;
 }
 
@@ -73,7 +73,7 @@ function SB_getHTMLBody(aItem)
 
 function SB_getHTMLFoot()
 {
-	var src = '</body>\n\n' + '</html>\n';
+	var src = '</body>\n' + '</html>\n';
 	return src;
 }
 
