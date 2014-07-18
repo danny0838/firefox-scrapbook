@@ -48,11 +48,10 @@ function SB_initView()
 
 function SB_getHTMLHead(aTitle)
 {
-	var src = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">\n\n'
+	var src = '<!DOCTYPE html>\n\n'
 	src += '<html>\n\n'
 	src += '<head>\n'
-	src += '	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">\n'
-	src += '	<meta http-equiv="Content-Style-Type" content="text/css">\n'
+	src += '	<meta charset="UTF-8">\n'
 	src += '	<title>' + aTitle + '</title>\n'
 	src += '	<link rel="stylesheet" type="text/css" href="chrome://scrapbook/skin/combine.css" media="screen,print">\n'
 	src += '</head>\n\n'
