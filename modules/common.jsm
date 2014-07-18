@@ -266,8 +266,8 @@ var sbCommonUtils = {
 		try {
 			// URLObj.spec is encoded and usable URI
 			var baseURLObj = this.convertURLToObject(aBaseURL);
-			var relURLObj = this.convertURLToObject(aRelURL);
-			return baseURLObj.resolve(relURLObj.spec);
+			var resolved = baseURLObj.resolve(aRelURL);
+			return this.convertURLToObject(resolved).spec;
 		} catch(ex) {
 			sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_RESOLVE_URL", [aBaseURL, aRelURL]));
 		}
