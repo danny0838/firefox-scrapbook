@@ -48,34 +48,37 @@ function SB_initView()
 
 function SB_getHTMLHead(aTitle)
 {
-	var src = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">\n\n'
-	src += '<html>\n\n'
-	src += '<head>\n'
-	src += '	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">\n'
-	src += '	<meta http-equiv="Content-Style-Type" content="text/css">\n'
-	src += '	<title>' + aTitle + '</title>\n'
-	src += '	<link rel="stylesheet" type="text/css" href="chrome://scrapbook/skin/combine.css" media="screen,print">\n'
-	src += '</head>\n\n'
-	src += '<body>\n\n';
+	var src = '<!DOCTYPE html>\n'
+		+ '<html>\n'
+		+ '<head>\n'
+		+ '	<meta charset="UTF-8">\n'
+		+ '	<title>' + sbCommonUtils.escapeHTML(aTitle, true) + '</title>\n'
+		+ '	<link rel="stylesheet" type="text/css" href="chrome://scrapbook/skin/combine.css" media="screen,print">\n'
+		+ '	<script>\n'
+		+ '	function initHeight(obj){\n'
+		+ '		obj.style.height = parseInt(obj.contentDocument.documentElement.scrollHeight, 10) + 30 + \'px\';\n'
+		+ '	}\n'
+		+ '	</script>\n'
+		+ '</head>\n'
+		+ '<body>\n';
 	return src;
 }
 
 
 function SB_getHTMLBody(aItem)
 {
-	var src = "";
-	src += '<cite class="scrapbook-header">\n';
-	src += '\t<img src="' + (aItem.icon ? aItem.icon : sbCommonUtils.getDefaultIcon(aItem.type)) + '" width="16" height="16">\n';
-	src += '\t<a href="' + aItem.source + '" target="_top">' + sbCommonUtils.crop(aItem.title, 100) + '</a>\n';
-	src += '</cite>\n';
-	if ( aItem.type != "bookmark" ) src += '<iframe class="scrapbook-iframe" src="./data/' + aItem.id + '/index.html" onload="this.setAttribute(\'style\', \'height:\' + (this.contentDocument.height || 600 + 30));"></iframe>\n';
+	var src = '<cite class="scrapbook-header">\n'
+		+ '\t<img src="' + sbCommonUtils.escapeHTML(aItem.icon ? aItem.icon : sbCommonUtils.getDefaultIcon(aItem.type)) + '" width="16" height="16">\n'
+		+ '\t<a href="' + sbCommonUtils.escapeHTML(aItem.source) + '" target="_top">' + sbCommonUtils.escapeHTML(sbCommonUtils.crop(aItem.title, 100)) + '</a>\n'
+		+ '</cite>\n';
+	if ( aItem.type != "bookmark" ) src += '<iframe class="scrapbook-iframe" src="./data/' + aItem.id + '/index.html" onload="initHeight(this);"></iframe>\n';
 	return src;
 }
 
 
 function SB_getHTMLFoot()
 {
-	var src = '</body>\n\n' + '</html>\n';
+	var src = '</body>\n' + '</html>\n';
 	return src;
 }
 
