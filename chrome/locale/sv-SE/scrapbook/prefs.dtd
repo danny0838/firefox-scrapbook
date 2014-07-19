@@ -34,7 +34,6 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "nederst i mappen">
 <!ENTITY sb.prefs.showDetailOnDrop "Visa dialogen &quot;Infångstinformation&quot; vid infångst via dra och släpp i sidofältet">
 <!ENTITY sb.prefs.notifyOnComplete "Visa meddelandet &quot;Infångsten har slutförts&quot;">
-<!ENTITY sb.prefs.exportFolders "Allow exporting folder items">
 <!ENTITY sb.button.customize "Anpassa">
 <!ENTITY sb.button.browse "Bläddra">
 <!ENTITY sb.button.show "Visa filer">

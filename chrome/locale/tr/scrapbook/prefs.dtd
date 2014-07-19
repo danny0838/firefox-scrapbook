@@ -34,7 +34,6 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "Klasörün altı">
 <!ENTITY sb.prefs.showDetailOnDrop "Kenar çubuğuna sürükleyip-bırakarak kaydetmelerde &apos;Kayıt Detayları&apos; diyaloğunu göster">
 <!ENTITY sb.prefs.notifyOnComplete "&apos;Kaydetme Tamamlandı&apos; uyarısını göster">
-<!ENTITY sb.prefs.exportFolders "Allow exporting folder items">
 <!ENTITY sb.button.customize "Özelleştir">
 <!ENTITY sb.button.browse "Gözat">
 <!ENTITY sb.button.show "Dosyaları Göster">

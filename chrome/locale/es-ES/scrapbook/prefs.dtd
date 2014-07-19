@@ -34,7 +34,6 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "la parte baja de una carpeta">
 <!ENTITY sb.prefs.showDetailOnDrop "Mostrar el diálogo &apos;Detalles de Captura&apos; cuando se capture mediante &apos;arrastrar y soltar&apos; en la barra lateral">
 <!ENTITY sb.prefs.notifyOnComplete "Mostrar notificación de &apos;Captura Finalizada&apos;">
-<!ENTITY sb.prefs.exportFolders "Allow exporting folder items">
 <!ENTITY sb.button.customize "Personalizar">
 <!ENTITY sb.button.browse "Buscar">
 <!ENTITY sb.button.show "Mostrar ficheros">

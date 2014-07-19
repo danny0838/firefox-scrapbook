@@ -220,12 +220,11 @@ var sbTradeService = {
 		var ret = [];
 		var uriList = [];
 		var selRes = window.top.sbTreeHandler.getSelection(true, 0);
-		var filterRule = sbCommonUtils.getPref("exportFolders", false) ? 0 : 2;
 		for ( var i = 0; i < selRes.length; i++ )
 		{
 			if ( window.top.sbDataSource.isContainer(selRes[i]) )
 			{
-				var childRes = window.top.sbDataSource.flattenResources(selRes[i], filterRule, true);
+				var childRes = window.top.sbDataSource.flattenResources(selRes[i], 0, true);
 				for ( var j = 0; j < childRes.length; j++ )
 				{
 					if ( uriList.indexOf(childRes[j].Value) < 0 ) { ret.push(childRes[j]); uriList.push(childRes[j].Value); }
