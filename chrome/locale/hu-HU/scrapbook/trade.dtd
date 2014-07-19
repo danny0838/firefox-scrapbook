@@ -4,4 +4,4 @@
 <!ENTITY sb.trade.update "Import as latest ScrapBook X format">
 <!ENTITY sb.trade.restore "Importálás a mappaszerkezet visszaállításával">
 <!ENTITY sb.trade.remove "Fájlok eltávolítása importálás után">
-<!ENTITY sb.trade.exportFolder "Export folder items">
+<!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">

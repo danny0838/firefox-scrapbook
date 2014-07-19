@@ -4,4 +4,4 @@
 <!ENTITY sb.trade.update "Import as latest ScrapBook X format">
 <!ENTITY sb.trade.restore "Import with restoring folder structure">
 <!ENTITY sb.trade.remove "Remove files after importing">
-<!ENTITY sb.trade.exportFolder "Export folder items">
+<!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">

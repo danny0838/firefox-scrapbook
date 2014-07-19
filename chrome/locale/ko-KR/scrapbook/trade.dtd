@@ -4,4 +4,4 @@
 <!ENTITY sb.trade.update "Import as latest ScrapBook X format">
 <!ENTITY sb.trade.restore "복구하는 폴더 구조로 가져오기">
 <!ENTITY sb.trade.remove "가져오기 완료 후 파일 삭제">
-<!ENTITY sb.trade.exportFolder "Export folder items">
+<!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">

@@ -4,4 +4,4 @@
 <!ENTITY sb.trade.update "Import as latest ScrapBook X format">
 <!ENTITY sb.trade.restore "Klasör yapısını geri yükleyerek içe aktar">
 <!ENTITY sb.trade.remove "İçe aktardıktan sonra dosyaları kaldır">
-<!ENTITY sb.trade.exportFolder "Export folder items">
+<!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">
