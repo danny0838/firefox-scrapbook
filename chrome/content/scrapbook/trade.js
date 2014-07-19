@@ -414,11 +414,6 @@ var sbExportService = {
 		{
 			item[prop] = window.top.sbDataSource.getProperty(aRes, prop);
 		}
-		// fix: generate create and modify if none
-		// older version (<= ScrapBook X 1.12.0a10) do not have these records
-		if (!item.create) item.create = item.id;
-		if (!item.modify) item.modify = item.create;
-		// fix end
 		item.folder = this.getFolderPath(aRes).join("\t");
 		if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) )
 		{
