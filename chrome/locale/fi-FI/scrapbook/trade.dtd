@@ -1,6 +1,7 @@
 <!ENTITY sb.trade.import "Tuo">
 <!ENTITY sb.trade.export "Vie">
 <!ENTITY sb.trade.time "Viemispäivä">
+<!ENTITY sb.trade.update "Import as latest ScrapBook X format">
 <!ENTITY sb.trade.restore "Tuo palauttaen kansiorakenne">
 <!ENTITY sb.trade.remove "Poista tiedostot tuonnin jälkeen">
-<!ENTITY sb.trade.exportFolder "Export folder items">
+<!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">
