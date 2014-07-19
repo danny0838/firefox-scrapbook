@@ -75,10 +75,10 @@
 			<button id="sbTradeImportButton" label="&sb.trade.import;" group="lockTarget" oncommand="sbImportService.exec(-128,-1);" image="chrome://scrapbook/skin/expander_left.png" />
 		</hbox>
 		<vbox>
+			<checkbox id="sbTradeOptionExportFolder"  label="&sb.trade.exportFolder; " group="lockTarget" checked="false" persist="checked" />
 			<checkbox id="sbTradeOptionUpdate" label="&sb.trade.update;" group="lockTarget" checked="false" persist="checked" title="may lower performance" />
 			<checkbox id="sbTradeOptionRestore" label="&sb.trade.restore;" group="lockTarget" checked="true" />
 			<checkbox id="sbTradeOptionRemove"  label="&sb.trade.remove; " group="lockTarget" checked="false" persist="checked" />
-			<checkbox id="sbTradeOptionExportFolder"  label="&sb.trade.exportFolder; " group="lockTarget" checked="false" persist="checked" />
 		</vbox>
 	</toolbar>
 
