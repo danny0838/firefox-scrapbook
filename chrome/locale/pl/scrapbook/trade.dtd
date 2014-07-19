@@ -3,3 +3,4 @@
 <!ENTITY sb.trade.time "Czas operacji">
 <!ENTITY sb.trade.restore "Importuj z rozpakowaną strukturą folderu">
 <!ENTITY sb.trade.remove "Usuń pliki po zakończeniu importowania">
+<!ENTITY sb.trade.exportFolder "Export folder items">

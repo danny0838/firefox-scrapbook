@@ -3,3 +3,4 @@
 <!ENTITY sb.trade.time "Data exportului">
 <!ENTITY sb.trade.restore "Importă refăcând structura dosarelor">
 <!ENTITY sb.trade.remove "Elimină fișierele după import">
+<!ENTITY sb.trade.exportFolder "Export folder items">

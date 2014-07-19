@@ -3,3 +3,4 @@
 <!ENTITY sb.trade.time "Data de exportación">
 <!ENTITY sb.trade.restore "Importar restaurando a estrutura do cartafol">
 <!ENTITY sb.trade.remove "Eliminar os ficheiros despois de os importar">
+<!ENTITY sb.trade.exportFolder "Export folder items">

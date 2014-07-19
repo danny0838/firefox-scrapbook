@@ -3,3 +3,4 @@
 <!ENTITY sb.trade.time "Час експортування">
 <!ENTITY sb.trade.restore "Імпортувати з відновленням структури тек">
 <!ENTITY sb.trade.remove "Вилучити файли після імпортування">
+<!ENTITY sb.trade.exportFolder "Export folder items">
