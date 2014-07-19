@@ -1,5 +1,7 @@
 <!ENTITY sb.trade.import "インポート">
 <!ENTITY sb.trade.export "エクスポート">
 <!ENTITY sb.trade.time "エクスポートした日時">
+<!ENTITY sb.trade.update "Import as latest ScrapBook X format">
 <!ENTITY sb.trade.restore "フォルダ構成を復元しながらインポート">
 <!ENTITY sb.trade.remove "インポート後にファイルを削除する">
+<!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">
