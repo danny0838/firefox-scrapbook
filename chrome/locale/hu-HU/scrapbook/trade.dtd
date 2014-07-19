@@ -3,3 +3,4 @@
 <!ENTITY sb.trade.time "Exportálva">
 <!ENTITY sb.trade.restore "Importálás a mappaszerkezet visszaállításával">
 <!ENTITY sb.trade.remove "Fájlok eltávolítása importálás után">
+<!ENTITY sb.trade.exportFolder "Export folder items">

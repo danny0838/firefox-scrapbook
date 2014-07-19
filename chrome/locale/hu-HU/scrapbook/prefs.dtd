@@ -34,7 +34,6 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "mappa végére">
 <!ENTITY sb.prefs.showDetailOnDrop "A „Rögzítés részletek” ablak megjelenítése, ha a felvételt húzd és ejtsd módon kezdeményezik az Oldalsávon">
 <!ENTITY sb.prefs.notifyOnComplete "A „Rögzítés kész” értesítés megjelenítése">
-<!ENTITY sb.prefs.exportFolders "Allow exporting folder items">
 <!ENTITY sb.button.customize "Testreszabás">
 <!ENTITY sb.button.browse "Tallózás">
 <!ENTITY sb.button.show "Fájlok megjelenítése">

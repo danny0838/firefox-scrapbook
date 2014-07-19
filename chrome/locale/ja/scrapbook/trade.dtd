@@ -3,3 +3,4 @@
 <!ENTITY sb.trade.time "エクスポートした日時">
 <!ENTITY sb.trade.restore "フォルダ構成を復元しながらインポート">
 <!ENTITY sb.trade.remove "インポート後にファイルを削除する">
+<!ENTITY sb.trade.exportFolder "Export folder items">

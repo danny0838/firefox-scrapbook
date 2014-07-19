@@ -220,7 +220,7 @@ var sbTradeService = {
 		var ret = [];
 		var uriList = [];
 		var selRes = window.top.sbTreeHandler.getSelection(true, 0);
-		var filterRule = sbCommonUtils.getPref("exportFolders", false) ? 0 : 2;
+		var filterRule = document.getElementById("sbTradeOptionExportFolder").checked ? 0 : 2;
 		for ( var i = 0; i < selRes.length; i++ )
 		{
 			if ( window.top.sbDataSource.isContainer(selRes[i]) )

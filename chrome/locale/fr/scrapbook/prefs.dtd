@@ -34,7 +34,6 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "le bas d&apos;un dossier">
 <!ENTITY sb.prefs.showDetailOnDrop "Afficher la boîte de dialogue &apos;Détail de la capture&apos; lors de la capture par un glisser-déposer dans le panneau latéral">
 <!ENTITY sb.prefs.notifyOnComplete "Afficher la notification &apos;Capture terminée&apos;">
-<!ENTITY sb.prefs.exportFolders "Allow exporting folder items">
 <!ENTITY sb.button.customize "Personnaliser">
 <!ENTITY sb.button.browse "Parcourir">
 <!ENTITY sb.button.show "Afficher les fichiers">

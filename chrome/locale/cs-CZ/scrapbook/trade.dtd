@@ -3,3 +3,4 @@
 <!ENTITY sb.trade.time "Vyexportováno dne">
 <!ENTITY sb.trade.restore "Při importu zároveň obnovit strukturu složky">
 <!ENTITY sb.trade.remove "Po dokončení importu odstranit původní soubory">
+<!ENTITY sb.trade.exportFolder "Export folder items">

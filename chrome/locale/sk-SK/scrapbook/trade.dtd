@@ -3,3 +3,4 @@
 <!ENTITY sb.trade.time "Čas exportovania">
 <!ENTITY sb.trade.restore "Importovať so štruktúrou obnoveného priečinka">
 <!ENTITY sb.trade.remove "Po importovaní odstrániť súbory">
+<!ENTITY sb.trade.exportFolder "Export folder items">
