@@ -1,6 +1,7 @@
 <!ENTITY sb.trade.import "İçe Aktar">
 <!ENTITY sb.trade.export "Dışa Aktar">
 <!ENTITY sb.trade.time "Dışarı Aktarılma Zamanı">
+<!ENTITY sb.trade.update "Import as latest ScrapBook X format">
 <!ENTITY sb.trade.restore "Klasör yapısını geri yükleyerek içe aktar">
 <!ENTITY sb.trade.remove "İçe aktardıktan sonra dosyaları kaldır">
 <!ENTITY sb.trade.exportFolder "Export folder items">

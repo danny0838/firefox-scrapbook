@@ -529,6 +529,12 @@ var sbImportService = {
 		if ( window.top.sbDataSource.exists(item.id) ) throw sbCommonUtils.lang("trade", "ERROR_SAME_ID_EXISTS");
 		var destDir = sbTradeService.leftDir.clone();
 		if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) ) item.icon = "resource://scrapbook/data/" + item.id + "/" + item.icon;
+		if ( document.getElementById("sbTradeOptionUpdate").checked ) {
+			// generate create and modify if none
+			// older version (<= ScrapBook X 1.12.0a10) do not have these records
+			if (!item.create) item.create = item.id;
+			if (!item.modify) item.modify = item.create;
+		}
 		if ( item.type == "folder" || item.type == "bookmark" || item.type == "separator" )
 		{
 			if ( document.getElementById("sbTradeOptionRemove").checked ) sbCommonUtils.removeDirSafety(srcDir, false);

@@ -1,6 +1,7 @@
 <!ENTITY sb.trade.import "匯入">
 <!ENTITY sb.trade.export "匯出">
 <!ENTITY sb.trade.time "匯出時間">
+<!ENTITY sb.trade.update "匯入為最新版 ScrapBook X 格式">
 <!ENTITY sb.trade.restore "匯入並重製資料夾結構">
 <!ENTITY sb.trade.remove "匯入後移除檔案">
 <!ENTITY sb.trade.exportFolder "匯出資料夾項目">
