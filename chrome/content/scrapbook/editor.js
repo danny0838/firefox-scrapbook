@@ -1315,6 +1315,11 @@ var sbHtmlEditor = {
 			}
 			var children = node.childNodes;
 			var pos = 0;
+			// in this case childOffset means the child is the nth child node of the node
+			if (node === child) {
+				child = node.childNodes[childOffset];
+				childOffset = 0;
+			}
 			for (var i = 0; i< children.length; i++) {
 				if (children[i] === child) {
 					pos += childOffset;
