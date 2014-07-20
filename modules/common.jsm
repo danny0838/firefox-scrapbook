@@ -66,6 +66,10 @@ var sbCommonUtils = {
 		delete this._fxVer4;
 		return this._fxVer4 = (this.checkFirefoxVersion("4.0") >=0);
 	},
+	get _fxVer9() {
+		delete this._fxVer9;
+		return this._fxVer9 = (this.checkFirefoxVersion("9.0") >=0);
+	},
 	get _fxVer11() {
 		delete this._fxVer11;
 		return this._fxVer11 = (this.checkFirefoxVersion("11.0") >=0);
@@ -766,6 +770,17 @@ var sbCommonUtils = {
 		}
 		tag += ">" + br;
 		return tag + aNode.innerHTML + "</" + aNode.nodeName.toLowerCase() + ">" + br;
+	},
+
+	isContaining : function(aNode, aOtherNode)
+	{
+		if (this._fxVer9) return aNode.contains(aOtherNode);
+		var tmpNode = aOtherNode;
+		while (tmpNode) {
+			if (aNode === tmpNode) return true;
+			tmpNode = tmpNode.parentNode;
+		}
+		return false;
 	},
 
 	/**

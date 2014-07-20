@@ -1261,7 +1261,13 @@ var sbHtmlEditor = {
 	{
 		var sel = aDoc.defaultView.getSelection();
 		var collapsed = sel.isCollapsed;
-		var data = {value:""};
+		var data = {
+			preTag: "",
+			preContext: "",
+			value: "",
+			postContext: "",
+			postTag: ""
+		};
 		if (!collapsed) {
 			// backup original selection ranges
 			var ranges = [];
@@ -1269,30 +1275,31 @@ var sbHtmlEditor = {
 				ranges.push(sel.getRangeAt(i))
 			}
 			// get selection area to edit
-			if (sbCommonUtils.getPref("edit.extendSourceEdit", true)) {
-				// reset selection to the common ancestor container of the first range
-				var node = ranges[0].commonAncestorContainer;
-				if (node.nodeName == "#text") node = node.parentNode;
-				var range = aDoc.createRange();
-				range.selectNodeContents(node);
-				sel.removeAllRanges();
-				sel.addRange(range);			
-				// set data
-				data.value = node.innerHTML;
-			}
-			else {
-				// reset selection to the first range
-				sel.removeAllRanges();
-				sel.addRange(ranges[0]);
-				// set data
-				data.value = sbPageEditor.getSelectionHTML(sel);
-			}
+			var range = ranges[0];
+			var ac = range.commonAncestorContainer;
+			if (ac.nodeName == "#text") ac = ac.parentNode;
+			var source = sbCommonUtils.getOuterHTML(ac);
+			var source_inner = ac.innerHTML;
+			var istart = source.lastIndexOf(source_inner);
+			var start = getPosition(ac, range.startContainer, range.startOffset);
+			var end = getPosition(ac, range.endContainer, range.endOffset);
+			var iend = istart + source_inner.length;
+			data.preTag = source.substring(0, istart);
+			data.preContext = source.substring(istart, start);
+			data.value = source.substring(start, end);
+			data.postContext = source.substring(end, iend);
+			data.postTag = source.substring(iend);
+			// reset selection to the common ancestor container of the first range
+			var range = aDoc.createRange();
+			range.selectNodeContents(ac);
+			sel.removeAllRanges();
+			sel.addRange(range);
 		}
 		// prompt the dialog for user input
 		window.top.openDialog("chrome://scrapbook/content/editor_source.xul", "ScrapBook:EditSource", "chrome,modal,centerscreen,resizable", data);
 		// accepted, do the modify
 		if (data.result) {
-			aDoc.execCommand("insertHTML", false, data.value);
+			aDoc.execCommand("insertHTML", false, data.preContext + data.value + data.postContext);
 		}
 		// cancled, restore the original selection if previously modified
 		else if (!collapsed) {
@@ -1300,6 +1307,31 @@ var sbHtmlEditor = {
 			for (var i=0, len=ranges.length; i<len; i++) {
 				sel.addRange(ranges[i]);
 			}
+		}
+
+		function getPosition(node, child, childOffset) {
+			if (!sbCommonUtils.isContaining(node, child)) {
+				return -1;
+			}
+			var children = node.childNodes;
+			var pos = 0;
+			for (var i = 0; i< children.length; i++) {
+				if (children[i] === child) {
+					pos += childOffset;
+					break;
+				} else if (sbCommonUtils.isContaining(children[i], child)) {
+					pos += getPosition(children[i], child, childOffset);
+					break;
+				} else if (children[i].nodeName === "#text") {
+					pos += children[i].textContent.length;
+				} else {
+					pos += sbCommonUtils.getOuterHTML(children[i]).length;
+				}
+			}
+			if (node.nodeName !== "#text") {
+				pos += sbCommonUtils.getOuterHTML(node).lastIndexOf(node.innerHTML);
+			}
+			return pos;
 		}
 	},
 
