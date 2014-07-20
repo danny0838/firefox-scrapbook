@@ -1289,16 +1289,21 @@ var sbHtmlEditor = {
 			data.value = source.substring(start, end);
 			data.postContext = source.substring(end, iend);
 			data.postTag = source.substring(iend);
-			// reset selection to the common ancestor container of the first range
-			var range = aDoc.createRange();
-			range.selectNodeContents(ac);
+			// reset selection to the first range
 			sel.removeAllRanges();
-			sel.addRange(range);
+			sel.addRange(ranges[0]);
 		}
 		// prompt the dialog for user input
 		window.top.openDialog("chrome://scrapbook/content/editor_source.xul", "ScrapBook:EditSource", "chrome,modal,centerscreen,resizable", data);
 		// accepted, do the modify
 		if (data.result) {
+			if (!collapsed) {
+				// reset selection to the common ancestor container of the first range
+				var range = aDoc.createRange();
+				range.selectNodeContents(ac);
+				sel.removeAllRanges();
+				sel.addRange(range);
+			}
 			aDoc.execCommand("insertHTML", false, data.preContext + data.value + data.postContext);
 		}
 		// cancled, restore the original selection if previously modified
