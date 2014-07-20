@@ -1281,8 +1281,8 @@ var sbHtmlEditor = {
 			var source = sbCommonUtils.getOuterHTML(ac);
 			var source_inner = ac.innerHTML;
 			var istart = source.lastIndexOf(source_inner);
-			var start = getPosition(ac, range.startContainer, range.startOffset);
-			var end = getPosition(ac, range.endContainer, range.endOffset);
+			var start = getPosition(ac, range.startContainer, textToHtmlOffset(range.startContainer, range.startOffset));
+			var end = getPosition(ac, range.endContainer, textToHtmlOffset(range.endContainer, range.endOffset));
 			var iend = istart + source_inner.length;
 			data.preTag = source.substring(0, istart);
 			data.preContext = source.substring(istart, start);
@@ -1323,7 +1323,7 @@ var sbHtmlEditor = {
 					pos += getPosition(children[i], child, childOffset);
 					break;
 				} else if (children[i].nodeName === "#text") {
-					pos += children[i].textContent.length;
+					pos += textToHtmlOffset(children[i], children[i].textContent.length);
 				} else {
 					pos += sbCommonUtils.getOuterHTML(children[i]).length;
 				}
@@ -1332,6 +1332,14 @@ var sbHtmlEditor = {
 				pos += sbCommonUtils.getOuterHTML(node).lastIndexOf(node.innerHTML);
 			}
 			return pos;
+		}
+
+		function textToHtmlOffset(node, offset) {
+			if (node.nodeName !== "#text") return offset;
+			var span = node.ownerDocument.createElement("SPAN");
+			var text = node.ownerDocument.createTextNode(node.textContent.substring(0, offset));
+			span.appendChild(text);
+			return span.innerHTML.length;
 		}
 	},
 
