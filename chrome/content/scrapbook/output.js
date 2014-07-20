@@ -199,7 +199,7 @@ var sbOutputService = {
 		var ret;
 		switch (type) {
 			case "separator": 
-				ret = '<hr>\n';
+				ret = title + ' ----------------------------------------';
 				break;
 			case "folder": 
 				ret = '<a class="folder" href="javascript:toggle(\'folder-' + id + '\');">'
