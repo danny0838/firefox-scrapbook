@@ -1281,8 +1281,8 @@ var sbHtmlEditor = {
 			var source = sbCommonUtils.getOuterHTML(ac);
 			var source_inner = ac.innerHTML;
 			var istart = source.lastIndexOf(source_inner);
-			var start = getSourceOffset(ac, range.startContainer, textToHtmlOffset(range.startContainer, range.startOffset));
-			var end = getSourceOffset(ac, range.endContainer, textToHtmlOffset(range.endContainer, range.endOffset));
+			var start = getSourceOffset(ac, range.startContainer, range.startOffset);
+			var end = getSourceOffset(ac, range.endContainer, range.endOffset);
 			var iend = istart + source_inner.length;
 			data.preTag = source.substring(0, istart);
 			data.preContext = source.substring(istart, start);
@@ -1322,23 +1322,25 @@ var sbHtmlEditor = {
 				child = node.childNodes[childOffset];
 				childOffset = 0;
 			}
+			if (node.nodeName !== "#text") {
+				pos += sbCommonUtils.getOuterHTML(node).lastIndexOf(node.innerHTML);
+			}
 			for (var i = 0; i< children.length; i++) {
 				if (children[i] === child) {
-					pos += childOffset;
-					break;
-				} else if (sbCommonUtils.isContaining(children[i], child)) {
-					pos += getSourceOffset(children[i], child, childOffset);
+					if (child.nodeName === "#text") {
+						pos += textToHtmlOffset(child, childOffset);
+					}
 					break;
 				} else if (children[i].nodeName === "#text") {
 					pos += textToHtmlOffset(children[i], children[i].textContent.length);
 				} else if (children[i].nodeName === "#comment") {
 					pos += ("<!--" + children[i].textContent + "-->").length;
+				} else if (sbCommonUtils.isContaining(children[i], child)) {
+					pos += getSourceOffset(children[i], child, childOffset);
+					break;
 				} else {
 					pos += sbCommonUtils.getOuterHTML(children[i]).length;
 				}
-			}
-			if (node.nodeName !== "#text") {
-				pos += sbCommonUtils.getOuterHTML(node).lastIndexOf(node.innerHTML);
 			}
 			return pos;
 		}
