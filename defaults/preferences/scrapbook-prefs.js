@@ -15,7 +15,6 @@ pref("extensions.scrapbook.tabs.note", false);
 pref("extensions.scrapbook.data.default", true);
 pref("extensions.scrapbook.data.path", "");
 pref("extensions.scrapbook.multibook.enabled", false);
-pref("extensions.scrapbook.edit.extendSourceEdit", true);
 pref("extensions.scrapbook.edit.autoEditNoteX", true);
 pref("extensions.scrapbook.edit.insertDateFormat", "%Y-%m-%d %H:%M:%S");
 pref("extensions.scrapbook.fileViewer.default", true);

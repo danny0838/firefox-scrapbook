@@ -17,7 +17,6 @@
 <!ENTITY sb.prefs.restart "Muutokset saatetaan voimaan, kun Firefox käynnistetään uudelleen.">
 <!ENTITY sb.prefs.tabs.tips "Avaa välilehtiin seuraavilla toiminnoilla">
 <!ENTITY sb.prefs.tabs.note "Muokkaa muistilappua">
-<!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
 <!ENTITY sbx.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format">

@@ -141,7 +141,6 @@
 
 	<prefpane id="editPane" label="&sb.prefs.edit;" flex="1">
 		<preferences>
-			<preference id="extensions.scrapbook.edit.extendSourceEdit" name="extensions.scrapbook.edit.extendSourceEdit" type="bool" />
 			<preference id="extensions.scrapbook.edit.autoEditNoteX" name="extensions.scrapbook.edit.autoEditNoteX" type="bool" />
 			<preference id="extensions.scrapbook.edit.insertDateFormat" name="extensions.scrapbook.edit.insertDateFormat" type="string" />
 			<preference id="extensions.scrapbook.edit.wrapperFormat.1" name="extensions.scrapbook.edit.wrapperFormat.1" type="string" />
@@ -208,7 +207,6 @@
 			</hbox>
 		</groupbox>
 		<spacer height="10" />
-		<checkbox preference="extensions.scrapbook.edit.extendSourceEdit" label="&sbx.prefs.edit.extendSourceEdit;" />
 		<checkbox preference="extensions.scrapbook.edit.autoEditNoteX" label="&sbx.prefs.edit.autoEditNoteX;" />
 		<hbox>
 			<label value="&sbx.prefs.edit.insertDateFormat;" />
