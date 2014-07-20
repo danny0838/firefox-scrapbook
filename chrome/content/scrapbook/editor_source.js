@@ -8,6 +8,12 @@ function init() {
 	document.getElementById('sbSourceValue').value = gData.value;
 	document.getElementById('sbSourcePostContext').value = gData.postContext;
 	document.getElementById('sbSourcePostTag').value = gData.postTag;
+
+	if (!gData.preTag) document.getElementById('sbSourcePreTag').hidden = true;
+	if (!gData.preContext) document.getElementById('sbSourcePreContext').hidden = true;
+	if (!gData.postContext) document.getElementById('sbSourcePostContext').hidden = true;
+	if (!gData.postTag) document.getElementById('sbSourcePostTag').hidden = true;
+
 	document.getElementById('sbSourceValue').select();
 }
 
