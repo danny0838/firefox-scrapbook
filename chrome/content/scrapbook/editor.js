@@ -1281,8 +1281,8 @@ var sbHtmlEditor = {
 			var source = sbCommonUtils.getOuterHTML(ac);
 			var source_inner = ac.innerHTML;
 			var istart = source.lastIndexOf(source_inner);
-			var start = getPosition(ac, range.startContainer, textToHtmlOffset(range.startContainer, range.startOffset));
-			var end = getPosition(ac, range.endContainer, textToHtmlOffset(range.endContainer, range.endOffset));
+			var start = getSourceOffset(ac, range.startContainer, textToHtmlOffset(range.startContainer, range.startOffset));
+			var end = getSourceOffset(ac, range.endContainer, textToHtmlOffset(range.endContainer, range.endOffset));
 			var iend = istart + source_inner.length;
 			data.preTag = source.substring(0, istart);
 			data.preContext = source.substring(istart, start);
@@ -1314,7 +1314,7 @@ var sbHtmlEditor = {
 			}
 		}
 
-		function getPosition(node, child, childOffset) {
+		function getSourceOffset(node, child, childOffset) {
 			if (!sbCommonUtils.isContaining(node, child)) {
 				return -1;
 			}
@@ -1330,7 +1330,7 @@ var sbHtmlEditor = {
 					pos += childOffset;
 					break;
 				} else if (sbCommonUtils.isContaining(children[i], child)) {
-					pos += getPosition(children[i], child, childOffset);
+					pos += getSourceOffset(children[i], child, childOffset);
 					break;
 				} else if (children[i].nodeName === "#text") {
 					pos += textToHtmlOffset(children[i], children[i].textContent.length);
