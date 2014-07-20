@@ -1315,9 +1315,6 @@ var sbHtmlEditor = {
 		}
 
 		function getSourceOffset(node, child, childOffset) {
-			if (!sbCommonUtils.isContaining(node, child)) {
-				return -1;
-			}
 			var children = node.childNodes;
 			var pos = 0;
 			// in this case childOffset means the child is the nth child node of the node
