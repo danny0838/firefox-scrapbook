@@ -1350,7 +1350,7 @@ var sbHtmlEditor = {
 		}
 
 		function textToHtmlOffset(node, offset) {
-			if (node.nodeName !== "#text") return offset;
+			// if (node.nodeName !== "#text") return offset;
 			var span = node.ownerDocument.createElement("SPAN");
 			var text = node.ownerDocument.createTextNode(node.textContent.substring(0, offset));
 			span.appendChild(text);
