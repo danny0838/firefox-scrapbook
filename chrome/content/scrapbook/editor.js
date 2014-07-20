@@ -1331,14 +1331,18 @@ var sbHtmlEditor = {
 						pos += textToHtmlOffset(child, childOffset);
 					}
 					break;
-				} else if (children[i].nodeName === "#text") {
+				}
+				else if (children[i].nodeName === "#text") {
 					pos += textToHtmlOffset(children[i], children[i].textContent.length);
-				} else if (children[i].nodeName === "#comment") {
+				}
+				else if (children[i].nodeName === "#comment") {
 					pos += ("<!--" + children[i].textContent + "-->").length;
-				} else if (sbCommonUtils.isContaining(children[i], child)) {
+				}
+				else if (sbCommonUtils.isContaining(children[i], child)) {
 					pos += getSourceOffset(children[i], child, childOffset);
 					break;
-				} else {
+				}
+				else {
 					pos += sbCommonUtils.getOuterHTML(children[i]).length;
 				}
 			}
