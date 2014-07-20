@@ -1334,6 +1334,8 @@ var sbHtmlEditor = {
 					break;
 				} else if (children[i].nodeName === "#text") {
 					pos += textToHtmlOffset(children[i], children[i].textContent.length);
+				} else if (children[i].nodeName === "#comment") {
+					pos += ("<!--" + children[i].textContent + "-->").length;
 				} else {
 					pos += sbCommonUtils.getOuterHTML(children[i]).length;
 				}
