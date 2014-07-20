@@ -14,6 +14,7 @@ function init() {
 	if (!gData.postContext) document.getElementById('sbSourcePostContext').hidden = true;
 	if (!gData.postTag) document.getElementById('sbSourcePostTag').hidden = true;
 
+	document.getElementById('sbSourcePreContext').select();  // scroll to the end
 	document.getElementById('sbSourceValue').select();
 }
 
