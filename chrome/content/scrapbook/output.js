@@ -190,12 +190,15 @@ var sbOutputService = {
 	getHTMLBody : function(aRes)
 	{
 		var id    = sbDataSource.getProperty(aRes, "id");
-		var title = sbDataSource.getProperty(aRes, "title");
-		var icon  = sbDataSource.getProperty(aRes, "icon");
 		var type  = sbDataSource.getProperty(aRes, "type");
+		var icon  = sbDataSource.getProperty(aRes, "icon");
+		var title = sbDataSource.getProperty(aRes, "title");
+		var source = sbDataSource.getProperty(aRes, "source");
 		if ( icon.match(/(\/data\/\d{14}\/.*$)/) ) icon = ".." + RegExp.$1;
-		if ( !icon ) icon = sbCommonUtils.getFileName( sbCommonUtils.getDefaultIcon(type) );
+		if ( !icon ) icon = sbCommonUtils.escapeFileName(sbCommonUtils.getFileName( sbCommonUtils.getDefaultIcon(type) ));
+		icon = sbCommonUtils.escapeHTML(icon);
 		title = sbCommonUtils.escapeHTML(title);
+		source = sbCommonUtils.escapeHTML(source);
 		var ret;
 		switch (type) {
 			case "separator": 
@@ -205,13 +208,15 @@ var sbOutputService = {
 				ret = '<a class="folder" href="javascript:toggle(\'folder-' + id + '\');" title="' + title + '">'
 				    + '<img src="./folder.png" width="16" height="16" alt="">' + title + '</a>\n';
 				break;
+			case "bookmark": 
+				ret = '<a href="' + source + '" target="_blank" class="' + type + '" title="' + title + '">'
+				    + '<img src="' + icon + '" width="16" height="16" alt="">' + title + '</a>';
+				break;
 			default: 
-				var href = (type == "bookmark") ? 
-				           sbDataSource.getProperty(aRes, "source") : 
-				           "../data/" + id + "/index.html";
+				var href = sbCommonUtils.escapeHTML("../data/" + id + "/index.html");
 				var target = this.optionFrame ? ' target="main"' : "";
 				ret = '<a href="' + href + '"' + target + ' class="' + type + '" title="' + title + '">'
-				    + '<img src="' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(icon)) + '" width="16" height="16" alt="">' + title + '</a>';
+				    + '<img src="' + icon + '" width="16" height="16" alt="">' + title + '</a>';
 				break;
 		}
 		return ret;
