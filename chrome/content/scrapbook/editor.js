@@ -1314,34 +1314,46 @@ var sbHtmlEditor = {
 			}
 		}
 
+		// aDescNode must be a descendent of aNode
 		function getOffsetInSource(aNode, aDescNode, aDescOffset) {
-			// in this case aDescOffset means the real desc node is the nth child of aDescNode
-			if (aNode === aDescNode) {
-				aDescNode = aNode.childNodes[aDescOffset];
-				aDescOffset = 0;
+			var pos = 0;
+			switch (aDescNode.nodeName) {
+				case "#text":
+					pos += textToHtmlOffset(aDescNode, aDescOffset);
+					break;
+				case "#comment":
+					pos += ("<!--").length + aDescOffset;
+					break;
+				case "#cdata-section":
+					pos += ("<![CDATA[").length + aDescOffset;
+					break;
+				default:
+					// in this case aDescOffset means the real desc node is the nth child of aDescNode
+					aDescNode = aDescNode.childNodes[aDescOffset];
+					break;
 			}
-			var children = aNode.childNodes;
-			var pos = sbCommonUtils.getOuterHTML(aNode).lastIndexOf(aNode.innerHTML);
-			for (var i = 0; i< children.length; i++) {
-				if (children[i] === aDescNode) {
-					if (aDescNode.nodeName === "#text") {
-						pos += textToHtmlOffset(aDescNode, aDescOffset);
+			var tmpParent = aDescNode;
+			while (tmpParent && tmpParent !== aNode) {
+				var tmpSibling = tmpParent.previousSibling;
+				while (tmpSibling) {
+					switch (tmpSibling.nodeName) {
+						case "#text":
+							pos += textToHtmlOffset(tmpSibling);
+							break;
+						case "#comment":
+							pos += ("<!--" + tmpSibling.textContent + "-->").length;
+							break;
+						case "#cdata-section":
+							pos += ("<![CDATA[" + tmpSibling.textContent + "]]>").length;
+							break;
+						default:
+							pos += sbCommonUtils.getOuterHTML(tmpSibling).length;
+							break;
 					}
-					break;
+					tmpSibling = tmpSibling.previousSibling;
 				}
-				else if (children[i].nodeName === "#text") {
-					pos += textToHtmlOffset(children[i]);
-				}
-				else if (children[i].nodeName === "#comment") {
-					pos += ("<!--" + children[i].textContent + "-->").length;
-				}
-				else if (sbCommonUtils.isContaining(children[i], aDescNode)) {
-					pos += getOffsetInSource(children[i], aDescNode, aDescOffset);
-					break;
-				}
-				else {
-					pos += sbCommonUtils.getOuterHTML(children[i]).length;
-				}
+				tmpParent = tmpParent.parentNode;
+				pos += sbCommonUtils.getOuterHTML(tmpParent).lastIndexOf(tmpParent.innerHTML);
 			}
 			return pos;
 		}

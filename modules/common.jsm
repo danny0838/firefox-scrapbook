@@ -772,17 +772,6 @@ var sbCommonUtils = {
 		return tag + aNode.innerHTML + "</" + aNode.nodeName.toLowerCase() + ">" + br;
 	},
 
-	isContaining : function(aNode, aOtherNode)
-	{
-		if (this._fxVer9) return aNode.contains(aOtherNode);
-		var tmpNode = aOtherNode;
-		while (tmpNode) {
-			if (aNode === tmpNode) return true;
-			tmpNode = tmpNode.parentNode;
-		}
-		return false;
-	},
-
 	/**
 	 * DOM elements considered as ScrapBook additional
 	 *
