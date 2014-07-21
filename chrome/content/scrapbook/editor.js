@@ -1281,8 +1281,8 @@ var sbHtmlEditor = {
 			var source = sbCommonUtils.getOuterHTML(ac);
 			var source_inner = ac.innerHTML;
 			var istart = source.lastIndexOf(source_inner);
-			var start = getSourceOffset(ac, range.startContainer, range.startOffset);
-			var end = getSourceOffset(ac, range.endContainer, range.endOffset);
+			var start = getOffsetInSource(ac, range.startContainer, range.startOffset);
+			var end = getOffsetInSource(ac, range.endContainer, range.endOffset);
 			var iend = istart + source_inner.length;
 			data.preTag = source.substring(0, istart);
 			data.preContext = source.substring(istart, start);
@@ -1314,7 +1314,7 @@ var sbHtmlEditor = {
 			}
 		}
 
-		function getSourceOffset(aNode, aDescNode, aDescOffset) {
+		function getOffsetInSource(aNode, aDescNode, aDescOffset) {
 			// in this case aDescOffset means the real desc node is the nth child of aDescNode
 			if (aNode === aDescNode) {
 				aDescNode = aNode.childNodes[aDescOffset];
@@ -1336,7 +1336,7 @@ var sbHtmlEditor = {
 					pos += ("<!--" + children[i].textContent + "-->").length;
 				}
 				else if (sbCommonUtils.isContaining(children[i], aDescNode)) {
-					pos += getSourceOffset(children[i], aDescNode, aDescOffset);
+					pos += getOffsetInSource(children[i], aDescNode, aDescOffset);
 					break;
 				}
 				else {
