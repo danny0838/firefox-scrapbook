@@ -102,8 +102,8 @@ var sbPageEditor = {
 		document.getElementById("ScrapBookEditAnnotation").firstChild.childNodes[1].disabled = (aID == null);
 		document.getElementById("ScrapBookEditAnnotation").firstChild.childNodes[2].disabled = (aID == null);
 		// -- refresh the toolbar
-		if ( aID && this.item.lock == "true" ) {
-			// locked items cannot be edited, simply show a disabled toolbar
+		if ( aID && (this.item.lock == "true" || sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec).leafName.match(/^\./)) ) {
+			// locked items and hidden (history) HTML pages cannot be edited, simply show a disabled toolbar
 			// sbDOMEraser.init(0);  // included in disable(true)
 			sbHtmlEditor.init(null, 0);
 			this.disable(true);
@@ -129,7 +129,7 @@ var sbPageEditor = {
 					sbPageEditor.documentBeforeEdit(doc);
 				}, this);
 			}, this);
-			if (this.item && this.item.lock != "true" && this.item.type == "notex" && sbCommonUtils.getPref("edit.autoEditNoteX", true)) {
+			if (this.enabled && this.item && this.item.lock != "true" && this.item.type == "notex" && sbCommonUtils.getPref("edit.autoEditNoteX", true)) {
 				this.documentLoad(window.content.document, function(doc){
 					// check document type and make sure it's a file
 					if (doc.contentType != "text/html") return;
@@ -1080,7 +1080,7 @@ var sbHtmlEditor = {
 			var url = RegExp.$1;
 		}
 		// prompt the dialog for user input
-		var data = { url: url };
+		var data = { url: url, filename: htmlFile.leafName };
 		var accepted = window.top.openDialog("chrome://scrapbook/content/editor_file.xul", "ScrapBook:AttachFile", "chrome,modal,centerscreen,resizable", data);
 		if (data.result != 1) return;
 		// insert file ?
@@ -1169,6 +1169,25 @@ var sbHtmlEditor = {
 					/{([\w_]+)}/g
 				);
 				aDoc.execCommand("insertHTML", false, html);
+			}
+		}
+		// insert hist html ?
+		else if (data.hist_html_use) {
+			var title = data.hist_html;
+			var filename = "." + sbCommonUtils.splitFileName(htmlFile.leafName)[0] + "." + sbCommonUtils.getTimeStamp() + (title ? " " + title : "") + ".html";
+			var filename2 = sbCommonUtils.validateFileName(filename);
+			try {
+				var destFile = htmlFile.parent.clone();
+				destFile.append(filename2);
+				if ( destFile.exists() && destFile.isFile() ) {
+					if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [filename2])) ) return;
+					destFile.remove(false);
+				}
+				// copy the page
+				htmlFile.copyTo(destFile.parent, filename2);
+			} catch(ex) {
+				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename2]));
+				return;
 			}
 		}
 	},

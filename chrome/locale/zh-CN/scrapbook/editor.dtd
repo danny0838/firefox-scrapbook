@@ -23,6 +23,7 @@
 <!ENTITY sb.edit.html.file "插入文件">
 <!ENTITY sb.edit.html.file.pick "插入文件:">
 <!ENTITY sb.edit.html.file.html "插入子页面:">
+<!ENTITY sb.edit.html.file.histHtml "备分当前页面:">
 <!ENTITY sb.edit.html.file.format "指定插入格式:">
 <!ENTITY sb.edit.cutter "删除所选内容">
 <!ENTITY sb.edit.remove.iframe "删除所有 IFRAME 标签">
