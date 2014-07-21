@@ -1330,7 +1330,7 @@ var sbHtmlEditor = {
 					break;
 				}
 				else if (children[i].nodeName === "#text") {
-					pos += textToHtmlOffset(children[i], children[i].textContent.length);
+					pos += textToHtmlOffset(children[i]);
 				}
 				else if (children[i].nodeName === "#comment") {
 					pos += ("<!--" + children[i].textContent + "-->").length;
@@ -1348,9 +1348,9 @@ var sbHtmlEditor = {
 
 		function textToHtmlOffset(aNode, aOffset) {
 			// if (aNode.nodeName !== "#text") return aOffset;
+			var content = (typeof aOffset == "undefined") ? aNode.textContent : aNode.textContent.substring(0, aOffset);
 			var span = aNode.ownerDocument.createElement("SPAN");
-			var text = aNode.ownerDocument.createTextNode(aNode.textContent.substring(0, aOffset));
-			span.appendChild(text);
+			span.appendChild(aNode.ownerDocument.createTextNode(content));
 			return span.innerHTML.length;
 		}
 	},
