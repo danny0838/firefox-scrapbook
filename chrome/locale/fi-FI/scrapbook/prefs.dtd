@@ -17,7 +17,6 @@
 <!ENTITY sb.prefs.restart "Muutokset saatetaan voimaan, kun Firefox käynnistetään uudelleen.">
 <!ENTITY sb.prefs.tabs.tips "Avaa välilehtiin seuraavilla toiminnoilla">
 <!ENTITY sb.prefs.tabs.note "Muokkaa muistilappua">
-<!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
 <!ENTITY sbx.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format">
@@ -34,7 +33,6 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "kansion alimmaksi merkinnäksi">
 <!ENTITY sb.prefs.showDetailOnDrop "Näytä Tallennuksen tiedot -ikkuna kun sivu tallennetaan vetämällä sivupaneeliin">
 <!ENTITY sb.prefs.notifyOnComplete "Näytä Tallennus valmis -huomautus">
-<!ENTITY sb.prefs.exportFolders "Allow exporting folder items">
 <!ENTITY sb.button.customize "Muokkaa">
 <!ENTITY sb.button.browse "Selaa">
 <!ENTITY sb.button.show "Näytä tiedostot">

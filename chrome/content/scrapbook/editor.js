@@ -102,8 +102,8 @@ var sbPageEditor = {
 		document.getElementById("ScrapBookEditAnnotation").firstChild.childNodes[1].disabled = (aID == null);
 		document.getElementById("ScrapBookEditAnnotation").firstChild.childNodes[2].disabled = (aID == null);
 		// -- refresh the toolbar
-		if ( aID && this.item.lock == "true" ) {
-			// locked items cannot be edited, simply show a disabled toolbar
+		if ( aID && (this.item.lock == "true" || sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec).leafName.match(/^\./)) ) {
+			// locked items and hidden (history) HTML pages cannot be edited, simply show a disabled toolbar
 			// sbDOMEraser.init(0);  // included in disable(true)
 			sbHtmlEditor.init(null, 0);
 			this.disable(true);
@@ -129,7 +129,7 @@ var sbPageEditor = {
 					sbPageEditor.documentBeforeEdit(doc);
 				}, this);
 			}, this);
-			if (this.item && this.item.lock != "true" && this.item.type == "notex" && sbCommonUtils.getPref("edit.autoEditNoteX", true)) {
+			if (this.enabled && this.item && this.item.lock != "true" && this.item.type == "notex" && sbCommonUtils.getPref("edit.autoEditNoteX", true)) {
 				this.documentLoad(window.content.document, function(doc){
 					// check document type and make sure it's a file
 					if (doc.contentType != "text/html") return;
@@ -672,7 +672,7 @@ var sbHtmlEditor = {
 		"Alt+4" : "formatblock_h4",
 		"Alt+5" : "formatblock_h5",
 		"Alt+6" : "formatblock_h6",
-		"Alt+7" : "formatblock_blockquote",
+		"Alt+7" : "formatblock_div",
 		"Alt+8" : "formatblock_pre",
 
 		"Alt+U" : "insertUnorderedList",
@@ -917,9 +917,9 @@ var sbHtmlEditor = {
 		aDoc.execCommand("formatblock", false, "h6");
 	},
 
-	formatblock_blockquote : function(aDoc)
+	formatblock_div : function(aDoc)
 	{
-		aDoc.execCommand("formatblock", false, "blockquote");
+		aDoc.execCommand("formatblock", false, "div");
 	},
 
 	formatblock_pre : function(aDoc)
@@ -1080,7 +1080,7 @@ var sbHtmlEditor = {
 			var url = RegExp.$1;
 		}
 		// prompt the dialog for user input
-		var data = { url: url };
+		var data = { url: url, filename: htmlFile.leafName };
 		var accepted = window.top.openDialog("chrome://scrapbook/content/editor_file.xul", "ScrapBook:AttachFile", "chrome,modal,centerscreen,resizable", data);
 		if (data.result != 1) return;
 		// insert file ?
@@ -1158,7 +1158,7 @@ var sbHtmlEditor = {
 				return;
 			}
 			// insert to the document
-			if (data.format) {
+			if (data.insert && data.format) {
 				var html = sbCommonUtils.stringTemplate(
 					data.format,
 					{
@@ -1169,6 +1169,25 @@ var sbHtmlEditor = {
 					/{([\w_]+)}/g
 				);
 				aDoc.execCommand("insertHTML", false, html);
+			}
+		}
+		// insert hist html ?
+		else if (data.hist_html_use) {
+			var title = data.hist_html;
+			var filename = "." + sbCommonUtils.splitFileName(htmlFile.leafName)[0] + "." + sbCommonUtils.getTimeStamp() + (title ? " " + title : "") + ".html";
+			var filename2 = sbCommonUtils.validateFileName(filename);
+			try {
+				var destFile = htmlFile.parent.clone();
+				destFile.append(filename2);
+				if ( destFile.exists() && destFile.isFile() ) {
+					if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [filename2])) ) return;
+					destFile.remove(false);
+				}
+				// copy the page
+				htmlFile.copyTo(destFile.parent, filename2);
+			} catch(ex) {
+				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename2]));
+				return;
 			}
 		}
 	},
@@ -1261,7 +1280,13 @@ var sbHtmlEditor = {
 	{
 		var sel = aDoc.defaultView.getSelection();
 		var collapsed = sel.isCollapsed;
-		var data = {value:""};
+		var data = {
+			preTag: "",
+			preContext: "",
+			value: "",
+			postContext: "",
+			postTag: ""
+		};
 		if (!collapsed) {
 			// backup original selection ranges
 			var ranges = [];
@@ -1269,30 +1294,36 @@ var sbHtmlEditor = {
 				ranges.push(sel.getRangeAt(i))
 			}
 			// get selection area to edit
-			if (sbCommonUtils.getPref("edit.extendSourceEdit", true)) {
-				// reset selection to the common ancestor container of the first range
-				var node = ranges[0].commonAncestorContainer;
-				if (node.nodeName == "#text") node = node.parentNode;
-				var range = aDoc.createRange();
-				range.selectNodeContents(node);
-				sel.removeAllRanges();
-				sel.addRange(range);			
-				// set data
-				data.value = node.innerHTML;
-			}
-			else {
-				// reset selection to the first range
-				sel.removeAllRanges();
-				sel.addRange(ranges[0]);
-				// set data
-				data.value = sbPageEditor.getSelectionHTML(sel);
-			}
+			var range = ranges[0];
+			var ac = range.commonAncestorContainer;
+			if (ac.nodeName == "#text") ac = ac.parentNode;
+			var source = sbCommonUtils.getOuterHTML(ac);
+			var source_inner = ac.innerHTML;
+			var istart = source.lastIndexOf(source_inner);
+			var start = getOffsetInSource(ac, range.startContainer, range.startOffset);
+			var end = getOffsetInSource(ac, range.endContainer, range.endOffset);
+			var iend = istart + source_inner.length;
+			data.preTag = source.substring(0, istart);
+			data.preContext = source.substring(istart, start);
+			data.value = source.substring(start, end);
+			data.postContext = source.substring(end, iend);
+			data.postTag = source.substring(iend);
+			// reset selection to the first range
+			sel.removeAllRanges();
+			sel.addRange(ranges[0]);
 		}
 		// prompt the dialog for user input
 		window.top.openDialog("chrome://scrapbook/content/editor_source.xul", "ScrapBook:EditSource", "chrome,modal,centerscreen,resizable", data);
 		// accepted, do the modify
 		if (data.result) {
-			aDoc.execCommand("insertHTML", false, data.value);
+			if (!collapsed) {
+				// reset selection to the common ancestor container of the first range
+				var range = aDoc.createRange();
+				range.selectNodeContents(ac);
+				sel.removeAllRanges();
+				sel.addRange(range);
+			}
+			aDoc.execCommand("insertHTML", false, data.preContext + data.value + data.postContext);
 		}
 		// cancled, restore the original selection if previously modified
 		else if (!collapsed) {
@@ -1300,6 +1331,58 @@ var sbHtmlEditor = {
 			for (var i=0, len=ranges.length; i<len; i++) {
 				sel.addRange(ranges[i]);
 			}
+		}
+
+		// aDescNode must be a descendent of aNode
+		function getOffsetInSource(aNode, aDescNode, aDescOffset) {
+			var pos = 0;
+			switch (aDescNode.nodeName) {
+				case "#text":
+					pos += textToHtmlOffset(aDescNode, aDescOffset);
+					break;
+				case "#comment":
+					pos += ("<!--").length + aDescOffset;
+					break;
+				case "#cdata-section":
+					pos += ("<![CDATA[").length + aDescOffset;
+					break;
+				default:
+					// in this case aDescOffset means the real desc node is the nth child of aDescNode
+					aDescNode = aDescNode.childNodes[aDescOffset];
+					break;
+			}
+			var tmpParent = aDescNode;
+			while (tmpParent && tmpParent !== aNode) {
+				var tmpSibling = tmpParent.previousSibling;
+				while (tmpSibling) {
+					switch (tmpSibling.nodeName) {
+						case "#text":
+							pos += textToHtmlOffset(tmpSibling);
+							break;
+						case "#comment":
+							pos += ("<!--" + tmpSibling.textContent + "-->").length;
+							break;
+						case "#cdata-section":
+							pos += ("<![CDATA[" + tmpSibling.textContent + "]]>").length;
+							break;
+						default:
+							pos += sbCommonUtils.getOuterHTML(tmpSibling).length;
+							break;
+					}
+					tmpSibling = tmpSibling.previousSibling;
+				}
+				tmpParent = tmpParent.parentNode;
+				pos += sbCommonUtils.getOuterHTML(tmpParent).lastIndexOf(tmpParent.innerHTML);
+			}
+			return pos;
+		}
+
+		function textToHtmlOffset(aNode, aOffset) {
+			// if (aNode.nodeName !== "#text") return aOffset;
+			var content = (typeof aOffset == "undefined") ? aNode.textContent : aNode.textContent.substring(0, aOffset);
+			var span = aNode.ownerDocument.createElement("SPAN");
+			span.appendChild(aNode.ownerDocument.createTextNode(content));
+			return span.innerHTML.length;
 		}
 	},
 

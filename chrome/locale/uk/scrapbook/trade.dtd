@@ -1,5 +1,7 @@
 <!ENTITY sb.trade.import "Імпорт">
 <!ENTITY sb.trade.export "Експорт">
 <!ENTITY sb.trade.time "Час експортування">
+<!ENTITY sb.trade.update "Import as latest ScrapBook X format">
 <!ENTITY sb.trade.restore "Імпортувати з відновленням структури тек">
 <!ENTITY sb.trade.remove "Вилучити файли після імпортування">
+<!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">

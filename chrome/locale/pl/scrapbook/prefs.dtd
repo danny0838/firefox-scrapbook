@@ -17,7 +17,6 @@
 <!ENTITY sb.prefs.restart "Zmiana wymaga ponownego uruchomienia Firefoksa">
 <!ENTITY sb.prefs.tabs.tips "Otwieraj w karcie wynik następujących poleceń">
 <!ENTITY sb.prefs.tabs.note "Edytuj notatkę">
-<!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
 <!ENTITY sbx.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format">
@@ -34,7 +33,6 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "na dole folderu">
 <!ENTITY sb.prefs.showDetailOnDrop "Wyświetlaj okno dialogowe „Szczegóły przechwytywania” podczas przechwytywania za pomocą przeciągania do panelu bocznego">
 <!ENTITY sb.prefs.notifyOnComplete "Wyświetlaj powiadomienie o zakończeniu przechwytywania">
-<!ENTITY sb.prefs.exportFolders "Allow exporting folder items">
 <!ENTITY sb.button.customize "Dostosuj">
 <!ENTITY sb.button.browse "Przeglądaj">
 <!ENTITY sb.button.show "Wyświetl pliki">

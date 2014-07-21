@@ -17,7 +17,6 @@
 <!ENTITY sb.prefs.restart "El cambio requiere reiniciar Firefox">
 <!ENTITY sb.prefs.tabs.tips "Abrir en pestañas al realizar las siguientes operaciones">
 <!ENTITY sb.prefs.tabs.note "Editar Nota">
-<!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
 <!ENTITY sbx.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format">
@@ -34,7 +33,6 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "la parte baja de una carpeta">
 <!ENTITY sb.prefs.showDetailOnDrop "Mostrar el diálogo &apos;Detalles de Captura&apos; cuando se capture mediante &apos;arrastrar y soltar&apos; en la barra lateral">
 <!ENTITY sb.prefs.notifyOnComplete "Mostrar notificación de &apos;Captura Finalizada&apos;">
-<!ENTITY sb.prefs.exportFolders "Allow exporting folder items">
 <!ENTITY sb.button.customize "Personalizar">
 <!ENTITY sb.button.browse "Buscar">
 <!ENTITY sb.button.show "Mostrar ficheros">

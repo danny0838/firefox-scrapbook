@@ -220,7 +220,7 @@ var sbTradeService = {
 		var ret = [];
 		var uriList = [];
 		var selRes = window.top.sbTreeHandler.getSelection(true, 0);
-		var filterRule = sbCommonUtils.getPref("exportFolders", false) ? 0 : 2;
+		var filterRule = document.getElementById("sbTradeOptionExportFolder").checked ? 0 : 2;
 		for ( var i = 0; i < selRes.length; i++ )
 		{
 			if ( window.top.sbDataSource.isContainer(selRes[i]) )
@@ -414,11 +414,6 @@ var sbExportService = {
 		{
 			item[prop] = window.top.sbDataSource.getProperty(aRes, prop);
 		}
-		// fix: generate create and modify if none
-		// older version (<= ScrapBook X 1.12.0a10) do not have these records
-		if (!item.create) item.create = item.id;
-		if (!item.modify) item.modify = item.create;
-		// fix end
 		item.folder = this.getFolderPath(aRes).join("\t");
 		if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) )
 		{
@@ -534,6 +529,12 @@ var sbImportService = {
 		if ( window.top.sbDataSource.exists(item.id) ) throw sbCommonUtils.lang("trade", "ERROR_SAME_ID_EXISTS");
 		var destDir = sbTradeService.leftDir.clone();
 		if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) ) item.icon = "resource://scrapbook/data/" + item.id + "/" + item.icon;
+		if ( document.getElementById("sbTradeOptionUpdate").checked ) {
+			// generate create and modify if none
+			// older version (<= ScrapBook X 1.12.0a10) do not have these records
+			if (!item.create) item.create = item.id;
+			if (!item.modify) item.modify = item.create;
+		}
 		if ( item.type == "folder" || item.type == "bookmark" || item.type == "separator" )
 		{
 			if ( document.getElementById("sbTradeOptionRemove").checked ) sbCommonUtils.removeDirSafety(srcDir, false);

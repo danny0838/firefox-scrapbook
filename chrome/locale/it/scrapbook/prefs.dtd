@@ -17,7 +17,6 @@
 <!ENTITY sb.prefs.restart "Riavviare il browser per rendere effettive le modifiche">
 <!ENTITY sb.prefs.tabs.tips "Azioni che verranno eseguite in nuove schede">
 <!ENTITY sb.prefs.tabs.note "Apri/modifica le note">
-<!ENTITY sbx.prefs.edit.extendSourceEdit "Auto extends the selection range on editing HTML source">
 <!ENTITY sbx.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format">
@@ -34,7 +33,6 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "in fondo alla cartella">
 <!ENTITY sb.prefs.showDetailOnDrop "Mostra la finestra di dialogo &apos;Dettagli cattura&apos; quando si cattura tramite trascinamento e rilascio nella barra laterale">
 <!ENTITY sb.prefs.notifyOnComplete "Mostra la finestra di notifica &apos;Cattura completata&apos;">
-<!ENTITY sb.prefs.exportFolders "Allow exporting folder items">
 <!ENTITY sb.button.customize "Personalizza">
 <!ENTITY sb.button.browse "Sfoglia">
 <!ENTITY sb.button.show "Mostra i file">
