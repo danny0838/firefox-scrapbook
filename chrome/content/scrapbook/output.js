@@ -217,6 +217,8 @@ var sbOutputService = {
 				var target = this.optionFrame ? ' target="main"' : "";
 				ret = '<a href="' + href + '"' + target + ' class="' + type + '" title="' + title + '">'
 				    + '<img src="' + icon + '" width="16" height="16" alt="">' + title + '</a>';
+				if (!source) break;
+				ret += '<sup> <a href="' + source + '" target="_blank" class="bookmark" title="Source">[S]</a></sup>';
 				break;
 		}
 		return ret;
