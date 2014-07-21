@@ -672,7 +672,7 @@ var sbHtmlEditor = {
 		"Alt+4" : "formatblock_h4",
 		"Alt+5" : "formatblock_h5",
 		"Alt+6" : "formatblock_h6",
-		"Alt+7" : "formatblock_blockquote",
+		"Alt+7" : "formatblock_div",
 		"Alt+8" : "formatblock_pre",
 
 		"Alt+U" : "insertUnorderedList",
@@ -917,9 +917,9 @@ var sbHtmlEditor = {
 		aDoc.execCommand("formatblock", false, "h6");
 	},
 
-	formatblock_blockquote : function(aDoc)
+	formatblock_div : function(aDoc)
 	{
-		aDoc.execCommand("formatblock", false, "blockquote");
+		aDoc.execCommand("formatblock", false, "div");
 	},
 
 	formatblock_pre : function(aDoc)
