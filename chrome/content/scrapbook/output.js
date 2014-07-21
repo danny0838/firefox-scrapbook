@@ -195,14 +195,14 @@ var sbOutputService = {
 		var type  = sbDataSource.getProperty(aRes, "type");
 		if ( icon.match(/(\/data\/\d{14}\/.*$)/) ) icon = ".." + RegExp.$1;
 		if ( !icon ) icon = sbCommonUtils.getFileName( sbCommonUtils.getDefaultIcon(type) );
-		title = sbCommonUtils.escapeHTML(title, true);
+		title = sbCommonUtils.escapeHTML(title);
 		var ret;
 		switch (type) {
 			case "separator": 
-				ret = title + ' ----------------------------------------';
+				ret = '<a title="' + title + '">' + title + ' ----------------------------------------' + '</a>';
 				break;
 			case "folder": 
-				ret = '<a class="folder" href="javascript:toggle(\'folder-' + id + '\');">'
+				ret = '<a class="folder" href="javascript:toggle(\'folder-' + id + '\');" title="' + title + '">'
 				    + '<img src="./folder.png" width="16" height="16" alt="">' + title + '</a>\n';
 				break;
 			default: 
@@ -210,7 +210,7 @@ var sbOutputService = {
 				           sbDataSource.getProperty(aRes, "source") : 
 				           "../data/" + id + "/index.html";
 				var target = this.optionFrame ? ' target="main"' : "";
-				ret = '<a href="' + href + '"' + target + ' class="' + type + '">'
+				ret = '<a href="' + href + '"' + target + ' class="' + type + '" title="' + title + '">'
 				    + '<img src="' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(icon)) + '" width="16" height="16" alt="">' + title + '</a>';
 				break;
 		}
