@@ -1314,18 +1314,18 @@ var sbHtmlEditor = {
 			}
 		}
 
-		function getSourceOffset(node, child, childOffset) {
-			// in this case childOffset means the child is the nth child node of the node
-			if (node === child) {
-				child = node.childNodes[childOffset];
-				childOffset = 0;
+		function getSourceOffset(aNode, aDescNode, aDescOffset) {
+			// in this case aDescOffset means the real desc node is the nth child of aDescNode
+			if (aNode === aDescNode) {
+				aDescNode = aNode.childNodes[aDescOffset];
+				aDescOffset = 0;
 			}
-			var children = node.childNodes;
-			var pos = sbCommonUtils.getOuterHTML(node).lastIndexOf(node.innerHTML);
+			var children = aNode.childNodes;
+			var pos = sbCommonUtils.getOuterHTML(aNode).lastIndexOf(aNode.innerHTML);
 			for (var i = 0; i< children.length; i++) {
-				if (children[i] === child) {
-					if (child.nodeName === "#text") {
-						pos += textToHtmlOffset(child, childOffset);
+				if (children[i] === aDescNode) {
+					if (aDescNode.nodeName === "#text") {
+						pos += textToHtmlOffset(aDescNode, aDescOffset);
 					}
 					break;
 				}
@@ -1335,8 +1335,8 @@ var sbHtmlEditor = {
 				else if (children[i].nodeName === "#comment") {
 					pos += ("<!--" + children[i].textContent + "-->").length;
 				}
-				else if (sbCommonUtils.isContaining(children[i], child)) {
-					pos += getSourceOffset(children[i], child, childOffset);
+				else if (sbCommonUtils.isContaining(children[i], aDescNode)) {
+					pos += getSourceOffset(children[i], aDescNode, aDescOffset);
 					break;
 				}
 				else {
@@ -1346,10 +1346,10 @@ var sbHtmlEditor = {
 			return pos;
 		}
 
-		function textToHtmlOffset(node, offset) {
-			// if (node.nodeName !== "#text") return offset;
-			var span = node.ownerDocument.createElement("SPAN");
-			var text = node.ownerDocument.createTextNode(node.textContent.substring(0, offset));
+		function textToHtmlOffset(aNode, aOffset) {
+			// if (aNode.nodeName !== "#text") return aOffset;
+			var span = aNode.ownerDocument.createElement("SPAN");
+			var text = aNode.ownerDocument.createTextNode(aNode.textContent.substring(0, aOffset));
 			span.appendChild(text);
 			return span.innerHTML.length;
 		}
