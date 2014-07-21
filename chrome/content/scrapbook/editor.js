@@ -1261,7 +1261,13 @@ var sbHtmlEditor = {
 	{
 		var sel = aDoc.defaultView.getSelection();
 		var collapsed = sel.isCollapsed;
-		var data = {value:""};
+		var data = {
+			preTag: "",
+			preContext: "",
+			value: "",
+			postContext: "",
+			postTag: ""
+		};
 		if (!collapsed) {
 			// backup original selection ranges
 			var ranges = [];
@@ -1269,30 +1275,36 @@ var sbHtmlEditor = {
 				ranges.push(sel.getRangeAt(i))
 			}
 			// get selection area to edit
-			if (sbCommonUtils.getPref("edit.extendSourceEdit", true)) {
-				// reset selection to the common ancestor container of the first range
-				var node = ranges[0].commonAncestorContainer;
-				if (node.nodeName == "#text") node = node.parentNode;
-				var range = aDoc.createRange();
-				range.selectNodeContents(node);
-				sel.removeAllRanges();
-				sel.addRange(range);			
-				// set data
-				data.value = node.innerHTML;
-			}
-			else {
-				// reset selection to the first range
-				sel.removeAllRanges();
-				sel.addRange(ranges[0]);
-				// set data
-				data.value = sbPageEditor.getSelectionHTML(sel);
-			}
+			var range = ranges[0];
+			var ac = range.commonAncestorContainer;
+			if (ac.nodeName == "#text") ac = ac.parentNode;
+			var source = sbCommonUtils.getOuterHTML(ac);
+			var source_inner = ac.innerHTML;
+			var istart = source.lastIndexOf(source_inner);
+			var start = getOffsetInSource(ac, range.startContainer, range.startOffset);
+			var end = getOffsetInSource(ac, range.endContainer, range.endOffset);
+			var iend = istart + source_inner.length;
+			data.preTag = source.substring(0, istart);
+			data.preContext = source.substring(istart, start);
+			data.value = source.substring(start, end);
+			data.postContext = source.substring(end, iend);
+			data.postTag = source.substring(iend);
+			// reset selection to the first range
+			sel.removeAllRanges();
+			sel.addRange(ranges[0]);
 		}
 		// prompt the dialog for user input
 		window.top.openDialog("chrome://scrapbook/content/editor_source.xul", "ScrapBook:EditSource", "chrome,modal,centerscreen,resizable", data);
 		// accepted, do the modify
 		if (data.result) {
-			aDoc.execCommand("insertHTML", false, data.value);
+			if (!collapsed) {
+				// reset selection to the common ancestor container of the first range
+				var range = aDoc.createRange();
+				range.selectNodeContents(ac);
+				sel.removeAllRanges();
+				sel.addRange(range);
+			}
+			aDoc.execCommand("insertHTML", false, data.preContext + data.value + data.postContext);
 		}
 		// cancled, restore the original selection if previously modified
 		else if (!collapsed) {
@@ -1300,6 +1312,58 @@ var sbHtmlEditor = {
 			for (var i=0, len=ranges.length; i<len; i++) {
 				sel.addRange(ranges[i]);
 			}
+		}
+
+		// aDescNode must be a descendent of aNode
+		function getOffsetInSource(aNode, aDescNode, aDescOffset) {
+			var pos = 0;
+			switch (aDescNode.nodeName) {
+				case "#text":
+					pos += textToHtmlOffset(aDescNode, aDescOffset);
+					break;
+				case "#comment":
+					pos += ("<!--").length + aDescOffset;
+					break;
+				case "#cdata-section":
+					pos += ("<![CDATA[").length + aDescOffset;
+					break;
+				default:
+					// in this case aDescOffset means the real desc node is the nth child of aDescNode
+					aDescNode = aDescNode.childNodes[aDescOffset];
+					break;
+			}
+			var tmpParent = aDescNode;
+			while (tmpParent && tmpParent !== aNode) {
+				var tmpSibling = tmpParent.previousSibling;
+				while (tmpSibling) {
+					switch (tmpSibling.nodeName) {
+						case "#text":
+							pos += textToHtmlOffset(tmpSibling);
+							break;
+						case "#comment":
+							pos += ("<!--" + tmpSibling.textContent + "-->").length;
+							break;
+						case "#cdata-section":
+							pos += ("<![CDATA[" + tmpSibling.textContent + "]]>").length;
+							break;
+						default:
+							pos += sbCommonUtils.getOuterHTML(tmpSibling).length;
+							break;
+					}
+					tmpSibling = tmpSibling.previousSibling;
+				}
+				tmpParent = tmpParent.parentNode;
+				pos += sbCommonUtils.getOuterHTML(tmpParent).lastIndexOf(tmpParent.innerHTML);
+			}
+			return pos;
+		}
+
+		function textToHtmlOffset(aNode, aOffset) {
+			// if (aNode.nodeName !== "#text") return aOffset;
+			var content = (typeof aOffset == "undefined") ? aNode.textContent : aNode.textContent.substring(0, aOffset);
+			var span = aNode.ownerDocument.createElement("SPAN");
+			span.appendChild(aNode.ownerDocument.createTextNode(content));
+			return span.innerHTML.length;
 		}
 	},
 
