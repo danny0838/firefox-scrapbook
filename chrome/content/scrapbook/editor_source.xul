@@ -19,9 +19,9 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/editor_source.js" />
 
 	<textbox id="sbSourcePreTag" disabled="true" rows="1" style="font-family: monospace; font-size: 1.34em;" />
-	<textbox id="sbSourcePreContext" multiline="true" rows="3" flex="1" style="font-family: monospace; font-size: 1.34em; min-height: 1.5em; color: blue;" />
-	<textbox id="sbSourceValue" multiline="true" rows="6" flex="2" style="font-family: monospace; font-size: 1.34em; min-height: 1.5em;" />
-	<textbox id="sbSourcePostContext" multiline="true" rows="3" flex="1" style="font-family: monospace; font-size: 1.34em; min-height: 1.5em; color: blue;" />
+	<textbox id="sbSourcePreContext" multiline="true" rows="3" flex="1" style="font-family: monospace; font-size: 1.34em; min-height: 1.7em; color: blue;" />
+	<textbox id="sbSourceValue" multiline="true" rows="6" flex="2" style="font-family: monospace; font-size: 1.34em; min-height: 1.7em;" />
+	<textbox id="sbSourcePostContext" multiline="true" rows="3" flex="1" style="font-family: monospace; font-size: 1.34em; min-height: 1.7em; color: blue;" />
 	<textbox id="sbSourcePostTag" disabled="true" rows="1" style="font-family: monospace; font-size: 1.34em;" />
 
 </dialog>
