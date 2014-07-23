@@ -1333,7 +1333,6 @@ var sbHtmlEditor = {
 			}
 		}
 
-		// aDescNode must be a descendent of aNode
 		function getOffsetInSource(aNode, aDescNode, aDescOffset) {
 			var pos = 0;
 			switch (aDescNode.nodeName) {
@@ -1348,12 +1347,21 @@ var sbHtmlEditor = {
 					break;
 				default:
 					// in this case aDescOffset means the real desc node is the nth child of aDescNode
+					var aDescNodeParent = aDescNode;
 					aDescNode = aDescNode.childNodes[aDescOffset];
 					break;
 			}
-			var tmpParent = aDescNode;
-			while (tmpParent && tmpParent !== aNode) {
-				var tmpSibling = tmpParent.previousSibling;
+			if (aDescNode) {
+				var tmpParent = aDescNode;
+				var tmpSibling = aDescNode.previousSibling;
+			}
+			else {
+				// no end element means that the selection ends after the last child of aDescNodeParent
+				// so we walk for all elements
+				var tmpSibling = aDescNodeParent.lastChild;
+				var tmpParent = tmpSibling;
+			}
+			do {
 				while (tmpSibling) {
 					switch (tmpSibling.nodeName) {
 						case "#text":
@@ -1372,8 +1380,13 @@ var sbHtmlEditor = {
 					tmpSibling = tmpSibling.previousSibling;
 				}
 				tmpParent = tmpParent.parentNode;
+				// all parent nodes are not aNode
+				// in this case aDescNode is not a descendant of aNode
+				if (!tmpParent) return -1;
 				pos += sbCommonUtils.getOuterHTML(tmpParent).lastIndexOf(tmpParent.innerHTML);
-			}
+				if (tmpParent === aNode) break;
+				tmpSibling = tmpParent.previousSibling;
+			} while (true)
 			return pos;
 		}
 
