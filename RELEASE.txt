@@ -1,3 +1,10 @@
+Scrapbook X 1.12.0a17
+----------------
+
+- UPDATE: Insert source of HTML editor now shows editable source context fragments in blue color.
+- FIXED: Insert source of HTML editor gets wrong fragments if the selection extends to exactly the end of an HTML element.
+
+
 Scrapbook X 1.12.0a16
 ----------------
 
