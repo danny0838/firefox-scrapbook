@@ -1288,13 +1288,8 @@ var sbHtmlEditor = {
 			postTag: ""
 		};
 		if (!collapsed) {
-			// backup original selection ranges
-			var ranges = [];
-			for (var i=0, len=sel.rangeCount; i<len; i++) {
-				ranges.push(sel.getRangeAt(i))
-			}
 			// get selection area to edit
-			var range = ranges[0];
+			var range = sel.getRangeAt(0);
 			var ac = range.commonAncestorContainer;
 			if (ac.nodeName == "#text") ac = ac.parentNode;
 			var source = sbCommonUtils.getOuterHTML(ac);
@@ -1308,9 +1303,6 @@ var sbHtmlEditor = {
 			data.value = source.substring(start, end);
 			data.postContext = source.substring(end, iend);
 			data.postTag = source.substring(iend);
-			// reset selection to the first range
-			sel.removeAllRanges();
-			sel.addRange(ranges[0]);
 		}
 		// prompt the dialog for user input
 		window.top.openDialog("chrome://scrapbook/content/editor_source.xul", "ScrapBook:EditSource", "chrome,modal,centerscreen,resizable", data);
@@ -1324,13 +1316,6 @@ var sbHtmlEditor = {
 				sel.addRange(range);
 			}
 			aDoc.execCommand("insertHTML", false, data.preContext + data.value + data.postContext);
-		}
-		// cancled, restore the original selection if previously modified
-		else if (!collapsed) {
-			sel.removeAllRanges();
-			for (var i=0, len=ranges.length; i<len; i++) {
-				sel.addRange(ranges[i]);
-			}
 		}
 
 		function getOffsetInSource(aNode, aDescNode, aDescOffset) {
