@@ -60,11 +60,8 @@ var sbDataSource = {
 		bDir.append("backup");
 		if ( !bDir.exists() ) bDir.create(bDir.DIRECTORY_TYPE, parseInt("0700", 8));
 		var bFileName = "scrapbook_" + sbCommonUtils.getTimeStamp().substring(0,8) + ".rdf";
-		try {
-			this._dataFile.copyTo(bDir, bFileName);
-			setTimeout(function(){ sbDataSource.cleanUpBackups(bDir); }, 1000);
-		} catch(ex) {
-		}
+		try { this._dataFile.copyTo(bDir, bFileName); } catch(ex) {}
+		this.cleanUpBackups(bDir);
 	},
 
 	cleanUpBackups : function(bDir)
