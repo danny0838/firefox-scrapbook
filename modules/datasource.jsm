@@ -58,7 +58,7 @@ var sbDataSource = {
 	{
 		var bDir = sbCommonUtils.getScrapBookDir();
 		bDir.append("backup");
-		if ( !bDir.exists() ) bDir.create(bDir.DIRECTORY_TYPE, parseInt("0700", 8));
+		if ( !bDir.exists() ) bDir.create(bDir.DIRECTORY_TYPE, 0700);
 		var bFileName = "scrapbook_" + sbCommonUtils.getTimeStamp().substring(0,8) + ".rdf";
 		try { this._dataFile.copyTo(bDir, bFileName); } catch(ex) {}
 		this.cleanUpBackups(bDir);
@@ -75,8 +75,8 @@ var sbDataSource = {
 			if ( !entry.leafName.match(/^scrapbook_(\d{4})(\d{2})(\d{2})\.rdf$/) ) continue;
 			var lifeTime = (new Date(parseInt(RegExp.$1, 10), parseInt(RegExp.$2, 10) - 1, parseInt(RegExp.$3, 10))).getTime();
 			lifeTime = Math.round((today - lifeTime) / (1000 * 60 * 60 * 24));
-			if ( lifeTime > 30 && --max >= 0 )
-			{
+			if ( lifeTime > 30 ) {
+				if (--max < 0) break;
 				entry.remove(false);
 			}
 		}
