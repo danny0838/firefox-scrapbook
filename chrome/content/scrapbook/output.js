@@ -128,7 +128,7 @@ var sbOutputService = {
 			+ '<head>\n'
 			+ '	<meta charset="UTF-8">\n'
 			+ '	<title>' + document.title + '</title>\n'
-			+ '	<link rel="stylesheet" type="text/css" href="./output.css" media="all">\n'
+			+ '	<link rel="stylesheet" type="text/css" href="output.css" media="all">\n'
 			+ '	<script>\n'
 			+ '	function init() {\n'
 			+ '		loadHash();\n'
@@ -206,7 +206,7 @@ var sbOutputService = {
 				break;
 			case "folder": 
 				ret = '<a class="folder" href="javascript:toggle(\'folder-' + id + '\');" title="' + title + '">'
-				    + '<img src="./folder.png" width="16" height="16" alt="">' + title + '</a>\n';
+				    + '<img src="folder.png" width="16" height="16" alt="">' + title + '</a>\n';
 				break;
 			case "bookmark": 
 				ret = '<a href="' + source + '" target="_blank" class="' + type + '" title="' + title + '">'
@@ -239,7 +239,7 @@ var sbOutputService = {
 			+ '	<title>' + document.title + '</title>\n'
 			+ '</head>\n\n'
 			+ '<frameset cols="200,*">\n'
-			+ '	<frame name="side" src="./index.html">\n'
+			+ '	<frame name="side" src="index.html">\n'
 			+ '	<frame name="main">\n'
 			+ '</frameset>\n\n'
 			+ '</html>\n';
