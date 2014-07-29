@@ -1290,8 +1290,7 @@ var sbHtmlEditor = {
 		if (!collapsed) {
 			// get selection area to edit
 			var range = sel.getRangeAt(0);
-			var ac = range.commonAncestorContainer;
-			if (ac.nodeName == "#text") ac = ac.parentNode;
+			var ac = getReplaceableNode(range.commonAncestorContainer);
 			var source = sbCommonUtils.getOuterHTML(ac);
 			var source_inner = ac.innerHTML;
 			var istart = source.lastIndexOf(source_inner);
@@ -1329,6 +1328,14 @@ var sbHtmlEditor = {
 				var html = data.value;
 			}
 			aDoc.execCommand("insertHTML", false, html);
+		}
+
+		function getReplaceableNode(aNode) {
+			var forbiddenList = ["#text", "TBODY", "TR"];
+			while (forbiddenList.indexOf(aNode.nodeName) >= 0) {
+				aNode = aNode.parentNode;
+			}
+			return aNode;
 		}
 
 		function getOffsetInSource(aNode, aDescNode, aDescOffset) {
