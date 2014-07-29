@@ -1311,11 +1311,24 @@ var sbHtmlEditor = {
 			if (!collapsed) {
 				// reset selection to the common ancestor container of the first range
 				var range = aDoc.createRange();
-				range.selectNodeContents(ac);
+				if (ac.nodeName != "BODY") {
+					// replace outer tag
+					var html = data.preTag + data.preContext + data.value + data.postContext + data.postTag;
+					range.setStartBefore(ac);
+					range.setEndAfter(ac);
+				}
+				else {
+					// replace inner tag
+					var html = data.preContext + data.value + data.postContext;
+					range.selectNodeContents(ac);
+				}
 				sel.removeAllRanges();
 				sel.addRange(range);
 			}
-			aDoc.execCommand("insertHTML", false, data.preContext + data.value + data.postContext);
+			else {
+				var html = data.value;
+			}
+			aDoc.execCommand("insertHTML", false, html);
 		}
 
 		function getOffsetInSource(aNode, aDescNode, aDescOffset) {
