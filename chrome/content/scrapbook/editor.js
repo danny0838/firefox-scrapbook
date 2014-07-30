@@ -1125,7 +1125,6 @@ var sbHtmlEditor = {
 				destFile.append(filename2);
 				if ( destFile.exists() && destFile.isFile() ) {
 					if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [filename2])) ) return;
-					destFile.remove(false);
 				}
 				// check the template file, create one if not exist
 				var template = sbCommonUtils.getScrapBookDir().clone();
