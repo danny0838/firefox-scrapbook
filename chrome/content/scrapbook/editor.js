@@ -1138,17 +1138,27 @@ var sbHtmlEditor = {
 					content,
 					{
 						NOTE_TITLE: title,
-						SCRAPBOOK_DIR: (function(aBaseURL){
-							var result = "";
+						SCRAPBOOK_DIR: (function(aFile){
+							var result = "", checkFile = aFile.parent;
 							var sbDir = sbCommonUtils.getScrapBookDir();
-							var checkFile = sbCommonUtils.convertURLToFile(aBaseURL);
 							while (!checkFile.equals(sbDir)){
 								result += "../";
 								checkFile = checkFile.parent;
 							}
 							// remove trailing "/"
 							return result.substring(0, result.length -1);
-						})(aDoc.location.href),
+						})(destFile),
+						DATA_DIR: (function(aFile, aID){
+							var result = "", checkFile = aFile.parent;
+							var dataDir = sbCommonUtils.getContentDir(aID);
+							while (!checkFile.equals(dataDir)){
+								result += "../";
+								checkFile = checkFile.parent;
+							}
+							// remove trailing "/", or return "." if empty
+							if (result) return result.substring(0, result.length -1);
+							else return ".";
+						})(destFile, sbPageEditor.item.id),
 					},
 					/<%([\w_]+)%>/g
 				);
