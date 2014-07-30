@@ -349,11 +349,10 @@ var sbCommonUtils = {
 	writeFile : function(aFile, aContent, aChars, aNoCatch)
 	{
 		try {
-			if (!aFile.exists()) aFile.create(aFile.NORMAL_FILE_TYPE, 0666);
 			this.UNICODE.charset = aChars;
 			aContent = this.UNICODE.ConvertFromUnicode(aContent);
 			var ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
-			ostream.init(aFile, 2, 0x200, false);
+			ostream.init(aFile, -1, 0666, 0);
 			ostream.write(aContent, aContent.length);
 			ostream.close();
 		}
