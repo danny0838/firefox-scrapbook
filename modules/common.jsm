@@ -147,13 +147,18 @@ var sbCommonUtils = {
 
 	removeDirSafety : function(aDir, check)
 	{
-		var file;
+		var curFile;
 		try {
 			if ( check && !aDir.leafName.match(/^\d{14}$/) ) return;
-			aDir.remove(true);
+			this.forEachFile(aDir, function(file) {
+				curFile = file;
+				if (!curFile.isDirectory()) curFile.remove(false);
+			}, true);
+			curFile = aDir;
+			curFile.remove(true);
 			return true;
 		} catch(ex) {
-			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_FILE", [aDir ? aDir.path : "", ex]));
+			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_FILE", [curFile ? curFile.path : "", ex]));
 			return false;
 		}
 	},
