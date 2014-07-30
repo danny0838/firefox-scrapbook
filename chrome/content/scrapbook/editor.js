@@ -1138,17 +1138,27 @@ var sbHtmlEditor = {
 					content,
 					{
 						NOTE_TITLE: title,
-						SCRAPBOOK_DIR: (function(aBaseURL){
-							var result = "";
+						SCRAPBOOK_DIR: (function(aFile){
+							var result = "", checkFile = aFile.parent;
 							var sbDir = sbCommonUtils.getScrapBookDir();
-							var checkFile = sbCommonUtils.convertURLToFile(aBaseURL);
 							while (!checkFile.equals(sbDir)){
 								result += "../";
 								checkFile = checkFile.parent;
 							}
 							// remove trailing "/"
 							return result.substring(0, result.length -1);
-						})(aDoc.location.href),
+						})(destFile),
+						DATA_DIR: (function(aFile, aID){
+							var result = "", checkFile = aFile.parent;
+							var dataDir = sbCommonUtils.getContentDir(aID);
+							while (!checkFile.equals(dataDir)){
+								result += "../";
+								checkFile = checkFile.parent;
+							}
+							// remove trailing "/", or return "." if empty
+							if (result) return result.substring(0, result.length -1);
+							else return ".";
+						})(destFile, sbPageEditor.item.id),
 					},
 					/<%([\w_]+)%>/g
 				);
@@ -1290,8 +1300,7 @@ var sbHtmlEditor = {
 		if (!collapsed) {
 			// get selection area to edit
 			var range = sel.getRangeAt(0);
-			var ac = range.commonAncestorContainer;
-			if (ac.nodeName == "#text") ac = ac.parentNode;
+			var ac = getReplaceableNode(range.commonAncestorContainer);
 			var source = sbCommonUtils.getOuterHTML(ac);
 			var source_inner = ac.innerHTML;
 			var istart = source.lastIndexOf(source_inner);
@@ -1311,11 +1320,32 @@ var sbHtmlEditor = {
 			if (!collapsed) {
 				// reset selection to the common ancestor container of the first range
 				var range = aDoc.createRange();
-				range.selectNodeContents(ac);
+				if (ac.nodeName != "BODY") {
+					// replace outer tag
+					var html = data.preTag + data.preContext + data.value + data.postContext + data.postTag;
+					range.setStartBefore(ac);
+					range.setEndAfter(ac);
+				}
+				else {
+					// replace inner tag
+					var html = data.preContext + data.value + data.postContext;
+					range.selectNodeContents(ac);
+				}
 				sel.removeAllRanges();
 				sel.addRange(range);
 			}
-			aDoc.execCommand("insertHTML", false, data.preContext + data.value + data.postContext);
+			else {
+				var html = data.value;
+			}
+			aDoc.execCommand("insertHTML", false, html);
+		}
+
+		function getReplaceableNode(aNode) {
+			var forbiddenList = ["#text", "TBODY", "TR"];
+			while (forbiddenList.indexOf(aNode.nodeName) >= 0) {
+				aNode = aNode.parentNode;
+			}
+			return aNode;
 		}
 
 		function getOffsetInSource(aNode, aDescNode, aDescOffset) {
