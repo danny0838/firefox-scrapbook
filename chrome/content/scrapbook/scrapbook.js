@@ -213,6 +213,7 @@ var sbMainService = {
 		var tpl = {
 			NOTE_TITLE: newItem.title,
 			SCRAPBOOK_DIR: "../..",
+			DATA_DIR: ".",
 		};
 		var content = sbCommonUtils.readFile(template);
 		content = sbCommonUtils.convertToUnicode(content, "UTF-8");

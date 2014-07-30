@@ -1148,6 +1148,17 @@ var sbHtmlEditor = {
 							// remove trailing "/"
 							return result.substring(0, result.length -1);
 						})(destFile),
+						DATA_DIR: (function(aFile, aID){
+							var result = "", checkFile = aFile.parent;
+							var dataDir = sbCommonUtils.getContentDir(aID);
+							while (!checkFile.equals(dataDir)){
+								result += "../";
+								checkFile = checkFile.parent;
+							}
+							// remove trailing "/", or return "." if empty
+							if (result) return result.substring(0, result.length -1);
+							else return ".";
+						})(destFile, sbPageEditor.item.id),
 					},
 					/<%([\w_]+)%>/g
 				);
