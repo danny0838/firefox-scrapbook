@@ -1138,17 +1138,16 @@ var sbHtmlEditor = {
 					content,
 					{
 						NOTE_TITLE: title,
-						SCRAPBOOK_DIR: (function(aBaseURL){
-							var result = "";
+						SCRAPBOOK_DIR: (function(aFile){
+							var result = "", checkFile = aFile.parent;
 							var sbDir = sbCommonUtils.getScrapBookDir();
-							var checkFile = sbCommonUtils.convertURLToFile(aBaseURL);
 							while (!checkFile.equals(sbDir)){
 								result += "../";
 								checkFile = checkFile.parent;
 							}
 							// remove trailing "/"
 							return result.substring(0, result.length -1);
-						})(aDoc.location.href),
+						})(destFile),
 					},
 					/<%([\w_]+)%>/g
 				);
