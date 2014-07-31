@@ -123,10 +123,9 @@ var sbMainService = {
 		var newRes = sbDataSource.addItem(newItem, tarResName, tarRelIdx);
 		sbDataSource.createEmptySeq(newRes.Value);
 		sbCommonUtils.rebuildGlobal();
-		// select the new resource and open to edit
-		if (isRootPos)
-			sbTreeHandler.TREE.treeBoxObject.scrollToRow(0);
+		// scroll, select the new resource and open to edit
 		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(newRes);
+		sbTreeHandler.TREE.treeBoxObject.ensureRowIsVisible(idx);
 		sbTreeHandler.TREE.view.selection.select(idx);
 		sbTreeHandler.TREE.focus();
 		var result = {};
@@ -195,11 +194,10 @@ var sbMainService = {
 		}
 		sbNoteService.create(tarResName, tarRelIdx, aInTab);
 		sbCommonUtils.rebuildGlobal();
-		// select the new resource and open to edit
+		// scroll, select the new resource and open to edit
 		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(sbNoteService.resource);
+		sbTreeHandler.TREE.treeBoxObject.ensureRowIsVisible(idx);
 		sbTreeHandler.TREE.view.selection.select(idx);
-		if (isRootPos)
-			sbTreeHandler.TREE.treeBoxObject.scrollByLines(sbTreeHandler.TREE.view.rowCount);
 	},
 
 	createNoteX: function()
@@ -252,8 +250,9 @@ var sbMainService = {
 		}
 		var newRes = sbDataSource.addItem(newItem, tarResName, tarRelIdx);
 		sbCommonUtils.rebuildGlobal();
-		// select the new resource and open to edit
+		// scroll, select the new resource and open to edit
 		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(newRes);
+		sbTreeHandler.TREE.treeBoxObject.ensureRowIsVisible(idx);
 		sbTreeHandler.TREE.view.selection.select(idx);
 		sbController.open(newRes, false);
 	},
