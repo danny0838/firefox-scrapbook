@@ -99,10 +99,12 @@ var sbMainService = {
 	{
 		sbSearchService.exit();
 		sbListHandler.quit();
+		// create item
 		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
 		var newItem = sbCommonUtils.newItem(newID);
 		newItem.title = sbCommonUtils.lang("scrapbook", "DEFAULT_FOLDER");
 		newItem.type = "folder";
+		// add resource
 		var tarResName, tarRelIdx, isRootPos;
 		try {
 			var curIdx = sbTreeHandler.TREE.currentIndex;
@@ -121,6 +123,7 @@ var sbMainService = {
 		var newRes = sbDataSource.addItem(newItem, tarResName, tarRelIdx);
 		sbDataSource.createEmptySeq(newRes.Value);
 		sbCommonUtils.rebuildGlobal();
+		// select the new resource and open to edit
 		if (isRootPos)
 			sbTreeHandler.TREE.treeBoxObject.scrollToRow(0);
 		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(newRes);
@@ -142,9 +145,11 @@ var sbMainService = {
 	{
 		sbSearchService.exit();
 		sbListHandler.quit();
+		// create item
 		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
 		var newItem = sbCommonUtils.newItem(newID);
 		newItem.type = "separator";
+		// add resource
 		var tarResName, tarRelIdx, isRootPos;
 		try {
 			var curIdx = sbTreeHandler.TREE.currentIndex;
@@ -162,6 +167,7 @@ var sbMainService = {
 		}
 		var newRes = sbDataSource.addItem(newItem, tarResName, tarRelIdx);
 		sbTreeHandler.TREE.builder.rebuild();
+		// scroll to the new resource
 		sbTreeHandler.TREE.view.selection.clearSelection();
 		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(newRes);
 		sbTreeHandler.TREE.treeBoxObject.ensureRowIsVisible(idx);
@@ -171,6 +177,7 @@ var sbMainService = {
 	{
 		sbSearchService.exit();
 		sbListHandler.quit();
+		// add resource
 		var tarResName, tarRelIdx, isRootPos;
 		try {
 			var curIdx = sbTreeHandler.TREE.currentIndex;
@@ -188,6 +195,7 @@ var sbMainService = {
 		}
 		sbNoteService.create(tarResName, tarRelIdx, aInTab);
 		sbTreeHandler.TREE.builder.rebuild();
+		// select the new resource and open to edit
 		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(sbNoteService.resource);
 		sbTreeHandler.TREE.view.selection.select(idx);
 		if (isRootPos)
@@ -198,6 +206,7 @@ var sbMainService = {
 	{
 		sbSearchService.exit();
 		sbListHandler.quit();
+		// create item
 		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
 		var newItem = sbCommonUtils.newItem(newID);
 		newItem.title = sbCommonUtils.lang("scrapbook", "DEFAULT_NOTEX");
@@ -243,6 +252,7 @@ var sbMainService = {
 		}
 		var newRes = sbDataSource.addItem(newItem, tarResName, tarRelIdx);
 		sbTreeHandler.TREE.builder.rebuild();
+		// select the new resource and open to edit
 		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(newRes);
 		sbTreeHandler.TREE.view.selection.select(idx);
 		sbController.open(newRes, false);
