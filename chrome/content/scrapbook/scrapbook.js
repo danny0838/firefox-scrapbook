@@ -187,7 +187,7 @@ var sbMainService = {
 			var curPar = sbTreeHandler.getParentResource(curIdx);
 			var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
 			tarResName = curPar.Value;
-			tarRelIdx  = curRelIdx;
+			tarRelIdx  = curRelIdx + 1;
 			isRootPos  = false;
 		}
 		catch(ex) {
