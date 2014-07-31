@@ -166,7 +166,7 @@ var sbMainService = {
 			isRootPos  = true;
 		}
 		var newRes = sbDataSource.addItem(newItem, tarResName, tarRelIdx);
-		sbTreeHandler.TREE.builder.rebuild();
+		sbCommonUtils.rebuildGlobal();
 		// scroll to the new resource
 		sbTreeHandler.TREE.view.selection.clearSelection();
 		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(newRes);
@@ -194,7 +194,7 @@ var sbMainService = {
 			isRootPos  = true;
 		}
 		sbNoteService.create(tarResName, tarRelIdx, aInTab);
-		sbTreeHandler.TREE.builder.rebuild();
+		sbCommonUtils.rebuildGlobal();
 		// select the new resource and open to edit
 		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(sbNoteService.resource);
 		sbTreeHandler.TREE.view.selection.select(idx);
@@ -251,7 +251,7 @@ var sbMainService = {
 			isRootPos  = true;
 		}
 		var newRes = sbDataSource.addItem(newItem, tarResName, tarRelIdx);
-		sbTreeHandler.TREE.builder.rebuild();
+		sbCommonUtils.rebuildGlobal();
 		// select the new resource and open to edit
 		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(newRes);
 		sbTreeHandler.TREE.view.selection.select(idx);
