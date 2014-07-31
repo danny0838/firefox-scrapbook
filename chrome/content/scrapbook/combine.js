@@ -223,7 +223,7 @@ var sbCombineService = {
 		sbDataSource.setProperty(newRes, "type", "combine");
 		sbDataSource.setProperty(newRes, "source", sbDataSource.getProperty(this.resList[0], "source"));
 		var newIcon = sbDataSource.getProperty(this.resList[0], "icon");
-		if ( newIcon.match(/\d{14}/) ) newIcon = "resource://scrapbook/data/" + aItem.id + "/" + sbCommonUtils.getFileName(newIcon);
+		if ( newIcon.indexOf("resource://scrapbook/data/") == 0 ) newIcon = "resource://scrapbook/data/" + aItem.id + "/" + sbCommonUtils.getFileName(newIcon);
 		sbDataSource.setProperty(newRes, "icon", newIcon);
 		var newComment = "";
 		for ( var i = 0; i < this.resList.length; i++ )
