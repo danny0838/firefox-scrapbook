@@ -187,6 +187,7 @@ var sbMainService = {
 			isRootPos  = true;
 		}
 		sbNoteService.create(tarResName, tarRelIdx, aInTab);
+		sbTreeHandler.TREE.builder.rebuild();
 		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(sbNoteService.resource);
 		sbTreeHandler.TREE.view.selection.select(idx);
 		if (isRootPos)
