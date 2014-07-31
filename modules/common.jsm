@@ -424,6 +424,14 @@ var sbCommonUtils = {
 		return "resource://scrapbook/" + pathFull.substring(pathBase.length);
 	},
 
+	convertResURLToURL : function(aResURL)
+	{
+		if (aResURL.indexOf("resource://scrapbook/") != 0) return aResURL;
+		var pathBase = this.convertFilePathToURL(this.getScrapBookDir().path);
+		var subPath = aResURL.substring("resource://scrapbook/".length);
+		return pathBase + subPath;
+	},
+
 	convertURLToObject : function(aURLString)
 	{
 		var aURL = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURI);

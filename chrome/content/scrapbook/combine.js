@@ -460,10 +460,7 @@ var sbPageCombiner = {
 		}
 		var icon = sbDataSource.getProperty(sbCombineService.curRes, "icon");
 		if ( !icon ) icon = sbCommonUtils.getDefaultIcon(aType);
-		if ( icon.indexOf("resource://") == 0 && icon.indexOf(sbCombineService.curID) > 0 )
-		{
-			icon = "./data/" + sbCombineService.curID + "/" + sbCommonUtils.getFileName(icon);
-		}
+		icon = sbCommonUtils.convertResURLToURL(icon);
 		src += '<cite class="scrapbook-header' + '">\n';
 		src += '\t<img src="' + icon + '" width="16" height="16">\n';
 		src += '\t<a class="' + aType + '"' + (linkURL ? ' href="' + linkURL + '"' : "") + '>' + sbCommonUtils.escapeHTML(title, true) + '</a>\n';
