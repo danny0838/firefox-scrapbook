@@ -417,6 +417,13 @@ var sbCommonUtils = {
 		return this.IO.newFileURI(tmpFile).spec;
 	},
 
+	convertFileToResURL : function(aFile)
+	{
+		var pathFull = this.convertFilePathToURL(aFile.path);
+		var pathBase = this.convertFilePathToURL(this.getScrapBookDir().path);
+		return "resource://scrapbook/" + pathFull.substring(pathBase.length);
+	},
+
 	convertURLToObject : function(aURLString)
 	{
 		var aURL = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURI);
@@ -444,7 +451,7 @@ var sbCommonUtils = {
 		var sbPath = new RegExp("^" + sbCommonUtils.escapeRegExp(sbDir) + "data/(\\d{14})/");
 		return aURL.match(sbPath) ? RegExp.$1 : null;
 	},
-	
+
 	splitURLByAnchor : function(aURL)
 	{
 		var pos = 0;
