@@ -116,6 +116,8 @@ var sbMainService = {
 			sbDataSource.deleteItemDescending(newRes, sbTreeHandler.getParentResource(sbTreeHandler.TREE.currentIndex));
 			return false;
 		}
+		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(newRes);
+		sbTreeHandler.TREE.view.selection.select(idx);
 		return true;
 	},
 
