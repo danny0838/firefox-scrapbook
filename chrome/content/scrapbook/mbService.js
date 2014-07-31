@@ -60,7 +60,7 @@ var sbMultiBookService = {
 		this.file.append("ScrapBook");
 		this.file.append("multibook.txt");
 		if (!this.file.exists()) {
-			this.file.create(this.file.NORMAL_FILE_TYPE, parseInt("0666", 8));
+			this.file.create(this.file.NORMAL_FILE_TYPE, 0666);
 			var path = sbCommonUtils.getPref("data.path", "");
 			if (path)
 				sbCommonUtils.writeFile(this.file, "My ScrapBook\t" + path + "\n", "UTF-8");

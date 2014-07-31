@@ -118,7 +118,7 @@ var sbCommonUtils = {
 		}
 		if ( !dir.exists() )
 		{
-			dir.create(dir.DIRECTORY_TYPE, parseInt("0700", 8));
+			dir.create(dir.DIRECTORY_TYPE, 0700);
 		}
 		return dir;
 	},
@@ -132,7 +132,7 @@ var sbCommonUtils = {
 		}
 		var dir = this.getScrapBookDir().clone();
 		dir.append("data");
-		if ( !dir.exists() ) dir.create(dir.DIRECTORY_TYPE, parseInt("0700", 8));
+		if ( !dir.exists() ) dir.create(dir.DIRECTORY_TYPE, 0700);
 		dir.append(aID);
 		if ( !dir.exists() )
 		{
@@ -140,20 +140,25 @@ var sbCommonUtils = {
 			{
 				return null;
 			}
-			dir.create(dir.DIRECTORY_TYPE, parseInt("0700", 8));
+			dir.create(dir.DIRECTORY_TYPE, 0700);
 		}
 		return dir;
 	},
 
 	removeDirSafety : function(aDir, check)
 	{
-		var file;
+		var curFile;
 		try {
 			if ( check && !aDir.leafName.match(/^\d{14}$/) ) return;
-			aDir.remove(true);
+			this.forEachFile(aDir, function(file) {
+				curFile = file;
+				if (!curFile.isDirectory()) curFile.remove(false);
+			}, true);
+			curFile = aDir;
+			curFile.remove(true);
 			return true;
 		} catch(ex) {
-			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_FILE", [aDir ? aDir.path : "", ex]));
+			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_FILE", [curFile ? curFile.path : "", ex]));
 			return false;
 		}
 	},
@@ -343,13 +348,11 @@ var sbCommonUtils = {
 
 	writeFile : function(aFile, aContent, aChars, aNoCatch)
 	{
-		if ( aFile.exists() ) aFile.remove(false);
 		try {
-			aFile.create(aFile.NORMAL_FILE_TYPE, parseInt("0666", 8));
 			this.UNICODE.charset = aChars;
 			aContent = this.UNICODE.ConvertFromUnicode(aContent);
 			var ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
-			ostream.init(aFile, 2, 0x200, false);
+			ostream.init(aFile, -1, 0666, 0);
 			ostream.write(aContent, aContent.length);
 			ostream.close();
 		}
