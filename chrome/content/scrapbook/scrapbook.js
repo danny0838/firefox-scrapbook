@@ -127,7 +127,6 @@ var sbMainService = {
 		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(newRes);
 		sbTreeHandler.TREE.treeBoxObject.ensureRowIsVisible(idx);
 		sbTreeHandler.TREE.view.selection.select(idx);
-		sbTreeHandler.TREE.focus();
 		var result = {};
 		window.openDialog(
 			"chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome",
@@ -166,10 +165,10 @@ var sbMainService = {
 		}
 		var newRes = sbDataSource.addItem(newItem, tarResName, tarRelIdx);
 		sbCommonUtils.rebuildGlobal();
-		// scroll to the new resource
-		sbTreeHandler.TREE.view.selection.clearSelection();
+		// scroll, select the new resource
 		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(newRes);
 		sbTreeHandler.TREE.treeBoxObject.ensureRowIsVisible(idx);
+		sbTreeHandler.TREE.view.selection.select(idx);
 	},
 
 	createNote: function(aInTab)
