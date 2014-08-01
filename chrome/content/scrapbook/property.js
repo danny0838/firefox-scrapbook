@@ -172,8 +172,8 @@ var sbPropService = {
 		if ( FP.show() == FP.returnOK )
 		{
 			var iconURL;
-			if      ( aCommand == "F" && dir.contains(FP.file, false) ) iconURL = "resource://scrapbook/data/" + this.id + "/" + sbCommonUtils.escapeFileName(FP.file.leafName);
-			else if ( aCommand == "U" && dir.contains(FP.file, false) ) iconURL = "resource://scrapbook/icon/" + sbCommonUtils.escapeFileName(FP.file.leafName);
+			if      ( aCommand == "F" && dir.contains(FP.file, false) ) iconURL = sbCommonUtils.convertFileToResURL(FP.file);
+			else if ( aCommand == "U" && dir.contains(FP.file, false) ) iconURL = sbCommonUtils.convertFileToResURL(FP.file);
 			else iconURL = sbCommonUtils.convertFilePathToURL(FP.file.path);
 			this.ICON.src = iconURL;
 		}

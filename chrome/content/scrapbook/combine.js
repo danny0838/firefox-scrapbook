@@ -223,7 +223,7 @@ var sbCombineService = {
 		sbDataSource.setProperty(newRes, "type", "combine");
 		sbDataSource.setProperty(newRes, "source", sbDataSource.getProperty(this.resList[0], "source"));
 		var newIcon = sbDataSource.getProperty(this.resList[0], "icon");
-		if ( newIcon.match(/\d{14}/) ) newIcon = "resource://scrapbook/data/" + aItem.id + "/" + sbCommonUtils.getFileName(newIcon);
+		if ( newIcon.indexOf("resource://scrapbook/data/") == 0 ) newIcon = "resource://scrapbook/data/" + aItem.id + "/" + sbCommonUtils.getFileName(newIcon);
 		sbDataSource.setProperty(newRes, "icon", newIcon);
 		var newComment = "";
 		for ( var i = 0; i < this.resList.length; i++ )
@@ -460,10 +460,7 @@ var sbPageCombiner = {
 		}
 		var icon = sbDataSource.getProperty(sbCombineService.curRes, "icon");
 		if ( !icon ) icon = sbCommonUtils.getDefaultIcon(aType);
-		if ( icon.indexOf("resource://") == 0 && icon.indexOf(sbCombineService.curID) > 0 )
-		{
-			icon = "./data/" + sbCombineService.curID + "/" + sbCommonUtils.getFileName(icon);
-		}
+		icon = sbCommonUtils.convertResURLToURL(icon);
 		src += '<cite class="scrapbook-header' + '">\n';
 		src += '\t<img src="' + icon + '" width="16" height="16">\n';
 		src += '\t<a class="' + aType + '"' + (linkURL ? ' href="' + linkURL + '"' : "") + '>' + sbCommonUtils.escapeHTML(title, true) + '</a>\n';

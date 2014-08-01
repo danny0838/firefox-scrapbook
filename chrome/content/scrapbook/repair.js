@@ -96,7 +96,6 @@ var sbRepair = {
 			}
 		}
 		document.getElementById("sbRepairFaviconsTextbox").value = document.getElementById("sbRepairRDF2Label").value;
-		window.opener.reload();
 	},
 
 };
