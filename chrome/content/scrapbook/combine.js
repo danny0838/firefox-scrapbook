@@ -119,6 +119,7 @@ var sbCombineService = {
 		this.WIZARD.getButton("cancel").hidden = false;
 		this.WIZARD.getButton("cancel").disabled = true;
 //		this.WIZARD.getButton("cancel").onclick = function(){ sbCombineService.abort(); };
+		this.option["T"] = document.getElementById("sbpTitleTextbox").value;
 		this.option["R"] = document.getElementById("sbCombineOptionRemove").checked;
 		// reset the variables to prevent double-charged content when reloaded
 		sbPageCombiner.htmlSrc = "";
@@ -201,13 +202,7 @@ var sbCombineService = {
 		this.toggleElements(true);
 		SB_trace(sbCommonUtils.lang("capture", "CAPTURE_START"));
 //sbCommonUtils.alert("--"+document.getElementById("sbpTitleTextbox").value+"--");
-		if ( document.getElementById("sbpTitleTextbox").value == "" )
-		{
-			setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null); }, 0);
-		} else
-		{
-			setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null, null, document.getElementById("sbpTitleTextbox").value); }, 0);
-		}
+		setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null); }, 0);
 	},
 
 	toggleElements : function(isProgressMode)
@@ -396,11 +391,14 @@ var sbPageCombiner = {
 		this.isTargetCombined = false;
 		if ( sbCombineService.index == 0 )
 		{
+			if (!sbCombineService.option["T"]) {
+				sbCombineService.option["T"] = sbDataSource.getProperty(sbCombineService.curRes, "title");
+			}
 			this.htmlSrc += '<!DOCTYPE html>' + '\n' +
 				'<html>' + '\n' +
 				'<head>' + '\n' +
 				'<meta charset="UTF-8">' + '\n' +
-				'<title>' + sbDataSource.getProperty(sbCombineService.curRes, "title") + '</title>' + '\n' +
+				'<title>' + sbCombineService.option["T"] + '</title>' + '\n' +
 				'<link rel="stylesheet" href="combine.css" media="all">' +
 				'<link rel="stylesheet" href="chrome://scrapbook/skin/combine.css" media="all">' + '\n' +
 				'<link rel="stylesheet" href="chrome://scrapbook/skin/annotation.css" media="all">' + '\n' +
