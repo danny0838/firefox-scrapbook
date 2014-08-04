@@ -120,10 +120,9 @@ var sbCombineService = {
 		this.WIZARD.getButton("cancel").disabled = true;
 //		this.WIZARD.getButton("cancel").onclick = function(){ sbCombineService.abort(); };
 		this.option["R"] = document.getElementById("sbCombineOptionRemove").checked;
-		//Werte müssen initialisiert werden, damit es beim erneuten Laden nicht zu doppelt geladenem Inhalt kommt
+		// reset the variables to prevent double-charged content when reloaded
 		sbPageCombiner.htmlSrc = "";
 		sbPageCombiner.cssText = "";
-		sbPageCombiner.offsetTop = 0;
 		sbPageCombiner.isTargetCombined = false;
 		sbInvisibleBrowser.init();
 		sbInvisibleBrowser.ELEMENT.removeEventListener("load", sbInvisibleBrowser.onload, true);
