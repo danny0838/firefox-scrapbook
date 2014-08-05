@@ -811,6 +811,7 @@ var sbCommonUtils = {
 	 */
 	getSbObjectType : function(aNode)
 	{
+		if (aNode.nodeType != 1) return false;
 		var type = aNode.getAttribute("data-sb-obj");
 		if (type) return type;
 		// below is for downward compatibility
