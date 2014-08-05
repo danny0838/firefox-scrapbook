@@ -1884,7 +1884,6 @@ var sbAnnotationService = {
 		);
 		if ( aPreset ) div.appendChild(win.document.createTextNode(aPreset[1]));
 		targetNode.appendChild(div);
-		targetNode.appendChild(win.document.createTextNode("\n"));
 		if ( !win.document.getElementById("scrapbook-sticky-css") )
 		{
 			var linkNode = win.document.createElement("link");
