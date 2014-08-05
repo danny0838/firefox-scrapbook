@@ -1833,7 +1833,9 @@ var sbAnnotationService = {
 					sbAnnotationService.editAnnotation(aEvent.originalTarget);
 					break;
 				case "block-comment" :
-					sbAnnotationService.createSticky([aEvent.originalTarget.previousSibling, aEvent.originalTarget.firstChild.data]);
+					// for downward compatibility with SB <= 0.17.0
+					// block-comment is created in old versions, replace it with a sticky note
+					sbAnnotationService.createSticky([aEvent.originalTarget.parentNode, aEvent.originalTarget.firstChild.data]);
 					aEvent.originalTarget.parentNode.removeChild(aEvent.originalTarget);
 					break;
 			}

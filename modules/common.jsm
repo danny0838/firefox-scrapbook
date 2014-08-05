@@ -802,7 +802,7 @@ var sbCommonUtils = {
 	 * sticky-footer
 	 * sticky-save
 	 * sticky-delete
-	 * block-comment (?)
+	 * block-comment (div) (for downward compatibility with SB <= 0.17.0)
 	 *
 	 * title (*)
 	 * title-src (*)
