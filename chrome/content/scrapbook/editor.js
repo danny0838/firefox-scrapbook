@@ -1833,6 +1833,8 @@ var sbAnnotationService = {
 					sbAnnotationService.editAnnotation(aEvent.originalTarget);
 					break;
 				case "block-comment" :
+					// for downward compatibility with SB <= 0.17.0
+					// block-comment is created in old versions, replace it with a sticky note
 					sbAnnotationService.createSticky([aEvent.originalTarget.previousSibling, aEvent.originalTarget.firstChild.data]);
 					aEvent.originalTarget.parentNode.removeChild(aEvent.originalTarget);
 					break;
@@ -1866,23 +1868,32 @@ var sbAnnotationService = {
 		if ( win.document.body instanceof HTMLFrameSetElement ) win = win.frames[0];
 		sbPageEditor.allowUndo(win.document);
 		var targetNode;
+		var isRelative = true;
 		if ( aPreset ) {
-			targetNode = aPreset[0];
+			targetNode = findTargetNode(aPreset[0]);
 		}
 		else {
 			var sel = sbPageEditor.getSelection(win);
-			targetNode = sel ? sel.anchorNode : win.document.body;
+			if (sel) {
+				targetNode = findTargetNode(sel.anchorNode);
+			}
+			else {
+				targetNode = win.document.body;
+				isRelative = false;
+			}
 		}
-		if ( targetNode instanceof Text ) targetNode = targetNode.parentNode;
-		if ( targetNode instanceof HTMLAnchorElement ) targetNode = targetNode.parentNode;
-		var div = this.duplicateElement(targetNode != win.document.body, false,
+		var div = this.duplicateElement(isRelative, false,
 			win.scrollX + Math.round((win.innerWidth  - this.DEFAULT_WIDTH ) / 2),
 			win.scrollY + Math.round((win.innerHeight - this.DEFAULT_HEIGHT) / 2),
 			this.DEFAULT_WIDTH, this.DEFAULT_HEIGHT
 		);
 		if ( aPreset ) div.appendChild(win.document.createTextNode(aPreset[1]));
-		targetNode.appendChild(div);
-		targetNode.appendChild(win.document.createTextNode("\n"));
+		if (isRelative) {
+			targetNode.parentNode.insertBefore(div, targetNode.nextSibling);
+		}
+		else {
+			targetNode.appendChild(div);
+		}
 		if ( !win.document.getElementById("scrapbook-sticky-css") )
 		{
 			var linkNode = win.document.createElement("link");
@@ -1899,6 +1910,19 @@ var sbAnnotationService = {
 			headNode.appendChild(win.document.createTextNode("\n"));
 		}
 		this._editSticky(div);
+		
+		function findTargetNode(aNode) {
+			var targetNode = aNode;
+			var parentNode = targetNode.parentNode;
+			while (["BODY", "DIV", "TD", "LI"].indexOf(parentNode.nodeName) == -1) {
+				targetNode = parentNode;
+				parentNode = targetNode.parentNode;
+			}
+			while (targetNode.nextSibling && sbCommonUtils.getSbObjectType(targetNode.nextSibling) == "sticky")  {
+				targetNode = targetNode.nextSibling;
+			}
+			return targetNode;
+		}
 	},
 
 	editSticky : function(oldElem)
@@ -1910,7 +1934,7 @@ var sbAnnotationService = {
 	_editSticky : function(oldElem)
 	{
 		var newElem = this.duplicateElement(
-			!(oldElem.parentNode instanceof HTMLBodyElement), true, 
+			oldElem.className.indexOf("scrapbook-sticky-relative") != -1, true, 
 			parseInt(oldElem.style.left, 10), parseInt(oldElem.style.top, 10), 
 			parseInt(oldElem.style.width, 10), parseInt(oldElem.style.height, 10)
 		);

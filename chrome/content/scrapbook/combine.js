@@ -119,11 +119,11 @@ var sbCombineService = {
 		this.WIZARD.getButton("cancel").hidden = false;
 		this.WIZARD.getButton("cancel").disabled = true;
 //		this.WIZARD.getButton("cancel").onclick = function(){ sbCombineService.abort(); };
+		this.option["T"] = document.getElementById("sbpTitleTextbox").value;
 		this.option["R"] = document.getElementById("sbCombineOptionRemove").checked;
-		//Werte müssen initialisiert werden, damit es beim erneuten Laden nicht zu doppelt geladenem Inhalt kommt
+		// reset the variables to prevent double-charged content when reloaded
 		sbPageCombiner.htmlSrc = "";
 		sbPageCombiner.cssText = "";
-		sbPageCombiner.offsetTop = 0;
 		sbPageCombiner.isTargetCombined = false;
 		sbInvisibleBrowser.init();
 		sbInvisibleBrowser.ELEMENT.removeEventListener("load", sbInvisibleBrowser.onload, true);
@@ -202,13 +202,7 @@ var sbCombineService = {
 		this.toggleElements(true);
 		SB_trace(sbCommonUtils.lang("capture", "CAPTURE_START"));
 //sbCommonUtils.alert("--"+document.getElementById("sbpTitleTextbox").value+"--");
-		if ( document.getElementById("sbpTitleTextbox").value == "" )
-		{
-			setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null); }, 0);
-		} else
-		{
-			setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null, null, document.getElementById("sbpTitleTextbox").value); }, 0);
-		}
+		setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null); }, 0);
 	},
 
 	toggleElements : function(isProgressMode)
@@ -223,7 +217,7 @@ var sbCombineService = {
 		sbDataSource.setProperty(newRes, "type", "combine");
 		sbDataSource.setProperty(newRes, "source", sbDataSource.getProperty(this.resList[0], "source"));
 		var newIcon = sbDataSource.getProperty(this.resList[0], "icon");
-		if ( newIcon.match(/\d{14}/) ) newIcon = "resource://scrapbook/data/" + aItem.id + "/" + sbCommonUtils.getFileName(newIcon);
+		if ( newIcon.indexOf("resource://scrapbook/data/") == 0 ) newIcon = "resource://scrapbook/data/" + aItem.id + "/" + sbCommonUtils.getFileName(newIcon);
 		sbDataSource.setProperty(newRes, "icon", newIcon);
 		var newComment = "";
 		for ( var i = 0; i < this.resList.length; i++ )
@@ -397,11 +391,14 @@ var sbPageCombiner = {
 		this.isTargetCombined = false;
 		if ( sbCombineService.index == 0 )
 		{
+			if (!sbCombineService.option["T"]) {
+				sbCombineService.option["T"] = sbDataSource.getProperty(sbCombineService.curRes, "title");
+			}
 			this.htmlSrc += '<!DOCTYPE html>' + '\n' +
 				'<html>' + '\n' +
 				'<head>' + '\n' +
 				'<meta charset="UTF-8">' + '\n' +
-				'<title>' + sbDataSource.getProperty(sbCombineService.curRes, "title") + '</title>' + '\n' +
+				'<title>' + sbCombineService.option["T"] + '</title>' + '\n' +
 				'<link rel="stylesheet" href="combine.css" media="all">' +
 				'<link rel="stylesheet" href="chrome://scrapbook/skin/combine.css" media="all">' + '\n' +
 				'<link rel="stylesheet" href="chrome://scrapbook/skin/annotation.css" media="all">' + '\n' +
@@ -460,10 +457,7 @@ var sbPageCombiner = {
 		}
 		var icon = sbDataSource.getProperty(sbCombineService.curRes, "icon");
 		if ( !icon ) icon = sbCommonUtils.getDefaultIcon(aType);
-		if ( icon.indexOf("resource://") == 0 && icon.indexOf(sbCombineService.curID) > 0 )
-		{
-			icon = "./data/" + sbCombineService.curID + "/" + sbCommonUtils.getFileName(icon);
-		}
+		icon = sbCommonUtils.convertResURLToURL(icon);
 		src += '<cite class="scrapbook-header' + '">\n';
 		src += '\t<img src="' + icon + '" width="16" height="16">\n';
 		src += '\t<a class="' + aType + '"' + (linkURL ? ' href="' + linkURL + '"' : "") + '>' + sbCommonUtils.escapeHTML(title, true) + '</a>\n';

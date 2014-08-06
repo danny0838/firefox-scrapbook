@@ -417,7 +417,7 @@ var sbExportService = {
 		item.folder = this.getFolderPath(aRes).join("\t");
 		if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) )
 		{
-			item.icon = item.icon.match(/\d{14}\/([^\/]+)$/) ? RegExp.$1 : "";
+			item.icon = item.icon.match(/\d{14}\/(.+)$/) ? RegExp.$1 : "";
 		}
 		var num = 0, destDir, dirName;
 		do {
