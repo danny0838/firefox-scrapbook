@@ -802,7 +802,7 @@ var sbCommonUtils = {
 	 * sticky-footer
 	 * sticky-save
 	 * sticky-delete
-	 * block-comment (?)
+	 * block-comment (div) (for downward compatibility with SB <= 0.17.0)
 	 *
 	 * title (*)
 	 * title-src (*)
@@ -811,6 +811,7 @@ var sbCommonUtils = {
 	 */
 	getSbObjectType : function(aNode)
 	{
+		if (aNode.nodeType != 1) return false;
 		var type = aNode.getAttribute("data-sb-obj");
 		if (type) return type;
 		// below is for downward compatibility
