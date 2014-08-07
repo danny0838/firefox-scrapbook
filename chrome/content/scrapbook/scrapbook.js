@@ -875,7 +875,19 @@ var sbSearchService = {
 				var regex1 = this.optionRE ? 
 				             this.query : sbCommonUtils.escapeRegExp(this.query);
 				var regex2 = this.optionCS ? "m" : "mi";
-				this.regex = new RegExp(regex1, regex2)
+				try {
+					this.regex = new RegExp(regex1, regex2);
+				} catch (ex) {
+					sbListHandler.quit();
+					sbTreeHandler.TREE.ref = "urn:scrapbook:search";
+					sbTreeHandler.TREE.builder.rebuild();
+					sbTreeDNDHandler.quit();
+					sbMainService.toggleHeader(
+						true,
+						sbCommonUtils.lang("fulltext", "ERR_REGEXP_INAVLID", [regex1])
+					);
+					return;
+				}
 				this.exec(false);
 			}
 		}
