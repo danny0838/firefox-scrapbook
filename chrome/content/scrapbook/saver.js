@@ -457,6 +457,18 @@ var sbContentSaver = {
 					}
 				}
 				break;
+			case "applet" : 
+				if ( aNode.hasAttribute("archive") ) {
+					if ( this.option["internalize"] && aNode.getAttribute("archive").indexOf("://") == -1 ) break;
+                    var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("archive"));
+					if ( this.option["media"] ) {
+						var aFileName = this.download(url);
+						if (aFileName) aNode.setAttribute("archive", sbCommonUtils.escapeFileName(aFileName));
+					} else {
+						aNode.setAttribute("archive", url);
+					}
+				}
+				break;
 			case "track" :  // in <audio> and <vedio>
 				if ( aNode.hasAttribute("src") ) {
 					if ( this.option["internalize"] ) break;
