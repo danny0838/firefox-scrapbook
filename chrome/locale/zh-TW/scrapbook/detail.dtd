@@ -1,6 +1,6 @@
 <!ENTITY sb.detail.linked.timeout "逾時（秒數）">
 <!ENTITY sb.detail.linked.charset "字元編碼">
-<!ENTITY sb.detail "擷取資訊">
+<!ENTITY sb.detail "擷取細節">
 <!ENTITY sb.detail.new.folder "開新資料夾">
 <!ENTITY sb.detail.select.folder "選取資料夾">
 <!ENTITY sb.detail.option "選項">
