@@ -457,6 +457,18 @@ var sbContentSaver = {
 					}
 				}
 				break;
+			case "applet" : 
+				if ( aNode.hasAttribute("archive") ) {
+					if ( this.option["internalize"] && aNode.getAttribute("archive").indexOf("://") == -1 ) break;
+                    var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("archive"));
+					if ( this.option["media"] ) {
+						var aFileName = this.download(url);
+						if (aFileName) aNode.setAttribute("archive", sbCommonUtils.escapeFileName(aFileName));
+					} else {
+						aNode.setAttribute("archive", url);
+					}
+				}
+				break;
 			case "track" :  // in <audio> and <vedio>
 				if ( aNode.hasAttribute("src") ) {
 					if ( this.option["internalize"] ) break;
@@ -592,9 +604,9 @@ var sbContentSaver = {
 					switch ( ext )
 					{
 						case "jpg" : case "jpeg" : case "png" : case "gif" : case "tiff" : flag = this.option["dlimg"]; break;
-						case "mp3" : case "wav"  : case "ram" : case "rm"  : case "wma"  : flag = this.option["dlsnd"]; break;
-						case "mpg" : case "mpeg" : case "avi" : case "mov" : case "wmv"  : flag = this.option["dlmov"]; break;
-						case "zip" : case "lzh"  : case "rar" : case "jar" : case "xpi"  : flag = this.option["dlarc"]; break;
+						case "aac" : case "flac" : case "mp3" : case "ogg" : case "ram" : case "ra" : case "rm" : case "rmx" : case "wav" : case "wma" : flag = this.option["dlsnd"]; break;
+						case "avi" : case "avc" : case "flv" : case "mkv" : case "mov" : case "mpg" : case "mpeg" : case "mp4" : case "wmv" : flag = this.option["dlmov"]; break;
+						case "zip" : case "lzh"  : case "lha"  : case "tar" : case "gz" : case "bz" : case "7z" : case "rar" : case "jar" : case "xpi" : flag = this.option["dlarc"]; break;
 						default : 
 							// do not copy, but add to the link list if it's a work of deep capture
 							if ( this.option["inDepth"] > 0 ) this.linkURLs.push(aNode.href);

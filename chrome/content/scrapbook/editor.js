@@ -330,10 +330,13 @@ var sbPageEditor = {
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			var doc = win.document;
 			this.allowUndo(doc);
-			var elems = doc.getElementsByTagName(aTagName), todo = [];
+			var elems = doc.getElementsByTagName(aTagName), toRemove = [];
 			for ( var i = 0; i < elems.length; i++ ) {
-				sbContentSaver.removeNodeFromParent(elems[i]);
+                toRemove.push(elems[i]);
 			}
+            toRemove.forEach(function(elem){
+                elem.parentNode.removeChild(elem);
+            }, this);
 		}, this);
 	},
 
