@@ -155,7 +155,7 @@
 						<menuitem label="&sb.edit.sticky.create;"  oncommand="sbAnnotationService.createSticky();" />
 					</menupopup>
 				</toolbarbutton>
-				<toolbarbutton id="ScrapBookEditCutter" type="menu-button" tooltiptext="&sb.edit.cutter;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbPageEditor.cutter();">
+				<toolbarbutton id="ScrapBookEditCutter" type="menu-button" tooltiptext="&sb.edit.cutter;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbPageEditor.cutter();" onclick="if (event.originalTarget.localName == 'toolbarbutton') if (event.button == 1) sbPageEditor.removeSbObjectsSelected();">
 					<menupopup>
 						<menuitem label="&sb.edit.remove.script;" oncommand="sbPageEditor.removeElementsByTagName('script');" />
 						<menuitem label="&sb.edit.remove.iframe;" oncommand="sbPageEditor.removeElementsByTagName('iframe');" />
