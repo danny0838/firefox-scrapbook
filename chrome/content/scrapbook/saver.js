@@ -820,8 +820,7 @@ var sbContentSaver = {
 			aURLSpec = sbCommonUtils.resolveURL(this.refURLObj.spec, aURLSpec);
 		}
 		try {
-			var aURL = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
-			aURL.spec = aURLSpec;
+            var aURL = sbCommonUtils.convertURLToObject(aURLSpec);
 		} catch(ex) {
 			sbCommonUtils.alert("ScrapBook ERROR: Failed to download: " + aURLSpec);
 			return "";
