@@ -195,7 +195,13 @@ var sbContentSaver = {
 		}
 
 		// HTML document: save the current DOM
-		this.refURLObj = sbCommonUtils.convertURLToObject(aDocument.location.href);
+
+        // frames could have ridiculous malformed location.href, such as "javascript:foo.bar"
+        // in this case catch the error and this.refURLObj should remain original (the parent frame)
+        try {
+            this.refURLObj = sbCommonUtils.convertURLToObject(aDocument.location.href);
+        } catch(ex) {
+        }
 
 		if ( !this.option["internalize"] ) {
 			var arr = this.getUniqueFileName(aFileKey + ".html", this.refURLObj.spec, aDocument);
@@ -814,10 +820,9 @@ var sbContentSaver = {
 			aURLSpec = sbCommonUtils.resolveURL(this.refURLObj.spec, aURLSpec);
 		}
 		try {
-			var aURL = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
-			aURL.spec = aURLSpec;
+            var aURL = sbCommonUtils.convertURLToObject(aURLSpec);
 		} catch(ex) {
-			sbCommonUtils.alert("ScrapBook ERROR: Failed to download: " + aURLSpec);
+            sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_DOWNLOAD_FILE", [aURLSpec, ex]));
 			return "";
 		}
 

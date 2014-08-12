@@ -1,5 +1,6 @@
 <!ENTITY sb.prop.general "Informacje podstawowe">
 <!ENTITY sb.prop.type "Typ">
+<!ENTITY sb.prop.date "Data">
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Kodowanie">

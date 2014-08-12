@@ -631,19 +631,19 @@ var sbCommonUtils = {
 	},
 
 	// deprecated, use getPref instead (left for downward compatibility with addons)
-	copyUnicharPref : function(aPrefName, aDefVal)
+	copyUnicharPref : function(aName, aDefVal)
 	{
 		return this.getPref(aName, aDefVal, true);
 	},
 
 	// deprecated, use setPref instead (left for downward compatibility with addons)
-	setBoolPref : function(aPrefName, aPrefValue)
+	setBoolPref : function(aName, aPrefValue)
 	{
 		return this.setPref(aName, aPrefValue, true);
 	},
 
 	// deprecated, use setPref instead (left for downward compatibility with addons)
-	setUnicharPref : function(aPrefName, aPrefValue)
+	setUnicharPref : function(aName, aPrefValue)
 	{
 		return this.setPref(aName, aPrefValue, true);
 	},
