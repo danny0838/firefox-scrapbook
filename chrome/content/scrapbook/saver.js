@@ -822,7 +822,7 @@ var sbContentSaver = {
 		try {
             var aURL = sbCommonUtils.convertURLToObject(aURLSpec);
 		} catch(ex) {
-			sbCommonUtils.alert("ScrapBook ERROR: Failed to download: " + aURLSpec);
+            sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_DOWNLOAD_FILE", [aURLSpec, ex]));
 			return "";
 		}
 
