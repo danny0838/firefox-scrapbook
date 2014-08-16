@@ -1,5 +1,6 @@
 <!ENTITY sb.prop.general "Informații generale">
 <!ENTITY sb.prop.type "Tip">
+<!ENTITY sb.prop.date "Dată">
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Codare">

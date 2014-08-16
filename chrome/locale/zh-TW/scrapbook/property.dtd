@@ -1,5 +1,6 @@
 <!ENTITY sb.prop.general "一般資訊">
 <!ENTITY sb.prop.type "型態">
+<!ENTITY sb.prop.date "日期">
 <!ENTITY sb.prop.create "建立時間">
 <!ENTITY sb.prop.modify "修改時間">
 <!ENTITY sb.prop.encode "字集">
