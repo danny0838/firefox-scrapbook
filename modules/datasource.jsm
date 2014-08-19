@@ -448,7 +448,7 @@ var sbDataSource = {
 		if (!this._needReOutputTree) return;
 		try {
 			if (!aWindow) aWindow = sbCommonUtils.getFocusedWindow();
-			aWindow.openDialog('chrome://scrapbook/content/output.xul?auto','ScrapBook:Output','chrome,modal,resizable');
+			aWindow.openDialog('chrome://scrapbook/content/output.xul','ScrapBook:Output','chrome,modal', true);
 		} catch(ex) {
 		}
 		this._needReOutputTree = false;
