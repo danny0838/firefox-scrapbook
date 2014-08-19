@@ -123,7 +123,7 @@ var sbOutputService = {
 
 	getHTMLHead : function()
 	{
-		var HTML = '<!DOCTYPE html>\n\n'
+		var HTML = '<!DOCTYPE html>\n'
 			+ '<html>\n\n'
 			+ '<head>\n'
 			+ '	<meta charset="UTF-8">\n'
@@ -231,22 +231,22 @@ var sbOutputService = {
 
 	getHTMLFoot : function()
 	{
-		var HTML = "\n</body>\n</html>\n";
+		var HTML = "</body>\n\n</html>\n";
 		return HTML;
 	},
 
 	getHTMLFrame : function()
 	{
-		var HTML = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">\n\n'
-			+ '<html>\n\n'
+		var HTML = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">\n'
+			+ '<html>\n'
 			+ '<head>\n'
-			+ '	<meta http-equiv="Content-Type" Content="text/html;charset=UTF-8">\n'
+			+ '	<meta charset="UTF-8">\n'
 			+ '	<title>' + document.title + '</title>\n'
-			+ '</head>\n\n'
+			+ '</head>\n'
 			+ '<frameset cols="200,*">\n'
 			+ '	<frame name="side" src="index.html">\n'
 			+ '	<frame name="main">\n'
-			+ '</frameset>\n\n'
+			+ '</frameset>\n'
 			+ '</html>\n';
 		return HTML;
 	},
