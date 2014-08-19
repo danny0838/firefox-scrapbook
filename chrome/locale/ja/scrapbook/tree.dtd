@@ -13,7 +13,7 @@
 <!ENTITY sb.export "エクスポート">
 <!ENTITY sb.remove "削除">
 <!ENTITY sb.property "プロパティ">
-<!ENTITY sb.listview "リストビュー"><!-- left for addon compatibility -->
+<!ENTITY sb.listview "リストビュー">
 <!ENTITY sb.prop.title "タイトル">
 <!ENTITY sb.prop.comment "コメント">
 <!ENTITY sbp.prop.url "URL">

@@ -13,7 +13,7 @@
 <!ENTITY sb.export "Exportieren">
 <!ENTITY sb.remove "Löschen">
 <!ENTITY sb.property "Eigenschaften">
-<!ENTITY sb.listview "Geteilte Listenansicht"><!-- left for addon compatibility -->
+<!ENTITY sb.listview "Geteilte Listenansicht">
 <!ENTITY sb.prop.title "Name">
 <!ENTITY sb.prop.comment "Beschreibung">
 <!ENTITY sbp.prop.url "URL">

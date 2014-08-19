@@ -13,7 +13,7 @@
 <!ENTITY sb.export "Vie">
 <!ENTITY sb.remove "Poista">
 <!ENTITY sb.property "Ominaisuudet">
-<!ENTITY sb.listview "Luettelo"><!-- left for addon compatibility -->
+<!ENTITY sb.listview "Luettelo">
 <!ENTITY sb.prop.title "Otsikko">
 <!ENTITY sb.prop.comment "Kommentti">
 <!ENTITY sbp.prop.url "URL">

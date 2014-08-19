@@ -45,6 +45,7 @@
 				</menupopup>
 			</toolbarbutton>
 			<toolbarbutton id="sbToolbarToggle"   tooltiptext="&sb.toggle.all;" oncommand="sbTreeHandler.toggleAllFolders();" />
+			<toolbarbutton id="sbToolbarListView" tooltiptext="&sb.listview;"   oncommand="sbSearchService.listView();" />
 			<toolbarbutton id="mbToolbarButton" />
 			<toolbarseparator /><toolbarbutton id="sbToolbarMove"   label="&sb.move;..." oncommand="if ( sbManageService.ensureContextIsTree() ) sbTreeHandler.send();" />
 			<toolbarseparator /><toolbarbutton id="sbToolbarRemove" label="&sb.remove;"  oncommand="if ( sbManageService.ensureContextIsTree() ) sbTreeHandler.remove();" />

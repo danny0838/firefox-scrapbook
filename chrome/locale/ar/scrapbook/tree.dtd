@@ -13,7 +13,7 @@
 <!ENTITY sb.export "تصدير">
 <!ENTITY sb.remove "إزالة">
 <!ENTITY sb.property "خصائص">
-<!ENTITY sb.listview "عرض قائمة"><!-- left for addon compatibility -->
+<!ENTITY sb.listview "عرض قائمة">
 <!ENTITY sb.prop.title "العنونة">
 <!ENTITY sb.prop.comment "التعليق">
 <!ENTITY sbp.prop.url "العنوان">

@@ -13,7 +13,7 @@
 <!ENTITY sb.export "匯出">
 <!ENTITY sb.remove "刪除">
 <!ENTITY sb.property "文件屬性">
-<!ENTITY sb.listview "列表模式"><!-- left for addon compatibility -->
+<!ENTITY sb.listview "列表模式">
 <!ENTITY sb.prop.title "標題">
 <!ENTITY sb.prop.comment "文件評註">
 <!ENTITY sbp.prop.url "URL">

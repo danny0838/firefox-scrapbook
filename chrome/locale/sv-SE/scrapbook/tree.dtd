@@ -13,7 +13,7 @@
 <!ENTITY sb.export "Exportera">
 <!ENTITY sb.remove "Ta bort">
 <!ENTITY sb.property "Egenskaper">
-<!ENTITY sb.listview "Listvy"><!-- left for addon compatibility -->
+<!ENTITY sb.listview "Listvy">
 <!ENTITY sb.prop.title "Rubrik">
 <!ENTITY sb.prop.comment "Kommentar">
 <!ENTITY sbp.prop.url "URL">

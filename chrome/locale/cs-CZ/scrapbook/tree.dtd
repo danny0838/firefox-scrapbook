@@ -13,7 +13,7 @@
 <!ENTITY sb.export "Exportovat">
 <!ENTITY sb.remove "Odstranit">
 <!ENTITY sb.property "Vlastnosti">
-<!ENTITY sb.listview "Seznam"><!-- left for addon compatibility -->
+<!ENTITY sb.listview "Seznam">
 <!ENTITY sb.prop.title "Název">
 <!ENTITY sb.prop.comment "Komentář">
 <!ENTITY sbp.prop.url "Adresa URL">

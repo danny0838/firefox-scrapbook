@@ -962,6 +962,27 @@ var sbSearchService = {
 		this.type = tmpType;
 	},
 
+	listView: function()
+	{
+		if (sbTreeHandler.TREE.ref == "urn:scrapbook:search") {
+			this.exit();
+			return;
+		}
+		sbDataSource.clearContainer("urn:scrapbook:search");
+		this.container = sbDataSource.getContainer("urn:scrapbook:search", true);
+		var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource(this.treeRef), 2, true);
+		resList.forEach(function(res) {
+			this.container.AppendElement(res);
+		}, this);
+		sbTreeHandler.TREE.ref = "urn:scrapbook:search";
+		sbTreeHandler.TREE.builder.rebuild();
+		sbTreeDNDHandler.quit();
+		sbMainService.toggleHeader(
+			true,
+			sbCommonUtils.lang("scrapbook", "SEARCH_RESULTS_FOUND", [this.container.GetCount()])
+		);
+	},
+
 	exit: function()
 	{
 		if (sbTreeHandler.TREE.ref != "urn:scrapbook:search")

@@ -13,7 +13,7 @@
 <!ENTITY sb.export "Dışa Aktar">
 <!ENTITY sb.remove "Sil">
 <!ENTITY sb.property "Özellikler">
-<!ENTITY sb.listview "List View"><!-- left for addon compatibility -->
+<!ENTITY sb.listview "List View">
 <!ENTITY sb.prop.title "Başlık">
 <!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.comment "Yorum">

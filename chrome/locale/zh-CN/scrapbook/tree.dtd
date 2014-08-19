@@ -13,7 +13,7 @@
 <!ENTITY sb.export "导出">
 <!ENTITY sb.remove "删除">
 <!ENTITY sb.property "属性">
-<!ENTITY sb.listview "详细列表"><!-- left for addon compatibility -->
+<!ENTITY sb.listview "详细列表">
 <!ENTITY sb.prop.title "标题">
 <!ENTITY sb.prop.comment "注释">
 <!ENTITY sbp.prop.url "URL">

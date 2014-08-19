@@ -13,7 +13,7 @@
 <!ENTITY sb.export "Экспортировать">
 <!ENTITY sb.remove "Удалить">
 <!ENTITY sb.property "Свойства">
-<!ENTITY sb.listview "Список"><!-- left for addon compatibility -->
+<!ENTITY sb.listview "Список">
 <!ENTITY sb.prop.title "Заголовок">
 <!ENTITY sb.prop.comment "Комментарий">
 <!ENTITY sbp.prop.url "URL">
