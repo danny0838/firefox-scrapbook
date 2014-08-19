@@ -13,7 +13,7 @@
 <!ENTITY sb.export "가져오기">
 <!ENTITY sb.remove "삭제">
 <!ENTITY sb.property "속성">
-<!ENTITY sb.listview "목록 보기">
+<!ENTITY sb.listview "목록 보기"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.title "제목">
 <!ENTITY sb.prop.comment "주석">
 <!ENTITY sbp.prop.url "URL">

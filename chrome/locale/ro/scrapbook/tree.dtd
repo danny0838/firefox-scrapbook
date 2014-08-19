@@ -13,7 +13,7 @@
 <!ENTITY sb.export "Exportă">
 <!ENTITY sb.remove "Șterge">
 <!ENTITY sb.property "Proprietăți">
-<!ENTITY sb.listview "Afișează în mod listă">
+<!ENTITY sb.listview "Afișează în mod listă"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.title "Denumire">
 <!ENTITY sb.prop.comment "Comentariu">
 <!ENTITY sbp.prop.url "Adresă">

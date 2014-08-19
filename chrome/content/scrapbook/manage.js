@@ -27,7 +27,7 @@ var sbManageService = {
 
 	ensureContextIsTree : function()
 	{
-		return sbTreeHandler.TREE.treeBoxObject.focused && !sbListHandler.enabled;
+		return sbTreeHandler.TREE.treeBoxObject.focused;
 	},
 
 	toggleRightPane : function(aModuleElt)

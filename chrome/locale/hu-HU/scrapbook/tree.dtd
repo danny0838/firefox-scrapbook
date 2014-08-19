@@ -13,7 +13,7 @@
 <!ENTITY sb.export "Exportálás">
 <!ENTITY sb.remove "Törlés">
 <!ENTITY sb.property "Tulajdonságok">
-<!ENTITY sb.listview "Utolsó megtekintés">
+<!ENTITY sb.listview "Utolsó megtekintés"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.title "Név">
 <!ENTITY sb.prop.comment "Megjegyzés">
 <!ENTITY sbp.prop.url "URL">
