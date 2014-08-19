@@ -1,6 +1,6 @@
 <!ENTITY sb.prop.general "Info General">
 <!ENTITY sb.prop.type "Tipo">
-<!ENTITY sb.prop.date "Fecha">
+<!ENTITY sb.prop.date "Fecha"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Codificación">

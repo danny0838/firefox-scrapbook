@@ -1,6 +1,6 @@
 <!ENTITY sb.prop.general "常规">
 <!ENTITY sb.prop.type "类型">
-<!ENTITY sb.prop.date "日期">
+<!ENTITY sb.prop.date "日期"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "建立时间">
 <!ENTITY sb.prop.modify "修改时间">
 <!ENTITY sb.prop.encode "编码">
