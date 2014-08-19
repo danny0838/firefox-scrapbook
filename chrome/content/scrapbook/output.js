@@ -48,7 +48,7 @@ var sbOutputService = {
 		this.optionFrame = document.getElementById("ScrapBookOutputOptionF").checked;
 		this.optionAll ? this.execAll() : this.exec();
 		sbTreeHandler.toggleAllFolders(true);
-		if ( this.isAuto ) setTimeout(function(){ window.close(); }, 1000);
+		if ( this.isAuto ) window.close();
 	},
 
 	execAll : function()
