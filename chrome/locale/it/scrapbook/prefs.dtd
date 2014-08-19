@@ -33,6 +33,7 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "in fondo alla cartella">
 <!ENTITY sb.prefs.showDetailOnDrop "Mostra la finestra di dialogo &apos;Dettagli cattura&apos; quando si cattura tramite trascinamento e rilascio nella barra laterale">
 <!ENTITY sb.prefs.notifyOnComplete "Mostra la finestra di notifica &apos;Cattura completata&apos;">
+<!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.button.customize "Personalizza">
 <!ENTITY sb.button.browse "Sfoglia">
 <!ENTITY sb.button.show "Mostra i file">

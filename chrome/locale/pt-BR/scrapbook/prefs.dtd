@@ -33,6 +33,7 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "rodapé da pasta">
 <!ENTITY sb.prefs.showDetailOnDrop "Mostrar janela &apos;Detalhe de Captura&apos; quando capturando via arrastar e soltar na barra lateral">
 <!ENTITY sb.prefs.notifyOnComplete "Mostrar notificação &apos;Captura Completa&apos;">
+<!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.button.customize "Personalizar">
 <!ENTITY sb.button.browse "Caminho">
 <!ENTITY sb.button.show "Mostrar arquivos">

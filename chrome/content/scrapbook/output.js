@@ -3,6 +3,7 @@ var sbOutputService = {
 
 	depth : 0,
 	content : "",
+	isAuto : window.location.search == "?auto",
 	optionAll   : true,
 	optionFrame : false,
 
@@ -11,7 +12,7 @@ var sbOutputService = {
 		document.documentElement.getButton("accept").label = sbCommonUtils.lang("scrapbook", "START_BUTTON");
 		sbTreeHandler.init(true);
 		this.selectAllFolders();
-		if ( window.location.search == "?auto" )
+		if ( this.isAuto )
 		{
 			document.getElementById("ScrapBookOutputOptionO").checked = false;
 			this.start();
@@ -43,7 +44,7 @@ var sbOutputService = {
 		this.optionFrame = document.getElementById("ScrapBookOutputOptionF").checked;
 		this.optionAll ? this.execAll() : this.exec();
 		sbTreeHandler.toggleAllFolders(true);
-		if ( window.location.search == "?auto" ) setTimeout(function(){ window.close(); }, 1000);
+		if ( this.isAuto ) setTimeout(function(){ window.close(); }, 1000);
 	},
 
 	execAll : function()

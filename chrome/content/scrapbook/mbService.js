@@ -77,8 +77,10 @@ var sbMultiBookService = {
 
 	change: function(aItem)
 	{
-		if (!this.validateRefresh())
-			return;
+		if (!this.validateRefresh()) return;
+		// output tree requires correct pref and datasource,
+		// we have to exec it before changing them
+		sbDataSource.outputTreeAuto(window);
 		aItem.setAttribute("checked", true);
 		var path = aItem.getAttribute("path");
 		sbCommonUtils.setPref("data.default", path == "");

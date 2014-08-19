@@ -33,6 +33,7 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "Ende eines Ordners erstellen">
 <!ENTITY sb.prefs.showDetailOnDrop "Dialog &quot;Archivierungsdetails&quot; anzeigen, wenn eine Archivierung durch Ziehen mit der Maus in die Sidebar erfolgt">
 <!ENTITY sb.prefs.notifyOnComplete "Meldung nach Abschluss der Archivierung anzeigen">
+<!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.button.customize "Anpassen">
 <!ENTITY sb.button.browse "Durchsuchen">
 <!ENTITY sb.button.show "Dateien anzeigen">
