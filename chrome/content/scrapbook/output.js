@@ -6,6 +6,7 @@ var sbOutputService = {
 	isAuto : false,
 	optionAll   : true,
 	optionFrame : false,
+	optionOpen   : true,
 
 	/**
 	 * window.arguments[0]: true means is auto mode
@@ -16,11 +17,7 @@ var sbOutputService = {
 		document.documentElement.getButton("accept").label = sbCommonUtils.lang("scrapbook", "START_BUTTON");
 		sbTreeHandler.init(true);
 		this.selectAllFolders();
-		if ( this.isAuto )
-		{
-			document.getElementById("ScrapBookOutputOptionO").checked = false;
-			this.start();
-		}
+		if ( this.isAuto ) this.start();
 	},
 
 	selectAllFolders : function()
@@ -31,21 +28,21 @@ var sbOutputService = {
 			sbTreeHandler.TREE.view.selection.selectAll();
 			sbTreeHandler.TREE.treeBoxObject.focused = true;
 		}
-		this.optionAll = true;
 	},
 
 	toggleAllSelection : function()
 	{
-		if ( this.optionAll )
-		{
-			document.getElementById("ScrapBookOutputOptionA").checked = false;
-			this.optionAll = false;
-		}
+		document.getElementById("ScrapBookOutputOptionA").checked = false;
 	},
 
 	start : function()
 	{
+		this.optionAll = document.getElementById("ScrapBookOutputOptionA").checked;
 		this.optionFrame = document.getElementById("ScrapBookOutputOptionF").checked;
+		this.optionOpen = document.getElementById("ScrapBookOutputOptionO").checked;
+		if ( this.isAuto ) {
+			this.optionOpen = false;
+		}
 		this.optionAll ? this.execAll() : this.exec();
 		sbTreeHandler.toggleAllFolders(true);
 		if ( this.isAuto ) window.close();
@@ -103,7 +100,7 @@ var sbOutputService = {
 		this.content += this.getHTMLFoot();
 		sbCommonUtils.writeFile(indexFile, this.content, "UTF-8");
 		var fileName = this.optionFrame ? "frame.html" : "index.html";
-		if ( document.getElementById("ScrapBookOutputOptionO").checked )
+		if ( this.optionOpen )
 		{
 			sbCommonUtils.loadURL(sbCommonUtils.convertFilePathToURL(dir.path) + fileName, true);
 		}
