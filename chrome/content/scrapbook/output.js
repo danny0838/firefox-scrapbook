@@ -128,6 +128,7 @@ var sbOutputService = {
 			+ '<head>\n'
 			+ '	<meta charset="UTF-8">\n'
 			+ '	<title>' + document.title + '</title>\n'
+			+ '	<meta name="viewport" content="width=device-width">\n'
 			+ '	<link rel="stylesheet" type="text/css" href="output.css" media="all">\n'
 			+ '	<script>\n'
 			+ '	function init() {\n'
