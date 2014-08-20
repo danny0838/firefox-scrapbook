@@ -3,17 +3,13 @@ var sbOutputService = {
 
 	depth : 0,
 	content : "",
-	isAuto : false,
+	isAuto : window.location.hash == "#auto",
 	optionAll   : true,
 	optionFrame : false,
 	optionOpen   : true,
 
-	/**
-	 * window.arguments[0]: true means is auto mode
-	 */
 	init : function()
 	{
-		if (window.arguments && window.arguments[0]) this.isAuto = true;
 		document.documentElement.getButton("accept").label = sbCommonUtils.lang("scrapbook", "START_BUTTON");
 		sbTreeHandler.init(true);
 		this.selectAllFolders();
