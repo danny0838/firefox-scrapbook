@@ -327,7 +327,7 @@ var sbCacheService = {
 			for ( var j = 0; j < resList.length; j++ )
 			{
 				var type = sbDataSource.getProperty(resList[j], "type");
-				if ( type == "bookmark" || type == "separator" ) continue;
+				if ( type == "separator" ) continue;
 				this.resList.push(resList[j]);
 				this.folders.push(contResList[i].ValueUTF8);
 			}
@@ -418,6 +418,9 @@ var sbCacheService = {
 					}
 				}
 				break;
+			case "bookmark":
+				
+				break;
 			default:
 				sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_UNKNOWN_DATA_TYPE", [type]));
 				break;
@@ -440,7 +443,7 @@ var sbCacheService = {
 		if ( sbCacheSource.exists(resource) ) {
 			if ( gCacheFile.lastModifiedTime > aFile.lastModifiedTime && charset == sbCacheSource.getProperty(resource, "charset") )
 			{
-				sbCacheService.checkFrameFiles(aFile, function(){return 0;});
+				if (mode == "html") sbCacheService.checkFrameFiles(aFile, function(){return 0;});
 				this.uriHash[resource.ValueUTF8] = true;
 				sbCacheSource.updateEntry(resource, "folder",  this.folders[this.index]);
 				return;
