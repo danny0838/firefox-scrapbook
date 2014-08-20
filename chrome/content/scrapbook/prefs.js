@@ -27,6 +27,9 @@ var sbPrefWindow = {
 			}
 			document.getElementById("sbKeysMenubar").hidden = true;
 		}
+		// output tree requires correct pref and datasource,
+		// we have to exec it before changing them
+		sbDataSource.outputTreeAuto();
 	},
 
 	done: function() {

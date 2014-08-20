@@ -42,7 +42,6 @@ var sbDataSource = {
 
 	_uninit : function()
 	{
-		this.outputTreeAuto();
 		if (this._flushTimer) this.flush();
 		sbCommonUtils.RDF.UnregisterDataSource(this._dataObj);
 		this._dataObj = null;
@@ -111,6 +110,7 @@ var sbDataSource = {
 				this.flush();
 				break;
 			case "quit-application-requested": 
+				this.outputTreeAuto();
 				this._uninit();
 				break;
 			default: 
