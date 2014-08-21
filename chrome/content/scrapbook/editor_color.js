@@ -23,8 +23,8 @@ function init() {
 		gColorBgPicker = document.getElementById("sbColorBgPicker2");
 		gColorTextPicker.hidden = false;
 		gColorBgPicker.hidden = false;
-		document.getElementById("sbColorTextPicker").hidden = true;
-		document.getElementById("sbColorBgPicker").hidden = true;
+		document.getElementById("sbColorTextPicker").style.display = "none";
+		document.getElementById("sbColorBgPicker").style.display = "none";
 	}
 	gColorTextChecker = document.getElementById("sbColorText");
 	gColorBgChecker = document.getElementById("sbColorBg");
