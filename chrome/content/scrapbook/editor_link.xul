@@ -23,11 +23,11 @@
 
 	<radiogroup id="sbLinkSelector">
 		<hbox>
-			<radio id="sbLinkURLUse" label="&sb.edit.html.link.url;"/>
+			<radio id="sbLinkURLUse" label="&sb.edit.html.link.url;" selected="true" persist="selected" />
 			<textbox id="sbLinkURL" flex="1" oninput="pick('sbLinkURLUse')" />
 		</hbox>
 		<hbox>
-			<radio id="sbLinkIDUse" label="&sb.edit.html.link.id;"/>
+			<radio id="sbLinkIDUse" label="&sb.edit.html.link.id;" persist="selected" />
 			<textbox id="sbLinkID" flex="1" oninput="pick('sbLinkIDUse')" />
 		</hbox>
 	</radiogroup>
@@ -40,5 +40,6 @@
 				<menuitem label='&lt;a href="{URL}" title="{TITLE}">{THIS}&lt;/a>' selected="true" />
 			</menupopup>
 		</menulist>
+		<textbox id="sbLinkFormatValue" hidden="true" value='&lt;a href="{URL}" title="{TITLE}">{THIS}&lt;/a>' persist="value" />
 	</hbox>
 </dialog>
