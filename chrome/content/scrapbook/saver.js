@@ -804,7 +804,7 @@ var sbContentSaver = {
 
 	download : function(aURLSpec)
 	{
-		if ( !aURLSpec ) return;
+		if ( !aURLSpec ) return "";
 		// never download chrome:// resources
 		if ( aURLSpec.indexOf("chrome://") == 0 )
 		{
@@ -876,6 +876,7 @@ var sbContentSaver = {
 				return "";
 			}
 		}
+		return "";
 	},
 
 	/**
