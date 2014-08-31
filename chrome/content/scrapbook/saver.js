@@ -171,24 +171,20 @@ var sbContentSaver = {
 
 	saveDocumentInternal : function(aDocument, aFileKey)
 	{
-		var captureAsFile = false;
 		var captureType = "";
 		// any file unparsable: process as file saving
 		if ( !aDocument.body ) {
-			captureAsFile = true;
 			captureType = "file";
 		}
 		// image: use special captureType
 		else if ( aDocument.contentType.indexOf("image/") === 0 ) {
-			captureAsFile = true;
 			captureType = "file";
 		}
 		// text (parsable non-HTML): if not capture as HTML, save as file
 		else if ( aDocument.contentType != "text/html" && !this.option["textAsHtml"] ) {
-			captureAsFile = true;
 			captureType = "file";
 		}
-		if ( captureAsFile ) {
+		if ( captureType ) {
 			if ( this.isMainFrame ) this.item.type = captureType;
 			var newLeafName = this.saveFileInternal(aDocument.location.href, aFileKey, captureType, aDocument.characterSet);
 			return newLeafName;
