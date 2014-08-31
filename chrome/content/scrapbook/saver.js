@@ -349,17 +349,17 @@ var sbContentSaver = {
 	{
 		if ( !aFileKey ) aFileKey = "file" + Math.random().toString();
 		if ( !this.refURLObj ) this.refURLObj = sbCommonUtils.convertURLToObject(aFileURL);
-		if ( this.isMainFrame )
-		{
-			this.item.icon  = "moz-icon://" + sbCommonUtils.escapeFileName(sbCommonUtils.getFileName(aFileURL)) + "?size=16";
-			this.item.type  = aCaptureType;
-			this.item.chars = aCharset || "";
-		}
 		var newFileName = this.download(aFileURL);
 		if ( aCaptureType == "image" ) {
 			var myHTML = '<html><head><meta http-equiv="Content-Type" content="text/html; Charset=UTF-8"></head><body><img src="' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(newFileName)) + '"></body></html>';
 		} else {
 			var myHTML = '<html><head><meta http-equiv="Content-Type" content="text/html; Charset=UTF-8"><meta http-equiv="refresh" content="0;URL=./' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(newFileName)) + '"></head><body></body></html>';
+		}
+		if ( this.isMainFrame )
+		{
+			this.item.icon  = "moz-icon://" + sbCommonUtils.escapeFileName(newFileName) + "?size=16";
+			this.item.type  = aCaptureType;
+			this.item.chars = aCharset || "";
 		}
 		var myHTMLFile = this.contentDir.clone();
 		myHTMLFile.append(aFileKey + ".html");
