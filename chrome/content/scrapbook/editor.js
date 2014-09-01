@@ -2335,7 +2335,7 @@ var sbInfoViewer = {
 			"media" : true,
 			"styles" : true,
 			"script" : true,
-			"textAsHtml" : false,
+			"asHtml" : false,
 			"forceUtf8" : false,
 			"rewriteStyles" : false,
 			"internalize" : refFile,

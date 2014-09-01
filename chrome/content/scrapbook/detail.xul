@@ -65,7 +65,7 @@
 					</hbox>
 					<checkbox id="sbDetailOptionRewriteStyles" label="&sb.detail.option.rewriteStyles;" checked="true" />
 					<checkbox id="sbDetailOptionForceUtf8" label="&sb.detail.option.forceUtf8;" checked="true" />
-					<checkbox id="sbDetailOptionTextAsHtml" label="&sb.detail.option.textAsHtml;" />
+					<checkbox id="sbDetailOptionAsHtml" label="&sb.detail.option.asHtml;" />
 				</groupbox>
 				<groupbox group="capture-options" style="margin-top:8px;">
 					<caption label="&sb.detail.linked.file;" />

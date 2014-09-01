@@ -25,7 +25,7 @@ var sbContentSaver = {
 		this.name = "index";
 		this.favicon = null;
 		this.file2URL = { "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
-		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "styles" : true, "script" : false, "textAsHtml" : false, "forceUtf8" : true, "rewriteStyles" : true, "internalize" : false };
+		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "styles" : true, "script" : false, "asHtml" : false, "forceUtf8" : true, "rewriteStyles" : true, "internalize" : false };
 		this.plusoption = { "timeout" : "0", "charset" : "UTF-8" }
 		this.linkURLs = [];
 		this.frames = [];
@@ -173,7 +173,7 @@ var sbContentSaver = {
 	{
 		var captureType = "";
 		if ( aDocument.contentType != "text/html" ) {
-			if ( !(aDocument.documentElement.nodeName.toUpperCase() == "HTML" && aDocument.documentElement.lastChild.nodeName.toUpperCase() == "BODY" && this.option["textAsHtml"]) ) {
+			if ( !(aDocument.documentElement.nodeName.toUpperCase() == "HTML" && aDocument.documentElement.lastChild.nodeName.toUpperCase() == "BODY" && this.option["asHtml"]) ) {
 				captureType = "file";
 			}
 		}
