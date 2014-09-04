@@ -10,7 +10,6 @@ var sbMainService = {
 		sbMultiBookService.showButton();
 		sbTreeHandler.init(false);
 		sbTreeDNDHandler.init();
-		sbListHandler.restoreLastState();
 		this.baseURL = sbCommonUtils.getBaseHref(sbDataSource.data.URI);
 		this.initPrefs();
 		sbSearchService.init();
@@ -41,13 +40,10 @@ var sbMainService = {
 	rebuild: function()
 	{
 		sbTreeHandler.TREE.builder.rebuild();
-		sbListHandler.LIST.builder.rebuild();
 	},
 
 	refresh: function()
 	{
-		sbListHandler.quit();
-		sbListHandler.exit();
 		sbTreeHandler.exit();
 		sbTreeDNDHandler.quit();
 		this.init();
@@ -90,15 +86,12 @@ var sbMainService = {
 		if (aRes.Value == "urn:scrapbook:root")
 			return;
 		sbSearchService.exit();
-		if (!sbDataSource.isContainer(aRes))
-			sbListHandler.quit();
 		sbTreeHandler.locateInternal(aRes);
 	},
 
 	createFolder: function()
 	{
 		sbSearchService.exit();
-		sbListHandler.quit();
 		// create item
 		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
 		var newItem = sbCommonUtils.newItem(newID);
@@ -124,7 +117,6 @@ var sbMainService = {
 	createSeparator: function()
 	{
 		sbSearchService.exit();
-		sbListHandler.quit();
 		// create item
 		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
 		var newItem = sbCommonUtils.newItem(newID);
@@ -136,7 +128,6 @@ var sbMainService = {
 	createNote: function(aInTab)
 	{
 		sbSearchService.exit();
-		sbListHandler.quit();
 		// add resource
 		var newRes = this.addNewResource(null, {"type": "note", "inTab": aInTab});
 	},
@@ -144,7 +135,6 @@ var sbMainService = {
 	createNoteX: function()
 	{
 		sbSearchService.exit();
-		sbListHandler.quit();
 		// create item
 		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
 		var newItem = sbCommonUtils.newItem(newID);
@@ -233,20 +223,17 @@ var sbMainService = {
 
 var sbController = {
 
+	// left for addon compatibility
 	isTreeContext : function(itcEvent)
 	{
-		if ( !sbCommonUtils._fxVer4 ) {
-			return document.popupNode.nodeName == "treechildren";
-		}else {
-			return itcEvent.originalTarget.triggerNode.nodeName == "treechildren";
-		}
+		return true;
 	},
 
 	onPopupShowing : function(aEvent)
 	{
 		if (aEvent.originalTarget.localName != "menupopup")
 			return;
-		var res = this.isTreeContext(aEvent) ? sbTreeHandler.resource : sbListHandler.resource;
+		var res = sbTreeHandler.resource;
 		if (!res) {
 			aEvent.preventDefault();
 			return;
@@ -270,7 +257,6 @@ var sbController = {
 		getElement("sbPopupOpenTab").hidden                    = !isNote   || isSeparator;
 		getElement("sbPopupOpenNewTab").hidden                 = isFolder  || isNote || isSeparator;
 		getElement("sbPopupOpenSource").hidden                 = isFolder  || isNote || isSeparator;
-		getElement("sbPopupListView").hidden                   = !isFolder || isSeparator;
 		getElement("sbPopupCombinedView").hidden               = !isFolder || isSeparator;
 		getElement("sbPopupOpenAllItems").hidden               = !isFolder || isSeparator;
 		getElement("sbPopupOpenAllItems").nextSibling.hidden   = !isFolder || isSeparator;
@@ -286,7 +272,7 @@ var sbController = {
 	open: function(aRes, aInTab)
 	{
 		if (!aRes)
-			aRes = this.isTreeContext ? sbTreeHandler.resource : sbListHandler.resource;
+			aRes = sbTreeHandler.resource;
 		if (!aRes)
 			return;
 		var id = sbDataSource.getProperty(aRes, "id");
@@ -315,7 +301,7 @@ var sbController = {
 	openAllInTabs: function(aRes)
 	{
 		if (!aRes)
-			aRes = this.isTreeContext ? sbTreeHandler.resource : sbListHandler.resource;
+			aRes = sbTreeHandler.resource;
 		if (!aRes)
 			return;
 		var resList = sbDataSource.flattenResources(aRes, 2, false);
@@ -327,7 +313,7 @@ var sbController = {
 	renew: function(aRes, aShowDetail)
 	{
 		if (!aRes)
-			aRes = this.isTreeContext ? sbTreeHandler.resource : sbListHandler.resource;
+			aRes = sbTreeHandler.resource;
 		if (!aRes)
 			return;
 		var preset = [
@@ -359,7 +345,7 @@ var sbController = {
 	internalize: function(aRes)
 	{
 		if (!aRes)
-			aRes = this.isTreeContext ? sbTreeHandler.resource : sbListHandler.resource;
+			aRes = sbTreeHandler.resource;
 		if (!aRes)
 			return;
 		var id = sbDataSource.getProperty(aRes, "id");
@@ -414,7 +400,7 @@ var sbController = {
 	forward: function(aRes, aCommand, aParam)
 	{
 		if (!aRes)
-			aRes = this.isTreeContext ? sbTreeHandler.resource : sbListHandler.resource;
+			aRes = sbTreeHandler.resource;
 		if (!aRes)
 			return;
 		var id = sbDataSource.getProperty(aRes, "id");
@@ -878,7 +864,6 @@ var sbSearchService = {
 				try {
 					this.regex = new RegExp(regex1, regex2);
 				} catch (ex) {
-					sbListHandler.quit();
 					sbTreeHandler.TREE.ref = "urn:scrapbook:search";
 					sbTreeHandler.TREE.builder.rebuild();
 					sbTreeDNDHandler.quit();
@@ -942,7 +927,6 @@ var sbSearchService = {
 			if (val && val.match(this.regex))
 				this.container.AppendElement(res);
 		}, this);
-		sbListHandler.quit();
 		sbTreeHandler.TREE.ref = "urn:scrapbook:search";
 		sbTreeHandler.TREE.builder.rebuild();
 		sbTreeDNDHandler.quit();
@@ -976,6 +960,27 @@ var sbSearchService = {
 		this.regex = new RegExp("^(" + ymdList.join("|") + ")", "");
 		this.exec(true);
 		this.type = tmpType;
+	},
+
+	listView: function()
+	{
+		if (sbTreeHandler.TREE.ref == "urn:scrapbook:search") {
+			this.exit();
+			return;
+		}
+		sbDataSource.clearContainer("urn:scrapbook:search");
+		this.container = sbDataSource.getContainer("urn:scrapbook:search", true);
+		var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource(this.treeRef), 2, true);
+		resList.forEach(function(res) {
+			this.container.AppendElement(res);
+		}, this);
+		sbTreeHandler.TREE.ref = "urn:scrapbook:search";
+		sbTreeHandler.TREE.builder.rebuild();
+		sbTreeDNDHandler.quit();
+		sbMainService.toggleHeader(
+			true,
+			sbCommonUtils.lang("scrapbook", "SEARCH_RESULTS_FOUND", [this.container.GetCount()])
+		);
 	},
 
 	exit: function()

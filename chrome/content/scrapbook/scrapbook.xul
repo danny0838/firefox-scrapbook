@@ -32,7 +32,6 @@
 				</menupopup>
 			</toolbarbutton>
 			<toolbarbutton id="sbToolbarToggle"   tooltiptext="&sb.toggle.all;"   oncommand="sbTreeHandler.toggleAllFolders();" />
-			<toolbarbutton id="sbToolbarListView" observes="sbToggleListView"     oncommand="sbListHandler.toggle();" />
 			<toolbarbutton id="sbToolbarManage"   tooltiptext="&sb.tools.manage;" oncommand="sbCommonUtils.openManageWindow(null,null);" />
 			<toolbarbutton id="mbToolbarButton" />
 			<spacer flex="1" />
@@ -76,8 +75,6 @@
 			      seltype="single"
 			      class="plain" flex="1" />
 		</vbox>
-		<splitter id="sbListSplitter" class="plain" hidden="true" />
-		<vbox id="sbListOuter" flex="1" persist="height" hidden="true" style="height: 200px;" />
 		<splitter id="sbNoteSplitter" class="plain" hidden="true" />
 		<vbox id="sbNoteOuter" flex="1" persist="height" hidden="true">
 			<hbox id="sbNoteHeader" class="sb-header" align="center">
