@@ -41,12 +41,13 @@ var sbCalcService = {
 			var bytes = sbPropService.getTotalFileSize(id)[0];
 			this.grandSum += bytes;
 			var res   = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
-			var valid = sbDataSource.exists(res);
+			var type = sbDataSource.getProperty(res, "type");
+			var valid = sbDataSource.exists(res) && ["folder", "separator", "bookmark"].indexOf(type) == -1;
 			var icon  = sbDataSource.getProperty(res, "icon");
-			if ( !icon ) icon = sbCommonUtils.getDefaultIcon(sbDataSource.getProperty(res, "type"));
+			if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
 			this.treeItems.push([
 				id,
-				sbDataSource.getProperty(res, "type"),
+				type,
 				sbDataSource.getProperty(res, "title"),
 				icon,
 				bytes,
