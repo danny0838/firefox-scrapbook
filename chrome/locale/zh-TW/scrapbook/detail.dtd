@@ -10,7 +10,7 @@
 <!ENTITY sb.detail.option.styles "樣式">
 <!ENTITY sb.detail.option.scripts "動態腳本">
 <!ENTITY sb.detail.option.rewriteStyles "重組樣式表">
-<!ENTITY sb.detail.option.textAsHtml "純文字檔擷取為 HTML">
+<!ENTITY sb.detail.option.asHtml "擷取為 HTML">
 <!ENTITY sb.detail.option.forceUtf8 "儲存為 UTF-8 編碼">
 <!ENTITY sb.detail.linked.file "下載連結">
 <!ENTITY sb.detail.linked.image "圖片">
