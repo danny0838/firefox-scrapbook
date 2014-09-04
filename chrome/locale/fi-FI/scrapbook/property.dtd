@@ -1,6 +1,6 @@
 <!ENTITY sb.prop.general "Yleiset">
 <!ENTITY sb.prop.type "Tyyppi">
-<!ENTITY sb.prop.date "Päiväys">
+<!ENTITY sb.prop.date "Päiväys"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Merkistökoodaus">

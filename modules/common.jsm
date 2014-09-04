@@ -434,7 +434,7 @@ var sbCommonUtils = {
 
 	convertURLToObject : function(aURLString)
 	{
-		var aURL = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURI);
+		var aURL = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
 		aURL.spec = aURLString;
 		return aURL;
 	},

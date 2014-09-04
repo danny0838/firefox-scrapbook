@@ -1,5 +1,6 @@
 <!ENTITY sb.prop.general "معلومات عامة">
 <!ENTITY sb.prop.type "النوع">
+<!ENTITY sb.prop.date "التاريخ"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "الترميز">
