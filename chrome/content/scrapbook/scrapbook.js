@@ -667,7 +667,6 @@ var sbTreeDNDHandler = {
 			sbTreeHandler.TREE.view.isContainerOpen(row) &&
 			sbTreeHandler.TREE.view.isContainerEmpty(row) == false) {
 			tarPar = tarRes;
-			tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(row + 1);
 		}
 		curResList.forEach(function(curRes){
 			var curAbsIdx = sbTreeHandler.TREE.builderView.getIndexOfResource(curRes);
@@ -682,8 +681,10 @@ var sbTreeDNDHandler = {
 			var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
 			var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
 			if (curRes.Value == tarRes.Value) return;
-			if (orient == 1)
-				tarRelIdx++;
+			if (orient == 1) {
+				if (tarRelIdx == -1) tarRelIdx = 1;
+				else tarRelIdx++;
+			}
 			if (orient == -1 || orient == 1) {
 				if (curPar.Value == tarPar.Value && tarRelIdx > curRelIdx)
 					tarRelIdx--;
