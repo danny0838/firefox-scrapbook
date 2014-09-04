@@ -262,16 +262,27 @@ var sbSearchResult =
 	{
 		if ( !this.CURRENT_TREEITEM ) return;
 		var id   = this.CURRENT_TREEITEM[5];
-		var url  = this.CURRENT_TREEITEM[6] == "note" ? "chrome://scrapbook/content/note.xul?id=" + id : this.resPathToURL(id, this.CURRENT_TREEITEM[4]);
 		switch ( key ) {
-			case "O" : sbCommonUtils.loadURL(url, false); break;
-			case "T" : sbCommonUtils.loadURL(url, true); break;
+			case "O" : sbCommonUtils.loadURL(getURL(), false); break;
+			case "T" : sbCommonUtils.loadURL(getURL(), true); break;
 			case "P" : window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome" ,id); break;
 			case "L" : 
-				var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + sbSearchResult.CURRENT_TREEITEM[5]);
+				var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
 				sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser").sbBrowserOverlay.execLocate(res);
 				break;
-			default  : document.getElementById("sbBrowser").loadURI(url); break;
+			default  : document.getElementById("sbBrowser").loadURI(getURL()); break;
+		}
+		
+		function getURL() {
+			switch (sbSearchResult.CURRENT_TREEITEM[6]) {
+				case "note":
+					return "chrome://scrapbook/content/note.xul?id=" + id;
+				case "bookmark":
+					var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
+					return sbDataSource.getProperty(res, "source");
+				default:
+					return sbSearchResult.resPathToURL(id, sbSearchResult.CURRENT_TREEITEM[4]);
+			}
 		}
 	},
 
@@ -327,7 +338,7 @@ var sbCacheService = {
 			for ( var j = 0; j < resList.length; j++ )
 			{
 				var type = sbDataSource.getProperty(resList[j], "type");
-				if ( type == "image" || type == "bookmark" || type == "separator" ) continue;
+				if ( type == "separator" ) continue;
 				this.resList.push(resList[j]);
 				this.folders.push(contResList[i].ValueUTF8);
 			}
@@ -369,19 +380,19 @@ var sbCacheService = {
 						var mime = sbCommonUtils.getFileMime(file2);
 						if ( !mime || mime != "text/html" ) break;
 						var basePathCut = dir.path.length + 1;
-						sbCacheService.inspectFile(file2, file2.path.substring(basePathCut).replace(/\\/g, "/"));
+						sbCacheService.inspectFile(file2, file2.path.substring(basePathCut).replace(/\\/g, "/"), "html");
 						break;
 					}
 				}
 				// cache the file
-				sbCacheService.inspectFile(file, "index.html");
+				sbCacheService.inspectFile(file, "index.html", "html");
 				break;
 			case "combine":
 			case "note":
 				var file = dir.clone();
 				file.append("index.html");
 				if (!file.exists()) break;
-				sbCacheService.inspectFile(file, "index.html");
+				sbCacheService.inspectFile(file, "index.html", "html");
 				break;
 			case "notex":
 			case "site":
@@ -392,11 +403,11 @@ var sbCacheService = {
 					// filter with common filter
 					if ( !sbCacheService.cacheFilter(file) ) return;
 					// cache this file
-					sbCacheService.inspectFile(file, file.path.substring(basePathCut).replace(/\\/g, "/"));
+					sbCacheService.inspectFile(file, file.path.substring(basePathCut).replace(/\\/g, "/"), "html");
 				}, this);
 				break;
 			case "file":
-				if (!sbDataSource.getProperty(res, "chars")) break;
+			case "image":
 				var file = dir.clone();
 				file.append("index.html");
 				if (!file.exists()) break;
@@ -409,10 +420,17 @@ var sbCacheService = {
 					var file2 = sbCommonUtils.convertURLToFile(URI2);
 					if (!file2.exists()) break;
 					var mime = sbCommonUtils.getFileMime(file2);
-					if ( !mime || mime.indexOf("text/") != 0 ) break;
 					var basePathCut = dir.path.length + 1;
-					sbCacheService.inspectFile(file2, file2.path.substring(basePathCut).replace(/\\/g, "/"), true);
+					if ( mime && mime.indexOf("text/") == 0 ) {
+						sbCacheService.inspectFile(file2, file2.path.substring(basePathCut).replace(/\\/g, "/"), "text");
+					}
+					else {
+						sbCacheService.inspectFile(file2, file2.path.substring(basePathCut).replace(/\\/g, "/"), "none");
+					}
 				}
+				break;
+			case "bookmark":
+				sbCacheService.inspectFile(null, "index.html", "none");
 				break;
 			default:
 				sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_UNKNOWN_DATA_TYPE", [type]));
@@ -427,26 +445,31 @@ var sbCacheService = {
 			setTimeout(function(){ sbCacheService.finalize(); }, 0);
 	},
 
-	inspectFile : function(aFile, aSubPath, nonHTML)
+	inspectFile : function(aFile, aSubPath, mode)
 	{
 		var resource = sbCommonUtils.RDF.GetResource(this.resList[this.index].ValueUTF8 + "#" + aSubPath);
 		var charset = sbDataSource.getProperty(sbCacheService.resList[sbCacheService.index], "chars");
-		// if cache is newer, skip caching this file and its frames
-		// (only check update of the main page)
-		if ( sbCacheSource.exists(resource) ) {
-			if ( gCacheFile.lastModifiedTime > aFile.lastModifiedTime && charset == sbCacheSource.getProperty(resource, "charset") )
-			{
-				sbCacheService.checkFrameFiles(aFile, function(){return 0;});
-				this.uriHash[resource.ValueUTF8] = true;
-				sbCacheSource.updateEntry(resource, "folder",  this.folders[this.index]);
-				return;
+		if (aFile) {
+			// if cache is newer, skip caching this file and its frames
+			// (only check update of the main page)
+			if ( sbCacheSource.exists(resource) ) {
+				if ( gCacheFile.lastModifiedTime > aFile.lastModifiedTime && charset == sbCacheSource.getProperty(resource, "charset") )
+				{
+					if (mode == "html") sbCacheService.checkFrameFiles(aFile, function(){return 0;});
+					this.uriHash[resource.ValueUTF8] = true;
+					sbCacheSource.updateEntry(resource, "folder",  this.folders[this.index]);
+					return;
+				}
 			}
+			// cache text in the file and its frames
+			var contents = [];
+			addContent(aFile);
+			if (mode == "html") sbCacheService.checkFrameFiles(aFile, addContent);
+			contents = contents.join("\t").replace(/[\x00-\x1F\x7F]/g, " ").replace(/\s+/g, " ");
 		}
-		// cache text in the file and its frames
-		var contents = [];
-		addContent(aFile);
-		if (!nonHTML) sbCacheService.checkFrameFiles(aFile, addContent);
-		contents = contents.join("\t").replace(/[\x00-\x1F\x7F]/g, " ").replace(/\s+/g, " ");
+		else {
+			var contents = "";
+		}
 		// update cache data
 		if ( sbCacheSource.exists(resource) ) {
 			sbCacheSource.updateEntry(resource, "folder",  this.folders[this.index]);
@@ -459,13 +482,25 @@ var sbCacheService = {
 		this.uriHash[resource.ValueUTF8] = true;
 
 		function addContent(aFile) {
-			var content = sbCommonUtils.readFile(aFile);
-			content = sbCommonUtils.convertToUnicode(content, charset);
-			if (!nonHTML) {
-				contents.push(sbCacheService.convertHTML2Text(content));
-			}
-			else {
-				contents.push(content);
+			switch (mode) {
+				case "html":
+					var content = sbCommonUtils.readFile(aFile);
+					content = sbCommonUtils.convertToUnicode(content, charset);
+					contents.push(sbCacheService.convertHTML2Text(content));
+					break;
+				case "text":
+					if (charset) {
+						var content = sbCommonUtils.readFile(aFile);
+						content = sbCommonUtils.convertToUnicode(content, charset);
+						contents.push(content);
+					}
+					else {
+						contents.push("");
+					}
+					break;
+				case "none":
+					contents.push("");
+					break;
 			}
 		}
 	},
