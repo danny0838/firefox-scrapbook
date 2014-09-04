@@ -48,11 +48,12 @@ a {
 }
 
 a:active {
-	background-color:#000000;
-	color:#FFFFFF;
+	background-color: #000000;
+	color: #FFFFFF;
 }
 
 a:focus {
+    background-color: #6495ED;
 	text-decoration: underline;
 }
 
