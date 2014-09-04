@@ -171,25 +171,20 @@ var sbContentSaver = {
 
 	saveDocumentInternal : function(aDocument, aFileKey)
 	{
-		var captureAsFile = false;
 		var captureType = "";
 		// any file unparsable: process as file saving
 		if ( !aDocument.body ) {
-			captureAsFile = true;
 			captureType = "file";
 		}
 		// image: use special captureType
 		else if ( aDocument.contentType.indexOf("image/") === 0 ) {
-			captureAsFile = true;
 			captureType = "file";
 		}
 		// text (parsable non-HTML): if not capture as HTML, save as file
 		else if ( aDocument.contentType != "text/html" && !this.option["textAsHtml"] ) {
-			captureAsFile = true;
 			captureType = "file";
 		}
-		if ( captureAsFile ) {
-			if ( this.isMainFrame ) this.item.type = captureType;
+		if ( captureType ) {
 			var newLeafName = this.saveFileInternal(aDocument.location.href, aFileKey, captureType, aDocument.characterSet);
 			return newLeafName;
 		}
@@ -353,17 +348,21 @@ var sbContentSaver = {
 	{
 		if ( !aFileKey ) aFileKey = "file" + Math.random().toString();
 		if ( !this.refURLObj ) this.refURLObj = sbCommonUtils.convertURLToObject(aFileURL);
-		if ( this.isMainFrame )
-		{
-			this.item.icon  = "moz-icon://" + sbCommonUtils.escapeFileName(sbCommonUtils.getFileName(aFileURL)) + "?size=16";
-			this.item.type  = aCaptureType;
-			this.item.chars = aCharset || "";
-		}
 		var newFileName = this.download(aFileURL);
-		if ( aCaptureType == "image" ) {
-			var myHTML = '<html><head><meta http-equiv="Content-Type" content="text/html; Charset=UTF-8"></head><body><img src="' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(newFileName)) + '"></body></html>';
-		} else {
-			var myHTML = '<html><head><meta http-equiv="Content-Type" content="text/html; Charset=UTF-8"><meta http-equiv="refresh" content="0;URL=./' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(newFileName)) + '"></head><body></body></html>';
+		if (newFileName) {
+			if ( aCaptureType == "image" ) {
+				var myHTML = '<html><head><meta http-equiv="Content-Type" content="text/html; Charset=UTF-8"></head><body><img src="' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(newFileName)) + '"></body></html>';
+			} else {
+				var myHTML = '<html><head><meta http-equiv="Content-Type" content="text/html; Charset=UTF-8"><meta http-equiv="refresh" content="0;URL=./' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(newFileName)) + '"></head><body></body></html>';
+			}
+			if ( this.isMainFrame ) {
+				this.item.icon  = "moz-icon://" + sbCommonUtils.escapeFileName(newFileName) + "?size=16";
+				this.item.type  = aCaptureType;
+				this.item.chars = aCharset || "";
+			}
+		}
+		else {
+			var myHTML = "";
 		}
 		var myHTMLFile = this.contentDir.clone();
 		myHTMLFile.append(aFileKey + ".html");
@@ -808,7 +807,7 @@ var sbContentSaver = {
 
 	download : function(aURLSpec)
 	{
-		if ( !aURLSpec ) return;
+		if ( !aURLSpec ) return "";
 		// never download chrome:// resources
 		if ( aURLSpec.indexOf("chrome://") == 0 )
 		{
@@ -880,6 +879,7 @@ var sbContentSaver = {
 				return "";
 			}
 		}
+		return "";
 	},
 
 	/**
