@@ -4,9 +4,6 @@ function init() {
 	if ( !window.arguments) window.close();
 	gData = window.arguments[0];
 	if (gData.url) document.getElementById("sbFileHTML").value = gData.url;
-	document.getElementById("sbFileInsert").checked = sbCommonUtils.getPref("edit.file.lastInsert", true);
-	var lastFormat = sbCommonUtils.getPref("edit.file.lastFormat", "");
-	if (lastFormat) document.getElementById("sbFileFormat").value = lastFormat;
 
 	// disable insert hist_html if the current file is not html
 	if ( sbCommonUtils.splitFileName(gData.filename)[1] != "html" ) {
@@ -14,8 +11,7 @@ function init() {
 		document.getElementById("sbFileHistHTML").disabled = true;
 	}
 
-	// pick the last picked type and focus the corresponding field
-	pick( sbCommonUtils.getPref("edit.file.lastType", "sbFileFileUse") );
+	// focus the corresponding field of the selected radio
 	if (document.getElementById("sbFileFileUse").selected) {
 		document.getElementById("sbFilePicker").focus();
 	}
@@ -25,6 +21,9 @@ function init() {
 	else if (document.getElementById("sbFileHistHTMLUse").selected) {
 		document.getElementById("sbFileHistHTML").focus();
 	}
+
+	// sync sbFileFormatValue --> sbFileFormat for persist
+	document.getElementById("sbFileFormat").value = document.getElementById("sbFileFormatValue").getAttribute('value');
 }
 
 function accept() {
@@ -37,9 +36,9 @@ function accept() {
 	gData.insert = document.getElementById("sbFileInsert").checked;
 	gData.format = document.getElementById("sbFileFormat").value;
 	gData.result = ((gData.file_use && gData.file) || (gData.html_use && gData.html) || (gData.hist_html_use)) ? 1 : 0;
-	sbCommonUtils.setPref("edit.file.lastType", document.getElementById("sbFileSelector").selectedItem.id);
-	sbCommonUtils.setPref("edit.file.lastInsert", gData.insert);
-	sbCommonUtils.setPref("edit.file.lastFormat", gData.format);
+
+	// sync sbFileFormat --> sbFileFormatValue for persist
+	document.getElementById("sbFileFormatValue").setAttribute('value', document.getElementById("sbFileFormat").value);
 }
 
 function pickFile() {

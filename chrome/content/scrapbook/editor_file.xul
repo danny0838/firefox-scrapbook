@@ -23,22 +23,22 @@
 
 	<radiogroup id="sbFileSelector">
 		<hbox>
-			<radio id="sbFileFileUse" label="&sb.edit.html.file.pick;" />
+			<radio id="sbFileFileUse" label="&sb.edit.html.file.pick;" selected="true" persist="selected" />
 			<filefield id="sbFilePath" flex="1" />
 			<button id="sbFilePicker" label="&sb.button.browse;..." oncommand="if (pickFile()) pick('sbFileFileUse');" />
 		</hbox>
 		<hbox>
-			<radio id="sbFileHTMLUse" label="&sb.edit.html.file.html;" />
+			<radio id="sbFileHTMLUse" label="&sb.edit.html.file.html;" persist="selected" />
 			<textbox id="sbFileHTML" placeholder="eg. index2" flex="1" oninput="pick('sbFileHTMLUse');" />
 		</hbox>
 		<hbox>
-			<radio id="sbFileHistHTMLUse" label="&sb.edit.html.file.histHtml;" />
+			<radio id="sbFileHistHTMLUse" label="&sb.edit.html.file.histHtml;" persist="selected" />
 			<textbox id="sbFileHistHTML" placeholder="some comment" flex="1" oninput="pick('sbFileHistHTMLUse');" />
 		</hbox>
 	</radiogroup>
 	<separator />
 	<hbox>
-		<checkbox id="sbFileInsert" label="&sb.edit.html.file.format;" />
+		<checkbox id="sbFileInsert" label="&sb.edit.html.file.format;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
 		<menulist id="sbFileFormat" editable="true" flex="1">
 			<menupopup>
 				<menuitem label='&lt;a href="{FILE_E}">{THIS}&lt;/a>' />
@@ -48,5 +48,6 @@
 				<menuitem label='&lt;img width="500" src="{FILE_E}" alt="{THIS}" title="{THIS}" />' />
 			</menupopup>
 		</menulist>
+		<textbox id="sbFileFormatValue" hidden="true" value='&lt;a href="{FILE_E}" title="{FILE}">{THIS}&lt;/a>' persist="value" />
 	</hbox>
 </dialog>
