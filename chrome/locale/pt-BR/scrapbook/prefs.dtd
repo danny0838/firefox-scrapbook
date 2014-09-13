@@ -1,0 +1,34 @@
+<!ENTITY sb.prefs.main "Principal">
+<!ENTITY sb.prefs.keys "Chaves">
+<!ENTITY sb.prefs.tabs "Abas">
+<!ENTITY sb.prefs.save "Salvar">
+<!ENTITY sb.prefs.edit "Editar">
+<!ENTITY sb.prefs.organize "Organizar">
+<!ENTITY sb.prefs.advanced "Avançado">
+<!ENTITY sb.prefs.ui.contextMenu "Mostrar no menu de contexto do navegador">
+<!ENTITY sb.prefs.ui.contextSubMenu "Submenu">
+<!ENTITY sb.prefs.ui.bookmark "Mostrar menu &apos;Salvar como favorito&apos;">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Mostrar até">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "pastas usadas recentemente">
+<!ENTITY sb.prefs.ui.menuBar "Mostrar na barra de menu">
+<!ENTITY sb.prefs.ui.menuBar.icon "Ícone">
+<!ENTITY sb.prefs.ui.toolsMenu "Mostrar no menu &apos;Ferramentas&apos;">
+<!ENTITY sb.prefs.restart "Mudança requer reiniciar o Firefox.">
+<!ENTITY sb.prefs.tabs.tips "Abrir em aba para as seguintes operações">
+<!ENTITY sb.prefs.tabs.note "Editar nota">
+<!ENTITY sb.prefs.data "Local onde armazenar informações">
+<!ENTITY sb.prefs.data.default "Padrão (pasta do perfil)">
+<!ENTITY sb.prefs.data.custom "Salvar informações em">
+<!ENTITY sb.prefs.data.tips "Escolha uma pasta onde guardar as informações do ScrapBook.">
+<!ENTITY sb.prefs.multibook.enabled "Habilitar Multi-ScrapBook">
+<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook permite definir vários locais onde armazenar informações e alternar entre eles rapidamente com um botão na barra de ferramentas.">
+<!ENTITY sb.prefs.confirmDelete "Avise-me quando for apagar itens da árvore">
+<!ENTITY sb.prefs.tree.autoCollapse "Ao abrir uma pasta da árvore, fechar automaticamente outras pastas">
+<!ENTITY sb.prefs.tree.unshift "Colocar um item">
+<!ENTITY sb.prefs.tree.unshift.top "no início de uma pasta">
+<!ENTITY sb.prefs.tree.unshift.bottom "no final de uma pasta">
+<!ENTITY sb.prefs.showDetailOnDrop "Quando arrastar e soltar no painel lateral, mostrar o diálogo 'Salvar detalhe'">
+<!ENTITY sb.prefs.notifyOnComplete "Mostrar notificação &apos;Salvamento completo&apos;">
+<!ENTITY sb.button.customize "Personalizar">
+<!ENTITY sb.button.browse "Navegar">
+<!ENTITY sb.button.show "Mostrar arquivos">

@@ -13,7 +13,6 @@
 <!ENTITY sb.prefs.ui.menuBar "Zobrazit v liště nabídek">
 <!ENTITY sb.prefs.ui.menuBar.icon "Ikona">
 <!ENTITY sb.prefs.ui.toolsMenu "Zobrazit v nabídce položku 'Nástroje'">
-<!ENTITY sb.prefs.ui.statusBar "Zobrazit ve stavové liště">
 <!ENTITY sb.prefs.restart "Změna vyžaduje restart Firefoxu.">
 <!ENTITY sb.prefs.tabs.tips "Otevřít v panelu pro následující operace">
 <!ENTITY sb.prefs.tabs.note "Upravit poznámku">

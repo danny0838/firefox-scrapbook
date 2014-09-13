@@ -4,7 +4,6 @@ pref("scrapbook.ui.bookmarkMenu", true);
 pref("scrapbook.ui.menuBar", true);
 pref("scrapbook.ui.menuBar.icon", false);
 pref("scrapbook.ui.toolsMenu", false);
-pref("scrapbook.ui.statusBar", true);
 pref("scrapbook.ui.folderList", "");
 pref("scrapbook.ui.folderList.maxEntries", 5);
 pref("scrapbook.tabs.open", false);

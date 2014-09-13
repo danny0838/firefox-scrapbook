@@ -13,7 +13,6 @@
 <!ENTITY sb.prefs.ui.menuBar "Näytä valikkopalkissa">
 <!ENTITY sb.prefs.ui.menuBar.icon "Kuvake">
 <!ENTITY sb.prefs.ui.toolsMenu "Näytä Työkalut-valikossa">
-<!ENTITY sb.prefs.ui.statusBar "Näytä tilarivillä">
 <!ENTITY sb.prefs.restart "Muutokset saatetaan voimaan, kun Firefox käynnistetään uudelleen.">
 <!ENTITY sb.prefs.tabs.tips "Avaa välilehtiin seuraavilla toiminnoilla">
 <!ENTITY sb.prefs.tabs.note "Muokkaa muistilappua">

@@ -13,7 +13,6 @@
 <!ENTITY sb.prefs.ui.menuBar "Afficher dans la barre des menus">
 <!ENTITY sb.prefs.ui.menuBar.icon "Icône">
 <!ENTITY sb.prefs.ui.toolsMenu "Afficher dans le menu 'Outils'">
-<!ENTITY sb.prefs.ui.statusBar "Afficher dans la barre d'état">
 <!ENTITY sb.prefs.restart "La modification nécessite un redémarrage de Firefox.">
 <!ENTITY sb.prefs.tabs.tips "Ouvrir dans un nouvel onglet pour les opérations suivantes">
 <!ENTITY sb.prefs.tabs.note "Éditer une note">

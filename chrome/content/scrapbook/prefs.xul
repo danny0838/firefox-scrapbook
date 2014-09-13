@@ -33,7 +33,6 @@
 			<preference id="scrapbook.ui.menuBar"        name="scrapbook.ui.menuBar"        type="bool" />
 			<preference id="scrapbook.ui.menuBar.icon"   name="scrapbook.ui.menuBar.icon"   type="bool" />
 			<preference id="scrapbook.ui.toolsMenu"      name="scrapbook.ui.toolsMenu"      type="bool" />
-			<preference id="scrapbook.ui.statusBar"      name="scrapbook.ui.statusBar"      type="bool" />
 		</preferences>
 		<checkbox preference="scrapbook.ui.contextMenu"    label="&sb.prefs.ui.contextMenu;"
 		          onsyncfrompreference="sbPrefWindow.updateGroupedUI('scrapbook.ui.contextMenu', 'contextmenu');" />
@@ -48,7 +47,6 @@
 		          onsyncfrompreference="sbPrefWindow.updateGroupedUI('scrapbook.ui.menuBar', 'menubar');" />
 		<checkbox preference="scrapbook.ui.menuBar.icon"   label="&sb.prefs.ui.menuBar.icon; *"   class="indent" group="menubar" />
 		<checkbox preference="scrapbook.ui.toolsMenu" label="&sb.prefs.ui.toolsMenu;" />
-		<checkbox preference="scrapbook.ui.statusBar" label="&sb.prefs.ui.statusBar;" />
 		<description>* &sb.prefs.restart;</description>
 	</prefpane>
 

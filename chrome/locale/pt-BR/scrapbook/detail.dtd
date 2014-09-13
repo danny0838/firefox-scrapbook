@@ -1,0 +1,17 @@
+<!ENTITY sb.detail.title "Salvar detalhe">
+<!ENTITY sb.detail.new.folder "Nova pasta">
+<!ENTITY sb.detail.select.folder "Selecionar pasta">
+<!ENTITY sb.detail.option "Opções">
+<!ENTITY sb.detail.option.images "Imagens">
+<!ENTITY sb.detail.option.styles "Estilos">
+<!ENTITY sb.detail.linked.file "Baixar arquivos linkados">
+<!ENTITY sb.detail.linked.image "Imagem">
+<!ENTITY sb.detail.linked.sound "Som">
+<!ENTITY sb.detail.linked.movie "Filme">
+<!ENTITY sb.detail.linked.archive "Arquivo">
+<!ENTITY sb.detail.linked.custom "Personalizado">
+<!ENTITY sb.detail.linked.page2 "Salvamento em profundidade">
+<!ENTITY sb.detail.linked.page.depth "Profundidade para seguir os links">
+<!ENTITY sb.detail.linked.page.text "Após completar as capturas, todas as páginas serão linkadas umas às outras.">
+<!ENTITY sb.detail.warnAboutRenew "AVISO: 'Capturar Novamente' substitui a página salva anteriormente.">
+<!ENTITY sb.detail.warnAboutScript "AVISO: JavaScript pode causar alguns problemas.">

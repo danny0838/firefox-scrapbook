@@ -768,21 +768,6 @@ var sbInfoViewer = {
 
 	get TOOLBAR() { return document.getElementById("ScrapBookInfobar"); },
 
-	onPopupShowing : function(aEvent)
-	{
-		var id = ScrapBookBrowserOverlay.getID();
-		var elems = aEvent.originalTarget.childNodes;
-		for ( var i = 0; i < elems.length - 2; i++ ) elems[i].setAttribute("disabled", id ? "false" : "true");
-		for ( i; i < elems.length; i++ ) elems[i].hidden = id;
-		if ( id ) {
-			if ( !ScrapBookData.exists(ScrapBookBrowserOverlay.resource) ) { aEvent.preventDefault(); return; }
-			document.getElementById("ScrapBookStatusPopupE").setAttribute("checked",  ScrapBookBrowserOverlay.editMode);
-			document.getElementById("ScrapBookStatusPopupI").setAttribute("checked",  ScrapBookBrowserOverlay.infoMode);
-		} else {
-			aEvent.originalTarget.lastChild.setAttribute("checked", !(sbPageEditor.TOOLBAR.hidden || document.getElementById("ScrapBookToolbox").hidden));
-		}
-	},
-
 	init : function(aID)
 	{
 		if ( aID != ScrapBookBrowserOverlay.getID() ) return;
@@ -790,9 +775,7 @@ var sbInfoViewer = {
 		this.TOOLBAR.hidden = false;
 		var isTypeSite = (ScrapBookData.getProperty(ScrapBookBrowserOverlay.resource, "type") == "site");
 		document.getElementById("ScrapBookInfoHome").disabled = !isTypeSite;
-		document.getElementById("ScrapBookInfoSite").disabled = !isTypeSite;
 		document.getElementById("ScrapBookInfoHome").setAttribute("image", "chrome://scrapbook/skin/info_home" + (isTypeSite ? "1" : "0") +  ".png");
-		document.getElementById("ScrapBookInfoSite").setAttribute("image", "chrome://scrapbook/skin/info_link" + (isTypeSite ? "1" : "0") +  ".png");
 		var srcLabel = document.getElementById("ScrapBookInfoSource");
 		srcLabel.value = ScrapBookData.getProperty(ScrapBookBrowserOverlay.resource, "source");
 		srcLabel.onclick = function(aEvent){ ScrapBookUtils.loadURL(srcLabel.value, aEvent.button == 1); };

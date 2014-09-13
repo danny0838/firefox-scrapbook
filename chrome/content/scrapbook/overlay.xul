@@ -56,6 +56,11 @@
 				<menuitem id="ScrapBookMenubarItem2" key="key_ScrapBookCaptureAs" />
 				<menuitem id="ScrapBookMenubarItem3" key="key_BookmarkWithScrapBook" label="&sb.save.bookmark;..." oncommand="ScrapBookBrowserOverlay.execBookmark('ScrapBookContextPicking'); event.stopPropagation();" />
 				<menuitem id="ScrapBookMenubarItem4" key="key_ScrapBookSaveAllTabs" label="&sb.save.alltabs;..." oncommand="ScrapBookMenuHandler.execCaptureAllTabs(); event.stopPropagation();" />
+				<menuitem id="ScrapBookEditBefore" label="&sb.editbefore;" type="checkbox" autocheck="false" oncommand="this.getAttribute('checked') == 'false' ? sbPageEditor.init() : sbPageEditor.exit(true);" />
+				<menuitem id="ScrapBookStatusPopupI" label="&sb.toolbar.info;" type="checkbox" oncommand="sbInfoViewer.toggle();" />
+				<menuitem id="ScrapBookStatusPopupE" label="&sb.toolbar.edit;" type="checkbox" oncommand="sbPageEditor.toggle();" />
+				<menuitem id="ScrapBookStatusPopupD" label="&sb.indicators;"   type="checkbox" oncommand="sbInfoViewer.toggleIndicator(this.getAttribute('checked'));" persist="checked" />
+				<menuseparator />
 				<menuitem id="ScrapBookMenubarItem5" sblabel="&sb.sidebar;" observes="viewScrapBookSidebar" key="key_openScrapBookSidebar" />
 				<menuseparator />
 			</menupopup>
@@ -119,7 +124,6 @@
 				<image src="chrome://scrapbook/skin/info.png" />
 				<label id="ScrapBookInfoSource" crop="end" flex="1" />
 				<toolbarbutton id="ScrapBookInfoHome" image="chrome://scrapbook/skin/info_home0.png" label="&sb.info.home;"    oncommand="sbInfoViewer.loadFile('index.html');" />
-				<toolbarbutton id="ScrapBookInfoSite" image="chrome://scrapbook/skin/info_link0.png" label="&sb.info.sitemap;" oncommand="sbInfoViewer.loadFile('sitemap.xml');" />
 				<toolbarbutton image="chrome://scrapbook/skin/expander_left.png" tooltiptext="&sb.locate;" oncommand="ScrapBookBrowserOverlay.execLocate(ScrapBookBrowserOverlay.resource);" />
 			</toolbar>
 			<toolbar id="ScrapBookEditor" align="center" hidden="true" autoshow="true" persist="autoshow" style="background-attachment: scroll !important;">
@@ -163,24 +167,5 @@
 			</toolbar>
 		</toolbox>
 	</vbox>
-
-	<statusbar id="status-bar">
-		<statusbarpanel id="ScrapBookStatusPanel"
-		                class="statusbarpanel-menu-iconic"
-		                src="chrome://scrapbook/skin/main.png"
-		                style="padding: 0px 2px;"
-		                onclick="if (event.button == 2) document.getElementById('ScrapBookStatusPopup').showPopup(); else if (event.button == 1) toggleSidebar('viewScrapBookSidebar'); event.stopPropagation();">
-			<menupopup id="ScrapBookStatusPopup" onpopupshowing="sbInfoViewer.onPopupShowing(event);" onclick="event.stopPropagation();">
-				<menuitem id="ScrapBookStatusPopupR" label="&sb.renew;..."     oncommand="sbInfoViewer.renew(true);" onclick="if (event.button == 1) sbInfoViewer.renew(false);" class="menuitem-iconic sb-capture-target" />
-				<menuitem id="ScrapBookStatusPopupS" label="&sb.source;"       oncommand="sbInfoViewer.openSourceURL(false);" onclick="if (event.button == 1) sbInfoViewer.openSourceURL(true);document.getElementById('ScrapBookStatusPopup').hidePopup();" />
-				<menuseparator />
-				<menuitem id="ScrapBookStatusPopupD" label="&sb.indicators;"   type="checkbox" oncommand="sbInfoViewer.toggleIndicator(this.getAttribute('checked'));" persist="checked" />
-				<menuitem id="ScrapBookStatusPopupI" label="&sb.toolbar.info;" type="checkbox" oncommand="sbInfoViewer.toggle();" />
-				<menuitem id="ScrapBookStatusPopupE" label="&sb.toolbar.edit;" type="checkbox" oncommand="sbPageEditor.toggle();" />
-				<menuseparator />
-				<menuitem id="ScrapBookEditBefore" label="&sb.editbefore;" type="checkbox" autocheck="false" oncommand="this.getAttribute('checked') == 'false' ? sbPageEditor.init() : sbPageEditor.exit(true);" />
-			</menupopup>
-		</statusbarpanel>
-	</statusbar>
 
 </overlay>

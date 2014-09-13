@@ -5,7 +5,7 @@
 <!ENTITY sb.note.normalview "Vista Normal">
 <!ENTITY sb.note.template "Editar Plantilla HTML">
 <!ENTITY sb.note.autolinefeed "Salto de línea automático">
-<!ENTITY sb.note.autolinefeed.t "Añadir etiqueta &lt;br&gt; al final de la línea para &sb.note.htmlview;">
+<!ENTITY sb.note.autolinefeed.t "Añadir etiqueta <br> al final de la línea para &sb.note.htmlview;">
 <!ENTITY sb.note.fontsize "Tamaño de fuente">
 <!ENTITY sb.note.help "Ayuda">
 <!ENTITY sb.note.print "Imprimir">

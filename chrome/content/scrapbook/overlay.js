@@ -104,7 +104,6 @@ var ScrapBookBrowserOverlay = {
 		this.editMode = sbPageEditor.TOOLBAR.getAttribute("autoshow") == "true";
 		this.infoMode = sbInfoViewer.TOOLBAR.getAttribute("autoshow") == "true";
 		document.getElementById("ScrapBookMenu").hidden        = !ScrapBookUtils.getPref("ui.menuBar");
-		document.getElementById("ScrapBookStatusPanel").hidden = !ScrapBookUtils.getPref("ui.statusBar");
 		document.getElementById("ScrapBookToolsMenu").hidden   = !ScrapBookUtils.getPref("ui.toolsMenu");
 		var file = ScrapBookUtils.getScrapBookDir().clone();
 		file.append("folders.txt");
@@ -424,8 +423,24 @@ var ScrapBookMenuHandler = {
 			this._init();
 		var selected = ScrapBookBrowserOverlay.isSelected();
 		if (event.target == aMenuPopup) {
-			var label1 = document.getElementById("ScrapBookContextMenu" + (selected ? 1 : 3)).getAttribute("label");
-			var label2 = document.getElementById("ScrapBookContextMenu" + (selected ? 2 : 4)).getAttribute("label");
+			var isSaved = ScrapBookBrowserOverlay.getID() && ScrapBookData.exists(ScrapBookBrowserOverlay.resource);
+			getElement("ScrapBookMenubarItem1").hidden = isSaved;
+			getElement("ScrapBookMenubarItem2").hidden = isSaved;
+			getElement("ScrapBookMenubarItem3").hidden = isSaved;
+			getElement("ScrapBookMenubarItem4").hidden = isSaved;
+			getElement("ScrapBookEditBefore").hidden   = isSaved;
+			getElement("ScrapBookStatusPopupI").hidden = !isSaved;
+			getElement("ScrapBookStatusPopupE").hidden = !isSaved;
+			getElement("ScrapBookStatusPopupD").hidden = !isSaved;
+			if (isSaved) {
+				getElement("ScrapBookStatusPopupE").setAttribute("checked",  ScrapBookBrowserOverlay.editMode);
+				getElement("ScrapBookStatusPopupI").setAttribute("checked",  ScrapBookBrowserOverlay.infoMode);
+			}
+			else {
+				getElement("ScrapBookEditBefore").setAttribute("checked", !(sbPageEditor.TOOLBAR.hidden || getElement("ScrapBookToolbox").hidden));
+			}
+			var label1 = getElement("ScrapBookContextMenu" + (selected ? 1 : 3)).getAttribute("label");
+			var label2 = getElement("ScrapBookContextMenu" + (selected ? 2 : 4)).getAttribute("label");
 			getElement("ScrapBookMenubarItem1").setAttribute("label", label1);
 			getElement("ScrapBookMenubarItem2").setAttribute("label", label2);
 			getElement("ScrapBookMenubarItem1").className = "menuitem-iconic " + (selected ? "sb-capture-partial" : "sb-capture-entire");
