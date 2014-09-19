@@ -187,13 +187,17 @@ var sbCommonUtils = {
 
 	_refresh: function(aDSChanged)
 	{
+		var cur = this.WINDOW.getMostRecentWindow(null);
+		var curDone = false;
 		var sidebarId = this.getSidebarId("sidebar");
-		var winEnum = this.WINDOW.getEnumerator("navigator:browser");
 		// refresh/rebuild main browser windows and their sidebars
+		var winEnum = this.WINDOW.getEnumerator("navigator:browser");
 		while (winEnum.hasMoreElements()) {
 			var win = winEnum.getNext();
+			if (cur === win) curDone = true;
 			aDSChanged ? win.sbBrowserOverlay.refresh() : win.sbBrowserOverlay.rebuild();
 			var win = win.document.getElementById(sidebarId).contentWindow;
+			if (cur === win) curDone = true;
 			if (win.sbMainService) {
 				aDSChanged ? win.sbMainService.refresh() : win.sbMainService.rebuild();
 			}
@@ -202,6 +206,14 @@ var sbCommonUtils = {
 		var winEnum = this.WINDOW.getEnumerator("scrapbook");
 		while (winEnum.hasMoreElements()) {
 			var win = winEnum.getNext();
+			if (cur === win) curDone = true;
+			if (win.sbMainService) {
+				aDSChanged ? win.sbMainService.refresh() : win.sbMainService.rebuild();
+			}
+		}
+		// refresh/rebuild the current window if not included
+		if (!curDone) {
+			win = cur;
 			if (win.sbMainService) {
 				aDSChanged ? win.sbMainService.refresh() : win.sbMainService.rebuild();
 			}
