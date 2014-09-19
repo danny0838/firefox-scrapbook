@@ -1212,9 +1212,10 @@ var sbHtmlEditor = {
 
 	insertDate : function(aDoc)
 	{
-        var d = new Date();
 		var fmt = sbCommonUtils.getPref("edit.insertDateFormat", "") || "%Y-%m-%d %H:%M:%S";
-		aDoc.execCommand("insertHTML", false, d.strftime(fmt));
+		var time = "&lt;time&gt;";
+		try { time = strftime(fmt, Math.round(new Date()/1000)); } catch (ex) {}
+		aDoc.execCommand("insertHTML", false, time);
 	},
 
 	insertTodoBox : function(aDoc)
