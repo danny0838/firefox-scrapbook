@@ -478,23 +478,6 @@ var sbCommonUtils = {
 		return ( (pos = aURL.indexOf("#")) < 0 ) ? [aURL, ""] : [aURL.substring(0, pos), aURL.substring(pos, aURL.length)];
 	},
 
-	execProgram : function(aExecFilePath, args)
-	{
-		var execfile = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-		var process  = Components.classes["@mozilla.org/process/util;1"].createInstance(Components.interfaces.nsIProcess);
-		try {
-			execfile.initWithPath(aExecFilePath);
-			if ( !execfile.exists() ) {
-				this.alert(sbCommonUtils.lang("scrapbook", "ERR_FILE_NOT_EXIST", [aExecFilePath]));
-				return;
-			}
-			process.init(execfile);
-			process.run(false, args, args.length);
-		} catch (ex) {
-			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_EXEC_FILE", [aExecFilePath]));
-		}
-	},
-
 	getFocusedWindow : function()
 	{
 		var window = this.WINDOW.getMostRecentWindow("navigator:browser");
