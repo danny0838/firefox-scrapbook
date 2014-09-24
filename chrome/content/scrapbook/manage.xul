@@ -45,7 +45,7 @@
 				</menupopup>
 			</toolbarbutton>
 			<toolbarbutton id="sbToolbarToggle"   tooltiptext="&sb.toggle.all;" oncommand="sbTreeHandler.toggleAllFolders();" />
-			<toolbarbutton id="sbToolbarListView" observes="sbToggleListView"   oncommand="sbListHandler.toggle();" />
+			<toolbarbutton id="sbToolbarListView" tooltiptext="&sb.listview;"   oncommand="sbSearchService.listView();" />
 			<toolbarbutton id="mbToolbarButton" />
 			<toolbarseparator /><toolbarbutton id="sbToolbarMove"   label="&sb.move;..." oncommand="if ( sbManageService.ensureContextIsTree() ) sbTreeHandler.send();" />
 			<toolbarseparator /><toolbarbutton id="sbToolbarRemove" label="&sb.remove;"  oncommand="if ( sbManageService.ensureContextIsTree() ) sbTreeHandler.remove();" />
@@ -149,8 +149,6 @@
 					</template>
 				</tree>
 			</vbox>
-			<splitter id="sbListSplitter" class="plain" hidden="true" />
-			<vbox id="sbListOuter" flex="1" persist="height" hidden="true" style="height:200px;" />
 		</vbox>
 		<splitter id="sbPaneSplitter" hidden="true" />
 		<browser id="sbRightPaneBrowser" onload="event.stopPropagation();" flex="5" hidden="true" persist="width" disablehistory="true" type="chrome" />

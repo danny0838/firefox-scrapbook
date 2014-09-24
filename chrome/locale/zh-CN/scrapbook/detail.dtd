@@ -10,7 +10,7 @@
 <!ENTITY sb.detail.option.styles "样式">
 <!ENTITY sb.detail.option.scripts "动态脚本">
 <!ENTITY sb.detail.option.rewriteStyles "重组样式表">
-<!ENTITY sb.detail.option.textAsHtml "纯文字文件获取为 HTML">
+<!ENTITY sb.detail.option.asHtml "获取为 HTML">
 <!ENTITY sb.detail.option.forceUtf8 "保存为 UTF-8 编码">
 <!ENTITY sb.detail.linked.file "下载链接的文件">
 <!ENTITY sb.detail.linked.image "图像">

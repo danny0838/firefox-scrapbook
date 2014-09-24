@@ -37,7 +37,7 @@ function SB_trace(aMessage)
                            determine where to save file and to set resource property
  *   option:      object   capture options, such as:
  *                           images:  media:  styles:  script:
- *                           rewriteStyles:  forceUtf8:  textAsHtml: 
+ *                           rewriteStyles:  forceUtf8:  asHtml: 
  *                           dlimg:  dlsnd:  dlmov:  dlarc:  custom:
  *                           inDepth:  isPartial:
  *   file2Url:    array    the file2URL data in saver.js from last capture,
@@ -695,6 +695,7 @@ var sbInvisibleBrowser = {
 		}
 		this.loading = aURL;
 		this.ELEMENT.loadURI(aURL, null, null);
+		this.reload();  // in case the URI is different from the previous one only in hash
 	},
 
 	execCapture : function()

@@ -18,7 +18,24 @@ var sbCalcService = {
 		while ( resEnum.hasMoreElements() )
 		{
 			var res = resEnum.getNext();
-			if ( !sbDataSource.isContainer(res) ) this.total++;
+			if ( sbDataSource.isContainer(res) ) continue;
+			this.total++;
+			var id = sbDataSource.getProperty(res, "id");
+			if ( !id ) continue;
+			var type = sbDataSource.getProperty(res, "type");
+			if ( ["folder", "separator", "bookmark"].indexOf(type) != -1 ) continue;
+			if ( !sbCommonUtils.getContentDir(id, true) ) {
+				this.invalidCount++;
+				this.treeItems.push([
+					id,
+					sbDataSource.getProperty(res, "type"),
+					sbDataSource.getProperty(res, "title"),
+					sbDataSource.getProperty(res, "icon"),
+					0,
+					sbPropService.formatFileSize(0),
+					false,
+				]);
+			}
 		}
 		var dataDir = sbCommonUtils.getScrapBookDir().clone();
 		dataDir.append("data");
@@ -41,12 +58,13 @@ var sbCalcService = {
 			var bytes = sbPropService.getTotalFileSize(id)[0];
 			this.grandSum += bytes;
 			var res   = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
-			var valid = sbDataSource.exists(res);
+			var type = sbDataSource.getProperty(res, "type");
+			var valid = sbDataSource.exists(res) && ["folder", "separator", "bookmark"].indexOf(type) == -1;
 			var icon  = sbDataSource.getProperty(res, "icon");
-			if ( !icon ) icon = sbCommonUtils.getDefaultIcon(sbDataSource.getProperty(res, "type"));
+			if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
 			this.treeItems.push([
 				id,
-				sbDataSource.getProperty(res, "type"),
+				type,
 				sbDataSource.getProperty(res, "title"),
 				icon,
 				bytes,

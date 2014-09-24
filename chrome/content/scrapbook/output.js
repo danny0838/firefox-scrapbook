@@ -3,19 +3,21 @@ var sbOutputService = {
 
 	depth : 0,
 	content : "",
+	isAuto : false,
 	optionAll   : true,
 	optionFrame : false,
+	optionOpen   : true,
 
+	/**
+	 * window.arguments[0]: true means is auto mode
+	 */
 	init : function()
 	{
+		if (window.arguments && window.arguments[0]) this.isAuto = true;
 		document.documentElement.getButton("accept").label = sbCommonUtils.lang("scrapbook", "START_BUTTON");
 		sbTreeHandler.init(true);
 		this.selectAllFolders();
-		if ( window.location.search == "?auto" )
-		{
-			document.getElementById("ScrapBookOutputOptionO").checked = false;
-			this.start();
-		}
+		if ( this.isAuto ) this.start();
 	},
 
 	selectAllFolders : function()
@@ -26,24 +28,24 @@ var sbOutputService = {
 			sbTreeHandler.TREE.view.selection.selectAll();
 			sbTreeHandler.TREE.treeBoxObject.focused = true;
 		}
-		this.optionAll = true;
 	},
 
 	toggleAllSelection : function()
 	{
-		if ( this.optionAll )
-		{
-			document.getElementById("ScrapBookOutputOptionA").checked = false;
-			this.optionAll = false;
-		}
+		document.getElementById("ScrapBookOutputOptionA").checked = false;
 	},
 
 	start : function()
 	{
+		this.optionAll = document.getElementById("ScrapBookOutputOptionA").checked;
 		this.optionFrame = document.getElementById("ScrapBookOutputOptionF").checked;
+		this.optionOpen = document.getElementById("ScrapBookOutputOptionO").checked;
+		if ( this.isAuto ) {
+			this.optionOpen = false;
+		}
 		this.optionAll ? this.execAll() : this.exec();
 		sbTreeHandler.toggleAllFolders(true);
-		if ( window.location.search == "?auto" ) setTimeout(function(){ window.close(); }, 1000);
+		if ( this.isAuto ) window.close();
 	},
 
 	execAll : function()
@@ -98,7 +100,7 @@ var sbOutputService = {
 		this.content += this.getHTMLFoot();
 		sbCommonUtils.writeFile(indexFile, this.content, "UTF-8");
 		var fileName = this.optionFrame ? "frame.html" : "index.html";
-		if ( document.getElementById("ScrapBookOutputOptionO").checked )
+		if ( this.optionOpen )
 		{
 			sbCommonUtils.loadURL(sbCommonUtils.convertFilePathToURL(dir.path) + fileName, true);
 		}
@@ -123,27 +125,32 @@ var sbOutputService = {
 
 	getHTMLHead : function()
 	{
-		var HTML = '<!DOCTYPE html>\n\n'
+		var HTML = '<!DOCTYPE html>\n'
 			+ '<html>\n\n'
 			+ '<head>\n'
 			+ '	<meta charset="UTF-8">\n'
-			+ '	<title>' + document.title + '</title>\n'
+			+ '	<title>' + sbCommonUtils.escapeHTML(document.title, true) + '</title>\n'
+			+ '	<meta name="viewport" content="width=device-width">\n'
 			+ '	<link rel="stylesheet" type="text/css" href="output.css" media="all">\n'
 			+ '	<script>\n'
 			+ '	function init() {\n'
+			+ '		toggleAll(false);\n'
 			+ '		loadHash();\n'
 			+ '		registerRenewHash();\n'
-			+ '		toggleAll(false);\n'
 			+ '	}\n'
 			+ '	function loadHash() {\n'
 			+ '		var hash = top.location.hash;\n'
 			+ '		if (!hash) return;\n'
 			+ '		hash = hash.substring(1);\n'
-			+ '		top.frames[1].location = hash;\n'
+			+ '		if (self != top) top.frames[1].location = hash;\n'
 			+ '		var aElems = document.getElementsByTagName("A");\n'
 			+ '		for ( var i = 1; i < aElems.length; i++ ) {\n'
-			+ '			if (aElems[i].getAttribute("href") == hash) {\n'
-			+ '				top.document.title = aElems[i].childNodes[1].nodeValue;\n'
+            + '		    var aElem = aElems[i];\n'
+			+ '			if (aElem.getAttribute("href") == hash) {\n'
+			+ '				if (self != top) top.document.title = aElem.childNodes[1].nodeValue;\n'
+			+ '				var ansc = aElem.parentNode;\n'
+			+ '				while (ansc) { if (ansc.nodeName == "UL") ansc.style.display = "block"; ansc = ansc.parentNode; }\n'
+			+ '				aElem.focus();\n'
 			+ '				break;\n'
 			+ '			}\n'
 			+ '		}\n'
@@ -218,7 +225,7 @@ var sbOutputService = {
 				ret = '<a href="' + href + '"' + target + ' class="' + type + '" title="' + title + '">'
 				    + '<img src="' + icon + '" width="16" height="16" alt="">' + title + '</a>';
 				if (!source) break;
-				ret += '<sup> <a href="' + source + '" target="_blank" class="bookmark" title="Source">[S]</a></sup>';
+				ret += ' <a href="' + source + '" target="_blank" class="bookmark" title="Source">➤</a>';
 				break;
 		}
 		return ret;
@@ -226,22 +233,22 @@ var sbOutputService = {
 
 	getHTMLFoot : function()
 	{
-		var HTML = "\n</body>\n</html>\n";
+		var HTML = "</body>\n\n</html>\n";
 		return HTML;
 	},
 
 	getHTMLFrame : function()
 	{
-		var HTML = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN">\n\n'
-			+ '<html>\n\n'
+		var HTML = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">\n'
+			+ '<html>\n'
 			+ '<head>\n'
-			+ '	<meta http-equiv="Content-Type" Content="text/html;charset=UTF-8">\n'
-			+ '	<title>' + document.title + '</title>\n'
-			+ '</head>\n\n'
+			+ '	<meta charset="UTF-8">\n'
+			+ '	<title>' + sbCommonUtils.escapeHTML(document.title, true) + '</title>\n'
+			+ '</head>\n'
 			+ '<frameset cols="200,*">\n'
 			+ '	<frame name="side" src="index.html">\n'
 			+ '	<frame name="main">\n'
-			+ '</frameset>\n\n'
+			+ '</frameset>\n'
 			+ '</html>\n';
 		return HTML;
 	},

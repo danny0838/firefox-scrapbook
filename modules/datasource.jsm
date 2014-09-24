@@ -6,6 +6,7 @@ var sbDataSource = {
 	_flushTimer : null,
 	_dataObj : null,
 	_dataFile : null,
+	_needReOutputTree : false,
 
 	get data()
 	{
@@ -18,7 +19,7 @@ var sbDataSource = {
 		if (this._firstInit) {
 			this._firstInit = false;
 			var obs = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
-			obs.addObserver(this, "quit-application", false);
+			obs.addObserver(this, "quit-application-requested", false);
 		}
 		try {
 			this._dataFile = sbCommonUtils.getScrapBookDir();
@@ -32,6 +33,7 @@ var sbDataSource = {
 			}
 			var fileURL = sbCommonUtils.IO.newFileURI(this._dataFile).spec;
 			this._dataObj = sbCommonUtils.RDF.GetDataSourceBlocking(fileURL);
+			this._needReOutputTree = false;
 		}
 		catch(ex) {
 			if ( !aQuietWarning ) sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_INIT_DATASOURCE", [ex]));
@@ -84,6 +86,7 @@ var sbDataSource = {
 
 	flush : function()
 	{
+		this._needReOutputTree = true;
 		this._dataObj.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).Flush();
 		if (this._flushTimer) {
 			this._flushTimer.cancel();
@@ -94,6 +97,7 @@ var sbDataSource = {
 	_flushWithDelay : function()
 	{
 		if (this._flushTimer) return;
+		this._needReOutputTree = true;
 		this._flushTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
 		// this.observe is called when time's up
 		this._flushTimer.init(this, 10000, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
@@ -105,7 +109,8 @@ var sbDataSource = {
 			case "timer-callback": 
 				this.flush();
 				break;
-			case "quit-application": 
+			case "quit-application-requested": 
+				this.outputTreeAuto();
 				this._uninit();
 				break;
 			default: 
@@ -435,6 +440,18 @@ var sbDataSource = {
 			if ( sbCommonUtils.RDFCU.indexOf(this._dataObj, res, aRes) != -1 ) return res;
 		}
 		return null;
+	},
+
+	outputTreeAuto : function(aWindow)
+	{
+		if (!sbCommonUtils.getPref("autoOutput", false)) return;
+		if (!this._needReOutputTree) return;
+		try {
+			if (!aWindow) aWindow = sbCommonUtils.getFocusedWindow();
+			aWindow.openDialog('chrome://scrapbook/content/output.xul','ScrapBook:Output','chrome,modal', true);
+		} catch(ex) {
+		}
+		this._needReOutputTree = false;
 	},
 
 };

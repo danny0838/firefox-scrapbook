@@ -14,10 +14,6 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/tree.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/mbService.js" />
 
-	<broadcasterset id="sbBroadcasters">
-		<broadcaster id="sbToggleListView" type="checkbox" autoCheck="false" persist="checked lastRef" tooltiptext="&sb.listview;" />
-	</broadcasterset>
-
 	<keyset id="sbGenericKeys">
 		<key keycode="VK_ESCAPE" oncommand="window.close();"/>
 		<key keycode="VK_F5"     oncommand="window.location.reload();"/>
@@ -31,15 +27,14 @@
 			<menuitem id="sbPopupOpenNewTab" label="&sb.open.newtab;" nodelay="true" oncommand="sbController.open(null,true);" />
 			<menuitem id="sbPopupOpenSource" label="&sb.open.source;" nodelay="true" oncommand="sbController.forward(null,'S');"
 			          onclick="if (event.button != 1) return; this.parentNode.hidePopup(); sbController.forward(null,'S',true);" />
-			<menuitem id="sbPopupListView"     label="&sb.listview;"       oncommand="sbListHandler.init(null);"         hidden="true" />
 			<menuitem id="sbPopupCombinedView" label="&sb.folder.combine;" oncommand="sbController.forward(null,'C');"   hidden="true" />
 			<menuitem id="sbPopupOpenAllItems" label="&sb.folder.openall;" oncommand="sbController.openAllInTabs(null);" hidden="true" />
 			<menuseparator hidden="true" />
 			<menu id="sbPopupTools" label="&sb.tools;" onmouseover="event.stopPropagation();">
 				<menupopup id="sbPopupToolsMenu">
 					<menuitem id="sbPopupShowFiles" label="&sb.show.files;" oncommand="sbController.forward(null,'L');" />
-					<menuitem id="sbPopupSend"      label="&sb.move;..."    oncommand="sbController.isTreeContext ? sbTreeHandler.send() : sbListHandler.doCommand('send');" />
-					<menuitem id="sbPopupCopy"      label="&sb.copy;..."    oncommand="sbController.isTreeContext ? sbTreeHandler.copy() : sbListHandler.doCommand('copy');" />
+					<menuitem id="sbPopupSend"      label="&sb.move;..."    oncommand="sbTreeHandler.send();" />
+					<menuitem id="sbPopupCopy"      label="&sb.copy;..."    oncommand="sbTreeHandler.copy();" />
 					<menuseparator />
 					<menuitem id="sbPopupRenew" class="menuitem-iconic" label="&sb.renew;..." oncommand="sbController.renew(null, true);" onclick="if (event.button == 1) sbController.renew(null, false);" />
 					<menuitem id="sbPopupInternalize" class="menuitem-iconic" label="&sb.internalize;..." oncommand="sbController.internalize(null);" />
@@ -55,7 +50,7 @@
 			<menuitem id="sbPopupNewNote"      class="menuitem-iconic sb-create" label="&sb.new.note;"      oncommand="sbMainService.createNote();" />
 			<menuitem id="sbPopupNewNotex"     class="menuitem-iconic sb-create" label="&sb.new.notex;"     oncommand="sbMainService.createNoteX();" />
 			<menuseparator />
-			<menuitem id="sbPopupRemove"    class="menuitem-iconic" label="&sb.remove;"   oncommand="sbController.isTreeContext ? sbTreeHandler.remove() : sbListHandler.doCommand('remove');" />
+			<menuitem id="sbPopupRemove"    class="menuitem-iconic" label="&sb.remove;"   oncommand="sbTreeHandler.remove();" />
 			<menuseparator />
 			<menuitem id="sbPopupProperty"  class="menuitem-iconic" label="&sb.property;" oncommand="sbController.forward(null,'P');" />
 		</menupopup>
@@ -122,43 +117,6 @@
 			</rule>
 		</template>
 	</tree>
-
-	<vbox id="sbListOuter">
-		<sidebarheader id="sbListHeader" align="center">
-			<label flex="1" crop="end" />
-			<spacer flex="1" />
-			<toolbarbutton id="sbListMoveUpButton" style="-moz-appearance:none;" oncommand="sbListHandler.goUpperLevel();" />
-			<toolbarbutton id="sbListPickerButton" style="-moz-appearance:none;" type="menu" oncommand="sbListHandler.refresh(true);" >
-				<menupopup id="sbListPickerMenuPopup">
-					<menuitem id="sbListToggleTitle"   label="&sb.prop.title;"   type="checkbox" checked="true" disabled="true" />
-					<menuitem id="sbListToggleComment" label="&sb.prop.comment;" type="checkbox" persist="checked" />
-					<menuitem id="sbListToggleSource"  label="&sbp.prop.url;"    type="checkbox" persist="checked" />
-				</menupopup>
-			</toolbarbutton>
-			<toolbarbutton class="sb-header-exit" oncommand="sbListHandler.quit(true);" />
-		</sidebarheader>
-		<richlistbox id="sbList"
-		             datasources="rdf:null"
-		             contextmenu="sbPopup"
-		             onclick="sbListHandler.onClick(event);"
-		             onkeypress="sbListHandler.onKeyPress(event);"
-		             flex="1">
-			<template>
-				<rule iscontainer="false">
-					<richlistitem uri="rdf:*" class="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type">
-						<vbox>
-							<image class="sblist-icon" src="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon" />
-						</vbox>
-						<vbox id="sbListTemplateBox">
-							<label id="sbListTemplateTitle"   class="sblist-title"   value="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title" />
-							<label id="sbListTemplateComment" class="sblist-comment" value="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#comment" />
-							<label id="sbListTemplateSource"  class="sblist-source"  value="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#source" />
-						</vbox>
-					</richlistitem>
-				</rule>
-			</template>
-		</richlistbox>
-	</vbox>
 
 	<toolbarbutton id="mbToolbarButton" type="menu" tooltiptext="&sb.multi;" onpopupshowing="sbMultiBookService.initMenu();" hidden="true">
 		<menupopup id="mbMenuPopup" oncommand="sbMultiBookService.change(event.originalTarget);">

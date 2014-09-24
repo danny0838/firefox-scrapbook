@@ -25,7 +25,7 @@ var sbContentSaver = {
 		this.name = "index";
 		this.favicon = null;
 		this.file2URL = { "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
-		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "styles" : true, "script" : false, "textAsHtml" : false, "forceUtf8" : true, "rewriteStyles" : true, "internalize" : false };
+		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "styles" : true, "script" : false, "asHtml" : false, "forceUtf8" : true, "rewriteStyles" : true, "internalize" : false };
 		this.plusoption = { "timeout" : "0", "charset" : "UTF-8" }
 		this.linkURLs = [];
 		this.frames = [];
@@ -171,25 +171,13 @@ var sbContentSaver = {
 
 	saveDocumentInternal : function(aDocument, aFileKey)
 	{
-		var captureAsFile = false;
 		var captureType = "";
-		// any file unparsable: process as file saving
-		if ( !aDocument.body ) {
-			captureAsFile = true;
-			captureType = "file";
+		if ( aDocument.contentType != "text/html" ) {
+			if ( !(aDocument.documentElement.nodeName.toUpperCase() == "HTML" && aDocument.documentElement.lastChild.nodeName.toUpperCase() == "BODY" && this.option["asHtml"]) ) {
+				captureType = "file";
+			}
 		}
-		// image: use special captureType
-		else if ( aDocument.contentType.indexOf("image/") === 0 ) {
-			captureAsFile = true;
-			captureType = "file";
-		}
-		// text (parsable non-HTML): if not capture as HTML, save as file
-		else if ( aDocument.contentType != "text/html" && !this.option["textAsHtml"] ) {
-			captureAsFile = true;
-			captureType = "file";
-		}
-		if ( captureAsFile ) {
-			if ( this.isMainFrame ) this.item.type = captureType;
+		if ( captureType ) {
 			var newLeafName = this.saveFileInternal(aDocument.location.href, aFileKey, captureType, aDocument.characterSet);
 			return newLeafName;
 		}
@@ -217,7 +205,7 @@ var sbContentSaver = {
 
 		// cloned frames has contentDocument = null
 		// give all frames an unique id for later retrieving
-		var htmlNode = aDocument.getElementsByTagName("html")[0];
+		var htmlNode = aDocument.documentElement;
 		var frames = htmlNode.getElementsByTagName("frame");
 		for (var i=0, len=frames.length; i<len; i++) {
 			var frame = frames[i];
@@ -238,7 +226,13 @@ var sbContentSaver = {
 			var myRange = this.selection.getRangeAt(0);
 			var myDocFrag = myRange.cloneContents();
 			var curNode = myRange.commonAncestorContainer;
-			if ( curNode.nodeName == "#text" ) curNode = curNode.parentNode;
+			if ( curNode.nodeName.toUpperCase() == "HTML" ) {
+				// in some case (eg. view image) the selection is the html node
+				// and will cause subsequent errors.
+				// in this case we just process as if there's no selection
+				this.selection = null;
+			}
+			else if ( curNode.nodeName == "#text" ) curNode = curNode.parentNode;
 		}
 		// now make the clone
 		var tmpNodeList = [];
@@ -252,11 +246,11 @@ var sbContentSaver = {
 		}
 		else
 		{
-			tmpNodeList.unshift(aDocument.body.cloneNode(true));
+			tmpNodeList.unshift(htmlNode.getElementsByTagName("body")[0].cloneNode(true));
 		}
 		var rootNode = htmlNode.cloneNode(false);
 		try {
-			var headNode = aDocument.getElementsByTagName("head")[0].cloneNode(true);
+			var headNode = htmlNode.getElementsByTagName("head")[0].cloneNode(true);
 			rootNode.appendChild(headNode);
 			rootNode.appendChild(aDocument.createTextNode("\n"));
 		} catch(ex) {
@@ -353,17 +347,21 @@ var sbContentSaver = {
 	{
 		if ( !aFileKey ) aFileKey = "file" + Math.random().toString();
 		if ( !this.refURLObj ) this.refURLObj = sbCommonUtils.convertURLToObject(aFileURL);
-		if ( this.isMainFrame )
-		{
-			this.item.icon  = "moz-icon://" + sbCommonUtils.escapeFileName(sbCommonUtils.getFileName(aFileURL)) + "?size=16";
-			this.item.type  = aCaptureType;
-			this.item.chars = aCharset || "";
-		}
 		var newFileName = this.download(aFileURL);
-		if ( aCaptureType == "image" ) {
-			var myHTML = '<html><head><meta http-equiv="Content-Type" content="text/html; Charset=UTF-8"></head><body><img src="' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(newFileName)) + '"></body></html>';
-		} else {
-			var myHTML = '<html><head><meta http-equiv="Content-Type" content="text/html; Charset=UTF-8"><meta http-equiv="refresh" content="0;URL=./' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(newFileName)) + '"></head><body></body></html>';
+		if (newFileName) {
+			if ( aCaptureType == "image" ) {
+				var myHTML = '<html><head><meta http-equiv="Content-Type" content="text/html; Charset=UTF-8"></head><body><img src="' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(newFileName)) + '"></body></html>';
+			} else {
+				var myHTML = '<html><head><meta http-equiv="Content-Type" content="text/html; Charset=UTF-8"><meta http-equiv="refresh" content="0;URL=./' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(newFileName)) + '"></head><body></body></html>';
+			}
+			if ( this.isMainFrame ) {
+				this.item.icon  = "moz-icon://" + sbCommonUtils.escapeFileName(newFileName) + "?size=16";
+				this.item.type  = aCaptureType;
+				this.item.chars = aCharset || "";
+			}
+		}
+		else {
+			var myHTML = "";
 		}
 		var myHTMLFile = this.contentDir.clone();
 		myHTMLFile.append(aFileKey + ".html");
@@ -808,7 +806,7 @@ var sbContentSaver = {
 
 	download : function(aURLSpec)
 	{
-		if ( !aURLSpec ) return;
+		if ( !aURLSpec ) return "";
 		// never download chrome:// resources
 		if ( aURLSpec.indexOf("chrome://") == 0 )
 		{
@@ -820,8 +818,7 @@ var sbContentSaver = {
 			aURLSpec = sbCommonUtils.resolveURL(this.refURLObj.spec, aURLSpec);
 		}
 		try {
-			var aURL = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
-			aURL.spec = aURLSpec;
+            var aURL = sbCommonUtils.convertURLToObject(aURLSpec);
 		} catch(ex) {
             sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_DOWNLOAD_FILE", [aURLSpec, ex]));
 			return "";
@@ -881,6 +878,7 @@ var sbContentSaver = {
 				return "";
 			}
 		}
+		return "";
 	},
 
 	/**

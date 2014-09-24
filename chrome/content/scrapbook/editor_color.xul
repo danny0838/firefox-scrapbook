@@ -21,13 +21,15 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/editor_color.js" />
 
 	<hbox>
-		<checkbox id="sbColorText" label="&sb.edit.html.color.forText;" />
-		<html:input id="sbColorTextPicker" type="color" onchange="pick(this, 'sbColorText');" />
-		<colorpicker id="sbColorTextPicker2" type="button" hidden="true" onchange="pick(this, 'sbColorText');" />
+		<checkbox id="sbColorText" label="&sb.edit.html.color.forText;" persist="checked" checked="true" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
+		<html:input id="sbColorTextPicker" type="color" onchange="pick('sbColorText');" />
+		<colorpicker id="sbColorTextPicker2" type="button" hidden="true" onchange="pick('sbColorText');" />
+		<textbox id="sbColorTextValue" hidden="true" value="#000000" persist="value" />
 		<spacer flex="1"/>
-		<checkbox id="sbColorBg" label="&sb.edit.html.color.forBg;" />
-		<html:input id="sbColorBgPicker" type="color" onchange="pick(this, 'sbColorBg');" />
-		<colorpicker id="sbColorBgPicker2" type="button" hidden="true" onchange="pick(this, 'sbColorBg');" />
+		<checkbox id="sbColorBg" label="&sb.edit.html.color.forBg;" persist="checked" />
+		<html:input id="sbColorBgPicker" type="color" onchange="pick('sbColorBg');" />
+		<colorpicker id="sbColorBgPicker2" type="button" hidden="true" onchange="pick('sbColorBg');" />
+		<textbox id="sbColorBgValue" hidden="true" value="#FFFFFF" persist="value" />
 	</hbox>
 
 </dialog>

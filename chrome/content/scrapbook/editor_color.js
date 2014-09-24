@@ -2,8 +2,10 @@ var gData;
 var gColorType;
 var gColorTextChecker;
 var gColorTextPicker;
+var gColorTextHidden;
 var gColorBgChecker;
 var gColorBgPicker;
+var gColorBgHidden;
 
 function init() {
 	if ( !window.arguments) window.close();
@@ -23,32 +25,26 @@ function init() {
 		gColorBgPicker = document.getElementById("sbColorBgPicker2");
 		gColorTextPicker.hidden = false;
 		gColorBgPicker.hidden = false;
-		document.getElementById("sbColorTextPicker").hidden = true;
-		document.getElementById("sbColorBgPicker").hidden = true;
+		document.getElementById("sbColorTextPicker").style.display = "none";
+		document.getElementById("sbColorBgPicker").style.display = "none";
 	}
 	gColorTextChecker = document.getElementById("sbColorText");
 	gColorBgChecker = document.getElementById("sbColorBg");
-	// restore last selection
-	gColorTextChecker.checked = sbCommonUtils.getPref("edit.color.lastPickedText", true);
-	gColorBgChecker.checked = sbCommonUtils.getPref("edit.color.lastPickedBg", false);
-	gColorTextPicker[gColorType] = sbCommonUtils.getPref("edit.color.lastPickedTextColor", "#000000");
-	gColorBgPicker[gColorType] = sbCommonUtils.getPref("edit.color.lastPickedBgColor", "#FFFFFF");
+	gColorTextHidden = document.getElementById("sbColorTextValue");
+	gColorBgHidden = document.getElementById("sbColorBgValue")
+	// sync value of textbox to colorpicker
+	gColorTextPicker[gColorType] = gColorTextHidden.getAttribute('value');
+	gColorBgPicker[gColorType] = gColorBgHidden.getAttribute('value');
 }
 
 function accept() {
-	sbCommonUtils.setPref("edit.color.lastPickedText", gColorTextChecker.checked);
-	sbCommonUtils.setPref("edit.color.lastPickedBg", gColorBgChecker.checked);
 	gData.result = (gColorTextChecker.checked || gColorBgChecker.checked) ? 1 : 0;
-	gData.textColor = gColorTextChecker.checked ? gColorTextPicker[gColorType] : null;
-	gData.bgColor = gColorBgChecker.checked ? gColorBgPicker[gColorType] : null;
+	gData.textColor = gColorTextChecker.checked ? gColorTextHidden.getAttribute('value') : null;
+	gData.bgColor = gColorBgChecker.checked ? gColorBgHidden.getAttribute('value') : null;
 }
 
-function pick(aElem, aIDToCheck) {
-	if (aElem == gColorTextPicker) {
-		sbCommonUtils.setPref("edit.color.lastPickedTextColor", aElem[gColorType]);
-	}
-	else if (aElem == gColorBgPicker) {
-		sbCommonUtils.setPref("edit.color.lastPickedBgColor", aElem[gColorType]);
-	}
+function pick(aIDToCheck) {
+	gColorTextHidden.setAttribute('value', gColorTextPicker[gColorType]);
+	gColorBgHidden.setAttribute('value', gColorBgPicker[gColorType]);
 	document.getElementById(aIDToCheck).checked = true;
 }

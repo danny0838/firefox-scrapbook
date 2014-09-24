@@ -35,6 +35,6 @@
 
 	<checkbox id="ScrapBookOutputOptionA" label="&sb.output.option.all;"   style="margin-top:12px;" oncommand="sbOutputService.selectAllFolders();" checked="true" />
 	<checkbox id="ScrapBookOutputOptionF" label="&sb.output.option.frame;" persist="checked" />
-	<checkbox id="ScrapBookOutputOptionO" label="&sb.output.option.open;"  persist="checked" checked="true" />
+	<checkbox id="ScrapBookOutputOptionO" label="&sb.output.option.open;"  persist="checked" checked="true" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
 
 </dialog>

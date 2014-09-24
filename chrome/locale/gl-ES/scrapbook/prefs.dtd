@@ -33,6 +33,7 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "na parte inferior do cartafol">
 <!ENTITY sb.prefs.showDetailOnDrop "Amosar o diálogo &apos;Detalles da captura&apos; cando se capture arrastrando e soltando sobre o panel lateral">
 <!ENTITY sb.prefs.notifyOnComplete "Amosar o aviso de &apos;Captura completada&apos;">
+<!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.button.customize "Personalizar">
 <!ENTITY sb.button.browse "Procurar">
 <!ENTITY sb.button.show "Amosar ficheiros">

@@ -187,13 +187,17 @@ var sbCommonUtils = {
 
 	_refresh: function(aDSChanged)
 	{
+		var cur = this.WINDOW.getMostRecentWindow(null);
+		var curDone = false;
 		var sidebarId = this.getSidebarId("sidebar");
-		var winEnum = this.WINDOW.getEnumerator("navigator:browser");
 		// refresh/rebuild main browser windows and their sidebars
+		var winEnum = this.WINDOW.getEnumerator("navigator:browser");
 		while (winEnum.hasMoreElements()) {
 			var win = winEnum.getNext();
+			if (cur === win) curDone = true;
 			aDSChanged ? win.sbBrowserOverlay.refresh() : win.sbBrowserOverlay.rebuild();
 			var win = win.document.getElementById(sidebarId).contentWindow;
+			if (cur === win) curDone = true;
 			if (win.sbMainService) {
 				aDSChanged ? win.sbMainService.refresh() : win.sbMainService.rebuild();
 			}
@@ -202,6 +206,14 @@ var sbCommonUtils = {
 		var winEnum = this.WINDOW.getEnumerator("scrapbook");
 		while (winEnum.hasMoreElements()) {
 			var win = winEnum.getNext();
+			if (cur === win) curDone = true;
+			if (win.sbMainService) {
+				aDSChanged ? win.sbMainService.refresh() : win.sbMainService.rebuild();
+			}
+		}
+		// refresh/rebuild the current window if not included
+		if (!curDone) {
+			win = cur;
 			if (win.sbMainService) {
 				aDSChanged ? win.sbMainService.refresh() : win.sbMainService.rebuild();
 			}
@@ -434,7 +446,7 @@ var sbCommonUtils = {
 
 	convertURLToObject : function(aURLString)
 	{
-		var aURL = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURI);
+		var aURL = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
 		aURL.spec = aURLString;
 		return aURL;
 	},
@@ -464,23 +476,6 @@ var sbCommonUtils = {
 	{
 		var pos = 0;
 		return ( (pos = aURL.indexOf("#")) < 0 ) ? [aURL, ""] : [aURL.substring(0, pos), aURL.substring(pos, aURL.length)];
-	},
-
-	execProgram : function(aExecFilePath, args)
-	{
-		var execfile = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-		var process  = Components.classes["@mozilla.org/process/util;1"].createInstance(Components.interfaces.nsIProcess);
-		try {
-			execfile.initWithPath(aExecFilePath);
-			if ( !execfile.exists() ) {
-				this.alert(sbCommonUtils.lang("scrapbook", "ERR_FILE_NOT_EXIST", [aExecFilePath]));
-				return;
-			}
-			process.init(execfile);
-			process.run(false, args, args.length);
-		} catch (ex) {
-			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_EXEC_FILE", [aExecFilePath]));
-		}
 	},
 
 	getFocusedWindow : function()
