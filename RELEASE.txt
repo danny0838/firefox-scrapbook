@@ -1,3 +1,23 @@
+Scrapbook X 1.12.0a26
+----------------
+
+- NEW: Added an advanced option "Automatically output tree as HTML when data is changed".
+- UPDATE: Replace "Capture Text Files as HTML" with "Capture as HTML", which attempts to capture the current browsed content as HTML if possible, eg. images or XML files transformed to HTML via XSLT.
+- UPDATE: "List View" in the manager window now lists all non-folder items. No more support old style List View. 
+- UPDATE: Fulltext search now works for bookmarks and non-plain-text files.
+- UPDATE: "Calculate" now detects missing and/or obsolete data folders.
+- UPDATE: Latest editor settings are no more recorded via preferences.
+- UPDATE: Improve mobile viewport for the default note page template. (Delete notex_template.html in the ScrapBook directory to renew)
+- UPDATE: Improve the UI of the ScrapBook sidebar.
+- UPDATE: Improved the UI of Output Tree as HTML. (remove tree/output.css from the ScrapBook directory for a complete update)
+- FIXED: A multiple capture process freezes if a link is different with the previous one only in the hash.
+- FIXED: Capture error if there is a frame with about:blank or an undownloadable file as the src.
+- FIXED: Several problems regarding the "New Folder" button in the pick-folder dialog.
+- FIXED: Export manager could get an error for items without folder definition in the export directory.
+- FIXED: Repaired some missing entities in the language pack.
+- FIXED: Use a different library for date insertion of the HTML editor to prevent possible conflicts.
+
+
 Scrapbook X 1.12.0a25
 ----------------
 
