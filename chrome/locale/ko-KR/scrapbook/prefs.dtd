@@ -11,8 +11,8 @@
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "위로 보이기">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "최근에 사용한 폴더">
 <!ENTITY sb.prefs.ui.menuBar "메뉴 도구 모음에 보이기">
-<!ENTITY sb.prefs.ui.menuBar.icon "아이콘">
 <!ENTITY sb.prefs.ui.toolsMenu "'도구' 메뉴에 보이기">
+<!ENTITY sb.prefs.ui.statusBar "상태 표시줄에 보이기">
 <!ENTITY sb.prefs.restart "표시 항목의 변경된 내용을 적용하려면 Firefox를 재시작해야 합니다.">
 <!ENTITY sb.prefs.tabs.tips "다음 동작은 탭으로 열기">
 <!ENTITY sb.prefs.tabs.note "노트 편집">

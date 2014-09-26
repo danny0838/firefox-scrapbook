@@ -5,7 +5,7 @@
 <!ENTITY sb.note.normalview "Normalvy">
 <!ENTITY sb.note.template "Redigera HTML-mall">
 <!ENTITY sb.note.autolinefeed "Automatisk vagnretur">
-<!ENTITY sb.note.autolinefeed.t "Lägger till <br>-taggar i radsluten i HTML-vyn">
+<!ENTITY sb.note.autolinefeed.t "Lägger till br-taggar i radsluten i HTML-vyn">
 <!ENTITY sb.note.fontsize "Fontstorlek">
 <!ENTITY sb.note.help "Hjälp">
 <!ENTITY sb.note.print "Skriv ut">

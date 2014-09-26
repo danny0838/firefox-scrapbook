@@ -11,8 +11,8 @@
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Son kullanılan">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "klasörü göster">
 <!ENTITY sb.prefs.ui.menuBar "Menü çubuğunda göster">
-<!ENTITY sb.prefs.ui.menuBar.icon "Simge">
 <!ENTITY sb.prefs.ui.toolsMenu "&apos;Araçlar&apos; menüsünde göster">
+<!ENTITY sb.prefs.ui.statusBar "Durumu çubuğunda göster">
 <!ENTITY sb.prefs.restart "Değişiklikler Firefox&apos;u yeniden başlatmanızı gerektirir.">
 <!ENTITY sb.prefs.tabs.tips "Aşağıdaki eylemleri sekmede aç">
 <!ENTITY sb.prefs.tabs.note "Notu Düzenle">

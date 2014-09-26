@@ -11,8 +11,8 @@
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Show up to">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "recently used folders">
 <!ENTITY sb.prefs.ui.menuBar "Show in menu bar">
-<!ENTITY sb.prefs.ui.menuBar.icon "Icon">
 <!ENTITY sb.prefs.ui.toolsMenu "Show in &apos;Tools&apos; menu">
+<!ENTITY sb.prefs.ui.statusBar "Show in status bar">
 <!ENTITY sb.prefs.restart "Change requires Firefox restart.">
 <!ENTITY sb.prefs.tabs.tips "Open in tab for the following operations">
 <!ENTITY sb.prefs.tabs.note "Edit Note">

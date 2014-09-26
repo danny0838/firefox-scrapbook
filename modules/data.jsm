@@ -159,8 +159,8 @@ var ScrapBookData = {
 				    aData == PREF_DOMAIN + "multibook.enabled") {
 					this._uninit();
 					this._init();
-					ScrapBookUtils.refreshGlobal(true);
 				}
+				ScrapBookUtils.refreshGlobal(true);
 				break;
 			default: 
 		}

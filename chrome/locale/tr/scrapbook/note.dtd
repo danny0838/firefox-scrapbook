@@ -5,7 +5,7 @@
 <!ENTITY sb.note.normalview "Normal Görünüm">
 <!ENTITY sb.note.template "Şablon HTML&apos;i Düzenle">
 <!ENTITY sb.note.autolinefeed "Otomatik Satırlama">
-<!ENTITY sb.note.autolinefeed.t "&sb.note.htmlview;&apos;nde satırların sonuna <br> etiketi ekle">
+<!ENTITY sb.note.autolinefeed.t "&sb.note.htmlview;&apos;nde satırların sonuna br etiketi ekle">
 <!ENTITY sb.note.fontsize "Yazı Tipi Boyutu">
 <!ENTITY sb.note.help "Yardım">
 <!ENTITY sb.note.print "Yazdır">

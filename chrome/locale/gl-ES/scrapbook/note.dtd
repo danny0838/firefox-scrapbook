@@ -5,7 +5,7 @@
 <!ENTITY sb.note.normalview "Vista normal">
 <!ENTITY sb.note.template "Editar sobreplanta HTML">
 <!ENTITY sb.note.autolinefeed "Quebras de liña automáticas">
-<!ENTITY sb.note.autolinefeed.t "Engadir etiquetas <br> ao remate de cada liña en &sb.note.htmlview;">
+<!ENTITY sb.note.autolinefeed.t "Engadir etiquetas br ao remate de cada liña en &sb.note.htmlview;">
 <!ENTITY sb.note.fontsize "Tamaño da fonte">
 <!ENTITY sb.note.help "Axuda">
 <!ENTITY sb.note.print "Imprimir">

@@ -11,8 +11,8 @@
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Mostrar hasta">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "carpetas usadas recientemente">
 <!ENTITY sb.prefs.ui.menuBar "Mostrar en la barra de Menú">
-<!ENTITY sb.prefs.ui.menuBar.icon "Icono">
 <!ENTITY sb.prefs.ui.toolsMenu "Mostrar en el menú 'Herramientas'">
+<!ENTITY sb.prefs.ui.statusBar "Mostrar en la barra de estado">
 <!ENTITY sb.prefs.restart "El cambio requiere reiniciar Firefox">
 <!ENTITY sb.prefs.tabs.tips "Abrir en pestañas al realizar las siguientes operaciones">
 <!ENTITY sb.prefs.tabs.note "Editar Nota">

@@ -11,8 +11,8 @@
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Afișează ultimele">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "dosare deschise">
 <!ENTITY sb.prefs.ui.menuBar "Afișează în meniul principal">
-<!ENTITY sb.prefs.ui.menuBar.icon "Afișează doar pictograma">
 <!ENTITY sb.prefs.ui.toolsMenu "Afișează în meniul „Unelte”">
+<!ENTITY sb.prefs.ui.statusBar "Afișează în bara de stare">
 <!ENTITY sb.prefs.restart "Modificările devin efective după repornirea navigatorului.">
 <!ENTITY sb.prefs.tabs.tips "Deschide în file pentru următoarele operații">
 <!ENTITY sb.prefs.tabs.note "Editează note">

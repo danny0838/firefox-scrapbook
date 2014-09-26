@@ -5,7 +5,7 @@
 <!ENTITY sb.note.normalview "Visão Normal">
 <!ENTITY sb.note.template "Editar Template HTML">
 <!ENTITY sb.note.autolinefeed "Quebra Automática">
-<!ENTITY sb.note.autolinefeed.t "Adicionar a tag <br> no final da linha na pré-visualização do HTML">
+<!ENTITY sb.note.autolinefeed.t "Adicionar a tag br no final da linha na pré-visualização do HTML">
 <!ENTITY sb.note.fontsize "Tamanho da Fonte">
 <!ENTITY sb.note.help "Ajuda">
 <!ENTITY sb.note.print "Imprimir">

@@ -11,8 +11,8 @@
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Bis zu">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "zuletzt verwendete Ordner anzeigen">
 <!ENTITY sb.prefs.ui.menuBar "ScrapBook-Eintrag in der Menüleiste anzeigen">
-<!ENTITY sb.prefs.ui.menuBar.icon "Symbol">
 <!ENTITY sb.prefs.ui.toolsMenu "ScrapBook-Eintrag im Menü &quot;Extras&quot; anzeigen">
+<!ENTITY sb.prefs.ui.statusBar "Symbol in der Statusleiste anzeigen">
 <!ENTITY sb.prefs.restart "Änderung erfordert einen Firefox-Neustart.">
 <!ENTITY sb.prefs.tabs.tips "Folgende Aktionen öffnen neue Tabs">
 <!ENTITY sb.prefs.tabs.note "Notiz bearbeiten">
