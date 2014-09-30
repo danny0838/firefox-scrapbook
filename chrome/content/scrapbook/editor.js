@@ -129,7 +129,8 @@ var sbPageEditor = {
 					sbPageEditor.documentBeforeEdit(doc);
 				}, this);
 			}, this);
-			if (this.enabled && this.item && this.item.lock != "true" && this.item.type == "notex" && sbCommonUtils.getPref("edit.autoEditNoteX", true)) {
+			if (this.enabled && this.item && this.item.lock != "true" && this.item.type == "notex" && 
+				sbCommonUtils.getPref("edit.autoEditNoteX", true) && sbCommonUtils.getPref("edit.autoEditNoteX.active", true)) {
 				this.documentLoad(window.content.document, function(doc){
 					// check document type and make sure it's a file
 					if (doc.contentType != "text/html") return;
@@ -733,6 +734,9 @@ var sbHtmlEditor = {
 		if ( aStateFlag == 1 ) {
 			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled", true);
 			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.document", aDoc);
+			if (sbPageEditor.item && sbPageEditor.item.type == "notex") {
+				sbCommonUtils.setPref("edit.autoEditNoteX.active", true);
+			}
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 				if ( win.document.designMode != "off" && win.document != aDoc ) {
 					win.document.designMode = "off";
@@ -765,6 +769,9 @@ var sbHtmlEditor = {
 		else if ( aStateFlag == 0 ) {
 			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled", false);
 			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.document", null);
+			if (sbPageEditor.item && sbPageEditor.item.type == "notex") {
+				sbCommonUtils.setPref("edit.autoEditNoteX.active", false);
+			}
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 				if ( win.document.designMode != "off" ) {
 					win.document.designMode = "off";
