@@ -261,16 +261,25 @@ var sbSearchResult =
 	forward : function(key)
 	{
 		if ( !this.CURRENT_TREEITEM ) return;
-		var id   = this.CURRENT_TREEITEM[5];
+		var id = this.CURRENT_TREEITEM[5];
+		var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
+		if (!sbDataSource.getProperty(res, "id")) return;
 		switch ( key ) {
-			case "O" : sbCommonUtils.loadURL(getURL(), false); break;
-			case "T" : sbCommonUtils.loadURL(getURL(), true); break;
-			case "P" : window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome" ,id); break;
+			case "O" : 
+				sbCommonUtils.loadURL(getURL(), false);
+				break;
+			case "T" : 
+				sbCommonUtils.loadURL(getURL(), true);
+				break;
+			case "P" : 
+				window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome" ,id);
+				break;
 			case "L" : 
-				var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
 				sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser").sbBrowserOverlay.execLocate(res);
 				break;
-			default  : document.getElementById("sbBrowser").loadURI(getURL()); break;
+			default  : 
+				document.getElementById("sbBrowser").loadURI(getURL());
+				break;
 		}
 		
 		function getURL() {
@@ -278,7 +287,6 @@ var sbSearchResult =
 				case "note":
 					return "chrome://scrapbook/content/note.xul?id=" + id;
 				case "bookmark":
-					var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
 					return sbDataSource.getProperty(res, "source");
 				default:
 					return sbSearchResult.resPathToURL(id, sbSearchResult.CURRENT_TREEITEM[4]);
