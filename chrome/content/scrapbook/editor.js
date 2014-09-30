@@ -144,6 +144,7 @@ var sbPageEditor = {
 
 	uninit : function()
 	{
+		this.item = null;
 		sbHtmlEditor.init(null, 0);
 		this.disable(true);
 	},
