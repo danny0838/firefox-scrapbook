@@ -40,6 +40,7 @@
 	</hbox>
 
 	<tree id="sbTree"
+	      enableColumnDrag="true"
 	      context="sbPopup"
 	      seltype="single"
 	      onselect="sbSearchResult.forward();"
