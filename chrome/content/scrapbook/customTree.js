@@ -60,7 +60,7 @@ var sbCustomTreeUtil = {
 
 	sortItems : function(aService, aColElem)
 	{
-		var asc = aColElem.getAttribute("sortDirection") == "descending";
+		var asc = aColElem.getAttribute("sortDirection") != "ascending";
 		var elems = aService.TREE.firstChild.childNodes;
 		for ( var i = 0; i < elems.length; i++ )
 		{
