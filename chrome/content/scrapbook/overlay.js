@@ -98,9 +98,7 @@ var sbBrowserOverlay = {
 		this.editMode = sbPageEditor.TOOLBAR.getAttribute("autoshow") == "true";
 		this.infoMode = sbInfoViewer.TOOLBAR.getAttribute("autoshow") == "true";
 		document.getElementById("ScrapBookMenu").hidden        = !sbCommonUtils.getPref("ui.menuBar", false);
-		if ( !sbCommonUtils._fxVer4 ) {
-			document.getElementById("ScrapBookStatusPanel").hidden = !sbCommonUtils.getPref("ui.statusBar", false);
-		}
+		document.getElementById("ScrapBookStatusPanel").hidden = !sbCommonUtils.getPref("ui.statusBar", false);
 		document.getElementById("ScrapBookToolsMenu").hidden   = !sbCommonUtils.getPref("ui.toolsMenu", false);
 		sbDataSource.backup();
 		this.setProtocolSubstitution();
