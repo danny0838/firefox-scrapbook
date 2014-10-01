@@ -61,6 +61,9 @@
 			<splitter class="tree-splitter" />
 			<treecol id="sbTreeColName" label="&sb.prop.file;" flex="1" hidden="true"
 			         sortIndex="4" persist="width hidden ordinal" />
+			<splitter class="tree-splitter" />
+			<treecol id="sbTreeColId" label="&sb.prop.id.date;" flex="1" hidden="true"
+			         sortIndex="5" persist="width hidden ordinal" />
 		</treecols>
 		<treechildren />
 	</tree>

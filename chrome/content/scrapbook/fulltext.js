@@ -233,6 +233,7 @@ var sbSearchResult =
 			"sbTreeColComment",
 			"sbTreeColFolder",
 			"sbTreeColName",
+			"sbTreeColId",
 		];
 		var treeView = new sbCustomTreeView(colIDs, this.treeItems);
 		treeView.getImageSrc = function(row, col)
