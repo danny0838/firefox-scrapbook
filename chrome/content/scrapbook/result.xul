@@ -46,11 +46,15 @@
 	      class="plain"
 	      style="height:160px;">
 		<treecols>
-			<treecol id="sbTreeColTitle"   label="&sb.prop.title;"   flex="3" /><splitter class="tree-splitter" />
-			<treecol id="sbTreeColContent" label="&sb.prop.content;" flex="5" /><splitter class="tree-splitter" />
-			<treecol id="sbTreeColComment" label="&sb.prop.comment;" flex="2" persist="hidden" /><splitter class="tree-splitter" />
-			<treecol id="sbTreeColFolder"  label="&sb.prop.folder;"  flex="1" persist="hidden" /><splitter class="tree-splitter" />
-			<treecol id="sbTreeColName"    label="&sb.prop.file;" flex="1" hidden="true" persist="hidden" />
+			<treecol id="sbTreeColTitle" label="&sb.prop.title;" flex="3" />
+			<splitter class="tree-splitter" />
+			<treecol id="sbTreeColContent" label="&sb.prop.content;" flex="5" />
+			<splitter class="tree-splitter" />
+			<treecol id="sbTreeColComment" label="&sb.prop.comment;" flex="2" persist="hidden" />
+			<splitter class="tree-splitter" />
+			<treecol id="sbTreeColFolder" label="&sb.prop.folder;" flex="1" persist="hidden" />
+			<splitter class="tree-splitter" />
+			<treecol id="sbTreeColName" label="&sb.prop.file;" flex="1" hidden="true" persist="hidden" />
 		</treecols>
 		<treechildren />
 	</tree>
