@@ -18,8 +18,8 @@
         onload="SB_initFT('SEARCH');">
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/fulltext.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/fulltext.js" />
 
 	<popupset>
 		<menupopup id="sbPopup">
@@ -40,17 +40,30 @@
 	</hbox>
 
 	<tree id="sbTree"
+	      enableColumnDrag="true"
 	      context="sbPopup"
 	      seltype="single"
 	      onselect="sbSearchResult.forward();"
 	      class="plain"
 	      style="height:160px;">
 		<treecols>
-			<treecol id="sbTreeColTitle"   label="&sb.prop.title;"   flex="3" /><splitter class="tree-splitter" />
-			<treecol id="sbTreeColContent" label="&sb.prop.content;" flex="5" /><splitter class="tree-splitter" />
-			<treecol id="sbTreeColComment" label="&sb.prop.comment;" flex="2" persist="hidden" /><splitter class="tree-splitter" />
-			<treecol id="sbTreeColFolder"  label="&sb.prop.folder;"  flex="1" persist="hidden" /><splitter class="tree-splitter" />
-			<treecol id="sbTreeColName"    label="&sb.prop.file;" flex="1" hidden="true" persist="hidden" />
+			<treecol id="sbTreeColTitle" label="&sb.prop.title;" flex="3"
+			         sortIndex="0" persist="width hidden ordinal" />
+			<splitter class="tree-splitter" />
+			<treecol id="sbTreeColContent" label="&sb.prop.content;" flex="5"
+			         sortIndex="1" persist="width hidden ordinal" />
+			<splitter class="tree-splitter" />
+			<treecol id="sbTreeColComment" label="&sb.prop.comment;" flex="2"
+			         sortIndex="2" persist="width hidden ordinal" />
+			<splitter class="tree-splitter" />
+			<treecol id="sbTreeColFolder" label="&sb.prop.folder;" flex="1"
+			         sortIndex="3" persist="width hidden ordinal" />
+			<splitter class="tree-splitter" />
+			<treecol id="sbTreeColName" label="&sb.prop.file;" flex="1" hidden="true"
+			         sortIndex="4" persist="width hidden ordinal" />
+			<splitter class="tree-splitter" />
+			<treecol id="sbTreeColId" label="&sb.prop.id.date;" flex="1" hidden="true"
+			         sortIndex="5" persist="width hidden ordinal" />
 		</treecols>
 		<treechildren />
 	</tree>
