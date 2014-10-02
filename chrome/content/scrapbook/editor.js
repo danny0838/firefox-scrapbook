@@ -104,11 +104,9 @@ var sbPageEditor = {
 		// -- refresh the toolbar
 		if ( aID && (this.item.lock == "true" || sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec).leafName.match(/^\./)) ) {
 			// locked items and hidden (history) HTML pages cannot be edited, simply show a disabled toolbar
-			sbHtmlEditor.init(null, 0);
 			this.disable(true);
 		}
 		else {
-			// sbHtmlEditor.init(null, 2);  // included in disable(false)
 			this.disable(false);
 		}
 		this.showHide(true);
@@ -144,7 +142,6 @@ var sbPageEditor = {
 	uninit : function()
 	{
 		this.item = null;
-		sbHtmlEditor.init(null, 0);
 		this.disable(true);
 	},
 
@@ -462,7 +459,7 @@ var sbPageEditor = {
 			return;
 		}
 		// check pass, exec the saving
-		this.disable(true);
+		this.disable(true, true);
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			var doc = win.document;
 			if ( doc.contentType != "text/html" ) {
@@ -481,7 +478,7 @@ var sbPageEditor = {
 			this.documentAfterSave(doc);
 			sbCommonUtils.documentData(doc, "changed", false);
 		}, this);
-		window.setTimeout(function() { window.content.stop(); sbPageEditor.disable(false); }, 500);
+		window.setTimeout(function() { window.content.stop(); sbPageEditor.disable(false, true); }, 500);
 	},
 
 	saveResource : function()
@@ -508,14 +505,16 @@ var sbPageEditor = {
 	//   3. HTMLEditor
 	// To prevent conflict:
 	//   - we should turn off DOMEraser before disable or it's effect will persist
+	//   - we should turn off HTMLEditor before disable if it's permanent
 	//   - we should refresh HTMLEditor after since it may be on and should not get all disabled
-	disable : function(aBool)
+	disable : function(isDisable, isTemp)
 	{
-		this.enabled = !aBool;
+		this.enabled = !isDisable;
 		sbDOMEraser.init(0);
+		if (isDisable && !isTemp) sbHtmlEditor.init(null, 0);
 		var elems = this.TOOLBAR.childNodes;
-		for ( var i = 0; i < elems.length; i++ ) elems[i].disabled = aBool;
-		if (!aBool) sbHtmlEditor.init(null, 2);
+		for ( var i = 0; i < elems.length; i++ ) elems[i].disabled = isDisable;
+		if (!isDisable) sbHtmlEditor.init(null, 2);
 	},
 
 	toggle : function()
