@@ -1,3 +1,20 @@
+Scrapbook X 1.12.0a27
+----------------
+
+- UPDATE: The status popup is now available via the toolbar button and the status bar icon, in all supported Firefox versions.
+- UPDATE: Removed "SiteMap" and "Open Source URL" buttons from the status popup.
+- UPDATE: Smarter "Auto edit Note Pages".
+- UPDATE: The column order can now be customized in the fulltext search result, import/export manager, and calculate interfaces.
+- UPDATE: Fulltext search result can now be sorted.
+- UPDATE: Added "ID" column to the fulltext search result.
+- UPDATE: Simplified the parameters of the fulltext search URI.
+- UPDATE: Improved some language packs.
+- FIXED: Now can normally use Ctrl+Q to highlight and Ctrl+A to add a sticky note.
+- FIXED: The status popup buttons sometimes show wrong status.
+- FIXED: Sometimes the first sorting in several dialogs are incorrect.
+- FIXED: Prevent potential script errors in some situations of the fulltext search result.
+
+
 Scrapbook X 1.12.0a26
 ----------------
 
