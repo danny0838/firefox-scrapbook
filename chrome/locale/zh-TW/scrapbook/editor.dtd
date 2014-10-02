@@ -34,7 +34,7 @@
 <!ENTITY sb.source "開啟原始網址">
 <!ENTITY sb.renew "重新擷取">
 <!ENTITY sb.internalize "將內嵌的外部媒體存入資料目錄">
-<!ENTITY sb.locate "於側邊欄中顯示此檔位置">
+<!ENTITY sb.locate "在側邊欄顯示此項目的位置">
 <!ENTITY sb.indicators "顯示連結標記">
 <!ENTITY sb.info.home "首頁">
 <!ENTITY sb.info.sitemap "網站導覽">
