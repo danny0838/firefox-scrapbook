@@ -1,6 +1,12 @@
 Scrapbook X 1.12.0a27
 ----------------
 
+- FIXED: HTML editor of note pages is always automatically turned off if the user has viewed a locked note page previously.
+
+
+Scrapbook X 1.12.0a27
+----------------
+
 - UPDATE: The status popup is now available via the toolbar button and the status bar icon, in all supported Firefox versions.
 - UPDATE: Removed "SiteMap" and "Open Source URL" buttons from the status popup.
 - UPDATE: Smarter "Auto edit Note Pages".
