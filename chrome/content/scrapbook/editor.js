@@ -104,13 +104,9 @@ var sbPageEditor = {
 		// -- refresh the toolbar
 		if ( aID && (this.item.lock == "true" || sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec).leafName.match(/^\./)) ) {
 			// locked items and hidden (history) HTML pages cannot be edited, simply show a disabled toolbar
-			// sbDOMEraser.init(0);  // included in disable(true)
-			sbHtmlEditor.init(null, 0);
 			this.disable(true);
 		}
 		else {
-			sbDOMEraser.init(0);
-			// sbHtmlEditor.init(null, 2);  // included in disable(false)
 			this.disable(false);
 		}
 		this.showHide(true);
@@ -146,7 +142,6 @@ var sbPageEditor = {
 	uninit : function()
 	{
 		this.item = null;
-		sbHtmlEditor.init(null, 0);
 		this.disable(true);
 	},
 
@@ -464,8 +459,7 @@ var sbPageEditor = {
 			return;
 		}
 		// check pass, exec the saving
-		sbDOMEraser.init(0);
-		this.disable(true);
+		this.disable(true, true);
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			var doc = win.document;
 			if ( doc.contentType != "text/html" ) {
@@ -484,7 +478,7 @@ var sbPageEditor = {
 			this.documentAfterSave(doc);
 			sbCommonUtils.documentData(doc, "changed", false);
 		}, this);
-		window.setTimeout(function() { window.content.stop(); sbPageEditor.disable(false); }, 500);
+		window.setTimeout(function() { window.content.stop(); sbPageEditor.disable(false, true); }, 500);
 	},
 
 	saveResource : function()
@@ -511,14 +505,16 @@ var sbPageEditor = {
 	//   3. HTMLEditor
 	// To prevent conflict:
 	//   - we should turn off DOMEraser before disable or it's effect will persist
+	//   - we should turn off HTMLEditor before disable if it's permanent
 	//   - we should refresh HTMLEditor after since it may be on and should not get all disabled
-	disable : function(aBool)
+	disable : function(isDisable, isTemp)
 	{
-		this.enabled = !aBool;
-		if (aBool) sbDOMEraser.init(0);
+		this.enabled = !isDisable;
+		sbDOMEraser.init(0);
+		if (isDisable && !isTemp) sbHtmlEditor.init(null, 0);
 		var elems = this.TOOLBAR.childNodes;
-		for ( var i = 0; i < elems.length; i++ ) elems[i].disabled = aBool;
-		if (!aBool) sbHtmlEditor.init(null, 2);
+		for ( var i = 0; i < elems.length; i++ ) elems[i].disabled = isDisable;
+		if (!isDisable) sbHtmlEditor.init(null, 2);
 	},
 
 	toggle : function()
@@ -734,7 +730,7 @@ var sbHtmlEditor = {
 		if ( aStateFlag == 1 ) {
 			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled", true);
 			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.document", aDoc);
-			if (sbPageEditor.item && sbPageEditor.item.type == "notex") {
+			if (sbPageEditor.enabled && sbPageEditor.item && sbPageEditor.item.type == "notex") {
 				sbCommonUtils.setPref("edit.autoEditNoteX.active", true);
 			}
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
@@ -769,7 +765,7 @@ var sbHtmlEditor = {
 		else if ( aStateFlag == 0 ) {
 			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled", false);
 			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.document", null);
-			if (sbPageEditor.item && sbPageEditor.item.type == "notex") {
+			if (sbPageEditor.enabled && sbPageEditor.item && sbPageEditor.item.type == "notex") {
 				sbCommonUtils.setPref("edit.autoEditNoteX.active", false);
 			}
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
