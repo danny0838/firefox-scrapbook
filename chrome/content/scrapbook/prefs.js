@@ -3,7 +3,6 @@ var sbPrefWindow = {
 	changed: false,
 
 	init: function() {
-		if ( sbCommonUtils._fxVer4 ) document.getElementById("sbPrefStatsBarIcon").hidden = true;
 		this.updateDataPath();
 		this.hlUpdateUI();
 		this._updateFileField("sbDataPath", "extensions.scrapbook.data.path");

@@ -129,7 +129,8 @@ var sbPageEditor = {
 					sbPageEditor.documentBeforeEdit(doc);
 				}, this);
 			}, this);
-			if (this.enabled && this.item && this.item.lock != "true" && this.item.type == "notex" && sbCommonUtils.getPref("edit.autoEditNoteX", true)) {
+			if (this.enabled && this.item && this.item.lock != "true" && this.item.type == "notex" && 
+				sbCommonUtils.getPref("edit.autoEditNoteX", true) && sbCommonUtils.getPref("edit.autoEditNoteX.active", true)) {
 				this.documentLoad(window.content.document, function(doc){
 					// check document type and make sure it's a file
 					if (doc.contentType != "text/html") return;
@@ -144,6 +145,7 @@ var sbPageEditor = {
 
 	uninit : function()
 	{
+		this.item = null;
 		sbHtmlEditor.init(null, 0);
 		this.disable(true);
 	},
@@ -732,6 +734,9 @@ var sbHtmlEditor = {
 		if ( aStateFlag == 1 ) {
 			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled", true);
 			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.document", aDoc);
+			if (sbPageEditor.item && sbPageEditor.item.type == "notex") {
+				sbCommonUtils.setPref("edit.autoEditNoteX.active", true);
+			}
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 				if ( win.document.designMode != "off" && win.document != aDoc ) {
 					win.document.designMode = "off";
@@ -764,6 +769,9 @@ var sbHtmlEditor = {
 		else if ( aStateFlag == 0 ) {
 			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled", false);
 			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.document", null);
+			if (sbPageEditor.item && sbPageEditor.item.type == "notex") {
+				sbCommonUtils.setPref("edit.autoEditNoteX.active", false);
+			}
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 				if ( win.document.designMode != "off" ) {
 					win.document.designMode = "off";
@@ -2216,20 +2224,25 @@ var sbInfoViewer = {
 	onPopupShowing : function(aEvent)
 	{
 		var id = sbBrowserOverlay.getID();
-		var elems = aEvent.originalTarget.childNodes;
-		for ( var i = 0; i < elems.length - 2; i++ ) elems[i].setAttribute("disabled", id ? "false" : "true");
-		for ( i; i < elems.length; i++ ) elems[i].hidden = id;
-		if ( id ) {
-			if ( !sbDataSource.exists(sbBrowserOverlay.resource) ) { aEvent.preventDefault(); return; }
-			document.getElementById("ScrapBookStatusPopupE").setAttribute("checked",  sbBrowserOverlay.editMode);
-			document.getElementById("ScrapBookStatusPopupI").setAttribute("checked",  sbBrowserOverlay.infoMode);
-			document.getElementById("ScrapBookStatusPopupM").setAttribute("disabled", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") != "site");
+		document.getElementById("ScrapBookStatusPopupE").setAttribute("checked", sbBrowserOverlay.editMode);
+		document.getElementById("ScrapBookStatusPopupI").setAttribute("checked", sbBrowserOverlay.infoMode);
+		if ( id && sbDataSource.exists(sbBrowserOverlay.resource) ) {
 			document.getElementById("ScrapBookStatusPopupR").setAttribute("disabled", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "notex");
+			document.getElementById("ScrapBookStatusPopupT").setAttribute("hidden", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") != "notex");
 			document.getElementById("ScrapBookStatusPopupD").setAttribute("disabled", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "notex");
 			document.getElementById("ScrapBookStatusPopupI").setAttribute("disabled", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "notex");
-			document.getElementById("ScrapBookStatusPopupT").setAttribute("hidden", sbDataSource.getProperty(sbBrowserOverlay.resource, "type") != "notex");
+			document.getElementById("ScrapBookStatusPopupE").setAttribute("disabled", false);
+			document.getElementById("ScrapBookStatusPopup").lastChild.previousSibling.setAttribute("hidden", true);
+			document.getElementById("ScrapBookStatusPopup").lastChild.setAttribute("hidden", true);
 		} else {
-			aEvent.originalTarget.lastChild.setAttribute("checked", !(sbPageEditor.TOOLBAR.hidden || document.getElementById("ScrapBookToolbox").hidden));
+			document.getElementById("ScrapBookStatusPopupR").setAttribute("disabled", true);
+			document.getElementById("ScrapBookStatusPopupT").setAttribute("hidden", true);
+			document.getElementById("ScrapBookStatusPopupD").setAttribute("disabled", true);
+			document.getElementById("ScrapBookStatusPopupI").setAttribute("disabled", true);
+			document.getElementById("ScrapBookStatusPopupE").setAttribute("disabled", true);
+			document.getElementById("ScrapBookStatusPopup").lastChild.previousSibling.setAttribute("hidden", false);
+			document.getElementById("ScrapBookStatusPopup").lastChild.setAttribute("hidden", false);
+			document.getElementById("ScrapBookStatusPopup").lastChild.setAttribute("checked", !(sbPageEditor.TOOLBAR.hidden || document.getElementById("ScrapBookToolbox").hidden));
 		}
 	},
 

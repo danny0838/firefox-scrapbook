@@ -20,6 +20,7 @@ function SB_initFT(type)
 
 var sbSearchResult =
 {
+	get TREE() { return document.getElementById("sbTree"); },
 	get CURRENT_TREEITEM() { return this.treeItems[document.getElementById("sbTree").currentIndex]; },
 
 	index : 0,
@@ -57,8 +58,8 @@ var sbSearchResult =
 			}
 		}
 
-		this.RegExpModifier = ( this.QueryStrings['cs'] != "true" ) ? "im" : "m";
-		if ( this.QueryStrings['re'] != "true" )
+		this.RegExpModifier = ( !this.QueryStrings['cs'] ) ? "im" : "m";
+		if ( !this.QueryStrings['re'] )
 		{
 			var query = this.QueryStrings['q'].replace(/( |\u3000)+/g, " ");
 			var quotePos1;
@@ -153,7 +154,7 @@ var sbSearchResult =
 		var type    = sbDataSource.getProperty(res, "type");
 		var title   = sbDataSource.getProperty(res, "title");
 		var comment = sbDataSource.getProperty(res, "comment");
-		if ( this.QueryStrings['re'] == "true" )
+		if ( this.QueryStrings['re'] )
 		{
 			try {
 				var re = new RegExp(this.QueryStrings['q'], this.RegExpModifier);
@@ -201,28 +202,9 @@ var sbSearchResult =
 
 	finalize : function()
 	{
-		var colIDs = [
-			"sbTreeColTitle",
-			"sbTreeColContent",
-			"sbTreeColComment",
-			"sbTreeColFolder",
-			"sbTreeColName",
-		];
-		var treeView = new sbCustomTreeView(colIDs, this.treeItems);
-		treeView.getImageSrc = function(row, col)
-		{
-			if ( col.index == 0 ) return this._items[row][7];
-		};
-		treeView.getCellProperties = function(row, col, properties)
-		{
-			if ( col.index != 0 ) return "";
-			var val = this._items[row][6];
-			if (sbCommonUtils._fxVer22) return val;
-			else properties.AppendElement(ATOM_SERVICE.getAtom(val));
-		};
-		document.getElementById("sbTree").view = treeView;
+		this.initTree();
 		var headerLabel1 = sbCommonUtils.lang("fulltext", "RESULTS_FOUND", [this.hit] );
-		if ( this.QueryStrings['re'] == "true" )
+		if ( this.QueryStrings['re'] )
 		{
 			var headerLabel2 = sbCommonUtils.lang("fulltext", "MATCHING", [ this.localizedQuotation(this.QueryStrings['q']) ]);
 		}
@@ -243,11 +225,39 @@ var sbSearchResult =
 		document.title = document.getElementById("sbResultHeader").firstChild.value = headerLabel1 + " : " + headerLabel2;
 	},
 
+	initTree : function()
+	{
+		var colIDs = [
+			"sbTreeColTitle",
+			"sbTreeColContent",
+			"sbTreeColComment",
+			"sbTreeColFolder",
+			"sbTreeColName",
+			"sbTreeColId",
+		];
+		var treeView = new sbCustomTreeView(colIDs, this.treeItems);
+		treeView.getImageSrc = function(row, col)
+		{
+			if ( col.index == 0 ) return this._items[row][7];
+		};
+		treeView.getCellProperties = function(row, col, properties)
+		{
+			if ( col.index != 0 ) return "";
+			var val = this._items[row][6];
+			if (sbCommonUtils._fxVer22) return val;
+			else properties.AppendElement(ATOM_SERVICE.getAtom(val));
+		};
+		treeView.cycleHeader = function(col)
+		{
+			sbCustomTreeUtil.sortItems(sbSearchResult, col.element);
+		};
+		this.TREE.view = treeView;
+	},
 
 	extractRightContext : function(aString)
 	{
 		aString = aString.replace(/\r|\n|\t/g, " ");
-		pattern = ( this.QueryStrings['re'] == "true" ) ? this.QueryStrings['q'] : this.includeWords[0];
+		pattern = ( this.QueryStrings['re'] ) ? this.QueryStrings['q'] : this.includeWords[0];
 		var re = new RegExp("(" + sbCommonUtils.escapeRegExp(pattern) + ".*)", this.RegExpModifier);
 		var ret = aString.match(re) ? RegExp.$1 : aString;
 		return ( ret.length > 100 ) ? ret.substring(0, 100) : ret;
@@ -261,16 +271,25 @@ var sbSearchResult =
 	forward : function(key)
 	{
 		if ( !this.CURRENT_TREEITEM ) return;
-		var id   = this.CURRENT_TREEITEM[5];
+		var id = this.CURRENT_TREEITEM[5];
+		var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
+		if (!sbDataSource.getProperty(res, "id")) return;
 		switch ( key ) {
-			case "O" : sbCommonUtils.loadURL(getURL(), false); break;
-			case "T" : sbCommonUtils.loadURL(getURL(), true); break;
-			case "P" : window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome" ,id); break;
+			case "O" : 
+				sbCommonUtils.loadURL(getURL(), false);
+				break;
+			case "T" : 
+				sbCommonUtils.loadURL(getURL(), true);
+				break;
+			case "P" : 
+				window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome" ,id);
+				break;
 			case "L" : 
-				var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
 				sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser").sbBrowserOverlay.execLocate(res);
 				break;
-			default  : document.getElementById("sbBrowser").loadURI(getURL()); break;
+			default  : 
+				document.getElementById("sbBrowser").loadURI(getURL());
+				break;
 		}
 		
 		function getURL() {
@@ -278,7 +297,6 @@ var sbSearchResult =
 				case "note":
 					return "chrome://scrapbook/content/note.xul?id=" + id;
 				case "bookmark":
-					var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
 					return sbDataSource.getProperty(res, "source");
 				default:
 					return sbSearchResult.resPathToURL(id, sbSearchResult.CURRENT_TREEITEM[4]);
@@ -296,7 +314,7 @@ var sbSearchResult =
 	{
 		aEvent.stopPropagation();
 		aEvent.preventDefault();
-		if ( this.QueryStrings["re"] == "true" ) this.includeWords = [this.QueryStrings['q']];
+		if ( this.QueryStrings['re'] ) this.includeWords = [this.QueryStrings['q']];
 		for ( var i = 0; i < this.includeWords.length; i++ )
 		{
 			var colors = ["#FFFF33","#66FFFF","#90FF90","#FF9999","#FF99FF"];

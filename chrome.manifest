@@ -1,6 +1,4 @@
-overlay	chrome://browser/content/browser.xul	chrome://scrapbook/content/overlay3.xul application={ec8030f7-c20a-464f-9b0e-13a3a9e97384} appversion<4.0
-overlay	chrome://browser/content/browser.xul	chrome://scrapbook/content/overlay4.xul application={ec8030f7-c20a-464f-9b0e-13a3a9e97384} appversion>=4.0
-
+overlay	chrome://browser/content/browser.xul	chrome://scrapbook/content/overlay.xul
 content	scrapbook	chrome/content/scrapbook/	contentaccessible=yes
 
 skin	scrapbook	classic/1.0	chrome/skin/classic/scrapbook/

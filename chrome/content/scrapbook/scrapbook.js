@@ -893,9 +893,10 @@ var sbSearchService = {
 				shouldBuild = true;
 		}
 		var uri = "chrome://scrapbook/content/result.xul";
-		var query = "?q=" + encodeURIComponent(this.query) + "&re=" + this.optionRE.toString() + "&cs=" + this.optionCS.toString();
-		if (this.treeRef != "urn:scrapbook:root")
-			query += "&ref=" + this.treeRef;
+		var query = "?q=" + encodeURIComponent(this.query) 
+			+ "&re=" + (this.optionRE ? "1" : "")
+			+ "&cs=" + (this.optionCS ? "1" : "")
+			+ (this.treeRef != "urn:scrapbook:root" ? "&ref=" + this.treeRef : "");
 		if (shouldBuild) {
 			this.buildFT(uri + query);
 		}

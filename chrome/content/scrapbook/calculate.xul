@@ -66,6 +66,7 @@
 	</grid>
 
 	<tree id="sbTree"
+	      enableColumnDrag="true"
 	      context="sbCalcPopup"
 	      seltype="single"
 	      ondblclick="sbCalcController.onDblClick(event);"
