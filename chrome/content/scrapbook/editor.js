@@ -104,12 +104,10 @@ var sbPageEditor = {
 		// -- refresh the toolbar
 		if ( aID && (this.item.lock == "true" || sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec).leafName.match(/^\./)) ) {
 			// locked items and hidden (history) HTML pages cannot be edited, simply show a disabled toolbar
-			// sbDOMEraser.init(0);  // included in disable(true)
 			sbHtmlEditor.init(null, 0);
 			this.disable(true);
 		}
 		else {
-			sbDOMEraser.init(0);
 			// sbHtmlEditor.init(null, 2);  // included in disable(false)
 			this.disable(false);
 		}
@@ -464,7 +462,6 @@ var sbPageEditor = {
 			return;
 		}
 		// check pass, exec the saving
-		sbDOMEraser.init(0);
 		this.disable(true);
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			var doc = win.document;
@@ -515,7 +512,7 @@ var sbPageEditor = {
 	disable : function(aBool)
 	{
 		this.enabled = !aBool;
-		if (aBool) sbDOMEraser.init(0);
+		sbDOMEraser.init(0);
 		var elems = this.TOOLBAR.childNodes;
 		for ( var i = 0; i < elems.length; i++ ) elems[i].disabled = aBool;
 		if (!aBool) sbHtmlEditor.init(null, 2);
