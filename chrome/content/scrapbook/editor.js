@@ -730,7 +730,7 @@ var sbHtmlEditor = {
 		if ( aStateFlag == 1 ) {
 			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled", true);
 			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.document", aDoc);
-			if (sbPageEditor.item && sbPageEditor.item.type == "notex") {
+			if (sbPageEditor.enabled && sbPageEditor.item && sbPageEditor.item.type == "notex") {
 				sbCommonUtils.setPref("edit.autoEditNoteX.active", true);
 			}
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
@@ -765,7 +765,7 @@ var sbHtmlEditor = {
 		else if ( aStateFlag == 0 ) {
 			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled", false);
 			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.document", null);
-			if (sbPageEditor.item && sbPageEditor.item.type == "notex") {
+			if (sbPageEditor.enabled && sbPageEditor.item && sbPageEditor.item.type == "notex") {
 				sbCommonUtils.setPref("edit.autoEditNoteX.active", false);
 			}
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
