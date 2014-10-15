@@ -824,7 +824,13 @@ var sbContentSaver = {
 			return "";
 		}
 
-		var arr = this.getUniqueFileName(decodeURIComponent(aURL.fileName), aURLSpec);
+		var fileName = aURL.fileName;
+		// decode %xx%xx%xx only if it's UTF-8 encoded
+		try {
+			fileName = decodeURIComponent(fileName);
+		} catch(ex) {
+		}
+		var arr = this.getUniqueFileName(fileName, aURLSpec);
 		var newFileName = arr[0];
 		var hasDownloaded = arr[1];
 		if (hasDownloaded) return newFileName;

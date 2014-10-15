@@ -1,4 +1,10 @@
-Scrapbook X 1.12.0a27
+Scrapbook X 1.12.0a29
+----------------
+
+- FIXED: URLs escaped in the form %xx%xx with non UTF-8 encoding causes an error on capture.
+
+
+Scrapbook X 1.12.0a28
 ----------------
 
 - FIXED: HTML editor of note pages is always automatically turned off if the user has viewed a locked note page previously.
