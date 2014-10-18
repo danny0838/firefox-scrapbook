@@ -741,25 +741,7 @@ var sbContentSaver = {
 				content += "/* ERROR: Unable to access this CSS */\n\n";
 			skip = true;
 		}
-		if (!skip) {
-			Array.forEach(aCSS.cssRules, function(cssRule) {
-				switch (cssRule.type) {
-					case Components.interfaces.nsIDOMCSSRule.IMPORT_RULE: 
-						content += this.processCSSRecursively(cssRule.styleSheet, aDocument, true);
-						break;
-					case Components.interfaces.nsIDOMCSSRule.FONT_FACE_RULE: 
-						var cssText = this.inspectCSSText(cssRule.cssText, aCSS.href);
-						if (cssText) content += cssText + "\n";
-						break;
-					case Components.interfaces.nsIDOMCSSRule.STYLE_RULE: 
-					case Components.interfaces.nsIDOMCSSRule.MEDIA_RULE: 
-					default: 
-						var cssText = this.inspectCSSText(cssRule.cssText, aCSS.href, true);
-						if (cssText) content += cssText + "\n";
-						break;
-				}
-			}, this);
-		}
+		if (!skip) content += this.processCSSRules(aCSS, aDocument, "");
 		var media = aCSS.media.mediaText;
 		if (media) {
 			// omit "all" since it's defined in the link tag
@@ -779,6 +761,34 @@ var sbContentSaver = {
 		else {
 			content = "/* ::::: " + "[internal]" + media + " ::::: */\n\n" + content;
 		}
+		return content;
+	},
+
+	processCSSRules : function(aCSS, aDocument, indent)
+	{
+		var content = "";
+		Array.forEach(aCSS.cssRules, function(cssRule) {
+			switch (cssRule.type) {
+				case Components.interfaces.nsIDOMCSSRule.IMPORT_RULE: 
+					content += this.processCSSRecursively(cssRule.styleSheet, aDocument, true);
+					break;
+				case Components.interfaces.nsIDOMCSSRule.FONT_FACE_RULE: 
+					var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href);
+					if (cssText) content += cssText + "\n";
+					break;
+				case Components.interfaces.nsIDOMCSSRule.MEDIA_RULE: 
+					cssText = indent + "@media " + cssRule.conditionText + " {\n"
+						+ this.processCSSRules(cssRule, aDocument, indent + "  ")
+						+ indent + "}";
+					if (cssText) content += cssText + "\n";
+					break;
+				case Components.interfaces.nsIDOMCSSRule.STYLE_RULE: 
+				default: 
+					var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, true);
+					if (cssText) content += cssText + "\n";
+					break;
+			}
+		}, this);
 		return content;
 	},
 
