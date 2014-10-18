@@ -451,9 +451,12 @@ var sbDataSource = {
 			aWindow.openDialog('chrome://scrapbook/content/output.xul','ScrapBook:Output','chrome,modal', true);
 		} catch(ex) {
 		}
-		this._needReOutputTree = false;
 	},
 
+	outputTreeAutoDone : function()
+	{
+		this._needReOutputTree = false;
+	}
 };
 
 var EXPORTED_SYMBOLS = ["sbDataSource"];
