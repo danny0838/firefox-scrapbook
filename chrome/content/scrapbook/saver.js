@@ -798,6 +798,8 @@ var sbContentSaver = {
 		return content;
 
 		function verifySelector(rootNode, selectorText) {
+			// older Firefox versions don't support querySelector, simply return true
+			if (!sbCommonUtils._fxVer3_5) return true;
 			try {
 				if (rootNode.querySelector(selectorText)) return true;
 				// querySelector of selectors like a:hover or so always return null
