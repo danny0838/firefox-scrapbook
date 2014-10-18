@@ -800,18 +800,39 @@ var sbContentSaver = {
 		function verifySelector(rootNode, selectorText) {
 			try {
 				if (rootNode.querySelector(selectorText)) return true;
-				// querySelector of a:hover or so always returns null
-				// preserve all pseudo-class and pseudo-elements to prevent erasing them
-				// @TODO: could be more precise?
-				var isPseudo = false;
+				// querySelector of selectors like a:hover or so always return null
+				// preserve pseudo-class and pseudo-elements if their non-pseudo versions exist
+				var hasPseudo = false;
+				var startPseudo = false;
+				var depseudoSelectors = [""];
 				selectorText.replace(
 					/(,\s+)|(\s+)|((?:[\-0-9A-Za-z_\u00A0-\uFFFF]|\\[0-9A-Fa-f]{1,6} ?|\\.)+)|(\[(?:"(?:\\.|[^"])*"|\\.|[^\]])*\])|(.)/g,
 					function(){
-						if (arguments[5] == ":") isPseudo = true;
+						if (arguments[1]) {
+							depseudoSelectors.push("");
+							startPseudo = false;
+						}
+						else if (arguments[5] == ":") {
+							hasPseudo = true;
+							startPseudo = true;
+						}
+						else if (startPseudo && (arguments[3] || arguments[5])) {
+						}
+						else if (startPseudo) {
+							startPseudo = false;
+							depseudoSelectors[depseudoSelectors.length - 1] += arguments[0];
+						}
+						else {
+							depseudoSelectors[depseudoSelectors.length - 1] += arguments[0];
+						}
 						return arguments[0];
 					}
 				);
-				if (isPseudo) return true;
+				if (hasPseudo) {
+					for (var i=0, I=depseudoSelectors.length; i<I; ++i) {
+						if (depseudoSelectors[i] === "" || rootNode.querySelector(depseudoSelectors[i])) return true;
+					};
+				}
 			} catch(ex) {
 			}
 			return false;
