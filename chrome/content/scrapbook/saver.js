@@ -705,7 +705,7 @@ var sbContentSaver = {
 		}
 		if ( aNode.style && aNode.style.cssText )
 		{
-			var newCSStext = this.inspectCSSText(aNode.style.cssText, this.refURLObj.spec, true);
+			var newCSStext = this.inspectCSSText(aNode.style.cssText, this.refURLObj.spec, "image");
 			if ( newCSStext ) aNode.setAttribute("style", newCSStext);
 		}
 		if ( !this.option["script"] )
@@ -773,7 +773,7 @@ var sbContentSaver = {
 					content += this.processCSSRecursively(cssRule.styleSheet, aDocument, rootNode, true);
 					break;
 				case Components.interfaces.nsIDOMCSSRule.FONT_FACE_RULE: 
-					var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href);
+					var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "font");
 					if (cssText) content += cssText + "\n";
 					break;
 				case Components.interfaces.nsIDOMCSSRule.MEDIA_RULE: 
@@ -785,12 +785,12 @@ var sbContentSaver = {
 				case Components.interfaces.nsIDOMCSSRule.STYLE_RULE: 
 					// if script is used, preserve all css in case it's used by a dynamic generated DOM
 					if (this.option["script"] || verifySelector(rootNode, cssRule.selectorText)) {
-						var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, true);
+						var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "image");
 						if (cssText) content += cssText + "\n";
 					}
 					break;
 				default: 
-					var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, true);
+					var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "image");
 					if (cssText) content += cssText + "\n";
 					break;
 			}
@@ -841,7 +841,7 @@ var sbContentSaver = {
 		}
 	},
 
-	inspectCSSText : function(aCSSText, aCSSHref, isImage)
+	inspectCSSText : function(aCSSText, aCSSHref, type)
 	{
 		if (!aCSSHref) aCSSHref = this.refURLObj.spec;
 		// CSS get by .cssText is always url("something-with-\"double-quote\"-escaped")
@@ -854,7 +854,7 @@ var sbContentSaver = {
 			if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
 			if ( sbContentSaver.option["internalize"] && dataURL .indexOf("://") == -1 ) return ' url("' + dataURL + '")';
 			dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);
-			if (sbContentSaver.option["images"] || !isImage) {
+			if (sbContentSaver.option["images"] || type != "image") {
 				var dataFile = sbContentSaver.download(dataURL);
 				if (dataFile) dataURL = sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(dataFile));
 			}
