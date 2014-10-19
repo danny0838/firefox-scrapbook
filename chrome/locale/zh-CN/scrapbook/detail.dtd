@@ -7,6 +7,7 @@
 <!ENTITY sb.detail.option.capture "获取">
 <!ENTITY sb.detail.option.images "图片">
 <!ENTITY sb.detail.option.media "多媒体">
+<!ENTITY sb.detail.option.fonts "字体">
 <!ENTITY sb.detail.option.styles "样式">
 <!ENTITY sb.detail.option.scripts "动态脚本">
 <!ENTITY sb.detail.option.rewriteStyles "重组样式表">

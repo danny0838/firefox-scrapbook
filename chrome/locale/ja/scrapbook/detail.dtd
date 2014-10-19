@@ -7,6 +7,7 @@
 <!ENTITY sb.detail.option.capture "取り込む">
 <!ENTITY sb.detail.option.images "画像">
 <!ENTITY sb.detail.option.media "メディア">
+<!ENTITY sb.detail.option.fonts "フォント">
 <!ENTITY sb.detail.option.styles "スタイル">
 <!ENTITY sb.detail.option.scripts "スクリプト">
 <!ENTITY sb.detail.option.rewriteStyles "スタイルを再編成">
