@@ -527,18 +527,18 @@ var sbContentSaver = {
 				// gets "" if rel attribute not defined
 				switch ( aNode.rel.toLowerCase() ) {
 					case "stylesheet" :
-						if ( !this.option["styles"] ) {
-							return this.removeNodeFromParent(aNode);
-						}
-						else if ( !this.option["rewriteStyles"] ) {
-							if ( this.option["internalize"] ) break;
-							if ( aNode.hasAttribute("href") ) {
+						if ( this.option["internalize"] ) break;
+						if ( aNode.hasAttribute("href") ) {
+							if ( !this.option["styles"] ) {
+								aNode.setAttribute("href", "about:blank#" + aNode.href);
+							}
+							else if ( !this.option["rewriteStyles"] ) {
 								var aFileName = this.download(aNode.href);
 								if (aFileName) aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
 							}
-						}
-						else if ( aNode.href.indexOf("chrome://") != 0 ) {
-							return this.removeNodeFromParent(aNode);
+							else if ( aNode.href.indexOf("chrome://") != 0 ) {
+								aNode.setAttribute("href", "about:blank#" + aNode.href);
+							}
 						}
 						break;
 					case "shortcut icon" :
