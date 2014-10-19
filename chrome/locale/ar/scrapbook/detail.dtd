@@ -10,6 +10,7 @@
 <!ENTITY sb.detail.option.fonts "Fonts">
 <!ENTITY sb.detail.option.styles "الهيئة">
 <!ENTITY sb.detail.option.scripts "Scripts">
+<!ENTITY sb.detail.option.keepLink "Link to source for those not to capture">
 <!ENTITY sb.detail.option.rewriteStyles "Reorganize Styles">
 <!ENTITY sb.detail.option.asHtml "Capture as HTML">
 <!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
