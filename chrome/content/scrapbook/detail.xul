@@ -60,9 +60,11 @@
 					<caption label="&sb.detail.option.capture;:" />
 						<checkbox id="sbDetailOptionImages" label="&sb.detail.option.images;" checked="true" />
 						<checkbox id="sbDetailOptionMedia" label="&sb.detail.option.media;" checked="true" />
+						<checkbox id="sbDetailOptionFonts" label="&sb.detail.option.fonts;" checked="true" />
 						<checkbox id="sbDetailOptionStyles" label="&sb.detail.option.styles;" checked="true" />
 						<checkbox id="sbDetailOptionScript" label="&sb.detail.option.scripts;" oncommand="sbCaptureOptions.toggleWarningUI();" />
 					</hbox>
+					<checkbox id="sbDetailOptionKeepLink" label="&sb.detail.option.keepLink;" />
 					<checkbox id="sbDetailOptionRewriteStyles" label="&sb.detail.option.rewriteStyles;" checked="true" />
 					<checkbox id="sbDetailOptionForceUtf8" label="&sb.detail.option.forceUtf8;" checked="true" />
 					<checkbox id="sbDetailOptionAsHtml" label="&sb.detail.option.asHtml;" />

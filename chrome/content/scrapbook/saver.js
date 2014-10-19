@@ -25,7 +25,7 @@ var sbContentSaver = {
 		this.name = "index";
 		this.favicon = null;
 		this.file2URL = { "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
-		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "styles" : true, "script" : false, "asHtml" : false, "forceUtf8" : true, "rewriteStyles" : true, "internalize" : false };
+		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "fonts" : true, "styles" : true, "script" : false, "asHtml" : false, "forceUtf8" : true, "rewriteStyles" : true, "keepLink" : false, "internalize" : false };
 		this.plusoption = { "timeout" : "0", "charset" : "UTF-8" }
 		this.linkURLs = [];
 		this.frames = [];
@@ -433,8 +433,10 @@ var sbContentSaver = {
 					if ( this.option["images"] ) {
 						var aFileName = this.download(aNode.src);
 						if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
-					} else {
+					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("src", aNode.src);
+					} else {
+						aNode.setAttribute("src", "about:blank#" + aNode.src);
 					}
 				}
 				break;
@@ -445,8 +447,10 @@ var sbContentSaver = {
 					if ( this.option["media"] ) {
 						var aFileName = this.download(aNode.src);
 						if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
-					} else {
+					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("src", aNode.src);
+					} else {
+						aNode.setAttribute("src", "about:blank#" + aNode.src);
 					}
 				}
 				break;
@@ -456,8 +460,10 @@ var sbContentSaver = {
 					if ( this.option["media"] ) {
 						var aFileName = this.download(aNode.data);
 						if (aFileName) aNode.setAttribute("data", sbCommonUtils.escapeFileName(aFileName));
-					} else {
+					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("data", aNode.src);
+					} else {
+						aNode.setAttribute("data", "about:blank#" + aNode.src);
 					}
 				}
 				break;
@@ -468,8 +474,10 @@ var sbContentSaver = {
 					if ( this.option["media"] ) {
 						var aFileName = this.download(url);
 						if (aFileName) aNode.setAttribute("archive", sbCommonUtils.escapeFileName(aFileName));
-					} else {
+					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("archive", url);
+					} else {
+						aNode.setAttribute("archive", "about:blank#" + url);
 					}
 				}
 				break;
@@ -491,8 +499,10 @@ var sbContentSaver = {
 					if ( this.option["images"] ) {
 						var aFileName = this.download(url);
 						if (aFileName) aNode.setAttribute("background", sbCommonUtils.escapeFileName(aFileName));
-					} else {
+					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("background", url);
+					} else {
+						aNode.setAttribute("background", "about:blank#" + url);
 					}
 				}
 				break;
@@ -504,8 +514,10 @@ var sbContentSaver = {
 							if ( this.option["images"] ) {
 								var aFileName = this.download(aNode.src);
 								if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
-							} else {
+							} else if ( this.option["keepLink"] ) {
 								aNode.setAttribute("src", aNode.src);
+							} else {
+								aNode.setAttribute("src", "about:blank#" + aNode.src);
 							}
 						}
 						break;
@@ -515,18 +527,18 @@ var sbContentSaver = {
 				// gets "" if rel attribute not defined
 				switch ( aNode.rel.toLowerCase() ) {
 					case "stylesheet" :
-						if ( !this.option["styles"] ) {
-							return this.removeNodeFromParent(aNode);
-						}
-						else if ( !this.option["rewriteStyles"] ) {
-							if ( this.option["internalize"] ) break;
-							if ( aNode.hasAttribute("href") ) {
+						if ( this.option["internalize"] ) break;
+						if ( aNode.hasAttribute("href") ) {
+							if ( !this.option["styles"] ) {
+								aNode.setAttribute("href", "about:blank#" + aNode.href);
+							}
+							else if ( !this.option["rewriteStyles"] ) {
 								var aFileName = this.download(aNode.href);
 								if (aFileName) aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
 							}
-						}
-						else if ( aNode.href.indexOf("chrome://") != 0 ) {
-							return this.removeNodeFromParent(aNode);
+							else if ( aNode.href.indexOf("chrome://") != 0 ) {
+								aNode.setAttribute("href", "about:blank#" + aNode.href);
+							}
 						}
 						break;
 					case "shortcut icon" :
@@ -638,30 +650,12 @@ var sbContentSaver = {
 						case "og:image" :
 						case "og:image:url" :
 						case "og:image:secure_url" :
-							var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
-							if ( this.option["images"] ) {
-								var aFileName = this.download(url);
-								if (aFileName) aNode.setAttribute("content", sbCommonUtils.escapeFileName(aFileName));
-							}
-							else {
-								aNode.setAttribute("content", url);
-							}
-							break;
 						case "og:audio" :
 						case "og:audio:url" :
 						case "og:audio:secure_url" :
 						case "og:video" :
 						case "og:video:url" :
 						case "og:video:secure_url" :
-							var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
-							if ( this.option["media"] ) {
-								var aFileName = this.download(url);
-								if (aFileName) aNode.setAttribute("content", sbCommonUtils.escapeFileName(aFileName));
-							}
-							else {
-								aNode.setAttribute("content", url);
-							}
-							break;
 						case "og:url" :
 							var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
 							aNode.setAttribute("content", url);
@@ -705,7 +699,7 @@ var sbContentSaver = {
 		}
 		if ( aNode.style && aNode.style.cssText )
 		{
-			var newCSStext = this.inspectCSSText(aNode.style.cssText, this.refURLObj.spec, true);
+			var newCSStext = this.inspectCSSText(aNode.style.cssText, this.refURLObj.spec, "image");
 			if ( newCSStext ) aNode.setAttribute("style", newCSStext);
 		}
 		if ( !this.option["script"] )
@@ -773,7 +767,7 @@ var sbContentSaver = {
 					content += this.processCSSRecursively(cssRule.styleSheet, aDocument, rootNode, true);
 					break;
 				case Components.interfaces.nsIDOMCSSRule.FONT_FACE_RULE: 
-					var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href);
+					var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "font");
 					if (cssText) content += cssText + "\n";
 					break;
 				case Components.interfaces.nsIDOMCSSRule.MEDIA_RULE: 
@@ -785,12 +779,12 @@ var sbContentSaver = {
 				case Components.interfaces.nsIDOMCSSRule.STYLE_RULE: 
 					// if script is used, preserve all css in case it's used by a dynamic generated DOM
 					if (this.option["script"] || verifySelector(rootNode, cssRule.selectorText)) {
-						var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, true);
+						var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "image");
 						if (cssText) content += cssText + "\n";
 					}
 					break;
 				default: 
-					var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, true);
+					var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "image");
 					if (cssText) content += cssText + "\n";
 					break;
 			}
@@ -841,7 +835,7 @@ var sbContentSaver = {
 		}
 	},
 
-	inspectCSSText : function(aCSSText, aCSSHref, isImage)
+	inspectCSSText : function(aCSSText, aCSSHref, type)
 	{
 		if (!aCSSHref) aCSSHref = this.refURLObj.spec;
 		// CSS get by .cssText is always url("something-with-\"double-quote\"-escaped")
@@ -854,9 +848,23 @@ var sbContentSaver = {
 			if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
 			if ( sbContentSaver.option["internalize"] && dataURL .indexOf("://") == -1 ) return ' url("' + dataURL + '")';
 			dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);
-			if (sbContentSaver.option["images"] || !isImage) {
-				var dataFile = sbContentSaver.download(dataURL);
-				if (dataFile) dataURL = sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(dataFile));
+			switch (type) {
+				case "image":
+					if (sbContentSaver.option["images"]) {
+						var dataFile = sbContentSaver.download(dataURL);
+						if (dataFile) dataURL = sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(dataFile));
+					} else if (!sbContentSaver.option["keepLink"]) {
+						dataURL = "about:blank#" + dataURL;
+					}
+					break;
+				case "font":
+					if (sbContentSaver.option["fonts"]) {
+						var dataFile = sbContentSaver.download(dataURL);
+						if (dataFile) dataURL = sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(dataFile));
+					} else if (!sbContentSaver.option["keepLink"]) {
+						dataURL = "about:blank#" + dataURL;
+					}
+					break;
 			}
 			return ' url("' + dataURL + '")';
 		});
