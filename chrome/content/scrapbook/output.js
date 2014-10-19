@@ -99,6 +99,7 @@ var sbOutputService = {
 		if ( !indexFile.exists() ) indexFile.create(indexFile.NORMAL_FILE_TYPE, 0666);
 		this.content += this.getHTMLFoot();
 		sbCommonUtils.writeFile(indexFile, this.content, "UTF-8");
+		sbDataSource.outputTreeAutoDone();
 		var fileName = this.optionFrame ? "frame.html" : "index.html";
 		if ( this.optionOpen )
 		{

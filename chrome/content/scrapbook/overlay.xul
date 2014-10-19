@@ -36,9 +36,6 @@
 		<key id="key_ScrapBookCaptureAs"    modifiers="accel shift" oncommand="sbBrowserOverlay.execCapture(0, null, true , 'urn:scrapbook:root');" />
 		<key id="key_ScrapBookSaveAllTabs"  modifiers="accel shift" oncommand="sbMenuHandler.execCaptureAllTabs();" />
 		<key id="key_BookmarkWithScrapBook" modifiers="accel shift" oncommand="sbBrowserOverlay.execBookmark('ScrapBookContextPicking');" />
-
-		<key id="key_ScrapBookHighlighter" modifiers="alt" key="Q" oncommand="sbPageEditor.highlight();" />
-		<key id="key_ScrapBookEditAnnotation" modifiers="alt" key="A" oncommand="sbAnnotationService.createSticky();" />
 	</keyset>
 
 	<menupopup id="viewSidebarMenu">
@@ -143,7 +140,7 @@
 				<textbox id="ScrapBookEditComment" spellcheck="true" oninput="sbPageEditor.onInputComment(this.value);" onkeypress="if (event.keyCode == 13) if (!sbPageEditor.multiline) sbPageEditor.saveResource();" flex="3" style="padding:2px;" />
 				<spacer id="ScrapBookEditSpacer" flex="0" />
 				<label id="ScrapBookHighlighterPreview" value="&sb.highlighter;" />
-				<toolbarbutton id="ScrapBookHighlighter" type="menu-button" persist="color" tooltiptext="&sb.highlighter;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbPageEditor.highlight();">
+				<toolbarbutton id="ScrapBookHighlighter" type="menu-button" persist="color" tooltiptext="&sb.highlighter;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbPageEditor.highlight();" accesskey="Q">
 					<menupopup onpopupshowing="sbHighlighter.updatePopup();">
 						<menuitem id="ScrapBookHighlighterM1" type="radio" label="&sb.highlighter;1" oncommand="sbPageEditor.highlight(1);" />
 						<menuitem id="ScrapBookHighlighterM2" type="radio" label="&sb.highlighter;2" oncommand="sbPageEditor.highlight(2);" />
@@ -155,7 +152,7 @@
 						<menuitem id="ScrapBookHighlighterM8" type="radio" label="&sb.highlighter;8" oncommand="sbPageEditor.highlight(8);" />
 					</menupopup>
 				</toolbarbutton>
-				<toolbarbutton id="ScrapBookEditAnnotation" type="menu-button" tooltiptext="&sb.edit.sticky.create;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbAnnotationService.createSticky();">
+				<toolbarbutton id="ScrapBookEditAnnotation" type="menu-button" tooltiptext="&sb.edit.sticky.create;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbAnnotationService.createSticky();" accesskey="A">
 					<menupopup>
 						<menuitem label="&sb.edit.attach.link;" oncommand="sbAnnotationService.attach('L');" />
 						<menuitem label="&sb.edit.attach.innerlink;" oncommand="sbAnnotationService.attach('I');" />
