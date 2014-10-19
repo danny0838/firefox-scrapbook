@@ -25,7 +25,7 @@ var sbContentSaver = {
 		this.name = "index";
 		this.favicon = null;
 		this.file2URL = { "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
-		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "fonts" : true, "styles" : true, "script" : false, "asHtml" : false, "forceUtf8" : true, "rewriteStyles" : true, "internalize" : false };
+		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "fonts" : true, "styles" : true, "script" : false, "asHtml" : false, "forceUtf8" : true, "rewriteStyles" : true, "keepLink" : false, "internalize" : false };
 		this.plusoption = { "timeout" : "0", "charset" : "UTF-8" }
 		this.linkURLs = [];
 		this.frames = [];
@@ -433,8 +433,10 @@ var sbContentSaver = {
 					if ( this.option["images"] ) {
 						var aFileName = this.download(aNode.src);
 						if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
-					} else {
+					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("src", aNode.src);
+					} else {
+						aNode.setAttribute("src", "about:blank#" + aNode.src);
 					}
 				}
 				break;
@@ -445,8 +447,10 @@ var sbContentSaver = {
 					if ( this.option["media"] ) {
 						var aFileName = this.download(aNode.src);
 						if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
-					} else {
+					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("src", aNode.src);
+					} else {
+						aNode.setAttribute("src", "about:blank#" + aNode.src);
 					}
 				}
 				break;
@@ -456,8 +460,10 @@ var sbContentSaver = {
 					if ( this.option["media"] ) {
 						var aFileName = this.download(aNode.data);
 						if (aFileName) aNode.setAttribute("data", sbCommonUtils.escapeFileName(aFileName));
-					} else {
+					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("data", aNode.src);
+					} else {
+						aNode.setAttribute("data", "about:blank#" + aNode.src);
 					}
 				}
 				break;
@@ -468,8 +474,10 @@ var sbContentSaver = {
 					if ( this.option["media"] ) {
 						var aFileName = this.download(url);
 						if (aFileName) aNode.setAttribute("archive", sbCommonUtils.escapeFileName(aFileName));
-					} else {
+					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("archive", url);
+					} else {
+						aNode.setAttribute("archive", "about:blank#" + url);
 					}
 				}
 				break;
@@ -491,8 +499,10 @@ var sbContentSaver = {
 					if ( this.option["images"] ) {
 						var aFileName = this.download(url);
 						if (aFileName) aNode.setAttribute("background", sbCommonUtils.escapeFileName(aFileName));
-					} else {
+					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("background", url);
+					} else {
+						aNode.setAttribute("background", "about:blank#" + url);
 					}
 				}
 				break;
@@ -504,8 +514,10 @@ var sbContentSaver = {
 							if ( this.option["images"] ) {
 								var aFileName = this.download(aNode.src);
 								if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
-							} else {
+							} else if ( this.option["keepLink"] ) {
 								aNode.setAttribute("src", aNode.src);
+							} else {
+								aNode.setAttribute("src", "about:blank#" + aNode.src);
 							}
 						}
 						break;
@@ -515,18 +527,18 @@ var sbContentSaver = {
 				// gets "" if rel attribute not defined
 				switch ( aNode.rel.toLowerCase() ) {
 					case "stylesheet" :
-						if ( !this.option["styles"] ) {
-							return this.removeNodeFromParent(aNode);
-						}
-						else if ( !this.option["rewriteStyles"] ) {
-							if ( this.option["internalize"] ) break;
-							if ( aNode.hasAttribute("href") ) {
+						if ( this.option["internalize"] ) break;
+						if ( aNode.hasAttribute("href") ) {
+							if ( !this.option["styles"] ) {
+								aNode.setAttribute("href", "about:blank#" + aNode.href);
+							}
+							else if ( !this.option["rewriteStyles"] ) {
 								var aFileName = this.download(aNode.href);
 								if (aFileName) aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
 							}
-						}
-						else if ( aNode.href.indexOf("chrome://") != 0 ) {
-							return this.removeNodeFromParent(aNode);
+							else if ( aNode.href.indexOf("chrome://") != 0 ) {
+								aNode.setAttribute("href", "about:blank#" + aNode.href);
+							}
 						}
 						break;
 					case "shortcut icon" :
@@ -841,12 +853,16 @@ var sbContentSaver = {
 					if (sbContentSaver.option["images"]) {
 						var dataFile = sbContentSaver.download(dataURL);
 						if (dataFile) dataURL = sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(dataFile));
+					} else if (!sbContentSaver.option["keepLink"]) {
+						dataURL = "about:blank#" + dataURL;
 					}
 					break;
 				case "font":
 					if (sbContentSaver.option["fonts"]) {
 						var dataFile = sbContentSaver.download(dataURL);
 						if (dataFile) dataURL = sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(dataFile));
+					} else if (!sbContentSaver.option["keepLink"]) {
+						dataURL = "about:blank#" + dataURL;
 					}
 					break;
 			}
