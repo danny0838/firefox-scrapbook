@@ -436,7 +436,7 @@ var sbContentSaver = {
 					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("src", aNode.src);
 					} else {
-						return this.removeNodeFromParent(aNode);
+						aNode.setAttribute("src", "about:blank");
 					}
 				}
 				break;
@@ -450,7 +450,7 @@ var sbContentSaver = {
 					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("src", aNode.src);
 					} else {
-						return this.removeNodeFromParent(aNode);
+						aNode.setAttribute("src", "about:blank");
 					}
 				}
 				break;
@@ -463,7 +463,7 @@ var sbContentSaver = {
 					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("data", aNode.src);
 					} else {
-						return this.removeNodeFromParent(aNode);
+						aNode.setAttribute("data", "about:blank");
 					}
 				}
 				break;
@@ -477,7 +477,7 @@ var sbContentSaver = {
 					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("archive", url);
 					} else {
-						return this.removeNodeFromParent(aNode);
+						aNode.setAttribute("archive", "about:blank");
 					}
 				}
 				break;
@@ -502,7 +502,7 @@ var sbContentSaver = {
 					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("background", url);
 					} else {
-						aNode.removeAttribute("background");
+						aNode.setAttribute("background", "about:blank");
 					}
 				}
 				break;
@@ -517,7 +517,7 @@ var sbContentSaver = {
 							} else if ( this.option["keepLink"] ) {
 								aNode.setAttribute("src", aNode.src);
 							} else {
-								aNode.removeAttribute("src");
+								aNode.setAttribute("src", "about:blank");
 							}
 						}
 						break;
