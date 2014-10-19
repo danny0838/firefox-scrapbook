@@ -280,7 +280,7 @@ var sbContentSaver = {
 			var myStyleSheets = aDocument.styleSheets;
 			for ( var i=0; i<myStyleSheets.length; i++ )
 			{
-				myCSS += this.processCSSRecursively(myStyleSheets[i], aDocument);
+				myCSS += this.processCSSRecursively(myStyleSheets[i], aDocument, rootNode);
 			}
 			if ( myCSS )
 			{
@@ -724,7 +724,7 @@ var sbContentSaver = {
 		return aNode;
 	},
 
-	processCSSRecursively : function(aCSS, aDocument, isImport)
+	processCSSRecursively : function(aCSS, aDocument, rootNode, isImport)
 	{
 		if (!aCSS || aCSS.disabled) return "";
 		if (aCSS.href && aCSS.href.indexOf("chrome://") == 0) return "";
@@ -741,25 +741,7 @@ var sbContentSaver = {
 				content += "/* ERROR: Unable to access this CSS */\n\n";
 			skip = true;
 		}
-		if (!skip) {
-			Array.forEach(aCSS.cssRules, function(cssRule) {
-				switch (cssRule.type) {
-					case Components.interfaces.nsIDOMCSSRule.IMPORT_RULE: 
-						content += this.processCSSRecursively(cssRule.styleSheet, aDocument, true);
-						break;
-					case Components.interfaces.nsIDOMCSSRule.FONT_FACE_RULE: 
-						var cssText = this.inspectCSSText(cssRule.cssText, aCSS.href);
-						if (cssText) content += cssText + "\n";
-						break;
-					case Components.interfaces.nsIDOMCSSRule.STYLE_RULE: 
-					case Components.interfaces.nsIDOMCSSRule.MEDIA_RULE: 
-					default: 
-						var cssText = this.inspectCSSText(cssRule.cssText, aCSS.href, true);
-						if (cssText) content += cssText + "\n";
-						break;
-				}
-			}, this);
-		}
+		if (!skip) content += this.processCSSRules(aCSS, aDocument, rootNode, "");
 		var media = aCSS.media.mediaText;
 		if (media) {
 			// omit "all" since it's defined in the link tag
@@ -780,6 +762,83 @@ var sbContentSaver = {
 			content = "/* ::::: " + "[internal]" + media + " ::::: */\n\n" + content;
 		}
 		return content;
+	},
+
+	processCSSRules : function(aCSS, aDocument, rootNode, indent)
+	{
+		var content = "";
+		Array.forEach(aCSS.cssRules, function(cssRule) {
+			switch (cssRule.type) {
+				case Components.interfaces.nsIDOMCSSRule.IMPORT_RULE: 
+					content += this.processCSSRecursively(cssRule.styleSheet, aDocument, rootNode, true);
+					break;
+				case Components.interfaces.nsIDOMCSSRule.FONT_FACE_RULE: 
+					var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href);
+					if (cssText) content += cssText + "\n";
+					break;
+				case Components.interfaces.nsIDOMCSSRule.MEDIA_RULE: 
+					cssText = indent + "@media " + cssRule.conditionText + " {\n"
+						+ this.processCSSRules(cssRule, aDocument, rootNode, indent + "  ")
+						+ indent + "}";
+					if (cssText) content += cssText + "\n";
+					break;
+				case Components.interfaces.nsIDOMCSSRule.STYLE_RULE: 
+					// if script is used, preserve all css in case it's used by a dynamic generated DOM
+					if (this.option["script"] || verifySelector(rootNode, cssRule.selectorText)) {
+						var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, true);
+						if (cssText) content += cssText + "\n";
+					}
+					break;
+				default: 
+					var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, true);
+					if (cssText) content += cssText + "\n";
+					break;
+			}
+		}, this);
+		return content;
+
+		function verifySelector(rootNode, selectorText) {
+			// older Firefox versions don't support querySelector, simply return true
+			if (!sbCommonUtils._fxVer3_5) return true;
+			try {
+				if (rootNode.querySelector(selectorText)) return true;
+				// querySelector of selectors like a:hover or so always return null
+				// preserve pseudo-class and pseudo-elements if their non-pseudo versions exist
+				var hasPseudo = false;
+				var startPseudo = false;
+				var depseudoSelectors = [""];
+				selectorText.replace(
+					/(,\s+)|(\s+)|((?:[\-0-9A-Za-z_\u00A0-\uFFFF]|\\[0-9A-Fa-f]{1,6} ?|\\.)+)|(\[(?:"(?:\\.|[^"])*"|\\.|[^\]])*\])|(.)/g,
+					function(){
+						if (arguments[1]) {
+							depseudoSelectors.push("");
+							startPseudo = false;
+						}
+						else if (arguments[5] == ":") {
+							hasPseudo = true;
+							startPseudo = true;
+						}
+						else if (startPseudo && (arguments[3] || arguments[5])) {
+						}
+						else if (startPseudo) {
+							startPseudo = false;
+							depseudoSelectors[depseudoSelectors.length - 1] += arguments[0];
+						}
+						else {
+							depseudoSelectors[depseudoSelectors.length - 1] += arguments[0];
+						}
+						return arguments[0];
+					}
+				);
+				if (hasPseudo) {
+					for (var i=0, I=depseudoSelectors.length; i<I; ++i) {
+						if (depseudoSelectors[i] === "" || rootNode.querySelector(depseudoSelectors[i])) return true;
+					};
+				}
+			} catch(ex) {
+			}
+			return false;
+		}
 	},
 
 	inspectCSSText : function(aCSSText, aCSSHref, isImage)
