@@ -638,30 +638,12 @@ var sbContentSaver = {
 						case "og:image" :
 						case "og:image:url" :
 						case "og:image:secure_url" :
-							var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
-							if ( this.option["images"] ) {
-								var aFileName = this.download(url);
-								if (aFileName) aNode.setAttribute("content", sbCommonUtils.escapeFileName(aFileName));
-							}
-							else {
-								aNode.setAttribute("content", url);
-							}
-							break;
 						case "og:audio" :
 						case "og:audio:url" :
 						case "og:audio:secure_url" :
 						case "og:video" :
 						case "og:video:url" :
 						case "og:video:secure_url" :
-							var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
-							if ( this.option["media"] ) {
-								var aFileName = this.download(url);
-								if (aFileName) aNode.setAttribute("content", sbCommonUtils.escapeFileName(aFileName));
-							}
-							else {
-								aNode.setAttribute("content", url);
-							}
-							break;
 						case "og:url" :
 							var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
 							aNode.setAttribute("content", url);
