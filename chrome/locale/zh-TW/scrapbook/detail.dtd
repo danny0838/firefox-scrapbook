@@ -7,6 +7,7 @@
 <!ENTITY sb.detail.option.capture "擷取">
 <!ENTITY sb.detail.option.images "圖片">
 <!ENTITY sb.detail.option.media "多媒體">
+<!ENTITY sb.detail.option.fonts "字體">
 <!ENTITY sb.detail.option.styles "樣式">
 <!ENTITY sb.detail.option.scripts "動態腳本">
 <!ENTITY sb.detail.option.rewriteStyles "重組樣式表">

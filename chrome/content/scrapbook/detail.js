@@ -84,6 +84,7 @@ var sbCaptureOptions = {
 		this.param.item.title           = document.getElementById("sbDetailTitle").value;
 		this.param.option["images"]     = document.getElementById("sbDetailOptionImages").checked;
 		this.param.option["media"]      = document.getElementById("sbDetailOptionMedia").checked;
+		this.param.option["fonts"]      = document.getElementById("sbDetailOptionFonts").checked;
 		this.param.option["styles"]     = document.getElementById("sbDetailOptionStyles").checked;
 		this.param.option["script"]     = document.getElementById("sbDetailOptionScript").checked;
 		this.param.option["asHtml"]     = document.getElementById("sbDetailOptionAsHtml").checked;

@@ -7,6 +7,7 @@
 <!ENTITY sb.detail.option.capture "Capture">
 <!ENTITY sb.detail.option.images "Imagens">
 <!ENTITY sb.detail.option.media "Media">
+<!ENTITY sb.detail.option.fonts "Fonts">
 <!ENTITY sb.detail.option.styles "Estilos">
 <!ENTITY sb.detail.option.scripts "Scripts">
 <!ENTITY sb.detail.option.rewriteStyles "Reorganize Styles">
