@@ -436,7 +436,7 @@ var sbContentSaver = {
 					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("src", aNode.src);
 					} else {
-						aNode.setAttribute("src", "about:blank");
+						aNode.setAttribute("src", "about:blank#" + aNode.src);
 					}
 				}
 				break;
@@ -450,7 +450,7 @@ var sbContentSaver = {
 					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("src", aNode.src);
 					} else {
-						aNode.setAttribute("src", "about:blank");
+						aNode.setAttribute("src", "about:blank#" + aNode.src);
 					}
 				}
 				break;
@@ -463,7 +463,7 @@ var sbContentSaver = {
 					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("data", aNode.src);
 					} else {
-						aNode.setAttribute("data", "about:blank");
+						aNode.setAttribute("data", "about:blank#" + aNode.src);
 					}
 				}
 				break;
@@ -477,7 +477,7 @@ var sbContentSaver = {
 					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("archive", url);
 					} else {
-						aNode.setAttribute("archive", "about:blank");
+						aNode.setAttribute("archive", "about:blank#" + url);
 					}
 				}
 				break;
@@ -502,7 +502,7 @@ var sbContentSaver = {
 					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("background", url);
 					} else {
-						aNode.setAttribute("background", "about:blank");
+						aNode.setAttribute("background", "about:blank#" + url);
 					}
 				}
 				break;
@@ -517,7 +517,7 @@ var sbContentSaver = {
 							} else if ( this.option["keepLink"] ) {
 								aNode.setAttribute("src", aNode.src);
 							} else {
-								aNode.setAttribute("src", "about:blank");
+								aNode.setAttribute("src", "about:blank#" + aNode.src);
 							}
 						}
 						break;
@@ -854,7 +854,7 @@ var sbContentSaver = {
 						var dataFile = sbContentSaver.download(dataURL);
 						if (dataFile) dataURL = sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(dataFile));
 					} else if (!sbContentSaver.option["keepLink"]) {
-						dataURL = "about:blank";
+						dataURL = "about:blank#" + dataURL;
 					}
 					break;
 				case "font":
@@ -862,7 +862,7 @@ var sbContentSaver = {
 						var dataFile = sbContentSaver.download(dataURL);
 						if (dataFile) dataURL = sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(dataFile));
 					} else if (!sbContentSaver.option["keepLink"]) {
-						dataURL = "about:blank";
+						dataURL = "about:blank#" + dataURL;
 					}
 					break;
 			}
