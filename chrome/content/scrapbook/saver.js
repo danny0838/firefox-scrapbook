@@ -537,7 +537,7 @@ var sbContentSaver = {
 								if (aFileName) aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
 							}
 							else if ( aNode.href.indexOf("chrome://") != 0 ) {
-								aNode.setAttribute("href", "about:blank#" + aNode.href);
+								return this.removeNodeFromParent(aNode);
 							}
 						}
 						break;

@@ -1,3 +1,9 @@
+Scrapbook X 1.12.0a31
+----------------
+
+- FIXED: No more leave stylesheet <link> tags when "Reorganize Styles" is checked.
+
+
 Scrapbook X 1.12.0a30
 ----------------
 
