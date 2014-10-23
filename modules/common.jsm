@@ -807,6 +807,7 @@ var sbCommonUtils = {
 	 * title (*)
 	 * title-src (*)
 	 * stylesheet (link, style)
+	 * stylesheet-temp (link, style)
 	 * todo (input, textarea)
 	 */
 	getSbObjectType : function(aNode)
