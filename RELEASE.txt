@@ -1,3 +1,21 @@
+Scrapbook X 1.12.0a31
+----------------
+
+- FIXED: No more leave stylesheet <link> tags when "Reorganize Styles" is checked.
+
+
+Scrapbook X 1.12.0a30
+----------------
+
+- NEW: Added capture option "Fonts" to determine whether to download fonts.
+- UPDATE: Redefined capture options "Images" and "Media" to blanking the image/media in the page. Added capture option "Link to source for files not to capture" for the previous behavior.
+- UPDATE: Filter out most unused style entries when capturing pages.
+- UPDATE: No more download og-media defined in the metadata.
+- UPDATE: Cancel Alt+Q and Alt+A hotkeys.
+- UPDATE: Improved some language packs.
+- FIXED: No more output HTML tree automatically if it has already been done manually.
+
+
 Scrapbook X 1.12.0a29
 ----------------
 
