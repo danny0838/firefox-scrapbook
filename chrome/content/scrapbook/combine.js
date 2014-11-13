@@ -532,7 +532,7 @@ var sbPageCombiner = {
 				cssText = this.remapCSSSelector(cssRule.selectorText) + "{" + cssRule.style.cssText + "}";
 			}
 			else if (cssRule.type == Components.interfaces.nsIDOMCSSRule.MEDIA_RULE) {
-				cssText = "@media " + cssRule.conditionText + "{\n" + this.processCSSRecursively(cssRule) + "\n}";
+				cssText = "@media " + cssRule.conditionText + " {\n" + this.processCSSRecursively(cssRule) + "}";
 			}
 			else {
 				cssText = cssRule.cssText;

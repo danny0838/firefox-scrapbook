@@ -542,7 +542,7 @@ var sbPageEditor = {
 			return;
 		}
 		var newNode = aWindow.document.createElement("style");
-		newNode.setAttribute("data-sb-obj", "stylesheet");
+		newNode.setAttribute("data-sb-obj", "stylesheet-temp");
 		newNode.setAttribute("media", "screen");
 		newNode.setAttribute("type", "text/css");
 		newNode.setAttribute("id", aID);
@@ -574,11 +574,11 @@ var sbPageEditor = {
 				sbAnnotationService.saveSticky(node);
 			}
 		}
-		// remove all scrapbook inserted styles
+		// remove temp styles
 		var nodes = aDoc.getElementsByTagName("style");
 		for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
 			var node = nodes[i];
-			if ( sbCommonUtils.getSbObjectType(node) == "stylesheet") {
+			if ( sbCommonUtils.getSbObjectType(node) == "stylesheet-temp") {
 				sbContentSaver.removeNodeFromParent(node);
 			}
 		}
