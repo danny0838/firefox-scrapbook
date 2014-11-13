@@ -45,6 +45,7 @@ var sbManageService = {
 		var colElts = document.getElementById("sbTreeCols").childNodes;
 		for ( var i = 1; i < colElts.length; i++ )
 		{
+			if (colElts[i].nodeName != "treecol") continue;
 			if ( willEnable ) {
 				this.treeColumnState.persist[i] = colElts[i].getAttribute("persist");
 				colElts[i].removeAttribute("persist");
