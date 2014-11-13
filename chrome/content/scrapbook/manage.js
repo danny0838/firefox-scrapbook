@@ -3,7 +3,7 @@ var sbManageService = {
 
 	moduleID : "",
 
-	treeColumnState : [],
+	treeColumnState : { hidden: [], persist: [] },
 
 	init : function()
 	{
@@ -45,12 +45,14 @@ var sbManageService = {
 		var colElts = document.getElementById("sbTreeCols").childNodes;
 		for ( var i = 1; i < colElts.length; i++ )
 		{
-			colElts[i].removeAttribute("persist");
 			if ( willEnable ) {
-				this.treeColumnState[i] = colElts[i].hidden;
+				this.treeColumnState.persist[i] = colElts[i].getAttribute("persist");
+				colElts[i].removeAttribute("persist");
+				this.treeColumnState.hidden[i] = colElts[i].hidden;
 				colElts[i].hidden = true;
 			} else {
-				colElts[i].hidden = this.treeColumnState[i];
+				colElts[i].hidden = this.treeColumnState.hidden[i];
+				colElts[i].setAttribute("persist", this.treeColumnState.persist[i]);
 			}
 		}
 		if ( willEnable ) document.getElementById("sbRightPaneBrowser").loadURI(aModuleElt.getAttribute("moduleurl"));
