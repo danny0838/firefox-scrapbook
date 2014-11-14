@@ -4,8 +4,9 @@
 <!ENTITY sb.edit.undo "Kumoa">
 <!ENTITY sb.edit.save "Tallenna muutokset">
 <!ENTITY sb.edit.comment "Laajenna kommenttialuetta">
-<!ENTITY sb.edit.sticky "Muistilappu">
-<!ENTITY sb.edit.sticky.create "Luo &sb.edit.sticky;">
+<!ENTITY sb.edit.sticky "Muistilappu"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "Luo &sb.edit.sticky;"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Lisää valinnan tekstiin huomautus">
 <!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "Liitä tiedosto valintaan">

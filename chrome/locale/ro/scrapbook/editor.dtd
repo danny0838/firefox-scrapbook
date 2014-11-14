@@ -4,8 +4,9 @@
 <!ENTITY sb.edit.undo "Anulează operația">
 <!ENTITY sb.edit.save "Salvează modificările">
 <!ENTITY sb.edit.comment "Extinde zona comentariu">
-<!ENTITY sb.edit.sticky "notă adezivă">
-<!ENTITY sb.edit.sticky.create "Creează o &sb.edit.sticky;">
+<!ENTITY sb.edit.sticky "notă adezivă"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "Creează o &sb.edit.sticky;"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Adaugă o adnotare la selecție">
 <!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "Atașează un fișier la selecție">

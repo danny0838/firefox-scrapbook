@@ -4,8 +4,9 @@
 <!ENTITY sb.edit.undo "Zpět">
 <!ENTITY sb.edit.save "Uložit změny">
 <!ENTITY sb.edit.comment "Rozšířit oblast pro komentář">
-<!ENTITY sb.edit.sticky "Nálepka">
-<!ENTITY sb.edit.sticky.create "Vytvořit nálepku">
+<!ENTITY sb.edit.sticky "Nálepka"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "Vytvořit nálepku"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Přidat poznámku k výběru">
 <!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "Připojit k výběru soubor">

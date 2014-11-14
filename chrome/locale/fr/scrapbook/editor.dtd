@@ -4,8 +4,9 @@
 <!ENTITY sb.edit.undo "Annuler">
 <!ENTITY sb.edit.save "Sauvegarder les changements">
 <!ENTITY sb.edit.comment "Déployer la zone de commentaire">
-<!ENTITY sb.edit.sticky "Note collante">
-<!ENTITY sb.edit.sticky.create "Créer une &sb.edit.sticky;">
+<!ENTITY sb.edit.sticky "Note collante"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "Créer une &sb.edit.sticky;"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Ajouter une annotation à la sélection">
 <!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "Attacher un fichier à la sélection">

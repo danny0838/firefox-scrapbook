@@ -4,8 +4,9 @@
 <!ENTITY sb.edit.undo "Rückgängig">
 <!ENTITY sb.edit.save "Änderungen speichern">
 <!ENTITY sb.edit.comment "Beschreibungsfeld vergrößern">
-<!ENTITY sb.edit.sticky "Notizkommentar">
-<!ENTITY sb.edit.sticky.create "&sb.edit.sticky; erstellen">
+<!ENTITY sb.edit.sticky "Notizkommentar"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "&sb.edit.sticky; erstellen"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Zeilenkommentar für Auswahl anlegen">
 <!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "Auswahl mit Datei verknüpfen">
