@@ -366,11 +366,45 @@ var sbCommonUtils = {
 	writeFile : function(aFile, aContent, aChars, aNoCatch)
 	{
 		try {
-			this.UNICODE.charset = aChars;
-			aContent = this.UNICODE.ConvertFromUnicode(aContent);
 			var ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
 			ostream.init(aFile, -1, 0666, 0);
-			ostream.write(aContent, aContent.length);
+			if (aChars == "UTF-8" || !aChars) {
+				// quick way to preocess UTF-8 conversion
+				// UTF-16 => UTF-8 should be no unsupported chars
+				var converter = Components.classes["@mozilla.org/intl/converter-output-stream;1"].createInstance(Components.interfaces.nsIConverterOutputStream);
+				converter.init(ostream, "UTF-8", 4096, 0x0000);
+				converter.writeString(aContent);
+				converter.close();
+			}
+			else {
+				// loop over all chars and encode the unsupported ones
+				this.UNICODE.charset = aChars;
+				var output = [];
+				for (var i=0, I=aContent.length; i<I; i++) {
+					var code = aContent.charCodeAt(i);
+					var oldchar = aContent[i];
+					// special process for a UTF-16 surrogate pair
+					if (0xD800 <= code && code <= 0xDBFF) {
+						var high = code, low = aContent.charCodeAt(i+1);
+						code = ((high - 0xD800) * 0x400) + (low - 0xDC00) + 0x10000;
+						oldchar += aContent[i+1];
+						i++;
+					}
+					// an unsupported char in the target charset may cause:
+					// 1. an error
+					// 2. results ""
+					// 3. results "?" (or "??" for a surrogate pair)
+					try {
+						var newchar = this.UNICODE.ConvertFromUnicode(oldchar);
+						if (!newchar || (newchar[0] == "?" && oldchar != "?")) throw "unsupported char";
+						output.push(newchar);
+					} catch(ex) {
+						output.push("&#" + code.toString(10) + ";");
+					}
+				}
+				output = output.join("");
+				ostream.write(output, output.length);
+			}
 			ostream.close();
 		}
 		catch(ex) {
