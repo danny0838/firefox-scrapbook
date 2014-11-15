@@ -220,7 +220,7 @@ var sbContentSaver = {
 			this.frames[idx] = frame;
 			frame.setAttribute("data-sb-frame-id", idx);
 		}
-		// construct the tree, especially for capture of partial selection
+		// construct the node list
 		if ( this.selection )
 		{
 			var myRange = this.selection.getRangeAt(0);
@@ -233,11 +233,7 @@ var sbContentSaver = {
 				this.selection = null;
 			}
 			else if ( curNode.nodeName == "#text" ) curNode = curNode.parentNode;
-		}
-		// now make the clone
-		var tmpNodeList = [];
-		if ( this.selection )
-		{
+			var tmpNodeList = [];
 			do {
 				tmpNodeList.unshift(curNode.cloneNode(false));
 				curNode = curNode.parentNode;
@@ -246,7 +242,11 @@ var sbContentSaver = {
 		}
 		else
 		{
-			tmpNodeList.unshift(htmlNode.getElementsByTagName("body")[0].cloneNode(true));
+			try {
+				var tmpNodeList = [htmlNode.getElementsByTagName("body")[0].cloneNode(true)];
+			} catch(ex) {
+				var tmpNodeList = [aDocument.createElement("body")];
+			}
 		}
 		var rootNode = htmlNode.cloneNode(false);
 		try {

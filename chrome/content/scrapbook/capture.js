@@ -695,7 +695,9 @@ var sbInvisibleBrowser = {
 		}
 		this.loading = aURL;
 		this.ELEMENT.loadURI(aURL, null, null);
-		this.reload();  // in case the URI is different from the previous one only in hash
+		// if aURL is different from the current URL only in hash,
+		// a loading is not performed unless forced to reload
+		if (this.ELEMENT.currentURI.specIgnoringRef == sbCommonUtils.splitURLByAnchor(aURL)[0]) this.ELEMENT.reload();
 	},
 
 	execCapture : function()
