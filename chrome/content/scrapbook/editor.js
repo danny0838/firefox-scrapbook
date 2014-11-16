@@ -1983,7 +1983,10 @@ var sbAnnotationService = {
 		
 		// append the freenote
 		if (isRelative) {
-			if (targetNode.nextSibling) {
+			if (targetNode === win.document.body) {
+				targetNode.appendChild(mainDiv);
+			}
+			else if (targetNode.nextSibling) {
 				targetNode.parentNode.insertBefore(mainDiv, targetNode.nextSibling);
 			}
 			else {
