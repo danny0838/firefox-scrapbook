@@ -1853,7 +1853,7 @@ var sbAnnotationService = {
 					}
 					sbAnnotationService.createFreenote({
 						element: sticky,
-						content: sbCommonUtils.escapeHTML(text, true),
+						content: sbCommonUtils.escapeHTML(text, true).replace("\n", "<br>"),
 						isRelative: sticky.className.indexOf("scrapbook-sticky-relative") != -1,
 					});
 					break;
