@@ -53,6 +53,10 @@ var sbCommonUtils = {
 		delete this.BUNDLE;
 		return this.BUNDLE = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
 	},
+	get FIREFOX_VERSION() {
+		delete this.FIREFOX_VERSION;
+		return this.FIREFOX_VERSION = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo).version;
+	},
 
 	get _fxVer3_5() {
 		delete this._fxVer3_5;
@@ -87,13 +91,16 @@ var sbCommonUtils = {
 		return this._fxVer30 = (this.checkFirefoxVersion("30.0") >=0);
 	},
 
-	/**
-	 * return >= 0 if current version >= given version
-	 */
 	checkFirefoxVersion : function(ver) {
+		return this.checkVersion(this.FIREFOX_VERSION, ver);
+	},
+
+	/**
+	 * return (1, 0, -1) if ver1 (>, =, <) ver2
+	 */
+	checkVersion : function(ver1, ver2) {
 		var iVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
-		var iAppInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
-		return iVerComparator.compare(iAppInfo.version, ver);
+		return iVerComparator.compare(ver1, ver2);
 	},
 
 	newItem : function(aID)
