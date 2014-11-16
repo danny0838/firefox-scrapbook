@@ -1995,7 +1995,7 @@ var sbAnnotationService = {
 		function findTargetNode(refNode) {
 			var targetNode = refNode;
 			var parentNode = targetNode.parentNode;
-			while (["BODY", "DIV", "TD", "LI"].indexOf(parentNode.nodeName) == -1) {
+			while (["BODY", "DIV", "TD", "LI"].indexOf(parentNode.nodeName) == -1 || sbCommonUtils.getSbObjectType(parentNode)) {
 				targetNode = parentNode;
 				parentNode = targetNode.parentNode;
 			}
