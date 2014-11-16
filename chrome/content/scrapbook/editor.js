@@ -1948,6 +1948,7 @@ var sbAnnotationService = {
 		mainDiv.setAttribute("data-sb-obj", "freenote");
 		mainDiv.style.margin = "0px";
 		mainDiv.style.border = "1px solid #CCCCCC";
+		mainDiv.style.borderTopWidth = (this.FREENOTE_HEADER_HEIGHT + 1) + "px";
 		mainDiv.style.background = "#FAFFFA";
 		mainDiv.style.padding = "0px";
 		mainDiv.style.zIndex = "500000";
@@ -2020,16 +2021,18 @@ var sbAnnotationService = {
 	_editFreenote : function(mainDiv)
 	{
 		var doc = mainDiv.ownerDocument;
-		mainDiv.style.borderTopWidth = "1px";
 		mainDiv.setAttribute("data-sb-active", "1");
 
 		var headDiv = doc.createElement("DIV");
 		headDiv.setAttribute("data-sb-obj", "freenote-header");
 		headDiv.style.cursor = "move";
+		headDiv.style.position = "absolute";
 		headDiv.style.margin = "0px";
+		headDiv.style.marginTop = -this.FREENOTE_HEADER_HEIGHT + "px";
 		headDiv.style.border = "none";
 		headDiv.style.background = "#CCCCCC";
 		headDiv.style.padding = "0px";
+		headDiv.style.width = "100%";
 		headDiv.style.height = this.FREENOTE_HEADER_HEIGHT + "px";
 
 		var bodyDiv = doc.createElement("DIV");
@@ -2086,7 +2089,6 @@ var sbAnnotationService = {
 
 	saveFreenote : function(mainDiv)
 	{
-		mainDiv.style.borderTopWidth = (this.FREENOTE_HEADER_HEIGHT + 1) + "px";
 		mainDiv.removeAttribute("data-sb-active");
 		mainDiv.innerHTML = mainDiv.childNodes[1].innerHTML;
 	},
@@ -2098,7 +2100,7 @@ var sbAnnotationService = {
 
 	_adjustEditArea : function(mainDiv)
 	{
-		var h = Math.max(parseInt(mainDiv.style.height, 10) - this.FREENOTE_HEADER_HEIGHT - this.FREENOTE_FOOTER_HEIGHT, 0);
+		var h = Math.max(parseInt(mainDiv.style.height, 10) - this.FREENOTE_FOOTER_HEIGHT, 0);
 		mainDiv.childNodes[1].style.height = h + "px";
 	},
 
