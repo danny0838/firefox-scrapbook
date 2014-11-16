@@ -2002,11 +2002,11 @@ var sbAnnotationService = {
 
 		function findTargetNode(refNode) {
 			var targetNode = refNode;
-			var parentNode = targetNode.parentNode;
-			while (["BODY", "DIV", "TD", "LI"].indexOf(parentNode.nodeName) == -1 || sbCommonUtils.getSbObjectType(parentNode)) {
-				targetNode = parentNode;
-				parentNode = targetNode.parentNode;
+			// must be one of these block elements
+			while (["BODY", "DIV", "BLOCKQUOTE", "PRE", "P", "TD", "LI", "DT", "DD"].indexOf(targetNode.nodeName) == -1 || sbCommonUtils.getSbObjectType(targetNode)) {
+				targetNode = targetNode.parentNode;
 			}
+			// if it's before a freenote, move it after
 			while (targetNode.nextSibling && sbCommonUtils.getSbObjectType(targetNode.nextSibling) == "freenote")  {
 				targetNode = targetNode.nextSibling;
 			}
