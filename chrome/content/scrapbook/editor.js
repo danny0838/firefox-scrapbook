@@ -1946,7 +1946,7 @@ var sbAnnotationService = {
 		// create a new freenote
 		var mainDiv = win.content.document.createElement("DIV");
 		mainDiv.setAttribute("data-sb-obj", "freenote");
-		mainDiv.style.overflow = "visible";
+		mainDiv.style.overflow = "hidden";
 		mainDiv.style.margin = "0px";
 		mainDiv.style.border = "1px solid #CCCCCC";
 		mainDiv.style.borderTopWidth = (this.FREENOTE_HEADER_HEIGHT + 1) + "px";
@@ -1956,12 +1956,13 @@ var sbAnnotationService = {
 		mainDiv.style.textAlign = "start";
 		mainDiv.style.fontSize = "small";
 		mainDiv.style.lineHeight = "1.2em";
+		mainDiv.style.wordWrap = "break-word";
 		var width = this.FREENOTE_DEFAULT_WIDTH;
 		var height = this.FREENOTE_DEFAULT_HEIGHT;
 		mainDiv.style.width = width + "px";
 		mainDiv.style.height = height + "px";
 		if ( isRelative ) {
-			mainDiv.style.margin = "16px 10px";
+			mainDiv.style.margin = "16px auto";
 		}
 		else {
 			mainDiv.style.position = "absolute";
@@ -2033,7 +2034,7 @@ var sbAnnotationService = {
 		headDiv.style.border = "none";
 		headDiv.style.background = "#CCCCCC";
 		headDiv.style.padding = "0px";
-		headDiv.style.width = "100%";
+		headDiv.style.width = "inherit";
 		headDiv.style.height = this.FREENOTE_HEADER_HEIGHT + "px";
 
 		var bodyDiv = doc.createElement("DIV");
@@ -2041,7 +2042,7 @@ var sbAnnotationService = {
 		bodyDiv.innerHTML = mainDiv.innerHTML;
 		bodyDiv.setAttribute("contentEditable", true);
 		bodyDiv.style.cursor = "auto";
-		bodyDiv.style.overflow = "visible";
+		bodyDiv.style.overflow = "inherit";
 		bodyDiv.style.margin = "0px";
 		bodyDiv.style.border = "none";
 		bodyDiv.style.background = "#FFFFFF";
