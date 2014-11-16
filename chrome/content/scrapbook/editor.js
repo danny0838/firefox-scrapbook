@@ -1946,9 +1946,14 @@ var sbAnnotationService = {
 		// create a new freenote
 		var mainDiv = win.content.document.createElement("DIV");
 		mainDiv.setAttribute("data-sb-obj", "freenote");
+		mainDiv.style.margin = "0px";
 		mainDiv.style.border = "1px solid #CCCCCC";
-		mainDiv.style.background = "#FAFAFA";
+		mainDiv.style.background = "#FAFFFA";
+		mainDiv.style.padding = "0px";
 		mainDiv.style.zIndex = "500000";
+		mainDiv.style.textAlign = "start";
+		mainDiv.style.fontSize = "small";
+		mainDiv.style.lineHeight = "1.2em";
 		var width = this.FREENOTE_DEFAULT_WIDTH;
 		var height = this.FREENOTE_DEFAULT_HEIGHT;
 		mainDiv.style.width = width + "px";
@@ -2021,7 +2026,10 @@ var sbAnnotationService = {
 		var headDiv = doc.createElement("DIV");
 		headDiv.setAttribute("data-sb-obj", "freenote-header");
 		headDiv.style.cursor = "move";
+		headDiv.style.margin = "0px";
+		headDiv.style.border = "none";
 		headDiv.style.background = "#CCCCCC";
+		headDiv.style.padding = "0px";
 		headDiv.style.height = this.FREENOTE_HEADER_HEIGHT + "px";
 
 		var bodyDiv = doc.createElement("DIV");
@@ -2030,12 +2038,22 @@ var sbAnnotationService = {
 		bodyDiv.setAttribute("contentEditable", true);
 		bodyDiv.style.cursor = "auto";
 		bodyDiv.style.overflow = "auto";
+		bodyDiv.style.margin = "0px";
+		bodyDiv.style.border = "none";
 		bodyDiv.style.background = "#FFFFFF";
+		bodyDiv.style.padding = "0px";
+		bodyDiv.style.fontSize = "inherit";
+		bodyDiv.style.lineHeight = "inherit";
+		bodyDiv.style.textAlign = "inherit";
 
 		var footDiv = doc.createElement("DIV");
 		footDiv.setAttribute("data-sb-obj", "freenote-footer");
 		footDiv.style.cursor = "se-resize";
+		footDiv.style.margin = "0px";
+		footDiv.style.border = "none";
 		footDiv.style.background = "url('chrome://scrapbook/skin/sticky_resizer.png') right bottom no-repeat";
+		footDiv.style.padding = "0px";
+		footDiv.style.textAlign = "inherit";
 		footDiv.style.height = this.FREENOTE_FOOTER_HEIGHT + "px";
 
 		var button1  = doc.createElement("INPUT");
@@ -2044,12 +2062,16 @@ var sbAnnotationService = {
 		button1.setAttribute("src", "chrome://scrapbook/skin/sticky_save.png");
 		button1.style.margin = "1px";
 		button1.style.border = "1px solid #CCCCCC";
+		button1.style.padding = "0px";
+		button1.style.verticalAlign = "baseline";
 		var button2  = doc.createElement("INPUT");
 		button2.setAttribute("data-sb-obj", "freenote-delete");
 		button2.setAttribute("type", "image");
 		button2.setAttribute("src", "chrome://scrapbook/skin/sticky_delete.png");
 		button2.style.margin = "1px";
 		button2.style.border = "1px solid #CCCCCC";
+		button2.style.padding = "0px";
+		button2.style.verticalAlign = "baseline";
 		footDiv.appendChild(button1);
 		footDiv.appendChild(button2);
 
