@@ -1787,7 +1787,7 @@ var sbAnnotationService = {
 	FREENOTE_MIN_WIDTH : 100,
 	FREENOTE_MIN_HEIGHT : 40,
 	FREENOTE_HEADER_HEIGHT : 11,
-	FREENOTE_FOOTER_HEIGHT : 16,
+	FREENOTE_FOOTER_HEIGHT : 18,
 	offsetX : 0,
 	offsetY : 0,
 	isMove  : true,
@@ -2055,7 +2055,7 @@ var sbAnnotationService = {
 		footDiv.style.cursor = "se-resize";
 		footDiv.style.margin = "0px";
 		footDiv.style.border = "none";
-		footDiv.style.background = "url('chrome://scrapbook/skin/sticky_resizer.png') right bottom no-repeat";
+		footDiv.style.background = "url('chrome://scrapbook/skin/freenote_resizer.png') right bottom no-repeat";
 		footDiv.style.padding = "0px";
 		footDiv.style.textAlign = "inherit";
 		footDiv.style.height = this.FREENOTE_FOOTER_HEIGHT + "px";
@@ -2063,18 +2063,22 @@ var sbAnnotationService = {
 		var button1  = doc.createElement("INPUT");
 		button1.setAttribute("data-sb-obj", "freenote-save");
 		button1.setAttribute("type", "image");
-		button1.setAttribute("src", "chrome://scrapbook/skin/sticky_save.png");
-		button1.style.margin = "1px";
-		button1.style.border = "1px solid #CCCCCC";
+		button1.setAttribute("src", "chrome://scrapbook/skin/freenote_save.gif");
+		button1.style.margin = "1px 2px";
+		button1.style.border = "none";
 		button1.style.padding = "0px";
+		button1.style.width = "16px";
+		button1.style.height = "16px";
 		button1.style.verticalAlign = "baseline";
 		var button2  = doc.createElement("INPUT");
 		button2.setAttribute("data-sb-obj", "freenote-delete");
 		button2.setAttribute("type", "image");
-		button2.setAttribute("src", "chrome://scrapbook/skin/sticky_delete.png");
-		button2.style.margin = "1px";
-		button2.style.border = "1px solid #CCCCCC";
+		button2.setAttribute("src", "chrome://scrapbook/skin/freenote_delete.gif");
+		button2.style.margin = "1px 2px";
+		button2.style.border = "none";
 		button2.style.padding = "0px";
+		button2.style.width = "16px";
+		button2.style.height = "16px";
 		button2.style.verticalAlign = "baseline";
 		footDiv.appendChild(button1);
 		footDiv.appendChild(button2);
