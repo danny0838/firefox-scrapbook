@@ -33,6 +33,7 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "Klasörün altı">
 <!ENTITY sb.prefs.showDetailOnDrop "Kenar çubuğuna sürükleyip-bırakarak kaydetmelerde &apos;Kayıt Detayları&apos; diyaloğunu göster">
 <!ENTITY sb.prefs.notifyOnComplete "&apos;Kaydetme Tamamlandı&apos; uyarısını göster">
+<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.button.customize "Özelleştir">
 <!ENTITY sb.button.browse "Gözat">

@@ -33,6 +33,7 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "la sfârșitul arborelui">
 <!ENTITY sb.prefs.showDetailOnDrop "Afișează caseta „Detalii capturare” când se capturează prin glisare și fixare în panoul lateral">
 <!ENTITY sb.prefs.notifyOnComplete "Afișează notificarea „Capturare finalizată”">
+<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.button.customize "Personalizează">
 <!ENTITY sb.button.browse "Răsfoiește">

@@ -33,6 +33,7 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "폴더 맨 아래">
 <!ENTITY sb.prefs.showDetailOnDrop "탐색 창으로 끌어다 놓기하여 캡처할 때 &apos;상세 캡처&apos; 창 보이기">
 <!ENTITY sb.prefs.notifyOnComplete "&apos;캡처 완료&apos; 알림 보이기">
+<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.button.customize "사용자 설정">
 <!ENTITY sb.button.browse "찾아보기">

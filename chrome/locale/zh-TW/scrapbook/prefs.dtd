@@ -33,6 +33,7 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "最後面">
 <!ENTITY sb.prefs.showDetailOnDrop "以拖曳方式擷取資料時，顯示「詳細資訊」對話方塊">
 <!ENTITY sb.prefs.notifyOnComplete "顯示「擷取完畢」提醒視窗">
+<!ENTITY sb.prefs.notifyPageCaptured "瀏覽擷取過的頁面時，顯示提醒視窗">
 <!ENTITY sb.prefs.autoOutput "更動資料時，自動將資料列表匯出為 HTML">
 <!ENTITY sb.button.customize "自訂">
 <!ENTITY sb.button.browse "瀏覽">

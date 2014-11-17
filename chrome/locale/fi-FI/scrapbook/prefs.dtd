@@ -33,6 +33,7 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "kansion alimmaksi merkinnäksi">
 <!ENTITY sb.prefs.showDetailOnDrop "Näytä Tallennuksen tiedot -ikkuna kun sivu tallennetaan vetämällä sivupaneeliin">
 <!ENTITY sb.prefs.notifyOnComplete "Näytä Tallennus valmis -huomautus">
+<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.button.customize "Muokkaa">
 <!ENTITY sb.button.browse "Selaa">

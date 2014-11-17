@@ -33,6 +33,7 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "na dole folderu">
 <!ENTITY sb.prefs.showDetailOnDrop "Wyświetlaj okno dialogowe „Szczegóły przechwytywania” podczas przechwytywania za pomocą przeciągania do panelu bocznego">
 <!ENTITY sb.prefs.notifyOnComplete "Wyświetlaj powiadomienie o zakończeniu przechwytywania">
+<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.button.customize "Dostosuj">
 <!ENTITY sb.button.browse "Przeglądaj">
