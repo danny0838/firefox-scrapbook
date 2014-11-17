@@ -1063,7 +1063,17 @@ var sbCaptureObserverCallback = {
 		if ( aItem && sbDataSource.getProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id), "type") == "marked" ) return;
 		if ( sbCommonUtils.getPref("notifyOnComplete", true) )
 		{
-			window.openDialog("chrome://scrapbook/content/notify.xul", "", "chrome,dialog=yes,titlebar=no,popup=yes", aItem);
+			var icon = aItem.icon ? "resource://scrapbook/data/" + aItem.id + "/" + aItem.icon : sbCommonUtils.getDefaultIcon();
+			var title = "ScrapBook: " + sbCommonUtils.lang("overlay", "CAPTURE_COMPLETE");
+			var text = sbCommonUtils.crop(aItem.title, 40);
+			var listener = {
+				observe: function(subject, topic, data) {
+					if (topic == "alertclickcallback")
+						sbCommonUtils.loadURL("chrome://scrapbook/content/view.xul?id=" + data, true);
+				}
+			};
+			var alertsSvc = Components.classes["@mozilla.org/alerts-service;1"].getService(Components.interfaces.nsIAlertsService);
+			alertsSvc.showAlertNotification(icon, title, text, true, aItem.id, listener);
 		}
 		if ( aItem && aItem.id in sbContentSaver.httpTask ) delete sbContentSaver.httpTask[aItem.id];
 	},
