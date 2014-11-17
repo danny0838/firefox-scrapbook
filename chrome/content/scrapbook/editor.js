@@ -1951,6 +1951,7 @@ var sbAnnotationService = {
 		mainDiv.style.border = "1px solid #CCCCCC";
 		mainDiv.style.borderTopWidth = (this.FREENOTE_HEADER_HEIGHT + 1) + "px";
 		mainDiv.style.background = "#FAFFFA";
+		mainDiv.style.opacity = "0.95";
 		mainDiv.style.padding = "0px";
 		mainDiv.style.zIndex = "500000";
 		mainDiv.style.textAlign = "start";
