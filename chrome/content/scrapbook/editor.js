@@ -269,6 +269,7 @@ var sbPageEditor = {
 		// apply
 		this.allowUndo(win.document);
 		var attr = {
+			"data-sb-id" : (new Date()).valueOf(),
 			"data-sb-obj" : "linemarker",
 			"class" : "linemarker-marked-line", // for downward compatibility with ScrapBook / ScrapBook Plus
 			"style" : style,
@@ -2042,6 +2043,7 @@ var sbAnnotationService = {
 		// apply
 		sbPageEditor.allowUndo(win.document);
 		var attr = {
+			"data-sb-id" : (new Date()).valueOf(),
 			"data-sb-obj" : "inline",
 			"class" : "scrapbook-inline", // for downward compatibility with ScrapBook / ScrapBook Plus
 			"style" : "border-bottom: 2px dotted #FF3333; cursor: help;",
