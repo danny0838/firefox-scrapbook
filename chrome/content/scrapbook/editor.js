@@ -120,7 +120,7 @@ var sbPageEditor = {
 			}
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 				sbAnnotationService.initEvent(win);
-				this.initEvent(win, 1);
+				this.initEvent(win);
 				this.documentLoad(win.document, function(doc){
 					sbPageEditor.documentBeforeEdit(doc);
 				}, this);
@@ -157,15 +157,10 @@ var sbPageEditor = {
 		}, true);
 	},
 
-	// aStateFlag
-	//   0: disable
-	//   1: enable
-	initEvent : function(aWindow, aStateFlag)
+	initEvent : function(aWindow)
 	{
 		try { aWindow.document.removeEventListener("keydown", this.handleKeyEvent, true); } catch(ex){}
-		if (aStateFlag == 1) {
-			aWindow.document.addEventListener("keydown", this.handleKeyEvent, true);
-		}
+		aWindow.document.addEventListener("keydown", this.handleKeyEvent, true);
 	},
 
 	handleKeyEvent : function(aEvent)
