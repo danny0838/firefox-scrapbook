@@ -115,7 +115,7 @@ var sbPageEditor = {
 		if ( !sbCommonUtils.documentData(window.content.document, "inited") ) {
 			sbCommonUtils.documentData(window.content.document, "inited", true);
 			if ( aID ) {
-				try { window.content.removeEventListener("beforeunload", this.handleUnloadEvent, true); } catch(ex){}
+				window.content.removeEventListener("beforeunload", this.handleUnloadEvent, true);
 				window.content.addEventListener("beforeunload", this.handleUnloadEvent, true);
 			}
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
@@ -159,7 +159,7 @@ var sbPageEditor = {
 
 	initEvent : function(aWindow)
 	{
-		try { aWindow.document.removeEventListener("keydown", this.handleKeyEvent, true); } catch(ex){}
+		aWindow.document.removeEventListener("keydown", this.handleKeyEvent, true);
 		aWindow.document.addEventListener("keydown", this.handleKeyEvent, true);
 	},
 
