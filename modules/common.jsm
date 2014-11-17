@@ -892,6 +892,28 @@ var sbCommonUtils = {
 	},
 
 	/**
+	 * if aRefNode has "data-sb-id" attribute, get all nodes with same data-sb-id
+	 * else return [aRefNode]
+	 */
+	getSbObjectsById : function(aRefNode) {
+		var id = aRefNode.getAttribute("data-sb-id");
+		if (!id) return [aRefNode];
+		var doc = aRefNode.ownerDocument;
+		if (doc.querySelectorAll) {
+			return doc.querySelectorAll('[data-sb-id="' + id.replace(/"/g, '\\"') + '"]');
+		}
+		else {
+			// workaround for older Firefox versions that don't support
+			var ret = [];
+			var els = doc.getElementsByTagName("*");
+			for (var i=0, I=els.length; i<I; ++i) {
+				if (els[i].getAttribute("data-sb-id") == id) ret.push(els[i]);
+			}
+			return ret;
+		}
+	},
+
+	/**
 	 * Data Store
 	 */
 	_getDocumentIndex : function(aDocument)

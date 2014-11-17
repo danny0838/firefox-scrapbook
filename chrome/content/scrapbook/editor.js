@@ -2060,10 +2060,17 @@ var sbAnnotationService = {
 		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("overlay", "EDIT_INLINE", [sbCommonUtils.crop(aElement.textContent, 32)]), ret, null, {}) ) return;
 		// apply
 		sbPageEditor.allowUndo(doc);
-		if ( ret.value )
-			aElement.setAttribute("title", ret.value);
-		else
-			sbPageEditor.removeSbObj(aElement);
+		var els = sbCommonUtils.getSbObjectsById(aElement);
+		if ( ret.value ) {
+			for (var i=0, I=els.length; i<I; ++i) {
+				els[i].setAttribute("title", ret.value);
+			}
+		}
+		else {
+			for (var i=0, I=els.length; i<I; ++i) {
+				sbPageEditor.removeSbObj(els[i]);
+			}
+		}
 	},
 
 
