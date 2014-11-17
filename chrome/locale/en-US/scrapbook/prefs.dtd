@@ -33,6 +33,7 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "the bottom of a folder">
 <!ENTITY sb.prefs.showDetailOnDrop "Show &apos;Capture Detail&apos; dialog when capturing by drag-and-drop into Sidebar">
 <!ENTITY sb.prefs.notifyOnComplete "Show &apos;Capture Completed&apos; notification">
+<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.button.customize "Customize">
 <!ENTITY sb.button.browse "Browse">

@@ -149,9 +149,39 @@ var sbBrowserOverlay = {
 		}
 		else {
 			window.setTimeout(function() { sbPageEditor.uninit(); }, 0);
+			if ( sbCommonUtils.getPref("notifyPageCaptured", true) ) this.notifyPageCaptured(aURL);
 		}
 		this.locateMe = null;
 		this.lastLocation = aURL;
+	},
+
+	notifyPageCaptured: function(aURL)
+	{
+		aURL = sbCommonUtils.splitURLByAnchor(aURL)[0];
+		var result = [];
+		var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"), 2, true);
+		resList.forEach(function(res) {
+			if (["bookmark", "note", "notex"].indexOf(sbDataSource.getProperty(res, "type")) != -1) return;
+			if (sbCommonUtils.splitURLByAnchor(sbDataSource.getProperty(res, "source"))[0] == aURL) result.push(res);
+		}, this);
+		if (result.length) {
+			res = result[0];
+			var id = sbDataSource.getProperty(res, "id");
+			var title = sbDataSource.getProperty(res, "title");
+			var type = sbDataSource.getProperty(res, "type");
+			var icon = sbDataSource.getProperty(res, "icon") || sbCommonUtils.getDefaultIcon(type);
+
+			var text = title;
+			var title = sbCommonUtils.lang("overlay", "PAGE_CAPTURED", [result.length]);
+			var listener = {
+				observe: function(subject, topic, data) {
+					if (topic == "alertclickcallback")
+						sbCommonUtils.loadURL("chrome://scrapbook/content/view.xul?id=" + data);
+				}
+			};
+			var alertsSvc = Components.classes["@mozilla.org/alerts-service;1"].getService(Components.interfaces.nsIAlertsService);
+			alertsSvc.showAlertNotification(icon, title, text, true, id, listener);
+		}
 	},
 
 	buildPopup: function(aPopup)
