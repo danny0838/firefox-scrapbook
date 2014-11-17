@@ -1813,6 +1813,7 @@ var sbAnnotationService = {
 
 	handleEvent : function(aEvent)
 	{
+		if (!sbPageEditor.enabled || sbHtmlEditor.enabled || sbDOMEraser.enabled) return;
 		if ( aEvent.type == "mousedown" )
 		{
 			switch ( sbCommonUtils.getSbObjectType(aEvent.originalTarget) )
