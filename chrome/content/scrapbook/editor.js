@@ -506,6 +506,8 @@ var sbPageEditor = {
 	// To prevent conflict:
 	//   - we should turn off DOMEraser before disable or it's effect will persist
 	//   - we should turn off HTMLEditor before disable if it's permanent
+	//     HTMLEditor keeps enabled in a temp disable. However the undo history will be broken if
+	//     disabled and enabled; let it go since temp disable is merely a UI matter currently.
 	//   - we should refresh HTMLEditor after since it may be on and should not get all disabled
 	disable : function(isDisable, isTemp)
 	{
