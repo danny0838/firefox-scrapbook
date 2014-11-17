@@ -119,7 +119,7 @@ var sbPageEditor = {
 				window.content.addEventListener("beforeunload", this.handleUnloadEvent, true);
 			}
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
-				sbAnnotationService.initEvent(win, 1);
+				sbAnnotationService.initEvent(win);
 				this.initEvent(win, 1);
 				this.documentLoad(win.document, function(doc){
 					sbPageEditor.documentBeforeEdit(doc);
@@ -743,7 +743,6 @@ var sbHtmlEditor = {
 					win.document.designMode = "off";
 				}
 				this.initEvent(win, 1);
-				sbAnnotationService.initEvent(win, 0);
 			}, this);
 			if ( aDoc.designMode != "on" ) {
 				var sel = aDoc.defaultView.getSelection();
@@ -778,7 +777,6 @@ var sbHtmlEditor = {
 					win.document.designMode = "off";
 				}
 				this.initEvent(win, 0);
-				sbAnnotationService.initEvent(win, 1);
 			}, this);
 		}
 	},
@@ -1487,7 +1485,6 @@ var sbDOMEraser = {
 				sbCommonUtils.flattenFrames(this.lastWindow).forEach(function(win) {
 					this.initEvent(win, 0);
 					this.initStyle(win, 0);
-					sbAnnotationService.initEvent(win, 1);
 				}, this);
 			}
 		}
@@ -1498,7 +1495,6 @@ var sbDOMEraser = {
 			sbCommonUtils.flattenFrames(this.lastWindow).forEach(function(win) {
 				this.initEvent(win, 1);
 				this.initStyle(win, 1);
-				sbAnnotationService.initEvent(win, 0);
 			}, this);
 		}
 	},
@@ -1794,21 +1790,12 @@ var sbAnnotationService = {
 	isMove  : true,
 	target  : null,
 
-	// aStateFlag
-	//  0: disable
-	//  1: enable
-	initEvent : function(aWindow, aStateFlag)
+	initEvent : function(aWindow)
 	{
 		aWindow.document.removeEventListener("mousedown", this.handleEvent, true);
 		aWindow.document.removeEventListener("click", this.handleEvent, true);
-		if (aStateFlag == 1) {
-			aWindow.document.addEventListener("mousedown", this.handleEvent, true);
-			aWindow.document.addEventListener("click", this.handleEvent, true);
-		}
-		else {
-			aWindow.document.removeEventListener("mousemove", this.handleEvent, true);
-			aWindow.document.removeEventListener("mouseup",   this.handleEvent, true);
-		}
+		aWindow.document.addEventListener("mousedown", this.handleEvent, true);
+		aWindow.document.addEventListener("click", this.handleEvent, true);
 	},
 
 	handleEvent : function(aEvent)
