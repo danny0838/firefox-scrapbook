@@ -262,17 +262,22 @@ var sbPageEditor = {
 
 	highlight : function(idx)
 	{
-		if ( !idx ) idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 8;	//DropDownList
+		// update the dropdown list
+		if ( !idx ) idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 8;
 		document.getElementById("ScrapBookHighlighter").setAttribute("color", idx);
-		var attr = {};
-		attr["style"] = sbCommonUtils.getPref("highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);	//DropDownList
-		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighterPreview"), attr["style"]);	//DropDownList
+		var style = sbCommonUtils.getPref("highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);
+		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighterPreview"), style);
+		// check and get selection
 		var win = sbCommonUtils.getFocusedWindow();
 		var sel = this.getSelection(win);
 		if ( !sel ) return;
+		// apply
 		this.allowUndo(win.document);
-		attr["data-sb-obj"] = "linemarker";
-		attr["class"] = "linemarker-marked-line";
+		var attr = {
+			"data-sb-obj" : "linemarker",
+			"class" : "linemarker-marked-line", // for downward compatibility with ScrapBook / ScrapBook Plus
+			"style" : style,
+		};
 		sbHighlighter.set(win, sel, "span", attr);
 	},
 
@@ -2041,22 +2046,32 @@ var sbAnnotationService = {
 
 	addInline : function()
 	{
+		// check and get selection
 		var win = sbCommonUtils.getFocusedWindow();
 		var sel = sbPageEditor.getSelection(win);
 		if ( !sel ) return;
+		// check and get the annotation
 		var ret = {};
 		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("overlay", "EDIT_INLINE", [sbCommonUtils.crop(sel.toString(), 32)]), ret, null, {}) ) return;
 		if ( !ret.value ) return;
+		// apply
 		sbPageEditor.allowUndo(win.document);
-		var attr = { style : "border-bottom: 2px dotted #FF3333; cursor: help;", "data-sb-obj" : "inline" , class : "scrapbook-inline", title : ret.value };
+		var attr = {
+			"data-sb-obj" : "inline",
+			"class" : "scrapbook-inline", // for downward compatibility with ScrapBook / ScrapBook Plus
+			"style" : "border-bottom: 2px dotted #FF3333; cursor: help;",
+			"title" : ret.value,
+		};
 		sbHighlighter.set(win, sel, "span", attr);
 	},
 
 	editInline : function(aElement)
 	{
 		var doc = aElement.ownerDocument;
+		// check and get the annotation
 		var ret = { value : aElement.getAttribute("title") };
 		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("overlay", "EDIT_INLINE", [sbCommonUtils.crop(aElement.textContent, 32)]), ret, null, {}) ) return;
+		// apply
 		sbPageEditor.allowUndo(doc);
 		if ( ret.value )
 			aElement.setAttribute("title", ret.value);
@@ -2067,12 +2082,15 @@ var sbAnnotationService = {
 
 	addAnnotation : function()
 	{
+		// check and get selection
 		var win = sbCommonUtils.getFocusedWindow();
 		var sel = sbPageEditor.getSelection(win);
 		if ( !sel ) return;
+		// check and get the annotation
 		var ret = {};
 		if ( !sbCommonUtils.PROMPT.prompt(window, "[ScrapBook]", sbCommonUtils.lang("overlay", "EDIT_ANNOTATION"), ret, null, {}) ) return;
 		if ( !ret.value ) return;
+		// apply
 		sbPageEditor.allowUndo(win.document);
 		var range = sel.getRangeAt(0);
 		var endC = range.endContainer;
@@ -2089,8 +2107,10 @@ var sbAnnotationService = {
 	editAnnotation : function(aElement)
 	{
 		var doc = aElement.ownerDocument;
+		// check and get the annotation
 		var ret = { value : aElement.textContent };
 		if ( !sbCommonUtils.PROMPT.prompt(window, "[ScrapBook]", sbCommonUtils.lang("overlay", "EDIT_ANNOTATION"), ret, null, {}) ) return;
+		// apply
 		sbPageEditor.allowUndo(doc);
 		if ( ret.value )
 			aElement.innerHTML = ret.value;
@@ -2104,7 +2124,6 @@ var sbAnnotationService = {
 		var win = sbCommonUtils.getFocusedWindow();
 		var sel = sbPageEditor.getSelection(win);
 		if ( !sel ) return;
-		var attr = {};
 		if ( aFlag == "L" )
 		{
 			// fill the selection it looks like an URL
@@ -2116,8 +2135,10 @@ var sbAnnotationService = {
 			var ret = { value: url || "" };
 			if ( !sbCommonUtils.PROMPT.prompt(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_LINK_TITLE"), sbCommonUtils.lang("overlay", "ADDRESS"), ret, null, {}) ) return;
 			if ( !ret.value ) return;
-			attr["href"] = ret.value;
-			attr["data-sb-obj"] = "link-url";
+			var attr = {
+				"data-sb-obj" : "link-url",
+				"href" : ret.value
+			};
 		}
 		else if ( aFlag == "I" )
 		{
@@ -2157,9 +2178,11 @@ var sbAnnotationService = {
 			}
 			// attach the link
 			var title = sbDataSource.getProperty(res, "title");
-			attr["href"] = (type == "bookmark") ? sbDataSource.getProperty(res, "source") : makeRelativeLink(win.location.href, sbPageEditor.item.id, id);
-			attr["title"] = title;
-			attr["data-sb-obj"] = "link-inner";
+			var attr = {
+				"data-sb-obj" : "link-inner",
+				"href" : (type == "bookmark") ? sbDataSource.getProperty(res, "source") : makeRelativeLink(win.location.href, sbPageEditor.item.id, id),
+				"title" : title
+			};
 		}
 		else
 		{
@@ -2189,9 +2212,11 @@ var sbAnnotationService = {
 				return;
 			}
 			// attach the link
-			attr["href"] = sbCommonUtils.escapeFileName(filename2);
-			attr["title"] = filename;
-			attr["data-sb-obj"] = "link-file";
+			var attr = {
+				"data-sb-obj" : "link-file",
+				"href" : sbCommonUtils.escapeFileName(filename2),
+				"title" : filename
+			};
 		}
 		sbPageEditor.allowUndo(win.document);
 		sbHighlighter.set(win, sel, "a", attr);
