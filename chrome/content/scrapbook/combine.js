@@ -493,8 +493,8 @@ var sbPageCombiner = {
 		if ( !icon ) icon = sbCommonUtils.getDefaultIcon(aType);
 		icon = sbCommonUtils.convertResURLToURL(icon);
 		src += '<cite class="scrapbook-header' + '">\n';
-		src += '\t<img src="' + icon + '" width="16" height="16">\n';
-		src += '\t<a class="' + aType + '"' + (linkURL ? ' href="' + linkURL + '"' : "") + '>' + sbCommonUtils.escapeHTML(title, true) + '</a>\n';
+		src += '\t<img src="' + sbCommonUtils.escapeHTML(icon) + '" width="16" height="16">\n';
+		src += '\t<a class="' + aType + '"' + (linkURL ? ' href="' + sbCommonUtils.escapeHTML(linkURL) + '"' : "") + '>' + sbCommonUtils.escapeHTML(title, true) + '</a>\n';
 		src += '</cite>\n';
 		return src;
 	},
