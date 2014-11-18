@@ -115,12 +115,12 @@ var sbPageEditor = {
 		if ( !sbCommonUtils.documentData(window.content.document, "inited") ) {
 			sbCommonUtils.documentData(window.content.document, "inited", true);
 			if ( aID ) {
-				try { window.content.removeEventListener("beforeunload", this.handleUnloadEvent, true); } catch(ex){}
+				window.content.removeEventListener("beforeunload", this.handleUnloadEvent, true);
 				window.content.addEventListener("beforeunload", this.handleUnloadEvent, true);
 			}
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
-				sbAnnotationService.initEvent(win, 1);
-				this.initEvent(win, 1);
+				sbAnnotationService.initEvent(win);
+				this.initEvent(win);
 				this.documentLoad(win.document, function(doc){
 					sbPageEditor.documentBeforeEdit(doc);
 				}, this);
@@ -157,15 +157,10 @@ var sbPageEditor = {
 		}, true);
 	},
 
-	// aStateFlag
-	//   0: disable
-	//   1: enable
-	initEvent : function(aWindow, aStateFlag)
+	initEvent : function(aWindow)
 	{
-		try { aWindow.document.removeEventListener("keydown", this.handleKeyEvent, true); } catch(ex){}
-		if (aStateFlag == 1) {
-			aWindow.document.addEventListener("keydown", this.handleKeyEvent, true);
-		}
+		aWindow.document.removeEventListener("keydown", this.handleKeyEvent, true);
+		aWindow.document.addEventListener("keydown", this.handleKeyEvent, true);
 	},
 
 	handleKeyEvent : function(aEvent)
@@ -262,17 +257,23 @@ var sbPageEditor = {
 
 	highlight : function(idx)
 	{
-		if ( !idx ) idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 8;	//DropDownList
+		// update the dropdown list
+		if ( !idx ) idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 8;
 		document.getElementById("ScrapBookHighlighter").setAttribute("color", idx);
-		var attr = {};
-		attr["style"] = sbCommonUtils.getPref("highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);	//DropDownList
-		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighterPreview"), attr["style"]);	//DropDownList
+		var style = sbCommonUtils.getPref("highlighter.style." + idx, sbHighlighter.PRESET_STYLES[idx]);
+		sbHighlighter.decorateElement(document.getElementById("ScrapBookHighlighterPreview"), style);
+		// check and get selection
 		var win = sbCommonUtils.getFocusedWindow();
 		var sel = this.getSelection(win);
 		if ( !sel ) return;
+		// apply
 		this.allowUndo(win.document);
-		attr["data-sb-obj"] = "linemarker";
-		attr["class"] = "linemarker-marked-line";
+		var attr = {
+			"data-sb-id" : (new Date()).valueOf(),
+			"data-sb-obj" : "linemarker",
+			"class" : "linemarker-marked-line", // for downward compatibility with ScrapBook / ScrapBook Plus
+			"style" : style,
+		};
 		sbHighlighter.set(win, sel, "span", attr);
 	},
 
@@ -293,7 +294,7 @@ var sbPageEditor = {
 			if ( nodeRange.compareBoundaryPoints(Range.START_TO_END, selRange) > -1 )
 			{
 				if ( nodeRange.compareBoundaryPoints(Range.END_TO_START, selRange) > 0 ) break;
-				else if ( node.nodeType === 1 && sbCommonUtils.getSbObjectRemoveType(node) != 0 )
+				else if ( node.nodeType === 1 )
 				{
 					nodeToDel.push(node);
 				}
@@ -315,9 +316,7 @@ var sbPageEditor = {
 			var doc = win.document;
 			this.allowUndo(doc);
 			var elems = doc.getElementsByTagName("*");
-			for ( var i = 0; i < elems.length; i++ ) {
-				if ( sbCommonUtils.getSbObjectRemoveType(elems[i]) != 0 ) nodeToDel.push(elems[i]);
-			}
+			for ( var i = 0; i < elems.length; i++ ) nodeToDel.push(elems[i]);
 		}, this);
 		for ( var i = 0, len = nodeToDel.length; i < len; ++i ) this.removeSbObj(nodeToDel[i]);
 	},
@@ -339,14 +338,29 @@ var sbPageEditor = {
 
 	removeSbObj : function(aNode)
 	{
-		switch (sbCommonUtils.getSbObjectRemoveType(aNode)) {
+		try {
+			// not in the DOM tree, skip
+			if (!aNode.parentNode) return -1;
+		} catch(ex) {
+			// not an element or a dead object, skip
+			return -1;
+		}
+		var type = sbCommonUtils.getSbObjectRemoveType(aNode);
+		switch (type) {
 			case 1:
-				aNode.parentNode.removeChild(aNode);
+				var els = sbCommonUtils.getSbObjectsById(aNode);
+				for (var i=0, len=els.length; i<len; ++i) {
+					els[i].parentNode.removeChild(els[i]);
+				}
 				break;
 			case 2:
-				this.unwrapNode(aNode);
+				var els = sbCommonUtils.getSbObjectsById(aNode);
+				for (var i=0, len=els.length; i<len; ++i) {
+					this.unwrapNode(els[i]);
+				}
 				break;
 		}
+		return type;
 	},
 
 	unwrapNode : function(aNode)
@@ -506,6 +520,8 @@ var sbPageEditor = {
 	// To prevent conflict:
 	//   - we should turn off DOMEraser before disable or it's effect will persist
 	//   - we should turn off HTMLEditor before disable if it's permanent
+	//     HTMLEditor keeps enabled in a temp disable. However the undo history will be broken if
+	//     disabled and enabled; let it go since temp disable is merely a UI matter currently.
 	//   - we should refresh HTMLEditor after since it may be on and should not get all disabled
 	disable : function(isDisable, isTemp)
 	{
@@ -738,7 +754,6 @@ var sbHtmlEditor = {
 					win.document.designMode = "off";
 				}
 				this.initEvent(win, 1);
-				sbAnnotationService.initEvent(win, 0);
 			}, this);
 			if ( aDoc.designMode != "on" ) {
 				var sel = aDoc.defaultView.getSelection();
@@ -773,7 +788,6 @@ var sbHtmlEditor = {
 					win.document.designMode = "off";
 				}
 				this.initEvent(win, 0);
-				sbAnnotationService.initEvent(win, 1);
 			}, this);
 		}
 	},
@@ -1482,7 +1496,6 @@ var sbDOMEraser = {
 				sbCommonUtils.flattenFrames(this.lastWindow).forEach(function(win) {
 					this.initEvent(win, 0);
 					this.initStyle(win, 0);
-					sbAnnotationService.initEvent(win, 1);
 				}, this);
 			}
 		}
@@ -1493,7 +1506,6 @@ var sbDOMEraser = {
 			sbCommonUtils.flattenFrames(this.lastWindow).forEach(function(win) {
 				this.initEvent(win, 1);
 				this.initStyle(win, 1);
-				sbAnnotationService.initEvent(win, 0);
 			}, this);
 		}
 	},
@@ -1627,10 +1639,7 @@ var sbDOMEraser = {
 		if (!aNode) return false;
 		this._deselectNode();
 		sbPageEditor.allowUndo(aNode.ownerDocument);
-		if ( sbCommonUtils.getSbObjectRemoveType(aNode) != 0 ) {
-			sbPageEditor.removeSbObj(aNode);
-		}
-		else {
+		if ( sbPageEditor.removeSbObj(aNode) <= 0 ) {
 			aNode.parentNode.removeChild(aNode);
 		}
 	},
@@ -1735,7 +1744,7 @@ var sbDOMEraser = {
 		}
 		tooltip.style.left = this.lastX + "px";
 		tooltip.style.top  = this.lastY + "px";
-		if ( sbCommonUtils.getSbObjectRemoveType(aNode) != 0 ) {
+		if ( sbCommonUtils.getSbObjectRemoveType(aNode) > 0 ) {
 			tooltip.textContent = sbCommonUtils.lang("overlay", "EDIT_REMOVE_HIGHLIGHT");
 			sbDOMEraser._setOutline(aNode, "2px dashed #0000FF");
 		}
@@ -1789,25 +1798,17 @@ var sbAnnotationService = {
 	isMove  : true,
 	target  : null,
 
-	// aStateFlag
-	//  0: disable
-	//  1: enable
-	initEvent : function(aWindow, aStateFlag)
+	initEvent : function(aWindow)
 	{
 		aWindow.document.removeEventListener("mousedown", this.handleEvent, true);
 		aWindow.document.removeEventListener("click", this.handleEvent, true);
-		if (aStateFlag == 1) {
-			aWindow.document.addEventListener("mousedown", this.handleEvent, true);
-			aWindow.document.addEventListener("click", this.handleEvent, true);
-		}
-		else {
-			aWindow.document.removeEventListener("mousemove", this.handleEvent, true);
-			aWindow.document.removeEventListener("mouseup",   this.handleEvent, true);
-		}
+		aWindow.document.addEventListener("mousedown", this.handleEvent, true);
+		aWindow.document.addEventListener("click", this.handleEvent, true);
 	},
 
 	handleEvent : function(aEvent)
 	{
+		if (!sbPageEditor.enabled || sbHtmlEditor.enabled || sbDOMEraser.enabled) return;
 		if ( aEvent.type == "mousedown" )
 		{
 			switch ( sbCommonUtils.getSbObjectType(aEvent.originalTarget) )
@@ -2041,39 +2042,60 @@ var sbAnnotationService = {
 
 	addInline : function()
 	{
+		// check and get selection
 		var win = sbCommonUtils.getFocusedWindow();
 		var sel = sbPageEditor.getSelection(win);
 		if ( !sel ) return;
-		sbPageEditor.allowUndo(win.document);
+		// check and get the annotation
 		var ret = {};
 		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("overlay", "EDIT_INLINE", [sbCommonUtils.crop(sel.toString(), 32)]), ret, null, {}) ) return;
 		if ( !ret.value ) return;
-		var attr = { style : "border-bottom: 2px dotted #FF3333; cursor: help;", "data-sb-obj" : "inline" , class : "scrapbook-inline", title : ret.value };
+		// apply
+		sbPageEditor.allowUndo(win.document);
+		var attr = {
+			"data-sb-id" : (new Date()).valueOf(),
+			"data-sb-obj" : "inline",
+			"class" : "scrapbook-inline", // for downward compatibility with ScrapBook / ScrapBook Plus
+			"style" : "border-bottom: 2px dotted #FF3333; cursor: help;",
+			"title" : ret.value,
+		};
 		sbHighlighter.set(win, sel, "span", attr);
 	},
 
 	editInline : function(aElement)
 	{
 		var doc = aElement.ownerDocument;
-		sbPageEditor.allowUndo(doc);
+		// check and get the annotation
 		var ret = { value : aElement.getAttribute("title") };
 		if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("overlay", "EDIT_INLINE", [sbCommonUtils.crop(aElement.textContent, 32)]), ret, null, {}) ) return;
-		if ( ret.value )
-			aElement.setAttribute("title", ret.value);
-		else
-			sbPageEditor.removeSbObj(aElement);
+		// apply
+		sbPageEditor.allowUndo(doc);
+		var els = sbCommonUtils.getSbObjectsById(aElement);
+		if ( ret.value ) {
+			for (var i=0, I=els.length; i<I; ++i) {
+				els[i].setAttribute("title", ret.value);
+			}
+		}
+		else {
+			for (var i=0, I=els.length; i<I; ++i) {
+				sbPageEditor.removeSbObj(els[i]);
+			}
+		}
 	},
 
 
 	addAnnotation : function()
 	{
+		// check and get selection
 		var win = sbCommonUtils.getFocusedWindow();
 		var sel = sbPageEditor.getSelection(win);
 		if ( !sel ) return;
-		sbPageEditor.allowUndo(win.document);
+		// check and get the annotation
 		var ret = {};
 		if ( !sbCommonUtils.PROMPT.prompt(window, "[ScrapBook]", sbCommonUtils.lang("overlay", "EDIT_ANNOTATION"), ret, null, {}) ) return;
 		if ( !ret.value ) return;
+		// apply
+		sbPageEditor.allowUndo(win.document);
 		var range = sel.getRangeAt(0);
 		var endC = range.endContainer;
 		var eOffset	= range.endOffset;
@@ -2089,9 +2111,11 @@ var sbAnnotationService = {
 	editAnnotation : function(aElement)
 	{
 		var doc = aElement.ownerDocument;
-		sbPageEditor.allowUndo(doc);
+		// check and get the annotation
 		var ret = { value : aElement.textContent };
 		if ( !sbCommonUtils.PROMPT.prompt(window, "[ScrapBook]", sbCommonUtils.lang("overlay", "EDIT_ANNOTATION"), ret, null, {}) ) return;
+		// apply
+		sbPageEditor.allowUndo(doc);
 		if ( ret.value )
 			aElement.innerHTML = ret.value;
 		else
@@ -2104,7 +2128,6 @@ var sbAnnotationService = {
 		var win = sbCommonUtils.getFocusedWindow();
 		var sel = sbPageEditor.getSelection(win);
 		if ( !sel ) return;
-		var attr = {};
 		if ( aFlag == "L" )
 		{
 			// fill the selection it looks like an URL
@@ -2116,8 +2139,10 @@ var sbAnnotationService = {
 			var ret = { value: url || "" };
 			if ( !sbCommonUtils.PROMPT.prompt(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_LINK_TITLE"), sbCommonUtils.lang("overlay", "ADDRESS"), ret, null, {}) ) return;
 			if ( !ret.value ) return;
-			attr["href"] = ret.value;
-			attr["data-sb-obj"] = "link-url";
+			var attr = {
+				"data-sb-obj" : "link-url",
+				"href" : ret.value
+			};
 		}
 		else if ( aFlag == "I" )
 		{
@@ -2157,9 +2182,11 @@ var sbAnnotationService = {
 			}
 			// attach the link
 			var title = sbDataSource.getProperty(res, "title");
-			attr["href"] = (type == "bookmark") ? sbDataSource.getProperty(res, "source") : makeRelativeLink(win.location.href, sbPageEditor.item.id, id);
-			attr["title"] = title;
-			attr["data-sb-obj"] = "link-inner";
+			var attr = {
+				"data-sb-obj" : "link-inner",
+				"href" : (type == "bookmark") ? sbDataSource.getProperty(res, "source") : makeRelativeLink(win.location.href, sbPageEditor.item.id, id),
+				"title" : title
+			};
 		}
 		else
 		{
@@ -2189,9 +2216,11 @@ var sbAnnotationService = {
 				return;
 			}
 			// attach the link
-			attr["href"] = sbCommonUtils.escapeFileName(filename2);
-			attr["title"] = filename;
-			attr["data-sb-obj"] = "link-file";
+			var attr = {
+				"data-sb-obj" : "link-file",
+				"href" : sbCommonUtils.escapeFileName(filename2),
+				"title" : filename
+			};
 		}
 		sbPageEditor.allowUndo(win.document);
 		sbHighlighter.set(win, sel, "a", attr);
