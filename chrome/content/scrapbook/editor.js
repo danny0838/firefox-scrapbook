@@ -699,6 +699,7 @@ var sbHtmlEditor = {
 		"Alt+Comma" : "justifyLeft",
 		"Alt+Period" : "justifyRight",
 		"Alt+M" : "justifyCenter",
+		"Alt+Slash" : "justifyFull",
 
 		"Ctrl+Shift+K" : "unlink",
 		"Ctrl+L" : "attachLink",
@@ -992,6 +993,11 @@ var sbHtmlEditor = {
 	justifyCenter : function(aDoc)
 	{
 		aDoc.execCommand("justifyCenter", false, null);
+	},
+
+	justifyFull : function(aDoc)
+	{
+		aDoc.execCommand("justifyFull", false, null);
 	},
 
 	unlink : function(aDoc)

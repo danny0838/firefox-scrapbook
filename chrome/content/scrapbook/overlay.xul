@@ -160,6 +160,7 @@
 						<menuitem acceltext="Alt+," value="justifyLeft" label="&sb.edit.html.menuitem.justifyLeft;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
 						<menuitem acceltext="Alt+." value="justifyRight" label="&sb.edit.html.menuitem.justifyRight;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
 						<menuitem acceltext="Alt+M" value="justifyCenter" label="&sb.edit.html.menuitem.justifyCenter;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+						<menuitem acceltext="Alt+/" value="justifyFull" label="&sb.edit.html.menuitem.justifyFull;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
 					</menupopup>
 				</menu>
 				<menu label="&sb.edit.html.menu.insert;">

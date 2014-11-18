@@ -60,6 +60,7 @@
 <!ENTITY sb.edit.html.menuitem.justifyLeft "靠左對齊">
 <!ENTITY sb.edit.html.menuitem.justifyRight "靠右對齊">
 <!ENTITY sb.edit.html.menuitem.justifyCenter "置中對齊">
+<!ENTITY sb.edit.html.menuitem.justifyFull "左右對齊">
 <!ENTITY sb.edit.html.menuitem.attachLink "插入連結或內部連結">
 <!ENTITY sb.edit.html.menuitem.attachFile "插入檔案或子頁面">
 <!ENTITY sb.edit.html.menuitem.horizontalLine "插入水平線">
