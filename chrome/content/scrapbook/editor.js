@@ -341,10 +341,16 @@ var sbPageEditor = {
 		var type = sbCommonUtils.getSbObjectRemoveType(aNode);
 		switch (type) {
 			case 1:
-				aNode.parentNode.removeChild(aNode);
+				var els = sbCommonUtils.getSbObjectsById(aNode);
+				for (var i=0, len=els.length; i<len; ++i) {
+					els[i].parentNode.removeChild(els[i]);
+				}
 				break;
 			case 2:
-				this.unwrapNode(aNode);
+				var els = sbCommonUtils.getSbObjectsById(aNode);
+				for (var i=0, len=els.length; i<len; ++i) {
+					this.unwrapNode(els[i]);
+				}
 				break;
 		}
 		return type;
