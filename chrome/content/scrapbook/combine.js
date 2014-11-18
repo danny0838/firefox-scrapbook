@@ -406,7 +406,7 @@ var sbPageCombiner = {
 				+ '	margin: 0px;\n'
 				+ '	background-color: #FFFFFF;\n'
 				+ '}\n'
-				+ '\n'
+
 				+ 'cite.scrapbook-header {\n'
 				+ '	clear: both;\n'
 				+ '	display: block;\n'
@@ -417,20 +417,20 @@ var sbPageCombiner = {
 				+ '	background-color: InfoBackground;\n'
 				+ '	border: 1px solid ThreeDShadow;\n'
 				+ '}\n'
-				+ '\n'
+
 				+ 'cite.scrapbook-header img {\n'
 				+ '	vertical-align: middle;\n'
 				+ '}\n'
-				+ '\n'
+
 				+ 'cite.scrapbook-header a {\n'
 				+ '	color: InfoText;\n'
 				+ '	text-decoration: none;\n'
 				+ '}\n'
-				+ '\n'
+
 				+ 'cite.scrapbook-header a[href]:hover {\n'
 				+ '	color: #3388FF;\n'
 				+ '}\n'
-				+ '\n'
+
 				+ 'cite.scrapbook-header a.marked { font-weight: bold; }\n'
 				+ 'cite.scrapbook-header a.combine  { color: blue; }\n'
 				+ 'cite.scrapbook-header a.bookmark { color: limegreen; }\n'
