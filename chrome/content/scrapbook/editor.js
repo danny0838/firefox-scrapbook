@@ -1839,7 +1839,7 @@ var sbAnnotationService = {
 				case "sticky-footer" :
 				case "sticky-save" :
 				case "sticky-delete" :
-					// for downward compatibility with ScrapBook X <= 1.12.0a33
+					// for downward compatibility with ScrapBook X <= 1.12.0a34
 					// sticky annotation is created in old versions, replace it with a freenote
 					var sticky = aEvent.originalTarget;
 					while (sbCommonUtils.getSbObjectType(sticky)!="sticky") sticky = sticky.parentNode;
@@ -1927,6 +1927,7 @@ var sbAnnotationService = {
 		}
 
 		// create css for ScrapBook editor
+		// use old "scrapbook-sticky-css" name for better compatibility
 		if ( !win.document.getElementById("scrapbook-sticky-css") )
 		{
 			var linkNode = win.document.createElement("link");

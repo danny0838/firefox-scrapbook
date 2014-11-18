@@ -844,7 +844,7 @@ var sbCommonUtils = {
 	 * freenote-footer
 	 * freenote-save
 	 * freenote-delete
-	 * sticky (div) (for downward compatibility with SBX <= 1.12.0a33)
+	 * sticky (div) (for downward compatibility with SBX <= 1.12.0a34)
 	 * sticky-header
 	 * sticky-footer
 	 * sticky-save
