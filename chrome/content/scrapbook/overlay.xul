@@ -190,13 +190,13 @@
 					</menupopup>
 				</menu>
 				<menuseparator />
-				<menuitem acceltext="Ctrl+Alt+I" value="insertSource" label="&sb.edit.html.menuitem.insertSource;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+				<menuitem class="menuitem-iconic" acceltext="Ctrl+Alt+I" value="insertSource" label="&sb.edit.html.menuitem.insertSource;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
 				<menuseparator />
-				<menuitem acceltext="Ctrl+M" value="removeFormat" label="&sb.edit.html.menuitem.removeFormat;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
-				<menuitem acceltext="Ctrl+N" value="unlink" label="&sb.edit.html.menuitem.unlink;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+				<menuitem class="menuitem-iconic" acceltext="Ctrl+M" value="removeFormat" label="&sb.edit.html.menuitem.removeFormat;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+				<menuitem class="menuitem-iconic" acceltext="Ctrl+N" value="unlink" label="&sb.edit.html.menuitem.unlink;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
 				<menuseparator />
-				<menuitem acceltext="Ctrl+S" value="save" label="&sb.edit.html.menuitem.save;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
-				<menuitem acceltext="F10" value="quit" label="&sb.edit.html.menuitem.quit;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+				<menuitem class="menuitem-iconic" acceltext="Ctrl+S" value="save" label="&sb.edit.html.menuitem.save;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+				<menuitem class="menuitem-iconic" acceltext="F10" value="quit" label="&sb.edit.html.menuitem.quit;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
 			</menupopup>
 		</menu>
 		<!-- submenu placeholder -->
