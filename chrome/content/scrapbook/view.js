@@ -70,7 +70,7 @@ function SB_getHTMLBody(aItem)
 {
 	var src = '<cite class="scrapbook-header">\n'
 		+ '\t<img src="' + sbCommonUtils.escapeHTML(aItem.icon) + '" width="16" height="16">\n'
-		+ '\t<a href="' + sbCommonUtils.escapeHTML(aItem.source) + '" target="_top">' + sbCommonUtils.escapeHTML(sbCommonUtils.crop(aItem.title, 100)) + '</a>\n'
+		+ '\t<a href="' + sbCommonUtils.escapeHTML(aItem.source) + '" target="_top">' + sbCommonUtils.escapeHTML(aItem.title, true) + '</a>\n'
 		+ '</cite>\n';
 	if ( aItem.type != "bookmark" ) src += '<iframe class="scrapbook-iframe" src="./data/' + aItem.id + '/index.html" onload="initHeight(this);"></iframe>\n';
 	return src;
