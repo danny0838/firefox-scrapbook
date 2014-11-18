@@ -338,6 +338,13 @@ var sbPageEditor = {
 
 	removeSbObj : function(aNode)
 	{
+		try {
+			// not in the DOM tree, skip
+			if (!aNode.parentNode) return -1;
+		} catch(ex) {
+			// not an element or a dead object, skip
+			return -1;
+		}
 		var type = sbCommonUtils.getSbObjectRemoveType(aNode);
 		switch (type) {
 			case 1:
