@@ -31,7 +31,7 @@ function SB_initView()
 			continue;
 		var item = sbCommonUtils.newItem();
 		for ( var prop in item ) item[prop] = sbDataSource.getProperty(res, prop);
-		if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(sbDataSource.getProperty(res, "type"));
+		if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(item.type);
 		item.icon = sbCommonUtils.convertResURLToURL(item.icon, true);
 		src += SB_getHTMLBody(item);
 	}
