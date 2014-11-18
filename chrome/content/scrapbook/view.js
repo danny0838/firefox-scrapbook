@@ -72,7 +72,7 @@ function SB_getHTMLBody(aItem)
 		+ '\t<img src="' + sbCommonUtils.escapeHTML(aItem.icon) + '" width="16" height="16">\n'
 		+ '\t<a href="' + sbCommonUtils.escapeHTML(aItem.source) + '" target="_top">' + sbCommonUtils.escapeHTML(aItem.title, true) + '</a>\n'
 		+ '</cite>\n';
-	if ( aItem.type != "bookmark" ) src += '<iframe class="scrapbook-iframe" src="./data/' + aItem.id + '/index.html" onload="initHeight(this);"></iframe>\n';
+	if ( aItem.type != "bookmark" ) src += '<iframe class="scrapbook-iframe" src="data/' + aItem.id + '/index.html" onload="initHeight(this);"></iframe>\n';
 	return src;
 }
 
