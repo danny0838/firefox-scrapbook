@@ -410,6 +410,7 @@ var sbBrowserOverlay = {
 		getElement("ScrapBookContextMenu7").hidden = !prefContext || selected || !onLink;
 		getElement("ScrapBookContextMenu8").hidden = !prefContext || selected || !onLink;
 		getElement("ScrapBookContextMenu9").hidden = !prefContext || isActive || !prefBookmark;
+		getElement("ScrapBookContextMenu10").hidden = !prefContext || !sbHtmlEditor.enabled;
 	},
 
 	onMiddleClick: function(event, aFlag)

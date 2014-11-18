@@ -832,6 +832,17 @@ var sbHtmlEditor = {
 		}, 0);
 	},
 
+	handlePopupCommand : function(aCallback)
+	{
+		var callback = sbHtmlEditor[aCallback];
+
+		// check the document is editable and set
+		var doc = sbHtmlEditor.currentDocument();
+		if (!doc.body || doc.designMode != "on") return;
+
+		callback.call(sbHtmlEditor, doc);
+	},
+
 	quit : function(aDoc)
 	{
 		sbHtmlEditor.init(null, 0);
