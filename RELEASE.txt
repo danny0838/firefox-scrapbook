@@ -1,3 +1,12 @@
+Scrapbook X 1.12.0a34
+----------------
+
+- FIXED: A redundant undo history is created if there is no input for creating or editing an inline or HTML annotation.
+- FIXED: Editor functions still work even if the editor toolbar is closed.
+- UPDATE: A highlight or an inline annotation consisting of multiple HTML elements is edited or removed as an individual unit.
+- UPDATE: Minor code optimizations.
+
+
 Scrapbook X 1.12.0a33
 ----------------
 
