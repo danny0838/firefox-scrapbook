@@ -36,7 +36,7 @@ var sbBrowserOverlay = {
 		    sbCommonUtils.getPref("ui.contextSubMenu", false)) {
 			var callback = function() {
 				document.getElementById("ScrapBookContextSubmenu").hidden = false;
-				for (var i = 1; i <= 10; i++) {
+				for (var i = 1; i <= 9; i++) {
 					document.getElementById("ScrapBookContextSubmenu").firstChild.appendChild(
 						document.getElementById("ScrapBookContextMenu" + i)
 					);
