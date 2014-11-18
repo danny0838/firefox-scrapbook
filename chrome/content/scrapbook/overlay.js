@@ -30,20 +30,6 @@ var sbBrowserOverlay = {
 		gBrowser.addProgressListener(this.webProgressListener);
 		document.getElementById("contentAreaContextMenu").addEventListener( "popupshowing", this, false);
 		this.refresh();
-		// context menu
-		// update if it's shown in a submenu
-		if (sbCommonUtils.getPref("ui.contextMenu", false) && 
-		    sbCommonUtils.getPref("ui.contextSubMenu", false)) {
-			var callback = function() {
-				document.getElementById("ScrapBookContextSubmenu").hidden = false;
-				for (var i = 1; i <= 9; i++) {
-					document.getElementById("ScrapBookContextSubmenu").firstChild.appendChild(
-						document.getElementById("ScrapBookContextMenu" + i)
-					);
-				}
-			};
-			window.setTimeout(callback, 1000);
-		}
 		// hotkeys
 		var key = sbCommonUtils.getPref("key.menubar", "");
 		if (key.length == 1) {
@@ -87,6 +73,25 @@ var sbBrowserOverlay = {
 		document.getElementById("ScrapBookMenu").hidden        = !sbCommonUtils.getPref("ui.menuBar", false);
 		document.getElementById("ScrapBookStatusPanel").hidden = !sbCommonUtils.getPref("ui.statusBar", false);
 		document.getElementById("ScrapBookToolsMenu").hidden   = !sbCommonUtils.getPref("ui.toolsMenu", false);
+		// -- context menu
+		// update if it's shown in a submenu
+		var contextMenu = document.getElementById("contentAreaContextMenu");
+		var submenu = document.getElementById("ScrapBookContextSubmenu");
+		var submenu_mode_old = submenu.firstChild.hasChildNodes();
+		var submenu_mode_new = sbCommonUtils.getPref("ui.contextSubMenu", false);
+		if (submenu_mode_new != submenu_mode_old) {
+			if (submenu_mode_new) {
+				var start = document.getElementById("ScrapBookContextMenu0"), end = submenu, current;
+				while ((current = start.nextSibling) !== end) {
+					submenu.firstChild.appendChild(current);
+				}
+			}
+			else {
+				while (submenu.firstChild.hasChildNodes()) {
+					contextMenu.insertBefore(submenu.firstChild.firstChild, submenu);
+				}
+			}
+		}
 		// -- main menu
 		// update if it's shown as icon
 		var menu = document.getElementById("ScrapBookMenu");
