@@ -32,6 +32,7 @@ function SB_initView()
 		var item = sbCommonUtils.newItem();
 		for ( var prop in item ) item[prop] = sbDataSource.getProperty(res, prop);
 		if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(sbDataSource.getProperty(res, "type"));
+		item.icon = sbCommonUtils.convertResURLToURL(item.icon, true);
 		src += SB_getHTMLBody(item);
 	}
 
@@ -68,7 +69,7 @@ function SB_getHTMLHead(aTitle)
 function SB_getHTMLBody(aItem)
 {
 	var src = '<cite class="scrapbook-header">\n'
-		+ '\t<img src="' + sbCommonUtils.escapeHTML(aItem.icon ? aItem.icon : sbCommonUtils.getDefaultIcon(aItem.type)) + '" width="16" height="16">\n'
+		+ '\t<img src="' + sbCommonUtils.escapeHTML(aItem.icon) + '" width="16" height="16">\n'
 		+ '\t<a href="' + sbCommonUtils.escapeHTML(aItem.source) + '" target="_top">' + sbCommonUtils.escapeHTML(sbCommonUtils.crop(aItem.title, 100)) + '</a>\n'
 		+ '</cite>\n';
 	if ( aItem.type != "bookmark" ) src += '<iframe class="scrapbook-iframe" src="./data/' + aItem.id + '/index.html" onload="initHeight(this);"></iframe>\n';
