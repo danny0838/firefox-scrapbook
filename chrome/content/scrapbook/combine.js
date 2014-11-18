@@ -519,7 +519,10 @@ var sbPageCombiner = {
 	processCSSRecursively : function(aCSS)
 	{
 		var ret = "";
-		if ( aCSS.href && aCSS.href.indexOf("chrome://") == 0 ) return ret;
+		// a special stylesheet used by scrapbook, skip parsing it
+		if (aCSS.ownerNode && sbCommonUtils.getSbObjectType(aCSS.ownerNode) == "stylesheet") return ret;
+		// a special stylesheet used by scrapbook or other addons/programs, skip parsing it
+		if (aCSS.href && aCSS.href.indexOf("chrome://") == 0) return ret;
 		var cssRules = aCSS.cssRules;
 		for ( var i = 0; i < cssRules.length; i++ )
 		{
@@ -644,14 +647,19 @@ var sbPageCombiner = {
 		switch ( aNode.nodeName.toLowerCase() )
 		{
 			case "link" : 
-				// bad manner of link in the body
-				// styles should already be parsed, remove the node to prevent scope leak
-				if ( aNode.rel.toLowerCase() == "stylesheet" && aNode.href.indexOf("chrome://") != 0 ) 
-				return sbContentSaver.removeNodeFromParent(aNode);
+				if ( aNode.rel.toLowerCase() == "stylesheet") {
+					// link tags in the body element is unusual
+					// styles should already be processed
+					// in sbPageCombiner.exec => surroundCSS => processCSSRecursively
+					// just discard it here so that it never appear in the combined page
+					return sbContentSaver.removeNodeFromParent(aNode);
+				}
 				break;
 			case "style" :
-				// bad manner of style in the body
-				// styles should already be parsed, remove the node to prevent scope leak
+				// style tags in the body element is unusual
+				// styles should already be processed
+				// in sbPageCombiner.exec => surroundCSS => processCSSRecursively
+				// just discard it here so that it never appear in the combined page
 				return sbContentSaver.removeNodeFromParent(aNode);
 				break;
 			case "body" : 

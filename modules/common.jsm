@@ -888,7 +888,7 @@ var sbCommonUtils = {
 	{
 		var type = this.getSbObjectType(aNode);
 		if (!type) return -1;
-		if (["title", "title-src", "todo"].indexOf(type) != -1) return 0;
+		if (["title", "title-src", "stylesheet", "stylesheet-temp", "todo"].indexOf(type) != -1) return 0;
 		if (["linemarker", "inline", "link-url", "link-inner", "link-file"].indexOf(type) != -1) return 2;
 		return 1;
 	},
