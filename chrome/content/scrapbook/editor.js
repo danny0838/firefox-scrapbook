@@ -1926,27 +1926,10 @@ var sbAnnotationService = {
 			}
 		}
 
-		// create css for ScrapBook editor
-		// use old "scrapbook-sticky-css" name for better compatibility
-		if ( !win.document.getElementById("scrapbook-sticky-css") )
-		{
-			var linkNode = win.document.createElement("link");
-			linkNode.setAttribute("data-sb-obj", "stylesheet");
-			linkNode.setAttribute("media", "all");
-			linkNode.setAttribute("href", "chrome://scrapbook/skin/annotation.css");
-			linkNode.setAttribute("type", "text/css");
-			linkNode.setAttribute("id", "scrapbook-sticky-css");
-			linkNode.setAttribute("rel", "stylesheet");
-			var headNode = win.document.getElementsByTagName("head")[0];
-			if ( !headNode ) return;
-			headNode.appendChild(win.document.createTextNode("\n"));
-			headNode.appendChild(linkNode);
-			headNode.appendChild(win.document.createTextNode("\n"));
-		}
-
 		// create a new freenote
 		var mainDiv = win.content.document.createElement("DIV");
 		mainDiv.setAttribute("data-sb-obj", "freenote");
+		mainDiv.style.cursor = "help";
 		mainDiv.style.overflow = "visible";
 		mainDiv.style.margin = "0px";
 		mainDiv.style.border = "1px solid #CCCCCC";
