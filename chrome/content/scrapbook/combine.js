@@ -400,8 +400,8 @@ var sbPageCombiner = {
 				'<meta charset="UTF-8">' + '\n' +
 				'<title>' + sbCombineService.option["T"] + '</title>' + '\n' +
 				'<link rel="stylesheet" href="combine.css" media="all">' +
-				'<link rel="stylesheet" href="chrome://scrapbook/skin/combine.css" media="all">' + '\n' +
-				'<link rel="stylesheet" href="chrome://scrapbook/skin/annotation.css" media="all">' + '\n' +
+				'<link rel="stylesheet" href="chrome://scrapbook/skin/combine.css" media="all" data-sb-obj="stylesheet">' + '\n' +
+				'<link rel="stylesheet" href="chrome://scrapbook/skin/annotation.css" media="all" data-sb-obj="stylesheet">' + '\n' +
 				'</head>' + '\n' +
 				'<body>' + '\n';
 		}
