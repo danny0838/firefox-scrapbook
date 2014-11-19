@@ -89,16 +89,14 @@ var sbBrowserOverlay = {
 		document.getElementById("ScrapBookToolsMenu").hidden   = !sbCommonUtils.getPref("ui.toolsMenu", false);
 		// -- main menu
 		// update if it's shown as icon
-		var menu_old = document.getElementById("ScrapBookMenu");
-		var icon_mode_old = (menu_old.nodeName == 'toolbarbutton');
-		var icon_mode_new = sbCommonUtils.getPref("ui.menuBar.icon", false);
-		if (icon_mode_new != icon_mode_old) {
-			var menu_new = document.getElementById("ScrapBookMenu_hidden");
-			menu_old.id = "ScrapBookMenu_hidden";
-			menu_old.hidden = true;
-			menu_new.id = "ScrapBookMenu";
-			menu_new.hidden = false;
-			while (menu_old.hasChildNodes()) menu_new.appendChild(menu_old.firstChild);	
+		var menu = document.getElementById("ScrapBookMenu");
+		if (sbCommonUtils.getPref("ui.menuBar.icon", false)) {
+			menu.setAttribute("label", "");
+			menu.setAttribute("class", "menu-iconic");
+		}
+		else {
+			menu.setAttribute("label", menu.getAttribute("data-label"));
+			menu.setAttribute("class", "");
 		}
 		// update the database and sidebar
 		sbDataSource.backup();
