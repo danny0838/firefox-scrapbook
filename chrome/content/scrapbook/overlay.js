@@ -393,7 +393,9 @@ var sbBrowserOverlay = {
 			return document.getElementById(aID);
 		};
 		var prefContext  = sbCommonUtils.getPref("ui.contextMenu", false);
+		var prefContextSub = sbCommonUtils.getPref("ui.contextSubMenu", false);
 		var prefBookmark = sbCommonUtils.getPref("ui.bookmarkMenu", false);
+		getElement("ScrapBookContextSubmenu").hidden = !prefContext || !prefContextSub;
 		getElement("ScrapBookContextMenu0").hidden = !prefContext || onInput;
 		getElement("ScrapBookContextMenu1").hidden = !prefContext || !selected;
 		getElement("ScrapBookContextMenu2").hidden = !prefContext || !selected;
