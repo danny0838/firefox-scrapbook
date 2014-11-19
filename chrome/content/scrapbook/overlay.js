@@ -27,11 +27,11 @@ var sbBrowserOverlay = {
 
 	init: function()
 	{
-		document.getElementById("contentAreaContextMenu").addEventListener(
-			"popupshowing", this, false
-		);
-		this.refresh();
 		gBrowser.addProgressListener(this.webProgressListener);
+		document.getElementById("contentAreaContextMenu").addEventListener( "popupshowing", this, false);
+		this.refresh();
+		// context menu
+		// update if it's shown in a submenu
 		if (sbCommonUtils.getPref("ui.contextMenu", false) && 
 		    sbCommonUtils.getPref("ui.contextSubMenu", false)) {
 			var callback = function() {
@@ -44,6 +44,8 @@ var sbBrowserOverlay = {
 			};
 			window.setTimeout(callback, 1000);
 		}
+		// main menu
+		// update if it's shown as icon
 		if (sbCommonUtils.getPref("ui.menuBar.icon", false)) {
 			var menu   = document.getElementById("ScrapBookMenu");
 			var button = document.createElement("toolbarbutton");
@@ -59,6 +61,7 @@ var sbBrowserOverlay = {
 			menubar.appendChild(button);
 			menubar.removeChild(menu);
 		}
+		// hotkeys
 		var key = sbCommonUtils.getPref("key.menubar", "");
 		if (key.length == 1) {
 			var elt = document.getElementById("ScrapBookMenu");
@@ -97,9 +100,11 @@ var sbBrowserOverlay = {
 		this.dataTitle = "";
 		this.editMode = sbPageEditor.TOOLBAR.getAttribute("autoshow") == "true";
 		this.infoMode = sbInfoViewer.TOOLBAR.getAttribute("autoshow") == "true";
+		// update menus by ui settings
 		document.getElementById("ScrapBookMenu").hidden        = !sbCommonUtils.getPref("ui.menuBar", false);
 		document.getElementById("ScrapBookStatusPanel").hidden = !sbCommonUtils.getPref("ui.statusBar", false);
 		document.getElementById("ScrapBookToolsMenu").hidden   = !sbCommonUtils.getPref("ui.toolsMenu", false);
+		// update the database and sidebar
 		sbDataSource.backup();
 		this.setProtocolSubstitution();
 		var file = sbCommonUtils.getScrapBookDir().clone();
@@ -111,6 +116,7 @@ var sbBrowserOverlay = {
 			var ids = sbCommonUtils.getPref("ui.folderList", "");
 			sbCommonUtils.writeFile(file, ids, "UTF-8");
 		}
+		// fire a "location change" event, which updates the main browser window and editor and info toolbars
 		this.onLocationChange(gBrowser.currentURI.spec);
 	},
 
