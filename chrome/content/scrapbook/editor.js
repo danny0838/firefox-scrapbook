@@ -1947,6 +1947,7 @@ var sbAnnotationService = {
 		mainDiv.style.width = width + "px";
 		mainDiv.style.height = height + "px";
 		if ( isRelative ) {
+			mainDiv.style.position = "static";
 			mainDiv.style.margin = "16px auto";
 		}
 		else {
