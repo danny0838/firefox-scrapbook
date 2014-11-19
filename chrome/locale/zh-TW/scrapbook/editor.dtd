@@ -1,14 +1,14 @@
 <!ENTITY sb.toolbar.edit "編輯工具列">
 <!ENTITY sb.toolbar.info "顯示資訊列">
-<!ENTITY sb.edit.eraser "DOM Eraser: 將點選的區塊刪除，或可刪除單一標示。">
+<!ENTITY sb.edit.eraser "DOM 擦子: 將點選的區塊刪除，或可刪除單一標示。">
 <!ENTITY sb.edit.undo "復原">
 <!ENTITY sb.edit.save "存檔">
 <!ENTITY sb.edit.comment "展開文件評注欄">
 <!ENTITY sb.edit.sticky "自由註解"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.sticky.create "添增&sb.edit.sticky;"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.freenote.create "添增自由註解">
-<!ENTITY sb.edit.inline.add "為選取區添增註腳">
-<!ENTITY sb.edit.annotation.add "在選取區後添增 HTML 註解">
+<!ENTITY sb.edit.freenote.create "建立自由註解">
+<!ENTITY sb.edit.inline.add "為選取區加上行內註解">
+<!ENTITY sb.edit.annotation.add "在選取區後加上 HTML 註解">
 <!ENTITY sb.edit.attach.file "為選取區附加檔案">
 <!ENTITY sb.edit.attach.link "為選取區附加連結">
 <!ENTITY sb.edit.attach.innerlink "為選取區附加內部連結">
@@ -71,8 +71,8 @@
 <!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "插入待辦事項核取方塊 (已勾選)">
 <!ENTITY sb.edit.html.menuitem.wrapHTML "用模版格式化">
 <!ENTITY sb.edit.cutter "刪除選取區">
-<!ENTITY sb.edit.remove.iframe "移除所有 IFRAME 標籤">
-<!ENTITY sb.edit.remove.script "移除所有 SCRIPT 標籤">
+<!ENTITY sb.edit.remove.iframe "刪除所有 IFRAME 標籤">
+<!ENTITY sb.edit.remove.script "刪除所有 SCRIPT 標籤">
 <!ENTITY sb.highlighter "標示">
 <!ENTITY sb.highlighter.remove "刪除選取區內標示">
 <!ENTITY sb.highlighter.remove.all "刪除所有標示">
