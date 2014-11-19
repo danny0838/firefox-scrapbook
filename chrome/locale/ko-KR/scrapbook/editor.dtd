@@ -1,9 +1,11 @@
 <!ENTITY sb.toolbar.edit "도구 모음 편집">
 <!ENTITY sb.toolbar.info "도구 모음 정보">
-<!ENTITY sb.edit.eraser "DOM 삭제자: 불필요한 부분을 직접 클릭하여 삭제할 수 있습니다.">
+<!ENTITY sb.edit.folderView "Click to view the data directory.">
+<!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
 <!ENTITY sb.edit.undo "되돌리기">
 <!ENTITY sb.edit.save "변경 사항 저장">
 <!ENTITY sb.edit.comment "주석 영역 확장">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote.">
 <!ENTITY sb.edit.sticky "주석"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.sticky.create "&sb.edit.sticky; 만들기"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
@@ -12,6 +14,8 @@
 <!ENTITY sb.edit.attach.file "선택 부분에 파일 첨부">
 <!ENTITY sb.edit.attach.link "선택 부분에 링크 추가">
 <!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.cutterTool "Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.">
+<!ENTITY sb.edit.htmlTool "HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.">
 <!ENTITY sb.edit.html "HTML Editor">
 <!ENTITY sb.edit.html.color "Edit Color">
 <!ENTITY sb.edit.html.color.forText "Set text color:">
@@ -32,8 +36,8 @@
 <!ENTITY sb.edit.html.menu.insert "Insert">
 <!ENTITY sb.edit.html.menu.wrapper "Advanced">
 <!ENTITY sb.edit.html.menuitem.insertSource "Insert or Edit Source">
-<!ENTITY sb.edit.html.menuitem.removeFormat "Remove Formats">
-<!ENTITY sb.edit.html.menuitem.unlink "Remove Links">
+<!ENTITY sb.edit.html.menuitem.removeFormat "Clear Formats">
+<!ENTITY sb.edit.html.menuitem.unlink "Clear Links">
 <!ENTITY sb.edit.html.menuitem.save "Save the Page">
 <!ENTITY sb.edit.html.menuitem.quit "Switch HTMLEditor">
 <!ENTITY sb.edit.html.menuitem.bold "Switch Bold">
@@ -73,9 +77,10 @@
 <!ENTITY sb.edit.cutter "선택 부분 삭제">
 <!ENTITY sb.edit.remove.iframe "모든 IFRAME 태그 삭제">
 <!ENTITY sb.edit.remove.script "모든 SCRIPT 태그 삭제">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to add highlight for the selection.">
 <!ENTITY sb.highlighter "강조자">
-<!ENTITY sb.highlighter.remove "선택 부분 강조 해제">
-<!ENTITY sb.highlighter.remove.all "모든 강조 해제">
+<!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
+<!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
 <!ENTITY sb.source "소스 URL 열기">
 <!ENTITY sb.renew "다시 캡처">
 <!ENTITY sb.internalize "Localize Embedded External Media">

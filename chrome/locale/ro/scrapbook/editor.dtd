@@ -1,9 +1,11 @@
 <!ENTITY sb.toolbar.edit "Afișează bara de editare">
 <!ENTITY sb.toolbar.info "Afișează bara de informații">
-<!ENTITY sb.edit.eraser "Elimină elementele DOM (elemente pe care se poate face clic într-o pagină web)">
+<!ENTITY sb.edit.folderView "Click to view the data directory.">
+<!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
 <!ENTITY sb.edit.undo "Anulează operația">
 <!ENTITY sb.edit.save "Salvează modificările">
 <!ENTITY sb.edit.comment "Extinde zona comentariu">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote.">
 <!ENTITY sb.edit.sticky "notă adezivă"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.sticky.create "Creează o &sb.edit.sticky;"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
@@ -12,6 +14,8 @@
 <!ENTITY sb.edit.attach.file "Atașează un fișier la selecție">
 <!ENTITY sb.edit.attach.link "Atașează o legătură la selecție">
 <!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.cutterTool "Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.">
+<!ENTITY sb.edit.htmlTool "HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.">
 <!ENTITY sb.edit.html "HTML Editor">
 <!ENTITY sb.edit.html.color "Edit Color">
 <!ENTITY sb.edit.html.color.forText "Set text color:">
@@ -32,8 +36,8 @@
 <!ENTITY sb.edit.html.menu.insert "Insert">
 <!ENTITY sb.edit.html.menu.wrapper "Advanced">
 <!ENTITY sb.edit.html.menuitem.insertSource "Insert or Edit Source">
-<!ENTITY sb.edit.html.menuitem.removeFormat "Remove Formats">
-<!ENTITY sb.edit.html.menuitem.unlink "Remove Links">
+<!ENTITY sb.edit.html.menuitem.removeFormat "Clear Formats">
+<!ENTITY sb.edit.html.menuitem.unlink "Clear Links">
 <!ENTITY sb.edit.html.menuitem.save "Save the Page">
 <!ENTITY sb.edit.html.menuitem.quit "Switch HTMLEditor">
 <!ENTITY sb.edit.html.menuitem.bold "Switch Bold">
@@ -73,9 +77,10 @@
 <!ENTITY sb.edit.cutter "Elimină selecția">
 <!ENTITY sb.edit.remove.iframe "Elimină toate etichetele IFRAME">
 <!ENTITY sb.edit.remove.script "Elimină toate etichetele SCRIPT">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to add highlight for the selection.">
 <!ENTITY sb.highlighter "Evidențiere">
-<!ENTITY sb.highlighter.remove "Elimină evidențierile din selecție">
-<!ENTITY sb.highlighter.remove.all "Elimină toate evidențierile">
+<!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
+<!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
 <!ENTITY sb.source "Deschide adresa sursă">
 <!ENTITY sb.renew "Capturează din nou">
 <!ENTITY sb.internalize "Localize Embedded External Media">

@@ -1,9 +1,11 @@
 <!ENTITY sb.toolbar.edit "編輯工具列">
 <!ENTITY sb.toolbar.info "顯示資訊列">
-<!ENTITY sb.edit.eraser "DOM 擦子: 將點選的區塊刪除，或可刪除單一標示。">
+<!ENTITY sb.edit.folderView "點擊檢視資料目錄。">
+<!ENTITY sb.edit.eraser "DOM 擦子 - 刪除不想要的元素或 ScrapBook 註記。">
 <!ENTITY sb.edit.undo "復原">
 <!ENTITY sb.edit.save "存檔">
 <!ENTITY sb.edit.comment "展開文件評注欄">
+<!ENTITY sb.edit.annotationTool "註解工具 - 點擊建立自由註解。">
 <!ENTITY sb.edit.sticky "自由註解"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.sticky.create "添增&sb.edit.sticky;"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "建立自由註解">
@@ -12,6 +14,7 @@
 <!ENTITY sb.edit.attach.file "為選取區附加檔案">
 <!ENTITY sb.edit.attach.link "為選取區附加連結">
 <!ENTITY sb.edit.attach.innerlink "為選取區附加內部連結">
+<!ENTITY sb.edit.htmlTool "HTML 編輯器 - 點擊開啟或關閉，開啟後可自由編輯頁面內容，並可透過快捷鍵或右鍵選單調用編輯功能。">
 <!ENTITY sb.edit.html "HTML 編輯器">
 <!ENTITY sb.edit.html.color "編輯顏色">
 <!ENTITY sb.edit.html.color.forText "設定文字顏色:">
@@ -32,8 +35,8 @@
 <!ENTITY sb.edit.html.menu.insert "插入">
 <!ENTITY sb.edit.html.menu.wrapper "進階">
 <!ENTITY sb.edit.html.menuitem.insertSource "插入或編輯原始碼">
-<!ENTITY sb.edit.html.menuitem.removeFormat "移除格式">
-<!ENTITY sb.edit.html.menuitem.unlink "移除連結">
+<!ENTITY sb.edit.html.menuitem.removeFormat "清除格式">
+<!ENTITY sb.edit.html.menuitem.unlink "清除連結">
 <!ENTITY sb.edit.html.menuitem.save "儲存頁面">
 <!ENTITY sb.edit.html.menuitem.quit "切換 HTML 編輯器">
 <!ENTITY sb.edit.html.menuitem.bold "切換粗體">
@@ -70,12 +73,14 @@
 <!ENTITY sb.edit.html.menuitem.insertTodoBox "插入待辦事項核取方塊">
 <!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "插入待辦事項核取方塊 (已勾選)">
 <!ENTITY sb.edit.html.menuitem.wrapHTML "用模版格式化">
+<!ENTITY sb.edit.cutterTool "擦子工具 - 點擊刪除選取區，中鍵點擊清除選取區內的 ScrapBook 註記。">
 <!ENTITY sb.edit.cutter "刪除選取區">
 <!ENTITY sb.edit.remove.iframe "刪除所有 IFRAME 標籤">
 <!ENTITY sb.edit.remove.script "刪除所有 SCRIPT 標籤">
+<!ENTITY sb.highlighterTool "標示工具 - 點擊在選取區加上標示。">
 <!ENTITY sb.highlighter "標示">
-<!ENTITY sb.highlighter.remove "刪除選取區內標示">
-<!ENTITY sb.highlighter.remove.all "刪除所有標示">
+<!ENTITY sb.highlighter.remove "清除選取區內的 ScrapBook 註記">
+<!ENTITY sb.highlighter.remove.all "清除所有 ScrapBook 註記">
 <!ENTITY sb.source "開啟原始網址">
 <!ENTITY sb.renew "重新擷取">
 <!ENTITY sb.internalize "將內嵌的外部媒體存入資料目錄">

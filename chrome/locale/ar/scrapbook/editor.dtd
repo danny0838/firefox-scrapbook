@@ -1,9 +1,11 @@
 <!ENTITY sb.toolbar.edit "شريط التحرير">
 <!ENTITY sb.toolbar.info "شريط المعلومات">
-<!ENTITY sb.edit.eraser "ماسح دووم: أداة لإزالة العناصر المنقورة من صفحة وب">
+<!ENTITY sb.edit.folderView "Click to view the data directory.">
+<!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
 <!ENTITY sb.edit.undo "تراجع">
 <!ENTITY sb.edit.save "حفظ التغييرات">
 <!ENTITY sb.edit.comment "توسيع مكان التعليق">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote.">
 <!ENTITY sb.edit.sticky "حاشية ملتصقة"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.sticky.create "إعمل &sb.edit.sticky;"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
@@ -12,6 +14,8 @@
 <!ENTITY sb.edit.attach.file "إرفاق ملف بالمحدد">
 <!ENTITY sb.edit.attach.link "إرفاق وصلة بالمحدد">
 <!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.cutterTool "Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.">
+<!ENTITY sb.edit.htmlTool "HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.">
 <!ENTITY sb.edit.html "HTML Editor">
 <!ENTITY sb.edit.html.color "Edit Color">
 <!ENTITY sb.edit.html.color.forText "Set text color:">
@@ -32,8 +36,8 @@
 <!ENTITY sb.edit.html.menu.insert "Insert">
 <!ENTITY sb.edit.html.menu.wrapper "Advanced">
 <!ENTITY sb.edit.html.menuitem.insertSource "Insert or Edit Source">
-<!ENTITY sb.edit.html.menuitem.removeFormat "Remove Formats">
-<!ENTITY sb.edit.html.menuitem.unlink "Remove Links">
+<!ENTITY sb.edit.html.menuitem.removeFormat "Clear Formats">
+<!ENTITY sb.edit.html.menuitem.unlink "Clear Links">
 <!ENTITY sb.edit.html.menuitem.save "Save the Page">
 <!ENTITY sb.edit.html.menuitem.quit "Switch HTMLEditor">
 <!ENTITY sb.edit.html.menuitem.bold "Switch Bold">
@@ -73,9 +77,10 @@
 <!ENTITY sb.edit.cutter "أزل المحدد">
 <!ENTITY sb.edit.remove.iframe "إزالة جميع وسوم IFRAME">
 <!ENTITY sb.edit.remove.script "إزالة جميع وسوم السكربت">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to add highlight for the selection.">
 <!ENTITY sb.highlighter "المضيء">
-<!ENTITY sb.highlighter.remove "إزالة الإضاءة من المحدد">
-<!ENTITY sb.highlighter.remove.all "إزالة كل الإضاءات">
+<!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
+<!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
 <!ENTITY sb.source "فتح الموقع المصدر">
 <!ENTITY sb.renew "التقط مجددا">
 <!ENTITY sb.internalize "Localize Embedded External Media">

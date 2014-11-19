@@ -1,9 +1,11 @@
 <!ENTITY sb.toolbar.edit "编辑工具栏">
 <!ENTITY sb.toolbar.info "信息工具栏">
-<!ENTITY sb.edit.eraser "DOM 橡皮: 单击页面上的元素可以将该部分删除。">
+<!ENTITY sb.edit.folderView "点击检视资料目录。">
+<!ENTITY sb.edit.eraser "DOM 橡皮- 删除不想要的元素或 ScrapBook 注记">
 <!ENTITY sb.edit.undo "撤销">
 <!ENTITY sb.edit.save "保存">
 <!ENTITY sb.edit.comment "展开注释区">
+<!ENTITY sb.edit.annotationTool "注解工具 - 点击建立自由注解。">
 <!ENTITY sb.edit.sticky "即时贴"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.sticky.create "创建即时贴"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "创建自由注解">
@@ -12,6 +14,8 @@
 <!ENTITY sb.edit.attach.file "为所选内容附加文件">
 <!ENTITY sb.edit.attach.link "为所选内容附加链接">
 <!ENTITY sb.edit.attach.innerlink "为所选内容附加内部链接">
+<!ENTITY sb.edit.cutterTool "橡皮工具- 点击删除选取区，中键点击清除选取区内的 ScrapBook 注记。">
+<!ENTITY sb.edit.htmlTool "HTML 编辑器- 点击开启或关闭，开启后可自由编辑页面内容，并可透过快捷键或右键选单调用编辑功能。">
 <!ENTITY sb.edit.html "HTML 编辑器">
 <!ENTITY sb.edit.html.color "编辑颜色">
 <!ENTITY sb.edit.html.color.forText "设定文字颜色:">
@@ -32,8 +36,8 @@
 <!ENTITY sb.edit.html.menu.insert "插入">
 <!ENTITY sb.edit.html.menu.wrapper "高级">
 <!ENTITY sb.edit.html.menuitem.insertSource "插入或编辑源代码">
-<!ENTITY sb.edit.html.menuitem.removeFormat "移除格式">
-<!ENTITY sb.edit.html.menuitem.unlink "移除链接">
+<!ENTITY sb.edit.html.menuitem.removeFormat "清除格式">
+<!ENTITY sb.edit.html.menuitem.unlink "清除链接">
 <!ENTITY sb.edit.html.menuitem.save "保存页面">
 <!ENTITY sb.edit.html.menuitem.quit "切换 HTML 编辑器">
 <!ENTITY sb.edit.html.menuitem.bold "切换粗体">
@@ -73,9 +77,10 @@
 <!ENTITY sb.edit.cutter "删除所选内容">
 <!ENTITY sb.edit.remove.iframe "删除所有 IFRAME 标签">
 <!ENTITY sb.edit.remove.script "删除所有 SCRIPT 标签">
+<!ENTITY sb.highlighterTool "高亮标记工具- 点击在选取区加上高亮标记。">
 <!ENTITY sb.highlighter "高亮标记">
-<!ENTITY sb.highlighter.remove "取消所选高亮显示">
-<!ENTITY sb.highlighter.remove.all "取消所有高亮显示">
+<!ENTITY sb.highlighter.remove "清除选取区内的 ScrapBook 注记">
+<!ENTITY sb.highlighter.remove.all "清除所有 ScrapBook 注记">
 <!ENTITY sb.source "打开原始链接">
 <!ENTITY sb.renew "重新获取">
 <!ENTITY sb.internalize "将内嵌的外部媒体存入资料目录">
