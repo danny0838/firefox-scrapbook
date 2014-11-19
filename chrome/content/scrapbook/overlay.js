@@ -44,23 +44,6 @@ var sbBrowserOverlay = {
 			};
 			window.setTimeout(callback, 1000);
 		}
-		// main menu
-		// update if it's shown as icon
-		if (sbCommonUtils.getPref("ui.menuBar.icon", false)) {
-			var menu   = document.getElementById("ScrapBookMenu");
-			var button = document.createElement("toolbarbutton");
-			var attrs = menu.attributes;
-			for (var i = 0; i < attrs.length; i++)
-				button.setAttribute(attrs[i].nodeName, attrs[i].nodeValue);
-			while (menu.hasChildNodes())
-				button.appendChild(menu.firstChild);
-			button.removeAttribute("label");
-			button.setAttribute("type", "menu");
-			button.setAttribute("image", "chrome://scrapbook/skin/main_16.png");
-			var menubar = document.getElementById("main-menubar");
-			menubar.appendChild(button);
-			menubar.removeChild(menu);
-		}
 		// hotkeys
 		var key = sbCommonUtils.getPref("key.menubar", "");
 		if (key.length == 1) {
@@ -104,6 +87,19 @@ var sbBrowserOverlay = {
 		document.getElementById("ScrapBookMenu").hidden        = !sbCommonUtils.getPref("ui.menuBar", false);
 		document.getElementById("ScrapBookStatusPanel").hidden = !sbCommonUtils.getPref("ui.statusBar", false);
 		document.getElementById("ScrapBookToolsMenu").hidden   = !sbCommonUtils.getPref("ui.toolsMenu", false);
+		// -- main menu
+		// update if it's shown as icon
+		var menu_old = document.getElementById("ScrapBookMenu");
+		var icon_mode_old = (menu_old.nodeName == 'toolbarbutton');
+		var icon_mode_new = sbCommonUtils.getPref("ui.menuBar.icon", false);
+		if (icon_mode_new != icon_mode_old) {
+			var menu_new = document.getElementById("ScrapBookMenu_hidden");
+			menu_old.id = "ScrapBookMenu_hidden";
+			menu_old.hidden = true;
+			menu_new.id = "ScrapBookMenu";
+			menu_new.hidden = false;
+			while (menu_old.hasChildNodes()) menu_new.appendChild(menu_old.firstChild);	
+		}
 		// update the database and sidebar
 		sbDataSource.backup();
 		this.setProtocolSubstitution();

@@ -79,6 +79,11 @@
 				</rule>
 			</template>
 		</menu>
+		<toolbarbutton id="ScrapBookMenu_hidden" type="menu" image="chrome://scrapbook/skin/main_16.png" hidden="true"
+		               datasources="rdf:null" ref="urn:scrapbook:root" flags="dont-test-empty"
+		               insertafter="bookmarks-menu bookmarksMenu"
+		               oncommand="sbMenuHandler.onClick(event);"
+		               onclick="if (event.button == 1) sbMenuHandler.onClick(event);" />
 	</menubar>
 
 	<popupset id="mainPopupSet">
