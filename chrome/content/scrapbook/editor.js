@@ -705,6 +705,7 @@ var sbHtmlEditor = {
 
 		"Ctrl+Shift+L" : "attachLink",
 		"Ctrl+Shift+F" : "attachFile",
+		"Ctrl+Shift+B" : "backupFile",
 
 		"Ctrl+Shift+H" : "horizontalLine",
 		"Ctrl+Shift+D" : "insertDate",
@@ -1233,24 +1234,37 @@ var sbHtmlEditor = {
 				aDoc.execCommand("insertHTML", false, html);
 			}
 		}
-		// insert hist html ?
-		else if (data.hist_html_use) {
-			var title = data.hist_html;
-			var filename = "." + sbCommonUtils.splitFileName(htmlFile.leafName)[0] + "." + sbCommonUtils.getTimeStamp() + (title ? " " + title : "") + ".html";
-			var filename2 = sbCommonUtils.validateFileName(filename);
-			try {
-				var destFile = htmlFile.parent.clone();
-				destFile.append(filename2);
-				if ( destFile.exists() && destFile.isFile() ) {
-					if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [filename2])) ) return;
-					destFile.remove(false);
-				}
-				// copy the page
-				htmlFile.copyTo(destFile.parent, filename2);
-			} catch(ex) {
-				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename2]));
-				return;
+	},
+
+	backupFile : function(aDoc)
+	{
+		// we can save history only for those with valid id
+		if (!sbPageEditor.item) return;
+		// check if the current page is local and get its path
+		var htmlFile = sbCommonUtils.convertURLToFile(aDoc.location.href);
+		if (!htmlFile) return;
+		// check if it's an HTML file
+		if (sbCommonUtils.splitFileName(htmlFile.leafName)[1] != "html") return;
+		// prompt the dialog for user input
+		var data = {};
+		var accepted = window.top.openDialog("chrome://scrapbook/content/editor_backup.xul", "ScrapBook:backupFile", "chrome,modal,centerscreen,resizable", data);
+		if (data.result != 1) return;
+		// insert hist html
+		var title = data.hist_html;
+		var filename = "." + sbCommonUtils.splitFileName(htmlFile.leafName)[0] + "." + sbCommonUtils.getTimeStamp() + (title ? " " + title : "") + ".html";
+		var filename2 = sbCommonUtils.validateFileName(filename);
+		try {
+			var destFile = htmlFile.parent.clone();
+			destFile.append(filename2);
+			if ( destFile.exists() && destFile.isFile() ) {
+				if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [filename2])) ) return;
+				destFile.remove(false);
 			}
+			// copy the page
+			htmlFile.copyTo(destFile.parent, filename2);
+		} catch(ex) {
+			sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename2]));
+			return;
 		}
 	},
 

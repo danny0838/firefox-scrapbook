@@ -24,8 +24,9 @@
 <!ENTITY sb.edit.html.file "插入文件">
 <!ENTITY sb.edit.html.file.pick "插入文件:">
 <!ENTITY sb.edit.html.file.html "插入子页面:">
-<!ENTITY sb.edit.html.file.histHtml "备分当前页面:">
 <!ENTITY sb.edit.html.file.format "指定插入格式:">
+<!ENTITY sb.edit.html.backup "备份当前页面">
+<!ENTITY sb.edit.html.backup.desc "描述:">
 <!ENTITY sb.edit.html.menu.basic "字符">
 <!ENTITY sb.edit.html.menu.block "区块">
 <!ENTITY sb.edit.html.menu.insert "插入">
@@ -63,6 +64,7 @@
 <!ENTITY sb.edit.html.menuitem.justifyFull "左右对齐">
 <!ENTITY sb.edit.html.menuitem.attachLink "插入链接或内部链接">
 <!ENTITY sb.edit.html.menuitem.attachFile "插入文件或子页面">
+<!ENTITY sb.edit.html.menuitem.backupFile "建立此页面的备份">
 <!ENTITY sb.edit.html.menuitem.horizontalLine "插入水平线">
 <!ENTITY sb.edit.html.menuitem.insertDate "插入日期">
 <!ENTITY sb.edit.html.menuitem.insertTodoBox "插入待办事项选框">

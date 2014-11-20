@@ -24,8 +24,9 @@
 <!ENTITY sb.edit.html.file "Insert File">
 <!ENTITY sb.edit.html.file.pick "Insert file:">
 <!ENTITY sb.edit.html.file.html "Insert sub-page:">
-<!ENTITY sb.edit.html.file.histHtml "Backup current page:">
 <!ENTITY sb.edit.html.file.format "Select insert format:">
+<!ENTITY sb.edit.html.backup "Backup the Current Page">
+<!ENTITY sb.edit.html.backup.desc "Description:">
 <!ENTITY sb.edit.html.menu.basic "Text">
 <!ENTITY sb.edit.html.menu.block "Block">
 <!ENTITY sb.edit.html.menu.insert "Insert">
@@ -63,6 +64,7 @@
 <!ENTITY sb.edit.html.menuitem.justifyFull "Align Justify">
 <!ENTITY sb.edit.html.menuitem.attachLink "Insert a Link or Innerlink">
 <!ENTITY sb.edit.html.menuitem.attachFile "Insert a File or Sub-page">
+<!ENTITY sb.edit.html.menuitem.backupFile "Create a Backup for this Page">
 <!ENTITY sb.edit.html.menuitem.horizontalLine "Insert a Horizontal Rule">
 <!ENTITY sb.edit.html.menuitem.insertDate "Insert a Date">
 <!ENTITY sb.edit.html.menuitem.insertTodoBox "Insert a Todo Checkbox">
