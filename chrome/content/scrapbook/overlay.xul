@@ -95,7 +95,7 @@
 	</popupset>
 
 	<menupopup id="menu_ToolsPopup">
-		<menuitem id="ScrapBookToolsMenu" key="key_openScrapBookSidebar" observes="viewScrapBookSidebar" insertafter="devToolsSeparator" />
+		<menuitem id="ScrapBookToolsMenu" accesskey="K" key="key_openScrapBookSidebar" observes="viewScrapBookSidebar" />
 	</menupopup>
 
 	<menupopup id="contentAreaContextMenu">
