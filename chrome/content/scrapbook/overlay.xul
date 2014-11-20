@@ -24,7 +24,6 @@
 	<broadcasterset id="mainBroadcasterSet">
 		<broadcaster id="viewScrapBookSidebar"
 		             type="checkbox" autoCheck="false"
-		             label="ScrapBook X"
 		             group="sidebar" sidebartitle="ScrapBook X"
 		             sidebarurl="chrome://scrapbook/content/scrapbook.xul"
 		             onclick="if (event.button == 1) sbCommonUtils.openManageWindow();"
@@ -64,7 +63,7 @@
 				<menuitem id="ScrapBookMenubarItem2" key="key_ScrapBookCaptureAs" />
 				<menuitem id="ScrapBookMenubarItem3" key="key_BookmarkWithScrapBook" label="&sb.capture.bookmark;..." oncommand="sbBrowserOverlay.execBookmark('ScrapBookContextPicking'); event.stopPropagation();" />
 				<menuitem id="ScrapBookMenubarItem4" key="key_ScrapBookSaveAllTabs" label="&sb.capture.alltabs;..." oncommand="sbMenuHandler.execCaptureAllTabs(); event.stopPropagation();" />
-				<menuitem id="ScrapBookMenubarItem5" key="key_openScrapBookSidebar" sblabel="&sb.sidebar;" observes="viewScrapBookSidebar" />
+				<menuitem id="ScrapBookMenubarItem5" key="key_openScrapBookSidebar" label="&sb.sidebar;" observes="viewScrapBookSidebar" />
 				<menuseparator />
 			</menupopup>
 			<template>
@@ -94,7 +93,7 @@
 
 	<!-- main menu > [Tools] button -->
 	<menupopup id="menu_ToolsPopup">
-		<menuitem id="ScrapBookToolsMenu" accesskey="K" key="key_openScrapBookSidebar" observes="viewScrapBookSidebar" />
+		<menuitem id="ScrapBookToolsMenu" label="ScrapBook X" accesskey="K" key="key_openScrapBookSidebar" observes="viewScrapBookSidebar" />
 	</menupopup>
 
 	<!-- toolbar button -->
