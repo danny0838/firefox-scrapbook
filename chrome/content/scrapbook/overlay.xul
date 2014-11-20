@@ -38,10 +38,6 @@
 		<key id="key_BookmarkWithScrapBook" modifiers="accel shift" oncommand="sbBrowserOverlay.execBookmark('ScrapBookContextPicking');" />
 	</keyset>
 
-	<menupopup id="viewSidebarMenu">
-		<menuitem observes="viewScrapBookSidebar" key="key_openScrapBookSidebar" />
-	</menupopup>
-
 	<menubar id="main-menubar">
 		<menu id="ScrapBookMenu" class="menu-iconic" image="chrome://scrapbook/skin/main_16.png" data-label="ScrapBook X"
 		      datasources="rdf:null" ref="urn:scrapbook:root" flags="dont-test-empty"
