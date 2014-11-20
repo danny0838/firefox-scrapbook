@@ -836,7 +836,9 @@ var sbCommonUtils = {
 	 *
 	 * linemarker (span)
 	 * inline (span)
+	 * annotation (span)
 	 * link-url (a)
+	 * link-inner (a)
 	 * link-file (a)
 	 * freenote (div)
 	 * freenote-header
