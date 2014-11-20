@@ -100,7 +100,6 @@
 	<!-- toolbar button -->
 	<toolbarpalette id="BrowserToolbarPalette">
 		<toolbarbutton id="scrapbook-button"
-		               label="ScrapBook X"
 		               tooltiptext="ScrapBook X"
 		               class="toolbarbutton-1 chromeclass-toolbar-additional"
 		               observes="viewScrapBookSidebar"
