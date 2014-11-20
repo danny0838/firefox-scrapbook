@@ -123,7 +123,7 @@
 		</menu>
 		<!-- HTMLEditor -->
 		<menu id="ScrapBookContextMenu10" class="menu-iconic sb-htmleditor" label="&sb.edit.html;">
-			<menupopup>
+			<menupopup onpopupshowing="sbHtmlEditor.updatePopup();">
 				<menu label="&sb.edit.html.menu.basic;">
 					<menupopup>
 						<menuitem acceltext="Ctrl+B" value="bold" label="&sb.edit.html.menuitem.bold;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
@@ -170,23 +170,23 @@
 						<menuitem acceltext="Ctrl+Shift+F" value="attachFile" label="&sb.edit.html.menuitem.attachFile;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
 						<menuseparator />
 						<menuitem acceltext="Ctrl+Shift+H" value="horizontalLine" label="&sb.edit.html.menuitem.horizontalLine;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
-						<menuitem acceltext="Ctrl+Shift+D" value="insertDate" label="&sb.edit.html.menuitem.insertDate;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+						<menuitem id="ScrapBookEditHTML_insertDate" acceltext="Ctrl+Shift+D" value="insertDate" label="&sb.edit.html.menuitem.insertDate;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
 						<menuitem acceltext="Ctrl+Shift+C" value="insertTodoBox" label="&sb.edit.html.menuitem.insertTodoBox;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
 						<menuitem acceltext="Ctrl+Alt+Shift+C" value="insertTodoBoxDone" label="&sb.edit.html.menuitem.insertTodoBoxDone;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
 					</menupopup>
 				</menu>
 				<menu label="&sb.edit.html.menu.wrapper;">
 					<menupopup>
-						<menuitem acceltext="Ctrl+Alt+1" value="wrapHTML1" label="&sb.edit.html.menuitem.wrapHTML; 1" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
-						<menuitem acceltext="Ctrl+Alt+2" value="wrapHTML2" label="&sb.edit.html.menuitem.wrapHTML; 2" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
-						<menuitem acceltext="Ctrl+Alt+3" value="wrapHTML3" label="&sb.edit.html.menuitem.wrapHTML; 3" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
-						<menuitem acceltext="Ctrl+Alt+4" value="wrapHTML4" label="&sb.edit.html.menuitem.wrapHTML; 4" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
-						<menuitem acceltext="Ctrl+Alt+5" value="wrapHTML5" label="&sb.edit.html.menuitem.wrapHTML; 5" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
-						<menuitem acceltext="Ctrl+Alt+6" value="wrapHTML6" label="&sb.edit.html.menuitem.wrapHTML; 6" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
-						<menuitem acceltext="Ctrl+Alt+7" value="wrapHTML7" label="&sb.edit.html.menuitem.wrapHTML; 7" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
-						<menuitem acceltext="Ctrl+Alt+8" value="wrapHTML8" label="&sb.edit.html.menuitem.wrapHTML; 8" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
-						<menuitem acceltext="Ctrl+Alt+9" value="wrapHTML9" label="&sb.edit.html.menuitem.wrapHTML; 9" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
-						<menuitem acceltext="Ctrl+Alt+0" value="wrapHTML0" label="&sb.edit.html.menuitem.wrapHTML; 0" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+						<menuitem id="ScrapBookEditHTML_wrapHTML1" acceltext="Ctrl+Alt+1" value="wrapHTML1" label="&sb.edit.html.menuitem.wrapHTML; 1" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+						<menuitem id="ScrapBookEditHTML_wrapHTML2" acceltext="Ctrl+Alt+2" value="wrapHTML2" label="&sb.edit.html.menuitem.wrapHTML; 2" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+						<menuitem id="ScrapBookEditHTML_wrapHTML3" acceltext="Ctrl+Alt+3" value="wrapHTML3" label="&sb.edit.html.menuitem.wrapHTML; 3" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+						<menuitem id="ScrapBookEditHTML_wrapHTML4" acceltext="Ctrl+Alt+4" value="wrapHTML4" label="&sb.edit.html.menuitem.wrapHTML; 4" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+						<menuitem id="ScrapBookEditHTML_wrapHTML5" acceltext="Ctrl+Alt+5" value="wrapHTML5" label="&sb.edit.html.menuitem.wrapHTML; 5" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+						<menuitem id="ScrapBookEditHTML_wrapHTML6" acceltext="Ctrl+Alt+6" value="wrapHTML6" label="&sb.edit.html.menuitem.wrapHTML; 6" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+						<menuitem id="ScrapBookEditHTML_wrapHTML7" acceltext="Ctrl+Alt+7" value="wrapHTML7" label="&sb.edit.html.menuitem.wrapHTML; 7" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+						<menuitem id="ScrapBookEditHTML_wrapHTML8" acceltext="Ctrl+Alt+8" value="wrapHTML8" label="&sb.edit.html.menuitem.wrapHTML; 8" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+						<menuitem id="ScrapBookEditHTML_wrapHTML9" acceltext="Ctrl+Alt+9" value="wrapHTML9" label="&sb.edit.html.menuitem.wrapHTML; 9" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+						<menuitem id="ScrapBookEditHTML_wrapHTML0" acceltext="Ctrl+Alt+0" value="wrapHTML0" label="&sb.edit.html.menuitem.wrapHTML; 0" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
 					</menupopup>
 				</menu>
 				<menuseparator />

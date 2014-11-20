@@ -843,6 +843,21 @@ var sbHtmlEditor = {
 
 		callback.call(sbHtmlEditor, doc);
 	},
+	
+	updatePopup : function()
+	{
+		document.getElementById("ScrapBookEditHTML_insertDate").tooltipText = sbCommonUtils.getPref("edit.insertDateFormat", "") || "%Y-%m-%d %H:%M:%S";
+		document.getElementById("ScrapBookEditHTML_wrapHTML1").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.1", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML2").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.2", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML3").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.3", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML4").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.4", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML5").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.5", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML6").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.6", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML7").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.7", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML8").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.8", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML9").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.9", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML0").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.0", "") || "<code>{THIS}</code>";
+	},
 
 	quit : function(aDoc)
 	{
