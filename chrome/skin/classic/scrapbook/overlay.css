@@ -33,6 +33,8 @@ toolbar[iconsize="small"] #scrapbook-button {
 .sb-capture-target  > .menu-iconic-left image,
 .sb-capture-frame   > .menu-iconic-left image { width : 13px !important; height: 13px !important; }
 
+#ScrapBookContextSubmenu { list-style-image: url("chrome://scrapbook/skin/main_16.png"); }
+
 
 /* ::::: MENUBAR ::::: */
 

@@ -123,7 +123,7 @@
 			<menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this);" onpopuphiding="sbBrowserOverlay.destroyPopup(this);" />
 		</menu>
 		<!-- submenu placeholder -->
-		<menu id="ScrapBookContextSubmenu" label="ScrapBook X" accesskey="K" hidden="true"><menupopup /></menu>
+		<menu id="ScrapBookContextSubmenu" class="menu-iconic" label="ScrapBook X" accesskey="K" hidden="true"><menupopup /></menu>
 	</menupopup>
 
 	<!-- toolbox in the main browser window -->
