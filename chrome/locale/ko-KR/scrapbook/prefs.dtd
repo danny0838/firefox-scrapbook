@@ -19,7 +19,7 @@
 <!ENTITY sb.prefs.tabs.note "노트 편집">
 <!ENTITY sbx.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
-<!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format">
+<!ENTITY sbx.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data "데이터 저장 위치">
 <!ENTITY sb.prefs.data.default "기본값 (프로필 폴더)">
 <!ENTITY sb.prefs.data.custom "다음에 저장:">

@@ -19,7 +19,7 @@
 <!ENTITY sb.prefs.tabs.note "Изменить заметку">
 <!ENTITY sbx.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
-<!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format">
+<!ENTITY sbx.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data "Расположение сохраняемой информации">
 <!ENTITY sb.prefs.data.default "По умолчанию (каталог профиля)">
 <!ENTITY sb.prefs.data.custom "Сохранить информацию в">

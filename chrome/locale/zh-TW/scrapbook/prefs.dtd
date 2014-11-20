@@ -19,7 +19,7 @@
 <!ENTITY sb.prefs.tabs.note "編輯筆記">
 <!ENTITY sbx.prefs.edit.autoEditNoteX "筆記頁面自動進入編輯模式">
 <!ENTITY sbx.prefs.edit.insertDateFormat "插入日期格式 (strftime):">
-<!ENTITY sbx.prefs.edit.wrapperFormat "HTML 包裹器格式">
+<!ENTITY sbx.prefs.edit.wrapperFormat "HTML 格式化模版">
 <!ENTITY sb.prefs.data "擷取資料存放處">
 <!ENTITY sb.prefs.data.default "預設（在您的個人設定檔資料夾中）">
 <!ENTITY sb.prefs.data.custom "存放至">
