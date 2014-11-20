@@ -71,7 +71,6 @@ var sbBrowserOverlay = {
 		this.infoMode = sbInfoViewer.TOOLBAR.getAttribute("autoshow") == "true";
 		// update menus by ui settings
 		document.getElementById("ScrapBookMenu").hidden        = !sbCommonUtils.getPref("ui.menuBar", false);
-		document.getElementById("ScrapBookStatusPanel").hidden = !sbCommonUtils.getPref("ui.statusBar", false);
 		document.getElementById("ScrapBookToolsMenu").hidden   = !sbCommonUtils.getPref("ui.toolsMenu", false);
 		// -- context menu
 		// update if it's shown in a submenu

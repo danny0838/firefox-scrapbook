@@ -38,19 +38,6 @@
 		<key id="key_BookmarkWithScrapBook" modifiers="accel shift" oncommand="sbBrowserOverlay.execBookmark('ScrapBookContextPicking');" />
 	</keyset>
 
-	<popupset id="mainPopupSet">
-		<menupopup id="ScrapBookStatusPopup" onpopupshowing="sbInfoViewer.onPopupShowing(event);">
-			<menuitem id="ScrapBookStatusPopupR" label="&sb.renew;..."     oncommand="sbInfoViewer.renew(true);" onclick="if (event.button == 1) sbInfoViewer.renew(false);" class="menuitem-iconic sb-capture-target" />
-			<menuitem id="ScrapBookStatusPopupT" label="&sb.internalize;..." oncommand="sbInfoViewer.internalize();" class="menuitem-iconic sb-capture-target" />
-			<menuseparator />
-			<menuitem id="ScrapBookStatusPopupD" label="&sb.indicators;"   type="checkbox" oncommand="sbInfoViewer.toggleIndicator(this.getAttribute('checked'));" persist="checked" />
-			<menuitem id="ScrapBookStatusPopupI" label="&sb.toolbar.info;" type="checkbox" oncommand="sbInfoViewer.toggle();" />
-			<menuitem id="ScrapBookStatusPopupE" label="&sb.toolbar.edit;" type="checkbox" oncommand="sbPageEditor.toggle();" />
-			<menuseparator />
-			<menuitem id="ScrapBookEditBefore" label="&sb.editbefore;" type="checkbox" autocheck="false" oncommand="this.getAttribute('checked') == 'false' ? sbPageEditor.init() : sbPageEditor.exit();" />
-		</menupopup>
-	</popupset>
-
 	<!-- main menu button -->
 	<menubar id="main-menubar">
 		<menu id="ScrapBookMenu" class="menu-iconic" image="chrome://scrapbook/skin/main_16.png" data-label="ScrapBook X"
@@ -100,10 +87,22 @@
 	<toolbarpalette id="BrowserToolbarPalette">
 		<toolbarbutton id="scrapbook-button"
 		               tooltiptext="ScrapBook X"
+					   type="menu-button"
 		               class="toolbarbutton-1 chromeclass-toolbar-additional"
-		               observes="viewScrapBookSidebar"
-		               context="ScrapBookStatusPopup"
-		               ondragover="toggleSidebar('viewScrapBookSidebar',true);" />
+		               oncommand="if (event.originalTarget.localName == 'toolbarbutton') toggleSidebar('viewScrapBookSidebar');"
+		               onclick="if (event.button == 1) sbCommonUtils.openManageWindow();"
+		               ondragover="toggleSidebar('viewScrapBookSidebar',true);">
+			<menupopup id="ScrapBookStatusPopup" onpopupshowing="sbInfoViewer.onPopupShowing(event);">
+				<menuitem id="ScrapBookStatusPopupR" label="&sb.renew;..."     oncommand="sbInfoViewer.renew(true);" onclick="if (event.button == 1) sbInfoViewer.renew(false);" class="menuitem-iconic sb-capture-target" />
+				<menuitem id="ScrapBookStatusPopupT" label="&sb.internalize;..." oncommand="sbInfoViewer.internalize();" class="menuitem-iconic sb-capture-target" />
+				<menuseparator />
+				<menuitem id="ScrapBookStatusPopupD" label="&sb.indicators;"   type="checkbox" oncommand="sbInfoViewer.toggleIndicator(this.getAttribute('checked'));" persist="checked" />
+				<menuitem id="ScrapBookStatusPopupI" label="&sb.toolbar.info;" type="checkbox" oncommand="sbInfoViewer.toggle();" />
+				<menuitem id="ScrapBookStatusPopupE" label="&sb.toolbar.edit;" type="checkbox" oncommand="sbPageEditor.toggle();" />
+				<menuseparator />
+				<menuitem id="ScrapBookEditBefore" label="&sb.editbefore;" type="checkbox" autocheck="false" oncommand="this.getAttribute('checked') == 'false' ? sbPageEditor.init() : sbPageEditor.exit();" />
+			</menupopup>
+		</toolbarbutton>
 	</toolbarpalette>
 
 	<!-- context menu item(s) -->
@@ -185,17 +184,5 @@
 			</toolbar>
 		</toolbox>
 	</vbox>
-
-	<!-- status bar button -->
-	<!-- available in Firefox < 4.0 or with Status-4-ever addon -->
-	<statusbar id="status-bar">
-		<statusbarpanel id="ScrapBookStatusPanel"
-		                class="statusbarpanel-menu-iconic"
-		                src="chrome://scrapbook/skin/main.png"
-		                style="padding: 0px 2px;"
-		                popup="ScrapBookStatusPopup"
-		                onclick="if (event.button == 1) toggleSidebar('viewScrapBookSidebar'); event.stopPropagation();">
-		</statusbarpanel>
-	</statusbar>
 
 </overlay>
