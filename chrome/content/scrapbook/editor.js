@@ -582,12 +582,12 @@ var sbPageEditor = {
 
 	documentBeforeSave : function(aDoc)
 	{
-		// save all sticky
+		// save all freenotes
 		var nodes = aDoc.getElementsByTagName("div");
 		for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
 			var node = nodes[i];
-			if ( sbCommonUtils.getSbObjectType(node) == "sticky" && node.getAttribute("data-sb-active")) {
-				sbAnnotationService.saveSticky(node);
+			if ( sbCommonUtils.getSbObjectType(node) == "freenote" && node.getAttribute("data-sb-active")) {
+				sbAnnotationService.saveFreenote(node);
 			}
 		}
 		// remove temp styles
@@ -1791,8 +1791,12 @@ var sbDOMEraser = {
 
 var sbAnnotationService = {
 
-	DEFAULT_WIDTH  : 250,
-	DEFAULT_HEIGHT : 100,
+	FREENOTE_DEFAULT_WIDTH : 250,
+	FREENOTE_DEFAULT_HEIGHT : 100,
+	FREENOTE_MIN_WIDTH : 100,
+	FREENOTE_MIN_HEIGHT : 40,
+	FREENOTE_HEADER_HEIGHT : 11,
+	FREENOTE_FOOTER_HEIGHT : 18,
 	offsetX : 0,
 	offsetY : 0,
 	isMove  : true,
@@ -1813,27 +1817,17 @@ var sbAnnotationService = {
 		{
 			switch ( sbCommonUtils.getSbObjectType(aEvent.originalTarget) )
 			{
-				case "sticky" :
-					var sticky = aEvent.originalTarget;
-					if (!sticky.hasAttribute("data-sb-active")) {
-						sbAnnotationService.editSticky(sticky);
-					}
-					// for downward compatibility
-					else if ( sticky.childNodes.length == 2 ) {
-						sbAnnotationService.editSticky(sticky);
+				case "freenote" :
+					var freenote = aEvent.originalTarget;
+					if (!freenote.hasAttribute("data-sb-active")) {
+						sbAnnotationService.editFreenote(freenote);
 					}
 					break;
-				case "sticky-header" :
-					var sticky = aEvent.originalTarget.parentNode;
-					if (sticky.getAttribute("data-sb-active")==="1") {
-						sbAnnotationService.startDrag(aEvent, true);
-					}
+				case "freenote-header" :
+					sbAnnotationService.startDrag(aEvent, true);
 					break;
-				case "sticky-footer" :
-					var sticky = aEvent.originalTarget.parentNode;
-					if (sticky.getAttribute("data-sb-active")==="1") {
-						sbAnnotationService.startDrag(aEvent, false);
-					}
+				case "freenote-footer" :
+					sbAnnotationService.startDrag(aEvent, false);
 					break;
 				case "inline" :
 					sbAnnotationService.editInline(aEvent.originalTarget);
@@ -1841,11 +1835,46 @@ var sbAnnotationService = {
 				case "annotation" :
 					sbAnnotationService.editAnnotation(aEvent.originalTarget);
 					break;
+				case "sticky" :
+				case "sticky-header" :
+				case "sticky-footer" :
+				case "sticky-save" :
+				case "sticky-delete" :
+					// for downward compatibility with ScrapBook X <= 1.12.0a34
+					// sticky annotation is created in old versions, replace it with a freenote
+					var sticky = aEvent.originalTarget;
+					while (sbCommonUtils.getSbObjectType(sticky)!="sticky") sticky = sticky.parentNode;
+					if (sticky.lastChild.nodeName == "#text") {
+						// general cases
+						var text = sticky.lastChild.data;
+					}
+					else {
+						// SB/SBP unsaved sticky
+						var text = sticky.childNodes[1].value;
+					}
+					sbAnnotationService.createFreenote({
+						element: sticky,
+						content: sbCommonUtils.escapeHTML(text, true).replace("\n", "<br>"),
+						isRelative: sticky.className.indexOf("scrapbook-sticky-relative") != -1,
+					});
+					break;
 				case "block-comment" :
 					// for downward compatibility with SB <= 0.17.0
-					// block-comment is created in old versions, replace it with a sticky note
-					sbAnnotationService.createSticky([aEvent.originalTarget.previousSibling, aEvent.originalTarget.firstChild.data]);
-					aEvent.originalTarget.parentNode.removeChild(aEvent.originalTarget);
+					// block-comment is created in old versions, replace it with a freenote
+					var bcomment = aEvent.originalTarget;
+					if (bcomment.firstChild.nodeName == "#text") {
+						// general cases
+						var text = bcomment.firstChild.data;
+					}
+					else {
+						// unsaved block comment
+						var text = bcomment.firstChild.firstChild.value;
+					}
+					sbAnnotationService.createFreenote({
+						element: bcomment,
+						content: sbCommonUtils.escapeHTML(text, true),
+						isRelative: true,
+					});
 					break;
 			}
 		}
@@ -1861,118 +1890,219 @@ var sbAnnotationService = {
 		{
 			switch ( sbCommonUtils.getSbObjectType(aEvent.originalTarget) )
 			{
-				case "sticky-save" :
-					sbAnnotationService.saveSticky(aEvent.originalTarget.parentNode.parentNode);
+				case "freenote-save" :
+					sbAnnotationService.saveFreenote(aEvent.originalTarget.parentNode.parentNode);
 					break;
-				case "sticky-delete" :
-					sbAnnotationService.deleteSticky(aEvent.originalTarget.parentNode.parentNode);
+				case "freenote-delete" :
+					sbAnnotationService.deleteFreenote(aEvent.originalTarget.parentNode.parentNode);
 					break;
 			}
 		}
 	},
 
-	createSticky : function(aPreset)
+	/**
+	 * @param preset { element: <object>, content: <string>, isRelative: <bool> }
+	 */
+	createFreenote : function(preset)
 	{
 		var win = sbCommonUtils.getFocusedWindow();
 		if ( win.document.body instanceof HTMLFrameSetElement ) win = win.frames[0];
 		sbPageEditor.allowUndo(win.document);
-		var targetNode;
-		var isRelative = true;
-		if ( aPreset ) {
-			targetNode = findTargetNode(aPreset[0]);
+
+		// place at the target
+		if (preset) {
+			var isRelative = preset.isRelative;
+			var targetNode = preset.element;
 		}
 		else {
 			var sel = sbPageEditor.getSelection(win);
 			if (sel) {
-				targetNode = findTargetNode(sel.anchorNode);
+				// relative to the target element
+				var isRelative = true;
+				var targetNode = findTargetNode(sel.anchorNode);
 			}
 			else {
-				targetNode = win.document.body;
-				isRelative = false;
+				// absolute (in the body element)
+				var isRelative = false;
 			}
 		}
-		var div = this.duplicateElement(isRelative, false,
-			win.scrollX + Math.round((win.innerWidth  - this.DEFAULT_WIDTH ) / 2),
-			win.scrollY + Math.round((win.innerHeight - this.DEFAULT_HEIGHT) / 2),
-			this.DEFAULT_WIDTH, this.DEFAULT_HEIGHT
-		);
-		if ( aPreset ) div.appendChild(win.document.createTextNode(aPreset[1]));
-		if (isRelative) {
-			targetNode.parentNode.insertBefore(div, targetNode.nextSibling);
+
+		// create a new freenote
+		var mainDiv = win.content.document.createElement("DIV");
+		mainDiv.setAttribute("data-sb-obj", "freenote");
+		mainDiv.style.cursor = "help";
+		mainDiv.style.overflow = "visible";
+		mainDiv.style.margin = "0px";
+		mainDiv.style.border = "1px solid #CCCCCC";
+		mainDiv.style.borderTopWidth = (this.FREENOTE_HEADER_HEIGHT + 1) + "px";
+		mainDiv.style.background = "#FAFFFA";
+		mainDiv.style.opacity = "0.95";
+		mainDiv.style.padding = "0px";
+		mainDiv.style.zIndex = "500000";
+		mainDiv.style.textAlign = "start";
+		mainDiv.style.fontSize = "small";
+		mainDiv.style.lineHeight = "1.2em";
+		mainDiv.style.wordWrap = "break-word";
+		var width = this.FREENOTE_DEFAULT_WIDTH;
+		var height = this.FREENOTE_DEFAULT_HEIGHT;
+		mainDiv.style.width = width + "px";
+		mainDiv.style.height = height + "px";
+		if ( isRelative ) {
+			mainDiv.style.position = "static";
+			mainDiv.style.margin = "16px auto";
 		}
 		else {
-			targetNode.appendChild(div);
-		}
-		if ( !win.document.getElementById("scrapbook-sticky-css") )
-		{
-			var linkNode = win.document.createElement("link");
-			linkNode.setAttribute("data-sb-obj", "stylesheet");
-			linkNode.setAttribute("media", "all");
-			linkNode.setAttribute("href", "chrome://scrapbook/skin/annotation.css");
-			linkNode.setAttribute("type", "text/css");
-			linkNode.setAttribute("id", "scrapbook-sticky-css");
-			linkNode.setAttribute("rel", "stylesheet");
-			var headNode = win.document.getElementsByTagName("head")[0];
-			if ( !headNode ) return;
-			headNode.appendChild(win.document.createTextNode("\n"));
-			headNode.appendChild(linkNode);
-			headNode.appendChild(win.document.createTextNode("\n"));
-		}
-		this._editSticky(div);
-		
-		function findTargetNode(aNode) {
-			var targetNode = aNode;
-			var parentNode = targetNode.parentNode;
-			while (["BODY", "DIV", "TD", "LI"].indexOf(parentNode.nodeName) == -1) {
-				targetNode = parentNode;
-				parentNode = targetNode.parentNode;
+			mainDiv.style.position = "absolute";
+			if (preset) {
+				mainDiv.style.left = targetNode.style.left;
+				mainDiv.style.top  = targetNode.style.top;
 			}
-			while (targetNode.nextSibling && sbCommonUtils.getSbObjectType(targetNode.nextSibling) == "sticky")  {
+			else {
+				var left = win.scrollX + Math.round((win.innerWidth - width) / 2);
+				var top = win.scrollY + Math.round((win.innerHeight - height) / 2);
+				mainDiv.style.left = left + "px";
+				mainDiv.style.top  = top  + "px";
+			}
+		}
+		if (preset) {
+			mainDiv.innerHTML = preset.content;
+		}
+		
+		// append the freenote
+		if (isRelative) {
+			if (targetNode === win.document.body) {
+				targetNode.appendChild(mainDiv);
+			}
+			else if (targetNode.nextSibling) {
+				targetNode.parentNode.insertBefore(mainDiv, targetNode.nextSibling);
+			}
+			else {
+				targetNode.parentNode.appendChild(mainDiv);
+			}
+		}
+		else {
+			win.document.body.appendChild(mainDiv);
+		}
+		if (preset) {
+			targetNode.parentNode.removeChild(targetNode);
+		}
+
+		// edit the freenote
+		this._editFreenote(mainDiv);
+
+		function findTargetNode(refNode) {
+			var targetNode = refNode;
+			// must be one of these block elements
+			while (["BODY", "DIV", "BLOCKQUOTE", "PRE", "P", "TD", "LI", "DT", "DD"].indexOf(targetNode.nodeName) == -1 || sbCommonUtils.getSbObjectType(targetNode)) {
+				targetNode = targetNode.parentNode;
+			}
+			// if it's before a freenote, move it after
+			while (targetNode.nextSibling && sbCommonUtils.getSbObjectType(targetNode.nextSibling) == "freenote")  {
 				targetNode = targetNode.nextSibling;
 			}
 			return targetNode;
 		}
 	},
 
-	editSticky : function(oldElem)
+	editFreenote : function(mainDiv)
 	{
-		sbPageEditor.allowUndo(oldElem.ownerDocument);
-		this._editSticky(oldElem);
+		sbPageEditor.allowUndo(mainDiv.ownerDocument);
+		this._editFreenote(mainDiv);
 	},
 
-	_editSticky : function(oldElem)
+	_editFreenote : function(mainDiv)
 	{
-		var newElem = this.duplicateElement(
-			oldElem.className.indexOf("scrapbook-sticky-relative") != -1, true, 
-			parseInt(oldElem.style.left, 10), parseInt(oldElem.style.top, 10), 
-			parseInt(oldElem.style.width, 10), parseInt(oldElem.style.height, 10)
-		);
-		newElem.firstChild.nextSibling.appendChild(
-			newElem.ownerDocument.createTextNode(oldElem.lastChild.data || "")
-		);
-		oldElem.parentNode.replaceChild(newElem, oldElem);
-		this.adjustTextArea(newElem);
-		setTimeout(function(){ newElem.firstChild.nextSibling.focus(); }, 100);
+		var doc = mainDiv.ownerDocument;
+		mainDiv.setAttribute("data-sb-active", "1");
+
+		var headDiv = doc.createElement("DIV");
+		headDiv.setAttribute("data-sb-obj", "freenote-header");
+		headDiv.style.cursor = "move";
+		headDiv.style.position = "absolute";
+		headDiv.style.margin = "0px";
+		headDiv.style.marginTop = -this.FREENOTE_HEADER_HEIGHT + "px";
+		headDiv.style.border = "none";
+		headDiv.style.background = "#CCCCCC";
+		headDiv.style.padding = "0px";
+		headDiv.style.width = "inherit";
+		headDiv.style.height = this.FREENOTE_HEADER_HEIGHT + "px";
+
+		var bodyDiv = doc.createElement("DIV");
+		bodyDiv.setAttribute("data-sb-obj", "freenote-body");
+		bodyDiv.innerHTML = mainDiv.innerHTML;
+		bodyDiv.setAttribute("contentEditable", true);
+		bodyDiv.style.cursor = "auto";
+		bodyDiv.style.overflow = "auto";
+		bodyDiv.style.margin = "0px";
+		bodyDiv.style.border = "none";
+		bodyDiv.style.background = "#FFFFFF";
+		bodyDiv.style.padding = "0px";
+		bodyDiv.style.fontSize = "inherit";
+		bodyDiv.style.lineHeight = "inherit";
+		bodyDiv.style.textAlign = "inherit";
+
+		var footDiv = doc.createElement("DIV");
+		footDiv.setAttribute("data-sb-obj", "freenote-footer");
+		footDiv.style.cursor = "se-resize";
+		footDiv.style.margin = "0px";
+		footDiv.style.border = "none";
+		footDiv.style.background = "url('chrome://scrapbook/skin/freenote_resizer.png') right bottom no-repeat";
+		footDiv.style.padding = "0px";
+		footDiv.style.textAlign = "inherit";
+		footDiv.style.height = this.FREENOTE_FOOTER_HEIGHT + "px";
+
+		var button1  = doc.createElement("INPUT");
+		button1.setAttribute("data-sb-obj", "freenote-save");
+		button1.setAttribute("type", "image");
+		button1.setAttribute("src", "chrome://scrapbook/skin/freenote_save.gif");
+		button1.style.margin = "1px 2px";
+		button1.style.border = "none";
+		button1.style.padding = "0px";
+		button1.style.width = "16px";
+		button1.style.height = "16px";
+		button1.style.verticalAlign = "baseline";
+		var button2  = doc.createElement("INPUT");
+		button2.setAttribute("data-sb-obj", "freenote-delete");
+		button2.setAttribute("type", "image");
+		button2.setAttribute("src", "chrome://scrapbook/skin/freenote_delete.gif");
+		button2.style.margin = "1px 2px";
+		button2.style.border = "none";
+		button2.style.padding = "0px";
+		button2.style.width = "16px";
+		button2.style.height = "16px";
+		button2.style.verticalAlign = "baseline";
+		footDiv.appendChild(button1);
+		footDiv.appendChild(button2);
+
+		mainDiv.innerHTML = "";
+		mainDiv.appendChild(headDiv);
+		mainDiv.appendChild(bodyDiv);
+		mainDiv.appendChild(footDiv);
+		this._adjustEditArea(mainDiv);
+
+		setTimeout(function(){ bodyDiv.focus(); }, 0);
 	},
 
-	saveSticky : function(sticky)
+	saveFreenote : function(mainDiv)
 	{
-		var header = sticky.firstChild;
-		var textarea = header.nextSibling;
-		var footer = sticky.lastChild;
-		sticky.replaceChild(sticky.ownerDocument.createTextNode(textarea.value), textarea);
-		sticky.removeChild(footer);
-		sticky.removeAttribute("data-sb-active");
-		header.removeAttribute("data-sb-active");
+		mainDiv.removeAttribute("data-sb-active");
+		mainDiv.innerHTML = mainDiv.childNodes[1].innerHTML;
 	},
 
-	deleteSticky : function(sticky)
+	deleteFreenote : function(mainDiv)
 	{
-		sticky.parentNode.removeChild(sticky);
+		mainDiv.parentNode.removeChild(mainDiv);
+	},
+
+	_adjustEditArea : function(mainDiv)
+	{
+		var h = Math.max(parseInt(mainDiv.style.height, 10) - this.FREENOTE_FOOTER_HEIGHT, 0);
+		mainDiv.childNodes[1].style.height = h + "px";
 	},
 
 	startDrag : function(aEvent, isMove)
 	{
+		aEvent.preventDefault();
 		this.target = aEvent.originalTarget.parentNode;
 		this.isMove = isMove;
 		this.offsetX = aEvent.clientX - parseInt(this.target.style[this.isMove ? "left" : "width" ], 10);
@@ -1983,9 +2113,20 @@ var sbAnnotationService = {
 
 	onDrag : function(aEvent)
 	{
-		var x = aEvent.clientX - this.offsetX; if ( x < 0 ) x = 0; this.target.style[this.isMove ? "left" : "width" ] = x + "px";
-		var y = aEvent.clientY - this.offsetY; if ( y < 0 ) y = 0; this.target.style[this.isMove ? "top"  : "height"] = y + "px";
-		if ( !this.isMove && this.target.firstChild.nextSibling instanceof HTMLTextAreaElement ) this.adjustTextArea(this.target);
+		aEvent.preventDefault();
+		if (this.isMove) {
+			var x = aEvent.clientX - this.offsetX;
+			var y = aEvent.clientY - this.offsetY;
+			this.target.style.left = x + "px";
+			this.target.style.top = y + "px";
+		}
+		else {
+			var x = Math.max(aEvent.clientX - this.offsetX, this.FREENOTE_MIN_WIDTH);
+			var y = Math.max(aEvent.clientY - this.offsetY, this.FREENOTE_MIN_HEIGHT);
+			this.target.style.width = x + "px";
+			this.target.style.height = y + "px";
+			this._adjustEditArea(this.target);
+		}
 	},
 
 	stopDrag : function(aEvent)
@@ -1994,51 +2135,6 @@ var sbAnnotationService = {
 		aEvent.view.document.removeEventListener("mousemove", this.handleEvent, true);
 		aEvent.view.document.removeEventListener("mouseup",   this.handleEvent, true);
 	},
-
-	adjustTextArea : function(aTarget)
-	{
-		var h = parseInt(aTarget.style.height, 10) - 10 - 16; if ( h < 0 ) h = 0;
-		aTarget.firstChild.nextSibling.style.height = h + "px";
-	},
-
-	duplicateElement : function(isRelative, isEditable, aLeft, aTop, aWidth, aHeight)
-	{
-		var mainDiv = window.content.document.createElement("DIV");
-		var headDiv = window.content.document.createElement("DIV");
-		headDiv.className = "scrapbook-sticky-header";
-		headDiv.setAttribute("data-sb-obj", "sticky-header");
-		mainDiv.appendChild(headDiv);
-		if ( isEditable )
-		{
-			mainDiv.setAttribute("data-sb-active", "1");
-			if ( !isRelative ) headDiv.setAttribute("data-sb-active", "1");
-			var textArea = window.content.document.createElement("TEXTAREA");
-			var footDiv  = window.content.document.createElement("DIV");
-			var button1  = window.content.document.createElement("INPUT");
-			var button2  = window.content.document.createElement("INPUT");
-			button1.setAttribute("type", "image"); button1.setAttribute("src", "chrome://scrapbook/skin/sticky_save.png");
-			button1.setAttribute("data-sb-obj", "sticky-save");
-			button2.setAttribute("type", "image"); button2.setAttribute("src", "chrome://scrapbook/skin/sticky_delete.png");
-			button2.setAttribute("data-sb-obj", "sticky-delete");
-			footDiv.className = "scrapbook-sticky-footer";
-			footDiv.setAttribute("data-sb-obj", "sticky-footer");
-			footDiv.setAttribute("data-sb-active", "1");
-			footDiv.appendChild(button1); footDiv.appendChild(button2);
-			mainDiv.appendChild(textArea); mainDiv.appendChild(footDiv);
-		}
-		if ( !isRelative )
-		{
-			mainDiv.style.left = aLeft + "px";
-			mainDiv.style.top  = aTop  + "px";
-			mainDiv.style.position = "absolute";
-		}
-		mainDiv.style.width  = (aWidth  || this.DEFAULT_WIDTH)  + "px";
-		mainDiv.style.height = (aHeight || this.DEFAULT_HEIGHT) + "px";
-		mainDiv.setAttribute("data-sb-obj", "sticky");
-		mainDiv.className = "scrapbook-sticky" + (isRelative ? " scrapbook-sticky-relative" : "");  // for compatibility
-		return mainDiv;
-	},
-
 
 	addInline : function()
 	{

@@ -4,8 +4,9 @@
 <!ENTITY sb.edit.undo "되돌리기">
 <!ENTITY sb.edit.save "변경 사항 저장">
 <!ENTITY sb.edit.comment "주석 영역 확장">
-<!ENTITY sb.edit.sticky "주석">
-<!ENTITY sb.edit.sticky.create "&sb.edit.sticky; 만들기">
+<!ENTITY sb.edit.sticky "주석"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "&sb.edit.sticky; 만들기"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "선택 부분에 인라인 주석 추가">
 <!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "선택 부분에 파일 첨부">

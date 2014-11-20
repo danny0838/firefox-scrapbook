@@ -4,8 +4,9 @@
 <!ENTITY sb.edit.undo "復原">
 <!ENTITY sb.edit.save "存檔">
 <!ENTITY sb.edit.comment "展開文件評注欄">
-<!ENTITY sb.edit.sticky "自由註解">
-<!ENTITY sb.edit.sticky.create "添增&sb.edit.sticky;">
+<!ENTITY sb.edit.sticky "自由註解"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "添增&sb.edit.sticky;"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "添增自由註解">
 <!ENTITY sb.edit.inline.add "為選取區添增註腳">
 <!ENTITY sb.edit.annotation.add "在選取區後添增 HTML 註解">
 <!ENTITY sb.edit.attach.file "為選取區附加檔案">

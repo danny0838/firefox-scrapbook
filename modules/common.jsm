@@ -838,7 +838,13 @@ var sbCommonUtils = {
 	 * inline (span)
 	 * link-url (a)
 	 * link-file (a)
-	 * sticky (div)
+	 * freenote (div)
+	 * freenote-header
+	 * freenote-body
+	 * freenote-footer
+	 * freenote-save
+	 * freenote-delete
+	 * sticky (div) (for downward compatibility with SBX <= 1.12.0a34)
 	 * sticky-header
 	 * sticky-footer
 	 * sticky-save
@@ -867,7 +873,8 @@ var sbCommonUtils = {
 				return "sticky";
 			case "scrapbook-sticky-header":
 				return "sticky-header";
-			
+			case "scrapbook-sticky-footer":
+				return "sticky-footer";
 			case "scrapbook-block-comment":
 				return "block-comment";
 		}

@@ -154,7 +154,7 @@
 						<menuitem id="ScrapBookHighlighterM8" type="radio" label="&sb.highlighter;8" oncommand="sbPageEditor.highlight(8);" />
 					</menupopup>
 				</toolbarbutton>
-				<toolbarbutton id="ScrapBookEditAnnotation" type="menu-button" tooltiptext="&sb.edit.sticky.create;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbAnnotationService.createSticky();" accesskey="A">
+				<toolbarbutton id="ScrapBookEditAnnotation" type="menu-button" tooltiptext="&sb.edit.freenote.create;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbAnnotationService.createFreenote();" accesskey="A">
 					<menupopup>
 						<menuitem label="&sb.edit.attach.link;" oncommand="sbAnnotationService.attach('L');" />
 						<menuitem label="&sb.edit.attach.innerlink;" oncommand="sbAnnotationService.attach('I');" />
@@ -162,7 +162,7 @@
 						<menuitem label="&sb.edit.inline.add;"  oncommand="sbAnnotationService.addInline();" />
 						<menuitem label="&sb.edit.annotation.add;"  oncommand="sbAnnotationService.addAnnotation();" />
 						<menuseparator />
-						<menuitem label="&sb.edit.sticky.create;"  oncommand="sbAnnotationService.createSticky();" />
+						<menuitem label="&sb.edit.freenote.create;"  oncommand="sbAnnotationService.createFreenote();" />
 					</menupopup>
 				</toolbarbutton>
 				<toolbarbutton id="ScrapBookEditCutter" type="menu-button" tooltiptext="&sb.edit.cutter;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbPageEditor.cutter();" onclick="if (event.originalTarget.localName == 'toolbarbutton') if (event.button == 1) sbPageEditor.removeSbObjectsSelected();">

@@ -4,8 +4,9 @@
 <!ENTITY sb.edit.undo "撤销">
 <!ENTITY sb.edit.save "保存">
 <!ENTITY sb.edit.comment "展开注释区">
-<!ENTITY sb.edit.sticky "即时贴">
-<!ENTITY sb.edit.sticky.create "创建即时贴">
+<!ENTITY sb.edit.sticky "即时贴"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "创建即时贴"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "创建自由注解">
 <!ENTITY sb.edit.inline.add "为所选内容添加提示">
 <!ENTITY sb.edit.annotation.add "在所选内容后添加 HTML 提示">
 <!ENTITY sb.edit.attach.file "为所选内容附加文件">

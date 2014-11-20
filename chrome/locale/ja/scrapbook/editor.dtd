@@ -4,8 +4,9 @@
 <!ENTITY sb.edit.undo "元に戻す">
 <!ENTITY sb.edit.save "変更を保存する">
 <!ENTITY sb.edit.comment "コメントエリアを広げる">
-<!ENTITY sb.edit.sticky "付箋アノテーション">
-<!ENTITY sb.edit.sticky.create "&sb.edit.sticky;を作成">
+<!ENTITY sb.edit.sticky "付箋アノテーション"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "&sb.edit.sticky;を作成"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "自由ノートを作成">
 <!ENTITY sb.edit.inline.add "選択範囲にインライン注釈を入力">
 <!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "選択範囲にファイルを添付">

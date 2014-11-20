@@ -4,8 +4,9 @@
 <!ENTITY sb.edit.undo "Повернути">
 <!ENTITY sb.edit.save "Зберегти зміни">
 <!ENTITY sb.edit.comment "Збільшити форму коментування">
-<!ENTITY sb.edit.sticky "Пересувна нотатка">
-<!ENTITY sb.edit.sticky.create "Створити пересувну нотатку">
+<!ENTITY sb.edit.sticky "Пересувна нотатка"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "Створити пересувну нотатку"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Додати приховану нотатку до обраного">
 <!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "Додати файл до обраного">

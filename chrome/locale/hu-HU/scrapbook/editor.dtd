@@ -4,8 +4,9 @@
 <!ENTITY sb.edit.undo "Visszavonás">
 <!ENTITY sb.edit.save "A változtatások mentése">
 <!ENTITY sb.edit.comment "A jegyzetek területének megnövelése">
-<!ENTITY sb.edit.sticky "Ragadós megjegyzések">
-<!ENTITY sb.edit.sticky.create "&sb.edit.sticky; elem beszúrása">
+<!ENTITY sb.edit.sticky "Ragadós megjegyzések"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "&sb.edit.sticky; elem beszúrása"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Megjegyzés hozzáadása a kiválasztáshoz">
 <!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "Fájl csatolása a kijelöléshez">
