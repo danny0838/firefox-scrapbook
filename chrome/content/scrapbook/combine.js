@@ -394,16 +394,50 @@ var sbPageCombiner = {
 			if (!sbCombineService.option["T"]) {
 				sbCombineService.option["T"] = sbDataSource.getProperty(sbCombineService.curRes, "title");
 			}
-			this.htmlSrc += '<!DOCTYPE html>' + '\n' +
-				'<html>' + '\n' +
-				'<head>' + '\n' +
-				'<meta charset="UTF-8">' + '\n' +
-				'<title>' + sbCombineService.option["T"] + '</title>' + '\n' +
-				'<link rel="stylesheet" href="combine.css" media="all">' +
-				'<link rel="stylesheet" href="chrome://scrapbook/skin/combine.css" media="all">' + '\n' +
-				'<link rel="stylesheet" href="chrome://scrapbook/skin/annotation.css" media="all">' + '\n' +
-				'</head>' + '\n' +
-				'<body>' + '\n';
+			this.htmlSrc += '<!DOCTYPE html>\n'
+				+ '<html>\n'
+				+ '<head>\n'
+				+ '<meta charset="UTF-8">\n'
+				+ '<title>' + sbCombineService.option["T"] + '</title>\n'
+				+ '<link rel="stylesheet" href="combine.css" media="all">\n'
+				+ '<link rel="stylesheet" href="chrome://scrapbook/skin/annotation.css" media="all" data-sb-obj="stylesheet">\n'
+				+ '<style type="text/css" media="all" data-sb-obj="stylesheet">\n'
+				+ 'body {\n'
+				+ '	margin: 0px;\n'
+				+ '	background-color: #FFFFFF;\n'
+				+ '}\n'
+
+				+ 'cite.scrapbook-header {\n'
+				+ '	clear: both;\n'
+				+ '	display: block;\n'
+				+ '	padding: 3px 6px;\n'
+				+ '	font-family: "MS UI Gothic","Tahoma","Verdana","Arial","Sans-Serif","Helvetica";\n'
+				+ '	font-style: normal;\n'
+				+ '	font-size: 12px;\n'
+				+ '	background-color: InfoBackground;\n'
+				+ '	border: 1px solid ThreeDShadow;\n'
+				+ '}\n'
+
+				+ 'cite.scrapbook-header img {\n'
+				+ '	vertical-align: middle;\n'
+				+ '}\n'
+
+				+ 'cite.scrapbook-header a {\n'
+				+ '	color: InfoText;\n'
+				+ '	text-decoration: none;\n'
+				+ '}\n'
+
+				+ 'cite.scrapbook-header a[href]:hover {\n'
+				+ '	color: #3388FF;\n'
+				+ '}\n'
+
+				+ 'cite.scrapbook-header a.marked { font-weight: bold; }\n'
+				+ 'cite.scrapbook-header a.combine  { color: blue; }\n'
+				+ 'cite.scrapbook-header a.bookmark { color: limegreen; }\n'
+				+ 'cite.scrapbook-header a.notex { color: rgb(80,0,32); }\n'
+				+ '</style>\n'
+				+ '</head>\n'
+				+ '<body>\n';
 		}
 		if ( aType == "file" || aType == "bookmark" )
 		{
@@ -519,7 +553,10 @@ var sbPageCombiner = {
 	processCSSRecursively : function(aCSS)
 	{
 		var ret = "";
-		if ( aCSS.href && aCSS.href.indexOf("chrome://") == 0 ) return ret;
+		// a special stylesheet used by scrapbook, skip parsing it
+		if (aCSS.ownerNode && sbCommonUtils.getSbObjectType(aCSS.ownerNode) == "stylesheet") return ret;
+		// a special stylesheet used by scrapbook or other addons/programs, skip parsing it
+		if (aCSS.href && aCSS.href.indexOf("chrome://") == 0) return ret;
 		var cssRules = aCSS.cssRules;
 		for ( var i = 0; i < cssRules.length; i++ )
 		{
@@ -644,14 +681,19 @@ var sbPageCombiner = {
 		switch ( aNode.nodeName.toLowerCase() )
 		{
 			case "link" : 
-				// bad manner of link in the body
-				// styles should already be parsed, remove the node to prevent scope leak
-				if ( aNode.rel.toLowerCase() == "stylesheet" && aNode.href.indexOf("chrome://") != 0 ) 
-				return sbContentSaver.removeNodeFromParent(aNode);
+				if ( aNode.rel.toLowerCase() == "stylesheet") {
+					// link tags in the body element is unusual
+					// styles should already be processed
+					// in sbPageCombiner.exec => surroundCSS => processCSSRecursively
+					// just discard it here so that it never appear in the combined page
+					return sbContentSaver.removeNodeFromParent(aNode);
+				}
 				break;
 			case "style" :
-				// bad manner of style in the body
-				// styles should already be parsed, remove the node to prevent scope leak
+				// style tags in the body element is unusual
+				// styles should already be processed
+				// in sbPageCombiner.exec => surroundCSS => processCSSRecursively
+				// just discard it here so that it never appear in the combined page
 				return sbContentSaver.removeNodeFromParent(aNode);
 				break;
 			case "body" : 

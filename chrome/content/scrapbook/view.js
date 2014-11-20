@@ -53,7 +53,7 @@ function SB_getHTMLHead(aTitle)
 		+ '<head>\n'
 		+ '	<meta charset="UTF-8">\n'
 		+ '	<title>' + sbCommonUtils.escapeHTML(aTitle, true) + '</title>\n'
-		+ '	<link rel="stylesheet" type="text/css" href="chrome://scrapbook/skin/combine.css" media="screen,print">\n'
+		+ '	<link rel="stylesheet" type="text/css" href="chrome://scrapbook/skin/combine.css" media="screen,print" data-sb-obj="stylesheet">\n'
 		+ '	<script>\n'
 		+ '	function initHeight(obj){\n'
 		+ '		obj.style.height = parseInt(obj.contentDocument.documentElement.scrollHeight, 10) + 30 + \'px\';\n'
