@@ -1243,6 +1243,8 @@ var sbHtmlEditor = {
 		// check if the current page is local and get its path
 		var htmlFile = sbCommonUtils.convertURLToFile(aDoc.location.href);
 		if (!htmlFile) return;
+		// check if it's an HTML file
+		if (sbCommonUtils.splitFileName(htmlFile.leafName)[1] != "html") return;
 		// prompt the dialog for user input
 		var data = {};
 		var accepted = window.top.openDialog("chrome://scrapbook/content/editor_backup.xul", "ScrapBook:backupFile", "chrome,modal,centerscreen,resizable", data);
