@@ -1161,7 +1161,7 @@ var sbHtmlEditor = {
 					{
 						FILE: sbCommonUtils.escapeHTML(filename),
 						FILE_E: sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(filename2)),
-						THIS: sel.isCollapsed ? sbCommonUtils.escapeHTML(filename) : sbPageEditor.getSelectionHTML(sel),
+						THIS: sel.isCollapsed ? sbCommonUtils.escapeHTMLWithSpace(filename) : sbPageEditor.getSelectionHTML(sel),
 					},
 					/{([\w_]+)}/g
 				);
@@ -1227,7 +1227,7 @@ var sbHtmlEditor = {
 					{
 						FILE: sbCommonUtils.escapeHTML(filename),
 						FILE_E: sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(filename2)),
-						THIS: sel.isCollapsed ? sbCommonUtils.escapeHTML(filename) : sbPageEditor.getSelectionHTML(sel),
+						THIS: sel.isCollapsed ? sbCommonUtils.escapeHTMLWithSpace(filename) : sbPageEditor.getSelectionHTML(sel),
 					},
 					/{([\w_]+)}/g
 				);
@@ -2044,7 +2044,7 @@ var sbDOMEraser = {
 	_addTooltip : function(aNode) {
 		if ( sbCommonUtils.getSbObjectRemoveType(aNode) > 0 ) {
 			var outlineStyle = "2px dashed #0000FF";
-			var labelText = sbCommonUtils.escapeHTML(sbCommonUtils.lang("overlay", "EDIT_REMOVE_HIGHLIGHT"));
+			var labelText = sbCommonUtils.escapeHTMLWithSpace(sbCommonUtils.lang("overlay", "EDIT_REMOVE_HIGHLIGHT"));
 		}
 		else {
 			var outlineStyle = "2px solid #FF0000";
@@ -2103,9 +2103,9 @@ var sbDOMEraser = {
 		}
 
 		function makeElementLabelString(elem) {
-			var s = "<b style='color:#000'>" + sbCommonUtils.escapeHTML(elem.tagName.toLowerCase()) + "</b>";
-			if (elem.id != '') s += ", id: " + sbCommonUtils.escapeHTML(elem.id);
-			if (elem.className != '') s += ", class: " + sbCommonUtils.escapeHTML(elem.className);
+			var s = "<b style='color:#000'>" + sbCommonUtils.escapeHTMLWithSpace(elem.tagName.toLowerCase()) + "</b>";
+			if (elem.id != '') s += ", id: " + sbCommonUtils.escapeHTMLWithSpace(elem.id);
+			if (elem.className != '') s += ", class: " + sbCommonUtils.escapeHTMLWithSpace(elem.className);
 			return s;
 		}
 
@@ -2232,7 +2232,7 @@ var sbAnnotationService = {
 					}
 					sbAnnotationService.createFreenote({
 						element: sticky,
-						content: sbCommonUtils.escapeHTML(text, true).replace("\n", "<br>"),
+						content: sbCommonUtils.escapeHTMLWithSpace(text, true).replace("\n", "<br>"),
 						isRelative: sticky.className.indexOf("scrapbook-sticky-relative") != -1,
 					});
 					break;

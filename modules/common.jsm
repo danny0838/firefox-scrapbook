@@ -721,11 +721,14 @@ var sbCommonUtils = {
 
 	escapeHTML : function(aStr, aNoDoubleQuotes, aSingleQuotes, aNoAmp)
 	{
-		if (!aNoAmp) aStr = aStr.replace(/&/g, "&amp;");
-		aStr = aStr.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-		if (!aNoDoubleQuotes) aStr = aStr.replace(/"/g, "&quot;");
-		if (aSingleQuotes) aStr = aStr.replace(/'/g, "&apos;");
-		return aStr;
+		var list = {"&": (aNoAmp ? "&" : "&amp;"), "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&apos;" : "'") };
+		return aStr.replace(/[&<>"']/g, function(m){ return list[m]; });
+	},
+
+	escapeHTMLWithSpace : function(aStr, aNoDoubleQuotes, aSingleQuotes, aNoAmp)
+	{
+		var list = {"&": (aNoAmp ? "&" : "&amp;"), "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&apos;" : "'"), " ": "&nbsp;" };
+		return aStr.replace(/[&<>"']| (?= )/g, function(m){ return list[m]; });
 	},
 
 	escapeRegExp : function(aString)
