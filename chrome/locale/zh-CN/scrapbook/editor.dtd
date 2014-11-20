@@ -26,6 +26,48 @@
 <!ENTITY sb.edit.html.file.html "插入子页面:">
 <!ENTITY sb.edit.html.file.histHtml "备分当前页面:">
 <!ENTITY sb.edit.html.file.format "指定插入格式:">
+<!ENTITY sb.edit.html.menu.basic "字符">
+<!ENTITY sb.edit.html.menu.block "区块">
+<!ENTITY sb.edit.html.menu.insert "插入">
+<!ENTITY sb.edit.html.menu.wrapper "高级">
+<!ENTITY sb.edit.html.menuitem.insertSource "插入或编辑源代码">
+<!ENTITY sb.edit.html.menuitem.removeFormat "移除格式">
+<!ENTITY sb.edit.html.menuitem.unlink "移除链接">
+<!ENTITY sb.edit.html.menuitem.save "保存页面">
+<!ENTITY sb.edit.html.menuitem.quit "切换 HTML 编辑器">
+<!ENTITY sb.edit.html.menuitem.bold "切换粗体">
+<!ENTITY sb.edit.html.menuitem.italic "切换斜体">
+<!ENTITY sb.edit.html.menuitem.underline "切换底线">
+<!ENTITY sb.edit.html.menuitem.strikeThrough "切换删除线">
+<!ENTITY sb.edit.html.menuitem.setColor "设定文字及背景颜色">
+<!ENTITY sb.edit.html.menuitem.increaseFontSize "放大字级">
+<!ENTITY sb.edit.html.menuitem.decreaseFontSize "缩小字级">
+<!ENTITY sb.edit.html.menuitem.superscript "切换上标">
+<!ENTITY sb.edit.html.menuitem.subscript "切换下标">
+<!ENTITY sb.edit.html.menuitem.formatblock_p "设定为一般段落">
+<!ENTITY sb.edit.html.menuitem.formatblock_h1 "设定为 1 级标题">
+<!ENTITY sb.edit.html.menuitem.formatblock_h2 "设定为 2 级标题">
+<!ENTITY sb.edit.html.menuitem.formatblock_h3 "设定为 3 级标题">
+<!ENTITY sb.edit.html.menuitem.formatblock_h4 "设定为 4 级标题">
+<!ENTITY sb.edit.html.menuitem.formatblock_h5 "设定为 5 级标题">
+<!ENTITY sb.edit.html.menuitem.formatblock_h6 "设定为 6 级标题">
+<!ENTITY sb.edit.html.menuitem.formatblock_div "设定为 DIV 区块">
+<!ENTITY sb.edit.html.menuitem.formatblock_pre "设定为 PRE 区块">
+<!ENTITY sb.edit.html.menuitem.insertUnorderedList "切换无序列表">
+<!ENTITY sb.edit.html.menuitem.insertOrderedList "切换有序列表">
+<!ENTITY sb.edit.html.menuitem.outdent "减少缩进">
+<!ENTITY sb.edit.html.menuitem.indent "增加缩进">
+<!ENTITY sb.edit.html.menuitem.justifyLeft "靠左对齐">
+<!ENTITY sb.edit.html.menuitem.justifyRight "靠右对齐">
+<!ENTITY sb.edit.html.menuitem.justifyCenter "置中对齐">
+<!ENTITY sb.edit.html.menuitem.justifyFull "左右对齐">
+<!ENTITY sb.edit.html.menuitem.attachLink "插入链接或内部链接">
+<!ENTITY sb.edit.html.menuitem.attachFile "插入文件或子页面">
+<!ENTITY sb.edit.html.menuitem.horizontalLine "插入水平线">
+<!ENTITY sb.edit.html.menuitem.insertDate "插入日期">
+<!ENTITY sb.edit.html.menuitem.insertTodoBox "插入待办事项选框">
+<!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "插入待办事项选框 (已勾选)">
+<!ENTITY sb.edit.html.menuitem.wrapHTML "用模版格式化">
 <!ENTITY sb.edit.cutter "删除所选内容">
 <!ENTITY sb.edit.remove.iframe "删除所有 IFRAME 标签">
 <!ENTITY sb.edit.remove.script "删除所有 SCRIPT 标签">

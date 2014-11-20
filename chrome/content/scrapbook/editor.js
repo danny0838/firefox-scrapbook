@@ -670,17 +670,19 @@ var sbHtmlEditor = {
 	_shortcut_table : {
 		"F10" : "quit",
 		"Ctrl+S" : "save",
+		"Ctrl+M" : "removeFormat",
+		"Ctrl+N" : "unlink",
+		"Ctrl+Alt+I" : "insertSource",
 
-		"Ctrl+K" : "removeFormat",
 		"Ctrl+B" : "bold",
 		"Ctrl+I" : "italic",
 		"Ctrl+U" : "underline",
 		"Ctrl+T" : "strikeThrough",
 		"Ctrl+E" : "setColor",
-		"Alt+Up" : "increaseFontSize",
-		"Alt+Down" : "decreaseFontSize",
-		"Alt+K" : "superscript",
-		"Alt+J" : "subscript",
+		"Ctrl+Up" : "increaseFontSize",
+		"Ctrl+Down" : "decreaseFontSize",
+		"Ctrl+K" : "superscript",
+		"Ctrl+J" : "subscript",
 
 		"Alt+0" : "formatblock_p",
 		"Alt+1" : "formatblock_h1",
@@ -699,13 +701,13 @@ var sbHtmlEditor = {
 		"Alt+Comma" : "justifyLeft",
 		"Alt+Period" : "justifyRight",
 		"Alt+M" : "justifyCenter",
+		"Alt+Slash" : "justifyFull",
 
-		"Ctrl+Shift+K" : "unlink",
-		"Ctrl+L" : "attachLink",
-		"Alt+I" : "attachFile",
+		"Ctrl+Shift+L" : "attachLink",
+		"Ctrl+Shift+F" : "attachFile",
 
-		"Alt+H" : "horizontalLine",
-		"Alt+D" : "insertDate",
+		"Ctrl+Shift+H" : "horizontalLine",
+		"Ctrl+Shift+D" : "insertDate",
 		"Ctrl+Shift+C" : "insertTodoBox",
 		"Ctrl+Alt+Shift+C" : "insertTodoBoxDone",
 		"Ctrl+Alt+1" : "wrapHTML1",
@@ -718,7 +720,6 @@ var sbHtmlEditor = {
 		"Ctrl+Alt+8" : "wrapHTML8",
 		"Ctrl+Alt+9" : "wrapHTML9",
 		"Ctrl+Alt+0" : "wrapHTML0",
-		"Ctrl+Alt+I" : "insertSource",
 	},
 
 	currentDocument : function(aMainDoc)
@@ -830,6 +831,32 @@ var sbHtmlEditor = {
 		setTimeout(function(){
 			callback.call(sbHtmlEditor, doc);
 		}, 0);
+	},
+
+	handlePopupCommand : function(aCallback)
+	{
+		var callback = sbHtmlEditor[aCallback];
+
+		// check the document is editable and set
+		var doc = sbHtmlEditor.currentDocument();
+		if (!doc.body || doc.designMode != "on") return;
+
+		callback.call(sbHtmlEditor, doc);
+	},
+	
+	updatePopup : function()
+	{
+		document.getElementById("ScrapBookEditHTML_insertDate").tooltipText = sbCommonUtils.getPref("edit.insertDateFormat", "") || "%Y-%m-%d %H:%M:%S";
+		document.getElementById("ScrapBookEditHTML_wrapHTML1").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.1", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML2").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.2", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML3").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.3", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML4").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.4", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML5").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.5", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML6").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.6", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML7").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.7", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML8").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.8", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML9").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.9", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML0").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.0", "") || "<code>{THIS}</code>";
 	},
 
 	quit : function(aDoc)
@@ -981,6 +1008,11 @@ var sbHtmlEditor = {
 	justifyCenter : function(aDoc)
 	{
 		aDoc.execCommand("justifyCenter", false, null);
+	},
+
+	justifyFull : function(aDoc)
+	{
+		aDoc.execCommand("justifyFull", false, null);
 	},
 
 	unlink : function(aDoc)
