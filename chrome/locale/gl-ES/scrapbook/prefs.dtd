@@ -17,9 +17,9 @@
 <!ENTITY sb.prefs.restart "É necesario reiniciar o Firefox despois dos cambios.">
 <!ENTITY sb.prefs.tabs.tips "Para as seguintes operacións abrirase unha pestana">
 <!ENTITY sb.prefs.tabs.note "Editar aviso">
-<!ENTITY sbx.prefs.edit.autoEditNoteX "Auto edit Note Pages">
-<!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
-<!ENTITY sbx.prefs.edit.wrapperFormat "HTML formatting template">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data "Localización dos datos">
 <!ENTITY sb.prefs.data.default "Predeterminada (Cartafol do perfil)">
 <!ENTITY sb.prefs.data.custom "Gardar os datos en">

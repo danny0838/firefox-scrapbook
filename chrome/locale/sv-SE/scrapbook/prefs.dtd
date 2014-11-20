@@ -17,9 +17,9 @@
 <!ENTITY sb.prefs.restart "Ändring kräver att Firefox startas om.">
 <!ENTITY sb.prefs.tabs.tips "Öppna följande åtgärder i ny flik">
 <!ENTITY sb.prefs.tabs.note "Redigera anteckning">
-<!ENTITY sbx.prefs.edit.autoEditNoteX "Auto edit Note Pages">
-<!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
-<!ENTITY sbx.prefs.edit.wrapperFormat "HTML formatting template">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data "Lagringsplats för data">
 <!ENTITY sb.prefs.data.default "Standard (profilmappen)">
 <!ENTITY sb.prefs.data.custom "Spara data till">

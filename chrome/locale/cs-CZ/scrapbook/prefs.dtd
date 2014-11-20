@@ -17,9 +17,9 @@
 <!ENTITY sb.prefs.restart "Změna vyžaduje restart aplikace Firefox.">
 <!ENTITY sb.prefs.tabs.tips "Otevřít v panelu pro následující operace">
 <!ENTITY sb.prefs.tabs.note "Upravit poznámku">
-<!ENTITY sbx.prefs.edit.autoEditNoteX "Auto edit Note Pages">
-<!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
-<!ENTITY sbx.prefs.edit.wrapperFormat "HTML formatting template">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data "Umístění pro ukládání dat">
 <!ENTITY sb.prefs.data.default "Výchozí (Složka s profilem)">
 <!ENTITY sb.prefs.data.custom "Uložit data do">
