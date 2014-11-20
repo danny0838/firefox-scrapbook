@@ -36,7 +36,6 @@
 			<preference id="extensions.scrapbook.ui.menuBar"        name="extensions.scrapbook.ui.menuBar"        type="bool" />
 			<preference id="extensions.scrapbook.ui.menuBar.icon"   name="extensions.scrapbook.ui.menuBar.icon"   type="bool" />
 			<preference id="extensions.scrapbook.ui.toolsMenu"      name="extensions.scrapbook.ui.toolsMenu"      type="bool" />
-			<preference id="extensions.scrapbook.ui.statusBar"      name="extensions.scrapbook.ui.statusBar"      type="bool" />
 		</preferences>
 		<vbox flex="1" style="overflow: auto;">
 		<checkbox preference="extensions.scrapbook.ui.contextMenu"    label="&sb.prefs.ui.contextMenu;"
@@ -52,7 +51,6 @@
 		          onsyncfrompreference="sbPrefWindow.updateGroupedUI('extensions.scrapbook.ui.menuBar', 'menubar');" />
 		<checkbox preference="extensions.scrapbook.ui.menuBar.icon"   label="&sb.prefs.ui.menuBar.icon;"   class="indent" group="menubar" />
 		<checkbox preference="extensions.scrapbook.ui.toolsMenu" label="&sb.prefs.ui.toolsMenu;" />
-		<checkbox id="sbPrefStatsBarIcon" preference="extensions.scrapbook.ui.statusBar" label="&sb.prefs.ui.statusBar;" />
 		</vbox>
 	</prefpane>
 
