@@ -114,7 +114,7 @@
 			<menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this);" onpopuphiding="sbBrowserOverlay.destroyPopup(this);" />
 		</menu>
 		<!-- submenu placeholder -->
-		<menu id="ScrapBookContextSubmenu" label="ScrapBook" hidden="true"><menupopup /></menu>
+		<menu id="ScrapBookContextSubmenu" label="ScrapBook X" accesskey="K" hidden="true"><menupopup /></menu>
 	</menupopup>
 
 	<toolbarpalette id="BrowserToolbarPalette">
