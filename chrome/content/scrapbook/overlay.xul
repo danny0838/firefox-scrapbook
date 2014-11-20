@@ -168,6 +168,7 @@
 					<menupopup>
 						<menuitem acceltext="Ctrl+Shift+L" value="attachLink" label="&sb.edit.html.menuitem.attachLink;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
 						<menuitem acceltext="Ctrl+Shift+F" value="attachFile" label="&sb.edit.html.menuitem.attachFile;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+						<menuitem acceltext="Ctrl+Shift+B" value="backupFile" label="&sb.edit.html.menuitem.backupFile;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
 						<menuseparator />
 						<menuitem acceltext="Ctrl+Shift+H" value="horizontalLine" label="&sb.edit.html.menuitem.horizontalLine;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
 						<menuitem id="ScrapBookEditHTML_insertDate" acceltext="Ctrl+Shift+D" value="insertDate" label="&sb.edit.html.menuitem.insertDate;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
