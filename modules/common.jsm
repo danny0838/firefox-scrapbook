@@ -858,6 +858,9 @@ var sbCommonUtils = {
 	 * stylesheet (link, style)
 	 * stylesheet-temp (link, style)
 	 * todo (input, textarea)
+	 *
+	 * custom (*) (custom objects to be removed by the eraser)
+	 * custom-wrapper (*) (custom objects to be unwrapped by the eraser)
 	 */
 	getSbObjectType : function(aNode)
 	{
@@ -898,7 +901,7 @@ var sbCommonUtils = {
 		var type = this.getSbObjectType(aNode);
 		if (!type) return -1;
 		if (["title", "title-src", "todo"].indexOf(type) != -1) return 0;
-		if (["linemarker", "inline", "link-url", "link-inner", "link-file"].indexOf(type) != -1) return 2;
+		if (["linemarker", "inline", "link-url", "link-inner", "link-file", "custom-wrapper"].indexOf(type) != -1) return 2;
 		return 1;
 	},
 
