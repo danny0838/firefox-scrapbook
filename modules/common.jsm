@@ -836,9 +836,17 @@ var sbCommonUtils = {
 	 *
 	 * linemarker (span)
 	 * inline (span)
+	 * annotation (span)
 	 * link-url (a)
+	 * link-inner (a)
 	 * link-file (a)
-	 * sticky (div)
+	 * freenote (div)
+	 * freenote-header
+	 * freenote-body
+	 * freenote-footer
+	 * freenote-save
+	 * freenote-delete
+	 * sticky (div) (for downward compatibility with SBX <= 1.12.0a34)
 	 * sticky-header
 	 * sticky-footer
 	 * sticky-save
@@ -850,6 +858,9 @@ var sbCommonUtils = {
 	 * stylesheet (link, style)
 	 * stylesheet-temp (link, style)
 	 * todo (input, textarea)
+	 *
+	 * custom (*) (custom objects to be removed by the eraser)
+	 * custom-wrapper (*) (custom objects to be unwrapped by the eraser)
 	 */
 	getSbObjectType : function(aNode)
 	{
@@ -867,7 +878,8 @@ var sbCommonUtils = {
 				return "sticky";
 			case "scrapbook-sticky-header":
 				return "sticky-header";
-			
+			case "scrapbook-sticky-footer":
+				return "sticky-footer";
 			case "scrapbook-block-comment":
 				return "block-comment";
 		}
@@ -889,7 +901,7 @@ var sbCommonUtils = {
 		var type = this.getSbObjectType(aNode);
 		if (!type) return -1;
 		if (["title", "title-src", "todo"].indexOf(type) != -1) return 0;
-		if (["linemarker", "inline", "link-url", "link-inner", "link-file"].indexOf(type) != -1) return 2;
+		if (["linemarker", "inline", "link-url", "link-inner", "link-file", "custom-wrapper"].indexOf(type) != -1) return 2;
 		return 1;
 	},
 

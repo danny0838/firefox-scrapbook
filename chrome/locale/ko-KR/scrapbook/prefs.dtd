@@ -17,9 +17,9 @@
 <!ENTITY sb.prefs.restart "표시 항목의 변경된 내용을 적용하려면 Firefox를 재시작해야 합니다.">
 <!ENTITY sb.prefs.tabs.tips "다음 동작은 탭으로 열기">
 <!ENTITY sb.prefs.tabs.note "노트 편집">
-<!ENTITY sbx.prefs.edit.autoEditNoteX "Auto edit Note Pages">
-<!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
-<!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data "데이터 저장 위치">
 <!ENTITY sb.prefs.data.default "기본값 (프로필 폴더)">
 <!ENTITY sb.prefs.data.custom "다음에 저장:">

@@ -36,12 +36,11 @@
 			<preference id="extensions.scrapbook.ui.menuBar"        name="extensions.scrapbook.ui.menuBar"        type="bool" />
 			<preference id="extensions.scrapbook.ui.menuBar.icon"   name="extensions.scrapbook.ui.menuBar.icon"   type="bool" />
 			<preference id="extensions.scrapbook.ui.toolsMenu"      name="extensions.scrapbook.ui.toolsMenu"      type="bool" />
-			<preference id="extensions.scrapbook.ui.statusBar"      name="extensions.scrapbook.ui.statusBar"      type="bool" />
 		</preferences>
 		<vbox flex="1" style="overflow: auto;">
 		<checkbox preference="extensions.scrapbook.ui.contextMenu"    label="&sb.prefs.ui.contextMenu;"
 		          onsyncfrompreference="sbPrefWindow.updateGroupedUI('extensions.scrapbook.ui.contextMenu', 'contextmenu');" />
-		<checkbox preference="extensions.scrapbook.ui.contextSubMenu" label="&sb.prefs.ui.contextSubMenu; *" class="indent" group="contextmenu" />
+		<checkbox preference="extensions.scrapbook.ui.contextSubMenu" label="&sb.prefs.ui.contextSubMenu;" class="indent" group="contextmenu" />
 		<checkbox preference="extensions.scrapbook.ui.bookmarkMenu"   label="&sb.prefs.ui.bookmarkMenu;"     class="indent" group="contextmenu" />
 		<hbox align="center">
 			<label value="&sb.prefs.ui.folderList.maxEntries.1;" class="indent" />
@@ -50,10 +49,8 @@
 		</hbox>
 		<checkbox preference="extensions.scrapbook.ui.menuBar"        label="&sb.prefs.ui.menuBar;"
 		          onsyncfrompreference="sbPrefWindow.updateGroupedUI('extensions.scrapbook.ui.menuBar', 'menubar');" />
-		<checkbox preference="extensions.scrapbook.ui.menuBar.icon"   label="&sb.prefs.ui.menuBar.icon; *"   class="indent" group="menubar" />
+		<checkbox preference="extensions.scrapbook.ui.menuBar.icon"   label="&sb.prefs.ui.menuBar.icon;"   class="indent" group="menubar" />
 		<checkbox preference="extensions.scrapbook.ui.toolsMenu" label="&sb.prefs.ui.toolsMenu;" />
-		<checkbox id="sbPrefStatsBarIcon" preference="extensions.scrapbook.ui.statusBar" label="&sb.prefs.ui.statusBar;" />
-		<description>* &sb.prefs.restart;</description>
 		</vbox>
 	</prefpane>
 
@@ -207,49 +204,49 @@
 			</hbox>
 		</groupbox>
 		<spacer height="10" />
-		<checkbox preference="extensions.scrapbook.edit.autoEditNoteX" label="&sbx.prefs.edit.autoEditNoteX;" />
+		<checkbox preference="extensions.scrapbook.edit.autoEditNoteX" label="&sb.prefs.edit.autoEditNoteX;" />
 		<hbox>
-			<label value="&sbx.prefs.edit.insertDateFormat;" />
+			<label value="&sb.prefs.edit.insertDateFormat;" />
 			<textbox preference="extensions.scrapbook.edit.insertDateFormat" placeholder="eg. %Y-%m-%d %H:%M:%S" flex="1" />
 		</hbox>
 		<hbox>
-			<label value="&sbx.prefs.edit.wrapperFormat; 1:" />
+			<label value="&sb.prefs.edit.wrapperFormat; 1:" />
 			<textbox preference="extensions.scrapbook.edit.wrapperFormat.1" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
 		</hbox>
 		<hbox>
-			<label value="&sbx.prefs.edit.wrapperFormat; 2:" />
+			<label value="&sb.prefs.edit.wrapperFormat; 2:" />
 			<textbox preference="extensions.scrapbook.edit.wrapperFormat.2" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
 		</hbox>
 		<hbox>
-			<label value="&sbx.prefs.edit.wrapperFormat; 3:" />
+			<label value="&sb.prefs.edit.wrapperFormat; 3:" />
 			<textbox preference="extensions.scrapbook.edit.wrapperFormat.3" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
 		</hbox>
 		<hbox>
-			<label value="&sbx.prefs.edit.wrapperFormat; 4:" />
+			<label value="&sb.prefs.edit.wrapperFormat; 4:" />
 			<textbox preference="extensions.scrapbook.edit.wrapperFormat.4" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
 		</hbox>
 		<hbox>
-			<label value="&sbx.prefs.edit.wrapperFormat; 5:" />
+			<label value="&sb.prefs.edit.wrapperFormat; 5:" />
 			<textbox preference="extensions.scrapbook.edit.wrapperFormat.5" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
 		</hbox>
 		<hbox>
-			<label value="&sbx.prefs.edit.wrapperFormat; 6:" />
+			<label value="&sb.prefs.edit.wrapperFormat; 6:" />
 			<textbox preference="extensions.scrapbook.edit.wrapperFormat.6" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
 		</hbox>
 		<hbox>
-			<label value="&sbx.prefs.edit.wrapperFormat; 7:" />
+			<label value="&sb.prefs.edit.wrapperFormat; 7:" />
 			<textbox preference="extensions.scrapbook.edit.wrapperFormat.7" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
 		</hbox>
 		<hbox>
-			<label value="&sbx.prefs.edit.wrapperFormat; 8:" />
+			<label value="&sb.prefs.edit.wrapperFormat; 8:" />
 			<textbox preference="extensions.scrapbook.edit.wrapperFormat.8" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
 		</hbox>
 		<hbox>
-			<label value="&sbx.prefs.edit.wrapperFormat; 9:" />
+			<label value="&sb.prefs.edit.wrapperFormat; 9:" />
 			<textbox preference="extensions.scrapbook.edit.wrapperFormat.9" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
 		</hbox>
 		<hbox>
-			<label value="&sbx.prefs.edit.wrapperFormat; 0:" />
+			<label value="&sb.prefs.edit.wrapperFormat; 0:" />
 			<textbox preference="extensions.scrapbook.edit.wrapperFormat.0" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
 		</hbox>
 		</vbox>
