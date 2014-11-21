@@ -328,11 +328,11 @@ var sbPageEditor = {
 			this.allowUndo(doc);
 			var elems = doc.getElementsByTagName(aTagName), toRemove = [];
 			for ( var i = 0; i < elems.length; i++ ) {
-                toRemove.push(elems[i]);
+				toRemove.push(elems[i]);
 			}
-            toRemove.forEach(function(elem){
-                elem.parentNode.removeChild(elem);
-            }, this);
+			toRemove.forEach(function(elem){
+				elem.parentNode.removeChild(elem);
+			}, this);
 		}, this);
 	},
 
@@ -477,12 +477,12 @@ var sbPageEditor = {
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			var doc = win.document;
 			if ( doc.contentType != "text/html" ) {
-			    sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_CANT_MODIFY", [doc.contentType]));
+				sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_CANT_MODIFY", [doc.contentType]));
 				return;
 			}
 			var charset = doc.characterSet;
 			if (charset != "UTF-8") {
-			    sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_NOT_UTF8", [doc.location.href]));
+				sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_NOT_UTF8", [doc.location.href]));
 			}
 			this.documentBeforeSave(doc);
 			var rootNode = doc.getElementsByTagName("html")[0];
@@ -1487,15 +1487,6 @@ var sbHtmlEditor = {
 
 var sbDOMEraser = {
 
-	enabled : false,
-	verbose : 0,
-	lastX : 0,
-	lastY : 0,
-	lastTarget : null,
-	mouseTarget : null,
-	widerStack : null,
-	lastWindow : null,
-
 	_shortcut_table : {
 		"F9" : "quit",
 		"Escape" : "quit",
@@ -1512,10 +1503,20 @@ var sbDOMEraser = {
 		"R" : "remove",
 		"I" : "isolate",
 		"B" : "blackOnWhite",
+		"C" : "colorize",
 		"D" : "deWidthify",
 		"U" : "undo",
+		"H" : "help",
 		"Q" : "quit",
 	},
+
+	enabled : false,
+	lastX : 0,
+	lastY : 0,
+	lastWindow : null,
+	lastTarget : null,
+	lastTargetOutline : "",
+	widerStack : null,
 
 	// aStateFlag
 	//   0: disable
@@ -1531,28 +1532,21 @@ var sbDOMEraser = {
 		document.getElementById("ScrapBookEditHTML").disabled  = this.enabled;
 		document.getElementById("ScrapBookEditCutter").disabled  = this.enabled;
 
+		this._clear();
 		if (aStateFlag == 0) {
-			// revert last selected target
-			if (this.lastTarget) {
-				this._deselectNode();
-				this.lastTarget = null;
-			}
 			// revert settings of the last window
 			if (this.lastWindow) {
-				sbCommonUtils.flattenFrames(this.lastWindow).forEach(function(win) {
-					this.initEvent(win, 0);
-					this.initStyle(win, 0);
-				}, this);
+				this.initEvent(this.lastWindow, 0);
+				this.initStyle(this.lastWindow, 0);
 			}
 		}
 		else if (aStateFlag == 1) {
 			this.lastWindow = window.content;
-			this.verbose = 0;
 			// apply settings to the current window
-			sbCommonUtils.flattenFrames(this.lastWindow).forEach(function(win) {
-				this.initEvent(win, 1);
-				this.initStyle(win, 1);
-			}, this);
+			this.initEvent(this.lastWindow, 1);
+			this.initStyle(this.lastWindow, 1);
+			// show help
+			this._showHelp(this.lastWindow);
 		}
 	},
 
@@ -1560,13 +1554,11 @@ var sbDOMEraser = {
 	{
 		aWindow.document.removeEventListener("mouseover", this.handleEvent, true);
 		aWindow.document.removeEventListener("mousemove", this.handleEvent, true);
-		aWindow.document.removeEventListener("mouseout",  this.handleEvent, true);
 		aWindow.document.removeEventListener("click",     this.handleEvent, true);
 		aWindow.document.removeEventListener("keydown",   this.handleKeyEvent, true);
 		if ( aStateFlag == 1 ) {
 			aWindow.document.addEventListener("mouseover", this.handleEvent, true);
 			aWindow.document.addEventListener("mousemove", this.handleEvent, true);
-			aWindow.document.addEventListener("mouseout",  this.handleEvent, true);
 			aWindow.document.addEventListener("click",     this.handleEvent, true);
 			aWindow.document.addEventListener("keydown",   this.handleKeyEvent, true);
 		}
@@ -1575,10 +1567,7 @@ var sbDOMEraser = {
 	initStyle : function(aWindow, aStateFlag)
 	{
 		if ( aStateFlag == 1 ) {
-			var estyle = "* { cursor: crosshair; }\n"
-					   + "#scrapbook-eraser-tooltip { -moz-appearance: tooltip;"
-					   + " position: absolute; z-index: 10000; margin-top: 32px; padding: 2px 3px; max-width: 40em;"
-					   + " border: 1px solid InfoText; background-color: InfoBackground; color: InfoText; font: message-box; }";
+			var estyle = "* { cursor: crosshair !important; }";
 			sbPageEditor.applyStyle(aWindow, "scrapbook-eraser-style", estyle);
 		}
 		else {
@@ -1591,18 +1580,17 @@ var sbDOMEraser = {
 		// set variables and check whether it's a defined hotkey combination
 		var shortcut = Shortcut.fromEvent(aEvent);
 		var key = shortcut.toString();
-		var callback_name = sbDOMEraser._shortcut_table[key];
-		if (!callback_name) return;
+		var command = sbDOMEraser._shortcut_table[key];
+		if (!command) return;
 
-		// now we are sure we have the hotkey
-		var callback = sbDOMEraser[callback_name];
+		// now we are sure we have the hotkey, skip the default key action
 		aEvent.preventDefault();
 
 		// The original key effect could not be blocked completely
 		// if the command has a prompt or modal window that blocks.
 		// Therefore we call the callback command using an async workaround.
 		setTimeout(function(){
-			callback.call(sbDOMEraser, sbDOMEraser.lastTarget);
+			sbDOMEraser._execCommand(sbDOMEraser.lastWindow, command, key);
 		}, 0);
 	},
 
@@ -1610,90 +1598,78 @@ var sbDOMEraser = {
 	{
 		aEvent.preventDefault();
 		var elem = aEvent.target;
-		var tagName = elem.nodeName.toLowerCase();
-		if ( ["#document","scrollbar","html","body","frame","frameset"].indexOf(tagName) >= 0 ) return;
-		sbDOMEraser.lastX = aEvent.pageX;
-		sbDOMEraser.lastY = aEvent.pageY;
 		if ( aEvent.type == "mouseover" ) {
-			sbDOMEraser.mouseTarget = elem;
-			if (sbDOMEraser.lastTarget != elem) {
-				sbDOMEraser.widerStack = null;
-				sbDOMEraser._selectNode(elem);
-			}
-			else {
-				sbDOMEraser._updateTooltip(elem);
+			if (sbDOMEraser._isNormalNode(elem)) {
+				elem = sbDOMEraser._findValidElement(elem);
+				if (elem) {
+					if (elem !== sbDOMEraser.lastTarget) {
+						sbDOMEraser.widerStack = null;
+						sbDOMEraser._selectNode(elem);
+					}
+				}
+				else {
+					sbDOMEraser.widerStack = null;
+					sbDOMEraser._deselectNode();
+				}
 			}
 		}
 		else if ( aEvent.type == "mousemove" ) {
-			sbDOMEraser.mouseTarget = elem;
-			if ( ++sbDOMEraser.verbose % 3 != 0 ) return;
-			if (sbDOMEraser.lastTarget != elem) {
-				sbDOMEraser.widerStack = null;
-				sbDOMEraser._selectNode(elem);
-			}
-			else {
-				sbDOMEraser._updateTooltip(elem);
-			}
-		}
-		else if ( aEvent.type == "mouseout" ) {
-			sbDOMEraser.mouseTarget = null;
-			sbDOMEraser._deselectNode();
+			sbDOMEraser.lastX = aEvent.clientX;
+			sbDOMEraser.lastY = aEvent.clientY;
+			sbDOMEraser._clearHelp();
 		}
 		else if ( aEvent.type == "click" ) {
-			sbDOMEraser.mouseTarget = elem;
 			var elem = sbDOMEraser.lastTarget;
 			if (elem) {
-				if ( aEvent.shiftKey || aEvent.button == 2 ){
-					sbDOMEraser.isolate(elem);
-				}
-				else {
-					sbDOMEraser.remove(elem);
-				}
+				var command = ( aEvent.shiftKey || aEvent.button == 2 ) ? "isolate" : "remove";
+				sbDOMEraser._execCommand(sbDOMEraser.lastWindow, command, "");
 			}
 		}
 	},
 
-	quit : function(aNode)
+	cmd_quit : function (aNode)
 	{
 		this.init(0);
+		return true;
 	},
 
-	wider : function(aNode)
+	cmd_wider : function (aNode)
 	{
-		if (!aNode) return false;
-		var parent = aNode.parentNode;
-		if ( !parent ) return false;
-		if ( parent == aNode.ownerDocument.body ) {
-			parent = this._getParentFrameNode(aNode);
-			if (!parent) return false;
-		}
-		if (!this.widerStack) this.widerStack = [];
-		this.widerStack.push(aNode);
-		this._selectNode(parent);
+        if (aNode && aNode.parentNode) {
+            var newNode = this._findValidElement(aNode.parentNode);
+            if (!newNode) return false;
+			if (!this.widerStack) this.widerStack = [];
+			this.widerStack.push(aNode);
+			this._selectNode(newNode);
+            return true;
+        }
+        return false;
 	},
 
-	narrower : function(aNode)
+	cmd_narrower : function (aNode)
 	{
 		if (!aNode) return false;
 		if (!this.widerStack || !this.widerStack.length) return false;
 		var child = this.widerStack.pop();
 		this._selectNode(child);
+		return true;
 	},
 
-	remove : function(aNode)
+	cmd_remove : function (aNode)
 	{
 		if (!aNode) return false;
-		this._deselectNode();
+		this._clear();
 		sbPageEditor.allowUndo(aNode.ownerDocument);
 		if ( sbPageEditor.removeSbObj(aNode) <= 0 ) {
 			aNode.parentNode.removeChild(aNode);
 		}
+		return true;
 	},
 
-	isolate : function(aNode)
+	cmd_isolate : function (aNode)
 	{
 		if ( !aNode || !aNode.ownerDocument.body ) return false;
-		this._deselectNode();
+		this._clear();
 		sbPageEditor.allowUndo(aNode.ownerDocument);
 		var i = 0;
 		while ( aNode != aNode.ownerDocument.body && ++i < 64 )
@@ -1709,26 +1685,49 @@ var sbDOMEraser = {
 			}
 			aNode = parent;
 		}
+		return true;
 	},
 
-	blackOnWhite : function(aNode)
+	cmd_blackOnWhite : function (aNode)
 	{
 		if (!aNode) return false;
-		this._deselectNode();
+		this._clear();
 		sbPageEditor.allowUndo(aNode.ownerDocument);
 		this._selectNode(aNode);
-		aNode.style.color = "#000";
-		aNode.style.backgroundColor = "#FFF";
-		aNode.style.backgroundImage = "";
+		blackOnWhite(aNode);
+		return true;
+
+		function blackOnWhite(aNode) {
+			if (aNode.nodeType != 1) return;
+			aNode.style.color = "#000";
+			aNode.style.backgroundColor = "#FFF";
+			aNode.style.backgroundImage = "";
+			var childs = aNode.childNodes;
+			for (var i=0; i<childs.length; i++) {
+				blackOnWhite(childs[i]);
+			}
+		}
 	},
 
-	deWidthify : function(aNode)
+	cmd_colorize : function (aNode)
 	{
 		if (!aNode) return false;
-		this._deselectNode();
+		this._clear();
+		sbPageEditor.allowUndo(aNode.ownerDocument);
+		this._selectNode(aNode);
+		aNode.style.backgroundColor = "#" + Math.floor(Math.random() * 17).toString(16) + Math.floor(Math.random() * 17).toString(16) + Math.floor(Math.random() * 17).toString(16);
+		aNode.style.backgroundImage = "";
+		return true;
+	},
+
+	cmd_deWidthify : function (aNode)
+	{
+		if (!aNode) return false;
+		this._clear();
 		sbPageEditor.allowUndo(aNode.ownerDocument);
 		this._selectNode(aNode);
 		removeWidth(aNode);
+		return true;
 
 		function removeWidth(aNode) {
 			if (aNode.nodeType != 1) return;
@@ -1741,96 +1740,429 @@ var sbDOMEraser = {
 		}
 	},
 
-	undo : function(aNode)
+	cmd_help : function (aNode)
 	{
-		sbPageEditor.undo();
+		this._showHelp(this.lastWindow);
+		return true;
 	},
 
-	_getParentFrameNode : function(aNode)
+	cmd_undo : function (aNode)
 	{
-		var parentWindow = aNode.ownerDocument.defaultView.parent;
-		if (!parentWindow) return null;
-		var frames = parentWindow.document.getElementsByTagName("IFRAME");
-		for (var i=0; i<frames.length; i++) {
-			if (frames[i].contentDocument == aNode.ownerDocument) {
-				return frames[i];
+		return sbPageEditor.undo();
+	},
+
+	_execCommand : function (win, command, key)
+	{
+		if (command != "help") this._clearHelp();
+		var callback = sbDOMEraser["cmd_" + command];
+		if (callback.call(sbDOMEraser, sbDOMEraser.lastTarget)) {
+			sbDOMEraser._showKeybox(win, command, key);
+		}
+	},
+
+	_showHelp : function (win)
+	{
+		var doc = win.document;
+		var id = "DOMEraser_" + (new Date()).valueOf();  // a unique id for styling
+
+		// clear the help if existed
+		if (this.helpElem) {
+			this._clearHelp();
+			return;
+		}
+
+		// create new help
+        var helpElem = doc.createElement("DIV");
+		helpElem.id = id;
+		helpElem.isDOMEraser = true; // mark as ours
+		helpElem.style.backgroundColor = "#f0f0f0";
+		helpElem.style.opacity = "0.95";
+		helpElem.style.boxShadow = "3px 4px 5px #888";
+		helpElem.style.margin = "0 auto";
+		helpElem.style.border = "1px solid #CCC";
+		helpElem.style.borderRadius = "5px";
+		helpElem.style.padding = "0";
+		helpElem.style.textAlign = "left";
+		helpElem.style.color = "#000";
+		helpElem.style.fontSize = "16px";
+		helpElem.style.display = "block";
+		helpElem.style.position = "absolute";
+		helpElem.style.zIndex = "2147483647";
+
+		var content = ''
+			+ '<style>\n'
+			+ '#__id__ .keytable {\n'
+			+ '	margin: 5px 10px 0 10px;\n'
+			+ '}\n'
+			+ '#__id__ .key {\n'
+			+ '	padding: 2px 7px;\n'
+			+ '	border: 1px solid black;\n'
+			+ '	background-color: #ddd;\n'
+			+ '	font-family: monospace;\n'
+			+ '	font-weight: bold;\n'
+			+ '}\n'
+			+ '#__id__ .altkey code {\n'
+			+ '	margin: 1px;\n'
+			+ '	border: 1px solid black;\n'
+			+ '	padding: 1px 2px;\n'
+			+ '	background-color: #ddd;\n'
+			+ '	font-family: monospace;\n'
+			+ '	font-weight: bold;\n'
+			+ '}\n'
+			+ '#__id__ .command {\n'
+			+ '	padding: 3px 7px;\n'
+			+ '	font-size: 14px;\n'
+			+ '	text-align: left;\n'
+			+ '}\n'
+			+ '</style>\n'
+			+ '<div style="margin: 0; border: 0; padding: 10; text-align: center; color: #000; font-size: 24px; background-color: #D8D7DC;">ScrapBook DOM Eraser Tips</div>\n'
+			+ '<div style="padding: 5px 20px;">\n'
+			+ '	Move the mouse to select an element.<br>\n'
+			+ '	Use the following commands to operate on.<br>\n'
+			+ '</div>\n'
+			+ '<div style="margin: 0 auto; padding: 1px 10px 10px 10px;">\n'
+			+ '<div style="float: left;">\n'
+			+ '<table class="keytable">\n'
+			+ '<tbody>\n'
+			+ '<tr>\n'
+			+ '	<th colspan="2">Primary Keys</th>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="key"><code>h</code></td>\n'
+			+ '	<td class="command">help (toggle)</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="key"><code>q</code></td>\n'
+			+ '	<td class="command">quit (deactivate)</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="key"><code>w</code></td>\n'
+			+ '	<td class="command">wider</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="key"><code>n</code></td>\n'
+			+ '	<td class="command">narrower</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="key"><code>r</code></td>\n'
+			+ '	<td class="command">remove</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="key"><code>i</code></td>\n'
+			+ '	<td class="command">isolate</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="key"><code>b</code></td>\n'
+			+ '	<td class="command">black on white</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="key"><code>c</code></td>\n'
+			+ '	<td class="command">colorize</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="key"><code>d</code></td>\n'
+			+ '	<td class="command">de-width</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="key"><code>u</code></td>\n'
+			+ '	<td class="command">undo</td>\n'
+			+ '</tr>\n'
+			+ '</tbody>\n'
+			+ '</table>\n'
+			+ '</div>\n'
+			+ '<div style="float: left;">\n'
+			+ '<table class="keytable">\n'
+			+ '<tbody>\n'
+			+ '<tr>\n'
+			+ '	<th colspan="2">Alternatives</th>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="altkey"><code>click</code></td>\n'
+			+ '	<td class="command">remove</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="altkey"><code>enter</code></td>\n'
+			+ '	<td class="command">remove</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="altkey"><code>space</code></td>\n'
+			+ '	<td class="command">remove</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="altkey"><code>right-click</code></td>\n'
+			+ '	<td class="command">isolate</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="altkey"><code>shift</code>+<code>click</code></td>\n'
+			+ '	<td class="command">isolate</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="altkey"><code>shift</code>+<code>enter</code></td>\n'
+			+ '	<td class="command">isolate</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="altkey"><code>shift</code>+<code>space</code></td>\n'
+			+ '	<td class="command">isolate</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="altkey"><code>+</code></td>\n'
+			+ '	<td class="command">wider</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="altkey"><code>-</code></td>\n'
+			+ '	<td class="command">narrower</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="altkey"><code>F9</code></td>\n'
+			+ '	<td class="command">activate or deactivate</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="altkey"><code>ESC</code></td>\n'
+			+ '	<td class="command">deactivate</td>\n'
+			+ '</tr>\n'
+			+ '</tbody>\n'
+			+ '</table>\n'
+			+ '</div>\n'
+			+ '<div style="clear: both;" />\n'
+			+ '</div>\n';
+
+		content = content.replace(/__id__/g, id);
+		helpElem.innerHTML = content;
+		doc.body.appendChild(helpElem);
+
+		// fix position
+		var dims = this._getWindowDimensions(win);
+		var x = dims.scrollX + (dims.width - helpElem.offsetWidth) / 2;  if (x < 0) x = 0;
+		var y = dims.scrollY + (dims.height - helpElem.offsetHeight) / 2; if (y < 0) y = 0;
+		helpElem.style.left = x + "px";
+		helpElem.style.top = y + "px";
+
+		// expose this variable
+		this.helpElem = helpElem;
+	},
+
+	_clearHelp : function()
+	{
+		try { sbDOMEraser.helpElem.parentNode.removeChild(sbDOMEraser.helpElem); } catch(ex) {}
+		sbDOMEraser.helpElem = null;
+	},
+
+	_showKeybox : function (win, command, key)
+	{
+		var doc = win.document;
+
+		// clear previous keybox
+		this._clearKeybox();
+
+		// set content
+		var content = command;
+		if (key) {
+			var index = command.toLowerCase().indexOf(key.toLowerCase());
+			if (index >= 0) {
+				var s1 = command.substring(0, index);
+				var s2 = command.substring(index + 1);
+				var content = s1 + "<b style='font-size:2em;'>" + command.charAt(index) + "</b>" + s2;
 			}
 		}
-		var frames = parentWindow.document.getElementsByTagName("FRAME");
-		for (var i=0; i<frames.length; i++) {
-			if (frames[i].contentDocument == aNode.ownerDocument) {
-				return frames[i];
-			}
+
+		// create a keybox
+		var dims = this._getWindowDimensions(win);
+		var x = this.lastX + 10; if (x < 0) x = 0;
+		var y = dims.scrollY + this.lastY + 10; if (y < 0) y = 0;
+
+        var keyboxElem = doc.createElement("DIV");
+		keyboxElem.isDOMEraser = true; // mark as ours
+		keyboxElem.style.backgroundColor = "#dfd";
+		keyboxElem.style.border = "2px solid black";
+		keyboxElem.style.fontFamily = "arial";
+		keyboxElem.style.textAlign = "left";
+		keyboxElem.style.color = "#000";
+		keyboxElem.style.fontSize = "12px";
+		keyboxElem.style.position = "absolute";
+		keyboxElem.style.padding = "2px 5px 2px 5px";
+		keyboxElem.style.zIndex = "2147483647";
+		keyboxElem.innerHTML = content;
+        doc.body.appendChild(keyboxElem);
+
+		// adjust the label as necessary to make sure it is within screen
+		if ((x + keyboxElem.offsetWidth) >= dims.scrollX + dims.width) {
+			x = (dims.scrollX + dims.width) - keyboxElem.offsetWidth * 1.6;
+		}
+		if ((y + keyboxElem.offsetHeight) >= dims.scrollY + dims.height) {
+			y = (dims.scrollY + dims.height) - keyboxElem.offsetHeight * 2;
+		}
+		keyboxElem.style.left = x + "px";
+		keyboxElem.style.top = y + "px";
+
+		// remove the keybox after a timeout
+		this.keyboxElem = keyboxElem;
+		this.keyboxTimeout = setTimeout(this._clearKeybox, 400);
+	},
+
+	_clearKeybox : function()
+	{
+		try { sbDOMEraser.keyboxElem.parentNode.removeChild(sbDOMEraser.keyboxElem); } catch(ex) {}
+		try { clearTimeout(sbDOMEraser.keyboxTimeout); } catch(ex) {}
+		sbDOMEraser.keyboxElem = null;
+		sbDOMEraser.keyboxTimeout = null;
+	},
+
+	// verify it's not in an element specially used by DOMEraser
+	_isNormalNode : function(elem)
+	{
+		// check whether it's in our special element
+		var test = elem;
+		while (test) {
+			if (test.isDOMEraser) return false;
+			test = test.parentNode;
+		}
+		return true;
+	},
+
+	// given an element, walk upwards to find the first
+	// valid selectable element
+	_findValidElement : function(elem)
+	{
+		while (elem) {
+			if (["#document","scrollbar","html","body","frame","frameset"].indexOf(elem.nodeName.toLowerCase()) == -1) return elem;
+			elem = elem.parentNode;
 		}
 		return null;
 	},
 
-	_selectNode : function(aNode)
-	{
-		if (this.lastTarget) this._deselectNode();
-		this._addTooltip(aNode);
+	_selectNode : function(aNode) {
+		this._deselectNode();
 		this.lastTarget = aNode;
+		this._addTooltip(aNode);
 	},
 
-	_deselectNode : function()
-	{
-		if (!sbCommonUtils.isDeadObject(this.lastTarget)) this._removeTooltip(this.lastTarget);
+	_deselectNode : function() {
+		this._removeTooltip(this.lastTarget);
 		this.lastTarget = null;
 	},
 
-	_addTooltip : function(aNode)
-	{
-		var doc = (this.mouseTarget) ? this.mouseTarget.ownerDocument : aNode.ownerDocument;
-		var tooltip = doc.getElementById("scrapbook-eraser-tooltip");
-		if ( !tooltip ) {
-			var newtooltip = true;
-			tooltip = doc.createElement("DIV");
-			tooltip.id = "scrapbook-eraser-tooltip";
-			doc.body.appendChild(tooltip);
-		}
-		tooltip.style.left = this.lastX + "px";
-		tooltip.style.top  = this.lastY + "px";
+	_addTooltip : function(aNode) {
 		if ( sbCommonUtils.getSbObjectRemoveType(aNode) > 0 ) {
-			tooltip.textContent = sbCommonUtils.lang("overlay", "EDIT_REMOVE_HIGHLIGHT");
-			sbDOMEraser._setOutline(aNode, "2px dashed #0000FF");
+			var outlineStyle = "2px dashed #0000FF";
+			var labelText = sbCommonUtils.escapeHTML(sbCommonUtils.lang("overlay", "EDIT_REMOVE_HIGHLIGHT"));
 		}
 		else {
-			var text = aNode.nodeName.toLowerCase();
-			if ( aNode.id ) text += ' id="' + aNode.id + '"';
-			if ( aNode.className ) text += ' class="' + aNode.className + '"';
-			tooltip.textContent = text;
-			sbDOMEraser._setOutline(aNode, "2px solid #FF0000");
+			var outlineStyle = "2px solid #FF0000";
+			var labelText = makeElementLabelString(aNode);
+		}
+		createLabel(this.lastWindow, aNode, labelText);
+		setOutline(aNode, outlineStyle);
+
+		function createLabel(win, elem, text) {
+			var doc = win.document;
+			var dims = sbDOMEraser._getWindowDimensions(win);
+			var pos = getPos(elem), x = pos.x, y = pos.y;
+			y += elem.offsetHeight;
+
+			this.labelElem = doc.createElement("DIV");
+			this.labelElem.isDOMEraser = true; // mark as ours
+			this.labelElem.style.backgroundColor = "#fff0cc";
+			this.labelElem.style.border = "2px solid black";
+			this.labelElem.style.fontFamily = "arial";
+			this.labelElem.style.textAlign = "left";
+			this.labelElem.style.color = "#000";
+			this.labelElem.style.fontSize = "12px";
+			this.labelElem.style.position = "absolute";
+			this.labelElem.style.padding = "2px 5px 2px 5px";
+			this.labelElem.style.borderRadius = "6px";
+			this.labelElem.style.zIndex = "2147483647";
+			this.labelElem.innerHTML = text;
+			doc.body.appendChild(this.labelElem);
+
+			// adjust the label as necessary to make sure it is within screen
+			if ((y + this.labelElem.offsetHeight) >= dims.scrollY + dims.height) {
+				y = (dims.scrollY + dims.height) - this.labelElem.offsetHeight;
+			}
+			this.labelElem.style.left = (x + 2) + "px";
+			this.labelElem.style.top = y + "px";
+		}
+
+		function getPos(elem) {
+			var pos = {};
+
+			var leftX = 0;
+			var leftY = 0;
+			if (elem.offsetParent) {
+				while (elem.offsetParent) {
+					leftX += elem.offsetLeft;
+					leftY += elem.offsetTop;
+					elem = elem.offsetParent;
+				}
+			} else if (elem.x) {
+				leftX += elem.x;
+				leftY += elem.y;
+			}
+			pos.x = leftX;
+			pos.y = leftY;
+			return pos;
+		}
+
+		function makeElementLabelString(elem) {
+			var s = "<b style='color:#000'>" + sbCommonUtils.escapeHTML(elem.tagName.toLowerCase()) + "</b>";
+			if (elem.id != '') s += ", id: " + sbCommonUtils.escapeHTML(elem.id);
+			if (elem.className != '') s += ", class: " + sbCommonUtils.escapeHTML(elem.className);
+			return s;
+		}
+
+		function setOutline(aElement, outline) {
+			this.lastTargetOutline = aElement.style.outline;
+			aElement.style.outline = outline;
 		}
 	},
-	
-	_updateTooltip : function(aNode)
-	{
-		var tooltip = aNode.ownerDocument.getElementById("scrapbook-eraser-tooltip");
-		if ( tooltip ) {
-			tooltip.style.left = this.lastX + "px";
-			tooltip.style.top  = this.lastY + "px";
+
+	_removeTooltip : function(aNode) {
+		clearOutline(aNode);
+		removeLabel();
+		
+		function removeLabel() {
+			try { this.labelElem.parentNode.removeChild(this.labelElem); } catch(ex) {}
+			this.labelElem = null;
+		}
+
+		function clearOutline(aNode) {
+			if (aNode && !sbCommonUtils.isDeadObject(aNode)) {
+				aNode.style.outline = this.lastTargetOutline;
+				if ( !aNode.getAttribute("style") ) aNode.removeAttribute("style");
+			}
 		}
 	},
-	
-	_removeTooltip : function(aNode)
-	{
-		var tooltip = aNode.ownerDocument.getElementById("scrapbook-eraser-tooltip");
-		if ( tooltip ) aNode.ownerDocument.body.removeChild(tooltip);
-		this._clearOutline(aNode);
+
+	_getWindowDimensions : function (win) {
+		var out = {};
+		var doc = win.document;
+
+		if (win.pageXOffset) {
+			out.scrollX = win.pageXOffset;
+			out.scrollY = win.pageYOffset;
+		} else if (doc.documentElement) {
+			out.scrollX = doc.body.scrollLeft + doc.documentElement.scrollLeft;
+			out.scrollY = doc.body.scrollTop + doc.documentElement.scrollTop;
+		} else if (doc.body.scrollLeft >= 0) {
+			out.scrollX = doc.body.scrollLeft;
+			out.scrollY = doc.body.scrollTop;
+		}
+		if (doc.compatMode == "BackCompat") {
+			out.width = doc.body.clientWidth;
+			out.height = doc.body.clientHeight;
+		} else {
+			out.width = doc.documentElement.clientWidth;
+			out.height = doc.documentElement.clientHeight;
+		}
+		return out;
 	},
 
-	_setOutline : function(aElement, outline)
-	{
-		aElement.setAttribute("data-sb-old-outline", aElement.style.outline);
-		aElement.style.outline = outline;
+	// clear all elements generated by DOMEraser
+	// usually before making an undo history, to prevent anything being recorded
+	_clear : function () {
+		this._clearHelp();
+		this._clearKeybox();
+		this._deselectNode();
 	},
-
-	_clearOutline : function(aElement)
-	{
-		aElement.style.outline = aElement.getAttribute("data-sb-old-outline") || "";
-		if ( !aElement.getAttribute("style") ) aElement.removeAttribute("style");
-		aElement.removeAttribute("data-sb-old-outline");
-	}
 };
 
 
