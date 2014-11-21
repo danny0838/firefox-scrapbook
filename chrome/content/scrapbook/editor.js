@@ -1503,6 +1503,7 @@ var sbDOMEraser = {
 		"R" : "remove",
 		"I" : "isolate",
 		"B" : "blackOnWhite",
+		"C" : "colorize",
 		"D" : "deWidthify",
 		"U" : "undo",
 		"Q" : "quit",
@@ -1706,6 +1707,17 @@ var sbDOMEraser = {
 				blackOnWhite(childs[i]);
 			}
 		}
+	},
+
+	cmd_colorize : function (aNode)
+	{
+		if (!aNode) return false;
+		this._deselectNode();
+		sbPageEditor.allowUndo(aNode.ownerDocument);
+		this._selectNode(aNode);
+		aNode.style.backgroundColor = "#" + Math.floor(Math.random() * 17).toString(16) + Math.floor(Math.random() * 17).toString(16) + Math.floor(Math.random() * 17).toString(16);
+		aNode.style.backgroundImage = "";
+		return true;
 	},
 
 	cmd_deWidthify : function (aNode)
