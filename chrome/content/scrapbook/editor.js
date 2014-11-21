@@ -1509,13 +1509,12 @@ var sbDOMEraser = {
 	},
 
 	enabled : false,
-	verbose : 0,
 	lastX : 0,
 	lastY : 0,
-	lastTarget : null,
-	mouseTarget : null,
-	widerStack : null,
 	lastWindow : null,
+	lastTarget : null,
+	lastTargetOutline : "",
+	widerStack : null,
 
 	// aStateFlag
 	//   0: disable
@@ -1545,7 +1544,6 @@ var sbDOMEraser = {
 		}
 		else if (aStateFlag == 1) {
 			this.lastWindow = window.content;
-			this.verbose = 0;
 			// apply settings to the current window
 			this.initEvent(this.lastWindow, 1);
 			this.initStyle(this.lastWindow, 1);
@@ -1555,14 +1553,10 @@ var sbDOMEraser = {
 	initEvent : function(aWindow, aStateFlag)
 	{
 		aWindow.document.removeEventListener("mouseover", this.handleEvent, true);
-		aWindow.document.removeEventListener("mousemove", this.handleEvent, true);
-		aWindow.document.removeEventListener("mouseout",  this.handleEvent, true);
 		aWindow.document.removeEventListener("click",     this.handleEvent, true);
 		aWindow.document.removeEventListener("keydown",   this.handleKeyEvent, true);
 		if ( aStateFlag == 1 ) {
 			aWindow.document.addEventListener("mouseover", this.handleEvent, true);
-			aWindow.document.addEventListener("mousemove", this.handleEvent, true);
-			aWindow.document.addEventListener("mouseout",  this.handleEvent, true);
 			aWindow.document.addEventListener("click",     this.handleEvent, true);
 			aWindow.document.addEventListener("keydown",   this.handleKeyEvent, true);
 		}
@@ -1571,10 +1565,7 @@ var sbDOMEraser = {
 	initStyle : function(aWindow, aStateFlag)
 	{
 		if ( aStateFlag == 1 ) {
-			var estyle = "* { cursor: crosshair; }\n"
-					   + "#scrapbook-eraser-tooltip { -moz-appearance: tooltip;"
-					   + " position: absolute; z-index: 10000; margin-top: 32px; padding: 2px 3px; max-width: 40em;"
-					   + " border: 1px solid InfoText; background-color: InfoBackground; color: InfoText; font: message-box; }";
+			var estyle = "* { cursor: crosshair !important; }";
 			sbPageEditor.applyStyle(aWindow, "scrapbook-eraser-style", estyle);
 		}
 		else {
@@ -1606,37 +1597,22 @@ var sbDOMEraser = {
 	{
 		aEvent.preventDefault();
 		var elem = aEvent.target;
-		var tagName = elem.nodeName.toLowerCase();
-		if ( ["#document","scrollbar","html","body","frame","frameset"].indexOf(tagName) >= 0 ) return;
-		sbDOMEraser.lastX = aEvent.pageX;
-		sbDOMEraser.lastY = aEvent.pageY;
 		if ( aEvent.type == "mouseover" ) {
-			sbDOMEraser.mouseTarget = elem;
-			if (sbDOMEraser.lastTarget != elem) {
-				sbDOMEraser.widerStack = null;
-				sbDOMEraser._selectNode(elem);
+			if (!elem.isDOMEraser) {
+				elem = sbDOMEraser._findValidElement(elem);
+				if (elem) {
+					if (elem !== sbDOMEraser.lastTarget) {
+						sbDOMEraser.widerStack = null;
+						sbDOMEraser._selectNode(elem);
+					}
+				}
+				else {
+					sbDOMEraser.widerStack = null;
+					sbDOMEraser._deselectNode();
+				}
 			}
-			else {
-				sbDOMEraser._updateTooltip(elem);
-			}
-		}
-		else if ( aEvent.type == "mousemove" ) {
-			sbDOMEraser.mouseTarget = elem;
-			if ( ++sbDOMEraser.verbose % 3 != 0 ) return;
-			if (sbDOMEraser.lastTarget != elem) {
-				sbDOMEraser.widerStack = null;
-				sbDOMEraser._selectNode(elem);
-			}
-			else {
-				sbDOMEraser._updateTooltip(elem);
-			}
-		}
-		else if ( aEvent.type == "mouseout" ) {
-			sbDOMEraser.mouseTarget = null;
-			sbDOMEraser._deselectNode();
 		}
 		else if ( aEvent.type == "click" ) {
-			sbDOMEraser.mouseTarget = elem;
 			var elem = sbDOMEraser.lastTarget;
 			if (elem) {
 				if ( aEvent.shiftKey || aEvent.button == 2 ){
@@ -1656,16 +1632,15 @@ var sbDOMEraser = {
 
 	cmd_wider : function (aNode)
 	{
-		if (!aNode) return false;
-		var parent = aNode.parentNode;
-		if ( !parent ) return false;
-		if ( parent == aNode.ownerDocument.body ) {
-			parent = this._getParentFrameNode(aNode);
-			if (!parent) return false;
-		}
-		if (!this.widerStack) this.widerStack = [];
-		this.widerStack.push(aNode);
-		this._selectNode(parent);
+        if (aNode && aNode.parentNode) {
+            var newNode = this._findValidElement(aNode.parentNode);
+            if (!newNode) return false;
+			if (!this.widerStack) this.widerStack = [];
+			this.widerStack.push(aNode);
+			this._selectNode(newNode);
+            return true;
+        }
+        return false;
 	},
 
 	cmd_narrower : function (aNode)
@@ -1742,91 +1717,142 @@ var sbDOMEraser = {
 		sbPageEditor.undo();
 	},
 
-	_getParentFrameNode : function(aNode)
+	// given an element, walk upwards to find the first
+	// valid selectable element
+	_findValidElement : function(elem)
 	{
-		var parentWindow = aNode.ownerDocument.defaultView.parent;
-		if (!parentWindow) return null;
-		var frames = parentWindow.document.getElementsByTagName("IFRAME");
-		for (var i=0; i<frames.length; i++) {
-			if (frames[i].contentDocument == aNode.ownerDocument) {
-				return frames[i];
-			}
-		}
-		var frames = parentWindow.document.getElementsByTagName("FRAME");
-		for (var i=0; i<frames.length; i++) {
-			if (frames[i].contentDocument == aNode.ownerDocument) {
-				return frames[i];
-			}
+		while (elem) {
+			if (["#document","scrollbar","html","body","frame","frameset"].indexOf(elem.nodeName.toLowerCase()) == -1) return elem;
+			elem = elem.parentNode;
 		}
 		return null;
 	},
 
-	_selectNode : function(aNode)
-	{
-		if (this.lastTarget) this._deselectNode();
-		this._addTooltip(aNode);
+	_selectNode : function(aNode) {
+		this._deselectNode();
 		this.lastTarget = aNode;
+		this._addTooltip(aNode);
 	},
 
-	_deselectNode : function()
-	{
-		if (!sbCommonUtils.isDeadObject(this.lastTarget)) this._removeTooltip(this.lastTarget);
+	_deselectNode : function() {
+		this._removeTooltip(this.lastTarget);
 		this.lastTarget = null;
 	},
 
-	_addTooltip : function(aNode)
-	{
-		var doc = (this.mouseTarget) ? this.mouseTarget.ownerDocument : aNode.ownerDocument;
-		var tooltip = doc.getElementById("scrapbook-eraser-tooltip");
-		if ( !tooltip ) {
-			var newtooltip = true;
-			tooltip = doc.createElement("DIV");
-			tooltip.id = "scrapbook-eraser-tooltip";
-			doc.body.appendChild(tooltip);
-		}
-		tooltip.style.left = this.lastX + "px";
-		tooltip.style.top  = this.lastY + "px";
+	_addTooltip : function(aNode) {
 		if ( sbCommonUtils.getSbObjectRemoveType(aNode) > 0 ) {
-			tooltip.textContent = sbCommonUtils.lang("overlay", "EDIT_REMOVE_HIGHLIGHT");
-			sbDOMEraser._setOutline(aNode, "2px dashed #0000FF");
+			var outlineStyle = "2px dashed #0000FF";
+			var labelText = sbCommonUtils.lang("overlay", "EDIT_REMOVE_HIGHLIGHT");
 		}
 		else {
-			var text = aNode.nodeName.toLowerCase();
-			if ( aNode.id ) text += ' id="' + aNode.id + '"';
-			if ( aNode.className ) text += ' class="' + aNode.className + '"';
-			tooltip.textContent = text;
-			sbDOMEraser._setOutline(aNode, "2px solid #FF0000");
+			var outlineStyle = "2px solid #FF0000";
+			var labelText = makeElementLabelString(aNode);
+		}
+		createLabel(this.lastWindow, aNode, labelText);
+		setOutline(aNode, outlineStyle);
+
+		function createLabel(win, elem, text) {
+			var doc = win.document;
+			var dims = sbDOMEraser._getWindowDimensions(win);
+			var pos = getPos(elem), x = pos.x, y = pos.y;
+			y += elem.offsetHeight;
+
+			this.labelElem = doc.createElement("DIV");
+			this.labelElem.isDOMEraser = true; // mark as ours
+			this.labelElem.style.backgroundColor = "#fff0cc";
+			this.labelElem.style.border = "2px solid black";
+			this.labelElem.style.fontFamily = "arial";
+			this.labelElem.style.textAlign = "left";
+			this.labelElem.style.color = "#000";
+			this.labelElem.style.fontSize = "12px";
+			this.labelElem.style.position = "absolute";
+			this.labelElem.style.padding = "2px 5px 2px 5px";
+			this.labelElem.style.borderRadius = "6px";
+			this.labelElem.style.zIndex = "5005";
+			this.labelElem.innerHTML = text;
+			doc.body.appendChild(this.labelElem);
+
+			// adjust the label as necessary to make sure it is within screen
+			if ((y + this.labelElem.offsetHeight) >= dims.scrollY + dims.height) {
+				y = (dims.scrollY + dims.height) - this.labelElem.offsetHeight;
+			}
+			this.labelElem.style.left = (x + 2) + "px";
+			this.labelElem.style.top = y + "px";
+		}
+
+		function getPos(elem) {
+			var pos = {};
+
+			var leftX = 0;
+			var leftY = 0;
+			if (elem.offsetParent) {
+				while (elem.offsetParent) {
+					leftX += elem.offsetLeft;
+					leftY += elem.offsetTop;
+					elem = elem.offsetParent;
+				}
+			} else if (elem.x) {
+				leftX += elem.x;
+				leftY += elem.y;
+			}
+			pos.x = leftX;
+			pos.y = leftY;
+			return pos;
+		}
+
+		function makeElementLabelString(elem) {
+			var s = "<b style='color:#000'>" + elem.tagName.toLowerCase() + "</b>";
+			if (elem.id != '') s += ", id: " + elem.id;
+			if (elem.className != '') s += ", class: " + elem.className;
+			return s;
+		}
+
+		function setOutline(aElement, outline) {
+			this.lastTargetOutline = aElement.style.outline;
+			aElement.style.outline = outline;
 		}
 	},
-	
-	_updateTooltip : function(aNode)
-	{
-		var tooltip = aNode.ownerDocument.getElementById("scrapbook-eraser-tooltip");
-		if ( tooltip ) {
-			tooltip.style.left = this.lastX + "px";
-			tooltip.style.top  = this.lastY + "px";
+
+	_removeTooltip : function(aNode) {
+		clearOutline(aNode);
+		removeLabel();
+		
+		function removeLabel() {
+			try { this.labelElem.parentNode.removeChild(this.labelElem); } catch(ex) {}
+			this.labelElem = null;
+		}
+
+		function clearOutline(aNode) {
+			if (aNode && !sbCommonUtils.isDeadObject(aNode)) {
+				aNode.style.outline = this.lastTargetOutline;
+				if ( !aNode.getAttribute("style") ) aNode.removeAttribute("style");
+			}
 		}
 	},
-	
-	_removeTooltip : function(aNode)
-	{
-		var tooltip = aNode.ownerDocument.getElementById("scrapbook-eraser-tooltip");
-		if ( tooltip ) aNode.ownerDocument.body.removeChild(tooltip);
-		this._clearOutline(aNode);
-	},
 
-	_setOutline : function(aElement, outline)
-	{
-		aElement.setAttribute("data-sb-old-outline", aElement.style.outline);
-		aElement.style.outline = outline;
-	},
+	_getWindowDimensions : function (win) {
+		var out = {};
+		var doc = win.document;
 
-	_clearOutline : function(aElement)
-	{
-		aElement.style.outline = aElement.getAttribute("data-sb-old-outline") || "";
-		if ( !aElement.getAttribute("style") ) aElement.removeAttribute("style");
-		aElement.removeAttribute("data-sb-old-outline");
-	}
+		if (win.pageXOffset) {
+			out.scrollX = win.pageXOffset;
+			out.scrollY = win.pageYOffset;
+		} else if (doc.documentElement) {
+			out.scrollX = doc.body.scrollLeft + doc.documentElement.scrollLeft;
+			out.scrollY = doc.body.scrollTop + doc.documentElement.scrollTop;
+		} else if (doc.body.scrollLeft >= 0) {
+			out.scrollX = doc.body.scrollLeft;
+			out.scrollY = doc.body.scrollTop;
+		}
+		if (doc.compatMode == "BackCompat") {
+			out.width = doc.body.clientWidth;
+			out.height = doc.body.clientHeight;
+		} else {
+			out.width = doc.documentElement.clientWidth;
+			out.height = doc.documentElement.clientHeight;
+		}
+		return out;
+	},
 };
 
 
