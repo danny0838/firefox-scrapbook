@@ -328,11 +328,11 @@ var sbPageEditor = {
 			this.allowUndo(doc);
 			var elems = doc.getElementsByTagName(aTagName), toRemove = [];
 			for ( var i = 0; i < elems.length; i++ ) {
-                toRemove.push(elems[i]);
+				toRemove.push(elems[i]);
 			}
-            toRemove.forEach(function(elem){
-                elem.parentNode.removeChild(elem);
-            }, this);
+			toRemove.forEach(function(elem){
+				elem.parentNode.removeChild(elem);
+			}, this);
 		}, this);
 	},
 
@@ -477,12 +477,12 @@ var sbPageEditor = {
 		sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
 			var doc = win.document;
 			if ( doc.contentType != "text/html" ) {
-			    sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_CANT_MODIFY", [doc.contentType]));
+				sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_CANT_MODIFY", [doc.contentType]));
 				return;
 			}
 			var charset = doc.characterSet;
 			if (charset != "UTF-8") {
-			    sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_NOT_UTF8", [doc.location.href]));
+				sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_NOT_UTF8", [doc.location.href]));
 			}
 			this.documentBeforeSave(doc);
 			var rootNode = doc.getElementsByTagName("html")[0];
