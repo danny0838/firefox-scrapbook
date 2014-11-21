@@ -1595,7 +1595,7 @@ var sbDOMEraser = {
 		if (!callback_name) return;
 
 		// now we are sure we have the hotkey
-		var callback = sbDOMEraser[callback_name];
+		var callback = sbDOMEraser["cmd_" + callback_name];
 		aEvent.preventDefault();
 
 		// The original key effect could not be blocked completely
@@ -1644,21 +1644,21 @@ var sbDOMEraser = {
 			var elem = sbDOMEraser.lastTarget;
 			if (elem) {
 				if ( aEvent.shiftKey || aEvent.button == 2 ){
-					sbDOMEraser.isolate(elem);
+					sbDOMEraser.cmd_isolate(elem);
 				}
 				else {
-					sbDOMEraser.remove(elem);
+					sbDOMEraser.cmd_remove(elem);
 				}
 			}
 		}
 	},
 
-	quit : function(aNode)
+	cmd_quit : function (aNode)
 	{
 		this.init(0);
 	},
 
-	wider : function(aNode)
+	cmd_wider : function (aNode)
 	{
 		if (!aNode) return false;
 		var parent = aNode.parentNode;
@@ -1672,7 +1672,7 @@ var sbDOMEraser = {
 		this._selectNode(parent);
 	},
 
-	narrower : function(aNode)
+	cmd_narrower : function (aNode)
 	{
 		if (!aNode) return false;
 		if (!this.widerStack || !this.widerStack.length) return false;
@@ -1680,7 +1680,7 @@ var sbDOMEraser = {
 		this._selectNode(child);
 	},
 
-	remove : function(aNode)
+	cmd_remove : function (aNode)
 	{
 		if (!aNode) return false;
 		this._deselectNode();
@@ -1690,7 +1690,7 @@ var sbDOMEraser = {
 		}
 	},
 
-	isolate : function(aNode)
+	cmd_isolate : function (aNode)
 	{
 		if ( !aNode || !aNode.ownerDocument.body ) return false;
 		this._deselectNode();
@@ -1711,7 +1711,7 @@ var sbDOMEraser = {
 		}
 	},
 
-	blackOnWhite : function(aNode)
+	cmd_blackOnWhite : function (aNode)
 	{
 		if (!aNode) return false;
 		this._deselectNode();
@@ -1722,7 +1722,7 @@ var sbDOMEraser = {
 		aNode.style.backgroundImage = "";
 	},
 
-	deWidthify : function(aNode)
+	cmd_deWidthify : function (aNode)
 	{
 		if (!aNode) return false;
 		this._deselectNode();
@@ -1741,7 +1741,7 @@ var sbDOMEraser = {
 		}
 	},
 
-	undo : function(aNode)
+	cmd_undo : function (aNode)
 	{
 		sbPageEditor.undo();
 	},
