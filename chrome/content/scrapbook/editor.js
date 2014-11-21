@@ -1808,7 +1808,7 @@ var sbDOMEraser = {
 	_addTooltip : function(aNode) {
 		if ( sbCommonUtils.getSbObjectRemoveType(aNode) > 0 ) {
 			var outlineStyle = "2px dashed #0000FF";
-			var labelText = sbCommonUtils.lang("overlay", "EDIT_REMOVE_HIGHLIGHT");
+			var labelText = sbCommonUtils.escapeHTML(sbCommonUtils.lang("overlay", "EDIT_REMOVE_HIGHLIGHT"));
 		}
 		else {
 			var outlineStyle = "2px solid #FF0000";
@@ -1867,9 +1867,9 @@ var sbDOMEraser = {
 		}
 
 		function makeElementLabelString(elem) {
-			var s = "<b style='color:#000'>" + elem.tagName.toLowerCase() + "</b>";
-			if (elem.id != '') s += ", id: " + elem.id;
-			if (elem.className != '') s += ", class: " + elem.className;
+			var s = "<b style='color:#000'>" + sbCommonUtils.escapeHTML(elem.tagName.toLowerCase()) + "</b>";
+			if (elem.id != '') s += ", id: " + sbCommonUtils.escapeHTML(elem.id);
+			if (elem.className != '') s += ", class: " + sbCommonUtils.escapeHTML(elem.className);
 			return s;
 		}
 
