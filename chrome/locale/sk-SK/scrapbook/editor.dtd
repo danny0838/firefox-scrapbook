@@ -1,9 +1,11 @@
 <!ENTITY sb.toolbar.edit "Panel úprav">
 <!ENTITY sb.toolbar.info "Informačný panel">
-<!ENTITY sb.edit.eraser "DOM-Guma: Nástroj na odstránenie vybranej časti.">
+<!ENTITY sb.edit.folderView "Click to view the data directory.">
+<!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
 <!ENTITY sb.edit.undo "Vrátiť">
 <!ENTITY sb.edit.save "Uložiť zmeny">
 <!ENTITY sb.edit.comment "Zobraziť pole pre komentár">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote.">
 <!ENTITY sb.edit.sticky "Nálepka"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.sticky.create "Vytvoriť nálepku"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
@@ -12,6 +14,8 @@
 <!ENTITY sb.edit.attach.file "Pripojiť súbor do výberu">
 <!ENTITY sb.edit.attach.link "Pripojiť odkaz do výberu">
 <!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.cutterTool "Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.">
+<!ENTITY sb.edit.htmlTool "HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.">
 <!ENTITY sb.edit.html "HTML Editor">
 <!ENTITY sb.edit.html.color "Edit Color">
 <!ENTITY sb.edit.html.color.forText "Set text color:">
@@ -32,8 +36,8 @@
 <!ENTITY sb.edit.html.menu.insert "Insert">
 <!ENTITY sb.edit.html.menu.wrapper "Advanced">
 <!ENTITY sb.edit.html.menuitem.insertSource "Insert or Edit Source">
-<!ENTITY sb.edit.html.menuitem.removeFormat "Remove Formats">
-<!ENTITY sb.edit.html.menuitem.unlink "Remove Links">
+<!ENTITY sb.edit.html.menuitem.removeFormat "Clear Formats">
+<!ENTITY sb.edit.html.menuitem.unlink "Clear Links">
 <!ENTITY sb.edit.html.menuitem.save "Save the Page">
 <!ENTITY sb.edit.html.menuitem.quit "Switch HTMLEditor">
 <!ENTITY sb.edit.html.menuitem.bold "Switch Bold">
@@ -73,9 +77,10 @@
 <!ENTITY sb.edit.cutter "Odstrániť výber">
 <!ENTITY sb.edit.remove.iframe "Odstrániť všetky IFRAME tagy">
 <!ENTITY sb.edit.remove.script "Odstrániť všetky SCRIPT tagy">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to add highlight for the selection.">
 <!ENTITY sb.highlighter "Zvýrazniť">
-<!ENTITY sb.highlighter.remove "Odstrániť zvýraznenia">
-<!ENTITY sb.highlighter.remove.all "Odstrániť všetky zvýraznenia">
+<!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
+<!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
 <!ENTITY sb.source "Otvoriť zdroj URL">
 <!ENTITY sb.renew "Znovu zachytenie">
 <!ENTITY sb.internalize "Localize Embedded External Media">

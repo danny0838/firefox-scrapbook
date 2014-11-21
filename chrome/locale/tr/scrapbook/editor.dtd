@@ -1,9 +1,11 @@
 <!ENTITY sb.toolbar.edit "Araç Çubuğunu Düzenle">
 <!ENTITY sb.toolbar.info "Bilgi Çubuğu">
-<!ENTITY sb.edit.eraser "DOM Eraser: Tıklanan elementleri Web sayfasından kaldırmak için bir araç">
+<!ENTITY sb.edit.folderView "Click to view the data directory.">
+<!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
 <!ENTITY sb.edit.undo "Geri Al">
 <!ENTITY sb.edit.save "Değişiklikleri Kaydet">
 <!ENTITY sb.edit.comment "Yorum Bölgesini Genişlet">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote.">
 <!ENTITY sb.edit.sticky "Kalıcı Dipnot"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.sticky.create "&sb.edit.sticky; Oluştur"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
@@ -12,6 +14,8 @@
 <!ENTITY sb.edit.attach.file "Seçime Dosya Ekle">
 <!ENTITY sb.edit.attach.link "Seçime Link Ekle">
 <!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.cutterTool "Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.">
+<!ENTITY sb.edit.htmlTool "HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.">
 <!ENTITY sb.edit.html "HTML Editor">
 <!ENTITY sb.edit.html.color "Edit Color">
 <!ENTITY sb.edit.html.color.forText "Set text color:">
@@ -32,8 +36,8 @@
 <!ENTITY sb.edit.html.menu.insert "Insert">
 <!ENTITY sb.edit.html.menu.wrapper "Advanced">
 <!ENTITY sb.edit.html.menuitem.insertSource "Insert or Edit Source">
-<!ENTITY sb.edit.html.menuitem.removeFormat "Remove Formats">
-<!ENTITY sb.edit.html.menuitem.unlink "Remove Links">
+<!ENTITY sb.edit.html.menuitem.removeFormat "Clear Formats">
+<!ENTITY sb.edit.html.menuitem.unlink "Clear Links">
 <!ENTITY sb.edit.html.menuitem.save "Save the Page">
 <!ENTITY sb.edit.html.menuitem.quit "Switch HTMLEditor">
 <!ENTITY sb.edit.html.menuitem.bold "Switch Bold">
@@ -73,9 +77,10 @@
 <!ENTITY sb.edit.cutter "Seçimi Kaldır">
 <!ENTITY sb.edit.remove.iframe "Tüm IFRAME Etiketlerini Kaldır">
 <!ENTITY sb.edit.remove.script "Tüm SCRIPT Etiketlerini Kaldır">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to add highlight for the selection.">
 <!ENTITY sb.highlighter "Vurgulayıcı">
-<!ENTITY sb.highlighter.remove "Seçimden Vurguları Temizle">
-<!ENTITY sb.highlighter.remove.all "Tüm Vurguları Temizle">
+<!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
+<!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
 <!ENTITY sb.source "Kaynak URL&apos;yi Aç">
 <!ENTITY sb.renew "Yeniden Kaydet">
 <!ENTITY sb.internalize "Localize Embedded External Media">

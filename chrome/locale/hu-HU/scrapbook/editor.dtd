@@ -1,9 +1,11 @@
 <!ENTITY sb.toolbar.edit "Szerkesztés eszköztár">
 <!ENTITY sb.toolbar.info "Információ eszköztár">
-<!ENTITY sb.edit.eraser "DOM-radír: A weboldalon rákattintott elemek eltávolításának eszköze">
+<!ENTITY sb.edit.folderView "Click to view the data directory.">
+<!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
 <!ENTITY sb.edit.undo "Visszavonás">
 <!ENTITY sb.edit.save "A változtatások mentése">
 <!ENTITY sb.edit.comment "A jegyzetek területének megnövelése">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote.">
 <!ENTITY sb.edit.sticky "Ragadós megjegyzések"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.sticky.create "&sb.edit.sticky; elem beszúrása"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
@@ -12,6 +14,8 @@
 <!ENTITY sb.edit.attach.file "Fájl csatolása a kijelöléshez">
 <!ENTITY sb.edit.attach.link "Hivatkozás csatolása a kijelöléshez">
 <!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.cutterTool "Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.">
+<!ENTITY sb.edit.htmlTool "HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.">
 <!ENTITY sb.edit.html "HTML Editor">
 <!ENTITY sb.edit.html.color "Edit Color">
 <!ENTITY sb.edit.html.color.forText "Set text color:">
@@ -32,8 +36,8 @@
 <!ENTITY sb.edit.html.menu.insert "Insert">
 <!ENTITY sb.edit.html.menu.wrapper "Advanced">
 <!ENTITY sb.edit.html.menuitem.insertSource "Insert or Edit Source">
-<!ENTITY sb.edit.html.menuitem.removeFormat "Remove Formats">
-<!ENTITY sb.edit.html.menuitem.unlink "Remove Links">
+<!ENTITY sb.edit.html.menuitem.removeFormat "Clear Formats">
+<!ENTITY sb.edit.html.menuitem.unlink "Clear Links">
 <!ENTITY sb.edit.html.menuitem.save "Save the Page">
 <!ENTITY sb.edit.html.menuitem.quit "Switch HTMLEditor">
 <!ENTITY sb.edit.html.menuitem.bold "Switch Bold">
@@ -73,9 +77,10 @@
 <!ENTITY sb.edit.cutter "Kijelölés eltávolítása">
 <!ENTITY sb.edit.remove.iframe "Összes IFRAME kódelem eltávolítása">
 <!ENTITY sb.edit.remove.script "Összes SCRIPT kódelem eltávolítása">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to add highlight for the selection.">
 <!ENTITY sb.highlighter "Szövegkiemelő">
-<!ENTITY sb.highlighter.remove "Kiemelések eltávolítása a kijelölésből">
-<!ENTITY sb.highlighter.remove.all "Összes kijelölés törlése">
+<!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
+<!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
 <!ENTITY sb.source "Forráswebhely megnyitása">
 <!ENTITY sb.renew "Rögzítés ismét">
 <!ENTITY sb.internalize "Localize Embedded External Media">

@@ -1,9 +1,11 @@
 <!ENTITY sb.toolbar.edit "Barra de Herramientas de Edición">
 <!ENTITY sb.toolbar.info "Barra de Información">
-<!ENTITY sb.edit.eraser "Borrador DOM: Elimina bloques al hacer click en ellos.">
+<!ENTITY sb.edit.folderView "Click to view the data directory.">
+<!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
 <!ENTITY sb.edit.undo "Deshacer">
 <!ENTITY sb.edit.save "Guardar">
 <!ENTITY sb.edit.comment "Expandir área de comentarios">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote.">
 <!ENTITY sb.edit.sticky "Anotación Post-it"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.sticky.create "Crear &sb.edit.sticky;"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
@@ -12,6 +14,8 @@
 <!ENTITY sb.edit.attach.file "Anexar fichero a la selección">
 <!ENTITY sb.edit.attach.link "Anexar enlace a la selección">
 <!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.cutterTool "Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.">
+<!ENTITY sb.edit.htmlTool "HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.">
 <!ENTITY sb.edit.html "HTML Editor">
 <!ENTITY sb.edit.html.color "Edit Color">
 <!ENTITY sb.edit.html.color.forText "Set text color:">
@@ -32,8 +36,8 @@
 <!ENTITY sb.edit.html.menu.insert "Insert">
 <!ENTITY sb.edit.html.menu.wrapper "Advanced">
 <!ENTITY sb.edit.html.menuitem.insertSource "Insert or Edit Source">
-<!ENTITY sb.edit.html.menuitem.removeFormat "Remove Formats">
-<!ENTITY sb.edit.html.menuitem.unlink "Remove Links">
+<!ENTITY sb.edit.html.menuitem.removeFormat "Clear Formats">
+<!ENTITY sb.edit.html.menuitem.unlink "Clear Links">
 <!ENTITY sb.edit.html.menuitem.save "Save the Page">
 <!ENTITY sb.edit.html.menuitem.quit "Switch HTMLEditor">
 <!ENTITY sb.edit.html.menuitem.bold "Switch Bold">
@@ -73,9 +77,10 @@
 <!ENTITY sb.edit.cutter "Borrar todo lo seleccionado">
 <!ENTITY sb.edit.remove.iframe "Borrar todas las etiquetas IFRAME">
 <!ENTITY sb.edit.remove.script "Borrar todas las etiquetas SCRIPT">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to add highlight for the selection.">
 <!ENTITY sb.highlighter "Marcador">
-<!ENTITY sb.highlighter.remove "Limpiar marcas en la selección">
-<!ENTITY sb.highlighter.remove.all "Borrar todas las marcas">
+<!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
+<!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
 <!ENTITY sb.source "Abrir URL de origen">
 <!ENTITY sb.renew "Capturar Otra vez">
 <!ENTITY sb.internalize "Localize Embedded External Media">
