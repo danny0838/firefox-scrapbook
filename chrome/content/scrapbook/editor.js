@@ -1553,10 +1553,12 @@ var sbDOMEraser = {
 	initEvent : function(aWindow, aStateFlag)
 	{
 		aWindow.document.removeEventListener("mouseover", this.handleEvent, true);
+		aWindow.document.removeEventListener("mousemove", this.handleEvent, true);
 		aWindow.document.removeEventListener("click",     this.handleEvent, true);
 		aWindow.document.removeEventListener("keydown",   this.handleKeyEvent, true);
 		if ( aStateFlag == 1 ) {
 			aWindow.document.addEventListener("mouseover", this.handleEvent, true);
+			aWindow.document.addEventListener("mousemove", this.handleEvent, true);
 			aWindow.document.addEventListener("click",     this.handleEvent, true);
 			aWindow.document.addEventListener("keydown",   this.handleKeyEvent, true);
 		}
@@ -1578,18 +1580,17 @@ var sbDOMEraser = {
 		// set variables and check whether it's a defined hotkey combination
 		var shortcut = Shortcut.fromEvent(aEvent);
 		var key = shortcut.toString();
-		var callback_name = sbDOMEraser._shortcut_table[key];
-		if (!callback_name) return;
+		var command = sbDOMEraser._shortcut_table[key];
+		if (!command) return;
 
-		// now we are sure we have the hotkey
-		var callback = sbDOMEraser["cmd_" + callback_name];
+		// now we are sure we have the hotkey, skip the default key action
 		aEvent.preventDefault();
 
 		// The original key effect could not be blocked completely
 		// if the command has a prompt or modal window that blocks.
 		// Therefore we call the callback command using an async workaround.
 		setTimeout(function(){
-			callback.call(sbDOMEraser, sbDOMEraser.lastTarget);
+			sbDOMEraser._execCommand(sbDOMEraser.lastWindow, command, key);
 		}, 0);
 	},
 
@@ -1612,15 +1613,15 @@ var sbDOMEraser = {
 				}
 			}
 		}
+		else if ( aEvent.type == "mousemove" ) {
+			sbDOMEraser.lastX = aEvent.clientX;
+			sbDOMEraser.lastY = aEvent.clientY;
+		}
 		else if ( aEvent.type == "click" ) {
 			var elem = sbDOMEraser.lastTarget;
 			if (elem) {
-				if ( aEvent.shiftKey || aEvent.button == 2 ){
-					sbDOMEraser.cmd_isolate(elem);
-				}
-				else {
-					sbDOMEraser.cmd_remove(elem);
-				}
+				var command = ( aEvent.shiftKey || aEvent.button == 2 ) ? "isolate" : "remove";
+				sbDOMEraser._execCommand(sbDOMEraser.lastWindow, command, "");
 			}
 		}
 	},
@@ -1628,6 +1629,7 @@ var sbDOMEraser = {
 	cmd_quit : function (aNode)
 	{
 		this.init(0);
+		return true;
 	},
 
 	cmd_wider : function (aNode)
@@ -1649,6 +1651,7 @@ var sbDOMEraser = {
 		if (!this.widerStack || !this.widerStack.length) return false;
 		var child = this.widerStack.pop();
 		this._selectNode(child);
+		return true;
 	},
 
 	cmd_remove : function (aNode)
@@ -1659,6 +1662,7 @@ var sbDOMEraser = {
 		if ( sbPageEditor.removeSbObj(aNode) <= 0 ) {
 			aNode.parentNode.removeChild(aNode);
 		}
+		return true;
 	},
 
 	cmd_isolate : function (aNode)
@@ -1680,6 +1684,7 @@ var sbDOMEraser = {
 			}
 			aNode = parent;
 		}
+		return true;
 	},
 
 	cmd_blackOnWhite : function (aNode)
@@ -1691,6 +1696,7 @@ var sbDOMEraser = {
 		aNode.style.color = "#000";
 		aNode.style.backgroundColor = "#FFF";
 		aNode.style.backgroundImage = "";
+		return true;
 	},
 
 	cmd_deWidthify : function (aNode)
@@ -1700,6 +1706,7 @@ var sbDOMEraser = {
 		sbPageEditor.allowUndo(aNode.ownerDocument);
 		this._selectNode(aNode);
 		removeWidth(aNode);
+		return true;
 
 		function removeWidth(aNode) {
 			if (aNode.nodeType != 1) return;
@@ -1714,7 +1721,66 @@ var sbDOMEraser = {
 
 	cmd_undo : function (aNode)
 	{
-		sbPageEditor.undo();
+		return sbPageEditor.undo();
+	},
+
+	_execCommand : function (win, command, key)
+	{
+		var callback = sbDOMEraser["cmd_" + command];
+		if (callback.call(sbDOMEraser, sbDOMEraser.lastTarget)) {
+			sbDOMEraser._showKeybox(win, command, key);
+		}
+	},
+
+	_showKeybox : function (win, command, key)
+	{
+		var doc = win.document;
+
+		// set content
+		var content = command;
+		if (key) {
+			var index = command.toLowerCase().indexOf(key.toLowerCase());
+			if (index >= 0) {
+				var s1 = command.substring(0, index);
+				var s2 = command.substring(index + 1);
+				var content = s1 + "<b style='font-size:2em;'>" + command.charAt(index) + "</b>" + s2;
+			}
+		}
+
+		// create a keybox
+		var dims = this._getWindowDimensions(win);
+		var x = this.lastX + 10; if (x < 0) x = 0;
+		var y = dims.scrollY + this.lastY + 10; if (y < 0) y = 0;
+
+        var keyboxElem = doc.createElement("DIV");
+		keyboxElem.isDOMEraser = true; // mark as ours
+		keyboxElem.style.backgroundColor = "#dfd";
+		keyboxElem.style.border = "2px solid black";
+		keyboxElem.style.fontFamily = "arial";
+		keyboxElem.style.textAlign = "left";
+		keyboxElem.style.color = "#000";
+		keyboxElem.style.fontSize = "12px";
+		keyboxElem.style.position = "absolute";
+		keyboxElem.style.padding = "2px 5px 2px 5px";
+		keyboxElem.style.zIndex = "5006";
+		keyboxElem.innerHTML = content;
+        doc.body.appendChild(keyboxElem);
+
+		// adjust the label as necessary to make sure it is within screen
+		if ((x + keyboxElem.offsetWidth) >= dims.scrollX + dims.width) {
+			x = (dims.scrollX + dims.width) - keyboxElem.offsetWidth * 1.6;
+		}
+		if ((y + keyboxElem.offsetHeight) >= dims.scrollY + dims.height) {
+			y = (dims.scrollY + dims.height) - keyboxElem.offsetHeight * 2;
+		}
+		keyboxElem.style.left = x + "px";
+		keyboxElem.style.top = y + "px";
+
+		// remove the keybox after a timeout
+		var t = setTimeout(function () {
+			try { keyboxElem.parentNode.removeChild(keyboxElem); } catch(ex) {}
+			clearTimeout(t);
+		}, 400);
 	},
 
 	// given an element, walk upwards to find the first
