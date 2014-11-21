@@ -1600,7 +1600,7 @@ var sbDOMEraser = {
 		aEvent.preventDefault();
 		var elem = aEvent.target;
 		if ( aEvent.type == "mouseover" ) {
-			if (!elem.isDOMEraser) {
+			if (sbDOMEraser._isNormalNode(elem)) {
 				elem = sbDOMEraser._findValidElement(elem);
 				if (elem) {
 					if (elem !== sbDOMEraser.lastTarget) {
@@ -1811,6 +1811,18 @@ var sbDOMEraser = {
 		try { clearTimeout(sbDOMEraser.keyboxTimeout); } catch(ex) {}
 		sbDOMEraser.keyboxElem = null;
 		sbDOMEraser.keyboxTimeout = null;
+	},
+
+	// verify it's not in an element specially used by DOMEraser
+	_isNormalNode : function(elem)
+	{
+		// check whether it's in our special element
+		var test = elem;
+		while (test) {
+			if (test.isDOMEraser) return false;
+			test = test.parentNode;
+		}
+		return true;
 	},
 
 	// given an element, walk upwards to find the first
