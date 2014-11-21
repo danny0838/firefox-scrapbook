@@ -204,49 +204,49 @@
 			</hbox>
 		</groupbox>
 		<spacer height="10" />
-		<checkbox preference="extensions.scrapbook.edit.autoEditNoteX" label="&sbx.prefs.edit.autoEditNoteX;" />
+		<checkbox preference="extensions.scrapbook.edit.autoEditNoteX" label="&sb.prefs.edit.autoEditNoteX;" />
 		<hbox>
-			<label value="&sbx.prefs.edit.insertDateFormat;" />
+			<label value="&sb.prefs.edit.insertDateFormat;" />
 			<textbox preference="extensions.scrapbook.edit.insertDateFormat" placeholder="eg. %Y-%m-%d %H:%M:%S" flex="1" />
 		</hbox>
 		<hbox>
-			<label value="&sbx.prefs.edit.wrapperFormat; 1:" />
+			<label value="&sb.prefs.edit.wrapperFormat; 1:" />
 			<textbox preference="extensions.scrapbook.edit.wrapperFormat.1" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
 		</hbox>
 		<hbox>
-			<label value="&sbx.prefs.edit.wrapperFormat; 2:" />
+			<label value="&sb.prefs.edit.wrapperFormat; 2:" />
 			<textbox preference="extensions.scrapbook.edit.wrapperFormat.2" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
 		</hbox>
 		<hbox>
-			<label value="&sbx.prefs.edit.wrapperFormat; 3:" />
+			<label value="&sb.prefs.edit.wrapperFormat; 3:" />
 			<textbox preference="extensions.scrapbook.edit.wrapperFormat.3" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
 		</hbox>
 		<hbox>
-			<label value="&sbx.prefs.edit.wrapperFormat; 4:" />
+			<label value="&sb.prefs.edit.wrapperFormat; 4:" />
 			<textbox preference="extensions.scrapbook.edit.wrapperFormat.4" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
 		</hbox>
 		<hbox>
-			<label value="&sbx.prefs.edit.wrapperFormat; 5:" />
+			<label value="&sb.prefs.edit.wrapperFormat; 5:" />
 			<textbox preference="extensions.scrapbook.edit.wrapperFormat.5" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
 		</hbox>
 		<hbox>
-			<label value="&sbx.prefs.edit.wrapperFormat; 6:" />
+			<label value="&sb.prefs.edit.wrapperFormat; 6:" />
 			<textbox preference="extensions.scrapbook.edit.wrapperFormat.6" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
 		</hbox>
 		<hbox>
-			<label value="&sbx.prefs.edit.wrapperFormat; 7:" />
+			<label value="&sb.prefs.edit.wrapperFormat; 7:" />
 			<textbox preference="extensions.scrapbook.edit.wrapperFormat.7" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
 		</hbox>
 		<hbox>
-			<label value="&sbx.prefs.edit.wrapperFormat; 8:" />
+			<label value="&sb.prefs.edit.wrapperFormat; 8:" />
 			<textbox preference="extensions.scrapbook.edit.wrapperFormat.8" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
 		</hbox>
 		<hbox>
-			<label value="&sbx.prefs.edit.wrapperFormat; 9:" />
+			<label value="&sb.prefs.edit.wrapperFormat; 9:" />
 			<textbox preference="extensions.scrapbook.edit.wrapperFormat.9" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
 		</hbox>
 		<hbox>
-			<label value="&sbx.prefs.edit.wrapperFormat; 0:" />
+			<label value="&sb.prefs.edit.wrapperFormat; 0:" />
 			<textbox preference="extensions.scrapbook.edit.wrapperFormat.0" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
 		</hbox>
 		</vbox>

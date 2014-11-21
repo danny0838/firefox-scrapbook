@@ -670,17 +670,19 @@ var sbHtmlEditor = {
 	_shortcut_table : {
 		"F10" : "quit",
 		"Ctrl+S" : "save",
+		"Ctrl+M" : "removeFormat",
+		"Ctrl+N" : "unlink",
+		"Ctrl+Alt+I" : "insertSource",
 
-		"Ctrl+K" : "removeFormat",
 		"Ctrl+B" : "bold",
 		"Ctrl+I" : "italic",
 		"Ctrl+U" : "underline",
 		"Ctrl+T" : "strikeThrough",
 		"Ctrl+E" : "setColor",
-		"Alt+Up" : "increaseFontSize",
-		"Alt+Down" : "decreaseFontSize",
-		"Alt+K" : "superscript",
-		"Alt+J" : "subscript",
+		"Ctrl+Up" : "increaseFontSize",
+		"Ctrl+Down" : "decreaseFontSize",
+		"Ctrl+K" : "superscript",
+		"Ctrl+J" : "subscript",
 
 		"Alt+0" : "formatblock_p",
 		"Alt+1" : "formatblock_h1",
@@ -699,13 +701,14 @@ var sbHtmlEditor = {
 		"Alt+Comma" : "justifyLeft",
 		"Alt+Period" : "justifyRight",
 		"Alt+M" : "justifyCenter",
+		"Alt+Slash" : "justifyFull",
 
-		"Ctrl+Shift+K" : "unlink",
-		"Ctrl+L" : "attachLink",
-		"Alt+I" : "attachFile",
+		"Ctrl+Shift+L" : "attachLink",
+		"Ctrl+Shift+F" : "attachFile",
+		"Ctrl+Shift+B" : "backupFile",
 
-		"Alt+H" : "horizontalLine",
-		"Alt+D" : "insertDate",
+		"Ctrl+Shift+H" : "horizontalLine",
+		"Ctrl+Shift+D" : "insertDate",
 		"Ctrl+Shift+C" : "insertTodoBox",
 		"Ctrl+Alt+Shift+C" : "insertTodoBoxDone",
 		"Ctrl+Alt+1" : "wrapHTML1",
@@ -718,7 +721,6 @@ var sbHtmlEditor = {
 		"Ctrl+Alt+8" : "wrapHTML8",
 		"Ctrl+Alt+9" : "wrapHTML9",
 		"Ctrl+Alt+0" : "wrapHTML0",
-		"Ctrl+Alt+I" : "insertSource",
 	},
 
 	currentDocument : function(aMainDoc)
@@ -817,7 +819,7 @@ var sbHtmlEditor = {
 		if (!callback_name) return;
 
 		// now we are sure we have the hotkey
-		var callback = sbHtmlEditor[callback_name];
+		var callback = sbHtmlEditor["cmd_" + callback_name];
 		aEvent.preventDefault();
 
 		// check the document is editable and set
@@ -832,42 +834,68 @@ var sbHtmlEditor = {
 		}, 0);
 	},
 
-	quit : function(aDoc)
+	handlePopupCommand : function(aCallback)
+	{
+		var callback = sbHtmlEditor["cmd_" + aCallback];
+
+		// check the document is editable and set
+		var doc = sbHtmlEditor.currentDocument();
+		if (!doc.body || doc.designMode != "on") return;
+
+		callback.call(sbHtmlEditor, doc);
+	},
+	
+	updatePopup : function()
+	{
+		document.getElementById("ScrapBookEditHTML_insertDate").tooltipText = sbCommonUtils.getPref("edit.insertDateFormat", "") || "%Y-%m-%d %H:%M:%S";
+		document.getElementById("ScrapBookEditHTML_wrapHTML1").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.1", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML2").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.2", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML3").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.3", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML4").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.4", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML5").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.5", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML6").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.6", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML7").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.7", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML8").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.8", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML9").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.9", "") || "<code>{THIS}</code>";
+		document.getElementById("ScrapBookEditHTML_wrapHTML0").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.0", "") || "<code>{THIS}</code>";
+	},
+
+	cmd_quit : function (aDoc)
 	{
 		sbHtmlEditor.init(null, 0);
 	},
 
-	save : function(aDoc)
+	cmd_save : function (aDoc)
 	{
 		sbPageEditor.saveOrCapture();
 	},
 
-	removeFormat : function(aDoc)
+	cmd_removeFormat : function (aDoc)
 	{
 		aDoc.execCommand("removeFormat", false, null);
 	},
 
-	bold : function(aDoc)
+	cmd_bold : function (aDoc)
 	{
 		aDoc.execCommand("bold", false, null);
 	},
 
-	italic : function(aDoc)
+	cmd_italic : function (aDoc)
 	{
 		aDoc.execCommand("italic", false, null);
 	},
 
-	underline : function(aDoc)
+	cmd_underline : function (aDoc)
 	{
 		aDoc.execCommand("underline", false, null);
 	},
 
-	strikeThrough : function(aDoc)
+	cmd_strikeThrough : function (aDoc)
 	{
 		aDoc.execCommand("strikeThrough", false, null);
 	},
 
-	setColor : function(aDoc)
+	cmd_setColor : function (aDoc)
 	{
 		var data = {};
 		// prompt the dialog for user input
@@ -883,112 +911,117 @@ var sbHtmlEditor = {
 		aDoc.execCommand("styleWithCSS", false, false);
 	},
 
-	increaseFontSize : function(aDoc)
+	cmd_increaseFontSize : function (aDoc)
 	{
 		aDoc.execCommand("increaseFontSize", false, null);
 	},
 
-	decreaseFontSize : function(aDoc)
+	cmd_decreaseFontSize : function (aDoc)
 	{
 		aDoc.execCommand("decreaseFontSize", false, null);
 	},
 
-	superscript : function(aDoc)
+	cmd_superscript : function (aDoc)
 	{
 		aDoc.execCommand("superscript", false, null);
 	},
 
-	subscript : function(aDoc)
+	cmd_subscript : function (aDoc)
 	{
 		aDoc.execCommand("subscript", false, null);
 	},
 
-	formatblock_p : function(aDoc)
+	cmd_formatblock_p : function (aDoc)
 	{
 		aDoc.execCommand("formatblock", false, "p");
 	},
 
-	formatblock_h1 : function(aDoc)
+	cmd_formatblock_h1 : function (aDoc)
 	{
 		aDoc.execCommand("formatblock", false, "h1");
 	},
 
-	formatblock_h2 : function(aDoc)
+	cmd_formatblock_h2 : function (aDoc)
 	{
 		aDoc.execCommand("formatblock", false, "h2");
 	},
 
-	formatblock_h3 : function(aDoc)
+	cmd_formatblock_h3 : function (aDoc)
 	{
 		aDoc.execCommand("formatblock", false, "h3");
 	},
 
-	formatblock_h4 : function(aDoc)
+	cmd_formatblock_h4 : function (aDoc)
 	{
 		aDoc.execCommand("formatblock", false, "h4");
 	},
 
-	formatblock_h5 : function(aDoc)
+	cmd_formatblock_h5 : function (aDoc)
 	{
 		aDoc.execCommand("formatblock", false, "h5");
 	},
 
-	formatblock_h6 : function(aDoc)
+	cmd_formatblock_h6 : function (aDoc)
 	{
 		aDoc.execCommand("formatblock", false, "h6");
 	},
 
-	formatblock_div : function(aDoc)
+	cmd_formatblock_div : function (aDoc)
 	{
 		aDoc.execCommand("formatblock", false, "div");
 	},
 
-	formatblock_pre : function(aDoc)
+	cmd_formatblock_pre : function (aDoc)
 	{
 		aDoc.execCommand("formatblock", false, "pre");
 	},
 
-	insertUnorderedList : function(aDoc)
+	cmd_insertUnorderedList : function (aDoc)
 	{
 		aDoc.execCommand("insertUnorderedList", false, null);
 	},
 
-	insertOrderedList : function(aDoc)
+	cmd_insertOrderedList : function (aDoc)
 	{
 		aDoc.execCommand("insertOrderedList", false, null);
 	},
 
-	outdent : function(aDoc)
+	cmd_outdent : function (aDoc)
 	{
 		aDoc.execCommand("outdent", false, null);
 	},
 
-	indent : function(aDoc)
+	cmd_indent : function (aDoc)
 	{
 		aDoc.execCommand("indent", false, null);
 	},
 
-	justifyLeft : function(aDoc)
+	cmd_justifyLeft : function (aDoc)
 	{
 		aDoc.execCommand("justifyLeft", false, null);
 	},
 
-	justifyRight : function(aDoc)
+	cmd_justifyRight : function (aDoc)
 	{
 		aDoc.execCommand("justifyRight", false, null);
 	},
 
-	justifyCenter : function(aDoc)
+	cmd_justifyCenter : function (aDoc)
 	{
 		aDoc.execCommand("justifyCenter", false, null);
 	},
 
-	unlink : function(aDoc)
+	cmd_justifyFull : function (aDoc)
+	{
+		aDoc.execCommand("justifyFull", false, null);
+	},
+
+	cmd_unlink : function (aDoc)
 	{
 		aDoc.execCommand("unlink", false, null);
 	},
 
-	attachLink : function(aDoc)
+	cmd_attachLink : function (aDoc)
 	{
 		var sel = aDoc.defaultView.getSelection();
 		// fill the selection it looks like an URL
@@ -1087,7 +1120,7 @@ var sbHtmlEditor = {
 		}
 	},
 
-	attachFile : function(aDoc)
+	cmd_attachFile : function (aDoc)
 	{
 		// we can upload file only for those with valid id
 		if (!sbPageEditor.item) return;
@@ -1201,34 +1234,47 @@ var sbHtmlEditor = {
 				aDoc.execCommand("insertHTML", false, html);
 			}
 		}
-		// insert hist html ?
-		else if (data.hist_html_use) {
-			var title = data.hist_html;
-			var filename = "." + sbCommonUtils.splitFileName(htmlFile.leafName)[0] + "." + sbCommonUtils.getTimeStamp() + (title ? " " + title : "") + ".html";
-			var filename2 = sbCommonUtils.validateFileName(filename);
-			try {
-				var destFile = htmlFile.parent.clone();
-				destFile.append(filename2);
-				if ( destFile.exists() && destFile.isFile() ) {
-					if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [filename2])) ) return;
-					destFile.remove(false);
-				}
-				// copy the page
-				htmlFile.copyTo(destFile.parent, filename2);
-			} catch(ex) {
-				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename2]));
-				return;
+	},
+
+	cmd_backupFile : function (aDoc)
+	{
+		// we can save history only for those with valid id
+		if (!sbPageEditor.item) return;
+		// check if the current page is local and get its path
+		var htmlFile = sbCommonUtils.convertURLToFile(aDoc.location.href);
+		if (!htmlFile) return;
+		// check if it's an HTML file
+		if (sbCommonUtils.splitFileName(htmlFile.leafName)[1] != "html") return;
+		// prompt the dialog for user input
+		var data = {};
+		var accepted = window.top.openDialog("chrome://scrapbook/content/editor_backup.xul", "ScrapBook:backupFile", "chrome,modal,centerscreen,resizable", data);
+		if (data.result != 1) return;
+		// insert hist html
+		var title = data.hist_html;
+		var filename = "." + sbCommonUtils.splitFileName(htmlFile.leafName)[0] + "." + sbCommonUtils.getTimeStamp() + (title ? " " + title : "") + ".html";
+		var filename2 = sbCommonUtils.validateFileName(filename);
+		try {
+			var destFile = htmlFile.parent.clone();
+			destFile.append(filename2);
+			if ( destFile.exists() && destFile.isFile() ) {
+				if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [filename2])) ) return;
+				destFile.remove(false);
 			}
+			// copy the page
+			htmlFile.copyTo(destFile.parent, filename2);
+		} catch(ex) {
+			sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename2]));
+			return;
 		}
 	},
 
-	horizontalLine : function(aDoc)
+	cmd_horizontalLine : function (aDoc)
 	{
 		var html = '<hr/>';
 		aDoc.execCommand("insertHTML", false, html);
 	},
 
-	insertDate : function(aDoc)
+	cmd_insertDate : function (aDoc)
 	{
 		var fmt = sbCommonUtils.getPref("edit.insertDateFormat", "") || "%Y-%m-%d %H:%M:%S";
 		var time = "&lt;time&gt;";
@@ -1236,69 +1282,69 @@ var sbHtmlEditor = {
 		aDoc.execCommand("insertHTML", false, time);
 	},
 
-	insertTodoBox : function(aDoc)
+	cmd_insertTodoBox : function (aDoc)
 	{
 		var html = '<input type="checkbox" data-sb-obj="todo" />';
 		aDoc.execCommand("insertHTML", false, html);
 	},
 
-	insertTodoBoxDone : function(aDoc)
+	cmd_insertTodoBoxDone : function (aDoc)
 	{
 		var html = '<input type="checkbox" data-sb-obj="todo" checked="checked" />';
 		aDoc.execCommand("insertHTML", false, html);
 	},
 
-	wrapHTML1 : function(aDoc)
+	cmd_wrapHTML1 : function (aDoc)
 	{
 		this._wrapHTML(aDoc, 1);
 	},
 
-	wrapHTML2 : function(aDoc)
+	cmd_wrapHTML2 : function (aDoc)
 	{
 		this._wrapHTML(aDoc, 2);
 	},
 
-	wrapHTML3 : function(aDoc)
+	cmd_wrapHTML3 : function (aDoc)
 	{
 		this._wrapHTML(aDoc, 3);
 	},
 
-	wrapHTML4 : function(aDoc)
+	cmd_wrapHTML4 : function (aDoc)
 	{
 		this._wrapHTML(aDoc, 4);
 	},
 
-	wrapHTML5 : function(aDoc)
+	cmd_wrapHTML5 : function (aDoc)
 	{
 		this._wrapHTML(aDoc, 5);
 	},
 
-	wrapHTML6 : function(aDoc)
+	cmd_wrapHTML6 : function (aDoc)
 	{
 		this._wrapHTML(aDoc, 6);
 	},
 
-	wrapHTML7 : function(aDoc)
+	cmd_wrapHTML7 : function (aDoc)
 	{
 		this._wrapHTML(aDoc, 7);
 	},
 
-	wrapHTML8 : function(aDoc)
+	cmd_wrapHTML8 : function (aDoc)
 	{
 		this._wrapHTML(aDoc, 8);
 	},
 
-	wrapHTML9 : function(aDoc)
+	cmd_wrapHTML9 : function (aDoc)
 	{
 		this._wrapHTML(aDoc, 9);
 	},
 
-	wrapHTML0 : function(aDoc)
+	cmd_wrapHTML0 : function (aDoc)
 	{
 		this._wrapHTML(aDoc, 0);
 	},
 
-	_wrapHTML : function(aDoc, aIdx)
+	_wrapHTML : function (aDoc, aIdx)
 	{
 		var sel = aDoc.defaultView.getSelection();
 		var html = sel.isCollapsed ? "{THIS}" : sbPageEditor.getSelectionHTML(sel);
@@ -1307,7 +1353,7 @@ var sbHtmlEditor = {
 		aDoc.execCommand("insertHTML", false, html);
 	},
 	
-	insertSource : function(aDoc)
+	cmd_insertSource : function (aDoc)
 	{
 		var sel = aDoc.defaultView.getSelection();
 		var collapsed = sel.isCollapsed;

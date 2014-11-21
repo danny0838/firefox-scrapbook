@@ -24,8 +24,52 @@
 <!ENTITY sb.edit.html.file "插入檔案">
 <!ENTITY sb.edit.html.file.pick "插入檔案:">
 <!ENTITY sb.edit.html.file.html "插入子頁面:">
-<!ENTITY sb.edit.html.file.histHtml "備份目前頁面:">
 <!ENTITY sb.edit.html.file.format "指定插入格式:">
+<!ENTITY sb.edit.html.backup "備份目前頁面">
+<!ENTITY sb.edit.html.backup.desc "描述:">
+<!ENTITY sb.edit.html.menu.basic "字元">
+<!ENTITY sb.edit.html.menu.block "區塊">
+<!ENTITY sb.edit.html.menu.insert "插入">
+<!ENTITY sb.edit.html.menu.wrapper "進階">
+<!ENTITY sb.edit.html.menuitem.insertSource "插入或編輯原始碼">
+<!ENTITY sb.edit.html.menuitem.removeFormat "移除格式">
+<!ENTITY sb.edit.html.menuitem.unlink "移除連結">
+<!ENTITY sb.edit.html.menuitem.save "儲存頁面">
+<!ENTITY sb.edit.html.menuitem.quit "切換 HTML 編輯器">
+<!ENTITY sb.edit.html.menuitem.bold "切換粗體">
+<!ENTITY sb.edit.html.menuitem.italic "切換斜體">
+<!ENTITY sb.edit.html.menuitem.underline "切換底線">
+<!ENTITY sb.edit.html.menuitem.strikeThrough "切換刪除線">
+<!ENTITY sb.edit.html.menuitem.setColor "設定文字及背景顏色">
+<!ENTITY sb.edit.html.menuitem.increaseFontSize "放大字級">
+<!ENTITY sb.edit.html.menuitem.decreaseFontSize "縮小字級">
+<!ENTITY sb.edit.html.menuitem.superscript "切換上標">
+<!ENTITY sb.edit.html.menuitem.subscript "切換下標">
+<!ENTITY sb.edit.html.menuitem.formatblock_p "設定為一般段落">
+<!ENTITY sb.edit.html.menuitem.formatblock_h1 "設定為 1 級標題">
+<!ENTITY sb.edit.html.menuitem.formatblock_h2 "設定為 2 級標題">
+<!ENTITY sb.edit.html.menuitem.formatblock_h3 "設定為 3 級標題">
+<!ENTITY sb.edit.html.menuitem.formatblock_h4 "設定為 4 級標題">
+<!ENTITY sb.edit.html.menuitem.formatblock_h5 "設定為 5 級標題">
+<!ENTITY sb.edit.html.menuitem.formatblock_h6 "設定為 6 級標題">
+<!ENTITY sb.edit.html.menuitem.formatblock_div "設定為 DIV 區塊">
+<!ENTITY sb.edit.html.menuitem.formatblock_pre "設定為 PRE 區塊">
+<!ENTITY sb.edit.html.menuitem.insertUnorderedList "切換無序列表">
+<!ENTITY sb.edit.html.menuitem.insertOrderedList "切換有序列表">
+<!ENTITY sb.edit.html.menuitem.outdent "減少縮排">
+<!ENTITY sb.edit.html.menuitem.indent "增加縮排">
+<!ENTITY sb.edit.html.menuitem.justifyLeft "靠左對齊">
+<!ENTITY sb.edit.html.menuitem.justifyRight "靠右對齊">
+<!ENTITY sb.edit.html.menuitem.justifyCenter "置中對齊">
+<!ENTITY sb.edit.html.menuitem.justifyFull "左右對齊">
+<!ENTITY sb.edit.html.menuitem.attachLink "插入連結或內部連結">
+<!ENTITY sb.edit.html.menuitem.attachFile "插入檔案或子頁面">
+<!ENTITY sb.edit.html.menuitem.backupFile "建立此頁面的備份">
+<!ENTITY sb.edit.html.menuitem.horizontalLine "插入水平線">
+<!ENTITY sb.edit.html.menuitem.insertDate "插入日期">
+<!ENTITY sb.edit.html.menuitem.insertTodoBox "插入待辦事項核取方塊">
+<!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "插入待辦事項核取方塊 (已勾選)">
+<!ENTITY sb.edit.html.menuitem.wrapHTML "用模版格式化">
 <!ENTITY sb.edit.cutter "刪除選取區">
 <!ENTITY sb.edit.remove.iframe "移除所有 IFRAME 標籤">
 <!ENTITY sb.edit.remove.script "移除所有 SCRIPT 標籤">
