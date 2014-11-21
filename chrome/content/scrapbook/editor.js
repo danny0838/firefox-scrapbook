@@ -1762,7 +1762,7 @@ var sbDOMEraser = {
 		keyboxElem.style.fontSize = "12px";
 		keyboxElem.style.position = "absolute";
 		keyboxElem.style.padding = "2px 5px 2px 5px";
-		keyboxElem.style.zIndex = "5006";
+		keyboxElem.style.zIndex = "2147483647";
 		keyboxElem.innerHTML = content;
         doc.body.appendChild(keyboxElem);
 
@@ -1834,7 +1834,7 @@ var sbDOMEraser = {
 			this.labelElem.style.position = "absolute";
 			this.labelElem.style.padding = "2px 5px 2px 5px";
 			this.labelElem.style.borderRadius = "6px";
-			this.labelElem.style.zIndex = "5005";
+			this.labelElem.style.zIndex = "2147483647";
 			this.labelElem.innerHTML = text;
 			doc.body.appendChild(this.labelElem);
 
