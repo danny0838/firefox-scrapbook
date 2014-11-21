@@ -1506,6 +1506,7 @@ var sbDOMEraser = {
 		"C" : "colorize",
 		"D" : "deWidthify",
 		"U" : "undo",
+		"H" : "help",
 		"Q" : "quit",
 	},
 
@@ -1544,6 +1545,8 @@ var sbDOMEraser = {
 			// apply settings to the current window
 			this.initEvent(this.lastWindow, 1);
 			this.initStyle(this.lastWindow, 1);
+			// show help
+			this._showHelp(this.lastWindow);
 		}
 	},
 
@@ -1613,6 +1616,7 @@ var sbDOMEraser = {
 		else if ( aEvent.type == "mousemove" ) {
 			sbDOMEraser.lastX = aEvent.clientX;
 			sbDOMEraser.lastY = aEvent.clientY;
+			sbDOMEraser._clearHelp();
 		}
 		else if ( aEvent.type == "click" ) {
 			var elem = sbDOMEraser.lastTarget;
@@ -1736,6 +1740,12 @@ var sbDOMEraser = {
 		}
 	},
 
+	cmd_help : function (aNode)
+	{
+		this._showHelp(this.lastWindow);
+		return true;
+	},
+
 	cmd_undo : function (aNode)
 	{
 		return sbPageEditor.undo();
@@ -1743,10 +1753,198 @@ var sbDOMEraser = {
 
 	_execCommand : function (win, command, key)
 	{
+		if (command != "help") this._clearHelp();
 		var callback = sbDOMEraser["cmd_" + command];
 		if (callback.call(sbDOMEraser, sbDOMEraser.lastTarget)) {
 			sbDOMEraser._showKeybox(win, command, key);
 		}
+	},
+
+	_showHelp : function (win)
+	{
+		var doc = win.document;
+		var id = "DOMEraser_" + (new Date()).valueOf();  // a unique id for styling
+
+		// clear the help if existed
+		if (this.helpElem) {
+			this._clearHelp();
+			return;
+		}
+
+		// create new help
+        var helpElem = doc.createElement("DIV");
+		helpElem.id = id;
+		helpElem.isDOMEraser = true; // mark as ours
+		helpElem.style.backgroundColor = "#f0f0f0";
+		helpElem.style.opacity = "0.95";
+		helpElem.style.boxShadow = "3px 4px 5px #888";
+		helpElem.style.margin = "0 auto";
+		helpElem.style.border = "1px solid #CCC";
+		helpElem.style.borderRadius = "5px";
+		helpElem.style.padding = "0";
+		helpElem.style.textAlign = "left";
+		helpElem.style.color = "#000";
+		helpElem.style.fontSize = "16px";
+		helpElem.style.display = "block";
+		helpElem.style.position = "absolute";
+		helpElem.style.zIndex = "2147483647";
+
+		var content = ''
+			+ '<style>\n'
+			+ '#__id__ .keytable {\n'
+			+ '	margin: 5px 10px 0 10px;\n'
+			+ '}\n'
+			+ '#__id__ .key {\n'
+			+ '	padding: 2px 7px;\n'
+			+ '	border: 1px solid black;\n'
+			+ '	background-color: #ddd;\n'
+			+ '	font-family: monospace;\n'
+			+ '	font-weight: bold;\n'
+			+ '}\n'
+			+ '#__id__ .altkey code {\n'
+			+ '	margin: 1px;\n'
+			+ '	border: 1px solid black;\n'
+			+ '	padding: 1px 2px;\n'
+			+ '	background-color: #ddd;\n'
+			+ '	font-family: monospace;\n'
+			+ '	font-weight: bold;\n'
+			+ '}\n'
+			+ '#__id__ .command {\n'
+			+ '	padding: 3px 7px;\n'
+			+ '	font-size: 14px;\n'
+			+ '	text-align: left;\n'
+			+ '}\n'
+			+ '</style>\n'
+			+ '<div style="margin: 0; border: 0; padding: 10; text-align: center; color: #000; font-size: 24px; background-color: #D8D7DC;">ScrapBook DOM Eraser Tips</div>\n'
+			+ '<div style="padding: 5px 20px;">\n'
+			+ '	Move the mouse to select an element.<br>\n'
+			+ '	Use the following commands to operate on.<br>\n'
+			+ '</div>\n'
+			+ '<div style="margin: 0 auto; padding: 1px 10px 10px 10px;">\n'
+			+ '<div style="float: left;">\n'
+			+ '<table class="keytable">\n'
+			+ '<tbody>\n'
+			+ '<tr>\n'
+			+ '	<th colspan="2">Primary Keys</th>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="key"><code>h</code></td>\n'
+			+ '	<td class="command">help (toggle)</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="key"><code>q</code></td>\n'
+			+ '	<td class="command">quit (deactivate)</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="key"><code>w</code></td>\n'
+			+ '	<td class="command">wider</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="key"><code>n</code></td>\n'
+			+ '	<td class="command">narrower</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="key"><code>r</code></td>\n'
+			+ '	<td class="command">remove</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="key"><code>i</code></td>\n'
+			+ '	<td class="command">isolate</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="key"><code>b</code></td>\n'
+			+ '	<td class="command">black on white</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="key"><code>c</code></td>\n'
+			+ '	<td class="command">colorize</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="key"><code>d</code></td>\n'
+			+ '	<td class="command">de-width</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="key"><code>u</code></td>\n'
+			+ '	<td class="command">undo</td>\n'
+			+ '</tr>\n'
+			+ '</tbody>\n'
+			+ '</table>\n'
+			+ '</div>\n'
+			+ '<div style="float: left;">\n'
+			+ '<table class="keytable">\n'
+			+ '<tbody>\n'
+			+ '<tr>\n'
+			+ '	<th colspan="2">Alternatives</th>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="altkey"><code>click</code></td>\n'
+			+ '	<td class="command">remove</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="altkey"><code>enter</code></td>\n'
+			+ '	<td class="command">remove</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="altkey"><code>space</code></td>\n'
+			+ '	<td class="command">remove</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="altkey"><code>right-click</code></td>\n'
+			+ '	<td class="command">isolate</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="altkey"><code>shift</code>+<code>click</code></td>\n'
+			+ '	<td class="command">isolate</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="altkey"><code>shift</code>+<code>enter</code></td>\n'
+			+ '	<td class="command">isolate</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="altkey"><code>shift</code>+<code>space</code></td>\n'
+			+ '	<td class="command">isolate</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="altkey"><code>+</code></td>\n'
+			+ '	<td class="command">wider</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="altkey"><code>-</code></td>\n'
+			+ '	<td class="command">narrower</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="altkey"><code>F9</code></td>\n'
+			+ '	<td class="command">activate or deactivate</td>\n'
+			+ '</tr>\n'
+			+ '<tr>\n'
+			+ '	<td class="altkey"><code>ESC</code></td>\n'
+			+ '	<td class="command">deactivate</td>\n'
+			+ '</tr>\n'
+			+ '</tbody>\n'
+			+ '</table>\n'
+			+ '</div>\n'
+			+ '<div style="clear: both;" />\n'
+			+ '</div>\n';
+
+		content = content.replace(/__id__/g, id);
+		helpElem.innerHTML = content;
+		doc.body.appendChild(helpElem);
+
+		// fix position
+		var dims = this._getWindowDimensions(win);
+		var x = dims.scrollX + (dims.width - helpElem.offsetWidth) / 2;  if (x < 0) x = 0;
+		var y = dims.scrollY + (dims.height - helpElem.offsetHeight) / 2; if (y < 0) y = 0;
+		helpElem.style.left = x + "px";
+		helpElem.style.top = y + "px";
+
+		// expose this variable
+		this.helpElem = helpElem;
+	},
+
+	_clearHelp : function()
+	{
+		try { sbDOMEraser.helpElem.parentNode.removeChild(sbDOMEraser.helpElem); } catch(ex) {}
+		sbDOMEraser.helpElem = null;
 	},
 
 	_showKeybox : function (win, command, key)
@@ -1961,6 +2159,7 @@ var sbDOMEraser = {
 	// clear all elements generated by DOMEraser
 	// usually before making an undo history, to prevent anything being recorded
 	_clear : function () {
+		this._clearHelp();
 		this._clearKeybox();
 		this._deselectNode();
 	},
