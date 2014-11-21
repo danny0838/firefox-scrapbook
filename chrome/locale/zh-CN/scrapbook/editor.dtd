@@ -1,16 +1,21 @@
 <!ENTITY sb.toolbar.edit "编辑工具栏">
 <!ENTITY sb.toolbar.info "信息工具栏">
-<!ENTITY sb.edit.eraser "DOM 橡皮: 单击页面上的元素可以将该部分删除。">
+<!ENTITY sb.edit.folderView "点击检视资料目录。">
+<!ENTITY sb.edit.eraser "DOM 橡皮- 删除不想要的元素或 ScrapBook 注记">
 <!ENTITY sb.edit.undo "撤销">
 <!ENTITY sb.edit.save "保存">
 <!ENTITY sb.edit.comment "展开注释区">
-<!ENTITY sb.edit.sticky "即时贴">
-<!ENTITY sb.edit.sticky.create "创建即时贴">
-<!ENTITY sb.edit.inline.add "为所选内容添加提示">
-<!ENTITY sb.edit.annotation.add "在所选内容后添加 HTML 提示">
+<!ENTITY sb.edit.annotationTool "注解工具 - 点击建立自由注解。">
+<!ENTITY sb.edit.sticky "即时贴"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "创建即时贴"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "创建自由注解">
+<!ENTITY sb.edit.inline.add "为所选内容添加行內注解">
+<!ENTITY sb.edit.annotation.add "在所选内容后添加 HTML 注解">
 <!ENTITY sb.edit.attach.file "为所选内容附加文件">
 <!ENTITY sb.edit.attach.link "为所选内容附加链接">
 <!ENTITY sb.edit.attach.innerlink "为所选内容附加内部链接">
+<!ENTITY sb.edit.cutterTool "橡皮工具- 点击删除选取区，中键点击清除选取区内的 ScrapBook 注记。">
+<!ENTITY sb.edit.htmlTool "HTML 编辑器- 点击开启或关闭，开启后可自由编辑页面内容，并可透过快捷键或右键选单调用编辑功能。">
 <!ENTITY sb.edit.html "HTML 编辑器">
 <!ENTITY sb.edit.html.color "编辑颜色">
 <!ENTITY sb.edit.html.color.forText "设定文字颜色:">
@@ -23,14 +28,59 @@
 <!ENTITY sb.edit.html.file "插入文件">
 <!ENTITY sb.edit.html.file.pick "插入文件:">
 <!ENTITY sb.edit.html.file.html "插入子页面:">
-<!ENTITY sb.edit.html.file.histHtml "备分当前页面:">
 <!ENTITY sb.edit.html.file.format "指定插入格式:">
+<!ENTITY sb.edit.html.backup "备份当前页面">
+<!ENTITY sb.edit.html.backup.desc "描述:">
+<!ENTITY sb.edit.html.menu.basic "字符">
+<!ENTITY sb.edit.html.menu.block "区块">
+<!ENTITY sb.edit.html.menu.insert "插入">
+<!ENTITY sb.edit.html.menu.wrapper "高级">
+<!ENTITY sb.edit.html.menuitem.insertSource "插入或编辑源代码">
+<!ENTITY sb.edit.html.menuitem.removeFormat "清除格式">
+<!ENTITY sb.edit.html.menuitem.unlink "清除链接">
+<!ENTITY sb.edit.html.menuitem.save "保存页面">
+<!ENTITY sb.edit.html.menuitem.quit "切换 HTML 编辑器">
+<!ENTITY sb.edit.html.menuitem.bold "切换粗体">
+<!ENTITY sb.edit.html.menuitem.italic "切换斜体">
+<!ENTITY sb.edit.html.menuitem.underline "切换底线">
+<!ENTITY sb.edit.html.menuitem.strikeThrough "切换删除线">
+<!ENTITY sb.edit.html.menuitem.setColor "设定文字及背景颜色">
+<!ENTITY sb.edit.html.menuitem.increaseFontSize "放大字级">
+<!ENTITY sb.edit.html.menuitem.decreaseFontSize "缩小字级">
+<!ENTITY sb.edit.html.menuitem.superscript "切换上标">
+<!ENTITY sb.edit.html.menuitem.subscript "切换下标">
+<!ENTITY sb.edit.html.menuitem.formatblock_p "设定为一般段落">
+<!ENTITY sb.edit.html.menuitem.formatblock_h1 "设定为 1 级标题">
+<!ENTITY sb.edit.html.menuitem.formatblock_h2 "设定为 2 级标题">
+<!ENTITY sb.edit.html.menuitem.formatblock_h3 "设定为 3 级标题">
+<!ENTITY sb.edit.html.menuitem.formatblock_h4 "设定为 4 级标题">
+<!ENTITY sb.edit.html.menuitem.formatblock_h5 "设定为 5 级标题">
+<!ENTITY sb.edit.html.menuitem.formatblock_h6 "设定为 6 级标题">
+<!ENTITY sb.edit.html.menuitem.formatblock_div "设定为 DIV 区块">
+<!ENTITY sb.edit.html.menuitem.formatblock_pre "设定为 PRE 区块">
+<!ENTITY sb.edit.html.menuitem.insertUnorderedList "切换无序列表">
+<!ENTITY sb.edit.html.menuitem.insertOrderedList "切换有序列表">
+<!ENTITY sb.edit.html.menuitem.outdent "减少缩进">
+<!ENTITY sb.edit.html.menuitem.indent "增加缩进">
+<!ENTITY sb.edit.html.menuitem.justifyLeft "靠左对齐">
+<!ENTITY sb.edit.html.menuitem.justifyRight "靠右对齐">
+<!ENTITY sb.edit.html.menuitem.justifyCenter "置中对齐">
+<!ENTITY sb.edit.html.menuitem.justifyFull "左右对齐">
+<!ENTITY sb.edit.html.menuitem.attachLink "插入链接或内部链接">
+<!ENTITY sb.edit.html.menuitem.attachFile "插入文件或子页面">
+<!ENTITY sb.edit.html.menuitem.backupFile "建立此页面的备份">
+<!ENTITY sb.edit.html.menuitem.horizontalLine "插入水平线">
+<!ENTITY sb.edit.html.menuitem.insertDate "插入日期">
+<!ENTITY sb.edit.html.menuitem.insertTodoBox "插入待办事项选框">
+<!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "插入待办事项选框 (已勾选)">
+<!ENTITY sb.edit.html.menuitem.wrapHTML "用模版格式化">
 <!ENTITY sb.edit.cutter "删除所选内容">
 <!ENTITY sb.edit.remove.iframe "删除所有 IFRAME 标签">
 <!ENTITY sb.edit.remove.script "删除所有 SCRIPT 标签">
+<!ENTITY sb.highlighterTool "高亮标记工具- 点击在选取区加上高亮标记。">
 <!ENTITY sb.highlighter "高亮标记">
-<!ENTITY sb.highlighter.remove "取消所选高亮显示">
-<!ENTITY sb.highlighter.remove.all "取消所有高亮显示">
+<!ENTITY sb.highlighter.remove "清除选取区内的 ScrapBook 注记">
+<!ENTITY sb.highlighter.remove.all "清除所有 ScrapBook 注记">
 <!ENTITY sb.source "打开原始链接">
 <!ENTITY sb.renew "重新获取">
 <!ENTITY sb.internalize "将内嵌的外部媒体存入资料目录">

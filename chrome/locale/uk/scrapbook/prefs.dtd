@@ -17,9 +17,9 @@
 <!ENTITY sb.prefs.restart "Потребує перезавантаження Firefox.">
 <!ENTITY sb.prefs.tabs.tips "Відкривати у нових вкладках наступні дії">
 <!ENTITY sb.prefs.tabs.note "Редагувати нотатку">
-<!ENTITY sbx.prefs.edit.autoEditNoteX "Auto edit Note Pages">
-<!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
-<!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data "Місце збереження даних">
 <!ENTITY sb.prefs.data.default "Типово (тека профілю)">
 <!ENTITY sb.prefs.data.custom "Зберігати дані у">
