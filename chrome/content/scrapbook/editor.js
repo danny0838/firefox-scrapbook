@@ -1757,6 +1757,9 @@ var sbDOMEraser = {
 	{
 		var doc = win.document;
 
+		// clear previous keybox
+		this._clearKeybox();
+
 		// set content
 		var content = command;
 		if (key) {
@@ -1798,10 +1801,16 @@ var sbDOMEraser = {
 		keyboxElem.style.top = y + "px";
 
 		// remove the keybox after a timeout
-		var t = setTimeout(function () {
-			try { keyboxElem.parentNode.removeChild(keyboxElem); } catch(ex) {}
-			clearTimeout(t);
-		}, 400);
+		this.keyboxElem = keyboxElem;
+		this.keyboxTimeout = setTimeout(this._clearKeybox, 400);
+	},
+
+	_clearKeybox : function()
+	{
+		try { sbDOMEraser.keyboxElem.parentNode.removeChild(sbDOMEraser.keyboxElem); } catch(ex) {}
+		try { clearTimeout(sbDOMEraser.keyboxTimeout); } catch(ex) {}
+		sbDOMEraser.keyboxElem = null;
+		sbDOMEraser.keyboxTimeout = null;
 	},
 
 	// given an element, walk upwards to find the first
