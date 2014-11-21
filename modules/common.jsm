@@ -482,11 +482,14 @@ var sbCommonUtils = {
 		return "resource://scrapbook/" + pathFull.substring(pathBase.length);
 	},
 
-	convertResURLToURL : function(aResURL)
+	convertResURLToURL : function(aResURL, aRelative)
 	{
 		if (aResURL.indexOf("resource://scrapbook/") != 0) return aResURL;
-		var pathBase = this.convertFilePathToURL(this.getScrapBookDir().path);
 		var subPath = aResURL.substring("resource://scrapbook/".length);
+		// if relative, return the subpath under the ScrapBook directory
+		if ( aRelative ) return subPath;
+		// else return the full path
+		var pathBase = this.convertFilePathToURL(this.getScrapBookDir().path);
 		return pathBase + subPath;
 	},
 
@@ -900,7 +903,7 @@ var sbCommonUtils = {
 	{
 		var type = this.getSbObjectType(aNode);
 		if (!type) return -1;
-		if (["title", "title-src", "todo"].indexOf(type) != -1) return 0;
+		if (["title", "title-src", "stylesheet", "stylesheet-temp", "todo"].indexOf(type) != -1) return 0;
 		if (["linemarker", "inline", "link-url", "link-inner", "link-file", "custom-wrapper"].indexOf(type) != -1) return 2;
 		return 1;
 	},

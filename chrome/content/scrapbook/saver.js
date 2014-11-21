@@ -529,15 +529,27 @@ var sbContentSaver = {
 					case "stylesheet" :
 						if ( this.option["internalize"] ) break;
 						if ( aNode.hasAttribute("href") ) {
-							if ( !this.option["styles"] ) {
+							if ( sbCommonUtils.getSbObjectType(aNode) == "stylesheet" ) {
+								// a special stylesheet used by scrapbook, keep it intact
+								// (it should use an absolute link or a chrome link, which don't break after capture)
+							}
+							else if ( aNode.href.indexOf("chrome://") == 0 ) {
+								// a special stylesheet used by scrapbook or other addons/programs, keep it intact
+							} 
+							else if ( !this.option["styles"] ) {
+								// not capturing styles, set it blank and record the original address in a hash
 								aNode.setAttribute("href", "about:blank#" + aNode.href);
 							}
-							else if ( !this.option["rewriteStyles"] ) {
+							else if ( this.option["rewriteStyles"] ) {
+								// capturing styles with rewrite, the style should be already processed
+								// in saveDocumentInternal => processCSSRecursively
+								// remove it here with safety
+								return this.removeNodeFromParent(aNode);
+							}
+							else {
+								// capturing styles with no rewrite, download it and rewrite the link
 								var aFileName = this.download(aNode.href);
 								if (aFileName) aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
-							}
-							else if ( aNode.href.indexOf("chrome://") != 0 ) {
-								return this.removeNodeFromParent(aNode);
 							}
 						}
 						break;
@@ -567,11 +579,17 @@ var sbContentSaver = {
 				}
 				break;
 			case "style" : 
-				if ( !this.option["styles"] ) {
+				if ( sbCommonUtils.getSbObjectType(aNode) == "stylesheet" ) {
+					// a special stylesheet used by scrapbook, keep it intact
+				}
+				else if ( !this.option["styles"] ) {
+					// not capturing styles, remove it
 					return this.removeNodeFromParent(aNode);
 				}
 				else if ( this.option["rewriteStyles"] ) {
-					// CSS in the page will be handled in another way, so remove them here
+					// capturing styles with rewrite, the styles should be already processed
+					// in saveDocumentInternal => processCSSRecursively
+					// remove it here with safety
 					return this.removeNodeFromParent(aNode);
 				}
 				break;
@@ -720,7 +738,11 @@ var sbContentSaver = {
 
 	processCSSRecursively : function(aCSS, aDocument, rootNode, isImport)
 	{
+		// aCSS is invalid or disabled, skip it
 		if (!aCSS || aCSS.disabled) return "";
+		// a special stylesheet used by scrapbook, skip parsing it
+		if (aCSS.ownerNode && sbCommonUtils.getSbObjectType(aCSS.ownerNode) == "stylesheet") return "";
+		// a special stylesheet used by scrapbook or other addons/programs, skip parsing it
 		if (aCSS.href && aCSS.href.indexOf("chrome://") == 0) return "";
 		var content = "";
 		// sometimes <link> cannot access remote css
