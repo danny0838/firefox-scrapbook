@@ -1539,20 +1539,16 @@ var sbDOMEraser = {
 			}
 			// revert settings of the last window
 			if (this.lastWindow) {
-				sbCommonUtils.flattenFrames(this.lastWindow).forEach(function(win) {
-					this.initEvent(win, 0);
-					this.initStyle(win, 0);
-				}, this);
+				this.initEvent(this.lastWindow, 0);
+				this.initStyle(this.lastWindow, 0);
 			}
 		}
 		else if (aStateFlag == 1) {
 			this.lastWindow = window.content;
 			this.verbose = 0;
 			// apply settings to the current window
-			sbCommonUtils.flattenFrames(this.lastWindow).forEach(function(win) {
-				this.initEvent(win, 1);
-				this.initStyle(win, 1);
-			}, this);
+			this.initEvent(this.lastWindow, 1);
+			this.initStyle(this.lastWindow, 1);
 		}
 	},
 
