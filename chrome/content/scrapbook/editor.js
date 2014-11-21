@@ -1487,15 +1487,6 @@ var sbHtmlEditor = {
 
 var sbDOMEraser = {
 
-	enabled : false,
-	verbose : 0,
-	lastX : 0,
-	lastY : 0,
-	lastTarget : null,
-	mouseTarget : null,
-	widerStack : null,
-	lastWindow : null,
-
 	_shortcut_table : {
 		"F9" : "quit",
 		"Escape" : "quit",
@@ -1516,6 +1507,15 @@ var sbDOMEraser = {
 		"U" : "undo",
 		"Q" : "quit",
 	},
+
+	enabled : false,
+	verbose : 0,
+	lastX : 0,
+	lastY : 0,
+	lastTarget : null,
+	mouseTarget : null,
+	widerStack : null,
+	lastWindow : null,
 
 	// aStateFlag
 	//   0: disable
