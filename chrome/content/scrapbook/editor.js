@@ -1693,10 +1693,19 @@ var sbDOMEraser = {
 		this._deselectNode();
 		sbPageEditor.allowUndo(aNode.ownerDocument);
 		this._selectNode(aNode);
-		aNode.style.color = "#000";
-		aNode.style.backgroundColor = "#FFF";
-		aNode.style.backgroundImage = "";
+		blackOnWhite(aNode);
 		return true;
+
+		function blackOnWhite(aNode) {
+			if (aNode.nodeType != 1) return;
+			aNode.style.color = "#000";
+			aNode.style.backgroundColor = "#FFF";
+			aNode.style.backgroundImage = "";
+			var childs = aNode.childNodes;
+			for (var i=0; i<childs.length; i++) {
+				blackOnWhite(childs[i]);
+			}
+		}
 	},
 
 	cmd_deWidthify : function (aNode)
