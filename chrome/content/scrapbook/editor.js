@@ -1061,7 +1061,7 @@ var sbHtmlEditor = {
 				var html = sbCommonUtils.stringTemplate(data.format, /{([\w_]+)}/g, {
 					URL: sbCommonUtils.escapeHTML(data.url, false, true),
 					TITLE: "",
-					THIS: sel.isCollapsed ? sbCommonUtils.escapeHTML(data.url, false, true) : sbPageEditor.getSelectionHTML(sel),
+					THIS: sel.isCollapsed ? sbCommonUtils.escapeHTMLWithSpace(data.url, false, true) : sbPageEditor.getSelectionHTML(sel),
 				});
 				aDoc.execCommand("insertHTML", false, html);
 			}
@@ -1090,7 +1090,7 @@ var sbHtmlEditor = {
 				var html = sbCommonUtils.stringTemplate(data.format, /{([\w_]+)}/g, {
 					URL: (type == "bookmark") ? sbCommonUtils.escapeHTML(sbDataSource.getProperty(res, "source"), false, true) : sbCommonUtils.escapeHTML(makeRelativeLink(aDoc.location.href, sbPageEditor.item.id, id), false, true),
 					TITLE: sbCommonUtils.escapeHTML(sbDataSource.getProperty(res, "title"), false, true),
-					THIS: sel.isCollapsed ? sbCommonUtils.escapeHTML(sbDataSource.getProperty(res, "title"), false, true) : sbPageEditor.getSelectionHTML(sel),
+					THIS: sel.isCollapsed ? sbCommonUtils.escapeHTMLWithSpace(sbDataSource.getProperty(res, "title"), false, true) : sbPageEditor.getSelectionHTML(sel),
 				});
 				aDoc.execCommand("insertHTML", false, html);
 			}
@@ -1147,7 +1147,7 @@ var sbHtmlEditor = {
 				var html = sbCommonUtils.stringTemplate(data.format, /{([\w_]+)}/g, {
 					FILE: sbCommonUtils.escapeHTML(filename, false, true),
 					FILE_E: sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(filename2), false, true),
-					THIS: sel.isCollapsed ? sbCommonUtils.escapeHTMLWithSpace(filename) : sbPageEditor.getSelectionHTML(sel),
+					THIS: sel.isCollapsed ? sbCommonUtils.escapeHTMLWithSpace(filename, false, true) : sbPageEditor.getSelectionHTML(sel),
 				});
 				aDoc.execCommand("insertHTML", false, html);
 			}
@@ -1205,7 +1205,7 @@ var sbHtmlEditor = {
 				var html = sbCommonUtils.stringTemplate(data.format, /{([\w_]+)}/g, {
 					FILE: sbCommonUtils.escapeHTML(filename, false, true),
 					FILE_E: sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(filename2), false, true),
-					THIS: sel.isCollapsed ? sbCommonUtils.escapeHTMLWithSpace(filename) : sbPageEditor.getSelectionHTML(sel),
+					THIS: sel.isCollapsed ? sbCommonUtils.escapeHTMLWithSpace(filename, false, true) : sbPageEditor.getSelectionHTML(sel),
 				});
 				aDoc.execCommand("insertHTML", false, html);
 			}
