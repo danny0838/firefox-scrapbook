@@ -1058,17 +1058,15 @@ var sbHtmlEditor = {
 		if (data.url_use) {
 			// attach the link
 			if (data.format) {
-				var URL = data.url;
-				var THIS = sel.isCollapsed ? URL : sbPageEditor.getSelectionHTML(sel);
-				var TITLE = "";
-				var html = data.format.replace(/{(TITLE|URL|THIS)}/g, function(){
-					switch (arguments[1]) {
-						case "TITLE": return TITLE;
-						case "URL": return URL;
-						case "THIS": return THIS;
-					}
-					return "";
-				});
+				var html = sbCommonUtils.stringTemplate(
+					data.format,
+					{
+						URL: sbCommonUtils.escapeHTML(data.url, false, true),
+						TITLE: "",
+						THIS: sel.isCollapsed ? sbCommonUtils.escapeHTML(data.url, false, true) : sbPageEditor.getSelectionHTML(sel),
+					},
+					/{([\w_]+)}/g
+				);
 				aDoc.execCommand("insertHTML", false, html);
 			}
 		}
@@ -1093,17 +1091,15 @@ var sbHtmlEditor = {
 			}
 			// attach the link
 			if (data.format) {
-				var TITLE = sbDataSource.getProperty(res, "title");
-				var URL = (type == "bookmark") ? sbDataSource.getProperty(res, "source") : makeRelativeLink(aDoc.location.href, sbPageEditor.item.id, id);
-				var THIS = sel.isCollapsed ? TITLE : sbPageEditor.getSelectionHTML(sel);
-				var html = data.format.replace(/{(TITLE|URL|THIS)}/g, function(){
-					switch (arguments[1]) {
-						case "TITLE": return TITLE;
-						case "URL": return URL;
-						case "THIS": return THIS;
-					}
-					return "";
-				});
+				var html = sbCommonUtils.stringTemplate(
+					data.format,
+					{
+						URL: (type == "bookmark") ? sbCommonUtils.escapeHTML(sbDataSource.getProperty(res, "source"), false, true) : sbCommonUtils.escapeHTML(makeRelativeLink(aDoc.location.href, sbPageEditor.item.id, id), false, true),
+						TITLE: sbCommonUtils.escapeHTML(sbDataSource.getProperty(res, "title"), false, true),
+						THIS: sel.isCollapsed ? sbCommonUtils.escapeHTML(sbDataSource.getProperty(res, "title"), false, true) : sbPageEditor.getSelectionHTML(sel),
+					},
+					/{([\w_]+)}/g
+				);
 				aDoc.execCommand("insertHTML", false, html);
 			}
 		}
