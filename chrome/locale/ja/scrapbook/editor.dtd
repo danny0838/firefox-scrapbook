@@ -77,7 +77,7 @@
 <!ENTITY sb.edit.cutter "選択範囲をカット">
 <!ENTITY sb.edit.remove.iframe "すべてのIFRAMEタグを削除">
 <!ENTITY sb.edit.remove.script "すべてのSCRIPTタグを削除">
-<!ENTITY sb.highlighterTool "Highlighter Tool - Click to add highlight for the selection.">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to highlight the selection.">
 <!ENTITY sb.highlighter "マーカー">
 <!ENTITY sb.highlighter.remove "選択範囲のScrapBookノートをクリア">
 <!ENTITY sb.highlighter.remove.all "すべてのScrapBookノートをクリア">

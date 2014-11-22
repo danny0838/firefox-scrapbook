@@ -77,7 +77,7 @@
 <!ENTITY sb.edit.cutter "Poista valinta">
 <!ENTITY sb.edit.remove.iframe "Poista kaikki IFRAME-tunnukset">
 <!ENTITY sb.edit.remove.script "Poista kaikki komentosarjatunnisteet">
-<!ENTITY sb.highlighterTool "Highlighter Tool - Click to add highlight for the selection.">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to highlight the selection.">
 <!ENTITY sb.highlighter "Korostin">
 <!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
 <!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">

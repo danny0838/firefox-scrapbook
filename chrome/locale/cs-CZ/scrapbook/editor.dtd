@@ -77,7 +77,7 @@
 <!ENTITY sb.edit.cutter "Odstranit výběr">
 <!ENTITY sb.edit.remove.iframe "Odstranit VŠECHNY tagy IFRAME">
 <!ENTITY sb.edit.remove.script "Odstranit VŠECHNY tagy SCRIPT">
-<!ENTITY sb.highlighterTool "Highlighter Tool - Click to add highlight for the selection.">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to highlight the selection.">
 <!ENTITY sb.highlighter "Zvýrazňovač">
 <!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
 <!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">

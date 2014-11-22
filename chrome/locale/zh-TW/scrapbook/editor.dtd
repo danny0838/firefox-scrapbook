@@ -77,7 +77,7 @@
 <!ENTITY sb.edit.cutter "刪除選取區">
 <!ENTITY sb.edit.remove.iframe "刪除所有 IFRAME 標籤">
 <!ENTITY sb.edit.remove.script "刪除所有 SCRIPT 標籤">
-<!ENTITY sb.highlighterTool "標示工具 - 點擊在選取區加上標示。">
+<!ENTITY sb.highlighterTool "標示工具 - 點擊以標示選取區。">
 <!ENTITY sb.highlighter "標示">
 <!ENTITY sb.highlighter.remove "清除選取區內的 ScrapBook 註記">
 <!ENTITY sb.highlighter.remove.all "清除所有 ScrapBook 註記">
