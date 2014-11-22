@@ -5,7 +5,7 @@
 <!ENTITY sb.edit.undo "Kumoa">
 <!ENTITY sb.edit.save "Tallenna muutokset">
 <!ENTITY sb.edit.comment "Laajenna kommenttialuetta">
-<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote.">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
 <!ENTITY sb.edit.sticky "Muistilappu"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.sticky.create "Luo &sb.edit.sticky;"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">

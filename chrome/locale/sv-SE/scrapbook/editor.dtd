@@ -5,7 +5,7 @@
 <!ENTITY sb.edit.undo "Ångra">
 <!ENTITY sb.edit.save "Spara ändringar">
 <!ENTITY sb.edit.comment "Visa kommenteringsområdet">
-<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote.">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
 <!ENTITY sb.edit.sticky "Klisterlapp"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.sticky.create "Skapa klisterlapp"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">

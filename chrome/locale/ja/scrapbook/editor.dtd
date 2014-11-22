@@ -5,7 +5,7 @@
 <!ENTITY sb.edit.undo "元に戻す">
 <!ENTITY sb.edit.save "変更を保存する">
 <!ENTITY sb.edit.comment "コメントエリアを広げる">
-<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote.">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
 <!ENTITY sb.edit.sticky "付箋アノテーション"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.sticky.create "&sb.edit.sticky;を作成"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "自由ノートを作成">

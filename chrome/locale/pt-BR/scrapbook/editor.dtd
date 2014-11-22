@@ -5,7 +5,7 @@
 <!ENTITY sb.edit.undo "Desfazer">
 <!ENTITY sb.edit.save "Salvar Mudanças">
 <!ENTITY sb.edit.comment "Expandir Área do Comentário">
-<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote.">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
 <!ENTITY sb.edit.sticky "Anotação"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.sticky.create "Criar &sb.edit.sticky;"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">

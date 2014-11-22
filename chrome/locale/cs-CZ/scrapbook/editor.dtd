@@ -5,7 +5,7 @@
 <!ENTITY sb.edit.undo "Zpět">
 <!ENTITY sb.edit.save "Uložit změny">
 <!ENTITY sb.edit.comment "Rozšířit oblast pro komentář">
-<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote.">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
 <!ENTITY sb.edit.sticky "Nálepka"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.sticky.create "Vytvořit nálepku"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">

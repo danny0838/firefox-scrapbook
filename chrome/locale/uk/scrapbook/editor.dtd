@@ -5,7 +5,7 @@
 <!ENTITY sb.edit.undo "Повернути">
 <!ENTITY sb.edit.save "Зберегти зміни">
 <!ENTITY sb.edit.comment "Збільшити форму коментування">
-<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote.">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
 <!ENTITY sb.edit.sticky "Пересувна нотатка"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.sticky.create "Створити пересувну нотатку"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">

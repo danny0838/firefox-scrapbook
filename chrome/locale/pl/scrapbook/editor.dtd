@@ -5,7 +5,7 @@
 <!ENTITY sb.edit.undo "Cofnij">
 <!ENTITY sb.edit.save "Zapisz zmiany">
 <!ENTITY sb.edit.comment "Zmień obszar komentarza">
-<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote.">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
 <!ENTITY sb.edit.sticky "Przyklejona notatka"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.sticky.create "Utwórz przyklejoną notatkę"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
