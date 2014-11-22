@@ -721,13 +721,13 @@ var sbCommonUtils = {
 
 	escapeHTML : function(aStr, aNoDoubleQuotes, aSingleQuotes, aNoAmp)
 	{
-		var list = {"&": (aNoAmp ? "&" : "&amp;"), "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&apos;" : "'") };
+		var list = {"&": (aNoAmp ? "&" : "&amp;"), "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&#39;" : "'") };
 		return aStr.replace(/[&<>"']/g, function(m){ return list[m]; });
 	},
 
 	escapeHTMLWithSpace : function(aStr, aNoDoubleQuotes, aSingleQuotes, aNoAmp)
 	{
-		var list = {"&": (aNoAmp ? "&" : "&amp;"), "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&apos;" : "'"), " ": "&nbsp;" };
+		var list = {"&": (aNoAmp ? "&" : "&amp;"), "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&#39;" : "'"), " ": "&nbsp;" };
 		return aStr.replace(/[&<>"']| (?= )/g, function(m){ return list[m]; });
 	},
 
