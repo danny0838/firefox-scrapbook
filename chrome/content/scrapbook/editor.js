@@ -1058,16 +1058,10 @@ var sbHtmlEditor = {
 		if (data.url_use) {
 			// attach the link
 			if (data.format) {
-				var URL = data.url;
-				var THIS = sel.isCollapsed ? URL : sbPageEditor.getSelectionHTML(sel);
-				var TITLE = "";
-				var html = data.format.replace(/{(TITLE|URL|THIS)}/g, function(){
-					switch (arguments[1]) {
-						case "TITLE": return TITLE;
-						case "URL": return URL;
-						case "THIS": return THIS;
-					}
-					return "";
+				var html = sbCommonUtils.stringTemplate(data.format, /{([\w_]+)}/g, {
+					URL: sbCommonUtils.escapeHTML(data.url, false, true),
+					TITLE: "",
+					THIS: sel.isCollapsed ? sbCommonUtils.escapeHTMLWithSpace(data.url, false, true) : sbPageEditor.getSelectionHTML(sel),
 				});
 				aDoc.execCommand("insertHTML", false, html);
 			}
@@ -1093,16 +1087,10 @@ var sbHtmlEditor = {
 			}
 			// attach the link
 			if (data.format) {
-				var TITLE = sbDataSource.getProperty(res, "title");
-				var URL = (type == "bookmark") ? sbDataSource.getProperty(res, "source") : makeRelativeLink(aDoc.location.href, sbPageEditor.item.id, id);
-				var THIS = sel.isCollapsed ? TITLE : sbPageEditor.getSelectionHTML(sel);
-				var html = data.format.replace(/{(TITLE|URL|THIS)}/g, function(){
-					switch (arguments[1]) {
-						case "TITLE": return TITLE;
-						case "URL": return URL;
-						case "THIS": return THIS;
-					}
-					return "";
+				var html = sbCommonUtils.stringTemplate(data.format, /{([\w_]+)}/g, {
+					URL: (type == "bookmark") ? sbCommonUtils.escapeHTML(sbDataSource.getProperty(res, "source"), false, true) : sbCommonUtils.escapeHTML(makeRelativeLink(aDoc.location.href, sbPageEditor.item.id, id), false, true),
+					TITLE: sbCommonUtils.escapeHTML(sbDataSource.getProperty(res, "title"), false, true),
+					THIS: sel.isCollapsed ? sbCommonUtils.escapeHTMLWithSpace(sbDataSource.getProperty(res, "title"), false, true) : sbPageEditor.getSelectionHTML(sel),
 				});
 				aDoc.execCommand("insertHTML", false, html);
 			}
@@ -1156,15 +1144,11 @@ var sbHtmlEditor = {
 			}
 			// insert to the document
 			if (data.format) {
-				var html = sbCommonUtils.stringTemplate(
-					data.format,
-					{
-						FILE: sbCommonUtils.escapeHTML(filename),
-						FILE_E: sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(filename2)),
-						THIS: sel.isCollapsed ? sbCommonUtils.escapeHTML(filename) : sbPageEditor.getSelectionHTML(sel),
-					},
-					/{([\w_]+)}/g
-				);
+				var html = sbCommonUtils.stringTemplate(data.format, /{([\w_]+)}/g, {
+					FILE: sbCommonUtils.escapeHTML(filename, false, true),
+					FILE_E: sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(filename2), false, true),
+					THIS: sel.isCollapsed ? sbCommonUtils.escapeHTMLWithSpace(filename, false, true) : sbPageEditor.getSelectionHTML(sel),
+				});
 				aDoc.execCommand("insertHTML", false, html);
 			}
 		}
@@ -1187,34 +1171,30 @@ var sbHtmlEditor = {
 				// create content
 				var content = sbCommonUtils.readFile(template);
 				content = sbCommonUtils.convertToUnicode(content, "UTF-8");
-				content = sbCommonUtils.stringTemplate(
-					content,
-					{
-						NOTE_TITLE: title,
-						SCRAPBOOK_DIR: (function(aFile){
-							var result = "", checkFile = aFile.parent;
-							var sbDir = sbCommonUtils.getScrapBookDir();
-							while (!checkFile.equals(sbDir)){
-								result += "../";
-								checkFile = checkFile.parent;
-							}
-							// remove trailing "/"
-							return result.substring(0, result.length -1);
-						})(destFile),
-						DATA_DIR: (function(aFile, aID){
-							var result = "", checkFile = aFile.parent;
-							var dataDir = sbCommonUtils.getContentDir(aID);
-							while (!checkFile.equals(dataDir)){
-								result += "../";
-								checkFile = checkFile.parent;
-							}
-							// remove trailing "/", or return "." if empty
-							if (result) return result.substring(0, result.length -1);
-							else return ".";
-						})(destFile, sbPageEditor.item.id),
-					},
-					/<%([\w_]+)%>/g
-				);
+				content = sbCommonUtils.stringTemplate(content, /<%([\w_]+)%>/g, {
+					NOTE_TITLE: title,
+					SCRAPBOOK_DIR: (function(aFile){
+						var result = "", checkFile = aFile.parent;
+						var sbDir = sbCommonUtils.getScrapBookDir();
+						while (!checkFile.equals(sbDir)){
+							result += "../";
+							checkFile = checkFile.parent;
+						}
+						// remove trailing "/"
+						return result.substring(0, result.length -1);
+					})(destFile),
+					DATA_DIR: (function(aFile, aID){
+						var result = "", checkFile = aFile.parent;
+						var dataDir = sbCommonUtils.getContentDir(aID);
+						while (!checkFile.equals(dataDir)){
+							result += "../";
+							checkFile = checkFile.parent;
+						}
+						// remove trailing "/", or return "." if empty
+						if (result) return result.substring(0, result.length -1);
+						else return ".";
+					})(destFile, sbPageEditor.item.id),
+				});
 				sbCommonUtils.writeFile(destFile, content, "UTF-8", true);
 			} catch(ex) {
 				sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename2]));
@@ -1222,15 +1202,11 @@ var sbHtmlEditor = {
 			}
 			// insert to the document
 			if (data.insert && data.format) {
-				var html = sbCommonUtils.stringTemplate(
-					data.format,
-					{
-						FILE: sbCommonUtils.escapeHTML(filename),
-						FILE_E: sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(filename2)),
-						THIS: sel.isCollapsed ? sbCommonUtils.escapeHTML(filename) : sbPageEditor.getSelectionHTML(sel),
-					},
-					/{([\w_]+)}/g
-				);
+				var html = sbCommonUtils.stringTemplate(data.format, /{([\w_]+)}/g, {
+					FILE: sbCommonUtils.escapeHTML(filename, false, true),
+					FILE_E: sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(filename2), false, true),
+					THIS: sel.isCollapsed ? sbCommonUtils.escapeHTMLWithSpace(filename, false, true) : sbPageEditor.getSelectionHTML(sel),
+				});
 				aDoc.execCommand("insertHTML", false, html);
 			}
 		}
@@ -2044,7 +2020,7 @@ var sbDOMEraser = {
 	_addTooltip : function(aNode) {
 		if ( sbCommonUtils.getSbObjectRemoveType(aNode) > 0 ) {
 			var outlineStyle = "2px dashed #0000FF";
-			var labelText = sbCommonUtils.escapeHTML(sbCommonUtils.lang("overlay", "EDIT_REMOVE_HIGHLIGHT"));
+			var labelText = sbCommonUtils.escapeHTMLWithSpace(sbCommonUtils.lang("overlay", "EDIT_REMOVE_HIGHLIGHT"));
 		}
 		else {
 			var outlineStyle = "2px solid #FF0000";
@@ -2103,9 +2079,9 @@ var sbDOMEraser = {
 		}
 
 		function makeElementLabelString(elem) {
-			var s = "<b style='color:#000'>" + sbCommonUtils.escapeHTML(elem.tagName.toLowerCase()) + "</b>";
-			if (elem.id != '') s += ", id: " + sbCommonUtils.escapeHTML(elem.id);
-			if (elem.className != '') s += ", class: " + sbCommonUtils.escapeHTML(elem.className);
+			var s = "<b style='color:#000'>" + sbCommonUtils.escapeHTMLWithSpace(elem.tagName.toLowerCase()) + "</b>";
+			if (elem.id != '') s += ", id: " + sbCommonUtils.escapeHTMLWithSpace(elem.id);
+			if (elem.className != '') s += ", class: " + sbCommonUtils.escapeHTMLWithSpace(elem.className);
 			return s;
 		}
 
@@ -2232,7 +2208,7 @@ var sbAnnotationService = {
 					}
 					sbAnnotationService.createFreenote({
 						element: sticky,
-						content: sbCommonUtils.escapeHTML(text, true).replace("\n", "<br>"),
+						content: sbCommonUtils.escapeHTMLWithSpace(text, true).replace("\n", "<br>"),
 						isRelative: sticky.className.indexOf("scrapbook-sticky-relative") != -1,
 					});
 					break;

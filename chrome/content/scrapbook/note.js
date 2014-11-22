@@ -78,7 +78,7 @@ var sbNoteService2 = {
 			title   = sbNoteService.TEXTBOX.value;
 			content = "";
 		}
-		title = sbCommonUtils.escapeHTML(title, true, false, true);
+		title = sbCommonUtils.escapeHTMLWithSpace(title, false, true, true);
 		if ( document.getElementById("sbNoteToolbarL").getAttribute("checked") ) content = content.replace(/([^>])$/mg, "$1<br>");
 		source = source.replace(/<%NOTE_TITLE%>/g,   title);
 		source = source.replace(/<%NOTE_CONTENT%>/g, content);

@@ -53,7 +53,7 @@ function SB_getHTMLHead(aTitle)
 		+ '<html>\n'
 		+ '<head>\n'
 		+ '<meta charset="UTF-8">\n'
-		+ '<title>' + sbCommonUtils.escapeHTML(aTitle, true) + '</title>\n'
+		+ '<title>' + sbCommonUtils.escapeHTMLWithSpace(aTitle, true) + '</title>\n'
 		+ '<style type="text/css" media="all" data-sb-obj="stylesheet">\n'
 		+ 'body {\n'
 		+ '	margin: 0px;\n'
@@ -112,7 +112,7 @@ function SB_getHTMLBody(aItem)
 {
 	var src = '<cite class="scrapbook-header">\n'
 		+ '\t<img src="' + sbCommonUtils.escapeHTML(aItem.icon) + '" width="16" height="16">\n'
-		+ '\t<a href="' + sbCommonUtils.escapeHTML(aItem.source) + '" target="_top">' + sbCommonUtils.escapeHTML(aItem.title, true) + '</a>\n'
+		+ '\t<a href="' + sbCommonUtils.escapeHTML(aItem.source) + '" target="_top">' + sbCommonUtils.escapeHTMLWithSpace(aItem.title, true) + '</a>\n'
 		+ '</cite>\n';
 	if ( aItem.type != "bookmark" ) src += '<iframe class="scrapbook-iframe" src="data/' + aItem.id + '/index.html" onload="initHeight(this);"></iframe>\n';
 	return src;

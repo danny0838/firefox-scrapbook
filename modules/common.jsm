@@ -721,11 +721,14 @@ var sbCommonUtils = {
 
 	escapeHTML : function(aStr, aNoDoubleQuotes, aSingleQuotes, aNoAmp)
 	{
-		if (!aNoAmp) aStr = aStr.replace(/&/g, "&amp;");
-		aStr = aStr.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-		if (!aNoDoubleQuotes) aStr = aStr.replace(/"/g, "&quot;");
-		if (aSingleQuotes) aStr = aStr.replace(/'/g, "&apos;");
-		return aStr;
+		var list = {"&": (aNoAmp ? "&" : "&amp;"), "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&#39;" : "'") };
+		return aStr.replace(/[&<>"']/g, function(m){ return list[m]; });
+	},
+
+	escapeHTMLWithSpace : function(aStr, aNoDoubleQuotes, aSingleQuotes, aNoAmp)
+	{
+		var list = {"&": (aNoAmp ? "&" : "&amp;"), "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&#39;" : "'"), " ": "&nbsp;" };
+		return aStr.replace(/[&<>"']| (?= )/g, function(m){ return list[m]; });
 	},
 
 	escapeRegExp : function(aString)
@@ -741,13 +744,13 @@ var sbCommonUtils = {
 		return aString.replace(/[#]+|(?:%[0-9A-Fa-f]{2})+/g, function(m){return encodeURIComponent(m);});
 	},
 
-	stringTemplate : function(aString, aTplArray, aTplRegExp)
+	// aTplRegExp is a RegExp with label name in the frist parenthesis, eg. /{([\w_]+)}/g
+	stringTemplate : function(aString, aTplRegExp, aTplArray)
 	{
-		var ret = aString.replace(aTplRegExp, function(match, label){
-			if (aTplArray[label]) return aTplArray[label];
+		return aString.replace(aTplRegExp, function(match, label){
+			if (label in aTplArray) return aTplArray[label];
 			return "";
 		});
-		return ret;
 	},
 		
 	pad : function(n, width, z)

@@ -398,7 +398,7 @@ var sbPageCombiner = {
 				+ '<html>\n'
 				+ '<head>\n'
 				+ '<meta charset="UTF-8">\n'
-				+ '<title>' + sbCombineService.option["T"] + '</title>\n'
+				+ '<title>' + sbCommonUtils.escapeHTMLWithSpace(sbCombineService.option["T"], true) + '</title>\n'
 				+ '<link rel="stylesheet" href="combine.css" media="all">\n'
 				+ '<link rel="stylesheet" href="chrome://scrapbook/skin/annotation.css" media="all" data-sb-obj="stylesheet">\n'
 				+ '<style type="text/css" media="all" data-sb-obj="stylesheet">\n'
@@ -494,7 +494,7 @@ var sbPageCombiner = {
 		icon = sbCommonUtils.convertResURLToURL(icon, true);
 		src += '<cite class="scrapbook-header' + '">\n';
 		src += '\t<img src="' + sbCommonUtils.escapeHTML(icon) + '" width="16" height="16">\n';
-		src += '\t<a class="' + aType + '"' + (linkURL ? ' href="' + sbCommonUtils.escapeHTML(linkURL) + '"' : "") + '>' + sbCommonUtils.escapeHTML(title, true) + '</a>\n';
+		src += '\t<a class="' + aType + '"' + (linkURL ? ' href="' + sbCommonUtils.escapeHTML(linkURL) + '"' : "") + '>' + sbCommonUtils.escapeHTMLWithSpace(title, true) + '</a>\n';
 		src += '</cite>\n';
 		return src;
 	},
