@@ -744,7 +744,8 @@ var sbCommonUtils = {
 		return aString.replace(/[#]+|(?:%[0-9A-Fa-f]{2})+/g, function(m){return encodeURIComponent(m);});
 	},
 
-	stringTemplate : function(aString, aTplArray, aTplRegExp)
+	// aTplRegExp is a RegExp with label name in the frist parenthesis, eg. /{([\w_]+)}/g
+	stringTemplate : function(aString, aTplRegExp, aTplArray)
 	{
 		return aString.replace(aTplRegExp, function(match, label){
 			if (label in aTplArray) return aTplArray[label];
