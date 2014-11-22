@@ -2178,7 +2178,9 @@ var sbAnnotationService = {
 					}
 					break;
 				case "freenote-header" :
-					sbAnnotationService.startDrag(aEvent, true);
+					if (aEvent.originalTarget.style.cursor == "move") {
+						sbAnnotationService.startDrag(aEvent, true);
+					}
 					break;
 				case "freenote-footer" :
 					sbAnnotationService.startDrag(aEvent, false);
@@ -2367,11 +2369,12 @@ var sbAnnotationService = {
 	_editFreenote : function(mainDiv)
 	{
 		var doc = mainDiv.ownerDocument;
+		var isRelative = mainDiv.style.position != "absolute";
 		mainDiv.setAttribute("data-sb-active", "1");
 
 		var headDiv = doc.createElement("DIV");
 		headDiv.setAttribute("data-sb-obj", "freenote-header");
-		headDiv.style.cursor = "move";
+		headDiv.style.cursor = isRelative ? "auto" : "move";
 		headDiv.style.position = "absolute";
 		headDiv.style.margin = "0px";
 		headDiv.style.marginTop = -this.FREENOTE_HEADER_HEIGHT + "px";
