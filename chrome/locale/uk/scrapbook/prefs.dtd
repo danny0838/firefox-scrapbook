@@ -17,9 +17,9 @@
 <!ENTITY sb.prefs.restart "Потребує перезавантаження Firefox.">
 <!ENTITY sb.prefs.tabs.tips "Відкривати у нових вкладках наступні дії">
 <!ENTITY sb.prefs.tabs.note "Редагувати нотатку">
-<!ENTITY sbx.prefs.edit.autoEditNoteX "Auto edit Note Pages">
-<!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
-<!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data "Місце збереження даних">
 <!ENTITY sb.prefs.data.default "Типово (тека профілю)">
 <!ENTITY sb.prefs.data.custom "Зберігати дані у">
@@ -33,6 +33,7 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "наприкінці теки">
 <!ENTITY sb.prefs.showDetailOnDrop "Відображати діалог „Налаштування збереження“ при збереженні перетягуванням на бічну панель">
 <!ENTITY sb.prefs.notifyOnComplete "Показувати інформацію „Збереження виконано“">
+<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.button.customize "Змінити">
 <!ENTITY sb.button.browse "Вибрати">

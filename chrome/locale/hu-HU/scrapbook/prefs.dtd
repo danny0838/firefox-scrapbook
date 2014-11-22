@@ -17,9 +17,9 @@
 <!ENTITY sb.prefs.restart "A változtatások érvényre jutásához a Firefox újraindítása szükséges">
 <!ENTITY sb.prefs.tabs.tips "Lap nyitása a következő műveletekhez">
 <!ENTITY sb.prefs.tabs.note "Jegyzet szerkesztése">
-<!ENTITY sbx.prefs.edit.autoEditNoteX "Auto edit Note Pages">
-<!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
-<!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data "Adattárolás helye">
 <!ENTITY sb.prefs.data.default "Alapértelmezett (Profil mappa)">
 <!ENTITY sb.prefs.data.custom "Mentés a következő helyre">
@@ -33,6 +33,7 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "mappa végére">
 <!ENTITY sb.prefs.showDetailOnDrop "A „Rögzítés részletek” ablak megjelenítése, ha a felvételt húzd és ejtsd módon kezdeményezik az Oldalsávon">
 <!ENTITY sb.prefs.notifyOnComplete "A „Rögzítés kész” értesítés megjelenítése">
+<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.button.customize "Testreszabás">
 <!ENTITY sb.button.browse "Tallózás">

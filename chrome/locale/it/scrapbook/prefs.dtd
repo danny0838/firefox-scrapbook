@@ -17,9 +17,9 @@
 <!ENTITY sb.prefs.restart "Riavviare il browser per rendere effettive le modifiche">
 <!ENTITY sb.prefs.tabs.tips "Azioni che verranno eseguite in nuove schede">
 <!ENTITY sb.prefs.tabs.note "Apri/modifica le note">
-<!ENTITY sbx.prefs.edit.autoEditNoteX "Auto edit Note Pages">
-<!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
-<!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data "Cartella dove conservare i dati">
 <!ENTITY sb.prefs.data.default "Predefinita (nella cartella del proprio profilo)">
 <!ENTITY sb.prefs.data.custom "(Da selezionare)">
@@ -33,6 +33,7 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "in fondo alla cartella">
 <!ENTITY sb.prefs.showDetailOnDrop "Mostra la finestra di dialogo &apos;Dettagli cattura&apos; quando si cattura tramite trascinamento e rilascio nella barra laterale">
 <!ENTITY sb.prefs.notifyOnComplete "Mostra la finestra di notifica &apos;Cattura completata&apos;">
+<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.button.customize "Personalizza">
 <!ENTITY sb.button.browse "Sfoglia">

@@ -12,7 +12,7 @@
 		<html>
 			<head>
 				<title>SiteMap</title>
-				<link rel="stylesheet" href="chrome://scrapbook/skin/sitemap.css" />
+				<link rel="stylesheet" href="chrome://scrapbook/skin/sitemap.css" data-sb-obj="stylesheet" />
 			</head>
 			<body>
 				<h1>SiteMap</h1>

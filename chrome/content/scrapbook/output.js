@@ -130,7 +130,7 @@ var sbOutputService = {
 			+ '<html>\n\n'
 			+ '<head>\n'
 			+ '	<meta charset="UTF-8">\n'
-			+ '	<title>' + sbCommonUtils.escapeHTML(document.title, true) + '</title>\n'
+			+ '	<title>' + sbCommonUtils.escapeHTMLWithSpace(document.title, true) + '</title>\n'
 			+ '	<meta name="viewport" content="width=device-width">\n'
 			+ '	<link rel="stylesheet" type="text/css" href="output.css" media="all">\n'
 			+ '	<script>\n'
@@ -205,7 +205,7 @@ var sbOutputService = {
 		if ( icon.match(/(\/data\/\d{14}\/.*$)/) ) icon = ".." + RegExp.$1;
 		if ( !icon ) icon = sbCommonUtils.escapeFileName(sbCommonUtils.getFileName( sbCommonUtils.getDefaultIcon(type) ));
 		icon = sbCommonUtils.escapeHTML(icon);
-		title = sbCommonUtils.escapeHTML(title);
+		title = sbCommonUtils.escapeHTMLWithSpace(title);
 		source = sbCommonUtils.escapeHTML(source);
 		var ret;
 		switch (type) {
@@ -244,7 +244,7 @@ var sbOutputService = {
 			+ '<html>\n'
 			+ '<head>\n'
 			+ '	<meta charset="UTF-8">\n'
-			+ '	<title>' + sbCommonUtils.escapeHTML(document.title, true) + '</title>\n'
+			+ '	<title>' + sbCommonUtils.escapeHTMLWithSpace(document.title, true) + '</title>\n'
 			+ '</head>\n'
 			+ '<frameset cols="200,*">\n'
 			+ '	<frame name="side" src="index.html">\n'

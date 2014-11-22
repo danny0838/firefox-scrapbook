@@ -33,6 +33,15 @@ toolbar[iconsize="small"] #scrapbook-button {
 .sb-capture-target  > .menu-iconic-left image,
 .sb-capture-frame   > .menu-iconic-left image { width : 13px !important; height: 13px !important; }
 
+.sb-htmleditor { list-style-image: url('chrome://scrapbook/skin/edit_html.png'); }
+.sb-htmleditor menuitem[value="insertSource"] { list-style-image: url('chrome://scrapbook/skin/edit_html.png'); }
+.sb-htmleditor menuitem[value="removeFormat"] { list-style-image: url('chrome://scrapbook/skin/edit_cutter.png'); }
+.sb-htmleditor menuitem[value="unlink"] { list-style-image: url('chrome://scrapbook/skin/edit_cutter.png'); }
+.sb-htmleditor menuitem[value="save"] { list-style-image: url('chrome://scrapbook/skin/edit_save.png'); }
+.sb-htmleditor menuitem[value="quit"] { list-style-image: url('chrome://scrapbook/skin/edit_html_disable.png'); }
+
+#ScrapBookContextSubmenu { list-style-image: url("chrome://scrapbook/skin/main_16.png"); }
+
 
 /* ::::: MENUBAR ::::: */
 

@@ -17,9 +17,9 @@
 <!ENTITY sb.prefs.restart "需重新啟動 Firefox 方能生效。">
 <!ENTITY sb.prefs.tabs.tips "操作下列項目時，以分頁開啟">
 <!ENTITY sb.prefs.tabs.note "編輯筆記">
-<!ENTITY sbx.prefs.edit.autoEditNoteX "筆記頁面自動進入編輯模式">
-<!ENTITY sbx.prefs.edit.insertDateFormat "插入日期格式 (strftime):">
-<!ENTITY sbx.prefs.edit.wrapperFormat "HTML 包裹器格式">
+<!ENTITY sb.prefs.edit.autoEditNoteX "筆記頁面自動進入編輯模式">
+<!ENTITY sb.prefs.edit.insertDateFormat "插入日期格式 (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML 格式化模版">
 <!ENTITY sb.prefs.data "擷取資料存放處">
 <!ENTITY sb.prefs.data.default "預設（在您的個人設定檔資料夾中）">
 <!ENTITY sb.prefs.data.custom "存放至">
@@ -33,6 +33,7 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "最後面">
 <!ENTITY sb.prefs.showDetailOnDrop "以拖曳方式擷取資料時，顯示「詳細資訊」對話方塊">
 <!ENTITY sb.prefs.notifyOnComplete "顯示「擷取完畢」提醒視窗">
+<!ENTITY sb.prefs.notifyPageCaptured "瀏覽擷取過的頁面時，顯示提醒視窗">
 <!ENTITY sb.prefs.autoOutput "更動資料時，自動將資料列表匯出為 HTML">
 <!ENTITY sb.button.customize "自訂">
 <!ENTITY sb.button.browse "瀏覽">

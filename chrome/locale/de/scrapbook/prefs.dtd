@@ -17,9 +17,9 @@
 <!ENTITY sb.prefs.restart "Änderung erfordert einen Firefox-Neustart.">
 <!ENTITY sb.prefs.tabs.tips "Folgende Aktionen öffnen neue Tabs">
 <!ENTITY sb.prefs.tabs.note "Notiz bearbeiten">
-<!ENTITY sbx.prefs.edit.autoEditNoteX "Auto edit Note Pages">
-<!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
-<!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data "Zielordner für die Datenspeicherung">
 <!ENTITY sb.prefs.data.default "Standardordner (aktueller Profilordner)">
 <!ENTITY sb.prefs.data.custom "Daten speichern in">
@@ -33,6 +33,7 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "Ende eines Ordners erstellen">
 <!ENTITY sb.prefs.showDetailOnDrop "Dialog &quot;Archivierungsdetails&quot; anzeigen, wenn eine Archivierung durch Ziehen mit der Maus in die Sidebar erfolgt">
 <!ENTITY sb.prefs.notifyOnComplete "Meldung nach Abschluss der Archivierung anzeigen">
+<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.button.customize "Anpassen">
 <!ENTITY sb.button.browse "Durchsuchen">

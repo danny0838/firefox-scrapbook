@@ -17,9 +17,9 @@
 <!ENTITY sb.prefs.restart "更改需要重启 Firefox。">
 <!ENTITY sb.prefs.tabs.tips "随后的操作在标签页中打开">
 <!ENTITY sb.prefs.tabs.note "编辑笔记">
-<!ENTITY sbx.prefs.edit.autoEditNoteX "便签页面自动进入编辑模式">
-<!ENTITY sbx.prefs.edit.insertDateFormat "插入日期格式 (strftime):">
-<!ENTITY sbx.prefs.edit.wrapperFormat "HTML 包裹器格式">
+<!ENTITY sb.prefs.edit.autoEditNoteX "便签页面自动进入编辑模式">
+<!ENTITY sb.prefs.edit.insertDateFormat "插入日期格式 (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML 格式化模版">
 <!ENTITY sb.prefs.data "定位到存储数据的位置">
 <!ENTITY sb.prefs.data.default "默认">
 <!ENTITY sb.prefs.data.custom "保存数据至">
@@ -33,6 +33,7 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "文件夹底部">
 <!ENTITY sb.prefs.showDetailOnDrop "通过向侧栏拖拽进行捕获时显示 &apos;Capture Detail&apos; 对话框">
 <!ENTITY sb.prefs.notifyOnComplete "显示“捕获完成”提示">
+<!ENTITY sb.prefs.notifyPageCaptured "浏览获取过的页面时，显示提示">
 <!ENTITY sb.prefs.autoOutput "更动项目时，自动导出项目列表">
 <!ENTITY sb.button.customize "定制">
 <!ENTITY sb.button.browse "浏览">

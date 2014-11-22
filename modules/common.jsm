@@ -482,11 +482,14 @@ var sbCommonUtils = {
 		return "resource://scrapbook/" + pathFull.substring(pathBase.length);
 	},
 
-	convertResURLToURL : function(aResURL)
+	convertResURLToURL : function(aResURL, aRelative)
 	{
 		if (aResURL.indexOf("resource://scrapbook/") != 0) return aResURL;
-		var pathBase = this.convertFilePathToURL(this.getScrapBookDir().path);
 		var subPath = aResURL.substring("resource://scrapbook/".length);
+		// if relative, return the subpath under the ScrapBook directory
+		if ( aRelative ) return subPath;
+		// else return the full path
+		var pathBase = this.convertFilePathToURL(this.getScrapBookDir().path);
 		return pathBase + subPath;
 	},
 
@@ -718,11 +721,14 @@ var sbCommonUtils = {
 
 	escapeHTML : function(aStr, aNoDoubleQuotes, aSingleQuotes, aNoAmp)
 	{
-		if (!aNoAmp) aStr = aStr.replace(/&/g, "&amp;");
-		aStr = aStr.replace(/</g, "&lt;").replace(/>/g, "&gt;");
-		if (!aNoDoubleQuotes) aStr = aStr.replace(/"/g, "&quot;");
-		if (aSingleQuotes) aStr = aStr.replace(/'/g, "&apos;");
-		return aStr;
+		var list = {"&": (aNoAmp ? "&" : "&amp;"), "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&#39;" : "'") };
+		return aStr.replace(/[&<>"']/g, function(m){ return list[m]; });
+	},
+
+	escapeHTMLWithSpace : function(aStr, aNoDoubleQuotes, aSingleQuotes, aNoAmp)
+	{
+		var list = {"&": (aNoAmp ? "&" : "&amp;"), "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&#39;" : "'"), " ": "&nbsp;" };
+		return aStr.replace(/[&<>"']| (?= )/g, function(m){ return list[m]; });
 	},
 
 	escapeRegExp : function(aString)
@@ -738,13 +744,13 @@ var sbCommonUtils = {
 		return aString.replace(/[#]+|(?:%[0-9A-Fa-f]{2})+/g, function(m){return encodeURIComponent(m);});
 	},
 
-	stringTemplate : function(aString, aTplArray, aTplRegExp)
+	// aTplRegExp is a RegExp with label name in the frist parenthesis, eg. /{([\w_]+)}/g
+	stringTemplate : function(aString, aTplRegExp, aTplArray)
 	{
-		var ret = aString.replace(aTplRegExp, function(match, label){
-			if (aTplArray[label]) return aTplArray[label];
+		return aString.replace(aTplRegExp, function(match, label){
+			if (label in aTplArray) return aTplArray[label];
 			return "";
 		});
-		return ret;
 	},
 		
 	pad : function(n, width, z)
@@ -836,9 +842,17 @@ var sbCommonUtils = {
 	 *
 	 * linemarker (span)
 	 * inline (span)
+	 * annotation (span)
 	 * link-url (a)
+	 * link-inner (a)
 	 * link-file (a)
-	 * sticky (div)
+	 * freenote (div)
+	 * freenote-header
+	 * freenote-body
+	 * freenote-footer
+	 * freenote-save
+	 * freenote-delete
+	 * sticky (div) (for downward compatibility with SBX <= 1.12.0a34)
 	 * sticky-header
 	 * sticky-footer
 	 * sticky-save
@@ -850,6 +864,9 @@ var sbCommonUtils = {
 	 * stylesheet (link, style)
 	 * stylesheet-temp (link, style)
 	 * todo (input, textarea)
+	 *
+	 * custom (*) (custom objects to be removed by the eraser)
+	 * custom-wrapper (*) (custom objects to be unwrapped by the eraser)
 	 */
 	getSbObjectType : function(aNode)
 	{
@@ -867,7 +884,8 @@ var sbCommonUtils = {
 				return "sticky";
 			case "scrapbook-sticky-header":
 				return "sticky-header";
-			
+			case "scrapbook-sticky-footer":
+				return "sticky-footer";
 			case "scrapbook-block-comment":
 				return "block-comment";
 		}
@@ -888,8 +906,8 @@ var sbCommonUtils = {
 	{
 		var type = this.getSbObjectType(aNode);
 		if (!type) return -1;
-		if (["title", "title-src", "todo"].indexOf(type) != -1) return 0;
-		if (["linemarker", "inline", "link-url", "link-inner", "link-file"].indexOf(type) != -1) return 2;
+		if (["title", "title-src", "stylesheet", "stylesheet-temp", "todo"].indexOf(type) != -1) return 0;
+		if (["linemarker", "inline", "link-url", "link-inner", "link-file", "custom-wrapper"].indexOf(type) != -1) return 2;
 		return 1;
 	},
 

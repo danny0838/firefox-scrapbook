@@ -27,38 +27,10 @@ var sbBrowserOverlay = {
 
 	init: function()
 	{
-		document.getElementById("contentAreaContextMenu").addEventListener(
-			"popupshowing", this, false
-		);
-		this.refresh();
 		gBrowser.addProgressListener(this.webProgressListener);
-		if (sbCommonUtils.getPref("ui.contextMenu", false) && 
-		    sbCommonUtils.getPref("ui.contextSubMenu", false)) {
-			var callback = function() {
-				document.getElementById("ScrapBookContextSubmenu").hidden = false;
-				for (var i = 1; i <= 10; i++) {
-					document.getElementById("ScrapBookContextSubmenu").firstChild.appendChild(
-						document.getElementById("ScrapBookContextMenu" + i)
-					);
-				}
-			};
-			window.setTimeout(callback, 1000);
-		}
-		if (sbCommonUtils.getPref("ui.menuBar.icon", false)) {
-			var menu   = document.getElementById("ScrapBookMenu");
-			var button = document.createElement("toolbarbutton");
-			var attrs = menu.attributes;
-			for (var i = 0; i < attrs.length; i++)
-				button.setAttribute(attrs[i].nodeName, attrs[i].nodeValue);
-			while (menu.hasChildNodes())
-				button.appendChild(menu.firstChild);
-			button.removeAttribute("label");
-			button.setAttribute("type", "menu");
-			button.setAttribute("image", "chrome://scrapbook/skin/main_16.png");
-			var menubar = document.getElementById("main-menubar");
-			menubar.appendChild(button);
-			menubar.removeChild(menu);
-		}
+		document.getElementById("contentAreaContextMenu").addEventListener( "popupshowing", this, false);
+		this.refresh();
+		// hotkeys
 		var key = sbCommonUtils.getPref("key.menubar", "");
 		if (key.length == 1) {
 			var elt = document.getElementById("ScrapBookMenu");
@@ -97,9 +69,40 @@ var sbBrowserOverlay = {
 		this.dataTitle = "";
 		this.editMode = sbPageEditor.TOOLBAR.getAttribute("autoshow") == "true";
 		this.infoMode = sbInfoViewer.TOOLBAR.getAttribute("autoshow") == "true";
+		// update menus by ui settings
 		document.getElementById("ScrapBookMenu").hidden        = !sbCommonUtils.getPref("ui.menuBar", false);
-		document.getElementById("ScrapBookStatusPanel").hidden = !sbCommonUtils.getPref("ui.statusBar", false);
 		document.getElementById("ScrapBookToolsMenu").hidden   = !sbCommonUtils.getPref("ui.toolsMenu", false);
+		// -- context menu
+		// update if it's shown in a submenu
+		var contextMenu = document.getElementById("contentAreaContextMenu");
+		var submenu = document.getElementById("ScrapBookContextSubmenu");
+		var submenu_mode_old = submenu.firstChild.hasChildNodes();
+		var submenu_mode_new = sbCommonUtils.getPref("ui.contextSubMenu", false);
+		if (submenu_mode_new != submenu_mode_old) {
+			if (submenu_mode_new) {
+				var start = document.getElementById("ScrapBookContextMenu0"), end = submenu, current;
+				while ((current = start.nextSibling) !== end) {
+					submenu.firstChild.appendChild(current);
+				}
+			}
+			else {
+				while (submenu.firstChild.hasChildNodes()) {
+					contextMenu.insertBefore(submenu.firstChild.firstChild, submenu);
+				}
+			}
+		}
+		// -- main menu
+		// update if it's shown as icon
+		var menu = document.getElementById("ScrapBookMenu");
+		if (sbCommonUtils.getPref("ui.menuBar.icon", false)) {
+			menu.setAttribute("label", "");
+			menu.setAttribute("class", "menu-iconic");
+		}
+		else {
+			menu.setAttribute("label", menu.getAttribute("data-label"));
+			menu.setAttribute("class", "");
+		}
+		// update the database and sidebar
 		sbDataSource.backup();
 		this.setProtocolSubstitution();
 		var file = sbCommonUtils.getScrapBookDir().clone();
@@ -111,6 +114,7 @@ var sbBrowserOverlay = {
 			var ids = sbCommonUtils.getPref("ui.folderList", "");
 			sbCommonUtils.writeFile(file, ids, "UTF-8");
 		}
+		// fire a "location change" event, which updates the main browser window and editor and info toolbars
 		this.onLocationChange(gBrowser.currentURI.spec);
 	},
 
@@ -149,9 +153,39 @@ var sbBrowserOverlay = {
 		}
 		else {
 			window.setTimeout(function() { sbPageEditor.uninit(); }, 0);
+			if ( sbCommonUtils.getPref("notifyPageCaptured", true) ) this.notifyPageCaptured(aURL);
 		}
 		this.locateMe = null;
 		this.lastLocation = aURL;
+	},
+
+	notifyPageCaptured: function(aURL)
+	{
+		aURL = sbCommonUtils.splitURLByAnchor(aURL)[0];
+		var result = [];
+		var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"), 2, true);
+		resList.forEach(function(res) {
+			if (["bookmark", "note", "notex"].indexOf(sbDataSource.getProperty(res, "type")) != -1) return;
+			if (sbCommonUtils.splitURLByAnchor(sbDataSource.getProperty(res, "source"))[0] == aURL) result.push(res);
+		}, this);
+		if (result.length) {
+			res = result[0];
+			var id = sbDataSource.getProperty(res, "id");
+			var title = sbDataSource.getProperty(res, "title");
+			var type = sbDataSource.getProperty(res, "type");
+			var icon = sbDataSource.getProperty(res, "icon") || sbCommonUtils.getDefaultIcon(type);
+
+			var text = title;
+			var title = sbCommonUtils.lang("overlay", "PAGE_CAPTURED", [result.length]);
+			var listener = {
+				observe: function(subject, topic, data) {
+					if (topic == "alertclickcallback")
+						sbCommonUtils.loadURL("chrome://scrapbook/content/view.xul?id=" + data);
+				}
+			};
+			var alertsSvc = Components.classes["@mozilla.org/alerts-service;1"].getService(Components.interfaces.nsIAlertsService);
+			alertsSvc.showAlertNotification(icon, title, text, true, id, listener);
+		}
 	},
 
 	buildPopup: function(aPopup)
@@ -363,7 +397,9 @@ var sbBrowserOverlay = {
 			return document.getElementById(aID);
 		};
 		var prefContext  = sbCommonUtils.getPref("ui.contextMenu", false);
+		var prefContextSub = sbCommonUtils.getPref("ui.contextSubMenu", false);
 		var prefBookmark = sbCommonUtils.getPref("ui.bookmarkMenu", false);
+		getElement("ScrapBookContextSubmenu").hidden = !prefContext || !prefContextSub;
 		getElement("ScrapBookContextMenu0").hidden = !prefContext || onInput;
 		getElement("ScrapBookContextMenu1").hidden = !prefContext || !selected;
 		getElement("ScrapBookContextMenu2").hidden = !prefContext || !selected;
@@ -374,6 +410,7 @@ var sbBrowserOverlay = {
 		getElement("ScrapBookContextMenu7").hidden = !prefContext || selected || !onLink;
 		getElement("ScrapBookContextMenu8").hidden = !prefContext || selected || !onLink;
 		getElement("ScrapBookContextMenu9").hidden = !prefContext || isActive || !prefBookmark;
+		getElement("ScrapBookContextMenu10").hidden = !prefContext || !sbHtmlEditor.enabled;
 	},
 
 	onMiddleClick: function(event, aFlag)
@@ -433,7 +470,6 @@ var sbMenuHandler = {
 			getElement("ScrapBookMenubarItem2").setAttribute("label", document.getElementById("ScrapBookContextMenu" + (selected ? 2 : 4)).getAttribute("label"));
 			getElement("ScrapBookMenubarItem1").className = "menuitem-iconic " + (selected ? "sb-capture-partial" : "sb-capture-entire");
 			getElement("ScrapBookMenubarItem2").className = "menuitem-iconic " + (selected ? "sb-capture-partial" : "sb-capture-entire");
-			getElement("ScrapBookMenubarItem5").label = getElement("ScrapBookMenubarItem5").getAttribute("sblabel");
 			if (!this.shouldRebuild)
 				return;
 			this.shouldRebuild = false;

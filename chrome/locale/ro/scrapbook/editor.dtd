@@ -1,16 +1,21 @@
 <!ENTITY sb.toolbar.edit "Afișează bara de editare">
 <!ENTITY sb.toolbar.info "Afișează bara de informații">
-<!ENTITY sb.edit.eraser "Elimină elementele DOM (elemente pe care se poate face clic într-o pagină web)">
+<!ENTITY sb.edit.folderView "Click to view the data directory. Middle-click to open in a new tab.">
+<!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
 <!ENTITY sb.edit.undo "Anulează operația">
 <!ENTITY sb.edit.save "Salvează modificările">
 <!ENTITY sb.edit.comment "Extinde zona comentariu">
-<!ENTITY sb.edit.sticky "notă adezivă">
-<!ENTITY sb.edit.sticky.create "Creează o &sb.edit.sticky;">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
+<!ENTITY sb.edit.sticky "notă adezivă"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "Creează o &sb.edit.sticky;"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Adaugă o adnotare la selecție">
 <!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "Atașează un fișier la selecție">
 <!ENTITY sb.edit.attach.link "Atașează o legătură la selecție">
 <!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.cutterTool "Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.">
+<!ENTITY sb.edit.htmlTool "HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.">
 <!ENTITY sb.edit.html "HTML Editor">
 <!ENTITY sb.edit.html.color "Edit Color">
 <!ENTITY sb.edit.html.color.forText "Set text color:">
@@ -23,14 +28,59 @@
 <!ENTITY sb.edit.html.file "Insert File">
 <!ENTITY sb.edit.html.file.pick "Insert file:">
 <!ENTITY sb.edit.html.file.html "Insert sub-page:">
-<!ENTITY sb.edit.html.file.histHtml "Backup current page:">
 <!ENTITY sb.edit.html.file.format "Select insert format:">
+<!ENTITY sb.edit.html.backup "Backup the Current Page">
+<!ENTITY sb.edit.html.backup.desc "Description:">
+<!ENTITY sb.edit.html.menu.basic "Text">
+<!ENTITY sb.edit.html.menu.block "Block">
+<!ENTITY sb.edit.html.menu.insert "Insert">
+<!ENTITY sb.edit.html.menu.wrapper "Advanced">
+<!ENTITY sb.edit.html.menuitem.insertSource "Insert or Edit Source">
+<!ENTITY sb.edit.html.menuitem.removeFormat "Clear Formats">
+<!ENTITY sb.edit.html.menuitem.unlink "Clear Links">
+<!ENTITY sb.edit.html.menuitem.save "Save the Page">
+<!ENTITY sb.edit.html.menuitem.quit "Switch HTMLEditor">
+<!ENTITY sb.edit.html.menuitem.bold "Switch Bold">
+<!ENTITY sb.edit.html.menuitem.italic "Switch Italic">
+<!ENTITY sb.edit.html.menuitem.underline "Switch Underline">
+<!ENTITY sb.edit.html.menuitem.strikeThrough "Switch Line-through">
+<!ENTITY sb.edit.html.menuitem.setColor "Set Text and Background Color">
+<!ENTITY sb.edit.html.menuitem.increaseFontSize "Increase Text Size">
+<!ENTITY sb.edit.html.menuitem.decreaseFontSize "Decrease Text Size">
+<!ENTITY sb.edit.html.menuitem.superscript "Switch Superscript">
+<!ENTITY sb.edit.html.menuitem.subscript "Switch Subscript">
+<!ENTITY sb.edit.html.menuitem.formatblock_p "Set to Normal Paragraph">
+<!ENTITY sb.edit.html.menuitem.formatblock_h1 "Set to Header Level 1">
+<!ENTITY sb.edit.html.menuitem.formatblock_h2 "Set to Header Level 2">
+<!ENTITY sb.edit.html.menuitem.formatblock_h3 "Set to Header Level 3">
+<!ENTITY sb.edit.html.menuitem.formatblock_h4 "Set to Header Level 4">
+<!ENTITY sb.edit.html.menuitem.formatblock_h5 "Set to Header Level 5">
+<!ENTITY sb.edit.html.menuitem.formatblock_h6 "Set to Header Level 6">
+<!ENTITY sb.edit.html.menuitem.formatblock_div "Set to DIV Block">
+<!ENTITY sb.edit.html.menuitem.formatblock_pre "Set to PRE Block">
+<!ENTITY sb.edit.html.menuitem.insertUnorderedList "Switch Unordered List">
+<!ENTITY sb.edit.html.menuitem.insertOrderedList "Switch Ordered List">
+<!ENTITY sb.edit.html.menuitem.outdent "Outdent">
+<!ENTITY sb.edit.html.menuitem.indent "Indent">
+<!ENTITY sb.edit.html.menuitem.justifyLeft "Align Left">
+<!ENTITY sb.edit.html.menuitem.justifyRight "Align Right">
+<!ENTITY sb.edit.html.menuitem.justifyCenter "Align Center">
+<!ENTITY sb.edit.html.menuitem.justifyFull "Align Justify">
+<!ENTITY sb.edit.html.menuitem.attachLink "Insert a Link or Innerlink">
+<!ENTITY sb.edit.html.menuitem.attachFile "Insert a File or Sub-page">
+<!ENTITY sb.edit.html.menuitem.backupFile "Create a Backup for this Page">
+<!ENTITY sb.edit.html.menuitem.horizontalLine "Insert a Horizontal Rule">
+<!ENTITY sb.edit.html.menuitem.insertDate "Insert a Date">
+<!ENTITY sb.edit.html.menuitem.insertTodoBox "Insert a Todo Checkbox">
+<!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "Insert a Todo Checkbox (Checked)">
+<!ENTITY sb.edit.html.menuitem.wrapHTML "Format with Template">
 <!ENTITY sb.edit.cutter "Elimină selecția">
 <!ENTITY sb.edit.remove.iframe "Elimină toate etichetele IFRAME">
 <!ENTITY sb.edit.remove.script "Elimină toate etichetele SCRIPT">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to highlight the selection.">
 <!ENTITY sb.highlighter "Evidențiere">
-<!ENTITY sb.highlighter.remove "Elimină evidențierile din selecție">
-<!ENTITY sb.highlighter.remove.all "Elimină toate evidențierile">
+<!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
+<!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
 <!ENTITY sb.source "Deschide adresa sursă">
 <!ENTITY sb.renew "Capturează din nou">
 <!ENTITY sb.internalize "Localize Embedded External Media">

@@ -17,9 +17,9 @@
 <!ENTITY sb.prefs.restart "Изменения требуют перезапуска Firefox&apos;а">
 <!ENTITY sb.prefs.tabs.tips "Открывать в новых вкладках следующие операции">
 <!ENTITY sb.prefs.tabs.note "Изменить заметку">
-<!ENTITY sbx.prefs.edit.autoEditNoteX "Auto edit Note Pages">
-<!ENTITY sbx.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
-<!ENTITY sbx.prefs.edit.wrapperFormat "HTML wrapper format">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data "Расположение сохраняемой информации">
 <!ENTITY sb.prefs.data.default "По умолчанию (каталог профиля)">
 <!ENTITY sb.prefs.data.custom "Сохранить информацию в">
@@ -33,6 +33,7 @@
 <!ENTITY sb.prefs.tree.unshift.bottom "конец каталога">
 <!ENTITY sb.prefs.showDetailOnDrop "Показывать диалог «Настройки сохранения страницы» при захвате перетаскиванием на боковую панель">
 <!ENTITY sb.prefs.notifyOnComplete "Показывать сообщение «Сохранение завершено»">
+<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.button.customize "Изменить">
 <!ENTITY sb.button.browse "Обзор">
