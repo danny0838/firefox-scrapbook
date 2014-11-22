@@ -1159,8 +1159,8 @@ var sbHtmlEditor = {
 				var html = sbCommonUtils.stringTemplate(
 					data.format,
 					{
-						FILE: sbCommonUtils.escapeHTML(filename),
-						FILE_E: sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(filename2)),
+						FILE: sbCommonUtils.escapeHTML(filename, false, true),
+						FILE_E: sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(filename2), false, true),
 						THIS: sel.isCollapsed ? sbCommonUtils.escapeHTMLWithSpace(filename) : sbPageEditor.getSelectionHTML(sel),
 					},
 					/{([\w_]+)}/g
@@ -1225,8 +1225,8 @@ var sbHtmlEditor = {
 				var html = sbCommonUtils.stringTemplate(
 					data.format,
 					{
-						FILE: sbCommonUtils.escapeHTML(filename),
-						FILE_E: sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(filename2)),
+						FILE: sbCommonUtils.escapeHTML(filename, false, true),
+						FILE_E: sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(filename2), false, true),
 						THIS: sel.isCollapsed ? sbCommonUtils.escapeHTMLWithSpace(filename) : sbPageEditor.getSelectionHTML(sel),
 					},
 					/{([\w_]+)}/g
