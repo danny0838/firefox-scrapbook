@@ -1,6 +1,6 @@
 <!ENTITY sb.toolbar.edit "編輯工具列">
 <!ENTITY sb.toolbar.info "顯示資訊列">
-<!ENTITY sb.edit.folderView "點擊檢視資料目錄。">
+<!ENTITY sb.edit.folderView "點擊檢視資料目錄，中鍵點擊在新分頁開啟。">
 <!ENTITY sb.edit.eraser "DOM 擦子 - 刪除不想要的元素或 ScrapBook 註記。">
 <!ENTITY sb.edit.undo "復原">
 <!ENTITY sb.edit.save "存檔">

@@ -1,6 +1,6 @@
 <!ENTITY sb.toolbar.edit "Barre d&apos;outils d&apos;édition">
 <!ENTITY sb.toolbar.info "Barre d&apos;information">
-<!ENTITY sb.edit.folderView "Click to view the data directory.">
+<!ENTITY sb.edit.folderView "Click to view the data directory. Middle-click to open in a new tab.">
 <!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
 <!ENTITY sb.edit.undo "Annuler">
 <!ENTITY sb.edit.save "Sauvegarder les changements">

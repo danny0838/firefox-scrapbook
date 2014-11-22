@@ -1,6 +1,6 @@
 <!ENTITY sb.toolbar.edit "도구 모음 편집">
 <!ENTITY sb.toolbar.info "도구 모음 정보">
-<!ENTITY sb.edit.folderView "Click to view the data directory.">
+<!ENTITY sb.edit.folderView "Click to view the data directory. Middle-click to open in a new tab.">
 <!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
 <!ENTITY sb.edit.undo "되돌리기">
 <!ENTITY sb.edit.save "변경 사항 저장">

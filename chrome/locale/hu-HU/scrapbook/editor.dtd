@@ -1,6 +1,6 @@
 <!ENTITY sb.toolbar.edit "Szerkesztés eszköztár">
 <!ENTITY sb.toolbar.info "Információ eszköztár">
-<!ENTITY sb.edit.folderView "Click to view the data directory.">
+<!ENTITY sb.edit.folderView "Click to view the data directory. Middle-click to open in a new tab.">
 <!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
 <!ENTITY sb.edit.undo "Visszavonás">
 <!ENTITY sb.edit.save "A változtatások mentése">

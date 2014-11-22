@@ -1,6 +1,6 @@
 <!ENTITY sb.toolbar.edit "编辑工具栏">
 <!ENTITY sb.toolbar.info "信息工具栏">
-<!ENTITY sb.edit.folderView "点击检视资料目录。">
+<!ENTITY sb.edit.folderView "点击检视资料目录，中键点击在新分页开启。">
 <!ENTITY sb.edit.eraser "DOM 橡皮- 删除不想要的元素或 ScrapBook 注记">
 <!ENTITY sb.edit.undo "撤销">
 <!ENTITY sb.edit.save "保存">

@@ -1,6 +1,6 @@
 <!ENTITY sb.toolbar.edit "Araç Çubuğunu Düzenle">
 <!ENTITY sb.toolbar.info "Bilgi Çubuğu">
-<!ENTITY sb.edit.folderView "Click to view the data directory.">
+<!ENTITY sb.edit.folderView "Click to view the data directory. Middle-click to open in a new tab.">
 <!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
 <!ENTITY sb.edit.undo "Geri Al">
 <!ENTITY sb.edit.save "Değişiklikleri Kaydet">

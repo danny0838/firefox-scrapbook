@@ -1,6 +1,6 @@
 <!ENTITY sb.toolbar.edit "Editační lišta">
 <!ENTITY sb.toolbar.info "Informační lišta">
-<!ENTITY sb.edit.folderView "Click to view the data directory.">
+<!ENTITY sb.edit.folderView "Click to view the data directory. Middle-click to open in a new tab.">
 <!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
 <!ENTITY sb.edit.undo "Zpět">
 <!ENTITY sb.edit.save "Uložit změny">
