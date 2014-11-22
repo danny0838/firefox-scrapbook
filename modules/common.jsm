@@ -746,11 +746,10 @@ var sbCommonUtils = {
 
 	stringTemplate : function(aString, aTplArray, aTplRegExp)
 	{
-		var ret = aString.replace(aTplRegExp, function(match, label){
-			if (aTplArray[label]) return aTplArray[label];
+		return aString.replace(aTplRegExp, function(match, label){
+			if (label in aTplArray) return aTplArray[label];
 			return "";
 		});
-		return ret;
 	},
 		
 	pad : function(n, width, z)
