@@ -1739,7 +1739,7 @@ var sbDOMEraser = {
 	_showHelp : function (win)
 	{
 		var doc = win.document;
-		var id = "DOMEraser_" + (new Date()).valueOf();  // a unique id for styling
+		var id = "scrapbook-domeraser-" + (new Date()).valueOf();  // a unique id for styling
 
 		// clear the help if existed
 		if (this.helpElem) {
