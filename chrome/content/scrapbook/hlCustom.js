@@ -72,7 +72,7 @@ var hlCustomizer = {
 			var borderStyle = getElement("hlBorderStyle").selectedItem.value;
 			var borderWidth = getElement("hlBorderWidth").selectedItem.value;
 			var borderColor = getElement("hlBorderColor").color;
-			rules.push(borderType + ": " + [borderWidth, borderStyle, borderColor].join(" "));
+			rules.push(borderType + ": " + [borderWidth, borderStyle, borderColor].join(" ") + ";");
 		}
 		this._updateUIActiveState();
 		gPreviewUI.setAttribute("style", rules.join(" "));
