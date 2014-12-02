@@ -1751,26 +1751,28 @@ var sbDOMEraser = {
         var helpElem = doc.createElement("DIV");
 		helpElem.id = id;
 		helpElem.isDOMEraser = true; // mark as ours
-		helpElem.style.backgroundColor = "#f0f0f0";
-		helpElem.style.opacity = "0.95";
-		helpElem.style.boxShadow = "3px 4px 5px #888";
-		helpElem.style.margin = "0 auto";
-		helpElem.style.border = "1px solid #CCC";
-		helpElem.style.borderRadius = "5px";
-		helpElem.style.padding = "0";
-		helpElem.style.textAlign = "left";
-		helpElem.style.color = "#000";
-		helpElem.style.fontSize = "16px";
-		helpElem.style.display = "block";
-		helpElem.style.position = "absolute";
-		helpElem.style.zIndex = "2147483647";
 
 		var content = ''
 			+ '<style>\n'
-			+ '#__id__ * {\n'
+			+ '#__id__, #__id__ * {\n'
 			+ '	margin: 0;\n'
 			+ '	border: 0;\n'
 			+ '	padding: 0;\n'
+			+ '}\n'
+			+ '#__id__ {\n'
+			+ '	background-color: #f0f0f0;\n'
+			+ '	opacity: 0.95;\n'
+			+ '	box-shadow: 3px 4px 5px #888;\n'
+			+ '	margin: 0 auto;\n'
+			+ '	border: 1px solid #CCC;\n'
+			+ '	border-radius: 5px;\n'
+			+ '	padding: 0;\n'
+			+ '	text-align: left;\n'
+			+ '	color: #000;\n'
+			+ '	font-size: 16px;\n'
+			+ '	display: block;\n'
+			+ '	position: absolute;\n'
+			+ '	z-index: 2147483647;\n'
 			+ '}\n'
 			+ '#__id__ .keytable {\n'
 			+ '	margin: 5px 10px 0 10px;\n'
