@@ -1,3 +1,34 @@
+Scrapbook X 1.12.0a35
+----------------
+
+- NEW: Added an advanced option "Show notification on browsing a page having been captured".
+- UPDATE: Improved the HTML Editor. Context menu with edit commands was added, and several hotkey commands were adjusted for HTML Editor for better organization:
+  - "Align Justify" added with Alt+/
+  - "Create a Backup for this Page" added with Ctrl+Shift+B, and removed related function from "Attach File"
+  - "Remove Format" changed from Ctrl+K to Ctrl+M
+  - "Remove Links" changed from Ctrl+Shift+K to Ctrl+N
+  - "Increase Font Size" changed from Alt+Up to Ctrl+Up
+  - "Decrease Font Size" changed from Alt+Down to Ctrl+Down
+  - "Superscript" changed from Alt+K to Ctrl+K
+  - "Subscript" changed from Alt+J to Ctrl+J
+  - "Attach Link" changed from Ctrl+L to Ctrl+Shift+L
+  - "Attach File" changed from Alt+I to Ctrl+Shift+F
+  - "Horizontal Rule" changed from Alt+H to Ctrl+Shift+H
+  - "Insert Date" changed from Alt+D to Ctrl+Shift+D
+- UPDATE: Improved the DOM Eraser.
+  - Added a help menu, which can be toggled with key 'h'.
+  - Added colorize, which can be called with key 'c'.
+  - The "black on white" command now also fixes child elements of the selected element.
+  - Improved the user interface, especially the tooltips and the selecting behavior on frames.
+- UPDATE: Replaced sticky annotations with freenotes, which allows HTML contents, has improved styles, and don't require ScrapBook internal stylesheets to be displayed properly.
+- UPDATE: Adjusted the output of combine and combined-view, fixed some potential exploits, and they no more require ScrapBook internal stylesheets to be displayed properly.
+- UPDATE: Removed the status popup button and integrated its menu into the toolbar button.
+- UPDATE: Improved the tooltips and the user interface for the main menu button, the button in "Tools" menu, the context menu, and the editor toolbar buttons.
+- UPDATE: Changed the notify box style to which is used by ScrapBook since 1.4.0.
+- UPDATE: Restarting Firefox is no more required after modifying the configs of "Main" preferences.
+- FIXED: Consecutive spaces and HTML special chars (&, ", ') could be misprocessed in some cases, such as combined page, combined view, output tree, and insert link/file of the HTML Editor.
+
+
 Scrapbook X 1.12.0a34
 ----------------
 

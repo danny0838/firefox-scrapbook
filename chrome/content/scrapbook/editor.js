@@ -1767,8 +1767,15 @@ var sbDOMEraser = {
 
 		var content = ''
 			+ '<style>\n'
+			+ '#__id__ * {\n'
+			+ '	margin: 0;\n'
+			+ '	border: 0;\n'
+			+ '	padding: 0;\n'
+			+ '}\n'
 			+ '#__id__ .keytable {\n'
 			+ '	margin: 5px 10px 0 10px;\n'
+			+ '	border-collapse: separate;\n'
+			+ '	border-spacing: 2px;\n'
 			+ '}\n'
 			+ '#__id__ .key {\n'
 			+ '	padding: 2px 7px;\n'
@@ -1791,7 +1798,7 @@ var sbDOMEraser = {
 			+ '	text-align: left;\n'
 			+ '}\n'
 			+ '</style>\n'
-			+ '<div style="margin: 0; border: 0; padding: 10; text-align: center; color: #000; font-size: 24px; background-color: #D8D7DC;">ScrapBook DOM Eraser Tips</div>\n'
+			+ '<div style="margin: 0; border: 0; padding: 10; text-align: center; color: #000; font-size: 24px; background-color: #D8D7DC;">ScrapBook DOM Eraser Usage</div>\n'
 			+ '<div style="padding: 5px 20px;">\n'
 			+ '	Move the mouse to select an element.<br>\n'
 			+ '	Use the following commands to operate on.<br>\n'
@@ -1809,7 +1816,7 @@ var sbDOMEraser = {
 			+ '</tr>\n'
 			+ '<tr>\n'
 			+ '	<td class="key"><code>q</code></td>\n'
-			+ '	<td class="command">quit (deactivate)</td>\n'
+			+ '	<td class="command">quit</td>\n'
 			+ '</tr>\n'
 			+ '<tr>\n'
 			+ '	<td class="key"><code>w</code></td>\n'
@@ -1890,11 +1897,11 @@ var sbDOMEraser = {
 			+ '</tr>\n'
 			+ '<tr>\n'
 			+ '	<td class="altkey"><code>F9</code></td>\n'
-			+ '	<td class="command">activate or deactivate</td>\n'
+			+ '	<td class="command">quit or start</td>\n'
 			+ '</tr>\n'
 			+ '<tr>\n'
 			+ '	<td class="altkey"><code>ESC</code></td>\n'
-			+ '	<td class="command">deactivate</td>\n'
+			+ '	<td class="command">quit</td>\n'
 			+ '</tr>\n'
 			+ '</tbody>\n'
 			+ '</table>\n'
@@ -2178,7 +2185,9 @@ var sbAnnotationService = {
 					}
 					break;
 				case "freenote-header" :
-					sbAnnotationService.startDrag(aEvent, true);
+					if (aEvent.originalTarget.style.cursor == "move") {
+						sbAnnotationService.startDrag(aEvent, true);
+					}
 					break;
 				case "freenote-footer" :
 					sbAnnotationService.startDrag(aEvent, false);
@@ -2367,11 +2376,12 @@ var sbAnnotationService = {
 	_editFreenote : function(mainDiv)
 	{
 		var doc = mainDiv.ownerDocument;
+		var isRelative = mainDiv.style.position != "absolute";
 		mainDiv.setAttribute("data-sb-active", "1");
 
 		var headDiv = doc.createElement("DIV");
 		headDiv.setAttribute("data-sb-obj", "freenote-header");
-		headDiv.style.cursor = "move";
+		headDiv.style.cursor = isRelative ? "auto" : "move";
 		headDiv.style.position = "absolute";
 		headDiv.style.margin = "0px";
 		headDiv.style.marginTop = -this.FREENOTE_HEADER_HEIGHT + "px";
