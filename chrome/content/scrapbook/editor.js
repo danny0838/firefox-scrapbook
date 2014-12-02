@@ -1909,8 +1909,9 @@ var sbDOMEraser = {
 			+ '<div style="clear: both;" />\n'
 			+ '</div>\n';
 
-		content = content.replace(/__id__/g, id);
-		helpElem.innerHTML = content;
+		helpElem.innerHTML = sbCommonUtils.stringTemplate(content, /__([\w_]+)__/g, {
+			"id": id
+		});
 		doc.body.appendChild(helpElem);
 
 		// fix position
