@@ -34,23 +34,15 @@ var hlCustomizer = {
 		getElement("hlTextBold").checked   = gPreviewUI.style.fontWeight == "bold";
 		getElement("hlTextItalic").checked = gPreviewUI.style.fontStyle == "italic";
 		getElement("hlTextStrike").checked = gPreviewUI.style.textDecoration == "line-through";
-		getElement("hlBackgroundColor").color = gPreviewUI.style.backgroundColor   || "none";
-		getElement("hlTextColor").color       = gPreviewUI.style.color             || "none";
-		getElement("hlBorderColor").color     = gPreviewUI.style.borderBottomColor || "none";
 		getElement("hlBackgroundEnabled").checked = !!gPreviewUI.style.backgroundColor;
 		getElement("hlTextEnabled").checked       = !!gPreviewUI.style.color;
 		getElement("hlBorderEnabled").checked     = !!gPreviewUI.style.borderBottomColor;
-		getElement("hlBorderType").selectedIndex = gPreviewUI.style.borderTop ? 0 : 1;
-		var style = gPreviewUI.style.borderBottomStyle;
-		if (style) {
-			var selIdx = ["solid", "dotted", "dashed", "double"].indexOf(style);
-			getElement("hlBorderStyle").selectedIndex = selIdx;
-		}
-		var width = gPreviewUI.style.borderBottomWidth;
-		if (width) {
-			var selIdx = ["thin", "medium", "thick"].indexOf(width);
-			getElement("hlBorderWidth").selectedIndex = selIdx;
-		}
+		getElement("hlBackgroundColor").color = gPreviewUI.style.backgroundColor   || "none";
+		getElement("hlTextColor").color       = gPreviewUI.style.color             || "none";
+		getElement("hlBorderColor").color     = gPreviewUI.style.borderBottomColor || "none";
+		getElement("hlBorderType").value = gPreviewUI.style.border ? "border" : gPreviewUI.style.borderBottom ? "border-bottom" : "";
+		getElement("hlBorderStyle").value = gPreviewUI.style.borderBottomStyle;
+		getElement("hlBorderWidth").value = gPreviewUI.style.borderBottomWidth;
 		this._updateUIActiveState();
 	},
 
@@ -68,9 +60,9 @@ var hlCustomizer = {
 		if (getElement("hlTextEnabled").checked)
 			rules.push("color: " + getElement("hlTextColor").color + ";");
 		if (getElement("hlBorderEnabled").checked) {
-			var borderType  = getElement("hlBorderType").selectedItem.value;
-			var borderStyle = getElement("hlBorderStyle").selectedItem.value;
-			var borderWidth = getElement("hlBorderWidth").selectedItem.value;
+			var borderType  = getElement("hlBorderType").value;
+			var borderStyle = getElement("hlBorderStyle").value;
+			var borderWidth = getElement("hlBorderWidth").value;
 			var borderColor = getElement("hlBorderColor").color;
 			rules.push(borderType + ": " + [borderWidth, borderStyle, borderColor].join(" ") + ";");
 		}
