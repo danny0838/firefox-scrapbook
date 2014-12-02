@@ -1762,9 +1762,11 @@ var sbDOMEraser = {
 			+ '#__id__ {'
 				+ 'background-color: #f0f0f0;'
 				+ 'opacity: 0.95;'
+				+ '-moz-box-shadow: 3px 4px 5px #888;'
 				+ 'box-shadow: 3px 4px 5px #888;'
 				+ 'margin: 0 auto;'
 				+ 'border: 1px solid #CCC;'
+				+ '-moz-border-radius: 5px;'
 				+ 'border-radius: 5px;'
 				+ 'padding: 0;'
 				+ 'text-align: left;'
@@ -2057,6 +2059,7 @@ var sbDOMEraser = {
 			labelElem.style.fontSize = "12px";
 			labelElem.style.position = "absolute";
 			labelElem.style.padding = "2px 5px 2px 5px";
+			labelElem.style.MozBorderRadius = "6px";
 			labelElem.style.borderRadius = "6px";
 			labelElem.style.zIndex = "2147483647";
 			labelElem.innerHTML = text;
