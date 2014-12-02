@@ -1980,8 +1980,10 @@ var sbDOMEraser = {
 		keyboxElem.style.left = x + "px";
 		keyboxElem.style.top = y + "px";
 
-		// remove the keybox after a timeout
+		// expose this variable
 		this.keyboxElem = keyboxElem;
+
+		// remove the keybox after a timeout
 		this.keyboxTimeout = setTimeout(this._clearKeybox, 400);
 	},
 
@@ -2045,27 +2047,30 @@ var sbDOMEraser = {
 			var pos = getPos(elem), x = pos.x, y = pos.y;
 			y += elem.offsetHeight;
 
-			this.labelElem = doc.createElement("DIV");
-			this.labelElem.isDOMEraser = true; // mark as ours
-			this.labelElem.style.backgroundColor = "#fff0cc";
-			this.labelElem.style.border = "2px solid black";
-			this.labelElem.style.fontFamily = "arial";
-			this.labelElem.style.textAlign = "left";
-			this.labelElem.style.color = "#000";
-			this.labelElem.style.fontSize = "12px";
-			this.labelElem.style.position = "absolute";
-			this.labelElem.style.padding = "2px 5px 2px 5px";
-			this.labelElem.style.borderRadius = "6px";
-			this.labelElem.style.zIndex = "2147483647";
-			this.labelElem.innerHTML = text;
-			doc.body.appendChild(this.labelElem);
+			var labelElem = doc.createElement("DIV");
+			labelElem.isDOMEraser = true; // mark as ours
+			labelElem.style.backgroundColor = "#fff0cc";
+			labelElem.style.border = "2px solid black";
+			labelElem.style.fontFamily = "arial";
+			labelElem.style.textAlign = "left";
+			labelElem.style.color = "#000";
+			labelElem.style.fontSize = "12px";
+			labelElem.style.position = "absolute";
+			labelElem.style.padding = "2px 5px 2px 5px";
+			labelElem.style.borderRadius = "6px";
+			labelElem.style.zIndex = "2147483647";
+			labelElem.innerHTML = text;
+			doc.body.appendChild(labelElem);
 
 			// adjust the label as necessary to make sure it is within screen
-			if ((y + this.labelElem.offsetHeight) >= dims.scrollY + dims.height) {
-				y = (dims.scrollY + dims.height) - this.labelElem.offsetHeight;
+			if ((y + labelElem.offsetHeight) >= dims.scrollY + dims.height) {
+				y = (dims.scrollY + dims.height) - labelElem.offsetHeight;
 			}
-			this.labelElem.style.left = (x + 2) + "px";
-			this.labelElem.style.top = y + "px";
+			labelElem.style.left = (x + 2) + "px";
+			labelElem.style.top = y + "px";
+
+			// expose this variable
+			this.labelElem = labelElem;
 		}
 
 		function getPos(elem) {
