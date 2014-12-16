@@ -146,7 +146,7 @@ var sbOutputService = {
 			+ '		if (self != top) top.frames[1].location = hash;\n'
 			+ '		var aElems = document.getElementsByTagName("A");\n'
 			+ '		for ( var i = 1; i < aElems.length; i++ ) {\n'
-            + '		    var aElem = aElems[i];\n'
+			+ '			var aElem = aElems[i];\n'
 			+ '			if (aElem.getAttribute("href") == hash) {\n'
 			+ '				if (self != top) top.document.title = aElem.childNodes[1].nodeValue;\n'
 			+ '				var ansc = aElem.parentNode;\n'
