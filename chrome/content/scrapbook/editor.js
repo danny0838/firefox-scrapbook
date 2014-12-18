@@ -1740,7 +1740,7 @@ var sbDOMEraser = {
 	_showHelp : function (win)
 	{
 		var doc = win.document;
-		var id = "DOMEraser_" + (new Date()).valueOf();  // a unique id for styling
+		var id = "scrapbook-domeraser-" + (new Date()).valueOf();  // a unique id for styling
 
 		// clear the help if existed
 		if (this.helpElem) {
@@ -1752,166 +1752,187 @@ var sbDOMEraser = {
         var helpElem = doc.createElement("DIV");
 		helpElem.id = id;
 		helpElem.isDOMEraser = true; // mark as ours
-		helpElem.style.backgroundColor = "#f0f0f0";
-		helpElem.style.opacity = "0.95";
-		helpElem.style.boxShadow = "3px 4px 5px #888";
-		helpElem.style.margin = "0 auto";
-		helpElem.style.border = "1px solid #CCC";
-		helpElem.style.borderRadius = "5px";
-		helpElem.style.padding = "0";
-		helpElem.style.textAlign = "left";
-		helpElem.style.color = "#000";
-		helpElem.style.fontSize = "16px";
-		helpElem.style.display = "block";
-		helpElem.style.position = "absolute";
-		helpElem.style.zIndex = "2147483647";
 
 		var content = ''
-			+ '<style>\n'
-			+ '#__id__ * {\n'
-			+ '	margin: 0;\n'
-			+ '	border: 0;\n'
-			+ '	padding: 0;\n'
-			+ '}\n'
-			+ '#__id__ .keytable {\n'
-			+ '	margin: 5px 10px 0 10px;\n'
-			+ '	border-collapse: separate;\n'
-			+ '	border-spacing: 2px;\n'
-			+ '}\n'
-			+ '#__id__ .key {\n'
-			+ '	padding: 2px 7px;\n'
-			+ '	border: 1px solid black;\n'
-			+ '	background-color: #ddd;\n'
-			+ '	font-family: monospace;\n'
-			+ '	font-weight: bold;\n'
-			+ '}\n'
-			+ '#__id__ .altkey code {\n'
-			+ '	margin: 1px;\n'
-			+ '	border: 1px solid black;\n'
-			+ '	padding: 1px 2px;\n'
-			+ '	background-color: #ddd;\n'
-			+ '	font-family: monospace;\n'
-			+ '	font-weight: bold;\n'
-			+ '}\n'
-			+ '#__id__ .command {\n'
-			+ '	padding: 3px 7px;\n'
-			+ '	font-size: 14px;\n'
-			+ '	text-align: left;\n'
-			+ '}\n'
-			+ '</style>\n'
-			+ '<div style="margin: 0; border: 0; padding: 10; text-align: center; color: #000; font-size: 24px; background-color: #D8D7DC;">ScrapBook DOM Eraser Usage</div>\n'
-			+ '<div style="padding: 5px 20px;">\n'
-			+ '	Move the mouse to select an element.<br>\n'
-			+ '	Use the following commands to operate on.<br>\n'
-			+ '</div>\n'
-			+ '<div style="margin: 0 auto; padding: 1px 10px 10px 10px;">\n'
-			+ '<div style="float: left;">\n'
-			+ '<table class="keytable">\n'
-			+ '<tbody>\n'
-			+ '<tr>\n'
-			+ '	<th colspan="2">Primary Keys</th>\n'
-			+ '</tr>\n'
-			+ '<tr>\n'
-			+ '	<td class="key"><code>h</code></td>\n'
-			+ '	<td class="command">help (toggle)</td>\n'
-			+ '</tr>\n'
-			+ '<tr>\n'
-			+ '	<td class="key"><code>q</code></td>\n'
-			+ '	<td class="command">quit</td>\n'
-			+ '</tr>\n'
-			+ '<tr>\n'
-			+ '	<td class="key"><code>w</code></td>\n'
-			+ '	<td class="command">wider</td>\n'
-			+ '</tr>\n'
-			+ '<tr>\n'
-			+ '	<td class="key"><code>n</code></td>\n'
-			+ '	<td class="command">narrower</td>\n'
-			+ '</tr>\n'
-			+ '<tr>\n'
-			+ '	<td class="key"><code>r</code></td>\n'
-			+ '	<td class="command">remove</td>\n'
-			+ '</tr>\n'
-			+ '<tr>\n'
-			+ '	<td class="key"><code>i</code></td>\n'
-			+ '	<td class="command">isolate</td>\n'
-			+ '</tr>\n'
-			+ '<tr>\n'
-			+ '	<td class="key"><code>b</code></td>\n'
-			+ '	<td class="command">black on white</td>\n'
-			+ '</tr>\n'
-			+ '<tr>\n'
-			+ '	<td class="key"><code>c</code></td>\n'
-			+ '	<td class="command">colorize</td>\n'
-			+ '</tr>\n'
-			+ '<tr>\n'
-			+ '	<td class="key"><code>d</code></td>\n'
-			+ '	<td class="command">de-width</td>\n'
-			+ '</tr>\n'
-			+ '<tr>\n'
-			+ '	<td class="key"><code>u</code></td>\n'
-			+ '	<td class="command">undo</td>\n'
-			+ '</tr>\n'
-			+ '</tbody>\n'
-			+ '</table>\n'
-			+ '</div>\n'
-			+ '<div style="float: left;">\n'
-			+ '<table class="keytable">\n'
-			+ '<tbody>\n'
-			+ '<tr>\n'
-			+ '	<th colspan="2">Alternatives</th>\n'
-			+ '</tr>\n'
-			+ '<tr>\n'
-			+ '	<td class="altkey"><code>click</code></td>\n'
-			+ '	<td class="command">remove</td>\n'
-			+ '</tr>\n'
-			+ '<tr>\n'
-			+ '	<td class="altkey"><code>enter</code></td>\n'
-			+ '	<td class="command">remove</td>\n'
-			+ '</tr>\n'
-			+ '<tr>\n'
-			+ '	<td class="altkey"><code>space</code></td>\n'
-			+ '	<td class="command">remove</td>\n'
-			+ '</tr>\n'
-			+ '<tr>\n'
-			+ '	<td class="altkey"><code>right-click</code></td>\n'
-			+ '	<td class="command">isolate</td>\n'
-			+ '</tr>\n'
-			+ '<tr>\n'
-			+ '	<td class="altkey"><code>shift</code>+<code>click</code></td>\n'
-			+ '	<td class="command">isolate</td>\n'
-			+ '</tr>\n'
-			+ '<tr>\n'
-			+ '	<td class="altkey"><code>shift</code>+<code>enter</code></td>\n'
-			+ '	<td class="command">isolate</td>\n'
-			+ '</tr>\n'
-			+ '<tr>\n'
-			+ '	<td class="altkey"><code>shift</code>+<code>space</code></td>\n'
-			+ '	<td class="command">isolate</td>\n'
-			+ '</tr>\n'
-			+ '<tr>\n'
-			+ '	<td class="altkey"><code>+</code></td>\n'
-			+ '	<td class="command">wider</td>\n'
-			+ '</tr>\n'
-			+ '<tr>\n'
-			+ '	<td class="altkey"><code>-</code></td>\n'
-			+ '	<td class="command">narrower</td>\n'
-			+ '</tr>\n'
-			+ '<tr>\n'
-			+ '	<td class="altkey"><code>F9</code></td>\n'
-			+ '	<td class="command">quit or start</td>\n'
-			+ '</tr>\n'
-			+ '<tr>\n'
-			+ '	<td class="altkey"><code>ESC</code></td>\n'
-			+ '	<td class="command">quit</td>\n'
-			+ '</tr>\n'
-			+ '</tbody>\n'
-			+ '</table>\n'
-			+ '</div>\n'
-			+ '<div style="clear: both;" />\n'
-			+ '</div>\n';
+			+ '<style>'
+			+ '#__id__, #__id__ * {'
+				+ 'visibility: visible;'
+				+ 'overflow: visible;'
+				+ 'margin: 0;'
+				+ 'border: 0;'
+				+ 'padding: 0;'
+				+ 'max-width: none;'
+				+ 'max-height: none;'
+				+ 'min-width: 0px;'
+				+ 'min-height: 0px;'
+			+ '}'
+			+ '#__id__ {'
+				+ 'background-color: #f0f0f0;'
+				+ 'opacity: 0.95;'
+				+ '-moz-box-shadow: 3px 4px 5px #888;'
+				+ 'box-shadow: 3px 4px 5px #888;'
+				+ 'margin: 0 auto;'
+				+ 'border: 1px solid #CCC;'
+				+ '-moz-border-radius: 5px;'
+				+ 'border-radius: 5px;'
+				+ 'display: block;'
+				+ 'position: absolute;'
+				+ 'z-index: 2147483647;'
+				+ 'color: black;'
+				+ 'font-size: 16px;'
+				+ 'line-height: 1.3em;'
+				+ 'font-family: sans-serif;'
+				+ 'text-align: left;'
+			+ '}'
+			+ '#__id__ .header {'
+				+ 'padding: 10px;'
+				+ 'text-align: center;'
+				+ 'font-size: 1.5em;'
+				+ 'background-color: #D8D7DC;'
+			+ '}'
+			+ '#__id__ .desc {'
+				+ 'padding: 5px 25px;'
+			+ '}'
+			+ '#__id__ .table-wrapper {'
+				+ 'margin: 0 auto;'
+				+ 'padding: 1px 10px 10px 10px;'
+			+ '}'
+			+ '#__id__ .keytable {'
+				+ 'float: left;'
+				+ 'margin: 5px 10px 0 10px;'
+				+ 'border-collapse: separate;'
+				+ 'border-spacing: 2px;'
+			+ '}'
+			+ '#__id__ .key code {'
+				+ 'padding: 2px 7px;'
+				+ 'border: 1px solid black;'
+				+ 'background-color: #ddd;'
+				+ 'font-family: monospace;'
+				+ 'font-weight: bold;'
+			+ '}'
+			+ '#__id__ .altkey code {'
+				+ 'margin: 1px 2px;'
+				+ 'border: 1px solid black;'
+				+ 'padding: 1px 3px;'
+				+ 'background-color: #ddd;'
+				+ 'font-family: monospace;'
+				+ 'font-weight: bold;'
+			+ '}'
+			+ '#__id__ .command {'
+				+ 'padding: 3px 7px;'
+				+ 'font-size: 14px;'
+			+ '}'
+			+ '</style>'
+			+ '<div class="header">ScrapBook DOM Eraser Usage</div>'
+			+ '<div class="desc">'
+				+ 'Move the mouse to select an element.<br>'
+				+ 'Use the following commands to operate on.<br>'
+			+ '</div>'
+			+ '<div class="table-wrapper">'
+			+ '<table class="keytable">'
+			+ '<tbody>'
+			+ '<tr>'
+				+ '<th colspan="2">Primary Keys</th>'
+			+ '</tr>'
+			+ '<tr>'
+				+ '<td class="key"><code>h</code></td>'
+				+ '<td class="command">help (toggle)</td>'
+			+ '</tr>'
+			+ '<tr>'
+				+ '<td class="key"><code>q</code></td>'
+				+ '<td class="command">quit</td>'
+			+ '</tr>'
+			+ '<tr>'
+				+ '<td class="key"><code>w</code></td>'
+				+ '<td class="command">wider</td>'
+			+ '</tr>'
+			+ '<tr>'
+				+ '<td class="key"><code>n</code></td>'
+				+ '<td class="command">narrower</td>'
+			+ '</tr>'
+			+ '<tr>'
+				+ '<td class="key"><code>r</code></td>'
+				+ '<td class="command">remove</td>'
+			+ '</tr>'
+			+ '<tr>'
+				+ '<td class="key"><code>i</code></td>'
+				+ '<td class="command">isolate</td>'
+			+ '</tr>'
+			+ '<tr>'
+				+ '<td class="key"><code>b</code></td>'
+				+ '<td class="command">black on white</td>'
+			+ '</tr>'
+			+ '<tr>'
+				+ '<td class="key"><code>c</code></td>'
+				+ '<td class="command">colorize</td>'
+			+ '</tr>'
+			+ '<tr>'
+				+ '<td class="key"><code>d</code></td>'
+				+ '<td class="command">de-width</td>'
+			+ '</tr>'
+			+ '<tr>'
+				+ '<td class="key"><code>u</code></td>'
+				+ '<td class="command">undo</td>'
+			+ '</tr>'
+			+ '</tbody>'
+			+ '</table>'
+			+ '<table class="keytable">'
+			+ '<tbody>'
+			+ '<tr>'
+				+ '<th colspan="2">Alternatives</th>'
+			+ '</tr>'
+			+ '<tr>'
+				+ '<td class="altkey"><code>click</code></td>'
+				+ '<td class="command">remove</td>'
+			+ '</tr>'
+			+ '<tr>'
+				+ '<td class="altkey"><code>enter</code></td>'
+				+ '<td class="command">remove</td>'
+			+ '</tr>'
+			+ '<tr>'
+				+ '<td class="altkey"><code>space</code></td>'
+				+ '<td class="command">remove</td>'
+			+ '</tr>'
+			+ '<tr>'
+				+ '<td class="altkey"><code>right-click</code></td>'
+				+ '<td class="command">isolate</td>'
+			+ '</tr>'
+			+ '<tr>'
+				+ '<td class="altkey"><code>shift</code>+<code>click</code></td>'
+				+ '<td class="command">isolate</td>'
+			+ '</tr>'
+			+ '<tr>'
+				+ '<td class="altkey"><code>shift</code>+<code>enter</code></td>'
+				+ '<td class="command">isolate</td>'
+			+ '</tr>'
+			+ '<tr>'
+				+ '<td class="altkey"><code>shift</code>+<code>space</code></td>'
+				+ '<td class="command">isolate</td>'
+			+ '</tr>'
+			+ '<tr>'
+				+ '<td class="altkey"><code>+</code></td>'
+				+ '<td class="command">wider</td>'
+			+ '</tr>'
+			+ '<tr>'
+				+ '<td class="altkey"><code>-</code></td>'
+				+ '<td class="command">narrower</td>'
+			+ '</tr>'
+			+ '<tr>'
+				+ '<td class="altkey"><code>F9</code></td>'
+				+ '<td class="command">quit or start</td>'
+			+ '</tr>'
+			+ '<tr>'
+				+ '<td class="altkey"><code>ESC</code></td>'
+				+ '<td class="command">quit</td>'
+			+ '</tr>'
+			+ '</tbody>'
+			+ '</table>'
+			+ '<div style="clear: both;" />'
+			+ '</div>';
 
-		content = content.replace(/__id__/g, id);
-		helpElem.innerHTML = content;
+		helpElem.innerHTML = sbCommonUtils.stringTemplate(content, /__([\w_]+)__/g, {
+			"id": id
+		});
 		doc.body.appendChild(helpElem);
 
 		// fix position
@@ -1978,8 +1999,10 @@ var sbDOMEraser = {
 		keyboxElem.style.left = x + "px";
 		keyboxElem.style.top = y + "px";
 
-		// remove the keybox after a timeout
+		// expose this variable
 		this.keyboxElem = keyboxElem;
+
+		// remove the keybox after a timeout
 		this.keyboxTimeout = setTimeout(this._clearKeybox, 400);
 	},
 
@@ -2043,27 +2066,31 @@ var sbDOMEraser = {
 			var pos = getPos(elem), x = pos.x, y = pos.y;
 			y += elem.offsetHeight;
 
-			this.labelElem = doc.createElement("DIV");
-			this.labelElem.isDOMEraser = true; // mark as ours
-			this.labelElem.style.backgroundColor = "#fff0cc";
-			this.labelElem.style.border = "2px solid black";
-			this.labelElem.style.fontFamily = "arial";
-			this.labelElem.style.textAlign = "left";
-			this.labelElem.style.color = "#000";
-			this.labelElem.style.fontSize = "12px";
-			this.labelElem.style.position = "absolute";
-			this.labelElem.style.padding = "2px 5px 2px 5px";
-			this.labelElem.style.borderRadius = "6px";
-			this.labelElem.style.zIndex = "2147483647";
-			this.labelElem.innerHTML = text;
-			doc.body.appendChild(this.labelElem);
+			var labelElem = doc.createElement("DIV");
+			labelElem.isDOMEraser = true; // mark as ours
+			labelElem.style.backgroundColor = "#fff0cc";
+			labelElem.style.border = "2px solid black";
+			labelElem.style.fontFamily = "arial";
+			labelElem.style.textAlign = "left";
+			labelElem.style.color = "#000";
+			labelElem.style.fontSize = "12px";
+			labelElem.style.position = "absolute";
+			labelElem.style.padding = "2px 5px 2px 5px";
+			labelElem.style.MozBorderRadius = "6px";
+			labelElem.style.borderRadius = "6px";
+			labelElem.style.zIndex = "2147483647";
+			labelElem.innerHTML = text;
+			doc.body.appendChild(labelElem);
 
 			// adjust the label as necessary to make sure it is within screen
-			if ((y + this.labelElem.offsetHeight) >= dims.scrollY + dims.height) {
-				y = (dims.scrollY + dims.height) - this.labelElem.offsetHeight;
+			if ((y + labelElem.offsetHeight) >= dims.scrollY + dims.height) {
+				y = (dims.scrollY + dims.height) - labelElem.offsetHeight;
 			}
-			this.labelElem.style.left = (x + 2) + "px";
-			this.labelElem.style.top = y + "px";
+			labelElem.style.left = (x + 2) + "px";
+			labelElem.style.top = y + "px";
+
+			// expose this variable
+			this.labelElem = labelElem;
 		}
 
 		function getPos(elem) {
