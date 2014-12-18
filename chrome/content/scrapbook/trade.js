@@ -394,18 +394,6 @@ var sbExportService = {
 		}
 	},
 
-	getFolderPath : function(aRes)
-	{
-		var ret = [];
-		for ( var i = 0; i < 32; i++ )
-		{
-			aRes = window.top.sbDataSource.findParentResource(aRes);
-			if ( aRes.Value == "urn:scrapbook:root" ) break;
-			ret.unshift(window.top.sbDataSource.getProperty(aRes, "title"));
-		}
-		return ret;
-	},
-
 	copyLeftToRight : function(aRes)
 	{
 		if ( !window.top.sbDataSource.exists(aRes) ) throw "Datasource changed.";
@@ -414,7 +402,7 @@ var sbExportService = {
 		{
 			item[prop] = window.top.sbDataSource.getProperty(aRes, prop);
 		}
-		item.folder = this.getFolderPath(aRes).join("\t");
+		item.folder = window.top.sbDataSource.getFolderPath(aRes).join("\t");
 		if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) )
 		{
 			item.icon = item.icon.match(/\d{14}\/(.+)$/) ? RegExp.$1 : "";
