@@ -67,18 +67,18 @@
 			<label value="&sb.hlCustom.style;:" />
 			<menulist id="hlBorderStyle">
 				<menupopup>
-					<menuitem value="solid"  label="&sb.hlCustom.solid;"  index="0" />
-					<menuitem value="dotted" label="&sb.hlCustom.dotted;" index="1" />
-					<menuitem value="dashed" label="&sb.hlCustom.dashed;" index="2" />
-					<menuitem value="double" label="&sb.hlCustom.double;" index="3" />
+					<menuitem value="solid"  label="&sb.hlCustom.solid;" />
+					<menuitem value="dotted" label="&sb.hlCustom.dotted;" />
+					<menuitem value="dashed" label="&sb.hlCustom.dashed;" />
+					<menuitem value="double" label="&sb.hlCustom.double;" />
 				</menupopup>
 			</menulist>
 			<label value="&sb.hlCustom.width;:" />
 			<menulist id="hlBorderWidth">
 				<menupopup>
-					<menuitem value="thin"   label="&sb.hlCustom.thin;"   index="0" />
-					<menuitem value="medium" label="&sb.hlCustom.medium;" index="1" />
-					<menuitem value="thick"  label="&sb.hlCustom.thick;"  index="2" />
+					<menuitem value="thin"   label="&sb.hlCustom.thin;" />
+					<menuitem value="medium" label="&sb.hlCustom.medium;" />
+					<menuitem value="thick"  label="&sb.hlCustom.thick;" />
 				</menupopup>
 			</menulist>
 		</hbox>

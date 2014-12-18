@@ -6,7 +6,7 @@
 <!ENTITY sb.hlCustom.italic "斜體">
 <!ENTITY sb.hlCustom.line "刪除線">
 <!ENTITY sb.hlCustom.border "框線">
-<!ENTITY sb.hlCustom.type "樣式">
+<!ENTITY sb.hlCustom.type "類型">
 <!ENTITY sb.hlCustom.box "方框">
 <!ENTITY sb.hlCustom.underline "底線">
 <!ENTITY sb.hlCustom.style "樣式">
