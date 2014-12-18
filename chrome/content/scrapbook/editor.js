@@ -577,7 +577,7 @@ var sbPageEditor = {
 		if (this.item && this.item.type != "notex") {
 			var indicate = document.getElementById("ScrapBookStatusPopupD");
 			indicate = indicate ? indicate.getAttribute("checked") : false;
-			if (indicate) sbInfoViewer.indicateLinks(aDoc.defaultView);
+			if (indicate) sbInfoViewer.toggleIndicator(true);
 		}
 	},
 
