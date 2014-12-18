@@ -445,7 +445,7 @@ var sbDataSource = {
 	getFolderPath : function(aRes)
 	{
 		var ret = [];
-		for ( var i = 0; i < 32; i++ )
+		while (true)
 		{
 			aRes = this.findParentResource(aRes);
 			if ( aRes.Value == "urn:scrapbook:root" ) break;
