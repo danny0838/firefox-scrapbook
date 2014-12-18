@@ -438,14 +438,18 @@ var sbCommonUtils = {
 	saveTemplateFile : function(aURISpec, aFile)
 	{
 		if ( aFile.exists() ) return;
-		var uri = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
-		uri.spec = aURISpec;
-		var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
-		if ( this._fxVer18 ) {
-			WBP.saveURI(uri, null, null, null, null, aFile, null);
-		} else {
-			WBP.saveURI(uri, null, null, null, null, aFile);
+		var istream = this.IO.newChannelFromURI(this.convertURLToObject(aURISpec)).open();
+		var bistream = Components.classes["@mozilla.org/binaryinputstream;1"].createInstance(Components.interfaces.nsIBinaryInputStream);
+		bistream.setInputStream(istream);
+        var ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
+        ostream.init(aFile, -1, 0666, 0);
+		var bostream = Components.classes["@mozilla.org/binaryoutputstream;1"].createInstance(Components.interfaces.nsIBinaryOutputStream);
+		bostream.setOutputStream(ostream);
+		var size = 0;
+		while (size = bistream.available()) {
+			bostream.writeBytes(bistream.readBytes(size), size);
 		}
+        bostream.close();
 	},
 
 	convertToUnicode : function(aString, aCharset)

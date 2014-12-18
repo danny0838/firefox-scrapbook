@@ -43,7 +43,7 @@ var sbDataSource = {
 	_uninit : function()
 	{
 		if (this._flushTimer) this.flush();
-		sbCommonUtils.RDF.UnregisterDataSource(this._dataObj);
+		try { sbCommonUtils.RDF.UnregisterDataSource(this._dataObj); } catch(ex) {}
 		this._dataObj = null;
 		this._dataFile = null;
 	},
