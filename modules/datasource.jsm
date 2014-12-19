@@ -442,6 +442,18 @@ var sbDataSource = {
 		return null;
 	},
 
+	getFolderPath : function(aRes)
+	{
+		var ret = [];
+		while (true)
+		{
+			aRes = this.findParentResource(aRes);
+			if ( aRes.Value == "urn:scrapbook:root" ) break;
+			ret.unshift(this.getProperty(aRes, "title"));
+		}
+		return ret;
+	},
+
 	outputTreeAuto : function(aWindow)
 	{
 		if (!sbCommonUtils.getPref("autoOutput", false)) return;
