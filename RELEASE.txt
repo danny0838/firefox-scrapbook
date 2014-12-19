@@ -9,6 +9,7 @@ Scrapbook X 1.12.0a36
 - FIXED: Unable to change the ScrapBook directory path until restarting Firefox if a bad path has been previously used.
 - FIXED: Several potential issues related with the UI or data value of the highlight custimization dialog.
 - FIXED: A potential issue that the native template could not be applied when first used.
+- UPDATE: Folder paths are now separated with a less confusing char.
 - UPDATE: Slightly improved the output of "Output HTML tree".
 
 
