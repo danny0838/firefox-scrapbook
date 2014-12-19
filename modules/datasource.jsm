@@ -43,7 +43,7 @@ var sbDataSource = {
 	_uninit : function()
 	{
 		if (this._flushTimer) this.flush();
-		sbCommonUtils.RDF.UnregisterDataSource(this._dataObj);
+		try { sbCommonUtils.RDF.UnregisterDataSource(this._dataObj); } catch(ex) {}
 		this._dataObj = null;
 		this._dataFile = null;
 	},
@@ -440,6 +440,18 @@ var sbDataSource = {
 			if ( sbCommonUtils.RDFCU.indexOf(this._dataObj, res, aRes) != -1 ) return res;
 		}
 		return null;
+	},
+
+	getFolderPath : function(aRes)
+	{
+		var ret = [];
+		while (true)
+		{
+			aRes = this.findParentResource(aRes);
+			if ( aRes.Value == "urn:scrapbook:root" ) break;
+			ret.unshift(this.getProperty(aRes, "title"));
+		}
+		return ret;
 	},
 
 	outputTreeAuto : function(aWindow)

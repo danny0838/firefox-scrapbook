@@ -64,6 +64,10 @@
 						</row>
 						<separator class="groove" style="margin:8px 0px;" />
 						<row align="center">
+							<label value="&sb.prop.folder;:" />
+							<textbox id="sbPropFolder" readonly="true" />
+						</row>
+						<row align="center">
 							<label value="ID:" />
 							<textbox id="sbPropID" readonly="true" />
 						</row>
