@@ -45,7 +45,7 @@ var sbPropService = {
 			dateTime2 = dd.toLocaleString();
 		}
 		// fill data to the fields
-		document.getElementById("sbPropFolder").value  = sbDataSource.getFolderPath(this.resource).join("/");
+		document.getElementById("sbPropFolder").value  = sbDataSource.getFolderPath(this.resource).join("␟");
 		document.getElementById("sbPropID").value      = this.item.id;
 		document.getElementById("sbPropTitle").value   = this.item.title;
 		document.getElementById("sbPropSource").value  = this.item.source;

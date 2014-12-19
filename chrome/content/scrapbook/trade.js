@@ -117,7 +117,7 @@ var sbTradeService = {
 			this.treeItems.push([
 				item.title,
 				(new Date(file.lastModifiedTime)).toLocaleString(),
-				item.folder ? item.folder.replace(/\t/g, "/") : "",
+				item.folder ? item.folder.replace(/\t/g, "␟") : "",
 				item.id,
 				item.icon,
 				file.lastModifiedTime,
