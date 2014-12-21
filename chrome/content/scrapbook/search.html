@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Search - ScrapBook</title>
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" type="text/css" href="tree/output.css" media="all">
+<script>
+var searchEngine = {
+
+	_cache: null,
+	_scrapbook: null,
+
+	init: function () {
+		var that = this;
+		if (location.protocol.match(/https?/)) {
+			if (!confirm('Running this search engine could cause large network flow, are you sure to continue?')) {
+				return;
+			}
+		}
+		try {
+			that.loadXMLDoc('cache.rdf', function(xml){
+				var data = [];
+				// some mobile browsers (e.g. Dolphin) do not support xmlDoc.getElementsByTagName
+				var items = xml.documentElement.childNodes;
+				for (var i = 0, len = items.length; i < len; i++) {
+					var item = items[i];
+					if (item.nodeName != 'RDF:Description') continue;
+					var id_path = item.getAttribute('RDF:about').match(/^urn:scrapbook:item(\d{14})#(.*?)$/);
+					// var folder = item.getAttribute('NS1:folder').match(/^urn:scrapbook:item(\d{14})$/);
+					data.push({
+						'id': id_path[1],
+						'path': id_path[2],
+						// 'folder': folder ? folder[1] : null,
+						'content': item.getAttribute('NS1:content')
+					});
+				}
+				that._cache = data;
+				checkLoad();
+			});
+			that.loadXMLDoc('scrapbook.rdf', function(xml){
+				var data = [];
+				var items = xml.documentElement.childNodes;
+				for (var i = 0, len = items.length; i < len; i++) {
+					var item = items[i];
+					if (item.nodeName != 'RDF:Description') continue;
+					var id = item.getAttribute('NS1:id');
+					data[id] = {
+						'id': id,
+						'type': item.getAttribute('NS1:type'),
+						'title': item.getAttribute('NS1:title'),
+						'source': item.getAttribute('NS1:source'),
+						'comment': item.getAttribute('NS1:comment'),
+						'create': item.getAttribute('NS1:create'),
+						'modify': item.getAttribute('NS1:modify')
+					};
+				}
+				that._scrapbook = data;
+				checkLoad();
+			});
+		} catch(ex) {
+			alert("Your browser doesn't support AJAX connection: \n" + ex.name + ': ' + ex.message);
+			return;
+		}
+
+		function checkLoad() {
+			if (that._cache && that._scrapbook) {
+				document.getElementById('search').removeAttribute('disabled');
+			}
+		}
+	},
+
+	loadXMLDoc: function(url, callback) {
+		var that = this;
+		var xmlhttp;
+		if (window.XMLHttpRequest) {  // code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp = new XMLHttpRequest();
+		}
+		else {  // code for IE6, IE5
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4) {
+				if (xmlhttp.status == 200 || xmlhttp.status == 0) {
+					callback.call(that, xmlhttp.responseXML);
+				}
+			}
+		}
+		xmlhttp.open("GET", url, true);
+		xmlhttp.send();
+		return xmlhttp;
+	},
+
+	search: function() {
+		var key = {
+			'word': document.getElementById('keyword').value
+		};
+		this.clearResult();
+		for (var i = 0, len = this._cache.length; i < len; i++) {
+			var item = this._cache[i];
+			var data = {
+				'cache': item,
+				'item': this._scrapbook[item.id]
+			};
+
+			if (this.matchResult(data, key)) {
+				this.addResult(data);
+			}
+		}
+	},
+
+	matchResult: function(data, key) {
+		try {
+			var word = new RegExp(key.word, 'i');
+		} catch(ex) {
+			return false;
+		}
+		if (!data.cache.content.match(word)) {
+			return false;
+		}
+		return true;
+	},
+
+	addResult: function(data) {
+		var cache = data.cache;
+		var item = data.item;
+		var wrapper = document.getElementById("result");
+		var result = document.createElement("LI");
+		var link = document.createElement("A");
+		var href = item.type == 'bookmark' ? item.source : 'data/' + item.id + '/' + cache.path;
+		link.setAttribute('href', href);
+		link.setAttribute('target', 'main');
+		link.setAttribute('class', item.type);
+		link.setAttribute('title', item.title);
+		link.appendChild(document.createTextNode(item.title));
+		result.appendChild(link);
+		wrapper.appendChild(result);
+	},
+
+	clearResult: function() {
+		document.getElementById("result").innerHTML = "";
+	}
+};
+</script>
+</head>
+<body onload="searchEngine.init();">
+<form action="javascript:searchEngine.search();">
+	<input id="keyword" type="text">
+	<input id="search" type="submit" value="go" disabled="disabled" autocomplete="off">
+</form>
+<div><ul id="result"></ul></div>
+</body>
+

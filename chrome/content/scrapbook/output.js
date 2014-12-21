@@ -97,6 +97,9 @@ var sbOutputService = {
 		indexFile.append("index.html");
 		this.content += this.getHTMLFoot();
 		sbCommonUtils.writeFile(indexFile, this.content, "UTF-8");
+		var searchFile = dir.parent;
+		searchFile.append('search.html');
+		sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/search.html", searchFile, true);
 		sbDataSource.outputTreeAutoDone();
 		if ( this.optionOpen )
 		{
