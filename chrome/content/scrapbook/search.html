@@ -311,13 +311,23 @@ var searchEngine = {
 		var item = data.item;
 		var wrapper = document.getElementById("result");
 		var result = document.createElement("LI");
-		var link = document.createElement("A");
 		var href = item.type == 'bookmark' ? item.source : 'data/' + item.id + '/' + cache.path;
+		if (item.type != 'bookmark') {
+			var fhref = 'tree/frame.html#../' + href;
+			var link = document.createElement("A");
+			link.setAttribute('href', fhref);
+			link.setAttribute('target', '_blank');
+			link.setAttribute('class', 'bookmark');
+			link.setAttribute('title', 'View In Frame');
+			link.appendChild(document.createTextNode('⌖ '));
+			result.appendChild(link);
+		}
+		var link = document.createElement("A");
 		link.setAttribute('href', href);
 		link.setAttribute('target', 'main');
 		link.setAttribute('class', item.type);
 		link.setAttribute('title', item.title);
-		link.appendChild(document.createTextNode(item.title));
+		link.appendChild(document.createTextNode(item.type == 'bookmark' ? '⌖ ' + item.title : item.title));
 		result.appendChild(link);
 		wrapper.appendChild(result);
 	},
