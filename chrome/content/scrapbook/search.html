@@ -107,6 +107,8 @@ var searchEngine = {
 			'comment': { 'include': [], 'exclude': [] },
 			'content': { 'include': [], 'exclude': [] },
 			'text': { 'include': [], 'exclude': [] },
+			'create': { 'include': [], 'exclude': [] },
+			'modify': { 'include': [], 'exclude': [] },
 		};
 		keyStr.replace(/(\-?[A-Za-z]+:|\-)(?:"((?:\\"|[^"])*)"|([^ "]*))|(?:"((?:\\"|[^"])*)"|([^ "]+))/g, function(match, cmd, qstr, str, qstr2, str2){
 //console.log([match, cmd, qstr, str, qstr2, str2]);
@@ -165,6 +167,18 @@ var searchEngine = {
 					case "-content:":
 						key.content.exclude.push(parseStr(str));
 						break;
+					case "create:":
+						key.create.include.push(parseDate(str));
+						break;
+					case "-create:":
+						key.create.exclude.push(parseDate(str));
+						break;
+					case "modify:":
+						key.modify.include.push(parseDate(str));
+						break;
+					case "-modify:":
+						key.modify.exclude.push(parseDate(str));
+						break;
 					case "-":
 						key.text.exclude.push(parseStr(str));
 						break;
@@ -190,6 +204,24 @@ var searchEngine = {
 				}
 				return regex;
 			}
+
+			function parseDate(str) {
+				var match = str.match(/^(\d{0,14})-?(\d{0,14})$/);
+				if (!match) {
+					isError = true;
+					that.addMsg("Invalid date format: " + str);
+					return null;
+				}
+				var since = match[1] ? pad(match[1], 14) : pad(match[1], 14);
+				var until = match[2] ? pad(match[2], 14) : pad(match[2], 14, "9");
+				return [parseInt(since, 10), parseInt(until, 10)];
+			}
+
+			function pad(n, width, z) {
+				z = z || '0';
+				n = n + '';
+				return n.length >= width ? n : n + new Array(width - n.length + 1).join(z);
+			}
 		});
 //console.log(key);
 		if (isError) return;
@@ -210,32 +242,40 @@ var searchEngine = {
 			return false;
 		}
 		// text
-		if (!matchData('text', [data.item.title, data.item.comment, data.cache.content].join("\t"))) {
+		if (!matchText('text', [data.item.title, data.item.comment, data.cache.content].join("\t"))) {
 			return false;
 		}
 		// id
-		if (!matchData('id', data.item.id)) {
+		if (!matchText('id', data.item.id)) {
 			return false;
 		}
 		// source
-		if (!matchData('source', data.item.source)) {
+		if (!matchText('source', data.item.source)) {
 			return false;
 		}
 		// title
-		if (!matchData('title', data.item.title)) {
+		if (!matchText('title', data.item.title)) {
 			return false;
 		}
 		// comment
-		if (!matchData('comment', data.item.comment)) {
+		if (!matchText('comment', data.item.comment)) {
 			return false;
 		}
 		// content
-		if (!matchData('content', data.cache.content)) {
+		if (!matchText('content', data.cache.content)) {
+			return false;
+		}
+		// create
+		if (!matchDate('create', data.item.create)) {
+			return false;
+		}
+		// modify
+		if (!matchDate('modify', data.item.modify)) {
 			return false;
 		}
 		return true;
 
-		function matchData(name, text) {
+		function matchText(name, text) {
 			for (var i=0, len=key[name].exclude.length; i<len; i++) {
 				if (text.match(key[name].exclude[i])) {
 					return false;
@@ -243,6 +283,22 @@ var searchEngine = {
 			}
 			for (var i=0, len=key[name].include.length; i<len; i++) {
 				if (!text.match(key[name].include[i])) {
+					return false;
+				}
+			}
+			return true;
+		}
+
+		function matchDate(name, date) {
+			if (!date) return false;
+			var date = parseInt(date, 10);
+			for (var i=0, len=key[name].exclude.length; i<len; i++) {
+				if (key[name].exclude[i][0] <= date && date <= key[name].exclude[i][1]) {
+					return false;
+				}
+			}
+			for (var i=0, len=key[name].include.length; i<len; i++) {
+				if (!(key[name].include[i][0] <= date && date <= key[name].include[i][1])) {
 					return false;
 				}
 			}
