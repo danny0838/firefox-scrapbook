@@ -92,10 +92,16 @@ var searchEngine = {
 	},
 
 	search: function() {
-		var key = {
-			'word': document.getElementById('keyword').value
-		};
 		this.clearResult();
+		var keyStr = document.getElementById('keyword').value;
+		try {
+			var key_regex = new RegExp(keyStr, 'i');
+		} catch(ex) {
+			return;
+		}
+		var key = {
+			'regex': key_regex
+		};
 		for (var i = 0, len = this._cache.length; i < len; i++) {
 			var item = this._cache[i];
 			var data = {
@@ -110,12 +116,10 @@ var searchEngine = {
 	},
 
 	matchResult: function(data, key) {
-		try {
-			var word = new RegExp(key.word, 'i');
-		} catch(ex) {
+		if (!data.item) {
 			return false;
 		}
-		if (!data.cache.content.match(word)) {
+		if (!data.cache.content.match(key.regex) && !data.item.title.match(key.regex)) {
 			return false;
 		}
 		return true;
