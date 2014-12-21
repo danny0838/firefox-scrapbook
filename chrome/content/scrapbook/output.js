@@ -92,17 +92,15 @@ var sbOutputService = {
 		}
 		var frameFile = dir.clone();
 		frameFile.append("frame.html");
-		if ( !frameFile.exists() ) frameFile.create(frameFile.NORMAL_FILE_TYPE, 0666);
 		sbCommonUtils.writeFile(frameFile, this.getHTMLFrame(), "UTF-8");
 		var indexFile = dir.clone();
 		indexFile.append("index.html");
-		if ( !indexFile.exists() ) indexFile.create(indexFile.NORMAL_FILE_TYPE, 0666);
 		this.content += this.getHTMLFoot();
 		sbCommonUtils.writeFile(indexFile, this.content, "UTF-8");
 		sbDataSource.outputTreeAutoDone();
-		var fileName = this.optionFrame ? "frame.html" : "index.html";
 		if ( this.optionOpen )
 		{
+			var fileName = this.optionFrame ? "frame.html" : "index.html";
 			sbCommonUtils.loadURL(sbCommonUtils.convertFilePathToURL(dir.path) + fileName, true);
 		}
 	},
