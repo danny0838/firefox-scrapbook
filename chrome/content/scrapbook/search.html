@@ -92,23 +92,113 @@ var searchEngine = {
 	},
 
 	search: function() {
-		this.clearResult();
+		var that = this;
+		that.clearResult();
 		var keyStr = document.getElementById('keyword').value;
-		try {
-			var key_regex = new RegExp(keyStr, 'i');
-		} catch(ex) {
-			return;
-		}
-		var key = {
-			'regex': key_regex
+		var isError = false;
+		var mode = {
+			'mc': false,
+			're': false,
 		};
+		var key = {
+			'id': { 'include': [], 'exclude': [] },
+			'source': { 'include': [], 'exclude': [] },
+			'title': { 'include': [], 'exclude': [] },
+			'comment': { 'include': [], 'exclude': [] },
+			'content': { 'include': [], 'exclude': [] },
+			'text': { 'include': [], 'exclude': [] },
+		};
+		keyStr.replace(/(\-?[A-Za-z]+:|\-)(?:"((?:\\"|[^"])*)"|([^ "]*))|(?:"((?:\\"|[^"])*)"|([^ "]+))/g, function(match, cmd, qstr, str, qstr2, str2){
+//console.log([match, cmd, qstr, str, qstr2, str2]);
+			if (cmd) {
+				var str = qstr ? qstr.replace(/\\"/g, '"') : str;
+			}
+			else {
+				var str = qstr2 ? qstr2.replace(/\\"/g, '"') : str2;
+			}
+			// commands that don't require a str
+			// the str will then be reguarded as a "text include"
+			switch (cmd) {
+				case "mc:":
+					mode.mc = true;
+					break;
+				case "-mc:":
+					mode.mc = false;
+					break;
+				case "re:":
+					mode.re = true;
+					break;
+				case "-re:":
+					mode.re = false;
+					break;
+			}
+			// commands that requires a str
+			if (str) {
+				switch (cmd) {
+					case "id:":
+						key.id.include.push(parseStr(str));
+						break;
+					case "-id:":
+						key.id.exclude.push(parseStr(str));
+						break;
+					case "source:":
+						key.source.include.push(parseStr(str));
+						break;
+					case "-source:":
+						key.source.exclude.push(parseStr(str));
+						break;
+					case "title:":
+						key.title.include.push(parseStr(str));
+						break;
+					case "-title:":
+						key.title.exclude.push(parseStr(str));
+						break;
+					case "comment:":
+						key.comment.include.push(parseStr(str));
+						break;
+					case "-comment:":
+						key.comment.exclude.push(parseStr(str));
+						break;
+					case "content:":
+						key.content.include.push(parseStr(str));
+						break;
+					case "-content:":
+						key.content.exclude.push(parseStr(str));
+						break;
+					case "-":
+						key.text.exclude.push(parseStr(str));
+						break;
+					default:
+						key.text.include.push(parseStr(str));
+						break;
+				}
+			}
+
+			function parseStr(str) {
+				var options = mode.mc ? '' : 'i';
+				if (mode.re) {
+					try {
+						var regex = new RegExp(str, options);
+					} catch(ex) {
+						isError = true;
+						that.addMsg("Invalid RegExp: " + str);
+						return null;
+					}
+				}
+				else {
+					var regex = new RegExp(that.escapeRegExp(str), options);
+				}
+				return regex;
+			}
+		});
+//console.log(key);
+		if (isError) return;
 		for (var i = 0, len = this._cache.length; i < len; i++) {
 			var item = this._cache[i];
 			var data = {
 				'cache': item,
 				'item': this._scrapbook[item.id]
 			};
-
 			if (this.matchResult(data, key)) {
 				this.addResult(data);
 			}
@@ -119,10 +209,45 @@ var searchEngine = {
 		if (!data.item) {
 			return false;
 		}
-		if (!data.cache.content.match(key.regex) && !data.item.title.match(key.regex)) {
+		// text
+		if (!matchData('text', [data.item.title, data.item.comment, data.cache.content].join("\t"))) {
+			return false;
+		}
+		// id
+		if (!matchData('id', data.item.id)) {
+			return false;
+		}
+		// source
+		if (!matchData('source', data.item.source)) {
+			return false;
+		}
+		// title
+		if (!matchData('title', data.item.title)) {
+			return false;
+		}
+		// comment
+		if (!matchData('comment', data.item.comment)) {
+			return false;
+		}
+		// content
+		if (!matchData('content', data.cache.content)) {
 			return false;
 		}
 		return true;
+
+		function matchData(name, text) {
+			for (var i=0, len=key[name].exclude.length; i<len; i++) {
+				if (text.match(key[name].exclude[i])) {
+					return false;
+				}
+			}
+			for (var i=0, len=key[name].include.length; i<len; i++) {
+				if (!text.match(key[name].include[i])) {
+					return false;
+				}
+			}
+			return true;
+		}
 	},
 
 	addResult: function(data) {
@@ -143,6 +268,17 @@ var searchEngine = {
 
 	clearResult: function() {
 		document.getElementById("result").innerHTML = "";
+	},
+
+	addMsg: function(msg) {
+		var wrapper = document.getElementById("result");
+		var result = document.createElement("LI");
+		result.appendChild(document.createTextNode(msg));
+		wrapper.appendChild(result);
+	},
+
+	escapeRegExp : function(str) {
+		return str.replace(/([\*\+\?\.\^\/\$\\\|\[\]\{\}\(\)])/g, "\\$1");
 	}
 };
 </script>
