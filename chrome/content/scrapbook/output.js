@@ -159,7 +159,7 @@ var sbOutputService = {
 			+ '		}\n'
 			+ '	}\n'
 			+ '	function registerRenewHash() {\n'
-			+ '		var elems = document.getElementsByTagName("A");\n'
+			+ '		var elems = document.getElementById("folder-root").getElementsByTagName("A");\n'
 			+ '		for ( var i = 1; i < elems.length; i++ ) {\n'
 			+ '			if (elems[i].className != "folder") {\n'
 			+ '				elems[i].onclick = renewHash;\n'
