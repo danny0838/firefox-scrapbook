@@ -83,6 +83,7 @@ var sbOutputService = {
 			"chrome://scrapbook/skin/treenotex.png"  : "treenotex.png",
 			"chrome://scrapbook/skin/treefolder.png" : "folder.png",
 			"chrome://scrapbook/skin/toolbar_toggle.png" : "toggle.png",
+			"chrome://scrapbook/skin/search_all.png" : "search.png",
 		};
 		for ( var url in urlHash )
 		{
@@ -192,7 +193,7 @@ var sbOutputService = {
 			+ '	</script>\n'
 			+ '</head>\n\n'
 			+ '<body onload="init();">\n'
-			+ '<div id="header"><a href="javascript:toggleAll();">ScrapBook</a></div>\n'
+			+ '<div id="header"><a href="javascript:toggleAll();"><img src="toggle.png" width="16" height="16" alt="">ScrapBook</a> <a href="../search.html"><img src="search.png" width="18" height="12" alt=""></a></div>\n'
 		return HTML;
 	},
 

@@ -22,11 +22,6 @@ div#header a {
 	color: #666666;
 }
 
-div#header a:before {
-	content: url('./toggle.png');
-	vertical-align: middle;
-}
-
 /* ::::: list ::::: */
 ul {
 	margin-left :  0px;
