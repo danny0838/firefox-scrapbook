@@ -26,7 +26,7 @@ var sbSearchResult =
 	index : 0,
 	count : 0,
 	hit : 0,
-	QueryStrings   : { q : "", re : "", cs : "", ref : "" },
+	QueryStrings   : null,
 	RegExpModifier : "",
 	RegExpInclude : [],
 	RegExpExclude : [],
@@ -38,14 +38,12 @@ var sbSearchResult =
 
 	exec : function()
 	{
-		var qa = document.location.search.substring(1).split("&");
-		for ( var i = 0; i < qa.length; i++ )
-		{
-			this.QueryStrings[qa[i].split("=")[0]] = qa[i].split("=")[1];
-		}
-		this.QueryStrings['q'] = decodeURIComponent(this.QueryStrings['q']);
+		this.QueryStrings = sbCommonUtils.parseURLQuery(document.location.search.substring(1));
+		['q', 're', 'cs', 'ref'].forEach(function(key){
+			this.QueryStrings[key] = this.QueryStrings[key] || "";
+		}, this);
 
-		if ( this.QueryStrings['ref'].indexOf("urn:scrapbook:item") == 0 )
+		if ( this.QueryStrings['ref'] && this.QueryStrings['ref'].indexOf("urn:scrapbook:item") == 0 )
 		{
 			var refRes = sbCommonUtils.RDF.GetResource(this.QueryStrings['ref']);
 			var elt = document.getElementById("sbResultHeader").firstChild.nextSibling;
