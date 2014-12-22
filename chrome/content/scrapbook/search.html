@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<title>Search - ScrapBook</title>
+<meta name="viewport" content="width=device-width">
+<link rel="stylesheet" type="text/css" href="tree/output.css" media="all">
+<script>
+var searchEngine = {
+
+	_cache: null,
+	_scrapbook: null,
+
+	init: function () {
+		var that = this;
+		if (location.protocol.match(/https?/)) {
+			if (!confirm('Running this search engine could cause large network flow, are you sure to continue?')) {
+				return;
+			}
+		}
+		try {
+			that.loadXMLDoc('cache.rdf', function(xml){
+				var data = [];
+				// some mobile browsers (e.g. Dolphin) do not support xmlDoc.getElementsByTagName
+				var items = xml.documentElement.childNodes;
+				for (var i = 0, len = items.length; i < len; i++) {
+					var item = items[i];
+					if (item.nodeName != 'RDF:Description') continue;
+					var id_path = item.getAttribute('RDF:about').match(/^urn:scrapbook:item(\d{14})#(.*?)$/);
+					// var folder = item.getAttribute('NS1:folder').match(/^urn:scrapbook:item(\d{14})$/);
+					data.push({
+						'id': id_path[1],
+						'path': id_path[2],
+						// 'folder': folder ? folder[1] : null,
+						'content': item.getAttribute('NS1:content')
+					});
+				}
+				that._cache = data;
+				checkLoad();
+			});
+			that.loadXMLDoc('scrapbook.rdf', function(xml){
+				var data = [];
+				var items = xml.documentElement.childNodes;
+				for (var i = 0, len = items.length; i < len; i++) {
+					var item = items[i];
+					if (item.nodeName != 'RDF:Description') continue;
+					var id = item.getAttribute('NS1:id');
+					data[id] = {
+						'id': id,
+						'type': item.getAttribute('NS1:type'),
+						'title': item.getAttribute('NS1:title'),
+						'source': item.getAttribute('NS1:source'),
+						'comment': item.getAttribute('NS1:comment'),
+						'create': item.getAttribute('NS1:create'),
+						'modify': item.getAttribute('NS1:modify')
+					};
+				}
+				that._scrapbook = data;
+				checkLoad();
+			});
+		} catch(ex) {
+			alert("Your browser doesn't support AJAX connection: \n" + ex.name + ': ' + ex.message);
+			return;
+		}
+
+		function checkLoad() {
+			if (that._cache && that._scrapbook) {
+				document.getElementById('search').removeAttribute('disabled');
+			}
+		}
+	},
+
+	loadXMLDoc: function(url, callback) {
+		var that = this;
+		var xmlhttp;
+		if (window.XMLHttpRequest) {  // code for IE7+, Firefox, Chrome, Opera, Safari
+			xmlhttp = new XMLHttpRequest();
+		}
+		else {  // code for IE6, IE5
+			xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		xmlhttp.onreadystatechange = function() {
+			if (xmlhttp.readyState == 4) {
+				if (xmlhttp.status == 200 || xmlhttp.status == 0) {
+					callback.call(that, xmlhttp.responseXML);
+				}
+			}
+		}
+		xmlhttp.open("GET", url, true);
+		xmlhttp.send();
+		return xmlhttp;
+	},
+
+	search: function() {
+		var that = this;
+		that.clearResult();
+		var keyStr = document.getElementById('keyword').value;
+		var isError = false;
+		var mode = {
+			'mc': false,
+			're': false,
+		};
+		var key = {
+			'id': { 'include': [], 'exclude': [] },
+			'type': { 'include': [], 'exclude': [] },
+			'source': { 'include': [], 'exclude': [] },
+			'title': { 'include': [], 'exclude': [] },
+			'comment': { 'include': [], 'exclude': [] },
+			'content': { 'include': [], 'exclude': [] },
+			'text': { 'include': [], 'exclude': [] },
+			'create': { 'include': [], 'exclude': [] },
+			'modify': { 'include': [], 'exclude': [] },
+		};
+		keyStr.replace(/(\-?[A-Za-z]+:|\-)(?:"((?:\\"|[^"])*)"|([^ "\u3000]*))|(?:"((?:""|[^"])*)"|([^ "\u3000]+))/g, function(match, cmd, qstr, str, qstr2, str2){
+//console.log([match, cmd, qstr, str, qstr2, str2]);
+			if (cmd) {
+				var str = qstr ? qstr.replace(/""/g, '"') : str;
+			}
+			else {
+				var str = qstr2 ? qstr2.replace(/""/g, '"') : str2;
+			}
+			// commands that don't require a str
+			// the str will then be reguarded as a "text include"
+			switch (cmd) {
+				case "mc:":
+					mode.mc = true;
+					break;
+				case "-mc:":
+					mode.mc = false;
+					break;
+				case "re:":
+					mode.re = true;
+					break;
+				case "-re:":
+					mode.re = false;
+					break;
+			}
+			// commands that requires a str
+			if (str) {
+				switch (cmd) {
+					case "id:":
+						key.id.include.push(parseStr(str));
+						break;
+					case "-id:":
+						key.id.exclude.push(parseStr(str));
+						break;
+					case "type:":
+						key.type.include.push(parseStr(str));
+						break;
+					case "-type:":
+						key.type.exclude.push(parseStr(str));
+						break;
+					case "source:":
+						key.source.include.push(parseStr(str));
+						break;
+					case "-source:":
+						key.source.exclude.push(parseStr(str));
+						break;
+					case "title:":
+						key.title.include.push(parseStr(str));
+						break;
+					case "-title:":
+						key.title.exclude.push(parseStr(str));
+						break;
+					case "comment:":
+						key.comment.include.push(parseStr(str));
+						break;
+					case "-comment:":
+						key.comment.exclude.push(parseStr(str));
+						break;
+					case "content:":
+						key.content.include.push(parseStr(str));
+						break;
+					case "-content:":
+						key.content.exclude.push(parseStr(str));
+						break;
+					case "create:":
+						key.create.include.push(parseDate(str));
+						break;
+					case "-create:":
+						key.create.exclude.push(parseDate(str));
+						break;
+					case "modify:":
+						key.modify.include.push(parseDate(str));
+						break;
+					case "-modify:":
+						key.modify.exclude.push(parseDate(str));
+						break;
+					case "-":
+						key.text.exclude.push(parseStr(str));
+						break;
+					default:
+						key.text.include.push(parseStr(str));
+						break;
+				}
+			}
+
+			function parseStr(str) {
+				var options = mode.mc ? '' : 'i';
+				if (mode.re) {
+					try {
+						var regex = new RegExp(str, options);
+					} catch(ex) {
+						isError = true;
+						that.addMsg("Invalid RegExp: " + str);
+						return null;
+					}
+				}
+				else {
+					var regex = new RegExp(that.escapeRegExp(str), options);
+				}
+				return regex;
+			}
+
+			function parseDate(str) {
+				var match = str.match(/^(\d{0,14})-?(\d{0,14})$/);
+				if (!match) {
+					isError = true;
+					that.addMsg("Invalid date format: " + str);
+					return null;
+				}
+				var since = match[1] ? pad(match[1], 14) : pad(match[1], 14);
+				var until = match[2] ? pad(match[2], 14) : pad(match[2], 14, "9");
+				return [parseInt(since, 10), parseInt(until, 10)];
+			}
+
+			function pad(n, width, z) {
+				z = z || '0';
+				n = n + '';
+				return n.length >= width ? n : n + new Array(width - n.length + 1).join(z);
+			}
+		});
+//console.log(key);
+		if (isError) return;
+		for (var i = 0, len = this._cache.length; i < len; i++) {
+			var item = this._cache[i];
+			var data = {
+				'cache': item,
+				'item': this._scrapbook[item.id]
+			};
+			if (this.matchResult(data, key)) {
+				this.addResult(data);
+			}
+		}
+	},
+
+	matchResult: function(data, key) {
+		if (!data.item) {
+			return false;
+		}
+		// text
+		if (!matchText('text', [data.item.title, data.item.comment, data.cache.content].join("\t"))) {
+			return false;
+		}
+		// id
+		if (!matchText('id', data.item.id)) {
+			return false;
+		}
+		// type
+		if (!matchText('type', data.item.type)) {
+			return false;
+		}
+		// source
+		if (!matchText('source', data.item.source)) {
+			return false;
+		}
+		// title
+		if (!matchText('title', data.item.title)) {
+			return false;
+		}
+		// comment
+		if (!matchText('comment', data.item.comment)) {
+			return false;
+		}
+		// content
+		if (!matchText('content', data.cache.content)) {
+			return false;
+		}
+		// create
+		if (!matchDate('create', data.item.create)) {
+			return false;
+		}
+		// modify
+		if (!matchDate('modify', data.item.modify)) {
+			return false;
+		}
+		return true;
+
+		function matchText(name, text) {
+			for (var i=0, len=key[name].exclude.length; i<len; i++) {
+				if (key[name].exclude[i].test(text)) {
+					return false;
+				}
+			}
+			for (var i=0, len=key[name].include.length; i<len; i++) {
+				if (!key[name].include[i].test(text)) {
+					return false;
+				}
+			}
+			return true;
+		}
+
+		function matchDate(name, date) {
+			if (!date) return false;
+			var date = parseInt(date, 10);
+			for (var i=0, len=key[name].exclude.length; i<len; i++) {
+				if (key[name].exclude[i][0] <= date && date <= key[name].exclude[i][1]) {
+					return false;
+				}
+			}
+			for (var i=0, len=key[name].include.length; i<len; i++) {
+				if (!(key[name].include[i][0] <= date && date <= key[name].include[i][1])) {
+					return false;
+				}
+			}
+			return true;
+		}
+	},
+
+	addResult: function(data) {
+		var cache = data.cache;
+		var item = data.item;
+		var wrapper = document.getElementById("result");
+		var result = document.createElement("LI");
+		var href = item.type == 'bookmark' ? item.source : 'data/' + item.id + '/' + cache.path;
+		if (item.type != 'bookmark') {
+			var fhref = 'tree/frame.html#../' + href;
+			var link = document.createElement("A");
+			link.setAttribute('href', fhref);
+			link.setAttribute('target', '_blank');
+			link.setAttribute('class', 'bookmark');
+			link.setAttribute('title', 'View In Frame');
+			link.appendChild(document.createTextNode('⌖ '));
+			result.appendChild(link);
+		}
+		var link = document.createElement("A");
+		link.setAttribute('href', href);
+		link.setAttribute('target', 'main');
+		link.setAttribute('class', item.type);
+		link.setAttribute('title', item.title);
+		link.appendChild(document.createTextNode(item.type == 'bookmark' ? '⌖ ' + item.title : item.title));
+		result.appendChild(link);
+		wrapper.appendChild(result);
+	},
+
+	clearResult: function() {
+		document.getElementById("result").innerHTML = "";
+	},
+
+	addMsg: function(msg) {
+		var wrapper = document.getElementById("result");
+		var result = document.createElement("LI");
+		result.appendChild(document.createTextNode(msg));
+		wrapper.appendChild(result);
+	},
+
+	escapeRegExp : function(str) {
+		return str.replace(/([\*\+\?\.\^\/\$\\\|\[\]\{\}\(\)])/g, "\\$1");
+	}
+};
+</script>
+</head>
+<body onload="searchEngine.init();">
+<form action="javascript:searchEngine.search();">
+	<input id="keyword" type="text">
+	<input id="search" type="submit" value="go" disabled="disabled" autocomplete="off">
+</form>
+<div><ul id="result"></ul></div>
+</body>
+

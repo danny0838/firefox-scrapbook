@@ -435,9 +435,9 @@ var sbCommonUtils = {
 		this.writeFile(aFile, content, "UTF-8");
 	},
 
-	saveTemplateFile : function(aURISpec, aFile)
+	saveTemplateFile : function(aURISpec, aFile, aOverwrite)
 	{
-		if ( aFile.exists() ) return;
+		if ( aFile.exists() && !aOverwrite ) return;
 		var istream = this.IO.newChannelFromURI(this.convertURLToObject(aURISpec)).open();
 		var bistream = Components.classes["@mozilla.org/binaryinputstream;1"].createInstance(Components.interfaces.nsIBinaryInputStream);
 		bistream.setInputStream(istream);
