@@ -855,7 +855,7 @@ var sbSearchService = {
 			this.optionCS = document.getElementById("sbSearchPopupOptionCS").getAttribute("checked");
 			this.FORM_HISTORY.addEntry("sbSearchHistory", this.query);
 			if (this.type == "fulltext") {
-				this.execFT();
+				this.doFullTextSearch();
 			}
 		 
 			else {
@@ -874,12 +874,12 @@ var sbSearchService = {
 					);
 					return;
 				}
-				this.exec(false);
+				this.doFilteringSearch();
 			}
 		}
 	},
 
-	execFT: function()
+	doFullTextSearch: function()
 	{
 		var cache = sbCommonUtils.getScrapBookDir().clone();
 		cache.append("cache.rdf");
@@ -898,7 +898,7 @@ var sbSearchService = {
 			+ "&cs=" + (this.optionCS ? "1" : "")
 			+ (this.treeRef != "urn:scrapbook:root" ? "&ref=" + this.treeRef : "");
 		if (shouldBuild) {
-			this.buildFT(uri + query);
+			this.updateCache(uri + query);
 		}
 		else {
 			var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
@@ -908,12 +908,12 @@ var sbSearchService = {
 		}
 	},
 
-	buildFT: function(aResURI)
+	updateCache: function(aResURI)
 	{
 		window.openDialog('chrome://scrapbook/content/cache.xul','ScrapBook:Cache','chrome,dialog=no', aResURI);
 	},
 
-	exec: function()
+	doFilteringSearch: function()
 	{
 		sbDataSource.clearContainer("urn:scrapbook:search");
 		this.container = sbDataSource.getContainer("urn:scrapbook:search", true);
@@ -960,7 +960,7 @@ var sbSearchService = {
 		var tmpType = this.type;
 		this.type = "id";
 		this.regex = new RegExp("^(" + ymdList.join("|") + ")", "");
-		this.exec(true);
+		this.doFilteringSearch();
 		this.type = tmpType;
 	},
 

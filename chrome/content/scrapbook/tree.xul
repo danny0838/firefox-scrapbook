@@ -69,7 +69,7 @@
 			<menu label="&sb.tools;">
 				<menupopup>
 					<menuitem label="&sb.search.days;..." oncommand="sbSearchService.filterByDays();" />
-					<menuitem label="&sb.search.cache;"   oncommand="sbSearchService.buildFT();" />
+					<menuitem label="&sb.search.cache;"   oncommand="sbSearchService.updateCache();" />
 					<menuitem label="&sb.search.clear;"   oncommand="sbSearchService.clearFormHistory();" />
 				</menupopup>
 			</menu>
