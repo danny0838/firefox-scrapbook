@@ -110,7 +110,7 @@ var searchEngine = {
 			'create': { 'include': [], 'exclude': [] },
 			'modify': { 'include': [], 'exclude': [] },
 		};
-		keyStr.replace(/(\-?[A-Za-z]+:|\-)(?:"((?:\\"|[^"])*)"|([^ "]*))|(?:"((?:""|[^"])*)"|([^ "]+))/g, function(match, cmd, qstr, str, qstr2, str2){
+		keyStr.replace(/(\-?[A-Za-z]+:|\-)(?:"((?:\\"|[^"])*)"|([^ "\u3000]*))|(?:"((?:""|[^"])*)"|([^ "\u3000]+))/g, function(match, cmd, qstr, str, qstr2, str2){
 //console.log([match, cmd, qstr, str, qstr2, str2]);
 			if (cmd) {
 				var str = qstr ? qstr.replace(/""/g, '"') : str;
