@@ -26,7 +26,7 @@ var sbSearchResult =
 	index : 0,
 	count : 0,
 	hit : 0,
-	QueryStrings   : null,
+	query : null,
 	RegExpModifier : "",
 	RegExpInclude : [],
 	RegExpExclude : [],
@@ -38,14 +38,14 @@ var sbSearchResult =
 
 	exec : function()
 	{
-		this.QueryStrings = sbCommonUtils.parseURLQuery(document.location.search.substring(1));
+		this.query = sbCommonUtils.parseURLQuery(document.location.search.substring(1));
 		['q', 're', 'cs', 'ref'].forEach(function(key){
-			this.QueryStrings[key] = this.QueryStrings[key] || "";
+			this.query[key] = this.query[key] || "";
 		}, this);
 
-		if ( this.QueryStrings['ref'] && this.QueryStrings['ref'].indexOf("urn:scrapbook:item") == 0 )
+		if ( this.query['ref'] && this.query['ref'].indexOf("urn:scrapbook:item") == 0 )
 		{
-			var refRes = sbCommonUtils.RDF.GetResource(this.QueryStrings['ref']);
+			var refRes = sbCommonUtils.RDF.GetResource(this.query['ref']);
 			var elt = document.getElementById("sbResultHeader").firstChild.nextSibling;
 			elt.value += sbDataSource.getProperty(refRes, "title");
 			elt.hidden = false;
@@ -56,10 +56,10 @@ var sbSearchResult =
 			}
 		}
 
-		this.RegExpModifier = ( !this.QueryStrings['cs'] ) ? "im" : "m";
-		if ( !this.QueryStrings['re'] )
+		this.RegExpModifier = ( !this.query['cs'] ) ? "im" : "m";
+		if ( !this.query['re'] )
 		{
-			var query = this.QueryStrings['q'].replace(/( |\u3000)+/g, " ");
+			var query = this.query['q'].replace(/( |\u3000)+/g, " ");
 			var quotePos1;
 			var quotePos2;
 			var quotedStr;
@@ -100,7 +100,7 @@ var sbSearchResult =
 				}
 			}
 			if ( this.RegExpInclude.length == 0 ) {
-				document.getElementById("sbResultHeader").firstChild.value = sbCommonUtils.lang("fulltext", "ERR_NO_INCLUDE_WORD", [this.QueryStrings['q']] );
+				document.getElementById("sbResultHeader").firstChild.value = sbCommonUtils.lang("fulltext", "ERR_NO_INCLUDE_WORD", [this.query['q']] );
 				return;
 			}
 		}
@@ -152,12 +152,12 @@ var sbSearchResult =
 		var type    = sbDataSource.getProperty(res, "type");
 		var title   = sbDataSource.getProperty(res, "title");
 		var comment = sbDataSource.getProperty(res, "comment");
-		if ( this.QueryStrings['re'] )
+		if ( this.query['re'] )
 		{
 			try {
-				var re = new RegExp(this.QueryStrings['q'], this.RegExpModifier);
+				var re = new RegExp(this.query['q'], this.RegExpModifier);
 			} catch (ex) {
-				document.getElementById("sbResultHeader").firstChild.value = sbCommonUtils.lang("fulltext", "ERR_REGEXP_INAVLID", [this.QueryStrings['q']] );
+				document.getElementById("sbResultHeader").firstChild.value = sbCommonUtils.lang("fulltext", "ERR_REGEXP_INAVLID", [this.query['q']] );
 				return;
 			}
 			var isMatchT = title.match(re);
@@ -202,9 +202,9 @@ var sbSearchResult =
 	{
 		this.initTree();
 		var headerLabel1 = sbCommonUtils.lang("fulltext", "RESULTS_FOUND", [this.hit] );
-		if ( this.QueryStrings['re'] )
+		if ( this.query['re'] )
 		{
-			var headerLabel2 = sbCommonUtils.lang("fulltext", "MATCHING", [ this.localizedQuotation(this.QueryStrings['q']) ]);
+			var headerLabel2 = sbCommonUtils.lang("fulltext", "MATCHING", [ this.localizedQuotation(this.query['q']) ]);
 		}
 		else
 		{
@@ -255,7 +255,7 @@ var sbSearchResult =
 	extractRightContext : function(aString)
 	{
 		aString = aString.replace(/\r|\n|\t/g, " ");
-		pattern = ( this.QueryStrings['re'] ) ? this.QueryStrings['q'] : this.includeWords[0];
+		pattern = ( this.query['re'] ) ? this.query['q'] : this.includeWords[0];
 		var re = new RegExp("(" + sbCommonUtils.escapeRegExp(pattern) + ".*)", this.RegExpModifier);
 		var ret = aString.match(re) ? RegExp.$1 : aString;
 		return ( ret.length > 100 ) ? ret.substring(0, 100) : ret;
@@ -312,7 +312,7 @@ var sbSearchResult =
 	{
 		aEvent.stopPropagation();
 		aEvent.preventDefault();
-		if ( this.QueryStrings['re'] ) this.includeWords = [this.QueryStrings['q']];
+		if ( this.query['re'] ) this.includeWords = [this.query['q']];
 		for ( var i = 0; i < this.includeWords.length; i++ )
 		{
 			var colors = ["#FFFF33","#66FFFF","#90FF90","#FF9999","#FF99FF"];
