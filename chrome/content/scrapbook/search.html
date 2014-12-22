@@ -277,12 +277,12 @@ var searchEngine = {
 
 		function matchText(name, text) {
 			for (var i=0, len=key[name].exclude.length; i<len; i++) {
-				if (text.match(key[name].exclude[i])) {
+				if (key[name].exclude[i].test(text)) {
 					return false;
 				}
 			}
 			for (var i=0, len=key[name].include.length; i<len; i++) {
-				if (!text.match(key[name].include[i])) {
+				if (!key[name].include[i].test(text)) {
 					return false;
 				}
 			}
