@@ -1068,7 +1068,7 @@ var sbSearchService = {
 			}
 
 			function parseStr(term) {
-				var options = mode.mc ? '' : 'i';
+				var options = mode.mc ? 'g' : 'ig';
 				if (mode.re) {
 					try {
 						var regex = new RegExp(term, options);
@@ -1108,11 +1108,12 @@ var sbSearchService = {
 	// aText: text from the fulltext cache; optional
 	queryMatch : function(aKey, aRes, aText)
 	{
+		var hits = {};
 		var title = sbDataSource.getProperty(aRes, "title");
 		var comment = sbDataSource.getProperty(aRes, "comment");
 		var content = aText || "";
 		// text
-		if (!matchText('text', [title, comment, content].join("\t"))) {
+		if (!matchTextTCC(title, comment, content)) {
 			return false;
 		}
 		// title
@@ -1147,20 +1148,74 @@ var sbSearchService = {
 		if (!matchDate('modify', sbDataSource.getProperty(aRes, "modify"))) {
 			return false;
 		}
-		return true;
+		return hits;
+
+		function matchTextTCC(title, comment, content) {
+			var regex;
+			var excludes = aKey['text'].exclude;
+			for (var i=0, len=excludes.length; i<len; i++) {
+				regex = excludes[i];
+				regex.lastIndex = 0;
+				if (regex.test(title)) {
+					return false;
+				}
+				regex.lastIndex = 0;
+				if (regex.test(comment)) {
+					return false;
+				}
+				regex.lastIndex = 0;
+				if (regex.test(content)) {
+					return false;
+				}
+			}
+			var includes = aKey['text'].include;
+			for (var i=0, len=includes.length; i<len; i++) {
+				regex = includes[i];
+				var result = false;
+				regex.lastIndex = 0;
+				if (regex.test(title)) {
+					result = true;
+					updateHits('title', regex.lastIndex - RegExp.lastMatch.length);
+				}
+				regex.lastIndex = 0;
+				if (regex.test(comment)) {
+					result = true;
+					updateHits('comment', regex.lastIndex - RegExp.lastMatch.length);
+				}
+				regex.lastIndex = 0;
+				if (regex.test(content)) {
+					result = true;
+					updateHits('content', regex.lastIndex - RegExp.lastMatch.length);
+				}
+				if (!result) return false;
+			}
+			return true;
+		}
 
 		function matchText(name, text) {
+			var regex;
 			for (var i=0, len=aKey[name].exclude.length; i<len; i++) {
-				if (text.match(aKey[name].exclude[i])) {
+				regex = aKey[name].exclude[i];
+				regex.lastIndex = 0;
+				if (regex.test(text)) {
 					return false;
 				}
 			}
 			for (var i=0, len=aKey[name].include.length; i<len; i++) {
-				if (!text.match(aKey[name].include[i])) {
+				regex = aKey[name].include[i];
+				regex.lastIndex = 0;
+				if (!regex.test(text)) {
 					return false;
+				}
+				else {
+					updateHits(name, regex.lastIndex - RegExp.lastMatch.length);
 				}
 			}
 			return true;
+		}
+
+		function updateHits(name, index) {
+			if (hits[name] === undefined || index < hits[name]) hits[name] = index;
 		}
 
 		function matchDate(name, date) {
