@@ -879,6 +879,7 @@ var sbCommonUtils = {
 	 * stylesheet (link, style)
 	 * stylesheet-temp (link, style)
 	 * todo (input, textarea)
+	 * fulltext
 	 *
 	 * custom (*) (custom objects to be removed by the eraser)
 	 * custom-wrapper (*) (custom objects to be unwrapped by the eraser)

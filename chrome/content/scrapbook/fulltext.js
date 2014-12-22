@@ -226,13 +226,61 @@ var sbSearchResult =
 		var regex_chars = /[^\\][\*\+\?\.\^\$\|\[\]\{\}\(\)]/;
 		var colors = ["#FFFF33", "#66FFFF", "#90FF90", "#FF9999", "#FF99FF"];
 		var i = 0;
-		var keys = this.queryKey.text.include.concat(this.queryKey.content.include);
-		keys.forEach(function(key){
-			key = key.source;
-			if (key.match(regex_chars)) return;
-			key = key.replace(/\\(.)/g, "$1");
-			sbKeywordHighlighter.exec(colors[i++ % colors.length], key);
+		var keys = this.queryKey.text.include.concat(this.queryKey.content.include).forEach(function(key){
+			this.highlightKeyWords(colors[i++ % colors.length], key);
 		}, this);
+	},
+
+	highlightKeyWords : function(color, key)
+	{
+		var skipTags = /mark|title|meta|style|script|textarea|input|i?frame/i;
+		var baseNode;
+		sbCommonUtils.flattenFrames(document.getElementById("sbBrowser").contentWindow).forEach(function(win) {
+			var doc = win.document;
+			var body = doc.body;
+			if ( !body ) return;
+			baseNode = doc.createElement("mark");
+			baseNode.setAttribute("data-sb-obj", "fulltext");
+			baseNode.style.backgroundColor = color;
+			highlightNode(body, key);
+		}, this);
+
+		function highlightNode(node, regex) {
+			var list = [node];
+			var i = 0;
+			do {
+				node = list[i];
+				if (node.nodeType === 3) {
+					var nextNode = highlightTextNode(node, regex);
+					if (nextNode) list[i++] = nextNode;
+				}
+				else if (node.nodeType === 1) {
+					var nodename = node.nodeName.toLowerCase();
+					if (node.childNodes && !skipTags.test(nodename)) {
+						var childs = node.childNodes, j = childs.length;
+						while(j) { list[i++] = childs[--j]; }
+					}
+				}
+			} while (i--);
+		}
+
+		function highlightTextNode(node, regex) {
+			var s = node.data, m = s.match(regex), nextNode = null;
+			regex.lastIndex = 0;
+			while (regex.test(s)) {
+				var replaceLen = RegExp.lastMatch.length;
+				if (!replaceLen) continue;
+				var replaceEnd = regex.lastIndex;
+				var replaceStart = replaceEnd - replaceLen;
+				var wordNode = node.splitText(replaceStart);
+				if (wordNode.data.length > replaceLen) nextNode = wordNode.splitText(replaceLen);
+				var newNode = baseNode.cloneNode(false);
+				wordNode.parentNode.insertBefore(newNode, wordNode);
+				newNode.appendChild(wordNode);
+				break;
+			}
+			return nextNode;
+		}
 	},
 
 };
@@ -620,71 +668,3 @@ var sbCacheSource = {
 	}
 
 };
-
-
-
-
-var sbKeywordHighlighter = {
-
-	word : "",
-	searchRange : null,
-	startPoint : null,
-	endPoint : null,
-
-	exec : function(color, word)
-	{
-		this.word = word;
-
-		var rootWin = document.getElementById("sbBrowser").contentWindow;
-		sbCommonUtils.flattenFrames(rootWin).forEach(function(win) {
-			var doc = win.document;
-			var body = doc.body;
-			if ( !body ) return;
-
-			var count = body.childNodes.length;
-			this.searchRange = doc.createRange();
-			this.startPoint  = doc.createRange();
-			this.endPoint    = doc.createRange();
-
-			var baseNode = doc.createElement("span");
-			baseNode.setAttribute("style", "background-color: " + color + ";");
-			baseNode.setAttribute("id", "__firefox-findbar-search-id");
-
-			this.searchRange.setStart(body, 0);
-			this.searchRange.setEnd(body, count);
-
-			this.startPoint.setStart(body, 0);
-			this.startPoint.setEnd(body, 0);
-			this.endPoint.setStart(body, count);
-			this.endPoint.setEnd(body, count);
-
-			var retRange = null;
-			var finder = Components.classes['@mozilla.org/embedcomp/rangefind;1'].createInstance().QueryInterface(Components.interfaces.nsIFind);
-
-			while( (retRange = finder.Find(this.word, this.searchRange, this.startPoint, this.endPoint)) )
-			{
-				var nodeSurround = baseNode.cloneNode(true);
-				var node = this.highlightNode(retRange, nodeSurround);
-				this.startPoint = node.ownerDocument.createRange();
-				this.startPoint.setStart(node, node.childNodes.length);
-				this.startPoint.setEnd(node, node.childNodes.length);
-			}
-		}, this);
-	},
-
-	highlightNode : function(range, node)
-	{
-		var startContainer = range.startContainer;
-		var startOffset = range.startOffset;
-		var endOffset = range.endOffset;
-		var docfrag = range.extractContents();
-		var before = startContainer.splitText(startOffset);
-		var parent = before.parentNode;
-		node.appendChild(docfrag);
-		parent.insertBefore(node, before);
-		return node;
-	}
-
-};
-
-
