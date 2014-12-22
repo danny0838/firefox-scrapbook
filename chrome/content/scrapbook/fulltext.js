@@ -27,11 +27,7 @@ var sbSearchResult =
 	count : 0,
 	hit : 0,
 	query : null,
-	RegExpModifier : "",
-	RegExpInclude : [],
-	RegExpExclude : [],
-	includeWords : [],
-	excludeWords : [],
+	queryKey : null,
 	resEnum : null,
 	treeItems : [],
 	targetFolders : [],
@@ -42,7 +38,7 @@ var sbSearchResult =
 		['q', 're', 'cs', 'ref'].forEach(function(key){
 			this.query[key] = this.query[key] || "";
 		}, this);
-
+		// set target folder
 		if ( this.query['ref'] && this.query['ref'].indexOf("urn:scrapbook:item") == 0 )
 		{
 			var refRes = sbCommonUtils.RDF.GetResource(this.query['ref']);
@@ -55,55 +51,13 @@ var sbSearchResult =
 				this.targetFolders[i] = this.targetFolders[i].ValueUTF8;
 			}
 		}
-
-		this.RegExpModifier = ( !this.query['cs'] ) ? "im" : "m";
-		if ( !this.query['re'] )
-		{
-			var query = this.query['q'].replace(/( |\u3000)+/g, " ");
-			var quotePos1;
-			var quotePos2;
-			var quotedStr;
-			while ( (quotePos1 = query.indexOf('"')) != -1 )
-			{
-				quotedStr = query.substring(quotePos1+1, query.length);
-				quotePos2 = quotedStr.indexOf('"');
-				if ( quotePos2 == -1 ) break;
-				quotedStr = quotedStr.substring(0, quotePos2);
-				var replaceStr = '"' + quotedStr + '"';
-				if ( quotePos1 >= 1 && query.charAt(quotePos1-1) == '-' )
-				{
-					this.excludeWords.push(quotedStr);
-					this.RegExpExclude.push( new RegExp(sbCommonUtils.escapeRegExp(quotedStr), this.RegExpModifier) );
-					replaceStr = "-" + replaceStr;
-				}
-				else if ( quotedStr.length > 0 )
-				{
-					this.includeWords.push(quotedStr);
-					this.RegExpInclude.push( new RegExp(sbCommonUtils.escapeRegExp(quotedStr), this.RegExpModifier) );
-				}
-				query = query.replace(replaceStr, "");
-			}
-			query = query.replace(/ +/g, " ").split(' ');
-			for ( var i=0; i<query.length; i++ )
-			{
-				var word = query[i];
-				if ( word.charAt(0) == '-' )
-				{
-					word = word.substring(1, word.length);
-					this.excludeWords.push(word);
-					this.RegExpExclude.push( new RegExp(sbCommonUtils.escapeRegExp(word), this.RegExpModifier) );
-				}
-				else if ( word.length > 0 )
-				{
-					this.includeWords.push(word);
-					this.RegExpInclude.push( new RegExp(sbCommonUtils.escapeRegExp(word), this.RegExpModifier) );
-				}
-			}
-			if ( this.RegExpInclude.length == 0 ) {
-				document.getElementById("sbResultHeader").firstChild.value = sbCommonUtils.lang("fulltext", "ERR_NO_INCLUDE_WORD", [this.query['q']] );
-				return;
-			}
+		// parse keywords
+		this.queryKey = sbSearchService.queryParser(this.query['q'], {'re': this.query['re'], 'mc': this.query['cs']});
+		if (this.queryKey.error.length) {
+			document.getElementById("sbResultHeader").firstChild.value = this.queryKey.error[0];
+			return;
 		}
+		// start search process
 		this.resEnum = sbCacheSource.container.GetElements();
 		this.count = sbCacheSource.container.GetCount();
 		setTimeout(function(){ sbSearchResult.next(); }, 10);
@@ -152,41 +106,16 @@ var sbSearchResult =
 		var type    = sbDataSource.getProperty(res, "type");
 		var title   = sbDataSource.getProperty(res, "title");
 		var comment = sbDataSource.getProperty(res, "comment");
-		if ( this.query['re'] )
-		{
-			try {
-				var re = new RegExp(this.query['q'], this.RegExpModifier);
-			} catch (ex) {
-				document.getElementById("sbResultHeader").firstChild.value = sbCommonUtils.lang("fulltext", "ERR_REGEXP_INAVLID", [this.query['q']] );
-				return;
-			}
-			var isMatchT = title.match(re);
-			var isMatchM = comment.match(re);
-			var isMatchC = content.match(re);
-		}
-		else
-		{
-			var willContinue = false;
-			var tcc = [title, comment, content].join("\t");
-			for ( var x = 0; x < this.RegExpInclude.length; x++ ) {
-				if ( !tcc.match(this.RegExpInclude[x]) ) { willContinue = true; break; }
-			}
-			if ( willContinue ) return this.next();
-			for ( x = 0; x < this.RegExpExclude.length; x++ ) {
-				if ( tcc.match(this.RegExpExclude[x]) )  { willContinue = true; break; }
-			}
-			if ( willContinue ) return this.next();
-			var isMatchT = isMatchM = isMatchC = true;
-		}
-		if ( isMatchT || isMatchM || isMatchC )
+		var hits = sbSearchService.queryMatch(this.queryKey, res, content);
+		if ( hits )
 		{
 			var icon = sbDataSource.getProperty(res, "icon");
 			if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
 			if ( folder.indexOf("urn:scrapbook:") == 0 ) folder = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(folder), "title");
 			sbSearchResult.treeItems.push([
 				title,
-				this.extractRightContext(content),
-				this.extractRightContext(comment).replace(/ __BR__ /g, " "),
+				this.extractRightContext(content, hits['content']),
+				this.extractRightContext(comment, hits['comment']).replace(/ __BR__ /g, " "),
 				folder,
 				name,
 				resURI.substring(18),
@@ -202,24 +131,7 @@ var sbSearchResult =
 	{
 		this.initTree();
 		var headerLabel1 = sbCommonUtils.lang("fulltext", "RESULTS_FOUND", [this.hit] );
-		if ( this.query['re'] )
-		{
-			var headerLabel2 = sbCommonUtils.lang("fulltext", "MATCHING", [ this.localizedQuotation(this.query['q']) ]);
-		}
-		else
-		{
-			var includeQuoted = [];
-			for ( var x = 0; x < this.includeWords.length; x++ ) {
-				includeQuoted.push(this.localizedQuotation(this.includeWords[x]));
-			}
-			if ( includeQuoted.length > 0 ) includeQuoted = sbCommonUtils.lang("fulltext", "INCLUDING", [includeQuoted.join(" ")]);
-			var excludeQuoted = [];
-			for ( var x = 0; x < this.excludeWords.length; x++ ) {
-				excludeQuoted.push(this.localizedQuotation(this.excludeWords[x]));
-			}
-			if ( excludeQuoted.length > 0 ) excludeQuoted = sbCommonUtils.lang("fulltext", "EXCLUDING", [excludeQuoted.join(" ")]);
-			var headerLabel2 = includeQuoted + " " + excludeQuoted;
-		}
+		var headerLabel2 = this.query['q'];
 		document.title = document.getElementById("sbResultHeader").firstChild.value = headerLabel1 + " : " + headerLabel2;
 	},
 
@@ -252,13 +164,11 @@ var sbSearchResult =
 		this.TREE.view = treeView;
 	},
 
-	extractRightContext : function(aString)
+	extractRightContext : function(aString, aIndex)
 	{
+		aString = aString.substr(aIndex || 0, 100);
 		aString = aString.replace(/\r|\n|\t/g, " ");
-		pattern = ( this.query['re'] ) ? this.query['q'] : this.includeWords[0];
-		var re = new RegExp("(" + sbCommonUtils.escapeRegExp(pattern) + ".*)", this.RegExpModifier);
-		var ret = aString.match(re) ? RegExp.$1 : aString;
-		return ( ret.length > 100 ) ? ret.substring(0, 100) : ret;
+		return aString;
 	},
 
 	localizedQuotation : function(aString)
@@ -312,12 +222,17 @@ var sbSearchResult =
 	{
 		aEvent.stopPropagation();
 		aEvent.preventDefault();
-		if ( this.query['re'] ) this.includeWords = [this.query['q']];
-		for ( var i = 0; i < this.includeWords.length; i++ )
-		{
-			var colors = ["#FFFF33","#66FFFF","#90FF90","#FF9999","#FF99FF"];
-			sbKeywordHighlighter.exec(colors[i % colors.length], this.includeWords[i]);
-		}
+		if (!this.queryKey) return;
+		var regex_chars = /[^\\][\*\+\?\.\^\$\|\[\]\{\}\(\)]/;
+		var colors = ["#FFFF33", "#66FFFF", "#90FF90", "#FF9999", "#FF99FF"];
+		var i = 0;
+		var keys = this.queryKey.text.include.concat(this.queryKey.content.include);
+		keys.forEach(function(key){
+			key = key.source;
+			if (key.match(regex_chars)) return;
+			key = key.replace(/\\(.)/g, "$1");
+			sbKeywordHighlighter.exec(colors[i++ % colors.length], key);
+		}, this);
 	},
 
 };
