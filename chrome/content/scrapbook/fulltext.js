@@ -242,6 +242,7 @@ var sbSearchResult =
 			baseNode = doc.createElement("mark");
 			baseNode.setAttribute("data-sb-obj", "fulltext");
 			baseNode.style.backgroundColor = color;
+			baseNode.style.color = "#333";
 			highlightNode(body, key);
 		}, this);
 
