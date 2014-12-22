@@ -26,28 +26,22 @@ var sbSearchResult =
 	index : 0,
 	count : 0,
 	hit : 0,
-	QueryStrings   : { q : "", re : "", cs : "", ref : "" },
-	RegExpModifier : "",
-	RegExpInclude : [],
-	RegExpExclude : [],
-	includeWords : [],
-	excludeWords : [],
+	query : null,
+	queryKey : null,
 	resEnum : null,
 	treeItems : [],
 	targetFolders : [],
 
 	exec : function()
 	{
-		var qa = document.location.search.substring(1).split("&");
-		for ( var i = 0; i < qa.length; i++ )
+		this.query = sbCommonUtils.parseURLQuery(document.location.search.substring(1));
+		['q', 're', 'cs', 'ref'].forEach(function(key){
+			this.query[key] = this.query[key] || "";
+		}, this);
+		// set target folder
+		if ( this.query['ref'] && this.query['ref'].indexOf("urn:scrapbook:item") == 0 )
 		{
-			this.QueryStrings[qa[i].split("=")[0]] = qa[i].split("=")[1];
-		}
-		this.QueryStrings['q'] = decodeURIComponent(this.QueryStrings['q']);
-
-		if ( this.QueryStrings['ref'].indexOf("urn:scrapbook:item") == 0 )
-		{
-			var refRes = sbCommonUtils.RDF.GetResource(this.QueryStrings['ref']);
+			var refRes = sbCommonUtils.RDF.GetResource(this.query['ref']);
 			var elt = document.getElementById("sbResultHeader").firstChild.nextSibling;
 			elt.value += sbDataSource.getProperty(refRes, "title");
 			elt.hidden = false;
@@ -57,55 +51,13 @@ var sbSearchResult =
 				this.targetFolders[i] = this.targetFolders[i].ValueUTF8;
 			}
 		}
-
-		this.RegExpModifier = ( !this.QueryStrings['cs'] ) ? "im" : "m";
-		if ( !this.QueryStrings['re'] )
-		{
-			var query = this.QueryStrings['q'].replace(/( |\u3000)+/g, " ");
-			var quotePos1;
-			var quotePos2;
-			var quotedStr;
-			while ( (quotePos1 = query.indexOf('"')) != -1 )
-			{
-				quotedStr = query.substring(quotePos1+1, query.length);
-				quotePos2 = quotedStr.indexOf('"');
-				if ( quotePos2 == -1 ) break;
-				quotedStr = quotedStr.substring(0, quotePos2);
-				var replaceStr = '"' + quotedStr + '"';
-				if ( quotePos1 >= 1 && query.charAt(quotePos1-1) == '-' )
-				{
-					this.excludeWords.push(quotedStr);
-					this.RegExpExclude.push( new RegExp(sbCommonUtils.escapeRegExp(quotedStr), this.RegExpModifier) );
-					replaceStr = "-" + replaceStr;
-				}
-				else if ( quotedStr.length > 0 )
-				{
-					this.includeWords.push(quotedStr);
-					this.RegExpInclude.push( new RegExp(sbCommonUtils.escapeRegExp(quotedStr), this.RegExpModifier) );
-				}
-				query = query.replace(replaceStr, "");
-			}
-			query = query.replace(/ +/g, " ").split(' ');
-			for ( var i=0; i<query.length; i++ )
-			{
-				var word = query[i];
-				if ( word.charAt(0) == '-' )
-				{
-					word = word.substring(1, word.length);
-					this.excludeWords.push(word);
-					this.RegExpExclude.push( new RegExp(sbCommonUtils.escapeRegExp(word), this.RegExpModifier) );
-				}
-				else if ( word.length > 0 )
-				{
-					this.includeWords.push(word);
-					this.RegExpInclude.push( new RegExp(sbCommonUtils.escapeRegExp(word), this.RegExpModifier) );
-				}
-			}
-			if ( this.RegExpInclude.length == 0 ) {
-				document.getElementById("sbResultHeader").firstChild.value = sbCommonUtils.lang("fulltext", "ERR_NO_INCLUDE_WORD", [this.QueryStrings['q']] );
-				return;
-			}
+		// parse keywords
+		this.queryKey = sbSearchService.queryParser(this.query['q'], {'re': this.query['re'], 'mc': this.query['cs']});
+		if (this.queryKey.error.length) {
+			document.getElementById("sbResultHeader").firstChild.value = this.queryKey.error[0];
+			return;
 		}
+		// start search process
 		this.resEnum = sbCacheSource.container.GetElements();
 		this.count = sbCacheSource.container.GetCount();
 		setTimeout(function(){ sbSearchResult.next(); }, 10);
@@ -154,41 +106,16 @@ var sbSearchResult =
 		var type    = sbDataSource.getProperty(res, "type");
 		var title   = sbDataSource.getProperty(res, "title");
 		var comment = sbDataSource.getProperty(res, "comment");
-		if ( this.QueryStrings['re'] )
-		{
-			try {
-				var re = new RegExp(this.QueryStrings['q'], this.RegExpModifier);
-			} catch (ex) {
-				document.getElementById("sbResultHeader").firstChild.value = sbCommonUtils.lang("fulltext", "ERR_REGEXP_INAVLID", [this.QueryStrings['q']] );
-				return;
-			}
-			var isMatchT = title.match(re);
-			var isMatchM = comment.match(re);
-			var isMatchC = content.match(re);
-		}
-		else
-		{
-			var willContinue = false;
-			var tcc = [title, comment, content].join("\t");
-			for ( var x = 0; x < this.RegExpInclude.length; x++ ) {
-				if ( !tcc.match(this.RegExpInclude[x]) ) { willContinue = true; break; }
-			}
-			if ( willContinue ) return this.next();
-			for ( x = 0; x < this.RegExpExclude.length; x++ ) {
-				if ( tcc.match(this.RegExpExclude[x]) )  { willContinue = true; break; }
-			}
-			if ( willContinue ) return this.next();
-			var isMatchT = isMatchM = isMatchC = true;
-		}
-		if ( isMatchT || isMatchM || isMatchC )
+		var hits = sbSearchService.queryMatch(this.queryKey, res, content);
+		if ( hits )
 		{
 			var icon = sbDataSource.getProperty(res, "icon");
 			if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
 			if ( folder.indexOf("urn:scrapbook:") == 0 ) folder = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(folder), "title");
 			sbSearchResult.treeItems.push([
 				title,
-				this.extractRightContext(content),
-				this.extractRightContext(comment).replace(/ __BR__ /g, " "),
+				this.extractRightContext(content, hits['content']),
+				this.extractRightContext(comment, hits['comment']).replace(/ __BR__ /g, " "),
 				folder,
 				name,
 				resURI.substring(18),
@@ -204,24 +131,7 @@ var sbSearchResult =
 	{
 		this.initTree();
 		var headerLabel1 = sbCommonUtils.lang("fulltext", "RESULTS_FOUND", [this.hit] );
-		if ( this.QueryStrings['re'] )
-		{
-			var headerLabel2 = sbCommonUtils.lang("fulltext", "MATCHING", [ this.localizedQuotation(this.QueryStrings['q']) ]);
-		}
-		else
-		{
-			var includeQuoted = [];
-			for ( var x = 0; x < this.includeWords.length; x++ ) {
-				includeQuoted.push(this.localizedQuotation(this.includeWords[x]));
-			}
-			if ( includeQuoted.length > 0 ) includeQuoted = sbCommonUtils.lang("fulltext", "INCLUDING", [includeQuoted.join(" ")]);
-			var excludeQuoted = [];
-			for ( var x = 0; x < this.excludeWords.length; x++ ) {
-				excludeQuoted.push(this.localizedQuotation(this.excludeWords[x]));
-			}
-			if ( excludeQuoted.length > 0 ) excludeQuoted = sbCommonUtils.lang("fulltext", "EXCLUDING", [excludeQuoted.join(" ")]);
-			var headerLabel2 = includeQuoted + " " + excludeQuoted;
-		}
+		var headerLabel2 = this.query['q'];
 		document.title = document.getElementById("sbResultHeader").firstChild.value = headerLabel1 + " : " + headerLabel2;
 	},
 
@@ -254,13 +164,11 @@ var sbSearchResult =
 		this.TREE.view = treeView;
 	},
 
-	extractRightContext : function(aString)
+	extractRightContext : function(aString, aIndex)
 	{
+		aString = aString.substr(aIndex || 0, 100);
 		aString = aString.replace(/\r|\n|\t/g, " ");
-		pattern = ( this.QueryStrings['re'] ) ? this.QueryStrings['q'] : this.includeWords[0];
-		var re = new RegExp("(" + sbCommonUtils.escapeRegExp(pattern) + ".*)", this.RegExpModifier);
-		var ret = aString.match(re) ? RegExp.$1 : aString;
-		return ( ret.length > 100 ) ? ret.substring(0, 100) : ret;
+		return aString;
 	},
 
 	localizedQuotation : function(aString)
@@ -314,11 +222,65 @@ var sbSearchResult =
 	{
 		aEvent.stopPropagation();
 		aEvent.preventDefault();
-		if ( this.QueryStrings['re'] ) this.includeWords = [this.QueryStrings['q']];
-		for ( var i = 0; i < this.includeWords.length; i++ )
-		{
-			var colors = ["#FFFF33","#66FFFF","#90FF90","#FF9999","#FF99FF"];
-			sbKeywordHighlighter.exec(colors[i % colors.length], this.includeWords[i]);
+		if (!this.queryKey) return;
+		var regex_chars = /[^\\][\*\+\?\.\^\$\|\[\]\{\}\(\)]/;
+		var colors = ["#FFFF33", "#66FFFF", "#90FF90", "#FF9999", "#FF99FF"];
+		var i = 0;
+		var keys = this.queryKey.text.include.concat(this.queryKey.content.include).forEach(function(key){
+			this.highlightKeyWords(colors[i++ % colors.length], key);
+		}, this);
+	},
+
+	highlightKeyWords : function(color, key)
+	{
+		var skipTags = /mark|title|meta|style|script|textarea|input|i?frame/i;
+		var baseNode;
+		sbCommonUtils.flattenFrames(document.getElementById("sbBrowser").contentWindow).forEach(function(win) {
+			var doc = win.document;
+			var body = doc.body;
+			if ( !body ) return;
+			baseNode = doc.createElement("mark");
+			baseNode.setAttribute("data-sb-obj", "fulltext");
+			baseNode.style.backgroundColor = color;
+			baseNode.style.color = "#333";
+			highlightNode(body, key);
+		}, this);
+
+		function highlightNode(node, regex) {
+			var list = [node];
+			var i = 0;
+			do {
+				node = list[i];
+				if (node.nodeType === 3) {
+					var nextNode = highlightTextNode(node, regex);
+					if (nextNode) list[i++] = nextNode;
+				}
+				else if (node.nodeType === 1) {
+					var nodename = node.nodeName.toLowerCase();
+					if (node.childNodes && !skipTags.test(nodename)) {
+						var childs = node.childNodes, j = childs.length;
+						while(j) { list[i++] = childs[--j]; }
+					}
+				}
+			} while (i--);
+		}
+
+		function highlightTextNode(node, regex) {
+			var s = node.data, m = s.match(regex), nextNode = null;
+			regex.lastIndex = 0;
+			while (regex.test(s)) {
+				var replaceLen = RegExp.lastMatch.length;
+				if (!replaceLen) continue;
+				var replaceEnd = regex.lastIndex;
+				var replaceStart = replaceEnd - replaceLen;
+				var wordNode = node.splitText(replaceStart);
+				if (wordNode.data.length > replaceLen) nextNode = wordNode.splitText(replaceLen);
+				var newNode = baseNode.cloneNode(false);
+				wordNode.parentNode.insertBefore(newNode, wordNode);
+				newNode.appendChild(wordNode);
+				break;
+			}
+			return nextNode;
 		}
 	},
 
@@ -707,71 +669,3 @@ var sbCacheSource = {
 	}
 
 };
-
-
-
-
-var sbKeywordHighlighter = {
-
-	word : "",
-	searchRange : null,
-	startPoint : null,
-	endPoint : null,
-
-	exec : function(color, word)
-	{
-		this.word = word;
-
-		var rootWin = document.getElementById("sbBrowser").contentWindow;
-		sbCommonUtils.flattenFrames(rootWin).forEach(function(win) {
-			var doc = win.document;
-			var body = doc.body;
-			if ( !body ) return;
-
-			var count = body.childNodes.length;
-			this.searchRange = doc.createRange();
-			this.startPoint  = doc.createRange();
-			this.endPoint    = doc.createRange();
-
-			var baseNode = doc.createElement("span");
-			baseNode.setAttribute("style", "background-color: " + color + ";");
-			baseNode.setAttribute("id", "__firefox-findbar-search-id");
-
-			this.searchRange.setStart(body, 0);
-			this.searchRange.setEnd(body, count);
-
-			this.startPoint.setStart(body, 0);
-			this.startPoint.setEnd(body, 0);
-			this.endPoint.setStart(body, count);
-			this.endPoint.setEnd(body, count);
-
-			var retRange = null;
-			var finder = Components.classes['@mozilla.org/embedcomp/rangefind;1'].createInstance().QueryInterface(Components.interfaces.nsIFind);
-
-			while( (retRange = finder.Find(this.word, this.searchRange, this.startPoint, this.endPoint)) )
-			{
-				var nodeSurround = baseNode.cloneNode(true);
-				var node = this.highlightNode(retRange, nodeSurround);
-				this.startPoint = node.ownerDocument.createRange();
-				this.startPoint.setStart(node, node.childNodes.length);
-				this.startPoint.setEnd(node, node.childNodes.length);
-			}
-		}, this);
-	},
-
-	highlightNode : function(range, node)
-	{
-		var startContainer = range.startContainer;
-		var startOffset = range.startOffset;
-		var endOffset = range.endOffset;
-		var docfrag = range.extractContents();
-		var before = startContainer.splitText(startOffset);
-		var parent = before.parentNode;
-		node.appendChild(docfrag);
-		parent.insertBefore(node, before);
-		return node;
-	}
-
-};
-
-

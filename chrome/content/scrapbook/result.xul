@@ -19,6 +19,7 @@
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapbook.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/fulltext.js" />
 
 	<popupset>

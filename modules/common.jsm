@@ -764,6 +764,17 @@ var sbCommonUtils = {
 		return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
 	},
 
+	parseURLQuery : function(aStr)
+	{
+		var query = {};
+		var a = aStr.split('&');
+		for (var i in a) {
+			var b = a[i].split('=');
+			query[decodeURIComponent(b[0])] = decodeURIComponent(b[1]);
+		}
+		return query;
+	},
+
 	/**
 	 * Window daemon
 	 */
@@ -868,6 +879,7 @@ var sbCommonUtils = {
 	 * stylesheet (link, style)
 	 * stylesheet-temp (link, style)
 	 * todo (input, textarea)
+	 * fulltext
 	 *
 	 * custom (*) (custom objects to be removed by the eraser)
 	 * custom-wrapper (*) (custom objects to be unwrapped by the eraser)
