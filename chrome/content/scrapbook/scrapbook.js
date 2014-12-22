@@ -968,6 +968,7 @@ var sbSearchService = {
 		var that = this;
 		var key = {
 			'id': { 'include': [], 'exclude': [] },
+			'type': { 'include': [], 'exclude': [] },
 			'source': { 'include': [], 'exclude': [] },
 			'title': { 'include': [], 'exclude': [] },
 			'comment': { 'include': [], 'exclude': [] },
@@ -1014,6 +1015,12 @@ var sbSearchService = {
 						break;
 					case "-id:":
 						key.id.exclude.push(parseStr(term));
+						break;
+					case "type:":
+						key.type.include.push(parseStr(term));
+						break;
+					case "-type:":
+						key.type.exclude.push(parseStr(term));
 						break;
 					case "source:":
 						key.source.include.push(parseStr(term));
@@ -1122,6 +1129,10 @@ var sbSearchService = {
 		}
 		// id
 		if (!matchText('id', sbDataSource.getProperty(aRes, "id"))) {
+			return false;
+		}
+		// type
+		if (!matchText('type', sbDataSource.getProperty(aRes, "type"))) {
 			return false;
 		}
 		// source
