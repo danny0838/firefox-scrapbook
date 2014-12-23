@@ -269,10 +269,7 @@ var sbTradeService = {
 	{
 		var idxList = sbCustomTreeUtil.getSelection(this.TREE);
 		if ( idxList.length < 1 ) return;
-		if ( !sbCommonUtils.getPref("tree.quickdelete", false) )
-		{
-			if ( !this.confirmRemovingPrompt() ) return;
-		}
+		if ( !this.confirmRemovingPrompt() ) return;
 		for ( var i = 0; i < idxList.length; i++ )
 		{
 			var dirName = this.treeItems[idxList[i]][6];

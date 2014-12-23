@@ -3,7 +3,7 @@ var gCacheFile;
 
 
 
-
+// window.arguments[0]: an url to load when the CACHE process is finished
 function SB_initFT(type)
 {
 	gCacheStatus = document.getElementById("sbCacheStatus");
@@ -20,8 +20,13 @@ function SB_initFT(type)
 
 var sbSearchResult =
 {
-	get TREE() { return document.getElementById("sbTree"); },
-	get CURRENT_TREEITEM() { return this.treeItems[document.getElementById("sbTree").currentIndex]; },
+	get TREE() {
+		delete this.TREE;
+		return this.TREE = document.getElementById("sbTree");
+	},
+	get CURRENT_TREEITEM() {
+		return this.treeItems[this.TREE.currentIndex];
+	},
 
 	index : 0,
 	count : 0,
@@ -181,7 +186,7 @@ var sbSearchResult =
 		if ( !this.CURRENT_TREEITEM ) return;
 		var id = this.CURRENT_TREEITEM[5];
 		var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
-		if (!sbDataSource.getProperty(res, "id")) return;
+		if (!sbDataSource.exists(res)) return;
 		switch ( key ) {
 			case "O" : 
 				sbCommonUtils.loadURL(getURL(), false);
@@ -190,7 +195,7 @@ var sbSearchResult =
 				sbCommonUtils.loadURL(getURL(), true);
 				break;
 			case "P" : 
-				window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome" ,id);
+				window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome", id);
 				break;
 			case "L" : 
 				sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser").sbBrowserOverlay.execLocate(res);
@@ -549,7 +554,11 @@ var sbCacheService = {
 		gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_UPDATE", ["cache.rdf"]);
 		sbCacheSource.flush();
 		try {
-			if ( window.arguments[0] ) sbCommonUtils.loadURL(window.arguments[0], true);
+			if ( window.arguments[0] ) {
+				var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
+				var inTab = (win.content.location.href.indexOf("chrome://scrapbook/content/result.xul") == 0) ? false : sbCommonUtils.getPref("tabs.searchResult", false);
+				sbCommonUtils.loadURL(window.arguments[0], inTab);
+			}
 		} catch(ex) {
 		}
 		window.close();

@@ -1,3 +1,23 @@
+Scrapbook X 1.12.0a37
+----------------
+
+- NEW: "Output HTML tree" now creates a search page. (remove tree/output.css from the ScrapBook directory for a complete update)
+- UPDATE: Extended the syntax for fulltext search and filtering search (following brackets are for representation only):
+  - Use commands [id:], [type:], [title:], [comment:], [content:], [source:], [create:], [modify:] that follows a term for a conditional search. Use [re:], [mc:] to switch subsequent terms's type.
+  - Add a minus sign before a command or a term to make a condition exclusive or to switch off. For example: [-blog], [-comment:author], [mc: FBI CIA -mc: information].
+  - Use a double quote pair to delimit a term containing spaces, and double the double quote for a literal double quote char inside. For example: ["a ""funny"" story"].
+  - Date format is 0-14 digits followed by optionally a minus sign followed by 0-14 digits. For example: [create:2014-2015] means 20140000000000 to 20150000000000, [create:-201309] means 00000000000000 to 20130900000000, [modify:20110825] means 20110825000000 to 99999999999999.
+  - Removed the "Filtering by Days" feature. Use [id:], [create:], and [modify:] instead.
+  - Fulltext spaces now are treated as a term separator.
+- UPDATE: Changed the folder path separator to a less confusing char.
+- UPDATE: Fulltext search highlighting now works for regular expression terms.
+- UPDATE: Fulltext search highlights now use better visible text colors.
+- FIXED: Fulltext search highlights sometimes aren't apply to a term following another term.
+- FIXED: Fulltext search result is always opened in a new tab if the cache data is small.
+- FIXED: Some preference settings such as those in "Open in tab for the following operations" do not take effect until restarting Firefox.
+- UPDATE: Minor code optimizations.
+
+
 Scrapbook X 1.12.0a36
 ----------------
 
