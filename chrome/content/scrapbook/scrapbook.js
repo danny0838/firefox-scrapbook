@@ -11,7 +11,6 @@ var sbMainService = {
 		sbTreeHandler.init(false);
 		sbTreeDNDHandler.init();
 		this.baseURL = sbCommonUtils.getBaseHref(sbDataSource.data.URI);
-		this.initPrefs();
 		sbSearchService.init();
 		setTimeout(function() { sbMainService.delayedInit(); }, 0);
 	},
@@ -24,17 +23,6 @@ var sbMainService = {
 			this.locate(null);
 		if (!document.getElementById("sbAddOnsPopup").firstChild)
 			document.getElementById("sbAddOns").hidden = true;
-	},
-
-	initPrefs: function()
-	{
-		this.prefs.showDetailOnDrop = sbCommonUtils.getPref("showDetailOnDrop",  false);
-		this.prefs.confirmDelete    = sbCommonUtils.getPref("confirmDelete",     true);
-		this.prefs.tabsOpen         = sbCommonUtils.getPref("tabs.open",         false);
-		this.prefs.tabsOpenSource   = sbCommonUtils.getPref("tabs.openSource",   false);
-		this.prefs.tabsSearchResult = sbCommonUtils.getPref("tabs.searchResult", true);
-		this.prefs.tabsCombinedView = sbCommonUtils.getPref("tabs.combinedView", true);
-		this.prefs.tabsNote         = sbCommonUtils.getPref("tabs.note",         false);
 	},
 
 	rebuild: function()
@@ -280,12 +268,12 @@ var sbController = {
 			return;
 		switch (sbDataSource.getProperty(aRes, "type")) {
 			case "note" :
-				sbNoteService.open(aRes, aInTab || sbMainService.prefs.tabsNote);
+				sbNoteService.open(aRes, aInTab || sbCommonUtils.getPref("tabs.note", false));
 				break;
 			case "bookmark" :
 				sbCommonUtils.loadURL(
 					sbDataSource.getProperty(aRes, "source"),
-					aInTab || sbMainService.prefs.tabsOpen
+					aInTab || sbCommonUtils.getPref("tabs.open", false)
 				);
 				break;
 			case "separator": 
@@ -293,7 +281,7 @@ var sbController = {
 			default :
 				sbCommonUtils.loadURL(
 					sbMainService.baseURL + "data/" + id + "/index.html",
-					aInTab || sbMainService.prefs.tabsOpen
+					aInTab || sbCommonUtils.getPref("tabs.open", false)
 				);
 		}
 	},
@@ -419,13 +407,13 @@ var sbController = {
 			case "C": 
 				sbCommonUtils.loadURL(
 					"chrome://scrapbook/content/view.xul?id=" + sbDataSource.getProperty(aRes, "id"),
-					sbMainService.prefs.tabsCombinedView
+					sbCommonUtils.getPref("tabs.combinedView", false)
 				);
 				break;
 			case "S": 
 				sbCommonUtils.loadURL(
 					sbDataSource.getProperty(aRes, "source"),
-					sbMainService.prefs.tabsOpenSource || aParam
+					sbCommonUtils.getPref("tabs.openSource", false) || aParam
 				);
 				break;
 			case "L": 
@@ -510,7 +498,7 @@ var sbController = {
 
 	confirmRemovingFor: function(aResList)
 	{
-		if (sbMainService.prefs.confirmDelete) {
+		if (sbCommonUtils.getPref("confirmDelete", false)) {
 			return this.confirmRemovingPrompt();
 		}
 		for ( var i = 0; i < aResList.length; i++ ) {
@@ -733,7 +721,7 @@ var sbTreeDNDHandler = {
 			var targetWindow = isEntire ? top.window.content : win;
 			top.window.sbContentSaver.captureWindow(
 				targetWindow, !isEntire,
-				sbMainService.prefs.showDetailOnDrop || this.modShift,
+				sbCommonUtils.getPref("showDetailOnDrop", false) || this.modShift,
 				res[0], res[1], null
 			);
 		}
@@ -741,7 +729,7 @@ var sbTreeDNDHandler = {
 			var data = {
 				urls: [url],
 				refUrl: win.location.href,
-				showDetail: sbMainService.prefs.showDetailOnDrop || this.modShift,
+				showDetail: sbCommonUtils.getPref("showDetailOnDrop", false) || this.modShift,
 				resName: res[0],
 				resIdx: res[1],
 				referItem: null,
@@ -756,7 +744,7 @@ var sbTreeDNDHandler = {
 		}
 		else if (url.indexOf("file://") == 0) {
 			top.window.sbContentSaver.captureFile(
-				url, "file://", "file", sbMainService.prefs.showDetailOnDrop,
+				url, "file://", "file", sbCommonUtils.getPref("showDetailOnDrop", false),
 				res[0], res[1], null
 			);
 		}
@@ -883,7 +871,7 @@ var sbSearchService = {
 		}
 		else {
 			var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
-			var inTab = (win.content.location.href.indexOf(uri) == 0) ? false : sbMainService.prefs.tabsSearchResult;
+			var inTab = (win.content.location.href.indexOf(uri) == 0) ? false : sbCommonUtils.getPref("tabs.searchResult", false);
 			sbCommonUtils.loadURL(uri + query, inTab);
 			win.focus();
 		}

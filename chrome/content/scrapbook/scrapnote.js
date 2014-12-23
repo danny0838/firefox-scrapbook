@@ -27,7 +27,7 @@ var sbNoteService = {
 		this.notefile.append("index.html");
 		sbCommonUtils.writeFile(this.notefile, "", "UTF-8");
 		if ( !("gBrowser" in window.top) ) aForceTabbed = true;
-		(sbMainService.prefs.tabsNote || aForceTabbed) ? this.open(this.resource, true) : this.edit(this.resource);
+		(sbCommonUtils.getPref("tabs.note", false) || aForceTabbed) ? this.open(this.resource, true) : this.edit(this.resource);
 	},
 
 	edit : function(aRes)
