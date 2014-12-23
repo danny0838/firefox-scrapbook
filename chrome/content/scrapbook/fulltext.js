@@ -554,7 +554,11 @@ var sbCacheService = {
 		gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_UPDATE", ["cache.rdf"]);
 		sbCacheSource.flush();
 		try {
-			if ( window.arguments[0] ) sbCommonUtils.loadURL(window.arguments[0], true);
+			if ( window.arguments[0] ) {
+				var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
+				var inTab = (win.content.location.href.indexOf("chrome://scrapbook/content/result.xul") == 0) ? false : sbCommonUtils.getPref("tabs.searchResult", false);
+				sbCommonUtils.loadURL(window.arguments[0], inTab);
+			}
 		} catch(ex) {
 		}
 		window.close();
