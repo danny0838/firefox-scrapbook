@@ -37,11 +37,8 @@ var sbNoteService = {
 			this.initFlag = true;
 			this.TEXTBOX.addEventListener("dragdrop", function(){ sbNoteService.change(true); }, true);
 		}
+		if ( !sbDataSource.exists(aRes) ) return;
 		this.save();
-		if ( !sbDataSource.exists(aRes) )
-		{
-			if ( !sbDataSource.exists(aRes) ) return;
-		}
 		this.resource = aRes;
 		this.changed = false;
 		if ( this.sidebarContext )
