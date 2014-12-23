@@ -231,7 +231,7 @@ var sbSearchResult =
 		var regex_chars = /[^\\][\*\+\?\.\^\$\|\[\]\{\}\(\)]/;
 		var colors = ["#FFFF33", "#66FFFF", "#90FF90", "#FF9999", "#FF99FF"];
 		var i = 0;
-		var keys = this.queryKey.text.include.concat(this.queryKey.content.include).forEach(function(key){
+		var keys = this.queryKey.tcc.include.concat(this.queryKey.content.include).forEach(function(key){
 			this.highlightKeyWords(colors[i++ % colors.length], key);
 		}, this);
 	},

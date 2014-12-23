@@ -961,16 +961,16 @@ var sbSearchService = {
 			'title': { 'include': [], 'exclude': [] },
 			'comment': { 'include': [], 'exclude': [] },
 			'content': { 'include': [], 'exclude': [] },
-			'text': { 'include': [], 'exclude': [] },
 			'create': { 'include': [], 'exclude': [] },
 			'modify': { 'include': [], 'exclude': [] },
+			'tcc': { 'include': [], 'exclude': [] },
 			'error': [],
 		};
 		aPreset = aPreset || [];
 		var mode = {
 			'mc': !!aPreset['mc'],
 			're': !!aPreset['re'],
-			'default_field': key[aPreset['default_field']] ? aPreset['default_field'] : 'text',
+			'default_field': key[aPreset['default_field']] ? aPreset['default_field'] : 'tcc',
 		};
 		aString.replace(/(\-?[A-Za-z]+:|\-)(?:"((?:\\"|[^"])*)"|([^ "]*))|(?:"((?:""|[^"])*)"|([^ "]+))/g, function(match, cmd, qterm, term, qterm2, term2){
 			if (cmd) {
@@ -980,7 +980,7 @@ var sbSearchService = {
 				var term = qterm2 ? qterm2.replace(/""/g, '"') : term2;
 			}
 			// commands that don't require a term
-			// if a term is given, it will then be treated as a "text include"
+			// if a term is given, it will then be treated as a "default include"
 			switch (cmd) {
 				case "mc:":
 					mode.mc = true;
@@ -1100,7 +1100,7 @@ var sbSearchService = {
 		var title = sbDataSource.getProperty(aRes, "title");
 		var comment = sbDataSource.getProperty(aRes, "comment");
 		var content = aText || "";
-		// text
+		// tcc
 		if (!matchTextTCC(title, comment, content)) {
 			return false;
 		}
@@ -1140,7 +1140,7 @@ var sbSearchService = {
 
 		function matchTextTCC(title, comment, content) {
 			var regex;
-			var excludes = aKey['text'].exclude;
+			var excludes = aKey['tcc'].exclude;
 			for (var i=0, len=excludes.length; i<len; i++) {
 				regex = excludes[i];
 				regex.lastIndex = 0;
@@ -1156,7 +1156,7 @@ var sbSearchService = {
 					return false;
 				}
 			}
-			var includes = aKey['text'].include;
+			var includes = aKey['tcc'].include;
 			for (var i=0, len=includes.length; i<len; i++) {
 				regex = includes[i];
 				var result = false;
