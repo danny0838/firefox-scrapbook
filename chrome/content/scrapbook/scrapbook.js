@@ -892,7 +892,7 @@ var sbSearchService = {
 		this.container = sbDataSource.getContainer("urn:scrapbook:search", true);
 		var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource(this.treeRef), 2, true);
 		resList.forEach(function(res) {
-			if (this.queryMatch(aKey, res)) this.container.AppendElement(res);
+			if (this.queryMatch(aKey, res, false)) this.container.AppendElement(res);
 		}, this);
 		sbTreeHandler.TREE.ref = "urn:scrapbook:search";
 		sbTreeHandler.TREE.builder.rebuild();
@@ -964,6 +964,7 @@ var sbSearchService = {
 			'create': { 'include': [], 'exclude': [] },
 			'modify': { 'include': [], 'exclude': [] },
 			'tcc': { 'include': [], 'exclude': [] },
+			'all': { 'include': [], 'exclude': [] },
 			'error': [],
 		};
 		aPreset = aPreset || [];
@@ -1056,7 +1057,7 @@ var sbSearchService = {
 			}
 
 			function parseStr(term) {
-				var options = mode.mc ? 'g' : 'ig';
+				var options = mode.mc ? 'gm' : 'igm';
 				if (mode.re) {
 					try {
 						var regex = new RegExp(term, options);
@@ -1093,16 +1094,27 @@ var sbSearchService = {
 
 	// aKey: array, generated via queryParser
 	// aRes: the resource object to test
-	// aText: text from the fulltext cache; optional
+	// aText: text from the fulltext cache; false for a filtering search
 	queryMatch : function(aKey, aRes, aText)
 	{
 		var hits = {};
 		var title = sbDataSource.getProperty(aRes, "title");
 		var comment = sbDataSource.getProperty(aRes, "comment");
 		var content = aText || "";
-		// tcc
-		if (!matchTextTCC(title, comment, content)) {
-			return false;
+		var id = sbDataSource.getProperty(aRes, "id");
+		var source = sbDataSource.getProperty(aRes, "source");
+
+		if (aText !== false) {
+			// tcc
+			if (!matchTextTCC(title, comment, content)) {
+				return false;
+			}
+		}
+		else {
+			// tcsi
+			if (!matchText('all', [title, comment, source, id].join("\n"))) {
+				return false;
+			}
 		}
 		// title
 		if (!matchText('title', title)) {
@@ -1117,7 +1129,7 @@ var sbSearchService = {
 			return false;
 		}
 		// id
-		if (!matchText('id', sbDataSource.getProperty(aRes, "id"))) {
+		if (!matchText('id', id)) {
 			return false;
 		}
 		// type
@@ -1125,7 +1137,7 @@ var sbSearchService = {
 			return false;
 		}
 		// source
-		if (!matchText('source', sbDataSource.getProperty(aRes, "source"))) {
+		if (!matchText('source', source)) {
 			return false;
 		}
 		// create
