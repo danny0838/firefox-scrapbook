@@ -408,6 +408,7 @@ var sbDataSource = {
 		return sbCommonUtils.RDFCU.indexOf(this._dataObj, aParRes, aRes);
 	},
 
+	// aRule: 0 for any, 1 for containers (folders), 2 for items
 	flattenResources : function(aContRes, aRule, aRecursive)
 	{
 		var resList = [];

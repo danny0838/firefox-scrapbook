@@ -11,7 +11,6 @@ var sbMainService = {
 		sbTreeHandler.init(false);
 		sbTreeDNDHandler.init();
 		this.baseURL = sbCommonUtils.getBaseHref(sbDataSource.data.URI);
-		this.initPrefs();
 		sbSearchService.init();
 		setTimeout(function() { sbMainService.delayedInit(); }, 0);
 	},
@@ -24,17 +23,6 @@ var sbMainService = {
 			this.locate(null);
 		if (!document.getElementById("sbAddOnsPopup").firstChild)
 			document.getElementById("sbAddOns").hidden = true;
-	},
-
-	initPrefs: function()
-	{
-		this.prefs.showDetailOnDrop = sbCommonUtils.getPref("showDetailOnDrop",  false);
-		this.prefs.confirmDelete    = sbCommonUtils.getPref("confirmDelete",     true);
-		this.prefs.tabsOpen         = sbCommonUtils.getPref("tabs.open",         false);
-		this.prefs.tabsOpenSource   = sbCommonUtils.getPref("tabs.openSource",   false);
-		this.prefs.tabsSearchResult = sbCommonUtils.getPref("tabs.searchResult", true);
-		this.prefs.tabsCombinedView = sbCommonUtils.getPref("tabs.combinedView", true);
-		this.prefs.tabsNote         = sbCommonUtils.getPref("tabs.note",         false);
 	},
 
 	rebuild: function()
@@ -280,12 +268,12 @@ var sbController = {
 			return;
 		switch (sbDataSource.getProperty(aRes, "type")) {
 			case "note" :
-				sbNoteService.open(aRes, aInTab || sbMainService.prefs.tabsNote);
+				sbNoteService.open(aRes, aInTab || sbCommonUtils.getPref("tabs.note", false));
 				break;
 			case "bookmark" :
 				sbCommonUtils.loadURL(
 					sbDataSource.getProperty(aRes, "source"),
-					aInTab || sbMainService.prefs.tabsOpen
+					aInTab || sbCommonUtils.getPref("tabs.open", false)
 				);
 				break;
 			case "separator": 
@@ -293,7 +281,7 @@ var sbController = {
 			default :
 				sbCommonUtils.loadURL(
 					sbMainService.baseURL + "data/" + id + "/index.html",
-					aInTab || sbMainService.prefs.tabsOpen
+					aInTab || sbCommonUtils.getPref("tabs.open", false)
 				);
 		}
 	},
@@ -419,13 +407,13 @@ var sbController = {
 			case "C": 
 				sbCommonUtils.loadURL(
 					"chrome://scrapbook/content/view.xul?id=" + sbDataSource.getProperty(aRes, "id"),
-					sbMainService.prefs.tabsCombinedView
+					sbCommonUtils.getPref("tabs.combinedView", false)
 				);
 				break;
 			case "S": 
 				sbCommonUtils.loadURL(
 					sbDataSource.getProperty(aRes, "source"),
-					sbMainService.prefs.tabsOpenSource || aParam
+					sbCommonUtils.getPref("tabs.openSource", false) || aParam
 				);
 				break;
 			case "L": 
@@ -510,7 +498,7 @@ var sbController = {
 
 	confirmRemovingFor: function(aResList)
 	{
-		if (sbMainService.prefs.confirmDelete) {
+		if (sbCommonUtils.getPref("confirmDelete", false)) {
 			return this.confirmRemovingPrompt();
 		}
 		for ( var i = 0; i < aResList.length; i++ ) {
@@ -733,7 +721,7 @@ var sbTreeDNDHandler = {
 			var targetWindow = isEntire ? top.window.content : win;
 			top.window.sbContentSaver.captureWindow(
 				targetWindow, !isEntire,
-				sbMainService.prefs.showDetailOnDrop || this.modShift,
+				sbCommonUtils.getPref("showDetailOnDrop", false) || this.modShift,
 				res[0], res[1], null
 			);
 		}
@@ -741,7 +729,7 @@ var sbTreeDNDHandler = {
 			var data = {
 				urls: [url],
 				refUrl: win.location.href,
-				showDetail: sbMainService.prefs.showDetailOnDrop || this.modShift,
+				showDetail: sbCommonUtils.getPref("showDetailOnDrop", false) || this.modShift,
 				resName: res[0],
 				resIdx: res[1],
 				referItem: null,
@@ -756,7 +744,7 @@ var sbTreeDNDHandler = {
 		}
 		else if (url.indexOf("file://") == 0) {
 			top.window.sbContentSaver.captureFile(
-				url, "file://", "file", sbMainService.prefs.showDetailOnDrop,
+				url, "file://", "file", sbCommonUtils.getPref("showDetailOnDrop", false),
 				res[0], res[1], null
 			);
 		}
@@ -802,10 +790,6 @@ var sbSearchService = {
 	},
 
 	type      : "",
-	query     : "",
-	regex     : null,
-	optionRE  : false,
-	optionCS  : false,
 	container : null,
 	treeRef   : "urn:scrapbook:root",
 
@@ -850,36 +834,21 @@ var sbSearchService = {
 			document.getElementById("sbSearchTextbox").value = "";
 		}
 		else {
-			this.query = aInput;
-			this.optionRE = document.getElementById("sbSearchPopupOptionRE").getAttribute("checked");
-			this.optionCS = document.getElementById("sbSearchPopupOptionCS").getAttribute("checked");
-			this.FORM_HISTORY.addEntry("sbSearchHistory", this.query);
+			var query = aInput;
+			var re = document.getElementById("sbSearchPopupOptionRE").getAttribute("checked");
+			var mc = document.getElementById("sbSearchPopupOptionCS").getAttribute("checked");
+			this.FORM_HISTORY.addEntry("sbSearchHistory", query);
 			if (this.type == "fulltext") {
-				this.execFT();
+				this.doFullTextSearch(query, re, mc);
 			}
-		 
 			else {
-				var regex1 = this.optionRE ? 
-				             this.query : sbCommonUtils.escapeRegExp(this.query);
-				var regex2 = this.optionCS ? "m" : "mi";
-				try {
-					this.regex = new RegExp(regex1, regex2);
-				} catch (ex) {
-					sbTreeHandler.TREE.ref = "urn:scrapbook:search";
-					sbTreeHandler.TREE.builder.rebuild();
-					sbTreeDNDHandler.quit();
-					sbMainService.toggleHeader(
-						true,
-						sbCommonUtils.lang("fulltext", "ERR_REGEXP_INAVLID", [regex1])
-					);
-					return;
-				}
-				this.exec(false);
+				var key = this.queryParser(query, {'re': re, 'mc': mc, 'default_field': this.type});
+				this.doFilteringSearch(key);
 			}
 		}
 	},
 
-	execFT: function()
+	doFullTextSearch: function(query, re, mc)
 	{
 		var cache = sbCommonUtils.getScrapBookDir().clone();
 		cache.append("cache.rdf");
@@ -893,41 +862,37 @@ var sbSearchService = {
 				shouldBuild = true;
 		}
 		var uri = "chrome://scrapbook/content/result.xul";
-		var query = "?q=" + encodeURIComponent(this.query) 
-			+ "&re=" + (this.optionRE ? "1" : "")
-			+ "&cs=" + (this.optionCS ? "1" : "")
+		var query = "?q=" + encodeURIComponent(query) 
+			+ (re ? "&re=1" : "")
+			+ (mc ? "&cs=1" : "")
 			+ (this.treeRef != "urn:scrapbook:root" ? "&ref=" + this.treeRef : "");
 		if (shouldBuild) {
-			this.buildFT(uri + query);
+			this.updateCache(uri + query);
 		}
 		else {
 			var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
-			var inTab = (win.content.location.href.indexOf(uri) == 0) ? false : sbMainService.prefs.tabsSearchResult;
+			var inTab = (win.content.location.href.indexOf(uri) == 0) ? false : sbCommonUtils.getPref("tabs.searchResult", false);
 			sbCommonUtils.loadURL(uri + query, inTab);
 			win.focus();
 		}
 	},
 
-	buildFT: function(aResURI)
+	updateCache: function(aResURI)
 	{
 		window.openDialog('chrome://scrapbook/content/cache.xul','ScrapBook:Cache','chrome,dialog=no', aResURI);
 	},
 
-	exec: function()
+	doFilteringSearch: function(aKey)
 	{
+		if (aKey.error.length) {
+			this.showErrorMessage(aKey.error[0]);
+			return;
+		}
 		sbDataSource.clearContainer("urn:scrapbook:search");
 		this.container = sbDataSource.getContainer("urn:scrapbook:search", true);
 		var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource(this.treeRef), 2, true);
 		resList.forEach(function(res) {
-			var val;
-			if (this.type != "all")
-				val = sbDataSource.getProperty(res, this.type);
-			else
-				var val = ["title", "comment", "source", "id"].map(function(prop) {
-					return sbDataSource.getProperty(res, prop);
-				}).join("\n");
-			if (val && val.match(this.regex))
-				this.container.AppendElement(res);
+			if (this.queryMatch(aKey, res)) this.container.AppendElement(res);
 		}, this);
 		sbTreeHandler.TREE.ref = "urn:scrapbook:search";
 		sbTreeHandler.TREE.builder.rebuild();
@@ -938,30 +903,12 @@ var sbSearchService = {
 		);
 	},
 
-	filterByDays : function()
+	showErrorMessage : function(aStr)
 	{
-		var ret = { value: "1" };
-		var title = sbCommonUtils.lang("scrapbook", "FILTER_BY_DAYS");
-		if (!sbCommonUtils.PROMPT.prompt(window, "ScrapBook", title, ret, null, {}))
-			return;
-		var days = ret.value;
-		if (isNaN(days) || days <= 0)
-			return;
-		var ymdList = [];
-		var dd = new Date;
-		do {
-			var y = dd.getFullYear();
-			var m = dd.getMonth() + 1; if ( m < 10 ) m = "0" + m;
-			var d = dd.getDate();      if ( d < 10 ) d = "0" + d;
-			ymdList.push(y.toString() + m.toString() + d.toString());
-			dd.setTime(dd.getTime() - 1000 * 60 * 60 * 24);
-		}
-		while (--days > 0);
-		var tmpType = this.type;
-		this.type = "id";
-		this.regex = new RegExp("^(" + ymdList.join("|") + ")", "");
-		this.exec(true);
-		this.type = tmpType;
+		sbTreeHandler.TREE.ref = "urn:scrapbook:search";
+		sbTreeHandler.TREE.builder.rebuild();
+		sbTreeDNDHandler.quit();
+		sbMainService.toggleHeader(true, aStr);
 	},
 
 	listView: function()
@@ -1001,6 +948,279 @@ var sbSearchService = {
 	clearFormHistory: function()
 	{
 		this.FORM_HISTORY.removeEntriesForName("sbSearchHistory");
+	},
+
+	// parses a given search query string
+	queryParser : function(aString, aPreset)
+	{
+		var that = this;
+		var key = {
+			'id': { 'include': [], 'exclude': [] },
+			'type': { 'include': [], 'exclude': [] },
+			'source': { 'include': [], 'exclude': [] },
+			'title': { 'include': [], 'exclude': [] },
+			'comment': { 'include': [], 'exclude': [] },
+			'content': { 'include': [], 'exclude': [] },
+			'text': { 'include': [], 'exclude': [] },
+			'create': { 'include': [], 'exclude': [] },
+			'modify': { 'include': [], 'exclude': [] },
+			'error': [],
+		};
+		aPreset = aPreset || [];
+		var mode = {
+			'mc': !!aPreset['mc'],
+			're': !!aPreset['re'],
+			'default_field': key[aPreset['default_field']] ? aPreset['default_field'] : 'text',
+		};
+		aString.replace(/(\-?[A-Za-z]+:|\-)(?:"((?:\\"|[^"])*)"|([^ "]*))|(?:"((?:""|[^"])*)"|([^ "]+))/g, function(match, cmd, qterm, term, qterm2, term2){
+			if (cmd) {
+				var term = qterm ? qterm.replace(/""/g, '"') : term;
+			}
+			else {
+				var term = qterm2 ? qterm2.replace(/""/g, '"') : term2;
+			}
+			// commands that don't require a term
+			// if a term is given, it will then be treated as a "text include"
+			switch (cmd) {
+				case "mc:":
+					mode.mc = true;
+					break;
+				case "-mc:":
+					mode.mc = false;
+					break;
+				case "re:":
+					mode.re = true;
+					break;
+				case "-re:":
+					mode.re = false;
+					break;
+			}
+			// commands that requires a term
+			if (term) {
+				switch (cmd) {
+					case "id:":
+						key.id.include.push(parseStr(term));
+						break;
+					case "-id:":
+						key.id.exclude.push(parseStr(term));
+						break;
+					case "type:":
+						key.type.include.push(parseStr(term));
+						break;
+					case "-type:":
+						key.type.exclude.push(parseStr(term));
+						break;
+					case "source:":
+						key.source.include.push(parseStr(term));
+						break;
+					case "-source:":
+						key.source.exclude.push(parseStr(term));
+						break;
+					case "title:":
+						key.title.include.push(parseStr(term));
+						break;
+					case "-title:":
+						key.title.exclude.push(parseStr(term));
+						break;
+					case "comment:":
+						key.comment.include.push(parseStr(term));
+						break;
+					case "-comment:":
+						key.comment.exclude.push(parseStr(term));
+						break;
+					case "content:":
+						key.content.include.push(parseStr(term));
+						break;
+					case "-content:":
+						key.content.exclude.push(parseStr(term));
+						break;
+					case "create:":
+						key.create.include.push(parseDate(term));
+						break;
+					case "-create:":
+						key.create.exclude.push(parseDate(term));
+						break;
+					case "modify:":
+						key.modify.include.push(parseDate(term));
+						break;
+					case "-modify:":
+						key.modify.exclude.push(parseDate(term));
+						break;
+					case "-":
+						key[mode['default_field']].exclude.push(parseStr(term));
+						break;
+					default:
+						key[mode['default_field']].include.push(parseStr(term));
+						break;
+				}
+			}
+
+			function parseStr(term) {
+				var options = mode.mc ? 'g' : 'ig';
+				if (mode.re) {
+					try {
+						var regex = new RegExp(term, options);
+					} catch(ex) {
+						key.error.push(sbCommonUtils.lang("scrapbook", "ERR_SEARCH_REGEXP_INAVLID", [term]));
+						return null;
+					}
+				}
+				else {
+					var regex = new RegExp(sbCommonUtils.escapeRegExp(term), options);
+				}
+				return regex;
+			}
+
+			function parseDate(term) {
+				var match = term.match(/^(\d{0,14})-?(\d{0,14})$/);
+				if (!match) {
+					key.error.push(sbCommonUtils.lang("scrapbook", "ERR_SEARCH_DATE_INAVLID", [term]));
+					return null;
+				}
+				var since = match[1] ? fill(match[1], 14) : fill(match[1], 14);
+				var until = match[2] ? fill(match[2], 14) : fill(match[2], 14, "9");
+				return [parseInt(since, 10), parseInt(until, 10)];
+			}
+
+			function fill(n, width, z) {
+				z = z || '0';
+				n = n + '';
+				return n.length >= width ? n : n + new Array(width - n.length + 1).join(z);
+			}
+		});
+		return key;
+	},
+
+	// aKey: array, generated via queryParser
+	// aRes: the resource object to test
+	// aText: text from the fulltext cache; optional
+	queryMatch : function(aKey, aRes, aText)
+	{
+		var hits = {};
+		var title = sbDataSource.getProperty(aRes, "title");
+		var comment = sbDataSource.getProperty(aRes, "comment");
+		var content = aText || "";
+		// text
+		if (!matchTextTCC(title, comment, content)) {
+			return false;
+		}
+		// title
+		if (!matchText('title', title)) {
+			return false;
+		}
+		// comment
+		if (!matchText('comment', comment)) {
+			return false;
+		}
+		// content
+		if (!matchText('content', content)) {
+			return false;
+		}
+		// id
+		if (!matchText('id', sbDataSource.getProperty(aRes, "id"))) {
+			return false;
+		}
+		// type
+		if (!matchText('type', sbDataSource.getProperty(aRes, "type"))) {
+			return false;
+		}
+		// source
+		if (!matchText('source', sbDataSource.getProperty(aRes, "source"))) {
+			return false;
+		}
+		// create
+		if (!matchDate('create', sbDataSource.getProperty(aRes, "create"))) {
+			return false;
+		}
+		// modify
+		if (!matchDate('modify', sbDataSource.getProperty(aRes, "modify"))) {
+			return false;
+		}
+		return hits;
+
+		function matchTextTCC(title, comment, content) {
+			var regex;
+			var excludes = aKey['text'].exclude;
+			for (var i=0, len=excludes.length; i<len; i++) {
+				regex = excludes[i];
+				regex.lastIndex = 0;
+				if (regex.test(title)) {
+					return false;
+				}
+				regex.lastIndex = 0;
+				if (regex.test(comment)) {
+					return false;
+				}
+				regex.lastIndex = 0;
+				if (regex.test(content)) {
+					return false;
+				}
+			}
+			var includes = aKey['text'].include;
+			for (var i=0, len=includes.length; i<len; i++) {
+				regex = includes[i];
+				var result = false;
+				regex.lastIndex = 0;
+				if (regex.test(title)) {
+					result = true;
+					updateHits('title', regex.lastIndex - RegExp.lastMatch.length);
+				}
+				regex.lastIndex = 0;
+				if (regex.test(comment)) {
+					result = true;
+					updateHits('comment', regex.lastIndex - RegExp.lastMatch.length);
+				}
+				regex.lastIndex = 0;
+				if (regex.test(content)) {
+					result = true;
+					updateHits('content', regex.lastIndex - RegExp.lastMatch.length);
+				}
+				if (!result) return false;
+			}
+			return true;
+		}
+
+		function matchText(name, text) {
+			var regex;
+			for (var i=0, len=aKey[name].exclude.length; i<len; i++) {
+				regex = aKey[name].exclude[i];
+				regex.lastIndex = 0;
+				if (regex.test(text)) {
+					return false;
+				}
+			}
+			for (var i=0, len=aKey[name].include.length; i<len; i++) {
+				regex = aKey[name].include[i];
+				regex.lastIndex = 0;
+				if (!regex.test(text)) {
+					return false;
+				}
+				else {
+					updateHits(name, regex.lastIndex - RegExp.lastMatch.length);
+				}
+			}
+			return true;
+		}
+
+		function updateHits(name, index) {
+			if (hits[name] === undefined || index < hits[name]) hits[name] = index;
+		}
+
+		function matchDate(name, date) {
+			if (!date) return false;
+			var date = parseInt(date, 10);
+			for (var i=0, len=aKey[name].exclude.length; i<len; i++) {
+				if (aKey[name].exclude[i][0] <= date && date <= aKey[name].exclude[i][1]) {
+					return false;
+				}
+			}
+			for (var i=0, len=aKey[name].include.length; i<len; i++) {
+				if (!(aKey[name].include[i][0] <= date && date <= aKey[name].include[i][1])) {
+					return false;
+				}
+			}
+			return true;
+		}
 	}
 
 };

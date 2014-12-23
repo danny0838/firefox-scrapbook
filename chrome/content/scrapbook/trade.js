@@ -117,7 +117,7 @@ var sbTradeService = {
 			this.treeItems.push([
 				item.title,
 				(new Date(file.lastModifiedTime)).toLocaleString(),
-				item.folder ? item.folder.replace(/\t/g, "␟") : "",
+				item.folder ? item.folder.replace(/\t/g, "\x1B") : "",
 				item.id,
 				item.icon,
 				file.lastModifiedTime,
@@ -269,10 +269,7 @@ var sbTradeService = {
 	{
 		var idxList = sbCustomTreeUtil.getSelection(this.TREE);
 		if ( idxList.length < 1 ) return;
-		if ( !sbCommonUtils.getPref("tree.quickdelete", false) )
-		{
-			if ( !this.confirmRemovingPrompt() ) return;
-		}
+		if ( !this.confirmRemovingPrompt() ) return;
 		for ( var i = 0; i < idxList.length; i++ )
 		{
 			var dirName = this.treeItems[idxList[i]][6];
