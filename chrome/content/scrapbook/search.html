@@ -92,10 +92,28 @@ var searchEngine = {
 	},
 
 	search: function() {
+		this.clearResult();
+		var key = this.parseQuery(document.getElementById('keyword').value);
+		if (key.error) {
+			for (var i = 0, len = key.error.length; i < len; i++) {
+				this.addMsg(key.error[i]);
+			}
+			return;
+		}
+		for (var i = 0, len = this._cache.length; i < len; i++) {
+			var item = this._cache[i];
+			var data = {
+				'cache': item,
+				'item': this._scrapbook[item.id]
+			};
+			if (this.matchResult(data, key)) {
+				this.addResult(data);
+			}
+		}
+	},
+
+	parseQuery: function(keyStr) {
 		var that = this;
-		that.clearResult();
-		var keyStr = document.getElementById('keyword').value;
-		var isError = false;
 		var mode = {
 			'mc': false,
 			're': false,
@@ -195,14 +213,18 @@ var searchEngine = {
 				}
 			}
 
+			function addError(msg) {
+				if (key['error'] === undefined) key['error'] = [];
+				key['error'].push(msg);
+			}
+
 			function parseStr(str) {
 				var options = mode.mc ? '' : 'i';
 				if (mode.re) {
 					try {
 						var regex = new RegExp(str, options);
 					} catch(ex) {
-						isError = true;
-						that.addMsg("Invalid RegExp: " + str);
+						addError("Invalid RegExp: " + str);
 						return null;
 					}
 				}
@@ -215,8 +237,7 @@ var searchEngine = {
 			function parseDate(str) {
 				var match = str.match(/^(\d{0,14})-?(\d{0,14})$/);
 				if (!match) {
-					isError = true;
-					that.addMsg("Invalid date format: " + str);
+					addError("Invalid date format: " + str);
 					return null;
 				}
 				var since = match[1] ? pad(match[1], 14) : pad(match[1], 14);
@@ -230,18 +251,7 @@ var searchEngine = {
 				return n.length >= width ? n : n + new Array(width - n.length + 1).join(z);
 			}
 		});
-//console.log(key);
-		if (isError) return;
-		for (var i = 0, len = this._cache.length; i < len; i++) {
-			var item = this._cache[i];
-			var data = {
-				'cache': item,
-				'item': this._scrapbook[item.id]
-			};
-			if (this.matchResult(data, key)) {
-				this.addResult(data);
-			}
-		}
+		return key;
 	},
 
 	matchResult: function(data, key) {
