@@ -114,31 +114,20 @@ var searchEngine = {
 
 	parseQuery: function(keyStr) {
 		var that = this;
+		var key = {};
 		var mode = {
 			'mc': false,
 			're': false,
 		};
-		var key = {
-			'id': { 'include': [], 'exclude': [] },
-			'type': { 'include': [], 'exclude': [] },
-			'source': { 'include': [], 'exclude': [] },
-			'title': { 'include': [], 'exclude': [] },
-			'comment': { 'include': [], 'exclude': [] },
-			'content': { 'include': [], 'exclude': [] },
-			'text': { 'include': [], 'exclude': [] },
-			'create': { 'include': [], 'exclude': [] },
-			'modify': { 'include': [], 'exclude': [] },
-		};
-		keyStr.replace(/(\-?[A-Za-z]+:|\-)(?:"((?:\\"|[^"])*)"|([^ "\u3000]*))|(?:"((?:""|[^"])*)"|([^ "\u3000]+))/g, function(match, cmd, qstr, str, qstr2, str2){
-//console.log([match, cmd, qstr, str, qstr2, str2]);
+		keyStr.replace(/(\-?[A-Za-z]+:|\-)(?:"((?:\\"|[^"])*)"|([^ "\u3000]*))|(?:"((?:""|[^"])*)"|([^ "\u3000]+))/g, function(match, cmd, qterm, term, qterm2, term2){
 			if (cmd) {
-				var str = qstr ? qstr.replace(/""/g, '"') : str;
+				var term = qterm ? qterm.replace(/""/g, '"') : term;
 			}
 			else {
-				var str = qstr2 ? qstr2.replace(/""/g, '"') : str2;
+				var term = qterm2 ? qterm2.replace(/""/g, '"') : term2;
 			}
-			// commands that don't require a str
-			// the str will then be reguarded as a "text include"
+			// commands that don't require a term
+			// the term will then be reguarded as a "tcc include"
 			switch (cmd) {
 				case "mc:":
 					mode.mc = true;
@@ -152,65 +141,73 @@ var searchEngine = {
 				case "-re:":
 					mode.re = false;
 					break;
+				case "type:":
+					setKey('type', 'include', term);
+					term = false;
+					break;
+				case "-type:":
+					setKey('type', 'exclude', term);
+					term = false;
+					break;
 			}
-			// commands that requires a str
-			if (str) {
+			// commands that require a term
+			if (term) {
 				switch (cmd) {
 					case "id:":
-						key.id.include.push(parseStr(str));
+						setKey('id', 'include', parseStr(term));
 						break;
 					case "-id:":
-						key.id.exclude.push(parseStr(str));
-						break;
-					case "type:":
-						key.type.include.push(parseStr(str));
-						break;
-					case "-type:":
-						key.type.exclude.push(parseStr(str));
+						setKey('id', 'exclude', parseStr(term));
 						break;
 					case "source:":
-						key.source.include.push(parseStr(str));
+						setKey('source', 'include', parseStr(term));
 						break;
 					case "-source:":
-						key.source.exclude.push(parseStr(str));
+						setKey('source', 'exclude', parseStr(term));
 						break;
 					case "title:":
-						key.title.include.push(parseStr(str));
+						setKey('title', 'include', parseStr(term));
 						break;
 					case "-title:":
-						key.title.exclude.push(parseStr(str));
+						setKey('title', 'exclude', parseStr(term));
 						break;
 					case "comment:":
-						key.comment.include.push(parseStr(str));
+						setKey('comment', 'include', parseStr(term));
 						break;
 					case "-comment:":
-						key.comment.exclude.push(parseStr(str));
+						setKey('comment', 'exclude', parseStr(term));
 						break;
 					case "content:":
-						key.content.include.push(parseStr(str));
+						setKey('content', 'include', parseStr(term));
 						break;
 					case "-content:":
-						key.content.exclude.push(parseStr(str));
+						setKey('content', 'exclude', parseStr(term));
 						break;
 					case "create:":
-						key.create.include.push(parseDate(str));
+						setKey('create', 'include', parseDate(term));
 						break;
 					case "-create:":
-						key.create.exclude.push(parseDate(str));
+						setKey('create', 'exclude', parseDate(term));
 						break;
 					case "modify:":
-						key.modify.include.push(parseDate(str));
+						setKey('modify', 'include', parseDate(term));
 						break;
 					case "-modify:":
-						key.modify.exclude.push(parseDate(str));
+						setKey('modify', 'exclude', parseDate(term));
 						break;
 					case "-":
-						key.text.exclude.push(parseStr(str));
+						setKey('tcc', 'exclude', parseStr(term));
 						break;
 					default:
-						key.text.include.push(parseStr(str));
+						setKey('tcc', 'include', parseStr(term));
 						break;
 				}
+			}
+			return "";
+
+			function setKey(name, type, value) {
+				if (key[name] === undefined) key[name] = { 'include': [], 'exclude': [] };
+				key[name][type].push(value);
 			}
 
 			function addError(msg) {
@@ -218,26 +215,26 @@ var searchEngine = {
 				key['error'].push(msg);
 			}
 
-			function parseStr(str) {
+			function parseStr(term) {
 				var options = mode.mc ? 'm' : 'im';
 				if (mode.re) {
 					try {
-						var regex = new RegExp(str, options);
+						var regex = new RegExp(term, options);
 					} catch(ex) {
-						addError("Invalid RegExp: " + str);
+						addError("Invalid RegExp: " + term);
 						return null;
 					}
 				}
 				else {
-					var regex = new RegExp(that.escapeRegExp(str), options);
+					var regex = new RegExp(that.escapeRegExp(term), options);
 				}
 				return regex;
 			}
 
-			function parseDate(str) {
-				var match = str.match(/^(\d{0,14})-?(\d{0,14})$/);
+			function parseDate(term) {
+				var match = term.match(/^(\d{0,14})-?(\d{0,14})$/);
 				if (!match) {
-					addError("Invalid date format: " + str);
+					addError("Invalid date format: " + term);
 					return null;
 				}
 				var since = match[1] ? pad(match[1], 14) : pad(match[1], 14);
@@ -258,73 +255,89 @@ var searchEngine = {
 		if (!data.item) {
 			return false;
 		}
-		// text
-		if (!matchText('text', [data.item.title, data.item.comment, data.cache.content].join("\t"))) {
-			return false;
-		}
-		// id
-		if (!matchText('id', data.item.id)) {
-			return false;
-		}
-		// type
-		if (!matchText('type', data.item.type)) {
-			return false;
-		}
-		// source
-		if (!matchText('source', data.item.source)) {
-			return false;
-		}
-		// title
-		if (!matchText('title', data.item.title)) {
-			return false;
-		}
-		// comment
-		if (!matchText('comment', data.item.comment)) {
-			return false;
-		}
-		// content
-		if (!matchText('content', data.cache.content)) {
-			return false;
-		}
-		// create
-		if (!matchDate('create', data.item.create)) {
-			return false;
-		}
-		// modify
-		if (!matchDate('modify', data.item.modify)) {
-			return false;
+		for (var i in key) {
+			if (!this['_match_'+i](key[i], data)) return false;
 		}
 		return true;
+	},
 
-		function matchText(name, text) {
-			for (var i=0, len=key[name].exclude.length; i<len; i++) {
-				if (key[name].exclude[i].test(text)) {
-					return false;
-				}
-			}
-			for (var i=0, len=key[name].include.length; i<len; i++) {
-				if (!key[name].include[i].test(text)) {
-					return false;
-				}
-			}
-			return true;
-		}
+	_match_tcc : function(keyitem, data) {
+		return this.matchText(keyitem, [data.item.title, data.item.comment, data.cache.content].join("\n"));
+	},
 
-		function matchDate(name, date) {
-			if (!date) return false;
-			var date = parseInt(date, 10);
-			for (var i=0, len=key[name].exclude.length; i<len; i++) {
-				if (key[name].exclude[i][0] <= date && date <= key[name].exclude[i][1]) {
-					return false;
-				}
+	_match_content : function(keyitem, data) {
+		return this.matchText(keyitem, data.cache.content);
+	},
+
+	_match_id : function(keyitem, data) {
+		return this.matchText(keyitem, data.item.id);
+	},
+
+	_match_title : function(keyitem, data) {
+		return this.matchText(keyitem, data.item.title);
+	},
+
+	_match_comment : function(keyitem, data) {
+		return this.matchText(keyitem, data.item.comment);
+	},
+
+	_match_source : function(keyitem, data) {
+		return this.matchText(keyitem, data.item.source);
+	},
+
+	_match_type : function(keyitem, data) {
+		var type = data.item.type;
+		for (var i=0, len=keyitem.exclude.length; i<len; i++) {
+			if (type == keyitem.exclude[i]) {
+				return false;
 			}
-			for (var i=0, len=key[name].include.length; i<len; i++) {
-				if (!(key[name].include[i][0] <= date && date <= key[name].include[i][1])) {
-					return false;
-				}
-			}
-			return true;
 		}
+		// uses "or" clause
+		if (!keyitem.include.length) return true;
+		for (var i=0, len=keyitem.include.length; i<len; i++) {
+			if (type == keyitem.include[i]) {
+				return true;
+			}
+		}
+		return false;
+	},
+
+	_match_create : function(keyitem, data) {
+		return this.matchDate(keyitem, data.item.create);
+	},
+
+	_match_modify : function(keyitem, data) {
+		return this.matchDate(keyitem, data.item.modify);
+	},
+
+	matchText : function(keyitem, text) {
+		for (var i=0, len=keyitem.exclude.length; i<len; i++) {
+			if (keyitem.exclude[i].test(text)) {
+				return false;
+			}
+		}
+		for (var i=0, len=keyitem.include.length; i<len; i++) {
+			if (!keyitem.include[i].test(text)) {
+				return false;
+			}
+		}
+		return true;
+	},
+
+	matchDate : function(keyitem, date) {
+		if (!date) return false;
+		var date = parseInt(date, 10);
+		for (var i=0, len=keyitem.exclude.length; i<len; i++) {
+			if (keyitem.exclude[i][0] <= date && date <= keyitem.exclude[i][1]) {
+				return false;
+			}
+		}
+		for (var i=0, len=keyitem.include.length; i<len; i++) {
+			if (!(keyitem.include[i][0] <= date && date <= keyitem.include[i][1])) {
+				return false;
+			}
+		}
+		return true;
 	},
 
 	addResult: function(data) {
