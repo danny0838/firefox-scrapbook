@@ -978,6 +978,7 @@ var sbSearchQueryHandler = {
 			}
 			// commands that don't require a term
 			// if a term is given, it will then be treated as a "default include"
+			// (unless expicitly cleared)
 			switch (cmd) {
 				case "mc:":
 					mode.mc = true;
@@ -991,6 +992,14 @@ var sbSearchQueryHandler = {
 				case "-re:":
 					mode.re = false;
 					break;
+				case "type:":
+					setKey('type', 'include', term);
+					term = false;
+					break;
+				case "-type:":
+					setKey('type', 'exclude', term);
+					term = false;
+					break;
 			}
 			// commands that require a term
 			if (term) {
@@ -1000,12 +1009,6 @@ var sbSearchQueryHandler = {
 						break;
 					case "-id:":
 						setKey('id', 'exclude', parseStr(term));
-						break;
-					case "type:":
-						setKey('type', 'include', parseStr(term));
-						break;
-					case "-type:":
-						setKey('type', 'exclude', parseStr(term));
 						break;
 					case "source:":
 						setKey('source', 'include', parseStr(term));
@@ -1178,12 +1181,25 @@ var sbSearchQueryHandler = {
 		return this.matchText(aKeyItem, "comment", sbDataSource.getProperty(aRes, "comment"));
 	},
 
-	_match_type : function(aKeyItem, aRes, aText) {
-		return this.matchText(aKeyItem, "type", sbDataSource.getProperty(aRes, "type"));
-	},
-
 	_match_source : function(aKeyItem, aRes, aText) {
 		return this.matchText(aKeyItem, "source", sbDataSource.getProperty(aRes, "source"));
+	},
+
+	_match_type : function(aKeyItem, aRes, aText) {
+		var type = sbDataSource.getProperty(aRes, "type");
+		for (var i=0, len=aKeyItem.exclude.length; i<len; i++) {
+			if (type == aKeyItem.exclude[i]) {
+				return false;
+			}
+		}
+		// uses "or" clause
+		if (!aKeyItem.include.length) return true;
+		for (var i=0, len=aKeyItem.include.length; i<len; i++) {
+			if (type == aKeyItem.include[i]) {
+				return true;
+			}
+		}
+		return false;
 	},
 
 	_match_create : function(aKeyItem, aRes, aText) {
