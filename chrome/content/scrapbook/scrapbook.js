@@ -842,7 +842,7 @@ var sbSearchService = {
 				this.doFullTextSearch(query, re, mc);
 			}
 			else {
-				var key = this.queryParser(query, {'re': re, 'mc': mc, 'default_field': this.type});
+				var key = sbSearchQueryHandler.parse(query, {'re': re, 'mc': mc, 'default': this.type});
 				this.doFilteringSearch(key);
 			}
 		}
@@ -884,7 +884,7 @@ var sbSearchService = {
 
 	doFilteringSearch: function(aKey)
 	{
-		if (aKey.error.length) {
+		if (aKey.error) {
 			this.showErrorMessage(aKey.error[0]);
 			return;
 		}
@@ -892,7 +892,7 @@ var sbSearchService = {
 		this.container = sbDataSource.getContainer("urn:scrapbook:search", true);
 		var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource(this.treeRef), 2, true);
 		resList.forEach(function(res) {
-			if (this.queryMatch(aKey, res)) this.container.AppendElement(res);
+			if (sbSearchQueryHandler.match(aKey, res, false)) this.container.AppendElement(res);
 		}, this);
 		sbTreeHandler.TREE.ref = "urn:scrapbook:search";
 		sbTreeHandler.TREE.builder.rebuild();
@@ -949,28 +949,25 @@ var sbSearchService = {
 	{
 		this.FORM_HISTORY.removeEntriesForName("sbSearchHistory");
 	},
+};
+
+
+
+
+var sbSearchQueryHandler = {
+
+	hits : null,
 
 	// parses a given search query string
-	queryParser : function(aString, aPreset)
+	parse : function(aString, aPreset)
 	{
 		var that = this;
-		var key = {
-			'id': { 'include': [], 'exclude': [] },
-			'type': { 'include': [], 'exclude': [] },
-			'source': { 'include': [], 'exclude': [] },
-			'title': { 'include': [], 'exclude': [] },
-			'comment': { 'include': [], 'exclude': [] },
-			'content': { 'include': [], 'exclude': [] },
-			'text': { 'include': [], 'exclude': [] },
-			'create': { 'include': [], 'exclude': [] },
-			'modify': { 'include': [], 'exclude': [] },
-			'error': [],
-		};
+		var key = {};
 		aPreset = aPreset || [];
 		var mode = {
 			'mc': !!aPreset['mc'],
 			're': !!aPreset['re'],
-			'default_field': key[aPreset['default_field']] ? aPreset['default_field'] : 'text',
+			'default': aPreset['default'] || 'title',
 		};
 		aString.replace(/(\-?[A-Za-z]+:|\-)(?:"((?:\\"|[^"])*)"|([^ "]*))|(?:"((?:""|[^"])*)"|([^ "]+))/g, function(match, cmd, qterm, term, qterm2, term2){
 			if (cmd) {
@@ -980,7 +977,8 @@ var sbSearchService = {
 				var term = qterm2 ? qterm2.replace(/""/g, '"') : term2;
 			}
 			// commands that don't require a term
-			// if a term is given, it will then be treated as a "text include"
+			// if a term is given, it will then be treated as a "default include"
+			// (unless expicitly cleared)
 			switch (cmd) {
 				case "mc:":
 					mode.mc = true;
@@ -994,74 +992,87 @@ var sbSearchService = {
 				case "-re:":
 					mode.re = false;
 					break;
+				case "type:":
+					setKey('type', 'include', term);
+					term = false;
+					break;
+				case "-type:":
+					setKey('type', 'exclude', term);
+					term = false;
+					break;
 			}
-			// commands that requires a term
+			// commands that require a term
 			if (term) {
 				switch (cmd) {
 					case "id:":
-						key.id.include.push(parseStr(term));
+						setKey('id', 'include', parseStr(term));
 						break;
 					case "-id:":
-						key.id.exclude.push(parseStr(term));
-						break;
-					case "type:":
-						key.type.include.push(parseStr(term));
-						break;
-					case "-type:":
-						key.type.exclude.push(parseStr(term));
+						setKey('id', 'exclude', parseStr(term));
 						break;
 					case "source:":
-						key.source.include.push(parseStr(term));
+						setKey('source', 'include', parseStr(term));
 						break;
 					case "-source:":
-						key.source.exclude.push(parseStr(term));
+						setKey('source', 'exclude', parseStr(term));
 						break;
 					case "title:":
-						key.title.include.push(parseStr(term));
+						setKey('title', 'include', parseStr(term));
 						break;
 					case "-title:":
-						key.title.exclude.push(parseStr(term));
+						setKey('title', 'exclude', parseStr(term));
 						break;
 					case "comment:":
-						key.comment.include.push(parseStr(term));
+						setKey('comment', 'include', parseStr(term));
 						break;
 					case "-comment:":
-						key.comment.exclude.push(parseStr(term));
+						setKey('comment', 'exclude', parseStr(term));
 						break;
 					case "content:":
-						key.content.include.push(parseStr(term));
+						setKey('content', 'include', parseStr(term));
 						break;
 					case "-content:":
-						key.content.exclude.push(parseStr(term));
+						setKey('content', 'exclude', parseStr(term));
 						break;
 					case "create:":
-						key.create.include.push(parseDate(term));
+						setKey('create', 'include', parseDate(term));
 						break;
 					case "-create:":
-						key.create.exclude.push(parseDate(term));
+						setKey('create', 'exclude', parseDate(term));
 						break;
 					case "modify:":
-						key.modify.include.push(parseDate(term));
+						setKey('modify', 'include', parseDate(term));
 						break;
 					case "-modify:":
-						key.modify.exclude.push(parseDate(term));
+						setKey('modify', 'exclude', parseDate(term));
 						break;
 					case "-":
-						key[mode['default_field']].exclude.push(parseStr(term));
+						setKey(mode['default'], 'exclude', parseStr(term));
 						break;
 					default:
-						key[mode['default_field']].include.push(parseStr(term));
+						setKey(mode['default'], 'include', parseStr(term));
 						break;
 				}
 			}
+			return "";
+
+			function setKey(name, type, value) {
+				if (key[name] === undefined) key[name] = { 'include': [], 'exclude': [] };
+				key[name][type].push(value);
+			}
+
+			function addError(msg) {
+				if (key['error'] === undefined) key['error'] = [];
+				key['error'].push(msg);
+			}
 
 			function parseStr(term) {
-				var options = mode.mc ? 'g' : 'ig';
+				var options = mode.mc ? 'gm' : 'igm';
 				if (mode.re) {
 					try {
 						var regex = new RegExp(term, options);
 					} catch(ex) {
-						key.error.push(sbCommonUtils.lang("scrapbook", "ERR_SEARCH_REGEXP_INAVLID", [term]));
+						addError(sbCommonUtils.lang("scrapbook", "ERR_SEARCH_REGEXP_INAVLID", [term]));
 						return null;
 					}
 				}
@@ -1074,7 +1085,7 @@ var sbSearchService = {
 			function parseDate(term) {
 				var match = term.match(/^(\d{0,14})-?(\d{0,14})$/);
 				if (!match) {
-					key.error.push(sbCommonUtils.lang("scrapbook", "ERR_SEARCH_DATE_INAVLID", [term]));
+					addError(sbCommonUtils.lang("scrapbook", "ERR_SEARCH_DATE_INAVLID", [term]));
 					return null;
 				}
 				var since = match[1] ? fill(match[1], 14) : fill(match[1], 14);
@@ -1091,137 +1102,155 @@ var sbSearchService = {
 		return key;
 	},
 
-	// aKey: array, generated via queryParser
+	// aKey: array, generated via parse()
 	// aRes: the resource object to test
-	// aText: text from the fulltext cache; optional
-	queryMatch : function(aKey, aRes, aText)
+	// aText: text from the fulltext cache; false for a filtering search
+	match : function(aKey, aRes, aText)
 	{
-		var hits = {};
+		this.hits = {};
+		for (var i in aKey) {
+			if (!this['_match_'+i](aKey[i], aRes, aText)) return false;
+		}
+		return this.hits;
+	},
+
+	_match_tcc : function(aKeyItem, aRes, aText) {
 		var title = sbDataSource.getProperty(aRes, "title");
 		var comment = sbDataSource.getProperty(aRes, "comment");
 		var content = aText || "";
-		// text
-		if (!matchTextTCC(title, comment, content)) {
-			return false;
+		var regex;
+		for (var i=0, len=aKeyItem.exclude.length; i<len; i++) {
+			regex = aKeyItem.exclude[i];
+			regex.lastIndex = 0;
+			if (regex.test(title)) {
+				return false;
+			}
+			regex.lastIndex = 0;
+			if (regex.test(comment)) {
+				return false;
+			}
+			regex.lastIndex = 0;
+			if (regex.test(content)) {
+				return false;
+			}
 		}
-		// title
-		if (!matchText('title', title)) {
-			return false;
+		for (var i=0, len=aKeyItem.include.length; i<len; i++) {
+			regex = aKeyItem.include[i];
+			var result = false;
+			regex.lastIndex = 0;
+			if (regex.test(title)) {
+				result = true;
+				this.updateHits('title', regex.lastIndex - RegExp.lastMatch.length);
+			}
+			regex.lastIndex = 0;
+			if (regex.test(comment)) {
+				result = true;
+				this.updateHits('comment', regex.lastIndex - RegExp.lastMatch.length);
+			}
+			regex.lastIndex = 0;
+			if (regex.test(content)) {
+				result = true;
+				this.updateHits('content', regex.lastIndex - RegExp.lastMatch.length);
+			}
+			if (!result) return false;
 		}
-		// comment
-		if (!matchText('comment', comment)) {
-			return false;
-		}
-		// content
-		if (!matchText('content', content)) {
-			return false;
-		}
-		// id
-		if (!matchText('id', sbDataSource.getProperty(aRes, "id"))) {
-			return false;
-		}
-		// type
-		if (!matchText('type', sbDataSource.getProperty(aRes, "type"))) {
-			return false;
-		}
-		// source
-		if (!matchText('source', sbDataSource.getProperty(aRes, "source"))) {
-			return false;
-		}
-		// create
-		if (!matchDate('create', sbDataSource.getProperty(aRes, "create"))) {
-			return false;
-		}
-		// modify
-		if (!matchDate('modify', sbDataSource.getProperty(aRes, "modify"))) {
-			return false;
-		}
-		return hits;
+		return true;
+	},
 
-		function matchTextTCC(title, comment, content) {
-			var regex;
-			var excludes = aKey['text'].exclude;
-			for (var i=0, len=excludes.length; i<len; i++) {
-				regex = excludes[i];
-				regex.lastIndex = 0;
-				if (regex.test(title)) {
-					return false;
-				}
-				regex.lastIndex = 0;
-				if (regex.test(comment)) {
-					return false;
-				}
-				regex.lastIndex = 0;
-				if (regex.test(content)) {
-					return false;
-				}
-			}
-			var includes = aKey['text'].include;
-			for (var i=0, len=includes.length; i<len; i++) {
-				regex = includes[i];
-				var result = false;
-				regex.lastIndex = 0;
-				if (regex.test(title)) {
-					result = true;
-					updateHits('title', regex.lastIndex - RegExp.lastMatch.length);
-				}
-				regex.lastIndex = 0;
-				if (regex.test(comment)) {
-					result = true;
-					updateHits('comment', regex.lastIndex - RegExp.lastMatch.length);
-				}
-				regex.lastIndex = 0;
-				if (regex.test(content)) {
-					result = true;
-					updateHits('content', regex.lastIndex - RegExp.lastMatch.length);
-				}
-				if (!result) return false;
-			}
-			return true;
-		}
+	_match_content : function(aKeyItem, aRes, aText) {
+		return this.matchText(aKeyItem, aText || "");
+	},
 
-		function matchText(name, text) {
-			var regex;
-			for (var i=0, len=aKey[name].exclude.length; i<len; i++) {
-				regex = aKey[name].exclude[i];
-				regex.lastIndex = 0;
-				if (regex.test(text)) {
-					return false;
-				}
-			}
-			for (var i=0, len=aKey[name].include.length; i<len; i++) {
-				regex = aKey[name].include[i];
-				regex.lastIndex = 0;
-				if (!regex.test(text)) {
-					return false;
-				}
-				else {
-					updateHits(name, regex.lastIndex - RegExp.lastMatch.length);
-				}
-			}
-			return true;
-		}
+	_match_all : function(aKeyItem, aRes, aText) {
+		var title = sbDataSource.getProperty(aRes, "title");
+		var comment = sbDataSource.getProperty(aRes, "comment");
+		var id = sbDataSource.getProperty(aRes, "id");
+		var source = sbDataSource.getProperty(aRes, "source");
+		return this.matchText(aKeyItem, "all", [title, comment, source, id].join("\n"));
+	},
 
-		function updateHits(name, index) {
-			if (hits[name] === undefined || index < hits[name]) hits[name] = index;
-		}
+	_match_id : function(aKeyItem, aRes, aText) {
+		return this.matchText(aKeyItem, "id", sbDataSource.getProperty(aRes, "id"));
+	},
 
-		function matchDate(name, date) {
-			if (!date) return false;
-			var date = parseInt(date, 10);
-			for (var i=0, len=aKey[name].exclude.length; i<len; i++) {
-				if (aKey[name].exclude[i][0] <= date && date <= aKey[name].exclude[i][1]) {
-					return false;
-				}
+	_match_title : function(aKeyItem, aRes, aText) {
+		return this.matchText(aKeyItem, "title", sbDataSource.getProperty(aRes, "title"));
+	},
+
+	_match_comment : function(aKeyItem, aRes, aText) {
+		return this.matchText(aKeyItem, "comment", sbDataSource.getProperty(aRes, "comment"));
+	},
+
+	_match_source : function(aKeyItem, aRes, aText) {
+		return this.matchText(aKeyItem, "source", sbDataSource.getProperty(aRes, "source"));
+	},
+
+	_match_type : function(aKeyItem, aRes, aText) {
+		var type = sbDataSource.getProperty(aRes, "type");
+		for (var i=0, len=aKeyItem.exclude.length; i<len; i++) {
+			if (type == aKeyItem.exclude[i]) {
+				return false;
 			}
-			for (var i=0, len=aKey[name].include.length; i<len; i++) {
-				if (!(aKey[name].include[i][0] <= date && date <= aKey[name].include[i][1])) {
-					return false;
-				}
-			}
-			return true;
 		}
-	}
+		// uses "or" clause
+		if (!aKeyItem.include.length) return true;
+		for (var i=0, len=aKeyItem.include.length; i<len; i++) {
+			if (type == aKeyItem.include[i]) {
+				return true;
+			}
+		}
+		return false;
+	},
+
+	_match_create : function(aKeyItem, aRes, aText) {
+		return this.matchDate(aKeyItem, sbDataSource.getProperty(aRes, "create"));
+	},
+
+	_match_modify : function(aKeyItem, aRes, aText) {
+		return this.matchDate(aKeyItem, sbDataSource.getProperty(aRes, "modify"));
+	},
+
+	matchText : function(aKeyItem, aKeyName, aText) {
+		var regex;
+		for (var i=0, len=aKeyItem.exclude.length; i<len; i++) {
+			regex = aKeyItem.exclude[i];
+			regex.lastIndex = 0;
+			if (regex.test(aText)) {
+				return false;
+			}
+		}
+		for (var i=0, len=aKeyItem.include.length; i<len; i++) {
+			regex = aKeyItem.include[i];
+			regex.lastIndex = 0;
+			if (!regex.test(aText)) {
+				return false;
+			}
+			else {
+				this.updateHits(aKeyName, regex.lastIndex - RegExp.lastMatch.length);
+			}
+		}
+		return true;
+	},
+
+	matchDate : function(aKeyItem, aDate) {
+		if (!aDate) return false;
+		var aDate = parseInt(aDate, 10);
+		for (var i=0, len=aKeyItem.exclude.length; i<len; i++) {
+			if (aKeyItem.exclude[i][0] <= aDate && aDate <= aKeyItem.exclude[i][1]) {
+				return false;
+			}
+		}
+		for (var i=0, len=aKeyItem.include.length; i<len; i++) {
+			if (!(aKeyItem.include[i][0] <= aDate && aDate <= aKeyItem.include[i][1])) {
+				return false;
+			}
+		}
+		return true;
+	},
+
+	updateHits : function(name, index) {
+		if (this.hits[name] === undefined || index < this.hits[name]) this.hits[name] = index;
+	},
 
 };
 
