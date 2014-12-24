@@ -219,7 +219,7 @@ var searchEngine = {
 			}
 
 			function parseStr(str) {
-				var options = mode.mc ? '' : 'i';
+				var options = mode.mc ? 'm' : 'im';
 				if (mode.re) {
 					try {
 						var regex = new RegExp(str, options);
