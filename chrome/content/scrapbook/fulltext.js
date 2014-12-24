@@ -57,8 +57,8 @@ var sbSearchResult =
 			}
 		}
 		// parse keywords
-		this.queryKey = sbSearchService.queryParser(this.query['q'], {'re': this.query['re'], 'mc': this.query['cs']});
-		if (this.queryKey.error.length) {
+		this.queryKey = sbSearchQueryHandler.parse(this.query['q'], {'re': this.query['re'], 'mc': this.query['cs'], 'default': 'tcc'});
+		if (this.queryKey.error) {
 			document.getElementById("sbResultHeader").firstChild.value = this.queryKey.error[0];
 			return;
 		}
@@ -111,7 +111,7 @@ var sbSearchResult =
 		var type    = sbDataSource.getProperty(res, "type");
 		var title   = sbDataSource.getProperty(res, "title");
 		var comment = sbDataSource.getProperty(res, "comment");
-		var hits = sbSearchService.queryMatch(this.queryKey, res, content);
+		var hits = sbSearchQueryHandler.match(this.queryKey, res, content);
 		if ( hits )
 		{
 			var icon = sbDataSource.getProperty(res, "icon");
@@ -231,7 +231,10 @@ var sbSearchResult =
 		var regex_chars = /[^\\][\*\+\?\.\^\$\|\[\]\{\}\(\)]/;
 		var colors = ["#FFFF33", "#66FFFF", "#90FF90", "#FF9999", "#FF99FF"];
 		var i = 0;
-		var keys = this.queryKey.text.include.concat(this.queryKey.content.include).forEach(function(key){
+		var keys = [];
+		if (this.queryKey['tcc']) keys = keys.concat(this.queryKey['tcc']['include']);
+		if (this.queryKey['content']) keys = keys.concat(this.queryKey['content']['include']);
+		keys.forEach(function(key){
 			this.highlightKeyWords(colors[i++ % colors.length], key);
 		}, this);
 	},
