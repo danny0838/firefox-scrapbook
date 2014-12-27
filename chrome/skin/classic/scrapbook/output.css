@@ -9,8 +9,8 @@ div#header {
 	padding: 2px 8px;
 	border: 1px solid ThreeDShadow;
 	background-color: InfoBackground;
-	font-family:"MS UI Gothic", sans-serif;
-	font-size:9pt;
+	font-family: sans-serif;
+	font-size: 9pt;
 }
 
 div#header a {
@@ -19,17 +19,17 @@ div#header a {
 
 /* ::::: list ::::: */
 ul {
-	margin-left :  0px;
-	padding-left : 0px;
+	margin-left: 0px;
+	padding-left: 0px;
 }
 
 /* ::::: list items ::::: */
 li {
 	list-style-type: none;
-	margin:2px 20px;
+	margin: 2px 20px;
 	white-space: nowrap;
-	font-family:"MS UI Gothic", sans-serif;
-	font-size:9pt;
+	font-family: sans-serif;
+	font-size: 9pt;
 }
 
 a {
@@ -43,7 +43,7 @@ a:active {
 }
 
 a:focus {
-    background-color: #6495ED;
+	background-color: #6495ED;
 	text-decoration: underline;
 }
 
