@@ -53,6 +53,17 @@ a.combine  { color: blue; }
 a.bookmark { color: limegreen; }
 a.notex { color: rgb(80,0,32); }
 
+fieldset.separator {
+	margin: 0;
+	border: none;
+	border-top: 1px solid #aaa;
+	padding: 0 0 0 1em;
+}
+
+fieldset.separator legend {
+	padding: 0;
+}
+
 /* ::::: icon ::::: */
 li img {
 	border: none;

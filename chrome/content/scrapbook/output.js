@@ -216,7 +216,7 @@ var sbOutputService = {
 		var ret;
 		switch (type) {
 			case "separator": 
-				ret = '<a title="' + title + '">' + title + ' ----------------------------------------' + '</a>';
+				ret = '<fieldset class="separator" title="' + title + '"><legend>&nbsp;' + title + '&nbsp;</legend></fieldset>';
 				break;
 			case "folder": 
 				ret = '<a class="folder" href="javascript:toggle(\'folder-' + id + '\');" title="' + title + '">'
