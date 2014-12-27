@@ -77,7 +77,6 @@ var sbOutputService = {
 		dir.append("tree");
 		if ( !dir.exists() ) dir.create(dir.DIRECTORY_TYPE, 0700);
 		var urlHash = {
-			"chrome://scrapbook/skin/output.css"     : "output.css",
 			"chrome://scrapbook/skin/treeitem.png"   : "treeitem.png",
 			"chrome://scrapbook/skin/treenote.png"   : "treenote.png",
 			"chrome://scrapbook/skin/treenotex.png"  : "treenotex.png",
@@ -98,6 +97,9 @@ var sbOutputService = {
 		indexFile.append("index.html");
 		this.content += this.getHTMLFoot();
 		sbCommonUtils.writeFile(indexFile, this.content, "UTF-8");
+		var indexCSS = dir.clone();
+		indexCSS.append('index.css');
+		sbCommonUtils.saveTemplateFile("chrome://scrapbook/skin/output.css", indexCSS, true);
 		var searchFile = dir.parent;
 		searchFile.append('search.html');
 		sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/search.html", searchFile, true);
@@ -134,7 +136,7 @@ var sbOutputService = {
 			+ '	<meta charset="UTF-8">\n'
 			+ '	<title>' + sbCommonUtils.escapeHTMLWithSpace(document.title, true) + '</title>\n'
 			+ '	<meta name="viewport" content="width=device-width">\n'
-			+ '	<link rel="stylesheet" type="text/css" href="output.css" media="all">\n'
+			+ '	<link rel="stylesheet" type="text/css" href="index.css" media="all">\n'
 			+ '	<link rel="stylesheet" type="text/css" href="custom.css" media="all">\n'
 			+ '	<script>\n'
 			+ '	function init() {\n'
