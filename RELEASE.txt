@@ -1,3 +1,10 @@
+Scrapbook X 1.12.0a38
+----------------
+- FIXED: Filtering search with "All" doesn't work as expected.
+- UPDATE: The "type:" command in a search now matches an exact text, allows an empty term, and uses 'or' clause.
+- UPDATE: Optimize the codes about the search engine.
+
+
 Scrapbook X 1.12.0a37
 ----------------
 
