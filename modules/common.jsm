@@ -130,9 +130,9 @@ var sbCommonUtils = {
 		return dir;
 	},
 
-	getContentDir : function(aID, aSuppressCreate)
+	getContentDir : function(aID, aSuppressCreate, aSkipIdCheck)
 	{
-		if ( !this.validateID(aID) )
+		if ( !aSkipIdCheck && !this.validateID(aID) )
 		{
 			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_GET_DIR", [aID]));
 			return null;
