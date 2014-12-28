@@ -24,13 +24,15 @@ var sbCalcService = {
 			if ( !id ) continue;
 			var type = sbDataSource.getProperty(res, "type");
 			if ( ["folder", "separator", "bookmark"].indexOf(type) != -1 ) continue;
+			var icon = sbDataSource.getProperty(res, "icon");
+			if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
 			if ( !sbCommonUtils.getContentDir(id, true) ) {
 				this.invalidCount++;
 				this.treeItems.push([
 					id,
 					sbDataSource.getProperty(res, "type"),
 					sbDataSource.getProperty(res, "title"),
-					sbDataSource.getProperty(res, "icon"),
+					icon,
 					0,
 					sbPropService.formatFileSize(0),
 					false,
