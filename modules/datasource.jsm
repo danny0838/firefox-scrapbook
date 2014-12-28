@@ -248,8 +248,10 @@ var sbDataSource = {
 
 	deleteItemDescending : function(aRes, aParRes, aRecObj)
 	{
-		sbCommonUtils.RDFC.Init(this._dataObj, aParRes);
-		sbCommonUtils.RDFC.RemoveElement(aRes, true);
+		if (aParRes) {
+			sbCommonUtils.RDFC.Init(this._dataObj, aParRes);
+			sbCommonUtils.RDFC.RemoveElement(aRes, true);
+		}
 		var rmIDs = aRecObj || [];
 		if (this.isContainer(aRes)) {
 			this.flattenResources(aRes, 0, true).forEach(function(res){
