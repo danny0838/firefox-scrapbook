@@ -19,11 +19,8 @@ var sbPropService = {
 		// get item and properties
 		this.id = window.arguments[0];
 		if (!this.id) { window.close(); return; }
-		this.item = sbCommonUtils.newItem();
 		this.resource = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.id);
-		for (var prop in this.item) {
-			this.item[prop] = sbDataSource.getProperty(this.resource, prop);
-		}
+		this.item = sbDataSource.getItem(this.resource);
 		if (!this.item.id) { window.close(); return; }
 		// parse dateTime
 		var date1 = this.item.create || this.id;

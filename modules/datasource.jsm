@@ -336,6 +336,25 @@ var sbDataSource = {
 
 
 
+	getItem : function(aRes)
+	{
+		var ns = sbCommonUtils.namespace, nsl = ns.length;
+		var item = sbCommonUtils.newItem();
+		var names = this._dataObj.ArcLabelsOut(aRes);
+		while ( names.hasMoreElements() )
+		{
+			try {
+				var name  = names.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+				if (name.Value.substring(0, nsl) != ns) continue;
+				var key = name.Value.substring(nsl);
+				var value = this._dataObj.GetTarget(aRes, name, true).QueryInterface(Components.interfaces.nsIRDFLiteral).Value;
+				item[key] = value;
+			} catch(ex) {
+			}
+		}
+		return item;
+	},
+
 	getProperty : function(aRes, aProp)
 	{
 		if ( aRes.Value == "urn:scrapbook:root" ) return "";

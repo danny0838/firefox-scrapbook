@@ -27,8 +27,7 @@ function SB_initView()
 		var res = resList[i];
 		if (sbDataSource.getProperty(res, "type") == "separator")
 			continue;
-		var item = sbCommonUtils.newItem();
-		for ( var prop in item ) item[prop] = sbDataSource.getProperty(res, prop);
+		var item = sbDataSource.getItem(res);
 		if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(item.type);
 		item.icon = sbCommonUtils.convertResURLToURL(item.icon, true);
 		src += SB_getHTMLBody(item);

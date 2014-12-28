@@ -19,8 +19,7 @@ var sbPageEditor = {
 
 		// record item and resource
 		if ( aID ) {
-			this.item = sbCommonUtils.newItem(aID);
-			for ( var prop in this.item ) this.item[prop] = sbDataSource.getProperty(sbBrowserOverlay.resource, prop);
+			this.item = sbDataSource.getItem(sbBrowserOverlay.resource);
 		}
 		else {
 			this.item = null;

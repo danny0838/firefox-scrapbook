@@ -394,11 +394,7 @@ var sbExportService = {
 	copyLeftToRight : function(aRes)
 	{
 		if ( !sbDataSource.exists(aRes) ) throw "Datasource changed.";
-		var item = sbCommonUtils.newItem();
-		for ( var prop in item )
-		{
-			item[prop] = sbDataSource.getProperty(aRes, prop);
-		}
+		var item = sbDataSource.getItem(aRes);
 		item.folder = sbDataSource.getFolderPath(aRes).join("\t");
 		if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) )
 		{
