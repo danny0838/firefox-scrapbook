@@ -217,7 +217,9 @@ var sbPropService = {
 		var totalSize = 0;
 		var totalFile = 0;
 		var totalDir  = 0;
-		sbCommonUtils.forEachFile(sbCommonUtils.getContentDir(aID, true), function(file){
+		var dir = sbCommonUtils.getContentDir(aID, true);
+		if (!dir) return [totalSize, totalFile, totalDir];
+		sbCommonUtils.forEachFile(dir, function(file){
 			if (file.isDirectory()) {
 				totalDir++;
 			}
