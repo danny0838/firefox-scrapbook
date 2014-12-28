@@ -1,7 +1,4 @@
 
-var sbCommonUtils;
-var sbDataSource;
-
 var sbCombineService = {
 
 
@@ -54,8 +51,6 @@ var sbCombineService = {
 			return;
 		}
 		window.top.document.getElementById("mbToolbarButton").disabled = true;
-		sbCommonUtils = window.top.sbCommonUtils;
-		sbDataSource  = window.top.sbDataSource;
 		this.index = 0;
 		sbFolderSelector2.init();
 //		this.WIZARD.getButton("back").onclick = function(){ sbCombineService.undo(); };

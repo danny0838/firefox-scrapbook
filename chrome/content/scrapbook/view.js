@@ -1,7 +1,6 @@
 
 var gID;
 var gRes;
-var sbDataSource;
 
 
 
@@ -12,7 +11,6 @@ function SB_initView()
 	if ( !gID ) return;
 	var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
 	if ( !win ) return;
-	sbDataSource = win.sbDataSource;
 	gRes = sbCommonUtils.RDF.GetResource(gID ? "urn:scrapbook:item" + gID : "urn:scrapbook:root");
 	if ( !sbDataSource.isContainer(gRes) )
 	{
