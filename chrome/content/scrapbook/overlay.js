@@ -202,11 +202,9 @@ var sbBrowserOverlay = {
 		var shownItems = 0;
 		var maxEntries = sbCommonUtils.getPref("ui.folderList.maxEntries", 5);
 		for (var i = 0; i < ids.length && shownItems < maxEntries; i++) {
-			if (ids[i].length != 14)
-				continue;
+			if (!sbCommonUtils.validateID(ids[i])) continue;
 			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + ids[i]);
-			if (!sbDataSource.exists(res))
-				continue;
+			if (!sbDataSource.exists(res)) continue;
 			menuItem = aPopup.appendChild(document.createElement("menuitem"));
 			menuItem.id = res.Value;
 			menuItem.setAttribute("class", "menuitem-iconic bookmark-item");

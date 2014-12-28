@@ -411,7 +411,7 @@ var sbExportService = {
 		while ( destDir.exists() && ++num < 256 );
 		var srcDir = sbCommonUtils.getContentDir(item.id, false);
 		sbCommonUtils.writeIndexDat(item);
-		if ( !srcDir.exists() || !srcDir.leafName.match(/^\d{14}$/) ) throw "Directory not found.";
+		if ( !srcDir.exists() || !sbCommonUtils.validateID(srcDir.leafName) ) throw "Directory not found.";
 		try {
 			srcDir.copyTo(sbTradeService.rightDir, destDir.leafName);
 		} catch(ex) {
@@ -506,7 +506,7 @@ var sbImportService = {
 		datFile.append("index.dat");
 		if ( !datFile.exists() ) throw "index.dat not found.";
 		var item = sbTradeService.parseIndexDat(datFile);
-		if ( !item.id || item.id.length != 14 ) throw "Invalid ID.";
+		if ( !sbCommonUtils.validateID(item.id) ) throw "Invalid ID.";
 		if ( sbDataSource.exists(item.id) ) throw sbCommonUtils.lang("trade", "ERROR_SAME_ID_EXISTS");
 		var destDir = sbTradeService.leftDir.clone();
 		if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) ) item.icon = "resource://scrapbook/data/" + item.id + "/" + item.icon;

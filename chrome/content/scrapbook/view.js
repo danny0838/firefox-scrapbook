@@ -6,8 +6,7 @@ var gRes;
 
 function SB_initView()
 {
-	document.location.search.match(/\?id\=(\d{14})$/);
-	gID = RegExp.$1;
+	gID = sbCommonUtils.parseURLQuery(document.location.search.substring(1))['id'];
 	if ( !gID ) return;
 	var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
 	if ( !win ) return;

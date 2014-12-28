@@ -132,7 +132,7 @@ var sbCommonUtils = {
 
 	getContentDir : function(aID, aSuppressCreate)
 	{
-		if ( !aID || aID.length != 14 )
+		if ( !this.validateID(aID) )
 		{
 			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_GET_DIR", [aID]));
 			return null;
@@ -156,7 +156,7 @@ var sbCommonUtils = {
 	{
 		var curFile;
 		try {
-			if ( check && !aDir.leafName.match(/^\d{14}$/) ) return;
+			if ( check && !this.validateID(aDir.leafName) ) return;
 			this.forEachFile(aDir, function(file) {
 				curFile = file;
 				if (!curFile.isDirectory()) curFile.remove(false);
@@ -304,6 +304,11 @@ var sbCommonUtils = {
 		} catch(ex) {
 			sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_RESOLVE_URL", [aBaseURL, aRelURL]));
 		}
+	},
+
+	validateID : function(aID)
+	{
+		return typeof(aID) == "string" && /^\d{14}$/.test(aID);
 	},
 
 	crop : function(aString, aMaxLength)

@@ -490,8 +490,7 @@ var sbController = {
 		}
 		for (var i = 0; i < rmIDs.length; i++) {
 			var myDir = sbCommonUtils.getContentDir(rmIDs[i], true);
-			if (myDir && rmIDs[i].length == 14)
-				sbCommonUtils.removeDirSafety(myDir, true);
+			if (myDir) sbCommonUtils.removeDirSafety(myDir, false);
 		}
 		return rmIDs;
 	},
