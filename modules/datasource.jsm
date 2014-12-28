@@ -246,11 +246,11 @@ var sbDataSource = {
 		this._flushWithDelay();
 	},
 
-	deleteItemDescending : function(aRes, aParRes)
+	deleteItemDescending : function(aRes, aParRes, aRecObj)
 	{
 		sbCommonUtils.RDFC.Init(this._dataObj, aParRes);
 		sbCommonUtils.RDFC.RemoveElement(aRes, true);
-		var rmIDs = [];
+		var rmIDs = aRecObj || [];
 		if (this.isContainer(aRes)) {
 			this.flattenResources(aRes, 0, true).forEach(function(res){
 				rmIDs.push(this.removeResource(res));
@@ -408,9 +408,9 @@ var sbDataSource = {
 	},
 
 	// aRule: 0 for any, 1 for containers (folders), 2 for items
-	flattenResources : function(aContRes, aRule, aRecursive)
+	flattenResources : function(aContRes, aRule, aRecursive, aRecObj)
 	{
-		var resList = [];
+		var resList = aRecObj || [];
 		if ( aRule != 2 ) resList.push(aContRes);
 		sbCommonUtils.RDFC.Init(this._dataObj, aContRes);
 		var resEnum = sbCommonUtils.RDFC.GetElements();
@@ -419,7 +419,7 @@ var sbDataSource = {
 			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
 			if ( this.isContainer(res) ) {
 				if ( aRecursive )
-					resList = resList.concat(this.flattenResources(res, aRule, aRecursive));
+					this.flattenResources(res, aRule, aRecursive, resList);
 				else
 					if ( aRule != 2 ) resList.push(res);
 			} else {

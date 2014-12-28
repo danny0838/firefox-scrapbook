@@ -486,7 +486,7 @@ var sbController = {
 				sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_RESOURCE", [aResList[i].Value]));
 				continue;
 			}
-			rmIDs = rmIDs.concat(sbDataSource.deleteItemDescending(aResList[i], aParResList[i]));
+			sbDataSource.deleteItemDescending(aResList[i], aParResList[i], rmIDs);
 		}
 		for (var i = 0; i < rmIDs.length; i++) {
 			var myDir = sbCommonUtils.getContentDir(rmIDs[i], true);
