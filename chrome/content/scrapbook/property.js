@@ -21,7 +21,16 @@ var sbPropService = {
 		if (!this.id) { window.close(); return; }
 		this.resource = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.id);
 		this.item = sbDataSource.getItem(this.resource);
-		if (!this.item.id) { window.close(); return; }
+		if (!this.item.id) {
+			// an invalid ID is given, show nothing but the given ID
+			document.getElementById("sbPropDialog").getButton("accept").hidden = true;
+			document.getElementById("sbPropGeneralTab").hidden = true;
+			document.getElementById("sbPropCommentTab").hidden = true;
+			document.getElementById("sbPropInvalidTab").hidden = false;
+			document.getElementById("sbPropInvalidTab").parentNode.selectedIndex = 2;
+			document.getElementById("sbPropIDInvalid").value = this.id;
+			return;
+		}
 		// parse dateTime
 		var date1 = this.item.create || this.id;
 		var dateTime = "";

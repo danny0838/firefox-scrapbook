@@ -157,7 +157,6 @@ var sbCalcController = {
 	{
 		var valid = this.CURRENT_TREEITEM[6];
 		document.getElementById("sbPopupRemove").setAttribute("disabled", valid);
-		document.getElementById("sbPopupProperty").setAttribute("disabled", !valid);
 	},
 
 	onDblClick : function(aEvent)

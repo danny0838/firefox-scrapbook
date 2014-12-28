@@ -22,8 +22,9 @@
 
 	<tabbox>
 		<tabs orient="horizontal">
-			<tab label="&sb.prop.general;" />
+			<tab label="&sb.prop.general;" id="sbPropGeneralTab" />
 			<tab label="&sb.prop.comment;" id="sbPropCommentTab" />
+			<tab label="&sb.prop.general;" id="sbPropInvalidTab" hidden="true" />
 		</tabs>
 		<tabpanels>
 			<tabpanel>
@@ -96,6 +97,20 @@
 			</tabpanel>
 			<tabpanel>
 				<textbox id="sbPropComment" multiline="true" flex="1" oninput="sbPropService.updateCommentTab(this.value);" />
+			</tabpanel>
+			<tabpanel>
+				<grid flex="1">
+					<columns>
+						<column />
+						<column flex="1" />
+					</columns>
+					<rows>
+						<row align="center">
+							<label value="ID:" />
+							<textbox id="sbPropIDInvalid" readonly="true" />
+						</row>
+					</rows>
+				</grid>
 			</tabpanel>
 		</tabpanels>
 	</tabbox>
