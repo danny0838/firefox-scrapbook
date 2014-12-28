@@ -214,7 +214,7 @@ var sbCommonUtils = {
 		while (winEnum.hasMoreElements()) {
 			var win = winEnum.getNext();
 			if (cur === win) curDone = true;
-			if (win.sbMainService) {
+			if (win.sbMainService && win.sbTreeHandler) {
 				aDSChanged ? win.sbMainService.refresh() : win.sbMainService.rebuild();
 			}
 		}
