@@ -176,10 +176,17 @@ var sbCalcController = {
 		if ( this.CURRENT_TREEITEM[6] ) return;
 		var id = this.CURRENT_TREEITEM[0];
 		if ( id.length != 14 ) return;
+		// remove the data folder
 		if ( sbCommonUtils.removeDirSafety(sbCommonUtils.getContentDir(id), true) )
 		{
 			sbCalcService.treeItems.splice(sbCalcService.TREE.currentIndex, 1);
 			sbCalcService.initTree();
+		}
+		// remove the item from the resource
+		var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
+		if (sbDataSource.exists(res)) {
+			var parent = sbDataSource.findParentResource(res);
+			sbDataSource.deleteItemDescending(res, parent);
 		}
 	},
 
