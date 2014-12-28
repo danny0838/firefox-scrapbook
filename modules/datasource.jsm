@@ -155,14 +155,13 @@ var sbDataSource = {
 			// create a new item and merge the props
 			var newItem = sbCommonUtils.newItem();
 			sbCommonUtils.extendObject(newItem, aSBitem);
-			var propList = sbCommonUtils.getKeys(newItem);
 			var newRes = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aSBitem.id);
-			propList.forEach(function(prop) {
-				if (prop == "folder") return;  // "folder" prop is specially handled and do not need to store
+			for (prop in newItem) {
+				if (prop == "folder") continue;  // "folder" prop is specially handled and do not need to store
 				var arc = sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + prop);
 				var val = sbCommonUtils.RDF.GetLiteral(aSBitem[prop]);
 				this._dataObj.Assert(newRes, arc, val, true);
-			}, this);
+			}
 			if (aSBitem.type == "separator") {
 				this._dataObj.Assert(
 					newRes,
