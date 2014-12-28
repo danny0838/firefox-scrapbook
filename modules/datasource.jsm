@@ -250,33 +250,14 @@ var sbDataSource = {
 	{
 		sbCommonUtils.RDFC.Init(this._dataObj, aParRes);
 		sbCommonUtils.RDFC.RemoveElement(aRes, true);
-		var addIDs = [];
 		var rmIDs = [];
-		var depth = 0;
-		do {
-			addIDs = this.cleanUpIsolation();
-			rmIDs = rmIDs.concat(addIDs);
+		if (this.isContainer(aRes)) {
+			this.flattenResources(aRes, 0, true).forEach(function(res){
+				rmIDs.push(this.removeResource(res));
+			}, this);
 		}
-		while( addIDs.length > 0 && ++depth < 100 );
-		this._flushWithDelay();
-		return rmIDs;
-	},
-
-	cleanUpIsolation : function()
-	{
-		var rmIDs = [];
-		try {
-			var resEnum = this._dataObj.GetAllResources();
-			while ( resEnum.hasMoreElements() )
-			{
-				var aRes = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-				if ( aRes.Value != "urn:scrapbook:root" && aRes.Value != "urn:scrapbook:search" && !this._dataObj.ArcLabelsIn(aRes).hasMoreElements() )
-				{
-					rmIDs.push( this.removeResource(aRes) );
-				}
-			}
-		} catch(ex) {
-			sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_CLEAN_DATASOURCE", [ex]));
+		else {
+			rmIDs.push(this.removeResource(aRes));
 		}
 		return rmIDs;
 	},
