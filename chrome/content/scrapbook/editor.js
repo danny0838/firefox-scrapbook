@@ -1384,7 +1384,8 @@ var sbHtmlEditor = {
 		}
 
 		function getReplaceableNode(aNode) {
-			var forbiddenList = ["#text", "TBODY", "TR"];
+			// replacing these nodes could get a bad and not-undoable result
+			var forbiddenList = ["#text", "THEAD", "TBODY", "TFOOT", "TR"];
 			while (forbiddenList.indexOf(aNode.nodeName) >= 0) {
 				aNode = aNode.parentNode;
 			}
