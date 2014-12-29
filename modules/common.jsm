@@ -845,16 +845,14 @@ var sbCommonUtils = {
 	 * DOM elements handling
 	 */
 
-	getOuterHTML : function(aNode, aAddBr)
+	getOuterHTML : function(aNode)
 	{
-		if (!aAddBr && this._fxVer11) return aNode.outerHTML;
-		var br = aAddBr ? "\n" : "";
-		var tag = "<" + aNode.nodeName.toLowerCase();
-		for ( var i=0; i<aNode.attributes.length; i++ ) {
-			tag += ' ' + aNode.attributes[i].name + '="' + this.escapeHTML(aNode.attributes[i].value) + '"';
-		}
-		tag += ">" + br;
-		return tag + aNode.innerHTML + "</" + aNode.nodeName.toLowerCase() + ">" + br;
+		var outer = aNode.outerHTML;
+		if (typeof(outer) != "undefined") return outer;
+		// older versions without native outerHTML
+		var wrapper = aNode.ownerDocument.createElement("DIV");
+		wrapper.appendChild(aNode.cloneNode(true));
+		return wrapper.innerHTML;
 	},
 
 	surroundByTags : function(aNode, aContent)
