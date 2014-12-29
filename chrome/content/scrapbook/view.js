@@ -1,18 +1,15 @@
 
 var gID;
 var gRes;
-var sbDataSource;
 
 
 
 function SB_initView()
 {
-	document.location.search.match(/\?id\=(\d{14})$/);
-	gID = RegExp.$1;
+	gID = sbCommonUtils.parseURLQuery(document.location.search.substring(1))['id'];
 	if ( !gID ) return;
 	var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
 	if ( !win ) return;
-	sbDataSource = win.sbDataSource;
 	gRes = sbCommonUtils.RDF.GetResource(gID ? "urn:scrapbook:item" + gID : "urn:scrapbook:root");
 	if ( !sbDataSource.isContainer(gRes) )
 	{
@@ -29,8 +26,7 @@ function SB_initView()
 		var res = resList[i];
 		if (sbDataSource.getProperty(res, "type") == "separator")
 			continue;
-		var item = sbCommonUtils.newItem();
-		for ( var prop in item ) item[prop] = sbDataSource.getProperty(res, prop);
+		var item = sbDataSource.getItem(res);
 		if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(item.type);
 		item.icon = sbCommonUtils.convertResURLToURL(item.icon, true);
 		src += SB_getHTMLBody(item);

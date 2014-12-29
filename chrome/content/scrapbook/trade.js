@@ -223,9 +223,9 @@ var sbTradeService = {
 		var filterRule = document.getElementById("sbTradeOptionExportFolder").checked ? 0 : 2;
 		for ( var i = 0; i < selRes.length; i++ )
 		{
-			if ( window.top.sbDataSource.isContainer(selRes[i]) )
+			if ( sbDataSource.isContainer(selRes[i]) )
 			{
-				var childRes = window.top.sbDataSource.flattenResources(selRes[i], filterRule, true);
+				var childRes = sbDataSource.flattenResources(selRes[i], filterRule, true);
 				for ( var j = 0; j < childRes.length; j++ )
 				{
 					if ( uriList.indexOf(childRes[j].Value) < 0 ) { ret.push(childRes[j]); uriList.push(childRes[j].Value); }
@@ -347,7 +347,7 @@ var sbExportService = {
 	{
 		this.QUICK_STATUS.value = document.getElementById("sbTradeExportButton").label;
 		sbTradeService.prepareLeftDir();
-		var title = window.top.sbDataSource.getProperty(aRes, "title");
+		var title = sbDataSource.getProperty(aRes, "title");
 		try {
 			this.copyLeftToRight(aRes);
 		} catch(ex) {
@@ -374,7 +374,7 @@ var sbExportService = {
 		if ( ++this.count < this.resList.length )
 		{
 			var rate = " (" + (this.count + 1) + "/" + this.resList.length + ") ";
-			var title = window.top.sbDataSource.getProperty(this.resList[this.count], "title");
+			var title = sbDataSource.getProperty(this.resList[this.count], "title");
 			try {
 				this.copyLeftToRight(this.resList[this.count]);
 				sbTradeService.log(document.getElementById("sbTradeExportButton").label + rate + title, "B");
@@ -393,13 +393,9 @@ var sbExportService = {
 
 	copyLeftToRight : function(aRes)
 	{
-		if ( !window.top.sbDataSource.exists(aRes) ) throw "Datasource changed.";
-		var item = sbCommonUtils.newItem();
-		for ( var prop in item )
-		{
-			item[prop] = window.top.sbDataSource.getProperty(aRes, prop);
-		}
-		item.folder = window.top.sbDataSource.getFolderPath(aRes).join("\t");
+		if ( !sbDataSource.exists(aRes) ) throw "Datasource changed.";
+		var item = sbDataSource.getItem(aRes);
+		item.folder = sbDataSource.getFolderPath(aRes).join("\t");
 		if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) )
 		{
 			item.icon = item.icon.match(/\d{14}\/(.+)$/) ? RegExp.$1 : "";
@@ -415,7 +411,7 @@ var sbExportService = {
 		while ( destDir.exists() && ++num < 256 );
 		var srcDir = sbCommonUtils.getContentDir(item.id, false);
 		sbCommonUtils.writeIndexDat(item);
-		if ( !srcDir.exists() || !srcDir.leafName.match(/^\d{14}$/) ) throw "Directory not found.";
+		if ( !srcDir.exists() || !sbCommonUtils.validateID(srcDir.leafName) ) throw "Directory not found.";
 		try {
 			srcDir.copyTo(sbTradeService.rightDir, destDir.leafName);
 		} catch(ex) {
@@ -450,7 +446,7 @@ var sbImportService = {
 		if ( sbTradeService.TREE.view.selection.count == 0 ) return;
 		sbTradeService.lock(2);
 		sbTradeService.prepareLeftDir();
-		this._dataURI = window.top.sbDataSource.data.URI;
+		this._dataURI = sbDataSource.data.URI;
 		this.restoring = ( aRow == -128 ) ? document.getElementById("sbTradeOptionRestore").checked : false;
 		this.tarResArray = ( aRow < 0 ) ? [window.top.sbTreeHandler.TREE.ref, 0] : window.top.sbTreeDNDHandler.getTarget(aRow, aOrient);
 		this.ascending = ( aRow < 0 ) ? true : (aOrient == 0);
@@ -459,10 +455,10 @@ var sbImportService = {
 		this.folderTable = {};
 		if ( this.restoring )
 		{
-			var resList = window.top.sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"), 1, true);
+			var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"), 1, true);
 			for ( var i = 1; i < resList.length; i++ )
 			{
-				this.folderTable[window.top.sbDataSource.getProperty(resList[i], "title")] = resList[i].Value;
+				this.folderTable[sbDataSource.getProperty(resList[i], "title")] = resList[i].Value;
 			}
 		}
 		this.next();
@@ -501,7 +497,7 @@ var sbImportService = {
 
 	copyRightToLeft : function()
 	{
-		if ( window.top.sbDataSource.data.URI != this._dataURI ) throw "Datasource changed.";
+		if ( sbDataSource.data.URI != this._dataURI ) throw "Datasource changed.";
 		var dirName = sbTradeService.treeItems[this.idxList[this.count]][6];
 		var srcDir = sbTradeService.rightDir.clone();
 		srcDir.append(dirName);
@@ -510,8 +506,8 @@ var sbImportService = {
 		datFile.append("index.dat");
 		if ( !datFile.exists() ) throw "index.dat not found.";
 		var item = sbTradeService.parseIndexDat(datFile);
-		if ( !item.id || item.id.length != 14 ) throw "Invalid ID.";
-		if ( window.top.sbDataSource.exists(item.id) ) throw sbCommonUtils.lang("trade", "ERROR_SAME_ID_EXISTS");
+		if ( !sbCommonUtils.validateID(item.id) ) throw "Invalid ID.";
+		if ( sbDataSource.exists(item.id) ) throw sbCommonUtils.lang("trade", "ERROR_SAME_ID_EXISTS");
 		var destDir = sbTradeService.leftDir.clone();
 		if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) ) item.icon = "resource://scrapbook/data/" + item.id + "/" + item.icon;
 		if ( document.getElementById("sbTradeOptionUpdate").checked ) {
@@ -544,7 +540,7 @@ var sbImportService = {
 			{
 				if ( folderList[i] == "" ) continue;
 				if ( folderList[i] in this.folderTable &&
-					window.top.sbDataSource.getRelativeIndex(
+					sbDataSource.getRelativeIndex(
 						sbCommonUtils.RDF.GetResource(this.tarResArray[0]),
 						sbCommonUtils.RDF.GetResource(this.folderTable[folderList[i]])
 					) > 0 )
@@ -555,11 +551,11 @@ var sbImportService = {
 				}
 				else
 				{
-					var newItem = sbCommonUtils.newItem(window.top.sbDataSource.identify(sbCommonUtils.getTimeStamp()));
+					var newItem = sbCommonUtils.newItem(sbDataSource.identify(sbCommonUtils.getTimeStamp()));
 					newItem.title = folderList[i];
 					newItem.type = "folder";
-					var newRes = window.top.sbDataSource.addItem(newItem, this.tarResArray[0], 0);
-					window.top.sbDataSource.createEmptySeq(newRes.Value);
+					var newRes = sbDataSource.addItem(newItem, this.tarResArray[0], 0);
+					sbDataSource.createEmptySeq(newRes.Value);
 					var idx = window.top.sbTreeHandler.TREE.builderView.getIndexOfResource(newRes);
 					if ( idx >= 0 ) window.top.sbTreeHandler.TREE.view.toggleOpenState(idx);
 					this.folderTable[newItem.title] = newRes.Value;
@@ -569,8 +565,8 @@ var sbImportService = {
 			}
 			if ( this.tarResArray[0] != window.top.sbTreeHandler.TREE.ref ) folder = " [" + item.folder + "] ";
 		}
-		var curRes = window.top.sbDataSource.addItem(item, this.tarResArray[0], this.tarResArray[1]);
-		if (item.type == "folder") window.top.sbDataSource.createEmptySeq(curRes.Value);
+		var curRes = sbDataSource.addItem(item, this.tarResArray[0], this.tarResArray[1]);
+		if (item.type == "folder") sbDataSource.createEmptySeq(curRes.Value);
 		this.folderTable[item.title] = curRes.Value;
 		window.top.sbTreeHandler.TREE.builder.rebuild();
 	},

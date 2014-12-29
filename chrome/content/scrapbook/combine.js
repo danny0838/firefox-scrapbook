@@ -1,7 +1,4 @@
 
-var sbCommonUtils;
-var sbDataSource;
-
 var sbCombineService = {
 
 
@@ -54,8 +51,6 @@ var sbCombineService = {
 			return;
 		}
 		window.top.document.getElementById("mbToolbarButton").disabled = true;
-		sbCommonUtils = window.top.sbCommonUtils;
-		sbDataSource  = window.top.sbDataSource;
 		this.index = 0;
 		sbFolderSelector2.init();
 //		this.WIZARD.getButton("back").onclick = function(){ sbCombineService.undo(); };
@@ -527,7 +522,7 @@ var sbPageCombiner = {
 		divHTML.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
 		divWrap.appendChild(divHTML);
 		divWrap.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
-		return sbCommonUtils.getOuterHTML(divWrap, true);
+		return sbCommonUtils.surroundByTags(divWrap, divWrap.innerHTML);
 	},
 
 	surroundDOMCombined : function()
@@ -535,7 +530,7 @@ var sbPageCombiner = {
 		var divWrap = this.BROWSER.contentDocument.createElement("DIV");
 		divWrap.id = "item" + sbCombineService.curID;
 		divWrap.innerHTML = this.BODY.innerHTML;
-		return sbCommonUtils.getOuterHTML(divWrap, true);
+		return sbCommonUtils.surroundByTags(divWrap, divWrap.innerHTML);
 	},
 
 	surroundCSS : function()

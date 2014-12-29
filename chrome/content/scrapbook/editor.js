@@ -19,8 +19,7 @@ var sbPageEditor = {
 
 		// record item and resource
 		if ( aID ) {
-			this.item = sbCommonUtils.newItem(aID);
-			for ( var prop in this.item ) this.item[prop] = sbDataSource.getProperty(sbBrowserOverlay.resource, prop);
+			this.item = sbDataSource.getItem(sbBrowserOverlay.resource);
 		}
 		else {
 			this.item = null;
@@ -486,7 +485,7 @@ var sbPageEditor = {
 			}
 			this.documentBeforeSave(doc);
 			var rootNode = doc.getElementsByTagName("html")[0];
-			var src = sbContentSaver.doctypeToString(doc.doctype) + sbCommonUtils.getOuterHTML(rootNode, true);
+			var src = sbContentSaver.doctypeToString(doc.doctype) + sbCommonUtils.surroundByTags(rootNode, rootNode.innerHTML);
 			var file = sbCommonUtils.convertURLToFile(doc.location.href);
 			sbCommonUtils.writeFile(file, src, charset);
 			this.documentAfterSave(doc);
