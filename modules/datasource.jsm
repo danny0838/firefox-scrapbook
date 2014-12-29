@@ -390,6 +390,11 @@ var sbDataSource = {
 		return this._dataObj.ArcLabelsOut(aRes).hasMoreElements();
 	},
 
+	isolated : function(aRes)
+	{
+		return !this._dataObj.ArcLabelsIn(aRes).hasMoreElements();
+	},
+
 	isContainer : function(aRes)
 	{
 		return sbCommonUtils.RDFCU.IsContainer(this._dataObj, aRes);
@@ -450,7 +455,7 @@ var sbDataSource = {
 		while (true)
 		{
 			aRes = this.findParentResource(aRes);
-			if ( aRes.Value == "urn:scrapbook:root" ) break;
+			if ( !aRes || aRes.Value == "urn:scrapbook:root" ) break;
 			ret.unshift(this.getProperty(aRes, "title"));
 		}
 		return ret;

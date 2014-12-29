@@ -130,9 +130,9 @@ var sbCommonUtils = {
 		return dir;
 	},
 
-	getContentDir : function(aID, aSuppressCreate)
+	getContentDir : function(aID, aSuppressCreate, aSkipIdCheck)
 	{
-		if ( !this.validateID(aID) )
+		if ( !aSkipIdCheck && !this.validateID(aID) )
 		{
 			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_GET_DIR", [aID]));
 			return null;
@@ -214,7 +214,7 @@ var sbCommonUtils = {
 		while (winEnum.hasMoreElements()) {
 			var win = winEnum.getNext();
 			if (cur === win) curDone = true;
-			if (win.sbMainService) {
+			if (win.sbMainService && win.sbTreeHandler) {
 				aDSChanged ? win.sbMainService.refresh() : win.sbMainService.rebuild();
 			}
 		}
