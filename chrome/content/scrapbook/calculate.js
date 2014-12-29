@@ -24,13 +24,15 @@ var sbCalcService = {
 			if ( !id ) continue;
 			var type = sbDataSource.getProperty(res, "type");
 			if ( ["folder", "separator", "bookmark"].indexOf(type) != -1 ) continue;
+			var icon = sbDataSource.getProperty(res, "icon");
+			if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
 			if ( !sbCommonUtils.getContentDir(id, true) ) {
 				this.invalidCount++;
 				this.treeItems.push([
 					id,
 					sbDataSource.getProperty(res, "type"),
 					sbDataSource.getProperty(res, "title"),
-					sbDataSource.getProperty(res, "icon"),
+					icon,
 					0,
 					sbPropService.formatFileSize(0),
 					false,
@@ -55,11 +57,15 @@ var sbCalcService = {
 		if ( dir.isDirectory() )
 		{
 			var id = dir.leafName;
+			var index = dir.clone(); index.append("index.html");
 			var bytes = sbPropService.getTotalFileSize(id)[0];
 			this.grandSum += bytes;
 			var res   = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
 			var type = sbDataSource.getProperty(res, "type");
-			var valid = sbDataSource.exists(res) && ["folder", "separator", "bookmark"].indexOf(type) == -1;
+			var valid = sbDataSource.exists(res)
+				&& !sbDataSource.isolated(res)
+				&& ["folder", "separator", "bookmark"].indexOf(type) == -1
+				&& index.exists() && index.isFile();
 			var icon  = sbDataSource.getProperty(res, "icon");
 			if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
 			this.treeItems.push([
@@ -157,7 +163,6 @@ var sbCalcController = {
 	{
 		var valid = this.CURRENT_TREEITEM[6];
 		document.getElementById("sbPopupRemove").setAttribute("disabled", valid);
-		document.getElementById("sbPopupProperty").setAttribute("disabled", !valid);
 	},
 
 	onDblClick : function(aEvent)
@@ -175,11 +180,17 @@ var sbCalcController = {
 	{
 		if ( this.CURRENT_TREEITEM[6] ) return;
 		var id = this.CURRENT_TREEITEM[0];
-		if ( id.length != 14 ) return;
-		if ( sbCommonUtils.removeDirSafety(sbCommonUtils.getContentDir(id), true) )
+		// remove the data folder
+		if ( sbCommonUtils.removeDirSafety(sbCommonUtils.getContentDir(id, true, true), false) )
 		{
 			sbCalcService.treeItems.splice(sbCalcService.TREE.currentIndex, 1);
 			sbCalcService.initTree();
+		}
+		// remove the item from the resource
+		var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
+		if (sbDataSource.exists(res)) {
+			var parent = sbDataSource.findParentResource(res);
+			sbDataSource.deleteItemDescending(res, parent);
 		}
 	},
 
@@ -189,7 +200,7 @@ var sbCalcController = {
 		switch ( aCommand )
 		{
 			case "P" : window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome" ,id); break;
-			case "L" : sbController.launch(sbCommonUtils.getContentDir(id));
+			case "L" : sbController.launch(sbCommonUtils.getContentDir(id, true, true));
 			default  : break;
 		}
 	},

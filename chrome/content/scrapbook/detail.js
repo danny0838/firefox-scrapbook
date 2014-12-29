@@ -182,11 +182,9 @@ var sbFolderSelector = {
 		var maxEntries = sbCommonUtils.getPref("ui.folderList.maxEntries", 5);
 		for (var i = 0; i < ids.length && shownItems < maxEntries; i++)
 		{
-			if (ids[i].length != 14)
-				continue;
+			if (!sbCommonUtils.validateID(ids[i])) continue;
 			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + ids[i]);
-			if (!sbDataSource.exists(res))
-				continue;
+			if (!sbDataSource.exists(res)) continue;
 			this.fill(res.Value, sbDataSource.getProperty(res, "title"));
 			shownItems++;
 		}

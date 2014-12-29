@@ -130,9 +130,9 @@ var sbCommonUtils = {
 		return dir;
 	},
 
-	getContentDir : function(aID, aSuppressCreate)
+	getContentDir : function(aID, aSuppressCreate, aSkipIdCheck)
 	{
-		if ( !aID || aID.length != 14 )
+		if ( !aSkipIdCheck && !this.validateID(aID) )
 		{
 			this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_GET_DIR", [aID]));
 			return null;
@@ -156,7 +156,7 @@ var sbCommonUtils = {
 	{
 		var curFile;
 		try {
-			if ( check && !aDir.leafName.match(/^\d{14}$/) ) return;
+			if ( check && !this.validateID(aDir.leafName) ) return;
 			this.forEachFile(aDir, function(file) {
 				curFile = file;
 				if (!curFile.isDirectory()) curFile.remove(false);
@@ -214,7 +214,7 @@ var sbCommonUtils = {
 		while (winEnum.hasMoreElements()) {
 			var win = winEnum.getNext();
 			if (cur === win) curDone = true;
-			if (win.sbMainService) {
+			if (win.sbMainService && win.sbTreeHandler) {
 				aDSChanged ? win.sbMainService.refresh() : win.sbMainService.rebuild();
 			}
 		}
@@ -304,6 +304,11 @@ var sbCommonUtils = {
 		} catch(ex) {
 			sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_RESOLVE_URL", [aBaseURL, aRelURL]));
 		}
+	},
+
+	validateID : function(aID)
+	{
+		return typeof(aID) == "string" && /^\d{14}$/.test(aID);
 	},
 
 	crop : function(aString, aMaxLength)
@@ -840,16 +845,24 @@ var sbCommonUtils = {
 	 * DOM elements handling
 	 */
 
-	getOuterHTML : function(aNode, aAddBr)
+	getOuterHTML : function(aNode)
 	{
-		if (!aAddBr && this._fxVer11) return aNode.outerHTML;
-		var br = aAddBr ? "\n" : "";
+		var outer = aNode.outerHTML;
+		if (typeof(outer) != "undefined") return outer;
+		// older versions without native outerHTML
+		var wrapper = aNode.ownerDocument.createElement("DIV");
+		wrapper.appendChild(aNode.cloneNode(true));
+		return wrapper.innerHTML;
+	},
+
+	surroundByTags : function(aNode, aContent)
+	{
 		var tag = "<" + aNode.nodeName.toLowerCase();
 		for ( var i=0; i<aNode.attributes.length; i++ ) {
 			tag += ' ' + aNode.attributes[i].name + '="' + this.escapeHTML(aNode.attributes[i].value) + '"';
 		}
-		tag += ">" + br;
-		return tag + aNode.innerHTML + "</" + aNode.nodeName.toLowerCase() + ">" + br;
+		tag += ">\n";
+		return tag + aContent + "</" + aNode.nodeName.toLowerCase() + ">\n";
 	},
 
 	/**
@@ -1010,13 +1023,6 @@ var sbCommonUtils = {
 			aObject1[i] = aObject2[i];
 		}
 		return aObject1;
-	},
-
-	getKeys : function(aObject)
-	{
-		var ret = [];
-		for (var i in aObject) ret.push(i);
-		return ret;
 	},
 };
 

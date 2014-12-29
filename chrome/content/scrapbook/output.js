@@ -77,7 +77,6 @@ var sbOutputService = {
 		dir.append("tree");
 		if ( !dir.exists() ) dir.create(dir.DIRECTORY_TYPE, 0700);
 		var urlHash = {
-			"chrome://scrapbook/skin/output.css"     : "output.css",
 			"chrome://scrapbook/skin/treeitem.png"   : "treeitem.png",
 			"chrome://scrapbook/skin/treenote.png"   : "treenote.png",
 			"chrome://scrapbook/skin/treenotex.png"  : "treenotex.png",
@@ -98,6 +97,9 @@ var sbOutputService = {
 		indexFile.append("index.html");
 		this.content += this.getHTMLFoot();
 		sbCommonUtils.writeFile(indexFile, this.content, "UTF-8");
+		var indexCSS = dir.clone();
+		indexCSS.append('index.css');
+		sbCommonUtils.saveTemplateFile("chrome://scrapbook/skin/output.css", indexCSS, true);
 		var searchFile = dir.parent;
 		searchFile.append('search.html');
 		sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/search.html", searchFile, true);
@@ -134,7 +136,8 @@ var sbOutputService = {
 			+ '	<meta charset="UTF-8">\n'
 			+ '	<title>' + sbCommonUtils.escapeHTMLWithSpace(document.title, true) + '</title>\n'
 			+ '	<meta name="viewport" content="width=device-width">\n'
-			+ '	<link rel="stylesheet" type="text/css" href="output.css" media="all">\n'
+			+ '	<link rel="stylesheet" type="text/css" href="index.css" media="all">\n'
+			+ '	<link rel="stylesheet" type="text/css" href="custom.css" media="all">\n'
 			+ '	<script>\n'
 			+ '	function init() {\n'
 			+ '		toggleAll(false);\n'
@@ -191,6 +194,7 @@ var sbOutputService = {
 			+ '		}\n'
 			+ '	}\n'
 			+ '	</script>\n'
+			+ '	<script src="custom.js"></script>\n'
 			+ '</head>\n\n'
 			+ '<body onload="init();">\n'
 			+ '<div id="header"><a href="javascript:toggleAll();"><img src="toggle.png" width="16" height="16" alt="">ScrapBook</a> <a href="../search.html"><img src="search.png" width="18" height="12" alt=""></a></div>\n'
@@ -212,7 +216,7 @@ var sbOutputService = {
 		var ret;
 		switch (type) {
 			case "separator": 
-				ret = '<a title="' + title + '">' + title + ' ----------------------------------------' + '</a>';
+				ret = '<fieldset class="separator" title="' + title + '"><legend>&nbsp;' + title + '&nbsp;</legend></fieldset>';
 				break;
 			case "folder": 
 				ret = '<a class="folder" href="javascript:toggle(\'folder-' + id + '\');" title="' + title + '">'

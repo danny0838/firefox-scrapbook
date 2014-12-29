@@ -155,14 +155,13 @@ var sbDataSource = {
 			// create a new item and merge the props
 			var newItem = sbCommonUtils.newItem();
 			sbCommonUtils.extendObject(newItem, aSBitem);
-			var propList = sbCommonUtils.getKeys(newItem);
 			var newRes = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aSBitem.id);
-			propList.forEach(function(prop) {
-				if (prop == "folder") return;  // "folder" prop is specially handled and do not need to store
+			for (prop in newItem) {
+				if (prop == "folder") continue;  // "folder" prop is specially handled and do not need to store
 				var arc = sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + prop);
 				var val = sbCommonUtils.RDF.GetLiteral(aSBitem[prop]);
 				this._dataObj.Assert(newRes, arc, val, true);
-			}, this);
+			}
 			if (aSBitem.type == "separator") {
 				this._dataObj.Assert(
 					newRes,
@@ -247,37 +246,20 @@ var sbDataSource = {
 		this._flushWithDelay();
 	},
 
-	deleteItemDescending : function(aRes, aParRes)
+	deleteItemDescending : function(aRes, aParRes, aRecObj)
 	{
-		sbCommonUtils.RDFC.Init(this._dataObj, aParRes);
-		sbCommonUtils.RDFC.RemoveElement(aRes, true);
-		var addIDs = [];
-		var rmIDs = [];
-		var depth = 0;
-		do {
-			addIDs = this.cleanUpIsolation();
-			rmIDs = rmIDs.concat(addIDs);
+		if (aParRes) {
+			sbCommonUtils.RDFC.Init(this._dataObj, aParRes);
+			sbCommonUtils.RDFC.RemoveElement(aRes, true);
 		}
-		while( addIDs.length > 0 && ++depth < 100 );
-		this._flushWithDelay();
-		return rmIDs;
-	},
-
-	cleanUpIsolation : function()
-	{
-		var rmIDs = [];
-		try {
-			var resEnum = this._dataObj.GetAllResources();
-			while ( resEnum.hasMoreElements() )
-			{
-				var aRes = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-				if ( aRes.Value != "urn:scrapbook:root" && aRes.Value != "urn:scrapbook:search" && !this._dataObj.ArcLabelsIn(aRes).hasMoreElements() )
-				{
-					rmIDs.push( this.removeResource(aRes) );
-				}
-			}
-		} catch(ex) {
-			sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_CLEAN_DATASOURCE", [ex]));
+		var rmIDs = aRecObj || [];
+		if (this.isContainer(aRes)) {
+			this.flattenResources(aRes, 0, true).forEach(function(res){
+				rmIDs.push(this.removeResource(res));
+			}, this);
+		}
+		else {
+			rmIDs.push(this.removeResource(aRes));
 		}
 		return rmIDs;
 	},
@@ -337,6 +319,25 @@ var sbDataSource = {
 
 
 
+	getItem : function(aRes)
+	{
+		var ns = sbCommonUtils.namespace, nsl = ns.length;
+		var item = sbCommonUtils.newItem();
+		var names = this._dataObj.ArcLabelsOut(aRes);
+		while ( names.hasMoreElements() )
+		{
+			try {
+				var name  = names.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+				if (name.Value.substring(0, nsl) != ns) continue;
+				var key = name.Value.substring(nsl);
+				var value = this._dataObj.GetTarget(aRes, name, true).QueryInterface(Components.interfaces.nsIRDFLiteral).Value;
+				item[key] = value;
+			} catch(ex) {
+			}
+		}
+		return item;
+	},
+
 	getProperty : function(aRes, aProp)
 	{
 		if ( aRes.Value == "urn:scrapbook:root" ) return "";
@@ -389,6 +390,11 @@ var sbDataSource = {
 		return this._dataObj.ArcLabelsOut(aRes).hasMoreElements();
 	},
 
+	isolated : function(aRes)
+	{
+		return !this._dataObj.ArcLabelsIn(aRes).hasMoreElements();
+	},
+
 	isContainer : function(aRes)
 	{
 		return sbCommonUtils.RDFCU.IsContainer(this._dataObj, aRes);
@@ -409,9 +415,9 @@ var sbDataSource = {
 	},
 
 	// aRule: 0 for any, 1 for containers (folders), 2 for items
-	flattenResources : function(aContRes, aRule, aRecursive)
+	flattenResources : function(aContRes, aRule, aRecursive, aRecObj)
 	{
-		var resList = [];
+		var resList = aRecObj || [];
 		if ( aRule != 2 ) resList.push(aContRes);
 		sbCommonUtils.RDFC.Init(this._dataObj, aContRes);
 		var resEnum = sbCommonUtils.RDFC.GetElements();
@@ -420,7 +426,7 @@ var sbDataSource = {
 			var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
 			if ( this.isContainer(res) ) {
 				if ( aRecursive )
-					resList = resList.concat(this.flattenResources(res, aRule, aRecursive));
+					this.flattenResources(res, aRule, aRecursive, resList);
 				else
 					if ( aRule != 2 ) resList.push(res);
 			} else {
@@ -449,7 +455,7 @@ var sbDataSource = {
 		while (true)
 		{
 			aRes = this.findParentResource(aRes);
-			if ( aRes.Value == "urn:scrapbook:root" ) break;
+			if ( !aRes || aRes.Value == "urn:scrapbook:root" ) break;
 			ret.unshift(this.getProperty(aRes, "title"));
 		}
 		return ret;
