@@ -857,6 +857,16 @@ var sbCommonUtils = {
 		return tag + aNode.innerHTML + "</" + aNode.nodeName.toLowerCase() + ">" + br;
 	},
 
+	surroundByTags : function(aNode, aContent)
+	{
+		var tag = "<" + aNode.nodeName.toLowerCase();
+		for ( var i=0; i<aNode.attributes.length; i++ ) {
+			tag += ' ' + aNode.attributes[i].name + '="' + this.escapeHTML(aNode.attributes[i].value) + '"';
+		}
+		tag += ">\n";
+		return tag + aContent + "</" + aNode.nodeName.toLowerCase() + ">\n";
+	},
+
 	/**
 	 * DOM elements considered as ScrapBook additional
 	 *

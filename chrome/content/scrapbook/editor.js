@@ -485,7 +485,7 @@ var sbPageEditor = {
 			}
 			this.documentBeforeSave(doc);
 			var rootNode = doc.getElementsByTagName("html")[0];
-			var src = sbContentSaver.doctypeToString(doc.doctype) + sbCommonUtils.getOuterHTML(rootNode, true);
+			var src = sbContentSaver.doctypeToString(doc.doctype) + sbCommonUtils.surroundByTags(rootNode, rootNode.innerHTML);
 			var file = sbCommonUtils.convertURLToFile(doc.location.href);
 			sbCommonUtils.writeFile(file, src, charset);
 			this.documentAfterSave(doc);

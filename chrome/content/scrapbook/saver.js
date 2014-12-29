@@ -325,7 +325,7 @@ var sbContentSaver = {
 		}
 
 		// generate the HTML and CSS file and save
-		var myHTML = this.doctypeToString(aDocument.doctype) + sbCommonUtils.getOuterHTML(rootNode, true);
+		var myHTML = this.doctypeToString(aDocument.doctype) + sbCommonUtils.surroundByTags(rootNode, rootNode.innerHTML);
 		if ( this.option["internalize"] ) {
 			var myHTMLFile = this.option["internalize"];
 		}
