@@ -114,7 +114,7 @@ var sbPageEditor = {
 		if ( !sbCommonUtils.documentData(window.content.document, "inited") ) {
 			sbCommonUtils.documentData(window.content.document, "inited", true);
 			if ( aID ) {
-				window.content.removeEventListener("beforeunload", this.handleUnloadEvent, true);
+				try { window.content.removeEventListener("beforeunload", this.handleUnloadEvent, true); } catch(ex) {} // could get an error in Firefox 3.0
 				window.content.addEventListener("beforeunload", this.handleUnloadEvent, true);
 			}
 			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
@@ -1384,7 +1384,8 @@ var sbHtmlEditor = {
 		}
 
 		function getReplaceableNode(aNode) {
-			var forbiddenList = ["#text", "TBODY", "TR"];
+			// replacing these nodes could get a bad and not-undoable result
+			var forbiddenList = ["#text", "THEAD", "TBODY", "TFOOT", "TR"];
 			while (forbiddenList.indexOf(aNode.nodeName) >= 0) {
 				aNode = aNode.parentNode;
 			}
