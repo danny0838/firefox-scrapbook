@@ -159,11 +159,7 @@ var sbCalcController = {
 		return sbCalcService.treeItems[sbCalcService.TREE.currentIndex];
 	},
 
-	createPopupMenu : function(aEvent)
-	{
-		var valid = this.CURRENT_TREEITEM[6];
-		document.getElementById("sbPopupRemove").setAttribute("disabled", valid);
-	},
+	createPopupMenu : function(aEvent) {},
 
 	onDblClick : function(aEvent)
 	{
@@ -178,7 +174,6 @@ var sbCalcController = {
 
 	remove : function()
 	{
-		if ( this.CURRENT_TREEITEM[6] ) return;
 		var id = this.CURRENT_TREEITEM[0];
         try {
             // remove the data folder
