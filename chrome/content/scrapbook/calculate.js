@@ -180,18 +180,22 @@ var sbCalcController = {
 	{
 		if ( this.CURRENT_TREEITEM[6] ) return;
 		var id = this.CURRENT_TREEITEM[0];
-		// remove the data folder
-		if ( sbCommonUtils.removeDirSafety(sbCommonUtils.getContentDir(id, true, true), false) )
-		{
-			sbCalcService.treeItems.splice(sbCalcService.TREE.currentIndex, 1);
-			sbCalcService.initTree();
-		}
-		// remove the item from the resource
-		var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
-		if (sbDataSource.exists(res)) {
-			var parent = sbDataSource.findParentResource(res);
-			sbDataSource.deleteItemDescending(res, parent);
-		}
+        try {
+            // remove the data folder
+            var dir = sbCommonUtils.getContentDir(id, true, true);
+            if (dir) {
+                if (!sbCommonUtils.removeDirSafety(dir, false)) throw "failed to remove directory";
+            }
+            // remove the item from the resource
+            var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
+            if (sbDataSource.exists(res)) {
+                var parent = sbDataSource.findParentResource(res);
+                sbDataSource.deleteItemDescending(res, parent);
+            }
+            // remove the item from the list
+            sbCalcService.treeItems.splice(sbCalcService.TREE.currentIndex, 1);
+            sbCalcService.initTree();
+        } catch(ex) {}
 	},
 
 	forward : function(aCommand)
