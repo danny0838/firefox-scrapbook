@@ -123,6 +123,7 @@ var sbSearchResult =
 				resURI.substring(18),
 				type,
 				icon,
+				res,
 			]);
 			this.hit++;
 		}
@@ -131,6 +132,15 @@ var sbSearchResult =
 
 	finalize : function()
 	{
+		this.queryKey.sort.forEach(function(sortKey){
+			sbSearchResult.treeItems.sort(function(a, b){
+				a = sbDataSource.getProperty(a[8], sortKey[0]);
+				b = sbDataSource.getProperty(b[8], sortKey[0]);
+				if (a > b) return sortKey[1];
+				if (a < b) return -sortKey[1];
+				return 0;
+			});
+		}, this);
 		this.initTree();
 		var headerLabel1 = sbCommonUtils.lang("fulltext", "RESULTS_FOUND", [this.hit] );
 		var headerLabel2 = this.query['q'];

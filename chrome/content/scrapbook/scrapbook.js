@@ -892,8 +892,21 @@ var sbSearchService = {
 		sbDataSource.clearContainer("urn:scrapbook:search");
 		this.container = sbDataSource.getContainer("urn:scrapbook:search", true);
 		var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource(this.treeRef), 2, true);
+		var result = [];
 		resList.forEach(function(res) {
-			if (sbSearchQueryHandler.match(aKey, res, false)) this.container.AppendElement(res);
+			if (sbSearchQueryHandler.match(aKey, res, false)) result.push(res);
+		}, this);
+		aKey.sort.forEach(function(sortKey){
+			result.sort(function(a, b){
+				a = sbDataSource.getProperty(a, sortKey[0]);
+				b = sbDataSource.getProperty(b, sortKey[0]);
+				if (a > b) return sortKey[1];
+				if (a < b) return -sortKey[1];
+				return 0;
+			});
+		}, this);
+		result.forEach(function(res){
+			this.container.AppendElement(res);
 		}, this);
 		sbTreeHandler.TREE.ref = "urn:scrapbook:search";
 		sbTreeHandler.TREE.builder.rebuild();
@@ -967,6 +980,7 @@ var sbSearchQueryHandler = {
 		var key = {
             'rule': [],
             'error': [],
+			'sort': [],
 			'mc': !!aPreset['mc'],
 			're': !!aPreset['re'],
 			'default': aPreset['default'] || 'title',
@@ -1000,6 +1014,14 @@ var sbSearchQueryHandler = {
 					break;
 				case "-type:":
 					addRule('type', 'exclude', term);
+					term = false;
+					break;
+				case "sort:":
+					addSort(term, 1);
+					term = false;
+					break;
+				case "-sort:":
+					addSort(term, -1);
 					term = false;
 					break;
 			}
@@ -1061,6 +1083,10 @@ var sbSearchQueryHandler = {
 			function addRule(name, type, value) {
 				if (key.rule[name] === undefined) key.rule[name] = { 'include': [], 'exclude': [] };
 				key.rule[name][type].push(value);
+			}
+
+			function addSort(field, order) {
+				key.sort.push([field, order]);
 			}
 
 			function addError(msg) {
