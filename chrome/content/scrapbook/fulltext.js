@@ -103,22 +103,19 @@ var sbSearchResult =
 			if ( this.targetFolders.indexOf(folder) < 0 ) return this.next();
 		}
 		var content = sbCacheSource.getProperty(res, "content");
-		var nameLR = res.ValueUTF8.split("#");
-		var resURI  = nameLR.shift();
-		var name    = nameLR.join("#") || "index.html";
+		var nameLR = sbCommonUtils.splitURLByAnchor(res.ValueUTF8);
+		var resURI = nameLR[0], name = nameLR[1].substring(1) || "index.html";
 		res = sbCommonUtils.RDF.GetResource(resURI);
 		if ( !sbDataSource.exists(res) ) return this.next();
-		var type    = sbDataSource.getProperty(res, "type");
-		var title   = sbDataSource.getProperty(res, "title");
-		var comment = sbDataSource.getProperty(res, "comment");
 		var hits = sbSearchQueryHandler.match(this.queryKey, res, content);
 		if ( hits )
 		{
-			var icon = sbDataSource.getProperty(res, "icon");
-			if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
+			var comment = sbDataSource.getProperty(res, "comment");
+			var type = sbDataSource.getProperty(res, "type");
+			var icon = sbDataSource.getProperty(res, "icon") || sbCommonUtils.getDefaultIcon(type);
 			if ( folder.indexOf("urn:scrapbook:") == 0 ) folder = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(folder), "title");
 			sbSearchResult.treeItems.push([
-				title,
+				sbDataSource.getProperty(res, "title"),
 				this.extractRightContext(content, hits['content']),
 				this.extractRightContext(comment, hits['comment']).replace(/ __BR__ /g, " "),
 				folder,
