@@ -101,38 +101,44 @@ var searchEngine = {
 
 	search: function() {
 		this.clearResult();
-		// parse key
-		var key = this.parseQuery(document.getElementById('keyword').value);
-		if (key.error.length) {
-			for (var i = 0, len = key.error.length; i < len; i++) {
-				this.addMsg(key.error[i]);
+		try {
+			// parse key
+			var key = this.parseQuery(document.getElementById('keyword').value);
+			if (key.error.length) {
+				for (var i = 0, len = key.error.length; i < len; i++) {
+					this.addMsg(key.error[i]);
+				}
+				return;
 			}
-			return;
-		}
-		// get result
-		var result = [];
-		for (var i = 0, len = this._cache.length; i < len; i++) {
-			var item = this._cache[i];
-			var data = {
-				'cache': item,
-				'item': this._scrapbook[item.id]
-			};
-			if (this.matchResult(data, key)) {
-				result.push(data);
+			// get result
+			var result = [];
+			for (var i = 0, len = this._cache.length; i < len; i++) {
+				var item = this._cache[i];
+				var data = {
+					'cache': item,
+					'item': this._scrapbook[item.id]
+				};
+				if (this.matchResult(data, key)) {
+					result.push(data);
+				}
+			}
+			// sort result
+			for (var i = 0, len = key.sort.length; i < len; i++) {
+				var sort = key.sort[i];
+				result.sort(function(a, b){
+					if (a[sort[0]][sort[1]] > b[sort[0]][sort[1]]) return sort[2];
+					if (a[sort[0]][sort[1]] < b[sort[0]][sort[1]]) return -sort[2];
+					return 0;
+				});
+			}
+			// display result
+			for (var i = 0, len = result.length; i < len; i++) {
+				this.addResult(result[i]);
 			}
 		}
-		// sort result
-		for (var i = 0, len = key.sort.length; i < len; i++) {
-			var sort = key.sort[i];
-			result.sort(function(a, b){
-				if (a[sort[0]][sort[1]] > b[sort[0]][sort[1]]) return sort[2];
-				if (a[sort[0]][sort[1]] < b[sort[0]][sort[1]]) return -sort[2];
-				return 0;
-			});
-		}
-		// display result
-		for (var i = 0, len = result.length; i < len; i++) {
-			this.addResult(result[i]);
+		catch (ex) {
+			alert("Script error: \n" + ex.name + ': ' + ex.message);
+			throw ex;
 		}
 	},
 
