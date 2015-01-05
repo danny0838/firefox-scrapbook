@@ -12,9 +12,7 @@ var searchEngine = {
 	_cache: null,
 	_scrapbook: null,
 	config: {
-		'regex': false,
-		'match_case': false,
-		'sort': [],
+		'default_search': '',
 		'default_field': 'tcc',
 		'list_bullet': '◉'
 	},
@@ -103,7 +101,9 @@ var searchEngine = {
 		this.clearResult();
 		try {
 			// parse key
-			var key = this.parseQuery(document.getElementById('keyword').value);
+			var keyStr = document.getElementById('keyword').value;
+			if (this.config['default_search']) keyStr = this.config['default_search'] + ' ' + keyStr;
+			var key = this.parseQuery(keyStr);
 			if (key.error.length) {
 				for (var i = 0, len = key.error.length; i < len; i++) {
 					this.addMsg(key.error[i]);
@@ -148,9 +148,9 @@ var searchEngine = {
 		var key = {
 			'error': [],
 			'rule': [],
-			'sort': this.config['sort'],
-			'mc': this.config['match_case'],
-			're': this.config['regex'],
+			'sort': [],
+			'mc': false,
+			're': false,
 			'default': this.config['default_field']
         };
 		keyStr.replace(/(\-?[A-Za-z]+:|\-)(?:"((?:\\"|[^"])*)"|([^ "\u3000]*))|(?:"((?:""|[^"])*)"|([^ "\u3000]+))/g, function(match, cmd, qterm, term, qterm2, term2){
