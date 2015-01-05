@@ -124,10 +124,12 @@ var searchEngine = {
 			}
 			// sort result
 			for (var i = 0, len = key.sort.length; i < len; i++) {
-				var sort = key.sort[i];
+				var sortKey = key.sort[i];
 				result.sort(function(a, b){
-					if (a[sort[0]][sort[1]] > b[sort[0]][sort[1]]) return sort[2];
-					if (a[sort[0]][sort[1]] < b[sort[0]][sort[1]]) return -sort[2];
+					a = a[sortKey[0]][sortKey[1]];
+					b = b[sortKey[0]][sortKey[1]];
+					if (a > b) return sortKey[2];
+					if (a < b) return -sortKey[2];
 					return 0;
 				});
 			}
