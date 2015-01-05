@@ -132,6 +132,7 @@ var searchEngine = {
 				});
 			}
 			// display result
+			this.addMsg('Found ' + result.length + ' results:');
 			for (var i = 0, len = result.length; i < len; i++) {
 				this.addResult(result[i]);
 			}
