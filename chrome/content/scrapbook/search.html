@@ -11,6 +11,12 @@ var searchEngine = {
 
 	_cache: null,
 	_scrapbook: null,
+	config: {
+		'regex': false,
+		'match_case': false,
+		'default_field': 'tcc',
+		'list_bullet': '⌖'
+	},
 
 	init: function () {
 		var that = this;
@@ -118,8 +124,9 @@ var searchEngine = {
 		var key = {
 			'error': [],
 			'rule': [],
-			'mc': false,
-			're': false,
+			'mc': this.config['match_case'],
+			're': this.config['regex'],
+			'default': this.config['default_field']
         };
 		keyStr.replace(/(\-?[A-Za-z]+:|\-)(?:"((?:\\"|[^"])*)"|([^ "\u3000]*))|(?:"((?:""|[^"])*)"|([^ "\u3000]+))/g, function(match, cmd, qterm, term, qterm2, term2){
 			if (cmd) {
@@ -198,10 +205,10 @@ var searchEngine = {
 						addRule('modify', 'exclude', parseDate(term));
 						break;
 					case "-":
-						addRule('tcc', 'exclude', parseStr(term));
+						addRule(key['default'], 'exclude', parseStr(term));
 						break;
 					default:
-						addRule('tcc', 'include', parseStr(term));
+						addRule(key['default'], 'include', parseStr(term));
 						break;
 				}
 			}
@@ -347,6 +354,7 @@ var searchEngine = {
 		var wrapper = document.getElementById("result");
 		var result = document.createElement("LI");
 		var href = item.type == 'bookmark' ? item.source : 'data/' + item.id + '/' + cache.path;
+		var bullet = this.config['list_bullet'] + ' ';
 		if (item.type != 'bookmark') {
 			var fhref = 'tree/frame.html#../' + href;
 			var link = document.createElement("A");
@@ -354,7 +362,7 @@ var searchEngine = {
 			link.setAttribute('target', '_blank');
 			link.setAttribute('class', 'bookmark');
 			link.setAttribute('title', 'View In Frame');
-			link.appendChild(document.createTextNode('⌖ '));
+			link.appendChild(document.createTextNode(bullet));
 			result.appendChild(link);
 		}
 		var link = document.createElement("A");
@@ -362,7 +370,7 @@ var searchEngine = {
 		link.setAttribute('target', 'main');
 		link.setAttribute('class', item.type);
 		link.setAttribute('title', item.title);
-		link.appendChild(document.createTextNode(item.type == 'bookmark' ? '⌖ ' + item.title : item.title));
+		link.appendChild(document.createTextNode(item.type == 'bookmark' ? bullet + item.title : item.title));
 		result.appendChild(link);
 		wrapper.appendChild(result);
 	},
