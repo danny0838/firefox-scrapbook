@@ -14,6 +14,7 @@ var searchEngine = {
 	config: {
 		'regex': false,
 		'match_case': false,
+		'sort': [],
 		'default_field': 'tcc',
 		'list_bullet': '◉'
 	},
@@ -100,6 +101,7 @@ var searchEngine = {
 
 	search: function() {
 		this.clearResult();
+		// parse key
 		var key = this.parseQuery(document.getElementById('keyword').value);
 		if (key.error.length) {
 			for (var i = 0, len = key.error.length; i < len; i++) {
@@ -107,6 +109,8 @@ var searchEngine = {
 			}
 			return;
 		}
+		// get result
+		var result = [];
 		for (var i = 0, len = this._cache.length; i < len; i++) {
 			var item = this._cache[i];
 			var data = {
@@ -114,8 +118,21 @@ var searchEngine = {
 				'item': this._scrapbook[item.id]
 			};
 			if (this.matchResult(data, key)) {
-				this.addResult(data);
+				result.push(data);
 			}
+		}
+		// sort result
+		for (var i = 0, len = key.sort.length; i < len; i++) {
+			var sort = key.sort[i];
+			result.sort(function(a, b){
+				if (a[sort[0]][sort[1]] > b[sort[0]][sort[1]]) return sort[2];
+				if (a[sort[0]][sort[1]] < b[sort[0]][sort[1]]) return -sort[2];
+				return 0;
+			});
+		}
+		// display result
+		for (var i = 0, len = result.length; i < len; i++) {
+			this.addResult(result[i]);
 		}
 	},
 
@@ -124,6 +141,7 @@ var searchEngine = {
 		var key = {
 			'error': [],
 			'rule': [],
+			'sort': this.config['sort'],
 			'mc': this.config['match_case'],
 			're': this.config['regex'],
 			'default': this.config['default_field']
@@ -156,6 +174,14 @@ var searchEngine = {
 					break;
 				case "-type:":
 					addRule('type', 'exclude', term);
+					term = false;
+					break;
+				case "sort:":
+					addSort(term, 1);
+					term = false;
+					break;
+				case "-sort:":
+					addSort(term, -1);
 					term = false;
 					break;
 			}
@@ -217,6 +243,14 @@ var searchEngine = {
 			function addRule(name, type, value) {
 				if (key.rule[name] === undefined) key.rule[name] = { 'include': [], 'exclude': [] };
 				key.rule[name][type].push(value);
+			}
+
+			function addSort(field, order) {
+				if (['path', 'content'].indexOf(field) >= 0) {
+					key.sort.push(['cache', field, order]);
+					return;
+				}
+				key.sort.push(['item', field, order]);
 			}
 
 			function addError(msg) {
