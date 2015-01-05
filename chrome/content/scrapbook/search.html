@@ -95,7 +95,7 @@ var searchEngine = {
 	search: function() {
 		this.clearResult();
 		var key = this.parseQuery(document.getElementById('keyword').value);
-		if (key.error) {
+		if (key.error.length) {
 			for (var i = 0, len = key.error.length; i < len; i++) {
 				this.addMsg(key.error[i]);
 			}
@@ -115,11 +115,12 @@ var searchEngine = {
 
 	parseQuery: function(keyStr) {
 		var that = this;
-		var key = {};
-		var mode = {
+		var key = {
+			'error': [],
+			'rule': [],
 			'mc': false,
 			're': false,
-		};
+        };
 		keyStr.replace(/(\-?[A-Za-z]+:|\-)(?:"((?:\\"|[^"])*)"|([^ "\u3000]*))|(?:"((?:""|[^"])*)"|([^ "\u3000]+))/g, function(match, cmd, qterm, term, qterm2, term2){
 			if (cmd) {
 				var term = qterm ? qterm.replace(/""/g, '"') : term;
@@ -131,23 +132,23 @@ var searchEngine = {
 			// the term will then be reguarded as a "tcc include"
 			switch (cmd) {
 				case "mc:":
-					mode.mc = true;
+					key.mc = true;
 					break;
 				case "-mc:":
-					mode.mc = false;
+					key.mc = false;
 					break;
 				case "re:":
-					mode.re = true;
+					key.re = true;
 					break;
 				case "-re:":
-					mode.re = false;
+					key.re = false;
 					break;
 				case "type:":
-					setKey('type', 'include', term);
+					addRule('type', 'include', term);
 					term = false;
 					break;
 				case "-type:":
-					setKey('type', 'exclude', term);
+					addRule('type', 'exclude', term);
 					term = false;
 					break;
 			}
@@ -155,70 +156,69 @@ var searchEngine = {
 			if (term) {
 				switch (cmd) {
 					case "id:":
-						setKey('id', 'include', parseStr(term));
+						addRule('id', 'include', parseStr(term));
 						break;
 					case "-id:":
-						setKey('id', 'exclude', parseStr(term));
+						addRule('id', 'exclude', parseStr(term));
 						break;
 					case "source:":
-						setKey('source', 'include', parseStr(term));
+						addRule('source', 'include', parseStr(term));
 						break;
 					case "-source:":
-						setKey('source', 'exclude', parseStr(term));
+						addRule('source', 'exclude', parseStr(term));
 						break;
 					case "title:":
-						setKey('title', 'include', parseStr(term));
+						addRule('title', 'include', parseStr(term));
 						break;
 					case "-title:":
-						setKey('title', 'exclude', parseStr(term));
+						addRule('title', 'exclude', parseStr(term));
 						break;
 					case "comment:":
-						setKey('comment', 'include', parseStr(term));
+						addRule('comment', 'include', parseStr(term));
 						break;
 					case "-comment:":
-						setKey('comment', 'exclude', parseStr(term));
+						addRule('comment', 'exclude', parseStr(term));
 						break;
 					case "content:":
-						setKey('content', 'include', parseStr(term));
+						addRule('content', 'include', parseStr(term));
 						break;
 					case "-content:":
-						setKey('content', 'exclude', parseStr(term));
+						addRule('content', 'exclude', parseStr(term));
 						break;
 					case "create:":
-						setKey('create', 'include', parseDate(term));
+						addRule('create', 'include', parseDate(term));
 						break;
 					case "-create:":
-						setKey('create', 'exclude', parseDate(term));
+						addRule('create', 'exclude', parseDate(term));
 						break;
 					case "modify:":
-						setKey('modify', 'include', parseDate(term));
+						addRule('modify', 'include', parseDate(term));
 						break;
 					case "-modify:":
-						setKey('modify', 'exclude', parseDate(term));
+						addRule('modify', 'exclude', parseDate(term));
 						break;
 					case "-":
-						setKey('tcc', 'exclude', parseStr(term));
+						addRule('tcc', 'exclude', parseStr(term));
 						break;
 					default:
-						setKey('tcc', 'include', parseStr(term));
+						addRule('tcc', 'include', parseStr(term));
 						break;
 				}
 			}
 			return "";
 
-			function setKey(name, type, value) {
-				if (key[name] === undefined) key[name] = { 'include': [], 'exclude': [] };
-				key[name][type].push(value);
+			function addRule(name, type, value) {
+				if (key.rule[name] === undefined) key.rule[name] = { 'include': [], 'exclude': [] };
+				key.rule[name][type].push(value);
 			}
 
 			function addError(msg) {
-				if (key['error'] === undefined) key['error'] = [];
-				key['error'].push(msg);
+				key.error.push(msg);
 			}
 
 			function parseStr(term) {
-				var options = mode.mc ? 'm' : 'im';
-				if (mode.re) {
+				var options = key.mc ? 'm' : 'im';
+				if (key.re) {
 					try {
 						var regex = new RegExp(term, options);
 					} catch(ex) {
@@ -256,8 +256,8 @@ var searchEngine = {
 		if (!data.item) {
 			return false;
 		}
-		for (var i in key) {
-			if (!this['_match_'+i](key[i], data)) return false;
+		for (var i in key.rule) {
+			if (!this['_match_'+i](key.rule[i], data)) return false;
 		}
 		return true;
 	},
