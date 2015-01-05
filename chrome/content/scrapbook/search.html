@@ -396,7 +396,9 @@ var searchEngine = {
 		var item = data.item;
 		var wrapper = document.getElementById("result");
 		var result = document.createElement("LI");
-		var href = item.type == 'bookmark' ? item.source : 'data/' + item.id + '/' + cache.path;
+		var href = (item.type == 'bookmark') ?
+			item.source :
+			'data/' + item.id + '/' + cache.path.replace(/[^\/]+/g, function(m){return encodeURIComponent(m);});
 		var bullet = this.config['list_bullet'] + ' ';
 		if (item.type != 'bookmark') {
 			var fhref = 'tree/frame.html#../' + href;
