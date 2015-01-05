@@ -58,7 +58,7 @@ var sbSearchResult =
 		}
 		// parse keywords
 		this.queryKey = sbSearchQueryHandler.parse(this.query['q'], {'re': this.query['re'], 'mc': this.query['cs'], 'default': 'tcc'});
-		if (this.queryKey.error) {
+		if (this.queryKey.error.length) {
 			document.getElementById("sbResultHeader").firstChild.value = this.queryKey.error[0];
 			return;
 		}

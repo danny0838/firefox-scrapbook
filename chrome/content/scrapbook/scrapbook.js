@@ -885,7 +885,7 @@ var sbSearchService = {
 
 	doFilteringSearch: function(aKey)
 	{
-		if (aKey.error) {
+		if (aKey.error.length) {
 			this.showErrorMessage(aKey.error[0]);
 			return;
 		}
@@ -963,13 +963,14 @@ var sbSearchQueryHandler = {
 	parse : function(aString, aPreset)
 	{
 		var that = this;
-		var key = {};
 		aPreset = aPreset || [];
-		var mode = {
+		var key = {
+            'rule': [],
+            'error': [],
 			'mc': !!aPreset['mc'],
 			're': !!aPreset['re'],
 			'default': aPreset['default'] || 'title',
-		};
+        };
 		aString.replace(/(\-?[A-Za-z]+:|\-)(?:"((?:\\"|[^"])*)"|([^ "]*))|(?:"((?:""|[^"])*)"|([^ "]+))/g, function(match, cmd, qterm, term, qterm2, term2){
 			if (cmd) {
 				var term = qterm ? qterm.replace(/""/g, '"') : term;
@@ -982,23 +983,23 @@ var sbSearchQueryHandler = {
 			// (unless expicitly cleared)
 			switch (cmd) {
 				case "mc:":
-					mode.mc = true;
+					key.mc = true;
 					break;
 				case "-mc:":
-					mode.mc = false;
+					key.mc = false;
 					break;
 				case "re:":
-					mode.re = true;
+					key.re = true;
 					break;
 				case "-re:":
-					mode.re = false;
+					key.re = false;
 					break;
 				case "type:":
-					setKey('type', 'include', term);
+					addRule('type', 'include', term);
 					term = false;
 					break;
 				case "-type:":
-					setKey('type', 'exclude', term);
+					addRule('type', 'exclude', term);
 					term = false;
 					break;
 			}
@@ -1006,70 +1007,69 @@ var sbSearchQueryHandler = {
 			if (term) {
 				switch (cmd) {
 					case "id:":
-						setKey('id', 'include', parseStr(term));
+						addRule('id', 'include', parseStr(term));
 						break;
 					case "-id:":
-						setKey('id', 'exclude', parseStr(term));
+						addRule('id', 'exclude', parseStr(term));
 						break;
 					case "source:":
-						setKey('source', 'include', parseStr(term));
+						addRule('source', 'include', parseStr(term));
 						break;
 					case "-source:":
-						setKey('source', 'exclude', parseStr(term));
+						addRule('source', 'exclude', parseStr(term));
 						break;
 					case "title:":
-						setKey('title', 'include', parseStr(term));
+						addRule('title', 'include', parseStr(term));
 						break;
 					case "-title:":
-						setKey('title', 'exclude', parseStr(term));
+						addRule('title', 'exclude', parseStr(term));
 						break;
 					case "comment:":
-						setKey('comment', 'include', parseStr(term));
+						addRule('comment', 'include', parseStr(term));
 						break;
 					case "-comment:":
-						setKey('comment', 'exclude', parseStr(term));
+						addRule('comment', 'exclude', parseStr(term));
 						break;
 					case "content:":
-						setKey('content', 'include', parseStr(term));
+						addRule('content', 'include', parseStr(term));
 						break;
 					case "-content:":
-						setKey('content', 'exclude', parseStr(term));
+						addRule('content', 'exclude', parseStr(term));
 						break;
 					case "create:":
-						setKey('create', 'include', parseDate(term));
+						addRule('create', 'include', parseDate(term));
 						break;
 					case "-create:":
-						setKey('create', 'exclude', parseDate(term));
+						addRule('create', 'exclude', parseDate(term));
 						break;
 					case "modify:":
-						setKey('modify', 'include', parseDate(term));
+						addRule('modify', 'include', parseDate(term));
 						break;
 					case "-modify:":
-						setKey('modify', 'exclude', parseDate(term));
+						addRule('modify', 'exclude', parseDate(term));
 						break;
 					case "-":
-						setKey(mode['default'], 'exclude', parseStr(term));
+						addRule(key['default'], 'exclude', parseStr(term));
 						break;
 					default:
-						setKey(mode['default'], 'include', parseStr(term));
+						addRule(key['default'], 'include', parseStr(term));
 						break;
 				}
 			}
 			return "";
 
-			function setKey(name, type, value) {
-				if (key[name] === undefined) key[name] = { 'include': [], 'exclude': [] };
-				key[name][type].push(value);
+			function addRule(name, type, value) {
+				if (key.rule[name] === undefined) key.rule[name] = { 'include': [], 'exclude': [] };
+				key.rule[name][type].push(value);
 			}
 
 			function addError(msg) {
-				if (key['error'] === undefined) key['error'] = [];
-				key['error'].push(msg);
+				key.error.push(msg);
 			}
 
 			function parseStr(term) {
-				var options = mode.mc ? 'gm' : 'igm';
-				if (mode.re) {
+				var options = key.mc ? 'gm' : 'igm';
+				if (key.re) {
 					try {
 						var regex = new RegExp(term, options);
 					} catch(ex) {
@@ -1109,8 +1109,8 @@ var sbSearchQueryHandler = {
 	match : function(aKey, aRes, aText)
 	{
 		this.hits = {};
-		for (var i in aKey) {
-			if (!this['_match_'+i](aKey[i], aRes, aText)) return false;
+		for (var i in aKey.rule) {
+			if (!this['_match_'+i](aKey.rule[i], aRes, aText)) return false;
 		}
 		return this.hits;
 	},
