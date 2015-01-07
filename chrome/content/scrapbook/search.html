@@ -11,6 +11,11 @@ var searchEngine = {
 
 	_cache: null,
 	_scrapbook: null,
+	config: {
+		'default_search': '',
+		'default_field': 'tcc',
+		'list_bullet': '◉'
+	},
 
 	init: function () {
 		var that = this;
@@ -94,32 +99,62 @@ var searchEngine = {
 
 	search: function() {
 		this.clearResult();
-		var key = this.parseQuery(document.getElementById('keyword').value);
-		if (key.error) {
-			for (var i = 0, len = key.error.length; i < len; i++) {
-				this.addMsg(key.error[i]);
+		try {
+			// parse key
+			var keyStr = document.getElementById('keyword').value;
+			if (this.config['default_search']) keyStr = this.config['default_search'] + ' ' + keyStr;
+			var key = this.parseQuery(keyStr);
+			if (key.error.length) {
+				for (var i = 0, len = key.error.length; i < len; i++) {
+					this.addMsg(key.error[i]);
+				}
+				return;
 			}
-			return;
+			// get result
+			var result = [];
+			for (var i = 0, len = this._cache.length; i < len; i++) {
+				var item = this._cache[i];
+				var data = {
+					'cache': item,
+					'item': this._scrapbook[item.id]
+				};
+				if (this.matchResult(data, key)) {
+					result.push(data);
+				}
+			}
+			// sort result
+			for (var i = 0, len = key.sort.length; i < len; i++) {
+				var sortKey = key.sort[i];
+				result.sort(function(a, b){
+					a = a[sortKey[0]][sortKey[1]];
+					b = b[sortKey[0]][sortKey[1]];
+					if (a > b) return sortKey[2];
+					if (a < b) return -sortKey[2];
+					return 0;
+				});
+			}
+			// display result
+			this.addMsg('Found ' + result.length + ' results:');
+			for (var i = 0, len = result.length; i < len; i++) {
+				this.addResult(result[i]);
+			}
 		}
-		for (var i = 0, len = this._cache.length; i < len; i++) {
-			var item = this._cache[i];
-			var data = {
-				'cache': item,
-				'item': this._scrapbook[item.id]
-			};
-			if (this.matchResult(data, key)) {
-				this.addResult(data);
-			}
+		catch (ex) {
+			alert("Script error: \n" + ex.name + ': ' + ex.message);
+			throw ex;
 		}
 	},
 
 	parseQuery: function(keyStr) {
 		var that = this;
-		var key = {};
-		var mode = {
+		var key = {
+			'error': [],
+			'rule': [],
+			'sort': [],
 			'mc': false,
 			're': false,
-		};
+			'default': this.config['default_field']
+        };
 		keyStr.replace(/(\-?[A-Za-z]+:|\-)(?:"((?:\\"|[^"])*)"|([^ "\u3000]*))|(?:"((?:""|[^"])*)"|([^ "\u3000]+))/g, function(match, cmd, qterm, term, qterm2, term2){
 			if (cmd) {
 				var term = qterm ? qterm.replace(/""/g, '"') : term;
@@ -131,23 +166,31 @@ var searchEngine = {
 			// the term will then be reguarded as a "tcc include"
 			switch (cmd) {
 				case "mc:":
-					mode.mc = true;
+					key.mc = true;
 					break;
 				case "-mc:":
-					mode.mc = false;
+					key.mc = false;
 					break;
 				case "re:":
-					mode.re = true;
+					key.re = true;
 					break;
 				case "-re:":
-					mode.re = false;
+					key.re = false;
 					break;
 				case "type:":
-					setKey('type', 'include', term);
+					addRule('type', 'include', term);
 					term = false;
 					break;
 				case "-type:":
-					setKey('type', 'exclude', term);
+					addRule('type', 'exclude', term);
+					term = false;
+					break;
+				case "sort:":
+					addSort(term, 1);
+					term = false;
+					break;
+				case "-sort:":
+					addSort(term, -1);
 					term = false;
 					break;
 			}
@@ -155,70 +198,77 @@ var searchEngine = {
 			if (term) {
 				switch (cmd) {
 					case "id:":
-						setKey('id', 'include', parseStr(term));
+						addRule('id', 'include', parseStr(term));
 						break;
 					case "-id:":
-						setKey('id', 'exclude', parseStr(term));
+						addRule('id', 'exclude', parseStr(term));
 						break;
 					case "source:":
-						setKey('source', 'include', parseStr(term));
+						addRule('source', 'include', parseStr(term));
 						break;
 					case "-source:":
-						setKey('source', 'exclude', parseStr(term));
+						addRule('source', 'exclude', parseStr(term));
 						break;
 					case "title:":
-						setKey('title', 'include', parseStr(term));
+						addRule('title', 'include', parseStr(term));
 						break;
 					case "-title:":
-						setKey('title', 'exclude', parseStr(term));
+						addRule('title', 'exclude', parseStr(term));
 						break;
 					case "comment:":
-						setKey('comment', 'include', parseStr(term));
+						addRule('comment', 'include', parseStr(term));
 						break;
 					case "-comment:":
-						setKey('comment', 'exclude', parseStr(term));
+						addRule('comment', 'exclude', parseStr(term));
 						break;
 					case "content:":
-						setKey('content', 'include', parseStr(term));
+						addRule('content', 'include', parseStr(term));
 						break;
 					case "-content:":
-						setKey('content', 'exclude', parseStr(term));
+						addRule('content', 'exclude', parseStr(term));
 						break;
 					case "create:":
-						setKey('create', 'include', parseDate(term));
+						addRule('create', 'include', parseDate(term));
 						break;
 					case "-create:":
-						setKey('create', 'exclude', parseDate(term));
+						addRule('create', 'exclude', parseDate(term));
 						break;
 					case "modify:":
-						setKey('modify', 'include', parseDate(term));
+						addRule('modify', 'include', parseDate(term));
 						break;
 					case "-modify:":
-						setKey('modify', 'exclude', parseDate(term));
+						addRule('modify', 'exclude', parseDate(term));
 						break;
 					case "-":
-						setKey('tcc', 'exclude', parseStr(term));
+						addRule(key['default'], 'exclude', parseStr(term));
 						break;
 					default:
-						setKey('tcc', 'include', parseStr(term));
+						addRule(key['default'], 'include', parseStr(term));
 						break;
 				}
 			}
 			return "";
 
-			function setKey(name, type, value) {
-				if (key[name] === undefined) key[name] = { 'include': [], 'exclude': [] };
-				key[name][type].push(value);
+			function addRule(name, type, value) {
+				if (key.rule[name] === undefined) key.rule[name] = { 'include': [], 'exclude': [] };
+				key.rule[name][type].push(value);
+			}
+
+			function addSort(field, order) {
+				if (['path', 'content'].indexOf(field) >= 0) {
+					key.sort.push(['cache', field, order]);
+					return;
+				}
+				key.sort.push(['item', field, order]);
 			}
 
 			function addError(msg) {
-				if (key['error'] === undefined) key['error'] = [];
-				key['error'].push(msg);
+				key.error.push(msg);
 			}
 
 			function parseStr(term) {
-				var options = mode.mc ? 'm' : 'im';
-				if (mode.re) {
+				var options = key.mc ? 'm' : 'im';
+				if (key.re) {
 					try {
 						var regex = new RegExp(term, options);
 					} catch(ex) {
@@ -256,8 +306,8 @@ var searchEngine = {
 		if (!data.item) {
 			return false;
 		}
-		for (var i in key) {
-			if (!this['_match_'+i](key[i], data)) return false;
+		for (var i in key.rule) {
+			if (!this['_match_'+i](key.rule[i], data)) return false;
 		}
 		return true;
 	},
@@ -346,7 +396,10 @@ var searchEngine = {
 		var item = data.item;
 		var wrapper = document.getElementById("result");
 		var result = document.createElement("LI");
-		var href = item.type == 'bookmark' ? item.source : 'data/' + item.id + '/' + cache.path;
+		var href = (item.type == 'bookmark') ?
+			item.source :
+			'data/' + item.id + '/' + cache.path.replace(/[^\/]+/g, function(m){return encodeURIComponent(m);});
+		var bullet = this.config['list_bullet'] + ' ';
 		if (item.type != 'bookmark') {
 			var fhref = 'tree/frame.html#../' + href;
 			var link = document.createElement("A");
@@ -354,7 +407,7 @@ var searchEngine = {
 			link.setAttribute('target', '_blank');
 			link.setAttribute('class', 'bookmark');
 			link.setAttribute('title', 'View In Frame');
-			link.appendChild(document.createTextNode('⌖ '));
+			link.appendChild(document.createTextNode(bullet));
 			result.appendChild(link);
 		}
 		var link = document.createElement("A");
@@ -362,7 +415,7 @@ var searchEngine = {
 		link.setAttribute('target', 'main');
 		link.setAttribute('class', item.type);
 		link.setAttribute('title', item.title);
-		link.appendChild(document.createTextNode(item.type == 'bookmark' ? '⌖ ' + item.title : item.title));
+		link.appendChild(document.createTextNode(item.type == 'bookmark' ? bullet + item.title : item.title));
 		result.appendChild(link);
 		wrapper.appendChild(result);
 	},
