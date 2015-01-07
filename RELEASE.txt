@@ -1,3 +1,15 @@
+Scrapbook X 1.12.0a40
+----------------
+- UPDATE: Searches can now use "sort:" or "-sort:" command to sort the results.
+- UPDATE: The search page of "Output HTML tree" now uses a symbol that is wider supported as the item bullet.
+- FIXED: Special chars (e.g. "#") in the item subpath causes the link broken in the search page of "Output HTML tree".
+- UPDATE: Allows deleting non-invalid item in the "Calculate" dialog.
+- FIXED: Items with missing data directory cannot be deleted properly in the "Calculate" dialog.
+- FIXED: No more fire an error when trying to launch a directory whose item ID is not exist.
+- FIXED: Sometimes the datasource file isn't renewed until closing Firefox when a change has been made.
+- UPDATE: Optimized the internal codes, especially improved the performance of sorting fulltext search results.
+
+
 Scrapbook X 1.12.0a39
 ----------------
 - NEW: "Calculate" dialog now checks for items with missing index.html, items not reside in any folder, and directories with invalid name.
