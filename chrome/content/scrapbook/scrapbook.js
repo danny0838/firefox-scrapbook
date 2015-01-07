@@ -431,8 +431,10 @@ var sbController = {
 
 	launch: function(aDir)
 	{
-		aDir = aDir.QueryInterface(Components.interfaces.nsILocalFile);
-		aDir.launch();
+        try {
+            aDir = aDir.QueryInterface(Components.interfaces.nsILocalFile);
+            aDir.launch();
+        } catch(ex) {}
 	},
 
 	sendInternal: function(aResList, aParResList)
@@ -883,15 +885,28 @@ var sbSearchService = {
 
 	doFilteringSearch: function(aKey)
 	{
-		if (aKey.error) {
+		if (aKey.error.length) {
 			this.showErrorMessage(aKey.error[0]);
 			return;
 		}
 		sbDataSource.clearContainer("urn:scrapbook:search");
 		this.container = sbDataSource.getContainer("urn:scrapbook:search", true);
 		var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource(this.treeRef), 2, true);
+		var result = [];
 		resList.forEach(function(res) {
-			if (sbSearchQueryHandler.match(aKey, res, false)) this.container.AppendElement(res);
+			if (sbSearchQueryHandler.match(aKey, res, false)) result.push(res);
+		}, this);
+		aKey.sort.forEach(function(sortKey){
+			result.sort(function(a, b){
+				a = sbDataSource.getProperty(a, sortKey[0]);
+				b = sbDataSource.getProperty(b, sortKey[0]);
+				if (a > b) return sortKey[1];
+				if (a < b) return -sortKey[1];
+				return 0;
+			});
+		}, this);
+		result.forEach(function(res){
+			this.container.AppendElement(res);
 		}, this);
 		sbTreeHandler.TREE.ref = "urn:scrapbook:search";
 		sbTreeHandler.TREE.builder.rebuild();
@@ -961,13 +976,15 @@ var sbSearchQueryHandler = {
 	parse : function(aString, aPreset)
 	{
 		var that = this;
-		var key = {};
 		aPreset = aPreset || [];
-		var mode = {
+		var key = {
+            'rule': [],
+            'error': [],
+			'sort': [],
 			'mc': !!aPreset['mc'],
 			're': !!aPreset['re'],
 			'default': aPreset['default'] || 'title',
-		};
+        };
 		aString.replace(/(\-?[A-Za-z]+:|\-)(?:"((?:\\"|[^"])*)"|([^ "]*))|(?:"((?:""|[^"])*)"|([^ "]+))/g, function(match, cmd, qterm, term, qterm2, term2){
 			if (cmd) {
 				var term = qterm ? qterm.replace(/""/g, '"') : term;
@@ -980,23 +997,31 @@ var sbSearchQueryHandler = {
 			// (unless expicitly cleared)
 			switch (cmd) {
 				case "mc:":
-					mode.mc = true;
+					key.mc = true;
 					break;
 				case "-mc:":
-					mode.mc = false;
+					key.mc = false;
 					break;
 				case "re:":
-					mode.re = true;
+					key.re = true;
 					break;
 				case "-re:":
-					mode.re = false;
+					key.re = false;
 					break;
 				case "type:":
-					setKey('type', 'include', term);
+					addRule('type', 'include', term);
 					term = false;
 					break;
 				case "-type:":
-					setKey('type', 'exclude', term);
+					addRule('type', 'exclude', term);
+					term = false;
+					break;
+				case "sort:":
+					addSort(term, 1);
+					term = false;
+					break;
+				case "-sort:":
+					addSort(term, -1);
 					term = false;
 					break;
 			}
@@ -1004,70 +1029,73 @@ var sbSearchQueryHandler = {
 			if (term) {
 				switch (cmd) {
 					case "id:":
-						setKey('id', 'include', parseStr(term));
+						addRule('id', 'include', parseStr(term));
 						break;
 					case "-id:":
-						setKey('id', 'exclude', parseStr(term));
+						addRule('id', 'exclude', parseStr(term));
 						break;
 					case "source:":
-						setKey('source', 'include', parseStr(term));
+						addRule('source', 'include', parseStr(term));
 						break;
 					case "-source:":
-						setKey('source', 'exclude', parseStr(term));
+						addRule('source', 'exclude', parseStr(term));
 						break;
 					case "title:":
-						setKey('title', 'include', parseStr(term));
+						addRule('title', 'include', parseStr(term));
 						break;
 					case "-title:":
-						setKey('title', 'exclude', parseStr(term));
+						addRule('title', 'exclude', parseStr(term));
 						break;
 					case "comment:":
-						setKey('comment', 'include', parseStr(term));
+						addRule('comment', 'include', parseStr(term));
 						break;
 					case "-comment:":
-						setKey('comment', 'exclude', parseStr(term));
+						addRule('comment', 'exclude', parseStr(term));
 						break;
 					case "content:":
-						setKey('content', 'include', parseStr(term));
+						addRule('content', 'include', parseStr(term));
 						break;
 					case "-content:":
-						setKey('content', 'exclude', parseStr(term));
+						addRule('content', 'exclude', parseStr(term));
 						break;
 					case "create:":
-						setKey('create', 'include', parseDate(term));
+						addRule('create', 'include', parseDate(term));
 						break;
 					case "-create:":
-						setKey('create', 'exclude', parseDate(term));
+						addRule('create', 'exclude', parseDate(term));
 						break;
 					case "modify:":
-						setKey('modify', 'include', parseDate(term));
+						addRule('modify', 'include', parseDate(term));
 						break;
 					case "-modify:":
-						setKey('modify', 'exclude', parseDate(term));
+						addRule('modify', 'exclude', parseDate(term));
 						break;
 					case "-":
-						setKey(mode['default'], 'exclude', parseStr(term));
+						addRule(key['default'], 'exclude', parseStr(term));
 						break;
 					default:
-						setKey(mode['default'], 'include', parseStr(term));
+						addRule(key['default'], 'include', parseStr(term));
 						break;
 				}
 			}
 			return "";
 
-			function setKey(name, type, value) {
-				if (key[name] === undefined) key[name] = { 'include': [], 'exclude': [] };
-				key[name][type].push(value);
+			function addRule(name, type, value) {
+				if (key.rule[name] === undefined) key.rule[name] = { 'include': [], 'exclude': [] };
+				key.rule[name][type].push(value);
+			}
+
+			function addSort(field, order) {
+				key.sort.push([field, order]);
 			}
 
 			function addError(msg) {
-				if (key['error'] === undefined) key['error'] = [];
-				key['error'].push(msg);
+				key.error.push(msg);
 			}
 
 			function parseStr(term) {
-				var options = mode.mc ? 'gm' : 'igm';
-				if (mode.re) {
+				var options = key.mc ? 'gm' : 'igm';
+				if (key.re) {
 					try {
 						var regex = new RegExp(term, options);
 					} catch(ex) {
@@ -1107,8 +1135,8 @@ var sbSearchQueryHandler = {
 	match : function(aKey, aRes, aText)
 	{
 		this.hits = {};
-		for (var i in aKey) {
-			if (!this['_match_'+i](aKey[i], aRes, aText)) return false;
+		for (var i in aKey.rule) {
+			if (!this['_match_'+i](aKey.rule[i], aRes, aText)) return false;
 		}
 		return this.hits;
 	},

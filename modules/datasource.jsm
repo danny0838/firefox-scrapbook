@@ -86,12 +86,16 @@ var sbDataSource = {
 
 	flush : function()
 	{
-		this._needReOutputTree = true;
-		this._dataObj.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).Flush();
 		if (this._flushTimer) {
 			this._flushTimer.cancel();
 			this._flushTimer = null;
 		}
+		this._needReOutputTree = true;
+        try {
+            this._dataObj.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).Flush();
+        } catch(ex) {
+            sbCommonUtils.error(ex);
+        }
 	},
 
 	_flushWithDelay : function()
