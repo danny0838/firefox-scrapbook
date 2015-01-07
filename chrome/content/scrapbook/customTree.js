@@ -69,43 +69,15 @@ var sbCustomTreeUtil = {
 		if ( !asc ) {
 			aService.treeItems.reverse();
 		} else {
-			this.heapSort(aService.treeItems, aColElem.getAttribute("sortIndex"));
+            var index = aColElem.getAttribute("sortIndex");
+            aService.treeItems.sort(function(a, b){
+                if (a[index] > b[index]) return 1;
+                if (a[index] < b[index]) return -1;
+                return 0;
+            });
 		}
 		aColElem.setAttribute("sortDirection", asc ? "ascending" : "descending");
 		aService.initTree();
-	},
-
-	heapSort : function(array, k)
-	{
-		var h, i, j, n;
-		array[array.length] = array[0];
-		var N = array.length - 1;
-		for( h=N; h>0; h-- ) {
-			i = h;
-			n = array[i];
-			while( (j=i*2) <= N ) {
-				if( (j<N) && (array[j][k]<array[j+1][k]) ) j++;
-				if( n[k] >= array[j][k] ) break;
-				array[i] = array[j];
-				i = j;
-			}
-			array[i] = n;
-		}
-		while( N>1 ) {
-			n = array[N];
-			array[N] = array[1];
-			N--;
-			i = 1;
-			while( (j=i*2)<=N ) {
-				if( (j<N) && (array[j][k]<array[j+1][k]) ) j++;
-				if( n[k] >= array[j][k] ) break;
-				array[i] = array[j];
-				i = j;
-			}
-			array[i] = n;
-		}
-		for( i=0; i<array.length-1; i++ ) array[i] = array[i+1];
-		array.length--;
 	},
 
 	getSelection : function(aTree)

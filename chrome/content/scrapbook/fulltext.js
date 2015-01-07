@@ -58,7 +58,7 @@ var sbSearchResult =
 		}
 		// parse keywords
 		this.queryKey = sbSearchQueryHandler.parse(this.query['q'], {'re': this.query['re'], 'mc': this.query['cs'], 'default': 'tcc'});
-		if (this.queryKey.error) {
+		if (this.queryKey.error.length) {
 			document.getElementById("sbResultHeader").firstChild.value = this.queryKey.error[0];
 			return;
 		}
@@ -103,22 +103,19 @@ var sbSearchResult =
 			if ( this.targetFolders.indexOf(folder) < 0 ) return this.next();
 		}
 		var content = sbCacheSource.getProperty(res, "content");
-		var nameLR = res.ValueUTF8.split("#");
-		var resURI  = nameLR.shift();
-		var name    = nameLR.join("#") || "index.html";
+		var nameLR = sbCommonUtils.splitURLByAnchor(res.ValueUTF8);
+		var resURI = nameLR[0], name = nameLR[1].substring(1) || "index.html";
 		res = sbCommonUtils.RDF.GetResource(resURI);
 		if ( !sbDataSource.exists(res) ) return this.next();
-		var type    = sbDataSource.getProperty(res, "type");
-		var title   = sbDataSource.getProperty(res, "title");
-		var comment = sbDataSource.getProperty(res, "comment");
 		var hits = sbSearchQueryHandler.match(this.queryKey, res, content);
 		if ( hits )
 		{
-			var icon = sbDataSource.getProperty(res, "icon");
-			if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
+			var comment = sbDataSource.getProperty(res, "comment");
+			var type = sbDataSource.getProperty(res, "type");
+			var icon = sbDataSource.getProperty(res, "icon") || sbCommonUtils.getDefaultIcon(type);
 			if ( folder.indexOf("urn:scrapbook:") == 0 ) folder = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(folder), "title");
 			sbSearchResult.treeItems.push([
-				title,
+				sbDataSource.getProperty(res, "title"),
 				this.extractRightContext(content, hits['content']),
 				this.extractRightContext(comment, hits['comment']).replace(/ __BR__ /g, " "),
 				folder,
@@ -126,6 +123,7 @@ var sbSearchResult =
 				resURI.substring(18),
 				type,
 				icon,
+				res,
 			]);
 			this.hit++;
 		}
@@ -134,6 +132,15 @@ var sbSearchResult =
 
 	finalize : function()
 	{
+		this.queryKey.sort.forEach(function(sortKey){
+			sbSearchResult.treeItems.sort(function(a, b){
+				a = sbDataSource.getProperty(a[8], sortKey[0]);
+				b = sbDataSource.getProperty(b[8], sortKey[0]);
+				if (a > b) return sortKey[1];
+				if (a < b) return -sortKey[1];
+				return 0;
+			});
+		}, this);
 		this.initTree();
 		var headerLabel1 = sbCommonUtils.lang("fulltext", "RESULTS_FOUND", [this.hit] );
 		var headerLabel2 = this.query['q'];
