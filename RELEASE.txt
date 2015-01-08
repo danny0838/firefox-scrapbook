@@ -1,3 +1,8 @@
+Scrapbook X 1.12.0a41
+----------------
+- FIXED: Calculate and Export dialogs don't work correctly.
+
+
 Scrapbook X 1.12.0a40
 ----------------
 - UPDATE: Searches can now use "sort:" or "-sort:" command to sort the results.
