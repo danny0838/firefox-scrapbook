@@ -86,7 +86,7 @@ var sbCalcService = {
 
 	finish : function()
 	{
-		sbCustomTreeUtil.heapSort(this.treeItems, 4);
+		sbCustomTreeUtil.sortArrayByIndex(this.treeItems, 4);
 		this.treeItems.reverse();
 		this.initTree();
 		this.STATUS.label = "";

@@ -69,15 +69,19 @@ var sbCustomTreeUtil = {
 		if ( !asc ) {
 			aService.treeItems.reverse();
 		} else {
-            var index = aColElem.getAttribute("sortIndex");
-            aService.treeItems.sort(function(a, b){
-                if (a[index] > b[index]) return 1;
-                if (a[index] < b[index]) return -1;
-                return 0;
-            });
+			this.sortArrayByIndex(aService.treeItems, aColElem.getAttribute("sortIndex"));
 		}
 		aColElem.setAttribute("sortDirection", asc ? "ascending" : "descending");
 		aService.initTree();
+	},
+
+	sortArrayByIndex : function(array, index)
+	{
+		array.sort(function(a, b){
+			if (a[index] > b[index]) return 1;
+			if (a[index] < b[index]) return -1;
+			return 0;
+		});
 	},
 
 	getSelection : function(aTree)
