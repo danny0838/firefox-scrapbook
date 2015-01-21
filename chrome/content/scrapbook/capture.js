@@ -638,7 +638,14 @@ var sbpFilter = {
 
 var sbInvisibleBrowser = {
 
-	get ELEMENT() { return document.getElementById("sbCaptureBrowser"); },
+	get ELEMENT() {
+		delete this.ELEMENT;
+		return this.ELEMENT = document.getElementById("sbCaptureBrowser");
+	},
+	get STATE_START() {
+		delete this.STATE_START;
+		return this.STATE_START = Components.interfaces.nsIWebProgressListener.STATE_START;
+	},
 
 	fileCount : 0,
 	onload    : null,
@@ -646,10 +653,10 @@ var sbInvisibleBrowser = {
 	init : function()
 	{
 		try {
-			this.ELEMENT.webProgress.removeProgressListener(this, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
+			this.ELEMENT.removeProgressListener(this, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
 		} catch(ex) {
 		}
-		this.ELEMENT.webProgress.addProgressListener(this, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
+		this.ELEMENT.addProgressListener(this, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
 		this.loading = false;
 		this.onload = function(){
 			// onload may be fired many times when a document is loaded
@@ -772,7 +779,7 @@ var sbInvisibleBrowser = {
 
 	onStateChange : function(aWebProgress, aRequest, aStateFlags, aStatus)
 	{
-		if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
+		if ( aStateFlags & this.STATE_START )
 		{
 			SB_trace(sbCommonUtils.lang("capture", "LOADING", [++this.fileCount, (sbCaptureTask.URL ? sbCaptureTask.URL : this.ELEMENT.contentDocument.title)]));
 		}
