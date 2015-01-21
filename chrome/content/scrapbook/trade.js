@@ -125,7 +125,7 @@ var sbTradeService = {
 				item.type
 			]);
 		}
-		sbCustomTreeUtil.heapSort(this.treeItems, 5);
+		sbCustomTreeUtil.sortArrayByIndex(this.treeItems, 5);
 		this.initTree();
 		this.log(sbCommonUtils.lang("trade", "DETECT", [this.treeItems.length, this.rightDir.path]), "G");
 	},

@@ -1,15 +1,32 @@
+Scrapbook X 1.12.0a41
+----------------
+- FIXED: Calculate and Export dialogs don't work correctly.
+
+
+Scrapbook X 1.12.0a40
+----------------
+- UPDATE: Searches can now use "sort:" or "-sort:" command to sort the results.
+- UPDATE: The search page of "Output HTML tree" now uses a symbol that is wider supported as the item bullet.
+- FIXED: Special chars (e.g. "#") in the item subpath causes the link broken in the search page of "Output HTML tree".
+- UPDATE: Allows deleting non-invalid item in the "Calculate" dialog.
+- FIXED: Items with missing data directory cannot be deleted properly in the "Calculate" dialog.
+- FIXED: No more fire an error when trying to launch a directory whose item ID is not exist.
+- FIXED: Sometimes the datasource file isn't renewed until closing Firefox when a change has been made.
+- UPDATE: Optimized the internal codes, especially improved the performance of sorting fulltext search results.
+
+
 Scrapbook X 1.12.0a39
 ----------------
 - NEW: "Calculate" dialog now checks for items with missing index.html, items not reside in any folder, and directories with invalid name.
 - UPDATE: "Calculate" dialog now allows viewing properties for invalid items.
 - FIXED: The item is not truly removed from the datasource if deleted from the "Calculate" dialog.
 - FIXED: The "Properties" dialog opened by "Calculate" gets an error if the data is changed.
-- FIXED: Some items do not show the correct icon.
+- FIXED: Some items do not show the correct icon in the "Calculate" dialog.
 - UPDATE: "Output HTML tree" now uses "tree/index.css" instead of "tree/output.css", and updates on every output.
 - UPDATE: Improve the styles of the "Output HTML tree" result, especially for separators.
 - NEW: Allows customizing the style and the script of the "Output HTML tree" pages via "tree/custom.css" and "tree/custom.js".
 - UPDATE: Custom item properties can now be exported.
-- FIXED: Items in a folder are not deleted properly when deleting with a filtering search active.
+- FIXED: When a filtering search is active, deleting a folder do not delete its descendant items properly. They no longer exist in any folder, and are not cleared until deactivating the filtering search and deleting some other items. (Since this version, items not deleted properly before can be detected and deleted via the "Calaulate" dialog)
 - FIXED: "Insert or Edit Source" of the HTML Editor could get a wrong code range in Firefox < 11.0.
 - FIXED: Possible init error in some older Firefox versions.
 - UPDATE: Optimized the internal codes, especially improved the performance of deleting items.
