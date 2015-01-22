@@ -121,14 +121,6 @@ var sbCombineService = {
 		sbPageCombiner.cssText = "";
 		sbPageCombiner.isTargetCombined = false;
 		sbInvisibleBrowser.init();
-		sbInvisibleBrowser.ELEMENT.removeEventListener("load", sbInvisibleBrowser.onload, true);
-		sbInvisibleBrowser.onload = function(){
-			// onload may be fired many times when a document is loaded
-			if (sbInvisibleBrowser.ELEMENT.currentURI.spec !== sbInvisibleBrowser.loading) return;
-			sbInvisibleBrowser.loading = false;
-			sbPageCombiner.exec();
-		};
-		sbInvisibleBrowser.ELEMENT.addEventListener("load", sbInvisibleBrowser.onload, true);
 		this.next();
 	},
 
@@ -164,7 +156,14 @@ var sbCombineService = {
 		var cssFile = sbCommonUtils.getScrapBookDir();
 		cssFile.append("combine.css");
 		sbCommonUtils.writeFile(cssFile, sbPageCombiner.cssText, "UTF-8");
-		sbInvisibleBrowser.refreshEvent(function(){ sbCombineService.showBrowser(); });
+		sbInvisibleBrowser.onStateChange = function(aWebProgress, aRequest, aStateFlags, aStatus) {
+			if ( aStateFlags & sbInvisibleBrowser.STATE_START ) {
+				SB_trace(sbCommonUtils.lang("capture", "LOADING", [sbCombineService.prefix + (++this.fileCount), sbCombineService.postfix]));
+			}
+			else if ( (aStateFlags & sbInvisibleBrowser.STATE_LOADED) === sbInvisibleBrowser.STATE_LOADED && aStatus == 0 && aRequest.name === sbInvisibleBrowser.ELEMENT.currentURI.spec ) {
+				sbCombineService.showBrowser();
+			}
+		};
 		sbInvisibleBrowser.load(sbCommonUtils.convertFilePathToURL(htmlFile.path));
 	},
 
@@ -770,9 +769,11 @@ sbCaptureObserverCallback.onCaptureComplete = function(aItem)
 
 sbInvisibleBrowser.onStateChange = function(aWebProgress, aRequest, aStateFlags, aStatus)
 {
-	if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
-	{
+	if ( aStateFlags & sbInvisibleBrowser.STATE_START ) {
 		SB_trace(sbCommonUtils.lang("capture", "LOADING", [sbCombineService.prefix + (++this.fileCount), sbCombineService.postfix]));
+	}
+	else if ( (aStateFlags & sbInvisibleBrowser.STATE_LOADED) === sbInvisibleBrowser.STATE_LOADED && aStatus == 0 && aRequest.name === sbInvisibleBrowser.ELEMENT.currentURI.spec ) {
+		sbPageCombiner.exec();
 	}
 };
 

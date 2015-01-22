@@ -646,9 +646,12 @@ var sbInvisibleBrowser = {
 		delete this.STATE_START;
 		return this.STATE_START = Components.interfaces.nsIWebProgressListener.STATE_START;
 	},
+	get STATE_LOADED() {
+		delete this.STATE_LOADED;
+		return this.STATE_LOADED = Components.interfaces.nsIWebProgressListener.STATE_STOP | Components.interfaces.nsIWebProgressListener.STATE_IS_NETWORK | Components.interfaces.nsIWebProgressListener.STATE_IS_WINDOW;
+	},
 
 	fileCount : 0,
-	onload    : null,
 
 	init : function()
 	{
@@ -657,23 +660,6 @@ var sbInvisibleBrowser = {
 		} catch(ex) {
 		}
 		this.ELEMENT.addProgressListener(this, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
-		this.loading = false;
-		this.onload = function(){
-			// onload may be fired many times when a document is loaded
-			// (loading of a frame may fire)
-			// we need this check to allow only the desired url and only fire once...
-			if (sbInvisibleBrowser.ELEMENT.currentURI.spec !== sbInvisibleBrowser.loading) return;
-			sbInvisibleBrowser.loading = false;
-			sbInvisibleBrowser.execCapture();
-		};
-		this.ELEMENT.addEventListener("load", sbInvisibleBrowser.onload, true);
-	},
-
-	refreshEvent : function(aEvent)
-	{
-		this.ELEMENT.removeEventListener("load", this.onload, true);
-		this.onload = aEvent;
-		this.ELEMENT.addEventListener("load", this.onload, true);
 	},
 
 	load : function(aURL)
@@ -700,7 +686,6 @@ var sbInvisibleBrowser = {
 		else {
 			this.ELEMENT.docShell.useGlobalHistory = false;
 		}
-		this.loading = aURL;
 		this.ELEMENT.loadURI(aURL, null, null);
 		// if aURL is different from the current URL only in hash,
 		// a loading is not performed unless forced to reload
@@ -779,9 +764,11 @@ var sbInvisibleBrowser = {
 
 	onStateChange : function(aWebProgress, aRequest, aStateFlags, aStatus)
 	{
-		if ( aStateFlags & this.STATE_START )
-		{
+		if ( aStateFlags & this.STATE_START ) {
 			SB_trace(sbCommonUtils.lang("capture", "LOADING", [++this.fileCount, (sbCaptureTask.URL ? sbCaptureTask.URL : this.ELEMENT.contentDocument.title)]));
+		}
+		else if ( (aStateFlags & this.STATE_LOADED) === this.STATE_LOADED && aStatus == 0 && aRequest.name === this.ELEMENT.currentURI.spec ) {
+			sbInvisibleBrowser.execCapture();
 		}
 	},
 
@@ -817,14 +804,14 @@ var sbCrossLinker = {
 	invoke : function()
 	{
 		sbDataSource.setProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gReferItem.id), "type", "site");
-		sbInvisibleBrowser.refreshEvent(function(){ sbCrossLinker.exec(); });
 		this.ELEMENT.docShell.allowImages = false;
-		sbInvisibleBrowser.onStateChange = function(aWebProgress, aRequest, aStateFlags, aStatus)
-		{
-			if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
-			{
+		sbInvisibleBrowser.onStateChange = function(aWebProgress, aRequest, aStateFlags, aStatus) {
+			if ( aStateFlags & sbInvisibleBrowser.STATE_START ) {
 				SB_trace(sbCommonUtils.lang("capture", "REBUILD_LINKS", 
 					[sbCrossLinker.index + 1, sbCrossLinker.nameList.length, ++sbInvisibleBrowser.fileCount, sbCrossLinker.nameList[sbCrossLinker.index] + ".html"]));
+			}
+			else if ( (aStateFlags & sbInvisibleBrowser.STATE_LOADED) === sbInvisibleBrowser.STATE_LOADED && aStatus == 0 && aRequest.name === sbInvisibleBrowser.ELEMENT.currentURI.spec ) {
+				sbCrossLinker.exec();
 			}
 		};
 		this.baseURL = sbCommonUtils.IO.newFileURI(sbCommonUtils.getContentDir(gReferItem.id)).spec;
@@ -843,7 +830,6 @@ var sbCrossLinker = {
 		{
 			sbInvisibleBrowser.fileCount = 0;
 			var url = this.baseURL + encodeURIComponent(this.nameList[this.index]) + ".html";
-			sbInvisibleBrowser.loading = url;
 			this.ELEMENT.loadURI(url, null, null);
 		}
 		else
@@ -867,10 +853,6 @@ var sbCrossLinker = {
 
 	exec : function()
 	{
-		// onload may be fired many times when a document is loaded
-		// we need this check to prevent
-		if (this.ELEMENT.currentURI.spec !== sbInvisibleBrowser.loading) return;
-		sbInvisibleBrowser.loading = false;
 		if ( this.ELEMENT.currentURI.scheme != "file" ) {
 			return;
 		}
