@@ -650,21 +650,53 @@ var sbInvisibleBrowser = {
 		delete this.STATE_LOADED;
 		return this.STATE_LOADED = Components.interfaces.nsIWebProgressListener.STATE_STOP | Components.interfaces.nsIWebProgressListener.STATE_IS_NETWORK | Components.interfaces.nsIWebProgressListener.STATE_IS_WINDOW;
 	},
+	
+	_eventListener : {
+		QueryInterface : function(aIID)
+		{
+			if (aIID.equals(Components.interfaces.nsIWebProgressListener) ||
+				aIID.equals(Components.interfaces.nsISupportsWeakReference) ||
+				aIID.equals(Components.interfaces.nsIXULBrowserWindow) ||
+				aIID.equals(Components.interfaces.nsISupports))
+				return this;
+			throw Components.results.NS_NOINTERFACE;
+		},
+
+		onStateChange : function(aWebProgress, aRequest, aStateFlags, aStatus)
+		{
+			if ( aStateFlags & sbInvisibleBrowser.STATE_START ) {
+				sbInvisibleBrowser.fileCount++;
+				sbInvisibleBrowser.onLoadStart.call(sbInvisibleBrowser);
+			}
+			else if ( (aStateFlags & sbInvisibleBrowser.STATE_LOADED) === sbInvisibleBrowser.STATE_LOADED && aStatus == 0 ) {
+				if (aRequest.name === sbInvisibleBrowser.ELEMENT.currentURI.spec) {
+					sbInvisibleBrowser.onLoadFinish.call(sbInvisibleBrowser);
+				}
+			}
+		},
+
+		onProgressChange : function(aWebProgress, aRequest, aCurSelfProgress, aMaxSelfProgress, aCurTotalProgress, aMaxTotalProgress)
+		{
+			if ( aCurTotalProgress != aMaxTotalProgress )
+			{
+				SB_trace(sbCommonUtils.lang("overlay", "TRANSFER_DATA", [aCurTotalProgress]));
+			}
+		},
+
+		onStatusChange   : function() {},
+		onLocationChange : function() {},
+		onSecurityChange : function() {},
+	},
 
 	fileCount : 0,
 
 	init : function()
 	{
 		try {
-			this.ELEMENT.removeProgressListener(this, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
+			this.ELEMENT.removeProgressListener(this._eventListener, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
 		} catch(ex) {
 		}
-		this.ELEMENT.addProgressListener(this, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
-	},
-
-	load : function(aURL)
-	{
-		this.fileCount = 0;
+		this.ELEMENT.addProgressListener(this._eventListener, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
 		this.ELEMENT.docShell.allowJavascript = gOption["script"];
 		this.ELEMENT.docShell.allowImages     = gOption["images"];
 		this.ELEMENT.docShell.allowMetaRedirects = false;
@@ -686,6 +718,11 @@ var sbInvisibleBrowser = {
 		else {
 			this.ELEMENT.docShell.useGlobalHistory = false;
 		}
+	},
+
+	load : function(aURL)
+	{
+		this.fileCount = 0;
 		this.ELEMENT.loadURI(aURL, null, null);
 		// if aURL is different from the current URL only in hash,
 		// a loading is not performed unless forced to reload
@@ -752,37 +789,15 @@ var sbInvisibleBrowser = {
 		}
 	},
 
-	QueryInterface : function(aIID)
+	onLoadStart : function()
 	{
-		if (aIID.equals(Components.interfaces.nsIWebProgressListener) ||
-			aIID.equals(Components.interfaces.nsISupportsWeakReference) ||
-			aIID.equals(Components.interfaces.nsIXULBrowserWindow) ||
-			aIID.equals(Components.interfaces.nsISupports))
-			return this;
-		throw Components.results.NS_NOINTERFACE;
+		SB_trace(sbCommonUtils.lang("capture", "LOADING", [this.fileCount, (sbCaptureTask.URL || this.ELEMENT.contentDocument.title)]));
 	},
-
-	onStateChange : function(aWebProgress, aRequest, aStateFlags, aStatus)
+	
+	onLoadFinish : function()
 	{
-		if ( aStateFlags & this.STATE_START ) {
-			SB_trace(sbCommonUtils.lang("capture", "LOADING", [++this.fileCount, (sbCaptureTask.URL ? sbCaptureTask.URL : this.ELEMENT.contentDocument.title)]));
-		}
-		else if ( (aStateFlags & this.STATE_LOADED) === this.STATE_LOADED && aStatus == 0 && aRequest.name === this.ELEMENT.currentURI.spec ) {
-			sbInvisibleBrowser.execCapture();
-		}
+		this.execCapture();
 	},
-
-	onProgressChange : function(aWebProgress, aRequest, aCurSelfProgress, aMaxSelfProgress, aCurTotalProgress, aMaxTotalProgress)
-	{
-		if ( aCurTotalProgress != aMaxTotalProgress )
-		{
-			SB_trace(sbCommonUtils.lang("overlay", "TRANSFER_DATA", [aCurTotalProgress]));
-		}
-	},
-
-	onStatusChange   : function() {},
-	onLocationChange : function() {},
-	onSecurityChange : function() {},
 
 };
 
@@ -805,14 +820,11 @@ var sbCrossLinker = {
 	{
 		sbDataSource.setProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gReferItem.id), "type", "site");
 		this.ELEMENT.docShell.allowImages = false;
-		sbInvisibleBrowser.onStateChange = function(aWebProgress, aRequest, aStateFlags, aStatus) {
-			if ( aStateFlags & sbInvisibleBrowser.STATE_START ) {
-				SB_trace(sbCommonUtils.lang("capture", "REBUILD_LINKS", 
-					[sbCrossLinker.index + 1, sbCrossLinker.nameList.length, ++sbInvisibleBrowser.fileCount, sbCrossLinker.nameList[sbCrossLinker.index] + ".html"]));
-			}
-			else if ( (aStateFlags & sbInvisibleBrowser.STATE_LOADED) === sbInvisibleBrowser.STATE_LOADED && aStatus == 0 && aRequest.name === sbInvisibleBrowser.ELEMENT.currentURI.spec ) {
-				sbCrossLinker.exec();
-			}
+		sbInvisibleBrowser.onLoadStart = function() {
+			SB_trace(sbCommonUtils.lang("capture", "REBUILD_LINKS", [sbCrossLinker.index + 1, sbCrossLinker.nameList.length, this.fileCount, sbCrossLinker.nameList[sbCrossLinker.index] + ".html"]));
+		};
+		sbInvisibleBrowser.onLoadFinish = function() {
+			sbCrossLinker.exec();
 		};
 		this.baseURL = sbCommonUtils.IO.newFileURI(sbCommonUtils.getContentDir(gReferItem.id)).spec;
 		for ( var url in gURL2Name )
@@ -828,9 +840,8 @@ var sbCrossLinker = {
 	{
 		if ( ++this.index < this.nameList.length )
 		{
-			sbInvisibleBrowser.fileCount = 0;
 			var url = this.baseURL + encodeURIComponent(this.nameList[this.index]) + ".html";
-			this.ELEMENT.loadURI(url, null, null);
+			sbInvisibleBrowser.load(url);
 		}
 		else
 		{
