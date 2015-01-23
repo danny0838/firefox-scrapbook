@@ -752,7 +752,7 @@ var sbInvisibleBrowser = {
 		}
 		else
 		{
-			ret = sbContentSaver.captureFile(sbCaptureTask.URL, gRefURL ? gRefURL : sbCaptureTask.URL, "file", gShowDetail, gResName, gResIdx, preset, gContext);
+			ret = sbContentSaver.captureFile(sbCaptureTask.sniffer.URLSpec, gRefURL ? gRefURL : sbCaptureTask.URL, "file", gShowDetail, gResName, gResIdx, preset, gContext);
 		}
 		if ( ret )
 		{
