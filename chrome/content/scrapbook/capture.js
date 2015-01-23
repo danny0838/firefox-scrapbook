@@ -995,11 +995,7 @@ function sbHeaderSniffer(aURLSpec, aRefURLSpec)
 				return;
 			}
 
-			// if no content, assume it's html
-			if ( !contentType ) contentType = "text/html";
-			// check type, load it if it's a document
-			sbCaptureTask.isDocument = (contentType == "text/html");
-			that.load();
+			that.load(contentType);
 		},
 	};
 }
@@ -1030,8 +1026,7 @@ sbHeaderSniffer.prototype = {
 			return;
 		}
 		var mime = sbCommonUtils.getFileMime(file);
-		sbCaptureTask.isDocument = (mime == "text/html");
-		this.load();
+		this.load(mime);
 	},
 
 	checkHttpHeader : function()
@@ -1066,15 +1061,25 @@ sbHeaderSniffer.prototype = {
 		try { return [this._channel.responseStatus, this._channel.responseStatusText]; } catch(ex) { return [false, ""]; }
 	},
 
-	load : function()
+	load : function(contentType)
 	{
+		// if no content, assume it's html
+		if ( !contentType ) contentType = "text/html";
+		// check type
+		sbCaptureTask.isDocument = ["text/plain", "html", "xml"].some(function(val) {
+			return contentType.indexOf(val) >= 0;
+		});
 		if (sbCaptureTask.isDocument) {
+			// load the document and capture it
 			sbInvisibleBrowser.load(this.URLSpec);
 		}
 		else {
 			if ( gContext == "indepth" ) {
+				// in an indepth capture, files with defined extensions are pre-processed and is not send to the URL list
+				// those who go here are undefined files, and should be skipped
 				sbCaptureTask.next(true);
 			} else {
+				// will be captured as a file
 				sbInvisibleBrowser.execCapture();
 			}
 		}
