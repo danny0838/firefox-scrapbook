@@ -939,7 +939,9 @@ var sbContentSaver = {
 				var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
 				WBP.persistFlags |= WBP.PERSIST_FLAGS_FROM_CACHE;
 				WBP.persistFlags |= WBP.PERSIST_FLAGS_AUTODETECT_APPLY_CONVERSION;
-				if ( sbCommonUtils._fxVer18 ) {
+				if ( sbCommonUtils._fxVer36 ) {
+					WBP.saveURI(aURL, null, this.refURLObj, null, null, null, targetFile, null);
+				} else if ( sbCommonUtils._fxVer18 ) {
 					WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile, null);
 				} else {
 					WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile);
