@@ -1,3 +1,8 @@
+Scrapbook X 1.12.0a43
+----------------
+- UPDATE: Resolved a compatibility issue that files cannot be downloaded during a capture process in Firefox >= 36.0.
+
+
 Scrapbook X 1.12.0a42
 ----------------
 - FIXED: A link capture or an indepth capture process might freeze on a web page whose response header has no "Location" instruction to a HEAD request and has to a GET request.
