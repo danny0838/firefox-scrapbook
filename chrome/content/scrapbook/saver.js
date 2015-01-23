@@ -966,6 +966,9 @@ var sbContentSaver = {
 				var orgFile = sbCommonUtils.convertURLToFile(aURLSpec);
 				if ( !orgFile.isFile() ) return;
 				orgFile.copyTo(targetDir, newFileName);
+				this.httpTask[this.item.id]++;
+				var item = this.item;
+				setTimeout(function(){ sbCaptureObserverCallback.onDownloadComplete(item); }, 0);
 				return newFileName;
 			}
 			catch(ex) {
@@ -1030,11 +1033,7 @@ sbCaptureObserver.prototype = {
 	{
 		if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_STOP )
 		{
-			if ( --sbContentSaver.httpTask[this.item.id] == 0 ) {
-				this.callback.onAllDownloadsComplete(this.item);
-			} else {
-				this.callback.onDownloadComplete(this.item);
-			}
+			this.callback.onDownloadComplete(this.item);
 		}
 	},
 	onProgressChange : function(aWebProgress, aRequest, aCurSelfProgress, aMaxSelfProgress, aCurTotalProgress, aMaxTotalProgress)
@@ -1066,6 +1065,10 @@ var sbCaptureObserverCallback = {
 
 	onDownloadComplete : function(aItem)
 	{
+		if ( --sbContentSaver.httpTask[aItem.id] == 0 ) {
+			this.onAllDownloadsComplete(aItem);
+			return;
+		}
 		this.trace(sbCommonUtils.lang("overlay", "CAPTURE", [sbContentSaver.httpTask[aItem.id], aItem.title]), 0);
 	},
 
