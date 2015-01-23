@@ -179,7 +179,6 @@ var sbCaptureTask = {
 	get URL()      { return gURLs[this.index]; },
 
 	index       : 0,
-	contentType : "",
 	isDocument  : false,
 	isLocal     : false,
 	refreshHash  : null,
@@ -254,20 +253,13 @@ var sbCaptureTask = {
 			this.next(true);
 			return;
 		}
-		this.contentType = "";
 		this.isDocument = true;
 		this.refreshHash = {};
 		var url = aOverriddenURL || gURLs[this.index];
 		if ( gTitles ) gTitle = gTitles[this.index];
 		SB_trace(sbCommonUtils.lang("capture", "CONNECT", [url]));
-		if ( url.indexOf("file://") == 0 ) {
-			this.isLocal = true;
-			sbInvisibleBrowser.load(url);
-		} else {
-			this.isLocal = false;
-			this.sniffer = new sbHeaderSniffer(url, gRefURL);
-			this.sniffer.httpHead();
-		}
+		this.sniffer = new sbHeaderSniffer(url, gRefURL);
+		this.sniffer.checkURL();
 	},
 
 	succeed : function()
@@ -737,7 +729,7 @@ var sbInvisibleBrowser = {
 		var ret = null;
 		var preset = gReferItem ? [gReferItem.id, SB_suggestName(this.ELEMENT.currentURI.spec), gOption, gFile2URL, gDepths[sbCaptureTask.index]] : null;
 		if ( gPreset ) preset = gPreset;
-		if ( this.ELEMENT.contentDocument.body && sbCaptureTask.isDocument )
+		if ( sbCaptureTask.isDocument && this.ELEMENT.contentDocument.body )
 		{
 			var metaElems = this.ELEMENT.contentDocument.getElementsByTagName("meta");
 			for ( var i = 0; i < metaElems.length; i++ )
@@ -976,8 +968,40 @@ var sbCrossLinker = {
 
 function sbHeaderSniffer(aURLSpec, aRefURLSpec)
 {
+	var that = this;
 	this.URLSpec    = aURLSpec;
 	this.refURLSpec = aRefURLSpec;
+	this._eventListener = {
+		onDataAvailable : function(aRequest, aContext, aInputStream, aOffset, aCount) {},
+		onStartRequest  : function(aRequest, aContext) {},
+		onStopRequest   : function(aRequest, aContext, aStatus) {
+			// show connect success
+			var contentType = that.getHeader("Content-Type");
+			SB_trace(sbCommonUtils.lang("capture", "CONNECT_SUCCESS", [contentType]));
+
+			// get and show http status
+			var httpStatus = that.getStatus();
+			if ( httpStatus[0] >= 400 && httpStatus[0] < 600 || httpStatus[0] == 305 ) {
+				sbCaptureTask.failed++;
+				sbCaptureTask.fail(httpStatus.join(" "));
+				return;
+			}
+
+			// manage redirect if defined
+			var redirectURL = that.getHeader("Location");
+			if ( redirectURL ) {
+				if ( redirectURL.indexOf("http") != 0 ) redirectURL = that._URL.resolve(redirectURL);
+				sbCaptureTask.start(redirectURL);
+				return;
+			}
+
+			// if no content, assume it's html
+			if ( !contentType ) contentType = "text/html";
+			// check type, load it if it's a document
+			sbCaptureTask.isDocument = (contentType == "text/html");
+			that.load();
+		},
+	};
 }
 
 
@@ -987,10 +1011,33 @@ sbHeaderSniffer.prototype = {
 	_channel : null,
 	_headers : null,
 
-	httpHead : function()
+	checkURL : function()
 	{
+		if (this.URLSpec.indexOf("file://") == 0) {
+			this.checkLocalFile();
+		}
+		else {
+			this.checkHttpHeader();
+		}
+	},
+
+	checkLocalFile : function()
+	{
+		sbCaptureTask.isLocal = true;
+		var file = sbCommonUtils.convertURLToFile(this.URLSpec);
+		if (!(file.exists() && file.isFile() && file.isReadable())) {
+			this.reportError("can't access");
+			return;
+		}
+		var mime = sbCommonUtils.getFileMime(file);
+		sbCaptureTask.isDocument = (mime == "text/html");
+		this.load();
+	},
+
+	checkHttpHeader : function()
+	{
+		sbCaptureTask.isLocal = false;
 		this._channel = null;
-		this._headers = {};
 		try {
 			this._URL.spec = this.URLSpec;
 			this._channel = sbCommonUtils.IO.newChannelFromURI(this._URL).QueryInterface(Components.interfaces.nsIHttpChannel);
@@ -998,13 +1045,14 @@ sbHeaderSniffer.prototype = {
 			this._channel.setRequestHeader("User-Agent", navigator.userAgent, false);
 			if ( this.refURLSpec ) this._channel.setRequestHeader("Referer", this.refURLSpec, false);
 		} catch(ex) {
-			this.onHttpError("Invalid URL");
+			this.reportError("Invalid URL");
+			return;
 		}
 		try {
 			this._channel.requestMethod = "HEAD";
-			this._channel.asyncOpen(this, this);
+			this._channel.asyncOpen(this._eventListener, this);
 		} catch(ex) {
-			this.onHttpError(ex);
+			this.reportError(ex);
 		}
 	},
 
@@ -1018,45 +1066,8 @@ sbHeaderSniffer.prototype = {
 		try { return [this._channel.responseStatus, this._channel.responseStatusText]; } catch(ex) { return [false, ""]; }
 	},
 
-	visitHeader : function(aHeader, aValue)
+	load : function()
 	{
-		this._headers[aHeader] = aValue;
-	},
-
-	onDataAvailable : function(aRequest, aContext, aInputStream, aOffset, aCount) {},
-	onStartRequest  : function(aRequest, aContext) {},
-	onStopRequest   : function(aRequest, aContext, aStatus) { this.onHttpSuccess(); },
-
-	onHttpSuccess : function()
-	{
-		// show connect success
-		sbCaptureTask.contentType = this.getHeader("Content-Type");
-		SB_trace(sbCommonUtils.lang("capture", "CONNECT_SUCCESS", [sbCaptureTask.contentType]));
-
-		// get and show http status
-		var httpStatus = this.getStatus();
-		if ( httpStatus[0] >= 400 && httpStatus[0] < 600 || httpStatus[0] == 305 ) {
-			sbCaptureTask.failed++;
-			sbCaptureTask.fail(httpStatus.join(" "));
-			return;
-		}
-
-		// manage redirect if defined
-		var redirectURL = this.getHeader("Location");
-		if ( redirectURL ) {
-			if ( redirectURL.indexOf("http") != 0 ) redirectURL = this._URL.resolve(redirectURL);
-			sbCaptureTask.start(redirectURL);
-			return;
-		}
-
-		// if no content, assume it's html
-		if ( !sbCaptureTask.contentType ) {
-			sbCaptureTask.contentType = "text/html";
-		}
-		// check type, load it if it's a document
-		sbCaptureTask.isDocument = ["text/plain", "html", "xml"].some(function(val) {
-			return sbCaptureTask.contentType.indexOf(val) >= 0;
-		});
 		if (sbCaptureTask.isDocument) {
 			sbInvisibleBrowser.load(this.URLSpec);
 		}
@@ -1069,7 +1080,7 @@ sbHeaderSniffer.prototype = {
 		}
 	},
 
-	onHttpError : function(aErrorMsg)
+	reportError : function(aErrorMsg)
 	{
 		//Ermitteln, wann der Wert this.failed erhoeht werden muss
 		sbCaptureTask.failed++;
