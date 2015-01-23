@@ -90,6 +90,10 @@ var sbCommonUtils = {
 		delete this._fxVer30;
 		return this._fxVer30 = (this.checkFirefoxVersion("30.0") >=0);
 	},
+	get _fxVer36() {
+		delete this._fxVer36;
+		return this._fxVer36 = (this.checkFirefoxVersion("36.0") >=0);
+	},
 
 	checkFirefoxVersion : function(ver) {
 		return this.checkVersion(this.FIREFOX_VERSION, ver);
