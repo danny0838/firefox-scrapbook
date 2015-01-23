@@ -179,7 +179,6 @@ var sbCaptureTask = {
 	get URL()      { return gURLs[this.index]; },
 
 	index       : 0,
-	contentType : "",
 	isDocument  : false,
 	isLocal     : false,
 	refreshHash  : null,
@@ -254,20 +253,13 @@ var sbCaptureTask = {
 			this.next(true);
 			return;
 		}
-		this.contentType = "";
 		this.isDocument = true;
 		this.refreshHash = {};
 		var url = aOverriddenURL || gURLs[this.index];
 		if ( gTitles ) gTitle = gTitles[this.index];
 		SB_trace(sbCommonUtils.lang("capture", "CONNECT", [url]));
-		if ( url.indexOf("file://") == 0 ) {
-			this.isLocal = true;
-			sbInvisibleBrowser.load(url);
-		} else {
-			this.isLocal = false;
-			this.sniffer = new sbHeaderSniffer(url, gRefURL);
-			this.sniffer.httpHead();
-		}
+		this.sniffer = new sbHeaderSniffer(url, gRefURL);
+		this.sniffer.checkURL();
 	},
 
 	succeed : function()
@@ -638,40 +630,65 @@ var sbpFilter = {
 
 var sbInvisibleBrowser = {
 
-	get ELEMENT() { return document.getElementById("sbCaptureBrowser"); },
+	get ELEMENT() {
+		delete this.ELEMENT;
+		return this.ELEMENT = document.getElementById("sbCaptureBrowser");
+	},
+	get STATE_START() {
+		delete this.STATE_START;
+		return this.STATE_START = Components.interfaces.nsIWebProgressListener.STATE_START;
+	},
+	get STATE_LOADED() {
+		delete this.STATE_LOADED;
+		return this.STATE_LOADED = Components.interfaces.nsIWebProgressListener.STATE_STOP | Components.interfaces.nsIWebProgressListener.STATE_IS_NETWORK | Components.interfaces.nsIWebProgressListener.STATE_IS_WINDOW;
+	},
+	
+	_eventListener : {
+		QueryInterface : function(aIID)
+		{
+			if (aIID.equals(Components.interfaces.nsIWebProgressListener) ||
+				aIID.equals(Components.interfaces.nsISupportsWeakReference) ||
+				aIID.equals(Components.interfaces.nsIXULBrowserWindow) ||
+				aIID.equals(Components.interfaces.nsISupports))
+				return this;
+			throw Components.results.NS_NOINTERFACE;
+		},
+
+		onStateChange : function(aWebProgress, aRequest, aStateFlags, aStatus)
+		{
+			if ( aStateFlags & sbInvisibleBrowser.STATE_START ) {
+				sbInvisibleBrowser.fileCount++;
+				sbInvisibleBrowser.onLoadStart.call(sbInvisibleBrowser);
+			}
+			else if ( (aStateFlags & sbInvisibleBrowser.STATE_LOADED) === sbInvisibleBrowser.STATE_LOADED && aStatus == 0 ) {
+				if (aRequest.name === sbInvisibleBrowser.ELEMENT.currentURI.spec) {
+					sbInvisibleBrowser.onLoadFinish.call(sbInvisibleBrowser);
+				}
+			}
+		},
+
+		onProgressChange : function(aWebProgress, aRequest, aCurSelfProgress, aMaxSelfProgress, aCurTotalProgress, aMaxTotalProgress)
+		{
+			if ( aCurTotalProgress != aMaxTotalProgress )
+			{
+				SB_trace(sbCommonUtils.lang("overlay", "TRANSFER_DATA", [aCurTotalProgress]));
+			}
+		},
+
+		onStatusChange   : function() {},
+		onLocationChange : function() {},
+		onSecurityChange : function() {},
+	},
 
 	fileCount : 0,
-	onload    : null,
 
 	init : function()
 	{
 		try {
-			this.ELEMENT.webProgress.removeProgressListener(this, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
+			this.ELEMENT.removeProgressListener(this._eventListener, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
 		} catch(ex) {
 		}
-		this.ELEMENT.webProgress.addProgressListener(this, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
-		this.loading = false;
-		this.onload = function(){
-			// onload may be fired many times when a document is loaded
-			// (loading of a frame may fire)
-			// we need this check to allow only the desired url and only fire once...
-			if (sbInvisibleBrowser.ELEMENT.currentURI.spec !== sbInvisibleBrowser.loading) return;
-			sbInvisibleBrowser.loading = false;
-			sbInvisibleBrowser.execCapture();
-		};
-		this.ELEMENT.addEventListener("load", sbInvisibleBrowser.onload, true);
-	},
-
-	refreshEvent : function(aEvent)
-	{
-		this.ELEMENT.removeEventListener("load", this.onload, true);
-		this.onload = aEvent;
-		this.ELEMENT.addEventListener("load", this.onload, true);
-	},
-
-	load : function(aURL)
-	{
-		this.fileCount = 0;
+		this.ELEMENT.addProgressListener(this._eventListener, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
 		this.ELEMENT.docShell.allowJavascript = gOption["script"];
 		this.ELEMENT.docShell.allowImages     = gOption["images"];
 		this.ELEMENT.docShell.allowMetaRedirects = false;
@@ -693,7 +710,11 @@ var sbInvisibleBrowser = {
 		else {
 			this.ELEMENT.docShell.useGlobalHistory = false;
 		}
-		this.loading = aURL;
+	},
+
+	load : function(aURL)
+	{
+		this.fileCount = 0;
 		this.ELEMENT.loadURI(aURL, null, null);
 		// if aURL is different from the current URL only in hash,
 		// a loading is not performed unless forced to reload
@@ -708,7 +729,7 @@ var sbInvisibleBrowser = {
 		var ret = null;
 		var preset = gReferItem ? [gReferItem.id, SB_suggestName(this.ELEMENT.currentURI.spec), gOption, gFile2URL, gDepths[sbCaptureTask.index]] : null;
 		if ( gPreset ) preset = gPreset;
-		if ( this.ELEMENT.contentDocument.body && sbCaptureTask.isDocument )
+		if ( sbCaptureTask.isDocument && this.ELEMENT.contentDocument.body )
 		{
 			var metaElems = this.ELEMENT.contentDocument.getElementsByTagName("meta");
 			for ( var i = 0; i < metaElems.length; i++ )
@@ -731,7 +752,7 @@ var sbInvisibleBrowser = {
 		}
 		else
 		{
-			ret = sbContentSaver.captureFile(sbCaptureTask.URL, gRefURL ? gRefURL : sbCaptureTask.URL, "file", gShowDetail, gResName, gResIdx, preset, gContext);
+			ret = sbContentSaver.captureFile(sbCaptureTask.sniffer.URLSpec, gRefURL ? gRefURL : sbCaptureTask.URL, "file", gShowDetail, gResName, gResIdx, preset, gContext);
 		}
 		if ( ret )
 		{
@@ -760,35 +781,15 @@ var sbInvisibleBrowser = {
 		}
 	},
 
-	QueryInterface : function(aIID)
+	onLoadStart : function()
 	{
-		if (aIID.equals(Components.interfaces.nsIWebProgressListener) ||
-			aIID.equals(Components.interfaces.nsISupportsWeakReference) ||
-			aIID.equals(Components.interfaces.nsIXULBrowserWindow) ||
-			aIID.equals(Components.interfaces.nsISupports))
-			return this;
-		throw Components.results.NS_NOINTERFACE;
+		SB_trace(sbCommonUtils.lang("capture", "LOADING", [this.fileCount, (sbCaptureTask.URL || this.ELEMENT.contentDocument.title)]));
 	},
-
-	onStateChange : function(aWebProgress, aRequest, aStateFlags, aStatus)
+	
+	onLoadFinish : function()
 	{
-		if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
-		{
-			SB_trace(sbCommonUtils.lang("capture", "LOADING", [++this.fileCount, (sbCaptureTask.URL ? sbCaptureTask.URL : this.ELEMENT.contentDocument.title)]));
-		}
+		this.execCapture();
 	},
-
-	onProgressChange : function(aWebProgress, aRequest, aCurSelfProgress, aMaxSelfProgress, aCurTotalProgress, aMaxTotalProgress)
-	{
-		if ( aCurTotalProgress != aMaxTotalProgress )
-		{
-			SB_trace(sbCommonUtils.lang("overlay", "TRANSFER_DATA", [aCurTotalProgress]));
-		}
-	},
-
-	onStatusChange   : function() {},
-	onLocationChange : function() {},
-	onSecurityChange : function() {},
 
 };
 
@@ -810,15 +811,12 @@ var sbCrossLinker = {
 	invoke : function()
 	{
 		sbDataSource.setProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gReferItem.id), "type", "site");
-		sbInvisibleBrowser.refreshEvent(function(){ sbCrossLinker.exec(); });
 		this.ELEMENT.docShell.allowImages = false;
-		sbInvisibleBrowser.onStateChange = function(aWebProgress, aRequest, aStateFlags, aStatus)
-		{
-			if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_START )
-			{
-				SB_trace(sbCommonUtils.lang("capture", "REBUILD_LINKS", 
-					[sbCrossLinker.index + 1, sbCrossLinker.nameList.length, ++sbInvisibleBrowser.fileCount, sbCrossLinker.nameList[sbCrossLinker.index] + ".html"]));
-			}
+		sbInvisibleBrowser.onLoadStart = function() {
+			SB_trace(sbCommonUtils.lang("capture", "REBUILD_LINKS", [sbCrossLinker.index + 1, sbCrossLinker.nameList.length, this.fileCount, sbCrossLinker.nameList[sbCrossLinker.index] + ".html"]));
+		};
+		sbInvisibleBrowser.onLoadFinish = function() {
+			sbCrossLinker.exec();
 		};
 		this.baseURL = sbCommonUtils.IO.newFileURI(sbCommonUtils.getContentDir(gReferItem.id)).spec;
 		for ( var url in gURL2Name )
@@ -834,10 +832,8 @@ var sbCrossLinker = {
 	{
 		if ( ++this.index < this.nameList.length )
 		{
-			sbInvisibleBrowser.fileCount = 0;
 			var url = this.baseURL + encodeURIComponent(this.nameList[this.index]) + ".html";
-			sbInvisibleBrowser.loading = url;
-			this.ELEMENT.loadURI(url, null, null);
+			sbInvisibleBrowser.load(url);
 		}
 		else
 		{
@@ -860,10 +856,6 @@ var sbCrossLinker = {
 
 	exec : function()
 	{
-		// onload may be fired many times when a document is loaded
-		// we need this check to prevent
-		if (this.ELEMENT.currentURI.spec !== sbInvisibleBrowser.loading) return;
-		sbInvisibleBrowser.loading = false;
 		if ( this.ELEMENT.currentURI.scheme != "file" ) {
 			return;
 		}
@@ -976,8 +968,36 @@ var sbCrossLinker = {
 
 function sbHeaderSniffer(aURLSpec, aRefURLSpec)
 {
+	var that = this;
 	this.URLSpec    = aURLSpec;
 	this.refURLSpec = aRefURLSpec;
+	this._eventListener = {
+		onDataAvailable : function(aRequest, aContext, aInputStream, aOffset, aCount) {},
+		onStartRequest  : function(aRequest, aContext) {},
+		onStopRequest   : function(aRequest, aContext, aStatus) {
+			// show connect success
+			var contentType = that.getHeader("Content-Type");
+			SB_trace(sbCommonUtils.lang("capture", "CONNECT_SUCCESS", [contentType]));
+
+			// get and show http status
+			var httpStatus = that.getStatus();
+			if ( httpStatus[0] >= 400 && httpStatus[0] < 600 || httpStatus[0] == 305 ) {
+				sbCaptureTask.failed++;
+				sbCaptureTask.fail(httpStatus.join(" "));
+				return;
+			}
+
+			// manage redirect if defined
+			var redirectURL = that.getHeader("Location");
+			if ( redirectURL ) {
+				if ( redirectURL.indexOf("http") != 0 ) redirectURL = that._URL.resolve(redirectURL);
+				sbCaptureTask.start(redirectURL);
+				return;
+			}
+
+			that.load(contentType);
+		},
+	};
 }
 
 
@@ -987,10 +1007,32 @@ sbHeaderSniffer.prototype = {
 	_channel : null,
 	_headers : null,
 
-	httpHead : function()
+	checkURL : function()
 	{
+		if (this.URLSpec.indexOf("file://") == 0) {
+			this.checkLocalFile();
+		}
+		else {
+			this.checkHttpHeader();
+		}
+	},
+
+	checkLocalFile : function()
+	{
+		sbCaptureTask.isLocal = true;
+		var file = sbCommonUtils.convertURLToFile(this.URLSpec);
+		if (!(file.exists() && file.isFile() && file.isReadable())) {
+			this.reportError("can't access");
+			return;
+		}
+		var mime = sbCommonUtils.getFileMime(file);
+		this.load(mime);
+	},
+
+	checkHttpHeader : function()
+	{
+		sbCaptureTask.isLocal = false;
 		this._channel = null;
-		this._headers = {};
 		try {
 			this._URL.spec = this.URLSpec;
 			this._channel = sbCommonUtils.IO.newChannelFromURI(this._URL).QueryInterface(Components.interfaces.nsIHttpChannel);
@@ -998,13 +1040,14 @@ sbHeaderSniffer.prototype = {
 			this._channel.setRequestHeader("User-Agent", navigator.userAgent, false);
 			if ( this.refURLSpec ) this._channel.setRequestHeader("Referer", this.refURLSpec, false);
 		} catch(ex) {
-			this.onHttpError("Invalid URL");
+			this.reportError("Invalid URL");
+			return;
 		}
 		try {
 			this._channel.requestMethod = "HEAD";
-			this._channel.asyncOpen(this, this);
+			this._channel.asyncOpen(this._eventListener, this);
 		} catch(ex) {
-			this.onHttpError(ex);
+			this.reportError(ex);
 		}
 	},
 
@@ -1018,58 +1061,31 @@ sbHeaderSniffer.prototype = {
 		try { return [this._channel.responseStatus, this._channel.responseStatusText]; } catch(ex) { return [false, ""]; }
 	},
 
-	visitHeader : function(aHeader, aValue)
+	load : function(contentType)
 	{
-		this._headers[aHeader] = aValue;
-	},
-
-	onDataAvailable : function(aRequest, aContext, aInputStream, aOffset, aCount) {},
-	onStartRequest  : function(aRequest, aContext) {},
-	onStopRequest   : function(aRequest, aContext, aStatus) { this.onHttpSuccess(); },
-
-	onHttpSuccess : function()
-	{
-		// show connect success
-		sbCaptureTask.contentType = this.getHeader("Content-Type");
-		SB_trace(sbCommonUtils.lang("capture", "CONNECT_SUCCESS", [sbCaptureTask.contentType]));
-
-		// get and show http status
-		var httpStatus = this.getStatus();
-		if ( httpStatus[0] >= 400 && httpStatus[0] < 600 || httpStatus[0] == 305 ) {
-			sbCaptureTask.failed++;
-			sbCaptureTask.fail(httpStatus.join(" "));
-			return;
-		}
-
-		// manage redirect if defined
-		var redirectURL = this.getHeader("Location");
-		if ( redirectURL ) {
-			if ( redirectURL.indexOf("http") != 0 ) redirectURL = this._URL.resolve(redirectURL);
-			sbCaptureTask.start(redirectURL);
-			return;
-		}
-
 		// if no content, assume it's html
-		if ( !sbCaptureTask.contentType ) {
-			sbCaptureTask.contentType = "text/html";
-		}
-		// check type, load it if it's a document
+		if ( !contentType ) contentType = "text/html";
+		// check type
 		sbCaptureTask.isDocument = ["text/plain", "html", "xml"].some(function(val) {
-			return sbCaptureTask.contentType.indexOf(val) >= 0;
+			return contentType.indexOf(val) >= 0;
 		});
 		if (sbCaptureTask.isDocument) {
+			// load the document and capture it
 			sbInvisibleBrowser.load(this.URLSpec);
 		}
 		else {
 			if ( gContext == "indepth" ) {
+				// in an indepth capture, files with defined extensions are pre-processed and is not send to the URL list
+				// those who go here are undefined files, and should be skipped
 				sbCaptureTask.next(true);
 			} else {
+				// will be captured as a file
 				sbInvisibleBrowser.execCapture();
 			}
 		}
 	},
 
-	onHttpError : function(aErrorMsg)
+	reportError : function(aErrorMsg)
 	{
 		//Ermitteln, wann der Wert this.failed erhoeht werden muss
 		sbCaptureTask.failed++;
