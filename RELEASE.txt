@@ -1,3 +1,8 @@
+Scrapbook X 1.12.0a44
+----------------
+- FIXED: Style rules for the HTML element are missing in a capture whose "Reorganize Styles" option is enabled.
+
+
 Scrapbook X 1.12.0a43
 ----------------
 - UPDATE: Resolved a compatibility issue that files cannot be downloaded during a capture process in Firefox >= 36.0.
