@@ -280,7 +280,7 @@ var sbContentSaver = {
 			var myStyleSheets = aDocument.styleSheets;
 			for ( var i=0; i<myStyleSheets.length; i++ )
 			{
-				myCSS += this.processCSSRecursively(myStyleSheets[i], aDocument, rootNode);
+				myCSS += this.processCSSRecursively(myStyleSheets[i], aDocument);
 			}
 			if ( myCSS )
 			{
@@ -736,7 +736,7 @@ var sbContentSaver = {
 		return aNode;
 	},
 
-	processCSSRecursively : function(aCSS, aDocument, rootNode, isImport)
+	processCSSRecursively : function(aCSS, aDocument, isImport)
 	{
 		// aCSS is invalid or disabled, skip it
 		if (!aCSS || aCSS.disabled) return "";
@@ -757,7 +757,7 @@ var sbContentSaver = {
 				content += "/* ERROR: Unable to access this CSS */\n\n";
 			skip = true;
 		}
-		if (!skip) content += this.processCSSRules(aCSS, aDocument, rootNode, "");
+		if (!skip) content += this.processCSSRules(aCSS, aDocument, "");
 		var media = aCSS.media.mediaText;
 		if (media) {
 			// omit "all" since it's defined in the link tag
@@ -780,13 +780,13 @@ var sbContentSaver = {
 		return content;
 	},
 
-	processCSSRules : function(aCSS, aDocument, rootNode, indent)
+	processCSSRules : function(aCSS, aDocument, indent)
 	{
 		var content = "";
 		Array.forEach(aCSS.cssRules, function(cssRule) {
 			switch (cssRule.type) {
 				case Components.interfaces.nsIDOMCSSRule.IMPORT_RULE: 
-					content += this.processCSSRecursively(cssRule.styleSheet, aDocument, rootNode, true);
+					content += this.processCSSRecursively(cssRule.styleSheet, aDocument, true);
 					break;
 				case Components.interfaces.nsIDOMCSSRule.FONT_FACE_RULE: 
 					var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "font");
@@ -794,13 +794,13 @@ var sbContentSaver = {
 					break;
 				case Components.interfaces.nsIDOMCSSRule.MEDIA_RULE: 
 					cssText = indent + "@media " + cssRule.conditionText + " {\n"
-						+ this.processCSSRules(cssRule, aDocument, rootNode, indent + "  ")
+						+ this.processCSSRules(cssRule, aDocument, indent + "  ")
 						+ indent + "}";
 					if (cssText) content += cssText + "\n";
 					break;
 				case Components.interfaces.nsIDOMCSSRule.STYLE_RULE: 
 					// if script is used, preserve all css in case it's used by a dynamic generated DOM
-					if (this.option["script"] || verifySelector(rootNode, cssRule.selectorText)) {
+					if (this.option["script"] || verifySelector(aDocument, cssRule.selectorText)) {
 						var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "image");
 						if (cssText) content += cssText + "\n";
 					}
@@ -813,11 +813,11 @@ var sbContentSaver = {
 		}, this);
 		return content;
 
-		function verifySelector(rootNode, selectorText) {
+		function verifySelector(doc, selectorText) {
 			// older Firefox versions don't support querySelector, simply return true
 			if (!sbCommonUtils._fxVer3_5) return true;
 			try {
-				if (rootNode.querySelector(selectorText)) return true;
+				if (doc.querySelector(selectorText)) return true;
 				// querySelector of selectors like a:hover or so always return null
 				// preserve pseudo-class and pseudo-elements if their non-pseudo versions exist
 				var hasPseudo = false;
@@ -848,7 +848,7 @@ var sbContentSaver = {
 				);
 				if (hasPseudo) {
 					for (var i=0, I=depseudoSelectors.length; i<I; ++i) {
-						if (depseudoSelectors[i] === "" || rootNode.querySelector(depseudoSelectors[i])) return true;
+						if (depseudoSelectors[i] === "" || doc.querySelector(depseudoSelectors[i])) return true;
 					};
 				}
 			} catch(ex) {
