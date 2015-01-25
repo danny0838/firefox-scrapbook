@@ -1,3 +1,8 @@
+Scrapbook X 1.12.0a45
+----------------
+- FIXED: Keywords are not highlighted in the fulltext search result.
+
+
 Scrapbook X 1.12.0a44
 ----------------
 - FIXED: Style rules for the HTML element are missing in a capture whose "Reorganize Styles" option is enabled.
