@@ -239,8 +239,8 @@ var sbSearchResult =
 		var colors = ["#FFFF33", "#66FFFF", "#90FF90", "#FF9999", "#FF99FF"];
 		var i = 0;
 		var keys = [];
-		if (this.queryKey['tcc']) keys = keys.concat(this.queryKey['tcc']['include']);
-		if (this.queryKey['content']) keys = keys.concat(this.queryKey['content']['include']);
+		if (this.queryKey.rule['tcc']) keys = keys.concat(this.queryKey.rule['tcc']['include']);
+		if (this.queryKey.rule['content']) keys = keys.concat(this.queryKey.rule['content']['include']);
 		keys.forEach(function(key){
 			this.highlightKeyWords(colors[i++ % colors.length], key);
 		}, this);
