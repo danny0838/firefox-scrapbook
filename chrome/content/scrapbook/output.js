@@ -100,6 +100,9 @@ var sbOutputService = {
 		var indexCSS = dir.clone();
 		indexCSS.append('index.css');
 		sbCommonUtils.saveTemplateFile("chrome://scrapbook/skin/output.css", indexCSS, true);
+		var searchJS = dir.clone();
+		searchJS.append('search.js');
+		sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/search.js", searchJS, true);
 		var searchFile = dir.parent;
 		searchFile.append('search.html');
 		sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/search.html", searchFile, true);
