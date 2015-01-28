@@ -621,7 +621,7 @@ var sbPageEditor = {
 		for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
 			var node = nodes[i];
 			if ( sbCommonUtils.getSbObjectType(node) == "todo") {
-				node.innerHTML = sbCommonUtils.escapeHTML(node.value, true);
+				node.textContent = node.value;
 			}
 		}
 		// flush title for the main page if it's notex
