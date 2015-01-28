@@ -518,6 +518,7 @@ var sbPageCombiner = {
 
 		var divWrap = this.BROWSER.contentDocument.createElement("DIV");
 		divWrap.id = "item" + sbCombineService.curID;
+        divWrap.style.position = "relative";
 		return sbCommonUtils.surroundByTags(divWrap, divHTML + "\n");
 	},
 
@@ -701,8 +702,6 @@ var sbPageCombiner = {
 					if (!aNode.style.color) aNode.style.color = aNode.getAttribute("text");
 					aNode.removeAttribute("text");
 				}
-				// always set position:relative to make position:absolute in the pages to be combined to look right
-				aNode.style.position = "relative";
 				break;
 			case "img" : case "embed" : case "source" : case "iframe" : 
 				if ( aNode.src ) aNode.setAttribute("src", aNode.src);
