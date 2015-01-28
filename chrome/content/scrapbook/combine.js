@@ -499,35 +499,33 @@ var sbPageCombiner = {
 			this.BROWSER.stop();
 			window.location.reload();
 		}
-		var divWrap = this.BROWSER.contentDocument.createElement("DIV");
-		divWrap.id = "item" + sbCombineService.curID;
-		var divHTML = this.BROWSER.contentDocument.createElement("DIV");
-		var attrs = this.BROWSER.contentDocument.getElementsByTagName("html")[0].attributes;
-		for (var i = 0; i < attrs.length; i++) {
-			divHTML.setAttribute(attrs[i].name, attrs[i].value);
-		}
-		divHTML.id = "item" + sbCombineService.curID + "html";
+
 		var divBody = this.BROWSER.contentDocument.createElement("DIV");
 		var attrs = this.BODY.attributes;
 		for (var i = 0; i < attrs.length; i++) {
 			divBody.setAttribute(attrs[i].name, attrs[i].value);
 		}
 		divBody.id = "item" + sbCombineService.curID + "body";
-		divBody.innerHTML = this.BODY.innerHTML;
-		divHTML.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
-		divHTML.appendChild(divBody);
-		divHTML.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
-		divWrap.appendChild(divHTML);
-		divWrap.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
-		return sbCommonUtils.surroundByTags(divWrap, divWrap.innerHTML);
+        divBody = sbCommonUtils.surroundByTags(divBody, this.BODY.innerHTML);
+
+		var divHTML = this.BROWSER.contentDocument.createElement("DIV");
+		var attrs = this.BROWSER.contentDocument.getElementsByTagName("html")[0].attributes;
+		for (var i = 0; i < attrs.length; i++) {
+			divHTML.setAttribute(attrs[i].name, attrs[i].value);
+		}
+		divHTML.id = "item" + sbCombineService.curID + "html";
+        divHTML = sbCommonUtils.surroundByTags(divHTML, "\n" + divBody + "\n");
+
+		var divWrap = this.BROWSER.contentDocument.createElement("DIV");
+		divWrap.id = "item" + sbCombineService.curID;
+		return sbCommonUtils.surroundByTags(divWrap, divHTML + "\n");
 	},
 
 	surroundDOMCombined : function()
 	{
 		var divWrap = this.BROWSER.contentDocument.createElement("DIV");
 		divWrap.id = "item" + sbCombineService.curID;
-		divWrap.innerHTML = this.BODY.innerHTML;
-		return sbCommonUtils.surroundByTags(divWrap, divWrap.innerHTML);
+		return sbCommonUtils.surroundByTags(divWrap, this.BODY.innerHTML);
 	},
 
 	surroundCSS : function()
