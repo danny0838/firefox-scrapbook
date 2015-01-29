@@ -71,6 +71,6 @@
 
 	<splitter />
 
-	<browser id="sbBrowser" type="content-primary" disablehistory="true" flex="1" onload="sbSearchResult.onDocumentLoad(event);" />
+	<browser type="content-primary" id="sbBrowser" disablehistory="true" flex="1" onload="sbSearchResult.onDocumentLoad(event);" />
 
 </window>

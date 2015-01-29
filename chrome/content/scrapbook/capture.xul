@@ -45,7 +45,7 @@
 		<treechildren/>
 	</tree>
 
-	<browser id="sbCaptureBrowser" collapsed="true" disablehistory="true" type="content" />
+	<browser type="content" id="sbCaptureBrowser" collapsed="true" disablehistory="true" />
 
 	<spacer style="height:5px" />
 	<hbox>

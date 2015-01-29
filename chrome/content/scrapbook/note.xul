@@ -15,7 +15,7 @@
 	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapnote.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/note.js" />
 
-	<browser id="sbNoteBrowser" type="content-primary" flex="3" collapsed="true" disablehistory="true" onload="event.stopPropagation();" />
+	<browser type="content-primary" id="sbNoteBrowser" flex="3" collapsed="true" disablehistory="true" onload="event.stopPropagation();" />
 	<splitter id="sbSplitter" class="plain" collapsed="true" />
 	<vbox id="sbNoteEditor" flex="2">
 		<hbox id="sbNoteHeader" class="sb-header" align="center">
