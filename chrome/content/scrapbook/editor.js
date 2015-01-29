@@ -2403,7 +2403,7 @@ var sbAnnotationService = {
 
 	_editFreenote : function(mainDiv)
 	{
-		var doc = mainDiv.ownerDocument;
+		var doc = mainDiv.ownerDocument, child;
 		var isRelative = mainDiv.style.position != "absolute";
 		mainDiv.setAttribute("data-sb-active", "1");
 
@@ -2421,7 +2421,6 @@ var sbAnnotationService = {
 
 		var bodyDiv = doc.createElement("DIV");
 		bodyDiv.setAttribute("data-sb-obj", "freenote-body");
-		bodyDiv.innerHTML = mainDiv.innerHTML;
 		bodyDiv.setAttribute("contentEditable", true);
 		bodyDiv.style.cursor = "auto";
 		bodyDiv.style.overflow = "auto";
@@ -2432,6 +2431,7 @@ var sbAnnotationService = {
 		bodyDiv.style.fontSize = "inherit";
 		bodyDiv.style.lineHeight = "inherit";
 		bodyDiv.style.textAlign = "inherit";
+        while ((child = mainDiv.firstChild)) bodyDiv.appendChild(child);
 
 		var footDiv = doc.createElement("DIV");
 		footDiv.setAttribute("data-sb-obj", "freenote-footer");
@@ -2466,7 +2466,6 @@ var sbAnnotationService = {
 		footDiv.appendChild(button1);
 		footDiv.appendChild(button2);
 
-		mainDiv.innerHTML = "";
 		mainDiv.appendChild(headDiv);
 		mainDiv.appendChild(bodyDiv);
 		mainDiv.appendChild(footDiv);
@@ -2478,7 +2477,11 @@ var sbAnnotationService = {
 	saveFreenote : function(mainDiv)
 	{
 		mainDiv.removeAttribute("data-sb-active");
-		mainDiv.innerHTML = mainDiv.childNodes[1].innerHTML;
+        var bodyDiv = mainDiv.childNodes[1], child;
+        while ((child = mainDiv.firstChild)) mainDiv.removeChild(child);
+        if (bodyDiv && sbCommonUtils.getSbObjectType(bodyDiv) == "freenote-body") {
+            while ((child = bodyDiv.firstChild)) mainDiv.appendChild(child);
+        }
 	},
 
 	deleteFreenote : function(mainDiv)
