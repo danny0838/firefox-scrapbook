@@ -412,7 +412,8 @@ var searchEngine = {
 	},
 
 	clearResult: function() {
-		document.getElementById("result").innerHTML = "";
+        var result = document.getElementById("result"), child;
+        while ((child = result.firstChild)) result.removeChild(child);
 	},
 
 	addMsg: function(msg) {
