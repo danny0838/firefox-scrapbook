@@ -874,7 +874,7 @@ var sbCommonUtils = {
 	 *
 	 * linemarker (span)
 	 * inline (span)
-	 * annotation (span)
+	 * annotation (span) (for downward compatibility with SBX 1.12.0a - 1.12.0a45)
 	 * link-url (a)
 	 * link-inner (a)
 	 * link-file (a)

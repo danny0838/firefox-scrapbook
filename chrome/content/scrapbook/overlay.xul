@@ -240,7 +240,6 @@
 						<menuitem label="&sb.edit.attach.innerlink;" oncommand="sbAnnotationService.attach('I');" />
 						<menuitem label="&sb.edit.attach.file;" oncommand="sbAnnotationService.attach('F');" />
 						<menuitem label="&sb.edit.inline.add;"  oncommand="sbAnnotationService.addInline();" />
-						<menuitem label="&sb.edit.annotation.add;"  oncommand="sbAnnotationService.addAnnotation();" />
 						<menuseparator />
 						<menuitem label="&sb.edit.freenote.create;"  oncommand="sbAnnotationService.createFreenote();" />
 					</menupopup>

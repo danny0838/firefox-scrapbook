@@ -2223,9 +2223,6 @@ var sbAnnotationService = {
 				case "inline" :
 					sbAnnotationService.editInline(aEvent.originalTarget);
 					break;
-				case "annotation" :
-					sbAnnotationService.editAnnotation(aEvent.originalTarget);
-					break;
 				case "sticky" :
 				case "sticky-header" :
 				case "sticky-footer" :
@@ -2572,45 +2569,6 @@ var sbAnnotationService = {
 				sbPageEditor.removeSbObj(els[i]);
 			}
 		}
-	},
-
-
-	addAnnotation : function()
-	{
-		// check and get selection
-		var win = sbCommonUtils.getFocusedWindow();
-		var sel = sbPageEditor.getSelection(win);
-		if ( !sel ) return;
-		// check and get the annotation
-		var ret = {};
-		if ( !sbCommonUtils.PROMPT.prompt(window, "[ScrapBook]", sbCommonUtils.lang("overlay", "EDIT_ANNOTATION"), ret, null, {}) ) return;
-		if ( !ret.value ) return;
-		// apply
-		sbPageEditor.allowUndo(win.document);
-		var range = sel.getRangeAt(0);
-		var endC = range.endContainer;
-		var eOffset	= range.endOffset;
-		if (eOffset < endC.length - 1) endC.splitText( eOffset );
-		var annote = endC.ownerDocument.createElement("span");
-		annote.style = "font-size: small; border-bottom: 1px solid #FF3333; background: linen; cursor: help;";
-		annote.setAttribute("data-sb-obj", "annotation");
-		annote.innerHTML = ret.value;
-		endC.parentNode.insertBefore(annote, endC);
-		endC.parentNode.insertBefore(endC, annote);
-	},
-
-	editAnnotation : function(aElement)
-	{
-		var doc = aElement.ownerDocument;
-		// check and get the annotation
-		var ret = { value : aElement.textContent };
-		if ( !sbCommonUtils.PROMPT.prompt(window, "[ScrapBook]", sbCommonUtils.lang("overlay", "EDIT_ANNOTATION"), ret, null, {}) ) return;
-		// apply
-		sbPageEditor.allowUndo(doc);
-		if ( ret.value )
-			aElement.innerHTML = ret.value;
-		else
-			sbPageEditor.removeSbObj(aElement);
 	},
 
 
