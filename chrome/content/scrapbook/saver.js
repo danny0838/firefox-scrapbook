@@ -184,12 +184,12 @@ var sbContentSaver = {
 
 		// HTML document: save the current DOM
 
-        // frames could have ridiculous malformed location.href, such as "javascript:foo.bar"
-        // in this case catch the error and this.refURLObj should remain original (the parent frame)
-        try {
-            this.refURLObj = sbCommonUtils.convertURLToObject(aDocument.location.href);
-        } catch(ex) {
-        }
+		// frames could have ridiculous malformed location.href, such as "javascript:foo.bar"
+		// in this case catch the error and this.refURLObj should remain original (the parent frame)
+		try {
+			this.refURLObj = sbCommonUtils.convertURLToObject(aDocument.location.href);
+		} catch(ex) {
+		}
 
 		if ( !this.option["internalize"] ) {
 			var arr = this.getUniqueFileName(aFileKey + ".html", this.refURLObj.spec, aDocument);

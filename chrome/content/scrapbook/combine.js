@@ -121,9 +121,9 @@ var sbCombineService = {
 		sbPageCombiner.cssText = "";
 		sbPageCombiner.isTargetCombined = false;
 		sbInvisibleBrowser.init();
-        sbInvisibleBrowser.onLoadFinish = function() {
-            sbPageCombiner.exec();
-        };
+		sbInvisibleBrowser.onLoadFinish = function() {
+			sbPageCombiner.exec();
+		};
 		this.next();
 	},
 
@@ -506,7 +506,7 @@ var sbPageCombiner = {
 			divBody.setAttribute(attrs[i].name, attrs[i].value);
 		}
 		divBody.id = "item" + sbCombineService.curID + "body";
-        divBody = sbCommonUtils.surroundByTags(divBody, this.BODY.innerHTML);
+		divBody = sbCommonUtils.surroundByTags(divBody, this.BODY.innerHTML);
 
 		var divHTML = this.BROWSER.contentDocument.createElement("DIV");
 		var attrs = this.BROWSER.contentDocument.getElementsByTagName("html")[0].attributes;
@@ -514,11 +514,11 @@ var sbPageCombiner = {
 			divHTML.setAttribute(attrs[i].name, attrs[i].value);
 		}
 		divHTML.id = "item" + sbCombineService.curID + "html";
-        divHTML = sbCommonUtils.surroundByTags(divHTML, "\n" + divBody + "\n");
+		divHTML = sbCommonUtils.surroundByTags(divHTML, "\n" + divBody + "\n");
 
 		var divWrap = this.BROWSER.contentDocument.createElement("DIV");
 		divWrap.id = "item" + sbCombineService.curID;
-        divWrap.style.position = "relative";
+		divWrap.style.position = "relative";
 		return sbCommonUtils.surroundByTags(divWrap, divHTML + "\n");
 	},
 

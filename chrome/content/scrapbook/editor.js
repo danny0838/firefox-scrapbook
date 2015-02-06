@@ -1612,15 +1612,15 @@ var sbDOMEraser = {
 
 	cmd_wider : function (aNode)
 	{
-        if (aNode && aNode.parentNode) {
-            var newNode = this._findValidElement(aNode.parentNode);
-            if (!newNode) return false;
+		if (aNode && aNode.parentNode) {
+			var newNode = this._findValidElement(aNode.parentNode);
+			if (!newNode) return false;
 			if (!this.widerStack) this.widerStack = [];
 			this.widerStack.push(aNode);
 			this._selectNode(newNode);
-            return true;
-        }
-        return false;
+			return true;
+		}
+		return false;
 	},
 
 	cmd_narrower : function (aNode)
@@ -1749,7 +1749,7 @@ var sbDOMEraser = {
 		}
 
 		// create new help
-        var helpElem = doc.createElement("DIV");
+		var helpElem = doc.createElement("DIV");
 		helpElem.id = id;
 		helpElem.isDOMEraser = true; // mark as ours
 
@@ -1975,7 +1975,7 @@ var sbDOMEraser = {
 		var x = this.lastX + 10; if (x < 0) x = 0;
 		var y = dims.scrollY + this.lastY + 10; if (y < 0) y = 0;
 
-        var keyboxElem = doc.createElement("DIV");
+		var keyboxElem = doc.createElement("DIV");
 		keyboxElem.isDOMEraser = true; // mark as ours
 		keyboxElem.style.backgroundColor = "#dfd";
 		keyboxElem.style.border = "2px solid black";
@@ -1987,7 +1987,7 @@ var sbDOMEraser = {
 		keyboxElem.style.padding = "2px 5px 2px 5px";
 		keyboxElem.style.zIndex = "2147483647";
 		keyboxElem.innerHTML = content;
-        doc.body.appendChild(keyboxElem);
+		doc.body.appendChild(keyboxElem);
 
 		// adjust the label as necessary to make sure it is within screen
 		if ((x + keyboxElem.offsetWidth) >= dims.scrollX + dims.width) {
@@ -2431,7 +2431,7 @@ var sbAnnotationService = {
 		bodyDiv.style.fontSize = "inherit";
 		bodyDiv.style.lineHeight = "inherit";
 		bodyDiv.style.textAlign = "inherit";
-        while ((child = mainDiv.firstChild)) bodyDiv.appendChild(child);
+		while ((child = mainDiv.firstChild)) bodyDiv.appendChild(child);
 
 		var footDiv = doc.createElement("DIV");
 		footDiv.setAttribute("data-sb-obj", "freenote-footer");
@@ -2477,11 +2477,11 @@ var sbAnnotationService = {
 	saveFreenote : function(mainDiv)
 	{
 		mainDiv.removeAttribute("data-sb-active");
-        var bodyDiv = mainDiv.childNodes[1], child;
-        while ((child = mainDiv.firstChild)) mainDiv.removeChild(child);
-        if (bodyDiv && sbCommonUtils.getSbObjectType(bodyDiv) == "freenote-body") {
-            while ((child = bodyDiv.firstChild)) mainDiv.appendChild(child);
-        }
+		var bodyDiv = mainDiv.childNodes[1], child;
+		while ((child = mainDiv.firstChild)) mainDiv.removeChild(child);
+		if (bodyDiv && sbCommonUtils.getSbObjectType(bodyDiv) == "freenote-body") {
+			while ((child = bodyDiv.firstChild)) mainDiv.appendChild(child);
+		}
 	},
 
 	deleteFreenote : function(mainDiv)
