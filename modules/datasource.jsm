@@ -228,10 +228,7 @@ var sbDataSource = {
 		var newDir = sbCommonUtils.getContentDir(newID);
 		oldDir.copyTo(newDir.parent, newID);
 		// create new item
-		var newItem = sbCommonUtils.newItem(newID);
-		for (var prop in newItem) {
-			newItem[prop] = this.getProperty(curRes, prop);
-		}
+		var newItem = this.getItem(curRes);
 		newItem.id = newID;
 		sbCommonUtils.writeIndexDat(newItem);
 		// add to resource
