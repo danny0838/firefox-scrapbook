@@ -10,42 +10,41 @@ var sbCaptureOptions = {
 	{
 		if ( !window.arguments || !("sbContentSaver" in window.opener) ) window.close();
 		this.param = window.arguments[0];
-		this.toggleCustomUI();
-		this.CUSTOM_UI.nextSibling.value = sbCommonUtils.getPref("detail.custom", "pdf, doc");
+		// customization for different context
 		if ( this.param.context == "bookmark" )
 		{
 			document.title = "ScrapBook - " + window.opener.document.getElementById("ScrapBookContextMenuB").label.replace("...","");
+			var elts = document.getElementsByAttribute("group", "capture-options");
+			for ( var i = 0; i < elts.length; i++ ) elts[i].collapsed = true;
 		}
 		else
 		{
 			document.documentElement.getButton("accept").label = sbCommonUtils.lang("scrapbook", "CAPTURE_OK_BUTTON");
 			document.documentElement.getButton("accept").accesskey = "C";
+			if ( this.param.context == "capture-again" || this.param.context == "capture-again-deep" )
+			{
+				document.getElementById("sbDetailFolderRow").collapsed = true;
+				document.getElementById("sbDetailWarnAboutRenew").hidden = false;
+				document.getElementById("sbDetailTabComment").hidden = true;
+				if ( this.param.context == "capture-again-deep" )
+				{
+					document.getElementById("sbDetailInDepthBox").collapsed = true;
+				}
+				return;
+			}
 		}
+		// title
 		this.fillTitleList();
-		if ( this.param.item.source.indexOf("://mail.google.com/") > 0 )
-		{
-			document.getElementById("sbDetailOptionScript").disabled = true;
-		}
+		// folder
+		setTimeout(function(){ sbFolderSelector.init(); }, 100);
+		// script
 		var offset = this.WARNING_UI.boxObject.height || 32;
 		this.WARNING_UI.setAttribute("offset", offset);
 		this.WARNING_UI.hidden = true;
-		if ( this.param.context == "bookmark" )
-		{
-			var elts = document.getElementsByAttribute("group", "capture-options");
-			for ( var i = 0; i < elts.length; i++ ) elts[i].collapsed = true;
-		}
-		else if ( this.param.context == "capture-again" || this.param.context == "capture-again-deep" )
-		{
-			document.getElementById("sbDetailFolderRow").collapsed = true;
-			document.getElementById("sbDetailWarnAboutRenew").hidden = false;
-			document.getElementById("sbDetailTabComment").hidden = true;
-			if ( this.param.context == "capture-again-deep" )
-			{
-				document.getElementById("sbDetailInDepthBox").collapsed = true;
-			}
-			return;
-		}
-		setTimeout(function(){ sbFolderSelector.init(); }, 100);
+		// custom extension
+		this.toggleCustomUI();
+		this.CUSTOM_UI.nextSibling.value = sbCommonUtils.getPref("detail.custom", "pdf, doc");
+		// comment
 		document.getElementById("sbDetailComment").value = this.param.item.comment.replace(/ __BR__ /g, "\n");
 	},
 
