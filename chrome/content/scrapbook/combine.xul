@@ -63,7 +63,7 @@
 	            description="&sb.combine.preview.d;"
 	            onpageshow="sbCombineService.initPreview();">
 		<textbox id="sbCaptureTextbox" readonly="true" />
-		<browser id="sbCaptureBrowser" collapsed="true" flex="30" style="border: 1px solid ThreeDShadow;" disablehistory="true" onload="event.stopPropagation();" type="content" />
+		<browser type="content" id="sbCaptureBrowser" collapsed="true" flex="30" style="border: 1px solid ThreeDShadow;" disablehistory="true" onload="event.stopPropagation();" />
 		<spacer flex="1" />
 		<checkbox id="sbCombineOptionRemove" label="&sb.combine.option.remove;" style="color: red;" />
 	</wizardpage>

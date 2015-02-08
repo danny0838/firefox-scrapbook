@@ -431,10 +431,10 @@ var sbController = {
 
 	launch: function(aDir)
 	{
-        try {
-            aDir = aDir.QueryInterface(Components.interfaces.nsILocalFile);
-            aDir.launch();
-        } catch(ex) {}
+		try {
+			aDir = aDir.QueryInterface(Components.interfaces.nsILocalFile);
+			aDir.launch();
+		} catch(ex) {}
 	},
 
 	sendInternal: function(aResList, aParResList)

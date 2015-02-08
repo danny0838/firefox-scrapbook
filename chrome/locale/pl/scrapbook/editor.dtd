@@ -10,7 +10,6 @@
 <!ENTITY sb.edit.sticky.create "Utwórz przyklejoną notatkę"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Dodaj komentarz w linii zaznaczenia">
-<!ENTITY sb.edit.annotation.add "Add HTML Annotation after Selection">
 <!ENTITY sb.edit.attach.file "Dołącz plik do zaznaczenia">
 <!ENTITY sb.edit.attach.link "Dołącz odnośnik do zaznaczenia">
 <!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">

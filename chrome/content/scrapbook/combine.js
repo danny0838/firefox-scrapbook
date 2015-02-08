@@ -121,6 +121,9 @@ var sbCombineService = {
 		sbPageCombiner.cssText = "";
 		sbPageCombiner.isTargetCombined = false;
 		sbInvisibleBrowser.init();
+		sbInvisibleBrowser.onLoadFinish = function() {
+			sbPageCombiner.exec();
+		};
 		this.next();
 	},
 
@@ -156,9 +159,6 @@ var sbCombineService = {
 		var cssFile = sbCommonUtils.getScrapBookDir();
 		cssFile.append("combine.css");
 		sbCommonUtils.writeFile(cssFile, sbPageCombiner.cssText, "UTF-8");
-		sbInvisibleBrowser.onLoadStart = function() {
-			SB_trace(sbCommonUtils.lang("capture", "LOADING", [sbCombineService.prefix + this.fileCount, sbCombineService.postfix]));
-		};
 		sbInvisibleBrowser.onLoadFinish = function() {
 			sbCombineService.showBrowser();
 		};
@@ -499,35 +499,34 @@ var sbPageCombiner = {
 			this.BROWSER.stop();
 			window.location.reload();
 		}
-		var divWrap = this.BROWSER.contentDocument.createElement("DIV");
-		divWrap.id = "item" + sbCombineService.curID;
-		var divHTML = this.BROWSER.contentDocument.createElement("DIV");
-		var attrs = this.BROWSER.contentDocument.getElementsByTagName("html")[0].attributes;
-		for (var i = 0; i < attrs.length; i++) {
-			divHTML.setAttribute(attrs[i].name, attrs[i].value);
-		}
-		divHTML.id = "item" + sbCombineService.curID + "html";
+
 		var divBody = this.BROWSER.contentDocument.createElement("DIV");
 		var attrs = this.BODY.attributes;
 		for (var i = 0; i < attrs.length; i++) {
 			divBody.setAttribute(attrs[i].name, attrs[i].value);
 		}
 		divBody.id = "item" + sbCombineService.curID + "body";
-		divBody.innerHTML = this.BODY.innerHTML;
-		divHTML.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
-		divHTML.appendChild(divBody);
-		divHTML.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
-		divWrap.appendChild(divHTML);
-		divWrap.appendChild(this.BROWSER.contentDocument.createTextNode("\n"));
-		return sbCommonUtils.surroundByTags(divWrap, divWrap.innerHTML);
+		divBody = sbCommonUtils.surroundByTags(divBody, this.BODY.innerHTML);
+
+		var divHTML = this.BROWSER.contentDocument.createElement("DIV");
+		var attrs = this.BROWSER.contentDocument.getElementsByTagName("html")[0].attributes;
+		for (var i = 0; i < attrs.length; i++) {
+			divHTML.setAttribute(attrs[i].name, attrs[i].value);
+		}
+		divHTML.id = "item" + sbCombineService.curID + "html";
+		divHTML = sbCommonUtils.surroundByTags(divHTML, "\n" + divBody + "\n");
+
+		var divWrap = this.BROWSER.contentDocument.createElement("DIV");
+		divWrap.id = "item" + sbCombineService.curID;
+		divWrap.style.position = "relative";
+		return sbCommonUtils.surroundByTags(divWrap, divHTML + "\n");
 	},
 
 	surroundDOMCombined : function()
 	{
 		var divWrap = this.BROWSER.contentDocument.createElement("DIV");
 		divWrap.id = "item" + sbCombineService.curID;
-		divWrap.innerHTML = this.BODY.innerHTML;
-		return sbCommonUtils.surroundByTags(divWrap, divWrap.innerHTML);
+		return sbCommonUtils.surroundByTags(divWrap, this.BODY.innerHTML);
 	},
 
 	surroundCSS : function()
@@ -703,8 +702,6 @@ var sbPageCombiner = {
 					if (!aNode.style.color) aNode.style.color = aNode.getAttribute("text");
 					aNode.removeAttribute("text");
 				}
-				// always set position:relative to make position:absolute in the pages to be combined to look right
-				aNode.style.position = "relative";
 				break;
 			case "img" : case "embed" : case "source" : case "iframe" : 
 				if ( aNode.src ) aNode.setAttribute("src", aNode.src);
@@ -767,9 +764,6 @@ sbCaptureObserverCallback.onCaptureComplete = function(aItem)
 
 sbInvisibleBrowser.onLoadStart = function() {
 	SB_trace(sbCommonUtils.lang("capture", "LOADING", [sbCombineService.prefix + this.fileCount, sbCombineService.postfix]));
-};
-sbInvisibleBrowser.onLoadFinish = function() {
-		sbPageCombiner.exec();
 };
 
 

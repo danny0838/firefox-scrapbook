@@ -10,7 +10,6 @@
 <!ENTITY sb.edit.sticky.create "添增&sb.edit.sticky;"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "建立自由註解">
 <!ENTITY sb.edit.inline.add "為選取區加上行內註解">
-<!ENTITY sb.edit.annotation.add "在選取區後加上 HTML 註解">
 <!ENTITY sb.edit.attach.file "為選取區附加檔案">
 <!ENTITY sb.edit.attach.link "為選取區附加連結">
 <!ENTITY sb.edit.attach.innerlink "為選取區附加內部連結">

@@ -621,7 +621,7 @@ var sbPageEditor = {
 		for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
 			var node = nodes[i];
 			if ( sbCommonUtils.getSbObjectType(node) == "todo") {
-				node.innerHTML = sbCommonUtils.escapeHTML(node.value, true);
+				node.textContent = node.value;
 			}
 		}
 		// flush title for the main page if it's notex
@@ -1612,15 +1612,15 @@ var sbDOMEraser = {
 
 	cmd_wider : function (aNode)
 	{
-        if (aNode && aNode.parentNode) {
-            var newNode = this._findValidElement(aNode.parentNode);
-            if (!newNode) return false;
+		if (aNode && aNode.parentNode) {
+			var newNode = this._findValidElement(aNode.parentNode);
+			if (!newNode) return false;
 			if (!this.widerStack) this.widerStack = [];
 			this.widerStack.push(aNode);
 			this._selectNode(newNode);
-            return true;
-        }
-        return false;
+			return true;
+		}
+		return false;
 	},
 
 	cmd_narrower : function (aNode)
@@ -1749,7 +1749,7 @@ var sbDOMEraser = {
 		}
 
 		// create new help
-        var helpElem = doc.createElement("DIV");
+		var helpElem = doc.createElement("DIV");
 		helpElem.id = id;
 		helpElem.isDOMEraser = true; // mark as ours
 
@@ -1975,7 +1975,7 @@ var sbDOMEraser = {
 		var x = this.lastX + 10; if (x < 0) x = 0;
 		var y = dims.scrollY + this.lastY + 10; if (y < 0) y = 0;
 
-        var keyboxElem = doc.createElement("DIV");
+		var keyboxElem = doc.createElement("DIV");
 		keyboxElem.isDOMEraser = true; // mark as ours
 		keyboxElem.style.backgroundColor = "#dfd";
 		keyboxElem.style.border = "2px solid black";
@@ -1987,7 +1987,7 @@ var sbDOMEraser = {
 		keyboxElem.style.padding = "2px 5px 2px 5px";
 		keyboxElem.style.zIndex = "2147483647";
 		keyboxElem.innerHTML = content;
-        doc.body.appendChild(keyboxElem);
+		doc.body.appendChild(keyboxElem);
 
 		// adjust the label as necessary to make sure it is within screen
 		if ((x + keyboxElem.offsetWidth) >= dims.scrollX + dims.width) {
@@ -2223,9 +2223,6 @@ var sbAnnotationService = {
 				case "inline" :
 					sbAnnotationService.editInline(aEvent.originalTarget);
 					break;
-				case "annotation" :
-					sbAnnotationService.editAnnotation(aEvent.originalTarget);
-					break;
 				case "sticky" :
 				case "sticky-header" :
 				case "sticky-footer" :
@@ -2403,7 +2400,7 @@ var sbAnnotationService = {
 
 	_editFreenote : function(mainDiv)
 	{
-		var doc = mainDiv.ownerDocument;
+		var doc = mainDiv.ownerDocument, child;
 		var isRelative = mainDiv.style.position != "absolute";
 		mainDiv.setAttribute("data-sb-active", "1");
 
@@ -2421,7 +2418,6 @@ var sbAnnotationService = {
 
 		var bodyDiv = doc.createElement("DIV");
 		bodyDiv.setAttribute("data-sb-obj", "freenote-body");
-		bodyDiv.innerHTML = mainDiv.innerHTML;
 		bodyDiv.setAttribute("contentEditable", true);
 		bodyDiv.style.cursor = "auto";
 		bodyDiv.style.overflow = "auto";
@@ -2432,6 +2428,7 @@ var sbAnnotationService = {
 		bodyDiv.style.fontSize = "inherit";
 		bodyDiv.style.lineHeight = "inherit";
 		bodyDiv.style.textAlign = "inherit";
+		while ((child = mainDiv.firstChild)) bodyDiv.appendChild(child);
 
 		var footDiv = doc.createElement("DIV");
 		footDiv.setAttribute("data-sb-obj", "freenote-footer");
@@ -2466,7 +2463,6 @@ var sbAnnotationService = {
 		footDiv.appendChild(button1);
 		footDiv.appendChild(button2);
 
-		mainDiv.innerHTML = "";
 		mainDiv.appendChild(headDiv);
 		mainDiv.appendChild(bodyDiv);
 		mainDiv.appendChild(footDiv);
@@ -2478,7 +2474,11 @@ var sbAnnotationService = {
 	saveFreenote : function(mainDiv)
 	{
 		mainDiv.removeAttribute("data-sb-active");
-		mainDiv.innerHTML = mainDiv.childNodes[1].innerHTML;
+		var bodyDiv = mainDiv.childNodes[1], child;
+		while ((child = mainDiv.firstChild)) mainDiv.removeChild(child);
+		if (bodyDiv && sbCommonUtils.getSbObjectType(bodyDiv) == "freenote-body") {
+			while ((child = bodyDiv.firstChild)) mainDiv.appendChild(child);
+		}
 	},
 
 	deleteFreenote : function(mainDiv)
@@ -2569,45 +2569,6 @@ var sbAnnotationService = {
 				sbPageEditor.removeSbObj(els[i]);
 			}
 		}
-	},
-
-
-	addAnnotation : function()
-	{
-		// check and get selection
-		var win = sbCommonUtils.getFocusedWindow();
-		var sel = sbPageEditor.getSelection(win);
-		if ( !sel ) return;
-		// check and get the annotation
-		var ret = {};
-		if ( !sbCommonUtils.PROMPT.prompt(window, "[ScrapBook]", sbCommonUtils.lang("overlay", "EDIT_ANNOTATION"), ret, null, {}) ) return;
-		if ( !ret.value ) return;
-		// apply
-		sbPageEditor.allowUndo(win.document);
-		var range = sel.getRangeAt(0);
-		var endC = range.endContainer;
-		var eOffset	= range.endOffset;
-		if (eOffset < endC.length - 1) endC.splitText( eOffset );
-		var annote = endC.ownerDocument.createElement("span");
-		annote.style = "font-size: small; border-bottom: 1px solid #FF3333; background: linen; cursor: help;";
-		annote.setAttribute("data-sb-obj", "annotation");
-		annote.innerHTML = ret.value;
-		endC.parentNode.insertBefore(annote, endC);
-		endC.parentNode.insertBefore(endC, annote);
-	},
-
-	editAnnotation : function(aElement)
-	{
-		var doc = aElement.ownerDocument;
-		// check and get the annotation
-		var ret = { value : aElement.textContent };
-		if ( !sbCommonUtils.PROMPT.prompt(window, "[ScrapBook]", sbCommonUtils.lang("overlay", "EDIT_ANNOTATION"), ret, null, {}) ) return;
-		// apply
-		sbPageEditor.allowUndo(doc);
-		if ( ret.value )
-			aElement.innerHTML = ret.value;
-		else
-			sbPageEditor.removeSbObj(aElement);
 	},
 
 
