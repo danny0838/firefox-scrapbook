@@ -38,9 +38,8 @@ var sbCaptureOptions = {
 		// folder
 		setTimeout(function(){ sbFolderSelector.init(); }, 100);
 		// script
-		var offset = this.WARNING_UI.boxObject.height || 32;
-		this.WARNING_UI.setAttribute("offset", offset);
-		this.WARNING_UI.hidden = true;
+		this.WARNING_UI.setAttribute("offset", this.WARNING_UI.boxObject.height || 32);
+		setTimeout(function(){ sbCaptureOptions.updateWarningUI(document.getElementById('sbDetailOptionScript').checked); }, 100);
 		// custom extension
 		this.toggleCustomUI();
 		this.CUSTOM_UI.nextSibling.value = sbCommonUtils.getPref("detail.custom", "pdf, doc");
@@ -53,11 +52,15 @@ var sbCaptureOptions = {
 		this.CUSTOM_UI.nextSibling.disabled = !this.CUSTOM_UI.checked;
 	},
 
-	toggleWarningUI : function()
+	updateWarningUI : function(checked)
 	{
-		var offset = parseInt(this.WARNING_UI.getAttribute("offset"), 10);
-		this.WARNING_UI.hidden = !this.WARNING_UI.hidden;
-		this.WARNING_UI.hidden ? window.outerHeight -= offset : window.outerHeight += offset;
+		var oldHidden = this.WARNING_UI.hidden;
+		var newHidden = !checked;
+		this.WARNING_UI.hidden = newHidden;
+		if (oldHidden != newHidden) {
+			var offset = parseInt(this.WARNING_UI.getAttribute("offset"), 10);
+			newHidden ? window.outerHeight -= offset : window.outerHeight += offset;
+		}
 	},
 
 	fillTitleList : function()

@@ -58,16 +58,16 @@
 					<caption label="&sb.detail.option;" />
 					<hbox align="center">
 					<caption label="&sb.detail.option.capture;:" />
-						<checkbox id="sbDetailOptionImages" label="&sb.detail.option.images;" checked="true" />
-						<checkbox id="sbDetailOptionMedia" label="&sb.detail.option.media;" checked="true" />
-						<checkbox id="sbDetailOptionFonts" label="&sb.detail.option.fonts;" checked="true" />
-						<checkbox id="sbDetailOptionStyles" label="&sb.detail.option.styles;" checked="true" />
-						<checkbox id="sbDetailOptionScript" label="&sb.detail.option.scripts;" oncommand="sbCaptureOptions.toggleWarningUI();" />
+						<checkbox id="sbDetailOptionImages" label="&sb.detail.option.images;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
+						<checkbox id="sbDetailOptionMedia" label="&sb.detail.option.media;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
+						<checkbox id="sbDetailOptionFonts" label="&sb.detail.option.fonts;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
+						<checkbox id="sbDetailOptionStyles" label="&sb.detail.option.styles;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
+						<checkbox id="sbDetailOptionScript" label="&sb.detail.option.scripts;" persist="checked" oncommand="sbCaptureOptions.updateWarningUI(this.checked);" />
 					</hbox>
-					<checkbox id="sbDetailOptionKeepLink" label="&sb.detail.option.keepLink;" />
-					<checkbox id="sbDetailOptionRewriteStyles" label="&sb.detail.option.rewriteStyles;" checked="true" />
-					<checkbox id="sbDetailOptionForceUtf8" label="&sb.detail.option.forceUtf8;" checked="true" />
-					<checkbox id="sbDetailOptionAsHtml" label="&sb.detail.option.asHtml;" />
+					<checkbox id="sbDetailOptionKeepLink" label="&sb.detail.option.keepLink;" persist="checked" />
+					<checkbox id="sbDetailOptionRewriteStyles" label="&sb.detail.option.rewriteStyles;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
+					<checkbox id="sbDetailOptionForceUtf8" label="&sb.detail.option.forceUtf8;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
+					<checkbox id="sbDetailOptionAsHtml" label="&sb.detail.option.asHtml;" persist="checked" />
 				</groupbox>
 				<groupbox group="capture-options" style="margin-top:8px;">
 					<caption label="&sb.detail.linked.file;" />
