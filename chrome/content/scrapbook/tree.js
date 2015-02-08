@@ -73,7 +73,7 @@ var sbTreeHandler = {
 
 	send : function()
 	{
-		var idxList = this.getSelection(false, 2);
+		var idxList = this.getSelection(false, 0);
 		if ( idxList.length < 1 ) return;
 		var i = 0;
 		var resList = [];
