@@ -219,8 +219,7 @@ var sbController = {
 
 	onPopupShowing : function(aEvent)
 	{
-		if (aEvent.originalTarget.localName != "menupopup")
-			return;
+		if (aEvent.originalTarget.localName != "menupopup") return;
 		var res = sbTreeHandler.resource;
 		if (!res) {
 			aEvent.preventDefault();
@@ -231,30 +230,41 @@ var sbController = {
 		var isFolder = false;
 		var isBookmark = false;
 		var isSeparator = false;
-		switch (sbDataSource.getProperty(res, "type")) {
-			case "note"     : isNote      = true; break;
-			case "notex"    : isNotex     = true; break;
-			case "folder"   : isFolder    = true; break;
-			case "bookmark" : isBookmark  = true; break;
-			case "separator": isSeparator = true; break;
+		var isMultiple = ( sbTreeHandler.TREE.view.selection.count > 1 );
+		if (!isMultiple) {
+			switch (sbDataSource.getProperty(res, "type")) {
+				case "note"     : isNote      = true; break;
+				case "notex"    : isNotex     = true; break;
+				case "folder"   : isFolder    = true; break;
+				case "bookmark" : isBookmark  = true; break;
+				case "separator": isSeparator = true; break;
+			}
 		}
 		var getElement = function(aID) {
 			return document.getElementById(aID);
 		};
-		getElement("sbPopupOpen").hidden                       = isFolder  || isSeparator;
-		getElement("sbPopupOpenTab").hidden                    = !isNote   || isSeparator;
-		getElement("sbPopupOpenNewTab").hidden                 = isFolder  || isNote || isSeparator;
-		getElement("sbPopupOpenSource").hidden                 = isFolder  || isNote || isSeparator;
-		getElement("sbPopupCombinedView").hidden               = !isFolder || isSeparator;
-		getElement("sbPopupOpenAllItems").hidden               = !isFolder || isSeparator;
-		getElement("sbPopupOpenAllItems").nextSibling.hidden   = !isFolder || isSeparator;
-		getElement("sbPopupSort").hidden                       = !isFolder || isSeparator;
-		getElement("sbPopupManage").hidden                     = !isFolder || isSeparator;
-		getElement("sbPopupNewFolder").previousSibling.hidden  = isSeparator;
-		getElement("sbPopupTools").hidden                      = isFolder || isSeparator;
-		getElement("sbPopupRenew").disabled                    = isNote || isNotex;
-		getElement("sbPopupInternalize").hidden                = !isNotex;
-		getElement("sbPopupShowFiles").disabled                = isBookmark;
+		getElement("sbPopupOpen").hidden                       = isMultiple || isFolder || isSeparator;
+		getElement("sbPopupOpenNewTab").hidden                 = isMultiple || isFolder || isSeparator;
+		getElement("sbPopupOpenSource").hidden                 = isMultiple || isFolder || isSeparator || isNote;
+		getElement("sbPopupCombinedView").hidden               = isMultiple || !isFolder;
+		getElement("sbPopupOpenAllItems").hidden               = isMultiple || !isFolder;
+		getElement("sbPopupOpenAllItems").nextSibling.hidden   = isMultiple || !isFolder;
+		getElement("sbPopupManage").hidden                     = isMultiple || !isFolder;
+		getElement("sbPopupSort").hidden                       = isMultiple || !isFolder;
+		getElement("sbPopupNewFolder").hidden                  = isMultiple;
+		getElement("sbPopupNewSeparator").hidden               = isMultiple;
+		getElement("sbPopupNewNote").hidden                    = isMultiple;
+		getElement("sbPopupNewNotex").hidden                   = isMultiple;
+		getElement("sbPopupNewNotex").nextSibling.hidden       = isMultiple;
+		getElement("sbPopupProperty").previousSibling.hidden   = isMultiple;
+		getElement("sbPopupProperty").hidden                   = isMultiple;
+		// tools submenu
+		getElement("sbPopupShowFiles").disabled                = isMultiple || isFolder || isSeparator || isBookmark;
+		getElement("sbPopupCopy").disabled                     = isMultiple || isFolder;
+		getElement("sbPopupRenew").disabled                    = isMultiple || isFolder || isSeparator || isNote || isNotex;
+		getElement("sbPopupInternalize").hidden                = isMultiple || !isNotex;
+		getElement("sbPopupExport").previousSibling.hidden     = isMultiple || isFolder;
+		getElement("sbPopupExport").hidden                     = isMultiple || isFolder;
 	},
 
 	open: function(aRes, aInTab)
