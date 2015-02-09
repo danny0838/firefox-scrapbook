@@ -484,7 +484,7 @@ var sbController = {
 	removeInternal: function(aResList, aParResList, aBypassConfirm)
 	{
 		var rmIDs = [];
-		for (var i = 0; i < aResList.length; i++) {
+		for (var i = 0, I = aResList.length; i < I; i++) {
 			if (aParResList[i].Value == "urn:scrapbook:search") {
 				aParResList[i] = sbDataSource.findParentResource(aResList[i]);
 				if (!aParResList[i])

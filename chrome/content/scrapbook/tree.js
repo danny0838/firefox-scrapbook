@@ -73,19 +73,16 @@ var sbTreeHandler = {
 
 	send : function()
 	{
-		var idxList = this.getSelection(false, 0);
-		if ( idxList.length < 1 ) return;
-		var i = 0;
-		var resList = [];
-		var parList = [];
-		for ( i = 0; i < idxList.length; i++ )
+		if ( this.TREE.view.selection.count == 0 ) return;
+		var idxList = this.getSelection(false, 0), resList = [], parList = [];
+		for ( var i = 0, I = idxList.length; i < I; i++ )
 		{
 			var curRes = this.TREE.builderView.getResourceAtIndex(idxList[i]);
 			var parRes = this.getParentResource(idxList[i]);
 			if ( parRes.Value == "urn:scrapbook:search" )
 			{
 				parRes = sbDataSource.findParentResource(curRes);
-				if ( sbCommonUtils.RDFCU.indexOf(sbDataSource.data, parRes, curRes) == -1 ) { sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SEND")); return; }
+				if (!parRes) { sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SEND")); return; }
 			}
 			resList.push(curRes);
 			parList.push(parRes);
@@ -96,19 +93,16 @@ var sbTreeHandler = {
 
 	copy : function()
 	{
-		var idxList = this.getSelection(false, 2);
-		if ( idxList.length < 1 ) return;
-		var i = 0;
-		var resList = [];
-		var parList = [];
-		for ( i = 0; i < idxList.length; i++ )
+		if ( this.TREE.view.selection.count == 0 ) return;
+		var idxList = this.getSelection(false, 0), resList = [], parList = [];
+		for ( var i = 0, I = idxList.length; i < I; i++ )
 		{
 			var curRes = this.TREE.builderView.getResourceAtIndex(idxList[i]);
 			var parRes = this.getParentResource(idxList[i]);
 			if ( parRes.Value == "urn:scrapbook:search" )
 			{
 				parRes = sbDataSource.findParentResource(curRes);
-				if ( sbCommonUtils.RDFCU.indexOf(sbDataSource.data, parRes, curRes) == -1 ) { sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SEND")); return; }
+				if (!parRes) { sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SEND")); return; }
 			}
 			resList.push(curRes);
 			parList.push(parRes);
@@ -120,24 +114,11 @@ var sbTreeHandler = {
 	remove : function()
 	{
 		if ( this.TREE.view.selection.count == 0 ) return;
-		var resList = [];
-		var parList = [];
-		if ( this.TREE.view.selection.count > 1 )
+		var idxList = this.getSelection(false, 0), resList = [], parList = [];
+		for ( var i = 0, I = idxList.length; i < I; i++ )
 		{
-			var idxList = this.getSelection(false, null);
-			for ( var i = 0; i < idxList.length; i++ )
-			{
-				resList.push( this.TREE.builderView.getResourceAtIndex(idxList[i]) );
-				parList.push( this.getParentResource(idxList[i]) );
-			}
-		}
-		else
-		{
-			var curIdx = this.TREE.currentIndex;
-			var curRes = this.TREE.builderView.getResourceAtIndex(curIdx);
-			var parRes = this.getParentResource(curIdx);
-			resList.push(curRes);
-			parList.push(parRes);
+			resList.push( this.TREE.builderView.getResourceAtIndex(idxList[i]) );
+			parList.push( this.getParentResource(idxList[i]) );
 		}
 		if ( !sbController.confirmRemovingFor(resList) ) return;
 		var rmIDs = sbController.removeInternal(resList, parList, false);
