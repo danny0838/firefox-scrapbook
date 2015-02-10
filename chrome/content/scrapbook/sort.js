@@ -6,6 +6,7 @@ var sbSortService = {
 
 	key : "",
 	order : 1,
+	grouping : false,
 	index : -1,
 	contResList : [],
 	waitTime : 0,
@@ -39,6 +40,7 @@ var sbSortService = {
 	exec : function()
 	{
 		this.WIZARD.getButton("cancel").hidden = true;
+		this.grouping = document.getElementById("sbSortGrouping").checked;
 		if (document.getElementById("sbSortRecursive").checked)
 			this.contResList = sbDataSource.flattenResources(this.contResList[0], 1, true);
 		switch ( this.RADIO_GROUP.selectedIndex )
@@ -72,17 +74,7 @@ var sbSortService = {
 		rdfCont.Init(sbDataSource.data, aContRes);
 		var resEnum = rdfCont.GetElements();
 		var resListF = [], resListI = [], resListN = [], resListX = [];
-		if ( !this.key )
-		{
-			while ( resEnum.hasMoreElements() )
-			{
-				var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-				resListF.push(res);
-			}
-			resListF.reverse();
-		}
-		else
-		{
+		if (this.grouping) {
 			while ( resEnum.hasMoreElements() )
 			{
 				var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
@@ -101,11 +93,33 @@ var sbSortService = {
 						break;
 				}
 			}
-			resListF.sort(this.compare);
-			resListI.sort(this.compare);
-			resListN.sort(this.compare);
-			resListX.sort(this.compare);
-			resListF = resListF.concat(resListI).concat(resListN).concat(resListX);
+			if ( !this.key ){
+				resListF.reverse();
+				resListI.reverse();
+				resListN.reverse();
+				resListX.reverse();
+				resListF = resListF.concat(resListI).concat(resListN).concat(resListX);
+			}
+			else {
+				resListF.sort(this.compare);
+				resListI.sort(this.compare);
+				resListN.sort(this.compare);
+				resListX.sort(this.compare);
+				resListF = resListF.concat(resListI).concat(resListN).concat(resListX);
+			}
+		}
+		else {
+			while ( resEnum.hasMoreElements() )
+			{
+				var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+				resListF.push(res);
+			}
+			if ( !this.key ){
+				resListF.reverse();
+			}
+			else {
+				resListF.sort(this.compare);
+			}
 		}
 		for ( var i = 0; i < resListF.length; i++ )
 		{

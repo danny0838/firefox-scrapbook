@@ -4,5 +4,6 @@
 <!ENTITY sb.sort.title.desc "Ordenar por Título (Z &gt; A)">
 <!ENTITY sb.sort.date.asc "Por Data">
 <!ENTITY sb.sort.date.desc "Por Data Descendente">
+<!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.recursive "Ordenar Sub-Pastas Recursivamente">
 <!ENTITY sb.sort.warning "Aviso: você não pode desfazer esta operação.">
