@@ -5,7 +5,7 @@ var sbSortService = {
 	get RADIO_GROUP() { return document.getElementById("sbSortRadioGroup"); },
 
 	key : "",
-	ascending : false,
+	order : 1,
 	index : -1,
 	contResList : [],
 	waitTime : 0,
@@ -44,10 +44,10 @@ var sbSortService = {
 		switch ( this.RADIO_GROUP.selectedIndex )
 		{
 			case 0 : break;
-			case 1 : this.key = "title"; this.ascending = true;  break;
-			case 2 : this.key = "title"; this.ascending = false; break;
-			case 3 : this.key = "id";    this.ascending = true;  break;
-			case 4 : this.key = "id";    this.ascending = false; break;
+			case 1 : this.key = "title"; this.order = 1;  break;
+			case 2 : this.key = "title"; this.order = -1; break;
+			case 3 : this.key = "id";    this.order = 1;  break;
+			case 4 : this.key = "id";    this.order = -1; break;
 		}
 		this.next();
 	},
@@ -86,14 +86,21 @@ var sbSortService = {
 			while ( resEnum.hasMoreElements() )
 			{
 				var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-				if ( sbDataSource.isContainer(res) )
-					resListF.push(res);
-				else
-					( sbDataSource.getProperty(res, "type") == "note" ? resListN : resListI ).push(res);
+				switch(sbDataSource.getProperty(res, "type")) {
+					case "folder":
+						resListF.push(res);
+						break;
+					case "note":
+						resListN.push(res);
+						break;
+					default:
+						resListI.push(res);
+						break;
+				}
 			}
-			resListF.sort(this.compare); if ( !this.ascending ) resListF.reverse();
-			resListI.sort(this.compare); if ( !this.ascending ) resListI.reverse();
-			resListN.sort(this.compare); if ( !this.ascending ) resListN.reverse();
+			resListF.sort(this.compare);
+			resListI.sort(this.compare);
+			resListN.sort(this.compare);
 			resListF = resListF.concat(resListI).concat(resListN);
 		}
 		for ( var i = 0; i < resListF.length; i++ )
@@ -114,8 +121,8 @@ var sbSortService = {
 	{
 		var a = sbDataSource.getProperty(resA, sbSortService.key).toUpperCase();
 		var b = sbDataSource.getProperty(resB, sbSortService.key).toUpperCase();
-		if ( a > b ) return 1;
-		if ( a < b ) return -1;
+		if ( a > b ) return sbSortService.order;
+		if ( a < b ) return -sbSortService.order;
 		return 0;
 	},
 
