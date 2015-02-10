@@ -71,7 +71,7 @@ var sbSortService = {
 		var rdfCont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
 		rdfCont.Init(sbDataSource.data, aContRes);
 		var resEnum = rdfCont.GetElements();
-		var resListF = [], resListI = [], resListN = [];
+		var resListF = [], resListI = [], resListN = [], resListX = [];
 		if ( !this.key )
 		{
 			while ( resEnum.hasMoreElements() )
@@ -93,6 +93,9 @@ var sbSortService = {
 					case "note":
 						resListN.push(res);
 						break;
+					case "notex":
+						resListX.push(res);
+						break;
 					default:
 						resListI.push(res);
 						break;
@@ -101,7 +104,8 @@ var sbSortService = {
 			resListF.sort(this.compare);
 			resListI.sort(this.compare);
 			resListN.sort(this.compare);
-			resListF = resListF.concat(resListI).concat(resListN);
+			resListX.sort(this.compare);
+			resListF = resListF.concat(resListI).concat(resListN).concat(resListX);
 		}
 		for ( var i = 0; i < resListF.length; i++ )
 		{
