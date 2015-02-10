@@ -41,12 +41,12 @@ var sbCaptureOptions = {
 		this.WARNING_UI.setAttribute("offset", this.WARNING_UI.boxObject.height || 32);
 		setTimeout(function(){ sbCaptureOptions.updateWarningUI(document.getElementById('sbDetailOptionScript').checked); }, 100);
 		// custom extension
-		this.toggleCustomUI();
+		this.updateCustomUI();
 		// comment
 		document.getElementById("sbDetailComment").value = this.param.item.comment.replace(/ __BR__ /g, "\n");
 	},
 
-	toggleCustomUI : function()
+	updateCustomUI : function()
 	{
 		this.CUSTOM_UI.nextSibling.disabled = !this.CUSTOM_UI.checked;
 	},

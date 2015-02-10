@@ -76,7 +76,7 @@
 					<checkbox id="sbDetailMovie"   persist="checked" label="&sb.detail.linked.movie; (avi, avc, flv, mkv, mov, mpg, mp4, wmv)" />
 					<checkbox id="sbDetailArchive" persist="checked" label="&sb.detail.linked.archive; (zip, lzh, tar, gz, bz, 7z, rar, jar, xpi)" />
 					<hbox align="center">
-						<checkbox id="sbDetailCustom" persist="checked" label="&sb.detail.linked.custom;" oncommand="sbCaptureOptions.toggleCustomUI();" />
+						<checkbox id="sbDetailCustom" persist="checked" label="&sb.detail.linked.custom;" oncommand="sbCaptureOptions.updateCustomUI();" />
 						<textbox id="sbDetailCustomExt" flex="1" value="pdf, doc" persist="value" onchange="this.setAttribute('value', this.value.replace(/[^0-9a-zA-Z,\|]/g, '').replace(/[,\|]/g, ', ')); document.persist(this, 'value');" />
 					</hbox>
 				</groupbox>
