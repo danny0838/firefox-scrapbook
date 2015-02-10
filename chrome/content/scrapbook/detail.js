@@ -42,7 +42,6 @@ var sbCaptureOptions = {
 		setTimeout(function(){ sbCaptureOptions.updateWarningUI(document.getElementById('sbDetailOptionScript').checked); }, 100);
 		// custom extension
 		this.toggleCustomUI();
-		this.CUSTOM_UI.nextSibling.value = sbCommonUtils.getPref("detail.custom", "pdf, doc");
 		// comment
 		document.getElementById("sbDetailComment").value = this.param.item.comment.replace(/ __BR__ /g, "\n");
 	},
@@ -103,8 +102,7 @@ var sbCaptureOptions = {
 		this.param.poption["charset"]   = document.getElementById("sbDetailCharset").value;
 		if ( this.CUSTOM_UI.checked )
 		{
-			this.param.option["custom"] = this.CUSTOM_UI.nextSibling.value.replace(/[^0-9a-zA-Z,\|]/g, "").replace(/[,\|]/g, ", ");
-			sbCommonUtils.setPref("detail.custom", this.param.option["custom"]);
+			this.param.option["custom"] = this.CUSTOM_UI.nextSibling.getAttribute("value");
 		}
 		if ( this.param.context == "capture-again" )
 		{

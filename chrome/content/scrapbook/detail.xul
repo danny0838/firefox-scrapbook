@@ -77,7 +77,7 @@
 					<checkbox id="sbDetailArchive" persist="checked" label="&sb.detail.linked.archive; (zip, lzh, tar, gz, bz, 7z, rar, jar, xpi)" />
 					<hbox align="center">
 						<checkbox id="sbDetailCustom" persist="checked" label="&sb.detail.linked.custom;" oncommand="sbCaptureOptions.toggleCustomUI();" />
-						<textbox flex="1" />
+						<textbox id="sbDetailCustomExt" flex="1" value="pdf, doc" persist="value" onchange="this.setAttribute('value', this.value.replace(/[^0-9a-zA-Z,\|]/g, '').replace(/[,\|]/g, ', ')); document.persist(this, 'value');" />
 					</hbox>
 				</groupbox>
 				<groupbox id="sbDetailInDepthBox" group="capture-options" style="margin-top:8px;">
