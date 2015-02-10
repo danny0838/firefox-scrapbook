@@ -35,15 +35,14 @@
 	<separator />
 	<hbox>
 		<checkbox id="sbFileInsert" label="&sb.edit.html.file.format;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
-		<menulist id="sbFileFormat" editable="true" flex="1">
+		<menulist id="sbFileFormat" editable="true" flex="1" value='&lt;a href="{FILE_E}" title="{FILE}">{THIS}&lt;/a>' persist="value" onchange="this.setAttribute('value', this.value); document.persist(this, 'value');">
 			<menupopup>
 				<menuitem label='&lt;a href="{FILE_E}">{THIS}&lt;/a>' />
-				<menuitem label='&lt;a href="{FILE_E}" title="{FILE}">{THIS}&lt;/a>' selected="true" />
+				<menuitem label='&lt;a href="{FILE_E}" title="{FILE}">{THIS}&lt;/a>' />
 				<menuitem label='&lt;img src="{FILE_E}" />' />
 				<menuitem label='&lt;img src="{FILE_E}" alt="{THIS}" title="{THIS}" />' />
 				<menuitem label='&lt;img width="500" src="{FILE_E}" alt="{THIS}" title="{THIS}" />' />
 			</menupopup>
 		</menulist>
-		<textbox id="sbFileFormatValue" hidden="true" value='&lt;a href="{FILE_E}" title="{FILE}">{THIS}&lt;/a>' persist="value" />
 	</hbox>
 </dialog>

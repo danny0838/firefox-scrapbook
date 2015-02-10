@@ -34,12 +34,11 @@
 	<separator />
 	<hbox>
 		<label value="&sb.edit.html.link.format;" />
-		<menulist id="sbLinkFormat" editable="true" flex="1">
+		<menulist id="sbLinkFormat" editable="true" flex="1" value='&lt;a href="{URL}" title="{TITLE}">{THIS}&lt;/a>' persist="value" onchange="this.setAttribute('value', this.value); document.persist(this, 'value');">
 			<menupopup>
 				<menuitem label='&lt;a href="{URL}">{THIS}&lt;/a>' />
-				<menuitem label='&lt;a href="{URL}" title="{TITLE}">{THIS}&lt;/a>' selected="true" />
+				<menuitem label='&lt;a href="{URL}" title="{TITLE}">{THIS}&lt;/a>' />
 			</menupopup>
 		</menulist>
-		<textbox id="sbLinkFormatValue" hidden="true" value='&lt;a href="{URL}" title="{TITLE}">{THIS}&lt;/a>' persist="value" />
 	</hbox>
 </dialog>
