@@ -47,6 +47,39 @@ var sbCaptureOptions = {
 		}
 		setTimeout(function(){ sbFolderSelector.init(); }, 100);
 		document.getElementById("sbDetailComment").value = this.param.item.comment.replace(/ __BR__ /g, "\n");
+
+		this.persistInit();
+	},
+
+	persistInit : function()
+	{
+		var key = 'sb.detail.option.inited';
+
+		// when need reset p[tion default, set sb.detail.option.inited = false;
+		if (sbCommonUtils.getPref(key, false))
+		{
+			return;
+		}
+
+		sbCommonUtils.setPref(key, true)
+
+		var checkbox_ids = [
+			'sbDetailOptionStyles',
+			'sbDetailOptionImages',
+
+			'sbDetailArchive',
+			'sbDetailImage',
+		];
+
+		var i;
+		for (i in checkbox_ids)
+		{
+			var target = document.getElementById(checkbox_ids[i]);
+
+			target.checked = true;
+
+			document.persist(target, 'checked');
+		}
 	},
 
 	toggleCustomUI : function()
