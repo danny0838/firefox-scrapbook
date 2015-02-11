@@ -266,15 +266,13 @@ var sbContentSaver = {
 		rootNode.appendChild(aDocument.createTextNode("\n"));
 		for ( var n = 0; n < tmpNodeList.length-1; n++ )
 		{
-			tmpNodeList[n].appendChild(aDocument.createTextNode("\n"));
 			tmpNodeList[n].appendChild(tmpNodeList[n+1]);
-			tmpNodeList[n].appendChild(aDocument.createTextNode("\n"));
 		}
 		if ( this.selection )
 		{
-			this.addCommentTag(tmpNodeList[tmpNodeList.length-1], "DOCUMENT_FRAGMENT");
+			tmpNodeList[tmpNodeList.length-1].appendChild(aDocument.createComment("DOCUMENT_FRAGMENT"));
 			tmpNodeList[tmpNodeList.length-1].appendChild(myDocFrag);
-			this.addCommentTag(tmpNodeList[tmpNodeList.length-1], "/DOCUMENT_FRAGMENT");
+			tmpNodeList[tmpNodeList.length-1].appendChild(aDocument.createComment("/DOCUMENT_FRAGMENT"));
 		}
 		// process HTML DOM
 		this.processDOMRecursively(rootNode);
@@ -392,13 +390,6 @@ var sbContentSaver = {
 		if ( "sbBrowserOverlay" in window ) sbBrowserOverlay.updateFolderPref(aResName);
 	},
 
-
-	addCommentTag : function(targetNode, aComment)
-	{
-		targetNode.appendChild(targetNode.ownerDocument.createTextNode("\n"));
-		targetNode.appendChild(targetNode.ownerDocument.createComment(aComment));
-		targetNode.appendChild(targetNode.ownerDocument.createTextNode("\n"));
-	},
 
 	removeNodeFromParent : function(aNode)
 	{
