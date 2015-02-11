@@ -62,7 +62,7 @@
 						<checkbox id="sbDetailOptionMedia" persist="checked" label="&sb.detail.option.media;" _checked="true" />
 						<checkbox id="sbDetailOptionFonts" persist="checked" label="&sb.detail.option.fonts;" _checked="true" />
 						<checkbox id="sbDetailOptionStyles" persist="checked" label="&sb.detail.option.styles;" _checked="true" />
-						<checkbox id="sbDetailOptionScript" persist="checked" label="&sb.detail.option.scripts;" oncommand="sbCaptureOptions.toggleWarningUI();" />
+						<checkbox id="sbDetailOptionScript" _persist="checked" label="&sb.detail.option.scripts;" oncommand="sbCaptureOptions.toggleWarningUI();" />
 					</hbox>
 					<checkbox id="sbDetailOptionKeepLink" label="&sb.detail.option.keepLink;" />
 					<checkbox id="sbDetailOptionRewriteStyles" label="&sb.detail.option.rewriteStyles;" checked="true" />
