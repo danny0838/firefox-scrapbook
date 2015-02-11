@@ -21,6 +21,7 @@
 	<script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
 	<script type="application/x-javascript" src="chrome://global/content/nsTransferable.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/lib/jquery-v2.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/saver.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/capture.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/folderPicker.js" />
