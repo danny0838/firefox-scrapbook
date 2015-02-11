@@ -8,6 +8,7 @@
 <!ENTITY sb.detail.option.images "圖片">
 <!ENTITY sb.detail.option.media "多媒體">
 <!ENTITY sb.detail.option.fonts "字體">
+<!ENTITY sb.detail.option.frames "頁框">
 <!ENTITY sb.detail.option.styles "樣式">
 <!ENTITY sb.detail.option.scripts "動態腳本">
 <!ENTITY sb.detail.option.keepLink "不擷取者以連往原址的方式調用">

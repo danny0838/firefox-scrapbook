@@ -25,7 +25,7 @@ var sbContentSaver = {
 		this.name = "index";
 		this.favicon = null;
 		this.file2URL = { "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
-		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "fonts" : true, "styles" : true, "script" : false, "asHtml" : false, "forceUtf8" : true, "rewriteStyles" : true, "keepLink" : false, "internalize" : false };
+		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "fonts" : true, "frames" : true, "styles" : true, "script" : false, "asHtml" : false, "forceUtf8" : true, "rewriteStyles" : true, "keepLink" : false, "internalize" : false };
 		this.plusoption = { "timeout" : "0", "charset" : "UTF-8" }
 		this.linkURLs = [];
 		this.frames = [];
@@ -173,7 +173,7 @@ var sbContentSaver = {
 	{
 		var captureType = "";
 		if ( aDocument.contentType != "text/html" ) {
-			if ( !(aDocument.documentElement.nodeName.toUpperCase() == "HTML" && aDocument.documentElement.lastChild.nodeName.toUpperCase() == "BODY" && this.option["asHtml"]) ) {
+			if ( !(aDocument.documentElement.nodeName.toUpperCase() == "HTML" && this.option["asHtml"]) ) {
 				captureType = "file";
 			}
 		}
@@ -232,44 +232,37 @@ var sbContentSaver = {
 				// in this case we just process as if there's no selection
 				this.selection = null;
 			}
-			else if ( curNode.nodeName == "#text" ) curNode = curNode.parentNode;
-			var tmpNodeList = [];
-			do {
-				tmpNodeList.unshift(curNode.cloneNode(false));
+			else {
+				if ( curNode.nodeName == "#text" ) curNode = curNode.parentNode;
+				var tmpNode = curNode.cloneNode(false), tmpNode2;
+				tmpNode.appendChild(aDocument.createComment("DOCUMENT_FRAGMENT"));
+				tmpNode.appendChild(myDocFrag);
+				tmpNode.appendChild(aDocument.createComment("/DOCUMENT_FRAGMENT"));
 				curNode = curNode.parentNode;
+				while ( curNode.nodeName.toUpperCase() != "HTML" ) {
+					tmpNode2 = curNode.cloneNode(false);
+					tmpNode2.appendChild(tmpNode);
+					tmpNode = tmpNode2;
+					curNode = curNode.parentNode;
+				}
+				var rootNode = htmlNode.cloneNode(false);
+				var headNode = this.getHeadNode(htmlNode);
+				headNode = headNode ? headNode.cloneNode(true) : aDocument.createElement("head");
+				rootNode.appendChild(headNode);
+				rootNode.appendChild(aDocument.createTextNode("\n"));
+				rootNode.appendChild(tmpNode);
 			}
-			while ( curNode.nodeName.toUpperCase() != "HTML" );
 		}
-		else
+		if ( !this.selection )
 		{
-			try {
-				var tmpNodeList = [htmlNode.getElementsByTagName("body")[0].cloneNode(true)];
-			} catch(ex) {
-				var tmpNodeList = [aDocument.createElement("body")];
+			var rootNode = htmlNode.cloneNode(true);
+			var headNode = this.getHeadNode(rootNode);
+			if (!headNode) {
+				headNode = aDocument.createElement("head");
+				rootNode.insertBefore(headNode, rootNode.firstChild);
+				rootNode.insertBefore(aDocument.createTextNode("\n"), headNode.nextSibling);
 			}
 		}
-		var rootNode = htmlNode.cloneNode(false);
-		try {
-			var headNode = htmlNode.getElementsByTagName("head")[0].cloneNode(true);
-			rootNode.appendChild(headNode);
-			rootNode.appendChild(aDocument.createTextNode("\n"));
-		} catch(ex) {
-		}
-		rootNode.appendChild(tmpNodeList[0]);
-		rootNode.appendChild(aDocument.createTextNode("\n"));
-		for ( var n = 0; n < tmpNodeList.length-1; n++ )
-		{
-			tmpNodeList[n].appendChild(aDocument.createTextNode("\n"));
-			tmpNodeList[n].appendChild(tmpNodeList[n+1]);
-			tmpNodeList[n].appendChild(aDocument.createTextNode("\n"));
-		}
-		if ( this.selection )
-		{
-			this.addCommentTag(tmpNodeList[tmpNodeList.length-1], "DOCUMENT_FRAGMENT");
-			tmpNodeList[tmpNodeList.length-1].appendChild(myDocFrag);
-			this.addCommentTag(tmpNodeList[tmpNodeList.length-1], "/DOCUMENT_FRAGMENT");
-		}
-
 		// process HTML DOM
 		this.processDOMRecursively(rootNode);
 
@@ -289,9 +282,9 @@ var sbContentSaver = {
 				newLinkNode.setAttribute("href", myCSSFileName);
 				newLinkNode.setAttribute("type", "text/css");
 				newLinkNode.setAttribute("rel", "stylesheet");
-				rootNode.firstChild.appendChild(aDocument.createTextNode("\n"));
-				rootNode.firstChild.appendChild(newLinkNode);
-				rootNode.firstChild.appendChild(aDocument.createTextNode("\n"));
+				headNode.appendChild(aDocument.createTextNode("\n"));
+				headNode.appendChild(newLinkNode);
+				headNode.appendChild(aDocument.createTextNode("\n"));
 			}
 		}
 
@@ -319,13 +312,14 @@ var sbContentSaver = {
 			if (!hasmeta) {
 				var metaNode = aDocument.createElement("meta");
 				metaNode.setAttribute("charset", this.item.chars);
-				rootNode.firstChild.insertBefore(metaNode, rootNode.firstChild.firstChild);
-				rootNode.firstChild.insertBefore(aDocument.createTextNode("\n"), rootNode.firstChild.firstChild);
+				headNode.insertBefore(aDocument.createTextNode("\n"), headNode.firstChild);
+				headNode.insertBefore(metaNode, headNode.firstChild);
+				headNode.insertBefore(aDocument.createTextNode("\n"), headNode.firstChild);
 			}
 		}
 
 		// generate the HTML and CSS file and save
-		var myHTML = this.doctypeToString(aDocument.doctype) + sbCommonUtils.surroundByTags(rootNode, rootNode.innerHTML);
+		var myHTML = this.doctypeToString(aDocument.doctype) + sbCommonUtils.surroundByTags(rootNode, rootNode.innerHTML + "\n");
 		if ( this.option["internalize"] ) {
 			var myHTMLFile = this.option["internalize"];
 		}
@@ -387,13 +381,6 @@ var sbContentSaver = {
 	},
 
 
-	addCommentTag : function(targetNode, aComment)
-	{
-		targetNode.appendChild(targetNode.ownerDocument.createTextNode("\n"));
-		targetNode.appendChild(targetNode.ownerDocument.createComment(aComment));
-		targetNode.appendChild(targetNode.ownerDocument.createTextNode("\n"));
-	},
-
 	removeNodeFromParent : function(aNode)
 	{
 		var newNode = aNode.ownerDocument.createTextNode("");
@@ -410,6 +397,25 @@ var sbContentSaver = {
 		if ( aDoctype.systemId ) ret += ' "'        + aDoctype.systemId + '"';
 		ret += ">\n";
 		return ret;
+	},
+
+	getHeadNode : function(aNode)
+	{
+		var headNode = aNode.getElementsByTagName("head")[0];
+		if (!headNode) {
+			var elems = aNode.childNodes;
+			for (var i=0, I=elems.length; i<I; i++) {
+				if (elems[i].nodeType == 1) {
+					if (elems[i].nodeName.toUpperCase() == "HEAD") {
+						headNode = elems[i];
+					}
+					else {
+						break;
+					}
+				}
+			}
+		}
+		return headNode;
 	},
 
 
@@ -696,15 +702,21 @@ var sbContentSaver = {
 			case "frame"  : 
 			case "iframe" : 
 				if ( this.option["internalize"] ) break;
-				this.isMainFrame = false;
-				if ( this.selection ) this.selection = null;
-				var tmpRefURL = this.refURLObj;
-				// retrieve contentDocument from the corresponding real frame
-				var idx = aNode.getAttribute("data-sb-frame-id");
-				var newFileName = this.saveDocumentInternal(this.frames[idx].contentDocument, this.name + "_" + (parseInt(idx)+1));
-				aNode.setAttribute("src", sbCommonUtils.escapeFileName(newFileName));
+				if ( this.option["frames"] ) {
+					this.isMainFrame = false;
+					if ( this.selection ) this.selection = null;
+					var tmpRefURL = this.refURLObj;
+					// retrieve contentDocument from the corresponding real frame
+					var idx = aNode.getAttribute("data-sb-frame-id");
+					var newFileName = this.saveDocumentInternal(this.frames[idx].contentDocument, this.name + "_" + (parseInt(idx)+1));
+					aNode.setAttribute("src", sbCommonUtils.escapeFileName(newFileName));
+					this.refURLObj = tmpRefURL;
+				} else if ( this.option["keepLink"] ) {
+					aNode.setAttribute("src", aNode.src);
+				} else {
+					aNode.setAttribute("src", "about:blank#" + aNode.src);
+				}
 				aNode.removeAttribute("data-sb-frame-id");
-				this.refURLObj = tmpRefURL;
 				break;
 			// Deprecated, like <pre> but inner contents are escaped to be plain text
 			// Replace with <pre> since it breaks ScrapBook highlights
