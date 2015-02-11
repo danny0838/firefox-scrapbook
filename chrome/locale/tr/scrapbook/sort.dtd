@@ -4,5 +4,6 @@
 <!ENTITY sb.sort.title.desc "Başlığa Göre Sırala (Z &gt; A)">
 <!ENTITY sb.sort.date.asc "Kronolojik">
 <!ENTITY sb.sort.date.desc "Kronolojiyi Ters Çevir">
+<!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.recursive "Alt-Klasörleri Tekrar Tekrar Sırala">
 <!ENTITY sb.sort.warning "Dikkat: Bu eylemi geri alamazsınız.">

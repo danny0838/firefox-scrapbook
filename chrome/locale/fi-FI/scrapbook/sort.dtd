@@ -4,5 +4,6 @@
 <!ENTITY sb.sort.title.desc "Järjestä otsikon mukaan (Ö-A)">
 <!ENTITY sb.sort.date.asc "Aikajärjestys">
 <!ENTITY sb.sort.date.desc "Käänteinen aikajärjestys">
+<!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.recursive "Järjestä alikansioiden sisältö">
 <!ENTITY sb.sort.warning "HUOM.: Tätä toimintoa ei voi kumota.">

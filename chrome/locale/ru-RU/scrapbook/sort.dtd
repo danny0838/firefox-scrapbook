@@ -4,5 +4,6 @@
 <!ENTITY sb.sort.title.desc "По заголовкам (Я &gt; А)">
 <!ENTITY sb.sort.date.asc "В хронологическом порядке">
 <!ENTITY sb.sort.date.desc "В обратном хронологическом порядке">
+<!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.recursive "Сортировать подкаталоги рекурсивно">
 <!ENTITY sb.sort.warning "Внимание: Выполнение данной операции отменить невозможно.">

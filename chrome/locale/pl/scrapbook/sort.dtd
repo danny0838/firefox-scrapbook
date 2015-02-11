@@ -4,5 +4,6 @@
 <!ENTITY sb.sort.title.desc "Sortuj wg tytułów (od Z do A)">
 <!ENTITY sb.sort.date.asc "Rosnąco">
 <!ENTITY sb.sort.date.desc "Malejąco">
+<!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.recursive "Sortuj subfoldery z całą zawartością">
 <!ENTITY sb.sort.warning "Uwaga: Tej operacji nie można odwrócić.">
