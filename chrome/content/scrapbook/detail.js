@@ -55,7 +55,7 @@ var sbCaptureOptions = {
 	{
 		var key = 'sb.detail.option.inited';
 
-		// when need reset p[tion default, set sb.detail.option.inited = false;
+		// when need reset option default, set sb.detail.option.inited = false;
 		if (sbCommonUtils.getPref(key, false))
 		{
 			return;
