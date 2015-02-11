@@ -8,6 +8,7 @@
 <!ENTITY sb.detail.option.images "Imagini">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
+<!ENTITY sb.detail.option.frames "Frames">
 <!ENTITY sb.detail.option.styles "Stiluri">
 <!ENTITY sb.detail.option.scripts "Scripts">
 <!ENTITY sb.detail.option.keepLink "Link to source for those not to capture">

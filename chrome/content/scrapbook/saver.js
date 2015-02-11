@@ -25,7 +25,7 @@ var sbContentSaver = {
 		this.name = "index";
 		this.favicon = null;
 		this.file2URL = { "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
-		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "fonts" : true, "styles" : true, "script" : false, "asHtml" : false, "forceUtf8" : true, "rewriteStyles" : true, "keepLink" : false, "internalize" : false };
+		this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "fonts" : true, "frames" : true, "styles" : true, "script" : false, "asHtml" : false, "forceUtf8" : true, "rewriteStyles" : true, "keepLink" : false, "internalize" : false };
 		this.plusoption = { "timeout" : "0", "charset" : "UTF-8" }
 		this.linkURLs = [];
 		this.frames = [];
@@ -702,15 +702,21 @@ var sbContentSaver = {
 			case "frame"  : 
 			case "iframe" : 
 				if ( this.option["internalize"] ) break;
-				this.isMainFrame = false;
-				if ( this.selection ) this.selection = null;
-				var tmpRefURL = this.refURLObj;
-				// retrieve contentDocument from the corresponding real frame
-				var idx = aNode.getAttribute("data-sb-frame-id");
-				var newFileName = this.saveDocumentInternal(this.frames[idx].contentDocument, this.name + "_" + (parseInt(idx)+1));
-				aNode.setAttribute("src", sbCommonUtils.escapeFileName(newFileName));
+				if ( this.option["frames"] ) {
+					this.isMainFrame = false;
+					if ( this.selection ) this.selection = null;
+					var tmpRefURL = this.refURLObj;
+					// retrieve contentDocument from the corresponding real frame
+					var idx = aNode.getAttribute("data-sb-frame-id");
+					var newFileName = this.saveDocumentInternal(this.frames[idx].contentDocument, this.name + "_" + (parseInt(idx)+1));
+					aNode.setAttribute("src", sbCommonUtils.escapeFileName(newFileName));
+					this.refURLObj = tmpRefURL;
+				} else if ( this.option["keepLink"] ) {
+					aNode.setAttribute("src", aNode.src);
+				} else {
+					aNode.setAttribute("src", "about:blank#" + aNode.src);
+				}
 				aNode.removeAttribute("data-sb-frame-id");
-				this.refURLObj = tmpRefURL;
 				break;
 			// Deprecated, like <pre> but inner contents are escaped to be plain text
 			// Replace with <pre> since it breaks ScrapBook highlights
