@@ -58,11 +58,11 @@
 					<caption label="&sb.detail.option;" />
 					<hbox align="center">
 					<caption label="&sb.detail.option.capture;:" />
-						<checkbox id="sbDetailOptionImages" label="&sb.detail.option.images;" checked="true" />
-						<checkbox id="sbDetailOptionMedia" label="&sb.detail.option.media;" checked="true" />
-						<checkbox id="sbDetailOptionFonts" label="&sb.detail.option.fonts;" checked="true" />
-						<checkbox id="sbDetailOptionStyles" label="&sb.detail.option.styles;" checked="true" />
-						<checkbox id="sbDetailOptionScript" label="&sb.detail.option.scripts;" oncommand="sbCaptureOptions.toggleWarningUI();" />
+						<checkbox id="sbDetailOptionImages" persist="checked" label="&sb.detail.option.images;" _checked="true" />
+						<checkbox id="sbDetailOptionMedia" persist="checked" label="&sb.detail.option.media;" _checked="true" />
+						<checkbox id="sbDetailOptionFonts" persist="checked" label="&sb.detail.option.fonts;" _checked="true" />
+						<checkbox id="sbDetailOptionStyles" persist="checked" label="&sb.detail.option.styles;" _checked="true" />
+						<checkbox id="sbDetailOptionScript" _persist="checked" label="&sb.detail.option.scripts;" oncommand="sbCaptureOptions.toggleWarningUI();" />
 					</hbox>
 					<checkbox id="sbDetailOptionKeepLink" label="&sb.detail.option.keepLink;" />
 					<checkbox id="sbDetailOptionRewriteStyles" label="&sb.detail.option.rewriteStyles;" checked="true" />
