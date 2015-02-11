@@ -17,9 +17,6 @@ function init() {
 	else {
 		document.getElementById("sbLinkID").focus();
 	}
-
-	// sync sbLinkFormatValue --> sbLinkFormat for persist
-	document.getElementById("sbLinkFormat").value = document.getElementById("sbLinkFormatValue").getAttribute('value');
 }
 
 function accept() {
@@ -29,9 +26,6 @@ function accept() {
 	gData.id = document.getElementById("sbLinkID").value;
 	gData.format = document.getElementById("sbLinkFormat").value;
 	gData.result = ((gData.url_use && gData.url) || (gData.id_use && gData.id)) ? 1 : 0;
-
-	// sync sbLinkFormat --> sbLinkFormatValue for persist
-	document.getElementById("sbLinkFormatValue").setAttribute('value', document.getElementById("sbLinkFormat").value);
 }
 
 function pick(aIDToCheck) {

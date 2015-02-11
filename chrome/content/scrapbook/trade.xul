@@ -78,7 +78,7 @@
 		<vbox>
 			<checkbox id="sbTradeOptionExportFolder"  label="&sb.trade.exportFolder; " group="lockTarget" checked="false" persist="checked" />
 			<checkbox id="sbTradeOptionUpdate" label="&sb.trade.update;" group="lockTarget" checked="false" persist="checked" title="may lower performance" />
-			<checkbox id="sbTradeOptionRestore" label="&sb.trade.restore;" group="lockTarget" checked="true" />
+			<checkbox id="sbTradeOptionRestore" label="&sb.trade.restore;" group="lockTarget" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
 			<checkbox id="sbTradeOptionRemove"  label="&sb.trade.remove; " group="lockTarget" checked="false" persist="checked" />
 		</vbox>
 	</toolbar>

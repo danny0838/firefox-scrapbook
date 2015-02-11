@@ -58,16 +58,16 @@
 					<caption label="&sb.detail.option;" />
 					<hbox align="center">
 					<caption label="&sb.detail.option.capture;:" />
-						<checkbox id="sbDetailOptionImages" label="&sb.detail.option.images;" checked="true" />
-						<checkbox id="sbDetailOptionMedia" label="&sb.detail.option.media;" checked="true" />
-						<checkbox id="sbDetailOptionFonts" label="&sb.detail.option.fonts;" checked="true" />
-						<checkbox id="sbDetailOptionStyles" label="&sb.detail.option.styles;" checked="true" />
-						<checkbox id="sbDetailOptionScript" label="&sb.detail.option.scripts;" oncommand="sbCaptureOptions.toggleWarningUI();" />
+						<checkbox id="sbDetailOptionImages" label="&sb.detail.option.images;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
+						<checkbox id="sbDetailOptionMedia" label="&sb.detail.option.media;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
+						<checkbox id="sbDetailOptionFonts" label="&sb.detail.option.fonts;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
+						<checkbox id="sbDetailOptionStyles" label="&sb.detail.option.styles;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
+						<checkbox id="sbDetailOptionScript" label="&sb.detail.option.scripts;" persist="checked" oncommand="sbCaptureOptions.updateWarningUI(this.checked);" />
 					</hbox>
-					<checkbox id="sbDetailOptionKeepLink" label="&sb.detail.option.keepLink;" />
-					<checkbox id="sbDetailOptionRewriteStyles" label="&sb.detail.option.rewriteStyles;" checked="true" />
-					<checkbox id="sbDetailOptionForceUtf8" label="&sb.detail.option.forceUtf8;" checked="true" />
-					<checkbox id="sbDetailOptionAsHtml" label="&sb.detail.option.asHtml;" />
+					<checkbox id="sbDetailOptionKeepLink" label="&sb.detail.option.keepLink;" persist="checked" />
+					<checkbox id="sbDetailOptionRewriteStyles" label="&sb.detail.option.rewriteStyles;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
+					<checkbox id="sbDetailOptionForceUtf8" label="&sb.detail.option.forceUtf8;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
+					<checkbox id="sbDetailOptionAsHtml" label="&sb.detail.option.asHtml;" persist="checked" />
 				</groupbox>
 				<groupbox group="capture-options" style="margin-top:8px;">
 					<caption label="&sb.detail.linked.file;" />
@@ -76,17 +76,17 @@
 					<checkbox id="sbDetailMovie"   persist="checked" label="&sb.detail.linked.movie; (avi, avc, flv, mkv, mov, mpg, mp4, wmv)" />
 					<checkbox id="sbDetailArchive" persist="checked" label="&sb.detail.linked.archive; (zip, lzh, tar, gz, bz, 7z, rar, jar, xpi)" />
 					<hbox align="center">
-						<checkbox id="sbDetailCustom" persist="checked" label="&sb.detail.linked.custom;" oncommand="sbCaptureOptions.toggleCustomUI();" />
-						<textbox flex="1" />
+						<checkbox id="sbDetailCustom" persist="checked" label="&sb.detail.linked.custom;" oncommand="sbCaptureOptions.updateCustomUI();" />
+						<textbox id="sbDetailCustomExt" flex="1" value="pdf, doc" persist="value" onchange="this.setAttribute('value', this.value.replace(/[^0-9a-zA-Z,\|]/g, '').replace(/[,\|]/g, ', ')); document.persist(this, 'value');" />
 					</hbox>
 				</groupbox>
 				<groupbox id="sbDetailInDepthBox" group="capture-options" style="margin-top:8px;">
 					<caption label="&sb.detail.linked.page;" />
 					<hbox align="center">
 						<label id="sbDetailInDepthLabel" value="&sb.detail.linked.page.depth;:" />
-						<menulist id="sbDetailInDepth" editable="true" flex="1">
+						<menulist id="sbDetailInDepth" editable="true" flex="1" value="0" persist="value" onchange="this.setAttribute('value', this.value); document.persist(this, 'value');">
 							<menupopup>
-								<menuitem value="0" label="0" selected="true" />
+								<menuitem value="0" label="0" />
 								<menuitem value="1" label="1" />
 								<menuitem value="2" label="2" />
 								<menuitem value="3" label="3" />
@@ -95,9 +95,9 @@
 					</hbox>
 					<hbox align="center">
 						<label id="sbDetailTimeoutLabel" value="&sb.detail.linked.timeout;:" />
-						<menulist id="sbDetailTimeout" editable="true" flex="1">
+						<menulist id="sbDetailTimeout" editable="true" flex="1" value="0" persist="value" onchange="this.setAttribute('value', this.value); document.persist(this, 'value');">
 							<menupopup>
-								<menuitem value="0" label="0" selected="true" />
+								<menuitem value="0" label="0" />
 								<menuitem value="1" label="1" />
 								<menuitem value="2" label="2" />
 								<menuitem value="3" label="3" />
@@ -106,9 +106,9 @@
 					</hbox>
 					<hbox align="center">
 						<label id="sbDetailCharsetLabel" value="&sb.detail.linked.charset;:" />
-						<menulist id="sbDetailCharset" editable="true" flex="1">
+						<menulist id="sbDetailCharset" editable="true" flex="1" value="" persist="value" onchange="this.setAttribute('value', this.value); document.persist(this, 'value');">
 							<menupopup>
-								<menuitem value="" label="" selected="true" />
+								<menuitem value="" label="" />
 								<menuitem value="BIG5" label="BIG5" />
 								<menuitem value="GBK" label="GBK" />
 								<menuitem value="ISO-8859-1" label="ISO-8859-1" />

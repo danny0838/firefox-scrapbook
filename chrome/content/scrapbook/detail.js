@@ -10,55 +10,56 @@ var sbCaptureOptions = {
 	{
 		if ( !window.arguments || !("sbContentSaver" in window.opener) ) window.close();
 		this.param = window.arguments[0];
-		this.toggleCustomUI();
-		this.CUSTOM_UI.nextSibling.value = sbCommonUtils.getPref("detail.custom", "pdf, doc");
+		// customization for different context
 		if ( this.param.context == "bookmark" )
 		{
 			document.title = "ScrapBook - " + window.opener.document.getElementById("ScrapBookContextMenuB").label.replace("...","");
+			var elts = document.getElementsByAttribute("group", "capture-options");
+			for ( var i = 0; i < elts.length; i++ ) elts[i].collapsed = true;
 		}
 		else
 		{
 			document.documentElement.getButton("accept").label = sbCommonUtils.lang("scrapbook", "CAPTURE_OK_BUTTON");
 			document.documentElement.getButton("accept").accesskey = "C";
-		}
-		this.fillTitleList();
-		if ( this.param.item.source.indexOf("://mail.google.com/") > 0 )
-		{
-			document.getElementById("sbDetailOptionScript").disabled = true;
-		}
-		var offset = this.WARNING_UI.boxObject.height || 32;
-		this.WARNING_UI.setAttribute("offset", offset);
-		this.WARNING_UI.hidden = true;
-		if ( this.param.context == "bookmark" )
-		{
-			var elts = document.getElementsByAttribute("group", "capture-options");
-			for ( var i = 0; i < elts.length; i++ ) elts[i].collapsed = true;
-		}
-		else if ( this.param.context == "capture-again" || this.param.context == "capture-again-deep" )
-		{
-			document.getElementById("sbDetailFolderRow").collapsed = true;
-			document.getElementById("sbDetailWarnAboutRenew").hidden = false;
-			document.getElementById("sbDetailTabComment").hidden = true;
-			if ( this.param.context == "capture-again-deep" )
+			if ( this.param.context == "capture-again" || this.param.context == "capture-again-deep" )
 			{
-				document.getElementById("sbDetailInDepthBox").collapsed = true;
+				document.getElementById("sbDetailFolderRow").collapsed = true;
+				document.getElementById("sbDetailWarnAboutRenew").hidden = false;
+				document.getElementById("sbDetailTabComment").hidden = true;
+				if ( this.param.context == "capture-again-deep" )
+				{
+					document.getElementById("sbDetailInDepthBox").collapsed = true;
+				}
+				return;
 			}
-			return;
 		}
+		// title
+		this.fillTitleList();
+		// folder
 		setTimeout(function(){ sbFolderSelector.init(); }, 100);
+		// script
+		this.WARNING_UI.setAttribute("offset", this.WARNING_UI.boxObject.height || 32);
+		setTimeout(function(){ sbCaptureOptions.updateWarningUI(document.getElementById('sbDetailOptionScript').checked); }, 100);
+		// custom extension
+		this.updateCustomUI();
+		// comment
 		document.getElementById("sbDetailComment").value = this.param.item.comment.replace(/ __BR__ /g, "\n");
 	},
 
-	toggleCustomUI : function()
+	updateCustomUI : function()
 	{
 		this.CUSTOM_UI.nextSibling.disabled = !this.CUSTOM_UI.checked;
 	},
 
-	toggleWarningUI : function()
+	updateWarningUI : function(checked)
 	{
-		var offset = parseInt(this.WARNING_UI.getAttribute("offset"), 10);
-		this.WARNING_UI.hidden = !this.WARNING_UI.hidden;
-		this.WARNING_UI.hidden ? window.outerHeight -= offset : window.outerHeight += offset;
+		var oldHidden = this.WARNING_UI.hidden;
+		var newHidden = !checked;
+		this.WARNING_UI.hidden = newHidden;
+		if (oldHidden != newHidden) {
+			var offset = parseInt(this.WARNING_UI.getAttribute("offset"), 10);
+			newHidden ? window.outerHeight -= offset : window.outerHeight += offset;
+		}
 	},
 
 	fillTitleList : function()
@@ -101,8 +102,7 @@ var sbCaptureOptions = {
 		this.param.poption["charset"]   = document.getElementById("sbDetailCharset").value;
 		if ( this.CUSTOM_UI.checked )
 		{
-			this.param.option["custom"] = this.CUSTOM_UI.nextSibling.value.replace(/[^0-9a-zA-Z,\|]/g, "").replace(/[,\|]/g, ", ");
-			sbCommonUtils.setPref("detail.custom", this.param.option["custom"]);
+			this.param.option["custom"] = this.CUSTOM_UI.nextSibling.getAttribute("value");
 		}
 		if ( this.param.context == "capture-again" )
 		{

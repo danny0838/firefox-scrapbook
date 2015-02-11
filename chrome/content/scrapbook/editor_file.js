@@ -12,9 +12,6 @@ function init() {
 	else if (document.getElementById("sbFileHTMLUse").selected) {
 		document.getElementById("sbFileHTML").focus();
 	}
-
-	// sync sbFileFormatValue --> sbFileFormat for persist
-	document.getElementById("sbFileFormat").value = document.getElementById("sbFileFormatValue").getAttribute('value');
 }
 
 function accept() {
@@ -25,9 +22,6 @@ function accept() {
 	gData.insert = document.getElementById("sbFileInsert").checked;
 	gData.format = document.getElementById("sbFileFormat").value;
 	gData.result = ((gData.file_use && gData.file) || (gData.html_use && gData.html)) ? 1 : 0;
-
-	// sync sbFileFormat --> sbFileFormatValue for persist
-	document.getElementById("sbFileFormatValue").setAttribute('value', document.getElementById("sbFileFormat").value);
 }
 
 function pickFile() {
