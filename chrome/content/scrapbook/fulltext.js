@@ -550,7 +550,7 @@ var sbCacheService = {
 
 	finalize : function()
 	{
-		document.title = sbCommonUtils.lang("fulltext", "BUILD_CACHE_UPDATE");
+		document.title = sbCommonUtils.lang("fulltext", "BUILD_CACHE");
 		for ( var uri in this.uriHash )
 		{
 			if ( !this.uriHash[uri] && uri != "urn:scrapbook:cache" )
