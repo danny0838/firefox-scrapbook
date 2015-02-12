@@ -47,6 +47,42 @@ var sbCaptureOptions = {
 		}
 		setTimeout(function(){ sbFolderSelector.init(); }, 100);
 		document.getElementById("sbDetailComment").value = this.param.item.comment.replace(/ __BR__ /g, "\n");
+
+		this.persistInit();
+	},
+
+	persistInit : function()
+	{
+		var key = 'sb.detail.option.inited';
+
+		// when need reset option default, set sb.detail.option.inited = false;
+		if (sbCommonUtils.getPref(key, false))
+		{
+			return;
+		}
+
+		sbCommonUtils.setPref(key, true)
+
+		var checkbox_ids = [
+			'sbDetailOptionStyles',
+			'sbDetailOptionImages',
+
+			'sbDetailArchive',
+			'sbDetailImage',
+
+			'sbDetailOptionIframes',
+		];
+
+		var i, data;
+		for (i in checkbox_ids)
+		{
+			if (data = this.processMap(checkbox_ids[i]))
+			{
+				data.target.checked = true;
+
+				document.persist(data.target, 'checked');
+			}
+		}
 	},
 
 	toggleCustomUI : function()
@@ -109,6 +145,53 @@ var sbCaptureOptions = {
 			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
 			sbDataSource.setProperty(res, "title", document.getElementById("sbDetailTitle").value);
 		}
+
+		this.processParams();
+	},
+
+	processParams : function()
+	{
+		var map = {
+			'iframes' : 'sbDetailOptionIframes',
+		};
+
+		var name, data, target;
+
+		for (name in map)
+		{
+			if (data = this.processMap(map[name]))
+			{
+				this.param.option[name] = data.target.checked;
+			}
+		}
+	},
+
+	// TODO:
+	processMap : function(data)
+	{
+		var target, ret;
+
+		if (typeof data === 'string')
+		{
+			target = document.getElementById(data);
+
+			data = {
+				id: data,
+			};
+		}
+		else if (data)
+		{
+			target = data.target || document.getElementById(data.id);
+		}
+
+		if (target)
+		{
+			ret = $.extend({}, data, {
+				target: target,
+			});
+		}
+
+		return ret;
 	},
 
 	cancel : function()

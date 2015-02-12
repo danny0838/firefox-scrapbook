@@ -270,8 +270,12 @@ var sbContentSaver = {
 			this.addCommentTag(tmpNodeList[tmpNodeList.length-1], "/DOCUMENT_FRAGMENT");
 		}
 
+		this.processDOMRootBefore(rootNode);
+
 		// process HTML DOM
 		this.processDOMRecursively(rootNode);
+
+		this.processDOMRootAfter(rootNode);
 
 		// process all inline and link CSS, will merge them into index.css later
 		var myCSS = "";
@@ -304,7 +308,7 @@ var sbContentSaver = {
 			for (var i=0, len=metas.length; i<len; ++i) {
 				meta = metas[i];
 				if (meta.hasAttribute("http-equiv") && meta.hasAttribute("content") &&
-					meta.getAttribute("http-equiv").toLowerCase() == "content-type" && 
+					meta.getAttribute("http-equiv").toLowerCase() == "content-type" &&
 					meta.getAttribute("content").match(/^[^;]*;\s*charset=(.*)$/i) )
 				{
 					hasmeta = true;
@@ -341,6 +345,28 @@ var sbContentSaver = {
 			sbCommonUtils.writeFile(myCSSFile, myCSS, this.item.chars);
 		}
 		return myHTMLFile.leafName;
+	},
+
+	processDOMRootBefore : function(rootNode)
+	{
+		try
+		{
+			//console.log([this.option]);
+
+			if (!this.option['iframes'])
+			{
+				$('iframe', rootNode).remove();
+			}
+		}
+		catch(e)
+		{
+			//console.log([e]);
+		}
+	},
+
+	processDOMRootAfter : function(rootNode)
+	{
+		//
 	},
 
 	saveFileInternal : function(aFileURL, aFileKey, aCaptureType, aCharset)
@@ -427,7 +453,7 @@ var sbContentSaver = {
 	{
 		switch ( aNode.nodeName.toLowerCase() )
 		{
-			case "img" : 
+			case "img" :
 				if ( aNode.hasAttribute("src") ) {
 					if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
 					if ( this.option["images"] ) {
@@ -440,7 +466,7 @@ var sbContentSaver = {
 					}
 				}
 				break;
-			case "embed" : 
+			case "embed" :
 			case "source":  // in <audio> and <vedio>
 				if ( aNode.hasAttribute("src") ) {
 					if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
@@ -454,7 +480,7 @@ var sbContentSaver = {
 					}
 				}
 				break;
-			case "object" : 
+			case "object" :
 				if ( aNode.hasAttribute("data") ) {
 					if ( this.option["internalize"] && aNode.getAttribute("data").indexOf("://") == -1 ) break;
 					if ( this.option["media"] ) {
@@ -467,7 +493,7 @@ var sbContentSaver = {
 					}
 				}
 				break;
-			case "applet" : 
+			case "applet" :
 				if ( aNode.hasAttribute("archive") ) {
 					if ( this.option["internalize"] && aNode.getAttribute("archive").indexOf("://") == -1 ) break;
                     var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("archive"));
@@ -487,11 +513,11 @@ var sbContentSaver = {
 					aNode.setAttribute("src", aNode.src);
 				}
 				break;
-			case "body" : 
-			case "table" : 
-			case "tr" : 
-			case "th" : 
-			case "td" : 
+			case "body" :
+			case "table" :
+			case "tr" :
+			case "th" :
+			case "td" :
 				// handle "background" attribute (HTML5 deprecated)
 				if ( aNode.hasAttribute("background") ) {
 					if ( this.option["internalize"] && aNode.getAttribute("background").indexOf("://") == -1 ) break;
@@ -506,9 +532,9 @@ var sbContentSaver = {
 					}
 				}
 				break;
-			case "input" : 
+			case "input" :
 				switch (aNode.type.toLowerCase()) {
-					case "image": 
+					case "image":
 						if ( aNode.hasAttribute("src") ) {
 							if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
 							if ( this.option["images"] ) {
@@ -523,7 +549,7 @@ var sbContentSaver = {
 						break;
 				}
 				break;
-			case "link" : 
+			case "link" :
 				// gets "" if rel attribute not defined
 				switch ( aNode.rel.toLowerCase() ) {
 					case "stylesheet" :
@@ -535,7 +561,7 @@ var sbContentSaver = {
 							}
 							else if ( aNode.href.indexOf("chrome://") == 0 ) {
 								// a special stylesheet used by scrapbook or other addons/programs, keep it intact
-							} 
+							}
 							else if ( !this.option["styles"] ) {
 								// not capturing styles, set it blank and record the original address in a hash
 								aNode.setAttribute("href", "about:blank#" + aNode.href);
@@ -572,13 +598,13 @@ var sbContentSaver = {
 						break;
 				}
 				break;
-			case "base" : 
+			case "base" :
 				if ( aNode.hasAttribute("href") ) {
 					if ( this.option["internalize"] ) break;
 					aNode.setAttribute("href", "");
 				}
 				break;
-			case "style" : 
+			case "style" :
 				if ( sbCommonUtils.getSbObjectType(aNode) == "stylesheet" ) {
 					// a special stylesheet used by scrapbook, keep it intact
 				}
@@ -593,8 +619,8 @@ var sbContentSaver = {
 					return this.removeNodeFromParent(aNode);
 				}
 				break;
-			case "script" : 
-			case "noscript" : 
+			case "script" :
+			case "noscript" :
 				if ( this.option["script"] ) {
 					if ( aNode.hasAttribute("src") ) {
 						if ( this.option["internalize"] ) break;
@@ -605,8 +631,8 @@ var sbContentSaver = {
 					return this.removeNodeFromParent(aNode);
 				}
 				break;
-			case "a" : 
-			case "area" : 
+			case "a" :
+			case "area" :
 				if ( this.option["internalize"] ) break;
 				if ( !aNode.href ) {
 					break;
@@ -641,7 +667,7 @@ var sbContentSaver = {
 						case "aac" : case "flac" : case "mp3" : case "ogg" : case "ram" : case "ra" : case "rm" : case "rmx" : case "wav" : case "wma" : flag = this.option["dlsnd"]; break;
 						case "avi" : case "avc" : case "flv" : case "mkv" : case "mov" : case "mpg" : case "mpeg" : case "mp4" : case "wmv" : flag = this.option["dlmov"]; break;
 						case "zip" : case "lzh"  : case "lha"  : case "tar" : case "gz" : case "bz" : case "7z" : case "rar" : case "jar" : case "xpi" : flag = this.option["dlarc"]; break;
-						default : 
+						default :
 							// do not copy, but add to the link list if it's a work of deep capture
 							if ( this.option["inDepth"] > 0 ) this.linkURLs.push(aNode.href);
 					}
@@ -654,13 +680,13 @@ var sbContentSaver = {
 					aNode.setAttribute("href", aNode.href);
 				}
 				break;
-			case "form" : 
+			case "form" :
 				if ( aNode.hasAttribute("action") ) {
 					if ( this.option["internalize"] ) break;
 					aNode.setAttribute("action", aNode.action);
 				}
 				break;
-			case "meta" : 
+			case "meta" :
 				if ( !aNode.hasAttribute("content") ) break;
 				if ( aNode.hasAttribute("property") ) {
 					if ( this.option["internalize"] ) break;
@@ -693,8 +719,8 @@ var sbContentSaver = {
 					}
 				}
 				break;
-			case "frame"  : 
-			case "iframe" : 
+			case "frame"  :
+			case "iframe" :
 				if ( this.option["internalize"] ) break;
 				this.isMainFrame = false;
 				if ( this.selection ) this.selection = null;
@@ -708,7 +734,7 @@ var sbContentSaver = {
 				break;
 			// Deprecated, like <pre> but inner contents are escaped to be plain text
 			// Replace with <pre> since it breaks ScrapBook highlights
-			case "xmp" : 
+			case "xmp" :
 				if ( this.option["internalize"] ) break;
 				var pre = aNode.ownerDocument.createElement("pre");
 				pre.appendChild(aNode.firstChild);
@@ -785,27 +811,27 @@ var sbContentSaver = {
 		var content = "";
 		Array.forEach(aCSS.cssRules, function(cssRule) {
 			switch (cssRule.type) {
-				case Components.interfaces.nsIDOMCSSRule.IMPORT_RULE: 
+				case Components.interfaces.nsIDOMCSSRule.IMPORT_RULE:
 					content += this.processCSSRecursively(cssRule.styleSheet, aDocument, true);
 					break;
-				case Components.interfaces.nsIDOMCSSRule.FONT_FACE_RULE: 
+				case Components.interfaces.nsIDOMCSSRule.FONT_FACE_RULE:
 					var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "font");
 					if (cssText) content += cssText + "\n";
 					break;
-				case Components.interfaces.nsIDOMCSSRule.MEDIA_RULE: 
+				case Components.interfaces.nsIDOMCSSRule.MEDIA_RULE:
 					cssText = indent + "@media " + cssRule.conditionText + " {\n"
 						+ this.processCSSRules(cssRule, aDocument, indent + "  ")
 						+ indent + "}";
 					if (cssText) content += cssText + "\n";
 					break;
-				case Components.interfaces.nsIDOMCSSRule.STYLE_RULE: 
+				case Components.interfaces.nsIDOMCSSRule.STYLE_RULE:
 					// if script is used, preserve all css in case it's used by a dynamic generated DOM
 					if (this.option["script"] || verifySelector(aDocument, cssRule.selectorText)) {
 						var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "image");
 						if (cssText) content += cssText + "\n";
 					}
 					break;
-				default: 
+				default:
 					var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "image");
 					if (cssText) content += cssText + "\n";
 					break;
