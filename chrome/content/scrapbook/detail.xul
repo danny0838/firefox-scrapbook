@@ -23,6 +23,7 @@
         ondialogcancel="sbCaptureOptions.cancel();">
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbook/content/lib/jquery-v2.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/detail.js" />
 
 	<tabbox flex="1">
@@ -63,6 +64,7 @@
 						<checkbox id="sbDetailOptionFonts" persist="checked" label="&sb.detail.option.fonts;" _checked="true" />
 						<checkbox id="sbDetailOptionStyles" persist="checked" label="&sb.detail.option.styles;" _checked="true" />
 						<checkbox id="sbDetailOptionScript" _persist="checked" label="&sb.detail.option.scripts;" oncommand="sbCaptureOptions.toggleWarningUI();" />
+						<checkbox id="sbDetailOptionIframes" persist="checked" label="&sb.detail.option.iframes;" _checked="true" />
 					</hbox>
 					<checkbox id="sbDetailOptionKeepLink" label="&sb.detail.option.keepLink;" />
 					<checkbox id="sbDetailOptionRewriteStyles" label="&sb.detail.option.rewriteStyles;" checked="true" />
