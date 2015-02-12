@@ -4,5 +4,6 @@
 <!ENTITY sb.sort.title.desc "Ordenar polo título (Z &gt; A)">
 <!ENTITY sb.sort.date.asc "Cronolóxica">
 <!ENTITY sb.sort.date.desc "Cronolóxica inversa">
+<!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.recursive "Ordenar os sub-cartafoles recurrentemente">
 <!ENTITY sb.sort.warning "Aviso: Esta operación non se poderá desfacer.">

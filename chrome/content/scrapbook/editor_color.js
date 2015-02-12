@@ -32,7 +32,7 @@ function init() {
 	gColorBgChecker = document.getElementById("sbColorBg");
 	gColorTextHidden = document.getElementById("sbColorTextValue");
 	gColorBgHidden = document.getElementById("sbColorBgValue")
-	// sync value of textbox to colorpicker
+	// sync values from textbox to colorpicker
 	gColorTextPicker[gColorType] = gColorTextHidden.getAttribute('value');
 	gColorBgPicker[gColorType] = gColorBgHidden.getAttribute('value');
 }
@@ -44,6 +44,7 @@ function accept() {
 }
 
 function pick(aIDToCheck) {
+	// sync value from colorpicker to textbox
 	gColorTextHidden.setAttribute('value', gColorTextPicker[gColorType]);
 	gColorBgHidden.setAttribute('value', gColorBgPicker[gColorType]);
 	document.getElementById(aIDToCheck).checked = true;

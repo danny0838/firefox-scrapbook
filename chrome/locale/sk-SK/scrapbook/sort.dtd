@@ -4,5 +4,6 @@
 <!ENTITY sb.sort.title.desc "Zoradiť podľa názvu (Z &gt; A)">
 <!ENTITY sb.sort.date.asc "Chronologicky">
 <!ENTITY sb.sort.date.desc "Od najnovšieho k najstaršiemu">
+<!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.recursive "Zoradiť vrátane všetkých podpriečinkov">
 <!ENTITY sb.sort.warning "Upozornenie: Túto operáciu nieje možné vrátiť. Chcete zoradiť celý priečinok?">

@@ -4,5 +4,6 @@
 <!ENTITY sb.sort.title.desc "Sort by Title (Z &gt; A)">
 <!ENTITY sb.sort.date.asc "Chronological">
 <!ENTITY sb.sort.date.desc "Reverse Chronological">
+<!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.recursive "Sort Sub-folders Recursively">
 <!ENTITY sb.sort.warning "Notice: You can&apos;t undo this operation.">

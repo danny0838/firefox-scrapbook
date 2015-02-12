@@ -23,13 +23,14 @@
 		<menupopup id="sbPopup" onpopupshowing="sbController.onPopupShowing(event);"
 		       onmouseover="if (event.originalTarget.getAttribute('nodelay')) document.getElementById('sbPopupToolsMenu').hidePopup();">
 			<menuitem id="sbPopupOpen"       label="&sb.open;"        nodelay="true" oncommand="sbController.open(null,false);" default="true" />
-			<menuitem id="sbPopupOpenTab"    label="&sb.open.tab;"    nodelay="true" oncommand="sbController.open(null,true);" hidden="true" />
 			<menuitem id="sbPopupOpenNewTab" label="&sb.open.newtab;" nodelay="true" oncommand="sbController.open(null,true);" />
 			<menuitem id="sbPopupOpenSource" label="&sb.open.source;" nodelay="true" oncommand="sbController.forward(null,'S');"
 			          onclick="if (event.button != 1) return; this.parentNode.hidePopup(); sbController.forward(null,'S',true);" />
 			<menuitem id="sbPopupCombinedView" label="&sb.folder.combine;" oncommand="sbController.forward(null,'C');"   hidden="true" />
 			<menuitem id="sbPopupOpenAllItems" label="&sb.folder.openall;" oncommand="sbController.openAllInTabs(null);" hidden="true" />
 			<menuseparator hidden="true" />
+			<menuitem id="sbPopupManage" label="&sb.folder.manage;..." oncommand="sbController.forward(null,'M');" hidden="true" />
+			<menuitem id="sbPopupSort"   label="&sb.sort.folder;..."   oncommand="sbController.forward(null,'Z');" hidden="true" />
 			<menu id="sbPopupTools" label="&sb.tools;" onmouseover="event.stopPropagation();">
 				<menupopup id="sbPopupToolsMenu">
 					<menuitem id="sbPopupShowFiles" label="&sb.show.files;" oncommand="sbController.forward(null,'L');" />
@@ -42,8 +43,6 @@
 					<menuitem id="sbPopupExport" label="&sb.export;" oncommand="sbController.forward(null,'E');" />
 				</menupopup>
 			</menu>
-			<menuitem id="sbPopupManage" label="&sb.folder.manage;..." oncommand="sbController.forward(null,'M');" hidden="true" />
-			<menuitem id="sbPopupSort"   label="&sb.sort.folder;..."   oncommand="sbController.forward(null,'Z');" hidden="true" />
 			<menuseparator />
 			<menuitem id="sbPopupNewFolder"    class="menuitem-iconic sb-create" label="&sb.new.folder;..." oncommand="sbMainService.createFolder();" />
 			<menuitem id="sbPopupNewSeparator" class="menuitem-iconic sb-create" label="&sb.new.separator;" oncommand="sbMainService.createSeparator();" />

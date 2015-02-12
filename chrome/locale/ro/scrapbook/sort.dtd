@@ -4,5 +4,6 @@
 <!ENTITY sb.sort.title.desc "Sortează după denumire (Z -&gt; A)">
 <!ENTITY sb.sort.date.asc "Sortează cronologic">
 <!ENTITY sb.sort.date.desc "Sortează invers cronologic">
+<!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.recursive "Sortează recursiv în subdosare">
 <!ENTITY sb.sort.warning "Notă: Nu puteți anula această operațiune.">

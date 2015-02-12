@@ -4,5 +4,6 @@
 <!ENTITY sb.sort.title.desc "タイトルでソート (Z &gt; A)">
 <!ENTITY sb.sort.date.asc "日時でソート (古い順)">
 <!ENTITY sb.sort.date.desc "日時でソート (新しい順)">
+<!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.recursive "サブフォルダ内も再帰的にソートする">
 <!ENTITY sb.sort.warning "注意：ソートを実行すると元には戻せません。">
