@@ -1070,7 +1070,7 @@ var sbContentSaver = {
 	/**
 	 * @return  [(string) newFileName, (bool) isDuplicated]
 	 */
-	getUniqueFileName: function(newFileName, aURLSpec, aDocumentSpec)
+	getUniqueFileName: function(newFileName, aURLSpec, aDocumentSpec, sNodeData)
 	{
 		if ( !newFileName ) newFileName = "untitled";
 		newFileName = newFileName;
@@ -1080,6 +1080,9 @@ var sbContentSaver = {
 		if ( !fileLR[1] ) fileLR[1] = "dat";
 		aURLSpec = sbCommonUtils.splitURLByAnchor(aURLSpec)[0];
 		var seq = 0;
+
+		fileLR = this.handleFileName(fileLR, newFileName, aURLSpec, aDocumentSpec, sNodeData);
+
 		newFileName = fileLR[0] + "." + fileLR[1];
 		var newFileNameCI = newFileName.toLowerCase();
 		while ( this.file2URL[newFileNameCI] != undefined ) {
