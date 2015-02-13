@@ -264,7 +264,7 @@ var sbContentSaver = {
 			}
 		}
 		// process HTML DOM
-		this.processDOMRecursively(rootNode);
+		this.processDOMRecursively(rootNode, aDocument);
 
 		// process all inline and link CSS, will merge them into index.css later
 		var myCSS = "";
@@ -419,23 +419,35 @@ var sbContentSaver = {
 	},
 
 
-	processDOMRecursively : function(rootNode)
+	processDOMRecursively : function(rootNode, aDocument)
 	{
 		for ( var curNode = rootNode.firstChild; curNode != null; curNode = curNode.nextSibling )
 		{
 			if ( curNode.nodeName == "#text" || curNode.nodeName == "#comment" ) continue;
-			curNode = this.inspectNode(curNode);
-			this.processDOMRecursively(curNode);
+			curNode = this.inspectNode(curNode, aDocument);
+			this.processDOMRecursively(curNode, aDocument);
 		}
 	},
 
-	inspectNode : function(aNode)
+	inspectNode : function(aNode, aDocument)
 	{
 		switch ( aNode.nodeName.toLowerCase() )
 		{
 			case "img" :
-				if ( aNode.hasAttribute("src") && aNode.getAttribute("src") != '' ) {
+				// fix lazyload
+				if ( aNode.hasAttribute("src") && aNode.getAttribute("src") && aNode.src ) {
 					if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
+
+					// fix lazyload
+					var t1 = sbCommonUtils.splitURLByAnchor(aDocument.location.href);
+					var t2 = sbCommonUtils.splitURLByAnchor(sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.src));
+
+					if (t1[0] == t2[0])
+					{
+						aNode.setAttribute("src", "about:blank#" + aNode.src);
+						break;
+					}
+
 					if ( this.option["images"] ) {
 						var aFileName = this.download(aNode.src, aNode);
 						if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
@@ -444,6 +456,10 @@ var sbContentSaver = {
 					} else {
 						aNode.setAttribute("src", "about:blank#" + aNode.src);
 					}
+				}
+				else
+				{
+					aNode.removeAttribute('src');
 				}
 				break;
 			case "embed" :
