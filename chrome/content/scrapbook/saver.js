@@ -993,6 +993,80 @@ var sbContentSaver = {
 		return "";
 	},
 
+	handleFileName: function(fileLR, newFileName, aURLSpec, aDocumentSpec, sNodeData)
+	{
+		var tagName = '', download;
+		var _typeof = typeof sNodeData;
+
+		if (_typeof === 'undefined' || !_typeof)
+		{
+			//
+		}
+		else if (_typeof === 'string')
+		{
+			tagName = sNodeData;
+		}
+		else if (typeof sNodeData.nodeType !== 'undefined')
+		{
+			tagName = sNodeData.nodeName;
+		}
+
+		tagName = (tagName || '').toLowerCase();
+
+		switch (tagName)
+		{
+			case 'image':
+			case 'img':
+				if (fileLR[1].match(/dat|php|htm/))
+				{
+					fileLR[1] += '.jpg';
+				}
+				break;
+			case 'ico':
+				if (fileLR[1].match(/dat|php|htm/))
+				{
+					fileLR[1] += '.ico';
+				}
+				break;
+			case 'a':
+				// BUG: not work, can't get sNodeData.getAttribute('download')
+				if (download = sbCommonUtils.validateFileName(sNodeData.getAttribute('download') || sNodeData.download || ''))
+				{
+					var _fileLR = sbCommonUtils.splitFileName(fileLR[0] + "." + fileLR[1]);
+
+					if (_fileLR[0])
+					{
+						fileLR[0] = _fileLR[0];
+					}
+
+					if (_fileLR[1] && _fileLR[1] != fileLR[1])
+					{
+						fileLR[1] += '.' + _fileLR[1];
+					}
+				}
+				break;
+			case "script" :
+			case "noscript" :
+				if (fileLR[1].match(/dat|php|htm/))
+				{
+					fileLR[1] += '.js';
+				}
+				break;
+		}
+
+		/*
+		//var console = Components.classes["@mozilla.org/consoleservice;1"].getService(Components.interfaces.nsIConsoleService);
+
+		Components.utils.import("resource://gre/modules/devtools/Console.jsm");
+
+		console.log(['ScrapBook> handleFileName', tagName, fileLR, newFileName, aURLSpec, aDocumentSpec, sNodeData]);
+
+		//fileLR[0] = sbCommonUtils.validateFileName(fileLR[0]);
+		*/
+
+		return fileLR;
+	},
+
 	/**
 	 * @return  [(string) newFileName, (bool) isDuplicated]
 	 */
