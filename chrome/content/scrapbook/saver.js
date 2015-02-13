@@ -1029,6 +1029,11 @@ var sbContentSaver = {
 			tagName = sNodeData.nodeName;
 
 			isNode = true;
+
+			if (tagName == 'link')
+			{
+				tagName = sNodeData.rel || tagName;
+			}
 		}
 
 		tagName = (tagName || '').toLowerCase();
@@ -1043,6 +1048,8 @@ var sbContentSaver = {
 				}
 				break;
 			case 'ico':
+			case 'shortcut icon':
+			case 'icon':
 				if (fileLR[1].match(/dat|php|htm/))
 				{
 					fileLR[1] += '.ico';
@@ -1065,11 +1072,19 @@ var sbContentSaver = {
 					}
 				}
 				break;
-			case "script" :
-			case "noscript" :
+			case 'script':
+			case 'noscript':
+			case 'js':
 				if (fileLR[1].match(/dat|php|htm/))
 				{
 					fileLR[1] += '.js';
+				}
+				break;
+			case 'stylesheet':
+			case 'css':
+				if (fileLR[1].match(/dat|php|htm/))
+				{
+					fileLR[1] += '.css';
 				}
 				break;
 		}
