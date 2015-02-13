@@ -1042,7 +1042,23 @@ var sbContentSaver = {
 		{
 			case 'image':
 			case 'img':
-				if (fileLR[1].match(/dat|php|htm/))
+				var _fileLR;
+
+				if (isNode && (download = sbCommonUtils.validateFileName(sNodeData.getAttribute('download') || sNodeData.download || '')))
+				{
+					_fileLR = sbCommonUtils.splitFileName(download);
+
+					if (_fileLR[0])
+					{
+						fileLR[0] = _fileLR[0];
+					}
+				}
+
+				if (_fileLR && _fileLR[1] && _fileLR[1] != fileLR[1])
+				{
+					fileLR[1] += '.' + _fileLR[1];
+				}
+				else if (fileLR[1].match(/dat|php|htm/))
 				{
 					fileLR[1] += '.jpg';
 				}
