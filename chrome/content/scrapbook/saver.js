@@ -437,7 +437,7 @@ var sbContentSaver = {
 				if ( aNode.hasAttribute("src") && aNode.getAttribute("src") != '' ) {
 					if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
 					if ( this.option["images"] ) {
-						var aFileName = this.download(aNode.src);
+						var aFileName = this.download(aNode.src, aNode);
 						if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
 					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("src", aNode.src);
@@ -451,7 +451,7 @@ var sbContentSaver = {
 				if ( aNode.hasAttribute("src") ) {
 					if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
 					if ( this.option["media"] ) {
-						var aFileName = this.download(aNode.src);
+						var aFileName = this.download(aNode.src, aNode);
 						if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
 					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("src", aNode.src);
@@ -464,7 +464,7 @@ var sbContentSaver = {
 				if ( aNode.hasAttribute("data") ) {
 					if ( this.option["internalize"] && aNode.getAttribute("data").indexOf("://") == -1 ) break;
 					if ( this.option["media"] ) {
-						var aFileName = this.download(aNode.data);
+						var aFileName = this.download(aNode.data, aNode);
 						if (aFileName) aNode.setAttribute("data", sbCommonUtils.escapeFileName(aFileName));
 					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("data", aNode.src);
@@ -478,7 +478,7 @@ var sbContentSaver = {
 					if ( this.option["internalize"] && aNode.getAttribute("archive").indexOf("://") == -1 ) break;
                     var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("archive"));
 					if ( this.option["media"] ) {
-						var aFileName = this.download(url);
+						var aFileName = this.download(url, aNode);
 						if (aFileName) aNode.setAttribute("archive", sbCommonUtils.escapeFileName(aFileName));
 					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("archive", url);
@@ -503,7 +503,7 @@ var sbContentSaver = {
 					if ( this.option["internalize"] && aNode.getAttribute("background").indexOf("://") == -1 ) break;
 					var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("background"));
 					if ( this.option["images"] ) {
-						var aFileName = this.download(url);
+						var aFileName = this.download(url, aNode);
 						if (aFileName) aNode.setAttribute("background", sbCommonUtils.escapeFileName(aFileName));
 					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("background", url);
@@ -518,7 +518,7 @@ var sbContentSaver = {
 						if ( aNode.hasAttribute("src") ) {
 							if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
 							if ( this.option["images"] ) {
-								var aFileName = this.download(aNode.src);
+								var aFileName = this.download(aNode.src, aNode);
 								if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
 							} else if ( this.option["keepLink"] ) {
 								aNode.setAttribute("src", aNode.src);
@@ -554,7 +554,7 @@ var sbContentSaver = {
 							}
 							else {
 								// capturing styles with no rewrite, download it and rewrite the link
-								var aFileName = this.download(aNode.href);
+								var aFileName = this.download(aNode.href, aNode);
 								if (aFileName) aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
 							}
 						}
@@ -563,7 +563,7 @@ var sbContentSaver = {
 					case "icon" :
 						if ( aNode.hasAttribute("href") ) {
 							if ( this.option["internalize"] ) break;
-							var aFileName = this.download(aNode.href);
+							var aFileName = this.download(aNode.href, aNode);
 							if (aFileName) {
 								aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
 								if ( this.isMainFrame && !this.favicon ) this.favicon = aFileName;
@@ -604,7 +604,7 @@ var sbContentSaver = {
 				if ( this.option["script"] ) {
 					if ( aNode.hasAttribute("src") ) {
 						if ( this.option["internalize"] ) break;
-						var aFileName = this.download(aNode.src);
+						var aFileName = this.download(aNode.src, aNode);
 						if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
 					}
 				} else {
@@ -654,7 +654,7 @@ var sbContentSaver = {
 				}
 				// do the copy or URL rewrite
 				if ( flag ) {
-					var aFileName = this.download(aNode.href);
+					var aFileName = this.download(aNode.href, aNode);
 					if (aFileName) aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
 				} else {
 					aNode.setAttribute("href", aNode.href);
@@ -885,7 +885,7 @@ var sbContentSaver = {
 			switch (type) {
 				case "image":
 					if (sbContentSaver.option["images"]) {
-						var dataFile = sbContentSaver.download(dataURL);
+						var dataFile = sbContentSaver.download(dataURL, type);
 						if (dataFile) dataURL = sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(dataFile));
 					} else if (!sbContentSaver.option["keepLink"]) {
 						dataURL = "about:blank#" + dataURL;
@@ -893,7 +893,7 @@ var sbContentSaver = {
 					break;
 				case "font":
 					if (sbContentSaver.option["fonts"]) {
-						var dataFile = sbContentSaver.download(dataURL);
+						var dataFile = sbContentSaver.download(dataURL, type);
 						if (dataFile) dataURL = sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(dataFile));
 					} else if (!sbContentSaver.option["keepLink"]) {
 						dataURL = "about:blank#" + dataURL;
@@ -905,7 +905,7 @@ var sbContentSaver = {
 		return aCSSText;
 	},
 
-	download : function(aURLSpec)
+	download : function(aURLSpec, sNodeData)
 	{
 		if ( !aURLSpec ) return "";
 		// never download chrome:// resources
@@ -931,7 +931,7 @@ var sbContentSaver = {
 			fileName = decodeURIComponent(fileName);
 		} catch(ex) {
 		}
-		var arr = this.getUniqueFileName(fileName, aURLSpec);
+		var arr = this.getUniqueFileName(fileName, aURLSpec, undefined, sNodeData);
 		var newFileName = arr[0];
 		var hasDownloaded = arr[1];
 		if (hasDownloaded) return newFileName;
