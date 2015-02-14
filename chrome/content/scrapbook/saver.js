@@ -222,6 +222,7 @@ var sbContentSaver = {
 		}
 		// construct the node list
 		var rootNode;
+		var headNode;
 		if ( this.selection )
 		{
 			var selNodeTree = []; // Is not enough to preserve order of sparsely selected table cells
@@ -230,7 +231,7 @@ var sbContentSaver = {
 				var myRange = this.selection.getRangeAt(iRange);
 				var curNode = myRange.commonAncestorContainer;
 				if ( curNode.nodeName.toUpperCase() == "HTML" ) {
-					// in some case (eg. view image) the selection is the html node
+					// in some case (e.g. view image) the selection is the html node
 					// and will cause subsequent errors.
 					// in this case we just process as if there's no selection
 					this.selection = null;
@@ -239,7 +240,7 @@ var sbContentSaver = {
 
 				if ( iRange === 0 ) {
 					rootNode = htmlNode.cloneNode(false);
-					var headNode = this.getHeadNode(htmlNode);
+					headNode = this.getHeadNode(htmlNode);
 					headNode = headNode ? headNode.cloneNode(true) : aDocument.createElement("head");
 					rootNode.appendChild(headNode);
 					rootNode.appendChild(aDocument.createTextNode("\n"));
@@ -258,8 +259,7 @@ var sbContentSaver = {
 				var matchedDepth = -2;
 				for( var iDepth = 0; iDepth < tmpNodeList.length; ++iDepth )
 				{
-					var iBranch = 0;
-					for ( ; iBranch < branchList.length; ++iBranch )
+					for ( var iBranch = 0; iBranch < branchList.length; ++iBranch )
 					{
 						if (tmpNodeList[iDepth] === branchList[iBranch].origNode )
 						{
@@ -269,37 +269,36 @@ var sbContentSaver = {
 					}
 
 					if (iBranch === branchList.length) {
-						var clonedNode = tmpNodeList[iDepth].cloneNode(false)
+						var clonedNode = tmpNodeList[iDepth].cloneNode(false);
 						parentNode.appendChild(clonedNode);
-						var v = {
+						branchList.push({
 							origNode: tmpNodeList[iDepth],
 							clonedNode: clonedNode,
 							children: []
-						};
-						branchList.push(v);
+						});
 					}
 					parentNode = branchList[iBranch].clonedNode;
 					branchList = branchList[iBranch].children;
 				}
-				if ( myRange.commonAncestorContainer.nodeName === "#text"
-					&& matchedDepth === tmpNodeList.length - 1)
+				if ( matchedDepth === tmpNodeList.length - 1 )
 				{
 					// Perhaps a similar splitter should be added for any node type
 					// but some tags e.g. <td> require special care
-					parentNode.appendChild(aDocument.createComment("DOCUMENT_FRAGMENT_SPLITTER"));
-					parentNode.appendChild(aDocument.createTextNode(" … "));
-					parentNode.appendChild(aDocument.createComment("/DOCUMENT_FRAGMENT_SPLITTER"));
+					if (myRange.commonAncestorContainer.nodeName === "#text") {
+						parentNode.appendChild(aDocument.createComment("DOCUMENT_FRAGMENT_SPLITTER"));
+						parentNode.appendChild(aDocument.createTextNode(" … "));
+						parentNode.appendChild(aDocument.createComment("/DOCUMENT_FRAGMENT_SPLITTER"));
+					}
 				}
 				parentNode.appendChild(aDocument.createComment("DOCUMENT_FRAGMENT"));
-				var myDocFrag = myRange.cloneContents();
-				parentNode.appendChild(myDocFrag);
+				parentNode.appendChild(myRange.cloneContents());
 				parentNode.appendChild(aDocument.createComment("/DOCUMENT_FRAGMENT"));
 			}
 		}
 		if ( !this.selection )
 		{
 			rootNode = htmlNode.cloneNode(true);
-			var headNode = this.getHeadNode(rootNode);
+			headNode = this.getHeadNode(rootNode);
 			if (!headNode) {
 				headNode = aDocument.createElement("head");
 				rootNode.insertBefore(headNode, rootNode.firstChild);
