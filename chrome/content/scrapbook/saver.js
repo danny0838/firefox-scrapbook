@@ -287,9 +287,7 @@ var sbContentSaver = {
 					// Perhaps a similar splitter should be added for any node type
 					// but some tags e.g. <td> require special care
 					parentNode.appendChild(aDocument.createComment("DOCUMENT_FRAGMENT_SPLITTER"));
-					var ellipsis = aDocument.createElement("span");
-					ellipsis.appendChild(aDocument.createTextNode(" … "));
-					parentNode.appendChild(ellipsis);
+					parentNode.appendChild(aDocument.createTextNode(" … "));
 					parentNode.appendChild(aDocument.createComment("/DOCUMENT_FRAGMENT_SPLITTER"));
 				}
 				parentNode.appendChild(aDocument.createComment("DOCUMENT_FRAGMENT"));
