@@ -1,3 +1,7 @@
+Scrapbook X 1.12.0a48
+----------------
+
+
 Scrapbook X 1.12.0a47
 ----------------
 - FIXED: Web pages made up of traditional <frame>s cannot be correctly captured.
