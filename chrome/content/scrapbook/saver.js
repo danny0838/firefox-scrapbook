@@ -270,9 +270,7 @@ var sbContentSaver = {
 
 					if (iBranch === branchList.length) {
 						var clonedNode = tmpNodeList[iDepth].cloneNode(false)
-						parentNode.appendChild(aDocument.createTextNode("\n"));
 						parentNode.appendChild(clonedNode);
-						parentNode.appendChild(aDocument.createTextNode("\n"));
 						var v = {
 							origNode: tmpNodeList[iDepth],
 							clonedNode: clonedNode,
@@ -293,13 +291,11 @@ var sbContentSaver = {
 					ellipsis.appendChild(aDocument.createTextNode(" … "));
 					parentNode.appendChild(ellipsis);
 					parentNode.appendChild(aDocument.createComment("/DOCUMENT_FRAGMENT_SPLITTER"));
-					parentNode.appendChild(aDocument.createTextNode("\n"));
 				}
 				parentNode.appendChild(aDocument.createComment("DOCUMENT_FRAGMENT"));
 				var myDocFrag = myRange.cloneContents();
 				parentNode.appendChild(myDocFrag);
 				parentNode.appendChild(aDocument.createComment("/DOCUMENT_FRAGMENT"));
-				parentNode.appendChild(aDocument.createTextNode("\n"));
 			}
 		}
 		if ( !this.selection )
