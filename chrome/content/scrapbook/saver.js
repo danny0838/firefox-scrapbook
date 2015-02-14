@@ -221,42 +221,84 @@ var sbContentSaver = {
 			frame.setAttribute("data-sb-frame-id", idx);
 		}
 		// construct the node list
+		var rootNode;
+		var headNode;
 		if ( this.selection )
 		{
-			var myRange = this.selection.getRangeAt(0);
-			var myDocFrag = myRange.cloneContents();
-			var curNode = myRange.commonAncestorContainer;
-			if ( curNode.nodeName.toUpperCase() == "HTML" ) {
-				// in some case (eg. view image) the selection is the html node
-				// and will cause subsequent errors.
-				// in this case we just process as if there's no selection
-				this.selection = null;
-			}
-			else {
-				if ( curNode.nodeName == "#text" ) curNode = curNode.parentNode;
-				var tmpNode = curNode.cloneNode(false), tmpNode2;
-				tmpNode.appendChild(aDocument.createComment("DOCUMENT_FRAGMENT"));
-				tmpNode.appendChild(myDocFrag);
-				tmpNode.appendChild(aDocument.createComment("/DOCUMENT_FRAGMENT"));
-				curNode = curNode.parentNode;
-				while ( curNode.nodeName.toUpperCase() != "HTML" ) {
-					tmpNode2 = curNode.cloneNode(false);
-					tmpNode2.appendChild(tmpNode);
-					tmpNode = tmpNode2;
-					curNode = curNode.parentNode;
+			var selNodeTree = []; // Is not enough to preserve order of sparsely selected table cells
+			for ( var iRange = 0; iRange < this.selection.rangeCount; ++iRange )
+			{
+				var myRange = this.selection.getRangeAt(iRange);
+				var curNode = myRange.commonAncestorContainer;
+				if ( curNode.nodeName.toUpperCase() == "HTML" ) {
+					// in some case (e.g. view image) the selection is the html node
+					// and will cause subsequent errors.
+					// in this case we just process as if there's no selection
+					this.selection = null;
+					break;
 				}
-				var rootNode = htmlNode.cloneNode(false);
-				var headNode = this.getHeadNode(htmlNode);
-				headNode = headNode ? headNode.cloneNode(true) : aDocument.createElement("head");
-				rootNode.appendChild(headNode);
-				rootNode.appendChild(aDocument.createTextNode("\n"));
-				rootNode.appendChild(tmpNode);
+
+				if ( iRange === 0 ) {
+					rootNode = htmlNode.cloneNode(false);
+					headNode = this.getHeadNode(htmlNode);
+					headNode = headNode ? headNode.cloneNode(true) : aDocument.createElement("head");
+					rootNode.appendChild(headNode);
+					rootNode.appendChild(aDocument.createTextNode("\n"));
+				}
+
+				if ( curNode.nodeName == "#text" ) curNode = curNode.parentNode;
+
+				var tmpNodeList = [];
+				do {
+					tmpNodeList.unshift(curNode);
+					curNode = curNode.parentNode;
+				} while ( curNode.nodeName.toUpperCase() != "HTML" );
+
+				var parentNode = rootNode;
+				var branchList = selNodeTree;
+				var matchedDepth = -2;
+				for( var iDepth = 0; iDepth < tmpNodeList.length; ++iDepth )
+				{
+					for ( var iBranch = 0; iBranch < branchList.length; ++iBranch )
+					{
+						if (tmpNodeList[iDepth] === branchList[iBranch].origNode )
+						{
+							matchedDepth = iDepth;
+							break;
+						}
+					}
+
+					if (iBranch === branchList.length) {
+						var clonedNode = tmpNodeList[iDepth].cloneNode(false);
+						parentNode.appendChild(clonedNode);
+						branchList.push({
+							origNode: tmpNodeList[iDepth],
+							clonedNode: clonedNode,
+							children: []
+						});
+					}
+					parentNode = branchList[iBranch].clonedNode;
+					branchList = branchList[iBranch].children;
+				}
+				if ( matchedDepth === tmpNodeList.length - 1 )
+				{
+					// Perhaps a similar splitter should be added for any node type
+					// but some tags e.g. <td> require special care
+					if (myRange.commonAncestorContainer.nodeName === "#text") {
+						parentNode.appendChild(aDocument.createComment("DOCUMENT_FRAGMENT_SPLITTER"));
+						parentNode.appendChild(aDocument.createTextNode(" … "));
+						parentNode.appendChild(aDocument.createComment("/DOCUMENT_FRAGMENT_SPLITTER"));
+					}
+				}
+				parentNode.appendChild(aDocument.createComment("DOCUMENT_FRAGMENT"));
+				parentNode.appendChild(myRange.cloneContents());
+				parentNode.appendChild(aDocument.createComment("/DOCUMENT_FRAGMENT"));
 			}
 		}
 		if ( !this.selection )
 		{
-			var rootNode = htmlNode.cloneNode(true);
-			var headNode = this.getHeadNode(rootNode);
+			rootNode = htmlNode.cloneNode(true);
+			headNode = this.getHeadNode(rootNode);
 			if (!headNode) {
 				headNode = aDocument.createElement("head");
 				rootNode.insertBefore(headNode, rootNode.firstChild);
