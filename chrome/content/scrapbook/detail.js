@@ -39,7 +39,7 @@ var sbCaptureOptions = {
 		setTimeout(function(){ sbFolderSelector.init(); }, 100);
 		// script
 		this.WARNING_UI.setAttribute("offset", this.WARNING_UI.boxObject.height || 32);
-		setTimeout(function(){ sbCaptureOptions.updateWarningUI(document.getElementById('sbDetailOptionScript').checked); }, 100);
+		setTimeout(function(){ sbCaptureOptions.updateWarningUI(document.getElementById('sbDetailOptionScript').checked); }, 0);
 		// custom extension
 		this.updateCustomUI();
 		// comment
