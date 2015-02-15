@@ -105,7 +105,7 @@ var sbCaptureOptions = {
 		{
 			this.param.option["custom"] = this.CUSTOM_UI.nextSibling.getAttribute("value");
 		}
-		if ( this.param.context == "capture-again" )
+		if ( this.param.item.title && this.param.context == "capture-again" )
 		{
 			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
 			sbDataSource.setProperty(res, "title", this.param.item.title);
