@@ -162,7 +162,7 @@ var sbMainService = {
 		// calculate the position to insert
 		var tarResName, tarRelIdx, isRootPos;
 		try {
-			var curIdx = sbTreeHandler.TREE.currentIndex;
+			var curIdx = sbTreeHandler.TREE.view.selection.count ? sbTreeHandler.TREE.currentIndex : -1;
 			var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
 			if (aAsChild && sbDataSource.isContainer(curRes)) {
 				tarResName = curRes.Value;
