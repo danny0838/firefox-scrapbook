@@ -77,7 +77,7 @@ var sbMainService = {
 		sbTreeHandler.locateInternal(aRes);
 	},
 
-	createFolder: function()
+	createFolder: function(aAsChild)
 	{
 		sbSearchService.exit();
 		// create item
@@ -86,23 +86,23 @@ var sbMainService = {
 		newItem.title = sbCommonUtils.lang("scrapbook", "DEFAULT_FOLDER");
 		newItem.type = "folder";
 		// add resource
-		var newRes = this.addNewResource(newItem);
+		var newRes = this.addNewResource(newItem, null, aAsChild);
 		// edit the new folder
 		var result = {};
 		window.openDialog(
 			"chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome",
 			newItem.id, result
 		);
+		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(newRes);
 		if (!result.accept) {
-			sbDataSource.deleteItemDescending(newRes, sbTreeHandler.getParentResource(sbTreeHandler.TREE.currentIndex));
+			sbDataSource.deleteItemDescending(newRes, sbTreeHandler.getParentResource(idx));
 			return false;
 		}
-		var idx = sbTreeHandler.TREE.builderView.getIndexOfResource(newRes);
 		sbTreeHandler.TREE.view.selection.select(idx);
 		return true;
 	},
 
-	createSeparator: function()
+	createSeparator: function(aAsChild)
 	{
 		sbSearchService.exit();
 		// create item
@@ -110,17 +110,17 @@ var sbMainService = {
 		var newItem = sbCommonUtils.newItem(newID);
 		newItem.type = "separator";
 		// add resource
-		var newRes = this.addNewResource(newItem);
+		var newRes = this.addNewResource(newItem, null, aAsChild);
 	},
 
-	createNote: function(aInTab)
+	createNote: function(aAsChild, aInTab)
 	{
 		sbSearchService.exit();
 		// add resource
-		var newRes = this.addNewResource(null, {"type": "note", "inTab": aInTab});
+		var newRes = this.addNewResource(null, {"type": "note", "inTab": aInTab}, aAsChild);
 	},
 
-	createNoteX: function()
+	createNoteX: function(aAsChild)
 	{
 		sbSearchService.exit();
 		// create item
@@ -152,27 +152,35 @@ var sbMainService = {
 		sbCommonUtils.writeFile(html, content, newItem.chars);
 		sbCommonUtils.writeIndexDat(newItem);
 		// add resource
-		var newRes = this.addNewResource(newItem);
+		var newRes = this.addNewResource(newItem, null, aAsChild);
 		// open and edit the new notex
 		sbController.open(newRes, false);
 	},
 
-	addNewResource: function(aItem, aData)
+	addNewResource: function(aItem, aData, aAsChild)
 	{
 		// calculate the position to insert
 		var tarResName, tarRelIdx, isRootPos;
 		try {
-			var curIdx = sbTreeHandler.TREE.currentIndex;
+			var curIdx = sbTreeHandler.TREE.view.selection.count ? sbTreeHandler.TREE.currentIndex : -1;
 			var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
-			var curPar = sbTreeHandler.getParentResource(curIdx);
-			var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
-			tarResName = curPar.Value;
-			tarRelIdx  = curRelIdx + 1;
-			isRootPos  = false;
+			if (aAsChild && sbDataSource.isContainer(curRes)) {
+				tarResName = curRes.Value;
+				tarRelIdx  = sbCommonUtils.getPref("tree.unshift", false) ? 1 : 0;
+				isRootPos  = false;
+				if (!sbTreeHandler.TREE.view.isContainerOpen(curIdx) ) sbTreeHandler.TREE.view.toggleOpenState(curIdx);
+			}
+			else {
+				var curPar = sbTreeHandler.getParentResource(curIdx);
+				var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
+				tarResName = curPar.Value;
+				tarRelIdx  = curRelIdx + (sbCommonUtils.getPref("tree.unshift", false) ? 0 : 1);
+				isRootPos  = false;
+			}
 		}
 		catch(ex) {
 			tarResName = sbTreeHandler.TREE.ref;
-			tarRelIdx  = 0;
+			tarRelIdx  = sbCommonUtils.getPref("tree.unshift", false) ? 1 : 0;
 			isRootPos  = true;
 		}
 		// add the new resource

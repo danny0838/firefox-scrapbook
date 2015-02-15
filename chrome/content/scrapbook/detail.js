@@ -207,28 +207,6 @@ var sbFolderSelector = {
 		this.nest--;
 	},
 
-	createFolder : function()
-	{
-		var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
-		var newItem = sbCommonUtils.newItem(newID);
-		newItem.title = sbCommonUtils.lang("scrapbook", "DEFAULT_FOLDER");
-		newItem.type = "folder";
-		var tarResName = this.MENU_LIST.selectedItem.getAttribute("nest") > 0 ? this.MENU_LIST.selectedItem.id : "urn:scrapbook:root";
-		var newRes = sbDataSource.addItem(newItem, tarResName, 0);
-		sbDataSource.createEmptySeq(newRes.Value);
-		var result = {};
-		window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome", newItem.id, result);
-		if ( !result.accept )
-		{
-			sbDataSource.deleteItemDescending(newRes, sbCommonUtils.RDF.GetResource(tarResName));
-		}
-		else
-		{
-			this.refresh(newRes.Value);
-			this.onChange(newRes.Value);
-		}
-	},
-
 	onChange : function(aResURI)
 	{
 		sbCaptureOptions.param.resURI = aResURI;

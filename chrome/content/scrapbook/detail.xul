@@ -48,7 +48,6 @@
 								<menulist id="sbFolderList" class="folder-icon" flex="1" onclick="if ( event.button == 1 ) sbFolderSelector.onMiddleClick();" disabled="true">
 									<menupopup id="sbFolderPopup" oncommand="sbFolderSelector.onChange(event.target.id);" />
 								</menulist>
-								<toolbarbutton id="sbToolbarNewFolder" tooltiptext="&sb.detail.new.folder;..."    oncommand="sbFolderSelector.createFolder();" />
 								<toolbarbutton id="sbToolbarMove"      tooltiptext="&sb.detail.select.folder;..." oncommand="sbFolderSelector.pick();" />
 							</hbox>
 						</row>
