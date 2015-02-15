@@ -1,6 +1,7 @@
 Scrapbook X 1.12.0a48
 ----------------
 - UPDATE: Capture selection now supports multiple ranges.
+- UPDATE: Improve the title and the display message of the "Build Cache" dialog.
 
 
 Scrapbook X 1.12.0a47
