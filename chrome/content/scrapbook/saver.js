@@ -63,7 +63,7 @@ var sbContentSaver = {
 				if ( lines[i].length > 0 ) titles.push(lines[i].substring(0,72));
 				if ( titles.length > 4 ) break;
 			}
-			this.item.title = ( titles.length > 0 ) ? titles[1] : titles[0];
+			this.item.title = ( titles.length > 1 ) ? titles[1] : titles[0];
 		}
 		else
 		{
@@ -73,7 +73,7 @@ var sbContentSaver = {
 		if ( document.getElementById("ScrapBookToolbox") && !document.getElementById("ScrapBookToolbox").hidden )
 		{
 			var modTitle = document.getElementById("ScrapBookEditTitle").value;
-			if ( titles.indexOf(modTitle) < 0 )
+			if ( modTitle && titles.indexOf(modTitle) < 0 )
 			{
 				titles.splice(1, 0, modTitle);
 				this.item.title = modTitle;
