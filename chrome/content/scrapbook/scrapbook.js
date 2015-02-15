@@ -167,12 +167,12 @@ var sbMainService = {
 			var curPar = sbTreeHandler.getParentResource(curIdx);
 			var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
 			tarResName = curPar.Value;
-			tarRelIdx  = curRelIdx + 1;
+			tarRelIdx  = curRelIdx + (sbCommonUtils.getPref("tree.unshift", false) ? 0 : 1);
 			isRootPos  = false;
 		}
 		catch(ex) {
 			tarResName = sbTreeHandler.TREE.ref;
-			tarRelIdx  = 0;
+			tarRelIdx  = sbCommonUtils.getPref("tree.unshift", false) ? 1 : 0;
 			isRootPos  = true;
 		}
 		// add the new resource
