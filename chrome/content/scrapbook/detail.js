@@ -10,40 +10,30 @@ var sbCaptureOptions = {
 	{
 		if ( !window.arguments || !("sbContentSaver" in window.opener) ) window.close();
 		this.param = window.arguments[0];
-		// customization for different context
-		if ( this.param.context == "bookmark" )
-		{
-			document.title = "ScrapBook - " + window.opener.document.getElementById("ScrapBookContextMenuB").label.replace("...","");
-			var elts = document.getElementsByAttribute("group", "capture-options");
-			for ( var i = 0; i < elts.length; i++ ) elts[i].collapsed = true;
-		}
-		else
-		{
-			document.documentElement.getButton("accept").label = sbCommonUtils.lang("scrapbook", "CAPTURE_OK_BUTTON");
-			document.documentElement.getButton("accept").accesskey = "C";
-			if ( this.param.context == "capture-again" || this.param.context == "capture-again-deep" )
-			{
-				document.getElementById("sbDetailFolderRow").collapsed = true;
-				document.getElementById("sbDetailWarnAboutRenew").hidden = false;
-				document.getElementById("sbDetailTabComment").hidden = true;
-				if ( this.param.context == "capture-again-deep" )
-				{
-					document.getElementById("sbDetailInDepthBox").collapsed = true;
-				}
-				return;
-			}
-		}
+		// accept button
+		document.documentElement.getButton("accept").label = sbCommonUtils.lang("scrapbook", "CAPTURE_OK_BUTTON");
 		// title
 		this.fillTitleList();
-		// folder
-		setTimeout(function(){ sbFolderSelector.init(); }, 100);
-		// script
+		// script warning
 		this.WARNING_UI.setAttribute("offset", this.WARNING_UI.boxObject.height || 32);
 		setTimeout(function(){ sbCaptureOptions.updateWarningUI(document.getElementById('sbDetailOptionScript').checked); }, 0);
-		// custom extension
+		// download link - custom extension
 		this.updateCustomUI();
-		// comment
-		document.getElementById("sbDetailComment").value = this.param.item.comment.replace(/ __BR__ /g, "\n");
+		// context specific settings
+		if ( this.param.context == "capture-again" || this.param.context == "capture-again-deep" ) {
+			document.getElementById("sbDetailFolderRow").collapsed = true;
+			document.getElementById("sbDetailWarnAboutRenew").hidden = false;
+			document.getElementById("sbDetailTabComment").hidden = true;
+			if ( this.param.context == "capture-again-deep" ) {
+				document.getElementById("sbDetailInDepthBox").collapsed = true;
+			}
+		}
+		else {
+			// make folder list
+			setTimeout(function(){ sbFolderSelector.init(); }, 100);
+			// comment
+			document.getElementById("sbDetailComment").value = this.param.item.comment.replace(/ __BR__ /g, "\n");
+		}
 	},
 
 	updateCustomUI : function()
