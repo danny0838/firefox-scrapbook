@@ -29,6 +29,7 @@
 
 	<keyset id="sbGenericKeys">
 		<key key="a" modifiers="accel" oncommand="sbTreeHandler.TREE.focus();sbTreeHandler.TREE.view.selection.selectAll();" />
+		<key key="w" modifiers="accel" oncommand="window.close();" />
 	</keyset>
 
 	<popupset id="sbPopupSet" />
