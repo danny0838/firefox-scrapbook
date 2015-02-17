@@ -10,7 +10,7 @@ var sbMultiBookService = {
 		document.getElementById("mbToolbarButton").hidden = !this.enabled;
 	},
 
-	showTitle: function()
+	showSidebarTitle: function()
 	{
 		var sidebarTitleId = sbCommonUtils.getSidebarId("sidebar-title");
 		var win = "sbBrowserOverlay" in window.top ? window.top : sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
