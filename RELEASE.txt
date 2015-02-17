@@ -5,10 +5,10 @@ Scrapbook X 1.12.0a48
 - UPDATE: Improve the UI of the "Capture Detail" dialog.
 - FIXED: "Capture Again" gets an empty title.
 - FIXED: Middle-click on a toolbar button menu option causes the "Manage" window to open.
-- NEW: Creates the new item in the child hierarchy if shift or ctrl key is holded. The "New Folder" button in the "Pick Folder" dialog always creates as child.
+- NEW: Allow creating a new item in the child hierarchy by holding shift or ctrl key. The "New Folder" button in the "Pick Folder" dialog always creates as child.
 - UPDATE: The new item is now created above the selected item if "Put an item into the top of a folder" is set.
-- UPDATE: Remove the "New Folder" button from the capture detail dialog.
-- FIXED: Sometimes the new folder is created relative to a previous selected item even if the "Root Folder" is checked in the "Pick Folder" dialog.
+- UPDATE: Removed the "New Folder" button from the capture detail dialog.
+- FIXED: Sometimes the new folder is created relative to a previously selected item even if the "Root Folder" is checked in the "Pick Folder" dialog.
 
 
 Scrapbook X 1.12.0a47
