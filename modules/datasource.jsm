@@ -174,10 +174,6 @@ var sbDataSource = {
 					true
 				);
 			}
-			if ( sbCommonUtils.getPref("tree.unshift", false) )
-			{
-				if ( aIdx == 0 || aIdx == -1 ) aIdx = 1;
-			}
 			if ( 0 < aIdx && aIdx <= cont.GetCount() )
 				cont.InsertElementAt(newRes, aIdx, true);
 			else

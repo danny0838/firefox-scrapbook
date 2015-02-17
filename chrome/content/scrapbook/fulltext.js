@@ -346,6 +346,7 @@ var sbCacheService = {
 	{
 		var res = this.resList[this.index];
 		// update trace message
+		document.title = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(this.folders[this.index]), "title") || sbCommonUtils.lang("fulltext", "BUILD_CACHE");
 		gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_UPDATE", [sbDataSource.getProperty(res, "title")]);
 		gCacheStatus.lastChild.value  = Math.round((this.index + 1) / this.resList.length * 100);
 		// inspect the data and do the cache
@@ -429,8 +430,6 @@ var sbCacheService = {
 				sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_UNKNOWN_DATA_TYPE", [type]));
 				break;
 		}
-		// update trace message
-		document.title = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(this.folders[this.index]), "title") || sbCommonUtils.lang("fulltext", "BUILD_CACHE");
 		// next one
 		if ( ++this.index < this.resList.length )
 			setTimeout(function(){ sbCacheService.processAsync(); }, 0);
@@ -550,7 +549,7 @@ var sbCacheService = {
 
 	finalize : function()
 	{
-		document.title = sbCommonUtils.lang("fulltext", "BUILD_CACHE_UPDATE");
+		document.title = sbCommonUtils.lang("fulltext", "BUILD_CACHE");
 		for ( var uri in this.uriHash )
 		{
 			if ( !this.uriHash[uri] && uri != "urn:scrapbook:cache" )

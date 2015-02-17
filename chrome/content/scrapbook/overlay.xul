@@ -91,7 +91,7 @@
 		               type="menu-button"
 		               class="toolbarbutton-1 chromeclass-toolbar-additional"
 		               oncommand="if (event.originalTarget.localName == 'toolbarbutton') toggleSidebar('viewScrapBookSidebar');"
-		               onclick="if (event.button == 1) sbCommonUtils.openManageWindow();"
+		               onclick="if (event.originalTarget.localName == 'toolbarbutton') if (event.button == 1) sbCommonUtils.openManageWindow();"
 		               ondragover="toggleSidebar('viewScrapBookSidebar',true);">
 			<menupopup id="ScrapBookStatusPopup" onpopupshowing="sbInfoViewer.onPopupShowing(event);">
 				<menuitem id="ScrapBookStatusPopupR" label="&sb.renew;..."     oncommand="sbInfoViewer.renew(true);" onclick="if (event.button == 1) sbInfoViewer.renew(false);" class="menuitem-iconic sb-capture-target" />

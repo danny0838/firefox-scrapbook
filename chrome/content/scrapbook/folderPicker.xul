@@ -14,7 +14,7 @@
         buttonlabelextra2="&sb.detail.new.folder;..."
         onload="sbFolderPicker.init();"
         ondialogaccept="sbFolderPicker.accept();"
-        ondialogextra2="sbMainService.createFolder();">
+        ondialogextra2="sbMainService.createFolder(true);">
 
 	<script type="application/x-javascript" src="chrome://scrapbook/content/folderPicker.js" />
 	<script type="application/x-javascript" src="chrome://scrapbook/content/multiple.js" />
