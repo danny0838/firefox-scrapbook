@@ -25,11 +25,6 @@ var sbManageService = {
 		document.getElementById("sbSearchTextbox").focus();
 	},
 
-	ensureContextIsTree : function()
-	{
-		return sbTreeHandler.TREE.treeBoxObject.focused;
-	},
-
 	toggleRightPane : function(aModuleElt)
 	{
 		if ( typeof(aModuleElt) == "string" ) aModuleElt = document.getElementById(aModuleElt);

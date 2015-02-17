@@ -177,8 +177,7 @@ MultiBookTreeView.prototype = {
 	getRowProperties: function(index, properties) {},
 	getCellProperties: function(row, col, properties) {
 		if (this._data[row][kActiveCol]) {
-			var atomSvc = Components.classes["@mozilla.org/atom-service;1"].getService(Components.interfaces.nsIAtomService);
-			var val = atomSvc.getAtom("active");
+			var val = "active";
 			if (sbCommonUtils._fxVer22) return val;
 			else properties.AppendElement(ATOM_SERVICE.getAtom(val));
 		}
