@@ -31,6 +31,7 @@ var gMultiBookManager = {
 				if (item[kActiveCol]) {
 					sbCommonUtils.setPref("data.title", item[kNameCol]);
 					sbCommonUtils.setPref("data.path", item[kPathCol]);
+					sbDataSource.checkRefresh();
 				}
 			});
 		}
@@ -39,7 +40,6 @@ var gMultiBookManager = {
 			content += item[kNameCol] + "\t" + item[kPathCol] + "\n";
 		});
 		sbCommonUtils.writeFile(sbMultiBookService.file, content, "UTF-8");
-		window.opener.location.reload();
 	},
 
 	updateButtonsUI: function() {
