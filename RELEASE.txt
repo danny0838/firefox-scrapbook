@@ -1,3 +1,8 @@
+Scrapbook X 1.12.0a49
+----------------
+- NEW: Add accesskey "Ctrl+W" to close the "Manage" dialog.
+
+
 Scrapbook X 1.12.0a48
 ----------------
 - UPDATE: Capture selection now supports multiple ranges.
