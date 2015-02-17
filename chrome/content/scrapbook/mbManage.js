@@ -34,8 +34,9 @@ var gMultiBookManager = {
 		if (this._activeItemChanged) {
 			gMultiBookTreeView._data.forEach(function(item) {
 				if (item[kActiveCol]) {
-					sbCommonUtils.setPref("data.title", item[kNameCol]);
 					sbCommonUtils.setPref("data.path", item[kPathCol]);
+					if (!sbCommonUtils.getPref("data.default", true))
+						sbCommonUtils.setPref("data.title", item[kNameCol]);
 				}
 			});
 		}
