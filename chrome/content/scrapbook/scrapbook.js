@@ -34,6 +34,7 @@ var sbMainService = {
 	{
 		sbTreeHandler.exit();
 		sbTreeDNDHandler.quit();
+		sbMultiBookService.file = null;  // force sbMultiBookService.initMenu to run initFile when called
 		this.init();
 	},
 

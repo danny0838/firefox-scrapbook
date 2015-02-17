@@ -26,6 +26,11 @@ var gMultiBookManager = {
 	done: function() {
 		if (!this._changed)
 			return;
+		var content = "";
+		gMultiBookTreeView._data.forEach(function(item) {
+			content += item[kNameCol] + "\t" + item[kPathCol] + "\n";
+		});
+		sbCommonUtils.writeFile(sbMultiBookService.file, content, "UTF-8");
 		if (this._activeItemChanged) {
 			gMultiBookTreeView._data.forEach(function(item) {
 				if (item[kActiveCol]) {
@@ -35,11 +40,6 @@ var gMultiBookManager = {
 				}
 			});
 		}
-		var content = "";
-		gMultiBookTreeView._data.forEach(function(item) {
-			content += item[kNameCol] + "\t" + item[kPathCol] + "\n";
-		});
-		sbCommonUtils.writeFile(sbMultiBookService.file, content, "UTF-8");
 	},
 
 	updateButtonsUI: function() {

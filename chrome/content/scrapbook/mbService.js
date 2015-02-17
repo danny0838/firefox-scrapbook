@@ -24,23 +24,32 @@ var sbMultiBookService = {
 		var dataPath  = sbCommonUtils.getPref("data.path", "");
 		var popup = document.getElementById("mbMenuPopup");
 		if (!this.file) {
+			var child;
+			while ((child = popup.firstChild) && !child.id) {
+				popup.removeChild(child);
+			}
 			var items = this.initFile();
 			for (var i = items.length - 1; i >= 0; i--) {
-				var elt = document.getElementById("mbMenuItem").cloneNode(false);
-				popup.insertBefore(elt, popup.firstChild);
-				elt.removeAttribute("id");
-				elt.removeAttribute("hidden");
-				elt.setAttribute("label", items[i][0]);
-				elt.setAttribute("path",  items[i][1]);
+				var elem = document.createElement("menuitem");
+				elem.setAttribute("type", "radio");
+				elem.setAttribute("autocheck", false);
+				elem.setAttribute("label", items[i][0]);
+				elem.setAttribute("path",  items[i][1]);
+				popup.insertBefore(elem, popup.firstChild);
 			}
 		}
-		var nodes = popup.childNodes;
-		for (var i = 0; i < nodes.length; i++) {
-			if (!isDefault && nodes[i].getAttribute("path") == dataPath)
-				return nodes[i].setAttribute("checked", true);
-		}
-		if (isDefault)
+		if (isDefault) {
 			document.getElementById("mbMenuItemDefault").setAttribute("checked", true);
+		}
+		else {
+			var nodes = popup.childNodes;
+			for (var i = 0; i < nodes.length; i++) {
+				if (nodes[i].getAttribute("path") == dataPath) {
+					nodes[i].setAttribute("checked", true);
+					break;
+				}
+			}
+		}
 	},
 
 	initFile : function()
