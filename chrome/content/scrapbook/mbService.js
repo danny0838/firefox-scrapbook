@@ -13,20 +13,9 @@ var sbMultiBookService = {
 	showSidebarTitle: function()
 	{
 		var sidebarTitleId = sbCommonUtils.getSidebarId("sidebar-title");
-		var win = "sbBrowserOverlay" in window.top ? window.top : sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
-		if (!this.enabled)
-		{
-			win.document.getElementById(sidebarTitleId).value = "ScrapBook X";
-		} else
-		{
-			var title = win.sbBrowserOverlay.dataTitle;
-			if (!title) {
-				title = sbCommonUtils.getPref("data.title", "");
-				win.sbBrowserOverlay.dataTitle = title;
-			}
-			if (title)
-				win.document.getElementById(sidebarTitleId).value = "ScrapBook X [" + title + "]";
-		}
+		var elem = window.top.document.getElementById(sidebarTitleId);
+		if (!elem) return;
+		elem.value = "ScrapBook X" + (this.enabled ? " [" + sbCommonUtils.getPref("data.title", "") + "]" : "");
 	},
 
 	initMenu : function()
@@ -84,14 +73,8 @@ var sbMultiBookService = {
 		aItem.setAttribute("checked", true);
 		var path = aItem.getAttribute("path");
 		sbCommonUtils.setPref("data.default", path == "");
-		if (path != "")
-			sbCommonUtils.setPref("data.path", path);
+		if (path != "") sbCommonUtils.setPref("data.path", path);
 		sbCommonUtils.setPref("data.title", aItem.label);
-		try {
-			var refWin = "sbBrowserOverlay" in window.top ? window.top : window.opener.top;
-			refWin.sbBrowserOverlay.dataTitle = aItem.label;
-		} catch(ex) {
-		}
 		sbDataSource.checkRefresh();
 	},
 

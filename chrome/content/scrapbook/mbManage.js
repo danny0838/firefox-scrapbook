@@ -31,7 +31,6 @@ var gMultiBookManager = {
 				if (item[kActiveCol]) {
 					sbCommonUtils.setPref("data.title", item[kNameCol]);
 					sbCommonUtils.setPref("data.path", item[kPathCol]);
-					window.opener.top.sbBrowserOverlay.dataTitle = item[kNameCol];
 				}
 			});
 		}
