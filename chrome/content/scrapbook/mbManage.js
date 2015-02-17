@@ -36,10 +36,10 @@ var gMultiBookManager = {
 				if (item[kActiveCol]) {
 					sbCommonUtils.setPref("data.title", item[kNameCol]);
 					sbCommonUtils.setPref("data.path", item[kPathCol]);
-					sbDataSource.checkRefresh();
 				}
 			});
 		}
+		sbDataSource.checkRefresh();
 	},
 
 	updateButtonsUI: function() {
