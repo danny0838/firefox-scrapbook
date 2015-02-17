@@ -1,6 +1,8 @@
 Scrapbook X 1.12.0a49
 ----------------
 - NEW: Add accesskey "Ctrl+W" to close the "Manage" dialog.
+- FIXED: Changing items in the "Multi-ScrapBook Manager" invoked from the "Manage" window could get an error on submitting.
+- FIXED: The UI of the main sidebar title and the Multi-ScrapBook dropdown list do not update or behave properly in several cases after a change in the Multi-ScrapBook dropdown list or the "Multi-ScrapBook Manager".
 
 
 Scrapbook X 1.12.0a48
