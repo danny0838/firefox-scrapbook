@@ -66,7 +66,6 @@ var sbBrowserOverlay = {
 	refresh: function()
 	{
 		this.lastLocation = "";
-		this.dataTitle = "";
 		this.editMode = sbPageEditor.TOOLBAR.getAttribute("autoshow") == "true";
 		this.infoMode = sbInfoViewer.TOOLBAR.getAttribute("autoshow") == "true";
 		// update menus by ui settings

@@ -10,23 +10,12 @@ var sbMultiBookService = {
 		document.getElementById("mbToolbarButton").hidden = !this.enabled;
 	},
 
-	showTitle: function()
+	showSidebarTitle: function()
 	{
 		var sidebarTitleId = sbCommonUtils.getSidebarId("sidebar-title");
-		var win = "sbBrowserOverlay" in window.top ? window.top : sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
-		if (!this.enabled)
-		{
-			win.document.getElementById(sidebarTitleId).value = "ScrapBook X";
-		} else
-		{
-			var title = win.sbBrowserOverlay.dataTitle;
-			if (!title) {
-				title = sbCommonUtils.getPref("data.title", "");
-				win.sbBrowserOverlay.dataTitle = title;
-			}
-			if (title)
-				win.document.getElementById(sidebarTitleId).value = "ScrapBook X [" + title + "]";
-		}
+		var elem = window.top.document.getElementById(sidebarTitleId);
+		if (!elem) return;
+		elem.value = "ScrapBook X" + (this.enabled ? " [" + sbCommonUtils.getPref("data.title", "") + "]" : "");
 	},
 
 	initMenu : function()
@@ -35,23 +24,36 @@ var sbMultiBookService = {
 		var dataPath  = sbCommonUtils.getPref("data.path", "");
 		var popup = document.getElementById("mbMenuPopup");
 		if (!this.file) {
+			var child;
+			while ((child = popup.firstChild) && !child.id) {
+				popup.removeChild(child);
+			}
 			var items = this.initFile();
 			for (var i = items.length - 1; i >= 0; i--) {
-				var elt = document.getElementById("mbMenuItem").cloneNode(false);
-				popup.insertBefore(elt, popup.firstChild);
-				elt.removeAttribute("id");
-				elt.removeAttribute("hidden");
-				elt.setAttribute("label", items[i][0]);
-				elt.setAttribute("path",  items[i][1]);
+				var elem = document.createElement("menuitem");
+				elem.setAttribute("type", "radio");
+				elem.setAttribute("autocheck", false);
+				elem.setAttribute("label", items[i][0]);
+				elem.setAttribute("path",  items[i][1]);
+				popup.insertBefore(elem, popup.firstChild);
 			}
 		}
-		var nodes = popup.childNodes;
-		for (var i = 0; i < nodes.length; i++) {
-			if (!isDefault && nodes[i].getAttribute("path") == dataPath)
-				return nodes[i].setAttribute("checked", true);
-		}
-		if (isDefault)
+		if (isDefault) {
 			document.getElementById("mbMenuItemDefault").setAttribute("checked", true);
+		}
+		else {
+			// if we don't remove the check explicitly,
+			// the main sidebar could get both the default one and the picked one selected
+			// when we set this to a non-default one in the "Manage" dialog
+			document.getElementById("mbMenuItemDefault").setAttribute("checked", false);
+			var nodes = popup.childNodes;
+			for (var i = 0; i < nodes.length; i++) {
+				if (nodes[i].getAttribute("path") == dataPath) {
+					nodes[i].setAttribute("checked", true);
+					break;
+				}
+			}
+		}
 	},
 
 	initFile : function()
@@ -84,14 +86,8 @@ var sbMultiBookService = {
 		aItem.setAttribute("checked", true);
 		var path = aItem.getAttribute("path");
 		sbCommonUtils.setPref("data.default", path == "");
-		if (path != "")
-			sbCommonUtils.setPref("data.path", path);
+		if (path != "") sbCommonUtils.setPref("data.path", path);
 		sbCommonUtils.setPref("data.title", aItem.label);
-		try {
-			var refWin = "sbBrowserOverlay" in window.top ? window.top : window.opener.top;
-			refWin.sbBrowserOverlay.dataTitle = aItem.label;
-		} catch(ex) {
-		}
 		sbDataSource.checkRefresh();
 	},
 
