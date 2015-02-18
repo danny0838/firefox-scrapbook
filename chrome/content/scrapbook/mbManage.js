@@ -26,21 +26,21 @@ var gMultiBookManager = {
 	done: function() {
 		if (!this._changed)
 			return;
-		if (this._activeItemChanged) {
-			gMultiBookTreeView._data.forEach(function(item) {
-				if (item[kActiveCol]) {
-					sbCommonUtils.setPref("data.title", item[kNameCol]);
-					sbCommonUtils.setPref("data.path", item[kPathCol]);
-					window.opener.top.sbBrowserOverlay.dataTitle = item[kNameCol];
-				}
-			});
-		}
 		var content = "";
 		gMultiBookTreeView._data.forEach(function(item) {
 			content += item[kNameCol] + "\t" + item[kPathCol] + "\n";
 		});
 		sbCommonUtils.writeFile(sbMultiBookService.file, content, "UTF-8");
-		window.opener.location.reload();
+		if (this._activeItemChanged) {
+			gMultiBookTreeView._data.forEach(function(item) {
+				if (item[kActiveCol]) {
+					sbCommonUtils.setPref("data.path", item[kPathCol]);
+					if (!sbCommonUtils.getPref("data.default", true))
+						sbCommonUtils.setPref("data.title", item[kNameCol]);
+				}
+			});
+		}
+		sbDataSource.checkRefresh();
 	},
 
 	updateButtonsUI: function() {
@@ -177,8 +177,7 @@ MultiBookTreeView.prototype = {
 	getRowProperties: function(index, properties) {},
 	getCellProperties: function(row, col, properties) {
 		if (this._data[row][kActiveCol]) {
-			var atomSvc = Components.classes["@mozilla.org/atom-service;1"].getService(Components.interfaces.nsIAtomService);
-			var val = atomSvc.getAtom("active");
+			var val = "active";
 			if (sbCommonUtils._fxVer22) return val;
 			else properties.AppendElement(ATOM_SERVICE.getAtom(val));
 		}

@@ -18,7 +18,7 @@ var sbMainService = {
 	delayedInit: function()
 	{
 		if ("sbBrowserOverlay" in window.top == false) return;
-		sbMultiBookService.showTitle();
+		sbMultiBookService.showSidebarTitle();
 		if (window.top.sbBrowserOverlay.locateMe)
 			this.locate(null);
 		if (!document.getElementById("sbAddOnsPopup").firstChild)
@@ -34,6 +34,7 @@ var sbMainService = {
 	{
 		sbTreeHandler.exit();
 		sbTreeDNDHandler.quit();
+		sbMultiBookService.file = null;  // force sbMultiBookService.initMenu to run initFile when called
 		this.init();
 	},
 

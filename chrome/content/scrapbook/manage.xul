@@ -48,8 +48,8 @@
 			<toolbarbutton id="sbToolbarToggle"   tooltiptext="&sb.toggle.all;" oncommand="sbTreeHandler.toggleAllFolders();" />
 			<toolbarbutton id="sbToolbarListView" tooltiptext="&sb.listview;"   oncommand="sbSearchService.listView();" />
 			<toolbarbutton id="mbToolbarButton" />
-			<toolbarseparator /><toolbarbutton id="sbToolbarMove"   label="&sb.move;..." oncommand="if ( sbManageService.ensureContextIsTree() ) sbTreeHandler.send();" />
-			<toolbarseparator /><toolbarbutton id="sbToolbarRemove" label="&sb.remove;"  oncommand="if ( sbManageService.ensureContextIsTree() ) sbTreeHandler.remove();" />
+			<toolbarseparator /><toolbarbutton id="sbToolbarMove"   label="&sb.move;..." oncommand="sbTreeHandler.send();" />
+			<toolbarseparator /><toolbarbutton id="sbToolbarRemove" label="&sb.remove;"  oncommand="sbTreeHandler.remove();" />
 			<spacer flex="1" />
 			<toolbarseparator /><toolbarbutton id="sbToolbarCombine" label="&sb.tools.combine;" type="checkbox" autoCheck="false" group="module" moduleurl="chrome://scrapbook/content/combine.xul" oncommand="sbManageService.toggleRightPane(this);" />
 			<toolbarseparator /><toolbarbutton id="sbToolbarTrade"   label="&sb.tools.trade;"   type="checkbox" autoCheck="false" group="module" moduleurl="chrome://scrapbook/content/trade.xul"   oncommand="sbManageService.toggleRightPane(this);" />
