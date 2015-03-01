@@ -1,3 +1,10 @@
+Scrapbook X 1.12.0a50
+----------------
+- UPDATE: Now prompts a confirm when deleting a valid item in the "Calculate" dialog.
+- UPDATE: When rebuilding the cache, the process of removing existing entries is now visible.
+- FIXED: Firefox could be frozen on rebuilding the cache if there are too many existing entries to remove.
+
+
 Scrapbook X 1.12.0a49
 ----------------
 - NEW: Add accesskey "Ctrl+W" to close the "Manage" dialog.
