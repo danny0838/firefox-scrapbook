@@ -550,25 +550,37 @@ var sbCacheService = {
 	finalize : function()
 	{
 		document.title = sbCommonUtils.lang("fulltext", "BUILD_CACHE");
+		var toRemove = [];
 		for ( var uri in this.uriHash )
 		{
 			if ( !this.uriHash[uri] && uri != "urn:scrapbook:cache" )
 			{
+				toRemove.push(uri);
+			}
+		}
+        (function () {
+			var uri = toRemove.shift();
+            if (uri) {
+				// next
 				gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_REMOVE", [uri]);
 				sbCacheSource.removeEntry(sbCommonUtils.RDF.GetResource(uri));
-			}
-		}
-		gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_UPDATE", ["cache.rdf"]);
-		sbCacheSource.flush();
-		try {
-			if ( window.arguments[0] ) {
-				var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
-				var inTab = (win.content.location.href.indexOf("chrome://scrapbook/content/result.xul") == 0) ? false : sbCommonUtils.getPref("tabs.searchResult", false);
-				sbCommonUtils.loadURL(window.arguments[0], inTab);
-			}
-		} catch(ex) {
-		}
-		window.close();
+                setTimeout(arguments.callee, 0);
+            }
+			else {
+                // done
+				gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_UPDATE", ["cache.rdf"]);
+				sbCacheSource.flush();
+				try {
+					if ( window.arguments[0] ) {
+						var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
+						var inTab = (win.content.location.href.indexOf("chrome://scrapbook/content/result.xul") == 0) ? false : sbCommonUtils.getPref("tabs.searchResult", false);
+						sbCommonUtils.loadURL(window.arguments[0], inTab);
+					}
+				} catch(ex) {
+				}
+				window.close();
+            }
+        })();
 	},
 
 	convertHTML2Text : function(aStr)
