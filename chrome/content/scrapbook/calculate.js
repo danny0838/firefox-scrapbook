@@ -175,6 +175,9 @@ var sbCalcController = {
 	remove : function()
 	{
 		var id = this.CURRENT_TREEITEM[0];
+		if (this.CURRENT_TREEITEM[6]) {
+			if (!sbController.confirmRemovingPrompt()) return;
+		}
 		try {
 			// remove the data folder
 			var dir = sbCommonUtils.getContentDir(id, true, true);
