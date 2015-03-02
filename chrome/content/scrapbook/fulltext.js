@@ -558,16 +558,16 @@ var sbCacheService = {
 				toRemove.push(uri);
 			}
 		}
-        (function () {
+		(function () {
 			var uri = toRemove.shift();
-            if (uri) {
+			if (uri) {
 				// next
 				gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_REMOVE", [uri]);
 				sbCacheSource.removeEntry(sbCommonUtils.RDF.GetResource(uri));
-                setTimeout(arguments.callee, 0);
-            }
+				setTimeout(arguments.callee, 0);
+			}
 			else {
-                // done
+				// done
 				gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_UPDATE", ["cache.rdf"]);
 				sbCacheSource.flush();
 				try {
@@ -579,8 +579,8 @@ var sbCacheService = {
 				} catch(ex) {
 				}
 				window.close();
-            }
-        })();
+			}
+		})();
 	},
 
 	convertHTML2Text : function(aStr)
