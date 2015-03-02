@@ -1,3 +1,8 @@
+Scrapbook X 1.12.0a51
+----------------
+- FIXED: New captured item is placed at the bottom even if "Put an item into the top of a folder" is set.
+
+
 Scrapbook X 1.12.0a50
 ----------------
 - UPDATE: Now prompts a confirm when deleting a valid item in the "Calculate" dialog.
