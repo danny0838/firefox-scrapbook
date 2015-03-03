@@ -6,6 +6,14 @@ const ScrapBookUtils = {
 
 	get namespace() { return "http://amb.vis.ne.jp/mozilla/scrapbook-rdf#"; },
 
+	get FX36() {
+		var vc  = Cc["@mozilla.org/xpcom/version-comparator;1"].getService(Ci.nsIVersionComparator);
+		var ver = Cc["@mozilla.org/xre/app-info;1"].getService(Ci.nsIXULAppInfo).version;
+		var cmp = vc.compare(ver, "36.0") >= 0;
+		this.__defineGetter__("FX36", function() cmp);
+		return cmp;
+	},
+
 
 	getScrapBookDir: function SBU_getScrapBookDir() {
 		var dir;
@@ -231,7 +239,10 @@ const ScrapBookUtils = {
 		              createInstance(Ci.nsIWebBrowserPersist);
 		var privacyContext = this.getBrowserWindow().QueryInterface(Ci.nsIInterfaceRequestor).
 		                     getInterface(Ci.nsIWebNavigation).QueryInterface(Ci.nsILoadContext);
-		persist.saveURI(uri, null, null, null, null, aFile, privacyContext); 
+		if (this.FX36)
+			persist.saveURI(uri, null, null, Ci.nsIHttpChannel.REFERRER_POLICY_NO_REFERRER_WHEN_DOWNGRADE, null, null, aFile, privacyContext); 
+		else
+			persist.saveURI(uri, null, null, null, null, aFile, privacyContext); 
 	},
 
 	convertToUnicode: function SBU_convertToUnicode(aString, aCharset) {

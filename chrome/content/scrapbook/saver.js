@@ -708,7 +708,10 @@ var sbContentSaver = {
 				var WBP = Cc['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Ci.nsIWebBrowserPersist);
 				WBP.persistFlags |= WBP.PERSIST_FLAGS_FROM_CACHE;
 				WBP.persistFlags |= WBP.PERSIST_FLAGS_AUTODETECT_APPLY_CONVERSION;
-				WBP.saveURI(aURL, null, refURL, null, null, targetFile, null);
+				if (ScrapBookUtils.FX36)
+					WBP.saveURI(aURL, null, refURL, Ci.nsIHttpChannel.REFERRER_POLICY_NO_REFERRER_WHEN_DOWNGRADE, null, null, targetFile, null);
+				else
+					WBP.saveURI(aURL, null, refURL, null, null, targetFile, null);
 				this.httpTask[this.item.id]++;
 				WBP.progressListener = new sbCaptureObserver(this.item, newFileName);
 				this.file2URL[newFileName] = aURLSpec;
