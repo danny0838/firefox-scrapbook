@@ -30,6 +30,11 @@ var sbContentSaver = {
 		this.linkURLs = [];
 		this.frames = [];
 		this.isMainFrame = true;
+
+		this.option = sbCommonUtils.extendObject(this.option, {
+			'image_bg_ignore': true,
+		});
+
 		if ( aPresetData )
 		{
 			if ( aPresetData[0] ) this.item.id  = aPresetData[0];
@@ -745,7 +750,7 @@ var sbContentSaver = {
 		}
 		if ( aNode.style && aNode.style.cssText )
 		{
-			var newCSStext = this.inspectCSSText(aNode.style.cssText, this.refURLObj.spec, "image");
+			var newCSStext = this.inspectCSSText(aNode.style.cssText, this.refURLObj.spec, "image", aNode);
 			if ( newCSStext ) aNode.setAttribute("style", newCSStext);
 		}
 		if ( !this.option["script"] )
@@ -817,7 +822,7 @@ var sbContentSaver = {
 					content += this.processCSSRecursively(cssRule.styleSheet, aDocument, true);
 					break;
 				case Components.interfaces.nsIDOMCSSRule.FONT_FACE_RULE:
-					var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "font");
+					var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "font", cssRule);
 					if (cssText) content += cssText + "\n";
 					break;
 				case Components.interfaces.nsIDOMCSSRule.MEDIA_RULE:
@@ -829,12 +834,12 @@ var sbContentSaver = {
 				case Components.interfaces.nsIDOMCSSRule.STYLE_RULE:
 					// if script is used, preserve all css in case it's used by a dynamic generated DOM
 					if (this.option["script"] || verifySelector(aDocument, cssRule.selectorText)) {
-						var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "image");
+						var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "image", cssRule);
 						if (cssText) content += cssText + "\n";
 					}
 					break;
 				default:
-					var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "image");
+					var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "image", cssRule);
 					if (cssText) content += cssText + "\n";
 					break;
 			}
@@ -885,23 +890,40 @@ var sbContentSaver = {
 		}
 	},
 
-	inspectCSSText : function(aCSSText, aCSSHref, type)
+	inspectCSSText : function(aCSSText, aCSSHref, type, aNode)
 	{
 		if (!aCSSHref) aCSSHref = this.refURLObj.spec;
 		// CSS get by .cssText is always url("something-with-\"double-quote\"-escaped")
 		// or url(something) in Firefox < 3.6
 		// and no CSS comment is in
 		// so we can parse it safely with this RegExp
+		/*
 		var regex = (sbCommonUtils._fxVer3_6) ? / url\(\"((?:\\.|[^"])+)\"\)/g : / url\(((?:\\.|[^)])+)\)/g;
+		*/
+
+		var regex = (sbCommonUtils._fxVer3_6) ? /(?:([a-z0-9A-Z\-]+)[\s\r\n\t]*:.*)?[\s\r\n\t]+url\(\"((?:\\.|[^"])+)\"\)/g : /(?:([a-z0-9A-Z\-]+)[\s\r\n\t]*:.*)?[\s\r\n\t]+url\(((?:\\.|[^)])+)\)/g;
+
 		aCSSText = aCSSText.replace(regex, function() {
-			var dataURL = arguments[1];
+			//var dataURL = arguments[1];
+			var dataURL = arguments[2] || arguments[1];
 			if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
 			if ( sbContentSaver.option["internalize"] && dataURL .indexOf("://") == -1 ) return ' url("' + dataURL + '")';
 			dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);
+
+			var sNodeData = {
+				isCss: true,
+				notImageSrc: true,
+				type: type,
+
+				cssRule: arguments[1],
+
+				elemNode: aNode,
+			};
+
 			switch (type) {
 				case "image":
 					if (sbContentSaver.option["images"]) {
-						var dataFile = sbContentSaver.download(dataURL, type);
+						var dataFile = sbContentSaver.download(dataURL, sNodeData);
 						if (dataFile) dataURL = sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(dataFile));
 					} else if (!sbContentSaver.option["keepLink"]) {
 						dataURL = "about:blank#" + dataURL;
@@ -909,7 +931,7 @@ var sbContentSaver = {
 					break;
 				case "font":
 					if (sbContentSaver.option["fonts"]) {
-						var dataFile = sbContentSaver.download(dataURL, type);
+						var dataFile = sbContentSaver.download(dataURL, sNodeData);
 						if (dataFile) dataURL = sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(dataFile));
 					} else if (!sbContentSaver.option["keepLink"]) {
 						dataURL = "about:blank#" + dataURL;
@@ -1015,6 +1037,10 @@ var sbContentSaver = {
 		var _typeof = typeof sNodeData;
 
 		var isNode = false;
+		var isObject = false;
+		var cancelDownload = false;
+
+		var aNode = {};
 
 		if (_typeof === 'undefined' || !_typeof)
 		{
@@ -1034,7 +1060,19 @@ var sbContentSaver = {
 			{
 				tagName = sNodeData.rel || tagName;
 			}
+
+			aNode = sNodeData;
 		}
+		else if (_typeof === 'object')
+		{
+			isObject = true;
+
+			tagName = sNodeData.type || sNodeData.tagName;
+
+			aNode = sNodeData.elemNode;
+		}
+
+		sNodeData = sNodeData || {};
 
 		tagName = (tagName || '').toLowerCase();
 
@@ -1043,6 +1081,21 @@ var sbContentSaver = {
 			case 'image':
 			case 'img':
 				var _fileLR;
+
+				if ((isObject || isNode) && this.option["image_bg_ignore"])
+				{
+					if (sNodeData.notImageSrc || sNodeData.isCss)
+					{
+						cancelDownload = true;
+
+						if (1 || isNode || aNode instanceof CSSStyleRule)
+						{
+							fileLR = this.handleLinkAttr(false, newFileName, aNode, fileLR);
+
+							break;
+						}
+					}
+				}
 
 				if (isNode && (download = sbCommonUtils.validateFileName(sNodeData.getAttribute('download') || sNodeData.download || '')))
 				{
@@ -1105,6 +1158,26 @@ var sbContentSaver = {
 				break;
 		}
 
+//		console.log(tagName, [fileLR, newFileName, aURLSpec, aDocumentSpec, sNodeData], aNode, [this.option], [isObject, isNode]);
+
+		return fileLR;
+	},
+
+	handleLinkAttr: function(allow, newFileName, aNode, fileLR)
+	{
+		if (allow)
+		{
+
+		}
+		else if (this.option["keepLink"])
+		{
+			fileLR[2] = newFileName;
+		}
+		else
+		{
+			fileLR[2] = "about:blank#" + newFileName;
+		}
+
 		return fileLR;
 	},
 
@@ -1123,6 +1196,11 @@ var sbContentSaver = {
 		var seq = 0;
 
 		fileLR = this.handleFileName(fileLR, newFileName, aURLSpec, aDocumentSpec, sNodeData);
+
+		if (fileLR[2])
+		{
+			return [fileLR[2], true];
+		}
 
 		newFileName = fileLR[0] + "." + fileLR[1];
 		var newFileNameCI = newFileName.toLowerCase();
