@@ -167,7 +167,7 @@ var sbMainService = {
 			var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
 			if (aAsChild && sbDataSource.isContainer(curRes)) {
 				tarResName = curRes.Value;
-				tarRelIdx  = sbCommonUtils.getPref("tree.unshift", false) ? 1 : 0;
+				tarRelIdx  = 0;
 				isRootPos  = false;
 				if (!sbTreeHandler.TREE.view.isContainerOpen(curIdx) ) sbTreeHandler.TREE.view.toggleOpenState(curIdx);
 			}
@@ -181,7 +181,7 @@ var sbMainService = {
 		}
 		catch(ex) {
 			tarResName = sbTreeHandler.TREE.ref;
-			tarRelIdx  = sbCommonUtils.getPref("tree.unshift", false) ? 1 : 0;
+			tarRelIdx  = 0;
 			isRootPos  = true;
 		}
 		// add the new resource
