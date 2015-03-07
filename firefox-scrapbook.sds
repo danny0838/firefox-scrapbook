@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<desktop scan="28" scanned="20150307112151" built="20150307113205" lang="zh" pane="TLogPane" col="6" row="calculate.dtd.sb.calc.diagnosis">
+  <language id="zh.tra" autoime="0" autokeyboard="0"/>
+  <language id="zh" autoime="0" autokeyboard="0"/>
+  <language id="ja" autoime="0" autokeyboard="0"/>
+  <sheet>
+    <columns>
+      <item class="TIndexColumn" width="134"/>
+      <item class="TFlagsColumn" width="38"/>
+      <item class="TPathColumn" width="134"/>
+      <item class="TTranslationStatusColumn" width="66"/>
+      <item class="TOriginalColumn" width="269"/>
+      <item class="TTranslationColumn" lang="zh.tra" width="269"/>
+      <item class="TTranslationColumn" lang="zh" width="269"/>
+      <item class="TTranslationColumn" lang="ja" width="268"/>
+    </columns>
+  </sheet>
+  <path>
+    <item>All</item>
+    <item>chrome\locale\en-US\scrapbook\*.dtd</item>
+  </path>
+</desktop>
