@@ -1,0 +1,2800 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<document created="20150307070436" version="4.0.352" date="20150307095825" scan="18" scanned="20150307092903">
+  <lang id="zh.tra"/>
+  <lang id="zh"/>
+  <lang id="ja"/>
+  <source class="TTextSource" name="chrome\locale\en-US\scrapbook\*.dtd" original="en" newline="nlLf" date="18991230000000" subdirs="0">
+    <definition name="Document Type Definition (DTD)">
+      <item type="ctContext" before="&lt;!ENTITY " after=" "/>
+      <item type="ctText" before="&quot;" after="&quot;" escape="seCpp"/>
+    </definition>
+    <outputfile dir="." localized="..\..\&lt;ish&gt;\scrapbook\&lt;file&gt;"/>
+    <encodings>
+      <item language="zh.tra" encoding="utf-8"/>
+      <item language="zh" encoding="utf-8"/>
+      <item language="ja" encoding="utf-8"/>
+    </encodings>
+    <node class="TTextNode" name="calculate.dtd" created="20150307074221">
+      <row id="sb.calc.diagnosis" state="0" created="20150307074501">
+        <native>Diagnosis</native>
+        <lang id="zh.tra" date="20150307085053" status="3">檢查結果</lang>
+        <lang id="zh" date="20150307090826" status="3">检查结果</lang>
+        <lang id="ja" date="20150307092912" status="3">合計サイズ</lang>
+      </row>
+      <row id="sb.calc.total.size" state="0" created="20150307074501">
+        <native>Total Size</native>
+        <lang id="zh.tra" date="20150307085053" status="3">總容量大小</lang>
+        <lang id="zh" date="20150307090826" status="3">总大小</lang>
+        <lang id="ja" date="20150307092912" status="3">データ診断</lang>
+      </row>
+    </node>
+    <node class="TTextNode" name="capture.dtd" created="20150307074221">
+      <row id="sb.capture" state="0" created="20150307074501">
+        <native>Capture</native>
+        <lang id="zh.tra" status="2">擷取</lang>
+        <lang id="zh" status="2">获取</lang>
+        <lang id="ja" date="20150307092922" status="3">取り込み</lang>
+      </row>
+      <row id="sb.capture.abort" state="0" created="20150307074501">
+        <native>Abort</native>
+        <lang id="zh.tra" date="20150307085058" status="3">中止</lang>
+        <lang id="zh" date="20150307090830" status="3">中止</lang>
+        <lang id="ja" date="20150307092922" status="3">中止</lang>
+      </row>
+      <row id="sb.capture.filter" state="0" created="20150307074501">
+        <native>Filter</native>
+        <lang id="zh.tra" date="20150307085058" status="3">過濾</lang>
+        <lang id="zh" date="20150307090830" status="3">过滤器</lang>
+        <lang id="ja" date="20150307092922" status="3">開始</lang>
+      </row>
+      <row id="sb.capture.filter.accept" state="0" created="20150307074501">
+        <native>Accept</native>
+        <lang id="zh.tra" date="20150307085058" status="3">確認</lang>
+        <lang id="zh" date="20150307090830" status="3">接受</lang>
+        <lang id="ja" date="20150307092922" status="3">再試行</lang>
+      </row>
+      <row id="sb.capture.filter.accept.tt" state="0" created="20150307074501">
+        <native>change or edit value</native>
+        <lang id="zh.tra" date="20150307085058" status="3">變更或編輯數值</lang>
+        <lang id="zh" date="20150307090830" status="3">修改或编辑值</lang>
+        <lang id="ja" date="20150307092922" status="3">スキップ</lang>
+      </row>
+      <row id="sb.capture.filter.cancel" state="0" created="20150307074501">
+        <native>Cancel</native>
+        <lang id="zh.tra" date="20150307085058" status="3">取消</lang>
+        <lang id="zh" date="20150307090830" status="3">取消</lang>
+        <lang id="ja" date="20150307092922" status="3">一時停止</lang>
+      </row>
+      <row id="sb.capture.filter.cancel.tt" state="0" created="20150307074501">
+        <native>abort editing</native>
+        <lang id="zh.tra" date="20150307085058" status="3">中斷編輯</lang>
+        <lang id="zh" date="20150307090830" status="3">中止编辑</lang>
+        <lang id="ja" date="20150307092922" status="3">キャンセル</lang>
+      </row>
+      <row id="sb.capture.filter.column.one" state="0" created="20150307074501">
+        <native>Show/Hide</native>
+        <lang id="zh.tra" date="20150307085058" status="3">顯示/隱藏</lang>
+        <lang id="zh" date="20150307090830" status="3">显示/隐藏</lang>
+        <lang id="ja" date="20150307092922" status="3">フィルタ</lang>
+      </row>
+      <row id="sb.capture.filter.column.two" state="0" created="20150307074501">
+        <native>Filter (regular expression)</native>
+        <lang id="zh.tra" date="20150307085058" status="3">篩選條件（使用規則運算式）</lang>
+        <lang id="zh" date="20150307090830" status="3">过滤规则（正则表达式）</lang>
+        <lang id="ja" date="20150307092922" status="3">含む/除外</lang>
+      </row>
+      <row id="sb.capture.filter.delete" state="0" created="20150307074501">
+        <native>Delete</native>
+        <lang id="zh.tra" date="20150307085058" status="3">刪除</lang>
+        <lang id="zh" date="20150307090830" status="3">删除</lang>
+        <lang id="ja" date="20150307092922" status="3">フィルタ (正規表現)</lang>
+      </row>
+      <row id="sb.capture.filter.delete.tt" state="0" created="20150307074501">
+        <native>remove filter from the list</native>
+        <lang id="zh.tra" date="20150307085058" status="3">從清單移除過濾條件</lang>
+        <lang id="zh" date="20150307090830" status="3">从列表中移除过滤规则</lang>
+        <lang id="ja" date="20150307092922" status="3">適用</lang>
+      </row>
+      <row id="sb.capture.finish" state="0" created="20150307074501">
+        <native>Cancel</native>
+        <lang id="zh.tra" date="20150307085058" status="3">取消</lang>
+        <lang id="zh" date="20150307090830" status="3">取消</lang>
+        <lang id="ja" date="20150307092922" status="3">値を変更または編集する</lang>
+      </row>
+      <row id="sb.capture.pause" state="0" created="20150307074501">
+        <native>Pause</native>
+        <lang id="zh.tra" date="20150307085058" status="3">暫停</lang>
+        <lang id="zh" date="20150307090830" status="3">暂停</lang>
+        <lang id="ja" date="20150307092922" status="3">キャンセル</lang>
+      </row>
+      <row id="sb.capture.retry" state="0" created="20150307074501">
+        <native>Retry</native>
+        <lang id="zh.tra" date="20150307085058" status="3">重試</lang>
+        <lang id="zh" date="20150307090830" status="3">重试</lang>
+        <lang id="ja" date="20150307092922" status="3">編集を中止する</lang>
+      </row>
+      <row id="sb.capture.skip" state="0" created="20150307074501">
+        <native>Skip</native>
+        <lang id="zh.tra" date="20150307085058" status="3">略過</lang>
+        <lang id="zh" date="20150307090830" status="3">忽略</lang>
+        <lang id="ja" date="20150307092922" status="3">削除</lang>
+      </row>
+      <row id="sb.capture.start" state="0" created="20150307074501">
+        <native>Start</native>
+        <lang id="zh.tra" status="2">開始</lang>
+        <lang id="zh" date="20150307090830" status="3">开始</lang>
+        <lang id="ja" date="20150307092922" status="3">リストからフィルタを削除する</lang>
+      </row>
+      <row id="sbp.capture.column.one" state="0" created="20150307074501">
+        <native>URL</native>
+        <lang id="zh.tra" date="20150307085058" status="3">位址</lang>
+        <lang id="zh" date="20150307090830" status="3">URL</lang>
+        <lang id="ja" date="20150307092922" status="3">URL</lang>
+      </row>
+      <row id="sbp.capture.column.three" state="0" created="20150307074501">
+        <native>Status</native>
+        <lang id="zh.tra" date="20150307085058" status="3">狀態</lang>
+        <lang id="zh" date="20150307090830" status="3">状态</lang>
+        <lang id="ja" date="20150307092922" status="3">タイトル</lang>
+      </row>
+      <row id="sbp.capture.column.two" state="0" created="20150307074501">
+        <native>Title</native>
+        <lang id="zh.tra" date="20150307085058" status="3">標題</lang>
+        <lang id="zh" date="20150307090830" status="3">标题</lang>
+        <lang id="ja" date="20150307092922" status="3">状態</lang>
+      </row>
+    </node>
+    <node class="TTextNode" name="combine.dtd" created="20150307074221">
+      <row id="sb.combine.dragdrop" state="0" created="20150307074501">
+        <native>Add items by drag-and-drop from the tree in the order you want to combine. You can drag-and-drop multiple items at once.</native>
+        <lang id="zh.tra" date="20150307085105" status="3">請以滑鼠將要合併的檔案從樹狀列表中拖曳至此，並依合併順序排列。一次可以拖曳多個檔案。</lang>
+        <lang id="zh" date="20150307090836" status="3">从树中拖拽您希望合并的条目到表中。您可以一次拖拽多个条目。</lang>
+        <lang id="ja" date="20150307092928" status="3">結合したいページを順番にツリーからドラッグ＆ドロップして追加してください。複数のアイテムを一度にドラッグ＆ドロップして追加することも可能です。</lang>
+      </row>
+      <row id="sb.combine.option.remove" state="0" created="20150307074501">
+        <native>After completing combine, remove original pages</native>
+        <lang id="zh.tra" date="20150307085105" status="3">合併後刪除原頁面</lang>
+        <lang id="zh" date="20150307090836" status="3">合并完成后删除原始页面</lang>
+        <lang id="ja" date="20150307092928" status="3">プレビュー</lang>
+      </row>
+      <row id="sb.combine.preview" state="0" created="20150307074501">
+        <native>Preview</native>
+        <lang id="zh.tra" date="20150307085105" status="3">預覽</lang>
+        <lang id="zh" date="20150307090836" status="3">预览</lang>
+        <lang id="ja" date="20150307092928" status="3">プレビューを確認して、よろしければ結合ボタンを押してください。</lang>
+      </row>
+      <row id="sb.combine.preview.d" state="0" created="20150307074501">
+        <native>Press &amp;apos;Combine&amp;apos; button after verifying the preview.</native>
+        <lang id="zh.tra" date="20150307085105" status="3">確認預覽結果後，請按下「合併」鈕。</lang>
+        <lang id="zh" date="20150307090836" status="3">预览确认无误后单击“合并”。</lang>
+        <lang id="ja" date="20150307092928" status="3">結合完了後、結合された元のページを削除する</lang>
+      </row>
+      <row id="sbp.combine.down" state="0" created="20150307074501">
+        <native>move item downwards</native>
+        <lang id="zh.tra" date="20150307085105" status="3">檔案下移</lang>
+        <lang id="zh" date="20150307090836" status="3">下移条目</lang>
+        <lang id="ja" date="20150307092928" status="3">上へ</lang>
+      </row>
+      <row id="sbp.combine.newTitle" state="0" created="20150307074501">
+        <native>new title</native>
+        <lang id="zh.tra" date="20150307085105" status="3">新標題</lang>
+        <lang id="zh" date="20150307090836" status="3">新标题</lang>
+        <lang id="ja" date="20150307092928" status="3">下へ</lang>
+      </row>
+      <row id="sbp.combine.remove" state="0" created="20150307074501">
+        <native>remove item</native>
+        <lang id="zh.tra" date="20150307085105" status="3">移除檔案</lang>
+        <lang id="zh" date="20150307090836" status="3">移除条目</lang>
+        <lang id="ja" date="20150307092928" status="3">削除</lang>
+      </row>
+      <row id="sbp.combine.up" state="0" created="20150307074501">
+        <native>move item upwards</native>
+        <lang id="zh.tra" date="20150307085105" status="3">檔案上移</lang>
+        <lang id="zh" date="20150307090836" status="3">上移条目</lang>
+        <lang id="ja" date="20150307092928" status="3">新しいタイトル</lang>
+      </row>
+    </node>
+    <node class="TTextNode" name="detail.dtd" created="20150307074221">
+      <row id="sb.detail" state="0" created="20150307074501">
+        <native>Capture Detail</native>
+        <lang id="zh.tra" status="2">擷取細節</lang>
+        <lang id="zh" date="20150307090841" status="3">详细信息</lang>
+        <lang id="ja" date="20150307093951" status="3">取り込み詳細</lang>
+      </row>
+      <row id="sb.detail.linked.archive" state="0" created="20150307074501">
+        <native>Archive</native>
+        <lang id="zh.tra" status="2">壓縮檔</lang>
+        <lang id="zh" date="20150307090841" status="3">压缩文件</lang>
+        <lang id="ja" date="20150307094139" status="3">アーカイブ</lang>
+      </row>
+      <row id="sb.detail.linked.charset" state="0" created="20150307074501">
+        <native>Character set</native>
+        <lang id="zh.tra" status="2">字元編碼</lang>
+        <lang id="zh" date="20150307090841" status="3">字符集</lang>
+        <lang id="ja" date="20150307094040" status="3">文字セット</lang>
+      </row>
+      <row id="sb.detail.linked.custom" state="0" created="20150307074501">
+        <native>Custom</native>
+        <lang id="zh.tra" status="2">自訂</lang>
+        <lang id="zh" date="20150307090841" status="3">自定义</lang>
+        <lang id="ja" date="20150307094132" status="3">カスタム</lang>
+      </row>
+      <row id="sb.detail.linked.file" state="0" created="20150307074501">
+        <native>Download linked files</native>
+        <lang id="zh.tra" status="2">下載連結</lang>
+        <lang id="zh" date="20150307090841" status="3">下载链接的文件</lang>
+        <lang id="ja" date="20150307094146" status="3">リンク先ファイルのダウンロード</lang>
+      </row>
+      <row id="sb.detail.linked.image" state="0" created="20150307074501">
+        <native>Image</native>
+        <lang id="zh.tra" status="2">圖片</lang>
+        <lang id="zh" date="20150307090841" status="3">图像</lang>
+        <lang id="ja" date="20150307094146" status="3">イメージ</lang>
+      </row>
+      <row id="sb.detail.linked.movie" state="0" created="20150307074501">
+        <native>Movie</native>
+        <lang id="zh.tra" status="2">影片</lang>
+        <lang id="zh" date="20150307090841" status="3">视频</lang>
+        <lang id="ja" date="20150307094146" status="3">ムービー</lang>
+      </row>
+      <row id="sb.detail.linked.page" state="0" created="20150307074501">
+        <native>In-depth Capture</native>
+        <lang id="zh.tra" status="2">多層擷取</lang>
+        <lang id="zh" date="20150307090841" status="3">深层获取</lang>
+        <lang id="ja" date="20150307094146" status="3">掘り下げ取り込み</lang>
+      </row>
+      <row id="sb.detail.linked.page.depth" state="0" created="20150307074501">
+        <native>Depth to follow links</native>
+        <lang id="zh.tra" status="2">擷取連結層數</lang>
+        <lang id="zh" date="20150307090841" status="3">获取链接层数</lang>
+        <lang id="ja" date="20150307094146" status="3">リンクをたどる深さ</lang>
+      </row>
+      <row id="sb.detail.linked.page.text" state="0" created="20150307074501">
+        <native>After completing captures, all pages will be linked each other and sitemap will be created.</native>
+        <lang id="zh.tra" status="2">（擷取完畢後，網頁連結會自動依硬碟中位置更新。）</lang>
+        <lang id="zh" date="20150307090841" status="3">全部获取完成后，所有页面将保持彼此的链接并创建网站地图。</lang>
+        <lang id="ja" date="20150307094146" status="3">取り込み完了後、すべてのページは相互にリンクされ、サイトマップが生成されます。</lang>
+      </row>
+      <row id="sb.detail.linked.sound" state="0" created="20150307074501">
+        <native>Sound</native>
+        <lang id="zh.tra" status="2">音樂</lang>
+        <lang id="zh" date="20150307090841" status="3">音乐</lang>
+        <lang id="ja" date="20150307094146" status="3">サウンド</lang>
+      </row>
+      <row id="sb.detail.linked.timeout" state="0" created="20150307074501">
+        <native>Timeout (in seconds)</native>
+        <lang id="zh.tra" status="2">逾時（秒數）</lang>
+        <lang id="zh" date="20150307090841" status="3">超时 (秒)</lang>
+        <lang id="ja" date="20150307094146" status="3">タイムアウト（秒）</lang>
+      </row>
+      <row id="sb.detail.new.folder" state="0" created="20150307074501">
+        <native>New Folder</native>
+        <lang id="zh.tra" date="20150307074600" status="3">開新資料夾</lang>
+        <lang id="zh" date="20150307090841" status="3">新建文件夹</lang>
+        <lang id="ja" date="20150307094146" status="3">新しいフォルダ</lang>
+      </row>
+      <row id="sb.detail.option" state="0" created="20150307074501">
+        <native>Options</native>
+        <lang id="zh.tra" status="2">選項</lang>
+        <lang id="zh" date="20150307090841" status="3">选项</lang>
+        <lang id="ja" date="20150307094146" status="3">オプション</lang>
+      </row>
+      <row id="sb.detail.option.asHtml" state="0" created="20150307074501">
+        <native>Capture as HTML</native>
+        <lang id="zh.tra" date="20150307074610" status="3">擷取為 HTML</lang>
+        <lang id="zh" date="20150307090841" status="3">获取为 HTML</lang>
+        <lang id="ja" date="20150307094146" status="3">HTMLとして取り込み</lang>
+      </row>
+      <row id="sb.detail.option.capture" state="0" created="20150307074501">
+        <native>Capture</native>
+        <lang id="zh.tra" status="2">擷取</lang>
+        <lang id="zh" status="2">获取</lang>
+        <lang id="ja" status="2">取り込む</lang>
+      </row>
+      <row id="sb.detail.option.fonts" state="0" created="20150307074501">
+        <native>Fonts</native>
+        <lang id="zh.tra" status="2">字體</lang>
+        <lang id="zh" date="20150307090841" status="3">字体</lang>
+        <lang id="ja" date="20150307094146" status="3">フォント</lang>
+      </row>
+      <row id="sb.detail.option.forceUtf8" state="0" created="20150307074501">
+        <native>Save with UTF-8 encoding</native>
+        <lang id="zh.tra" status="2">儲存為 UTF-8 編碼</lang>
+        <lang id="zh" date="20150307090841" status="3">保存为 UTF-8 编码</lang>
+        <lang id="ja" date="20150307094146" status="3">UTF-8エンコーディングとして保存</lang>
+      </row>
+      <row id="sb.detail.option.frames" state="0" created="20150307074501">
+        <native>Frames</native>
+        <lang id="zh.tra" status="2">頁框</lang>
+        <lang id="zh" date="20150307090841" status="3">页框</lang>
+      </row>
+      <row id="sb.detail.option.images" state="0" created="20150307074501">
+        <native>Images</native>
+        <lang id="zh.tra" status="2">圖片</lang>
+        <lang id="zh" date="20150307090841" status="3">图片</lang>
+        <lang id="ja" date="20150307094146" status="3">画像</lang>
+      </row>
+      <row id="sb.detail.option.keepLink" state="0" created="20150307074501">
+        <native>Link to source for those not to capture</native>
+        <lang id="zh.tra" status="2">不擷取者以連往原址的方式調用</lang>
+        <lang id="zh" date="20150307090841" status="3">不获取者以链接到原址的方式调用</lang>
+      </row>
+      <row id="sb.detail.option.media" state="0" created="20150307074501">
+        <native>Media</native>
+        <lang id="zh.tra" status="2">多媒體</lang>
+        <lang id="zh" date="20150307090841" status="3">多媒体</lang>
+        <lang id="ja" date="20150307094146" status="3">メディア</lang>
+      </row>
+      <row id="sb.detail.option.rewriteStyles" state="0" created="20150307074501">
+        <native>Reorganize Styles</native>
+        <lang id="zh.tra" status="2">重組樣式表</lang>
+        <lang id="zh" date="20150307090841" status="3">重组样式表</lang>
+        <lang id="ja" date="20150307094146" status="3">スタイルを再編成</lang>
+      </row>
+      <row id="sb.detail.option.scripts" state="0" created="20150307074501">
+        <native>Scripts</native>
+        <lang id="zh.tra" status="2">動態腳本</lang>
+        <lang id="zh" date="20150307090841" status="3">动态脚本</lang>
+        <lang id="ja" date="20150307094146" status="3">スクリプト</lang>
+      </row>
+      <row id="sb.detail.option.styles" state="0" created="20150307074501">
+        <native>Styles</native>
+        <lang id="zh.tra" status="2">樣式</lang>
+        <lang id="zh" date="20150307090841" status="3">样式</lang>
+        <lang id="ja" date="20150307094146" status="3">スタイル</lang>
+      </row>
+      <row id="sb.detail.select.folder" state="0" created="20150307074501">
+        <native>Select Folder</native>
+        <lang id="zh.tra" status="2">選取資料夾</lang>
+        <lang id="zh" date="20150307090841" status="3">选择文件夹</lang>
+        <lang id="ja" date="20150307094146" status="3">フォルダの選択</lang>
+      </row>
+      <row id="sb.detail.warnAboutRenew" state="0" created="20150307074501">
+        <native>NOTICE: &amp;apos;Capture Again&amp;apos; overwrites the previously saved page.</native>
+        <lang id="zh.tra" status="2">請注意：「重新擷取」將覆蓋之前擷取的頁面。</lang>
+        <lang id="zh" date="20150307090841" status="3">注意: “重新获取” 会覆盖以前保存的页面。</lang>
+        <lang id="ja" date="20150307094146" status="3">注意: 再取り込みを行うと元のページに上書きされます。</lang>
+      </row>
+      <row id="sb.detail.warnAboutScript" state="0" created="20150307074501">
+        <native>NOTICE: JavaScript may cause some problems.</native>
+        <lang id="zh.tra" status="2">請注意：儲存 JavaScript 可能會引發許多問題。</lang>
+        <lang id="zh" date="20150307090841" status="3">注意: 将会因为 JavaScript 而引起很多问题。</lang>
+        <lang id="ja" date="20150307094146" status="3">注意: JavaScriptは何らかの問題を引き起こす可能性があります。</lang>
+      </row>
+    </node>
+    <node class="TTextNode" name="editor.dtd" created="20150307074221">
+      <row id="sb.edit.annotationTool" state="0" created="20150307074501">
+        <native>Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.</native>
+        <lang id="zh.tra" date="20150307085157" status="3">註解工具 - 點擊建立自由註解，錨定於選取區後，無選取區則自由浮動。</lang>
+        <lang id="zh" date="20150307090849" status="3">注解工具 - 点击建立自由注解，锚定于选取区后，无选取区则自由浮动。</lang>
+      </row>
+      <row id="sb.edit.attach.file" state="0" created="20150307074501">
+        <native>Attach File to Selection</native>
+        <lang id="zh.tra" date="20150307085207" status="3">為選取區附加檔案</lang>
+        <lang id="zh" date="20150307090849" status="3">为所选内容附加文件</lang>
+        <lang id="ja" date="20150307094204" status="3">選択範囲にファイルを添付</lang>
+      </row>
+      <row id="sb.edit.attach.innerlink" state="0" created="20150307074501">
+        <native>Attach Inner Link to Selection</native>
+        <lang id="zh.tra" date="20150307085207" status="3">為選取區附加內部連結</lang>
+        <lang id="zh" date="20150307090849" status="3">为所选内容附加内部链接</lang>
+      </row>
+      <row id="sb.edit.attach.link" state="0" created="20150307074501">
+        <native>Attach Link to Selection</native>
+        <lang id="zh.tra" date="20150307085207" status="3">為選取區附加連結</lang>
+        <lang id="zh" date="20150307090849" status="3">为所选内容附加链接</lang>
+        <lang id="ja" date="20150307094204" status="3">選択範囲にリンクを追加</lang>
+      </row>
+      <row id="sb.edit.comment" state="0" created="20150307074501">
+        <native>Expand Comment Area</native>
+        <lang id="zh.tra" status="2">展開文件評註欄</lang>
+        <lang id="zh" date="20150307090849" status="3">展开注释区</lang>
+        <lang id="ja" date="20150307094204" status="3">コメントエリアを広げる</lang>
+      </row>
+      <row id="sb.edit.cutter" state="0" created="20150307074501">
+        <native>Remove the Selection</native>
+        <lang id="zh.tra" date="20150307085207" status="3">刪除選取區</lang>
+        <lang id="zh" date="20150307090849" status="3">删除所选内容</lang>
+        <lang id="ja" date="20150307094204" status="3">選択範囲をカット</lang>
+      </row>
+      <row id="sb.edit.cutterTool" state="0" created="20150307074501">
+        <native>Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.</native>
+        <lang id="zh.tra" date="20150307085207" status="3">HTML 編輯器 - 點擊開啟或關閉，開啟後可自由編輯頁面內容，並可透過快捷鍵或右鍵選單調用編輯功能。</lang>
+        <lang id="zh" date="20150307090849" status="3">橡皮工具- 点击删除选取区，中键点击清除选取区内的 ScrapBook 注记。</lang>
+      </row>
+      <row id="sb.edit.eraser" state="0" created="20150307074501">
+        <native>DOM Eraser - Delete unwanted elements or ScrapBook notes.</native>
+        <lang id="zh.tra" date="20150307085139" status="3">DOM 擦子 - 刪除不想要的元素或 ScrapBook 註記。</lang>
+        <lang id="zh" date="20150307090849" status="3">DOM 橡皮- 删除不想要的元素或 ScrapBook 注记</lang>
+      </row>
+      <row id="sb.edit.folderView" state="0" created="20150307074501">
+        <native>Click to view the data directory. Middle-click to open in a new tab.</native>
+        <lang id="zh.tra" date="20150307085139" status="3">點擊檢視資料目錄，中鍵點擊在新分頁開啟。</lang>
+        <lang id="zh" date="20150307090849" status="3">点击检视资料目录，中键点击在新分页开启。</lang>
+      </row>
+      <row id="sb.edit.freenote.create" state="0" created="20150307074501">
+        <native>Create Freenote</native>
+        <lang id="zh.tra" date="20150307085207" status="3">建立自由註解</lang>
+        <lang id="zh" date="20150307090849" status="3">创建自由注解</lang>
+        <lang id="ja" date="20150307094204" status="3">自由ノートを作成</lang>
+      </row>
+      <row id="sb.edit.html" state="0" created="20150307074501">
+        <native>HTML Editor</native>
+        <lang id="zh.tra" date="20150307085207" status="3">編輯顏色</lang>
+        <lang id="zh" date="20150307090849" status="3">HTML 编辑器</lang>
+      </row>
+      <row id="sb.edit.html.backup" state="0" created="20150307074501">
+        <native>Backup the Current Page</native>
+        <lang id="zh.tra" date="20150307085207" status="3">描述:</lang>
+        <lang id="zh" date="20150307090849" status="3">备份当前页面</lang>
+      </row>
+      <row id="sb.edit.html.backup.desc" state="0" created="20150307074501">
+        <native>Description:</native>
+        <lang id="zh.tra" date="20150307085207" status="3">字元</lang>
+        <lang id="zh" date="20150307090849" status="3">描述:</lang>
+      </row>
+      <row id="sb.edit.html.color" state="0" created="20150307074501">
+        <native>Edit Color</native>
+        <lang id="zh.tra" date="20150307085207" status="3">設定文字顏色:</lang>
+        <lang id="zh" date="20150307090849" status="3">编辑颜色</lang>
+      </row>
+      <row id="sb.edit.html.color.forBg" state="0" created="20150307074501">
+        <native>Set background color:</native>
+        <lang id="zh.tra" date="20150307085207" status="3">編輯 HTML 原始碼</lang>
+        <lang id="zh" date="20150307090849" status="3">设定背景颜色:</lang>
+      </row>
+      <row id="sb.edit.html.color.forText" state="0" created="20150307074501">
+        <native>Set text color:</native>
+        <lang id="zh.tra" date="20150307085207" status="3">設定背景顏色:</lang>
+        <lang id="zh" date="20150307090849" status="3">设定文字颜色:</lang>
+      </row>
+      <row id="sb.edit.html.file" state="0" created="20150307074501">
+        <native>Insert File</native>
+        <lang id="zh.tra" date="20150307085207" status="3">插入檔案:</lang>
+        <lang id="zh" date="20150307090849" status="3">插入文件</lang>
+      </row>
+      <row id="sb.edit.html.file.format" state="0" created="20150307074501">
+        <native>Select insert format:</native>
+        <lang id="zh.tra" date="20150307085207" status="3">備份目前頁面</lang>
+        <lang id="zh" date="20150307090849" status="3">指定插入格式:</lang>
+      </row>
+      <row id="sb.edit.html.file.html" state="0" created="20150307074501">
+        <native>Insert sub-page:</native>
+        <lang id="zh.tra" date="20150307085207" status="3">指定插入格式:</lang>
+        <lang id="zh" date="20150307090849" status="3">插入子页面:</lang>
+      </row>
+      <row id="sb.edit.html.file.pick" state="0" created="20150307074501">
+        <native>Insert file:</native>
+        <lang id="zh.tra" date="20150307085207" status="3">插入子頁面:</lang>
+        <lang id="zh" date="20150307090849" status="3">插入文件:</lang>
+      </row>
+      <row id="sb.edit.html.link" state="0" created="20150307074501">
+        <native>Insert Link</native>
+        <lang id="zh.tra" date="20150307085207" status="3">目標 URL:</lang>
+        <lang id="zh" date="20150307090849" status="3">插入链接</lang>
+      </row>
+      <row id="sb.edit.html.link.format" state="0" created="20150307074501">
+        <native>Select insert format:</native>
+        <lang id="zh.tra" date="20150307085207" status="3">插入檔案</lang>
+        <lang id="zh" date="20150307090849" status="3">指定插入格式:</lang>
+      </row>
+      <row id="sb.edit.html.link.id" state="0" created="20150307074501">
+        <native>Item ID:</native>
+        <lang id="zh.tra" date="20150307085207" status="3">指定插入格式:</lang>
+        <lang id="zh" date="20150307090849" status="3">项目 ID:</lang>
+      </row>
+      <row id="sb.edit.html.link.url" state="0" created="20150307074501">
+        <native>Target URL:</native>
+        <lang id="zh.tra" date="20150307085207" status="3">資源 ID:</lang>
+        <lang id="zh" date="20150307090849" status="3">目标 URL:</lang>
+      </row>
+      <row id="sb.edit.html.menu.basic" state="0" created="20150307074501">
+        <native>Text</native>
+        <lang id="zh.tra" date="20150307085207" status="3">區塊</lang>
+        <lang id="zh" date="20150307090849" status="3">字符</lang>
+      </row>
+      <row id="sb.edit.html.menu.block" state="0" created="20150307074501">
+        <native>Block</native>
+        <lang id="zh.tra" date="20150307085207" status="3">插入</lang>
+        <lang id="zh" date="20150307090849" status="3">区块</lang>
+      </row>
+      <row id="sb.edit.html.menu.insert" state="0" created="20150307074501">
+        <native>Insert</native>
+        <lang id="zh.tra" date="20150307085207" status="3">進階</lang>
+        <lang id="zh" date="20150307090849" status="3">插入</lang>
+      </row>
+      <row id="sb.edit.html.menu.wrapper" state="0" created="20150307074501">
+        <native>Advanced</native>
+        <lang id="zh.tra" date="20150307085207" status="3">插入或編輯原始碼</lang>
+        <lang id="zh" date="20150307090849" status="3">高级</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.attachFile" state="0" created="20150307074501">
+        <native>Insert a File or Sub-page</native>
+        <lang id="zh.tra" date="20150307085207" status="3">建立此頁面的備份</lang>
+        <lang id="zh" date="20150307090849" status="3">插入文件或子页面</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.attachLink" state="0" created="20150307074501">
+        <native>Insert a Link or Innerlink</native>
+        <lang id="zh.tra" date="20150307085207" status="3">插入檔案或子頁面</lang>
+        <lang id="zh" date="20150307090849" status="3">插入链接或内部链接</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.backupFile" state="0" created="20150307074501">
+        <native>Create a Backup for this Page</native>
+        <lang id="zh.tra" date="20150307085207" status="3">插入水平線</lang>
+        <lang id="zh" date="20150307090849" status="3">建立此页面的备份</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.bold" state="0" created="20150307074501">
+        <native>Switch Bold</native>
+        <lang id="zh.tra" date="20150307085207" status="3">切換斜體</lang>
+        <lang id="zh" date="20150307090849" status="3">切换粗体</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.decreaseFontSize" state="0" created="20150307074501">
+        <native>Decrease Text Size</native>
+        <lang id="zh.tra" date="20150307085207" status="3">切換上標</lang>
+        <lang id="zh" date="20150307090849" status="3">缩小字级</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.formatblock_div" state="0" created="20150307074501">
+        <native>Set to DIV Block</native>
+        <lang id="zh.tra" date="20150307085207" status="3">設定為 PRE 區塊</lang>
+        <lang id="zh" date="20150307090849" status="3">设定为 DIV 区块</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.formatblock_h1" state="0" created="20150307074501">
+        <native>Set to Header Level 1</native>
+        <lang id="zh.tra" date="20150307085207" status="3">設定為 2 級標題</lang>
+        <lang id="zh" date="20150307090849" status="3">设定为 1 级标题</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.formatblock_h2" state="0" created="20150307074501">
+        <native>Set to Header Level 2</native>
+        <lang id="zh.tra" date="20150307085207" status="3">設定為 3 級標題</lang>
+        <lang id="zh" date="20150307090849" status="3">设定为 2 级标题</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.formatblock_h3" state="0" created="20150307074501">
+        <native>Set to Header Level 3</native>
+        <lang id="zh.tra" date="20150307085207" status="3">設定為 4 級標題</lang>
+        <lang id="zh" date="20150307090849" status="3">设定为 3 级标题</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.formatblock_h4" state="0" created="20150307074501">
+        <native>Set to Header Level 4</native>
+        <lang id="zh.tra" date="20150307085207" status="3">設定為 5 級標題</lang>
+        <lang id="zh" date="20150307090849" status="3">设定为 4 级标题</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.formatblock_h5" state="0" created="20150307074501">
+        <native>Set to Header Level 5</native>
+        <lang id="zh.tra" date="20150307085207" status="3">設定為 6 級標題</lang>
+        <lang id="zh" date="20150307090849" status="3">设定为 5 级标题</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.formatblock_h6" state="0" created="20150307074501">
+        <native>Set to Header Level 6</native>
+        <lang id="zh.tra" date="20150307085207" status="3">設定為 DIV 區塊</lang>
+        <lang id="zh" date="20150307090849" status="3">设定为 6 级标题</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.formatblock_p" state="0" created="20150307074501">
+        <native>Set to Normal Paragraph</native>
+        <lang id="zh.tra" date="20150307085207" status="3">設定為 1 級標題</lang>
+        <lang id="zh" date="20150307090849" status="3">设定为一般段落</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.formatblock_pre" state="0" created="20150307074501">
+        <native>Set to PRE Block</native>
+        <lang id="zh.tra" date="20150307085207" status="3">切換無序列表</lang>
+        <lang id="zh" date="20150307090849" status="3">设定为 PRE 区块</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.horizontalLine" state="0" created="20150307074501">
+        <native>Insert a Horizontal Rule</native>
+        <lang id="zh.tra" date="20150307085207" status="3">插入日期</lang>
+        <lang id="zh" date="20150307090849" status="3">插入水平线</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.increaseFontSize" state="0" created="20150307074501">
+        <native>Increase Text Size</native>
+        <lang id="zh.tra" date="20150307085207" status="3">縮小字級</lang>
+        <lang id="zh" date="20150307090849" status="3">放大字级</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.indent" state="0" created="20150307074501">
+        <native>Indent</native>
+        <lang id="zh.tra" date="20150307085207" status="3">靠左對齊</lang>
+        <lang id="zh" date="20150307090849" status="3">增加缩进</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.insertDate" state="0" created="20150307074501">
+        <native>Insert a Date</native>
+        <lang id="zh.tra" date="20150307085207" status="3">插入待辦事項核取方塊</lang>
+        <lang id="zh" date="20150307090849" status="3">插入日期</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.insertOrderedList" state="0" created="20150307074501">
+        <native>Switch Ordered List</native>
+        <lang id="zh.tra" date="20150307085207" status="3">減少縮排</lang>
+        <lang id="zh" date="20150307090849" status="3">切换有序列表</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.insertSource" state="0" created="20150307074501">
+        <native>Insert or Edit Source</native>
+        <lang id="zh.tra" date="20150307085207" status="3">清除格式</lang>
+        <lang id="zh" date="20150307090849" status="3">插入或编辑源代码</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.insertTodoBox" state="0" created="20150307074501">
+        <native>Insert a Todo Checkbox</native>
+        <lang id="zh.tra" date="20150307085207" status="3">插入待辦事項核取方塊 (已勾選)</lang>
+        <lang id="zh" date="20150307090849" status="3">插入待办事项选框</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.insertTodoBoxDone" state="0" created="20150307074501">
+        <native>Insert a Todo Checkbox (Checked)</native>
+        <lang id="zh.tra" date="20150307085207" status="3">用模版格式化</lang>
+        <lang id="zh" date="20150307090849" status="3">插入待办事项选框 (已勾选)</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.insertUnorderedList" state="0" created="20150307074501">
+        <native>Switch Unordered List</native>
+        <lang id="zh.tra" date="20150307085207" status="3">切換有序列表</lang>
+        <lang id="zh" date="20150307090849" status="3">切换无序列表</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.italic" state="0" created="20150307074501">
+        <native>Switch Italic</native>
+        <lang id="zh.tra" date="20150307085207" status="3">切換底線</lang>
+        <lang id="zh" date="20150307090849" status="3">切换斜体</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.justifyCenter" state="0" created="20150307074501">
+        <native>Align Center</native>
+        <lang id="zh.tra" date="20150307085207" status="3">左右對齊</lang>
+        <lang id="zh" date="20150307090849" status="3">置中对齐</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.justifyFull" state="0" created="20150307074501">
+        <native>Align Justify</native>
+        <lang id="zh.tra" date="20150307085207" status="3">插入連結或內部連結</lang>
+        <lang id="zh" date="20150307090849" status="3">左右对齐</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.justifyLeft" state="0" created="20150307074501">
+        <native>Align Left</native>
+        <lang id="zh.tra" date="20150307085207" status="3">靠右對齊</lang>
+        <lang id="zh" date="20150307090849" status="3">靠左对齐</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.justifyRight" state="0" created="20150307074501">
+        <native>Align Right</native>
+        <lang id="zh.tra" date="20150307085207" status="3">置中對齊</lang>
+        <lang id="zh" date="20150307090849" status="3">靠右对齐</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.outdent" state="0" created="20150307074501">
+        <native>Outdent</native>
+        <lang id="zh.tra" date="20150307085207" status="3">增加縮排</lang>
+        <lang id="zh" date="20150307090849" status="3">减少缩进</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.quit" state="0" created="20150307074501">
+        <native>Switch HTMLEditor</native>
+        <lang id="zh.tra" date="20150307085207" status="3">切換粗體</lang>
+        <lang id="zh" date="20150307090849" status="3">切换 HTML 编辑器</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.removeFormat" state="0" created="20150307074501">
+        <native>Clear Formats</native>
+        <lang id="zh.tra" date="20150307085207" status="3">清除連結</lang>
+        <lang id="zh" date="20150307090849" status="3">清除格式</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.save" state="0" created="20150307074501">
+        <native>Save the Page</native>
+        <lang id="zh.tra" date="20150307085207" status="3">切換 HTML 編輯器</lang>
+        <lang id="zh" date="20150307090849" status="3">保存页面</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.setColor" state="0" created="20150307074501">
+        <native>Set Text and Background Color</native>
+        <lang id="zh.tra" date="20150307085207" status="3">放大字級</lang>
+        <lang id="zh" date="20150307090849" status="3">设定文字及背景颜色</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.strikeThrough" state="0" created="20150307074501">
+        <native>Switch Line-through</native>
+        <lang id="zh.tra" date="20150307085207" status="3">設定文字及背景顏色</lang>
+        <lang id="zh" date="20150307090849" status="3">切换删除线</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.subscript" state="0" created="20150307074501">
+        <native>Switch Subscript</native>
+        <lang id="zh.tra" date="20150307085207" status="3">設定為一般段落</lang>
+        <lang id="zh" date="20150307090849" status="3">切换下标</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.superscript" state="0" created="20150307074501">
+        <native>Switch Superscript</native>
+        <lang id="zh.tra" date="20150307085207" status="3">切換下標</lang>
+        <lang id="zh" date="20150307090849" status="3">切换上标</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.underline" state="0" created="20150307074501">
+        <native>Switch Underline</native>
+        <lang id="zh.tra" date="20150307085207" status="3">切換刪除線</lang>
+        <lang id="zh" date="20150307090849" status="3">切换底线</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.unlink" state="0" created="20150307074501">
+        <native>Clear Links</native>
+        <lang id="zh.tra" date="20150307085207" status="3">儲存頁面</lang>
+        <lang id="zh" date="20150307090849" status="3">清除链接</lang>
+      </row>
+      <row id="sb.edit.html.menuitem.wrapHTML" state="0" created="20150307074501">
+        <native>Format with Template</native>
+        <lang id="zh.tra" date="20150307085207" status="3">擦子工具 - 點擊刪除選取區，中鍵點擊清除選取區內的 ScrapBook 註記。</lang>
+        <lang id="zh" date="20150307090849" status="3">用模版格式化</lang>
+      </row>
+      <row id="sb.edit.html.source" state="0" created="20150307074501">
+        <native>Edit HTML Source</native>
+        <lang id="zh.tra" date="20150307085207" status="3">插入連結</lang>
+        <lang id="zh" date="20150307090849" status="3">编辑 HTML 源代码</lang>
+      </row>
+      <row id="sb.edit.htmlTool" state="0" created="20150307074501">
+        <native>HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.</native>
+        <lang id="zh.tra" date="20150307085207" status="3">HTML 編輯器</lang>
+        <lang id="zh" date="20150307090849" status="3">HTML 编辑器- 点击开启或关闭，开启后可自由编辑页面内容，并可透过快捷键或右键选单调用编辑功能。</lang>
+      </row>
+      <row id="sb.edit.inline.add" state="0" created="20150307074501">
+        <native>Add Inline Annotation to Selection</native>
+        <lang id="zh.tra" date="20150307085207" status="3">為選取區加上行內註解</lang>
+        <lang id="zh" date="20150307090849" status="3">为所选内容添加行內注解</lang>
+        <lang id="ja" date="20150307094204" status="3">選択範囲にインライン注釈を入力</lang>
+      </row>
+      <row id="sb.edit.remove.iframe" state="0" created="20150307074501">
+        <native>Delete All IFRAME Tags</native>
+        <lang id="zh.tra" date="20150307085207" status="3">刪除所有 IFRAME 標籤</lang>
+        <lang id="zh" date="20150307090849" status="3">删除所有 IFRAME 标签</lang>
+        <lang id="ja" date="20150307094204" status="3">すべてのIFRAMEタグを削除</lang>
+      </row>
+      <row id="sb.edit.remove.script" state="0" created="20150307074501">
+        <native>Delete All SCRIPT Tags</native>
+        <lang id="zh.tra" date="20150307085207" status="3">刪除所有 SCRIPT 標籤</lang>
+        <lang id="zh" date="20150307090849" status="3">删除所有 SCRIPT 标签</lang>
+        <lang id="ja" date="20150307094204" status="3">すべてのSCRIPTタグを削除</lang>
+      </row>
+      <row id="sb.edit.save" state="0" created="20150307074501">
+        <native>Save Changes</native>
+        <lang id="zh.tra" date="20150307085139" status="3">存檔</lang>
+        <lang id="zh" date="20150307090849" status="3">保存</lang>
+        <lang id="ja" date="20150307094204" status="3">変更を保存する</lang>
+      </row>
+      <row id="sb.edit.sticky" state="0" created="20150307074501">
+        <native>Sticky Annotation</native>
+        <lang id="zh.tra" date="20150307085207" status="3">自由註解</lang>
+        <lang id="zh" date="20150307090849" status="3">即时贴</lang>
+        <lang id="ja" date="20150307094204" status="3">付箋アノテーション</lang>
+      </row>
+      <row id="sb.edit.sticky.create" state="0" created="20150307074501">
+        <native>Create &amp;sb.edit.sticky;</native>
+        <lang id="zh.tra" date="20150307085207" status="3">添增&amp;sb.edit.sticky;</lang>
+        <lang id="zh" date="20150307090849" status="3">创建即时贴</lang>
+        <lang id="ja" date="20150307094204" status="3">&amp;sb.edit.sticky;を作成</lang>
+      </row>
+      <row id="sb.edit.undo" state="0" created="20150307074501">
+        <native>Undo</native>
+        <lang id="zh.tra" date="20150307085139" status="3">復原</lang>
+        <lang id="zh" date="20150307090849" status="3">撤销</lang>
+        <lang id="ja" date="20150307094204" status="3">元に戻す</lang>
+      </row>
+      <row id="sb.highlighter" state="0" created="20150307074501">
+        <native>Highlighter</native>
+        <lang id="zh.tra" date="20150307085207" status="3">標示</lang>
+        <lang id="zh" date="20150307090849" status="3">高亮标记</lang>
+        <lang id="ja" date="20150307094204" status="3">マーカー</lang>
+      </row>
+      <row id="sb.highlighter.remove" state="0" created="20150307074501">
+        <native>Clear ScrapBook Notes in the Selection</native>
+        <lang id="zh.tra" date="20150307085207" status="3">清除選取區內的 ScrapBook 註記</lang>
+        <lang id="zh" date="20150307090849" status="3">清除选取区内的 ScrapBook 注记</lang>
+        <lang id="ja" date="20150307094204" status="3">選択範囲のScrapBookノートをクリア</lang>
+      </row>
+      <row id="sb.highlighter.remove.all" state="0" created="20150307074501">
+        <native>Clear all ScrapBook Notes</native>
+        <lang id="zh.tra" date="20150307085207" status="3">清除所有 ScrapBook 註記</lang>
+        <lang id="zh" date="20150307090849" status="3">清除所有 ScrapBook 注记</lang>
+        <lang id="ja" date="20150307094204" status="3">すべてのScrapBookノートをクリア</lang>
+      </row>
+      <row id="sb.highlighterTool" state="0" created="20150307074501">
+        <native>Highlighter Tool - Click to highlight the selection.</native>
+        <lang id="zh.tra" date="20150307085207" status="3">標示工具 - 點擊以標示選取區。</lang>
+        <lang id="zh" date="20150307090849" status="3">高亮标记工具- 点击以高亮标记选取区。</lang>
+      </row>
+      <row id="sb.indicators" state="0" created="20150307074501">
+        <native>Show Link Indicators</native>
+        <lang id="zh.tra" date="20150307085207" status="3">顯示連結標記</lang>
+        <lang id="zh" date="20150307090849" status="3">显示链接指示器</lang>
+        <lang id="ja" date="20150307094204" status="3">リンクインジケータを表示</lang>
+      </row>
+      <row id="sb.info.home" state="0" created="20150307074501">
+        <native>Home</native>
+        <lang id="zh.tra" date="20150307085207" status="3">首頁</lang>
+        <lang id="zh" date="20150307090849" status="3">主页</lang>
+        <lang id="ja" date="20150307094204" status="3">ホーム</lang>
+      </row>
+      <row id="sb.info.sitemap" state="0" created="20150307074501">
+        <native>SiteMap</native>
+        <lang id="zh.tra" date="20150307085207" status="3">網站導覽</lang>
+        <lang id="zh" date="20150307090849" status="3">网站地图</lang>
+        <lang id="ja" date="20150307094204" status="3">サイトマップ</lang>
+      </row>
+      <row id="sb.internalize" state="0" created="20150307074501">
+        <native>Localize Embedded External Media</native>
+        <lang id="zh.tra" date="20150307085207" status="3">將內嵌的外部媒體存入資料目錄</lang>
+        <lang id="zh" date="20150307090849" status="3">将内嵌的外部媒体存入资料目录</lang>
+      </row>
+      <row id="sb.locate" state="0" created="20150307074501">
+        <native>Locate in Sidebar Tree</native>
+        <lang id="zh.tra" date="20150307085207" status="3">在側邊欄顯示此項目的位置</lang>
+        <lang id="zh" date="20150307090849" status="3">与侧栏列表同步</lang>
+        <lang id="ja" date="20150307094204" status="3">サイドバーのツリー上で位置を特定</lang>
+      </row>
+      <row id="sb.renew" state="0" created="20150307074501">
+        <native>Capture Again</native>
+        <lang id="zh.tra" date="20150307085207" status="3">重新擷取</lang>
+        <lang id="zh" date="20150307090849" status="3">重新获取</lang>
+        <lang id="ja" date="20150307094204" status="3">再取り込み</lang>
+      </row>
+      <row id="sb.source" state="0" created="20150307074501">
+        <native>Open Source URL</native>
+        <lang id="zh.tra" date="20150307085207" status="3">開啟原始網址</lang>
+        <lang id="zh" date="20150307090849" status="3">打开原始链接</lang>
+        <lang id="ja" date="20150307094204" status="3">ソースURLを開く</lang>
+      </row>
+      <row id="sb.toolbar.edit" state="0" created="20150307074501">
+        <native>Edit Toolbar</native>
+        <lang id="zh.tra" date="20150307085139" status="3">編輯工具列</lang>
+        <lang id="zh" date="20150307090849" status="3">编辑工具栏</lang>
+        <lang id="ja" date="20150307094204" status="3">編集ツールバー</lang>
+      </row>
+      <row id="sb.toolbar.info" state="0" created="20150307074501">
+        <native>Info Toolbar</native>
+        <lang id="zh.tra" date="20150307085139" status="3">顯示資訊列</lang>
+        <lang id="zh" date="20150307090849" status="3">信息工具栏</lang>
+        <lang id="ja" date="20150307094204" status="3">情報ツールバー</lang>
+      </row>
+    </node>
+    <node class="TTextNode" name="hlCustom.dtd" created="20150307074221">
+      <row id="sb.hlCustom.background" state="0" created="20150307074501">
+        <native>Background</native>
+        <lang id="zh.tra" date="20150307085222" status="3">背景</lang>
+        <lang id="zh" date="20150307090856" status="3">背景</lang>
+      </row>
+      <row id="sb.hlCustom.bold" state="0" created="20150307074501">
+        <native>Bold</native>
+        <lang id="zh.tra" date="20150307085222" status="3">粗體</lang>
+        <lang id="zh" date="20150307090856" status="3">粗体</lang>
+      </row>
+      <row id="sb.hlCustom.border" state="0" created="20150307074501">
+        <native>Border</native>
+        <lang id="zh.tra" date="20150307085222" status="3">框線</lang>
+        <lang id="zh" date="20150307090856" status="3">边框</lang>
+      </row>
+      <row id="sb.hlCustom.box" state="0" created="20150307074501">
+        <native>Box</native>
+        <lang id="zh.tra" date="20150307085222" status="3">方框</lang>
+        <lang id="zh" date="20150307090856" status="3">方框</lang>
+      </row>
+      <row id="sb.hlCustom.color" state="0" created="20150307074501">
+        <native>Color</native>
+        <lang id="zh.tra" date="20150307085222" status="3">色彩</lang>
+        <lang id="zh" date="20150307090856" status="3">颜色</lang>
+      </row>
+      <row id="sb.hlCustom.dashed" state="0" created="20150307074501">
+        <native>Dashed</native>
+        <lang id="zh.tra" date="20150307085222" status="3">虛線</lang>
+        <lang id="zh" date="20150307090856" status="3">虚线</lang>
+      </row>
+      <row id="sb.hlCustom.dotted" state="0" created="20150307074501">
+        <native>Dotted</native>
+        <lang id="zh.tra" date="20150307085222" status="3">點線</lang>
+        <lang id="zh" date="20150307090856" status="3">点划线</lang>
+      </row>
+      <row id="sb.hlCustom.double" state="0" created="20150307074501">
+        <native>Double</native>
+        <lang id="zh.tra" date="20150307085222" status="3">雙線</lang>
+        <lang id="zh" date="20150307090856" status="3">双线</lang>
+      </row>
+      <row id="sb.hlCustom.italic" state="0" created="20150307074501">
+        <native>Italic</native>
+        <lang id="zh.tra" date="20150307085222" status="3">斜體</lang>
+        <lang id="zh" date="20150307090856" status="3">斜体</lang>
+      </row>
+      <row id="sb.hlCustom.line" state="0" created="20150307074501">
+        <native>Line-through</native>
+        <lang id="zh.tra" date="20150307085222" status="3">刪除線</lang>
+        <lang id="zh" date="20150307090856" status="3">删除线</lang>
+      </row>
+      <row id="sb.hlCustom.medium" state="0" created="20150307074501">
+        <native>Medium</native>
+        <lang id="zh.tra" date="20150307085222" status="3">中</lang>
+        <lang id="zh" date="20150307090856" status="3">中</lang>
+      </row>
+      <row id="sb.hlCustom.preset" state="0" created="20150307074501">
+        <native>Preset Styles</native>
+        <lang id="zh.tra" date="20150307085222" status="3">預設樣式</lang>
+        <lang id="zh" date="20150307090856" status="3">预置样式</lang>
+      </row>
+      <row id="sb.hlCustom.solid" state="0" created="20150307074501">
+        <native>Solid</native>
+        <lang id="zh.tra" date="20150307085222" status="3">實線</lang>
+        <lang id="zh" date="20150307090856" status="3">实线</lang>
+      </row>
+      <row id="sb.hlCustom.style" state="0" created="20150307074501">
+        <native>Style</native>
+        <lang id="zh.tra" date="20150307085222" status="3">樣式</lang>
+        <lang id="zh" date="20150307090856" status="3">样式</lang>
+      </row>
+      <row id="sb.hlCustom.text" state="0" created="20150307074501">
+        <native>Text</native>
+        <lang id="zh.tra" date="20150307085222" status="3">文字</lang>
+        <lang id="zh" date="20150307090856" status="3">文字</lang>
+      </row>
+      <row id="sb.hlCustom.thick" state="0" created="20150307074501">
+        <native>Thick</native>
+        <lang id="zh.tra" date="20150307085222" status="3">寬</lang>
+        <lang id="zh" date="20150307090856" status="3">粗</lang>
+      </row>
+      <row id="sb.hlCustom.thin" state="0" created="20150307074501">
+        <native>Thin</native>
+        <lang id="zh.tra" date="20150307085222" status="3">細</lang>
+        <lang id="zh" date="20150307090856" status="3">细</lang>
+      </row>
+      <row id="sb.hlCustom.type" state="0" created="20150307074501">
+        <native>Type</native>
+        <lang id="zh.tra" date="20150307085222" status="3">類型</lang>
+        <lang id="zh" date="20150307090856" status="3">类型</lang>
+      </row>
+      <row id="sb.hlCustom.underline" state="0" created="20150307074501">
+        <native>Underline</native>
+        <lang id="zh.tra" date="20150307085222" status="3">底線</lang>
+        <lang id="zh" date="20150307090856" status="3">下划线</lang>
+      </row>
+      <row id="sb.hlCustom.width" state="0" created="20150307074501">
+        <native>Width</native>
+        <lang id="zh.tra" date="20150307085222" status="3">寬度</lang>
+        <lang id="zh" date="20150307090856" status="3">宽度</lang>
+      </row>
+    </node>
+    <node class="TTextNode" name="mbManage.dtd" created="20150307074221">
+      <row id="mb.button.add" state="0" created="20150307074501">
+        <native>Add</native>
+        <lang id="zh.tra" date="20150307085232" status="3">新增</lang>
+        <lang id="zh" date="20150307090904" status="3">添加</lang>
+        <lang id="ja" date="20150307094246" status="3">追加</lang>
+      </row>
+      <row id="mb.button.edit" state="0" created="20150307074501">
+        <native>Edit</native>
+        <lang id="zh.tra" date="20150307085232" status="3">編輯</lang>
+        <lang id="zh" date="20150307090904" status="3">编辑</lang>
+        <lang id="ja" date="20150307094246" status="3">編集</lang>
+      </row>
+      <row id="mb.button.remove" state="0" created="20150307074501">
+        <native>Remove</native>
+        <lang id="zh.tra" date="20150307085232" status="3">刪除</lang>
+        <lang id="zh" date="20150307090904" status="3">删除</lang>
+        <lang id="ja" date="20150307094246" status="3">削除</lang>
+      </row>
+      <row id="mb.manager" state="0" created="20150307074501">
+        <native>Multi-ScrapBook Manager</native>
+        <lang id="zh.tra" date="20150307085232" status="3">多重 ScrapBook 管理員</lang>
+        <lang id="zh" date="20150307090904" status="3">多重 ScrapBook 管理器</lang>
+      </row>
+      <row id="mb.prop.name" state="0" created="20150307074501">
+        <native>Name</native>
+        <lang id="zh.tra" date="20150307085232" status="3">名稱</lang>
+        <lang id="zh" date="20150307090904" status="3">名称</lang>
+        <lang id="ja" date="20150307094246" status="3">名前</lang>
+      </row>
+      <row id="mb.prop.path" state="0" created="20150307074501">
+        <native>Path</native>
+        <lang id="zh.tra" date="20150307085232" status="3">路徑</lang>
+        <lang id="zh" date="20150307090904" status="3">路径</lang>
+        <lang id="ja" date="20150307094246" status="3">パス</lang>
+      </row>
+    </node>
+    <node class="TTextNode" name="multiple.dtd" created="20150307074221">
+      <row id="sb.multiple.charset" state="0" created="20150307074501">
+        <native>Charset</native>
+        <lang id="zh.tra" date="20150307085239" status="3">字元集</lang>
+        <lang id="zh" date="20150307090915" status="3">字符集</lang>
+        <lang id="ja" date="20150307094252" status="3">フィルタ（正規表現）</lang>
+      </row>
+      <row id="sb.multiple.detector" state="0" created="20150307074501">
+        <native>URL Detector</native>
+        <lang id="zh.tra" date="20150307085239" status="3">自動偵測 URL</lang>
+        <lang id="zh" date="20150307090915" status="3">检测 URL</lang>
+        <lang id="ja" date="20150307094252" status="3">ウェブサイトのタイトル</lang>
+      </row>
+      <row id="sb.multiple.detector.bookmarks" state="0" created="20150307074501">
+        <native>Bookmarks</native>
+        <lang id="zh.tra" date="20150307085239" status="3">書籤</lang>
+        <lang id="zh" date="20150307090915" status="3">Bookmarks</lang>
+        <lang id="ja" date="20150307094252" status="3">リンクのタイトル</lang>
+      </row>
+      <row id="sb.multiple.detector.clear" state="0" created="20150307074501">
+        <native>Clear</native>
+        <lang id="zh.tra" date="20150307085239" status="3">清除</lang>
+        <lang id="zh" date="20150307090915" status="3">清除</lang>
+        <lang id="ja" date="20150307094252" status="3">タイトル</lang>
+      </row>
+      <row id="sb.multiple.detector.local" state="0" created="20150307074501">
+        <native>All Local HTMLs in a Directory</native>
+        <lang id="zh.tra" date="20150307085239" status="3">某目錄下所有的 HTML 檔</lang>
+        <lang id="zh" date="20150307090915" status="3">本地存储的 HTML 文件</lang>
+        <lang id="ja" date="20150307094252" status="3">タイムアウト</lang>
+      </row>
+      <row id="sb.multiple.detector.plink" state="0" created="20150307074501">
+        <native>All Links in the Page</native>
+        <lang id="zh.tra" date="20150307085239" status="3">本頁所有連結</lang>
+        <lang id="zh" date="20150307090915" status="3">页面中包含的所有链接</lang>
+        <lang id="ja" date="20150307094252" status="3">メソッド</lang>
+      </row>
+      <row id="sb.multiple.detector.slink" state="0" created="20150307074501">
+        <native>All Links in the Selection</native>
+        <lang id="zh.tra" date="20150307085239" status="3">選取區中所有連結</lang>
+        <lang id="zh" date="20150307090915" status="3">所选内容中的所有链接</lang>
+        <lang id="ja" date="20150307094252" status="3">文字セット</lang>
+      </row>
+      <row id="sb.multiple.detector.tabs" state="0" created="20150307074501">
+        <native>All Open Tabs in the Window</native>
+        <lang id="zh.tra" date="20150307085239" status="3">此視窗中所有的分頁</lang>
+        <lang id="zh" date="20150307090915" status="3">当前所有打开的标签页</lang>
+        <lang id="ja" date="20150307094252" status="3">URL （改行して複数入力可）</lang>
+      </row>
+      <row id="sb.multiple.filter" state="0" created="20150307074501">
+        <native>Filter (regular expression)</native>
+        <lang id="zh.tra" date="20150307085239" status="3">篩選條件（使用規則運算式）</lang>
+        <lang id="zh" date="20150307090915" status="3">过滤器</lang>
+        <lang id="ja" date="20150307094252" status="3">URL検出ツール</lang>
+      </row>
+      <row id="sb.multiple.timeout" state="0" created="20150307074501">
+        <native>Timeout</native>
+        <lang id="zh.tra" date="20150307085239" status="3">逾時</lang>
+        <lang id="zh" date="20150307090915" status="3">超时</lang>
+        <lang id="ja" date="20150307094252" status="3">ページ内のすべてのリンク</lang>
+      </row>
+      <row id="sb.multiple.title" state="0" created="20150307074501">
+        <native>Title</native>
+        <lang id="zh.tra" date="20150307085239" status="3">標題</lang>
+        <lang id="zh" date="20150307090915" status="3">标题</lang>
+        <lang id="ja" date="20150307094252" status="3">選択範囲内のすべてのリンク</lang>
+      </row>
+      <row id="sb.multiple.url" state="0" created="20150307074501">
+        <native>URL (Enter URLs line-by-line)</native>
+        <lang id="zh.tra" date="20150307085239" status="3">URL (每行一個 URL)</lang>
+        <lang id="zh" date="20150307090915" status="3">URL (每行输入一个 URL)</lang>
+        <lang id="ja" date="20150307094252" status="3">現在のウィンドウに開かれたすべてのタブ</lang>
+      </row>
+      <row id="sbp.multiple.downloadmethod" state="0" created="20150307074501">
+        <native>Method</native>
+        <lang id="zh.tra" date="20150307085239" status="3">方式</lang>
+        <lang id="zh" date="20150307090915" status="3">方法</lang>
+        <lang id="ja" date="20150307094252" status="3">指定したフォルダ以下のローカルHTML</lang>
+      </row>
+      <row id="sbp.multiple.exclude" state="0" created="20150307074501">
+        <native>ignore already existing addresses in destination folder</native>
+        <lang id="zh.tra" date="20150307085239" status="3">略過已存在於目標資料夾的位址</lang>
+        <lang id="zh" date="20150307090915" status="3">忽略目的文件夹中已存在的地址</lang>
+        <lang id="ja" date="20150307094252" status="3">ブックマーク</lang>
+      </row>
+      <row id="sbp.multiple.titleoflink" state="0" created="20150307074501">
+        <native>Title of link</native>
+        <lang id="zh.tra" date="20150307085239" status="3">連結標題</lang>
+        <lang id="zh" date="20150307090915" status="3">链接标题</lang>
+        <lang id="ja" date="20150307094252" status="3">クリア</lang>
+      </row>
+      <row id="sbp.multiple.titleofwebsite" state="0" created="20150307074501">
+        <native>Title of website</native>
+        <lang id="zh.tra" date="20150307085239" status="3">網站標題</lang>
+        <lang id="zh" date="20150307090915" status="3">站点标题</lang>
+        <lang id="ja" date="20150307094252" status="3">保存先フォルダにすでに存在するアドレスは無視する</lang>
+      </row>
+    </node>
+    <node class="TTextNode" name="note.dtd" created="20150307074221">
+      <row id="sb.note.autolinefeed" state="0" created="20150307074501">
+        <native>Auto-Linefeed</native>
+        <lang id="zh.tra" date="20150307085302" status="3">自動斷行</lang>
+        <lang id="zh" date="20150307090931" status="3">自动换行</lang>
+        <lang id="ja" date="20150307094404" status="3">自動改行</lang>
+      </row>
+      <row id="sb.note.autolinefeed.t" state="0" created="20150307074501">
+        <native>Add &amp;lt;br&amp;gt; tag to the end-of-line at &amp;sb.note.htmlview;</native>
+        <lang id="zh.tra" date="20150307085302" status="3">在 HTML 預覽時，於每行最後自動添加 &amp;lt;br&amp;gt; 標籤。</lang>
+        <lang id="zh" date="20150307090931" status="3">预览时在每行结尾自动添加 &amp;lt;br&amp;gt; 标记。</lang>
+        <lang id="ja" date="20150307094404" status="3">&amp;sb.note.htmlview;時に行末に&amp;lt;br&amp;gt;タグを自動で付加します</lang>
+      </row>
+      <row id="sb.note.close" state="0" created="20150307074501">
+        <native>Close</native>
+        <lang id="zh.tra" date="20150307085302" status="3">關閉</lang>
+        <lang id="zh" date="20150307090931" status="3">关闭</lang>
+        <lang id="ja" date="20150307094404" status="3">閉じる</lang>
+      </row>
+      <row id="sb.note.exit" state="0" created="20150307074501">
+        <native>Exit</native>
+        <lang id="zh.tra" date="20150307085302" status="3">離開</lang>
+        <lang id="zh" date="20150307090931" status="3">退出</lang>
+        <lang id="ja" date="20150307094404" status="3">終了</lang>
+      </row>
+      <row id="sb.note.exit.accesskey" state="0" created="20150307074501">X</row>
+      <row id="sb.note.fontsize" state="0" created="20150307074501">
+        <native>Font Size</native>
+        <lang id="zh.tra" date="20150307085302" status="3">文字尺寸</lang>
+        <lang id="zh" date="20150307090931" status="3">字体大小</lang>
+        <lang id="ja" date="20150307094404" status="3">文字サイズ</lang>
+      </row>
+      <row id="sb.note.fontsize.accesskey" state="0" created="20150307074501">F</row>
+      <row id="sb.note.help" state="0" created="20150307074501">
+        <native>Help</native>
+        <lang id="zh.tra" date="20150307085302" status="3">說明</lang>
+        <lang id="zh" date="20150307090931" status="3">帮助</lang>
+        <lang id="ja" date="20150307094404" status="3">ヘルプ</lang>
+      </row>
+      <row id="sb.note.htmlview" state="0" created="20150307074501">
+        <native>HTML View</native>
+        <lang id="zh.tra" date="20150307085302" status="3">HTML 預覽</lang>
+        <lang id="zh" date="20150307090931" status="3">预览</lang>
+        <lang id="ja" date="20150307094404" status="3">HTMLビュー</lang>
+      </row>
+      <row id="sb.note.htmlview.accesskey" state="0" created="20150307074501">H</row>
+      <row id="sb.note.normalview" state="0" created="20150307074501">
+        <native>Normal View</native>
+        <lang id="zh.tra" date="20150307085302" status="3">一般模式</lang>
+        <lang id="zh" date="20150307090931" status="3">常规视图</lang>
+        <lang id="ja" date="20150307094404" status="3">通常ビュー</lang>
+      </row>
+      <row id="sb.note.normalview.accesskey" state="0" created="20150307074501">N</row>
+      <row id="sb.note.print" state="0" created="20150307074501">
+        <native>Print</native>
+        <lang id="zh.tra" date="20150307085302" status="3">列印</lang>
+        <lang id="zh" date="20150307090931" status="3">打印</lang>
+        <lang id="ja" date="20150307094404" status="3">印刷</lang>
+      </row>
+      <row id="sb.note.print.accesskey" state="0" created="20150307074501">P</row>
+      <row id="sb.note.save" state="0" created="20150307074501">
+        <native>Save</native>
+        <lang id="zh.tra" date="20150307085302" status="3">存檔</lang>
+        <lang id="zh" date="20150307090931" status="3">保存</lang>
+        <lang id="ja" date="20150307094404" status="3">保存</lang>
+      </row>
+      <row id="sb.note.save.accesskey" state="0" created="20150307074501">S</row>
+      <row id="sb.note.template" state="0" created="20150307074501">
+        <native>Edit Template HTML</native>
+        <lang id="zh.tra" date="20150307085302" status="3">編輯 HTML 樣版</lang>
+        <lang id="zh" date="20150307090931" status="3">编辑 HTML 模板</lang>
+        <lang id="ja" date="20150307094404" status="3">テンプレートHTMLの編集</lang>
+      </row>
+      <row id="sb.note.tools" state="0" created="20150307074501">
+        <native>Tools</native>
+        <lang id="zh.tra" date="20150307085302" status="3">工具</lang>
+        <lang id="zh" date="20150307090931" status="3">工具</lang>
+        <lang id="ja" date="20150307094404" status="3">ツール</lang>
+      </row>
+      <row id="sb.note.tools.accesskey" state="0" created="20150307074501">T</row>
+    </node>
+    <node class="TTextNode" name="notify.dtd" created="20150307074221">
+      <row id="sb.capture.complete" state="0" created="20150307074501">
+        <native>Capture Completed.</native>
+        <lang id="zh.tra" date="20150307085314" status="3">擷取完成。</lang>
+        <lang id="zh" date="20150307091007" status="3">获取完成</lang>
+        <lang id="ja" date="20150307094421" status="3">取り込み完了</lang>
+      </row>
+      <row id="sb.capture.complete.all" state="0" created="20150307074501">
+        <native>All Captures Completed.</native>
+        <lang id="zh.tra" date="20150307085314" status="3">擷取全部完成。</lang>
+        <lang id="zh" date="20150307091007" status="3">全部获取完成</lang>
+        <lang id="ja" date="20150307094421" status="3">すべての取り込みが完了しました。</lang>
+      </row>
+    </node>
+    <node class="TTextNode" name="output.dtd" created="20150307074221">
+      <row id="sb.output.option.all" state="0" created="20150307074501">
+        <native>Output whole tree</native>
+        <lang id="zh.tra" date="20150307085322" status="3">匯出所有文件</lang>
+        <lang id="zh" date="20150307091018" status="3">输出整个树</lang>
+        <lang id="ja" date="20150307094428" status="3">すべてを出力</lang>
+      </row>
+      <row id="sb.output.option.frame" state="0" created="20150307074501">
+        <native>Output with frame</native>
+        <lang id="zh.tra" date="20150307085322" status="3">使用頁框格式</lang>
+        <lang id="zh" date="20150307091018" status="3">连带帧一起输出</lang>
+        <lang id="ja" date="20150307094428" status="3">フレーム付きのHTMLを出力</lang>
+      </row>
+      <row id="sb.output.option.open" state="0" created="20150307074501">
+        <native>After outputting, open it in browser</native>
+        <lang id="zh.tra" date="20150307085322" status="3">匯出後，在瀏覽器開啟匯出結果</lang>
+        <lang id="zh" date="20150307091018" status="3">输出完成后，用浏览器打开</lang>
+        <lang id="ja" date="20150307094428" status="3">HTML出力後、ブラウザで開く</lang>
+      </row>
+    </node>
+    <node class="TTextNode" name="overlay.dtd" created="20150307074221">
+      <row id="sb.capture.alltabs" state="0" created="20150307074501">
+        <native>Capture All Tabs</native>
+        <lang id="zh.tra" date="20150307085335" status="3">擷取所有分頁</lang>
+        <lang id="zh" date="20150307091025" status="3">获取所有标签页</lang>
+        <lang id="ja" date="20150307094440" status="3">すべてのタブを取り込み</lang>
+      </row>
+      <row id="sb.capture.bookmark" state="0" created="20150307074501">
+        <native>Bookmark with ScrapBook</native>
+        <lang id="zh.tra" date="20150307085335" status="3">加入 ScrapBook 書籤</lang>
+        <lang id="zh" date="20150307091025" status="3">加入 ScrapBook 书签</lang>
+        <lang id="ja" date="20150307094440" status="3">ScrapBookにブックマーク</lang>
+      </row>
+      <row id="sb.capture.entire" state="0" created="20150307074501">
+        <native>Capture Page</native>
+        <lang id="zh.tra" date="20150307085335" status="3">擷取網頁</lang>
+        <lang id="zh" date="20150307091025" status="3">获取页面</lang>
+        <lang id="ja" date="20150307094440" status="3">ページの取り込み</lang>
+      </row>
+      <row id="sb.capture.entire.as" state="0" created="20150307074501">
+        <native>Capture Page As</native>
+        <lang id="zh.tra" date="20150307085335" status="3">擷取網頁細節</lang>
+        <lang id="zh" date="20150307091025" status="3">获取页面为</lang>
+        <lang id="ja" date="20150307094440" status="3">ページの詳細な取り込み</lang>
+      </row>
+      <row id="sb.capture.frame" state="0" created="20150307074501">
+        <native>Capture Frame</native>
+        <lang id="zh.tra" date="20150307085335" status="3">擷取頁框</lang>
+        <lang id="zh" date="20150307091025" status="3">获取框架</lang>
+        <lang id="ja" date="20150307094440" status="3">フレームの取り込み</lang>
+      </row>
+      <row id="sb.capture.frame.as" state="0" created="20150307074501">
+        <native>Capture Frame As</native>
+        <lang id="zh.tra" date="20150307085335" status="3">擷取頁框細節</lang>
+        <lang id="zh" date="20150307091025" status="3">获取框架为</lang>
+        <lang id="ja" date="20150307094440" status="3">フレームの詳細な取り込み</lang>
+      </row>
+      <row id="sb.capture.partial" state="0" created="20150307074501">
+        <native>Capture Selection</native>
+        <lang id="zh.tra" date="20150307085335" status="3">擷取選擇區域</lang>
+        <lang id="zh" date="20150307091025" status="3">获取所选内容</lang>
+        <lang id="ja" date="20150307094440" status="3">選択範囲の取り込み</lang>
+      </row>
+      <row id="sb.capture.partial.as" state="0" created="20150307074501">
+        <native>Capture Selection As</native>
+        <lang id="zh.tra" date="20150307085335" status="3">擷取選擇區域細節</lang>
+        <lang id="zh" date="20150307091025" status="3">获取所选内容为</lang>
+        <lang id="ja" date="20150307094440" status="3">選択範囲の詳細な取り込み</lang>
+      </row>
+      <row id="sb.capture.target" state="0" created="20150307074501">
+        <native>Capture Link</native>
+        <lang id="zh.tra" date="20150307085335" status="3">擷取連結</lang>
+        <lang id="zh" date="20150307091025" status="3">获取链接</lang>
+        <lang id="ja" date="20150307094440" status="3">リンク先の取り込み</lang>
+      </row>
+      <row id="sb.capture.target.as" state="0" created="20150307074501">
+        <native>Capture Link As</native>
+        <lang id="zh.tra" date="20150307085335" status="3">擷取連結細節</lang>
+        <lang id="zh" date="20150307091025" status="3">获取链接为</lang>
+        <lang id="ja" date="20150307094440" status="3">リンク先の詳細な取り込み</lang>
+      </row>
+      <row id="sb.editbefore" state="0" created="20150307074501">
+        <native>Edit Before Capture</native>
+        <lang id="zh.tra" date="20150307085335" status="3">編輯後擷取</lang>
+        <lang id="zh" date="20150307091025" status="3">获取前进行编辑</lang>
+        <lang id="ja" date="20150307094440" status="3">取り込み前編集モード</lang>
+      </row>
+      <row id="sb.menubar" state="0" created="20150307074501">
+        <native>Menubar</native>
+        <lang id="zh.tra" date="20150307085335" status="3">選單列</lang>
+        <lang id="zh" date="20150307091025" status="3">菜单栏</lang>
+        <lang id="ja" date="20150307094440" status="3">メニュー</lang>
+      </row>
+      <row id="sb.sidebar" state="0" created="20150307074501">
+        <native>Show in Sidebar</native>
+        <lang id="zh.tra" date="20150307085335" status="3">在側邊欄顯示</lang>
+        <lang id="zh" date="20150307091025" status="3">在侧栏显示</lang>
+        <lang id="ja" date="20150307094440" status="3">サイドバーに表示</lang>
+      </row>
+    </node>
+    <node class="TTextNode" name="prefs.dtd" created="20150307074221">
+      <row id="sb.button.browse" state="0" created="20150307074501">
+        <native>Browse</native>
+        <lang id="zh.tra" date="20150307085343" status="3">瀏覽</lang>
+        <lang id="zh" date="20150307091030" status="3">浏览</lang>
+        <lang id="ja" date="20150307094450" status="3">参照</lang>
+      </row>
+      <row id="sb.button.customize" state="0" created="20150307074501">
+        <native>Customize</native>
+        <lang id="zh.tra" date="20150307085343" status="3">自訂</lang>
+        <lang id="zh" date="20150307091030" status="3">定制</lang>
+        <lang id="ja" date="20150307094450" status="3">カスタマイズ</lang>
+      </row>
+      <row id="sb.button.show" state="0" created="20150307074501">
+        <native>Show Files</native>
+        <lang id="zh.tra" date="20150307085343" status="3">顯示檔案</lang>
+        <lang id="zh" date="20150307091030" status="3">显示文件</lang>
+        <lang id="ja" date="20150307094450" status="3">ファイルを表示</lang>
+      </row>
+      <row id="sb.prefs.advanced" state="0" created="20150307074501">
+        <native>Advanced</native>
+        <lang id="zh.tra" date="20150307085343" status="3">進階設定</lang>
+        <lang id="zh" date="20150307091030" status="3">高级</lang>
+        <lang id="ja" date="20150307094450" status="3">詳細</lang>
+      </row>
+      <row id="sb.prefs.autoOutput" state="0" created="20150307074501">
+        <native>Automatically output tree as HTML when data is changed</native>
+        <lang id="zh.tra" date="20150307085343" status="3">更動資料時，自動將資料列表匯出為 HTML</lang>
+        <lang id="zh" date="20150307091030" status="3">更动项目时，自动导出项目列表</lang>
+      </row>
+      <row id="sb.prefs.confirmDelete" state="0" created="20150307074501">
+        <native>Warn me when deleting tree item(s)</native>
+        <lang id="zh.tra" date="20150307085343" status="3">刪除資料需要確認</lang>
+        <lang id="zh" date="20150307091030" status="3">删除树状条目时警告万我</lang>
+        <lang id="ja" date="20150307094450" status="3">削除確認をする</lang>
+      </row>
+      <row id="sb.prefs.data" state="0" created="20150307074501">
+        <native>Location to Store Data</native>
+        <lang id="zh.tra" date="20150307085343" status="3">擷取資料存放處</lang>
+        <lang id="zh" date="20150307091030" status="3">定位到存储数据的位置</lang>
+        <lang id="ja" date="20150307094450" status="3">データ保存先</lang>
+      </row>
+      <row id="sb.prefs.data.custom" state="0" created="20150307074501">
+        <native>Save data to</native>
+        <lang id="zh.tra" date="20150307085343" status="3">存放至</lang>
+        <lang id="zh" date="20150307091030" status="3">保存数据至</lang>
+        <lang id="ja" date="20150307094450" status="3">次のフォルダ</lang>
+      </row>
+      <row id="sb.prefs.data.default" state="0" created="20150307074501">
+        <native>Default (Profile Folder)</native>
+        <lang id="zh.tra" date="20150307085343" status="3">預設（在您的個人設定檔資料夾中）</lang>
+        <lang id="zh" date="20150307091030" status="3">默认</lang>
+        <lang id="ja" date="20150307094450" status="3">デフォルト (プロファイルフォルダ下)</lang>
+      </row>
+      <row id="sb.prefs.data.tips" state="0" created="20150307074501">
+        <native>Choose a folder where to store the ScrapBook data.</native>
+        <lang id="zh.tra" date="20150307085343" status="3">請選擇 ScrapBook 存放擷取資料的資料夾</lang>
+        <lang id="zh" date="20150307091030" status="3">选择用户存储 ScrapBook 数据的文件夹。</lang>
+        <lang id="ja" date="20150307094450" status="3">ScrapBook のデータを保存するためのフォルダを選択してください。</lang>
+      </row>
+      <row id="sb.prefs.edit" state="0" created="20150307074501">
+        <native>Edit</native>
+        <lang id="zh.tra" date="20150307085343" status="3">編輯設定</lang>
+        <lang id="zh" date="20150307091030" status="3">编辑</lang>
+        <lang id="ja" date="20150307094450" status="3">編集</lang>
+      </row>
+      <row id="sb.prefs.edit.autoEditNoteX" state="0" created="20150307074501">
+        <native>Auto edit Note Pages</native>
+        <lang id="zh.tra" date="20150307085343" status="3">筆記頁面自動進入編輯模式</lang>
+        <lang id="zh" date="20150307091030" status="3">便签页面自动进入编辑模式</lang>
+      </row>
+      <row id="sb.prefs.edit.insertDateFormat" state="0" created="20150307074501">
+        <native>Insert Date Format (strftime):</native>
+        <lang id="zh.tra" date="20150307085343" status="3">插入日期格式 (strftime):</lang>
+        <lang id="zh" date="20150307091030" status="3">插入日期格式 (strftime):</lang>
+      </row>
+      <row id="sb.prefs.edit.wrapperFormat" state="0" created="20150307074501">
+        <native>HTML formatting template</native>
+        <lang id="zh.tra" date="20150307085343" status="3">HTML 格式化模版</lang>
+        <lang id="zh" date="20150307091030" status="3">HTML 格式化模版</lang>
+      </row>
+      <row id="sb.prefs.keys" state="0" created="20150307074501">
+        <native>Keys</native>
+        <lang id="zh.tra" date="20150307085343" status="3">按鍵設定</lang>
+        <lang id="zh" date="20150307091030" status="3">关键字</lang>
+      </row>
+      <row id="sb.prefs.main" state="0" created="20150307074501">
+        <native>Main</native>
+        <lang id="zh.tra" date="20150307085343" status="3">一般設定</lang>
+        <lang id="zh" date="20150307091030" status="3">主要</lang>
+        <lang id="ja" date="20150307094450" status="3">一般</lang>
+      </row>
+      <row id="sb.prefs.multibook.enabled" state="0" created="20150307074501">
+        <native>Enable Multi-ScrapBook</native>
+        <lang id="zh.tra" date="20150307085343" status="3">啟用多重 ScrapBook 功能</lang>
+        <lang id="zh" date="20150307091030" status="3">启动 Multi-ScrapBook</lang>
+        <lang id="ja" date="20150307094450" status="3">Multi-ScrapBook 機能を有効にする</lang>
+      </row>
+      <row id="sb.prefs.multibook.tips" state="0" created="20150307074501">
+        <native>Multi-ScrapBook enables you to set up multiple locations to store data and switch between them quickly with toolbar button.</native>
+        <lang id="zh.tra" date="20150307085343" status="3">這個選項可讓你指定一個以上的資料存放處，並以工具列按鈕快速切換欲儲存位置。</lang>
+        <lang id="zh" date="20150307091030" status="3">Multi-ScrapBook 可以使您设置多个存储数据的位置，而且您还可以在工具栏对这些位置进行快速切换。</lang>
+        <lang id="ja" date="20150307094450" status="3">複数のデータ保存先を設定し、ツールバーボタンから素早く切り替えることができます。</lang>
+      </row>
+      <row id="sb.prefs.notifyOnComplete" state="0" created="20150307074501">
+        <native>Show &amp;apos;Capture Completed&amp;apos; notification</native>
+        <lang id="zh.tra" date="20150307085343" status="3">顯示「擷取完畢」提醒視窗</lang>
+        <lang id="zh" date="20150307091030" status="3">显示“捕获完成”提示</lang>
+        <lang id="ja" date="20150307094450" status="3">取り込みが完了したら通知する</lang>
+      </row>
+      <row id="sb.prefs.notifyPageCaptured" state="0" created="20150307074501">
+        <native>Show notification on browsing a page having been captured</native>
+        <lang id="zh.tra" date="20150307085343" status="3">瀏覽擷取過的頁面時，顯示提醒視窗</lang>
+        <lang id="zh" date="20150307091030" status="3">浏览获取过的页面时，显示提示</lang>
+      </row>
+      <row id="sb.prefs.organize" state="0" created="20150307074501">
+        <native>Organize</native>
+        <lang id="zh.tra" date="20150307085343" status="3">組織設定</lang>
+        <lang id="zh" date="20150307091030" status="3">组织</lang>
+        <lang id="ja" date="20150307094450" status="3">整理</lang>
+      </row>
+      <row id="sb.prefs.restart" state="0" created="20150307074501">
+        <native>Change requires Firefox restart.</native>
+        <lang id="zh.tra" date="20150307085343" status="3">需重新啟動 Firefox 方能生效。</lang>
+        <lang id="zh" date="20150307091030" status="3">更改需要重启 Firefox。</lang>
+        <lang id="ja" date="20150307094450" status="3">変更は Firefox 再起動後に反映されます。</lang>
+      </row>
+      <row id="sb.prefs.save" state="0" created="20150307074501">
+        <native>Save</native>
+        <lang id="zh.tra" date="20150307085343" status="3">儲存設定</lang>
+        <lang id="zh" date="20150307091030" status="3">保存</lang>
+        <lang id="ja" date="20150307094450" status="3">保存</lang>
+      </row>
+      <row id="sb.prefs.showDetailOnDrop" state="0" created="20150307074501">
+        <native>Show &amp;apos;Capture Detail&amp;apos; dialog when capturing by drag-and-drop into Sidebar</native>
+        <lang id="zh.tra" date="20150307085343" status="3">以拖曳方式擷取資料時，顯示「詳細資訊」對話方塊</lang>
+        <lang id="zh" date="20150307091030" status="3">通过向侧栏拖拽进行捕获时显示 &amp;apos;Capture Detail&amp;apos; 对话框</lang>
+        <lang id="ja" date="20150307094450" status="3">サイドバーへのドラッグ＆ドロップ時、詳細な取り込みをする</lang>
+      </row>
+      <row id="sb.prefs.tabs" state="0" created="20150307074501">
+        <native>Tabs</native>
+        <lang id="zh.tra" date="20150307085343" status="3">分頁設定</lang>
+        <lang id="zh" date="20150307091030" status="3">标签</lang>
+        <lang id="ja" date="20150307094450" status="3">タブ</lang>
+      </row>
+      <row id="sb.prefs.tabs.note" state="0" created="20150307074501">
+        <native>Edit Note</native>
+        <lang id="zh.tra" date="20150307085343" status="3">編輯筆記</lang>
+        <lang id="zh" date="20150307091030" status="3">编辑笔记</lang>
+        <lang id="ja" date="20150307094450" status="3">ノートの編集</lang>
+      </row>
+      <row id="sb.prefs.tabs.tips" state="0" created="20150307074501">
+        <native>Open in tab for the following operations</native>
+        <lang id="zh.tra" date="20150307085343" status="3">操作下列項目時，以分頁開啟</lang>
+        <lang id="zh" date="20150307091030" status="3">随后的操作在标签页中打开</lang>
+        <lang id="ja" date="20150307094450" status="3">次の操作を新しいタブで開く</lang>
+      </row>
+      <row id="sb.prefs.tree.autoCollapse" state="0" created="20150307074501">
+        <native>When opening a tree folder, automatically close other folders</native>
+        <lang id="zh.tra" date="20150307085343" status="3">開啟某資料夾時，自動收合其他資料夾</lang>
+        <lang id="zh" date="20150307091030" status="3">打开树状文件夹时，自动关闭其他文件夹</lang>
+        <lang id="ja" date="20150307094450" status="3">ツリーフォルダを開いたとき、他のフォルダを自動的に閉じる</lang>
+      </row>
+      <row id="sb.prefs.tree.unshift" state="0" created="20150307074501">
+        <native>Put an item into</native>
+        <lang id="zh.tra" date="20150307085343" status="3">新增資料時，應放在</lang>
+        <lang id="zh" date="20150307091030" status="3">放条目至</lang>
+        <lang id="ja" date="20150307094450" status="3">アイテムを追加する位置:</lang>
+      </row>
+      <row id="sb.prefs.tree.unshift.bottom" state="0" created="20150307074501">
+        <native>the bottom of a folder</native>
+        <lang id="zh.tra" date="20150307085343" status="3">最後面</lang>
+        <lang id="zh" date="20150307091030" status="3">文件夹底部</lang>
+        <lang id="ja" date="20150307094450" status="3">フォルダの一番下</lang>
+      </row>
+      <row id="sb.prefs.tree.unshift.top" state="0" created="20150307074501">
+        <native>the top of a folder</native>
+        <lang id="zh.tra" date="20150307085343" status="3">最前面</lang>
+        <lang id="zh" date="20150307091030" status="3">文件夹顶部</lang>
+        <lang id="ja" date="20150307094450" status="3">フォルダの一番上</lang>
+      </row>
+      <row id="sb.prefs.ui.bookmarkMenu" state="0" created="20150307074501">
+        <native>Show &amp;apos;Bookmark with ScrapBook&amp;apos; menu</native>
+        <lang id="zh.tra" date="20150307085343" status="3">顯示「加入 ScrapBook 書籤」選項</lang>
+        <lang id="zh" date="20150307091030" status="3">显示 &amp;apos;Bookmark with ScrapBook&amp;apos; 菜单</lang>
+        <lang id="ja" date="20150307094450" status="3">'ScrapBookにブックマーク' メニューを表示</lang>
+      </row>
+      <row id="sb.prefs.ui.contextMenu" state="0" created="20150307074501">
+        <native>Show in browser context menu</native>
+        <lang id="zh.tra" date="20150307085343" status="3">於快捷選單中顯示擷取選項</lang>
+        <lang id="zh" date="20150307091030" status="3">在浏览器中显示上下文菜单</lang>
+        <lang id="ja" date="20150307094450" status="3">ブラウザのコンテキストメニューに表示</lang>
+      </row>
+      <row id="sb.prefs.ui.contextSubMenu" state="0" created="20150307074501">
+        <native>Submenu</native>
+        <lang id="zh.tra" date="20150307085343" status="3">以子選單方式顯示</lang>
+        <lang id="zh" date="20150307091030" status="3">子菜单</lang>
+        <lang id="ja" date="20150307094450" status="3">サブメニュー</lang>
+      </row>
+      <row id="sb.prefs.ui.folderList.maxEntries.1" state="0" created="20150307074501">
+        <native>Show up to</native>
+        <lang id="zh.tra" date="20150307085343" status="3">最多顯示</lang>
+        <lang id="zh" date="20150307091030" status="3">突出显示于</lang>
+        <lang id="ja" date="20150307094450" status="3">最近使用したフォルダを</lang>
+      </row>
+      <row id="sb.prefs.ui.folderList.maxEntries.2" state="0" created="20150307074501">
+        <native>recently used folders</native>
+        <lang id="zh.tra" date="20150307085343" status="3">項最近使用的資料夾</lang>
+        <lang id="zh" date="20150307091030" status="3">最近使用的文件夹</lang>
+        <lang id="ja" date="20150307094450" status="3">個まで表示する</lang>
+      </row>
+      <row id="sb.prefs.ui.menuBar" state="0" created="20150307074501">
+        <native>Show in menu bar</native>
+        <lang id="zh.tra" date="20150307085343" status="3">在選單列上顯示「ScrapBook」選單</lang>
+        <lang id="zh" date="20150307091030" status="3">在菜单栏中显示</lang>
+        <lang id="ja" date="20150307094450" status="3">メニューバーに表示</lang>
+      </row>
+      <row id="sb.prefs.ui.menuBar.icon" state="0" created="20150307074501">
+        <native>Icon</native>
+        <lang id="zh.tra" date="20150307085343" status="3">顯示為圖示</lang>
+        <lang id="zh" date="20150307091030" status="3">图标</lang>
+        <lang id="ja" date="20150307094450" status="3">アイコン</lang>
+      </row>
+      <row id="sb.prefs.ui.statusBar" state="0" created="20150307074501">
+        <native>Show in status bar</native>
+        <lang id="zh.tra" date="20150307085343" status="3">在狀態列中顯示圖示</lang>
+        <lang id="zh" date="20150307091030" status="3">在状态栏显示</lang>
+        <lang id="ja" date="20150307094450" status="3">ステータスバーに表示</lang>
+      </row>
+      <row id="sb.prefs.ui.toolsMenu" state="0" created="20150307074501">
+        <native>Show in &amp;apos;Tools&amp;apos; menu</native>
+        <lang id="zh.tra" date="20150307085343" status="3">在「工具」功能表中顯示選項</lang>
+        <lang id="zh" date="20150307091030" status="3">在“工具”菜单显示</lang>
+        <lang id="ja" date="20150307094450" status="3">'ツール' メニューに表示</lang>
+      </row>
+    </node>
+    <node class="TTextNode" name="property.dtd" created="20150307074221">
+      <row id="sb.prop.content" state="0" created="20150307074501">
+        <native>Content</native>
+        <lang id="zh.tra" date="20150307085350" status="3">內容</lang>
+        <lang id="zh" date="20150307091037" status="3">内容</lang>
+        <lang id="ja" date="20150307094505" status="3">本文</lang>
+      </row>
+      <row id="sb.prop.create" state="0" created="20150307074501">
+        <native>Create</native>
+        <lang id="zh.tra" date="20150307085350" status="3">建立時間</lang>
+        <lang id="zh" date="20150307091037" status="3">建立时间</lang>
+      </row>
+      <row id="sb.prop.date" state="0" created="20150307074501">
+        <native>Date</native>
+        <lang id="zh.tra" date="20150307085350" status="3">日期</lang>
+        <lang id="zh" date="20150307091037" status="3">日期</lang>
+        <lang id="ja" date="20150307094505" status="3">日時</lang>
+      </row>
+      <row id="sb.prop.encode" state="0" created="20150307074501">
+        <native>Encode</native>
+        <lang id="zh.tra" date="20150307085350" status="3">字集</lang>
+        <lang id="zh" date="20150307091037" status="3">编码</lang>
+        <lang id="ja" date="20150307094505" status="3">文字コード</lang>
+      </row>
+      <row id="sb.prop.file" state="0" created="20150307074501">
+        <native>File</native>
+        <lang id="zh.tra" status="2">檔案</lang>
+        <lang id="zh" status="2">文件</lang>
+        <lang id="ja" status="2">ファイル</lang>
+      </row>
+      <row id="sb.prop.folder" state="0" created="20150307074501">
+        <native>Folder</native>
+        <lang id="zh.tra" status="2">資料夾</lang>
+        <lang id="zh" status="2">文件夹</lang>
+        <lang id="ja" status="2">フォルダ</lang>
+      </row>
+      <row id="sb.prop.general" state="0" created="20150307074501">
+        <native>General Info</native>
+        <lang id="zh.tra" date="20150307085350" status="3">一般資訊</lang>
+        <lang id="zh" date="20150307091037" status="3">常规</lang>
+        <lang id="ja" date="20150307094505" status="3">一般情報</lang>
+      </row>
+      <row id="sb.prop.icon" state="0" created="20150307074501">
+        <native>Icon</native>
+        <lang id="zh.tra" date="20150307085350" status="3">圖示</lang>
+        <lang id="zh" date="20150307091037" status="3">图标</lang>
+        <lang id="ja" date="20150307094505" status="3">アイコン</lang>
+      </row>
+      <row id="sb.prop.icon.change" state="0" created="20150307074501">
+        <native>Change</native>
+        <lang id="zh.tra" date="20150307085350" status="3">更換</lang>
+        <lang id="zh" date="20150307091037" status="3">更改</lang>
+        <lang id="ja" date="20150307094505" status="3">アイコン変更</lang>
+      </row>
+      <row id="sb.prop.icon.custom" state="0" created="20150307074501">
+        <native>Select user icon</native>
+        <lang id="zh.tra" date="20150307085350" status="3">選擇自訂圖示</lang>
+        <lang id="zh" date="20150307091037" status="3">选择自定义图标</lang>
+        <lang id="ja" date="20150307094505" status="3">ユーザーアイコンを選択</lang>
+      </row>
+      <row id="sb.prop.icon.default" state="0" created="20150307074501">
+        <native>Default</native>
+        <lang id="zh.tra" date="20150307085350" status="3">預設圖示</lang>
+        <lang id="zh" date="20150307091037" status="3">默认</lang>
+        <lang id="ja" date="20150307094505" status="3">デフォルト</lang>
+      </row>
+      <row id="sb.prop.icon.favicon" state="0" created="20150307074501">
+        <native>Select favicon</native>
+        <lang id="zh.tra" date="20150307085350" status="3">選擇網站圖示</lang>
+        <lang id="zh" date="20150307091037" status="3">选择个性化图标</lang>
+        <lang id="ja" date="20150307094505" status="3">faviconを選択</lang>
+      </row>
+      <row id="sb.prop.lock" state="0" created="20150307074501">
+        <native>Lock</native>
+        <lang id="zh.tra" date="20150307085350" status="3">鎖定</lang>
+        <lang id="zh" date="20150307091037" status="3">上锁</lang>
+      </row>
+      <row id="sb.prop.mark" state="0" created="20150307074501">
+        <native>Mark</native>
+        <lang id="zh.tra" date="20150307085350" status="3">標示</lang>
+        <lang id="zh" date="20150307091037" status="3">标记</lang>
+        <lang id="ja" date="20150307094505" status="3">マーク</lang>
+      </row>
+      <row id="sb.prop.modify" state="0" created="20150307074501">
+        <native>Modify</native>
+        <lang id="zh.tra" date="20150307085350" status="3">修改時間</lang>
+        <lang id="zh" date="20150307091037" status="3">修改时间</lang>
+      </row>
+      <row id="sb.prop.size" state="0" created="20150307074501">
+        <native>Size</native>
+        <lang id="zh.tra" date="20150307085350" status="3">文件大小</lang>
+        <lang id="zh" date="20150307091037" status="3">大小</lang>
+        <lang id="ja" date="20150307094505" status="3">サイズ</lang>
+      </row>
+      <row id="sb.prop.type" state="0" created="20150307074501">
+        <native>Type</native>
+        <lang id="zh.tra" date="20150307085350" status="3">型態</lang>
+        <lang id="zh" date="20150307091037" status="3">类型</lang>
+        <lang id="ja" date="20150307094505" status="3">形式</lang>
+      </row>
+    </node>
+    <node class="TTextNode" name="repair.dtd" created="20150307074221">
+      <row id="sb.repair.complete" state="0" created="20150307074501">
+        <native>Completed.</native>
+        <lang id="zh.tra" date="20150307085356" status="3">完成。</lang>
+        <lang id="zh" status="2">完成。</lang>
+        <lang id="ja" date="20150307094521" status="3">完了しました。</lang>
+      </row>
+      <row id="sb.repair.favicons" state="0" created="20150307074501">
+        <native>Restore favicons in tree</native>
+        <lang id="zh.tra" date="20150307085356" status="3">復原圖示</lang>
+        <lang id="zh" date="20150307091043" status="3">恢复个性化图标</lang>
+        <lang id="ja" date="20150307094521" status="3">favicon（ツリーのアイコン）を復元</lang>
+      </row>
+      <row id="sb.repair.favicons.descript" state="0" created="20150307074501">
+        <native>Try this if many favicons in ScrapBook tree disappear.</native>
+        <lang id="zh.tra" date="20150307085356" status="3">如果許多擷取文件中的網站圖示消失了，就試試這個方法。</lang>
+        <lang id="zh" date="20150307091043" status="3">如果项目列表中有大量个性化图标丢失，请尝试此选项。</lang>
+        <lang id="ja" date="20150307094521" status="3">ScrapBookツリーのfaviconが突然表示されなくなった場合はこちらを試してください。データ保存先フォルダを移動した際などに狂いが生じたfaviconのパスを再変換します。</lang>
+      </row>
+      <row id="sb.repair.rdfFile" state="0" created="20150307074501">
+        <native>Restore scrapbook.rdf</native>
+        <lang id="zh.tra" date="20150307085356" status="3">復原 scrapbook.rdf</lang>
+        <lang id="zh" date="20150307091043" status="3">恢复项目列表</lang>
+        <lang id="ja" date="20150307094521" status="3">scrapbook.rdf の復元</lang>
+      </row>
+      <row id="sb.repair.rdfFile.descript" state="0" created="20150307074501">
+        <native>Try this if ScrapBook tree disappears suddenly.</native>
+        <lang id="zh.tra" date="20150307085356" status="3">如果 ScrapBook 的資料突然都不見了，就試試這個方法。</lang>
+        <lang id="zh" date="20150307091043" status="3">如果项目列表突然无法正常显示，请尝试此选项。</lang>
+        <lang id="ja" date="20150307094521" status="3">ScrapBookツリーが突然表示されなくなった場合はこちらを試してください。backupフォルダにバックアップされた scrapbook.rdf からツリー構造を復元します。</lang>
+      </row>
+      <row id="sb.repair.rdfFile.file" state="0" created="20150307074501">
+        <native>File</native>
+        <lang id="zh.tra" status="2">檔案</lang>
+        <lang id="zh" status="2">文件</lang>
+        <lang id="ja" status="2">ファイル</lang>
+      </row>
+      <row id="sb.repair.rdfFile.select" state="0" created="20150307074501">
+        <native>Select a backup file for the restoration.</native>
+        <lang id="zh.tra" date="20150307085356" status="3">選擇欲復原的檔案版本。</lang>
+        <lang id="zh" date="20150307091043" status="3">请选择一个备份文件进行恢复</lang>
+        <lang id="ja" date="20150307094521" status="3">バックアップ元のファイルを選択してください。</lang>
+      </row>
+      <row id="sb.repair.rdfFile.size" state="0" created="20150307074501">
+        <native>Size</native>
+        <lang id="zh.tra" date="20150307085356" status="3">尺寸</lang>
+        <lang id="zh" date="20150307091043" status="3">大小</lang>
+        <lang id="ja" date="20150307094521" status="3">サイズ</lang>
+      </row>
+      <row id="sb.repair.rdfFile.time" state="0" created="20150307074501">
+        <native>Time</native>
+        <lang id="zh.tra" date="20150307085356" status="3">時間</lang>
+        <lang id="zh" date="20150307091043" status="3">时间</lang>
+        <lang id="ja" date="20150307094521" status="3">日時</lang>
+      </row>
+    </node>
+    <node class="TTextNode" name="scrapbook.dtd" created="20150307074221">
+      <row id="sb.new.folder" state="0" created="20150307074501">
+        <native>New Folder</native>
+        <lang id="zh.tra" date="20150307085401" status="3">開新資料夾</lang>
+        <lang id="zh" date="20150307091049" status="3">新建文件夹</lang>
+        <lang id="ja" date="20150307094532" status="3">新しいフォルダ</lang>
+      </row>
+      <row id="sb.new.note" state="0" created="20150307074501">
+        <native>New Note</native>
+        <lang id="zh.tra" date="20150307085401" status="3">新增筆記</lang>
+        <lang id="zh" date="20150307091049" status="3">新建便签</lang>
+        <lang id="ja" date="20150307094532" status="3">新しいノート</lang>
+      </row>
+      <row id="sb.new.notex" state="0" created="20150307074501">
+        <native>New Note Page</native>
+        <lang id="zh.tra" date="20150307085401" status="3">新增筆記頁面</lang>
+        <lang id="zh" status="2">新建便签页面</lang>
+        <lang id="ja" date="20150307094532" status="3">新しいノートページ</lang>
+      </row>
+      <row id="sb.new.separator" state="0" created="20150307074501">
+        <native>New Separator</native>
+        <lang id="zh.tra" date="20150307085401" status="3">新增分隔線</lang>
+        <lang id="zh" date="20150307091049" status="3">新建分隔线</lang>
+        <lang id="ja" date="20150307094532" status="3">新しい区切り</lang>
+      </row>
+      <row id="sb.note.close" state="0" created="20150307074501">
+        <native>Close</native>
+        <lang id="zh.tra" date="20150307085401" status="3">關閉</lang>
+        <lang id="zh" date="20150307091049" status="3">关闭</lang>
+        <lang id="ja" date="20150307094532" status="3">閉じる</lang>
+      </row>
+      <row id="sb.note.opentab" state="0" created="20150307074501">
+        <native>Open in Tab</native>
+        <lang id="zh.tra" date="20150307085401" status="3">開啟於新分頁中</lang>
+        <lang id="zh" date="20150307091049" status="3">在标签页中打开</lang>
+        <lang id="ja" date="20150307094532" status="3">タブで開く</lang>
+      </row>
+      <row id="sb.toggle.all" state="0" created="20150307074501">
+        <native>Open/close All Folders</native>
+        <lang id="zh.tra" date="20150307085401" status="3">開啟/收合所有資料夾</lang>
+        <lang id="zh" date="20150307091049" status="3">打开 / 关闭全部文件夹</lang>
+        <lang id="ja" date="20150307094532" status="3">すべてのフォルダを開く／閉じる</lang>
+      </row>
+      <row id="sb.tools" state="0" created="20150307074501">
+        <native>Tools</native>
+        <lang id="zh.tra" date="20150307085401" status="3">工具</lang>
+        <lang id="zh" date="20150307091049" status="3">工具</lang>
+        <lang id="ja" date="20150307094532" status="3">ツール</lang>
+      </row>
+      <row id="sb.tools.addons" state="0" created="20150307074501">
+        <native>Add-on Functions</native>
+        <lang id="zh.tra" date="20150307085401" status="3">附加元件功能</lang>
+        <lang id="zh" date="20150307091049" status="3">附加功能</lang>
+        <lang id="ja" date="20150307094532" status="3">アドオン機能</lang>
+      </row>
+      <row id="sb.tools.calculate" state="0" created="20150307074501">
+        <native>Calculation of Size</native>
+        <lang id="zh.tra" date="20150307085401" status="3">計算資料容量</lang>
+        <lang id="zh" date="20150307091049" status="3">计算大小</lang>
+        <lang id="ja" date="20150307094532" status="3">データサイズ計算</lang>
+      </row>
+      <row id="sb.tools.combine" state="0" created="20150307074501">
+        <native>Combine Wizard</native>
+        <lang id="zh.tra" date="20150307085401" status="3">文件合併精靈</lang>
+        <lang id="zh" date="20150307091049" status="3">合并向导</lang>
+        <lang id="ja" date="20150307094532" status="3">結合ウィザード</lang>
+      </row>
+      <row id="sb.tools.directory" state="0" created="20150307074501">
+        <native>ScrapBook Directory</native>
+        <lang id="zh.tra" date="20150307085401" status="3">開啟 ScrapBook 目錄</lang>
+        <lang id="zh" date="20150307091049" status="3">ScrapBook 目录</lang>
+        <lang id="ja" date="20150307094532" status="3">ScrapBookフォルダ</lang>
+      </row>
+      <row id="sb.tools.manage" state="0" created="20150307074501">
+        <native>Manage</native>
+        <lang id="zh.tra" date="20150307085401" status="3">管理擷取資料</lang>
+        <lang id="zh" date="20150307091049" status="3">管理项目</lang>
+        <lang id="ja" date="20150307094532" status="3">管理</lang>
+      </row>
+      <row id="sb.tools.multiple" state="0" created="20150307074501">
+        <native>Capture Multiple URLs</native>
+        <lang id="zh.tra" date="20150307085401" status="3">擷取多重 URL</lang>
+        <lang id="zh" date="20150307091049" status="3">多链接获取</lang>
+        <lang id="ja" date="20150307094532" status="3">URL一括取り込み</lang>
+      </row>
+      <row id="sb.tools.options" state="0" created="20150307074501">
+        <native>Options</native>
+        <lang id="zh.tra" date="20150307085401" status="3">設定</lang>
+        <lang id="zh" date="20150307091049" status="3">选项</lang>
+        <lang id="ja" date="20150307094532" status="3">設定</lang>
+      </row>
+      <row id="sb.tools.output" state="0" created="20150307074501">
+        <native>Output Tree as HTML</native>
+        <lang id="zh.tra" date="20150307085401" status="3">將資料列表匯出為 HTML</lang>
+        <lang id="zh" date="20150307091049" status="3">导出项目列表</lang>
+        <lang id="ja" date="20150307094532" status="3">ツリーのHTML出力</lang>
+      </row>
+      <row id="sb.tools.repair" state="0" created="20150307074501">
+        <native>Emergency Repair</native>
+        <lang id="zh.tra" date="20150307085401" status="3">緊急救援</lang>
+        <lang id="zh" date="20150307091049" status="3">紧急修复</lang>
+        <lang id="ja" date="20150307094532" status="3">緊急時の修復ツール</lang>
+      </row>
+      <row id="sb.tools.sorttree" state="0" created="20150307074501">
+        <native>Sort Entire Tree</native>
+        <lang id="zh.tra" date="20150307085401" status="3">所有資料排序</lang>
+        <lang id="zh" date="20150307091049" status="3">排列项目列表</lang>
+        <lang id="ja" date="20150307094532" status="3">ツリー全体をソート</lang>
+      </row>
+      <row id="sb.tools.trade" state="0" created="20150307074501">
+        <native>Import / Export</native>
+        <lang id="zh.tra" date="20150307085401" status="3">匯入 / 匯出</lang>
+        <lang id="zh" date="20150307091049" status="3">导入和导出</lang>
+        <lang id="ja" date="20150307094532" status="3">インポート/エクスポート</lang>
+      </row>
+    </node>
+    <node class="TTextNode" name="sort.dtd" created="20150307074221">
+      <row id="sb.sort" state="0" created="20150307074501">
+        <native>Sort</native>
+        <lang id="zh.tra" date="20150307085408" status="3">排序</lang>
+        <lang id="zh" date="20150307091056" status="3">排列项目列表</lang>
+        <lang id="ja" date="20150307094538" status="3">ソート</lang>
+      </row>
+      <row id="sb.sort.date.asc" state="0" created="20150307074501">
+        <native>Chronological</native>
+        <lang id="zh.tra" date="20150307085408" status="3">依日期排列 (舊 &amp;gt; 新)</lang>
+        <lang id="zh" date="20150307091056" status="3">时间 (升序)</lang>
+        <lang id="ja" date="20150307094538" status="3">日時でソート (古い順)</lang>
+      </row>
+      <row id="sb.sort.date.desc" state="0" created="20150307074501">
+        <native>Reverse Chronological</native>
+        <lang id="zh.tra" date="20150307085408" status="3">依日期排列 (新 &amp;gt; 舊)</lang>
+        <lang id="zh" date="20150307091056" status="3">时间 (降序)</lang>
+        <lang id="ja" date="20150307094538" status="3">日時でソート (新しい順)</lang>
+      </row>
+      <row id="sb.sort.grouping" state="0" created="20150307074501">
+        <native>Group by Type</native>
+        <lang id="zh.tra" date="20150307085408" status="3">依型態分組</lang>
+        <lang id="zh" date="20150307091056" status="3">依型态分组</lang>
+      </row>
+      <row id="sb.sort.recursive" state="0" created="20150307074501">
+        <native>Sort Sub-folders Recursively</native>
+        <lang id="zh.tra" date="20150307085408" status="3">一併排列子資料夾內的資料</lang>
+        <lang id="zh" date="20150307091056" status="3">包括所有子文件夹</lang>
+        <lang id="ja" date="20150307094538" status="3">サブフォルダ内も再帰的にソートする</lang>
+      </row>
+      <row id="sb.sort.reverse" state="0" created="20150307074501">
+        <native>Reverse</native>
+        <lang id="zh.tra" date="20150307085408" status="3">反序</lang>
+        <lang id="zh" date="20150307091056" status="3">反序</lang>
+        <lang id="ja" date="20150307094538" status="3">逆順にソート</lang>
+      </row>
+      <row id="sb.sort.title.asc" state="0" created="20150307074501">
+        <native>Sort by Title (A &amp;gt; Z)</native>
+        <lang id="zh.tra" date="20150307085408" status="3">依標題排列 (A &amp;gt; Z)</lang>
+        <lang id="zh" date="20150307091056" status="3">标题 (A &amp;gt; Z)</lang>
+        <lang id="ja" date="20150307094538" status="3">タイトルでソート (A &amp;gt; Z)</lang>
+      </row>
+      <row id="sb.sort.title.desc" state="0" created="20150307074501">
+        <native>Sort by Title (Z &amp;gt; A)</native>
+        <lang id="zh.tra" date="20150307085408" status="3">依標題排列 (Z &amp;gt; A)</lang>
+        <lang id="zh" date="20150307091056" status="3">标题 (Z &amp;gt; A)</lang>
+        <lang id="ja" date="20150307094538" status="3">タイトルでソート (Z &amp;gt; A)</lang>
+      </row>
+      <row id="sb.sort.warning" state="0" created="20150307074501">
+        <native>Notice: You can&amp;apos;t undo this operation.</native>
+        <lang id="zh.tra" date="20150307085408" status="3">請注意：此動作無法復原。</lang>
+        <lang id="zh" date="20150307091056" status="3">注意: 此操作无法撤销。</lang>
+        <lang id="ja" date="20150307094538" status="3">注意：ソートを実行すると元には戻せません。</lang>
+      </row>
+    </node>
+    <node class="TTextNode" name="trade.dtd" created="20150307074221">
+      <row id="sb.trade.export" state="0" created="20150307074501">
+        <native>Export</native>
+        <lang id="zh.tra" date="20150307085413" status="3">匯出</lang>
+        <lang id="zh" date="20150307091103" status="3">导出</lang>
+        <lang id="ja" date="20150307094542" status="3">エクスポート</lang>
+      </row>
+      <row id="sb.trade.exportFolder" state="0" created="20150307074501">
+        <native>Export folder items (re-import with care)</native>
+        <lang id="zh.tra" date="20150307085413" status="3">匯出資料夾項目 (匯入時注意順序)</lang>
+        <lang id="zh" date="20150307091103" status="3">导出文件夹项目 (导入时注意顺序)</lang>
+      </row>
+      <row id="sb.trade.import" state="0" created="20150307074501">
+        <native>Import</native>
+        <lang id="zh.tra" date="20150307085413" status="3">匯入</lang>
+        <lang id="zh" date="20150307091103" status="3">导入</lang>
+        <lang id="ja" date="20150307094542" status="3">インポート</lang>
+      </row>
+      <row id="sb.trade.remove" state="0" created="20150307074501">
+        <native>Remove files after importing</native>
+        <lang id="zh.tra" date="20150307085413" status="3">匯入後移除檔案</lang>
+        <lang id="zh" date="20150307091103" status="3">导入后删除原文件</lang>
+        <lang id="ja" date="20150307094542" status="3">インポート後にファイルを削除する</lang>
+      </row>
+      <row id="sb.trade.restore" state="0" created="20150307074501">
+        <native>Import with restoring folder structure</native>
+        <lang id="zh.tra" date="20150307085413" status="3">匯入並重製資料夾結構</lang>
+        <lang id="zh" date="20150307091103" status="3">导入并重建目录结构</lang>
+        <lang id="ja" date="20150307094542" status="3">フォルダ構成を復元しながらインポート</lang>
+      </row>
+      <row id="sb.trade.time" state="0" created="20150307074501">
+        <native>Exported Time</native>
+        <lang id="zh.tra" date="20150307085413" status="3">匯出時間</lang>
+        <lang id="zh" date="20150307091103" status="3">导出日期</lang>
+        <lang id="ja" date="20150307094542" status="3">エクスポートした日時</lang>
+      </row>
+      <row id="sb.trade.update" state="0" created="20150307074501">
+        <native>Import as latest ScrapBook X format</native>
+        <lang id="zh.tra" date="20150307085413" status="3">匯入為最新版 ScrapBook X 格式</lang>
+        <lang id="zh" date="20150307091103" status="3">导入为最新版 ScrapBook X 格式</lang>
+      </row>
+    </node>
+    <node class="TTextNode" name="tree.dtd" created="20150307074221">
+      <row id="mb.manage" state="0" created="20150307074501">
+        <native>Manage</native>
+        <lang id="zh.tra" date="20150307091451" status="3">管理</lang>
+        <lang id="zh" date="20150307091107" status="3">管理</lang>
+        <lang id="ja" date="20150307094550" status="3">管理</lang>
+      </row>
+      <row id="mb.profileFolder" state="0" created="20150307074501">
+        <native>Profile Folder</native>
+        <lang id="zh.tra" date="20150307091451" status="3">設定檔資料夾</lang>
+        <lang id="zh" date="20150307091107" status="3">配置文件夹</lang>
+        <lang id="ja" date="20150307094550" status="3">プロファイルフォルダ</lang>
+      </row>
+      <row id="sb.copy" state="0" created="20150307074501">
+        <native>Copy</native>
+        <lang id="zh.tra" date="20150307091451" status="3">複製</lang>
+        <lang id="zh" date="20150307091107" status="3">复制</lang>
+      </row>
+      <row id="sb.export" state="0" created="20150307074501">
+        <native>Export</native>
+        <lang id="zh.tra" date="20150307091451" status="3">匯出</lang>
+        <lang id="zh" date="20150307091107" status="3">导出</lang>
+        <lang id="ja" date="20150307094550" status="3">エクスポート</lang>
+      </row>
+      <row id="sb.folder.combine" state="0" created="20150307074501">
+        <native>Combined View</native>
+        <lang id="zh.tra" date="20150307091451" status="3">合併檢視</lang>
+        <lang id="zh" date="20150307091107" status="3">合并在同一标签页中打开</lang>
+        <lang id="ja" date="20150307094550" status="3">結合ビュー</lang>
+      </row>
+      <row id="sb.folder.manage" state="0" created="20150307074501">
+        <native>Manage Folder</native>
+        <lang id="zh.tra" date="20150307091451" status="3">管理資料夾</lang>
+        <lang id="zh" date="20150307091107" status="3">管理文件夹</lang>
+        <lang id="ja" date="20150307094550" status="3">フォルダの管理</lang>
+      </row>
+      <row id="sb.folder.openall" state="0" created="20150307074501">
+        <native>Open All in Tabs</native>
+        <lang id="zh.tra" date="20150307091451" status="3">以分頁開啟所有資料</lang>
+        <lang id="zh" date="20150307091107" status="3">在标签页中打开所有项目</lang>
+        <lang id="ja" date="20150307094550" status="3">すべてタブで開く</lang>
+      </row>
+      <row id="sb.internalize" state="0" created="20150307074501">
+        <native>Localize Embedded External Media</native>
+        <lang id="zh.tra" date="20150307091451" status="3">將內嵌的外部媒體存入資料目錄</lang>
+        <lang id="zh" date="20150307091107" status="3">将内嵌的外部媒体存入资料目录</lang>
+      </row>
+      <row id="sb.listview" state="0" created="20150307074501">
+        <native>List View</native>
+        <lang id="zh.tra" date="20150307091451" status="3">列表模式</lang>
+        <lang id="zh" date="20150307091107" status="3">详细列表</lang>
+        <lang id="ja" date="20150307094550" status="3">リストビュー</lang>
+      </row>
+      <row id="sb.move" state="0" created="20150307074501">
+        <native>Move</native>
+        <lang id="zh.tra" date="20150307091451" status="3">移動</lang>
+        <lang id="zh" date="20150307091107" status="3">移动</lang>
+        <lang id="ja" date="20150307094550" status="3">移動</lang>
+      </row>
+      <row id="sb.move.into" state="0" created="20150307074501">
+        <native>Move into Folder</native>
+        <lang id="zh.tra" date="20150307091451" status="3">移到其他資料夾</lang>
+        <lang id="zh" date="20150307091107" status="3">移动</lang>
+        <lang id="ja" date="20150307094550" status="3">フォルダへ移動</lang>
+      </row>
+      <row id="sb.multi" state="0" created="20150307074501">
+        <native>Multi-ScrapBook</native>
+        <lang id="zh.tra" date="20150307091451" status="3">多重 ScrapBook</lang>
+        <lang id="zh" date="20150307091107" status="3">多重 ScrapBook</lang>
+      </row>
+      <row id="sb.new.folder" state="0" created="20150307074501">
+        <native>New Folder</native>
+        <lang id="zh.tra" date="20150307091451" status="3">開新資料夾</lang>
+        <lang id="zh" date="20150307091107" status="3">新建文件夹</lang>
+        <lang id="ja" date="20150307094550" status="3">新しいフォルダ</lang>
+      </row>
+      <row id="sb.new.note" state="0" created="20150307074501">
+        <native>New Note</native>
+        <lang id="zh.tra" date="20150307091451" status="3">新增筆記</lang>
+        <lang id="zh" date="20150307091107" status="3">新建便签</lang>
+        <lang id="ja" date="20150307094550" status="3">新しいノート</lang>
+      </row>
+      <row id="sb.new.notex" state="0" created="20150307074501">
+        <native>New Note Page</native>
+        <lang id="zh.tra" date="20150307091451" status="3">新增筆記頁面</lang>
+        <lang id="zh" status="2">新建便签页面</lang>
+        <lang id="ja" date="20150307094550" status="3">新しいノートページ</lang>
+      </row>
+      <row id="sb.new.separator" state="0" created="20150307074501">
+        <native>New Separator</native>
+        <lang id="zh.tra" date="20150307091451" status="3">新增分隔線</lang>
+        <lang id="zh" date="20150307091107" status="3">新建分隔线</lang>
+        <lang id="ja" date="20150307094550" status="3">新しい区切り</lang>
+      </row>
+      <row id="sb.open" state="0" created="20150307074501">
+        <native>Open</native>
+        <lang id="zh.tra" date="20150307091451" status="3">開啟</lang>
+        <lang id="zh" date="20150307091107" status="3">打开</lang>
+        <lang id="ja" date="20150307094550" status="3">開く</lang>
+      </row>
+      <row id="sb.open.newtab" state="0" created="20150307074501">
+        <native>Open in New Tab</native>
+        <lang id="zh.tra" date="20150307091451" status="3">開啟於新分頁中</lang>
+        <lang id="zh" date="20150307091107" status="3">在新标签页中打开</lang>
+        <lang id="ja" date="20150307094550" status="3">新しいタブで開く</lang>
+      </row>
+      <row id="sb.open.source" state="0" created="20150307074501">
+        <native>Open Source URL</native>
+        <lang id="zh.tra" date="20150307091451" status="3">開啟原始網址</lang>
+        <lang id="zh" date="20150307091107" status="3">打开原始链接</lang>
+        <lang id="ja" date="20150307094550" status="3">ソースURLを開く</lang>
+      </row>
+      <row id="sb.open.tab" state="0" created="20150307074501">
+        <native>Open in Tab</native>
+        <lang id="zh.tra" date="20150307091451" status="3">開啟於新分頁中</lang>
+        <lang id="zh" date="20150307091107" status="3">在标签页中打开</lang>
+        <lang id="ja" date="20150307094550" status="3">タブで開く</lang>
+      </row>
+      <row id="sb.prop.comment" state="0" created="20150307074501">
+        <native>Comment</native>
+        <lang id="zh.tra" date="20150307091451" status="3">文件評註</lang>
+        <lang id="zh" date="20150307091107" status="3">注释</lang>
+        <lang id="ja" date="20150307094550" status="3">コメント</lang>
+      </row>
+      <row id="sb.prop.id.date" state="0" created="20150307074501">
+        <native>ID</native>
+        <lang id="zh.tra" date="20150307091451" status="3">ID</lang>
+        <lang id="zh" status="3">ID</lang>
+        <lang id="ja" date="20150307094550" status="3">ID</lang>
+      </row>
+      <row id="sb.prop.title" state="0" created="20150307074501">
+        <native>Title</native>
+        <lang id="zh.tra" date="20150307091451" status="3">標題</lang>
+        <lang id="zh" date="20150307091107" status="3">标题</lang>
+        <lang id="ja" date="20150307094550" status="3">タイトル</lang>
+      </row>
+      <row id="sb.property" state="0" created="20150307074501">
+        <native>Properties</native>
+        <lang id="zh.tra" date="20150307091451" status="3">文件屬性</lang>
+        <lang id="zh" date="20150307091107" status="3">属性</lang>
+        <lang id="ja" date="20150307094550" status="3">プロパティ</lang>
+      </row>
+      <row id="sb.remove" state="0" created="20150307074501">
+        <native>Delete</native>
+        <lang id="zh.tra" date="20150307091451" status="3">刪除</lang>
+        <lang id="zh" date="20150307091107" status="3">删除</lang>
+        <lang id="ja" date="20150307094550" status="3">削除</lang>
+      </row>
+      <row id="sb.renew" state="0" created="20150307074501">
+        <native>Capture Again</native>
+        <lang id="zh.tra" date="20150307091451" status="3">重新擷取</lang>
+        <lang id="zh" date="20150307091107" status="3">重新获取</lang>
+        <lang id="ja" date="20150307094550" status="3">再取り込み</lang>
+      </row>
+      <row id="sb.search" state="0" created="20150307074501">
+        <native>Search</native>
+        <lang id="zh.tra" date="20150307091451" status="3">搜尋</lang>
+        <lang id="zh" date="20150307091107" status="3">搜索</lang>
+        <lang id="ja" date="20150307094550" status="3">検索</lang>
+      </row>
+      <row id="sb.search.all" state="0" created="20150307074501">
+        <native>All</native>
+        <lang id="zh.tra" date="20150307091451" status="3">所有欄位</lang>
+        <lang id="zh" date="20150307091107" status="3">全部</lang>
+        <lang id="ja" date="20150307094550" status="3">すべて</lang>
+      </row>
+      <row id="sb.search.cache" state="0" created="20150307074501">
+        <native>Update Cache for Full Text Search</native>
+        <lang id="zh.tra" date="20150307091451" status="3">更新全文搜尋快取</lang>
+        <lang id="zh" date="20150307091107" status="3">更新全文搜索缓存</lang>
+        <lang id="ja" date="20150307094550" status="3">全文検索用キャッシュを更新</lang>
+      </row>
+      <row id="sb.search.clear" state="0" created="20150307074501">
+        <native>Clear Form History</native>
+        <lang id="zh.tra" date="20150307091451" status="3">清除搜尋歷史記錄</lang>
+        <lang id="zh" date="20150307091107" status="3">清空搜索历史记录</lang>
+        <lang id="ja" date="20150307094550" status="3">入力履歴のクリア</lang>
+      </row>
+      <row id="sb.search.cs" state="0" created="20150307074501">
+        <native>Match Case</native>
+        <lang id="zh.tra" date="20150307091451" status="3">大小寫需相符</lang>
+        <lang id="zh" date="20150307091107" status="3">区分大小写</lang>
+        <lang id="ja" date="20150307094550" status="3">大文字/小文字の区別</lang>
+      </row>
+      <row id="sb.search.days" state="0" created="20150307074501">
+        <native>Filtering by Days</native>
+        <lang id="zh.tra" date="20150307091451" status="3">依擷取日期檢視</lang>
+        <lang id="zh" date="20150307091107" status="3">按时间段过滤查寻</lang>
+        <lang id="ja" date="20150307094550" status="3">日数でフィルタリング</lang>
+      </row>
+      <row id="sb.search.fulltext" state="0" created="20150307074501">
+        <native>Full Text Search</native>
+        <lang id="zh.tra" date="20150307091451" status="3">全文搜尋</lang>
+        <lang id="zh" date="20150307091107" status="3">全文搜索</lang>
+        <lang id="ja" date="20150307094550" status="3">全文検索</lang>
+      </row>
+      <row id="sb.search.re" state="0" created="20150307074501">
+        <native>Use RegExp</native>
+        <lang id="zh.tra" date="20150307091451" status="3">使用規則運算式</lang>
+        <lang id="zh" date="20150307091107" status="3">使用正则表达式</lang>
+        <lang id="ja" date="20150307094550" status="3">正規表現の使用</lang>
+      </row>
+      <row id="sb.show.files" state="0" created="20150307074501">
+        <native>Show Files</native>
+        <lang id="zh.tra" date="20150307091451" status="3">顯示相關檔案</lang>
+        <lang id="zh" date="20150307091107" status="3">查看文件</lang>
+        <lang id="ja" date="20150307094550" status="3">ファイルを表示</lang>
+      </row>
+      <row id="sb.sort.folder" state="0" created="20150307074501">
+        <native>Sort Folder</native>
+        <lang id="zh.tra" date="20150307091451" status="3">資料夾文件排序</lang>
+        <lang id="zh" date="20150307091107" status="3">排列项目列表</lang>
+        <lang id="ja" date="20150307094550" status="3">フォルダ内をソート</lang>
+      </row>
+      <row id="sb.tools" state="0" created="20150307074501">
+        <native>Tools</native>
+        <lang id="zh.tra" date="20150307091451" status="3">工具</lang>
+        <lang id="zh" date="20150307091107" status="3">工具</lang>
+        <lang id="ja" date="20150307094550" status="3">ツール</lang>
+      </row>
+      <row id="sbp.prop.url" state="0" created="20150307074501">
+        <native>URL</native>
+        <lang id="zh.tra" date="20150307091451" status="3">URL</lang>
+        <lang id="zh" status="3">URL</lang>
+        <lang id="ja" date="20150307094550" status="3">URL</lang>
+      </row>
+    </node>
+  </source>
+  <source class="TJavaResourceSource" name="chrome\locale\en-US\scrapbook\*.properties" original="en" encoding="windows-1252" date="18991230000000" subdirs="0">
+    <node class="TJavaResourceNode" name="capture.properties" created="20150307074039">
+      <row id="CAPTURE_ABORT">
+        <native>Capture Aborted.</native>
+        <lang id="zh.tra" percent="99" status="1">擷取已中止。</lang>
+        <lang id="zh" date="20150307090642" status="3">获取已中止。</lang>
+        <lang id="ja" date="20150307091714" status="3">取り込みを中止しました。</lang>
+      </row>
+      <row id="CAPTURE_START">
+        <native>Initialize Capture</native>
+        <lang id="zh.tra" status="2">啟動擷取</lang>
+        <lang id="zh" date="20150307090642" status="3">开始获取</lang>
+        <lang id="ja" date="20150307091714" status="3">取り込み開始</lang>
+      </row>
+      <row id="CONNECT">
+        <native>Connecting... %S</native>
+        <lang id="zh.tra" status="2">連線中... %S</lang>
+        <lang id="zh" date="20150307090642" status="3">正在连接... %S</lang>
+        <lang id="ja" date="20150307091714" status="3">接続中... %S</lang>
+      </row>
+      <row id="CONNECT_FAILURE">
+        <native>Failed to Connect. (%S)</native>
+        <lang id="zh.tra" status="2">無法連線 (%S)</lang>
+        <lang id="zh" date="20150307090642" status="3">无法连接。 (%S)</lang>
+        <lang id="ja" date="20150307091714" status="3">接続できません (%S)</lang>
+      </row>
+      <row id="CONNECT_SUCCESS">
+        <native>Connected (Content-Type: %S)</native>
+        <lang id="zh.tra" status="2">已連線 (Content-Type: %S)</lang>
+        <lang id="zh" date="20150307090642" status="3">已连接 (Content-Type: %S)</lang>
+        <lang id="ja" date="20150307091714" status="3">接続しました (Content-Type: %S)</lang>
+      </row>
+      <row id="CONTENT_TYPE_FAILURE">
+        <native>Failed to get Content-Type.</native>
+        <lang id="zh.tra" percent="99" status="1">無法取得 Content-Type。</lang>
+        <lang id="zh" date="20150307090642" status="3">未知内容类型。</lang>
+        <lang id="ja" date="20150307091714" status="3">Content-Typeを取得できません</lang>
+      </row>
+      <row id="FILTER_BY_STRING">
+        <native>URL which doesn't contain inputted string will be excluded.</native>
+        <lang id="zh.tra" percent="99" status="1">未含所輸入字串的網址將略過。</lang>
+        <lang id="zh" date="20150307090642" status="3">过滤器将排除那些不包含所输入字符串的链接(URL)。</lang>
+        <lang id="ja" date="20150307091714" status="3">入力した文字列を含むURLのみに制限されます。</lang>
+      </row>
+      <row id="HTTP_STATUS_403">
+        <native>Access denied. (403 Forbidden)</native>
+        <lang id="zh.tra" status="2">禁止存取 (403 Forbidden)</lang>
+        <lang id="zh" date="20150307090642" status="3">拒绝访问。 (403 Forbidden)</lang>
+        <lang id="ja" date="20150307091714" status="3">アクセスできません (403 Forbidden)</lang>
+      </row>
+      <row id="HTTP_STATUS_404">
+        <native>File not found. (404 Not Found)</native>
+        <lang id="zh.tra" status="2">無此檔案 (404 Not Found)</lang>
+        <lang id="zh" date="20150307090642" status="3">找不到文件。 (404 Not Found)</lang>
+        <lang id="ja" date="20150307091714" status="3">ページが見つかりません (404 Not Found)</lang>
+      </row>
+      <row id="HTTP_STATUS_500">
+        <native>Internal Server Error. (500 Internal Server Error)</native>
+        <lang id="zh.tra" status="2">內部伺服器錯誤 (500 Internal Server Error)</lang>
+        <lang id="zh" date="20150307090642" status="3">内部服务器错误。 (500 Internal Server Error)</lang>
+      </row>
+      <row id="LOADING">
+        <native>Loading... %1$S %2$S</native>
+        <lang id="zh.tra" status="2">讀取中... %1$S %2$S</lang>
+        <lang id="zh" date="20150307090642" status="3">载入中... %1$S %2$S</lang>
+        <lang id="ja" date="20150307091714" status="3">ロード中... %1$S %2$S</lang>
+      </row>
+      <row id="REBUILD_LINKS">
+        <native>Rebuilding Links (%S/%S)... %S : %S</native>
+        <lang id="zh.tra" status="2">重建連結 (%S/%S)... %S : %S</lang>
+        <lang id="zh" date="20150307090642" status="3">重建链接 (%S/%S)... %S : %S</lang>
+        <lang id="ja" date="20150307091714" status="3">リンク再構築中 (%S/%S)... %S : %S</lang>
+      </row>
+      <row id="REBUILD_LINKS_COMPLETE">
+        <native>Completed.</native>
+        <lang id="zh.tra" percent="99" status="1">完成。</lang>
+        <lang id="zh" date="20150307090642" status="3">完成。</lang>
+        <lang id="ja" date="20150307091714" status="3">リンク再構築が完了しました。</lang>
+      </row>
+      <row id="WAITING">
+        <native>Waiting  (%S sec.)...</native>
+        <lang id="zh.tra" percent="99" status="1">請稍候 (%S 秒)...</lang>
+        <lang id="zh" date="20150307090642" status="3">请稍候 (%S 秒)...</lang>
+        <lang id="ja" date="20150307091714" status="3">待機中 （%S秒）...</lang>
+      </row>
+    </node>
+    <node class="TJavaResourceNode" name="combine.properties" created="20150307074039">
+      <row id="CANNOT_COMBINE_FRAMES">
+        <native>Failed to combine since this page contains frames.#l%S</native>
+        <lang id="zh.tra" date="20150307081233" status="3">欲合併頁面含有頁框，無法合併。#n%S</lang>
+        <lang id="zh" date="20150307090647" status="3">无法合并含有框架的页面。#n%S</lang>
+        <lang id="ja" date="20150307091718" status="3">このページにフレームが含まれているため、結合できません。#n%S</lang>
+      </row>
+      <row id="FINISH_BUTTON_LABEL">
+        <native>Combine</native>
+        <lang id="zh.tra" date="20150307081233" status="3">合併</lang>
+        <lang id="zh" date="20150307090647" status="3">合并</lang>
+        <lang id="ja" date="20150307091718" status="3">結合</lang>
+      </row>
+      <row id="WARN_ABOUT_INDEPTH">
+        <native>NOTE: Linked pages saved by in-depth capture will not be combined.</native>
+        <lang id="zh.tra" date="20150307081233" status="3">注意：以多層擷取方式儲存的關聯網頁不會被合併。</lang>
+        <lang id="zh" date="20150307090647" status="3">注意: 以深层获取方式保存的相连网页将不会合并。</lang>
+        <lang id="ja" date="20150307091718" status="3">注意: 掘り下げ取り込みによって保存されたリンク先ページは結合されません。</lang>
+      </row>
+    </node>
+    <node class="TJavaResourceNode" name="fulltext.properties" created="20150307074039">
+      <row id="BUILD_CACHE">
+        <native>Update Cache</native>
+        <lang id="zh.tra" date="20150307081239" status="3">更新快取資訊</lang>
+        <lang id="zh" date="20150307090652" status="3">更新缓存</lang>
+        <lang id="ja" date="20150307091841" status="3">キャッシュの更新</lang>
+      </row>
+      <row id="BUILD_CACHE_INIT">
+        <native>Initializing... </native>
+        <lang id="zh.tra" date="20150307081239" status="3">請稍候...</lang>
+        <lang id="zh" date="20150307090652" status="3">初始化... </lang>
+        <lang id="ja" date="20150307091841" status="3">初期化しています... </lang>
+      </row>
+      <row id="BUILD_CACHE_REMOVE">
+        <native>Removing...  %S</native>
+        <lang id="zh.tra" date="20150307081239" status="3">移除快取...  %S</lang>
+        <lang id="zh" date="20150307090652" status="3">删除...  %S</lang>
+        <lang id="ja" date="20150307091841" status="3">削除中...  %S</lang>
+      </row>
+      <row id="BUILD_CACHE_UPDATE">
+        <native>Updating...  %S</native>
+        <lang id="zh.tra" date="20150307081239" status="3">建立快取...  %S</lang>
+        <lang id="zh" date="20150307090652" status="3">更新...  %S</lang>
+        <lang id="ja" date="20150307091841" status="3">更新中...  %S</lang>
+      </row>
+      <row id="EXCLUDING">
+        <native>Excluding %S</native>
+        <lang id="zh.tra" date="20150307081239" status="3">且不含 %S</lang>
+        <lang id="zh" date="20150307090652" status="3">不含 %S</lang>
+        <lang id="ja" date="20150307091841" status="3">%Sを含まない</lang>
+      </row>
+      <row id="INCLUDING">
+        <native>Including %S</native>
+        <lang id="zh.tra" date="20150307081239" status="3">含有 %S</lang>
+        <lang id="zh" date="20150307090652" status="3">含有 %S</lang>
+        <lang id="ja" date="20150307091841" status="3">%Sを含む</lang>
+      </row>
+      <row id="MATCHING">
+        <native>Matching RegExp %S</native>
+        <lang id="zh.tra" date="20150307081239" status="3">符合 %S 條件。</lang>
+        <lang id="zh" date="20150307090652" status="3">匹配正则表达式 %S</lang>
+        <lang id="ja" date="20150307091841" status="3">正規表現%Sにマッチ</lang>
+      </row>
+      <row id="QUOTATION">
+        <native>'%S'</native>
+        <lang id="zh.tra" date="20150307081239" status="3">「%S」</lang>
+        <lang id="zh" date="20150307090652" status="3">“%S”</lang>
+        <lang id="ja" date="20150307091841" status="3">「%S」</lang>
+      </row>
+      <row id="RESULTS_FOUND">
+        <native>%S Results Found</native>
+        <lang id="zh.tra" date="20150307081239" status="3">共找到 %S 項資料</lang>
+        <lang id="zh" date="20150307090652" status="3">找到 %S 个项目</lang>
+        <lang id="ja" date="20150307091841" status="3">検索結果 (%S 件)</lang>
+      </row>
+    </node>
+    <node class="TJavaResourceNode" name="overlay.properties" created="20150307074039">
+      <row id="ADDRESS">
+        <native>URL:</native>
+        <lang id="zh.tra" date="20150307081359" status="3">URL:</lang>
+        <lang id="zh" date="20150307090657" status="3">URL:</lang>
+        <lang id="ja" date="20150307091849" status="3">URL:</lang>
+      </row>
+      <row id="CAPTURE">
+        <native>Capturing... (%S) %S</native>
+        <lang id="zh.tra" date="20150307081413" status="3">擷取中... (%S) %S</lang>
+        <lang id="zh" date="20150307090657" status="3">无法写入文件“%S”。</lang>
+        <lang id="ja" date="20150307091849" status="3">取り込み中... (%S) %S</lang>
+      </row>
+      <row id="CAPTURE_COMPLETE">
+        <native>Capturing Completed</native>
+        <lang id="zh.tra" date="20150307081413" status="3">擷取已完成</lang>
+        <lang id="zh" date="20150307090657" status="3">获取中... (%S) %S</lang>
+        <lang id="ja" date="20150307091849" status="3">取り込み完了</lang>
+      </row>
+      <row id="DOWNLOAD_DATA">
+        <native>Downloading data... (%S) %S</native>
+        <lang id="zh.tra" date="20150307081413" status="3">資料下載中... (%S) %S</lang>
+        <lang id="zh" date="20150307090657" status="3">正在传输... (%S Bytes)</lang>
+        <lang id="ja" date="20150307091849" status="3">Downloading data... (%S) %S</lang>
+      </row>
+      <row id="EDIT_ATTACH_FILE_INVALID">
+        <native>Unable to write '%S'.</native>
+        <lang id="zh.tra" date="20150307081413" status="3">無法寫入檔案「%S」。</lang>
+        <lang id="zh" date="20150307090657" status="3">是否确实要覆盖文件“%S”?</lang>
+        <lang id="ja" date="20150307091849" status="3">Unable to write '%S'.</lang>
+      </row>
+      <row id="EDIT_ATTACH_FILE_OVERWRITE">
+        <native>Would you like to overwrite the file '%S'?</native>
+        <lang id="zh.tra" date="20150307081413" status="3">您確定要覆寫檔案「%S」嗎？</lang>
+        <lang id="zh" date="20150307090657" status="3">无效的资料 ID: %S</lang>
+        <lang id="ja" date="20150307091849" status="3">Would you like to overwrite the file '%S'?</lang>
+      </row>
+      <row id="EDIT_ATTACH_FILE_TITLE">
+        <native>Attach File</native>
+        <lang id="zh.tra" date="20150307081413" status="3">附加檔案</lang>
+        <lang id="zh" date="20150307090657" status="3">附加内部链接</lang>
+        <lang id="ja" date="20150307091849" status="3">Attach File</lang>
+      </row>
+      <row id="EDIT_ATTACH_INNERLINK_ENTER">
+        <native>Input the item ID:</native>
+        <lang id="zh.tra" date="20150307081413" status="3">請輸入目標項目的 ID:</lang>
+        <lang id="zh" date="20150307090657" status="3">附加文件</lang>
+        <lang id="ja" date="20150307091849" status="3">Input the item ID:</lang>
+      </row>
+      <row id="EDIT_ATTACH_INNERLINK_INVALID">
+        <native>Invalid item ID: %S</native>
+        <lang id="zh.tra" date="20150307081413" status="3">無效的資料 ID: %S</lang>
+        <lang id="zh" date="20150307090657" status="3">请输入目标项目的 ID:</lang>
+        <lang id="ja" date="20150307091849" status="3">Invalid item ID: %S</lang>
+      </row>
+      <row id="EDIT_ATTACH_INNERLINK_TITLE">
+        <native>Attach Inner Link</native>
+        <lang id="zh.tra" date="20150307081413" status="3">附加內部連結</lang>
+        <lang id="zh" date="20150307090657" status="3">附加链接</lang>
+        <lang id="ja" date="20150307091849" status="3">Attach Inner Link</lang>
+      </row>
+      <row id="EDIT_ATTACH_LINK_TITLE">
+        <native>Attach Link</native>
+        <lang id="zh.tra" date="20150307081413" status="3">附加連結</lang>
+        <lang id="zh" date="20150307090657" status="3">编辑 HTML 注记</lang>
+        <lang id="ja" date="20150307091849" status="3">Attach Link</lang>
+      </row>
+      <row id="EDIT_INLINE">
+        <native>Edit inline annotation for '%S'</native>
+        <lang id="zh.tra" date="20150307081359" status="3">編輯「%S」的註腳</lang>
+        <lang id="zh" date="20150307090657" status="3">编辑项目“%S”的提示</lang>
+        <lang id="ja" date="20150307091849" status="3">「%S」へのインライン注釈を編集</lang>
+      </row>
+      <row id="EDIT_REMOVE_HIGHLIGHT">
+        <native>Clear this ScrapBook note</native>
+        <lang id="zh.tra" date="20150307081359" status="3">清除這個 ScrapBook 註記</lang>
+        <lang id="zh" date="20150307090657" status="3">清除这个 ScrapBook 注记</lang>
+        <lang id="ja" date="20150307091849" status="3">このScrapBookノートをクリア</lang>
+      </row>
+      <row id="EDIT_SAVE_CHANGES">
+        <native>The page is modified with ScrapBook. Be sure to discard them?</native>
+        <lang id="zh.tra" date="20150307081359" status="3">此頁面已用 ScrapBook 更動，確定要放棄？</lang>
+        <lang id="zh" date="20150307090657" status="3">这个页面已使用 ScrapBook 更改，确定要放弃？</lang>
+        <lang id="ja" date="20150307091849" status="3">The page is modified with ScrapBook. Be sure to discard them?</lang>
+      </row>
+      <row id="EDIT_UNDO_LAST">
+        <native>There is no history to undo</native>
+        <lang id="zh.tra" date="20150307081359" status="3">已無可復原的編輯</lang>
+        <lang id="zh" date="20150307090657" status="3">已无可撤销的编辑</lang>
+        <lang id="ja" date="20150307091849" status="3">There is no history to undo</lang>
+      </row>
+      <row id="MAX_COMMENT">
+        <native>Expand Comment Area</native>
+        <lang id="zh.tra" date="20150307081359" status="3">展開文件評註欄</lang>
+        <lang id="zh" date="20150307090657" status="3">展开注释区域</lang>
+        <lang id="ja" date="20150307091849" status="3">コメントエリアを広げる</lang>
+      </row>
+      <row id="MIN_COMMENT">
+        <native>Collapse Comment Area</native>
+        <lang id="zh.tra" date="20150307081359" status="3">收合文件評註欄</lang>
+        <lang id="zh" date="20150307090657" status="3">折叠注释区域</lang>
+        <lang id="ja" date="20150307091849" status="3">コメントエリアを折りたたむ</lang>
+      </row>
+      <row id="PAGE_CAPTURED">
+        <native>This page has %S captured version(s)!!</native>
+        <lang id="zh.tra" date="20150307081413" status="3">本頁有 %S 個已擷取的版本!!</lang>
+        <lang id="zh" date="20150307090657" status="3">获取完成</lang>
+        <lang id="ja" date="20150307091849" status="3">This page has %S captured version(s)!!</lang>
+      </row>
+      <row id="ROOT_FOLDER">
+        <native>Root Folder</native>
+        <lang id="zh.tra" date="20150307081413" status="3">主資料夾</lang>
+        <lang id="zh" date="20150307090657" status="3">正在下载... (%S) %S</lang>
+        <lang id="ja" date="20150307091849" status="3">ルートフォルダ</lang>
+      </row>
+      <row id="SELECT_FOLDER">
+        <native>Select Folder...</native>
+        <lang id="zh.tra" percent="99" status="1">選取資料夾...</lang>
+        <lang id="zh" date="20150307090657" status="3">根文件夹</lang>
+        <lang id="ja" date="20150307091849" status="3">フォルダの選択...</lang>
+      </row>
+      <row id="TRANSFER_DATA">
+        <native>Transferring Data... (%S Bytes)</native>
+        <lang id="zh.tra" date="20150307081413" status="3">資料傳輸中... (%S Bytes)</lang>
+        <lang id="zh" date="20150307090657" status="3">这个页面有 %S 个已获取的版本!!</lang>
+        <lang id="ja" date="20150307091849" status="3">データ転送中... (%S Bytes)</lang>
+      </row>
+    </node>
+    <node class="TJavaResourceNode" name="property.properties" created="20150307074039">
+      <row id="ADDRESS">
+        <native>URL:</native>
+        <lang id="zh.tra" date="20150307081427" status="3">URL:</lang>
+        <lang id="zh" date="20150307090702" status="3">URL:</lang>
+        <lang id="ja" date="20150307092627" status="3">URL:</lang>
+      </row>
+      <row id="CALCULATING">
+        <native>Now Calculating... (%S/%S)</native>
+        <lang id="zh.tra" date="20150307081427" status="3">掃瞄中... (%S/%S)</lang>
+        <lang id="zh" date="20150307090702" status="3">正在计算... (%S/%S)</lang>
+        <lang id="ja" date="20150307092627" status="3">計算中... (%S/%S)</lang>
+      </row>
+      <row id="DIAGNOSIS_NG">
+        <native>%S invalid items are detected.</native>
+        <lang id="zh.tra" date="20150307081427" status="3">偵測到 %S 個無效項目。</lang>
+        <lang id="zh" date="20150307090702" status="3">检查到 %S 个无效项目。</lang>
+        <lang id="ja" date="20150307092627" status="3">%S 個の無効なデータが検出されました。</lang>
+      </row>
+      <row id="DIAGNOSIS_OK">
+        <native>Good</native>
+        <lang id="zh.tra" date="20150307081427" status="3">正確無誤</lang>
+        <lang id="zh" date="20150307090702" status="3">未发现错误。</lang>
+        <lang id="ja" date="20150307092627" status="3">良好</lang>
+      </row>
+      <row id="FILES_COUNT">
+        <native>%S (%S Files, %S Folders)</native>
+        <lang id="zh.tra" date="20150307081427" status="3">%S (%S 個檔案，%S 個資料夾)</lang>
+        <lang id="zh" date="20150307090702" status="3">%S (%S 个文件，%S 个文件夹)</lang>
+        <lang id="ja" date="20150307092627" status="3">%S (%S ファイル、%S フォルダ)</lang>
+      </row>
+      <row id="INVALID">
+        <native>INVALID</native>
+        <lang id="zh.tra" date="20150307081427" status="3">有誤</lang>
+        <lang id="zh" date="20150307090702" status="3">无效!</lang>
+        <lang id="ja" date="20150307092627" status="3">無効</lang>
+      </row>
+      <row id="ITEMS_COUNT">
+        <native>%S (%S Items)</native>
+        <lang id="zh.tra" date="20150307081427" status="3">%S (%S 個項目)</lang>
+        <lang id="zh" date="20150307090702" status="3">%S (%S 个项目)</lang>
+        <lang id="ja" date="20150307092627" status="3">%S (%S アイテム)</lang>
+      </row>
+      <row id="TYPE_BOOKMARK">
+        <native>Bookmark</native>
+        <lang id="zh.tra" date="20150307081427" status="3">書籤</lang>
+        <lang id="zh" date="20150307090702" status="3">书签</lang>
+        <lang id="ja" date="20150307092627" status="3">ブックマーク</lang>
+      </row>
+      <row id="TYPE_COMBINE">
+        <native>Combined Page</native>
+        <lang id="zh.tra" date="20150307081427" status="3">合併頁面</lang>
+        <lang id="zh" date="20150307090702" status="3">合并的页面</lang>
+        <lang id="ja" date="20150307092627" status="3">結合されたページ</lang>
+      </row>
+      <row id="TYPE_FILE">
+        <native>File</native>
+        <lang id="zh.tra" date="20150307081427" status="3">檔案</lang>
+        <lang id="zh" date="20150307090702" status="3">文件</lang>
+        <lang id="ja" date="20150307092627" status="3">ファイル</lang>
+      </row>
+      <row id="TYPE_FOLDER">
+        <native>Folder</native>
+        <lang id="zh.tra" date="20150307081427" status="3">資料夾</lang>
+        <lang id="zh" date="20150307090702" status="3">文件夹</lang>
+        <lang id="ja" date="20150307092627" status="3">フォルダ</lang>
+      </row>
+      <row id="TYPE_INDEPTH">
+        <native>Pages Saved by In-depth Capture</native>
+        <lang id="zh.tra" date="20150307081427" status="3">網頁以多層擷取方式儲存</lang>
+        <lang id="zh" date="20150307090702" status="3">以深层获取方式保存的页面</lang>
+        <lang id="ja" date="20150307092627" status="3">掘り下げ取り込みで保存されたページ</lang>
+      </row>
+      <row id="TYPE_NOTE">
+        <native>Note</native>
+        <lang id="zh.tra" date="20150307081427" status="3">筆記</lang>
+        <lang id="zh" date="20150307090702" status="3">便签</lang>
+        <lang id="ja" date="20150307092627" status="3">ノート</lang>
+      </row>
+      <row id="TYPE_NOTEX">
+        <native>Note Page</native>
+        <lang id="zh.tra" date="20150307081427" status="3">筆記頁面</lang>
+        <lang id="zh" date="20150307090702" status="3">便签页面</lang>
+        <lang id="ja" date="20150307092627" status="3">ノートページ</lang>
+      </row>
+      <row id="TYPE_PAGE">
+        <native>Page</native>
+        <lang id="zh.tra" date="20150307081427" status="3">頁面</lang>
+        <lang id="zh" date="20150307090702" status="3">页面</lang>
+        <lang id="ja" date="20150307092627" status="3">ページ</lang>
+      </row>
+      <row id="TYPE_SEPARATOR">
+        <native>Separator</native>
+        <lang id="zh.tra" date="20150307081427" status="3">分隔線</lang>
+        <lang id="zh" date="20150307090702" status="3">分隔线</lang>
+        <lang id="ja" date="20150307092627" status="3">区切り</lang>
+      </row>
+    </node>
+    <node class="TJavaResourceNode" name="scrapbook.properties" created="20150307074039">
+      <row id="CAPTURE_OK_BUTTON">
+        <native>Capture</native>
+        <lang id="zh.tra" status="2">擷取</lang>
+        <lang id="zh" date="20150307090708" status="3">获取</lang>
+        <lang id="ja" date="20150307092633" status="3">取り込む</lang>
+      </row>
+      <row id="COMPLETED">
+        <native>Completed</native>
+        <lang id="zh.tra" date="20150307081444" status="3">已完成</lang>
+        <lang id="zh" date="20150307090708" status="3">完成</lang>
+        <lang id="ja" date="20150307092633" status="3">完了</lang>
+      </row>
+      <row id="CONFIRM_DELETE">
+        <native>Would you like to delete this item?</native>
+        <lang id="zh.tra" date="20150307081444" status="3">您確定要刪除此資料嗎？</lang>
+        <lang id="zh" date="20150307090708" status="3">确实要刪除此项目吗?</lang>
+        <lang id="ja" date="20150307092633" status="3">本当に削除してもよろしいですか？</lang>
+      </row>
+      <row id="DEFAULT_FOLDER">
+        <native>New Folder</native>
+        <lang id="zh.tra" date="20150307081444" status="3">新增資料夾</lang>
+        <lang id="zh" date="20150307090708" status="3">新建文件夹</lang>
+        <lang id="ja" date="20150307092633" status="3">新規フォルダ</lang>
+      </row>
+      <row id="DEFAULT_NOTEX">
+        <native>New Note Page</native>
+        <lang id="zh.tra" date="20150307081444" status="3">新筆記頁面</lang>
+        <lang id="zh" date="20150307090708" status="3">新建便签页面</lang>
+        <lang id="ja" date="20150307092633" status="3">新規ノートページ</lang>
+      </row>
+      <row id="ERROR_INVALID_URL">
+        <native>ERROR: Invalid URL.#l%S</native>
+        <lang id="zh.tra" date="20150307081444" status="3">錯誤：網址無效。#n%S</lang>
+        <lang id="zh" date="20150307090708" status="3">错误: 无效 URL。#n%S</lang>
+        <lang id="ja" date="20150307092633" status="3">エラー: 無効なURLです。#n%S</lang>
+      </row>
+      <row id="ERR_FAIL_ADD_RESOURCE">
+        <native>ScrapBook ERROR: Failed to add resource to datasource.#l#l%S</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 錯誤: 無法將資源加入資料源。#n#n%S</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 错误: 无法将资源加入资料源。#n#n%S</lang>
+      </row>
+      <row id="ERR_FAIL_ADD_RESOURCE1">
+        <native>ScrapBook ERROR: Failed to add resource to datasource (1).#l#l%S</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 錯誤: 無法將資源加入資料源(1)。#n#n%S</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 错误: 无法将资源加入资料源(1)。#n#n%S</lang>
+      </row>
+      <row id="ERR_FAIL_ADD_RESOURCE2">
+        <native>ScrapBook ERROR: Failed to add resource to datasource (2).#l#l%S</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 錯誤: 無法將資源加入資料源(2)。#n#n%S</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 错误: 无法将资源加入资料源(2)。#n#n%S</lang>
+      </row>
+      <row id="ERR_FAIL_CHANGE_CHARSET">
+        <native>ScrapBook ERROR: Your browser does not support setting input charset.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 錯誤: 您的瀏覽器不支援更改輸入內容的字元編碼。</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 错误: 您的浏览器不支援更改输入内容的字元编码。</lang>
+      </row>
+      <row id="ERR_FAIL_CLEAN_DATASOURCE">
+        <native>ScrapBook ERROR: Failed to clean up datasource.#l#l%S</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 錯誤: 無法清除資料源。#n#n%S</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 错误: 无法清除资料源。#n#n%S</lang>
+      </row>
+      <row id="ERR_FAIL_COPY_FILE">
+        <native>"*** Could not copy file '%S'#l#l%S</native>
+        <lang id="zh.tra" date="20150307081444" status="3">"*** 無法複製檔案 '%S'#n#n%S</lang>
+        <lang id="zh" date="20150307090708" status="3">"*** 无法复制文件 '%S'#n#n%S</lang>
+      </row>
+      <row id="ERR_FAIL_DOWNLOAD_FILE">
+        <native>*** Could not download file '%S'#l#l%S</native>
+        <lang id="zh.tra" date="20150307081444" status="3">*** 無法下載檔案 '%S'#n#n%S</lang>
+        <lang id="zh" date="20150307090708" status="3">*** 无法下载文件 '%S'#n#n%S</lang>
+      </row>
+      <row id="ERR_FAIL_EXEC_FILE">
+        <native>ScrapBook ERROR: File '%S' is not executable.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 錯誤: 檔案 '%S' 無法執行。</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 错误: 文件 '%S' 无法执行。</lang>
+      </row>
+      <row id="ERR_FAIL_GET_CSS">
+        <native>Unable to access CSS from '%1$S' in page '%2$S'#l#l%3$S</native>
+        <lang id="zh.tra" date="20150307081444" status="3">無法從 '%2$S' 存取 '%1$S' 的 CSS。#n#n%3$S</lang>
+        <lang id="zh" date="20150307090708" status="3">无法从 '%2$S' 存取 '%1$S' 的 CSS。#n#n%3$S</lang>
+      </row>
+      <row id="ERR_FAIL_GET_DIR">
+        <native>ScrapBook FATAL ERROR: Failed to get data directory '%S'.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 嚴重錯誤: 無法取得資料目錄 '%S'。</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 严重错误: 无法取得资料目录 '%S'。</lang>
+      </row>
+      <row id="ERR_FAIL_INIT_DATASOURCE">
+        <native>ScrapBook ERROR: Failed to initialize datasource.#l#l%S</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 錯誤: 無法初始化資料源.#n#n%S</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 错误: 无法初始化资料源.#n#n%S</lang>
+      </row>
+      <row id="ERR_FAIL_NOT_INTERNALIZE_TYPE">
+        <native>ScrapBook ERROR: You can do this only for HTML files.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 錯誤: 只有 HTML 檔案可以這麼做。</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 错误: 只有 HTML 文件可以这么做。</lang>
+      </row>
+      <row id="ERR_FAIL_READ_FILE_SIZE">
+        <native>ScrapBook ERROR: Cannot read file size from '%S'. (maybe due to long or improper file name)</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 錯誤: 無法讀取 '%S' 的檔案大小。(可能是檔名過長或不正常)</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 错误: 无法读取 '%S' 的文件大小。(可能是文件名过长或不正常)</lang>
+      </row>
+      <row id="ERR_FAIL_REMOVE_FILE">
+        <native>ScrapBook ERROR: Failed to remove file '%S'.#l#l%S</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 錯誤: 無法移除檔案 '%S'。#n#n%S</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 错误: 无法移除文件 '%S'。#n#n%S</lang>
+      </row>
+      <row id="ERR_FAIL_REMOVE_RESOURCE">
+        <native>ScrapBook ERROR: Failed to remove resource '%S' from datasource.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 錯誤: 無法從資料源清除資源 '%S'。</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 错误: 无法从资料源清除资源 '%S'。</lang>
+      </row>
+      <row id="ERR_FAIL_RESOLVE_URL">
+        <native>*** Failed to resolve URL '%2$S' (relative to '%1$S').</native>
+        <lang id="zh.tra" date="20150307081444" status="3">*** 無法解析 URL '%2$S' (相對於 '%1$S')。</lang>
+        <lang id="zh" date="20150307090708" status="3">*** 无法解析 URL '%2$S' (相对于 '%1$S')。</lang>
+      </row>
+      <row id="ERR_FAIL_SAVE_FILE">
+        <native>ScrapBook ERROR: Cannot save file '%S'.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 錯誤: 無法儲存檔案 '%S'。</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 错误: 无法保存文件 '%S'。</lang>
+      </row>
+      <row id="ERR_FAIL_SEND">
+        <native>ScrapBook FATAL ERROR.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 嚴重錯誤。</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 严重错误。</lang>
+      </row>
+      <row id="ERR_FAIL_SET_PREF">
+        <native>Unable to set pref: %S</native>
+        <lang id="zh.tra" date="20150307081444" status="3">無法更改偏好設定: %S</lang>
+        <lang id="zh" date="20150307090708" status="3">无法更改偏好设定: %S</lang>
+      </row>
+      <row id="ERR_FAIL_WRITE_FILE">
+        <native>ScrapBook ERROR: Failed to write file '%S'.#l#l%S</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 錯誤: 無法寫入檔案 '%S'。#n#n%S</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 错误: 无法写入文件 '%S'。#n#n%S</lang>
+      </row>
+      <row id="ERR_FILE_NOT_EXIST">
+        <native>ScrapBook ERROR: File '%S' does not exist.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 錯誤: 檔案 '%S' 不存在。</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 错误: 文件 '%S' 不存在。</lang>
+      </row>
+      <row id="ERR_NO_FILE2URL">
+        <native>ScrapBook ERROR: Could not find 'sb-file2url.txt'.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 錯誤: 找不到 'sb-file2url.txt'。</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 错误: 找不到 'sb-file2url.txt'。</lang>
+      </row>
+      <row id="ERR_NO_SOURCE_URL">
+        <native>ScrapBook ERROR: Could not find the source URL for '%S'.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 錯誤: 找不到 '%S' 的來源 URL。</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 错误: 找不到 '%S' 的来源 URL。</lang>
+      </row>
+      <row id="ERR_NO_URL2NAME">
+        <native>ScrapBook ERROR: Could not find 'sb-url2name.txt'.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 錯誤: 找不到 'sb-url2name.txt'。</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 错误: 找不到 'sb-url2name.txt'。</lang>
+      </row>
+      <row id="ERR_SEARCH_DATE_INAVLID">
+        <native>ERROR: Invalid date format '%S'</native>
+        <lang id="zh.tra" date="20150307081444" status="3">錯誤：不正確的日期格式「%S」</lang>
+        <lang id="zh" date="20150307090708" status="3">错误：不正确的日期格式“%S”</lang>
+      </row>
+      <row id="ERR_SEARCH_REGEXP_INAVLID">
+        <native>ERROR: Invalid regular expression '%S'</native>
+        <lang id="zh.tra" date="20150307081444" status="3">錯誤：不正確的規則運算式「%S」</lang>
+        <lang id="zh" date="20150307090708" status="3">错误：不正确的正则表达式“%S”</lang>
+      </row>
+      <row id="ERR_TRADE_INVALID_ARGS">
+        <native>Invalid agurments in sbTradeService::parseIndexDat.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">sbTradeService::parseIndexDat 引數錯誤。</lang>
+        <lang id="zh" date="20150307090708" status="3">sbTradeService::parseIndexDat 引数错误。</lang>
+      </row>
+      <row id="ERR_UNKNOWN_CAPTURE_METHOD">
+        <native>ScrapBook ERROR: Unknown capture method '%S'.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 錯誤: 不明的擷取方式 '%S'。</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 错误: 不明的获取方式 '%S'。</lang>
+      </row>
+      <row id="ERR_UNKNOWN_DATA_TYPE">
+        <native>ScrapBook ERROR: Unknown data type %S.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 錯誤: 不明的資料型態 %S。</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 错误: 不明的资料型态 %S。</lang>
+      </row>
+      <row id="FILTER_BY_DAYS">
+        <native>Enter the number of days back for filtering.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">輸入回朔天數。</lang>
+        <lang id="zh" date="20150307090708" status="3">要过滤查寻几天前的项目，请输入过去的天数:</lang>
+        <lang id="ja" date="20150307092633" status="3">何日前までフィルタリングしますか？日数を入力してください。</lang>
+      </row>
+      <row id="ITEMS_REMOVED">
+        <native>%S item(s) deleted</native>
+        <lang id="zh.tra" date="20150307081444" status="3">刪除 %S 項資料</lang>
+        <lang id="zh" date="20150307090708" status="3">已删除 %S 个项目</lang>
+        <lang id="ja" date="20150307092633" status="3">%S アイテム削除しました</lang>
+      </row>
+      <row id="MB_CLOSE_WINDOW">
+        <native>Before changing the location folder, you should close the window:#l[%S]</native>
+        <lang id="zh.tra" date="20150307081444" status="3">您必須關閉此視窗才能變更存放資料夾:#n[%S]</lang>
+        <lang id="zh" date="20150307090708" status="3">在切换目的文件夹之前，您应该关闭此窗口:#n[%S]</lang>
+        <lang id="ja" date="20150307092633" status="3">データ保存先フォルダを切り替える前に、次のウィンドウを閉じてください:#n[%S]</lang>
+      </row>
+      <row id="MSG_ATTACH_ACROSS_TAGS">
+        <native>ScrapBook ERROR: Can't attach a link across HTML tags.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 錯誤: 不能跨 HTML 標籤附加連結。</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 错误: 不能跨 HTML 标签附加连结。</lang>
+      </row>
+      <row id="MSG_CANT_MODIFY">
+        <native>ScrapBook ERROR: Cannot modify the content of files with type %S.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 錯誤: 無法修改型態為 %S 的檔案。</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 错误: 无法修改型态为 %S 的文件。</lang>
+      </row>
+      <row id="MSG_CANT_SAVE_LOCKED">
+        <native>This item is locked and cannot be saved.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">本資料已鎖定，無法儲存。</lang>
+        <lang id="zh" date="20150307090708" status="3">本项目已锁定，无法保存。</lang>
+      </row>
+      <row id="MSG_LARGE_COMMENT">
+        <native>ScrapBook NOTICE: Too long comment makes ScrapBook slow.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 提醒: 太長的評註會使 ScrapBook 速度變慢。</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 提醒: 太长的评注会使 ScrapBook 速度变慢。</lang>
+      </row>
+      <row id="MSG_NOT_UTF8">
+        <native>ScrapBook NOTICE: '%S' is not UTF-8 encoded, unsupported chars may lose after saving.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 提醒: '%S' 不是使用 UTF-8 編碼，不支援的字元將在儲存後遺失。</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 提醒: '%S' 不是使用 UTF-8 编码，不支援的字符将在保存后遗失。</lang>
+      </row>
+      <row id="MSG_NO_BACKUP_FILES">
+        <native>No backup files found.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">找不到備分檔案。</lang>
+        <lang id="zh" date="20150307090708" status="3">找不到备分文件。</lang>
+      </row>
+      <row id="ROOT_FOLDER">
+        <native>Root Folder</native>
+        <lang id="zh.tra" date="20150307081444" status="3">主資料夾</lang>
+        <lang id="zh" date="20150307090708" status="3">根文件夹</lang>
+        <lang id="ja" date="20150307092633" status="3">ルートフォルダ</lang>
+      </row>
+      <row id="SCANNING_DIR">
+        <native>Scanning (%S/%S)... %S</native>
+        <lang id="zh.tra" date="20150307081444" status="3">掃瞄中 (%S/%S)... %S</lang>
+        <lang id="zh" date="20150307090708" status="3">正在扫描 (%S/%S)... %S</lang>
+        <lang id="ja" date="20150307092633" status="3">検索中 (%S/%S)... %S</lang>
+      </row>
+      <row id="SCANNING_FILE">
+        <native>Scanning... ($S/%S)</native>
+        <lang id="zh.tra" date="20150307081444" status="3">掃瞄中... ($S/%S)</lang>
+        <lang id="zh" date="20150307090708" status="3">正在扫描... ($S/%S)</lang>
+        <lang id="ja" date="20150307092633" status="3">検索中... ($S/%S)</lang>
+      </row>
+      <row id="SCANNING_TREE">
+        <native>Scanning... (%S)</native>
+        <lang id="zh.tra" date="20150307081444" status="3">掃瞄中... (%S)</lang>
+        <lang id="zh" date="20150307090708" status="3">正在扫描... (%S)</lang>
+        <lang id="ja" date="20150307092633" status="3">検索中... (%S)</lang>
+      </row>
+      <row id="SEARCH_RESULTS_FOUND">
+        <native>%S Results Found.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">找到 %S 項資料。</lang>
+        <lang id="zh" date="20150307090708" status="3">找到 %S 个项目。</lang>
+        <lang id="ja" date="20150307092633" status="3">検索結果 (%S 件)</lang>
+      </row>
+      <row id="START_BUTTON">
+        <native>Start</native>
+        <lang id="zh.tra" date="20150307081444" status="3">開始</lang>
+        <lang id="zh" date="20150307090708" status="3">确定</lang>
+        <lang id="ja" date="20150307092633" status="3">開始</lang>
+      </row>
+      <row id="WARN_DOUBLE_ENTRY">
+        <native>ScrapBook WARNING: Found double entries of resource '%S'.</native>
+        <lang id="zh.tra" date="20150307081444" status="3">ScrapBook 警告: 資源 '%S' 發現重複的資料記錄。</lang>
+        <lang id="zh" date="20150307090708" status="3">ScrapBook 警告: 资源 '%S' 发现重复的资料记录。</lang>
+      </row>
+    </node>
+    <node class="TJavaResourceNode" name="trade.properties" created="20150307074039">
+      <row id="CREATE_FOLDER">
+        <native>Created Folder [%S]</native>
+        <lang id="zh.tra" date="20150307081457" status="3">開新資料夾 [%S]</lang>
+        <lang id="zh" date="20150307090714" status="3">创建文件夹“%S”</lang>
+        <lang id="ja" date="20150307092640" status="3">フォルダ [%S] を作成しました</lang>
+      </row>
+      <row id="DETECT">
+        <native>%S items are detected in %S</native>
+        <lang id="zh.tra" date="20150307081457" status="3">共找到%S份資料（位置：%S）</lang>
+        <lang id="zh" date="20150307090714" status="3">检查到 %S 个项目存放在 %S</lang>
+        <lang id="ja" date="20150307092640" status="3">%S個のアイテムが検出されました。位置：%S</lang>
+      </row>
+      <row id="ERROR_INVALID_FILEPATH">
+        <native>ERROR: Invalid file path.#l%S</native>
+        <lang id="zh.tra" date="20150307081457" status="3">錯誤：檔案路徑無效#n%S</lang>
+        <lang id="zh" date="20150307090714" status="3">错误: 无效文件路径。#n%S</lang>
+        <lang id="ja" date="20150307092640" status="3">エラー: 無効なファイルパスです。#n%S</lang>
+      </row>
+      <row id="ERROR_SAME_ID_EXISTS">
+        <native>The same ID is already existing.</native>
+        <lang id="zh.tra" date="20150307081457" status="3">已有相同 ID 檔案。</lang>
+        <lang id="zh" date="20150307090714" status="3">相同 ID 已存在。</lang>
+        <lang id="ja" date="20150307092640" status="3">同一のIDが存在します</lang>
+      </row>
+      <row id="FAILED">
+        <native>Failed</native>
+        <lang id="zh.tra" date="20150307081457" status="3">失敗</lang>
+        <lang id="zh" date="20150307090714" status="3">失败</lang>
+        <lang id="ja" date="20150307092640" status="3">失敗</lang>
+      </row>
+      <row id="SELECT_PATH">
+        <native>Select folder where to export / where from import.</native>
+        <lang id="zh.tra" date="20150307081457" status="3">選取資料夾供匯出/入</lang>
+        <lang id="zh" date="20150307090714" status="3">选择用于导入/导出的文件夹。</lang>
+        <lang id="ja" date="20150307092640" status="3">エクスポート先／インポート元のフォルダを選択してください。</lang>
+      </row>
+    </node>
+  </source>
+</document>
