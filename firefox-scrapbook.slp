@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<document created="20150307070436" version="4.0.352" date="20150307103834" scan="23" scanned="20150307103742">
+<document created="20150307070436" version="4.0.352" date="20150307110409" scan="25" scanned="20150307110356">
   <lang id="zh.tra"/>
   <lang id="zh"/>
   <lang id="ja"/>
@@ -365,471 +365,471 @@
     <node class="TTextNode" name="editor.dtd" created="20150307074221">
       <row id="sb.edit.annotationTool" state="0" created="20150307074501">
         <native>Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.</native>
-        <lang id="zh.tra" date="20150307085157" status="3">註解工具 - 點擊建立自由註解，錨定於選取區後，無選取區則自由浮動。</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">註解工具 - 點擊建立自由註解，錨定於選取區後，無選取區則自由浮動。</lang>
         <lang id="zh" date="20150307090849" status="3">注解工具 - 点击建立自由注解，锚定于选取区后，无选取区则自由浮动。</lang>
       </row>
       <row id="sb.edit.attach.file" state="0" created="20150307074501">
         <native>Attach File to Selection</native>
-        <lang id="zh.tra" date="20150307085207" status="3">為選取區附加檔案</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">為選取區附加檔案</lang>
         <lang id="zh" date="20150307090849" status="3">为所选内容附加文件</lang>
         <lang id="ja" date="20150307094204" status="3">選択範囲にファイルを添付</lang>
       </row>
       <row id="sb.edit.attach.innerlink" state="0" created="20150307074501">
         <native>Attach Inner Link to Selection</native>
-        <lang id="zh.tra" date="20150307085207" status="3">為選取區附加內部連結</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">為選取區附加內部連結</lang>
         <lang id="zh" date="20150307090849" status="3">为所选内容附加内部链接</lang>
       </row>
       <row id="sb.edit.attach.link" state="0" created="20150307074501">
         <native>Attach Link to Selection</native>
-        <lang id="zh.tra" date="20150307085207" status="3">為選取區附加連結</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">為選取區附加連結</lang>
         <lang id="zh" date="20150307090849" status="3">为所选内容附加链接</lang>
         <lang id="ja" date="20150307094204" status="3">選択範囲にリンクを追加</lang>
       </row>
       <row id="sb.edit.comment" state="0" created="20150307074501">
         <native>Expand Comment Area</native>
-        <lang id="zh.tra" status="2">展開文件評註欄</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">展開文件評注欄</lang>
         <lang id="zh" date="20150307090849" status="3">展开注释区</lang>
         <lang id="ja" date="20150307094204" status="3">コメントエリアを広げる</lang>
       </row>
       <row id="sb.edit.cutter" state="0" created="20150307074501">
         <native>Remove the Selection</native>
-        <lang id="zh.tra" date="20150307085207" status="3">刪除選取區</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">刪除選取區</lang>
         <lang id="zh" date="20150307090849" status="3">删除所选内容</lang>
         <lang id="ja" date="20150307094204" status="3">選択範囲をカット</lang>
       </row>
       <row id="sb.edit.cutterTool" state="0" created="20150307074501">
         <native>Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.</native>
-        <lang id="zh.tra" date="20150307085207" status="3">HTML 編輯器 - 點擊開啟或關閉，開啟後可自由編輯頁面內容，並可透過快捷鍵或右鍵選單調用編輯功能。</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">擦子工具 - 點擊刪除選取區，中鍵點擊清除選取區內的 ScrapBook 註記。</lang>
         <lang id="zh" date="20150307090849" status="3">橡皮工具- 点击删除选取区，中键点击清除选取区内的 ScrapBook 注记。</lang>
       </row>
       <row id="sb.edit.eraser" state="0" created="20150307074501">
         <native>DOM Eraser - Delete unwanted elements or ScrapBook notes.</native>
-        <lang id="zh.tra" date="20150307085139" status="3">DOM 擦子 - 刪除不想要的元素或 ScrapBook 註記。</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">DOM 擦子 - 刪除不想要的元素或 ScrapBook 註記。</lang>
         <lang id="zh" date="20150307090849" status="3">DOM 橡皮- 删除不想要的元素或 ScrapBook 注记</lang>
       </row>
       <row id="sb.edit.folderView" state="0" created="20150307074501">
         <native>Click to view the data directory. Middle-click to open in a new tab.</native>
-        <lang id="zh.tra" date="20150307085139" status="3">點擊檢視資料目錄，中鍵點擊在新分頁開啟。</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">點擊檢視資料目錄，中鍵點擊在新分頁開啟。</lang>
         <lang id="zh" date="20150307090849" status="3">点击检视资料目录，中键点击在新分页开启。</lang>
       </row>
       <row id="sb.edit.freenote.create" state="0" created="20150307074501">
         <native>Create Freenote</native>
-        <lang id="zh.tra" date="20150307085207" status="3">建立自由註解</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">建立自由註解</lang>
         <lang id="zh" date="20150307090849" status="3">创建自由注解</lang>
         <lang id="ja" date="20150307094204" status="3">自由ノートを作成</lang>
       </row>
       <row id="sb.edit.html" state="0" created="20150307074501">
         <native>HTML Editor</native>
-        <lang id="zh.tra" date="20150307085207" status="3">編輯顏色</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">HTML 編輯器</lang>
         <lang id="zh" date="20150307090849" status="3">HTML 编辑器</lang>
       </row>
       <row id="sb.edit.html.backup" state="0" created="20150307074501">
         <native>Backup the Current Page</native>
-        <lang id="zh.tra" date="20150307085207" status="3">描述:</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">備份目前頁面</lang>
         <lang id="zh" date="20150307090849" status="3">备份当前页面</lang>
       </row>
       <row id="sb.edit.html.backup.desc" state="0" created="20150307074501">
         <native>Description:</native>
-        <lang id="zh.tra" date="20150307085207" status="3">字元</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">描述:</lang>
         <lang id="zh" date="20150307090849" status="3">描述:</lang>
       </row>
       <row id="sb.edit.html.color" state="0" created="20150307074501">
         <native>Edit Color</native>
-        <lang id="zh.tra" date="20150307085207" status="3">設定文字顏色:</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">編輯顏色</lang>
         <lang id="zh" date="20150307090849" status="3">编辑颜色</lang>
       </row>
       <row id="sb.edit.html.color.forBg" state="0" created="20150307074501">
         <native>Set background color:</native>
-        <lang id="zh.tra" date="20150307085207" status="3">編輯 HTML 原始碼</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">設定背景顏色:</lang>
         <lang id="zh" date="20150307090849" status="3">设定背景颜色:</lang>
       </row>
       <row id="sb.edit.html.color.forText" state="0" created="20150307074501">
         <native>Set text color:</native>
-        <lang id="zh.tra" date="20150307085207" status="3">設定背景顏色:</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">設定文字顏色:</lang>
         <lang id="zh" date="20150307090849" status="3">设定文字颜色:</lang>
       </row>
       <row id="sb.edit.html.file" state="0" created="20150307074501">
         <native>Insert File</native>
-        <lang id="zh.tra" date="20150307085207" status="3">插入檔案:</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">插入檔案</lang>
         <lang id="zh" date="20150307090849" status="3">插入文件</lang>
       </row>
       <row id="sb.edit.html.file.format" state="0" created="20150307074501">
         <native>Select insert format:</native>
-        <lang id="zh.tra" date="20150307085207" status="3">備份目前頁面</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">指定插入格式:</lang>
         <lang id="zh" date="20150307090849" status="3">指定插入格式:</lang>
       </row>
       <row id="sb.edit.html.file.html" state="0" created="20150307074501">
         <native>Insert sub-page:</native>
-        <lang id="zh.tra" date="20150307085207" status="3">指定插入格式:</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">插入子頁面:</lang>
         <lang id="zh" date="20150307090849" status="3">插入子页面:</lang>
       </row>
       <row id="sb.edit.html.file.pick" state="0" created="20150307074501">
         <native>Insert file:</native>
-        <lang id="zh.tra" date="20150307085207" status="3">插入子頁面:</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">插入檔案:</lang>
         <lang id="zh" date="20150307090849" status="3">插入文件:</lang>
       </row>
       <row id="sb.edit.html.link" state="0" created="20150307074501">
         <native>Insert Link</native>
-        <lang id="zh.tra" date="20150307085207" status="3">目標 URL:</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">插入連結</lang>
         <lang id="zh" date="20150307090849" status="3">插入链接</lang>
       </row>
       <row id="sb.edit.html.link.format" state="0" created="20150307074501">
         <native>Select insert format:</native>
-        <lang id="zh.tra" date="20150307085207" status="3">插入檔案</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">指定插入格式:</lang>
         <lang id="zh" date="20150307090849" status="3">指定插入格式:</lang>
       </row>
       <row id="sb.edit.html.link.id" state="0" created="20150307074501">
         <native>Item ID:</native>
-        <lang id="zh.tra" date="20150307085207" status="3">指定插入格式:</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">資源 ID:</lang>
         <lang id="zh" date="20150307090849" status="3">项目 ID:</lang>
       </row>
       <row id="sb.edit.html.link.url" state="0" created="20150307074501">
         <native>Target URL:</native>
-        <lang id="zh.tra" date="20150307085207" status="3">資源 ID:</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">目標 URL:</lang>
         <lang id="zh" date="20150307090849" status="3">目标 URL:</lang>
       </row>
       <row id="sb.edit.html.menu.basic" state="0" created="20150307074501">
         <native>Text</native>
-        <lang id="zh.tra" date="20150307085207" status="3">區塊</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">字元</lang>
         <lang id="zh" date="20150307090849" status="3">字符</lang>
         <lang id="ja" status="2">文字</lang>
       </row>
       <row id="sb.edit.html.menu.block" state="0" created="20150307074501">
         <native>Block</native>
-        <lang id="zh.tra" date="20150307085207" status="3">插入</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">區塊</lang>
         <lang id="zh" date="20150307090849" status="3">区块</lang>
       </row>
       <row id="sb.edit.html.menu.insert" state="0" created="20150307074501">
         <native>Insert</native>
-        <lang id="zh.tra" date="20150307085207" status="3">進階</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">插入</lang>
         <lang id="zh" date="20150307090849" status="3">插入</lang>
       </row>
       <row id="sb.edit.html.menu.wrapper" state="0" created="20150307074501">
         <native>Advanced</native>
-        <lang id="zh.tra" date="20150307085207" status="3">插入或編輯原始碼</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">進階</lang>
         <lang id="zh" date="20150307090849" status="3">高级</lang>
         <lang id="ja" status="2">詳細</lang>
       </row>
       <row id="sb.edit.html.menuitem.attachFile" state="0" created="20150307074501">
         <native>Insert a File or Sub-page</native>
-        <lang id="zh.tra" date="20150307085207" status="3">建立此頁面的備份</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">插入檔案或子頁面</lang>
         <lang id="zh" date="20150307090849" status="3">插入文件或子页面</lang>
       </row>
       <row id="sb.edit.html.menuitem.attachLink" state="0" created="20150307074501">
         <native>Insert a Link or Innerlink</native>
-        <lang id="zh.tra" date="20150307085207" status="3">插入檔案或子頁面</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">插入連結或內部連結</lang>
         <lang id="zh" date="20150307090849" status="3">插入链接或内部链接</lang>
       </row>
       <row id="sb.edit.html.menuitem.backupFile" state="0" created="20150307074501">
         <native>Create a Backup for this Page</native>
-        <lang id="zh.tra" date="20150307085207" status="3">插入水平線</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">建立此頁面的備份</lang>
         <lang id="zh" date="20150307090849" status="3">建立此页面的备份</lang>
       </row>
       <row id="sb.edit.html.menuitem.bold" state="0" created="20150307074501">
         <native>Switch Bold</native>
-        <lang id="zh.tra" date="20150307085207" status="3">切換斜體</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">切換粗體</lang>
         <lang id="zh" date="20150307090849" status="3">切换粗体</lang>
       </row>
       <row id="sb.edit.html.menuitem.decreaseFontSize" state="0" created="20150307074501">
         <native>Decrease Text Size</native>
-        <lang id="zh.tra" date="20150307085207" status="3">切換上標</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">縮小字級</lang>
         <lang id="zh" date="20150307090849" status="3">缩小字级</lang>
       </row>
       <row id="sb.edit.html.menuitem.formatblock_div" state="0" created="20150307074501">
         <native>Set to DIV Block</native>
-        <lang id="zh.tra" date="20150307085207" status="3">設定為 PRE 區塊</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">設定為 DIV 區塊</lang>
         <lang id="zh" date="20150307090849" status="3">设定为 DIV 区块</lang>
       </row>
       <row id="sb.edit.html.menuitem.formatblock_h1" state="0" created="20150307074501">
         <native>Set to Header Level 1</native>
-        <lang id="zh.tra" date="20150307085207" status="3">設定為 2 級標題</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">設定為 1 級標題</lang>
         <lang id="zh" date="20150307090849" status="3">设定为 1 级标题</lang>
       </row>
       <row id="sb.edit.html.menuitem.formatblock_h2" state="0" created="20150307074501">
         <native>Set to Header Level 2</native>
-        <lang id="zh.tra" date="20150307085207" status="3">設定為 3 級標題</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">設定為 2 級標題</lang>
         <lang id="zh" date="20150307090849" status="3">设定为 2 级标题</lang>
       </row>
       <row id="sb.edit.html.menuitem.formatblock_h3" state="0" created="20150307074501">
         <native>Set to Header Level 3</native>
-        <lang id="zh.tra" date="20150307085207" status="3">設定為 4 級標題</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">設定為 3 級標題</lang>
         <lang id="zh" date="20150307090849" status="3">设定为 3 级标题</lang>
       </row>
       <row id="sb.edit.html.menuitem.formatblock_h4" state="0" created="20150307074501">
         <native>Set to Header Level 4</native>
-        <lang id="zh.tra" date="20150307085207" status="3">設定為 5 級標題</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">設定為 4 級標題</lang>
         <lang id="zh" date="20150307090849" status="3">设定为 4 级标题</lang>
       </row>
       <row id="sb.edit.html.menuitem.formatblock_h5" state="0" created="20150307074501">
         <native>Set to Header Level 5</native>
-        <lang id="zh.tra" date="20150307085207" status="3">設定為 6 級標題</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">設定為 5 級標題</lang>
         <lang id="zh" date="20150307090849" status="3">设定为 5 级标题</lang>
       </row>
       <row id="sb.edit.html.menuitem.formatblock_h6" state="0" created="20150307074501">
         <native>Set to Header Level 6</native>
-        <lang id="zh.tra" date="20150307085207" status="3">設定為 DIV 區塊</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">設定為 6 級標題</lang>
         <lang id="zh" date="20150307090849" status="3">设定为 6 级标题</lang>
       </row>
       <row id="sb.edit.html.menuitem.formatblock_p" state="0" created="20150307074501">
         <native>Set to Normal Paragraph</native>
-        <lang id="zh.tra" date="20150307085207" status="3">設定為 1 級標題</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">設定為一般段落</lang>
         <lang id="zh" date="20150307090849" status="3">设定为一般段落</lang>
       </row>
       <row id="sb.edit.html.menuitem.formatblock_pre" state="0" created="20150307074501">
         <native>Set to PRE Block</native>
-        <lang id="zh.tra" date="20150307085207" status="3">切換無序列表</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">設定為 PRE 區塊</lang>
         <lang id="zh" date="20150307090849" status="3">设定为 PRE 区块</lang>
       </row>
       <row id="sb.edit.html.menuitem.horizontalLine" state="0" created="20150307074501">
         <native>Insert a Horizontal Rule</native>
-        <lang id="zh.tra" date="20150307085207" status="3">插入日期</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">插入水平線</lang>
         <lang id="zh" date="20150307090849" status="3">插入水平线</lang>
       </row>
       <row id="sb.edit.html.menuitem.increaseFontSize" state="0" created="20150307074501">
         <native>Increase Text Size</native>
-        <lang id="zh.tra" date="20150307085207" status="3">縮小字級</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">放大字級</lang>
         <lang id="zh" date="20150307090849" status="3">放大字级</lang>
       </row>
       <row id="sb.edit.html.menuitem.indent" state="0" created="20150307074501">
         <native>Indent</native>
-        <lang id="zh.tra" date="20150307085207" status="3">靠左對齊</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">增加縮排</lang>
         <lang id="zh" date="20150307090849" status="3">增加缩进</lang>
       </row>
       <row id="sb.edit.html.menuitem.insertDate" state="0" created="20150307074501">
         <native>Insert a Date</native>
-        <lang id="zh.tra" date="20150307085207" status="3">插入待辦事項核取方塊</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">插入日期</lang>
         <lang id="zh" date="20150307090849" status="3">插入日期</lang>
       </row>
       <row id="sb.edit.html.menuitem.insertOrderedList" state="0" created="20150307074501">
         <native>Switch Ordered List</native>
-        <lang id="zh.tra" date="20150307085207" status="3">減少縮排</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">切換有序列表</lang>
         <lang id="zh" date="20150307090849" status="3">切换有序列表</lang>
       </row>
       <row id="sb.edit.html.menuitem.insertSource" state="0" created="20150307074501">
         <native>Insert or Edit Source</native>
-        <lang id="zh.tra" date="20150307085207" status="3">清除格式</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">插入或編輯原始碼</lang>
         <lang id="zh" date="20150307090849" status="3">插入或编辑源代码</lang>
       </row>
       <row id="sb.edit.html.menuitem.insertTodoBox" state="0" created="20150307074501">
         <native>Insert a Todo Checkbox</native>
-        <lang id="zh.tra" date="20150307085207" status="3">插入待辦事項核取方塊 (已勾選)</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">插入待辦事項核取方塊</lang>
         <lang id="zh" date="20150307090849" status="3">插入待办事项选框</lang>
       </row>
       <row id="sb.edit.html.menuitem.insertTodoBoxDone" state="0" created="20150307074501">
         <native>Insert a Todo Checkbox (Checked)</native>
-        <lang id="zh.tra" date="20150307085207" status="3">用模版格式化</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">插入待辦事項核取方塊 (已勾選)</lang>
         <lang id="zh" date="20150307090849" status="3">插入待办事项选框 (已勾选)</lang>
       </row>
       <row id="sb.edit.html.menuitem.insertUnorderedList" state="0" created="20150307074501">
         <native>Switch Unordered List</native>
-        <lang id="zh.tra" date="20150307085207" status="3">切換有序列表</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">切換無序列表</lang>
         <lang id="zh" date="20150307090849" status="3">切换无序列表</lang>
       </row>
       <row id="sb.edit.html.menuitem.italic" state="0" created="20150307074501">
         <native>Switch Italic</native>
-        <lang id="zh.tra" date="20150307085207" status="3">切換底線</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">切換斜體</lang>
         <lang id="zh" date="20150307090849" status="3">切换斜体</lang>
       </row>
       <row id="sb.edit.html.menuitem.justifyCenter" state="0" created="20150307074501">
         <native>Align Center</native>
-        <lang id="zh.tra" date="20150307085207" status="3">左右對齊</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">置中對齊</lang>
         <lang id="zh" date="20150307090849" status="3">置中对齐</lang>
       </row>
       <row id="sb.edit.html.menuitem.justifyFull" state="0" created="20150307074501">
         <native>Align Justify</native>
-        <lang id="zh.tra" date="20150307085207" status="3">插入連結或內部連結</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">左右對齊</lang>
         <lang id="zh" date="20150307090849" status="3">左右对齐</lang>
       </row>
       <row id="sb.edit.html.menuitem.justifyLeft" state="0" created="20150307074501">
         <native>Align Left</native>
-        <lang id="zh.tra" date="20150307085207" status="3">靠右對齊</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">靠左對齊</lang>
         <lang id="zh" date="20150307090849" status="3">靠左对齐</lang>
       </row>
       <row id="sb.edit.html.menuitem.justifyRight" state="0" created="20150307074501">
         <native>Align Right</native>
-        <lang id="zh.tra" date="20150307085207" status="3">置中對齊</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">靠右對齊</lang>
         <lang id="zh" date="20150307090849" status="3">靠右对齐</lang>
       </row>
       <row id="sb.edit.html.menuitem.outdent" state="0" created="20150307074501">
         <native>Outdent</native>
-        <lang id="zh.tra" date="20150307085207" status="3">增加縮排</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">減少縮排</lang>
         <lang id="zh" date="20150307090849" status="3">减少缩进</lang>
       </row>
       <row id="sb.edit.html.menuitem.quit" state="0" created="20150307074501">
         <native>Switch HTMLEditor</native>
-        <lang id="zh.tra" date="20150307085207" status="3">切換粗體</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">切換 HTML 編輯器</lang>
         <lang id="zh" date="20150307090849" status="3">切换 HTML 编辑器</lang>
       </row>
       <row id="sb.edit.html.menuitem.removeFormat" state="0" created="20150307074501">
         <native>Clear Formats</native>
-        <lang id="zh.tra" date="20150307085207" status="3">清除連結</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">清除格式</lang>
         <lang id="zh" date="20150307090849" status="3">清除格式</lang>
       </row>
       <row id="sb.edit.html.menuitem.save" state="0" created="20150307074501">
         <native>Save the Page</native>
-        <lang id="zh.tra" date="20150307085207" status="3">切換 HTML 編輯器</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">儲存頁面</lang>
         <lang id="zh" date="20150307090849" status="3">保存页面</lang>
       </row>
       <row id="sb.edit.html.menuitem.setColor" state="0" created="20150307074501">
         <native>Set Text and Background Color</native>
-        <lang id="zh.tra" date="20150307085207" status="3">放大字級</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">設定文字及背景顏色</lang>
         <lang id="zh" date="20150307090849" status="3">设定文字及背景颜色</lang>
       </row>
       <row id="sb.edit.html.menuitem.strikeThrough" state="0" created="20150307074501">
         <native>Switch Line-through</native>
-        <lang id="zh.tra" date="20150307085207" status="3">設定文字及背景顏色</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">切換刪除線</lang>
         <lang id="zh" date="20150307090849" status="3">切换删除线</lang>
       </row>
       <row id="sb.edit.html.menuitem.subscript" state="0" created="20150307074501">
         <native>Switch Subscript</native>
-        <lang id="zh.tra" date="20150307085207" status="3">設定為一般段落</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">切換下標</lang>
         <lang id="zh" date="20150307090849" status="3">切换下标</lang>
       </row>
       <row id="sb.edit.html.menuitem.superscript" state="0" created="20150307074501">
         <native>Switch Superscript</native>
-        <lang id="zh.tra" date="20150307085207" status="3">切換下標</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">切換上標</lang>
         <lang id="zh" date="20150307090849" status="3">切换上标</lang>
       </row>
       <row id="sb.edit.html.menuitem.underline" state="0" created="20150307074501">
         <native>Switch Underline</native>
-        <lang id="zh.tra" date="20150307085207" status="3">切換刪除線</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">切換底線</lang>
         <lang id="zh" date="20150307090849" status="3">切换底线</lang>
       </row>
       <row id="sb.edit.html.menuitem.unlink" state="0" created="20150307074501">
         <native>Clear Links</native>
-        <lang id="zh.tra" date="20150307085207" status="3">儲存頁面</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">清除連結</lang>
         <lang id="zh" date="20150307090849" status="3">清除链接</lang>
       </row>
       <row id="sb.edit.html.menuitem.wrapHTML" state="0" created="20150307074501">
         <native>Format with Template</native>
-        <lang id="zh.tra" date="20150307085207" status="3">擦子工具 - 點擊刪除選取區，中鍵點擊清除選取區內的 ScrapBook 註記。</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">用模版格式化</lang>
         <lang id="zh" date="20150307090849" status="3">用模版格式化</lang>
       </row>
       <row id="sb.edit.html.source" state="0" created="20150307074501">
         <native>Edit HTML Source</native>
-        <lang id="zh.tra" date="20150307085207" status="3">插入連結</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">編輯 HTML 原始碼</lang>
         <lang id="zh" date="20150307090849" status="3">编辑 HTML 源代码</lang>
       </row>
       <row id="sb.edit.htmlTool" state="0" created="20150307074501">
         <native>HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.</native>
-        <lang id="zh.tra" date="20150307085207" status="3">HTML 編輯器</lang>
+        <lang id="zh.tra" date="20150307110405" status="3">HTML 編輯器 - 點擊開啟或關閉，開啟後可自由編輯頁面內容，並可透過快捷鍵或右鍵選單調用編輯功能。</lang>
         <lang id="zh" date="20150307090849" status="3">HTML 编辑器- 点击开启或关闭，开启后可自由编辑页面内容，并可透过快捷键或右键选单调用编辑功能。</lang>
       </row>
       <row id="sb.edit.inline.add" state="0" created="20150307074501">
         <native>Add Inline Annotation to Selection</native>
-        <lang id="zh.tra" date="20150307085207" status="3">為選取區加上行內註解</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">為選取區加上行內註解</lang>
         <lang id="zh" date="20150307090849" status="3">为所选内容添加行內注解</lang>
         <lang id="ja" date="20150307094204" status="3">選択範囲にインライン注釈を入力</lang>
       </row>
       <row id="sb.edit.remove.iframe" state="0" created="20150307074501">
         <native>Delete All IFRAME Tags</native>
-        <lang id="zh.tra" date="20150307085207" status="3">刪除所有 IFRAME 標籤</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">刪除所有 IFRAME 標籤</lang>
         <lang id="zh" date="20150307090849" status="3">删除所有 IFRAME 标签</lang>
         <lang id="ja" date="20150307094204" status="3">すべてのIFRAMEタグを削除</lang>
       </row>
       <row id="sb.edit.remove.script" state="0" created="20150307074501">
         <native>Delete All SCRIPT Tags</native>
-        <lang id="zh.tra" date="20150307085207" status="3">刪除所有 SCRIPT 標籤</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">刪除所有 SCRIPT 標籤</lang>
         <lang id="zh" date="20150307090849" status="3">删除所有 SCRIPT 标签</lang>
         <lang id="ja" date="20150307094204" status="3">すべてのSCRIPTタグを削除</lang>
       </row>
       <row id="sb.edit.save" state="0" created="20150307074501">
         <native>Save Changes</native>
-        <lang id="zh.tra" date="20150307085139" status="3">存檔</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">存檔</lang>
         <lang id="zh" date="20150307090849" status="3">保存</lang>
         <lang id="ja" date="20150307094204" status="3">変更を保存する</lang>
       </row>
       <row id="sb.edit.sticky" state="0" created="20150307074501">
         <native>Sticky Annotation</native>
-        <lang id="zh.tra" date="20150307085207" status="3">自由註解</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">自由註解</lang>
         <lang id="zh" date="20150307090849" status="3">即时贴</lang>
         <lang id="ja" date="20150307094204" status="3">付箋アノテーション</lang>
       </row>
       <row id="sb.edit.sticky.create" state="0" created="20150307074501">
         <native>Create &amp;sb.edit.sticky;</native>
-        <lang id="zh.tra" date="20150307085207" status="3">添增&amp;sb.edit.sticky;</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">添增&amp;sb.edit.sticky;</lang>
         <lang id="zh" date="20150307090849" status="3">创建即时贴</lang>
         <lang id="ja" date="20150307094204" status="3">&amp;sb.edit.sticky;を作成</lang>
       </row>
       <row id="sb.edit.undo" state="0" created="20150307074501">
         <native>Undo</native>
-        <lang id="zh.tra" date="20150307085139" status="3">復原</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">復原</lang>
         <lang id="zh" date="20150307090849" status="3">撤销</lang>
         <lang id="ja" date="20150307094204" status="3">元に戻す</lang>
       </row>
       <row id="sb.highlighter" state="0" created="20150307074501">
         <native>Highlighter</native>
-        <lang id="zh.tra" date="20150307085207" status="3">標示</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">標示</lang>
         <lang id="zh" date="20150307090849" status="3">高亮标记</lang>
         <lang id="ja" date="20150307094204" status="3">マーカー</lang>
       </row>
       <row id="sb.highlighter.remove" state="0" created="20150307074501">
         <native>Clear ScrapBook Notes in the Selection</native>
-        <lang id="zh.tra" date="20150307085207" status="3">清除選取區內的 ScrapBook 註記</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">清除選取區內的 ScrapBook 註記</lang>
         <lang id="zh" date="20150307090849" status="3">清除选取区内的 ScrapBook 注记</lang>
         <lang id="ja" date="20150307094204" status="3">選択範囲のScrapBookノートをクリア</lang>
       </row>
       <row id="sb.highlighter.remove.all" state="0" created="20150307074501">
         <native>Clear all ScrapBook Notes</native>
-        <lang id="zh.tra" date="20150307085207" status="3">清除所有 ScrapBook 註記</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">清除所有 ScrapBook 註記</lang>
         <lang id="zh" date="20150307090849" status="3">清除所有 ScrapBook 注记</lang>
         <lang id="ja" date="20150307094204" status="3">すべてのScrapBookノートをクリア</lang>
       </row>
       <row id="sb.highlighterTool" state="0" created="20150307074501">
         <native>Highlighter Tool - Click to highlight the selection.</native>
-        <lang id="zh.tra" date="20150307085207" status="3">標示工具 - 點擊以標示選取區。</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">標示工具 - 點擊以標示選取區。</lang>
         <lang id="zh" date="20150307090849" status="3">高亮标记工具- 点击以高亮标记选取区。</lang>
       </row>
       <row id="sb.indicators" state="0" created="20150307074501">
         <native>Show Link Indicators</native>
-        <lang id="zh.tra" date="20150307085207" status="3">顯示連結標記</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">顯示連結標記</lang>
         <lang id="zh" date="20150307090849" status="3">显示链接指示器</lang>
         <lang id="ja" date="20150307094204" status="3">リンクインジケータを表示</lang>
       </row>
       <row id="sb.info.home" state="0" created="20150307074501">
         <native>Home</native>
-        <lang id="zh.tra" date="20150307085207" status="3">首頁</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">首頁</lang>
         <lang id="zh" date="20150307090849" status="3">主页</lang>
         <lang id="ja" date="20150307094204" status="3">ホーム</lang>
       </row>
       <row id="sb.info.sitemap" state="0" created="20150307074501">
         <native>SiteMap</native>
-        <lang id="zh.tra" date="20150307085207" status="3">網站導覽</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">網站導覽</lang>
         <lang id="zh" date="20150307090849" status="3">网站地图</lang>
         <lang id="ja" date="20150307094204" status="3">サイトマップ</lang>
       </row>
       <row id="sb.internalize" state="0" created="20150307074501">
         <native>Localize Embedded External Media</native>
-        <lang id="zh.tra" date="20150307085207" status="3">將內嵌的外部媒體存入資料目錄</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">將內嵌的外部媒體存入資料目錄</lang>
         <lang id="zh" date="20150307090849" status="3">将内嵌的外部媒体存入资料目录</lang>
       </row>
       <row id="sb.locate" state="0" created="20150307074501">
         <native>Locate in Sidebar Tree</native>
-        <lang id="zh.tra" date="20150307085207" status="3">在側邊欄顯示此項目的位置</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">在側邊欄顯示此項目的位置</lang>
         <lang id="zh" date="20150307090849" status="3">与侧栏列表同步</lang>
         <lang id="ja" date="20150307094204" status="3">サイドバーのツリー上で位置を特定</lang>
       </row>
       <row id="sb.renew" state="0" created="20150307074501">
         <native>Capture Again</native>
-        <lang id="zh.tra" date="20150307085207" status="3">重新擷取</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">重新擷取</lang>
         <lang id="zh" date="20150307090849" status="3">重新获取</lang>
         <lang id="ja" date="20150307094204" status="3">再取り込み</lang>
       </row>
       <row id="sb.source" state="0" created="20150307074501">
         <native>Open Source URL</native>
-        <lang id="zh.tra" date="20150307085207" status="3">開啟原始網址</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">開啟原始網址</lang>
         <lang id="zh" date="20150307090849" status="3">打开原始链接</lang>
         <lang id="ja" date="20150307094204" status="3">ソースURLを開く</lang>
       </row>
       <row id="sb.toolbar.edit" state="0" created="20150307074501">
         <native>Edit Toolbar</native>
-        <lang id="zh.tra" date="20150307085139" status="3">編輯工具列</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">編輯工具列</lang>
         <lang id="zh" date="20150307090849" status="3">编辑工具栏</lang>
         <lang id="ja" date="20150307094204" status="3">編集ツールバー</lang>
       </row>
       <row id="sb.toolbar.info" state="0" created="20150307074501">
         <native>Info Toolbar</native>
-        <lang id="zh.tra" date="20150307085139" status="3">顯示資訊列</lang>
+        <lang id="zh.tra" date="20150307110154" status="2">顯示資訊列</lang>
         <lang id="zh" date="20150307090849" status="3">信息工具栏</lang>
         <lang id="ja" date="20150307094204" status="3">情報ツールバー</lang>
       </row>
@@ -998,97 +998,97 @@
         <native>Charset</native>
         <lang id="zh.tra" date="20150307085239" status="3">字元集</lang>
         <lang id="zh" date="20150307090915" status="3">字符集</lang>
-        <lang id="ja" date="20150307094252" status="3">フィルタ（正規表現）</lang>
+        <lang id="ja" date="20150307105746" status="3">文字セット</lang>
       </row>
       <row id="sb.multiple.detector" state="0" created="20150307074501">
         <native>URL Detector</native>
         <lang id="zh.tra" date="20150307085239" status="3">自動偵測 URL</lang>
         <lang id="zh" date="20150307090915" status="3">检测 URL</lang>
-        <lang id="ja" date="20150307094252" status="3">ウェブサイトのタイトル</lang>
+        <lang id="ja" date="20150307105816" status="3">URL検出ツール</lang>
       </row>
       <row id="sb.multiple.detector.bookmarks" state="0" created="20150307074501">
         <native>Bookmarks</native>
         <lang id="zh.tra" date="20150307085239" status="3">書籤</lang>
         <lang id="zh" date="20150307090915" status="3">Bookmarks</lang>
-        <lang id="ja" date="20150307094252" status="3">リンクのタイトル</lang>
+        <lang id="ja" date="20150307105908" status="3">ブックマーク</lang>
       </row>
       <row id="sb.multiple.detector.clear" state="0" created="20150307074501">
         <native>Clear</native>
         <lang id="zh.tra" date="20150307085239" status="3">清除</lang>
         <lang id="zh" date="20150307090915" status="3">清除</lang>
-        <lang id="ja" date="20150307094252" status="3">タイトル</lang>
+        <lang id="ja" date="20150307105914" status="3">クリア</lang>
       </row>
       <row id="sb.multiple.detector.local" state="0" created="20150307074501">
         <native>All Local HTMLs in a Directory</native>
         <lang id="zh.tra" date="20150307085239" status="3">某目錄下所有的 HTML 檔</lang>
         <lang id="zh" date="20150307090915" status="3">本地存储的 HTML 文件</lang>
-        <lang id="ja" date="20150307094252" status="3">タイムアウト</lang>
+        <lang id="ja" date="20150307105857" status="3">指定したフォルダ以下のローカルHTML</lang>
       </row>
       <row id="sb.multiple.detector.plink" state="0" created="20150307074501">
         <native>All Links in the Page</native>
         <lang id="zh.tra" date="20150307085239" status="3">本頁所有連結</lang>
         <lang id="zh" date="20150307090915" status="3">页面中包含的所有链接</lang>
-        <lang id="ja" date="20150307094252" status="3">メソッド</lang>
+        <lang id="ja" date="20150307105826" status="3">ページ内のすべてのリンク</lang>
       </row>
       <row id="sb.multiple.detector.slink" state="0" created="20150307074501">
         <native>All Links in the Selection</native>
         <lang id="zh.tra" date="20150307085239" status="3">選取區中所有連結</lang>
         <lang id="zh" date="20150307090915" status="3">所选内容中的所有链接</lang>
-        <lang id="ja" date="20150307094252" status="3">文字セット</lang>
+        <lang id="ja" date="20150307105835" status="3">選択範囲内のすべてのリンク</lang>
       </row>
       <row id="sb.multiple.detector.tabs" state="0" created="20150307074501">
         <native>All Open Tabs in the Window</native>
         <lang id="zh.tra" date="20150307085239" status="3">此視窗中所有的分頁</lang>
         <lang id="zh" date="20150307090915" status="3">当前所有打开的标签页</lang>
-        <lang id="ja" date="20150307094252" status="3">URL （改行して複数入力可）</lang>
+        <lang id="ja" date="20150307105844" status="3">現在のウィンドウに開かれたすべてのタブ</lang>
       </row>
       <row id="sb.multiple.filter" state="0" created="20150307074501">
         <native>Filter (regular expression)</native>
         <lang id="zh.tra" date="20150307085239" status="3">篩選條件（使用規則運算式）</lang>
         <lang id="zh" date="20150307090915" status="3">过滤器</lang>
-        <lang id="ja" date="20150307102446" status="3">フィルタ (正規表現)</lang>
+        <lang id="ja" date="20150307105639" status="3">フィルタ（正規表現）</lang>
       </row>
       <row id="sb.multiple.timeout" state="0" created="20150307074501">
         <native>Timeout</native>
         <lang id="zh.tra" date="20150307085239" status="3">逾時</lang>
         <lang id="zh" date="20150307090915" status="3">超时</lang>
-        <lang id="ja" date="20150307094252" status="3">ページ内のすべてのリンク</lang>
+        <lang id="ja" date="20150307105722" status="3">タイムアウト</lang>
       </row>
       <row id="sb.multiple.title" state="0" created="20150307074501">
         <native>Title</native>
         <lang id="zh.tra" date="20150307085239" status="3">標題</lang>
         <lang id="zh" date="20150307090915" status="3">标题</lang>
-        <lang id="ja" date="20150307094252" status="3">選択範囲内のすべてのリンク</lang>
+        <lang id="ja" date="20150307105714" status="3">タイトル</lang>
       </row>
       <row id="sb.multiple.url" state="0" created="20150307074501">
         <native>URL (Enter URLs line-by-line)</native>
         <lang id="zh.tra" date="20150307085239" status="3">URL (每行一個 URL)</lang>
         <lang id="zh" date="20150307090915" status="3">URL (每行输入一个 URL)</lang>
-        <lang id="ja" date="20150307094252" status="3">現在のウィンドウに開かれたすべてのタブ</lang>
+        <lang id="ja" date="20150307105759" status="3">URL （改行して複数入力可）</lang>
       </row>
       <row id="sbp.multiple.downloadmethod" state="0" created="20150307074501">
         <native>Method</native>
         <lang id="zh.tra" date="20150307085239" status="3">方式</lang>
         <lang id="zh" date="20150307090915" status="3">方法</lang>
-        <lang id="ja" date="20150307094252" status="3">指定したフォルダ以下のローカルHTML</lang>
+        <lang id="ja" date="20150307105737" status="3">メソッド</lang>
       </row>
       <row id="sbp.multiple.exclude" state="0" created="20150307074501">
         <native>ignore already existing addresses in destination folder</native>
         <lang id="zh.tra" date="20150307085239" status="3">略過已存在於目標資料夾的位址</lang>
         <lang id="zh" date="20150307090915" status="3">忽略目的文件夹中已存在的地址</lang>
-        <lang id="ja" date="20150307094252" status="3">ブックマーク</lang>
+        <lang id="ja" date="20150307105924" status="3">保存先フォルダにすでに存在するアドレスは無視する</lang>
       </row>
       <row id="sbp.multiple.titleoflink" state="0" created="20150307074501">
         <native>Title of link</native>
         <lang id="zh.tra" date="20150307085239" status="3">連結標題</lang>
         <lang id="zh" date="20150307090915" status="3">链接标题</lang>
-        <lang id="ja" date="20150307094252" status="3">クリア</lang>
+        <lang id="ja" date="20150307105703" status="3">リンクのタイトル</lang>
       </row>
       <row id="sbp.multiple.titleofwebsite" state="0" created="20150307074501">
         <native>Title of website</native>
         <lang id="zh.tra" date="20150307085239" status="3">網站標題</lang>
         <lang id="zh" date="20150307090915" status="3">站点标题</lang>
-        <lang id="ja" date="20150307094252" status="3">保存先フォルダにすでに存在するアドレスは無視する</lang>
+        <lang id="ja" date="20150307105655" status="3">ウェブサイトのタイトル</lang>
       </row>
     </node>
     <node class="TTextNode" name="note.dtd" created="20150307074221">
@@ -2311,49 +2311,41 @@
         <native>Downloading data... (%S) %S</native>
         <lang id="zh.tra" date="20150307081413" status="3">資料下載中... (%S) %S</lang>
         <lang id="zh" date="20150307090657" status="3">正在传输... (%S Bytes)</lang>
-        <lang id="ja" date="20150307091849" status="3">Downloading data... (%S) %S</lang>
       </row>
       <row id="EDIT_ATTACH_FILE_INVALID">
         <native>Unable to write '%S'.</native>
         <lang id="zh.tra" date="20150307081413" status="3">無法寫入檔案「%S」。</lang>
         <lang id="zh" date="20150307090657" status="3">是否确实要覆盖文件“%S”?</lang>
-        <lang id="ja" date="20150307091849" status="3">Unable to write '%S'.</lang>
       </row>
       <row id="EDIT_ATTACH_FILE_OVERWRITE">
         <native>Would you like to overwrite the file '%S'?</native>
         <lang id="zh.tra" date="20150307081413" status="3">您確定要覆寫檔案「%S」嗎？</lang>
         <lang id="zh" date="20150307090657" status="3">无效的资料 ID: %S</lang>
-        <lang id="ja" date="20150307091849" status="3">Would you like to overwrite the file '%S'?</lang>
       </row>
       <row id="EDIT_ATTACH_FILE_TITLE">
         <native>Attach File</native>
         <lang id="zh.tra" date="20150307081413" status="3">附加檔案</lang>
         <lang id="zh" date="20150307090657" status="3">附加内部链接</lang>
-        <lang id="ja" date="20150307091849" status="3">Attach File</lang>
       </row>
       <row id="EDIT_ATTACH_INNERLINK_ENTER">
         <native>Input the item ID:</native>
         <lang id="zh.tra" date="20150307081413" status="3">請輸入目標項目的 ID:</lang>
         <lang id="zh" date="20150307090657" status="3">附加文件</lang>
-        <lang id="ja" date="20150307091849" status="3">Input the item ID:</lang>
       </row>
       <row id="EDIT_ATTACH_INNERLINK_INVALID">
         <native>Invalid item ID: %S</native>
         <lang id="zh.tra" date="20150307081413" status="3">無效的資料 ID: %S</lang>
         <lang id="zh" date="20150307090657" status="3">请输入目标项目的 ID:</lang>
-        <lang id="ja" date="20150307091849" status="3">Invalid item ID: %S</lang>
       </row>
       <row id="EDIT_ATTACH_INNERLINK_TITLE">
         <native>Attach Inner Link</native>
         <lang id="zh.tra" date="20150307081413" status="3">附加內部連結</lang>
         <lang id="zh" date="20150307090657" status="3">附加链接</lang>
-        <lang id="ja" date="20150307091849" status="3">Attach Inner Link</lang>
       </row>
       <row id="EDIT_ATTACH_LINK_TITLE">
         <native>Attach Link</native>
         <lang id="zh.tra" date="20150307081413" status="3">附加連結</lang>
         <lang id="zh" date="20150307090657" status="3">编辑 HTML 注记</lang>
-        <lang id="ja" date="20150307091849" status="3">Attach Link</lang>
       </row>
       <row id="EDIT_INLINE">
         <native>Edit inline annotation for '%S'</native>
@@ -2371,13 +2363,11 @@
         <native>The page is modified with ScrapBook. Be sure to discard them?</native>
         <lang id="zh.tra" date="20150307081359" status="3">此頁面已用 ScrapBook 更動，確定要放棄？</lang>
         <lang id="zh" date="20150307090657" status="3">这个页面已使用 ScrapBook 更改，确定要放弃？</lang>
-        <lang id="ja" date="20150307091849" status="3">The page is modified with ScrapBook. Be sure to discard them?</lang>
       </row>
       <row id="EDIT_UNDO_LAST">
         <native>There is no history to undo</native>
         <lang id="zh.tra" date="20150307081359" status="3">已無可復原的編輯</lang>
         <lang id="zh" date="20150307090657" status="3">已无可撤销的编辑</lang>
-        <lang id="ja" date="20150307091849" status="3">There is no history to undo</lang>
       </row>
       <row id="MAX_COMMENT">
         <native>Expand Comment Area</native>
@@ -2395,7 +2385,6 @@
         <native>This page has %S captured version(s)!!</native>
         <lang id="zh.tra" date="20150307081413" status="3">本頁有 %S 個已擷取的版本!!</lang>
         <lang id="zh" date="20150307090657" status="3">获取完成</lang>
-        <lang id="ja" date="20150307091849" status="3">This page has %S captured version(s)!!</lang>
       </row>
       <row id="ROOT_FOLDER">
         <native>Root Folder</native>
@@ -2825,971 +2814,599 @@
       </row>
     </node>
   </source>
-  <source class="TTextSource" name="chrome\locale\ja\scrapbook\*.dtd" original="ja" newline="nlLf" date="18991230000000" subdirs="0">
+  <source class="TTextSource" name="chrome\locale\zh-TW\scrapbook\*.dtd" original="en" date="18991230000000" subdirs="0">
     <definition name="Document Type Definition (DTD)" detectfileformat="0" fileformat="tffUtf8">
       <item type="ctContext" before="&lt;!ENTITY"/>
-      <item type="ctText" before="&quot;" after="&quot;&gt;\n" escape="seCpp"/>
+      <item type="ctText" before="&quot;" after="&quot;" escape="seCpp"/>
     </definition>
-    <segmentation>
-      <rules>
-      </rules>
-    </segmentation>
-    <node class="TTextNode" name="calculate.dtd" created="20150307101553">
-      <row id="sb.calc.diagnosis" state="3" changed="20150307102006">
-        <prev>合計サイズ</prev>
-        <native>データ診断</native>
-      </row>
-      <row id="sb.calc.total.size" state="3" changed="20150307102006">
-        <prev>データ診断</prev>
-        <native>合計サイズ</native>
-      </row>
+    <node class="TTextNode" name="calculate.dtd" created="20150307105139">
+      <row id="sb.calc.diagnosis">檢查結果</row>
+      <row id="sb.calc.total.size">總容量大小</row>
     </node>
-    <node class="TTextNode" name="capture.dtd" created="20150307101553">
-      <row id="sb.capture">取り込み</row>
+    <node class="TTextNode" name="capture.dtd" created="20150307105139">
+      <row id="sb.capture">擷取</row>
       <row id="sb.capture.abort">中止</row>
-      <row id="sb.capture.filter" state="3" changed="20150307102701">
-        <prev>リストからフィルタを削除する</prev>
-        <native>フィルタ</native>
-      </row>
-      <row id="sb.capture.filter.accept" state="3" changed="20150307102701">
-        <prev>編集を中止する</prev>
-        <native>適用</native>
-      </row>
-      <row id="sb.capture.filter.accept.tt" state="3" changed="20150307102701">
-        <prev>削除</prev>
-        <native>値を変更または編集する</native>
-      </row>
-      <row id="sb.capture.filter.cancel" state="3" changed="20150307102006">
-        <prev>一時停止</prev>
-        <native>キャンセル</native>
-      </row>
-      <row id="sb.capture.filter.cancel.tt" state="3" changed="20150307102701">
-        <prev>値を変更または編集する</prev>
-        <native>編集を中止する</native>
-      </row>
-      <row id="sb.capture.filter.column.one" state="3" changed="20150307102835">
-        <prev>キャンセル</prev>
-        <native>含む/除外</native>
-      </row>
-      <row id="sb.capture.filter.column.two" state="3" changed="20150307102701">
-        <prev>フィルタ</prev>
-        <native>フィルタ (正規表現)</native>
-      </row>
-      <row id="sb.capture.filter.delete" state="3" changed="20150307102701">
-        <prev>含む/除外</prev>
-        <native>削除</native>
-      </row>
-      <row id="sb.capture.filter.delete.tt" state="3" changed="20150307102701">
-        <prev>再試行</prev>
-        <native>リストからフィルタを削除する</native>
-      </row>
-      <row id="sb.capture.finish" state="3" changed="20150307102835">
-        <prev>スキップ</prev>
-        <native>キャンセル</native>
-      </row>
-      <row id="sb.capture.pause" state="3" changed="20150307102006">
-        <prev>キャンセル</prev>
-        <native>一時停止</native>
-      </row>
-      <row id="sb.capture.retry" state="3" changed="20150307102701">
-        <prev>キャンセル</prev>
-        <native>再試行</native>
-      </row>
-      <row id="sb.capture.skip" state="3" changed="20150307102835">
-        <prev>含む/除外</prev>
-        <native>スキップ</native>
-      </row>
-      <row id="sb.capture.start" state="3" changed="20150307102701">
-        <prev>適用</prev>
-        <native>開始</native>
-      </row>
-      <row id="sbp.capture.column.one">
-        <native>URL</native>
-        <lang id="zh" status="2">URL</lang>
-        <lang id="ja" status="2">URL</lang>
-      </row>
-      <row id="sbp.capture.column.three" state="3" changed="20150307102006">
-        <prev>タイトル</prev>
-        <native>状態</native>
-      </row>
-      <row id="sbp.capture.column.two" state="3" changed="20150307102006">
-        <prev>状態</prev>
-        <native>タイトル</native>
-      </row>
+      <row id="sb.capture.filter">過濾</row>
+      <row id="sb.capture.filter.accept">確認</row>
+      <row id="sb.capture.filter.accept.tt">變更或編輯數值</row>
+      <row id="sb.capture.filter.cancel">取消</row>
+      <row id="sb.capture.filter.cancel.tt">中斷編輯</row>
+      <row id="sb.capture.filter.column.one">顯示/隱藏</row>
+      <row id="sb.capture.filter.column.two">篩選條件（使用規則運算式）</row>
+      <row id="sb.capture.filter.delete">刪除</row>
+      <row id="sb.capture.filter.delete.tt">從清單移除過濾條件</row>
+      <row id="sb.capture.finish">取消</row>
+      <row id="sb.capture.pause">暫停</row>
+      <row id="sb.capture.retry">重試</row>
+      <row id="sb.capture.skip">略過</row>
+      <row id="sb.capture.start">開始</row>
+      <row id="sbp.capture.column.one">位址</row>
+      <row id="sbp.capture.column.three">狀態</row>
+      <row id="sbp.capture.column.two">標題</row>
     </node>
-    <node class="TTextNode" name="combine.dtd" created="20150307101553">
-      <row id="sb.combine.dragdrop">結合したいページを順番にツリーからドラッグ＆ドロップして追加してください。複数のアイテムを一度にドラッグ＆ドロップして追加することも可能です。</row>
-      <row id="sb.combine.option.remove" state="3" changed="20150307102006">
-        <prev>プレビュー</prev>
-        <native>結合完了後、結合された元のページを削除する</native>
-      </row>
-      <row id="sb.combine.preview" state="3" changed="20150307102006">
-        <prev>プレビューを確認して、よろしければ結合ボタンを押してください。</prev>
-        <native>プレビュー</native>
-      </row>
-      <row id="sb.combine.preview.d" state="3" changed="20150307102006">
-        <prev>結合完了後、結合された元のページを削除する</prev>
-        <native>プレビューを確認して、よろしければ結合ボタンを押してください。</native>
-      </row>
-      <row id="sbp.combine.down" state="3" changed="20150307102006">
-        <prev>上へ</prev>
-        <native>下へ</native>
-      </row>
-      <row id="sbp.combine.newTitle" state="3" changed="20150307102006">
-        <prev>下へ</prev>
-        <native>新しいタイトル</native>
-      </row>
-      <row id="sbp.combine.remove">削除</row>
-      <row id="sbp.combine.up" state="3" changed="20150307102006">
-        <prev>新しいタイトル</prev>
-        <native>上へ</native>
-      </row>
+    <node class="TTextNode" name="combine.dtd" created="20150307105139">
+      <row id="sb.combine.dragdrop">請以滑鼠將要合併的檔案從樹狀列表中拖曳至此，並依合併順序排列。一次可以拖曳多個檔案。</row>
+      <row id="sb.combine.option.remove">合併後刪除原頁面</row>
+      <row id="sb.combine.preview">預覽</row>
+      <row id="sb.combine.preview.d">確認預覽結果後，請按下「合併」鈕。</row>
+      <row id="sbp.combine.down">檔案下移</row>
+      <row id="sbp.combine.newTitle">新標題</row>
+      <row id="sbp.combine.remove">移除檔案</row>
+      <row id="sbp.combine.up">檔案上移</row>
     </node>
-    <node class="TTextNode" name="detail.dtd" created="20150307101553">
-      <row id="sb.detail">取り込み詳細</row>
-      <row id="sb.detail.linked.archive">アーカイブ</row>
-      <row id="sb.detail.linked.charset">文字セット</row>
-      <row id="sb.detail.linked.custom">カスタム</row>
-      <row id="sb.detail.linked.file">リンク先ファイルのダウンロード</row>
-      <row id="sb.detail.linked.image">イメージ</row>
-      <row id="sb.detail.linked.movie">ムービー</row>
-      <row id="sb.detail.linked.page">掘り下げ取り込み</row>
-      <row id="sb.detail.linked.page.depth">リンクをたどる深さ</row>
-      <row id="sb.detail.linked.page.text">取り込み完了後、すべてのページは相互にリンクされ、サイトマップが生成されます。</row>
-      <row id="sb.detail.linked.sound">サウンド</row>
-      <row id="sb.detail.linked.timeout">タイムアウト（秒）</row>
-      <row id="sb.detail.new.folder">新しいフォルダ</row>
-      <row id="sb.detail.option">オプション</row>
-      <row id="sb.detail.option.asHtml">HTMLとして取り込み</row>
-      <row id="sb.detail.option.capture">取り込む</row>
-      <row id="sb.detail.option.fonts">フォント</row>
-      <row id="sb.detail.option.forceUtf8">UTF-8エンコーディングとして保存</row>
-      <row id="sb.detail.option.frames">
-        <native>Frames</native>
-        <lang id="zh.tra" status="2">頁框</lang>
-        <lang id="zh" status="2">页框</lang>
-      </row>
-      <row id="sb.detail.option.images">画像</row>
-      <row id="sb.detail.option.keepLink">
-        <native>Link to source for those not to capture</native>
-        <lang id="zh.tra" status="2">不擷取者以連往原址的方式調用</lang>
-        <lang id="zh" status="2">不获取者以链接到原址的方式调用</lang>
-      </row>
-      <row id="sb.detail.option.media">メディア</row>
-      <row id="sb.detail.option.rewriteStyles">スタイルを再編成</row>
-      <row id="sb.detail.option.scripts">スクリプト</row>
-      <row id="sb.detail.option.styles">スタイル</row>
-      <row id="sb.detail.select.folder">フォルダの選択</row>
-      <row id="sb.detail.warnAboutRenew">注意: 再取り込みを行うと元のページに上書きされます。</row>
-      <row id="sb.detail.warnAboutScript">注意: JavaScriptは何らかの問題を引き起こす可能性があります。</row>
+    <node class="TTextNode" name="detail.dtd" created="20150307105139">
+      <row id="sb.detail">擷取細節</row>
+      <row id="sb.detail.linked.archive">壓縮檔</row>
+      <row id="sb.detail.linked.charset">字元編碼</row>
+      <row id="sb.detail.linked.custom">自訂</row>
+      <row id="sb.detail.linked.file">下載連結</row>
+      <row id="sb.detail.linked.image">圖片</row>
+      <row id="sb.detail.linked.movie">影片</row>
+      <row id="sb.detail.linked.page">多層擷取</row>
+      <row id="sb.detail.linked.page.depth">擷取連結層數</row>
+      <row id="sb.detail.linked.page.text">（擷取完畢後，網頁連結會自動依硬碟中位置更新。）</row>
+      <row id="sb.detail.linked.sound">音樂</row>
+      <row id="sb.detail.linked.timeout">逾時（秒數）</row>
+      <row id="sb.detail.new.folder">開新資料夾</row>
+      <row id="sb.detail.option">選項</row>
+      <row id="sb.detail.option.asHtml">擷取為 HTML</row>
+      <row id="sb.detail.option.capture">擷取</row>
+      <row id="sb.detail.option.fonts">字體</row>
+      <row id="sb.detail.option.forceUtf8">儲存為 UTF-8 編碼</row>
+      <row id="sb.detail.option.frames">頁框</row>
+      <row id="sb.detail.option.images">圖片</row>
+      <row id="sb.detail.option.keepLink">不擷取者以連往原址的方式調用</row>
+      <row id="sb.detail.option.media">多媒體</row>
+      <row id="sb.detail.option.rewriteStyles">重組樣式表</row>
+      <row id="sb.detail.option.scripts">動態腳本</row>
+      <row id="sb.detail.option.styles">樣式</row>
+      <row id="sb.detail.select.folder">選取資料夾</row>
+      <row id="sb.detail.warnAboutRenew">請注意：「重新擷取」將覆蓋之前擷取的頁面。</row>
+      <row id="sb.detail.warnAboutScript">請注意：儲存 JavaScript 可能會引發許多問題。</row>
     </node>
-    <node class="TTextNode" name="editor.dtd" created="20150307101553">
-      <row id="sb.edit.annotationTool">
-        <native>Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.</native>
-        <lang id="zh.tra" percent="99" status="1">註解工具 - 點擊建立自由註解，錨定於選取區後，無選取區則自由浮動。</lang>
-        <lang id="zh" percent="99" status="1">注解工具 - 点击建立自由注解，锚定于选取区后，无选取区则自由浮动。</lang>
-      </row>
-      <row id="sb.edit.attach.file">選択範囲にファイルを添付</row>
-      <row id="sb.edit.attach.innerlink">
-        <native>Attach Inner Link to Selection</native>
-        <lang id="zh.tra" status="2">為選取區附加內部連結</lang>
-        <lang id="zh" status="2">为所选内容附加内部链接</lang>
-      </row>
-      <row id="sb.edit.attach.link">選択範囲にリンクを追加</row>
-      <row id="sb.edit.comment">コメントエリアを広げる</row>
-      <row id="sb.edit.cutter">選択範囲をカット</row>
-      <row id="sb.edit.cutterTool">
-        <native>Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.</native>
-        <lang id="zh.tra" percent="99" status="1">HTML 編輯器 - 點擊開啟或關閉，開啟後可自由編輯頁面內容，並可透過快捷鍵或右鍵選單調用編輯功能。</lang>
-        <lang id="zh" percent="99" status="1">橡皮工具- 点击删除选取区，中键点击清除选取区内的 ScrapBook 注记。</lang>
-      </row>
-      <row id="sb.edit.eraser">
-        <native>DOM Eraser - Delete unwanted elements or ScrapBook notes.</native>
-        <lang id="zh.tra" percent="99" status="1">DOM 擦子 - 刪除不想要的元素或 ScrapBook 註記。</lang>
-        <lang id="zh" percent="99" status="1">DOM 橡皮- 删除不想要的元素或 ScrapBook 注记。</lang>
-      </row>
-      <row id="sb.edit.folderView">
-        <native>Click to view the data directory. Middle-click to open in a new tab.</native>
-        <lang id="zh.tra" percent="99" status="1">點擊檢視資料目錄，中鍵點擊在新分頁開啟。</lang>
-        <lang id="zh" percent="99" status="1">点击检视资料目录，中键点击在新分页开启。</lang>
-      </row>
-      <row id="sb.edit.html">
-        <native>HTML Editor</native>
-        <lang id="zh.tra" status="2">編輯顏色</lang>
-        <lang id="zh" status="2">HTML 编辑器</lang>
-      </row>
-      <row id="sb.edit.html.backup">
-        <native>Backup the Current Page</native>
-        <lang id="zh.tra" status="2">描述</lang>
-        <lang id="zh" status="2">备份当前页面</lang>
-      </row>
-      <row id="sb.edit.html.backup.desc">
-        <native>Description:</native>
-        <lang id="zh.tra" percent="99" status="1">字元:</lang>
-        <lang id="zh" percent="99" status="1">描述:</lang>
-      </row>
-      <row id="sb.edit.html.color">
-        <native>Edit Color</native>
-        <lang id="zh.tra" status="2">設定文字顏色</lang>
-        <lang id="zh" status="2">编辑颜色</lang>
-      </row>
-      <row id="sb.edit.html.color.forBg">
-        <native>Set background color:</native>
-        <lang id="zh.tra" percent="99" status="1">編輯 HTML 原始碼:</lang>
-        <lang id="zh" percent="99" status="1">设定背景颜色:</lang>
-      </row>
-      <row id="sb.edit.html.color.forText">
-        <native>Set text color:</native>
-        <lang id="zh.tra" percent="99" status="1">設定背景顏色:</lang>
-        <lang id="zh" percent="99" status="1">设定文字颜色:</lang>
-      </row>
-      <row id="sb.edit.html.file">
-        <native>Insert File</native>
-        <lang id="zh" status="2">插入文件</lang>
-      </row>
-      <row id="sb.edit.html.file.format">
-        <native>Select insert format:</native>
-        <lang id="zh" percent="99" status="1">指定插入格式:</lang>
-      </row>
-      <row id="sb.edit.html.file.html">
-        <native>Insert sub-page:</native>
-        <lang id="zh.tra" percent="99" status="1">指定插入格式:</lang>
-        <lang id="zh" percent="99" status="1">插入子页面:</lang>
-      </row>
-      <row id="sb.edit.html.file.pick">
-        <native>Insert file:</native>
-        <lang id="zh.tra" percent="99" status="1">插入子頁面:</lang>
-        <lang id="zh" percent="99" status="1">插入文件:</lang>
-      </row>
-      <row id="sb.edit.html.link">
-        <native>Insert Link</native>
-        <lang id="zh.tra" status="2">目標 URL</lang>
-        <lang id="zh" status="2">插入链接</lang>
-      </row>
-      <row id="sb.edit.html.link.format">
-        <native>Select insert format:</native>
-        <lang id="zh" percent="99" status="1">指定插入格式:</lang>
-      </row>
-      <row id="sb.edit.html.link.id">
-        <native>Item ID:</native>
-        <lang id="zh.tra" percent="99" status="1">指定插入格式:</lang>
-        <lang id="zh" percent="99" status="1">项目 ID:</lang>
-      </row>
-      <row id="sb.edit.html.link.url">
-        <native>Target URL:</native>
-        <lang id="zh.tra" percent="99" status="1">資源 ID:</lang>
-        <lang id="zh" percent="99" status="1">目标 URL:</lang>
-      </row>
-      <row id="sb.edit.html.menu.basic">Text</row>
-      <row id="sb.edit.html.menu.block">
-        <native>Block</native>
-        <lang id="zh.tra" status="2">插入</lang>
-        <lang id="zh" status="2">区块</lang>
-      </row>
-      <row id="sb.edit.html.menu.insert">
-        <native>Insert</native>
-        <lang id="zh.tra" status="2">進階</lang>
-        <lang id="zh" status="2">插入</lang>
-      </row>
-      <row id="sb.edit.html.menu.wrapper" state="3" changed="20150307103132">
-        <prev>詳細</prev>
-        <native>Advanced</native>
-        <lang id="zh" invalidated="1" status="2">高级</lang>
-        <lang id="ja" invalidated="1" status="2">詳細</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.attachFile">
-        <native>Insert a File or Sub-page</native>
-        <lang id="zh.tra" status="2">建立此頁面的備份</lang>
-        <lang id="zh" status="2">插入文件或子页面</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.attachLink">
-        <native>Insert a Link or Innerlink</native>
-        <lang id="zh.tra" status="2">插入檔案或子頁面</lang>
-        <lang id="zh" status="2">插入链接或内部链接</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.backupFile">
-        <native>Create a Backup for this Page</native>
-        <lang id="zh.tra" status="2">插入水平線</lang>
-        <lang id="zh" status="2">建立此页面的备份</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.bold">
-        <native>Switch Bold</native>
-        <lang id="zh.tra" status="2">切換斜體</lang>
-        <lang id="zh" status="2">切换粗体</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.decreaseFontSize">
-        <native>Decrease Text Size</native>
-        <lang id="zh.tra" status="2">切換上標</lang>
-        <lang id="zh" status="2">缩小字级</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.formatblock_div">
-        <native>Set to DIV Block</native>
-        <lang id="zh.tra" status="2">設定為 PRE 區塊</lang>
-        <lang id="zh" status="2">设定为 DIV 区块</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.formatblock_h1">
-        <native>Set to Header Level 1</native>
-        <lang id="zh.tra" status="2">設定為 2 級標題</lang>
-        <lang id="zh" status="2">设定为 1 级标题</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.formatblock_h2">
-        <native>Set to Header Level 2</native>
-        <lang id="zh.tra" status="2">設定為 3 級標題</lang>
-        <lang id="zh" status="2">设定为 2 级标题</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.formatblock_h3">
-        <native>Set to Header Level 3</native>
-        <lang id="zh.tra" status="2">設定為 4 級標題</lang>
-        <lang id="zh" status="2">设定为 3 级标题</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.formatblock_h4">
-        <native>Set to Header Level 4</native>
-        <lang id="zh.tra" status="2">設定為 5 級標題</lang>
-        <lang id="zh" status="2">设定为 4 级标题</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.formatblock_h5">
-        <native>Set to Header Level 5</native>
-        <lang id="zh.tra" status="2">設定為 6 級標題</lang>
-        <lang id="zh" status="2">设定为 5 级标题</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.formatblock_h6">
-        <native>Set to Header Level 6</native>
-        <lang id="zh.tra" status="2">設定為 DIV 區塊</lang>
-        <lang id="zh" status="2">设定为 6 级标题</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.formatblock_p">
-        <native>Set to Normal Paragraph</native>
-        <lang id="zh.tra" status="2">設定為 1 級標題</lang>
-        <lang id="zh" status="2">设定为一般段落</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.formatblock_pre">
-        <native>Set to PRE Block</native>
-        <lang id="zh.tra" status="2">切換無序列表</lang>
-        <lang id="zh" status="2">设定为 PRE 区块</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.horizontalLine">
-        <native>Insert a Horizontal Rule</native>
-        <lang id="zh.tra" status="2">插入日期</lang>
-        <lang id="zh" status="2">插入水平线</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.increaseFontSize">
-        <native>Increase Text Size</native>
-        <lang id="zh.tra" status="2">縮小字級</lang>
-        <lang id="zh" status="2">放大字级</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.indent">
-        <native>Indent</native>
-        <lang id="zh.tra" status="2">靠左對齊</lang>
-        <lang id="zh" status="2">增加缩进</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.insertDate">
-        <native>Insert a Date</native>
-        <lang id="zh.tra" status="2">插入待辦事項核取方塊</lang>
-        <lang id="zh" status="2">插入日期</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.insertOrderedList">
-        <native>Switch Ordered List</native>
-        <lang id="zh.tra" status="2">減少縮排</lang>
-        <lang id="zh" status="2">切换有序列表</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.insertSource">
-        <native>Insert or Edit Source</native>
-        <lang id="zh.tra" status="2">清除格式</lang>
-        <lang id="zh" status="2">插入或编辑源代码</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.insertTodoBox">
-        <native>Insert a Todo Checkbox</native>
-        <lang id="zh.tra" status="2">插入待辦事項核取方塊 (已勾選)</lang>
-        <lang id="zh" status="2">插入待办事项选框</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.insertTodoBoxDone">
-        <native>Insert a Todo Checkbox (Checked)</native>
-        <lang id="zh.tra" status="2">用模版格式化</lang>
-        <lang id="zh" status="2">插入待办事项选框 (已勾选)</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.insertUnorderedList">
-        <native>Switch Unordered List</native>
-        <lang id="zh.tra" status="2">切換有序列表</lang>
-        <lang id="zh" status="2">切换无序列表</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.italic">
-        <native>Switch Italic</native>
-        <lang id="zh.tra" status="2">切換底線</lang>
-        <lang id="zh" status="2">切换斜体</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.justifyCenter">
-        <native>Align Center</native>
-        <lang id="zh.tra" status="2">左右對齊</lang>
-        <lang id="zh" status="2">置中对齐</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.justifyFull">
-        <native>Align Justify</native>
-        <lang id="zh.tra" status="2">插入連結或內部連結</lang>
-        <lang id="zh" status="2">左右对齐</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.justifyLeft">
-        <native>Align Left</native>
-        <lang id="zh.tra" status="2">靠右對齊</lang>
-        <lang id="zh" status="2">靠左对齐</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.justifyRight">
-        <native>Align Right</native>
-        <lang id="zh.tra" status="2">置中對齊</lang>
-        <lang id="zh" status="2">靠右对齐</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.outdent">
-        <native>Outdent</native>
-        <lang id="zh.tra" status="2">增加縮排</lang>
-        <lang id="zh" status="2">减少缩进</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.quit">
-        <native>Switch HTMLEditor</native>
-        <lang id="zh.tra" status="2">切換粗體</lang>
-        <lang id="zh" status="2">切换 HTML 编辑器</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.removeFormat">
-        <native>Clear Formats</native>
-        <lang id="zh.tra" status="2">清除連結</lang>
-        <lang id="zh" status="2">清除格式</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.save">
-        <native>Save the Page</native>
-        <lang id="zh.tra" status="2">切換 HTML 編輯器</lang>
-        <lang id="zh" status="2">保存页面</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.setColor">
-        <native>Set Text and Background Color</native>
-        <lang id="zh.tra" status="2">放大字級</lang>
-        <lang id="zh" status="2">设定文字及背景颜色</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.strikeThrough">
-        <native>Switch Line-through</native>
-        <lang id="zh.tra" status="2">設定文字及背景顏色</lang>
-        <lang id="zh" status="2">切换删除线</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.subscript">
-        <native>Switch Subscript</native>
-        <lang id="zh.tra" status="2">設定為一般段落</lang>
-        <lang id="zh" status="2">切换下标</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.superscript">
-        <native>Switch Superscript</native>
-        <lang id="zh.tra" status="2">切換下標</lang>
-        <lang id="zh" status="2">切换上标</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.underline">
-        <native>Switch Underline</native>
-        <lang id="zh.tra" status="2">切換刪除線</lang>
-        <lang id="zh" status="2">切换底线</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.unlink">
-        <native>Clear Links</native>
-        <lang id="zh.tra" status="2">儲存頁面</lang>
-        <lang id="zh" status="2">清除链接</lang>
-      </row>
-      <row id="sb.edit.html.menuitem.wrapHTML">
-        <native>Format with Template</native>
-        <lang id="zh.tra" status="2">擦子工具 - 點擊刪除選取區，中鍵點擊清除選取區內的 ScrapBook 註記</lang>
-        <lang id="zh" status="2">用模版格式化</lang>
-      </row>
-      <row id="sb.edit.html.source">
-        <native>Edit HTML Source</native>
-        <lang id="zh.tra" status="2">插入連結</lang>
-        <lang id="zh" status="2">编辑 HTML 源代码</lang>
-      </row>
-      <row id="sb.edit.htmlTool">
-        <native>HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.</native>
-        <lang id="zh.tra" percent="99" status="1">HTML 編輯器。</lang>
-        <lang id="zh" percent="99" status="1">HTML 编辑器- 点击开启或关闭，开启后可自由编辑页面内容，并可透过快捷键或右键选单调用编辑功能。</lang>
-      </row>
-      <row id="sb.edit.inline.add">選択範囲にインライン注釈を入力</row>
-      <row id="sb.edit.remove.iframe">すべてのIFRAMEタグを削除</row>
-      <row id="sb.edit.remove.script">すべてのSCRIPTタグを削除</row>
-      <row id="sb.edit.save">変更を保存する</row>
-      <row id="sb.edit.sticky" state="3" changed="20150307102301">
-        <prev>付箋アノテーション</prev>
-        <native>付箋アノテーション"&gt;&lt;!-- left for addon compatibility --&gt;#l&lt;!ENTITY sb.edit.sticky.create "&amp;sb.edit.sticky;を作成"&gt;&lt;!-- left for addon compatibility --&gt;#l&lt;!ENTITY sb.edit.freenote.create "自由ノートを作成</native>
-      </row>
-      <row id="sb.edit.undo">元に戻す</row>
-      <row id="sb.highlighter">マーカー</row>
-      <row id="sb.highlighter.remove">選択範囲のScrapBookノートをクリア</row>
-      <row id="sb.highlighter.remove.all">すべてのScrapBookノートをクリア</row>
-      <row id="sb.highlighterTool">
-        <native>Highlighter Tool - Click to highlight the selection.</native>
-        <lang id="zh.tra" percent="99" status="1">標示工具 - 點擊以標示選取區。</lang>
-        <lang id="zh" percent="99" status="1">高亮标记工具- 点击以高亮标记选取区。</lang>
-      </row>
-      <row id="sb.indicators">リンクインジケータを表示</row>
-      <row id="sb.info.home">ホーム</row>
-      <row id="sb.info.sitemap">サイトマップ</row>
-      <row id="sb.internalize">
-        <native>Localize Embedded External Media</native>
-        <lang id="zh.tra" status="2">將內嵌的外部媒體存入資料目錄</lang>
-        <lang id="zh" status="2">将内嵌的外部媒体存入资料目录</lang>
-      </row>
-      <row id="sb.locate">サイドバーのツリー上で位置を特定</row>
-      <row id="sb.renew">再取り込み</row>
-      <row id="sb.source">ソースURLを開く</row>
-      <row id="sb.toolbar.edit">編集ツールバー</row>
-      <row id="sb.toolbar.info">情報ツールバー</row>
+    <node class="TTextNode" name="editor.dtd" created="20150307105139">
+      <row id="sb.edit.annotationTool">註解工具 - 點擊建立自由註解，錨定於選取區後，無選取區則自由浮動。</row>
+      <row id="sb.edit.attach.file">為選取區附加檔案</row>
+      <row id="sb.edit.attach.innerlink">為選取區附加內部連結</row>
+      <row id="sb.edit.attach.link">為選取區附加連結</row>
+      <row id="sb.edit.comment" state="3" changed="20150307110356">
+        <prev>展開文件評註欄</prev>
+        <native>展開文件評注欄</native>
+      </row>
+      <row id="sb.edit.cutter">刪除選取區</row>
+      <row id="sb.edit.cutterTool" state="3" changed="20150307110356">
+        <prev>HTML 編輯器 - 點擊開啟或關閉，開啟後可自由編輯頁面內容，並可透過快捷鍵或右鍵選單調用編輯功能。</prev>
+        <native>擦子工具 - 點擊刪除選取區，中鍵點擊清除選取區內的 ScrapBook 註記。</native>
+      </row>
+      <row id="sb.edit.eraser">DOM 擦子 - 刪除不想要的元素或 ScrapBook 註記。</row>
+      <row id="sb.edit.folderView">點擊檢視資料目錄，中鍵點擊在新分頁開啟。</row>
+      <row id="sb.edit.freenote.create">建立自由註解</row>
+      <row id="sb.edit.html" state="3" changed="20150307110356">
+        <prev>編輯顏色</prev>
+        <native>HTML 編輯器</native>
+      </row>
+      <row id="sb.edit.html.backup" state="3" changed="20150307110356">
+        <prev>描述:</prev>
+        <native>備份目前頁面</native>
+      </row>
+      <row id="sb.edit.html.backup.desc" state="3" changed="20150307110356">
+        <prev>字元</prev>
+        <native>描述:</native>
+      </row>
+      <row id="sb.edit.html.color" state="3" changed="20150307110356">
+        <prev>設定文字顏色:</prev>
+        <native>編輯顏色</native>
+      </row>
+      <row id="sb.edit.html.color.forBg" state="3" changed="20150307110356">
+        <prev>編輯 HTML 原始碼</prev>
+        <native>設定背景顏色:</native>
+      </row>
+      <row id="sb.edit.html.color.forText" state="3" changed="20150307110356">
+        <prev>設定背景顏色:</prev>
+        <native>設定文字顏色:</native>
+      </row>
+      <row id="sb.edit.html.file" state="3" changed="20150307110356">
+        <prev>插入檔案:</prev>
+        <native>插入檔案</native>
+      </row>
+      <row id="sb.edit.html.file.format" state="3" changed="20150307110356">
+        <prev>備份目前頁面</prev>
+        <native>指定插入格式:</native>
+      </row>
+      <row id="sb.edit.html.file.html" state="3" changed="20150307110356">
+        <prev>指定插入格式:</prev>
+        <native>插入子頁面:</native>
+      </row>
+      <row id="sb.edit.html.file.pick" state="3" changed="20150307110356">
+        <prev>插入子頁面:</prev>
+        <native>插入檔案:</native>
+      </row>
+      <row id="sb.edit.html.link" state="3" changed="20150307110356">
+        <prev>目標 URL:</prev>
+        <native>插入連結</native>
+      </row>
+      <row id="sb.edit.html.link.format" state="3" changed="20150307110356">
+        <prev>插入檔案</prev>
+        <native>指定插入格式:</native>
+      </row>
+      <row id="sb.edit.html.link.id" state="3" changed="20150307110356">
+        <prev>指定插入格式:</prev>
+        <native>資源 ID:</native>
+      </row>
+      <row id="sb.edit.html.link.url" state="3" changed="20150307110356">
+        <prev>資源 ID:</prev>
+        <native>目標 URL:</native>
+      </row>
+      <row id="sb.edit.html.menu.basic" state="3" changed="20150307110356">
+        <prev>區塊</prev>
+        <native>字元</native>
+      </row>
+      <row id="sb.edit.html.menu.block" state="3" changed="20150307110356">
+        <prev>插入</prev>
+        <native>區塊</native>
+      </row>
+      <row id="sb.edit.html.menu.insert" state="3" changed="20150307110356">
+        <prev>進階</prev>
+        <native>插入</native>
+      </row>
+      <row id="sb.edit.html.menu.wrapper" state="3" changed="20150307110356">
+        <prev>插入或編輯原始碼</prev>
+        <native>進階</native>
+      </row>
+      <row id="sb.edit.html.menuitem.attachFile" state="3" changed="20150307110356">
+        <prev>建立此頁面的備份</prev>
+        <native>插入檔案或子頁面</native>
+      </row>
+      <row id="sb.edit.html.menuitem.attachLink" state="3" changed="20150307110356">
+        <prev>插入檔案或子頁面</prev>
+        <native>插入連結或內部連結</native>
+      </row>
+      <row id="sb.edit.html.menuitem.backupFile" state="3" changed="20150307110356">
+        <prev>插入水平線</prev>
+        <native>建立此頁面的備份</native>
+      </row>
+      <row id="sb.edit.html.menuitem.bold" state="3" changed="20150307110356">
+        <prev>切換斜體</prev>
+        <native>切換粗體</native>
+      </row>
+      <row id="sb.edit.html.menuitem.decreaseFontSize" state="3" changed="20150307110356">
+        <prev>切換上標</prev>
+        <native>縮小字級</native>
+      </row>
+      <row id="sb.edit.html.menuitem.formatblock_div" state="3" changed="20150307110356">
+        <prev>設定為 PRE 區塊</prev>
+        <native>設定為 DIV 區塊</native>
+      </row>
+      <row id="sb.edit.html.menuitem.formatblock_h1" state="3" changed="20150307110356">
+        <prev>設定為 2 級標題</prev>
+        <native>設定為 1 級標題</native>
+      </row>
+      <row id="sb.edit.html.menuitem.formatblock_h2" state="3" changed="20150307110356">
+        <prev>設定為 3 級標題</prev>
+        <native>設定為 2 級標題</native>
+      </row>
+      <row id="sb.edit.html.menuitem.formatblock_h3" state="3" changed="20150307110356">
+        <prev>設定為 4 級標題</prev>
+        <native>設定為 3 級標題</native>
+      </row>
+      <row id="sb.edit.html.menuitem.formatblock_h4" state="3" changed="20150307110356">
+        <prev>設定為 5 級標題</prev>
+        <native>設定為 4 級標題</native>
+      </row>
+      <row id="sb.edit.html.menuitem.formatblock_h5" state="3" changed="20150307110356">
+        <prev>設定為 6 級標題</prev>
+        <native>設定為 5 級標題</native>
+      </row>
+      <row id="sb.edit.html.menuitem.formatblock_h6" state="3" changed="20150307110356">
+        <prev>設定為 DIV 區塊</prev>
+        <native>設定為 6 級標題</native>
+      </row>
+      <row id="sb.edit.html.menuitem.formatblock_p" state="3" changed="20150307110356">
+        <prev>設定為 1 級標題</prev>
+        <native>設定為一般段落</native>
+      </row>
+      <row id="sb.edit.html.menuitem.formatblock_pre" state="3" changed="20150307110356">
+        <prev>切換無序列表</prev>
+        <native>設定為 PRE 區塊</native>
+      </row>
+      <row id="sb.edit.html.menuitem.horizontalLine" state="3" changed="20150307110356">
+        <prev>插入日期</prev>
+        <native>插入水平線</native>
+      </row>
+      <row id="sb.edit.html.menuitem.increaseFontSize" state="3" changed="20150307110356">
+        <prev>縮小字級</prev>
+        <native>放大字級</native>
+      </row>
+      <row id="sb.edit.html.menuitem.indent" state="3" changed="20150307110356">
+        <prev>靠左對齊</prev>
+        <native>增加縮排</native>
+      </row>
+      <row id="sb.edit.html.menuitem.insertDate" state="3" changed="20150307110356">
+        <prev>插入待辦事項核取方塊</prev>
+        <native>插入日期</native>
+      </row>
+      <row id="sb.edit.html.menuitem.insertOrderedList" state="3" changed="20150307110356">
+        <prev>減少縮排</prev>
+        <native>切換有序列表</native>
+      </row>
+      <row id="sb.edit.html.menuitem.insertSource" state="3" changed="20150307110356">
+        <prev>清除格式</prev>
+        <native>插入或編輯原始碼</native>
+      </row>
+      <row id="sb.edit.html.menuitem.insertTodoBox" state="3" changed="20150307110356">
+        <prev>插入待辦事項核取方塊 (已勾選)</prev>
+        <native>插入待辦事項核取方塊</native>
+      </row>
+      <row id="sb.edit.html.menuitem.insertTodoBoxDone" state="3" changed="20150307110356">
+        <prev>用模版格式化</prev>
+        <native>插入待辦事項核取方塊 (已勾選)</native>
+      </row>
+      <row id="sb.edit.html.menuitem.insertUnorderedList" state="3" changed="20150307110356">
+        <prev>切換有序列表</prev>
+        <native>切換無序列表</native>
+      </row>
+      <row id="sb.edit.html.menuitem.italic" state="3" changed="20150307110356">
+        <prev>切換底線</prev>
+        <native>切換斜體</native>
+      </row>
+      <row id="sb.edit.html.menuitem.justifyCenter" state="3" changed="20150307110356">
+        <prev>左右對齊</prev>
+        <native>置中對齊</native>
+      </row>
+      <row id="sb.edit.html.menuitem.justifyFull" state="3" changed="20150307110356">
+        <prev>插入連結或內部連結</prev>
+        <native>左右對齊</native>
+      </row>
+      <row id="sb.edit.html.menuitem.justifyLeft" state="3" changed="20150307110356">
+        <prev>靠右對齊</prev>
+        <native>靠左對齊</native>
+      </row>
+      <row id="sb.edit.html.menuitem.justifyRight" state="3" changed="20150307110356">
+        <prev>置中對齊</prev>
+        <native>靠右對齊</native>
+      </row>
+      <row id="sb.edit.html.menuitem.outdent" state="3" changed="20150307110356">
+        <prev>增加縮排</prev>
+        <native>減少縮排</native>
+      </row>
+      <row id="sb.edit.html.menuitem.quit" state="3" changed="20150307110356">
+        <prev>切換粗體</prev>
+        <native>切換 HTML 編輯器</native>
+      </row>
+      <row id="sb.edit.html.menuitem.removeFormat" state="3" changed="20150307110356">
+        <prev>清除連結</prev>
+        <native>清除格式</native>
+      </row>
+      <row id="sb.edit.html.menuitem.save" state="3" changed="20150307110356">
+        <prev>切換 HTML 編輯器</prev>
+        <native>儲存頁面</native>
+      </row>
+      <row id="sb.edit.html.menuitem.setColor" state="3" changed="20150307110356">
+        <prev>放大字級</prev>
+        <native>設定文字及背景顏色</native>
+      </row>
+      <row id="sb.edit.html.menuitem.strikeThrough" state="3" changed="20150307110356">
+        <prev>設定文字及背景顏色</prev>
+        <native>切換刪除線</native>
+      </row>
+      <row id="sb.edit.html.menuitem.subscript" state="3" changed="20150307110356">
+        <prev>設定為一般段落</prev>
+        <native>切換下標</native>
+      </row>
+      <row id="sb.edit.html.menuitem.superscript" state="3" changed="20150307110356">
+        <prev>切換下標</prev>
+        <native>切換上標</native>
+      </row>
+      <row id="sb.edit.html.menuitem.underline" state="3" changed="20150307110356">
+        <prev>切換刪除線</prev>
+        <native>切換底線</native>
+      </row>
+      <row id="sb.edit.html.menuitem.unlink" state="3" changed="20150307110356">
+        <prev>儲存頁面</prev>
+        <native>清除連結</native>
+      </row>
+      <row id="sb.edit.html.menuitem.wrapHTML" state="3" changed="20150307110356">
+        <prev>擦子工具 - 點擊刪除選取區，中鍵點擊清除選取區內的 ScrapBook 註記。</prev>
+        <native>用模版格式化</native>
+      </row>
+      <row id="sb.edit.html.source" state="3" changed="20150307110356">
+        <prev>插入連結</prev>
+        <native>編輯 HTML 原始碼</native>
+      </row>
+      <row id="sb.edit.htmlTool" state="3" changed="20150307110356">
+        <prev>HTML 編輯器</prev>
+        <native>HTML 編輯器 - 點擊開啟或關閉，開啟後可自由編輯頁面內容，並可透過快捷鍵或右鍵選單調用編輯功能。</native>
+      </row>
+      <row id="sb.edit.inline.add">為選取區加上行內註解</row>
+      <row id="sb.edit.remove.iframe">刪除所有 IFRAME 標籤</row>
+      <row id="sb.edit.remove.script">刪除所有 SCRIPT 標籤</row>
+      <row id="sb.edit.save">存檔</row>
+      <row id="sb.edit.sticky">自由註解</row>
+      <row id="sb.edit.sticky.create">添增&amp;sb.edit.sticky;</row>
+      <row id="sb.edit.undo">復原</row>
+      <row id="sb.highlighter">標示</row>
+      <row id="sb.highlighter.remove">清除選取區內的 ScrapBook 註記</row>
+      <row id="sb.highlighter.remove.all">清除所有 ScrapBook 註記</row>
+      <row id="sb.highlighterTool">標示工具 - 點擊以標示選取區。</row>
+      <row id="sb.indicators">顯示連結標記</row>
+      <row id="sb.info.home">首頁</row>
+      <row id="sb.info.sitemap">網站導覽</row>
+      <row id="sb.internalize">將內嵌的外部媒體存入資料目錄</row>
+      <row id="sb.locate">在側邊欄顯示此項目的位置</row>
+      <row id="sb.renew">重新擷取</row>
+      <row id="sb.source">開啟原始網址</row>
+      <row id="sb.toolbar.edit">編輯工具列</row>
+      <row id="sb.toolbar.info">顯示資訊列</row>
     </node>
-    <node class="TTextNode" name="hlCustom.dtd" created="20150307101553">
-      <row id="sb.hlCustom.background" state="3" changed="20150307103742">
-        <prev>Background</prev>
-        <native>背景</native>
-        <lang id="zh.tra" invalidated="1" status="2">背景</lang>
-        <lang id="zh" invalidated="1" status="2">背景</lang>
-      </row>
-      <row id="sb.hlCustom.bold" state="3" changed="20150307103742">
-        <prev>Bold</prev>
-        <native>太字</native>
-        <lang id="zh.tra" invalidated="1" status="2">粗體</lang>
-        <lang id="zh" invalidated="1" status="2">粗体</lang>
-      </row>
-      <row id="sb.hlCustom.border" state="3" changed="20150307103742">
-        <prev>Border</prev>
-        <native>枠</native>
-        <lang id="zh.tra" invalidated="1" status="2">框線</lang>
-        <lang id="zh" invalidated="1" status="2">边框</lang>
-      </row>
-      <row id="sb.hlCustom.box" state="3" changed="20150307103742">
-        <prev>Box</prev>
-        <native>囲み線</native>
-        <lang id="zh.tra" invalidated="1" status="2">方框</lang>
-        <lang id="zh" invalidated="1" status="2">方框</lang>
-      </row>
-      <row id="sb.hlCustom.color" state="3" changed="20150307103742">
-        <prev>Color</prev>
-        <native>色</native>
-        <lang id="zh.tra" invalidated="1" status="2">色彩</lang>
-        <lang id="zh" invalidated="1" status="2">颜色</lang>
-      </row>
-      <row id="sb.hlCustom.dashed" state="3" changed="20150307103742">
-        <prev>Dashed</prev>
-        <native>破線 (Dashed)</native>
-        <lang id="zh.tra" invalidated="1" status="2">虛線</lang>
-        <lang id="zh" invalidated="1" status="2">虚线</lang>
-      </row>
-      <row id="sb.hlCustom.dotted" state="3" changed="20150307103742">
-        <prev>Dotted</prev>
-        <native>点線 (Dotted)</native>
-        <lang id="zh.tra" invalidated="1" status="2">點線</lang>
-        <lang id="zh" invalidated="1" status="2">点划线</lang>
-      </row>
-      <row id="sb.hlCustom.double" state="3" changed="20150307103742">
-        <prev>Double</prev>
-        <native>二重線 (Double)</native>
-        <lang id="zh.tra" invalidated="1" status="2">雙線</lang>
-        <lang id="zh" invalidated="1" status="2">双线</lang>
-      </row>
-      <row id="sb.hlCustom.italic" state="3" changed="20150307103742">
-        <prev>Italic</prev>
-        <native>斜体</native>
-        <lang id="zh.tra" invalidated="1" status="2">斜體</lang>
-        <lang id="zh" invalidated="1" status="2">斜体</lang>
-      </row>
-      <row id="sb.hlCustom.line" state="3" changed="20150307103742">
-        <prev>Line-through</prev>
-        <native>取り消し線</native>
-        <lang id="zh.tra" invalidated="1" status="2">刪除線</lang>
-        <lang id="zh" invalidated="1" status="2">删除线</lang>
-      </row>
-      <row id="sb.hlCustom.medium" state="3" changed="20150307103742">
-        <prev>Medium</prev>
-        <native>中</native>
-        <lang id="zh.tra" invalidated="1" status="2">中</lang>
-        <lang id="zh" invalidated="1" status="2">中</lang>
-      </row>
-      <row id="sb.hlCustom.preset" state="3" changed="20150307103742">
-        <prev>Preset Styles</prev>
-        <native>プリセットスタイル</native>
-        <lang id="zh.tra" invalidated="1" status="2">預設樣式</lang>
-        <lang id="zh" invalidated="1" status="2">预置样式</lang>
-      </row>
-      <row id="sb.hlCustom.solid" state="3" changed="20150307103742">
-        <prev>Solid</prev>
-        <native>実線 (Solid)</native>
-        <lang id="zh.tra" invalidated="1" status="2">實線</lang>
-        <lang id="zh" invalidated="1" status="2">实线</lang>
-      </row>
-      <row id="sb.hlCustom.style" state="3" changed="20150307103742">
-        <prev>Style</prev>
-        <native>形式</native>
-        <lang id="zh.tra" invalidated="1" status="2">樣式</lang>
-        <lang id="zh" invalidated="1" status="2">样式</lang>
-      </row>
-      <row id="sb.hlCustom.text" state="3" changed="20150307103742">
-        <prev>Text</prev>
-        <native>文字</native>
-      </row>
-      <row id="sb.hlCustom.thick" state="3" changed="20150307103742">
-        <prev>Thick</prev>
-        <native>太い</native>
-        <lang id="zh.tra" invalidated="1" status="2">寬</lang>
-        <lang id="zh" invalidated="1" status="2">粗</lang>
-      </row>
-      <row id="sb.hlCustom.thin" state="3" changed="20150307103742">
-        <prev>Thin</prev>
-        <native>細い</native>
-        <lang id="zh.tra" invalidated="1" status="2">細</lang>
-        <lang id="zh" invalidated="1" status="2">细</lang>
-      </row>
-      <row id="sb.hlCustom.type" state="3" changed="20150307103742">
-        <prev>形式</prev>
-        <native>種類</native>
-        <lang id="zh" invalidated="1" status="2">类型</lang>
-        <lang id="ja" invalidated="1" status="2">形式</lang>
-      </row>
-      <row id="sb.hlCustom.underline" state="3" changed="20150307103742">
-        <prev>Underline</prev>
-        <native>下線</native>
-        <lang id="zh.tra" invalidated="1" status="2">底線</lang>
-        <lang id="zh" invalidated="1" status="2">下划线</lang>
-      </row>
-      <row id="sb.hlCustom.width" state="3" changed="20150307103742">
-        <prev>Width</prev>
-        <native>太さ</native>
-        <lang id="zh.tra" invalidated="1" status="2">寬度</lang>
-        <lang id="zh" invalidated="1" status="2">宽度</lang>
-      </row>
+    <node class="TTextNode" name="hlCustom.dtd" created="20150307105139">
+      <row id="sb.hlCustom.background">背景</row>
+      <row id="sb.hlCustom.bold">粗體</row>
+      <row id="sb.hlCustom.border">框線</row>
+      <row id="sb.hlCustom.box">方框</row>
+      <row id="sb.hlCustom.color">色彩</row>
+      <row id="sb.hlCustom.dashed">虛線</row>
+      <row id="sb.hlCustom.dotted">點線</row>
+      <row id="sb.hlCustom.double">雙線</row>
+      <row id="sb.hlCustom.italic">斜體</row>
+      <row id="sb.hlCustom.line">刪除線</row>
+      <row id="sb.hlCustom.medium">中</row>
+      <row id="sb.hlCustom.preset">預設樣式</row>
+      <row id="sb.hlCustom.solid">實線</row>
+      <row id="sb.hlCustom.style">樣式</row>
+      <row id="sb.hlCustom.text">文字</row>
+      <row id="sb.hlCustom.thick">寬</row>
+      <row id="sb.hlCustom.thin">細</row>
+      <row id="sb.hlCustom.type">類型</row>
+      <row id="sb.hlCustom.underline">底線</row>
+      <row id="sb.hlCustom.width">寬度</row>
     </node>
-    <node class="TTextNode" name="mbManage.dtd" created="20150307101553">
-      <row id="mb.button.add">追加</row>
-      <row id="mb.button.edit">編集</row>
-      <row id="mb.button.remove">削除</row>
-      <row id="mb.manager">
-        <native>Multi-ScrapBook Manager</native>
-        <lang id="zh.tra" status="2">多重 ScrapBook 管理員</lang>
-        <lang id="zh" status="2">多重 ScrapBook 管理器</lang>
-      </row>
-      <row id="mb.prop.name">名前</row>
-      <row id="mb.prop.path">パス</row>
+    <node class="TTextNode" name="mbManage.dtd" created="20150307105139">
+      <row id="mb.button.add">新增</row>
+      <row id="mb.button.edit">編輯</row>
+      <row id="mb.button.remove">刪除</row>
+      <row id="mb.manager">多重 ScrapBook 管理員</row>
+      <row id="mb.prop.name">名稱</row>
+      <row id="mb.prop.path">路徑</row>
     </node>
-    <node class="TTextNode" name="multiple.dtd" created="20150307101553">
-      <row id="sb.multiple.charset" state="3" changed="20150307103742">
-        <prev>フィルタ（正規表現）</prev>
-        <native>文字セット</native>
-      </row>
-      <row id="sb.multiple.detector" state="3" changed="20150307103742">
-        <prev>ウェブサイトのタイトル</prev>
-        <native>URL検出ツール</native>
-      </row>
-      <row id="sb.multiple.detector.bookmarks" state="3" changed="20150307103742">
-        <prev>リンクのタイトル</prev>
-        <native>ブックマーク</native>
-      </row>
-      <row id="sb.multiple.detector.clear" state="3" changed="20150307103742">
-        <prev>タイトル</prev>
-        <native>クリア</native>
-      </row>
-      <row id="sb.multiple.detector.local" state="3" changed="20150307103742">
-        <prev>タイムアウト</prev>
-        <native>指定したフォルダ以下のローカルHTML</native>
-      </row>
-      <row id="sb.multiple.detector.plink" state="3" changed="20150307103742">
-        <prev>メソッド</prev>
-        <native>ページ内のすべてのリンク</native>
-      </row>
-      <row id="sb.multiple.detector.slink" state="3" changed="20150307103742">
-        <prev>文字セット</prev>
-        <native>選択範囲内のすべてのリンク</native>
-      </row>
-      <row id="sb.multiple.detector.tabs" state="3" changed="20150307103742">
-        <prev>URL （改行して複数入力可）</prev>
-        <native>現在のウィンドウに開かれたすべてのタブ</native>
-      </row>
-      <row id="sb.multiple.filter" state="3" changed="20150307103742">
-        <prev>フィルタ (正規表現)</prev>
-        <native>フィルタ（正規表現）</native>
-      </row>
-      <row id="sb.multiple.timeout" state="3" changed="20150307103742">
-        <prev>ページ内のすべてのリンク</prev>
-        <native>タイムアウト</native>
-      </row>
-      <row id="sb.multiple.title" state="3" changed="20150307103742">
-        <prev>選択範囲内のすべてのリンク</prev>
-        <native>タイトル</native>
-      </row>
-      <row id="sb.multiple.url" state="3" changed="20150307103742">
-        <prev>現在のウィンドウに開かれたすべてのタブ</prev>
-        <native>URL （改行して複数入力可）</native>
-      </row>
-      <row id="sbp.multiple.downloadmethod" state="3" changed="20150307103742">
-        <prev>指定したフォルダ以下のローカルHTML</prev>
-        <native>メソッド</native>
-      </row>
-      <row id="sbp.multiple.exclude" state="3" changed="20150307103742">
-        <prev>ブックマーク</prev>
-        <native>保存先フォルダにすでに存在するアドレスは無視する</native>
-      </row>
-      <row id="sbp.multiple.titleoflink" state="3" changed="20150307103742">
-        <prev>クリア</prev>
-        <native>リンクのタイトル</native>
-      </row>
-      <row id="sbp.multiple.titleofwebsite" state="3" changed="20150307103742">
-        <prev>保存先フォルダにすでに存在するアドレスは無視する</prev>
-        <native>ウェブサイトのタイトル</native>
-      </row>
+    <node class="TTextNode" name="multiple.dtd" created="20150307105139">
+      <row id="sb.multiple.charset">字元集</row>
+      <row id="sb.multiple.detector">自動偵測 URL</row>
+      <row id="sb.multiple.detector.bookmarks">書籤</row>
+      <row id="sb.multiple.detector.clear">清除</row>
+      <row id="sb.multiple.detector.local">某目錄下所有的 HTML 檔</row>
+      <row id="sb.multiple.detector.plink">本頁所有連結</row>
+      <row id="sb.multiple.detector.slink">選取區中所有連結</row>
+      <row id="sb.multiple.detector.tabs">此視窗中所有的分頁</row>
+      <row id="sb.multiple.filter">篩選條件（使用規則運算式）</row>
+      <row id="sb.multiple.timeout">逾時</row>
+      <row id="sb.multiple.title">標題</row>
+      <row id="sb.multiple.url">URL (每行一個 URL)</row>
+      <row id="sbp.multiple.downloadmethod">方式</row>
+      <row id="sbp.multiple.exclude">略過已存在於目標資料夾的位址</row>
+      <row id="sbp.multiple.titleoflink">連結標題</row>
+      <row id="sbp.multiple.titleofwebsite">網站標題</row>
     </node>
-    <node class="TTextNode" name="note.dtd" created="20150307101553">
-      <row id="sb.note.autolinefeed">自動改行</row>
-      <row id="sb.note.autolinefeed.t">&amp;sb.note.htmlview;時に行末に&amp;lt;br&amp;gt;タグを自動で付加します</row>
-      <row id="sb.note.close">閉じる</row>
-      <row id="sb.note.exit">終了</row>
+    <node class="TTextNode" name="note.dtd" created="20150307105139">
+      <row id="sb.note.autolinefeed">自動斷行</row>
+      <row id="sb.note.autolinefeed.t">在 HTML 預覽時，於每行最後自動添加 &amp;lt;br&amp;gt; 標籤。</row>
+      <row id="sb.note.close">關閉</row>
+      <row id="sb.note.exit">離開</row>
       <row id="sb.note.exit.accesskey">X</row>
-      <row id="sb.note.fontsize">文字サイズ</row>
+      <row id="sb.note.fontsize">文字尺寸</row>
       <row id="sb.note.fontsize.accesskey">F</row>
-      <row id="sb.note.help">ヘルプ</row>
-      <row id="sb.note.htmlview">HTMLビュー</row>
+      <row id="sb.note.help">說明</row>
+      <row id="sb.note.htmlview">HTML 預覽</row>
       <row id="sb.note.htmlview.accesskey">H</row>
-      <row id="sb.note.normalview">通常ビュー</row>
+      <row id="sb.note.normalview">一般模式</row>
       <row id="sb.note.normalview.accesskey">N</row>
-      <row id="sb.note.print">印刷</row>
+      <row id="sb.note.print">列印</row>
       <row id="sb.note.print.accesskey">P</row>
-      <row id="sb.note.save">保存</row>
+      <row id="sb.note.save">存檔</row>
       <row id="sb.note.save.accesskey">S</row>
-      <row id="sb.note.template">テンプレートHTMLの編集</row>
-      <row id="sb.note.tools">ツール</row>
+      <row id="sb.note.template">編輯 HTML 樣版</row>
+      <row id="sb.note.tools">工具</row>
       <row id="sb.note.tools.accesskey">T</row>
     </node>
-    <node class="TTextNode" name="notify.dtd" created="20150307101553">
-      <row id="sb.capture.complete">取り込み完了</row>
-      <row id="sb.capture.complete.all">すべての取り込みが完了しました。</row>
+    <node class="TTextNode" name="notify.dtd" created="20150307105139">
+      <row id="sb.capture.complete">擷取完成。</row>
+      <row id="sb.capture.complete.all">擷取全部完成。</row>
     </node>
-    <node class="TTextNode" name="output.dtd" created="20150307101553">
-      <row id="sb.output.option.all">すべてを出力</row>
-      <row id="sb.output.option.frame">フレーム付きのHTMLを出力</row>
-      <row id="sb.output.option.open">HTML出力後、ブラウザで開く</row>
+    <node class="TTextNode" name="output.dtd" created="20150307105139">
+      <row id="sb.output.option.all">匯出所有文件</row>
+      <row id="sb.output.option.frame">使用頁框格式</row>
+      <row id="sb.output.option.open">匯出後，在瀏覽器開啟匯出結果</row>
     </node>
-    <node class="TTextNode" name="overlay.dtd" created="20150307101553">
-      <row id="sb.capture.alltabs">すべてのタブを取り込み</row>
-      <row id="sb.capture.bookmark">ScrapBookにブックマーク</row>
-      <row id="sb.capture.entire">ページの取り込み</row>
-      <row id="sb.capture.entire.as">ページの詳細な取り込み</row>
-      <row id="sb.capture.frame">フレームの取り込み</row>
-      <row id="sb.capture.frame.as">フレームの詳細な取り込み</row>
-      <row id="sb.capture.partial">選択範囲の取り込み</row>
-      <row id="sb.capture.partial.as">選択範囲の詳細な取り込み</row>
-      <row id="sb.capture.target">リンク先の取り込み</row>
-      <row id="sb.capture.target.as">リンク先の詳細な取り込み</row>
-      <row id="sb.editbefore">取り込み前編集モード</row>
-      <row id="sb.menubar">メニュー</row>
-      <row id="sb.sidebar">サイドバーに表示</row>
+    <node class="TTextNode" name="overlay.dtd" created="20150307105139">
+      <row id="sb.capture.alltabs">擷取所有分頁</row>
+      <row id="sb.capture.bookmark">加入 ScrapBook 書籤</row>
+      <row id="sb.capture.entire">擷取網頁</row>
+      <row id="sb.capture.entire.as">擷取網頁細節</row>
+      <row id="sb.capture.frame">擷取頁框</row>
+      <row id="sb.capture.frame.as">擷取頁框細節</row>
+      <row id="sb.capture.partial">擷取選擇區域</row>
+      <row id="sb.capture.partial.as">擷取選擇區域細節</row>
+      <row id="sb.capture.target">擷取連結</row>
+      <row id="sb.capture.target.as">擷取連結細節</row>
+      <row id="sb.editbefore">編輯後擷取</row>
+      <row id="sb.menubar">選單列</row>
+      <row id="sb.sidebar">在側邊欄顯示</row>
     </node>
-    <node class="TTextNode" name="prefs.dtd" created="20150307101553">
-      <row id="sb.button.browse">参照</row>
-      <row id="sb.button.customize">カスタマイズ</row>
-      <row id="sb.button.show">ファイルを表示</row>
-      <row id="sb.prefs.advanced">詳細</row>
-      <row id="sb.prefs.autoOutput">
-        <native>Automatically output tree as HTML when data is changed</native>
-        <lang id="zh.tra" status="2">更動資料時，自動將資料列表匯出為 HTML</lang>
-        <lang id="zh" status="2">更动项目时，自动导出项目列表</lang>
-      </row>
-      <row id="sb.prefs.confirmDelete">削除確認をする</row>
-      <row id="sb.prefs.data">データ保存先</row>
-      <row id="sb.prefs.data.custom">次のフォルダ</row>
-      <row id="sb.prefs.data.default">デフォルト (プロファイルフォルダ下)</row>
-      <row id="sb.prefs.data.tips">ScrapBook のデータを保存するためのフォルダを選択してください。</row>
-      <row id="sb.prefs.edit">編集</row>
-      <row id="sb.prefs.edit.autoEditNoteX">
-        <native>Auto edit Note Pages</native>
-        <lang id="zh.tra" status="2">筆記頁面自動進入編輯模式</lang>
-        <lang id="zh" status="2">便签页面自动进入编辑模式</lang>
-      </row>
-      <row id="sb.prefs.edit.insertDateFormat">
-        <native>Insert Date Format (strftime):</native>
-        <lang id="zh.tra" percent="99" status="1">插入日期格式 (strftime):</lang>
-        <lang id="zh" percent="99" status="1">插入日期格式 (strftime):</lang>
-      </row>
-      <row id="sb.prefs.edit.wrapperFormat">
-        <native>HTML formatting template</native>
-        <lang id="zh.tra" status="2">HTML 格式化模版</lang>
-        <lang id="zh" status="2">HTML 格式化模版</lang>
-      </row>
-      <row id="sb.prefs.keys">
-        <native>Keys</native>
-        <lang id="zh.tra" status="2">按鍵設定</lang>
-        <lang id="zh" status="2">关键字</lang>
-      </row>
-      <row id="sb.prefs.main">一般</row>
-      <row id="sb.prefs.multibook.enabled">Multi-ScrapBook 機能を有効にする</row>
-      <row id="sb.prefs.multibook.tips">複数のデータ保存先を設定し、ツールバーボタンから素早く切り替えることができます。</row>
-      <row id="sb.prefs.notifyOnComplete">取り込みが完了したら通知する</row>
-      <row id="sb.prefs.notifyPageCaptured">
-        <native>Show notification on browsing a page having been captured</native>
-        <lang id="zh.tra" status="2">瀏覽擷取過的頁面時，顯示提醒視窗</lang>
-        <lang id="zh" status="2">浏览获取过的页面时，显示提示</lang>
-      </row>
-      <row id="sb.prefs.organize">整理</row>
-      <row id="sb.prefs.restart">変更は Firefox 再起動後に反映されます。</row>
-      <row id="sb.prefs.save">保存</row>
-      <row id="sb.prefs.showDetailOnDrop">サイドバーへのドラッグ＆ドロップ時、詳細な取り込みをする</row>
-      <row id="sb.prefs.tabs">タブ</row>
-      <row id="sb.prefs.tabs.note">ノートの編集</row>
-      <row id="sb.prefs.tabs.tips">次の操作を新しいタブで開く</row>
-      <row id="sb.prefs.tree.autoCollapse">ツリーフォルダを開いたとき、他のフォルダを自動的に閉じる</row>
-      <row id="sb.prefs.tree.unshift">アイテムを追加する位置:</row>
-      <row id="sb.prefs.tree.unshift.bottom">フォルダの一番下</row>
-      <row id="sb.prefs.tree.unshift.top">フォルダの一番上</row>
-      <row id="sb.prefs.ui.bookmarkMenu">'ScrapBookにブックマーク' メニューを表示</row>
-      <row id="sb.prefs.ui.contextMenu">ブラウザのコンテキストメニューに表示</row>
-      <row id="sb.prefs.ui.contextSubMenu">サブメニュー</row>
-      <row id="sb.prefs.ui.folderList.maxEntries.1">最近使用したフォルダを</row>
-      <row id="sb.prefs.ui.folderList.maxEntries.2">個まで表示する</row>
-      <row id="sb.prefs.ui.menuBar">メニューバーに表示</row>
-      <row id="sb.prefs.ui.menuBar.icon">アイコン</row>
-      <row id="sb.prefs.ui.statusBar">ステータスバーに表示</row>
-      <row id="sb.prefs.ui.toolsMenu">'ツール' メニューに表示</row>
+    <node class="TTextNode" name="prefs.dtd" created="20150307105139">
+      <row id="sb.button.browse">瀏覽</row>
+      <row id="sb.button.customize">自訂</row>
+      <row id="sb.button.show">顯示檔案</row>
+      <row id="sb.prefs.advanced">進階設定</row>
+      <row id="sb.prefs.autoOutput">更動資料時，自動將資料列表匯出為 HTML</row>
+      <row id="sb.prefs.confirmDelete">刪除資料需要確認</row>
+      <row id="sb.prefs.data">擷取資料存放處</row>
+      <row id="sb.prefs.data.custom">存放至</row>
+      <row id="sb.prefs.data.default">預設（在您的個人設定檔資料夾中）</row>
+      <row id="sb.prefs.data.tips">請選擇 ScrapBook 存放擷取資料的資料夾</row>
+      <row id="sb.prefs.edit">編輯設定</row>
+      <row id="sb.prefs.edit.autoEditNoteX">筆記頁面自動進入編輯模式</row>
+      <row id="sb.prefs.edit.insertDateFormat">插入日期格式 (strftime):</row>
+      <row id="sb.prefs.edit.wrapperFormat">HTML 格式化模版</row>
+      <row id="sb.prefs.keys">按鍵設定</row>
+      <row id="sb.prefs.main">一般設定</row>
+      <row id="sb.prefs.multibook.enabled">啟用多重 ScrapBook 功能</row>
+      <row id="sb.prefs.multibook.tips">這個選項可讓你指定一個以上的資料存放處，並以工具列按鈕快速切換欲儲存位置。</row>
+      <row id="sb.prefs.notifyOnComplete">顯示「擷取完畢」提醒視窗</row>
+      <row id="sb.prefs.notifyPageCaptured">瀏覽擷取過的頁面時，顯示提醒視窗</row>
+      <row id="sb.prefs.organize">組織設定</row>
+      <row id="sb.prefs.restart">需重新啟動 Firefox 方能生效。</row>
+      <row id="sb.prefs.save">儲存設定</row>
+      <row id="sb.prefs.showDetailOnDrop">以拖曳方式擷取資料時，顯示「詳細資訊」對話方塊</row>
+      <row id="sb.prefs.tabs">分頁設定</row>
+      <row id="sb.prefs.tabs.note">編輯筆記</row>
+      <row id="sb.prefs.tabs.tips">操作下列項目時，以分頁開啟</row>
+      <row id="sb.prefs.tree.autoCollapse">開啟某資料夾時，自動收合其他資料夾</row>
+      <row id="sb.prefs.tree.unshift">新增資料時，應放在</row>
+      <row id="sb.prefs.tree.unshift.bottom">最後面</row>
+      <row id="sb.prefs.tree.unshift.top">最前面</row>
+      <row id="sb.prefs.ui.bookmarkMenu">顯示「加入 ScrapBook 書籤」選項</row>
+      <row id="sb.prefs.ui.contextMenu">於快捷選單中顯示擷取選項</row>
+      <row id="sb.prefs.ui.contextSubMenu">以子選單方式顯示</row>
+      <row id="sb.prefs.ui.folderList.maxEntries.1">最多顯示</row>
+      <row id="sb.prefs.ui.folderList.maxEntries.2">項最近使用的資料夾</row>
+      <row id="sb.prefs.ui.menuBar">在選單列上顯示「ScrapBook」選單</row>
+      <row id="sb.prefs.ui.menuBar.icon">顯示為圖示</row>
+      <row id="sb.prefs.ui.statusBar">在狀態列中顯示圖示</row>
+      <row id="sb.prefs.ui.toolsMenu">在「工具」功能表中顯示選項</row>
     </node>
-    <node class="TTextNode" name="property.dtd" created="20150307101553">
-      <row id="sb.prop.content">本文</row>
-      <row id="sb.prop.date" state="3" changed="20150307102301">
-        <prev>日時</prev>
-        <native>日時"&gt;&lt;!-- left for addon compatibility --&gt;#l&lt;!ENTITY sb.prop.create "Create</native>
-      </row>
-      <row id="sb.prop.encode">文字コード</row>
-      <row id="sb.prop.file">ファイル</row>
-      <row id="sb.prop.folder">フォルダ</row>
-      <row id="sb.prop.general">一般情報</row>
-      <row id="sb.prop.icon">アイコン</row>
-      <row id="sb.prop.icon.change">アイコン変更</row>
-      <row id="sb.prop.icon.custom">ユーザーアイコンを選択</row>
-      <row id="sb.prop.icon.default">デフォルト</row>
-      <row id="sb.prop.icon.favicon">faviconを選択</row>
-      <row id="sb.prop.lock">
-        <native>Lock</native>
-        <lang id="zh.tra" status="2">鎖定</lang>
-        <lang id="zh" status="2">上锁</lang>
-      </row>
-      <row id="sb.prop.mark">マーク</row>
-      <row id="sb.prop.modify">
-        <native>Modify</native>
-        <lang id="zh.tra" status="2">修改時間</lang>
-        <lang id="zh" status="2">修改时间</lang>
-      </row>
-      <row id="sb.prop.size">サイズ</row>
-      <row id="sb.prop.type">形式</row>
+    <node class="TTextNode" name="property.dtd" created="20150307105139">
+      <row id="sb.prop.content">內容</row>
+      <row id="sb.prop.create">建立時間</row>
+      <row id="sb.prop.date">日期</row>
+      <row id="sb.prop.encode">字集</row>
+      <row id="sb.prop.file">檔案</row>
+      <row id="sb.prop.folder">資料夾</row>
+      <row id="sb.prop.general">一般資訊</row>
+      <row id="sb.prop.icon">圖示</row>
+      <row id="sb.prop.icon.change">更換</row>
+      <row id="sb.prop.icon.custom">選擇自訂圖示</row>
+      <row id="sb.prop.icon.default">預設圖示</row>
+      <row id="sb.prop.icon.favicon">選擇網站圖示</row>
+      <row id="sb.prop.lock">鎖定</row>
+      <row id="sb.prop.mark">標示</row>
+      <row id="sb.prop.modify">修改時間</row>
+      <row id="sb.prop.size">文件大小</row>
+      <row id="sb.prop.type">型態</row>
     </node>
-    <node class="TTextNode" name="repair.dtd" created="20150307101553">
-      <row id="sb.repair.complete">完了しました。</row>
-      <row id="sb.repair.favicons">favicon（ツリーのアイコン）を復元</row>
-      <row id="sb.repair.favicons.descript">ScrapBookツリーのfaviconが突然表示されなくなった場合はこちらを試してください。データ保存先フォルダを移動した際などに狂いが生じたfaviconのパスを再変換します。</row>
-      <row id="sb.repair.rdfFile">scrapbook.rdf の復元</row>
-      <row id="sb.repair.rdfFile.descript">ScrapBookツリーが突然表示されなくなった場合はこちらを試してください。backupフォルダにバックアップされた scrapbook.rdf からツリー構造を復元します。</row>
-      <row id="sb.repair.rdfFile.file">ファイル</row>
-      <row id="sb.repair.rdfFile.select">バックアップ元のファイルを選択してください。</row>
-      <row id="sb.repair.rdfFile.size">サイズ</row>
-      <row id="sb.repair.rdfFile.time">日時</row>
+    <node class="TTextNode" name="repair.dtd" created="20150307105139">
+      <row id="sb.repair.complete">完成。</row>
+      <row id="sb.repair.favicons">復原圖示</row>
+      <row id="sb.repair.favicons.descript">如果許多擷取文件中的網站圖示消失了，就試試這個方法。</row>
+      <row id="sb.repair.rdfFile">復原 scrapbook.rdf</row>
+      <row id="sb.repair.rdfFile.descript">如果 ScrapBook 的資料突然都不見了，就試試這個方法。</row>
+      <row id="sb.repair.rdfFile.file">檔案</row>
+      <row id="sb.repair.rdfFile.select">選擇欲復原的檔案版本。</row>
+      <row id="sb.repair.rdfFile.size">尺寸</row>
+      <row id="sb.repair.rdfFile.time">時間</row>
     </node>
-    <node class="TTextNode" name="scrapbook.dtd" created="20150307101553">
-      <row id="sb.new.folder">新しいフォルダ</row>
-      <row id="sb.new.note">新しいノート</row>
-      <row id="sb.new.notex">新しいノートページ</row>
-      <row id="sb.new.separator">新しい区切り</row>
-      <row id="sb.note.close">閉じる</row>
-      <row id="sb.note.opentab">タブで開く</row>
-      <row id="sb.toggle.all">すべてのフォルダを開く／閉じる</row>
-      <row id="sb.tools">ツール</row>
-      <row id="sb.tools.addons">アドオン機能</row>
-      <row id="sb.tools.calculate">データサイズ計算</row>
-      <row id="sb.tools.combine">結合ウィザード</row>
-      <row id="sb.tools.directory">ScrapBookフォルダ</row>
-      <row id="sb.tools.manage">管理</row>
-      <row id="sb.tools.multiple">URL一括取り込み</row>
+    <node class="TTextNode" name="scrapbook.dtd" created="20150307105139">
+      <row id="sb.new.folder">開新資料夾</row>
+      <row id="sb.new.note">新增筆記</row>
+      <row id="sb.new.notex">新增筆記頁面</row>
+      <row id="sb.new.separator">新增分隔線</row>
+      <row id="sb.note.close">關閉</row>
+      <row id="sb.note.opentab">開啟於新分頁中</row>
+      <row id="sb.toggle.all">開啟/收合所有資料夾</row>
+      <row id="sb.tools">工具</row>
+      <row id="sb.tools.addons">附加元件功能</row>
+      <row id="sb.tools.calculate">計算資料容量</row>
+      <row id="sb.tools.combine">文件合併精靈</row>
+      <row id="sb.tools.directory">開啟 ScrapBook 目錄</row>
+      <row id="sb.tools.manage">管理擷取資料</row>
+      <row id="sb.tools.multiple">擷取多重 URL</row>
       <row id="sb.tools.options">設定</row>
-      <row id="sb.tools.output">ツリーのHTML出力</row>
-      <row id="sb.tools.repair">緊急時の修復ツール</row>
-      <row id="sb.tools.sorttree">ツリー全体をソート</row>
-      <row id="sb.tools.trade">インポート/エクスポート</row>
+      <row id="sb.tools.output">將資料列表匯出為 HTML</row>
+      <row id="sb.tools.repair">緊急救援</row>
+      <row id="sb.tools.sorttree">所有資料排序</row>
+      <row id="sb.tools.trade">匯入 / 匯出</row>
     </node>
-    <node class="TTextNode" name="sort.dtd" created="20150307101553">
-      <row id="sb.sort">ソート</row>
-      <row id="sb.sort.date.asc">日時でソート (古い順)</row>
-      <row id="sb.sort.date.desc">日時でソート (新しい順)</row>
-      <row id="sb.sort.grouping">
-        <native>Group by Type</native>
-        <lang id="zh.tra" status="2">依型態分組</lang>
-        <lang id="zh" status="2">依型态分组</lang>
-      </row>
-      <row id="sb.sort.recursive">サブフォルダ内も再帰的にソートする</row>
-      <row id="sb.sort.reverse">逆順にソート</row>
-      <row id="sb.sort.title.asc">タイトルでソート (A &amp;gt; Z)</row>
-      <row id="sb.sort.title.desc">タイトルでソート (Z &amp;gt; A)</row>
-      <row id="sb.sort.warning">注意：ソートを実行すると元には戻せません。</row>
+    <node class="TTextNode" name="sort.dtd" created="20150307105139">
+      <row id="sb.sort">排序</row>
+      <row id="sb.sort.date.asc">依日期排列 (舊 &amp;gt; 新)</row>
+      <row id="sb.sort.date.desc">依日期排列 (新 &amp;gt; 舊)</row>
+      <row id="sb.sort.grouping">依型態分組</row>
+      <row id="sb.sort.recursive">一併排列子資料夾內的資料</row>
+      <row id="sb.sort.reverse">反序</row>
+      <row id="sb.sort.title.asc">依標題排列 (A &amp;gt; Z)</row>
+      <row id="sb.sort.title.desc">依標題排列 (Z &amp;gt; A)</row>
+      <row id="sb.sort.warning">請注意：此動作無法復原。</row>
     </node>
-    <node class="TTextNode" name="trade.dtd" created="20150307101553">
-      <row id="sb.trade.export">エクスポート</row>
-      <row id="sb.trade.exportFolder">
-        <native>Export folder items (re-import with care)</native>
-        <lang id="zh.tra" status="2">匯出資料夾項目 (匯入時注意順序)</lang>
-        <lang id="zh" status="2">导出文件夹项目 (导入时注意顺序)</lang>
-      </row>
-      <row id="sb.trade.import">インポート</row>
-      <row id="sb.trade.remove">インポート後にファイルを削除する</row>
-      <row id="sb.trade.restore">フォルダ構成を復元しながらインポート</row>
-      <row id="sb.trade.time">エクスポートした日時</row>
-      <row id="sb.trade.update">
-        <native>Import as latest ScrapBook X format</native>
-        <lang id="zh.tra" status="2">匯入為最新版 ScrapBook X 格式</lang>
-        <lang id="zh" status="2">导入为最新版 ScrapBook X 格式</lang>
-      </row>
+    <node class="TTextNode" name="trade.dtd" created="20150307105139">
+      <row id="sb.trade.export">匯出</row>
+      <row id="sb.trade.exportFolder">匯出資料夾項目 (匯入時注意順序)</row>
+      <row id="sb.trade.import">匯入</row>
+      <row id="sb.trade.remove">匯入後移除檔案</row>
+      <row id="sb.trade.restore">匯入並重製資料夾結構</row>
+      <row id="sb.trade.time">匯出時間</row>
+      <row id="sb.trade.update">匯入為最新版 ScrapBook X 格式</row>
     </node>
-    <node class="TTextNode" name="tree.dtd" created="20150307101553">
+    <node class="TTextNode" name="tree.dtd" created="20150307105139">
       <row id="mb.manage">管理</row>
-      <row id="mb.profileFolder">プロファイルフォルダ</row>
-      <row id="sb.copy">
-        <native>Copy</native>
-        <lang id="zh.tra" status="2">複製</lang>
-        <lang id="zh" status="2">复制</lang>
-      </row>
-      <row id="sb.export">エクスポート</row>
-      <row id="sb.folder.combine">結合ビュー</row>
-      <row id="sb.folder.manage">フォルダの管理</row>
-      <row id="sb.folder.openall">すべてタブで開く</row>
-      <row id="sb.internalize">
-        <native>Localize Embedded External Media</native>
-        <lang id="zh.tra" status="2">將內嵌的外部媒體存入資料目錄</lang>
-        <lang id="zh" status="2">将内嵌的外部媒体存入资料目录</lang>
-      </row>
-      <row id="sb.listview">リストビュー</row>
+      <row id="mb.profileFolder">設定檔資料夾</row>
+      <row id="sb.copy">複製</row>
+      <row id="sb.export">匯出</row>
+      <row id="sb.folder.combine">合併檢視</row>
+      <row id="sb.folder.manage">管理資料夾</row>
+      <row id="sb.folder.openall">以分頁開啟所有資料</row>
+      <row id="sb.internalize">將內嵌的外部媒體存入資料目錄</row>
+      <row id="sb.listview">列表模式</row>
       <row id="sb.move">移動</row>
-      <row id="sb.move.into">フォルダへ移動</row>
-      <row id="sb.multi">
-        <native>Multi-ScrapBook</native>
-        <lang id="zh.tra" status="2">多重 ScrapBook</lang>
-        <lang id="zh" status="2">多重 ScrapBook</lang>
-      </row>
-      <row id="sb.new.folder">新しいフォルダ</row>
-      <row id="sb.new.note">新しいノート</row>
-      <row id="sb.new.notex">新しいノートページ</row>
-      <row id="sb.new.separator">新しい区切り</row>
-      <row id="sb.open">開く</row>
-      <row id="sb.open.newtab">新しいタブで開く</row>
-      <row id="sb.open.source">ソースURLを開く</row>
-      <row id="sb.open.tab">タブで開く</row>
-      <row id="sb.prop.comment">コメント</row>
+      <row id="sb.move.into">移到其他資料夾</row>
+      <row id="sb.multi">多重 ScrapBook</row>
+      <row id="sb.new.folder">開新資料夾</row>
+      <row id="sb.new.note">新增筆記</row>
+      <row id="sb.new.notex">新增筆記頁面</row>
+      <row id="sb.new.separator">新增分隔線</row>
+      <row id="sb.open">開啟</row>
+      <row id="sb.open.newtab">開啟於新分頁中</row>
+      <row id="sb.open.source">開啟原始網址</row>
+      <row id="sb.open.tab">開啟於新分頁中</row>
+      <row id="sb.prop.comment">文件評註</row>
       <row id="sb.prop.id.date">
         <native>ID</native>
         <lang id="zh.tra" status="2">ID</lang>
         <lang id="zh" status="2">ID</lang>
         <lang id="ja" status="2">ID</lang>
       </row>
-      <row id="sb.prop.title">タイトル</row>
-      <row id="sb.property">プロパティ</row>
-      <row id="sb.remove">削除</row>
-      <row id="sb.renew">再取り込み</row>
-      <row id="sb.search">検索</row>
-      <row id="sb.search.all">すべて</row>
-      <row id="sb.search.cache">全文検索用キャッシュを更新</row>
-      <row id="sb.search.clear">入力履歴のクリア</row>
-      <row id="sb.search.cs">大文字/小文字の区別</row>
-      <row id="sb.search.days">日数でフィルタリング</row>
-      <row id="sb.search.fulltext">全文検索</row>
-      <row id="sb.search.re">正規表現の使用</row>
-      <row id="sb.show.files">ファイルを表示</row>
-      <row id="sb.sort.folder">フォルダ内をソート</row>
-      <row id="sb.tools">ツール</row>
+      <row id="sb.prop.title">標題</row>
+      <row id="sb.property">文件屬性</row>
+      <row id="sb.remove">刪除</row>
+      <row id="sb.renew">重新擷取</row>
+      <row id="sb.search">搜尋</row>
+      <row id="sb.search.all">所有欄位</row>
+      <row id="sb.search.cache">更新全文搜尋快取</row>
+      <row id="sb.search.clear">清除搜尋歷史記錄</row>
+      <row id="sb.search.cs">大小寫需相符</row>
+      <row id="sb.search.days">依擷取日期檢視</row>
+      <row id="sb.search.fulltext">全文搜尋</row>
+      <row id="sb.search.re">使用規則運算式</row>
+      <row id="sb.show.files">顯示相關檔案</row>
+      <row id="sb.sort.folder">資料夾文件排序</row>
+      <row id="sb.tools">工具</row>
       <row id="sbp.prop.url">
         <native>URL</native>
         <lang id="zh" status="2">URL</lang>
