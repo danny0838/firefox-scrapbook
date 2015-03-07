@@ -30,10 +30,10 @@
 <!ENTITY sb.edit.html.file.format "Select insert format:">
 <!ENTITY sb.edit.html.backup "Backup the Current Page">
 <!ENTITY sb.edit.html.backup.desc "Description:">
-<!ENTITY sb.edit.html.menu.basic "Text">
+<!ENTITY sb.edit.html.menu.basic "文字">
 <!ENTITY sb.edit.html.menu.block "Block">
 <!ENTITY sb.edit.html.menu.insert "Insert">
-<!ENTITY sb.edit.html.menu.wrapper "Advanced">
+<!ENTITY sb.edit.html.menu.wrapper "詳細">
 <!ENTITY sb.edit.html.menuitem.insertSource "Insert or Edit Source">
 <!ENTITY sb.edit.html.menuitem.removeFormat "Clear Formats">
 <!ENTITY sb.edit.html.menuitem.unlink "Clear Links">

@@ -4,7 +4,7 @@
 <!ENTITY sb.edit.eraser "DOM 橡皮- 删除不想要的元素或 ScrapBook 注记">
 <!ENTITY sb.edit.undo "撤销">
 <!ENTITY sb.edit.save "保存">
-<!ENTITY sb.edit.comment "展开注释区">
+<!ENTITY sb.edit.comment "展开注释区域">
 <!ENTITY sb.edit.annotationTool "注解工具 - 点击建立自由注解，锚定于选取区后，无选取区则自由浮动。">
 <!ENTITY sb.edit.sticky "即时贴"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.sticky.create "创建即时贴"><!-- left for addon compatibility -->
