@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<textdefinition version="4.0.352" name="Document Type Definition (DTD)" detectfileformat="0" fileformat="tffUtf8">
+  <item type="ctContext" before="&lt;!ENTITY " after=" "/>
+  <item type="ctText" before="&quot;" after="&quot;" escape="seCpp"/>
+</textdefinition>
