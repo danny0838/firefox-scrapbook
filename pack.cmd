@@ -5,6 +5,7 @@
 ::   e.g. ScrapBook X, ScrapBook >= 1.4.9
 ::
 :: System requirements:
+:: * OS: Windows
 :: * 7z
 ::
 :: Steps:

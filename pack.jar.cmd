@@ -5,6 +5,7 @@
 ::   e.g. ScrapBook <= 1.4.8, ScrapBook Plus <= 1.9.24.40b3 
 ::
 :: System requirements:
+:: * OS: Windows
 :: * 7z
 ::
 :: Steps:
