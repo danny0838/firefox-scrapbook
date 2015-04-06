@@ -736,15 +736,15 @@ var sbHtmlEditor = {
 	init : function(aDoc, aStateFlag)
 	{
 		aDoc = aDoc || sbCommonUtils.getFocusedWindow().document;
-		var enabled = sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled") || false;
-		if ( aStateFlag === undefined ) aStateFlag = enabled ? 0 : 1;
-		this.enabled = enabled = (aStateFlag === 2) ? enabled : (aStateFlag == 1);
-		document.getElementById("ScrapBookEditHTML").checked = enabled;
-		document.getElementById("ScrapBookHighlighter").disabled = enabled;
-		document.getElementById("ScrapBookEditAnnotation").disabled = enabled;
-		document.getElementById("ScrapBookEditCutter").disabled = enabled;
-		document.getElementById("ScrapBookEditEraser").disabled = enabled;
-		document.getElementById("ScrapBookEditUndo").disabled = enabled;
+		var wasEnabled = sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled") || false;
+		if ( aStateFlag === undefined ) aStateFlag = wasEnabled ? 0 : 1;
+		var toEnable = this.enabled = (aStateFlag === 2) ? wasEnabled : (aStateFlag == 1);
+		document.getElementById("ScrapBookEditHTML").checked = toEnable;
+		document.getElementById("ScrapBookHighlighter").disabled = toEnable;
+		document.getElementById("ScrapBookEditAnnotation").disabled = toEnable;
+		document.getElementById("ScrapBookEditCutter").disabled = toEnable;
+		document.getElementById("ScrapBookEditEraser").disabled = toEnable;
+		document.getElementById("ScrapBookEditUndo").disabled = toEnable;
 		if ( aStateFlag == 1 ) {
 			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled", true);
 			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.document", aDoc);
@@ -782,15 +782,17 @@ var sbHtmlEditor = {
 		else if ( aStateFlag == 0 ) {
 			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled", false);
 			sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.document", null);
-			if (sbPageEditor.enabled && sbPageEditor.item && sbPageEditor.item.type == "notex") {
-				sbCommonUtils.setPref("edit.autoEditNoteX.active", false);
-			}
-			sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
-				if ( win.document.designMode != "off" ) {
-					win.document.designMode = "off";
+			if (wasEnabled) {
+				if (sbPageEditor.enabled && sbPageEditor.item && sbPageEditor.item.type == "notex") {
+					sbCommonUtils.setPref("edit.autoEditNoteX.active", false);
 				}
-				this.initEvent(win, 0);
-			}, this);
+				sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
+					if ( win.document.designMode != "off" ) {
+						win.document.designMode = "off";
+					}
+					this.initEvent(win, 0);
+				}, this);
+			}
 		}
 	},
 

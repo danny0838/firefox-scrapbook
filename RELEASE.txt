@@ -1,3 +1,8 @@
+Scrapbook X 1.12.0a52
+----------------
+- FIXED: A non-ScrapBook page gets HTML edit mode turned off when switching to another tab and then back.
+
+
 Scrapbook X 1.12.0a51
 ----------------
 - FIXED: New captured item is placed at the bottom even if "Put an item into the top of a folder" is set.
