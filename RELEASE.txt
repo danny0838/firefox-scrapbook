@@ -1,3 +1,8 @@
+Scrapbook X 1.12.0
+----------------
+- Bump version number to 1.12.0.
+
+
 Scrapbook X 1.12.0a52
 ----------------
 - FIXED: A non-ScrapBook page gets HTML edit mode turned off when switching to another tab and then back.
