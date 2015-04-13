@@ -1,0 +1,13 @@
+<!ENTITY sb.prop.general "Загальна інформація">
+<!ENTITY sb.prop.type "Тип">
+<!ENTITY sb.prop.date "Дата">
+<!ENTITY sb.prop.encode "Кодування">
+<!ENTITY sb.prop.size "Розмір">
+<!ENTITY sb.prop.content "Вміст">
+<!ENTITY sb.prop.folder "Тека">
+<!ENTITY sb.prop.icon "Значок">
+<!ENTITY sb.prop.icon.change "Змінити">
+<!ENTITY sb.prop.icon.default "Типовий">
+<!ENTITY sb.prop.icon.favicon "З зображень сторінки">
+<!ENTITY sb.prop.icon.custom "Особистий">
+<!ENTITY sb.prop.mark "Виділити у альбомі">

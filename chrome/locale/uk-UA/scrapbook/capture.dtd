@@ -1,0 +1,13 @@
+<!ENTITY sb.save "Зберегти">
+<!ENTITY sb.save.abort "Перервати">
+<!ENTITY sb.save.start "Почати">
+<!ENTITY sb.save.retry "Повторити">
+<!ENTITY sb.save.skip "Пропустити">
+<!ENTITY sb.save.pause "Пауза">
+<!ENTITY sb.save.filter "Фільтр">
+<!ENTITY sb.save.filter.domain "Обмежити доменом">
+<!ENTITY sb.save.filter.level "Обмежити каталогом">
+<!ENTITY sb.save.filter.string "Фільтр за рядком...">
+<!ENTITY sb.save.filter.checkon "Відмітити всі">
+<!ENTITY sb.save.filter.checkoff "Зняти всі">
+<!ENTITY sb.save.filter.invert "Обернути виділене">

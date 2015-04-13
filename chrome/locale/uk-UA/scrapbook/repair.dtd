@@ -1,0 +1,9 @@
+<!ENTITY sb.repair.rdfFile "Відновлення файлу scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript "Використовуйте, якщо раптом зник увесь вміст ScrapBook.">
+<!ENTITY sb.repair.rdfFile.select "Вкажіть файл резервної копії для відновлення інформації.">
+<!ENTITY sb.repair.rdfFile.file "Файл">
+<!ENTITY sb.repair.rdfFile.time "Час">
+<!ENTITY sb.repair.rdfFile.size "Розмір">
+<!ENTITY sb.repair.favicons "Відновлення значків у дереві">
+<!ENTITY sb.repair.favicons.descript "Використовуйте, якщо зникло багато значків у дереві ScrapBook.">
+<!ENTITY sb.repair.complete "Виконано.">
