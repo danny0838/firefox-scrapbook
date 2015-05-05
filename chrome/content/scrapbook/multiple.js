@@ -223,7 +223,7 @@ var sbMultipleService = {
 		this.clear();
 		var duisURL = "";
 		var duisAllHash = {};
-		var sel = window.opener.top.sbPageEditor.getSelection();
+		var sel = window.opener.top.sbPageEditor.getSelection(sbCommonUtils.getFocusedWindow());
 		if ( !sel )
 		{
 			document.getElementById("sbpCounter").setAttribute("value", "");
