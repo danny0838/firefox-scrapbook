@@ -223,37 +223,39 @@ var sbMultipleService = {
 		this.clear();
 		var duisURL = "";
 		var duisAllHash = {};
-		var sel = window.opener.top.sbPageEditor.getSelection();
+		var sel = window.opener.top.sbPageEditor.getSelection(sbCommonUtils.getFocusedWindow());
 		if ( !sel )
 		{
 			document.getElementById("sbpCounter").setAttribute("value", "");
 			return;
 		}
-		var selRange  = sel.getRangeAt(0);
-		var node = selRange.startContainer;
-		if ( node.nodeName == "#text" ) node = node.parentNode;
-		var nodeRange = window.opener.top.content.document.createRange();
 		this.allURLs = [];
-		traceTree : while ( true )
-		{
-			nodeRange.selectNode(node);
-			if ( nodeRange.compareBoundaryPoints(Range.START_TO_END, selRange) > -1 )
+		for (var i=0, I=sel.rangeCount; i<I; i++) {
+			var selRange  = sel.getRangeAt(i);
+			var node = selRange.startContainer;
+			if ( node.nodeName == "#text" ) node = node.parentNode;
+			var nodeRange = window.opener.top.content.document.createRange();
+			traceTree : while ( true )
 			{
-				if ( nodeRange.compareBoundaryPoints(Range.END_TO_START, selRange) > 0 ) break;
-				else if ( node instanceof HTMLAnchorElement || node instanceof HTMLAreaElement )
+				nodeRange.selectNode(node);
+				if ( nodeRange.compareBoundaryPoints(Range.START_TO_END, selRange) > -1 )
 				{
-					duisURL = node.href;
-					if ( duisURL.match(/^(http|https|ftp|file):\/\//) )
+					if ( nodeRange.compareBoundaryPoints(Range.END_TO_START, selRange) > 0 ) break;
+					else if ( node instanceof HTMLAnchorElement || node instanceof HTMLAreaElement )
 					{
-						duisAllHash[duisURL] = node.text.replace(/^\s+/, '').replace(/\s+$/, '').replace(/\n/, ' ');
+						duisURL = node.href;
+						if ( duisURL.match(/^(http|https|ftp|file):\/\//) )
+						{
+							duisAllHash[duisURL] = node.text.replace(/^\s+/, '').replace(/\s+$/, '').replace(/\n/, ' ');
+						}
 					}
 				}
-			}
-			if ( node.hasChildNodes() ) node = node.firstChild;
-			else
-			{
-				while ( !node.nextSibling ) { node = node.parentNode; if ( !node ) break traceTree; }
-				node = node.nextSibling;
+				if ( node.hasChildNodes() ) node = node.firstChild;
+				else
+				{
+					while ( !node.nextSibling ) { node = node.parentNode; if ( !node ) break traceTree; }
+					node = node.nextSibling;
+				}
 			}
 		}
 		this.addURL(duisAllHash);
