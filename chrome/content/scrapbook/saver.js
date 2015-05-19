@@ -17,6 +17,7 @@ var sbContentSaver = {
 	linkURLs     : [],
 	_fxVer35     : null,
 	_fxVer18     : null,
+	_fxVer36     : null,
 
 
 
@@ -38,6 +39,7 @@ var sbContentSaver = {
 			var iVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
 			this._fxVer35 = iVerComparator.compare(iAppInfo.version, "3.5")>=0;
 			this._fxVer18 = iVerComparator.compare(iAppInfo.version, "18.0")>=0;
+			this._fxVer36 = iVerComparator.compare(iAppInfo.version, "36.0")>=0;
 		}
 		this.item = sbCommonUtils.newItem(sbDataSource.identify(sbCommonUtils.getTimeStamp()));
 		this.name = "index";
@@ -696,7 +698,9 @@ var sbContentSaver = {
 				var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
 				WBP.persistFlags |= WBP.PERSIST_FLAGS_FROM_CACHE;
 				WBP.persistFlags |= WBP.PERSIST_FLAGS_AUTODETECT_APPLY_CONVERSION;
-				if ( this._fxVer18 ) {
+				if ( this._fxVer36 ) {
+					WBP.saveURI(aURL, null, this.refURLObj, Components.interfaces.nsIHttpChannel.REFERRER_POLICY_NO_REFERRER_WHEN_DOWNGRADE, null, null, targetFile, null);
+				} else if ( this._fxVer18 ) {
 					WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile, null);
 				} else {
 					WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile);
