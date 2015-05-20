@@ -75,7 +75,9 @@
 	      flex="1">
 		<treecols>
 			<treecol id="sbTreeColTitle" label="&sb.prop.title;"     flex="7" sortIndex="2" primary="true" />
+			<splitter class="tree-splitter" />
 			<treecol id="sbTreeColSize"  label="&sb.prop.size;"      flex="2" sortIndex="4" sortDirection="descending" />
+			<splitter class="tree-splitter" />
 			<treecol id="sbTreeColState" label="&sb.calc.diagnosis;" flex="1" sortIndex="6" style="max-width:120px;" />
 		</treecols>
 		<treechildren />
