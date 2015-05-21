@@ -12,10 +12,10 @@
 <!ENTITY sb.internalize "將內嵌的外部媒體存入資料目錄">
 <!ENTITY sb.export "匯出">
 <!ENTITY sb.remove "刪除">
-<!ENTITY sb.property "文件屬性">
+<!ENTITY sb.property "屬性">
 <!ENTITY sb.listview "列表模式">
 <!ENTITY sb.prop.title "標題">
-<!ENTITY sb.prop.comment "文件評註">
+<!ENTITY sb.prop.comment "評註">
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.folder.combine "合併檢視">
@@ -25,7 +25,7 @@
 <!ENTITY sb.new.separator "新增分隔線">
 <!ENTITY sb.new.note "新增筆記">
 <!ENTITY sb.new.notex "新增筆記頁面">
-<!ENTITY sb.sort.folder "資料夾文件排序">
+<!ENTITY sb.sort.folder "排序資料夾">
 <!ENTITY sb.search "搜尋">
 <!ENTITY sb.search.fulltext "全文搜尋">
 <!ENTITY sb.search.all "所有欄位">
