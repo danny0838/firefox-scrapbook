@@ -1,9 +1,9 @@
 <!ENTITY sb.sort "排序">
 <!ENTITY sb.sort.reverse "反序">
-<!ENTITY sb.sort.title.asc "依標題排列 (A &gt; Z)">
-<!ENTITY sb.sort.title.desc "依標題排列 (Z &gt; A)">
-<!ENTITY sb.sort.date.asc "依日期排列 (舊 &gt; 新)">
-<!ENTITY sb.sort.date.desc "依日期排列 (新 &gt; 舊)">
-<!ENTITY sb.sort.grouping "依型態分組">
-<!ENTITY sb.sort.recursive "一併排列子資料夾內的資料">
-<!ENTITY sb.sort.warning "請注意：此動作無法復原。">
+<!ENTITY sb.sort.title.asc "依標題排序 (A &gt; Z)">
+<!ENTITY sb.sort.title.desc "依標題排序 (Z &gt; A)">
+<!ENTITY sb.sort.date.asc "依日期排序 (舊 &gt; 新)">
+<!ENTITY sb.sort.date.desc "依日期排序 (新 &gt; 舊)">
+<!ENTITY sb.sort.grouping "依類型分組">
+<!ENTITY sb.sort.recursive "也排序子資料夾中的項目">
+<!ENTITY sb.sort.warning "請注意：此操作無法復原。">

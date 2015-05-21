@@ -4,7 +4,7 @@
 <!ENTITY sb.edit.eraser "DOM 擦子 - 刪除不想要的元素或 ScrapBook 註記。">
 <!ENTITY sb.edit.undo "復原">
 <!ENTITY sb.edit.save "存檔">
-<!ENTITY sb.edit.comment "展開文件評注欄">
+<!ENTITY sb.edit.comment "展開評注區">
 <!ENTITY sb.edit.annotationTool "註解工具 - 點擊建立自由註解，錨定於選取區後，無選取區則自由浮動。">
 <!ENTITY sb.edit.sticky "自由註解"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.sticky.create "添增&sb.edit.sticky;"><!-- left for addon compatibility -->

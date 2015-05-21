@@ -6,7 +6,7 @@
 <!ENTITY sb.note.template "編輯 HTML 樣版">
 <!ENTITY sb.note.autolinefeed "自動斷行">
 <!ENTITY sb.note.autolinefeed.t "在 HTML 預覽時，於每行最後自動添加 &lt;br&gt; 標籤。">
-<!ENTITY sb.note.fontsize "文字尺寸">
+<!ENTITY sb.note.fontsize "字體大小">
 <!ENTITY sb.note.help "說明">
 <!ENTITY sb.note.print "列印">
 <!ENTITY sb.note.exit "離開">
