@@ -3,7 +3,7 @@
 <!ENTITY sb.capture.entire "获取页面">
 <!ENTITY sb.capture.entire.as "获取页面为">
 <!ENTITY sb.capture.frame "获取框架">
-<!ENTITY sb.capture.frame.as "获取框架为">
+<!ENTITY sb.capture.frame.as "获取页框为">
 <!ENTITY sb.capture.target "获取链接">
 <!ENTITY sb.capture.target.as "获取链接为">
 <!ENTITY sb.capture.alltabs "获取所有标签页">

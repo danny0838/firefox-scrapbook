@@ -138,7 +138,7 @@
 						<menuitem acceltext="Ctrl+↑" value="increaseFontSize" label="&sb.edit.html.menuitem.increaseFontSize;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
 						<menuitem acceltext="Ctrl+↓" value="decreaseFontSize" label="&sb.edit.html.menuitem.decreaseFontSize;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
 						<menuseparator />
-						<menuitem acceltext="Ctrl+E" value="setColor" label="&sb.edit.html.menuitem.setColor;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+						<menuitem acceltext="Ctrl+E" value="setColor" label="&sb.edit.html.menuitem.setColor;..." oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
 					</menupopup>
 				</menu>
 				<menu label="&sb.edit.html.menu.block;">
@@ -167,9 +167,9 @@
 				</menu>
 				<menu label="&sb.edit.html.menu.insert;">
 					<menupopup>
-						<menuitem acceltext="Ctrl+Shift+L" value="attachLink" label="&sb.edit.html.menuitem.attachLink;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
-						<menuitem acceltext="Ctrl+Shift+F" value="attachFile" label="&sb.edit.html.menuitem.attachFile;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
-						<menuitem acceltext="Ctrl+Shift+B" value="backupFile" label="&sb.edit.html.menuitem.backupFile;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+						<menuitem acceltext="Ctrl+Shift+L" value="attachLink" label="&sb.edit.html.menuitem.attachLink;..." oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+						<menuitem acceltext="Ctrl+Shift+F" value="attachFile" label="&sb.edit.html.menuitem.attachFile;..." oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+						<menuitem acceltext="Ctrl+Shift+B" value="backupFile" label="&sb.edit.html.menuitem.backupFile;..." oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
 						<menuseparator />
 						<menuitem acceltext="Ctrl+Shift+H" value="horizontalLine" label="&sb.edit.html.menuitem.horizontalLine;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
 						<menuitem id="ScrapBookEditHTML_insertDate" acceltext="Ctrl+Shift+D" value="insertDate" label="&sb.edit.html.menuitem.insertDate;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
@@ -192,7 +192,7 @@
 					</menupopup>
 				</menu>
 				<menuseparator />
-				<menuitem class="menuitem-iconic" acceltext="Ctrl+Alt+I" value="insertSource" label="&sb.edit.html.menuitem.insertSource;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
+				<menuitem class="menuitem-iconic" acceltext="Ctrl+Alt+I" value="insertSource" label="&sb.edit.html.menuitem.insertSource;..." oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
 				<menuseparator />
 				<menuitem class="menuitem-iconic" acceltext="Ctrl+M" value="removeFormat" label="&sb.edit.html.menuitem.removeFormat;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
 				<menuitem class="menuitem-iconic" acceltext="Ctrl+N" value="unlink" label="&sb.edit.html.menuitem.unlink;" oncommand="sbHtmlEditor.handlePopupCommand(this.value);" />
@@ -236,10 +236,10 @@
 				</toolbarbutton>
 				<toolbarbutton id="ScrapBookEditAnnotation" type="menu-button" tooltiptext="&sb.edit.annotationTool;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbAnnotationService.createFreenote();" accesskey="A">
 					<menupopup>
-						<menuitem label="&sb.edit.attach.link;" oncommand="sbAnnotationService.attach('L');" />
-						<menuitem label="&sb.edit.attach.innerlink;" oncommand="sbAnnotationService.attach('I');" />
-						<menuitem label="&sb.edit.attach.file;" oncommand="sbAnnotationService.attach('F');" />
-						<menuitem label="&sb.edit.inline.add;"  oncommand="sbAnnotationService.addInline();" />
+						<menuitem label="&sb.edit.attach.link;..." oncommand="sbAnnotationService.attach('L');" />
+						<menuitem label="&sb.edit.attach.innerlink;..." oncommand="sbAnnotationService.attach('I');" />
+						<menuitem label="&sb.edit.attach.file;..." oncommand="sbAnnotationService.attach('F');" />
+						<menuitem label="&sb.edit.inline.add;..."  oncommand="sbAnnotationService.addInline();" />
 						<menuseparator />
 						<menuitem label="&sb.edit.freenote.create;"  oncommand="sbAnnotationService.createFreenote();" />
 					</menupopup>
