@@ -391,6 +391,9 @@ var searchEngine = {
 			item.source :
 			'data/' + item.id + '/' + cache.path.replace(/[^\/]+/g, function(m){return encodeURIComponent(m);});
 		var bullet = this.config['list_bullet'] + ' ';
+		var text = item.type == 'bookmark' ?
+			bullet + item.title :
+			item.title + ((cache.path != 'index.html') ? (" (" + cache.path + ")") : "");
 		if (item.type != 'bookmark') {
 			var fhref = 'tree/frame.html#../' + href;
 			var link = document.createElement("A");
@@ -406,7 +409,7 @@ var searchEngine = {
 		link.setAttribute('target', 'main');
 		link.setAttribute('class', item.type);
 		link.setAttribute('title', item.title);
-		link.appendChild(document.createTextNode(item.type == 'bookmark' ? bullet + item.title : item.title));
+		link.appendChild(document.createTextNode(text));
 		result.appendChild(link);
 		wrapper.appendChild(result);
 	},
