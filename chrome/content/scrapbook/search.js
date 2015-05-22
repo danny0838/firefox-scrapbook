@@ -145,7 +145,7 @@ var searchEngine = {
 			'mc': false,
 			're': false,
 			'default': this.config['default_field']
-        };
+		};
 		keyStr.replace(/(\-?[A-Za-z]+:|\-)(?:"((?:\\"|[^"])*)"|([^ "\u3000]*))|(?:"((?:""|[^"])*)"|([^ "\u3000]+))/g, function(match, cmd, qterm, term, qterm2, term2){
 			if (cmd) {
 				var term = qterm ? qterm.replace(/""/g, '"') : term;
@@ -412,8 +412,8 @@ var searchEngine = {
 	},
 
 	clearResult: function() {
-        var result = document.getElementById("result"), child;
-        while ((child = result.firstChild)) result.removeChild(child);
+		var result = document.getElementById("result"), child;
+		while ((child = result.firstChild)) result.removeChild(child);
 	},
 
 	addMsg: function(msg) {
