@@ -47,7 +47,7 @@ var sbSearchResult =
 		if ( this.query['ref'] && this.query['ref'].indexOf("urn:scrapbook:item") == 0 )
 		{
 			var refRes = sbCommonUtils.RDF.GetResource(this.query['ref']);
-			var elt = document.getElementById("sbResultHeader").firstChild.nextSibling;
+			var elt = document.getElementById("sbResultHeaderLoc");
 			elt.value += sbDataSource.getProperty(refRes, "title");
 			elt.hidden = false;
 			this.targetFolders = sbDataSource.flattenResources(refRes, 1, true);
@@ -59,7 +59,9 @@ var sbSearchResult =
 		// parse keywords
 		this.queryKey = sbSearchQueryHandler.parse(this.query['q'], {'re': this.query['re'], 'mc': this.query['cs'], 'default': 'tcc'});
 		if (this.queryKey.error.length) {
-			document.getElementById("sbResultHeader").firstChild.value = this.queryKey.error[0];
+			document.getElementById("sbResultHeaderNotice").value = this.queryKey.error[0];
+			document.getElementById("sbResultHeaderNotice").hidden = false;
+			document.getElementById("sbResultHeaderMsg").hidden = true;
 			return;
 		}
 		// start search process
@@ -75,7 +77,7 @@ var sbSearchResult =
 			if ( ++this.index % 100 == 0 ) {
 				setTimeout(function(){ sbSearchResult.process(); }, 0);
 				var msg = sbCommonUtils.lang("fulltext", "SCANNING", [Math.round(this.index / this.count * 100) + " %"]);
-				document.title = document.getElementById("sbResultHeader").firstChild.value = msg;
+				document.title = document.getElementById("sbResultHeaderMsg").value = msg;
 			} else {
 				this.process();
 			}
@@ -144,7 +146,7 @@ var sbSearchResult =
 		this.initTree();
 		var headerLabel1 = sbCommonUtils.lang("fulltext", "RESULTS_FOUND", [this.hit] );
 		var headerLabel2 = this.query['q'];
-		document.title = document.getElementById("sbResultHeader").firstChild.value = headerLabel1 + " : " + headerLabel2;
+		document.title = document.getElementById("sbResultHeaderMsg").value = headerLabel1 + " : " + headerLabel2;
 	},
 
 	initTree : function()
