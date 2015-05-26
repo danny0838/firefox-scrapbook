@@ -87,14 +87,10 @@ var sbCaptureOptions = {
 		this.param.option["dlsnd"]      = document.getElementById("sbDetailSound").checked;
 		this.param.option["dlmov"]      = document.getElementById("sbDetailMovie").checked;
 		this.param.option["dlarc"]      = document.getElementById("sbDetailArchive").checked;
+		this.param.option["custom"]     = this.CUSTOM_UI.checked ? document.getElementById("sbDetailCustomExt").value : "";
 		this.param.option["inDepth"]    = parseInt("0" + document.getElementById("sbDetailInDepth").value, 10);
-		this.param.option["custom"]     = "";
 		this.param.poption["timeout"]   = parseInt("0" + document.getElementById("sbDetailTimeout").value, 10);
 		this.param.poption["charset"]   = document.getElementById("sbDetailCharset").value;
-		if ( this.CUSTOM_UI.checked )
-		{
-			this.param.option["custom"] = this.CUSTOM_UI.nextSibling.getAttribute("value");
-		}
 		if ( this.param.context == "capture-again" )
 		{
 			var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
