@@ -1,5 +1,6 @@
 Scrapbook X 1.12.2
 ----------------
+- FIXED: Add missing suffix "..." for several indirect commands.
 - UPDATE: Improve the comprehensibility of the result counting in the "calculate" dialog.
 - UPDATE: Allow column resizing in the "calculate" dialog.
 - UPDATE: Improve Chinese (zh-TW and zh-CN) language packs.
