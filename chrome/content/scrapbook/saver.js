@@ -760,14 +760,6 @@ var sbContentSaver = {
 				}
 				aNode.removeAttribute("data-sb-frame-id");
 				break;
-			// Deprecated, like <pre> but inner contents are escaped to be plain text
-			// Replace with <pre> since it breaks ScrapBook highlights
-			case "xmp" : 
-				if ( this.option["internalize"] ) break;
-				var pre = aNode.ownerDocument.createElement("pre");
-				pre.appendChild(aNode.firstChild);
-				aNode.parentNode.replaceChild(pre, aNode);
-				break;
 		}
 		if ( aNode.style && aNode.style.cssText )
 		{
