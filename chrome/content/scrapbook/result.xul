@@ -33,9 +33,10 @@
 	</popupset>
 
 	<hbox id="sbResultHeader" class="sb-header" align="center">
-		<label crop="end" />
-		<label crop="end" value="&sb.prop.folder;: " style="color: blue;" hidden="true" />
-		<spacer flex="1" />
+		<label id="sbResultHeaderNotice" crop="end" flex="1" style="color: red; min-width: 100px;" hidden="true" />
+		<label id="sbResultHeaderMsg" crop="end" flex="1" style="min-width: 100px;" />
+		<label id="sbResultHeaderLoc" crop="end" flex="1" value="&sb.prop.folder;: " style="color: blue; min-width: 100px;" hidden="true" />
+		<spacer flex="1000" />
 		<toolbarbutton class="sb-header-locate" tooltiptext="&sb.locate;" oncommand="sbSearchResult.forward('L');" />
 		<toolbarbutton class="sb-header-exit"   oncommand="SB_exitResult();" />
 	</hbox>

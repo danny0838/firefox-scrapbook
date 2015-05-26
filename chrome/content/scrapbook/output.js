@@ -152,6 +152,7 @@ var sbOutputService = {
 			+ '		if (!hash) return;\n'
 			+ '		hash = hash.substring(1);\n'
 			+ '		if (self != top) top.frames[1].location = hash;\n'
+			+ '		hash = hash.replace(/^(\\.\\.\\/data\\/\\d{14})\\/.*/, "$1/index.html");\n'
 			+ '		var elems = document.getElementsByTagName("A");\n'
 			+ '		for ( var i = 1; i < elems.length; i++ ) {\n'
 			+ '			var elem = elems[i];\n'

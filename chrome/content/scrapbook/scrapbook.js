@@ -877,8 +877,11 @@ var sbSearchService = {
 			shouldBuild = true;
 		}
 		else {
-			var modTime = cache.lastModifiedTime;
-			if (modTime && ((new Date()).getTime() - modTime) > 1000 * 60 * 60 * 24 * 5)
+			var data = sbCommonUtils.getScrapBookDir().clone();
+			data.append("scrapbook.rdf");
+			var dataModTime = data.lastModifiedTime;
+			var cacheModTime = cache.lastModifiedTime;
+			if (dataModTime > cacheModTime && ((new Date()).getTime() - cacheModTime) > 1000 * 60 * 60 * 24 * 5)
 				shouldBuild = true;
 		}
 		var uri = "chrome://scrapbook/content/result.xul";

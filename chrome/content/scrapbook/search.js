@@ -145,7 +145,7 @@ var searchEngine = {
 			'mc': false,
 			're': false,
 			'default': this.config['default_field']
-        };
+		};
 		keyStr.replace(/(\-?[A-Za-z]+:|\-)(?:"((?:\\"|[^"])*)"|([^ "\u3000]*))|(?:"((?:""|[^"])*)"|([^ "\u3000]+))/g, function(match, cmd, qterm, term, qterm2, term2){
 			if (cmd) {
 				var term = qterm ? qterm.replace(/""/g, '"') : term;
@@ -391,6 +391,9 @@ var searchEngine = {
 			item.source :
 			'data/' + item.id + '/' + cache.path.replace(/[^\/]+/g, function(m){return encodeURIComponent(m);});
 		var bullet = this.config['list_bullet'] + ' ';
+		var text = item.type == 'bookmark' ?
+			bullet + item.title :
+			item.title + ((cache.path != 'index.html') ? (" (" + cache.path + ")") : "");
 		if (item.type != 'bookmark') {
 			var fhref = 'tree/frame.html#../' + href;
 			var link = document.createElement("A");
@@ -406,14 +409,14 @@ var searchEngine = {
 		link.setAttribute('target', 'main');
 		link.setAttribute('class', item.type);
 		link.setAttribute('title', item.title);
-		link.appendChild(document.createTextNode(item.type == 'bookmark' ? bullet + item.title : item.title));
+		link.appendChild(document.createTextNode(text));
 		result.appendChild(link);
 		wrapper.appendChild(result);
 	},
 
 	clearResult: function() {
-        var result = document.getElementById("result"), child;
-        while ((child = result.firstChild)) result.removeChild(child);
+		var result = document.getElementById("result"), child;
+		while ((child = result.firstChild)) result.removeChild(child);
 	},
 
 	addMsg: function(msg) {
