@@ -986,9 +986,11 @@ var sbContentSaver = {
 				WBP.persistFlags |= WBP.PERSIST_FLAGS_FROM_CACHE;
 				WBP.persistFlags |= WBP.PERSIST_FLAGS_AUTODETECT_APPLY_CONVERSION;
 				if ( sbCommonUtils._fxVer36 ) {
-					WBP.saveURI(aURL, null, this.refURLObj, null, null, null, targetFile, null);
+                    var privacyContext = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebNavigation).QueryInterface(Components.interfaces.nsILoadContext);
+					WBP.saveURI(aURL, null, this.refURLObj, null, null, null, targetFile, privacyContext);
 				} else if ( sbCommonUtils._fxVer18 ) {
-					WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile, null);
+                    var privacyContext = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebNavigation).QueryInterface(Components.interfaces.nsILoadContext);
+					WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile, privacyContext);
 				} else {
 					WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile);
 				}
