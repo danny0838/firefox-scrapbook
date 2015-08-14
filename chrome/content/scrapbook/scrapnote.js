@@ -93,7 +93,6 @@ var sbNoteService = {
 		else
 		{
 			if ( aTabbed ) {
-				if ( top.gBrowser && top.gBrowser.currentURI.spec == "about:blank" ) aTabbed = false;
 				sbCommonUtils.loadURL("chrome://scrapbook/content/note.xul?id=" + sbDataSource.getProperty(aRes, "id"), aTabbed);
 			} else {
 				sbNoteService.edit(aRes);
