@@ -141,7 +141,10 @@ var sbMultipleService = {
 			if ( !clip ) return false;
 			var trans = Components.classes["@mozilla.org/widget/transferable;1"].createInstance(Components.interfaces.nsITransferable);
 			if ( !trans ) return false;
-			if ( 'init' in trans ) trans.init(null);
+			if ( 'init' in trans ) {
+                var loadContext = document.defaultView.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebNavigation).QueryInterface(Components.interfaces.nsILoadContext);
+                trans.init(loadContext);
+            }
 			trans.addDataFlavor("text/unicode");
 			clip.getData(trans, clip.kGlobalClipboard);
 			var str = new Object();
