@@ -1,3 +1,8 @@
+Scrapbook X 1.12.5
+----------------
+- FIXED: "ScrapBook X" item is absent in the View > Sitebar.
+
+
 Scrapbook X 1.12.4
 ----------------
 - UPDATE: No more open a note in the current tab if it's currently an about:blank page.
