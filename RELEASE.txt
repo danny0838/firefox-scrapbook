@@ -1,3 +1,14 @@
+Scrapbook X 1.12.5
+----------------
+- FIXED: "ScrapBook X" item is absent in the View > Sitebar.
+
+
+Scrapbook X 1.12.4
+----------------
+- UPDATE: No more open a note in the current tab if it's currently an about:blank page.
+- UPDATE: Adjust several internal codes to fit Firefox addon protocol.
+
+
 Scrapbook X 1.12.3
 ----------------
 - UPDATE: Improve the intelligence of auto-adjustment of "Capture Detail" dialog field values.
