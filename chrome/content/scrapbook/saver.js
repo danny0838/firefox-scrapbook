@@ -487,6 +487,24 @@ var sbContentSaver = {
 						aNode.setAttribute("src", "about:blank#" + aNode.src);
 					}
 				}
+				if ( aNode.hasAttribute("srcset") ) {
+					var that = this;
+					aNode.setAttribute("srcset", (function(srcset){
+						return srcset.replace(/(\s*)([^ ,][^ ]*[^ ,])(\s*(?: [^ ,]+)?\s*(?:,|$))/g, function(m, m1, m2, m3){
+							if ( that.option["internalize"] && m2.indexOf("://") == -1 ) return m;
+							var url = sbCommonUtils.resolveURL(that.refURLObj.spec, m2);
+							if ( that.option["images"] ) {
+								var aFileName = that.download(url);
+								if (aFileName) return m1 + sbCommonUtils.escapeFileName(aFileName) + m3;
+							} else if ( that.option["keepLink"] ) {
+								return m1 + url + m3;
+							} else {
+								return m1 + "about:blank#" + url + m3;
+							}
+							return m;
+						});
+					})(aNode.getAttribute("srcset")));
+				}
 				break;
 			case "embed" : 
 			case "source":  // in <audio> and <vedio>
@@ -500,6 +518,24 @@ var sbContentSaver = {
 					} else {
 						aNode.setAttribute("src", "about:blank#" + aNode.src);
 					}
+				}
+				if ( aNode.hasAttribute("srcset") ) {
+					var that = this;
+					aNode.setAttribute("srcset", (function(srcset){
+						return srcset.replace(/(\s*)([^ ,][^ ]*[^ ,])(\s*(?: [^ ,]+)?\s*(?:,|$))/g, function(m, m1, m2, m3){
+							if ( that.option["internalize"] && m2.indexOf("://") == -1 ) return m;
+							var url = sbCommonUtils.resolveURL(that.refURLObj.spec, m2);
+							if ( that.option["media"] ) {
+								var aFileName = that.download(url);
+								if (aFileName) return m1 + sbCommonUtils.escapeFileName(aFileName) + m3;
+							} else if ( that.option["keepLink"] ) {
+								return m1 + url + m3;
+							} else {
+								return m1 + "about:blank#" + url + m3;
+							}
+							return m;
+						});
+					})(aNode.getAttribute("srcset")));
 				}
 				break;
 			case "object" : 
