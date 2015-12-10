@@ -131,13 +131,20 @@ var sbOutputService = {
 		this.depth--;
 	},
 
+	getHTMLTitle : function()
+	{
+		var multibook = sbCommonUtils.getPref("multibook.enabled", false);
+		var title = (multibook ? sbCommonUtils.getPref("data.title", "") + " - " : "") + "ScrapBook";
+		return sbCommonUtils.escapeHTMLWithSpace(title, true);
+	},
+
 	getHTMLHead : function()
 	{
 		var HTML = '<!DOCTYPE html>\n'
 			+ '<html>\n\n'
 			+ '<head>\n'
 			+ '<meta charset="UTF-8">\n'
-			+ '<title>' + sbCommonUtils.escapeHTMLWithSpace(document.title, true) + '</title>\n'
+			+ '<title>' + this.getHTMLTitle() + '</title>\n'
 			+ '<meta name="viewport" content="width=device-width">\n'
 			+ '<link rel="stylesheet" type="text/css" href="index.css" media="all">\n'
 			+ '<link rel="stylesheet" type="text/css" href="custom.css" media="all">\n'
@@ -254,7 +261,7 @@ var sbOutputService = {
 			+ '<html>\n'
 			+ '<head>\n'
 			+ '<meta charset="UTF-8">\n'
-			+ '<title>' + sbCommonUtils.escapeHTMLWithSpace(document.title, true) + '</title>\n'
+			+ '<title>' + this.getHTMLTitle() + '</title>\n'
 			+ '</head>\n'
 			+ '<frameset cols="200,*">\n'
 			+ '<frame name="side" src="index.html">\n'
