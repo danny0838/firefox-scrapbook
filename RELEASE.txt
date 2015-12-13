@@ -1,3 +1,9 @@
+Scrapbook X 1.12.12
+----------------
+- UPDATE: No more record the original URL for not captured objects.
+- UPDATE: Adjusted the tooltip for some capture options.
+
+
 Scrapbook X 1.12.11
 ----------------
 - UPDATE: Bumped version number due to some uploading issues in the AMO.
