@@ -484,7 +484,7 @@ var sbContentSaver = {
 					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("src", aNode.src);
 					} else {
-						aNode.setAttribute("src", "about:blank#" + aNode.src);
+						aNode.setAttribute("src", "about:blank");
 					}
 				}
 				if ( aNode.hasAttribute("srcset") ) {
@@ -499,7 +499,7 @@ var sbContentSaver = {
 							} else if ( that.option["keepLink"] ) {
 								return m1 + url + m3;
 							} else {
-								return m1 + "about:blank#" + url + m3;
+								return m1 + "about:blank" + m3;
 							}
 							return m;
 						});
@@ -516,7 +516,7 @@ var sbContentSaver = {
 					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("src", aNode.src);
 					} else {
-						aNode.setAttribute("src", "about:blank#" + aNode.src);
+						aNode.setAttribute("src", "about:blank");
 					}
 				}
 				if ( aNode.hasAttribute("srcset") ) {
@@ -531,7 +531,7 @@ var sbContentSaver = {
 							} else if ( that.option["keepLink"] ) {
 								return m1 + url + m3;
 							} else {
-								return m1 + "about:blank#" + url + m3;
+								return m1 + "about:blank" + m3;
 							}
 							return m;
 						});
@@ -547,7 +547,7 @@ var sbContentSaver = {
 					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("data", aNode.src);
 					} else {
-						aNode.setAttribute("data", "about:blank#" + aNode.src);
+						aNode.setAttribute("data", "about:blank");
 					}
 				}
 				break;
@@ -561,7 +561,7 @@ var sbContentSaver = {
 					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("archive", url);
 					} else {
-						aNode.setAttribute("archive", "about:blank#" + url);
+						aNode.setAttribute("archive", "about:blank");
 					}
 				}
 				break;
@@ -586,7 +586,7 @@ var sbContentSaver = {
 					} else if ( this.option["keepLink"] ) {
 						aNode.setAttribute("background", url);
 					} else {
-						aNode.setAttribute("background", "about:blank#" + url);
+						aNode.setAttribute("background", "about:blank");
 					}
 				}
 				break;
@@ -601,7 +601,7 @@ var sbContentSaver = {
 							} else if ( this.option["keepLink"] ) {
 								aNode.setAttribute("src", aNode.src);
 							} else {
-								aNode.setAttribute("src", "about:blank#" + aNode.src);
+								aNode.setAttribute("src", "about:blank");
 							}
 						}
 						break;
@@ -621,8 +621,8 @@ var sbContentSaver = {
 								// a special stylesheet used by scrapbook or other addons/programs, keep it intact
 							} 
 							else if ( !this.option["styles"] ) {
-								// not capturing styles, set it blank and record the original address in a hash
-								aNode.setAttribute("href", "about:blank#" + aNode.href);
+								// not capturing styles, set it blank
+								aNode.setAttribute("href", "about:blank");
 							}
 							else if ( this.option["rewriteStyles"] ) {
 								// capturing styles with rewrite, the style should be already processed
@@ -792,7 +792,7 @@ var sbContentSaver = {
 				} else if ( this.option["keepLink"] ) {
 					aNode.setAttribute("src", aNode.src);
 				} else {
-					aNode.setAttribute("src", "about:blank#" + aNode.src);
+					aNode.setAttribute("src", "about:blank");
 				}
 				aNode.removeAttribute("data-sb-frame-id");
 				break;
@@ -958,7 +958,7 @@ var sbContentSaver = {
 						var dataFile = sbContentSaver.download(dataURL);
 						if (dataFile) dataURL = sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(dataFile));
 					} else if (!sbContentSaver.option["keepLink"]) {
-						dataURL = "about:blank#" + dataURL;
+						dataURL = "about:blank";
 					}
 					break;
 				case "font":
@@ -966,7 +966,7 @@ var sbContentSaver = {
 						var dataFile = sbContentSaver.download(dataURL);
 						if (dataFile) dataURL = sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(dataFile));
 					} else if (!sbContentSaver.option["keepLink"]) {
-						dataURL = "about:blank#" + dataURL;
+						dataURL = "about:blank";
 					}
 					break;
 			}
