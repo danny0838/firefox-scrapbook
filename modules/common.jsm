@@ -595,20 +595,23 @@ var sbCommonUtils = {
 	get prefBranch()
 	{
 		delete this.prefBranch;
-		// must specify a branch or we get an error on setting a pref
 		return this.prefBranch = Components.classes["@mozilla.org/preferences-service;1"].
 			getService(Components.interfaces.nsIPrefService).
-			getBranch("");
+			getBranch("extensions.scrapbook.");
 	},
 
-	getLocalPref: function (aName)
+	get prefBranchGlobal()
 	{
-		return "extensions.scrapbook." + aName;
+		delete this.prefBranchGlobal;
+		// must specify a branch or we get an error on setting a pref
+		return this.prefBranchGlobal = Components.classes["@mozilla.org/preferences-service;1"].
+			getService(Components.interfaces.nsIPrefService).
+			getBranch("");
 	},
 	
 	getPrefType: function (aName, aDefaultValue, isGlobal)
 	{
-		if (!isGlobal) aName = this.getLocalPref(aName);
+        var branch = isGlobal ? this.prefBranchGlobal : this.prefBranch;
 		try {
 			switch (typeof aDefaultValue) {
 				case "boolean":
@@ -618,12 +621,12 @@ var sbCommonUtils = {
 				case "string":
 					return "string";
 			}
-			switch (this.prefBranch.getPrefType(aName)) {
-				case this.prefBranch.PREF_BOOL: 
+			switch (branch.getPrefType(aName)) {
+				case branch.PREF_BOOL: 
 					return "boolean";
-				case this.prefBranch.PREF_INT: 
+				case branch.PREF_INT: 
 					return "number";
-				case this.prefBranch.PREF_STRING: 
+				case branch.PREF_STRING: 
 					return "string";
 			}
 		}
@@ -635,16 +638,16 @@ var sbCommonUtils = {
 
 	getPref: function (aName, aDefaultValue, isGlobal)
 	{
-		if (!isGlobal) aName = this.getLocalPref(aName);
+        var branch = isGlobal ? this.prefBranchGlobal : this.prefBranch;
 		try {
-			switch (this.getPrefType(aName, aDefaultValue, true)) {
+			switch (this.getPrefType(aName, aDefaultValue, isGlobal)) {
 				case "boolean": 
-					return this.prefBranch.getBoolPref(aName);
+					return branch.getBoolPref(aName);
 				case "number": 
-					return this.prefBranch.getIntPref(aName);
+					return branch.getIntPref(aName);
 				case "string": 
 					// using getCharPref may meet encoding problems
-					return this.prefBranch.getComplexValue(aName, Components.interfaces.nsISupportsString).data;
+					return branch.getComplexValue(aName, Components.interfaces.nsISupportsString).data;
 				default: 
 					throw null;
 			}
@@ -656,21 +659,21 @@ var sbCommonUtils = {
 
 	setPref: function (aName, aValue, isGlobal)
 	{
-		if (!isGlobal) aName = this.getLocalPref(aName);
+        var branch = isGlobal ? this.prefBranchGlobal : this.prefBranch;
 		try {
-			switch (this.getPrefType(aName, aValue, true)) {
+			switch (this.getPrefType(aName, aValue, isGlobal)) {
 				case "boolean": 
-					this.prefBranch.setBoolPref(aName, aValue);
+					branch.setBoolPref(aName, aValue);
 					break;
 				case "number": 
-					this.prefBranch.setIntPref(aName, aValue);
+					branch.setIntPref(aName, aValue);
 					break;
 				case "string":
 					// using getCharPref may meet encoding problems
 					var str = Components.classes["@mozilla.org/supports-string;1"].
 					          createInstance(Components.interfaces.nsISupportsString);
 					str.data = aValue;
-					this.prefBranch.setComplexValue(aName, Components.interfaces.nsISupportsString, str);
+					branch.setComplexValue(aName, Components.interfaces.nsISupportsString, str);
 					break;
 				default: 
 					throw null;
