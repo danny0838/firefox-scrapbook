@@ -35,6 +35,9 @@
 <!ENTITY sb.prefs.notifyOnComplete "&apos;캡처 완료&apos; 알림 보이기">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
+<!ENTITY sb.prefs.export "Export Preferences">
+<!ENTITY sb.prefs.import "Import Preferences">
+<!ENTITY sb.prefs.reset "Reset Preferences">
 <!ENTITY sb.button.customize "사용자 설정">
 <!ENTITY sb.button.browse "찾아보기">
 <!ENTITY sb.button.show "파일 보이기">
