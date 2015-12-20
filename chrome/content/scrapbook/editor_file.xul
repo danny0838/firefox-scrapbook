@@ -3,14 +3,14 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 
 <!DOCTYPE dialog [
-	<!ENTITY % prefDTD SYSTEM "chrome://scrapbook/locale/prefs.dtd">
-	%prefDTD;
-	<!ENTITY % editorDTD SYSTEM "chrome://scrapbook/locale/editor.dtd" >
-	%editorDTD;
+    <!ENTITY % prefDTD SYSTEM "chrome://scrapbook/locale/prefs.dtd">
+    %prefDTD;
+    <!ENTITY % editorDTD SYSTEM "chrome://scrapbook/locale/editor.dtd" >
+    %editorDTD;
 ]>
 
 <dialog id="sbFileDialog"
-		title="&sb.edit.html.file;"
+        title="&sb.edit.html.file;"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         buttons="accept,cancel"
         style="width: 400px;"
@@ -18,31 +18,31 @@
         onload="init();"
         ondialogaccept="accept();">
 
-	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/editor_file.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/editor_file.js" />
 
-	<radiogroup id="sbFileSelector">
-		<hbox>
-			<radio id="sbFileFileUse" label="&sb.edit.html.file.pick;" selected="true" persist="selected" />
-			<filefield id="sbFilePath" flex="1" />
-			<button id="sbFilePicker" label="&sb.button.browse;..." oncommand="if (pickFile()) pick('sbFileFileUse');" />
-		</hbox>
-		<hbox>
-			<radio id="sbFileHTMLUse" label="&sb.edit.html.file.html;" persist="selected" />
-			<textbox id="sbFileHTML" placeholder="eg. index2" flex="1" oninput="pick('sbFileHTMLUse');" />
-		</hbox>
-	</radiogroup>
-	<separator />
-	<hbox>
-		<checkbox id="sbFileInsert" label="&sb.edit.html.file.format;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
-		<menulist id="sbFileFormat" editable="true" flex="1" value='&lt;a href="{FILE_E}" title="{FILE}">{THIS}&lt;/a>' persist="value" onchange="this.setAttribute('value', this.value); document.persist(this, 'value');">
-			<menupopup>
-				<menuitem label='&lt;a href="{FILE_E}">{THIS}&lt;/a>' />
-				<menuitem label='&lt;a href="{FILE_E}" title="{FILE}">{THIS}&lt;/a>' />
-				<menuitem label='&lt;img src="{FILE_E}" />' />
-				<menuitem label='&lt;img src="{FILE_E}" alt="{THIS}" title="{THIS}" />' />
-				<menuitem label='&lt;img width="500" src="{FILE_E}" alt="{THIS}" title="{THIS}" />' />
-			</menupopup>
-		</menulist>
-	</hbox>
+    <radiogroup id="sbFileSelector">
+        <hbox>
+            <radio id="sbFileFileUse" label="&sb.edit.html.file.pick;" selected="true" persist="selected" />
+            <filefield id="sbFilePath" flex="1" />
+            <button id="sbFilePicker" label="&sb.button.browse;..." oncommand="if (pickFile()) pick('sbFileFileUse');" />
+        </hbox>
+        <hbox>
+            <radio id="sbFileHTMLUse" label="&sb.edit.html.file.html;" persist="selected" />
+            <textbox id="sbFileHTML" placeholder="eg. index2" flex="1" oninput="pick('sbFileHTMLUse');" />
+        </hbox>
+    </radiogroup>
+    <separator />
+    <hbox>
+        <checkbox id="sbFileInsert" label="&sb.edit.html.file.format;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
+        <menulist id="sbFileFormat" editable="true" flex="1" value='&lt;a href="{FILE_E}" title="{FILE}">{THIS}&lt;/a>' persist="value" onchange="this.setAttribute('value', this.value); document.persist(this, 'value');">
+            <menupopup>
+                <menuitem label='&lt;a href="{FILE_E}">{THIS}&lt;/a>' />
+                <menuitem label='&lt;a href="{FILE_E}" title="{FILE}">{THIS}&lt;/a>' />
+                <menuitem label='&lt;img src="{FILE_E}" />' />
+                <menuitem label='&lt;img src="{FILE_E}" alt="{THIS}" title="{THIS}" />' />
+                <menuitem label='&lt;img width="500" src="{FILE_E}" alt="{THIS}" title="{THIS}" />' />
+            </menupopup>
+        </menulist>
+    </hbox>
 </dialog>

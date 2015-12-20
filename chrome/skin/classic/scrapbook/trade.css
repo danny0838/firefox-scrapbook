@@ -1,28 +1,28 @@
 /* ::::: TRADE ::::: */
 
 tree {
-	-moz-appearance: listbox;
+    -moz-appearance: listbox;
 }
 
 tree#sbTradeTree treechildren::-moz-tree-image(sbTradeTreeColTitle) {
-	-moz-image-region: auto !important;
-	width: 16px; height: 16px;
-	margin-right: 3px;
+    -moz-image-region: auto !important;
+    width: 16px; height: 16px;
+    margin-right: 3px;
 }
 
 tree#sbTradeTree treechildren::-moz-tree-cell-text(separator) {
-	color: GrayText;
+    color: GrayText;
 }
 
 #sbTradeLog {
-	height: 6.4em;
-	-moz-appearance: listbox;
+    height: 6.4em;
+    -moz-appearance: listbox;
 }
 
 #sbTradeIcon {
-	width: 16px;
-	height: 16px;
-	margin-left: 5px;
+    width: 16px;
+    height: 16px;
+    margin-left: 5px;
 }
 
 

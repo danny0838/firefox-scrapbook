@@ -1,38 +1,38 @@
 /* ::::: Combined Pages ::::: */
 
 body {
-	margin: 0px;
-	background-color: #FFFFFF;
+    margin: 0px;
+    background-color: #FFFFFF;
 }
 
 cite.scrapbook-header {
-	clear: both;
-	display: block;
-	padding: 3px 6px;
-	font-family: 'MS UI Gothic','Tahoma','Verdana','Arial','Sans-Serif','Helvetica';
-	font-style: normal;
-	font-size: 12px;
+    clear: both;
+    display: block;
+    padding: 3px 6px;
+    font-family: 'MS UI Gothic','Tahoma','Verdana','Arial','Sans-Serif','Helvetica';
+    font-style: normal;
+    font-size: 12px;
 /*
-	background-color:#E7F4FC;
-	border: 1px solid #0FA9E5;
+    background-color:#E7F4FC;
+    border: 1px solid #0FA9E5;
 */
-	background-color: InfoBackground;
-	border: 1px solid ThreeDShadow;
+    background-color: InfoBackground;
+    border: 1px solid ThreeDShadow;
 }
 
 cite.scrapbook-header img,
 div.scrapbook-combine-file {
-	vertical-align: middle;
+    vertical-align: middle;
 }
 
 cite.scrapbook-header a,
 div.scrapbook-combine-file {
-	color: InfoText;
-	text-decoration: none;
+    color: InfoText;
+    text-decoration: none;
 }
 
 cite.scrapbook-header a[href]:hover {
-	color: #3388FF;
+    color: #3388FF;
 }
 
 cite.scrapbook-header a.marked { font-weight: bold; }
@@ -41,15 +41,15 @@ cite.scrapbook-header a.bookmark { color: limegreen; }
 cite.scrapbook-header a.notex { color: rgb(80,0,32); }
 
 div.scrapbook-combine-file {
-	padding: 20px;
-	font-size: small;
+    padding: 20px;
+    font-size: small;
 }
 
 iframe.scrapbook-iframe {
-	padding: 0px;
-	border: 0px;
-	margin: 0px;
-	width: 100%;
-	height: 250px;
+    padding: 0px;
+    border: 0px;
+    margin: 0px;
+    width: 100%;
+    height: 250px;
 }
 

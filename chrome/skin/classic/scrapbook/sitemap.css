@@ -1,70 +1,70 @@
 ﻿/* ::::: StyleSheet for sitemap.xsl ::::: */
 
 * {
-	margin: 0px;
-	padding: 0px;
+    margin: 0px;
+    padding: 0px;
 }
 
 body {
-	background-color: #F7F7F7;
-	padding: 20px 50px;
+    background-color: #F7F7F7;
+    padding: 20px 50px;
 }
 
 h1 {
-	font-size: 24px;
-	font-family: Arial, Sans-Serif;
-	font-weight: normal;
-	margin-bottom: 5px;
-	color: #333333;
+    font-size: 24px;
+    font-family: Arial, Sans-Serif;
+    font-weight: normal;
+    margin-bottom: 5px;
+    color: #333333;
 }
 
 div#sitemap-container {
-	background-color: #FFFFFF;
-	border: 1px dotted #CCCCCC;
-	padding: 20px 25px 20px 0px;
+    background-color: #FFFFFF;
+    border: 1px dotted #CCCCCC;
+    padding: 20px 25px 20px 0px;
 }
 
 ul {
-	margin-left: 25px;
+    margin-left: 25px;
 }
 
 li {
-	font-size: 13px;
-	font-family: Verdana, Arial, Sans-Serif;
-	list-style-type: none;
-	margin: 1px 0px;
+    font-size: 13px;
+    font-family: Verdana, Arial, Sans-Serif;
+    list-style-type: none;
+    margin: 1px 0px;
 }
 
 a {
-	display: block;
-	padding: 4px;
-	text-decoration: none;
-	color: #993300;
+    display: block;
+    padding: 4px;
+    text-decoration: none;
+    color: #993300;
 }
 
 a:before {
-	content: url('chrome://scrapbook/skin/info_link0.png');
-	margin-right: 4px;
+    content: url('chrome://scrapbook/skin/info_link0.png');
+    margin-right: 4px;
 }
 
 a:hover {
-	background-color: #F0F0F0;
+    background-color: #F0F0F0;
 }
 
 a:hover:before {
-	content: url('chrome://scrapbook/skin/info_link1.png');
-	margin-right: 4px;
+    content: url('chrome://scrapbook/skin/info_link1.png');
+    margin-right: 4px;
 }
 
 a:visited {
-	color: #D57702;
+    color: #D57702;
 }
 
 div#sitemap-container > ul > li > a:before {
-	content: url('chrome://scrapbook/skin/info_home0.png');
+    content: url('chrome://scrapbook/skin/info_home0.png');
 }
 
 div#sitemap-container > ul > li > a:hover:before {
-	content: url('chrome://scrapbook/skin/info_home1.png');
+    content: url('chrome://scrapbook/skin/info_home1.png');
 }
 

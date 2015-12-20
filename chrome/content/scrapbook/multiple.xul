@@ -4,16 +4,16 @@
 <?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
 
 <!DOCTYPE dialog [
-	<!ENTITY % mainDTD     SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
-	%mainDTD;
-	<!ENTITY % propDTD     SYSTEM "chrome://scrapbook/locale/property.dtd" >
-	%propDTD;
-	<!ENTITY % detailDTD   SYSTEM "chrome://scrapbook/locale/detail.dtd" >
-	%detailDTD;
-	<!ENTITY % multipleDTD SYSTEM "chrome://scrapbook/locale/multiple.dtd" >
-	%multipleDTD;
-	<!ENTITY % overlayDTD  SYSTEM "chrome://scrapbook/locale/overlay.dtd" >
-	%overlayDTD;
+    <!ENTITY % mainDTD     SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+    %mainDTD;
+    <!ENTITY % propDTD     SYSTEM "chrome://scrapbook/locale/property.dtd" >
+    %propDTD;
+    <!ENTITY % detailDTD   SYSTEM "chrome://scrapbook/locale/detail.dtd" >
+    %detailDTD;
+    <!ENTITY % multipleDTD SYSTEM "chrome://scrapbook/locale/multiple.dtd" >
+    %multipleDTD;
+    <!ENTITY % overlayDTD  SYSTEM "chrome://scrapbook/locale/overlay.dtd" >
+    %overlayDTD;
 ]>
 
 <dialog id="sbMultipleDialog"
@@ -26,83 +26,83 @@
         ondialogextra2="window.opener.top.sbMenuHandler.execCaptureAllTabs(sbFolderSelector2.resURI); window.close();"
         windowtype="scrapbook">
 
-	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/folderPicker.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/multiple.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/folderPicker.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/multiple.js" />
 
-	<grid style="margin-top:3px;">
-		<columns>
-			<column />
-			<column flex="1" />
-		</columns>
-		<rows>
-			<row align="center" style="margin-bottom:8px;">
-				<label value="&sb.prop.folder;:" />
-				<textbox id="sbFolderTextbox" readonly="true" flex="1" />
-				<toolbarbutton id="sbToolbarMove" tooltiptext="&sb.detail.select.folder;..." oncommand="sbFolderSelector2.pick();" />
-			</row>
-			<row align="center" style="margin-bottom:8px;">
-				<label value="&sb.multiple.filter;:" />
-				<textbox id="sbFilter" flex="1" oninput="sbMultipleService.updateSelection();"/>
-			</row>
-			<row align="center" style="margin-bottom:8px;">
-				<label value="&sb.multiple.title;:" />
-				<menulist id="sbLinktitle" editable="false">
-					<menupopup id="sbLinktitleitems">
-						<menuitem value="ScrapBook"  label="&sbp.multiple.titleofwebsite;"/>
-						<menuitem value="Linkname" label="&sbp.multiple.titleoflink;"/>
-					</menupopup>
-				</menulist>
-			</row>
-			<row align="center" style="margin-bottom:8px;">
-				<label value="&sb.multiple.timeout;:" />
-				<menulist id="sbTimeout" editable="true">
-					<menupopup id="sbTimeoutitems">
-						<menuitem value="0" label="0" selected="true" />
-						<menuitem value="1" label="1"/>
-						<menuitem value="2" label="2"/>
-						<menuitem value="3" label="3"/>
-					</menupopup>
-				</menulist>
-			</row>
-			<row align="center" style="margin-bottom:8px;">
-				<label value="&sb.multiple.charset;:" />
-				<menulist id="sbCharset" editable="true">
-					<menupopup id="sbCharsetitems">
-						<menuitem value="" label="" selected="true" />
-						<menuitem value="BIG5" label="BIG5" />
-						<menuitem value="GBK" label="GBK" />
-						<menuitem value="ISO-8859-1" label="ISO-8859-1" />
-						<menuitem value="SHIFT-JIS" label="SHIFT_JIS" />
-						<menuitem value="UTF-8" label="UTF-8" />
-					</menupopup>
-				</menulist>
-			</row>
-		</rows>
-	</grid>
+    <grid style="margin-top:3px;">
+        <columns>
+            <column />
+            <column flex="1" />
+        </columns>
+        <rows>
+            <row align="center" style="margin-bottom:8px;">
+                <label value="&sb.prop.folder;:" />
+                <textbox id="sbFolderTextbox" readonly="true" flex="1" />
+                <toolbarbutton id="sbToolbarMove" tooltiptext="&sb.detail.select.folder;..." oncommand="sbFolderSelector2.pick();" />
+            </row>
+            <row align="center" style="margin-bottom:8px;">
+                <label value="&sb.multiple.filter;:" />
+                <textbox id="sbFilter" flex="1" oninput="sbMultipleService.updateSelection();"/>
+            </row>
+            <row align="center" style="margin-bottom:8px;">
+                <label value="&sb.multiple.title;:" />
+                <menulist id="sbLinktitle" editable="false">
+                    <menupopup id="sbLinktitleitems">
+                        <menuitem value="ScrapBook"  label="&sbp.multiple.titleofwebsite;"/>
+                        <menuitem value="Linkname" label="&sbp.multiple.titleoflink;"/>
+                    </menupopup>
+                </menulist>
+            </row>
+            <row align="center" style="margin-bottom:8px;">
+                <label value="&sb.multiple.timeout;:" />
+                <menulist id="sbTimeout" editable="true">
+                    <menupopup id="sbTimeoutitems">
+                        <menuitem value="0" label="0" selected="true" />
+                        <menuitem value="1" label="1"/>
+                        <menuitem value="2" label="2"/>
+                        <menuitem value="3" label="3"/>
+                    </menupopup>
+                </menulist>
+            </row>
+            <row align="center" style="margin-bottom:8px;">
+                <label value="&sb.multiple.charset;:" />
+                <menulist id="sbCharset" editable="true">
+                    <menupopup id="sbCharsetitems">
+                        <menuitem value="" label="" selected="true" />
+                        <menuitem value="BIG5" label="BIG5" />
+                        <menuitem value="GBK" label="GBK" />
+                        <menuitem value="ISO-8859-1" label="ISO-8859-1" />
+                        <menuitem value="SHIFT-JIS" label="SHIFT_JIS" />
+                        <menuitem value="UTF-8" label="UTF-8" />
+                    </menupopup>
+                </menulist>
+            </row>
+        </rows>
+    </grid>
 
-	<description>&sb.multiple.url;:</description>
-	<hbox>
-		<vbox flex="1">
-			<label id="sbpCounter" flex="1" value="" />
-		</vbox>
-		<vbox>
-			<button type="menu" label="&sb.multiple.detector;">
-				<menupopup>
-					<menuitem label="&sb.multiple.detector.plink;" oncommand="sbMultipleService.detectURLsInPage();" />
-					<menuitem label="&sb.multiple.detector.slink;" oncommand="sbMultipleService.detectURLsInSelection();" />
-					<menuitem label="&sb.multiple.detector.tabs;"  oncommand="sbMultipleService.detectURLsOfTabs();" />
-					<menuitem label="&sb.multiple.detector.local;" oncommand="sbURLDetector1.run();" />
-					<menuitem label="&sb.multiple.detector.bookmarks; (bookmarks.html)" oncommand="sbURLDetector2.run('B');" />
-					<menuitem label="WeBoX (default.html)"         oncommand="sbURLDetector2.run('W');" />
-					<menuseparator />
-					<menuitem label="&sb.multiple.detector.clear;"    oncommand="sbMultipleService.clear();" />
-				</menupopup>
-			</button>
-		</vbox>
-	</hbox>
-	<textbox id="ScrapBookTextbox" multiline="true" rows="15" flex="1" />
-	<checkbox id="sbpExcludeExistingAddresses" label="&sbp.multiple.exclude;" checked="true" onclick="sbMultipleService.updateSelection(event);" />
-	<label id="sbStatus" crop="end" value="" />
+    <description>&sb.multiple.url;:</description>
+    <hbox>
+        <vbox flex="1">
+            <label id="sbpCounter" flex="1" value="" />
+        </vbox>
+        <vbox>
+            <button type="menu" label="&sb.multiple.detector;">
+                <menupopup>
+                    <menuitem label="&sb.multiple.detector.plink;" oncommand="sbMultipleService.detectURLsInPage();" />
+                    <menuitem label="&sb.multiple.detector.slink;" oncommand="sbMultipleService.detectURLsInSelection();" />
+                    <menuitem label="&sb.multiple.detector.tabs;"  oncommand="sbMultipleService.detectURLsOfTabs();" />
+                    <menuitem label="&sb.multiple.detector.local;" oncommand="sbURLDetector1.run();" />
+                    <menuitem label="&sb.multiple.detector.bookmarks; (bookmarks.html)" oncommand="sbURLDetector2.run('B');" />
+                    <menuitem label="WeBoX (default.html)"         oncommand="sbURLDetector2.run('W');" />
+                    <menuseparator />
+                    <menuitem label="&sb.multiple.detector.clear;"    oncommand="sbMultipleService.clear();" />
+                </menupopup>
+            </button>
+        </vbox>
+    </hbox>
+    <textbox id="ScrapBookTextbox" multiline="true" rows="15" flex="1" />
+    <checkbox id="sbpExcludeExistingAddresses" label="&sbp.multiple.exclude;" checked="true" onclick="sbMultipleService.updateSelection(event);" />
+    <label id="sbStatus" crop="end" value="" />
 
 </dialog>

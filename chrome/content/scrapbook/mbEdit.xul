@@ -5,10 +5,10 @@
 <?xml-stylesheet href="chrome://browser/skin/preferences/preferences.css"?>
 
 <!DOCTYPE dialog [
-	<!ENTITY % mbManageDTD SYSTEM "chrome://scrapbook/locale/mbManage.dtd" >
-	%mbManageDTD;
-	<!ENTITY % settingDTD  SYSTEM "chrome://scrapbook/locale/prefs.dtd" >
-	%settingDTD;
+    <!ENTITY % mbManageDTD SYSTEM "chrome://scrapbook/locale/mbManage.dtd" >
+    %mbManageDTD;
+    <!ENTITY % settingDTD  SYSTEM "chrome://scrapbook/locale/prefs.dtd" >
+    %settingDTD;
 ]>
 
 <dialog id="mbEditDialog"
@@ -19,30 +19,30 @@
         ondialogcancel="mbEditDialog.cancel();"
         style="width: 36em;">
 
-	<script type="application/x-javascript" src="chrome://scrapbook/content/mbEdit.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/mbEdit.js" />
 
-	<grid flex="1">
-		<columns>
-			<column />
-			<column flex="1" />
-		</columns>
-		<rows>
-			<row align="center">
-				<label control="mbName" value="&mb.prop.name;:" />
-				<textbox id="mbName" flex="1" />
-			</row>
-			<spacer height="5" />
-			<row align="center">
-				<label control="mbPath" value="&mb.prop.path;:" />
-				<hbox>
-					<filefield id="mbPath" flex="1" />
-					<button label="&sb.button.browse;..." label2="&sb.prefs.data.tips;"
-					        oncommand="mbEditDialog.selectFolder(this.getAttribute('label2'));" />
-				</hbox>
-			</row>
-		</rows>
-	</grid>
+    <grid flex="1">
+        <columns>
+            <column />
+            <column flex="1" />
+        </columns>
+        <rows>
+            <row align="center">
+                <label control="mbName" value="&mb.prop.name;:" />
+                <textbox id="mbName" flex="1" />
+            </row>
+            <spacer height="5" />
+            <row align="center">
+                <label control="mbPath" value="&mb.prop.path;:" />
+                <hbox>
+                    <filefield id="mbPath" flex="1" />
+                    <button label="&sb.button.browse;..." label2="&sb.prefs.data.tips;"
+                            oncommand="mbEditDialog.selectFolder(this.getAttribute('label2'));" />
+                </hbox>
+            </row>
+        </rows>
+    </grid>
 
-	<spacer height="20" />
+    <spacer height="20" />
 
 </dialog>

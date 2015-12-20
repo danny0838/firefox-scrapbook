@@ -16,20 +16,20 @@
         ondialogaccept="sbFolderPicker.accept();"
         ondialogextra2="sbMainService.createFolder(true);">
 
-	<script type="application/x-javascript" src="chrome://scrapbook/content/folderPicker.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/multiple.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/folderPicker.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/multiple.js" />
 
-	<broadcasterset id="sbBroadcasters" />
+    <broadcasterset id="sbBroadcasters" />
 
-	<checkbox id="sbFolderPickerRoot" checked="true" oncommand="sbTreeHandler.TREE.view.selection.clearSelection();" style="margin-bottom: 10px;" />
+    <checkbox id="sbFolderPickerRoot" checked="true" oncommand="sbTreeHandler.TREE.view.selection.clearSelection();" style="margin-bottom: 10px;" />
 
-	<tree id="sbTree"
-	      seltype="single"
-	      hidecolumnpicker="true"
-	      onclick="sbTreeHandler.onClick(event, 0);"
-	      onkeypress="event.stopPropagation();"
-	      onselect="sbFolderPicker.update();"
-	      style="-moz-appearance: listbox;"
-	      flex="1" />
+    <tree id="sbTree"
+          seltype="single"
+          hidecolumnpicker="true"
+          onclick="sbTreeHandler.onClick(event, 0);"
+          onkeypress="event.stopPropagation();"
+          onselect="sbFolderPicker.update();"
+          style="-moz-appearance: listbox;"
+          flex="1" />
 
 </dialog>

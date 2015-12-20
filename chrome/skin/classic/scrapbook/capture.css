@@ -1,36 +1,36 @@
 /* ::::: INDICATOR ::::: */
 
 listitem[indicated="true"] {
-	background-color: #33CC33;
+    background-color: #33CC33;
 }
 
 listitem[indicated="true"] label {
-	color: #FFFFFF;
+    color: #FFFFFF;
 }
 
 listitem[disabled="true"] image {
-	visibility: hidden;
+    visibility: hidden;
 }
 
 /* ::::: SUCCEED & FAILURE ::::: */
 
 listitem[status="succeed"] label {
-	color: #33CC33;
+    color: #33CC33;
 }
 
 listitem[status="failure"] label {
-	color: #FF0000;
-	font-weight: bold;
+    color: #FF0000;
+    font-weight: bold;
 }
 
 /* ::::: TOOLBAR BUTTON ::::: */
 
 toolbarbutton {
-	margin-left: 5px;
-	padding-right: 5px;
+    margin-left: 5px;
+    padding-right: 5px;
 }
 
 toolbarbutton dropmarker {
-	padding-left: 5px;
+    padding-left: 5px;
 }
 
