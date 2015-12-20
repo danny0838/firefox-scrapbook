@@ -1207,7 +1207,7 @@ var sbSearchQueryHandler = {
 	},
 
 	_match_content : function(aKeyItem, aRes, aText) {
-		return this.matchText(aKeyItem, aText || "");
+		return this.matchText(aKeyItem, "content", aText || "");
 	},
 
 	_match_all : function(aKeyItem, aRes, aText) {
