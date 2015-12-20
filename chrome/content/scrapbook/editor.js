@@ -1493,6 +1493,7 @@ var sbDOMEraser = {
 	lastX : 0,
 	lastY : 0,
 	lastWindow : null,
+	lastMouseWindow : null,
 	lastTarget : null,
 	lastTargetOutline : "",
 	widerStack : null,
@@ -1531,27 +1532,31 @@ var sbDOMEraser = {
 
 	initEvent : function(aWindow, aStateFlag)
 	{
-		aWindow.document.removeEventListener("mouseover", this.handleEvent, true);
-		aWindow.document.removeEventListener("mousemove", this.handleEvent, true);
-		aWindow.document.removeEventListener("click",     this.handleEvent, true);
-		aWindow.document.removeEventListener("keydown",   this.handleKeyEvent, true);
-		if ( aStateFlag == 1 ) {
-			aWindow.document.addEventListener("mouseover", this.handleEvent, true);
-			aWindow.document.addEventListener("mousemove", this.handleEvent, true);
-			aWindow.document.addEventListener("click",     this.handleEvent, true);
-			aWindow.document.addEventListener("keydown",   this.handleKeyEvent, true);
-		}
+        sbCommonUtils.flattenFrames(aWindow).forEach(function(win) {
+            win.document.removeEventListener("mouseover", this.handleEvent, true);
+            win.document.removeEventListener("mousemove", this.handleEvent, true);
+            win.document.removeEventListener("click",     this.handleEvent, true);
+            win.document.removeEventListener("keydown",   this.handleKeyEvent, true);
+            if ( aStateFlag == 1 ) {
+                win.document.addEventListener("mouseover", this.handleEvent, true);
+                win.document.addEventListener("mousemove", this.handleEvent, true);
+                win.document.addEventListener("click",     this.handleEvent, true);
+                win.document.addEventListener("keydown",   this.handleKeyEvent, true);
+            }
+        }, this);
 	},
 
 	initStyle : function(aWindow, aStateFlag)
 	{
-		if ( aStateFlag == 1 ) {
-			var estyle = "* { cursor: crosshair !important; }";
-			sbPageEditor.applyStyle(aWindow, "scrapbook-eraser-style", estyle);
-		}
-		else {
-			sbPageEditor.removeStyle(aWindow, "scrapbook-eraser-style");
-		}
+        sbCommonUtils.flattenFrames(aWindow).forEach(function(win) {
+            if ( aStateFlag == 1 ) {
+                var estyle = "* { cursor: crosshair !important; }";
+                sbPageEditor.applyStyle(win, "scrapbook-eraser-style", estyle);
+            }
+            else {
+                sbPageEditor.removeStyle(win, "scrapbook-eraser-style");
+            }
+        }, this);
 	},
 
 	handleKeyEvent : function(aEvent)
@@ -1595,6 +1600,7 @@ var sbDOMEraser = {
 		else if ( aEvent.type == "mousemove" ) {
 			sbDOMEraser.lastX = aEvent.clientX;
 			sbDOMEraser.lastY = aEvent.clientY;
+            sbDOMEraser.lastMouseWindow = aEvent.target.ownerDocument.defaultView;
 			sbDOMEraser._clearHelp();
 		}
 		else if ( aEvent.type == "click" ) {
@@ -1977,6 +1983,11 @@ var sbDOMEraser = {
 		var x = this.lastX + 10; if (x < 0) x = 0;
 		var y = dims.scrollY + this.lastY + 10; if (y < 0) y = 0;
 
+        // if in frame, add parent window offset
+        var pos = sbDOMEraser._getFrameOffset(sbDOMEraser.lastMouseWindow);
+        x += pos.x;
+        y += pos.y;
+
 		var keyboxElem = doc.createElement("DIV");
 		keyboxElem.isDOMEraser = true; // mark as ours
 		keyboxElem.style.backgroundColor = "#dfd";
@@ -2034,10 +2045,80 @@ var sbDOMEraser = {
 	{
 		while (elem) {
 			if (["#document","scrollbar","html","body","frame","frameset"].indexOf(elem.nodeName.toLowerCase()) == -1) return elem;
+            if (!elem.parentNode) {  // now elem is #document
+                var win = elem.defaultView;
+                var parent = win.parent;
+                // if the elem is in a frame, go out to the frame element and then go up
+                if (win != parent) {
+                    elem = this._findFrameElement(win, parent);
+                    continue;
+                }
+            }
 			elem = elem.parentNode;
 		}
 		return null;
 	},
+
+	// find which element in parentWin owns the given frame
+    _findFrameElement : function (frame, parentWin)
+    {
+        var elems = parentWin.document.getElementsByTagName("iframe");
+        for (var i=0, I=elems.length; i<I; ++i) {
+            var elem = elems[i];
+            if (elem.contentDocument.defaultView === frame) {
+                return elem;
+            }
+        }
+        var elems = parentWin.document.getElementsByTagName("frame");
+        for (var i=0, I=elems.length; i<I; ++i) {
+            var elem = elems[i];
+            if (elem.contentDocument.defaultView === frame) {
+                return elem;
+            }
+        }
+        return null;
+    },
+
+    _getPos : function (elem)
+    {
+        var pos = sbDOMEraser._getPosInWindow(elem);
+        var pos2 = sbDOMEraser._getFrameOffset(elem.ownerDocument.defaultView);
+        pos.x += pos2.x;
+        pos.y += pos2.y;
+        return pos;
+    },
+
+    // if win is a frame, get its offset relative to all parent windows
+    _getFrameOffset : function(win)
+    {
+        var pos = {x: 0, y: 0};
+        var parent = win.parent;
+        while (win != parent) {
+            var frameElem = sbDOMEraser._findFrameElement(win, parent);
+            var framePos = sbDOMEraser._getPosInWindow(frameElem);
+            pos.x += framePos.x;
+            pos.y += framePos.y;
+            win = parent;
+            parent = win.parent;
+        }
+        return pos;
+    },
+
+    _getPosInWindow : function (elem)
+    {
+        var pos = {x: 0, y: 0};
+        if (elem.offsetParent) {
+            while (elem.offsetParent) {
+                pos.x += elem.offsetLeft;
+                pos.y += elem.offsetTop;
+                elem = elem.offsetParent;
+            }
+        } else if (elem.x) {
+            pos.x += elem.x;
+            pos.y += elem.y;
+        }
+        return pos;
+    },
 
 	_selectNode : function(aNode) {
 		this._deselectNode();
@@ -2065,7 +2146,7 @@ var sbDOMEraser = {
 		function createLabel(win, elem, text) {
 			var doc = win.document;
 			var dims = sbDOMEraser._getWindowDimensions(win);
-			var pos = getPos(elem), x = pos.x, y = pos.y;
+			var pos = sbDOMEraser._getPos(elem), x = pos.x, y = pos.y;
 			y += elem.offsetHeight;
 
 			var labelElem = doc.createElement("DIV");
@@ -2093,26 +2174,6 @@ var sbDOMEraser = {
 
 			// expose this variable
 			this.labelElem = labelElem;
-		}
-
-		function getPos(elem) {
-			var pos = {};
-
-			var leftX = 0;
-			var leftY = 0;
-			if (elem.offsetParent) {
-				while (elem.offsetParent) {
-					leftX += elem.offsetLeft;
-					leftY += elem.offsetTop;
-					elem = elem.offsetParent;
-				}
-			} else if (elem.x) {
-				leftX += elem.x;
-				leftY += elem.y;
-			}
-			pos.x = leftX;
-			pos.y = leftY;
-			return pos;
 		}
 
 		function makeElementLabelString(elem) {
