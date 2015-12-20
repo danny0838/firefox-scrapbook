@@ -6,7 +6,7 @@
 	<Description about="urn:mozilla:install-manifest">
 		<em:id>scrapbookx@addons.mozilla.org</em:id>
 		<em:type>2</em:type>
-		<em:version>1.12.14</em:version>
+		<em:version>1.12.15</em:version>
 
 		<em:name>ScrapBook X</em:name>
 		<em:description>Helps you save web pages and organize the collection.</em:description>
@@ -261,7 +261,7 @@
 			<Description>
 				<em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
 				<em:minVersion>3.0</em:minVersion>
-				<em:maxVersion>38.*</em:maxVersion>
+				<em:maxVersion>44.*</em:maxVersion>
 			</Description>
 		</em:targetApplication>
 	</Description>

@@ -99,6 +99,62 @@ var sbPrefWindow = {
 		event.target.value = event.target.value.toUpperCase().replace(/[^A-Z]/g, '');
 	},
 
+    exportPrefs: function() {
+        var oFP = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
+        oFP.init(window, "Export Preferences", oFP.modeSave);
+        oFP.defaultString = "scrapbook.prefs." + sbCommonUtils.getTimeStamp().substring(0, 8) + ".json";
+        oFP.defaultExtension = "json";
+        oFP.appendFilter("JSON files", "*.json");
+        oFP.appendFilters(oFP.filterAll);
+
+        var ret = oFP.show();
+        if (ret == oFP.returnOK || ret == oFP.returnReplace)
+        {
+            var list = sbCommonUtils.getPrefKeys();
+            var result = {};
+            for (var i=0, I=list.length; i<I; ++i) {
+                result[list[i]] = sbCommonUtils.getPref(list[i]);
+            }
+            sbCommonUtils.writeFile(oFP.file, JSON.stringify(result));
+            return true;
+        }
+        return false;
+    },
+    
+    importPrefs: function() {
+        var oFP = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
+        oFP.init(window, "Import Preferences", oFP.modeOpen);
+        oFP.defaultExtension = "json";
+        oFP.appendFilter("JSON files", "*.json");
+        oFP.appendFilters(oFP.filterAll);
+
+        if (oFP.show() == oFP.returnOK) {
+            try {
+                var data = sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(oFP.file), "UTF-8");
+                var prefs = JSON.parse(data);
+                for (var i in prefs) {
+                    sbCommonUtils.setPref(i, prefs[i]);
+                }
+                sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_UPDATE_PREFS"));
+                return true;
+            } catch(ex) {
+                sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_UPDATE_PREFS", [ex]));
+                return false;
+            }
+        }
+        return false;
+    },
+    
+    resetPrefs: function() {
+        try {
+            sbCommonUtils.resetPrefs();
+            sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_UPDATE_PREFS"));
+            return true;
+        } catch(ex) {
+            sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_UPDATE_PREFS", [ex]));
+            return false;
+        }
+    }
 };
 
 

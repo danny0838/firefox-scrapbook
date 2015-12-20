@@ -309,6 +309,11 @@
 		<checkbox preference="extensions.scrapbook.notifyOnComplete" label="&sb.prefs.notifyOnComplete;" />
 		<checkbox preference="extensions.scrapbook.notifyPageCaptured" label="&sb.prefs.notifyPageCaptured;" />
 		<checkbox preference="extensions.scrapbook.autoOutput"       label="&sb.prefs.autoOutput;" />
+        <hbox>
+            <button label="&sb.prefs.export;" oncommand="sbPrefWindow.exportPrefs();" />
+            <button label="&sb.prefs.import;" oncommand="sbPrefWindow.importPrefs();" />
+            <button label="&sb.prefs.reset;" oncommand="sbPrefWindow.resetPrefs();" />
+        </hbox>
 		</vbox>
 	</prefpane>
 
