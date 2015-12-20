@@ -9,8 +9,7 @@ function getElement(aID) {
 
 var hlCustomizer = {
 
-    init: function() 
-    {
+    init: function() {
         if (!window.arguments || !(gArg = window.arguments[0])) {
             window.close();
             return;
@@ -23,14 +22,12 @@ var hlCustomizer = {
         this.syncFromPreview();
     },
 
-    done: function() 
-    {
+    done: function() {
         sbCommonUtils.setPref(gPrefName, gPreviewUI.style.cssText);
         gArg.result = 1;
     },
 
-    syncFromPreview: function()
-    {
+    syncFromPreview: function() {
         getElement("hlTextBold").checked   = gPreviewUI.style.fontWeight == "bold";
         getElement("hlTextItalic").checked = gPreviewUI.style.fontStyle == "italic";
         getElement("hlTextStrike").checked = gPreviewUI.style.textDecoration == "line-through";
@@ -46,8 +43,7 @@ var hlCustomizer = {
         this._updateUIActiveState();
     },
 
-    syncToPreview: function()
-    {
+    syncToPreview: function() {
         var rules = [];
         if (getElement("hlTextBold").checked)
             rules.push("font-weight: bold;");
@@ -71,8 +67,7 @@ var hlCustomizer = {
         gPreviewUI.setAttribute("tooltiptext", gPreviewUI.style.cssText);
     },
 
-    _updateUIActiveState: function()
-    {
+    _updateUIActiveState: function() {
         var bgEnabled     = getElement("hlBackgroundEnabled").checked;
         var textEnabled   = getElement("hlTextEnabled").checked;
         var borderEnabled = getElement("hlBorderEnabled").checked;
@@ -92,8 +87,7 @@ var hlCustomizer = {
 
     _presetIndex: 0,
 
-    rotatePreset: function()
-    {
+    rotatePreset: function() {
         if (++this._presetIndex > 8)
             this._presetIndex = 0;
         var button = getElement("hlCustomizeDialog").getButton("extra2");

@@ -13,8 +13,7 @@ var sbPropService = {
     isTypeFile     : false,
     isTypeSite     : false,
 
-    init : function()
-    {
+    init : function() {
         if (!window.arguments) { window.close(); return; }
         // get item and properties
         this.id = window.arguments[0];
@@ -93,14 +92,12 @@ var sbPropService = {
             setTimeout(function(){ sbPropService.delayedInit(); }, 0);
     },
 
-    delayedInit : function()
-    {
+    delayedInit : function() {
         var sizeCount = this.getTotalFileSize(this.id);
         document.getElementById("sbPropSize").value = sbCommonUtils.lang("property", "FILES_COUNT", [sbPropService.formatFileSize(sizeCount[0]), sizeCount[1], sizeCount[2]]);
     },
 
-    accept : function()
-    {
+    accept : function() {
         var newVals = {
             title   : document.getElementById("sbPropTitle").value,
             source  : document.getElementById("sbPropSource").value,
@@ -137,33 +134,27 @@ var sbPropService = {
             window.arguments[1].accept = true;
     },
 
-    cancel : function()
-    {
+    cancel : function() {
         if ( window.arguments[1] ) window.arguments[1].accept = false;
     },
 
-    fillTitle : function(aPopupElem)
-    {
+    fillTitle : function(aPopupElem) {
         if ( this.isTypeFolder || this.isTypeNote || this.isTypeFile || this.isTypeBookmark ) return;
-        if ( !aPopupElem.hasChildNodes() )
-        {
+        if ( !aPopupElem.hasChildNodes() ) {
             aPopupElem.parentNode.appendItem(this.getHTMLTitle(this.id, this.item.chars));
         }
     },
 
-    setDefaultIcon : function()
-    {
+    setDefaultIcon : function() {
         this.ICON.src = sbCommonUtils.getDefaultIcon(this.item.type);
     },
 
-    getIconURL : function()
-    {
+    getIconURL : function() {
         var iconURL = this.ICON.src;
         return ( iconURL.indexOf("chrome://scrapbook/skin/") == 0 ) ? "" : iconURL;
     },
 
-    pickupIcon : function(aCommand, aPickerLabel)
-    {
+    pickupIcon : function(aCommand, aPickerLabel) {
         var dir;
         if ( aCommand == "F" ) {
             dir = sbCommonUtils.getContentDir(this.item.id, true);
@@ -177,8 +168,7 @@ var sbPropService = {
         FP.init(window, aPickerLabel, FP.modeOpen);
         FP.displayDirectory = dir;
         FP.appendFilters(FP.filterImages);
-        if ( FP.show() == FP.returnOK )
-        {
+        if ( FP.show() == FP.returnOK ) {
             var iconURL;
             if      ( aCommand == "F" && dir.contains(FP.file, false) ) iconURL = sbCommonUtils.convertFileToResURL(FP.file);
             else if ( aCommand == "U" && dir.contains(FP.file, false) ) iconURL = sbCommonUtils.convertFileToResURL(FP.file);
@@ -187,15 +177,13 @@ var sbPropService = {
         }
     },
 
-    setIconURL : function()
-    {
+    setIconURL : function() {
         var ret = { value : this.getIconURL() };
         if ( !sbCommonUtils.PROMPT.prompt(window, document.getElementById("sbPropIconMenu").label, sbCommonUtils.lang("property", "ADDRESS"), ret, null, {}) ) return;
         if ( ret.value ) this.ICON.src = ret.value;
     },
 
-    updateCommentTab : function(aComment)
-    {
+    updateCommentTab : function(aComment) {
         var elem = document.getElementById("sbPropCommentTab");
         if ( aComment )
             elem.setAttribute("image", "chrome://scrapbook/skin/edit_comment.png");
@@ -203,8 +191,7 @@ var sbPropService = {
             elem.removeAttribute("image");
     },
 
-    getHTMLTitle : function(aID, aChars)
-    {
+    getHTMLTitle : function(aID, aChars) {
         var file  = sbCommonUtils.getContentDir(aID, true);
         if ( !file ) return "";
         file.append("index.html");
@@ -212,8 +199,7 @@ var sbPropService = {
         return content.match(/<title>([^<]+?)<\/title>/im) ? RegExp.$1 : "";
     },
 
-    getTotalFileSize : function(aID)
-    {
+    getTotalFileSize : function(aID) {
         var totalSize = 0;
         var totalFile = 0;
         var totalDir  = 0;
@@ -235,8 +221,7 @@ var sbPropService = {
         return [totalSize, totalFile, totalDir];
     },
 
-    formatFileSize : function(aBytes)
-    {
+    formatFileSize : function(aBytes) {
         if ( aBytes > 1000 * 1000 ) {
             return this.divideBy100( Math.round( aBytes / 1024 / 1024 * 100 ) ) + " MB";
         } else if ( aBytes == 0 ) {
@@ -247,8 +232,7 @@ var sbPropService = {
         }
     },
 
-    divideBy100 : function(aInt)
-    {
+    divideBy100 : function(aInt) {
         if ( aInt % 100 == 0 ) {
             return aInt / 100 + ".00";
         } else if ( aInt % 10 == 0 ) {

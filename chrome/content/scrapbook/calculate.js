@@ -12,11 +12,9 @@ var sbCalcService = {
     grandSum : 0,
     invalidCount : 0,
 
-    exec : function()
-    {
+    exec : function() {
         var resEnum = sbDataSource.data.GetAllResources();
-        while ( resEnum.hasMoreElements() )
-        {
+        while ( resEnum.hasMoreElements() ) {
             var res = resEnum.getNext();
             if ( sbDataSource.isContainer(res) ) continue;
             this.total++;
@@ -45,17 +43,14 @@ var sbCalcService = {
         this.processAsync();
     },
 
-    processAsync : function()
-    {
-        if ( !this.dirEnum.hasMoreElements() )
-        {
+    processAsync : function() {
+        if ( !this.dirEnum.hasMoreElements() ) {
             this.finish();
             return;
         }
         this.count++;
         var dir = this.dirEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
-        if ( dir.isDirectory() )
-        {
+        if ( dir.isDirectory() ) {
             var id = dir.leafName;
             var index = dir.clone(); index.append("index.html");
             var bytes = sbPropService.getTotalFileSize(id)[0];
@@ -84,8 +79,7 @@ var sbCalcService = {
         setTimeout(function() { sbCalcService.processAsync(); }, 0);
     },
 
-    finish : function()
-    {
+    finish : function() {
         sbCustomTreeUtil.sortArrayByIndex(this.treeItems, 4);
         this.treeItems.reverse();
         this.initTree();
@@ -96,49 +90,40 @@ var sbCalcService = {
         this.checkDoubleEntries();
     },
 
-    initTree : function()
-    {
+    initTree : function() {
         var colIDs = [
             "sbTreeColTitle",
             "sbTreeColSize",
             "sbTreeColState",
         ];
         var treeView = new sbCustomTreeView(colIDs, this.treeItems);
-        treeView.getCellText = function(row, col)
-        {
-            switch ( col.index )
-            {
+        treeView.getCellText = function(row, col) {
+            switch ( col.index ) {
                 case 0 : return this._items[row][2]; break;
                 case 1 : return this._items[row][5]; break;
                 case 2 : return this._items[row][6] ? "" : sbCommonUtils.lang("property", "INVALID"); break;
             }
         };
-        treeView.getImageSrc = function(row, col)
-        {
+        treeView.getImageSrc = function(row, col) {
             if ( col.index == 0 ) return this._items[row][3];
         };
-        treeView.getCellProperties = function(row, col, properties)
-        {
+        treeView.getCellProperties = function(row, col, properties) {
             if ( this._items[row][6] && col.index != 0 ) return "";
             var val = !this._items[row][6] ? "invalid" : this._items[row][1];
             if (sbCommonUtils._fxVer22) return val;
             else properties.AppendElement(ATOM_SERVICE.getAtom(val));
         };
-        treeView.cycleHeader = function(col)
-        {
+        treeView.cycleHeader = function(col) {
             sbCustomTreeUtil.sortItems(sbCalcService, col.element);
         };
         this.TREE.view = treeView;
     },
 
-    checkDoubleEntries : function()
-    {
+    checkDoubleEntries : function() {
         var hashTable = {};
         var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"), 0, true);
-        for ( var i = 0; i < resList.length; i++ )
-        {
-            if ( resList[i].Value in hashTable )
-            {
+        for ( var i = 0; i < resList.length; i++ ) {
+            if ( resList[i].Value in hashTable ) {
                 sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "WARN_DOUBLE_ENTRY", [sbDataSource.getProperty(resList[i], "title")]));
                 var parRes = sbDataSource.findParentResource(resList[i]);
                 if ( parRes ) sbDataSource.removeFromContainer(parRes.Value, resList[i]);
@@ -154,26 +139,22 @@ var sbCalcService = {
 
 var sbCalcController = {
 
-    get CURRENT_TREEITEM()
-    {
+    get CURRENT_TREEITEM() {
         return sbCalcService.treeItems[sbCalcService.TREE.currentIndex];
     },
 
     createPopupMenu : function(aEvent) {},
 
-    onDblClick : function(aEvent)
-    {
+    onDblClick : function(aEvent) {
         if ( aEvent.button == 0 && aEvent.originalTarget.localName == "treechildren" ) this.open(false);
     },
 
-    open : function(tabbed)
-    {
+    open : function(tabbed) {
         var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.CURRENT_TREEITEM[0]);
         sbCommonUtils.loadURL(sbDataSource.getURL(res), tabbed);
     },
 
-    remove : function()
-    {
+    remove : function() {
         var id = this.CURRENT_TREEITEM[0];
         if (this.CURRENT_TREEITEM[6]) {
             if (!sbController.confirmRemovingPrompt()) return;
@@ -196,11 +177,9 @@ var sbCalcController = {
         } catch(ex) {}
     },
 
-    forward : function(aCommand)
-    {
+    forward : function(aCommand) {
         var id = this.CURRENT_TREEITEM[0];
-        switch ( aCommand )
-        {
+        switch ( aCommand ) {
             case "P" : window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome" ,id); break;
             case "L" : sbController.launch(sbCommonUtils.getContentDir(id, true, true));
             default  : break;

@@ -25,8 +25,7 @@ var sbBrowserOverlay = {
         },
     },
 
-    init: function()
-    {
+    init: function() {
         gBrowser.addProgressListener(this.webProgressListener);
         document.getElementById("contentAreaContextMenu").addEventListener( "popupshowing", this, false);
         this.refresh();
@@ -53,18 +52,15 @@ var sbBrowserOverlay = {
         }
     },
 
-    destroy: function()
-    {
+    destroy: function() {
         gBrowser.removeProgressListener(this.webProgressListener);
     },
 
-    rebuild: function()
-    {
+    rebuild: function() {
         sbMenuHandler.shouldRebuild = true;
     },
 
-    refresh: function()
-    {
+    refresh: function() {
         this.lastLocation = "";
         this.editMode = sbPageEditor.TOOLBAR.getAttribute("autoshow") == "true";
         this.infoMode = sbInfoViewer.TOOLBAR.getAttribute("autoshow") == "true";
@@ -117,8 +113,7 @@ var sbBrowserOverlay = {
         this.onLocationChange(gBrowser.currentURI.spec);
     },
 
-    setProtocolSubstitution: function()
-    {
+    setProtocolSubstitution: function() {
         var baseURL = sbCommonUtils.getBaseHref(sbDataSource.data.URI);
         var RPH = sbCommonUtils.IO.getProtocolHandler("resource")
                   .QueryInterface(Components.interfaces.nsIResProtocolHandler);
@@ -127,14 +122,12 @@ var sbBrowserOverlay = {
         RPH.setSubstitution("scrapbook", sbCommonUtils.convertURLToObject(baseURL));
     },
 
-    getID: function(aURL)
-    {
+    getID: function(aURL) {
         if (!aURL) aURL = gBrowser.currentURI ? gBrowser.currentURI.spec : "";
         return sbCommonUtils.convertURLToId(aURL);
     },
 
-    onLocationChange: function(aURL)
-    {
+    onLocationChange: function(aURL) {
         if (aURL && aURL != (gBrowser.currentURI ? gBrowser.currentURI.spec : ""))
             return;
         if (aURL.indexOf("file") != 0 && aURL == this.lastLocation)
@@ -158,8 +151,7 @@ var sbBrowserOverlay = {
         this.lastLocation = aURL;
     },
 
-    notifyPageCaptured: function(aURL)
-    {
+    notifyPageCaptured: function(aURL) {
         aURL = sbCommonUtils.splitURLByAnchor(aURL)[0];
         var result = [];
         var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"), 2, true);
@@ -187,8 +179,7 @@ var sbBrowserOverlay = {
         }
     },
 
-    buildPopup: function(aPopup)
-    {
+    buildPopup: function(aPopup) {
         var menuItem;
         menuItem = aPopup.appendChild(document.createElement("menuitem"));
         menuItem.id = "urn:scrapbook:root";
@@ -218,14 +209,12 @@ var sbBrowserOverlay = {
         menuItem.setAttribute("label", sbCommonUtils.lang("overlay", "SELECT_FOLDER"));
     },
 
-    destroyPopup: function(aPopup)
-    {
+    destroyPopup: function(aPopup) {
         while (aPopup.hasChildNodes())
             aPopup.removeChild(aPopup.lastChild);
     },
 
-    updateFolderPref : function(aResURI)
-    {
+    updateFolderPref : function(aResURI) {
         if ( aResURI == "urn:scrapbook:root" ) return;
         var oldIDs = sbCommonUtils.getPref("ui.folderList", "");
         oldIDs = oldIDs ? oldIDs.split("|") : [];
@@ -238,8 +227,7 @@ var sbBrowserOverlay = {
         sbCommonUtils.writeFile(file, newIDs, "UTF-8");
     },
 
-    verifyTargetID : function(aTargetID)
-    {
+    verifyTargetID : function(aTargetID) {
         if (aTargetID == "ScrapBookContextPicking") {
             var ret = {};
             window.openDialog(
@@ -253,10 +241,8 @@ var sbBrowserOverlay = {
         return aTargetID;
     },
 
-    execCapture : function(aPartialEntire, aFrameOnly, aShowDetail, aTargetID)
-    {
-        if ( aPartialEntire == 0 )
-        {
+    execCapture : function(aPartialEntire, aFrameOnly, aShowDetail, aTargetID) {
+        if ( aPartialEntire == 0 ) {
             aPartialEntire = this.isSelected() ? 1 : 2;
             aFrameOnly = aPartialEntire == 1;
         }
@@ -267,8 +253,7 @@ var sbBrowserOverlay = {
         return ret;
     },
 
-    execCaptureTarget : function(aShowDetail, aTargetID)
-    {
+    execCaptureTarget : function(aShowDetail, aTargetID) {
         aTargetID = this.verifyTargetID(aTargetID);
         if ( !aTargetID ) return;
         var linkURL;
@@ -296,16 +281,14 @@ var sbBrowserOverlay = {
         window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
     },
 
-    execBookmark: function(aTargetID)
-    {
+    execBookmark: function(aTargetID) {
         aTargetID = this.verifyTargetID(aTargetID);
         if (!aTargetID)
             return;
         this.bookmark(aTargetID, 0);
     },
 
-    bookmark: function(aResName, aResIndex, aPreset)
-    {
+    bookmark: function(aResName, aResIndex, aPreset) {
         var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
         var newItem = sbCommonUtils.newItem(newID);
         newItem.type   = "bookmark";
@@ -319,8 +302,7 @@ var sbBrowserOverlay = {
         sbCommonUtils.rebuildGlobal();
     },
 
-    execLocate: function(aRes)
-    {
+    execLocate: function(aRes) {
         var sidebarId = sbCommonUtils.getSidebarId("sidebar");
         if (!aRes)
             return;
@@ -336,8 +318,7 @@ var sbBrowserOverlay = {
         }
     },
 
-    getLinkURI: function()
-    {
+    getLinkURI: function() {
         var i = 0;
         var linkURL;
         var curNode = document.popupNode;
@@ -353,8 +334,7 @@ var sbBrowserOverlay = {
             return linkURL;
     },
 
-    isSelected : function()
-    {
+    isSelected : function() {
         var sel = sbCommonUtils.getFocusedWindow().getSelection().QueryInterface(Components.interfaces.nsISelectionPrivate);
         var isSelected = false;
         try {
@@ -364,14 +344,12 @@ var sbBrowserOverlay = {
         return isSelected;
     },
 
-    handleEvent: function(event)
-    {
+    handleEvent: function(event) {
         if (event.type == "popupshowing")
             this.onPopupShowing(event);
     },
 
-    onPopupShowing : function(event)
-    {
+    onPopupShowing : function(event) {
         if (event.originalTarget.id != "contentAreaContextMenu")
             return;
         var selected, onLink, inFrame, onInput;
@@ -410,8 +388,7 @@ var sbBrowserOverlay = {
         getElement("ScrapBookContextMenu10").hidden = !prefContext || !sbHtmlEditor.enabled;
     },
 
-    onMiddleClick: function(event, aFlag)
-    {
+    onMiddleClick: function(event, aFlag) {
         if (event.originalTarget.localName == "menu" || event.button != 1)
             return;
         switch (aFlag) {
@@ -433,8 +410,7 @@ var sbMenuHandler = {
     baseURL: "",
     shouldRebuild: false,
 
-    _init: function()
-    {
+    _init: function() {
         this._menu = document.getElementById("ScrapBookMenu");
         this.baseURL  = sbCommonUtils.getBaseHref(sbDataSource.data.URI);
         var dsEnum = this._menu.database.GetDataSources();
@@ -447,8 +423,7 @@ var sbMenuHandler = {
         this.shouldRebuild = false;
     },
 
-    onPopupShowing: function(event, aMenuPopup)
-    {
+    onPopupShowing: function(event, aMenuPopup) {
         var getElement = function(aID) {
             return document.getElementById(aID);
         };
@@ -488,8 +463,7 @@ var sbMenuHandler = {
         }
     },
 
-    onClick: function(event)
-    {
+    onClick: function(event) {
         if (event.target.id == "ScrapBookMenubarItem3" || event.target.id == "ScrapBookMenubarItem4")
             return;
         if (event.target.className.indexOf("sb-capture") >= 0) {
@@ -529,8 +503,7 @@ var sbMenuHandler = {
         event.stopPropagation();
     },
 
-    execCaptureAllTabs: function(aTargetID)
-    {
+    execCaptureAllTabs: function(aTargetID) {
         if (!aTargetID)
             aTargetID = sbBrowserOverlay.verifyTargetID("ScrapBookContextPicking");
         if (!aTargetID)
@@ -542,15 +515,13 @@ var sbMenuHandler = {
         this._goNextTab(tabList, aTargetID);
     },
 
-    _goNextTab: function(tabList, aTargetID)
-    {
+    _goNextTab: function(tabList, aTargetID) {
         if (tabList.length == 0)
             return;
         var tab = tabList.shift();
         gBrowser.selectedTab = tab;
         var win = gBrowser.getBrowserForTab(tab).contentWindow;
-        if (win.location.href != "about:blank")
-        {
+        if (win.location.href != "about:blank") {
             try {
                 sbContentSaver.captureWindow(win, false, false, aTargetID, 0, null);
             } catch(ex) {

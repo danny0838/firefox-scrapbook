@@ -107,13 +107,11 @@ var sbCommonUtils = {
         return iVerComparator.compare(ver1, ver2);
     },
 
-    newItem : function(aID)
-    {
+    newItem : function(aID) {
         return { id : aID || "", create : aID || "", modify : aID || "", type : "", title : "", chars : "", icon : "", source : "", comment : "", lock : "" };
     },
 
-    getScrapBookDir : function()
-    {
+    getScrapBookDir : function() {
         var dir;
         try {
             var isDefault = sbCommonUtils.getPref("data.default", true);
@@ -122,22 +120,18 @@ var sbCommonUtils = {
         } catch(ex) {
             isDefault = true;
         }
-        if ( isDefault )
-        {
+        if ( isDefault ) {
             dir = this.DIR.get("ProfD", Components.interfaces.nsIFile);
             dir.append("ScrapBook");
         }
-        if ( !dir.exists() )
-        {
+        if ( !dir.exists() ) {
             dir.create(dir.DIRECTORY_TYPE, 0700);
         }
         return dir;
     },
 
-    getContentDir : function(aID, aSuppressCreate, aSkipIdCheck)
-    {
-        if ( !aSkipIdCheck && !this.validateID(aID) )
-        {
+    getContentDir : function(aID, aSuppressCreate, aSkipIdCheck) {
+        if ( !aSkipIdCheck && !this.validateID(aID) ) {
             this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_GET_DIR", [aID]));
             return null;
         }
@@ -145,10 +139,8 @@ var sbCommonUtils = {
         dir.append("data");
         if ( !dir.exists() ) dir.create(dir.DIRECTORY_TYPE, 0700);
         dir.append(aID);
-        if ( !dir.exists() )
-        {
-            if ( aSuppressCreate )
-            {
+        if ( !dir.exists() ) {
+            if ( aSuppressCreate ) {
                 return null;
             }
             dir.create(dir.DIRECTORY_TYPE, 0700);
@@ -156,8 +148,7 @@ var sbCommonUtils = {
         return dir;
     },
 
-    removeDirSafety : function(aDir, check)
-    {
+    removeDirSafety : function(aDir, check) {
         var curFile;
         try {
             if ( check && !this.validateID(aDir.leafName) ) return;
@@ -174,8 +165,7 @@ var sbCommonUtils = {
         }
     },
 
-    loadURL : function(aURL, tabbed)
-    {
+    loadURL : function(aURL, tabbed) {
         var win = this.WINDOW.getMostRecentWindow("navigator:browser");
         if ( !win ) return;
         var browser = win.gBrowser;
@@ -186,18 +176,15 @@ var sbCommonUtils = {
         }
     },
 
-    rebuildGlobal : function()
-    {
+    rebuildGlobal : function() {
         this._refresh(false);
     },
 
-    refreshGlobal: function()
-    {
+    refreshGlobal: function() {
         this._refresh(true);
     },
 
-    _refresh: function(aDSChanged)
-    {
+    _refresh: function(aDSChanged) {
         var cur = this.WINDOW.getMostRecentWindow(null);
         var curDone = false;
         var sidebarId = this.getSidebarId("sidebar");
@@ -231,8 +218,7 @@ var sbCommonUtils = {
         }
     },
 
-    getTimeStamp : function(aDate)
-    {
+    getTimeStamp : function(aDate) {
         var dd = aDate || new Date();
         var y = dd.getFullYear();
         var m = dd.getMonth() + 1; if ( m < 10 ) m = "0" + m;
@@ -243,15 +229,13 @@ var sbCommonUtils = {
         return y.toString() + m.toString() + d.toString() + h.toString() + i.toString() + s.toString();
     },
 
-    getRootHref : function(aURLSpec)
-    {
+    getRootHref : function(aURLSpec) {
         var url = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
         url.spec = aURLSpec;
         return url.scheme + "://" + url.host + "/";
     },
 
-    getBaseHref : function(sURI)
-    {
+    getBaseHref : function(sURI) {
         var pos, base;
         base = ( (pos = sURI.indexOf("?")) != -1 ) ? sURI.substring(0, pos) : sURI;
         base = ( (pos = base.indexOf("#")) != -1 ) ? base.substring(0, pos) : base;
@@ -259,8 +243,7 @@ var sbCommonUtils = {
         return base;
     },
 
-    getFileName : function(aURI)
-    {
+    getFileName : function(aURI) {
         var pos, name;
         name = ( (pos = aURI.indexOf("?")) != -1 ) ? aURI.substring(0, pos) : aURI;
         name = ( (pos = name.indexOf("#")) != -1 ) ? name.substring(0, pos) : name;
@@ -273,8 +256,7 @@ var sbCommonUtils = {
         }
     },
 
-    splitFileName : function(aFileName)
-    {
+    splitFileName : function(aFileName) {
         var pos = aFileName.lastIndexOf(".");
         var ret = [];
         if ( pos != -1 ) {
@@ -289,8 +271,7 @@ var sbCommonUtils = {
 
     // process filename to make safe
     // see also: escapeFileName
-    validateFileName : function(aFileName)
-    {
+    validateFileName : function(aFileName) {
         aFileName = aFileName.replace(/[\x00-\x1F\x7F]+|^ +/g, "");
         aFileName = aFileName.replace(/[\"\?\*\\\/\|\:]/g, "_");
         aFileName = aFileName.replace(/[\<]/g, "(");
@@ -298,8 +279,7 @@ var sbCommonUtils = {
         return aFileName;
     },
 
-    resolveURL : function(aBaseURL, aRelURL)
-    {
+    resolveURL : function(aBaseURL, aRelURL) {
         try {
             // URLObj.spec is encoded and usable URI
             var baseURLObj = this.convertURLToObject(aBaseURL);
@@ -310,13 +290,11 @@ var sbCommonUtils = {
         }
     },
 
-    validateID : function(aID)
-    {
+    validateID : function(aID) {
         return typeof(aID) == "string" && /^\d{14}$/.test(aID);
     },
 
-    crop : function(aString, aMaxLength)
-    {
+    crop : function(aString, aMaxLength) {
         return aString.length > aMaxLength ? aString.substr(0, aMaxLength) + "..." : aString;
     },
 
@@ -331,8 +309,7 @@ var sbCommonUtils = {
      *   1: skip look other files in the same folder level
      *   2: skip look all files
      */
-    forEachFile : function(aFolder, aCallback, aThisArg, aArgs)
-    {
+    forEachFile : function(aFolder, aCallback, aThisArg, aArgs) {
         var dirs = [aFolder], ret;
         all:
         for (var i=0; i<dirs.length; i++) {
@@ -352,8 +329,7 @@ var sbCommonUtils = {
         }
     },
 
-    getFileMime : function(aFile)
-    {
+    getFileMime : function(aFile) {
         try {
             return this.MIME.getTypeFromFile(aFile);
         }
@@ -361,8 +337,7 @@ var sbCommonUtils = {
         return false;
     },
 
-    readFile : function(aFile)
-    {
+    readFile : function(aFile) {
         try {
             var istream = Components.classes['@mozilla.org/network/file-input-stream;1'].createInstance(Components.interfaces.nsIFileInputStream);
             istream.init(aFile, 1, 0, false);
@@ -373,14 +348,12 @@ var sbCommonUtils = {
             istream.close();
             return content;
         }
-        catch(ex)
-        {
+        catch(ex) {
             return false;
         }
     },
 
-    writeFile : function(aFile, aContent, aChars, aNoCatch)
-    {
+    writeFile : function(aFile, aContent, aChars, aNoCatch) {
         try {
             var ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
             ostream.init(aFile, -1, 0666, 0);
@@ -429,23 +402,19 @@ var sbCommonUtils = {
         }
     },
 
-    writeIndexDat : function(aItem, aFile)
-    {
-        if ( !aFile )
-        {
+    writeIndexDat : function(aItem, aFile) {
+        if ( !aFile ) {
             aFile = this.getContentDir(aItem.id).clone();
             aFile.append("index.dat");
         }
         var content = "";
-        for ( var prop in aItem )
-        {
+        for ( var prop in aItem ) {
             content += prop + "\t" + aItem[prop] + "\n";
         }
         this.writeFile(aFile, content, "UTF-8");
     },
 
-    saveTemplateFile : function(aURISpec, aFile, aOverwrite)
-    {
+    saveTemplateFile : function(aURISpec, aFile, aOverwrite) {
         if ( aFile.exists() && !aOverwrite ) return;
         var istream = this.IO.newChannelFromURI(this.convertURLToObject(aURISpec)).open();
         var bistream = Components.classes["@mozilla.org/binaryinputstream;1"].createInstance(Components.interfaces.nsIBinaryInputStream);
@@ -461,8 +430,7 @@ var sbCommonUtils = {
         bostream.close();
     },
 
-    convertToUnicode : function(aString, aCharset)
-    {
+    convertToUnicode : function(aString, aCharset) {
         if ( !aString ) return "";
         try {
             this.UNICODE.charset = aCharset;
@@ -474,29 +442,25 @@ var sbCommonUtils = {
 
 
 
-    convertPathToFile : function(aPath)
-    {
+    convertPathToFile : function(aPath) {
         var aFile = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
         aFile.initWithPath(aPath);
         return aFile;
     },
 
-    convertFilePathToURL : function(aFilePath)
-    {
+    convertFilePathToURL : function(aFilePath) {
         var tmpFile = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
         tmpFile.initWithPath(aFilePath);
         return this.IO.newFileURI(tmpFile).spec;
     },
 
-    convertFileToResURL : function(aFile)
-    {
+    convertFileToResURL : function(aFile) {
         var pathFull = this.convertFilePathToURL(aFile.path);
         var pathBase = this.convertFilePathToURL(this.getScrapBookDir().path);
         return "resource://scrapbook/" + pathFull.substring(pathBase.length);
     },
 
-    convertResURLToURL : function(aResURL, aRelative)
-    {
+    convertResURLToURL : function(aResURL, aRelative) {
         if (aResURL.indexOf("resource://scrapbook/") != 0) return aResURL;
         var subPath = aResURL.substring("resource://scrapbook/".length);
         // if relative, return the subpath under the ScrapBook directory
@@ -506,15 +470,13 @@ var sbCommonUtils = {
         return pathBase + subPath;
     },
 
-    convertURLToObject : function(aURLString)
-    {
+    convertURLToObject : function(aURLString) {
         var aURL = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
         aURL.spec = aURLString;
         return aURL;
     },
 
-    convertURLToFile : function(aURLString)
-    {
+    convertURLToFile : function(aURLString) {
         var aURL = this.convertURLToObject(aURLString);
         if ( !aURL.schemeIs("file") ) return;
         try {
@@ -524,8 +486,7 @@ var sbCommonUtils = {
         }
     },
 
-    convertURLToId : function(aURL)
-    {
+    convertURLToId : function(aURL) {
         var file = sbCommonUtils.convertURLToFile(aURL);
         if (!file || !file.exists() || !file.isFile()) return null;
         var aURL = sbCommonUtils.convertFilePathToURL(file.path);
@@ -534,36 +495,30 @@ var sbCommonUtils = {
         return aURL.match(sbPath) ? RegExp.$1 : null;
     },
 
-    splitURLByAnchor : function(aURL)
-    {
+    splitURLByAnchor : function(aURL) {
         var pos = 0;
         return ( (pos = aURL.indexOf("#")) < 0 ) ? [aURL, ""] : [aURL.substring(0, pos), aURL.substring(pos, aURL.length)];
     },
 
-    getFocusedWindow : function()
-    {
+    getFocusedWindow : function() {
         var window = this.WINDOW.getMostRecentWindow("navigator:browser");
         var win = window.document.commandDispatcher.focusedWindow;
         if ( !win || win == window || win instanceof Components.interfaces.nsIDOMChromeWindow ) win = window.content;
         return win;
     },
 
-    flattenFrames : function(aWindow)
-    {
+    flattenFrames : function(aWindow) {
         var ret = [aWindow];
-        for ( var i = 0; i < aWindow.frames.length; i++ )
-        {
+        for ( var i = 0; i < aWindow.frames.length; i++ ) {
             ret = ret.concat(this.flattenFrames(aWindow.frames[i]));
         }
         return ret;
     },
     
-    getSidebarId : function(id)
-    {
+    getSidebarId : function(id) {
         // Need this or MultiSidebar can cause errors
         var rgPosition = sbCommonUtils.getPref("extensions.multisidebar.viewScrapBookSidebar", 1, true);
-        if ( rgPosition > 1)
-        {
+        if ( rgPosition > 1) {
             switch (id) {
                 case "sidebar" :
                     return "sidebar-" + rgPosition;
@@ -578,10 +533,8 @@ var sbCommonUtils = {
         return id;
     },
 
-    getDefaultIcon : function(type)
-    {
-        switch ( type )
-        {
+    getDefaultIcon : function(type) {
+        switch ( type ) {
             case "folder" : return "chrome://scrapbook/skin/treefolder.png"; break;
             case "note"   : return "chrome://scrapbook/skin/treenote.png";   break;
             case "notex"  : return "chrome://scrapbook/skin/treenotex.png";  break;
@@ -592,16 +545,14 @@ var sbCommonUtils = {
     /**
      * Preference handling
      */
-    get prefBranch()
-    {
+    get prefBranch() {
         delete this.prefBranch;
         return this.prefBranch = Components.classes["@mozilla.org/preferences-service;1"].
             getService(Components.interfaces.nsIPrefService).
             getBranch("extensions.scrapbook.");
     },
 
-    get prefBranchGlobal()
-    {
+    get prefBranchGlobal() {
         delete this.prefBranchGlobal;
         // must specify a branch or we get an error on setting a pref
         return this.prefBranchGlobal = Components.classes["@mozilla.org/preferences-service;1"].
@@ -609,8 +560,7 @@ var sbCommonUtils = {
             getBranch("");
     },
     
-    getPrefType: function (aName, aDefaultValue, isGlobal)
-    {
+    getPrefType: function (aName, aDefaultValue, isGlobal) {
         var branch = isGlobal ? this.prefBranchGlobal : this.prefBranch;
         try {
             switch (typeof aDefaultValue) {
@@ -636,8 +586,7 @@ var sbCommonUtils = {
         return "undefined";
     },
 
-    getPref: function (aName, aDefaultValue, isGlobal)
-    {
+    getPref: function (aName, aDefaultValue, isGlobal) {
         var branch = isGlobal ? this.prefBranchGlobal : this.prefBranch;
         try {
             switch (this.getPrefType(aName, aDefaultValue, isGlobal)) {
@@ -657,8 +606,7 @@ var sbCommonUtils = {
         }
     },
 
-    setPref: function (aName, aValue, isGlobal)
-    {
+    setPref: function (aName, aValue, isGlobal) {
         var branch = isGlobal ? this.prefBranchGlobal : this.prefBranch;
         try {
             switch (this.getPrefType(aName, aValue, isGlobal)) {
@@ -684,13 +632,11 @@ var sbCommonUtils = {
         }
     },
 
-    getPrefKeys: function ()
-    {
+    getPrefKeys: function () {
         return this.prefBranch.getChildList("", {});
     },
 
-    resetPrefs: function ()
-    {
+    resetPrefs: function () {
         var list = this.getPrefKeys();
         for (var i=0, I=list.length; i<I; ++i) {
             this.prefBranch.clearUserPref(list[i]);
@@ -698,34 +644,29 @@ var sbCommonUtils = {
     },
 
     // deprecated, use getPref instead (left for downward compatibility with addons)
-    getBoolPref : function(aName, aDefVal)
-    {
+    getBoolPref : function(aName, aDefVal) {
         return this.getPref(aName, aDefVal, true);
     },
 
     // deprecated, use getPref instead (left for downward compatibility with addons)
-    copyUnicharPref : function(aName, aDefVal)
-    {
+    copyUnicharPref : function(aName, aDefVal) {
         return this.getPref(aName, aDefVal, true);
     },
 
     // deprecated, use setPref instead (left for downward compatibility with addons)
-    setBoolPref : function(aName, aPrefValue)
-    {
+    setBoolPref : function(aName, aPrefValue) {
         return this.setPref(aName, aPrefValue, true);
     },
 
     // deprecated, use setPref instead (left for downward compatibility with addons)
-    setUnicharPref : function(aName, aPrefValue)
-    {
+    setUnicharPref : function(aName, aPrefValue) {
         return this.setPref(aName, aPrefValue, true);
     },
 
     /**
      * String handling
      */
-    lang : function(aBundle, aName, aArgs)
-    {
+    lang : function(aBundle, aName, aArgs) {
         var bundle = this._stringBundles[aBundle];
         if (!bundle) {
             var uri = "chrome://scrapbook/locale/%s.properties".replace("%s", aBundle);
@@ -742,55 +683,47 @@ var sbCommonUtils = {
         return aName;
     },
 
-    escapeComment : function(aStr)
-    {
+    escapeComment : function(aStr) {
         if ( aStr.length > 10000 ) this.alert(sbCommonUtils.lang("scrapbook", "MSG_LARGE_COMMENT"));
         return aStr.replace(/\r|\n|\t/g, " __BR__ ");
     },
 
-    escapeHTML : function(aStr, aNoDoubleQuotes, aSingleQuotes, aNoAmp)
-    {
+    escapeHTML : function(aStr, aNoDoubleQuotes, aSingleQuotes, aNoAmp) {
         var list = {"&": (aNoAmp ? "&" : "&amp;"), "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&#39;" : "'") };
         return aStr.replace(/[&<>"']/g, function(m){ return list[m]; });
     },
 
-    escapeHTMLWithSpace : function(aStr, aNoDoubleQuotes, aSingleQuotes, aNoAmp)
-    {
+    escapeHTMLWithSpace : function(aStr, aNoDoubleQuotes, aSingleQuotes, aNoAmp) {
         var list = {"&": (aNoAmp ? "&" : "&amp;"), "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&#39;" : "'"), " ": "&nbsp;" };
         return aStr.replace(/[&<>"']| (?= )/g, function(m){ return list[m]; });
     },
 
-    escapeRegExp : function(aString)
-    {
+    escapeRegExp : function(aString) {
         return aString.replace(/([\*\+\?\.\^\/\$\\\|\[\]\{\}\(\)])/g, "\\$1");
     },
 
     // escape valid filename characters that are misleading in the URI
     // preserve other chars for beauty
     // see also: validateFilename
-    escapeFileName : function(aString)
-    {
+    escapeFileName : function(aString) {
         return aString.replace(/[#]+|(?:%[0-9A-Fa-f]{2})+/g, function(m){return encodeURIComponent(m);});
     },
 
     // aTplRegExp is a RegExp with label name in the frist parenthesis, eg. /{([\w_]+)}/g
-    stringTemplate : function(aString, aTplRegExp, aTplArray)
-    {
+    stringTemplate : function(aString, aTplRegExp, aTplArray) {
         return aString.replace(aTplRegExp, function(match, label){
             if (label in aTplArray) return aTplArray[label];
             return "";
         });
     },
         
-    pad : function(n, width, z)
-    {
+    pad : function(n, width, z) {
         z = z || '0';
         n = n + '';
         return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
     },
 
-    parseURLQuery : function(aStr)
-    {
+    parseURLQuery : function(aStr) {
         var query = {};
         var a = aStr.split('&');
         for (var i in a) {
@@ -803,8 +736,7 @@ var sbCommonUtils = {
     /**
      * Window daemon
      */
-    openManageWindow : function(aRes, aModEltID)
-    {
+    openManageWindow : function(aRes, aModEltID) {
         var window = this.WINDOW.getMostRecentWindow("navigator:browser");
         window.openDialog("chrome://scrapbook/content/manage.xul", "ScrapBook:Manage", "chrome,centerscreen,all,resizable,dialog=no", aRes, aModEltID);
     },
@@ -813,8 +745,7 @@ var sbCommonUtils = {
         this.PROMPT.alert(null, "[ScrapBook]", aText);
     },
 
-    log : function(aMsg)
-    {
+    log : function(aMsg) {
         if (this._fxVer30) {
             // Support started since Firefox 4.0
             // However, older versions may not see the message.
@@ -828,8 +759,7 @@ var sbCommonUtils = {
         }
     },
 
-    warn : function(aMsg)
-    {
+    warn : function(aMsg) {
         if (this._fxVer30) {
             // Support started since Firefox 4.0
             // However, older versions may not see the message.
@@ -844,8 +774,7 @@ var sbCommonUtils = {
         }
     },
 
-    error : function(aMsg)
-    {
+    error : function(aMsg) {
         if (this._fxVer30) {
             // Support started since Firefox 4.0
             // However, older versions may not see the message.
@@ -865,8 +794,7 @@ var sbCommonUtils = {
      * DOM elements handling
      */
 
-    getOuterHTML : function(aNode)
-    {
+    getOuterHTML : function(aNode) {
         var outer = aNode.outerHTML;
         if (typeof(outer) != "undefined") return outer;
         // older versions without native outerHTML
@@ -875,8 +803,7 @@ var sbCommonUtils = {
         return wrapper.innerHTML;
     },
 
-    surroundByTags : function(aNode, aContent)
-    {
+    surroundByTags : function(aNode, aContent) {
         var tag = "<" + aNode.nodeName.toLowerCase();
         for ( var i=0; i<aNode.attributes.length; i++ ) {
             tag += ' ' + aNode.attributes[i].name + '="' + this.escapeHTML(aNode.attributes[i].value) + '"';
@@ -917,8 +844,7 @@ var sbCommonUtils = {
      * custom (*) (custom objects to be removed by the eraser)
      * custom-wrapper (*) (custom objects to be unwrapped by the eraser)
      */
-    getSbObjectType : function(aNode)
-    {
+    getSbObjectType : function(aNode) {
         if (aNode.nodeType != 1) return false;
         var type = aNode.getAttribute("data-sb-obj");
         if (type) return type;
@@ -951,8 +877,7 @@ var sbCommonUtils = {
      *   1: should remove
      *   2: should unwrap
      */
-    getSbObjectRemoveType : function(aNode)
-    {
+    getSbObjectRemoveType : function(aNode) {
         var type = this.getSbObjectType(aNode);
         if (!type) return -1;
         if (["title", "title-src", "stylesheet", "stylesheet-temp", "todo"].indexOf(type) != -1) return 0;
@@ -985,8 +910,7 @@ var sbCommonUtils = {
     /**
      * Data Store
      */
-    _getDocumentIndex : function(aDocument)
-    {
+    _getDocumentIndex : function(aDocument) {
         // try to lookup the index of the specific document
         var idx = false;
         var firstEmptyIdx = false;
@@ -1010,8 +934,7 @@ var sbCommonUtils = {
         return idx;
     },
 
-    documentData : function(aDocument, aKey, aValue)
-    {
+    documentData : function(aDocument, aKey, aValue) {
         var idx = this._getDocumentIndex(aDocument);
         // if given a new value, set it
         if (aValue !== undefined) {
@@ -1023,8 +946,7 @@ var sbCommonUtils = {
     },
 
     // check if an object is dead (eg. window/document closed)
-    isDeadObject : function(aObject)
-    {
+    isDeadObject : function(aObject) {
         try {
             var x = aObject.body;
         }
@@ -1037,8 +959,7 @@ var sbCommonUtils = {
     /**
      * Object handling
      */
-    extendObject : function(aObject1, aObject2)
-    {
+    extendObject : function(aObject1, aObject2) {
         for (var i in aObject2) {
             aObject1[i] = aObject2[i];
         }

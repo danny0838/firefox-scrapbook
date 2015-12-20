@@ -1,32 +1,26 @@
 
 var sbFolderPicker = {
 
-    init : function()
-    {
+    init : function() {
         sbTreeHandler.init(true);
         document.documentElement.buttons = "accept,cancel,extra2";
         document.documentElement.getButton("extra2").className += " sb-create";
         document.getElementById("sbFolderPickerRoot").label = sbCommonUtils.lang("scrapbook", "ROOT_FOLDER");
-        if ( window.arguments.length == 2 )
-        {
-            if ( window.arguments[1] )
-            {
+        if ( window.arguments.length == 2 ) {
+            if ( window.arguments[1] ) {
                 if ( typeof(window.arguments[1]) == "string" ) window.arguments[1] = sbCommonUtils.RDF.GetResource(window.arguments[1]);
-                if ( window.arguments[1].Value != "urn:scrapbook:root" )
-                {
+                if ( window.arguments[1].Value != "urn:scrapbook:root" ) {
                     sbTreeHandler.locateInternal(window.arguments[1]);
                 }
             }
         }
     },
 
-    update : function()
-    {
+    update : function() {
         document.getElementById("sbFolderPickerRoot").checked = sbTreeHandler.TREE.view.selection.count == 0;
     },
 
-    accept : function()
-    {
+    accept : function() {
         if ( document.getElementById("sbFolderPickerRoot").checked ) {
             window.arguments[0].resource = sbCommonUtils.RDF.GetResource(sbTreeHandler.TREE.ref);
             window.arguments[0].title    = sbCommonUtils.lang("scrapbook", "ROOT_FOLDER");
@@ -47,23 +41,19 @@ var sbFolderSelector2 = {
     get TEXTBOX(){ return document.getElementById("sbFolderTextbox"); },
     get resURI() { return this.TEXTBOX.getAttribute("resuri"); },
 
-    init : function()
-    {
+    init : function() {
         this.TEXTBOX.value = sbCommonUtils.lang("scrapbook", "ROOT_FOLDER");
         this.TEXTBOX.setAttribute("resuri", "urn:scrapbook:root");
     },
 
-    pick : function()
-    {
+    pick : function() {
         var ret = {};
         //this.RES_URI durch this.resURI ersetzt
         window.openDialog('chrome://scrapbook/content/folderPicker.xul','','modal,chrome,centerscreen,resizable=yes', ret, this.resURI);
-        if ( ret.resource )
-        {
+        if ( ret.resource ) {
             this.TEXTBOX.value = ret.title;
             this.TEXTBOX.setAttribute("resuri", ret.resource.Value);
-            if ( document.getElementById("sbpCounter") )
-            {
+            if ( document.getElementById("sbpCounter") ) {
                 sbMultipleService.currentID = this.resURI;
                 if ( sbMultipleService.currentID != sbMultipleService.lastID ) sbMultipleService.detectExistingLinks();
                 sbMultipleService.updateSelection();

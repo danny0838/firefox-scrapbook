@@ -19,8 +19,7 @@ var sbContentSaver = {
 
 
 
-    init : function(aPresetData)
-    {
+    init : function(aPresetData) {
         this.item = sbCommonUtils.newItem(sbDataSource.identify(sbCommonUtils.getTimeStamp()));
         this.name = "index";
         this.favicon = null;
@@ -30,8 +29,7 @@ var sbContentSaver = {
         this.linkURLs = [];
         this.frames = [];
         this.isMainFrame = true;
-        if ( aPresetData )
-        {
+        if ( aPresetData ) {
             if ( aPresetData[0] ) this.item.id  = aPresetData[0];
             if ( aPresetData[1] ) this.name     = aPresetData[1];
             if ( aPresetData[2] ) this.option   = sbCommonUtils.extendObject(this.option, aPresetData[2]);
@@ -41,68 +39,56 @@ var sbContentSaver = {
         this.httpTask[this.item.id] = 0;
     },
 
-    captureWindow : function(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData, aContext, aTitle)
-    {
+    captureWindow : function(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData, aContext, aTitle) {
         this.init(aPresetData);
         this.item.chars  = aRootWindow.document.characterSet;
         this.item.source = aRootWindow.location.href;
         //Favicon der angezeigten Seite bestimmen (Unterscheidung zwischen FF2 und FF3 notwendig!)
-        if ( "gBrowser" in window && aRootWindow == gBrowser.contentWindow )
-        {
+        if ( "gBrowser" in window && aRootWindow == gBrowser.contentWindow ) {
             this.item.icon = gBrowser.mCurrentBrowser.mIconURL;
         }
         var titles = aRootWindow.document.title ? [aRootWindow.document.title] : [decodeURI(this.item.source)];
         if ( aTitle ) titles[0] = aTitle;
-        if ( aIsPartial )
-        {
+        if ( aIsPartial ) {
             this.selection = aRootWindow.getSelection();
             var lines = this.selection.toString().split("\n");
-            for ( var i = 0; i < lines.length; i++ )
-            {
+            for ( var i = 0; i < lines.length; i++ ) {
                 lines[i] = lines[i].replace(/\r|\n|\t/g, "");
                 if ( lines[i].length > 0 ) titles.push(lines[i].substring(0,72));
                 if ( titles.length > 4 ) break;
             }
             this.item.title = ( titles.length > 0 ) ? titles[1] : titles[0];
         }
-        else
-        {
+        else {
             this.selection = null;
             this.item.title = titles[0];
         }
-        if ( document.getElementById("ScrapBookToolbox") && !document.getElementById("ScrapBookToolbox").hidden )
-        {
+        if ( document.getElementById("ScrapBookToolbox") && !document.getElementById("ScrapBookToolbox").hidden ) {
             var modTitle = document.getElementById("ScrapBookEditTitle").value;
-            if ( titles.indexOf(modTitle) < 0 )
-            {
+            if ( titles.indexOf(modTitle) < 0 ) {
                 titles.splice(1, 0, modTitle);
                 this.item.title = modTitle;
             }
             this.item.comment = sbCommonUtils.escapeComment(sbPageEditor.COMMENT.value);
         }
-        if ( aShowDetail )
-        {
+        if ( aShowDetail ) {
             var ret = this.showDetailDialog(titles, aResName, aContext);
             if ( ret.result == 0 ) { return null; }
             if ( ret.result == 2 ) { aResName = ret.resURI; aResIndex = 0; }
         }
         this.contentDir = sbCommonUtils.getContentDir(this.item.id);
         var newName = this.saveDocumentInternal(aRootWindow.document, this.name);
-        if ( this.item.icon && this.item.type != "image" && this.item.type != "file" )
-        {
+        if ( this.item.icon && this.item.type != "image" && this.item.type != "file" ) {
             var iconFileName = this.download(this.item.icon);
             this.favicon = iconFileName;
         }
-        if ( this.httpTask[this.item.id] == 0 )
-        {
+        if ( this.httpTask[this.item.id] == 0 ) {
             setTimeout(function(){ sbCaptureObserverCallback.onCaptureComplete(sbContentSaver.item); }, 100);
         }
-        if ( this.option["inDepth"] > 0 && this.linkURLs.length > 0 )
-        {
+        if ( this.option["inDepth"] > 0 && this.linkURLs.length > 0 ) {
             // inDepth capture for "capture-again-deep" is pre-disallowed by hiding the options
             // and should never occur here
-            if ( !aPresetData || aContext == "capture-again" )
-            {
+            if ( !aPresetData || aContext == "capture-again" ) {
                 this.item.type = "marked";
                 this.option["isPartial"] = aIsPartial;
                 var data = {
@@ -122,10 +108,8 @@ var sbContentSaver = {
                 };
                 window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no", data);
             }
-            else
-            {
-                for ( var i = 0; i < this.linkURLs.length; i++ )
-                {
+            else {
+                for ( var i = 0; i < this.linkURLs.length; i++ ) {
                     sbCaptureTask.add(this.linkURLs[i], aPresetData[4] + 1);
                 }
             }
@@ -134,15 +118,13 @@ var sbContentSaver = {
         return [sbCommonUtils.splitFileName(newName)[0], this.file2URL, this.item.title];
     },
 
-    captureFile : function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext)
-    {
+    captureFile : function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext) {
         this.init(aPresetData);
         this.item.title  = sbCommonUtils.getFileName(aSourceURL);
         this.item.icon   = "moz-icon://" + sbCommonUtils.escapeFileName(this.item.title) + "?size=16";
         this.item.source = aSourceURL;
         this.item.type   = aType;
-        if ( aShowDetail )
-        {
+        if ( aShowDetail ) {
             var ret = this.showDetailDialog(null, aResName, aContext);
             if ( ret.result == 0 ) { return null; }
             if ( ret.result == 2 ) { aResName = ret.resURI; aResIndex = 0; }
@@ -154,8 +136,7 @@ var sbContentSaver = {
         return [sbCommonUtils.splitFileName(newName)[0], this.file2URL, this.item.title];
     },
 
-    showDetailDialog : function(aTitles, aResURI, aContext)
-    {
+    showDetailDialog : function(aTitles, aResURI, aContext) {
         var ret = {
             item    : this.item,
             option  : this.option,
@@ -169,8 +150,7 @@ var sbContentSaver = {
         return ret;
     },
 
-    saveDocumentInternal : function(aDocument, aFileKey)
-    {
+    saveDocumentInternal : function(aDocument, aFileKey) {
         var captureType = "";
         if ( aDocument.contentType != "text/html" ) {
             if ( !(aDocument.documentElement.nodeName.toUpperCase() == "HTML" && this.option["asHtml"]) ) {
@@ -223,11 +203,9 @@ var sbContentSaver = {
         // construct the node list
         var rootNode;
         var headNode;
-        if ( this.selection )
-        {
+        if ( this.selection ) {
             var selNodeTree = []; // Is not enough to preserve order of sparsely selected table cells
-            for ( var iRange = 0; iRange < this.selection.rangeCount; ++iRange )
-            {
+            for ( var iRange = 0; iRange < this.selection.rangeCount; ++iRange ) {
                 var myRange = this.selection.getRangeAt(iRange);
                 var curNode = myRange.commonAncestorContainer;
                 if ( curNode.nodeName.toUpperCase() == "HTML" ) {
@@ -257,12 +235,9 @@ var sbContentSaver = {
                 var parentNode = rootNode;
                 var branchList = selNodeTree;
                 var matchedDepth = -2;
-                for( var iDepth = 0; iDepth < tmpNodeList.length; ++iDepth )
-                {
-                    for ( var iBranch = 0; iBranch < branchList.length; ++iBranch )
-                    {
-                        if (tmpNodeList[iDepth] === branchList[iBranch].origNode )
-                        {
+                for( var iDepth = 0; iDepth < tmpNodeList.length; ++iDepth ) {
+                    for ( var iBranch = 0; iBranch < branchList.length; ++iBranch ) {
+                        if (tmpNodeList[iDepth] === branchList[iBranch].origNode ) {
                             matchedDepth = iDepth;
                             break;
                         }
@@ -280,8 +255,7 @@ var sbContentSaver = {
                     parentNode = branchList[iBranch].clonedNode;
                     branchList = branchList[iBranch].children;
                 }
-                if ( matchedDepth === tmpNodeList.length - 1 )
-                {
+                if ( matchedDepth === tmpNodeList.length - 1 ) {
                     // Perhaps a similar splitter should be added for any node type
                     // but some tags e.g. <td> require special care
                     if (myRange.commonAncestorContainer.nodeName === "#text") {
@@ -295,8 +269,7 @@ var sbContentSaver = {
                 parentNode.appendChild(aDocument.createComment("/DOCUMENT_FRAGMENT"));
             }
         }
-        if ( !this.selection )
-        {
+        if ( !this.selection ) {
             rootNode = htmlNode.cloneNode(true);
             headNode = this.getHeadNode(rootNode);
             if (!headNode) {
@@ -310,15 +283,12 @@ var sbContentSaver = {
 
         // process all inline and link CSS, will merge them into index.css later
         var myCSS = "";
-        if ( this.option["styles"] && this.option["rewriteStyles"] )
-        {
+        if ( this.option["styles"] && this.option["rewriteStyles"] ) {
             var myStyleSheets = aDocument.styleSheets;
-            for ( var i=0; i<myStyleSheets.length; i++ )
-            {
+            for ( var i=0; i<myStyleSheets.length; i++ ) {
                 myCSS += this.processCSSRecursively(myStyleSheets[i], aDocument);
             }
-            if ( myCSS )
-            {
+            if ( myCSS ) {
                 var newLinkNode = aDocument.createElement("link");
                 newLinkNode.setAttribute("media", "all");
                 newLinkNode.setAttribute("href", myCSSFileName);
@@ -332,21 +302,18 @@ var sbContentSaver = {
 
         // change the charset to UTF-8
         // also change the meta tag; generate one if none found
-        if ( this.option["forceUtf8"] )
-        {
+        if ( this.option["forceUtf8"] ) {
             this.item.chars = "UTF-8";
             var metas = rootNode.getElementsByTagName("meta"), meta, hasmeta = false;
             for (var i=0, len=metas.length; i<len; ++i) {
                 meta = metas[i];
                 if (meta.hasAttribute("http-equiv") && meta.hasAttribute("content") &&
                     meta.getAttribute("http-equiv").toLowerCase() == "content-type" && 
-                    meta.getAttribute("content").match(/^[^;]*;\s*charset=(.*)$/i) )
-                {
+                    meta.getAttribute("content").match(/^[^;]*;\s*charset=(.*)$/i) ) {
                     hasmeta = true;
                     meta.setAttribute("content", "text/html; charset=UTF-8");
                 }
-                else if ( meta.hasAttribute("charset") )
-                {
+                else if ( meta.hasAttribute("charset") ) {
                     hasmeta = true;
                     meta.setAttribute("charset", "UTF-8");
                 }
@@ -370,8 +337,7 @@ var sbContentSaver = {
             myHTMLFile.append(myHTMLFileName);
         }
         sbCommonUtils.writeFile(myHTMLFile, myHTML, this.item.chars);
-        if ( myCSS )
-        {
+        if ( myCSS ) {
             var myCSSFile = this.contentDir.clone();
             myCSSFile.append(myCSSFileName);
             sbCommonUtils.writeFile(myCSSFile, myCSS, this.item.chars);
@@ -379,8 +345,7 @@ var sbContentSaver = {
         return myHTMLFile.leafName;
     },
 
-    saveFileInternal : function(aFileURL, aFileKey, aCaptureType, aCharset)
-    {
+    saveFileInternal : function(aFileURL, aFileKey, aCaptureType, aCharset) {
         if ( !aFileKey ) aFileKey = "file" + Math.random().toString();
         if ( !this.refURLObj ) this.refURLObj = sbCommonUtils.convertURLToObject(aFileURL);
         var newFileName = this.download(aFileURL);
@@ -405,13 +370,11 @@ var sbContentSaver = {
         return myHTMLFile.leafName;
     },
 
-    addResource : function(aResName, aResIndex)
-    {
+    addResource : function(aResName, aResIndex) {
         if ( !aResName ) return;
         var res = sbDataSource.addItem(this.item, aResName, aResIndex);
         sbCommonUtils.rebuildGlobal();
-        if ( this.favicon )
-        {
+        if ( this.favicon ) {
             var iconURL = "resource://scrapbook/data/" + this.item.id + "/" + sbCommonUtils.escapeFileName(this.favicon);
             setTimeout(function(){
                 sbDataSource.setProperty(res, "icon", iconURL);
@@ -423,16 +386,14 @@ var sbContentSaver = {
     },
 
 
-    removeNodeFromParent : function(aNode)
-    {
+    removeNodeFromParent : function(aNode) {
         var newNode = aNode.ownerDocument.createTextNode("");
         aNode.parentNode.replaceChild(newNode, aNode);
         aNode = newNode;
         return aNode;
     },
 
-    doctypeToString : function(aDoctype)
-    {
+    doctypeToString : function(aDoctype) {
         if ( !aDoctype ) return "";
         var ret = "<!DOCTYPE " + aDoctype.name;
         if ( aDoctype.publicId ) ret += ' PUBLIC "' + aDoctype.publicId + '"';
@@ -441,8 +402,7 @@ var sbContentSaver = {
         return ret;
     },
 
-    getHeadNode : function(aNode)
-    {
+    getHeadNode : function(aNode) {
         var headNode = aNode.getElementsByTagName("head")[0];
         if (!headNode) {
             var elems = aNode.childNodes;
@@ -461,20 +421,16 @@ var sbContentSaver = {
     },
 
 
-    processDOMRecursively : function(rootNode)
-    {
-        for ( var curNode = rootNode.firstChild; curNode != null; curNode = curNode.nextSibling )
-        {
+    processDOMRecursively : function(rootNode) {
+        for ( var curNode = rootNode.firstChild; curNode != null; curNode = curNode.nextSibling ) {
             if ( curNode.nodeName == "#text" || curNode.nodeName == "#comment" ) continue;
             curNode = this.inspectNode(curNode);
             this.processDOMRecursively(curNode);
         }
     },
 
-    inspectNode : function(aNode)
-    {
-        switch ( aNode.nodeName.toLowerCase() )
-        {
+    inspectNode : function(aNode) {
+        switch ( aNode.nodeName.toLowerCase() ) {
             case "img" : 
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
@@ -719,8 +675,7 @@ var sbContentSaver = {
                     flag = true;
                 }
                 else {
-                    switch ( ext )
-                    {
+                    switch ( ext ) {
                         case "jpg" : case "jpeg" : case "png" : case "gif" : case "tiff" : flag = this.option["dlimg"]; break;
                         case "aac" : case "flac" : case "mp3" : case "ogg" : case "ram" : case "ra" : case "rm" : case "rmx" : case "wav" : case "wma" : flag = this.option["dlsnd"]; break;
                         case "avi" : case "avc" : case "flv" : case "mkv" : case "mov" : case "mpg" : case "mpeg" : case "mp4" : case "wmv" : flag = this.option["dlmov"]; break;
@@ -797,13 +752,11 @@ var sbContentSaver = {
                 aNode.removeAttribute("data-sb-frame-id");
                 break;
         }
-        if ( aNode.style && aNode.style.cssText )
-        {
+        if ( aNode.style && aNode.style.cssText ) {
             var newCSStext = this.inspectCSSText(aNode.style.cssText, this.refURLObj.spec, "image");
             if ( newCSStext ) aNode.setAttribute("style", newCSStext);
         }
-        if ( !this.option["script"] )
-        {
+        if ( !this.option["script"] ) {
             // general: remove on* attributes
             var attrs = aNode.attributes;
             for (var i = 0; i < attrs.length; i++) {
@@ -818,8 +771,7 @@ var sbContentSaver = {
         return aNode;
     },
 
-    processCSSRecursively : function(aCSS, aDocument, isImport)
-    {
+    processCSSRecursively : function(aCSS, aDocument, isImport) {
         // aCSS is invalid or disabled, skip it
         if (!aCSS || aCSS.disabled) return "";
         // a special stylesheet used by scrapbook, skip parsing it
@@ -862,8 +814,7 @@ var sbContentSaver = {
         return content;
     },
 
-    processCSSRules : function(aCSS, aDocument, indent)
-    {
+    processCSSRules : function(aCSS, aDocument, indent) {
         var content = "";
         Array.forEach(aCSS.cssRules, function(cssRule) {
             switch (cssRule.type) {
@@ -939,8 +890,7 @@ var sbContentSaver = {
         }
     },
 
-    inspectCSSText : function(aCSSText, aCSSHref, type)
-    {
+    inspectCSSText : function(aCSSText, aCSSHref, type) {
         if (!aCSSHref) aCSSHref = this.refURLObj.spec;
         // CSS get by .cssText is always url("something-with-\"double-quote\"-escaped")
         // or url(something) in Firefox < 3.6
@@ -975,17 +925,14 @@ var sbContentSaver = {
         return aCSSText;
     },
 
-    download : function(aURLSpec)
-    {
+    download : function(aURLSpec) {
         if ( !aURLSpec ) return "";
         // never download chrome:// resources
-        if ( aURLSpec.indexOf("chrome://") == 0 )
-        {
+        if ( aURLSpec.indexOf("chrome://") == 0 ) {
             return "";
         }
         // resolve relative url
-        if ( aURLSpec.indexOf("://") < 0 )
-        {
+        if ( aURLSpec.indexOf("://") < 0 ) {
             aURLSpec = sbCommonUtils.resolveURL(this.refURLObj.spec, aURLSpec);
         }
         try {
@@ -1006,8 +953,7 @@ var sbContentSaver = {
         var hasDownloaded = arr[1];
         if (hasDownloaded) return newFileName;
 
-        if ( aURL.schemeIs("http") || aURL.schemeIs("https") || aURL.schemeIs("ftp") )
-        {
+        if ( aURL.schemeIs("http") || aURL.schemeIs("https") || aURL.schemeIs("ftp") ) {
             if ( this.option["internalize"] ) {
                 var targetFile = this.option["internalize"].parent;
                 targetFile.append(newFileName);
@@ -1040,8 +986,7 @@ var sbContentSaver = {
                 return "";
             }
         }
-        else if ( aURL.schemeIs("file") )
-        {
+        else if ( aURL.schemeIs("file") ) {
             if ( this.option["internalize"] ) {
                 var targetDir = this.option["internalize"].parent;
             }
@@ -1068,8 +1013,7 @@ var sbContentSaver = {
     /**
      * @return  [(string) newFileName, (bool) isDuplicated]
      */
-    getUniqueFileName: function(newFileName, aURLSpec, aDocumentSpec)
-    {
+    getUniqueFileName: function(newFileName, aURLSpec, aDocumentSpec) {
         if ( !newFileName ) newFileName = "untitled";
         newFileName = newFileName;
         newFileName = sbCommonUtils.validateFileName(newFileName);
@@ -1106,8 +1050,7 @@ var sbContentSaver = {
 
 
 
-function sbCaptureObserver(aSBitem, aFileName)
-{
+function sbCaptureObserver(aSBitem, aFileName) {
     this.item     = aSBitem;
     this.fileName = aFileName;
     this.callback = sbCaptureObserverCallback;
@@ -1115,15 +1058,12 @@ function sbCaptureObserver(aSBitem, aFileName)
 
 sbCaptureObserver.prototype = {
 
-    onStateChange : function(aWebProgress, aRequest, aStateFlags, aStatus)
-    {
-        if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_STOP )
-        {
+    onStateChange : function(aWebProgress, aRequest, aStateFlags, aStatus) {
+        if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_STOP ) {
             this.callback.onDownloadComplete(this.item);
         }
     },
-    onProgressChange : function(aWebProgress, aRequest, aCurSelfProgress, aMaxSelfProgress, aCurTotalProgress, aMaxTotalProgress)
-    {
+    onProgressChange : function(aWebProgress, aRequest, aCurSelfProgress, aMaxSelfProgress, aCurTotalProgress, aMaxTotalProgress) {
         if ( aCurTotalProgress == aMaxTotalProgress ) return;
         var progress = (aMaxSelfProgress > 0) ? Math.round(aCurSelfProgress / aMaxSelfProgress * 100) + "%" : aCurSelfProgress + "Bytes";
         this.callback.onDownloadProgress(this.item, this.fileName, progress);
@@ -1136,8 +1076,7 @@ sbCaptureObserver.prototype = {
 
 var sbCaptureObserverCallback = {
 
-    trace : function(aText, aMillisec)
-    {
+    trace : function(aText, aMillisec) {
         var status = top.window.document.getElementById("statusbar-display");
         if ( !status ) return;
         status.label = aText;
@@ -1149,8 +1088,7 @@ var sbCaptureObserverCallback = {
         }
     },
 
-    onDownloadComplete : function(aItem)
-    {
+    onDownloadComplete : function(aItem) {
         if ( --sbContentSaver.httpTask[aItem.id] == 0 ) {
             this.onAllDownloadsComplete(aItem);
             return;
@@ -1158,25 +1096,21 @@ var sbCaptureObserverCallback = {
         this.trace(sbCommonUtils.lang("overlay", "CAPTURE", [sbContentSaver.httpTask[aItem.id], aItem.title]), 0);
     },
 
-    onAllDownloadsComplete : function(aItem)
-    {
+    onAllDownloadsComplete : function(aItem) {
         this.trace(sbCommonUtils.lang("overlay", "CAPTURE_COMPLETE", [aItem.title]), 5000);
         this.onCaptureComplete(aItem);
     },
 
-    onDownloadProgress : function(aItem, aFileName, aProgress)
-    {
+    onDownloadProgress : function(aItem, aFileName, aProgress) {
         this.trace(sbCommonUtils.lang("overlay", "DOWNLOAD_DATA", [aProgress, aFileName]), 0);
     },
 
-    onCaptureComplete : function(aItem)
-    {
+    onCaptureComplete : function(aItem) {
         // aItem is the last item that is captured
         // in a multiple capture it could be null 
         if (aItem) {
             if ( sbDataSource.getProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id), "type") == "marked" ) return;
-            if ( sbCommonUtils.getPref("notifyOnComplete", true) )
-            {
+            if ( sbCommonUtils.getPref("notifyOnComplete", true) ) {
                 var icon = aItem.icon ? "resource://scrapbook/data/" + aItem.id + "/" + aItem.icon : sbCommonUtils.getDefaultIcon();
                 var title = "ScrapBook: " + sbCommonUtils.lang("overlay", "CAPTURE_COMPLETE");
                 var text = sbCommonUtils.crop(aItem.title, 40);

@@ -6,11 +6,9 @@ var sbRepair = {
 
     treeItems : [],
 
-    initStartPage : function()
-    {
+    initStartPage : function() {
         var nextPage;
-        switch ( document.getElementById("sbRepairRadioGroup").selectedIndex )
-        {
+        switch ( document.getElementById("sbRepairRadioGroup").selectedIndex ) {
             case 0 : nextPage = "sbRepairRDF1"; break;
             case 1 : nextPage = "sbRepairFavicons"; break;
         }
@@ -18,19 +16,16 @@ var sbRepair = {
         this.WIZARD.canAdvance = nextPage ? true : false;
     },
 
-    initRestoreRDF : function()
-    {
+    initRestoreRDF : function() {
         this.treeItems = [];
         var backupDir = sbCommonUtils.getScrapBookDir();
         backupDir.append("backup");
-        if ( !backupDir.exists() )
-        {
+        if ( !backupDir.exists() ) {
             sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_NO_BACKUP_FILES"));
             return;
         }
         var fileEnum = backupDir.directoryEntries;
-        while ( fileEnum.hasMoreElements() )
-        {
+        while ( fileEnum.hasMoreElements() ) {
             var fileObj  = fileEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
             var fileName = fileObj.leafName;
             var isMatch  = fileName.match(/^scrapbook_\d{8}\.rdf$/);
@@ -44,8 +39,7 @@ var sbRepair = {
         this.TREE.view = new sbCustomTreeView(colIDs, this.treeItems);
     },
 
-    execRestoreRDF : function()
-    {
+    execRestoreRDF : function() {
         if ( this.TREE.currentIndex < 0 ) { this.WIZARD.rewind(); return; }
         var fileName = this.treeItems[this.TREE.currentIndex][0];
         if ( !fileName ) { this.WIZARD.rewind(); return; }
@@ -73,24 +67,20 @@ var sbRepair = {
         sbDataSource.checkRefresh(true);
     },
 
-    restoreFavicons : function()
-    {
+    restoreFavicons : function() {
         this.WIZARD.canRewind = false;
         var shouldFlush = false;
         var i = 0;
         var resEnum = sbDataSource.data.GetAllResources();
-        while ( resEnum.hasMoreElements() )
-        {
+        while ( resEnum.hasMoreElements() ) {
             var res  = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
             var id   = sbDataSource.getProperty(res, "id");
             var icon = sbDataSource.getProperty(res, "icon");
             if ( res.Value == "urn:scrapbook:root" || res.Value == "urn:scrapbook:search" ) continue;
             if ( ++i % 10 == 0 ) document.getElementById("sbRepairFaviconsTextbox").value = res.Value;
-            if ( icon.match(/(\d{14}\/.*$)/) )
-            {
+            if ( icon.match(/(\d{14}\/.*$)/) ) {
                 var newIcon = "resource://scrapbook/data/" + RegExp.$1;
-                if ( icon != newIcon )
-                {
+                if ( icon != newIcon ) {
                     sbDataSource.setProperty(res, "icon", newIcon);
                 }
             }

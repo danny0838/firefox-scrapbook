@@ -11,8 +11,7 @@ var sbOutputService = {
     /**
      * window.arguments[0]: true means is auto mode
      */
-    init : function()
-    {
+    init : function() {
         if (window.arguments && window.arguments[0]) this.isAuto = true;
         document.documentElement.getButton("accept").label = sbCommonUtils.lang("scrapbook", "START_BUTTON");
         sbTreeHandler.init(true);
@@ -20,23 +19,19 @@ var sbOutputService = {
         if ( this.isAuto ) this.start();
     },
 
-    selectAllFolders : function()
-    {
-        if ( document.getElementById('ScrapBookOutputOptionA').checked )
-        {
+    selectAllFolders : function() {
+        if ( document.getElementById('ScrapBookOutputOptionA').checked ) {
             sbTreeHandler.toggleAllFolders(true);
             sbTreeHandler.TREE.view.selection.selectAll();
             sbTreeHandler.TREE.treeBoxObject.focused = true;
         }
     },
 
-    toggleAllSelection : function()
-    {
+    toggleAllSelection : function() {
         document.getElementById("ScrapBookOutputOptionA").checked = false;
     },
 
-    start : function()
-    {
+    start : function() {
         this.optionAll = document.getElementById("ScrapBookOutputOptionA").checked;
         this.optionFrame = document.getElementById("ScrapBookOutputOptionF").checked;
         this.optionOpen = document.getElementById("ScrapBookOutputOptionO").checked;
@@ -48,20 +43,17 @@ var sbOutputService = {
         if ( this.isAuto ) window.close();
     },
 
-    execAll : function()
-    {
+    execAll : function() {
         this.content = this.getHTMLHead();
         this.processRescursively(sbTreeHandler.TREE.resource);
         this.finalize();
     },
 
-    exec : function()
-    {
+    exec : function() {
         this.content = this.getHTMLHead();
         var selResList = sbTreeHandler.getSelection(true, 1);
         this.content += "<ul>\n";
-        for ( var i = 0; i < selResList.length; i++ )
-        {
+        for ( var i = 0; i < selResList.length; i++ ) {
             this.content += '<li class="depth' + String(this.depth) + '">';
             this.content += this.getHTMLBody(selResList[i]);
             this.processRescursively(selResList[i]);
@@ -71,8 +63,7 @@ var sbOutputService = {
         this.finalize();
     },
 
-    finalize : function()
-    {
+    finalize : function() {
         var dir = sbCommonUtils.getScrapBookDir().clone();
         dir.append("tree");
         if ( !dir.exists() ) dir.create(dir.DIRECTORY_TYPE, 0700);
@@ -84,8 +75,7 @@ var sbOutputService = {
             "chrome://scrapbook/skin/toolbar_toggle.png" : "toggle.png",
             "chrome://scrapbook/skin/search_all.png" : "search.png",
         };
-        for ( var url in urlHash )
-        {
+        for ( var url in urlHash ) {
             var destFile = dir.clone();
             destFile.append(urlHash[url]);
             sbCommonUtils.saveTemplateFile(url, destFile);
@@ -104,15 +94,13 @@ var sbOutputService = {
         indexCSS.append('index.css');
         sbCommonUtils.saveTemplateFile("chrome://scrapbook/skin/output.css", indexCSS, true);
         sbDataSource.outputTreeAutoDone();
-        if ( this.optionOpen )
-        {
+        if ( this.optionOpen ) {
             var fileName = this.optionFrame ? "frame.html" : "index.html";
             sbCommonUtils.loadURL(sbCommonUtils.convertFilePathToURL(dir.path) + fileName, true);
         }
     },
 
-    processRescursively : function(aContRes)
-    {
+    processRescursively : function(aContRes) {
         this.depth++;
         var id = sbDataSource.getProperty(aContRes, "id") || "root";
         this.content += '<ul id="folder-' + id + '">\n';
@@ -128,15 +116,13 @@ var sbOutputService = {
         this.depth--;
     },
 
-    getHTMLTitle : function()
-    {
+    getHTMLTitle : function() {
         var multibook = sbCommonUtils.getPref("multibook.enabled", false);
         var title = (multibook ? sbCommonUtils.getPref("data.title", "") + " - " : "") + "ScrapBook";
         return sbCommonUtils.escapeHTMLWithSpace(title, true);
     },
 
-    getHTMLHead : function()
-    {
+    getHTMLHead : function() {
         var HTML = '<!DOCTYPE html>\n'
             + '<html id="scrapbook-index">\n\n'
             + '<head>\n'
@@ -209,8 +195,7 @@ var sbOutputService = {
         return HTML;
     },
 
-    getHTMLBody : function(aRes)
-    {
+    getHTMLBody : function(aRes) {
         var id    = sbDataSource.getProperty(aRes, "id");
         var type  = sbDataSource.getProperty(aRes, "type");
         var icon  = sbDataSource.getProperty(aRes, "icon");
@@ -246,14 +231,12 @@ var sbOutputService = {
         return ret;
     },
 
-    getHTMLFoot : function()
-    {
+    getHTMLFoot : function() {
         var HTML = "</body>\n\n</html>\n";
         return HTML;
     },
 
-    getHTMLFrame : function()
-    {
+    getHTMLFrame : function() {
         var HTML = '<!DOCTYPE html>\n'
             + '<html id="scrapbook-frame">\n'
             + '<head>\n'
@@ -340,8 +323,7 @@ var sbOutputService = {
         return HTML;
     },
 
-    getHTMLSearch : function()
-    {
+    getHTMLSearch : function() {
         var HTML = '<!DOCTYPE html>\n'
             + '<html id="scrapbook-search">\n'
             + '<head>\n'

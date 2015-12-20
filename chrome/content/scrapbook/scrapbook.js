@@ -5,8 +5,7 @@ var sbMainService = {
     prefs  : {},
 
 
-    init: function()
-    {
+    init: function() {
         sbMultiBookService.showButton();
         sbTreeHandler.init(false);
         sbTreeDNDHandler.init();
@@ -15,8 +14,7 @@ var sbMainService = {
         setTimeout(function() { sbMainService.delayedInit(); }, 0);
     },
 
-    delayedInit: function()
-    {
+    delayedInit: function() {
         if ("sbBrowserOverlay" in window.top == false) return;
         sbMultiBookService.showSidebarTitle();
         if (window.top.sbBrowserOverlay.locateMe)
@@ -25,33 +23,28 @@ var sbMainService = {
             document.getElementById("sbAddOns").hidden = true;
     },
 
-    rebuild: function()
-    {
+    rebuild: function() {
         sbTreeHandler.TREE.builder.rebuild();
     },
 
-    refresh: function()
-    {
+    refresh: function() {
         sbTreeHandler.exit();
         sbTreeDNDHandler.quit();
         sbMultiBookService.file = null;  // force sbMultiBookService.initMenu to run initFile when called
         this.init();
     },
 
-    done: function()
-    {
+    done: function() {
         sbNoteService.save();
     },
 
 
-    toggleHeader: function(aWillShow, aLabel)
-    {
+    toggleHeader: function(aWillShow, aLabel) {
         document.getElementById("sbHeader").hidden = !aWillShow;
         document.getElementById("sbHeader").firstChild.value = aLabel;
     },
 
-    trace: function(aText, aMillisec)
-    {
+    trace: function(aText, aMillisec) {
         var status = top.window.document.getElementById("statusbar-display");
         if ( !status ) return;
         status.label = aText;
@@ -66,8 +59,7 @@ var sbMainService = {
 
     _traceTimer: null,
 
-    locate: function(aRes)
-    {
+    locate: function(aRes) {
         if (!aRes)
             aRes = window.top.sbBrowserOverlay.locateMe;
         if ("sbBrowserOverlay" in window.top)
@@ -78,8 +70,7 @@ var sbMainService = {
         sbTreeHandler.locateInternal(aRes);
     },
 
-    createFolder: function(aAsChild)
-    {
+    createFolder: function(aAsChild) {
         sbSearchService.exit();
         // create item
         var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
@@ -103,8 +94,7 @@ var sbMainService = {
         return true;
     },
 
-    createSeparator: function(aAsChild)
-    {
+    createSeparator: function(aAsChild) {
         sbSearchService.exit();
         // create item
         var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
@@ -114,15 +104,13 @@ var sbMainService = {
         var newRes = this.addNewResource(newItem, null, aAsChild);
     },
 
-    createNote: function(aAsChild, aInTab)
-    {
+    createNote: function(aAsChild, aInTab) {
         sbSearchService.exit();
         // add resource
         var newRes = this.addNewResource(null, {"type": "note", "inTab": aInTab}, aAsChild);
     },
 
-    createNoteX: function(aAsChild)
-    {
+    createNoteX: function(aAsChild) {
         sbSearchService.exit();
         // create item
         var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
@@ -158,8 +146,7 @@ var sbMainService = {
         sbController.open(newRes, false);
     },
 
-    addNewResource: function(aItem, aData, aAsChild)
-    {
+    addNewResource: function(aItem, aData, aAsChild) {
         // calculate the position to insert
         var tarResName, tarRelIdx, isRootPos;
         try {
@@ -204,8 +191,7 @@ var sbMainService = {
         return newRes;
     },
 
-    openPrefWindow : function()
-    {
+    openPrefWindow : function() {
         var instantApply = sbCommonUtils.getPref("browser.preferences.instantApply", false, true);
         window.top.openDialog(
             "chrome://scrapbook/content/prefs.xul", "ScrapBook:Options",
@@ -221,13 +207,11 @@ var sbMainService = {
 var sbController = {
 
     // left for addon compatibility
-    isTreeContext : function(itcEvent)
-    {
+    isTreeContext : function(itcEvent) {
         return true;
     },
 
-    onPopupShowing : function(aEvent)
-    {
+    onPopupShowing : function(aEvent) {
         if (aEvent.originalTarget.localName != "menupopup") return;
         var res = sbTreeHandler.resource;
         if (!res) {
@@ -276,8 +260,7 @@ var sbController = {
         getElement("sbPopupExport").hidden                     = isMultiple || isFolder;
     },
 
-    open: function(aRes, aInTab)
-    {
+    open: function(aRes, aInTab) {
         if (!aRes)
             aRes = sbTreeHandler.resource;
         if (!aRes)
@@ -305,8 +288,7 @@ var sbController = {
         }
     },
 
-    openAllInTabs: function(aRes)
-    {
+    openAllInTabs: function(aRes) {
         if (!aRes)
             aRes = sbTreeHandler.resource;
         if (!aRes)
@@ -317,8 +299,7 @@ var sbController = {
         });
     },
 
-    renew: function(aRes, aShowDetail)
-    {
+    renew: function(aRes, aShowDetail) {
         if (!aRes)
             aRes = sbTreeHandler.resource;
         if (!aRes)
@@ -349,8 +330,7 @@ var sbController = {
         window.top.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
     },
 
-    internalize: function(aRes)
-    {
+    internalize: function(aRes) {
         if (!aRes)
             aRes = sbTreeHandler.resource;
         if (!aRes)
@@ -404,8 +384,7 @@ var sbController = {
         window.top.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
     },
 
-    forward: function(aRes, aCommand, aParam)
-    {
+    forward: function(aRes, aCommand, aParam) {
         if (!aRes)
             aRes = sbTreeHandler.resource;
         if (!aRes)
@@ -448,16 +427,14 @@ var sbController = {
         }
     },
 
-    launch: function(aDir)
-    {
+    launch: function(aDir) {
         try {
             aDir = aDir.QueryInterface(Components.interfaces.nsILocalFile);
             aDir.launch();
         } catch(ex) {}
     },
 
-    sendInternal: function(aResList, aParResList)
-    {
+    sendInternal: function(aResList, aParResList) {
         var result = {};
         var preset = aParResList[0];
         window.openDialog(
@@ -473,8 +450,7 @@ var sbController = {
         sbCommonUtils.rebuildGlobal();
     },
 
-    copyInternal: function(aResList, aParResList)
-    {
+    copyInternal: function(aResList, aParResList) {
         var result = {};
         var preset = aParResList[0];
         window.openDialog(
@@ -490,8 +466,7 @@ var sbController = {
         sbCommonUtils.rebuildGlobal();
     },
 
-    removeInternal: function(aResList, aParResList, aBypassConfirm)
-    {
+    removeInternal: function(aResList, aParResList, aBypassConfirm) {
         var rmIDs = [];
         for (var i = 0, I = aResList.length; i < I; i++) {
             if (aParResList[i].Value == "urn:scrapbook:search") {
@@ -516,8 +491,7 @@ var sbController = {
         return rmIDs;
     },
 
-    confirmRemovingFor: function(aResList)
-    {
+    confirmRemovingFor: function(aResList) {
         if (sbCommonUtils.getPref("confirmDelete", false)) {
             return this.confirmRemovingPrompt();
         }
@@ -548,8 +522,7 @@ var sbTreeDNDHandler = {
     modShift : false,
     currentDataTransfer : null,
 
-    dragDropObserver: 
-    {
+    dragDropObserver: {
         onDragStart: function(event, transferData, action) {
             if (event.originalTarget.localName != "treechildren")
                 return;
@@ -574,8 +547,7 @@ var sbTreeDNDHandler = {
         onDrop    : function() {},
     },
 
-    builderObserver: 
-    {
+    builderObserver: {
         canDrop: function(targetIndex, orientation) {
             return true;
         },
@@ -583,25 +555,20 @@ var sbTreeDNDHandler = {
             var XferData, XferType;
             if (sbCommonUtils._fxVer3_5 &&
                 (sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0) == "application/x-moz-tabbrowser-tab" ||
-                 sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0) == "sb/tradeitem"))
-            {
-                switch (sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0))
-                {
-                    case "application/x-moz-tabbrowser-tab":
-                    {
+                 sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0) == "sb/tradeitem")) {
+                switch (sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0)) {
+                    case "application/x-moz-tabbrowser-tab": {
                         XferData = sbTreeDNDHandler.currentDataTransfer.getData(sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(1))+"\n"+document.commandDispatcher.focusedWindow.document.title;
                         break;
                     }
-                    case "sb/tradeitem":
-                    {
+                    case "sb/tradeitem": {
                         XferType = "sb/tradeitem";
                         break;
                     }
                     default:
                         sbCommonUtils.alert("Unsupported XferType:\n---\n"+sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0));
                 }
-            } else
-            {
+            } else {
                 var XferDataSet  = nsTransferable.get(
                     sbTreeDNDHandler.dragDropObserver.getSupportedFlavours(),
                     nsDragAndDrop.getDragData || this.getDragData,
@@ -641,19 +608,16 @@ var sbTreeDNDHandler = {
         },
     },
 
-    getModifiers: function(aEvent)
-    {
+    getModifiers: function(aEvent) {
         this.modAlt   = aEvent.altKey;
         this.modShift = aEvent.ctrlKey || aEvent.shiftKey;
     },
 
-    init: function()
-    {
+    init: function() {
         sbTreeHandler.TREE.builderView.addObserver(this.builderObserver);
     },
 
-    quit: function()
-    {
+    quit: function() {
         try {
             sbTreeHandler.TREE.builderView.removeObserver(this.builderObserver);
         }
@@ -662,8 +626,7 @@ var sbTreeDNDHandler = {
     },
     
     // orient: -1 = drop before; 0 = drop on; 1 = drop after
-    move: function(row, orient)
-    {
+    move: function(row, orient) {
         //Für Firefox 3.5 notwendig, da sonst ein Fehler ausgegeben wird
         if ( row == -1 ) return;
         var curResList = sbTreeHandler.getSelection(true, 0);
@@ -715,8 +678,7 @@ var sbTreeDNDHandler = {
         sbCommonUtils.rebuildGlobal();
     },
 
-    capture: function(aXferString, aRow, aOrient)
-    {
+    capture: function(aXferString, aRow, aOrient) {
         var url = aXferString.split("\n")[0];
         var win = sbCommonUtils.getFocusedWindow();
         var sel = win.getSelection();
@@ -773,13 +735,11 @@ var sbTreeDNDHandler = {
         }
     },
 
-    importData: function(aRow, aOrient)
-    {
+    importData: function(aRow, aOrient) {
         throw Components.results.NS_ERROR_NOT_IMPLEMENTED;
     },
 
-    getTarget: function(aRow, aOrient)
-    {
+    getTarget: function(aRow, aOrient) {
         var tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(aRow);
         var tarPar = (aOrient == 0) ? tarRes : sbTreeHandler.getParentResource(aRow);
         var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
@@ -803,8 +763,7 @@ var sbTreeDNDHandler = {
 var sbSearchService = {
 
     get ELEMENT() { return document.getElementById("sbSearchImage"); },
-    get FORM_HISTORY()
-    {
+    get FORM_HISTORY() {
         return Components.classes["@mozilla.org/satchel/form-history;1"]
                .getService(Components.interfaces.nsIFormHistory2 || Components.interfaces.nsIFormHistory);
     },
@@ -813,8 +772,7 @@ var sbSearchService = {
     container : null,
     treeRef   : "urn:scrapbook:root",
 
-    init: function()
-    {
+    init: function() {
         this.type = this.ELEMENT.getAttribute("searchtype");
         if (["fulltext","title","comment","source","id","all"].indexOf(this.type) < 0)
             this.type = "fulltext";
@@ -822,22 +780,19 @@ var sbSearchService = {
         this.exit();
     },
 
-    change: function(aType)
-    {
+    change: function(aType) {
         this.ELEMENT.setAttribute("searchtype", aType);
         this.init();
     },
 
-    populatePopup: function()
-    {
+    populatePopup: function() {
         var c = this.type.charAt(0).toUpperCase();
         ["F", "T", "C", "S", "I", "A"].forEach(function(elt) {
             document.getElementById("sbSearchPopup" + elt).setAttribute("checked", elt == c);
         });
     },
 
-    enter: function(aInput)
-    {
+    enter: function(aInput) {
         if (aInput.match(/^[a-z]$/i) || !aInput) {
             var table = {
                 "F": "fulltext",
@@ -868,8 +823,7 @@ var sbSearchService = {
         }
     },
 
-    doFullTextSearch: function(query, re, mc)
-    {
+    doFullTextSearch: function(query, re, mc) {
         var cache = sbCommonUtils.getScrapBookDir().clone();
         cache.append("cache.rdf");
         var shouldBuild = false;
@@ -900,13 +854,11 @@ var sbSearchService = {
         }
     },
 
-    updateCache: function(aResURI)
-    {
+    updateCache: function(aResURI) {
         window.openDialog('chrome://scrapbook/content/cache.xul','ScrapBook:Cache','chrome,dialog=no', aResURI);
     },
 
-    doFilteringSearch: function(aKey)
-    {
+    doFilteringSearch: function(aKey) {
         if (aKey.error.length) {
             this.showErrorMessage(aKey.error[0]);
             return;
@@ -939,16 +891,14 @@ var sbSearchService = {
         );
     },
 
-    showErrorMessage : function(aStr)
-    {
+    showErrorMessage : function(aStr) {
         sbTreeHandler.TREE.ref = "urn:scrapbook:search";
         sbTreeHandler.TREE.builder.rebuild();
         sbTreeDNDHandler.quit();
         sbMainService.toggleHeader(true, aStr);
     },
 
-    listView: function()
-    {
+    listView: function() {
         if (sbTreeHandler.TREE.ref == "urn:scrapbook:search") {
             this.exit();
             return;
@@ -968,8 +918,7 @@ var sbSearchService = {
         );
     },
 
-    exit: function()
-    {
+    exit: function() {
         if (sbTreeHandler.TREE.ref != "urn:scrapbook:search")
             return;
         sbMainService.toggleHeader(false, "");
@@ -981,8 +930,7 @@ var sbSearchService = {
         sbDataSource.clearContainer("urn:scrapbook:search");
     },
 
-    clearFormHistory: function()
-    {
+    clearFormHistory: function() {
         this.FORM_HISTORY.removeEntriesForName("sbSearchHistory");
     },
 };
@@ -995,8 +943,7 @@ var sbSearchQueryHandler = {
     hits : null,
 
     // parses a given search query string
-    parse : function(aString, aPreset)
-    {
+    parse : function(aString, aPreset) {
         var that = this;
         aPreset = aPreset || [];
         var key = {
@@ -1167,8 +1114,7 @@ var sbSearchQueryHandler = {
     // aRes: the resource object to test
     // aText: text from the fulltext cache; false for a filtering search
     // aFile: file name from the fulltext cache; false for a filtering search
-    match : function(aKey, aRes, aText, aFile)
-    {
+    match : function(aKey, aRes, aText, aFile) {
         this.hits = {};
         for (var i in aKey.rule) {
             if (!this['_match_'+i](aKey.rule[i], aRes, aText, aFile)) return false;

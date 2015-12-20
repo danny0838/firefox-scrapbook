@@ -4,22 +4,19 @@ var sbMultiBookService = {
     enabled: false,
     file: null,
 
-    showButton: function()
-    {
+    showButton: function() {
         this.enabled = sbCommonUtils.getPref("multibook.enabled", false);
         document.getElementById("mbToolbarButton").hidden = !this.enabled;
     },
 
-    showSidebarTitle: function()
-    {
+    showSidebarTitle: function() {
         var sidebarTitleId = sbCommonUtils.getSidebarId("sidebar-title");
         var elem = window.top.document.getElementById(sidebarTitleId);
         if (!elem) return;
         elem.value = "ScrapBook X" + (this.enabled ? " [" + sbCommonUtils.getPref("data.title", "") + "]" : "");
     },
 
-    initMenu : function()
-    {
+    initMenu : function() {
         var isDefault = sbCommonUtils.getPref("data.default", true);
         var dataPath  = sbCommonUtils.getPref("data.path", "");
         var popup = document.getElementById("mbMenuPopup");
@@ -56,8 +53,7 @@ var sbMultiBookService = {
         }
     },
 
-    initFile : function()
-    {
+    initFile : function() {
         this.file = sbCommonUtils.DIR.get("ProfD", Components.interfaces.nsIFile).clone();
         this.file.append("ScrapBook");
         this.file.append("multibook.txt");
@@ -77,8 +73,7 @@ var sbMultiBookService = {
         return ret;
     },
 
-    change: function(aItem)
-    {
+    change: function(aItem) {
         if (!this.validateRefresh()) return;
         // output tree requires correct pref and datasource,
         // we have to exec it before changing them
@@ -92,8 +87,7 @@ var sbMultiBookService = {
     },
 
 
-    validateRefresh: function(aQuietWarning)
-    {
+    validateRefresh: function(aQuietWarning) {
         var winEnum = sbCommonUtils.WINDOW.getEnumerator("scrapbook");
         while (winEnum.hasMoreElements()) {
             var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
@@ -106,8 +100,7 @@ var sbMultiBookService = {
         return true;
     },
 
-    config: function()
-    {
+    config: function() {
         window.openDialog(
             "chrome://scrapbook/content/mbManage.xul", "",
             "chrome,centerscreen,modal,resizable"

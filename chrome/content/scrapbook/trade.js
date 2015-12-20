@@ -11,10 +11,8 @@ var sbTradeService = {
     treeItems : [],
 
 
-    init : function()
-    {
-        if ( window.arguments )
-        {
+    init : function() {
+        if ( window.arguments ) {
             document.getElementById("sbTradeHeader").collapsed = true;
             document.getElementById("sbTradeTree").collapsed = true;
             document.getElementById("sbTradeToolbar").collapsed = true;
@@ -25,26 +23,21 @@ var sbTradeService = {
             setTimeout(function(){ sbTradeService.prepareRightDir(true); }, 100);
             return;
         }
-        if ( window.top.location.href != "chrome://scrapbook/content/manage.xul" )
-        {
+        if ( window.top.location.href != "chrome://scrapbook/content/manage.xul" ) {
             document.documentElement.collapsed = true;
             return;
         }
-        window.top.sbTreeDNDHandler.importData = function(aRow, aOrient)
-        {
+        window.top.sbTreeDNDHandler.importData = function(aRow, aOrient) {
             sbImportService.exec(aRow, aOrient);
         };
         setTimeout(function(){ sbTradeService.prepareRightDir(false); }, 100);
     },
 
-    prepareRightDir : function(aQuickMode)
-    {
+    prepareRightDir : function(aQuickMode) {
         var dirPath = sbCommonUtils.getPref("trade.path", "");
-        if ( !dirPath )
-        {
+        if ( !dirPath ) {
             this.lock(1);
-            if ( this.selectDir(aQuickMode) )
-            {
+            if ( this.selectDir(aQuickMode) ) {
                 this.prepareRightDir(aQuickMode);
                 return;
             }
@@ -62,20 +55,17 @@ var sbTradeService = {
         } catch(ex) {
             invalid = true;
         }
-        if ( invalid )
-        {
+        if ( invalid ) {
             this.lock(1);
             sbCommonUtils.alert(sbCommonUtils.lang("trade", "ERROR_INVALID_FILEPATH", [dirPath]));
             if (aQuickMode)
                 window.setTimeout(function() { window.close(); }, 0);
             return;
         }
-        if ( aQuickMode )
-        {
+        if ( aQuickMode ) {
             sbExportService.execQuick(window.arguments[0]);
         }
-        else
-        {
+        else {
             if ( this.locked ) this.lock(0);
             var fileField = document.getElementById("sbTradePath");
             fileField.file = this.rightDir;
@@ -84,8 +74,7 @@ var sbTradeService = {
         }
     },
 
-    selectDir : function()
-    {
+    selectDir : function() {
         var picker = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
         picker.init(window, sbCommonUtils.lang("trade", "SELECT_PATH"), picker.modeGetFolder);
         if ( this.rightDir ) picker.displayDirectory = this.rightDir;
@@ -97,20 +86,17 @@ var sbTradeService = {
         return false;
     },
 
-    refreshTree : function()
-    {
+    refreshTree : function() {
         this.treeItems = [];
         var baseURL = sbCommonUtils.convertFilePathToURL(this.rightDir.path);
         var dirEnum = this.rightDir.directoryEntries;
-        while ( dirEnum.hasMoreElements() )
-        {
+        while ( dirEnum.hasMoreElements() ) {
             var file = dirEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
             var dirName = file.leafName;
             file.append("index.dat");
             if ( !file.exists() ) continue;
             var item = this.parseIndexDat(file);
-            if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) )
-            {
+            if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) ) {
                 item.icon = baseURL + dirName + "/" + item.icon;
             }
             if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(item.type);
@@ -130,8 +116,7 @@ var sbTradeService = {
         this.log(sbCommonUtils.lang("trade", "DETECT", [this.treeItems.length, this.rightDir.path]), "G");
     },
 
-    initTree : function()
-    {
+    initTree : function() {
         var colIDs = [
             "sbTradeTreeColTitle",
             "sbTradeTreeColDate",
@@ -159,34 +144,29 @@ var sbTradeService = {
         this.TREE.view = treeView;
     },
 
-    prepareLeftDir : function()
-    {
+    prepareLeftDir : function() {
         this.leftDir = sbCommonUtils.getScrapBookDir();
         this.leftDir.append("data");
     },
 
 
-    lock : function(aLevel)
-    {
+    lock : function(aLevel) {
         this.locked = aLevel > 0;
         var elts = document.getElementsByAttribute("group", "lockTarget");
         for ( var i = 0; i < elts.length; i++ ) elts[i].setAttribute("disabled", aLevel > 0);
-        if ( window.top != window )
-        {
+        if ( window.top != window ) {
             document.getElementById("sbTradeBrowseButton").disabled = aLevel == 2;
             window.top.document.getElementById("mbToolbarButton").disabled = aLevel == 2;
             window.top.document.getElementById("statusbar-progresspanel").collapsed = aLevel != 2;
         }
     },
 
-    log : function(aMessage, aColor, aBold)
-    {
+    log : function(aMessage, aColor, aBold) {
         window.top.sbMainService.trace(aMessage, 2000);
         var listbox = document.getElementById("sbTradeLog");
         var listitem = listbox.appendItem(aMessage);
         listbox.ensureIndexIsVisible(listbox.getRowCount() - 1);
-        switch ( aColor )
-        {
+        switch ( aColor ) {
             case "R" : aColor = "#FF0000"; break;
             case "G" : aColor = "#00AA33"; break;
             case "B" : aColor = "#0000FF"; break;
@@ -196,15 +176,13 @@ var sbTradeService = {
     },
 
 
-    parseIndexDat : function(aFile)
-    {
+    parseIndexDat : function(aFile) {
         if ( !(aFile instanceof Components.interfaces.nsILocalFile) ) return sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_TRADE_INVALID_ARGS"));
         var data = sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(aFile), "UTF-8");
         data = data.split("\n");
         if ( data.length < 2 ) return;
         var item = sbCommonUtils.newItem();
-        for ( var i = 0; i < data.length; i++ )
-        {
+        for ( var i = 0; i < data.length; i++ ) {
             if ( !data[i].match(/\t/) ) continue;
             var keyVal = data[i].split("\t");
             if ( keyVal.length == 2 )
@@ -215,24 +193,19 @@ var sbTradeService = {
         return item;
     },
 
-    getComplexTreeSelection : function()
-    {
+    getComplexTreeSelection : function() {
         var ret = [];
         var uriList = [];
         var selRes = window.top.sbTreeHandler.getSelection(true, 0);
         var filterRule = document.getElementById("sbTradeOptionExportFolder").checked ? 0 : 2;
-        for ( var i = 0; i < selRes.length; i++ )
-        {
-            if ( sbDataSource.isContainer(selRes[i]) )
-            {
+        for ( var i = 0; i < selRes.length; i++ ) {
+            if ( sbDataSource.isContainer(selRes[i]) ) {
                 var childRes = sbDataSource.flattenResources(selRes[i], filterRule, true);
-                for ( var j = 0; j < childRes.length; j++ )
-                {
+                for ( var j = 0; j < childRes.length; j++ ) {
                     if ( uriList.indexOf(childRes[j].Value) < 0 ) { ret.push(childRes[j]); uriList.push(childRes[j].Value); }
                 }
             }
-            else
-            {
+            else {
                 if ( uriList.indexOf(selRes[i].Value) < 0 ) { ret.push(selRes[i]); uriList.push(selRes[i].Value); }
             }
         }
@@ -240,14 +213,12 @@ var sbTradeService = {
     },
 
 
-    getCurrentDirName : function()
-    {
+    getCurrentDirName : function() {
         var curIdx = sbCustomTreeUtil.getSelection(this.TREE)[0];
         return this.treeItems[curIdx][6];
     },
 
-    open : function(aTabbed)
-    {
+    open : function(aTabbed) {
         var idx = sbCustomTreeUtil.getSelection(this.TREE)[0];
         var type = this.treeItems[idx][7];
         if (type == "bookmark" || type == "separator")
@@ -258,20 +229,17 @@ var sbTradeService = {
         );
     },
 
-    browse : function()
-    {
+    browse : function() {
         var dir = this.rightDir.clone();
         dir.append(this.getCurrentDirName());
         if ( dir.exists() ) window.top.sbController.launch(dir);
     },
 
-    remove : function()
-    {
+    remove : function() {
         var idxList = sbCustomTreeUtil.getSelection(this.TREE);
         if ( idxList.length < 1 ) return;
         if ( !this.confirmRemovingPrompt() ) return;
-        for ( var i = 0; i < idxList.length; i++ )
-        {
+        for ( var i = 0; i < idxList.length; i++ ) {
             var dirName = this.treeItems[idxList[i]][6];
             if ( !dirName ) return;
             var dir = this.rightDir.clone();
@@ -290,30 +258,25 @@ var sbTradeService = {
         return !sbCommonUtils.PROMPT.confirmEx(null, "[ScrapBook]", text, button, null, null, null, null, {});
     },
 
-    showProperties : function()
-    {
+    showProperties : function() {
         var datFile = this.rightDir.clone();
         datFile.append(this.getCurrentDirName());
         datFile.append("index.dat");
         if ( !datFile.exists() ) return;
         var item = this.parseIndexDat(datFile);
         var content = "";
-        for ( var prop in item )
-        {
+        for ( var prop in item ) {
             content += prop + " : " + item[prop] + "\n";
         }
         sbCommonUtils.alert(content);
     },
 
-    onDblClick : function(aEvent)
-    {
+    onDblClick : function(aEvent) {
         if ( aEvent.originalTarget.localName == "treechildren" && aEvent.button == 0 ) this.open(false);
     },
 
-    onKeyPress : function(aEvent)
-    {
-        switch ( aEvent.keyCode )
-        {
+    onKeyPress : function(aEvent) {
+        switch ( aEvent.keyCode ) {
             case aEvent.DOM_VK_RETURN : this.open(false); break;
             case aEvent.DOM_VK_DELETE : this.remove(); break;
             default : break;
@@ -332,8 +295,7 @@ var sbExportService = {
     count : -1,
     resList : [],
 
-    exec : function()
-    {
+    exec : function() {
         if ( sbTradeService.locked ) return;
         if ( window.top.sbTreeHandler.TREE.view.selection.count == 0 ) return;
         sbTradeService.lock(2);
@@ -343,8 +305,7 @@ var sbExportService = {
         this.next();
     },
 
-    execQuick : function(aRes)
-    {
+    execQuick : function(aRes) {
         this.QUICK_STATUS.value = document.getElementById("sbTradeExportButton").label;
         sbTradeService.prepareLeftDir();
         var title = sbDataSource.getProperty(aRes, "title");
@@ -357,8 +318,7 @@ var sbExportService = {
         }
         this.QUICK_STATUS.value = document.getElementById("sbTradeExportButton").label + ": " + title;
         var winEnum = sbCommonUtils.WINDOW.getEnumerator("scrapbook");
-        while ( winEnum.hasMoreElements() )
-        {
+        while ( winEnum.hasMoreElements() ) {
             var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
             if ( win.location.href != "chrome://scrapbook/content/manage.xul" ) continue;
             try {
@@ -369,10 +329,8 @@ var sbExportService = {
         setTimeout(function(){ window.close(); }, 1500);
     },
 
-    next : function()
-    {
-        if ( ++this.count < this.resList.length )
-        {
+    next : function() {
+        if ( ++this.count < this.resList.length ) {
             var rate = " (" + (this.count + 1) + "/" + this.resList.length + ") ";
             var title = sbDataSource.getProperty(this.resList[this.count], "title");
             try {
@@ -384,20 +342,17 @@ var sbExportService = {
             window.top.document.getElementById("sbManageProgress").value = Math.round( (this.count + 1) / this.resList.length * 100);
             setTimeout(function(){ sbExportService.next(); }, 0);
         }
-        else
-        {
+        else {
             sbTradeService.refreshTree();
             sbTradeService.lock(0);
         }
     },
 
-    copyLeftToRight : function(aRes)
-    {
+    copyLeftToRight : function(aRes) {
         if ( !sbDataSource.exists(aRes) ) throw "Datasource changed.";
         var item = sbDataSource.getItem(aRes);
         item.folder = sbDataSource.getFolderPath(aRes).join("\t");
-        if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) )
-        {
+        if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) ) {
             item.icon = item.icon.match(/\d{14}\/(.+)$/) ? RegExp.$1 : "";
         }
         var num = 0, destDir, dirName;
@@ -440,8 +395,7 @@ var sbImportService = {
     folderTable : {},
     _dataURI : "",
 
-    exec : function(aRow, aOrient)
-    {
+    exec : function(aRow, aOrient) {
         if ( sbTradeService.locked ) return;
         if ( sbTradeService.TREE.view.selection.count == 0 ) return;
         sbTradeService.lock(2);
@@ -453,26 +407,22 @@ var sbImportService = {
         this.idxList   = sbCustomTreeUtil.getSelection(sbTradeService.TREE);
         this.count     = this.ascending ? -1 : this.idxList.length;
         this.folderTable = {};
-        if ( this.restoring )
-        {
+        if ( this.restoring ) {
             var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"), 1, true);
-            for ( var i = 1; i < resList.length; i++ )
-            {
+            for ( var i = 1; i < resList.length; i++ ) {
                 this.folderTable[sbDataSource.getProperty(resList[i], "title")] = resList[i].Value;
             }
         }
         this.next();
     },
 
-    next : function()
-    {
+    next : function() {
         var atEnd;
         if ( this.ascending )
             atEnd = ++this.count >= this.idxList.length;
         else
             atEnd = --this.count < 0;
-        if ( !atEnd )
-        {
+        if ( !atEnd ) {
             var num  = this.ascending ? this.count + 1 : this.idxList.length - this.count;
             var rate = " (" + num + "/" + this.idxList.length + ") ";
             var title  = sbTradeService.treeItems[this.idxList[this.count]][0];
@@ -487,16 +437,14 @@ var sbImportService = {
             window.top.document.getElementById("sbManageProgress").value = Math.round(num / this.idxList.length * 100);
             setTimeout(function(){ sbImportService.next(); }, 0);
         }
-        else
-        {
+        else {
             sbTradeService.refreshTree();
             sbTradeService.lock(0);
             sbCommonUtils.rebuildGlobal();
         }
     },
 
-    copyRightToLeft : function()
-    {
+    copyRightToLeft : function() {
         if ( sbDataSource.data.URI != this._dataURI ) throw "Datasource changed.";
         var dirName = sbTradeService.treeItems[this.idxList[this.count]][6];
         var srcDir = sbTradeService.rightDir.clone();
@@ -516,12 +464,10 @@ var sbImportService = {
             if (!item.create) item.create = item.id;
             if (!item.modify) item.modify = item.create;
         }
-        if ( item.type == "folder" || item.type == "bookmark" || item.type == "separator" )
-        {
+        if ( item.type == "folder" || item.type == "bookmark" || item.type == "separator" ) {
             if ( document.getElementById("sbTradeOptionRemove").checked ) sbCommonUtils.removeDirSafety(srcDir, false);
         }
-        else
-        {
+        else {
             try {
                 if ( document.getElementById("sbTradeOptionRemove").checked )
                     srcDir.moveTo(destDir, item.id);
@@ -532,25 +478,21 @@ var sbImportService = {
             }
         }
         var folder = "";
-        if ( this.restoring )
-        {
+        if ( this.restoring ) {
             this.tarResArray = ["urn:scrapbook:root", 0];
             var folderList = "folder" in item ? item.folder.split("\t") : [];
-            for ( var i = 0; i < folderList.length; i++ )
-            {
+            for ( var i = 0; i < folderList.length; i++ ) {
                 if ( folderList[i] == "" ) continue;
                 if ( folderList[i] in this.folderTable &&
                     sbDataSource.getRelativeIndex(
                         sbCommonUtils.RDF.GetResource(this.tarResArray[0]),
                         sbCommonUtils.RDF.GetResource(this.folderTable[folderList[i]])
-                    ) > 0 )
-                {
+                    ) > 0 ) {
                     this.tarResArray[0] = this.folderTable[folderList[i]];
                     var idx = window.top.sbTreeHandler.TREE.builderView.getIndexOfResource(sbCommonUtils.RDF.GetResource(this.tarResArray[0]));
                     if ( idx >= 0 && !window.top.sbTreeHandler.TREE.view.isContainerOpen(idx) ) window.top.sbTreeHandler.TREE.view.toggleOpenState(idx);
                 }
-                else
-                {
+                else {
                     var newItem = sbCommonUtils.newItem(sbDataSource.identify(sbCommonUtils.getTimeStamp()));
                     newItem.title = folderList[i];
                     newItem.type = "folder";

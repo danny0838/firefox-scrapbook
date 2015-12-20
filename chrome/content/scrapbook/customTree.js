@@ -1,30 +1,24 @@
 
 const ATOM_SERVICE = Components.classes['@mozilla.org/atom-service;1'].getService(Components.interfaces.nsIAtomService);
 
-function sbCustomTreeView(aColIDs, aItems)
-{
+function sbCustomTreeView(aColIDs, aItems) {
     this._items = aItems;
     this._rowCount = aItems.length;
     this.colIDs = aColIDs;
 }
 
 
-sbCustomTreeView.prototype = 
-{
-    get rowCount()
-    {
+sbCustomTreeView.prototype = {
+    get rowCount() {
         return this._rowCount;
     },
-    getCellText: function(row, col)
-    {
+    getCellText: function(row, col) {
         return this._items[row][col.index];
     },
-    setCellText: function(row, col, val)
-    {
+    setCellText: function(row, col, val) {
         this._items[row][col.index] = val;
     },
-    setTree: function(tree)
-    {
+    setTree: function(tree) {
         this._treeBox = tree;
     },
     cycleHeader : function(colID, elem){},
@@ -58,12 +52,10 @@ sbCustomTreeView.prototype =
 
 var sbCustomTreeUtil = {
 
-    sortItems : function(aService, aColElem)
-    {
+    sortItems : function(aService, aColElem) {
         var asc = aColElem.getAttribute("sortDirection") != "ascending";
         var elems = aService.TREE.firstChild.childNodes;
-        for ( var i = 0; i < elems.length; i++ )
-        {
+        for ( var i = 0; i < elems.length; i++ ) {
             elems[i].removeAttribute("sortDirection");
         }
         if ( !asc ) {
@@ -75,8 +67,7 @@ var sbCustomTreeUtil = {
         aService.initTree();
     },
 
-    sortArrayByIndex : function(array, index)
-    {
+    sortArrayByIndex : function(array, index) {
         array.sort(function(a, b){
             if (a[index] > b[index]) return 1;
             if (a[index] < b[index]) return -1;
@@ -84,15 +75,12 @@ var sbCustomTreeUtil = {
         });
     },
 
-    getSelection : function(aTree)
-    {
+    getSelection : function(aTree) {
         var retArray = [];
-        for ( var rc = 0; rc < aTree.view.selection.getRangeCount(); rc++ )
-        {
+        for ( var rc = 0; rc < aTree.view.selection.getRangeCount(); rc++ ) {
             var start = {}, end = {};
             aTree.view.selection.getRangeAt(rc, start, end);
-            for ( var i = start.value; i <= end.value; i++ )
-            {
+            for ( var i = start.value; i <= end.value; i++ ) {
                 retArray.push(i);
             }
         }

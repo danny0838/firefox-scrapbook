@@ -12,8 +12,7 @@ var sbNoteService = {
     initFlag : false,
     sidebarContext : true,
 
-    create : function(aTarResURI, aTarRelIdx, aForceTabbed)
-    {
+    create : function(aTarResURI, aTarRelIdx, aForceTabbed) {
         if ( this.locked ) return;
         this.locked = true;
         setTimeout(function(){ sbNoteService.locked = false; }, 1000);
@@ -30,10 +29,8 @@ var sbNoteService = {
         (sbCommonUtils.getPref("tabs.note", false) || aForceTabbed) ? this.open(this.resource, true) : this.edit(this.resource);
     },
 
-    edit : function(aRes)
-    {
-        if ( !this.initFlag )
-        {
+    edit : function(aRes) {
+        if ( !this.initFlag ) {
             this.initFlag = true;
             this.TEXTBOX.addEventListener("dragdrop", function(){ sbNoteService.change(true); }, true);
         }
@@ -41,8 +38,7 @@ var sbNoteService = {
         this.save();
         this.resource = aRes;
         this.changed = false;
-        if ( this.sidebarContext )
-        {
+        if ( this.sidebarContext ) {
             document.getElementById("sbNoteSplitter").hidden = false;
             document.getElementById("sbNoteOuter").hidden = false;
         }
@@ -56,8 +52,7 @@ var sbNoteService = {
         if ( !this.sidebarContext ) setTimeout(function(){ sbNoteService2.refreshTab(); }, 0);
     },
 
-    save : function()
-    {
+    save : function() {
         if ( !this.changed ) return;
         if ( !sbDataSource.exists(this.resource) ) return;
         sbCommonUtils.writeFile(this.notefile, this.HTML_HEAD + this.TEXTBOX.value + this.HTML_FOOT, "UTF-8");
@@ -65,14 +60,12 @@ var sbNoteService = {
         this.change(false);
     },
 
-    saveResource : function()
-    {
+    saveResource : function() {
         var title = sbCommonUtils.crop(this.TEXTBOX.value.split("\n")[0].replace(/\t/g, " "), 50);
         sbDataSource.setProperty(this.resource, "title", title);
     },
 
-    exit : function()
-    {
+    exit : function() {
         this.save();
         this.resource  = null;
         this.notefile = null;
@@ -83,15 +76,12 @@ var sbNoteService = {
         }
     },
 
-    open : function(aRes, aTabbed)
-    {
+    open : function(aRes, aTabbed) {
         if ( !("gBrowser" in window.top) ) aTabbed = true;
-        if ( !aTabbed && window.top.content.sbNoteService )
-        {
+        if ( !aTabbed && window.top.content.sbNoteService ) {
             window.top.content.sbNoteService.edit(aRes);
         }
-        else
-        {
+        else {
             if ( aTabbed ) {
                 sbCommonUtils.loadURL("chrome://scrapbook/content/note.xul?id=" + sbDataSource.getProperty(aRes, "id"), aTabbed);
             } else {
@@ -100,8 +90,7 @@ var sbNoteService = {
         }
     },
 
-    getContentFromFile : function(aFile)
-    {
+    getContentFromFile : function(aFile) {
         var content = sbCommonUtils.readFile(aFile);
         content = sbCommonUtils.convertToUnicode(content, "UTF-8");
         content = content.replace(this.HTML_HEAD, "");
@@ -109,25 +98,21 @@ var sbNoteService = {
         return content;
     },
 
-    expand : function()
-    {
+    expand : function() {
         this.open(this.resource, true);
         this.exit();
     },
 
-    change : function(aBool)
-    {
+    change : function(aBool) {
         this.changed = aBool;
         if ( !this.sidebarContext ) document.getElementById("sbNoteToolbarS").disabled = !aBool;
     },
 
-    insertString : function(aEvent)
-    {
+    insertString : function(aEvent) {
         if ( aEvent.keyCode == aEvent.DOM_VK_ESCAPE && this.sidebarContext ) { sbNoteService.exit(); return; }
         if ( aEvent.ctrlKey || aEvent.altKey || aEvent.shiftKey ) return;
         var str = "";
-        switch ( aEvent.keyCode )
-        {
+        switch ( aEvent.keyCode ) {
             case aEvent.DOM_VK_TAB : str = "\t"; break;
             case aEvent.DOM_VK_F5  : str = (new Date()).toLocaleString(); break;
             default : return;
@@ -136,8 +121,7 @@ var sbNoteService = {
         var command = "cmd_insertText";
         try {
             var controller = document.commandDispatcher.getControllerForCommand(command);
-            if ( controller && controller.isCommandEnabled(command) )
-            {
+            if ( controller && controller.isCommandEnabled(command) ) {
                 controller = controller.QueryInterface(Components.interfaces.nsICommandController);
                 var params = Components.classes['@mozilla.org/embedcomp/command-params;1'].createInstance(Components.interfaces.nsICommandParams);
                 params.setStringValue("state_data", str);

@@ -4,15 +4,13 @@ var gRes;
 
 
 
-function SB_initView()
-{
+function SB_initView() {
     gID = sbCommonUtils.parseURLQuery(document.location.search.substring(1))['id'];
     if ( !gID ) return;
     var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
     if ( !win ) return;
     gRes = sbCommonUtils.RDF.GetResource(gID ? "urn:scrapbook:item" + gID : "urn:scrapbook:root");
-    if ( !sbDataSource.isContainer(gRes) )
-    {
+    if ( !sbDataSource.isContainer(gRes) ) {
         window.location.href = sbDataSource.getURL(gRes);
         return;
     }
@@ -21,8 +19,7 @@ function SB_initView()
     var src = SB_getHTMLHead(sbDataSource.getProperty(gRes, "title"));
 
     var resList = sbDataSource.flattenResources(gRes, 2, false);
-    for ( var i = 0; i < resList.length; i++ )
-    {
+    for ( var i = 0; i < resList.length; i++ ) {
         var res = resList[i];
         if (sbDataSource.getProperty(res, "type") == "separator")
             continue;
@@ -43,8 +40,7 @@ function SB_initView()
 }
 
 
-function SB_getHTMLHead(aTitle)
-{
+function SB_getHTMLHead(aTitle) {
     var src = '<!DOCTYPE html>\n'
         + '<html>\n'
         + '<head>\n'
@@ -104,8 +100,7 @@ function SB_getHTMLHead(aTitle)
 }
 
 
-function SB_getHTMLBody(aItem)
-{
+function SB_getHTMLBody(aItem) {
     var src = '<cite class="scrapbook-header">\n'
         + '\t<img src="' + sbCommonUtils.escapeHTML(aItem.icon) + '" width="16" height="16">\n'
         + '\t<a href="' + sbCommonUtils.escapeHTML(aItem.source) + '" target="_top">' + sbCommonUtils.escapeHTMLWithSpace(aItem.title, true) + '</a>\n'
@@ -115,8 +110,7 @@ function SB_getHTMLBody(aItem)
 }
 
 
-function SB_getHTMLFoot()
-{
+function SB_getHTMLFoot() {
     var src = '</body>\n' + '</html>\n';
     return src;
 }

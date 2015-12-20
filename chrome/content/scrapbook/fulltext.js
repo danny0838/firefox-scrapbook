@@ -4,22 +4,19 @@ var gCacheFile;
 
 
 // window.arguments[0]: an url to load when the CACHE process is finished
-function SB_initFT(type)
-{
+function SB_initFT(type) {
     gCacheStatus = document.getElementById("sbCacheStatus");
     gCacheFile = sbCommonUtils.getScrapBookDir().clone();
     gCacheFile.append("cache.rdf");
     sbCacheSource.init();
-    switch ( type )
-    {
+    switch ( type ) {
         case 'SEARCH' : sbSearchResult.exec(); break;
         case 'CACHE'  : setTimeout(function() { sbCacheService.build(); }, 0); break;
     }
 }
 
 
-var sbSearchResult =
-{
+var sbSearchResult = {
     get TREE() {
         delete this.TREE;
         return this.TREE = document.getElementById("sbTree");
@@ -37,22 +34,19 @@ var sbSearchResult =
     treeItems : [],
     targetFolders : [],
 
-    exec : function()
-    {
+    exec : function() {
         this.query = sbCommonUtils.parseURLQuery(document.location.search.substring(1));
         ['q', 're', 'cs', 'ref'].forEach(function(key){
             this.query[key] = this.query[key] || "";
         }, this);
         // set target folder
-        if ( this.query['ref'] && this.query['ref'].indexOf("urn:scrapbook:item") == 0 )
-        {
+        if ( this.query['ref'] && this.query['ref'].indexOf("urn:scrapbook:item") == 0 ) {
             var refRes = sbCommonUtils.RDF.GetResource(this.query['ref']);
             var elt = document.getElementById("sbResultHeaderLoc");
             elt.value += sbDataSource.getProperty(refRes, "title");
             elt.hidden = false;
             this.targetFolders = sbDataSource.flattenResources(refRes, 1, true);
-            for ( var i = 0; i < this.targetFolders.length; i++ )
-            {
+            for ( var i = 0; i < this.targetFolders.length; i++ ) {
                 this.targetFolders[i] = this.targetFolders[i].ValueUTF8;
             }
         }
@@ -70,10 +64,8 @@ var sbSearchResult =
         setTimeout(function(){ sbSearchResult.next(); }, 10);
     },
 
-    next : function()
-    {
-        if ( this.resEnum.hasMoreElements() )
-        {
+    next : function() {
+        if ( this.resEnum.hasMoreElements() ) {
             if ( ++this.index % 100 == 0 ) {
                 setTimeout(function(){ sbSearchResult.process(); }, 0);
                 var msg = sbCommonUtils.lang("fulltext", "SCANNING", [Math.round(this.index / this.count * 100) + " %"]);
@@ -85,15 +77,12 @@ var sbSearchResult =
         else this.finalize();
     },
 
-    process : function()
-    {
+    process : function() {
         var res = this.resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
         if ( res.ValueUTF8 == "urn:scrapbook:cache" ) return this.next();
         var folder  = sbCacheSource.getProperty(res, "folder");
-        if ( this.targetFolders.length > 0 )
-        {
-            if ( folder && folder.indexOf("urn:scrapbook:item") != 0 )
-            {
+        if ( this.targetFolders.length > 0 ) {
+            if ( folder && folder.indexOf("urn:scrapbook:item") != 0 ) {
                 try {
                     var target = sbCommonUtils.RDF.GetLiteral(folder);
                     var prop   = sbDataSource.data.ArcLabelsIn(target).getNext().QueryInterface(Components.interfaces.nsIRDFResource);
@@ -110,8 +99,7 @@ var sbSearchResult =
         res = sbCommonUtils.RDF.GetResource(resURI);
         if ( !sbDataSource.exists(res) ) return this.next();
         var hits = sbSearchQueryHandler.match(this.queryKey, res, content, name);
-        if ( hits )
-        {
+        if ( hits ) {
             var comment = sbDataSource.getProperty(res, "comment");
             var type = sbDataSource.getProperty(res, "type");
             var icon = sbDataSource.getProperty(res, "icon") || sbCommonUtils.getDefaultIcon(type);
@@ -132,8 +120,7 @@ var sbSearchResult =
         return this.next();
     },
 
-    finalize : function()
-    {
+    finalize : function() {
         this.queryKey.sort.forEach(function(sortKey){
             sbSearchResult.treeItems.sort(function(a, b){
                 a = sbDataSource.getProperty(a[8], sortKey[0]);
@@ -149,8 +136,7 @@ var sbSearchResult =
         document.title = document.getElementById("sbResultHeaderMsg").value = headerLabel1 + " : " + headerLabel2;
     },
 
-    initTree : function()
-    {
+    initTree : function() {
         var colIDs = [
             "sbTreeColTitle",
             "sbTreeColContent",
@@ -160,38 +146,32 @@ var sbSearchResult =
             "sbTreeColId",
         ];
         var treeView = new sbCustomTreeView(colIDs, this.treeItems);
-        treeView.getImageSrc = function(row, col)
-        {
+        treeView.getImageSrc = function(row, col) {
             if ( col.index == 0 ) return this._items[row][7];
         };
-        treeView.getCellProperties = function(row, col, properties)
-        {
+        treeView.getCellProperties = function(row, col, properties) {
             if ( col.index != 0 ) return "";
             var val = this._items[row][6];
             if (sbCommonUtils._fxVer22) return val;
             else properties.AppendElement(ATOM_SERVICE.getAtom(val));
         };
-        treeView.cycleHeader = function(col)
-        {
+        treeView.cycleHeader = function(col) {
             sbCustomTreeUtil.sortItems(sbSearchResult, col.element);
         };
         this.TREE.view = treeView;
     },
 
-    extractRightContext : function(aString, aIndex)
-    {
+    extractRightContext : function(aString, aIndex) {
         aString = aString.substr(aIndex || 0, 100);
         aString = aString.replace(/\r|\n|\t/g, " ");
         return aString;
     },
 
-    localizedQuotation : function(aString)
-    {
+    localizedQuotation : function(aString) {
         return sbCommonUtils.lang("fulltext", "QUOTATION", [aString]);
     },
 
-    forward : function(key)
-    {
+    forward : function(key) {
         if ( !this.CURRENT_TREEITEM ) return;
         var id = this.CURRENT_TREEITEM[5];
         var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
@@ -226,14 +206,12 @@ var sbSearchResult =
         }
     },
 
-    resPathToURL : function(aID, aSubPath)
-    {
+    resPathToURL : function(aID, aSubPath) {
         var parts = aSubPath.split("/").map(function(part){return encodeURIComponent(part);});
         return sbCommonUtils.getBaseHref(sbDataSource.data.URI) + "data/" + aID + "/" + parts.join("/");
     },
 
-    onDocumentLoad : function(aEvent)
-    {
+    onDocumentLoad : function(aEvent) {
         aEvent.stopPropagation();
         aEvent.preventDefault();
         if (!this.queryKey) return;
@@ -246,8 +224,7 @@ var sbSearchResult =
         }, this);
     },
 
-    highlightKeyWords : function(color, key)
-    {
+    highlightKeyWords : function(color, key) {
         var skipTags = /mark|title|meta|style|script|textarea|input|i?frame/i;
         var baseNode;
         sbCommonUtils.flattenFrames(document.getElementById("sbBrowser").contentWindow).forEach(function(win) {
@@ -302,8 +279,7 @@ var sbSearchResult =
 };
 
 
-function SB_exitResult()
-{
+function SB_exitResult() {
     window.location.href = document.getElementById("sbBrowser").currentURI.spec;
 }
 
@@ -319,19 +295,16 @@ var sbCacheService = {
     uriHash : {},
     skipFiles : {},
 
-    build : function()
-    {
+    build : function() {
         document.title = sbCommonUtils.lang("fulltext", "BUILD_CACHE") + " - ScrapBook";
         gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_INIT");
         sbCacheSource.refreshEntries();
         this.dataDir = sbCommonUtils.getScrapBookDir().clone();
         this.dataDir.append("data");
         var contResList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"), 1, true);
-        for ( var i = 0; i < contResList.length; i++ )
-        {
+        for ( var i = 0; i < contResList.length; i++ ) {
             var resList = sbDataSource.flattenResources(contResList[i], 2, false);
-            for ( var j = 0; j < resList.length; j++ )
-            {
+            for ( var j = 0; j < resList.length; j++ ) {
                 var type = sbDataSource.getProperty(resList[j], "type");
                 if ( type == "separator" ) continue;
                 this.resList.push(resList[j]);
@@ -344,8 +317,7 @@ var sbCacheService = {
             sbCacheService.finalize();
     },
 
-    processAsync : function()
-    {
+    processAsync : function() {
         var res = this.resList[this.index];
         // update trace message
         document.title = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(this.folders[this.index]), "title") || sbCommonUtils.lang("fulltext", "BUILD_CACHE");
@@ -439,16 +411,14 @@ var sbCacheService = {
             setTimeout(function(){ sbCacheService.finalize(); }, 0);
     },
 
-    inspectFile : function(aFile, aSubPath, mode)
-    {
+    inspectFile : function(aFile, aSubPath, mode) {
         var resource = sbCommonUtils.RDF.GetResource(this.resList[this.index].ValueUTF8 + "#" + aSubPath);
         var charset = sbDataSource.getProperty(sbCacheService.resList[sbCacheService.index], "chars");
         if (aFile) {
             // if cache is newer, skip caching this file and its frames
             // (only check update of the main page)
             if ( sbCacheSource.exists(resource) ) {
-                if ( gCacheFile.lastModifiedTime > aFile.lastModifiedTime && charset == sbCacheSource.getProperty(resource, "charset") )
-                {
+                if ( gCacheFile.lastModifiedTime > aFile.lastModifiedTime && charset == sbCacheSource.getProperty(resource, "charset") ) {
                     if (mode == "html") sbCacheService.checkFrameFiles(aFile, function(){return 0;});
                     this.uriHash[resource.ValueUTF8] = true;
                     sbCacheSource.updateEntry(resource, "folder",  this.folders[this.index]);
@@ -499,8 +469,7 @@ var sbCacheService = {
         }
     },
     
-    cacheFilter : function(aFile)
-    {
+    cacheFilter : function(aFile) {
         // only process normal files
         if ( !aFile.isFile() ) return false;
         // only process files with html extension
@@ -510,8 +479,7 @@ var sbCacheService = {
         return true;
     },
 
-    checkFrameFiles : function(aFile, aCallback)
-    {
+    checkFrameFiles : function(aFile, aCallback) {
         var dir = aFile.parent;
         if (!dir) return;
         var fileLR = sbCommonUtils.splitFileName(aFile.leafName);
@@ -549,14 +517,11 @@ var sbCacheService = {
         }
     },
 
-    finalize : function()
-    {
+    finalize : function() {
         document.title = sbCommonUtils.lang("fulltext", "BUILD_CACHE");
         var toRemove = [];
-        for ( var uri in this.uriHash )
-        {
-            if ( !this.uriHash[uri] && uri != "urn:scrapbook:cache" )
-            {
+        for ( var uri in this.uriHash ) {
+            if ( !this.uriHash[uri] && uri != "urn:scrapbook:cache" ) {
                 toRemove.push(uri);
             }
         }
@@ -585,8 +550,7 @@ var sbCacheService = {
         })();
     },
 
-    convertHTML2Text : function(aStr)
-    {
+    convertHTML2Text : function(aStr) {
         var FORMAT_CONVERTER = Components.classes['@mozilla.org/widget/htmlformatconverter;1'].createInstance(Components.interfaces.nsIFormatConverter);
         var fromStr = Components.classes['@mozilla.org/supports-string;1'].createInstance(Components.interfaces.nsISupportsString);
         var toStr   = { value: null };
@@ -611,8 +575,7 @@ var sbCacheSource = {
     dataSource : null,
     container  : null,
 
-    init : function()
-    {
+    init : function() {
         if ( !gCacheFile.exists() ) {
             var iDS = Components.classes["@mozilla.org/rdf/datasource;1?name=xml-datasource"].createInstance(Components.interfaces.nsIRDFDataSource);
             sbCommonUtils.RDFCU.MakeSeq(iDS, sbCommonUtils.RDF.GetResource("urn:scrapbook:cache"));
@@ -629,11 +592,9 @@ var sbCacheSource = {
         }
     },
 
-    refreshEntries : function()
-    {
+    refreshEntries : function() {
         var resEnum = this.dataSource.GetAllResources();
-        while ( resEnum.hasMoreElements() )
-        {
+        while ( resEnum.hasMoreElements() ) {
             var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
             if ( res.ValueUTF8.indexOf("#") == -1 && res.ValueUTF8 != "urn:scrapbook:cache" )
                 this.removeEntry(res);
@@ -643,16 +604,14 @@ var sbCacheSource = {
         this.container = sbCommonUtils.RDFCU.MakeSeq(this.dataSource, sbCommonUtils.RDF.GetResource("urn:scrapbook:cache"));
     },
 
-    addEntry : function(aRes, aFolder, aCharset, aContent)
-    {
+    addEntry : function(aRes, aFolder, aCharset, aContent) {
         this.container.AppendElement(aRes);
         this.updateEntry(aRes, "folder", aFolder);
         this.updateEntry(aRes, "charset", aCharset);
         this.updateEntry(aRes, "content", aContent);
     },
 
-    updateEntry : function(aRes, aProp, newVal)
-    {
+    updateEntry : function(aRes, aProp, newVal) {
         newVal = sbDataSource.sanitize(newVal);
         aProp = sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + aProp);
         var oldVal = this.dataSource.GetTarget(aRes, aProp, true);
@@ -666,20 +625,17 @@ var sbCacheSource = {
         }
     },
 
-    removeEntry : function(aRes)
-    {
+    removeEntry : function(aRes) {
         this.container.RemoveElement(aRes, true);
         var names = this.dataSource.ArcLabelsOut(aRes);
-        while ( names.hasMoreElements() )
-        {
+        while ( names.hasMoreElements() ) {
             var name  = names.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
             var value = this.dataSource.GetTarget(aRes, name, true);
             this.dataSource.Unassert(aRes, name, value);
         }
     },
 
-    getProperty : function(aRes, aProp)
-    {
+    getProperty : function(aRes, aProp) {
         try {
             var retVal = this.dataSource.GetTarget(aRes, sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + aProp), true);
             return retVal.QueryInterface(Components.interfaces.nsIRDFLiteral).Value;
@@ -688,13 +644,11 @@ var sbCacheSource = {
         }
     },
 
-    exists : function(aRes)
-    {
+    exists : function(aRes) {
         return (this.dataSource.ArcLabelsOut(aRes).hasMoreElements() && this.container.IndexOf(aRes) != -1);
     },
 
-    flush : function()
-    {
+    flush : function() {
         this.dataSource.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).Flush();
     }
 

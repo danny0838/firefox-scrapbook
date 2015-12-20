@@ -9,8 +9,7 @@ var sbPageEditor = {
     multiline : false,
     isMainPage : false,
 
-    init : function(aID)
-    {
+    init : function(aID) {
         // check if the given ID is valid
         if ( aID ) {
             if ( aID != sbBrowserOverlay.getID() ) return;
@@ -138,14 +137,12 @@ var sbPageEditor = {
         }
     },
 
-    uninit : function()
-    {
+    uninit : function() {
         this.item = null;
         this.disable(true);
     },
 
-    documentLoad : function(aDoc, aCallback, aThisArg)
-    {
+    documentLoad : function(aDoc, aCallback, aThisArg) {
         if (aDoc.readyState === 'complete') {
             aCallback.call(aThisArg, aDoc);
             return;
@@ -156,14 +153,12 @@ var sbPageEditor = {
         }, true);
     },
 
-    initEvent : function(aWindow)
-    {
+    initEvent : function(aWindow) {
         aWindow.document.removeEventListener("keydown", this.handleKeyEvent, true);
         aWindow.document.addEventListener("keydown", this.handleKeyEvent, true);
     },
 
-    handleKeyEvent : function(aEvent)
-    {
+    handleKeyEvent : function(aEvent) {
         if (!sbPageEditor.enabled || sbHtmlEditor.enabled || sbDOMEraser.enabled) return;
         // F9
         if (aEvent.keyCode == aEvent.DOM_VK_F9 &&
@@ -188,8 +183,7 @@ var sbPageEditor = {
         }
     },
 
-    handleUnloadEvent : function(aEvent)
-    {
+    handleUnloadEvent : function(aEvent) {
         if (sbPageEditor.checkModify()) {
             // The message only work for Firefox 3.*
             // Else it only fires a default prompt to confirm whether to exit
@@ -197,8 +191,7 @@ var sbPageEditor = {
         }
     },
 
-    toggleComment : function()
-    {
+    toggleComment : function() {
         this.multiline = !this.multiline;
         var val = this.COMMENT.value;
         this.COMMENT.setAttribute("multiline", this.multiline);
@@ -217,14 +210,12 @@ var sbPageEditor = {
         this.COMMENT.focus();
     },
 
-    onInputComment: function(aValue)
-    {
+    onInputComment: function(aValue) {
         sbCommonUtils.documentData(window.content.document, "comment", aValue);
         sbCommonUtils.documentData(window.content.document, "propertyChanged", true);
     },
 
-    getSelection : function(aWindow)
-    {
+    getSelection : function(aWindow) {
         var selText = aWindow.getSelection();
         var sel = selText.QueryInterface(Components.interfaces.nsISelectionPrivate);
         var isSelected = false;
@@ -236,8 +227,7 @@ var sbPageEditor = {
         return isSelected ? sel : false;
     },
 
-    getSelectionHTML : function(aSelection)
-    {
+    getSelectionHTML : function(aSelection) {
         var range = aSelection.getRangeAt(0);
         var content = range.cloneContents();
         var elem = aSelection.anchorNode.ownerDocument.createElement("DIV");
@@ -245,8 +235,7 @@ var sbPageEditor = {
         return elem.innerHTML;
     },
 
-    cutter : function()
-    {
+    cutter : function() {
         var win = sbCommonUtils.getFocusedWindow();
         var sel = this.getSelection(win);
         if ( !sel ) return;
@@ -254,8 +243,7 @@ var sbPageEditor = {
         sel.deleteFromDocument();
     },
 
-    highlight : function(idx)
-    {
+    highlight : function(idx) {
         // update the dropdown list
         if ( !idx ) idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 8;
         document.getElementById("ScrapBookHighlighter").setAttribute("color", idx);
@@ -276,8 +264,7 @@ var sbPageEditor = {
         sbHighlighter.set(win, sel, "span", attr);
     },
 
-    removeSbObjectsSelected : function()
-    {
+    removeSbObjectsSelected : function() {
         var win = sbCommonUtils.getFocusedWindow();
         var sel = this.getSelection(win);
         if ( !sel ) return;
@@ -287,20 +274,16 @@ var sbPageEditor = {
         if ( node.nodeName == "#text" ) node = node.parentNode;
         var nodeRange = win.document.createRange();
         var nodeToDel = [];
-        traceTree : while ( true )
-        {
+        traceTree : while ( true ) {
             nodeRange.selectNode(node);
-            if ( nodeRange.compareBoundaryPoints(Range.START_TO_END, selRange) > -1 )
-            {
+            if ( nodeRange.compareBoundaryPoints(Range.START_TO_END, selRange) > -1 ) {
                 if ( nodeRange.compareBoundaryPoints(Range.END_TO_START, selRange) > 0 ) break;
-                else if ( node.nodeType === 1 )
-                {
+                else if ( node.nodeType === 1 ) {
                     nodeToDel.push(node);
                 }
             }
             if ( node.hasChildNodes() ) node = node.firstChild;
-            else
-            {
+            else {
                 while ( !node.nextSibling ) { node = node.parentNode; if ( !node ) break traceTree; }
                 node = node.nextSibling;
             }
@@ -308,8 +291,7 @@ var sbPageEditor = {
         for ( var i = 0, len = nodeToDel.length; i < len; ++i ) this.removeSbObj(nodeToDel[i]);
     },
 
-    removeSbObjects : function()
-    {
+    removeSbObjects : function() {
         var nodeToDel = [];
         sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
             var doc = win.document;
@@ -320,8 +302,7 @@ var sbPageEditor = {
         for ( var i = 0, len = nodeToDel.length; i < len; ++i ) this.removeSbObj(nodeToDel[i]);
     },
 
-    removeElementsByTagName : function(aTagName)
-    {
+    removeElementsByTagName : function(aTagName) {
         sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
             var doc = win.document;
             this.allowUndo(doc);
@@ -335,8 +316,7 @@ var sbPageEditor = {
         }, this);
     },
 
-    removeSbObj : function(aNode)
-    {
+    removeSbObj : function(aNode) {
         try {
             // not in the DOM tree, skip
             if (!aNode.parentNode) return -1;
@@ -362,8 +342,7 @@ var sbPageEditor = {
         return type;
     },
 
-    unwrapNode : function(aNode)
-    {
+    unwrapNode : function(aNode) {
         var childs = aNode.childNodes;
         var parent = aNode.parentNode;
         while ( childs.length ) parent.insertBefore(childs[0], aNode);
@@ -371,8 +350,7 @@ var sbPageEditor = {
         parent.normalize();
     },
 
-    selection2Title : function(aElement)
-    {
+    selection2Title : function(aElement) {
         var win = sbCommonUtils.getFocusedWindow();
         var sel = this.getSelection(win);
         if ( !sel ) return;
@@ -381,22 +359,19 @@ var sbPageEditor = {
         sbCommonUtils.documentData(window.content.document, "propertyChanged", true);
     },
 
-    restore : function()
-    {
+    restore : function() {
         window.sbBrowserOverlay.lastLocation = "";
         // this will then fire the beforeunload event and enter the event handler
         window.content.location.reload();
     },
 
-    exit : function()
-    {
+    exit : function() {
         if ( sbDOMEraser.enabled ) sbDOMEraser.init(0);
         this.showHide(false);
         this.uninit();
     },
 
-    allowUndo : function(aDoc)
-    {
+    allowUndo : function(aDoc) {
         aDoc = aDoc || sbCommonUtils.getFocusedWindow().document;
         var histories = sbCommonUtils.documentData(aDoc, "histories");
         if (!histories) sbCommonUtils.documentData(aDoc, "histories", histories = []);
@@ -406,8 +381,7 @@ var sbPageEditor = {
         }
     },
 
-    undo : function(aDoc)
-    {
+    undo : function(aDoc) {
         aDoc = aDoc || sbCommonUtils.getFocusedWindow().document;
         var histories = sbCommonUtils.documentData(aDoc, "histories");
         if (!histories) sbCommonUtils.documentData(aDoc, "histories", histories = []);
@@ -423,8 +397,7 @@ var sbPageEditor = {
         return false;
     },
 
-    checkModify : function()
-    {
+    checkModify : function() {
         if ( sbCommonUtils.documentData(window.content.document, "propertyChanged") ) this.saveResource();
         var changed = false;
         sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
@@ -433,8 +406,7 @@ var sbPageEditor = {
         return changed;
     },
 
-    saveOrCapture : function(aBypassDialog)
-    {
+    saveOrCapture : function(aBypassDialog) {
         if ( sbBrowserOverlay.getID() ) {
             this.saveResource();
             this.savePage();
@@ -455,8 +427,7 @@ var sbPageEditor = {
         }
     },
 
-    savePage : function()
-    {
+    savePage : function() {
         // if for some reason the item no longer exists, abort
         if ( !sbDataSource.exists(sbBrowserOverlay.resource) ) { this.disable(true); return; }
         // acquires the id from current uri and check again for safe
@@ -494,8 +465,7 @@ var sbPageEditor = {
         window.setTimeout(function() { window.content.stop(); sbPageEditor.disable(false, true); }, 500);
     },
 
-    saveResource : function()
-    {
+    saveResource : function() {
         if ( !this.item ) return;
         if ( !sbDataSource.exists(sbBrowserOverlay.resource) ) { this.disable(true); return; }
         var newTitle   = document.getElementById("ScrapBookEditTitle").value;
@@ -522,8 +492,7 @@ var sbPageEditor = {
     //     HTMLEditor keeps enabled in a temp disable. However the undo history will be broken if
     //     disabled and enabled; let it go since temp disable is merely a UI matter currently.
     //   - we should refresh HTMLEditor after since it may be on and should not get all disabled
-    disable : function(isDisable, isTemp)
-    {
+    disable : function(isDisable, isTemp) {
         this.enabled = !isDisable;
         sbDOMEraser.init(0);
         if (isDisable && !isTemp) sbHtmlEditor.init(null, 0);
@@ -532,8 +501,7 @@ var sbPageEditor = {
         if (!isDisable) sbHtmlEditor.init(null, 2);
     },
 
-    toggle : function()
-    {
+    toggle : function() {
         var id = sbBrowserOverlay.getID();
         if ( !id ) return;
         this.TOOLBAR.setAttribute("autoshow", this.TOOLBAR.hidden);
@@ -541,8 +509,7 @@ var sbPageEditor = {
         this.TOOLBAR.hidden ? this.init(id) : this.exit();
     },
 
-    showHide : function(willShow)
-    {
+    showHide : function(willShow) {
         this.COMMENT.hidden = !willShow;
         this.TOOLBAR.hidden = !willShow;
         willShow ? this.TOOLBAR.setAttribute("moz-collapsed", "false") : this.TOOLBAR.removeAttribute("moz-collapsed");
@@ -550,10 +517,8 @@ var sbPageEditor = {
     },
 
 
-    applyStyle : function(aWindow, aID, aString)
-    {
-        if ( aWindow.document.getElementById(aID) )
-        {
+    applyStyle : function(aWindow, aID, aString) {
+        if ( aWindow.document.getElementById(aID) ) {
             return;
         }
         var newNode = aWindow.document.createElement("style");
@@ -566,13 +531,11 @@ var sbPageEditor = {
         if ( headNode ) headNode.appendChild(newNode);
     },
 
-    removeStyle : function(aWindow, aID)
-    {
+    removeStyle : function(aWindow, aID) {
         try { sbContentSaver.removeNodeFromParent(aWindow.document.getElementById(aID)); } catch(ex) {}
     },
 
-    documentBeforeEdit : function(aDoc)
-    {
+    documentBeforeEdit : function(aDoc) {
         if (this.item && this.item.type != "notex") {
             var indicate = document.getElementById("ScrapBookStatusPopupD");
             indicate = indicate ? indicate.getAttribute("checked") : false;
@@ -580,8 +543,7 @@ var sbPageEditor = {
         }
     },
 
-    documentBeforeSave : function(aDoc)
-    {
+    documentBeforeSave : function(aDoc) {
         // save all freenotes
         var nodes = aDoc.getElementsByTagName("div");
         for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
@@ -656,8 +618,7 @@ var sbPageEditor = {
         }
     },
 
-    documentAfterSave : function(aDoc)
-    {
+    documentAfterSave : function(aDoc) {
         this.documentBeforeEdit(aDoc);
     },
 };
@@ -723,8 +684,7 @@ var sbHtmlEditor = {
         "Ctrl+Alt+0" : "wrapHTML0",
     },
 
-    currentDocument : function(aMainDoc)
-    {
+    currentDocument : function(aMainDoc) {
         if (!aMainDoc) aMainDoc = window.content.document;
         return sbCommonUtils.documentData(aMainDoc, "sbHtmlEditor.document");
     },
@@ -733,8 +693,7 @@ var sbHtmlEditor = {
     //   0: disable (for all window documents)
     //   1: enable  (for a specific window document)
     //   2: refresh (updates toolbar)
-    init : function(aDoc, aStateFlag)
-    {
+    init : function(aDoc, aStateFlag) {
         aDoc = aDoc || sbCommonUtils.getFocusedWindow().document;
         var wasEnabled = sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled") || false;
         if ( aStateFlag === undefined ) aStateFlag = wasEnabled ? 0 : 1;
@@ -796,8 +755,7 @@ var sbHtmlEditor = {
         }
     },
 
-    initEvent : function(aWindow, aStateFlag)
-    {
+    initEvent : function(aWindow, aStateFlag) {
         aWindow.document.removeEventListener("keydown", this.handleKeyEvent, true);
         aWindow.document.removeEventListener("input", this.handleInputEvent, true);
         if (aStateFlag == 1) {
@@ -806,14 +764,12 @@ var sbHtmlEditor = {
         }
     },
 
-    handleInputEvent : function(aEvent)
-    {
+    handleInputEvent : function(aEvent) {
         var doc = aEvent.originalTarget.ownerDocument;
         sbCommonUtils.documentData(doc, "changed", true);
     },
 
-    handleKeyEvent : function(aEvent)
-    {
+    handleKeyEvent : function(aEvent) {
         // set variables and check whether it's a defined hotkey combination
         var shortcut = Shortcut.fromEvent(aEvent);
         var key = shortcut.toString();
@@ -836,8 +792,7 @@ var sbHtmlEditor = {
         }, 0);
     },
 
-    handlePopupCommand : function(aCallback)
-    {
+    handlePopupCommand : function(aCallback) {
         var callback = sbHtmlEditor["cmd_" + aCallback];
 
         // check the document is editable and set
@@ -847,8 +802,7 @@ var sbHtmlEditor = {
         callback.call(sbHtmlEditor, doc);
     },
     
-    updatePopup : function()
-    {
+    updatePopup : function() {
         document.getElementById("ScrapBookEditHTML_insertDate").tooltipText = sbCommonUtils.getPref("edit.insertDateFormat", "") || "%Y-%m-%d %H:%M:%S";
         document.getElementById("ScrapBookEditHTML_wrapHTML1").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.1", "") || "<code>{THIS}</code>";
         document.getElementById("ScrapBookEditHTML_wrapHTML2").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.2", "") || "<code>{THIS}</code>";
@@ -862,43 +816,35 @@ var sbHtmlEditor = {
         document.getElementById("ScrapBookEditHTML_wrapHTML0").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.0", "") || "<code>{THIS}</code>";
     },
 
-    cmd_quit : function (aDoc)
-    {
+    cmd_quit : function (aDoc) {
         sbHtmlEditor.init(null, 0);
     },
 
-    cmd_save : function (aDoc)
-    {
+    cmd_save : function (aDoc) {
         sbPageEditor.saveOrCapture();
     },
 
-    cmd_removeFormat : function (aDoc)
-    {
+    cmd_removeFormat : function (aDoc) {
         aDoc.execCommand("removeFormat", false, null);
     },
 
-    cmd_bold : function (aDoc)
-    {
+    cmd_bold : function (aDoc) {
         aDoc.execCommand("bold", false, null);
     },
 
-    cmd_italic : function (aDoc)
-    {
+    cmd_italic : function (aDoc) {
         aDoc.execCommand("italic", false, null);
     },
 
-    cmd_underline : function (aDoc)
-    {
+    cmd_underline : function (aDoc) {
         aDoc.execCommand("underline", false, null);
     },
 
-    cmd_strikeThrough : function (aDoc)
-    {
+    cmd_strikeThrough : function (aDoc) {
         aDoc.execCommand("strikeThrough", false, null);
     },
 
-    cmd_setColor : function (aDoc)
-    {
+    cmd_setColor : function (aDoc) {
         var data = {};
         // prompt the dialog for user input
         var accepted = window.top.openDialog("chrome://scrapbook/content/editor_color.xul", "ScrapBook:PickColor", "chrome,modal,centerscreen", data);
@@ -913,118 +859,95 @@ var sbHtmlEditor = {
         aDoc.execCommand("styleWithCSS", false, false);
     },
 
-    cmd_increaseFontSize : function (aDoc)
-    {
+    cmd_increaseFontSize : function (aDoc) {
         aDoc.execCommand("increaseFontSize", false, null);
     },
 
-    cmd_decreaseFontSize : function (aDoc)
-    {
+    cmd_decreaseFontSize : function (aDoc) {
         aDoc.execCommand("decreaseFontSize", false, null);
     },
 
-    cmd_superscript : function (aDoc)
-    {
+    cmd_superscript : function (aDoc) {
         aDoc.execCommand("superscript", false, null);
     },
 
-    cmd_subscript : function (aDoc)
-    {
+    cmd_subscript : function (aDoc) {
         aDoc.execCommand("subscript", false, null);
     },
 
-    cmd_formatblock_p : function (aDoc)
-    {
+    cmd_formatblock_p : function (aDoc) {
         aDoc.execCommand("formatblock", false, "p");
     },
 
-    cmd_formatblock_h1 : function (aDoc)
-    {
+    cmd_formatblock_h1 : function (aDoc) {
         aDoc.execCommand("formatblock", false, "h1");
     },
 
-    cmd_formatblock_h2 : function (aDoc)
-    {
+    cmd_formatblock_h2 : function (aDoc) {
         aDoc.execCommand("formatblock", false, "h2");
     },
 
-    cmd_formatblock_h3 : function (aDoc)
-    {
+    cmd_formatblock_h3 : function (aDoc) {
         aDoc.execCommand("formatblock", false, "h3");
     },
 
-    cmd_formatblock_h4 : function (aDoc)
-    {
+    cmd_formatblock_h4 : function (aDoc) {
         aDoc.execCommand("formatblock", false, "h4");
     },
 
-    cmd_formatblock_h5 : function (aDoc)
-    {
+    cmd_formatblock_h5 : function (aDoc) {
         aDoc.execCommand("formatblock", false, "h5");
     },
 
-    cmd_formatblock_h6 : function (aDoc)
-    {
+    cmd_formatblock_h6 : function (aDoc) {
         aDoc.execCommand("formatblock", false, "h6");
     },
 
-    cmd_formatblock_div : function (aDoc)
-    {
+    cmd_formatblock_div : function (aDoc) {
         aDoc.execCommand("formatblock", false, "div");
     },
 
-    cmd_formatblock_pre : function (aDoc)
-    {
+    cmd_formatblock_pre : function (aDoc) {
         aDoc.execCommand("formatblock", false, "pre");
     },
 
-    cmd_insertUnorderedList : function (aDoc)
-    {
+    cmd_insertUnorderedList : function (aDoc) {
         aDoc.execCommand("insertUnorderedList", false, null);
     },
 
-    cmd_insertOrderedList : function (aDoc)
-    {
+    cmd_insertOrderedList : function (aDoc) {
         aDoc.execCommand("insertOrderedList", false, null);
     },
 
-    cmd_outdent : function (aDoc)
-    {
+    cmd_outdent : function (aDoc) {
         aDoc.execCommand("outdent", false, null);
     },
 
-    cmd_indent : function (aDoc)
-    {
+    cmd_indent : function (aDoc) {
         aDoc.execCommand("indent", false, null);
     },
 
-    cmd_justifyLeft : function (aDoc)
-    {
+    cmd_justifyLeft : function (aDoc) {
         aDoc.execCommand("justifyLeft", false, null);
     },
 
-    cmd_justifyRight : function (aDoc)
-    {
+    cmd_justifyRight : function (aDoc) {
         aDoc.execCommand("justifyRight", false, null);
     },
 
-    cmd_justifyCenter : function (aDoc)
-    {
+    cmd_justifyCenter : function (aDoc) {
         aDoc.execCommand("justifyCenter", false, null);
     },
 
-    cmd_justifyFull : function (aDoc)
-    {
+    cmd_justifyFull : function (aDoc) {
         aDoc.execCommand("justifyFull", false, null);
     },
 
-    cmd_unlink : function (aDoc)
-    {
+    cmd_unlink : function (aDoc) {
         aDoc.execCommand("unlink", false, null);
     },
 
-    cmd_attachLink : function (aDoc)
-    {
+    cmd_attachLink : function (aDoc) {
         var sel = aDoc.defaultView.getSelection();
         // fill the selection it looks like an URL
         // use a very wide standard, which allows as many cases as may be used
@@ -1110,8 +1033,7 @@ var sbHtmlEditor = {
         }
     },
 
-    cmd_attachFile : function (aDoc)
-    {
+    cmd_attachFile : function (aDoc) {
         // we can upload file only for those with valid id
         if (!sbPageEditor.item) return;
         // check if the current page is local and get its path
@@ -1214,8 +1136,7 @@ var sbHtmlEditor = {
         }
     },
 
-    cmd_backupFile : function (aDoc)
-    {
+    cmd_backupFile : function (aDoc) {
         // we can save history only for those with valid id
         if (!sbPageEditor.item) return;
         // check if the current page is local and get its path
@@ -1246,84 +1167,69 @@ var sbHtmlEditor = {
         }
     },
 
-    cmd_horizontalLine : function (aDoc)
-    {
+    cmd_horizontalLine : function (aDoc) {
         var html = '<hr/>';
         aDoc.execCommand("insertHTML", false, html);
     },
 
-    cmd_insertDate : function (aDoc)
-    {
+    cmd_insertDate : function (aDoc) {
         var fmt = sbCommonUtils.getPref("edit.insertDateFormat", "") || "%Y-%m-%d %H:%M:%S";
         var time = "&lt;time&gt;";
         try { time = strftime(fmt, Math.round(new Date()/1000)); } catch (ex) {}
         aDoc.execCommand("insertHTML", false, time);
     },
 
-    cmd_insertTodoBox : function (aDoc)
-    {
+    cmd_insertTodoBox : function (aDoc) {
         var html = '<input type="checkbox" data-sb-obj="todo" />';
         aDoc.execCommand("insertHTML", false, html);
     },
 
-    cmd_insertTodoBoxDone : function (aDoc)
-    {
+    cmd_insertTodoBoxDone : function (aDoc) {
         var html = '<input type="checkbox" data-sb-obj="todo" checked="checked" />';
         aDoc.execCommand("insertHTML", false, html);
     },
 
-    cmd_wrapHTML1 : function (aDoc)
-    {
+    cmd_wrapHTML1 : function (aDoc) {
         this._wrapHTML(aDoc, 1);
     },
 
-    cmd_wrapHTML2 : function (aDoc)
-    {
+    cmd_wrapHTML2 : function (aDoc) {
         this._wrapHTML(aDoc, 2);
     },
 
-    cmd_wrapHTML3 : function (aDoc)
-    {
+    cmd_wrapHTML3 : function (aDoc) {
         this._wrapHTML(aDoc, 3);
     },
 
-    cmd_wrapHTML4 : function (aDoc)
-    {
+    cmd_wrapHTML4 : function (aDoc) {
         this._wrapHTML(aDoc, 4);
     },
 
-    cmd_wrapHTML5 : function (aDoc)
-    {
+    cmd_wrapHTML5 : function (aDoc) {
         this._wrapHTML(aDoc, 5);
     },
 
-    cmd_wrapHTML6 : function (aDoc)
-    {
+    cmd_wrapHTML6 : function (aDoc) {
         this._wrapHTML(aDoc, 6);
     },
 
-    cmd_wrapHTML7 : function (aDoc)
-    {
+    cmd_wrapHTML7 : function (aDoc) {
         this._wrapHTML(aDoc, 7);
     },
 
-    cmd_wrapHTML8 : function (aDoc)
-    {
+    cmd_wrapHTML8 : function (aDoc) {
         this._wrapHTML(aDoc, 8);
     },
 
-    cmd_wrapHTML9 : function (aDoc)
-    {
+    cmd_wrapHTML9 : function (aDoc) {
         this._wrapHTML(aDoc, 9);
     },
 
-    cmd_wrapHTML0 : function (aDoc)
-    {
+    cmd_wrapHTML0 : function (aDoc) {
         this._wrapHTML(aDoc, 0);
     },
 
-    _wrapHTML : function (aDoc, aIdx)
-    {
+    _wrapHTML : function (aDoc, aIdx) {
         var sel = aDoc.defaultView.getSelection();
         var html = sel.isCollapsed ? "{THIS}" : sbPageEditor.getSelectionHTML(sel);
         var wrapper = sbCommonUtils.getPref("edit.wrapperFormat." + aIdx, "") || "<code>{THIS}</code>";
@@ -1331,8 +1237,7 @@ var sbHtmlEditor = {
         aDoc.execCommand("insertHTML", false, html);
     },
     
-    cmd_insertSource : function (aDoc)
-    {
+    cmd_insertSource : function (aDoc) {
         var sel = aDoc.defaultView.getSelection();
         var collapsed = sel.isCollapsed;
         var data = {
@@ -1501,8 +1406,7 @@ var sbDOMEraser = {
     // aStateFlag
     //   0: disable
     //   1: enable
-    init : function(aStateFlag)
-    {
+    init : function(aStateFlag) {
         var wasEnabled = this.enabled;
         this.enabled = (aStateFlag == 1);
         if (this.enabled == wasEnabled) return;
@@ -1530,8 +1434,7 @@ var sbDOMEraser = {
         }
     },
 
-    initEvent : function(aWindow, aStateFlag)
-    {
+    initEvent : function(aWindow, aStateFlag) {
         sbCommonUtils.flattenFrames(aWindow).forEach(function(win) {
             win.document.removeEventListener("mouseover", this.handleEvent, true);
             win.document.removeEventListener("mousemove", this.handleEvent, true);
@@ -1546,8 +1449,7 @@ var sbDOMEraser = {
         }, this);
     },
 
-    initStyle : function(aWindow, aStateFlag)
-    {
+    initStyle : function(aWindow, aStateFlag) {
         sbCommonUtils.flattenFrames(aWindow).forEach(function(win) {
             if ( aStateFlag == 1 ) {
                 var estyle = "* { cursor: crosshair !important; }";
@@ -1559,8 +1461,7 @@ var sbDOMEraser = {
         }, this);
     },
 
-    handleKeyEvent : function(aEvent)
-    {
+    handleKeyEvent : function(aEvent) {
         // set variables and check whether it's a defined hotkey combination
         var shortcut = Shortcut.fromEvent(aEvent);
         var key = shortcut.toString();
@@ -1578,8 +1479,7 @@ var sbDOMEraser = {
         }, 0);
     },
 
-    handleEvent : function(aEvent)
-    {
+    handleEvent : function(aEvent) {
         aEvent.preventDefault();
         var elem = aEvent.target;
         if ( aEvent.type == "mouseover" ) {
@@ -1612,14 +1512,12 @@ var sbDOMEraser = {
         }
     },
 
-    cmd_quit : function (aNode)
-    {
+    cmd_quit : function (aNode) {
         this.init(0);
         return true;
     },
 
-    cmd_wider : function (aNode)
-    {
+    cmd_wider : function (aNode) {
         if (aNode && aNode.parentNode) {
             var newNode = this._findValidElement(aNode.parentNode, true);
             if (!newNode) return false;
@@ -1631,8 +1529,7 @@ var sbDOMEraser = {
         return false;
     },
 
-    cmd_narrower : function (aNode)
-    {
+    cmd_narrower : function (aNode) {
         if (!aNode) return false;
         if (!this.widerStack || !this.widerStack.length) return false;
         var child = this.widerStack.pop();
@@ -1640,8 +1537,7 @@ var sbDOMEraser = {
         return true;
     },
 
-    cmd_remove : function (aNode)
-    {
+    cmd_remove : function (aNode) {
         if (!aNode) return false;
         this._clear();
         sbPageEditor.allowUndo(aNode.ownerDocument);
@@ -1651,19 +1547,16 @@ var sbDOMEraser = {
         return true;
     },
 
-    cmd_isolate : function (aNode)
-    {
+    cmd_isolate : function (aNode) {
         if ( !aNode || !aNode.ownerDocument.body ) return false;
         this._clear();
         sbPageEditor.allowUndo(aNode.ownerDocument);
         var i = 0;
-        while ( aNode != aNode.ownerDocument.body && ++i < 64 )
-        {
+        while ( aNode != aNode.ownerDocument.body && ++i < 64 ) {
             var parent = aNode.parentNode;
             var child = parent.lastChild;
             var j = 0;
-            while ( child && ++j < 1024 )
-            {
+            while ( child && ++j < 1024 ) {
                 var prevChild = child.previousSibling;
                 if ( child != aNode ) parent.removeChild(child);
                 child = prevChild;
@@ -1673,8 +1566,7 @@ var sbDOMEraser = {
         return true;
     },
 
-    cmd_blackOnWhite : function (aNode)
-    {
+    cmd_blackOnWhite : function (aNode) {
         if (!aNode) return false;
         this._clear();
         sbPageEditor.allowUndo(aNode.ownerDocument);
@@ -1694,8 +1586,7 @@ var sbDOMEraser = {
         }
     },
 
-    cmd_colorize : function (aNode)
-    {
+    cmd_colorize : function (aNode) {
         if (!aNode) return false;
         this._clear();
         sbPageEditor.allowUndo(aNode.ownerDocument);
@@ -1705,8 +1596,7 @@ var sbDOMEraser = {
         return true;
     },
 
-    cmd_deWrapping : function (aNode)
-    {
+    cmd_deWrapping : function (aNode) {
         if (!aNode) return false;
         this.cmd_isolate(aNode);
         var next = this._findValidElement(aNode);
@@ -1718,19 +1608,16 @@ var sbDOMEraser = {
         return true;
     },
 
-    cmd_help : function (aNode)
-    {
+    cmd_help : function (aNode) {
         this._showHelp(this.lastWindow);
         return true;
     },
 
-    cmd_undo : function (aNode)
-    {
+    cmd_undo : function (aNode) {
         return sbPageEditor.undo();
     },
 
-    _execCommand : function (win, command, key)
-    {
+    _execCommand : function (win, command, key) {
         if (command != "help") this._clearHelp();
         var callback = sbDOMEraser["cmd_" + command];
         if (callback.call(sbDOMEraser, sbDOMEraser.lastTarget)) {
@@ -1738,8 +1625,7 @@ var sbDOMEraser = {
         }
     },
 
-    _showHelp : function (win)
-    {
+    _showHelp : function (win) {
         var doc = win.document;
         var id = "scrapbook-domeraser-" + (new Date()).valueOf();  // a unique id for styling
 
@@ -1947,14 +1833,12 @@ var sbDOMEraser = {
         this.helpElem = helpElem;
     },
 
-    _clearHelp : function()
-    {
+    _clearHelp : function() {
         try { sbDOMEraser.helpElem.parentNode.removeChild(sbDOMEraser.helpElem); } catch(ex) {}
         sbDOMEraser.helpElem = null;
     },
 
-    _showKeybox : function (win, command, key)
-    {
+    _showKeybox : function (win, command, key) {
         var doc = win.document;
 
         // clear previous keybox
@@ -2012,8 +1896,7 @@ var sbDOMEraser = {
         this.keyboxTimeout = setTimeout(this._clearKeybox, 400);
     },
 
-    _clearKeybox : function()
-    {
+    _clearKeybox : function() {
         try { sbDOMEraser.keyboxElem.parentNode.removeChild(sbDOMEraser.keyboxElem); } catch(ex) {}
         try { clearTimeout(sbDOMEraser.keyboxTimeout); } catch(ex) {}
         sbDOMEraser.keyboxElem = null;
@@ -2021,8 +1904,7 @@ var sbDOMEraser = {
     },
 
     // verify it's not in an element specially used by DOMEraser
-    _isNormalNode : function(elem)
-    {
+    _isNormalNode : function(elem) {
         // check whether it's in our special element
         var test = elem;
         while (test) {
@@ -2034,8 +1916,7 @@ var sbDOMEraser = {
 
     // given an element, walk upwards to find the first
     // valid selectable element
-    _findValidElement : function(elem, traceFrame)
-    {
+    _findValidElement : function(elem, traceFrame) {
         while (elem) {
             if (["#document","scrollbar","html","body","frame","frameset"].indexOf(elem.nodeName.toLowerCase()) == -1) return elem;
             if (traceFrame && !elem.parentNode) {  // now elem is #document
@@ -2053,8 +1934,7 @@ var sbDOMEraser = {
     },
 
     // find which element in parentWin owns the given frame
-    _findFrameElement : function (frame, parentWin)
-    {
+    _findFrameElement : function (frame, parentWin) {
         var elems = parentWin.document.getElementsByTagName("iframe");
         for (var i=0, I=elems.length; i<I; ++i) {
             var elem = elems[i];
@@ -2072,8 +1952,7 @@ var sbDOMEraser = {
         return null;
     },
 
-    _getPos : function (elem)
-    {
+    _getPos : function (elem) {
         var pos = sbDOMEraser._getPosInWindow(elem);
         var pos2 = sbDOMEraser._getFrameOffset(elem.ownerDocument.defaultView);
         pos.x += pos2.x;
@@ -2082,8 +1961,7 @@ var sbDOMEraser = {
     },
 
     // if win is a frame, get its offset relative to all parent windows
-    _getFrameOffset : function(win)
-    {
+    _getFrameOffset : function(win) {
         var pos = {x: 0, y: 0};
         var parent = win.parent;
         while (win != parent) {
@@ -2097,8 +1975,7 @@ var sbDOMEraser = {
         return pos;
     },
 
-    _getPosInWindow : function (elem)
-    {
+    _getPosInWindow : function (elem) {
         var pos = {x: 0, y: 0};
         if (elem.offsetParent) {
             while (elem.offsetParent) {
@@ -2247,21 +2124,17 @@ var sbAnnotationService = {
     isMove  : true,
     target  : null,
 
-    initEvent : function(aWindow)
-    {
+    initEvent : function(aWindow) {
         aWindow.document.removeEventListener("mousedown", this.handleEvent, true);
         aWindow.document.removeEventListener("click", this.handleEvent, true);
         aWindow.document.addEventListener("mousedown", this.handleEvent, true);
         aWindow.document.addEventListener("click", this.handleEvent, true);
     },
 
-    handleEvent : function(aEvent)
-    {
+    handleEvent : function(aEvent) {
         if (!sbPageEditor.enabled || sbHtmlEditor.enabled || sbDOMEraser.enabled) return;
-        if ( aEvent.type == "mousedown" )
-        {
-            switch ( sbCommonUtils.getSbObjectType(aEvent.originalTarget) )
-            {
+        if ( aEvent.type == "mousedown" ) {
+            switch ( sbCommonUtils.getSbObjectType(aEvent.originalTarget) ) {
                 case "freenote" :
                     var freenote = aEvent.originalTarget;
                     if (!freenote.hasAttribute("data-sb-active")) {
@@ -2322,18 +2195,14 @@ var sbAnnotationService = {
                     break;
             }
         }
-        else if ( aEvent.type == "mousemove" )
-        {
+        else if ( aEvent.type == "mousemove" ) {
             if ( sbAnnotationService.target ) sbAnnotationService.onDrag(aEvent);
         }
-        else if ( aEvent.type == "mouseup"   )
-        {
+        else if ( aEvent.type == "mouseup"   ) {
             if ( sbAnnotationService.target ) sbAnnotationService.stopDrag(aEvent);
         }
-        else if ( aEvent.type == "click" )
-        {
-            switch ( sbCommonUtils.getSbObjectType(aEvent.originalTarget) )
-            {
+        else if ( aEvent.type == "click" ) {
+            switch ( sbCommonUtils.getSbObjectType(aEvent.originalTarget) ) {
                 case "freenote-save" :
                     sbAnnotationService.saveFreenote(aEvent.originalTarget.parentNode.parentNode);
                     break;
@@ -2347,8 +2216,7 @@ var sbAnnotationService = {
     /**
      * @param preset { element: <object>, content: <string>, isRelative: <bool> }
      */
-    createFreenote : function(preset)
-    {
+    createFreenote : function(preset) {
         var win = sbCommonUtils.getFocusedWindow();
         if ( win.document.body instanceof HTMLFrameSetElement ) win = win.frames[0];
         sbPageEditor.allowUndo(win.document);
@@ -2448,14 +2316,12 @@ var sbAnnotationService = {
         }
     },
 
-    editFreenote : function(mainDiv)
-    {
+    editFreenote : function(mainDiv) {
         sbPageEditor.allowUndo(mainDiv.ownerDocument);
         this._editFreenote(mainDiv);
     },
 
-    _editFreenote : function(mainDiv)
-    {
+    _editFreenote : function(mainDiv) {
         var doc = mainDiv.ownerDocument, child;
         var isRelative = mainDiv.style.position != "absolute";
         mainDiv.setAttribute("data-sb-active", "1");
@@ -2527,8 +2393,7 @@ var sbAnnotationService = {
         setTimeout(function(){ bodyDiv.focus(); }, 0);
     },
 
-    saveFreenote : function(mainDiv)
-    {
+    saveFreenote : function(mainDiv) {
         mainDiv.removeAttribute("data-sb-active");
         var bodyDiv = mainDiv.childNodes[1], child;
         while ((child = mainDiv.firstChild)) mainDiv.removeChild(child);
@@ -2537,19 +2402,16 @@ var sbAnnotationService = {
         }
     },
 
-    deleteFreenote : function(mainDiv)
-    {
+    deleteFreenote : function(mainDiv) {
         mainDiv.parentNode.removeChild(mainDiv);
     },
 
-    _adjustEditArea : function(mainDiv)
-    {
+    _adjustEditArea : function(mainDiv) {
         var h = Math.max(parseInt(mainDiv.style.height, 10) - this.FREENOTE_FOOTER_HEIGHT, 0);
         mainDiv.childNodes[1].style.height = h + "px";
     },
 
-    startDrag : function(aEvent, isMove)
-    {
+    startDrag : function(aEvent, isMove) {
         aEvent.preventDefault();
         this.target = aEvent.originalTarget.parentNode;
         this.isMove = isMove;
@@ -2559,8 +2421,7 @@ var sbAnnotationService = {
         aEvent.view.document.addEventListener("mouseup",   this.handleEvent, true);
     },
 
-    onDrag : function(aEvent)
-    {
+    onDrag : function(aEvent) {
         aEvent.preventDefault();
         if (this.isMove) {
             var x = aEvent.clientX - this.offsetX;
@@ -2577,15 +2438,13 @@ var sbAnnotationService = {
         }
     },
 
-    stopDrag : function(aEvent)
-    {
+    stopDrag : function(aEvent) {
         this.target = null;
         aEvent.view.document.removeEventListener("mousemove", this.handleEvent, true);
         aEvent.view.document.removeEventListener("mouseup",   this.handleEvent, true);
     },
 
-    addInline : function()
-    {
+    addInline : function() {
         // check and get selection
         var win = sbCommonUtils.getFocusedWindow();
         var sel = sbPageEditor.getSelection(win);
@@ -2606,8 +2465,7 @@ var sbAnnotationService = {
         sbHighlighter.set(win, sel, "span", attr);
     },
 
-    editInline : function(aElement)
-    {
+    editInline : function(aElement) {
         var doc = aElement.ownerDocument;
         // check and get the annotation
         var ret = { value : aElement.getAttribute("title") };
@@ -2628,13 +2486,11 @@ var sbAnnotationService = {
     },
 
 
-    attach : function(aFlag)
-    {
+    attach : function(aFlag) {
         var win = sbCommonUtils.getFocusedWindow();
         var sel = sbPageEditor.getSelection(win);
         if ( !sel ) return;
-        if ( aFlag == "L" )
-        {
+        if ( aFlag == "L" ) {
             // fill the selection it looks like an URL
             // use a very wide standard, which allows as many cases as may be used
             var selText = sel.toString();
@@ -2649,8 +2505,7 @@ var sbAnnotationService = {
                 "href" : ret.value
             };
         }
-        else if ( aFlag == "I" )
-        {
+        else if ( aFlag == "I" ) {
             // we can construct inner link only for those with valid id
             if (!sbPageEditor.item) return;
             // if the sidebar is closed, we may get an error
@@ -2693,8 +2548,7 @@ var sbAnnotationService = {
                 "title" : title
             };
         }
-        else
-        {
+        else {
             // we can upload file only for those with valid id
             if (!sbPageEditor.item) return;
             // check if the page is local and get its path
@@ -2751,8 +2605,7 @@ var sbInfoViewer = {
 
     get TOOLBAR() { return document.getElementById("ScrapBookInfobar"); },
 
-    onPopupShowing : function(aEvent)
-    {
+    onPopupShowing : function(aEvent) {
         var id = sbBrowserOverlay.getID();
         document.getElementById("ScrapBookStatusPopupE").setAttribute("checked", sbBrowserOverlay.editMode);
         document.getElementById("ScrapBookStatusPopupI").setAttribute("checked", sbBrowserOverlay.infoMode);
@@ -2776,8 +2629,7 @@ var sbInfoViewer = {
         }
     },
 
-    init : function(aID)
-    {
+    init : function(aID) {
         if ( aID != sbBrowserOverlay.getID() ) return;
         if (!sbDataSource.exists(sbBrowserOverlay.resource) || 
             sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "notex") {
@@ -2805,8 +2657,7 @@ var sbInfoViewer = {
         srcLabel.onclick = function(aEvent){ sbCommonUtils.loadURL(srcLabel.value, aEvent.button == 1); };
     },
 
-    toggle : function()
-    {
+    toggle : function() {
         var id = sbBrowserOverlay.getID();
         if ( !id ) return;
         this.TOOLBAR.setAttribute("autoshow", this.TOOLBAR.hidden);
@@ -2815,8 +2666,7 @@ var sbInfoViewer = {
         this.optimize();
     },
 
-    toggleIndicator : function(willEnable)
-    {
+    toggleIndicator : function(willEnable) {
         sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
             if ( willEnable )
                 this.indicateLinks(win);
@@ -2825,13 +2675,11 @@ var sbInfoViewer = {
         }, this);
     },
 
-    indicateLinks : function(aWindow)
-    {
+    indicateLinks : function(aWindow) {
         sbPageEditor.applyStyle(aWindow, "scrapbook-indicator-style", "a[href]:not([href^=\"http\"]):not([href^=\"javascript\"]):not([href^=\"mailto\"]):before { content:url('chrome://scrapbook/skin/info_link1.png'); }");
     },
 
-    renew : function(showDetail)
-    {
+    renew : function(showDetail) {
         var id = sbBrowserOverlay.getID();
         if ( !id ) return;
         var fileName = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(window.content.location.href))[0];
@@ -2854,8 +2702,7 @@ var sbInfoViewer = {
         top.window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
     },
 
-    internalize : function()
-    {
+    internalize : function() {
         var id = sbBrowserOverlay.getID();
         if ( !id ) return;
         if (window.content.document.contentType != "text/html") {
@@ -2910,14 +2757,12 @@ var sbInfoViewer = {
         top.window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
     },
 
-    openSourceURL : function(tabbed)
-    {
+    openSourceURL : function(tabbed) {
         if ( !sbBrowserOverlay.getID() ) return;
         sbCommonUtils.loadURL(sbDataSource.getProperty(sbBrowserOverlay.resource, "source"), tabbed);
     },
 
-    loadFile : function(aFileName)
-    {
+    loadFile : function(aFileName) {
         var file = sbCommonUtils.getContentDir(sbPageEditor.item.id); file.append(aFileName);
         var url = sbCommonUtils.convertFilePathToURL(file.path);
         var dataXml = sbCommonUtils.convertURLToFile(url);
@@ -2952,8 +2797,7 @@ var sbInfoViewer = {
         gBrowser.loadURI(url, null, null);
     },
 
-    optimize : function()
-    {
+    optimize : function() {
         this.TOOLBAR.style.borderBottom = sbPageEditor.TOOLBAR.hidden ? "1px solid ThreeDShadow" : "none";
     },
 

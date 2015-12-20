@@ -108,8 +108,7 @@ var sbPrefWindow = {
         oFP.appendFilters(oFP.filterAll);
 
         var ret = oFP.show();
-        if (ret == oFP.returnOK || ret == oFP.returnReplace)
-        {
+        if (ret == oFP.returnOK || ret == oFP.returnReplace) {
             var list = sbCommonUtils.getPrefKeys();
             var result = {};
             for (var i=0, I=list.length; i<I; ++i) {
