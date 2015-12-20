@@ -138,7 +138,7 @@ var sbOutputService = {
 	getHTMLHead : function()
 	{
 		var HTML = '<!DOCTYPE html>\n'
-			+ '<html>\n\n'
+			+ '<html id="scrapbook-index">\n\n'
 			+ '<head>\n'
 			+ '<meta charset="UTF-8">\n'
 			+ '<title>' + this.getHTMLTitle() + '</title>\n'
@@ -255,7 +255,7 @@ var sbOutputService = {
 	getHTMLFrame : function()
 	{
 		var HTML = '<!DOCTYPE html>\n'
-            + '<html>\n'
+            + '<html id="scrapbook-frame">\n'
             + '<head>\n'
             + '<meta charset="UTF-8">\n'
             + '<title>' + this.getHTMLTitle() + '</title>\n'
@@ -343,7 +343,7 @@ var sbOutputService = {
 	getHTMLSearch : function()
 	{
 		var HTML = '<!DOCTYPE html>\n'
-			+ '<html>\n'
+			+ '<html id="scrapbook-search">\n'
 			+ '<head>\n'
 			+ '<meta charset="UTF-8">\n'
 			+ '<title>Search - ScrapBook</title>\n'
