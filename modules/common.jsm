@@ -684,6 +684,19 @@ var sbCommonUtils = {
 		}
 	},
 
+    getPrefKeys: function ()
+    {
+        return this.prefBranch.getChildList("", {});
+    },
+
+    resetPrefs: function ()
+    {
+        var list = this.getPrefKeys();
+        for (var i=0, I=list.length; i<I; ++i) {
+            this.prefBranch.clearUserPref(list[i]);
+        }
+    },
+
 	// deprecated, use getPref instead (left for downward compatibility with addons)
 	getBoolPref : function(aName, aDefVal)
 	{

@@ -35,6 +35,9 @@
 <!ENTITY sb.prefs.notifyOnComplete "Показувати інформацію „Збереження виконано“">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
+<!ENTITY sb.prefs.export "Export Preferences">
+<!ENTITY sb.prefs.import "Import Preferences">
+<!ENTITY sb.prefs.reset "Reset Preferences">
 <!ENTITY sb.button.customize "Змінити">
 <!ENTITY sb.button.browse "Вибрати">
 <!ENTITY sb.button.show "Показати файли">
