@@ -109,7 +109,7 @@ var sbSearchResult =
 		var resURI = nameLR[0], name = nameLR[1].substring(1) || "index.html";
 		res = sbCommonUtils.RDF.GetResource(resURI);
 		if ( !sbDataSource.exists(res) ) return this.next();
-		var hits = sbSearchQueryHandler.match(this.queryKey, res, content);
+		var hits = sbSearchQueryHandler.match(this.queryKey, res, content, name);
 		if ( hits )
 		{
 			var comment = sbDataSource.getProperty(res, "comment");
