@@ -1056,6 +1056,12 @@ var sbSearchQueryHandler = {
 					case "-id:":
 						addRule('id', 'exclude', parseStr(term));
 						break;
+					case "file:":
+						addRule('file', 'include', parseStr(term));
+						break;
+					case "-file:":
+						addRule('file', 'exclude', parseStr(term));
+						break;
 					case "source:":
 						addRule('source', 'include', parseStr(term));
 						break;
@@ -1079,6 +1085,12 @@ var sbSearchQueryHandler = {
 						break;
 					case "-content:":
 						addRule('content', 'exclude', parseStr(term));
+						break;
+					case "tcc:":
+						addRule('tcc', 'include', parseStr(term));
+						break;
+					case "-tcc:":
+						addRule('tcc', 'exclude', parseStr(term));
 						break;
 					case "create:":
 						addRule('create', 'include', parseDate(term));
@@ -1154,16 +1166,17 @@ var sbSearchQueryHandler = {
 	// aKey: array, generated via parse()
 	// aRes: the resource object to test
 	// aText: text from the fulltext cache; false for a filtering search
-	match : function(aKey, aRes, aText)
+    // aFile: file name from the fulltext cache; false for a filtering search
+	match : function(aKey, aRes, aText, aFile)
 	{
 		this.hits = {};
 		for (var i in aKey.rule) {
-			if (!this['_match_'+i](aKey.rule[i], aRes, aText)) return false;
+			if (!this['_match_'+i](aKey.rule[i], aRes, aText, aFile)) return false;
 		}
 		return this.hits;
 	},
 
-	_match_tcc : function(aKeyItem, aRes, aText) {
+	_match_tcc : function(aKeyItem, aRes, aText, aFile) {
 		var title = sbDataSource.getProperty(aRes, "title");
 		var comment = sbDataSource.getProperty(aRes, "comment");
 		var content = aText || "";
@@ -1206,11 +1219,11 @@ var sbSearchQueryHandler = {
 		return true;
 	},
 
-	_match_content : function(aKeyItem, aRes, aText) {
+	_match_content : function(aKeyItem, aRes, aText, aFile) {
 		return this.matchText(aKeyItem, "content", aText || "");
 	},
 
-	_match_all : function(aKeyItem, aRes, aText) {
+	_match_all : function(aKeyItem, aRes, aText, aFile) {
 		var title = sbDataSource.getProperty(aRes, "title");
 		var comment = sbDataSource.getProperty(aRes, "comment");
 		var id = sbDataSource.getProperty(aRes, "id");
@@ -1218,23 +1231,27 @@ var sbSearchQueryHandler = {
 		return this.matchText(aKeyItem, "all", [title, comment, source, id].join("\n"));
 	},
 
-	_match_id : function(aKeyItem, aRes, aText) {
+	_match_id : function(aKeyItem, aRes, aText, aFile) {
 		return this.matchText(aKeyItem, "id", sbDataSource.getProperty(aRes, "id"));
 	},
 
-	_match_title : function(aKeyItem, aRes, aText) {
+	_match_file : function(aKeyItem, aRes, aText, aFile) {
+		return this.matchText(aKeyItem, "file", aFile || "");
+	},
+
+	_match_title : function(aKeyItem, aRes, aText, aFile) {
 		return this.matchText(aKeyItem, "title", sbDataSource.getProperty(aRes, "title"));
 	},
 
-	_match_comment : function(aKeyItem, aRes, aText) {
+	_match_comment : function(aKeyItem, aRes, aText, aFile) {
 		return this.matchText(aKeyItem, "comment", sbDataSource.getProperty(aRes, "comment"));
 	},
 
-	_match_source : function(aKeyItem, aRes, aText) {
+	_match_source : function(aKeyItem, aRes, aText, aFile) {
 		return this.matchText(aKeyItem, "source", sbDataSource.getProperty(aRes, "source"));
 	},
 
-	_match_type : function(aKeyItem, aRes, aText) {
+	_match_type : function(aKeyItem, aRes, aText, aFile) {
 		var type = sbDataSource.getProperty(aRes, "type");
 		for (var i=0, len=aKeyItem.exclude.length; i<len; i++) {
 			if (type == aKeyItem.exclude[i]) {
@@ -1251,11 +1268,11 @@ var sbSearchQueryHandler = {
 		return false;
 	},
 
-	_match_create : function(aKeyItem, aRes, aText) {
+	_match_create : function(aKeyItem, aRes, aText, aFile) {
 		return this.matchDate(aKeyItem, sbDataSource.getProperty(aRes, "create"));
 	},
 
-	_match_modify : function(aKeyItem, aRes, aText) {
+	_match_modify : function(aKeyItem, aRes, aText, aFile) {
 		return this.matchDate(aKeyItem, sbDataSource.getProperty(aRes, "modify"));
 	},
 
