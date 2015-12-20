@@ -1,22 +1,22 @@
 /* ::::: PROPERTIES ::::: */
 
 dialog {
-	width: 450px;
+    width: 450px;
 }
 
 tab {
-	min-width: 80px;
-	text-align: center;
+    min-width: 80px;
+    text-align: center;
 }
 
 rows#sbPropRows row {
-	min-height: 2.2em;
-	margin-bottom: 3px;
+    min-height: 2.2em;
+    margin-bottom: 3px;
 }
 
 row > textbox[readonly="true"] {
-	-moz-appearance: none !important;
-	border: none;
+    -moz-appearance: none !important;
+    border: none;
 }
 
 

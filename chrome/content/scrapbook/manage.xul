@@ -6,12 +6,12 @@
 <?xul-overlay href="chrome://scrapbook/content/tree.xul"?>
 
 <!DOCTYPE window [
-	<!ENTITY % mainDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
-	%mainDTD;
-	<!ENTITY % propDTD SYSTEM "chrome://scrapbook/locale/property.dtd" >
-	%propDTD;
-	<!ENTITY % treeDTD SYSTEM "chrome://scrapbook/locale/tree.dtd" >
-	%treeDTD;
+    <!ENTITY % mainDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+    %mainDTD;
+    <!ENTITY % propDTD SYSTEM "chrome://scrapbook/locale/property.dtd" >
+    %propDTD;
+    <!ENTITY % treeDTD SYSTEM "chrome://scrapbook/locale/tree.dtd" >
+    %treeDTD;
 ]>
 
 <window id="sbManageWindow"
@@ -22,144 +22,144 @@
         onload="sbMainService.init();sbManageService.init();"
         windowtype="scrapbook">
 
-	<script type="application/x-javascript" src="chrome://scrapbook/content/manage.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapnote.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/manage.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/scrapnote.js" />
 
-	<broadcasterset id="sbBroadcasters" />
+    <broadcasterset id="sbBroadcasters" />
 
-	<keyset id="sbGenericKeys">
-		<key key="a" modifiers="accel" oncommand="sbTreeHandler.TREE.focus();sbTreeHandler.TREE.view.selection.selectAll();" />
-		<key key="w" modifiers="accel" oncommand="window.close();" />
-	</keyset>
+    <keyset id="sbGenericKeys">
+        <key key="a" modifiers="accel" oncommand="sbTreeHandler.TREE.focus();sbTreeHandler.TREE.view.selection.selectAll();" />
+        <key key="w" modifiers="accel" oncommand="window.close();" />
+    </keyset>
 
-	<popupset id="sbPopupSet" />
+    <popupset id="sbPopupSet" />
 
-	<toolbox id="sbMainToolbox" class="plain">
-		<toolbar id="sbSearchToolbar" />
-		<toolbar id="sbMainToolbar">
-			<toolbarbutton id="sbToolbarNewFolder" type="menu">
-				<menupopup>
-					<menuitem class="menuitem-iconic sb-create" label="&sb.new.folder;..." oncommand="sbMainService.createFolder(event.ctrlKey || event.shiftKey);" />
-					<menuitem class="menuitem-iconic sb-create" label="&sb.new.separator;" oncommand="sbMainService.createSeparator(event.ctrlKey || event.shiftKey);" />
-					<menuitem class="menuitem-iconic sb-create" label="&sb.new.note;"      oncommand="sbMainService.createNote(event.ctrlKey || event.shiftKey);" />
-					<menuitem class="menuitem-iconic sb-create" label="&sb.new.notex;"     oncommand="sbMainService.createNoteX(event.ctrlKey || event.shiftKey);" />
-				</menupopup>
-			</toolbarbutton>
-			<toolbarbutton id="sbToolbarToggle"   tooltiptext="&sb.toggle.all;" oncommand="sbTreeHandler.toggleAllFolders();" />
-			<toolbarbutton id="sbToolbarListView" tooltiptext="&sb.listview;"   oncommand="sbSearchService.listView();" />
-			<toolbarbutton id="mbToolbarButton" />
-			<toolbarseparator /><toolbarbutton id="sbToolbarMove"   label="&sb.move;..." oncommand="sbTreeHandler.send();" />
-			<toolbarseparator /><toolbarbutton id="sbToolbarRemove" label="&sb.remove;"  oncommand="sbTreeHandler.remove();" />
-			<spacer flex="1" />
-			<toolbarseparator /><toolbarbutton id="sbToolbarCombine" label="&sb.tools.combine;" type="checkbox" autoCheck="false" group="module" moduleurl="chrome://scrapbook/content/combine.xul" oncommand="sbManageService.toggleRightPane(this);" />
-			<toolbarseparator /><toolbarbutton id="sbToolbarTrade"   label="&sb.tools.trade;"   type="checkbox" autoCheck="false" group="module" moduleurl="chrome://scrapbook/content/trade.xul"   oncommand="sbManageService.toggleRightPane(this);" />
-		</toolbar>
-	</toolbox>
+    <toolbox id="sbMainToolbox" class="plain">
+        <toolbar id="sbSearchToolbar" />
+        <toolbar id="sbMainToolbar">
+            <toolbarbutton id="sbToolbarNewFolder" type="menu">
+                <menupopup>
+                    <menuitem class="menuitem-iconic sb-create" label="&sb.new.folder;..." oncommand="sbMainService.createFolder(event.ctrlKey || event.shiftKey);" />
+                    <menuitem class="menuitem-iconic sb-create" label="&sb.new.separator;" oncommand="sbMainService.createSeparator(event.ctrlKey || event.shiftKey);" />
+                    <menuitem class="menuitem-iconic sb-create" label="&sb.new.note;"      oncommand="sbMainService.createNote(event.ctrlKey || event.shiftKey);" />
+                    <menuitem class="menuitem-iconic sb-create" label="&sb.new.notex;"     oncommand="sbMainService.createNoteX(event.ctrlKey || event.shiftKey);" />
+                </menupopup>
+            </toolbarbutton>
+            <toolbarbutton id="sbToolbarToggle"   tooltiptext="&sb.toggle.all;" oncommand="sbTreeHandler.toggleAllFolders();" />
+            <toolbarbutton id="sbToolbarListView" tooltiptext="&sb.listview;"   oncommand="sbSearchService.listView();" />
+            <toolbarbutton id="mbToolbarButton" />
+            <toolbarseparator /><toolbarbutton id="sbToolbarMove"   label="&sb.move;..." oncommand="sbTreeHandler.send();" />
+            <toolbarseparator /><toolbarbutton id="sbToolbarRemove" label="&sb.remove;"  oncommand="sbTreeHandler.remove();" />
+            <spacer flex="1" />
+            <toolbarseparator /><toolbarbutton id="sbToolbarCombine" label="&sb.tools.combine;" type="checkbox" autoCheck="false" group="module" moduleurl="chrome://scrapbook/content/combine.xul" oncommand="sbManageService.toggleRightPane(this);" />
+            <toolbarseparator /><toolbarbutton id="sbToolbarTrade"   label="&sb.tools.trade;"   type="checkbox" autoCheck="false" group="module" moduleurl="chrome://scrapbook/content/trade.xul"   oncommand="sbManageService.toggleRightPane(this);" />
+        </toolbar>
+    </toolbox>
 
-	<hbox flex="1">
-		<vbox id="sbLeftPane" flex="2" persist="width">
-			<hbox id="sbHeader" class="sb-header" align="center" hidden="true">
-				<label flex="1" crop="end" />
-				<spacer flex="1" />
-				<toolbarbutton class="sb-header-exit" oncommand="sbSearchService.exit();" />
-			</hbox>
-			<vbox id="sbTreeOuter" flex="2" persist="height">
-				<tree id="sbTree"
-				      onclick="sbTreeHandler.onClick(event, 1);"
-				      ondblclick="sbTreeHandler.onDblClick(event);"
-				      onkeypress="sbTreeHandler.onKeyPress(event);"
-					  ondragenter="sbTreeDNDHandler.currentDataTransfer=event.dataTransfer;"
-				      ondraggesture="if (event.originalTarget.localName == 'treechildren') nsDragAndDrop.startDrag(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
-				      ondragover="nsDragAndDrop.dragOver(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
-				      ondragdrop="nsDragAndDrop.drop(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
-				      contextmenu="sbPopup"
-				      hidecolumnpicker="false"
-				      enableColumnDrag="true"
-				      seltype="multiple"
-				      class="plain" flex="1">
-					<treecols id="sbTreeCols">
-						<treecol id="sbTreeColTitle" flex="6" label="&sb.prop.title;" hideheader="false"
-							class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title"
-							persist="width hidden ordinal" />
-						<splitter class="tree-splitter" />
-						<treecol id="sbTreeColSource" flex="2" label="&sbp.prop.url;"
-							class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#source"
-							persist="width hidden ordinal" />
-						<splitter class="tree-splitter" />
-						<treecol id="sbTreeColType" flex="1" label="&sb.prop.type;"
-							class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type"
-							persist="width hidden ordinal" />
-						<splitter class="tree-splitter" />
-						<treecol id="sbTreeColIcon" flex="1" label="&sb.prop.icon;"
-							class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon"
-							hidden="true"
-							persist="width hidden ordinal" />
-						<splitter class="tree-splitter" />
-						<treecol id="sbTreeColChars" flex="1" label="&sb.prop.encode;"
-							class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#chars"
-							hidden="true"
-							persist="width hidden ordinal" />
-						<splitter class="tree-splitter" />
-						<treecol id="sbTreeColComment" flex="2" label="&sb.prop.comment;"
-							class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#comment"
-							hidden="true"
-							persist="width hidden ordinal" />
-						<splitter class="tree-splitter" />
-						<treecol id="sbTreeColLock" flex="2" label="&sb.prop.lock;"
-							class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#lock"
-							hidden="true"
-							persist="width hidden ordinal" />
-						<splitter class="tree-splitter" />
-						<treecol id="sbTreeColModify" flex="2" label="&sb.prop.create;"
-							class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#create"
-							hidden="true"
-							persist="width hidden ordinal" />
-						<splitter class="tree-splitter" />
-						<treecol id="sbTreeColModify" flex="2" label="&sb.prop.modify;"
-							class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#modify"
-							hidden="true"
-							persist="width hidden ordinal" />
-						<splitter class="tree-splitter" />
-						<treecol id="sbTreeColID" flex="1" label="&sb.prop.id.date;"
-							class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#id"
-							hidden="true"
-							persist="width hidden ordinal" />
-					</treecols>
-					<template>
-						<rule id="sbTreeRule">
-							<treechildren flex="1">
-								<treeitem uri="rdf:*">
-									<treerow>
-										<treecell id="sbTreeItem"
-										          label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title"
-										          src="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon"
-										          properties="Name title rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
-										<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#source" />
-										<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
-										<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon" />
-										<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#chars" />
-										<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#comment" />
-										<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#lock" />
-										<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#create" />
-										<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#modify" />
-										<treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#id" />
-									</treerow>
-								</treeitem>
-							</treechildren>
-						</rule>
-					</template>
-				</tree>
-			</vbox>
-		</vbox>
-		<splitter id="sbPaneSplitter" hidden="true" />
-		<browser type="chrome" id="sbRightPaneBrowser" onload="event.stopPropagation();" flex="5" hidden="true" persist="width" disablehistory="true" />
-	</hbox>
+    <hbox flex="1">
+        <vbox id="sbLeftPane" flex="2" persist="width">
+            <hbox id="sbHeader" class="sb-header" align="center" hidden="true">
+                <label flex="1" crop="end" />
+                <spacer flex="1" />
+                <toolbarbutton class="sb-header-exit" oncommand="sbSearchService.exit();" />
+            </hbox>
+            <vbox id="sbTreeOuter" flex="2" persist="height">
+                <tree id="sbTree"
+                      onclick="sbTreeHandler.onClick(event, 1);"
+                      ondblclick="sbTreeHandler.onDblClick(event);"
+                      onkeypress="sbTreeHandler.onKeyPress(event);"
+                      ondragenter="sbTreeDNDHandler.currentDataTransfer=event.dataTransfer;"
+                      ondraggesture="if (event.originalTarget.localName == 'treechildren') nsDragAndDrop.startDrag(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
+                      ondragover="nsDragAndDrop.dragOver(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
+                      ondragdrop="nsDragAndDrop.drop(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
+                      contextmenu="sbPopup"
+                      hidecolumnpicker="false"
+                      enableColumnDrag="true"
+                      seltype="multiple"
+                      class="plain" flex="1">
+                    <treecols id="sbTreeCols">
+                        <treecol id="sbTreeColTitle" flex="6" label="&sb.prop.title;" hideheader="false"
+                            class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title"
+                            persist="width hidden ordinal" />
+                        <splitter class="tree-splitter" />
+                        <treecol id="sbTreeColSource" flex="2" label="&sbp.prop.url;"
+                            class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#source"
+                            persist="width hidden ordinal" />
+                        <splitter class="tree-splitter" />
+                        <treecol id="sbTreeColType" flex="1" label="&sb.prop.type;"
+                            class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type"
+                            persist="width hidden ordinal" />
+                        <splitter class="tree-splitter" />
+                        <treecol id="sbTreeColIcon" flex="1" label="&sb.prop.icon;"
+                            class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon"
+                            hidden="true"
+                            persist="width hidden ordinal" />
+                        <splitter class="tree-splitter" />
+                        <treecol id="sbTreeColChars" flex="1" label="&sb.prop.encode;"
+                            class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#chars"
+                            hidden="true"
+                            persist="width hidden ordinal" />
+                        <splitter class="tree-splitter" />
+                        <treecol id="sbTreeColComment" flex="2" label="&sb.prop.comment;"
+                            class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#comment"
+                            hidden="true"
+                            persist="width hidden ordinal" />
+                        <splitter class="tree-splitter" />
+                        <treecol id="sbTreeColLock" flex="2" label="&sb.prop.lock;"
+                            class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#lock"
+                            hidden="true"
+                            persist="width hidden ordinal" />
+                        <splitter class="tree-splitter" />
+                        <treecol id="sbTreeColModify" flex="2" label="&sb.prop.create;"
+                            class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#create"
+                            hidden="true"
+                            persist="width hidden ordinal" />
+                        <splitter class="tree-splitter" />
+                        <treecol id="sbTreeColModify" flex="2" label="&sb.prop.modify;"
+                            class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#modify"
+                            hidden="true"
+                            persist="width hidden ordinal" />
+                        <splitter class="tree-splitter" />
+                        <treecol id="sbTreeColID" flex="1" label="&sb.prop.id.date;"
+                            class="sortDirectionIndicator" sortActive="true" sort="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#id"
+                            hidden="true"
+                            persist="width hidden ordinal" />
+                    </treecols>
+                    <template>
+                        <rule id="sbTreeRule">
+                            <treechildren flex="1">
+                                <treeitem uri="rdf:*">
+                                    <treerow>
+                                        <treecell id="sbTreeItem"
+                                                  label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#title"
+                                                  src="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon"
+                                                  properties="Name title rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
+                                        <treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#source" />
+                                        <treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type" />
+                                        <treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon" />
+                                        <treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#chars" />
+                                        <treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#comment" />
+                                        <treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#lock" />
+                                        <treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#create" />
+                                        <treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#modify" />
+                                        <treecell label="rdf:http://amb.vis.ne.jp/mozilla/scrapbook-rdf#id" />
+                                    </treerow>
+                                </treeitem>
+                            </treechildren>
+                        </rule>
+                    </template>
+                </tree>
+            </vbox>
+        </vbox>
+        <splitter id="sbPaneSplitter" hidden="true" />
+        <browser type="chrome" id="sbRightPaneBrowser" onload="event.stopPropagation();" flex="5" hidden="true" persist="width" disablehistory="true" />
+    </hbox>
 
-	<statusbar id="status-bar" class="chromeclass-status">
-		<statusbarpanel id="statusbar-display" flex="1" />
-		<statusbarpanel id="statusbar-progresspanel" class="statusbarpanel-progress" collapsed="true">
-			<progressmeter id="sbManageProgress" mode="determined" value="0" width="160" />
-		</statusbarpanel>
-	</statusbar>
+    <statusbar id="status-bar" class="chromeclass-status">
+        <statusbarpanel id="statusbar-display" flex="1" />
+        <statusbarpanel id="statusbar-progresspanel" class="statusbarpanel-progress" collapsed="true">
+            <progressmeter id="sbManageProgress" mode="determined" value="0" width="160" />
+        </statusbarpanel>
+    </statusbar>
 
 </window>

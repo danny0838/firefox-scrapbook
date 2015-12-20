@@ -14,89 +14,89 @@
         onclose="event.preventDefault();sbCaptureTask.abort();"
         windowtype="scrapbook">
 
-	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/saver.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/capture.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/saver.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/capture.js" />
 
-	<hbox>
-		<textbox id="sbpCaptureProgress" readonly="true" width="100"/>
-		<textbox id="sbCaptureTextbox"   readonly="true" flex="1"/>
-	</hbox>
+    <hbox>
+        <textbox id="sbpCaptureProgress" readonly="true" width="100"/>
+        <textbox id="sbCaptureTextbox"   readonly="true" flex="1"/>
+    </hbox>
 
-	<tree
-		id="sbpURLList"
-		flex="1"
-		context="popup"
-		seltype="multiple"
-		enableColumnDrag="true"
-		style="margin:0px;"
-		editable="true"
-		autostretch="always"
-	>
-		<treecols>
-			<treecol type="checkbox" fixed="true" editable="true" ignoreincolumnpicker="true" />
-			<splitter class="tree-splitter"/>
-			<treecol label="&sbp.capture.column.one;" flex="35" editable="true" crop="right" persist="width hidden" />
-			<splitter class="tree-splitter"/>
-			<treecol label="&sbp.capture.column.two;" flex="9" editable="true" persist="width hidden" />
-			<splitter class="tree-splitter"/>
-			<treecol label="&sbp.capture.column.three;" flex="5" editable="true" persist="width hidden"/>
-		</treecols>
-		<treechildren/>
-	</tree>
+    <tree
+        id="sbpURLList"
+        flex="1"
+        context="popup"
+        seltype="multiple"
+        enableColumnDrag="true"
+        style="margin:0px;"
+        editable="true"
+        autostretch="always"
+    >
+        <treecols>
+            <treecol type="checkbox" fixed="true" editable="true" ignoreincolumnpicker="true" />
+            <splitter class="tree-splitter"/>
+            <treecol label="&sbp.capture.column.one;" flex="35" editable="true" crop="right" persist="width hidden" />
+            <splitter class="tree-splitter"/>
+            <treecol label="&sbp.capture.column.two;" flex="9" editable="true" persist="width hidden" />
+            <splitter class="tree-splitter"/>
+            <treecol label="&sbp.capture.column.three;" flex="5" editable="true" persist="width hidden"/>
+        </treecols>
+        <treechildren/>
+    </tree>
 
-	<browser type="content" id="sbCaptureBrowser" collapsed="true" disablehistory="true" />
+    <browser type="content" id="sbCaptureBrowser" collapsed="true" disablehistory="true" />
 
-	<spacer style="height:5px" />
-	<hbox>
-		<checkbox id="sbpChkFilter" label="&sb.capture.filter;" checked="false" oncommand="sbCaptureTask.toggleFilterBox(event);" />
-		<spacer flex="1" />
-	</hbox>
-	<spacer style="height:7px" />
-	<vbox id="sbpFilterBox" hidden="true" style="border: 1px solid black; padding:4px">
-		<hbox>
-			<menulist id="sbpMnuIncExc">
-				<menupopup>
-					<menuitem label="Include" />
-					<menuitem label="Exclude" />
-				</menupopup>
-			</menulist>
-			<textbox id="sbpTextboxFilter"
-					 autocompletesearch="form-history"
-					 autocompletesearchparam="sbSearchHistory"
-					 enablehistory="true"
-					 flex="1"
-					 oninput="sbpFilter.input();"
-					 ontextentered="sbpFilter.add();"
-					 tabscrolling="true"
-					 type="autocomplete" />
-			<button id="sbpBtnAccept" label="&sb.capture.filter.accept;" disabled="true" tooltiptext="&sb.capture.filter.accept.tt;" oncommand="sbpFilter.add();" />
-			<button id="sbpBtnCancel" label="&sb.capture.filter.cancel;" disabled="true" tooltiptext="&sb.capture.filter.cancel.tt;" oncommand="sbpFilter.cancel();" />
-			<button id="sbpBtnDel" label="&sb.capture.filter.delete;" disabled="true" tooltiptext="&sb.capture.filter.delete.tt;" oncommand="sbpFilter.del();" />
-		</hbox>
-		<tree id="sbpTreeFilter"
-			  autostrech="always"
-			  onclick="sbpFilter.editFilter();"
-			  rows="5"
-			  seltype="single"
-			  style="margin:0px;"
-		>
-			<treecols>
-				<treecol label="&sb.capture.filter.column.one;" flex="1" editable="true" crop="right" persist="width hidden" />
-				<splitter class="tree-splitter" />
-				<treecol label="&sb.capture.filter.column.two;" flex="10" editable="true" crop="right" persist="width hidden" />
-			</treecols>
-			<treechildren/>
-		</tree>
-	</vbox>
+    <spacer style="height:5px" />
+    <hbox>
+        <checkbox id="sbpChkFilter" label="&sb.capture.filter;" checked="false" oncommand="sbCaptureTask.toggleFilterBox(event);" />
+        <spacer flex="1" />
+    </hbox>
+    <spacer style="height:7px" />
+    <vbox id="sbpFilterBox" hidden="true" style="border: 1px solid black; padding:4px">
+        <hbox>
+            <menulist id="sbpMnuIncExc">
+                <menupopup>
+                    <menuitem label="Include" />
+                    <menuitem label="Exclude" />
+                </menupopup>
+            </menulist>
+            <textbox id="sbpTextboxFilter"
+                     autocompletesearch="form-history"
+                     autocompletesearchparam="sbSearchHistory"
+                     enablehistory="true"
+                     flex="1"
+                     oninput="sbpFilter.input();"
+                     ontextentered="sbpFilter.add();"
+                     tabscrolling="true"
+                     type="autocomplete" />
+            <button id="sbpBtnAccept" label="&sb.capture.filter.accept;" disabled="true" tooltiptext="&sb.capture.filter.accept.tt;" oncommand="sbpFilter.add();" />
+            <button id="sbpBtnCancel" label="&sb.capture.filter.cancel;" disabled="true" tooltiptext="&sb.capture.filter.cancel.tt;" oncommand="sbpFilter.cancel();" />
+            <button id="sbpBtnDel" label="&sb.capture.filter.delete;" disabled="true" tooltiptext="&sb.capture.filter.delete.tt;" oncommand="sbpFilter.del();" />
+        </hbox>
+        <tree id="sbpTreeFilter"
+              autostrech="always"
+              onclick="sbpFilter.editFilter();"
+              rows="5"
+              seltype="single"
+              style="margin:0px;"
+        >
+            <treecols>
+                <treecol label="&sb.capture.filter.column.one;" flex="1" editable="true" crop="right" persist="width hidden" />
+                <splitter class="tree-splitter" />
+                <treecol label="&sb.capture.filter.column.two;" flex="10" editable="true" crop="right" persist="width hidden" />
+            </treecols>
+            <treechildren/>
+        </tree>
+    </vbox>
 
-	<hbox>
-		<button id="sbCaptureSkipButton"  label="&sb.capture.skip;"  oncommand="sbCaptureTask.next(true);" disabled="true" />
-		<spacer flex="1" />
-		<button id="sbCapturePauseButton" label="&sb.capture.pause;" oncommand="sbCaptureTask.pause();" />
-		<button id="sbCaptureStartButton" label="&sb.capture.start;" oncommand="sbCaptureTask.activate();" hidden="true" />
-		<button id="sbCaptureCancelButton" label="&sb.capture.abort;" oncommand="sbCaptureTask.abort();" />
-		<button id="sbCaptureFinishButton" label="&sb.capture.finish;" oncommand="sbCaptureTask.closeWindow();" hidden="true" />
-	</hbox>
+    <hbox>
+        <button id="sbCaptureSkipButton"  label="&sb.capture.skip;"  oncommand="sbCaptureTask.next(true);" disabled="true" />
+        <spacer flex="1" />
+        <button id="sbCapturePauseButton" label="&sb.capture.pause;" oncommand="sbCaptureTask.pause();" />
+        <button id="sbCaptureStartButton" label="&sb.capture.start;" oncommand="sbCaptureTask.activate();" hidden="true" />
+        <button id="sbCaptureCancelButton" label="&sb.capture.abort;" oncommand="sbCaptureTask.abort();" />
+        <button id="sbCaptureFinishButton" label="&sb.capture.finish;" oncommand="sbCaptureTask.closeWindow();" hidden="true" />
+    </hbox>
 
 </window>

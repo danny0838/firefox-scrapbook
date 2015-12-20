@@ -10,12 +10,12 @@
         persist="screenX screenY"
         windowtype="scrapbook">
 
-	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/fulltext.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/fulltext.js" />
 
-	<vbox id="sbCacheStatus" style="padding:2px;">
-		<textbox id="sbCacheStatusLabel" flex="1" readonly="true" />
-		<progressmeter id="sbCacheStatusProgress" flex="1" mode="determined" value="0" />
-	</vbox>
+    <vbox id="sbCacheStatus" style="padding:2px;">
+        <textbox id="sbCacheStatusLabel" flex="1" readonly="true" />
+        <progressmeter id="sbCacheStatusProgress" flex="1" mode="determined" value="0" />
+    </vbox>
 
 </window>

@@ -4,12 +4,12 @@
 <?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
 
 <!DOCTYPE window [
-	<!ENTITY % propDTD SYSTEM "chrome://scrapbook/locale/property.dtd" >
-	%propDTD;
-	<!ENTITY % treeDTD SYSTEM "chrome://scrapbook/locale/tree.dtd" >
-	%treeDTD;
-	<!ENTITY % editDTD SYSTEM "chrome://scrapbook/locale/editor.dtd" >
-	%editDTD;
+    <!ENTITY % propDTD SYSTEM "chrome://scrapbook/locale/property.dtd" >
+    %propDTD;
+    <!ENTITY % treeDTD SYSTEM "chrome://scrapbook/locale/tree.dtd" >
+    %treeDTD;
+    <!ENTITY % editDTD SYSTEM "chrome://scrapbook/locale/editor.dtd" >
+    %editDTD;
 ]>
 
 <window id="sbResultWindow"
@@ -17,61 +17,61 @@
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         onload="SB_initFT('SEARCH');">
 
-	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/scrapbook.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/fulltext.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/scrapbook.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/fulltext.js" />
 
-	<popupset>
-		<menupopup id="sbPopup">
-			<menuitem id="sbPopupOpen"       label="&sb.open;"        oncommand="sbSearchResult.forward('O');" />
-			<menuitem id="sbPopupOpenNewTab" label="&sb.open.newtab;" oncommand="sbSearchResult.forward('T');" />
-			<menuitem id="sbPopupOpenLocate" label="&sb.locate;"      oncommand="sbSearchResult.forward('L');" />
-			<menuseparator />
-			<menuitem id="sbPopupProperty" class="menuitem-iconic" label="&sb.property;" oncommand="sbSearchResult.forward('P');" />
-		</menupopup>
-	</popupset>
+    <popupset>
+        <menupopup id="sbPopup">
+            <menuitem id="sbPopupOpen"       label="&sb.open;"        oncommand="sbSearchResult.forward('O');" />
+            <menuitem id="sbPopupOpenNewTab" label="&sb.open.newtab;" oncommand="sbSearchResult.forward('T');" />
+            <menuitem id="sbPopupOpenLocate" label="&sb.locate;"      oncommand="sbSearchResult.forward('L');" />
+            <menuseparator />
+            <menuitem id="sbPopupProperty" class="menuitem-iconic" label="&sb.property;" oncommand="sbSearchResult.forward('P');" />
+        </menupopup>
+    </popupset>
 
-	<hbox id="sbResultHeader" class="sb-header" align="center">
-		<label id="sbResultHeaderNotice" crop="end" flex="1" style="color: red; min-width: 100px;" hidden="true" />
-		<label id="sbResultHeaderMsg" crop="end" flex="1" style="min-width: 100px;" />
-		<label id="sbResultHeaderLoc" crop="end" flex="1" value="&sb.prop.folder;: " style="color: blue; min-width: 100px;" hidden="true" />
-		<spacer flex="1000" />
-		<toolbarbutton class="sb-header-locate" tooltiptext="&sb.locate;" oncommand="sbSearchResult.forward('L');" />
-		<toolbarbutton class="sb-header-exit"   oncommand="SB_exitResult();" />
-	</hbox>
+    <hbox id="sbResultHeader" class="sb-header" align="center">
+        <label id="sbResultHeaderNotice" crop="end" flex="1" style="color: red; min-width: 100px;" hidden="true" />
+        <label id="sbResultHeaderMsg" crop="end" flex="1" style="min-width: 100px;" />
+        <label id="sbResultHeaderLoc" crop="end" flex="1" value="&sb.prop.folder;: " style="color: blue; min-width: 100px;" hidden="true" />
+        <spacer flex="1000" />
+        <toolbarbutton class="sb-header-locate" tooltiptext="&sb.locate;" oncommand="sbSearchResult.forward('L');" />
+        <toolbarbutton class="sb-header-exit"   oncommand="SB_exitResult();" />
+    </hbox>
 
-	<tree id="sbTree"
-	      enableColumnDrag="true"
-	      context="sbPopup"
-	      seltype="single"
-	      onselect="sbSearchResult.forward();"
-	      class="plain"
-	      style="height:160px;">
-		<treecols>
-			<treecol id="sbTreeColTitle" label="&sb.prop.title;" flex="3"
-			         sortIndex="0" persist="width hidden ordinal" />
-			<splitter class="tree-splitter" />
-			<treecol id="sbTreeColContent" label="&sb.prop.content;" flex="5"
-			         sortIndex="1" persist="width hidden ordinal" />
-			<splitter class="tree-splitter" />
-			<treecol id="sbTreeColComment" label="&sb.prop.comment;" flex="2"
-			         sortIndex="2" persist="width hidden ordinal" />
-			<splitter class="tree-splitter" />
-			<treecol id="sbTreeColFolder" label="&sb.prop.folder;" flex="1"
-			         sortIndex="3" persist="width hidden ordinal" />
-			<splitter class="tree-splitter" />
-			<treecol id="sbTreeColName" label="&sb.prop.file;" flex="1" hidden="true"
-			         sortIndex="4" persist="width hidden ordinal" />
-			<splitter class="tree-splitter" />
-			<treecol id="sbTreeColId" label="&sb.prop.id.date;" flex="1" hidden="true"
-			         sortIndex="5" persist="width hidden ordinal" />
-		</treecols>
-		<treechildren />
-	</tree>
+    <tree id="sbTree"
+          enableColumnDrag="true"
+          context="sbPopup"
+          seltype="single"
+          onselect="sbSearchResult.forward();"
+          class="plain"
+          style="height:160px;">
+        <treecols>
+            <treecol id="sbTreeColTitle" label="&sb.prop.title;" flex="3"
+                     sortIndex="0" persist="width hidden ordinal" />
+            <splitter class="tree-splitter" />
+            <treecol id="sbTreeColContent" label="&sb.prop.content;" flex="5"
+                     sortIndex="1" persist="width hidden ordinal" />
+            <splitter class="tree-splitter" />
+            <treecol id="sbTreeColComment" label="&sb.prop.comment;" flex="2"
+                     sortIndex="2" persist="width hidden ordinal" />
+            <splitter class="tree-splitter" />
+            <treecol id="sbTreeColFolder" label="&sb.prop.folder;" flex="1"
+                     sortIndex="3" persist="width hidden ordinal" />
+            <splitter class="tree-splitter" />
+            <treecol id="sbTreeColName" label="&sb.prop.file;" flex="1" hidden="true"
+                     sortIndex="4" persist="width hidden ordinal" />
+            <splitter class="tree-splitter" />
+            <treecol id="sbTreeColId" label="&sb.prop.id.date;" flex="1" hidden="true"
+                     sortIndex="5" persist="width hidden ordinal" />
+        </treecols>
+        <treechildren />
+    </tree>
 
-	<splitter />
+    <splitter />
 
-	<browser type="content-primary" id="sbBrowser" disablehistory="true" flex="1" onload="sbSearchResult.onDocumentLoad(event);" />
+    <browser type="content-primary" id="sbBrowser" disablehistory="true" flex="1" onload="sbSearchResult.onDocumentLoad(event);" />
 
 </window>

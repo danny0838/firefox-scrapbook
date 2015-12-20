@@ -1,26 +1,26 @@
 /* ::::: Multi-Book Manager ::::: */
 
 treechildren::-moz-tree-row {
-	min-height: 1.8em;
+    min-height: 1.8em;
 }
 
 treechildren::-moz-tree-cell-text(active) {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 treechildren::-moz-tree-drop-feedback {
-	width: 100px;
+    width: 100px;
 }
 
 button#mbAddButton {
-	list-style-image: url(chrome://scrapbook/skin/menu_create.png);
+    list-style-image: url(chrome://scrapbook/skin/menu_create.png);
 }
 
 button#mbEditButton {
-	list-style-image: url(chrome://scrapbook/skin/menu_property.png);
+    list-style-image: url(chrome://scrapbook/skin/menu_property.png);
 }
 
 button#mbRemoveButton {
-	list-style-image: url(chrome://scrapbook/skin/menu_remove.png);
+    list-style-image: url(chrome://scrapbook/skin/menu_remove.png);
 }
 

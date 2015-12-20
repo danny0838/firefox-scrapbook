@@ -1,41 +1,41 @@
 /* ::::: NOTIFIER ::::: */
 
 #sbNotifierBox {
-	border: 2px solid #7B969C;
-	min-height: 50px;
+    border: 2px solid #7B969C;
+    min-height: 50px;
 }
 
 #sbNotifierIconBox {
-	margin-left : 4px;
-	margin-right: 6px;
-	min-height: 46px;
+    margin-left : 4px;
+    margin-right: 6px;
+    min-height: 46px;
 }
 
 #sbNotifierTextBox {
-	padding-right: 10px;
-	padding-top  : 5px;
+    padding-right: 10px;
+    padding-top  : 5px;
 }
 
 #sbNotifierIcon {
-	width : 16px;
-	height: 16px;
+    width : 16px;
+    height: 16px;
 }
 
 #sbNotifierTitle {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 #sbNotifierText,
 #sbNotifierTextAll {
-	margin-right: 6px;
-	cursor: pointer;
-	color: #1455D6;
-	text-decoration: underline;
+    margin-right: 6px;
+    cursor: pointer;
+    color: #1455D6;
+    text-decoration: underline;
 }
 
 #sbNotifierText:hover:active,
 #sbNotifierTextAll:hover:active {
-	color: #424F63;
+    color: #424F63;
 }
 
 

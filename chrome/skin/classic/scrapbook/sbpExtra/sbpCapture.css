@@ -25,21 +25,21 @@ treechildren::-moz-tree-checkbox(disabled)
 
 treechildren::-moz-tree-row(selected)
 {
-	background-color: #33CC33;
+    background-color: #33CC33;
 }
 
 treechildren::-moz-tree-row(finished)
 {
-	background-color: #FFFFFF;
+    background-color: #FFFFFF;
 }
 
 treechildren::-moz-tree-cell-text(success)
 {
-	color: #33CC33;
+    color: #33CC33;
 }
 
 treechildren::-moz-tree-cell-text(failed)
 {
-	color: #FF0000;
-	font-weight: bold;
+    color: #FF0000;
+    font-weight: bold;
 }

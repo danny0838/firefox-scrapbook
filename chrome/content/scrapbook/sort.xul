@@ -3,38 +3,38 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 
 <!DOCTYPE wizard [
-	<!ENTITY % mainDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
-	%mainDTD;
-	<!ENTITY % sortDTD SYSTEM "chrome://scrapbook/locale/sort.dtd" >
-	%sortDTD;
+    <!ENTITY % mainDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
+    %mainDTD;
+    <!ENTITY % sortDTD SYSTEM "chrome://scrapbook/locale/sort.dtd" >
+    %sortDTD;
 ]>
 
 <wizard id="sbSortWizard"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         title="&sb.sort; - ScrapBook"
         onload="sbSortService.init();"
-		onwizardcancel="sbSortService.showTree();"
+        onwizardcancel="sbSortService.showTree();"
         windowtype="scrapbook">
 
-	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/sort.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/sort.js" />
 
-	<wizardpage pageid="sbSortStartPage" label="&sb.sort;">
-		<radiogroup id="sbSortRadioGroup" persist="sortIndex">
-			<radio label="&sb.sort.reverse;" />
-			<radio label="&sb.sort.title.asc;" />
-			<radio label="&sb.sort.title.desc;" />
-			<radio label="&sb.sort.date.asc;" />
-			<radio label="&sb.sort.date.desc;" />
-		</radiogroup>
-		<separator class="groove" />
-		<checkbox id="sbSortGrouping" label="&sb.sort.grouping;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
-		<checkbox id="sbSortRecursive" label="&sb.sort.recursive;" persist="checked" />
-		<description id="sbSortWarning" value="&sb.sort.warning;" style="margin:10px;color:red;" />
-	</wizardpage>
+    <wizardpage pageid="sbSortStartPage" label="&sb.sort;">
+        <radiogroup id="sbSortRadioGroup" persist="sortIndex">
+            <radio label="&sb.sort.reverse;" />
+            <radio label="&sb.sort.title.asc;" />
+            <radio label="&sb.sort.title.desc;" />
+            <radio label="&sb.sort.date.asc;" />
+            <radio label="&sb.sort.date.desc;" />
+        </radiogroup>
+        <separator class="groove" />
+        <checkbox id="sbSortGrouping" label="&sb.sort.grouping;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
+        <checkbox id="sbSortRecursive" label="&sb.sort.recursive;" persist="checked" />
+        <description id="sbSortWarning" value="&sb.sort.warning;" style="margin:10px;color:red;" />
+    </wizardpage>
 
-	<wizardpage pageid="sbSortProcessPage" label="&sb.sort;" onpageshow="sbSortService.exec();">
-		<textbox id="sbSortTextbox" readonly="true" />
-	</wizardpage>
+    <wizardpage pageid="sbSortProcessPage" label="&sb.sort;" onpageshow="sbSortService.exec();">
+        <textbox id="sbSortTextbox" readonly="true" />
+    </wizardpage>
 
 </wizard>

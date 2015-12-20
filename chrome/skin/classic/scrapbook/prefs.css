@@ -1,38 +1,38 @@
 /* ::::: Options ::::: */
 
 radio[pane] {
-	list-style-image: url("chrome://scrapbook/skin/prefs.png");
+    list-style-image: url("chrome://scrapbook/skin/prefs.png");
 }
 
 radio[pane="mainPane"] {
-	-moz-image-region: rect(0px, 32px, 32px, 0px)
+    -moz-image-region: rect(0px, 32px, 32px, 0px)
 }
 
 radio[pane="keysPane"] {
-	-moz-image-region: rect(0px, 64px, 32px, 32px)
+    -moz-image-region: rect(0px, 64px, 32px, 32px)
 }
 
 radio[pane="tabsPane"] {
-	-moz-image-region: rect(0px, 96px, 32px, 64px)
+    -moz-image-region: rect(0px, 96px, 32px, 64px)
 }
 
 radio[pane="editPane"] {
-	-moz-image-region: rect(0px, 128px, 32px, 96px)
+    -moz-image-region: rect(0px, 128px, 32px, 96px)
 }
 
 radio[pane="organizePane"] {
-	-moz-image-region: rect(0px, 160px, 32px, 128px)
+    -moz-image-region: rect(0px, 160px, 32px, 128px)
 }
 
 radio[pane="advancedPane"] {
-	-moz-image-region: rect(0px, 192px, 32px, 160px)
+    -moz-image-region: rect(0px, 192px, 32px, 160px)
 }
 
 prefpane > checkbox,
 prefpane > groupbox,
 prefpane > description {
-	margin-top: 5px;
-	margin-bottom: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 
