@@ -1483,7 +1483,7 @@ var sbDOMEraser = {
 		"I" : "isolate",
 		"B" : "blackOnWhite",
 		"C" : "colorize",
-		"D" : "deWidthify",
+		"D" : "deWrapping",
 		"U" : "undo",
 		"H" : "help",
 		"Q" : "quit",
@@ -1584,7 +1584,7 @@ var sbDOMEraser = {
 		var elem = aEvent.target;
 		if ( aEvent.type == "mouseover" ) {
 			if (sbDOMEraser._isNormalNode(elem)) {
-				elem = sbDOMEraser._findValidElement(elem);
+				elem = sbDOMEraser._findValidElement(elem, true);
 				if (elem) {
 					if (elem !== sbDOMEraser.lastTarget) {
 						sbDOMEraser.widerStack = null;
@@ -1621,7 +1621,7 @@ var sbDOMEraser = {
 	cmd_wider : function (aNode)
 	{
 		if (aNode && aNode.parentNode) {
-			var newNode = this._findValidElement(aNode.parentNode);
+			var newNode = this._findValidElement(aNode.parentNode, true);
 			if (!newNode) return false;
 			if (!this.widerStack) this.widerStack = [];
 			this.widerStack.push(aNode);
@@ -1705,24 +1705,17 @@ var sbDOMEraser = {
 		return true;
 	},
 
-	cmd_deWidthify : function (aNode)
+	cmd_deWrapping : function (aNode)
 	{
 		if (!aNode) return false;
-		this._clear();
-		sbPageEditor.allowUndo(aNode.ownerDocument);
-		this._selectNode(aNode);
-		removeWidth(aNode);
+        this.cmd_isolate(aNode);
+        var next = this._findValidElement(aNode);
+        while (next) {
+            var cur = next;
+            var next = this._findValidElement(cur.parentNode);
+            sbPageEditor.unwrapNode(cur);
+        }
 		return true;
-
-		function removeWidth(aNode) {
-			if (aNode.nodeType != 1) return;
-			if (aNode.width) aNode.width = null;
-			if (aNode.style) aNode.style.width = 'auto';
-			var childs = aNode.childNodes;
-			for (var i=0; i<childs.length; i++) {
-				removeWidth(childs[i]);
-			}
-		}
 	},
 
 	cmd_help : function (aNode)
@@ -1871,12 +1864,12 @@ var sbDOMEraser = {
 				+ '<td class="command">black on white</td>'
 			+ '</tr>'
 			+ '<tr>'
-				+ '<td class="key"><code>c</code></td>'
-				+ '<td class="command">colorize</td>'
+				+ '<td class="key"><code>d</code></td>'
+				+ '<td class="command">de-wrapping</td>'
 			+ '</tr>'
 			+ '<tr>'
-				+ '<td class="key"><code>d</code></td>'
-				+ '<td class="command">de-width</td>'
+				+ '<td class="key"><code>c</code></td>'
+				+ '<td class="command">colorize</td>'
 			+ '</tr>'
 			+ '<tr>'
 				+ '<td class="key"><code>u</code></td>'
@@ -2041,11 +2034,11 @@ var sbDOMEraser = {
 
 	// given an element, walk upwards to find the first
 	// valid selectable element
-	_findValidElement : function(elem)
+	_findValidElement : function(elem, traceFrame)
 	{
 		while (elem) {
 			if (["#document","scrollbar","html","body","frame","frameset"].indexOf(elem.nodeName.toLowerCase()) == -1) return elem;
-            if (!elem.parentNode) {  // now elem is #document
+            if (traceFrame && !elem.parentNode) {  // now elem is #document
                 var win = elem.defaultView;
                 var parent = win.parent;
                 // if the elem is in a frame, go out to the frame element and then go up
