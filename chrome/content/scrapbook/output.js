@@ -72,6 +72,7 @@ var sbOutputService = {
             "chrome://scrapbook/skin/treenote.png"   : "treenote.png",
             "chrome://scrapbook/skin/treenotex.png"  : "treenotex.png",
             "chrome://scrapbook/skin/treefolder.png" : "folder.png",
+            "chrome://scrapbook/skin/treefolder_open.png" : "folder_open.png",
             "chrome://scrapbook/skin/toolbar_toggle.png" : "toggle.png",
             "chrome://scrapbook/skin/search_all.png" : "search.png",
         };
@@ -149,7 +150,7 @@ var sbOutputService = {
             + '        if (elem.getAttribute("href") == hash) {\n'
             + '            if (self != top) top.document.title = elem.childNodes[1].nodeValue;\n'
             + '            var ancs = elem.parentNode;\n'
-            + '            while (ancs) { if (ancs.nodeName == "UL") ancs.style.display = "block"; ancs = ancs.parentNode; }\n'
+            + '            while (ancs) { if (ancs.nodeName == "UL") toggleElem(ancs, true); ancs = ancs.parentNode; }\n'
             + '            elem.focus();\n'
             + '            break;\n'
             + '        }\n'
@@ -171,20 +172,31 @@ var sbOutputService = {
             + '    else top.location.hash = hash;\n'
             + '    top.document.title = title;\n'
             + '}\n'
-            + 'function toggle(aID) {\n'
-            + '    var listElems = document.getElementById(aID);\n'
-            + '    listElems.style.display = ( listElems.style.display == "none" ) ? "block" : "none";\n'
+            + 'function toggle(id, willOpen) {\n'
+            + '    toggleElem(document.getElementById(id), willOpen);\n'
+            + '}\n'
+            + 'function toggleElem(elem, willOpen) {\n'
+            + '    var iconElem = elem.previousSibling.previousSibling.firstChild;\n'
+            + '    if (typeof willOpen === "undefined") willOpen = (elem.style.display == "none");\n'
+            + '    if (willOpen) {\n'
+            + '        elem.style.display = "block";\n'
+            + '        iconElem.src = "folder_open.png";\n'
+            + '    }\n'
+            + '    else {\n'
+            + '        elem.style.display = "none";\n'
+            + '        iconElem.src = "folder.png";\n'
+            + '    }\n'
             + '}\n'
             + 'function toggleAll(willOpen) {\n'
             + '    var ulElems = document.getElementsByTagName("UL");\n'
-            + '    if (willOpen === undefined) {\n'
+            + '    if (typeof willOpen === "undefined") {\n'
             + '        willOpen = false;\n'
             + '        for ( var i = 1; i < ulElems.length; i++ ) {\n'
             + '            if (ulElems[i].style.display == "none") { willOpen = true; break; }\n'
             + '        }\n'
             + '    }\n'
             + '    for ( var i = 1; i < ulElems.length; i++ ) {\n'
-            + '        ulElems[i].style.display = willOpen ? "block" : "none";\n'
+            + '        toggleElem(ulElems[i], willOpen);\n'
             + '    }\n'
             + '}\n'
             + '</script>\n'
