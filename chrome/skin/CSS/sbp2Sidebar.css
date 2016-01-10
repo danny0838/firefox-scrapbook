@@ -1,12 +1,12 @@
 /* ::::: sbp2Sidebar.css ::::: */
 
-/* Gew‰hltes ScrapBook fett hervorheben */
+/* Gew√§hltes ScrapBook fett hervorheben */
 
 menuitem[type="radio"][checked="true"] {
 	font-weight: bold;
 }
 
-/* Eintr‰ge im Tree */
+/* Eintr√§ge im Tree */
 
 treechildren::-moz-tree-image() {
 	margin-right : 3px;
@@ -16,7 +16,7 @@ treechildren::-moz-tree-image(note) {
 	list-style-image: url('chrome://scrapbookplus2/skin/treenote.png');
 }
 
-/* Formatierung Dropdownmen¸ der Suchleiste */
+/* Formatierung Dropdownmen√º der Suchleiste */
 
 #sbp2SearchImage {
 	max-width : 24px !important;
@@ -26,7 +26,7 @@ treechildren::-moz-tree-image(note) {
 	background-image: url('chrome://scrapbookplus2/skin/dropdown.png');
 }
 
-/* Formatierung der Eintr‰ge im Tree */
+/* Formatierung der Eintr√§ge im Tree */
 
 treechildren::-moz-tree-cell-text(bookmark) {
 	color: rgb(32,192,32);
@@ -61,7 +61,7 @@ treechildren::-moz-tree-cell-text(bookmark) {
 	list-style-image: url('chrome://scrapbookplus2/skin/exit.png');
 }
 
-/* Fix f¸r Firefox 3.5+ */
+/* Fix f√ºr Firefox 3.5+ */
 
 textbox[class="plain"] {
 	background-color: -moz-Field;

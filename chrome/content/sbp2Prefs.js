@@ -8,7 +8,7 @@ var sbp2Prefs = {
 
 	getBoolPref : function(gbpPrefName, gbpDefVal)
 	{
-		//Liefert den aktuellen Wert für gboPrefName zurück.
+		//Liefert den aktuellen Wert fÃ¼r gboPrefName zurÃ¼ck.
 
 		try
 		{
@@ -21,17 +21,17 @@ var sbp2Prefs = {
 
 	setBoolPref : function(sbpPrefName, sbpValue)
 	{
-		//Ändert den Wert für sbpPrefName.
+		//Ã¤ndert den Wert fÃ¼r sbpPrefName.
 		//
 		//Ablauf:
-		//1. Wert ändern
-		//2. Änderung speichern
+		//1. Wert Ã¤ndern
+		//2. Ã¤nderung speichern
 
 		try
 		{
-			//1. Wert ändern
+			//1. Wert Ã¤ndern
 			this.PREF.setBoolPref(sbpPrefName, sbpValue);
-			//2. Änderung speichern
+			//2. Ã¤nderung speichern
 			var supPrefService = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
 			supPrefService.savePrefFile(null);
 		} catch(sbpEx)
@@ -42,7 +42,7 @@ var sbp2Prefs = {
 
 	getIntPref : function(gipPrefName)
 	{
-		//Liefert den aktuellen Wert für gipPrefName zurück.
+		//Liefert den aktuellen Wert fÃ¼r gipPrefName zurÃ¼ck.
 		try
 		{
 			return this.PREF.getIntPref(gipPrefName);
@@ -54,7 +54,7 @@ var sbp2Prefs = {
 
 	getUnicharPref : function(gupPrefName, gupDefVal)
 	{
-		//Liefert den aktuellen Wert für gupPrefName zurück.
+		//Liefert den aktuellen Wert fÃ¼r gupPrefName zurÃ¼ck.
 
 		try
 		{
@@ -67,19 +67,19 @@ var sbp2Prefs = {
 
 	setUnicharPref : function(supPrefName, supPrefValue)
 	{
-		//Ändert den Wert für supPrefName.
+		//Ã¤ndert den Wert fÃ¼r supPrefName.
 		//
 		//Ablauf:
-		//1. Wert ändern
-		//2. Änderung speichern
+		//1. Wert Ã¤ndern
+		//2. Ã¤nderung speichern
 
 		try
 		{
-			//1. Wert ändern
+			//1. Wert Ã¤ndern
 			var supString = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
 			supString.data = supPrefValue;
 			this.PREF.setComplexValue(supPrefName, Components.interfaces.nsISupportsString, supString);
-			//2. Änderung speichern
+			//2. Ã¤nderung speichern
 			var supPrefService = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefService);
 			supPrefService.savePrefFile(null);
 		} catch(supEx)

@@ -10,17 +10,20 @@ var sbp2Editor = {
 		//- Shift-Taste gedrückt halten, um nur das hervorgehobene Element zu behalten
 		//
 		//Ablauf:
-		//1. Variablen initialisieren und ausgelöstes Event unterbrechen
-		//2. HTML- und BODY-Tag dürfen nicht angefasst werden, da sonst die komplette Seite fehlen würde
-		//3. gewünschtes Objekt entfernen
+		//1. Verhindern, dass beim Klick auf Verweise die Seite gewechselt wird.
+		//2. Variablen initialisieren und ausgelöstes Event unterbrechen
+		//3. HTML- und BODY-Tag dürfen nicht angefasst werden, da sonst die komplette Seite fehlen würde
+		//4. gewünschtes Objekt entfernen
 
-		//1. Variablen initialisieren und ausgelöstes Event unterbrechen
+		//1. Verhindern, dass beim Klick auf Verweise die Seite gewechselt wird.
+		deheEvent.preventDefault();
+		//2. Variablen initialisieren und ausgelöstes Event unterbrechen
 		var deheElement = deheEvent.target;
 		var deheTagName = deheElement.localName.toUpperCase();
-		//2. HTML- und BODY-Tag dürfen nicht angefasst werden, da sonst die komplette Seite fehlen würde
+		//3. HTML- und BODY-Tag dürfen nicht angefasst werden, da sonst die komplette Seite fehlen würde
 		if ( deheTagName=="HTML" ) return;
 		if ( deheTagName=="BODY" ) return;
-		//3. gewünschtes Objekt entfernen
+		//4. gewünschtes Objekt entfernen
 		if ( deheEvent.shiftKey && deheEvent.button == 0 ) {
 			//alles bis auf das selektierte Objekt wird entfernt
 			var deheNode = deheElement;
@@ -96,6 +99,7 @@ var sbp2Editor = {
 			sbp2DataSource.dsFlush(sbp2DataSource.dbDataSearchCacheUpdate);
 		} else {
 			//Archivieren, da Webseite
+alert("sbp2Editor - sSave - captureTab Aufruf korrigieren.");
 			sbp2Common.captureTab(window.content.location.href, document.getElementById('content').selectedTab.label);
 		}
 	},

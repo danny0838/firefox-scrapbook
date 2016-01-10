@@ -1,0 +1,26 @@
+<!ENTITY sbp2.single.window				"Mehrere URLs archivieren">
+<!ENTITY sbp2.single.tab.one			"Allgemeine Informationen">
+<!ENTITY sbp2.single.title				"Titel">
+<!ENTITY sbp2.single.title.default		"Webseitentitel">
+<!ENTITY sbp2.single.folder				"Verzeichnis">
+
+<!ENTITY sbp2.single.details.caption	"Verlinkte Dateien herunterladen">
+<!ENTITY sbp2.single.details.image		"Grafiken (jpg, png, gif, tiff)">
+<!ENTITY sbp2.single.details.audio		"Audio (mp3, wav, ram, wma)">
+<!ENTITY sbp2.single.details.movie		"Filme (mpg, avi, mov, wmv)">
+<!ENTITY sbp2.single.details.archive	"Archive (zip, lzh, rar, jar, xpi)">
+<!ENTITY sbp2.single.details.custom		"Benutzerdefiniert">
+<!ENTITY sbp2.single.timeout.label		"Wartezeit (in Sekunden)">
+
+<!ENTITY sbp2.include					"Einschließen">
+<!ENTITY sbp2.include.pictures			"Grafiken">
+<!ENTITY sbp2.include.styles			"Webseitenstile">
+<!ENTITY sbp2.include.java				"JavaScript">
+<!ENTITY sbp2.timeout					"Wartezeit (in Sekunden)">
+
+<!ENTITY sbp2.multiple.description		"Zu archivierende Adressen (zeilenweise eingeben)">
+<!ENTITY sbp2.multiple.ignore			"vorhandene Adresse im Zielverzeichnis ignorieren">
+<!ENTITY sbp2.multiple.filter			"Filter (regulärer Ausdruck)">
+<!ENTITY sbp2.multiple.detector			"URLs automatisch ermitteln">
+<!ENTITY sbp2.multiple.detector.links	"Alle Links innerhalb der Webseite">
+<!ENTITY sbp2.multiple.detector.clear	"Textbox leeren">

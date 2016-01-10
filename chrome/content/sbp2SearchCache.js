@@ -153,7 +153,23 @@ var sbp2SearchCache = {
 				}
 			}
 		} else {
-			iaFilenames.push("index.html");
+			iaFile = iaDirectory.clone();
+			iaFile.append(iaID);
+			iaFile.append("sbp2-links.txt");
+			if ( iaFile.exists() ) {
+				var iaData = sbp2Common.fileRead(iaFile);
+				var iaSplit = iaData.split("\n");
+				for ( var iaI=6; iaI<iaSplit.length - 4; iaI = iaI + 7 )
+				{
+					if ( iaSplit[iaI] == 1 ) {
+						if ( iaSplit[iaI-3] == 1 ) {
+							iaFilenames.push(iaSplit[iaI-4]);
+						}
+					}
+				}
+			} else {
+				iaFilenames.push("index.html");
+			}
 		}
 		//3. Inhalt der in Schritt 2 gefundenen Dateien aufnehmen
 		for ( var iaI=0; iaI<iaFilenames.length; iaI++ )

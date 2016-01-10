@@ -1,6 +1,8 @@
 
 var sbp2Search = {
 
+	ssCaseSensitive			: false,
+	ssIsFullTextSearch		: 0,
 	ssSearchFound			: [],
 	ssSearchFoundStartPos	: [],
 	ssSearchString			: "",
@@ -17,6 +19,8 @@ var sbp2Search = {
 		//5. Der Inhalt des Suchfeldes wird entfernt
 
 		//1. Variablen initialisieren
+		this.ssIsFullTextSearch = 0;
+		this.ssSearchString = "";
 		var eTree = document.getElementById("sbp2Tree");
 		//2. RDF-Datenquellen vom tree entfernen
 		sbp2DataSource.dsRemoveFromTree(eTree);
@@ -58,20 +62,19 @@ var sbp2Search = {
 		//Wird ausgeführt, wenn der Benuter in der Textbox ENTER drückt
 		//
 		//Ablauf:
-		//1. Wechsel zu anderer Funktion, wenn Modus nicht passt
-		//2. Variablen initialisieren
-		//3. Ordnerstruktur entfernen
-		//4. Eintrag nach Begriff durchsuchen
-		//5. Funde in einem seperatem Tree ausgeben
-		//6. Historie der Suchbegriffe aktualisieren
-		//7. Scope ändern
+		//1. Variablen initialisieren
+		//2. Suchmodus bestimmen
+		//3. Zum Suchmodus passende Funktion aufrufen
 
-		//1. Suchmodus bestimmen
+		//1. Variablen initialisieren
+		this.ssIsFullTextSearch = 0;
+		//2. Suchmodus bestimmen
 		var sbMode = document.getElementById("sbp2SearchImage").getAttribute("searchtype");
-		//2. Zum Suchmodus passende Funktion aufrufen
+		//3. Zum Suchmodus passende Funktion aufrufen
 		switch(sbMode)
 		{
 			case "fulltext":
+				this.ssIsFullTextSearch = 1;
 				this.searchStartFulltext();
 				break;
 			case "tag":
@@ -131,6 +134,7 @@ var sbp2Search = {
 		this.ssSearchFound = [];
 		this.ssSearchFoundStartPos = [];
 		this.ssSearchString = document.getElementById("sbp2SearchTextbox").value;
+		this.ssCaseSensitive = document.getElementById("sbp2SidebarPopupSearchOptionUC").getAttribute("checked");
 		if ( this.ssSearchString.length <= 1 ) return;
 		var ssfRes = null;
 		var ssfSearchCacheUpdateMode = null;	//-1 neu erstellen, 0 nichts zu tun, 1 entweder neu erstellen oder aktualisieren
@@ -160,7 +164,7 @@ return;
 		sbp2DataSource.containerGetAllItems(ssfDataSearchCache, sbp2Common.RDF.GetResource("urn:scrapbook:searchcache"), ssfResList, true);
 		//4. Suchbegriff zusammensetzen
 		var ssfParameters = "";
-		if ( !document.getElementById("sbp2SidebarPopupSearchOptionUC").getAttribute("checked") ) ssfParameters = "i";
+		if ( !this.ssCaseSensitive ) ssfParameters = "i";
 		var ssfRegExp = new RegExp(this.ssSearchString, ssfParameters);
 		//5. Eintraege nach Begriff durchsuchen
 		for ( var ssfI=0; ssfI<ssfResList.length; ssfI++ )

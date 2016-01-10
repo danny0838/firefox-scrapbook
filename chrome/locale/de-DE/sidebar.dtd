@@ -1,4 +1,4 @@
-﻿<!ENTITY sbp2.sidebar.new.tooltiptext	"neuen Ordner anlegen">
+<!ENTITY sbp2.sidebar.new.tooltiptext	"neuen Ordner anlegen">
 <!ENTITY sbp2.sidebar.newfolder			"neuer Ordner">
 <!ENTITY sbp2.sidebar.newseparator		"neue Trennlinie">
 <!ENTITY sbp2.sidebar.newnote			"neue Notiz">
@@ -12,6 +12,10 @@
 <!ENTITY sbp2.sidebar.tools				"Extras">
 <!ENTITY sbp2.sidebar.tools.settings	"Einstellungen">
 <!ENTITY sbp2.sidebar.tools.sbpfopen	"ScrapBook-Ordner öffnen">
+<!ENTITY sbp2.sidebar.tools.addons		"Erweiterte Funktionen">
+
+<!ENTITY sbp2.sidebar.addons.linkrepl.activate	"externe Verweise ersetzen: aktivieren">
+<!ENTITY sbp2.sidebar.addons.linkrepl.linklist	"externe Verweise ersetzen: Liste nicht aktualisieren">
 
 <!ENTITY sbp2.sidebar.search.fulltext	"Volltextsuche">
 <!ENTITY sbp2.sidebar.search.title		"Name">
@@ -29,10 +33,9 @@
 <!ENTITY sbp2.sidebar.context.open		"Öffnen">
 <!ENTITY sbp2.sidebar.context.openintab	"In neuem Tab öffnen">
 <!ENTITY sbp2.sidebar.context.opensrc	"Ursprungs-URL öffnen">
-<!ENTITY sbp2.sidebar.context.update	"Aktualisieren">
 <!ENTITY sbp2.sidebar.context.showfiles	"Dateien anzeigen">
 <!ENTITY sbp2.sidebar.context.delete	"Löschen">
-<!ENTITY sbp2.sidebar.context.capttabs	"Alle Tabs archivieren">
+<!ENTITY sbp2.sidebar.context.linksadd	"verlinkte Seiten hinzufügen">
 <!ENTITY sbp2.sidebar.context.props		"Eigenschaften">
 
 <!ENTITY sbp2.sidebar.tag.rename		"Umbenennen">

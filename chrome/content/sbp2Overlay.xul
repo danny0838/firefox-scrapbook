@@ -12,12 +12,13 @@
 
 <overlay id="sbp2SidebarOverlay" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 
-	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2CaptureSaverImage.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2CaptureSaver.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2CaptureSaverImage.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2DataSource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Editor.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2HighlightNode.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2LinkRepl.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Overlay.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Prefs.js" />
 
@@ -30,19 +31,20 @@
 			  label="SBP"
 			  insertafter="bookmarks-menu bookmarksMenu">
 			<menupopup>
-				<menuitem id="sbp2MenuItem1" key="key_sbp2SiteCapture"		label="&sbp2.menubar.save;"		oncommand="sbp2Common.captureTab(window.content.location.href, document.getElementById('content').selectedTab.label, null, null, false);" />
-				<menuitem id="sbp2MenuItem2" key="key_sbp2SiteCaptureAs"	label="&sbp2.menubar.saveas;"	oncommand="sbp2Common.captureTab(window.content.location.href, document.getElementById('content').selectedTab.label, null, null, true);" />
-				<menuitem id="sbp2MenuItem3" key="key_sbp2SiteBookmark"		label="&sbp2.menubar.bookmark;"	oncommand="sbp2Common.captureBookmark(window.content.location.href, document.getElementById('content').selectedTab.label);" />
-				<!-- menuitem id="sbp2MenuItem4" key="key_sbp2TabsCapture"		label="&sbp2.menubar.alltabs;"	oncommand="" /-->
-				<menuitem id="sbp2MenuItem5" label="&sbp2.menubar.sidebar;" observes="sbp2ViewSidebar" key="key_opensbp2Sidebar" />
+				<menuitem id="sbp2MenuItem1" key="key_sbp2SiteCapture"		label="&sbp2.menubar.save;"		oncommand="sbp2Common.captureTab(window.content.location.href, document.getElementById('content').selectedTab.label, null, null, 0);" />
+				<menuitem id="sbp2MenuItem2" key="key_sbp2SiteCaptureAs"	label="&sbp2.menubar.saveas;"	oncommand="sbp2Common.captureTab(window.content.location.href, document.getElementById('content').selectedTab.label, null, null, 1);" />
+				<menuitem id="sbp2MenuItem3" key="key_sbp2SiteCaptureAdd"	label="&sbp2.menubar.saveadd;"	oncommand="sbp2Common.captureTab(window.content.location.href, document.getElementById('content').selectedTab.label, null, null, 2);" />
+				<menuitem id="sbp2MenuItem4" key="key_sbp2SiteBookmark"		label="&sbp2.menubar.bookmark;"	oncommand="sbp2Common.captureBookmark(window.content.location.href, document.getElementById('content').selectedTab.label);" />
+				<!-- menuitem id="sbp2MenuItem5" key="key_sbp2TabsCapture"		label="&sbp2.menubar.alltabs;"	oncommand="" /-->
+				<menuitem id="sbp2MenuItem6" label="&sbp2.menubar.sidebar;" observes="sbp2ViewSidebar" key="key_opensbp2Sidebar" />
 			</menupopup>
 		</menu>
 	</menubar>
 
 	<keyset id="mainKeyset">
 		<key id="key_opensbp2Sidebar"	command="sbp2ViewSidebar" />
-		<key id="key_sbp2SiteCapture"	oncommand="sbp2Common.captureTab(window.content.location.href, document.getElementById('content').selectedTab.label, null, null, false);"/>
-		<key id="key_sbp2SiteCaptureAs"	oncommand="sbp2Common.captureTab(window.content.location.href, document.getElementById('content').selectedTab.label, null, null, true);" />
+		<key id="key_sbp2SiteCapture"	oncommand="sbp2Common.captureTab(window.content.location.href, document.getElementById('content').selectedTab.label, null, null, 0);"/>
+		<key id="key_sbp2SiteCaptureAs"	oncommand="sbp2Common.captureTab(window.content.location.href, document.getElementById('content').selectedTab.label, null, null, 1);" />
 		<key id="key_sbp2SiteBookmark"	oncommand="sbp2Common.captureBookmark(window.content.location.href, document.getElementById('content').selectedTab.label);" />
 		<!-- key id="key_sbp2TabsCapture"	oncommand="" /-->
 	</keyset>
@@ -62,8 +64,9 @@
 		<menuseparator />
 		<menuitem	id="sbp2ContextMenu1"  class="menuitem-iconic sb-capture-partial" label="&sbp2.context.selection;"		oncommand="" />
 		<menuitem	id="sbp2ContextMenu2"  class="menuitem-iconic sb-capture-partial" label="&sbp2.context.selectionas;"	oncommand="" />
-		<menuitem	id="sbp2ContextMenu3"  class="menuitem-iconic sb-capture-partial" label="&sbp2.context.save;"			oncommand="sbp2Common.captureTab(window.content.location.href, document.getElementById('content').selectedTab.label, null, null, false);" />
-		<menuitem	id="sbp2ContextMenu4"  class="menuitem-iconic sb-capture-partial" label="&sbp2.context.saveas;"			oncommand="sbp2Common.captureTab(window.content.location.href, document.getElementById('content').selectedTab.label, null, null, true);" />
+		<menuitem	id="sbp2ContextMenu3"  class="menuitem-iconic sb-capture-partial" label="&sbp2.context.save;"			oncommand="sbp2Common.captureTab(window.content.location.href, document.getElementById('content').selectedTab.label, null, null, 0);" />
+		<menuitem	id="sbp2ContextMenu4"  class="menuitem-iconic sb-capture-partial" label="&sbp2.context.saveas;"			oncommand="sbp2Common.captureTab(window.content.location.href, document.getElementById('content').selectedTab.label, null, null, 1);" />
+		<menuitem	id="sbp2ContextMenu5"  class="menuitem-iconic sb-capture-partial" label="&sbp2.context.saveadd;"		oncommand="sbp2Common.captureTab(window.content.location.href, document.getElementById('content').selectedTab.label, null, null, 2);" />
 		<menuitem	id="sbp2ContextMenu6"  class="menuitem-iconic sb-capture-partial" label="&sbp2.context.frame;"			oncommand="" />
 		<menuitem	id="sbp2ContextMenu7"  class="menuitem-iconic sb-capture-partial" label="&sbp2.context.frameas;"		oncommand="" />
 		<menuitem	id="sbp2ContextMenu8"  class="menuitem-iconic sb-capture-partial" label="&sbp2.context.link;"			oncommand="" />
@@ -74,6 +77,7 @@
 		<menuitem	id="sbp2ContextMenu13" class="menuitem-iconic sb-capture-partial" label="&sbp2.context.bm-link;"		oncommand="sbp2Common.captureBookmark(gContextMenu.target.href, gContextMenu.target.text);" />
 		<menuitem	id="sbp2ContextMenu14" class="menuitem-iconic sb-capture-partial" label="&sbp2.context.picture-frame;"	oncommand="sbp2Common.captureImage('focused');" />
 		<menuitem	id="sbp2ContextMenu15" class="menuitem-iconic sb-capture-partial" label="&sbp2.context.picture-page;"	oncommand="sbp2Common.captureImage('focused');" />
+		<menuitem	id="sbp2ContextMenu16" class="menuitem-iconic sb-capture-partial" label="&sbp2.context.linkmulti;"		oncommand="sbp2Common.captureLinks();" />
 	</popup>
 
 	<popupset id="mainPopupSet">

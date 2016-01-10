@@ -1,1 +1,22 @@
-﻿<!ENTITY sbp2.single.window				"Capture detail"><!ENTITY sbp2.single.tab.one			"General information"><!ENTITY sbp2.single.tab.two			"Description"><!ENTITY sbp2.single.title				"Title"><!ENTITY sbp2.single.folder				"Folder"><!ENTITY sbp2.single.details.caption	"Verlinkte Dateien herunterladen"><!ENTITY sbp2.single.details.image		"Images (jpg, png, gif, tiff)"><!ENTITY sbp2.single.details.audio		"Sound (mp3, wav, ram, wma)"><!ENTITY sbp2.single.details.movie		"Movie (mpg, avi, mov, wmv)"><!ENTITY sbp2.single.details.archive	"Archive (zip, lzh, rar, jar, xpi)"><!ENTITY sbp2.single.details.custom		"Custom"><!ENTITY sbp2.single.depth.label		"In-depth capture"><!ENTITY sbp2.single.depth.radio4.tt	"Click here, if you want to use a value higher than 3"><!ENTITY sbp2.single.timeout.label		"Timeout (in seconds)"><!ENTITY sbp2.include					"Include"><!ENTITY sbp2.include.pictures			"Images"><!ENTITY sbp2.include.styles			"Styles"><!ENTITY sbp2.include.java				"JavaScript"><!ENTITY sbp2.timeout					"Timeout (in seconds)"><!ENTITY sbp2.charset					"Character set">
+<!ENTITY sbp2.single.window				"Capture detail">
+<!ENTITY sbp2.single.tab.one			"General information">
+<!ENTITY sbp2.single.tab.two			"Description">
+<!ENTITY sbp2.single.title				"Title">
+<!ENTITY sbp2.single.folder				"Folder">
+
+<!ENTITY sbp2.single.details.caption	"Capture linked websites">
+<!ENTITY sbp2.single.details.image		"Images (jpg, png, gif, tiff)">
+<!ENTITY sbp2.single.details.audio		"Sound (mp3, wav, ram, wma)">
+<!ENTITY sbp2.single.details.movie		"Movie (mpg, avi, mov, wmv)">
+<!ENTITY sbp2.single.details.archive	"Archive (zip, lzh, rar, jar, xpi)">
+<!ENTITY sbp2.single.details.custom		"Custom">
+<!ENTITY sbp2.single.depth.box			"In-depth capture">
+<!ENTITY sbp2.single.depth.radio4.tt	"Click here, if you want to use a value higher than 3">
+<!ENTITY sbp2.single.timeout.label		"Timeout (in seconds)">
+
+<!ENTITY sbp2.include					"Include">
+<!ENTITY sbp2.include.pictures			"Images">
+<!ENTITY sbp2.include.styles			"Styles">
+<!ENTITY sbp2.include.java				"JavaScript">
+<!ENTITY sbp2.timeout					"Timeout (in seconds)">
+<!ENTITY sbp2.charset					"Character set">

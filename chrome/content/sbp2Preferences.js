@@ -1,12 +1,12 @@
 
 var sbp2Preferences = {
 
-	spElements        : [],		//enthält einen Verweis auf die 5 Eingabefelder
-	spKeysChanged     :  0,		//0=keine akzeptierte Taste bei aktiver Textbox gedrückt, 1=Taste gedrückt
-	spKeysAccel       : -1,		//enthält den KeyCode für accel
-	spKeysModifiers   : [],		//enthält den modifier in der Reihenfolge Umschalt, Strg und Alt
-	spKeysTranslated  : [],		//enthält die Übersetzungen aus prefs.properties in der Reihenfolge Umschalt, Strg und Alt
-	spKeysSetTransltd : [],		//enthält die derzeitigen, vom Anwender gesetzten, Werte in lesbarer Form
+	spElements        : [],		//enthÃ¤lt einen Verweis auf die 5 Eingabefelder
+	spKeysChanged     :  0,		//0=keine akzeptierte Taste bei aktiver Textbox gedrÃ¼ckt, 1=Taste gedrÃ¼ckt
+	spKeysAccel       : -1,		//enthÃ¤lt den KeyCode fÃ¼r accel
+	spKeysModifiers   : [],		//enthÃ¤lt den modifier in der Reihenfolge Umschalt, Strg und Alt
+	spKeysTranslated  : [],		//enthÃ¤lt die Ã¼bersetzungen aus prefs.properties in der Reihenfolge Umschalt, Strg und Alt
+	spKeysSetTransltd : [],		//enthÃ¤lt die derzeitigen, vom Anwender gesetzten, Werte in lesbarer Form
 
 	close : function()
 	{
@@ -15,13 +15,13 @@ var sbp2Preferences = {
 
 	keysAccept : function()
 	{
-		//Diese Funktion aktualisiert die Einstellungen für ScrapBook Plus 2 (nur die Tastenkürzel)
+		//Diese Funktion aktualisiert die Einstellungen fÃ¼r ScrapBook Plus 2 (nur die TastenkÃ¼rzel)
 		if ( this.spKeysChanged == 1 ) {
 			for ( var kaI=0; kaI<this.spKeysSetTransltd.length; kaI++ )
 			{
-				//Es werden nur die Tastenkürzel neu geschrieben, die auch tatsächlich geändert wurden
+				//Es werden nur die TastenkÃ¼rzel neu geschrieben, die auch tatsÃ¤chlich geÃ¤ndert wurden
 				if ( this.spKeysSetTransltd[kaI] != this.spElements[kaI].value ) {
-					//Neues Tastenkürzel aufbereiten (z.B. Alt durch alt ersetzen)
+					//Neues TastenkÃ¼rzel aufbereiten (z.B. Alt durch alt ersetzen)
 					var kaString = "";
 					var kaSplits = this.spElements[kaI].value.split(" + ");
 					for ( var kaJ=0; kaJ<kaSplits.length-1; kaJ++ )
@@ -36,7 +36,7 @@ var sbp2Preferences = {
 						if ( kaString.length>0 ) kaString += " ";
 						kaString += kaSplits[kaJ];
 					}
-					//Neues Tastenkürzel vermerken
+					//Neues TastenkÃ¼rzel vermerken
 					var rkPrefKeys = ["extensions.scrapbookplus2.key.a.","extensions.scrapbookplus2.key.b.","extensions.scrapbookplus2.key.c.","extensions.scrapbookplus2.key.d.","extensions.scrapbookplus2.key.e."];
 					var rkPrefBranch = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
 					var rkString = Components.classes["@mozilla.org/supports-string;1"].createInstance(Components.interfaces.nsISupportsString);
@@ -51,15 +51,15 @@ var sbp2Preferences = {
 
 	keysInit : function()
 	{
-		//Diese Funktion läd alle notwendigen Informationen in den Speicher.
+		//Diese Funktion lÃ¤d alle notwendigen Informationen in den Speicher.
 		//
 		//Ablauf:
-		//1. Übersetzungen laden
+		//1. Ã¼bersetzungen laden
 		//2. accel KeyCode bestimmen
 		//3. modifier code laden
 		//4. modifier austauschen, falls erforderlich
 
-		//1. Übersetzungen laden
+		//1. Ã¼bersetzungen laden
 		this.spKeysTranslated.push(document.getElementById("sbp2PreferencesString").getString("KEY_SHIFT"));
 		this.spKeysTranslated.push(document.getElementById("sbp2PreferencesString").getString("KEY_CONTROL"));
 		this.spKeysTranslated.push(document.getElementById("sbp2PreferencesString").getString("KEY_ALT"));
@@ -73,7 +73,7 @@ var sbp2Preferences = {
 		if ( this.spKeysAccel-16>-1 ) {
 			this.spKeysModifiers[this.spKeysAccel-16] = "accel";
 		}
-		//5. formatierte Ausgabe für Benutzer bestimmen
+		//5. formatierte Ausgabe fÃ¼r Benutzer bestimmen
 		this.spElements = [document.getElementById("sbp2PrefKey1"),document.getElementById("sbp2PrefKey2"),document.getElementById("sbp2PrefKey3"),document.getElementById("sbp2PrefKey4"),document.getElementById("sbp2PrefKey5")];
 		var kiPref = ["extensions.scrapbookplus2.key.a.","extensions.scrapbookplus2.key.b.","extensions.scrapbookplus2.key.c.","extensions.scrapbookplus2.key.d.","extensions.scrapbookplus2.key.e."];
 		var kiPrefBranch = Components.classes["@mozilla.org/preferences-service;1"].getService(Components.interfaces.nsIPrefBranch);
@@ -103,12 +103,12 @@ var sbp2Preferences = {
 
 	keysOnKeyDown : function(kokdElement, kokdEvent)
 	{
-		//Wenn Tab gedrückt wird, soll der Focus zum nächsten Element springen
+		//Wenn Tab gedrÃ¼ckt wird, soll der Focus zum nÃ¤chsten Element springen
 		if ( kokdEvent.keyCode == 9 ) return;
 		//Normale Verarbeitung des Tastendrucks verhindern
 		kokdEvent.preventDefault();
 		kokdEvent.stopPropagation();
-		//ESC-Taste setzt den Wert der Textbox auf den aktuell genutzten Wert zurück
+		//ESC-Taste setzt den Wert der Textbox auf den aktuell genutzten Wert zurÃ¼ck
 		if ( kokdEvent.keyCode == 27 ) {
 			this.keysReset(kokdElement);
 			return;
@@ -133,17 +133,17 @@ var sbp2Preferences = {
 			kokdShortcutString += document.getElementById("sbp2PreferencesString").getString("KEY_ALT")+" + ";
 			kokdKeysPressed++
 		}
-		//gedrückte Taste bestimmen
+		//gedrÃ¼ckte Taste bestimmen
 		if ( kokdEvent.keyCode != 16 &&
 		     kokdEvent.keyCode != 17 &&
 		     kokdEvent.keyCode != 18 &&
 		     kokdEvent.keyCode != 224 ) {
-			//Es werden nur Tastenkürzel unterstützt, die nicht mehr als 3 Tasten umfassen
+			//Es werden nur TastenkÃ¼rzel unterstÃ¼tzt, die nicht mehr als 3 Tasten umfassen
 			if ( kokdKeysPressed == 3 ) return;
 			//
 			kokdShortcutString += String.fromCharCode(kokdEvent.keyCode);
 		}
-		//Änderung vermerken
+		//Ã¤nderung vermerken
 		this.spKeysChanged = 1;
 		//Tastenkombination im Textfeld ausgeben
 		kokdElement.value = kokdShortcutString;
@@ -151,7 +151,7 @@ var sbp2Preferences = {
 
 	keysReset : function(krElement)
 	{
-		//Diese Funktion setzt den für die Tastenkombination
+		//Diese Funktion setzt den fÃ¼r die Tastenkombination
 		if ( krElement.id == "sbp2PrefKey1" ) {
 			krElement.value = this.spKeysSetTransltd[0];
 		} else if ( krElement.id == "sbp2PrefKey2" ) {

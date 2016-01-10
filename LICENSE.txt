@@ -14,7 +14,7 @@
  * The Original Code is ScrapBook Plus 2.
  *
  * The Initial Developer of the Original Code is haselnuss.
- * Portions created by the Initial Developer are Copyright (C) 2013
+ * Portions created by the Initial Developer are Copyright (C) 2016
  * the Initial Developer. All Rights Reserved.
  *
  * Alternatively, the contents of this file may be used under the terms of

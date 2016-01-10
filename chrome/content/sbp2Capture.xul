@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet type="text/css" href="chrome://global/skin/" ?>
+<?xml-stylesheet type="text/css" href="chrome://scrapbookplus2/skin/CSS/sbp2Capture.css" ?>
+
+<!DOCTYPE overlay SYSTEM "chrome://scrapbookplus2/locale/capture.dtd">
+
+<window id="sbp2Capture"
+        title="ScrapBook Plus 2 - &sbp2.capture.title;"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        style="width: 900px; height: 700px;"
+		onclose=""
+		onload="sbp2Capture.cInit();">
+
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Capture.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2CaptureFilter.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2CaptureSaverInDepth.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2CaptureSaverMultiple.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2DataSource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2LinkRepl.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Prefs.js" />
+
+	<stringbundleset id="sbp2StringBundles">
+		<stringbundle id="sbp2CaptureString" src="chrome://scrapbookplus2/locale/capture.properties" />
+	</stringbundleset>
+
+	<popupset>
+		<menupopup id="sbp2CPopup">
+			<menuitem id="sbp2CaptureSel" label="&sbp2.capture.select;" oncommand="sbp2Capture.treeCheckboxSetSelection('true');" />
+			<menuitem id="sbp2CaptureUns" label="&sbp2.capture.deselect;" oncommand="sbp2Capture.treeCheckboxSetSelection('false');" />
+		</menupopup>
+	</popupset>
+
+	<toolbox>
+		<toolbar id="nav-toolbar0">
+			<textbox id="sbp2CaptureCount" readonly="true" style="width: 70px; text-align: right" />
+			<textbox id="sbp2Progress"     flex="1" readonly="true" />
+			<button id="sbp2CaptureStartButton"  label="&sbp2.capture.btn.start;"	oncommand="sbp2Capture.toggleButtons('start');sbp2Capture.cStart();" />
+			<button id="sbp2CapturePauseButton"	 label="&sbp2.capture.btn.pause;"	oncommand="sbp2Capture.scPause = true;"		disabled="true" />
+			<button id="sbp2CaptureSkipButton"	 label="&sbp2.capture.btn.skip;"	oncommand=""								disabled="true" />
+			<button id="sbp2CaptureFinishButton" label="&sbp2.capture.btn.finish;"	oncommand="sbp2Capture.close();" />
+		</toolbar>
+		<toolbar id="nav-toolbar1">
+			<toolbarbutton id="sbp2SelectAll"   image="chrome://scrapbookplus2/skin/cbox-check.png"     tooltiptext="&sbp2.capture.checkbox.all;"	oncommand="sbp2Capture.treeCheckboxSet(true);" />
+			<toolbarbutton id="sbp2UnselectAll" image="chrome://scrapbookplus2/skin/cbox-not-check.png" tooltiptext="&sbp2.capture.checkbox.none;"	oncommand="sbp2Capture.treeCheckboxSet(false);" />
+		</toolbar>
+	</toolbox>
+
+	<tree
+		id="sbp2HTMLTree"
+		autostretch="always"
+		contextmenu="sbp2CPopup"
+		editable=""
+		enableColumnDrag="false"
+		flex="1"
+		onclick="sbp2Capture.treeOnClick(event);"
+		onkeypress="sbp2Capture.treeOnKeyPress(event);"
+		seltype="multiple"
+		style="margin:0px;"
+	>
+		<treecols>
+			<treecol type="checkbox" fixed="true" editable="true" ignoreincolumnpicker="true" />
+			<splitter class="tree-splitter"/>
+			<treecol label="&sbp2.capture.tree.url;" flex="200" editable="true" crop="right" persist="width hidden" />
+			<splitter class="tree-splitter"/>
+			<treecol label="&sbp2.capture.tree.title;" flex="30" editable="true" persist="width hidden" />
+			<splitter class="tree-splitter"/>
+			<treecol label="&sbp2.capture.tree.mode;" flex="30" editable="true" persist="width hidden"/>
+			<splitter class="tree-splitter"/>
+			<treecol label="&sbp2.capture.tree.state;" flex="5" editable="true" persist="width hidden"/>
+		</treecols>
+		<treechildren/>
+	</tree>
+
+	<browser id="sbp2CaptureBrowser" collapsed="false" disablehistory="true" style="width: 300px; height: 400px;" type="content" />
+
+	<spacer style="height:5px" />
+	<hbox>
+		<checkbox id="sbp2ChkFilter" label="&sbp2.capture.filter;" checked="false" oncommand="sbp2Capture.toggleFilterBox(event);" />
+		<spacer flex="1" />
+	</hbox>
+	<spacer style="height:7px" />
+	<vbox id="sbp2FilterBox" hidden="true" style="border: 1px solid black; padding:4px">
+		<hbox>
+			<menulist id="sbp2MnuIncExc"
+					  onclick="sbp2CaptureFilter.input();"
+					  onkeypress="sbp2CaptureFilter.onKeyPress(event);" >
+				<menupopup>
+					<menuitem label="&sbp2.capture.filter.inc;"/>
+					<menuitem label="&sbp2.capture.filter.exc;"/>
+				</menupopup>
+			</menulist>
+		<textbox id="sbp2TextboxFilter"
+				 autocompletesearch="form-history"
+				 autocompletesearchparam="sbp2SearchHistory"
+				 enablehistory="true"
+				 flex="1"
+				 oninput="sbp2CaptureFilter.input();"
+				 ontextentered="sbp2Capture.scURLTreeItemsSel = sbp2CaptureFilter.onKeyPressEnter(sbp2Capture.scURLTreeItemsSel);"
+				 tabscrolling="true"
+				 type="autocomplete" />
+			<button   id="sbp2BtnAccept"	label="&sbp2.capture.filter.btn.accept;"	disabled="true" tooltiptext="&sbp2.capture.filter.btn.accept.tt;" oncommand="sbp2Capture.scURLTreeItemsSel = sbp2CaptureFilter.itemAdd();" />
+			<button   id="sbp2BtnCancel"	label="&sbp2.capture.filter.btn.cancel;"	disabled="true" tooltiptext="&sbp2.capture.filter.btn.cancel.tt;" oncommand="sbp2CaptureFilter.itemEditCancel();" />
+			<button   id="sbp2BtnDel"		label="&sbp2.capture.filter.btn.remove;"	disabled="true" tooltiptext="&sbp2.capture.filter.btn.remove.tt;" oncommand="sbp2Capture.scURLTreeItemsSel = sbp2CaptureFilter.itemDel();" />
+		</hbox>
+		<tree id="sbp2TreeFilter"
+			autostretch="always"
+			onclick="sbp2CaptureFilter.itemEdit();"
+			rows="5"
+			seltype="single"
+			style="margin:0px;"
+		>
+			<treecols>
+				<treecol label="&sbp2.capture.filter.regexp;" flex="1" editable="true" crop="right" persist="width hidden" />
+				<splitter class="tree-splitter"/>
+				<treecol label="&sbp2.capture.filter.show;" flex="10" editable="true" crop="right" persist="width hidden" />
+			</treecols>
+			<treechildren/>
+		</tree>
+	</vbox>
+
+</window>

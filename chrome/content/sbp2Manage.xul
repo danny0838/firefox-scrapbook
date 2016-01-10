@@ -19,6 +19,7 @@
 
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2DataSource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2LinkRepl.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Manage.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2MDragAndDropImpExp.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Prefs.js" />
@@ -38,14 +39,14 @@
 	<popupset>
 		<menupopup id="sbp2MIEPopupL" onpopupshowing="sbp2TreeHandle.populatePopupIEL(event);">
 			<menuitem id="sbp2ShowFiles"	label="&sbp2.context.showfiles;"	oncommand="sbp2Common.directoryShow('sbp2MIETree1', true);" />
+			<menuseparator id="sbp2Separator2" />
+			<menuitem id="sbp2Delete"		label="&sbp2.context.delete;"		oncommand="sbp2Manage.ieItemDeleteL();" />
 			<menuseparator id="sbp2Separator3" />
+			<menuitem id="sbp2Props"		label="&sbp2.context.props;"		oncommand="window.openDialog('chrome://scrapbookplus2/content/sbp2Properties.xul', 'ScrapBook Plus 2', 'chrome,centerscreen,modal', document.getElementById('sbp2MIETree1'));" />
+			<menuseparator id="sbp2Separator5" />
 			<menuitem id="sbp2NewFolder"	label="&sbp2.context.newfolder;"	oncommand="sbp2Common.createItem('sbp2MIETree1', 'folder');" />
 			<menuitem id="sbp2NewSeparator"	label="&sbp2.context.newseparator;"	oncommand="sbp2Common.createItem('sbp2MIETree1', 'separator');" />
 			<menuitem id="sbp2NewNote"		label="&sbp2.context.newnote;"		oncommand="sbp2Common.createItem('sbp2MIETree1', 'note');" />
-			<menuseparator id="sbp2Separator4" />
-			<menuitem id="sbp2Delete"		label="&sbp2.context.delete;"		oncommand="sbp2Manage.ieItemDeleteL();" />
-			<menuseparator id="sbp2Separator5" />
-			<menuitem id="sbp2Props"		label="&sbp2.context.props;"		oncommand="window.openDialog('chrome://scrapbookplus2/content/sbp2Properties.xul', 'ScrapBook Plus 2', 'chrome,centerscreen,modal', document.getElementById('sbp2MIETree1'));" />
 		</menupopup>
 		<menupopup id="sbp2MIEPopupR" onpopupshowing="sbp2TreeHandle.populatePopupIER(event);">
 			<menuitem id="sbp2MIEShowFiles"	label="&sbp2.context.showfiles;"	oncommand="sbp2Manage.ieItemShowFiles();" />

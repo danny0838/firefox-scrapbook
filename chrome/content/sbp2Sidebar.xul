@@ -15,6 +15,7 @@
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2CaptureSaver.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2DataSource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2LinkRepl.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Manage.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2NoteSidebar.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Prefs.js" />
@@ -36,19 +37,17 @@
 			<menuitem id="sbp2OpenInTab"	label="&sbp2.sidebar.context.openintab;"	oncommand="sbp2TreeHandle.itemShow(document.getElementById('sbp2Tree'), true );" />
 			<menuitem id="sbp2OpenURL"		label="&sbp2.sidebar.context.opensrc;"		oncommand="sbp2Common.loadURL(sbp2DataSource.propertyGet(sbp2DataSource.dbData, document.getElementById('sbp2Tree').builderView.getResourceAtIndex(document.getElementById('sbp2Tree').currentIndex), 'source'), event.ctrlKey);" />
 			<menuseparator id="sbp2Separator1" />
-			<menuitem id="sbp2Update"		label="&sbp2.sidebar.context.update;"		oncommand="" />
-			<menuseparator id="sbp2Separator2" />
 			<menuitem id="sbp2ShowFiles"	label="&sbp2.sidebar.context.showfiles;"	oncommand="sbp2Common.directoryShow('sbp2Tree', true);" />
+			<menuseparator id="sbp2Separator2" />
+			<menuitem id="sbp2Delete"		label="&sbp2.sidebar.context.delete;"		oncommand="sbp2TreeHandle.itemDelete('sbp2Tree', sbp2DataSource.dbData, null);" />
 			<menuseparator id="sbp2Separator3" />
+			<menuitem id="sbp2Props"		label="&sbp2.sidebar.context.props;"		oncommand="window.openDialog('chrome://scrapbookplus2/content/sbp2Properties.xul', 'ScrapBook Plus 2', 'chrome,centerscreen,modal', document.getElementById('sbp2Tree'));" />
+			<menuseparator id="sbp2Separator4" />
+			<menuitem id="sbp2LinksAdd"		label="&sbp2.sidebar.context.linksadd;"		oncommand="sbp2Common.captureTab(null, null, null, null, 3);" />
+			<menuseparator id="sbp2Separator5" />
 			<menuitem id="sbp2NewFolder"	label="&sbp2.sidebar.newfolder;"			oncommand="sbp2Common.createItem('sbp2Tree', 'folder');" />
 			<menuitem id="sbp2NewSeparator"	label="&sbp2.sidebar.newseparator;"			oncommand="sbp2Common.createItem('sbp2Tree', 'separator');" />
 			<menuitem id="sbp2NewNote"		label="&sbp2.sidebar.newnote;"				oncommand="sbp2Common.createItem('sbp2Tree', 'note');" />
-			<menuseparator id="sbp2Separator4" />
-			<menuitem id="sbp2Delete"		label="&sbp2.sidebar.context.delete;"		oncommand="sbp2TreeHandle.itemDelete('sbp2Tree', sbp2DataSource.dbData, null);" />
-			<menuseparator id="sbp2Separator7" />
-			<menuitem id="sbp2CaptureTabs"	label="&sbp2.sidebar.context.capttabs;"		oncommand="" />
-			<menuseparator id="sbp2Separator5" />
-			<menuitem id="sbp2Props"		label="&sbp2.sidebar.context.props;"		oncommand="window.openDialog('chrome://scrapbookplus2/content/sbp2Properties.xul', 'ScrapBook Plus 2', 'chrome,centerscreen,modal', document.getElementById('sbp2Tree'));" />
 		</menupopup>
 		<menupopup id="sbp2SidebarPopupSearch">
 			<menuitem id="sbp2SidebarPopupSearchF" label="&sbp2.sidebar.search.fulltext;"	type="radio" oncommand="sbp2Search.searchModeChange('fulltext');" />

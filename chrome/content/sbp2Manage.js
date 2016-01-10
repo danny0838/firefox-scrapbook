@@ -13,10 +13,10 @@ var sbp2Manage = {
 	tRSelectedOne		: false,
 
 	statsDiagnostics	: [],	//Beschreibung zu Diagnoswerten 0-4
-	statsDirectories	: [],	//Enthält Angaben zu den gefundenen Verzeichnissen
-	statsItems			: [],	//Enthält Angaben zu den Einträgen im Tree (Verzeichnisse und RDF-Einträge)
+	statsDirectories	: [],	//EnthÃ¤lt Angaben zu den gefundenen Verzeichnissen
+	statsItems			: [],	//EnthÃ¤lt Angaben zu den EintrÃ¤gen im Tree (Verzeichnisse und RDF-EintrÃ¤ge)
 	statsItemsDirEmpty	: 0,	//>0, falls leere Verzeichnisse existieren
-	statsItemsSorted	: [],	//gibt die Reihenfolge der Einträge im Tree an
+	statsItemsSorted	: [],	//gibt die Reihenfolge der EintrÃ¤ge im Tree an
 
 	mainChangeTab : function(mctModus)
 	{
@@ -68,7 +68,7 @@ var sbp2Manage = {
 				if ( this.mainTabContentLoaded[3] == 0 ) {
 					//1. multibook.txt laden
 					this.mbTreeUpdate(this.mbDatensaetze);
-					//2. Sortieren der Einträge zulassen
+					//2. Sortieren der EintrÃ¤ge zulassen
 					this.mbTreeSortEnable();
 					//3. Erstmalige Anzeige vermerken
 					this.mainTabContentLoaded[3] = 1;
@@ -81,12 +81,12 @@ var sbp2Manage = {
 
 	mainLoad : function(mlModus)
 	{
-		//Initialisiert verschiedene Variablen und läd den gewünschten Tab beim Aufruf der Verwaltung
+		//Initialisiert verschiedene Variablen und lÃ¤d den gewÃ¼nschten Tab beim Aufruf der Verwaltung
 		//
 		//Ablauf:
 		//1. Variablen initialisieren
 		//2. sbp2DataSource.dbData laden, falls erfoderlich
-		//3. Übergabeparameter des Fensters übernehmen
+		//3. Ã¼bergabeparameter des Fensters Ã¼bernehmen
 		//4. Datenquelle vom tree in der Sidebar trennen und den tree verstecken
 		//5. multibook.txt laden
 		//6. Listener einbinden
@@ -104,6 +104,8 @@ var sbp2Manage = {
 		this.statsDiagnostics.push(document.getElementById("sbp2ManageString").getString("DIAGNOSTICS_3"));
 		this.statsDiagnostics.push(document.getElementById("sbp2ManageString").getString("DIAGNOSTICS_4"));
 		sbp2DataSource.initSearchCacheUpdate();
+		sbp2LinkRepl.slrInitDatabase();
+		sbp2LinkRepl.slrInit();
 /*
 		this.mProfileFolder = document.getElementById("sbp2CommonString").getString("PROFILEFOLDER");
 		//2. RDF-Dateien laden, falls erfoderlich
@@ -111,13 +113,12 @@ var sbp2Manage = {
 		if ( !sbp2DataSource.dbData ) sbp2DataSource.init();
 		if ( !sbp2DataSource.dbDataTag ) sbp2DataSource.initTag();
 /*
-		if ( !sbp2DataSource.dbDataCrosslinkUpdate ) sbp2DataSource.initCrosslinkUpdate();
 		if ( !sbp2DataSource.dbDataSearchCacheUpdate ) sbp2DataSource.initSearchCacheUpdate();
 */
 		this.dbData = Components.classes["@mozilla.org/rdf/datasource;1?name=in-memory-datasource"].createInstance(Components.interfaces.nsIRDFDataSource);
 		var iResRoot = sbp2Common.RDF.GetResource("urn:scrapbook:root");
 		sbp2Common.RDFCU.MakeSeq(this.dbData, iResRoot);
-		//3. Übergabeparameter des Fensters übernehmen
+		//3. Ã¼bergabeparameter des Fensters Ã¼bernehmen
 		mlModus = window.arguments[0];
 		//4. Datenquelle vom tree in der Sidebar trennen und den tree verstecken
 		var mlSidebarTree = window.opener.document.getElementById("sbp2Tree");
@@ -130,7 +131,7 @@ var sbp2Manage = {
 		this.mbDatensaetze = this.mbLoadMultibookTxt();
 		//6. Listener einbinden
 //		document.getElementById("sbp2MIETree1").builderView.addObserver(sbpMDragAndDrop.ddBuilderViewObserver);
-		//7. Ansicht aktualisieren (wird für die Anzeige der Einträge im Multibook-Tab benötigt, falls dieses direkt über die Sidebar aufgerufen wird)
+		//7. Ansicht aktualisieren (wird fÃ¼r die Anzeige der EintrÃ¤ge im Multibook-Tab benÃ¶tigt, falls dieses direkt Ã¼ber die Sidebar aufgerufen wird)
 		this.mainChangeTab(mlModus);
 		//8. Ansicht wechseln, falls iModus != impexp
 		if ( mlModus != "impexp" ) {
@@ -144,7 +145,7 @@ var sbp2Manage = {
 		//
 		//Ablauf:
 		//1. Alle RDF-Resourcen von den Trees entfernen
-		//2. Datenquelle an tree in der Sidebar anhängen und den tree wieder sichtbar machen
+		//2. Datenquelle an tree in der Sidebar anhÃ¤ngen und den tree wieder sichtbar machen
 
 		//1. Alle RDF-Resourcen von den Trees entfernen
 //		sbp2DataSource.exit(document.getElementById("sbp2MIETree1"));
@@ -153,14 +154,14 @@ var sbp2Manage = {
 //			sbp2DataSource.korrigiereIconRes(true);
 //		}
 //		sbp2DataSource.exit(document.getElementById("sbp2MCombineTree"));
-		//2. Datenquelle an tree in der Sidebar anhängen und den tree wieder sichtbar machen
+		//2. Datenquelle an tree in der Sidebar anhÃ¤ngen und den tree wieder sichtbar machen
 		var muTreeSidebar = window.opener.document.getElementById("sbp2Tree");
 		muTreeSidebar.database.AddDataSource(sbp2DataSource.dbData);
 		muTreeSidebar.hidden = false;
 		muTreeSidebar = window.opener.document.getElementById("sbp2TreeTag");
 		muTreeSidebar.database.AddDataSource(sbp2DataSource.dbDataTag);
 		muTreeSidebar.hidden = false;
-			//Vor dem rebuild() müssen noch die Einträge für Standardicons eingetragen werden
+			//Vor dem rebuild() mÃ¼ssen noch die EintrÃ¤ge fÃ¼r Standardicons eingetragen werden
 //		sbp2DataSource.addDefaultIcons(sbp2DataSource.dbData);
 			//Der rebuild() ist notwendig, da sonst immer noch nichts angezeigt wird!
 		muTreeSidebar.builder.rebuild();
@@ -168,18 +169,18 @@ var sbp2Manage = {
 
 	ieChangeDirectory : function()
 	{
-		//Öffnet den Dateimanager, um das Export-Verzeichnis ändern zu können
+		//Ã¶ffnet den Dateimanager, um das Export-Verzeichnis Ã¤ndern zu kÃ¶nnen
 		//
 		//Ablauf:
-		//1. Picker öffnen
+		//1. Picker Ã¶ffnen
 		//2. Verzeichnis in sbp2MC2VZ anzeigen
-		//3. Variable für Export-Verzeichnis aktualisieren
+		//3. Variable fÃ¼r Export-Verzeichnis aktualisieren
 		//4. about:config aktualisieren
 		//5. Ansicht aktualisieren
 
-		//1. Picker öffnen
+		//1. Picker Ã¶ffnen
 		var iecdPickerDir = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-		iecdPickerDir.init(window, "Wählen sie ein Verzeichnis", iecdPickerDir.modeGetFolder);
+		iecdPickerDir.init(window, "WÃ¤hlen sie ein Verzeichnis", iecdPickerDir.modeGetFolder);
 		if ( this.ieExportDir != "" ) {
 			var iecdDir = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
 			iecdDir.initWithPath(this.ieExportDir);
@@ -191,7 +192,7 @@ var sbp2Manage = {
 //			var iecdPathField = document.getElementById("sbp2MC2VZ");
 //			iecdPathField.file = iecdPickerDir.file;
 //			iecdPathField.label = iecdPickerDir.file.path;
-			//3. Variable für Export-Verzeichnis aktualisieren
+			//3. Variable fÃ¼r Export-Verzeichnis aktualisieren
 			this.ieExportDir = iecdPickerDir.file.path;
 			//4. about:config aktualisieren
 			sbp2Prefs.setUnicharPref("extensions.scrapbookplus2.trade.path", iecdPickerDir.file.path);
@@ -202,7 +203,7 @@ var sbp2Manage = {
 
 	ieGetFolders : function(iegfContRes, iegfArray)
 	{
-		//Ermittelt alle Einträge des Typs folder in iegfContRes
+		//Ermittelt alle EintrÃ¤ge des Typs folder in iegfContRes
 
 		//1. Container in sbp2DataSource.dbData initialisieren
 		var iegfCont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
@@ -222,13 +223,13 @@ var sbp2Manage = {
 				iegfArray = this.ieGetFolders(iegfRes, iegfArray);
 			}
 		}
-		//4. Rückgabe aller bislang gefundenen folder an aufrufende Funktion
+		//4. RÃ¼ckgabe aller bislang gefundenen folder an aufrufende Funktion
 		return iegfArray;
 	},
 
 	ieItemAdd : function(ieiaNr, ieiaItem, ieiaCont, ieiaFolder)
 	{
-		//Erstellt den Eintrag in der RDF-Datenquelle mit allen für den Import benötigten Informationen
+		//Erstellt den Eintrag in der RDF-Datenquelle mit allen fÃ¼r den Import benÃ¶tigten Informationen
 		var ieiaNewRes = sbp2Common.RDF.GetResource("urn:scrapbook:item" + ieiaNr);
 		this.dbData.Assert(ieiaNewRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#" + "id"),      sbp2Common.RDF.GetLiteral(ieiaItem.id), true);
 		this.dbData.Assert(ieiaNewRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#" + "type"),    sbp2Common.RDF.GetLiteral(ieiaItem.type), true);
@@ -257,7 +258,7 @@ var sbp2Manage = {
 
 	ieItemDeleteL : function()
 	{
-		//Falls die Statistik-Daten schon erstellt waren, müssen diese Daten nach dem Löschen einer oder mehrerer Einträge erneut erstellt werden.
+		//Falls die Statistik-Daten schon erstellt waren, mÃ¼ssen diese Daten nach dem LÃ¶schen einer oder mehrerer EintrÃ¤ge erneut erstellt werden.
 		//this.mainTabContentLoaded[2] -> 0
 		var ieidlRC = sbp2TreeHandle.itemDelete('sbp2MIETree1', sbp2DataSource.dbData);
 		if ( ieidlRC == 1 ) this.mainTabContentLoaded[2] = 0;
@@ -265,12 +266,12 @@ var sbp2Manage = {
 
 	ieItemDeleteR : function()
 	{
-		//Alle selektierten Einträge werden gelöscht
+		//Alle selektierten EintrÃ¤ge werden gelÃ¶scht
 		//
 		//Ablauf:
 		//1. Variablen initialisieren
-		//2. Sicherheitsabfrage (wirklich löschen?)
-		//2.1 Selektierte Einträge löschen
+		//2. Sicherheitsabfrage (wirklich lÃ¶schen?)
+		//2.1 Selektierte EintrÃ¤ge lÃ¶schen
 		//2.2 Ansicht aktualisieren
 
 		//1. Variablen initialisieren
@@ -279,14 +280,14 @@ var sbp2Manage = {
 		var ieidEnd			= new Object();
 		var ieidNumRanges	= ieidTree.view.selection.getRangeCount();
 		var ieidAnswer      = null;
-		//2. Sicherheitsabfrage (wirklich löschen?)
+		//2. Sicherheitsabfrage (wirklich lÃ¶schen?)
 		if ( ieidTree.view.selection.count == 1 ) {
 			ieidAnswer = window.confirm(document.getElementById("sbp2CommonString").getString("QUESTION_DELETE_S"));
 		} else {
 			ieidAnswer = window.confirm(document.getElementById("sbp2CommonString").getString("QUESTION_DELETE_M"));
 		}
 		if ( ieidAnswer == true ) {
-			//2.1 Selektierte Einträge löschen
+			//2.1 Selektierte EintrÃ¤ge lÃ¶schen
 			for ( var ieidI=0; ieidI<ieidNumRanges; ieidI++)
 			{
 				ieidTree.view.selection.getRangeAt(ieidI,ieidStart,ieidEnd);
@@ -295,7 +296,12 @@ var sbp2Manage = {
 					var ieidRes = ieidTree.builderView.getResourceAtIndex(ieidJ);
 					var ieidFolder = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
 					ieidFolder.initWithPath(sbp2DataSource.propertyGet(ieidTree.database, ieidRes, "localfld"));
-					sbp2Common.directoryRemove(ieidFolder);
+					//exportierte EintrÃ¤ge aus sbp1 sind Verzeichnisse, ab sbp2 handelt es sich um ZIP-Dateien.
+					if ( ieidFolder.isDirectory() ) {
+						sbp2Common.directoryRemove(ieidFolder);
+					} else {
+						ieidFolder.remove(false);
+					}
 				}
 			}
 			//2.2 Ansicht aktualisieren
@@ -307,23 +313,25 @@ var sbp2Manage = {
 
 	ieItemExport : function()
 	{
-		//Exportiert die in sbp2MIETree1 selektierten Einträge ins Exportverzeichnis
+		//Exportiert die in sbp2MIETree1 selektierten EintrÃ¤ge ins Exportverzeichnis
 		//
 		//Ablauf:
 		//1. Variablen initialisieren
 		//2. selektierte Eintraege bestimmen (Trennlinien werden ignoriert)
-		//3. selektierte Einträge exportieren
+		//3. selektierte EintrÃ¤ge exportieren
 		//	3.1 Titel bestimmen
 		//	3.2 Name der ZIP-Datei anhand des Titels festlegen
-		//	3.3 ZIP-Datei erstellen
-		//	3.4 komplettes Quellverzeichnis der Resource bestimmen
+		//	3.3 Nicht erlaubte Zeichen im Dateinamen ersetzen
+		//	3.4 ZIP-Datei erstellen
 		//	3.5 index.dat erstellen, falls diese fehlt
-		//	3.6 Eintrag einfügen
+		//	3.6 komplettes Quellverzeichnis der Resource bestimmen
+		//	3.7 Eintrag einfÃ¼gen
 
 		//1. Variablen initialisieren
 		var iieData         = sbp2DataSource.dbData;
 		var iieTree         = document.getElementById("sbp2MIETree1");
 		var iieZTree        = document.getElementById("sbp2MIETree2");
+		var iieExists		= 0;
 		var iieResContList  = [];
 		var iieResList      = [];
 		var iieResRoot      = sbp2Common.RDF.GetResource("urn:scrapbook:root");
@@ -338,40 +346,30 @@ var sbp2Manage = {
 			{
 				//Resource des selektierten Eintrags bestimmen
 				var iieRes = iieTree.builderView.getResourceAtIndex(iieJ);
+				//Typ der Resource bestimmen
+				var iieType = sbp2DataSource.propertyGet(iieData, iieRes, "type");
 				//Resourcen vom Typ "separator" ignorieren
-				var iieType = sbp2DataSource.propertyGet(iieData, iieRes, "type");
 				if ( iieType=="separator" ) continue;
-				//Resource zum Exportieren vormerken
-				iieResList.push(iieRes);
-			}
-/*
-				//Resource des selektierten Eintrags bestimmen
-				var iieRes = iieTree.builderView.getResourceAtIndex(iieJ);
-				//Resourcen vom Type "separator" ignorieren
-				var iieType = sbp2DataSource.propertyGet(iieData, iieRes, "type");
-				if ( iieType=="separator" ) continue;
-				//Sicherstellen, das gefundene Resource nicht in einem Container enthalten ist, der schon aufgenommen wurde
-				var iieFound = 0;
-				for ( var iieK=0; iieK<iieResContList.length; iieK++ )
-				{
-					if ( sbp2Common.RDFCU.indexOf(iieData, iieResContList[iieK], iieRes) > -1 ) {
-						iieFound=1;
-						iieK=iieResContList.length;
-					}
-				}
-				if ( iieFound==1 ) continue;
-				//bei einem Container müssen die enthaltenen Einträge berücksichtigt werden
-				if ( sbp2Common.RDFCU.IsContainer(iieData, iieRes) ) {
-					iieResContList.push(iieRes);
-//					this.elContainerAdd(iieData, iieRes, iieResList, iieResContList);
+				//Sonderbehandlung fÃ¼r Verzeichnisse
+				if ( iieType=="folder" ) {
+					//alle EintrÃ¤ge des Verzeichnis zum Exportieren vormerken. Das Verzeichnis selbst wird nicht exportiert.
+					iieResList = this.ieItemExportContainerAdd(iieData, iieResList, iieRes);
 				} else {
-					//Resource zum Loeschen vormerken
-					iieResList.push(iieRes);
+					//Sicherstellen, dass die Resource noch neu ist. Sie kÃ¶nnte schon bei der Sonderbehandlung fÃ¼r Verzeichnisse hinzugekommen sein.
+					iieExists = 0;
+					for ( var iieK=0; iieK<iieResList.length; iieK++ )
+					{
+						if ( iieRes == iieResList[iieK] ) {
+							iieExists = 1;
+							iieK = iieResList.length;
+						}
+					}
+					//Resource zum Exportieren vormerken
+					if ( iieExists == 0 ) iieResList.push(iieRes);
 				}
 			}
-*/
 		}
-		//3. selektierte Einträge exportieren
+		//3. selektierte EintrÃ¤ge exportieren
 		for ( var iieI=0; iieI<iieResList.length; iieI++ )
 		{
 			//3.1 Titel bestimmen
@@ -381,8 +379,11 @@ var sbp2Manage = {
 			//3.2 Name der ZIP-Datei anhand des Titels festlegen
 			var iieZIPFile = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
 			iieZIPFile.initWithPath(this.ieExportDir);
-			iieFilename = iieFilename.replace(/\"/g, "'");		//ungültiges Zeichen für Verzeichnisse ersetzen
-			iieFilename = iieFilename.replace(/\|/g, "");		//ungültiges Zeichen für Verzeichnisse ersetzen
+			//3.3 Nicht erlaubte Zeichen im Dateinamen ersetzen
+			iieFilename = iieFilename.replace(/[\"]+/g, "'");
+			iieFilename = iieFilename.replace(/[\*\:\?\|]+/g, " ");
+			iieFilename = iieFilename.replace(/[\<]+/g, "(");
+			iieFilename = iieFilename.replace(/[\>]+/g, ")");
 			iieZIPFile.append(iieFilename+iieFileextension);
 			var iieCounter = 0;
 			while ( iieZIPFile.exists() )
@@ -392,58 +393,7 @@ var sbp2Manage = {
 				iieZIPFile.initWithPath(this.ieExportDir);
 				iieZIPFile.append(iieFilename+"-"+iieCounter+iieFileextension);
 			}
-//			iieZielDir.create(iieZielDir.DIRECTORY_TYPE, parseInt("0700", 8));
-/*
-			var iieType = sbp2DataSource.propertyGet(sbp2DataSource.dbData, iieRes, "type");
-			var iieID = sbp2DataSource.propertyGet(sbp2DataSource.dbData, iieRes, "id");
-			if ( iieType != "bookmark" ) {
-				//Quellverzeichnis bestimmen
-				var iieQuellVZ = sbp2Common.getBuchVZ();
-				iieQuellVZ.append("data");
-				iieQuellVZ.append(iieID);
-				//alle Dateien im Quellverzeichnis kopieren
-				var iieQuellVZEnum = iieQuellVZ.directoryEntries;
-				while ( iieQuellVZEnum.hasMoreElements() )
-				{
-					var iieFile = iieQuellVZEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
-					if ( !iieFile.isDirectory() ) iieFile.copyTo(iieZielDir, iieFile.leafName);
-				}
-			}
-			//3.4 komplettes Quellverzeichnis der Resource bestimmen
-			var iieDir = "";
-			var iieContResAll = this.ieGetFolders(iieResRoot, []);
-			iieContResAll.push(iieRes);
-			var iieReachedRoot = false;
-			var iieLastHit = iieContResAll.length-1;
-			for ( var iieK=iieContResAll.length-2; iieK>-1; iieK-- )
-			{
-				if ( sbp2Common.RDFCU.indexOf(sbp2DataSource.dbData, iieContResAll[iieK], iieContResAll[iieLastHit]) > -1 ) {
-					iieLastHit = iieK;
-					iieDir = "\t"+sbp2DataSource.propertyGet(sbp2DataSource.dbData, iieContResAll[iieK], "title")+iieDir;
-				}
-			}
-			iieDir = iieDir.substring(1, iieDir.length);
-			//3.5 index.dat erstellen, falls diese fehlt
-			var iieIndexDat = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
-			iieIndexDat.initWithPath(iieZielDir.path);
-			iieIndexDat.append("index.dat");
-			var iieItem = { id: "", type: "", title: "", chars: "", icon: "", source: "", comment: "", folder: "", isZip: "0" };
-			iieItem.id      = iieID;
-			iieItem.type    = sbp2DataSource.propertyGet(sbp2DataSource.dbData, iieRes, "type");
-			iieItem.title   = sbp2DataSource.propertyGet(sbp2DataSource.dbData, iieRes, "title");
-			iieItem.chars   = sbp2DataSource.propertyGet(sbp2DataSource.dbData, iieRes, "chars");
-			iieItem.icon    = sbp2DataSource.propertyGet(sbp2DataSource.dbData, iieRes, "icon");
-			if ( iieItem.icon.match(/^resource:\/\/scrapbook\/data\/\d{14}/) ) {
-				iieItem.icon = iieItem.icon.substring(41, iieItem.icon.length);
-			}
-			iieItem.source  = sbp2DataSource.propertyGet(sbp2DataSource.dbData, iieRes, "source");
-			iieItem.comment = sbp2DataSource.propertyGet(sbp2DataSource.dbData, iieRes, "comment");
-			iieItem.folder = iieDir;
-			if ( !iieIndexDat.exists() ) {
-				sbp2Common.fileWriteIndexDat(iieIndexDat.path, iieItem);
-			}
-*/
-			//3.3 ZIP-Datei erstellen
+			//3.4 ZIP-Datei erstellen
 			var iieID = sbp2DataSource.propertyGet(sbp2DataSource.dbData, iieRes, "id");
 			if ( iieType != "bookmark" ) {
 				//Quellverzeichnis bestimmen
@@ -453,7 +403,7 @@ var sbp2Manage = {
 				//alle Dateien im Quellverzeichnis packen
 				sbp2ToolsZip.zipFolder(iieZIPFile, iieQuellVZ, false);
 			}
-			//3.4 index.dat erstellen, falls diese fehlt
+			//3.5 index.dat erstellen, falls diese fehlt
 			var iieItem = { id: "", type: "", title: "", chars: "", icon: "", source: "", comment: "", folder: "", isZip: "1" };
 			iieItem.id = iieID;
 			iieItem.type = sbp2DataSource.propertyGet(sbp2DataSource.dbData, iieRes, "type");
@@ -463,7 +413,7 @@ var sbp2Manage = {
 			if ( iieItem.icon.match(/^resource:\/\/scrapbook\/data\/\d{14}/) ) iieItem.icon = iieItem.icon.substring(41, iieItem.icon.length);
 			iieItem.source = sbp2DataSource.propertyGet(sbp2DataSource.dbData, iieRes, "source");
 			iieItem.comment = sbp2DataSource.propertyGet(sbp2DataSource.dbData, iieRes, "comment");
-			//4.4.1 komplettes Quellverzeichnis der Resource bestimmen
+			//3.6 komplettes Quellverzeichnis der Resource bestimmen
 			var iieFolder = "";
 			var iieContResAll = this.ieGetFolders(iieResRoot, []);
 			iieContResAll.push(iieRes);
@@ -493,7 +443,7 @@ var sbp2Manage = {
 			sbp2ToolsZip.zipStream(iieZIPFile, "index.dat", iieStream, true);
 			//Damit bei einem ZIP-Archiv ein Icon angezeigt wird, muss der Wert auf "" gesetzt werden
 			iieItem.icon = "";
-			//3.6 Eintrag einfügen
+			//3.7 Eintrag einfÃ¼gen
 			var iieContRoot = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
 			iieContRoot.Init(this.dbData, iieResRoot);
 			this.ieItemAdd(iieContRoot.GetCount(), iieItem, iieContRoot, iieZIPFile);
@@ -501,18 +451,53 @@ var sbp2Manage = {
 		}
 	},
 
+	ieItemExportContainerAdd : function(iiecaData, iiecaResList, iiecaRes)
+	{
+		//Bei iiecaRes handelt es sich um ein Verzeichnis. Die Funktion nimmt alle EintrÃ¤ge des Verzeichnis in iiecaResList auf. Unterverzeichnisse werden durch rekursiven Aufruf dieser
+		//Funktion ebenfalls berÃ¼cksichtigt.
+		//
+		//Ablauf:
+		//1. Container initialisieren
+		//2. Enumerator erstellen
+		//3. Alle EintrÃ¤ge aufnehmen (keine seperator und folder)
+		//4. Liste mit EintrÃ¤gen zurÃ¼ck an aufrufende Funktion
+
+		//1. Container initialisieren
+		var iiecaCont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
+		iiecaCont.Init(iiecaData, iiecaRes);
+		//2. Enumerator erstellen
+		var iiecaContEnum = iiecaCont.GetElements();
+		//3. Alle EintrÃ¤ge aufnehmen (keine seperator und folder)
+		while ( iiecaContEnum.hasMoreElements() )
+		{
+			//Resource bestimmen
+			var iiecaResNew = iiecaContEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+			//Type bestimmen
+			var iiecaType = sbp2DataSource.propertyGet(sbp2DataSource.dbData, iiecaResNew, "type");
+			//Bei Verzeichnissen wird diese Funktion rekursiv aufgerufen, "seperator" werden ignoriert, alle anderen EintrÃ¤ge aufgenommen
+			if ( iiecaType == "folder" ) {
+				iiecaResList = this.ieItemExportContainerAdd(iiecaData, iiecaResList, iiecaResNew);
+			} else if ( iiecaType != "seperator" ) {
+				//Eintrag aufnehmen
+				iiecaResList.push(iiecaResNew);
+			}
+		}
+		//4. Liste mit EintrÃ¤gen zurÃ¼ck an aufrufende Funktion
+		return iiecaResList;
+	},
+
 	ieItemImport : function()
 	{
-		//Es werden alle selektierten Einträge importiert und am Ende die RDF-Datei neu geschrieben.
+		//Es werden alle selektierten EintrÃ¤ge importiert und am Ende die RDF-Datei neu geschrieben.
 		//
-		//Ablauf (für jeden selektierten Eintrag im rechten Tree):
+		//Ablauf (fÃ¼r jeden selektierten Eintrag im rechten Tree):
 		//1. Zielverzeichnis in RDF-Struktur initialisieren
 		//2. Verzeichnisstruktur im Tree erstellen
 		//3. Variablen initialisieren
-		//4. neue ID bestimmen (es wird die alte verwendet, falls dies möglich ist)
-		//5. Daten für Eintrag und index.dat sammeln
+		//4. neue ID bestimmen (es wird die alte verwendet, falls dies mÃ¶glich ist)
+		//5. Daten fÃ¼r Eintrag und index.dat sammeln
 		//6. Dateien kopieren, sofern kein "bookmark" importiert werden soll
-		//7. Eintrag einfügen
+		//7. Eintrag einfÃ¼gen
 		//8. Damit die Boxen zum Auf-/Zuklappen von Verzeichnissen dargestellt werden, ist ein rebuild des Tree notwendig
 		//9. rdf-Datei schreiben
 
@@ -563,13 +548,13 @@ var sbp2Manage = {
 				var iiiFolder = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
 				iiiFolder.initWithPath(iiiFolderString);
 //muss noch angepasst werden (???)
-				//4. neue ID bestimmen (es wird die alte verwendet, falls dies möglich ist)
+				//4. neue ID bestimmen (es wird die alte verwendet, falls dies mÃ¶glich ist)
 				var iiiResNew = sbp2Common.RDF.GetResource("urn:scrapbook:item" + iiiDir);
 				if ( sbp2DataSource.propertyGet(sbp2DataSource.dbData, iiiResNew, "id") != "" ) {
-//Übersetzung fehlt.
+//Ã¼bersetzung fehlt.
 					alert("Schon benutzt! Eintrag wird nicht importiert.");
 				} else {
-					//5. Daten für Eintrag und index.dat sammeln
+					//5. Daten fÃ¼r Eintrag und index.dat sammeln
 					var iiiItem = { id: "", type: "", title: "", chars: "", comment: "", icon: "", source: "", folder: "", quellVZ: "" };
 					iiiItem.id		= iiiDir;
 					iiiItem.type	= sbp2DataSource.propertyGet(this.dbData, iiiRes, "type");
@@ -609,7 +594,7 @@ var sbp2Manage = {
 						//index.dat erstellen
 						sbp2Common.fileWriteIndexDat(iiiDestinationDir.path+"\\index.dat", iiiItem);
 					}
-					//7. Eintrag einfügen
+					//7. Eintrag einfÃ¼gen
 					sbp2DataSource.itemAdd(sbp2DataSource.dbData, iiiItem, iiiResCont, -1);
 				}
 			}
@@ -623,7 +608,7 @@ var sbp2Manage = {
 
 	ieItemShowFiles : function()
 	{
-		//Öffnet das Verzeichnis, das die Dateien des gewählten Eintrags enthält.
+		//Ã¶ffnet das Verzeichnis, das die Dateien des gewÃ¤hlten Eintrags enthÃ¤lt.
 		//
 		//Ablauf:
 		//1. Verzeichnis bestimmen
@@ -632,20 +617,20 @@ var sbp2Manage = {
 		//1. Verzeichnis bestimmen
 			//1a. Tree bestimmen
 		var ieisfTree = document.getElementById("sbp2MIETree2");
-			//1b. Nummer des gewählten Eintrags bestimmen
+			//1b. Nummer des gewÃ¤hlten Eintrags bestimmen
 		var ieisfIndex = ieisfTree.currentIndex;
 //			//1c. Funktion verlassen, wenn ein Verzeichnis (Container) selektiert ist und somit nichts angezeigt werden kann
 //		if ( ieisfTree.view.isContainer(ieisfIndex) ) return;
 			//1d. Resource bestimmen
 		var ieisfRes = ieisfTree.builderView.getResourceAtIndex(ieisfIndex);
-			//1e. Verzeichnisnamen vervollständigen
+			//1e. Verzeichnisnamen vervollstÃ¤ndigen
 		var ieisfFolder = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
 		ieisfFolder.initWithPath(sbp2DataSource.propertyGet(ieisfTree.database, ieisfRes, "localfld"));
 		//2. Verzeichnis anzeigen
 		try
 		{
 			ieisfFolder = ieisfFolder.QueryInterface(Components.interfaces.nsILocalFile);
-			ieisfFolder.launch();
+			ieisfFolder.reveal();
 		} catch(ieisfEx)
 		{
 			alert("sbp2Manage.showFiles\n---\n"+ieisfEx);
@@ -655,7 +640,7 @@ var sbp2Manage = {
 	ieOnKeyPress : function(ieokpEvent)
 	{
 		//F2  -> Editieren des Eintrags
-		//del -> Löschen des Eintrags
+		//del -> LÃ¶schen des Eintrags
 
 		switch ( ieokpEvent.keyCode )
 		{
@@ -674,14 +659,14 @@ var sbp2Manage = {
 
 	ieRefresh : function(ierVerzeichnis)
 	{
-		//Listet alle Einträge, die importiert werden können, in sbp2MIETree2 auf
+		//Listet alle EintrÃ¤ge, die importiert werden kÃ¶nnen, in sbp2MIETree2 auf
 		//
 		//Ablauf:
 		//1. Treeobjekt bestimmen
 		//2. Datenbank entfernen
 		//3. Tree leeren
-		//4. Tree mit Datensätzen im Verzeichnis füllen
-		//5. RDF-Datenquelle dem tree hinzufügen
+		//4. Tree mit DatensÃ¤tzen im Verzeichnis fÃ¼llen
+		//5. RDF-Datenquelle dem tree hinzufÃ¼gen
 		//6. Damit die Boxen zum Auf-/Zuklappen von Verzeichnissen dargestellt werden, ist ein rebuild des Tree notwendig
 
 		//1. Treeobjekt bestimmen
@@ -695,7 +680,7 @@ var sbp2Manage = {
 		}
 		//3. Tree leeren
 		this.ieTreeRemoveItems(ierTree);
-		//4. Tree mit Datensätzen im Verzeichnis füllen
+		//4. Tree mit DatensÃ¤tzen im Verzeichnis fÃ¼llen
 		var ierNr = -1;
 		var ierDirEnum = ierVerzeichnis.directoryEntries;
 		var ierCont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
@@ -704,7 +689,7 @@ var sbp2Manage = {
 		{
 			var ierFile = ierDirEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
 			if ( ierFile.isDirectory() ) {
-				//exportierte Einträge aus ScrapBook Plus 1 sowie ScrapBook stehen in eigenen Unterverzeichnissen
+				//exportierte EintrÃ¤ge aus ScrapBook Plus 1 sowie ScrapBook stehen in eigenen Unterverzeichnissen
 				var ierIndexDat = ierFile.clone();
 				ierIndexDat.append("index.dat");
 				var ierItem = "";
@@ -718,7 +703,7 @@ var sbp2Manage = {
 				ierNr++;
 				this.ieItemAdd(ierNr, ierItem, ierCont, ierFile);
 			} else {
-				//ZIP-Dateien stehen direkt im gewählten Verzeichnis
+				//ZIP-Dateien stehen direkt im gewÃ¤hlten Verzeichnis
 				if ( ierFile.fileSize > 0 ) {
 					//index.dat in ZIP-Datei lesen
 					var ierData = sbp2ToolsZip.zipStreamRead(ierFile, "index.dat");
@@ -744,7 +729,7 @@ var sbp2Manage = {
 				this.ieItemAdd(ierNr, ierItem, ierCont, ierFile);
 			}
 		}
-		//5. RDF-Datenquelle dem tree hinzufügen
+		//5. RDF-Datenquelle dem tree hinzufÃ¼gen
 		ierTree.database.AddDataSource(this.dbData);
 		//6. Damit die Boxen zum Auf-/Zuklappen von Verzeichnissen dargestellt werden, ist ein rebuild des Tree notwendig
 		ierTree.builder.rebuild();
@@ -752,17 +737,17 @@ var sbp2Manage = {
 
 	ieTreeRemoveItems : function(ietriTree)
 	{
-		//Entfernt sämtliche Einträge aus sbp2Manage.dbData
+		//Entfernt sÃ¤mtliche EintrÃ¤ge aus sbp2Manage.dbData
 		//
 		//Ablauf:
 		//1. Variablen initialisieren
-		//2. Alle Einträge des Containers entfernen
+		//2. Alle EintrÃ¤ge des Containers entfernen
 
 		//1. Variablen initialisieren
 		var ietriCont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
 		ietriCont.Init(this.dbData, sbp2Common.RDF.GetResource("urn:scrapbook:root"));
 		var ietriCount = ietriCont.GetCount();
-		//2. Alle Einträge des Containers entfernen
+		//2. Alle EintrÃ¤ge des Containers entfernen
 		for ( var ietriI=ietriCount; ietriI>0; ietriI-- )
 		{
 			//Eintrag im Container entfernen
@@ -786,15 +771,15 @@ var sbp2Manage = {
 
 	mSort : function(scResContainer, scModus, scDirSub)
 	{
-		//Sortiert die Einträge in Container scResContainer auf- oder absteigend (scModus). Unterverzeichnisse werden berücksichtigt,
+		//Sortiert die EintrÃ¤ge in Container scResContainer auf- oder absteigend (scModus). Unterverzeichnisse werden berÃ¼cksichtigt,
 		//falls scDirSub den Wert true hat.
 		//
 		//Ablauf:
 		//1. Variablen initialisieren
-		//2. Einträge aus Container sammeln
-		//3. Einträge sortieren
-		//4. neue Reihenfolge übernehmen
-		//5. Vermerken, dass ein Mal Veränderungen vorgenommen wurden, damit später gespeichert wird
+		//2. EintrÃ¤ge aus Container sammeln
+		//3. EintrÃ¤ge sortieren
+		//4. neue Reihenfolge Ã¼bernehmen
+		//5. Vermerken, dass ein Mal VerÃ¤nderungen vorgenommen wurden, damit spÃ¤ter gespeichert wird
 		//6. sortierte Liste auf Festplatte schreiben
 		//7. Damit die Boxen zum Auf-/Zuklappen von Verzeichnissen dargestellt werden, ist ein rebuild des Tree notwendig
 
@@ -806,15 +791,15 @@ var sbp2Manage = {
 		var scType				= "";
 		var scItemLastNr		= -1;
 		var scChanged			= 0;	//0 -> innere Schleife verlassen
-		var scChangedAll		= 0;	//0 -> äussere Schleife verlassen
-		var scChangedAll2		= 0;	//1 -> in irgendeinem der folder in scListFolder wurde mindestens eine Veränderung vorgenommen -> speichern
+		var scChangedAll		= 0;	//0 -> Ã¤ussere Schleife verlassen
+		var scChangedAll2		= 0;	//1 -> in irgendeinem der folder in scListFolder wurde mindestens eine VerÃ¤nderung vorgenommen -> speichern
 		var scTemp				= null;
 		var scVal1				= null;
 		var scVal2				= null;
 		scListFolder.push(scResContainer);
 		for ( var scA=0; scA<scListFolder.length; scA++ )
 		{
-			//2. Einträge aus Container sammeln
+			//2. EintrÃ¤ge aus Container sammeln
 			scListType			= [];
 			scListItem			= [];
 			scListItemNr		= [];
@@ -838,7 +823,7 @@ var sbp2Manage = {
 					scListType.push(0);
 				}
 			}
-			//3. Einträge sortieren
+			//3. EintrÃ¤ge sortieren
 			scItemLastNr = scListItem.length;
 			scChangedAll = 0;
 			if ( scModus == 0 ) {
@@ -850,7 +835,7 @@ var sbp2Manage = {
 					{
 						if ( scListType[scListItemNr[scJ]] == 1 ) {
 							if ( scListType[scListItemNr[scJ+1]] == 1 ) {
-								//Tausch prüfen
+								//Tausch prÃ¼fen
 								scVal1 = sbp2DataSource.propertyGet(sbp2DataSource.dbData, scListItem[scListItemNr[scJ]], "title");
 								scVal2 = sbp2DataSource.propertyGet(sbp2DataSource.dbData, scListItem[scListItemNr[scJ+1]], "title");
 								if (  scVal1 > scVal2 ) {
@@ -862,12 +847,12 @@ var sbp2Manage = {
 									scChangedAll2 = 1;
 								}
 							} else if ( scListType[scListItemNr[scJ+1]] == 2 ) {
-								//den folgenden separator überspringen
+								//den folgenden separator Ã¼berspringen
 								scJ++;
 							}
 						} else if ( scListType[scListItemNr[scJ]] == 0 ) {
 							if ( scListType[scListItemNr[scJ+1]] == 1 ) {
-								//tauschen, da folder immer über normalen Einträgen stehen
+								//tauschen, da folder immer Ã¼ber normalen EintrÃ¤gen stehen
 								scTemp = scListItemNr[scJ];
 								scListItemNr[scJ] = scListItemNr[scJ+1];
 								scListItemNr[scJ+1] = scTemp;
@@ -875,10 +860,10 @@ var sbp2Manage = {
 								scChangedAll = 1;
 								scChangedAll2 = 1;
 							} else if ( scListType[scListItemNr[scJ+1]] == 2 ) {
-								//den folgenden separator überspringen
+								//den folgenden separator Ã¼berspringen
 								scJ++;
 							} else {
-								//Tausch prüfen
+								//Tausch prÃ¼fen
 								scVal1 = sbp2DataSource.propertyGet(sbp2DataSource.dbData, scListItem[scListItemNr[scJ]], "title");
 								scVal2 = sbp2DataSource.propertyGet(sbp2DataSource.dbData, scListItem[scListItemNr[scJ+1]], "title");
 								if (  scVal1 > scVal2 ) {
@@ -892,7 +877,7 @@ var sbp2Manage = {
 							}
 						}
 					}
-					//Falls keine Änderung durchgeführt wurde, kann das Sortieren beendet werden.
+					//Falls keine Ã¤nderung durchgefÃ¼hrt wurde, kann das Sortieren beendet werden.
 					if ( scChanged == 0 ) {
 						scI = scListItem.length;
 						scJ = scItemLastNr;
@@ -907,7 +892,7 @@ var sbp2Manage = {
 					{
 						if ( scListType[scListItemNr[scJ]] == 1 ) {
 							if ( scListType[scListItemNr[scJ+1]] == 1 ) {
-								//Tausch prüfen
+								//Tausch prÃ¼fen
 								scVal1 = sbp2DataSource.propertyGet(sbp2DataSource.dbData, scListItem[scListItemNr[scJ]], "title");
 								scVal2 = sbp2DataSource.propertyGet(sbp2DataSource.dbData, scListItem[scListItemNr[scJ+1]], "title");
 								if (  scVal1 < scVal2 ) {
@@ -918,22 +903,22 @@ var sbp2Manage = {
 									scChangedAll = 1;
 								}
 							} else if ( scListType[scListItemNr[scJ+1]] == 2 ) {
-								//den folgenden separator überspringen
+								//den folgenden separator Ã¼berspringen
 								scJ++;
 							}
 						} else if ( scListType[scListItemNr[scJ]] == 0 ) {
 							if ( scListType[scListItemNr[scJ+1]] == 1 ) {
-								//tauschen, da folder immer über normalen Einträgen stehen
+								//tauschen, da folder immer Ã¼ber normalen EintrÃ¤gen stehen
 								scTemp = scListItemNr[scJ];
 								scListItemNr[scJ] = scListItemNr[scJ+1];
 								scListItemNr[scJ+1] = scTemp;
 								scChanged = 1;
 								scChangedAll = 1;
 							} else if ( scListType[scListItemNr[scJ+1]] == 2 ) {
-								//den folgenden separator überspringen
+								//den folgenden separator Ã¼berspringen
 								scJ++;
 							} else {
-								//Tausch prüfen
+								//Tausch prÃ¼fen
 								scVal1 = sbp2DataSource.propertyGet(sbp2DataSource.dbData, scListItem[scListItemNr[scJ]], "title");
 								scVal2 = sbp2DataSource.propertyGet(sbp2DataSource.dbData, scListItem[scListItemNr[scJ+1]], "title");
 								if (  scVal1 < scVal2 ) {
@@ -946,16 +931,16 @@ var sbp2Manage = {
 							}
 						}
 					}
-					//Falls keine Änderung durchgeführt wurde, kann das Sortieren beendet werden.
+					//Falls keine Ã¤nderung durchgefÃ¼hrt wurde, kann das Sortieren beendet werden.
 					if ( scChanged == 0 ) {
 						scI = scListItem.length;
 						scJ = scItemLastNr;
 					}
 				}
 			}
-			//Anpassungen sind nur erforderlich, falls Einträge verschoben wurden.
+			//Anpassungen sind nur erforderlich, falls EintrÃ¤ge verschoben wurden.
 			if ( scChangedAll == 1 ) {
-				//4. neue Reihenfolge übernehmen
+				//4. neue Reihenfolge Ã¼bernehmen
 				for ( var scI=0; scI<scListItem.length; scI++ )
 				{
 					if ( scListItemNr[scI] != scI ) {
@@ -963,11 +948,11 @@ var sbp2Manage = {
 						scCont.InsertElementAt(scRes, scI+1, false);
 					}
 				}
-				//5. Vermerken, dass ein Mal Veränderungen vorgenommen wurden, damit später gespeichert wird
+				//5. Vermerken, dass ein Mal VerÃ¤nderungen vorgenommen wurden, damit spÃ¤ter gespeichert wird
 				scChangedAll2 = 1;
 			}
 		}
-		//Anpassungen sind nur erforderlich, falls Einträge verschoben wurden.
+		//Anpassungen sind nur erforderlich, falls EintrÃ¤ge verschoben wurden.
 		if ( scChangedAll2 == 1 ) {
 			//6. sortierte Liste auf Festplatte schreiben
 			sbp2DataSource.dsFlush(sbp2DataSource.dbData);
@@ -978,16 +963,16 @@ var sbp2Manage = {
 
 	tCheckButtons : function(tcbMode, tcbTreeString)
 	{
-		//Prüft, welche Knöpfe aktiviert/deaktiviert werden
+		//PrÃ¼ft, welche KnÃ¶pfe aktiviert/deaktiviert werden
 		//
 		//Ablauf:
-		//1. Tree-Element, dessen Informationen geprüft werden, bestimmen
-		//2. Modus abfragen (je nach Modus müssen nur bestimmte Abfragen gemacht werden)
-		//3. Knöpfe aktivieren/deaktivieren
+		//1. Tree-Element, dessen Informationen geprÃ¼ft werden, bestimmen
+		//2. Modus abfragen (je nach Modus mÃ¼ssen nur bestimmte Abfragen gemacht werden)
+		//3. KnÃ¶pfe aktivieren/deaktivieren
 
-		//1. Tree-Element, dessen Informationen geprüft werden, bestimmen
+		//1. Tree-Element, dessen Informationen geprÃ¼ft werden, bestimmen
 		var tcbTree = document.getElementById(tcbTreeString);
-		//2. Modus abfragen (je nach Modus müssen nur bestimmte Abfragen gemacht werden)
+		//2. Modus abfragen (je nach Modus mÃ¼ssen nur bestimmte Abfragen gemacht werden)
 		if ( tcbMode == 1 ) {
 			if ( tcbTree.view.selection.count == 0 ) {
 				this.tLSelectedOK	= false;
@@ -1030,7 +1015,7 @@ var sbp2Manage = {
 				this.tRSelectedOK = true;
 			}
 		}
-		//3. Knöpfe aktivieren/deaktivieren
+		//3. KnÃ¶pfe aktivieren/deaktivieren
 		document.getElementById("sbp2MTBtnTagNew").disabled = !this.tLSelectedOK;
 		document.getElementById("sbp2MTBtnTagAdd").disabled = !( this.tLSelectedOK && this.tRSelectedOK );
 		document.getElementById("sbp2MTBtnTagSub").disabled = !( this.tLSelectedOK && this.tRSelectedOK );
@@ -1072,21 +1057,21 @@ var sbp2Manage = {
 		//
 		//Ablauf:
 		//1. Popupobjekt bestimmen
-		//2. Variable Einträge aus Popupobjekt entfernen
-		//3. Neue Einträge am Listenanfang des Popupobjekt einfügen
-		//4. Geöffnetes Buch hervorheben
+		//2. Variable EintrÃ¤ge aus Popupobjekt entfernen
+		//3. Neue EintrÃ¤ge am Listenanfang des Popupobjekt einfÃ¼gen
+		//4. GeÃ¶ffnetes Buch hervorheben
 
 		var mupDataPath = sbp2Prefs.getUnicharPref("extensions.scrapbookplus2.data.path");
 		var mupIsDefault = false;
 		if ( mupDataPath == "" ) mupIsDefault = true;
 		//1. Popupobjekt bestimmen
 		var mupPopup = document.getElementById("sbp2SidebarBSwitchMPopup");
-		//2. Variable Einträge entfernen
+		//2. Variable EintrÃ¤ge entfernen
 		while ( mupPopup.childNodes.length>4 )
 		{
 			mupPopup.removeChild(mupPopup.firstChild);
 		}
-		//3. Neue Einträge am Listenanfang einfügen
+		//3. Neue EintrÃ¤ge am Listenanfang einfÃ¼gen
 		var mupItems = this.mbLoadMultibookTxt();
 		for ( var mupI=mupItems.length-1; mupI>=0; mupI--)
 		{
@@ -1097,7 +1082,7 @@ var sbp2Manage = {
 			mupElt.setAttribute("label", mupItems[mupI][0]);
 			mupElt.setAttribute("path",  mupItems[mupI][1]);
 		}
-		//4. Geöffnetes Buch hervorheben
+		//4. GeÃ¶ffnetes Buch hervorheben
 		if ( mupIsDefault ) {
 			document.getElementById("sbp2SidebarBSwitchMItemDefault").setAttribute("checked", true);
 		} else {
@@ -1114,12 +1099,12 @@ var sbp2Manage = {
 
 	mbLoadMultibookTxt : function()
 	{
-		//Läd multiple.txt und zeigt die gefundenen Einträge in sbp2MMBTree an
+		//LÃ¤d multiple.txt und zeigt die gefundenen EintrÃ¤ge in sbp2MMBTree an
 		//
 		//Ablauf:
 		//1. Dateiobjekt erstellen
 		//2. Vorhandene Datei laden oder eine Leere erstellen
-		//3. Rückgabe der gefundenen Datensätze an aufrufende Funktion
+		//3. RÃ¼ckgabe der gefundenen DatensÃ¤tze an aufrufende Funktion
 
 		//1. Dateiobjekt erstellen
 		var lmtDatei = sbp2Common.PVZ.get("ProfD", Components.interfaces.nsIFile);
@@ -1130,7 +1115,7 @@ var sbp2Manage = {
 		if ( lmtDatei.exists() ) {
 			//Inhalt lesen
 			var lmtZeilen = sbp2Common.convertToUnicode(sbp2Common.fileRead(lmtDatei), "UTF-8").split("\n");
-			//Datensätze erstellen
+			//DatensÃ¤tze erstellen
 			for ( var lmtI=0; lmtI<lmtZeilen.length; lmtI++ )
 			{
 				var lmtDatensatz = lmtZeilen[lmtI].replace(/\r|\n/g,"").split("\t");
@@ -1140,21 +1125,21 @@ var sbp2Manage = {
 			//leere Datei anlegen
 			lmtDatei.create(lmtDatei.NORMAL_FILE_TYPE, parseInt("0666", 8));
 		}
-		//3. Rückgabe der gefundenen Datensätze an aufrufende Funktion
+		//3. RÃ¼ckgabe der gefundenen DatensÃ¤tze an aufrufende Funktion
 		return lmtDatensaetze;
 	},
 
 	mbAdd : function()
 	{
-		//Legt ein neues ScrapBook im Auswahlmenü an. Zunächst wird ein Fenster geöffnet, damit Name und Speicherort für ein neues ScrapBook eingegeben werden können.
+		//Legt ein neues ScrapBook im AuswahlmenÃ¼ an. ZunÃ¤chst wird ein Fenster geÃ¶ffnet, damit Name und Speicherort fÃ¼r ein neues ScrapBook eingegeben werden kÃ¶nnen.
 		//
 		//Ablauf:
-		//1. Fenster zur Angabe von Titel und Speicherort öffnen
+		//1. Fenster zur Angabe von Titel und Speicherort Ã¶ffnen
 		//2. Informationen verarbeiten, falls Fenster mit OK-Knopf geschlossen wurde
 		//	3. Sicherstellen, dass durch die Aufnahme kein doppelter Eintrag existiert
-		//	4. Eintrag aufnehmen, wenn zuvor keine Übereinstimmung gefunden wurde
+		//	4. Eintrag aufnehmen, wenn zuvor keine Ã¼bereinstimmung gefunden wurde
 
-		//1. Fenster zur Angabe von Titel und Speicherort öffnen
+		//1. Fenster zur Angabe von Titel und Speicherort Ã¶ffnen
 		var mbaRetVals = { name: "", folder: "", status: null };
 		window.openDialog("chrome://scrapbookplus2/content/sbp2MBEdit.xul", "", "chrome,centerscreen,modal", mbaRetVals);
 		//2. Informationen verarbeiten, falls Fenster mit OK-Knopf geschlossen wurde
@@ -1173,9 +1158,9 @@ var sbp2Manage = {
 						mbaI = mbaItems.length;
 					}
 				}
-				//4. Eintrag aufnehmen, wenn zuvor keine Übereinstimmung gefunden wurde
+				//4. Eintrag aufnehmen, wenn zuvor keine Ã¼bereinstimmung gefunden wurde
 				if ( mbaGefunden == 0 ) {
-					//Datensatz hinzufügen
+					//Datensatz hinzufÃ¼gen
 					var mbaItem = [];
 					mbaItem.push(mbaRetVals.name);
 					mbaItem.push(mbaRetVals.folder);
@@ -1208,7 +1193,7 @@ var sbp2Manage = {
 							var aTitem = document.createElement("treeitem");
 							aTitem.appendChild(aTrow);
 							aTchild.appendChild(aTitem);
-							//Zustand der Sortierknöpfe anpassen
+							//Zustand der SortierknÃ¶pfe anpassen
 							this.mbTreeSortEnable();
 						}
 					}
@@ -1219,17 +1204,17 @@ var sbp2Manage = {
 
 	mbDel : function()
 	{
-		//Selektiertes ScrapBook aus Auswahlmenü entfernen
+		//Selektiertes ScrapBook aus AuswahlmenÃ¼ entfernen
 		//
 		//Ablauf:
 		//1. Treeobjekt bestimmen
-		//2. Ein geöffnetes Buch kann nicht entfernt werden!
-		//3. Sicherheitsabfrage (wirklich löschen?)
-		//3a. Eintrag entfernen und Titel merken für Bereinigung der Datei multibook.txt
+		//2. Ein geÃ¶ffnetes Buch kann nicht entfernt werden!
+		//3. Sicherheitsabfrage (wirklich lÃ¶schen?)
+		//3a. Eintrag entfernen und Titel merken fÃ¼r Bereinigung der Datei multibook.txt
 
 		//1. Treeobjekt bestimmen
 		var mbdTree = document.getElementById("sbp2MMBTree");
-		//2. Ein geöffnetes Buch kann nicht entfernt werden!
+		//2. Ein geÃ¶ffnetes Buch kann nicht entfernt werden!
 		var mbdStatus = "";
 		for (var mbdI=0; mbdI<mbdTree.childNodes.length;mbdI++) {
 			if (mbdTree.childNodes[mbdI].nodeName == "treechildren")
@@ -1239,9 +1224,9 @@ var sbp2Manage = {
 			alert(document.getElementById("sbp2ManageString").getString("OPENBOOKERROR"));
 			return;
 		}
-		//3. Sicherheitsabfrage (wirklich löschen?)
+		//3. Sicherheitsabfrage (wirklich lÃ¶schen?)
 		if ( window.confirm(document.getElementById("sbp2CommonString").getString("QUESTION_DELETE_S")) ) {
-			//3a. Eintrag entfernen und Titel merken für Bereinigung der Datei multibook.txt
+			//3a. Eintrag entfernen und Titel merken fÃ¼r Bereinigung der Datei multibook.txt
 			var mbdTitel = "";
 			for (var mbdI=0; mbdI<mbdTree.childNodes.length;mbdI++) {
 				if (mbdTree.childNodes[mbdI].nodeName == "treechildren") {
@@ -1275,15 +1260,15 @@ var sbp2Manage = {
 
 	mbEdit : function()
 	{
-		//Titel oder Speicherort von selektiertem ScrapBook anpassen. Die Werte von einem geöffnetem Buch können nicht angepasst werden.
+		//Titel oder Speicherort von selektiertem ScrapBook anpassen. Die Werte von einem geÃ¶ffnetem Buch kÃ¶nnen nicht angepasst werden.
 		//
 		//Ablauf:
-		//1. Ein geöffnetes Buch kann nicht editiert werden!
+		//1. Ein geÃ¶ffnetes Buch kann nicht editiert werden!
 		//2. Variablen initialisieren
 		//3. Titel und Speicherord des selektierten Buchs bestimmen
-		//3.1 Fenster zum Ändern der Werte öffnen
+		//3.1 Fenster zum Ã¤ndern der Werte Ã¶ffnen
 
-		//1. Ein geöffnetes Buch kann nicht editiert werden!
+		//1. Ein geÃ¶ffnetes Buch kann nicht editiert werden!
 		var mbeStatus = "";
 		var mbeTree = document.getElementById("sbp2MMBTree");
 		for (var mbeI=0; mbeI<mbeTree.childNodes.length;mbeI++) {
@@ -1292,7 +1277,7 @@ var sbp2Manage = {
 			}
 		}
 		if ( mbeStatus == "active" ) {
-			alert("Ein geöffnetes Buch kann nicht editiert werden!");
+			alert("Ein geÃ¶ffnetes Buch kann nicht editiert werden!");
 			return;
 		}
 		//2. Variablen initialisieren
@@ -1304,10 +1289,10 @@ var sbp2Manage = {
 			if ( mbeTree.childNodes[mbeI].nodeName == "treechildren" ) {
 				mbeTitle = mbeTree.childNodes[mbeI].childNodes[mbeTree.view.selection.currentIndex].childNodes[0].childNodes[0].getAttribute("label");
 				mbePfad = mbeTree.childNodes[mbeI].childNodes[mbeTree.view.selection.currentIndex].childNodes[0].childNodes[1].getAttribute("label");
-				//3.1 Fenster zum Ändern der Werte öffnen
+				//3.1 Fenster zum Ã¤ndern der Werte Ã¶ffnen
 				var mbeRetVals = { name: mbeTitle, folder: mbePfad, status: null };
 				window.openDialog("chrome://scrapbookplus2/content/sbp2MBEdit.xul", "", "chrome,centerscreen,modal", mbeRetVals);
-				//3.2 Werte für gewählten Eintrag aktualisieren, falls das Fenster mit "OK" geschlossen wurde
+				//3.2 Werte fÃ¼r gewÃ¤hlten Eintrag aktualisieren, falls das Fenster mit "OK" geschlossen wurde
 				if ( mbeRetVals.status == 1 ) {
 					//Datensatz modifizieren
 					var mbeData = "";
@@ -1341,7 +1326,7 @@ var sbp2Manage = {
 	mbOnKeyPress : function(mbokpEvent)
 	{
 		//F2  -> Editieren des Eintrags
-		//del -> Löschen des Eintrags
+		//del -> LÃ¶schen des Eintrags
 
 		if ( document.getElementById("sbp2MMBBtnEdit").disabled == false ) {
 			switch ( mbokpEvent.keyCode )
@@ -1362,7 +1347,7 @@ var sbp2Manage = {
 
 	mbSelected : function()
 	{
-		//Editieren bzw. Löschen eines selektierten Eintrags zulassen.
+		//Editieren bzw. LÃ¶schen eines selektierten Eintrags zulassen.
 		if ( document.getElementById("sbp2MMBTree").view.selection.currentIndex > -1 ) {
 			document.getElementById("sbp2MMBBtnEdit").disabled = false;
 			document.getElementById("sbp2MMBBtnEdit").image = "chrome://scrapbookplus2/skin/manage_mbedit.png";
@@ -1373,23 +1358,23 @@ var sbp2Manage = {
 
 	mbSort : function(mbsRichtung)
 	{
-		//Die Einträge im Auswahlmenü werden alphabetisch auf- bzw. absteigend sortiert
+		//Die EintrÃ¤ge im AuswahlmenÃ¼ werden alphabetisch auf- bzw. absteigend sortiert
 		//
 		//Ablauf:
 		//1. Variablen initialisieren
-		//2. Index des childNode bestimmen, der die Zeilen mit den Daten enthält
+		//2. Index des childNode bestimmen, der die Zeilen mit den Daten enthÃ¤lt
 		//3. Eine Liste mit den Titeln sowie eine weitere mit der Reihenfolge der Titel erstellen
-		//4. Einträge sortieren mit Bubble Sort
+		//4. EintrÃ¤ge sortieren mit Bubble Sort
 		//5. multibook.txt aktualisieren
 		//6a. Inhalt des tree aktualisieren
-		//6b. Symbol für Sortierrichtung aktualisieren
+		//6b. Symbol fÃ¼r Sortierrichtung aktualisieren
 
 		//1. Variablen initialisieren
 		var mbsItems = this.mbDatensaetze;
 		var mbsReihenfolge = [];
 		var mbsGetauscht = 0;
 		var mbsTreeChildrenIndex = -1;
-		//2. Index des childNode bestimmen, der die Zeilen mit den Daten enthält
+		//2. Index des childNode bestimmen, der die Zeilen mit den Daten enthÃ¤lt
 		var mbsTree = document.getElementById("sbp2MMBTree");
 		for ( var mbsI=0; mbsI<mbsTree.childNodes.length; mbsI++ ) {
 			if ( mbsTree.childNodes[mbsI].nodeName == "treechildren" ) {
@@ -1401,7 +1386,7 @@ var sbp2Manage = {
 		for ( var mbsI=0; mbsI<mbsItems.length; mbsI++ ) {
 			mbsReihenfolge.push(mbsI);
 		}
-		//4. Einträge sortieren mit Bubble Sort
+		//4. EintrÃ¤ge sortieren mit Bubble Sort
 		var mbsAnzahl = mbsItems.length;
 		if ( mbsRichtung == 0 ) {
 			for ( var mbsI=0; mbsI<mbsItems.length-1; mbsI++ ) {
@@ -1455,7 +1440,7 @@ var sbp2Manage = {
 			}
 			this.mbTreeUpdate(mbsItems);
 		}
-		//6b. Symbol für Sortierrichtung aktualisieren
+		//6b. Symbol fÃ¼r Sortierrichtung aktualisieren
 		if ( mbsRichtung == 0 ) {
 			document.getElementById("sbp2MMBColTitle").setAttribute("sortDirection", "ascending");
 		} else {
@@ -1465,7 +1450,7 @@ var sbp2Manage = {
 
 	mbTreeSortEnable : function()
 	{
-		//Erlaubt das Sortieren der Einträge, sofern mehr als ein Eintrag vorhanden ist
+		//Erlaubt das Sortieren der EintrÃ¤ge, sofern mehr als ein Eintrag vorhanden ist
 		if ( this.mbDatensaetze.length > 1 ) {
 			document.getElementById("sbp2MMBBtnSortUp").disabled = false;
 			document.getElementById("sbp2MMBBtnSortUp").image = "chrome://scrapbookplus2/skin/manage_sortup.png";
@@ -1481,12 +1466,12 @@ var sbp2Manage = {
 
 	mbTreeUpdate : function(mbtuDatensaetze)
 	{
-		//Läd die übergebenen Datensätze in sbp2MMBTree
+		//LÃ¤d die Ã¼bergebenen DatensÃ¤tze in sbp2MMBTree
 		//
 		//Ablauf:
 		//1. Treeobjekt bestimmen
 		//2. Tree leeren
-		//3. Datensätze in Tree einfügen
+		//3. DatensÃ¤tze in Tree einfÃ¼gen
 
 		//1. Treeobjekt bestimmen
 		var mbtuTree = document.getElementById("sbp2MMBTree");
@@ -1496,7 +1481,7 @@ var sbp2Manage = {
 		{
 			mbtuTree.childNodes[1].removeChild(mbtuTree.childNodes[1].childNodes[mbtuI]);
 		}
-		//3. Datensätze in Tree einfügen
+		//3. DatensÃ¤tze in Tree einfÃ¼gen
 		for ( var mbtuI=0; mbtuI<mbtuDatensaetze.length; mbtuI++ )
 		{
 			for ( var mbtuJ=0; mbtuJ<mbtuTree.childNodes.length; mbtuJ++ )
@@ -1524,12 +1509,12 @@ var sbp2Manage = {
 
 	selectAll : function()
 	{
-		//Alle Einträge im Tree auswählen
+		//Alle EintrÃ¤ge im Tree auswÃ¤hlen
 		//
 		//Ablauf:
 		//1. Variablen initialisieren
 		//2. ID des fokusierten Tree-Elements bestimmen (saError -> true, falls kein Tree fokusiert ist)
-		//3. alle Einträge im Tree auswählen, falls ein Tree fokusiert ist
+		//3. alle EintrÃ¤ge im Tree auswÃ¤hlen, falls ein Tree fokusiert ist
 
 		//1. Variablen initialisieren
 		var saElement	= document.commandDispatcher.focusedElement;
@@ -1551,7 +1536,7 @@ if ( !saElement ) alert(saElement);
 			case 4:
 				if ( saElementID != "sbp2MMBTree" ) saError = true; break;
 		}
-		//3. alle Einträge im Tree auswählen, falls ein Tree fokusiert ist
+		//3. alle EintrÃ¤ge im Tree auswÃ¤hlen, falls ein Tree fokusiert ist
 		if ( !saError ) {
 //			var saTree = document.getElementById(saElementID);
 			saElement.view.selection.selectAll();
@@ -1560,16 +1545,16 @@ if ( !saElement ) alert(saElement);
 
 	statsCalculateSize : function(scsFolder)
 	{
-		//Bestimmt die Gesamtgröße aller Dateien im Verzeichnis und gibt die Summe an die aufrufende Funktion zurück.
+		//Bestimmt die GesamtgrÃ¶ÃŸe aller Dateien im Verzeichnis und gibt die Summe an die aufrufende Funktion zurÃ¼ck.
 		//
 		//Ablauf
 		//1. Variablen initialisieren
-		//2. Größe der Dateien im Verzeichnis zusammenzählen
-		//3. Rückgabe der Gesamtgröße in Byte an aufrufende Funktion
+		//2. GrÃ¶ÃŸe der Dateien im Verzeichnis zusammenzÃ¤hlen
+		//3. RÃ¼ckgabe der GesamtgrÃ¶ÃŸe in Byte an aufrufende Funktion
 
 		//1. Variablen initialisieren
 		var scsDatasize = 0;
-		//2. Größe der Dateien im Verzeichnis zusammenzählen
+		//2. GrÃ¶ÃŸe der Dateien im Verzeichnis zusammenzÃ¤hlen
 		try
 		{
 			var scsFolderEnum = scsFolder.directoryEntries;
@@ -1582,7 +1567,7 @@ if ( !saElement ) alert(saElement);
 		{
 			alert("sbp2Manage.statsCalculateSize\n---\n"+scsEx);
 		}
-		//3. Rückgabe der Gesamtgröße in Byte an aufrufende Funktion
+		//3. RÃ¼ckgabe der GesamtgrÃ¶ÃŸe in Byte an aufrufende Funktion
 		return scsDatasize;
 	},
 
@@ -1608,7 +1593,7 @@ if ( !saElement ) alert(saElement);
 		try
 		{
 			sdsDirectory = sdsDirectory.QueryInterface(Components.interfaces.nsILocalFile);
-			sdsDirectory.launch();
+			sdsDirectory.reveal();
 		} catch(dsEx)
 		{
 			alert("sbp2Manage.statsDirectoryShow\n---\n"+dsEx);
@@ -1621,14 +1606,14 @@ if ( !saElement ) alert(saElement);
 		//
 		//Ablauf:
 		//1. Variablen initialisieren
-		//2. ssfGroesse umrechnen in gewünschte Einheit
-		//3. Anhängen der Nachkommastellen
-		//4. Übergabe von ssfString an aufrufende Funktion
+		//2. ssfGroesse umrechnen in gewÃ¼nschte Einheit
+		//3. AnhÃ¤ngen der Nachkommastellen
+		//4. Ã¼bergabe von ssfString an aufrufende Funktion
 
 		//1. Variablen initialisieren
 		var ssfUnit = new Array("B","kB","MB");
 		var ssfUnitNr = 0;
-		//2. ssfGroesse umrechnen in gewünschte Einheit
+		//2. ssfGroesse umrechnen in gewÃ¼nschte Einheit
 		if ( ssfSize == -1 ) return -1;
 		switch (ssfIdx)
 		{
@@ -1647,7 +1632,7 @@ if ( !saElement ) alert(saElement);
 			default:
 				break;
 		}
-		//3. Anhängen der Nachkommastellen
+		//3. AnhÃ¤ngen der Nachkommastellen
 		var ssfString;
 		if ( ssfUnitNr == 2 ) {
 			ssfString = (Math.round(ssfSize * 100) / 100).toString();
@@ -1657,20 +1642,20 @@ if ( !saElement ) alert(saElement);
 			ssfString = (Math.round(ssfSize)).toString();
 		}
 		ssfString = ssfString.concat(" "+ssfUnit[ssfUnitNr]);
-		//4. Übergabe von ssfString an aufrufende Funktion
+		//4. Ã¼bergabe von ssfString an aufrufende Funktion
 		return ssfString;
 	},
 
 	statsRepair : function()
 	{
-		//Löscht leere Verzeichnisse
+		//LÃ¶scht leere Verzeichnisse
 		//
 		//Ablauf:
 		//1. Variablen initialisieren
-		//2. Verzeichnis auf Datenträger löschen
-		//3. Einträge im Tree löschen
-		//4. Eintrgäe für gelöschte Verzeichnisse aus this.statsItemsSorted entfernen
-		//5. Variablen zurücksetzen
+		//2. Verzeichnis auf DatentrÃ¤ger lÃ¶schen
+		//3. EintrÃ¤ge im Tree lÃ¶schen
+		//4. EintrgÃ¤e fÃ¼r gelÃ¶schte Verzeichnisse aus this.statsItemsSorted entfernen
+		//5. Variablen zurÃ¼cksetzen
 
 		if ( this.statsItemsDirEmpty>0 ) {
 			//1. Variablen initialisieren
@@ -1683,25 +1668,25 @@ if ( !saElement ) alert(saElement);
 				alert("sbp2Manage.statsRepair\n---\n\nCan't empty tree");
 				return;
 			}
-			//2. Verzeichnis auf Datenträger löschen
+			//2. Verzeichnis auf DatentrÃ¤ger lÃ¶schen
 			for ( var srI=0; srI<this.statsItemsSorted.length; srI++ )
 			{
-				//leeres Verzeichnis, Informationen im Speicher löschen
+				//leeres Verzeichnis, Informationen im Speicher lÃ¶schen
 				if (this.statsItems[this.statsItemsSorted[srI]].diagnostics == 3 ) {
 					var srFile = srDir.clone();
 					srFile.append(this.statsItems[this.statsItemsSorted[srI]].id);
-					//Verzeichnis wird nicht über sbp2Common.directoryRemove gelöscht, da es wirklich leer ist.
-//					srFile.remove(false);
+					//Verzeichnis wird nicht Ã¼ber sbp2Common.directoryRemove gelÃ¶scht, da es wirklich leer ist.
+					srFile.remove(false);
 					//
 					srItemsDeletedNr.push(srI);
 				}
 			}
-			//3. Einträge im Tree löschen
+			//3. EintrÃ¤ge im Tree lÃ¶schen
 			for ( var srI=srItemsDeletedNr.length-1; srI>=0; srI-- )
 			{
 				srTree.childNodes[1].removeChild(srTree.childNodes[1].childNodes[srItemsDeletedNr[srI]]);
 			}
-			//4. Eintrgäe für gelöschte Verzeichnisse aus this.statsItemsSorted entfernen
+			//4. EintrgÃ¤e fÃ¼r gelÃ¶schte Verzeichnisse aus this.statsItemsSorted entfernen
 			var srNr = 0;
 			for ( var srI=0; srI<this.statsItemsSorted.length; srI++ )
 			{
@@ -1716,23 +1701,23 @@ if ( !saElement ) alert(saElement);
 			{
 				this.statsItemsSorted.push(srTempItemsSorted[srI]);
 			}
-			//5. Variablen zurücksetzen
+			//5. Variablen zurÃ¼cksetzen
 			this.statsItemsDirEmpty = 0;
 		}
 	},
 
 	statsSort : function(ssColumn)
 	{
-		//Sortiert die Einträge im sbp2MSTree
+		//Sortiert die EintrÃ¤ge im sbp2MSTree
 		//
 		//Ablauf:
 		//1. Variablen initialisieren
 		//2. Neue Sortierreihenfolge festlegen
 		//3. Daten sortieren (es wird nur sbp2Manage.statsItemsSorted sortiert)
 		//4. Tree leeren
-		//5. Datensätze in Tree einfügen
+		//5. DatensÃ¤tze in Tree einfÃ¼gen
 		//6. alten Spaltenindikator entfernen
-		//7. neuen Spaltenindikator einfügen
+		//7. neuen Spaltenindikator einfÃ¼gen
 		//8. alten Treeindikator entfernen
 
 		//1. Variablen initialisieren
@@ -1810,7 +1795,7 @@ if ( !saElement ) alert(saElement);
 		{
 			ssTree.childNodes[1].removeChild(ssTree.childNodes[1].childNodes[ssI]);
 		}
-		//5. Datensätze in Tree einfügen
+		//5. DatensÃ¤tze in Tree einfÃ¼gen
 		for ( var ssI=0; ssI<this.statsItems.length; ssI++ )
 		{
 			var ssTrow = document.createElement("treerow");
@@ -1863,7 +1848,7 @@ if ( !saElement ) alert(saElement);
 		}
 		//6. alten Spaltenindikator entfernen
 		if ( ssColumnIDOld ) document.getElementById(ssColumnIDOld).removeAttribute("sortDirection");
-		//7. neuen Spaltenindikator einfügen
+		//7. neuen Spaltenindikator einfÃ¼gen
 		document.getElementById(ssColumn.id).setAttribute("sortDirection", ssOrder == 0 ? "ascending" : "descending");
 		//8. alten Treeindikator entfernen
 		ssTree.setAttribute("sortDirection", ssOrder == 0 ? "ascending" : "descending");
@@ -1877,21 +1862,21 @@ if ( !saElement ) alert(saElement);
 		//
 		//Ablauf:
 		//1. Variablen initialisieren
-		//2. Resources aller Einträge ohne Ordner (aber mit Ordnerinhalten) sammeln
+		//2. Resources aller EintrÃ¤ge ohne Ordner (aber mit Ordnerinhalten) sammeln
 		//3. Informationen zu Unterverzeichnissen im data-Verzeichnis sammeln
-		//4. Daten der Resources mit denen der Unterverzeichnisse zusammenführen
-		//5. Daten von nicht "sichtbaren" RDF-Einträgen sammeln
+		//4. Daten der Resources mit denen der Unterverzeichnisse zusammenfÃ¼hren
+		//5. Daten von nicht "sichtbaren" RDF-EintrÃ¤gen sammeln
 		//6. Treeobjekt bestimmen
 		//7. Tree leeren
-		//8. Datensätze in Tree einfügen
-		//9. Spaltensortierung zurücksetzen
+		//8. DatensÃ¤tze in Tree einfÃ¼gen
+		//9. Spaltensortierung zurÃ¼cksetzen
 		//
 		//Anmerkung:
 		//diagnostics kann Werte von 0-4 annehmen
 		//0 -> alles ok
 		//1 -> Verzeichnis mit index.dat, jedoch nicht sichtbar
 		//2 -> Verzeichnis ohne index.dat -> kaputter Inhalt
-		//3 -> leeres Verzeichnis (immer löschen inkl. eventuell vorhandener RDF-Einträge)
+		//3 -> leeres Verzeichnis (immer lÃ¶schen inkl. eventuell vorhandener RDF-EintrÃ¤ge)
 		//4 -> fehlerhafter RDF-Eintrag (keine Dateien oder nur RDF-Container-Eintrag)
 
 if ( !sbp2DataSource.dbData ) {
@@ -1908,7 +1893,7 @@ if ( !sbp2DataSource.dbData ) {
 		var suResListe			= null;
 		var suDirTemp			= sbp2Common.getBuchVZ();
 		suDirTemp.append("data");
-		//2. Resources aller Einträge ohne Ordner (aber mit Ordnerinhalten) sammeln
+		//2. Resources aller EintrÃ¤ge ohne Ordner (aber mit Ordnerinhalten) sammeln
 		suResListe = sbp2DataSource.dsGetResources(suData, sbp2Common.RDF.GetResource("urn:scrapbook:root"), 1, true);
 		//3. Informationen zu Unterverzeichnissen im data-Verzeichnis sammeln
 		var suDirTempEnum = suDirTemp.directoryEntries;
@@ -1939,7 +1924,7 @@ if ( !sbp2DataSource.dbData ) {
 			//Daten merken
 			this.statsDirectories.push(suDirectory);
 		}
-		//4. Daten der Resources mit denen der Unterverzeichnisse zusammenführen
+		//4. Daten der Resources mit denen der Unterverzeichnisse zusammenfÃ¼hren
 		for ( var suI=0; suI<suResListe.length; suI++ )
 		{
 			//Daten von Resource sammeln
@@ -1948,7 +1933,7 @@ if ( !sbp2DataSource.dbData ) {
 			suItem.id = sbp2DataSource.propertyGet(suData, suResListe[suI], "id");
 			suItem.type = sbp2DataSource.propertyGet(suData, suResListe[suI], "type");
 			suItem.icon = sbp2DataSource.propertyGet(suData, suResListe[suI], "icon");
-			//dazugehörendes Verzeichnis suchen
+			//dazugehÃ¶rendes Verzeichnis suchen
 			if ( suItem.type == "" || suItem.type == "note" || suItem.type == "site" ) {
 				suFound = 0;
 				for ( var suJ=0; suJ<this.statsDirectories.length; suJ++ )
@@ -1974,7 +1959,7 @@ if ( suI != this.statsItems.length ) alert("Fehler");
 			this.statsItemsSorted.push(this.statsItems.length);
 			this.statsItems.push(suItem);
 		}
-		//5. Daten von nicht "sichtbaren" RDF-Einträgen sammeln
+		//5. Daten von nicht "sichtbaren" RDF-EintrÃ¤gen sammeln
 		for ( var suI=0; suI<this.statsDirectories.length; suI++ )
 		{
 			if ( this.statsDirectories[suI].res == 0 ) {
@@ -1997,7 +1982,7 @@ if ( suI != this.statsItems.length ) alert("Fehler");
 		{
 			suTree.childNodes[1].removeChild(suTree.childNodes[1].childNodes[suI]);
 		}
-		//8. Datensätze in Tree einfügen
+		//8. DatensÃ¤tze in Tree einfÃ¼gen
 		for ( var suI=0; suI<this.statsItems.length; suI++ )
 		{
 			for ( var suJ=0; suJ<suTree.childNodes.length; suJ++ )
@@ -2053,7 +2038,7 @@ if ( suI != this.statsItems.length ) alert("Fehler");
 				}
 			}
 		}
-		//9. Spaltensortierung zurücksetzen
+		//9. Spaltensortierung zurÃ¼cksetzen
 		suTree.removeAttribute("sortResource");
 		suTree.removeAttribute("sortDirection");
 		document.getElementById("sbp2MSColTitle").removeAttribute("sortDirection");

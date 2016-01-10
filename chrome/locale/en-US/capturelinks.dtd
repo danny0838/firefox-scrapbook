@@ -1,0 +1,26 @@
+<!ENTITY sbp2.single.window				"Capture multiple URLs">
+<!ENTITY sbp2.single.tab.one			"General information">
+<!ENTITY sbp2.single.title				"Title">
+<!ENTITY sbp2.single.title.default		"Title of website">
+<!ENTITY sbp2.single.folder				"Folder">
+
+<!ENTITY sbp2.single.details.caption	"Capture linked websites">
+<!ENTITY sbp2.single.details.image		"Images (jpg, png, gif, tiff)">
+<!ENTITY sbp2.single.details.audio		"Sound (mp3, wav, ram, wma)">
+<!ENTITY sbp2.single.details.movie		"Movie (mpg, avi, mov, wmv)">
+<!ENTITY sbp2.single.details.archive	"Archive (zip, lzh, rar, jar, xpi)">
+<!ENTITY sbp2.single.details.custom		"Custom">
+<!ENTITY sbp2.single.timeout.label		"Timeout (in seconds)">
+
+<!ENTITY sbp2.include					"Include">
+<!ENTITY sbp2.include.pictures			"Images">
+<!ENTITY sbp2.include.styles			"Styles">
+<!ENTITY sbp2.include.java				"JavaScript">
+<!ENTITY sbp2.timeout					"Timeout (in seconds)">
+
+<!ENTITY sbp2.multiple.description		"URLs (enter them line-by-line)">
+<!ENTITY sbp2.multiple.ignore			"ignore already existing addresses in destination folder">
+<!ENTITY sbp2.multiple.filter			"Filter (regular expression)">
+<!ENTITY sbp2.multiple.detector			"URL detector">
+<!ENTITY sbp2.multiple.detector.links	"All links in the website">
+<!ENTITY sbp2.multiple.detector.clear	"Clear textbox">

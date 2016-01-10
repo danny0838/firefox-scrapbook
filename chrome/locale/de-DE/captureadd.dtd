@@ -1,0 +1,7 @@
+<!ENTITY sbp2.window						"Seite hinzufügen">
+
+<!ENTITY sbp2.captureadd.box				"Erweiterte Optionen">
+<!ENTITY sbp2.captureadd.details.custom		"Benutzerdefiniert">
+<!ENTITY sbp2.captureadd.depth.box			"Verzeichnistiefe der Links">
+<!ENTITY sbp2.captureadd.depth.radio4.tt	"Hier klicken, um einen Wert höher als 3 verwenden zu können">
+<!ENTITY sbp2.captureadd.timeout.label		"Wartezeit (in Sekunden)">

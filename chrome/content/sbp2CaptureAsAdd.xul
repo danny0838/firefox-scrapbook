@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet type="text/css" href="chrome://global/skin/" ?>
+
+<!DOCTYPE window SYSTEM "chrome://scrapbookplus2/locale/captureas.dtd">
+
+<dialog id="sbp2CaptureAsAdd"
+        title="ScrapBook Plus 2 - &sbp2.single.window;"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        style="width: 400px;"
+		onload="sbp2CaptureAsAdd.caInit();"
+		ondialogaccept="sbp2CaptureAsAdd.caAccept();"
+		ondialogcancel="window.arguments[1].dialogAccepted = false;">
+
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2CaptureAsAdd.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2DataSource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Prefs.js" />
+
+	<stringbundleset id="sbp2StringBundles">
+		<stringbundle id="sbp2CaptureAsString" src="chrome://scrapbookplus2/locale/captureas.properties" />
+	</stringbundleset>
+
+	<tabbox flex="1">
+		<tabs orient="horizontal">
+			<tab label="&sbp2.single.tab.one;" />
+		</tabs>
+		<tabpanels flex="1">
+			<tabpanel orient="vertical">
+				<grid>
+					<columns>
+						<column />
+						<column flex="1" />
+					</columns>
+					<rows>
+						<row>
+							<label control="sbp2DetailTitle" value="&sbp2.single.title;:" />
+							<textbox id="sbp2DetailTitle" disabled="true" />
+						</row>
+					</rows>
+				</grid>
+				<hbox>
+					<label value="&sbp2.include;:" />
+					<checkbox id="sbp2DetailOptionImages" label="&sbp2.include.pictures;" checked="true" />
+					<checkbox id="sbp2DetailOptionStyles" label="&sbp2.include.styles;" checked="true" />
+					<checkbox id="sbp2DetailOptionScript" label="&sbp2.include.java;" />
+				</hbox>
+				<groupbox>
+					<caption label="&sbp2.single.details.caption;" />
+					<checkbox id="sbp2DetailImage"   persist="checked" label="&sbp2.single.details.image;" />
+					<checkbox id="sbp2DetailSound"   persist="checked" label="&sbp2.single.details.audio;" />
+					<checkbox id="sbp2DetailMovie"   persist="checked" label="&sbp2.single.details.movie;" />
+					<checkbox id="sbp2DetailArchive" persist="checked" label="&sbp2.single.details.archive;" />
+					<hbox>
+						<checkbox id="sbp2DetailCustom" persist="checked" label="&sbp2.single.details.custom;" />
+						<textbox id="sbp2DetailCustomExt" flex="1" disabled="true" />
+					</hbox>
+				</groupbox>
+				<groupbox id="sbp2DetailInDepthBox">
+					<caption label="&sbp2.single.depth.box;" />
+					<hbox>
+						<radiogroup id="sbp2DetailInDepthRadioGroup"  onclick="sbp2CaptureAsAdd.idcSetDepth(event);" orient="horizontal">
+							<radio label="0" disabled="true" />
+							<radio label="1" selected="true" />
+							<radio label="2" />
+							<radio label="3" />
+							<radio label="?" tooltiptext="&sbp2.single.depth.radio4.tt;" />
+						</radiogroup>
+						<toolbarbutton class="plain" image="chrome://scrapbookplus2/skin/expander.png" />
+					</hbox>
+				</groupbox>
+				<groupbox id="sbp2DetailTimeoutBox">
+					<caption label="&sbp2.single.timeout.label;" />
+					<hbox>
+						<radiogroup id="sbp2DetailTimeoutRadioGroup" orient="horizontal" disabled="true">
+							<radio label="0" selected="true" />
+							<radio label="1" />
+							<radio label="2" />
+							<radio label="3" />
+						</radiogroup>
+					</hbox>
+				</groupbox>
+				<groupbox id="sbp2DetailCharsetBox" hidden="true">
+					<caption label="Zeichensatz" />
+					<hbox>
+						<radiogroup id="sbp2DetailCharsetRadioGroup" orient="horizontal">
+							<radio label="automatisch" selected="true" />
+							<radio label="ISO-8859-1" />
+							<radio label="UTF-8" />
+						</radiogroup>
+					</hbox>
+				</groupbox>
+			</tabpanel>
+			<tabpanel>
+				<textbox id="sbp2DetailComment" flex="1" multiline="true" spellcheck="true" />
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+
+</dialog>

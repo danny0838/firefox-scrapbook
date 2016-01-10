@@ -1,0 +1,29 @@
+<!ENTITY sbp2.capture.title					"Archivierung">
+
+<!ENTITY sbp2.capture.btn.start				"Start">
+<!ENTITY sbp2.capture.btn.pause				"Pause">
+<!ENTITY sbp2.capture.btn.skip				"Überspringen">
+<!ENTITY sbp2.capture.btn.finish			"Beenden">
+
+<!ENTITY sbp2.capture.checkbox.all			"alle auswählen">
+<!ENTITY sbp2.capture.checkbox.none			"alle abwählen">
+
+<!ENTITY sbp2.capture.select				"markierte Einträge auswählen">
+<!ENTITY sbp2.capture.deselect				"markierte Einträge abwählen">
+
+<!ENTITY sbp2.capture.tree.url				"URL">
+<!ENTITY sbp2.capture.tree.title			"Titel">
+<!ENTITY sbp2.capture.tree.mode				"Modus">
+<!ENTITY sbp2.capture.tree.state			"Status">
+
+<!ENTITY sbp2.capture.filter				"Filter">
+<!ENTITY sbp2.capture.filter.inc			"Include">
+<!ENTITY sbp2.capture.filter.exc			"Exclude">
+<!ENTITY sbp2.capture.filter.btn.accept		"OK">
+<!ENTITY sbp2.capture.filter.btn.accept.tt	"Wert übernehmen/Wert ändern">
+<!ENTITY sbp2.capture.filter.btn.cancel		"Abbrechen">
+<!ENTITY sbp2.capture.filter.btn.cancel.tt	"Editieren abbrechen">
+<!ENTITY sbp2.capture.filter.btn.remove		"Entfernen">
+<!ENTITY sbp2.capture.filter.btn.remove.tt	"Filter aus der Liste enfernen">
+<!ENTITY sbp2.capture.filter.regexp			"Filter (regulärer Ausdruck)">
+<!ENTITY sbp2.capture.filter.show			"Ein-/Ausblenden">

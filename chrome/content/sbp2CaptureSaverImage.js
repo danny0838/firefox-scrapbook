@@ -7,12 +7,12 @@ var sbp2CaptureSaverImage = {
 		//
 		//Ablauf:
 		//1. Zielverzeichnis anlegen
-		//2. Canvas mit Daten f�llen
+		//2. Canvas mit Daten füllen
 		//3. Daten in Canvas umwandeln
 		//4. Daten als PNG-Datei im Zielverzeichnis ablegen
 		//5. index.html schreiben
 		//6. index.dat schreiben
-		//7. Eintrag aufnehmen
+		//7. Archivierung abschließen
 
 		//1. Zielverzeichnis anlegen
 		var sNewID = sbp2Common.directoryCreate();
@@ -21,14 +21,14 @@ var sbp2CaptureSaverImage = {
 		sFile.append("data");
 		sFile.append(sNewID);
 		sFile.append("index"+sExt);
-		//2. Canvas mit Daten f�llen
+		//2. Canvas mit Daten füllen
 		var sCanvas = document.createElementNS("http://www.w3.org/1999/xhtml", "html:canvas");
 		var sContext = sCanvas.getContext("2d");
-		sCanvas.height = sContent.document.documentElement.offsetHeight;
-		sCanvas.width = sContent.document.documentElement.offsetWidth;
+		sCanvas.height = sContent.document.documentElement.scrollHeight;
+		sCanvas.width = sContent.document.documentElement.scrollWidth;
 		try
 		{
-			sContext.drawWindow(sContent, 0, 0, sContent.document.documentElement.offsetWidth, sContent.document.documentElement.offsetHeight, "rgb(255,255,255)");
+			sContext.drawWindow(sContent, 0, 0, sContent.document.documentElement.scrollWidth, sContent.document.documentElement.scrollHeight, "rgb(255,255,255)");
 		} catch (sEx)
 		{
 			alert("sbp2CaptureSaverImage.save\n---\n"+sEx);
@@ -81,8 +81,8 @@ var sbp2CaptureSaverImage = {
 		sFile = sFile.parent;
 		sFile.append("index.dat");
 		sbp2Common.fileWriteIndexDat(sFile.path, sItem);
-		//7. Eintrag aufnehmen
-		sbp2DataSource.itemAdd(sdbData, sItem, sbp2Common.RDF.GetResource("urn:scrapbook:root"), -1);
+		//7. Archivierung abschließen
+		sbp2Common.captureTabFinish(sItem, sbp2Common.RDF.GetResource("urn:scrapbook:root"), -1, 9);
 	},
 
 }

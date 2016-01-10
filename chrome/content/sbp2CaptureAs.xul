@@ -66,11 +66,10 @@
 						<textbox id="sbp2DetailCustomExt" flex="1" disabled="true" />
 					</hbox>
 				</groupbox>
-				<groupbox id="sbp2DetailInDepthBox" hidden="true">
-					<caption label="Hier fehlt Text" />
+				<groupbox id="sbp2DetailInDepthBox">
+					<caption label="&sbp2.single.depth.box;" />
 					<hbox>
-						<label id="sbp2DetailInDepthLabel" value="&sbp2.single.depth.label;:" />
-						<radiogroup id="sbp2DetailInDepthRadioGroup"  onclick="sbp2CaptureAs.setIndividualDepth(event);" orient="horizontal">
+						<radiogroup id="sbp2DetailInDepthRadioGroup"  onclick="sbp2CaptureAs.idcSetDepth(event);" orient="horizontal">
 							<radio label="0" selected="true" />
 							<radio label="1" />
 							<radio label="2" />
@@ -80,10 +79,10 @@
 						<toolbarbutton class="plain" image="chrome://scrapbookplus2/skin/expander.png" />
 					</hbox>
 				</groupbox>
-				<groupbox id="sbp2DetailTimeoutBox" hidden="true">
+				<groupbox id="sbp2DetailTimeoutBox">
 					<caption label="&sbp2.single.timeout.label;" />
 					<hbox>
-						<radiogroup id="sbp2DetailTimeoutRadioGroup" orient="horizontal">
+						<radiogroup id="sbp2DetailTimeoutRadioGroup" orient="horizontal" disabled="true">
 							<radio label="0" selected="true" />
 							<radio label="1" />
 							<radio label="2" />

@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+
+<?xml-stylesheet type="text/css" href="chrome://global/skin/" ?>
+
+<!DOCTYPE window SYSTEM "chrome://scrapbookplus2/locale/capturelinks.dtd">
+
+<dialog id="sbp2CaptureLinks"
+        title="ScrapBook Plus 2 - &sbp2.single.window;"
+        xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+        style="width: 400px;"
+		onload="sbp2CaptureLinks.caInit();"
+		ondialogaccept="sbp2CaptureLinks.caAccept();"
+		ondialogcancel="window.arguments[1].dialogAccepted = false;">
+
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2CaptureLinks.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Common.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2DataSource.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Prefs.js" />
+
+	<stringbundleset id="sbp2StringBundles">
+		<stringbundle id="sbp2CaptureLinksString" src="chrome://scrapbookplus2/locale/capturelinks.properties" />
+	</stringbundleset>
+
+	<tabbox flex="1">
+		<tabs orient="horizontal">
+			<tab label="&sbp2.single.tab.one;" />
+		</tabs>
+		<tabpanels flex="1">
+			<tabpanel orient="vertical">
+				<grid>
+					<columns>
+						<column />
+						<column flex="1" />
+					</columns>
+					<rows>
+						<row>
+							<label control="sbp2DetailTitle" value="&sbp2.single.title;:" />
+							<label control="sbp2DetailTitle" value="&sbp2.single.title.default;" />
+						</row>
+						<row id="sbp2DetailFolderRow">
+							<label value="&sbp2.single.folder;:" />
+							<hbox>
+								<menulist id="sbp2FolderList" flex="1">
+									<menupopup id="sbp2FolderPopup" />
+								</menulist>
+								<toolbarbutton id="sbp2FolderChange"	image="chrome://scrapbookplus2/skin/folder.png"    tooltiptext="" oncommand="sbp2CaptureLinks.folderChange();" />
+							</hbox>
+						</row>
+					</rows>
+				</grid>
+				<hbox>
+					<label value="&sbp2.include;:" />
+					<checkbox id="sbp2DetailOptionImages" label="&sbp2.include.pictures;" checked="true" />
+					<checkbox id="sbp2DetailOptionStyles" label="&sbp2.include.styles;" checked="true" />
+					<checkbox id="sbp2DetailOptionScript" label="&sbp2.include.java;" />
+				</hbox>
+				<groupbox>
+					<caption label="&sbp2.single.details.caption;" />
+					<checkbox id="sbp2DetailImage"   persist="checked" label="&sbp2.single.details.image;" />
+					<checkbox id="sbp2DetailSound"   persist="checked" label="&sbp2.single.details.audio;" />
+					<checkbox id="sbp2DetailMovie"   persist="checked" label="&sbp2.single.details.movie;" />
+					<checkbox id="sbp2DetailArchive" persist="checked" label="&sbp2.single.details.archive;" />
+					<hbox>
+						<checkbox id="sbp2DetailCustom" persist="checked" label="&sbp2.single.details.custom;" />
+						<textbox id="sbp2DetailCustomExt" flex="1" disabled="true" />
+					</hbox>
+				</groupbox>
+				<groupbox id="sbp2DetailTimeoutBox">
+					<caption label="&sbp2.single.timeout.label;" />
+					<hbox>
+						<radiogroup id="sbp2DetailTimeoutRadioGroup" orient="horizontal" disabled="false">
+							<radio label="0" selected="true" />
+							<radio label="1" />
+							<radio label="2" />
+							<radio label="3" />
+						</radiogroup>
+					</hbox>
+				</groupbox>
+				<groupbox id="sbp2DetailURLList">
+					<caption label="&sbp2.multiple.description;" />
+					<hbox>
+						<vbox flex="1">
+							<label id="sbp2FillSpace" flex="1" value="" />
+						</vbox>
+						<vbox flex="1">
+							<button type="menu" label="&sbp2.multiple.detector;">
+								<menupopup>
+									<menuitem label="&sbp2.multiple.detector.links;" oncommand="sbp2CaptureLinks.urlsDetectURLsInPage();" />
+									<menuseparator />
+									<menuitem label="&sbp2.multiple.detector.clear;" oncommand="sbp2CaptureLinks.urlsClear();" />
+								</menupopup>
+							</button>
+						</vbox>
+					</hbox>
+					<hbox>
+						<label id="sbp2FilterLabel" flex="1" value="&sbp2.multiple.filter;" />
+						<textbox id="sbp2FilterTextbox" flex="1" oninput="sbp2CaptureLinks.urlsUpdateSelection();" />
+					</hbox>
+					<checkbox id="sbp2ExcludeExistingAddresses" label="&sbp2.multiple.ignore;" checked="true" onclick="sbp2CaptureLinks.urlsUpdateSelection();" />
+					<textbox id="sbp2URLList" multiline="true" rows="15" flex="1" />
+					<label id="sbp2Status" crop="end" value="" />
+				</groupbox>
+			</tabpanel>
+		</tabpanels>
+	</tabbox>
+
+</dialog>

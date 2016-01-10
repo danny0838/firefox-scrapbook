@@ -2,7 +2,7 @@
 var sbp2DataSource = {
 
 	dbData					: null,
-	dbDataSearch			: null,	//nur tempor‰r, um Ergebnisse pr¸fen zu kˆnnen; sp‰ter durch in-memory-ds ersetzen
+	dbDataSearch			: null,	//nur tempor√§r, um Ergebnisse pr√ºfen zu k√∂nnen; sp√§ter durch in-memory-ds ersetzen
 	dbDataSearchCache		: null,
 	dbDataSearchCacheUpdate	: null,
 	dbDataTag				: null,
@@ -10,18 +10,18 @@ var sbp2DataSource = {
 	checkFolderExists : function(cfeData, cfeContParentRes, cfeFolderName)
 	{
 		//Sucht in cfeData im Container cfeContParentRes nach einem Verzeichnis (type: folder) mit dem Namen cfeFolderName
-		//Liefert bei Fund die Resource des Containers zur¸ck.
+		//Liefert bei Fund die Resource des Containers zur√ºck.
 		//
 		//Ablauf:
 		//1. Variablen initialisieren
-		//2. Pr¸fen, ob einer der Eintr‰ge des Containers cfeContParent dem gesuchten Verzeichnis entspricht
-		//3. Resource oder null wird zur¸ck gegeben
+		//2. Pr√ºfen, ob einer der Eintr√§ge des Containers cfeContParent dem gesuchten Verzeichnis entspricht
+		//3. Resource oder null wird zur√ºck gegeben
 
 		//1. Variablen initialisieren
 		var cfeRRes = null;
 		var cfeContParent = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
 		cfeContParent.Init(cfeData, cfeContParentRes);
-		//2. Pr¸fen, ob einer der Eintr‰ge des Containers cfeContParent dem gesuchten Verzeichnis entspricht
+		//2. Pr√ºfen, ob einer der Eintr√§ge des Containers cfeContParent dem gesuchten Verzeichnis entspricht
 		var cfeContParentEnum = cfeContParent.GetElements();
 		while ( cfeContParentEnum.hasMoreElements() )
 		{
@@ -37,13 +37,13 @@ var sbp2DataSource = {
 				}
 			}
 		}
-		//3. Resource oder null wird zur¸ck gegeben
+		//3. Resource oder null wird zur√ºck gegeben
 		return cfeRRes;
 	},
 
 	containerGetAllContainers : function(cgacData, cgacContRes, cgacContResList, cgacRecursive)
 	{
-		//Die Funktion ermittelt alle Container im ¸bergebenen Container. Ist cgacRecursive gesetzt, werden auch die gefundenen Container verarbeitet.
+		//Die Funktion ermittelt alle Container im √ºbergebenen Container. Ist cgacRecursive gesetzt, werden auch die gefundenen Container verarbeitet.
 		//
 		//Ablauf:
 		//1.
@@ -70,7 +70,7 @@ var sbp2DataSource = {
 
 	containerGetAllItems : function(cgaiData, cgaiContRes, cgaiResList, cgaiRecursive)
 	{
-		//Die Funktion ermittelt alle Eintr‰ge im ¸bergebenen Container. Ist cgaiRecursive gesetzt, werden auch die gefundenen Container verarbeitet.
+		//Die Funktion ermittelt alle Eintr√§ge im √ºbergebenen Container. Ist cgaiRecursive gesetzt, werden auch die gefundenen Container verarbeitet.
 		//
 		//Ablauf:
 		//1.
@@ -98,7 +98,7 @@ var sbp2DataSource = {
 
 	containerGetAll : function(cgaData, cgaContParentRes, cgaListe, cgaListeCont, cgaOnlyCont)
 	{
-		//Diese Funktion erstellt eine Liste, die s‰mtliche Resources vom Typ Container enth‰lt.
+		//Diese Funktion erstellt eine Liste, die s√§mtliche Resources vom Typ Container enth√§lt.
 		//
 		//Nimmt alle Resources/Container innerhalb des Containers cgaContParentRes in cgaListe auf. 
 		//Die Resource des Containers, in dem sich die Resource befindet, wird in cgaListeCont vermerkt.
@@ -134,7 +134,7 @@ var sbp2DataSource = {
 
 	containerRemoveAllEntries : function(craeData, craeContResString, craeFlush)
 	{
-		//Entfernt alle Eintr‰ge des Containers
+		//Entfernt alle Eintr√§ge des Containers
 		//
 		//Ablauf:
 		//1. Container initialisieren
@@ -187,7 +187,7 @@ var sbp2DataSource = {
 
 	dsGetResources : function(dsgrData, dsgrContRes, dsgrMode, dsgrRekursiv)
 	{
-		//Gibt eine Liste mit Resourcen der Eintr‰ge zur¸ck. Die Resource von Verzeichnissen wird nur im Modus 2 aufgenommen, die Inhalte von
+		//Gibt eine Liste mit Resourcen der Eintr√§ge zur√ºck. Die Resource von Verzeichnissen wird nur im Modus 2 aufgenommen, die Inhalte von
 		//Verzeichnissen immer.
 		//
 		//dsgrMode:
@@ -235,7 +235,7 @@ if ( !drftTree ) {
 
 	propertyGet : function(pgData, pgRes, pgProp)
 	{
-		//Liefert den Wert f¸r pgProp der Resource pgRes zur¸ck. Existiert pgRes noch nicht, wird "" zur¸ckgeliefert.
+		//Liefert den Wert f√ºr pgProp der Resource pgRes zur√ºck. Existiert pgRes noch nicht, wird "" zur√ºckgeliefert.
 		if ( pgRes.Value == "urn:scrapbook:root" ) return "";
 		try
 		{
@@ -265,7 +265,7 @@ if ( psNewVal == undefined ) alert("sbp2DataSource.propertySet\n---\npsNewVal no
 
 	init : function()
 	{
-		//Funktion initialisiert eine leere Datenbank oder l‰d eine vorhandene
+		//Funktion initialisiert eine leere Datenbank oder l√§d eine vorhandene
 		//
 		//Ablauf:
 		//1. Vorarbeit
@@ -285,8 +285,8 @@ if ( psNewVal == undefined ) alert("sbp2DataSource.propertySet\n---\npsNewVal no
 			//2b. leere Datenbank anlegen und laden
 			iFile.create(iFile.NORMAL_FILE_TYPE, parseInt("0666", 8));
 			var iFileURL = sbp2Common.IO.newFileURI(iFile).spec;
-				//Info: Beim Aufruf wird eine Fehlermeldung geschrieben, da die Datei bislang keinerlei Daten enth‰lt.
-				//Ein Abfangen des Fehlers war bislang nicht mˆglich!
+				//Info: Beim Aufruf wird eine Fehlermeldung geschrieben, da die Datei bislang keinerlei Daten enth√§lt.
+				//Ein Abfangen des Fehlers war bislang nicht m√∂glich!
 			sbp2DataSource.dbData = sbp2Common.RDF.GetDataSourceBlocking(iFileURL);
 			sbp2DataSource.dsCreateEmptySeq(sbp2DataSource.dbData, sbp2Common.RDF.GetResource("urn:scrapbook:root"));
 			sbp2DataSource.dsFlush(sbp2DataSource.dbData);
@@ -310,8 +310,8 @@ if ( psNewVal == undefined ) alert("sbp2DataSource.propertySet\n---\npsNewVal no
 		//3. leere Datenbank anlegen und laden
 		isFile.create(isFile.NORMAL_FILE_TYPE, parseInt("0666", 8));
 		var isFileURL = sbp2Common.IO.newFileURI(isFile).spec;
-			//Info: Beim Aufruf wird eine Fehlermeldung geschrieben, da die Datei bislang keinerlei Daten enth‰lt.
-			//Ein Abfangen des Fehlers war bislang nicht mˆglich!
+			//Info: Beim Aufruf wird eine Fehlermeldung geschrieben, da die Datei bislang keinerlei Daten enth√§lt.
+			//Ein Abfangen des Fehlers war bislang nicht m√∂glich!
 		sbp2DataSource.dbDataSearch = sbp2Common.RDF.GetDataSourceBlocking(isFileURL);
 		sbp2DataSource.dsCreateEmptySeq(sbp2DataSource.dbDataSearch, sbp2Common.RDF.GetResource("urn:scrapbook:search"));
 		sbp2DataSource.dsFlush(sbp2DataSource.dbDataSearch);
@@ -319,9 +319,9 @@ if ( psNewVal == undefined ) alert("sbp2DataSource.propertySet\n---\npsNewVal no
 
 	initSearchCache : function()
 	{
-		//Funktion initialisiert eine leere SearchCacheUpdate-Datenbank. Diese enth‰lt Informationen ¸ber neue, ge‰nderte sowie gelˆschte
-		//Eintr‰ge. Mit Hilfe dieser Informationen wird entschieden, ob nur einzelne Eintr‰ge im SearchCache aktualisiert werden oder die
-		//Datei gelˆscht und neu erstellt wird.
+		//Funktion initialisiert eine leere SearchCacheUpdate-Datenbank. Diese enth√§lt Informationen √ºber neue, ge√§nderte sowie gel√∂schte
+		//Eintr√§ge. Mit Hilfe dieser Informationen wird entschieden, ob nur einzelne Eintr√§ge im SearchCache aktualisiert werden oder die
+		//Datei gel√∂scht und neu erstellt wird.
 		//
 		//Ablauf:
 		//1. Vorarbeit
@@ -341,8 +341,8 @@ if ( psNewVal == undefined ) alert("sbp2DataSource.propertySet\n---\npsNewVal no
 			//2b. leere Datenbank anlegen und laden
 			iscFile.create(iscFile.NORMAL_FILE_TYPE, parseInt("0666", 8));
 			var iscFileURL = sbp2Common.IO.newFileURI(iscFile).spec;
-				//Info: Beim Aufruf wird eine Fehlermeldung geschrieben, da die Datei bislang keinerlei Daten enth‰lt.
-				//Ein Abfangen des Fehlers war bislang nicht mˆglich!
+				//Info: Beim Aufruf wird eine Fehlermeldung geschrieben, da die Datei bislang keinerlei Daten enth√§lt.
+				//Ein Abfangen des Fehlers war bislang nicht m√∂glich!
 			sbp2DataSource.dbDataSearchCache = sbp2Common.RDF.GetDataSourceBlocking(iscFileURL);
 			sbp2Common.RDFCU.MakeSeq(sbp2DataSource.dbDataSearchCache, sbp2Common.RDF.GetResource("urn:scrapbook:searchcache"));
 			sbp2DataSource.dsFlush(sbp2DataSource.dbDataSearchCache);
@@ -352,9 +352,9 @@ if ( psNewVal == undefined ) alert("sbp2DataSource.propertySet\n---\npsNewVal no
 
 	initSearchCacheUpdate : function(iscuEntfernen)
 	{
-		//Funktion initialisiert eine leere SearchCacheUpdate-Datenbank. Diese enth‰lt Informationen ¸ber neue, ge‰nderte sowie gelˆschte
-		//Eintr‰ge. Mit Hilfe dieser Informationen wird entschieden, ob nur einzelne Eintr‰ge im SearchCache aktualisiert werden oder die
-		//Datei gelˆscht und neu erstellt wird.
+		//Funktion initialisiert eine leere SearchCacheUpdate-Datenbank. Diese enth√§lt Informationen √ºber neue, ge√§nderte sowie gel√∂schte
+		//Eintr√§ge. Mit Hilfe dieser Informationen wird entschieden, ob nur einzelne Eintr√§ge im SearchCache aktualisiert werden oder die
+		//Datei gel√∂scht und neu erstellt wird.
 		//
 		//Ablauf:
 		//1. Vorarbeit
@@ -375,8 +375,8 @@ if ( psNewVal == undefined ) alert("sbp2DataSource.propertySet\n---\npsNewVal no
 			//2b. leere Datenbank anlegen und laden
 			iscuFile.create(iscuFile.NORMAL_FILE_TYPE, parseInt("0666", 8));
 			var iscuFileURL = sbp2Common.IO.newFileURI(iscuFile).spec;
-				//Info: Beim Aufruf wird eine Fehlermeldung geschrieben, da die Datei bislang keinerlei Daten enth‰lt.
-				//Ein Abfangen des Fehlers war bislang nicht mˆglich!
+				//Info: Beim Aufruf wird eine Fehlermeldung geschrieben, da die Datei bislang keinerlei Daten enth√§lt.
+				//Ein Abfangen des Fehlers war bislang nicht m√∂glich!
 			sbp2DataSource.dbDataSearchCacheUpdate = sbp2Common.RDF.GetDataSourceBlocking(iscuFileURL);
 			sbp2Common.RDFCU.MakeSeq(sbp2DataSource.dbDataSearchCacheUpdate, sbp2Common.RDF.GetResource("urn:scrapbook:searchcacheupdate"));
 			var iscuRes = sbp2Common.RDF.GetResource("urn:scrapbook:searchcachestats");
@@ -389,7 +389,7 @@ if ( psNewVal == undefined ) alert("sbp2DataSource.propertySet\n---\npsNewVal no
 
 	initTag : function()
 	{
-		//Funktion initialisiert eine leere Datenbank oder l‰d eine vorhandene f¸r Stichwˆrter.
+		//Funktion initialisiert eine leere Datenbank oder l√§d eine vorhandene f√ºr Stichw√∂rter.
 		//
 		//Ablauf:
 		//1. Vorarbeit
@@ -409,8 +409,8 @@ if ( psNewVal == undefined ) alert("sbp2DataSource.propertySet\n---\npsNewVal no
 			//2b. leere Datenbank anlegen und laden
 			itFile.create(itFile.NORMAL_FILE_TYPE, parseInt("0666", 8));
 			var itFileURL = sbp2Common.IO.newFileURI(itFile).spec;
-				//Info: Beim Aufruf wird eine Fehlermeldung geschrieben, da die Datei bislang keinerlei Daten enth‰lt.
-				//Ein Abfangen des Fehlers war bislang nicht mˆglich!
+				//Info: Beim Aufruf wird eine Fehlermeldung geschrieben, da die Datei bislang keinerlei Daten enth√§lt.
+				//Ein Abfangen des Fehlers war bislang nicht m√∂glich!
 			sbp2DataSource.dbDataTag = sbp2Common.RDF.GetDataSourceBlocking(itFileURL);
 			sbp2DataSource.dsCreateEmptySeq(sbp2DataSource.dbDataTag, sbp2Common.RDF.GetResource("urn:scrapbook:tags"));
 			sbp2DataSource.dsFlush(sbp2DataSource.dbDataTag);
@@ -422,13 +422,13 @@ if ( psNewVal == undefined ) alert("sbp2DataSource.propertySet\n---\npsNewVal no
 		//
 		//
 		//Ablauf:
-		//1. Da Datenbank von Zeit zu Zeit nicht geladen ist, muss diese Pr¸fung stattfinden.
+		//1. Da Datenbank von Zeit zu Zeit nicht geladen ist, muss diese Pr√ºfung stattfinden.
 		//2. neuen Datensatz anlegen
-		//3. Datensatz in Container einf¸gen
+		//3. Datensatz in Container einf√ºgen
 
-		//1. Da Datenbank von Zeit zu Zeit nicht geladen ist, muss diese Pr¸fung stattfinden.
+		//1. Da Datenbank von Zeit zu Zeit nicht geladen ist, muss diese Pr√ºfung stattfinden.
 		if ( !iaData ) {
-			//Wird beim Benutzen des Archivierungs-Dialogs benˆtigt, wenn die Sidebar nicht angezeigt wird
+			//Wird beim Benutzen des Archivierungs-Dialogs ben√∂tigt, wenn die Sidebar nicht angezeigt wird
 dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.");
 			sbp2DataSource.init();
 			iaData = sbp2DataSource.dbData;
@@ -455,7 +455,7 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 			const NC_NS  = "http://home.netscape.com/NC-rdf#";
 			iaData.Assert(iaNewRes, sbp2Common.RDF.GetResource(RDF_NS + "type"), sbp2Common.RDF.GetResource(NC_NS + "BookmarkSeparator"), true);
 		}
-		//3. Datensatz in Container einf¸gen
+		//3. Datensatz in Container einf√ºgen
 		var iaCont = Components.classes['@mozilla.org/rdf/container;1'].getService(Components.interfaces.nsIRDFContainer);
 		iaCont.Init(iaData, iaContRes);
 		if ( iaPosition == -1 ) {
@@ -466,7 +466,7 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 		if ( iaItem.type == "folder" ) {
 			sbp2DataSource.dsCreateEmptySeq(iaData, iaNewRes);
 		} else if ( iaItem.type != "separator" && iaItem.type !="bookmark" ) {
-//			sbp2DataSource.itemAddCrosslinkUpdate("urn:scrapbook:crosslinkupdate", iaItem.id, "0");
+			sbp2LinkRepl.slrItemAdd("urn:scrapbook:linkreplupdate", iaItem.id, "0");
 			sbp2DataSource.itemAddSearchCacheUpdate("urn:scrapbook:searchcacheupdate", iaItem.id, "0");
 		}
 	},
@@ -476,11 +476,11 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 		//Erstellt einen neuen Eintrag sbp2DataSource.dbDataSearch.
 		//
 		//Ablauf:
-		//1. Da Datenbank von Zeit zu Zeit nicht geladen ist, muss diese Pr¸fung stattfinden.
+		//1. Da Datenbank von Zeit zu Zeit nicht geladen ist, muss diese Pr√ºfung stattfinden.
 		//2. neuen Datensatz anlegen
-		//3. Datensatz in Container einf¸gen
+		//3. Datensatz in Container einf√ºgen
 
-		//1. Da Datenbank von Zeit zu Zeit nicht geladen ist, muss diese Pr¸fung stattfinden.
+		//1. Da Datenbank von Zeit zu Zeit nicht geladen ist, muss diese Pr√ºfung stattfinden.
 		if ( !this.dbDataSearch ) {
 			alert("sbp2DataSource.itemAddSearch\n---\ndatabase not loaed.");
 			return;
@@ -492,7 +492,7 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 		this.dbDataSearch.Assert(iasNewRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#type"),   sbp2Common.RDF.GetLiteral(iasType), true);
 		this.dbDataSearch.Assert(iasNewRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#source"), sbp2Common.RDF.GetLiteral(iasSource), true);
 		this.dbDataSearch.Assert(iasNewRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#icon"),   sbp2Common.RDF.GetLiteral(iasIcon), true);
-		//3. Datensatz in Container einf¸gen
+		//3. Datensatz in Container einf√ºgen
 		var iasCont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
 		iasCont.Init(this.dbDataSearch, sbp2Common.RDF.GetResource(iasContString));
 		iasCont.AppendElement(iasNewRes);
@@ -503,7 +503,7 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 		//1. neuen Datensatz anlegen
 		var iascNewRes = sbp2Common.RDF.GetResource("urn:scrapbook:item" + iascID + "#" + iascFilename);
 		iascData.Assert(iascNewRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#content"), sbp2Common.RDF.GetLiteral(iascContent), true);
-		//2. Datensatz in Container einf¸gen
+		//2. Datensatz in Container einf√ºgen
 		var iascCont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
 		iascCont.Init(iascData, sbp2Common.RDF.GetResource("urn:scrapbook:searchcache"));
 		iascCont.AppendElement(iascNewRes);
@@ -511,7 +511,7 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 
 	itemAddSearchCacheUpdate : function(iascuContString, iascuID, iascuStatus)
 	{
-		//Bringt this.dbDataSearchCacheUpdate auf den aktuellen Stand. Wurden ƒnderungen gemacht, wird an die aufrufende Funktion 1, sonst 0, zur¸ckgegeben.
+		//Bringt this.dbDataSearchCacheUpdate auf den aktuellen Stand. Wurden √§nderungen gemacht, wird an die aufrufende Funktion 1, sonst 0, zur√ºckgegeben.
 		//
 		//iascuStatus:
 		//0 = add
@@ -520,35 +520,35 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 		//
 		//Ablauf:
 		//1. Initialisierung
-		//2. Es muss kein Eintrag aufgenommen werden, falls der Cache noch nie in SBP2 f¸r das offene Buch erstellt worden ist, was durch -1 angezeigt wird
-		//3. Da die Datenbank von Zeit zu Zeit nicht geladen ist, muss diese Pr¸fung stattfinden.
-		//4. Pr¸fen, ob schon ein Eintrag vorhanden ist und wie der "status" lautet
-		//5. Aktualisierung in Abh‰ngigkeit von der vorhergehenden Pr¸fung und iascuStatus vornehmen
-//muss noch ¸berarbeitet werden -> Schritt 6 nicht vorhanden
-		//6. iascuReturnCode zur¸ck an aufrufende Funktion
+		//2. Es muss kein Eintrag aufgenommen werden, falls der Cache noch nie in SBP2 f√ºr das offene Buch erstellt worden ist, was durch -1 angezeigt wird
+		//3. Da die Datenbank von Zeit zu Zeit nicht geladen ist, muss diese Pr√ºfung stattfinden.
+		//4. Pr√ºfen, ob schon ein Eintrag vorhanden ist und wie der "status" lautet
+		//5. Aktualisierung in Abh√§ngigkeit von der vorhergehenden Pr√ºfung und iascuStatus vornehmen
+//muss noch √ºberarbeitet werden -> Schritt 6 nicht vorhanden
+		//6. iascuReturnCode zur√ºck an aufrufende Funktion
 
-		//x. Da Datenbank von Zeit zu Zeit nicht geladen ist, muss diese Pr¸fung stattfinden.
+		//x. Da Datenbank von Zeit zu Zeit nicht geladen ist, muss diese Pr√ºfung stattfinden.
 		if ( !this.dbDataSearchCacheUpdate ) {
-			alert("laden");
+			alert("sbp2DataSource.itemAddSearchCacheUpdate\n---\nError. itemAddSearchCacheUpdate needs to be loaded. Contact the developer.");
 			this.initSearchCacheUpdate(false);
 		}
 		//1. Initialisierung
-		var iascuReturnCode = 0;	//falls der Wert auf 1 steht, wurde eine ƒnderung in this.dbDataSearchCacheUpdate vorgenommen
+		var iascuReturnCode = 0;	//falls der Wert auf 1 steht, wurde eine √§nderung in this.dbDataSearchCacheUpdate vorgenommen
 		var iascuData = this.dbDataSearchCacheUpdate;
 		var iascuUpdateMode = this.propertyGet(iascuData, sbp2Common.RDF.GetResource("urn:scrapbook:searchcachestats"), "updatemode");
 		var iascuEntriesAdd = this.propertyGet(iascuData, sbp2Common.RDF.GetResource("urn:scrapbook:searchcachestats"), "entriesadd");
 		var iascuEntriesDelUpd = this.propertyGet(iascuData, sbp2Common.RDF.GetResource("urn:scrapbook:searchcachestats"), "entriesdelupd");
-		//2. Es muss kein Eintrag aufgenommen werden, falls der Cache noch nie in SBP2 f¸r das offene Buch erstellt worden ist, was durch -1 angezeigt wird
+		//2. Es muss kein Eintrag aufgenommen werden, falls der Cache noch nie in SBP2 f√ºr das offene Buch erstellt worden ist, was durch -1 angezeigt wird
 		if ( iascuUpdateMode == -1 ) return;
-		//3. Da die Datenbank von Zeit zu Zeit nicht geladen ist, muss diese Pr¸fung stattfinden.
+		//3. Da die Datenbank von Zeit zu Zeit nicht geladen ist, muss diese Pr√ºfung stattfinden.
 		if ( !iascuData ) {
 			alert("sbp2DataSource.itemAddSearchCacheUpdate\n---\nFehler Suche");
 			return;
 		}
-		//4. Pr¸fen, ob schon ein Eintrag vorhanden ist und wie der "status" lautet
+		//4. Pr√ºfen, ob schon ein Eintrag vorhanden ist und wie der "status" lautet
 		var iascuNewRes = sbp2Common.RDF.GetResource("urn:scrapbook:item" + iascuID);
 		var iascuOldStatus = this.propertyGet(iascuData, iascuNewRes, "status");
-		//5. Aktualisierung in Abh‰ngigkeit von der vorhergehenden Pr¸fung und iascuStatus vornehmen
+		//5. Aktualisierung in Abh√§ngigkeit von der vorhergehenden Pr√ºfung und iascuStatus vornehmen
 		if ( iascuOldStatus == "" ) {
 			iascuData.Assert(iascuNewRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#id"), sbp2Common.RDF.GetLiteral(iascuID), true);
 			iascuData.Assert(iascuNewRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#status"), sbp2Common.RDF.GetLiteral(iascuStatus), true);
@@ -604,13 +604,13 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 	itemDelete : function(idData, idRes)
 	{
 //Wird derzeit nur von sbp2TreeHandle.itemDelete() und sbp2DataSource.itemAddSearchCacheUpdate() aufgerufen.
-		//Entfernt die ¸bergebene Resource aus idData (intakte als auch tote Eintr‰ge)
+		//Entfernt die √ºbergebene Resource aus idData (intakte als auch tote Eintr√§ge)
 		//
-		//1. Container bestimmen, der die Resource enth‰lt
+		//1. Container bestimmen, der die Resource enth√§lt
 		//2. Resource aus Container entfernen
 		//3. Unterpunkte entfernen
 
-		//1. Container bestimmen, der die Resource enth‰lt
+		//1. Container bestimmen, der die Resource enth√§lt
 		var idResources = idData.GetAllResources();
 		var idContParentRes;
 		while ( idResources.hasMoreElements() )
@@ -645,7 +645,7 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 
 	itemDeleteSearchCache : function(idscData, idscRes)
 	{
-		//Entfernt die ¸bergebene Resource aus idscData
+		//Entfernt die √ºbergebene Resource aus idscData
 		//
 		//Ablauf:
 		//1. idscRes aus Container urn:scrapbook:searchcache entfernen
@@ -675,17 +675,17 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 	itemMove : function(imTreeFrom, imTreeTo, imRow, imPosition)
 	{
 		//imPosition== 0 -> ans Ende des Containers
-		//imPosition== 1 -> vor dem dazugehˆrenden Eintrag im ¸bergeordneten Container
-		//imPosition==-1 -> nach dem dazugehˆrenden Eintrag im ¸bergeordneten Container
+		//imPosition== 1 -> vor dem dazugeh√∂renden Eintrag im √ºbergeordneten Container
+		//imPosition==-1 -> nach dem dazugeh√∂renden Eintrag im √ºbergeordneten Container
 		//
 		//Ablauf:
 		//0. Initialisierung
 		//1. Zielcontainer bestimmen
-		//2. Selektierte Container (inkl. Untercontainer) und Eintr‰ge bestimmen
-		//3. Selektion um Eintr‰ge bereinigen, deren Container in imListeMoveSelCont enthalten ist
+		//2. Selektierte Container (inkl. Untercontainer) und Eintr√§ge bestimmen
+		//3. Selektion um Eintr√§ge bereinigen, deren Container in imListeMoveSelCont enthalten ist
 		//4. RDF-Datenquelle vom tree entfernen
-		//5. Verbliebene Eintr‰ge verschieben
-		//6. RDF-Datenquelle dem tree hinzuf¸gen
+		//5. Verbliebene Eintr√§ge verschieben
+		//6. RDF-Datenquelle dem tree hinzuf√ºgen
 		//7. Damit die Boxen zum Auf-/Zuklappen von Verzeichnissen dargestellt werden, ist ein rebuild des Tree notwendig
 		//8. RDF-Datei auf Platte aktualisieren (ohne geht der Datensatz beim Beenden von FF verloren)
 
@@ -724,7 +724,7 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 				}
 			}
 		}
-		//2. Selektierte Container (inkl. Untercontainer) und Eintr‰ge bestimmen
+		//2. Selektierte Container (inkl. Untercontainer) und Eintr√§ge bestimmen
 		var imNumRanges = imTreeFrom.view.selection.getRangeCount();
 		var imStart = new Object();
 		var imEnd = new Object();
@@ -740,9 +740,9 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 //					alert("Quelle und Ziel identisch\n\n"+imRes.Value+"\n"+imContNewParentRes.Value);
 					return;
 				}
-				//Falls selektierte Resource mit imRow ¸bereinstimmt, Vorgang abbrechen
+				//Falls selektierte Resource mit imRow √ºbereinstimmt, Vorgang abbrechen
 				if ( imRes == imDstRes ) {
-//					alert("Quelle stimmt mit imRow (imDstRes) ¸berein");
+//					alert("Quelle stimmt mit imRow (imDstRes) √ºberein");
 					return;
 				}
 				//Resource in Liste aufnehmen
@@ -763,10 +763,10 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 		}
 		imListeMoveSelCont = [];
 		for ( var imEintrag in imHash ) { imListeMoveSelCont.push(sbp2Common.RDF.GetResource(imEintrag)); }
-		//3. Selektion um Eintr‰ge bereinigen, deren Container in imListeMoveSelCont enthalten ist
+		//3. Selektion um Eintr√§ge bereinigen, deren Container in imListeMoveSelCont enthalten ist
 		for ( var imI=0; imI<imListeMoveAll.length; imI++ )
 		{
-			//Quellcontainer bestimmen, der die Resource enth‰lt
+			//Quellcontainer bestimmen, der die Resource enth√§lt
 			var imEintraege = imDataFrom.GetAllResources();
 			var imContParentRes = sbp2Common.RDF.GetResource("urn:scrapbook:root");
 			while ( imEintraege.hasMoreElements() )
@@ -812,10 +812,10 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 			imTreeTo.database.RemoveDataSource(ds);
 		}
 */
-		//5. Verbliebene Eintr‰ge verschieben
+		//5. Verbliebene Eintr√§ge verschieben
 		for ( var imI=0; imI<imListeMoveFiltered.length; imI++ )
 		{
-			//Quellcontainer bestimmen, der die Resource enth‰lt
+			//Quellcontainer bestimmen, der die Resource enth√§lt
 			var imEintraege = imDataFrom.GetAllResources();
 			var imContParentRes = sbp2Common.RDF.GetResource("urn:scrapbook:root");
 			while ( imEintraege.hasMoreElements() )
@@ -826,13 +826,13 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 					break;
 				}
 			}
-			//Sind Quell- und Zielcontainer identisch, wird der Eintrag ¸bersprungen
+			//Sind Quell- und Zielcontainer identisch, wird der Eintrag √ºbersprungen
 			if ( imContParentRes == imContNewParentRes && imPosition == 0 ) continue;
 			//Resource aus Quellcontainer entfernen
 			var imContParent = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
 			imContParent.Init(imDataFrom,imContParentRes);
 			imContParent.RemoveElement(imListeMoveFiltered[imI],true);
-			//Resource in Zielcontainer an vorbestimmter Stelle einf¸gen
+			//Resource in Zielcontainer an vorbestimmter Stelle einf√ºgen
 			var imContNewParent = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
 			imContNewParent.Init(imDataTo,imContNewParentRes);
 			if ( imPosition == 0 ) {
@@ -843,7 +843,7 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 				imContNewParent.InsertElementAt(imListeMoveFiltered[imI], imNewPosition, true);
 			}
 		}
-		//6. RDF-Datenquelle dem tree hinzuf¸gen
+		//6. RDF-Datenquelle dem tree hinzuf√ºgen
 		imTreeFrom.database.AddDataSource(imDataFrom);
 		imTreeTo.database.AddDataSource(imDataTo);
 		//7. Damit die Boxen zum Auf-/Zuklappen von Verzeichnissen dargestellt werden, ist ein rebuild des Tree notwendig
@@ -866,15 +866,15 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 		//
 		//Ablauf:
 		//1. neuen Datensatz anlegen
-		//2. Position bestimmen, an der das neue Stichwort eingef¸gt werden soll
-		//3. Datensatz am Ende des Containers einf¸gen
+		//2. Position bestimmen, an der das neue Stichwort eingef√ºgt werden soll
+		//3. Datensatz am Ende des Containers einf√ºgen
 
 		//1. neuen Datensatz anlegen
 		itaData.Assert(itaRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#" + "id"),     sbp2Common.RDF.GetLiteral(itaEintrag.id), true);
 		itaData.Assert(itaRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#" + "title"),  sbp2Common.RDF.GetLiteral(itaEintrag.title), true);
 		itaData.Assert(itaRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#" + "type"),   sbp2Common.RDF.GetLiteral(itaEintrag.type), true);
 		itaData.Assert(itaRes, sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#" + "icon"),   sbp2Common.RDF.GetLiteral(itaEintrag.icon), true);
-		//2. Position bestimmen, an der das neue Stichwort eingef¸gt werden soll
+		//2. Position bestimmen, an der das neue Stichwort eingef√ºgt werden soll
 		var itaCont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
 		itaCont.Init(sbp2DataSource.dbDataTag, itaContRes);
 		var itaContChildren = itaCont.GetElements();
@@ -892,7 +892,7 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 				break;
 			}
 		}
-		//3. Datensatz am Ende des Containers einf¸gen
+		//3. Datensatz am Ende des Containers einf√ºgen
 		if ( !itaAdded )
 		{
 			var itaCont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
@@ -903,7 +903,7 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 
 	itemTagDelete : function(itdRes)
 	{
-		//Lˆscht das Stichwort mit der Resource itdRes.
+		//L√∂scht das Stichwort mit der Resource itdRes.
 		//
 		//Ablauf:
 		//1. Items sammeln, denen das Tag zugewiesen wurde.
@@ -952,12 +952,12 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 
 	itemTagDeleteCheck : function(itdcResListTags)
 	{
-		//Lˆscht jene Stichwˆrter, denen kein Eintrag mehr zugewiesen ist.
+		//L√∂scht jene Stichw√∂rter, denen kein Eintrag mehr zugewiesen ist.
 		//
 		//Ablauf:
 		//1. Variablen initialisieren
-		//2. Alle Eintr‰ge in itdcResListTags verarbeiten
-		//  3. Stichwort nur lˆschen, falls keine anderen Eintr‰ge zugewiesen sind
+		//2. Alle Eintr√§ge in itdcResListTags verarbeiten
+		//  3. Stichwort nur l√∂schen, falls keine anderen Eintr√§ge zugewiesen sind
 		//    3. Stichwort aus Container entfernen
 		//    4. Unterpunkte entfernen
 
@@ -969,10 +969,10 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 		var itdcNames = null;
 		var itdcName = null;
 		var itdcValue = null;
-		//2. Alle Eintr‰ge in itdcResListTags verarbeiten
+		//2. Alle Eintr√§ge in itdcResListTags verarbeiten
 		for ( var itdcI=0; itdcI<itdcResListTags.length; itdcI++ )
 		{
-			//3. Stichwort nur lˆschen, falls keine anderen Eintr‰ge zugewiesen sind
+			//3. Stichwort nur l√∂schen, falls keine anderen Eintr√§ge zugewiesen sind
 			itdcTargetEnum = itdcData.GetTargets(itdcResListTags[itdcI], itdcPredicate, true);
 			if ( !itdcTargetEnum.hasMoreElements() ) {
 				//4. Stichwort aus Container entfernen
@@ -1002,9 +1002,9 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 		//1. Variablen initialisieren
 		var ittiData = sbp2DataSource.dbDataTag;
 		var ittiContTag = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
-		//2. Container f¸r Item anlegen (ist schon einer vorhanden, wird der Befehl ignoriert)
+		//2. Container f√ºr Item anlegen (ist schon einer vorhanden, wird der Befehl ignoriert)
 		this.dsCreateEmptySeq(ittiData, ittiRes);
-		//3. Tag einf¸gen in Item-Container
+		//3. Tag einf√ºgen in Item-Container
 		var ittiCont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
 		ittiCont.Init(ittiData, ittiRes);
 		for ( var ittiI=0; ittiI<ittiResListTags.length; ittiI++ )
@@ -1015,7 +1015,7 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 				var ittiTitleNew = this.propertyGet(ittiData, ittiResListTags[ittiI], "title");
 				//Item im Tag vermerken
 				ittiData.Assert(ittiResListTags[ittiI], sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#entries"),  sbp2Common.RDF.GetLiteral(ittiID), true);
-				//Position bestimmen, an der das Tag eingef¸gt werden soll
+				//Position bestimmen, an der das Tag eingef√ºgt werden soll
 				var ittiContChildren = ittiCont.GetElements();
 				var ittiNr = 0;
 				var ittiAdded = false;
@@ -1039,16 +1039,16 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 
 	itemTagToItemRemove : function(itdRes, itdResListTags)
 	{
-		//Lˆscht die Stichwˆrter aus itdResListTags f¸r den Eintrag itdRes
+		//L√∂scht die Stichw√∂rter aus itdResListTags f√ºr den Eintrag itdRes
 		//
 		//Ablauf:
 		//1. Variablen initialisieren
-		//2. Tag lˆschen in Item-Container
-		//3. Ist das Stichwort keinem Eintrag mehr zugewiesen, wird es gelˆscht
+		//2. Tag l√∂schen in Item-Container
+		//3. Ist das Stichwort keinem Eintrag mehr zugewiesen, wird es gel√∂scht
 
 		//1. Variablen initialisieren
 		var itdData = sbp2DataSource.dbDataTag;
-		//2. Tag lˆschen in Item-Container
+		//2. Tag l√∂schen in Item-Container
 		var itdCont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
 		if ( !sbp2Common.RDFCU.IsContainer(itdData, itdRes) ) return;
 		itdCont.Init(itdData, itdRes);
@@ -1058,7 +1058,7 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 			itdData.Unassert(itdResListTags[itdI], sbp2Common.RDF.GetResource("http://amb.vis.ne.jp/mozilla/scrapbook-rdf#entries"),  sbp2Common.RDF.GetLiteral(itdID), true);
 			itdCont.RemoveElement(itdResListTags[itdI], true);
 		}
-		//3. Ist das Stichwort keinem Eintrag mehr zugewiesen, wird es gelˆscht
+		//3. Ist das Stichwort keinem Eintrag mehr zugewiesen, wird es gel√∂scht
 		if ( sbp2Common.RDFCU.IsEmpty(itdData, itdRes) ) {
 			var itdNames = itdData.ArcLabelsOut(itdRes);
 			var itdID = this.propertyGet(itdData, itdRes, "id");
@@ -1079,7 +1079,7 @@ dump("sbp2DataSource.itemAdd\n---\ndbData is not defined. Contact the developer.
 
 	itemTagRename : function(itrRes, itrTitle)
 	{
-		//Titel von itrRes anpassen. Pr¸fung, ob Titel ¸berhaupt angepasst werden kann, findet vor dem Aufruf dieser Funktion statt.
+		//Titel von itrRes anpassen. Pr√ºfung, ob Titel √ºberhaupt angepasst werden kann, findet vor dem Aufruf dieser Funktion statt.
 		sbp2DataSource.propertySet(sbp2DataSource.dbDataTag, itrRes, "title", itrTitle);
 	},
 

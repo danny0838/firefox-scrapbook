@@ -1,4 +1,4 @@
-﻿<!ENTITY sbp2.prefs.keys						"keyboard shortcut">
+<!ENTITY sbp2.prefs.keys						"keyboard shortcut">
 <!ENTITY sbp2.prefs.keys.tip					"Change requires a restart of the browser.">
 <!ENTITY sbp2.prefs.keys.sidebar				"Open sidebar">
 <!ENTITY sbp2.prefs.keys.save					"Capture page">

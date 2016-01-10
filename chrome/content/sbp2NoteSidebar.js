@@ -3,20 +3,20 @@ var sbp2NoteSidebar = {
 
 	nsHTML_Head : '<html><head><meta http-equiv="Content-Type" content="text/html;Charset=UTF-8"></head><body><pre>\n',
 	nsHTML_Foot : '\n</pre></body></html>',
-	nsID : "",	//muß von außen gesetzt werden
-	nsChanged : 0,	//es muss eine eigene Variable gesetzt werden, da sonst beim Schließen der Sidebar keine Prüfung auf Änderung der Notiz stattfinden kann
+	nsID : "",	//muÃŸ von auÃŸen gesetzt werden
+	nsChanged : 0,	//es muss eine eigene Variable gesetzt werden, da sonst beim SchlieÃŸen der Sidebar keine PrÃ¼fung auf Ã¤nderung der Notiz stattfinden kann
 
 	close : function()
 	{
-		//Schließt das Fenster mit der Notiz. Fragt beim Schließen nach, ob noch nicht übernommene Änderungen vor dem Schließen
+		//SchlieÃŸt das Fenster mit der Notiz. Fragt beim SchlieÃŸen nach, ob noch nicht Ã¼bernommene Ã¤nderungen vor dem SchlieÃŸen
 		//gespeichert werden sollen.
 		//
 		//Ablauf:
-		//1. Änderungen speichern?
+		//1. Ã¤nderungen speichern?
 		//2. Sidebar-Ansicht ausblenden
-		//3. Variablien zurücksetzen
+		//3. Variablien zurÃ¼cksetzen
 
-		//1. Änderungen speichern?
+		//1. Ã¤nderungen speichern?
 		if ( this.nsChanged == 1 ) {
 			if ( window.confirm(document.getElementById("sbp2CommonString").getString("QUESTION_SAVE")) ) {
 				this.save();
@@ -27,22 +27,22 @@ var sbp2NoteSidebar = {
 		document.getElementById("sbp2NoteSBSave").setAttribute("image", "chrome://scrapbookplus2/skin/note_save_dis.png");
 		document.getElementById("sbp2SplitterNoteSB").hidden = true;
 		document.getElementById("sbp2NoteSBVB").hidden = true;
-		//3. Variablien zurücksetzen
+		//3. Variablien zurÃ¼cksetzen
 		this.nsID = "";
 		this.nsChanged = 0;
 	},
 
 	load : function()
 	{
-		//Läd den Inhalt von index.html in die Textbox.
+		//LÃ¤d den Inhalt von index.html in die Textbox.
 		//
 		//Ablauf:
-		//1. Datei-Objekt für index.html erstellen
+		//1. Datei-Objekt fÃ¼r index.html erstellen
 		//2. Daten laden
-		//3. Daten aufbereiten (Kopf und Fuß entfernen)
+		//3. Daten aufbereiten (Kopf und FuÃŸ entfernen)
 		//4. aufbereitete Daten in Textbox laden
 
-		//1. Datei-Objekt für index.html erstellen
+		//1. Datei-Objekt fÃ¼r index.html erstellen
 		var lDatei = sbp2Common.getBuchVZ();
 		lDatei.append("data");
 		lDatei.append(this.nsID);
@@ -50,7 +50,7 @@ var sbp2NoteSidebar = {
 		//2. Daten laden
 		var lData = sbp2Common.fileRead(lDatei);
 		lData = sbp2Common.convertToUnicode(lData, "UTF-8");
-		//3. Daten aufbereiten (Kopf und Fuß entfernen)
+		//3. Daten aufbereiten (Kopf und FuÃŸ entfernen)
 		lData = lData.replace(this.nsHTML_Head, "");
 		lData = lData.replace(this.nsHTML_Foot, "");
 		//4. aufbereitete Daten in Textbox laden
@@ -59,7 +59,7 @@ var sbp2NoteSidebar = {
 
 	onInput : function()
 	{
-		//Aktiviert den Speichern-Knopf, sobald eine Taste in der Textbox gedrückt wird. sbp2NoteSidebar.nChanged wird auf 1 gesetzt, um eine Änderung zu signalisieren.
+		//Aktiviert den Speichern-Knopf, sobald eine Taste in der Textbox gedrÃ¼ckt wird. sbp2NoteSidebar.nChanged wird auf 1 gesetzt, um eine Ã¤nderung zu signalisieren.
 		document.getElementById("sbp2NoteSBSave").disabled=false;
 		document.getElementById("sbp2NoteSBSave").setAttribute("image", "chrome://scrapbookplus2/skin/note_save.png");
 		this.nsChanged = 1;
@@ -67,7 +67,7 @@ var sbp2NoteSidebar = {
 
 	save : function()
 	{
-		//Speichert die in der Textbox stehenden Zeichen in index.html. Die erste Zeile wird zusätzlich als Titel eingetragen.
+		//Speichert die in der Textbox stehenden Zeichen in index.html. Die erste Zeile wird zusÃ¤tzlich als Titel eingetragen.
 		//Nach dem Speichern wird die Textbox wieder versteckt.
 		//
 		//Ablauf:
@@ -79,7 +79,7 @@ var sbp2NoteSidebar = {
 		//6. Titel aktualisieren
 		//7. Ansicht aktualisieren
 		//8. RDF-Datei auf Platte aktualisieren (ohne geht der Datensatz beim Beenden von FF verloren)
-		//9. Speichern-Knopf deaktivieren, um anzuzeigen, daß die letzte Änderung gespeichert worden ist
+		//9. Speichern-Knopf deaktivieren, um anzuzeigen, daÃŸ die letzte Ã¤nderung gespeichert worden ist
 
 		//1. Daten aus Textbox holen
 		var sData = document.getElementById("sbp2NoteSBTextbox").value;
@@ -102,7 +102,7 @@ var sbp2NoteSidebar = {
 		document.getElementById("sbp2Tree").builder.rebuild();
 		//8. RDF-Datei auf Platte aktualisieren (ohne geht der Datensatz beim Beenden von FF verloren)
 		sbp2DataSource.dsFlush(sbp2DataSource.dbData);
-		//9. Speichern-Knopf deaktivieren und nChanged auf 0 setzen, um anzuzeigen, daß die letzte Änderung gespeichert worden ist
+		//9. Speichern-Knopf deaktivieren und nChanged auf 0 setzen, um anzuzeigen, daÃŸ die letzte Ã¤nderung gespeichert worden ist
 		document.getElementById("sbp2NoteSBSave").disabled = true;
 		document.getElementById("sbp2NoteSBSave").setAttribute("image", "chrome://scrapbookplus2/skin/note_save_dis.png");
 		this.nsChanged = 0;
@@ -110,8 +110,8 @@ var sbp2NoteSidebar = {
 
 	tab : function()
 	{
-		//Öffnet die angezeigte Notiz in einem neuen Tab. Die Ansicht in der Sidebar wird ausgeblendet.
-		//Schon gemachte Änderungen werden im Tab angezeigt.
+		//Ã¶ffnet die angezeigte Notiz in einem neuen Tab. Die Ansicht in der Sidebar wird ausgeblendet.
+		//Schon gemachte Ã¤nderungen werden im Tab angezeigt.
 		//
 		//Ablauf:
 		//1. Sidebar-Ansicht ausblenden

@@ -1,0 +1,31 @@
+/* ::::: sbp2Capture.css ::::: */
+
+/* Anzeigen einer leeren Checkbox in der Spalte */
+
+treechildren::-moz-tree-checkbox {
+	list-style-image: url("chrome://scrapbookplus2/skin/cbox-not-check.png");
+}
+
+/* Anzeigen einer gesetzten Checkbox in der Spalte */
+
+treechildren::-moz-tree-checkbox(checked) {
+	list-style-image: url("chrome://scrapbookplus2/skin/cbox-check.png");
+}
+
+/* Keine Checkbox in der Spalte anzeigen */
+
+treechildren::-moz-tree-checkbox(disabled) {
+	list-style-image: none;
+}
+
+/* Konnte eine Seite nicht archiviert werden, wird der responseStatus des Channels rot hervorgehoben, sonst nur schwarz hervorgehoben */
+
+treechildren::-moz-tree-cell-text(success) {
+	color: #33CC33;
+	font-weight: bold;
+}
+
+treechildren::-moz-tree-cell-text(failure) {
+	color: #FF0000;
+	font-weight: bold;
+}

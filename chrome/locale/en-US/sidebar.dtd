@@ -1,4 +1,4 @@
-﻿<!ENTITY sbp2.sidebar.new.tooltiptext	"Create a new folder.">
+<!ENTITY sbp2.sidebar.new.tooltiptext	"Create a new folder.">
 <!ENTITY sbp2.sidebar.newfolder			"New folder">
 <!ENTITY sbp2.sidebar.newseparator		"New separator">
 <!ENTITY sbp2.sidebar.newnote			"New note">
@@ -11,7 +11,11 @@
 
 <!ENTITY sbp2.sidebar.tools				"Tools">
 <!ENTITY sbp2.sidebar.tools.settings	"Settings">
-<!ENTITY sbp2.sidebar.tools.sbpfopen	"ScrapBook-Ordner öffnen">
+<!ENTITY sbp2.sidebar.tools.sbpfopen	"Open ScrapBook directory">
+<!ENTITY sbp2.sidebar.tools.addons		"Extended features">
+
+<!ENTITY sbp2.sidebar.addons.linkrepl.activate	"replace remote links: activate">
+<!ENTITY sbp2.sidebar.addons.linkrepl.linklist	"replace remote links: do not update list">
 
 <!ENTITY sbp2.sidebar.search.fulltext	"Full text search">
 <!ENTITY sbp2.sidebar.search.title		"Title">
@@ -29,10 +33,9 @@
 <!ENTITY sbp2.sidebar.context.open		"Open">
 <!ENTITY sbp2.sidebar.context.openintab	"Open in new tab">
 <!ENTITY sbp2.sidebar.context.opensrc	"Open source URL">
-<!ENTITY sbp2.sidebar.context.update	"Update">
 <!ENTITY sbp2.sidebar.context.showfiles	"Show files">
 <!ENTITY sbp2.sidebar.context.delete	"Delete">
-<!ENTITY sbp2.sidebar.context.capttabs	"Capture all tabs">
+<!ENTITY sbp2.sidebar.context.linksadd	"add linked pages">
 <!ENTITY sbp2.sidebar.context.props		"Properties">
 
 <!ENTITY sbp2.sidebar.tag.rename		"Rename">

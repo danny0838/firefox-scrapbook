@@ -5,7 +5,7 @@ var sbp2MBEdit = {
 
 	mbeInit : function()
 	{
-		//OK-Knopf deaktivieren (erst verfügbar, wenn alle notwendigen Informationen angegeben sind)
+		//OK-Knopf deaktivieren (erst verfÃ¼gbar, wenn alle notwendigen Informationen angegeben sind)
 		document.documentElement.getButton("accept").disabled = true;
 		//Angaben merken
 		this.eintragDetails = window.arguments[0];
@@ -48,16 +48,16 @@ var sbp2MBEdit = {
 
 	mbeChangeDirectory : function()
 	{
-		//Auswahl eines Ordners, der als Daten-Verzeichnis dient oder schon welche enthält
+		//Auswahl eines Ordners, der als Daten-Verzeichnis dient oder schon welche enthÃ¤lt
 		//
 		//Ablauf:
-		//1. Picker öffnen
+		//1. Picker Ã¶ffnen
 		//2. Verzeichnis anzeigen
 		//3. Status des OK-Knopfs setzen
 
-		//1. Picker öffnen
+		//1. Picker Ã¶ffnen
 		var mcdPickerVZ = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-		mcdPickerVZ.init(window, "Wählen sie ein Verzeichnis", mcdPickerVZ.modeGetFolder);
+		mcdPickerVZ.init(window, "WÃ¤hlen sie ein Verzeichnis", mcdPickerVZ.modeGetFolder);
 		if ( this.eintragDetails.folder != "" )
 		{
 			var mcdVZ = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);

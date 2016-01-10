@@ -1,4 +1,4 @@
-﻿<!ENTITY sbp2.prefs.keys						"Tastenkürzel">
+<!ENTITY sbp2.prefs.keys						"Tastenkürzel">
 <!ENTITY sbp2.prefs.keys.tip					"Änderungen werden erst nach einem Neustart von Firefox wirksam">
 <!ENTITY sbp2.prefs.keys.sidebar				"Sidebar öffnen">
 <!ENTITY sbp2.prefs.keys.save					"Seite archivieren">

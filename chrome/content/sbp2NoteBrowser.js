@@ -7,18 +7,18 @@ var sbp2NoteBrowser = {
 
 	close : function()
 	{
-		//Schließt das Tab ohne den Browser zu schließen. Bei nicht gespeicherten Änderungen wird vor dem Schließen nachgefragt, ob gespeichert
+		//SchlieÃŸt das Tab ohne den Browser zu schlieÃŸen. Bei nicht gespeicherten Ã¤nderungen wird vor dem SchlieÃŸen nachgefragt, ob gespeichert
 		//werden soll.
 		//
 		//Ablauf:
 		//1. onunload abbrechen
-		//2. Änderungen speichern?
+		//2. Ã¤nderungen speichern?
 		//3. Tab entfernen oder leere Seite laden, falls das Tab das einzige im Fenster ist
-		//4. Variablien zurücksetzen
+		//4. Variablien zurÃ¼cksetzen
 
 		//1. onunload abbrechen
 		window.onunload = null;
-		//2. Änderungen speichern?
+		//2. Ã¤nderungen speichern?
 		if ( document.getElementById("sbp2NoteBSave").disabled == false ) {
 			if ( window.confirm(document.getElementById("sbp2CommonString").getString("QUESTION_SAVE")) ) {
 				this.save();
@@ -28,33 +28,33 @@ var sbp2NoteBrowser = {
 		var cBrowser = Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow("navigator:browser").getBrowser();
 		if ( cBrowser.mTabContainer.childNodes.length == 1 ) {
 			cBrowser.loadURI("about:blank");
-//Rein theoretisch nicht erfüllbar. Abfrage nur während alpha und beta-Phase. Dann entfernen.
+//Rein theoretisch nicht erfÃ¼llbar. Abfrage nur wÃ¤hrend alpha und beta-Phase. Dann entfernen.
 } else if ( cBrowser.mTabContainer.childNodes.length == 0 ) {
 	alert("sbp2NoteBrowser.close\n---\ncBrowser.mTabContainer.childNodes.length == 0. Contact the developer.");
 		} else {
 			window.close();
 		}
-		//4. Variablien zurücksetzen
+		//4. Variablien zurÃ¼cksetzen
 		this.nbID = "";
 	},
 
 	onInput : function()
 	{
-		//Aktiviert den Speichern-Knopf, sobald eine Taste in der Textbox gedrückt wird.
+		//Aktiviert den Speichern-Knopf, sobald eine Taste in der Textbox gedrÃ¼ckt wird.
 		document.getElementById("sbp2NoteBSave").disabled=false;
 		document.getElementById("sbp2NoteBSave").setAttribute("image", "chrome://scrapbookplus2/skin/note_save.png");
 	},
 
 	open : function()
 	{
-		//Läd den Inhalt von index.html im Tab des Browsers
+		//LÃ¤d den Inhalt von index.html im Tab des Browsers
 		//
 		//Ablauf:
 		//1. Variablen initialisieren
-		//2. Datei-Objekt für index.html erstellen
+		//2. Datei-Objekt fÃ¼r index.html erstellen
 		//3. Daten laden
 		//4. Sicherstellen, dass Umlaute korrekt dargestellt werden
-		//5. Kopf und Fuß entfernen
+		//5. Kopf und FuÃŸ entfernen
 		//6. aufbereitete Daten in Textbox laden
 		//7. Titel und Icon des Tab anpassen
 
@@ -62,7 +62,7 @@ var sbp2NoteBrowser = {
 		if ( !sbp2DataSource.dbData) sbp2DataSource.init();
 		window.location.href.match(/\?id\=(\d{14})/);
 		this.nbID = RegExp.$1;
-		//2. Datei-Objekt für index.html erstellen
+		//2. Datei-Objekt fÃ¼r index.html erstellen
 		var oDatei = sbp2Common.getBuchVZ();
 		oDatei.append("data");
 		oDatei.append(this.nbID);
@@ -71,7 +71,7 @@ var sbp2NoteBrowser = {
 		var oData = sbp2Common.fileRead(oDatei);
 		//4. Sicherstellen, dass Umlaute korrekt dargestellt werden
 		oData = sbp2Common.convertToUnicode(oData, "UTF-8");
-		//5. Kopf und Fuß entfernen
+		//5. Kopf und FuÃŸ entfernen
 		oData = oData.replace(this.nbHTML_Head, "");
 		oData = oData.replace(this.nbHTML_Foot, "");
 		//6. aufbereitete Daten in Textbox laden
@@ -82,13 +82,13 @@ var sbp2NoteBrowser = {
 		document.getElementById("sbp2NoteBLabel").value = oTitle;
 		var win = Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator).getMostRecentWindow("navigator:browser");
 		win.gBrowser.selectedTab.label = oTitle;
-//Funktioniert nicht, da Tab noch nicht sichtbar ist zum Ausführungszeitpunkt
+//Funktioniert nicht, da Tab noch nicht sichtbar ist zum AusfÃ¼hrungszeitpunkt
 //		win.gBrowser.selectedTab.setAttribute("image", "chrome://scrapbookplus2/skin/treenote.png");
 	},
 
 	save : function()
 	{
-		//Speichert die in der Textbox stehenden Zeichen in index.html. Die erste Zeile wird zusätzlich als Titel eingetragen.
+		//Speichert die in der Textbox stehenden Zeichen in index.html. Die erste Zeile wird zusÃ¤tzlich als Titel eingetragen.
 		//Nach dem Speichern wird die Textbox wieder versteckt.
 		//
 		//Ablauf:
@@ -100,7 +100,7 @@ var sbp2NoteBrowser = {
 		//6. Titel aktualisieren
 		//7. Ansicht aktualisieren
 		//7. RDF-Datei auf Platte aktualisieren (ohne geht der Datensatz beim Beenden von FF verloren)
-		//8. Speichern-Knopf deaktivieren, um anzuzeigen, daß die letzte Änderung gespeichert worden ist
+		//8. Speichern-Knopf deaktivieren, um anzuzeigen, daÃŸ die letzte Ã¤nderung gespeichert worden ist
 
 		//1. Daten aus Textbox holen
 		var sData = document.getElementById("sbp2NoteBTextbox").value;
@@ -124,7 +124,7 @@ var sbp2NoteBrowser = {
 		}
 		//7. RDF-Datei auf Platte aktualisieren (ohne geht der Datensatz beim Beenden von FF verloren)
 		sbp2DataSource.dsFlush(sbp2DataSource.dbData);
-		//8. Speichern-Knopf deaktivieren, um anzuzeigen, daß die letzte Änderung gespeichert worden ist
+		//8. Speichern-Knopf deaktivieren, um anzuzeigen, daÃŸ die letzte Ã¤nderung gespeichert worden ist
 		document.getElementById("sbp2NoteBSave").disabled = true;
 		document.getElementById("sbp2NoteBSave").setAttribute("image", "chrome://scrapbookplus2/skin/note_save_dis.png");
 	},

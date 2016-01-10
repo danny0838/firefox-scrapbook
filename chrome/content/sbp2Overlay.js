@@ -1,37 +1,37 @@
 /*
 	Dieses Skript darf nur in sbp2Overlay.xul eingebunden werden, da in anderen Fenstern immer wieder die init-Funktion
-	aufgerufen würde und dabei gBrowser nicht verfügbar ist. In der Fehlerkonsole würde dies mit einer Meldung quittiert.
+	aufgerufen wÃ¼rde und dabei gBrowser nicht verfÃ¼gbar ist. In der Fehlerkonsole wÃ¼rde dies mit einer Meldung quittiert.
 */
 
 var sbp2Overlay = {
 
 	handleEvent : function(heEvent)
 	{
-		//Dient zur Steuerung der angezeigten Menüeinträge im Kontextmenü des Browsers. Die Funktion muss "handleEvent" heißen,
+		//Dient zur Steuerung der angezeigten MenÃ¼eintrÃ¤ge im KontextmenÃ¼ des Browsers. Die Funktion muss "handleEvent" heiÃŸen,
 		//da Sie 
 		//
 		//Ablauf:
-		//1. Nur ausführen, wenn das Kontextmenüeinträge angezeigt werden soll
+		//1. Nur ausfÃ¼hren, falls das KontextmenÃ¼ angezeigt werden soll
 		//1a. Initialisierung
-		//1b. Funktion verlassen, falls es sich nicht um das Kontextmenü eines Browser-Elements handelt.
-		//1c. Zwischenspeichern von verschiedenen Stati zur späteren Verarbeitung
-		//1d. Ein-/Ausblenden der Einträge von ScrapBookPlus2 im Kontextmenü
+		//1b. Funktion verlassen, falls es sich nicht um das KontextmenÃ¼ eines Browser-Elements handelt.
+		//1c. Zwischenspeichern von verschiedenen Stati zur spÃ¤teren Verarbeitung
+		//1d. Ein-/Ausblenden der EintrÃ¤ge von ScrapBookPlus2 im KontextmenÃ¼
 
-		//1. Nur ausführen, wenn das Kontextmenüeinträge angezeigt werden soll
+		//1. Nur ausfÃ¼hren, falls das KontextmenÃ¼ angezeigt werden soll
 		if (heEvent.type == "popupshowing") {
 			//1a. Initialisierung
 			var heSelected;
 			var heLink;
 			var heFrame;
-			//1b. Funktion verlassen, falls es sich nicht um das Kontextmenü eines Browser-Elements handelt.
+			//1b. Funktion verlassen, falls es sich nicht um das KontextmenÃ¼ eines Browser-Elements handelt.
 			if (heEvent.originalTarget.id != "contentAreaContextMenu") { return; }
-			//1c. Zwischenspeichern von verschiedenen Stati zur späteren Verarbeitung
+			//1c. Zwischenspeichern von verschiedenen Stati zur spÃ¤teren Verarbeitung
 			heSelected		= gContextMenu.isTextSelected;
 			heLink			= gContextMenu.onLink && !gContextMenu.onMailtoLink;
 			heFrame			= gContextMenu.inFrame;
 			var heIsActive	= heSelected || heLink;
 			var heElement	= function(heID) { return document.getElementById(heID); };
-			//1d. Ein-/Ausblenden der Einträge von ScrapBook Plus im Kontextmenü
+			//1d. Ein-/Ausblenden der EintrÃ¤ge von ScrapBookPlus2 im KontextmenÃ¼
 			heElement("sbp2ContextMenu1").hidden = !heSelected;							//Auswahl archivieren
 			heElement("sbp2ContextMenu2").hidden = !heSelected;							//Auswahl archivieren als...
 			heElement("sbp2ContextMenu3").hidden = heLink || heSelected;				//Seite archivieren
@@ -41,11 +41,12 @@ var sbp2Overlay = {
 			heElement("sbp2ContextMenu8").hidden = !heLink;								//Link archivieren
 			heElement("sbp2ContextMenu9").hidden = !heLink;								//Link archivieren als...
 			heElement("sbp2ContextMenu11").hidden = heLink || heSelected;				//Lesezeichen
-			heElement("sbp2ContextMenu12").hidden = heLink || !heFrame;					//Lesezeichen für Frame
-			heElement("sbp2ContextMenu13").hidden = !heLink || heSelected;				//Lesezeichen für Link
+			heElement("sbp2ContextMenu12").hidden = heLink || !heFrame;					//Lesezeichen fÃ¼r Frame
+			heElement("sbp2ContextMenu13").hidden = !heLink || heSelected;				//Lesezeichen fÃ¼r Link
 			heElement("sbp2ContextMenu14").hidden = heLink || heSelected || !heFrame;	//Screengrab Frame
 			heElement("sbp2ContextMenu15").hidden = heLink || heSelected || heFrame;	//Screengrab Page
-			//"Link zu Projekt hinzufügen" nur dann einblenden, wenn es Sinn macht
+			heElement("sbp2ContextMenu16").hidden = heLink || heSelected || heFrame;	//Link multiple
+			//"Link zu Projekt hinzufÃ¼gen" nur dann einblenden, wenn es Sinn macht
 //			if ( heLink ) {
 //				var heBool = false;
 //				var heNode = gContextMenu.target;
@@ -58,29 +59,36 @@ var sbp2Overlay = {
 //					//angezeigte Seite ist nicht Bestandteil eines Eintrags, daher Eintrag ausblenden
 //					heBool = true;
 //				} else if ( heNode.href.match(this.sboRegExp) ) {
-//					//Link gehört schon eines Eintrags an, daher Eintrag ausblenden
+//					//Link gehÃ¶rt schon einem Eintrag an, daher Eintrag ausblenden
 //					heBool = true;
 //				}
 //				heElement("sbp2ContextMenu10").hidden = heBool;
 //			} else {
 //				heElement("sbp2ContextMenu10").hidden = true;
 //			}
-//Zeile ersetzt momentan den Code für die 19 Zeilen darüber
+//Zeile ersetzt momentan den Code fÃ¼r die 19 Zeilen darÃ¼ber
 heElement("sbp2ContextMenu10").hidden = true;
 		}
 	},
 
 	init : function()
 	{
-		//1. Ermöglicht das Ein- und Ausblenden von Einträgen im Kontextmenü (handleEvent);
+		//1. ErmÃ¶glicht das Ein- und Ausblenden von EintrÃ¤gen im KontextmenÃ¼ (handleEvent);
 		if ( document.getElementById("contentAreaContextMenu") ) {
 			document.getElementById("contentAreaContextMenu").addEventListener("popupshowing", this, false);
 		} else {
 			alert("sbp2Overlay.init\n---\nError. Contact the developer.");
 		}
-		//2. Inhalt der RDF-Datei verfügbar machen
+		//2. Inhalt der RDF-Datei verfÃ¼gbar machen
 		this.refresh();
-		//3. Tastenkürzel zuordnen
+		//3. lastFolder.txt erstellen, falls die Datei noch fehlt.
+		var iFile = sbp2Common.getBuchVZ();
+		iFile.append("lastFolder.txt");
+		if ( !iFile.exists() ) {
+			var iData = "\R";
+			sbp2Common.fileWrite(iFile, iData, "UTF-8");
+		}
+		//4. TastenkÃ¼rzel zuordnen
 		var iElements = [document.getElementById("key_opensbp2Sidebar"),document.getElementById("key_sbp2SiteCapture"),document.getElementById("key_sbp2SiteCaptureAs"),document.getElementById("key_sbp2SiteBookmark"),document.getElementById("key_sbp2TabsCapture")];
 		var iPrefs = ["extensions.scrapbookplus2.key.a.","extensions.scrapbookplus2.key.b.","extensions.scrapbookplus2.key.c.","extensions.scrapbookplus2.key.d.","extensions.scrapbookplus2.key.e."];
 		for ( var iI=0; iI<4; iI++ )
@@ -88,20 +96,17 @@ heElement("sbp2ContextMenu10").hidden = true;
 			iElements[iI].setAttribute("modifiers",	sbp2Prefs.getUnicharPref(iPrefs[iI]+(1), ""));
 			iElements[iI].setAttribute("key",		sbp2Prefs.getUnicharPref(iPrefs[iI]+(2), ""));
 		}
+		//5. LinkRepl initialisieren
+		sbp2LinkRepl.slrInit();
 	},
 
 	refresh : function()
 	{
-		//Wird bei der Initialisierung aufgerufen und beim Wechsel der Datenbank. Ohne diesen Schritt würden
-		//Seiten, die über das Kontextmenü gespeichert werden, in die falsche Datenbank geschrieben
+		//Wird bei der Initialisierung aufgerufen und beim Wechsel der Datenbank. Ohne diesen Schritt wÃ¼rden
+		//Seiten, die Ã¼ber das KontextmenÃ¼ gespeichert werden, in die falsche Datenbank geschrieben
 		sbp2DataSource.init();
 		sbp2DataSource.initSearchCacheUpdate();
-//		sbp2DataSource.initCrosslinkUpdate();
-//		var rTemp = sbp2Common.getBuchVZ().path;
-//		rTemp = rTemp.replace(/\\/g, "\\/");
-//		rTemp = "file:\\/\\/\\/"+rTemp+"\\/data";
-//		rTemp += "\\/\\\d\{14\}\\/";
-//		this.sboRegExp = new RegExp(rTemp, "");
+		sbp2LinkRepl.slrInitDatabase();
 	},
 
 };

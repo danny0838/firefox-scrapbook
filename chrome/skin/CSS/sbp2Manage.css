@@ -1,6 +1,6 @@
 /* ::::: sbp2Manage.css ::::: */
 
-/* Formatierung der Eintr‰ge im Tree */
+/* Formatierung der Eintr√§ge im Tree */
 
 treechildren::-moz-tree-image() {
 	margin-right : 3px;
