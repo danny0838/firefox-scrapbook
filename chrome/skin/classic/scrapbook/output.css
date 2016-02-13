@@ -1,50 +1,50 @@
 body {
-	margin: 0px;
-	padding: 0px;
+    margin: 0px;
+    padding: 0px;
 }
 
 /* ::::: header ::::: */
 
 div#header {
-	padding: 2px 8px;
-	border: 1px solid ThreeDShadow;
-	background-color: InfoBackground;
-	font-family: sans-serif;
-	font-size: 9pt;
+    padding: 2px 8px;
+    border: 1px solid ThreeDShadow;
+    background-color: InfoBackground;
+    font-family: sans-serif;
+    font-size: 9pt;
 }
 
 div#header a {
-	color: #666666;
+    color: #666666;
 }
 
 /* ::::: list ::::: */
 ul {
-	margin-left: 0px;
-	padding-left: 0px;
+    margin-left: 0px;
+    padding-left: 0px;
 }
 
 /* ::::: list items ::::: */
 li {
-	list-style-type: none;
-	margin: 2px 20px;
-	white-space: nowrap;
-	font-family: sans-serif;
-	font-size: 9pt;
+    list-style-type: none;
+    margin: 2px 20px;
+    white-space: nowrap;
+    font-family: sans-serif;
+    font-size: 9pt;
 }
 
 a {
-	text-decoration: none;
-	color: #000000;
+    text-decoration: none;
+    color: #000000;
 }
 
 a:active {
-	background-color: #000000;
-	color: #FFFFFF;
+    background-color: #000000;
+    color: #FFFFFF;
 }
 
 a:focus {
-	background-color: #6495ED;
-	text-decoration: underline;
+    background-color: #6495ED;
+    text-decoration: underline;
 }
 
 /* ::::: type ::::: */
@@ -54,20 +54,20 @@ a.bookmark { color: limegreen; }
 a.notex { color: rgb(80,0,32); }
 
 fieldset.separator {
-	margin: 0;
-	border: none;
-	border-top: 1px solid #aaa;
-	padding: 0 0 0 1em;
+    margin: 0;
+    border: none;
+    border-top: 1px solid #aaa;
+    padding: 0 0 0 1em;
 }
 
 fieldset.separator legend {
-	padding: 0;
+    padding: 0;
 }
 
 /* ::::: icon ::::: */
 li img {
-	border: none;
-	vertical-align: middle;
-	margin-right: 5px;
+    border: none;
+    vertical-align: middle;
+    margin-right: 5px;
 }
 

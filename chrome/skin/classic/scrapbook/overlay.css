@@ -5,19 +5,19 @@
 /* ::::: MAIN TOOLBAR BUTTON ::::: */
 
 #ScrapBookStatusPanel {
-	list-style-image: url("chrome://scrapbook/skin/main_24.png");
+    list-style-image: url("chrome://scrapbook/skin/main_24.png");
 }
 
 #scrapbook-button {
-	list-style-image: url("chrome://scrapbook/skin/main_24.png");
+    list-style-image: url("chrome://scrapbook/skin/main_24.png");
 }
 
 toolbar[iconsize="small"] #ScrapBookStatusPanel {
-	list-style-image: url("chrome://scrapbook/skin/main_16.png");
+    list-style-image: url("chrome://scrapbook/skin/main_16.png");
 }
 
 toolbar[iconsize="small"] #scrapbook-button {
-	list-style-image: url("chrome://scrapbook/skin/main_16.png");
+    list-style-image: url("chrome://scrapbook/skin/main_16.png");
 }
 
 
@@ -46,159 +46,159 @@ toolbar[iconsize="small"] #scrapbook-button {
 /* ::::: MENUBAR ::::: */
 
 #ScrapBookMenu menuitem.sb-item {
-	list-style-image: url('chrome://scrapbook/skin/treeitem.png') !important;
+    list-style-image: url('chrome://scrapbook/skin/treeitem.png') !important;
 }
 
 #ScrapBookMenu menuitem.sb-item[sbtype="note"] {
-	list-style-image: url('chrome://scrapbook/skin/treenote.png') !important;
+    list-style-image: url('chrome://scrapbook/skin/treenote.png') !important;
 }
 
 #ScrapBookMenu menuitem.sb-item[sbtype="notex"] {
-	list-style-image: url('chrome://scrapbook/skin/treenotex.png') !important;
-	color: rgb(80,0,32);
+    list-style-image: url('chrome://scrapbook/skin/treenotex.png') !important;
+    color: rgb(80,0,32);
 }
 
 #ScrapBookMenu menuitem.sb-item[sbtype="marked"] {
-	font-weight: bold;
+    font-weight: bold;
 }
 
 #ScrapBookMenu menuitem.sb-item[sbtype="combine"] {
-	color: blue;
+    color: blue;
 }
 
 #ScrapBookMenu menuitem.sb-item[sbtype="bookmark"] {
-	color: rgb(32,192,32);
+    color: rgb(32,192,32);
 }
 
 
 /* ::::: EDITOR / INFOBAR ::::: */
 
 toolbox#ScrapBookToolbox toolbar {
-	border-top: 1px solid ThreeDShadow;
-	padding: 1px;
+    border-top: 1px solid ThreeDShadow;
+    padding: 1px;
 }
 
 toolbox#ScrapBookToolbox toolbar > image {
-	margin-left: 3px;
+    margin-left: 3px;
 }
 
 toolbox#ScrapBookToolbox toolbarbutton .toolbarbutton-icon {
-	margin-left : 2px;
-	margin-right: 2px;
+    margin-left : 2px;
+    margin-right: 2px;
 }
 
 toolbox#ScrapBookToolbox toolbarbutton[type="menu-button"] .toolbarbutton-icon {
-	margin-right: 0px;
+    margin-right: 0px;
 }
 
 toolbox#ScrapBookToolbox textbox {
-	min-height: 2em;
+    min-height: 2em;
 }
 
 
 /* ::::: EDITOR ::::: */
 
 toolbar#ScrapBookEditor #ScrapBookToggleComment {
-	list-style-image: url('chrome://scrapbook/skin/edit_comment.png');
+    list-style-image: url('chrome://scrapbook/skin/edit_comment.png');
 }
 
 toolbar#ScrapBookEditor #ScrapBookToggleComment[disabled="true"] {
-	list-style-image: url('chrome://scrapbook/skin/edit_comment_disable.png');
+    list-style-image: url('chrome://scrapbook/skin/edit_comment_disable.png');
 }
 
 toolbar#ScrapBookEditor #ScrapBookHighlighter {
-	list-style-image: url('chrome://scrapbook/skin/edit_highlighter.png');
+    list-style-image: url('chrome://scrapbook/skin/edit_highlighter.png');
 }
 
 toolbar#ScrapBookEditor #ScrapBookHighlighter[disabled="true"] {
-	list-style-image: url('chrome://scrapbook/skin/edit_highlighter_disable.png');
+    list-style-image: url('chrome://scrapbook/skin/edit_highlighter_disable.png');
 }
 
 toolbar#ScrapBookEditor #ScrapBookHighlighter menuitem[type="radio"] {
-	padding: 2px;
-	margin: 1px;
+    padding: 2px;
+    margin: 1px;
 }
 
 toolbar#ScrapBookEditor #ScrapBookHighlighter menuitem[type="radio"] {
-	border: 1px solid transparent;
+    border: 1px solid transparent;
 }
 
 toolbar#ScrapBookEditor #ScrapBookHighlighter menupopup {
-	min-width: 160px;
+    min-width: 160px;
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditAnnotation {
-	list-style-image: url('chrome://scrapbook/skin/edit_annotation.png');
+    list-style-image: url('chrome://scrapbook/skin/edit_annotation.png');
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditAnnotation[disabled="true"] {
-	list-style-image: url('chrome://scrapbook/skin/edit_annotation_disable.png');
+    list-style-image: url('chrome://scrapbook/skin/edit_annotation_disable.png');
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditHTML {
-	list-style-image: url('chrome://scrapbook/skin/edit_html.png');
+    list-style-image: url('chrome://scrapbook/skin/edit_html.png');
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditHTML[disabled="true"] {
-	list-style-image: url('chrome://scrapbook/skin/edit_html_disable.png');
+    list-style-image: url('chrome://scrapbook/skin/edit_html_disable.png');
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditCutter {
-	list-style-image: url('chrome://scrapbook/skin/edit_cutter.png');
+    list-style-image: url('chrome://scrapbook/skin/edit_cutter.png');
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditCutter[disabled="true"] {
-	list-style-image: url('chrome://scrapbook/skin/edit_cutter_disable.png');
+    list-style-image: url('chrome://scrapbook/skin/edit_cutter_disable.png');
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditEraser {
-	list-style-image: url('chrome://scrapbook/skin/edit_eraser.png');
+    list-style-image: url('chrome://scrapbook/skin/edit_eraser.png');
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditEraser[disabled="true"] {
-	list-style-image: url('chrome://scrapbook/skin/edit_eraser_disable.png');
+    list-style-image: url('chrome://scrapbook/skin/edit_eraser_disable.png');
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditUndo {
-	list-style-image: url('chrome://scrapbook/skin/edit_undo.png');
+    list-style-image: url('chrome://scrapbook/skin/edit_undo.png');
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditUndo[disabled="true"] {
-	list-style-image: url('chrome://scrapbook/skin/edit_undo_disable.png');
+    list-style-image: url('chrome://scrapbook/skin/edit_undo_disable.png');
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditSave {
-	list-style-image: url('chrome://scrapbook/skin/edit_save.png');
+    list-style-image: url('chrome://scrapbook/skin/edit_save.png');
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditSave[disabled="true"] {
-	list-style-image: url('chrome://scrapbook/skin/edit_save_disable.png');
+    list-style-image: url('chrome://scrapbook/skin/edit_save_disable.png');
 }
 
 
 /* ::::: INFOBAR ::::: */
 
 toolbar#ScrapBookInfobar {
-	background-color: InfoBackground;
-	padding-left: 8px;
-	border-top: 1px solid ThreeDShadow !important;
+    background-color: InfoBackground;
+    padding-left: 8px;
+    border-top: 1px solid ThreeDShadow !important;
 }
 
 toolbar#ScrapBookInfobar label {
-	color: InfoText;
-	cursor: pointer;
-	margin-right: 50px;
+    color: InfoText;
+    cursor: pointer;
+    margin-right: 50px;
 }
 
 toolbar#ScrapBookInfobar toolbarbutton {
-	-moz-appearance: none;
-	margin: 1px 0px 1px 6px;
-	padding: 2px;
-	background: none;
+    -moz-appearance: none;
+    margin: 1px 0px 1px 6px;
+    padding: 2px;
+    background: none;
 }
 
 toolbar#ScrapBookInfobar toolbarbutton[disabled="true"] label {
-	color: GrayText;
+    color: GrayText;
 }
 
 

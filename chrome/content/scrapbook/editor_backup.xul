@@ -3,14 +3,14 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 
 <!DOCTYPE dialog [
-	<!ENTITY % prefDTD SYSTEM "chrome://scrapbook/locale/prefs.dtd">
-	%prefDTD;
-	<!ENTITY % editorDTD SYSTEM "chrome://scrapbook/locale/editor.dtd" >
-	%editorDTD;
+    <!ENTITY % prefDTD SYSTEM "chrome://scrapbook/locale/prefs.dtd">
+    %prefDTD;
+    <!ENTITY % editorDTD SYSTEM "chrome://scrapbook/locale/editor.dtd" >
+    %editorDTD;
 ]>
 
 <dialog id="sbFileDialog"
-		title="&sb.edit.html.backup;"
+        title="&sb.edit.html.backup;"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         buttons="accept,cancel"
         style="width: 400px;"
@@ -18,11 +18,11 @@
         onload="init();"
         ondialogaccept="accept();">
 
-	<script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
-	<script type="application/x-javascript" src="chrome://scrapbook/content/editor_backup.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
+    <script type="application/x-javascript" src="chrome://scrapbook/content/editor_backup.js" />
 
-	<hbox>
-		<label value="&sb.edit.html.backup.desc;" />
-		<textbox id="sbFileHistHTML" placeholder="some comment" flex="1" oninput="pick('sbFileHistHTMLUse');" />
-	</hbox>
+    <hbox>
+        <label value="&sb.edit.html.backup.desc;" />
+        <textbox id="sbFileHistHTML" placeholder="some comment" flex="1" oninput="pick('sbFileHistHTMLUse');" />
+    </hbox>
 </dialog>
