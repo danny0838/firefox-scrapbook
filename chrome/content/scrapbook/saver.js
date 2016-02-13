@@ -20,7 +20,8 @@ var sbContentSaver = {
 
 
     init : function(aPresetData) {
-        this.item = sbCommonUtils.newItem(sbDataSource.identify(sbCommonUtils.getTimeStamp()));
+        this.item = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
+        this.item.id = sbDataSource.identify(this.item.id);
         this.name = "index";
         this.favicon = null;
         this.file2URL = { "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
