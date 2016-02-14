@@ -289,8 +289,8 @@ var sbBrowserOverlay = {
     },
 
     bookmark: function(aResName, aResIndex, aPreset) {
-        var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
-        var newItem = sbCommonUtils.newItem(newID);
+        var newItem = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
+        newItem.id     = sbDataSource.identify(newItem.id);
         newItem.type   = "bookmark";
         newItem.source = window.content.location.href;
         newItem.title  = gBrowser.selectedTab.label;

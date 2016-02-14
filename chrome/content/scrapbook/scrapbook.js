@@ -73,8 +73,8 @@ var sbMainService = {
     createFolder: function(aAsChild) {
         sbSearchService.exit();
         // create item
-        var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
-        var newItem = sbCommonUtils.newItem(newID);
+        var newItem = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
+        newItem.id = sbDataSource.identify(newItem.id);
         newItem.title = sbCommonUtils.lang("scrapbook", "DEFAULT_FOLDER");
         newItem.type = "folder";
         // add resource
@@ -97,8 +97,8 @@ var sbMainService = {
     createSeparator: function(aAsChild) {
         sbSearchService.exit();
         // create item
-        var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
-        var newItem = sbCommonUtils.newItem(newID);
+        var newItem = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
+        newItem.id = sbDataSource.identify(newItem.id);
         newItem.type = "separator";
         // add resource
         var newRes = this.addNewResource(newItem, null, aAsChild);
@@ -113,8 +113,8 @@ var sbMainService = {
     createNoteX: function(aAsChild) {
         sbSearchService.exit();
         // create item
-        var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
-        var newItem = sbCommonUtils.newItem(newID);
+        var newItem = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
+        newItem.id = sbDataSource.identify(newItem.id);
         newItem.title = sbCommonUtils.lang("scrapbook", "DEFAULT_NOTEX");
         newItem.type = "notex";
         newItem.chars = "UTF-8";
@@ -123,7 +123,7 @@ var sbMainService = {
         template.append("notex_template.html");
         if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/notex_template.html", template);
         // create content
-        var dir = sbCommonUtils.getContentDir(newID);
+        var dir = sbCommonUtils.getContentDir(newItem.id);
         var html = dir.clone();
         html.append("index.html");
         var tpl = {
