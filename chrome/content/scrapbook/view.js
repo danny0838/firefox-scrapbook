@@ -90,9 +90,9 @@ function SB_getHTMLHead(aTitle) {
         + '}\n'
         + '</style>\n'
         + '<script>\n'
-        + '    function initHeight(obj){\n'
-        + '        obj.style.height = parseInt(obj.contentDocument.documentElement.scrollHeight, 10) + 30 + \'px\';\n'
-        + '    }\n'
+        + 'function fixHeight(elem){\n'
+        + '    elem.style.height = parseInt(elem.contentDocument.body.scrollHeight, 10) + 30 + "px";\n'
+        + '}\n'
         + '</script>\n'
         + '</head>\n'
         + '<body>\n';
@@ -105,7 +105,7 @@ function SB_getHTMLBody(aItem) {
         + '\t<img src="' + sbCommonUtils.escapeHTML(aItem.icon) + '" width="16" height="16">\n'
         + '\t<a href="' + sbCommonUtils.escapeHTML(aItem.source) + '" target="_top">' + sbCommonUtils.escapeHTMLWithSpace(aItem.title, true) + '</a>\n'
         + '</cite>\n';
-    if ( aItem.type != "bookmark" ) src += '<iframe class="scrapbook-iframe" src="data/' + aItem.id + '/index.html" onload="initHeight(this);"></iframe>\n';
+    if ( aItem.type != "bookmark" ) src += '<iframe class="scrapbook-iframe" src="data/' + aItem.id + '/index.html" onload="fixHeight(this);"></iframe>\n';
     return src;
 }
 
