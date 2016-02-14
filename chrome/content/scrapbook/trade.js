@@ -493,7 +493,8 @@ var sbImportService = {
                     if ( idx >= 0 && !window.top.sbTreeHandler.TREE.view.isContainerOpen(idx) ) window.top.sbTreeHandler.TREE.view.toggleOpenState(idx);
                 }
                 else {
-                    var newItem = sbCommonUtils.newItem(sbDataSource.identify(sbCommonUtils.getTimeStamp()));
+                    var newItem = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
+                    newItem.id = sbDataSource.identify(newItem.id);
                     newItem.title = folderList[i];
                     newItem.type = "folder";
                     var newRes = sbDataSource.addItem(newItem, this.tarResArray[0], 0);

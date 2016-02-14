@@ -108,7 +108,8 @@ var sbCommonUtils = {
     },
 
     newItem : function(aID) {
-        return { id : aID || "", create : aID || "", modify : aID || "", type : "", title : "", chars : "", icon : "", source : "", comment : "", lock : "" };
+        aID = aID || "";
+        return { id : aID, create : aID, modify : aID, type : "", title : "", chars : "", icon : "", source : "", comment : "", lock : "" };
     },
 
     getScrapBookDir : function() {

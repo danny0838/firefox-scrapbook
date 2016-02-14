@@ -17,8 +17,8 @@ var sbNoteService = {
         this.locked = true;
         setTimeout(function(){ sbNoteService.locked = false; }, 1000);
         this.save();
-        var newID = sbDataSource.identify(sbCommonUtils.getTimeStamp());
-        var newItem = sbCommonUtils.newItem(newID);
+        var newItem = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
+        newItem.id    = sbDataSource.identify(newItem.id);
         newItem.type  = "note";
         newItem.chars = "UTF-8";
         this.resource = sbDataSource.addItem(newItem, aTarResURI, aTarRelIdx);
