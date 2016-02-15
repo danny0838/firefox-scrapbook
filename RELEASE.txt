@@ -1,3 +1,8 @@
+Scrapbook X 1.12.19
+----------------
+- FIXED: Prevent invalid UTF-8 characters be stored in the cache.rdf, which causes failure of the search script of "Output HTML tree".
+
+
 Scrapbook X 1.12.18
 ----------------
 - UPDATE: Use more precise create time for newly captured items.
