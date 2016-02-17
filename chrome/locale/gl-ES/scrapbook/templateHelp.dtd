@@ -1,0 +1,6 @@
+<!ENTITY sb.thelp.dir "ltr">
+<!ENTITY sb.thelp.title "ScrapBook Template HTML Help">
+<!ENTITY sb.thelp.tags "Two Special Tags">
+<!ENTITY sb.thelp.tag1 "O titulo (a primeira lina) da notae">
+<!ENTITY sb.thelp.tag2 "Os contidos (a segunda lina ou posterirores) da nota">
+<!ENTITY sb.thelp.preset "Preset Template">
