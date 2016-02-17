@@ -82,10 +82,6 @@ var sbCommonUtils = {
         delete this._fxVer18;
         return this._fxVer18 = (this.checkFirefoxVersion("18.0") >=0);
     },
-    get _fxVer22() {
-        delete this._fxVer22;
-        return this._fxVer22 = (this.checkFirefoxVersion("22.0") >=0);
-    },
     get _fxVer30() {
         delete this._fxVer30;
         return this._fxVer30 = (this.checkFirefoxVersion("30.0") >=0);

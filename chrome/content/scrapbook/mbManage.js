@@ -178,8 +178,12 @@ MultiBookTreeView.prototype = {
     getCellProperties: function(row, col, properties) {
         if (this._data[row][kActiveCol]) {
             var val = "active";
-            if (sbCommonUtils._fxVer22) return val;
-            else properties.AppendElement(ATOM_SERVICE.getAtom(val));
+            // Gecko >= 22 (Firefox >= 22): do not take properties and requires a return value
+            if (properties) {
+                properties.AppendElement(ATOM_SERVICE.getAtom(val));
+            } else {
+                return val;
+            }
         }
     },
     getColumnProperties: function(col, properties) {},
