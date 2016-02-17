@@ -164,8 +164,7 @@ var sbMainService = {
                 tarRelIdx  = curRelIdx + (sbCommonUtils.getPref("tree.unshift", false) ? 0 : 1);
                 isRootPos  = false;
             }
-        }
-        catch(ex) {
+        } catch(ex) {
             tarResName = sbTreeHandler.TREE.ref;
             tarRelIdx  = 0;
             isRootPos  = true;
@@ -617,9 +616,7 @@ var sbTreeDNDHandler = {
     quit: function() {
         try {
             sbTreeHandler.TREE.builderView.removeObserver(this.builderObserver);
-        }
-        catch(ex) {
-        }
+        } catch(ex) {}
     },
     
     // orient: -1 = drop before; 0 = drop on; 1 = drop after
@@ -682,9 +679,7 @@ var sbTreeDNDHandler = {
         var isSelected = false;
         try {
             isSelected = !(sel.anchorNode == sel.focusNode && sel.anchorOffset == sel.focusOffset);
-        }
-        catch (ex) {
-        }
+        } catch (ex) {}
         var isEntire = (url == top.window.content.location.href);
         var res = (aRow == -1) ? [sbTreeHandler.TREE.ref, 0] : this.getTarget(aRow, aOrient);
         if (this.modAlt && !isSelected) {

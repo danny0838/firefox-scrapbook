@@ -335,8 +335,7 @@ var sbBrowserOverlay = {
         var isSelected = false;
         try {
             isSelected = !(sel.anchorNode == sel.focusNode && sel.anchorOffset == sel.focusOffset);
-        }
-        catch(ex) {}
+        } catch(ex) {}
         return isSelected;
     },
 
@@ -354,8 +353,7 @@ var sbBrowserOverlay = {
             onLink   = gContextMenu.onLink && !gContextMenu.onMailtoLink;
             inFrame  = gContextMenu.inFrame;
             onInput  = gContextMenu.onTextInput;
-        }
-        catch(ex) {
+        } catch(ex) {
             selected = this.isSelected();
             onLink   = this.getLinkURI() ? true : false;
             inFrame  = document.popupNode.ownerDocument != window.content.document;

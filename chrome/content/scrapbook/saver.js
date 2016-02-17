@@ -772,8 +772,7 @@ var sbContentSaver = {
         var skip = false;
         try {
             if (!aCSS.cssRules) skip = true;
-        }
-        catch(ex) {
+        } catch(ex) {
             sbCommonUtils.warn(sbCommonUtils.lang("scrapbook", "ERR_FAIL_GET_CSS", [aCSS.href, aDocument.location.href, ex]));
                 content += "/* ERROR: Unable to access this CSS */\n\n";
             skip = true;
@@ -959,8 +958,7 @@ var sbContentSaver = {
                 this.httpTask[this.item.id]++;
                 WBP.progressListener = new sbCaptureObserver(this.item, newFileName);
                 return newFileName;
-            }
-            catch(ex) {
+            } catch(ex) {
                 sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_DOWNLOAD_FILE", [aURLSpec, ex]));
                 this.httpTask[this.item.id]--;
                 return "";
@@ -979,8 +977,7 @@ var sbContentSaver = {
                 var item = this.item;
                 setTimeout(function(){ sbCaptureObserverCallback.onDownloadComplete(item); }, 0);
                 return newFileName;
-            }
-            catch(ex) {
+            } catch(ex) {
                 sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_COPY_FILE", [aURLSpec, ex]));
                 return "";
             }

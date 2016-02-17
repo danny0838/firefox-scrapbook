@@ -552,8 +552,7 @@ var sbCacheService = {
             FORMAT_CONVERTER.convert("text/html", fromStr, fromStr.toString().length, "text/unicode", toStr, {});
             toStr = toStr.value.QueryInterface(Components.interfaces.nsISupportsString);
             return toStr.toString();
-        }
-        catch(ex) {
+        } catch(ex) {
             return aStr;
         }
     },

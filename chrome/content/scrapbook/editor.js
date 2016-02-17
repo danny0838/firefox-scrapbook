@@ -955,9 +955,7 @@ var sbHtmlEditor = {
         try {
             var sidebarId = sbCommonUtils.getSidebarId("sidebar");
             var res = document.getElementById(sidebarId).contentWindow.sbTreeHandler.getSelection(true, 2);
-        }
-        catch (ex) {
-        }
+        } catch(ex) {}
         // -- check the selected resource
         if (res && res.length) {
             res = res[0];
@@ -2482,9 +2480,7 @@ var sbAnnotationService = {
             try {
                 var sidebarId = sbCommonUtils.getSidebarId("sidebar");
                 var res = document.getElementById(sidebarId).contentWindow.sbTreeHandler.getSelection(true, 2);
-            }
-            catch (ex) {
-            }
+            } catch(ex) {}
             // check the selected resource
             if (res && res.length) {
                 res = res[0];
