@@ -359,8 +359,7 @@ var sbExportService = {
             dirName = dirName.replace(/\./g, "");
             destDir = sbTradeService.rightDir.clone();
             destDir.append(dirName);
-        }
-        while ( destDir.exists() && ++num < 256 );
+        } while ( destDir.exists() && ++num < 256 );
         var srcDir = sbCommonUtils.getContentDir(item.id, false);
         sbCommonUtils.writeIndexDat(item);
         if ( !srcDir.exists() || !sbCommonUtils.validateID(srcDir.leafName) ) throw "Directory not found.";
