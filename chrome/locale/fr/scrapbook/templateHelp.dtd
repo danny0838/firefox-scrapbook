@@ -1,0 +1,6 @@
+<!ENTITY sb.thelp.dir "ltr">
+<!ENTITY sb.thelp.title "ScrapBook Template HTML Help">
+<!ENTITY sb.thelp.tags "Two Special Tags">
+<!ENTITY sb.thelp.tag1 "The title (the first line) of the note">
+<!ENTITY sb.thelp.tag2 "The contents (the second line or later) of the note">
+<!ENTITY sb.thelp.preset "Preset Template">
