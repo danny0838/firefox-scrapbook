@@ -59,8 +59,7 @@ var sbContentSaver = {
                 if ( titles.length > 4 ) break;
             }
             this.item.title = ( titles.length > 0 ) ? titles[1] : titles[0];
-        }
-        else {
+        } else {
             this.selection = null;
             this.item.title = titles[0];
         }
@@ -108,8 +107,7 @@ var sbContentSaver = {
                     context: "indepth",
                 };
                 window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no", data);
-            }
-            else {
+            } else {
                 for ( var i = 0; i < this.linkURLs.length; i++ ) {
                     sbCaptureTask.add(this.linkURLs[i], aPresetData[4] + 1);
                 }
@@ -313,8 +311,7 @@ var sbContentSaver = {
                     meta.getAttribute("content").match(/^[^;]*;\s*charset=(.*)$/i) ) {
                     hasmeta = true;
                     meta.setAttribute("content", "text/html; charset=UTF-8");
-                }
-                else if ( meta.hasAttribute("charset") ) {
+                } else if ( meta.hasAttribute("charset") ) {
                     hasmeta = true;
                     meta.setAttribute("charset", "UTF-8");
                 }
@@ -332,8 +329,7 @@ var sbContentSaver = {
         var myHTML = this.doctypeToString(aDocument.doctype) + sbCommonUtils.surroundByTags(rootNode, rootNode.innerHTML + "\n");
         if ( this.option["internalize"] ) {
             var myHTMLFile = this.option["internalize"];
-        }
-        else {
+        } else {
             var myHTMLFile = this.contentDir.clone();
             myHTMLFile.append(myHTMLFileName);
         }
@@ -361,8 +357,7 @@ var sbContentSaver = {
                 this.item.type  = aCaptureType;
                 this.item.chars = aCharset || "";
             }
-        }
-        else {
+        } else {
             var myHTML = "";
         }
         var myHTMLFile = this.contentDir.clone();
@@ -411,8 +406,7 @@ var sbContentSaver = {
                 if (elems[i].nodeType == 1) {
                     if (elems[i].nodeName.toUpperCase() == "HEAD") {
                         headNode = elems[i];
-                    }
-                    else {
+                    } else {
                         break;
                     }
                 }
@@ -573,21 +567,17 @@ var sbContentSaver = {
                             if ( sbCommonUtils.getSbObjectType(aNode) == "stylesheet" ) {
                                 // a special stylesheet used by scrapbook, keep it intact
                                 // (it should use an absolute link or a chrome link, which don't break after capture)
-                            }
-                            else if ( aNode.href.indexOf("chrome://") == 0 ) {
+                            } else if ( aNode.href.indexOf("chrome://") == 0 ) {
                                 // a special stylesheet used by scrapbook or other addons/programs, keep it intact
-                            } 
-                            else if ( !this.option["styles"] ) {
+                            } else if ( !this.option["styles"] ) {
                                 // not capturing styles, set it blank
                                 aNode.setAttribute("href", "about:blank");
-                            }
-                            else if ( this.option["rewriteStyles"] ) {
+                            } else if ( this.option["rewriteStyles"] ) {
                                 // capturing styles with rewrite, the style should be already processed
                                 // in saveDocumentInternal => processCSSRecursively
                                 // remove it here with safety
                                 return this.removeNodeFromParent(aNode);
-                            }
-                            else {
+                            } else {
                                 // capturing styles with no rewrite, download it and rewrite the link
                                 var aFileName = this.download(aNode.href);
                                 if (aFileName) aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
@@ -622,12 +612,10 @@ var sbContentSaver = {
             case "style" : 
                 if ( sbCommonUtils.getSbObjectType(aNode) == "stylesheet" ) {
                     // a special stylesheet used by scrapbook, keep it intact
-                }
-                else if ( !this.option["styles"] ) {
+                } else if ( !this.option["styles"] ) {
                     // not capturing styles, remove it
                     return this.removeNodeFromParent(aNode);
-                }
-                else if ( this.option["rewriteStyles"] ) {
+                } else if ( this.option["rewriteStyles"] ) {
                     // capturing styles with rewrite, the styles should be already processed
                     // in saveDocumentInternal => processCSSRecursively
                     // remove it here with safety
@@ -651,8 +639,7 @@ var sbContentSaver = {
                 if ( this.option["internalize"] ) break;
                 if ( !aNode.href ) {
                     break;
-                }
-                else if ( aNode.href.match(/^javascript:/i) && !this.option["script"] ) {
+                } else if ( aNode.href.match(/^javascript:/i) && !this.option["script"] ) {
                     aNode.removeAttribute("href");
                     break;
                 }
@@ -674,8 +661,7 @@ var sbContentSaver = {
                 // primarily to enable the combine wizard to capture all "file" data
                 else if ( aNode.href.indexOf("file://") == 0 && !ext.match(/html?/) ) {
                     flag = true;
-                }
-                else {
+                } else {
                     switch ( ext ) {
                         case "jpg" : case "jpeg" : case "png" : case "gif" : case "tiff" : flag = this.option["dlimg"]; break;
                         case "aac" : case "flac" : case "mp3" : case "ogg" : case "ram" : case "ra" : case "rm" : case "rmx" : case "wav" : case "wma" : flag = this.option["dlsnd"]; break;
@@ -804,12 +790,10 @@ var sbContentSaver = {
         if (aCSS.href) {
             if (!isImport) {
                 content = "/* ::::: " + aCSS.href + media + " ::::: */\n\n" + content;
-            }
-            else {
+            } else {
                 content = "/* ::::: " + "(import) " + aCSS.href + media + " ::::: */\n" + content + "/* ::::: " + "(end import)" + " ::::: */\n";
             }
-        }
-        else {
+        } else {
             content = "/* ::::: " + "[internal]" + media + " ::::: */\n\n" + content;
         }
         return content;
@@ -863,18 +847,14 @@ var sbContentSaver = {
                         if (arguments[1]) {
                             depseudoSelectors.push("");
                             startPseudo = false;
-                        }
-                        else if (arguments[5] == ":") {
+                        } else if (arguments[5] == ":") {
                             hasPseudo = true;
                             startPseudo = true;
-                        }
-                        else if (startPseudo && (arguments[3] || arguments[5])) {
-                        }
-                        else if (startPseudo) {
+                        } else if (startPseudo && (arguments[3] || arguments[5])) {
+                        } else if (startPseudo) {
                             startPseudo = false;
                             depseudoSelectors[depseudoSelectors.length - 1] += arguments[0];
-                        }
-                        else {
+                        } else {
                             depseudoSelectors[depseudoSelectors.length - 1] += arguments[0];
                         }
                         return arguments[0];
@@ -958,8 +938,7 @@ var sbContentSaver = {
             if ( this.option["internalize"] ) {
                 var targetFile = this.option["internalize"].parent;
                 targetFile.append(newFileName);
-            }
-            else {
+            } else {
                 var targetFile = this.contentDir.clone();
                 targetFile.append(newFileName);
             }
@@ -986,12 +965,10 @@ var sbContentSaver = {
                 this.httpTask[this.item.id]--;
                 return "";
             }
-        }
-        else if ( aURL.schemeIs("file") ) {
+        } else if ( aURL.schemeIs("file") ) {
             if ( this.option["internalize"] ) {
                 var targetDir = this.option["internalize"].parent;
-            }
-            else {
+            } else {
                 var targetDir = this.contentDir.clone();
             }
             try {
@@ -1125,8 +1102,7 @@ var sbCaptureObserverCallback = {
                 alertsSvc.showAlertNotification(icon, title, text, true, aItem.id, listener);
             }
             if ( aItem.id in sbContentSaver.httpTask ) delete sbContentSaver.httpTask[aItem.id];
-        }
-        else {
+        } else {
             var icon = sbCommonUtils.getDefaultIcon();
             var title = "ScrapBook: " + sbCommonUtils.lang("overlay", "CAPTURE_COMPLETE");
             var alertsSvc = Components.classes["@mozilla.org/alerts-service;1"].getService(Components.interfaces.nsIAlertsService);

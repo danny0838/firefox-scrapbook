@@ -80,8 +80,7 @@ var sbNoteService = {
         if ( !("gBrowser" in window.top) ) aTabbed = true;
         if ( !aTabbed && window.top.content.sbNoteService ) {
             window.top.content.sbNoteService.edit(aRes);
-        }
-        else {
+        } else {
             if ( aTabbed ) {
                 sbCommonUtils.loadURL("chrome://scrapbook/content/note.xul?id=" + sbDataSource.getProperty(aRes, "id"), aTabbed);
             } else {

@@ -157,8 +157,7 @@ var sbMainService = {
                 tarRelIdx  = 0;
                 isRootPos  = false;
                 if (!sbTreeHandler.TREE.view.isContainerOpen(curIdx) ) sbTreeHandler.TREE.view.toggleOpenState(curIdx);
-            }
-            else {
+            } else {
                 var curPar = sbTreeHandler.getParentResource(curIdx);
                 var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
                 tarResName = curPar.Value;
@@ -175,8 +174,7 @@ var sbMainService = {
         if (aItem) {
             var newRes = sbDataSource.addItem(aItem, tarResName, tarRelIdx);
             if (aItem.type == "folder") sbDataSource.createEmptySeq(newRes.Value);
-        }
-        else {
+        } else {
             if (!aData) return;
             if (aData.type == "note") {
                 sbNoteService.create(tarResName, tarRelIdx, aData.inTab);
@@ -477,8 +475,7 @@ var sbController = {
             }
             if (!sbDataSource.exists(aResList[i])) {
                 continue;
-            }
-            else if (sbDataSource.getRelativeIndex(aParResList[i], aResList[i]) < 0) {
+            } else if (sbDataSource.getRelativeIndex(aParResList[i], aResList[i]) < 0) {
                 sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_RESOURCE", [aResList[i].Value]));
                 continue;
             }
@@ -693,21 +690,18 @@ var sbTreeDNDHandler = {
         if (this.modAlt && !isSelected) {
             if (isEntire) {
                 top.window.sbBrowserOverlay.bookmark(res[0], res[1]);
-            }
-            else {
+            } else {
                 var arg = { title : aXferString.split("\n")[1], source : url };
                 top.window.sbBrowserOverlay.bookmark(res[0], res[1], arg);
             }
-        }
-        else if (isSelected || isEntire) {
+        } else if (isSelected || isEntire) {
             var targetWindow = isEntire ? top.window.content : win;
             top.window.sbContentSaver.captureWindow(
                 targetWindow, !isEntire,
                 sbCommonUtils.getPref("showDetailOnDrop", false) || this.modShift,
                 res[0], res[1], null
             );
-        }
-        else if (url.indexOf("http://") == 0 || url.indexOf("https://") == 0) {
+        } else if (url.indexOf("http://") == 0 || url.indexOf("https://") == 0) {
             var data = {
                 urls: [url],
                 refUrl: win.location.href,
@@ -723,14 +717,12 @@ var sbTreeDNDHandler = {
                 titles: null,
             };
             top.window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
-        }
-        else if (url.indexOf("file://") == 0) {
+        } else if (url.indexOf("file://") == 0) {
             top.window.sbContentSaver.captureFile(
                 url, "file://", "file", sbCommonUtils.getPref("showDetailOnDrop", false),
                 res[0], res[1], null
             );
-        }
-        else {
+        } else {
             sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERROR_INVALID_URL", [url]));
         }
     },
@@ -807,16 +799,14 @@ var sbSearchService = {
             else
                 this.exit();
             document.getElementById("sbSearchTextbox").value = "";
-        }
-        else {
+        } else {
             var query = aInput;
             var re = document.getElementById("sbSearchPopupOptionRE").getAttribute("checked");
             var mc = document.getElementById("sbSearchPopupOptionCS").getAttribute("checked");
             this.FORM_HISTORY.addEntry("sbSearchHistory", query);
             if (this.type == "fulltext") {
                 this.doFullTextSearch(query, re, mc);
-            }
-            else {
+            } else {
                 var key = sbSearchQueryHandler.parse(query, {'re': re, 'mc': mc, 'default': this.type});
                 this.doFilteringSearch(key);
             }
@@ -829,8 +819,7 @@ var sbSearchService = {
         var shouldBuild = false;
         if (!cache.exists() || cache.fileSize < 1024 * 32) {
             shouldBuild = true;
-        }
-        else {
+        } else {
             var data = sbCommonUtils.getScrapBookDir().clone();
             data.append("scrapbook.rdf");
             var dataModTime = data.lastModifiedTime;
@@ -845,8 +834,7 @@ var sbSearchService = {
             + (this.treeRef != "urn:scrapbook:root" ? "&ref=" + this.treeRef : "");
         if (shouldBuild) {
             this.updateCache(uri + query);
-        }
-        else {
+        } else {
             var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
             var inTab = (win.content.location.href.indexOf(uri) == 0) ? false : sbCommonUtils.getPref("tabs.searchResult", false);
             sbCommonUtils.loadURL(uri + query, inTab);
@@ -957,8 +945,7 @@ var sbSearchQueryHandler = {
         aString.replace(/(\-?[A-Za-z]+:|\-)(?:"((?:\\"|[^"])*)"|([^ "]*))|(?:"((?:""|[^"])*)"|([^ "]+))/g, function(match, cmd, qterm, term, qterm2, term2){
             if (cmd) {
                 var term = qterm ? qterm.replace(/""/g, '"') : term;
-            }
-            else {
+            } else {
                 var term = qterm2 ? qterm2.replace(/""/g, '"') : term2;
             }
             // commands that don't require a term
@@ -1083,8 +1070,7 @@ var sbSearchQueryHandler = {
                         addError(sbCommonUtils.lang("scrapbook", "ERR_SEARCH_REGEXP_INAVLID", [term]));
                         return null;
                     }
-                }
-                else {
+                } else {
                     var regex = new RegExp(sbCommonUtils.escapeRegExp(term), options);
                 }
                 return regex;
@@ -1236,8 +1222,7 @@ var sbSearchQueryHandler = {
             regex.lastIndex = 0;
             if (!regex.test(aText)) {
                 return false;
-            }
-            else {
+            } else {
                 this.updateHits(aKeyName, regex.lastIndex - RegExp.lastMatch.length);
             }
         }

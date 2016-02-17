@@ -92,24 +92,21 @@ var sbSortService = {
                 resListN.reverse();
                 resListX.reverse();
                 resListF = resListF.concat(resListI).concat(resListN).concat(resListX);
-            }
-            else {
+            } else {
                 resListF.sort(this.compare);
                 resListI.sort(this.compare);
                 resListN.sort(this.compare);
                 resListX.sort(this.compare);
                 resListF = resListF.concat(resListI).concat(resListN).concat(resListX);
             }
-        }
-        else {
+        } else {
             while ( resEnum.hasMoreElements() ) {
                 var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
                 resListF.push(res);
             }
             if ( !this.key ){
                 resListF.reverse();
-            }
-            else {
+            } else {
                 resListF.sort(this.compare);
             }
         }

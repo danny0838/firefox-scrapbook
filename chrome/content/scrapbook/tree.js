@@ -36,8 +36,7 @@ var sbTreeHandler = {
         var curIdx = this.TREE.currentIndex;
         if ( this.TREE.view.isContainer(curIdx) ) {
             this.toggleFolder(curIdx);
-        }
-        else {
+        } else {
             if ( aType < 2 && aEvent.button != 1 ) return;
             sbController.open(this.resource, aEvent.button == 1 || aEvent.ctrlKey || aEvent.shiftKey);
         }

@@ -19,8 +19,7 @@ var sbPageEditor = {
         // record item and resource
         if ( aID ) {
             this.item = sbDataSource.getItem(sbBrowserOverlay.resource);
-        }
-        else {
+        } else {
             this.item = null;
             sbBrowserOverlay.resource = null;
         }
@@ -84,8 +83,7 @@ var sbPageEditor = {
             } catch(ex) {
                 sbCommonUtils.error(ex);
             }
-        }
-        else {
+        } else {
             icon.src = gBrowser.selectedTab.getAttribute("image");
         }
         // -- title
@@ -103,8 +101,7 @@ var sbPageEditor = {
         if ( aID && (this.item.lock == "true" || sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec).leafName.match(/^\./)) ) {
             // locked items and hidden (history) HTML pages cannot be edited, simply show a disabled toolbar
             this.disable(true);
-        }
-        else {
+        } else {
             this.disable(false);
         }
         this.showHide(true);
@@ -410,8 +407,7 @@ var sbPageEditor = {
         if ( sbBrowserOverlay.getID() ) {
             this.saveResource();
             this.savePage();
-        }
-        else {
+        } else {
             sbDOMEraser.init(0);
             sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
                 this.documentBeforeSave(win.document);
@@ -737,8 +733,7 @@ var sbHtmlEditor = {
                     sel.addRange(ranges[i]);
                 }
             }
-        }
-        else if ( aStateFlag == 0 ) {
+        } else if ( aStateFlag == 0 ) {
             sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled", false);
             sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.document", null);
             if (wasEnabled) {
@@ -1003,8 +998,7 @@ var sbHtmlEditor = {
                 if ( ["folder", "separator"].indexOf(type) !== -1 ) {
                     res = null;
                 }
-            }
-            else res = null;
+            } else res = null;
             // if it's invalid, alert and quit
             if (!res) {
                 sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_INVALID", [id]));
@@ -1275,16 +1269,14 @@ var sbHtmlEditor = {
                     var html = data.preTag + data.preContext + data.value + data.postContext + data.postTag;
                     range.setStartBefore(ac);
                     range.setEndAfter(ac);
-                }
-                else {
+                } else {
                     // replace inner tag
                     var html = data.preContext + data.value + data.postContext;
                     range.selectNodeContents(ac);
                 }
                 sel.removeAllRanges();
                 sel.addRange(range);
-            }
-            else {
+            } else {
                 var html = data.value;
             }
             aDoc.execCommand("insertHTML", false, html);
@@ -1320,8 +1312,7 @@ var sbHtmlEditor = {
             if (aDescNode) {
                 var tmpParent = aDescNode;
                 var tmpSibling = aDescNode.previousSibling;
-            }
-            else {
+            } else {
                 // no end element means that the selection ends after the last child of aDescNodeParent
                 // so we walk for all elements
                 var tmpSibling = aDescNodeParent.lastChild;
@@ -1423,8 +1414,7 @@ var sbDOMEraser = {
                 this.initEvent(this.lastWindow, 0);
                 this.initStyle(this.lastWindow, 0);
             }
-        }
-        else if (aStateFlag == 1) {
+        } else if (aStateFlag == 1) {
             this.lastWindow = window.content;
             // apply settings to the current window
             this.initEvent(this.lastWindow, 1);
@@ -1454,8 +1444,7 @@ var sbDOMEraser = {
             if ( aStateFlag == 1 ) {
                 var estyle = "* { cursor: crosshair !important; }";
                 sbPageEditor.applyStyle(win, "scrapbook-eraser-style", estyle);
-            }
-            else {
+            } else {
                 sbPageEditor.removeStyle(win, "scrapbook-eraser-style");
             }
         }, this);
@@ -1490,20 +1479,17 @@ var sbDOMEraser = {
                         sbDOMEraser.widerStack = null;
                         sbDOMEraser._selectNode(elem);
                     }
-                }
-                else {
+                } else {
                     sbDOMEraser.widerStack = null;
                     sbDOMEraser._deselectNode();
                 }
             }
-        }
-        else if ( aEvent.type == "mousemove" ) {
+        } else if ( aEvent.type == "mousemove" ) {
             sbDOMEraser.lastX = aEvent.clientX;
             sbDOMEraser.lastY = aEvent.clientY;
             sbDOMEraser.lastMouseWindow = aEvent.target.ownerDocument.defaultView;
             sbDOMEraser._clearHelp();
-        }
-        else if ( aEvent.type == "click" ) {
+        } else if ( aEvent.type == "click" ) {
             var elem = sbDOMEraser.lastTarget;
             if (elem) {
                 var command = ( aEvent.shiftKey || aEvent.button == 2 ) ? "isolate" : "remove";
@@ -2005,8 +1991,7 @@ var sbDOMEraser = {
         if ( sbCommonUtils.getSbObjectRemoveType(aNode) > 0 ) {
             var outlineStyle = "2px dashed #0000FF";
             var labelText = sbCommonUtils.escapeHTMLWithSpace(sbCommonUtils.lang("overlay", "EDIT_REMOVE_HIGHLIGHT"));
-        }
-        else {
+        } else {
             var outlineStyle = "2px solid #FF0000";
             var labelText = makeElementLabelString(aNode);
         }
@@ -2164,8 +2149,7 @@ var sbAnnotationService = {
                     if (sticky.lastChild.nodeName == "#text") {
                         // general cases
                         var text = sticky.lastChild.data;
-                    }
-                    else {
+                    } else {
                         // SB/SBP unsaved sticky
                         var text = sticky.childNodes[1].value;
                     }
@@ -2182,8 +2166,7 @@ var sbAnnotationService = {
                     if (bcomment.firstChild.nodeName == "#text") {
                         // general cases
                         var text = bcomment.firstChild.data;
-                    }
-                    else {
+                    } else {
                         // unsaved block comment
                         var text = bcomment.firstChild.firstChild.value;
                     }
@@ -2194,14 +2177,11 @@ var sbAnnotationService = {
                     });
                     break;
             }
-        }
-        else if ( aEvent.type == "mousemove" ) {
+        } else if ( aEvent.type == "mousemove" ) {
             if ( sbAnnotationService.target ) sbAnnotationService.onDrag(aEvent);
-        }
-        else if ( aEvent.type == "mouseup"   ) {
+        } else if ( aEvent.type == "mouseup"   ) {
             if ( sbAnnotationService.target ) sbAnnotationService.stopDrag(aEvent);
-        }
-        else if ( aEvent.type == "click" ) {
+        } else if ( aEvent.type == "click" ) {
             switch ( sbCommonUtils.getSbObjectType(aEvent.originalTarget) ) {
                 case "freenote-save" :
                     sbAnnotationService.saveFreenote(aEvent.originalTarget.parentNode.parentNode);
@@ -2225,15 +2205,13 @@ var sbAnnotationService = {
         if (preset) {
             var isRelative = preset.isRelative;
             var targetNode = preset.element;
-        }
-        else {
+        } else {
             var sel = sbPageEditor.getSelection(win);
             if (sel) {
                 // relative to the target element
                 var isRelative = true;
                 var targetNode = findTargetNode(sel.anchorNode);
-            }
-            else {
+            } else {
                 // absolute (in the body element)
                 var isRelative = false;
             }
@@ -2262,14 +2240,12 @@ var sbAnnotationService = {
         if ( isRelative ) {
             mainDiv.style.position = "static";
             mainDiv.style.margin = "16px auto";
-        }
-        else {
+        } else {
             mainDiv.style.position = "absolute";
             if (preset) {
                 mainDiv.style.left = targetNode.style.left;
                 mainDiv.style.top  = targetNode.style.top;
-            }
-            else {
+            } else {
                 var left = win.scrollX + Math.round((win.innerWidth - width) / 2);
                 var top = win.scrollY + Math.round((win.innerHeight - height) / 2);
                 mainDiv.style.left = left + "px";
@@ -2284,15 +2260,12 @@ var sbAnnotationService = {
         if (isRelative) {
             if (targetNode === win.document.body) {
                 targetNode.appendChild(mainDiv);
-            }
-            else if (targetNode.nextSibling) {
+            } else if (targetNode.nextSibling) {
                 targetNode.parentNode.insertBefore(mainDiv, targetNode.nextSibling);
-            }
-            else {
+            } else {
                 targetNode.parentNode.appendChild(mainDiv);
             }
-        }
-        else {
+        } else {
             win.document.body.appendChild(mainDiv);
         }
         if (preset) {
@@ -2428,8 +2401,7 @@ var sbAnnotationService = {
             var y = aEvent.clientY - this.offsetY;
             this.target.style.left = x + "px";
             this.target.style.top = y + "px";
-        }
-        else {
+        } else {
             var x = Math.max(aEvent.clientX - this.offsetX, this.FREENOTE_MIN_WIDTH);
             var y = Math.max(aEvent.clientY - this.offsetY, this.FREENOTE_MIN_HEIGHT);
             this.target.style.width = x + "px";
@@ -2477,8 +2449,7 @@ var sbAnnotationService = {
             for (var i=0, I=els.length; i<I; ++i) {
                 els[i].setAttribute("title", ret.value);
             }
-        }
-        else {
+        } else {
             for (var i=0, I=els.length; i<I; ++i) {
                 sbPageEditor.removeSbObj(els[i]);
             }
@@ -2504,8 +2475,7 @@ var sbAnnotationService = {
                 "data-sb-obj" : "link-url",
                 "href" : ret.value
             };
-        }
-        else if ( aFlag == "I" ) {
+        } else if ( aFlag == "I" ) {
             // we can construct inner link only for those with valid id
             if (!sbPageEditor.item) return;
             // if the sidebar is closed, we may get an error
@@ -2533,8 +2503,7 @@ var sbAnnotationService = {
                 if ( ["folder", "separator"].indexOf(type) !== -1 ) {
                     res = null;
                 }
-            }
-            else res = null;
+            } else res = null;
             // if it's invalid, alert and quit
             if (!res) {
                 sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_INVALID", [id]));
@@ -2547,8 +2516,7 @@ var sbAnnotationService = {
                 "href" : (type == "bookmark") ? sbDataSource.getProperty(res, "source") : makeRelativeLink(win.location.href, sbPageEditor.item.id, id),
                 "title" : title
             };
-        }
-        else {
+        } else {
             // we can upload file only for those with valid id
             if (!sbPageEditor.item) return;
             // check if the page is local and get its path
