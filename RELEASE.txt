@@ -1,3 +1,8 @@
+Scrapbook X 1.12.20
+----------------
+- UPDATE: Now localizes the note template documentation with DTDs. (to fit Firefox protocol)
+
+
 Scrapbook X 1.12.19
 ----------------
 - FIXED: Prevent invalid UTF-8 characters be stored in the cache.rdf, which causes failure of the search script of "Output HTML tree".
