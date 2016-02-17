@@ -1,0 +1,6 @@
+<!ENTITY sb.thelp.dir "ltr">
+<!ENTITY sb.thelp.title "ScrapBook - Šablona HTML nápovědy">
+<!ENTITY sb.thelp.tags "Dva speciální tagy">
+<!ENTITY sb.thelp.tag1 "Nadpis (první řádek) v poznámce">
+<!ENTITY sb.thelp.tag2 "Obsah (druhý řádek a dál) v poznámce">
+<!ENTITY sb.thelp.preset "Přednastavená šablona">

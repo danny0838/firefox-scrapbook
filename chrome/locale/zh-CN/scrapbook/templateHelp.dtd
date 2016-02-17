@@ -1,0 +1,6 @@
+<!ENTITY sb.thelp.dir "ltr">
+<!ENTITY sb.thelp.title "ScrapBook HTML 模板帮助">
+<!ENTITY sb.thelp.tags "两个特殊的标签">
+<!ENTITY sb.thelp.tag1 "替换为便签的标题 (第一行)">
+<!ENTITY sb.thelp.tag2 "替换为便签的内容 (第二行及以下部分)">
+<!ENTITY sb.thelp.preset "预置 HTML 模板">

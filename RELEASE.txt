@@ -1,3 +1,20 @@
+Scrapbook X 1.12.20
+----------------
+- UPDATE: Now localizes the note template documentation with DTDs. (to fit Firefox protocol)
+
+
+Scrapbook X 1.12.19
+----------------
+- FIXED: Prevent invalid UTF-8 characters be stored in the cache.rdf, which causes failure of the search script of "Output HTML tree".
+
+
+Scrapbook X 1.12.18
+----------------
+- UPDATE: Use more precise create time for newly captured items.
+- UPDATE: "Combined View" now auto-adjusts frame heights on window resizing.
+- UPDATE: "Output HTML" page now loads more smoothly.
+
+
 Scrapbook X 1.12.17
 ----------------
 - UPDATE: "Output HTML tree" now displays opened folders in a different style.

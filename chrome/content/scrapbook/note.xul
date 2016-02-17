@@ -48,7 +48,7 @@
         <toolbarbutton id="sbNoteToolbarN" accesskey="&sb.note.normalview.accesskey;" label="&sb.note.normalview;" disabled="true" oncommand="sbNoteService2.toggleHTMLView(false);" />
         <toolbarbutton type="menu" label="&sb.note.tools;" accesskey="&sb.note.tools.accesskey;">
             <menupopup>
-                <menuitem label="&sb.note.help;" oncommand="sbCommonUtils.loadURL('chrome://scrapbook/locale/templateHelp.html', true);" />
+                <menuitem label="&sb.note.help;" oncommand="sbCommonUtils.loadURL('chrome://scrapbook/content/templateHelp.xhtml', true);" />
                 <menuseparator />
                 <menuitem id="sbNoteToolbarL" type="checkbox" label="&sb.note.autolinefeed;" tooltiptext="&sb.note.autolinefeed.t;" />
                 <menuitem id="sbNoteToolbarT" type="checkbox" label="&sb.note.template;" oncommand="this.getAttribute('checked') ? sbNoteTemplate.load() : sbNoteTemplate.exit(false);" />

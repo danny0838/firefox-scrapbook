@@ -429,7 +429,7 @@ var sbCacheService = {
             var contents = [];
             addContent(aFile);
             if (mode == "html") sbCacheService.checkFrameFiles(aFile, addContent);
-            contents = contents.join("\t").replace(/[\x00-\x1F\x7F]/g, " ").replace(/\s+/g, " ");
+            contents = contents.join("\t").replace(/[\x00-\x1F\x7F\uFFFE\uFFFF]/g, " ").replace(/\s+/g, " ");
         }
         else {
             var contents = "";

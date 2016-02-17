@@ -1,0 +1,7 @@
+<!ENTITY sb.thelp.dir "ltr">
+<!ENTITY sb.thelp.title "ScrapBook HTML 樣版說明">
+<!ENTITY sb.thelp.tags "兩個特殊標籤">
+<!ENTITY sb.thelp.tag1 "筆記的標題（第一行）">
+<!ENTITY sb.thelp.tag2 "筆記的內容（第二行之後）">
+<!ENTITY sb.thelp.preset "原始樣版">
+
