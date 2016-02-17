@@ -831,8 +831,8 @@ var sbContentSaver = {
         return content;
 
         function verifySelector(doc, selectorText) {
-            // older Firefox versions don't support querySelector, simply return true
-            if (!sbCommonUtils._fxVer3_5) return true;
+            // Firefox < 3.5: older Firefox versions don't support querySelector, simply return true
+            if (!doc.querySelector) return true;
             try {
                 if (doc.querySelector(selectorText)) return true;
                 // querySelector of selectors like a:hover or so always return null

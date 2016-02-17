@@ -82,10 +82,6 @@ var sbCommonUtils = {
         return this._fxVer36_saveURI = result;
     },
 
-    get _fxVer3_5() {
-        delete this._fxVer3_5;
-        return this._fxVer3_5 = (this.checkFirefoxVersion("3.5") >=0);
-    },
     get _fxVer3_6() {
         delete this._fxVer3_6;
         return this._fxVer3_6 = (this.checkFirefoxVersion("3.6") >=0);

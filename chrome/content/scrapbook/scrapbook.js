@@ -549,7 +549,8 @@ var sbTreeDNDHandler = {
         },
         onDrop: function(row, orient) {
             var XferData, XferType;
-            if (sbCommonUtils._fxVer3_5 &&
+            // Gecko >= 1.9.1 (Firefox >= 3.5): has sbTreeDNDHandler.currentDataTransfer
+            if (sbTreeDNDHandler.currentDataTransfer &&
                 (sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0) == "application/x-moz-tabbrowser-tab" ||
                  sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0) == "sb/tradeitem")) {
                 switch (sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0)) {
