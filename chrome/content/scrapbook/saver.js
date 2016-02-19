@@ -946,10 +946,11 @@ var sbContentSaver = {
                 var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
                 WBP.persistFlags |= WBP.PERSIST_FLAGS_FROM_CACHE;
                 WBP.persistFlags |= WBP.PERSIST_FLAGS_AUTODETECT_APPLY_CONVERSION;
-                if ( sbCommonUtils._fxVer36 ) {
+                if ( sbCommonUtils._fxVer36_saveURI ) {
                     var privacyContext = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebNavigation).QueryInterface(Components.interfaces.nsILoadContext);
                     WBP.saveURI(aURL, null, this.refURLObj, null, null, null, targetFile, privacyContext);
-                } else if ( sbCommonUtils._fxVer18 ) {
+                } else if (Components.interfaces.nsILoadContext) {
+                    // older Firefox versions does not have/need Components.interfaces.nsILoadContext
                     var privacyContext = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebNavigation).QueryInterface(Components.interfaces.nsILoadContext);
                     WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile, privacyContext);
                 } else {

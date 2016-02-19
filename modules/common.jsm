@@ -58,6 +58,20 @@ var sbCommonUtils = {
         return this.FIREFOX_VERSION = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo).version;
     },
 
+    get _fxVer36_saveURI() {
+        // Firefox >= 36: nsIWebBrowserPersist.saveURI takes 8 arguments
+        // Firefox < 36: nsIWebBrowserPersist.saveURI takes 7 arguments
+        var result;
+        try {
+            var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
+            WBP.saveURI(null, null, null, null, null, null, null);
+        } catch(ex) {
+            result = (ex.name === "NS_ERROR_XPC_NOT_ENOUGH_ARGS") ? true : false;
+        }
+        delete this._fxVer36_saveURI;
+        return this._fxVer36_saveURI = result;
+    },
+
     get _fxVer3_5() {
         delete this._fxVer3_5;
         return this._fxVer3_5 = (this.checkFirefoxVersion("3.5") >=0);
@@ -85,10 +99,6 @@ var sbCommonUtils = {
     get _fxVer30() {
         delete this._fxVer30;
         return this._fxVer30 = (this.checkFirefoxVersion("30.0") >=0);
-    },
-    get _fxVer36() {
-        delete this._fxVer36;
-        return this._fxVer36 = (this.checkFirefoxVersion("36.0") >=0);
     },
 
     checkFirefoxVersion : function(ver) {
