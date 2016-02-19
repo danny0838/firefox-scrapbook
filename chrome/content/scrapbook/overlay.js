@@ -79,8 +79,7 @@ var sbBrowserOverlay = {
                 while ((current = start.nextSibling) !== end) {
                     submenu.firstChild.appendChild(current);
                 }
-            }
-            else {
+            } else {
                 while (submenu.firstChild.hasChildNodes()) {
                     contextMenu.insertBefore(submenu.firstChild.firstChild, submenu);
                 }
@@ -92,8 +91,7 @@ var sbBrowserOverlay = {
         if (sbCommonUtils.getPref("ui.menuBar.icon", false)) {
             menu.setAttribute("label", "");
             menu.setAttribute("class", "menu-iconic");
-        }
-        else {
+        } else {
             menu.setAttribute("label", menu.getAttribute("data-label"));
             menu.setAttribute("class", "");
         }
@@ -104,8 +102,7 @@ var sbBrowserOverlay = {
         file.append("folders.txt");
         if (file.exists()) {
             sbCommonUtils.setPref("ui.folderList", sbCommonUtils.readFile(file));
-        }
-        else {
+        } else {
             var ids = sbCommonUtils.getPref("ui.folderList", "");
             sbCommonUtils.writeFile(file, ids, "UTF-8");
         }
@@ -142,8 +139,7 @@ var sbBrowserOverlay = {
                 window.setTimeout(function() { sbPageEditor.showHide(false); }, 0);
             if (this.infoMode)
                 window.setTimeout(function() { sbInfoViewer.init(id); }, 50);
-        }
-        else {
+        } else {
             window.setTimeout(function() { sbPageEditor.uninit(); }, 0);
             if ( sbCommonUtils.getPref("notifyPageCaptured", true) ) this.notifyPageCaptured(aURL);
         }
@@ -339,8 +335,7 @@ var sbBrowserOverlay = {
         var isSelected = false;
         try {
             isSelected = !(sel.anchorNode == sel.focusNode && sel.anchorOffset == sel.focusOffset);
-        }
-        catch(ex) {}
+        } catch(ex) {}
         return isSelected;
     },
 
@@ -358,8 +353,7 @@ var sbBrowserOverlay = {
             onLink   = gContextMenu.onLink && !gContextMenu.onMailtoLink;
             inFrame  = gContextMenu.inFrame;
             onInput  = gContextMenu.onTextInput;
-        }
-        catch(ex) {
+        } catch(ex) {
             selected = this.isSelected();
             onLink   = this.getLinkURI() ? true : false;
             inFrame  = document.popupNode.ownerDocument != window.content.document;
@@ -446,8 +440,7 @@ var sbMenuHandler = {
                 return;
             this.shouldRebuild = false;
             this._menu.builder.rebuild();
-        }
-        else {
+        } else {
             if (event.target.firstChild && event.target.firstChild.className.indexOf("sb-capture") >= 0) {
                 event.target.firstChild.label     = getElement("ScrapBookMenubarItem1").label;
                 event.target.firstChild.className = getElement("ScrapBookMenubarItem1").className;

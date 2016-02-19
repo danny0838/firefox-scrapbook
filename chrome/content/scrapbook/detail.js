@@ -26,8 +26,7 @@ var sbCaptureOptions = {
             if ( this.param.context == "capture-again-deep" ) {
                 document.getElementById("sbDetailInDepthBox").collapsed = true;
             }
-        }
-        else {
+        } else {
             // make folder list
             setTimeout(function(){ sbFolderSelector.init(); }, 100);
             // comment

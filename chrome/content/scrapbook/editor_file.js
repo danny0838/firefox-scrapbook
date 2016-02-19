@@ -8,8 +8,7 @@ function init() {
     // focus the corresponding field of the selected radio
     if (document.getElementById("sbFileFileUse").selected) {
         document.getElementById("sbFilePicker").focus();
-    }
-    else if (document.getElementById("sbFileHTMLUse").selected) {
+    } else if (document.getElementById("sbFileHTMLUse").selected) {
         document.getElementById("sbFileHTML").focus();
     }
 }
