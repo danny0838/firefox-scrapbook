@@ -553,14 +553,12 @@ var sbTreeDNDHandler = {
                 (sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0) == "application/x-moz-tabbrowser-tab" ||
                  sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0) == "sb/tradeitem")) {
                 switch (sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0)) {
-                    case "application/x-moz-tabbrowser-tab": {
+                    case "application/x-moz-tabbrowser-tab":
                         XferData = sbTreeDNDHandler.currentDataTransfer.getData(sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(1))+"\n"+document.commandDispatcher.focusedWindow.document.title;
                         break;
-                    }
-                    case "sb/tradeitem": {
+                    case "sb/tradeitem":
                         XferType = "sb/tradeitem";
                         break;
-                    }
                     default:
                         sbCommonUtils.alert("Unsupported XferType:\n---\n"+sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0));
                 }
