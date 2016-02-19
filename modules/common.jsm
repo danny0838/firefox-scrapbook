@@ -58,6 +58,16 @@ var sbCommonUtils = {
         return this.FIREFOX_VERSION = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo).version;
     },
 
+    get _fxVer30_consoleLog() {
+        // Firefox >= 30.0: window.console.log for addons can be seen; has window.console.count
+        // Firefox >=  4.0: has window.console.log, but addon logs do not show; no window.console.count
+        // Firefox <   4.0: no window.console.log
+        var window = this.WINDOW.getMostRecentWindow("navigator:browser");
+        var result = (window.console && window.console.count) ? true : false;
+        delete this._fxVer30_consoleLog;
+        return this._fxVer30_consoleLog = result;
+    },
+
     get _fxVer36_saveURI() {
         // Firefox >= 36: nsIWebBrowserPersist.saveURI takes 8 arguments
         // Firefox < 36: nsIWebBrowserPersist.saveURI takes 7 arguments
@@ -95,10 +105,6 @@ var sbCommonUtils = {
     get _fxVer18() {
         delete this._fxVer18;
         return this._fxVer18 = (this.checkFirefoxVersion("18.0") >=0);
-    },
-    get _fxVer30() {
-        delete this._fxVer30;
-        return this._fxVer30 = (this.checkFirefoxVersion("30.0") >=0);
     },
 
     checkFirefoxVersion : function(ver) {
@@ -753,28 +759,20 @@ var sbCommonUtils = {
     },
 
     log : function(aMsg) {
-        if (this._fxVer30) {
-            // Support started since Firefox 4.0
-            // However, older versions may not see the message.
-            // The least version known work is Firefox 30.0
+        if (this._fxVer30_consoleLog) {
             var window = this.WINDOW.getMostRecentWindow("navigator:browser");
             window.console.log(aMsg);
-        }
-        else {
+        } else {
             // does not record the script line and is not suitable for tracing...
             this.CONSOLE.logStringMessage(aMsg);
         }
     },
 
     warn : function(aMsg) {
-        if (this._fxVer30) {
-            // Support started since Firefox 4.0
-            // However, older versions may not see the message.
-            // The least version known work is Firefox 30.0
+        if (this._fxVer30_consoleLog) {
             var window = this.WINDOW.getMostRecentWindow("navigator:browser");
             window.console.warn(aMsg);
-        }
-        else {
+        } else {
             // set javascript.options.showInConsole to true in the about:config to see it
             // default true since Firefox 4.0
             Components.utils.reportError(aMsg);
@@ -782,14 +780,10 @@ var sbCommonUtils = {
     },
 
     error : function(aMsg) {
-        if (this._fxVer30) {
-            // Support started since Firefox 4.0
-            // However, older versions may not see the message.
-            // The least version known work is Firefox 30.0
+        if (this._fxVer30_consoleLog) {
             var window = this.WINDOW.getMostRecentWindow("navigator:browser");
             window.console.error(aMsg);
-        }
-        else {
+        } else {
             // set javascript.options.showInConsole to true in the about:config to see it
             // default true since Firefox 4.0
             Components.utils.reportError(aMsg);
