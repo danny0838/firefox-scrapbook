@@ -53,10 +53,6 @@ var sbCommonUtils = {
         delete this.BUNDLE;
         return this.BUNDLE = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
     },
-    get FIREFOX_VERSION() {
-        delete this.FIREFOX_VERSION;
-        return this.FIREFOX_VERSION = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo).version;
-    },
 
     get _fxVer30_consoleLog() {
         // Firefox >= 30.0: window.console.log for addons can be seen; has window.console.count
@@ -80,27 +76,6 @@ var sbCommonUtils = {
         }
         delete this._fxVer36_saveURI;
         return this._fxVer36_saveURI = result;
-    },
-
-    get _fxVer4() {
-        delete this._fxVer4;
-        return this._fxVer4 = (this.checkFirefoxVersion("4.0") >=0);
-    },
-    get _fxVer9() {
-        delete this._fxVer9;
-        return this._fxVer9 = (this.checkFirefoxVersion("9.0") >=0);
-    },
-    get _fxVer11() {
-        delete this._fxVer11;
-        return this._fxVer11 = (this.checkFirefoxVersion("11.0") >=0);
-    },
-    get _fxVer18() {
-        delete this._fxVer18;
-        return this._fxVer18 = (this.checkFirefoxVersion("18.0") >=0);
-    },
-
-    checkFirefoxVersion : function(ver) {
-        return this.checkVersion(this.FIREFOX_VERSION, ver);
     },
 
     /**
