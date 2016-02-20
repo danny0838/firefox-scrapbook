@@ -873,12 +873,11 @@ var sbContentSaver = {
     inspectCSSText : function(aCSSText, aCSSHref, type) {
         if (!aCSSHref) aCSSHref = this.refURLObj.spec;
         // CSS get by .cssText is always url("something-with-\"double-quote\"-escaped")
-        // or url(something) in Firefox < 3.6
-        // and no CSS comment is in
-        // so we can parse it safely with this RegExp
-        var regex = (sbCommonUtils._fxVer3_6) ? / url\(\"((?:\\.|[^"])+)\"\)/g : / url\(((?:\\.|[^)])+)\)/g;
+        // or url(something) (e.g. background-image in Firefox < 3.6)
+        // and no CSS comment is in, so we can parse it safely with this RegExp.
+        var regex = / url\(\"((?:\\.|[^"])+)\"\)| url\(((?:\\.|[^)])+)\)/g;
         aCSSText = aCSSText.replace(regex, function() {
-            var dataURL = arguments[1];
+            var dataURL = arguments[1] || arguments[2];
             if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
             if ( sbContentSaver.option["internalize"] && dataURL .indexOf("://") == -1 ) return ' url("' + dataURL + '")';
             dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);
