@@ -299,12 +299,14 @@
 
     <prefpane id="advancedPane" label="&sb.prefs.advanced;" flex="1">
         <preferences>
+            <preference id="extensions.scrapbook.asciiFilename"   name="extensions.scrapbook.asciiFilename"   type="bool" />
             <preference id="extensions.scrapbook.showDetailOnDrop"   name="extensions.scrapbook.showDetailOnDrop"   type="bool" />
             <preference id="extensions.scrapbook.notifyOnComplete"   name="extensions.scrapbook.notifyOnComplete"   type="bool" />
             <preference id="extensions.scrapbook.notifyPageCaptured" name="extensions.scrapbook.notifyPageCaptured" type="bool" />
             <preference id="extensions.scrapbook.autoOutput"         name="extensions.scrapbook.autoOutput"   type="bool" />
         </preferences>
         <vbox flex="1" style="overflow: auto;">
+        <checkbox preference="extensions.scrapbook.asciiFilename" label="&sb.prefs.asciiFilename;" />
         <checkbox preference="extensions.scrapbook.showDetailOnDrop" label="&sb.prefs.showDetailOnDrop;" />
         <checkbox preference="extensions.scrapbook.notifyOnComplete" label="&sb.prefs.notifyOnComplete;" />
         <checkbox preference="extensions.scrapbook.notifyPageCaptured" label="&sb.prefs.notifyPageCaptured;" />

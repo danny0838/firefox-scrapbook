@@ -23,6 +23,7 @@ pref("extensions.scrapbook.fileViewer.path", "");
 pref("extensions.scrapbook.tree.unshift", false);
 pref("extensions.scrapbook.tree.autoCollapse", false);
 pref("extensions.scrapbook.confirmDelete", true);
+pref("extensions.scrapbook.asciiFilename", false);
 pref("extensions.scrapbook.showDetailOnDrop", false);
 pref("extensions.scrapbook.notifyOnComplete", true);
 pref("extensions.scrapbook.notifyPageCaptured", false);

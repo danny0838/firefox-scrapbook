@@ -31,6 +31,7 @@
 <!ENTITY sb.prefs.tree.unshift "Placer un nouvel élément dans">
 <!ENTITY sb.prefs.tree.unshift.top "le haut d&apos;un dossier">
 <!ENTITY sb.prefs.tree.unshift.bottom "le bas d&apos;un dossier">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Afficher la boîte de dialogue &apos;Détail de la capture&apos; lors de la capture par un glisser-déposer dans le panneau latéral">
 <!ENTITY sb.prefs.notifyOnComplete "Afficher la notification &apos;Capture terminée&apos;">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">

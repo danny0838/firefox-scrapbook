@@ -256,6 +256,11 @@ var sbCommonUtils = {
         aFileName = aFileName.replace(/[\"\?\*\\\/\|\:]/g, "_");
         aFileName = aFileName.replace(/[\<]/g, "(");
         aFileName = aFileName.replace(/[\>]/g, ")");
+        if (sbCommonUtils.getPref("asciiFilename", false)) {
+            aFileName = aFileName.replace(/[^\x00-\x7F]+/g, function(m){
+                return encodeURI(m);
+            });
+        }
         return aFileName;
     },
 

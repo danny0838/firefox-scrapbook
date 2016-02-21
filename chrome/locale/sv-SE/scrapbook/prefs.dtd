@@ -31,6 +31,7 @@
 <!ENTITY sb.prefs.tree.unshift "Placera nya objekt">
 <!ENTITY sb.prefs.tree.unshift.top "överst i mappen">
 <!ENTITY sb.prefs.tree.unshift.bottom "nederst i mappen">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Visa dialogen &quot;Infångstinformation&quot; vid infångst via dra och släpp i sidofältet">
 <!ENTITY sb.prefs.notifyOnComplete "Visa meddelandet &quot;Infångsten har slutförts&quot;">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">

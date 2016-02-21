@@ -31,6 +31,7 @@
 <!ENTITY sb.prefs.tree.unshift "Elem elhelyezése a(z)">
 <!ENTITY sb.prefs.tree.unshift.top "mappába elejére">
 <!ENTITY sb.prefs.tree.unshift.bottom "mappa végére">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "A „Rögzítés részletek” ablak megjelenítése, ha a felvételt húzd és ejtsd módon kezdeményezik az Oldalsávon">
 <!ENTITY sb.prefs.notifyOnComplete "A „Rögzítés kész” értesítés megjelenítése">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">

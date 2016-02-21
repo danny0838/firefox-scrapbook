@@ -31,6 +31,7 @@
 <!ENTITY sb.prefs.tree.unshift "Colocar um item dentro do">
 <!ENTITY sb.prefs.tree.unshift.top "topo da pasta">
 <!ENTITY sb.prefs.tree.unshift.bottom "rodapé da pasta">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Mostrar janela &apos;Detalhe de Captura&apos; quando capturando via arrastar e soltar na barra lateral">
 <!ENTITY sb.prefs.notifyOnComplete "Mostrar notificação &apos;Captura Completa&apos;">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
