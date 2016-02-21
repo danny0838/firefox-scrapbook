@@ -127,8 +127,7 @@ var sbCombineService = {
                 sbPageCombiner.refreshHash = {};
                 sbInvisibleBrowser.load(sbCommonUtils.getBaseHref(sbDataSource.data.URI) + "data/" + this.curID + "/index.html");
             }
-        }
-        else {
+        } else {
             this.prefix  = "";
             this.postfix = "combine.html";
             this.donePreview();
@@ -395,15 +394,13 @@ var sbPageCombiner = {
         }
         if ( aType == "file" || aType == "bookmark" ) {
             this.htmlSrc += this.getCiteHTML(aType);
-        }
-        else {
+        } else {
             aType = sbDataSource.getProperty(sbCombineService.curRes, "type");
             this.cssText += this.surroundCSS();
             this.processDOMRecursively(this.BODY);
             if ( this.isTargetCombined ) {
                 this.htmlSrc += this.surroundDOMCombined();
-            }
-            else {
+            } else {
                 this.htmlSrc += this.getCiteHTML(aType);
                 this.htmlSrc += this.surroundDOM();
             }
@@ -505,14 +502,11 @@ var sbPageCombiner = {
             var cssText = "";
             if (this.isTargetCombined) {
                 cssText = cssRule.cssText;
-            }
-            else if (cssRule.type == Components.interfaces.nsIDOMCSSRule.STYLE_RULE) {
+            } else if (cssRule.type == Components.interfaces.nsIDOMCSSRule.STYLE_RULE) {
                 cssText = this.remapCSSSelector(cssRule.selectorText) + "{" + cssRule.style.cssText + "}";
-            }
-            else if (cssRule.type == Components.interfaces.nsIDOMCSSRule.MEDIA_RULE) {
+            } else if (cssRule.type == Components.interfaces.nsIDOMCSSRule.MEDIA_RULE) {
                 cssText = "@media " + cssRule.conditionText + " {\n" + this.processCSSRecursively(cssRule) + "}";
-            }
-            else {
+            } else {
                 cssText = cssRule.cssText;
             }
             ret += this.inspectCSSText(cssText, aCSS.href) + "\n";
@@ -547,26 +541,20 @@ var sbPageCombiner = {
                     if (canBeElement) {
                         if (arguments[3].toLowerCase() == "html") {
                             ret = "#" + id + "html";
-                        }
-                        else if (arguments[3].toLowerCase() == "body") {
+                        } else if (arguments[3].toLowerCase() == "body") {
                             ret = "#" + id + "body";
-                        }
-                        else {
+                        } else {
                             ret = arguments[3];
                         }
-                    }
-                    else if (canBeId) {
+                    } else if (canBeId) {
                         if (arguments[3] == htmlId) {
                             ret = id + "html";
-                        }
-                        else if (arguments[3] == bodyId) {
+                        } else if (arguments[3] == bodyId) {
                             ret = id + "body";
-                        }
-                        else {
+                        } else {
                             ret = arguments[3];
                         }
-                    }
-                    else {
+                    } else {
                         ret = arguments[3];
                     }
                     canBeElement = false;

@@ -73,8 +73,7 @@ var sbSearchResult = {
             } else {
                 this.process();
             }
-        }
-        else this.finalize();
+        } else this.finalize();
     },
 
     process : function() {
@@ -246,8 +245,7 @@ var sbSearchResult = {
                 if (node.nodeType === 3) {
                     var nextNode = highlightTextNode(node, regex);
                     if (nextNode) list[i++] = nextNode;
-                }
-                else if (node.nodeType === 1) {
+                } else if (node.nodeType === 1) {
                     var nodename = node.nodeName.toLowerCase();
                     if (node.childNodes && !skipTags.test(nodename)) {
                         var childs = node.childNodes, j = childs.length;
@@ -391,8 +389,7 @@ var sbCacheService = {
                     var basePathCut = dir.path.length + 1;
                     if ( mime && mime.indexOf("text/") == 0 ) {
                         sbCacheService.inspectFile(file2, file2.path.substring(basePathCut).replace(/\\/g, "/"), "text");
-                    }
-                    else {
+                    } else {
                         sbCacheService.inspectFile(file2, file2.path.substring(basePathCut).replace(/\\/g, "/"), "none");
                     }
                 }
@@ -430,8 +427,7 @@ var sbCacheService = {
             addContent(aFile);
             if (mode == "html") sbCacheService.checkFrameFiles(aFile, addContent);
             contents = contents.join("\t").replace(/[\x00-\x1F\x7F\uFFFE\uFFFF]/g, " ").replace(/\s+/g, " ");
-        }
-        else {
+        } else {
             var contents = "";
         }
         // update cache data
@@ -439,8 +435,7 @@ var sbCacheService = {
             sbCacheSource.updateEntry(resource, "folder",  this.folders[this.index]);
             sbCacheSource.updateEntry(resource, "charset", charset);
             sbCacheSource.updateEntry(resource, "content", contents);
-        }
-        else {
+        } else {
             sbCacheSource.addEntry(resource, this.folders[this.index], charset, contents);
         }
         this.uriHash[resource.ValueUTF8] = true;
@@ -457,8 +452,7 @@ var sbCacheService = {
                         var content = sbCommonUtils.readFile(aFile);
                         content = sbCommonUtils.convertToUnicode(content, charset);
                         contents.push(content);
-                    }
-                    else {
+                    } else {
                         contents.push("");
                     }
                     break;
@@ -532,8 +526,7 @@ var sbCacheService = {
                 gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_REMOVE", [uri]);
                 sbCacheSource.removeEntry(sbCommonUtils.RDF.GetResource(uri));
                 setTimeout(arguments.callee, 0);
-            }
-            else {
+            } else {
                 // done
                 gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_UPDATE", ["cache.rdf"]);
                 sbCacheSource.flush();
@@ -559,8 +552,7 @@ var sbCacheService = {
             FORMAT_CONVERTER.convert("text/html", fromStr, fromStr.toString().length, "text/unicode", toStr, {});
             toStr = toStr.value.QueryInterface(Components.interfaces.nsISupportsString);
             return toStr.toString();
-        }
-        catch(ex) {
+        } catch(ex) {
             return aStr;
         }
     },
@@ -617,8 +609,7 @@ var sbCacheSource = {
         var oldVal = this.dataSource.GetTarget(aRes, aProp, true);
         if (oldVal == sbCommonUtils.RDF.NS_RDF_NO_VALUE) {
             this.dataSource.Assert(aRes, aProp, sbCommonUtils.RDF.GetLiteral(newVal), true);
-        }
-        else {
+        } else {
             oldVal = oldVal.QueryInterface(Components.interfaces.nsIRDFLiteral);
             newVal = sbCommonUtils.RDF.GetLiteral(newVal);
             this.dataSource.Change(aRes, aProp, oldVal, newVal);

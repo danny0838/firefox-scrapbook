@@ -205,8 +205,7 @@ MultiBookTreeView.prototype = {
         if (sourceIndex < targetIndex) {
             if (orientation == Components.interfaces.nsITreeView.DROP_BEFORE)
                 targetIndex--;
-        }
-        else {
+        } else {
             if (orientation == Components.interfaces.nsITreeView.DROP_AFTER)
                 targetIndex++;
         }

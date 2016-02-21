@@ -17,8 +17,7 @@ function init() {
         gColorType = "value";
         gColorTextPicker = document.getElementById("sbColorTextPicker");
         gColorBgPicker = document.getElementById("sbColorBgPicker");
-    }
-    else {
+    } else {
         // not supported, use colorpicker
         gColorType = "color";
         gColorTextPicker = document.getElementById("sbColorTextPicker2");

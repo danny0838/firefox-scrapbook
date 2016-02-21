@@ -37,8 +37,7 @@ var sbMultiBookService = {
         }
         if (isDefault) {
             document.getElementById("mbMenuItemDefault").setAttribute("checked", true);
-        }
-        else {
+        } else {
             // if we don't remove the check explicitly,
             // the main sidebar could get both the default one and the picked one selected
             // when we set this to a non-default one in the "Manage" dialog

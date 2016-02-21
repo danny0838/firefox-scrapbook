@@ -108,8 +108,7 @@ function SB_initCapture() {
     if ( !gTimeout ) gTimeout = 0;
     if ( gContext == "indepth" ) {
         gURL2Name[gReferItem.source] = "index";
-    }
-    else if ( gContext == "capture-again-deep" ) {
+    } else if ( gContext == "capture-again-deep" ) {
         var contDir = sbCommonUtils.getContentDir(gPreset[0]);
         // read sb-file2url.txt => gFile2URL for later usage
         var file = contDir.clone();
@@ -302,8 +301,7 @@ var sbCaptureTask = {
     finalize : function() {
         if ( gContext == "indepth" ) {
             sbCrossLinker.invoke();
-        }
-        else {
+        } else {
             if ( gURLs.length > 1 ) SB_fireNotification(null);
             //Fenster wird nur geschlossen, wenn alle ausgewaehlten Seiten heruntergeladen werden konnten
             if ( this.failed == 0 ) this.closeWindow();
@@ -588,8 +586,7 @@ var sbInvisibleBrowser = {
             if ( aStateFlags & sbInvisibleBrowser.STATE_START ) {
                 sbInvisibleBrowser.fileCount++;
                 sbInvisibleBrowser.onLoadStart.call(sbInvisibleBrowser);
-            }
-            else if ( (aStateFlags & sbInvisibleBrowser.STATE_LOADED) === sbInvisibleBrowser.STATE_LOADED && aStatus == 0 ) {
+            } else if ( (aStateFlags & sbInvisibleBrowser.STATE_LOADED) === sbInvisibleBrowser.STATE_LOADED && aStatus == 0 ) {
                 if (aRequest.name === sbInvisibleBrowser.ELEMENT.currentURI.spec) {
                     sbInvisibleBrowser.onLoadFinish.call(sbInvisibleBrowser);
                 }
@@ -621,19 +618,16 @@ var sbInvisibleBrowser = {
         // older version of Firefox gets error on setting charset
         try {
             if (gCharset) this.ELEMENT.docShell.charset = gCharset;
-        }
-        catch (ex) {
+        } catch(ex) {
             sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_CHANGE_CHARSET"));
         }
         // nsIDocShellHistory is deprecated in newer version of Firefox
         // nsIDocShell in the old version doesn't work
         if ( Components.interfaces.nsIDocShellHistory ) {
             this.ELEMENT.docShell.QueryInterface(Components.interfaces.nsIDocShellHistory).useGlobalHistory = false;
-        }
-        else if ( Components.interfaces.nsIDocShell ) {
+        } else if ( Components.interfaces.nsIDocShell ) {
             this.ELEMENT.docShell.QueryInterface(Components.interfaces.nsIDocShell).useGlobalHistory = false;
-        }
-        else {
+        } else {
             this.ELEMENT.docShell.useGlobalHistory = false;
         }
     },
@@ -669,16 +663,14 @@ var sbInvisibleBrowser = {
                 }
             }
             ret = sbContentSaver.captureWindow(this.ELEMENT.contentWindow, false, gShowDetail, gResName, gResIdx, preset, gContext, gTitle);
-        }
-        else {
+        } else {
             ret = sbContentSaver.captureFile(sbCaptureTask.sniffer.URLSpec, gRefURL ? gRefURL : sbCaptureTask.URL, "file", gShowDetail, gResName, gResIdx, preset, gContext);
         }
         if ( ret ) {
             if ( gContext == "indepth" ) {
                 gURL2Name[sbCaptureTask.URL] = ret[0];
                 gFile2URL = ret[1];
-            }
-            else if ( gContext == "capture-again-deep" ) {
+            } else if ( gContext == "capture-again-deep" ) {
                 gFile2URL = ret[1];
                 var contDir = sbCommonUtils.getContentDir(gPreset[0]);
                 var txtFile = contDir.clone();
@@ -688,8 +680,7 @@ var sbInvisibleBrowser = {
                 sbCommonUtils.writeFile(txtFile, txt, "UTF-8");
             }
             gTitles[sbCaptureTask.index] = ret[2];
-        }
-        else {
+        } else {
             if ( gShowDetail ) window.close();
             SB_trace(sbCommonUtils.lang("capture", "CAPTURE_ABORT"));
             sbCaptureTask.fail("");
@@ -743,8 +734,7 @@ var sbCrossLinker = {
         if ( ++this.index < this.nameList.length ) {
             var url = this.baseURL + encodeURIComponent(this.nameList[this.index]) + ".html";
             sbInvisibleBrowser.load(url);
-        }
-        else {
+        } else {
             SB_trace(sbCommonUtils.lang("capture", "REBUILD_LINKS_COMPLETE"));
             this.flushXML();
             SB_fireNotification(gReferItem);
@@ -910,8 +900,7 @@ sbHeaderSniffer.prototype = {
     checkURL : function() {
         if (this.URLSpec.indexOf("file://") == 0) {
             this.checkLocalFile();
-        }
-        else {
+        } else {
             this.checkHttpHeader();
         }
     },
@@ -966,8 +955,7 @@ sbHeaderSniffer.prototype = {
         if (sbCaptureTask.isDocument) {
             // load the document and capture it
             sbInvisibleBrowser.load(this.URLSpec);
-        }
-        else {
+        } else {
             if ( gContext == "indepth" ) {
                 // in an indepth capture, files with defined extensions are pre-processed and is not send to the URL list
                 // those who go here are undefined files, and should be skipped
@@ -1001,8 +989,7 @@ sbCaptureObserverCallback.onCaptureComplete = function(aItem) {
         var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gPreset[0]);
         sbDataSource.setProperty(res, "chars", aItem.chars);
         if ( gPreset[5] ) sbDataSource.setProperty(res, "type", "");
-    }
-    else if ( gContext == "internalize" ) {
+    } else if ( gContext == "internalize" ) {
         sbCrossLinker.forceReloadingURL(sbCommonUtils.convertFilePathToURL(gOption.internalize.path));
     }
     sbCaptureTask.succeed();

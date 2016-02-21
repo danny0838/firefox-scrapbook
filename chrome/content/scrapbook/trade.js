@@ -64,8 +64,7 @@ var sbTradeService = {
         }
         if ( aQuickMode ) {
             sbExportService.execQuick(window.arguments[0]);
-        }
-        else {
+        } else {
             if ( this.locked ) this.lock(0);
             var fileField = document.getElementById("sbTradePath");
             fileField.file = this.rightDir;
@@ -204,8 +203,7 @@ var sbTradeService = {
                 for ( var j = 0; j < childRes.length; j++ ) {
                     if ( uriList.indexOf(childRes[j].Value) < 0 ) { ret.push(childRes[j]); uriList.push(childRes[j].Value); }
                 }
-            }
-            else {
+            } else {
                 if ( uriList.indexOf(selRes[i].Value) < 0 ) { ret.push(selRes[i]); uriList.push(selRes[i].Value); }
             }
         }
@@ -341,8 +339,7 @@ var sbExportService = {
             }
             window.top.document.getElementById("sbManageProgress").value = Math.round( (this.count + 1) / this.resList.length * 100);
             setTimeout(function(){ sbExportService.next(); }, 0);
-        }
-        else {
+        } else {
             sbTradeService.refreshTree();
             sbTradeService.lock(0);
         }
@@ -362,8 +359,7 @@ var sbExportService = {
             dirName = dirName.replace(/\./g, "");
             destDir = sbTradeService.rightDir.clone();
             destDir.append(dirName);
-        }
-        while ( destDir.exists() && ++num < 256 );
+        } while ( destDir.exists() && ++num < 256 );
         var srcDir = sbCommonUtils.getContentDir(item.id, false);
         sbCommonUtils.writeIndexDat(item);
         if ( !srcDir.exists() || !sbCommonUtils.validateID(srcDir.leafName) ) throw "Directory not found.";
@@ -436,8 +432,7 @@ var sbImportService = {
             }
             window.top.document.getElementById("sbManageProgress").value = Math.round(num / this.idxList.length * 100);
             setTimeout(function(){ sbImportService.next(); }, 0);
-        }
-        else {
+        } else {
             sbTradeService.refreshTree();
             sbTradeService.lock(0);
             sbCommonUtils.rebuildGlobal();
@@ -466,8 +461,7 @@ var sbImportService = {
         }
         if ( item.type == "folder" || item.type == "bookmark" || item.type == "separator" ) {
             if ( document.getElementById("sbTradeOptionRemove").checked ) sbCommonUtils.removeDirSafety(srcDir, false);
-        }
-        else {
+        } else {
             try {
                 if ( document.getElementById("sbTradeOptionRemove").checked )
                     srcDir.moveTo(destDir, item.id);
@@ -491,8 +485,7 @@ var sbImportService = {
                     this.tarResArray[0] = this.folderTable[folderList[i]];
                     var idx = window.top.sbTreeHandler.TREE.builderView.getIndexOfResource(sbCommonUtils.RDF.GetResource(this.tarResArray[0]));
                     if ( idx >= 0 && !window.top.sbTreeHandler.TREE.view.isContainerOpen(idx) ) window.top.sbTreeHandler.TREE.view.toggleOpenState(idx);
-                }
-                else {
+                } else {
                     var newItem = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
                     newItem.id = sbDataSource.identify(newItem.id);
                     newItem.title = folderList[i];

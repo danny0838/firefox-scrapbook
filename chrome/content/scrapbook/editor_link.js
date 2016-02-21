@@ -13,8 +13,7 @@ function init() {
     // focus the corresponding field of the selected radio
     if (document.getElementById("sbLinkURLUse").selected) {
         document.getElementById("sbLinkURL").focus();
-    }
-    else {
+    } else {
         document.getElementById("sbLinkID").focus();
     }
 }
