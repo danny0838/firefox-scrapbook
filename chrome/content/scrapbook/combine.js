@@ -580,10 +580,10 @@ var sbPageCombiner = {
     inspectCSSText : function(aCSSText, aCSSHref) {
         if (!aCSSHref) aCSSHref = this.BROWSER.currentURI.spec;
         // CSS get by cssText is always url("double-quoted-with-\"quote\"-escaped")
-        // or url(something) in Firefox < 3.6
-        var regex = (sbCommonUtils._fxVer3_6) ? / url\(\"((?:\\.|[^"])+)\"\)/g : / url\(((?:\\.|[^)])+)\)/g;
+        // or url(something) (e.g. background-image in Firefox < 3.6)
+        var regex = / url\(\"((?:\\.|[^"])+)\"\)| url\(((?:\\.|[^)])+)\)/g;
         aCSSText = aCSSText.replace(regex, function() {
-            var dataURL = arguments[1];
+            var dataURL = arguments[1] || arguments[2];
             if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
             dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);
             // redirect the files to the original folder so we can capture them later on (and will rewrite the CSS)
