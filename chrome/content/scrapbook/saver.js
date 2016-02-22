@@ -904,20 +904,17 @@ var sbContentSaver = {
         return aCSSText;
     },
 
+    // aURLSpec is an absolute URL
     download : function(aURLSpec) {
         if ( !aURLSpec ) return "";
-        // never download chrome:// resources
-        if ( aURLSpec.indexOf("chrome://") == 0 ) {
-            return "";
-        }
-        // resolve relative url
-        if ( aURLSpec.indexOf("://") < 0 ) {
-            aURLSpec = sbCommonUtils.resolveURL(this.refURLObj.spec, aURLSpec);
-        }
         try {
             var aURL = sbCommonUtils.convertURLToObject(aURLSpec);
         } catch(ex) {
             sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_DOWNLOAD_FILE", [aURLSpec, ex]));
+            return "";
+        }
+        // never download "data:" and "chrome://" resources
+        if ( ["data", "chrome"].indexOf(aURL.scheme) >= 0 ) {
             return "";
         }
 
