@@ -151,8 +151,12 @@ var sbSearchResult = {
         treeView.getCellProperties = function(row, col, properties) {
             if ( col.index != 0 ) return "";
             var val = this._items[row][6];
-            if (sbCommonUtils._fxVer22) return val;
-            else properties.AppendElement(ATOM_SERVICE.getAtom(val));
+            // Gecko >= 22 (Firefox >= 22): do not take properties and requires a return value
+            if (properties) {
+                properties.AppendElement(ATOM_SERVICE.getAtom(val));
+            } else {
+                return val;
+            }
         };
         treeView.cycleHeader = function(col) {
             sbCustomTreeUtil.sortItems(sbSearchResult, col.element);
@@ -344,7 +348,7 @@ var sbCacheService = {
                         var file2 = sbCommonUtils.convertURLToFile(URI2);
                         if (!file2.exists()) break;
                         var mime = sbCommonUtils.getFileMime(file2);
-                        if ( !mime || mime != "text/html" ) break;
+                        if ( !mime || ["text/html", "application/xhtml+xml"].indexOf(mime) < 0 ) break;
                         var basePathCut = dir.path.length + 1;
                         sbCacheService.inspectFile(file2, file2.path.substring(basePathCut).replace(/\\/g, "/"), "html");
                         break;

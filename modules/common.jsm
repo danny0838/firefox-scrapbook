@@ -53,50 +53,29 @@ var sbCommonUtils = {
         delete this.BUNDLE;
         return this.BUNDLE = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
     },
-    get FIREFOX_VERSION() {
-        delete this.FIREFOX_VERSION;
-        return this.FIREFOX_VERSION = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo).version;
+
+    get _fxVer30_consoleLog() {
+        // Firefox >= 30.0: window.console.log for addons can be seen; has window.console.count
+        // Firefox >=  4.0: has window.console.log, but addon logs do not show; no window.console.count
+        // Firefox <   4.0: no window.console.log
+        var window = this.WINDOW.getMostRecentWindow("navigator:browser");
+        var result = (window.console && window.console.count) ? true : false;
+        delete this._fxVer30_consoleLog;
+        return this._fxVer30_consoleLog = result;
     },
 
-    get _fxVer3_5() {
-        delete this._fxVer3_5;
-        return this._fxVer3_5 = (this.checkFirefoxVersion("3.5") >=0);
-    },
-    get _fxVer3_6() {
-        delete this._fxVer3_6;
-        return this._fxVer3_6 = (this.checkFirefoxVersion("3.6") >=0);
-    },
-    get _fxVer4() {
-        delete this._fxVer4;
-        return this._fxVer4 = (this.checkFirefoxVersion("4.0") >=0);
-    },
-    get _fxVer9() {
-        delete this._fxVer9;
-        return this._fxVer9 = (this.checkFirefoxVersion("9.0") >=0);
-    },
-    get _fxVer11() {
-        delete this._fxVer11;
-        return this._fxVer11 = (this.checkFirefoxVersion("11.0") >=0);
-    },
-    get _fxVer18() {
-        delete this._fxVer18;
-        return this._fxVer18 = (this.checkFirefoxVersion("18.0") >=0);
-    },
-    get _fxVer22() {
-        delete this._fxVer22;
-        return this._fxVer22 = (this.checkFirefoxVersion("22.0") >=0);
-    },
-    get _fxVer30() {
-        delete this._fxVer30;
-        return this._fxVer30 = (this.checkFirefoxVersion("30.0") >=0);
-    },
-    get _fxVer36() {
-        delete this._fxVer36;
-        return this._fxVer36 = (this.checkFirefoxVersion("36.0") >=0);
-    },
-
-    checkFirefoxVersion : function(ver) {
-        return this.checkVersion(this.FIREFOX_VERSION, ver);
+    get _fxVer36_saveURI() {
+        // Firefox >= 36: nsIWebBrowserPersist.saveURI takes 8 arguments
+        // Firefox < 36: nsIWebBrowserPersist.saveURI takes 7 arguments
+        var result;
+        try {
+            var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
+            WBP.saveURI(null, null, null, null, null, null, null);
+        } catch(ex) {
+            result = (ex.name === "NS_ERROR_XPC_NOT_ENOUGH_ARGS") ? true : false;
+        }
+        delete this._fxVer36_saveURI;
+        return this._fxVer36_saveURI = result;
     },
 
     /**
@@ -277,6 +256,11 @@ var sbCommonUtils = {
         aFileName = aFileName.replace(/[\"\?\*\\\/\|\:]/g, "_");
         aFileName = aFileName.replace(/[\<]/g, "(");
         aFileName = aFileName.replace(/[\>]/g, ")");
+        if (sbCommonUtils.getPref("asciiFilename", false)) {
+            aFileName = aFileName.replace(/[^\x00-\x7F]+/g, function(m){
+                return encodeURI(m);
+            });
+        }
         return aFileName;
     },
 
@@ -747,28 +731,20 @@ var sbCommonUtils = {
     },
 
     log : function(aMsg) {
-        if (this._fxVer30) {
-            // Support started since Firefox 4.0
-            // However, older versions may not see the message.
-            // The least version known work is Firefox 30.0
+        if (this._fxVer30_consoleLog) {
             var window = this.WINDOW.getMostRecentWindow("navigator:browser");
             window.console.log(aMsg);
-        }
-        else {
+        } else {
             // does not record the script line and is not suitable for tracing...
             this.CONSOLE.logStringMessage(aMsg);
         }
     },
 
     warn : function(aMsg) {
-        if (this._fxVer30) {
-            // Support started since Firefox 4.0
-            // However, older versions may not see the message.
-            // The least version known work is Firefox 30.0
+        if (this._fxVer30_consoleLog) {
             var window = this.WINDOW.getMostRecentWindow("navigator:browser");
             window.console.warn(aMsg);
-        }
-        else {
+        } else {
             // set javascript.options.showInConsole to true in the about:config to see it
             // default true since Firefox 4.0
             Components.utils.reportError(aMsg);
@@ -776,14 +752,10 @@ var sbCommonUtils = {
     },
 
     error : function(aMsg) {
-        if (this._fxVer30) {
-            // Support started since Firefox 4.0
-            // However, older versions may not see the message.
-            // The least version known work is Firefox 30.0
+        if (this._fxVer30_consoleLog) {
             var window = this.WINDOW.getMostRecentWindow("navigator:browser");
             window.console.error(aMsg);
-        }
-        else {
+        } else {
             // set javascript.options.showInConsole to true in the about:config to see it
             // default true since Firefox 4.0
             Components.utils.reportError(aMsg);

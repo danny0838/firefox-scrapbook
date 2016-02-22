@@ -151,7 +151,8 @@ var sbContentSaver = {
 
     saveDocumentInternal : function(aDocument, aFileKey) {
         var captureType = "";
-        if ( aDocument.contentType != "text/html" ) {
+        var contentType = aDocument.contentType;
+        if ( ["text/html", "application/xhtml+xml"].indexOf(contentType) < 0 ) {
             if ( !(aDocument.documentElement.nodeName.toUpperCase() == "HTML" && this.option["asHtml"]) ) {
                 captureType = "file";
             }
@@ -171,10 +172,18 @@ var sbContentSaver = {
         }
 
         if ( !this.option["internalize"] ) {
-            var arr = this.getUniqueFileName(aFileKey + ".html", this.refURLObj.spec, aDocument);
+            var useXHTML = (contentType == "application/xhtml+xml") && (!this.option["asHtml"]);
+            var arr = this.getUniqueFileName(aFileKey + (useXHTML?".xhtml":".html"), this.refURLObj.spec, aDocument);
             var myHTMLFileName = arr[0];
             var myHTMLFileDone = arr[1];
             if (myHTMLFileDone) return myHTMLFileName;
+            // create a meta refresh for each *.xhtml
+            if (useXHTML) {
+                var myHTML = '<html><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0;URL=./' + myHTMLFileName + '"></head><body></body></html>';
+                var myHTMLFile = this.contentDir.clone();
+                myHTMLFile.append(aFileKey + ".html");
+                sbCommonUtils.writeFile(myHTMLFile, myHTML, "UTF-8");
+            }
         }
 
         if ( this.option["rewriteStyles"] ) {
@@ -348,9 +357,9 @@ var sbContentSaver = {
         var newFileName = this.download(aFileURL);
         if (newFileName) {
             if ( aCaptureType == "image" ) {
-                var myHTML = '<html><head><meta http-equiv="Content-Type" content="text/html; Charset=UTF-8"></head><body><img src="' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(newFileName)) + '"></body></html>';
+                var myHTML = '<html><head><meta charset="UTF-8"></head><body><img src="' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(newFileName)) + '"></body></html>';
             } else {
-                var myHTML = '<html><head><meta http-equiv="Content-Type" content="text/html; Charset=UTF-8"><meta http-equiv="refresh" content="0;URL=./' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(newFileName)) + '"></head><body></body></html>';
+                var myHTML = '<html><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0;URL=./' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(newFileName)) + '"></head><body></body></html>';
             }
             if ( this.isMainFrame ) {
                 this.item.icon  = "moz-icon://" + sbCommonUtils.escapeFileName(newFileName) + "?size=16";
@@ -831,8 +840,8 @@ var sbContentSaver = {
         return content;
 
         function verifySelector(doc, selectorText) {
-            // older Firefox versions don't support querySelector, simply return true
-            if (!sbCommonUtils._fxVer3_5) return true;
+            // Firefox < 3.5: older Firefox versions don't support querySelector, simply return true
+            if (!doc.querySelector) return true;
             try {
                 if (doc.querySelector(selectorText)) return true;
                 // querySelector of selectors like a:hover or so always return null
@@ -873,12 +882,11 @@ var sbContentSaver = {
     inspectCSSText : function(aCSSText, aCSSHref, type) {
         if (!aCSSHref) aCSSHref = this.refURLObj.spec;
         // CSS get by .cssText is always url("something-with-\"double-quote\"-escaped")
-        // or url(something) in Firefox < 3.6
-        // and no CSS comment is in
-        // so we can parse it safely with this RegExp
-        var regex = (sbCommonUtils._fxVer3_6) ? / url\(\"((?:\\.|[^"])+)\"\)/g : / url\(((?:\\.|[^)])+)\)/g;
+        // or url(something) (e.g. background-image in Firefox < 3.6)
+        // and no CSS comment is in, so we can parse it safely with this RegExp.
+        var regex = / url\(\"((?:\\.|[^"])+)\"\)| url\(((?:\\.|[^)])+)\)/g;
         aCSSText = aCSSText.replace(regex, function() {
-            var dataURL = arguments[1];
+            var dataURL = arguments[1] || arguments[2];
             if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
             if ( sbContentSaver.option["internalize"] && dataURL .indexOf("://") == -1 ) return ' url("' + dataURL + '")';
             dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);
@@ -905,20 +913,17 @@ var sbContentSaver = {
         return aCSSText;
     },
 
+    // aURLSpec is an absolute URL
     download : function(aURLSpec) {
         if ( !aURLSpec ) return "";
-        // never download chrome:// resources
-        if ( aURLSpec.indexOf("chrome://") == 0 ) {
-            return "";
-        }
-        // resolve relative url
-        if ( aURLSpec.indexOf("://") < 0 ) {
-            aURLSpec = sbCommonUtils.resolveURL(this.refURLObj.spec, aURLSpec);
-        }
         try {
             var aURL = sbCommonUtils.convertURLToObject(aURLSpec);
         } catch(ex) {
             sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_DOWNLOAD_FILE", [aURLSpec, ex]));
+            return "";
+        }
+        // never download "data:" and "chrome://" resources
+        if ( ["data", "chrome"].indexOf(aURL.scheme) >= 0 ) {
             return "";
         }
 
@@ -946,10 +951,11 @@ var sbContentSaver = {
                 var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
                 WBP.persistFlags |= WBP.PERSIST_FLAGS_FROM_CACHE;
                 WBP.persistFlags |= WBP.PERSIST_FLAGS_AUTODETECT_APPLY_CONVERSION;
-                if ( sbCommonUtils._fxVer36 ) {
+                if ( sbCommonUtils._fxVer36_saveURI ) {
                     var privacyContext = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebNavigation).QueryInterface(Components.interfaces.nsILoadContext);
                     WBP.saveURI(aURL, null, this.refURLObj, null, null, null, targetFile, privacyContext);
-                } else if ( sbCommonUtils._fxVer18 ) {
+                } else if (Components.interfaces.nsILoadContext) {
+                    // older Firefox versions does not have/need Components.interfaces.nsILoadContext
                     var privacyContext = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebNavigation).QueryInterface(Components.interfaces.nsILoadContext);
                     WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile, privacyContext);
                 } else {

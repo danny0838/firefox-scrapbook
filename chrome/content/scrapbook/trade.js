@@ -131,8 +131,12 @@ var sbTradeService = {
         treeView.getCellProperties = function(row, col, properties) {
             if (col.index != 0) return "";
             var val = this._items[row][7];
-            if (sbCommonUtils._fxVer22) return val;
-            else properties.AppendElement(ATOM_SERVICE.getAtom(val));
+            // Gecko >= 22 (Firefox >= 22): do not take properties and requires a return value
+            if (properties) {
+                properties.AppendElement(ATOM_SERVICE.getAtom(val));
+            } else {
+                return val;
+            }
         };
         treeView.cycleHeader = function(col) {
             sbCustomTreeUtil.sortItems(sbTradeService, col.element);

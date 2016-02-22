@@ -442,7 +442,7 @@ var sbPageEditor = {
         this.disable(true, true);
         sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
             var doc = win.document;
-            if ( doc.contentType != "text/html" ) {
+            if ( ["text/html", "application/xhtml+xml"].indexOf(doc.contentType) < 0 ) {
                 sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_CANT_MODIFY", [doc.contentType]));
                 return;
             }

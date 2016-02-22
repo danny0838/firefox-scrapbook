@@ -31,6 +31,7 @@
 <!ENTITY sb.prefs.tree.unshift "Поместить элемент в">
 <!ENTITY sb.prefs.tree.unshift.top "начало каталога">
 <!ENTITY sb.prefs.tree.unshift.bottom "конец каталога">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Показывать диалог «Настройки сохранения страницы» при захвате перетаскиванием на боковую панель">
 <!ENTITY sb.prefs.notifyOnComplete "Показывать сообщение «Сохранение завершено»">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">

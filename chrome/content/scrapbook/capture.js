@@ -754,6 +754,22 @@ var sbCrossLinker = {
         if ( this.ELEMENT.currentURI.scheme != "file" ) {
             return;
         }
+        // follow the meta refresh (mainly for ###.html --> ###.xhtml)
+        if ( this.ELEMENT.contentDocument.body ) {
+            var curURL = this.ELEMENT.currentURI.spec;
+            var metaElems = this.ELEMENT.contentDocument.getElementsByTagName("meta");
+            for ( var i = 0; i < metaElems.length; i++ ) {
+                if ( metaElems[i].hasAttribute("http-equiv") && metaElems[i].hasAttribute("content") &&
+                     metaElems[i].getAttribute("http-equiv").toLowerCase() == "refresh" && 
+                     metaElems[i].getAttribute("content").match(/URL\=(.*)$/i) ) {
+                    var newURL = sbCommonUtils.splitURLByAnchor(sbCommonUtils.resolveURL(curURL, RegExp.$1))[0];
+                    if ( newURL != curURL ) {
+                        sbInvisibleBrowser.load(newURL);
+                        return;
+                    }
+                }
+            }
+        }
         if ( !this.nodeHash[this.nameList[this.index]] ) {
             // Error message could be intercepted using query. 
             // However, the demolition at this point may also be desirable (Research!)

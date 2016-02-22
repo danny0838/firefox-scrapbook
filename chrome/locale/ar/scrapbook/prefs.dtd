@@ -31,6 +31,7 @@
 <!ENTITY sb.prefs.tree.unshift "وضع عنصر في">
 <!ENTITY sb.prefs.tree.unshift.top "أعلى المجلد">
 <!ENTITY sb.prefs.tree.unshift.bottom "أسفل المجلد">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "عرض مربع&apos;تفاصيل الإلتقاط&apos; عند الإلتقاط بالسحب و الإفلات داخل الشريط الجانبي">
 <!ENTITY sb.prefs.notifyOnComplete "عرض تنبيه &apos;تم الإلتقاط&apos;">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">

@@ -31,6 +31,7 @@
 <!ENTITY sb.prefs.tree.unshift "Inserisci elemento">
 <!ENTITY sb.prefs.tree.unshift.top "in cima alla cartella">
 <!ENTITY sb.prefs.tree.unshift.bottom "in fondo alla cartella">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Mostra la finestra di dialogo &apos;Dettagli cattura&apos; quando si cattura tramite trascinamento e rilascio nella barra laterale">
 <!ENTITY sb.prefs.notifyOnComplete "Mostra la finestra di notifica &apos;Cattura completata&apos;">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">

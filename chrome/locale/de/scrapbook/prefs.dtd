@@ -31,6 +31,7 @@
 <!ENTITY sb.prefs.tree.unshift "Einen Eintrag am">
 <!ENTITY sb.prefs.tree.unshift.top "Anfang eines Ordners erstellen">
 <!ENTITY sb.prefs.tree.unshift.bottom "Ende eines Ordners erstellen">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Dialog &quot;Archivierungsdetails&quot; anzeigen, wenn eine Archivierung durch Ziehen mit der Maus in die Sidebar erfolgt">
 <!ENTITY sb.prefs.notifyOnComplete "Meldung nach Abschluss der Archivierung anzeigen">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
