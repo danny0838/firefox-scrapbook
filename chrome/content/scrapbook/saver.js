@@ -151,7 +151,8 @@ var sbContentSaver = {
 
     saveDocumentInternal : function(aDocument, aFileKey) {
         var captureType = "";
-        if ( aDocument.contentType != "text/html" ) {
+        var contentType = aDocument.contentType;
+        if ( ["text/html", "application/xhtml+xml"].indexOf(contentType) < 0 ) {
             if ( !(aDocument.documentElement.nodeName.toUpperCase() == "HTML" && this.option["asHtml"]) ) {
                 captureType = "file";
             }
@@ -171,10 +172,18 @@ var sbContentSaver = {
         }
 
         if ( !this.option["internalize"] ) {
-            var arr = this.getUniqueFileName(aFileKey + ".html", this.refURLObj.spec, aDocument);
+            var useXHTML = (contentType == "application/xhtml+xml") && (!this.option["asHtml"]);
+            var arr = this.getUniqueFileName(aFileKey + (useXHTML?".xhtml":".html"), this.refURLObj.spec, aDocument);
             var myHTMLFileName = arr[0];
             var myHTMLFileDone = arr[1];
             if (myHTMLFileDone) return myHTMLFileName;
+            // create a meta refresh for each *.xhtml
+            if (useXHTML) {
+                var myHTML = '<html><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0;URL=./' + myHTMLFileName + '"></head><body></body></html>';
+                var myHTMLFile = this.contentDir.clone();
+                myHTMLFile.append(aFileKey + ".html");
+                sbCommonUtils.writeFile(myHTMLFile, myHTML, "UTF-8");
+            }
         }
 
         if ( this.option["rewriteStyles"] ) {
