@@ -348,7 +348,7 @@ var sbCacheService = {
                         var file2 = sbCommonUtils.convertURLToFile(URI2);
                         if (!file2.exists()) break;
                         var mime = sbCommonUtils.getFileMime(file2);
-                        if ( !mime || mime != "text/html" ) break;
+                        if ( !mime || ["text/html", "application/xhtml+xml"].indexOf(mime) < 0 ) break;
                         var basePathCut = dir.path.length + 1;
                         sbCacheService.inspectFile(file2, file2.path.substring(basePathCut).replace(/\\/g, "/"), "html");
                         break;
