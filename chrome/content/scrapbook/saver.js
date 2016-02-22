@@ -151,7 +151,8 @@ var sbContentSaver = {
 
     saveDocumentInternal : function(aDocument, aFileKey) {
         var captureType = "";
-        if ( aDocument.contentType != "text/html" ) {
+        var contentType = aDocument.contentType;
+        if ( ["text/html", "application/xhtml+xml"].indexOf(contentType) < 0 ) {
             if ( !(aDocument.documentElement.nodeName.toUpperCase() == "HTML" && this.option["asHtml"]) ) {
                 captureType = "file";
             }
