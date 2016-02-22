@@ -31,6 +31,7 @@
 <!ENTITY sb.prefs.tree.unshift "Umístit položku na">
 <!ENTITY sb.prefs.tree.unshift.top "první místo ve složce">
 <!ENTITY sb.prefs.tree.unshift.bottom "poslední místo ve složce">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Zobrazit dialogové okno &apos;Zachytit detail&apos; při zachycování přetažením do postranní lišty">
 <!ENTITY sb.prefs.notifyOnComplete "Zobrazit oznámení &apos;Zachycení dokončeno&apos;">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">

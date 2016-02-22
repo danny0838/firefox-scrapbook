@@ -31,6 +31,7 @@
 <!ENTITY sb.prefs.tree.unshift "放条目至">
 <!ENTITY sb.prefs.tree.unshift.top "文件夹顶部">
 <!ENTITY sb.prefs.tree.unshift.bottom "文件夹底部">
+<!ENTITY sb.prefs.asciiFilename "将文件保存为 ASCII 文件名">
 <!ENTITY sb.prefs.showDetailOnDrop "通过向侧栏拖拽进行捕获时显示 &apos;Capture Detail&apos; 对话框">
 <!ENTITY sb.prefs.notifyOnComplete "显示“捕获完成”提示">
 <!ENTITY sb.prefs.notifyPageCaptured "浏览获取过的页面时，显示提示">

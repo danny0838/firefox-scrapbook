@@ -31,6 +31,7 @@
 <!ENTITY sb.prefs.tree.unshift "Pune noile elemente">
 <!ENTITY sb.prefs.tree.unshift.top "la începutul arborelui">
 <!ENTITY sb.prefs.tree.unshift.bottom "la sfârșitul arborelui">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Afișează caseta „Detalii capturare” când se capturează prin glisare și fixare în panoul lateral">
 <!ENTITY sb.prefs.notifyOnComplete "Afișează notificarea „Capturare finalizată”">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">

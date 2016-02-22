@@ -31,6 +31,7 @@
 <!ENTITY sb.prefs.tree.unshift "Buraya öğe bilgisi ekle">
 <!ENTITY sb.prefs.tree.unshift.top "Klasörün üstü">
 <!ENTITY sb.prefs.tree.unshift.bottom "Klasörün altı">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Kenar çubuğuna sürükleyip-bırakarak kaydetmelerde &apos;Kayıt Detayları&apos; diyaloğunu göster">
 <!ENTITY sb.prefs.notifyOnComplete "&apos;Kaydetme Tamamlandı&apos; uyarısını göster">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">

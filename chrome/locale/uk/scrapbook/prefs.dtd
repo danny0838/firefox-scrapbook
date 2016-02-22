@@ -31,6 +31,7 @@
 <!ENTITY sb.prefs.tree.unshift "Розміщувати елементи">
 <!ENTITY sb.prefs.tree.unshift.top "спочатку теки">
 <!ENTITY sb.prefs.tree.unshift.bottom "наприкінці теки">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Відображати діалог „Налаштування збереження“ при збереженні перетягуванням на бічну панель">
 <!ENTITY sb.prefs.notifyOnComplete "Показувати інформацію „Збереження виконано“">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">

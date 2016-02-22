@@ -31,6 +31,7 @@
 <!ENTITY sb.prefs.tree.unshift "Put an item into">
 <!ENTITY sb.prefs.tree.unshift.top "the top of a folder">
 <!ENTITY sb.prefs.tree.unshift.bottom "the bottom of a folder">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Show &apos;Capture Detail&apos; dialog when capturing by drag-and-drop into Sidebar">
 <!ENTITY sb.prefs.notifyOnComplete "Show &apos;Capture Completed&apos; notification">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">

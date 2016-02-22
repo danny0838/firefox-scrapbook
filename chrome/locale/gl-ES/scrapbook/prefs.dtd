@@ -31,6 +31,7 @@
 <!ENTITY sb.prefs.tree.unshift "Poñer o elemento">
 <!ENTITY sb.prefs.tree.unshift.top "na parte superior do cartafol">
 <!ENTITY sb.prefs.tree.unshift.bottom "na parte inferior do cartafol">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Amosar o diálogo &apos;Detalles da captura&apos; cando se capture arrastrando e soltando sobre o panel lateral">
 <!ENTITY sb.prefs.notifyOnComplete "Amosar o aviso de &apos;Captura completada&apos;">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
