@@ -4,10 +4,11 @@ var sbTreeHandler = {
     get TREE() { return document.getElementById("sbTree"); },
 
     get resource() {
-        if ( this.TREE.view.selection.count < 1 )
+        if ( this.TREE.view.selection.count < 1 ) {
             return null;
-        else
+        } else {
             return this.TREE.builderView.getResourceAtIndex(this.TREE.currentIndex);
+        }
     },
 
     autoCollapse : false,
@@ -128,10 +129,11 @@ var sbTreeHandler = {
 
     getParentResource : function(aIdx) {
         var parIdx = this.TREE.builderView.getParentIndex(aIdx);
-        if ( parIdx == -1 )
+        if ( parIdx == -1 ) {
             return this.TREE.resource;
-        else
+        } else {
             return this.TREE.builderView.getResourceAtIndex(parIdx);
+        }
     },
 
     getSelection : function(idx2res, rule) {

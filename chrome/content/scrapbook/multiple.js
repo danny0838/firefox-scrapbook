@@ -179,8 +179,9 @@ var sbMultipleService = {
                     duipAllHash[duipURL] = node.text.replace(/^\s+/, '').replace(/\s+$/, '').replace(/\n/, ' ');
                 }
             }
-            if ( node.hasChildNodes() ) node = node.firstChild;
-            else {
+            if ( node.hasChildNodes() ) {
+                node = node.firstChild;
+            } else {
                 while ( !node.nextSibling ) { node = node.parentNode; if ( !node ) break traceTree; }
                 node = node.nextSibling;
             }
@@ -206,16 +207,18 @@ var sbMultipleService = {
             traceTree : while ( true ) {
                 nodeRange.selectNode(node);
                 if ( nodeRange.compareBoundaryPoints(Range.START_TO_END, selRange) > -1 ) {
-                    if ( nodeRange.compareBoundaryPoints(Range.END_TO_START, selRange) > 0 ) break;
-                    else if ( node instanceof HTMLAnchorElement || node instanceof HTMLAreaElement ) {
+                    if ( nodeRange.compareBoundaryPoints(Range.END_TO_START, selRange) > 0 ) {
+                        break;
+                    } else if ( node instanceof HTMLAnchorElement || node instanceof HTMLAreaElement ) {
                         duisURL = node.href;
                         if ( duisURL.match(/^(http|https|ftp|file):\/\//) ) {
                             duisAllHash[duisURL] = node.text.replace(/^\s+/, '').replace(/\s+$/, '').replace(/\n/, ' ');
                         }
                     }
                 }
-                if ( node.hasChildNodes() ) node = node.firstChild;
-                else {
+                if ( node.hasChildNodes() ) {
+                    node = node.firstChild;
+                } else {
                     while ( !node.nextSibling ) { node = node.parentNode; if ( !node ) break traceTree; }
                     node = node.nextSibling;
                 }
@@ -341,8 +344,11 @@ var sbURLDetector2 = {
             FP.init(window, "Select default.html of WeBoX.", FP.modeOpen);
             FP.appendFilters(FP.filterHTML);
             var answer = FP.show();
-            if ( answer == FP.returnOK ) theFile = FP.file;
-            else return;
+            if ( answer == FP.returnOK ) {
+                theFile = FP.file;
+            } else {
+                return;
+            }
             this.weboxBaseURL = theFile.parent.path + '\\Data\\';
         } else {
             theFile = sbCommonUtils.DIR.get("ProfD", Components.interfaces.nsIFile);

@@ -45,10 +45,11 @@ var sbBrowserOverlay = {
         for (let [pref, id] in Iterator(keyMap)) {
             var key = sbCommonUtils.getPref(pref, "");
             var elt = document.getElementById(id);
-            if (key.length == 1)
+            if (key.length == 1) {
                 elt.setAttribute("key", key);
-            else
+            } else {
                 elt.parentNode.removeChild(elt);
+            }
         }
     },
 
@@ -133,10 +134,11 @@ var sbBrowserOverlay = {
         document.getElementById("ScrapBookToolbox").hidden = id ? false : true;
         if (id) {
             this.resource = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
-            if (this.editMode)
+            if (this.editMode) {
                 window.setTimeout(function() { sbPageEditor.init(id); }, 20);
-            else
+            } else {
                 window.setTimeout(function() { sbPageEditor.showHide(false); }, 0);
+            }
             if (this.infoMode)
                 window.setTimeout(function() { sbInfoViewer.init(id); }, 50);
         } else {
@@ -306,9 +308,9 @@ var sbBrowserOverlay = {
             sbPageEditor.disable(true);
             return;
         }
-        if (document.getElementById("viewScrapBookSidebar").getAttribute("checked"))
+        if (document.getElementById("viewScrapBookSidebar").getAttribute("checked")) {
             document.getElementById(sidebarId).contentWindow.sbMainService.locate(aRes);
-        else {
+        } else {
             this.locateMe = aRes;
             toggleSidebar("viewScrapBookSidebar");
         }

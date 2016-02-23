@@ -188,10 +188,11 @@ var sbTradeService = {
         for ( var i = 0; i < data.length; i++ ) {
             if ( !data[i].match(/\t/) ) continue;
             var keyVal = data[i].split("\t");
-            if ( keyVal.length == 2 )
+            if ( keyVal.length == 2 ) {
                 item[keyVal[0]] = keyVal[1];
-            else
+            } else {
                 item[keyVal.shift()] = keyVal.join("\t");
+            }
         }
         return item;
     },
@@ -418,10 +419,11 @@ var sbImportService = {
 
     next : function() {
         var atEnd;
-        if ( this.ascending )
+        if ( this.ascending ) {
             atEnd = ++this.count >= this.idxList.length;
-        else
+        } else {
             atEnd = --this.count < 0;
+        }
         if ( !atEnd ) {
             var num  = this.ascending ? this.count + 1 : this.idxList.length - this.count;
             var rate = " (" + num + "/" + this.idxList.length + ") ";
@@ -467,10 +469,11 @@ var sbImportService = {
             if ( document.getElementById("sbTradeOptionRemove").checked ) sbCommonUtils.removeDirSafety(srcDir, false);
         } else {
             try {
-                if ( document.getElementById("sbTradeOptionRemove").checked )
+                if ( document.getElementById("sbTradeOptionRemove").checked ) {
                     srcDir.moveTo(destDir, item.id);
-                else
+                } else {
                     srcDir.copyTo(destDir, item.id);
+                }
             } catch(ex) {
                 throw "Failed to copy files.";
             }

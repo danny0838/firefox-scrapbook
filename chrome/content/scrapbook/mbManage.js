@@ -131,10 +131,11 @@ MultiBookTreeView.prototype = {
     _treeBoxObject: null,
 
     get selectedItem() {
-        if (this.selection.count < 1)
+        if (this.selection.count < 1) {
             return null;
-        else
+        } else {
             return this._data[this.selection.currentIndex];
+        }
     },
 
     getItemAt: function(aRow) {

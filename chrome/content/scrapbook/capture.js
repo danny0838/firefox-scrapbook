@@ -85,8 +85,11 @@ function SB_initCapture() {
             titles: window.arguments[12],
         };
         data.context = (function(){
-            if ( data.referItem ) return "indepth";
-            else if ( data.preset ) return data.preset[1] == "index" ? "capture-again" : "capture-again-deep";
+            if ( data.referItem ) {
+                return "indepth";
+            } else if ( data.preset ) {
+                return data.preset[1] == "index" ? "capture-again" : "capture-again-deep";
+            }
             return "link";
         })();
     }
@@ -292,10 +295,11 @@ var sbCaptureTask = {
 
     countDown : function() {
         SB_trace(sbCommonUtils.lang("capture", "WAITING", [sbCaptureTask.seconds]));
-        if ( --this.seconds > 0 )
+        if ( --this.seconds > 0 ) {
             this.timerID = window.setTimeout(function(){ sbCaptureTask.countDown(); }, 1000);
-        else
+        } else {
             this.timerID = window.setTimeout(function(){ sbCaptureTask.start(); }, 1000);
+        }
     },
 
     finalize : function() {
@@ -314,10 +318,11 @@ var sbCaptureTask = {
 
     activate : function() {
         this.toggleStartPause(true);
-        if ( this.seconds < 0 )
+        if ( this.seconds < 0 ) {
             sbCaptureTask.start();
-        else
+        } else {
             this.countDown();
+        }
     },
 
     pause : function() {
