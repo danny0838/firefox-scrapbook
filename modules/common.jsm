@@ -304,11 +304,13 @@ var sbCommonUtils = {
                 var file = files.getNext().QueryInterface(Components.interfaces.nsIFile);
                 if (file.isDirectory()) {
                     dirs.push(file);
-                }
-                else {
+                } else {
                     ret = aCallback.call(aThisArg, file, aArgs);
-                    if (ret === 1) break;
-                    else if (ret === 2) break all;
+                    if (ret === 1) {
+                        break;
+                    } else if (ret === 2) {
+                        break all;
+                    }
                 }
             }
         }
@@ -317,8 +319,7 @@ var sbCommonUtils = {
     getFileMime : function(aFile) {
         try {
             return this.MIME.getTypeFromFile(aFile);
-        }
-        catch(ex) {}
+        } catch(ex) {}
         return false;
     },
 
@@ -332,8 +333,7 @@ var sbCommonUtils = {
             sstream.close();
             istream.close();
             return content;
-        }
-        catch(ex) {
+        } catch(ex) {
             return false;
         }
     },
@@ -349,8 +349,7 @@ var sbCommonUtils = {
                 converter.init(ostream, "UTF-8", 4096, 0x0000);
                 converter.writeString(aContent);
                 converter.close();
-            }
-            else {
+            } else {
                 // loop over all chars and encode the unsupported ones
                 this.UNICODE.charset = aChars;
                 var output = [];
@@ -380,10 +379,12 @@ var sbCommonUtils = {
                 ostream.write(output, output.length);
             }
             ostream.close();
-        }
-        catch(ex) {
-            if (aNoCatch) throw ex;
-            else this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_WRITE_FILE", [aFile.path, ex]));
+        } catch(ex) {
+            if (aNoCatch) {
+                throw ex;
+            } else {
+                this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_WRITE_FILE", [aFile.path, ex]));
+            }
         }
     },
 
@@ -564,8 +565,7 @@ var sbCommonUtils = {
                 case branch.PREF_STRING: 
                     return "string";
             }
-        }
-        catch (ex) {
+        } catch (ex) {
             return "undefined";
         }
         return "undefined";
@@ -585,8 +585,7 @@ var sbCommonUtils = {
                 default: 
                     throw null;
             }
-        }
-        catch (ex) {
+        } catch (ex) {
             return aDefaultValue != undefined ? aDefaultValue : null;
         }
     },
@@ -611,8 +610,7 @@ var sbCommonUtils = {
                 default: 
                     throw null;
             }
-        }
-        catch (ex) {
+        } catch (ex) {
             sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SET_PREF", [aName]));
         }
     },
@@ -658,13 +656,12 @@ var sbCommonUtils = {
             bundle = this._stringBundles[aBundle] = this.BUNDLE.createBundle(uri);
         }
         try {
-            if (!aArgs)
+            if (!aArgs) {
                 return bundle.GetStringFromName(aName);
-            else
+            } else {
                 return bundle.formatStringFromName(aName, aArgs, aArgs.length);
-        }
-        catch (ex) {
-        }
+            }
+        } catch (ex) {}
         return aName;
     },
 
@@ -868,8 +865,7 @@ var sbCommonUtils = {
         var doc = aRefNode.ownerDocument;
         if (doc.querySelectorAll) {
             return doc.querySelectorAll('[data-sb-id="' + id.replace(/"/g, '\\"') + '"]');
-        }
-        else {
+        } else {
             // workaround for older Firefox versions that don't support
             var ret = [];
             var els = doc.getElementsByTagName("*");
@@ -922,8 +918,7 @@ var sbCommonUtils = {
     isDeadObject : function(aObject) {
         try {
             var x = aObject.body;
-        }
-        catch(ex) {
+        } catch(ex) {
             return true;
         }
         return false;
