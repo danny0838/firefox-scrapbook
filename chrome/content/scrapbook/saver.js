@@ -287,7 +287,7 @@ var sbContentSaver = {
             }
         }
         // process HTML DOM
-        this.processDOMRecursively(rootNode);
+        this.processDOMRecursively(rootNode, rootNode);
 
         // process all inline and link CSS, will merge them into index.css later
         var myCSS = "";
@@ -425,15 +425,15 @@ var sbContentSaver = {
     },
 
 
-    processDOMRecursively : function(rootNode) {
-        for ( var curNode = rootNode.firstChild; curNode != null; curNode = curNode.nextSibling ) {
+    processDOMRecursively : function(startNode, rootNode) {
+        for ( var curNode = startNode.firstChild; curNode != null; curNode = curNode.nextSibling ) {
             if ( curNode.nodeName == "#text" || curNode.nodeName == "#comment" ) continue;
-            curNode = this.inspectNode(curNode);
-            this.processDOMRecursively(curNode);
+            curNode = this.inspectNode(curNode, rootNode);
+            this.processDOMRecursively(curNode, rootNode);
         }
     },
 
-    inspectNode : function(aNode) {
+    inspectNode : function(aNode, rootNode) {
         switch ( aNode.nodeName.toLowerCase() ) {
             case "img" : 
                 if ( aNode.hasAttribute("src") ) {
@@ -651,11 +651,39 @@ var sbContentSaver = {
                 } else if ( aNode.href.match(/^javascript:/i) && !this.option["script"] ) {
                     aNode.removeAttribute("href");
                     break;
-                } else if ( !this.selection && aNode.getAttribute("href").match(/^(?:#|$)/) ) {
-                    // Relative links to self need not be parsed
-                    // If has selection (i.e. partial capture), the captured page is incomplete,
+                } else {
+                    // Relative links to self may be obfuscated with path or full URL prefix.
+                    // If has selection (i.e. partial capture), the captured page is incomplete.
+                    // Stop processing if link target is within the selected fragment otherwise
                     // do the subsequent URL rewrite so that it is targeting the source page
-                    break;
+                    var splitHref = sbCommonUtils.splitURLByAnchor(aNode.href);
+                    var docFile = sbCommonUtils.splitURLByAnchor(aNode.ownerDocument.location.href)[0];
+                    if ( splitHref[0] === docFile ) {
+                        if ( splitHref[1] === '' || splitHref[1] === '#' ) { // link to this file as a whole
+                            aNode.setAttribute('href', '#');
+                            break;
+                        }
+                        var reallyLocal = !this.selection;
+                        if ( reallyLocal || sbCommonUtils.isFunction(rootNode.querySelector) ) {
+                            // Element.querySelector() available since version 3.5
+                            if ( !reallyLocal ) {
+                                try {
+                                    if ( rootNode.querySelector(splitHref[1]) ) {
+                                        reallyLocal = true;
+                                    }
+                                } catch (e) {
+                                    console.error(e);
+                                }
+                            }
+                            if ( reallyLocal ) {
+                                var hrefValue = aNode.getAttribute('href');
+                                if ( hrefValue && hrefValue.charAt(0) != '#' ) {
+                                    aNode.setAttribute('href', splitHref[1]);
+                                }
+                                break;
+                            }
+                        }
+                    }
                 }
                 // determine whether to download (copy) the link target file
                 var ext = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aNode.href))[1].toLowerCase();
