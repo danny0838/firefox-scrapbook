@@ -170,9 +170,13 @@ var sbPropService = {
         FP.appendFilters(FP.filterImages);
         if ( FP.show() == FP.returnOK ) {
             var iconURL;
-            if      ( aCommand == "F" && dir.contains(FP.file, false) ) iconURL = sbCommonUtils.convertFileToResURL(FP.file);
-            else if ( aCommand == "U" && dir.contains(FP.file, false) ) iconURL = sbCommonUtils.convertFileToResURL(FP.file);
-            else iconURL = sbCommonUtils.convertFilePathToURL(FP.file.path);
+            if ( aCommand == "F" && dir.contains(FP.file, false) ) {
+                iconURL = sbCommonUtils.convertFileToResURL(FP.file);
+            } else if ( aCommand == "U" && dir.contains(FP.file, false) ) {
+                iconURL = sbCommonUtils.convertFileToResURL(FP.file);
+            } else {
+                iconURL = sbCommonUtils.convertFilePathToURL(FP.file.path);
+            }
             this.ICON.src = iconURL;
         }
     },
@@ -185,10 +189,11 @@ var sbPropService = {
 
     updateCommentTab : function(aComment) {
         var elem = document.getElementById("sbPropCommentTab");
-        if ( aComment )
+        if ( aComment ) {
             elem.setAttribute("image", "chrome://scrapbook/skin/edit_comment.png");
-        else
+        } else {
             elem.removeAttribute("image");
+        }
     },
 
     getHTMLTitle : function(aID, aChars) {

@@ -572,12 +572,13 @@ var sbTreeDNDHandler = {
                 XferData = XferDataSet.first.first.data;
                 XferType = XferDataSet.first.first.flavour.contentType;
             }
-            if (XferType == "moz/rdfitem")
+            if (XferType == "moz/rdfitem") {
                 sbTreeDNDHandler.move(row, orient);
-            else if (XferType == "sb/tradeitem")
+            } else if (XferType == "sb/tradeitem") {
                 sbTreeDNDHandler.importData(row, orient);
-            else
+            } else {
                 sbTreeDNDHandler.capture(XferData, row, orient);
+            }
             sbCommonUtils.rebuildGlobal();
         },
         onToggleOpenState    : function() {},
@@ -646,8 +647,7 @@ var sbTreeDNDHandler = {
             var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
             if (curRes.Value == tarRes.Value) return;
             if (orient == 1) {
-                if (tarRelIdx == -1) tarRelIdx = 1;
-                else tarRelIdx++;
+                (tarRelIdx == -1) ? tarRelIdx = 1 : tarRelIdx++;
             }
             if (orient == -1 || orient == 1) {
                 if (curPar.Value == tarPar.Value && tarRelIdx > curRelIdx)
@@ -788,10 +788,11 @@ var sbSearchService = {
                 "I": "id",
                 "A": "all"
             };
-            if (aInput.toUpperCase() in table)
+            if (aInput.toUpperCase() in table) {
                 this.change(table[aInput.toUpperCase()]);
-            else
+            } else {
                 this.exit();
+            }
             document.getElementById("sbSearchTextbox").value = "";
         } else {
             var query = aInput;

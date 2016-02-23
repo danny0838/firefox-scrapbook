@@ -274,13 +274,15 @@ var sbPageEditor = {
         traceTree : while ( true ) {
             nodeRange.selectNode(node);
             if ( nodeRange.compareBoundaryPoints(Range.START_TO_END, selRange) > -1 ) {
-                if ( nodeRange.compareBoundaryPoints(Range.END_TO_START, selRange) > 0 ) break;
-                else if ( node.nodeType === 1 ) {
+                if ( nodeRange.compareBoundaryPoints(Range.END_TO_START, selRange) > 0 ) {
+                    break;
+                } else if ( node.nodeType === 1 ) {
                     nodeToDel.push(node);
                 }
             }
-            if ( node.hasChildNodes() ) node = node.firstChild;
-            else {
+            if ( node.hasChildNodes() ) {
+                node = node.firstChild;
+            } else {
                 while ( !node.nextSibling ) { node = node.parentNode; if ( !node ) break traceTree; }
                 node = node.nextSibling;
             }
@@ -564,10 +566,11 @@ var sbPageEditor = {
                 switch (node.type.toLowerCase()) {
                     case "checkbox":
                     case "radio":
-                        if (node.checked)
+                        if (node.checked) {
                             node.setAttribute("checked", "checked");
-                        else
+                        } else {
                             node.removeAttribute("checked");
+                        }
                         break;
                     case "text":
                         node.setAttribute("value", node.value);
@@ -972,8 +975,7 @@ var sbHtmlEditor = {
         };
         var accepted = window.top.openDialog("chrome://scrapbook/content/editor_link.xul", "ScrapBook:AttachLink", "chrome,modal,centerscreen,resizable", data);
         if (data.result != 1) return;
-        // insert link?
-        if (data.url_use) {
+        if (data.url_use) {  // insert link?
             // attach the link
             if (data.format) {
                 var html = sbCommonUtils.stringTemplate(data.format, /{([\w_]+)}/g, {
@@ -983,9 +985,7 @@ var sbHtmlEditor = {
                 });
                 aDoc.execCommand("insertHTML", false, html);
             }
-        }
-        // insert inner link?
-        else if (data.id_use) {
+        } else if (data.id_use) {  // insert inner link?
             // we can construct inner link only for those with valid id
             if (!sbPageEditor.item) return;
             var id = data.id;
@@ -1041,8 +1041,7 @@ var sbHtmlEditor = {
         var data = { url: url, filename: htmlFile.leafName };
         var accepted = window.top.openDialog("chrome://scrapbook/content/editor_file.xul", "ScrapBook:AttachFile", "chrome,modal,centerscreen,resizable", data);
         if (data.result != 1) return;
-        // insert file ?
-        if (data.file_use) {
+        if (data.file_use) {  // insert file ?
             var filename = data.file.leafName;
             var filename2 = sbCommonUtils.validateFileName(filename);
             try {
@@ -1067,9 +1066,7 @@ var sbHtmlEditor = {
                 });
                 aDoc.execCommand("insertHTML", false, html);
             }
-        }
-        // insert html ?
-        else if (data.html_use) {
+        } else if (data.html_use) {  // insert html ?
             var title = data.html;
             var filename = title + ".html";
             var filename2 = sbCommonUtils.validateFileName(filename);
@@ -1107,8 +1104,11 @@ var sbHtmlEditor = {
                             checkFile = checkFile.parent;
                         }
                         // remove trailing "/", or return "." if empty
-                        if (result) return result.substring(0, result.length -1);
-                        else return ".";
+                        if (result) {
+                            return result.substring(0, result.length -1);
+                        } else {
+                            return ".";
+                        }
                     })(destFile, sbPageEditor.item.id),
                 });
                 sbCommonUtils.writeFile(destFile, content, "UTF-8", true);
@@ -2632,10 +2632,11 @@ var sbInfoViewer = {
 
     toggleIndicator : function(willEnable) {
         sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
-            if ( willEnable )
+            if ( willEnable ) {
                 this.indicateLinks(win);
-            else
+            } else {
                 sbPageEditor.removeStyle(win, "scrapbook-indicator-style");
+            }
         }, this);
     },
 
