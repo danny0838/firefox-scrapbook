@@ -313,10 +313,11 @@ var sbCacheService = {
                 this.folders.push(contResList[i].ValueUTF8);
             }
         }
-        if ( this.resList.length>0 )
+        if ( this.resList.length>0 ) {
             this.processAsync();
-        else
+        } else {
             sbCacheService.finalize();
+        }
     },
 
     processAsync : function() {
@@ -406,10 +407,11 @@ var sbCacheService = {
                 break;
         }
         // next one
-        if ( ++this.index < this.resList.length )
+        if ( ++this.index < this.resList.length ) {
             setTimeout(function(){ sbCacheService.processAsync(); }, 0);
-        else
+        } else {
             setTimeout(function(){ sbCacheService.finalize(); }, 0);
+        }
     },
 
     inspectFile : function(aFile, aSubPath, mode) {
@@ -592,10 +594,11 @@ var sbCacheSource = {
         var resEnum = this.dataSource.GetAllResources();
         while ( resEnum.hasMoreElements() ) {
             var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-            if ( res.ValueUTF8.indexOf("#") == -1 && res.ValueUTF8 != "urn:scrapbook:cache" )
+            if ( res.ValueUTF8.indexOf("#") == -1 && res.ValueUTF8 != "urn:scrapbook:cache" ) {
                 this.removeEntry(res);
-            else
+            } else {
                 sbCacheService.uriHash[res.ValueUTF8] = false;
+            }
         }
         this.container = sbCommonUtils.RDFCU.MakeSeq(this.dataSource, sbCommonUtils.RDF.GetResource("urn:scrapbook:cache"));
     },

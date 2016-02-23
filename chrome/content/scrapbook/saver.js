@@ -651,24 +651,22 @@ var sbContentSaver = {
                 } else if ( aNode.href.match(/^javascript:/i) && !this.option["script"] ) {
                     aNode.removeAttribute("href");
                     break;
-                }
-                // Relative links to self need not be parsed
-                // If has selection (i.e. partial capture), the captured page is incomplete,
-                // do the subsequent URL rewrite so that it is targeting the source page
-                else if ( !this.selection && aNode.getAttribute("href").match(/^(?:#|$)/) ) {
+                } else if ( !this.selection && aNode.getAttribute("href").match(/^(?:#|$)/) ) {
+                    // Relative links to self need not be parsed
+                    // If has selection (i.e. partial capture), the captured page is incomplete,
+                    // do the subsequent URL rewrite so that it is targeting the source page
                     break;
                 }
                 // determine whether to download (copy) the link target file
                 var ext = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aNode.href))[1].toLowerCase();
                 var flag = false;
-                // copy files with custom defined extensions
                 if ( ext && this.option["custom"] &&
                     ( (", " + this.option["custom"] + ", ").indexOf(", " + ext + ", ") != -1 ) ) {
+                    // copy files with custom defined extensions
                     flag = true;
-                }
-                // download all non-HTML target of local file
-                // primarily to enable the combine wizard to capture all "file" data
-                else if ( aNode.href.indexOf("file://") == 0 && !ext.match(/html?/) ) {
+                } else if ( aNode.href.indexOf("file://") == 0 && !ext.match(/html?/) ) {
+                    // download all non-HTML target of local file
+                    // primarily to enable the combine wizard to capture all "file" data
                     flag = true;
                 } else {
                     switch ( ext ) {
@@ -1007,14 +1005,13 @@ var sbContentSaver = {
         var newFileNameCI = newFileName.toLowerCase();
         while ( this.file2URL[newFileNameCI] != undefined ) {
             if (this.file2URL[newFileNameCI] == aURLSpec) {
-                // this.file2Doc is mainly to check for dynamic iframes without src attr
-                // they have exactly same url with the main page
                 if (this.file2Doc[newFileNameCI] == aDocumentSpec) {
+                    // this.file2Doc is mainly to check for dynamic iframes without src attr
+                    // they have exactly same url with the main page
                     return [newFileName, true];
-                }
-                // if this.file2Doc[newFileName] has no document set,
-                // it should mean a preset url for the page and is safe to use
-                else if (!this.file2Doc[newFileNameCI]) {
+                } else if (!this.file2Doc[newFileNameCI]) {
+                    // if this.file2Doc[newFileName] has no document set,
+                    // it should mean a preset url for the page and is safe to use
                     this.file2Doc[newFileNameCI] = aDocumentSpec;
                     return [newFileName, false];
                 }

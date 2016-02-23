@@ -524,20 +524,18 @@ var sbPageCombiner = {
             /(,\s+)|(\s+)|((?:[\-0-9A-Za-z_\u00A0-\uFFFF]|\\[0-9A-Fa-f]{1,6} ?|\\.)+)|(\[(?:"(?:\\.|[^"])*"|\\.|[^\]])*\])|(.)/g,
             function(){
                 var ret = "";
-                // a new selector, add prefix
                 if (arguments[1]) {
+                    // a new selector, add prefix
                     ret = arguments[1] + "#" + id + " ";
                     canBeElement = true;
                     canBeId = false;
-                }
-                // spaces, can follow element
-                else if (arguments[2]) {
+                } else if (arguments[2]) {
+                    // spaces, can follow element
                     ret = arguments[2];
                     canBeElement = true;
                     canBeId = false;
-                }
-                // element-like, check whether to replace
-                else if (arguments[3]) {
+                } else if (arguments[3]) {
+                    // element-like, check whether to replace
                     if (canBeElement) {
                         if (arguments[3].toLowerCase() == "html") {
                             ret = "#" + id + "html";
@@ -559,15 +557,13 @@ var sbPageCombiner = {
                     }
                     canBeElement = false;
                     canBeId = false;
-                }
-                // bracket enclosed, eg. [class="html"]
-                else if (arguments[4]) {
+                } else if (arguments[4]) {
+                    // bracket enclosed, eg. [class="html"]
                     ret = arguments[4];
                     canBeElement = false;
                     canBeId = false;
-                }
-                // other chars, may come from "#", ".", ":", " > ", " + ", " ~ ", etc
-                else if (arguments[5]) {
+                } else if (arguments[5]) {
+                    // other chars, may come from "#", ".", ":", " > ", " + ", " ~ ", etc
                     ret = arguments[5];
                     canBeElement = false;
                     canBeId = (arguments[5] == "#");

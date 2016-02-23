@@ -31,8 +31,7 @@ var sbDataSource = {
             var fileURL = sbCommonUtils.IO.newFileURI(this._dataFile).spec;
             this._dataObj = sbCommonUtils.RDF.GetDataSourceBlocking(fileURL);
             this._needReOutputTree = false;
-        }
-        catch(ex) {
+        } catch(ex) {
             if ( !aQuietWarning ) sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_INIT_DATASOURCE", [ex]));
         }
     },
@@ -161,14 +160,14 @@ var sbDataSource = {
             if ( sbCommonUtils.getPref("tree.unshift", false) ) {
                 if ( aIdx == 0 || aIdx == -1 ) aIdx = 1;
             }
-            if ( 0 < aIdx && aIdx <= cont.GetCount() )
+            if ( 0 < aIdx && aIdx <= cont.GetCount() ) {
                 cont.InsertElementAt(newRes, aIdx, true);
-            else
+            } else {
                 cont.AppendElement(newRes);
+            }
             this._flushWithDelay();
             return newRes;
-        }
-        catch(ex) {
+        } catch(ex) {
             sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_ADD_RESOURCE", [ex]));
             return false;
         }
@@ -235,8 +234,7 @@ var sbDataSource = {
             this.flattenResources(aRes, 0, true).forEach(function(res){
                 rmIDs.push(this.removeResource(res));
             }, this);
-        }
-        else {
+        } else {
             rmIDs.push(this.removeResource(aRes));
         }
         return rmIDs;
@@ -325,8 +323,7 @@ var sbDataSource = {
             var oldVal = this._dataObj.GetTarget(aRes, aProp, true);
             if (oldVal == sbCommonUtils.RDF.NS_RDF_NO_VALUE) {
                 this._dataObj.Assert(aRes, aProp, sbCommonUtils.RDF.GetLiteral(newVal), true);
-            }
-            else {
+            } else {
                 oldVal = oldVal.QueryInterface(Components.interfaces.nsIRDFLiteral);
                 newVal = sbCommonUtils.RDF.GetLiteral(newVal);
                 this._dataObj.Change(aRes, aProp, oldVal, newVal);
@@ -382,10 +379,11 @@ var sbDataSource = {
         while ( resEnum.hasMoreElements() ) {
             var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
             if ( this.isContainer(res) ) {
-                if ( aRecursive )
+                if ( aRecursive ) {
                     this.flattenResources(res, aRule, aRecursive, resList);
-                else
+                } else {
                     if ( aRule != 2 ) resList.push(res);
+                }
             } else {
                 if ( aRule != 1 ) resList.push(res);
             }
