@@ -1,3 +1,8 @@
+Scrapbook X 1.12.23
+----------------
+- UPDATE: Adjust internal coding style. (No semantic change.)
+
+
 Scrapbook X 1.12.22
 ----------------
 - NEW: Add an option to save files in ASCII filename in Options > Advanced.
