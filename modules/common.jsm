@@ -279,8 +279,31 @@ var sbCommonUtils = {
         return typeof(aID) == "string" && /^\d{14}$/.test(aID);
     },
 
-    crop : function(aString, aMaxLength) {
-        return aString.length > aMaxLength ? aString.substr(0, aMaxLength) + "..." : aString;
+    // aByBytes: true to crop texts according to bytes under UTF-8 encoding
+    //           false to crop according to UTF-16 chars
+    // aEllipsis: text for ellipsis
+    crop : function(aString, aMaxLength, aByBytes, aEllipsis) {
+        if (typeof(aEllipsis) == "undefined") aEllipsis = "...";
+        if (aByBytes) {
+            var bytes= toBytesUTF8(aString);
+            if (bytes.length <= aMaxLength) return aString;
+            bytes = bytes.substring(0, aMaxLength - toBytesUTF8(aEllipsis).length);
+            while (true) {
+                try {
+                    return fromBytesUTF8(bytes) + aEllipsis;
+                } catch(e) {};
+                bytes= bytes.substring(0, bytes.length-1);
+            }
+        } else {
+            return (aString.length > aMaxLength) ? aString.substr(0, aMaxLength - aEllipsis.length) + aEllipsis : aString;
+        }
+
+        function toBytesUTF8(chars) {
+            return unescape(encodeURIComponent(chars));
+        }
+        function fromBytesUTF8(bytes) {
+            return decodeURIComponent(escape(bytes));
+        }
     },
 
 

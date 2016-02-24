@@ -55,7 +55,7 @@ var sbContentSaver = {
             var lines = this.selection.toString().split("\n");
             for ( var i = 0; i < lines.length; i++ ) {
                 lines[i] = lines[i].replace(/\r|\n|\t/g, "");
-                if ( lines[i].length > 0 ) titles.push(lines[i].substring(0,72));
+                if ( lines[i].length > 0 ) titles.push(sbCommonUtils.crop(sbCommonUtils.crop(lines[i], 180, true), 150));
                 if ( titles.length > 4 ) break;
             }
             this.item.title = ( titles.length > 0 ) ? titles[1] : titles[0];
@@ -997,7 +997,7 @@ var sbContentSaver = {
         newFileName = newFileName;
         newFileName = sbCommonUtils.validateFileName(newFileName);
         var fileLR = sbCommonUtils.splitFileName(newFileName);
-        fileLR[0] = sbCommonUtils.crop(fileLR[0], 100);
+        fileLR[0] = sbCommonUtils.crop(sbCommonUtils.crop(fileLR[0], 240, true), 128);
         if ( !fileLR[1] ) fileLR[1] = "dat";
         aURLSpec = sbCommonUtils.splitURLByAnchor(aURLSpec)[0];
         var seq = 0;
@@ -1091,7 +1091,7 @@ var sbCaptureObserverCallback = {
             if ( sbCommonUtils.getPref("notifyOnComplete", true) ) {
                 var icon = aItem.icon ? "resource://scrapbook/data/" + aItem.id + "/" + aItem.icon : sbCommonUtils.getDefaultIcon();
                 var title = "ScrapBook: " + sbCommonUtils.lang("overlay", "CAPTURE_COMPLETE");
-                var text = sbCommonUtils.crop(aItem.title, 40);
+                var text = sbCommonUtils.crop(aItem.title, 100, true);
                 var listener = {
                     observe: function(subject, topic, data) {
                         if (topic == "alertclickcallback")
