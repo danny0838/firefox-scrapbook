@@ -287,7 +287,7 @@ var sbContentSaver = {
             }
         }
         // process HTML DOM
-        this.processDOMRecursively(rootNode);
+        this.processDOMRecursively(rootNode, rootNode);
 
         // process all inline and link CSS, will merge them into index.css later
         var myCSS = "";
@@ -425,15 +425,15 @@ var sbContentSaver = {
     },
 
 
-    processDOMRecursively : function(rootNode) {
-        for ( var curNode = rootNode.firstChild; curNode != null; curNode = curNode.nextSibling ) {
+    processDOMRecursively : function(startNode, rootNode) {
+        for ( var curNode = startNode.firstChild; curNode != null; curNode = curNode.nextSibling ) {
             if ( curNode.nodeName == "#text" || curNode.nodeName == "#comment" ) continue;
-            curNode = this.inspectNode(curNode);
-            this.processDOMRecursively(curNode);
+            curNode = this.inspectNode(curNode, rootNode);
+            this.processDOMRecursively(curNode, rootNode);
         }
     },
 
-    inspectNode : function(aNode) {
+    inspectNode : function(aNode, rootNode) {
         switch ( aNode.nodeName.toLowerCase() ) {
             case "img" : 
                 if ( aNode.hasAttribute("src") ) {
@@ -651,9 +651,10 @@ var sbContentSaver = {
                 } else if ( aNode.href.match(/^javascript:/i) && !this.option["script"] ) {
                     aNode.removeAttribute("href");
                     break;
-                } else if ( !this.selection && aNode.getAttribute("href").match(/^(?:#|$)/) ) {
-                    // Relative links to self need not be parsed
-                    // If has selection (i.e. partial capture), the captured page is incomplete,
+                } else if ( this.detectLocalHref(aNode, rootNode) ) {
+                    // Relative links to self may be obfuscated with path or full URL prefix.
+                    // If has selection (i.e. partial capture), the captured page is incomplete.
+                    // Stop processing if link target is within the selected fragment otherwise
                     // do the subsequent URL rewrite so that it is targeting the source page
                     break;
                 }
@@ -763,6 +764,39 @@ var sbContentSaver = {
             aNode.removeAttribute("contextmenu");
         }
         return aNode;
+    },
+
+    detectLocalHref: function(aNode, rootNode) {
+        // Try to handle non-obvious internal links
+        var nodeHref = aNode.href;
+        var docFile = aNode.ownerDocument.location.href.replace(/#.*$/, '');
+        var hashPos = nodeHref.indexOf('#');
+        if ( hashPos < 0 ) {
+            if ( docFile == nodeHref ) { // link to this file as a whole
+                aNode.setAttribute('href', '#');
+                return true;
+            }
+            return false;
+        }
+        if ( docFile !== nodeHref.substring(0, hashPos) ) {
+            return false;
+        }
+        var ref = nodeHref.substring(hashPos);
+        if ( this.selection ) {
+            try {
+                if ( ref.length > 1 && !rootNode.querySelector(ref) ) {
+                    return false; // link target is outside of the captured (selection) fragment
+                }
+            } catch (e) {
+                console.error(e);
+                return false;
+            }
+        }
+        var hrefValue = aNode.getAttribute('href');
+        if ( hrefValue && hrefValue.charAt(0) != '#' ) {
+            aNode.setAttribute('href', ref);
+        }
+        return true;
     },
 
     processCSSRecursively : function(aCSS, aDocument, isImport) {
