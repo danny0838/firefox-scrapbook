@@ -237,7 +237,6 @@ var sbCaptureTask = {
             this.next(true);
             return;
         }
-        this.isDocument = true;
         this.refreshHash = {};
         var url = aOverriddenURL || gURLs[this.index];
         if ( gTitles ) gTitle = gTitles[this.index];
@@ -647,12 +646,8 @@ var sbInvisibleBrowser = {
 
     execCapture : function() {
         SB_trace(sbCommonUtils.lang("capture", "CAPTURE_START"));
-        document.getElementById("sbCapturePauseButton").disabled = true;
-        sbCaptureTask.toggleSkipButton(false);
-        var ret = null;
-        var preset = gReferItem ? [gReferItem.id, SB_suggestName(this.ELEMENT.currentURI.spec), gOption, gFile2URL, gDepths[sbCaptureTask.index]] : null;
-        if ( gPreset ) preset = gPreset;
-        if ( sbCaptureTask.isDocument && this.ELEMENT.contentDocument.body ) {
+        if ( this.ELEMENT.contentDocument.body ) {
+            // potential meta refresh redirect
             var metaElems = this.ELEMENT.contentDocument.getElementsByTagName("meta");
             for ( var i = 0; i < metaElems.length; i++ ) {
                 if ( metaElems[i].hasAttribute("http-equiv") && metaElems[i].hasAttribute("content") &&
@@ -667,10 +662,12 @@ var sbInvisibleBrowser = {
                     }
                 }
             }
-            ret = sbContentSaver.captureWindow(this.ELEMENT.contentWindow, false, gShowDetail, gResName, gResIdx, preset, gContext, gTitle);
-        } else {
-            ret = sbContentSaver.captureFile(sbCaptureTask.sniffer.URLSpec, gRefURL ? gRefURL : sbCaptureTask.URL, "file", gShowDetail, gResName, gResIdx, preset, gContext);
         }
+        document.getElementById("sbCapturePauseButton").disabled = true;
+        sbCaptureTask.toggleSkipButton(false);
+        var preset = gReferItem ? [gReferItem.id, SB_suggestName(this.ELEMENT.currentURI.spec), gOption, gFile2URL, gDepths[sbCaptureTask.index]] : null;
+        if ( gPreset ) preset = gPreset;
+        var ret = sbContentSaver.captureWindow(this.ELEMENT.contentWindow, false, gShowDetail, gResName, gResIdx, preset, gContext, gTitle);
         if ( ret ) {
             if ( gContext == "indepth" ) {
                 gURL2Name[sbCaptureTask.URL] = ret[0];
@@ -887,7 +884,7 @@ function sbHeaderSniffer(aURLSpec, aRefURLSpec) {
         onStartRequest  : function(aRequest, aContext) {},
         onStopRequest   : function(aRequest, aContext, aStatus) {
             // show connect success
-            var contentType = that.getHeader("Content-Type");
+            var contentType = that.getContentType() || "";
             SB_trace(sbCommonUtils.lang("capture", "CONNECT_SUCCESS", [contentType]));
 
             // get and show http status
@@ -966,25 +963,30 @@ sbHeaderSniffer.prototype = {
         try { return [this._channel.responseStatus, this._channel.responseStatusText]; } catch(ex) { return [false, ""]; }
     },
 
+    getContentType : function() {
+        try {
+            return this._channel.contentType;
+        } catch(ex) {}
+        return null;
+    },
+
     load : function(contentType) {
         // if no content, assume it's html
         if ( !contentType ) contentType = "text/html";
         // check type
-        sbCaptureTask.isDocument = ["text/plain", "html", "xml"].some(function(val) {
-            return contentType.indexOf(val) >= 0;
-        });
+        sbCaptureTask.isDocument = ["text/html", "application/xhtml+xml"].indexOf(contentType) >= 0;
         if (sbCaptureTask.isDocument) {
             // load the document and capture it
             sbInvisibleBrowser.load(this.URLSpec);
+        } else if (gContext == "link") {
+            // capture non-HTML documents as file for link capture 
+            sbContentSaver.captureFile(this.URLSpec, gRefURL ? gRefURL : sbCaptureTask.URL, "file", gShowDetail, gResName, gResIdx, null, gContext);
+        } else if (gContext == "indepth") {
+            // in an indepth capture, files with defined extensions are pre-processed and is not send to the URL list
+            // those who go here are undefined files, and should be skipped
+            sbCaptureTask.next(true);
         } else {
-            if ( gContext == "indepth" ) {
-                // in an indepth capture, files with defined extensions are pre-processed and is not send to the URL list
-                // those who go here are undefined files, and should be skipped
-                sbCaptureTask.next(true);
-            } else {
-                // will be captured as a file
-                sbInvisibleBrowser.execCapture();
-            }
+            // sbCommonUtils.error("Non-HTML under undefined context: " + gContext);
         }
     },
 
