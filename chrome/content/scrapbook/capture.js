@@ -223,10 +223,16 @@ var sbCaptureTask = {
         } catch(aEx) { sbCommonUtils.alert("add\n---\n"+aEx); }
     },
 
+    // start capture
     start: function(aOverriddenURL) {
         this.seconds = -1;
-        this.toggleStartPause(true);
+
+        // Resume "pause" and "skip" buttons, which are temporarily diasbled
+        // when a capture is already executed (rather than waiting for connection)
+        document.getElementById("sbCapturePauseButton").disabled = false;
         this.toggleSkipButton(true);
+
+        // mark the item we are currently on
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "selected");
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[0].setAttribute("properties", "disabled");
         var checkstate = this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[0].getAttribute("value");
@@ -240,10 +246,16 @@ var sbCaptureTask = {
         var url = aOverriddenURL || gURLs[this.index];
         if ( gTitles ) gTitle = gTitles[this.index];
         SB_trace(sbCommonUtils.lang("capture", "CONNECT", [url]));
-        this.sniffer = new sbHeaderSniffer(url, gRefURL);
-        this.sniffer.checkURL();
+
+        // "start" button hidden means currently active
+        // if active, start 
+        if (document.getElementById("sbCaptureStartButton").hidden) {
+            this.sniffer = new sbHeaderSniffer(url, gRefURL);
+            this.sniffer.checkURL();
+        }
     },
 
+    // when a capture completes successfully
     succeed: function() {
         document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
         if (!this.isLocal) {
@@ -261,6 +273,7 @@ var sbCaptureTask = {
         this.next(false);
     },
 
+    // when a capture fails
     fail: function(aErrorMsg) {
         document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
         if ( aErrorMsg ) SB_trace(aErrorMsg);
@@ -278,11 +291,9 @@ var sbCaptureTask = {
         this.next(true);
     },
 
+    // press "skip" button
+    // shift to next item
     next: function(quickly) {
-        this.toggleStartPause(true);
-        this.toggleSkipButton(false);
-        if ( this.sniffer ) this.sniffer.onHttpSuccess = function(){};
-        sbInvisibleBrowser.ELEMENT.stop();
         if ( ++this.index >= gURLs.length ) {
             this.finalize();
         } else {
@@ -319,21 +330,25 @@ var sbCaptureTask = {
         window.setTimeout(function(){ window.close(); }, 1000);
     },
 
+    // press "start" button
     activate: function() {
         this.toggleStartPause(true);
         this.countDown();
     },
 
+    // press "pause" button
     pause: function() {
         this.toggleStartPause(false);
         if ( this.seconds < 0 ) {
-            sbInvisibleBrowser.ELEMENT.stop();
+            if ( this.sniffer ) this.sniffer.cancel();
+            sbInvisibleBrowser.cancel();
         } else {
             this.seconds++;
             window.clearTimeout(this.timerID);
         }
     },
 
+    // press "cancel" button
     abort: function() {
         if ( gContext != "indepth" ) window.close();
         if ( ++this.forceExit > 2 ) window.close();
@@ -642,6 +657,10 @@ var sbInvisibleBrowser = {
         // if aURL is different from the current URL only in hash,
         // a loading is not performed unless forced to reload
         if (this.ELEMENT.currentURI.specIgnoringRef == sbCommonUtils.splitURLByAnchor(aURL)[0]) this.ELEMENT.reload();
+    },
+
+    cancel: function() {
+        this.ELEMENT.stop();
     },
 
     execCapture: function() {
@@ -1000,6 +1019,10 @@ sbHeaderSniffer.prototype = {
         } else {
             // sbCommonUtils.error("Non-HTML under undefined context: " + gContext);
         }
+    },
+
+    cancel: function() {
+        if (this._channel) this._channel.cancel(Components.results.NS_BINDING_ABORTED);
     },
 
     reportError: function(aErrorMsg) {
