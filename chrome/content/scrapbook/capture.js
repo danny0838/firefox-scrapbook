@@ -290,21 +290,18 @@ var sbCaptureTask = {
                 window.setTimeout(function(){ sbCaptureTask.start(); }, 0);
             } else {
                 this.seconds = this.INTERVAL;
-                if ( this.seconds > 0 ) {
-                    sbCaptureTask.countDown();
-                } else {
-                    sbCaptureTask.start();
-                }
+                sbCaptureTask.countDown();
             }
         }
     },
 
     countDown: function() {
         SB_trace(sbCommonUtils.lang("capture", "WAITING", [sbCaptureTask.seconds]));
-        if ( --this.seconds > 0 ) {
+        if ( this.seconds > 0 ) {
+            this.seconds--;
             this.timerID = window.setTimeout(function(){ sbCaptureTask.countDown(); }, 1000);
         } else {
-            this.timerID = window.setTimeout(function(){ sbCaptureTask.start(); }, 1000);
+            this.timerID = window.setTimeout(function(){ sbCaptureTask.start(); }, 0);
         }
     },
 
@@ -324,11 +321,7 @@ var sbCaptureTask = {
 
     activate: function() {
         this.toggleStartPause(true);
-        if ( this.seconds < 0 ) {
-            sbCaptureTask.start();
-        } else {
-            this.countDown();
-        }
+        this.countDown();
     },
 
     pause: function() {
