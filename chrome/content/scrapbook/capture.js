@@ -275,11 +275,7 @@ var sbCaptureTask = {
         treecell.setAttribute("properties", "failed");
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].appendChild(treecell);
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "finished");
-        if ( gURLs.length > 1 ) {
-            this.next(true);
-        } else {
-            this.toggleStartPause(false);
-        }
+        this.next(true);
     },
 
     next: function(quickly) {
