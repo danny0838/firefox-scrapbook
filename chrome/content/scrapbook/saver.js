@@ -145,7 +145,7 @@ var sbContentSaver = {
             result  : 1,
             context : aContext || "capture"
         };
-        window.openDialog("chrome://scrapbook/content/detail.xul" + (aContext ? "?capture" : ""), "", "chrome,modal,centerscreen,resizable", ret);
+        window.openDialog("chrome://scrapbook/content/detail.xul", "", "chrome,modal,centerscreen,resizable", ret);
         return ret;
     },
 
