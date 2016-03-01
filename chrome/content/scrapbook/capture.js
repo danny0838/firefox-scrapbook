@@ -617,8 +617,8 @@ var sbInvisibleBrowser = {
         } catch(ex) {
         }
         this.ELEMENT.addProgressListener(this._eventListener, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
-        this.ELEMENT.docShell.allowJavascript = gOption["script"];
-        this.ELEMENT.docShell.allowImages     = gOption["images"];
+        this.ELEMENT.docShell.allowImages = gOption["images"];
+        this.ELEMENT.docShell.allowJavascript = false;
         this.ELEMENT.docShell.allowMetaRedirects = false;
         // older version of Firefox gets error on setting charset
         try {
