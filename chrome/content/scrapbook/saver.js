@@ -669,7 +669,7 @@ var sbContentSaver = {
                         // Element.querySelector() is available only for Firefox >= 3.5
                         // For those with no support, simply skip the relink check.
                         var targetId = decodeURIComponent(urlParts[1].substr(1)).replace(/\W/g, '\\$&');
-                        if ( rootNode.querySelector('[id="' + targetId + '"]') ) {
+                        if ( rootNode.querySelector('[id="' + targetId + '"], a[name="' + targetId + '"]') ) {
                             hasLocalTarget = true;
                         }
                     }
