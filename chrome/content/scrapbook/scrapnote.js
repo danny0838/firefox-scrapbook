@@ -61,7 +61,7 @@ var sbNoteService = {
     },
 
     saveResource : function() {
-        var title = sbCommonUtils.crop(this.TEXTBOX.value.split("\n")[0].replace(/\t/g, " "), 50);
+        var title = sbCommonUtils.crop(sbCommonUtils.crop(this.TEXTBOX.value.split("\n")[0].replace(/\t/g, " "), 180, true), 150);
         sbDataSource.setProperty(this.resource, "title", title);
     },
 

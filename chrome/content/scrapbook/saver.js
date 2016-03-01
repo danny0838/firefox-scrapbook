@@ -55,7 +55,7 @@ var sbContentSaver = {
             var lines = this.selection.toString().split("\n");
             for ( var i = 0; i < lines.length; i++ ) {
                 lines[i] = lines[i].replace(/\r|\n|\t/g, "");
-                if ( lines[i].length > 0 ) titles.push(lines[i].substring(0,72));
+                if ( lines[i].length > 0 ) titles.push(sbCommonUtils.crop(sbCommonUtils.crop(lines[i], 180, true), 150));
                 if ( titles.length > 4 ) break;
             }
             this.item.title = ( titles.length > 0 ) ? titles[1] : titles[0];
@@ -145,7 +145,7 @@ var sbContentSaver = {
             result  : 1,
             context : aContext || "capture"
         };
-        window.openDialog("chrome://scrapbook/content/detail.xul" + (aContext ? "?capture" : ""), "", "chrome,modal,centerscreen,resizable", ret);
+        window.openDialog("chrome://scrapbook/content/detail.xul", "", "chrome,modal,centerscreen,resizable", ret);
         return ret;
     },
 
@@ -287,7 +287,7 @@ var sbContentSaver = {
             }
         }
         // process HTML DOM
-        this.processDOMRecursively(rootNode);
+        this.processDOMRecursively(rootNode, rootNode);
 
         // process all inline and link CSS, will merge them into index.css later
         var myCSS = "";
@@ -425,15 +425,15 @@ var sbContentSaver = {
     },
 
 
-    processDOMRecursively : function(rootNode) {
-        for ( var curNode = rootNode.firstChild; curNode != null; curNode = curNode.nextSibling ) {
+    processDOMRecursively : function(startNode, rootNode) {
+        for ( var curNode = startNode.firstChild; curNode != null; curNode = curNode.nextSibling ) {
             if ( curNode.nodeName == "#text" || curNode.nodeName == "#comment" ) continue;
-            curNode = this.inspectNode(curNode);
-            this.processDOMRecursively(curNode);
+            curNode = this.inspectNode(curNode, rootNode);
+            this.processDOMRecursively(curNode, rootNode);
         }
     },
 
-    inspectNode : function(aNode) {
+    inspectNode : function(aNode, rootNode) {
         switch ( aNode.nodeName.toLowerCase() ) {
             case "img" : 
                 if ( aNode.hasAttribute("src") ) {
@@ -651,11 +651,36 @@ var sbContentSaver = {
                 } else if ( aNode.href.match(/^javascript:/i) && !this.option["script"] ) {
                     aNode.removeAttribute("href");
                     break;
-                } else if ( !this.selection && aNode.getAttribute("href").match(/^(?:#|$)/) ) {
-                    // Relative links to self need not be parsed
-                    // If has selection (i.e. partial capture), the captured page is incomplete,
-                    // do the subsequent URL rewrite so that it is targeting the source page
-                    break;
+                }
+                // adjustment for hash links targeting the current page
+                var urlParts = sbCommonUtils.splitURLByAnchor(aNode.href);
+                if ( urlParts[0] === sbCommonUtils.splitURLByAnchor(aNode.ownerDocument.location.href)[0] ) {
+                    // This link targets the current page.
+                    if ( urlParts[1] === '' || urlParts[1] === '#' ) {
+                        // link to the current page as a whole
+                        aNode.setAttribute('href', '#');
+                        break;
+                    }
+                    // For full capture (no selection), relink to the captured page.
+                    // For partial capture, the captured page could be incomplete,
+                    // relink to the captured page only when the target node is included in the selected fragment.
+                    var hasLocalTarget = !this.selection;
+                    if ( !hasLocalTarget && rootNode.querySelector ) {
+                        // Element.querySelector() is available only for Firefox >= 3.5
+                        // For those with no support, simply skip the relink check.
+                        var targetId = decodeURIComponent(urlParts[1].substr(1)).replace(/\W/g, '\\$&');
+                        if ( rootNode.querySelector('[id="' + targetId + '"], a[name="' + targetId + '"]') ) {
+                            hasLocalTarget = true;
+                        }
+                    }
+                    if ( hasLocalTarget ) {
+                        // if the original link is already a pure hash, 
+                        // skip the rewrite to prevent a potential encoding change
+                        if (aNode.getAttribute('href').charAt(0) != "#") {
+                            aNode.setAttribute('href', urlParts[1]);
+                        }
+                        break;
+                    }
                 }
                 // determine whether to download (copy) the link target file
                 var ext = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aNode.href))[1].toLowerCase();
@@ -997,7 +1022,7 @@ var sbContentSaver = {
         newFileName = newFileName;
         newFileName = sbCommonUtils.validateFileName(newFileName);
         var fileLR = sbCommonUtils.splitFileName(newFileName);
-        fileLR[0] = sbCommonUtils.crop(fileLR[0], 100);
+        fileLR[0] = sbCommonUtils.crop(sbCommonUtils.crop(fileLR[0], 240, true), 128);
         if ( !fileLR[1] ) fileLR[1] = "dat";
         aURLSpec = sbCommonUtils.splitURLByAnchor(aURLSpec)[0];
         var seq = 0;
@@ -1091,7 +1116,7 @@ var sbCaptureObserverCallback = {
             if ( sbCommonUtils.getPref("notifyOnComplete", true) ) {
                 var icon = aItem.icon ? "resource://scrapbook/data/" + aItem.id + "/" + aItem.icon : sbCommonUtils.getDefaultIcon();
                 var title = "ScrapBook: " + sbCommonUtils.lang("overlay", "CAPTURE_COMPLETE");
-                var text = sbCommonUtils.crop(aItem.title, 40);
+                var text = sbCommonUtils.crop(aItem.title, 100, true);
                 var listener = {
                     observe: function(subject, topic, data) {
                         if (topic == "alertclickcallback")
