@@ -247,8 +247,14 @@ var sbCaptureTask = {
 
     succeed : function() {
         document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
+        if (!this.isLocal) {
+            var statusParts = this.sniffer.getStatus();
+            var status = (statusParts[0] === false) ? "???" : statusParts.join(" ");
+        } else {
+            var status = "OK";
+        }
         var treecell = document.createElement("treecell");
-        treecell.setAttribute("label", this.isLocal ? "OK" : this.sniffer.getStatus().join(" "));
+        treecell.setAttribute("label", status);
         treecell.setAttribute("properties", "success");
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].appendChild(treecell);
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "finished");
@@ -259,8 +265,14 @@ var sbCaptureTask = {
     fail : function(aErrorMsg) {
         document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
         if ( aErrorMsg ) SB_trace(aErrorMsg);
+        if (!this.isLocal) {
+            var statusParts = this.sniffer.getStatus();
+            var status = (statusParts[0] === false) ? "???" : statusParts.join(" ");
+        } else {
+            var status = "ERROR";
+        }
         var treecell = document.createElement("treecell");
-        treecell.setAttribute("label", this.isLocal ? "ERROR" : this.sniffer.getStatus().join(" "));
+        treecell.setAttribute("label", status);
         treecell.setAttribute("properties", "failed");
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].appendChild(treecell);
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "finished");
@@ -889,7 +901,9 @@ function sbHeaderSniffer(aURLSpec, aRefURLSpec) {
 
             // get and show http status
             var httpStatus = that.getStatus();
-            if ( httpStatus[0] >= 400 && httpStatus[0] < 600 || httpStatus[0] == 305 ) {
+            if ( httpStatus[0] === false) {
+                // got no status code, do nothing (continue parsing HTML)
+            } else if ( httpStatus[0] >= 400 && httpStatus[0] < 600 || httpStatus[0] == 305 ) {
                 sbCaptureTask.failed++;
                 sbCaptureTask.fail(httpStatus.join(" "));
                 return;
@@ -960,7 +974,11 @@ sbHeaderSniffer.prototype = {
     },
 
     getStatus : function() {
-        try { return [this._channel.responseStatus, this._channel.responseStatusText]; } catch(ex) { return [false, ""]; }
+        try {
+            return [this._channel.responseStatus, this._channel.responseStatusText];
+        } catch(ex) {
+            return [false, ""];
+        }
     },
 
     getContentType : function() {
