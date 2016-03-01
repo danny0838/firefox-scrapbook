@@ -1,3 +1,13 @@
+Scrapbook X 1.12.24
+----------------
+- FIXED: Deep capture could fail when "script" option is checked.
+- FIXED: Capture link fails when targeting an attachment file.
+- FIXED: capture detail options sometimes differ to previous used ones.
+- FIXED: No more displays "false" for the HTTP status code in the deep capture dialog.
+- FIXED: Adjusted text length restrictions, now are mostly based on UTF-8 bytes rather than UTF-16 chars. This also prevents capturing too long file name on Unix.
+- UPDATE: Links with a hash targeting the current page now points to the captured fragment whenever possible.
+
+
 Scrapbook X 1.12.23
 ----------------
 - UPDATE: Adjust internal coding style. (No semantic change.)
