@@ -353,7 +353,7 @@ var sbPageEditor = {
         var win = sbCommonUtils.getFocusedWindow();
         var sel = this.getSelection(win);
         if ( !sel ) return;
-        aElement.value = sbCommonUtils.crop(sel.toString().replace(/[\r\n\t\s]+/g, " "), 100);
+        aElement.value = sbCommonUtils.crop(sbCommonUtils.crop(sel.toString().replace(/[\r\n\t\s]+/g, " "), 180, true), 150);
         sel.removeAllRanges();
         sbCommonUtils.documentData(window.content.document, "propertyChanged", true);
     },
@@ -2421,7 +2421,7 @@ var sbAnnotationService = {
         if ( !sel ) return;
         // check and get the annotation
         var ret = {};
-        if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("overlay", "EDIT_INLINE", [sbCommonUtils.crop(sel.toString(), 32)]), ret, null, {}) ) return;
+        if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("overlay", "EDIT_INLINE", [sbCommonUtils.crop(sel.toString(), 80, true)]), ret, null, {}) ) return;
         if ( !ret.value ) return;
         // apply
         sbPageEditor.allowUndo(win.document);
@@ -2439,7 +2439,7 @@ var sbAnnotationService = {
         var doc = aElement.ownerDocument;
         // check and get the annotation
         var ret = { value : aElement.getAttribute("title") };
-        if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("overlay", "EDIT_INLINE", [sbCommonUtils.crop(aElement.textContent, 32)]), ret, null, {}) ) return;
+        if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("overlay", "EDIT_INLINE", [sbCommonUtils.crop(aElement.textContent, 80, true)]), ret, null, {}) ) return;
         // apply
         sbPageEditor.allowUndo(doc);
         var els = sbCommonUtils.getSbObjectsById(aElement);
