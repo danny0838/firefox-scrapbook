@@ -651,38 +651,35 @@ var sbContentSaver = {
                 } else if ( aNode.href.match(/^javascript:/i) && !this.option["script"] ) {
                     aNode.removeAttribute("href");
                     break;
-                } else {
-                    // Relative links to self may be obfuscated with path or full URL prefix.
-                    // If has selection (i.e. partial capture), the captured page is incomplete.
-                    // Stop processing if link target is within the selected fragment otherwise
-                    // do the subsequent URL rewrite so that it is targeting the source page
-                    var splitHref = sbCommonUtils.splitURLByAnchor(aNode.href);
-                    var docFile = sbCommonUtils.splitURLByAnchor(aNode.ownerDocument.location.href)[0];
-                    if ( splitHref[0] === docFile ) {
-                        if ( splitHref[1] === '' || splitHref[1] === '#' ) { // link to this file as a whole
-                            aNode.setAttribute('href', '#');
-                            break;
+                }
+                // adjustment for hash links targeting the current page
+                var urlParts = sbCommonUtils.splitURLByAnchor(aNode.href);
+                if ( urlParts[0] === sbCommonUtils.splitURLByAnchor(aNode.ownerDocument.location.href)[0] ) {
+                    // This link targets the current page.
+                    if ( urlParts[1] === '' || urlParts[1] === '#' ) {
+                        // link to the current page as a whole
+                        aNode.setAttribute('href', '#');
+                        break;
+                    }
+                    // For full capture (no selection), relink to the captured page.
+                    // For partial capture, the captured page could be incomplete,
+                    // relink to the captured page only when the target node is included in the selected fragment.
+                    var hasLocalTarget = !this.selection;
+                    if ( !hasLocalTarget && rootNode.querySelector ) {
+                        // Element.querySelector() is available only for Firefox >= 3.5
+                        // For those with no support, simply skip the relink check.
+                        var targetId = decodeURIComponent(urlParts[1].substr(1)).replace(/\W/g, '\\$&');
+                        if ( rootNode.querySelector('[id="' + targetId + '"]') ) {
+                            hasLocalTarget = true;
                         }
-                        var reallyLocal = !this.selection;
-                        if ( reallyLocal || sbCommonUtils.isFunction(rootNode.querySelector) ) {
-                            // Element.querySelector() available since version 3.5
-                            if ( !reallyLocal ) {
-                                try {
-                                    if ( rootNode.querySelector(splitHref[1]) ) {
-                                        reallyLocal = true;
-                                    }
-                                } catch (e) {
-                                    console.error(e);
-                                }
-                            }
-                            if ( reallyLocal ) {
-                                var hrefValue = aNode.getAttribute('href');
-                                if ( hrefValue && hrefValue.charAt(0) != '#' ) {
-                                    aNode.setAttribute('href', splitHref[1]);
-                                }
-                                break;
-                            }
+                    }
+                    if ( hasLocalTarget ) {
+                        // if the original link is already a pure hash, 
+                        // skip the rewrite to prevent a potential encoding change
+                        if (aNode.getAttribute('href').charAt(0) != "#") {
+                            aNode.setAttribute('href', urlParts[1]);
                         }
+                        break;
                     }
                 }
                 // determine whether to download (copy) the link target file

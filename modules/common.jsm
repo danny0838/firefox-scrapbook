@@ -933,10 +933,6 @@ var sbCommonUtils = {
         }
         return aObject1;
     },
-
-    isFunction : function(arg) {
-        return Object.prototype.toString.call(arg) === '[object Function]';
-    }
 };
 
 /**
