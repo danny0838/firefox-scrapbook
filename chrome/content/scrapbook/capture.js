@@ -997,7 +997,8 @@ sbHeaderSniffer.prototype = {
     },
 
     load : function(contentType, isAttachment) {
-        if (!isAttachment && contentType && ["text/html", "application/xhtml+xml"].indexOf(contentType) >= 0) {
+        contentType = contentType || "text/html";
+        if (!isAttachment && ["text/html", "application/xhtml+xml"].indexOf(contentType) >= 0) {
             // for inline html or xhtml files, load the document and capture it
             sbInvisibleBrowser.load(this.URLSpec);
         } else if (gContext == "link") {
