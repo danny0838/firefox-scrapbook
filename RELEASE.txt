@@ -1,3 +1,8 @@
+Scrapbook X 1.12.26
+----------------
+- FIXED: Capture the target URL as HTML if its HTTP header contentType is not declared.
+
+
 Scrapbook X 1.12.25
 ----------------
 - FIXED: Prevent potential issues for link capture on URLs with certain uncommon HTTP header declaration.
