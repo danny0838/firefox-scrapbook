@@ -172,7 +172,6 @@ var sbCaptureTask = {
     get URL()      { return gURLs[this.index]; },
 
     index       : 0,
-    isDocument  : false,
     isLocal     : false,
     refreshHash : null,
     sniffer     : null,
@@ -917,7 +916,9 @@ function sbHeaderSniffer(aURLSpec, aRefURLSpec) {
                 return;
             }
 
-            that.load(contentType);
+            // attempt to load the content
+            var contentDisposition = that.getContentDisposition();
+            that.load(contentType, contentDisposition);
         },
     };
 }
@@ -988,16 +989,19 @@ sbHeaderSniffer.prototype = {
         return null;
     },
 
-    load : function(contentType) {
-        // if no content, assume it's html
-        if ( !contentType ) contentType = "text/html";
-        // check type
-        sbCaptureTask.isDocument = ["text/html", "application/xhtml+xml"].indexOf(contentType) >= 0;
-        if (sbCaptureTask.isDocument) {
-            // load the document and capture it
+    getContentDisposition: function() {
+        try {
+            return this._channel.contentDisposition;
+        } catch(ex) {}
+        return null;
+    },
+
+    load : function(contentType, isAttachment) {
+        if (!isAttachment && contentType && ["text/html", "application/xhtml+xml"].indexOf(contentType) >= 0) {
+            // for inline html or xhtml files, load the document and capture it
             sbInvisibleBrowser.load(this.URLSpec);
         } else if (gContext == "link") {
-            // capture non-HTML documents as file for link capture 
+            // capture as file for link capture 
             sbContentSaver.captureFile(this.URLSpec, gRefURL ? gRefURL : sbCaptureTask.URL, "file", gShowDetail, gResName, gResIdx, null, gContext);
         } else if (gContext == "indepth") {
             // in an indepth capture, files with defined extensions are pre-processed and is not send to the URL list
