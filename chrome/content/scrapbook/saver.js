@@ -576,7 +576,7 @@ var sbContentSaver = {
                 }
                 break;
             case "canvas" :
-                if ( !this.option["script"] ) {
+                if ( this.option["media"] && !this.option["script"] ) {
                     var canvasOrig = this.canvases[aNode.getAttribute("data-sb-canvas-id")];
                     var canvasScript = aNode.ownerDocument.createElement("script");
                     canvasScript.textContent = "(" + this.inspectNodeSetCanvasData.toString().replace(/\s+/g, " ") + ")('" + canvasOrig.toDataURL() + "')";
