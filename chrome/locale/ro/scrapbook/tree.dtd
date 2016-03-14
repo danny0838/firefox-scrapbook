@@ -1,4 +1,5 @@
 <!ENTITY sb.open "Deschide">
+<!ENTITY sb.open.native "Open in Default Program">
 <!ENTITY sb.open.tab "Deschide într-o filă">
 <!ENTITY sb.open.newtab "Deschide într-o filă nouă">
 <!ENTITY sb.open.source "Deschide adresa sursei">

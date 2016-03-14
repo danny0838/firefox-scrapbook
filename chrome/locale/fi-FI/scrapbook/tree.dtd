@@ -1,4 +1,5 @@
 <!ENTITY sb.open "Avaa">
+<!ENTITY sb.open.native "Open in Default Program">
 <!ENTITY sb.open.tab "Avaa välilehdessä">
 <!ENTITY sb.open.newtab "Avaa uuteen välilehteen">
 <!ENTITY sb.open.source "Avaa lähde-URL">

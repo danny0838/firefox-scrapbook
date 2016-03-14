@@ -1,3 +1,12 @@
+Scrapbook X 1.12.27
+----------------
+- NEW: Add an "Open in Default Program" option for file items.
+- FIXED: Sort folder result is not saved after restarting Firefox.
+- FIXED: Capture file or link now use HTTP header defined filename if provided.
+- FIXED: No more leave an extra attribute for frame elements after a capture.
+- UPDATE: Provide more basic information of the addon in the install.rdf file.
+
+
 Scrapbook X 1.12.26
 ----------------
 - FIXED: Capture the target URL as HTML if its HTTP header contentType is not declared.

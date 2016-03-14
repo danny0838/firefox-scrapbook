@@ -1,4 +1,5 @@
 <!ENTITY sb.open "Abrir">
+<!ENTITY sb.open.native "Open in Default Program">
 <!ENTITY sb.open.tab "Abrir nunha pestana">
 <!ENTITY sb.open.newtab "Abrir nunha pestana nova">
 <!ENTITY sb.open.source "Abrir URL fonte">

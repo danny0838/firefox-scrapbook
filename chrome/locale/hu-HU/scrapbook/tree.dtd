@@ -1,4 +1,5 @@
 <!ENTITY sb.open "Megnyitás">
+<!ENTITY sb.open.native "Open in Default Program">
 <!ENTITY sb.open.tab "Megnyitás lapon">
 <!ENTITY sb.open.newtab "Megnyitás új lapon">
 <!ENTITY sb.open.source "Forráswebcím megnyitása">

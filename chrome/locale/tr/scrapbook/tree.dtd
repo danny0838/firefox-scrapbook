@@ -1,4 +1,5 @@
 <!ENTITY sb.open "Aç">
+<!ENTITY sb.open.native "Open in Default Program">
 <!ENTITY sb.open.tab "Sekmede Aç">
 <!ENTITY sb.open.newtab "Yeni Sekmede Aç">
 <!ENTITY sb.open.source "Kaynak URL&apos;yi Aç">

@@ -6,7 +6,22 @@
     <Description about="urn:mozilla:install-manifest">
         <em:id>scrapbookx@addons.mozilla.org</em:id>
         <em:type>2</em:type>
-        <em:version>1.12.26</em:version>
+        <em:version>1.12.27</em:version>
+        <em:unpack>false</em:unpack>
+        <em:bootstrap>false</em:bootstrap>
+        <em:multiprocessCompatible>false</em:multiprocessCompatible>
+        <em:iconURL>chrome://scrapbook/skin/main_32.png</em:iconURL>
+        <em:optionsURL>chrome://scrapbook/content/prefs.xul</em:optionsURL>
+        <em:homepageURL>https://addons.mozilla.org/firefox/addon/scrapbook-x/</em:homepageURL>
+
+        <em:targetApplication>
+            <Description>
+                <!-- Firefox -->
+                <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
+                <em:minVersion>3.0</em:minVersion>
+                <em:maxVersion>47.*</em:maxVersion>
+            </Description>
+        </em:targetApplication>
 
         <em:name>ScrapBook X</em:name>
         <em:description>Helps you save web pages and organize the collection.</em:description>
@@ -15,7 +30,6 @@
         <em:developer>haselnuss</em:developer>
         <em:contributor>Joe Antao</em:contributor>
         <em:contributor>Michael Brüggemann</em:contributor>
-        <em:homepageURL>https://addons.mozilla.org/firefox/addon/scrapbook-x/</em:homepageURL>
 
         <em:localized>
             <Description>
@@ -254,16 +268,6 @@
                 <em:homepageURL>https://addons.mozilla.org/firefox/addon/scrapbook-x/</em:homepageURL>
             </Description>
         </em:localized>
-
-        <em:iconURL>chrome://scrapbook/skin/main_32.png</em:iconURL>
-        <em:optionsURL>chrome://scrapbook/content/prefs.xul</em:optionsURL>
-        <em:targetApplication>
-            <Description>
-                <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
-                <em:minVersion>3.0</em:minVersion>
-                <em:maxVersion>44.*</em:maxVersion>
-            </Description>
-        </em:targetApplication>
     </Description>
 
 </RDF>
