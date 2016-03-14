@@ -353,8 +353,37 @@ var sbContentSaver = {
 
     saveFileInternal : function(aFileURL, aFileKey, aCaptureType, aCharset) {
         if ( !aFileKey ) aFileKey = "file" + Math.random().toString();
-        if ( !this.refURLObj ) this.refURLObj = sbCommonUtils.convertURLToObject(aFileURL);
-        var newFileName = this.download(aFileURL);
+        var urlObj = sbCommonUtils.convertURLToObject(aFileURL);
+        if ( !this.refURLObj ) {
+            this.refURLObj = urlObj;
+        }
+
+        // Get and use the filename from the header, if defined.
+        //
+        // This function requires an immediate return, so the async way is not viable.
+        //
+        // Since this connection is limited to getting HTTP header and to single
+        // file/link capture, the impact of user experience is rather minimal.
+        //
+        // Files linked via <img>s, <link>s, etc are not fixed currently as it could
+        // cause significant response delay due to potential large amount.
+        //
+        // @TODO: 
+        // This is a rather temporary patch to prevent the user from capturing a file
+        // with a bad extention, and being unable to open it correctly.
+        //
+        // We'll need a thorough code structure rework for a complete fix at last.
+        if ( urlObj.schemeIs("http") || urlObj.schemeIs("https") ) {
+            try {
+                var channel = sbCommonUtils.IO.newChannelFromURI(urlObj).QueryInterface(Components.interfaces.nsIHttpChannel);
+                channel.open();
+                if (channel.contentDispositionFilename) {
+                    var filename = channel.contentDispositionFilename;
+                }
+            } catch (ex) {}
+        }
+
+        var newFileName = this.download(aFileURL, filename);
         if (newFileName) {
             if ( aCaptureType == "image" ) {
                 var myHTML = '<html><head><meta charset="UTF-8"></head><body><img src="' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(newFileName)) + '"></body></html>';
@@ -937,7 +966,7 @@ var sbContentSaver = {
     },
 
     // aURLSpec is an absolute URL
-    download : function(aURLSpec) {
+    download : function(aURLSpec, aSuggestFilename) {
         if ( !aURLSpec ) return "";
         try {
             var aURL = sbCommonUtils.convertURLToObject(aURLSpec);
@@ -950,11 +979,14 @@ var sbContentSaver = {
             return "";
         }
 
-        var fileName = aURL.fileName;
-        // decode %xx%xx%xx only if it's UTF-8 encoded
-        try {
-            fileName = decodeURIComponent(fileName);
-        } catch(ex) {
+        if (aSuggestFilename) {
+            var fileName = aSuggestFilename;
+        } else {
+            var fileName = aURL.fileName;
+            // decode %xx%xx%xx only if it's UTF-8 encoded
+            try {
+                fileName = decodeURIComponent(fileName);
+            } catch(ex) {}
         }
         var arr = this.getUniqueFileName(fileName, aURLSpec);
         var newFileName = arr[0];
