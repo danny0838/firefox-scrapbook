@@ -1,4 +1,5 @@
 <!ENTITY sb.open "開く">
+<!ENTITY sb.open.native "Open in Default Program">
 <!ENTITY sb.open.tab "タブで開く">
 <!ENTITY sb.open.newtab "新しいタブで開く">
 <!ENTITY sb.open.source "ソースURLを開く">

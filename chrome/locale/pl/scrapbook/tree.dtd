@@ -1,4 +1,5 @@
 <!ENTITY sb.open "Otwórz">
+<!ENTITY sb.open.native "Open in Default Program">
 <!ENTITY sb.open.tab "Otwórz w karcie">
 <!ENTITY sb.open.newtab "Otwórz w nowej karcie">
 <!ENTITY sb.open.source "Pokaż stronę źródłową">

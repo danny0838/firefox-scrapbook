@@ -1,4 +1,5 @@
 <!ENTITY sb.open "فتح">
+<!ENTITY sb.open.native "Open in Default Program">
 <!ENTITY sb.open.tab "فتح في لسان">
 <!ENTITY sb.open.newtab "فتح في لسان جديد">
 <!ENTITY sb.open.source "فتح الموقع المصدر">

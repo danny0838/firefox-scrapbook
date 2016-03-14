@@ -36,10 +36,9 @@ reset.
 
 ScrapBook X uses launch() only in chrome/content/scrapbook/scrapbook.js. It is 
 to open a specific directory in the native file explorer so that users can 
-easily view or edit their source files of the selected ScrapBook item.
-
-It has been confirmed by the AMO reviewers that every passed value are pointed 
-to a directory rather than a file.
+easily view or edit their source files of the selected ScrapBook item. It is 
+also used to open the file of a selected ScrapBook "file" typed item, which 
+is under the user's fully consent.
 
 
 # Use of nsIWebBrowserPersist
