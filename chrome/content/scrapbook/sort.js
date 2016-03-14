@@ -57,9 +57,13 @@ var sbSortService = {
         } else {
             // sort completed
             this.RADIO_GROUP.setAttribute("sortIndex", this.RADIO_GROUP.selectedIndex);
-            window.close();
+            // Due to manual interverntion, we need to flush the datasource expicitly
+            // @TODO: should we move the sorting task into the datasource.jsm?
+            sbDataSource.flush();
             // show the tree
             window.opener.document.getElementById("sbTreeOuter").hidden = false;
+            // close this dialog window
+            window.close();
         }
     },
 
