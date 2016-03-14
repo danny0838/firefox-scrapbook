@@ -191,9 +191,9 @@ var sbContentSaver = {
             var myCSSFileName = arr[0];
         }
 
+        var htmlNode = aDocument.documentElement;
         // cloned frames has contentDocument = null
         // give all frames an unique id for later retrieving
-        var htmlNode = aDocument.documentElement;
         var frames = htmlNode.getElementsByTagName("frame");
         for (var i=0, len=frames.length; i<len; i++) {
             var frame = frames[i];
@@ -284,6 +284,12 @@ var sbContentSaver = {
                 headNode = aDocument.createElement("head");
                 rootNode.insertBefore(headNode, rootNode.firstChild);
                 rootNode.insertBefore(aDocument.createTextNode("\n"), headNode.nextSibling);
+            }
+        }
+        // remove the temporary mapping key
+        for (var i=0, len=this.frames.length; i<len; i++) {
+            if (!sbCommonUtils.isDeadObject(this.frames[i])) {
+                this.frames[i].removeAttribute("data-sb-frame-id");
             }
         }
         // process HTML DOM
