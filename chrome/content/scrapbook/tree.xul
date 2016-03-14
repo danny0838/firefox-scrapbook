@@ -23,6 +23,7 @@
         <menupopup id="sbPopup" onpopupshowing="sbController.onPopupShowing(event);"
                onmouseover="if (event.originalTarget.getAttribute('nodelay')) document.getElementById('sbPopupToolsMenu').hidePopup();">
             <menuitem id="sbPopupOpen"       label="&sb.open;"        nodelay="true" oncommand="sbController.open(null,false);" default="true" />
+            <menuitem id="sbPopupOpenNative" label="&sb.open.native;" nodelay="true" oncommand="sbController.forward(null,'N');" />
             <menuitem id="sbPopupOpenNewTab" label="&sb.open.newtab;" nodelay="true" oncommand="sbController.open(null,true);" />
             <menuitem id="sbPopupOpenSource" label="&sb.open.source;" nodelay="true" oncommand="sbController.forward(null,'S');"
                       onclick="if (event.button != 1) return; this.parentNode.hidePopup(); sbController.forward(null,'S',true);" />

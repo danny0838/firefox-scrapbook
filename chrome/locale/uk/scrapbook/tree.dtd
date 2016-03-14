@@ -1,4 +1,5 @@
 <!ENTITY sb.open "Відкрити">
+<!ENTITY sb.open.native "Open in Default Program">
 <!ENTITY sb.open.tab "Відкрити у вкладці">
 <!ENTITY sb.open.newtab "Відкрити у новій вкладці">
 <!ENTITY sb.open.source "Відкрити початкову адресу">

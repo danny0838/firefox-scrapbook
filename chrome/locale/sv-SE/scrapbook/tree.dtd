@@ -1,4 +1,5 @@
 <!ENTITY sb.open "Öppna">
+<!ENTITY sb.open.native "Open in Default Program">
 <!ENTITY sb.open.tab "Öppna i flik">
 <!ENTITY sb.open.newtab "Öppna i ny flik">
 <!ENTITY sb.open.source "Öppna käll-URL">

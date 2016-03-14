@@ -1,4 +1,5 @@
 <!ENTITY sb.open "打开">
+<!ENTITY sb.open.native "以默认程序打开">
 <!ENTITY sb.open.tab "在标签页中打开">
 <!ENTITY sb.open.newtab "在新标签页中打开">
 <!ENTITY sb.open.source "打开原始链接">

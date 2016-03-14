@@ -1,4 +1,5 @@
 <!ENTITY sb.open "열기">
+<!ENTITY sb.open.native "Open in Default Program">
 <!ENTITY sb.open.tab "탭으로 열기">
 <!ENTITY sb.open.newtab "새 탭으로 열기">
 <!ENTITY sb.open.source "소스 URL 열기">

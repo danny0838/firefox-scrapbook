@@ -215,6 +215,7 @@ var sbController = {
             aEvent.preventDefault();
             return;
         }
+        var isFile = false;
         var isNote = false;
         var isNotex = false;
         var isFolder = false;
@@ -223,6 +224,7 @@ var sbController = {
         var isMultiple = ( sbTreeHandler.TREE.view.selection.count > 1 );
         if (!isMultiple) {
             switch (sbDataSource.getProperty(res, "type")) {
+                case "file"     : isFile      = true; break;
                 case "note"     : isNote      = true; break;
                 case "notex"    : isNotex     = true; break;
                 case "folder"   : isFolder    = true; break;
@@ -233,6 +235,7 @@ var sbController = {
         var getElement = function(aID) {
             return document.getElementById(aID);
         };
+        getElement("sbPopupOpenNative").hidden                 = isMultiple || !isFile;
         getElement("sbPopupOpen").hidden                       = isMultiple || isFolder || isSeparator;
         getElement("sbPopupOpenNewTab").hidden                 = isMultiple || isFolder || isSeparator;
         getElement("sbPopupOpenSource").hidden                 = isMultiple || isFolder || isSeparator || isNote;
@@ -411,6 +414,18 @@ var sbController = {
                     sbCommonUtils.getPref("tabs.openSource", false) || aParam
                 );
                 break;
+            case "N": 
+                var index = sbCommonUtils.getContentDir(id); index.append("index.html");
+                // use a simple heuristic match for meta tag refresh
+                // should be enough for most cases
+                if (sbCommonUtils.readFile(index).match(/\s*content="\d+;URL=([^"]+)"/i)) {
+                    var relURL = sbCommonUtils.convertToUnicode(RegExp.$1, "UTF-8");
+                    var URI1 = sbCommonUtils.convertFilePathToURL(index.path);
+                    var URI2 = sbCommonUtils.resolveURL(URI1, relURL);
+                    var file = sbCommonUtils.convertURLToFile(URI2);
+                    this.launch(file);
+                }
+                break;
             case "L": 
                 this.launch(sbCommonUtils.getContentDir(id));
                 break;
@@ -424,11 +439,13 @@ var sbController = {
         }
     },
 
-    launch: function(aDir) {
+    launch: function(aFile) {
         try {
-            aDir = aDir.QueryInterface(Components.interfaces.nsILocalFile);
-            aDir.launch();
-        } catch(ex) {}
+            aFile = aFile.QueryInterface(Components.interfaces.nsILocalFile);
+            aFile.launch();
+        } catch(ex) {
+            console.log(ex);
+        }
     },
 
     sendInternal: function(aResList, aParResList) {

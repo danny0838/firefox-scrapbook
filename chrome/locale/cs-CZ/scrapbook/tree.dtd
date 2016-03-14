@@ -1,4 +1,5 @@
 <!ENTITY sb.open "Otevřít">
+<!ENTITY sb.open.native "Open in Default Program">
 <!ENTITY sb.open.tab "Otevřít v panelu">
 <!ENTITY sb.open.newtab "Otevřít v novém panelu">
 <!ENTITY sb.open.source "Otevřít zdrojovou adresu URL">
