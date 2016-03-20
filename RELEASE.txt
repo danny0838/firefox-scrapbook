@@ -1,3 +1,9 @@
+Scrapbook X 1.12.28
+----------------
+- NEW: Capture now preserves the current state of canvas if capture "Media" is checked and "Scripts" is not checked.
+- FIXED: Restrict some special finename from used by download files to prevent potential conflicts.
+
+
 Scrapbook X 1.12.27
 ----------------
 - NEW: Add an "Open in Default Program" option for file items.

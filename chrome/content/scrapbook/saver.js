@@ -13,6 +13,7 @@ var sbContentSaver = {
     refURLObj    : null,
     favicon      : null,
     frames       : [],
+    canvases     : [],
     isMainFrame  : true,
     selection    : null,
     linkURLs     : [],
@@ -24,7 +25,7 @@ var sbContentSaver = {
         this.item.id = sbDataSource.identify(this.item.id);
         this.name = "index";
         this.favicon = null;
-        this.file2URL = { "index.dat" : true, "index.png" : true, "sitemap.xml" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
+        this.file2URL = { "index.dat" : true, "index.png" : true, "index.rdf" : true, "sitemap.xml" : true, "sitemap.xsl" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
         this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "fonts" : true, "frames" : true, "styles" : true, "script" : false, "asHtml" : false, "forceUtf8" : true, "rewriteStyles" : true, "keepLink" : false, "internalize" : false };
         this.plusoption = { "timeout" : "0", "charset" : "UTF-8" }
         this.linkURLs = [];
@@ -208,6 +209,15 @@ var sbContentSaver = {
             this.frames[idx] = frame;
             frame.setAttribute("data-sb-frame-id", idx);
         }
+        // cloned canvas has no image data
+        // give all frames an unique id for later retrieving
+        var canvases = htmlNode.getElementsByTagName("canvas");
+        for (var i=0, len=canvases.length; i<len; i++) {
+            var canvas = canvases[i];
+            var idx = this.canvases.length;
+            this.canvases[idx] = canvas;
+            canvas.setAttribute("data-sb-canvas-id", idx);
+        }
         // construct the node list
         var rootNode;
         var headNode;
@@ -290,6 +300,11 @@ var sbContentSaver = {
         for (var i=0, len=this.frames.length; i<len; i++) {
             if (!sbCommonUtils.isDeadObject(this.frames[i])) {
                 this.frames[i].removeAttribute("data-sb-frame-id");
+            }
+        }
+        for (var i=0, len=this.canvases.length; i<len; i++) {
+            if (!sbCommonUtils.isDeadObject(this.canvases[i])) {
+                this.canvases[i].removeAttribute("data-sb-canvas-id");
             }
         }
         // process HTML DOM
@@ -560,6 +575,15 @@ var sbContentSaver = {
                     }
                 }
                 break;
+            case "canvas" :
+                if ( this.option["media"] && !this.option["script"] ) {
+                    var canvasOrig = this.canvases[aNode.getAttribute("data-sb-canvas-id")];
+                    var canvasScript = aNode.ownerDocument.createElement("script");
+                    canvasScript.textContent = "(" + this.inspectNodeSetCanvasData.toString().replace(/\s+/g, " ") + ")('" + canvasOrig.toDataURL() + "')";
+                    aNode.parentNode.insertBefore(canvasScript, aNode.nextSibling);
+                }
+                aNode.removeAttribute("data-sb-canvas-id");
+                break;
             case "track" :  // in <audio> and <vedio>
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] ) break;
@@ -822,7 +846,20 @@ var sbContentSaver = {
             // other specific
             aNode.removeAttribute("contextmenu");
         }
+        if (canvasScript) {
+            // special handle: shift to the script node so that it won't get removed on next process
+            return canvasScript;
+        }
         return aNode;
+    },
+
+    inspectNodeSetCanvasData : function (data) {
+      var scripts = document.getElementsByTagName("script");
+      var script = scripts[scripts.length-1], canvas = script.previousSibling;
+      var img = new Image();
+      img.onload = function(){ canvas.getContext('2d').drawImage(img, 0, 0); };
+      img.src = data;
+      script.parentNode.removeChild(script);
     },
 
     processCSSRecursively : function(aCSS, aDocument, isImport) {
