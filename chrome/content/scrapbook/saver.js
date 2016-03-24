@@ -394,12 +394,26 @@ var sbContentSaver = {
         // with a bad extention, and being unable to open it correctly.
         //
         // We'll need a thorough code structure rework for a complete fix at last.
+        var filename;
         if ( urlObj.schemeIs("http") || urlObj.schemeIs("https") ) {
             try {
                 var channel = sbCommonUtils.IO.newChannelFromURI(urlObj).QueryInterface(Components.interfaces.nsIHttpChannel);
                 channel.open();
-                if (channel.contentDispositionFilename) {
-                    var filename = channel.contentDispositionFilename;
+                try {
+                    if (channel.contentDispositionFilename) {
+                        filename = channel.contentDispositionFilename;
+                    }
+                } catch (ex) {}
+                if (!filename) {
+                    var base = urlObj.fileBaseName;
+                    var ext = urlObj.fileExtension;
+                    var mime = channel.contentType;
+                    if (mime) {
+                        var extFromMime = sbCommonUtils.getMimePrimaryExtension(mime, ext);
+                        if (extFromMime && (ext !== extFromMime)) {
+                            filename = base + (ext ? "." + ext : "") + "." + extFromMime;
+                        }
+                    }
                 }
             } catch (ex) {}
         }
