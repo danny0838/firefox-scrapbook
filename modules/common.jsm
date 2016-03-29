@@ -346,6 +346,13 @@ var sbCommonUtils = {
         return false;
     },
 
+    getMimePrimaryExtension : function(aString, aExtension) {
+        try {
+            return this.MIME.getPrimaryExtension(aString, aExtension);
+        } catch(ex) {}
+        return false;
+    },
+
     readFile : function(aFile) {
         try {
             var istream = Components.classes['@mozilla.org/network/file-input-stream;1'].createInstance(Components.interfaces.nsIFileInputStream);
