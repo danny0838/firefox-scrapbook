@@ -80,9 +80,11 @@ var sbCaptureOptions = {
         this.param.option["dlmov"]      = document.getElementById("sbDetailMovie").checked;
         this.param.option["dlarc"]      = document.getElementById("sbDetailArchive").checked;
         this.param.option["custom"]     = this.CUSTOM_UI.checked ? document.getElementById("sbDetailCustomExt").value : "";
-        this.param.option["inDepth"]    = parseInt("0" + document.getElementById("sbDetailInDepth").value, 10);
-        this.param.poption["timeout"]   = parseInt("0" + document.getElementById("sbDetailTimeout").value, 10);
-        this.param.poption["charset"]   = document.getElementById("sbDetailCharset").value;
+        if ( this.param.context !== "capture-again-deep" ) {
+            this.param.option["inDepth"]    = parseInt("0" + document.getElementById("sbDetailInDepth").value, 10);
+            this.param.poption["timeout"]   = parseInt("0" + document.getElementById("sbDetailTimeout").value, 10);
+            this.param.poption["charset"]   = document.getElementById("sbDetailCharset").value;
+        }
         if ( this.param.context == "capture-again" ) {
             var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
             sbDataSource.setProperty(res, "title", document.getElementById("sbDetailTitle").value);
