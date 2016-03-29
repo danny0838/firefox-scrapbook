@@ -312,7 +312,7 @@ var sbContentSaver = {
 
         // process all inline and link CSS, will merge them into index.css later
         var myCSS = "";
-        if ( this.option["styles"] && this.option["rewriteStyles"] ) {
+        if ( (this.option["styles"] || this.option["keepLink"]) && this.option["rewriteStyles"] ) {
             var myStyleSheets = aDocument.styleSheets;
             for ( var i=0; i<myStyleSheets.length; i++ ) {
                 myCSS += this.processCSSRecursively(myStyleSheets[i], aDocument);
@@ -637,18 +637,21 @@ var sbContentSaver = {
                                 // (it should use an absolute link or a chrome link, which don't break after capture)
                             } else if ( aNode.href.indexOf("chrome://") == 0 ) {
                                 // a special stylesheet used by scrapbook or other addons/programs, keep it intact
-                            } else if ( !this.option["styles"] ) {
-                                // not capturing styles, set it blank
-                                aNode.setAttribute("href", "about:blank");
-                            } else if ( this.option["rewriteStyles"] ) {
+                            } else if ( this.option["styles"] && this.option["rewriteStyles"] ) {
                                 // capturing styles with rewrite, the style should be already processed
                                 // in saveDocumentInternal => processCSSRecursively
                                 // remove it here with safety
                                 return this.removeNodeFromParent(aNode);
-                            } else {
+                            } else if ( this.option["styles"] && !this.option["rewriteStyles"] ) {
                                 // capturing styles with no rewrite, download it and rewrite the link
                                 var aFileName = this.download(aNode.href);
                                 if (aFileName) aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
+                            } else if ( !this.option["styles"] && this.option["keepLink"] ) {
+                                // link to the source css file
+                                aNode.setAttribute("href", aNode.href);
+                            } else if ( !this.option["styles"] && !this.option["keepLink"] ) {
+                                // not capturing styles, set it blank
+                                aNode.setAttribute("href", "about:blank");
                             }
                         }
                         break;
@@ -680,7 +683,7 @@ var sbContentSaver = {
             case "style" : 
                 if ( sbCommonUtils.getSbObjectType(aNode) == "stylesheet" ) {
                     // a special stylesheet used by scrapbook, keep it intact
-                } else if ( !this.option["styles"] ) {
+                } else if ( !this.option["styles"] && !this.option["keepLink"] ) {
                     // not capturing styles, remove it
                     return this.removeNodeFromParent(aNode);
                 } else if ( this.option["rewriteStyles"] ) {
