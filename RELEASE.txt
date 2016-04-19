@@ -1,3 +1,10 @@
+Scrapbook X 1.12.29
+----------------
+- FIXED: Capture file or link now uses an appropraite file extension defined by the HTTP header.
+- FIXED: If "Keep linking to the source" is set and "Styles" is not set, make stylesheets links link to the source and preserves internal stylesheets.
+- FIXED: Prevent capture again for a deep page from being a deep capture.
+
+
 Scrapbook X 1.12.28
 ----------------
 - NEW: Capture now preserves the current state of canvas if capture "Media" is checked and "Scripts" is not checked.
