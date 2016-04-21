@@ -1,3 +1,8 @@
+Scrapbook X 1.12.30
+----------------
+- FIXED: Adjusted the internal script of "Output HTML tree" page to prevent a potential compatibility issue in certain browsers.
+
+
 Scrapbook X 1.12.29
 ----------------
 - FIXED: Capture file or link now uses an appropraite file extension defined by the HTTP header.
