@@ -133,14 +133,6 @@ var sbOutputService = {
             + '<link rel="stylesheet" type="text/css" href="index.css" media="all">\n'
             + '<link rel="stylesheet" type="text/css" href="custom.css" media="all">\n'
             + '<script>\n'
-            + 'if (window.addEventListener) {\n'
-            + '    document.addEventListener("DOMContentLoaded", init);\n'
-            + '    window.addEventListener("load", init);\n'
-            + '} else if (window.attachEvent) {\n'
-            + '    window.attachEvent("onload", init);\n'
-            + '} else {\n'
-            + '    window.onload = init;\n'
-            + '}\n'
             + 'function init() {\n'
             + '    if (arguments.callee.done) return;\n'
             + '    arguments.callee.done = true;\n'
@@ -254,7 +246,11 @@ var sbOutputService = {
     },
 
     getHTMLFoot : function() {
-        var HTML = "</body>\n\n</html>\n";
+        var HTML = ''
+                + '<script>init();</script>\n'
+                + '</body>\n'
+                + '\n'
+                + '</html>\n';
         return HTML;
     },
 
