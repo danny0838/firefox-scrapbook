@@ -1,31 +1,27 @@
 /* ::::: Options ::::: */
 
-radio[pane] {
-    list-style-image: url("chrome://scrapbook/skin/prefs.png");
-}
-
 radio[pane="mainPane"] {
-    -moz-image-region: rect(0px, 32px, 32px, 0px)
+    list-style-image: url("chrome://scrapbook/skin/prefs_main.png");
 }
 
 radio[pane="keysPane"] {
-    -moz-image-region: rect(0px, 64px, 32px, 32px)
+    list-style-image: url("chrome://scrapbook/skin/prefs_keys.png");
 }
 
 radio[pane="tabsPane"] {
-    -moz-image-region: rect(0px, 96px, 32px, 64px)
+    list-style-image: url("chrome://scrapbook/skin/prefs_tabs.png");
 }
 
 radio[pane="editPane"] {
-    -moz-image-region: rect(0px, 128px, 32px, 96px)
+    list-style-image: url("chrome://scrapbook/skin/prefs_edit.png");
 }
 
 radio[pane="organizePane"] {
-    -moz-image-region: rect(0px, 160px, 32px, 128px)
+    list-style-image: url("chrome://scrapbook/skin/prefs_organize.png");
 }
 
 radio[pane="advancedPane"] {
-    -moz-image-region: rect(0px, 192px, 32px, 160px)
+    list-style-image: url("chrome://scrapbook/skin/prefs_advanced.png");
 }
 
 prefpane > checkbox,
