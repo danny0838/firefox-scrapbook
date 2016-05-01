@@ -1,0 +1,10 @@
+Scrapbook X 1.12.31
+===================
+
+Changes since v1.12.30
+----------------------
+
+- FIXED: Moving items by dragging does not work in Firefox >= 48.
+- FIXED: Several wrong or bad localizations.
+- UPDATE: Use old ScrapBook style fulltext caching mechanism for sites (deep-captured items) to prevent several performance issues for those with very much pages. This could prevent some information from being cached, though.
+- UPDATE: Adjusted internal coding style.

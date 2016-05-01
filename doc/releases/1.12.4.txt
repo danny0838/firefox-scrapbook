@@ -1,0 +1,8 @@
+Scrapbook X 1.12.4
+==================
+
+Changes since v1.12.3
+---------------------
+
+- UPDATE: No more open a note in the current tab if it's currently an about:blank page.
+- UPDATE: Adjust several internal codes to fit Firefox addon protocol.

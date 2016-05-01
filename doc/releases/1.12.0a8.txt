@@ -1,0 +1,7 @@
+Scrapbook X 1.12.0a8
+====================
+
+Changes since v1.12.0a7
+-----------------------
+
+- FIXED: Capture selection does not work if frames are included.

@@ -1,0 +1,14 @@
+Scrapbook X 1.6.3
+=================
+
+Changes since v1.6.2
+--------------------
+
+- Fixed an issue capturing a local file gets a bad title.
+- Fixed an issue that the dialog does not close at the end of a multiple-capture process.
+- Fixed an issue that the "All Links in the Selection" URL detector in "Save Multiple URLs" doesn't work.
+- Fixed issues about the combiner:
+  - That the combiner may combine pages incorrectly and results in only one page.
+  - That sticky annotations and pages with "position: absolute" style are messed up after combined.
+  - That non-link style sheets cause the combiner to freeze.
+  - That some files linked by a page get lost after combined.

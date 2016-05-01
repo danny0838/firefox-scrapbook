@@ -1,0 +1,7 @@
+Scrapbook X 1.12.0a51
+=====================
+
+Changes since v1.12.0a50
+------------------------
+
+- FIXED: New captured item is placed at the bottom even if "Put an item into the top of a folder" is set.

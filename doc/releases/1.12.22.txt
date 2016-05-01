@@ -1,0 +1,11 @@
+Scrapbook X 1.12.22
+===================
+
+Changes since v1.12.21
+----------------------
+
+- NEW: Add an option to save files in ASCII filename in Options > Advanced.
+- UPDATE: Generates simpler codes for index.html when capturing files.
+- UPDATE: Now supports capturing .xhtml files, which are as .xhtml. Also fixed some issues about editing .xhtml files.
+- FIXED: Resources using dataURI containing "/" may be captured incorrectly.
+- FIXED: Compatibility codes are now based on feature detect rather than Firefox version detect, which prevents some potential issues on browsers other than Firefox.

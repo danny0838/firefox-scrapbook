@@ -1,0 +1,16 @@
+Scrapbook X 1.12.0a36
+=====================
+
+Changes since v1.12.0a35
+------------------------
+
+- NEW: Now displays the item folder path in the "Properties" dialog.
+- FIXED: Missing label of the ScrapBook toolbar button in the toolbar customization dialog.
+- FIXED: The editor toolbar gets disabled after saving if the ScrapBook toolbar button is not installed.
+- FIXED: Link indicators are not applied to frame pages sometimes.
+- FIXED: The help box of the DOM Eraser has improper size in certain web pages.
+- FIXED: Unable to change the ScrapBook directory path until restarting Firefox if a bad path has been previously used.
+- FIXED: Several potential issues related with the UI or data value of the highlight custimization dialog.
+- FIXED: A potential issue that the native template could not be applied when first used.
+- UPDATE: Folder paths are now separated with a less confusing char.
+- UPDATE: Slightly improved the output of "Output HTML tree".

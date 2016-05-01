@@ -1,0 +1,7 @@
+Scrapbook X 1.12.0a45
+=====================
+
+Changes since v1.12.0a44
+------------------------
+
+- FIXED: Keywords are not highlighted in the fulltext search result.

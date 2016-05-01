@@ -1,0 +1,8 @@
+Scrapbook X 1.12.13
+===================
+
+Changes since v1.12.12
+----------------------
+
+- FIXED: Search script of "Output HTML tree" doesn't handle user-denied http connection correctly.
+- UPDATE: Search script of "Output HTML tree" now defaults to answer "no" for http traffic confirmation.

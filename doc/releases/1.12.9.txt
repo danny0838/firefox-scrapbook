@@ -1,0 +1,7 @@
+Scrapbook X 1.12.9
+==================
+
+Changes since v1.12.6
+---------------------
+
+- UPDATE: Bumped version number due to some uploading issues in the AMO.

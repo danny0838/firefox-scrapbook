@@ -1,0 +1,9 @@
+Scrapbook X 1.12.0a10
+=====================
+
+Changes since v1.12.0a9
+-----------------------
+
+- UPDATE: Fulltext search not tells the reason of error and abort.
+- FIXED: Fulltext search containing some special chars causes error.
+- FIXED: Multiple capture with local files gets abort.

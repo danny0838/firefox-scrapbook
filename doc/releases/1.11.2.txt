@@ -1,0 +1,10 @@
+Scrapbook X 1.11.2
+==================
+
+Changes since v1.11.1
+---------------------
+
+- UPDATE: extends compatibility down to Firefox 4.0.
+- FIXED: hotkey 5 and 6 doesn't work in edit mode.
+- FIXED: stickies are not saved before capture in "Edit Before Capture".
+- FIXED: some zh-CN localization.

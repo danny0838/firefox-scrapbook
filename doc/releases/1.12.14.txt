@@ -1,0 +1,7 @@
+Scrapbook X 1.12.14
+===================
+
+Changes since v1.12.13
+----------------------
+
+- UPDATE: Search script of "Output HTML tree" now defaults to answer "yes" for http traffic confirmation again.

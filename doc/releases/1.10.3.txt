@@ -1,0 +1,9 @@
+Scrapbook X 1.10.3
+==================
+
+Changes since v1.10.2
+---------------------
+
+- The combination page now outputs with latest html doctype declaration. (Fixed some style rendering problems in the browser)
+- Integrated hotkey customization.
+- Internal code optimization.

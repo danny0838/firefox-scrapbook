@@ -1,0 +1,11 @@
+Scrapbook X 1.12.0a23
+=====================
+
+Changes since v1.12.0a22
+------------------------
+
+- NEW: Middle click on the eraser button to remove highlights from the selection.
+- UPDATE: Download link now supports more file formats by default, such as .aac .ogg .mp4 .flv .tar .7z etc.
+- FIXED: "Remove All XXX Tags" do not complete remove all specified tags.
+- FIXED: Support capture of &lt;applet> linked files.
+- FIXED: Adjust some entries in the language packs.

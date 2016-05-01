@@ -1,0 +1,11 @@
+Scrapbook X 1.12.0a42
+=====================
+
+Changes since v1.12.0a41
+------------------------
+
+- FIXED: A link capture or an indepth capture process might freeze on a web page whose response header has no "Location" instruction to a HEAD request and has to a GET request.
+- FIXED: A link capture or indepth capture process sometimes gets an incomplete content.
+- FIXED: A link capture or indepth capture process freezes on a link targeting to a local non-HTML file.
+- FIXED: A link capture or indepth capture process for a non-HTML file gets the wrong result if the link is redirected.
+- FIXED: No notification is fired when a capture process of a local file is complete.

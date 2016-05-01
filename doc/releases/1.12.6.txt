@@ -1,0 +1,8 @@
+Scrapbook X 1.12.6
+==================
+
+Changes since v1.12.5
+---------------------
+
+- UPDATE: Now suports the HTML5 "srcset" attribute for <img> and <source> elements.
+- UPDATE: Add review notes for AMO reviewers and possibly other developers.

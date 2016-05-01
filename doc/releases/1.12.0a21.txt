@@ -1,0 +1,13 @@
+Scrapbook X 1.12.0a21
+=====================
+
+Changes since v1.12.0a20
+------------------------
+
+- UPDATE: New data items now place at more natural position. Also adjusted the UI behavior.
+- UPDATE: A sticky note anchored on the page is now placed at a more appropriate position on creating.
+- FIXED: Several path error problems if the icon set of a data item is in a sub-directory.
+- FIXED: "you should close the window" message do not show the correct window title.
+- FIXED: The column separator between Folder and File fields in the fulltext search result cannot be adjusted.
+- FIXED: No more inserts an extra linefeed on creating a sticky note, cause a permant source change even if it is removed.
+- FIXED: Sometimes a sticky note anchored on the page be misplaced after saving and re-loading.

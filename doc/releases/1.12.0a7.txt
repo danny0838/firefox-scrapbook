@@ -1,0 +1,15 @@
+Scrapbook X 1.12.0a7
+====================
+
+Changes since v1.12.0a6
+-----------------------
+
+- UPDATE: Improve the style of "Output Tree as HTML" (remove tree/output.css and re-output to renew).
+- UPDATE: Add toggle all folder function to "Output Tree as HTML".
+- UPDATE: Frame style of "Output Tree as HTML" now updates title on loading or switching page.
+- UPDATE: Improve the style of combine page.
+- FIXED: Some browsers reload the whole frameset on switching page when using frame style with "Output Tree as HTML".
+- FIXED: The combine page is empty when index.html uses a meta refresh to target another page.
+- FIXED: The process of deep capture freezes when a meta refresh targets to a local file with non-ASCII file name.
+- FIXED: The tab label doesn't show the default icon when a ScrapBook page does not specify an icon.
+- FIXED: Title and icon of a ScrapBook page often do not apply to the tab label.

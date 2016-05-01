@@ -1,0 +1,10 @@
+Scrapbook X 1.12.0a3
+====================
+
+Changes since v1.12.0a2
+-----------------------
+
+- FIXED: Pages in a subdirectory attach inner link with wrong path.
+- FIXED: Disallow non-ScrapBook pages to insert inner links or files.
+- FIXED: Some non-ScrapBook pages are regarded as ScrapBook pages.
+- FIXED: Some non-main page URI are reguarded as the main page.
