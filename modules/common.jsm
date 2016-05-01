@@ -596,7 +596,7 @@ var sbCommonUtils = {
                     throw null;
             }
         } catch (ex) {
-            return aDefaultValue != undefined ? aDefaultValue : null;
+            return (aDefaultValue !== undefined) ? aDefaultValue : null;
         }
     },
 
