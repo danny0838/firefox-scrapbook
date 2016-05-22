@@ -146,9 +146,6 @@
 <!ENTITY sb.highlighter "Korostin">
 <!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
 <!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
-<!ENTITY sb.source "Avaa lähde-URL">
-<!ENTITY sb.renew "Tallenna uudestaan">
-<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.locate "Paikanna sivupalkissa">
 <!ENTITY sb.indicators "Näytä linkkitunnukset">
 <!ENTITY sb.info.home "Etusivu">
@@ -324,10 +321,6 @@
 <!ENTITY sb.repair.complete "Valmis.">
 
 <!-- scrapbook.dtd -->
-<!ENTITY sb.new.folder "Uusi kansio">
-<!ENTITY sb.new.separator "Uusi erotin">
-<!ENTITY sb.new.note "Uusi muistilappu">
-<!ENTITY sb.new.notex "New Note Page">
 <!ENTITY sb.toggle.all "Avaa/sulje kaikki kansiot">
 <!ENTITY sb.tools "Työkalut">
 <!ENTITY sb.tools.options "Asetukset">
@@ -342,7 +335,6 @@
 <!ENTITY sb.tools.repair "Hätäkorjaus">
 <!ENTITY sb.tools.addons "Lisäosien toiminnot">
 <!ENTITY sb.note.opentab "Avaa välilehdessä">
-<!ENTITY sb.note.close "Sulje">
 
 <!-- sort.dtd -->
 <!ENTITY sb.sort "Järjestä">
@@ -379,7 +371,6 @@
 <!ENTITY sb.open.newtab "Avaa uuteen välilehteen">
 <!ENTITY sb.open.source "Avaa lähde-URL">
 <!ENTITY sb.multi "Multi-ScrapBook">
-<!ENTITY sb.tools "Työkalut">
 <!ENTITY sb.show.files "Näytä tiedostot">
 <!ENTITY sb.move "Siirrä">
 <!ENTITY sb.move.into "Siirrä kansioon">

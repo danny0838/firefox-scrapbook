@@ -146,9 +146,6 @@
 <!ENTITY sb.highlighter "Evidențiere">
 <!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
 <!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
-<!ENTITY sb.source "Deschide adresa sursă">
-<!ENTITY sb.renew "Capturează din nou">
-<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.locate "Localizează în arborele lateral">
 <!ENTITY sb.indicators "Afișează indicatorii de legături">
 <!ENTITY sb.info.home "Origine">
@@ -324,10 +321,6 @@
 <!ENTITY sb.repair.complete "Procedura a fost finalizată.">
 
 <!-- scrapbook.dtd -->
-<!ENTITY sb.new.folder "Dosar nou">
-<!ENTITY sb.new.separator "Separator nou">
-<!ENTITY sb.new.note "Notă nouă">
-<!ENTITY sb.new.notex "New Note Page">
 <!ENTITY sb.toggle.all "Expandează/Restrânge toate dosarele">
 <!ENTITY sb.tools "Instrumente ">
 <!ENTITY sb.tools.options "Opțiuni">
@@ -342,7 +335,6 @@
 <!ENTITY sb.tools.repair "Reparare de urgență">
 <!ENTITY sb.tools.addons "Funcții adiționale">
 <!ENTITY sb.note.opentab "Deschide într-o filă">
-<!ENTITY sb.note.close "Închide">
 
 <!-- sort.dtd -->
 <!ENTITY sb.sort "Sortare">
@@ -379,7 +371,6 @@
 <!ENTITY sb.open.newtab "Deschide într-o filă nouă">
 <!ENTITY sb.open.source "Deschide adresa sursei">
 <!ENTITY sb.multi "Multi-ScrapBook">
-<!ENTITY sb.tools "Unelte">
 <!ENTITY sb.show.files "Afișează fișierele">
 <!ENTITY sb.move "Mută">
 <!ENTITY sb.move.into "Mută în dosar">

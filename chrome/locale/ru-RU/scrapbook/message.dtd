@@ -146,9 +146,6 @@
 <!ENTITY sb.highlighter "Маркер">
 <!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
 <!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
-<!ENTITY sb.source "Открыть URL сохранённого сайта">
-<!ENTITY sb.renew "Произвести сохранение страницы снова">
-<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.locate "Синхронизировать с деревом боковой панели">
 <!ENTITY sb.indicators "Показывать индикаторы ссылок">
 <!ENTITY sb.info.home "К начальной странице">
@@ -324,10 +321,6 @@
 <!ENTITY sb.repair.complete "Восстановление завершено">
 
 <!-- scrapbook.dtd -->
-<!ENTITY sb.new.folder "Новый каталог">
-<!ENTITY sb.new.separator "Новый разделитель">
-<!ENTITY sb.new.note "Создать заметку">
-<!ENTITY sb.new.notex "New Note Page">
 <!ENTITY sb.toggle.all "Открыть/закрыть все каталоги">
 <!ENTITY sb.tools "Инструменты">
 <!ENTITY sb.tools.options "Настройки расширения">
@@ -342,7 +335,6 @@
 <!ENTITY sb.tools.repair "Аварийное восстановление">
 <!ENTITY sb.tools.addons "Установленные дополнения">
 <!ENTITY sb.note.opentab "Открыть в новой вкладке">
-<!ENTITY sb.note.close "Закрыть">
 
 <!-- sort.dtd -->
 <!ENTITY sb.sort "Сортировка каталогов">
@@ -379,7 +371,6 @@
 <!ENTITY sb.open.newtab "Открыть в новой вкладке">
 <!ENTITY sb.open.source "Открыть исходный URL">
 <!ENTITY sb.multi "Multi-ScrapBook">
-<!ENTITY sb.tools "Инструменты">
 <!ENTITY sb.show.files "Файлы веб-страницы">
 <!ENTITY sb.move "Переместить">
 <!ENTITY sb.move.into "Переместить в каталог">

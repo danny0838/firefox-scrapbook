@@ -146,9 +146,6 @@
 <!ENTITY sb.highlighter "高亮标记">
 <!ENTITY sb.highlighter.remove "清除选取区内的 ScrapBook 注记">
 <!ENTITY sb.highlighter.remove.all "清除所有 ScrapBook 注记">
-<!ENTITY sb.source "打开原始链接">
-<!ENTITY sb.renew "重新获取">
-<!ENTITY sb.internalize "将内嵌的外部媒体存入资料目录">
 <!ENTITY sb.locate "与侧栏列表同步">
 <!ENTITY sb.indicators "显示链接指示器">
 <!ENTITY sb.info.home "主页">
@@ -324,10 +321,6 @@
 <!ENTITY sb.repair.complete "完成。">
 
 <!-- scrapbook.dtd -->
-<!ENTITY sb.new.folder "新建文件夹">
-<!ENTITY sb.new.separator "新建分隔线">
-<!ENTITY sb.new.note "新建便签">
-<!ENTITY sb.new.notex "新建便签页面">
 <!ENTITY sb.toggle.all "打开 / 关闭全部文件夹">
 <!ENTITY sb.tools "工具">
 <!ENTITY sb.tools.options "选项">
@@ -342,7 +335,6 @@
 <!ENTITY sb.tools.repair "紧急修复">
 <!ENTITY sb.tools.addons "附加功能">
 <!ENTITY sb.note.opentab "在标签页中打开">
-<!ENTITY sb.note.close "关闭">
 
 <!-- sort.dtd -->
 <!ENTITY sb.sort "排列项目列表">
@@ -379,7 +371,6 @@
 <!ENTITY sb.open.newtab "在新标签页中打开">
 <!ENTITY sb.open.source "打开原始链接">
 <!ENTITY sb.multi "多重 ScrapBook">
-<!ENTITY sb.tools "工具">
 <!ENTITY sb.show.files "查看文件">
 <!ENTITY sb.move "移动">
 <!ENTITY sb.move.into "移动">

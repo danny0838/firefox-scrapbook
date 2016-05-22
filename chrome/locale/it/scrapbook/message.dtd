@@ -146,9 +146,6 @@
 <!ENTITY sb.highlighter "Evidenziatura ">
 <!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
 <!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
-<!ENTITY sb.source "Apri l&apos;indirizzo web sorgente">
-<!ENTITY sb.renew "Cattura ancora">
-<!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.locate "Sincronizza con il diagramma delle cartelle nel pannello">
 <!ENTITY sb.indicators "Mostra indicatori dei link">
 <!ENTITY sb.info.home "Pagina iniziale">
@@ -324,10 +321,6 @@
 <!ENTITY sb.repair.complete "Ripristino completato">
 
 <!-- scrapbook.dtd -->
-<!ENTITY sb.new.folder "Nuova cartella">
-<!ENTITY sb.new.separator "Nuovo separatore">
-<!ENTITY sb.new.note "Nuova nota">
-<!ENTITY sb.new.notex "New Note Page">
 <!ENTITY sb.toggle.all "Apre/chiude tutte le cartelle">
 <!ENTITY sb.tools "Strumenti">
 <!ENTITY sb.tools.options "Impostazioni">
@@ -342,7 +335,6 @@
 <!ENTITY sb.tools.repair "Riparazione d&apos;emergenza">
 <!ENTITY sb.tools.addons "Funzioni dei componenti aggiuntivi">
 <!ENTITY sb.note.opentab "Apri in una scheda">
-<!ENTITY sb.note.close "Chiudi">
 
 <!-- sort.dtd -->
 <!ENTITY sb.sort "Ordina">
@@ -379,7 +371,6 @@
 <!ENTITY sb.open.newtab "Apri in una nuova scheda">
 <!ENTITY sb.open.source "Apri l&apos;indirizzo web sorgente">
 <!ENTITY sb.multi "Multi-ScrapBook">
-<!ENTITY sb.tools "Strumenti">
 <!ENTITY sb.show.files "Visualizza i file">
 <!ENTITY sb.move "Sposta">
 <!ENTITY sb.move.into "Sposta nella cartella">
