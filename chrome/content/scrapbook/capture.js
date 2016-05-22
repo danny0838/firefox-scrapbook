@@ -1,20 +1,20 @@
 
-var gURLs       = [];
-var gDepths     = [];
-var gRefURL     = "";
+var gURLs = [];
+var gDepths = [];
+var gRefURL = "";
 var gShowDetail = false;
-var gResName    = "";
-var gResIdx     = 0;
-var gReferItem  = null;
-var gOption     = {};
-var gFile2URL   = {};
-var gURL2Name   = {};
-var gPreset     = [];
-var gContext    = "";
-var gCharset    = "";
-var gTitles     = [];
+var gResName = "";
+var gResIdx = 0;
+var gReferItem = null;
+var gOption = {};
+var gFile2URL = {};
+var gURL2Name = {};
+var gPreset = [];
+var gContext = "";
+var gCharset = "";
+var gTitles = [];
 var gTitle;
-var gTimeout    = null;
+var gTimeout = null;
 
 
 
@@ -94,19 +94,19 @@ function SB_initCapture() {
         })();
     }
 
-    var myURLs  = data.urls;
-    gRefURL     = data.refUrl;
+    var myURLs = data.urls;
+    gRefURL = data.refUrl;
     gShowDetail = data.showDetail;
-    gResName    = data.resName;
-    gResIdx     = data.resIdx;
-    gReferItem  = data.referItem;
-    gOption     = data.option;
-    gFile2URL   = data.file2Url;
-    gPreset     = data.preset;
-    gCharset    = data.charset;
-    gTimeout    = data.timeout;
-    gTitles     = data.titles;
-    gContext    = data.context;
+    gResName = data.resName;
+    gResIdx = data.resIdx;
+    gReferItem = data.referItem;
+    gOption = data.option;
+    gFile2URL = data.file2Url;
+    gPreset = data.preset;
+    gCharset = data.charset;
+    gTimeout = data.timeout;
+    gTitles = data.titles;
+    gContext = data.context;
 
     if ( !gTimeout ) gTimeout = 0;
     if ( gContext == "indepth" ) {
@@ -372,7 +372,7 @@ var sbCaptureTask = {
         document.getElementById("sbCapturePauseButton").disabled = false;
         document.getElementById("sbCapturePauseButton").hidden = !allowPause;
         document.getElementById("sbCaptureStartButton").hidden =  allowPause;
-        document.getElementById("sbCaptureTextbox").disabled   = !allowPause;
+        document.getElementById("sbCaptureTextbox").disabled = !allowPause;
     },
 
     toggleSkipButton: function(willEnable) {
@@ -888,7 +888,7 @@ var sbCrossLinker = {
 
 function sbHeaderSniffer(aURLSpec, aRefURLSpec) {
     var that = this;
-    this.URLSpec    = aURLSpec;
+    this.URLSpec = aURLSpec;
     this.refURLSpec = aRefURLSpec;
     this._eventListener = {
         onDataAvailable: function(aRequest, aContext, aInputStream, aOffset, aCount) {},

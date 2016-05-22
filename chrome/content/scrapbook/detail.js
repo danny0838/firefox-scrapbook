@@ -63,27 +63,27 @@ var sbCaptureOptions = {
     },
 
     accept: function() {
-        this.param.item.comment         = sbCommonUtils.escapeComment(document.getElementById("sbDetailComment").value);
-        this.param.item.title           = document.getElementById("sbDetailTitle").value;
-        this.param.option["images"]     = document.getElementById("sbDetailOptionImages").checked;
-        this.param.option["media"]      = document.getElementById("sbDetailOptionMedia").checked;
-        this.param.option["fonts"]      = document.getElementById("sbDetailOptionFonts").checked;
-        this.param.option["frames"]     = document.getElementById("sbDetailOptionFrames").checked;
-        this.param.option["styles"]     = document.getElementById("sbDetailOptionStyles").checked;
-        this.param.option["script"]     = document.getElementById("sbDetailOptionScript").checked;
-        this.param.option["asHtml"]     = document.getElementById("sbDetailOptionAsHtml").checked;
-        this.param.option["forceUtf8"]  = document.getElementById("sbDetailOptionForceUtf8").checked;
-        this.param.option["rewriteStyles"]  = document.getElementById("sbDetailOptionRewriteStyles").checked;
-        this.param.option["keepLink"]   = document.getElementById("sbDetailOptionKeepLink").checked;
-        this.param.option["dlimg"]      = document.getElementById("sbDetailImage").checked;
-        this.param.option["dlsnd"]      = document.getElementById("sbDetailSound").checked;
-        this.param.option["dlmov"]      = document.getElementById("sbDetailMovie").checked;
-        this.param.option["dlarc"]      = document.getElementById("sbDetailArchive").checked;
-        this.param.option["custom"]     = this.CUSTOM_UI.checked ? document.getElementById("sbDetailCustomExt").value : "";
+        this.param.item.comment = sbCommonUtils.escapeComment(document.getElementById("sbDetailComment").value);
+        this.param.item.title = document.getElementById("sbDetailTitle").value;
+        this.param.option["images"] = document.getElementById("sbDetailOptionImages").checked;
+        this.param.option["media"] = document.getElementById("sbDetailOptionMedia").checked;
+        this.param.option["fonts"] = document.getElementById("sbDetailOptionFonts").checked;
+        this.param.option["frames"] = document.getElementById("sbDetailOptionFrames").checked;
+        this.param.option["styles"] = document.getElementById("sbDetailOptionStyles").checked;
+        this.param.option["script"] = document.getElementById("sbDetailOptionScript").checked;
+        this.param.option["asHtml"] = document.getElementById("sbDetailOptionAsHtml").checked;
+        this.param.option["forceUtf8"] = document.getElementById("sbDetailOptionForceUtf8").checked;
+        this.param.option["rewriteStyles"] = document.getElementById("sbDetailOptionRewriteStyles").checked;
+        this.param.option["keepLink"] = document.getElementById("sbDetailOptionKeepLink").checked;
+        this.param.option["dlimg"] = document.getElementById("sbDetailImage").checked;
+        this.param.option["dlsnd"] = document.getElementById("sbDetailSound").checked;
+        this.param.option["dlmov"] = document.getElementById("sbDetailMovie").checked;
+        this.param.option["dlarc"] = document.getElementById("sbDetailArchive").checked;
+        this.param.option["custom"] = this.CUSTOM_UI.checked ? document.getElementById("sbDetailCustomExt").value : "";
         if ( this.param.context !== "capture-again-deep" ) {
-            this.param.option["inDepth"]    = parseInt("0" + document.getElementById("sbDetailInDepth").value, 10);
-            this.param.poption["timeout"]   = parseInt("0" + document.getElementById("sbDetailTimeout").value, 10);
-            this.param.poption["charset"]   = document.getElementById("sbDetailCharset").value;
+            this.param.option["inDepth"] = parseInt("0" + document.getElementById("sbDetailInDepth").value, 10);
+            this.param.poption["timeout"] = parseInt("0" + document.getElementById("sbDetailTimeout").value, 10);
+            this.param.poption["charset"] = document.getElementById("sbDetailCharset").value;
         }
         if ( this.param.context == "capture-again" ) {
             var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);

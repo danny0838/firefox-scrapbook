@@ -62,10 +62,10 @@ var sbNoteService2 = {
         var source = sbNoteTemplate.getTemplate();
         var title, content;
         if ( sbNoteService.TEXTBOX.value.match(/\n/) ) {
-            title   = RegExp.leftContext;
+            title = RegExp.leftContext;
             content = RegExp.rightContext;
         } else {
-            title   = sbNoteService.TEXTBOX.value;
+            title = sbNoteService.TEXTBOX.value;
             content = "";
         }
         title = sbCommonUtils.escapeHTMLWithSpace(title, false, true, true);
@@ -81,7 +81,7 @@ var sbNoteService2 = {
     },
 
     toggleHTMLView: function(willShow) {
-        this.BROWSER.collapsed  = !willShow;
+        this.BROWSER.collapsed = !willShow;
         document.getElementById("sbSplitter").collapsed = !willShow;
         document.getElementById("sbNoteHeader").lastChild.collapsed = !willShow;
         document.getElementById("sbNoteToolbarN").disabled = !willShow;
@@ -107,7 +107,7 @@ var sbNoteTemplate = {
 
     show: function(willShow) {
         document.getElementById("sbNoteTemplate").collapsed = !willShow;
-        document.getElementById("sbNoteEditor").collapsed   = willShow;
+        document.getElementById("sbNoteEditor").collapsed = willShow;
         this.enabled = willShow;
     },
 

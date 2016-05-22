@@ -405,8 +405,8 @@ var sbImportService = {
         this.restoring = ( aRow == -128 ) ? document.getElementById("sbTradeOptionRestore").checked : false;
         this.tarResArray = ( aRow < 0 ) ? [window.top.sbTreeHandler.TREE.ref, 0] : window.top.sbTreeDNDHandler.getTarget(aRow, aOrient);
         this.ascending = ( aRow < 0 ) ? true : (aOrient == 0);
-        this.idxList   = sbCustomTreeUtil.getSelection(sbTradeService.TREE);
-        this.count     = this.ascending ? -1 : this.idxList.length;
+        this.idxList = sbCustomTreeUtil.getSelection(sbTradeService.TREE);
+        this.count = this.ascending ? -1 : this.idxList.length;
         this.folderTable = {};
         if ( this.restoring ) {
             var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"), 1, true);
@@ -425,9 +425,9 @@ var sbImportService = {
             atEnd = --this.count < 0;
         }
         if ( !atEnd ) {
-            var num  = this.ascending ? this.count + 1 : this.idxList.length - this.count;
+            var num = this.ascending ? this.count + 1 : this.idxList.length - this.count;
             var rate = " (" + num + "/" + this.idxList.length + ") ";
-            var title  = sbTradeService.treeItems[this.idxList[this.count]][0];
+            var title = sbTradeService.treeItems[this.idxList[this.count]][0];
             var folder = sbTradeService.treeItems[this.idxList[this.count]][2];
             if ( folder ) folder = " [" + folder + "] ";
             try {

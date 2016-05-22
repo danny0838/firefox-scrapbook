@@ -15,8 +15,8 @@ var hlCustomizer = {
             return;
         }
         gColorIndex = gArg.index;
-        gPreviewUI  = getElement("hlCustomPreview");
-        gPrefName   = "highlighter.style." + gColorIndex;
+        gPreviewUI = getElement("hlCustomPreview");
+        gPrefName = "highlighter.style." + gColorIndex;
         var prefVal = sbCommonUtils.getPref(gPrefName, sbHighlighter.PRESET_STYLES[gColorIndex]);
         gPreviewUI.setAttribute("style", prefVal);
         this.syncFromPreview();
@@ -28,15 +28,15 @@ var hlCustomizer = {
     },
 
     syncFromPreview: function() {
-        getElement("hlTextBold").checked   = gPreviewUI.style.fontWeight == "bold";
+        getElement("hlTextBold").checked = gPreviewUI.style.fontWeight == "bold";
         getElement("hlTextItalic").checked = gPreviewUI.style.fontStyle == "italic";
         getElement("hlTextStrike").checked = gPreviewUI.style.textDecoration == "line-through";
         getElement("hlBackgroundEnabled").checked = !!gPreviewUI.style.backgroundColor;
-        getElement("hlTextEnabled").checked       = !!gPreviewUI.style.color;
-        getElement("hlBorderEnabled").checked     = !!gPreviewUI.style.borderBottomColor;
+        getElement("hlTextEnabled").checked = !!gPreviewUI.style.color;
+        getElement("hlBorderEnabled").checked = !!gPreviewUI.style.borderBottomColor;
         getElement("hlBackgroundColor").color = gPreviewUI.style.backgroundColor   || "none";
-        getElement("hlTextColor").color       = gPreviewUI.style.color             || "none";
-        getElement("hlBorderColor").color     = gPreviewUI.style.borderBottomColor || "none";
+        getElement("hlTextColor").color = gPreviewUI.style.color             || "none";
+        getElement("hlBorderColor").color = gPreviewUI.style.borderBottomColor || "none";
         getElement("hlBorderType").value = gPreviewUI.style.border ? "border" : gPreviewUI.style.borderBottom ? "border-bottom" : "";
         getElement("hlBorderStyle").value = gPreviewUI.style.borderBottomStyle;
         getElement("hlBorderWidth").value = gPreviewUI.style.borderBottomWidth;
@@ -56,7 +56,7 @@ var hlCustomizer = {
         if (getElement("hlTextEnabled").checked)
             rules.push("color: " + getElement("hlTextColor").color + ";");
         if (getElement("hlBorderEnabled").checked) {
-            var borderType  = getElement("hlBorderType").value;
+            var borderType = getElement("hlBorderType").value;
             var borderStyle = getElement("hlBorderStyle").value;
             var borderWidth = getElement("hlBorderWidth").value;
             var borderColor = getElement("hlBorderColor").color;
@@ -68,19 +68,19 @@ var hlCustomizer = {
     },
 
     _updateUIActiveState: function() {
-        var bgEnabled     = getElement("hlBackgroundEnabled").checked;
-        var textEnabled   = getElement("hlTextEnabled").checked;
+        var bgEnabled = getElement("hlBackgroundEnabled").checked;
+        var textEnabled = getElement("hlTextEnabled").checked;
         var borderEnabled = getElement("hlBorderEnabled").checked;
         getElement("hlBackgroundColor").disabled = !bgEnabled;
-        getElement("hlTextColor").disabled       = !textEnabled;
-        getElement("hlBorderColor").disabled     = !borderEnabled;
+        getElement("hlTextColor").disabled = !textEnabled;
+        getElement("hlBorderColor").disabled = !borderEnabled;
         getElement("hlBackgroundColor").style.MozOpacity = bgEnabled     ? "1.0" : "0.5";
-        getElement("hlBackgroundColor").style.opacity    = bgEnabled     ? "1.0" : "0.5";
-        getElement("hlTextColor").style.MozOpacity       = textEnabled   ? "1.0" : "0.5";
-        getElement("hlTextColor").style.opacity          = textEnabled   ? "1.0" : "0.5";
-        getElement("hlBorderColor").style.MozOpacity     = borderEnabled ? "1.0" : "0.5";
-        getElement("hlBorderColor").style.opacity        = borderEnabled ? "1.0" : "0.5";
-        getElement("hlBorderType").disabled  = !borderEnabled;
+        getElement("hlBackgroundColor").style.opacity = bgEnabled     ? "1.0" : "0.5";
+        getElement("hlTextColor").style.MozOpacity = textEnabled   ? "1.0" : "0.5";
+        getElement("hlTextColor").style.opacity = textEnabled   ? "1.0" : "0.5";
+        getElement("hlBorderColor").style.MozOpacity = borderEnabled ? "1.0" : "0.5";
+        getElement("hlBorderColor").style.opacity = borderEnabled ? "1.0" : "0.5";
+        getElement("hlBorderType").disabled = !borderEnabled;
         getElement("hlBorderStyle").disabled = !borderEnabled;
         getElement("hlBorderWidth").disabled = !borderEnabled;
     },

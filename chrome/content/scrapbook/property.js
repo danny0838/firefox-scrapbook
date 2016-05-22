@@ -50,13 +50,13 @@ var sbPropService = {
             dateTime2 = dd.toLocaleString();
         }
         // fill data to the fields
-        document.getElementById("sbPropFolder").value  = sbDataSource.getFolderPath(this.resource).join("\x1B");
-        document.getElementById("sbPropID").value      = this.item.id;
-        document.getElementById("sbPropTitle").value   = this.item.title;
-        document.getElementById("sbPropSource").value  = this.item.source;
-        document.getElementById("sbPropDate").value    = dateTime;
-        document.getElementById("sbPropModify").value  = dateTime2;
-        document.getElementById("sbPropChars").value   = this.item.chars;
+        document.getElementById("sbPropFolder").value = sbDataSource.getFolderPath(this.resource).join("\x1B");
+        document.getElementById("sbPropID").value = this.item.id;
+        document.getElementById("sbPropTitle").value = this.item.title;
+        document.getElementById("sbPropSource").value = this.item.source;
+        document.getElementById("sbPropDate").value = dateTime;
+        document.getElementById("sbPropModify").value = dateTime2;
+        document.getElementById("sbPropChars").value = this.item.chars;
         document.getElementById("sbPropComment").value = this.item.comment.replace(/ __BR__ /g, "\n");
         document.getElementById("sbPropMark").setAttribute("checked", this.item.type == "marked");
         document.getElementById("sbPropLock").setAttribute("checked", this.item.lock == "true");
@@ -67,23 +67,23 @@ var sbPropService = {
         var bundleName = "TYPE_PAGE";
         switch (this.item.type) {
             case "separator": this.isTypeSeparator = true; bundleName = "TYPE_SEPARATOR"; break;
-            case "bookmark": this.isTypeBookmark  = true; bundleName = "TYPE_BOOKMARK";  break;
-            case "folder": this.isTypeFolder    = true; bundleName = "TYPE_FOLDER";    break;
-            case "note": this.isTypeNote      = true; bundleName = "TYPE_NOTE";      break;
-            case "notex": this.isTypeNotex     = true; bundleName = "TYPE_NOTEX";      break;
+            case "bookmark": this.isTypeBookmark = true; bundleName = "TYPE_BOOKMARK";  break;
+            case "folder": this.isTypeFolder = true; bundleName = "TYPE_FOLDER";    break;
+            case "note": this.isTypeNote = true; bundleName = "TYPE_NOTE";      break;
+            case "notex": this.isTypeNotex = true; bundleName = "TYPE_NOTEX";      break;
             case "file": 
-            case "image": this.isTypeFile      = true; bundleName = "TYPE_FILE";      break;
-            case "combine": this.isTypeSite      = true; bundleName = "TYPE_COMBINE";   break;
-            case "site": this.isTypeSite      = true; bundleName = "TYPE_INDEPTH";   break;
+            case "image": this.isTypeFile = true; bundleName = "TYPE_FILE";      break;
+            case "combine": this.isTypeSite = true; bundleName = "TYPE_COMBINE";   break;
+            case "site": this.isTypeSite = true; bundleName = "TYPE_INDEPTH";   break;
         }
         document.getElementById("sbPropType").value = sbCommonUtils.lang("property", bundleName);
         document.getElementById("sbPropSourceRow").hidden = this.isTypeFolder || this.isTypeNote || this.isTypeSeparator;
-        document.getElementById("sbPropCharsRow").hidden  = this.isTypeFolder || this.isTypeBookmark || this.isTypeSeparator;
-        document.getElementById("sbPropIconRow").hidden   = this.isTypeSeparator;
-        document.getElementById("sbPropIconMenu").hidden  = this.isTypeNote;
-        document.getElementById("sbPropSizeRow").hidden   = this.isTypeFolder || this.isTypeBookmark || this.isTypeSeparator;
-        document.getElementById("sbPropMark").hidden      = this.isTypeFolder || this.isTypeNote || this.isTypeNotex || this.isTypeFile || this.isTypeSite || this.isTypeBookmark;
-        document.getElementById("sbPropLock").hidden      = this.isTypeFolder || this.isTypeNote || this.isTypeBookmark;
+        document.getElementById("sbPropCharsRow").hidden = this.isTypeFolder || this.isTypeBookmark || this.isTypeSeparator;
+        document.getElementById("sbPropIconRow").hidden = this.isTypeSeparator;
+        document.getElementById("sbPropIconMenu").hidden = this.isTypeNote;
+        document.getElementById("sbPropSizeRow").hidden = this.isTypeFolder || this.isTypeBookmark || this.isTypeSeparator;
+        document.getElementById("sbPropMark").hidden = this.isTypeFolder || this.isTypeNote || this.isTypeNotex || this.isTypeFile || this.isTypeSite || this.isTypeBookmark;
+        document.getElementById("sbPropLock").hidden = this.isTypeFolder || this.isTypeNote || this.isTypeBookmark;
         document.getElementById("sbPropIconMenu").firstChild.firstChild.nextSibling.setAttribute("disabled", this.isTypeFolder || this.isTypeBookmark);
         if (this.isTypeNote)
             document.getElementById("sbPropTitle").removeAttribute("editable");
@@ -197,7 +197,7 @@ var sbPropService = {
     },
 
     getHTMLTitle: function(aID, aChars) {
-        var file  = sbCommonUtils.getContentDir(aID, true);
+        var file = sbCommonUtils.getContentDir(aID, true);
         if ( !file ) return "";
         file.append("index.html");
         var content = sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(file), aChars);
@@ -207,7 +207,7 @@ var sbPropService = {
     getTotalFileSize: function(aID) {
         var totalSize = 0;
         var totalFile = 0;
-        var totalDir  = 0;
+        var totalDir = 0;
         var dir = sbCommonUtils.getContentDir(aID, true, true);
         if (!dir) return [totalSize, totalFile, totalDir];
         sbCommonUtils.forEachFile(dir, function(file){

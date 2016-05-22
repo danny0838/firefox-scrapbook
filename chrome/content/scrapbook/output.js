@@ -210,9 +210,9 @@ var sbOutputService = {
     },
 
     getHTMLBody: function(aRes) {
-        var id    = sbDataSource.getProperty(aRes, "id");
-        var type  = sbDataSource.getProperty(aRes, "type");
-        var icon  = sbDataSource.getProperty(aRes, "icon");
+        var id = sbDataSource.getProperty(aRes, "id");
+        var type = sbDataSource.getProperty(aRes, "type");
+        var icon = sbDataSource.getProperty(aRes, "icon");
         var title = sbDataSource.getProperty(aRes, "title");
         var source = sbDataSource.getProperty(aRes, "source");
         if ( icon.match(/(\/data\/\d{14}\/.*$)/) ) icon = ".." + RegExp.$1;

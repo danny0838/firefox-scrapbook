@@ -245,7 +245,7 @@ var sbDataSource = {
         var rmID = this.getProperty(aRes, "id");
         while ( names.hasMoreElements() ) {
             try {
-                var name  = names.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+                var name = names.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
                 var value = this._dataObj.GetTarget(aRes, name, true);
                 this._dataObj.Unassert(aRes, name, value);
             } catch(ex) {
@@ -295,7 +295,7 @@ var sbDataSource = {
         var names = this._dataObj.ArcLabelsOut(aRes);
         while ( names.hasMoreElements() ) {
             try {
-                var name  = names.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+                var name = names.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
                 if (name.Value.substring(0, nsl) != ns) continue;
                 var key = name.Value.substring(nsl);
                 var value = this._dataObj.GetTarget(aRes, name, true).QueryInterface(Components.interfaces.nsIRDFLiteral).Value;

@@ -154,20 +154,20 @@ var sbMainService = {
             var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
             if (aAsChild && sbDataSource.isContainer(curRes)) {
                 tarResName = curRes.Value;
-                tarRelIdx  = 0;
-                isRootPos  = false;
+                tarRelIdx = 0;
+                isRootPos = false;
                 if (!sbTreeHandler.TREE.view.isContainerOpen(curIdx) ) sbTreeHandler.TREE.view.toggleOpenState(curIdx);
             } else {
                 var curPar = sbTreeHandler.getParentResource(curIdx);
                 var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
                 tarResName = curPar.Value;
-                tarRelIdx  = curRelIdx + (sbCommonUtils.getPref("tree.unshift", false) ? 0 : 1);
-                isRootPos  = false;
+                tarRelIdx = curRelIdx + (sbCommonUtils.getPref("tree.unshift", false) ? 0 : 1);
+                isRootPos = false;
             }
         } catch(ex) {
             tarResName = sbTreeHandler.TREE.ref;
-            tarRelIdx  = 0;
-            isRootPos  = true;
+            tarRelIdx = 0;
+            isRootPos = true;
         }
         // add the new resource
         if (aItem) {
@@ -224,40 +224,40 @@ var sbController = {
         var isMultiple = ( sbTreeHandler.TREE.view.selection.count > 1 );
         if (!isMultiple) {
             switch (sbDataSource.getProperty(res, "type")) {
-                case "file": isFile      = true; break;
-                case "note": isNote      = true; break;
-                case "notex": isNotex     = true; break;
-                case "folder": isFolder    = true; break;
-                case "bookmark": isBookmark  = true; break;
+                case "file": isFile = true; break;
+                case "note": isNote = true; break;
+                case "notex": isNotex = true; break;
+                case "folder": isFolder = true; break;
+                case "bookmark": isBookmark = true; break;
                 case "separator": isSeparator = true; break;
             }
         }
         var getElement = function(aID) {
             return document.getElementById(aID);
         };
-        getElement("sbPopupOpenNative").hidden                 = isMultiple || !isFile;
-        getElement("sbPopupOpen").hidden                       = isMultiple || isFolder || isSeparator;
-        getElement("sbPopupOpenNewTab").hidden                 = isMultiple || isFolder || isSeparator;
-        getElement("sbPopupOpenSource").hidden                 = isMultiple || isFolder || isSeparator || isNote;
-        getElement("sbPopupCombinedView").hidden               = isMultiple || !isFolder;
-        getElement("sbPopupOpenAllItems").hidden               = isMultiple || !isFolder;
-        getElement("sbPopupOpenAllItems").nextSibling.hidden   = isMultiple || !isFolder;
-        getElement("sbPopupManage").hidden                     = isMultiple || !isFolder;
-        getElement("sbPopupSort").hidden                       = isMultiple || !isFolder;
-        getElement("sbPopupNewFolder").hidden                  = isMultiple;
-        getElement("sbPopupNewSeparator").hidden               = isMultiple;
-        getElement("sbPopupNewNote").hidden                    = isMultiple;
-        getElement("sbPopupNewNotex").hidden                   = isMultiple;
-        getElement("sbPopupNewNotex").nextSibling.hidden       = isMultiple;
-        getElement("sbPopupProperty").previousSibling.hidden   = isMultiple;
-        getElement("sbPopupProperty").hidden                   = isMultiple;
+        getElement("sbPopupOpenNative").hidden = isMultiple || !isFile;
+        getElement("sbPopupOpen").hidden = isMultiple || isFolder || isSeparator;
+        getElement("sbPopupOpenNewTab").hidden = isMultiple || isFolder || isSeparator;
+        getElement("sbPopupOpenSource").hidden = isMultiple || isFolder || isSeparator || isNote;
+        getElement("sbPopupCombinedView").hidden = isMultiple || !isFolder;
+        getElement("sbPopupOpenAllItems").hidden = isMultiple || !isFolder;
+        getElement("sbPopupOpenAllItems").nextSibling.hidden = isMultiple || !isFolder;
+        getElement("sbPopupManage").hidden = isMultiple || !isFolder;
+        getElement("sbPopupSort").hidden = isMultiple || !isFolder;
+        getElement("sbPopupNewFolder").hidden = isMultiple;
+        getElement("sbPopupNewSeparator").hidden = isMultiple;
+        getElement("sbPopupNewNote").hidden = isMultiple;
+        getElement("sbPopupNewNotex").hidden = isMultiple;
+        getElement("sbPopupNewNotex").nextSibling.hidden = isMultiple;
+        getElement("sbPopupProperty").previousSibling.hidden = isMultiple;
+        getElement("sbPopupProperty").hidden = isMultiple;
         // tools submenu
-        getElement("sbPopupShowFiles").disabled                = isMultiple || isFolder || isSeparator || isBookmark;
-        getElement("sbPopupCopy").disabled                     = isMultiple || isFolder;
-        getElement("sbPopupRenew").disabled                    = isMultiple || isFolder || isSeparator || isNote || isNotex;
-        getElement("sbPopupInternalize").hidden                = isMultiple || !isNotex;
-        getElement("sbPopupExport").previousSibling.hidden     = isMultiple || isFolder;
-        getElement("sbPopupExport").hidden                     = isMultiple || isFolder;
+        getElement("sbPopupShowFiles").disabled = isMultiple || isFolder || isSeparator || isBookmark;
+        getElement("sbPopupCopy").disabled = isMultiple || isFolder;
+        getElement("sbPopupRenew").disabled = isMultiple || isFolder || isSeparator || isNote || isNotex;
+        getElement("sbPopupInternalize").hidden = isMultiple || !isNotex;
+        getElement("sbPopupExport").previousSibling.hidden = isMultiple || isFolder;
+        getElement("sbPopupExport").hidden = isMultiple || isFolder;
     },
 
     open: function(aRes, aInTab) {
@@ -581,7 +581,7 @@ var sbTreeDNDHandler = {
                         sbCommonUtils.alert("Unsupported XferType:\n---\n"+sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0));
                 }
             } else {
-                var XferDataSet  = nsTransferable.get(
+                var XferDataSet = nsTransferable.get(
                     sbTreeDNDHandler.dragDropObserver.getSupportedFlavours(),
                     nsDragAndDrop.getDragData || this.getDragData,
                     true
@@ -622,7 +622,7 @@ var sbTreeDNDHandler = {
     },
 
     getModifiers: function(aEvent) {
-        this.modAlt   = aEvent.altKey;
+        this.modAlt = aEvent.altKey;
         this.modShift = aEvent.ctrlKey || aEvent.shiftKey;
     },
 

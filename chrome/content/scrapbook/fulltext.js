@@ -79,12 +79,12 @@ var sbSearchResult = {
     process: function() {
         var res = this.resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
         if ( res.ValueUTF8 == "urn:scrapbook:cache" ) return this.next();
-        var folder  = sbCacheSource.getProperty(res, "folder");
+        var folder = sbCacheSource.getProperty(res, "folder");
         if ( this.targetFolders.length > 0 ) {
             if ( folder && folder.indexOf("urn:scrapbook:item") != 0 ) {
                 try {
                     var target = sbCommonUtils.RDF.GetLiteral(folder);
-                    var prop   = sbDataSource.data.ArcLabelsIn(target).getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+                    var prop = sbDataSource.data.ArcLabelsIn(target).getNext().QueryInterface(Components.interfaces.nsIRDFResource);
                     var source = sbDataSource.data.GetSource(prop, target, true);
                     folder = source.ValueUTF8;
                 } catch(ex) {
@@ -325,9 +325,9 @@ var sbCacheService = {
         // update trace message
         document.title = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(this.folders[this.index]), "title") || sbCommonUtils.lang("fulltext", "BUILD_CACHE");
         gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_UPDATE", [sbDataSource.getProperty(res, "title")]);
-        gCacheStatus.lastChild.value  = Math.round((this.index + 1) / this.resList.length * 100);
+        gCacheStatus.lastChild.value = Math.round((this.index + 1) / this.resList.length * 100);
         // inspect the data and do the cache
-        var id  = sbDataSource.getProperty(res, "id");
+        var id = sbDataSource.getProperty(res, "id");
         var dir = this.dataDir.clone();
         dir.append(id);
         var type = sbDataSource.getProperty(res, "type");
@@ -552,7 +552,7 @@ var sbCacheService = {
     convertHTML2Text: function(aStr) {
         var FORMAT_CONVERTER = Components.classes['@mozilla.org/widget/htmlformatconverter;1'].createInstance(Components.interfaces.nsIFormatConverter);
         var fromStr = Components.classes['@mozilla.org/supports-string;1'].createInstance(Components.interfaces.nsISupportsString);
-        var toStr   = { value: null };
+        var toStr = { value: null };
         fromStr.data = aStr;
         try {
             FORMAT_CONVERTER.convert("text/html", fromStr, fromStr.toString().length, "text/unicode", toStr, {});
@@ -627,7 +627,7 @@ var sbCacheSource = {
         this.container.RemoveElement(aRes, true);
         var names = this.dataSource.ArcLabelsOut(aRes);
         while ( names.hasMoreElements() ) {
-            var name  = names.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+            var name = names.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
             var value = this.dataSource.GetTarget(aRes, name, true);
             this.dataSource.Unassert(aRes, name, value);
         }

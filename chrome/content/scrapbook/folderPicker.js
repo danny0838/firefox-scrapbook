@@ -23,10 +23,10 @@ var sbFolderPicker = {
     accept: function() {
         if ( document.getElementById("sbFolderPickerRoot").checked ) {
             window.arguments[0].resource = sbCommonUtils.RDF.GetResource(sbTreeHandler.TREE.ref);
-            window.arguments[0].title    = sbCommonUtils.lang("scrapbook", "ROOT_FOLDER");
+            window.arguments[0].title = sbCommonUtils.lang("scrapbook", "ROOT_FOLDER");
         } else {
             window.arguments[0].resource = sbTreeHandler.getSelection(true, 1)[0];
-            window.arguments[0].title    = sbDataSource.getProperty(window.arguments[0].resource, "title");
+            window.arguments[0].title = sbDataSource.getProperty(window.arguments[0].resource, "title");
         }
         sbTreeHandler.collapseFoldersBut(sbTreeHandler.TREE.currentIndex);
     },

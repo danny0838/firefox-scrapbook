@@ -32,9 +32,9 @@ var sbContentSaver = {
         this.frames = [];
         this.isMainFrame = true;
         if ( aPresetData ) {
-            if ( aPresetData[0] ) this.item.id  = aPresetData[0];
-            if ( aPresetData[1] ) this.name     = aPresetData[1];
-            if ( aPresetData[2] ) this.option   = sbCommonUtils.extendObject(this.option, aPresetData[2]);
+            if ( aPresetData[0] ) this.item.id = aPresetData[0];
+            if ( aPresetData[1] ) this.name = aPresetData[1];
+            if ( aPresetData[2] ) this.option = sbCommonUtils.extendObject(this.option, aPresetData[2]);
             if ( aPresetData[3] ) this.file2URL = aPresetData[3];
             if ( aPresetData[4] >= this.option["inDepth"] ) this.option["inDepth"] = 0;
         }
@@ -43,7 +43,7 @@ var sbContentSaver = {
 
     captureWindow: function(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData, aContext, aTitle) {
         this.init(aPresetData);
-        this.item.chars  = aRootWindow.document.characterSet;
+        this.item.chars = aRootWindow.document.characterSet;
         this.item.source = aRootWindow.location.href;
         //Favicon der angezeigten Seite bestimmen (Unterscheidung zwischen FF2 und FF3 notwendig!)
         if ( "gBrowser" in window && aRootWindow == gBrowser.contentWindow ) {
@@ -120,17 +120,17 @@ var sbContentSaver = {
 
     captureFile: function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext) {
         this.init(aPresetData);
-        this.item.title  = sbCommonUtils.getFileName(aSourceURL);
-        this.item.icon   = "moz-icon://" + sbCommonUtils.escapeFileName(this.item.title) + "?size=16";
+        this.item.title = sbCommonUtils.getFileName(aSourceURL);
+        this.item.icon = "moz-icon://" + sbCommonUtils.escapeFileName(this.item.title) + "?size=16";
         this.item.source = aSourceURL;
-        this.item.type   = aType;
+        this.item.type = aType;
         if ( aShowDetail ) {
             var ret = this.showDetailDialog(null, aResName, aContext);
             if ( ret.result == 0 ) { return null; }
             if ( ret.result == 2 ) { aResName = ret.resURI; aResIndex = 0; }
         }
         this.contentDir = sbCommonUtils.getContentDir(this.item.id);
-        this.refURLObj  = sbCommonUtils.convertURLToObject(aReferURL);
+        this.refURLObj = sbCommonUtils.convertURLToObject(aReferURL);
         var newName = this.saveFileInternal(aSourceURL, this.name, aType);
         this.addResource(aResName, aResIndex);
         return [sbCommonUtils.splitFileName(newName)[0], this.file2URL, this.item.title];
@@ -426,8 +426,8 @@ var sbContentSaver = {
                 var myHTML = '<html><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0;URL=./' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(newFileName)) + '"></head><body></body></html>';
             }
             if ( this.isMainFrame ) {
-                this.item.icon  = "moz-icon://" + sbCommonUtils.escapeFileName(newFileName) + "?size=16";
-                this.item.type  = aCaptureType;
+                this.item.icon = "moz-icon://" + sbCommonUtils.escapeFileName(newFileName) + "?size=16";
+                this.item.type = aCaptureType;
                 this.item.chars = aCharset || "";
             }
         } else {
@@ -1146,7 +1146,7 @@ var sbContentSaver = {
 
 
 function sbCaptureObserver(aSBitem, aFileName) {
-    this.item     = aSBitem;
+    this.item = aSBitem;
     this.fileName = aFileName;
     this.callback = sbCaptureObserverCallback;
 }

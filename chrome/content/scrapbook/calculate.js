@@ -55,13 +55,13 @@ var sbCalcService = {
             var index = dir.clone(); index.append("index.html");
             var bytes = sbPropService.getTotalFileSize(id)[0];
             this.grandSum += bytes;
-            var res   = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
+            var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
             var type = sbDataSource.getProperty(res, "type");
             var valid = sbDataSource.exists(res)
                 && !sbDataSource.isolated(res)
                 && ["folder", "separator", "bookmark"].indexOf(type) == -1
                 && index.exists() && index.isFile();
-            var icon  = sbDataSource.getProperty(res, "icon");
+            var icon = sbDataSource.getProperty(res, "icon");
             if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
             this.treeItems.push([
                 id,
@@ -73,7 +73,7 @@ var sbCalcService = {
                 valid,
             ]);
             if ( !valid ) this.invalidCount++;
-            this.STATUS.label   = sbCommonUtils.lang("property", "CALCULATING", [this.count, this.total]);
+            this.STATUS.label = sbCommonUtils.lang("property", "CALCULATING", [this.count, this.total]);
             this.PROGRESS.value = Math.round(this.count / this.total * 100);
         }
         setTimeout(function() { sbCalcService.processAsync(); }, 0);

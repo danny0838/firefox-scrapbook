@@ -26,9 +26,9 @@ var sbRepair = {
         }
         var fileEnum = backupDir.directoryEntries;
         while ( fileEnum.hasMoreElements() ) {
-            var fileObj  = fileEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
+            var fileObj = fileEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
             var fileName = fileObj.leafName;
-            var isMatch  = fileName.match(/^scrapbook_\d{8}\.rdf$/);
+            var isMatch = fileName.match(/^scrapbook_\d{8}\.rdf$/);
             if ( isMatch ) this.treeItems.push([fileName, (new Date(fileObj.lastModifiedTime)).toLocaleString(), fileObj.fileSize]);
         }
         var colIDs = [
@@ -73,8 +73,8 @@ var sbRepair = {
         var i = 0;
         var resEnum = sbDataSource.data.GetAllResources();
         while ( resEnum.hasMoreElements() ) {
-            var res  = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-            var id   = sbDataSource.getProperty(res, "id");
+            var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+            var id = sbDataSource.getProperty(res, "id");
             var icon = sbDataSource.getProperty(res, "icon");
             if ( res.Value == "urn:scrapbook:root" || res.Value == "urn:scrapbook:search" ) continue;
             if ( ++i % 10 == 0 ) document.getElementById("sbRepairFaviconsTextbox").value = res.Value;

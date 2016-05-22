@@ -266,7 +266,7 @@ var sbPageEditor = {
         var sel = this.getSelection(win);
         if ( !sel ) return;
         this.allowUndo(win.document);
-        var selRange  = sel.getRangeAt(0);
+        var selRange = sel.getRangeAt(0);
         var node = selRange.startContainer;
         if ( node.nodeName == "#text" ) node = node.parentNode;
         var nodeRange = win.document.createRange();
@@ -466,15 +466,15 @@ var sbPageEditor = {
     saveResource: function() {
         if ( !this.item ) return;
         if ( !sbDataSource.exists(sbBrowserOverlay.resource) ) { this.disable(true); return; }
-        var newTitle   = document.getElementById("ScrapBookEditTitle").value;
+        var newTitle = document.getElementById("ScrapBookEditTitle").value;
         var newComment = sbCommonUtils.escapeComment(this.COMMENT.value);
-        var newModify  = sbCommonUtils.getTimeStamp();
+        var newModify = sbCommonUtils.getTimeStamp();
         sbDataSource.setProperty(sbBrowserOverlay.resource, "title",   newTitle);
         sbDataSource.setProperty(sbBrowserOverlay.resource, "comment", newComment);
         sbDataSource.setProperty(sbBrowserOverlay.resource, "modify", newModify);
-        this.item.title   = newTitle;
+        this.item.title = newTitle;
         this.item.comment = newComment;
-        this.item.modify  = newModify;
+        this.item.modify = newModify;
         sbCommonUtils.writeIndexDat(this.item);
         sbCommonUtils.documentData(window.content.document, "comment", null);
         sbCommonUtils.documentData(window.content.document, "propertyChanged", false);
@@ -1402,8 +1402,8 @@ var sbDOMEraser = {
         document.getElementById("ScrapBookEditEraser").checked = this.enabled;
         document.getElementById("ScrapBookHighlighter").disabled = this.enabled;
         document.getElementById("ScrapBookEditAnnotation").disabled = this.enabled;
-        document.getElementById("ScrapBookEditHTML").disabled  = this.enabled;
-        document.getElementById("ScrapBookEditCutter").disabled  = this.enabled;
+        document.getElementById("ScrapBookEditHTML").disabled = this.enabled;
+        document.getElementById("ScrapBookEditCutter").disabled = this.enabled;
 
         this._clear();
         if (aStateFlag == 0) {
@@ -2242,12 +2242,12 @@ var sbAnnotationService = {
             mainDiv.style.position = "absolute";
             if (preset) {
                 mainDiv.style.left = targetNode.style.left;
-                mainDiv.style.top  = targetNode.style.top;
+                mainDiv.style.top = targetNode.style.top;
             } else {
                 var left = win.scrollX + Math.round((win.innerWidth - width) / 2);
                 var top = win.scrollY + Math.round((win.innerHeight - height) / 2);
                 mainDiv.style.left = left + "px";
-                mainDiv.style.top  = top  + "px";
+                mainDiv.style.top = top  + "px";
             }
         }
         if (preset) {
@@ -2333,7 +2333,7 @@ var sbAnnotationService = {
         footDiv.style.textAlign = "inherit";
         footDiv.style.height = this.FREENOTE_FOOTER_HEIGHT + "px";
 
-        var button1  = doc.createElement("INPUT");
+        var button1 = doc.createElement("INPUT");
         button1.setAttribute("data-sb-obj", "freenote-save");
         button1.setAttribute("type", "image");
         button1.setAttribute("src", "chrome://scrapbook/skin/freenote_save.gif");
@@ -2343,7 +2343,7 @@ var sbAnnotationService = {
         button1.style.width = "16px";
         button1.style.height = "16px";
         button1.style.verticalAlign = "baseline";
-        var button2  = doc.createElement("INPUT");
+        var button2 = doc.createElement("INPUT");
         button2.setAttribute("data-sb-obj", "freenote-delete");
         button2.setAttribute("type", "image");
         button2.setAttribute("src", "chrome://scrapbook/skin/freenote_delete.gif");

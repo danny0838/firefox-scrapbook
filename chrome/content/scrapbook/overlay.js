@@ -66,8 +66,8 @@ var sbBrowserOverlay = {
         this.editMode = sbPageEditor.TOOLBAR.getAttribute("autoshow") == "true";
         this.infoMode = sbInfoViewer.TOOLBAR.getAttribute("autoshow") == "true";
         // update menus by ui settings
-        document.getElementById("ScrapBookMenu").hidden        = !sbCommonUtils.getPref("ui.menuBar", false);
-        document.getElementById("ScrapBookToolsMenu").hidden   = !sbCommonUtils.getPref("ui.toolsMenu", false);
+        document.getElementById("ScrapBookMenu").hidden = !sbCommonUtils.getPref("ui.menuBar", false);
+        document.getElementById("ScrapBookToolsMenu").hidden = !sbCommonUtils.getPref("ui.toolsMenu", false);
         // -- context menu
         // update if it's shown in a submenu
         var contextMenu = document.getElementById("contentAreaContextMenu");
@@ -288,11 +288,11 @@ var sbBrowserOverlay = {
 
     bookmark: function(aResName, aResIndex, aPreset) {
         var newItem = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
-        newItem.id     = sbDataSource.identify(newItem.id);
-        newItem.type   = "bookmark";
+        newItem.id = sbDataSource.identify(newItem.id);
+        newItem.type = "bookmark";
         newItem.source = window.content.location.href;
-        newItem.title  = gBrowser.selectedTab.label;
-        newItem.icon   = gBrowser.selectedTab.getAttribute("image");
+        newItem.title = gBrowser.selectedTab.label;
+        newItem.icon = gBrowser.selectedTab.getAttribute("image");
         for (var prop in aPreset)
             newItem[prop] = aPreset[prop];
         sbDataSource.addItem(newItem, aResName, aResIndex);
@@ -352,14 +352,14 @@ var sbBrowserOverlay = {
         var selected, onLink, inFrame, onInput;
         try {
             selected = gContextMenu.isTextSelected;
-            onLink   = gContextMenu.onLink && !gContextMenu.onMailtoLink;
-            inFrame  = gContextMenu.inFrame;
-            onInput  = gContextMenu.onTextInput;
+            onLink = gContextMenu.onLink && !gContextMenu.onMailtoLink;
+            inFrame = gContextMenu.inFrame;
+            onInput = gContextMenu.onTextInput;
         } catch(ex) {
             selected = this.isSelected();
-            onLink   = this.getLinkURI() ? true : false;
-            inFrame  = document.popupNode.ownerDocument != window.content.document;
-            onInput  = document.popupNode instanceof HTMLTextAreaElement || 
+            onLink = this.getLinkURI() ? true : false;
+            inFrame = document.popupNode.ownerDocument != window.content.document;
+            onInput = document.popupNode instanceof HTMLTextAreaElement || 
                        (document.popupNode instanceof HTMLInputElement && 
                        (document.popupNode.type == "text" || document.popupNode.type == "password"));
         }
@@ -367,7 +367,7 @@ var sbBrowserOverlay = {
         var getElement = function(aID) {
             return document.getElementById(aID);
         };
-        var prefContext  = sbCommonUtils.getPref("ui.contextMenu", false);
+        var prefContext = sbCommonUtils.getPref("ui.contextMenu", false);
         var prefContextSub = sbCommonUtils.getPref("ui.contextSubMenu", false);
         var prefBookmark = sbCommonUtils.getPref("ui.bookmarkMenu", false);
         getElement("ScrapBookContextSubmenu").hidden = !prefContext || !prefContextSub;
@@ -408,7 +408,7 @@ var sbMenuHandler = {
 
     _init: function() {
         this._menu = document.getElementById("ScrapBookMenu");
-        this.baseURL  = sbCommonUtils.getBaseHref(sbDataSource.data.URI);
+        this.baseURL = sbCommonUtils.getBaseHref(sbDataSource.data.URI);
         var dsEnum = this._menu.database.GetDataSources();
         while (dsEnum.hasMoreElements()) {
             var ds = dsEnum.getNext().QueryInterface(Components.interfaces.nsIRDFDataSource);
@@ -444,7 +444,7 @@ var sbMenuHandler = {
             this._menu.builder.rebuild();
         } else {
             if (event.target.firstChild && event.target.firstChild.className.indexOf("sb-capture") >= 0) {
-                event.target.firstChild.label     = getElement("ScrapBookMenubarItem1").label;
+                event.target.firstChild.label = getElement("ScrapBookMenubarItem1").label;
                 event.target.firstChild.className = getElement("ScrapBookMenubarItem1").className;
                 return;
             }

@@ -39,12 +39,12 @@ var sbHighlighter = {
     set: function(aWindow, aSelection, aNodeName, aAttributes) {
         for ( var r = 0; r < aSelection.rangeCount; ++r ) {
             var range = aSelection.getRangeAt( r ); 
-            var doc      = aWindow.document;
+            var doc = aWindow.document;
 
-            var startC    = range.startContainer;
-            var endC    = range.endContainer;
-            var sOffset    = range.startOffset;
-            var eOffset    = range.endOffset;
+            var startC = range.startContainer;
+            var endC = range.endContainer;
+            var sOffset = range.startOffset;
+            var eOffset = range.endOffset;
             var sameNode = ( startC == endC );
 //sbCommonUtils.alert("startC - "+startC+"\nendC - "+endC+"\nsOffset - "+sOffset+"\neOffset - "+eOffset);
             if ( aNodeName == "a" && !sameNode ) {

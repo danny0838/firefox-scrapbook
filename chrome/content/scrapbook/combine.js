@@ -27,7 +27,7 @@ var sbCombineService = {
         onDrop: function(event, transferData, session) {
             var idxList = window.top.sbTreeHandler.getSelection(false, 2);
             idxList.forEach(function(aIdx) {
-                var res    = window.top.sbTreeHandler.TREE.builderView.getResourceAtIndex(aIdx);
+                var res = window.top.sbTreeHandler.TREE.builderView.getResourceAtIndex(aIdx);
                 var parRes = window.top.sbTreeHandler.getParentResource(aIdx);
                 sbCombineService.add(res, parRes);
             });
@@ -88,7 +88,7 @@ var sbCombineService = {
     },
 */
     updateButtons: function() {
-        this.WIZARD.canRewind  = this.idList.length > 0;
+        this.WIZARD.canRewind = this.idList.length > 0;
         this.WIZARD.canAdvance = this.idList.length > 1;
     },
 
@@ -118,7 +118,7 @@ var sbCombineService = {
 
     next: function() {
         if ( this.index < this.idList.length ) {
-            this.prefix  = "(" + (this.index + 1) + "/" + this.idList.length + ") ";
+            this.prefix = "(" + (this.index + 1) + "/" + this.idList.length + ") ";
             this.postfix = sbDataSource.getProperty(this.resList[this.index], "title");
             var type = sbDataSource.getProperty(this.resList[this.index], "type");
             if  ( type == "file" || type == "bookmark" ) {
@@ -128,7 +128,7 @@ var sbCombineService = {
                 sbInvisibleBrowser.load(sbCommonUtils.getBaseHref(sbDataSource.data.URI) + "data/" + this.curID + "/index.html");
             }
         } else {
-            this.prefix  = "";
+            this.prefix = "";
             this.postfix = "combine.html";
             this.donePreview();
         }
@@ -414,7 +414,7 @@ var sbPageCombiner = {
 
     getCiteHTML: function(aType) {
         // add a thin space between "--" in the comment to prevent exploits
-        var src   = '\n<!--' + sbCombineService.postfix.replace(/--/g, "- -") + '-->\n';
+        var src = '\n<!--' + sbCombineService.postfix.replace(/--/g, "- -") + '-->\n';
         var title = sbDataSource.getProperty(sbCombineService.curRes, "title");
         var linkURL = "";
         switch ( aType ) {

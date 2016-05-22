@@ -117,7 +117,7 @@ var sbMultipleService = {
         this.allURLs = [];
         this.allTitles = [];
         try {
-            var clip  = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
+            var clip = Components.classes['@mozilla.org/widget/clipboard;1'].createInstance(Components.interfaces.nsIClipboard);
             if ( !clip ) return false;
             var trans = Components.classes["@mozilla.org/widget/transferable;1"].createInstance(Components.interfaces.nsITransferable);
             if ( !trans ) return false;
@@ -200,7 +200,7 @@ var sbMultipleService = {
         }
         this.allURLs = [];
         for (var i=0, I=sel.rangeCount; i<I; i++) {
-            var selRange  = sel.getRangeAt(i);
+            var selRange = sel.getRangeAt(i);
             var node = selRange.startContainer;
             if ( node.nodeName == "#text" ) node = node.parentNode;
             var nodeRange = window.opener.top.content.document.createRange();

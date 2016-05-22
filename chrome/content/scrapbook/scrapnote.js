@@ -18,8 +18,8 @@ var sbNoteService = {
         setTimeout(function(){ sbNoteService.locked = false; }, 1000);
         this.save();
         var newItem = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
-        newItem.id    = sbDataSource.identify(newItem.id);
-        newItem.type  = "note";
+        newItem.id = sbDataSource.identify(newItem.id);
+        newItem.type = "note";
         newItem.chars = "UTF-8";
         this.resource = sbDataSource.addItem(newItem, aTarResURI, aTarRelIdx);
         this.notefile = sbCommonUtils.getContentDir(sbDataSource.getProperty(this.resource, "id")).clone();
@@ -67,7 +67,7 @@ var sbNoteService = {
 
     exit: function() {
         this.save();
-        this.resource  = null;
+        this.resource = null;
         this.notefile = null;
         this.change(false);
         if ( this.sidebarContext ) {
