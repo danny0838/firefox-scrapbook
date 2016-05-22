@@ -2,7 +2,7 @@
 var sbMainService = {
 
     baseURL: "",
-    prefs  : {},
+    prefs: {},
 
 
     init: function() {
@@ -188,7 +188,7 @@ var sbMainService = {
         return newRes;
     },
 
-    openPrefWindow : function() {
+    openPrefWindow: function() {
         var instantApply = sbCommonUtils.getPref("browser.preferences.instantApply", false, true);
         window.top.openDialog(
             "chrome://scrapbook/content/prefs.xul", "ScrapBook:Options",
@@ -204,11 +204,11 @@ var sbMainService = {
 var sbController = {
 
     // left for addon compatibility
-    isTreeContext : function(itcEvent) {
+    isTreeContext: function(itcEvent) {
         return true;
     },
 
-    onPopupShowing : function(aEvent) {
+    onPopupShowing: function(aEvent) {
         if (aEvent.originalTarget.localName != "menupopup") return;
         var res = sbTreeHandler.resource;
         if (!res) {
@@ -224,11 +224,11 @@ var sbController = {
         var isMultiple = ( sbTreeHandler.TREE.view.selection.count > 1 );
         if (!isMultiple) {
             switch (sbDataSource.getProperty(res, "type")) {
-                case "file"     : isFile      = true; break;
-                case "note"     : isNote      = true; break;
-                case "notex"    : isNotex     = true; break;
-                case "folder"   : isFolder    = true; break;
-                case "bookmark" : isBookmark  = true; break;
+                case "file": isFile      = true; break;
+                case "note": isNote      = true; break;
+                case "notex": isNotex     = true; break;
+                case "folder": isFolder    = true; break;
+                case "bookmark": isBookmark  = true; break;
                 case "separator": isSeparator = true; break;
             }
         }
@@ -269,10 +269,10 @@ var sbController = {
         if (!id)
             return;
         switch (sbDataSource.getProperty(aRes, "type")) {
-            case "note" :
+            case "note":
                 sbNoteService.open(aRes, aInTab || sbCommonUtils.getPref("tabs.note", false));
                 break;
-            case "bookmark" :
+            case "bookmark":
                 sbCommonUtils.loadURL(
                     sbDataSource.getProperty(aRes, "source"),
                     aInTab || sbCommonUtils.getPref("tabs.open", false)
@@ -280,7 +280,7 @@ var sbController = {
                 break;
             case "separator": 
                 return;
-            default :
+            default:
                 sbCommonUtils.loadURL(
                     sbMainService.baseURL + "data/" + id + "/index.html",
                     aInTab || sbCommonUtils.getPref("tabs.open", false)
@@ -348,15 +348,15 @@ var sbController = {
         }, this);
 
         var options = {
-            "isPartial" : false,
-            "images" : true,
-            "media" : true,
-            "styles" : true,
-            "script" : true,
-            "asHtml" : false,
-            "forceUtf8" : false,
-            "rewriteStyles" : false,
-            "internalize" : refFile,
+            "isPartial": false,
+            "images": true,
+            "media": true,
+            "styles": true,
+            "script": true,
+            "asHtml": false,
+            "forceUtf8": false,
+            "rewriteStyles": false,
+            "internalize": refFile,
         };
         var preset = [
             id,
@@ -531,9 +531,9 @@ var sbController = {
 
 var sbTreeDNDHandler = {
 
-    modAlt   : false,
-    modShift : false,
-    currentDataTransfer : null,
+    modAlt: false,
+    modShift: false,
+    currentDataTransfer: null,
 
     dragDropObserver: {
         onDragStart: function(event, transferData, action) {
@@ -557,7 +557,7 @@ var sbTreeDNDHandler = {
         },
         onDragOver: function() {},
         onDragExit: function() {},
-        onDrop    : function() {},
+        onDrop: function() {},
     },
 
     builderObserver: {
@@ -598,14 +598,14 @@ var sbTreeDNDHandler = {
             }
             sbCommonUtils.rebuildGlobal();
         },
-        onToggleOpenState    : function() {},
-        onCycleHeader        : function() {},
-        onSelectionChanged   : function() {},
-        onCycleCell          : function() {},
-        isEditable           : function() {},
-        onSetCellText        : function() {},
-        onPerformAction      : function() {},
-        onPerformActionOnRow : function() {},
+        onToggleOpenState: function() {},
+        onCycleHeader: function() {},
+        onSelectionChanged: function() {},
+        onCycleCell: function() {},
+        isEditable: function() {},
+        onSetCellText: function() {},
+        onPerformAction: function() {},
+        onPerformActionOnRow: function() {},
         onPerformActionOnCell: function() {},
         getDragData: function (aFlavourSet) {
             var supportsArray = Components.classes["@mozilla.org/supports-array;1"].
@@ -702,7 +702,7 @@ var sbTreeDNDHandler = {
             if (isEntire) {
                 top.window.sbBrowserOverlay.bookmark(res[0], res[1]);
             } else {
-                var arg = { title : aXferString.split("\n")[1], source : url };
+                var arg = { title: aXferString.split("\n")[1], source: url };
                 top.window.sbBrowserOverlay.bookmark(res[0], res[1], arg);
             }
         } else if (isSelected || isEntire) {
@@ -771,9 +771,9 @@ var sbSearchService = {
                .getService(Components.interfaces.nsIFormHistory2 || Components.interfaces.nsIFormHistory);
     },
 
-    type      : "",
-    container : null,
-    treeRef   : "urn:scrapbook:root",
+    type: "",
+    container: null,
+    treeRef: "urn:scrapbook:root",
 
     init: function() {
         this.type = this.ELEMENT.getAttribute("searchtype");
@@ -891,7 +891,7 @@ var sbSearchService = {
         );
     },
 
-    showErrorMessage : function(aStr) {
+    showErrorMessage: function(aStr) {
         sbTreeHandler.TREE.ref = "urn:scrapbook:search";
         sbTreeHandler.TREE.builder.rebuild();
         sbTreeDNDHandler.quit();
@@ -940,10 +940,10 @@ var sbSearchService = {
 
 var sbSearchQueryHandler = {
 
-    hits : null,
+    hits: null,
 
     // parses a given search query string
-    parse : function(aString, aPreset) {
+    parse: function(aString, aPreset) {
         var that = this;
         aPreset = aPreset || [];
         var key = {
@@ -1112,7 +1112,7 @@ var sbSearchQueryHandler = {
     // aRes: the resource object to test
     // aText: text from the fulltext cache; false for a filtering search
     // aFile: file name from the fulltext cache; false for a filtering search
-    match : function(aKey, aRes, aText, aFile) {
+    match: function(aKey, aRes, aText, aFile) {
         this.hits = {};
         for (var i in aKey.rule) {
             if (!this['_match_'+i](aKey.rule[i], aRes, aText, aFile)) return false;
@@ -1120,7 +1120,7 @@ var sbSearchQueryHandler = {
         return this.hits;
     },
 
-    _match_tcc : function(aKeyItem, aRes, aText, aFile) {
+    _match_tcc: function(aKeyItem, aRes, aText, aFile) {
         var title = sbDataSource.getProperty(aRes, "title");
         var comment = sbDataSource.getProperty(aRes, "comment");
         var content = aText || "";
@@ -1163,11 +1163,11 @@ var sbSearchQueryHandler = {
         return true;
     },
 
-    _match_content : function(aKeyItem, aRes, aText, aFile) {
+    _match_content: function(aKeyItem, aRes, aText, aFile) {
         return this.matchText(aKeyItem, "content", aText || "");
     },
 
-    _match_all : function(aKeyItem, aRes, aText, aFile) {
+    _match_all: function(aKeyItem, aRes, aText, aFile) {
         var title = sbDataSource.getProperty(aRes, "title");
         var comment = sbDataSource.getProperty(aRes, "comment");
         var id = sbDataSource.getProperty(aRes, "id");
@@ -1175,27 +1175,27 @@ var sbSearchQueryHandler = {
         return this.matchText(aKeyItem, "all", [title, comment, source, id].join("\n"));
     },
 
-    _match_id : function(aKeyItem, aRes, aText, aFile) {
+    _match_id: function(aKeyItem, aRes, aText, aFile) {
         return this.matchText(aKeyItem, "id", sbDataSource.getProperty(aRes, "id"));
     },
 
-    _match_file : function(aKeyItem, aRes, aText, aFile) {
+    _match_file: function(aKeyItem, aRes, aText, aFile) {
         return this.matchText(aKeyItem, "file", aFile || "");
     },
 
-    _match_title : function(aKeyItem, aRes, aText, aFile) {
+    _match_title: function(aKeyItem, aRes, aText, aFile) {
         return this.matchText(aKeyItem, "title", sbDataSource.getProperty(aRes, "title"));
     },
 
-    _match_comment : function(aKeyItem, aRes, aText, aFile) {
+    _match_comment: function(aKeyItem, aRes, aText, aFile) {
         return this.matchText(aKeyItem, "comment", sbDataSource.getProperty(aRes, "comment"));
     },
 
-    _match_source : function(aKeyItem, aRes, aText, aFile) {
+    _match_source: function(aKeyItem, aRes, aText, aFile) {
         return this.matchText(aKeyItem, "source", sbDataSource.getProperty(aRes, "source"));
     },
 
-    _match_type : function(aKeyItem, aRes, aText, aFile) {
+    _match_type: function(aKeyItem, aRes, aText, aFile) {
         var type = sbDataSource.getProperty(aRes, "type");
         for (var i=0, len=aKeyItem.exclude.length; i<len; i++) {
             if (type == aKeyItem.exclude[i]) {
@@ -1212,15 +1212,15 @@ var sbSearchQueryHandler = {
         return false;
     },
 
-    _match_create : function(aKeyItem, aRes, aText, aFile) {
+    _match_create: function(aKeyItem, aRes, aText, aFile) {
         return this.matchDate(aKeyItem, sbDataSource.getProperty(aRes, "create"));
     },
 
-    _match_modify : function(aKeyItem, aRes, aText, aFile) {
+    _match_modify: function(aKeyItem, aRes, aText, aFile) {
         return this.matchDate(aKeyItem, sbDataSource.getProperty(aRes, "modify"));
     },
 
-    matchText : function(aKeyItem, aKeyName, aText) {
+    matchText: function(aKeyItem, aKeyName, aText) {
         var regex;
         for (var i=0, len=aKeyItem.exclude.length; i<len; i++) {
             regex = aKeyItem.exclude[i];
@@ -1241,7 +1241,7 @@ var sbSearchQueryHandler = {
         return true;
     },
 
-    matchDate : function(aKeyItem, aDate) {
+    matchDate: function(aKeyItem, aDate) {
         if (!aDate) return false;
         var aDate = parseInt(aDate, 10);
         for (var i=0, len=aKeyItem.exclude.length; i<len; i++) {
@@ -1257,7 +1257,7 @@ var sbSearchQueryHandler = {
         return true;
     },
 
-    updateHits : function(name, index) {
+    updateHits: function(name, index) {
         if (this.hits[name] === undefined || index < this.hits[name]) this.hits[name] = index;
     },
 

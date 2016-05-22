@@ -5,15 +5,15 @@ var sbMultipleService = {
     get STATUS()  { return document.getElementById("sbStatus"); },
     get TEXTBOX() { return document.getElementById("ScrapBookTextbox"); },
 
-    vorhLinks : [],
-    allURLs : [],
-    allTitles : [],
-    selURLs : [],
-    selTitles : [],
-    currentID : null,
-    lastID : null,
+    vorhLinks: [],
+    allURLs: [],
+    allTitles: [],
+    selURLs: [],
+    selTitles: [],
+    currentID: null,
+    lastID: null,
 
-    init : function() {
+    init: function() {
         document.documentElement.buttons = "accept,cancel,extra2";
         document.documentElement.getButton("accept").label = sbCommonUtils.lang("scrapbook", "CAPTURE_OK_BUTTON");
         document.documentElement.getButton("accept").accesskey = "C";
@@ -22,7 +22,7 @@ var sbMultipleService = {
         setTimeout(function(){ sbMultipleService.pasteClipboardURL(); }, 0);
     },
 
-    done : function() {
+    done: function() {
         var allURLs = [];
         var urlList = [];
         var namList = [];
@@ -63,7 +63,7 @@ var sbMultipleService = {
         window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
     },
 
-    addURL : function(auAllHash, auExclude) {
+    addURL: function(auAllHash, auExclude) {
         var auAll = "";
         var auSelected = 0;
         var auCount = 0;
@@ -107,11 +107,11 @@ var sbMultipleService = {
         this.TEXTBOX.value = auAll;
     },
 
-    clear : function() {
+    clear: function() {
         this.TEXTBOX.value = "";
     },
 
-    pasteClipboardURL : function() {
+    pasteClipboardURL: function() {
         var pcuAllHash = {};
         var pcuLines = [];
         this.allURLs = [];
@@ -149,7 +149,7 @@ var sbMultipleService = {
         }
     },
 
-    detectURLsOfTabs : function() {
+    detectURLsOfTabs: function() {
         this.clear();
         var duotURL = "";
         var duotAllHash = {};
@@ -165,14 +165,14 @@ var sbMultipleService = {
         this.addURL(duotAllHash);
     },
 
-    detectURLsInPage : function() {
+    detectURLsInPage: function() {
         this.clear();
         var duipURL = "";
         var duipAllHash = {};
         var node = window.opener.top.content.document.body;
         this.allURLs = [];
         this.allTitles = [];
-        traceTree : while ( true ) {
+        traceTree: while ( true ) {
             if ( node instanceof HTMLAnchorElement || node instanceof HTMLAreaElement ) {
                 duipURL = node.href;
                 if ( duipURL.match(/^(http|https|ftp|file):\/\//) ) {
@@ -189,7 +189,7 @@ var sbMultipleService = {
         this.addURL(duipAllHash);
     },
 
-    detectURLsInSelection : function() {
+    detectURLsInSelection: function() {
         this.clear();
         var duisURL = "";
         var duisAllHash = {};
@@ -204,7 +204,7 @@ var sbMultipleService = {
             var node = selRange.startContainer;
             if ( node.nodeName == "#text" ) node = node.parentNode;
             var nodeRange = window.opener.top.content.document.createRange();
-            traceTree : while ( true ) {
+            traceTree: while ( true ) {
                 nodeRange.selectNode(node);
                 if ( nodeRange.compareBoundaryPoints(Range.START_TO_END, selRange) > -1 ) {
                     if ( nodeRange.compareBoundaryPoints(Range.END_TO_START, selRange) > 0 ) {
@@ -227,7 +227,7 @@ var sbMultipleService = {
         this.addURL(duisAllHash);
     },
 
-    detectExistingLinks : function() {
+    detectExistingLinks: function() {
         //Funktion ermittelt die Links der vorhandenen Einträge im aktuell gewählten Zielverzeichnis
         var delResource = null;
         var delRDFCont = null;
@@ -246,7 +246,7 @@ var sbMultipleService = {
         }
     },
 
-    updateSelection : function(usEvent) {
+    updateSelection: function(usEvent) {
         //Funktion aktualisiert den Inhalt der aktuellen Auswahl
         var usCount = this.allURLs.length;
         var usAllHash = {};
@@ -269,7 +269,7 @@ var sbMultipleService = {
         this.addURL(usAllHash, usExclude);
     },
 
-    toggleMethod : function() {
+    toggleMethod: function() {
         //Funktion aktiviert bzw. deaktiviert die Zeichensatzauswahl
         var tmMethod = document.getElementById("sbMethod").value;
         if ( tmMethod == "SB" ) {
@@ -286,9 +286,9 @@ var sbMultipleService = {
 
 var sbURLDetector1 = {
 
-    index : 0,
+    index: 0,
 
-    run : function() {
+    run: function() {
         this.index = 0;
         var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
         FP.init(window, "", FP.modeGetFolder);
@@ -299,7 +299,7 @@ var sbURLDetector1 = {
         }
     },
 
-    inspectDirectory : function(aDir, curIdx) {
+    inspectDirectory: function(aDir, curIdx) {
         sbMultipleService.STATUS.value = sbCommonUtils.lang("scrapbook", "SCANNING_DIR", [curIdx, this.index, aDir.path]);
         var entries = aDir.directoryEntries;
         while ( entries.hasMoreElements() ) {
@@ -317,7 +317,7 @@ var sbURLDetector1 = {
         if ( curIdx == this.index ) sbMultipleService.STATUS.value = "";
     },
 
-    inspectDirectoryWithDelay : function(aDir, aIndex) {
+    inspectDirectoryWithDelay: function(aDir, aIndex) {
         setTimeout(function(){ sbURLDetector1.inspectDirectory(aDir, aIndex); }, 200 * aIndex);
     },
 
@@ -326,13 +326,13 @@ var sbURLDetector1 = {
 
 var sbURLDetector2 = {
 
-    type   : "",
-    index  : 0,
-    lines  : [],
-    result : "",
-    weboxBaseURL : "",
+    type: "",
+    index: 0,
+    lines: [],
+    result: "",
+    weboxBaseURL: "",
 
-    run : function(aType) {
+    run: function(aType) {
         this.type = aType;
         this.index = 0;
         this.lines = [];
@@ -360,7 +360,7 @@ var sbURLDetector2 = {
         this.inspect();
     },
 
-    inspect : function() {
+    inspect: function() {
         sbMultipleService.STATUS.value = sbCommonUtils.lang("scrapbook", "SCANNING", [this.index, (this.lines.length-1)]);
         this.result += "\n";
         if ( this.type == "W" ) {

@@ -11,10 +11,10 @@ var sbBrowserOverlay = {
         onLocationChange: function(aProgress, aRequest, aURI) {
             sbBrowserOverlay.onLocationChange(aURI ? aURI.spec : "about:blank");
         },
-        onStateChange      : function(){},
-        onProgressChange   : function(){},
-        onStatusChange     : function(){},
-        onSecurityChange   : function(){},
+        onStateChange: function(){},
+        onProgressChange: function(){},
+        onStatusChange: function(){},
+        onSecurityChange: function(){},
         onLinkIconAvailable: function(){},
         QueryInterface: function(aIID) {
             if (aIID.equals(Components.interfaces.nsIWebProgressListener) ||
@@ -36,11 +36,11 @@ var sbBrowserOverlay = {
             elt.setAttribute("accesskey", key);
         }
         var keyMap = {
-            "key.sidebar"       : "key_openScrapBookSidebar",
-            "key.capture"       : "key_ScrapBookCapture",
-            "key.captureAs"     : "key_ScrapBookCaptureAs",
+            "key.sidebar": "key_openScrapBookSidebar",
+            "key.capture": "key_ScrapBookCapture",
+            "key.captureAs": "key_ScrapBookCaptureAs",
             "key.captureAllTabs": "key_ScrapBookSaveAllTabs",
-            "key.bookmark"      : "key_BookmarkWithScrapBook",
+            "key.bookmark": "key_BookmarkWithScrapBook",
         };
         for (let [pref, id] in Iterator(keyMap)) {
             var key = sbCommonUtils.getPref(pref, "");
@@ -212,7 +212,7 @@ var sbBrowserOverlay = {
             aPopup.removeChild(aPopup.lastChild);
     },
 
-    updateFolderPref : function(aResURI) {
+    updateFolderPref: function(aResURI) {
         if ( aResURI == "urn:scrapbook:root" ) return;
         var oldIDs = sbCommonUtils.getPref("ui.folderList", "");
         oldIDs = oldIDs ? oldIDs.split("|") : [];
@@ -225,7 +225,7 @@ var sbBrowserOverlay = {
         sbCommonUtils.writeFile(file, newIDs, "UTF-8");
     },
 
-    verifyTargetID : function(aTargetID) {
+    verifyTargetID: function(aTargetID) {
         if (aTargetID == "ScrapBookContextPicking") {
             var ret = {};
             window.openDialog(
@@ -239,7 +239,7 @@ var sbBrowserOverlay = {
         return aTargetID;
     },
 
-    execCapture : function(aPartialEntire, aFrameOnly, aShowDetail, aTargetID) {
+    execCapture: function(aPartialEntire, aFrameOnly, aShowDetail, aTargetID) {
         if ( aPartialEntire == 0 ) {
             aPartialEntire = this.isSelected() ? 1 : 2;
             aFrameOnly = aPartialEntire == 1;
@@ -251,7 +251,7 @@ var sbBrowserOverlay = {
         return ret;
     },
 
-    execCaptureTarget : function(aShowDetail, aTargetID) {
+    execCaptureTarget: function(aShowDetail, aTargetID) {
         aTargetID = this.verifyTargetID(aTargetID);
         if ( !aTargetID ) return;
         var linkURL;
@@ -332,7 +332,7 @@ var sbBrowserOverlay = {
             return linkURL;
     },
 
-    isSelected : function() {
+    isSelected: function() {
         var sel = sbCommonUtils.getFocusedWindow().getSelection().QueryInterface(Components.interfaces.nsISelectionPrivate);
         var isSelected = false;
         try {
@@ -346,7 +346,7 @@ var sbBrowserOverlay = {
             this.onPopupShowing(event);
     },
 
-    onPopupShowing : function(event) {
+    onPopupShowing: function(event) {
         if (event.originalTarget.id != "contentAreaContextMenu")
             return;
         var selected, onLink, inFrame, onInput;
@@ -388,10 +388,10 @@ var sbBrowserOverlay = {
         if (event.originalTarget.localName == "menu" || event.button != 1)
             return;
         switch (aFlag) {
-            case 1 : this.execCapture(1, true, true , event.originalTarget.id); break;
-            case 3 : this.execCapture(2, false,true , event.originalTarget.id); break;
-            case 5 : this.execCapture(2, true, true , event.originalTarget.id); break;
-            case 7 : this.execCaptureTarget(true,  event.originalTarget.id); break;
+            case 1: this.execCapture(1, true, true , event.originalTarget.id); break;
+            case 3: this.execCapture(2, false,true , event.originalTarget.id); break;
+            case 5: this.execCapture(2, true, true , event.originalTarget.id); break;
+            case 7: this.execCaptureTarget(true,  event.originalTarget.id); break;
         }
     },
 
@@ -489,9 +489,9 @@ var sbMenuHandler = {
             return;
         var url;
         switch (sbDataSource.getProperty(res, "type")) {
-            case "note"     : url = "chrome://scrapbook/content/note.xul?id=" + id; break;
-            case "bookmark" : url = sbDataSource.getProperty(res, "source");        break;
-            default         : url = this.baseURL + "data/" + id + "/index.html";
+            case "note": url = "chrome://scrapbook/content/note.xul?id=" + id; break;
+            case "bookmark": url = sbDataSource.getProperty(res, "source"); break;
+            default: url = this.baseURL + "data/" + id + "/index.html";
         }
         var openInTab = sbCommonUtils.getPref("tabs.open", false);
         sbCommonUtils.loadURL(url, openInTab || event.button == 1 || event.ctrlKey || event.shiftKey);

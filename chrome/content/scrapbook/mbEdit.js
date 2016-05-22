@@ -1,7 +1,7 @@
 var mbEditDialog = {
 
     _nameTextbox: null,
-    _pathField  : null,
+    _pathField: null,
 
     init: function() {
         if (!window.arguments)

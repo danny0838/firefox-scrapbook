@@ -3,17 +3,17 @@ var sbPropService = {
 
     get ICON()   { return document.getElementById("sbPropIcon"); },
 
-    id       : null,
-    item     : null,
-    resource : null,
+    id: null,
+    item: null,
+    resource: null,
     isTypeSeparator: false,
-    isTypeBookmark : false,
-    isTypeFolder   : false,
-    isTypeNote     : false,
-    isTypeFile     : false,
-    isTypeSite     : false,
+    isTypeBookmark: false,
+    isTypeFolder: false,
+    isTypeNote: false,
+    isTypeFile: false,
+    isTypeSite: false,
 
-    init : function() {
+    init: function() {
         if (!window.arguments) { window.close(); return; }
         // get item and properties
         this.id = window.arguments[0];
@@ -67,14 +67,14 @@ var sbPropService = {
         var bundleName = "TYPE_PAGE";
         switch (this.item.type) {
             case "separator": this.isTypeSeparator = true; bundleName = "TYPE_SEPARATOR"; break;
-            case "bookmark" : this.isTypeBookmark  = true; bundleName = "TYPE_BOOKMARK";  break;
-            case "folder"   : this.isTypeFolder    = true; bundleName = "TYPE_FOLDER";    break;
-            case "note"     : this.isTypeNote      = true; bundleName = "TYPE_NOTE";      break;
-            case "notex"    : this.isTypeNotex     = true; bundleName = "TYPE_NOTEX";      break;
-            case "file"     : 
-            case "image"    : this.isTypeFile      = true; bundleName = "TYPE_FILE";      break;
-            case "combine"  : this.isTypeSite      = true; bundleName = "TYPE_COMBINE";   break;
-            case "site"     : this.isTypeSite      = true; bundleName = "TYPE_INDEPTH";   break;
+            case "bookmark": this.isTypeBookmark  = true; bundleName = "TYPE_BOOKMARK";  break;
+            case "folder": this.isTypeFolder    = true; bundleName = "TYPE_FOLDER";    break;
+            case "note": this.isTypeNote      = true; bundleName = "TYPE_NOTE";      break;
+            case "notex": this.isTypeNotex     = true; bundleName = "TYPE_NOTEX";      break;
+            case "file": 
+            case "image": this.isTypeFile      = true; bundleName = "TYPE_FILE";      break;
+            case "combine": this.isTypeSite      = true; bundleName = "TYPE_COMBINE";   break;
+            case "site": this.isTypeSite      = true; bundleName = "TYPE_INDEPTH";   break;
         }
         document.getElementById("sbPropType").value = sbCommonUtils.lang("property", bundleName);
         document.getElementById("sbPropSourceRow").hidden = this.isTypeFolder || this.isTypeNote || this.isTypeSeparator;
@@ -92,19 +92,19 @@ var sbPropService = {
             setTimeout(function(){ sbPropService.delayedInit(); }, 0);
     },
 
-    delayedInit : function() {
+    delayedInit: function() {
         var sizeCount = this.getTotalFileSize(this.id);
         document.getElementById("sbPropSize").value = sbCommonUtils.lang("property", "FILES_COUNT", [sbPropService.formatFileSize(sizeCount[0]), sizeCount[1], sizeCount[2]]);
     },
 
-    accept : function() {
+    accept: function() {
         var newVals = {
-            title   : document.getElementById("sbPropTitle").value,
-            source  : document.getElementById("sbPropSource").value,
-            comment : sbCommonUtils.escapeComment(document.getElementById("sbPropComment").value),
-            type    : this.item.type,
-            icon    : this.getIconURL(),
-            chars   : document.getElementById("sbPropChars").value
+            title: document.getElementById("sbPropTitle").value,
+            source: document.getElementById("sbPropSource").value,
+            comment: sbCommonUtils.escapeComment(document.getElementById("sbPropComment").value),
+            type: this.item.type,
+            icon: this.getIconURL(),
+            chars: document.getElementById("sbPropChars").value
         };
         if (!this.isTypeSeparator && !document.getElementById("sbPropMark").hidden)
             newVals.type = document.getElementById("sbPropMark").checked ? "marked" : "";
@@ -134,27 +134,27 @@ var sbPropService = {
             window.arguments[1].accept = true;
     },
 
-    cancel : function() {
+    cancel: function() {
         if ( window.arguments[1] ) window.arguments[1].accept = false;
     },
 
-    fillTitle : function(aPopupElem) {
+    fillTitle: function(aPopupElem) {
         if ( this.isTypeFolder || this.isTypeNote || this.isTypeFile || this.isTypeBookmark ) return;
         if ( !aPopupElem.hasChildNodes() ) {
             aPopupElem.parentNode.appendItem(this.getHTMLTitle(this.id, this.item.chars));
         }
     },
 
-    setDefaultIcon : function() {
+    setDefaultIcon: function() {
         this.ICON.src = sbCommonUtils.getDefaultIcon(this.item.type);
     },
 
-    getIconURL : function() {
+    getIconURL: function() {
         var iconURL = this.ICON.src;
         return ( iconURL.indexOf("chrome://scrapbook/skin/") == 0 ) ? "" : iconURL;
     },
 
-    pickupIcon : function(aCommand, aPickerLabel) {
+    pickupIcon: function(aCommand, aPickerLabel) {
         var dir;
         if ( aCommand == "F" ) {
             dir = sbCommonUtils.getContentDir(this.item.id, true);
@@ -181,13 +181,13 @@ var sbPropService = {
         }
     },
 
-    setIconURL : function() {
-        var ret = { value : this.getIconURL() };
+    setIconURL: function() {
+        var ret = { value: this.getIconURL() };
         if ( !sbCommonUtils.PROMPT.prompt(window, document.getElementById("sbPropIconMenu").label, sbCommonUtils.lang("property", "ADDRESS"), ret, null, {}) ) return;
         if ( ret.value ) this.ICON.src = ret.value;
     },
 
-    updateCommentTab : function(aComment) {
+    updateCommentTab: function(aComment) {
         var elem = document.getElementById("sbPropCommentTab");
         if ( aComment ) {
             elem.setAttribute("image", "chrome://scrapbook/skin/edit_comment.png");
@@ -196,7 +196,7 @@ var sbPropService = {
         }
     },
 
-    getHTMLTitle : function(aID, aChars) {
+    getHTMLTitle: function(aID, aChars) {
         var file  = sbCommonUtils.getContentDir(aID, true);
         if ( !file ) return "";
         file.append("index.html");
@@ -204,7 +204,7 @@ var sbPropService = {
         return content.match(/<title>([^<]+?)<\/title>/im) ? RegExp.$1 : "";
     },
 
-    getTotalFileSize : function(aID) {
+    getTotalFileSize: function(aID) {
         var totalSize = 0;
         var totalFile = 0;
         var totalDir  = 0;
@@ -225,7 +225,7 @@ var sbPropService = {
         return [totalSize, totalFile, totalDir];
     },
 
-    formatFileSize : function(aBytes) {
+    formatFileSize: function(aBytes) {
         if ( aBytes > 1000 * 1000 ) {
             return this.divideBy100( Math.round( aBytes / 1024 / 1024 * 100 ) ) + " MB";
         } else if ( aBytes == 0 ) {
@@ -236,7 +236,7 @@ var sbPropService = {
         }
     },
 
-    divideBy100 : function(aInt) {
+    divideBy100: function(aInt) {
         if ( aInt % 100 == 0 ) {
             return aInt / 100 + ".00";
         } else if ( aInt % 10 == 0 ) {

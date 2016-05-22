@@ -1,7 +1,7 @@
 
 var sbFolderPicker = {
 
-    init : function() {
+    init: function() {
         sbTreeHandler.init(true);
         document.documentElement.buttons = "accept,cancel,extra2";
         document.documentElement.getButton("extra2").className += " sb-create";
@@ -16,11 +16,11 @@ var sbFolderPicker = {
         }
     },
 
-    update : function() {
+    update: function() {
         document.getElementById("sbFolderPickerRoot").checked = sbTreeHandler.TREE.view.selection.count == 0;
     },
 
-    accept : function() {
+    accept: function() {
         if ( document.getElementById("sbFolderPickerRoot").checked ) {
             window.arguments[0].resource = sbCommonUtils.RDF.GetResource(sbTreeHandler.TREE.ref);
             window.arguments[0].title    = sbCommonUtils.lang("scrapbook", "ROOT_FOLDER");
@@ -41,12 +41,12 @@ var sbFolderSelector2 = {
     get TEXTBOX(){ return document.getElementById("sbFolderTextbox"); },
     get resURI() { return this.TEXTBOX.getAttribute("resuri"); },
 
-    init : function() {
+    init: function() {
         this.TEXTBOX.value = sbCommonUtils.lang("scrapbook", "ROOT_FOLDER");
         this.TEXTBOX.setAttribute("resuri", "urn:scrapbook:root");
     },
 
-    pick : function() {
+    pick: function() {
         var ret = {};
         //this.RES_URI durch this.resURI ersetzt
         window.openDialog('chrome://scrapbook/content/folderPicker.xul','','modal,chrome,centerscreen,resizable=yes', ret, this.resURI);

@@ -14,9 +14,9 @@ var sbPrefWindow = {
         }
         if (navigator.platform.substr(0, 3) == "Mac") {
             var modifiersMap = {
-                "Ctrl" : "command",
+                "Ctrl": "command",
                 "Shift": "shift",
-                "Alt"  : "option",
+                "Alt": "option",
             };
             for (let [win, mac] in Iterator(modifiersMap)) {
                 var elts = document.querySelectorAll("label[value*='" + win + "']");

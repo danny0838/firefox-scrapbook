@@ -8,23 +8,23 @@ var sbCombineService = {
     get curRes()  { return this.resList[this.index]; },
 
 
-    index   : 0,
-    idList  : [],
-    resList : [],
-    parList : [],
-    option  : {},
-    prefix  : "",
-    postfix : "",
+    index: 0,
+    idList: [],
+    resList: [],
+    parList: [],
+    option: {},
+    prefix: "",
+    postfix: "",
 
-    dropObserver : {
-        getSupportedFlavours : function() {
+    dropObserver: {
+        getSupportedFlavours: function() {
             var flavours = new FlavourSet();
             flavours.appendFlavour("moz/rdfitem");
             return flavours;
         },
-        onDragOver : function(event, flavour, session) {},
-        onDragExit : function(event, session) {},
-        onDrop     : function(event, transferData, session) {
+        onDragOver: function(event, flavour, session) {},
+        onDragExit: function(event, session) {},
+        onDrop: function(event, transferData, session) {
             var idxList = window.top.sbTreeHandler.getSelection(false, 2);
             idxList.forEach(function(aIdx) {
                 var res    = window.top.sbTreeHandler.TREE.builderView.getResourceAtIndex(aIdx);
@@ -35,11 +35,11 @@ var sbCombineService = {
     },
 
 
-    init : function() {
+    init: function() {
         //Block wird benötigt, um Korrekturen bei fehlerhafter Zusammenstellung zu erlauben
         this.toggleElements(true);
         //Ende Block
-        gOption = { "script" : true, "images" : true };
+        gOption = { "script": true, "images": true };
         if ( window.top.location.href != "chrome://scrapbook/content/manage.xul" ) {
             document.documentElement.collapsed = true;
             return;
@@ -55,11 +55,11 @@ var sbCombineService = {
         this.updateButtons();
     },
 
-    done : function() {
+    done: function() {
         window.top.document.getElementById("mbToolbarButton").disabled = false;
     },
 
-    add : function(aRes, aParRes) {
+    add: function(aRes, aParRes) {
         if ( this.resList.indexOf(aRes) != -1 ) return;
         var type = sbDataSource.getProperty(aRes, "type");
         if (type == "folder" || type == "separator")
@@ -78,7 +78,7 @@ var sbCombineService = {
         this.updateButtons();
     },
 /*
-    undo : function() {
+    undo: function() {
         if ( this.idList.length == 0 ) return;
         this.LISTBOX.removeItemAt(this.idList.length - 1);
         this.idList.pop();
@@ -87,12 +87,12 @@ var sbCombineService = {
         this.updateButtons();
     },
 */
-    updateButtons : function() {
+    updateButtons: function() {
         this.WIZARD.canRewind  = this.idList.length > 0;
         this.WIZARD.canAdvance = this.idList.length > 1;
     },
 
-    initPreview : function() {
+    initPreview: function() {
 //        this.WIZARD.canRewind = false;
         this.WIZARD.canAdvance = false;
 //        this.WIZARD.getButton("back").onclick = null;
@@ -116,7 +116,7 @@ var sbCombineService = {
         this.next();
     },
 
-    next : function() {
+    next: function() {
         if ( this.index < this.idList.length ) {
             this.prefix  = "(" + (this.index + 1) + "/" + this.idList.length + ") ";
             this.postfix = sbDataSource.getProperty(this.resList[this.index], "title");
@@ -134,7 +134,7 @@ var sbCombineService = {
         }
     },
 
-    donePreview : function() {
+    donePreview: function() {
         var htmlFile = sbCommonUtils.getScrapBookDir();
         htmlFile.append("combine.html");
         sbCommonUtils.writeFile(htmlFile, sbPageCombiner.htmlSrc, "UTF-8");
@@ -147,7 +147,7 @@ var sbCombineService = {
         sbInvisibleBrowser.load(sbCommonUtils.convertFilePathToURL(htmlFile.path));
     },
 
-    showBrowser : function() {
+    showBrowser: function() {
         this.toggleElements(false);
         sbInvisibleBrowser.ELEMENT.onclick = function(aEvent){ aEvent.preventDefault(); };
         this.WIZARD.getButton("back").disabled = false;
@@ -156,7 +156,7 @@ var sbCombineService = {
         this.WIZARD.getButton("cancel").disabled = false;
     },
 
-    abort : function() {
+    abort: function() {
         this.WIZARD.getButton("back").disabled = true;
         this.WIZARD.getButton("finish").disabled = true;
         this.WIZARD.getButton("cancel").disabled = true;
@@ -165,7 +165,7 @@ var sbCombineService = {
         }, 500);
     },
 
-    finish : function() {
+    finish: function() {
         this.WIZARD.getButton("finish").disabled = true;
         this.WIZARD.getButton("cancel").disabled = true;
         this.option["R"] = document.getElementById("sbCombineOptionRemove").checked;
@@ -175,12 +175,12 @@ var sbCombineService = {
         setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null); }, 0);
     },
 
-    toggleElements : function(isProgressMode) {
+    toggleElements: function(isProgressMode) {
         sbInvisibleBrowser.ELEMENT.collapsed = isProgressMode;
         document.getElementById("sbCaptureTextbox").collapsed = !isProgressMode;
     },
 
-    onCombineComplete : function(aItem) {
+    onCombineComplete: function(aItem) {
         var newRes = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id);
         sbDataSource.setProperty(newRes, "type", "combine");
         sbDataSource.setProperty(newRes, "source", sbDataSource.getProperty(this.resList[0], "source"));
@@ -196,7 +196,7 @@ var sbCombineService = {
         return newRes;
     },
 
-    deleteItem : function() {
+    deleteItem: function() {
         //Index festhalten
         var diIndex = this.LISTBOX.selectedIndex;
         var diCount = this.LISTBOX.getRowCount();
@@ -214,7 +214,7 @@ var sbCombineService = {
         this.updateButtons();
     },
 
-    moveDown : function() {
+    moveDown: function() {
         var mdIndex = this.LISTBOX.selectedIndex;
         //Reihenfolge ändern
         var mdPuffer = this.idList[mdIndex];
@@ -234,7 +234,7 @@ var sbCombineService = {
         this.toggleButtons();
     },
 
-    moveUp : function() {
+    moveUp: function() {
         //Index bestimmen
         var muIndex = this.LISTBOX.selectedIndex;
         //Reihenfolge ändern
@@ -255,7 +255,7 @@ var sbCombineService = {
         this.toggleButtons();
     },
 
-    toggleButtons : function() {
+    toggleButtons: function() {
         var tbIndex = this.LISTBOX.selectedIndex;
         var tbEintraege = this.LISTBOX.getRowCount();
         if ( tbEintraege>1 ) {
@@ -318,14 +318,14 @@ var sbPageCombiner = {
     get BROWSER(){ return document.getElementById("sbCaptureBrowser"); },
     get BODY()   { return this.BROWSER.contentDocument.body; },
 
-    htmlSrc : "",
-    cssText : "",
-    isTargetCombined : false,
+    htmlSrc: "",
+    cssText: "",
+    isTargetCombined: false,
     htmlId: "",
     bodyId: "",
-    refreshHash : null,
+    refreshHash: null,
 
-    exec : function(aType) {
+    exec: function(aType) {
         // check for meta refresh
         var metaElems = this.BROWSER.contentDocument.getElementsByTagName("meta");
         for ( var i = 0; i < metaElems.length; i++ ) {
@@ -412,13 +412,13 @@ var sbPageCombiner = {
         sbCombineService.next();
     },
 
-    getCiteHTML : function(aType) {
+    getCiteHTML: function(aType) {
         // add a thin space between "--" in the comment to prevent exploits
         var src   = '\n<!--' + sbCombineService.postfix.replace(/--/g, "- -") + '-->\n';
         var title = sbDataSource.getProperty(sbCombineService.curRes, "title");
         var linkURL = "";
         switch ( aType ) {
-            case "file" :
+            case "file":
                 var htmlFile = sbCommonUtils.getContentDir(sbCombineService.curID);
                 htmlFile.append("index.html");
                 if (sbCommonUtils.readFile(htmlFile).match(/\s*content="\d+;URL=([^"]+)"/i)) {
@@ -430,9 +430,9 @@ var sbPageCombiner = {
                     linkURL = sbCommonUtils.convertFilePathToURL(file2.path);
                 }
                 break;
-            case "note" :
+            case "note":
                 linkURL = ""; break;
-            default :
+            default:
                 linkURL = sbDataSource.getProperty(sbCombineService.curRes, "source"); break;
         }
         var icon = sbDataSource.getProperty(sbCombineService.curRes, "icon");
@@ -445,7 +445,7 @@ var sbPageCombiner = {
         return src;
     },
 
-    surroundDOM : function() {
+    surroundDOM: function() {
         if ( this.BODY.localName.toUpperCase() != "BODY" ) {
             sbCommonUtils.alert(sbCommonUtils.lang("combine", "CANNOT_COMBINE_FRAMES", [sbDataSource.getProperty(sbCombineService.curRes, "title")]));
             this.BROWSER.stop();
@@ -474,13 +474,13 @@ var sbPageCombiner = {
         return sbCommonUtils.surroundByTags(divWrap, divHTML + "\n");
     },
 
-    surroundDOMCombined : function() {
+    surroundDOMCombined: function() {
         var divWrap = this.BROWSER.contentDocument.createElement("DIV");
         divWrap.id = "item" + sbCombineService.curID;
         return sbCommonUtils.surroundByTags(divWrap, this.BODY.innerHTML);
     },
 
-    surroundCSS : function() {
+    surroundCSS: function() {
         this.htmlId = this.BROWSER.contentDocument.getElementsByTagName("html")[0].id;
         this.bodyId = this.BODY.id;
         var ret = "";
@@ -490,7 +490,7 @@ var sbPageCombiner = {
         return ret + "\n\n";
     },
 
-    processCSSRecursively : function(aCSS) {
+    processCSSRecursively: function(aCSS) {
         var ret = "";
         // a special stylesheet used by scrapbook, skip parsing it
         if (aCSS.ownerNode && sbCommonUtils.getSbObjectType(aCSS.ownerNode) == "stylesheet") return ret;
@@ -514,7 +514,7 @@ var sbPageCombiner = {
         return ret;
     },
 
-    remapCSSSelector : function(selectorText) {
+    remapCSSSelector: function(selectorText) {
         var htmlId = this.htmlId;
         var bodyId = this.bodyId;
         var id = "item" + sbCombineService.curID;
@@ -573,7 +573,7 @@ var sbPageCombiner = {
         return ret;
     },
 
-    inspectCSSText : function(aCSSText, aCSSHref) {
+    inspectCSSText: function(aCSSText, aCSSHref) {
         if (!aCSSHref) aCSSHref = this.BROWSER.currentURI.spec;
         // CSS get by cssText is always url("double-quoted-with-\"quote\"-escaped")
         // or url(something) (e.g. background-image in Firefox < 3.6)
@@ -588,7 +588,7 @@ var sbPageCombiner = {
         return aCSSText;
     },
 
-    processDOMRecursively : function(rootNode) {
+    processDOMRecursively: function(rootNode) {
         rootNode = this.inspectNode(rootNode);
         for ( var curNode = rootNode.firstChild; curNode != null; curNode = curNode.nextSibling ) {
             if ( curNode.nodeName == "#text" || curNode.nodeName == "#comment" ) continue;
@@ -597,9 +597,9 @@ var sbPageCombiner = {
         return rootNode;
     },
 
-    inspectNode : function(aNode) {
+    inspectNode: function(aNode) {
         switch ( aNode.nodeName.toLowerCase() ) {
-            case "link" : 
+            case "link": 
                 if ( aNode.rel.toLowerCase() == "stylesheet") {
                     // link tags in the body element is unusual
                     // styles should already be processed
@@ -608,14 +608,14 @@ var sbPageCombiner = {
                     return sbContentSaver.removeNodeFromParent(aNode);
                 }
                 break;
-            case "style" :
+            case "style":
                 // style tags in the body element is unusual
                 // styles should already be processed
                 // in sbPageCombiner.exec => surroundCSS => processCSSRecursively
                 // just discard it here so that it never appear in the combined page
                 return sbContentSaver.removeNodeFromParent(aNode);
                 break;
-            case "body" : 
+            case "body": 
                 // move body specific attributes into inline styles so that it can be transfered to div
                 // inline style takes precedence than the corresponding HTML attribute
                 if ( aNode.hasAttribute("background") ) {
@@ -631,22 +631,22 @@ var sbPageCombiner = {
                     aNode.removeAttribute("text");
                 }
                 break;
-            case "img" : case "embed" : case "source" : case "iframe" : 
+            case "img": case "embed": case "source": case "iframe": 
                 if ( aNode.src ) aNode.setAttribute("src", aNode.src);
                 break;
-            case "object" : 
+            case "object": 
                 if ( aNode.data ) aNode.setAttribute("data", aNode.data);
                 break;
-            case "table" :  case "tr" :  case "th" : case "td" : 
+            case "table":  case "tr":  case "th": case "td": 
                 aNode = this.setAbsoluteURL(aNode, "background");
                 break;
-            case "input" : 
+            case "input": 
                 if ( aNode.type.toLowerCase() == "image" ) aNode.setAttribute("src", aNode.src);
                 break;
-            case "a" : case "area" : 
+            case "a": case "area": 
                 if ( aNode.href.indexOf("file://") == 0 ) aNode.setAttribute("href", aNode.href);
                 break;
-            case "cite" : 
+            case "cite": 
                 if ( aNode.className == "scrapbook-header" ) this.isTargetCombined = true;
                 break;
         }
@@ -657,7 +657,7 @@ var sbPageCombiner = {
         return aNode;
     },
 
-    setAbsoluteURL : function(aNode, aAttr) {
+    setAbsoluteURL: function(aNode, aAttr) {
         if ( aNode.getAttribute(aAttr) ) {
             aNode.setAttribute(aAttr, sbCommonUtils.resolveURL(this.BROWSER.currentURI.spec, aNode.getAttribute(aAttr)));
         }
