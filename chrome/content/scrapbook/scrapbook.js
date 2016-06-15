@@ -745,7 +745,7 @@ var sbTreeDNDHandler = {
                 res[0], res[1], null
             );
         } else {
-            sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERROR_INVALID_URL", [url]));
+            sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERROR_INVALID_URL", [url]));
         }
     },
 
