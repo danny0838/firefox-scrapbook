@@ -365,8 +365,9 @@ var sbCacheService = {
                 var url2name = dir.clone(); url2name.append("sb-url2name.txt");
                 if (url2name.exists()) {
                     url2name = sbCommonUtils.readFile(url2name).split("\n");
+                    var limit = sbCommonUtils.getPref("fulltext.sitePagesLimit", 0);
                     for (var i = 0; i < url2name.length; i++) {
-                        if (i > 256) break; // prevent too large cache
+                        if (limit && i > limit) break; // prevent too large cache
                         var line = url2name[i].split("\t");
                         if (!line[1] || line[1] == "index") continue;
                         var subpath = line[1] + ".html";
