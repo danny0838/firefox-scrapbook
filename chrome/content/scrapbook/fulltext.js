@@ -358,6 +358,24 @@ var sbCacheService = {
                 // cache the file
                 sbCacheService.inspectFile(file, "index.html", "html");
                 break;
+            case "site":
+                var file = dir.clone(); file.append("index.html");
+                if (!file.exists()) break;
+                sbCacheService.inspectFile(file, "index.html", "html");
+                var url2name = dir.clone(); url2name.append("sb-url2name.txt");
+                if (url2name.exists()) {
+                    url2name = sbCommonUtils.readFile(url2name).split("\n");
+                    for (var i = 0; i < url2name.length; i++) {
+                        if (i > 256) break; // prevent too large cache
+                        var line = url2name[i].split("\t");
+                        if (!line[1] || line[1] == "index") continue;
+                        var subpath = line[1] + ".html";
+                        var file = dir.clone(); file.append(subpath);
+                        if (!file.exists()) break;
+                        this.inspectFile(file, subpath, "html");
+                    }
+                }
+                break;
             case "combine":
             case "note":
                 var file = dir.clone();
@@ -366,7 +384,6 @@ var sbCacheService = {
                 sbCacheService.inspectFile(file, "index.html", "html");
                 break;
             case "notex":
-            case "site":
                 var basePathCut = dir.path.length + 1;
                 sbCommonUtils.forEachFile(dir, function(file){
                     // do not look in skipped files or folders
