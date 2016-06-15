@@ -551,7 +551,7 @@ var sbTreeDNDHandler = {
             flavours.appendFlavour("application/x-moz-tabbrowser-tab");
             flavours.appendFlavour("moz/rdfitem");
             flavours.appendFlavour("text/x-moz-url");
-            flavours.appendFlavour("text/html");
+            flavours.appendFlavour("text/html"); // drags rich text from Firefox browser content
             flavours.appendFlavour("sb/tradeitem");
             return flavours;
         },
@@ -567,19 +567,30 @@ var sbTreeDNDHandler = {
         onDrop: function(row, orient) {
             var XferData, XferType;
             // Gecko >= 1.9.1 (Firefox >= 3.5): has sbTreeDNDHandler.currentDataTransfer
-            if (sbTreeDNDHandler.currentDataTransfer &&
-                (sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0) == "application/x-moz-tabbrowser-tab" ||
-                 sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0) == "sb/tradeitem")) {
-                switch (sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0)) {
-                    case "application/x-moz-tabbrowser-tab":
-                        XferData = sbTreeDNDHandler.currentDataTransfer.getData(sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(1))+"\n"+document.commandDispatcher.focusedWindow.document.title;
+            if (sbTreeDNDHandler.currentDataTransfer) {
+                XferType = sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0);
+                XferData = sbTreeDNDHandler.currentDataTransfer.getData(XferType);
+                // special fixes
+                switch (XferType) {
+                    case "application/x-moz-tabbrowser-tab": // drags a tab from Firefox
+                        XferData = sbTreeDNDHandler.currentDataTransfer.getData(sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(1)) + "\n" + document.commandDispatcher.focusedWindow.document.title;
                         break;
-                    case "sb/tradeitem":
-                        XferType = "sb/tradeitem";
+                    case "application/x-moz-file": // drag from files from file browser
+                        XferData = sbTreeDNDHandler.currentDataTransfer.getData(sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(1));
                         break;
-                    default:
-                        sbCommonUtils.alert("Unsupported XferType:\n---\n"+sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0));
+                    case "text/x-moz-url": // drags the icon of Firefox address bar
+                    // case "text/_moz_htmlcontext": // drags rich text from Firefox browser content
+                    // case "text/html": // drags rich text from any application
+                    // case "text/plain": // drags plain text from any application
+                    case "moz/rdfitem": // drags items from tree
+                    case "sb/tradeitem": // drags items from the exported items tree
+                        break;
+                    default:                    
+                        sbCommonUtils.error("Unsupported XferType: " + XferType);
+                        XferType = null;
+                        break;
                 }
+            // older Firefox versions
             } else {
                 var XferDataSet = nsTransferable.get(
                     sbTreeDNDHandler.dragDropObserver.getSupportedFlavours(),
