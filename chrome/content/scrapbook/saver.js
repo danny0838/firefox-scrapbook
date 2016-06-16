@@ -2,48 +2,48 @@
 var sbContentSaver = {
 
 
-    name         : "",
-    item         : null,
-    contentDir   : null,
-    httpTask     : {},
-    file2URL     : {},
-    file2Doc     : {},
-    option       : {},
-    plusoption   : {},
-    refURLObj    : null,
-    favicon      : null,
-    frames       : [],
-    canvases     : [],
-    isMainFrame  : true,
-    selection    : null,
-    linkURLs     : [],
+    name: "",
+    item: null,
+    contentDir: null,
+    httpTask: {},
+    file2URL: {},
+    file2Doc: {},
+    option: {},
+    plusoption: {},
+    refURLObj: null,
+    favicon: null,
+    frames: [],
+    canvases: [],
+    isMainFrame: true,
+    selection: null,
+    linkURLs: [],
 
 
 
-    init : function(aPresetData) {
+    init: function(aPresetData) {
         this.item = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
         this.item.id = sbDataSource.identify(this.item.id);
         this.name = "index";
         this.favicon = null;
-        this.file2URL = { "index.dat" : true, "index.png" : true, "index.rdf" : true, "sitemap.xml" : true, "sitemap.xsl" : true, "sb-file2url.txt" : true, "sb-url2name.txt" : true, };
-        this.option   = { "dlimg" : false, "dlsnd" : false, "dlmov" : false, "dlarc" : false, "custom" : "", "inDepth" : 0, "isPartial" : false, "images" : true, "media" : true, "fonts" : true, "frames" : true, "styles" : true, "script" : false, "asHtml" : false, "forceUtf8" : true, "rewriteStyles" : true, "keepLink" : false, "internalize" : false };
-        this.plusoption = { "timeout" : "0", "charset" : "UTF-8" }
+        this.file2URL = { "index.dat": true, "index.png": true, "index.rdf": true, "sitemap.xml": true, "sitemap.xsl": true, "sb-file2url.txt": true, "sb-url2name.txt": true, };
+        this.option   = { "dlimg": false, "dlsnd": false, "dlmov": false, "dlarc": false, "custom": "", "inDepth": 0, "isPartial": false, "images": true, "media": true, "fonts": true, "frames": true, "styles": true, "script": false, "asHtml": false, "forceUtf8": true, "rewriteStyles": true, "keepLink": false, "internalize": false };
+        this.plusoption = { "timeout": "0", "charset": "UTF-8" }
         this.linkURLs = [];
         this.frames = [];
         this.isMainFrame = true;
         if ( aPresetData ) {
-            if ( aPresetData[0] ) this.item.id  = aPresetData[0];
-            if ( aPresetData[1] ) this.name     = aPresetData[1];
-            if ( aPresetData[2] ) this.option   = sbCommonUtils.extendObject(this.option, aPresetData[2]);
+            if ( aPresetData[0] ) this.item.id = aPresetData[0];
+            if ( aPresetData[1] ) this.name = aPresetData[1];
+            if ( aPresetData[2] ) this.option = sbCommonUtils.extendObject(this.option, aPresetData[2]);
             if ( aPresetData[3] ) this.file2URL = aPresetData[3];
             if ( aPresetData[4] >= this.option["inDepth"] ) this.option["inDepth"] = 0;
         }
         this.httpTask[this.item.id] = 0;
     },
 
-    captureWindow : function(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData, aContext, aTitle) {
+    captureWindow: function(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData, aContext, aTitle) {
         this.init(aPresetData);
-        this.item.chars  = aRootWindow.document.characterSet;
+        this.item.chars = aRootWindow.document.characterSet;
         this.item.source = aRootWindow.location.href;
         //Favicon der angezeigten Seite bestimmen (Unterscheidung zwischen FF2 und FF3 notwendig!)
         if ( "gBrowser" in window && aRootWindow == gBrowser.contentWindow ) {
@@ -118,39 +118,39 @@ var sbContentSaver = {
         return [sbCommonUtils.splitFileName(newName)[0], this.file2URL, this.item.title];
     },
 
-    captureFile : function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext) {
+    captureFile: function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext) {
         this.init(aPresetData);
-        this.item.title  = sbCommonUtils.getFileName(aSourceURL);
-        this.item.icon   = "moz-icon://" + sbCommonUtils.escapeFileName(this.item.title) + "?size=16";
+        this.item.title = sbCommonUtils.getFileName(aSourceURL);
+        this.item.icon = "moz-icon://" + sbCommonUtils.escapeFileName(this.item.title) + "?size=16";
         this.item.source = aSourceURL;
-        this.item.type   = aType;
+        this.item.type = aType;
         if ( aShowDetail ) {
             var ret = this.showDetailDialog(null, aResName, aContext);
             if ( ret.result == 0 ) { return null; }
             if ( ret.result == 2 ) { aResName = ret.resURI; aResIndex = 0; }
         }
         this.contentDir = sbCommonUtils.getContentDir(this.item.id);
-        this.refURLObj  = sbCommonUtils.convertURLToObject(aReferURL);
+        this.refURLObj = sbCommonUtils.convertURLToObject(aReferURL);
         var newName = this.saveFileInternal(aSourceURL, this.name, aType);
         this.addResource(aResName, aResIndex);
         return [sbCommonUtils.splitFileName(newName)[0], this.file2URL, this.item.title];
     },
 
-    showDetailDialog : function(aTitles, aResURI, aContext) {
+    showDetailDialog: function(aTitles, aResURI, aContext) {
         var ret = {
-            item    : this.item,
-            option  : this.option,
-            poption : this.plusoption,
-            titles  : aTitles || [this.item.title],
-            resURI  : aResURI,
-            result  : 1,
-            context : aContext || "capture"
+            item: this.item,
+            option: this.option,
+            poption: this.plusoption,
+            titles: aTitles || [this.item.title],
+            resURI: aResURI,
+            result: 1,
+            context: aContext || "capture"
         };
         window.openDialog("chrome://scrapbook/content/detail.xul", "", "chrome,modal,centerscreen,resizable", ret);
         return ret;
     },
 
-    saveDocumentInternal : function(aDocument, aFileKey) {
+    saveDocumentInternal: function(aDocument, aFileKey) {
         var captureType = "";
         var contentType = aDocument.contentType;
         if ( ["text/html", "application/xhtml+xml"].indexOf(contentType) < 0 ) {
@@ -372,7 +372,7 @@ var sbContentSaver = {
         return myHTMLFile.leafName;
     },
 
-    saveFileInternal : function(aFileURL, aFileKey, aCaptureType, aCharset) {
+    saveFileInternal: function(aFileURL, aFileKey, aCaptureType, aCharset) {
         if ( !aFileKey ) aFileKey = "file" + Math.random().toString();
         var urlObj = sbCommonUtils.convertURLToObject(aFileURL);
         if ( !this.refURLObj ) {
@@ -426,8 +426,8 @@ var sbContentSaver = {
                 var myHTML = '<html><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0;URL=./' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(newFileName)) + '"></head><body></body></html>';
             }
             if ( this.isMainFrame ) {
-                this.item.icon  = "moz-icon://" + sbCommonUtils.escapeFileName(newFileName) + "?size=16";
-                this.item.type  = aCaptureType;
+                this.item.icon = "moz-icon://" + sbCommonUtils.escapeFileName(newFileName) + "?size=16";
+                this.item.type = aCaptureType;
                 this.item.chars = aCharset || "";
             }
         } else {
@@ -439,7 +439,7 @@ var sbContentSaver = {
         return myHTMLFile.leafName;
     },
 
-    addResource : function(aResName, aResIndex) {
+    addResource: function(aResName, aResIndex) {
         if ( !aResName ) return;
         var res = sbDataSource.addItem(this.item, aResName, aResIndex);
         sbCommonUtils.rebuildGlobal();
@@ -455,14 +455,14 @@ var sbContentSaver = {
     },
 
 
-    removeNodeFromParent : function(aNode) {
+    removeNodeFromParent: function(aNode) {
         var newNode = aNode.ownerDocument.createTextNode("");
         aNode.parentNode.replaceChild(newNode, aNode);
         aNode = newNode;
         return aNode;
     },
 
-    doctypeToString : function(aDoctype) {
+    doctypeToString: function(aDoctype) {
         if ( !aDoctype ) return "";
         var ret = "<!DOCTYPE " + aDoctype.name;
         if ( aDoctype.publicId ) ret += ' PUBLIC "' + aDoctype.publicId + '"';
@@ -471,7 +471,7 @@ var sbContentSaver = {
         return ret;
     },
 
-    getHeadNode : function(aNode) {
+    getHeadNode: function(aNode) {
         var headNode = aNode.getElementsByTagName("head")[0];
         if (!headNode) {
             var elems = aNode.childNodes;
@@ -489,7 +489,7 @@ var sbContentSaver = {
     },
 
 
-    processDOMRecursively : function(startNode, rootNode) {
+    processDOMRecursively: function(startNode, rootNode) {
         for ( var curNode = startNode.firstChild; curNode != null; curNode = curNode.nextSibling ) {
             if ( curNode.nodeName == "#text" || curNode.nodeName == "#comment" ) continue;
             curNode = this.inspectNode(curNode, rootNode);
@@ -497,9 +497,9 @@ var sbContentSaver = {
         }
     },
 
-    inspectNode : function(aNode, rootNode) {
+    inspectNode: function(aNode, rootNode) {
         switch ( aNode.nodeName.toLowerCase() ) {
-            case "img" : 
+            case "img": 
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
                     if ( this.option["images"] ) {
@@ -530,7 +530,7 @@ var sbContentSaver = {
                     })(aNode.getAttribute("srcset")));
                 }
                 break;
-            case "embed" : 
+            case "embed": 
             case "source":  // in <audio> and <vedio>
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
@@ -562,7 +562,7 @@ var sbContentSaver = {
                     })(aNode.getAttribute("srcset")));
                 }
                 break;
-            case "object" : 
+            case "object": 
                 if ( aNode.hasAttribute("data") ) {
                     if ( this.option["internalize"] && aNode.getAttribute("data").indexOf("://") == -1 ) break;
                     if ( this.option["media"] ) {
@@ -575,7 +575,7 @@ var sbContentSaver = {
                     }
                 }
                 break;
-            case "applet" : 
+            case "applet": 
                 if ( aNode.hasAttribute("archive") ) {
                     if ( this.option["internalize"] && aNode.getAttribute("archive").indexOf("://") == -1 ) break;
                     var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("archive"));
@@ -589,7 +589,7 @@ var sbContentSaver = {
                     }
                 }
                 break;
-            case "canvas" :
+            case "canvas":
                 if ( this.option["media"] && !this.option["script"] ) {
                     var canvasOrig = this.canvases[aNode.getAttribute("data-sb-canvas-id")];
                     var canvasScript = aNode.ownerDocument.createElement("script");
@@ -598,17 +598,17 @@ var sbContentSaver = {
                 }
                 aNode.removeAttribute("data-sb-canvas-id");
                 break;
-            case "track" :  // in <audio> and <vedio>
+            case "track":  // in <audio> and <vedio>
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] ) break;
                     aNode.setAttribute("src", aNode.src);
                 }
                 break;
-            case "body" : 
-            case "table" : 
-            case "tr" : 
-            case "th" : 
-            case "td" : 
+            case "body": 
+            case "table": 
+            case "tr": 
+            case "th": 
+            case "td": 
                 // handle "background" attribute (HTML5 deprecated)
                 if ( aNode.hasAttribute("background") ) {
                     if ( this.option["internalize"] && aNode.getAttribute("background").indexOf("://") == -1 ) break;
@@ -623,7 +623,7 @@ var sbContentSaver = {
                     }
                 }
                 break;
-            case "input" : 
+            case "input": 
                 switch (aNode.type.toLowerCase()) {
                     case "image": 
                         if ( aNode.hasAttribute("src") ) {
@@ -640,10 +640,10 @@ var sbContentSaver = {
                         break;
                 }
                 break;
-            case "link" : 
+            case "link": 
                 // gets "" if rel attribute not defined
                 switch ( aNode.rel.toLowerCase() ) {
-                    case "stylesheet" :
+                    case "stylesheet":
                         if ( this.option["internalize"] ) break;
                         if ( aNode.hasAttribute("href") ) {
                             if ( sbCommonUtils.getSbObjectType(aNode) == "stylesheet" ) {
@@ -669,8 +669,8 @@ var sbContentSaver = {
                             }
                         }
                         break;
-                    case "shortcut icon" :
-                    case "icon" :
+                    case "shortcut icon":
+                    case "icon":
                         if ( aNode.hasAttribute("href") ) {
                             if ( this.option["internalize"] ) break;
                             var aFileName = this.download(aNode.href);
@@ -680,7 +680,7 @@ var sbContentSaver = {
                             }
                         }
                         break;
-                    default :
+                    default:
                         if ( aNode.hasAttribute("href") ) {
                             if ( this.option["internalize"] ) break;
                             aNode.setAttribute("href", aNode.href);
@@ -688,13 +688,13 @@ var sbContentSaver = {
                         break;
                 }
                 break;
-            case "base" : 
+            case "base": 
                 if ( aNode.hasAttribute("href") ) {
                     if ( this.option["internalize"] ) break;
                     aNode.setAttribute("href", "");
                 }
                 break;
-            case "style" : 
+            case "style": 
                 if ( sbCommonUtils.getSbObjectType(aNode) == "stylesheet" ) {
                     // a special stylesheet used by scrapbook, keep it intact
                 } else if ( !this.option["styles"] && !this.option["keepLink"] ) {
@@ -707,8 +707,8 @@ var sbContentSaver = {
                     return this.removeNodeFromParent(aNode);
                 }
                 break;
-            case "script" : 
-            case "noscript" : 
+            case "script": 
+            case "noscript": 
                 if ( this.option["script"] ) {
                     if ( aNode.hasAttribute("src") ) {
                         if ( this.option["internalize"] ) break;
@@ -719,8 +719,8 @@ var sbContentSaver = {
                     return this.removeNodeFromParent(aNode);
                 }
                 break;
-            case "a" : 
-            case "area" : 
+            case "a": 
+            case "area": 
                 if ( this.option["internalize"] ) break;
                 if ( !aNode.href ) {
                     break;
@@ -771,11 +771,11 @@ var sbContentSaver = {
                     flag = true;
                 } else {
                     switch ( ext ) {
-                        case "jpg" : case "jpeg" : case "png" : case "gif" : case "tiff" : flag = this.option["dlimg"]; break;
-                        case "aac" : case "flac" : case "mp3" : case "ogg" : case "ram" : case "ra" : case "rm" : case "rmx" : case "wav" : case "wma" : flag = this.option["dlsnd"]; break;
-                        case "avi" : case "avc" : case "flv" : case "mkv" : case "mov" : case "mpg" : case "mpeg" : case "mp4" : case "wmv" : flag = this.option["dlmov"]; break;
-                        case "zip" : case "lzh"  : case "lha"  : case "tar" : case "gz" : case "bz" : case "7z" : case "rar" : case "jar" : case "xpi" : flag = this.option["dlarc"]; break;
-                        default : 
+                        case "jpg": case "jpeg": case "png": case "gif": case "tiff": flag = this.option["dlimg"]; break;
+                        case "aac": case "flac": case "mp3": case "ogg": case "ram": case "ra": case "rm": case "rmx": case "wav": case "wma": flag = this.option["dlsnd"]; break;
+                        case "avi": case "avc": case "flv": case "mkv": case "mov": case "mpg": case "mpeg": case "mp4": case "wmv": flag = this.option["dlmov"]; break;
+                        case "zip": case "lzh": case "lha": case "tar": case "gz": case "bz": case "7z": case "rar": case "jar": case "xpi": flag = this.option["dlarc"]; break;
+                        default: 
                             // do not copy, but add to the link list if it's a work of deep capture
                             if ( this.option["inDepth"] > 0 ) this.linkURLs.push(aNode.href);
                     }
@@ -788,27 +788,27 @@ var sbContentSaver = {
                     aNode.setAttribute("href", aNode.href);
                 }
                 break;
-            case "form" : 
+            case "form": 
                 if ( aNode.hasAttribute("action") ) {
                     if ( this.option["internalize"] ) break;
                     aNode.setAttribute("action", aNode.action);
                 }
                 break;
-            case "meta" : 
+            case "meta": 
                 if ( !aNode.hasAttribute("content") ) break;
                 if ( aNode.hasAttribute("property") ) {
                     if ( this.option["internalize"] ) break;
                     switch ( aNode.getAttribute("property").toLowerCase() ) {
-                        case "og:image" :
-                        case "og:image:url" :
-                        case "og:image:secure_url" :
-                        case "og:audio" :
-                        case "og:audio:url" :
-                        case "og:audio:secure_url" :
-                        case "og:video" :
-                        case "og:video:url" :
-                        case "og:video:secure_url" :
-                        case "og:url" :
+                        case "og:image":
+                        case "og:image:url":
+                        case "og:image:secure_url":
+                        case "og:audio":
+                        case "og:audio:url":
+                        case "og:audio:secure_url":
+                        case "og:video":
+                        case "og:video:url":
+                        case "og:video:secure_url":
+                        case "og:url":
                             var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("content"));
                             aNode.setAttribute("content", url);
                             break;
@@ -816,7 +816,7 @@ var sbContentSaver = {
                 }
                 if ( aNode.hasAttribute("http-equiv") ) {
                     switch ( aNode.getAttribute("http-equiv").toLowerCase() ) {
-                        case "refresh" :
+                        case "refresh":
                             if ( aNode.getAttribute("content").match(/^(\d+;\s*url=)(.*)$/i) ) {
                                 var url = sbCommonUtils.resolveURL(this.refURLObj.spec, RegExp.$2);
                                 aNode.setAttribute("content", RegExp.$1 + url);
@@ -827,8 +827,8 @@ var sbContentSaver = {
                     }
                 }
                 break;
-            case "frame"  : 
-            case "iframe" : 
+            case "frame": 
+            case "iframe": 
                 if ( this.option["internalize"] ) break;
                 if ( this.option["frames"] ) {
                     this.isMainFrame = false;
@@ -870,7 +870,7 @@ var sbContentSaver = {
         return aNode;
     },
 
-    inspectNodeSetCanvasData : function (data) {
+    inspectNodeSetCanvasData: function (data) {
       var scripts = document.getElementsByTagName("script");
       var script = scripts[scripts.length-1], canvas = script.previousSibling;
       var img = new Image();
@@ -879,7 +879,7 @@ var sbContentSaver = {
       script.parentNode.removeChild(script);
     },
 
-    processCSSRecursively : function(aCSS, aDocument, isImport) {
+    processCSSRecursively: function(aCSS, aDocument, isImport) {
         // aCSS is invalid or disabled, skip it
         if (!aCSS || aCSS.disabled) return "";
         // a special stylesheet used by scrapbook, skip parsing it
@@ -919,7 +919,7 @@ var sbContentSaver = {
         return content;
     },
 
-    processCSSRules : function(aCSS, aDocument, indent) {
+    processCSSRules: function(aCSS, aDocument, indent) {
         var content = "";
         Array.forEach(aCSS.cssRules, function(cssRule) {
             switch (cssRule.type) {
@@ -991,7 +991,7 @@ var sbContentSaver = {
         }
     },
 
-    inspectCSSText : function(aCSSText, aCSSHref, type) {
+    inspectCSSText: function(aCSSText, aCSSHref, type) {
         if (!aCSSHref) aCSSHref = this.refURLObj.spec;
         // CSS get by .cssText is always url("something-with-\"double-quote\"-escaped")
         // or url(something) (e.g. background-image in Firefox < 3.6)
@@ -1026,7 +1026,7 @@ var sbContentSaver = {
     },
 
     // aURLSpec is an absolute URL
-    download : function(aURLSpec, aSuggestFilename) {
+    download: function(aURLSpec, aSuggestFilename) {
         if ( !aURLSpec ) return "";
         try {
             var aURL = sbCommonUtils.convertURLToObject(aURLSpec);
@@ -1146,32 +1146,32 @@ var sbContentSaver = {
 
 
 function sbCaptureObserver(aSBitem, aFileName) {
-    this.item     = aSBitem;
+    this.item = aSBitem;
     this.fileName = aFileName;
     this.callback = sbCaptureObserverCallback;
 }
 
 sbCaptureObserver.prototype = {
 
-    onStateChange : function(aWebProgress, aRequest, aStateFlags, aStatus) {
+    onStateChange: function(aWebProgress, aRequest, aStateFlags, aStatus) {
         if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_STOP ) {
             this.callback.onDownloadComplete(this.item);
         }
     },
-    onProgressChange : function(aWebProgress, aRequest, aCurSelfProgress, aMaxSelfProgress, aCurTotalProgress, aMaxTotalProgress) {
+    onProgressChange: function(aWebProgress, aRequest, aCurSelfProgress, aMaxSelfProgress, aCurTotalProgress, aMaxTotalProgress) {
         if ( aCurTotalProgress == aMaxTotalProgress ) return;
         var progress = (aMaxSelfProgress > 0) ? Math.round(aCurSelfProgress / aMaxSelfProgress * 100) + "%" : aCurSelfProgress + "Bytes";
         this.callback.onDownloadProgress(this.item, this.fileName, progress);
     },
-    onStatusChange   : function() {},
-    onLocationChange : function() {},
-    onSecurityChange : function() {},
+    onStatusChange: function() {},
+    onLocationChange: function() {},
+    onSecurityChange: function() {},
 };
 
 
 var sbCaptureObserverCallback = {
 
-    trace : function(aText, aMillisec) {
+    trace: function(aText, aMillisec) {
         var status = top.window.document.getElementById("statusbar-display");
         if ( !status ) return;
         status.label = aText;
@@ -1183,7 +1183,7 @@ var sbCaptureObserverCallback = {
         }
     },
 
-    onDownloadComplete : function(aItem) {
+    onDownloadComplete: function(aItem) {
         if ( --sbContentSaver.httpTask[aItem.id] == 0 ) {
             this.onAllDownloadsComplete(aItem);
             return;
@@ -1191,16 +1191,16 @@ var sbCaptureObserverCallback = {
         this.trace(sbCommonUtils.lang("overlay", "CAPTURE", [sbContentSaver.httpTask[aItem.id], aItem.title]), 0);
     },
 
-    onAllDownloadsComplete : function(aItem) {
+    onAllDownloadsComplete: function(aItem) {
         this.trace(sbCommonUtils.lang("overlay", "CAPTURE_COMPLETE", [aItem.title]), 5000);
         this.onCaptureComplete(aItem);
     },
 
-    onDownloadProgress : function(aItem, aFileName, aProgress) {
+    onDownloadProgress: function(aItem, aFileName, aProgress) {
         this.trace(sbCommonUtils.lang("overlay", "DOWNLOAD_DATA", [aProgress, aFileName]), 0);
     },
 
-    onCaptureComplete : function(aItem) {
+    onCaptureComplete: function(aItem) {
         // aItem is the last item that is captured
         // in a multiple capture it could be null 
         if (aItem) {

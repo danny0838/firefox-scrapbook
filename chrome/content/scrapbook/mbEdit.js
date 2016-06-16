@@ -1,13 +1,13 @@
 var mbEditDialog = {
 
     _nameTextbox: null,
-    _pathField  : null,
+    _pathField: null,
 
     init: function() {
         if (!window.arguments)
             throw Components.results.NS_ERROR_UNDEXPECTED;
         this._nameTextbox = document.getElementById("mbName");
-        this._pathField   = document.getElementById("mbPath");
+        this._pathField = document.getElementById("mbPath");
         var ret = window.arguments[0];
         this._nameTextbox.value = ret.value ? ret.value[0] : "";
         if (ret.value && ret.value[1]) {

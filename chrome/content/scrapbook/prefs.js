@@ -14,9 +14,9 @@ var sbPrefWindow = {
         }
         if (navigator.platform.substr(0, 3) == "Mac") {
             var modifiersMap = {
-                "Ctrl" : "command",
+                "Ctrl": "command",
                 "Shift": "shift",
-                "Alt"  : "option",
+                "Alt": "option",
             };
             for (let [win, mac] in Iterator(modifiersMap)) {
                 var elts = document.querySelectorAll("label[value*='" + win + "']");
@@ -65,8 +65,8 @@ var sbPrefWindow = {
         var isDefault = document.getElementById("extensions.scrapbook.data.default").value;
         var mbEnabled = document.getElementById("extensions.scrapbook.multibook.enabled").value;
         document.getElementById("sbDataDefault").disabled = mbEnabled;
-        document.getElementById("sbDataPath").disabled    = isDefault || mbEnabled;
-        document.getElementById("sbDataButton").disabled  = isDefault || mbEnabled;
+        document.getElementById("sbDataPath").disabled = isDefault || mbEnabled;
+        document.getElementById("sbDataButton").disabled = isDefault || mbEnabled;
     },
 
     updateDataPath: function() {

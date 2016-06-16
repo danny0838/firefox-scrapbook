@@ -1,10 +1,10 @@
 var sbHighlighter = {
 
-    nodePositionInRange : {
-        SINGLE  : 0,
-        START   : 1,
-        MIDDLE  : 2,
-        END     : 3
+    nodePositionInRange: {
+        SINGLE: 0,
+        START: 1,
+        MIDDLE: 2,
+        END: 3
     },
 
     get PRESET_STYLES() {
@@ -21,7 +21,7 @@ var sbHighlighter = {
         ];
     },
 
-    updatePopup : function() {
+    updatePopup: function() {
         var idx = document.getElementById("ScrapBookHighlighter").getAttribute("color") || 8;
         document.getElementById("ScrapBookHighlighterM" + idx).setAttribute("checked", "true");
         for ( idx = 8; idx > 0; idx-- ) {
@@ -30,21 +30,21 @@ var sbHighlighter = {
         }
     },
 
-    decorateElement : function(aElement, aCssText) {
+    decorateElement: function(aElement, aCssText) {
         if (aElement.localName == "menuitem") aElement = document.getAnonymousElementByAttribute(aElement, "class", "menu-iconic-text");
         aElement.style.cssText = aCssText;
         aElement.setAttribute("tooltiptext", aCssText);
     },
 
-    set : function(aWindow, aSelection, aNodeName, aAttributes) {
+    set: function(aWindow, aSelection, aNodeName, aAttributes) {
         for ( var r = 0; r < aSelection.rangeCount; ++r ) {
             var range = aSelection.getRangeAt( r ); 
-            var doc      = aWindow.document;
+            var doc = aWindow.document;
 
-            var startC    = range.startContainer;
-            var endC    = range.endContainer;
-            var sOffset    = range.startOffset;
-            var eOffset    = range.endOffset;
+            var startC = range.startContainer;
+            var endC = range.endContainer;
+            var sOffset = range.startOffset;
+            var eOffset = range.endOffset;
             var sameNode = ( startC == endC );
 //sbCommonUtils.alert("startC - "+startC+"\nendC - "+endC+"\nsOffset - "+sOffset+"\neOffset - "+eOffset);
             if ( aNodeName == "a" && !sameNode ) {
@@ -102,11 +102,11 @@ var sbHighlighter = {
         }
     },
 
-    _isTextNode : function( aNode ) { 
+    _isTextNode: function( aNode ) { 
         return aNode.nodeType == aNode.TEXT_NODE; 
     },
 
-    _acceptNode : function( aNode ) {
+    _acceptNode: function( aNode ) {
         if ( aNode.nodeType == aNode.TEXT_NODE 
              && ! ( /[^\t\n\r ]/.test( aNode.nodeValue ) ) 
            )
@@ -115,7 +115,7 @@ var sbHighlighter = {
         return NodeFilter.FILTER_ACCEPT;
     },
 
-    _createNode : function( aWindow, aNodeName, aAttributes, aNodePosInRange ) {
+    _createNode: function( aWindow, aNodeName, aAttributes, aNodePosInRange ) {
         var newNode = aWindow.document.createElement( aNodeName );
         for ( var attr in aAttributes ) {
             newNode.setAttribute( attr, aAttributes[attr] );
@@ -123,7 +123,7 @@ var sbHighlighter = {
         return newNode;
     },
 
-    _wrapTextNodeWithSpan : function( aDoc, aTextNode, aSpanNode ) {
+    _wrapTextNodeWithSpan: function( aDoc, aTextNode, aSpanNode ) {
         aTextNode.parentNode.insertBefore(aSpanNode, aTextNode);
         aSpanNode.appendChild( aTextNode );
         return aTextNode;

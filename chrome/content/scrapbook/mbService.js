@@ -16,9 +16,9 @@ var sbMultiBookService = {
         elem.value = "ScrapBook X" + (this.enabled ? " [" + sbCommonUtils.getPref("data.title", "") + "]" : "");
     },
 
-    initMenu : function() {
+    initMenu: function() {
         var isDefault = sbCommonUtils.getPref("data.default", true);
-        var dataPath  = sbCommonUtils.getPref("data.path", "");
+        var dataPath = sbCommonUtils.getPref("data.path", "");
         var popup = document.getElementById("mbMenuPopup");
         if (!this.file) {
             var child;
@@ -52,7 +52,7 @@ var sbMultiBookService = {
         }
     },
 
-    initFile : function() {
+    initFile: function() {
         this.file = sbCommonUtils.DIR.get("ProfD", Components.interfaces.nsIFile).clone();
         this.file.append("ScrapBook");
         this.file.append("multibook.txt");

@@ -4,19 +4,19 @@ var sbRepair = {
     get WIZARD() { return document.getElementById("sbRepairWizard"); },
     get TREE()   { return document.getElementById("sbRepairTree"); },
 
-    treeItems : [],
+    treeItems: [],
 
-    initStartPage : function() {
+    initStartPage: function() {
         var nextPage;
         switch ( document.getElementById("sbRepairRadioGroup").selectedIndex ) {
-            case 0 : nextPage = "sbRepairRDF1"; break;
-            case 1 : nextPage = "sbRepairFavicons"; break;
+            case 0: nextPage = "sbRepairRDF1"; break;
+            case 1: nextPage = "sbRepairFavicons"; break;
         }
         if ( nextPage ) this.WIZARD.currentPage.next = nextPage;
         this.WIZARD.canAdvance = nextPage ? true : false;
     },
 
-    initRestoreRDF : function() {
+    initRestoreRDF: function() {
         this.treeItems = [];
         var backupDir = sbCommonUtils.getScrapBookDir();
         backupDir.append("backup");
@@ -26,9 +26,9 @@ var sbRepair = {
         }
         var fileEnum = backupDir.directoryEntries;
         while ( fileEnum.hasMoreElements() ) {
-            var fileObj  = fileEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
+            var fileObj = fileEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
             var fileName = fileObj.leafName;
-            var isMatch  = fileName.match(/^scrapbook_\d{8}\.rdf$/);
+            var isMatch = fileName.match(/^scrapbook_\d{8}\.rdf$/);
             if ( isMatch ) this.treeItems.push([fileName, (new Date(fileObj.lastModifiedTime)).toLocaleString(), fileObj.fileSize]);
         }
         var colIDs = [
@@ -39,7 +39,7 @@ var sbRepair = {
         this.TREE.view = new sbCustomTreeView(colIDs, this.treeItems);
     },
 
-    execRestoreRDF : function() {
+    execRestoreRDF: function() {
         if ( this.TREE.currentIndex < 0 ) { this.WIZARD.rewind(); return; }
         var fileName = this.treeItems[this.TREE.currentIndex][0];
         if ( !fileName ) { this.WIZARD.rewind(); return; }
@@ -67,14 +67,14 @@ var sbRepair = {
         sbDataSource.checkRefresh(true);
     },
 
-    restoreFavicons : function() {
+    restoreFavicons: function() {
         this.WIZARD.canRewind = false;
         var shouldFlush = false;
         var i = 0;
         var resEnum = sbDataSource.data.GetAllResources();
         while ( resEnum.hasMoreElements() ) {
-            var res  = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-            var id   = sbDataSource.getProperty(res, "id");
+            var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+            var id = sbDataSource.getProperty(res, "id");
             var icon = sbDataSource.getProperty(res, "icon");
             if ( res.Value == "urn:scrapbook:root" || res.Value == "urn:scrapbook:search" ) continue;
             if ( ++i % 10 == 0 ) document.getElementById("sbRepairFaviconsTextbox").value = res.Value;

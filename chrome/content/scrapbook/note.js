@@ -3,10 +3,10 @@ var sbNoteService2 = {
 
     get BROWSER(){ return document.getElementById("sbNoteBrowser"); },
 
-    fontSize : 16,
-    enabledHTMLView : false,
+    fontSize: 16,
+    enabledHTMLView: false,
 
-    init : function() {
+    init: function() {
         var id = sbCommonUtils.parseURLQuery(window.location.search.substring(1))['id'];
         sbNoteService.sidebarContext = false;
         var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
@@ -20,7 +20,7 @@ var sbNoteService2 = {
         if ( sbCommonUtils.getPref("note.preview", false) ) this.initHTMLView();
     },
 
-    refreshTab : function() {
+    refreshTab: function() {
         var icon = sbCommonUtils.getDefaultIcon("note");
         document.getElementById("sbNoteImage").setAttribute("src", icon);
         var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
@@ -30,7 +30,7 @@ var sbNoteService2 = {
         }
     },
 
-    finalize : function(exit) {
+    finalize: function(exit) {
         window.onunload = null;
         sbNoteService.save(window);
         sbCommonUtils.setPref("note.preview",  this.enabledHTMLView);
@@ -42,13 +42,13 @@ var sbNoteService2 = {
         }
     },
 
-    initFontSize : function() {
+    initFontSize: function() {
         this.fontSize = sbCommonUtils.getPref("note.fontsize", 16);
         this.changeFontSize(this.fontSize);
         document.getElementById("sbNoteToolbarF" + this.fontSize).setAttribute("checked", true)
     },
 
-    changeFontSize : function(aPixel) {
+    changeFontSize: function(aPixel) {
         this.fontSize = aPixel;
         var newStyle = "font-size: " + aPixel + "px; font-family: monospace;";
         sbNoteService.TEXTBOX.setAttribute("style", newStyle);
@@ -56,16 +56,16 @@ var sbNoteService2 = {
     },
 
 
-    initHTMLView : function() {
+    initHTMLView: function() {
         sbNoteService.save();
         sbNoteTemplate.save();
         var source = sbNoteTemplate.getTemplate();
         var title, content;
         if ( sbNoteService.TEXTBOX.value.match(/\n/) ) {
-            title   = RegExp.leftContext;
+            title = RegExp.leftContext;
             content = RegExp.rightContext;
         } else {
-            title   = sbNoteService.TEXTBOX.value;
+            title = sbNoteService.TEXTBOX.value;
             content = "";
         }
         title = sbCommonUtils.escapeHTMLWithSpace(title, false, true, true);
@@ -80,8 +80,8 @@ var sbNoteService2 = {
         this.enabledHTMLView = true;
     },
 
-    toggleHTMLView : function(willShow) {
-        this.BROWSER.collapsed  = !willShow;
+    toggleHTMLView: function(willShow) {
+        this.BROWSER.collapsed = !willShow;
         document.getElementById("sbSplitter").collapsed = !willShow;
         document.getElementById("sbNoteHeader").lastChild.collapsed = !willShow;
         document.getElementById("sbNoteToolbarN").disabled = !willShow;
@@ -95,36 +95,36 @@ var sbNoteTemplate = {
 
     get TEXTBOX() { return document.getElementById("sbNoteTemplateTextbox"); },
 
-    enabled    : false,
-    shouldSave : false,
-    file       : null,
+    enabled: false,
+    shouldSave: false,
+    file: null,
 
-    init : function() {
+    init: function() {
         this.file = sbCommonUtils.getScrapBookDir().clone();
         this.file.append("note_template.html");
         if ( !this.file.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/note_template.html", this.file);
     },
 
-    show : function(willShow) {
+    show: function(willShow) {
         document.getElementById("sbNoteTemplate").collapsed = !willShow;
-        document.getElementById("sbNoteEditor").collapsed   = willShow;
+        document.getElementById("sbNoteEditor").collapsed = willShow;
         this.enabled = willShow;
     },
 
-    getTemplate : function() {
+    getTemplate: function() {
         var template = sbCommonUtils.readFile(this.file);
         template = sbCommonUtils.convertToUnicode(template, "UTF-8");
         return template;
     },
 
-    load : function() {
+    load: function() {
         this.save();
         this.show(true);
         this.TEXTBOX.value = this.getTemplate();
         this.TEXTBOX.focus();
     },
 
-    save : function() {
+    save: function() {
         if ( !this.shouldSave ) return;
         var myCSS = sbCommonUtils.getScrapBookDir().clone();
         myCSS.append("note_template.html");
@@ -132,13 +132,13 @@ var sbNoteTemplate = {
         this.change(false);
     },
 
-    exit : function(checkOff) {
+    exit: function(checkOff) {
         this.save();
         this.show(false);
         if ( checkOff ) document.getElementById("sbNoteToolbarT").setAttribute("checked", false);
     },
 
-    change : function(bool) {
+    change: function(bool) {
         this.shouldSave = bool;
         document.getElementById("sbNoteToolbarS").disabled = !bool;
     },
