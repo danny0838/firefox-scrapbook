@@ -9,6 +9,23 @@ var sbCaptureOptions = {
     init: function() {
         if ( !window.arguments || !("sbContentSaver" in window.opener) ) window.close();
         this.param = window.arguments[0];
+        // load from prefs
+        document.getElementById("sbDetailOptionImages").checked = sbCommonUtils.getPref("capture.default.images", true);
+        document.getElementById("sbDetailOptionMedia").checked = sbCommonUtils.getPref("capture.default.media", true);
+        document.getElementById("sbDetailOptionFonts").checked = sbCommonUtils.getPref("capture.default.fonts", true);
+        document.getElementById("sbDetailOptionFrames").checked = sbCommonUtils.getPref("capture.default.frames", true);
+        document.getElementById("sbDetailOptionStyles").checked = sbCommonUtils.getPref("capture.default.styles", true);
+        document.getElementById("sbDetailOptionScript").checked = sbCommonUtils.getPref("capture.default.script", false);
+        document.getElementById("sbDetailOptionAsHtml").checked = sbCommonUtils.getPref("capture.default.asHtml", false);
+        document.getElementById("sbDetailOptionForceUtf8").checked = sbCommonUtils.getPref("capture.default.forceUtf8", true);
+        document.getElementById("sbDetailOptionRewriteStyles").checked = sbCommonUtils.getPref("capture.default.rewriteStyles", true);
+        document.getElementById("sbDetailOptionKeepLink").checked = sbCommonUtils.getPref("capture.default.keepLink", false);
+        document.getElementById("sbDetailImage").checked = sbCommonUtils.getPref("capture.default.dlimg", false);
+        document.getElementById("sbDetailSound").checked = sbCommonUtils.getPref("capture.default.dlsnd", false);
+        document.getElementById("sbDetailMovie").checked = sbCommonUtils.getPref("capture.default.dlmov", false);
+        document.getElementById("sbDetailArchive").checked = sbCommonUtils.getPref("capture.default.dlarc", false);
+        document.getElementById("sbDetailCustom").checked = sbCommonUtils.getPref("capture.default.custom", false);
+        document.getElementById("sbDetailCustomExt").value = sbCommonUtils.getPref("capture.default.customExt", "");
         // accept button
         document.documentElement.getButton("accept").label = sbCommonUtils.lang("scrapbook", "CAPTURE_OK_BUTTON");
         // title
@@ -89,6 +106,23 @@ var sbCaptureOptions = {
             var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
             sbDataSource.setProperty(res, "title", document.getElementById("sbDetailTitle").value);
         }
+        // save to preference
+        sbCommonUtils.setPref("capture.default.images", this.param.option["images"]);
+        sbCommonUtils.setPref("capture.default.media", this.param.option["media"]);
+        sbCommonUtils.setPref("capture.default.fonts", this.param.option["fonts"]);
+        sbCommonUtils.setPref("capture.default.frames", this.param.option["frames"]);
+        sbCommonUtils.setPref("capture.default.styles", this.param.option["styles"]);
+        sbCommonUtils.setPref("capture.default.script", this.param.option["script"]);
+        sbCommonUtils.setPref("capture.default.asHtml", this.param.option["asHtml"]);
+        sbCommonUtils.setPref("capture.default.forceUtf8", this.param.option["forceUtf8"]);
+        sbCommonUtils.setPref("capture.default.rewriteStyles", this.param.option["rewriteStyles"]);
+        sbCommonUtils.setPref("capture.default.keepLink", this.param.option["keepLink"]);
+        sbCommonUtils.setPref("capture.default.dlimg", this.param.option["dlimg"]);
+        sbCommonUtils.setPref("capture.default.dlsnd", this.param.option["dlsnd"]);
+        sbCommonUtils.setPref("capture.default.dlmov", this.param.option["dlmov"]);
+        sbCommonUtils.setPref("capture.default.dlarc", this.param.option["dlarc"]);
+        sbCommonUtils.setPref("capture.default.custom", document.getElementById("sbDetailCustom").checked);
+        sbCommonUtils.setPref("capture.default.customExt", document.getElementById("sbDetailCustomExt").value);
     },
 
     cancel: function() {

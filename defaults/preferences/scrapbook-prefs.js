@@ -46,5 +46,6 @@ pref("extensions.scrapbook.capture.default.dlimg", false);
 pref("extensions.scrapbook.capture.default.dlsnd", false);
 pref("extensions.scrapbook.capture.default.dlmov", false);
 pref("extensions.scrapbook.capture.default.dlarc", false);
-pref("extensions.scrapbook.capture.default.custom", "");
+pref("extensions.scrapbook.capture.default.custom", false);
+pref("extensions.scrapbook.capture.default.customExt", "pdf, doc");
 pref("extensions.scrapbook.fulltext.sitePagesLimit", 256);
