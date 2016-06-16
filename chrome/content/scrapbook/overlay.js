@@ -11,10 +11,10 @@ var sbBrowserOverlay = {
         onLocationChange: function(aProgress, aRequest, aURI) {
             sbBrowserOverlay.onLocationChange(aURI ? aURI.spec : "about:blank");
         },
-        onStateChange      : function(){},
-        onProgressChange   : function(){},
-        onStatusChange     : function(){},
-        onSecurityChange   : function(){},
+        onStateChange: function(){},
+        onProgressChange: function(){},
+        onStatusChange: function(){},
+        onSecurityChange: function(){},
         onLinkIconAvailable: function(){},
         QueryInterface: function(aIID) {
             if (aIID.equals(Components.interfaces.nsIWebProgressListener) ||
@@ -36,11 +36,11 @@ var sbBrowserOverlay = {
             elt.setAttribute("accesskey", key);
         }
         var keyMap = {
-            "key.sidebar"       : "key_openScrapBookSidebar",
-            "key.capture"       : "key_ScrapBookCapture",
-            "key.captureAs"     : "key_ScrapBookCaptureAs",
+            "key.sidebar": "key_openScrapBookSidebar",
+            "key.capture": "key_ScrapBookCapture",
+            "key.captureAs": "key_ScrapBookCaptureAs",
             "key.captureAllTabs": "key_ScrapBookSaveAllTabs",
-            "key.bookmark"      : "key_BookmarkWithScrapBook",
+            "key.bookmark": "key_BookmarkWithScrapBook",
         };
         for (let [pref, id] in Iterator(keyMap)) {
             var key = sbCommonUtils.getPref(pref, "");
@@ -66,8 +66,8 @@ var sbBrowserOverlay = {
         this.editMode = sbPageEditor.TOOLBAR.getAttribute("autoshow") == "true";
         this.infoMode = sbInfoViewer.TOOLBAR.getAttribute("autoshow") == "true";
         // update menus by ui settings
-        document.getElementById("ScrapBookMenu").hidden        = !sbCommonUtils.getPref("ui.menuBar", false);
-        document.getElementById("ScrapBookToolsMenu").hidden   = !sbCommonUtils.getPref("ui.toolsMenu", false);
+        document.getElementById("ScrapBookMenu").hidden = !sbCommonUtils.getPref("ui.menuBar", false);
+        document.getElementById("ScrapBookToolsMenu").hidden = !sbCommonUtils.getPref("ui.toolsMenu", false);
         // -- context menu
         // update if it's shown in a submenu
         var contextMenu = document.getElementById("contentAreaContextMenu");
@@ -212,7 +212,7 @@ var sbBrowserOverlay = {
             aPopup.removeChild(aPopup.lastChild);
     },
 
-    updateFolderPref : function(aResURI) {
+    updateFolderPref: function(aResURI) {
         if ( aResURI == "urn:scrapbook:root" ) return;
         var oldIDs = sbCommonUtils.getPref("ui.folderList", "");
         oldIDs = oldIDs ? oldIDs.split("|") : [];
@@ -225,7 +225,7 @@ var sbBrowserOverlay = {
         sbCommonUtils.writeFile(file, newIDs, "UTF-8");
     },
 
-    verifyTargetID : function(aTargetID) {
+    verifyTargetID: function(aTargetID) {
         if (aTargetID == "ScrapBookContextPicking") {
             var ret = {};
             window.openDialog(
@@ -239,7 +239,7 @@ var sbBrowserOverlay = {
         return aTargetID;
     },
 
-    execCapture : function(aPartialEntire, aFrameOnly, aShowDetail, aTargetID) {
+    execCapture: function(aPartialEntire, aFrameOnly, aShowDetail, aTargetID) {
         if ( aPartialEntire == 0 ) {
             aPartialEntire = this.isSelected() ? 1 : 2;
             aFrameOnly = aPartialEntire == 1;
@@ -251,7 +251,7 @@ var sbBrowserOverlay = {
         return ret;
     },
 
-    execCaptureTarget : function(aShowDetail, aTargetID) {
+    execCaptureTarget: function(aShowDetail, aTargetID) {
         aTargetID = this.verifyTargetID(aTargetID);
         if ( !aTargetID ) return;
         var linkURL;
@@ -288,11 +288,11 @@ var sbBrowserOverlay = {
 
     bookmark: function(aResName, aResIndex, aPreset) {
         var newItem = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
-        newItem.id     = sbDataSource.identify(newItem.id);
-        newItem.type   = "bookmark";
+        newItem.id = sbDataSource.identify(newItem.id);
+        newItem.type = "bookmark";
         newItem.source = window.content.location.href;
-        newItem.title  = gBrowser.selectedTab.label;
-        newItem.icon   = gBrowser.selectedTab.getAttribute("image");
+        newItem.title = gBrowser.selectedTab.label;
+        newItem.icon = gBrowser.selectedTab.getAttribute("image");
         for (var prop in aPreset)
             newItem[prop] = aPreset[prop];
         sbDataSource.addItem(newItem, aResName, aResIndex);
@@ -332,7 +332,7 @@ var sbBrowserOverlay = {
             return linkURL;
     },
 
-    isSelected : function() {
+    isSelected: function() {
         var sel = sbCommonUtils.getFocusedWindow().getSelection().QueryInterface(Components.interfaces.nsISelectionPrivate);
         var isSelected = false;
         try {
@@ -346,20 +346,20 @@ var sbBrowserOverlay = {
             this.onPopupShowing(event);
     },
 
-    onPopupShowing : function(event) {
+    onPopupShowing: function(event) {
         if (event.originalTarget.id != "contentAreaContextMenu")
             return;
         var selected, onLink, inFrame, onInput;
         try {
             selected = gContextMenu.isTextSelected;
-            onLink   = gContextMenu.onLink && !gContextMenu.onMailtoLink;
-            inFrame  = gContextMenu.inFrame;
-            onInput  = gContextMenu.onTextInput;
+            onLink = gContextMenu.onLink && !gContextMenu.onMailtoLink;
+            inFrame = gContextMenu.inFrame;
+            onInput = gContextMenu.onTextInput;
         } catch(ex) {
             selected = this.isSelected();
-            onLink   = this.getLinkURI() ? true : false;
-            inFrame  = document.popupNode.ownerDocument != window.content.document;
-            onInput  = document.popupNode instanceof HTMLTextAreaElement || 
+            onLink = this.getLinkURI() ? true : false;
+            inFrame = document.popupNode.ownerDocument != window.content.document;
+            onInput = document.popupNode instanceof HTMLTextAreaElement || 
                        (document.popupNode instanceof HTMLInputElement && 
                        (document.popupNode.type == "text" || document.popupNode.type == "password"));
         }
@@ -367,7 +367,7 @@ var sbBrowserOverlay = {
         var getElement = function(aID) {
             return document.getElementById(aID);
         };
-        var prefContext  = sbCommonUtils.getPref("ui.contextMenu", false);
+        var prefContext = sbCommonUtils.getPref("ui.contextMenu", false);
         var prefContextSub = sbCommonUtils.getPref("ui.contextSubMenu", false);
         var prefBookmark = sbCommonUtils.getPref("ui.bookmarkMenu", false);
         getElement("ScrapBookContextSubmenu").hidden = !prefContext || !prefContextSub;
@@ -388,10 +388,10 @@ var sbBrowserOverlay = {
         if (event.originalTarget.localName == "menu" || event.button != 1)
             return;
         switch (aFlag) {
-            case 1 : this.execCapture(1, true, true , event.originalTarget.id); break;
-            case 3 : this.execCapture(2, false,true , event.originalTarget.id); break;
-            case 5 : this.execCapture(2, true, true , event.originalTarget.id); break;
-            case 7 : this.execCaptureTarget(true,  event.originalTarget.id); break;
+            case 1: this.execCapture(1, true, true , event.originalTarget.id); break;
+            case 3: this.execCapture(2, false,true , event.originalTarget.id); break;
+            case 5: this.execCapture(2, true, true , event.originalTarget.id); break;
+            case 7: this.execCaptureTarget(true,  event.originalTarget.id); break;
         }
     },
 
@@ -408,7 +408,7 @@ var sbMenuHandler = {
 
     _init: function() {
         this._menu = document.getElementById("ScrapBookMenu");
-        this.baseURL  = sbCommonUtils.getBaseHref(sbDataSource.data.URI);
+        this.baseURL = sbCommonUtils.getBaseHref(sbDataSource.data.URI);
         var dsEnum = this._menu.database.GetDataSources();
         while (dsEnum.hasMoreElements()) {
             var ds = dsEnum.getNext().QueryInterface(Components.interfaces.nsIRDFDataSource);
@@ -444,7 +444,7 @@ var sbMenuHandler = {
             this._menu.builder.rebuild();
         } else {
             if (event.target.firstChild && event.target.firstChild.className.indexOf("sb-capture") >= 0) {
-                event.target.firstChild.label     = getElement("ScrapBookMenubarItem1").label;
+                event.target.firstChild.label = getElement("ScrapBookMenubarItem1").label;
                 event.target.firstChild.className = getElement("ScrapBookMenubarItem1").className;
                 return;
             }
@@ -489,9 +489,9 @@ var sbMenuHandler = {
             return;
         var url;
         switch (sbDataSource.getProperty(res, "type")) {
-            case "note"     : url = "chrome://scrapbook/content/note.xul?id=" + id; break;
-            case "bookmark" : url = sbDataSource.getProperty(res, "source");        break;
-            default         : url = this.baseURL + "data/" + id + "/index.html";
+            case "note": url = "chrome://scrapbook/content/note.xul?id=" + id; break;
+            case "bookmark": url = sbDataSource.getProperty(res, "source"); break;
+            default: url = this.baseURL + "data/" + id + "/index.html";
         }
         var openInTab = sbCommonUtils.getPref("tabs.open", false);
         sbCommonUtils.loadURL(url, openInTab || event.button == 1 || event.ctrlKey || event.shiftKey);

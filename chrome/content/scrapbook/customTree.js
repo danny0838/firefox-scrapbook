@@ -21,38 +21,38 @@ sbCustomTreeView.prototype = {
     setTree: function(tree) {
         this._treeBox = tree;
     },
-    cycleHeader : function(colID, elem){},
-    getRowProperties : function(index, properties){},
-    getCellProperties : function(row, colID, properties){},
-    getColumnProperties : function(colID, colElem, properties){},
-    isContainer : function(row){},
-    isContainerOpen : function(row){},
-    isContainerEmpty : function(row){},
-    isSeparator : function(row){},
-    isSorted : function(row){},
-    canDrop : function(index, orient){},
-    canDropOn : function(index){},
-    canDropBeforeAfter : function(index, before){},
-    drop : function(index, orient){},
-    getParentIndex : function getParentIndex(index){ return -1; },
-    hasNextSibling : function(index, afterIndex){},
-     getLevel : function(index){},
-    getImageSrc : function(row, col){},
-    getProgressMode : function(row, colID){},
-    getCellValue : function(row, colID){},
-    selectionChanged : function(){},
-    cycleCell : function(row, colID){},
-    isEditable : function(row, colID){},
-    toggleOpenState : function(index){},
-    performAction : function(action){},
-    performActionOnRow : function(action, row){},
-    performActionOnCell : function(action, row, colID){},
+    cycleHeader: function(colID, elem){},
+    getRowProperties: function(index, properties){},
+    getCellProperties: function(row, colID, properties){},
+    getColumnProperties: function(colID, colElem, properties){},
+    isContainer: function(row){},
+    isContainerOpen: function(row){},
+    isContainerEmpty: function(row){},
+    isSeparator: function(row){},
+    isSorted: function(row){},
+    canDrop: function(index, orient){},
+    canDropOn: function(index){},
+    canDropBeforeAfter: function(index, before){},
+    drop: function(index, orient){},
+    getParentIndex: function getParentIndex(index){ return -1; },
+    hasNextSibling: function(index, afterIndex){},
+     getLevel: function(index){},
+    getImageSrc: function(row, col){},
+    getProgressMode: function(row, colID){},
+    getCellValue: function(row, colID){},
+    selectionChanged: function(){},
+    cycleCell: function(row, colID){},
+    isEditable: function(row, colID){},
+    toggleOpenState: function(index){},
+    performAction: function(action){},
+    performActionOnRow: function(action, row){},
+    performActionOnCell: function(action, row, colID){},
 };
 
 
 var sbCustomTreeUtil = {
 
-    sortItems : function(aService, aColElem) {
+    sortItems: function(aService, aColElem) {
         var asc = aColElem.getAttribute("sortDirection") != "ascending";
         var elems = aService.TREE.firstChild.childNodes;
         for ( var i = 0; i < elems.length; i++ ) {
@@ -67,7 +67,7 @@ var sbCustomTreeUtil = {
         aService.initTree();
     },
 
-    sortArrayByIndex : function(array, index) {
+    sortArrayByIndex: function(array, index) {
         array.sort(function(a, b){
             if (a[index] > b[index]) return 1;
             if (a[index] < b[index]) return -1;
@@ -75,7 +75,7 @@ var sbCustomTreeUtil = {
         });
     },
 
-    getSelection : function(aTree) {
+    getSelection: function(aTree) {
         var retArray = [];
         for ( var rc = 0; rc < aTree.view.selection.getRangeCount(); rc++ ) {
             var start = {}, end = {};

@@ -1,17 +1,17 @@
 
 var sbOutputService = {
 
-    depth : 0,
-    content : "",
-    isAuto : false,
-    optionAll   : true,
-    optionFrame : false,
-    optionOpen   : true,
+    depth: 0,
+    content: "",
+    isAuto: false,
+    optionAll: true,
+    optionFrame: false,
+    optionOpen: true,
 
     /**
      * window.arguments[0]: true means is auto mode
      */
-    init : function() {
+    init: function() {
         if (window.arguments && window.arguments[0]) this.isAuto = true;
         document.documentElement.getButton("accept").label = sbCommonUtils.lang("scrapbook", "START_BUTTON");
         sbTreeHandler.init(true);
@@ -19,7 +19,7 @@ var sbOutputService = {
         if ( this.isAuto ) this.start();
     },
 
-    selectAllFolders : function() {
+    selectAllFolders: function() {
         if ( document.getElementById('ScrapBookOutputOptionA').checked ) {
             sbTreeHandler.toggleAllFolders(true);
             sbTreeHandler.TREE.view.selection.selectAll();
@@ -27,11 +27,11 @@ var sbOutputService = {
         }
     },
 
-    toggleAllSelection : function() {
+    toggleAllSelection: function() {
         document.getElementById("ScrapBookOutputOptionA").checked = false;
     },
 
-    start : function() {
+    start: function() {
         this.optionAll = document.getElementById("ScrapBookOutputOptionA").checked;
         this.optionFrame = document.getElementById("ScrapBookOutputOptionF").checked;
         this.optionOpen = document.getElementById("ScrapBookOutputOptionO").checked;
@@ -43,13 +43,13 @@ var sbOutputService = {
         if ( this.isAuto ) window.close();
     },
 
-    execAll : function() {
+    execAll: function() {
         this.content = this.getHTMLHead();
         this.processRescursively(sbTreeHandler.TREE.resource);
         this.finalize();
     },
 
-    exec : function() {
+    exec: function() {
         this.content = this.getHTMLHead();
         var selResList = sbTreeHandler.getSelection(true, 1);
         this.content += "<ul>\n";
@@ -63,18 +63,18 @@ var sbOutputService = {
         this.finalize();
     },
 
-    finalize : function() {
+    finalize: function() {
         var dir = sbCommonUtils.getScrapBookDir().clone();
         dir.append("tree");
         if ( !dir.exists() ) dir.create(dir.DIRECTORY_TYPE, 0700);
         var urlHash = {
-            "chrome://scrapbook/skin/treeitem.png"   : "treeitem.png",
-            "chrome://scrapbook/skin/treenote.png"   : "treenote.png",
-            "chrome://scrapbook/skin/treenotex.png"  : "treenotex.png",
-            "chrome://scrapbook/skin/treefolder.png" : "folder.png",
-            "chrome://scrapbook/skin/treefolder_open.png" : "folder_open.png",
-            "chrome://scrapbook/skin/toolbar_toggle.png" : "toggle.png",
-            "chrome://scrapbook/skin/search_all.png" : "search.png",
+            "chrome://scrapbook/skin/treeitem.png": "treeitem.png",
+            "chrome://scrapbook/skin/treenote.png": "treenote.png",
+            "chrome://scrapbook/skin/treenotex.png": "treenotex.png",
+            "chrome://scrapbook/skin/treefolder.png": "folder.png",
+            "chrome://scrapbook/skin/treefolder_open.png": "folder_open.png",
+            "chrome://scrapbook/skin/toolbar_toggle.png": "toggle.png",
+            "chrome://scrapbook/skin/search_all.png": "search.png",
         };
         for ( var url in urlHash ) {
             var destFile = dir.clone();
@@ -101,7 +101,7 @@ var sbOutputService = {
         }
     },
 
-    processRescursively : function(aContRes) {
+    processRescursively: function(aContRes) {
         this.depth++;
         var id = sbDataSource.getProperty(aContRes, "id") || "root";
         this.content += '<ul id="folder-' + id + '">\n';
@@ -117,13 +117,13 @@ var sbOutputService = {
         this.depth--;
     },
 
-    getHTMLTitle : function() {
+    getHTMLTitle: function() {
         var multibook = sbCommonUtils.getPref("multibook.enabled", false);
         var title = (multibook ? sbCommonUtils.getPref("data.title", "") + " - " : "") + "ScrapBook";
         return sbCommonUtils.escapeHTMLWithSpace(title, true);
     },
 
-    getHTMLHead : function() {
+    getHTMLHead: function() {
         var HTML = '<!DOCTYPE html>\n'
             + '<html id="scrapbook-index">\n\n'
             + '<head>\n'
@@ -209,10 +209,10 @@ var sbOutputService = {
         return HTML;
     },
 
-    getHTMLBody : function(aRes) {
-        var id    = sbDataSource.getProperty(aRes, "id");
-        var type  = sbDataSource.getProperty(aRes, "type");
-        var icon  = sbDataSource.getProperty(aRes, "icon");
+    getHTMLBody: function(aRes) {
+        var id = sbDataSource.getProperty(aRes, "id");
+        var type = sbDataSource.getProperty(aRes, "type");
+        var icon = sbDataSource.getProperty(aRes, "icon");
         var title = sbDataSource.getProperty(aRes, "title");
         var source = sbDataSource.getProperty(aRes, "source");
         if ( icon.match(/(\/data\/\d{14}\/.*$)/) ) icon = ".." + RegExp.$1;
@@ -245,7 +245,7 @@ var sbOutputService = {
         return ret;
     },
 
-    getHTMLFoot : function() {
+    getHTMLFoot: function() {
         var HTML = ''
                 + '<script>init();</script>\n'
                 + '</body>\n'
@@ -254,7 +254,7 @@ var sbOutputService = {
         return HTML;
     },
 
-    getHTMLFrame : function() {
+    getHTMLFrame: function() {
         var HTML = '<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd">\n'
             + '<html id="scrapbook-frame">\n'
             + '<head>\n'
@@ -270,7 +270,7 @@ var sbOutputService = {
         return HTML;
     },
 
-    getHTMLSearch : function() {
+    getHTMLSearch: function() {
         var HTML = '<!DOCTYPE html>\n'
             + '<html id="scrapbook-search">\n'
             + '<head>\n'
@@ -652,35 +652,35 @@ var sbOutputService = {
             + '        return true;\n'
             + '    },\n'
             + '\n'
-            + '    _match_tcc : function(keyitem, data) {\n'
+            + '    _match_tcc: function(keyitem, data) {\n'
             + '        return this.matchText(keyitem, [data.item.title, data.item.comment, data.cache.content].join("\\n"));\n'
             + '    },\n'
             + '\n'
-            + '    _match_content : function(keyitem, data) {\n'
+            + '    _match_content: function(keyitem, data) {\n'
             + '        return this.matchText(keyitem, data.cache.content);\n'
             + '    },\n'
             + '\n'
-            + '    _match_id : function(keyitem, data) {\n'
+            + '    _match_id: function(keyitem, data) {\n'
             + '        return this.matchText(keyitem, data.item.id);\n'
             + '    },\n'
             + '\n'
-            + '    _match_file : function(keyitem, data) {\n'
+            + '    _match_file: function(keyitem, data) {\n'
             + '        return this.matchText(keyitem, data.cache.path);\n'
             + '    },\n'
             + '\n'
-            + '    _match_title : function(keyitem, data) {\n'
+            + '    _match_title: function(keyitem, data) {\n'
             + '        return this.matchText(keyitem, data.item.title);\n'
             + '    },\n'
             + '\n'
-            + '    _match_comment : function(keyitem, data) {\n'
+            + '    _match_comment: function(keyitem, data) {\n'
             + '        return this.matchText(keyitem, data.item.comment);\n'
             + '    },\n'
             + '\n'
-            + '    _match_source : function(keyitem, data) {\n'
+            + '    _match_source: function(keyitem, data) {\n'
             + '        return this.matchText(keyitem, data.item.source);\n'
             + '    },\n'
             + '\n'
-            + '    _match_type : function(keyitem, data) {\n'
+            + '    _match_type: function(keyitem, data) {\n'
             + '        var type = data.item.type;\n'
             + '        for (var i=0, len=keyitem.exclude.length; i<len; i++) {\n'
             + '            if (type == keyitem.exclude[i]) {\n'
@@ -697,15 +697,15 @@ var sbOutputService = {
             + '        return false;\n'
             + '    },\n'
             + '\n'
-            + '    _match_create : function(keyitem, data) {\n'
+            + '    _match_create: function(keyitem, data) {\n'
             + '        return this.matchDate(keyitem, data.item.create);\n'
             + '    },\n'
             + '\n'
-            + '    _match_modify : function(keyitem, data) {\n'
+            + '    _match_modify: function(keyitem, data) {\n'
             + '        return this.matchDate(keyitem, data.item.modify);\n'
             + '    },\n'
             + '\n'
-            + '    matchText : function(keyitem, text) {\n'
+            + '    matchText: function(keyitem, text) {\n'
             + '        for (var i=0, len=keyitem.exclude.length; i<len; i++) {\n'
             + '            if (keyitem.exclude[i].test(text)) {\n'
             + '                return false;\n'
@@ -719,7 +719,7 @@ var sbOutputService = {
             + '        return true;\n'
             + '    },\n'
             + '\n'
-            + '    matchDate : function(keyitem, date) {\n'
+            + '    matchDate: function(keyitem, date) {\n'
             + '        if (!date) return false;\n'
             + '        var date = parseInt(date, 10);\n'
             + '        for (var i=0, len=keyitem.exclude.length; i<len; i++) {\n'
@@ -741,11 +741,11 @@ var sbOutputService = {
             + '        var wrapper = document.getElementById("result");\n'
             + '        var result = document.createElement("LI");\n'
             + '        var href = (item.type == "bookmark") ?\n'
-            + '            item.source :\n'
+            + '            item.source:\n'
             + '            "data/" + item.id + "/" + cache.path.replace(/[^\\/]+/g, function(m){return encodeURIComponent(m);});\n'
             + '        var bullet = this.config["list_bullet"] + " ";\n'
             + '        var text = item.type == "bookmark" ?\n'
-            + '            bullet + item.title :\n'
+            + '            bullet + item.title:\n'
             + '            item.title + ((cache.path != "index.html") ? (" (" + cache.path + ")") : "");\n'
             + '        if (item.type != "bookmark") {\n'
             + '            var fhref = scrapbook.path + "/" + "tree/frame.html#../" + href;\n'
@@ -779,7 +779,7 @@ var sbOutputService = {
             + '        wrapper.appendChild(result);\n'
             + '    },\n'
             + '\n'
-            + '    escapeRegExp : function(str) {\n'
+            + '    escapeRegExp: function(str) {\n'
             + '        return str.replace(/([\\*\\+\\?\\.\\^\\/\\$\\\\\\|\\[\\]\\{\\}\\(\\)])/g, "\\\\$1");\n'
             + '    },\n'
             + '\n'

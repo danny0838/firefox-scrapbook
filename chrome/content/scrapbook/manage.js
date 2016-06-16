@@ -1,11 +1,11 @@
 
 var sbManageService = {
 
-    moduleID : "",
+    moduleID: "",
 
-    treeColumnState : { hidden: [], persist: [] },
+    treeColumnState: { hidden: [], persist: [] },
 
-    init : function() {
+    init: function() {
         if ( window.arguments ) {
             if ( window.arguments[0] ) {
                 sbTreeHandler.TREE.ref = window.arguments[0].Value;
@@ -21,7 +21,7 @@ var sbManageService = {
         document.getElementById("sbSearchTextbox").focus();
     },
 
-    toggleRightPane : function(aModuleElt) {
+    toggleRightPane: function(aModuleElt) {
         if ( typeof(aModuleElt) == "string" ) aModuleElt = document.getElementById(aModuleElt);
         this.moduleID = this.moduleID == aModuleElt.id ? "" : aModuleElt.id;
         var willEnable = this.moduleID == "" ? false : true;
@@ -47,7 +47,7 @@ var sbManageService = {
         if ( willEnable ) document.getElementById("sbRightPaneBrowser").loadURI(aModuleElt.getAttribute("moduleurl"));
     },
 
-    getTreeSelection : function() {
+    getTreeSelection: function() {
         var arg1 = [], arg2 = [];
         var idxList = sbTreeHandler.getSelection(false, 2);
         idxList.forEach(function(aIdx) {

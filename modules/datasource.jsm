@@ -2,18 +2,18 @@ Components.utils.import("resource://scrapbook-modules/common.jsm");
 
 var sbDataSource = {
 
-    _firstInit : true,
-    _flushTimer : null,
-    _dataObj : null,
-    _dataFile : null,
-    _needReOutputTree : false,
+    _firstInit: true,
+    _flushTimer: null,
+    _dataObj: null,
+    _dataFile: null,
+    _needReOutputTree: false,
 
     get data() {
         if (!this._dataObj) this._init();
         return this._dataObj;
     },
 
-    _init : function(aQuietWarning) {
+    _init: function(aQuietWarning) {
         if (this._firstInit) {
             this._firstInit = false;
             var obs = Components.classes["@mozilla.org/observer-service;1"].getService(Components.interfaces.nsIObserverService);
@@ -36,7 +36,7 @@ var sbDataSource = {
         }
     },
 
-    _uninit : function() {
+    _uninit: function() {
         if (this._flushTimer) this.flush();
         try { sbCommonUtils.RDF.UnregisterDataSource(this._dataObj); } catch(ex) {}
         this._dataObj = null;
@@ -44,13 +44,13 @@ var sbDataSource = {
     },
 
     // when data source change (mostly due to changing pref)
-    checkRefresh : function(aNoCheck) {
+    checkRefresh: function(aNoCheck) {
         this._uninit();
         this._init();
         sbCommonUtils.refreshGlobal();
     },
 
-    backup : function() {
+    backup: function() {
         var bDir = sbCommonUtils.getScrapBookDir();
         bDir.append("backup");
         if ( !bDir.exists() ) bDir.create(bDir.DIRECTORY_TYPE, 0700);
@@ -59,7 +59,7 @@ var sbDataSource = {
         this.cleanUpBackups(bDir);
     },
 
-    cleanUpBackups : function(bDir) {
+    cleanUpBackups: function(bDir) {
         var max = 5;
         var today = (new Date()).getTime();
         var dirEnum = bDir.directoryEntries;
@@ -75,7 +75,7 @@ var sbDataSource = {
         }
     },
 
-    flush : function() {
+    flush: function() {
         if (this._flushTimer) {
             this._flushTimer.cancel();
             this._flushTimer = null;
@@ -88,7 +88,7 @@ var sbDataSource = {
         }
     },
 
-    _flushWithDelay : function() {
+    _flushWithDelay: function() {
         if (this._flushTimer) return;
         this._needReOutputTree = true;
         this._flushTimer = Components.classes["@mozilla.org/timer;1"].createInstance(Components.interfaces.nsITimer);
@@ -96,7 +96,7 @@ var sbDataSource = {
         this._flushTimer.init(this, 10000, Components.interfaces.nsITimer.TYPE_ONE_SHOT);
     },
 
-    observe : function(aSubject, aTopic, aData) {
+    observe: function(aSubject, aTopic, aData) {
         switch (aTopic) {
             case "timer-callback": 
                 this.flush();
@@ -109,18 +109,18 @@ var sbDataSource = {
         }
     },
 
-    unregister : function() {
+    unregister: function() {
         sbCommonUtils.RDF.UnregisterDataSource(this._dataObj);
     },
 
 
 
-    sanitize : function(aVal) {
+    sanitize: function(aVal) {
         if ( !aVal ) return "";
         return aVal.replace(/[\x00-\x1F\x7F]/g, " ");
     },
 
-    validateURI : function(aURI) {
+    validateURI: function(aURI) {
         if ( aURI == "urn:scrapbook:root" || aURI == "urn:scrapbook:search" || aURI.match(/^urn:scrapbook:item\d{14}$/) ) {
             return true;
         } else {
@@ -128,7 +128,7 @@ var sbDataSource = {
         }
     },
 
-    addItem : function(aSBitem, aParName, aIdx) {
+    addItem: function(aSBitem, aParName, aIdx) {
         if ( !this.validateURI("urn:scrapbook:item" + aSBitem.id) ) return;
         ["title", "comment", "icon", "source"].forEach(function(prop) {
             aSBitem[prop] = this.sanitize(aSBitem[prop]);
@@ -173,7 +173,7 @@ var sbDataSource = {
         }
     },
 
-    moveItem : function(curRes, curPar, tarPar, tarRelIdx) {
+    moveItem: function(curRes, curPar, tarPar, tarRelIdx) {
         try {
             sbCommonUtils.RDFC.Init(this._dataObj, curPar);
             sbCommonUtils.RDFC.RemoveElement(curRes, true);
@@ -199,7 +199,7 @@ var sbDataSource = {
         this._flushWithDelay();
     },
 
-    copyItem : function(curRes, tarPar, tarRelIdx) {
+    copyItem: function(curRes, tarPar, tarRelIdx) {
         var oldID = this.getProperty(curRes, "id");
         var newID = this.identify(oldID);
         // copy content
@@ -218,13 +218,13 @@ var sbDataSource = {
         this._flushWithDelay();
     },
 
-    createEmptySeq : function(aResName) {
+    createEmptySeq: function(aResName) {
         if ( !this.validateURI(aResName) ) return;
         sbCommonUtils.RDFCU.MakeSeq(this._dataObj, sbCommonUtils.RDF.GetResource(aResName));
         this._flushWithDelay();
     },
 
-    deleteItemDescending : function(aRes, aParRes, aRecObj) {
+    deleteItemDescending: function(aRes, aParRes, aRecObj) {
         if (aParRes) {
             sbCommonUtils.RDFC.Init(this._dataObj, aParRes);
             sbCommonUtils.RDFC.RemoveElement(aRes, true);
@@ -240,12 +240,12 @@ var sbDataSource = {
         return rmIDs;
     },
 
-    removeResource : function(aRes) {
+    removeResource: function(aRes) {
         var names = this._dataObj.ArcLabelsOut(aRes);
         var rmID = this.getProperty(aRes, "id");
         while ( names.hasMoreElements() ) {
             try {
-                var name  = names.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+                var name = names.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
                 var value = this._dataObj.GetTarget(aRes, name, true);
                 this._dataObj.Unassert(aRes, name, value);
             } catch(ex) {
@@ -257,7 +257,7 @@ var sbDataSource = {
 
 
 
-    getContainer : function(aResURI, force) {
+    getContainer: function(aResURI, force) {
         var cont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
         try {
             cont.Init(this._dataObj, sbCommonUtils.RDF.GetResource(aResURI));
@@ -272,7 +272,7 @@ var sbDataSource = {
         return cont;
     },
 
-    clearContainer : function(ccResURI) {
+    clearContainer: function(ccResURI) {
         var ccCont = this.getContainer(ccResURI, true);
         var ccCount = ccCont.GetCount();
         for ( var ccI=ccCount; ccI>0; ccI-- ) {
@@ -281,7 +281,7 @@ var sbDataSource = {
         this._flushWithDelay();
     },
 
-    removeFromContainer : function(aResURI, aRes) {
+    removeFromContainer: function(aResURI, aRes) {
         var cont = this.getContainer(aResURI, true);
         if ( cont ) cont.RemoveElement(aRes, true);
         this._flushWithDelay();
@@ -289,13 +289,13 @@ var sbDataSource = {
 
 
 
-    getItem : function(aRes) {
+    getItem: function(aRes) {
         var ns = sbCommonUtils.namespace, nsl = ns.length;
         var item = sbCommonUtils.newItem();
         var names = this._dataObj.ArcLabelsOut(aRes);
         while ( names.hasMoreElements() ) {
             try {
-                var name  = names.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
+                var name = names.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
                 if (name.Value.substring(0, nsl) != ns) continue;
                 var key = name.Value.substring(nsl);
                 var value = this._dataObj.GetTarget(aRes, name, true).QueryInterface(Components.interfaces.nsIRDFLiteral).Value;
@@ -306,7 +306,7 @@ var sbDataSource = {
         return item;
     },
 
-    getProperty : function(aRes, aProp) {
+    getProperty: function(aRes, aProp) {
         if ( aRes.Value == "urn:scrapbook:root" ) return "";
         try {
             var retVal = this._dataObj.GetTarget(aRes, sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + aProp), true);
@@ -316,7 +316,7 @@ var sbDataSource = {
         }
     },
 
-    setProperty : function(aRes, aProp, newVal) {
+    setProperty: function(aRes, aProp, newVal) {
         newVal = this.sanitize(newVal);
         aProp = sbCommonUtils.RDF.GetResource(sbCommonUtils.namespace + aProp);
         try {
@@ -334,44 +334,44 @@ var sbDataSource = {
         }
     },
 
-    getURL : function(aRes) {
+    getURL: function(aRes) {
         var id = aRes.Value.substring(18);
         switch ( this.getProperty(aRes, "type") ) {
-            case "folder"   : return "chrome://scrapbook/content/view.xul?id=" + id; break;
-            case "note"     : return "chrome://scrapbook/content/note.xul?id=" + id; break;
-            case "bookmark" : return this.getProperty(aRes, "source"); break;
-            default         : return sbCommonUtils.getBaseHref(this._dataObj.URI) + "data/" + id + "/index.html";
+            case "folder": return "chrome://scrapbook/content/view.xul?id=" + id; break;
+            case "note": return "chrome://scrapbook/content/note.xul?id=" + id; break;
+            case "bookmark": return this.getProperty(aRes, "source"); break;
+            default: return sbCommonUtils.getBaseHref(this._dataObj.URI) + "data/" + id + "/index.html";
         }
     },
 
-    exists : function(aRes) {
+    exists: function(aRes) {
         if ( typeof(aRes) == "string" ) {
             aRes = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aRes);
         }
         return this._dataObj.ArcLabelsOut(aRes).hasMoreElements();
     },
 
-    isolated : function(aRes) {
+    isolated: function(aRes) {
         return !this._dataObj.ArcLabelsIn(aRes).hasMoreElements();
     },
 
-    isContainer : function(aRes) {
+    isContainer: function(aRes) {
         return sbCommonUtils.RDFCU.IsContainer(this._dataObj, aRes);
     },
 
-    identify : function(aID) {
+    identify: function(aID) {
         while ( this.exists(aID) ) {
             aID = (parseInt(aID, 10) + 1).toString();
         }
         return aID;
     },
 
-    getRelativeIndex : function(aParRes, aRes) {
+    getRelativeIndex: function(aParRes, aRes) {
         return sbCommonUtils.RDFCU.indexOf(this._dataObj, aParRes, aRes);
     },
 
     // aRule: 0 for any, 1 for containers (folders), 2 for items
-    flattenResources : function(aContRes, aRule, aRecursive, aRecObj) {
+    flattenResources: function(aContRes, aRule, aRecursive, aRecObj) {
         var resList = aRecObj || [];
         if ( aRule != 2 ) resList.push(aContRes);
         sbCommonUtils.RDFC.Init(this._dataObj, aContRes);
@@ -391,7 +391,7 @@ var sbDataSource = {
         return resList;
     },
 
-    findParentResource : function(aRes) {
+    findParentResource: function(aRes) {
         var resEnum = this._dataObj.GetAllResources();
         while ( resEnum.hasMoreElements() ) {
             var res = resEnum.getNext().QueryInterface(Components.interfaces.nsIRDFResource);
@@ -402,7 +402,7 @@ var sbDataSource = {
         return null;
     },
 
-    getFolderPath : function(aRes) {
+    getFolderPath: function(aRes) {
         var ret = [];
         while (true) {
             aRes = this.findParentResource(aRes);
@@ -412,7 +412,7 @@ var sbDataSource = {
         return ret;
     },
 
-    outputTreeAuto : function(aWindow) {
+    outputTreeAuto: function(aWindow) {
         if (!sbCommonUtils.getPref("autoOutput", false)) return;
         if (!this._needReOutputTree) return;
         try {
@@ -422,7 +422,7 @@ var sbDataSource = {
         }
     },
 
-    outputTreeAutoDone : function() {
+    outputTreeAutoDone: function() {
         this._needReOutputTree = false;
     }
 };

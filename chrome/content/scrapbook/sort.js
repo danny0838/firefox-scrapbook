@@ -4,14 +4,14 @@ var sbSortService = {
     get WIZARD()      { return document.getElementById("sbSortWizard"); },
     get RADIO_GROUP() { return document.getElementById("sbSortRadioGroup"); },
 
-    key : "",
-    order : 1,
-    grouping : false,
-    index : -1,
-    contResList : [],
-    waitTime : 0,
+    key: "",
+    order: 1,
+    grouping: false,
+    index: -1,
+    contResList: [],
+    waitTime: 0,
 
-    init : function() {
+    init: function() {
         this.WIZARD.getButton("back").hidden = true;
         this.WIZARD.getButton("finish").disabled = true;
         this.WIZARD.getButton("next").removeAttribute("accesskey");
@@ -29,28 +29,28 @@ var sbSortService = {
         window.opener.document.getElementById("sbTreeOuter").hidden = true;
     },
 
-    countDown : function() {
+    countDown: function() {
         this.WIZARD.getButton("next").label = sbCommonUtils.lang("scrapbook", "START_BUTTON") + (this.waitTime > 0 ? " (" + this.waitTime + ")" : "");
         this.WIZARD.canAdvance = this.waitTime == 0;
         if ( this.waitTime-- ) setTimeout(function(){ sbSortService.countDown() }, 500);
     },
 
-    exec : function() {
+    exec: function() {
         this.WIZARD.getButton("cancel").hidden = true;
         this.grouping = document.getElementById("sbSortGrouping").checked;
         if (document.getElementById("sbSortRecursive").checked)
             this.contResList = sbDataSource.flattenResources(this.contResList[0], 1, true);
         switch ( this.RADIO_GROUP.selectedIndex ) {
-            case 0 : break;
-            case 1 : this.key = "title"; this.order = 1;  break;
-            case 2 : this.key = "title"; this.order = -1; break;
-            case 3 : this.key = "id";    this.order = 1;  break;
-            case 4 : this.key = "id";    this.order = -1; break;
+            case 0: break;
+            case 1: this.key = "title"; this.order = 1;  break;
+            case 2: this.key = "title"; this.order = -1; break;
+            case 3: this.key = "id";    this.order = 1;  break;
+            case 4: this.key = "id";    this.order = -1; break;
         }
         this.next();
     },
 
-    next : function() {
+    next: function() {
         if ( ++this.index < this.contResList.length ) {
             document.getElementById("sbSortTextbox").value = "(" + (this.index + 1) + "/" + this.contResList.length + ")... " + sbDataSource.getProperty(this.contResList[this.index], "title");
             this.process(this.contResList[this.index]);
@@ -67,7 +67,7 @@ var sbSortService = {
         }
     },
 
-    process : function(aContRes) {
+    process: function(aContRes) {
         var rdfCont = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
         rdfCont.Init(sbDataSource.data, aContRes);
         var resEnum = rdfCont.GetElements();
@@ -121,12 +121,12 @@ var sbSortService = {
         setTimeout(function(){ sbSortService.next(res); }, 0);
     },
 
-    showTree : function() {
+    showTree: function() {
         // show the tree
         window.opener.document.getElementById("sbTreeOuter").hidden = false;
     },
 
-    compare : function(resA, resB) {
+    compare: function(resA, resB) {
         var a = sbDataSource.getProperty(resA, sbSortService.key).toUpperCase();
         var b = sbDataSource.getProperty(resB, sbSortService.key).toUpperCase();
         if ( a > b ) return sbSortService.order;

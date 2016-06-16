@@ -1,20 +1,20 @@
 
-var gURLs       = [];
-var gDepths     = [];
-var gRefURL     = "";
+var gURLs = [];
+var gDepths = [];
+var gRefURL = "";
 var gShowDetail = false;
-var gResName    = "";
-var gResIdx     = 0;
-var gReferItem  = null;
-var gOption     = {};
-var gFile2URL   = {};
-var gURL2Name   = {};
-var gPreset     = [];
-var gContext    = "";
-var gCharset    = "";
-var gTitles     = [];
+var gResName = "";
+var gResIdx = 0;
+var gReferItem = null;
+var gOption = {};
+var gFile2URL = {};
+var gURL2Name = {};
+var gPreset = [];
+var gContext = "";
+var gCharset = "";
+var gTitles = [];
 var gTitle;
-var gTimeout    = null;
+var gTimeout = null;
 
 
 
@@ -94,19 +94,19 @@ function SB_initCapture() {
         })();
     }
 
-    var myURLs  = data.urls;
-    gRefURL     = data.refUrl;
+    var myURLs = data.urls;
+    gRefURL = data.refUrl;
     gShowDetail = data.showDetail;
-    gResName    = data.resName;
-    gResIdx     = data.resIdx;
-    gReferItem  = data.referItem;
-    gOption     = data.option;
-    gFile2URL   = data.file2Url;
-    gPreset     = data.preset;
-    gCharset    = data.charset;
-    gTimeout    = data.timeout;
-    gTitles     = data.titles;
-    gContext    = data.context;
+    gResName = data.resName;
+    gResIdx = data.resIdx;
+    gReferItem = data.referItem;
+    gOption = data.option;
+    gFile2URL = data.file2Url;
+    gPreset = data.preset;
+    gCharset = data.charset;
+    gTimeout = data.timeout;
+    gTitles = data.titles;
+    gContext = data.context;
 
     if ( !gTimeout ) gTimeout = 0;
     if ( gContext == "indepth" ) {
@@ -171,16 +171,16 @@ var sbCaptureTask = {
     get TREE()     { return document.getElementById("sbpURLList"); },
     get URL()      { return gURLs[this.index]; },
 
-    index       : 0,
-    isLocal     : false,
-    refreshHash : null,
-    sniffer     : null,
-    seconds     : 3,
-    timerID     : 0,
-    forceExit   : 0,
-    failed      : 0,
+    index: 0,
+    isLocal: false,
+    refreshHash: null,
+    sniffer: null,
+    seconds: 3,
+    timerID: 0,
+    forceExit: 0,
+    failed: 0,
 
-    init : function(myURLs) {
+    init: function(myURLs) {
         if ( gContext != "indepth" && myURLs.length == 1 ) {
             document.getElementById("sbCaptureSkipButton").hidden = true;
         }
@@ -188,7 +188,7 @@ var sbCaptureTask = {
         for ( var i = 0; i < myURLs.length; i++ ) this.add(myURLs[i], 1, gTitles[i]);
     },
 
-    add : function(aURL, aDepth, aTitle) {
+    add: function(aURL, aDepth, aTitle) {
         if ( !aURL.match(/^(http|https|ftp|file):\/\//i) ) return;
         if ( gContext == "indepth" ) {
             if ( aDepth > gOption["inDepth"] ) {
@@ -223,7 +223,7 @@ var sbCaptureTask = {
         } catch(aEx) { sbCommonUtils.alert("add\n---\n"+aEx); }
     },
 
-    start : function(aOverriddenURL) {
+    start: function(aOverriddenURL) {
         this.seconds = -1;
         this.toggleStartPause(true);
         this.toggleSkipButton(true);
@@ -244,7 +244,7 @@ var sbCaptureTask = {
         this.sniffer.checkURL();
     },
 
-    succeed : function() {
+    succeed: function() {
         document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
         if (!this.isLocal) {
             var statusParts = this.sniffer.getStatus();
@@ -261,7 +261,7 @@ var sbCaptureTask = {
         this.next(false);
     },
 
-    fail : function(aErrorMsg) {
+    fail: function(aErrorMsg) {
         document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
         if ( aErrorMsg ) SB_trace(aErrorMsg);
         if (!this.isLocal) {
@@ -282,7 +282,7 @@ var sbCaptureTask = {
         }
     },
 
-    next : function(quickly) {
+    next: function(quickly) {
         this.toggleStartPause(true);
         this.toggleSkipButton(false);
         if ( this.sniffer ) this.sniffer.onHttpSuccess = function(){};
@@ -303,7 +303,7 @@ var sbCaptureTask = {
         }
     },
 
-    countDown : function() {
+    countDown: function() {
         SB_trace(sbCommonUtils.lang("capture", "WAITING", [sbCaptureTask.seconds]));
         if ( --this.seconds > 0 ) {
             this.timerID = window.setTimeout(function(){ sbCaptureTask.countDown(); }, 1000);
@@ -312,7 +312,7 @@ var sbCaptureTask = {
         }
     },
 
-    finalize : function() {
+    finalize: function() {
         if ( gContext == "indepth" ) {
             sbCrossLinker.invoke();
         } else {
@@ -322,11 +322,11 @@ var sbCaptureTask = {
         }
     },
 
-    closeWindow : function() {
+    closeWindow: function() {
         window.setTimeout(function(){ window.close(); }, 1000);
     },
 
-    activate : function() {
+    activate: function() {
         this.toggleStartPause(true);
         if ( this.seconds < 0 ) {
             sbCaptureTask.start();
@@ -335,7 +335,7 @@ var sbCaptureTask = {
         }
     },
 
-    pause : function() {
+    pause: function() {
         this.toggleStartPause(false);
         if ( this.seconds < 0 ) {
             sbInvisibleBrowser.ELEMENT.stop();
@@ -345,13 +345,13 @@ var sbCaptureTask = {
         }
     },
 
-    abort : function() {
+    abort: function() {
         if ( gContext != "indepth" ) window.close();
         if ( ++this.forceExit > 2 ) window.close();
         if ( this.index < gURLs.length - 1 ) { this.index = gURLs.length - 1; this.next(); }
     },
 
-    toggleFilterBox : function(tfbEvent) {
+    toggleFilterBox: function(tfbEvent) {
         //Blendet die Filterdetails an/aus
 
         var tfbChecked = true;
@@ -368,27 +368,27 @@ var sbCaptureTask = {
         document.getElementById("sbpFilterBox").hidden = !tfbChecked;
     },
 
-    toggleStartPause : function(allowPause) {
+    toggleStartPause: function(allowPause) {
         document.getElementById("sbCapturePauseButton").disabled = false;
         document.getElementById("sbCapturePauseButton").hidden = !allowPause;
         document.getElementById("sbCaptureStartButton").hidden =  allowPause;
-        document.getElementById("sbCaptureTextbox").disabled   = !allowPause;
+        document.getElementById("sbCaptureTextbox").disabled = !allowPause;
     },
 
-    toggleSkipButton : function(willEnable) {
+    toggleSkipButton: function(willEnable) {
         document.getElementById("sbCaptureSkipButton").disabled = !willEnable;
     },
 
 };
 
 var sbpFilter = {
-    sfLimitToDomain : 0,
-    sfRegularExpression : 0,
-    sfFilter : [],
-    sfFilterIncExc : [],
-    sfFilterEdit : -1,            //enthält den Index des zu editierenden Filters
+    sfLimitToDomain: 0,
+    sfRegularExpression: 0,
+    sfFilter: [],
+    sfFilterIncExc: [],
+    sfFilterEdit: -1,            //enthält den Index des zu editierenden Filters
 
-    add : function() {
+    add: function() {
         //Nimmt einen neuen Filter auf oder ändert einen bestehenden
         //
         //Ablauf
@@ -451,7 +451,7 @@ var sbpFilter = {
         document.getElementById("sbpBtnDel").disabled = true;
     },
 
-    cancel : function() {
+    cancel: function() {
         //Das Editieren des ausgewählten Eintrags wird vom Benutzer abgebrochen
 
         this.sfFilterEdit = -1;
@@ -461,7 +461,7 @@ var sbpFilter = {
         document.getElementById("sbpBtnDel").disabled = true;
     },
 
-    del : function() {
+    del: function() {
         //Löscht den selektierten Filter
         //
         //Ablauf:
@@ -493,7 +493,7 @@ var sbpFilter = {
         document.getElementById("sbpBtnDel").disabled = true;
     },
 
-    editFilter : function() {
+    editFilter: function() {
         //Vorbereiten zum Editieren oder Löschen eines Filters
         //
         //Ablauf:
@@ -516,7 +516,7 @@ var sbpFilter = {
         }
     },
 
-    filter : function(fURL) {
+    filter: function(fURL) {
         //Wendet die gesetzten Filter auf die übergebene URL an und liefert true oder false zurück
         //
         //Ablauf:
@@ -542,7 +542,7 @@ var sbpFilter = {
         return fRWert;
     },
 
-    input : function() {
+    input: function() {
         //Ist Text vorhanden, wird der OK-Knopf freigeschaltet, andernfalls deaktiviert
         var iText = document.getElementById("sbpTextboxFilter").value;
         if ( iText.length > 0 ) {
@@ -552,7 +552,7 @@ var sbpFilter = {
         }
     },
 
-    updateSelection : function() {
+    updateSelection: function() {
         //Funktion aktualisiert den Inhalt der aktuellen Auswahl
 
         var usFilteranzahl = this.sfFilter.length;
@@ -587,8 +587,8 @@ var sbInvisibleBrowser = {
         return this.STATE_LOADED = Components.interfaces.nsIWebProgressListener.STATE_STOP | Components.interfaces.nsIWebProgressListener.STATE_IS_NETWORK | Components.interfaces.nsIWebProgressListener.STATE_IS_WINDOW;
     },
     
-    _eventListener : {
-        QueryInterface : function(aIID) {
+    _eventListener: {
+        QueryInterface: function(aIID) {
             if (aIID.equals(Components.interfaces.nsIWebProgressListener) ||
                 aIID.equals(Components.interfaces.nsISupportsWeakReference) ||
                 aIID.equals(Components.interfaces.nsIXULBrowserWindow) ||
@@ -597,7 +597,7 @@ var sbInvisibleBrowser = {
             throw Components.results.NS_NOINTERFACE;
         },
 
-        onStateChange : function(aWebProgress, aRequest, aStateFlags, aStatus) {
+        onStateChange: function(aWebProgress, aRequest, aStateFlags, aStatus) {
             if ( aStateFlags & sbInvisibleBrowser.STATE_START ) {
                 sbInvisibleBrowser.fileCount++;
                 sbInvisibleBrowser.onLoadStart.call(sbInvisibleBrowser);
@@ -608,20 +608,20 @@ var sbInvisibleBrowser = {
             }
         },
 
-        onProgressChange : function(aWebProgress, aRequest, aCurSelfProgress, aMaxSelfProgress, aCurTotalProgress, aMaxTotalProgress) {
+        onProgressChange: function(aWebProgress, aRequest, aCurSelfProgress, aMaxSelfProgress, aCurTotalProgress, aMaxTotalProgress) {
             if ( aCurTotalProgress != aMaxTotalProgress ) {
                 SB_trace(sbCommonUtils.lang("overlay", "TRANSFER_DATA", [aCurTotalProgress]));
             }
         },
 
-        onStatusChange   : function() {},
-        onLocationChange : function() {},
-        onSecurityChange : function() {},
+        onStatusChange: function() {},
+        onLocationChange: function() {},
+        onSecurityChange: function() {},
     },
 
-    fileCount : 0,
+    fileCount: 0,
 
-    init : function() {
+    init: function() {
         try {
             this.ELEMENT.removeProgressListener(this._eventListener, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
         } catch(ex) {
@@ -647,7 +647,7 @@ var sbInvisibleBrowser = {
         }
     },
 
-    load : function(aURL) {
+    load: function(aURL) {
         this.fileCount = 0;
         this.ELEMENT.loadURI(aURL, null, null);
         // if aURL is different from the current URL only in hash,
@@ -655,7 +655,7 @@ var sbInvisibleBrowser = {
         if (this.ELEMENT.currentURI.specIgnoringRef == sbCommonUtils.splitURLByAnchor(aURL)[0]) this.ELEMENT.reload();
     },
 
-    execCapture : function() {
+    execCapture: function() {
         SB_trace(sbCommonUtils.lang("capture", "CAPTURE_START"));
         if ( this.ELEMENT.contentDocument.body ) {
             // potential meta refresh redirect
@@ -700,11 +700,11 @@ var sbInvisibleBrowser = {
         }
     },
 
-    onLoadStart : function() {
+    onLoadStart: function() {
         SB_trace(sbCommonUtils.lang("capture", "LOADING", [this.fileCount, (sbCaptureTask.URL || this.ELEMENT.contentDocument.title)]));
     },
     
-    onLoadFinish : function() {
+    onLoadFinish: function() {
         this.execCapture();
     },
 
@@ -717,15 +717,15 @@ var sbCrossLinker = {
 
     get ELEMENT(){ return document.getElementById("sbCaptureBrowser"); },
 
-    index    : -1,
-    baseURL  : "",
-    nameList : [],
+    index: -1,
+    baseURL: "",
+    nameList: [],
 
-    XML      : null,
-    rootNode : null,
-    nodeHash : {},
+    XML: null,
+    rootNode: null,
+    nodeHash: {},
 
-    invoke : function() {
+    invoke: function() {
         sbDataSource.setProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gReferItem.id), "type", "site");
         this.ELEMENT.docShell.allowImages = false;
         sbInvisibleBrowser.onLoadStart = function() {
@@ -743,7 +743,7 @@ var sbCrossLinker = {
         this.start();
     },
 
-    start : function() {
+    start: function() {
         if ( ++this.index < this.nameList.length ) {
             var url = this.baseURL + encodeURIComponent(this.nameList[this.index]) + ".html";
             sbInvisibleBrowser.load(url);
@@ -763,7 +763,7 @@ var sbCrossLinker = {
         }
     },
 
-    exec : function() {
+    exec: function() {
         if ( this.ELEMENT.currentURI.scheme != "file" ) {
             return;
         }
@@ -822,7 +822,7 @@ var sbCrossLinker = {
         this.start();
     },
 
-    createNode : function(aName, aText) {
+    createNode: function(aName, aText) {
         aText = sbCommonUtils.crop(sbCommonUtils.crop(aText, 180, true), 150);
         //Fehlermeldung könnte über Abfrage abgefangen werden.
         //Allerdings kann der Abbruch an dieser Stelle auch erwünscht sein (Nachforschungen!)
@@ -832,7 +832,7 @@ var sbCrossLinker = {
         return node;
     },
 
-    flushXML : function() {
+    flushXML: function() {
         this.rootNode.appendChild(this.nodeHash["index"]);
         this.XML.appendChild(this.rootNode);
         var src = "";
@@ -859,14 +859,14 @@ var sbCrossLinker = {
         sbCommonUtils.writeFile(txtFile2, txt, "UTF-8");
     },
 
-    forceReloading : function(aID, aName) {
+    forceReloading: function(aID, aName) {
         var file = sbCommonUtils.getContentDir(aID);
         file.append(aName + ".html");
         var url = sbCommonUtils.convertFilePathToURL(file.path);
         this.forceReloadingURL(url);
     },
 
-    forceReloadingURL : function(aURL) {
+    forceReloadingURL: function(aURL) {
         try {
             var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
             var nodes = win.gBrowser.mTabContainer.childNodes;
@@ -888,12 +888,12 @@ var sbCrossLinker = {
 
 function sbHeaderSniffer(aURLSpec, aRefURLSpec) {
     var that = this;
-    this.URLSpec    = aURLSpec;
+    this.URLSpec = aURLSpec;
     this.refURLSpec = aRefURLSpec;
     this._eventListener = {
-        onDataAvailable : function(aRequest, aContext, aInputStream, aOffset, aCount) {},
-        onStartRequest  : function(aRequest, aContext) {},
-        onStopRequest   : function(aRequest, aContext, aStatus) {
+        onDataAvailable: function(aRequest, aContext, aInputStream, aOffset, aCount) {},
+        onStartRequest: function(aRequest, aContext) {},
+        onStopRequest: function(aRequest, aContext, aStatus) {
             // show connect success
             var contentType = that.getContentType() || "";
             SB_trace(sbCommonUtils.lang("capture", "CONNECT_SUCCESS", [contentType]));
@@ -926,11 +926,11 @@ function sbHeaderSniffer(aURLSpec, aRefURLSpec) {
 
 sbHeaderSniffer.prototype = {
 
-    _URL     : Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL),
-    _channel : null,
-    _headers : null,
+    _URL: Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL),
+    _channel: null,
+    _headers: null,
 
-    checkURL : function() {
+    checkURL: function() {
         if (this.URLSpec.indexOf("file://") == 0) {
             this.checkLocalFile();
         } else {
@@ -938,7 +938,7 @@ sbHeaderSniffer.prototype = {
         }
     },
 
-    checkLocalFile : function() {
+    checkLocalFile: function() {
         sbCaptureTask.isLocal = true;
         var file = sbCommonUtils.convertURLToFile(this.URLSpec);
         if (!(file.exists() && file.isFile() && file.isReadable())) {
@@ -949,7 +949,7 @@ sbHeaderSniffer.prototype = {
         this.load(mime);
     },
 
-    checkHttpHeader : function() {
+    checkHttpHeader: function() {
         sbCaptureTask.isLocal = false;
         this._channel = null;
         try {
@@ -970,11 +970,11 @@ sbHeaderSniffer.prototype = {
         }
     },
 
-    getHeader : function(aHeader) {
+    getHeader: function(aHeader) {
          try { return this._channel.getResponseHeader(aHeader); } catch(ex) { return ""; }
     },
 
-    getStatus : function() {
+    getStatus: function() {
         try {
             return [this._channel.responseStatus, this._channel.responseStatusText];
         } catch(ex) {
@@ -982,7 +982,7 @@ sbHeaderSniffer.prototype = {
         }
     },
 
-    getContentType : function() {
+    getContentType: function() {
         try {
             return this._channel.contentType;
         } catch(ex) {}
@@ -996,7 +996,7 @@ sbHeaderSniffer.prototype = {
         return null;
     },
 
-    load : function(contentType, isAttachment) {
+    load: function(contentType, isAttachment) {
         contentType = contentType || "text/html";
         if (!isAttachment && ["text/html", "application/xhtml+xml"].indexOf(contentType) >= 0) {
             // for inline html or xhtml files, load the document and capture it
@@ -1013,7 +1013,7 @@ sbHeaderSniffer.prototype = {
         }
     },
 
-    reportError : function(aErrorMsg) {
+    reportError: function(aErrorMsg) {
         //Ermitteln, wann der Wert this.failed erhoeht werden muss
         sbCaptureTask.failed++;
         sbCaptureTask.fail(sbCommonUtils.lang("capture", "CONNECT_FAILURE", [aErrorMsg]));

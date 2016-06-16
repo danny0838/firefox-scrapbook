@@ -1,3 +1,12 @@
+Scrapbook X 1.12.31
+----------------
+
+- FIXED: Moving items by dragging does not work in Firefox >= 48.
+- FIXED: Several wrong or bad localizations.
+- UPDATE: Use old ScrapBook style fulltext caching mechanism for sites (deep-captured items) to prevent several performance issues for those with very much pages. This could prevent some information from being cached, though.
+- UPDATE: Adjusted internal coding style.
+
+
 Scrapbook X 1.12.30
 ----------------
 - FIXED: Adjusted the internal script of "Output HTML tree" page to prevent a potential compatibility issue in certain browsers.
@@ -522,10 +531,10 @@ Scrapbook X 1.12.0a20
 Scrapbook X 1.12.0a19
 ----------------
 
-- UPDATE: Note page template can now use &lt;%DATA_DIR%> to insert the relative path of the main data directory respectively on creating.
+- UPDATE: Note page template can now use <%DATA_DIR%> to insert the relative path of the main data directory respectively on creating.
 - UPDATE: The container tag fields of insert source of HTML editor can now be selected and copied.
 - UPDATE: Slightly improved the output of Output Tree.
-- FIXED: &lt;%SCRAPBOOK_DIR%> of note page template inserts a wrong path on creation of a sub-page.
+- FIXED: <%SCRAPBOOK_DIR%> of note page template inserts a wrong path on creation of a sub-page.
 - FIXED: Insert source of HTML editor causes an HTML tag to miss if the selection is exactly the full contents of it.
 - FIXED: Insert source of HTML editor sometimes extends to an inappropriate HTML tag (such as TR), causing an abnormal result.
 

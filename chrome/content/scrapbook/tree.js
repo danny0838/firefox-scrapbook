@@ -11,16 +11,16 @@ var sbTreeHandler = {
         }
     },
 
-    autoCollapse : false,
+    autoCollapse: false,
 
-    init : function(isContainer) {
+    init: function(isContainer) {
         this.TREE.database.AddDataSource(sbDataSource.data);
         this.autoCollapse = sbCommonUtils.getPref("tree.autoCollapse", false);
         if ( isContainer ) document.getElementById("sbTreeRule").setAttribute("iscontainer", true);
         this.TREE.builder.rebuild();
     },
 
-    exit : function() {
+    exit: function() {
         var dsEnum = this.TREE.database.GetDataSources();
         while ( dsEnum.hasMoreElements() ) {
             var ds = dsEnum.getNext().QueryInterface(Components.interfaces.nsIRDFDataSource);
@@ -29,7 +29,7 @@ var sbTreeHandler = {
     },
 
 
-    onClick : function(aEvent, aType) {
+    onClick: function(aEvent, aType) {
         if ( aEvent.button != 0 && aEvent.button != 1 ) return;
         var obj = {};
         this.TREE.treeBoxObject.getCellAt(aEvent.clientX, aEvent.clientY, {}, {}, obj);
@@ -43,25 +43,25 @@ var sbTreeHandler = {
         }
     },
 
-    onKeyPress : function(aEvent) {
+    onKeyPress: function(aEvent) {
         switch ( aEvent.keyCode ) {
-            case aEvent.DOM_VK_RETURN : 
+            case aEvent.DOM_VK_RETURN: 
                 if ( this.TREE.view.isContainer(this.TREE.currentIndex) ) return;
                 sbController.open(this.resource, aEvent.ctrlKey || aEvent.shiftKey);
                 break;
-            case aEvent.DOM_VK_DELETE : this.remove(); break;
-            case aEvent.DOM_VK_F2 : sbController.forward(this.resource, "P"); break;
+            case aEvent.DOM_VK_DELETE: this.remove(); break;
+            case aEvent.DOM_VK_F2: sbController.forward(this.resource, "P"); break;
         }
     },
 
-    onDblClick : function(aEvent) {
+    onDblClick: function(aEvent) {
         if ( aEvent.originalTarget.localName != "treechildren" || aEvent.button != 0 ) return;
         if ( this.TREE.view.isContainer(this.TREE.currentIndex) ) return;
         sbController.open(this.resource, aEvent.ctrlKey || aEvent.shiftKey);
     },
 
 
-    send : function() {
+    send: function() {
         if ( this.TREE.view.selection.count == 0 ) return;
         var idxList = this.getSelection(false, 0), resList = [], parList = [];
         for ( var i = 0, I = idxList.length; i < I; i++ ) {
@@ -78,7 +78,7 @@ var sbTreeHandler = {
     },
 
 
-    copy : function() {
+    copy: function() {
         if ( this.TREE.view.selection.count == 0 ) return;
         var idxList = this.getSelection(false, 0), resList = [], parList = [];
         for ( var i = 0, I = idxList.length; i < I; i++ ) {
@@ -95,7 +95,7 @@ var sbTreeHandler = {
     },
 
 
-    remove : function() {
+    remove: function() {
         if ( this.TREE.view.selection.count == 0 ) return;
         var idxList = this.getSelection(false, 0), resList = [], parList = [];
         for ( var i = 0, I = idxList.length; i < I; i++ ) {
@@ -110,7 +110,7 @@ var sbTreeHandler = {
         }
     },
 
-    locateInternal : function(aRes) {
+    locateInternal: function(aRes) {
         var i = 0;
         var resList = [];
         while ( aRes && aRes.Value != this.TREE.ref && ++i < 32 ) {
@@ -127,7 +127,7 @@ var sbTreeHandler = {
     },
 
 
-    getParentResource : function(aIdx) {
+    getParentResource: function(aIdx) {
         var parIdx = this.TREE.builderView.getParentIndex(aIdx);
         if ( parIdx == -1 ) {
             return this.TREE.resource;
@@ -136,7 +136,7 @@ var sbTreeHandler = {
         }
     },
 
-    getSelection : function(idx2res, rule) {
+    getSelection: function(idx2res, rule) {
         var ret = [];
         for ( var rc = 0; rc < this.TREE.view.selection.getRangeCount(); rc++ ) {
             var start = {}, end = {};
@@ -151,13 +151,13 @@ var sbTreeHandler = {
     },
 
 
-    toggleFolder : function(aIdx) {
+    toggleFolder: function(aIdx) {
         if ( !aIdx ) aIdx = this.TREE.currentIndex;
         this.TREE.view.toggleOpenState(aIdx);
         if ( this.autoCollapse ) this.collapseFoldersBut(aIdx);
     },
 
-    toggleAllFolders : function(forceClose) {
+    toggleAllFolders: function(forceClose) {
         var willOpen = true;
         for ( var i = 0; i < this.TREE.view.rowCount; i++ ) {
             if ( !this.TREE.view.isContainer(i) ) continue;
@@ -175,7 +175,7 @@ var sbTreeHandler = {
         }
     },
 
-    collapseFoldersBut : function(curIdx) {
+    collapseFoldersBut: function(curIdx) {
         var ascIdxList = {};
         ascIdxList[curIdx] = true;
         while ( curIdx >= 0 ) {

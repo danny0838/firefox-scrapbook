@@ -34,3 +34,4 @@ pref("extensions.scrapbook.key.capture", "");
 pref("extensions.scrapbook.key.captureAs", "");
 pref("extensions.scrapbook.key.captureAllTabs", "");
 pref("extensions.scrapbook.key.bookmark", "");
+pref("extensions.scrapbook.fulltext.sitePagesLimit", 256);

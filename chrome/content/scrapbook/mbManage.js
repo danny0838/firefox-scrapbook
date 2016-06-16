@@ -6,7 +6,7 @@ var gMultiBookTreeView;
 
 var gMultiBookManager = {
 
-    _changed : false,
+    _changed: false,
     _activeItemChanged: false,
 
     init: function() {
