@@ -1,3 +1,13 @@
+/********************************************************************
+ *
+ * Shared module utils for most scripts.
+ *
+ * @public {class} sbCommonUtils
+ *
+ *******************************************************************/
+
+var EXPORTED_SYMBOLS = ["sbCommonUtils", "Shortcut"];
+
 var sbCommonUtils = {
 
     _stringBundles: [],
@@ -994,7 +1004,7 @@ function Shortcut(data) {
     if (data.modifiers.indexOf("Ctrl") !== -1) this.modifiers.push("Ctrl");
     if (data.modifiers.indexOf("Alt") !== -1) this.modifiers.push("Alt");
     if (data.modifiers.indexOf("Shift") !== -1) this.modifiers.push("Shift");
-}
+};
 
 Shortcut.prototype.toString = function () {
     var parts = [];
@@ -1007,7 +1017,7 @@ Shortcut.prototype.toString = function () {
     parts.push(keyName);
 
     return parts.join("+");
-}
+};
 
 Shortcut.fromString = function (str) {
     var data = {}
@@ -1015,7 +1025,7 @@ Shortcut.fromString = function (str) {
     data.keyCode = keyNameToCodeMap[parts.pop()];
     data.modifiers = [].concat(parts);
     return new Shortcut(data);
-}
+};
 
 Shortcut.fromEvent = function (event) {
     var data = {};
@@ -1030,6 +1040,4 @@ Shortcut.fromEvent = function (event) {
     data.modifiers = modifiers;
 
     return new Shortcut(data);
-}
-
-var EXPORTED_SYMBOLS = ["sbCommonUtils", "Shortcut"];
+};

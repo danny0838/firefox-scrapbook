@@ -1,4 +1,14 @@
-Components.utils.import("resource://scrapbook-modules/common.jsm");
+/********************************************************************
+ *
+ * Central database manager.
+ *
+ * @public {class} sbDataSource
+ *
+ *******************************************************************/
+
+var EXPORTED_SYMBOLS = ["sbDataSource"];
+
+const { sbCommonUtils } = Components.utils.import("resource://scrapbook-modules/common.jsm", {});
 
 var sbDataSource = {
 
@@ -426,5 +436,3 @@ var sbDataSource = {
         this._needReOutputTree = false;
     }
 };
-
-var EXPORTED_SYMBOLS = ["sbDataSource"];
