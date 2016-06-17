@@ -8,9 +8,10 @@
 
 var EXPORTED_SYMBOLS = ["sbCommonUtils"];
 
+const { lang } = Components.utils.import("resource://scrapbook-modules/lang.jsm", {});
+
 var sbCommonUtils = {
 
-    _stringBundles: [],
     _documentArray: [],
     _documentDataArray: [],
 
@@ -58,10 +59,6 @@ var sbCommonUtils = {
     get PROMPT() {
         delete this.PROMPT;
         return this.PROMPT = Components.classes['@mozilla.org/embedcomp/prompt-service;1'].getService(Components.interfaces.nsIPromptService);
-    },
-    get BUNDLE() {
-        delete this.BUNDLE;
-        return this.BUNDLE = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
     },
 
     get _fxVer30_consoleLog() {
@@ -122,7 +119,7 @@ var sbCommonUtils = {
 
     getContentDir: function(aID, aSuppressCreate, aSkipIdCheck) {
         if ( !aSkipIdCheck && !this.validateID(aID) ) {
-            this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_GET_DIR", [aID]));
+            this.alert(lang("scrapbook", "ERR_FAIL_GET_DIR", [aID]));
             return null;
         }
         var dir = this.getScrapBookDir().clone();
@@ -150,7 +147,7 @@ var sbCommonUtils = {
             curFile.remove(true);
             return true;
         } catch(ex) {
-            this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_FILE", [curFile ? curFile.path : "", ex]));
+            this.alert(lang("scrapbook", "ERR_FAIL_REMOVE_FILE", [curFile ? curFile.path : "", ex]));
             return false;
         }
     },
@@ -281,7 +278,7 @@ var sbCommonUtils = {
             var resolved = baseURLObj.resolve(aRelURL);
             return this.convertURLToObject(resolved).spec;
         } catch(ex) {
-            sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_RESOLVE_URL", [aBaseURL, aRelURL]));
+            sbCommonUtils.error(lang("scrapbook", "ERR_FAIL_RESOLVE_URL", [aBaseURL, aRelURL]));
         }
     },
 
@@ -423,7 +420,7 @@ var sbCommonUtils = {
             if (aNoCatch) {
                 throw ex;
             } else {
-                this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_WRITE_FILE", [aFile.path, ex]));
+                this.alert(lang("scrapbook", "ERR_FAIL_WRITE_FILE", [aFile.path, ex]));
             }
         }
     },
@@ -651,7 +648,7 @@ var sbCommonUtils = {
                     throw null;
             }
         } catch (ex) {
-            sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SET_PREF", [aName]));
+            sbCommonUtils.error(lang("scrapbook", "ERR_FAIL_SET_PREF", [aName]));
         }
     },
 
@@ -689,24 +686,12 @@ var sbCommonUtils = {
     /**
      * String handling
      */
-    lang: function(aBundle, aName, aArgs) {
-        var bundle = this._stringBundles[aBundle];
-        if (!bundle) {
-            var uri = "chrome://scrapbook/locale/%s.properties".replace("%s", aBundle);
-            bundle = this._stringBundles[aBundle] = this.BUNDLE.createBundle(uri);
-        }
-        try {
-            if (!aArgs) {
-                return bundle.GetStringFromName(aName);
-            } else {
-                return bundle.formatStringFromName(aName, aArgs, aArgs.length);
-            }
-        } catch (ex) {}
-        return aName;
+    lang: function (aBundle, aName, aArgs) {
+        return lang(aBundle, aName, aArgs);
     },
 
     escapeComment: function(aStr) {
-        if ( aStr.length > 10000 ) this.alert(sbCommonUtils.lang("scrapbook", "MSG_LARGE_COMMENT"));
+        if ( aStr.length > 10000 ) this.alert(lang("scrapbook", "MSG_LARGE_COMMENT"));
         return aStr.replace(/\r|\n|\t/g, " __BR__ ");
     },
 
