@@ -9,6 +9,7 @@
 var EXPORTED_SYMBOLS = ["sbCommonUtils"];
 
 const { lang } = Components.utils.import("resource://scrapbook-modules/lang.jsm", {});
+const { console } = Components.utils.import("resource://scrapbook-modules/console.jsm", {});
 
 var sbCommonUtils = {
 
@@ -59,16 +60,6 @@ var sbCommonUtils = {
     get PROMPT() {
         delete this.PROMPT;
         return this.PROMPT = Components.classes['@mozilla.org/embedcomp/prompt-service;1'].getService(Components.interfaces.nsIPromptService);
-    },
-
-    get _fxVer30_consoleLog() {
-        // Firefox >= 30.0: window.console.log for addons can be seen; has window.console.count
-        // Firefox >=  4.0: has window.console.log, but addon logs do not show; no window.console.count
-        // Firefox <   4.0: no window.console.log
-        var window = this.WINDOW.getMostRecentWindow("navigator:browser");
-        var result = (window.console && window.console.count) ? true : false;
-        delete this._fxVer30_consoleLog;
-        return this._fxVer30_consoleLog = result;
     },
 
     get _fxVer36_saveURI() {
@@ -278,7 +269,7 @@ var sbCommonUtils = {
             var resolved = baseURLObj.resolve(aRelURL);
             return this.convertURLToObject(resolved).spec;
         } catch(ex) {
-            sbCommonUtils.error(lang("scrapbook", "ERR_FAIL_RESOLVE_URL", [aBaseURL, aRelURL]));
+            console.error(lang("scrapbook", "ERR_FAIL_RESOLVE_URL", [aBaseURL, aRelURL]));
         }
     },
 
@@ -648,7 +639,7 @@ var sbCommonUtils = {
                     throw null;
             }
         } catch (ex) {
-            sbCommonUtils.error(lang("scrapbook", "ERR_FAIL_SET_PREF", [aName]));
+            console.error(lang("scrapbook", "ERR_FAIL_SET_PREF", [aName]));
         }
     },
 
@@ -752,37 +743,11 @@ var sbCommonUtils = {
         this.PROMPT.alert(null, "[ScrapBook]", aText);
     },
 
-    log: function(aMsg) {
-        if (this._fxVer30_consoleLog) {
-            var window = this.WINDOW.getMostRecentWindow("navigator:browser");
-            window.console.log(aMsg);
-        } else {
-            // does not record the script line and is not suitable for tracing...
-            this.CONSOLE.logStringMessage(aMsg);
-        }
-    },
+    log: console.log,
 
-    warn: function(aMsg) {
-        if (this._fxVer30_consoleLog) {
-            var window = this.WINDOW.getMostRecentWindow("navigator:browser");
-            window.console.warn(aMsg);
-        } else {
-            // set javascript.options.showInConsole to true in the about:config to see it
-            // default true since Firefox 4.0
-            Components.utils.reportError(aMsg);
-        }
-    },
+    warn: console.warn,
 
-    error: function(aMsg) {
-        if (this._fxVer30_consoleLog) {
-            var window = this.WINDOW.getMostRecentWindow("navigator:browser");
-            window.console.error(aMsg);
-        } else {
-            // set javascript.options.showInConsole to true in the about:config to see it
-            // default true since Firefox 4.0
-            Components.utils.reportError(aMsg);
-        }
-    },
+    error: console.error,
 
 
     /**
