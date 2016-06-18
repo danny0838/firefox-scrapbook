@@ -1,9 +1,0 @@
-<!ENTITY sb.sort "ترتيب">
-<!ENTITY sb.sort.reverse "عكس">
-<!ENTITY sb.sort.title.asc "ترتيب بالعنوان (A &gt; Z)">
-<!ENTITY sb.sort.title.desc "ترتيب بالعنوان (Z &gt; A)">
-<!ENTITY sb.sort.date.asc "زمني">
-<!ENTITY sb.sort.date.desc "زمني عكسي">
-<!ENTITY sb.sort.grouping "Group by Type">
-<!ENTITY sb.sort.recursive "ترتيب المجلدات الفرعية تبعا">
-<!ENTITY sb.sort.warning "انتبه: لا يمكنك&apos; التراجع عن العملية.">

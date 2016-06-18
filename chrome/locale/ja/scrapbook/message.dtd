@@ -1,0 +1,415 @@
+<!-- calculate.dtd -->
+<!ENTITY sb.calc.total.size "合計サイズ">
+<!ENTITY sb.calc.diagnosis "データ診断">
+
+<!-- capture.dtd -->
+<!ENTITY sb.capture "取り込み">
+<!ENTITY sb.capture.abort "中止">
+<!ENTITY sb.capture.start "開始">
+<!ENTITY sb.capture.retry "再試行">
+<!ENTITY sb.capture.skip "スキップ">
+<!ENTITY sb.capture.pause "一時停止">
+<!ENTITY sb.capture.finish "キャンセル">
+<!ENTITY sb.capture.filter "フィルタ">
+<!ENTITY sb.capture.filter.column.one "含む/除外">
+<!ENTITY sb.capture.filter.column.two "フィルタ (正規表現)">
+<!ENTITY sb.capture.filter.accept "適用">
+<!ENTITY sb.capture.filter.accept.tt "値を変更または編集する">
+<!ENTITY sb.capture.filter.cancel "キャンセル">
+<!ENTITY sb.capture.filter.cancel.tt "編集を中止する">
+<!ENTITY sb.capture.filter.delete "削除">
+<!ENTITY sb.capture.filter.delete.tt "リストからフィルタを削除する">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "タイトル">
+<!ENTITY sbp.capture.column.three "状態">
+
+<!-- combine.dtd -->
+<!ENTITY sb.combine.dragdrop "結合したいページを順番にツリーからドラッグ＆ドロップして追加してください。複数のアイテムを一度にドラッグ＆ドロップして追加することも可能です。">
+<!ENTITY sb.combine.preview "プレビュー">
+<!ENTITY sb.combine.preview.d "プレビューを確認して、よろしければ結合ボタンを押してください。">
+<!ENTITY sb.combine.option.remove "結合完了後、結合された元のページを削除する">
+<!ENTITY sbp.combine.up "上へ">
+<!ENTITY sbp.combine.down "下へ">
+<!ENTITY sbp.combine.remove "削除">
+<!ENTITY sbp.combine.newTitle "新しいタイトル">
+
+<!-- detail.dtd -->
+<!ENTITY sb.detail.linked.timeout "タイムアウト（秒）">
+<!ENTITY sb.detail.linked.charset "文字セット">
+<!ENTITY sb.detail "取り込み詳細">
+<!ENTITY sb.detail.new.folder "新しいフォルダ">
+<!ENTITY sb.detail.select.folder "フォルダの選択">
+<!ENTITY sb.detail.option "オプション">
+<!ENTITY sb.detail.option.capture "取り込む">
+<!ENTITY sb.detail.option.images "画像">
+<!ENTITY sb.detail.option.media "メディア">
+<!ENTITY sb.detail.option.fonts "フォント">
+<!ENTITY sb.detail.option.frames "Frames">
+<!ENTITY sb.detail.option.styles "スタイル">
+<!ENTITY sb.detail.option.scripts "スクリプト">
+<!ENTITY sb.detail.option.keepLink "Keep linking to the source for not-captured objects">
+<!ENTITY sb.detail.option.rewriteStyles "スタイルを再編成">
+<!ENTITY sb.detail.option.asHtml "HTMLとして取り込み">
+<!ENTITY sb.detail.option.forceUtf8 "UTF-8エンコーディングとして保存">
+<!ENTITY sb.detail.linked.file "リンク先ファイルのダウンロード">
+<!ENTITY sb.detail.linked.image "イメージ">
+<!ENTITY sb.detail.linked.sound "サウンド">
+<!ENTITY sb.detail.linked.movie "ムービー">
+<!ENTITY sb.detail.linked.archive "アーカイブ">
+<!ENTITY sb.detail.linked.custom "カスタム">
+<!ENTITY sb.detail.linked.page "掘り下げ取り込み">
+<!ENTITY sb.detail.linked.page.depth "リンクをたどる深さ">
+<!ENTITY sb.detail.linked.page.text "取り込み完了後、すべてのページは相互にリンクされ、サイトマップが生成されます。">
+<!ENTITY sb.detail.warnAboutRenew "注意: 再取り込みを行うと元のページに上書きされます。">
+<!ENTITY sb.detail.warnAboutScript "注意: JavaScriptは何らかの問題を引き起こす可能性があります。">
+
+<!-- editor.dtd -->
+<!ENTITY sb.toolbar.edit "編集ツールバー">
+<!ENTITY sb.toolbar.info "情報ツールバー">
+<!ENTITY sb.edit.folderView "Click to view the data directory. Middle-click to open in a new tab.">
+<!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
+<!ENTITY sb.edit.undo "元に戻す">
+<!ENTITY sb.edit.save "変更を保存する">
+<!ENTITY sb.edit.comment "コメントエリアを広げる">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
+<!ENTITY sb.edit.sticky "付箋アノテーション"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "&sb.edit.sticky;を作成"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "自由ノートを作成">
+<!ENTITY sb.edit.inline.add "選択範囲にインライン注釈を入力">
+<!ENTITY sb.edit.attach.file "選択範囲にファイルを添付">
+<!ENTITY sb.edit.attach.link "選択範囲にリンクを追加">
+<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.cutterTool "Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.">
+<!ENTITY sb.edit.htmlTool "HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.">
+<!ENTITY sb.edit.html "HTML Editor">
+<!ENTITY sb.edit.html.color "Edit Color">
+<!ENTITY sb.edit.html.color.forText "Set text color:">
+<!ENTITY sb.edit.html.color.forBg "Set background color:">
+<!ENTITY sb.edit.html.source "Edit HTML Source">
+<!ENTITY sb.edit.html.link "Insert Link">
+<!ENTITY sb.edit.html.link.url "Target URL:">
+<!ENTITY sb.edit.html.link.id "Item ID:">
+<!ENTITY sb.edit.html.link.format "Select insert format:">
+<!ENTITY sb.edit.html.file "Insert File">
+<!ENTITY sb.edit.html.file.pick "Insert file:">
+<!ENTITY sb.edit.html.file.html "Insert sub-page:">
+<!ENTITY sb.edit.html.file.format "Select insert format:">
+<!ENTITY sb.edit.html.backup "Backup the Current Page">
+<!ENTITY sb.edit.html.backup.desc "Description:">
+<!ENTITY sb.edit.html.menu.basic "Text">
+<!ENTITY sb.edit.html.menu.block "Block">
+<!ENTITY sb.edit.html.menu.insert "Insert">
+<!ENTITY sb.edit.html.menu.wrapper "Advanced">
+<!ENTITY sb.edit.html.menuitem.insertSource "Insert or Edit Source">
+<!ENTITY sb.edit.html.menuitem.removeFormat "Clear Formats">
+<!ENTITY sb.edit.html.menuitem.unlink "Clear Links">
+<!ENTITY sb.edit.html.menuitem.save "Save the Page">
+<!ENTITY sb.edit.html.menuitem.quit "Switch HTMLEditor">
+<!ENTITY sb.edit.html.menuitem.bold "Switch Bold">
+<!ENTITY sb.edit.html.menuitem.italic "Switch Italic">
+<!ENTITY sb.edit.html.menuitem.underline "Switch Underline">
+<!ENTITY sb.edit.html.menuitem.strikeThrough "Switch Line-through">
+<!ENTITY sb.edit.html.menuitem.setColor "Set Text and Background Color">
+<!ENTITY sb.edit.html.menuitem.increaseFontSize "Increase Text Size">
+<!ENTITY sb.edit.html.menuitem.decreaseFontSize "Decrease Text Size">
+<!ENTITY sb.edit.html.menuitem.superscript "Switch Superscript">
+<!ENTITY sb.edit.html.menuitem.subscript "Switch Subscript">
+<!ENTITY sb.edit.html.menuitem.formatblock_p "Set to Normal Paragraph">
+<!ENTITY sb.edit.html.menuitem.formatblock_h1 "Set to Header Level 1">
+<!ENTITY sb.edit.html.menuitem.formatblock_h2 "Set to Header Level 2">
+<!ENTITY sb.edit.html.menuitem.formatblock_h3 "Set to Header Level 3">
+<!ENTITY sb.edit.html.menuitem.formatblock_h4 "Set to Header Level 4">
+<!ENTITY sb.edit.html.menuitem.formatblock_h5 "Set to Header Level 5">
+<!ENTITY sb.edit.html.menuitem.formatblock_h6 "Set to Header Level 6">
+<!ENTITY sb.edit.html.menuitem.formatblock_div "Set to DIV Block">
+<!ENTITY sb.edit.html.menuitem.formatblock_pre "Set to PRE Block">
+<!ENTITY sb.edit.html.menuitem.insertUnorderedList "Switch Unordered List">
+<!ENTITY sb.edit.html.menuitem.insertOrderedList "Switch Ordered List">
+<!ENTITY sb.edit.html.menuitem.outdent "Outdent">
+<!ENTITY sb.edit.html.menuitem.indent "Indent">
+<!ENTITY sb.edit.html.menuitem.justifyLeft "Align Left">
+<!ENTITY sb.edit.html.menuitem.justifyRight "Align Right">
+<!ENTITY sb.edit.html.menuitem.justifyCenter "Align Center">
+<!ENTITY sb.edit.html.menuitem.justifyFull "Align Justify">
+<!ENTITY sb.edit.html.menuitem.attachLink "Insert a Link or Innerlink">
+<!ENTITY sb.edit.html.menuitem.attachFile "Insert a File or Sub-page">
+<!ENTITY sb.edit.html.menuitem.backupFile "Create a Backup for this Page">
+<!ENTITY sb.edit.html.menuitem.horizontalLine "Insert a Horizontal Rule">
+<!ENTITY sb.edit.html.menuitem.insertDate "Insert a Date">
+<!ENTITY sb.edit.html.menuitem.insertTodoBox "Insert a Todo Checkbox">
+<!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "Insert a Todo Checkbox (Checked)">
+<!ENTITY sb.edit.html.menuitem.wrapHTML "Format with Template">
+<!ENTITY sb.edit.cutter "選択範囲をカット">
+<!ENTITY sb.edit.remove.iframe "すべてのIFRAMEタグを削除">
+<!ENTITY sb.edit.remove.script "すべてのSCRIPTタグを削除">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to highlight the selection.">
+<!ENTITY sb.highlighter "マーカー">
+<!ENTITY sb.highlighter.remove "選択範囲のScrapBookノートをクリア">
+<!ENTITY sb.highlighter.remove.all "すべてのScrapBookノートをクリア">
+<!ENTITY sb.source "ソースURLを開く">
+<!ENTITY sb.renew "再取り込み">
+<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.locate "サイドバーのツリー上で位置を特定">
+<!ENTITY sb.indicators "リンクインジケータを表示">
+<!ENTITY sb.info.home "ホーム">
+<!ENTITY sb.info.sitemap "サイトマップ">
+
+<!-- hlCustom.dtd -->
+<!ENTITY sb.hlCustom.preset "プリセットスタイル">
+<!ENTITY sb.hlCustom.background "背景">
+<!ENTITY sb.hlCustom.color "色">
+<!ENTITY sb.hlCustom.text "文字">
+<!ENTITY sb.hlCustom.bold "太字">
+<!ENTITY sb.hlCustom.italic "斜体">
+<!ENTITY sb.hlCustom.line "取り消し線">
+<!ENTITY sb.hlCustom.border "枠">
+<!ENTITY sb.hlCustom.type "種類">
+<!ENTITY sb.hlCustom.box "囲み線">
+<!ENTITY sb.hlCustom.underline "下線">
+<!ENTITY sb.hlCustom.style "形式">
+<!ENTITY sb.hlCustom.solid "実線 (Solid)">
+<!ENTITY sb.hlCustom.dotted "点線 (Dotted)">
+<!ENTITY sb.hlCustom.dashed "破線 (Dashed)">
+<!ENTITY sb.hlCustom.double "二重線 (Double)">
+<!ENTITY sb.hlCustom.width "太さ">
+<!ENTITY sb.hlCustom.thin "細い">
+<!ENTITY sb.hlCustom.medium "中">
+<!ENTITY sb.hlCustom.thick "太い">
+
+<!-- mbManage.dtd -->
+<!ENTITY mb.manager "Multi-ScrapBook Manager">
+<!ENTITY mb.prop.name "名前">
+<!ENTITY mb.prop.path "パス">
+<!ENTITY mb.button.add "追加">
+<!ENTITY mb.button.edit "編集">
+<!ENTITY mb.button.remove "削除">
+
+<!-- multiple.dtd -->
+<!ENTITY sb.multiple.filter "フィルタ（正規表現）">
+<!ENTITY sbp.multiple.titleofwebsite "ウェブサイトのタイトル">
+<!ENTITY sbp.multiple.titleoflink "リンクのタイトル">
+<!ENTITY sb.multiple.title "タイトル">
+<!ENTITY sb.multiple.timeout "タイムアウト">
+<!ENTITY sbp.multiple.downloadmethod "メソッド">
+<!ENTITY sb.multiple.charset "文字セット">
+<!ENTITY sb.multiple.url "URL （改行して複数入力可）">
+<!ENTITY sb.multiple.detector "URL検出ツール">
+<!ENTITY sb.multiple.detector.plink "ページ内のすべてのリンク">
+<!ENTITY sb.multiple.detector.slink "選択範囲内のすべてのリンク">
+<!ENTITY sb.multiple.detector.tabs "現在のウィンドウに開かれたすべてのタブ">
+<!ENTITY sb.multiple.detector.local "指定したフォルダ以下のローカルHTML">
+<!ENTITY sb.multiple.detector.bookmarks "ブックマーク">
+<!ENTITY sb.multiple.detector.clear "クリア">
+<!ENTITY sbp.multiple.exclude "保存先フォルダにすでに存在するアドレスは無視する">
+
+<!-- note.dtd -->
+<!ENTITY sb.note.save "保存">
+<!ENTITY sb.note.close "閉じる">
+<!ENTITY sb.note.tools "ツール">
+<!ENTITY sb.note.htmlview "HTMLビュー">
+<!ENTITY sb.note.normalview "通常ビュー">
+<!ENTITY sb.note.template "テンプレートHTMLの編集">
+<!ENTITY sb.note.autolinefeed "自動改行">
+<!ENTITY sb.note.autolinefeed.t "&sb.note.htmlview;時に行末に&lt;br&gt;タグを自動で付加します">
+<!ENTITY sb.note.fontsize "文字サイズ">
+<!ENTITY sb.note.help "ヘルプ">
+<!ENTITY sb.note.print "印刷">
+<!ENTITY sb.note.exit "終了">
+<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "N">
+<!ENTITY sb.note.tools.accesskey "T">
+<!ENTITY sb.note.fontsize.accesskey "F">
+<!ENTITY sb.note.print.accesskey "P">
+<!ENTITY sb.note.exit.accesskey "X">
+
+<!-- notify.dtd -->
+<!ENTITY sb.capture.complete "取り込み完了">
+<!ENTITY sb.capture.complete.all "すべての取り込みが完了しました。">
+
+<!-- output.dtd -->
+<!ENTITY sb.output.option.all "すべてを出力">
+<!ENTITY sb.output.option.frame "フレーム付きのHTMLを出力">
+<!ENTITY sb.output.option.open "HTML出力後、ブラウザで開く">
+
+<!-- overlay.dtd -->
+<!ENTITY sb.capture.partial "選択範囲の取り込み">
+<!ENTITY sb.capture.partial.as "選択範囲の詳細な取り込み">
+<!ENTITY sb.capture.entire "ページの取り込み">
+<!ENTITY sb.capture.entire.as "ページの詳細な取り込み">
+<!ENTITY sb.capture.frame "フレームの取り込み">
+<!ENTITY sb.capture.frame.as "フレームの詳細な取り込み">
+<!ENTITY sb.capture.target "リンク先の取り込み">
+<!ENTITY sb.capture.target.as "リンク先の詳細な取り込み">
+<!ENTITY sb.capture.alltabs "すべてのタブを取り込み">
+<!ENTITY sb.capture.bookmark "ScrapBookにブックマーク">
+<!ENTITY sb.sidebar "サイドバーに表示">
+<!ENTITY sb.menubar "メニュー">
+<!ENTITY sb.editbefore "取り込み前編集モード">
+
+<!-- prefs.dtd -->
+<!ENTITY sb.prefs.main "一般">
+<!ENTITY sb.prefs.keys "Keys">
+<!ENTITY sb.prefs.tabs "タブ">
+<!ENTITY sb.prefs.save "保存">
+<!ENTITY sb.prefs.edit "編集">
+<!ENTITY sb.prefs.organize "整理">
+<!ENTITY sb.prefs.advanced "詳細">
+<!ENTITY sb.prefs.ui.contextMenu "ブラウザのコンテキストメニューに表示">
+<!ENTITY sb.prefs.ui.contextSubMenu "サブメニュー">
+<!ENTITY sb.prefs.ui.bookmarkMenu "'ScrapBookにブックマーク' メニューを表示">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "最近使用したフォルダを">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "個まで表示する">
+<!ENTITY sb.prefs.ui.menuBar "メニューバーに表示">
+<!ENTITY sb.prefs.ui.menuBar.icon "アイコン">
+<!ENTITY sb.prefs.ui.toolsMenu "'ツール' メニューに表示">
+<!ENTITY sb.prefs.ui.statusBar "ステータスバーに表示">
+<!ENTITY sb.prefs.restart "変更は Firefox 再起動後に反映されます。">
+<!ENTITY sb.prefs.tabs.tips "次の操作を新しいタブで開く">
+<!ENTITY sb.prefs.tabs.note "ノートの編集">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
+<!ENTITY sb.prefs.data "データ保存先">
+<!ENTITY sb.prefs.data.default "デフォルト (プロファイルフォルダ下)">
+<!ENTITY sb.prefs.data.custom "次のフォルダ">
+<!ENTITY sb.prefs.data.tips "ScrapBook のデータを保存するためのフォルダを選択してください。">
+<!ENTITY sb.prefs.multibook.enabled "Multi-ScrapBook 機能を有効にする">
+<!ENTITY sb.prefs.multibook.tips "複数のデータ保存先を設定し、ツールバーボタンから素早く切り替えることができます。">
+<!ENTITY sb.prefs.confirmDelete "削除確認をする">
+<!ENTITY sb.prefs.tree.autoCollapse "ツリーフォルダを開いたとき、他のフォルダを自動的に閉じる">
+<!ENTITY sb.prefs.tree.unshift "アイテムを追加する位置:">
+<!ENTITY sb.prefs.tree.unshift.top "フォルダの一番上">
+<!ENTITY sb.prefs.tree.unshift.bottom "フォルダの一番下">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
+<!ENTITY sb.prefs.showDetailOnDrop "サイドバーへのドラッグ＆ドロップ時、詳細な取り込みをする">
+<!ENTITY sb.prefs.notifyOnComplete "取り込みが完了したら通知する">
+<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
+<!ENTITY sb.prefs.export "Export Preferences">
+<!ENTITY sb.prefs.import "Import Preferences">
+<!ENTITY sb.prefs.reset "Reset Preferences">
+<!ENTITY sb.button.customize "カスタマイズ">
+<!ENTITY sb.button.browse "参照">
+<!ENTITY sb.button.show "ファイルを表示">
+
+<!-- property.dtd -->
+<!ENTITY sb.prop.general "一般情報">
+<!ENTITY sb.prop.type "形式">
+<!ENTITY sb.prop.date "日時"><!-- left for addon compatibility -->
+<!ENTITY sb.prop.create "Create">
+<!ENTITY sb.prop.modify "Modify">
+<!ENTITY sb.prop.encode "文字コード">
+<!ENTITY sb.prop.size "サイズ">
+<!ENTITY sb.prop.content "本文">
+<!ENTITY sb.prop.file "ファイル">
+<!ENTITY sb.prop.folder "フォルダ">
+<!ENTITY sb.prop.icon "アイコン">
+<!ENTITY sb.prop.icon.change "アイコン変更">
+<!ENTITY sb.prop.icon.default "デフォルト">
+<!ENTITY sb.prop.icon.favicon "faviconを選択">
+<!ENTITY sb.prop.icon.custom "ユーザーアイコンを選択">
+<!ENTITY sb.prop.mark "マーク">
+<!ENTITY sb.prop.lock "Lock">
+
+<!-- repair.dtd -->
+<!ENTITY sb.repair.rdfFile "scrapbook.rdf の復元">
+<!ENTITY sb.repair.rdfFile.descript "ScrapBookツリーが突然表示されなくなった場合はこちらを試してください。backupフォルダにバックアップされた scrapbook.rdf からツリー構造を復元します。">
+<!ENTITY sb.repair.rdfFile.select "バックアップ元のファイルを選択してください。">
+<!ENTITY sb.repair.rdfFile.file "ファイル">
+<!ENTITY sb.repair.rdfFile.time "日時">
+<!ENTITY sb.repair.rdfFile.size "サイズ">
+<!ENTITY sb.repair.favicons "favicon（ツリーのアイコン）を復元">
+<!ENTITY sb.repair.favicons.descript "ScrapBookツリーのfaviconが突然表示されなくなった場合はこちらを試してください。データ保存先フォルダを移動した際などに狂いが生じたfaviconのパスを再変換します。">
+<!ENTITY sb.repair.complete "完了しました。">
+
+<!-- scrapbook.dtd -->
+<!ENTITY sb.new.folder "新しいフォルダ">
+<!ENTITY sb.new.separator "新しい区切り">
+<!ENTITY sb.new.note "新しいノート">
+<!ENTITY sb.new.notex "新しいノートページ">
+<!ENTITY sb.toggle.all "すべてのフォルダを開く／閉じる">
+<!ENTITY sb.tools "ツール">
+<!ENTITY sb.tools.options "設定">
+<!ENTITY sb.tools.manage "管理">
+<!ENTITY sb.tools.combine "結合ウィザード">
+<!ENTITY sb.tools.trade "インポート/エクスポート">
+<!ENTITY sb.tools.multiple "URL一括取り込み">
+<!ENTITY sb.tools.directory "ScrapBookフォルダ">
+<!ENTITY sb.tools.calculate "データサイズ計算">
+<!ENTITY sb.tools.sorttree "ツリー全体をソート">
+<!ENTITY sb.tools.output "ツリーのHTML出力">
+<!ENTITY sb.tools.repair "緊急時の修復ツール">
+<!ENTITY sb.tools.addons "アドオン機能">
+<!ENTITY sb.note.opentab "タブで開く">
+<!ENTITY sb.note.close "閉じる">
+
+<!-- sort.dtd -->
+<!ENTITY sb.sort "ソート">
+<!ENTITY sb.sort.reverse "逆順にソート">
+<!ENTITY sb.sort.title.asc "タイトルでソート (A &gt; Z)">
+<!ENTITY sb.sort.title.desc "タイトルでソート (Z &gt; A)">
+<!ENTITY sb.sort.date.asc "日時でソート (古い順)">
+<!ENTITY sb.sort.date.desc "日時でソート (新しい順)">
+<!ENTITY sb.sort.grouping "Group by Type">
+<!ENTITY sb.sort.recursive "サブフォルダ内も再帰的にソートする">
+<!ENTITY sb.sort.warning "注意：ソートを実行すると元には戻せません。">
+
+<!-- templateHelp.dtd -->
+<!ENTITY sb.thelp.dir "ltr">
+<!ENTITY sb.thelp.title "ScrapBook Template HTML Help">
+<!ENTITY sb.thelp.tags "２つの特殊タグ">
+<!ENTITY sb.thelp.tag1 "ノートのタイトル（1行目）へと置き換わります。">
+<!ENTITY sb.thelp.tag2 "ノートの本文（2行目以降）へと置き換わります。">
+<!ENTITY sb.thelp.preset "プリセット テンプレート">
+
+<!-- trade.dtd -->
+<!ENTITY sb.trade.import "インポート">
+<!ENTITY sb.trade.export "エクスポート">
+<!ENTITY sb.trade.time "エクスポートした日時">
+<!ENTITY sb.trade.update "Import as latest ScrapBook X format">
+<!ENTITY sb.trade.restore "フォルダ構成を復元しながらインポート">
+<!ENTITY sb.trade.remove "インポート後にファイルを削除する">
+<!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">
+
+<!-- tree.dtd -->
+<!ENTITY sb.open "開く">
+<!ENTITY sb.open.native "Open in Default Program">
+<!ENTITY sb.open.tab "タブで開く">
+<!ENTITY sb.open.newtab "新しいタブで開く">
+<!ENTITY sb.open.source "ソースURLを開く">
+<!ENTITY sb.multi "Multi-ScrapBook">
+<!ENTITY sb.tools "ツール">
+<!ENTITY sb.show.files "ファイルを表示">
+<!ENTITY sb.move "移動">
+<!ENTITY sb.move.into "フォルダへ移動">
+<!ENTITY sb.copy "Copy">
+<!ENTITY sb.renew "再取り込み">
+<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.export "エクスポート">
+<!ENTITY sb.remove "削除">
+<!ENTITY sb.property "プロパティ">
+<!ENTITY sb.listview "リストビュー">
+<!ENTITY sb.prop.title "タイトル">
+<!ENTITY sb.prop.comment "コメント">
+<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.id.date "ID">
+<!ENTITY sb.folder.combine "結合ビュー">
+<!ENTITY sb.folder.openall "すべてタブで開く">
+<!ENTITY sb.folder.manage "フォルダの管理">
+<!ENTITY sb.new.folder "新しいフォルダ">
+<!ENTITY sb.new.separator "新しい区切り">
+<!ENTITY sb.new.note "新しいノート">
+<!ENTITY sb.new.notex "新しいノートページ">
+<!ENTITY sb.sort.folder "フォルダ内をソート">
+<!ENTITY sb.search "検索">
+<!ENTITY sb.search.fulltext "全文検索">
+<!ENTITY sb.search.all "すべて">
+<!ENTITY sb.search.re "正規表現の使用">
+<!ENTITY sb.search.cs "大文字/小文字の区別">
+<!ENTITY sb.search.cache "全文検索用キャッシュを更新">
+<!ENTITY sb.search.clear "入力履歴のクリア">
+<!ENTITY sb.search.days "日数でフィルタリング">
+<!ENTITY mb.manage "管理">
+<!ENTITY mb.profileFolder "プロファイルフォルダ">
+

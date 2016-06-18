@@ -92,7 +92,7 @@ var sbMultiBookService = {
             var win = winEnum.getNext().QueryInterface(Components.interfaces.nsIDOMWindow);
             if (win != window) {
                 if (!aQuietWarning)
-                    alert(sbCommonUtils.lang("scrapbook", "MB_CLOSE_WINDOW", [win.document.title]));
+                    alert(sbCommonUtils.lang("MB_CLOSE_WINDOW", win.document.title));
                 return false;
             }
         }

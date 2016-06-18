@@ -1,0 +1,415 @@
+<!-- calculate.dtd -->
+<!ENTITY sb.calc.total.size "Общий размер">
+<!ENTITY sb.calc.diagnosis "Состояние">
+
+<!-- capture.dtd -->
+<!ENTITY sb.capture "Сохранение">
+<!ENTITY sb.capture.abort "Прервать">
+<!ENTITY sb.capture.start "Старт">
+<!ENTITY sb.capture.retry "Повтор">
+<!ENTITY sb.capture.skip "Пропустить">
+<!ENTITY sb.capture.pause "Пауза">
+<!ENTITY sb.capture.finish "Отменить">
+<!ENTITY sb.capture.filter "Фильтр">
+<!ENTITY sb.capture.filter.column.one "Показать/Скрыть">
+<!ENTITY sb.capture.filter.column.two "Фильтр (регулярные выражения)">
+<!ENTITY sb.capture.filter.accept "Применить">
+<!ENTITY sb.capture.filter.accept.tt "изменить значение">
+<!ENTITY sb.capture.filter.cancel "Отмена">
+<!ENTITY sb.capture.filter.cancel.tt "отменить редактирование">
+<!ENTITY sb.capture.filter.delete "Удалить">
+<!ENTITY sb.capture.filter.delete.tt "удалить фильтр из списка">
+<!ENTITY sbp.capture.column.one "Адрес">
+<!ENTITY sbp.capture.column.two "Заголовок">
+<!ENTITY sbp.capture.column.three "Статус">
+
+<!-- combine.dtd -->
+<!ENTITY sb.combine.dragdrop "Добавляйте требуемые для объединения страницы обычным перетаскиванием их из дерева страниц. Также имеется возможность перетаскивать по несколько страниц сразу.">
+<!ENTITY sb.combine.preview "Предварительный просмотр">
+<!ENTITY sb.combine.preview.d "Для запуска операции объединения нажмите кнопку «Начать объединение».">
+<!ENTITY sb.combine.option.remove "После окончания операции объединения удалить исходные страницы из веб-альбома ScrapBook">
+<!ENTITY sbp.combine.up "переместить выше">
+<!ENTITY sbp.combine.down "переместить ниже">
+<!ENTITY sbp.combine.remove "удалить">
+<!ENTITY sbp.combine.newTitle "новый заголовок">
+
+<!-- detail.dtd -->
+<!ENTITY sb.detail.linked.timeout "Задержка (в сек)">
+<!ENTITY sb.detail.linked.charset "Кодировка">
+<!ENTITY sb.detail "Настройки сохранения веб-страницы">
+<!ENTITY sb.detail.new.folder "Новый каталог">
+<!ENTITY sb.detail.select.folder "Выбрать каталог">
+<!ENTITY sb.detail.option "Составные части страницы">
+<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.images "Изображения">
+<!ENTITY sb.detail.option.media "Media">
+<!ENTITY sb.detail.option.fonts "Fonts">
+<!ENTITY sb.detail.option.frames "Frames">
+<!ENTITY sb.detail.option.styles "CSS-стили">
+<!ENTITY sb.detail.option.scripts "Scripts">
+<!ENTITY sb.detail.option.keepLink "Keep linking to the source for not-captured objects">
+<!ENTITY sb.detail.option.rewriteStyles "Reorganize Styles">
+<!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
+<!ENTITY sb.detail.linked.file "Загрузка содержимого по ссылкам на странице">
+<!ENTITY sb.detail.linked.image "Изображения">
+<!ENTITY sb.detail.linked.sound "Аудиофайлы">
+<!ENTITY sb.detail.linked.movie "Видеофайлы">
+<!ENTITY sb.detail.linked.archive "Архивы">
+<!ENTITY sb.detail.linked.custom "Другие файлы">
+<!ENTITY sb.detail.linked.page "Многоуровневый захват">
+<!ENTITY sb.detail.linked.page.depth "Уровень глубины захвата ссылок">
+<!ENTITY sb.detail.linked.page.text "После завершения сохранения веб-страниц они будут связаны между собой.">
+<!ENTITY sb.detail.warnAboutRenew "Примечание: При использовании функции «Захватить снова» сохранённая страница будет перезаписана.">
+<!ENTITY sb.detail.warnAboutScript "Внимание: Могут возникнуть проблемы с JavaScript.">
+
+<!-- editor.dtd -->
+<!ENTITY sb.toolbar.edit "Панель редактирования ScrapBook">
+<!ENTITY sb.toolbar.info "Информационная панель ScrapBook">
+<!ENTITY sb.edit.folderView "Click to view the data directory. Middle-click to open in a new tab.">
+<!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
+<!ENTITY sb.edit.undo "Отменить">
+<!ENTITY sb.edit.save "Сохранить изменения">
+<!ENTITY sb.edit.comment "Увеличить размер текстового поля для комментария">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
+<!ENTITY sb.edit.sticky "Быстрое примечание"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "Создать быстрое примечание"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "Create Freenote">
+<!ENTITY sb.edit.inline.add "Присоединить файл к выделенному фрагменту">
+<!ENTITY sb.edit.attach.file "Присоединить файл к выделенному">
+<!ENTITY sb.edit.attach.link "Присоединить ссылку к выделенному фрагменту">
+<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.cutterTool "Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.">
+<!ENTITY sb.edit.htmlTool "HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.">
+<!ENTITY sb.edit.html "HTML Editor">
+<!ENTITY sb.edit.html.color "Edit Color">
+<!ENTITY sb.edit.html.color.forText "Set text color:">
+<!ENTITY sb.edit.html.color.forBg "Set background color:">
+<!ENTITY sb.edit.html.source "Edit HTML Source">
+<!ENTITY sb.edit.html.link "Insert Link">
+<!ENTITY sb.edit.html.link.url "Target URL:">
+<!ENTITY sb.edit.html.link.id "Item ID:">
+<!ENTITY sb.edit.html.link.format "Select insert format:">
+<!ENTITY sb.edit.html.file "Insert File">
+<!ENTITY sb.edit.html.file.pick "Insert file:">
+<!ENTITY sb.edit.html.file.html "Insert sub-page:">
+<!ENTITY sb.edit.html.file.format "Select insert format:">
+<!ENTITY sb.edit.html.backup "Backup the Current Page">
+<!ENTITY sb.edit.html.backup.desc "Description:">
+<!ENTITY sb.edit.html.menu.basic "Text">
+<!ENTITY sb.edit.html.menu.block "Block">
+<!ENTITY sb.edit.html.menu.insert "Insert">
+<!ENTITY sb.edit.html.menu.wrapper "Advanced">
+<!ENTITY sb.edit.html.menuitem.insertSource "Insert or Edit Source">
+<!ENTITY sb.edit.html.menuitem.removeFormat "Clear Formats">
+<!ENTITY sb.edit.html.menuitem.unlink "Clear Links">
+<!ENTITY sb.edit.html.menuitem.save "Save the Page">
+<!ENTITY sb.edit.html.menuitem.quit "Switch HTMLEditor">
+<!ENTITY sb.edit.html.menuitem.bold "Switch Bold">
+<!ENTITY sb.edit.html.menuitem.italic "Switch Italic">
+<!ENTITY sb.edit.html.menuitem.underline "Switch Underline">
+<!ENTITY sb.edit.html.menuitem.strikeThrough "Switch Line-through">
+<!ENTITY sb.edit.html.menuitem.setColor "Set Text and Background Color">
+<!ENTITY sb.edit.html.menuitem.increaseFontSize "Increase Text Size">
+<!ENTITY sb.edit.html.menuitem.decreaseFontSize "Decrease Text Size">
+<!ENTITY sb.edit.html.menuitem.superscript "Switch Superscript">
+<!ENTITY sb.edit.html.menuitem.subscript "Switch Subscript">
+<!ENTITY sb.edit.html.menuitem.formatblock_p "Set to Normal Paragraph">
+<!ENTITY sb.edit.html.menuitem.formatblock_h1 "Set to Header Level 1">
+<!ENTITY sb.edit.html.menuitem.formatblock_h2 "Set to Header Level 2">
+<!ENTITY sb.edit.html.menuitem.formatblock_h3 "Set to Header Level 3">
+<!ENTITY sb.edit.html.menuitem.formatblock_h4 "Set to Header Level 4">
+<!ENTITY sb.edit.html.menuitem.formatblock_h5 "Set to Header Level 5">
+<!ENTITY sb.edit.html.menuitem.formatblock_h6 "Set to Header Level 6">
+<!ENTITY sb.edit.html.menuitem.formatblock_div "Set to DIV Block">
+<!ENTITY sb.edit.html.menuitem.formatblock_pre "Set to PRE Block">
+<!ENTITY sb.edit.html.menuitem.insertUnorderedList "Switch Unordered List">
+<!ENTITY sb.edit.html.menuitem.insertOrderedList "Switch Ordered List">
+<!ENTITY sb.edit.html.menuitem.outdent "Outdent">
+<!ENTITY sb.edit.html.menuitem.indent "Indent">
+<!ENTITY sb.edit.html.menuitem.justifyLeft "Align Left">
+<!ENTITY sb.edit.html.menuitem.justifyRight "Align Right">
+<!ENTITY sb.edit.html.menuitem.justifyCenter "Align Center">
+<!ENTITY sb.edit.html.menuitem.justifyFull "Align Justify">
+<!ENTITY sb.edit.html.menuitem.attachLink "Insert a Link or Innerlink">
+<!ENTITY sb.edit.html.menuitem.attachFile "Insert a File or Sub-page">
+<!ENTITY sb.edit.html.menuitem.backupFile "Create a Backup for this Page">
+<!ENTITY sb.edit.html.menuitem.horizontalLine "Insert a Horizontal Rule">
+<!ENTITY sb.edit.html.menuitem.insertDate "Insert a Date">
+<!ENTITY sb.edit.html.menuitem.insertTodoBox "Insert a Todo Checkbox">
+<!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "Insert a Todo Checkbox (Checked)">
+<!ENTITY sb.edit.html.menuitem.wrapHTML "Format with Template">
+<!ENTITY sb.edit.cutter "Удалить выделенный фрагмент">
+<!ENTITY sb.edit.remove.iframe "Удалить все тэги IFRAME">
+<!ENTITY sb.edit.remove.script "Удалить все тэги SCRIPT">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to highlight the selection.">
+<!ENTITY sb.highlighter "Маркер">
+<!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
+<!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
+<!ENTITY sb.source "Открыть URL сохранённого сайта">
+<!ENTITY sb.renew "Произвести сохранение страницы снова">
+<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.locate "Синхронизировать с деревом боковой панели">
+<!ENTITY sb.indicators "Показывать индикаторы ссылок">
+<!ENTITY sb.info.home "К начальной странице">
+<!ENTITY sb.info.sitemap "Показать карту сохранённого веб-сайта">
+
+<!-- hlCustom.dtd -->
+<!ENTITY sb.hlCustom.preset "Предустановленные стили">
+<!ENTITY sb.hlCustom.background "Фон">
+<!ENTITY sb.hlCustom.color "Цвет">
+<!ENTITY sb.hlCustom.text "Текст">
+<!ENTITY sb.hlCustom.bold "Полужирный">
+<!ENTITY sb.hlCustom.italic "Курсив">
+<!ENTITY sb.hlCustom.line "Зачёркнутый">
+<!ENTITY sb.hlCustom.border "Граница">
+<!ENTITY sb.hlCustom.type "Тип">
+<!ENTITY sb.hlCustom.box "Текст в рамке">
+<!ENTITY sb.hlCustom.underline "Подчёркнутый">
+<!ENTITY sb.hlCustom.style "Стиль">
+<!ENTITY sb.hlCustom.solid "Сплошной">
+<!ENTITY sb.hlCustom.dotted "Точками">
+<!ENTITY sb.hlCustom.dashed "Чёрточками">
+<!ENTITY sb.hlCustom.double "Двойной">
+<!ENTITY sb.hlCustom.width "Ширина">
+<!ENTITY sb.hlCustom.thin "Узкий">
+<!ENTITY sb.hlCustom.medium "Средний">
+<!ENTITY sb.hlCustom.thick "Толстый">
+
+<!-- mbManage.dtd -->
+<!ENTITY mb.manager "Multi-ScrapBook Manager">
+<!ENTITY mb.prop.name "Имя">
+<!ENTITY mb.prop.path "Путь">
+<!ENTITY mb.button.add "Добавить">
+<!ENTITY mb.button.edit "Изменить">
+<!ENTITY mb.button.remove "Удалить">
+
+<!-- multiple.dtd -->
+<!ENTITY sb.multiple.filter "Фильтр">
+<!ENTITY sbp.multiple.titleofwebsite "Заголовок веб-сайта">
+<!ENTITY sbp.multiple.titleoflink "Заголовок ссылки">
+<!ENTITY sb.multiple.title "Заголовок">
+<!ENTITY sb.multiple.timeout "Задержка">
+<!ENTITY sbp.multiple.downloadmethod "Метод">
+<!ENTITY sb.multiple.charset "Кодировка">
+<!ENTITY sb.multiple.url "URL (В одной строке должен быть один адрес)">
+<!ENTITY sb.multiple.detector "URL детектор">
+<!ENTITY sb.multiple.detector.plink "Все ссылки на странице">
+<!ENTITY sb.multiple.detector.slink "Все ссылки в выделенном">
+<!ENTITY sb.multiple.detector.tabs "Все открытые вкладки в окне">
+<!ENTITY sb.multiple.detector.local "Все веб-страницы в каталоге">
+<!ENTITY sb.multiple.detector.bookmarks "Закладки">
+<!ENTITY sb.multiple.detector.clear "Очистить">
+<!ENTITY sbp.multiple.exclude "игнорировать уже созданные адреса в папке назначения">
+
+<!-- note.dtd -->
+<!ENTITY sb.note.save "Сохранить">
+<!ENTITY sb.note.close "Закрыть">
+<!ENTITY sb.note.tools "Инструменты">
+<!ENTITY sb.note.htmlview "В виде веб-документа">
+<!ENTITY sb.note.normalview "Обычный вид">
+<!ENTITY sb.note.template "Изменить шаблон HTML">
+<!ENTITY sb.note.autolinefeed "Автоперенос строк">
+<!ENTITY sb.note.autolinefeed.t "Добавлять тег &lt;br&gt; в конец каждой строки при просмотре «В виде веб-документа»">
+<!ENTITY sb.note.fontsize "Размер шрифта">
+<!ENTITY sb.note.help "Помощь">
+<!ENTITY sb.note.print "Печать">
+<!ENTITY sb.note.exit "Выход">
+<!ENTITY sb.note.save.accesskey "о">
+<!ENTITY sb.note.htmlview.accesskey "и">
+<!ENTITY sb.note.normalview.accesskey "ы">
+<!ENTITY sb.note.tools.accesskey "с">
+<!ENTITY sb.note.fontsize.accesskey "а">
+<!ENTITY sb.note.print.accesskey "е">
+<!ENTITY sb.note.exit.accesskey "х">
+
+<!-- notify.dtd -->
+<!ENTITY sb.capture.complete "Сохранение завершено">
+<!ENTITY sb.capture.complete.all "Все сохранения выполнены">
+
+<!-- output.dtd -->
+<!ENTITY sb.output.option.all "Вывести целое дерево">
+<!ENTITY sb.output.option.frame "Вывести с фреймом">
+<!ENTITY sb.output.option.open "После вывода открыть в браузере">
+
+<!-- overlay.dtd -->
+<!ENTITY sb.capture.partial "Захватить выделенное">
+<!ENTITY sb.capture.partial.as "Захватить выделенное как">
+<!ENTITY sb.capture.entire "Захватить веб-страницу">
+<!ENTITY sb.capture.entire.as "Захватить веб-страницу как">
+<!ENTITY sb.capture.frame "Захватить фрейм">
+<!ENTITY sb.capture.frame.as "Захватить фрейм как">
+<!ENTITY sb.capture.target "Захватить ссылку">
+<!ENTITY sb.capture.target.as "Захватить ссылку как">
+<!ENTITY sb.capture.alltabs "Захватить все вкладки">
+<!ENTITY sb.capture.bookmark "Добавить в закладки ScrapBook">
+<!ENTITY sb.sidebar "Показать в боковой панели">
+<!ENTITY sb.menubar "Меню">
+<!ENTITY sb.editbefore "Редактирование перед сохранением">
+
+<!-- prefs.dtd -->
+<!ENTITY sb.prefs.main "Основные">
+<!ENTITY sb.prefs.keys "Keys">
+<!ENTITY sb.prefs.tabs "Вкладки">
+<!ENTITY sb.prefs.save "Сохранение">
+<!ENTITY sb.prefs.edit "Изменение">
+<!ENTITY sb.prefs.organize "Организация">
+<!ENTITY sb.prefs.advanced "Дополнительно">
+<!ENTITY sb.prefs.ui.contextMenu "Показывать в контекстном меню">
+<!ENTITY sb.prefs.ui.contextSubMenu "Использовать подменю">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Показывать «Добавить в закладки Scrapbook» в меню">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Показывать">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "недавно использованных папок">
+<!ENTITY sb.prefs.ui.menuBar "Показывать в панели меню">
+<!ENTITY sb.prefs.ui.menuBar.icon "Значок">
+<!ENTITY sb.prefs.ui.toolsMenu "Показывать в меню «Инструменты»">
+<!ENTITY sb.prefs.ui.statusBar "Показывать в строке состояния">
+<!ENTITY sb.prefs.restart "Изменения требуют перезапуска Firefox&apos;а">
+<!ENTITY sb.prefs.tabs.tips "Открывать в новых вкладках следующие операции">
+<!ENTITY sb.prefs.tabs.note "Изменить заметку">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
+<!ENTITY sb.prefs.data "Расположение сохраняемой информации">
+<!ENTITY sb.prefs.data.default "По умолчанию (каталог профиля)">
+<!ENTITY sb.prefs.data.custom "Сохранить информацию в">
+<!ENTITY sb.prefs.data.tips "Выберите каталог для хранения данных Scrapbook.">
+<!ENTITY sb.prefs.multibook.enabled "Использовать Multi-ScrapBook">
+<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook позволяет одновременно использовать несколько веб-альбомов с возможностью быстрого переключения между ними с помощью соответствующей кнопки на панели инструментов.">
+<!ENTITY sb.prefs.confirmDelete "Предупреждать при удалении элементов дерева">
+<!ENTITY sb.prefs.tree.autoCollapse "При открытии каталога дерева автоматически закрывать остальные">
+<!ENTITY sb.prefs.tree.unshift "Поместить элемент в">
+<!ENTITY sb.prefs.tree.unshift.top "начало каталога">
+<!ENTITY sb.prefs.tree.unshift.bottom "конец каталога">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
+<!ENTITY sb.prefs.showDetailOnDrop "Показывать диалог «Настройки сохранения страницы» при захвате перетаскиванием на боковую панель">
+<!ENTITY sb.prefs.notifyOnComplete "Показывать сообщение «Сохранение завершено»">
+<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
+<!ENTITY sb.prefs.export "Export Preferences">
+<!ENTITY sb.prefs.import "Import Preferences">
+<!ENTITY sb.prefs.reset "Reset Preferences">
+<!ENTITY sb.button.customize "Изменить">
+<!ENTITY sb.button.browse "Обзор">
+<!ENTITY sb.button.show "Показать файлы">
+
+<!-- property.dtd -->
+<!ENTITY sb.prop.general "Основная информация">
+<!ENTITY sb.prop.type "Тип">
+<!ENTITY sb.prop.date "Дата"><!-- left for addon compatibility -->
+<!ENTITY sb.prop.create "Create">
+<!ENTITY sb.prop.modify "Modify">
+<!ENTITY sb.prop.encode "Кодировка">
+<!ENTITY sb.prop.size "Размер">
+<!ENTITY sb.prop.content "Содержимое">
+<!ENTITY sb.prop.file "File">
+<!ENTITY sb.prop.folder "Каталог">
+<!ENTITY sb.prop.icon "Значок">
+<!ENTITY sb.prop.icon.change "Изменить">
+<!ENTITY sb.prop.icon.default "Значок по умолчанию">
+<!ENTITY sb.prop.icon.favicon "Значок из файлов страницы">
+<!ENTITY sb.prop.icon.custom "Установленный значок">
+<!ENTITY sb.prop.mark "Выделить страницу в веб-альбоме">
+<!ENTITY sb.prop.lock "Lock">
+
+<!-- repair.dtd -->
+<!ENTITY sb.repair.rdfFile "Восстановление файла scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript "Используйте данную функцию при внезапном исчезновении всего содержимого вашего веб-альбома ScrapBook.">
+<!ENTITY sb.repair.rdfFile.select "Укажите файл резервной копии для восстановления информации.">
+<!ENTITY sb.repair.rdfFile.file "Файл">
+<!ENTITY sb.repair.rdfFile.time "Время">
+<!ENTITY sb.repair.rdfFile.size "Размер">
+<!ENTITY sb.repair.favicons "Восстановление значков веб-сайтов в дереве веб-альбома">
+<!ENTITY sb.repair.favicons.descript "Используйте данную функцию при исчезновении значков сайтов в дереве вашего веб-альбома ScrapBook.">
+<!ENTITY sb.repair.complete "Восстановление завершено">
+
+<!-- scrapbook.dtd -->
+<!ENTITY sb.new.folder "Новый каталог">
+<!ENTITY sb.new.separator "Новый разделитель">
+<!ENTITY sb.new.note "Создать заметку">
+<!ENTITY sb.new.notex "New Note Page">
+<!ENTITY sb.toggle.all "Открыть/закрыть все каталоги">
+<!ENTITY sb.tools "Инструменты">
+<!ENTITY sb.tools.options "Настройки расширения">
+<!ENTITY sb.tools.manage "Управление каталогами">
+<!ENTITY sb.tools.combine "Объединение веб-страниц">
+<!ENTITY sb.tools.trade "Импорт / Экспорт веб-альбомов">
+<!ENTITY sb.tools.multiple "Сохранение нескольких URL">
+<!ENTITY sb.tools.directory "Открыть каталог ScrapBook">
+<!ENTITY sb.tools.calculate "Подсчёт занимаемого объема">
+<!ENTITY sb.tools.sorttree "Сортировка дерева веб-страниц">
+<!ENTITY sb.tools.output "Сохранение дерева в виде HTML">
+<!ENTITY sb.tools.repair "Аварийное восстановление">
+<!ENTITY sb.tools.addons "Установленные дополнения">
+<!ENTITY sb.note.opentab "Открыть в новой вкладке">
+<!ENTITY sb.note.close "Закрыть">
+
+<!-- sort.dtd -->
+<!ENTITY sb.sort "Сортировка каталогов">
+<!ENTITY sb.sort.reverse "В обратном порядке">
+<!ENTITY sb.sort.title.asc "По заголовкам (А &gt; Я)">
+<!ENTITY sb.sort.title.desc "По заголовкам (Я &gt; А)">
+<!ENTITY sb.sort.date.asc "В хронологическом порядке">
+<!ENTITY sb.sort.date.desc "В обратном хронологическом порядке">
+<!ENTITY sb.sort.grouping "Group by Type">
+<!ENTITY sb.sort.recursive "Сортировать подкаталоги рекурсивно">
+<!ENTITY sb.sort.warning "Внимание: Выполнение данной операции отменить невозможно.">
+
+<!-- templateHelp.dtd -->
+<!ENTITY sb.thelp.dir "ltr">
+<!ENTITY sb.thelp.title "Описание шаблона HTML для заметок в ScrapBook">
+<!ENTITY sb.thelp.tags "Предопределённые теги">
+<!ENTITY sb.thelp.tag1 "Заголовок заметки (первая строка)">
+<!ENTITY sb.thelp.tag2 "Содержимое заметки (вторая и последующие)">
+<!ENTITY sb.thelp.preset "Предопределённый шаблон">
+
+<!-- trade.dtd -->
+<!ENTITY sb.trade.import "Импорт">
+<!ENTITY sb.trade.export "Экспорт">
+<!ENTITY sb.trade.time "Время экспортирования">
+<!ENTITY sb.trade.update "Import as latest ScrapBook X format">
+<!ENTITY sb.trade.restore "Импортировать с восстановлением структуры каталогов">
+<!ENTITY sb.trade.remove "Удалять файлы после завершения операции импортирования">
+<!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">
+
+<!-- tree.dtd -->
+<!ENTITY sb.open "Открыть">
+<!ENTITY sb.open.native "Open in Default Program">
+<!ENTITY sb.open.tab "Открыть в вкладке">
+<!ENTITY sb.open.newtab "Открыть в новой вкладке">
+<!ENTITY sb.open.source "Открыть исходный URL">
+<!ENTITY sb.multi "Multi-ScrapBook">
+<!ENTITY sb.tools "Инструменты">
+<!ENTITY sb.show.files "Файлы веб-страницы">
+<!ENTITY sb.move "Переместить">
+<!ENTITY sb.move.into "Переместить в каталог">
+<!ENTITY sb.copy "Copy">
+<!ENTITY sb.renew "Захватить снова">
+<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.export "Экспортировать">
+<!ENTITY sb.remove "Удалить">
+<!ENTITY sb.property "Свойства">
+<!ENTITY sb.listview "Список">
+<!ENTITY sb.prop.title "Заголовок">
+<!ENTITY sb.prop.comment "Комментарий">
+<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.id.date "ID">
+<!ENTITY sb.folder.combine "Комбинированный вид">
+<!ENTITY sb.folder.openall "Открыть всё во вкладках">
+<!ENTITY sb.folder.manage "Управление каталогами">
+<!ENTITY sb.new.folder "Новый каталог">
+<!ENTITY sb.new.separator "Новый разделитель">
+<!ENTITY sb.new.note "Создать заметку">
+<!ENTITY sb.new.notex "New Note Page">
+<!ENTITY sb.sort.folder "Сортировка каталогов">
+<!ENTITY sb.search "Поиск">
+<!ENTITY sb.search.fulltext "Полнотекстовый поиск">
+<!ENTITY sb.search.all "Всё">
+<!ENTITY sb.search.re "Использовать шаблоны (RegExp)">
+<!ENTITY sb.search.cs "С учётом регистра">
+<!ENTITY sb.search.cache "Обновить кэш для полнотекстового поиска">
+<!ENTITY sb.search.clear "Удалить всю историю автозаполнения">
+<!ENTITY sb.search.days "Показать за последние:">
+<!ENTITY mb.manage "Организовать">
+<!ENTITY mb.profileFolder "Каталог профиля">
+

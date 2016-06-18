@@ -5,14 +5,7 @@
 
 <?xul-overlay href="chrome://scrapbook/content/tree.xul"?>
 
-<!DOCTYPE window [
-    <!ENTITY % mainDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
-    %mainDTD;
-    <!ENTITY % propDTD SYSTEM "chrome://scrapbook/locale/property.dtd" >
-    %propDTD;
-    <!ENTITY % treeDTD SYSTEM "chrome://scrapbook/locale/tree.dtd" >
-    %treeDTD;
-]>
+<!DOCTYPE window SYSTEM "chrome://scrapbook/locale/message.dtd">
 
 <window id="sbManageWindow"
         title="&sb.tools.manage; - ScrapBook"

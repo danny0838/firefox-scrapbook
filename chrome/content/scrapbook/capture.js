@@ -116,7 +116,7 @@ function SB_initCapture() {
         // read sb-file2url.txt => gFile2URL for later usage
         var file = contDir.clone();
         file.append("sb-file2url.txt");
-        if ( !file.exists() ) { sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_NO_FILE2URL")); window.close(); }
+        if ( !file.exists() ) { sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_FILE2URL")); window.close(); }
         var lines = sbCommonUtils.readFile(file).split("\n");
         for ( var i = 0; i < lines.length; i++ ) {
             var arr = lines[i].split("\t");
@@ -125,7 +125,7 @@ function SB_initCapture() {
         // read sb-url2name.txt => gURL2Name and search for source URL of the current page
         file = contDir.clone();
         file.append("sb-url2name.txt");
-        if ( !file.exists() ) { sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_NO_URL2NAME")); window.close(); }
+        if ( !file.exists() ) { sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_URL2NAME")); window.close(); }
         lines = sbCommonUtils.readFile(file).split("\n");
         for ( i = 0; i < lines.length; i++ ) {
             var arr = lines[i].split("\t");
@@ -135,7 +135,7 @@ function SB_initCapture() {
             }
         }
         gPreset[3] = gFile2URL;
-        if ( !myURLs[0] ) { sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_NO_SOURCE_URL", [gPreset[1] + ".html."])); window.close(); }
+        if ( !myURLs[0] ) { sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_SOURCE_URL", gPreset[1] + ".html.")); window.close(); }
     }
     if ( !gOption ) gOption = {};
     if ( !("script" in gOption ) ) gOption["script"] = false;
@@ -239,7 +239,7 @@ var sbCaptureTask = {
         this.refreshHash = {};
         var url = aOverriddenURL || gURLs[this.index];
         if ( gTitles ) gTitle = gTitles[this.index];
-        SB_trace(sbCommonUtils.lang("capture", "CONNECT", [url]));
+        SB_trace(sbCommonUtils.lang("CONNECT", url));
         this.sniffer = new sbHeaderSniffer(url, gRefURL);
         this.sniffer.checkURL();
     },
@@ -304,7 +304,7 @@ var sbCaptureTask = {
     },
 
     countDown: function() {
-        SB_trace(sbCommonUtils.lang("capture", "WAITING", [sbCaptureTask.seconds]));
+        SB_trace(sbCommonUtils.lang("WAITING", sbCaptureTask.seconds));
         if ( --this.seconds > 0 ) {
             this.timerID = window.setTimeout(function(){ sbCaptureTask.countDown(); }, 1000);
         } else {
@@ -610,7 +610,7 @@ var sbInvisibleBrowser = {
 
         onProgressChange: function(aWebProgress, aRequest, aCurSelfProgress, aMaxSelfProgress, aCurTotalProgress, aMaxTotalProgress) {
             if ( aCurTotalProgress != aMaxTotalProgress ) {
-                SB_trace(sbCommonUtils.lang("overlay", "TRANSFER_DATA", [aCurTotalProgress]));
+                SB_trace(sbCommonUtils.lang("TRANSFER_DATA", aCurTotalProgress));
             }
         },
 
@@ -634,7 +634,7 @@ var sbInvisibleBrowser = {
         try {
             if (gCharset) this.ELEMENT.docShell.charset = gCharset;
         } catch(ex) {
-            sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_CHANGE_CHARSET"));
+            sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_CHANGE_CHARSET"));
         }
         // nsIDocShellHistory is deprecated in newer version of Firefox
         // nsIDocShell in the old version doesn't work
@@ -656,7 +656,7 @@ var sbInvisibleBrowser = {
     },
 
     execCapture: function() {
-        SB_trace(sbCommonUtils.lang("capture", "CAPTURE_START"));
+        SB_trace(sbCommonUtils.lang("CAPTURE_START"));
         if ( this.ELEMENT.contentDocument.body ) {
             // potential meta refresh redirect
             var metaElems = this.ELEMENT.contentDocument.getElementsByTagName("meta");
@@ -695,13 +695,13 @@ var sbInvisibleBrowser = {
             gTitles[sbCaptureTask.index] = ret[2];
         } else {
             if ( gShowDetail ) window.close();
-            SB_trace(sbCommonUtils.lang("capture", "CAPTURE_ABORT"));
+            SB_trace(sbCommonUtils.lang("CAPTURE_ABORT"));
             sbCaptureTask.fail("");
         }
     },
 
     onLoadStart: function() {
-        SB_trace(sbCommonUtils.lang("capture", "LOADING", [this.fileCount, (sbCaptureTask.URL || this.ELEMENT.contentDocument.title)]));
+        SB_trace(sbCommonUtils.lang("LOADING", this.fileCount, (sbCaptureTask.URL || this.ELEMENT.contentDocument.title)));
     },
     
     onLoadFinish: function() {
@@ -729,7 +729,7 @@ var sbCrossLinker = {
         sbDataSource.setProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gReferItem.id), "type", "site");
         this.ELEMENT.docShell.allowImages = false;
         sbInvisibleBrowser.onLoadStart = function() {
-            SB_trace(sbCommonUtils.lang("capture", "REBUILD_LINKS", [sbCrossLinker.index + 1, sbCrossLinker.nameList.length, this.fileCount, sbCrossLinker.nameList[sbCrossLinker.index] + ".html"]));
+            SB_trace(sbCommonUtils.lang("REBUILD_LINKS", sbCrossLinker.index + 1, sbCrossLinker.nameList.length, this.fileCount, sbCrossLinker.nameList[sbCrossLinker.index] + ".html"));
         };
         sbInvisibleBrowser.onLoadFinish = function() {
             sbCrossLinker.exec();
@@ -748,7 +748,7 @@ var sbCrossLinker = {
             var url = this.baseURL + encodeURIComponent(this.nameList[this.index]) + ".html";
             sbInvisibleBrowser.load(url);
         } else {
-            SB_trace(sbCommonUtils.lang("capture", "REBUILD_LINKS_COMPLETE"));
+            SB_trace(sbCommonUtils.lang("REBUILD_LINKS_COMPLETE"));
             this.flushXML();
             SB_fireNotification(gReferItem);
             //Fenster wird nur geschlossen, wenn alle ausgewaehlten Seiten heruntergeladen werden konnten
@@ -896,7 +896,7 @@ function sbHeaderSniffer(aURLSpec, aRefURLSpec) {
         onStopRequest: function(aRequest, aContext, aStatus) {
             // show connect success
             var contentType = that.getContentType() || "";
-            SB_trace(sbCommonUtils.lang("capture", "CONNECT_SUCCESS", [contentType]));
+            SB_trace(sbCommonUtils.lang("CONNECT_SUCCESS", contentType));
 
             // get and show http status
             var httpStatus = that.getStatus();
@@ -1016,7 +1016,7 @@ sbHeaderSniffer.prototype = {
     reportError: function(aErrorMsg) {
         //Ermitteln, wann der Wert this.failed erhoeht werden muss
         sbCaptureTask.failed++;
-        sbCaptureTask.fail(sbCommonUtils.lang("capture", "CONNECT_FAILURE", [aErrorMsg]));
+        sbCaptureTask.fail(sbCommonUtils.lang("CONNECT_FAILURE", aErrorMsg));
     },
 
 };

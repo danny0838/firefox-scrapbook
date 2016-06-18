@@ -5,7 +5,7 @@
 
 <?xul-overlay href="chrome://scrapbook/content/tree.xul"?>
 
-<!DOCTYPE dialog SYSTEM "chrome://scrapbook/locale/detail.dtd">
+<!DOCTYPE dialog SYSTEM "chrome://scrapbook/locale/message.dtd">
 
 <dialog id="sbFolderPicker"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"

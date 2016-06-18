@@ -1,8 +1,0 @@
-<!ENTITY sb.combine.dragdrop "اضافة عناصر بالسحب والإفلات من القائمة بالترتيب الذي تريد  الجمع به. يمكنك سحب و إفلات عناصر متعددة معاً.">
-<!ENTITY sb.combine.preview "معاينة">
-<!ENTITY sb.combine.preview.d "إضغط &apos;جمع&apos; بعد التأكد بالمعاينة.">
-<!ENTITY sb.combine.option.remove "بعد إكمال الجمع, أزل الصفحات الأصلية.">
-<!ENTITY sbp.combine.up "انقل العنصر للأعلى">
-<!ENTITY sbp.combine.down "انقل العنصر للأسفل">
-<!ENTITY sbp.combine.remove "أزل العنصر">
-<!ENTITY sbp.combine.newTitle "عنوان جديد">

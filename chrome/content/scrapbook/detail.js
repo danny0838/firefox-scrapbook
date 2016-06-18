@@ -10,7 +10,7 @@ var sbCaptureOptions = {
         if ( !window.arguments || !("sbContentSaver" in window.opener) ) window.close();
         this.param = window.arguments[0];
         // accept button
-        document.documentElement.getButton("accept").label = sbCommonUtils.lang("scrapbook", "CAPTURE_OK_BUTTON");
+        document.documentElement.getButton("accept").label = sbCommonUtils.lang("CAPTURE_OK_BUTTON");
         // title
         this.fillTitleList();
         // script warning
@@ -142,7 +142,7 @@ var sbFolderSelector = {
     },
 
     processRoot: function() {
-        this.fill("urn:scrapbook:root", sbCommonUtils.lang("scrapbook", "ROOT_FOLDER"));
+        this.fill("urn:scrapbook:root", sbCommonUtils.lang("ROOT_FOLDER"));
         this.MENU_POPUP.appendChild(document.createElement("menuseparator"));
     },
 

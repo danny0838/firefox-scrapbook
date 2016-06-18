@@ -165,7 +165,7 @@ var sbBrowserOverlay = {
             var icon = sbDataSource.getProperty(res, "icon") || sbCommonUtils.getDefaultIcon(type);
 
             var text = title;
-            var title = sbCommonUtils.lang("overlay", "PAGE_CAPTURED", [result.length]);
+            var title = sbCommonUtils.lang("PAGE_CAPTURED", result.length);
             var listener = {
                 observe: function(subject, topic, data) {
                     if (topic == "alertclickcallback")
@@ -183,7 +183,7 @@ var sbBrowserOverlay = {
         menuItem.id = "urn:scrapbook:root";
         menuItem.setAttribute("class", "menuitem-iconic bookmark-item");
         menuItem.setAttribute("container", "true");
-        menuItem.setAttribute("label", sbCommonUtils.lang("overlay", "ROOT_FOLDER"));
+        menuItem.setAttribute("label", sbCommonUtils.lang("ROOT_FOLDER"));
         aPopup.appendChild(document.createElement("menuseparator"));
         var ids = sbCommonUtils.getPref("ui.folderList", "");
         ids = ids ? ids.split("|") : [];
@@ -204,7 +204,7 @@ var sbBrowserOverlay = {
             aPopup.appendChild(document.createElement("menuseparator"));
         menuItem = aPopup.appendChild(document.createElement("menuitem"));
         menuItem.id = "ScrapBookContextPicking";
-        menuItem.setAttribute("label", sbCommonUtils.lang("overlay", "SELECT_FOLDER"));
+        menuItem.setAttribute("label", sbCommonUtils.lang("SELECT_FOLDER"));
     },
 
     destroyPopup: function(aPopup) {

@@ -1,9 +1,0 @@
-<!ENTITY sb.repair.rdfFile "復原 scrapbook.rdf">
-<!ENTITY sb.repair.rdfFile.descript "如果 ScrapBook 資料列表中有很多項目突然消失，可嘗試這個，會用備份的 scrapbook.rdf 檔案重建資料列表。">
-<!ENTITY sb.repair.rdfFile.select "選擇欲復原的檔案版本。">
-<!ENTITY sb.repair.rdfFile.file "檔案">
-<!ENTITY sb.repair.rdfFile.time "時間">
-<!ENTITY sb.repair.rdfFile.size "大小">
-<!ENTITY sb.repair.favicons "復原項目圖示 (favicon)">
-<!ENTITY sb.repair.favicons.descript "如果 ScrapBook 資料列表中有很多項目圖示 (favicon) 突然消失，可嘗試這個，會自動修正因移動資料夾造成的 favicon 路徑錯誤。">
-<!ENTITY sb.repair.complete "完成。">

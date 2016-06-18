@@ -30,7 +30,7 @@ var sbSortService = {
     },
 
     countDown: function() {
-        this.WIZARD.getButton("next").label = sbCommonUtils.lang("scrapbook", "START_BUTTON") + (this.waitTime > 0 ? " (" + this.waitTime + ")" : "");
+        this.WIZARD.getButton("next").label = sbCommonUtils.lang("START_BUTTON") + (this.waitTime > 0 ? " (" + this.waitTime + ")" : "");
         this.WIZARD.canAdvance = this.waitTime == 0;
         if ( this.waitTime-- ) setTimeout(function(){ sbSortService.countDown() }, 500);
     },

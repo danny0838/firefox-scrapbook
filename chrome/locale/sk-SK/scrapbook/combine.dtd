@@ -1,8 +1,0 @@
-<!ENTITY sb.combine.dragdrop "Položky pridávajte pomocou drag-and-drop v poradí, v akom ich chcete zlúčiť. Súčasne môžte pridať viacero položiek.">
-<!ENTITY sb.combine.preview "Náhľad">
-<!ENTITY sb.combine.preview.d "Stlačením tlačidla &apos;Zlúčenie&apos; skontrolujte ukážku.">
-<!ENTITY sb.combine.option.remove "Po dokončení zlúčenia, odstrániť originálne stránky">
-<!ENTITY sbp.combine.up "move item upwards">
-<!ENTITY sbp.combine.down "move item downwards">
-<!ENTITY sbp.combine.remove "remove item">
-<!ENTITY sbp.combine.newTitle "nový názov">

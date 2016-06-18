@@ -6,16 +6,7 @@
 <?xml-stylesheet href="chrome://mozapps/content/preferences/preferences.css"?>
 <?xml-stylesheet href="chrome://browser/skin/preferences/preferences.css"?>
 
-<!DOCTYPE window [
-    <!ENTITY % treeDTD  SYSTEM "chrome://scrapbook/locale/tree.dtd" >
-    %treeDTD;
-    <!ENTITY % propDTD  SYSTEM "chrome://scrapbook/locale/property.dtd" >
-    %propDTD;
-    <!ENTITY % prefDTD  SYSTEM "chrome://scrapbook/locale/prefs.dtd" >
-    %prefDTD;
-    <!ENTITY % tradeDTD SYSTEM "chrome://scrapbook/locale/trade.dtd" >
-    %tradeDTD;
-]>
+<!DOCTYPE window SYSTEM "chrome://scrapbook/locale/message.dtd">
 
 <window id="sbTradeWindow"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"

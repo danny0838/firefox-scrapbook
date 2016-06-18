@@ -1,0 +1,415 @@
+<!-- calculate.dtd -->
+<!ENTITY sb.calc.total.size "Загальний розмір">
+<!ENTITY sb.calc.diagnosis "Перевірка">
+
+<!-- capture.dtd -->
+<!ENTITY sb.capture "Збереження">
+<!ENTITY sb.capture.abort "Скасувати">
+<!ENTITY sb.capture.start "Розпочати">
+<!ENTITY sb.capture.retry "Повторити">
+<!ENTITY sb.capture.skip "Пропустити">
+<!ENTITY sb.capture.pause "Призупинити">
+<!ENTITY sb.capture.finish "Скасувати">
+<!ENTITY sb.capture.filter "Фільтр">
+<!ENTITY sb.capture.filter.column.one "Показати/сховати">
+<!ENTITY sb.capture.filter.column.two "Фільтр (регулярний вираз)">
+<!ENTITY sb.capture.filter.accept "Прийняти">
+<!ENTITY sb.capture.filter.accept.tt "змінити чи редагувати значення">
+<!ENTITY sb.capture.filter.cancel "Скасувати">
+<!ENTITY sb.capture.filter.cancel.tt "відмінити редагування">
+<!ENTITY sb.capture.filter.delete "Видалити">
+<!ENTITY sb.capture.filter.delete.tt "Вилучити фільтр зі списку">
+<!ENTITY sbp.capture.column.one "Адреса">
+<!ENTITY sbp.capture.column.two "Назва">
+<!ENTITY sbp.capture.column.three "Статус">
+
+<!-- combine.dtd -->
+<!ENTITY sb.combine.dragdrop "Додавайте необхідні сторінки з дерева сторінок перетягуванням. Ви можете перетягувати одразу декілька сторінок.">
+<!ENTITY sb.combine.preview "Попередній перегляд">
+<!ENTITY sb.combine.preview.d "Натисніть кнопку 'Об’єднати' після перегляду попереднього перегляду.">
+<!ENTITY sb.combine.option.remove "Вилучити вихідні сторінки після закінчення об’єднання">
+<!ENTITY sbp.combine.up "перемістити вище">
+<!ENTITY sbp.combine.down "перемістити нижче">
+<!ENTITY sbp.combine.remove "вилучити">
+<!ENTITY sbp.combine.newTitle "нова назва">
+
+<!-- detail.dtd -->
+<!ENTITY sb.detail.linked.timeout "Час очікування (секунд)">
+<!ENTITY sb.detail.linked.charset "Кодування">
+<!ENTITY sb.detail "Подробиці збереження">
+<!ENTITY sb.detail.new.folder "Нова тека">
+<!ENTITY sb.detail.select.folder "Оберіть теку">
+<!ENTITY sb.detail.option "Параметри">
+<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.images "Зображення">
+<!ENTITY sb.detail.option.media "Media">
+<!ENTITY sb.detail.option.fonts "Fonts">
+<!ENTITY sb.detail.option.frames "Frames">
+<!ENTITY sb.detail.option.styles "Стилі">
+<!ENTITY sb.detail.option.scripts "Scripts">
+<!ENTITY sb.detail.option.keepLink "Keep linking to the source for not-captured objects">
+<!ENTITY sb.detail.option.rewriteStyles "Reorganize Styles">
+<!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
+<!ENTITY sb.detail.linked.file "Завантаження файлів за посиланнями на сторінці">
+<!ENTITY sb.detail.linked.image "Зображення">
+<!ENTITY sb.detail.linked.sound "Звукові файли">
+<!ENTITY sb.detail.linked.movie "Відео файли">
+<!ENTITY sb.detail.linked.archive "Архіви">
+<!ENTITY sb.detail.linked.custom "Особисті">
+<!ENTITY sb.detail.linked.page "Глибоке збереження">
+<!ENTITY sb.detail.linked.page.depth "Глибина збереження">
+<!ENTITY sb.detail.linked.page.text "Після завершення збереження усі сторінки будуть пов’язані між собою та буде створена карта сайту.">
+<!ENTITY sb.detail.warnAboutRenew "Увага: Функція „Зберегти знову“ перезаписує раніше збережену сторінку.">
+<!ENTITY sb.detail.warnAboutScript "Увага: Можливі проблеми з JavaScript.">
+
+<!-- editor.dtd -->
+<!ENTITY sb.toolbar.edit "Панель редагування">
+<!ENTITY sb.toolbar.info "Інформаційна панель">
+<!ENTITY sb.edit.folderView "Click to view the data directory. Middle-click to open in a new tab.">
+<!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
+<!ENTITY sb.edit.undo "Повернути">
+<!ENTITY sb.edit.save "Зберегти зміни">
+<!ENTITY sb.edit.comment "Збільшити форму коментування">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
+<!ENTITY sb.edit.sticky "Пересувна нотатка"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "Створити пересувну нотатку"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "Create Freenote">
+<!ENTITY sb.edit.inline.add "Додати приховану нотатку до обраного">
+<!ENTITY sb.edit.attach.file "Додати файл до обраного">
+<!ENTITY sb.edit.attach.link "Додати посилання до обраного">
+<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.cutterTool "Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.">
+<!ENTITY sb.edit.htmlTool "HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.">
+<!ENTITY sb.edit.html "HTML Editor">
+<!ENTITY sb.edit.html.color "Edit Color">
+<!ENTITY sb.edit.html.color.forText "Set text color:">
+<!ENTITY sb.edit.html.color.forBg "Set background color:">
+<!ENTITY sb.edit.html.source "Edit HTML Source">
+<!ENTITY sb.edit.html.link "Insert Link">
+<!ENTITY sb.edit.html.link.url "Target URL:">
+<!ENTITY sb.edit.html.link.id "Item ID:">
+<!ENTITY sb.edit.html.link.format "Select insert format:">
+<!ENTITY sb.edit.html.file "Insert File">
+<!ENTITY sb.edit.html.file.pick "Insert file:">
+<!ENTITY sb.edit.html.file.html "Insert sub-page:">
+<!ENTITY sb.edit.html.file.format "Select insert format:">
+<!ENTITY sb.edit.html.backup "Backup the Current Page">
+<!ENTITY sb.edit.html.backup.desc "Description:">
+<!ENTITY sb.edit.html.menu.basic "Text">
+<!ENTITY sb.edit.html.menu.block "Block">
+<!ENTITY sb.edit.html.menu.insert "Insert">
+<!ENTITY sb.edit.html.menu.wrapper "Advanced">
+<!ENTITY sb.edit.html.menuitem.insertSource "Insert or Edit Source">
+<!ENTITY sb.edit.html.menuitem.removeFormat "Clear Formats">
+<!ENTITY sb.edit.html.menuitem.unlink "Clear Links">
+<!ENTITY sb.edit.html.menuitem.save "Save the Page">
+<!ENTITY sb.edit.html.menuitem.quit "Switch HTMLEditor">
+<!ENTITY sb.edit.html.menuitem.bold "Switch Bold">
+<!ENTITY sb.edit.html.menuitem.italic "Switch Italic">
+<!ENTITY sb.edit.html.menuitem.underline "Switch Underline">
+<!ENTITY sb.edit.html.menuitem.strikeThrough "Switch Line-through">
+<!ENTITY sb.edit.html.menuitem.setColor "Set Text and Background Color">
+<!ENTITY sb.edit.html.menuitem.increaseFontSize "Increase Text Size">
+<!ENTITY sb.edit.html.menuitem.decreaseFontSize "Decrease Text Size">
+<!ENTITY sb.edit.html.menuitem.superscript "Switch Superscript">
+<!ENTITY sb.edit.html.menuitem.subscript "Switch Subscript">
+<!ENTITY sb.edit.html.menuitem.formatblock_p "Set to Normal Paragraph">
+<!ENTITY sb.edit.html.menuitem.formatblock_h1 "Set to Header Level 1">
+<!ENTITY sb.edit.html.menuitem.formatblock_h2 "Set to Header Level 2">
+<!ENTITY sb.edit.html.menuitem.formatblock_h3 "Set to Header Level 3">
+<!ENTITY sb.edit.html.menuitem.formatblock_h4 "Set to Header Level 4">
+<!ENTITY sb.edit.html.menuitem.formatblock_h5 "Set to Header Level 5">
+<!ENTITY sb.edit.html.menuitem.formatblock_h6 "Set to Header Level 6">
+<!ENTITY sb.edit.html.menuitem.formatblock_div "Set to DIV Block">
+<!ENTITY sb.edit.html.menuitem.formatblock_pre "Set to PRE Block">
+<!ENTITY sb.edit.html.menuitem.insertUnorderedList "Switch Unordered List">
+<!ENTITY sb.edit.html.menuitem.insertOrderedList "Switch Ordered List">
+<!ENTITY sb.edit.html.menuitem.outdent "Outdent">
+<!ENTITY sb.edit.html.menuitem.indent "Indent">
+<!ENTITY sb.edit.html.menuitem.justifyLeft "Align Left">
+<!ENTITY sb.edit.html.menuitem.justifyRight "Align Right">
+<!ENTITY sb.edit.html.menuitem.justifyCenter "Align Center">
+<!ENTITY sb.edit.html.menuitem.justifyFull "Align Justify">
+<!ENTITY sb.edit.html.menuitem.attachLink "Insert a Link or Innerlink">
+<!ENTITY sb.edit.html.menuitem.attachFile "Insert a File or Sub-page">
+<!ENTITY sb.edit.html.menuitem.backupFile "Create a Backup for this Page">
+<!ENTITY sb.edit.html.menuitem.horizontalLine "Insert a Horizontal Rule">
+<!ENTITY sb.edit.html.menuitem.insertDate "Insert a Date">
+<!ENTITY sb.edit.html.menuitem.insertTodoBox "Insert a Todo Checkbox">
+<!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "Insert a Todo Checkbox (Checked)">
+<!ENTITY sb.edit.html.menuitem.wrapHTML "Format with Template">
+<!ENTITY sb.edit.cutter "Вилучити обране">
+<!ENTITY sb.edit.remove.iframe "Вилучити усі мітки IFRAME">
+<!ENTITY sb.edit.remove.script "Вилучити усі мітки SCRIPT">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to highlight the selection.">
+<!ENTITY sb.highlighter "Підсвічування">
+<!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
+<!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
+<!ENTITY sb.source "Відкрити початкову адресу">
+<!ENTITY sb.renew "Зберегти знову">
+<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.locate "Показати розташування у Бічній панелі">
+<!ENTITY sb.indicators "Відображати індикатори посилань">
+<!ENTITY sb.info.home "На головну">
+<!ENTITY sb.info.sitemap "Карта сайту">
+
+<!-- hlCustom.dtd -->
+<!ENTITY sb.hlCustom.preset "Наявні стилі">
+<!ENTITY sb.hlCustom.background "Тло">
+<!ENTITY sb.hlCustom.color "Колір">
+<!ENTITY sb.hlCustom.text "Текст">
+<!ENTITY sb.hlCustom.bold "Жирний">
+<!ENTITY sb.hlCustom.italic "Курсив">
+<!ENTITY sb.hlCustom.line "Закреслений">
+<!ENTITY sb.hlCustom.border "Межа">
+<!ENTITY sb.hlCustom.type "Тип">
+<!ENTITY sb.hlCustom.box "У рамці">
+<!ENTITY sb.hlCustom.underline "Підкреслений">
+<!ENTITY sb.hlCustom.style "Стиль">
+<!ENTITY sb.hlCustom.solid "Рискою">
+<!ENTITY sb.hlCustom.dotted "Крапками">
+<!ENTITY sb.hlCustom.dashed "Рисками">
+<!ENTITY sb.hlCustom.double "Подвійною">
+<!ENTITY sb.hlCustom.width "Ширина">
+<!ENTITY sb.hlCustom.thin "Тонкий">
+<!ENTITY sb.hlCustom.medium "Середній">
+<!ENTITY sb.hlCustom.thick "Товстий">
+
+<!-- mbManage.dtd -->
+<!ENTITY mb.manager "Multi-ScrapBook Manager">
+<!ENTITY mb.prop.name "Назва">
+<!ENTITY mb.prop.path "Шлях">
+<!ENTITY mb.button.add "Додати">
+<!ENTITY mb.button.edit "Редагувати">
+<!ENTITY mb.button.remove "Вилучити">
+
+<!-- multiple.dtd -->
+<!ENTITY sb.multiple.filter "Фільтр (регулярний вираз)">
+<!ENTITY sbp.multiple.titleofwebsite "Назва сайту">
+<!ENTITY sbp.multiple.titleoflink "Посилання">
+<!ENTITY sb.multiple.title "Назва">
+<!ENTITY sb.multiple.timeout "Час очікування">
+<!ENTITY sbp.multiple.downloadmethod "Метод">
+<!ENTITY sb.multiple.charset "Кодування">
+<!ENTITY sb.multiple.url "Адреса (один рядок — одна адреса)">
+<!ENTITY sb.multiple.detector "Шукач адрес">
+<!ENTITY sb.multiple.detector.plink "Усі посилання на сторінці">
+<!ENTITY sb.multiple.detector.slink "Усі посилання з обраного">
+<!ENTITY sb.multiple.detector.tabs "Усі відкриті вкладки у вікні">
+<!ENTITY sb.multiple.detector.local "Усі локальні сторінці у теці">
+<!ENTITY sb.multiple.detector.bookmarks "Закладки">
+<!ENTITY sb.multiple.detector.clear "Очистити">
+<!ENTITY sbp.multiple.exclude "ігнорувати адреси наявні у теці призначення">
+
+<!-- note.dtd -->
+<!ENTITY sb.note.save "Зберегти">
+<!ENTITY sb.note.close "Закрити">
+<!ENTITY sb.note.tools "Інструменти">
+<!ENTITY sb.note.htmlview "У вигляді HTML">
+<!ENTITY sb.note.normalview "Звичайний вигляд">
+<!ENTITY sb.note.template "Редагувати шаблон HTML">
+<!ENTITY sb.note.autolinefeed "Автоматичне перенесення рядків">
+<!ENTITY sb.note.autolinefeed.t "Додавати мітку &lt;br&gt; до кожного рядка при перегляді у HTML">
+<!ENTITY sb.note.fontsize "Розмір шрифту">
+<!ENTITY sb.note.help "Допомога">
+<!ENTITY sb.note.print "Друк">
+<!ENTITY sb.note.exit "Вихід">
+<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "N">
+<!ENTITY sb.note.tools.accesskey "T">
+<!ENTITY sb.note.fontsize.accesskey "F">
+<!ENTITY sb.note.print.accesskey "P">
+<!ENTITY sb.note.exit.accesskey "X">
+
+<!-- notify.dtd -->
+<!ENTITY sb.capture.complete "Збереження виконано.">
+<!ENTITY sb.capture.complete.all "Усі сторінки збережено.">
+
+<!-- output.dtd -->
+<!ENTITY sb.output.option.all "Відобразити усе дерево">
+<!ENTITY sb.output.option.frame "Відобразити з фреймом">
+<!ENTITY sb.output.option.open "Відкрити у браузері після відображення">
+
+<!-- overlay.dtd -->
+<!ENTITY sb.capture.partial "Зберегти обране">
+<!ENTITY sb.capture.partial.as "Зберегти обране як">
+<!ENTITY sb.capture.entire "Зберегти сторінку">
+<!ENTITY sb.capture.entire.as "Зберегти сторінку як">
+<!ENTITY sb.capture.frame "Зберегти фрейм">
+<!ENTITY sb.capture.frame.as "Зберегти фрейм як">
+<!ENTITY sb.capture.target "Зберегти посилання">
+<!ENTITY sb.capture.target.as "Зберегти посилання як">
+<!ENTITY sb.capture.alltabs "Зберегти усі вкладки">
+<!ENTITY sb.capture.bookmark "Додати до закладок у ScrapBook">
+<!ENTITY sb.sidebar "Відобразити у бічній панелі">
+<!ENTITY sb.menubar "Меню">
+<!ENTITY sb.editbefore "Редагувати перед збереженням">
+
+<!-- prefs.dtd -->
+<!ENTITY sb.prefs.main "Загальні">
+<!ENTITY sb.prefs.keys "Keys">
+<!ENTITY sb.prefs.tabs "Вкладки">
+<!ENTITY sb.prefs.save "Зберегти">
+<!ENTITY sb.prefs.edit "Редагування">
+<!ENTITY sb.prefs.organize "Упорядкування">
+<!ENTITY sb.prefs.advanced "Додаткові">
+<!ENTITY sb.prefs.ui.contextMenu "Відображати у контекстному меню браузера">
+<!ENTITY sb.prefs.ui.contextSubMenu "Використовуючи підменю">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Відображати „Додати до закладок ScrapBook“ у меню">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Відображати">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "нещодавно використаних тек">
+<!ENTITY sb.prefs.ui.menuBar "Відображати у панелі меню">
+<!ENTITY sb.prefs.ui.menuBar.icon "Значок">
+<!ENTITY sb.prefs.ui.toolsMenu "Відображати у меню „Інструменти“">
+<!ENTITY sb.prefs.ui.statusBar "Відображати у рядку стану">
+<!ENTITY sb.prefs.restart "Потребує перезавантаження Firefox.">
+<!ENTITY sb.prefs.tabs.tips "Відкривати у нових вкладках наступні дії">
+<!ENTITY sb.prefs.tabs.note "Редагувати нотатку">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
+<!ENTITY sb.prefs.data "Місце збереження даних">
+<!ENTITY sb.prefs.data.default "Типово (тека профілю)">
+<!ENTITY sb.prefs.data.custom "Зберігати дані у">
+<!ENTITY sb.prefs.data.tips "Оберіть теку для збереження даних ScrapBook.">
+<!ENTITY sb.prefs.multibook.enabled "Увімкнути Multi-ScrapBook">
+<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook дозволяє Вам використовувати декілька місць для збереження даних та дозволяє швидко перемикатися між ними за допомогою кнопки інструментів.">
+<!ENTITY sb.prefs.confirmDelete "Попереджати при вилученні елементів дерева">
+<!ENTITY sb.prefs.tree.autoCollapse "При розгортанні теки дерева автоматично згортати інші теки">
+<!ENTITY sb.prefs.tree.unshift "Розміщувати елементи">
+<!ENTITY sb.prefs.tree.unshift.top "спочатку теки">
+<!ENTITY sb.prefs.tree.unshift.bottom "наприкінці теки">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
+<!ENTITY sb.prefs.showDetailOnDrop "Відображати діалог „Налаштування збереження“ при збереженні перетягуванням на бічну панель">
+<!ENTITY sb.prefs.notifyOnComplete "Показувати інформацію „Збереження виконано“">
+<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
+<!ENTITY sb.prefs.export "Export Preferences">
+<!ENTITY sb.prefs.import "Import Preferences">
+<!ENTITY sb.prefs.reset "Reset Preferences">
+<!ENTITY sb.button.customize "Змінити">
+<!ENTITY sb.button.browse "Вибрати">
+<!ENTITY sb.button.show "Показати файли">
+
+<!-- property.dtd -->
+<!ENTITY sb.prop.general "Загальна інформація">
+<!ENTITY sb.prop.type "Тип">
+<!ENTITY sb.prop.date "Дата"><!-- left for addon compatibility -->
+<!ENTITY sb.prop.create "Create">
+<!ENTITY sb.prop.modify "Modify">
+<!ENTITY sb.prop.encode "Кодування">
+<!ENTITY sb.prop.size "Розмір">
+<!ENTITY sb.prop.content "Вміст">
+<!ENTITY sb.prop.file "File">
+<!ENTITY sb.prop.folder "Тека">
+<!ENTITY sb.prop.icon "Значок">
+<!ENTITY sb.prop.icon.change "Змінити">
+<!ENTITY sb.prop.icon.default "Типовий">
+<!ENTITY sb.prop.icon.favicon "З зображень сторінки">
+<!ENTITY sb.prop.icon.custom "Особистий">
+<!ENTITY sb.prop.mark "Виділити у альбомі">
+<!ENTITY sb.prop.lock "Lock">
+
+<!-- repair.dtd -->
+<!ENTITY sb.repair.rdfFile "Відновлення файлу scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript "Використовуйте, якщо раптом зник увесь вміст ScrapBook.">
+<!ENTITY sb.repair.rdfFile.select "Вкажіть файл резервної копії для відновлення інформації.">
+<!ENTITY sb.repair.rdfFile.file "Файл">
+<!ENTITY sb.repair.rdfFile.time "Час">
+<!ENTITY sb.repair.rdfFile.size "Розмір">
+<!ENTITY sb.repair.favicons "Відновлення значків у дереві">
+<!ENTITY sb.repair.favicons.descript "Використовуйте, якщо зникло багато значків у дереві ScrapBook.">
+<!ENTITY sb.repair.complete "Виконано.">
+
+<!-- scrapbook.dtd -->
+<!ENTITY sb.new.folder "Нова тека">
+<!ENTITY sb.new.separator "Новий роздільник">
+<!ENTITY sb.new.note "Нова нотатка">
+<!ENTITY sb.new.notex "New Note Page">
+<!ENTITY sb.toggle.all "Відкрити/закрити усі теки">
+<!ENTITY sb.tools "Інструменти">
+<!ENTITY sb.tools.options "Параметри">
+<!ENTITY sb.tools.manage "Керування альбомами">
+<!ENTITY sb.tools.combine "Майстер об’єднання">
+<!ENTITY sb.tools.trade "Імпорт/Експорт">
+<!ENTITY sb.tools.multiple "Зберегти декілька адрес">
+<!ENTITY sb.tools.directory "Тека ScrapBook">
+<!ENTITY sb.tools.calculate "Підрахунок розміру">
+<!ENTITY sb.tools.sorttree "Сортування у дереві">
+<!ENTITY sb.tools.output "Відображення дерева у HTML">
+<!ENTITY sb.tools.repair "Аварійне відновлення">
+<!ENTITY sb.tools.addons "Додаткові функції">
+<!ENTITY sb.note.opentab "Відкрити у вкладці">
+<!ENTITY sb.note.close "Закрити">
+
+<!-- sort.dtd -->
+<!ENTITY sb.sort "Сортування">
+<!ENTITY sb.sort.reverse "У зворотньому напрямку">
+<!ENTITY sb.sort.title.asc "Сортувати за назвою (A &gt; Z, А &gt; Я)">
+<!ENTITY sb.sort.title.desc "Сортувати за назвою (Z &gt; A, Я &gt; А)">
+<!ENTITY sb.sort.date.asc "За датою">
+<!ENTITY sb.sort.date.desc "За датою у зворотньому порядку">
+<!ENTITY sb.sort.grouping "Group by Type">
+<!ENTITY sb.sort.recursive "Сортувати каталоги рекурсивно">
+<!ENTITY sb.sort.warning "Увага: Вороття назад не буде.">
+
+<!-- templateHelp.dtd -->
+<!ENTITY sb.thelp.dir "ltr">
+<!ENTITY sb.thelp.title "Довідка з шаблону ScrapBook у HTML">
+<!ENTITY sb.thelp.tags "Два спеціальних теги">
+<!ENTITY sb.thelp.tag1 "Назва нотатки (перший рядок)">
+<!ENTITY sb.thelp.tag2 "Вміст нотатки (другий та наступні рядки)">
+<!ENTITY sb.thelp.preset "Встановлений шаблон">
+
+<!-- trade.dtd -->
+<!ENTITY sb.trade.import "Імпорт">
+<!ENTITY sb.trade.export "Експорт">
+<!ENTITY sb.trade.time "Час експортування">
+<!ENTITY sb.trade.update "Import as latest ScrapBook X format">
+<!ENTITY sb.trade.restore "Імпортувати з відновленням структури тек">
+<!ENTITY sb.trade.remove "Вилучити файли після імпортування">
+<!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">
+
+<!-- tree.dtd -->
+<!ENTITY sb.open "Відкрити">
+<!ENTITY sb.open.native "Open in Default Program">
+<!ENTITY sb.open.tab "Відкрити у вкладці">
+<!ENTITY sb.open.newtab "Відкрити у новій вкладці">
+<!ENTITY sb.open.source "Відкрити початкову адресу">
+<!ENTITY sb.multi "Multi-ScrapBook">
+<!ENTITY sb.tools "Інструменти">
+<!ENTITY sb.show.files "Показати файли">
+<!ENTITY sb.move "Пересунути">
+<!ENTITY sb.move.into "Пересунути у теку">
+<!ENTITY sb.copy "Copy">
+<!ENTITY sb.renew "Зберегти знову">
+<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.export "Експорт">
+<!ENTITY sb.remove "Вилучити">
+<!ENTITY sb.property "Властивості">
+<!ENTITY sb.listview "Список">
+<!ENTITY sb.prop.title "Назва">
+<!ENTITY sb.prop.comment "Коментар">
+<!ENTITY sbp.prop.url "Адреса">
+<!ENTITY sb.prop.id.date "ID">
+<!ENTITY sb.folder.combine "Комбінований вигляд">
+<!ENTITY sb.folder.openall "Відкрити усе у вкладках">
+<!ENTITY sb.folder.manage "Керування текою">
+<!ENTITY sb.new.folder "Нова тека">
+<!ENTITY sb.new.separator "Новий роздільник">
+<!ENTITY sb.new.note "Нова нотатка">
+<!ENTITY sb.new.notex "New Note Page">
+<!ENTITY sb.sort.folder "Сортувати у теці">
+<!ENTITY sb.search "Пошук">
+<!ENTITY sb.search.fulltext "Повнотекстовий пошук">
+<!ENTITY sb.search.all "Усе">
+<!ENTITY sb.search.re "Використовувати шаблон">
+<!ENTITY sb.search.cs "З урахуванням регістру">
+<!ENTITY sb.search.cache "Поновити кеш повнотекстового пошуку">
+<!ENTITY sb.search.clear "Очистити історію автозаповнення">
+<!ENTITY sb.search.days "Показати за останні:">
+<!ENTITY mb.manage "Керування">
+<!ENTITY mb.profileFolder "Тека профілю">
+

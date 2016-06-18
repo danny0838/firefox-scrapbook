@@ -1,0 +1,415 @@
+<!-- calculate.dtd -->
+<!ENTITY sb.calc.total.size "Teljes méret">
+<!ENTITY sb.calc.diagnosis "Diagnózis">
+
+<!-- capture.dtd -->
+<!ENTITY sb.capture "Rögzítés">
+<!ENTITY sb.capture.abort "Mégse">
+<!ENTITY sb.capture.start "Indítás">
+<!ENTITY sb.capture.retry "Ismét">
+<!ENTITY sb.capture.skip "Kihagyás">
+<!ENTITY sb.capture.pause "Szünet">
+<!ENTITY sb.capture.finish "Mégse">
+<!ENTITY sb.capture.filter "Szűrés">
+<!ENTITY sb.capture.filter.column.one "Megjelenítés/elrejtés">
+<!ENTITY sb.capture.filter.column.two "Szűrő (reguláris kifejezés)">
+<!ENTITY sb.capture.filter.accept "Elfogadás">
+<!ENTITY sb.capture.filter.accept.tt "változtassa meg vagy adjon új értéket">
+<!ENTITY sb.capture.filter.cancel "Mégse">
+<!ENTITY sb.capture.filter.cancel.tt "szerkesztés megszakítása">
+<!ENTITY sb.capture.filter.delete "Törlés">
+<!ENTITY sb.capture.filter.delete.tt "szűrő eltávolítása a listáról">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "Cím">
+<!ENTITY sbp.capture.column.three "Állapot">
+
+<!-- combine.dtd -->
+<!ENTITY sb.combine.dragdrop "Elemek hozzáadása húzd és ejtsd módszerrel a struktúrából, az összefűzés sorrendjének megfelelően. Egyszerre több elem is áthúzható a húzd és ejtsd módszerrel.">
+<!ENTITY sb.combine.preview "Előnézet">
+<!ENTITY sb.combine.preview.d "Nyomja meg az „Összefűzés” gombot az előnézet ellenőrzése után.">
+<!ENTITY sb.combine.option.remove "Távolítsa el az összefűzés befejezése után az eredeti oldalakat">
+<!ENTITY sbp.combine.up "Mozgatás felfelé">
+<!ENTITY sbp.combine.down "Mozgatás lefelé">
+<!ENTITY sbp.combine.remove "Elem eltávolítása">
+<!ENTITY sbp.combine.newTitle "új cím">
+
+<!-- detail.dtd -->
+<!ENTITY sb.detail.linked.timeout "Időtúllépés (másodpercben megadva)">
+<!ENTITY sb.detail.linked.charset "Karakterkészlet">
+<!ENTITY sb.detail "Rögzítés adatai">
+<!ENTITY sb.detail.new.folder "Új mappa">
+<!ENTITY sb.detail.select.folder "Mappa kiválasztása">
+<!ENTITY sb.detail.option "Beállítások">
+<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.images "Képek">
+<!ENTITY sb.detail.option.media "Media">
+<!ENTITY sb.detail.option.fonts "Fonts">
+<!ENTITY sb.detail.option.frames "Frames">
+<!ENTITY sb.detail.option.styles "Stílusok">
+<!ENTITY sb.detail.option.scripts "Scripts">
+<!ENTITY sb.detail.option.keepLink "Keep linking to the source for not-captured objects">
+<!ENTITY sb.detail.option.rewriteStyles "Reorganize Styles">
+<!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
+<!ENTITY sb.detail.linked.file "Hivatkozott fájlok letöltése">
+<!ENTITY sb.detail.linked.image "Kép">
+<!ENTITY sb.detail.linked.sound "Hang">
+<!ENTITY sb.detail.linked.movie "Film">
+<!ENTITY sb.detail.linked.archive "Archívum">
+<!ENTITY sb.detail.linked.custom "Egyéni">
+<!ENTITY sb.detail.linked.page "Részletes rögzítés">
+<!ENTITY sb.detail.linked.page.depth "Hivatkozás-követés mélysége">
+<!ENTITY sb.detail.linked.page.text "A rögzítések befejezése után egymáshoz kapcsolja valamennyi oldalt, és elkészíti a webhely szerkezetét.">
+<!ENTITY sb.detail.warnAboutRenew "MEGJEGYZÉS: A „Rögzítés ismét” lehetőség felülírja a már elmentett oldalt.">
+<!ENTITY sb.detail.warnAboutScript "MEGJEGYZÉS: A JavaScript problémákat okozhat.">
+
+<!-- editor.dtd -->
+<!ENTITY sb.toolbar.edit "Szerkesztés eszköztár">
+<!ENTITY sb.toolbar.info "Információ eszköztár">
+<!ENTITY sb.edit.folderView "Click to view the data directory. Middle-click to open in a new tab.">
+<!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
+<!ENTITY sb.edit.undo "Visszavonás">
+<!ENTITY sb.edit.save "A változtatások mentése">
+<!ENTITY sb.edit.comment "A jegyzetek területének megnövelése">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
+<!ENTITY sb.edit.sticky "Ragadós megjegyzések"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "&sb.edit.sticky; elem beszúrása"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "Create Freenote">
+<!ENTITY sb.edit.inline.add "Megjegyzés hozzáadása a kiválasztáshoz">
+<!ENTITY sb.edit.attach.file "Fájl csatolása a kijelöléshez">
+<!ENTITY sb.edit.attach.link "Hivatkozás csatolása a kijelöléshez">
+<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.cutterTool "Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.">
+<!ENTITY sb.edit.htmlTool "HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.">
+<!ENTITY sb.edit.html "HTML Editor">
+<!ENTITY sb.edit.html.color "Edit Color">
+<!ENTITY sb.edit.html.color.forText "Set text color:">
+<!ENTITY sb.edit.html.color.forBg "Set background color:">
+<!ENTITY sb.edit.html.source "Edit HTML Source">
+<!ENTITY sb.edit.html.link "Insert Link">
+<!ENTITY sb.edit.html.link.url "Target URL:">
+<!ENTITY sb.edit.html.link.id "Item ID:">
+<!ENTITY sb.edit.html.link.format "Select insert format:">
+<!ENTITY sb.edit.html.file "Insert File">
+<!ENTITY sb.edit.html.file.pick "Insert file:">
+<!ENTITY sb.edit.html.file.html "Insert sub-page:">
+<!ENTITY sb.edit.html.file.format "Select insert format:">
+<!ENTITY sb.edit.html.backup "Backup the Current Page">
+<!ENTITY sb.edit.html.backup.desc "Description:">
+<!ENTITY sb.edit.html.menu.basic "Text">
+<!ENTITY sb.edit.html.menu.block "Block">
+<!ENTITY sb.edit.html.menu.insert "Insert">
+<!ENTITY sb.edit.html.menu.wrapper "Advanced">
+<!ENTITY sb.edit.html.menuitem.insertSource "Insert or Edit Source">
+<!ENTITY sb.edit.html.menuitem.removeFormat "Clear Formats">
+<!ENTITY sb.edit.html.menuitem.unlink "Clear Links">
+<!ENTITY sb.edit.html.menuitem.save "Save the Page">
+<!ENTITY sb.edit.html.menuitem.quit "Switch HTMLEditor">
+<!ENTITY sb.edit.html.menuitem.bold "Switch Bold">
+<!ENTITY sb.edit.html.menuitem.italic "Switch Italic">
+<!ENTITY sb.edit.html.menuitem.underline "Switch Underline">
+<!ENTITY sb.edit.html.menuitem.strikeThrough "Switch Line-through">
+<!ENTITY sb.edit.html.menuitem.setColor "Set Text and Background Color">
+<!ENTITY sb.edit.html.menuitem.increaseFontSize "Increase Text Size">
+<!ENTITY sb.edit.html.menuitem.decreaseFontSize "Decrease Text Size">
+<!ENTITY sb.edit.html.menuitem.superscript "Switch Superscript">
+<!ENTITY sb.edit.html.menuitem.subscript "Switch Subscript">
+<!ENTITY sb.edit.html.menuitem.formatblock_p "Set to Normal Paragraph">
+<!ENTITY sb.edit.html.menuitem.formatblock_h1 "Set to Header Level 1">
+<!ENTITY sb.edit.html.menuitem.formatblock_h2 "Set to Header Level 2">
+<!ENTITY sb.edit.html.menuitem.formatblock_h3 "Set to Header Level 3">
+<!ENTITY sb.edit.html.menuitem.formatblock_h4 "Set to Header Level 4">
+<!ENTITY sb.edit.html.menuitem.formatblock_h5 "Set to Header Level 5">
+<!ENTITY sb.edit.html.menuitem.formatblock_h6 "Set to Header Level 6">
+<!ENTITY sb.edit.html.menuitem.formatblock_div "Set to DIV Block">
+<!ENTITY sb.edit.html.menuitem.formatblock_pre "Set to PRE Block">
+<!ENTITY sb.edit.html.menuitem.insertUnorderedList "Switch Unordered List">
+<!ENTITY sb.edit.html.menuitem.insertOrderedList "Switch Ordered List">
+<!ENTITY sb.edit.html.menuitem.outdent "Outdent">
+<!ENTITY sb.edit.html.menuitem.indent "Indent">
+<!ENTITY sb.edit.html.menuitem.justifyLeft "Align Left">
+<!ENTITY sb.edit.html.menuitem.justifyRight "Align Right">
+<!ENTITY sb.edit.html.menuitem.justifyCenter "Align Center">
+<!ENTITY sb.edit.html.menuitem.justifyFull "Align Justify">
+<!ENTITY sb.edit.html.menuitem.attachLink "Insert a Link or Innerlink">
+<!ENTITY sb.edit.html.menuitem.attachFile "Insert a File or Sub-page">
+<!ENTITY sb.edit.html.menuitem.backupFile "Create a Backup for this Page">
+<!ENTITY sb.edit.html.menuitem.horizontalLine "Insert a Horizontal Rule">
+<!ENTITY sb.edit.html.menuitem.insertDate "Insert a Date">
+<!ENTITY sb.edit.html.menuitem.insertTodoBox "Insert a Todo Checkbox">
+<!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "Insert a Todo Checkbox (Checked)">
+<!ENTITY sb.edit.html.menuitem.wrapHTML "Format with Template">
+<!ENTITY sb.edit.cutter "Kijelölés eltávolítása">
+<!ENTITY sb.edit.remove.iframe "Összes IFRAME kódelem eltávolítása">
+<!ENTITY sb.edit.remove.script "Összes SCRIPT kódelem eltávolítása">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to highlight the selection.">
+<!ENTITY sb.highlighter "Szövegkiemelő">
+<!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
+<!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
+<!ENTITY sb.source "Forráswebhely megnyitása">
+<!ENTITY sb.renew "Rögzítés ismét">
+<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.locate "Hely meghatározása az Oldalsávban">
+<!ENTITY sb.indicators "Linkjelölők megjelenítése">
+<!ENTITY sb.info.home "Kezdőlap">
+<!ENTITY sb.info.sitemap "Helyszerkezet">
+
+<!-- hlCustom.dtd -->
+<!ENTITY sb.hlCustom.preset "Sablonok">
+<!ENTITY sb.hlCustom.background "Háttér">
+<!ENTITY sb.hlCustom.color "Szín">
+<!ENTITY sb.hlCustom.text "Szöveg">
+<!ENTITY sb.hlCustom.bold "Félkövér">
+<!ENTITY sb.hlCustom.italic "Dőlt">
+<!ENTITY sb.hlCustom.line "Áthúzott">
+<!ENTITY sb.hlCustom.border "Szegély">
+<!ENTITY sb.hlCustom.type "Típus">
+<!ENTITY sb.hlCustom.box "Keret">
+<!ENTITY sb.hlCustom.underline "Aláhúzás">
+<!ENTITY sb.hlCustom.style "Stílus">
+<!ENTITY sb.hlCustom.solid "Folytonos">
+<!ENTITY sb.hlCustom.dotted "Pontozott">
+<!ENTITY sb.hlCustom.dashed "Szaggatott">
+<!ENTITY sb.hlCustom.double "Kétszeres">
+<!ENTITY sb.hlCustom.width "Szélesség">
+<!ENTITY sb.hlCustom.thin "Vékony">
+<!ENTITY sb.hlCustom.medium "Közepes">
+<!ENTITY sb.hlCustom.thick "Vastag">
+
+<!-- mbManage.dtd -->
+<!ENTITY mb.manager "Multi-ScrapBook Manager">
+<!ENTITY mb.prop.name "Név">
+<!ENTITY mb.prop.path "Útvonal">
+<!ENTITY mb.button.add "Hozzáadás">
+<!ENTITY mb.button.edit "Szerkesztés">
+<!ENTITY mb.button.remove "Eltávolítás">
+
+<!-- multiple.dtd -->
+<!ENTITY sb.multiple.filter "Szűrő">
+<!ENTITY sbp.multiple.titleofwebsite "Webhely címe">
+<!ENTITY sbp.multiple.titleoflink "Link címe">
+<!ENTITY sb.multiple.title "Cím">
+<!ENTITY sb.multiple.timeout "Időtúllépés">
+<!ENTITY sbp.multiple.downloadmethod "Eljárás">
+<!ENTITY sb.multiple.charset "Karakterkészlet">
+<!ENTITY sb.multiple.url "Webcím (Soronként írja be a webcímeket)">
+<!ENTITY sb.multiple.detector "Webcímérzékelő">
+<!ENTITY sb.multiple.detector.plink "Az oldalon lévő összes hivatkozás">
+<!ENTITY sb.multiple.detector.slink "A kijelölésben lévő összes hivatkozás">
+<!ENTITY sb.multiple.detector.tabs "Az ablakban megnyitott összes fül">
+<!ENTITY sb.multiple.detector.local "Az összes helyi HTML valamelyik mappában">
+<!ENTITY sb.multiple.detector.bookmarks "Könyvjelzők">
+<!ENTITY sb.multiple.detector.clear "Törlés">
+<!ENTITY sbp.multiple.exclude "A célmappában már létező címek figyelmen kívül hagyása.">
+
+<!-- note.dtd -->
+<!ENTITY sb.note.save "Mentés">
+<!ENTITY sb.note.close "Bezárás">
+<!ENTITY sb.note.tools "Eszközök">
+<!ENTITY sb.note.htmlview "HTML nézet">
+<!ENTITY sb.note.normalview "Normál nézet">
+<!ENTITY sb.note.template "A sablon HTML szerkesztése">
+<!ENTITY sb.note.autolinefeed "Automatikus soremelés">
+<!ENTITY sb.note.autolinefeed.t "A &lt;br&gt; kódelem hozzáadása a sorvéghez a &sb.note.htmlview; hatására">
+<!ENTITY sb.note.fontsize "Betűméret">
+<!ENTITY sb.note.help "Súgó">
+<!ENTITY sb.note.print "Nyomtatás">
+<!ENTITY sb.note.exit "Kilépés">
+<!ENTITY sb.note.save.accesskey "M">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "N">
+<!ENTITY sb.note.tools.accesskey "E">
+<!ENTITY sb.note.fontsize.accesskey "B">
+<!ENTITY sb.note.print.accesskey "N">
+<!ENTITY sb.note.exit.accesskey "K">
+
+<!-- notify.dtd -->
+<!ENTITY sb.capture.complete "A rögzítés befejeződött.">
+<!ENTITY sb.capture.complete.all "Az összes rögzítés befejeződött.">
+
+<!-- output.dtd -->
+<!ENTITY sb.output.option.all "Egész struktúra leképzése">
+<!ENTITY sb.output.option.frame "Leképzés kerettel">
+<!ENTITY sb.output.option.open "Leképzés után megnyitás a böngészőben">
+
+<!-- overlay.dtd -->
+<!ENTITY sb.capture.partial "Kijelölés rögzítése">
+<!ENTITY sb.capture.partial.as "Kijelölés rögzítése másként">
+<!ENTITY sb.capture.entire "Oldal rögzítése">
+<!ENTITY sb.capture.entire.as "Oldal rögzítése másként">
+<!ENTITY sb.capture.frame "Keret rögzítése">
+<!ENTITY sb.capture.frame.as "Keret rögzítése másként">
+<!ENTITY sb.capture.target "Hivatkozás rögzítése">
+<!ENTITY sb.capture.target.as "Hivatkozás rögzítése másként">
+<!ENTITY sb.capture.alltabs "Összes lap rögzítése">
+<!ENTITY sb.capture.bookmark "Könyvjelző a Dossziéba">
+<!ENTITY sb.sidebar "Megjelenítés az Oldalsávon">
+<!ENTITY sb.menubar "Menü">
+<!ENTITY sb.editbefore "Szerkesztés rögzítés előtt">
+
+<!-- prefs.dtd -->
+<!ENTITY sb.prefs.main "Fő">
+<!ENTITY sb.prefs.keys "Keys">
+<!ENTITY sb.prefs.tabs "Lapok">
+<!ENTITY sb.prefs.save "Mentés">
+<!ENTITY sb.prefs.edit "Szerkesztés">
+<!ENTITY sb.prefs.organize "Rendezés">
+<!ENTITY sb.prefs.advanced "Haladó">
+<!ENTITY sb.prefs.ui.contextMenu "Megjelenítés a böngésző helyi menüjében">
+<!ENTITY sb.prefs.ui.contextSubMenu "Almenü">
+<!ENTITY sb.prefs.ui.bookmarkMenu "„Könyvjelző a dossziéba” menü megjelenítése">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Legfeljebb">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "legutóbb használt mappa megjelenítése">
+<!ENTITY sb.prefs.ui.menuBar "Megjelenítés a menüben">
+<!ENTITY sb.prefs.ui.menuBar.icon "Ikon">
+<!ENTITY sb.prefs.ui.toolsMenu "Megjelenítés az „Eszközök” menüben">
+<!ENTITY sb.prefs.ui.statusBar "Megjelenítés az állapotsorban">
+<!ENTITY sb.prefs.restart "A változtatások érvényre jutásához a Firefox újraindítása szükséges">
+<!ENTITY sb.prefs.tabs.tips "Lap nyitása a következő műveletekhez">
+<!ENTITY sb.prefs.tabs.note "Jegyzet szerkesztése">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
+<!ENTITY sb.prefs.data "Adattárolás helye">
+<!ENTITY sb.prefs.data.default "Alapértelmezett (Profil mappa)">
+<!ENTITY sb.prefs.data.custom "Mentés a következő helyre">
+<!ENTITY sb.prefs.data.tips "Válassza ki a mappát, ahová a Dosszié-adatok kerülnek">
+<!ENTITY sb.prefs.multibook.enabled "Többszörös dossziék engedélyezése">
+<!ENTITY sb.prefs.multibook.tips "Többszörös dossziék segítségével lehetőség van a dosszié-adatok több helyen történő tárolására. A tárolás helyének megváltoztatásához az eszköztár ikonra kell kattintani.">
+<!ENTITY sb.prefs.confirmDelete "Figyelmeztetés a dosszié-struktúra elemeinek törlése előtt">
+<!ENTITY sb.prefs.tree.autoCollapse "Mappa megnyitásakor a többi mappa automatikusan bezárásra kerül">
+<!ENTITY sb.prefs.tree.unshift "Elem elhelyezése a(z)">
+<!ENTITY sb.prefs.tree.unshift.top "mappába elejére">
+<!ENTITY sb.prefs.tree.unshift.bottom "mappa végére">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
+<!ENTITY sb.prefs.showDetailOnDrop "A „Rögzítés részletek” ablak megjelenítése, ha a felvételt húzd és ejtsd módon kezdeményezik az Oldalsávon">
+<!ENTITY sb.prefs.notifyOnComplete "A „Rögzítés kész” értesítés megjelenítése">
+<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
+<!ENTITY sb.prefs.export "Export Preferences">
+<!ENTITY sb.prefs.import "Import Preferences">
+<!ENTITY sb.prefs.reset "Reset Preferences">
+<!ENTITY sb.button.customize "Testreszabás">
+<!ENTITY sb.button.browse "Tallózás">
+<!ENTITY sb.button.show "Fájlok megjelenítése">
+
+<!-- property.dtd -->
+<!ENTITY sb.prop.general "Általános információ">
+<!ENTITY sb.prop.type "Típus">
+<!ENTITY sb.prop.date "Dátum"><!-- left for addon compatibility -->
+<!ENTITY sb.prop.create "Create">
+<!ENTITY sb.prop.modify "Modify">
+<!ENTITY sb.prop.encode "Kódolás">
+<!ENTITY sb.prop.size "Méret">
+<!ENTITY sb.prop.content "Tartalom">
+<!ENTITY sb.prop.file "File">
+<!ENTITY sb.prop.folder "Mappa">
+<!ENTITY sb.prop.icon "Ikon">
+<!ENTITY sb.prop.icon.change "Csere">
+<!ENTITY sb.prop.icon.default "Alapértelmezett">
+<!ENTITY sb.prop.icon.favicon "Favicon kiválasztása">
+<!ENTITY sb.prop.icon.custom "Felhasználói ikon kiválasztása">
+<!ENTITY sb.prop.mark "Megjelölés">
+<!ENTITY sb.prop.lock "Lock">
+
+<!-- repair.dtd -->
+<!ENTITY sb.repair.rdfFile "A scrapbook.rdf visszaállítása">
+<!ENTITY sb.repair.rdfFile.descript "Ezzel akkor próbálkozzon, ha hirtelen eltűnik a dossziéfa.">
+<!ENTITY sb.repair.rdfFile.select "Válassza ki a biztonsági mentés fájlját a visszaállításhoz.">
+<!ENTITY sb.repair.rdfFile.file "Fájl">
+<!ENTITY sb.repair.rdfFile.time "Idő">
+<!ENTITY sb.repair.rdfFile.size "Méret">
+<!ENTITY sb.repair.favicons "A Faviconok visszaállítása a fában">
+<!ENTITY sb.repair.favicons.descript "Ezt akkor próbálja meg, ha az dossziéfa Faviconjai közül sok eltűnik.">
+<!ENTITY sb.repair.complete "Elkészült.">
+
+<!-- scrapbook.dtd -->
+<!ENTITY sb.new.folder "Új mappa">
+<!ENTITY sb.new.separator "Új elválasztó">
+<!ENTITY sb.new.note "Új jegyzet">
+<!ENTITY sb.new.notex "New Note Page">
+<!ENTITY sb.toggle.all "Összes mappa kinyitása/becsukása">
+<!ENTITY sb.tools "Eszközök">
+<!ENTITY sb.tools.options "Beállítások">
+<!ENTITY sb.tools.manage "Kezelés">
+<!ENTITY sb.tools.combine "Összefűzés Varázsló">
+<!ENTITY sb.tools.trade "Importálás/Exportálás">
+<!ENTITY sb.tools.multiple "Több webcím rögzítése">
+<!ENTITY sb.tools.directory "Dosszié mappa">
+<!ENTITY sb.tools.calculate "Méret kiszámítása">
+<!ENTITY sb.tools.sorttree "Teljes fa rendezése">
+<!ENTITY sb.tools.output "Fa exportálása HTML-ként">
+<!ENTITY sb.tools.repair "Vészhelyzet javítása">
+<!ENTITY sb.tools.addons "Kibővített funkciók">
+<!ENTITY sb.note.opentab "Megnyitás fülön">
+<!ENTITY sb.note.close "Bezárás">
+
+<!-- sort.dtd -->
+<!ENTITY sb.sort "Rendezés">
+<!ENTITY sb.sort.reverse "Visszafelé">
+<!ENTITY sb.sort.title.asc "Cím szerinti rendezés (A → Z)">
+<!ENTITY sb.sort.title.desc "Cím szerinti rendezés (Z → A)">
+<!ENTITY sb.sort.date.asc "Időrend">
+<!ENTITY sb.sort.date.desc "Fordított időrend">
+<!ENTITY sb.sort.grouping "Group by Type">
+<!ENTITY sb.sort.recursive "Almappák rekurzív rendezése">
+<!ENTITY sb.sort.warning "Megjegyzés: Ez a művelet visszavonhatatlan.">
+
+<!-- templateHelp.dtd -->
+<!ENTITY sb.thelp.dir "ltr">
+<!ENTITY sb.thelp.title "Dosszié sablon HTML súgó">
+<!ENTITY sb.thelp.tags "Két speciális kódelem">
+<!ENTITY sb.thelp.tag1 "A jegyzet címe (első sora)">
+<!ENTITY sb.thelp.tag2 "A jegyzet tartalma (a második vagy későbbi sor)">
+<!ENTITY sb.thelp.preset "Előre beállított sablon">
+
+<!-- trade.dtd -->
+<!ENTITY sb.trade.import "Importálás">
+<!ENTITY sb.trade.export "Exportálás">
+<!ENTITY sb.trade.time "Exportálva">
+<!ENTITY sb.trade.update "Import as latest ScrapBook X format">
+<!ENTITY sb.trade.restore "Importálás a mappaszerkezet visszaállításával">
+<!ENTITY sb.trade.remove "Fájlok eltávolítása importálás után">
+<!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">
+
+<!-- tree.dtd -->
+<!ENTITY sb.open "Megnyitás">
+<!ENTITY sb.open.native "Open in Default Program">
+<!ENTITY sb.open.tab "Megnyitás lapon">
+<!ENTITY sb.open.newtab "Megnyitás új lapon">
+<!ENTITY sb.open.source "Forráswebcím megnyitása">
+<!ENTITY sb.multi "Multi-ScrapBook">
+<!ENTITY sb.tools "Eszközök">
+<!ENTITY sb.show.files "Fájlok megjelenítése">
+<!ENTITY sb.move "Áthelyezés">
+<!ENTITY sb.move.into "Áthelyezés mappába">
+<!ENTITY sb.copy "Copy">
+<!ENTITY sb.renew "Rögzítés ismét">
+<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.export "Exportálás">
+<!ENTITY sb.remove "Törlés">
+<!ENTITY sb.property "Tulajdonságok">
+<!ENTITY sb.listview "Utolsó megtekintés">
+<!ENTITY sb.prop.title "Név">
+<!ENTITY sb.prop.comment "Megjegyzés">
+<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.id.date "ID">
+<!ENTITY sb.folder.combine "Összefűzés nézet">
+<!ENTITY sb.folder.openall "Összes megnyitása füleken">
+<!ENTITY sb.folder.manage "Mappa kezelése">
+<!ENTITY sb.new.folder "Új mappa">
+<!ENTITY sb.new.separator "New elválasztó">
+<!ENTITY sb.new.note "Új jegyzet">
+<!ENTITY sb.new.notex "New Note Page">
+<!ENTITY sb.sort.folder "Mappa rendezése">
+<!ENTITY sb.search "Keresés">
+<!ENTITY sb.search.fulltext "Keresés a teljes szövegben">
+<!ENTITY sb.search.all "Mind">
+<!ENTITY sb.search.re "Reguláris kifejezés használata">
+<!ENTITY sb.search.cs "A kis- és nagybetűk megkülönböztetése">
+<!ENTITY sb.search.cache "A gyorsítótár frissítése a teljes szövegben kereséshez">
+<!ENTITY sb.search.clear "Törlés az előzményekből">
+<!ENTITY sb.search.days "Szűrés napok alapján">
+<!ENTITY mb.manage "Kezelés">
+<!ENTITY mb.profileFolder "Profil mappa">
+

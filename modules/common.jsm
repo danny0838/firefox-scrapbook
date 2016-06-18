@@ -75,8 +75,8 @@ var sbCommonUtils = {
      * ScrapBook language pack handling
      ***************************************************************/
 
-    lang: function (aBundle, aName, aArgs) {
-        return lang(aBundle, aName, aArgs);
+    lang: function () {
+        return lang.apply(lang, arguments);
     },
 
 
@@ -164,7 +164,7 @@ var sbCommonUtils = {
                     throw null;
             }
         } catch (ex) {
-            console.error(lang("scrapbook", "ERR_FAIL_SET_PREF", [aName]));
+            console.error(lang("ERR_FAIL_SET_PREF", aName));
         }
     },
 
@@ -230,7 +230,7 @@ var sbCommonUtils = {
 
     getContentDir: function(aID, aSuppressCreate, aSkipIdCheck) {
         if ( !aSkipIdCheck && !this.validateID(aID) ) {
-            this.alert(lang("scrapbook", "ERR_FAIL_GET_DIR", [aID]));
+            this.alert(lang("ERR_FAIL_GET_DIR", aID));
             return null;
         }
         var dir = this.getScrapBookDir().clone();
@@ -353,7 +353,7 @@ var sbCommonUtils = {
             var resolved = baseURLObj.resolve(aRelURL);
             return this.convertURLToObject(resolved).spec;
         } catch(ex) {
-            console.error(lang("scrapbook", "ERR_FAIL_RESOLVE_URL", [aBaseURL, aRelURL]));
+            console.error(lang("ERR_FAIL_RESOLVE_URL", aBaseURL, aRelURL));
         }
     },
 
@@ -458,7 +458,7 @@ var sbCommonUtils = {
             if (aNoCatch) {
                 throw ex;
             } else {
-                this.alert(lang("scrapbook", "ERR_FAIL_WRITE_FILE", [aFile.path, ex]));
+                this.alert(lang("ERR_FAIL_WRITE_FILE", aFile.path, ex));
             }
         }
     },
@@ -503,7 +503,7 @@ var sbCommonUtils = {
             curFile.remove(true);
             return true;
         } catch(ex) {
-            this.alert(lang("scrapbook", "ERR_FAIL_REMOVE_FILE", [curFile ? curFile.path : "", ex]));
+            this.alert(lang("ERR_FAIL_REMOVE_FILE", curFile ? curFile.path : "", ex));
             return false;
         }
     },
@@ -667,7 +667,7 @@ var sbCommonUtils = {
     },
 
     escapeComment: function(aStr) {
-        if ( aStr.length > 10000 ) this.alert(lang("scrapbook", "MSG_LARGE_COMMENT"));
+        if ( aStr.length > 10000 ) this.alert(lang("MSG_LARGE_COMMENT"));
         return aStr.replace(/\r|\n|\t/g, " __BR__ ");
     },
 

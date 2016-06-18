@@ -8,12 +8,7 @@
 <?xul-overlay href="chrome://scrapbook/content/tree.xul"?>
 
 <!--locale-->
-<!DOCTYPE dialog [
-<!ENTITY % mainDTD   SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
-%mainDTD;
-<!ENTITY % outputDTD SYSTEM "chrome://scrapbook/locale/output.dtd" >
-%outputDTD;
-]>
+<!DOCTYPE dialog SYSTEM "chrome://scrapbook/locale/message.dtd">
 
 <!--dialog-->
 <dialog id="ScrapBookOutputDialog"
