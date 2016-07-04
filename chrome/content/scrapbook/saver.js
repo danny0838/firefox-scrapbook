@@ -43,7 +43,7 @@ var sbContentSaver = {
 
     captureWindow: function(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData, aContext, aTitle) {
         this.init(aPresetData);
-        this.item.chars = aRootWindow.document.characterSet;
+        this.item.chars = this.option["forceUtf8"] ? "UTF-8" : aRootWindow.document.characterSet;
         this.item.source = aRootWindow.location.href;
         //Favicon der angezeigten Seite bestimmen (Unterscheidung zwischen FF2 und FF3 notwendig!)
         if ( "gBrowser" in window && aRootWindow == gBrowser.contentWindow ) {
@@ -152,6 +152,7 @@ var sbContentSaver = {
 
     saveDocumentInternal: function(aDocument, aFileKey) {
         var captureType = "";
+        var charset = this.option["forceUtf8"] ? "UTF-8" : aDocument.characterSet;
         var contentType = aDocument.contentType;
         if ( ["text/html", "application/xhtml+xml"].indexOf(contentType) < 0 ) {
             if ( !(aDocument.documentElement.nodeName.toUpperCase() == "HTML" && this.option["asHtml"]) ) {
@@ -159,7 +160,7 @@ var sbContentSaver = {
             }
         }
         if ( captureType ) {
-            var newLeafName = this.saveFileInternal(aDocument.location.href, aFileKey, captureType, aDocument.characterSet);
+            var newLeafName = this.saveFileInternal(aDocument.location.href, aFileKey, captureType, charset);
             return newLeafName;
         }
 
@@ -332,7 +333,6 @@ var sbContentSaver = {
         // change the charset to UTF-8
         // also change the meta tag; generate one if none found
         if ( this.option["forceUtf8"] ) {
-            this.item.chars = "UTF-8";
             var metas = rootNode.getElementsByTagName("meta"), meta, hasmeta = false;
             for (var i=0, len=metas.length; i<len; ++i) {
                 meta = metas[i];
@@ -348,7 +348,7 @@ var sbContentSaver = {
             }
             if (!hasmeta) {
                 var metaNode = aDocument.createElement("meta");
-                metaNode.setAttribute("charset", this.item.chars);
+                metaNode.setAttribute("charset", "UTF-8");
                 headNode.insertBefore(aDocument.createTextNode("\n"), headNode.firstChild);
                 headNode.insertBefore(metaNode, headNode.firstChild);
                 headNode.insertBefore(aDocument.createTextNode("\n"), headNode.firstChild);
@@ -363,11 +363,11 @@ var sbContentSaver = {
             var myHTMLFile = this.contentDir.clone();
             myHTMLFile.append(myHTMLFileName);
         }
-        sbCommonUtils.writeFile(myHTMLFile, myHTML, this.item.chars);
+        sbCommonUtils.writeFile(myHTMLFile, myHTML, charset);
         if ( myCSS ) {
             var myCSSFile = this.contentDir.clone();
             myCSSFile.append(myCSSFileName);
-            sbCommonUtils.writeFile(myCSSFile, myCSS, this.item.chars);
+            sbCommonUtils.writeFile(myCSSFile, myCSS, charset);
         }
         return myHTMLFile.leafName;
     },
