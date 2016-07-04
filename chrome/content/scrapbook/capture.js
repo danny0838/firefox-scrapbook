@@ -11,10 +11,8 @@ var gFile2URL = {};
 var gURL2Name = {};
 var gPreset = [];
 var gContext = "";
-var gCharset = "";
 var gTitles = [];
 var gTitle;
-var gTimeout = null;
 
 
 
@@ -35,10 +33,26 @@ function SB_trace(aMessage) {
  *   referItem:   string   (deep-capture, re-capture) the refer item,
                            determine where to save file and to set resource property
  *   option:      object   capture options, such as:
- *                           images:  media:  styles:  script:
- *                           rewriteStyles:  forceUtf8:  asHtml: 
- *                           dlimg:  dlsnd:  dlmov:  dlarc:  custom:
- *                           inDepth:  isPartial:
+                             isPartial:
+                             images:
+                             media:
+                             fonts:
+                             frames:
+                             styles:
+                             script:
+                             asHtml:
+                             forceUtf8:
+                             rewriteStyles:
+                             keepLink:
+                             dlimg:
+                             dlsnd:
+                             dlmov:
+                             dlarc:
+                             custom:
+                             inDepth:
+                             inDepthTimeout: (multi-capture, deep-capture) countdown seconds before next capture
+                             inDepthCharset: force using charset to load html, autodetect if not set      
+                             internalize:
  *   file2Url:    array    the file2URL data in saver.js from last capture,
  *                         will then pass to saver.js for next capture
  *   preset:      array    (re-capture) the preset data,
@@ -50,8 +64,6 @@ function SB_trace(aMessage) {
  *                           [3]   array    overwrites data.file2Url if set
  *                           [4]   int      limits depth of capture
  *                           [5]   bool     true if is a bookmark, will reset resource type to "" (page)
- *   charset:     string   force using charset to read html, autodetect if not set                  
- *   timeout:     string   (multi-capture, deep-capture) countdown seconds before next capture
  *   titles:      array    (multi-capture) strings, overwrite the resource title,
  *                         each entry corresponds with data.urls
  *   context      string   the capture context, determines the behavior
@@ -80,8 +92,8 @@ function SB_initCapture() {
             file2Url: window.arguments[7],
             preset: window.arguments[8],
             // method: window.arguments[9],  // we no more use this
-            charset: window.arguments[10],
-            timeout: window.arguments[11],
+            // charset: window.arguments[10],  // we no more use this
+            // timeout: window.arguments[11],  // we no more use this
             titles: window.arguments[12],
         };
         data.context = (function(){
@@ -103,12 +115,9 @@ function SB_initCapture() {
     gOption = data.option;
     gFile2URL = data.file2Url;
     gPreset = data.preset;
-    gCharset = data.charset;
-    gTimeout = data.timeout;
     gTitles = data.titles;
     gContext = data.context;
 
-    if ( !gTimeout ) gTimeout = 0;
     if ( gContext == "indepth" ) {
         gURL2Name[gReferItem.source] = "index";
     } else if ( gContext == "capture-again-deep" ) {
@@ -140,6 +149,7 @@ function SB_initCapture() {
     if ( !gOption ) gOption = {};
     if ( !("script" in gOption ) ) gOption["script"] = false;
     if ( !("images" in gOption ) ) gOption["images"] = true;
+    if ( !("inDepthTimeout" in gOption) ) gOption["inDepthTimeout"] = 0;
     sbInvisibleBrowser.init();
     sbCaptureTask.init(myURLs);
     //Es wird gar nichts gemacht. Der Benutzer muss den Download selbst starten!
@@ -167,7 +177,7 @@ function SB_fireNotification(aItem) {
 
 var sbCaptureTask = {
 
-    get INTERVAL() { return gTimeout; },
+    get INTERVAL() { return gOption["inDepthTimeout"]; },
     get TREE()     { return document.getElementById("sbpURLList"); },
     get URL()      { return gURLs[this.index]; },
 
@@ -663,7 +673,7 @@ var sbInvisibleBrowser = {
         this.ELEMENT.docShell.allowMetaRedirects = false;
         // older version of Firefox gets error on setting charset
         try {
-            if (gCharset) this.ELEMENT.docShell.charset = gCharset;
+            if (gOption["inDepthCharset"]) this.ELEMENT.docShell.charset = gOption["inDepthCharset"];
         } catch(ex) {
             sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_CHANGE_CHARSET"));
         }

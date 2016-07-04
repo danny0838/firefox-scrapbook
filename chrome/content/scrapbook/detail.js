@@ -101,8 +101,8 @@ var sbCaptureOptions = {
         this.param.option["custom"] = this.CUSTOM_UI.checked ? document.getElementById("sbDetailCustomExt").value : "";
         if ( this.param.context !== "capture-again-deep" ) {
             this.param.option["inDepth"] = parseInt("0" + document.getElementById("sbDetailInDepth").value, 10);
-            this.param.poption["timeout"] = parseInt("0" + document.getElementById("sbDetailTimeout").value, 10);
-            this.param.poption["charset"] = document.getElementById("sbDetailCharset").value;
+            this.param.option["inDepthTimeout"] = parseInt("0" + document.getElementById("sbDetailTimeout").value, 10);
+            this.param.option["inDepthCharset"] = document.getElementById("sbDetailCharset").value;
         }
         if ( this.param.context == "capture-again" ) {
             var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);

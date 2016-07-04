@@ -9,7 +9,6 @@ var sbContentSaver = {
     file2URL: {},
     file2Doc: {},
     option: {},
-    plusoption: {},
     refURLObj: null,
     favicon: null,
     frames: [],
@@ -45,9 +44,10 @@ var sbContentSaver = {
             "dlarc": sbCommonUtils.getPref("capture.default.dlarc", false),
             "custom": sbCommonUtils.getPref("capture.default.custom", ""),
             "inDepth": 0,
-            "internalize": false
+            "inDepthTimeout": 0,
+            "inDepthCharset": "UTF-8",
+            "internalize": false,
         };
-        this.plusoption = { "timeout": "0", "charset": "UTF-8" };
         this.linkURLs = [];
         this.frames = [];
         this.isMainFrame = true;
@@ -122,8 +122,6 @@ var sbContentSaver = {
                     option: this.option,
                     file2Url: this.file2URL,
                     preset: null,
-                    charset: this.plusoption["charset"],
-                    timeout: this.plusoption["timeout"],
                     titles: null,
                     context: "indepth",
                 };
@@ -160,7 +158,6 @@ var sbContentSaver = {
         var ret = {
             item: this.item,
             option: this.option,
-            poption: this.plusoption,
             titles: aTitles || [this.item.title],
             resURI: aResURI,
             result: 1,

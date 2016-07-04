@@ -322,8 +322,6 @@ var sbController = {
             option: null,
             file2Url: null,
             preset: preset,
-            charset: null,
-            timeout: null,
             titles: null,
             context: "capture-again",
         };
@@ -734,8 +732,6 @@ var sbTreeDNDHandler = {
                 option: null,
                 file2Url: null,
                 preset: null,
-                charset: null,
-                timeout: null,
                 titles: null,
             };
             top.window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);

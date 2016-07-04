@@ -2659,8 +2659,6 @@ var sbInfoViewer = {
             option: null,
             file2Url: {},
             preset: [id, fileName, null, null, 0],
-            charset: null,
-            timeout: null,
             titles: null,
             context: (fileName == "index") ? "capture-again" : "capture-again-deep",
         };
@@ -2714,8 +2712,6 @@ var sbInfoViewer = {
             option: options,
             file2Url: file2Url,
             preset: preset,
-            charset: null,
-            timeout: null,
             titles: null,
             context: "internalize",
         };

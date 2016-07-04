@@ -52,11 +52,12 @@ var sbMultipleService = {
             resName: sbFolderSelector2.resURI,
             resIdx: 0,
             referItem: null,
-            option: null,
+            option: {
+                inDepthTimeout: timeout,
+                inDepthCharset: charset,
+            },
             file2Url: null,
             preset: null,
-            charset: charset,
-            timeout: timeout,
             titles: (document.getElementById("sbLinktitle").value == "ScrapBook") ? null : namList,
             context: "link",
         };
