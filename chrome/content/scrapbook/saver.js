@@ -521,7 +521,7 @@ var sbContentSaver = {
         switch ( aNode.nodeName.toLowerCase() ) {
             case "img": 
                 if ( aNode.hasAttribute("src") ) {
-                    if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
+                    if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("src")) ) break;
                     if ( this.option["images"] ) {
                         var aFileName = this.download(aNode.src);
                         if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
@@ -535,7 +535,7 @@ var sbContentSaver = {
                     var that = this;
                     aNode.setAttribute("srcset", (function(srcset){
                         return srcset.replace(/(\s*)([^ ,][^ ]*[^ ,])(\s*(?: [^ ,]+)?\s*(?:,|$))/g, function(m, m1, m2, m3){
-                            if ( that.option["internalize"] && m2.indexOf("://") == -1 ) return m;
+                            if ( that.option["internalize"] && this.isInternalized(m2) ) return m;
                             var url = sbCommonUtils.resolveURL(that.refURLObj.spec, m2);
                             if ( that.option["images"] ) {
                                 var aFileName = that.download(url);
@@ -567,7 +567,7 @@ var sbContentSaver = {
                     var that = this;
                     aNode.setAttribute("srcset", (function(srcset){
                         return srcset.replace(/(\s*)([^ ,][^ ]*[^ ,])(\s*(?: [^ ,]+)?\s*(?:,|$))/g, function(m, m1, m2, m3){
-                            if ( that.option["internalize"] && m2.indexOf("://") == -1 ) return m;
+                            if ( that.option["internalize"] && this.isInternalized(m2) ) return m;
                             var url = sbCommonUtils.resolveURL(that.refURLObj.spec, m2);
                             if ( that.option["media"] ) {
                                 var aFileName = that.download(url);
@@ -584,7 +584,7 @@ var sbContentSaver = {
                 break;
             case "object": 
                 if ( aNode.hasAttribute("data") ) {
-                    if ( this.option["internalize"] && aNode.getAttribute("data").indexOf("://") == -1 ) break;
+                    if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("data")) ) break;
                     if ( this.option["media"] ) {
                         var aFileName = this.download(aNode.data);
                         if (aFileName) aNode.setAttribute("data", sbCommonUtils.escapeFileName(aFileName));
@@ -597,7 +597,7 @@ var sbContentSaver = {
                 break;
             case "applet": 
                 if ( aNode.hasAttribute("archive") ) {
-                    if ( this.option["internalize"] && aNode.getAttribute("archive").indexOf("://") == -1 ) break;
+                    if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("archive")) ) break;
                     var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("archive"));
                     if ( this.option["media"] ) {
                         var aFileName = this.download(url);
@@ -631,7 +631,7 @@ var sbContentSaver = {
             case "td": 
                 // handle "background" attribute (HTML5 deprecated)
                 if ( aNode.hasAttribute("background") ) {
-                    if ( this.option["internalize"] && aNode.getAttribute("background").indexOf("://") == -1 ) break;
+                    if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("background")) ) break;
                     var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("background"));
                     if ( this.option["images"] ) {
                         var aFileName = this.download(url);
@@ -647,7 +647,7 @@ var sbContentSaver = {
                 switch (aNode.type.toLowerCase()) {
                     case "image": 
                         if ( aNode.hasAttribute("src") ) {
-                            if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
+                            if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("src")) ) break;
                             if ( this.option["images"] ) {
                                 var aFileName = this.download(aNode.src);
                                 if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
@@ -1020,7 +1020,7 @@ var sbContentSaver = {
         aCSSText = aCSSText.replace(regex, function() {
             var dataURL = arguments[1] || arguments[2];
             if (dataURL.indexOf("data:") === 0 && !sbContentSaver.option["saveDataURI"]) return ' url("' + dataURL + '")';
-            if ( sbContentSaver.option["internalize"] && dataURL .indexOf("://") == -1 ) return ' url("' + dataURL + '")';
+            if ( sbContentSaver.option["internalize"] && sbContentSaver.isInternalized(dataURL) ) return ' url("' + dataURL + '")';
             dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);
             switch (type) {
                 case "image":
@@ -1167,6 +1167,9 @@ var sbContentSaver = {
         return [newFileName, false];
     },
 
+    isInternalized: function (aURI) {
+        return aURI.indexOf("://") === -1 && !(aURI.indexOf("data:") === 0);
+    },
 };
 
 
