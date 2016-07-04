@@ -713,6 +713,16 @@ var sbCommonUtils = {
         return query;
     },
 
+    formatFileSize: function (bytes, si) {
+        var thresh = si ? 1000 : 1024;
+        var units = si
+            ? ['B', 'kB','MB','GB','TB','PB','EB','ZB','YB']
+            : ['B', 'KiB','MiB','GiB','TiB','PiB','EiB','ZiB','YiB'];
+        var e = Math.log(bytes) / Math.log(thresh) | 0;
+        var n = bytes / Math.pow(thresh, e);
+        return n.toFixed((e >= 1 && n < 10) ? 1 : 0) + ' ' + units[e];
+    },
+
     /**
      * Window daemon
      */
