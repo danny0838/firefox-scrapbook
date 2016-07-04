@@ -38,6 +38,7 @@ var sbContentSaver = {
             "forceUtf8": sbCommonUtils.getPref("capture.default.forceUtf8", true),
             "rewriteStyles": sbCommonUtils.getPref("capture.default.rewriteStyles", true),
             "keepLink": sbCommonUtils.getPref("capture.default.keepLink", false),
+            "saveDataURI": sbCommonUtils.getPref("capture.default.saveDataURI", false),
             "dlimg": sbCommonUtils.getPref("capture.default.dlimg", false),
             "dlsnd": sbCommonUtils.getPref("capture.default.dlsnd", false),
             "dlmov": sbCommonUtils.getPref("capture.default.dlmov", false),
@@ -1018,7 +1019,7 @@ var sbContentSaver = {
         var regex = / url\(\"((?:\\.|[^"])+)\"\)| url\(((?:\\.|[^)])+)\)/g;
         aCSSText = aCSSText.replace(regex, function() {
             var dataURL = arguments[1] || arguments[2];
-            if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
+            if (dataURL.indexOf("data:") === 0 && !sbContentSaver.option["saveDataURI"]) return ' url("' + dataURL + '")';
             if ( sbContentSaver.option["internalize"] && dataURL .indexOf("://") == -1 ) return ' url("' + dataURL + '")';
             dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);
             switch (type) {
@@ -1045,82 +1046,88 @@ var sbContentSaver = {
     },
 
     // aURLSpec is an absolute URL
+    // Converting a data URI to nsIURL will throw an NS_ERROR_MALFORMED_URI error
+    // if the data URI is large (e.g. 5 MiB), so we manipulate the URL string instead
+    // of converting the URI to nsIURI initially.
     download: function(aURLSpec, aSuggestFilename) {
-        if ( !aURLSpec ) return "";
         try {
-            var aURL = sbCommonUtils.convertURLToObject(aURLSpec);
-        } catch(ex) {
-            sbCommonUtils.error(sbCommonUtils.lang("ERR_FAIL_DOWNLOAD_FILE", aURLSpec, ex));
-            return "";
-        }
-        // never download "data:" and "chrome://" resources
-        if ( ["data", "chrome"].indexOf(aURL.scheme) >= 0 ) {
-            return "";
-        }
+            if ( !aURLSpec ) return "";
 
-        if (aSuggestFilename) {
-            var fileName = aSuggestFilename;
-        } else {
-            var fileName = aURL.fileName;
-            // decode %xx%xx%xx only if it's UTF-8 encoded
-            try {
-                fileName = decodeURIComponent(fileName);
-            } catch(ex) {}
-        }
-        var arr = this.getUniqueFileName(fileName, aURLSpec);
-        var newFileName = arr[0];
-        var hasDownloaded = arr[1];
-        if (hasDownloaded) return newFileName;
-
-        if ( aURL.schemeIs("http") || aURL.schemeIs("https") || aURL.schemeIs("ftp") ) {
-            if ( this.option["internalize"] ) {
-                var targetFile = this.option["internalize"].parent;
-                targetFile.append(newFileName);
-            } else {
-                var targetFile = this.contentDir.clone();
-                targetFile.append(newFileName);
-            }
-//Der Try-Catch-Block wird auch bei einem alert innerhalb des Blocks weitergefuehrt!
-            try {
-                var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
-                WBP.persistFlags |= WBP.PERSIST_FLAGS_FROM_CACHE;
-                WBP.persistFlags |= WBP.PERSIST_FLAGS_AUTODETECT_APPLY_CONVERSION;
-                if ( sbCommonUtils._fxVer36_saveURI ) {
-                    var privacyContext = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebNavigation).QueryInterface(Components.interfaces.nsILoadContext);
-                    WBP.saveURI(aURL, null, this.refURLObj, null, null, null, targetFile, privacyContext);
-                } else if (Components.interfaces.nsILoadContext) {
-                    // older Firefox versions does not have/need Components.interfaces.nsILoadContext
-                    var privacyContext = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebNavigation).QueryInterface(Components.interfaces.nsILoadContext);
-                    WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile, privacyContext);
-                } else {
-                    WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile);
-                }
-                this.httpTask[this.item.id]++;
-                WBP.progressListener = new sbCaptureObserver(this.item, newFileName);
-                return newFileName;
-            } catch(ex) {
-                sbCommonUtils.error(sbCommonUtils.lang("ERR_FAIL_DOWNLOAD_FILE", aURLSpec, ex));
-                this.httpTask[this.item.id]--;
+            // never download "chrome://" resources
+            if (aURLSpec.indexOf("chrome:") === 0) {
                 return "";
             }
-        } else if ( aURL.schemeIs("file") ) {
-            if ( this.option["internalize"] ) {
-                var targetDir = this.option["internalize"].parent;
+
+            // download "data:" only if option on
+            if (aURLSpec.indexOf("data:") === 0) {
+                if (!this.option["saveDataURI"]) return "";
+                var { mime, charset, base64, data } = sbCommonUtils.parseDataURI(aURLSpec);
+                var dataBytes = base64 ? atob(data) : decodeURIComponent(data); // in bytes
+                // if not otherwise specified, use the sha1sum as the filename
+                var fileName = aSuggestFilename ||
+                    sbCommonUtils.sha1(dataBytes, "BYTES") + "." + (sbCommonUtils.getMimePrimaryExtension(mime, null) || "dat");
             } else {
-                var targetDir = this.contentDir.clone();
+                var fileName = aSuggestFilename || sbCommonUtils.getFileName(aURLSpec);
             }
-            try {
-                var orgFile = sbCommonUtils.convertURLToFile(aURLSpec);
-                if ( !orgFile.isFile() ) return;
-                orgFile.copyTo(targetDir, newFileName);
+
+            var [newFileName, hasDownloaded] = this.getUniqueFileName(fileName, aURLSpec);
+            if (hasDownloaded) return newFileName;
+
+            var targetDir = this.option["internalize"] ? this.option["internalize"].parent : this.contentDir.clone();
+
+            if ( aURLSpec.indexOf("http:") === 0 || aURLSpec.indexOf("https:") === 0 || aURLSpec.indexOf("ftp:") === 0 ) {
+                try {
+                    this.httpTask[this.item.id]++;
+                    var targetFile = targetDir.clone(); targetFile.append(newFileName);
+                    var aURL = sbCommonUtils.convertURLToObject(aURLSpec);
+                    var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
+                    WBP.persistFlags |= WBP.PERSIST_FLAGS_FROM_CACHE;
+                    WBP.persistFlags |= WBP.PERSIST_FLAGS_AUTODETECT_APPLY_CONVERSION;
+                    if ( sbCommonUtils._fxVer36_saveURI ) {
+                        var privacyContext = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebNavigation).QueryInterface(Components.interfaces.nsILoadContext);
+                        WBP.saveURI(aURL, null, this.refURLObj, null, null, null, targetFile, privacyContext);
+                    } else if (Components.interfaces.nsILoadContext) {
+                        // older Firefox versions does not have/need Components.interfaces.nsILoadContext
+                        var privacyContext = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebNavigation).QueryInterface(Components.interfaces.nsILoadContext);
+                        WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile, privacyContext);
+                    } else {
+                        WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile);
+                    }
+                    WBP.progressListener = new sbCaptureObserver(this.item, newFileName);
+                    return newFileName;
+                } catch(ex) {
+                    this.httpTask[this.item.id]--;
+                    throw ex;
+                }
+            } else if ( aURLSpec.indexOf("file:") === 0 ) {
                 this.httpTask[this.item.id]++;
                 var item = this.item;
                 setTimeout(function(){ sbCaptureObserverCallback.onDownloadComplete(item); }, 0);
-                return newFileName;
-            } catch(ex) {
-                sbCommonUtils.error(sbCommonUtils.lang("ERR_FAIL_COPY_FILE", aURLSpec, ex));
-                return "";
+                try {
+                    var orgFile = sbCommonUtils.convertURLToFile(aURLSpec);
+                    if ( !orgFile.isFile() ) return;
+                    orgFile.copyTo(targetDir, newFileName);
+                    return newFileName;
+                } catch(ex) {
+                    sbCommonUtils.error(sbCommonUtils.lang("ERR_FAIL_COPY_FILE", aURLSpec, ex));
+                    return "";
+                }
+            } else if ( aURLSpec.indexOf("data:") === 0 ) {
+                this.httpTask[this.item.id]++;
+                var item = this.item;
+                setTimeout(function(){ sbCaptureObserverCallback.onDownloadComplete(item); }, 0);
+                try {
+                    var targetFile = targetDir.clone(); targetFile.append(newFileName);
+                    sbCommonUtils.writeFileBytes(targetFile, dataBytes);
+                    return newFileName;
+                } catch(ex) {
+                    throw ex;
+                }
             }
+        } catch (ex) {
+            // crop to prevent large dataURI masking the exception info, especially dataURIs
+            aURLSpec = sbCommonUtils.crop(aURLSpec, 1024);
+            sbCommonUtils.error(sbCommonUtils.lang("ERR_FAIL_DOWNLOAD_FILE", aURLSpec, ex));
         }
         return "";
     },

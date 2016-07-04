@@ -48,6 +48,7 @@
 <!ENTITY sb.detail.option.styles "样式">
 <!ENTITY sb.detail.option.scripts "动态脚本">
 <!ENTITY sb.detail.option.keepLink "不获取的物件保持链接到原址">
+<!ENTITY sb.detail.option.saveDataURI "将 data URI 保存为文件">
 <!ENTITY sb.detail.option.rewriteStyles "重组样式表">
 <!ENTITY sb.detail.option.asHtml "非 HTML 档案获取呈现时的 HTML">
 <!ENTITY sb.detail.option.forceUtf8 "保存为 UTF-8 编码">

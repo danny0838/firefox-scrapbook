@@ -57,6 +57,7 @@
                         <checkbox id="sbDetailOptionStyles" label="&sb.detail.option.styles;" />
                         <checkbox id="sbDetailOptionScript" label="&sb.detail.option.scripts;" />
                     </hbox>
+                    <checkbox id="sbDetailOptionSaveDataURI" label="&sb.detail.option.saveDataURI;" />
                     <checkbox id="sbDetailOptionKeepLink" label="&sb.detail.option.keepLink;" />
                     <checkbox id="sbDetailOptionRewriteStyles" label="&sb.detail.option.rewriteStyles;" />
                     <checkbox id="sbDetailOptionForceUtf8" label="&sb.detail.option.forceUtf8;" />
