@@ -247,9 +247,8 @@ var sbCaptureTask = {
         if ( gTitles ) gTitle = gTitles[this.index];
         SB_trace(sbCommonUtils.lang("capture", "CONNECT", [url]));
 
-        // "start" button hidden means currently active
-        // if active, start 
-        if (document.getElementById("sbCaptureStartButton").hidden) {
+        // if active, start connection and capture
+        if (this.isActive()) {
             this.sniffer = new sbHeaderSniffer(url, gRefURL);
             this.sniffer.checkURL();
         }
@@ -317,6 +316,13 @@ var sbCaptureTask = {
     },
 
     finalize: function() {
+        document.getElementById("sbCaptureTextbox").disabled = false;
+        document.getElementById("sbCapturePauseButton").disabled = true;
+        document.getElementById("sbCapturePauseButton").hidden = false;
+        document.getElementById("sbCaptureStartButton").hidden = true;
+        document.getElementById("sbCaptureCancelButton").hidden = true;
+        document.getElementById("sbCaptureFinishButton").hidden = false;
+        document.getElementById("sbCaptureSkipButton").disabled = true;
         if ( gContext == "indepth" ) {
             sbCrossLinker.invoke();
         } else {
@@ -351,8 +357,29 @@ var sbCaptureTask = {
     // press "cancel" button
     abort: function() {
         if ( gContext != "indepth" ) window.close();
-        if ( ++this.forceExit > 2 ) window.close();
-        if ( this.index < gURLs.length - 1 ) { this.index = gURLs.length - 1; this.next(); }
+        if ( ++this.forceExit >= 2 ) window.close();
+
+        // remember the current active state because it would be interfered by UI changing
+        var wasActive = this.isActive();
+
+        // set UI, generally same as finalize
+        document.getElementById("sbCaptureTextbox").disabled = false;
+        document.getElementById("sbCapturePauseButton").disabled = true;
+        document.getElementById("sbCapturePauseButton").hidden = false;
+        document.getElementById("sbCaptureStartButton").hidden = true;
+        document.getElementById("sbCaptureCancelButton").hidden = true;
+        document.getElementById("sbCaptureFinishButton").hidden = false;
+        document.getElementById("sbCaptureSkipButton").disabled = true;
+
+        if (wasActive) {
+            this.index = gURLs.length - 1; // mark to finalize on next capture
+        } else {
+            this.finalize();
+        }
+    },
+
+    isActive: function () {
+        return this.seconds < 0 && document.getElementById("sbCaptureStartButton").hidden;
     },
 
     toggleFilterBox: function(tfbEvent) {
