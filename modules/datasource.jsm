@@ -1,4 +1,16 @@
-Components.utils.import("resource://scrapbook-modules/common.jsm");
+/********************************************************************
+ *
+ * Central database manager.
+ *
+ * @public {class} sbDataSource
+ *
+ *******************************************************************/
+
+var EXPORTED_SYMBOLS = ["sbDataSource"];
+
+const { sbCommonUtils } = Components.utils.import("resource://scrapbook-modules/common.jsm", {});
+const { lang } = Components.utils.import("resource://scrapbook-modules/lang.jsm", {});
+const { console } = Components.utils.import("resource://scrapbook-modules/console.jsm", {});
 
 var sbDataSource = {
 
@@ -32,7 +44,7 @@ var sbDataSource = {
             this._dataObj = sbCommonUtils.RDF.GetDataSourceBlocking(fileURL);
             this._needReOutputTree = false;
         } catch(ex) {
-            if ( !aQuietWarning ) sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_INIT_DATASOURCE", [ex]));
+            if ( !aQuietWarning ) sbCommonUtils.alert(lang("scrapbook", "ERR_FAIL_INIT_DATASOURCE", [ex]));
         }
     },
 
@@ -84,7 +96,7 @@ var sbDataSource = {
         try {
             this._dataObj.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).Flush();
         } catch(ex) {
-            sbCommonUtils.error(ex);
+            console.error(ex);
         }
     },
 
@@ -168,7 +180,7 @@ var sbDataSource = {
             this._flushWithDelay();
             return newRes;
         } catch(ex) {
-            sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_ADD_RESOURCE", [ex]));
+            sbCommonUtils.alert(lang("scrapbook", "ERR_FAIL_ADD_RESOURCE", [ex]));
             return false;
         }
     },
@@ -178,7 +190,7 @@ var sbDataSource = {
             sbCommonUtils.RDFC.Init(this._dataObj, curPar);
             sbCommonUtils.RDFC.RemoveElement(curRes, true);
         } catch(ex) {
-            sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_ADD_RESOURCE1", [ex]));
+            sbCommonUtils.alert(lang("scrapbook", "ERR_FAIL_ADD_RESOURCE1", [ex]));
             return;
         }
         if ( sbCommonUtils.getPref("tree.unshift", false) ) {
@@ -192,7 +204,7 @@ var sbDataSource = {
                 sbCommonUtils.RDFC.AppendElement(curRes);
             }
         } catch(ex) {
-            sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_ADD_RESOURCE2", [ex]));
+            sbCommonUtils.alert(lang("scrapbook", "ERR_FAIL_ADD_RESOURCE2", [ex]));
             sbCommonUtils.RDFC.Init(this._dataObj, sbCommonUtils.RDF.GetResource("urn:scrapbook:root"));
             sbCommonUtils.RDFC.AppendElement(curRes, true);
         }
@@ -330,7 +342,7 @@ var sbDataSource = {
             }
             this._flushWithDelay();
         } catch(ex) {
-            sbCommonUtils.error(ex);
+            console.error(ex);
         }
     },
 
@@ -426,5 +438,3 @@ var sbDataSource = {
         this._needReOutputTree = false;
     }
 };
-
-var EXPORTED_SYMBOLS = ["sbDataSource"];

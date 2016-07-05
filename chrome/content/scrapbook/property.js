@@ -94,7 +94,7 @@ var sbPropService = {
 
     delayedInit: function() {
         var sizeCount = this.getTotalFileSize(this.id);
-        document.getElementById("sbPropSize").value = sbCommonUtils.lang("property", "FILES_COUNT", [sbPropService.formatFileSize(sizeCount[0]), sizeCount[1], sizeCount[2]]);
+        document.getElementById("sbPropSize").value = sbCommonUtils.lang("property", "FILES_COUNT", [sbCommonUtils.formatFileSize(sizeCount[0]), sizeCount[1], sizeCount[2]]);
     },
 
     accept: function() {
@@ -223,27 +223,6 @@ var sbPropService = {
             }
         }, this);
         return [totalSize, totalFile, totalDir];
-    },
-
-    formatFileSize: function(aBytes) {
-        if ( aBytes > 1000 * 1000 ) {
-            return this.divideBy100( Math.round( aBytes / 1024 / 1024 * 100 ) ) + " MB";
-        } else if ( aBytes == 0 ) {
-            return "0 KB";
-        } else {
-            var kbytes = Math.round( aBytes / 1024 );
-            return (kbytes == 0 ? 1 : kbytes) + " KB";
-        }
-    },
-
-    divideBy100: function(aInt) {
-        if ( aInt % 100 == 0 ) {
-            return aInt / 100 + ".00";
-        } else if ( aInt % 10 == 0 ) {
-            return aInt / 100 + "0";
-        } else {
-            return aInt / 100;
-        }
     },
 
 };

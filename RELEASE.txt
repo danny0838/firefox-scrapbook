@@ -1,3 +1,12 @@
+Scrapbook X 1.12.32
+----------------
+
+- FIXED: Frames may be captured with wrong charset if "Save with UTF-8 encoding" is not checked.
+- FIXED: A potential error for getting preference setting.
+- UPDATE: Improved the presentation format of file size.
+- UPDATE: Internal code optimization.
+
+
 Scrapbook X 1.12.31
 ----------------
 

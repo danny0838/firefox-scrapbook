@@ -32,7 +32,7 @@ var sbCalcService = {
                     sbDataSource.getProperty(res, "title"),
                     icon,
                     0,
-                    sbPropService.formatFileSize(0),
+                    sbCommonUtils.formatFileSize(0),
                     false,
                 ]);
             }
@@ -69,7 +69,7 @@ var sbCalcService = {
                 sbDataSource.getProperty(res, "title"),
                 icon,
                 bytes,
-                sbPropService.formatFileSize(bytes),
+                sbCommonUtils.formatFileSize(bytes),
                 valid,
             ]);
             if ( !valid ) this.invalidCount++;
@@ -85,7 +85,7 @@ var sbCalcService = {
         this.initTree();
         this.STATUS.label = "";
         this.PROGRESS.hidden = true;
-        document.getElementById("sbCalcTotalSize").value = sbCommonUtils.lang("property", "ITEMS_COUNT", [sbPropService.formatFileSize(this.grandSum), this.count, this.total]);
+        document.getElementById("sbCalcTotalSize").value = sbCommonUtils.lang("property", "ITEMS_COUNT", [sbCommonUtils.formatFileSize(this.grandSum), this.count, this.total]);
         document.getElementById("sbCalcDiagnosis").value = ( this.invalidCount == 0 ) ? sbCommonUtils.lang("property", "DIAGNOSIS_OK") : sbCommonUtils.lang("property", "DIAGNOSIS_NG", [this.invalidCount]);
         this.checkDoubleEntries();
     },

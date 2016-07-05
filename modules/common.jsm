@@ -1,68 +1,52 @@
+/********************************************************************
+ *
+ * Shared module utils for most scripts.
+ *
+ * @public {class} sbCommonUtils
+ *
+ *******************************************************************/
+
+var EXPORTED_SYMBOLS = ["sbCommonUtils"];
+
+const { lang } = Components.utils.import("resource://scrapbook-modules/lang.jsm", {});
+const { console } = Components.utils.import("resource://scrapbook-modules/console.jsm", {});
+
 var sbCommonUtils = {
 
-    _stringBundles: [],
     _documentArray: [],
     _documentDataArray: [],
 
     get namespace() { return "http://amb.vis.ne.jp/mozilla/scrapbook-rdf#"; },
 
-    /**
-     * Frequently used objects
-     */
-    get RDF() {
-        delete this.RDF;
-        return this.RDF = Components.classes['@mozilla.org/rdf/rdf-service;1'].getService(Components.interfaces.nsIRDFService);
-    },
-    get RDFC() {
-        delete this.RDFC;
-        return this.RDFC = Components.classes['@mozilla.org/rdf/container;1'].getService(Components.interfaces.nsIRDFContainer);
-    },
-    get RDFCU() {
-        delete this.RDFCU;
-        return this.RDFCU = Components.classes['@mozilla.org/rdf/container-utils;1'].getService(Components.interfaces.nsIRDFContainerUtils);
-    },
-    get DIR() {
-        delete this.DIR;
-        return this.DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
-    },
-    get MIME() {
-        delete this.MIME;
-        return this.MIME = Components.classes["@mozilla.org/mime;1"].getService(Components.interfaces.nsIMIMEService);
-    },
-    get IO() {
-        delete this.IO;
-        return this.IO = Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService);
-    },
-    get UNICODE() {
-        delete this.UNICODE;
-        return this.UNICODE = Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter);
-    },
-    get WINDOW() {
-        delete this.WINDOW;
-        return this.WINDOW = Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator);
-    },
-    get CONSOLE() {
-        delete this.CONSOLE;
-        return this.CONSOLE = Components.classes['@mozilla.org/consoleservice;1'].getService(Components.interfaces.nsIConsoleService);
-    },
-    get PROMPT() {
-        delete this.PROMPT;
-        return this.PROMPT = Components.classes['@mozilla.org/embedcomp/prompt-service;1'].getService(Components.interfaces.nsIPromptService);
-    },
-    get BUNDLE() {
-        delete this.BUNDLE;
-        return this.BUNDLE = Components.classes["@mozilla.org/intl/stringbundle;1"].getService(Components.interfaces.nsIStringBundleService);
-    },
 
-    get _fxVer30_consoleLog() {
-        // Firefox >= 30.0: window.console.log for addons can be seen; has window.console.count
-        // Firefox >=  4.0: has window.console.log, but addon logs do not show; no window.console.count
-        // Firefox <   4.0: no window.console.log
-        var window = this.WINDOW.getMostRecentWindow("navigator:browser");
-        var result = (window.console && window.console.count) ? true : false;
-        delete this._fxVer30_consoleLog;
-        return this._fxVer30_consoleLog = result;
-    },
+    /****************************************************************
+     * Frequently used objects
+     ***************************************************************/
+
+    RDF: Components.classes['@mozilla.org/rdf/rdf-service;1'].getService(Components.interfaces.nsIRDFService),
+
+    RDFC: Components.classes['@mozilla.org/rdf/container;1'].getService(Components.interfaces.nsIRDFContainer),
+
+    RDFCU: Components.classes['@mozilla.org/rdf/container-utils;1'].getService(Components.interfaces.nsIRDFContainerUtils),
+
+    DIR: Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties),
+
+    MIME: Components.classes["@mozilla.org/mime;1"].getService(Components.interfaces.nsIMIMEService),
+
+    IO: Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService),
+
+    UNICODE: Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter),
+
+    WINDOW: Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator),
+
+    CONSOLE: Components.classes['@mozilla.org/consoleservice;1'].getService(Components.interfaces.nsIConsoleService),
+
+    PROMPT: Components.classes['@mozilla.org/embedcomp/prompt-service;1'].getService(Components.interfaces.nsIPromptService),
+
+
+    /****************************************************************
+     * Version specific handling
+     ***************************************************************/
 
     get _fxVer36_saveURI() {
         // Firefox >= 36: nsIWebBrowserPersist.saveURI takes 8 arguments
@@ -85,6 +69,140 @@ var sbCommonUtils = {
         var iVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
         return iVerComparator.compare(ver1, ver2);
     },
+
+
+    /****************************************************************
+     * ScrapBook language pack handling
+     ***************************************************************/
+
+    lang: function (aBundle, aName, aArgs) {
+        return lang(aBundle, aName, aArgs);
+    },
+
+
+    /****************************************************************
+     * Scrapbook Preference handling
+     ***************************************************************/
+
+    get prefBranch() {
+        delete this.prefBranch;
+        return this.prefBranch = Components.classes["@mozilla.org/preferences-service;1"].
+            getService(Components.interfaces.nsIPrefService).
+            getBranch("extensions.scrapbook.");
+    },
+
+    get prefBranchGlobal() {
+        delete this.prefBranchGlobal;
+        // must specify a branch or we get an error on setting a pref
+        return this.prefBranchGlobal = Components.classes["@mozilla.org/preferences-service;1"].
+            getService(Components.interfaces.nsIPrefService).
+            getBranch("");
+    },
+    
+    getPrefType: function (aName, aDefaultValue, isGlobal) {
+        var branch = isGlobal ? this.prefBranchGlobal : this.prefBranch;
+        try {
+            switch (typeof aDefaultValue) {
+                case "boolean":
+                    return "boolean";
+                case "number":
+                    return "number";
+                case "string":
+                    return "string";
+            }
+            switch (branch.getPrefType(aName)) {
+                case branch.PREF_BOOL: 
+                    return "boolean";
+                case branch.PREF_INT: 
+                    return "number";
+                case branch.PREF_STRING: 
+                    return "string";
+            }
+        } catch (ex) {
+            return "undefined";
+        }
+        return "undefined";
+    },
+
+    getPref: function (aName, aDefaultValue, isGlobal) {
+        var branch = isGlobal ? this.prefBranchGlobal : this.prefBranch;
+        try {
+            switch (this.getPrefType(aName, aDefaultValue, isGlobal)) {
+                case "boolean": 
+                    return branch.getBoolPref(aName);
+                case "number": 
+                    return branch.getIntPref(aName);
+                case "string": 
+                    // using getCharPref may meet encoding problems
+                    return branch.getComplexValue(aName, Components.interfaces.nsISupportsString).data;
+                default: 
+                    throw null;
+            }
+        } catch (ex) {
+            return (aDefaultValue !== undefined) ? aDefaultValue : null;
+        }
+    },
+
+    setPref: function (aName, aValue, isGlobal) {
+        var branch = isGlobal ? this.prefBranchGlobal : this.prefBranch;
+        try {
+            switch (this.getPrefType(aName, aValue, isGlobal)) {
+                case "boolean": 
+                    branch.setBoolPref(aName, aValue);
+                    break;
+                case "number": 
+                    branch.setIntPref(aName, aValue);
+                    break;
+                case "string":
+                    // using getCharPref may meet encoding problems
+                    var str = Components.classes["@mozilla.org/supports-string;1"].
+                              createInstance(Components.interfaces.nsISupportsString);
+                    str.data = aValue;
+                    branch.setComplexValue(aName, Components.interfaces.nsISupportsString, str);
+                    break;
+                default: 
+                    throw null;
+            }
+        } catch (ex) {
+            console.error(lang("scrapbook", "ERR_FAIL_SET_PREF", [aName]));
+        }
+    },
+
+    getPrefKeys: function () {
+        return this.prefBranch.getChildList("", {});
+    },
+
+    resetPrefs: function () {
+        var list = this.getPrefKeys();
+        for (var i=0, I=list.length; i<I; ++i) {
+            this.prefBranch.clearUserPref(list[i]);
+        }
+    },
+
+    // deprecated, use getPref instead (left for downward compatibility with addons)
+    getBoolPref: function(aName, aDefVal) {
+        return this.getPref(aName, aDefVal, true);
+    },
+
+    // deprecated, use getPref instead (left for downward compatibility with addons)
+    copyUnicharPref: function(aName, aDefVal) {
+        return this.getPref(aName, aDefVal, true);
+    },
+
+    // deprecated, use setPref instead (left for downward compatibility with addons)
+    setBoolPref: function(aName, aPrefValue) {
+        return this.setPref(aName, aPrefValue, true);
+    },
+
+    // deprecated, use setPref instead (left for downward compatibility with addons)
+    setUnicharPref: function(aName, aPrefValue) {
+        return this.setPref(aName, aPrefValue, true);
+    },
+
+
+    /****************************************************************
+     * ScrapBook related path/file/string/etc handling
+     ***************************************************************/
 
     newItem: function(aID) {
         aID = aID || "";
@@ -112,7 +230,7 @@ var sbCommonUtils = {
 
     getContentDir: function(aID, aSuppressCreate, aSkipIdCheck) {
         if ( !aSkipIdCheck && !this.validateID(aID) ) {
-            this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_GET_DIR", [aID]));
+            this.alert(lang("scrapbook", "ERR_FAIL_GET_DIR", [aID]));
             return null;
         }
         var dir = this.getScrapBookDir().clone();
@@ -128,21 +246,42 @@ var sbCommonUtils = {
         return dir;
     },
 
-    removeDirSafety: function(aDir, check) {
-        var curFile;
-        try {
-            if ( check && !this.validateID(aDir.leafName) ) return;
-            this.forEachFile(aDir, function(file) {
-                curFile = file;
-                if (!curFile.isDirectory()) curFile.remove(false);
-            }, true);
-            curFile = aDir;
-            curFile.remove(true);
-            return true;
-        } catch(ex) {
-            this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_FILE", [curFile ? curFile.path : "", ex]));
-            return false;
+    getTimeStamp: function(aDate) {
+        var dd = aDate || new Date();
+        var y = dd.getFullYear();
+        var m = dd.getMonth() + 1; if ( m < 10 ) m = "0" + m;
+        var d = dd.getDate();      if ( d < 10 ) d = "0" + d;
+        var h = dd.getHours();     if ( h < 10 ) h = "0" + h;
+        var i = dd.getMinutes();   if ( i < 10 ) i = "0" + i;
+        var s = dd.getSeconds();   if ( s < 10 ) s = "0" + s;
+        return y.toString() + m.toString() + d.toString() + h.toString() + i.toString() + s.toString();
+    },
+
+    getDefaultIcon: function(type) {
+        switch ( type ) {
+            case "folder": return "chrome://scrapbook/skin/treefolder.png"; break;
+            case "note": return "chrome://scrapbook/skin/treenote.png"; break;
+            case "notex": return "chrome://scrapbook/skin/treenotex.png"; break;
+            default: return "chrome://scrapbook/skin/treeitem.png"; break;
         }
+    },
+    
+    getSidebarId: function(id) {
+        // Need this or MultiSidebar can cause errors
+        var rgPosition = sbCommonUtils.getPref("extensions.multisidebar.viewScrapBookSidebar", 1, true);
+        if ( rgPosition > 1) {
+            switch (id) {
+                case "sidebar":
+                    return "sidebar-" + rgPosition;
+                case "sidebar-title":
+                    return "sidebar-" + rgPosition + "-title";
+                case "sidebar-splitter":
+                    return "sidebar-" + rgPosition + "-splitter";
+                case "sidebar-box":
+                    return "sidebar-" + rgPosition + "-box";
+            }
+        }
+        return id;
     },
 
     loadURL: function(aURL, tabbed) {
@@ -198,70 +337,13 @@ var sbCommonUtils = {
         }
     },
 
-    getTimeStamp: function(aDate) {
-        var dd = aDate || new Date();
-        var y = dd.getFullYear();
-        var m = dd.getMonth() + 1; if ( m < 10 ) m = "0" + m;
-        var d = dd.getDate();      if ( d < 10 ) d = "0" + d;
-        var h = dd.getHours();     if ( h < 10 ) h = "0" + h;
-        var i = dd.getMinutes();   if ( i < 10 ) i = "0" + i;
-        var s = dd.getSeconds();   if ( s < 10 ) s = "0" + s;
-        return y.toString() + m.toString() + d.toString() + h.toString() + i.toString() + s.toString();
-    },
-
-    getRootHref: function(aURLSpec) {
-        var url = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
-        url.spec = aURLSpec;
-        return url.scheme + "://" + url.host + "/";
-    },
-
-    getBaseHref: function(sURI) {
-        var pos, base;
-        base = ( (pos = sURI.indexOf("?")) != -1 ) ? sURI.substring(0, pos) : sURI;
-        base = ( (pos = base.indexOf("#")) != -1 ) ? base.substring(0, pos) : base;
-        base = ( (pos = base.lastIndexOf("/")) != -1 ) ? base.substring(0, ++pos) : base;
-        return base;
-    },
-
-    getFileName: function(aURI) {
-        var pos, name;
-        name = ( (pos = aURI.indexOf("?")) != -1 ) ? aURI.substring(0, pos) : aURI;
-        name = ( (pos = name.indexOf("#")) != -1 ) ? name.substring(0, pos) : name;
-        name = ( (pos = name.lastIndexOf("/")) != -1 ) ? name.substring(++pos) : name;
-        // decode %xx%xx%xx only if it's UTF-8 encoded
-        try {
-            return decodeURIComponent(name);
-        } catch(ex) {
-            return name;
-        }
-    },
-
-    splitFileName: function(aFileName) {
-        var pos = aFileName.lastIndexOf(".");
-        var ret = [];
-        if ( pos != -1 ) {
-            ret[0] = aFileName.substring(0, pos);
-            ret[1] = aFileName.substring(pos + 1, aFileName.length);
-        } else {
-            ret[0] = aFileName;
-            ret[1] = "";
-        }
-        return ret;
-    },
-
-    // process filename to make safe
-    // see also: escapeFileName
-    validateFileName: function(aFileName) {
-        aFileName = aFileName.replace(/[\x00-\x1F\x7F]+|^ +/g, "");
-        aFileName = aFileName.replace(/[\"\?\*\\\/\|\:]/g, "_");
-        aFileName = aFileName.replace(/[\<]/g, "(");
-        aFileName = aFileName.replace(/[\>]/g, ")");
-        if (sbCommonUtils.getPref("asciiFilename", false)) {
-            aFileName = aFileName.replace(/[^\x00-\x7F]+/g, function(m){
-                return encodeURI(m);
-            });
-        }
-        return aFileName;
+    convertURLToId: function(aURL) {
+        var file = sbCommonUtils.convertURLToFile(aURL);
+        if (!file || !file.exists() || !file.isFile()) return null;
+        var aURL = sbCommonUtils.convertFilePathToURL(file.path);
+        var sbDir = sbCommonUtils.convertFilePathToURL(sbCommonUtils.getScrapBookDir().path);
+        var sbPath = new RegExp("^" + sbCommonUtils.escapeRegExp(sbDir) + "data/(\\d{14})/");
+        return aURL.match(sbPath) ? RegExp.$1 : null;
     },
 
     resolveURL: function(aBaseURL, aRelURL) {
@@ -271,7 +353,7 @@ var sbCommonUtils = {
             var resolved = baseURLObj.resolve(aRelURL);
             return this.convertURLToObject(resolved).spec;
         } catch(ex) {
-            sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_RESOLVE_URL", [aBaseURL, aRelURL]));
+            console.error(lang("scrapbook", "ERR_FAIL_RESOLVE_URL", [aBaseURL, aRelURL]));
         }
     },
 
@@ -279,33 +361,10 @@ var sbCommonUtils = {
         return typeof(aID) == "string" && /^\d{14}$/.test(aID);
     },
 
-    // aByBytes: true to crop texts according to bytes under UTF-8 encoding
-    //           false to crop according to UTF-16 chars
-    // aEllipsis: text for ellipsis
-    crop: function(aString, aMaxLength, aByBytes, aEllipsis) {
-        if (typeof(aEllipsis) == "undefined") aEllipsis = "...";
-        if (aByBytes) {
-            var bytes= toBytesUTF8(aString);
-            if (bytes.length <= aMaxLength) return aString;
-            bytes = bytes.substring(0, aMaxLength - toBytesUTF8(aEllipsis).length);
-            while (true) {
-                try {
-                    return fromBytesUTF8(bytes) + aEllipsis;
-                } catch(e) {};
-                bytes= bytes.substring(0, bytes.length-1);
-            }
-        } else {
-            return (aString.length > aMaxLength) ? aString.substr(0, aMaxLength - aEllipsis.length) + aEllipsis : aString;
-        }
 
-        function toBytesUTF8(chars) {
-            return unescape(encodeURIComponent(chars));
-        }
-        function fromBytesUTF8(bytes) {
-            return decodeURIComponent(escape(bytes));
-        }
-    },
-
+    /****************************************************************
+     * File and IO utilities
+     ***************************************************************/
 
     /**
      * Walk over a folder and run a callback for each file or folder
@@ -337,20 +396,6 @@ var sbCommonUtils = {
                 }
             }
         }
-    },
-
-    getFileMime: function(aFile) {
-        try {
-            return this.MIME.getTypeFromFile(aFile);
-        } catch(ex) {}
-        return false;
-    },
-
-    getMimePrimaryExtension: function(aString, aExtension) {
-        try {
-            return this.MIME.getPrimaryExtension(aString, aExtension);
-        } catch(ex) {}
-        return false;
     },
 
     readFile: function(aFile) {
@@ -413,7 +458,7 @@ var sbCommonUtils = {
             if (aNoCatch) {
                 throw ex;
             } else {
-                this.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_WRITE_FILE", [aFile.path, ex]));
+                this.alert(lang("scrapbook", "ERR_FAIL_WRITE_FILE", [aFile.path, ex]));
             }
         }
     },
@@ -446,6 +491,23 @@ var sbCommonUtils = {
         bostream.close();
     },
 
+    removeDirSafety: function(aDir, check) {
+        var curFile;
+        try {
+            if ( check && !this.validateID(aDir.leafName) ) return;
+            this.forEachFile(aDir, function(file) {
+                curFile = file;
+                if (!curFile.isDirectory()) curFile.remove(false);
+            }, true);
+            curFile = aDir;
+            curFile.remove(true);
+            return true;
+        } catch(ex) {
+            this.alert(lang("scrapbook", "ERR_FAIL_REMOVE_FILE", [curFile ? curFile.path : "", ex]));
+            return false;
+        }
+    },
+
     convertToUnicode: function(aString, aCharset) {
         if ( !aString ) return "";
         try {
@@ -457,6 +519,73 @@ var sbCommonUtils = {
     },
 
 
+    /****************************************************************
+     * MIME utilities
+     ***************************************************************/
+
+    getFileMime: function(aFile) {
+        try {
+            return this.MIME.getTypeFromFile(aFile);
+        } catch(ex) {}
+        return false;
+    },
+
+    getMimePrimaryExtension: function(aString, aExtension) {
+        try {
+            return this.MIME.getPrimaryExtension(aString, aExtension);
+        } catch(ex) {}
+        return false;
+    },
+
+
+    /****************************************************************
+     * File/URI path and interface objects handling
+     ***************************************************************/
+
+    getRootHref: function(aURLSpec) {
+        var url = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
+        url.spec = aURLSpec;
+        return url.scheme + "://" + url.host + "/";
+    },
+
+    getBaseHref: function(sURI) {
+        var pos, base;
+        base = ( (pos = sURI.indexOf("?")) != -1 ) ? sURI.substring(0, pos) : sURI;
+        base = ( (pos = base.indexOf("#")) != -1 ) ? base.substring(0, pos) : base;
+        base = ( (pos = base.lastIndexOf("/")) != -1 ) ? base.substring(0, ++pos) : base;
+        return base;
+    },
+
+    getFileName: function(aURI) {
+        var pos, name;
+        name = ( (pos = aURI.indexOf("?")) != -1 ) ? aURI.substring(0, pos) : aURI;
+        name = ( (pos = name.indexOf("#")) != -1 ) ? name.substring(0, pos) : name;
+        name = ( (pos = name.lastIndexOf("/")) != -1 ) ? name.substring(++pos) : name;
+        // decode %xx%xx%xx only if it's UTF-8 encoded
+        try {
+            return decodeURIComponent(name);
+        } catch(ex) {
+            return name;
+        }
+    },
+
+    splitFileName: function(aFileName) {
+        var pos = aFileName.lastIndexOf(".");
+        var ret = [];
+        if ( pos != -1 ) {
+            ret[0] = aFileName.substring(0, pos);
+            ret[1] = aFileName.substring(pos + 1, aFileName.length);
+        } else {
+            ret[0] = aFileName;
+            ret[1] = "";
+        }
+        return ret;
+    },
+
+    splitURLByAnchor: function(aURL) {
+        var pos = 0;
+        return ( (pos = aURL.indexOf("#")) < 0 ) ? [aURL, ""] : [aURL.substring(0, pos), aURL.substring(pos, aURL.length)];
+    },
 
     convertPathToFile: function(aPath) {
         var aFile = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
@@ -502,201 +631,43 @@ var sbCommonUtils = {
         }
     },
 
-    convertURLToId: function(aURL) {
-        var file = sbCommonUtils.convertURLToFile(aURL);
-        if (!file || !file.exists() || !file.isFile()) return null;
-        var aURL = sbCommonUtils.convertFilePathToURL(file.path);
-        var sbDir = sbCommonUtils.convertFilePathToURL(sbCommonUtils.getScrapBookDir().path);
-        var sbPath = new RegExp("^" + sbCommonUtils.escapeRegExp(sbDir) + "data/(\\d{14})/");
-        return aURL.match(sbPath) ? RegExp.$1 : null;
-    },
-
-    splitURLByAnchor: function(aURL) {
-        var pos = 0;
-        return ( (pos = aURL.indexOf("#")) < 0 ) ? [aURL, ""] : [aURL.substring(0, pos), aURL.substring(pos, aURL.length)];
-    },
-
-    getFocusedWindow: function() {
-        var window = this.WINDOW.getMostRecentWindow("navigator:browser");
-        var win = window.document.commandDispatcher.focusedWindow;
-        if ( !win || win == window || win instanceof Components.interfaces.nsIDOMChromeWindow ) win = window.content;
-        return win;
-    },
-
-    flattenFrames: function(aWindow) {
-        var ret = [aWindow];
-        for ( var i = 0; i < aWindow.frames.length; i++ ) {
-            ret = ret.concat(this.flattenFrames(aWindow.frames[i]));
+    parseURLQuery: function(aStr) {
+        var query = {};
+        var a = aStr.split('&');
+        for (var i in a) {
+            var b = a[i].split('=');
+            query[decodeURIComponent(b[0])] = decodeURIComponent(b[1]);
         }
-        return ret;
+        return query;
     },
-    
-    getSidebarId: function(id) {
-        // Need this or MultiSidebar can cause errors
-        var rgPosition = sbCommonUtils.getPref("extensions.multisidebar.viewScrapBookSidebar", 1, true);
-        if ( rgPosition > 1) {
-            switch (id) {
-                case "sidebar":
-                    return "sidebar-" + rgPosition;
-                case "sidebar-title":
-                    return "sidebar-" + rgPosition + "-title";
-                case "sidebar-splitter":
-                    return "sidebar-" + rgPosition + "-splitter";
-                case "sidebar-box":
-                    return "sidebar-" + rgPosition + "-box";
-            }
+
+
+    /****************************************************************
+     * Javascript object utilies
+     ***************************************************************/
+
+    extendObject: function(aObject1, aObject2) {
+        for (var i in aObject2) {
+            aObject1[i] = aObject2[i];
         }
-        return id;
+        return aObject1;
     },
 
-    getDefaultIcon: function(type) {
-        switch ( type ) {
-            case "folder": return "chrome://scrapbook/skin/treefolder.png"; break;
-            case "note": return "chrome://scrapbook/skin/treenote.png"; break;
-            case "notex": return "chrome://scrapbook/skin/treenotex.png"; break;
-            default: return "chrome://scrapbook/skin/treeitem.png"; break;
-        }
+
+    /****************************************************************
+     * String utilies
+     ***************************************************************/
+
+    unicodeToUtf8: function (chars) {
+        return unescape(encodeURIComponent(chars));
     },
 
-    /**
-     * Preference handling
-     */
-    get prefBranch() {
-        delete this.prefBranch;
-        return this.prefBranch = Components.classes["@mozilla.org/preferences-service;1"].
-            getService(Components.interfaces.nsIPrefService).
-            getBranch("extensions.scrapbook.");
-    },
-
-    get prefBranchGlobal() {
-        delete this.prefBranchGlobal;
-        // must specify a branch or we get an error on setting a pref
-        return this.prefBranchGlobal = Components.classes["@mozilla.org/preferences-service;1"].
-            getService(Components.interfaces.nsIPrefService).
-            getBranch("");
-    },
-    
-    getPrefType: function (aName, aDefaultValue, isGlobal) {
-        var branch = isGlobal ? this.prefBranchGlobal : this.prefBranch;
-        try {
-            switch (typeof aDefaultValue) {
-                case "boolean":
-                    return "boolean";
-                case "number":
-                    return "number";
-                case "string":
-                    return "string";
-            }
-            switch (branch.getPrefType(aName)) {
-                case branch.PREF_BOOL: 
-                    return "boolean";
-                case branch.PREF_INT: 
-                    return "number";
-                case branch.PREF_STRING: 
-                    return "string";
-            }
-        } catch (ex) {
-            return "undefined";
-        }
-        return "undefined";
-    },
-
-    getPref: function (aName, aDefaultValue, isGlobal) {
-        var branch = isGlobal ? this.prefBranchGlobal : this.prefBranch;
-        try {
-            switch (this.getPrefType(aName, aDefaultValue, isGlobal)) {
-                case "boolean": 
-                    return branch.getBoolPref(aName);
-                case "number": 
-                    return branch.getIntPref(aName);
-                case "string": 
-                    // using getCharPref may meet encoding problems
-                    return branch.getComplexValue(aName, Components.interfaces.nsISupportsString).data;
-                default: 
-                    throw null;
-            }
-        } catch (ex) {
-            return aDefaultValue != undefined ? aDefaultValue : null;
-        }
-    },
-
-    setPref: function (aName, aValue, isGlobal) {
-        var branch = isGlobal ? this.prefBranchGlobal : this.prefBranch;
-        try {
-            switch (this.getPrefType(aName, aValue, isGlobal)) {
-                case "boolean": 
-                    branch.setBoolPref(aName, aValue);
-                    break;
-                case "number": 
-                    branch.setIntPref(aName, aValue);
-                    break;
-                case "string":
-                    // using getCharPref may meet encoding problems
-                    var str = Components.classes["@mozilla.org/supports-string;1"].
-                              createInstance(Components.interfaces.nsISupportsString);
-                    str.data = aValue;
-                    branch.setComplexValue(aName, Components.interfaces.nsISupportsString, str);
-                    break;
-                default: 
-                    throw null;
-            }
-        } catch (ex) {
-            sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SET_PREF", [aName]));
-        }
-    },
-
-    getPrefKeys: function () {
-        return this.prefBranch.getChildList("", {});
-    },
-
-    resetPrefs: function () {
-        var list = this.getPrefKeys();
-        for (var i=0, I=list.length; i<I; ++i) {
-            this.prefBranch.clearUserPref(list[i]);
-        }
-    },
-
-    // deprecated, use getPref instead (left for downward compatibility with addons)
-    getBoolPref: function(aName, aDefVal) {
-        return this.getPref(aName, aDefVal, true);
-    },
-
-    // deprecated, use getPref instead (left for downward compatibility with addons)
-    copyUnicharPref: function(aName, aDefVal) {
-        return this.getPref(aName, aDefVal, true);
-    },
-
-    // deprecated, use setPref instead (left for downward compatibility with addons)
-    setBoolPref: function(aName, aPrefValue) {
-        return this.setPref(aName, aPrefValue, true);
-    },
-
-    // deprecated, use setPref instead (left for downward compatibility with addons)
-    setUnicharPref: function(aName, aPrefValue) {
-        return this.setPref(aName, aPrefValue, true);
-    },
-
-    /**
-     * String handling
-     */
-    lang: function(aBundle, aName, aArgs) {
-        var bundle = this._stringBundles[aBundle];
-        if (!bundle) {
-            var uri = "chrome://scrapbook/locale/%s.properties".replace("%s", aBundle);
-            bundle = this._stringBundles[aBundle] = this.BUNDLE.createBundle(uri);
-        }
-        try {
-            if (!aArgs) {
-                return bundle.GetStringFromName(aName);
-            } else {
-                return bundle.formatStringFromName(aName, aArgs, aArgs.length);
-            }
-        } catch (ex) {}
-        return aName;
+    utf8ToUnicode: function (bytes) {
+        return decodeURIComponent(escape(bytes));
     },
 
     escapeComment: function(aStr) {
-        if ( aStr.length > 10000 ) this.alert(sbCommonUtils.lang("scrapbook", "MSG_LARGE_COMMENT"));
+        if ( aStr.length > 10000 ) this.alert(lang("scrapbook", "MSG_LARGE_COMMENT"));
         return aStr.replace(/\r|\n|\t/g, " __BR__ ");
     },
 
@@ -721,12 +692,47 @@ var sbCommonUtils = {
         return aString.replace(/[#]+|(?:%[0-9A-Fa-f]{2})+/g, function(m){return encodeURIComponent(m);});
     },
 
+    // process filename to make safe
+    // see also: escapeFileName
+    validateFileName: function(aFileName) {
+        aFileName = aFileName.replace(/[\x00-\x1F\x7F]+|^ +/g, "");
+        aFileName = aFileName.replace(/[\"\?\*\\\/\|\:]/g, "_");
+        aFileName = aFileName.replace(/[\<]/g, "(");
+        aFileName = aFileName.replace(/[\>]/g, ")");
+        if (sbCommonUtils.getPref("asciiFilename", false)) {
+            aFileName = aFileName.replace(/[^\x00-\x7F]+/g, function(m){
+                return encodeURI(m);
+            });
+        }
+        return aFileName;
+    },
+
     // aTplRegExp is a RegExp with label name in the frist parenthesis, eg. /{([\w_]+)}/g
     stringTemplate: function(aString, aTplRegExp, aTplArray) {
         return aString.replace(aTplRegExp, function(match, label){
             if (label in aTplArray) return aTplArray[label];
             return "";
         });
+    },
+ 
+    // aByBytes: true to crop texts according to bytes under UTF-8 encoding
+    //           false to crop according to UTF-16 chars
+    // aEllipsis: text for ellipsis
+    crop: function(aString, aMaxLength, aByBytes, aEllipsis) {
+        if (typeof(aEllipsis) == "undefined") aEllipsis = "...";
+        if (aByBytes) {
+            var bytes= sbCommonUtils.unicodeToUtf8(aString);
+            if (bytes.length <= aMaxLength) return aString;
+            bytes = bytes.substring(0, aMaxLength - sbCommonUtils.utf8ToUnicode(aEllipsis).length);
+            while (true) {
+                try {
+                    return sbCommonUtils.utf8ToUnicode(bytes) + aEllipsis;
+                } catch(e) {};
+                bytes= bytes.substring(0, bytes.length-1);
+            }
+        } else {
+            return (aString.length > aMaxLength) ? aString.substr(0, aMaxLength - aEllipsis.length) + aEllipsis : aString;
+        }
     },
         
     pad: function(n, width, z) {
@@ -735,64 +741,55 @@ var sbCommonUtils = {
         return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
     },
 
-    parseURLQuery: function(aStr) {
-        var query = {};
-        var a = aStr.split('&');
-        for (var i in a) {
-            var b = a[i].split('=');
-            query[decodeURIComponent(b[0])] = decodeURIComponent(b[1]);
-        }
-        return query;
+    formatFileSize: function (bytes, si) {
+        var thresh = si ? 1000 : 1024;
+        var units = si
+            ? ['B', 'kB','MB','GB','TB','PB','EB','ZB','YB']
+            : ['B', 'KiB','MiB','GiB','TiB','PiB','EiB','ZiB','YiB'];
+        var e = Math.log(bytes) / Math.log(thresh) | 0;
+        var n = bytes / Math.pow(thresh, e);
+        return n.toFixed((e >= 1 && n < 10) ? 1 : 0) + ' ' + units[e];
     },
 
-    /**
-     * Window daemon
-     */
-    openManageWindow: function(aRes, aModEltID) {
-        var window = this.WINDOW.getMostRecentWindow("navigator:browser");
-        window.openDialog("chrome://scrapbook/content/manage.xul", "ScrapBook:Manage", "chrome,centerscreen,all,resizable,dialog=no", aRes, aModEltID);
-    },
+
+    /****************************************************************
+     * Interface object utilies
+     ***************************************************************/
 
     alert: function(aText) {
         this.PROMPT.alert(null, "[ScrapBook]", aText);
     },
 
-    log: function(aMsg) {
-        if (this._fxVer30_consoleLog) {
-            var window = this.WINDOW.getMostRecentWindow("navigator:browser");
-            window.console.log(aMsg);
-        } else {
-            // does not record the script line and is not suitable for tracing...
-            this.CONSOLE.logStringMessage(aMsg);
-        }
-    },
+    log: console.log,
 
-    warn: function(aMsg) {
-        if (this._fxVer30_consoleLog) {
-            var window = this.WINDOW.getMostRecentWindow("navigator:browser");
-            window.console.warn(aMsg);
-        } else {
-            // set javascript.options.showInConsole to true in the about:config to see it
-            // default true since Firefox 4.0
-            Components.utils.reportError(aMsg);
-        }
-    },
+    warn: console.warn,
 
-    error: function(aMsg) {
-        if (this._fxVer30_consoleLog) {
-            var window = this.WINDOW.getMostRecentWindow("navigator:browser");
-            window.console.error(aMsg);
-        } else {
-            // set javascript.options.showInConsole to true in the about:config to see it
-            // default true since Firefox 4.0
-            Components.utils.reportError(aMsg);
-        }
+    error: console.error,
+
+    openManageWindow: function(aRes, aModEltID) {
+        var window = this.WINDOW.getMostRecentWindow("navigator:browser");
+        window.openDialog("chrome://scrapbook/content/manage.xul", "ScrapBook:Manage", "chrome,centerscreen,all,resizable,dialog=no", aRes, aModEltID);
+    },
+ 
+    getFocusedWindow: function() {
+        var window = this.WINDOW.getMostRecentWindow("navigator:browser");
+        var win = window.document.commandDispatcher.focusedWindow;
+        if ( !win || win == window || win instanceof Components.interfaces.nsIDOMChromeWindow ) win = window.content;
+        return win;
     },
 
 
-    /**
+    /****************************************************************
      * DOM elements handling
-     */
+     ***************************************************************/
+
+    flattenFrames: function(aWindow) {
+        var ret = [aWindow];
+        for ( var i = 0; i < aWindow.frames.length; i++ ) {
+            ret = ret.concat(this.flattenFrames(aWindow.frames[i]));
+        }
+        return ret;
+    },
 
     getOuterHTML: function(aNode) {
         var outer = aNode.outerHTML;
@@ -953,83 +950,4 @@ var sbCommonUtils = {
         }
         return false;
     },
-
-    /**
-     * Object handling
-     */
-    extendObject: function(aObject1, aObject2) {
-        for (var i in aObject2) {
-            aObject1[i] = aObject2[i];
-        }
-        return aObject1;
-    },
 };
-
-/**
- * Shortcut object
- */
-
-const keyCodeToNameMap = {};
-const keyNameToCodeMap = {};
-
-(function(){
-    var keys = Components.interfaces.nsIDOMKeyEvent;
-    for (var name in keys) {
-        if (name.match(/^DOM_VK_/)) {
-            var keyName = RegExp.rightContext.toLowerCase().replace(/(^|_)([a-z])/g, function(){
-                return arguments[1] + arguments[2].toUpperCase();
-            });
-            var keyCode = keys[name];
-            keyCodeToNameMap[keyCode] = keyName;
-            keyNameToCodeMap[keyName] = keyCode;
-        }
-    }
-})();
-
-function Shortcut(data) {
-    this.keyCode = data.keyCode;
-    this.modifiers = [];
-    // unify the order
-    if (data.modifiers.indexOf("Meta") !== -1) this.modifiers.push("Meta");
-    if (data.modifiers.indexOf("Ctrl") !== -1) this.modifiers.push("Ctrl");
-    if (data.modifiers.indexOf("Alt") !== -1) this.modifiers.push("Alt");
-    if (data.modifiers.indexOf("Shift") !== -1) this.modifiers.push("Shift");
-}
-
-Shortcut.prototype.toString = function () {
-    var parts = [];
-    var keyName = keyCodeToNameMap[this.keyCode];
-
-    // if the key is not registered, return null
-    if (!keyName) return null;
-
-    parts = parts.concat(this.modifiers);
-    parts.push(keyName);
-
-    return parts.join("+");
-}
-
-Shortcut.fromString = function (str) {
-    var data = {}
-    var parts = str.split("+");
-    data.keyCode = keyNameToCodeMap[parts.pop()];
-    data.modifiers = [].concat(parts);
-    return new Shortcut(data);
-}
-
-Shortcut.fromEvent = function (event) {
-    var data = {};
-
-    data.keyCode = event.keyCode;
-
-    var modifiers = [];
-    if (event.metaKey) modifiers.push("Meta");
-    if (event.ctrlKey) modifiers.push("Ctrl");
-    if (event.altKey) modifiers.push("Alt");
-    if (event.shiftKey) modifiers.push("Shift");
-    data.modifiers = modifiers;
-
-    return new Shortcut(data);
-}
-
-var EXPORTED_SYMBOLS = ["sbCommonUtils", "Shortcut"];
