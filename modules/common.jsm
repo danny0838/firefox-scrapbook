@@ -658,6 +658,14 @@ var sbCommonUtils = {
      * String utilies
      ***************************************************************/
 
+    unicodeToUtf8: function (chars) {
+        return unescape(encodeURIComponent(chars));
+    },
+
+    utf8ToUnicode: function (bytes) {
+        return decodeURIComponent(escape(bytes));
+    },
+
     escapeComment: function(aStr) {
         if ( aStr.length > 10000 ) this.alert(lang("scrapbook", "MSG_LARGE_COMMENT"));
         return aStr.replace(/\r|\n|\t/g, " __BR__ ");
@@ -713,24 +721,17 @@ var sbCommonUtils = {
     crop: function(aString, aMaxLength, aByBytes, aEllipsis) {
         if (typeof(aEllipsis) == "undefined") aEllipsis = "...";
         if (aByBytes) {
-            var bytes= toBytesUTF8(aString);
+            var bytes= sbCommonUtils.unicodeToUtf8(aString);
             if (bytes.length <= aMaxLength) return aString;
-            bytes = bytes.substring(0, aMaxLength - toBytesUTF8(aEllipsis).length);
+            bytes = bytes.substring(0, aMaxLength - sbCommonUtils.utf8ToUnicode(aEllipsis).length);
             while (true) {
                 try {
-                    return fromBytesUTF8(bytes) + aEllipsis;
+                    return sbCommonUtils.utf8ToUnicode(bytes) + aEllipsis;
                 } catch(e) {};
                 bytes= bytes.substring(0, bytes.length-1);
             }
         } else {
             return (aString.length > aMaxLength) ? aString.substr(0, aMaxLength - aEllipsis.length) + aEllipsis : aString;
-        }
-
-        function toBytesUTF8(chars) {
-            return unescape(encodeURIComponent(chars));
-        }
-        function fromBytesUTF8(bytes) {
-            return decodeURIComponent(escape(bytes));
         }
     },
         
