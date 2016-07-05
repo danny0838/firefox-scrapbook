@@ -1,0 +1,406 @@
+<!-- calculate.dtd -->
+<!ENTITY sb.calc.total.size "الحجم الكلي">
+<!ENTITY sb.calc.diagnosis "تشخيص">
+
+<!-- capture.dtd -->
+<!ENTITY sb.capture "إلتقط">
+<!ENTITY sb.capture.abort "أجهض">
+<!ENTITY sb.capture.start "إبدأ">
+<!ENTITY sb.capture.retry "إعادة">
+<!ENTITY sb.capture.skip "تجاوز">
+<!ENTITY sb.capture.pause "إيقاف مؤقت">
+<!ENTITY sb.capture.finish "ألغ">
+<!ENTITY sb.capture.filter "تصفية">
+<!ENTITY sb.capture.filter.column.one "أظهر/أخف">
+<!ENTITY sb.capture.filter.column.two "مرشح (تعبير نمطي)">
+<!ENTITY sb.capture.filter.accept "إقبل">
+<!ENTITY sb.capture.filter.accept.tt "غير أو حرر القيمة">
+<!ENTITY sb.capture.filter.cancel "ألغ">
+<!ENTITY sb.capture.filter.cancel.tt "ألغ التحرير">
+<!ENTITY sb.capture.filter.delete "احذف">
+<!ENTITY sb.capture.filter.delete.tt "أزل المرشح من القائمة">
+<!ENTITY sbp.capture.column.one "الرابط">
+<!ENTITY sbp.capture.column.two "العنوان">
+<!ENTITY sbp.capture.column.three "الحالة">
+
+<!-- combine.dtd -->
+<!ENTITY sb.combine.dragdrop "اضافة عناصر بالسحب والإفلات من القائمة بالترتيب الذي تريد  الجمع به. يمكنك سحب و إفلات عناصر متعددة معاً.">
+<!ENTITY sb.combine.preview "معاينة">
+<!ENTITY sb.combine.preview.d "إضغط &apos;جمع&apos; بعد التأكد بالمعاينة.">
+<!ENTITY sb.combine.option.remove "بعد إكمال الجمع, أزل الصفحات الأصلية.">
+<!ENTITY sbp.combine.up "انقل العنصر للأعلى">
+<!ENTITY sbp.combine.down "انقل العنصر للأسفل">
+<!ENTITY sbp.combine.remove "أزل العنصر">
+<!ENTITY sbp.combine.newTitle "عنوان جديد">
+
+<!-- detail.dtd -->
+<!ENTITY sb.detail.linked.timeout "المهلة (ثواني)">
+<!ENTITY sb.detail.linked.charset "ضبط المحارف">
+<!ENTITY sb.detail "تفاصيل الالتقاط">
+<!ENTITY sb.detail.new.folder "مجلد جديد">
+<!ENTITY sb.detail.select.folder "حدد مجلد">
+<!ENTITY sb.detail.option "خيارات">
+<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.images "صور">
+<!ENTITY sb.detail.option.media "Media">
+<!ENTITY sb.detail.option.fonts "Fonts">
+<!ENTITY sb.detail.option.frames "Frames">
+<!ENTITY sb.detail.option.styles "الهيئة">
+<!ENTITY sb.detail.option.scripts "Scripts">
+<!ENTITY sb.detail.option.keepLink "Keep linking to the source for not-captured objects">
+<!ENTITY sb.detail.option.rewriteStyles "Reorganize Styles">
+<!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
+<!ENTITY sb.detail.linked.file "تحميل الملفات المرتبطة">
+<!ENTITY sb.detail.linked.image "صور">
+<!ENTITY sb.detail.linked.sound "صوت">
+<!ENTITY sb.detail.linked.movie "أفلام">
+<!ENTITY sb.detail.linked.archive "مضغوطة">
+<!ENTITY sb.detail.linked.custom "مخصصة">
+<!ENTITY sb.detail.linked.page "إلتقاط في العمق">
+<!ENTITY sb.detail.linked.page.depth "عمق الارتباطات">
+<!ENTITY sb.detail.linked.page.text "بعد إتمام الالتقاط, سيتم ربط الصفحات مع بعضها و عمل خريطة الموقع.">
+<!ENTITY sb.detail.warnAboutRenew "لاحظ: &apos;الالتقاط مجدداً&apos; يكتب فوق الصفحات المحفوظة.">
+<!ENTITY sb.detail.warnAboutScript "لاحظ: نصوص-الجافا  قد تؤدي الى بعض المشاكل.">
+
+<!-- editor.dtd -->
+<!ENTITY sb.toolbar.edit "شريط التحرير">
+<!ENTITY sb.toolbar.info "شريط المعلومات">
+<!ENTITY sb.edit.folderView "Click to view the data directory. Middle-click to open in a new tab.">
+<!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
+<!ENTITY sb.edit.undo "تراجع">
+<!ENTITY sb.edit.save "حفظ التغييرات">
+<!ENTITY sb.edit.comment "توسيع مكان التعليق">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
+<!ENTITY sb.edit.sticky "حاشية ملتصقة"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "إعمل &sb.edit.sticky;"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "Create Freenote">
+<!ENTITY sb.edit.inline.add "إضافة حاشية مضمنة">
+<!ENTITY sb.edit.attach.file "إرفاق ملف بالمحدد">
+<!ENTITY sb.edit.attach.link "إرفاق وصلة بالمحدد">
+<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.cutterTool "Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.">
+<!ENTITY sb.edit.htmlTool "HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.">
+<!ENTITY sb.edit.html "HTML Editor">
+<!ENTITY sb.edit.html.color "Edit Color">
+<!ENTITY sb.edit.html.color.forText "Set text color:">
+<!ENTITY sb.edit.html.color.forBg "Set background color:">
+<!ENTITY sb.edit.html.source "Edit HTML Source">
+<!ENTITY sb.edit.html.link "Insert Link">
+<!ENTITY sb.edit.html.link.url "Target URL:">
+<!ENTITY sb.edit.html.link.id "Item ID:">
+<!ENTITY sb.edit.html.link.format "Select insert format:">
+<!ENTITY sb.edit.html.file "Insert File">
+<!ENTITY sb.edit.html.file.pick "Insert file:">
+<!ENTITY sb.edit.html.file.html "Insert sub-page:">
+<!ENTITY sb.edit.html.file.format "Select insert format:">
+<!ENTITY sb.edit.html.backup "Backup the Current Page">
+<!ENTITY sb.edit.html.backup.desc "Description:">
+<!ENTITY sb.edit.html.menu.basic "Text">
+<!ENTITY sb.edit.html.menu.block "Block">
+<!ENTITY sb.edit.html.menu.insert "Insert">
+<!ENTITY sb.edit.html.menu.wrapper "Advanced">
+<!ENTITY sb.edit.html.menuitem.insertSource "Insert or Edit Source">
+<!ENTITY sb.edit.html.menuitem.removeFormat "Clear Formats">
+<!ENTITY sb.edit.html.menuitem.unlink "Clear Links">
+<!ENTITY sb.edit.html.menuitem.save "Save the Page">
+<!ENTITY sb.edit.html.menuitem.quit "Switch HTMLEditor">
+<!ENTITY sb.edit.html.menuitem.bold "Switch Bold">
+<!ENTITY sb.edit.html.menuitem.italic "Switch Italic">
+<!ENTITY sb.edit.html.menuitem.underline "Switch Underline">
+<!ENTITY sb.edit.html.menuitem.strikeThrough "Switch Line-through">
+<!ENTITY sb.edit.html.menuitem.setColor "Set Text and Background Color">
+<!ENTITY sb.edit.html.menuitem.increaseFontSize "Increase Text Size">
+<!ENTITY sb.edit.html.menuitem.decreaseFontSize "Decrease Text Size">
+<!ENTITY sb.edit.html.menuitem.superscript "Switch Superscript">
+<!ENTITY sb.edit.html.menuitem.subscript "Switch Subscript">
+<!ENTITY sb.edit.html.menuitem.formatblock_p "Set to Normal Paragraph">
+<!ENTITY sb.edit.html.menuitem.formatblock_h1 "Set to Header Level 1">
+<!ENTITY sb.edit.html.menuitem.formatblock_h2 "Set to Header Level 2">
+<!ENTITY sb.edit.html.menuitem.formatblock_h3 "Set to Header Level 3">
+<!ENTITY sb.edit.html.menuitem.formatblock_h4 "Set to Header Level 4">
+<!ENTITY sb.edit.html.menuitem.formatblock_h5 "Set to Header Level 5">
+<!ENTITY sb.edit.html.menuitem.formatblock_h6 "Set to Header Level 6">
+<!ENTITY sb.edit.html.menuitem.formatblock_div "Set to DIV Block">
+<!ENTITY sb.edit.html.menuitem.formatblock_pre "Set to PRE Block">
+<!ENTITY sb.edit.html.menuitem.insertUnorderedList "Switch Unordered List">
+<!ENTITY sb.edit.html.menuitem.insertOrderedList "Switch Ordered List">
+<!ENTITY sb.edit.html.menuitem.outdent "Outdent">
+<!ENTITY sb.edit.html.menuitem.indent "Indent">
+<!ENTITY sb.edit.html.menuitem.justifyLeft "Align Left">
+<!ENTITY sb.edit.html.menuitem.justifyRight "Align Right">
+<!ENTITY sb.edit.html.menuitem.justifyCenter "Align Center">
+<!ENTITY sb.edit.html.menuitem.justifyFull "Align Justify">
+<!ENTITY sb.edit.html.menuitem.attachLink "Insert a Link or Innerlink">
+<!ENTITY sb.edit.html.menuitem.attachFile "Insert a File or Sub-page">
+<!ENTITY sb.edit.html.menuitem.backupFile "Create a Backup for this Page">
+<!ENTITY sb.edit.html.menuitem.horizontalLine "Insert a Horizontal Rule">
+<!ENTITY sb.edit.html.menuitem.insertDate "Insert a Date">
+<!ENTITY sb.edit.html.menuitem.insertTodoBox "Insert a Todo Checkbox">
+<!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "Insert a Todo Checkbox (Checked)">
+<!ENTITY sb.edit.html.menuitem.wrapHTML "Format with Template">
+<!ENTITY sb.edit.cutter "أزل المحدد">
+<!ENTITY sb.edit.remove.iframe "إزالة جميع وسوم IFRAME">
+<!ENTITY sb.edit.remove.script "إزالة جميع وسوم السكربت">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to highlight the selection.">
+<!ENTITY sb.highlighter "المضيء">
+<!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
+<!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
+<!ENTITY sb.locate "أوجد في شجرة الشريط الجانبي">
+<!ENTITY sb.indicators "عرض مؤشر الارتباط">
+<!ENTITY sb.info.home "البيت">
+<!ENTITY sb.info.sitemap "خريطة الموقع">
+
+<!-- hlCustom.dtd -->
+<!ENTITY sb.hlCustom.preset "النمط الاساسي">
+<!ENTITY sb.hlCustom.background "الخلفية">
+<!ENTITY sb.hlCustom.color "اللون">
+<!ENTITY sb.hlCustom.text "النص">
+<!ENTITY sb.hlCustom.bold "عريض">
+<!ENTITY sb.hlCustom.italic "مائل">
+<!ENTITY sb.hlCustom.line "خط في المنتصف">
+<!ENTITY sb.hlCustom.border "الحدود">
+<!ENTITY sb.hlCustom.type "النوغ">
+<!ENTITY sb.hlCustom.box "صندوق">
+<!ENTITY sb.hlCustom.underline "خط تحت السطر">
+<!ENTITY sb.hlCustom.style "التنسيق">
+<!ENTITY sb.hlCustom.solid "ثابت">
+<!ENTITY sb.hlCustom.dotted "منقط">
+<!ENTITY sb.hlCustom.dashed "شحطات">
+<!ENTITY sb.hlCustom.double "مضاعف">
+<!ENTITY sb.hlCustom.width "عرض">
+<!ENTITY sb.hlCustom.thin "رفيع">
+<!ENTITY sb.hlCustom.medium "متوسط">
+<!ENTITY sb.hlCustom.thick "ثخين">
+
+<!-- mbManage.dtd -->
+<!ENTITY mb.manager "Multi-ScrapBook Manager">
+<!ENTITY mb.prop.name "الاسم">
+<!ENTITY mb.prop.path "المسار">
+<!ENTITY mb.button.add "إضافة">
+<!ENTITY mb.button.edit "تحرير">
+<!ENTITY mb.button.remove "إزالة">
+
+<!-- multiple.dtd -->
+<!ENTITY sb.multiple.filter "المرشح">
+<!ENTITY sbp.multiple.titleofwebsite "عنوان الموقع">
+<!ENTITY sbp.multiple.titleoflink "عنوان الرابط">
+<!ENTITY sb.multiple.title "العنوان">
+<!ENTITY sb.multiple.timeout "المهلة">
+<!ENTITY sbp.multiple.downloadmethod "الأسلوب">
+<!ENTITY sb.multiple.charset "المحارف">
+<!ENTITY sb.multiple.url "عنوان (ادخل العناوين واحدا تحت الآخر)">
+<!ENTITY sb.multiple.detector "كاشف العناوين">
+<!ENTITY sb.multiple.detector.plink "كل الارتباطات في الصفحة">
+<!ENTITY sb.multiple.detector.slink "كل الارتباطات في التحديد">
+<!ENTITY sb.multiple.detector.tabs "كل الالسنة المفتوحة في النافذة">
+<!ENTITY sb.multiple.detector.local "كل HTMLs المحلية في دليل">
+<!ENTITY sb.multiple.detector.bookmarks "علامات المواقع">
+<!ENTITY sb.multiple.detector.clear "مسح">
+<!ENTITY sbp.multiple.exclude "تجاهل العناوين الموجودة مسبقا في المجلد الوجهه">
+
+<!-- note.dtd -->
+<!ENTITY sb.note.save "حفظ">
+<!ENTITY sb.note.close "إغلاق">
+<!ENTITY sb.note.tools "أدوات">
+<!ENTITY sb.note.htmlview "HTML عرض">
+<!ENTITY sb.note.normalview "عرض عادي">
+<!ENTITY sb.note.template "تحرير قالب HTML">
+<!ENTITY sb.note.autolinefeed "تلقائي-Linefeed">
+<!ENTITY sb.note.autolinefeed.t "إضافة &lt;br&gt; tag to the end-of-line at &sb.note.htmlview;">
+<!ENTITY sb.note.fontsize "حجم الخط">
+<!ENTITY sb.note.help "مساعدة">
+<!ENTITY sb.note.print "طباعة">
+<!ENTITY sb.note.exit "خروج">
+<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "N">
+<!ENTITY sb.note.tools.accesskey "T">
+<!ENTITY sb.note.fontsize.accesskey "F">
+<!ENTITY sb.note.print.accesskey "P">
+<!ENTITY sb.note.exit.accesskey "X">
+
+<!-- notify.dtd -->
+<!ENTITY sb.capture.complete "تم الالتقاط.">
+<!ENTITY sb.capture.complete.all "كل الالتقاطات تمت.">
+
+<!-- output.dtd -->
+<!ENTITY sb.output.option.all "استخراج كل الشجرة">
+<!ENTITY sb.output.option.frame "استخراج مع الاطار">
+<!ENTITY sb.output.option.open "بعد الاستخراج, افتحها ضمن المتصفح.">
+
+<!-- overlay.dtd -->
+<!ENTITY sb.capture.partial "التقاط المحدد">
+<!ENTITY sb.capture.partial.as "التقاط المحدد كـ">
+<!ENTITY sb.capture.entire "التقاط الصفحة">
+<!ENTITY sb.capture.entire.as "التقاط الصفحة كـ">
+<!ENTITY sb.capture.frame "التقاط الاطار">
+<!ENTITY sb.capture.frame.as "التقاط الاطاركـ">
+<!ENTITY sb.capture.target "التقاط الرابط">
+<!ENTITY sb.capture.target.as "التقاط الرابط كـ">
+<!ENTITY sb.capture.alltabs "التقاط كل الالسنة">
+<!ENTITY sb.capture.bookmark "علامة موقع بـ سكراببوك">
+<!ENTITY sb.sidebar "عرض في الشريط الجانبي">
+<!ENTITY sb.menubar "الفائمة">
+<!ENTITY sb.editbefore "تحرير قبل الالتقاط">
+
+<!-- prefs.dtd -->
+<!ENTITY sb.prefs.main "الرئيسية">
+<!ENTITY sb.prefs.keys "Keys">
+<!ENTITY sb.prefs.tabs "الألسنة">
+<!ENTITY sb.prefs.save "حفظ">
+<!ENTITY sb.prefs.edit "تحرير">
+<!ENTITY sb.prefs.organize "تنظيم">
+<!ENTITY sb.prefs.advanced "متقدم">
+<!ENTITY sb.prefs.ui.contextMenu "عرض في قائمة النص في المتصفح">
+<!ENTITY sb.prefs.ui.contextSubMenu "قائمة فرعية">
+<!ENTITY sb.prefs.ui.bookmarkMenu "عرض قائمة&apos;اشارة مرجعية مع ScrapBook&apos;">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "إعرض حتى">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "دليل مستخدم  مؤخراً">
+<!ENTITY sb.prefs.ui.menuBar "عرض في شريط القوائم">
+<!ENTITY sb.prefs.ui.menuBar.icon "رمز">
+<!ENTITY sb.prefs.ui.toolsMenu "عرض في قائمة &apos;الأدوات&apos;">
+<!ENTITY sb.prefs.ui.statusBar "عرض في شريط الحالة">
+<!ENTITY sb.prefs.restart "التغيير يتطلب إعادة تشغيل فيرفوكس.">
+<!ENTITY sb.prefs.tabs.tips "فتح في لسان للعمليات التالية">
+<!ENTITY sb.prefs.tabs.note "تحرير ملاحظة">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
+<!ENTITY sb.prefs.data "مكان تخزين البيانات">
+<!ENTITY sb.prefs.data.default "الافتراضي (مجلد profile)">
+<!ENTITY sb.prefs.data.custom "حفظ البيانات إلى">
+<!ENTITY sb.prefs.data.tips "إختر مجلدا لتخزين بيانات ScrapBook.">
+<!ENTITY sb.prefs.multibook.enabled "تمكين ScrapBook متعدد">
+<!ENTITY sb.prefs.multibook.tips "ScrapBook متعدد يمكن من اعداد مواقع متعددة لتخزين البيانات و التبديل بينها بسرعة بزر شريط الأدوات.">
+<!ENTITY sb.prefs.confirmDelete "نبهني عند ازالة عناصر الشجرة">
+<!ENTITY sb.prefs.tree.autoCollapse "عند فتح مجلد في الشجرة, تلقائيا أغلق المجلدات الاخرى">
+<!ENTITY sb.prefs.tree.unshift "وضع عنصر في">
+<!ENTITY sb.prefs.tree.unshift.top "أعلى المجلد">
+<!ENTITY sb.prefs.tree.unshift.bottom "أسفل المجلد">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
+<!ENTITY sb.prefs.showDetailOnDrop "عرض مربع&apos;تفاصيل الإلتقاط&apos; عند الإلتقاط بالسحب و الإفلات داخل الشريط الجانبي">
+<!ENTITY sb.prefs.notifyOnComplete "عرض تنبيه &apos;تم الإلتقاط&apos;">
+<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
+<!ENTITY sb.prefs.export "Export Preferences">
+<!ENTITY sb.prefs.import "Import Preferences">
+<!ENTITY sb.prefs.reset "Reset Preferences">
+<!ENTITY sb.button.customize "تخصيص">
+<!ENTITY sb.button.browse "استعراض">
+<!ENTITY sb.button.show "عرض الملفات">
+
+<!-- property.dtd -->
+<!ENTITY sb.prop.general "معلومات عامة">
+<!ENTITY sb.prop.type "النوع">
+<!ENTITY sb.prop.date "التاريخ"><!-- left for addon compatibility -->
+<!ENTITY sb.prop.create "Create">
+<!ENTITY sb.prop.modify "Modify">
+<!ENTITY sb.prop.encode "الترميز">
+<!ENTITY sb.prop.size "الحجم">
+<!ENTITY sb.prop.content "المحتوى">
+<!ENTITY sb.prop.file "File">
+<!ENTITY sb.prop.folder "المجلد">
+<!ENTITY sb.prop.icon "الأيقونة">
+<!ENTITY sb.prop.icon.change "تغيير">
+<!ENTITY sb.prop.icon.default "الافتراضية">
+<!ENTITY sb.prop.icon.favicon "حدد ايقونة fav">
+<!ENTITY sb.prop.icon.custom "حدد أيقونة المستخدم">
+<!ENTITY sb.prop.mark "علامة">
+<!ENTITY sb.prop.lock "Lock">
+
+<!-- repair.dtd -->
+<!ENTITY sb.repair.rdfFile "استعادة scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript "جرب هذا إذا كانت شجرة ScrapBook تختفي فجأة .">
+<!ENTITY sb.repair.rdfFile.select "حدد ملف نسخ احتياطي للاسترجاع.">
+<!ENTITY sb.repair.rdfFile.file "الملف">
+<!ENTITY sb.repair.rdfFile.time "الوقت">
+<!ENTITY sb.repair.rdfFile.size "الحجم">
+<!ENTITY sb.repair.favicons "استعادة الايقونات في الشجرة">
+<!ENTITY sb.repair.favicons.descript "جرب هذا إذا كانت العديد من الايقونات في شجرة  ScrapBook تختفي.">
+<!ENTITY sb.repair.complete "تمت.">
+
+<!-- scrapbook.dtd -->
+<!ENTITY sb.toggle.all "فتح  إغلاق جميع المجلدات">
+<!ENTITY sb.tools "أدوات">
+<!ENTITY sb.tools.options "خيارات">
+<!ENTITY sb.tools.manage "إدارة">
+<!ENTITY sb.tools.combine "معالج الجمع">
+<!ENTITY sb.tools.trade "استيراد \تصدير">
+<!ENTITY sb.tools.multiple "التقاط مجموعة من عناوين المواقع">
+<!ENTITY sb.tools.directory "ScrapBook دليل">
+<!ENTITY sb.tools.calculate "حساب الحجم">
+<!ENTITY sb.tools.sorttree "ترتيب الشجرة كاملا">
+<!ENTITY sb.tools.output "تصدير الشجرة كـ HTML">
+<!ENTITY sb.tools.repair "إصلاح اسعافي">
+<!ENTITY sb.tools.addons "وظائف الاضافات">
+<!ENTITY sb.note.opentab "فتح في لسان">
+
+<!-- sort.dtd -->
+<!ENTITY sb.sort "ترتيب">
+<!ENTITY sb.sort.reverse "عكس">
+<!ENTITY sb.sort.title.asc "ترتيب بالعنوان (A &gt; Z)">
+<!ENTITY sb.sort.title.desc "ترتيب بالعنوان (Z &gt; A)">
+<!ENTITY sb.sort.date.asc "زمني">
+<!ENTITY sb.sort.date.desc "زمني عكسي">
+<!ENTITY sb.sort.grouping "Group by Type">
+<!ENTITY sb.sort.recursive "ترتيب المجلدات الفرعية تبعا">
+<!ENTITY sb.sort.warning "انتبه: لا يمكنك&apos; التراجع عن العملية.">
+
+<!-- templateHelp.dtd -->
+<!ENTITY sb.thelp.dir "rtl">
+<!ENTITY sb.thelp.title "ScrapBook Template HTML Help">
+<!ENTITY sb.thelp.tags "علامتين مميزتين">
+<!ENTITY sb.thelp.tag1 "العنوان (السطر الاول من الملاحظة)">
+<!ENTITY sb.thelp.tag2 "المحتوى (السطر الثاني أو الاخرى من الملاحظة)">
+<!ENTITY sb.thelp.preset "قالب أولي">
+
+<!-- trade.dtd -->
+<!ENTITY sb.trade.import "استيراد">
+<!ENTITY sb.trade.export "تصدير">
+<!ENTITY sb.trade.time "وقت التصدير">
+<!ENTITY sb.trade.update "Import as latest ScrapBook X format">
+<!ENTITY sb.trade.restore "استيراد مع استرجاع بنية المجلد">
+<!ENTITY sb.trade.remove "إزالة الملفات بعد الاستيراد">
+<!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">
+
+<!-- tree.dtd -->
+<!ENTITY sb.open "فتح">
+<!ENTITY sb.open.native "Open in Default Program">
+<!ENTITY sb.open.tab "فتح في لسان">
+<!ENTITY sb.open.newtab "فتح في لسان جديد">
+<!ENTITY sb.open.source "فتح الموقع المصدر">
+<!ENTITY sb.multi "Multi-ScrapBook">
+<!ENTITY sb.show.files "عرض الملفات">
+<!ENTITY sb.move "نقل">
+<!ENTITY sb.move.into "نقل إلى مجلد">
+<!ENTITY sb.copy "Copy">
+<!ENTITY sb.renew "إلتقاط مجدداً">
+<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.export "تصدير">
+<!ENTITY sb.remove "إزالة">
+<!ENTITY sb.property "خصائص">
+<!ENTITY sb.listview "عرض قائمة">
+<!ENTITY sb.prop.title "العنونة">
+<!ENTITY sb.prop.comment "التعليق">
+<!ENTITY sbp.prop.url "العنوان">
+<!ENTITY sb.prop.id.date "المعرف">
+<!ENTITY sb.folder.combine "عرض مجموع">
+<!ENTITY sb.folder.openall "فتح الجميع في ألسنة">
+<!ENTITY sb.folder.manage "إدارةالمجلدات">
+<!ENTITY sb.new.folder "مجلد جديد">
+<!ENTITY sb.new.separator "فاصل جديد">
+<!ENTITY sb.new.note "ملاحظة جديدة">
+<!ENTITY sb.new.notex "New Note Page">
+<!ENTITY sb.sort.folder "ترتيب المجلد">
+<!ENTITY sb.search "بحث">
+<!ENTITY sb.search.fulltext "بحث كامل النص">
+<!ENTITY sb.search.all "الكل">
+<!ENTITY sb.search.re "استعمل RegExp">
+<!ENTITY sb.search.cs "مطابقة الكتابة">
+<!ENTITY sb.search.cache "تحديث المحفوظات لفحص نصي كامل">
+<!ENTITY sb.search.clear "مسح محفوظات البحث">
+<!ENTITY sb.search.days "التصفية بحسب الايام">
+<!ENTITY mb.manage "إدارة">
+<!ENTITY mb.profileFolder "مجلد المستخدم في ويندوز">
+

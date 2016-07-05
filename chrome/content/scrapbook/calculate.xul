@@ -5,16 +5,7 @@
 <?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
 
 <!--locale-->
-<!DOCTYPE window [
-<!ENTITY % mainDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
-%mainDTD;
-<!ENTITY % treeDTD SYSTEM "chrome://scrapbook/locale/tree.dtd" >
-%treeDTD;
-<!ENTITY % propDTD SYSTEM "chrome://scrapbook/locale/property.dtd" >
-%propDTD;
-<!ENTITY % calcDTD SYSTEM "chrome://scrapbook/locale/calculate.dtd" >
-%calcDTD;
-]>
+<!DOCTYPE window SYSTEM "chrome://scrapbook/locale/message.dtd">
 
 <!--window-->
 <window id="sbCalcWindow"

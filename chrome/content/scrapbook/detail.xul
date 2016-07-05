@@ -4,14 +4,7 @@
 <?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
 <?xml-stylesheet href="chrome://browser/skin/places/editBookmarkOverlay.css" type="text/css" ?>
 
-<!DOCTYPE dialog [
-    <!ENTITY % propDTD   SYSTEM "chrome://scrapbook/locale/property.dtd" >
-    %propDTD;
-    <!ENTITY % treeDTD   SYSTEM "chrome://scrapbook/locale/tree.dtd" >
-    %treeDTD;
-    <!ENTITY % detailDTD SYSTEM "chrome://scrapbook/locale/detail.dtd" >
-    %detailDTD;
-]>
+<!DOCTYPE dialog SYSTEM "chrome://scrapbook/locale/message.dtd">
 
 <dialog id="sbDetailDialog"
         title="ScrapBook - &sb.detail;"

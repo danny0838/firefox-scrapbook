@@ -1,8 +1,0 @@
-<!ENTITY sb.combine.dragdrop "Fügen Sie Einträge, die Sie zusammenfassen wollen, durch &quot;Ziehen und Ablegen&quot; aus dem Baum hinzu. Sie können auch mehrere Einträge auf einmal auswählen.">
-<!ENTITY sb.combine.preview "Vorschau">
-<!ENTITY sb.combine.preview.d "Nach Überprüfung der Vorschau mit &quot;Zusammenfassen&quot; fortfahren.">
-<!ENTITY sb.combine.option.remove "Nach erfolgter Zusammenfassung Originalseiten entfernen">
-<!ENTITY sbp.combine.up "Eintrag nach oben verschieben">
-<!ENTITY sbp.combine.down "Eintrag nach unten verschieben">
-<!ENTITY sbp.combine.remove "Eintrag entfernen">
-<!ENTITY sbp.combine.newTitle "neuer Titel">

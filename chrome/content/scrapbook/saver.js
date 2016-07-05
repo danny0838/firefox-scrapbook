@@ -894,7 +894,7 @@ var sbContentSaver = {
         try {
             if (!aCSS.cssRules) skip = true;
         } catch(ex) {
-            sbCommonUtils.warn(sbCommonUtils.lang("scrapbook", "ERR_FAIL_GET_CSS", [aCSS.href, aDocument.location.href, ex]));
+            sbCommonUtils.warn(sbCommonUtils.lang("ERR_FAIL_GET_CSS", aCSS.href, aDocument.location.href, ex));
                 content += "/* ERROR: Unable to access this CSS */\n\n";
             skip = true;
         }
@@ -1031,7 +1031,7 @@ var sbContentSaver = {
         try {
             var aURL = sbCommonUtils.convertURLToObject(aURLSpec);
         } catch(ex) {
-            sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_DOWNLOAD_FILE", [aURLSpec, ex]));
+            sbCommonUtils.error(sbCommonUtils.lang("ERR_FAIL_DOWNLOAD_FILE", aURLSpec, ex));
             return "";
         }
         // never download "data:" and "chrome://" resources
@@ -1080,7 +1080,7 @@ var sbContentSaver = {
                 WBP.progressListener = new sbCaptureObserver(this.item, newFileName);
                 return newFileName;
             } catch(ex) {
-                sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_DOWNLOAD_FILE", [aURLSpec, ex]));
+                sbCommonUtils.error(sbCommonUtils.lang("ERR_FAIL_DOWNLOAD_FILE", aURLSpec, ex));
                 this.httpTask[this.item.id]--;
                 return "";
             }
@@ -1099,7 +1099,7 @@ var sbContentSaver = {
                 setTimeout(function(){ sbCaptureObserverCallback.onDownloadComplete(item); }, 0);
                 return newFileName;
             } catch(ex) {
-                sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_COPY_FILE", [aURLSpec, ex]));
+                sbCommonUtils.error(sbCommonUtils.lang("ERR_FAIL_COPY_FILE", aURLSpec, ex));
                 return "";
             }
         }
@@ -1188,16 +1188,16 @@ var sbCaptureObserverCallback = {
             this.onAllDownloadsComplete(aItem);
             return;
         }
-        this.trace(sbCommonUtils.lang("overlay", "CAPTURE", [sbContentSaver.httpTask[aItem.id], aItem.title]), 0);
+        this.trace(sbCommonUtils.lang("CAPTURE", sbContentSaver.httpTask[aItem.id], aItem.title), 0);
     },
 
     onAllDownloadsComplete: function(aItem) {
-        this.trace(sbCommonUtils.lang("overlay", "CAPTURE_COMPLETE", [aItem.title]), 5000);
+        this.trace(sbCommonUtils.lang("CAPTURE_COMPLETE", aItem.title), 5000);
         this.onCaptureComplete(aItem);
     },
 
     onDownloadProgress: function(aItem, aFileName, aProgress) {
-        this.trace(sbCommonUtils.lang("overlay", "DOWNLOAD_DATA", [aProgress, aFileName]), 0);
+        this.trace(sbCommonUtils.lang("DOWNLOAD_DATA", aProgress, aFileName), 0);
     },
 
     onCaptureComplete: function(aItem) {
@@ -1207,7 +1207,7 @@ var sbCaptureObserverCallback = {
             if ( sbDataSource.getProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id), "type") == "marked" ) return;
             if ( sbCommonUtils.getPref("notifyOnComplete", true) ) {
                 var icon = aItem.icon ? "resource://scrapbook/data/" + aItem.id + "/" + aItem.icon : sbCommonUtils.getDefaultIcon();
-                var title = "ScrapBook: " + sbCommonUtils.lang("overlay", "CAPTURE_COMPLETE");
+                var title = "ScrapBook: " + sbCommonUtils.lang("CAPTURE_COMPLETE");
                 var text = sbCommonUtils.crop(aItem.title, 100, true);
                 var listener = {
                     observe: function(subject, topic, data) {
@@ -1221,7 +1221,7 @@ var sbCaptureObserverCallback = {
             if ( aItem.id in sbContentSaver.httpTask ) delete sbContentSaver.httpTask[aItem.id];
         } else {
             var icon = sbCommonUtils.getDefaultIcon();
-            var title = "ScrapBook: " + sbCommonUtils.lang("overlay", "CAPTURE_COMPLETE");
+            var title = "ScrapBook: " + sbCommonUtils.lang("CAPTURE_COMPLETE");
             var alertsSvc = Components.classes["@mozilla.org/alerts-service;1"].getService(Components.interfaces.nsIAlertsService);
             alertsSvc.showAlertNotification(icon, title, null);
         }

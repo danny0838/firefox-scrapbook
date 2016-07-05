@@ -4,7 +4,7 @@
 <?xml-stylesheet href="chrome://scrapbook/skin/capture.css" type="text/css" ?>
 <?xml-stylesheet href="chrome://scrapbook/skin/sbpExtra/sbpCapture.css" type="text/css" ?>
 
-<!DOCTYPE window SYSTEM "chrome://scrapbook/locale/capture.dtd">
+<!DOCTYPE window SYSTEM "chrome://scrapbook/locale/message.dtd">
 
 <window id="sbCaptureWindow"
         title="&sb.capture; - ScrapBook"

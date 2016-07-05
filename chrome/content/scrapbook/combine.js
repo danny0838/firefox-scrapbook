@@ -65,7 +65,7 @@ var sbCombineService = {
         if (type == "folder" || type == "separator")
             return;
         if (type == "site")
-            sbCommonUtils.alert(sbCommonUtils.lang("combine", "WARN_ABOUT_INDEPTH"));
+            sbCommonUtils.alert(sbCommonUtils.lang("WARN_ABOUT_INDEPTH"));
         var icon = sbDataSource.getProperty(aRes, "icon");
         if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
         var listItem = this.LISTBOX.appendItem(sbDataSource.getProperty(aRes, "title"));
@@ -98,7 +98,7 @@ var sbCombineService = {
 //        this.WIZARD.getButton("back").onclick = null;
         this.WIZARD.getButton("back").hidden = false;
         this.WIZARD.getButton("back").disabled = true;
-        this.WIZARD.getButton("finish").label = sbCommonUtils.lang("combine", "FINISH_BUTTON_LABEL");
+        this.WIZARD.getButton("finish").label = sbCommonUtils.lang("FINISH_BUTTON_LABEL");
         this.WIZARD.getButton("finish").disabled = true;
         this.WIZARD.getButton("cancel").hidden = false;
         this.WIZARD.getButton("cancel").disabled = true;
@@ -170,7 +170,7 @@ var sbCombineService = {
         this.WIZARD.getButton("cancel").disabled = true;
         this.option["R"] = document.getElementById("sbCombineOptionRemove").checked;
         this.toggleElements(true);
-        SB_trace(sbCommonUtils.lang("capture", "CAPTURE_START"));
+        SB_trace(sbCommonUtils.lang("CAPTURE_START"));
 //sbCommonUtils.alert("--"+document.getElementById("sbpTitleTextbox").value+"--");
         setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null); }, 0);
     },
@@ -447,7 +447,7 @@ var sbPageCombiner = {
 
     surroundDOM: function() {
         if ( this.BODY.localName.toUpperCase() != "BODY" ) {
-            sbCommonUtils.alert(sbCommonUtils.lang("combine", "CANNOT_COMBINE_FRAMES", [sbDataSource.getProperty(sbCombineService.curRes, "title")]));
+            sbCommonUtils.alert(sbCommonUtils.lang("CANNOT_COMBINE_FRAMES", sbDataSource.getProperty(sbCombineService.curRes, "title")));
             this.BROWSER.stop();
             window.location.reload();
         }
@@ -674,7 +674,7 @@ sbCaptureObserverCallback.onCaptureComplete = function(aItem) {
     if ( sbCombineService.option["R"] ) {
         if ( sbCombineService.resList.length != sbCombineService.parList.length ) return;
         var rmIDs = window.top.sbController.removeInternal(sbCombineService.resList, sbCombineService.parList);
-        if ( rmIDs ) SB_trace(sbCommonUtils.lang("scrapbook", "ITEMS_REMOVED", [rmIDs.length]));
+        if ( rmIDs ) SB_trace(sbCommonUtils.lang("ITEMS_REMOVED", rmIDs.length));
     }
     SB_fireNotification(aItem);
     setTimeout(function() {
@@ -685,7 +685,7 @@ sbCaptureObserverCallback.onCaptureComplete = function(aItem) {
 
 
 sbInvisibleBrowser.onLoadStart = function() {
-    SB_trace(sbCommonUtils.lang("capture", "LOADING", [sbCombineService.prefix + this.fileCount, sbCombineService.postfix]));
+    SB_trace(sbCommonUtils.lang("LOADING", sbCombineService.prefix + this.fileCount, sbCombineService.postfix));
 };
 
 

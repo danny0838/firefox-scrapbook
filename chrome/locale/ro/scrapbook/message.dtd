@@ -1,0 +1,406 @@
+<!-- calculate.dtd -->
+<!ENTITY sb.calc.total.size "Dimensiune totală">
+<!ENTITY sb.calc.diagnosis "Diagnostic">
+
+<!-- capture.dtd -->
+<!ENTITY sb.capture "Capturează">
+<!ENTITY sb.capture.abort "Întrerupe">
+<!ENTITY sb.capture.start "Pornește">
+<!ENTITY sb.capture.retry "Reîncearcă">
+<!ENTITY sb.capture.skip "Ignoră">
+<!ENTITY sb.capture.pause "Întrerupe">
+<!ENTITY sb.capture.finish "Renunță">
+<!ENTITY sb.capture.filter "Filtrare">
+<!ENTITY sb.capture.filter.column.one "Afișează/ascunde">
+<!ENTITY sb.capture.filter.column.two "Filtrare (expresie regulată)">
+<!ENTITY sb.capture.filter.accept "Acceptă">
+<!ENTITY sb.capture.filter.accept.tt "Modifică sau editează valoarea">
+<!ENTITY sb.capture.filter.cancel "Renunță">
+<!ENTITY sb.capture.filter.cancel.tt "Abandonează editarea">
+<!ENTITY sb.capture.filter.delete "Șterge">
+<!ENTITY sb.capture.filter.delete.tt "Elimină filtrul din listă">
+<!ENTITY sbp.capture.column.one "Adresă">
+<!ENTITY sbp.capture.column.two "Denumire">
+<!ENTITY sbp.capture.column.three "Stare">
+
+<!-- combine.dtd -->
+<!ENTITY sb.combine.dragdrop "Adăugați elemente din arbore prin glisare și fixare, în ordinea în care doriți să le combinați. Puteți glisa și fixa mai multe articole o dată.">
+<!ENTITY sb.combine.preview "Previzualizare">
+<!ENTITY sb.combine.preview.d "Apăsați butonul „Combină” după ce verificați rezultatul.">
+<!ENTITY sb.combine.option.remove "Elimină paginile originale după finalizarea combinării">
+<!ENTITY sbp.combine.up "Mută elementul în sus">
+<!ENTITY sbp.combine.down "Mută elementul în jos">
+<!ENTITY sbp.combine.remove "Elimină elementul">
+<!ENTITY sbp.combine.newTitle "Denumire nouă">
+
+<!-- detail.dtd -->
+<!ENTITY sb.detail.linked.timeout "Temporizare (secunde)">
+<!ENTITY sb.detail.linked.charset "Codare">
+<!ENTITY sb.detail "Detalii de capturare">
+<!ENTITY sb.detail.new.folder "Dosar nou">
+<!ENTITY sb.detail.select.folder "Selectează dosarul">
+<!ENTITY sb.detail.option "Opțiuni">
+<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.images "Imagini">
+<!ENTITY sb.detail.option.media "Media">
+<!ENTITY sb.detail.option.fonts "Fonts">
+<!ENTITY sb.detail.option.frames "Frames">
+<!ENTITY sb.detail.option.styles "Stiluri">
+<!ENTITY sb.detail.option.scripts "Scripts">
+<!ENTITY sb.detail.option.keepLink "Keep linking to the source for not-captured objects">
+<!ENTITY sb.detail.option.rewriteStyles "Reorganize Styles">
+<!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
+<!ENTITY sb.detail.linked.file "Descărcare fișiere legate">
+<!ENTITY sb.detail.linked.image "Imagini">
+<!ENTITY sb.detail.linked.sound "Audio">
+<!ENTITY sb.detail.linked.movie "Video">
+<!ENTITY sb.detail.linked.archive "Arhive">
+<!ENTITY sb.detail.linked.custom "Alte tipuri">
+<!ENTITY sb.detail.linked.page "Capturare în profunzime">
+<!ENTITY sb.detail.linked.page.depth "Nivelul de urmărire a legăturilor (profunzimea)">
+<!ENTITY sb.detail.linked.page.text "După finalizarea capturării, paginile vor fi legate una de alta și se va construi harta saitului.">
+<!ENTITY sb.detail.warnAboutRenew "NOTĂ: Operațiunea „Capturează din nou” va suprascrie paginile salvate anterior.">
+<!ENTITY sb.detail.warnAboutScript "NOTĂ: JavaScript poate crea unele probleme.">
+
+<!-- editor.dtd -->
+<!ENTITY sb.toolbar.edit "Afișează bara de editare">
+<!ENTITY sb.toolbar.info "Afișează bara de informații">
+<!ENTITY sb.edit.folderView "Click to view the data directory. Middle-click to open in a new tab.">
+<!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
+<!ENTITY sb.edit.undo "Anulează operația">
+<!ENTITY sb.edit.save "Salvează modificările">
+<!ENTITY sb.edit.comment "Extinde zona comentariu">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
+<!ENTITY sb.edit.sticky "notă adezivă"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "Creează o &sb.edit.sticky;"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "Create Freenote">
+<!ENTITY sb.edit.inline.add "Adaugă o adnotare la selecție">
+<!ENTITY sb.edit.attach.file "Atașează un fișier la selecție">
+<!ENTITY sb.edit.attach.link "Atașează o legătură la selecție">
+<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.cutterTool "Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.">
+<!ENTITY sb.edit.htmlTool "HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.">
+<!ENTITY sb.edit.html "HTML Editor">
+<!ENTITY sb.edit.html.color "Edit Color">
+<!ENTITY sb.edit.html.color.forText "Set text color:">
+<!ENTITY sb.edit.html.color.forBg "Set background color:">
+<!ENTITY sb.edit.html.source "Edit HTML Source">
+<!ENTITY sb.edit.html.link "Insert Link">
+<!ENTITY sb.edit.html.link.url "Target URL:">
+<!ENTITY sb.edit.html.link.id "Item ID:">
+<!ENTITY sb.edit.html.link.format "Select insert format:">
+<!ENTITY sb.edit.html.file "Insert File">
+<!ENTITY sb.edit.html.file.pick "Insert file:">
+<!ENTITY sb.edit.html.file.html "Insert sub-page:">
+<!ENTITY sb.edit.html.file.format "Select insert format:">
+<!ENTITY sb.edit.html.backup "Backup the Current Page">
+<!ENTITY sb.edit.html.backup.desc "Description:">
+<!ENTITY sb.edit.html.menu.basic "Text">
+<!ENTITY sb.edit.html.menu.block "Block">
+<!ENTITY sb.edit.html.menu.insert "Insert">
+<!ENTITY sb.edit.html.menu.wrapper "Advanced">
+<!ENTITY sb.edit.html.menuitem.insertSource "Insert or Edit Source">
+<!ENTITY sb.edit.html.menuitem.removeFormat "Clear Formats">
+<!ENTITY sb.edit.html.menuitem.unlink "Clear Links">
+<!ENTITY sb.edit.html.menuitem.save "Save the Page">
+<!ENTITY sb.edit.html.menuitem.quit "Switch HTMLEditor">
+<!ENTITY sb.edit.html.menuitem.bold "Switch Bold">
+<!ENTITY sb.edit.html.menuitem.italic "Switch Italic">
+<!ENTITY sb.edit.html.menuitem.underline "Switch Underline">
+<!ENTITY sb.edit.html.menuitem.strikeThrough "Switch Line-through">
+<!ENTITY sb.edit.html.menuitem.setColor "Set Text and Background Color">
+<!ENTITY sb.edit.html.menuitem.increaseFontSize "Increase Text Size">
+<!ENTITY sb.edit.html.menuitem.decreaseFontSize "Decrease Text Size">
+<!ENTITY sb.edit.html.menuitem.superscript "Switch Superscript">
+<!ENTITY sb.edit.html.menuitem.subscript "Switch Subscript">
+<!ENTITY sb.edit.html.menuitem.formatblock_p "Set to Normal Paragraph">
+<!ENTITY sb.edit.html.menuitem.formatblock_h1 "Set to Header Level 1">
+<!ENTITY sb.edit.html.menuitem.formatblock_h2 "Set to Header Level 2">
+<!ENTITY sb.edit.html.menuitem.formatblock_h3 "Set to Header Level 3">
+<!ENTITY sb.edit.html.menuitem.formatblock_h4 "Set to Header Level 4">
+<!ENTITY sb.edit.html.menuitem.formatblock_h5 "Set to Header Level 5">
+<!ENTITY sb.edit.html.menuitem.formatblock_h6 "Set to Header Level 6">
+<!ENTITY sb.edit.html.menuitem.formatblock_div "Set to DIV Block">
+<!ENTITY sb.edit.html.menuitem.formatblock_pre "Set to PRE Block">
+<!ENTITY sb.edit.html.menuitem.insertUnorderedList "Switch Unordered List">
+<!ENTITY sb.edit.html.menuitem.insertOrderedList "Switch Ordered List">
+<!ENTITY sb.edit.html.menuitem.outdent "Outdent">
+<!ENTITY sb.edit.html.menuitem.indent "Indent">
+<!ENTITY sb.edit.html.menuitem.justifyLeft "Align Left">
+<!ENTITY sb.edit.html.menuitem.justifyRight "Align Right">
+<!ENTITY sb.edit.html.menuitem.justifyCenter "Align Center">
+<!ENTITY sb.edit.html.menuitem.justifyFull "Align Justify">
+<!ENTITY sb.edit.html.menuitem.attachLink "Insert a Link or Innerlink">
+<!ENTITY sb.edit.html.menuitem.attachFile "Insert a File or Sub-page">
+<!ENTITY sb.edit.html.menuitem.backupFile "Create a Backup for this Page">
+<!ENTITY sb.edit.html.menuitem.horizontalLine "Insert a Horizontal Rule">
+<!ENTITY sb.edit.html.menuitem.insertDate "Insert a Date">
+<!ENTITY sb.edit.html.menuitem.insertTodoBox "Insert a Todo Checkbox">
+<!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "Insert a Todo Checkbox (Checked)">
+<!ENTITY sb.edit.html.menuitem.wrapHTML "Format with Template">
+<!ENTITY sb.edit.cutter "Elimină selecția">
+<!ENTITY sb.edit.remove.iframe "Elimină toate etichetele IFRAME">
+<!ENTITY sb.edit.remove.script "Elimină toate etichetele SCRIPT">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to highlight the selection.">
+<!ENTITY sb.highlighter "Evidențiere">
+<!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
+<!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
+<!ENTITY sb.locate "Localizează în arborele lateral">
+<!ENTITY sb.indicators "Afișează indicatorii de legături">
+<!ENTITY sb.info.home "Origine">
+<!ENTITY sb.info.sitemap "Hartă sait">
+
+<!-- hlCustom.dtd -->
+<!ENTITY sb.hlCustom.preset "Stil predefinit:">
+<!ENTITY sb.hlCustom.background "Fundal">
+<!ENTITY sb.hlCustom.color "Culoare">
+<!ENTITY sb.hlCustom.text "Text">
+<!ENTITY sb.hlCustom.bold "Aldin">
+<!ENTITY sb.hlCustom.italic "Cursiv">
+<!ENTITY sb.hlCustom.line "Tăiat">
+<!ENTITY sb.hlCustom.border "Chenar">
+<!ENTITY sb.hlCustom.type "Tip">
+<!ENTITY sb.hlCustom.box "Casetă">
+<!ENTITY sb.hlCustom.underline "Subliniere">
+<!ENTITY sb.hlCustom.style "Stil">
+<!ENTITY sb.hlCustom.solid "Solid">
+<!ENTITY sb.hlCustom.dotted "Punctat">
+<!ENTITY sb.hlCustom.dashed "Întrerupt">
+<!ENTITY sb.hlCustom.double "Dublu">
+<!ENTITY sb.hlCustom.width "Grosime">
+<!ENTITY sb.hlCustom.thin "Subțire">
+<!ENTITY sb.hlCustom.medium "Mediu">
+<!ENTITY sb.hlCustom.thick "Gros">
+
+<!-- mbManage.dtd -->
+<!ENTITY mb.manager "Multi-ScrapBook Manager">
+<!ENTITY mb.prop.name "Denumire">
+<!ENTITY mb.prop.path "Cale">
+<!ENTITY mb.button.add "Adaugă">
+<!ENTITY mb.button.edit "Editează">
+<!ENTITY mb.button.remove "Elimină">
+
+<!-- multiple.dtd -->
+<!ENTITY sb.multiple.filter "Filtru">
+<!ENTITY sbp.multiple.titleofwebsite "Denumire sait web">
+<!ENTITY sbp.multiple.titleoflink "Denumire legătură">
+<!ENTITY sb.multiple.title "Denumire">
+<!ENTITY sb.multiple.timeout "Temporizare">
+<!ENTITY sbp.multiple.downloadmethod "Metodă">
+<!ENTITY sb.multiple.charset "Codare">
+<!ENTITY sb.multiple.url "Adrese (furnizați adresele câte una pe linie)">
+<!ENTITY sb.multiple.detector "Detector de adrese">
+<!ENTITY sb.multiple.detector.plink "Toate legăturile din pagină">
+<!ENTITY sb.multiple.detector.slink "Toate legăturile din selecție">
+<!ENTITY sb.multiple.detector.tabs "Toate filele deschise din fereastră">
+<!ENTITY sb.multiple.detector.local "Toate paginile HTML locale din dosar">
+<!ENTITY sb.multiple.detector.bookmarks "Semne de carte">
+<!ENTITY sb.multiple.detector.clear "Șterge">
+<!ENTITY sbp.multiple.exclude "Ignoră adresele deja existente în dosarul destinație">
+
+<!-- note.dtd -->
+<!ENTITY sb.note.save "Salvează">
+<!ENTITY sb.note.close "Închide">
+<!ENTITY sb.note.tools "Instrumente">
+<!ENTITY sb.note.htmlview "Vizualizează ca HTML">
+<!ENTITY sb.note.normalview "Vizualizează normal">
+<!ENTITY sb.note.template "Editează șablonul HTML">
+<!ENTITY sb.note.autolinefeed "Avans automat de linie">
+<!ENTITY sb.note.autolinefeed.t "Adaugă eticheta &lt;br&gt; la sfârșitul liniei în modul &sb.note.htmlview;">
+<!ENTITY sb.note.fontsize "Dimensiune font">
+<!ENTITY sb.note.help "Ajutor">
+<!ENTITY sb.note.print "Imprimă">
+<!ENTITY sb.note.exit "Termină">
+<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "V">
+<!ENTITY sb.note.tools.accesskey "I">
+<!ENTITY sb.note.fontsize.accesskey "f">
+<!ENTITY sb.note.print.accesskey "p">
+<!ENTITY sb.note.exit.accesskey "T">
+
+<!-- notify.dtd -->
+<!ENTITY sb.capture.complete "Capturare finalizată.">
+<!ENTITY sb.capture.complete.all "Toate capturările sunt finalizate.">
+
+<!-- output.dtd -->
+<!ENTITY sb.output.option.all "Scrie arborele complet">
+<!ENTITY sb.output.option.frame "Scrie și cadrele">
+<!ENTITY sb.output.option.open "După scriere, deschide fișierul în navigator">
+
+<!-- overlay.dtd -->
+<!ENTITY sb.capture.partial "Capturează selecția">
+<!ENTITY sb.capture.partial.as "Capturează selecția ca">
+<!ENTITY sb.capture.entire "Capturează pagina">
+<!ENTITY sb.capture.entire.as "Capturează pagina ca">
+<!ENTITY sb.capture.frame "Capturează cadrul">
+<!ENTITY sb.capture.frame.as "Capturează cadrul ca">
+<!ENTITY sb.capture.target "Capturează legătura">
+<!ENTITY sb.capture.target.as "Capturează legătura ca">
+<!ENTITY sb.capture.alltabs "Capturează din toate filele">
+<!ENTITY sb.capture.bookmark "Pune semn de carte ScrapBook">
+<!ENTITY sb.sidebar "Afișează în panoul lateral">
+<!ENTITY sb.menubar "Meniu">
+<!ENTITY sb.editbefore "Editează înaintea capturării">
+
+<!-- prefs.dtd -->
+<!ENTITY sb.prefs.main "Principal">
+<!ENTITY sb.prefs.keys "Keys">
+<!ENTITY sb.prefs.tabs "File">
+<!ENTITY sb.prefs.save "Salvare">
+<!ENTITY sb.prefs.edit "Editare">
+<!ENTITY sb.prefs.organize "Organizare">
+<!ENTITY sb.prefs.advanced "Complex">
+<!ENTITY sb.prefs.ui.contextMenu "Afișează în meniul contextual al navigatorului">
+<!ENTITY sb.prefs.ui.contextSubMenu "Afișează ca submeniu">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Afișează opțiunea „Semne de carte ScrapBook”">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Afișează ultimele">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "dosare deschise">
+<!ENTITY sb.prefs.ui.menuBar "Afișează în meniul principal">
+<!ENTITY sb.prefs.ui.menuBar.icon "Afișează doar pictograma">
+<!ENTITY sb.prefs.ui.toolsMenu "Afișează în meniul „Unelte”">
+<!ENTITY sb.prefs.ui.statusBar "Afișează în bara de stare">
+<!ENTITY sb.prefs.restart "Modificările sunt efective după repornirea navigatorului.">
+<!ENTITY sb.prefs.tabs.tips "Deschide în file pentru următoarele operații">
+<!ENTITY sb.prefs.tabs.note "Editează note">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
+<!ENTITY sb.prefs.data "Locație stocare date">
+<!ENTITY sb.prefs.data.default "Implicit (dosarul profilului)">
+<!ENTITY sb.prefs.data.custom "Dosarul:">
+<!ENTITY sb.prefs.data.tips "Alegeți dosarul de stocare a datelor ScrapBook.">
+<!ENTITY sb.prefs.multibook.enabled "Activează Multi-ScrapBook">
+<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook vă permite să alegeți locații multiple de salvare a datelor și să comutați rapid între ele cu un buton de pe bară.">
+<!ENTITY sb.prefs.confirmDelete "Avertizează când se șterg elemente din arbore">
+<!ENTITY sb.prefs.tree.autoCollapse "La deschiderea unui arbore de dosare, închide automat celelalte dosare">
+<!ENTITY sb.prefs.tree.unshift "Pune noile elemente">
+<!ENTITY sb.prefs.tree.unshift.top "la începutul arborelui">
+<!ENTITY sb.prefs.tree.unshift.bottom "la sfârșitul arborelui">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
+<!ENTITY sb.prefs.showDetailOnDrop "Afișează caseta „Detalii capturare” când se capturează prin glisare și fixare în panoul lateral">
+<!ENTITY sb.prefs.notifyOnComplete "Afișează notificarea „Capturare finalizată”">
+<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
+<!ENTITY sb.prefs.export "Export Preferences">
+<!ENTITY sb.prefs.import "Import Preferences">
+<!ENTITY sb.prefs.reset "Reset Preferences">
+<!ENTITY sb.button.customize "Personalizează">
+<!ENTITY sb.button.browse "Răsfoiește">
+<!ENTITY sb.button.show "Afișează fișierele">
+
+<!-- property.dtd -->
+<!ENTITY sb.prop.general "Informații generale">
+<!ENTITY sb.prop.type "Tip">
+<!ENTITY sb.prop.date "Dată"><!-- left for addon compatibility -->
+<!ENTITY sb.prop.create "Create">
+<!ENTITY sb.prop.modify "Modify">
+<!ENTITY sb.prop.encode "Codare">
+<!ENTITY sb.prop.size "Dimensiune">
+<!ENTITY sb.prop.content "Conținut">
+<!ENTITY sb.prop.file "File">
+<!ENTITY sb.prop.folder "Dosar">
+<!ENTITY sb.prop.icon "Pictogramă">
+<!ENTITY sb.prop.icon.change "Modifică ">
+<!ENTITY sb.prop.icon.default "Selectează pictograma implicită">
+<!ENTITY sb.prop.icon.favicon "Selectează pictograma favicon">
+<!ENTITY sb.prop.icon.custom "Selectează o pictogramă personală">
+<!ENTITY sb.prop.mark "Marchează">
+<!ENTITY sb.prop.lock "Lock">
+
+<!-- repair.dtd -->
+<!ENTITY sb.repair.rdfFile "Restaurează „scrapbook.rdf”">
+<!ENTITY sb.repair.rdfFile.descript "Încercați această procedură dacă arborele de dosare ScrapBook dispare brusc.">
+<!ENTITY sb.repair.rdfFile.select "Selectați un fișier arhivă pentru restaurare.">
+<!ENTITY sb.repair.rdfFile.file "Fișier">
+<!ENTITY sb.repair.rdfFile.time "Data modificării">
+<!ENTITY sb.repair.rdfFile.size "Dimensiune">
+<!ENTITY sb.repair.favicons "Restaurează pictogramele favicon în arborele de dosare">
+<!ENTITY sb.repair.favicons.descript "Încercați această procedură dacă mai multe pictograme favicon din arborele de dosare ScrapBook au dispărut.">
+<!ENTITY sb.repair.complete "Procedura a fost finalizată.">
+
+<!-- scrapbook.dtd -->
+<!ENTITY sb.toggle.all "Expandează/Restrânge toate dosarele">
+<!ENTITY sb.tools "Instrumente ">
+<!ENTITY sb.tools.options "Opțiuni">
+<!ENTITY sb.tools.manage "Configurare">
+<!ENTITY sb.tools.combine "Asistent combinare">
+<!ENTITY sb.tools.trade "Import/Export">
+<!ENTITY sb.tools.multiple "Capturare adrese multiple">
+<!ENTITY sb.tools.directory "Dosar ScrapBook">
+<!ENTITY sb.tools.calculate "Calculator dimensiuni">
+<!ENTITY sb.tools.sorttree "Sortare arbore de dosare">
+<!ENTITY sb.tools.output "Scriere arbore ca HTML">
+<!ENTITY sb.tools.repair "Reparare de urgență">
+<!ENTITY sb.tools.addons "Funcții adiționale">
+<!ENTITY sb.note.opentab "Deschide într-o filă">
+
+<!-- sort.dtd -->
+<!ENTITY sb.sort "Sortare">
+<!ENTITY sb.sort.reverse "Inversează ordinea">
+<!ENTITY sb.sort.title.asc "Sortează după denumire (A -&gt; Z)">
+<!ENTITY sb.sort.title.desc "Sortează după denumire (Z -&gt; A)">
+<!ENTITY sb.sort.date.asc "Sortează cronologic">
+<!ENTITY sb.sort.date.desc "Sortează invers cronologic">
+<!ENTITY sb.sort.grouping "Group by Type">
+<!ENTITY sb.sort.recursive "Sortează recursiv în subdosare">
+<!ENTITY sb.sort.warning "Notă: Nu puteți anula această operațiune.">
+
+<!-- templateHelp.dtd -->
+<!ENTITY sb.thelp.dir "ltr">
+<!ENTITY sb.thelp.title "Informaţii despre şablonul HTML ScrapBook">
+<!ENTITY sb.thelp.tags "Două etichete speciale">
+<!ENTITY sb.thelp.tag1 "Titlul notei (prima linie)">
+<!ENTITY sb.thelp.tag2 "Conţinutul notei (a doua linie şi următoarele)">
+<!ENTITY sb.thelp.preset "Şablon predefinit">
+
+<!-- trade.dtd -->
+<!ENTITY sb.trade.import "Importă">
+<!ENTITY sb.trade.export "Exportă">
+<!ENTITY sb.trade.time "Data exportului">
+<!ENTITY sb.trade.update "Import as latest ScrapBook X format">
+<!ENTITY sb.trade.restore "Importă refăcând structura dosarelor">
+<!ENTITY sb.trade.remove "Elimină fișierele după import">
+<!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">
+
+<!-- tree.dtd -->
+<!ENTITY sb.open "Deschide">
+<!ENTITY sb.open.native "Open in Default Program">
+<!ENTITY sb.open.tab "Deschide într-o filă">
+<!ENTITY sb.open.newtab "Deschide într-o filă nouă">
+<!ENTITY sb.open.source "Deschide adresa sursei">
+<!ENTITY sb.multi "Multi-ScrapBook">
+<!ENTITY sb.show.files "Afișează fișierele">
+<!ENTITY sb.move "Mută">
+<!ENTITY sb.move.into "Mută în dosar">
+<!ENTITY sb.copy "Copy">
+<!ENTITY sb.renew "Capturează din nou">
+<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.export "Exportă">
+<!ENTITY sb.remove "Șterge">
+<!ENTITY sb.property "Proprietăți">
+<!ENTITY sb.listview "Afișează în mod listă">
+<!ENTITY sb.prop.title "Denumire">
+<!ENTITY sb.prop.comment "Comentariu">
+<!ENTITY sbp.prop.url "Adresă">
+<!ENTITY sb.prop.id.date "ID">
+<!ENTITY sb.folder.combine "Vizualizează combinat">
+<!ENTITY sb.folder.openall "Deschide totul în file">
+<!ENTITY sb.folder.manage "Gestionează dosarul">
+<!ENTITY sb.new.folder "Dosar nou">
+<!ENTITY sb.new.separator "Separator nou">
+<!ENTITY sb.new.note "Notă nouă">
+<!ENTITY sb.new.notex "New Note Page">
+<!ENTITY sb.sort.folder "Sortează dosarul">
+<!ENTITY sb.search "Caută">
+<!ENTITY sb.search.fulltext "Întregul conținut">
+<!ENTITY sb.search.all "Toate">
+<!ENTITY sb.search.re "Utilizează expresii regulate">
+<!ENTITY sb.search.cs "Ține cont de majuscule și minuscule">
+<!ENTITY sb.search.cache "Actualizează cache-ul pentru căutare în tot conținutul">
+<!ENTITY sb.search.clear "Șterge istoricul">
+<!ENTITY sb.search.days "Filtrează după zile">
+<!ENTITY mb.manage "Gestionează">
+<!ENTITY mb.profileFolder "Dosar profil">
+

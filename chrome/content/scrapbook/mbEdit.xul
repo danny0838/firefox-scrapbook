@@ -4,12 +4,7 @@
 <?xml-stylesheet href="chrome://mozapps/content/preferences/preferences.css"?>
 <?xml-stylesheet href="chrome://browser/skin/preferences/preferences.css"?>
 
-<!DOCTYPE dialog [
-    <!ENTITY % mbManageDTD SYSTEM "chrome://scrapbook/locale/mbManage.dtd" >
-    %mbManageDTD;
-    <!ENTITY % settingDTD  SYSTEM "chrome://scrapbook/locale/prefs.dtd" >
-    %settingDTD;
-]>
+<!DOCTYPE dialog SYSTEM "chrome://scrapbook/locale/message.dtd">
 
 <dialog id="mbEditDialog"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"

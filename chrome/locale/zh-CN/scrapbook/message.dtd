@@ -1,0 +1,406 @@
+<!-- calculate.dtd -->
+<!ENTITY sb.calc.total.size "总大小">
+<!ENTITY sb.calc.diagnosis "检查结果">
+
+<!-- capture.dtd -->
+<!ENTITY sb.capture "获取">
+<!ENTITY sb.capture.abort "中止">
+<!ENTITY sb.capture.start "开始">
+<!ENTITY sb.capture.retry "重试">
+<!ENTITY sb.capture.skip "忽略">
+<!ENTITY sb.capture.pause "暂停">
+<!ENTITY sb.capture.finish "取消">
+<!ENTITY sb.capture.filter "过滤器">
+<!ENTITY sb.capture.filter.column.one "显示/隐藏">
+<!ENTITY sb.capture.filter.column.two "过滤规则（正则表达式）">
+<!ENTITY sb.capture.filter.accept "接受">
+<!ENTITY sb.capture.filter.accept.tt "修改或编辑值">
+<!ENTITY sb.capture.filter.cancel "取消">
+<!ENTITY sb.capture.filter.cancel.tt "中止编辑">
+<!ENTITY sb.capture.filter.delete "删除">
+<!ENTITY sb.capture.filter.delete.tt "从列表中移除过滤规则">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "标题">
+<!ENTITY sbp.capture.column.three "状态">
+
+<!-- combine.dtd -->
+<!ENTITY sb.combine.dragdrop "从树中拖拽您希望合并的条目到表中。您可以一次拖拽多个条目。">
+<!ENTITY sb.combine.preview "预览">
+<!ENTITY sb.combine.preview.d "预览确认无误后单击“合并”。">
+<!ENTITY sb.combine.option.remove "合并完成后删除原始页面">
+<!ENTITY sbp.combine.up "上移条目">
+<!ENTITY sbp.combine.down "下移条目">
+<!ENTITY sbp.combine.remove "移除条目">
+<!ENTITY sbp.combine.newTitle "新标题">
+
+<!-- detail.dtd -->
+<!ENTITY sb.detail.linked.timeout "超时 (秒)">
+<!ENTITY sb.detail.linked.charset "字符集">
+<!ENTITY sb.detail "详细信息">
+<!ENTITY sb.detail.new.folder "新建文件夹">
+<!ENTITY sb.detail.select.folder "选择文件夹">
+<!ENTITY sb.detail.option "选项">
+<!ENTITY sb.detail.option.capture "获取">
+<!ENTITY sb.detail.option.images "图片">
+<!ENTITY sb.detail.option.media "多媒体">
+<!ENTITY sb.detail.option.fonts "字体">
+<!ENTITY sb.detail.option.frames "页框">
+<!ENTITY sb.detail.option.styles "样式">
+<!ENTITY sb.detail.option.scripts "动态脚本">
+<!ENTITY sb.detail.option.keepLink "不获取的物件保持链接到原址">
+<!ENTITY sb.detail.option.rewriteStyles "重组样式表">
+<!ENTITY sb.detail.option.asHtml "非 HTML 档案获取呈现时的 HTML">
+<!ENTITY sb.detail.option.forceUtf8 "保存为 UTF-8 编码">
+<!ENTITY sb.detail.linked.file "下载链接的文件">
+<!ENTITY sb.detail.linked.image "图像">
+<!ENTITY sb.detail.linked.sound "音乐">
+<!ENTITY sb.detail.linked.movie "视频">
+<!ENTITY sb.detail.linked.archive "压缩文件">
+<!ENTITY sb.detail.linked.custom "自定义">
+<!ENTITY sb.detail.linked.page "深层获取">
+<!ENTITY sb.detail.linked.page.depth "获取链接层数">
+<!ENTITY sb.detail.linked.page.text "全部获取完成后，所有页面将保持彼此的链接并创建网站地图。">
+<!ENTITY sb.detail.warnAboutRenew "注意: “重新获取” 会覆盖以前保存的页面。">
+<!ENTITY sb.detail.warnAboutScript "注意: 将会因为 JavaScript 而引起很多问题。">
+
+<!-- editor.dtd -->
+<!ENTITY sb.toolbar.edit "编辑工具栏">
+<!ENTITY sb.toolbar.info "信息工具栏">
+<!ENTITY sb.edit.folderView "点击检视资料目录，中键点击在新分页开启。">
+<!ENTITY sb.edit.eraser "DOM 橡皮- 删除不想要的元素或 ScrapBook 注记">
+<!ENTITY sb.edit.undo "撤销">
+<!ENTITY sb.edit.save "保存">
+<!ENTITY sb.edit.comment "展开注释区">
+<!ENTITY sb.edit.annotationTool "注解工具 - 点击建立自由注解，锚定于选取区后，无选取区则自由浮动。">
+<!ENTITY sb.edit.sticky "即时贴"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "创建即时贴"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "创建自由注解">
+<!ENTITY sb.edit.inline.add "为所选内容添加行內注解">
+<!ENTITY sb.edit.attach.file "为所选内容附加文件">
+<!ENTITY sb.edit.attach.link "为所选内容附加链接">
+<!ENTITY sb.edit.attach.innerlink "为所选内容附加内部链接">
+<!ENTITY sb.edit.cutterTool "橡皮工具- 点击删除选取区，中键点击清除选取区内的 ScrapBook 注记。">
+<!ENTITY sb.edit.htmlTool "HTML 编辑器- 点击开启或关闭，开启后可自由编辑页面内容，并可透过快捷键或右键选单调用编辑功能。">
+<!ENTITY sb.edit.html "HTML 编辑器">
+<!ENTITY sb.edit.html.color "编辑颜色">
+<!ENTITY sb.edit.html.color.forText "设定文字颜色:">
+<!ENTITY sb.edit.html.color.forBg "设定背景颜色:">
+<!ENTITY sb.edit.html.source "编辑 HTML 源代码">
+<!ENTITY sb.edit.html.link "插入链接">
+<!ENTITY sb.edit.html.link.url "目标 URL:">
+<!ENTITY sb.edit.html.link.id "项目 ID:">
+<!ENTITY sb.edit.html.link.format "指定插入格式:">
+<!ENTITY sb.edit.html.file "插入文件">
+<!ENTITY sb.edit.html.file.pick "插入文件:">
+<!ENTITY sb.edit.html.file.html "插入子页面:">
+<!ENTITY sb.edit.html.file.format "指定插入格式:">
+<!ENTITY sb.edit.html.backup "备份当前页面">
+<!ENTITY sb.edit.html.backup.desc "描述:">
+<!ENTITY sb.edit.html.menu.basic "字符">
+<!ENTITY sb.edit.html.menu.block "区块">
+<!ENTITY sb.edit.html.menu.insert "插入">
+<!ENTITY sb.edit.html.menu.wrapper "高级">
+<!ENTITY sb.edit.html.menuitem.insertSource "插入或编辑源代码">
+<!ENTITY sb.edit.html.menuitem.removeFormat "清除格式">
+<!ENTITY sb.edit.html.menuitem.unlink "清除链接">
+<!ENTITY sb.edit.html.menuitem.save "保存页面">
+<!ENTITY sb.edit.html.menuitem.quit "切换 HTML 编辑器">
+<!ENTITY sb.edit.html.menuitem.bold "切换粗体">
+<!ENTITY sb.edit.html.menuitem.italic "切换斜体">
+<!ENTITY sb.edit.html.menuitem.underline "切换底线">
+<!ENTITY sb.edit.html.menuitem.strikeThrough "切换删除线">
+<!ENTITY sb.edit.html.menuitem.setColor "设定文字及背景颜色">
+<!ENTITY sb.edit.html.menuitem.increaseFontSize "放大字级">
+<!ENTITY sb.edit.html.menuitem.decreaseFontSize "缩小字级">
+<!ENTITY sb.edit.html.menuitem.superscript "切换上标">
+<!ENTITY sb.edit.html.menuitem.subscript "切换下标">
+<!ENTITY sb.edit.html.menuitem.formatblock_p "设定为一般段落">
+<!ENTITY sb.edit.html.menuitem.formatblock_h1 "设定为 1 级标题">
+<!ENTITY sb.edit.html.menuitem.formatblock_h2 "设定为 2 级标题">
+<!ENTITY sb.edit.html.menuitem.formatblock_h3 "设定为 3 级标题">
+<!ENTITY sb.edit.html.menuitem.formatblock_h4 "设定为 4 级标题">
+<!ENTITY sb.edit.html.menuitem.formatblock_h5 "设定为 5 级标题">
+<!ENTITY sb.edit.html.menuitem.formatblock_h6 "设定为 6 级标题">
+<!ENTITY sb.edit.html.menuitem.formatblock_div "设定为 DIV 区块">
+<!ENTITY sb.edit.html.menuitem.formatblock_pre "设定为 PRE 区块">
+<!ENTITY sb.edit.html.menuitem.insertUnorderedList "切换无序列表">
+<!ENTITY sb.edit.html.menuitem.insertOrderedList "切换有序列表">
+<!ENTITY sb.edit.html.menuitem.outdent "减少缩进">
+<!ENTITY sb.edit.html.menuitem.indent "增加缩进">
+<!ENTITY sb.edit.html.menuitem.justifyLeft "靠左对齐">
+<!ENTITY sb.edit.html.menuitem.justifyRight "靠右对齐">
+<!ENTITY sb.edit.html.menuitem.justifyCenter "置中对齐">
+<!ENTITY sb.edit.html.menuitem.justifyFull "左右对齐">
+<!ENTITY sb.edit.html.menuitem.attachLink "插入链接或内部链接">
+<!ENTITY sb.edit.html.menuitem.attachFile "插入文件或子页面">
+<!ENTITY sb.edit.html.menuitem.backupFile "建立此页面的备份">
+<!ENTITY sb.edit.html.menuitem.horizontalLine "插入水平线">
+<!ENTITY sb.edit.html.menuitem.insertDate "插入日期">
+<!ENTITY sb.edit.html.menuitem.insertTodoBox "插入待办事项选框">
+<!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "插入待办事项选框 (已勾选)">
+<!ENTITY sb.edit.html.menuitem.wrapHTML "用模版格式化">
+<!ENTITY sb.edit.cutter "删除所选内容">
+<!ENTITY sb.edit.remove.iframe "删除所有 IFRAME 标签">
+<!ENTITY sb.edit.remove.script "删除所有 SCRIPT 标签">
+<!ENTITY sb.highlighterTool "高亮标记工具- 点击以高亮标记选取区。">
+<!ENTITY sb.highlighter "高亮标记">
+<!ENTITY sb.highlighter.remove "清除选取区内的 ScrapBook 注记">
+<!ENTITY sb.highlighter.remove.all "清除所有 ScrapBook 注记">
+<!ENTITY sb.locate "与侧栏列表同步">
+<!ENTITY sb.indicators "显示链接指示器">
+<!ENTITY sb.info.home "主页">
+<!ENTITY sb.info.sitemap "网站地图">
+
+<!-- hlCustom.dtd -->
+<!ENTITY sb.hlCustom.preset "预置样式">
+<!ENTITY sb.hlCustom.background "背景">
+<!ENTITY sb.hlCustom.color "颜色">
+<!ENTITY sb.hlCustom.text "文字">
+<!ENTITY sb.hlCustom.bold "粗体">
+<!ENTITY sb.hlCustom.italic "斜体">
+<!ENTITY sb.hlCustom.line "删除线">
+<!ENTITY sb.hlCustom.border "边框">
+<!ENTITY sb.hlCustom.type "类型">
+<!ENTITY sb.hlCustom.box "方框">
+<!ENTITY sb.hlCustom.underline "下划线">
+<!ENTITY sb.hlCustom.style "样式">
+<!ENTITY sb.hlCustom.solid "实线">
+<!ENTITY sb.hlCustom.dotted "点划线">
+<!ENTITY sb.hlCustom.dashed "虚线">
+<!ENTITY sb.hlCustom.double "双线">
+<!ENTITY sb.hlCustom.width "宽度">
+<!ENTITY sb.hlCustom.thin "细">
+<!ENTITY sb.hlCustom.medium "中">
+<!ENTITY sb.hlCustom.thick "粗">
+
+<!-- mbManage.dtd -->
+<!ENTITY mb.manager "多重 ScrapBook 管理器">
+<!ENTITY mb.prop.name "名称">
+<!ENTITY mb.prop.path "路径">
+<!ENTITY mb.button.add "添加">
+<!ENTITY mb.button.edit "编辑">
+<!ENTITY mb.button.remove "删除">
+
+<!-- multiple.dtd -->
+<!ENTITY sb.multiple.filter "过滤器">
+<!ENTITY sbp.multiple.titleofwebsite "站点标题">
+<!ENTITY sbp.multiple.titleoflink "链接标题">
+<!ENTITY sb.multiple.title "标题">
+<!ENTITY sb.multiple.timeout "超时">
+<!ENTITY sbp.multiple.downloadmethod "方法">
+<!ENTITY sb.multiple.charset "字符集">
+<!ENTITY sb.multiple.url "URL (每行输入一个 URL)">
+<!ENTITY sb.multiple.detector "检测 URL">
+<!ENTITY sb.multiple.detector.plink "页面中包含的所有链接">
+<!ENTITY sb.multiple.detector.slink "所选内容中的所有链接">
+<!ENTITY sb.multiple.detector.tabs "当前所有打开的标签页">
+<!ENTITY sb.multiple.detector.local "本地存储的 HTML 文件">
+<!ENTITY sb.multiple.detector.bookmarks "Bookmarks">
+<!ENTITY sb.multiple.detector.clear "清除">
+<!ENTITY sbp.multiple.exclude "忽略目的文件夹中已存在的地址">
+
+<!-- note.dtd -->
+<!ENTITY sb.note.save "保存">
+<!ENTITY sb.note.close "关闭">
+<!ENTITY sb.note.tools "工具">
+<!ENTITY sb.note.htmlview "预览">
+<!ENTITY sb.note.normalview "常规视图">
+<!ENTITY sb.note.template "编辑 HTML 模板">
+<!ENTITY sb.note.autolinefeed "自动换行">
+<!ENTITY sb.note.autolinefeed.t "预览时在每行结尾自动添加 &lt;br&gt; 标记。">
+<!ENTITY sb.note.fontsize "字体大小">
+<!ENTITY sb.note.help "帮助">
+<!ENTITY sb.note.print "打印">
+<!ENTITY sb.note.exit "退出">
+<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "N">
+<!ENTITY sb.note.tools.accesskey "T">
+<!ENTITY sb.note.fontsize.accesskey "F">
+<!ENTITY sb.note.print.accesskey "P">
+<!ENTITY sb.note.exit.accesskey "X">
+
+<!-- notify.dtd -->
+<!ENTITY sb.capture.complete "获取完成">
+<!ENTITY sb.capture.complete.all "全部获取完成">
+
+<!-- output.dtd -->
+<!ENTITY sb.output.option.all "输出整个树">
+<!ENTITY sb.output.option.frame "连带页框一起输出">
+<!ENTITY sb.output.option.open "输出完成后，用浏览器打开">
+
+<!-- overlay.dtd -->
+<!ENTITY sb.capture.partial "获取所选内容">
+<!ENTITY sb.capture.partial.as "获取所选内容为">
+<!ENTITY sb.capture.entire "获取页面">
+<!ENTITY sb.capture.entire.as "获取页面为">
+<!ENTITY sb.capture.frame "获取框架">
+<!ENTITY sb.capture.frame.as "获取页框为">
+<!ENTITY sb.capture.target "获取链接">
+<!ENTITY sb.capture.target.as "获取链接为">
+<!ENTITY sb.capture.alltabs "获取所有标签页">
+<!ENTITY sb.capture.bookmark "加入 ScrapBook 书签">
+<!ENTITY sb.sidebar "在侧栏显示">
+<!ENTITY sb.menubar "菜单栏">
+<!ENTITY sb.editbefore "获取前进行编辑">
+
+<!-- prefs.dtd -->
+<!ENTITY sb.prefs.main "主要">
+<!ENTITY sb.prefs.keys "关键字">
+<!ENTITY sb.prefs.tabs "标签">
+<!ENTITY sb.prefs.save "保存">
+<!ENTITY sb.prefs.edit "编辑">
+<!ENTITY sb.prefs.organize "组织">
+<!ENTITY sb.prefs.advanced "高级">
+<!ENTITY sb.prefs.ui.contextMenu "在浏览器中显示上下文菜单">
+<!ENTITY sb.prefs.ui.contextSubMenu "子菜单">
+<!ENTITY sb.prefs.ui.bookmarkMenu "显示 &apos;Bookmark with ScrapBook&apos; 菜单">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "突出显示于">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "最近使用的文件夹">
+<!ENTITY sb.prefs.ui.menuBar "在菜单栏中显示">
+<!ENTITY sb.prefs.ui.menuBar.icon "图标">
+<!ENTITY sb.prefs.ui.toolsMenu "在“工具”菜单显示">
+<!ENTITY sb.prefs.ui.statusBar "在状态栏显示">
+<!ENTITY sb.prefs.restart "更改需要重启 Firefox。">
+<!ENTITY sb.prefs.tabs.tips "随后的操作在标签页中打开">
+<!ENTITY sb.prefs.tabs.note "编辑笔记">
+<!ENTITY sb.prefs.edit.autoEditNoteX "便签页面自动进入编辑模式">
+<!ENTITY sb.prefs.edit.insertDateFormat "插入日期格式 (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML 格式化模版">
+<!ENTITY sb.prefs.data "定位到存储数据的位置">
+<!ENTITY sb.prefs.data.default "默认">
+<!ENTITY sb.prefs.data.custom "保存数据至">
+<!ENTITY sb.prefs.data.tips "选择用户存储 ScrapBook 数据的文件夹。">
+<!ENTITY sb.prefs.multibook.enabled "启动 Multi-ScrapBook">
+<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook 可以使您设置多个存储数据的位置，而且您还可以在工具栏对这些位置进行快速切换。">
+<!ENTITY sb.prefs.confirmDelete "删除树状条目时警告万我">
+<!ENTITY sb.prefs.tree.autoCollapse "打开树状文件夹时，自动关闭其他文件夹">
+<!ENTITY sb.prefs.tree.unshift "放条目至">
+<!ENTITY sb.prefs.tree.unshift.top "文件夹顶部">
+<!ENTITY sb.prefs.tree.unshift.bottom "文件夹底部">
+<!ENTITY sb.prefs.asciiFilename "将文件保存为 ASCII 文件名">
+<!ENTITY sb.prefs.showDetailOnDrop "通过向侧栏拖拽进行捕获时显示 &apos;Capture Detail&apos; 对话框">
+<!ENTITY sb.prefs.notifyOnComplete "显示“捕获完成”提示">
+<!ENTITY sb.prefs.notifyPageCaptured "浏览获取过的页面时，显示提示">
+<!ENTITY sb.prefs.autoOutput "更动项目时，自动导出项目列表">
+<!ENTITY sb.prefs.export "导出偏好设定">
+<!ENTITY sb.prefs.import "导入偏好设定">
+<!ENTITY sb.prefs.reset "重置偏好设定">
+<!ENTITY sb.button.customize "定制">
+<!ENTITY sb.button.browse "浏览">
+<!ENTITY sb.button.show "显示文件">
+
+<!-- property.dtd -->
+<!ENTITY sb.prop.general "常规">
+<!ENTITY sb.prop.type "类型">
+<!ENTITY sb.prop.date "日期"><!-- left for addon compatibility -->
+<!ENTITY sb.prop.create "建立时间">
+<!ENTITY sb.prop.modify "修改时间">
+<!ENTITY sb.prop.encode "编码">
+<!ENTITY sb.prop.size "大小">
+<!ENTITY sb.prop.content "内容">
+<!ENTITY sb.prop.file "文件">
+<!ENTITY sb.prop.folder "文件夹">
+<!ENTITY sb.prop.icon "图标">
+<!ENTITY sb.prop.icon.change "更改">
+<!ENTITY sb.prop.icon.default "默认">
+<!ENTITY sb.prop.icon.favicon "选择个性化图标">
+<!ENTITY sb.prop.icon.custom "选择自定义图标">
+<!ENTITY sb.prop.mark "标记">
+<!ENTITY sb.prop.lock "上锁">
+
+<!-- repair.dtd -->
+<!ENTITY sb.repair.rdfFile "恢复项目列表">
+<!ENTITY sb.repair.rdfFile.descript "如果项目列表突然无法正常显示，请尝试此选项。">
+<!ENTITY sb.repair.rdfFile.select "请选择一个备份文件进行恢复">
+<!ENTITY sb.repair.rdfFile.file "文件">
+<!ENTITY sb.repair.rdfFile.time "时间">
+<!ENTITY sb.repair.rdfFile.size "大小">
+<!ENTITY sb.repair.favicons "恢复个性化图标">
+<!ENTITY sb.repair.favicons.descript "如果项目列表中有大量个性化图标丢失，请尝试此选项。">
+<!ENTITY sb.repair.complete "完成。">
+
+<!-- scrapbook.dtd -->
+<!ENTITY sb.toggle.all "打开 / 关闭全部文件夹">
+<!ENTITY sb.tools "工具">
+<!ENTITY sb.tools.options "选项">
+<!ENTITY sb.tools.manage "管理项目">
+<!ENTITY sb.tools.combine "合并向导">
+<!ENTITY sb.tools.trade "导入和导出">
+<!ENTITY sb.tools.multiple "多链接获取">
+<!ENTITY sb.tools.directory "ScrapBook 目录">
+<!ENTITY sb.tools.calculate "计算大小">
+<!ENTITY sb.tools.sorttree "排列项目列表">
+<!ENTITY sb.tools.output "导出项目列表">
+<!ENTITY sb.tools.repair "紧急修复">
+<!ENTITY sb.tools.addons "附加功能">
+<!ENTITY sb.note.opentab "在标签页中打开">
+
+<!-- sort.dtd -->
+<!ENTITY sb.sort "排列项目列表">
+<!ENTITY sb.sort.reverse "反序">
+<!ENTITY sb.sort.title.asc "标题 (A &gt; Z)">
+<!ENTITY sb.sort.title.desc "标题 (Z &gt; A)">
+<!ENTITY sb.sort.date.asc "时间 (升序)">
+<!ENTITY sb.sort.date.desc "时间 (降序)">
+<!ENTITY sb.sort.grouping "依型态分组">
+<!ENTITY sb.sort.recursive "包括所有子文件夹">
+<!ENTITY sb.sort.warning "注意: 此操作无法撤销。">
+
+<!-- templateHelp.dtd -->
+<!ENTITY sb.thelp.dir "ltr">
+<!ENTITY sb.thelp.title "ScrapBook HTML 模板帮助">
+<!ENTITY sb.thelp.tags "两个特殊的标签">
+<!ENTITY sb.thelp.tag1 "替换为便签的标题 (第一行)">
+<!ENTITY sb.thelp.tag2 "替换为便签的内容 (第二行及以下部分)">
+<!ENTITY sb.thelp.preset "预置 HTML 模板">
+
+<!-- trade.dtd -->
+<!ENTITY sb.trade.import "导入">
+<!ENTITY sb.trade.export "导出">
+<!ENTITY sb.trade.time "导出日期">
+<!ENTITY sb.trade.update "导入为最新版 ScrapBook X 格式">
+<!ENTITY sb.trade.restore "导入并重建目录结构">
+<!ENTITY sb.trade.remove "导入后删除原文件">
+<!ENTITY sb.trade.exportFolder "导出文件夹项目 (导入时注意顺序)">
+
+<!-- tree.dtd -->
+<!ENTITY sb.open "打开">
+<!ENTITY sb.open.native "以默认程序打开">
+<!ENTITY sb.open.tab "在标签页中打开">
+<!ENTITY sb.open.newtab "在新标签页中打开">
+<!ENTITY sb.open.source "打开原始链接">
+<!ENTITY sb.multi "多重 ScrapBook">
+<!ENTITY sb.show.files "查看文件">
+<!ENTITY sb.move "移动">
+<!ENTITY sb.move.into "移动">
+<!ENTITY sb.copy "复制">
+<!ENTITY sb.renew "重新获取">
+<!ENTITY sb.internalize "将内嵌的外部媒体存入资料目录">
+<!ENTITY sb.export "导出">
+<!ENTITY sb.remove "删除">
+<!ENTITY sb.property "属性">
+<!ENTITY sb.listview "详细列表">
+<!ENTITY sb.prop.title "标题">
+<!ENTITY sb.prop.comment "注释">
+<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.id.date "ID">
+<!ENTITY sb.folder.combine "合并在同一标签页中打开">
+<!ENTITY sb.folder.openall "在标签页中打开所有项目">
+<!ENTITY sb.folder.manage "管理文件夹">
+<!ENTITY sb.new.folder "新建文件夹">
+<!ENTITY sb.new.separator "新建分隔线">
+<!ENTITY sb.new.note "新建便签">
+<!ENTITY sb.new.notex "新建便签页面">
+<!ENTITY sb.sort.folder "排列项目列表">
+<!ENTITY sb.search "搜索">
+<!ENTITY sb.search.fulltext "全文搜索">
+<!ENTITY sb.search.all "全部">
+<!ENTITY sb.search.re "使用正则表达式">
+<!ENTITY sb.search.cs "区分大小写">
+<!ENTITY sb.search.cache "更新全文搜索缓存">
+<!ENTITY sb.search.clear "清空搜索历史记录">
+<!ENTITY sb.search.days "按时间段过滤查寻">
+<!ENTITY mb.manage "管理">
+<!ENTITY mb.profileFolder "配置文件夹">
+

@@ -73,7 +73,7 @@ var sbCalcService = {
                 valid,
             ]);
             if ( !valid ) this.invalidCount++;
-            this.STATUS.label = sbCommonUtils.lang("property", "CALCULATING", [this.count, this.total]);
+            this.STATUS.label = sbCommonUtils.lang("CALCULATING", this.count, this.total);
             this.PROGRESS.value = Math.round(this.count / this.total * 100);
         }
         setTimeout(function() { sbCalcService.processAsync(); }, 0);
@@ -85,8 +85,8 @@ var sbCalcService = {
         this.initTree();
         this.STATUS.label = "";
         this.PROGRESS.hidden = true;
-        document.getElementById("sbCalcTotalSize").value = sbCommonUtils.lang("property", "ITEMS_COUNT", [sbCommonUtils.formatFileSize(this.grandSum), this.count, this.total]);
-        document.getElementById("sbCalcDiagnosis").value = ( this.invalidCount == 0 ) ? sbCommonUtils.lang("property", "DIAGNOSIS_OK") : sbCommonUtils.lang("property", "DIAGNOSIS_NG", [this.invalidCount]);
+        document.getElementById("sbCalcTotalSize").value = sbCommonUtils.lang("ITEMS_COUNT", sbCommonUtils.formatFileSize(this.grandSum), this.count, this.total);
+        document.getElementById("sbCalcDiagnosis").value = ( this.invalidCount == 0 ) ? sbCommonUtils.lang("DIAGNOSIS_OK") : sbCommonUtils.lang("DIAGNOSIS_NG", this.invalidCount);
         this.checkDoubleEntries();
     },
 
@@ -101,7 +101,7 @@ var sbCalcService = {
             switch ( col.index ) {
                 case 0: return this._items[row][2]; break;
                 case 1: return this._items[row][5]; break;
-                case 2: return this._items[row][6] ? "" : sbCommonUtils.lang("property", "INVALID"); break;
+                case 2: return this._items[row][6] ? "" : sbCommonUtils.lang("INVALID"); break;
             }
         };
         treeView.getImageSrc = function(row, col) {
@@ -128,7 +128,7 @@ var sbCalcService = {
         var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"), 0, true);
         for ( var i = 0; i < resList.length; i++ ) {
             if ( resList[i].Value in hashTable ) {
-                sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "WARN_DOUBLE_ENTRY", [sbDataSource.getProperty(resList[i], "title")]));
+                sbCommonUtils.alert(sbCommonUtils.lang("WARN_DOUBLE_ENTRY", sbDataSource.getProperty(resList[i], "title")));
                 var parRes = sbDataSource.findParentResource(resList[i]);
                 if ( parRes ) sbDataSource.removeFromContainer(parRes.Value, resList[i]);
             }

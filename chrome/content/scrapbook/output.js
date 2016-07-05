@@ -13,7 +13,7 @@ var sbOutputService = {
      */
     init: function() {
         if (window.arguments && window.arguments[0]) this.isAuto = true;
-        document.documentElement.getButton("accept").label = sbCommonUtils.lang("scrapbook", "START_BUTTON");
+        document.documentElement.getButton("accept").label = sbCommonUtils.lang("START_BUTTON");
         sbTreeHandler.init(true);
         this.selectAllFolders();
         if ( this.isAuto ) this.start();

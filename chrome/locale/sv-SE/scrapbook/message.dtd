@@ -1,0 +1,406 @@
+<!-- calculate.dtd -->
+<!ENTITY sb.calc.total.size "Total storlek">
+<!ENTITY sb.calc.diagnosis "Diagnos">
+
+<!-- capture.dtd -->
+<!ENTITY sb.capture "Fånga in">
+<!ENTITY sb.capture.abort "Avbryt">
+<!ENTITY sb.capture.start "Starta">
+<!ENTITY sb.capture.retry "Försök igen">
+<!ENTITY sb.capture.skip "Hoppa över">
+<!ENTITY sb.capture.pause "Pausa">
+<!ENTITY sb.capture.finish "Avbryt">
+<!ENTITY sb.capture.filter "Filtrera">
+<!ENTITY sb.capture.filter.column.one "Visa/Dölj">
+<!ENTITY sb.capture.filter.column.two "Filter (reguljärt uttryck)">
+<!ENTITY sb.capture.filter.accept "Acceptera">
+<!ENTITY sb.capture.filter.accept.tt "Ändra eller redigera värde">
+<!ENTITY sb.capture.filter.cancel "Avbryt">
+<!ENTITY sb.capture.filter.cancel.tt "Avbryt redigering">
+<!ENTITY sb.capture.filter.delete "Ta bort">
+<!ENTITY sb.capture.filter.delete.tt "Ta bort filter från listan">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "Rubrik">
+<!ENTITY sbp.capture.column.three "Status">
+
+<!-- combine.dtd -->
+<!ENTITY sb.combine.dragdrop "Lägg till objekt genom att dra och släppa från trädet i den ordning du vill kombinera dem. Du kan dra och släppa flera objekt samtidigt.">
+<!ENTITY sb.combine.preview "Förhandsgranska">
+<!ENTITY sb.combine.preview.d "Klicka på knappen &quot;Kombinera&quot; när du har godkänt förhandsgranskningen.">
+<!ENTITY sb.combine.option.remove "Ta bort originalsidorna efter slutförd kombinering">
+<!ENTITY sbp.combine.up "Flytta objekt uppåt">
+<!ENTITY sbp.combine.down "Flytta objekt nedåt">
+<!ENTITY sbp.combine.remove "Ta bort objekt">
+<!ENTITY sbp.combine.newTitle "Ny rubrik">
+
+<!-- detail.dtd -->
+<!ENTITY sb.detail.linked.timeout "Tidsgräns (s)">
+<!ENTITY sb.detail.linked.charset "Teckenuppsättning">
+<!ENTITY sb.detail "Infångstinformation">
+<!ENTITY sb.detail.new.folder "Ny mapp">
+<!ENTITY sb.detail.select.folder "Välj mapp">
+<!ENTITY sb.detail.option "Inställningar">
+<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.images "Bilder">
+<!ENTITY sb.detail.option.media "Media">
+<!ENTITY sb.detail.option.fonts "Fonts">
+<!ENTITY sb.detail.option.frames "Frames">
+<!ENTITY sb.detail.option.styles "Format">
+<!ENTITY sb.detail.option.scripts "Scripts">
+<!ENTITY sb.detail.option.keepLink "Keep linking to the source for not-captured objects">
+<!ENTITY sb.detail.option.rewriteStyles "Reorganize Styles">
+<!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
+<!ENTITY sb.detail.linked.file "Ladda ner länkade filer">
+<!ENTITY sb.detail.linked.image "Bild">
+<!ENTITY sb.detail.linked.sound "Ljud">
+<!ENTITY sb.detail.linked.movie "Video">
+<!ENTITY sb.detail.linked.archive "Arkiv">
+<!ENTITY sb.detail.linked.custom "Egna…">
+<!ENTITY sb.detail.linked.page "Djupgående infångst">
+<!ENTITY sb.detail.linked.page.depth "Siddjup">
+<!ENTITY sb.detail.linked.page.text "När infångsterna har slutförts, så kommer alla sidor att vara länkade till varandra och en webbplatskarta kommer att skapas.">
+<!ENTITY sb.detail.warnAboutRenew "OBS: &quot;Fånga in igen&quot; ersätter den tidigare sparade sidan.">
+<!ENTITY sb.detail.warnAboutScript "OBS: JavaScript kan orsaka vissa problem.">
+
+<!-- editor.dtd -->
+<!ENTITY sb.toolbar.edit "Redigeringsfältet">
+<!ENTITY sb.toolbar.info "Informationsfältet">
+<!ENTITY sb.edit.folderView "Click to view the data directory. Middle-click to open in a new tab.">
+<!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
+<!ENTITY sb.edit.undo "Ångra">
+<!ENTITY sb.edit.save "Spara ändringar">
+<!ENTITY sb.edit.comment "Visa kommenteringsområdet">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
+<!ENTITY sb.edit.sticky "Klisterlapp"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "Skapa klisterlapp"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "Create Freenote">
+<!ENTITY sb.edit.inline.add "Lägg till infogad anteckning i markering">
+<!ENTITY sb.edit.attach.file "Bifoga fil till markering">
+<!ENTITY sb.edit.attach.link "Bifoga länk till markering">
+<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.cutterTool "Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.">
+<!ENTITY sb.edit.htmlTool "HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.">
+<!ENTITY sb.edit.html "HTML Editor">
+<!ENTITY sb.edit.html.color "Edit Color">
+<!ENTITY sb.edit.html.color.forText "Set text color:">
+<!ENTITY sb.edit.html.color.forBg "Set background color:">
+<!ENTITY sb.edit.html.source "Edit HTML Source">
+<!ENTITY sb.edit.html.link "Insert Link">
+<!ENTITY sb.edit.html.link.url "Target URL:">
+<!ENTITY sb.edit.html.link.id "Item ID:">
+<!ENTITY sb.edit.html.link.format "Select insert format:">
+<!ENTITY sb.edit.html.file "Insert File">
+<!ENTITY sb.edit.html.file.pick "Insert file:">
+<!ENTITY sb.edit.html.file.html "Insert sub-page:">
+<!ENTITY sb.edit.html.file.format "Select insert format:">
+<!ENTITY sb.edit.html.backup "Backup the Current Page">
+<!ENTITY sb.edit.html.backup.desc "Description:">
+<!ENTITY sb.edit.html.menu.basic "Text">
+<!ENTITY sb.edit.html.menu.block "Block">
+<!ENTITY sb.edit.html.menu.insert "Insert">
+<!ENTITY sb.edit.html.menu.wrapper "Advanced">
+<!ENTITY sb.edit.html.menuitem.insertSource "Insert or Edit Source">
+<!ENTITY sb.edit.html.menuitem.removeFormat "Clear Formats">
+<!ENTITY sb.edit.html.menuitem.unlink "Clear Links">
+<!ENTITY sb.edit.html.menuitem.save "Save the Page">
+<!ENTITY sb.edit.html.menuitem.quit "Switch HTMLEditor">
+<!ENTITY sb.edit.html.menuitem.bold "Switch Bold">
+<!ENTITY sb.edit.html.menuitem.italic "Switch Italic">
+<!ENTITY sb.edit.html.menuitem.underline "Switch Underline">
+<!ENTITY sb.edit.html.menuitem.strikeThrough "Switch Line-through">
+<!ENTITY sb.edit.html.menuitem.setColor "Set Text and Background Color">
+<!ENTITY sb.edit.html.menuitem.increaseFontSize "Increase Text Size">
+<!ENTITY sb.edit.html.menuitem.decreaseFontSize "Decrease Text Size">
+<!ENTITY sb.edit.html.menuitem.superscript "Switch Superscript">
+<!ENTITY sb.edit.html.menuitem.subscript "Switch Subscript">
+<!ENTITY sb.edit.html.menuitem.formatblock_p "Set to Normal Paragraph">
+<!ENTITY sb.edit.html.menuitem.formatblock_h1 "Set to Header Level 1">
+<!ENTITY sb.edit.html.menuitem.formatblock_h2 "Set to Header Level 2">
+<!ENTITY sb.edit.html.menuitem.formatblock_h3 "Set to Header Level 3">
+<!ENTITY sb.edit.html.menuitem.formatblock_h4 "Set to Header Level 4">
+<!ENTITY sb.edit.html.menuitem.formatblock_h5 "Set to Header Level 5">
+<!ENTITY sb.edit.html.menuitem.formatblock_h6 "Set to Header Level 6">
+<!ENTITY sb.edit.html.menuitem.formatblock_div "Set to DIV Block">
+<!ENTITY sb.edit.html.menuitem.formatblock_pre "Set to PRE Block">
+<!ENTITY sb.edit.html.menuitem.insertUnorderedList "Switch Unordered List">
+<!ENTITY sb.edit.html.menuitem.insertOrderedList "Switch Ordered List">
+<!ENTITY sb.edit.html.menuitem.outdent "Outdent">
+<!ENTITY sb.edit.html.menuitem.indent "Indent">
+<!ENTITY sb.edit.html.menuitem.justifyLeft "Align Left">
+<!ENTITY sb.edit.html.menuitem.justifyRight "Align Right">
+<!ENTITY sb.edit.html.menuitem.justifyCenter "Align Center">
+<!ENTITY sb.edit.html.menuitem.justifyFull "Align Justify">
+<!ENTITY sb.edit.html.menuitem.attachLink "Insert a Link or Innerlink">
+<!ENTITY sb.edit.html.menuitem.attachFile "Insert a File or Sub-page">
+<!ENTITY sb.edit.html.menuitem.backupFile "Create a Backup for this Page">
+<!ENTITY sb.edit.html.menuitem.horizontalLine "Insert a Horizontal Rule">
+<!ENTITY sb.edit.html.menuitem.insertDate "Insert a Date">
+<!ENTITY sb.edit.html.menuitem.insertTodoBox "Insert a Todo Checkbox">
+<!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "Insert a Todo Checkbox (Checked)">
+<!ENTITY sb.edit.html.menuitem.wrapHTML "Format with Template">
+<!ENTITY sb.edit.cutter "Ta bort markering">
+<!ENTITY sb.edit.remove.iframe "Ta bort alla IFRAME-taggar">
+<!ENTITY sb.edit.remove.script "Ta bort alla SCRIPT-taggar">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to highlight the selection.">
+<!ENTITY sb.highlighter "Överstrykningspenna">
+<!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
+<!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
+<!ENTITY sb.locate "Hitta i sidopanelsträdet">
+<!ENTITY sb.indicators "Visa länkindikatorer">
+<!ENTITY sb.info.home "Hem">
+<!ENTITY sb.info.sitemap "Webbplatskarta">
+
+<!-- hlCustom.dtd -->
+<!ENTITY sb.hlCustom.preset "Förinställt format">
+<!ENTITY sb.hlCustom.background "Bakgrund">
+<!ENTITY sb.hlCustom.color "Färg">
+<!ENTITY sb.hlCustom.text "Text">
+<!ENTITY sb.hlCustom.bold "Fet">
+<!ENTITY sb.hlCustom.italic "Kursiv">
+<!ENTITY sb.hlCustom.line "Genomstruken">
+<!ENTITY sb.hlCustom.border "Kantlinje">
+<!ENTITY sb.hlCustom.type "Typ">
+<!ENTITY sb.hlCustom.box "Inramning">
+<!ENTITY sb.hlCustom.underline "Understrykning">
+<!ENTITY sb.hlCustom.style "Format">
+<!ENTITY sb.hlCustom.solid "Heldragen">
+<!ENTITY sb.hlCustom.dotted "Prickad">
+<!ENTITY sb.hlCustom.dashed "Streckad">
+<!ENTITY sb.hlCustom.double "Dubbel linje">
+<!ENTITY sb.hlCustom.width "Bredd">
+<!ENTITY sb.hlCustom.thin "Tunn">
+<!ENTITY sb.hlCustom.medium "Medeltjock">
+<!ENTITY sb.hlCustom.thick "Tjock">
+
+<!-- mbManage.dtd -->
+<!ENTITY mb.manager "Multi-ScrapBook Manager">
+<!ENTITY mb.prop.name "Namn">
+<!ENTITY mb.prop.path "Sökväg">
+<!ENTITY mb.button.add "Lägg till">
+<!ENTITY mb.button.edit "Redigera">
+<!ENTITY mb.button.remove "Ta bort">
+
+<!-- multiple.dtd -->
+<!ENTITY sb.multiple.filter "Filter (reguljärt uttryck)">
+<!ENTITY sbp.multiple.titleofwebsite "Webbplatsrubrik">
+<!ENTITY sbp.multiple.titleoflink "Länkrubrik">
+<!ENTITY sb.multiple.title "Rubrik">
+<!ENTITY sb.multiple.timeout "Tidsgräns">
+<!ENTITY sbp.multiple.downloadmethod "Metod">
+<!ENTITY sb.multiple.charset "Teckenuppsättning">
+<!ENTITY sb.multiple.url "URL:er (ange en URL per rad)">
+<!ENTITY sb.multiple.detector "URL-identifiering">
+<!ENTITY sb.multiple.detector.plink "Alla länkar på sidan">
+<!ENTITY sb.multiple.detector.slink "Alla länkar i markeringen">
+<!ENTITY sb.multiple.detector.tabs "Alla öppna flikar i fönstret">
+<!ENTITY sb.multiple.detector.local "Alla lokala HTML-filer i en mapp">
+<!ENTITY sb.multiple.detector.bookmarks "Bokmärken">
+<!ENTITY sb.multiple.detector.clear "Rensa">
+<!ENTITY sbp.multiple.exclude "Ignorera redan befintliga adresser i målmappen">
+
+<!-- note.dtd -->
+<!ENTITY sb.note.save "Spara">
+<!ENTITY sb.note.close "Stäng">
+<!ENTITY sb.note.tools "Verktyg">
+<!ENTITY sb.note.htmlview "HTML-vy">
+<!ENTITY sb.note.normalview "Normalvy">
+<!ENTITY sb.note.template "Redigera HTML-mall">
+<!ENTITY sb.note.autolinefeed "Automatisk vagnretur">
+<!ENTITY sb.note.autolinefeed.t "Lägger till &lt;br&gt; -taggar i radsluten i HTML-vyn">
+<!ENTITY sb.note.fontsize "Fontstorlek">
+<!ENTITY sb.note.help "Hjälp">
+<!ENTITY sb.note.print "Skriv ut">
+<!ENTITY sb.note.exit "Avsluta">
+<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "N">
+<!ENTITY sb.note.tools.accesskey "V">
+<!ENTITY sb.note.fontsize.accesskey "F">
+<!ENTITY sb.note.print.accesskey "u">
+<!ENTITY sb.note.exit.accesskey "A">
+
+<!-- notify.dtd -->
+<!ENTITY sb.capture.complete "Infångsten har slutförts.">
+<!ENTITY sb.capture.complete.all "Alla infångster har slutförts.">
+
+<!-- output.dtd -->
+<!ENTITY sb.output.option.all "Utdata för hela trädet">
+<!ENTITY sb.output.option.frame "Utdata med ram">
+<!ENTITY sb.output.option.open "Öppna utdataresultatet i webbläsaren">
+
+<!-- overlay.dtd -->
+<!ENTITY sb.capture.partial "Fånga in markering">
+<!ENTITY sb.capture.partial.as "Fånga in markering som">
+<!ENTITY sb.capture.entire "Fånga in sida">
+<!ENTITY sb.capture.entire.as "Fånga in sida som">
+<!ENTITY sb.capture.frame "Fånga in ram">
+<!ENTITY sb.capture.frame.as "Fånga in ram som">
+<!ENTITY sb.capture.target "Fånga in länk">
+<!ENTITY sb.capture.target.as "Fånga in länk som">
+<!ENTITY sb.capture.alltabs "Fånga in alla flikar">
+<!ENTITY sb.capture.bookmark "Bokmärk med ScrapBook">
+<!ENTITY sb.sidebar "Visa i sidopanelen">
+<!ENTITY sb.menubar "Meny">
+<!ENTITY sb.editbefore "Redigera innan infångst">
+
+<!-- prefs.dtd -->
+<!ENTITY sb.prefs.main "Allmänt">
+<!ENTITY sb.prefs.keys "Keys">
+<!ENTITY sb.prefs.tabs "Flikar">
+<!ENTITY sb.prefs.save "Spara">
+<!ENTITY sb.prefs.edit "Redigera">
+<!ENTITY sb.prefs.organize "Ordna">
+<!ENTITY sb.prefs.advanced "Avancerat">
+<!ENTITY sb.prefs.ui.contextMenu "Visa i webbläsarens snabbmeny">
+<!ENTITY sb.prefs.ui.contextSubMenu "Visa som en undermeny">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Visa menyn &quot;Bokmärk med ScrapBook&quot;">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Visa upp till">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "nyligen använda mappar">
+<!ENTITY sb.prefs.ui.menuBar "Visa i menyraden">
+<!ENTITY sb.prefs.ui.menuBar.icon "Ikon">
+<!ENTITY sb.prefs.ui.toolsMenu "Visa i &quot;Verktyg&quot;-menyn">
+<!ENTITY sb.prefs.ui.statusBar "Visa i statusfältet">
+<!ENTITY sb.prefs.restart "Ändring kräver att Firefox startas om.">
+<!ENTITY sb.prefs.tabs.tips "Öppna följande åtgärder i ny flik">
+<!ENTITY sb.prefs.tabs.note "Redigera anteckning">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
+<!ENTITY sb.prefs.data "Lagringsplats för data">
+<!ENTITY sb.prefs.data.default "Standard (profilmappen)">
+<!ENTITY sb.prefs.data.custom "Spara data till">
+<!ENTITY sb.prefs.data.tips "Välj en mapp där ScrapBook-data skall lagras.">
+<!ENTITY sb.prefs.multibook.enabled "Aktivera Multi-ScrapBook">
+<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook låter dig upprätta flera lagringsplatser för data och snabbt byta mellan dem m.h.a. en verktygsfältsknapp.">
+<!ENTITY sb.prefs.confirmDelete "Varna mig vid borttagning av trädobjekt">
+<!ENTITY sb.prefs.tree.autoCollapse "När en trädmapp öppnas, stäng automatiskt övriga mappar">
+<!ENTITY sb.prefs.tree.unshift "Placera nya objekt">
+<!ENTITY sb.prefs.tree.unshift.top "överst i mappen">
+<!ENTITY sb.prefs.tree.unshift.bottom "nederst i mappen">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
+<!ENTITY sb.prefs.showDetailOnDrop "Visa dialogen &quot;Infångstinformation&quot; vid infångst via dra och släpp i sidofältet">
+<!ENTITY sb.prefs.notifyOnComplete "Visa meddelandet &quot;Infångsten har slutförts&quot;">
+<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
+<!ENTITY sb.prefs.export "Export Preferences">
+<!ENTITY sb.prefs.import "Import Preferences">
+<!ENTITY sb.prefs.reset "Reset Preferences">
+<!ENTITY sb.button.customize "Anpassa">
+<!ENTITY sb.button.browse "Bläddra">
+<!ENTITY sb.button.show "Visa filer">
+
+<!-- property.dtd -->
+<!ENTITY sb.prop.general "Allmän information">
+<!ENTITY sb.prop.type "Typ">
+<!ENTITY sb.prop.date "Datum"><!-- left for addon compatibility -->
+<!ENTITY sb.prop.create "Create">
+<!ENTITY sb.prop.modify "Modify">
+<!ENTITY sb.prop.encode "Kodning">
+<!ENTITY sb.prop.size "Storlek">
+<!ENTITY sb.prop.content "Innehåll">
+<!ENTITY sb.prop.file "File">
+<!ENTITY sb.prop.folder "Mapp">
+<!ENTITY sb.prop.icon "Ikon">
+<!ENTITY sb.prop.icon.change "Byt">
+<!ENTITY sb.prop.icon.default "Standard">
+<!ENTITY sb.prop.icon.favicon "Välj sajtikon">
+<!ENTITY sb.prop.icon.custom "Välj användarikon">
+<!ENTITY sb.prop.mark "Märk">
+<!ENTITY sb.prop.lock "Lock">
+
+<!-- repair.dtd -->
+<!ENTITY sb.repair.rdfFile "Återställ scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript "Prova detta ifall ScrapBook-trädet plötsligt försvinner.">
+<!ENTITY sb.repair.rdfFile.select "Välj en säkerhetskopiefil till återställningen.">
+<!ENTITY sb.repair.rdfFile.file "Fil">
+<!ENTITY sb.repair.rdfFile.time "Tid">
+<!ENTITY sb.repair.rdfFile.size "Storlek">
+<!ENTITY sb.repair.favicons "Återställ sajtikoner i trädet">
+<!ENTITY sb.repair.favicons.descript "Prova detta ifall många sajtikoner i ScrapBook-trädet försvinner.">
+<!ENTITY sb.repair.complete "Slutförd.">
+
+<!-- scrapbook.dtd -->
+<!ENTITY sb.toggle.all "Öppna/Stäng alla mappar">
+<!ENTITY sb.tools "Verktyg">
+<!ENTITY sb.tools.options "Inställningar">
+<!ENTITY sb.tools.manage "Hantera">
+<!ENTITY sb.tools.combine "Kombineringsguiden">
+<!ENTITY sb.tools.trade "Importera/Exportera">
+<!ENTITY sb.tools.multiple "Fånga in flera URL:er">
+<!ENTITY sb.tools.directory "Öppna ScrapBook-mappen">
+<!ENTITY sb.tools.calculate "Beräkning av storlek">
+<!ENTITY sb.tools.sorttree "Sortera hela trädet">
+<!ENTITY sb.tools.output "Formatera utgående träddata som HTML">
+<!ENTITY sb.tools.repair "Nödreparation">
+<!ENTITY sb.tools.addons "Tilläggsfunktioner">
+<!ENTITY sb.note.opentab "Öppna in flik">
+
+<!-- sort.dtd -->
+<!ENTITY sb.sort "Sortera">
+<!ENTITY sb.sort.reverse "Omvänd ordning">
+<!ENTITY sb.sort.title.asc "Sortera efter rubrik (A &gt; Ö)">
+<!ENTITY sb.sort.title.desc "Sortera efter rubrik (Ö &gt; A)">
+<!ENTITY sb.sort.date.asc "Sortera kronologiskt">
+<!ENTITY sb.sort.date.desc "Omvänd kronologisk ordning">
+<!ENTITY sb.sort.grouping "Group by Type">
+<!ENTITY sb.sort.recursive "Sortera undermappar rekursivt">
+<!ENTITY sb.sort.warning "Obs: Du kan inte ångra denna åtgärd.">
+
+<!-- templateHelp.dtd -->
+<!ENTITY sb.thelp.dir "ltr">
+<!ENTITY sb.thelp.title "ScrapBooks HTML-mallshjälp">
+<!ENTITY sb.thelp.tags "Två specialtaggar">
+<!ENTITY sb.thelp.tag1 "Rubriken (den första raden) i anteckningen">
+<!ENTITY sb.thelp.tag2 "Innehållet (den andra raden eller senare) i anteckningen">
+<!ENTITY sb.thelp.preset "Förinställd mall">
+
+<!-- trade.dtd -->
+<!ENTITY sb.trade.import "Importera">
+<!ENTITY sb.trade.export "Exportera">
+<!ENTITY sb.trade.time "Exporttidpunkt">
+<!ENTITY sb.trade.update "Import as latest ScrapBook X format">
+<!ENTITY sb.trade.restore "Importera och återskapa mappstrukturen">
+<!ENTITY sb.trade.remove "Ta bort filer efter import">
+<!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">
+
+<!-- tree.dtd -->
+<!ENTITY sb.open "Öppna">
+<!ENTITY sb.open.native "Open in Default Program">
+<!ENTITY sb.open.tab "Öppna i flik">
+<!ENTITY sb.open.newtab "Öppna i ny flik">
+<!ENTITY sb.open.source "Öppna käll-URL">
+<!ENTITY sb.multi "Multi-ScrapBook">
+<!ENTITY sb.show.files "Visa filer">
+<!ENTITY sb.move "Flytta">
+<!ENTITY sb.move.into "Flytta till mapp">
+<!ENTITY sb.copy "Copy">
+<!ENTITY sb.renew "Fånga in igen">
+<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.export "Exportera">
+<!ENTITY sb.remove "Ta bort">
+<!ENTITY sb.property "Egenskaper">
+<!ENTITY sb.listview "Listvy">
+<!ENTITY sb.prop.title "Rubrik">
+<!ENTITY sb.prop.comment "Kommentar">
+<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.id.date "ID">
+<!ENTITY sb.folder.combine "Kombinerad vy">
+<!ENTITY sb.folder.openall "Öppna alla i flikar">
+<!ENTITY sb.folder.manage "Hantera mapp">
+<!ENTITY sb.new.folder "Ny mapp">
+<!ENTITY sb.new.separator "Ny avgränsare">
+<!ENTITY sb.new.note "Ny anteckning">
+<!ENTITY sb.new.notex "New Note Page">
+<!ENTITY sb.sort.folder "Sortera mapp">
+<!ENTITY sb.search "Sök">
+<!ENTITY sb.search.fulltext "Fulltextsökning">
+<!ENTITY sb.search.all "Alla">
+<!ENTITY sb.search.re "Använd RegExp">
+<!ENTITY sb.search.cs "Skiftlägeskänslig">
+<!ENTITY sb.search.cache "Uppdatera cachen för fulltextsökning">
+<!ENTITY sb.search.clear "Rensa formulärhistorik">
+<!ENTITY sb.search.days "Filtrera efter dagar">
+<!ENTITY mb.manage "Hantera">
+<!ENTITY mb.profileFolder "Profilmapp">
+

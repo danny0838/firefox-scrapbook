@@ -1,6 +1,0 @@
-<!ENTITY sb.thelp.dir "ltr">
-<!ENTITY sb.thelp.title "Dosszié sablon HTML súgó">
-<!ENTITY sb.thelp.tags "Két speciális kódelem">
-<!ENTITY sb.thelp.tag1 "A jegyzet címe (első sora)">
-<!ENTITY sb.thelp.tag2 "A jegyzet tartalma (a második vagy későbbi sor)">
-<!ENTITY sb.thelp.preset "Előre beállított sablon">

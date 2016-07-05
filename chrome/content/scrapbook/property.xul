@@ -3,12 +3,7 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 <?xml-stylesheet href="chrome://scrapbook/skin/property.css" type="text/css" ?>
 
-<!DOCTYPE dialog [
-    <!ENTITY % propDTD SYSTEM "chrome://scrapbook/locale/property.dtd" >
-    %propDTD;
-    <!ENTITY % treeDTD SYSTEM "chrome://scrapbook/locale/tree.dtd" >
-    %treeDTD;
-]>
+<!DOCTYPE dialog SYSTEM "chrome://scrapbook/locale/message.dtd">
 
 <dialog id="sbPropDialog"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"

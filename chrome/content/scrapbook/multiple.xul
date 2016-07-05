@@ -3,18 +3,7 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 <?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
 
-<!DOCTYPE dialog [
-    <!ENTITY % mainDTD     SYSTEM "chrome://scrapbook/locale/scrapbook.dtd" >
-    %mainDTD;
-    <!ENTITY % propDTD     SYSTEM "chrome://scrapbook/locale/property.dtd" >
-    %propDTD;
-    <!ENTITY % detailDTD   SYSTEM "chrome://scrapbook/locale/detail.dtd" >
-    %detailDTD;
-    <!ENTITY % multipleDTD SYSTEM "chrome://scrapbook/locale/multiple.dtd" >
-    %multipleDTD;
-    <!ENTITY % overlayDTD  SYSTEM "chrome://scrapbook/locale/overlay.dtd" >
-    %overlayDTD;
-]>
+<!DOCTYPE dialog SYSTEM "chrome://scrapbook/locale/message.dtd">
 
 <dialog id="sbMultipleDialog"
         title="&sb.tools.multiple; - ScrapBook"

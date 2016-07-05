@@ -4,7 +4,7 @@
 <?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
 <?xml-stylesheet href="chrome://scrapbook/skin/note.css" type="text/css" ?>
 
-<!DOCTYPE window SYSTEM "chrome://scrapbook/locale/note.dtd">
+<!DOCTYPE window SYSTEM "chrome://scrapbook/locale/message.dtd">
 
 <window id="sbNoteWindow"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"

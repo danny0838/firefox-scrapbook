@@ -184,7 +184,7 @@ var sbPageEditor = {
         if (sbPageEditor.checkModify()) {
             // The message only work for Firefox 3.*
             // Else it only fires a default prompt to confirm whether to exit
-            aEvent.returnValue = sbCommonUtils.lang("overlay", "EDIT_SAVE_CHANGES");
+            aEvent.returnValue = sbCommonUtils.lang("EDIT_SAVE_CHANGES");
         }
     },
 
@@ -194,11 +194,11 @@ var sbPageEditor = {
         this.COMMENT.setAttribute("multiline", this.multiline);
         this.COMMENT.setAttribute("style", this.multiline ? "height:100px;" : "padding:2px;");
         if ( this.multiline ) {
-            document.getElementById("ScrapBookToggleComment").setAttribute("tooltiptext", sbCommonUtils.lang("overlay", "MIN_COMMENT"));
+            document.getElementById("ScrapBookToggleComment").setAttribute("tooltiptext", sbCommonUtils.lang("MIN_COMMENT"));
             document.getElementById("ScrapBookToolbox").appendChild(this.COMMENT);
             val = val.replace(/\t/g, "\n");
         } else {
-            document.getElementById("ScrapBookToggleComment").setAttribute("tooltiptext", sbCommonUtils.lang("overlay", "MAX_COMMENT"));
+            document.getElementById("ScrapBookToggleComment").setAttribute("tooltiptext", sbCommonUtils.lang("MAX_COMMENT"));
             this.TOOLBAR.insertBefore(this.COMMENT, document.getElementById("ScrapBookHighlighterPreview"));
             val = val.replace(/\n/g, "\t");
         }
@@ -392,7 +392,7 @@ var sbPageEditor = {
                 return true;
             }
         }
-        sbCommonUtils.alert( sbCommonUtils.lang("overlay", "EDIT_UNDO_LAST") );
+        sbCommonUtils.alert( sbCommonUtils.lang("EDIT_UNDO_LAST") );
         return false;
     },
 
@@ -431,13 +431,13 @@ var sbPageEditor = {
         // acquires the id from current uri and check again for safe
         var curURL = window.content.location.href;
         if (sbBrowserOverlay.getID(curURL) != this.item.id) {
-            sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SAVE_FILE", [curURL]));
+            sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_SAVE_FILE", curURL));
             return;
         }
         // Do not allow locked items be saved
         // use the newest value from datesource since the user could change it after loading this page
         if (sbDataSource.getProperty(sbBrowserOverlay.resource, "lock") == "true") {
-            sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_CANT_SAVE_LOCKED"));
+            sbCommonUtils.alert(sbCommonUtils.lang("MSG_CANT_SAVE_LOCKED"));
             return;
         }
         // check pass, exec the saving
@@ -445,12 +445,12 @@ var sbPageEditor = {
         sbCommonUtils.flattenFrames(window.content).forEach(function(win) {
             var doc = win.document;
             if ( ["text/html", "application/xhtml+xml"].indexOf(doc.contentType) < 0 ) {
-                sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_CANT_MODIFY", [doc.contentType]));
+                sbCommonUtils.alert(sbCommonUtils.lang("MSG_CANT_MODIFY", doc.contentType));
                 return;
             }
             var charset = doc.characterSet;
             if (charset != "UTF-8") {
-                sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_NOT_UTF8", [doc.location.href]));
+                sbCommonUtils.alert(sbCommonUtils.lang("MSG_NOT_UTF8", doc.location.href));
             }
             this.documentBeforeSave(doc);
             var rootNode = doc.getElementsByTagName("html")[0];
@@ -999,7 +999,7 @@ var sbHtmlEditor = {
             } else res = null;
             // if it's invalid, alert and quit
             if (!res) {
-                sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_INVALID", [id]));
+                sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("EDIT_ATTACH_INNERLINK_INVALID", id));
                 return;
             }
             // attach the link
@@ -1049,12 +1049,12 @@ var sbHtmlEditor = {
                 var destFile = htmlFile.parent.clone();
                 destFile.append(filename2);
                 if ( destFile.exists() && destFile.isFile() ) {
-                    if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [filename2])) ) return;
+                    if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("EDIT_ATTACH_FILE_OVERWRITE", filename2)) ) return;
                     destFile.remove(false);
                 }
                 data.file.copyTo(destFile.parent, filename2);
             } catch(ex) {
-                sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename2]));
+                sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("EDIT_ATTACH_FILE_INVALID", filename2));
                 return;
             }
             // insert to the document
@@ -1075,7 +1075,7 @@ var sbHtmlEditor = {
                 var destFile = htmlFile.parent.clone();
                 destFile.append(filename2);
                 if ( destFile.exists() && destFile.isFile() ) {
-                    if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [filename2])) ) return;
+                    if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("EDIT_ATTACH_FILE_OVERWRITE", filename2)) ) return;
                 }
                 // check the template file, create one if not exist
                 var template = sbCommonUtils.getScrapBookDir().clone();
@@ -1113,7 +1113,7 @@ var sbHtmlEditor = {
                 });
                 sbCommonUtils.writeFile(destFile, content, "UTF-8", true);
             } catch(ex) {
-                sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename2]));
+                sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("EDIT_ATTACH_FILE_INVALID", filename2));
                 return;
             }
             // insert to the document
@@ -1148,13 +1148,13 @@ var sbHtmlEditor = {
             var destFile = htmlFile.parent.clone();
             destFile.append(filename2);
             if ( destFile.exists() && destFile.isFile() ) {
-                if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [filename2])) ) return;
+                if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("EDIT_ATTACH_FILE_OVERWRITE", filename2)) ) return;
                 destFile.remove(false);
             }
             // copy the page
             htmlFile.copyTo(destFile.parent, filename2);
         } catch(ex) {
-            sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename2]));
+            sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("EDIT_ATTACH_FILE_INVALID", filename2));
             return;
         }
     },
@@ -1988,7 +1988,7 @@ var sbDOMEraser = {
     _addTooltip: function(aNode) {
         if ( sbCommonUtils.getSbObjectRemoveType(aNode) > 0 ) {
             var outlineStyle = "2px dashed #0000FF";
-            var labelText = sbCommonUtils.escapeHTMLWithSpace(sbCommonUtils.lang("overlay", "EDIT_REMOVE_HIGHLIGHT"));
+            var labelText = sbCommonUtils.escapeHTMLWithSpace(sbCommonUtils.lang("EDIT_REMOVE_HIGHLIGHT"));
         } else {
             var outlineStyle = "2px solid #FF0000";
             var labelText = makeElementLabelString(aNode);
@@ -2421,7 +2421,7 @@ var sbAnnotationService = {
         if ( !sel ) return;
         // check and get the annotation
         var ret = {};
-        if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("overlay", "EDIT_INLINE", [sbCommonUtils.crop(sel.toString(), 80, true)]), ret, null, {}) ) return;
+        if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("EDIT_INLINE", sbCommonUtils.crop(sel.toString(), 80, true)), ret, null, {}) ) return;
         if ( !ret.value ) return;
         // apply
         sbPageEditor.allowUndo(win.document);
@@ -2439,7 +2439,7 @@ var sbAnnotationService = {
         var doc = aElement.ownerDocument;
         // check and get the annotation
         var ret = { value: aElement.getAttribute("title") };
-        if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("overlay", "EDIT_INLINE", [sbCommonUtils.crop(aElement.textContent, 80, true)]), ret, null, {}) ) return;
+        if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("EDIT_INLINE", sbCommonUtils.crop(aElement.textContent, 80, true)), ret, null, {}) ) return;
         // apply
         sbPageEditor.allowUndo(doc);
         var els = sbCommonUtils.getSbObjectsById(aElement);
@@ -2467,7 +2467,7 @@ var sbAnnotationService = {
                 var url = RegExp.$1;
             }
             var ret = { value: url || "" };
-            if ( !sbCommonUtils.PROMPT.prompt(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_LINK_TITLE"), sbCommonUtils.lang("overlay", "ADDRESS"), ret, null, {}) ) return;
+            if ( !sbCommonUtils.PROMPT.prompt(window, sbCommonUtils.lang("EDIT_ATTACH_LINK_TITLE"), sbCommonUtils.lang("ADDRESS"), ret, null, {}) ) return;
             if ( !ret.value ) return;
             var attr = {
                 "data-sb-obj": "link-url",
@@ -2491,7 +2491,7 @@ var sbAnnotationService = {
             }
             // if unavailable, let the user input an id
             var ret = {value: id || ""};
-            if ( !sbCommonUtils.PROMPT.prompt(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_ENTER"), ret, null, {}) ) return;
+            if ( !sbCommonUtils.PROMPT.prompt(window, sbCommonUtils.lang("EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("EDIT_ATTACH_INNERLINK_ENTER"), ret, null, {}) ) return;
             var id = ret.value;
             var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + id);
             if ( sbDataSource.exists(res) ) {
@@ -2502,7 +2502,7 @@ var sbAnnotationService = {
             } else res = null;
             // if it's invalid, alert and quit
             if (!res) {
-                sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_INNERLINK_INVALID", [id]));
+                sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("EDIT_ATTACH_INNERLINK_TITLE"), sbCommonUtils.lang("EDIT_ATTACH_INNERLINK_INVALID", id));
                 return;
             }
             // attach the link
@@ -2520,7 +2520,7 @@ var sbAnnotationService = {
             if (!htmlFile) return;
             // prompt a window to select file
             var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-            FP.init(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), FP.modeOpen);
+            FP.init(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), FP.modeOpen);
             var ret = FP.show();
             if ( ret != FP.returnOK ) return;
             // upload the file
@@ -2530,12 +2530,12 @@ var sbAnnotationService = {
                 var destFile = htmlFile.parent.clone();
                 destFile.append(filename2);
                 if ( destFile.exists() && destFile.isFile() ) {
-                    if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_OVERWRITE", [filename2])) ) return;
+                    if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("EDIT_ATTACH_FILE_OVERWRITE", filename2)) ) return;
                     destFile.remove(false);
                 }
                 FP.file.copyTo(destFile.parent, filename2);
             } catch(ex) {
-                sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_INVALID", [filename2]));
+                sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("EDIT_ATTACH_FILE_INVALID", filename2));
                 return;
             }
             // attach the link
@@ -2671,7 +2671,7 @@ var sbInfoViewer = {
         var id = sbBrowserOverlay.getID();
         if ( !id ) return;
         if (window.content.document.contentType != "text/html") {
-            sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_NOT_INTERNALIZE_TYPE"));
+            sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_NOT_INTERNALIZE_TYPE"));
             return;
         }
         var refFile = sbCommonUtils.convertURLToFile(window.content.location.href);

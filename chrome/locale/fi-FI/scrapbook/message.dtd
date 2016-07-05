@@ -1,0 +1,406 @@
+<!-- calculate.dtd -->
+<!ENTITY sb.calc.total.size "Koko yhteensä">
+<!ENTITY sb.calc.diagnosis "Tila">
+
+<!-- capture.dtd -->
+<!ENTITY sb.capture "Tallenna">
+<!ENTITY sb.capture.abort "Keskeytä">
+<!ENTITY sb.capture.start "Aloita">
+<!ENTITY sb.capture.retry "Yritä uudelleen">
+<!ENTITY sb.capture.skip "Ohita">
+<!ENTITY sb.capture.pause "Pysäytä">
+<!ENTITY sb.capture.finish "Peruuta">
+<!ENTITY sb.capture.filter "Suodata">
+<!ENTITY sb.capture.filter.column.one "Näytä/Piilota">
+<!ENTITY sb.capture.filter.column.two "Suodata (RegExp)">
+<!ENTITY sb.capture.filter.accept "Hyväksy">
+<!ENTITY sb.capture.filter.accept.tt "Muuta tai muokkaa arvoa">
+<!ENTITY sb.capture.filter.cancel "Peruuta">
+<!ENTITY sb.capture.filter.cancel.tt "Keskeytä muokkaus">
+<!ENTITY sb.capture.filter.delete "Poista">
+<!ENTITY sb.capture.filter.delete.tt "Poista suodatin listasta">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "Otsikko">
+<!ENTITY sbp.capture.column.three "Tila">
+
+<!-- combine.dtd -->
+<!ENTITY sb.combine.dragdrop "Lisää kohteita vetämällä yhdistämisjärjestyksessä sivupuusta. Voit lisätä useita kohteita samanaikaisesti.">
+<!ENTITY sb.combine.preview "Esikatsele">
+<!ENTITY sb.combine.preview.d "Napsauta Yhdistä-painiketta esikatselun jälkeen.">
+<!ENTITY sb.combine.option.remove "Poista alkuperäiset sivut yhdistämisen jälkeen">
+<!ENTITY sbp.combine.up "Siirrä kohdetta ylöspäin">
+<!ENTITY sbp.combine.down "Siirrä kohdetta alaspäin">
+<!ENTITY sbp.combine.remove "Poista kohde">
+<!ENTITY sbp.combine.newTitle "Uusi otsikko">
+
+<!-- detail.dtd -->
+<!ENTITY sb.detail.linked.timeout "Aikaraja (sekunneissa)">
+<!ENTITY sb.detail.linked.charset "Merkistö">
+<!ENTITY sb.detail "Tallenna osa">
+<!ENTITY sb.detail.new.folder "Uusi kansio">
+<!ENTITY sb.detail.select.folder "Valitse kansio">
+<!ENTITY sb.detail.option "Asetukset">
+<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.images "Kuvat">
+<!ENTITY sb.detail.option.media "Media">
+<!ENTITY sb.detail.option.fonts "Fonts">
+<!ENTITY sb.detail.option.frames "Frames">
+<!ENTITY sb.detail.option.styles "Tyylit">
+<!ENTITY sb.detail.option.scripts "Scripts">
+<!ENTITY sb.detail.option.keepLink "Keep linking to the source for not-captured objects">
+<!ENTITY sb.detail.option.rewriteStyles "Reorganize Styles">
+<!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
+<!ENTITY sb.detail.linked.file "Lataa linkitetyt tiedostot">
+<!ENTITY sb.detail.linked.image "Kuva">
+<!ENTITY sb.detail.linked.sound "Ääni">
+<!ENTITY sb.detail.linked.movie "Elokuva">
+<!ENTITY sb.detail.linked.archive "Paketti">
+<!ENTITY sb.detail.linked.custom "Itse määritetty">
+<!ENTITY sb.detail.linked.page "Syvätallennus">
+<!ENTITY sb.detail.linked.page.depth "Linkkien seuraussyvyys">
+<!ENTITY sb.detail.linked.page.text "Tallennusten valmistuttua kaikki sivut linkitetään toisiinsa.">
+<!ENTITY sb.detail.warnAboutRenew "HUOM.: &quot;Tallenna uudestaan&quot; korvaa aiemmin tallennetun sivun.">
+<!ENTITY sb.detail.warnAboutScript "HUOM.: JavaScript voi aiheuttaa ongelmia.">
+
+<!-- editor.dtd -->
+<!ENTITY sb.toolbar.edit "Muokkauspalkki">
+<!ENTITY sb.toolbar.info "Infopalkki">
+<!ENTITY sb.edit.folderView "Click to view the data directory. Middle-click to open in a new tab.">
+<!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
+<!ENTITY sb.edit.undo "Kumoa">
+<!ENTITY sb.edit.save "Tallenna muutokset">
+<!ENTITY sb.edit.comment "Laajenna kommenttialuetta">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
+<!ENTITY sb.edit.sticky "Muistilappu"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "Luo &sb.edit.sticky;"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "Create Freenote">
+<!ENTITY sb.edit.inline.add "Lisää valinnan tekstiin huomautus">
+<!ENTITY sb.edit.attach.file "Liitä tiedosto valintaan">
+<!ENTITY sb.edit.attach.link "Liitä linkki valintaan">
+<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.cutterTool "Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.">
+<!ENTITY sb.edit.htmlTool "HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.">
+<!ENTITY sb.edit.html "HTML Editor">
+<!ENTITY sb.edit.html.color "Edit Color">
+<!ENTITY sb.edit.html.color.forText "Set text color:">
+<!ENTITY sb.edit.html.color.forBg "Set background color:">
+<!ENTITY sb.edit.html.source "Edit HTML Source">
+<!ENTITY sb.edit.html.link "Insert Link">
+<!ENTITY sb.edit.html.link.url "Target URL:">
+<!ENTITY sb.edit.html.link.id "Item ID:">
+<!ENTITY sb.edit.html.link.format "Select insert format:">
+<!ENTITY sb.edit.html.file "Insert File">
+<!ENTITY sb.edit.html.file.pick "Insert file:">
+<!ENTITY sb.edit.html.file.html "Insert sub-page:">
+<!ENTITY sb.edit.html.file.format "Select insert format:">
+<!ENTITY sb.edit.html.backup "Backup the Current Page">
+<!ENTITY sb.edit.html.backup.desc "Description:">
+<!ENTITY sb.edit.html.menu.basic "Text">
+<!ENTITY sb.edit.html.menu.block "Block">
+<!ENTITY sb.edit.html.menu.insert "Insert">
+<!ENTITY sb.edit.html.menu.wrapper "Advanced">
+<!ENTITY sb.edit.html.menuitem.insertSource "Insert or Edit Source">
+<!ENTITY sb.edit.html.menuitem.removeFormat "Clear Formats">
+<!ENTITY sb.edit.html.menuitem.unlink "Clear Links">
+<!ENTITY sb.edit.html.menuitem.save "Save the Page">
+<!ENTITY sb.edit.html.menuitem.quit "Switch HTMLEditor">
+<!ENTITY sb.edit.html.menuitem.bold "Switch Bold">
+<!ENTITY sb.edit.html.menuitem.italic "Switch Italic">
+<!ENTITY sb.edit.html.menuitem.underline "Switch Underline">
+<!ENTITY sb.edit.html.menuitem.strikeThrough "Switch Line-through">
+<!ENTITY sb.edit.html.menuitem.setColor "Set Text and Background Color">
+<!ENTITY sb.edit.html.menuitem.increaseFontSize "Increase Text Size">
+<!ENTITY sb.edit.html.menuitem.decreaseFontSize "Decrease Text Size">
+<!ENTITY sb.edit.html.menuitem.superscript "Switch Superscript">
+<!ENTITY sb.edit.html.menuitem.subscript "Switch Subscript">
+<!ENTITY sb.edit.html.menuitem.formatblock_p "Set to Normal Paragraph">
+<!ENTITY sb.edit.html.menuitem.formatblock_h1 "Set to Header Level 1">
+<!ENTITY sb.edit.html.menuitem.formatblock_h2 "Set to Header Level 2">
+<!ENTITY sb.edit.html.menuitem.formatblock_h3 "Set to Header Level 3">
+<!ENTITY sb.edit.html.menuitem.formatblock_h4 "Set to Header Level 4">
+<!ENTITY sb.edit.html.menuitem.formatblock_h5 "Set to Header Level 5">
+<!ENTITY sb.edit.html.menuitem.formatblock_h6 "Set to Header Level 6">
+<!ENTITY sb.edit.html.menuitem.formatblock_div "Set to DIV Block">
+<!ENTITY sb.edit.html.menuitem.formatblock_pre "Set to PRE Block">
+<!ENTITY sb.edit.html.menuitem.insertUnorderedList "Switch Unordered List">
+<!ENTITY sb.edit.html.menuitem.insertOrderedList "Switch Ordered List">
+<!ENTITY sb.edit.html.menuitem.outdent "Outdent">
+<!ENTITY sb.edit.html.menuitem.indent "Indent">
+<!ENTITY sb.edit.html.menuitem.justifyLeft "Align Left">
+<!ENTITY sb.edit.html.menuitem.justifyRight "Align Right">
+<!ENTITY sb.edit.html.menuitem.justifyCenter "Align Center">
+<!ENTITY sb.edit.html.menuitem.justifyFull "Align Justify">
+<!ENTITY sb.edit.html.menuitem.attachLink "Insert a Link or Innerlink">
+<!ENTITY sb.edit.html.menuitem.attachFile "Insert a File or Sub-page">
+<!ENTITY sb.edit.html.menuitem.backupFile "Create a Backup for this Page">
+<!ENTITY sb.edit.html.menuitem.horizontalLine "Insert a Horizontal Rule">
+<!ENTITY sb.edit.html.menuitem.insertDate "Insert a Date">
+<!ENTITY sb.edit.html.menuitem.insertTodoBox "Insert a Todo Checkbox">
+<!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "Insert a Todo Checkbox (Checked)">
+<!ENTITY sb.edit.html.menuitem.wrapHTML "Format with Template">
+<!ENTITY sb.edit.cutter "Poista valinta">
+<!ENTITY sb.edit.remove.iframe "Poista kaikki IFRAME-tunnukset">
+<!ENTITY sb.edit.remove.script "Poista kaikki komentosarjatunnisteet">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to highlight the selection.">
+<!ENTITY sb.highlighter "Korostin">
+<!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
+<!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
+<!ENTITY sb.locate "Paikanna sivupalkissa">
+<!ENTITY sb.indicators "Näytä linkkitunnukset">
+<!ENTITY sb.info.home "Etusivu">
+<!ENTITY sb.info.sitemap "Sivustokartta">
+
+<!-- hlCustom.dtd -->
+<!ENTITY sb.hlCustom.preset "Oletustyylit">
+<!ENTITY sb.hlCustom.background "Tausta">
+<!ENTITY sb.hlCustom.color "Väri">
+<!ENTITY sb.hlCustom.text "Teksti">
+<!ENTITY sb.hlCustom.bold "Lihavoitu">
+<!ENTITY sb.hlCustom.italic "Kursivoitu">
+<!ENTITY sb.hlCustom.line "Yliviivattu">
+<!ENTITY sb.hlCustom.border "Reunus">
+<!ENTITY sb.hlCustom.type "Tyyppi">
+<!ENTITY sb.hlCustom.box "Laatikko">
+<!ENTITY sb.hlCustom.underline "Alleviivattu">
+<!ENTITY sb.hlCustom.style "Tyyli">
+<!ENTITY sb.hlCustom.solid "Kiinteä">
+<!ENTITY sb.hlCustom.dotted "Pisteviiva">
+<!ENTITY sb.hlCustom.dashed "Katkoviiva">
+<!ENTITY sb.hlCustom.double "Kaksinkertainen">
+<!ENTITY sb.hlCustom.width "Leveys">
+<!ENTITY sb.hlCustom.thin "Ohut">
+<!ENTITY sb.hlCustom.medium "Keskivahvuinen">
+<!ENTITY sb.hlCustom.thick "Paksu">
+
+<!-- mbManage.dtd -->
+<!ENTITY mb.manager "Multi-ScrapBook Manager">
+<!ENTITY mb.prop.name "Nimi">
+<!ENTITY mb.prop.path "Polku">
+<!ENTITY mb.button.add "Lisää">
+<!ENTITY mb.button.edit "Muokkaa">
+<!ENTITY mb.button.remove "Poista">
+
+<!-- multiple.dtd -->
+<!ENTITY sb.multiple.filter "Suodatin (RegExp)">
+<!ENTITY sbp.multiple.titleofwebsite "Verkkopaikan otsikko">
+<!ENTITY sbp.multiple.titleoflink "Otsikon linkki">
+<!ENTITY sb.multiple.title "Otsikko">
+<!ENTITY sb.multiple.timeout "Aikaraja">
+<!ENTITY sbp.multiple.downloadmethod "Menetelmä">
+<!ENTITY sb.multiple.charset "Merkistö">
+<!ENTITY sb.multiple.url "URL (Kukin URL omalle rivilleen)">
+<!ENTITY sb.multiple.detector "URL-tunnistin">
+<!ENTITY sb.multiple.detector.plink "Kaikki sivun linkit">
+<!ENTITY sb.multiple.detector.slink "Kaikki valinnan linkit">
+<!ENTITY sb.multiple.detector.tabs "Kaikki ikkunan avoimet välilehdet">
+<!ENTITY sb.multiple.detector.local "Kansion kaikki paikalliset HTML:t">
+<!ENTITY sb.multiple.detector.bookmarks "Kirjanmerkit">
+<!ENTITY sb.multiple.detector.clear "Tyhjennä">
+<!ENTITY sbp.multiple.exclude "Älä ota huomioon olemassaolevia osoitteita kohdekansiossa">
+
+<!-- note.dtd -->
+<!ENTITY sb.note.save "Tallenna">
+<!ENTITY sb.note.close "Sulje">
+<!ENTITY sb.note.tools "Työkalut">
+<!ENTITY sb.note.htmlview "HTML-näkymä">
+<!ENTITY sb.note.normalview "Normaali näkymä">
+<!ENTITY sb.note.template "Muokkaa HTML-pohjaa">
+<!ENTITY sb.note.autolinefeed "Automaattinen rivinvaihto">
+<!ENTITY sb.note.autolinefeed.t "Lisää &lt;br&gt;-koodin &sb.note.htmlview; rivin loppuun.">
+<!ENTITY sb.note.fontsize "Kirjasinkoko">
+<!ENTITY sb.note.help "Ohje">
+<!ENTITY sb.note.print "Tulosta">
+<!ENTITY sb.note.exit "Lopeta">
+<!ENTITY sb.note.save.accesskey "T">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "N">
+<!ENTITY sb.note.tools.accesskey "k">
+<!ENTITY sb.note.fontsize.accesskey "K">
+<!ENTITY sb.note.print.accesskey "u">
+<!ENTITY sb.note.exit.accesskey "L">
+
+<!-- notify.dtd -->
+<!ENTITY sb.capture.complete "Tallennus valmis.">
+<!ENTITY sb.capture.complete.all "Kaikki tallennukset valmiina.">
+
+<!-- output.dtd -->
+<!ENTITY sb.output.option.all "Luo koko puu">
+<!ENTITY sb.output.option.frame "Luo kehyksellä">
+<!ENTITY sb.output.option.open "Kun valmis, avaa HTML-tiedosto">
+
+<!-- overlay.dtd -->
+<!ENTITY sb.capture.partial "Tallenna valinta">
+<!ENTITY sb.capture.partial.as "Tallennna valinta nimellä">
+<!ENTITY sb.capture.entire "Tallenna sivu">
+<!ENTITY sb.capture.entire.as "Tallenna sivu nimellä">
+<!ENTITY sb.capture.frame "Tallenna kehys">
+<!ENTITY sb.capture.frame.as "Tallenna kehys nimellä">
+<!ENTITY sb.capture.target "Tallenna linkki">
+<!ENTITY sb.capture.target.as "Tallenna linkki nimellä">
+<!ENTITY sb.capture.alltabs "Tallenna kaikki välilehdet">
+<!ENTITY sb.capture.bookmark "Tallenna kirjanmerkki">
+<!ENTITY sb.sidebar "Näytä sivupaneelissa">
+<!ENTITY sb.menubar "Valikko">
+<!ENTITY sb.editbefore "Muokkaa ennen tallennusta">
+
+<!-- prefs.dtd -->
+<!ENTITY sb.prefs.main "Yleiset">
+<!ENTITY sb.prefs.keys "Keys">
+<!ENTITY sb.prefs.tabs "Välilehdet">
+<!ENTITY sb.prefs.save "Tallenna">
+<!ENTITY sb.prefs.edit "Muokkaa">
+<!ENTITY sb.prefs.organize "Järjestä">
+<!ENTITY sb.prefs.advanced "Lisäasetukset">
+<!ENTITY sb.prefs.ui.contextMenu "Näytä selaimen ponnahdusvalikossa">
+<!ENTITY sb.prefs.ui.contextSubMenu "Alavalikko">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Näytä &quot;Aseta kirjanmerkki ScrapBookilla&quot; -valikko">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Näytä">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "viimeksi käytettyä kansiota">
+<!ENTITY sb.prefs.ui.menuBar "Näytä valikkopalkissa">
+<!ENTITY sb.prefs.ui.menuBar.icon "Kuvake">
+<!ENTITY sb.prefs.ui.toolsMenu "Näytä Työkalut-valikossa">
+<!ENTITY sb.prefs.ui.statusBar "Näytä tilarivillä">
+<!ENTITY sb.prefs.restart "Muutokset saatetaan voimaan, kun Firefox käynnistetään uudelleen.">
+<!ENTITY sb.prefs.tabs.tips "Avaa välilehtiin seuraavilla toiminnoilla">
+<!ENTITY sb.prefs.tabs.note "Muokkaa muistilappua">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
+<!ENTITY sb.prefs.data "Tietojen tallennussijainti">
+<!ENTITY sb.prefs.data.default "Oletus (profiilikansio)">
+<!ENTITY sb.prefs.data.custom "Tallenna tiedot kohteeseen">
+<!ENTITY sb.prefs.data.tips "Valitse kansio, johon tallennetaan ScrapBookin tiedot.">
+<!ENTITY sb.prefs.multibook.enabled "Ota käyttöön Multi-ScrapBook">
+<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBookilla voit tallentaa sivuja moneen paikkaan ja vaihdella paikkoja työkalupalkin painikkeella.">
+<!ENTITY sb.prefs.confirmDelete "Varoita kohteiden poistamisesta puusta">
+<!ENTITY sb.prefs.tree.autoCollapse "Kun puun kansio avataan, sulje automaattisesti muut kansiot">
+<!ENTITY sb.prefs.tree.unshift "Aseta kohde">
+<!ENTITY sb.prefs.tree.unshift.top "kansion ylimmäksi merkinnäksi">
+<!ENTITY sb.prefs.tree.unshift.bottom "kansion alimmaksi merkinnäksi">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
+<!ENTITY sb.prefs.showDetailOnDrop "Näytä Tallennuksen tiedot -ikkuna kun sivu tallennetaan vetämällä sivupaneeliin">
+<!ENTITY sb.prefs.notifyOnComplete "Näytä Tallennus valmis -huomautus">
+<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
+<!ENTITY sb.prefs.export "Export Preferences">
+<!ENTITY sb.prefs.import "Import Preferences">
+<!ENTITY sb.prefs.reset "Reset Preferences">
+<!ENTITY sb.button.customize "Muokkaa">
+<!ENTITY sb.button.browse "Selaa">
+<!ENTITY sb.button.show "Näytä tiedostot">
+
+<!-- property.dtd -->
+<!ENTITY sb.prop.general "Yleiset">
+<!ENTITY sb.prop.type "Tyyppi">
+<!ENTITY sb.prop.date "Päiväys"><!-- left for addon compatibility -->
+<!ENTITY sb.prop.create "Create">
+<!ENTITY sb.prop.modify "Modify">
+<!ENTITY sb.prop.encode "Merkistökoodaus">
+<!ENTITY sb.prop.size "Koko">
+<!ENTITY sb.prop.content "Sisältö">
+<!ENTITY sb.prop.file "File">
+<!ENTITY sb.prop.folder "Kansio">
+<!ENTITY sb.prop.icon "Kuvake">
+<!ENTITY sb.prop.icon.change "Vaihda">
+<!ENTITY sb.prop.icon.default "Oletus">
+<!ENTITY sb.prop.icon.favicon "Valitse suosikkikuvake">
+<!ENTITY sb.prop.icon.custom "Valitse käyttäjäkuvake">
+<!ENTITY sb.prop.mark "Merkitse">
+<!ENTITY sb.prop.lock "Lock">
+
+<!-- repair.dtd -->
+<!ENTITY sb.repair.rdfFile "Palauta scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript "Tämä toiminto voi auttaa, jos sivupuu yhtäkkiä häviää.">
+<!ENTITY sb.repair.rdfFile.select "Valitse varmuuskopiotiedosto, josta palautetaan.">
+<!ENTITY sb.repair.rdfFile.file "Tiedosto">
+<!ENTITY sb.repair.rdfFile.time "Päiväys">
+<!ENTITY sb.repair.rdfFile.size "Koko">
+<!ENTITY sb.repair.favicons "Palauta puun suosikkikuvakkeet">
+<!ENTITY sb.repair.favicons.descript "Tämä toiminto voi auttaa, jos useita suosikkikuvakkeita puuttuu sivupuusta.">
+<!ENTITY sb.repair.complete "Valmis.">
+
+<!-- scrapbook.dtd -->
+<!ENTITY sb.toggle.all "Avaa/sulje kaikki kansiot">
+<!ENTITY sb.tools "Työkalut">
+<!ENTITY sb.tools.options "Asetukset">
+<!ENTITY sb.tools.manage "Muokkaa">
+<!ENTITY sb.tools.combine "Yhdistämistoiminto">
+<!ENTITY sb.tools.trade "Tuo/vie">
+<!ENTITY sb.tools.multiple "Kaappaa useita sivuja">
+<!ENTITY sb.tools.directory "ScrapBook-kansio">
+<!ENTITY sb.tools.calculate "Laske koko">
+<!ENTITY sb.tools.sorttree "Järjestä koko puu">
+<!ENTITY sb.tools.output "Tulosta kansiopuu HTML:nä">
+<!ENTITY sb.tools.repair "Hätäkorjaus">
+<!ENTITY sb.tools.addons "Lisäosien toiminnot">
+<!ENTITY sb.note.opentab "Avaa välilehdessä">
+
+<!-- sort.dtd -->
+<!ENTITY sb.sort "Järjestä">
+<!ENTITY sb.sort.reverse "Käänteinen">
+<!ENTITY sb.sort.title.asc "Järjestä otsikon mukaan (A-Ö)">
+<!ENTITY sb.sort.title.desc "Järjestä otsikon mukaan (Ö-A)">
+<!ENTITY sb.sort.date.asc "Aikajärjestys">
+<!ENTITY sb.sort.date.desc "Käänteinen aikajärjestys">
+<!ENTITY sb.sort.grouping "Group by Type">
+<!ENTITY sb.sort.recursive "Järjestä alikansioiden sisältö">
+<!ENTITY sb.sort.warning "HUOM.: Tätä toimintoa ei voi kumota.">
+
+<!-- templateHelp.dtd -->
+<!ENTITY sb.thelp.dir "ltr">
+<!ENTITY sb.thelp.title "ScrapBookin HTML-pohjan ohje">
+<!ENTITY sb.thelp.tags "Kaksi erikoistunnistetta">
+<!ENTITY sb.thelp.tag1 "Muistilapun otsikko (ensimmäinen rivi)">
+<!ENTITY sb.thelp.tag2 "Muistilapun sisältö (seuraavat rivit)">
+<!ENTITY sb.thelp.preset "Oletuspohja">
+
+<!-- trade.dtd -->
+<!ENTITY sb.trade.import "Tuo">
+<!ENTITY sb.trade.export "Vie">
+<!ENTITY sb.trade.time "Viemispäivä">
+<!ENTITY sb.trade.update "Import as latest ScrapBook X format">
+<!ENTITY sb.trade.restore "Tuo palauttaen kansiorakenne">
+<!ENTITY sb.trade.remove "Poista tiedostot tuonnin jälkeen">
+<!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">
+
+<!-- tree.dtd -->
+<!ENTITY sb.open "Avaa">
+<!ENTITY sb.open.native "Open in Default Program">
+<!ENTITY sb.open.tab "Avaa välilehdessä">
+<!ENTITY sb.open.newtab "Avaa uuteen välilehteen">
+<!ENTITY sb.open.source "Avaa lähde-URL">
+<!ENTITY sb.multi "Multi-ScrapBook">
+<!ENTITY sb.show.files "Näytä tiedostot">
+<!ENTITY sb.move "Siirrä">
+<!ENTITY sb.move.into "Siirrä kansioon">
+<!ENTITY sb.copy "Copy">
+<!ENTITY sb.renew "Kaappaa uudestaan">
+<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.export "Vie">
+<!ENTITY sb.remove "Poista">
+<!ENTITY sb.property "Ominaisuudet">
+<!ENTITY sb.listview "Luettelo">
+<!ENTITY sb.prop.title "Otsikko">
+<!ENTITY sb.prop.comment "Kommentti">
+<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.id.date "Tunnus">
+<!ENTITY sb.folder.combine "Yhdistetty näkymä">
+<!ENTITY sb.folder.openall "Avaa kaikki välilehtiin">
+<!ENTITY sb.folder.manage "Muokkaa kansiota">
+<!ENTITY sb.new.folder "Uusi kansio">
+<!ENTITY sb.new.separator "Uusi erotin">
+<!ENTITY sb.new.note "Uusi muistilappu">
+<!ENTITY sb.new.notex "New Note Page">
+<!ENTITY sb.sort.folder "Järjestä kansio">
+<!ENTITY sb.search "Etsi">
+<!ENTITY sb.search.fulltext "Täydellinen tekstihaku">
+<!ENTITY sb.search.all "Kaikki">
+<!ENTITY sb.search.re "RegExp-haku">
+<!ENTITY sb.search.cs "Isot ja pienet kirjaimet erikseen">
+<!ENTITY sb.search.cache "Päivitä välimuisti täydellistä tekstihakua varten">
+<!ENTITY sb.search.clear "Tyhjennä hakukentän muisti">
+<!ENTITY sb.search.days "Suodatus päivien mukaan">
+<!ENTITY mb.manage "Hallinnoi">
+<!ENTITY mb.profileFolder "Profiilikansio">
+

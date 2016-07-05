@@ -44,7 +44,7 @@ var sbDataSource = {
             this._dataObj = sbCommonUtils.RDF.GetDataSourceBlocking(fileURL);
             this._needReOutputTree = false;
         } catch(ex) {
-            if ( !aQuietWarning ) sbCommonUtils.alert(lang("scrapbook", "ERR_FAIL_INIT_DATASOURCE", [ex]));
+            if ( !aQuietWarning ) sbCommonUtils.alert(lang("ERR_FAIL_INIT_DATASOURCE", ex));
         }
     },
 
@@ -180,7 +180,7 @@ var sbDataSource = {
             this._flushWithDelay();
             return newRes;
         } catch(ex) {
-            sbCommonUtils.alert(lang("scrapbook", "ERR_FAIL_ADD_RESOURCE", [ex]));
+            sbCommonUtils.alert(lang("ERR_FAIL_ADD_RESOURCE", ex));
             return false;
         }
     },
@@ -190,7 +190,7 @@ var sbDataSource = {
             sbCommonUtils.RDFC.Init(this._dataObj, curPar);
             sbCommonUtils.RDFC.RemoveElement(curRes, true);
         } catch(ex) {
-            sbCommonUtils.alert(lang("scrapbook", "ERR_FAIL_ADD_RESOURCE1", [ex]));
+            sbCommonUtils.alert(lang("ERR_FAIL_ADD_RESOURCE1", ex));
             return;
         }
         if ( sbCommonUtils.getPref("tree.unshift", false) ) {
@@ -204,7 +204,7 @@ var sbDataSource = {
                 sbCommonUtils.RDFC.AppendElement(curRes);
             }
         } catch(ex) {
-            sbCommonUtils.alert(lang("scrapbook", "ERR_FAIL_ADD_RESOURCE2", [ex]));
+            sbCommonUtils.alert(lang("ERR_FAIL_ADD_RESOURCE2", ex));
             sbCommonUtils.RDFC.Init(this._dataObj, sbCommonUtils.RDF.GetResource("urn:scrapbook:root"));
             sbCommonUtils.RDFC.AppendElement(curRes, true);
         }

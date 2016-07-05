@@ -1,0 +1,407 @@
+<!-- calculate.dtd -->
+<!ENTITY sb.calc.total.size "Toplam Boyut">
+<!ENTITY sb.calc.diagnosis "Teşhis">
+
+<!-- capture.dtd -->
+<!ENTITY sb.capture "Kaydet">
+<!ENTITY sb.capture.abort "İptal Et">
+<!ENTITY sb.capture.start "Başla">
+<!ENTITY sb.capture.retry "Yeniden Dene">
+<!ENTITY sb.capture.skip "Atla">
+<!ENTITY sb.capture.pause "Duraklat">
+<!ENTITY sb.capture.finish "Cancel">
+<!ENTITY sb.capture.filter "Filtre">
+<!ENTITY sb.capture.filter.column.one "Show/Hide">
+<!ENTITY sb.capture.filter.column.two "Filter (regular expression)">
+<!ENTITY sb.capture.filter.accept "Accept">
+<!ENTITY sb.capture.filter.accept.tt "change or edit value">
+<!ENTITY sb.capture.filter.cancel "Cancel">
+<!ENTITY sb.capture.filter.cancel.tt "abort editing">
+<!ENTITY sb.capture.filter.delete "Delete">
+<!ENTITY sb.capture.filter.delete.tt "remove filter from the list">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "Title">
+<!ENTITY sbp.capture.column.three "Status">
+
+<!-- combine.dtd -->
+<!ENTITY sb.combine.dragdrop "Öğeleri ağaç görünümünden, birleştirmek istediğiniz sırayla, sürükleyip bırakarak ekleyin. Tek seferde birden çok öğeyi sürükleyip bırakabilirsiniz.">
+<!ENTITY sb.combine.preview "Ön İzleme">
+<!ENTITY sb.combine.preview.d "Ön izlemeyi doğruladıktan sonra &apos;Kaydet&apos; düğmesine basın.">
+<!ENTITY sb.combine.option.remove "Birleştirme tamamlandıktan sonra önceki sayfaları kaldır">
+<!ENTITY sbp.combine.up "move item upwards">
+<!ENTITY sbp.combine.down "move item downwards">
+<!ENTITY sbp.combine.remove "remove item">
+<!ENTITY sbp.combine.newTitle "new title">
+
+<!-- detail.dtd -->
+<!ENTITY sb.detail.linked.timeout "Timeout (in seconds)">
+<!ENTITY sb.detail.linked.charset "Character set">
+<!ENTITY sb.detail "Capture Detail">
+<!ENTITY sb.detail.new.folder "Yeni Klasör">
+<!ENTITY sb.detail.select.folder "Klasör Seç">
+<!ENTITY sb.detail.option "Ayarlar">
+<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.images "Resimler">
+<!ENTITY sb.detail.option.media "Media">
+<!ENTITY sb.detail.option.fonts "Fonts">
+<!ENTITY sb.detail.option.frames "Frames">
+<!ENTITY sb.detail.option.styles "Stiller">
+<!ENTITY sb.detail.option.scripts "Scripts">
+<!ENTITY sb.detail.option.keepLink "Keep linking to the source for not-captured objects">
+<!ENTITY sb.detail.option.rewriteStyles "Reorganize Styles">
+<!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
+<!ENTITY sb.detail.linked.file "Bağlantılı dosyaları indir">
+<!ENTITY sb.detail.linked.image "Resim">
+<!ENTITY sb.detail.linked.sound "Ses">
+<!ENTITY sb.detail.linked.movie "Film">
+<!ENTITY sb.detail.linked.archive "Arşiv">
+<!ENTITY sb.detail.linked.custom "Özel">
+<!ENTITY sb.detail.linked.page "Derinlemesine Kaydet">
+<!ENTITY sb.detail.linked.page.depth "Linkleri izleme derinliği">
+<!ENTITY sb.detail.linked.page.text "Kayıt etme işlemi tamamlandıktan sonra, tüm sayfalar birbirine bağlanacak ve site haritası oluşturulacak.">
+<!ENTITY sb.detail.warnAboutRenew "DİKKAT: &apos;Yeniden Kaydet&apos; önceden kaydedilmiş sayfanın üzerine yazar.">
+<!ENTITY sb.detail.warnAboutScript "DİKKAT: JavaScript bazı problemlere yol açabilir.">
+
+<!-- editor.dtd -->
+<!ENTITY sb.toolbar.edit "Araç Çubuğunu Düzenle">
+<!ENTITY sb.toolbar.info "Bilgi Çubuğu">
+<!ENTITY sb.edit.folderView "Click to view the data directory. Middle-click to open in a new tab.">
+<!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
+<!ENTITY sb.edit.undo "Geri Al">
+<!ENTITY sb.edit.save "Değişiklikleri Kaydet">
+<!ENTITY sb.edit.comment "Yorum Bölgesini Genişlet">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
+<!ENTITY sb.edit.sticky "Kalıcı Dipnot"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "&sb.edit.sticky; Oluştur"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "Create Freenote">
+<!ENTITY sb.edit.inline.add "Seçime Satır-Arası Dipnot Ekle">
+<!ENTITY sb.edit.attach.file "Seçime Dosya Ekle">
+<!ENTITY sb.edit.attach.link "Seçime Link Ekle">
+<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.cutterTool "Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.">
+<!ENTITY sb.edit.htmlTool "HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.">
+<!ENTITY sb.edit.html "HTML Editor">
+<!ENTITY sb.edit.html.color "Edit Color">
+<!ENTITY sb.edit.html.color.forText "Set text color:">
+<!ENTITY sb.edit.html.color.forBg "Set background color:">
+<!ENTITY sb.edit.html.source "Edit HTML Source">
+<!ENTITY sb.edit.html.link "Insert Link">
+<!ENTITY sb.edit.html.link.url "Target URL:">
+<!ENTITY sb.edit.html.link.id "Item ID:">
+<!ENTITY sb.edit.html.link.format "Select insert format:">
+<!ENTITY sb.edit.html.file "Insert File">
+<!ENTITY sb.edit.html.file.pick "Insert file:">
+<!ENTITY sb.edit.html.file.html "Insert sub-page:">
+<!ENTITY sb.edit.html.file.format "Select insert format:">
+<!ENTITY sb.edit.html.backup "Backup the Current Page">
+<!ENTITY sb.edit.html.backup.desc "Description:">
+<!ENTITY sb.edit.html.menu.basic "Text">
+<!ENTITY sb.edit.html.menu.block "Block">
+<!ENTITY sb.edit.html.menu.insert "Insert">
+<!ENTITY sb.edit.html.menu.wrapper "Advanced">
+<!ENTITY sb.edit.html.menuitem.insertSource "Insert or Edit Source">
+<!ENTITY sb.edit.html.menuitem.removeFormat "Clear Formats">
+<!ENTITY sb.edit.html.menuitem.unlink "Clear Links">
+<!ENTITY sb.edit.html.menuitem.save "Save the Page">
+<!ENTITY sb.edit.html.menuitem.quit "Switch HTMLEditor">
+<!ENTITY sb.edit.html.menuitem.bold "Switch Bold">
+<!ENTITY sb.edit.html.menuitem.italic "Switch Italic">
+<!ENTITY sb.edit.html.menuitem.underline "Switch Underline">
+<!ENTITY sb.edit.html.menuitem.strikeThrough "Switch Line-through">
+<!ENTITY sb.edit.html.menuitem.setColor "Set Text and Background Color">
+<!ENTITY sb.edit.html.menuitem.increaseFontSize "Increase Text Size">
+<!ENTITY sb.edit.html.menuitem.decreaseFontSize "Decrease Text Size">
+<!ENTITY sb.edit.html.menuitem.superscript "Switch Superscript">
+<!ENTITY sb.edit.html.menuitem.subscript "Switch Subscript">
+<!ENTITY sb.edit.html.menuitem.formatblock_p "Set to Normal Paragraph">
+<!ENTITY sb.edit.html.menuitem.formatblock_h1 "Set to Header Level 1">
+<!ENTITY sb.edit.html.menuitem.formatblock_h2 "Set to Header Level 2">
+<!ENTITY sb.edit.html.menuitem.formatblock_h3 "Set to Header Level 3">
+<!ENTITY sb.edit.html.menuitem.formatblock_h4 "Set to Header Level 4">
+<!ENTITY sb.edit.html.menuitem.formatblock_h5 "Set to Header Level 5">
+<!ENTITY sb.edit.html.menuitem.formatblock_h6 "Set to Header Level 6">
+<!ENTITY sb.edit.html.menuitem.formatblock_div "Set to DIV Block">
+<!ENTITY sb.edit.html.menuitem.formatblock_pre "Set to PRE Block">
+<!ENTITY sb.edit.html.menuitem.insertUnorderedList "Switch Unordered List">
+<!ENTITY sb.edit.html.menuitem.insertOrderedList "Switch Ordered List">
+<!ENTITY sb.edit.html.menuitem.outdent "Outdent">
+<!ENTITY sb.edit.html.menuitem.indent "Indent">
+<!ENTITY sb.edit.html.menuitem.justifyLeft "Align Left">
+<!ENTITY sb.edit.html.menuitem.justifyRight "Align Right">
+<!ENTITY sb.edit.html.menuitem.justifyCenter "Align Center">
+<!ENTITY sb.edit.html.menuitem.justifyFull "Align Justify">
+<!ENTITY sb.edit.html.menuitem.attachLink "Insert a Link or Innerlink">
+<!ENTITY sb.edit.html.menuitem.attachFile "Insert a File or Sub-page">
+<!ENTITY sb.edit.html.menuitem.backupFile "Create a Backup for this Page">
+<!ENTITY sb.edit.html.menuitem.horizontalLine "Insert a Horizontal Rule">
+<!ENTITY sb.edit.html.menuitem.insertDate "Insert a Date">
+<!ENTITY sb.edit.html.menuitem.insertTodoBox "Insert a Todo Checkbox">
+<!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "Insert a Todo Checkbox (Checked)">
+<!ENTITY sb.edit.html.menuitem.wrapHTML "Format with Template">
+<!ENTITY sb.edit.cutter "Seçimi Kaldır">
+<!ENTITY sb.edit.remove.iframe "Tüm IFRAME Etiketlerini Kaldır">
+<!ENTITY sb.edit.remove.script "Tüm SCRIPT Etiketlerini Kaldır">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to highlight the selection.">
+<!ENTITY sb.highlighter "Vurgulayıcı">
+<!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
+<!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
+<!ENTITY sb.locate "Kenar Çubuğu Ağacında Konumla">
+<!ENTITY sb.indicators "Link Belirteçlerini Göster">
+<!ENTITY sb.info.home "Ana Sayfa">
+<!ENTITY sb.info.sitemap "Site Haritası">
+
+<!-- hlCustom.dtd -->
+<!ENTITY sb.hlCustom.preset "Hazır Stiller">
+<!ENTITY sb.hlCustom.background "Arka Plan">
+<!ENTITY sb.hlCustom.color "Renk">
+<!ENTITY sb.hlCustom.text "Metin">
+<!ENTITY sb.hlCustom.bold "Kalın">
+<!ENTITY sb.hlCustom.italic "İtalik">
+<!ENTITY sb.hlCustom.line "Üzerini Çiz">
+<!ENTITY sb.hlCustom.border "Çerçeve">
+<!ENTITY sb.hlCustom.type "Tür">
+<!ENTITY sb.hlCustom.box "Kutu">
+<!ENTITY sb.hlCustom.underline "Altını Çiz">
+<!ENTITY sb.hlCustom.style "Stil">
+<!ENTITY sb.hlCustom.solid "Tam">
+<!ENTITY sb.hlCustom.dotted "Noktalı">
+<!ENTITY sb.hlCustom.dashed "Parçalı">
+<!ENTITY sb.hlCustom.double "Çift">
+<!ENTITY sb.hlCustom.width "Genişlik">
+<!ENTITY sb.hlCustom.thin "İnce">
+<!ENTITY sb.hlCustom.medium "Orta">
+<!ENTITY sb.hlCustom.thick "Kalın">
+
+<!-- mbManage.dtd -->
+<!ENTITY mb.manager "Multi-ScrapBook Manager">
+<!ENTITY mb.prop.name "İsim">
+<!ENTITY mb.prop.path "Yol">
+<!ENTITY mb.button.add "Ekle">
+<!ENTITY mb.button.edit "Düzenle">
+<!ENTITY mb.button.remove "Kaldır">
+
+<!-- multiple.dtd -->
+<!ENTITY sb.multiple.filter "Filter (regular expression)">
+<!ENTITY sbp.multiple.titleofwebsite "Title of website">
+<!ENTITY sbp.multiple.titleoflink "Title of link">
+<!ENTITY sb.multiple.title "Title">
+<!ENTITY sb.multiple.timeout "Timeout">
+<!ENTITY sbp.multiple.downloadmethod "Method">
+<!ENTITY sb.multiple.charset "Charset">
+<!ENTITY sb.multiple.url "URL (URL&apos;leri satır satır girin)">
+<!ENTITY sb.multiple.detector "URL Algılayıcı">
+<!ENTITY sb.multiple.detector.plink "Sayfadaki Tüm Linkler">
+<!ENTITY sb.multiple.detector.slink "Seçimdeki Tüm Linkler">
+<!ENTITY sb.multiple.detector.tabs "Pencerede Açık Olan Tüm Sekmeler">
+<!ENTITY sb.multiple.detector.local "Bir Dizindeki Tüm Yerel HTML&apos;ler">
+<!ENTITY sb.multiple.detector.bookmarks "Yer İmleri">
+<!ENTITY sb.multiple.detector.clear "Temizle">
+<!ENTITY sbp.multiple.exclude "ignore already existing addresses in destination folder">
+
+<!-- note.dtd -->
+<!ENTITY sb.note.save "Kaydet">
+<!ENTITY sb.note.close "Kapat">
+<!ENTITY sb.note.tools "Araçlar">
+<!ENTITY sb.note.htmlview "HTML Görünümü">
+<!ENTITY sb.note.normalview "Normal Görünüm">
+<!ENTITY sb.note.template "Şablon HTML&apos;i Düzenle">
+<!ENTITY sb.note.autolinefeed "Otomatik Satırlama">
+<!ENTITY sb.note.autolinefeed.t "&sb.note.htmlview;&apos;nde satırların sonuna <br> etiketi ekle">
+<!ENTITY sb.note.fontsize "Yazı Tipi Boyutu">
+<!ENTITY sb.note.help "Yardım">
+<!ENTITY sb.note.print "Yazdır">
+<!ENTITY sb.note.exit "Çıkış">
+<!ENTITY sb.note.save.accesskey "K">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "N">
+<!ENTITY sb.note.tools.accesskey "L">
+<!ENTITY sb.note.fontsize.accesskey "F">
+<!ENTITY sb.note.print.accesskey "Y">
+<!ENTITY sb.note.exit.accesskey "Ç">
+
+<!-- notify.dtd -->
+<!ENTITY sb.capture.complete "Capture Completed.">
+<!ENTITY sb.capture.complete.all "All Captures Completed.">
+
+<!-- output.dtd -->
+<!ENTITY sb.output.option.all "Tüm ağacı çıkart">
+<!ENTITY sb.output.option.frame "Çerçeve ile çıkart">
+<!ENTITY sb.output.option.open "Çıkarttıktan sonra tarayıcı ile aç">
+
+<!-- overlay.dtd -->
+<!ENTITY sb.capture.partial "Capture Selection">
+<!ENTITY sb.capture.partial.as "Capture Selection As">
+<!ENTITY sb.capture.entire "Capture Page">
+<!ENTITY sb.capture.entire.as "Capture Page As">
+<!ENTITY sb.capture.frame "Capture Frame">
+<!ENTITY sb.capture.frame.as "Capture Frame As">
+<!ENTITY sb.capture.target "Capture Link">
+<!ENTITY sb.capture.target.as "Capture Link As">
+<!ENTITY sb.capture.alltabs "Capture All Tabs">
+<!ENTITY sb.capture.bookmark "Bookmark with ScrapBook">
+<!ENTITY sb.sidebar "Kenar Çubuğunda Göster">
+<!ENTITY sb.menubar "Menü Çubuğu">
+<!ENTITY sb.editbefore "Kaydetmeden Önce Düzenle">
+
+<!-- prefs.dtd -->
+<!ENTITY sb.prefs.main "Genel">
+<!ENTITY sb.prefs.keys "Tuşlar">
+<!ENTITY sb.prefs.tabs "Sekmeler">
+<!ENTITY sb.prefs.save "Kaydet">
+<!ENTITY sb.prefs.edit "Düzenle">
+<!ENTITY sb.prefs.organize "Organize">
+<!ENTITY sb.prefs.advanced "Gelişmiş">
+<!ENTITY sb.prefs.ui.contextMenu "Tarayıcı sağ-tık menüsünde göster">
+<!ENTITY sb.prefs.ui.contextSubMenu "Alt menü">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Yerimi&amp;apos Farklı kaydet menüsünde; &amp;apos Göster">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Son kullanılan">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "klasörü göster">
+<!ENTITY sb.prefs.ui.menuBar "Menü çubuğunda göster">
+<!ENTITY sb.prefs.ui.menuBar.icon "Simge">
+<!ENTITY sb.prefs.ui.toolsMenu "&apos;Araçlar&apos; menüsünde göster">
+<!ENTITY sb.prefs.ui.statusBar "Durumu çubuğunda göster">
+<!ENTITY sb.prefs.restart "Değişiklikler Firefox&apos;u yeniden başlatmanızı gerektirir.">
+<!ENTITY sb.prefs.tabs.tips "Aşağıdaki eylemleri sekmede aç">
+<!ENTITY sb.prefs.tabs.note "Notu Düzenle">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
+<!ENTITY sb.prefs.data "Veri Saklama Konumu">
+<!ENTITY sb.prefs.data.default "Varsayılan (Profil Klasörü)">
+<!ENTITY sb.prefs.data.custom "Kaydetme konumu">
+<!ENTITY sb.prefs.data.tips "ScrapBook verilerinin saklanacağı konumu seçin.">
+<!ENTITY sb.prefs.multibook.enabled "Çoklu-ScrapBook&apos;u Etkinleştir">
+<!ENTITY sb.prefs.multibook.tips "Çoklu-ScrapBook, verileri saklamak için birden çok konum seçebilmenizi ve bunlar arasında, araç çubuğu düğmesi ile hızlı geçiş yapabilmenizi sağlar.">
+<!ENTITY sb.prefs.confirmDelete "Ağaç öğelerini silerken beni uyar">
+<!ENTITY sb.prefs.tree.autoCollapse "Ağaçta klasör açınca, otomatik olarak diğer klasörleri kapat">
+<!ENTITY sb.prefs.tree.unshift "Buraya öğe bilgisi ekle">
+<!ENTITY sb.prefs.tree.unshift.top "Klasörün üstü">
+<!ENTITY sb.prefs.tree.unshift.bottom "Klasörün altı">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
+<!ENTITY sb.prefs.showDetailOnDrop "Kenar çubuğuna sürükleyip-bırakarak kaydetmelerde &apos;Kayıt Detayları&apos; diyaloğunu göster">
+<!ENTITY sb.prefs.notifyOnComplete "&apos;Kaydetme Tamamlandı&apos; uyarısını göster">
+<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
+<!ENTITY sb.prefs.export "Export Preferences">
+<!ENTITY sb.prefs.import "Import Preferences">
+<!ENTITY sb.prefs.reset "Reset Preferences">
+<!ENTITY sb.button.customize "Özelleştir">
+<!ENTITY sb.button.browse "Gözat">
+<!ENTITY sb.button.show "Dosyaları Göster">
+
+<!-- property.dtd -->
+<!ENTITY sb.prop.general "Genel Bilgi">
+<!ENTITY sb.prop.type "Tür">
+<!ENTITY sb.prop.date "Tarih"><!-- left for addon compatibility -->
+<!ENTITY sb.prop.create "Create">
+<!ENTITY sb.prop.modify "Modify">
+<!ENTITY sb.prop.encode "Kodlama">
+<!ENTITY sb.prop.size "Boyut">
+<!ENTITY sb.prop.content "İçerik">
+<!ENTITY sb.prop.file "File">
+<!ENTITY sb.prop.folder "Klasör">
+<!ENTITY sb.prop.icon "Simge">
+<!ENTITY sb.prop.icon.change "Değiştir">
+<!ENTITY sb.prop.icon.default "Varsayılan">
+<!ENTITY sb.prop.icon.favicon "Site simgesi seç">
+<!ENTITY sb.prop.icon.custom "Kullanıcı tanımlı simge seç">
+<!ENTITY sb.prop.mark "İşaretle">
+<!ENTITY sb.prop.lock "Lock">
+
+<!-- repair.dtd -->
+<!ENTITY sb.repair.rdfFile "Scrapbook.rdf&apos;yi geri yükle">
+<!ENTITY sb.repair.rdfFile.descript "ScrapBook ağacı aniden kaybolursa bunu deneyin.">
+<!ENTITY sb.repair.rdfFile.select "Geri yükleme için bir yedekleme dosyası seçin.">
+<!ENTITY sb.repair.rdfFile.file "Dosya">
+<!ENTITY sb.repair.rdfFile.time "Zaman">
+<!ENTITY sb.repair.rdfFile.size "Boyut">
+<!ENTITY sb.repair.favicons "Ağaç görünümünde site simgelerini geri yükle">
+<!ENTITY sb.repair.favicons.descript "Eğer ScrapBook ağaç görünümününde birden çok site simgesi kaybolursa bunu deneyin.">
+<!ENTITY sb.repair.complete "Tamamlandı.">
+
+<!-- scrapbook.dtd -->
+<!ENTITY sb.toggle.all "Tüm Klasörleri Aç/Kapat">
+<!ENTITY sb.tools "Araçlar">
+<!ENTITY sb.tools.options "Ayarlar ">
+<!ENTITY sb.tools.manage "Yönet">
+<!ENTITY sb.tools.combine "Birleştirme Sihirbazı">
+<!ENTITY sb.tools.trade "İçe/Dışa Aktar">
+<!ENTITY sb.tools.multiple "Birden Çok URL&apos;yi Kaydet">
+<!ENTITY sb.tools.directory "ScrapBook Dizini">
+<!ENTITY sb.tools.calculate "Boyut Hesaplama">
+<!ENTITY sb.tools.sorttree "Tüm Ağacı Sırala">
+<!ENTITY sb.tools.output "Ağacı HTML Olarak Çıkart">
+<!ENTITY sb.tools.repair "Acil Durum Onarımı">
+<!ENTITY sb.tools.addons "Eklenti İşlevleri">
+<!ENTITY sb.note.opentab "Sekmede Aç">
+
+<!-- sort.dtd -->
+<!ENTITY sb.sort "Sırala">
+<!ENTITY sb.sort.reverse "Ters Çevir">
+<!ENTITY sb.sort.title.asc "Başlığa Göre Sırala (A &gt; Z)">
+<!ENTITY sb.sort.title.desc "Başlığa Göre Sırala (Z &gt; A)">
+<!ENTITY sb.sort.date.asc "Kronolojik">
+<!ENTITY sb.sort.date.desc "Kronolojiyi Ters Çevir">
+<!ENTITY sb.sort.grouping "Group by Type">
+<!ENTITY sb.sort.recursive "Alt-Klasörleri Tekrar Tekrar Sırala">
+<!ENTITY sb.sort.warning "Dikkat: Bu eylemi geri alamazsınız.">
+
+<!-- templateHelp.dtd -->
+<!ENTITY sb.thelp.dir "ltr">
+<!ENTITY sb.thelp.title "ScrapBook Şablon HTML Yardımı">
+<!ENTITY sb.thelp.tags "İki Özel Etiket">
+<!ENTITY sb.thelp.tag1 "Not Başlıği (birinci satır)">
+<!ENTITY sb.thelp.tag2 "Not içeriği (ikinci ya da daha sonraki satır)">
+<!ENTITY sb.thelp.preset "Preset Template">
+
+<!-- trade.dtd -->
+<!ENTITY sb.trade.import "İçe Aktar">
+<!ENTITY sb.trade.export "Dışa Aktar">
+<!ENTITY sb.trade.time "Dışarı Aktarılma Zamanı">
+<!ENTITY sb.trade.update "Import as latest ScrapBook X format">
+<!ENTITY sb.trade.restore "Klasör yapısını geri yükleyerek içe aktar">
+<!ENTITY sb.trade.remove "İçe aktardıktan sonra dosyaları kaldır">
+<!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">
+
+<!-- tree.dtd -->
+<!ENTITY sb.open "Aç">
+<!ENTITY sb.open.native "Open in Default Program">
+<!ENTITY sb.open.tab "Sekmede Aç">
+<!ENTITY sb.open.newtab "Yeni Sekmede Aç">
+<!ENTITY sb.open.source "Kaynak URL&apos;yi Aç">
+<!ENTITY sb.multi "Multi-ScrapBook">
+<!ENTITY sb.show.files "Dosyaları Göster">
+<!ENTITY sb.move "Taşı">
+<!ENTITY sb.move.into "Klasöre Taşı">
+<!ENTITY sb.copy "Copy">
+<!ENTITY sb.renew "Yeniden Kaydet">
+<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.export "Dışa Aktar">
+<!ENTITY sb.remove "Sil">
+<!ENTITY sb.property "Özellikler">
+<!ENTITY sb.listview "List View">
+<!ENTITY sb.prop.title "Başlık">
+<!ENTITY sb.prop.url "URL">
+<!ENTITY sb.prop.comment "Yorum">
+<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.id.date "ID">
+<!ENTITY sb.folder.combine "Birleşik Görünüm">
+<!ENTITY sb.folder.openall "Tümünü Sekmelerde Aç">
+<!ENTITY sb.folder.manage "Klasörü Düzenle">
+<!ENTITY sb.new.folder "Yeni Klasör">
+<!ENTITY sb.new.separator "Yeni Ayraç">
+<!ENTITY sb.new.note "Yeni Not">
+<!ENTITY sb.new.notex "New Note Page">
+<!ENTITY sb.sort.folder "Klasörü Sırala">
+<!ENTITY sb.search "Ara">
+<!ENTITY sb.search.fulltext "Tam Metin Arama">
+<!ENTITY sb.search.all "Tümü">
+<!ENTITY sb.search.re "RegExp Kullan">
+<!ENTITY sb.search.cs "Büyük-Küçük Harf Eşleştir">
+<!ENTITY sb.search.cache "Tam Metin Arama İçin Belleği Güncelle">
+<!ENTITY sb.search.clear "Geçmişten Temizle">
+<!ENTITY sb.search.days "Güne Göre Filteleme">
+<!ENTITY mb.manage "Yönet">
+<!ENTITY mb.profileFolder "Profil Klasörü">
+
