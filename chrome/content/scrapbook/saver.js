@@ -26,8 +26,27 @@ var sbContentSaver = {
         this.name = "index";
         this.favicon = null;
         this.file2URL = { "index.dat": true, "index.png": true, "index.rdf": true, "sitemap.xml": true, "sitemap.xsl": true, "sb-file2url.txt": true, "sb-url2name.txt": true, };
-        this.option   = { "dlimg": false, "dlsnd": false, "dlmov": false, "dlarc": false, "custom": "", "inDepth": 0, "isPartial": false, "images": true, "media": true, "fonts": true, "frames": true, "styles": true, "script": false, "asHtml": false, "forceUtf8": true, "rewriteStyles": true, "keepLink": false, "internalize": false };
-        this.plusoption = { "timeout": "0", "charset": "UTF-8" }
+        this.option = {
+            "isPartial": false,
+            "images": sbCommonUtils.getPref("capture.default.images", true),
+            "media": sbCommonUtils.getPref("capture.default.media", true),
+            "fonts": sbCommonUtils.getPref("capture.default.fonts", true),
+            "frames": sbCommonUtils.getPref("capture.default.frames", true),
+            "styles": sbCommonUtils.getPref("capture.default.styles", true),
+            "script": sbCommonUtils.getPref("capture.default.script", false),
+            "asHtml": sbCommonUtils.getPref("capture.default.asHtml", false),
+            "forceUtf8": sbCommonUtils.getPref("capture.default.forceUtf8", true),
+            "rewriteStyles": sbCommonUtils.getPref("capture.default.rewriteStyles", true),
+            "keepLink": sbCommonUtils.getPref("capture.default.keepLink", false),
+            "dlimg": sbCommonUtils.getPref("capture.default.dlimg", false),
+            "dlsnd": sbCommonUtils.getPref("capture.default.dlsnd", false),
+            "dlmov": sbCommonUtils.getPref("capture.default.dlmov", false),
+            "dlarc": sbCommonUtils.getPref("capture.default.dlarc", false),
+            "custom": sbCommonUtils.getPref("capture.default.custom", ""),
+            "inDepth": 0,
+            "internalize": false
+        };
+        this.plusoption = { "timeout": "0", "charset": "UTF-8" };
         this.linkURLs = [];
         this.frames = [];
         this.isMainFrame = true;

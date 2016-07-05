@@ -50,27 +50,27 @@
                     <caption label="&sb.detail.option;" />
                     <hbox align="center">
                     <caption label="&sb.detail.option.capture;:" />
-                        <checkbox id="sbDetailOptionImages" label="&sb.detail.option.images;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
-                        <checkbox id="sbDetailOptionMedia" label="&sb.detail.option.media;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
-                        <checkbox id="sbDetailOptionFonts" label="&sb.detail.option.fonts;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
-                        <checkbox id="sbDetailOptionFrames" label="&sb.detail.option.frames;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
-                        <checkbox id="sbDetailOptionStyles" label="&sb.detail.option.styles;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
-                        <checkbox id="sbDetailOptionScript" label="&sb.detail.option.scripts;" persist="checked" oncommand="sbCaptureOptions.updateWarningUI(this.checked);" />
+                        <checkbox id="sbDetailOptionImages" label="&sb.detail.option.images;" />
+                        <checkbox id="sbDetailOptionMedia" label="&sb.detail.option.media;" />
+                        <checkbox id="sbDetailOptionFonts" label="&sb.detail.option.fonts;" />
+                        <checkbox id="sbDetailOptionFrames" label="&sb.detail.option.frames;" />
+                        <checkbox id="sbDetailOptionStyles" label="&sb.detail.option.styles;" />
+                        <checkbox id="sbDetailOptionScript" label="&sb.detail.option.scripts;" />
                     </hbox>
-                    <checkbox id="sbDetailOptionKeepLink" label="&sb.detail.option.keepLink;" persist="checked" />
-                    <checkbox id="sbDetailOptionRewriteStyles" label="&sb.detail.option.rewriteStyles;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
-                    <checkbox id="sbDetailOptionForceUtf8" label="&sb.detail.option.forceUtf8;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
-                    <checkbox id="sbDetailOptionAsHtml" label="&sb.detail.option.asHtml;" persist="checked" />
+                    <checkbox id="sbDetailOptionKeepLink" label="&sb.detail.option.keepLink;" />
+                    <checkbox id="sbDetailOptionRewriteStyles" label="&sb.detail.option.rewriteStyles;" />
+                    <checkbox id="sbDetailOptionForceUtf8" label="&sb.detail.option.forceUtf8;" />
+                    <checkbox id="sbDetailOptionAsHtml" label="&sb.detail.option.asHtml;" />
                 </groupbox>
                 <groupbox group="capture-options" style="margin-top:8px;">
                     <caption label="&sb.detail.linked.file;" />
-                    <checkbox id="sbDetailImage"   persist="checked" label="&sb.detail.linked.image; (jpg, png, gif, tiff)" />
-                    <checkbox id="sbDetailSound"   persist="checked" label="&sb.detail.linked.sound; (aac, flac, mp3, ogg, ram, wav, wma)" />
-                    <checkbox id="sbDetailMovie"   persist="checked" label="&sb.detail.linked.movie; (avi, avc, flv, mkv, mov, mpg, mp4, wmv)" />
-                    <checkbox id="sbDetailArchive" persist="checked" label="&sb.detail.linked.archive; (zip, lzh, tar, gz, bz, 7z, rar, jar, xpi)" />
+                    <checkbox id="sbDetailImage"   label="&sb.detail.linked.image; (jpg, png, gif, tiff)" />
+                    <checkbox id="sbDetailSound"   label="&sb.detail.linked.sound; (aac, flac, mp3, ogg, ram, wav, wma)" />
+                    <checkbox id="sbDetailMovie"   label="&sb.detail.linked.movie; (avi, avc, flv, mkv, mov, mpg, mp4, wmv)" />
+                    <checkbox id="sbDetailArchive" label="&sb.detail.linked.archive; (zip, lzh, tar, gz, bz, 7z, rar, jar, xpi)" />
                     <hbox align="center">
-                        <checkbox id="sbDetailCustom" persist="checked" label="&sb.detail.linked.custom;" oncommand="sbCaptureOptions.updateCustomUI();" />
-                        <textbox id="sbDetailCustomExt" flex="1" value="pdf, doc" persist="value" onchange="this.value = this.value.toLowerCase().replace(/[^0-9a-z ,;\|]/g, '').replace(/[ ,;\|]+/g, ', '); this.setAttribute('value', this.value); document.persist(this, 'value');" />
+                        <checkbox id="sbDetailCustom" label="&sb.detail.linked.custom;" oncommand="sbCaptureOptions.updateCustomUI();" />
+                        <textbox id="sbDetailCustomExt" flex="1" onchange="this.value = this.value.toLowerCase().replace(/[^0-9a-z ,;\|]/g, '').replace(/[ ,;\|]+/g, ', '); this.setAttribute('value', this.value); document.persist(this, 'value');" />
                     </hbox>
                 </groupbox>
                 <groupbox id="sbDetailInDepthBox" group="capture-options" style="margin-top:8px;">
