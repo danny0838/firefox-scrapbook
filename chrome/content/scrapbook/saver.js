@@ -1072,18 +1072,13 @@ var sbContentSaver = {
                             try {
                                 fileName = aRequest.contentDispositionFilename;
                             } catch (ex) {}
-                            // if header Content-Disposition is not defined but Content-Type is defined, 
-                            // make file extension compatible with it.
+                            // if no ext defined, try header Content-Type
                             if (!fileName) {
                                 var [base, ext] = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aRequest.name));
-                                fileName = base + (ext ? "." + ext : "");
-                                var mime = aRequest.contentType;
-                                if (mime) {
-                                    var extFromMime = sbCommonUtils.getMimePrimaryExtension(mime, ext);
-                                    if (extFromMime && (ext !== extFromMime)) {
-                                        fileName = fileName + "." + extFromMime;
-                                    }
+                                if (!ext) {
+                                    ext = sbCommonUtils.getMimePrimaryExtension(aRequest.contentType, ext) || "dat";
                                 }
+                                fileName = base + "." + ext;
                             }
                             // determine the filename and check for duplicate
                             [fileName, isDuplicate] = sbContentSaver.getUniqueFileName(fileName, sourceURL);
