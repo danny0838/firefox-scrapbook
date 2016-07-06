@@ -8,6 +8,7 @@ var sbContentSaver = {
     refURLObj: null,
     isMainFrame: true,
     selection: null,
+    treeRes: null,
     httpTask: {},
     downloadRewriteFiles: {},
     downloadRewriteMap: {},
@@ -437,12 +438,14 @@ var sbContentSaver = {
     },
 
     // aResName is null if it's not the main document of an indepth capture
-    // Now we are during a capture process, temporarily set marked and no icon
+    // set treeRes to the created resource or null if aResName is not defined
     addResource: function(aResName, aResIndex) {
+        this.treeRes = null;
         if ( !aResName ) return;
+        // We are during a capture process, temporarily set marked and no icon
         var [_type, _icon] = [this.item.type, this.item.icon];
         [this.item.type, this.item.icon] = ["marked", ""];
-        sbDataSource.addItem(this.item, aResName, aResIndex);
+        this.treeRes = sbDataSource.addItem(this.item, aResName, aResIndex);
         [this.item.type, this.item.icon] = [_type, _icon];
         sbCommonUtils.rebuildGlobal();
         if ( "sbBrowserOverlay" in window ) sbBrowserOverlay.updateFolderPref(aResName);
@@ -1241,8 +1244,10 @@ var sbCaptureObserverCallback = {
         }
 
         // fix resource settings after capture complete
-        var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id);
-        if (sbDataSource.exists(res)) {
+        // If it's an indepth capture, sbContentSaver.treeRes will be null for non-main documents,
+        // and thus we don't have to update the resource for many times.
+        var res = sbContentSaver.treeRes;
+        if (res && sbDataSource.exists(res)) {
             sbDataSource.setProperty(res, "type", aItem.type);
             if (aItem.icon) sbDataSource.setProperty(res, "icon", aItem.icon);
             sbCommonUtils.rebuildGlobal();
