@@ -20,6 +20,7 @@ var sbCaptureOptions = {
         document.getElementById("sbDetailOptionForceUtf8").checked = sbCommonUtils.getPref("capture.default.forceUtf8", true);
         document.getElementById("sbDetailOptionRewriteStyles").checked = sbCommonUtils.getPref("capture.default.rewriteStyles", true);
         document.getElementById("sbDetailOptionKeepLink").checked = sbCommonUtils.getPref("capture.default.keepLink", false);
+        document.getElementById("sbDetailOptionSaveDataURI").checked = sbCommonUtils.getPref("capture.default.saveDataURI", false);
         document.getElementById("sbDetailImage").checked = sbCommonUtils.getPref("capture.default.dlimg", false);
         document.getElementById("sbDetailSound").checked = sbCommonUtils.getPref("capture.default.dlsnd", false);
         document.getElementById("sbDetailMovie").checked = sbCommonUtils.getPref("capture.default.dlmov", false);
@@ -92,6 +93,7 @@ var sbCaptureOptions = {
         this.param.option["forceUtf8"] = document.getElementById("sbDetailOptionForceUtf8").checked;
         this.param.option["rewriteStyles"] = document.getElementById("sbDetailOptionRewriteStyles").checked;
         this.param.option["keepLink"] = document.getElementById("sbDetailOptionKeepLink").checked;
+        this.param.option["saveDataURI"] = document.getElementById("sbDetailOptionSaveDataURI").checked;
         this.param.option["dlimg"] = document.getElementById("sbDetailImage").checked;
         this.param.option["dlsnd"] = document.getElementById("sbDetailSound").checked;
         this.param.option["dlmov"] = document.getElementById("sbDetailMovie").checked;
@@ -117,6 +119,7 @@ var sbCaptureOptions = {
         sbCommonUtils.setPref("capture.default.forceUtf8", this.param.option["forceUtf8"]);
         sbCommonUtils.setPref("capture.default.rewriteStyles", this.param.option["rewriteStyles"]);
         sbCommonUtils.setPref("capture.default.keepLink", this.param.option["keepLink"]);
+        sbCommonUtils.setPref("capture.default.saveDataURI", this.param.option["saveDataURI"]);
         sbCommonUtils.setPref("capture.default.dlimg", this.param.option["dlimg"]);
         sbCommonUtils.setPref("capture.default.dlsnd", this.param.option["dlsnd"]);
         sbCommonUtils.setPref("capture.default.dlmov", this.param.option["dlmov"]);

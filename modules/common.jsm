@@ -10,6 +10,7 @@ var EXPORTED_SYMBOLS = ["sbCommonUtils"];
 
 const { lang } = Components.utils.import("resource://scrapbook-modules/lang.jsm", {});
 const { console } = Components.utils.import("resource://scrapbook-modules/console.jsm", {});
+const { jsSHA } = Components.utils.import("resource://scrapbook-modules/lib/jsSHA.jsm", {});
 
 var sbCommonUtils = {
 
@@ -463,6 +464,13 @@ var sbCommonUtils = {
         }
     },
 
+    writeFileBytes: function (aFile, aBytes) {
+        var ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
+        ostream.init(aFile, -1, 0666, 0);
+        ostream.write(aBytes, aBytes.length);
+        ostream.close();
+    },
+
     writeIndexDat: function(aItem, aFile) {
         if ( !aFile ) {
             aFile = this.getContentDir(aItem.id).clone();
@@ -641,6 +649,19 @@ var sbCommonUtils = {
         return query;
     },
 
+    parseDataURI: function (aDataURI) {
+        var match = aDataURI.match(/^data:(?:\/\/)?([^;]*)(?:;charset=([^;,]*))?(?:;(base64))?,([\s\S]*)$/i);
+        if (match) {
+            return {
+                mime: match[1],
+                charset: match[2],
+                base64: !!match[3],
+                data: match[4],
+            };
+        }
+        return null;
+    },
+
 
     /****************************************************************
      * Javascript object utilies
@@ -664,6 +685,13 @@ var sbCommonUtils = {
 
     utf8ToUnicode: function (bytes) {
         return decodeURIComponent(escape(bytes));
+    },
+
+    // supported data types: "B64", "BYTES", "TEXT", "ARRAYBUFFER"
+    sha1: function (data, type) {
+        var shaObj = new jsSHA("SHA-1", type);
+        shaObj.update(data);
+        return shaObj.getHash("HEX");
     },
 
     escapeComment: function(aStr) {
