@@ -9,13 +9,13 @@ var sbContentSaver = {
     isMainFrame: true,
     selection: null,
     httpTask: {},
+    downloadRewriteFiles: {},
+    downloadRewriteMap: {},
     file2URL: {},
     file2Doc: {},
     linkURLs: [],
     frames: [],
     canvases: [],
-    downloadRewriteFiles: [],
-    downloadRewriteMap: {},
 
     init: function(aPresetData) {
         this.option = {
@@ -65,6 +65,8 @@ var sbContentSaver = {
             if ( aPresetData[4] >= this.option["inDepth"] ) this.option["inDepth"] = 0;
         }
         this.httpTask[this.item.id] = 0;
+        this.downloadRewriteFiles[this.item.id] = [];
+        this.downloadRewriteMap[this.item.id] = {};
     },
 
     // aRootWindow: window to be captured
@@ -396,12 +398,12 @@ var sbContentSaver = {
             myHTMLFile.append(myHTMLFileName);
         }
         sbCommonUtils.writeFile(myHTMLFile, myHTML, charset);
-        this.downloadRewriteFiles.push([myHTMLFile, charset]);
+        this.downloadRewriteFiles[this.item.id].push([myHTMLFile, charset]);
         if ( myCSS ) {
             var myCSSFile = this.contentDir.clone();
             myCSSFile.append(myCSSFileName);
             sbCommonUtils.writeFile(myCSSFile, myCSS, charset);
-            this.downloadRewriteFiles.push([myCSSFile, charset]);
+            this.downloadRewriteFiles[this.item.id].push([myCSSFile, charset]);
         }
         return myHTMLFile.leafName;
     },
@@ -430,22 +432,19 @@ var sbContentSaver = {
         var myHTMLFile = this.contentDir.clone();
         myHTMLFile.append(aFileKey + ".html");
         sbCommonUtils.writeFile(myHTMLFile, myHTML, "UTF-8");
-        this.downloadRewriteFiles.push([myHTMLFile, "UTF-8"]);
+        this.downloadRewriteFiles[this.item.id].push([myHTMLFile, "UTF-8"]);
         return myHTMLFile.leafName;
     },
 
+    // aResName is null if it's not the main document of an indepth capture
+    // Now we are during a capture process, temporarily set marked and no icon
     addResource: function(aResName, aResIndex) {
         if ( !aResName ) return;
-        var res = sbDataSource.addItem(this.item, aResName, aResIndex);
+        var [_type, _icon] = [this.item.type, this.item.icon];
+        [this.item.type, this.item.icon] = ["marked", ""];
+        sbDataSource.addItem(this.item, aResName, aResIndex);
+        [this.item.type, this.item.icon] = [_type, _icon];
         sbCommonUtils.rebuildGlobal();
-        if ( this.favicon ) {
-            var iconURL = "resource://scrapbook/data/" + this.item.id + "/" + sbCommonUtils.escapeFileName(this.favicon);
-            setTimeout(function(){
-                sbDataSource.setProperty(res, "icon", iconURL);
-            }, 500);
-            this.item.icon = sbCommonUtils.escapeFileName(this.favicon);
-        }
-        sbCommonUtils.writeIndexDat(this.item);
         if ( "sbBrowserOverlay" in window ) sbBrowserOverlay.updateFolderPref(aResName);
     },
 
@@ -1082,7 +1081,7 @@ var sbContentSaver = {
                             }
                             // determine the filename and check for duplicate
                             [fileName, isDuplicate] = sbContentSaver.getUniqueFileName(fileName, sourceURL);
-                            sbContentSaver.downloadRewriteMap[hashKey] = fileName;
+                            sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][hashKey] = fileName;
                             if (isDuplicate) {
                                 channel.cancel(Components.results.NS_BINDING_ABORTED);
                             }
@@ -1199,7 +1198,7 @@ var sbContentSaver = {
 
     restoreFileNameFromHash: function (hash) {
         return hash.replace(/scrapbook:\/\/([0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12})/g, function (match, key) {
-            return sbContentSaver.downloadRewriteMap[key];
+            return sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][key];
         });
     },
 };
@@ -1229,12 +1228,26 @@ var sbCaptureObserverCallback = {
 
     onAllDownloadsComplete: function(aItem) {
         // restore downloaded file names
-        sbContentSaver.downloadRewriteFiles.forEach(function (data) {
+        sbContentSaver.downloadRewriteFiles[aItem.id].forEach(function (data) {
             var [file, charset] = data;
             var content = sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(file), charset);
             content = sbContentSaver.restoreFileNameFromHash(content);
             sbCommonUtils.writeFile(file, content, charset);
         });
+
+        if ( sbContentSaver.favicon ) {
+            sbContentSaver.favicon = sbContentSaver.restoreFileNameFromHash(sbContentSaver.favicon);
+            aItem.icon = "resource://scrapbook/data/" + aItem.id + "/" + sbCommonUtils.escapeFileName(sbContentSaver.favicon);
+        }
+
+        // fix resource settings after capture complete
+        var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id);
+        if (sbDataSource.exists(res)) {
+            sbDataSource.setProperty(res, "type", aItem.type);
+            if (aItem.icon) sbDataSource.setProperty(res, "icon", aItem.icon);
+            sbCommonUtils.rebuildGlobal();
+            sbCommonUtils.writeIndexDat(aItem);
+        }
 
         this.trace(sbCommonUtils.lang("CAPTURE_COMPLETE", aItem.title), 5000);
         this.onCaptureComplete(aItem);
