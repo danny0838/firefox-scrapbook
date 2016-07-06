@@ -223,10 +223,16 @@ var sbCaptureTask = {
         } catch(aEx) { sbCommonUtils.alert("add\n---\n"+aEx); }
     },
 
+    // start capture
     start: function(aOverriddenURL) {
         this.seconds = -1;
-        this.toggleStartPause(true);
+
+        // Resume "pause" and "skip" buttons, which are temporarily diasbled
+        // when a capture is already executed (rather than waiting for connection)
+        document.getElementById("sbCapturePauseButton").disabled = false;
         this.toggleSkipButton(true);
+
+        // mark the item we are currently on
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "selected");
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[0].setAttribute("properties", "disabled");
         var checkstate = this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[0].getAttribute("value");
@@ -240,10 +246,15 @@ var sbCaptureTask = {
         var url = aOverriddenURL || gURLs[this.index];
         if ( gTitles ) gTitle = gTitles[this.index];
         SB_trace(sbCommonUtils.lang("CONNECT", url));
-        this.sniffer = new sbHeaderSniffer(url, gRefURL);
-        this.sniffer.checkURL();
+
+        // if active, start connection and capture
+        if (this.isActive()) {
+            this.sniffer = new sbHeaderSniffer(url, gRefURL);
+            this.sniffer.checkURL();
+        }
     },
 
+    // when a capture completes successfully
     succeed: function() {
         document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
         if (!this.isLocal) {
@@ -261,6 +272,7 @@ var sbCaptureTask = {
         this.next(false);
     },
 
+    // when a capture fails
     fail: function(aErrorMsg) {
         document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
         if ( aErrorMsg ) SB_trace(aErrorMsg);
@@ -275,18 +287,12 @@ var sbCaptureTask = {
         treecell.setAttribute("properties", "failed");
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].appendChild(treecell);
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "finished");
-        if ( gURLs.length > 1 ) {
-            this.next(true);
-        } else {
-            this.toggleStartPause(false);
-        }
+        this.next(true);
     },
 
+    // press "skip" button
+    // shift to next item
     next: function(quickly) {
-        this.toggleStartPause(true);
-        this.toggleSkipButton(false);
-        if ( this.sniffer ) this.sniffer.onHttpSuccess = function(){};
-        sbInvisibleBrowser.ELEMENT.stop();
         if ( ++this.index >= gURLs.length ) {
             this.finalize();
         } else {
@@ -294,25 +300,29 @@ var sbCaptureTask = {
                 window.setTimeout(function(){ sbCaptureTask.start(); }, 0);
             } else {
                 this.seconds = this.INTERVAL;
-                if ( this.seconds > 0 ) {
-                    sbCaptureTask.countDown();
-                } else {
-                    sbCaptureTask.start();
-                }
+                sbCaptureTask.countDown();
             }
         }
     },
 
     countDown: function() {
         SB_trace(sbCommonUtils.lang("WAITING", sbCaptureTask.seconds));
-        if ( --this.seconds > 0 ) {
+        if ( this.seconds > 0 ) {
+            this.seconds--;
             this.timerID = window.setTimeout(function(){ sbCaptureTask.countDown(); }, 1000);
         } else {
-            this.timerID = window.setTimeout(function(){ sbCaptureTask.start(); }, 1000);
+            this.timerID = window.setTimeout(function(){ sbCaptureTask.start(); }, 0);
         }
     },
 
     finalize: function() {
+        document.getElementById("sbCaptureTextbox").disabled = false;
+        document.getElementById("sbCapturePauseButton").disabled = true;
+        document.getElementById("sbCapturePauseButton").hidden = false;
+        document.getElementById("sbCaptureStartButton").hidden = true;
+        document.getElementById("sbCaptureCancelButton").hidden = true;
+        document.getElementById("sbCaptureFinishButton").hidden = false;
+        document.getElementById("sbCaptureSkipButton").disabled = true;
         if ( gContext == "indepth" ) {
             sbCrossLinker.invoke();
         } else {
@@ -326,29 +336,50 @@ var sbCaptureTask = {
         window.setTimeout(function(){ window.close(); }, 1000);
     },
 
+    // press "start" button
     activate: function() {
         this.toggleStartPause(true);
-        if ( this.seconds < 0 ) {
-            sbCaptureTask.start();
-        } else {
-            this.countDown();
-        }
+        this.countDown();
     },
 
+    // press "pause" button
     pause: function() {
         this.toggleStartPause(false);
         if ( this.seconds < 0 ) {
-            sbInvisibleBrowser.ELEMENT.stop();
+            if ( this.sniffer ) this.sniffer.cancel();
+            sbInvisibleBrowser.cancel();
         } else {
             this.seconds++;
             window.clearTimeout(this.timerID);
         }
     },
 
+    // press "cancel" button
     abort: function() {
         if ( gContext != "indepth" ) window.close();
-        if ( ++this.forceExit > 2 ) window.close();
-        if ( this.index < gURLs.length - 1 ) { this.index = gURLs.length - 1; this.next(); }
+        if ( ++this.forceExit >= 2 ) window.close();
+
+        // remember the current active state because it would be interfered by UI changing
+        var wasActive = this.isActive();
+
+        // set UI, generally same as finalize
+        document.getElementById("sbCaptureTextbox").disabled = false;
+        document.getElementById("sbCapturePauseButton").disabled = true;
+        document.getElementById("sbCapturePauseButton").hidden = false;
+        document.getElementById("sbCaptureStartButton").hidden = true;
+        document.getElementById("sbCaptureCancelButton").hidden = true;
+        document.getElementById("sbCaptureFinishButton").hidden = false;
+        document.getElementById("sbCaptureSkipButton").disabled = true;
+
+        if (wasActive) {
+            this.index = gURLs.length - 1; // mark to finalize on next capture
+        } else {
+            this.finalize();
+        }
+    },
+
+    isActive: function () {
+        return this.seconds < 0 && document.getElementById("sbCaptureStartButton").hidden;
     },
 
     toggleFilterBox: function(tfbEvent) {
@@ -653,6 +684,10 @@ var sbInvisibleBrowser = {
         // if aURL is different from the current URL only in hash,
         // a loading is not performed unless forced to reload
         if (this.ELEMENT.currentURI.specIgnoringRef == sbCommonUtils.splitURLByAnchor(aURL)[0]) this.ELEMENT.reload();
+    },
+
+    cancel: function() {
+        this.ELEMENT.stop();
     },
 
     execCapture: function() {
@@ -1011,6 +1046,10 @@ sbHeaderSniffer.prototype = {
         } else {
             // sbCommonUtils.error("Non-HTML under undefined context: " + gContext);
         }
+    },
+
+    cancel: function() {
+        if (this._channel) this._channel.cancel(Components.results.NS_BINDING_ABORTED);
     },
 
     reportError: function(aErrorMsg) {
