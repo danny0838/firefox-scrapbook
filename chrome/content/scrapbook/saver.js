@@ -66,6 +66,15 @@ var sbContentSaver = {
         this.httpTask[this.item.id] = 0;
     },
 
+    // aRootWindow: window to be captured
+    // aIsPartial: (bool) this is a partial capture (only capture selection area)
+    // aShowDetail: 
+    // aResName: the folder item which is the parent of this captured item
+    // aResIndex: the position index where this captured item will be in the parent folder
+    //            (1 is the first; 0 is last or first depending on pref "tree.unshift")
+    //            (currently it is always 0)
+    // aPresetData: data comes from a capture.js, cold be: 
+    //              link, indepth, capture-again, capture-again-deep
     captureWindow: function(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData, aContext, aTitle) {
         this.init(aPresetData);
         this.item.chars = this.option["forceUtf8"] ? "UTF-8" : aRootWindow.document.characterSet;
