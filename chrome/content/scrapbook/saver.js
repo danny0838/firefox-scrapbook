@@ -26,10 +26,12 @@ var sbContentSaver = {
         this.name = "index";
         this.favicon = null;
         this.file2URL = { "index.dat": true, "index.png": true, "index.rdf": true, "sitemap.xml": true, "sitemap.xsl": true, "sb-file2url.txt": true, "sb-url2name.txt": true, };
+        this.file2Doc = {};
         this.option   = { "dlimg": false, "dlsnd": false, "dlmov": false, "dlarc": false, "custom": "", "inDepth": 0, "isPartial": false, "images": true, "media": true, "fonts": true, "frames": true, "styles": true, "script": false, "asHtml": false, "forceUtf8": true, "rewriteStyles": true, "keepLink": false, "internalize": false };
         this.plusoption = { "timeout": "0", "charset": "UTF-8" }
         this.linkURLs = [];
         this.frames = [];
+        this.canvases = [];
         this.isMainFrame = true;
         if ( aPresetData ) {
             if ( aPresetData[0] ) this.item.id = aPresetData[0];
