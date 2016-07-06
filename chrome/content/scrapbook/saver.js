@@ -2,7 +2,7 @@
 var sbContentSaver = {
 
 
-    name: "",
+    documentName: "",
     item: null,
     contentDir: null,
     httpTask: {},
@@ -22,7 +22,7 @@ var sbContentSaver = {
     init: function(aPresetData) {
         this.item = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
         this.item.id = sbDataSource.identify(this.item.id);
-        this.name = "index";
+        this.documentName = "index";
         this.favicon = null;
         this.file2URL = { "index.dat": true, "index.png": true, "index.rdf": true, "sitemap.xml": true, "sitemap.xsl": true, "sb-file2url.txt": true, "sb-url2name.txt": true, };
         this.option = {
@@ -53,7 +53,7 @@ var sbContentSaver = {
         this.isMainFrame = true;
         if ( aPresetData ) {
             if ( aPresetData[0] ) this.item.id = aPresetData[0];
-            if ( aPresetData[1] ) this.name = aPresetData[1];
+            if ( aPresetData[1] ) this.documentName = aPresetData[1];
             if ( aPresetData[2] ) this.option = sbCommonUtils.extendObject(this.option, aPresetData[2]);
             if ( aPresetData[3] ) this.file2URL = aPresetData[3];
             if ( aPresetData[4] >= this.option["inDepth"] ) this.option["inDepth"] = 0;
@@ -98,7 +98,7 @@ var sbContentSaver = {
             if ( ret.result == 2 ) { aResName = ret.resURI; aResIndex = 0; }
         }
         this.contentDir = sbCommonUtils.getContentDir(this.item.id);
-        var newName = this.saveDocumentInternal(aRootWindow.document, this.name);
+        var newName = this.saveDocumentInternal(aRootWindow.document, this.documentName);
         if ( this.item.icon && this.item.type != "image" && this.item.type != "file" ) {
             var iconFileName = this.download(this.item.icon);
             this.favicon = iconFileName;
@@ -149,7 +149,7 @@ var sbContentSaver = {
         }
         this.contentDir = sbCommonUtils.getContentDir(this.item.id);
         this.refURLObj = sbCommonUtils.convertURLToObject(aReferURL);
-        var newName = this.saveFileInternal(aSourceURL, this.name, aType);
+        var newName = this.saveFileInternal(aSourceURL, this.documentName, aType);
         this.addResource(aResName, aResIndex);
         return [sbCommonUtils.splitFileName(newName)[0], this.file2URL, this.item.title];
     },
@@ -853,7 +853,7 @@ var sbContentSaver = {
                     var tmpRefURL = this.refURLObj;
                     // retrieve contentDocument from the corresponding real frame
                     var idx = aNode.getAttribute("data-sb-frame-id");
-                    var newFileName = this.saveDocumentInternal(this.frames[idx].contentDocument, this.name + "_" + (parseInt(idx)+1));
+                    var newFileName = this.saveDocumentInternal(this.frames[idx].contentDocument, this.documentName + "_" + (parseInt(idx)+1));
                     aNode.setAttribute("src", sbCommonUtils.escapeFileName(newFileName));
                     this.refURLObj = tmpRefURL;
                 } else if ( this.option["keepLink"] ) {
