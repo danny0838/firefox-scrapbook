@@ -733,12 +733,13 @@ var sbTreeDNDHandler = {
                 file2Url: null,
                 preset: null,
                 titles: null,
+                context: "link",
             };
             top.window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
         } else if (url.indexOf("file://") == 0) {
             top.window.sbContentSaver.captureFile(
                 url, "file://", "file", sbCommonUtils.getPref("showDetailOnDrop", false),
-                res[0], res[1], null
+                res[0], res[1], null, "link"
             );
         } else {
             sbCommonUtils.error(sbCommonUtils.lang("ERROR_INVALID_URL", url));
