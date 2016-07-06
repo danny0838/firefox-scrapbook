@@ -65,14 +65,8 @@
                 </groupbox>
                 <groupbox group="capture-options" style="margin-top:8px;">
                     <caption label="&sb.detail.linked.file;" />
-                    <checkbox id="sbDetailImage"   label="&sb.detail.linked.image; (jpg, png, gif, tiff)" />
-                    <checkbox id="sbDetailSound"   label="&sb.detail.linked.sound; (aac, flac, mp3, ogg, ram, wav, wma)" />
-                    <checkbox id="sbDetailMovie"   label="&sb.detail.linked.movie; (avi, avc, flv, mkv, mov, mpg, mp4, wmv)" />
-                    <checkbox id="sbDetailArchive" label="&sb.detail.linked.archive; (zip, lzh, tar, gz, bz, 7z, rar, jar, xpi)" />
-                    <hbox align="center">
-                        <checkbox id="sbDetailCustom" label="&sb.detail.linked.custom;" oncommand="sbCaptureOptions.updateCustomUI();" />
-                        <textbox id="sbDetailCustomExt" flex="1" onchange="this.value = this.value.toLowerCase().replace(/[^0-9a-z ,;\|]/g, '').replace(/[ ,;\|]+/g, ', '); this.setAttribute('value', this.value); document.persist(this, 'value');" />
-                    </hbox>
+                    <description>&sb.detail.linked.file.desc;</description>
+                    <textbox id="sbDetailDownLinkFilter" flex="1" multiline="true" rows="4" />
                 </groupbox>
                 <groupbox id="sbDetailInDepthBox" group="capture-options" style="margin-top:8px;">
                     <caption label="&sb.detail.linked.page;" />

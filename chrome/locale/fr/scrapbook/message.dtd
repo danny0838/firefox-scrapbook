@@ -53,11 +53,7 @@
 <!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
 <!ENTITY sb.detail.linked.file "Capturer les fichiers liés">
-<!ENTITY sb.detail.linked.image "Image">
-<!ENTITY sb.detail.linked.sound "Son">
-<!ENTITY sb.detail.linked.movie "Vidéo">
-<!ENTITY sb.detail.linked.archive "Archive">
-<!ENTITY sb.detail.linked.custom "Personnalisé">
+<!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped. Invalid RegExp will be skipped.">
 <!ENTITY sb.detail.linked.page "Capture en profondeur">
 <!ENTITY sb.detail.linked.page.depth "Profondeur de capture des liens">
 <!ENTITY sb.detail.linked.page.text "Une fois les captures terminées, toutes les pages seront liées entre elles et un plan du site sera créé.">

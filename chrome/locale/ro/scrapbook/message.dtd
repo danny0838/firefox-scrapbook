@@ -53,11 +53,7 @@
 <!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
 <!ENTITY sb.detail.linked.file "Descărcare fișiere legate">
-<!ENTITY sb.detail.linked.image "Imagini">
-<!ENTITY sb.detail.linked.sound "Audio">
-<!ENTITY sb.detail.linked.movie "Video">
-<!ENTITY sb.detail.linked.archive "Arhive">
-<!ENTITY sb.detail.linked.custom "Alte tipuri">
+<!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped. Invalid RegExp will be skipped.">
 <!ENTITY sb.detail.linked.page "Capturare în profunzime">
 <!ENTITY sb.detail.linked.page.depth "Nivelul de urmărire a legăturilor (profunzimea)">
 <!ENTITY sb.detail.linked.page.text "După finalizarea capturării, paginile vor fi legate una de alta și se va construi harta saitului.">

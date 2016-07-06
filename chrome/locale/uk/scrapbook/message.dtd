@@ -53,11 +53,7 @@
 <!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
 <!ENTITY sb.detail.linked.file "Завантаження файлів за посиланнями на сторінці">
-<!ENTITY sb.detail.linked.image "Зображення">
-<!ENTITY sb.detail.linked.sound "Звукові файли">
-<!ENTITY sb.detail.linked.movie "Відео файли">
-<!ENTITY sb.detail.linked.archive "Архіви">
-<!ENTITY sb.detail.linked.custom "Особисті">
+<!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped. Invalid RegExp will be skipped.">
 <!ENTITY sb.detail.linked.page "Глибоке збереження">
 <!ENTITY sb.detail.linked.page.depth "Глибина збереження">
 <!ENTITY sb.detail.linked.page.text "Після завершення збереження усі сторінки будуть пов’язані між собою та буде створена карта сайту.">

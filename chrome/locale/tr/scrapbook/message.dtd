@@ -53,11 +53,7 @@
 <!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
 <!ENTITY sb.detail.linked.file "Bağlantılı dosyaları indir">
-<!ENTITY sb.detail.linked.image "Resim">
-<!ENTITY sb.detail.linked.sound "Ses">
-<!ENTITY sb.detail.linked.movie "Film">
-<!ENTITY sb.detail.linked.archive "Arşiv">
-<!ENTITY sb.detail.linked.custom "Özel">
+<!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped. Invalid RegExp will be skipped.">
 <!ENTITY sb.detail.linked.page "Derinlemesine Kaydet">
 <!ENTITY sb.detail.linked.page.depth "Linkleri izleme derinliği">
 <!ENTITY sb.detail.linked.page.text "Kayıt etme işlemi tamamlandıktan sonra, tüm sayfalar birbirine bağlanacak ve site haritası oluşturulacak.">

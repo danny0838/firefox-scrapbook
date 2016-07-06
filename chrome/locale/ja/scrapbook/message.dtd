@@ -53,11 +53,7 @@
 <!ENTITY sb.detail.option.asHtml "HTMLとして取り込み">
 <!ENTITY sb.detail.option.forceUtf8 "UTF-8エンコーディングとして保存">
 <!ENTITY sb.detail.linked.file "リンク先ファイルのダウンロード">
-<!ENTITY sb.detail.linked.image "イメージ">
-<!ENTITY sb.detail.linked.sound "サウンド">
-<!ENTITY sb.detail.linked.movie "ムービー">
-<!ENTITY sb.detail.linked.archive "アーカイブ">
-<!ENTITY sb.detail.linked.custom "カスタム">
+<!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped. Invalid RegExp will be skipped.">
 <!ENTITY sb.detail.linked.page "掘り下げ取り込み">
 <!ENTITY sb.detail.linked.page.depth "リンクをたどる深さ">
 <!ENTITY sb.detail.linked.page.text "取り込み完了後、すべてのページは相互にリンクされ、サイトマップが生成されます。">

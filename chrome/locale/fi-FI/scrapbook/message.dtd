@@ -53,11 +53,7 @@
 <!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
 <!ENTITY sb.detail.linked.file "Lataa linkitetyt tiedostot">
-<!ENTITY sb.detail.linked.image "Kuva">
-<!ENTITY sb.detail.linked.sound "Ääni">
-<!ENTITY sb.detail.linked.movie "Elokuva">
-<!ENTITY sb.detail.linked.archive "Paketti">
-<!ENTITY sb.detail.linked.custom "Itse määritetty">
+<!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped. Invalid RegExp will be skipped.">
 <!ENTITY sb.detail.linked.page "Syvätallennus">
 <!ENTITY sb.detail.linked.page.depth "Linkkien seuraussyvyys">
 <!ENTITY sb.detail.linked.page.text "Tallennusten valmistuttua kaikki sivut linkitetään toisiinsa.">

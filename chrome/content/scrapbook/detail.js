@@ -1,7 +1,6 @@
 
 var sbCaptureOptions = {
 
-    get CUSTOM_UI() { return document.getElementById("sbDetailCustom"); },
     get WARNING_UI(){ return document.getElementById("sbDetailWarnAboutScript"); },
 
     param: null,
@@ -21,12 +20,7 @@ var sbCaptureOptions = {
         document.getElementById("sbDetailOptionRewriteStyles").checked = sbCommonUtils.getPref("capture.default.rewriteStyles", true);
         document.getElementById("sbDetailOptionKeepLink").checked = sbCommonUtils.getPref("capture.default.keepLink", false);
         document.getElementById("sbDetailOptionSaveDataURI").checked = sbCommonUtils.getPref("capture.default.saveDataURI", false);
-        document.getElementById("sbDetailImage").checked = sbCommonUtils.getPref("capture.default.dlimg", false);
-        document.getElementById("sbDetailSound").checked = sbCommonUtils.getPref("capture.default.dlsnd", false);
-        document.getElementById("sbDetailMovie").checked = sbCommonUtils.getPref("capture.default.dlmov", false);
-        document.getElementById("sbDetailArchive").checked = sbCommonUtils.getPref("capture.default.dlarc", false);
-        document.getElementById("sbDetailCustom").checked = sbCommonUtils.getPref("capture.default.custom", false);
-        document.getElementById("sbDetailCustomExt").value = sbCommonUtils.getPref("capture.default.customExt", "");
+        document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("capture.default.downLinkFilter", "");
         // accept button
         document.documentElement.getButton("accept").label = sbCommonUtils.lang("CAPTURE_OK_BUTTON");
         // title
@@ -34,8 +28,6 @@ var sbCaptureOptions = {
         // script warning
         this.WARNING_UI.setAttribute("offset", this.WARNING_UI.boxObject.height || 32);
         setTimeout(function(){ sbCaptureOptions.updateWarningUI(document.getElementById('sbDetailOptionScript').checked); }, 0);
-        // download link - custom extension
-        this.updateCustomUI();
         // context specific settings
         if ( this.param.context == "capture-again" || this.param.context == "capture-again-deep" ) {
             document.getElementById("sbDetailFolderRow").collapsed = true;
@@ -50,10 +42,6 @@ var sbCaptureOptions = {
             // comment
             document.getElementById("sbDetailComment").value = this.param.item.comment.replace(/ __BR__ /g, "\n");
         }
-    },
-
-    updateCustomUI: function() {
-        this.CUSTOM_UI.nextSibling.disabled = !this.CUSTOM_UI.checked;
     },
 
     updateWarningUI: function(checked) {
@@ -94,11 +82,7 @@ var sbCaptureOptions = {
         this.param.option["rewriteStyles"] = document.getElementById("sbDetailOptionRewriteStyles").checked;
         this.param.option["keepLink"] = document.getElementById("sbDetailOptionKeepLink").checked;
         this.param.option["saveDataURI"] = document.getElementById("sbDetailOptionSaveDataURI").checked;
-        this.param.option["dlimg"] = document.getElementById("sbDetailImage").checked;
-        this.param.option["dlsnd"] = document.getElementById("sbDetailSound").checked;
-        this.param.option["dlmov"] = document.getElementById("sbDetailMovie").checked;
-        this.param.option["dlarc"] = document.getElementById("sbDetailArchive").checked;
-        this.param.option["custom"] = this.CUSTOM_UI.checked ? document.getElementById("sbDetailCustomExt").value : "";
+        this.param.option["downLinkFilter"] = document.getElementById("sbDetailDownLinkFilter").value;
         if ( this.param.context !== "capture-again-deep" ) {
             this.param.option["inDepth"] = parseInt("0" + document.getElementById("sbDetailInDepth").value, 10);
             this.param.option["inDepthTimeout"] = parseInt("0" + document.getElementById("sbDetailTimeout").value, 10);
@@ -120,12 +104,7 @@ var sbCaptureOptions = {
         sbCommonUtils.setPref("capture.default.rewriteStyles", this.param.option["rewriteStyles"]);
         sbCommonUtils.setPref("capture.default.keepLink", this.param.option["keepLink"]);
         sbCommonUtils.setPref("capture.default.saveDataURI", this.param.option["saveDataURI"]);
-        sbCommonUtils.setPref("capture.default.dlimg", this.param.option["dlimg"]);
-        sbCommonUtils.setPref("capture.default.dlsnd", this.param.option["dlsnd"]);
-        sbCommonUtils.setPref("capture.default.dlmov", this.param.option["dlmov"]);
-        sbCommonUtils.setPref("capture.default.dlarc", this.param.option["dlarc"]);
-        sbCommonUtils.setPref("capture.default.custom", document.getElementById("sbDetailCustom").checked);
-        sbCommonUtils.setPref("capture.default.customExt", document.getElementById("sbDetailCustomExt").value);
+        sbCommonUtils.setPref("capture.default.downLinkFilter", this.param.option["downLinkFilter"]);
     },
 
     cancel: function() {
