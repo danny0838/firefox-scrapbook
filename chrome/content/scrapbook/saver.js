@@ -1,30 +1,21 @@
 
 var sbContentSaver = {
-
-
+    option: {},
     documentName: "",
     item: null,
+    favicon: null,
     contentDir: null,
+    refURLObj: null,
+    isMainFrame: true,
+    selection: null,
     httpTask: {},
     file2URL: {},
     file2Doc: {},
-    option: {},
-    refURLObj: null,
-    favicon: null,
+    linkURLs: [],
     frames: [],
     canvases: [],
-    isMainFrame: true,
-    selection: null,
-    linkURLs: [],
-
-
 
     init: function(aPresetData) {
-        this.item = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
-        this.item.id = sbDataSource.identify(this.item.id);
-        this.documentName = "index";
-        this.favicon = null;
-        this.file2URL = { "index.dat": true, "index.png": true, "index.rdf": true, "sitemap.xml": true, "sitemap.xsl": true, "sb-file2url.txt": true, "sb-url2name.txt": true, };
         this.option = {
             "isPartial": false,
             "images": sbCommonUtils.getPref("capture.default.images", true),
@@ -48,9 +39,23 @@ var sbContentSaver = {
             "inDepthCharset": "UTF-8",
             "internalize": false,
         };
+        this.documentName = "index";
+        this.item = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
+        this.item.id = sbDataSource.identify(this.item.id);
+        this.favicon = null;
+        this.isMainFrame = true;
+
+        this.file2URL = {
+            "index.dat": true,
+            "index.png": true,
+            "index.rdf": true,
+            "sitemap.xml": true,
+            "sitemap.xsl": true,
+            "sb-file2url.txt": true,
+            "sb-url2name.txt": true,
+        };
         this.linkURLs = [];
         this.frames = [];
-        this.isMainFrame = true;
         if ( aPresetData ) {
             if ( aPresetData[0] ) this.item.id = aPresetData[0];
             if ( aPresetData[1] ) this.documentName = aPresetData[1];
