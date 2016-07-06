@@ -54,8 +54,10 @@ var sbContentSaver = {
             "sb-file2url.txt": true,
             "sb-url2name.txt": true,
         };
+        this.file2Doc = {};
         this.linkURLs = [];
         this.frames = [];
+        this.canvases = [];
         if ( aPresetData ) {
             if ( aPresetData[0] ) this.item.id = aPresetData[0];
             if ( aPresetData[1] ) this.documentName = aPresetData[1];
