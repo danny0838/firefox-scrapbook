@@ -35,7 +35,7 @@
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Timeout (in seconds)">
-<!ENTITY sb.detail.linked.charset "Character set">
+<!ENTITY sb.detail.linked.charset "Loading charset">
 <!ENTITY sb.detail "Capture Detail">
 <!ENTITY sb.detail.new.folder "Yeni Klasör">
 <!ENTITY sb.detail.select.folder "Klasör Seç">
@@ -187,9 +187,7 @@
 <!ENTITY sbp.multiple.titleofwebsite "Title of website">
 <!ENTITY sbp.multiple.titleoflink "Title of link">
 <!ENTITY sb.multiple.title "Title">
-<!ENTITY sb.multiple.timeout "Timeout">
 <!ENTITY sbp.multiple.downloadmethod "Method">
-<!ENTITY sb.multiple.charset "Charset">
 <!ENTITY sb.multiple.url "URL (URL&apos;leri satır satır girin)">
 <!ENTITY sb.multiple.detector "URL Algılayıcı">
 <!ENTITY sb.multiple.detector.plink "Sayfadaki Tüm Linkler">

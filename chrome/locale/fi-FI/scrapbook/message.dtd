@@ -35,7 +35,7 @@
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Aikaraja (sekunneissa)">
-<!ENTITY sb.detail.linked.charset "Merkistö">
+<!ENTITY sb.detail.linked.charset "Loading charset">
 <!ENTITY sb.detail "Tallenna osa">
 <!ENTITY sb.detail.new.folder "Uusi kansio">
 <!ENTITY sb.detail.select.folder "Valitse kansio">
@@ -187,9 +187,7 @@
 <!ENTITY sbp.multiple.titleofwebsite "Verkkopaikan otsikko">
 <!ENTITY sbp.multiple.titleoflink "Otsikon linkki">
 <!ENTITY sb.multiple.title "Otsikko">
-<!ENTITY sb.multiple.timeout "Aikaraja">
 <!ENTITY sbp.multiple.downloadmethod "Menetelmä">
-<!ENTITY sb.multiple.charset "Merkistö">
 <!ENTITY sb.multiple.url "URL (Kukin URL omalle rivilleen)">
 <!ENTITY sb.multiple.detector "URL-tunnistin">
 <!ENTITY sb.multiple.detector.plink "Kaikki sivun linkit">

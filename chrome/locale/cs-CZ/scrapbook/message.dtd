@@ -35,7 +35,7 @@
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Časový limit (v sekundách)">
-<!ENTITY sb.detail.linked.charset "Znaková sada">
+<!ENTITY sb.detail.linked.charset "Loading charset">
 <!ENTITY sb.detail "Detail zachycení">
 <!ENTITY sb.detail.new.folder "Nová složka">
 <!ENTITY sb.detail.select.folder "Vybrat složku">
@@ -187,9 +187,7 @@
 <!ENTITY sbp.multiple.titleofwebsite "Název webové stránky">
 <!ENTITY sbp.multiple.titleoflink "Název odkazu">
 <!ENTITY sb.multiple.title "Název">
-<!ENTITY sb.multiple.timeout "Časový limit">
 <!ENTITY sbp.multiple.downloadmethod "Metoda">
-<!ENTITY sb.multiple.charset "Znaková sada">
 <!ENTITY sb.multiple.url "Adresa URL (zadávejte každou zvlášť na jeden řádek)">
 <!ENTITY sb.multiple.detector "Detektor URL">
 <!ENTITY sb.multiple.detector.plink "Všechny odkazy na stránce">

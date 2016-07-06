@@ -35,7 +35,7 @@
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Tidsgräns (s)">
-<!ENTITY sb.detail.linked.charset "Teckenuppsättning">
+<!ENTITY sb.detail.linked.charset "Loading charset">
 <!ENTITY sb.detail "Infångstinformation">
 <!ENTITY sb.detail.new.folder "Ny mapp">
 <!ENTITY sb.detail.select.folder "Välj mapp">
@@ -187,9 +187,7 @@
 <!ENTITY sbp.multiple.titleofwebsite "Webbplatsrubrik">
 <!ENTITY sbp.multiple.titleoflink "Länkrubrik">
 <!ENTITY sb.multiple.title "Rubrik">
-<!ENTITY sb.multiple.timeout "Tidsgräns">
 <!ENTITY sbp.multiple.downloadmethod "Metod">
-<!ENTITY sb.multiple.charset "Teckenuppsättning">
 <!ENTITY sb.multiple.url "URL:er (ange en URL per rad)">
 <!ENTITY sb.multiple.detector "URL-identifiering">
 <!ENTITY sb.multiple.detector.plink "Alla länkar på sidan">

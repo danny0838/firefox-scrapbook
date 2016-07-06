@@ -35,7 +35,7 @@
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "المهلة (ثواني)">
-<!ENTITY sb.detail.linked.charset "ضبط المحارف">
+<!ENTITY sb.detail.linked.charset "Loading charset">
 <!ENTITY sb.detail "تفاصيل الالتقاط">
 <!ENTITY sb.detail.new.folder "مجلد جديد">
 <!ENTITY sb.detail.select.folder "حدد مجلد">
@@ -187,9 +187,7 @@
 <!ENTITY sbp.multiple.titleofwebsite "عنوان الموقع">
 <!ENTITY sbp.multiple.titleoflink "عنوان الرابط">
 <!ENTITY sb.multiple.title "العنوان">
-<!ENTITY sb.multiple.timeout "المهلة">
 <!ENTITY sbp.multiple.downloadmethod "الأسلوب">
-<!ENTITY sb.multiple.charset "المحارف">
 <!ENTITY sb.multiple.url "عنوان (ادخل العناوين واحدا تحت الآخر)">
 <!ENTITY sb.multiple.detector "كاشف العناوين">
 <!ENTITY sb.multiple.detector.plink "كل الارتباطات في الصفحة">

@@ -35,7 +35,7 @@
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Timeout (in seconds)">
-<!ENTITY sb.detail.linked.charset "Character set">
+<!ENTITY sb.detail.linked.charset "Loading charset">
 <!ENTITY sb.detail "Capture Detail">
 <!ENTITY sb.detail.new.folder "New Folder">
 <!ENTITY sb.detail.select.folder "Select Folder">
@@ -187,9 +187,7 @@
 <!ENTITY sbp.multiple.titleofwebsite "Title of website">
 <!ENTITY sbp.multiple.titleoflink "Title of link">
 <!ENTITY sb.multiple.title "Title">
-<!ENTITY sb.multiple.timeout "Timeout">
 <!ENTITY sbp.multiple.downloadmethod "Method">
-<!ENTITY sb.multiple.charset "Charset">
 <!ENTITY sb.multiple.url "URL (Enter URLs line-by-line)">
 <!ENTITY sb.multiple.detector "URL Detector">
 <!ENTITY sb.multiple.detector.plink "All Links in the Page">

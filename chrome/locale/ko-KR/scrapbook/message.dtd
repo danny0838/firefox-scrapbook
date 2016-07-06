@@ -35,7 +35,7 @@
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "시간 제한 (초)">
-<!ENTITY sb.detail.linked.charset "문자셋">
+<!ENTITY sb.detail.linked.charset "Loading charset">
 <!ENTITY sb.detail "캡처 상세 설정">
 <!ENTITY sb.detail.new.folder "새 폴더">
 <!ENTITY sb.detail.select.folder "폴더 선택">
@@ -187,9 +187,7 @@
 <!ENTITY sbp.multiple.titleofwebsite "웹 사이트 제목">
 <!ENTITY sbp.multiple.titleoflink "링크 제목">
 <!ENTITY sb.multiple.title "제목">
-<!ENTITY sb.multiple.timeout "시간제한">
 <!ENTITY sbp.multiple.downloadmethod "방식">
-<!ENTITY sb.multiple.charset "문자셋">
 <!ENTITY sb.multiple.url "URL (여러 개를 입력하려면 줄을 바꾸어 입력하십시오.)">
 <!ENTITY sb.multiple.detector "URL 검출자">
 <!ENTITY sb.multiple.detector.plink "페이지의 모든 링크">

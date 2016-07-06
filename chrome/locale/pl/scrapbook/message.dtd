@@ -35,7 +35,7 @@
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Limit czasu (s)">
-<!ENTITY sb.detail.linked.charset "Zestaw znaków">
+<!ENTITY sb.detail.linked.charset "Loading charset">
 <!ENTITY sb.detail "Szczegóły przechwytywania">
 <!ENTITY sb.detail.new.folder "Nowy folder">
 <!ENTITY sb.detail.select.folder "Wybierz folder">
@@ -187,9 +187,7 @@
 <!ENTITY sbp.multiple.titleofwebsite "Tytuł witryny">
 <!ENTITY sbp.multiple.titleoflink "Tytuł odnośnika">
 <!ENTITY sb.multiple.title "Tytuł">
-<!ENTITY sb.multiple.timeout "Limit czasu">
 <!ENTITY sbp.multiple.downloadmethod "Metoda">
-<!ENTITY sb.multiple.charset "Zestaw znaków">
 <!ENTITY sb.multiple.url "URL (wprowadzaj adresy URL linia po linii)">
 <!ENTITY sb.multiple.detector "Wykrywacz adresów URL">
 <!ENTITY sb.multiple.detector.plink "Wszystkie odnośniki na tej stronie">

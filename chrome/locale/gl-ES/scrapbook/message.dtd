@@ -35,7 +35,7 @@
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Temporizador (en segundos)">
-<!ENTITY sb.detail.linked.charset "Xogo de caracteres">
+<!ENTITY sb.detail.linked.charset "Loading charset">
 <!ENTITY sb.detail "Detalles da captura">
 <!ENTITY sb.detail.new.folder "Novo cartafol">
 <!ENTITY sb.detail.select.folder "Seleccione un cartafol">
@@ -187,9 +187,7 @@
 <!ENTITY sbp.multiple.titleofwebsite "Título do sitio web">
 <!ENTITY sbp.multiple.titleoflink "Título da ligazón">
 <!ENTITY sb.multiple.title "Título">
-<!ENTITY sb.multiple.timeout "Temporizador">
 <!ENTITY sbp.multiple.downloadmethod "Método">
-<!ENTITY sb.multiple.charset "Xogo de caracteres">
 <!ENTITY sb.multiple.url "URL (Insira unha URL por liña)">
 <!ENTITY sb.multiple.detector "Detector de URLs">
 <!ENTITY sb.multiple.detector.plink "Todas as ligazóns da páxina">

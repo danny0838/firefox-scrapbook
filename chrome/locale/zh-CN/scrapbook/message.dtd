@@ -35,7 +35,7 @@
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "超时 (秒)">
-<!ENTITY sb.detail.linked.charset "字符集">
+<!ENTITY sb.detail.linked.charset "用这个字符集载入">
 <!ENTITY sb.detail "详细信息">
 <!ENTITY sb.detail.new.folder "新建文件夹">
 <!ENTITY sb.detail.select.folder "选择文件夹">
@@ -187,9 +187,7 @@
 <!ENTITY sbp.multiple.titleofwebsite "站点标题">
 <!ENTITY sbp.multiple.titleoflink "链接标题">
 <!ENTITY sb.multiple.title "标题">
-<!ENTITY sb.multiple.timeout "超时">
 <!ENTITY sbp.multiple.downloadmethod "方法">
-<!ENTITY sb.multiple.charset "字符集">
 <!ENTITY sb.multiple.url "URL (每行输入一个 URL)">
 <!ENTITY sb.multiple.detector "检测 URL">
 <!ENTITY sb.multiple.detector.plink "页面中包含的所有链接">

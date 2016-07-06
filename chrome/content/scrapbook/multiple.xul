@@ -44,7 +44,7 @@
                 </menulist>
             </row>
             <row align="center" style="margin-bottom:8px;">
-                <label value="&sb.multiple.timeout;:" />
+                <label value="&sb.detail.linked.timeout;:" />
                 <menulist id="sbTimeout" editable="true">
                     <menupopup id="sbTimeoutitems">
                         <menuitem value="0" label="0" selected="true" />
@@ -55,7 +55,7 @@
                 </menulist>
             </row>
             <row align="center" style="margin-bottom:8px;">
-                <label value="&sb.multiple.charset;:" />
+                <label value="&sb.detail.linked.charset;:" />
                 <menulist id="sbCharset" editable="true">
                     <menupopup id="sbCharsetitems">
                         <menuitem value="" label="" selected="true" />

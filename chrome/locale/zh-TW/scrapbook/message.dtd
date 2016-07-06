@@ -35,7 +35,7 @@
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "逾時（秒數）">
-<!ENTITY sb.detail.linked.charset "字元編碼">
+<!ENTITY sb.detail.linked.charset "以此文字編碼載入">
 <!ENTITY sb.detail "擷取細節">
 <!ENTITY sb.detail.new.folder "開新資料夾">
 <!ENTITY sb.detail.select.folder "選取資料夾">
@@ -187,9 +187,7 @@
 <!ENTITY sbp.multiple.titleofwebsite "網站標題">
 <!ENTITY sbp.multiple.titleoflink "連結標題">
 <!ENTITY sb.multiple.title "標題">
-<!ENTITY sb.multiple.timeout "逾時">
 <!ENTITY sbp.multiple.downloadmethod "方式">
-<!ENTITY sb.multiple.charset "字元集">
 <!ENTITY sb.multiple.url "URL (每行一個 URL)">
 <!ENTITY sb.multiple.detector "自動偵測 URL">
 <!ENTITY sb.multiple.detector.plink "本頁所有連結">
