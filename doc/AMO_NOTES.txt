@@ -39,20 +39,3 @@ to open a specific directory in the native file explorer so that users can
 easily view or edit their source files of the selected ScrapBook item. It is 
 also used to open the file of a selected ScrapBook "file" typed item, which 
 is under the user's fully consent.
-
-
-# Use of nsIWebBrowserPersist
-
-We know that nsIWebBrowserPersist is deprecated by Firefox and it's generally 
-recommanded to be replaced with Downloads.jsm. However, Downloads.jsm only 
-exists in newer Firefox versions so that with it we can no more support older 
-Firefox versions. Additionally, Downloads.jsm works differently with 
-nsIWebBrowserPersist, in that it doesn't support parrellel downloading, and 
-the downloaded files cannot be hidden from the download manager.
-
-Though we know there's a risk that the nsIWebBrowserPersist might be removed 
-in the future versions of Firefox, we decided that the transition will not be 
-done until Downloads.jsm has been revised to include the features as above 
-mentioned, or until nsIWebBrowserPersist is eventually removed (which would be 
-a torture as we have to largely modify many current working features and to 
-break the downward compatibility for old Firefox versions).
