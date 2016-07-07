@@ -480,6 +480,15 @@ var sbCommonUtils = {
         this.writeFile(aFile, content, "UTF-8");
     },
 
+    // check if two files are identical
+    compareFiles: function(aFile1, aFile2) {
+        // quick check for difference and to prevent an error
+        if (!(aFile1.exists() && aFile2.exists() && aFile1.isFile() && aFile2.isFile() && aFile1.fileSize == aFile2.fileSize)) {
+            return false;
+        }
+        return (this.readFile(aFile1) === this.readFile(aFile2));
+    },
+
     saveTemplateFile: function(aURISpec, aFile, aOverwrite) {
         if ( aFile.exists() && !aOverwrite ) return;
         var istream = this.IO.newChannelFromURI(this.convertURLToObject(aURISpec)).open();

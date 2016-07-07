@@ -1113,10 +1113,22 @@ var sbContentSaver = {
                 sbContentSaver.httpTask[sbContentSaver.item.id]++;
                 return "scrapbook://" + hashKey;
             } else if ( sourceURL.indexOf("file:") === 0 ) {
+                // if sourceURL is not targeting a file, fail out
+                var sourceFile = sbCommonUtils.convertURLToFile(sourceURL);
+                if ( !(sourceFile.exists() && sourceFile.isFile()) ) return "";
+                // determine the filename
                 var targetDir = this.option["internalize"] ? this.option["internalize"].parent : this.contentDir.clone();
                 var fileName, isDuplicate;
-                // determine the filename and check for duplicate
                 fileName = sbCommonUtils.getFileName(sourceURL);
+                // if the target file exists and has same content as the source file, skip copy
+                // This kind of duplicate is probably a result of Firefox making a relative link absolute
+                // during a copy/cut.
+                fileName = sbCommonUtils.validateFileName(fileName);
+                var targetFile = targetDir.clone(); targetFile.append(fileName);
+                if (sbCommonUtils.compareFiles(sourceFile, targetFile)) {
+                    return fileName;
+                }
+                // check for duplicate
                 [fileName, isDuplicate] = sbContentSaver.getUniqueFileName(fileName, sourceURL);
                 if (isDuplicate) return fileName;
                 // set task
@@ -1124,9 +1136,7 @@ var sbContentSaver = {
                 var item = this.item;
                 setTimeout(function(){ sbCaptureObserverCallback.onDownloadComplete(item); }, 0);
                 // do the copy
-                var orgFile = sbCommonUtils.convertURLToFile(sourceURL);
-                if ( !orgFile.isFile() ) return "";
-                orgFile.copyTo(targetDir, fileName);
+                sourceFile.copyTo(targetDir, fileName);
                 return fileName;
             } else if ( sourceURL.indexOf("data:") === 0 ) {
                 // download "data:" only if option on
