@@ -177,9 +177,7 @@ var sbContentSaver = {
 
         if ( !this.option["internalize"] ) {
             var useXHTML = (contentType == "application/xhtml+xml") && (!this.option["asHtml"]);
-            var arr = this.getUniqueFileName(aFileKey + (useXHTML?".xhtml":".html"), this.refURLObj.spec, aDocument);
-            var myHTMLFileName = arr[0];
-            var myHTMLFileDone = arr[1];
+            var [myHTMLFileName, myHTMLFileDone] = this.getUniqueFileName(aFileKey + (useXHTML?".xhtml":".html"), this.refURLObj.spec, aDocument);
             if (myHTMLFileDone) return myHTMLFileName;
             // create a meta refresh for each *.xhtml
             if (useXHTML) {
@@ -191,8 +189,7 @@ var sbContentSaver = {
         }
 
         if ( this.option["rewriteStyles"] ) {
-            var arr = this.getUniqueFileName(aFileKey + ".css", this.refURLObj.spec, aDocument);
-            var myCSSFileName = arr[0];
+            var [myCSSFileName] = this.getUniqueFileName(aFileKey + ".css", this.refURLObj.spec, aDocument);
         }
 
         var htmlNode = aDocument.documentElement;
@@ -1125,35 +1122,36 @@ var sbContentSaver = {
     /**
      * @return  [(string) newFileName, (bool) isDuplicated]
      */
-    getUniqueFileName: function(newFileName, aURLSpec, aDocumentSpec) {
-        if ( !newFileName ) newFileName = "untitled";
-        newFileName = newFileName;
-        newFileName = sbCommonUtils.validateFileName(newFileName);
-        var fileLR = sbCommonUtils.splitFileName(newFileName);
-        fileLR[0] = sbCommonUtils.crop(sbCommonUtils.crop(fileLR[0], 240, true), 128);
-        if ( !fileLR[1] ) fileLR[1] = "dat";
-        aURLSpec = sbCommonUtils.splitURLByAnchor(aURLSpec)[0];
+    getUniqueFileName: function(aSuggestFileName, aSourceURL, aSourceDoc) {
+        var newFileName = sbCommonUtils.validateFileName(aSuggestFileName || "untitled");
+        var [newFileBase, newFileExt] = sbCommonUtils.splitFileName(newFileName);
+        newFileBase = sbCommonUtils.crop(sbCommonUtils.crop(newFileBase, 240, true), 128);
+        newFileExt = newFileExt || "dat";
+        var sourceURL = sbCommonUtils.splitURLByAnchor(aSourceURL)[0];
+        var sourceDoc = aSourceDoc;
+
+        // CI means case insensitive
         var seq = 0;
-        newFileName = fileLR[0] + "." + fileLR[1];
+        newFileName = newFileBase + "." + newFileExt;
         var newFileNameCI = newFileName.toLowerCase();
-        while ( this.file2URL[newFileNameCI] != undefined ) {
-            if (this.file2URL[newFileNameCI] == aURLSpec) {
-                if (this.file2Doc[newFileNameCI] == aDocumentSpec) {
+        while (this.file2URL[newFileNameCI] !== undefined) {
+            if (this.file2URL[newFileNameCI] === sourceURL) {
+                if (this.file2Doc[newFileNameCI] === sourceDoc) {
                     // this.file2Doc is mainly to check for dynamic iframes without src attr
                     // they have exactly same url with the main page
                     return [newFileName, true];
                 } else if (!this.file2Doc[newFileNameCI]) {
                     // if this.file2Doc[newFileName] has no document set,
                     // it should mean a preset url for the page and is safe to use
-                    this.file2Doc[newFileNameCI] = aDocumentSpec;
+                    this.file2Doc[newFileNameCI] = sourceDoc;
                     return [newFileName, false];
                 }
             }
-            newFileName = fileLR[0] + "_" + sbCommonUtils.pad(++seq, 3) + "." + fileLR[1];
+            newFileName = newFileBase + "_" + sbCommonUtils.pad(++seq, 3) + "." + newFileExt;
             newFileNameCI = newFileName.toLowerCase();
         }
-        this.file2URL[newFileNameCI] = aURLSpec;
-        this.file2Doc[newFileNameCI] = aDocumentSpec;
+        this.file2URL[newFileNameCI] = sourceURL;
+        this.file2Doc[newFileNameCI] = sourceDoc;
         return [newFileName, false];
     },
 
