@@ -65,7 +65,13 @@
                 </groupbox>
                 <groupbox group="capture-options" style="margin-top:8px;">
                     <caption label="&sb.detail.linked.file;" />
-                    <checkbox id="sbDetailDownLinkActive" label="&sb.detail.linked.file.active;" />
+                    <menulist id="sbDetailDownLinkMethod" flex="1" value="0">
+                        <menupopup>
+                            <menuitem value="0" label="&sb.detail.linked.file.method0;" />
+                            <menuitem value="1" label="&sb.detail.linked.file.method1;" />
+                            <menuitem value="2" label="&sb.detail.linked.file.method2;" />
+                        </menupopup>
+                    </menulist>
                     <description>&sb.detail.linked.file.desc;</description>
                     <textbox id="sbDetailDownLinkFilter" flex="1" multiline="true" rows="4" />
                     <button label="&sb.detail.linked.file.reset;" oncommand="sbCaptureOptions.resetDownLinkFilters();" />

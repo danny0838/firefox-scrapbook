@@ -35,8 +35,8 @@ var sbContentSaver = {
             "rewriteStyles": sbCommonUtils.getPref("capture.default.rewriteStyles", true),
             "keepLink": sbCommonUtils.getPref("capture.default.keepLink", false),
             "saveDataURI": sbCommonUtils.getPref("capture.default.saveDataURI", false),
-            "downLinkActive": false, // active only if explicitly set in detail dialog
-            "downLinkFilter": sbCommonUtils.getPref("capture.default.downLinkFilter", ""),
+            "downLinkMethod": 0, // active only if explicitly set in detail dialog
+            "downLinkFilter": "",
             "inDepth": 0, // active only if explicitly set in detail dialog
             "inDepthTimeout": 0,
             "inDepthCharset": "UTF-8",
@@ -749,8 +749,27 @@ var sbContentSaver = {
                     }
                 }
                 // determine whether to download (copy) the link target file
-                var aFileName = this.download(aNode.href, true);
-                if (aFileName) aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
+                switch (sbContentSaver.option["downLinkMethod"]) {
+                    case 2: // check url and header filename
+                        var aFileName = this.download(aNode.href, true);
+                        if (aFileName) aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
+                        break;
+                    case 1: // check url filename
+                        var [,ext] = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aNode.href));
+                        if (this.downLinkFilter(ext)) {
+                            var aFileName = this.download(aNode.href);
+                            if (aFileName) aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
+                            break;
+                        }
+                    case 0: // no check
+                    default:
+                        if ( sbContentSaver.option["inDepth"] > 0 ) {
+                            // do not copy, but add to the link list if it's a work of deep capture
+                            sbContentSaver.linkURLs.push(aNode.href);
+                        }
+                        aNode.setAttribute("href", aNode.href);
+                        break;
+                }
                 break;
             case "form": 
                 if ( aNode.hasAttribute("action") ) {
@@ -1030,27 +1049,7 @@ var sbContentSaver = {
                             }
                             // apply the filter
                             if (aIsLinkFilter) {
-                                if (sbContentSaver.option["downLinkActive"]) {
-                                    if (sbContentSaver.cachedDownLinkFilterSource !== sbContentSaver.option["downLinkFilter"]) {
-                                        sbContentSaver.cachedDownLinkFilterSource = sbContentSaver.option["downLinkFilter"];
-                                        sbContentSaver.cachedDownLinkFilter = (function () {
-                                            var ret = [];
-                                            sbContentSaver.option["downLinkFilter"].split(/[\r\n]/).forEach(function (line) {
-                                                if (line.charAt(0) === "#") return;
-                                                try {
-                                                    var regex = new RegExp("^(?:" + line + ")$", "i");
-                                                    ret.push(regex);
-                                                } catch (ex) {}
-                                            });
-                                            return ret;
-                                        })();
-                                    }
-                                    var toDownload = sbContentSaver.cachedDownLinkFilter.some(function (filter) {
-                                        return filter.test(ext);
-                                    });
-                                } else {
-                                    var toDownload = false;
-                                }
+                                var toDownload = sbContentSaver.downLinkFilter(ext);
                                 if (!toDownload) {
                                     if ( sbContentSaver.option["inDepth"] > 0 ) {
                                         // do not copy, but add to the link list if it's a work of deep capture
@@ -1189,6 +1188,29 @@ var sbContentSaver = {
             sbCommonUtils.error(sbCommonUtils.lang(msgType, sourceURL, ex));
         }
         return "";
+    },
+
+    downLinkFilter: function(aFileExt) {
+        var that = this;
+        // use cache if there is the filter is not changed
+        if (that.cachedDownLinkFilterSource !== that.option["downLinkFilter"]) {
+            that.cachedDownLinkFilterSource = that.option["downLinkFilter"];
+            that.cachedDownLinkFilter = (function () {
+                var ret = [];
+                that.option["downLinkFilter"].split(/[\r\n]/).forEach(function (line) {
+                    if (line.charAt(0) === "#") return;
+                    try {
+                        var regex = new RegExp("^(?:" + line + ")$", "i");
+                        ret.push(regex);
+                    } catch (ex) {}
+                });
+                return ret;
+            })();
+        }
+        var toDownload = that.cachedDownLinkFilter.some(function (filter) {
+            return filter.test(aFileExt);
+        });
+        return toDownload;
     },
 
     /**
