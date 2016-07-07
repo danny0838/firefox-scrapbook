@@ -1149,8 +1149,15 @@ var sbContentSaver = {
                 var dataURIFileName = sbCommonUtils.sha1(dataURIBytes, "BYTES") + "." + (sbCommonUtils.getMimePrimaryExtension(mime, null) || "dat");
                 var targetDir = this.option["internalize"] ? this.option["internalize"].parent : this.contentDir.clone();
                 var fileName, isDuplicate;
-                // determine the filename and check for duplicate
+                // if the target file exists and has same content as the dataURI, skip copy
                 fileName = dataURIFileName;
+                var targetFile = targetDir.clone(); targetFile.append(fileName);
+                if (targetFile.exists() && targetFile.isFile()) {
+                    if (sbCommonUtils.readFile(targetFile) === dataURIBytes) {
+                        return fileName;
+                    }
+                }
+                // determine the filename and check for duplicate
                 [fileName, isDuplicate] = sbContentSaver.getUniqueFileName(fileName, sourceURL);
                 if (isDuplicate) return fileName;
                 // set task
