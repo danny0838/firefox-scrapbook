@@ -531,7 +531,21 @@ var sbContentSaver = {
                 }
                 break;
             case "embed": 
-            case "source":  // in <audio> and <vedio>
+            case "audio":
+            case "video":
+                if ( aNode.hasAttribute("src") ) {
+                    if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
+                    if ( this.option["media"] ) {
+                        var aFileName = this.download(aNode.src);
+                        if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
+                    } else if ( this.option["keepLink"] ) {
+                        aNode.setAttribute("src", aNode.src);
+                    } else {
+                        aNode.setAttribute("src", "about:blank");
+                    }
+                }
+                break;
+            case "source":  // in <picture>, <audio> and <video>
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
                     if ( this.option["media"] ) {
@@ -598,7 +612,7 @@ var sbContentSaver = {
                 }
                 aNode.removeAttribute("data-sb-canvas-id");
                 break;
-            case "track":  // in <audio> and <vedio>
+            case "track":  // in <audio> and <video>
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] ) break;
                     aNode.setAttribute("src", aNode.src);
