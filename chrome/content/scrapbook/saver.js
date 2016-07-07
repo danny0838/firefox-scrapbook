@@ -1255,6 +1255,8 @@ var sbContentSaver = {
     restoreFileNameFromHash: function (hash) {
         return hash.replace(/scrapbook:\/\/([0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12})/g, function (match, key) {
             var url = sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][key];
+            // error handling
+            if (!url) return key;
             // if the url contains ":", it is the source absolute url (meaning download fail),
             // and we should not escape it
             if (url.indexOf(":") === -1) {
