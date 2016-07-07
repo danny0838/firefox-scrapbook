@@ -74,7 +74,7 @@
                     <caption label="&sb.detail.linked.page;" />
                     <hbox align="center">
                         <label id="sbDetailInDepthLabel" value="&sb.detail.linked.page.depth;:" />
-                        <menulist id="sbDetailInDepth" editable="true" flex="1" value="0" persist="value" onchange="this.value = parseInt('0' + this.value, 10); this.setAttribute('value', this.value); document.persist(this, 'value');">
+                        <menulist id="sbDetailInDepth" editable="true" flex="1" value="0" onchange="this.value = parseInt('0' + this.value, 10);">
                             <menupopup>
                                 <menuitem value="0" label="0" />
                                 <menuitem value="1" label="1" />
@@ -85,7 +85,7 @@
                     </hbox>
                     <hbox align="center">
                         <label id="sbDetailTimeoutLabel" value="&sb.detail.linked.timeout;:" />
-                        <menulist id="sbDetailTimeout" editable="true" flex="1" value="0" persist="value" onchange="this.value = parseInt('0' + this.value, 10); this.setAttribute('value', this.value); document.persist(this, 'value');">
+                        <menulist id="sbDetailTimeout" editable="true" flex="1" value="0" onchange="this.value = parseInt('0' + this.value, 10);">
                             <menupopup>
                                 <menuitem value="0" label="0" />
                                 <menuitem value="1" label="1" />
@@ -96,7 +96,7 @@
                     </hbox>
                     <hbox align="center">
                         <label id="sbDetailCharsetLabel" value="&sb.detail.linked.charset;:" />
-                        <menulist id="sbDetailCharset" editable="true" flex="1" value="" persist="value" onchange="this.setAttribute('value', this.value); document.persist(this, 'value');">
+                        <menulist id="sbDetailCharset" editable="true" flex="1" value="">
                             <menupopup>
                                 <menuitem value="" label="" />
                                 <menuitem value="BIG5" label="BIG5" />

@@ -31,7 +31,7 @@ var sbContentSaver = {
             "saveDataURI": sbCommonUtils.getPref("capture.default.saveDataURI", false),
             "downLinkActive": false, // active only if explicitly set in detail dialog
             "downLinkFilter": sbCommonUtils.getPref("capture.default.downLinkFilter", ""),
-            "inDepth": 0,
+            "inDepth": 0, // active only if explicitly set in detail dialog
             "inDepthTimeout": 0,
             "inDepthCharset": "UTF-8",
             "internalize": false,
