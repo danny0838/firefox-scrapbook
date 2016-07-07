@@ -1301,7 +1301,7 @@ var sbCaptureObserverCallback = {
 
         if ( sbContentSaver.favicon ) {
             sbContentSaver.favicon = sbContentSaver.restoreFileNameFromHash(sbContentSaver.favicon);
-            aItem.icon = "resource://scrapbook/data/" + aItem.id + "/" + sbCommonUtils.escapeFileName(sbContentSaver.favicon);
+            aItem.icon = sbCommonUtils.escapeFileName(sbContentSaver.favicon);
         }
 
         // fix resource settings after capture complete
@@ -1310,7 +1310,10 @@ var sbCaptureObserverCallback = {
         var res = sbContentSaver.treeRes;
         if (res && sbDataSource.exists(res)) {
             sbDataSource.setProperty(res, "type", aItem.type);
-            if (aItem.icon) sbDataSource.setProperty(res, "icon", aItem.icon);
+            if (aItem.icon) {
+                var iconURL = "resource://scrapbook/data/" + aItem.id + "/" + aItem.icon;
+                sbDataSource.setProperty(res, "icon", iconURL);
+            }
             sbCommonUtils.rebuildGlobal();
             sbCommonUtils.writeIndexDat(aItem);
 
