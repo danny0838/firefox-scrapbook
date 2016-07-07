@@ -1044,27 +1044,13 @@ var sbContentSaver = {
         var sourceURL = aURLSpec;
 
         try {
-            // never download "chrome://" resources
             if (sourceURL.indexOf("chrome:") === 0) {
+                // never download "chrome://" resources
                 return "";
-            }
-
-            // download "data:" only if option on
-            if (sourceURL.indexOf("data:") === 0) {
-                if (!this.option["saveDataURI"]) {
-                    return "";
-                }
-                var { mime, charset, base64, data } = sbCommonUtils.parseDataURI(sourceURL);
-                var dataURIBytes = base64 ? atob(data) : decodeURIComponent(data); // in bytes
-                // use sha1sum as the filename
-                var dataURIFileName = sbCommonUtils.sha1(dataURIBytes, "BYTES") + "." + (sbCommonUtils.getMimePrimaryExtension(mime, null) || "dat");
-            }
-
-            var targetDir = this.option["internalize"] ? this.option["internalize"].parent : this.contentDir.clone();
-            var hashKey = sbCommonUtils.getUUID();
-            var fileName, isDuplicate;
-
-            if ( sourceURL.indexOf("http:") === 0 || sourceURL.indexOf("https:") === 0 || sourceURL.indexOf("ftp:") === 0 ) {
+            } else if ( sourceURL.indexOf("http:") === 0 || sourceURL.indexOf("https:") === 0 || sourceURL.indexOf("ftp:") === 0 ) {
+                var targetDir = this.option["internalize"] ? this.option["internalize"].parent : this.contentDir.clone();
+                var hashKey = sbCommonUtils.getUUID();
+                var fileName, isDuplicate;
                 try {
                     var channel = sbCommonUtils.IO.newChannel(sourceURL, null, null);
                     channel.asyncOpen({
@@ -1127,6 +1113,8 @@ var sbContentSaver = {
                 sbContentSaver.httpTask[sbContentSaver.item.id]++;
                 return "scrapbook://" + hashKey;
             } else if ( sourceURL.indexOf("file:") === 0 ) {
+                var targetDir = this.option["internalize"] ? this.option["internalize"].parent : this.contentDir.clone();
+                var fileName, isDuplicate;
                 // determine the filename and check for duplicate
                 fileName = sbCommonUtils.getFileName(sourceURL);
                 [fileName, isDuplicate] = sbContentSaver.getUniqueFileName(fileName, sourceURL);
@@ -1141,6 +1129,16 @@ var sbContentSaver = {
                 orgFile.copyTo(targetDir, fileName);
                 return fileName;
             } else if ( sourceURL.indexOf("data:") === 0 ) {
+                // download "data:" only if option on
+                if (!this.option["saveDataURI"]) {
+                    return "";
+                }
+                var { mime, charset, base64, data } = sbCommonUtils.parseDataURI(sourceURL);
+                var dataURIBytes = base64 ? atob(data) : decodeURIComponent(data); // in bytes
+                // use sha1sum as the filename
+                var dataURIFileName = sbCommonUtils.sha1(dataURIBytes, "BYTES") + "." + (sbCommonUtils.getMimePrimaryExtension(mime, null) || "dat");
+                var targetDir = this.option["internalize"] ? this.option["internalize"].parent : this.contentDir.clone();
+                var fileName, isDuplicate;
                 // determine the filename and check for duplicate
                 fileName = dataURIFileName;
                 [fileName, isDuplicate] = sbContentSaver.getUniqueFileName(fileName, sourceURL);
