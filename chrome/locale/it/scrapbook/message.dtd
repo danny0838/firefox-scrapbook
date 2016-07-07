@@ -54,6 +54,7 @@
 <!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
 <!ENTITY sb.detail.linked.file "File da scaricare contenuti nei link delle pagine web da catturare">
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped. Invalid RegExp will be skipped.">
+<!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Livello di cattura dei link presenti nelle pagine web">
 <!ENTITY sb.detail.linked.page.depth "Cattura fino al seguente livello">
 <!ENTITY sb.detail.linked.page.text "Dopo aver completato la cattura, tutte le pagine verranno elencate e verrà creata una mappa del sito">

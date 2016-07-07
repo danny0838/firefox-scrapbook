@@ -54,6 +54,7 @@
 <!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
 <!ENTITY sb.detail.linked.file "Stiahnuť previazané súbory">
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped. Invalid RegExp will be skipped.">
+<!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Hĺbkové zachytenie">
 <!ENTITY sb.detail.linked.page.depth "Hĺbkovo prechádzať odkazy">
 <!ENTITY sb.detail.linked.page.text "Po dokončení zachytenia budú všetky stránky vzájomne prepojené a bude vytvorená mapa stránok.">

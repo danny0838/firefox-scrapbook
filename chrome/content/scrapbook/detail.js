@@ -54,6 +54,11 @@ var sbCaptureOptions = {
         }
     },
 
+    resetDownLinkFilters: function() {
+        sbCommonUtils.resetPref("capture.default.downLinkFilter");
+        document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("capture.default.downLinkFilter", "");
+    },
+
     fillTitleList: function() {
         var isPartial = this.param.titles.length > 1;
         var list = document.getElementById("sbDetailTitle");

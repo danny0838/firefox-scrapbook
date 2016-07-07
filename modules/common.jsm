@@ -169,6 +169,11 @@ var sbCommonUtils = {
         }
     },
 
+    resetPref: function (aName, isGlobal) {
+        var branch = isGlobal ? this.prefBranchGlobal : this.prefBranch;
+        branch.clearUserPref(aName);
+    },
+
     getPrefKeys: function () {
         return this.prefBranch.getChildList("", {});
     },

@@ -67,6 +67,7 @@
                     <caption label="&sb.detail.linked.file;" />
                     <description>&sb.detail.linked.file.desc;</description>
                     <textbox id="sbDetailDownLinkFilter" flex="1" multiline="true" rows="4" />
+                    <button label="&sb.detail.linked.file.reset;" oncommand="sbCaptureOptions.resetDownLinkFilters();" />
                 </groupbox>
                 <groupbox id="sbDetailInDepthBox" group="capture-options" style="margin-top:8px;">
                     <caption label="&sb.detail.linked.page;" />
