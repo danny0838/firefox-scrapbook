@@ -1069,6 +1069,7 @@ var sbContentSaver = {
                     var channel = sbCommonUtils.IO.newChannel(sourceURL, null, null);
                     channel.asyncOpen({
                         _stream: null,
+                        _file: null,
                         onStartRequest: function (aRequest, aContext) {
                             // if header Content-Disposition is defined, use it
                             try {
@@ -1093,14 +1094,22 @@ var sbContentSaver = {
                             if (!!this._stream) {
                                 this._stream.close();
                             }
+                            if (!isDuplicate && aStatusCode != Components.results.NS_OK) {
+                                // download failed, remove the file and use the original URL
+                                this._file.remove(true);
+                                sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][hashKey] = sourceURL;
+                                // crop to prevent large dataURI masking the exception info, especially dataURIs
+                                sourceURL = sbCommonUtils.crop(sourceURL, 1024);
+                                sbCommonUtils.error(sbCommonUtils.lang("ERR_FAIL_DOWNLOAD_FILE", sourceURL, "download channel fail"));
+                            }
                             sbCaptureObserverCallback.onDownloadComplete(sbContentSaver.item);
                         },
                         onDataAvailable: function (aRequest, aContext, aInputStream, aOffset, aCount) {
                             if (!this._stream) {
-                                var file = targetDir.clone(); file.append(fileName);
+                                this._file = targetDir.clone(); this._file.append(fileName);
                                 var ostream = Components.classes['@mozilla.org/network/file-output-stream;1']
                                         .createInstance(Components.interfaces.nsIFileOutputStream);
-                                ostream.init(file, -1, 0666, 0);
+                                ostream.init(this._file, -1, 0666, 0);
                                 var bostream = Components.classes['@mozilla.org/network/buffered-output-stream;1']
                                         .createInstance(Components.interfaces.nsIBufferedOutputStream);
                                 bostream.init(ostream, 1024 * 1024);
