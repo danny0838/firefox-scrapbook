@@ -1041,7 +1041,7 @@ var sbContentSaver = {
     // of converting the URI to nsIURI initially.
     download: function(aURLSpec) {
         if ( !aURLSpec ) return "";
-        var sourceURL = sbCommonUtils.splitURLByAnchor(aURLSpec)[0];
+        var sourceURL = aURLSpec;
 
         try {
             // never download "chrome://" resources
