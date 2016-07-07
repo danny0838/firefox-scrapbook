@@ -49,20 +49,6 @@ var sbCommonUtils = {
      * Version specific handling
      ***************************************************************/
 
-    get _fxVer36_saveURI() {
-        // Firefox >= 36: nsIWebBrowserPersist.saveURI takes 8 arguments
-        // Firefox < 36: nsIWebBrowserPersist.saveURI takes 7 arguments
-        var result;
-        try {
-            var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
-            WBP.saveURI(null, null, null, null, null, null, null);
-        } catch(ex) {
-            result = (ex.name === "NS_ERROR_XPC_NOT_ENOUGH_ARGS") ? true : false;
-        }
-        delete this._fxVer36_saveURI;
-        return this._fxVer36_saveURI = result;
-    },
-
     /**
      * return (1, 0, -1) if ver1 (>, =, <) ver2
      */
@@ -494,6 +480,15 @@ var sbCommonUtils = {
         this.writeFile(aFile, content, "UTF-8");
     },
 
+    // check if two files are identical
+    compareFiles: function(aFile1, aFile2) {
+        // quick check for difference and to prevent an error
+        if (!(aFile1.exists() && aFile2.exists() && aFile1.isFile() && aFile2.isFile() && aFile1.fileSize == aFile2.fileSize)) {
+            return false;
+        }
+        return (this.readFile(aFile1) === this.readFile(aFile2));
+    },
+
     saveTemplateFile: function(aURISpec, aFile, aOverwrite) {
         if ( aFile.exists() && !aOverwrite ) return;
         var istream = this.IO.newChannelFromURI(this.convertURLToObject(aURISpec)).open();
@@ -780,6 +775,13 @@ var sbCommonUtils = {
         return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
     },
 
+    getUUID: function () {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+            return v.toString(16);
+        });
+    },
+    
     formatFileSize: function (bytes, si) {
         var thresh = si ? 1000 : 1024;
         var units = si

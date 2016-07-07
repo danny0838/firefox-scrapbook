@@ -53,7 +53,9 @@
 <!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
 <!ENTITY sb.detail.linked.file "Stiahnuť previazané súbory">
-<!ENTITY sb.detail.linked.file.active "Active download linked files">
+<!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
+<!ENTITY sb.detail.linked.file.method1 "Match URL file extension">
+<!ENTITY sb.detail.linked.file.method2 "Match HTTP header and URL file extension">
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped. Invalid RegExp will be skipped.">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Hĺbkové zachytenie">
