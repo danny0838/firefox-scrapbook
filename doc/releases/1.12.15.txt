@@ -1,0 +1,13 @@
+Scrapbook X 1.12.15
+===================
+
+Changes since v1.12.14
+----------------------
+
+- NEW: Add exporting, importing, and reseting preferences in Options > Advanced.
+- NEW: Add "tcc:" and "file:" commands to the search engine.
+- UPDATE: DOMEraser now works in frame pages.
+- UPDATE: DOMEraser command "de-widthify" is reworked to be "de-wrapping".
+- UPDATE: "Output HTML tree" now creates frame.html in HTML5 iframes and javascript, allowing custom scripting.
+- UPDATE: "Output HTML tree" created pages now have a specific id in the html element.
+- FIXED: Fulltext command "content:" does not work correctly.

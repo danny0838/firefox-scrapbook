@@ -1,0 +1,8 @@
+Scrapbook X 1.12.0a32
+=====================
+
+Changes since v1.12.0a31
+------------------------
+
+- FIXED: Several unintuitive behaviors in the sidebar of the "Manage" window concerning switching on and off of the combine or import wizard.
+- UPDATE: Minor code optimizations.

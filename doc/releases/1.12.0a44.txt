@@ -1,0 +1,7 @@
+Scrapbook X 1.12.0a44
+=====================
+
+Changes since v1.12.0a43
+------------------------
+
+- FIXED: Style rules for the HTML element are missing in a capture whose "Reorganize Styles" option is enabled.

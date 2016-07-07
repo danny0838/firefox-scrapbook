@@ -1,0 +1,9 @@
+Scrapbook X 1.11.5
+==================
+
+Changes since v1.11.4
+---------------------
+
+- FIXED: Changing data property sometimes change back after restarting Firefox.
+- FIXED: Wrong CSS output for background images for Firefox < 3.6.
+- FIXED: Remove extra linefeeds in the HTML output for Firefox < 3.6.

@@ -1,0 +1,8 @@
+Scrapbook X 1.12.0a14
+=====================
+
+Changes since v1.12.0a13
+------------------------
+
+- FIXED: Deep capture and page combine doesn't work normally if the page contains a meta refresh containing some frequently used characters.
+- FIXED: Fulltext search result items which are in a sub-directory or with special chars cannot be opened correctly.

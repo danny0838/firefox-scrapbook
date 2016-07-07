@@ -1,0 +1,9 @@
+Scrapbook X 1.10.1
+==================
+
+Changes since v1.10.0
+---------------------
+
+- Fixed an issue that "All Local HTMLs in a Directory" does not work correctly.
+- Meta refresh now point to the source URL after captured.
+- Internal code optimization.

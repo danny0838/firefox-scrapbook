@@ -1,0 +1,7 @@
+Scrapbook X 1.11.9
+==================
+
+Changes since v1.11.8
+---------------------
+
+- FIXED: Cannot rebuild fulltext cache.

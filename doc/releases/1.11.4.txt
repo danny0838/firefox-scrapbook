@@ -1,0 +1,14 @@
+Scrapbook X 1.11.4
+==================
+
+Changes since v1.11.3
+---------------------
+
+- UPDATE: Localized system messages. Fixed several translations.
+- UPDATE: If a linked page A is redirected to B, the name is now B (instead of A) in deep capture.
+- UPDATE: The combiner now generates DOM and CSS more precisely.
+- UPDATE: Internal code optimization.
+- FIXED: Combine pages sometimes become normal page after restarting Firefox.
+- FIXED: Highlighter may mark wrong range.
+- FIXED: Wrong link rebuilding for meta refresh.
+- FIXED: Pages with "-->" in title gets error output after combining.

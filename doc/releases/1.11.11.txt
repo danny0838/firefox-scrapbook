@@ -1,0 +1,9 @@
+Scrapbook X 1.11.11
+===================
+
+Changes since v1.11.10
+----------------------
+
+- FIXED: Save page no more records some temporary styles permanently.
+- FIXED: Pages moved to another window causes edit history undoable.
+- FIXED: Minor inproper undo history recording behaviors.

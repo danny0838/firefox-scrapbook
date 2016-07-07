@@ -1,0 +1,8 @@
+Scrapbook X 1.12.0a25
+=====================
+
+Changes since v1.12.0a24
+------------------------
+
+- UPDATE: Display folder path separator in the import/export manager.
+- FIXED: A file captured by dropping into ScrapBook is always named "untitled.dat".

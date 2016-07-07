@@ -1,0 +1,7 @@
+Scrapbook X 1.12.0a41
+=====================
+
+Changes since v1.12.0a40
+------------------------
+
+- FIXED: Calculate and Export dialogs don't work correctly.

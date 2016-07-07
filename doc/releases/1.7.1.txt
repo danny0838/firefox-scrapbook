@@ -1,0 +1,7 @@
+Scrapbook X 1.7.1
+=================
+
+Changes since v1.7.0
+--------------------
+
+- Fix wrong locales and remove error inserted files.

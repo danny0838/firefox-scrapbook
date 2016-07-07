@@ -1,0 +1,8 @@
+Scrapbook X 1.11.12
+===================
+
+Changes since v1.11.11
+----------------------
+
+- FIXED: Several preference change do not take effect immediately.
+- FIXED: Minor internal code fix.

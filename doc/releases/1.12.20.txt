@@ -1,0 +1,7 @@
+Scrapbook X 1.12.20
+===================
+
+Changes since v1.12.19
+----------------------
+
+- UPDATE: Now localizes the note template documentation with DTDs. (to fit Firefox protocol)

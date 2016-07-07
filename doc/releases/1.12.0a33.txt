@@ -1,0 +1,11 @@
+Scrapbook X 1.12.0a33
+=====================
+
+Changes since v1.12.0a32
+------------------------
+
+- FIXED: "Multiple Capture" containing a link different only in hash with the previous one gets a freeze.
+- FIXED: Every capture process containing multiple URLs gets script error messages.
+- FIXED: A frame having no body element in a web page causes a capture error.
+- FIXED: When pages are saving as an encoding other than UTF-8, unsupported chars are now saved HTML-entity-escaped instead of causing an error or incomplete save.
+- UPDATE: Minor code optimizations.

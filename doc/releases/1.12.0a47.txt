@@ -1,0 +1,16 @@
+Scrapbook X 1.12.0a47
+=====================
+
+Changes since v1.12.0a46
+------------------------
+
+- FIXED: Web pages made up of traditional <frame>s cannot be correctly captured.
+- FIXED: Web pages made up of XML + XSLT cannot be correctly captured as HTML in some cases.
+- FIXED: Capture selection gets malformed result if <pre> tags are involved.
+- FIXED: Copying an item loses unsupported properties.
+- UPDATE: Added capture option "Frames" to determine whether to capture frames.
+- UPDATE: Adjusted the popup menu options for the item tree, especially for multiple selection.
+- UPDATE: Added an option "Group by Type" to the "Sort" dialog.
+- UPDATE: Note pages are now isolated from normal items when sorted.
+- UPDATE: Options in the "Capture Detail" and "Import/Export" dialog now persist.
+- UPDATE: Several options are no more persisted via preferences.

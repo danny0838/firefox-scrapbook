@@ -1,0 +1,8 @@
+Scrapbook X 1.12.10
+===================
+
+Changes since v1.12.9
+---------------------
+
+- UPDATE: Improve Output HTML user interface.
+- UPDATE: "Output HTML" no more creates "tree/search.js", which is merged into "search.html".

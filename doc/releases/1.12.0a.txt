@@ -1,0 +1,22 @@
+Scrapbook X 1.12.0a
+===================
+
+Changes since v1.11.14
+----------------------
+
+- NEW: Capture option "Reorganize Styles".
+- NEW: Edit tool "Attach Inner Link".
+- NEW: Edit tool "Add HTML Annotation".
+- NEW: Hotkey commands for DOMEraser.
+- NEW: Edit tool HTMLEditor.
+- NEW: Create Note Page.
+- NEW: Copy item (adjusts ID by seconds to prevent duplicate).
+- UPDATE: Images not capture as files.
+- UPDATE: Remove highlighter buttons. Increase highlighters to 8.
+- UPDATE: Notes now outputs HTML5 syntax.
+- FIXED: A deep captured page cannot capture again normally.
+- FIXED: Sitemap sometimes become blank.
+- FIXED: Links of Index and Sitemap are broken for html pages in a subdirectory.
+- FIXED: Pages in a subdirectory cannot save normally.
+- FIXED: Pages in a subdirectory cannot attach file normally.
+- FIXED: Several wrong behaviors of the edit toolbar.

@@ -1,0 +1,7 @@
+Scrapbook X 1.12.21
+===================
+
+Changes since v1.12.20
+----------------------
+
+- UPDATE: Adjust internal coding style. (No semantic change.)

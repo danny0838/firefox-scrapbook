@@ -1,0 +1,7 @@
+Scrapbook X 1.12.25
+===================
+
+Changes since v1.12.24
+----------------------
+
+- FIXED: Prevent potential issues for link capture on URLs with certain uncommon HTTP header declaration.

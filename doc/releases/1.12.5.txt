@@ -1,0 +1,7 @@
+Scrapbook X 1.12.5
+==================
+
+Changes since v1.12.4
+---------------------
+
+- FIXED: "ScrapBook X" item is absent in the View > Sitebar.

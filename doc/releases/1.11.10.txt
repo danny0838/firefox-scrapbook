@@ -1,0 +1,11 @@
+Scrapbook X 1.11.10
+===================
+
+Changes since v1.11.9
+---------------------
+
+- UPDATE: Data property now reports total folders count.
+- UPDATE: Added a mouseover title to Attach File link.
+ -UPDATE: Multiple capture separator changed from ";" to "  " (2 spaces).
+- FIXED: Combine pages are not indexed by fulltext search.
+- FIXED: Several bad UI text and localization.

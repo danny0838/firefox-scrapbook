@@ -1,0 +1,10 @@
+Scrapbook X 1.10.6
+==================
+
+Changes since v1.10.5
+---------------------
+
+- UPDATE: Fulltext search now excludes separators.
+- UPDATE: Confirm of deleting data from the export directory now defaults to select "No".
+- UPDATE: Deep capture page names now are page_002, page_002_1, ... instead of page_002, page_1_002 (revert 1.6.1)
+- FIXED: the negative matching words in fulltext search sometimes work wrong.
