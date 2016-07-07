@@ -29,12 +29,9 @@ var sbContentSaver = {
             "rewriteStyles": sbCommonUtils.getPref("capture.default.rewriteStyles", true),
             "keepLink": sbCommonUtils.getPref("capture.default.keepLink", false),
             "saveDataURI": sbCommonUtils.getPref("capture.default.saveDataURI", false),
-            "dlimg": sbCommonUtils.getPref("capture.default.dlimg", false),
-            "dlsnd": sbCommonUtils.getPref("capture.default.dlsnd", false),
-            "dlmov": sbCommonUtils.getPref("capture.default.dlmov", false),
-            "dlarc": sbCommonUtils.getPref("capture.default.dlarc", false),
-            "custom": sbCommonUtils.getPref("capture.default.custom", ""),
-            "inDepth": 0,
+            "downLinkActive": false, // active only if explicitly set in detail dialog
+            "downLinkFilter": sbCommonUtils.getPref("capture.default.downLinkFilter", ""),
+            "inDepth": 0, // active only if explicitly set in detail dialog
             "inDepthTimeout": 0,
             "inDepthCharset": "UTF-8",
             "internalize": false,
@@ -564,7 +561,21 @@ var sbContentSaver = {
                 }
                 break;
             case "embed": 
-            case "source":  // in <audio> and <vedio>
+            case "audio":
+            case "video":
+                if ( aNode.hasAttribute("src") ) {
+                    if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
+                    if ( this.option["media"] ) {
+                        var aFileName = this.download(aNode.src);
+                        if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
+                    } else if ( this.option["keepLink"] ) {
+                        aNode.setAttribute("src", aNode.src);
+                    } else {
+                        aNode.setAttribute("src", "about:blank");
+                    }
+                }
+                break;
+            case "source":  // in <picture>, <audio> and <video>
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
                     if ( this.option["media"] ) {
@@ -631,7 +642,7 @@ var sbContentSaver = {
                 }
                 aNode.removeAttribute("data-sb-canvas-id");
                 break;
-            case "track":  // in <audio> and <vedio>
+            case "track":  // in <audio> and <video>
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] ) break;
                     aNode.setAttribute("src", aNode.src);
@@ -792,26 +803,25 @@ var sbContentSaver = {
                     }
                 }
                 // determine whether to download (copy) the link target file
-                var ext = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aNode.href))[1].toLowerCase();
+                var ext = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aNode.href))[1];
                 var flag = false;
-                if ( ext && this.option["custom"] &&
-                    ( (", " + this.option["custom"] + ", ").indexOf(", " + ext + ", ") != -1 ) ) {
-                    // copy files with custom defined extensions
-                    flag = true;
-                } else if ( aNode.href.indexOf("file://") == 0 && !ext.match(/html?/) ) {
+                if ( aNode.href.indexOf("file://") == 0 && !ext.match(/html?/i) ) {
                     // download all non-HTML target of local file
                     // primarily to enable the combine wizard to capture all "file" data
                     flag = true;
-                } else {
-                    switch ( ext ) {
-                        case "jpg": case "jpeg": case "png": case "gif": case "tiff": flag = this.option["dlimg"]; break;
-                        case "aac": case "flac": case "mp3": case "ogg": case "ram": case "ra": case "rm": case "rmx": case "wav": case "wma": flag = this.option["dlsnd"]; break;
-                        case "avi": case "avc": case "flv": case "mkv": case "mov": case "mpg": case "mpeg": case "mp4": case "wmv": flag = this.option["dlmov"]; break;
-                        case "zip": case "lzh": case "lha": case "tar": case "gz": case "bz": case "7z": case "rar": case "jar": case "xpi": flag = this.option["dlarc"]; break;
-                        default: 
-                            // do not copy, but add to the link list if it's a work of deep capture
-                            if ( this.option["inDepth"] > 0 ) this.linkURLs.push(aNode.href);
-                    }
+                } else if ( ext && this.option["downLinkActive"] ) {
+                    this.option["downLinkFilter"].split(/[\r\n]/).forEach(function (line) {
+                        if (line.charAt(0) === "#") return;
+                        try {
+                            var regex = new RegExp("^(?:" + line + ")$", "i");
+                            if (regex.test(ext)) {
+                                flag = true;
+                            }
+                        } catch (ex) {}
+                    });
+                } else if ( this.option["inDepth"] > 0 ) {
+                    // do not copy, but add to the link list if it's a work of deep capture
+                    this.linkURLs.push(aNode.href);
                 }
                 // do the copy or URL rewrite
                 if ( flag ) {

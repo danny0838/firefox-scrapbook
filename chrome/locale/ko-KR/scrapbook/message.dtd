@@ -53,11 +53,9 @@
 <!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
 <!ENTITY sb.detail.linked.file "링크된 파일 다운로드">
-<!ENTITY sb.detail.linked.image "이미지">
-<!ENTITY sb.detail.linked.sound "음악">
-<!ENTITY sb.detail.linked.movie "영화">
-<!ENTITY sb.detail.linked.archive "압축">
-<!ENTITY sb.detail.linked.custom "사용자 설정">
+<!ENTITY sb.detail.linked.file.active "Active download linked files">
+<!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped. Invalid RegExp will be skipped.">
+<!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "상세 캡처">
 <!ENTITY sb.detail.linked.page.depth "연결 링크 단계">
 <!ENTITY sb.detail.linked.page.text "캡처 완료 후 모든 페이지는 상호 링크되어 사이트 맵이 생성됩니다.">
