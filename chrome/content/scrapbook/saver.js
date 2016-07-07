@@ -18,6 +18,8 @@ var sbContentSaver = {
     linkURLs: [],
     frames: [],
     canvases: [],
+    cachedDownLinkFilter: null,
+    cachedDownLinkFilterSource: null,
 
     init: function(aPresetData) {
         this.option = {
@@ -1029,13 +1031,22 @@ var sbContentSaver = {
                             // apply the filter
                             if (aIsLinkFilter) {
                                 if (sbContentSaver.option["downLinkActive"]) {
-                                    var toDownload = sbContentSaver.option["downLinkFilter"].split(/[\r\n]/).some(function (line) {
-                                        if (line.charAt(0) === "#") return false;
-                                        try {
-                                            var regex = new RegExp("^(?:" + line + ")$", "i");
-                                            if (regex.test(ext)) return true;
-                                        } catch (ex) {}
-                                        return false;
+                                    if (sbContentSaver.cachedDownLinkFilterSource !== sbContentSaver.option["downLinkFilter"]) {
+                                        sbContentSaver.cachedDownLinkFilterSource = sbContentSaver.option["downLinkFilter"];
+                                        sbContentSaver.cachedDownLinkFilter = (function () {
+                                            var ret = [];
+                                            sbContentSaver.option["downLinkFilter"].split(/[\r\n]/).forEach(function (line) {
+                                                if (line.charAt(0) === "#") return;
+                                                try {
+                                                    var regex = new RegExp("^(?:" + line + ")$", "i");
+                                                    ret.push(regex);
+                                                } catch (ex) {}
+                                            });
+                                            return ret;
+                                        })();
+                                    }
+                                    var toDownload = sbContentSaver.cachedDownLinkFilter.some(function (filter) {
+                                        return filter.test(ext);
                                     });
                                 } else {
                                     var toDownload = false;
