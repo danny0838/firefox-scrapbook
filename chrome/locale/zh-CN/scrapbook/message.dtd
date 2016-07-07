@@ -53,6 +53,7 @@
 <!ENTITY sb.detail.option.asHtml "非 HTML 档案获取呈现时的 HTML">
 <!ENTITY sb.detail.option.forceUtf8 "保存为 UTF-8 编码">
 <!ENTITY sb.detail.linked.file "下载链接的文件">
+<!ENTITY sb.detail.linked.file.active "启用下载链接的文件">
 <!ENTITY sb.detail.linked.file.desc "下载整个扩展名匹配任一行正则表达式的文件。忽略 &quot;#&quot; 开头的行。忽略语法错误的正则表达式。">
 <!ENTITY sb.detail.linked.file.reset "还原默认值">
 <!ENTITY sb.detail.linked.page "深层获取">

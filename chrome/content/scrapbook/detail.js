@@ -20,6 +20,7 @@ var sbCaptureOptions = {
         document.getElementById("sbDetailOptionRewriteStyles").checked = sbCommonUtils.getPref("capture.default.rewriteStyles", true);
         document.getElementById("sbDetailOptionKeepLink").checked = sbCommonUtils.getPref("capture.default.keepLink", false);
         document.getElementById("sbDetailOptionSaveDataURI").checked = sbCommonUtils.getPref("capture.default.saveDataURI", false);
+        document.getElementById("sbDetailDownLinkActive").value = sbCommonUtils.getPref("capture.default.downLinkActive", false);
         document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("capture.default.downLinkFilter", "");
         // accept button
         document.documentElement.getButton("accept").label = sbCommonUtils.lang("CAPTURE_OK_BUTTON");
@@ -87,6 +88,7 @@ var sbCaptureOptions = {
         this.param.option["rewriteStyles"] = document.getElementById("sbDetailOptionRewriteStyles").checked;
         this.param.option["keepLink"] = document.getElementById("sbDetailOptionKeepLink").checked;
         this.param.option["saveDataURI"] = document.getElementById("sbDetailOptionSaveDataURI").checked;
+        this.param.option["downLinkActive"] = document.getElementById("sbDetailDownLinkActive").checked;
         this.param.option["downLinkFilter"] = document.getElementById("sbDetailDownLinkFilter").value;
         if ( this.param.context !== "capture-again-deep" ) {
             this.param.option["inDepth"] = parseInt("0" + document.getElementById("sbDetailInDepth").value, 10);
@@ -109,6 +111,7 @@ var sbCaptureOptions = {
         sbCommonUtils.setPref("capture.default.rewriteStyles", this.param.option["rewriteStyles"]);
         sbCommonUtils.setPref("capture.default.keepLink", this.param.option["keepLink"]);
         sbCommonUtils.setPref("capture.default.saveDataURI", this.param.option["saveDataURI"]);
+        sbCommonUtils.setPref("capture.default.downLinkActive", this.param.option["downLinkActive"]);
         sbCommonUtils.setPref("capture.default.downLinkFilter", this.param.option["downLinkFilter"]);
     },
 

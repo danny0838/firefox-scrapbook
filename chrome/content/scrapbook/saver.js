@@ -29,6 +29,7 @@ var sbContentSaver = {
             "rewriteStyles": sbCommonUtils.getPref("capture.default.rewriteStyles", true),
             "keepLink": sbCommonUtils.getPref("capture.default.keepLink", false),
             "saveDataURI": sbCommonUtils.getPref("capture.default.saveDataURI", false),
+            "downLinkActive": false, // active only if explicitly set in detail dialog
             "downLinkFilter": sbCommonUtils.getPref("capture.default.downLinkFilter", ""),
             "inDepth": 0,
             "inDepthTimeout": 0,
@@ -794,7 +795,7 @@ var sbContentSaver = {
                     // download all non-HTML target of local file
                     // primarily to enable the combine wizard to capture all "file" data
                     flag = true;
-                } else if ( ext && this.option["downLinkFilter"] ) {
+                } else if ( ext && this.option["downLinkActive"] ) {
                     this.option["downLinkFilter"].split(/[\r\n]/).forEach(function (line) {
                         if (line.charAt(0) === "#") return;
                         try {
