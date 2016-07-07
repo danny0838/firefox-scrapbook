@@ -1136,20 +1136,42 @@ var sbContentSaver = {
         var newFileNameCI = newFileName.toLowerCase();
         while (this.file2URL[newFileNameCI] !== undefined) {
             if (this.file2URL[newFileNameCI] === sourceURL) {
-                if (this.file2Doc[newFileNameCI] === sourceDoc) {
-                    // this.file2Doc is mainly to check for dynamic iframes without src attr
-                    // they have exactly same url with the main page
+                if (this.file2Doc[newFileNameCI] === sourceDoc || !sourceDoc) {
+                    // case 1. this.file2Doc[newFileNameCI] === sourceDoc === undefined
+                    // Has been used by a non-HTML-doc file, e.g. <img src="http://some.url/someFile.png">
+                    // And now used by a non-HTML-doc file, e.g. <link rel="icon" href="http://some.url/someFile.png">
+                    // Action: mark as duplicate and do not download.
+                    //
+                    // case 2. this.file2Doc[newFileNameCI] === sourceDoc !== undefined
+                    // This case is impossible since any two nodes having HTML-doc are never identical.
+                    //
+                    // case 3. this.file2Doc[newFileNameCI] !== sourceDoc === undefined (bad use case)
+                    // Has been used by an HTML doc, e.g. an <iframe src="http://some.url/index_1.html"> saving to index_1.html
+                    // And now used as a non-HTML-doc file, e.g. <img src="http://some.url/index_1.html">
+                    // Action: mark as duplicate and do not download.
                     return [newFileName, true];
                 } else if (!this.file2Doc[newFileNameCI]) {
-                    // if this.file2Doc[newFileName] has no document set,
-                    // it should mean a preset url for the page and is safe to use
+                    // case 4. undefined === this.file2Doc[newFileNameCI] !== sourceDoc (bad use case)
+                    // Has been used by an HTML-doc which had been downloaded as a non-HTML-doc file, e.g. <img src="http://some.url/index_1.html">
+                    // And now used by an HTML-doc, e.g. an <iframe src="http://some.url/index_1.html"> saving to index_1.html
+                    // Action: mark as non-duplicate and capture the parsed doc,
+                    //         and record the sourceDoc so that further usage of sourceURL becomes case 3 or 6.
                     this.file2Doc[newFileNameCI] = sourceDoc;
                     return [newFileName, false];
                 }
             }
+            // case 5. undefined !== this.file2URL[newFileNameCI] !== sourceURL
+            // Action: suggest another name to download.
+            //
+            // case 6. undefined !== this.file2Doc[newFileNameCI] !== sourceDoc !== undefined
+            // Has been used by an HTML-doc, e.g. an <iframe src="http://some.url/index_1.html"> saving to index_1.html
+            // And now used by another HTML doc with same sourceURL, e.g. a (indepth) main page http://some.url/index.html saving to index_1.html
+            // Action: suggest another name to download the doc.
             newFileName = newFileBase + "_" + sbCommonUtils.pad(++seq, 3) + "." + newFileExt;
             newFileNameCI = newFileName.toLowerCase();
         }
+        // case 7. undefined === this.file2URL[newFileNameCI] !== sourceURL
+        //         or as a post-renaming-result of case 5 or 6.
         this.file2URL[newFileNameCI] = sourceURL;
         this.file2Doc[newFileNameCI] = sourceDoc;
         return [newFileName, false];
