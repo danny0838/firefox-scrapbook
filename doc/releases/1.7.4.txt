@@ -1,0 +1,7 @@
+Scrapbook X 1.7.4
+=================
+
+Changes since v1.7.3
+--------------------
+
+- Fixed the min compatible Firefox version.

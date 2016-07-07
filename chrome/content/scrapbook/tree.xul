@@ -3,7 +3,7 @@
 <!-- Firefox 3.5 -->
 <?xml-stylesheet href="chrome://browser/skin/places/places.css" type="text/css"?>
 
-<!DOCTYPE overlay SYSTEM "chrome://scrapbook/locale/tree.dtd">
+<!DOCTYPE overlay SYSTEM "chrome://scrapbook/locale/message.dtd">
 
 <overlay id="sbTreeOverlay"
          xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">

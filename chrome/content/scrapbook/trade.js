@@ -57,7 +57,7 @@ var sbTradeService = {
         }
         if ( invalid ) {
             this.lock(1);
-            sbCommonUtils.alert(sbCommonUtils.lang("trade", "ERROR_INVALID_FILEPATH", [dirPath]));
+            sbCommonUtils.alert(sbCommonUtils.lang("ERROR_INVALID_FILEPATH", dirPath));
             if (aQuickMode)
                 window.setTimeout(function() { window.close(); }, 0);
             return;
@@ -75,7 +75,7 @@ var sbTradeService = {
 
     selectDir: function() {
         var picker = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-        picker.init(window, sbCommonUtils.lang("trade", "SELECT_PATH"), picker.modeGetFolder);
+        picker.init(window, sbCommonUtils.lang("SELECT_PATH"), picker.modeGetFolder);
         if ( this.rightDir ) picker.displayDirectory = this.rightDir;
         var answer = picker.show();
         if ( answer == picker.returnOK ) {
@@ -112,7 +112,7 @@ var sbTradeService = {
         }
         sbCustomTreeUtil.sortArrayByIndex(this.treeItems, 5);
         this.initTree();
-        this.log(sbCommonUtils.lang("trade", "DETECT", [this.treeItems.length, this.rightDir.path]), "G");
+        this.log(sbCommonUtils.lang("DETECT", this.treeItems.length, this.rightDir.path), "G");
     },
 
     initTree: function() {
@@ -180,7 +180,7 @@ var sbTradeService = {
 
 
     parseIndexDat: function(aFile) {
-        if ( !(aFile instanceof Components.interfaces.nsILocalFile) ) return sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_TRADE_INVALID_ARGS"));
+        if ( !(aFile instanceof Components.interfaces.nsILocalFile) ) return sbCommonUtils.alert(sbCommonUtils.lang("ERR_TRADE_INVALID_ARGS"));
         var data = sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(aFile), "UTF-8");
         data = data.split("\n");
         if ( data.length < 2 ) return;
@@ -255,7 +255,7 @@ var sbTradeService = {
 
     confirmRemovingPrompt: function() {
         var button = sbCommonUtils.PROMPT.STD_YES_NO_BUTTONS + sbCommonUtils.PROMPT.BUTTON_POS_1_DEFAULT;
-        var text = sbCommonUtils.lang("scrapbook", "CONFIRM_DELETE");
+        var text = sbCommonUtils.lang("CONFIRM_DELETE");
         // pressing default button or closing the prompt returns 1
         // reverse it to mean "no" by default
         return !sbCommonUtils.PROMPT.confirmEx(null, "[ScrapBook]", text, button, null, null, null, null, {});
@@ -315,7 +315,7 @@ var sbExportService = {
         try {
             this.copyLeftToRight(aRes);
         } catch(ex) {
-            this.QUICK_STATUS.value = sbCommonUtils.lang("trade", "FAILED") + ": " + title;
+            this.QUICK_STATUS.value = sbCommonUtils.lang("FAILED") + ": " + title;
             this.QUICK_STATUS.style.color = "#FF0000";
             return;
         }
@@ -340,7 +340,7 @@ var sbExportService = {
                 this.copyLeftToRight(this.resList[this.count]);
                 sbTradeService.log(document.getElementById("sbTradeExportButton").label + rate + title, "B");
             } catch(ex) {
-                sbTradeService.log(sbCommonUtils.lang("trade", "FAILED") + ' "' + ex + '"' + rate + title, "R", true);
+                sbTradeService.log(sbCommonUtils.lang("FAILED") + ' "' + ex + '"' + rate + title, "R", true);
             }
             window.top.document.getElementById("sbManageProgress").value = Math.round( (this.count + 1) / this.resList.length * 100);
             setTimeout(function(){ sbExportService.next(); }, 0);
@@ -434,7 +434,7 @@ var sbImportService = {
                 this.copyRightToLeft();
                 sbTradeService.log(document.getElementById("sbTradeImportButton").label + rate + folder + title, "B");
             } catch(ex) {
-                sbTradeService.log(sbCommonUtils.lang("trade", "FAILED") + ' "' + ex + '"' + rate + title, "R", true);
+                sbTradeService.log(sbCommonUtils.lang("FAILED") + ' "' + ex + '"' + rate + title, "R", true);
             }
             window.top.document.getElementById("sbManageProgress").value = Math.round(num / this.idxList.length * 100);
             setTimeout(function(){ sbImportService.next(); }, 0);
@@ -456,7 +456,7 @@ var sbImportService = {
         if ( !datFile.exists() ) throw "index.dat not found.";
         var item = sbTradeService.parseIndexDat(datFile);
         if ( !sbCommonUtils.validateID(item.id) ) throw "Invalid ID.";
-        if ( sbDataSource.exists(item.id) ) throw sbCommonUtils.lang("trade", "ERROR_SAME_ID_EXISTS");
+        if ( sbDataSource.exists(item.id) ) throw sbCommonUtils.lang("ERROR_SAME_ID_EXISTS");
         var destDir = sbTradeService.leftDir.clone();
         if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) ) item.icon = "resource://scrapbook/data/" + item.id + "/" + item.icon;
         if ( document.getElementById("sbTradeOptionUpdate").checked ) {
@@ -503,7 +503,7 @@ var sbImportService = {
                     if ( idx >= 0 ) window.top.sbTreeHandler.TREE.view.toggleOpenState(idx);
                     this.folderTable[newItem.title] = newRes.Value;
                     this.tarResArray[0] = newRes.Value;
-                    sbTradeService.log(sbCommonUtils.lang("trade", "CREATE_FOLDER", [newItem.title]), "B", true);
+                    sbTradeService.log(sbCommonUtils.lang("CREATE_FOLDER", newItem.title), "B", true);
                 }
             }
             if ( this.tarResArray[0] != window.top.sbTreeHandler.TREE.ref ) folder = " [" + item.folder + "] ";

@@ -1,48 +1,91 @@
 
 var sbContentSaver = {
-
-
-    name: "",
-    item: null,
-    contentDir: null,
-    httpTask: {},
-    file2URL: {},
-    file2Doc: {},
     option: {},
-    plusoption: {},
-    refURLObj: null,
+    documentName: "",
+    item: null,
     favicon: null,
-    frames: [],
-    canvases: [],
+    contentDir: null,
+    refURLObj: null,
     isMainFrame: true,
     selection: null,
+    treeRes: null,
+    presetData: null,
+    httpTask: {},
+    downloadRewriteFiles: {},
+    downloadRewriteMap: {},
+    file2URL: {},
+    file2Doc: {},
     linkURLs: [],
-
-
+    frames: [],
+    canvases: [],
+    cachedDownLinkFilter: null,
+    cachedDownLinkFilterSource: null,
 
     init: function(aPresetData) {
+        this.option = {
+            "isPartial": false,
+            "images": sbCommonUtils.getPref("capture.default.images", true),
+            "media": sbCommonUtils.getPref("capture.default.media", true),
+            "fonts": sbCommonUtils.getPref("capture.default.fonts", true),
+            "frames": sbCommonUtils.getPref("capture.default.frames", true),
+            "styles": sbCommonUtils.getPref("capture.default.styles", true),
+            "script": sbCommonUtils.getPref("capture.default.script", false),
+            "asHtml": sbCommonUtils.getPref("capture.default.asHtml", false),
+            "forceUtf8": sbCommonUtils.getPref("capture.default.forceUtf8", true),
+            "rewriteStyles": sbCommonUtils.getPref("capture.default.rewriteStyles", true),
+            "keepLink": sbCommonUtils.getPref("capture.default.keepLink", false),
+            "saveDataURI": sbCommonUtils.getPref("capture.default.saveDataURI", false),
+            "downLinkMethod": 0, // active only if explicitly set in detail dialog
+            "downLinkFilter": "",
+            "inDepth": 0, // active only if explicitly set in detail dialog
+            "inDepthTimeout": 0,
+            "inDepthCharset": "UTF-8",
+            "internalize": false,
+        };
+        this.documentName = "index";
         this.item = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
         this.item.id = sbDataSource.identify(this.item.id);
-        this.name = "index";
         this.favicon = null;
-        this.file2URL = { "index.dat": true, "index.png": true, "index.rdf": true, "sitemap.xml": true, "sitemap.xsl": true, "sb-file2url.txt": true, "sb-url2name.txt": true, };
-        this.option   = { "dlimg": false, "dlsnd": false, "dlmov": false, "dlarc": false, "custom": "", "inDepth": 0, "isPartial": false, "images": true, "media": true, "fonts": true, "frames": true, "styles": true, "script": false, "asHtml": false, "forceUtf8": true, "rewriteStyles": true, "keepLink": false, "internalize": false };
-        this.plusoption = { "timeout": "0", "charset": "UTF-8" }
+        this.isMainFrame = true;
+
+        this.file2URL = {
+            "index.dat": true,
+            "index.png": true,
+            "index.rdf": true,
+            "sitemap.xml": true,
+            "sitemap.xsl": true,
+            "sb-file2url.txt": true,
+            "sb-url2name.txt": true,
+        };
+        this.file2Doc = {};
         this.linkURLs = [];
         this.frames = [];
-        this.isMainFrame = true;
+        this.canvases = [];
+        this.presetData = aPresetData;
         if ( aPresetData ) {
             if ( aPresetData[0] ) this.item.id = aPresetData[0];
-            if ( aPresetData[1] ) this.name = aPresetData[1];
+            if ( aPresetData[1] ) this.documentName = aPresetData[1];
             if ( aPresetData[2] ) this.option = sbCommonUtils.extendObject(this.option, aPresetData[2]);
             if ( aPresetData[3] ) this.file2URL = aPresetData[3];
             if ( aPresetData[4] >= this.option["inDepth"] ) this.option["inDepth"] = 0;
         }
         this.httpTask[this.item.id] = 0;
+        this.downloadRewriteFiles[this.item.id] = [];
+        this.downloadRewriteMap[this.item.id] = {};
     },
 
+    // aRootWindow: window to be captured
+    // aIsPartial: (bool) this is a partial capture (only capture selection area)
+    // aShowDetail: 
+    // aResName: the folder item which is the parent of this captured item
+    // aResIndex: the position index where this captured item will be in the parent folder
+    //            (1 is the first; 0 is last or first depending on pref "tree.unshift")
+    //            (currently it is always 0)
+    // aPresetData: data comes from a capture.js, cold be: 
+    //              link, indepth, capture-again, capture-again-deep
     captureWindow: function(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData, aContext, aTitle) {
         this.init(aPresetData);
+        this.option["isPartial"] = aIsPartial;
         this.item.chars = this.option["forceUtf8"] ? "UTF-8" : aRootWindow.document.characterSet;
         this.item.source = aRootWindow.location.href;
         //Favicon der angezeigten Seite bestimmen (Unterscheidung zwischen FF2 und FF3 notwendig!)
@@ -78,41 +121,13 @@ var sbContentSaver = {
             if ( ret.result == 2 ) { aResName = ret.resURI; aResIndex = 0; }
         }
         this.contentDir = sbCommonUtils.getContentDir(this.item.id);
-        var newName = this.saveDocumentInternal(aRootWindow.document, this.name);
+        var newName = this.saveDocumentInternal(aRootWindow.document, this.documentName);
         if ( this.item.icon && this.item.type != "image" && this.item.type != "file" ) {
             var iconFileName = this.download(this.item.icon);
             this.favicon = iconFileName;
         }
         if ( this.httpTask[this.item.id] == 0 ) {
             setTimeout(function(){ sbCaptureObserverCallback.onCaptureComplete(sbContentSaver.item); }, 100);
-        }
-        if ( this.option["inDepth"] > 0 && this.linkURLs.length > 0 ) {
-            // inDepth capture for "capture-again-deep" is pre-disallowed by hiding the options
-            // and should never occur here
-            if ( !aPresetData || aContext == "capture-again" ) {
-                this.item.type = "marked";
-                this.option["isPartial"] = aIsPartial;
-                var data = {
-                    urls: this.linkURLs,
-                    refUrl: this.refURLObj.spec,
-                    showDetail: false,
-                    resName: null,
-                    resIdx: 0,
-                    referItem: this.item,
-                    option: this.option,
-                    file2Url: this.file2URL,
-                    preset: null,
-                    charset: this.plusoption["charset"],
-                    timeout: this.plusoption["timeout"],
-                    titles: null,
-                    context: "indepth",
-                };
-                window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no", data);
-            } else {
-                for ( var i = 0; i < this.linkURLs.length; i++ ) {
-                    sbCaptureTask.add(this.linkURLs[i], aPresetData[4] + 1);
-                }
-            }
         }
         this.addResource(aResName, aResIndex);
         return [sbCommonUtils.splitFileName(newName)[0], this.file2URL, this.item.title];
@@ -131,7 +146,7 @@ var sbContentSaver = {
         }
         this.contentDir = sbCommonUtils.getContentDir(this.item.id);
         this.refURLObj = sbCommonUtils.convertURLToObject(aReferURL);
-        var newName = this.saveFileInternal(aSourceURL, this.name, aType);
+        var newName = this.saveFileInternal(aSourceURL, this.documentName, aType);
         this.addResource(aResName, aResIndex);
         return [sbCommonUtils.splitFileName(newName)[0], this.file2URL, this.item.title];
     },
@@ -140,7 +155,6 @@ var sbContentSaver = {
         var ret = {
             item: this.item,
             option: this.option,
-            poption: this.plusoption,
             titles: aTitles || [this.item.title],
             resURI: aResURI,
             result: 1,
@@ -364,10 +378,12 @@ var sbContentSaver = {
             myHTMLFile.append(myHTMLFileName);
         }
         sbCommonUtils.writeFile(myHTMLFile, myHTML, charset);
+        this.downloadRewriteFiles[this.item.id].push([myHTMLFile, charset]);
         if ( myCSS ) {
             var myCSSFile = this.contentDir.clone();
             myCSSFile.append(myCSSFileName);
             sbCommonUtils.writeFile(myCSSFile, myCSS, charset);
+            this.downloadRewriteFiles[this.item.id].push([myCSSFile, charset]);
         }
         return myHTMLFile.leafName;
     },
@@ -378,47 +394,7 @@ var sbContentSaver = {
         if ( !this.refURLObj ) {
             this.refURLObj = urlObj;
         }
-
-        // Get and use the filename from the header, if defined.
-        //
-        // This function requires an immediate return, so the async way is not viable.
-        //
-        // Since this connection is limited to getting HTTP header and to single
-        // file/link capture, the impact of user experience is rather minimal.
-        //
-        // Files linked via <img>s, <link>s, etc are not fixed currently as it could
-        // cause significant response delay due to potential large amount.
-        //
-        // @TODO: 
-        // This is a rather temporary patch to prevent the user from capturing a file
-        // with a bad extention, and being unable to open it correctly.
-        //
-        // We'll need a thorough code structure rework for a complete fix at last.
-        var filename;
-        if ( urlObj.schemeIs("http") || urlObj.schemeIs("https") ) {
-            try {
-                var channel = sbCommonUtils.IO.newChannelFromURI(urlObj).QueryInterface(Components.interfaces.nsIHttpChannel);
-                channel.open();
-                try {
-                    if (channel.contentDispositionFilename) {
-                        filename = channel.contentDispositionFilename;
-                    }
-                } catch (ex) {}
-                if (!filename) {
-                    var base = urlObj.fileBaseName;
-                    var ext = urlObj.fileExtension;
-                    var mime = channel.contentType;
-                    if (mime) {
-                        var extFromMime = sbCommonUtils.getMimePrimaryExtension(mime, ext);
-                        if (extFromMime && (ext !== extFromMime)) {
-                            filename = base + (ext ? "." + ext : "") + "." + extFromMime;
-                        }
-                    }
-                }
-            } catch (ex) {}
-        }
-
-        var newFileName = this.download(aFileURL, filename);
+        var newFileName = this.download(aFileURL);
         if (newFileName) {
             if ( aCaptureType == "image" ) {
                 var myHTML = '<html><head><meta charset="UTF-8"></head><body><img src="' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(newFileName)) + '"></body></html>';
@@ -436,21 +412,21 @@ var sbContentSaver = {
         var myHTMLFile = this.contentDir.clone();
         myHTMLFile.append(aFileKey + ".html");
         sbCommonUtils.writeFile(myHTMLFile, myHTML, "UTF-8");
+        this.downloadRewriteFiles[this.item.id].push([myHTMLFile, "UTF-8"]);
         return myHTMLFile.leafName;
     },
 
+    // aResName is null if it's not the main document of an indepth capture
+    // set treeRes to the created resource or null if aResName is not defined
     addResource: function(aResName, aResIndex) {
+        this.treeRes = null;
         if ( !aResName ) return;
-        var res = sbDataSource.addItem(this.item, aResName, aResIndex);
+        // We are during a capture process, temporarily set marked and no icon
+        var [_type, _icon] = [this.item.type, this.item.icon];
+        [this.item.type, this.item.icon] = ["marked", ""];
+        this.treeRes = sbDataSource.addItem(this.item, aResName, aResIndex);
+        [this.item.type, this.item.icon] = [_type, _icon];
         sbCommonUtils.rebuildGlobal();
-        if ( this.favicon ) {
-            var iconURL = "resource://scrapbook/data/" + this.item.id + "/" + sbCommonUtils.escapeFileName(this.favicon);
-            setTimeout(function(){
-                sbDataSource.setProperty(res, "icon", iconURL);
-            }, 500);
-            this.item.icon = sbCommonUtils.escapeFileName(this.favicon);
-        }
-        sbCommonUtils.writeIndexDat(this.item);
         if ( "sbBrowserOverlay" in window ) sbBrowserOverlay.updateFolderPref(aResName);
     },
 
@@ -501,7 +477,7 @@ var sbContentSaver = {
         switch ( aNode.nodeName.toLowerCase() ) {
             case "img": 
                 if ( aNode.hasAttribute("src") ) {
-                    if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
+                    if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("src")) ) break;
                     if ( this.option["images"] ) {
                         var aFileName = this.download(aNode.src);
                         if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
@@ -515,7 +491,7 @@ var sbContentSaver = {
                     var that = this;
                     aNode.setAttribute("srcset", (function(srcset){
                         return srcset.replace(/(\s*)([^ ,][^ ]*[^ ,])(\s*(?: [^ ,]+)?\s*(?:,|$))/g, function(m, m1, m2, m3){
-                            if ( that.option["internalize"] && m2.indexOf("://") == -1 ) return m;
+                            if ( that.option["internalize"] && this.isInternalized(m2) ) return m;
                             var url = sbCommonUtils.resolveURL(that.refURLObj.spec, m2);
                             if ( that.option["images"] ) {
                                 var aFileName = that.download(url);
@@ -531,7 +507,21 @@ var sbContentSaver = {
                 }
                 break;
             case "embed": 
-            case "source":  // in <audio> and <vedio>
+            case "audio":
+            case "video":
+                if ( aNode.hasAttribute("src") ) {
+                    if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
+                    if ( this.option["media"] ) {
+                        var aFileName = this.download(aNode.src);
+                        if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
+                    } else if ( this.option["keepLink"] ) {
+                        aNode.setAttribute("src", aNode.src);
+                    } else {
+                        aNode.setAttribute("src", "about:blank");
+                    }
+                }
+                break;
+            case "source":  // in <picture>, <audio> and <video>
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
                     if ( this.option["media"] ) {
@@ -547,7 +537,7 @@ var sbContentSaver = {
                     var that = this;
                     aNode.setAttribute("srcset", (function(srcset){
                         return srcset.replace(/(\s*)([^ ,][^ ]*[^ ,])(\s*(?: [^ ,]+)?\s*(?:,|$))/g, function(m, m1, m2, m3){
-                            if ( that.option["internalize"] && m2.indexOf("://") == -1 ) return m;
+                            if ( that.option["internalize"] && this.isInternalized(m2) ) return m;
                             var url = sbCommonUtils.resolveURL(that.refURLObj.spec, m2);
                             if ( that.option["media"] ) {
                                 var aFileName = that.download(url);
@@ -564,7 +554,7 @@ var sbContentSaver = {
                 break;
             case "object": 
                 if ( aNode.hasAttribute("data") ) {
-                    if ( this.option["internalize"] && aNode.getAttribute("data").indexOf("://") == -1 ) break;
+                    if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("data")) ) break;
                     if ( this.option["media"] ) {
                         var aFileName = this.download(aNode.data);
                         if (aFileName) aNode.setAttribute("data", sbCommonUtils.escapeFileName(aFileName));
@@ -577,7 +567,7 @@ var sbContentSaver = {
                 break;
             case "applet": 
                 if ( aNode.hasAttribute("archive") ) {
-                    if ( this.option["internalize"] && aNode.getAttribute("archive").indexOf("://") == -1 ) break;
+                    if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("archive")) ) break;
                     var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("archive"));
                     if ( this.option["media"] ) {
                         var aFileName = this.download(url);
@@ -598,7 +588,7 @@ var sbContentSaver = {
                 }
                 aNode.removeAttribute("data-sb-canvas-id");
                 break;
-            case "track":  // in <audio> and <vedio>
+            case "track":  // in <audio> and <video>
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] ) break;
                     aNode.setAttribute("src", aNode.src);
@@ -611,7 +601,7 @@ var sbContentSaver = {
             case "td": 
                 // handle "background" attribute (HTML5 deprecated)
                 if ( aNode.hasAttribute("background") ) {
-                    if ( this.option["internalize"] && aNode.getAttribute("background").indexOf("://") == -1 ) break;
+                    if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("background")) ) break;
                     var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("background"));
                     if ( this.option["images"] ) {
                         var aFileName = this.download(url);
@@ -627,7 +617,7 @@ var sbContentSaver = {
                 switch (aNode.type.toLowerCase()) {
                     case "image": 
                         if ( aNode.hasAttribute("src") ) {
-                            if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
+                            if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("src")) ) break;
                             if ( this.option["images"] ) {
                                 var aFileName = this.download(aNode.src);
                                 if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
@@ -759,33 +749,26 @@ var sbContentSaver = {
                     }
                 }
                 // determine whether to download (copy) the link target file
-                var ext = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aNode.href))[1].toLowerCase();
-                var flag = false;
-                if ( ext && this.option["custom"] &&
-                    ( (", " + this.option["custom"] + ", ").indexOf(", " + ext + ", ") != -1 ) ) {
-                    // copy files with custom defined extensions
-                    flag = true;
-                } else if ( aNode.href.indexOf("file://") == 0 && !ext.match(/html?/) ) {
-                    // download all non-HTML target of local file
-                    // primarily to enable the combine wizard to capture all "file" data
-                    flag = true;
-                } else {
-                    switch ( ext ) {
-                        case "jpg": case "jpeg": case "png": case "gif": case "tiff": flag = this.option["dlimg"]; break;
-                        case "aac": case "flac": case "mp3": case "ogg": case "ram": case "ra": case "rm": case "rmx": case "wav": case "wma": flag = this.option["dlsnd"]; break;
-                        case "avi": case "avc": case "flv": case "mkv": case "mov": case "mpg": case "mpeg": case "mp4": case "wmv": flag = this.option["dlmov"]; break;
-                        case "zip": case "lzh": case "lha": case "tar": case "gz": case "bz": case "7z": case "rar": case "jar": case "xpi": flag = this.option["dlarc"]; break;
-                        default: 
+                switch (sbContentSaver.option["downLinkMethod"]) {
+                    case 2: // check url and header filename
+                        var aFileName = this.download(aNode.href, true);
+                        if (aFileName) aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
+                        break;
+                    case 1: // check url filename
+                        var [,ext] = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aNode.href));
+                        if (this.downLinkFilter(ext)) {
+                            var aFileName = this.download(aNode.href);
+                            if (aFileName) aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
+                            break;
+                        }
+                    case 0: // no check
+                    default:
+                        if ( sbContentSaver.option["inDepth"] > 0 ) {
                             // do not copy, but add to the link list if it's a work of deep capture
-                            if ( this.option["inDepth"] > 0 ) this.linkURLs.push(aNode.href);
-                    }
-                }
-                // do the copy or URL rewrite
-                if ( flag ) {
-                    var aFileName = this.download(aNode.href);
-                    if (aFileName) aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
-                } else {
-                    aNode.setAttribute("href", aNode.href);
+                            sbContentSaver.linkURLs.push(aNode.href);
+                        }
+                        aNode.setAttribute("href", aNode.href);
+                        break;
                 }
                 break;
             case "form": 
@@ -836,7 +819,7 @@ var sbContentSaver = {
                     var tmpRefURL = this.refURLObj;
                     // retrieve contentDocument from the corresponding real frame
                     var idx = aNode.getAttribute("data-sb-frame-id");
-                    var newFileName = this.saveDocumentInternal(this.frames[idx].contentDocument, this.name + "_" + (parseInt(idx)+1));
+                    var newFileName = this.saveDocumentInternal(this.frames[idx].contentDocument, this.documentName + "_" + (parseInt(idx)+1));
                     aNode.setAttribute("src", sbCommonUtils.escapeFileName(newFileName));
                     this.refURLObj = tmpRefURL;
                 } else if ( this.option["keepLink"] ) {
@@ -894,7 +877,7 @@ var sbContentSaver = {
         try {
             if (!aCSS.cssRules) skip = true;
         } catch(ex) {
-            sbCommonUtils.warn(sbCommonUtils.lang("scrapbook", "ERR_FAIL_GET_CSS", [aCSS.href, aDocument.location.href, ex]));
+            sbCommonUtils.warn(sbCommonUtils.lang("ERR_FAIL_GET_CSS", aCSS.href, aDocument.location.href, ex));
                 content += "/* ERROR: Unable to access this CSS */\n\n";
             skip = true;
         }
@@ -999,8 +982,8 @@ var sbContentSaver = {
         var regex = / url\(\"((?:\\.|[^"])+)\"\)| url\(((?:\\.|[^)])+)\)/g;
         aCSSText = aCSSText.replace(regex, function() {
             var dataURL = arguments[1] || arguments[2];
-            if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
-            if ( sbContentSaver.option["internalize"] && dataURL .indexOf("://") == -1 ) return ' url("' + dataURL + '")';
+            if (dataURL.indexOf("data:") === 0 && !sbContentSaver.option["saveDataURI"]) return ' url("' + dataURL + '")';
+            if ( sbContentSaver.option["internalize"] && sbContentSaver.isInternalized(dataURL) ) return ' url("' + dataURL + '")';
             dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);
             switch (type) {
                 case "image":
@@ -1026,84 +1009,208 @@ var sbContentSaver = {
     },
 
     // aURLSpec is an absolute URL
-    download: function(aURLSpec, aSuggestFilename) {
+    //
+    // Converting a data URI to nsIURL will throw an NS_ERROR_MALFORMED_URI error
+    // if the data URI is large (e.g. 5 MiB), so we manipulate the URL string instead
+    // of converting the URI to nsIURI initially.
+    //
+    // aIsLinkFilter is specific for download link filter
+    download: function(aURLSpec, aIsLinkFilter) {
         if ( !aURLSpec ) return "";
+        var sourceURL = aURLSpec;
+
         try {
-            var aURL = sbCommonUtils.convertURLToObject(aURLSpec);
-        } catch(ex) {
-            sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_DOWNLOAD_FILE", [aURLSpec, ex]));
-            return "";
-        }
-        // never download "data:" and "chrome://" resources
-        if ( ["data", "chrome"].indexOf(aURL.scheme) >= 0 ) {
-            return "";
-        }
-
-        if (aSuggestFilename) {
-            var fileName = aSuggestFilename;
-        } else {
-            var fileName = aURL.fileName;
-            // decode %xx%xx%xx only if it's UTF-8 encoded
-            try {
-                fileName = decodeURIComponent(fileName);
-            } catch(ex) {}
-        }
-        var arr = this.getUniqueFileName(fileName, aURLSpec);
-        var newFileName = arr[0];
-        var hasDownloaded = arr[1];
-        if (hasDownloaded) return newFileName;
-
-        if ( aURL.schemeIs("http") || aURL.schemeIs("https") || aURL.schemeIs("ftp") ) {
-            if ( this.option["internalize"] ) {
-                var targetFile = this.option["internalize"].parent;
-                targetFile.append(newFileName);
-            } else {
-                var targetFile = this.contentDir.clone();
-                targetFile.append(newFileName);
-            }
-//Der Try-Catch-Block wird auch bei einem alert innerhalb des Blocks weitergefuehrt!
-            try {
-                var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
-                WBP.persistFlags |= WBP.PERSIST_FLAGS_FROM_CACHE;
-                WBP.persistFlags |= WBP.PERSIST_FLAGS_AUTODETECT_APPLY_CONVERSION;
-                if ( sbCommonUtils._fxVer36_saveURI ) {
-                    var privacyContext = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebNavigation).QueryInterface(Components.interfaces.nsILoadContext);
-                    WBP.saveURI(aURL, null, this.refURLObj, null, null, null, targetFile, privacyContext);
-                } else if (Components.interfaces.nsILoadContext) {
-                    // older Firefox versions does not have/need Components.interfaces.nsILoadContext
-                    var privacyContext = window.QueryInterface(Components.interfaces.nsIInterfaceRequestor).getInterface(Components.interfaces.nsIWebNavigation).QueryInterface(Components.interfaces.nsILoadContext);
-                    WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile, privacyContext);
-                } else {
-                    WBP.saveURI(aURL, null, this.refURLObj, null, null, targetFile);
-                }
-                this.httpTask[this.item.id]++;
-                WBP.progressListener = new sbCaptureObserver(this.item, newFileName);
-                return newFileName;
-            } catch(ex) {
-                sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_DOWNLOAD_FILE", [aURLSpec, ex]));
-                this.httpTask[this.item.id]--;
+            if (sourceURL.indexOf("chrome:") === 0) {
+                // never download "chrome://" resources
                 return "";
-            }
-        } else if ( aURL.schemeIs("file") ) {
-            if ( this.option["internalize"] ) {
-                var targetDir = this.option["internalize"].parent;
-            } else {
-                var targetDir = this.contentDir.clone();
-            }
-            try {
-                var orgFile = sbCommonUtils.convertURLToFile(aURLSpec);
-                if ( !orgFile.isFile() ) return;
-                orgFile.copyTo(targetDir, newFileName);
+            } else if ( sourceURL.indexOf("http:") === 0 || sourceURL.indexOf("https:") === 0 || sourceURL.indexOf("ftp:") === 0 ) {
+                var targetDir = this.option["internalize"] ? this.option["internalize"].parent : this.contentDir.clone();
+                var hashKey = sbCommonUtils.getUUID();
+                var fileName, isDuplicate;
+                try {
+                    var channel = sbCommonUtils.IO.newChannel(sourceURL, null, null);
+                    channel.asyncOpen({
+                        _stream: null,
+                        _file: null,
+                        _skipped: false,
+                        onStartRequest: function (aRequest, aContext) {
+                            // if header Content-Disposition is defined, use it
+                            try {
+                                fileName = aRequest.contentDispositionFilename;
+                                var [, ext] = sbCommonUtils.splitFileName(fileName);
+                            } catch (ex) {}
+                            // if no ext defined, try header Content-Type
+                            if (!fileName) {
+                                var [base, ext] = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aRequest.name));
+                                if (!ext) {
+                                    ext = sbCommonUtils.getMimePrimaryExtension(aRequest.contentType, ext) || "dat";
+                                }
+                                fileName = base + "." + ext;
+                            }
+                            // apply the filter
+                            if (aIsLinkFilter) {
+                                var toDownload = sbContentSaver.downLinkFilter(ext);
+                                if (!toDownload) {
+                                    if ( sbContentSaver.option["inDepth"] > 0 ) {
+                                        // do not copy, but add to the link list if it's a work of deep capture
+                                        sbContentSaver.linkURLs.push(sourceURL);
+                                    }
+                                    sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][hashKey] = sourceURL;
+                                    this._skipped = true;
+                                    channel.cancel(Components.results.NS_BINDING_ABORTED);
+                                    return;
+                                }
+                            }
+                            // determine the filename and check for duplicate
+                            [fileName, isDuplicate] = sbContentSaver.getUniqueFileName(fileName, sourceURL);
+                            sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][hashKey] = fileName;
+                            if (isDuplicate) {
+                                this._skipped = true;
+                                channel.cancel(Components.results.NS_BINDING_ABORTED);
+                            }
+                        },
+                        onStopRequest: function (aRequest, aContext, aStatusCode) {
+                            if (!!this._stream) {
+                                this._stream.close();
+                            }
+                            if (!this._skipped && aStatusCode != Components.results.NS_OK) {
+                                // download failed, remove the file and use the original URL
+                                this._file.remove(true);
+                                sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][hashKey] = sourceURL;
+                                // crop to prevent large dataURI masking the exception info, especially dataURIs
+                                sourceURL = sbCommonUtils.crop(sourceURL, 1024);
+                                sbCommonUtils.error(sbCommonUtils.lang("ERR_FAIL_DOWNLOAD_FILE", sourceURL, "download channel fail"));
+                            }
+                            sbCaptureObserverCallback.onDownloadComplete(sbContentSaver.item);
+                        },
+                        onDataAvailable: function (aRequest, aContext, aInputStream, aOffset, aCount) {
+                            if (!this._stream) {
+                                this._file = targetDir.clone(); this._file.append(fileName);
+                                var ostream = Components.classes['@mozilla.org/network/file-output-stream;1']
+                                        .createInstance(Components.interfaces.nsIFileOutputStream);
+                                ostream.init(this._file, -1, 0666, 0);
+                                var bostream = Components.classes['@mozilla.org/network/buffered-output-stream;1']
+                                        .createInstance(Components.interfaces.nsIBufferedOutputStream);
+                                bostream.init(ostream, 1024 * 1024);
+                                this._stream = bostream;
+                            }
+                            this._stream.writeFrom(aInputStream, aCount);
+                            this._stream.flush();
+                            sbCaptureObserverCallback.onDownloadProgress(sbContentSaver.item, fileName, aOffset);
+                        }
+                    }, null);
+                } catch (ex) {
+                    sbContentSaver.httpTask[sbContentSaver.item.id]--;
+                    throw ex;
+                }
+                sbContentSaver.httpTask[sbContentSaver.item.id]++;
+                return "scrapbook://" + hashKey;
+            } else if ( sourceURL.indexOf("file:") === 0 ) {
+                // if sourceURL is not targeting a file, fail out
+                var sourceFile = sbCommonUtils.convertURLToFile(sourceURL);
+                if ( !(sourceFile.exists() && sourceFile.isFile()) ) return "";
+                // apply the filter
+                // Download all non-HTML local files.
+                // This is primarily to enable the combine wizard to capture all "file:" data.
+                if (aIsLinkFilter) {
+                    var mime = sbCommonUtils.getFileMime(sourceFile);
+                    if ( ["text/html", "application/xhtml+xml"].indexOf(mime) >= 0 ) {
+                        if ( this.option["inDepth"] > 0 ) {
+                            // do not copy, but add to the link list if it's a work of deep capture
+                            this.linkURLs.push(sourceURL);
+                        }
+                        return "";
+                    }
+                }
+                // determine the filename
+                var targetDir = this.option["internalize"] ? this.option["internalize"].parent : this.contentDir.clone();
+                var fileName, isDuplicate;
+                fileName = sbCommonUtils.getFileName(sourceURL);
+                // if the target file exists and has same content as the source file, skip copy
+                // This kind of duplicate is probably a result of Firefox making a relative link absolute
+                // during a copy/cut.
+                fileName = sbCommonUtils.validateFileName(fileName);
+                var targetFile = targetDir.clone(); targetFile.append(fileName);
+                if (sbCommonUtils.compareFiles(sourceFile, targetFile)) {
+                    return fileName;
+                }
+                // check for duplicate
+                [fileName, isDuplicate] = sbContentSaver.getUniqueFileName(fileName, sourceURL);
+                if (isDuplicate) return fileName;
+                // set task
                 this.httpTask[this.item.id]++;
                 var item = this.item;
                 setTimeout(function(){ sbCaptureObserverCallback.onDownloadComplete(item); }, 0);
-                return newFileName;
-            } catch(ex) {
-                sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_FAIL_COPY_FILE", [aURLSpec, ex]));
-                return "";
+                // do the copy
+                sourceFile.copyTo(targetDir, fileName);
+                return fileName;
+            } else if ( sourceURL.indexOf("data:") === 0 ) {
+                // download "data:" only if option on
+                if (!this.option["saveDataURI"]) {
+                    return "";
+                }
+                var { mime, charset, base64, data } = sbCommonUtils.parseDataURI(sourceURL);
+                var dataURIBytes = base64 ? atob(data) : decodeURIComponent(data); // in bytes
+                // use sha1sum as the filename
+                var dataURIFileName = sbCommonUtils.sha1(dataURIBytes, "BYTES") + "." + (sbCommonUtils.getMimePrimaryExtension(mime, null) || "dat");
+                var targetDir = this.option["internalize"] ? this.option["internalize"].parent : this.contentDir.clone();
+                var fileName, isDuplicate;
+                // if the target file exists and has same content as the dataURI, skip copy
+                fileName = dataURIFileName;
+                var targetFile = targetDir.clone(); targetFile.append(fileName);
+                if (targetFile.exists() && targetFile.isFile()) {
+                    if (sbCommonUtils.readFile(targetFile) === dataURIBytes) {
+                        return fileName;
+                    }
+                }
+                // determine the filename and check for duplicate
+                [fileName, isDuplicate] = sbContentSaver.getUniqueFileName(fileName, sourceURL);
+                if (isDuplicate) return fileName;
+                // set task
+                this.httpTask[this.item.id]++;
+                var item = this.item;
+                setTimeout(function(){ sbCaptureObserverCallback.onDownloadComplete(item); }, 0);
+                // do the save
+                var targetFile = targetDir.clone(); targetFile.append(fileName);
+                sbCommonUtils.writeFileBytes(targetFile, dataURIBytes);
+                return fileName;
             }
+        } catch (ex) {
+            // crop to prevent large dataURI masking the exception info, especially dataURIs
+            sourceURL = sbCommonUtils.crop(sourceURL, 1024);
+            if (sourceURL.indexOf("file:") === 0) {
+                var msgType = "ERR_FAIL_COPY_FILE";
+            } else if (sourceURL.indexOf("data:") === 0) {
+                var msgType = "ERR_FAIL_WRITE_FILE";
+            } else {
+                var msgType = "ERR_FAIL_DOWNLOAD_FILE";
+            }
+            sbCommonUtils.error(sbCommonUtils.lang(msgType, sourceURL, ex));
         }
         return "";
+    },
+
+    downLinkFilter: function(aFileExt) {
+        var that = this;
+        // use cache if there is the filter is not changed
+        if (that.cachedDownLinkFilterSource !== that.option["downLinkFilter"]) {
+            that.cachedDownLinkFilterSource = that.option["downLinkFilter"];
+            that.cachedDownLinkFilter = (function () {
+                var ret = [];
+                that.option["downLinkFilter"].split(/[\r\n]/).forEach(function (line) {
+                    if (line.charAt(0) === "#") return;
+                    try {
+                        var regex = new RegExp("^(?:" + line + ")$", "i");
+                        ret.push(regex);
+                    } catch (ex) {}
+                });
+                return ret;
+            })();
+        }
+        var toDownload = that.cachedDownLinkFilter.some(function (filter) {
+            return filter.test(aFileExt);
+        });
+        return toDownload;
     },
 
     /**
@@ -1141,31 +1248,23 @@ var sbContentSaver = {
         return [newFileName, false];
     },
 
-};
-
-
-
-function sbCaptureObserver(aSBitem, aFileName) {
-    this.item = aSBitem;
-    this.fileName = aFileName;
-    this.callback = sbCaptureObserverCallback;
-}
-
-sbCaptureObserver.prototype = {
-
-    onStateChange: function(aWebProgress, aRequest, aStateFlags, aStatus) {
-        if ( aStateFlags & Components.interfaces.nsIWebProgressListener.STATE_STOP ) {
-            this.callback.onDownloadComplete(this.item);
-        }
+    isInternalized: function (aURI) {
+        return aURI.indexOf("://") === -1 && !(aURI.indexOf("data:") === 0);
     },
-    onProgressChange: function(aWebProgress, aRequest, aCurSelfProgress, aMaxSelfProgress, aCurTotalProgress, aMaxTotalProgress) {
-        if ( aCurTotalProgress == aMaxTotalProgress ) return;
-        var progress = (aMaxSelfProgress > 0) ? Math.round(aCurSelfProgress / aMaxSelfProgress * 100) + "%" : aCurSelfProgress + "Bytes";
-        this.callback.onDownloadProgress(this.item, this.fileName, progress);
+
+    restoreFileNameFromHash: function (hash) {
+        return hash.replace(/scrapbook:\/\/([0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12})/g, function (match, key) {
+            var url = sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][key];
+            // error handling
+            if (!url) return key;
+            // if the url contains ":", it is the source absolute url (meaning download fail),
+            // and we should not escape it
+            if (url.indexOf(":") === -1) {
+                url = sbCommonUtils.escapeFileName(url);
+            }
+            return url;
+        });
     },
-    onStatusChange: function() {},
-    onLocationChange: function() {},
-    onSecurityChange: function() {},
 };
 
 
@@ -1188,16 +1287,69 @@ var sbCaptureObserverCallback = {
             this.onAllDownloadsComplete(aItem);
             return;
         }
-        this.trace(sbCommonUtils.lang("overlay", "CAPTURE", [sbContentSaver.httpTask[aItem.id], aItem.title]), 0);
+        this.trace(sbCommonUtils.lang("CAPTURE", sbContentSaver.httpTask[aItem.id], aItem.title), 0);
     },
 
     onAllDownloadsComplete: function(aItem) {
-        this.trace(sbCommonUtils.lang("overlay", "CAPTURE_COMPLETE", [aItem.title]), 5000);
+        // restore downloaded file names
+        sbContentSaver.downloadRewriteFiles[aItem.id].forEach(function (data) {
+            var [file, charset] = data;
+            var content = sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(file), charset);
+            content = sbContentSaver.restoreFileNameFromHash(content);
+            sbCommonUtils.writeFile(file, content, charset);
+        });
+
+        if ( sbContentSaver.favicon ) {
+            sbContentSaver.favicon = sbContentSaver.restoreFileNameFromHash(sbContentSaver.favicon);
+            aItem.icon = sbCommonUtils.escapeFileName(sbContentSaver.favicon);
+        }
+
+        // fix resource settings after capture complete
+        // If it's an indepth capture, sbContentSaver.treeRes will be null for non-main documents,
+        // and thus we don't have to update the resource for many times.
+        var res = sbContentSaver.treeRes;
+        if (res && sbDataSource.exists(res)) {
+            sbDataSource.setProperty(res, "type", aItem.type);
+            if (aItem.icon) {
+                var iconURL = "resource://scrapbook/data/" + aItem.id + "/" + aItem.icon;
+                sbDataSource.setProperty(res, "icon", iconURL);
+            }
+            sbCommonUtils.rebuildGlobal();
+            sbCommonUtils.writeIndexDat(aItem);
+
+            if ( sbContentSaver.option["inDepth"] > 0 && sbContentSaver.linkURLs.length > 0 ) {
+                // inDepth capture for "capture-again-deep" is pre-disallowed by hiding the options
+                // and should never occur here
+                if ( !sbContentSaver.presetData || aContext == "capture-again" ) {
+                    sbContentSaver.item.type = "marked";
+                    var data = {
+                        urls: sbContentSaver.linkURLs,
+                        refUrl: sbContentSaver.refURLObj.spec,
+                        showDetail: false,
+                        resName: null,
+                        resIdx: 0,
+                        referItem: sbContentSaver.item,
+                        option: sbContentSaver.option,
+                        file2Url: sbContentSaver.file2URL,
+                        preset: null,
+                        titles: null,
+                        context: "indepth",
+                    };
+                    window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no", data);
+                } else {
+                    for ( var i = 0; i < sbContentSaver.linkURLs.length; i++ ) {
+                        sbCaptureTask.add(sbContentSaver.linkURLs[i], sbContentSaver.presetData[4] + 1);
+                    }
+                }
+            }
+        }
+
+        this.trace(sbCommonUtils.lang("CAPTURE_COMPLETE", aItem.title), 5000);
         this.onCaptureComplete(aItem);
     },
 
     onDownloadProgress: function(aItem, aFileName, aProgress) {
-        this.trace(sbCommonUtils.lang("overlay", "DOWNLOAD_DATA", [aProgress, aFileName]), 0);
+        this.trace(sbCommonUtils.lang("DOWNLOAD_DATA", aFileName, sbCommonUtils.formatFileSize(aProgress)), 0);
     },
 
     onCaptureComplete: function(aItem) {
@@ -1207,7 +1359,7 @@ var sbCaptureObserverCallback = {
             if ( sbDataSource.getProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id), "type") == "marked" ) return;
             if ( sbCommonUtils.getPref("notifyOnComplete", true) ) {
                 var icon = aItem.icon ? "resource://scrapbook/data/" + aItem.id + "/" + aItem.icon : sbCommonUtils.getDefaultIcon();
-                var title = "ScrapBook: " + sbCommonUtils.lang("overlay", "CAPTURE_COMPLETE");
+                var title = "ScrapBook: " + sbCommonUtils.lang("CAPTURE_COMPLETE");
                 var text = sbCommonUtils.crop(aItem.title, 100, true);
                 var listener = {
                     observe: function(subject, topic, data) {
@@ -1221,7 +1373,7 @@ var sbCaptureObserverCallback = {
             if ( aItem.id in sbContentSaver.httpTask ) delete sbContentSaver.httpTask[aItem.id];
         } else {
             var icon = sbCommonUtils.getDefaultIcon();
-            var title = "ScrapBook: " + sbCommonUtils.lang("overlay", "CAPTURE_COMPLETE");
+            var title = "ScrapBook: " + sbCommonUtils.lang("CAPTURE_COMPLETE");
             var alertsSvc = Components.classes["@mozilla.org/alerts-service;1"].getService(Components.interfaces.nsIAlertsService);
             alertsSvc.showAlertNotification(icon, title, null);
         }

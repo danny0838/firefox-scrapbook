@@ -76,7 +76,7 @@ var sbPropService = {
             case "combine": this.isTypeSite = true; bundleName = "TYPE_COMBINE";   break;
             case "site": this.isTypeSite = true; bundleName = "TYPE_INDEPTH";   break;
         }
-        document.getElementById("sbPropType").value = sbCommonUtils.lang("property", bundleName);
+        document.getElementById("sbPropType").value = sbCommonUtils.lang(bundleName);
         document.getElementById("sbPropSourceRow").hidden = this.isTypeFolder || this.isTypeNote || this.isTypeSeparator;
         document.getElementById("sbPropCharsRow").hidden = this.isTypeFolder || this.isTypeBookmark || this.isTypeSeparator;
         document.getElementById("sbPropIconRow").hidden = this.isTypeSeparator;
@@ -94,7 +94,7 @@ var sbPropService = {
 
     delayedInit: function() {
         var sizeCount = this.getTotalFileSize(this.id);
-        document.getElementById("sbPropSize").value = sbCommonUtils.lang("property", "FILES_COUNT", [sbCommonUtils.formatFileSize(sizeCount[0]), sizeCount[1], sizeCount[2]]);
+        document.getElementById("sbPropSize").value = sbCommonUtils.lang("FILES_COUNT", sbCommonUtils.formatFileSize(sizeCount[0]), sizeCount[1], sizeCount[2]);
     },
 
     accept: function() {
@@ -183,7 +183,7 @@ var sbPropService = {
 
     setIconURL: function() {
         var ret = { value: this.getIconURL() };
-        if ( !sbCommonUtils.PROMPT.prompt(window, document.getElementById("sbPropIconMenu").label, sbCommonUtils.lang("property", "ADDRESS"), ret, null, {}) ) return;
+        if ( !sbCommonUtils.PROMPT.prompt(window, document.getElementById("sbPropIconMenu").label, sbCommonUtils.lang("ADDRESS"), ret, null, {}) ) return;
         if ( ret.value ) this.ICON.src = ret.value;
     },
 
@@ -219,7 +219,7 @@ var sbPropService = {
                 totalSize += file.fileSize;
                 totalFile++;
             } catch(ex) {
-                sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_READ_FILE_SIZE", [file.path]));
+                sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_READ_FILE_SIZE", file.path));
             }
         }, this);
         return [totalSize, totalFile, totalDir];

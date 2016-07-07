@@ -1,0 +1,7 @@
+Scrapbook X 1.12.0a52
+=====================
+
+Changes since v1.12.0a51
+------------------------
+
+- FIXED: A non-ScrapBook page gets HTML edit mode turned off when switching to another tab and then back.

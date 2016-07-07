@@ -1,0 +1,49 @@
+Scrapbook X 1.13.0b
+===================
+
+Changes since v1.12.32
+----------------------
+
+Bug fixes:
+
+ * Downloaded media now use HTTP header defined filename if it exists. This also fixed several issues for embeded media if the rendering effect depends on their file extension.
+
+ * HTML5 <video> and <audio> tags with "src" attribute are not captured correctly.
+
+Functionality changes:
+
+ * Non-detail captures now use previously used detail capture options.
+
+   Note that "download linked files" and "in-depth capture" options are still available only via the detail dialog.
+
+ * Capture detail options are now remembered via the user preference.
+
+   This will make them more portable (via exporting preferences).
+
+ * Added a capture detail option "Save data URI as file", which saves data URIs to local with a filename of its sha1 checksum.
+
+   This allows the internalizer to save data URI images, which are mostly created from dragging local files into an editable note page, into normal embeded files.
+
+ * No more duplicate the file when the capturer is about to save a local file to a target with exactly same filename and file content.
+ 
+   A relative link in Firefox will become an absolute link when they are copied or cut to otherwhere, this feature used to create a chaos when editing note pages and moves embeded images. With this change we can easily rewrite absolute links back to relative using the internalizer.
+
+ * Reworked "Download linked files" functionality.
+ 
+   Now uses regular expressions to filter the file extension, which is more flexible and portable. Also added an option to use the file extension defined in the HTTP header of each link, which could cause bad performance but would be useful in certain cases.
+
+ * Adjusted the behavior of the capture dialog.
+ 
+   Fixed some issues that "pause", "skip", and "abort" buttons didn't work as expected when clicked in some cases. "Skip" button now never resumes a paused task, which allows the user to skip multiple items during the pause. "Abort" button now attempts to stop and finalize the current capture when clicked once, and forces the capture task to shutdown when clicked for the second time.
+
+Core changes:
+
+ * Merged separated localization language pack files, and changed how sbCommonUtils.lang() works accordingly.
+
+ * Added several core APIs.
+
+ * Several structural code reworks, especially for the capture functionality.
+
+Documentation changes:
+
+ * Release notes now goes one-file-for-one-version.

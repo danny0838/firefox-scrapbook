@@ -1,0 +1,7 @@
+Scrapbook X 1.12.0a3
+====================
+
+Changes since v1.12.0a2
+-----------------------
+
+- FIXED: Initialization error of edit toolbar on "Edit Before Capture".

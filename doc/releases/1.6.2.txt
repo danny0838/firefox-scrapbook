@@ -1,0 +1,8 @@
+Scrapbook X 1.6.2
+=================
+
+Changes since v1.6.1
+--------------------
+
+- Adjusts handling of sticky annotations. They are now draggable only in the edit mode, have undo history saved only once at the pre-edit, and are automatically saved on page saving.
+- Updatea a component interface for better compatibility.

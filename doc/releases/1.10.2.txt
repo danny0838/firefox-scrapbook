@@ -1,0 +1,7 @@
+Scrapbook X 1.10.2
+==================
+
+Changes since v1.10.1
+---------------------
+
+- Fixed an issue that pages cannot be saved.

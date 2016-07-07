@@ -1,0 +1,8 @@
+Scrapbook X 1.12.17
+===================
+
+Changes since v1.12.16
+----------------------
+
+- UPDATE: "Output HTML tree" now displays opened folders in a different style.
+- UPDATE: "Output HTML tree" generated frame.html again uses frame, while supports id and custom scripting.

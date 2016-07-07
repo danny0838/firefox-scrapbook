@@ -1,0 +1,405 @@
+<!-- calculate.dtd -->
+<!ENTITY sb.calc.total.size "總計大小">
+<!ENTITY sb.calc.diagnosis "資料診斷">
+
+<!-- capture.dtd -->
+<!ENTITY sb.capture "擷取">
+<!ENTITY sb.capture.abort "中止">
+<!ENTITY sb.capture.start "開始">
+<!ENTITY sb.capture.retry "重試">
+<!ENTITY sb.capture.skip "略過">
+<!ENTITY sb.capture.pause "暫停">
+<!ENTITY sb.capture.finish "取消">
+<!ENTITY sb.capture.filter "過濾">
+<!ENTITY sb.capture.filter.column.one "顯示/隱藏">
+<!ENTITY sb.capture.filter.column.two "篩選條件（使用規則運算式）">
+<!ENTITY sb.capture.filter.accept "確認">
+<!ENTITY sb.capture.filter.accept.tt "變更或編輯數值">
+<!ENTITY sb.capture.filter.cancel "取消">
+<!ENTITY sb.capture.filter.cancel.tt "中斷編輯">
+<!ENTITY sb.capture.filter.delete "刪除">
+<!ENTITY sb.capture.filter.delete.tt "從清單移除過濾條件">
+<!ENTITY sbp.capture.column.one "位址">
+<!ENTITY sbp.capture.column.two "標題">
+<!ENTITY sbp.capture.column.three "狀態">
+
+<!-- combine.dtd -->
+<!ENTITY sb.combine.dragdrop "請以滑鼠將要合併的檔案從樹狀列表中拖曳至此，並依合併順序排列。一次可以拖曳多個檔案。">
+<!ENTITY sb.combine.preview "預覽">
+<!ENTITY sb.combine.preview.d "確認預覽結果後，請按下「合併」鈕。">
+<!ENTITY sb.combine.option.remove "合併後刪除原頁面">
+<!ENTITY sbp.combine.up "檔案上移">
+<!ENTITY sbp.combine.down "檔案下移">
+<!ENTITY sbp.combine.remove "移除檔案">
+<!ENTITY sbp.combine.newTitle "新標題">
+
+<!-- detail.dtd -->
+<!ENTITY sb.detail.linked.timeout "逾時（秒數）">
+<!ENTITY sb.detail.linked.charset "以此文字編碼載入">
+<!ENTITY sb.detail "擷取細節">
+<!ENTITY sb.detail.new.folder "開新資料夾">
+<!ENTITY sb.detail.select.folder "選取資料夾">
+<!ENTITY sb.detail.option "選項">
+<!ENTITY sb.detail.option.capture "擷取">
+<!ENTITY sb.detail.option.images "圖片">
+<!ENTITY sb.detail.option.media "多媒體">
+<!ENTITY sb.detail.option.fonts "字體">
+<!ENTITY sb.detail.option.frames "頁框">
+<!ENTITY sb.detail.option.styles "樣式">
+<!ENTITY sb.detail.option.scripts "動態腳本">
+<!ENTITY sb.detail.option.keepLink "不擷取的物件保持連往原址">
+<!ENTITY sb.detail.option.saveDataURI "將 data URI 儲存成檔案">
+<!ENTITY sb.detail.option.rewriteStyles "重組樣式表">
+<!ENTITY sb.detail.option.asHtml "非 HTML 檔案擷取呈現時的 HTML">
+<!ENTITY sb.detail.option.forceUtf8 "儲存為 UTF-8 編碼">
+<!ENTITY sb.detail.linked.file "下載連結檔案">
+<!ENTITY sb.detail.linked.file.method0 "停用下載連結檔案">
+<!ENTITY sb.detail.linked.file.method1 "比對網址副檔名">
+<!ENTITY sb.detail.linked.file.method2 "比對 HTTP 標頭及網址副檔名">
+<!ENTITY sb.detail.linked.file.desc "下載完整副檔名符合任一行正規表示式的檔案。略過 &quot;#&quot; 開頭的行。略過語法錯誤的正規表示式。">
+<!ENTITY sb.detail.linked.file.reset "還原預設值">
+<!ENTITY sb.detail.linked.page "多層擷取">
+<!ENTITY sb.detail.linked.page.depth "擷取連結層數">
+<!ENTITY sb.detail.linked.page.text "（擷取完畢後，網頁連結會自動依硬碟中位置更新。）">
+<!ENTITY sb.detail.warnAboutRenew "請注意：「重新擷取」將覆蓋之前擷取的頁面。">
+<!ENTITY sb.detail.warnAboutScript "請注意：儲存 JavaScript 可能會引發許多問題。">
+
+<!-- editor.dtd -->
+<!ENTITY sb.toolbar.edit "編輯工具列">
+<!ENTITY sb.toolbar.info "顯示資訊列">
+<!ENTITY sb.edit.folderView "點擊檢視資料目錄，中鍵點擊在新分頁開啟。">
+<!ENTITY sb.edit.eraser "DOM 擦子 - 刪除不想要的元素或 ScrapBook 註記。">
+<!ENTITY sb.edit.undo "復原">
+<!ENTITY sb.edit.save "存檔">
+<!ENTITY sb.edit.comment "展開評注區">
+<!ENTITY sb.edit.annotationTool "註解工具 - 點擊建立自由註解，錨定於選取區後，無選取區則自由浮動。">
+<!ENTITY sb.edit.sticky "自由註解"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "添增&sb.edit.sticky;"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "建立自由註解">
+<!ENTITY sb.edit.inline.add "為選取區加上行內註解">
+<!ENTITY sb.edit.attach.file "為選取區附加檔案">
+<!ENTITY sb.edit.attach.link "為選取區附加連結">
+<!ENTITY sb.edit.attach.innerlink "為選取區附加內部連結">
+<!ENTITY sb.edit.htmlTool "HTML 編輯器 - 點擊開啟或關閉，開啟後可自由編輯頁面內容，並可透過快捷鍵或右鍵選單調用編輯功能。">
+<!ENTITY sb.edit.html "HTML 編輯器">
+<!ENTITY sb.edit.html.color "編輯顏色">
+<!ENTITY sb.edit.html.color.forText "設定文字顏色:">
+<!ENTITY sb.edit.html.color.forBg "設定背景顏色:">
+<!ENTITY sb.edit.html.source "編輯 HTML 原始碼">
+<!ENTITY sb.edit.html.link "插入連結">
+<!ENTITY sb.edit.html.link.url "目標 URL:">
+<!ENTITY sb.edit.html.link.id "資源 ID:">
+<!ENTITY sb.edit.html.link.format "指定插入格式:">
+<!ENTITY sb.edit.html.file "插入檔案">
+<!ENTITY sb.edit.html.file.pick "插入檔案:">
+<!ENTITY sb.edit.html.file.html "插入子頁面:">
+<!ENTITY sb.edit.html.file.format "指定插入格式:">
+<!ENTITY sb.edit.html.backup "備份目前頁面">
+<!ENTITY sb.edit.html.backup.desc "描述:">
+<!ENTITY sb.edit.html.menu.basic "字元">
+<!ENTITY sb.edit.html.menu.block "區塊">
+<!ENTITY sb.edit.html.menu.insert "插入">
+<!ENTITY sb.edit.html.menu.wrapper "進階">
+<!ENTITY sb.edit.html.menuitem.insertSource "插入或編輯原始碼">
+<!ENTITY sb.edit.html.menuitem.removeFormat "清除格式">
+<!ENTITY sb.edit.html.menuitem.unlink "清除連結">
+<!ENTITY sb.edit.html.menuitem.save "儲存頁面">
+<!ENTITY sb.edit.html.menuitem.quit "切換 HTML 編輯器">
+<!ENTITY sb.edit.html.menuitem.bold "切換粗體">
+<!ENTITY sb.edit.html.menuitem.italic "切換斜體">
+<!ENTITY sb.edit.html.menuitem.underline "切換底線">
+<!ENTITY sb.edit.html.menuitem.strikeThrough "切換刪除線">
+<!ENTITY sb.edit.html.menuitem.setColor "設定文字及背景顏色">
+<!ENTITY sb.edit.html.menuitem.increaseFontSize "放大字級">
+<!ENTITY sb.edit.html.menuitem.decreaseFontSize "縮小字級">
+<!ENTITY sb.edit.html.menuitem.superscript "切換上標">
+<!ENTITY sb.edit.html.menuitem.subscript "切換下標">
+<!ENTITY sb.edit.html.menuitem.formatblock_p "設定為一般段落">
+<!ENTITY sb.edit.html.menuitem.formatblock_h1 "設定為 1 級標題">
+<!ENTITY sb.edit.html.menuitem.formatblock_h2 "設定為 2 級標題">
+<!ENTITY sb.edit.html.menuitem.formatblock_h3 "設定為 3 級標題">
+<!ENTITY sb.edit.html.menuitem.formatblock_h4 "設定為 4 級標題">
+<!ENTITY sb.edit.html.menuitem.formatblock_h5 "設定為 5 級標題">
+<!ENTITY sb.edit.html.menuitem.formatblock_h6 "設定為 6 級標題">
+<!ENTITY sb.edit.html.menuitem.formatblock_div "設定為 DIV 區塊">
+<!ENTITY sb.edit.html.menuitem.formatblock_pre "設定為 PRE 區塊">
+<!ENTITY sb.edit.html.menuitem.insertUnorderedList "切換無序列表">
+<!ENTITY sb.edit.html.menuitem.insertOrderedList "切換有序列表">
+<!ENTITY sb.edit.html.menuitem.outdent "減少縮排">
+<!ENTITY sb.edit.html.menuitem.indent "增加縮排">
+<!ENTITY sb.edit.html.menuitem.justifyLeft "靠左對齊">
+<!ENTITY sb.edit.html.menuitem.justifyRight "靠右對齊">
+<!ENTITY sb.edit.html.menuitem.justifyCenter "置中對齊">
+<!ENTITY sb.edit.html.menuitem.justifyFull "左右對齊">
+<!ENTITY sb.edit.html.menuitem.attachLink "插入連結或內部連結">
+<!ENTITY sb.edit.html.menuitem.attachFile "插入檔案或子頁面">
+<!ENTITY sb.edit.html.menuitem.backupFile "建立此頁面的備份">
+<!ENTITY sb.edit.html.menuitem.horizontalLine "插入水平線">
+<!ENTITY sb.edit.html.menuitem.insertDate "插入日期">
+<!ENTITY sb.edit.html.menuitem.insertTodoBox "插入待辦事項核取方塊">
+<!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "插入待辦事項核取方塊 (已勾選)">
+<!ENTITY sb.edit.html.menuitem.wrapHTML "用模版格式化">
+<!ENTITY sb.edit.cutterTool "擦子工具 - 點擊刪除選取區，中鍵點擊清除選取區內的 ScrapBook 註記。">
+<!ENTITY sb.edit.cutter "刪除選取區">
+<!ENTITY sb.edit.remove.iframe "刪除所有 IFRAME 標籤">
+<!ENTITY sb.edit.remove.script "刪除所有 SCRIPT 標籤">
+<!ENTITY sb.highlighterTool "標示工具 - 點擊以標示選取區。">
+<!ENTITY sb.highlighter "標示">
+<!ENTITY sb.highlighter.remove "清除選取區內的 ScrapBook 註記">
+<!ENTITY sb.highlighter.remove.all "清除所有 ScrapBook 註記">
+<!ENTITY sb.locate "在側邊欄顯示此項目的位置">
+<!ENTITY sb.indicators "顯示連結標記">
+<!ENTITY sb.info.home "首頁">
+<!ENTITY sb.info.sitemap "網站導覽">
+
+<!-- hlCustom.dtd -->
+<!ENTITY sb.hlCustom.preset "預設樣式">
+<!ENTITY sb.hlCustom.background "背景">
+<!ENTITY sb.hlCustom.color "色彩">
+<!ENTITY sb.hlCustom.text "文字">
+<!ENTITY sb.hlCustom.bold "粗體">
+<!ENTITY sb.hlCustom.italic "斜體">
+<!ENTITY sb.hlCustom.line "刪除線">
+<!ENTITY sb.hlCustom.border "框線">
+<!ENTITY sb.hlCustom.type "類型">
+<!ENTITY sb.hlCustom.box "方框">
+<!ENTITY sb.hlCustom.underline "底線">
+<!ENTITY sb.hlCustom.style "樣式">
+<!ENTITY sb.hlCustom.solid "實線">
+<!ENTITY sb.hlCustom.dotted "點線">
+<!ENTITY sb.hlCustom.dashed "虛線">
+<!ENTITY sb.hlCustom.double "雙線">
+<!ENTITY sb.hlCustom.width "寬度">
+<!ENTITY sb.hlCustom.thin "細">
+<!ENTITY sb.hlCustom.medium "中">
+<!ENTITY sb.hlCustom.thick "寬">
+
+<!-- mbManage.dtd -->
+<!ENTITY mb.manager "多重 ScrapBook 管理員">
+<!ENTITY mb.prop.name "名稱">
+<!ENTITY mb.prop.path "路徑">
+<!ENTITY mb.button.add "新增">
+<!ENTITY mb.button.edit "編輯">
+<!ENTITY mb.button.remove "刪除">
+
+<!-- multiple.dtd -->
+<!ENTITY sb.multiple.filter "篩選條件（使用規則運算式）">
+<!ENTITY sbp.multiple.titleofwebsite "網站標題">
+<!ENTITY sbp.multiple.titleoflink "連結標題">
+<!ENTITY sb.multiple.title "標題">
+<!ENTITY sbp.multiple.downloadmethod "方式">
+<!ENTITY sb.multiple.url "URL (每行一個 URL)">
+<!ENTITY sb.multiple.detector "自動偵測 URL">
+<!ENTITY sb.multiple.detector.plink "本頁所有連結">
+<!ENTITY sb.multiple.detector.slink "選取區中所有連結">
+<!ENTITY sb.multiple.detector.tabs "此視窗中所有的分頁">
+<!ENTITY sb.multiple.detector.local "某目錄下所有的 HTML 檔">
+<!ENTITY sb.multiple.detector.bookmarks "書籤">
+<!ENTITY sb.multiple.detector.clear "清除">
+<!ENTITY sbp.multiple.exclude "略過已存在於目標資料夾的位址">
+
+<!-- note.dtd -->
+<!ENTITY sb.note.save "存檔">
+<!ENTITY sb.note.close "關閉">
+<!ENTITY sb.note.tools "工具">
+<!ENTITY sb.note.htmlview "HTML 預覽">
+<!ENTITY sb.note.normalview "一般模式">
+<!ENTITY sb.note.template "編輯 HTML 樣版">
+<!ENTITY sb.note.autolinefeed "自動斷行">
+<!ENTITY sb.note.autolinefeed.t "在 HTML 預覽時，於每行最後自動添加 &lt;br&gt; 標籤。">
+<!ENTITY sb.note.fontsize "字體大小">
+<!ENTITY sb.note.help "說明">
+<!ENTITY sb.note.print "列印">
+<!ENTITY sb.note.exit "離開">
+<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "N">
+<!ENTITY sb.note.tools.accesskey "T">
+<!ENTITY sb.note.fontsize.accesskey "F">
+<!ENTITY sb.note.print.accesskey "P">
+<!ENTITY sb.note.exit.accesskey "X">
+
+<!-- notify.dtd -->
+<!ENTITY sb.capture.complete "擷取完成。">
+<!ENTITY sb.capture.complete.all "擷取全部完成。">
+
+<!-- output.dtd -->
+<!ENTITY sb.output.option.all "輸出所有項目">
+<!ENTITY sb.output.option.frame "輸出帶頁框的格式">
+<!ENTITY sb.output.option.open "輸出完成後，以瀏覽器開啟">
+
+<!-- overlay.dtd -->
+<!ENTITY sb.capture.partial "擷取選擇區域">
+<!ENTITY sb.capture.partial.as "擷取選擇區域細節">
+<!ENTITY sb.capture.entire "擷取網頁">
+<!ENTITY sb.capture.entire.as "擷取網頁細節">
+<!ENTITY sb.capture.frame "擷取頁框">
+<!ENTITY sb.capture.frame.as "擷取頁框細節">
+<!ENTITY sb.capture.target "擷取連結">
+<!ENTITY sb.capture.target.as "擷取連結細節">
+<!ENTITY sb.capture.alltabs "擷取所有分頁">
+<!ENTITY sb.capture.bookmark "加入 ScrapBook 書籤">
+<!ENTITY sb.sidebar "在側邊欄顯示">
+<!ENTITY sb.menubar "選單列">
+<!ENTITY sb.editbefore "編輯後擷取">
+
+<!-- prefs.dtd -->
+<!ENTITY sb.prefs.main "一般設定">
+<!ENTITY sb.prefs.keys "按鍵設定">
+<!ENTITY sb.prefs.tabs "分頁設定">
+<!ENTITY sb.prefs.save "儲存設定">
+<!ENTITY sb.prefs.edit "編輯設定">
+<!ENTITY sb.prefs.organize "組織設定">
+<!ENTITY sb.prefs.advanced "進階設定">
+<!ENTITY sb.prefs.ui.contextMenu "於快捷選單中顯示擷取選項">
+<!ENTITY sb.prefs.ui.contextSubMenu "以子選單方式顯示">
+<!ENTITY sb.prefs.ui.bookmarkMenu "顯示「加入 ScrapBook 書籤」選項">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "最多顯示">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "項最近使用的資料夾">
+<!ENTITY sb.prefs.ui.menuBar "在選單列上顯示「ScrapBook」選單">
+<!ENTITY sb.prefs.ui.menuBar.icon "顯示為圖示">
+<!ENTITY sb.prefs.ui.toolsMenu "在「工具」功能表中顯示選項">
+<!ENTITY sb.prefs.ui.statusBar "在狀態列中顯示圖示">
+<!ENTITY sb.prefs.restart "需重新啟動 Firefox 方能生效。">
+<!ENTITY sb.prefs.tabs.tips "操作下列項目時，以分頁開啟">
+<!ENTITY sb.prefs.tabs.note "編輯筆記">
+<!ENTITY sb.prefs.edit.autoEditNoteX "筆記頁面自動進入編輯模式">
+<!ENTITY sb.prefs.edit.insertDateFormat "插入日期格式 (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML 格式化模版">
+<!ENTITY sb.prefs.data "擷取資料存放處">
+<!ENTITY sb.prefs.data.default "預設（在您的個人設定檔資料夾中）">
+<!ENTITY sb.prefs.data.custom "存放至">
+<!ENTITY sb.prefs.data.tips "請選擇 ScrapBook 存放擷取資料的資料夾">
+<!ENTITY sb.prefs.multibook.enabled "啟用多重 ScrapBook 功能">
+<!ENTITY sb.prefs.multibook.tips "這個選項可讓你指定一個以上的資料存放處，並以工具列按鈕快速切換欲儲存位置。">
+<!ENTITY sb.prefs.confirmDelete "刪除資料需要確認">
+<!ENTITY sb.prefs.tree.autoCollapse "開啟某資料夾時，自動收合其他資料夾">
+<!ENTITY sb.prefs.tree.unshift "新增資料時，應放在">
+<!ENTITY sb.prefs.tree.unshift.top "最前面">
+<!ENTITY sb.prefs.tree.unshift.bottom "最後面">
+<!ENTITY sb.prefs.asciiFilename "將檔案儲存為 ASCII 檔名">
+<!ENTITY sb.prefs.showDetailOnDrop "以拖曳方式擷取資料時，顯示「詳細資訊」對話方塊">
+<!ENTITY sb.prefs.notifyOnComplete "顯示「擷取完畢」提醒視窗">
+<!ENTITY sb.prefs.notifyPageCaptured "瀏覽擷取過的頁面時，顯示提醒視窗">
+<!ENTITY sb.prefs.autoOutput "更動資料時，自動輸出 HTML 資料列表">
+<!ENTITY sb.prefs.export "匯出偏好設定">
+<!ENTITY sb.prefs.import "匯入偏好設定">
+<!ENTITY sb.prefs.reset "重設偏好設定">
+<!ENTITY sb.button.customize "自訂">
+<!ENTITY sb.button.browse "瀏覽">
+<!ENTITY sb.button.show "顯示檔案">
+
+<!-- property.dtd -->
+<!ENTITY sb.prop.general "一般資訊">
+<!ENTITY sb.prop.type "類型">
+<!ENTITY sb.prop.date "日期"><!-- left for addon compatibility -->
+<!ENTITY sb.prop.create "建立時間">
+<!ENTITY sb.prop.modify "修改時間">
+<!ENTITY sb.prop.encode "編碼">
+<!ENTITY sb.prop.size "大小">
+<!ENTITY sb.prop.content "內容">
+<!ENTITY sb.prop.file "檔案">
+<!ENTITY sb.prop.folder "資料夾">
+<!ENTITY sb.prop.icon "圖示">
+<!ENTITY sb.prop.icon.change "更換">
+<!ENTITY sb.prop.icon.default "預設圖示">
+<!ENTITY sb.prop.icon.favicon "選擇網站圖示">
+<!ENTITY sb.prop.icon.custom "選擇自訂圖示">
+<!ENTITY sb.prop.mark "標示">
+<!ENTITY sb.prop.lock "鎖定">
+
+<!-- repair.dtd -->
+<!ENTITY sb.repair.rdfFile "復原 scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript "如果 ScrapBook 資料列表中有很多項目突然消失，可嘗試這個，會用備份的 scrapbook.rdf 檔案重建資料列表。">
+<!ENTITY sb.repair.rdfFile.select "選擇欲復原的檔案版本。">
+<!ENTITY sb.repair.rdfFile.file "檔案">
+<!ENTITY sb.repair.rdfFile.time "時間">
+<!ENTITY sb.repair.rdfFile.size "大小">
+<!ENTITY sb.repair.favicons "復原項目圖示 (favicon)">
+<!ENTITY sb.repair.favicons.descript "如果 ScrapBook 資料列表中有很多項目圖示 (favicon) 突然消失，可嘗試這個，會自動修正因移動資料夾造成的 favicon 路徑錯誤。">
+<!ENTITY sb.repair.complete "完成。">
+
+<!-- scrapbook.dtd -->
+<!ENTITY sb.toggle.all "開啟/收合所有資料夾">
+<!ENTITY sb.tools "工具">
+<!ENTITY sb.tools.options "設定">
+<!ENTITY sb.tools.manage "管理擷取資料">
+<!ENTITY sb.tools.combine "合併精靈">
+<!ENTITY sb.tools.trade "匯入 / 匯出">
+<!ENTITY sb.tools.multiple "擷取多重 URL">
+<!ENTITY sb.tools.directory "開啟 ScrapBook 目錄">
+<!ENTITY sb.tools.calculate "計算資料大小">
+<!ENTITY sb.tools.sorttree "排序所有項目">
+<!ENTITY sb.tools.output "輸出 HTML 資料列表">
+<!ENTITY sb.tools.repair "緊急修復工具">
+<!ENTITY sb.tools.addons "附加元件功能">
+<!ENTITY sb.note.opentab "開啟於新分頁中">
+
+<!-- sort.dtd -->
+<!ENTITY sb.sort "排序">
+<!ENTITY sb.sort.reverse "反序">
+<!ENTITY sb.sort.title.asc "依標題排序 (A &gt; Z)">
+<!ENTITY sb.sort.title.desc "依標題排序 (Z &gt; A)">
+<!ENTITY sb.sort.date.asc "依日期排序 (舊 &gt; 新)">
+<!ENTITY sb.sort.date.desc "依日期排序 (新 &gt; 舊)">
+<!ENTITY sb.sort.grouping "依類型分組">
+<!ENTITY sb.sort.recursive "也排序子資料夾中的項目">
+<!ENTITY sb.sort.warning "請注意：此操作無法復原。">
+
+<!-- templateHelp.dtd -->
+<!ENTITY sb.thelp.dir "ltr">
+<!ENTITY sb.thelp.title "ScrapBook HTML 樣版說明">
+<!ENTITY sb.thelp.tags "兩個特殊標籤">
+<!ENTITY sb.thelp.tag1 "筆記的標題（第一行）">
+<!ENTITY sb.thelp.tag2 "筆記的內容（第二行之後）">
+<!ENTITY sb.thelp.preset "原始樣版">
+
+<!-- trade.dtd -->
+<!ENTITY sb.trade.import "匯入">
+<!ENTITY sb.trade.export "匯出">
+<!ENTITY sb.trade.time "匯出時間">
+<!ENTITY sb.trade.update "匯入為最新版 ScrapBook X 格式">
+<!ENTITY sb.trade.restore "匯入並重製資料夾結構">
+<!ENTITY sb.trade.remove "匯入後移除檔案">
+<!ENTITY sb.trade.exportFolder "匯出資料夾項目 (匯入時注意順序)">
+
+<!-- tree.dtd -->
+<!ENTITY sb.open "開啟">
+<!ENTITY sb.open.native "以預設程式開啟">
+<!ENTITY sb.open.tab "開啟於新分頁中">
+<!ENTITY sb.open.newtab "開啟於新分頁中">
+<!ENTITY sb.open.source "開啟原始網址">
+<!ENTITY sb.multi "多重 ScrapBook">
+<!ENTITY sb.show.files "顯示相關檔案">
+<!ENTITY sb.move "移動">
+<!ENTITY sb.move.into "移到其他資料夾">
+<!ENTITY sb.copy "複製">
+<!ENTITY sb.renew "重新擷取">
+<!ENTITY sb.internalize "將內嵌的外部媒體存入資料目錄">
+<!ENTITY sb.export "匯出">
+<!ENTITY sb.remove "刪除">
+<!ENTITY sb.property "屬性">
+<!ENTITY sb.listview "列表模式">
+<!ENTITY sb.prop.title "標題">
+<!ENTITY sb.prop.comment "評註">
+<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.id.date "ID">
+<!ENTITY sb.folder.combine "合併檢視">
+<!ENTITY sb.folder.openall "以分頁開啟所有資料">
+<!ENTITY sb.folder.manage "管理資料夾">
+<!ENTITY sb.new.folder "開新資料夾">
+<!ENTITY sb.new.separator "新增分隔線">
+<!ENTITY sb.new.note "新增筆記">
+<!ENTITY sb.new.notex "新增筆記頁面">
+<!ENTITY sb.sort.folder "排序資料夾">
+<!ENTITY sb.search "搜尋">
+<!ENTITY sb.search.fulltext "全文搜尋">
+<!ENTITY sb.search.all "所有欄位">
+<!ENTITY sb.search.re "使用規則運算式">
+<!ENTITY sb.search.cs "大小寫需相符">
+<!ENTITY sb.search.cache "更新全文搜尋快取">
+<!ENTITY sb.search.clear "清除搜尋歷史記錄">
+<!ENTITY sb.search.days "依擷取日期檢視">
+<!ENTITY mb.manage "管理">
+<!ENTITY mb.profileFolder "設定檔資料夾">
+

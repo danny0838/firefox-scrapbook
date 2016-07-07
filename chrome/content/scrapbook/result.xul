@@ -3,14 +3,7 @@
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 <?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
 
-<!DOCTYPE window [
-    <!ENTITY % propDTD SYSTEM "chrome://scrapbook/locale/property.dtd" >
-    %propDTD;
-    <!ENTITY % treeDTD SYSTEM "chrome://scrapbook/locale/tree.dtd" >
-    %treeDTD;
-    <!ENTITY % editDTD SYSTEM "chrome://scrapbook/locale/editor.dtd" >
-    %editDTD;
-]>
+<!DOCTYPE window SYSTEM "chrome://scrapbook/locale/message.dtd">
 
 <window id="sbResultWindow"
         title="ScrapBook"

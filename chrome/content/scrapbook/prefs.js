@@ -134,10 +134,10 @@ var sbPrefWindow = {
                 for (var i in prefs) {
                     sbCommonUtils.setPref(i, prefs[i]);
                 }
-                sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_UPDATE_PREFS"));
+                sbCommonUtils.alert(sbCommonUtils.lang("MSG_UPDATE_PREFS"));
                 return true;
             } catch(ex) {
-                sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_UPDATE_PREFS", [ex]));
+                sbCommonUtils.alert(sbCommonUtils.lang("ERR_UPDATE_PREFS", ex));
                 return false;
             }
         }
@@ -147,10 +147,10 @@ var sbPrefWindow = {
     resetPrefs: function() {
         try {
             sbCommonUtils.resetPrefs();
-            sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_UPDATE_PREFS"));
+            sbCommonUtils.alert(sbCommonUtils.lang("MSG_UPDATE_PREFS"));
             return true;
         } catch(ex) {
-            sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_UPDATE_PREFS", [ex]));
+            sbCommonUtils.alert(sbCommonUtils.lang("ERR_UPDATE_PREFS", ex));
             return false;
         }
     }

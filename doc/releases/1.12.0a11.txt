@@ -1,0 +1,14 @@
+Scrapbook X 1.12.0a11
+=====================
+
+Changes since v1.12.0a10
+------------------------
+
+- NEW: Added create and modify time properties for data items. (These properties will be added on export if not set. Export and then re-import old data to create these records)
+- NEW: Manage window now lists more data properties.
+- NEW: The data icon in the edit or info toolbar can now be clicked, and links to the directory of the current page, as a shortcut to view related data files.
+- UPDATE: Insert File now auto fills the current selected text as the name of a sub-page.
+- UPDATE: Insert Link or Insert File now auto records the last used format.
+- FIXED: Cannot drag to move data items when selecting multiple folders and items.
+- FIXED: Invalid file names for a sub-page now are rejected and alerted.
+- FIXED: Several file names of a sub page will cause the generated link be broken.

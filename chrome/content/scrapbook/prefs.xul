@@ -5,18 +5,7 @@
 <?xml-stylesheet href="chrome://mozapps/content/preferences/preferences.css"?>
 <?xml-stylesheet href="chrome://browser/skin/preferences/preferences.css"?>
 
-<!DOCTYPE prefwindow [
-    <!ENTITY % mainDTD SYSTEM "chrome://scrapbook/locale/scrapbook.dtd">
-    %mainDTD;
-    <!ENTITY % treeDTD SYSTEM "chrome://scrapbook/locale/tree.dtd">
-    %treeDTD;
-    <!ENTITY % prefDTD SYSTEM "chrome://scrapbook/locale/prefs.dtd">
-    %prefDTD;
-    <!ENTITY % editDTD SYSTEM "chrome://scrapbook/locale/editor.dtd">
-    %editDTD;
-    <!ENTITY % overlayDTD SYSTEM "chrome://scrapbook/locale/overlay.dtd">
-    %overlayDTD;
-]>
+<!DOCTYPE prefwindow SYSTEM "chrome://scrapbook/locale/message.dtd">
 
 <prefwindow id="sbPrefWindow"
             xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"

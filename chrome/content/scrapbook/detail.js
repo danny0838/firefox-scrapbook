@@ -1,7 +1,6 @@
 
 var sbCaptureOptions = {
 
-    get CUSTOM_UI() { return document.getElementById("sbDetailCustom"); },
     get WARNING_UI(){ return document.getElementById("sbDetailWarnAboutScript"); },
 
     param: null,
@@ -9,15 +8,30 @@ var sbCaptureOptions = {
     init: function() {
         if ( !window.arguments || !("sbContentSaver" in window.opener) ) window.close();
         this.param = window.arguments[0];
+        // load from preference
+        document.getElementById("sbDetailOptionImages").checked = sbCommonUtils.getPref("capture.default.images", true);
+        document.getElementById("sbDetailOptionMedia").checked = sbCommonUtils.getPref("capture.default.media", true);
+        document.getElementById("sbDetailOptionFonts").checked = sbCommonUtils.getPref("capture.default.fonts", true);
+        document.getElementById("sbDetailOptionFrames").checked = sbCommonUtils.getPref("capture.default.frames", true);
+        document.getElementById("sbDetailOptionStyles").checked = sbCommonUtils.getPref("capture.default.styles", true);
+        document.getElementById("sbDetailOptionScript").checked = sbCommonUtils.getPref("capture.default.script", false);
+        document.getElementById("sbDetailOptionAsHtml").checked = sbCommonUtils.getPref("capture.default.asHtml", false);
+        document.getElementById("sbDetailOptionForceUtf8").checked = sbCommonUtils.getPref("capture.default.forceUtf8", true);
+        document.getElementById("sbDetailOptionRewriteStyles").checked = sbCommonUtils.getPref("capture.default.rewriteStyles", true);
+        document.getElementById("sbDetailOptionKeepLink").checked = sbCommonUtils.getPref("capture.default.keepLink", false);
+        document.getElementById("sbDetailOptionSaveDataURI").checked = sbCommonUtils.getPref("capture.default.saveDataURI", false);
+        document.getElementById("sbDetailDownLinkMethod").value = sbCommonUtils.getPref("capture.default.downLinkMethod", 0);
+        document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("capture.default.downLinkFilter", "");
+        document.getElementById("sbDetailInDepth").value = sbCommonUtils.getPref("capture.default.inDepthLevels", 0);
+        document.getElementById("sbDetailTimeout").value = sbCommonUtils.getPref("capture.default.inDepthTimeout", 0);
+        document.getElementById("sbDetailCharset").value = sbCommonUtils.getPref("capture.default.inDepthCharset", "");
         // accept button
-        document.documentElement.getButton("accept").label = sbCommonUtils.lang("scrapbook", "CAPTURE_OK_BUTTON");
+        document.documentElement.getButton("accept").label = sbCommonUtils.lang("CAPTURE_OK_BUTTON");
         // title
         this.fillTitleList();
         // script warning
         this.WARNING_UI.setAttribute("offset", this.WARNING_UI.boxObject.height || 32);
         setTimeout(function(){ sbCaptureOptions.updateWarningUI(document.getElementById('sbDetailOptionScript').checked); }, 0);
-        // download link - custom extension
-        this.updateCustomUI();
         // context specific settings
         if ( this.param.context == "capture-again" || this.param.context == "capture-again-deep" ) {
             document.getElementById("sbDetailFolderRow").collapsed = true;
@@ -34,10 +48,6 @@ var sbCaptureOptions = {
         }
     },
 
-    updateCustomUI: function() {
-        this.CUSTOM_UI.nextSibling.disabled = !this.CUSTOM_UI.checked;
-    },
-
     updateWarningUI: function(checked) {
         var oldHidden = this.WARNING_UI.hidden;
         var newHidden = !checked;
@@ -46,6 +56,11 @@ var sbCaptureOptions = {
             var offset = parseInt(this.WARNING_UI.getAttribute("offset"), 10);
             newHidden ? window.outerHeight -= offset : window.outerHeight += offset;
         }
+    },
+
+    resetDownLinkFilters: function() {
+        sbCommonUtils.resetPref("capture.default.downLinkFilter");
+        document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("capture.default.downLinkFilter", "");
     },
 
     fillTitleList: function() {
@@ -63,6 +78,7 @@ var sbCaptureOptions = {
     },
 
     accept: function() {
+        // set return values
         this.param.item.comment = sbCommonUtils.escapeComment(document.getElementById("sbDetailComment").value);
         this.param.item.title = document.getElementById("sbDetailTitle").value;
         this.param.option["images"] = document.getElementById("sbDetailOptionImages").checked;
@@ -75,15 +91,34 @@ var sbCaptureOptions = {
         this.param.option["forceUtf8"] = document.getElementById("sbDetailOptionForceUtf8").checked;
         this.param.option["rewriteStyles"] = document.getElementById("sbDetailOptionRewriteStyles").checked;
         this.param.option["keepLink"] = document.getElementById("sbDetailOptionKeepLink").checked;
-        this.param.option["dlimg"] = document.getElementById("sbDetailImage").checked;
-        this.param.option["dlsnd"] = document.getElementById("sbDetailSound").checked;
-        this.param.option["dlmov"] = document.getElementById("sbDetailMovie").checked;
-        this.param.option["dlarc"] = document.getElementById("sbDetailArchive").checked;
-        this.param.option["custom"] = this.CUSTOM_UI.checked ? document.getElementById("sbDetailCustomExt").value : "";
-        if ( this.param.context !== "capture-again-deep" ) {
-            this.param.option["inDepth"] = parseInt("0" + document.getElementById("sbDetailInDepth").value, 10);
-            this.param.poption["timeout"] = parseInt("0" + document.getElementById("sbDetailTimeout").value, 10);
-            this.param.poption["charset"] = document.getElementById("sbDetailCharset").value;
+        this.param.option["saveDataURI"] = document.getElementById("sbDetailOptionSaveDataURI").checked;
+        this.param.option["downLinkMethod"] = parseInt("0" + document.getElementById("sbDetailDownLinkMethod").value, 10);
+        this.param.option["downLinkFilter"] = document.getElementById("sbDetailDownLinkFilter").value;
+        this.param.option["inDepth"] = parseInt("0" + document.getElementById("sbDetailInDepth").value, 10);
+        this.param.option["inDepthTimeout"] = parseInt("0" + document.getElementById("sbDetailTimeout").value, 10);
+        this.param.option["inDepthCharset"] = document.getElementById("sbDetailCharset").value;
+        // save to preference
+        sbCommonUtils.setPref("capture.default.images", this.param.option["images"]);
+        sbCommonUtils.setPref("capture.default.media", this.param.option["media"]);
+        sbCommonUtils.setPref("capture.default.fonts", this.param.option["fonts"]);
+        sbCommonUtils.setPref("capture.default.frames", this.param.option["frames"]);
+        sbCommonUtils.setPref("capture.default.styles", this.param.option["styles"]);
+        sbCommonUtils.setPref("capture.default.script", this.param.option["script"]);
+        sbCommonUtils.setPref("capture.default.asHtml", this.param.option["asHtml"]);
+        sbCommonUtils.setPref("capture.default.forceUtf8", this.param.option["forceUtf8"]);
+        sbCommonUtils.setPref("capture.default.rewriteStyles", this.param.option["rewriteStyles"]);
+        sbCommonUtils.setPref("capture.default.keepLink", this.param.option["keepLink"]);
+        sbCommonUtils.setPref("capture.default.saveDataURI", this.param.option["saveDataURI"]);
+        sbCommonUtils.setPref("capture.default.downLinkMethod", this.param.option["downLinkMethod"]);
+        sbCommonUtils.setPref("capture.default.downLinkFilter", this.param.option["downLinkFilter"]);
+        sbCommonUtils.setPref("capture.default.inDepthLevels", this.param.option["inDepth"]);
+        sbCommonUtils.setPref("capture.default.inDepthTimeout", this.param.option["inDepthTimeout"]);
+        sbCommonUtils.setPref("capture.default.inDepthCharset", this.param.option["inDepthCharset"]);
+        // post-fix for special cases
+        if ( this.param.context === "capture-again-deep" ) {
+            this.param.option["inDepth"] = 0;
+            this.param.option["inDepthTimeout"] = 0;
+            this.param.option["inDepthCharset"] = "";
         }
         if ( this.param.context == "capture-again" ) {
             var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
@@ -142,7 +177,7 @@ var sbFolderSelector = {
     },
 
     processRoot: function() {
-        this.fill("urn:scrapbook:root", sbCommonUtils.lang("scrapbook", "ROOT_FOLDER"));
+        this.fill("urn:scrapbook:root", sbCommonUtils.lang("ROOT_FOLDER"));
         this.MENU_POPUP.appendChild(document.createElement("menuseparator"));
     },
 

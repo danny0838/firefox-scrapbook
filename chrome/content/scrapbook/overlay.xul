@@ -2,12 +2,7 @@
 
 <?xml-stylesheet href="chrome://scrapbook/skin/overlay.css" type="text/css"?>
 
-<!DOCTYPE overlay [
-    <!ENTITY % overlayDTD SYSTEM "chrome://scrapbook/locale/overlay.dtd">
-    %overlayDTD;
-    <!ENTITY % editorDTD  SYSTEM "chrome://scrapbook/locale/editor.dtd">
-    %editorDTD;
-]>
+<!DOCTYPE overlay SYSTEM "chrome://scrapbook/locale/message.dtd">
 
 <overlay id="scrapbooktasksOverlay"
          xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"

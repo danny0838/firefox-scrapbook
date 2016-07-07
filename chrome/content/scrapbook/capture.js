@@ -11,10 +11,7 @@ var gFile2URL = {};
 var gURL2Name = {};
 var gPreset = [];
 var gContext = "";
-var gCharset = "";
 var gTitles = [];
-var gTitle;
-var gTimeout = null;
 
 
 
@@ -35,10 +32,26 @@ function SB_trace(aMessage) {
  *   referItem:   string   (deep-capture, re-capture) the refer item,
                            determine where to save file and to set resource property
  *   option:      object   capture options, such as:
- *                           images:  media:  styles:  script:
- *                           rewriteStyles:  forceUtf8:  asHtml: 
- *                           dlimg:  dlsnd:  dlmov:  dlarc:  custom:
- *                           inDepth:  isPartial:
+                             isPartial:
+                             images:
+                             media:
+                             fonts:
+                             frames:
+                             styles:
+                             script:
+                             asHtml:
+                             forceUtf8:
+                             rewriteStyles:
+                             keepLink:
+                             dlimg:
+                             dlsnd:
+                             dlmov:
+                             dlarc:
+                             custom:
+                             inDepth:
+                             inDepthTimeout: (multi-capture, deep-capture) countdown seconds before next capture
+                             inDepthCharset: force using charset to load html, autodetect if not set      
+                             internalize:
  *   file2Url:    array    the file2URL data in saver.js from last capture,
  *                         will then pass to saver.js for next capture
  *   preset:      array    (re-capture) the preset data,
@@ -50,8 +63,6 @@ function SB_trace(aMessage) {
  *                           [3]   array    overwrites data.file2Url if set
  *                           [4]   int      limits depth of capture
  *                           [5]   bool     true if is a bookmark, will reset resource type to "" (page)
- *   charset:     string   force using charset to read html, autodetect if not set                  
- *   timeout:     string   (multi-capture, deep-capture) countdown seconds before next capture
  *   titles:      array    (multi-capture) strings, overwrite the resource title,
  *                         each entry corresponds with data.urls
  *   context      string   the capture context, determines the behavior
@@ -80,8 +91,8 @@ function SB_initCapture() {
             file2Url: window.arguments[7],
             preset: window.arguments[8],
             // method: window.arguments[9],  // we no more use this
-            charset: window.arguments[10],
-            timeout: window.arguments[11],
+            // charset: window.arguments[10],  // we no more use this
+            // timeout: window.arguments[11],  // we no more use this
             titles: window.arguments[12],
         };
         data.context = (function(){
@@ -103,12 +114,9 @@ function SB_initCapture() {
     gOption = data.option;
     gFile2URL = data.file2Url;
     gPreset = data.preset;
-    gCharset = data.charset;
-    gTimeout = data.timeout;
     gTitles = data.titles;
     gContext = data.context;
 
-    if ( !gTimeout ) gTimeout = 0;
     if ( gContext == "indepth" ) {
         gURL2Name[gReferItem.source] = "index";
     } else if ( gContext == "capture-again-deep" ) {
@@ -116,7 +124,7 @@ function SB_initCapture() {
         // read sb-file2url.txt => gFile2URL for later usage
         var file = contDir.clone();
         file.append("sb-file2url.txt");
-        if ( !file.exists() ) { sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_NO_FILE2URL")); window.close(); }
+        if ( !file.exists() ) { sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_FILE2URL")); window.close(); }
         var lines = sbCommonUtils.readFile(file).split("\n");
         for ( var i = 0; i < lines.length; i++ ) {
             var arr = lines[i].split("\t");
@@ -125,7 +133,7 @@ function SB_initCapture() {
         // read sb-url2name.txt => gURL2Name and search for source URL of the current page
         file = contDir.clone();
         file.append("sb-url2name.txt");
-        if ( !file.exists() ) { sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_NO_URL2NAME")); window.close(); }
+        if ( !file.exists() ) { sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_URL2NAME")); window.close(); }
         lines = sbCommonUtils.readFile(file).split("\n");
         for ( i = 0; i < lines.length; i++ ) {
             var arr = lines[i].split("\t");
@@ -135,11 +143,12 @@ function SB_initCapture() {
             }
         }
         gPreset[3] = gFile2URL;
-        if ( !myURLs[0] ) { sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_NO_SOURCE_URL", [gPreset[1] + ".html."])); window.close(); }
+        if ( !myURLs[0] ) { sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_SOURCE_URL", gPreset[1] + ".html.")); window.close(); }
     }
     if ( !gOption ) gOption = {};
     if ( !("script" in gOption ) ) gOption["script"] = false;
     if ( !("images" in gOption ) ) gOption["images"] = true;
+    if ( !("inDepthTimeout" in gOption) ) gOption["inDepthTimeout"] = 0;
     sbInvisibleBrowser.init();
     sbCaptureTask.init(myURLs);
     //Es wird gar nichts gemacht. Der Benutzer muss den Download selbst starten!
@@ -167,7 +176,7 @@ function SB_fireNotification(aItem) {
 
 var sbCaptureTask = {
 
-    get INTERVAL() { return gTimeout; },
+    get INTERVAL() { return gOption["inDepthTimeout"]; },
     get TREE()     { return document.getElementById("sbpURLList"); },
     get URL()      { return gURLs[this.index]; },
 
@@ -223,10 +232,16 @@ var sbCaptureTask = {
         } catch(aEx) { sbCommonUtils.alert("add\n---\n"+aEx); }
     },
 
+    // start capture
     start: function(aOverriddenURL) {
         this.seconds = -1;
-        this.toggleStartPause(true);
+
+        // Resume "pause" and "skip" buttons, which are temporarily diasbled
+        // when a capture is already executed (rather than waiting for connection)
+        document.getElementById("sbCapturePauseButton").disabled = false;
         this.toggleSkipButton(true);
+
+        // mark the item we are currently on
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "selected");
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[0].setAttribute("properties", "disabled");
         var checkstate = this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[0].getAttribute("value");
@@ -238,12 +253,16 @@ var sbCaptureTask = {
         }
         this.refreshHash = {};
         var url = aOverriddenURL || gURLs[this.index];
-        if ( gTitles ) gTitle = gTitles[this.index];
-        SB_trace(sbCommonUtils.lang("capture", "CONNECT", [url]));
-        this.sniffer = new sbHeaderSniffer(url, gRefURL);
-        this.sniffer.checkURL();
+        SB_trace(sbCommonUtils.lang("CONNECT", url));
+
+        // if active, start connection and capture
+        if (this.isActive()) {
+            this.sniffer = new sbHeaderSniffer(url, gRefURL);
+            this.sniffer.checkURL();
+        }
     },
 
+    // when a capture completes successfully
     succeed: function() {
         document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
         if (!this.isLocal) {
@@ -261,6 +280,7 @@ var sbCaptureTask = {
         this.next(false);
     },
 
+    // when a capture fails
     fail: function(aErrorMsg) {
         document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
         if ( aErrorMsg ) SB_trace(aErrorMsg);
@@ -275,18 +295,12 @@ var sbCaptureTask = {
         treecell.setAttribute("properties", "failed");
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].appendChild(treecell);
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "finished");
-        if ( gURLs.length > 1 ) {
-            this.next(true);
-        } else {
-            this.toggleStartPause(false);
-        }
+        this.next(true);
     },
 
+    // press "skip" button
+    // shift to next item
     next: function(quickly) {
-        this.toggleStartPause(true);
-        this.toggleSkipButton(false);
-        if ( this.sniffer ) this.sniffer.onHttpSuccess = function(){};
-        sbInvisibleBrowser.ELEMENT.stop();
         if ( ++this.index >= gURLs.length ) {
             this.finalize();
         } else {
@@ -294,25 +308,29 @@ var sbCaptureTask = {
                 window.setTimeout(function(){ sbCaptureTask.start(); }, 0);
             } else {
                 this.seconds = this.INTERVAL;
-                if ( this.seconds > 0 ) {
-                    sbCaptureTask.countDown();
-                } else {
-                    sbCaptureTask.start();
-                }
+                sbCaptureTask.countDown();
             }
         }
     },
 
     countDown: function() {
-        SB_trace(sbCommonUtils.lang("capture", "WAITING", [sbCaptureTask.seconds]));
-        if ( --this.seconds > 0 ) {
+        SB_trace(sbCommonUtils.lang("WAITING", sbCaptureTask.seconds));
+        if ( this.seconds > 0 ) {
+            this.seconds--;
             this.timerID = window.setTimeout(function(){ sbCaptureTask.countDown(); }, 1000);
         } else {
-            this.timerID = window.setTimeout(function(){ sbCaptureTask.start(); }, 1000);
+            this.timerID = window.setTimeout(function(){ sbCaptureTask.start(); }, 0);
         }
     },
 
     finalize: function() {
+        document.getElementById("sbCaptureTextbox").disabled = false;
+        document.getElementById("sbCapturePauseButton").disabled = true;
+        document.getElementById("sbCapturePauseButton").hidden = false;
+        document.getElementById("sbCaptureStartButton").hidden = true;
+        document.getElementById("sbCaptureCancelButton").hidden = true;
+        document.getElementById("sbCaptureFinishButton").hidden = false;
+        document.getElementById("sbCaptureSkipButton").disabled = true;
         if ( gContext == "indepth" ) {
             sbCrossLinker.invoke();
         } else {
@@ -326,29 +344,50 @@ var sbCaptureTask = {
         window.setTimeout(function(){ window.close(); }, 1000);
     },
 
+    // press "start" button
     activate: function() {
         this.toggleStartPause(true);
-        if ( this.seconds < 0 ) {
-            sbCaptureTask.start();
-        } else {
-            this.countDown();
-        }
+        this.countDown();
     },
 
+    // press "pause" button
     pause: function() {
         this.toggleStartPause(false);
         if ( this.seconds < 0 ) {
-            sbInvisibleBrowser.ELEMENT.stop();
+            if ( this.sniffer ) this.sniffer.cancel();
+            sbInvisibleBrowser.cancel();
         } else {
             this.seconds++;
             window.clearTimeout(this.timerID);
         }
     },
 
+    // press "cancel" button
     abort: function() {
         if ( gContext != "indepth" ) window.close();
-        if ( ++this.forceExit > 2 ) window.close();
-        if ( this.index < gURLs.length - 1 ) { this.index = gURLs.length - 1; this.next(); }
+        if ( ++this.forceExit >= 2 ) window.close();
+
+        // remember the current active state because it would be interfered by UI changing
+        var wasActive = this.isActive();
+
+        // set UI, generally same as finalize
+        document.getElementById("sbCaptureTextbox").disabled = false;
+        document.getElementById("sbCapturePauseButton").disabled = true;
+        document.getElementById("sbCapturePauseButton").hidden = false;
+        document.getElementById("sbCaptureStartButton").hidden = true;
+        document.getElementById("sbCaptureCancelButton").hidden = true;
+        document.getElementById("sbCaptureFinishButton").hidden = false;
+        document.getElementById("sbCaptureSkipButton").disabled = true;
+
+        if (wasActive) {
+            this.index = gURLs.length - 1; // mark to finalize on next capture
+        } else {
+            this.finalize();
+        }
+    },
+
+    isActive: function () {
+        return this.seconds < 0 && document.getElementById("sbCaptureStartButton").hidden;
     },
 
     toggleFilterBox: function(tfbEvent) {
@@ -610,7 +649,7 @@ var sbInvisibleBrowser = {
 
         onProgressChange: function(aWebProgress, aRequest, aCurSelfProgress, aMaxSelfProgress, aCurTotalProgress, aMaxTotalProgress) {
             if ( aCurTotalProgress != aMaxTotalProgress ) {
-                SB_trace(sbCommonUtils.lang("overlay", "TRANSFER_DATA", [aCurTotalProgress]));
+                SB_trace(sbCommonUtils.lang("TRANSFER_DATA", aCurTotalProgress));
             }
         },
 
@@ -632,9 +671,9 @@ var sbInvisibleBrowser = {
         this.ELEMENT.docShell.allowMetaRedirects = false;
         // older version of Firefox gets error on setting charset
         try {
-            if (gCharset) this.ELEMENT.docShell.charset = gCharset;
+            if (gOption["inDepthCharset"]) this.ELEMENT.docShell.charset = gOption["inDepthCharset"];
         } catch(ex) {
-            sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_CHANGE_CHARSET"));
+            sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_CHANGE_CHARSET"));
         }
         // nsIDocShellHistory is deprecated in newer version of Firefox
         // nsIDocShell in the old version doesn't work
@@ -655,8 +694,12 @@ var sbInvisibleBrowser = {
         if (this.ELEMENT.currentURI.specIgnoringRef == sbCommonUtils.splitURLByAnchor(aURL)[0]) this.ELEMENT.reload();
     },
 
+    cancel: function() {
+        this.ELEMENT.stop();
+    },
+
     execCapture: function() {
-        SB_trace(sbCommonUtils.lang("capture", "CAPTURE_START"));
+        SB_trace(sbCommonUtils.lang("CAPTURE_START"));
         if ( this.ELEMENT.contentDocument.body ) {
             // potential meta refresh redirect
             var metaElems = this.ELEMENT.contentDocument.getElementsByTagName("meta");
@@ -678,7 +721,7 @@ var sbInvisibleBrowser = {
         sbCaptureTask.toggleSkipButton(false);
         var preset = gReferItem ? [gReferItem.id, SB_suggestName(this.ELEMENT.currentURI.spec), gOption, gFile2URL, gDepths[sbCaptureTask.index]] : null;
         if ( gPreset ) preset = gPreset;
-        var ret = sbContentSaver.captureWindow(this.ELEMENT.contentWindow, false, gShowDetail, gResName, gResIdx, preset, gContext, gTitle);
+        var ret = sbContentSaver.captureWindow(this.ELEMENT.contentWindow, false, gShowDetail, gResName, gResIdx, preset, gContext, gTitles[sbCaptureTask.index]);
         if ( ret ) {
             if ( gContext == "indepth" ) {
                 gURL2Name[sbCaptureTask.URL] = ret[0];
@@ -695,13 +738,13 @@ var sbInvisibleBrowser = {
             gTitles[sbCaptureTask.index] = ret[2];
         } else {
             if ( gShowDetail ) window.close();
-            SB_trace(sbCommonUtils.lang("capture", "CAPTURE_ABORT"));
+            SB_trace(sbCommonUtils.lang("CAPTURE_ABORT"));
             sbCaptureTask.fail("");
         }
     },
 
     onLoadStart: function() {
-        SB_trace(sbCommonUtils.lang("capture", "LOADING", [this.fileCount, (sbCaptureTask.URL || this.ELEMENT.contentDocument.title)]));
+        SB_trace(sbCommonUtils.lang("LOADING", this.fileCount, (sbCaptureTask.URL || this.ELEMENT.contentDocument.title)));
     },
     
     onLoadFinish: function() {
@@ -729,7 +772,7 @@ var sbCrossLinker = {
         sbDataSource.setProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gReferItem.id), "type", "site");
         this.ELEMENT.docShell.allowImages = false;
         sbInvisibleBrowser.onLoadStart = function() {
-            SB_trace(sbCommonUtils.lang("capture", "REBUILD_LINKS", [sbCrossLinker.index + 1, sbCrossLinker.nameList.length, this.fileCount, sbCrossLinker.nameList[sbCrossLinker.index] + ".html"]));
+            SB_trace(sbCommonUtils.lang("REBUILD_LINKS", sbCrossLinker.index + 1, sbCrossLinker.nameList.length, this.fileCount, sbCrossLinker.nameList[sbCrossLinker.index] + ".html"));
         };
         sbInvisibleBrowser.onLoadFinish = function() {
             sbCrossLinker.exec();
@@ -748,7 +791,7 @@ var sbCrossLinker = {
             var url = this.baseURL + encodeURIComponent(this.nameList[this.index]) + ".html";
             sbInvisibleBrowser.load(url);
         } else {
-            SB_trace(sbCommonUtils.lang("capture", "REBUILD_LINKS_COMPLETE"));
+            SB_trace(sbCommonUtils.lang("REBUILD_LINKS_COMPLETE"));
             this.flushXML();
             SB_fireNotification(gReferItem);
             //Fenster wird nur geschlossen, wenn alle ausgewaehlten Seiten heruntergeladen werden konnten
@@ -896,7 +939,7 @@ function sbHeaderSniffer(aURLSpec, aRefURLSpec) {
         onStopRequest: function(aRequest, aContext, aStatus) {
             // show connect success
             var contentType = that.getContentType() || "";
-            SB_trace(sbCommonUtils.lang("capture", "CONNECT_SUCCESS", [contentType]));
+            SB_trace(sbCommonUtils.lang("CONNECT_SUCCESS", contentType));
 
             // get and show http status
             var httpStatus = that.getStatus();
@@ -1013,10 +1056,14 @@ sbHeaderSniffer.prototype = {
         }
     },
 
+    cancel: function() {
+        if (this._channel) this._channel.cancel(Components.results.NS_BINDING_ABORTED);
+    },
+
     reportError: function(aErrorMsg) {
         //Ermitteln, wann der Wert this.failed erhoeht werden muss
         sbCaptureTask.failed++;
-        sbCaptureTask.fail(sbCommonUtils.lang("capture", "CONNECT_FAILURE", [aErrorMsg]));
+        sbCaptureTask.fail(sbCommonUtils.lang("CONNECT_FAILURE", aErrorMsg));
     },
 
 };

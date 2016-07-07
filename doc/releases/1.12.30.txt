@@ -1,0 +1,7 @@
+Scrapbook X 1.12.30
+===================
+
+Changes since v1.12.29
+----------------------
+
+- FIXED: Adjusted the internal script of "Output HTML tree" page to prevent a potential compatibility issue in certain browsers.

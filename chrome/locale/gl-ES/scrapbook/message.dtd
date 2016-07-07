@@ -1,0 +1,405 @@
+<!-- calculate.dtd -->
+<!ENTITY sb.calc.total.size "Tamaño total">
+<!ENTITY sb.calc.diagnosis "Diagnose">
+
+<!-- capture.dtd -->
+<!ENTITY sb.capture "Capturar">
+<!ENTITY sb.capture.abort "Abortar">
+<!ENTITY sb.capture.start "Comezar">
+<!ENTITY sb.capture.retry "Reintentar">
+<!ENTITY sb.capture.skip "Saltar">
+<!ENTITY sb.capture.pause "Pausar">
+<!ENTITY sb.capture.finish "Cancelar">
+<!ENTITY sb.capture.filter "Filtro">
+<!ENTITY sb.capture.filter.column.one "Amosar/Agochar">
+<!ENTITY sb.capture.filter.column.two "Filtro (expresión regular)">
+<!ENTITY sb.capture.filter.accept "Aceptar">
+<!ENTITY sb.capture.filter.accept.tt "cambiar ou editar o valor">
+<!ENTITY sb.capture.filter.cancel "Cancelar">
+<!ENTITY sb.capture.filter.cancel.tt "cancelar a edición">
+<!ENTITY sb.capture.filter.delete "Eliminar">
+<!ENTITY sb.capture.filter.delete.tt "eliminar o filtro da lista">
+<!ENTITY sbp.capture.column.one "URL">
+<!ENTITY sbp.capture.column.two "Título">
+<!ENTITY sbp.capture.column.three "Estado">
+
+<!-- combine.dtd -->
+<!ENTITY sb.combine.dragdrop "Engadir elementos, na orde desexada, arrastrando e soltando desde a colección . Pode mover varios elementos á vez.">
+<!ENTITY sb.combine.preview "Previsualizar">
+<!ENTITY sb.combine.preview.d "Prema &apos;Combinar&apos; despois de revisar a previsualización.">
+<!ENTITY sb.combine.option.remove "Despois de completar a combinación, eliminar as páxinas orixinais">
+<!ENTITY sbp.combine.up "Mover cara arriba">
+<!ENTITY sbp.combine.down "Mover cara abaixo">
+<!ENTITY sbp.combine.remove "Eliminar elemento">
+<!ENTITY sbp.combine.newTitle "Título novo">
+
+<!-- detail.dtd -->
+<!ENTITY sb.detail.linked.timeout "Temporizador (en segundos)">
+<!ENTITY sb.detail.linked.charset "Loading charset">
+<!ENTITY sb.detail "Detalles da captura">
+<!ENTITY sb.detail.new.folder "Novo cartafol">
+<!ENTITY sb.detail.select.folder "Seleccione un cartafol">
+<!ENTITY sb.detail.option "Opcións">
+<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.images "Imaxes">
+<!ENTITY sb.detail.option.media "Media">
+<!ENTITY sb.detail.option.fonts "Fonts">
+<!ENTITY sb.detail.option.frames "Frames">
+<!ENTITY sb.detail.option.styles "Estilos">
+<!ENTITY sb.detail.option.scripts "Scripts">
+<!ENTITY sb.detail.option.keepLink "Keep linking to the source for not-captured objects">
+<!ENTITY sb.detail.option.saveDataURI "Save data URI as file">
+<!ENTITY sb.detail.option.rewriteStyles "Reorganize Styles">
+<!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
+<!ENTITY sb.detail.linked.file "Descargar ficheiros ligados">
+<!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
+<!ENTITY sb.detail.linked.file.method1 "Match URL file extension">
+<!ENTITY sb.detail.linked.file.method2 "Match HTTP header and URL file extension">
+<!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped. Invalid RegExp will be skipped.">
+<!ENTITY sb.detail.linked.file.reset "Reset to default">
+<!ENTITY sb.detail.linked.page "Captura en niveis">
+<!ENTITY sb.detail.linked.page.depth "Número de niveis">
+<!ENTITY sb.detail.linked.page.text "Despois de completar as capturas, todas as páxinas serán ligadas e crearase un mapa web">
+<!ENTITY sb.detail.warnAboutRenew "AVISO: &apos;Capturar outra vez&apos;">
+<!ENTITY sb.detail.warnAboutScript "AVISO: JavaScrip pode producir un funcionamento anormal.">
+
+<!-- editor.dtd -->
+<!ENTITY sb.toolbar.edit "Barra de Ferramentas de edición">
+<!ENTITY sb.toolbar.info "Barra de Información">
+<!ENTITY sb.edit.folderView "Click to view the data directory. Middle-click to open in a new tab.">
+<!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
+<!ENTITY sb.edit.undo "Desfacer">
+<!ENTITY sb.edit.save "Gardar cambios">
+<!ENTITY sb.edit.comment "Expandir a área de comentarios">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
+<!ENTITY sb.edit.sticky "Anotación"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "Crear &sb.edit.sticky;"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "Create Freenote">
+<!ENTITY sb.edit.inline.add "Engadir un comentario á selección">
+<!ENTITY sb.edit.attach.file "Adxuntar un ficheiro á selección">
+<!ENTITY sb.edit.attach.link "Adxuntar unha ligazón á selección">
+<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.cutterTool "Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.">
+<!ENTITY sb.edit.htmlTool "HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.">
+<!ENTITY sb.edit.html "HTML Editor">
+<!ENTITY sb.edit.html.color "Edit Color">
+<!ENTITY sb.edit.html.color.forText "Set text color:">
+<!ENTITY sb.edit.html.color.forBg "Set background color:">
+<!ENTITY sb.edit.html.source "Edit HTML Source">
+<!ENTITY sb.edit.html.link "Insert Link">
+<!ENTITY sb.edit.html.link.url "Target URL:">
+<!ENTITY sb.edit.html.link.id "Item ID:">
+<!ENTITY sb.edit.html.link.format "Select insert format:">
+<!ENTITY sb.edit.html.file "Insert File">
+<!ENTITY sb.edit.html.file.pick "Insert file:">
+<!ENTITY sb.edit.html.file.html "Insert sub-page:">
+<!ENTITY sb.edit.html.file.format "Select insert format:">
+<!ENTITY sb.edit.html.backup "Backup the Current Page">
+<!ENTITY sb.edit.html.backup.desc "Description:">
+<!ENTITY sb.edit.html.menu.basic "Text">
+<!ENTITY sb.edit.html.menu.block "Block">
+<!ENTITY sb.edit.html.menu.insert "Insert">
+<!ENTITY sb.edit.html.menu.wrapper "Advanced">
+<!ENTITY sb.edit.html.menuitem.insertSource "Insert or Edit Source">
+<!ENTITY sb.edit.html.menuitem.removeFormat "Clear Formats">
+<!ENTITY sb.edit.html.menuitem.unlink "Clear Links">
+<!ENTITY sb.edit.html.menuitem.save "Save the Page">
+<!ENTITY sb.edit.html.menuitem.quit "Switch HTMLEditor">
+<!ENTITY sb.edit.html.menuitem.bold "Switch Bold">
+<!ENTITY sb.edit.html.menuitem.italic "Switch Italic">
+<!ENTITY sb.edit.html.menuitem.underline "Switch Underline">
+<!ENTITY sb.edit.html.menuitem.strikeThrough "Switch Line-through">
+<!ENTITY sb.edit.html.menuitem.setColor "Set Text and Background Color">
+<!ENTITY sb.edit.html.menuitem.increaseFontSize "Increase Text Size">
+<!ENTITY sb.edit.html.menuitem.decreaseFontSize "Decrease Text Size">
+<!ENTITY sb.edit.html.menuitem.superscript "Switch Superscript">
+<!ENTITY sb.edit.html.menuitem.subscript "Switch Subscript">
+<!ENTITY sb.edit.html.menuitem.formatblock_p "Set to Normal Paragraph">
+<!ENTITY sb.edit.html.menuitem.formatblock_h1 "Set to Header Level 1">
+<!ENTITY sb.edit.html.menuitem.formatblock_h2 "Set to Header Level 2">
+<!ENTITY sb.edit.html.menuitem.formatblock_h3 "Set to Header Level 3">
+<!ENTITY sb.edit.html.menuitem.formatblock_h4 "Set to Header Level 4">
+<!ENTITY sb.edit.html.menuitem.formatblock_h5 "Set to Header Level 5">
+<!ENTITY sb.edit.html.menuitem.formatblock_h6 "Set to Header Level 6">
+<!ENTITY sb.edit.html.menuitem.formatblock_div "Set to DIV Block">
+<!ENTITY sb.edit.html.menuitem.formatblock_pre "Set to PRE Block">
+<!ENTITY sb.edit.html.menuitem.insertUnorderedList "Switch Unordered List">
+<!ENTITY sb.edit.html.menuitem.insertOrderedList "Switch Ordered List">
+<!ENTITY sb.edit.html.menuitem.outdent "Outdent">
+<!ENTITY sb.edit.html.menuitem.indent "Indent">
+<!ENTITY sb.edit.html.menuitem.justifyLeft "Align Left">
+<!ENTITY sb.edit.html.menuitem.justifyRight "Align Right">
+<!ENTITY sb.edit.html.menuitem.justifyCenter "Align Center">
+<!ENTITY sb.edit.html.menuitem.justifyFull "Align Justify">
+<!ENTITY sb.edit.html.menuitem.attachLink "Insert a Link or Innerlink">
+<!ENTITY sb.edit.html.menuitem.attachFile "Insert a File or Sub-page">
+<!ENTITY sb.edit.html.menuitem.backupFile "Create a Backup for this Page">
+<!ENTITY sb.edit.html.menuitem.horizontalLine "Insert a Horizontal Rule">
+<!ENTITY sb.edit.html.menuitem.insertDate "Insert a Date">
+<!ENTITY sb.edit.html.menuitem.insertTodoBox "Insert a Todo Checkbox">
+<!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "Insert a Todo Checkbox (Checked)">
+<!ENTITY sb.edit.html.menuitem.wrapHTML "Format with Template">
+<!ENTITY sb.edit.cutter "Eliminar a selección">
+<!ENTITY sb.edit.remove.iframe "Eliminar todas as etiquetas IFRAME">
+<!ENTITY sb.edit.remove.script "Eliminar todas as etiquetas SCRIPT">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to highlight the selection.">
+<!ENTITY sb.highlighter "Resaltador">
+<!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
+<!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
+<!ENTITY sb.locate "Localizar na colección do panel lateral">
+<!ENTITY sb.indicators "Amosar indicadores de ligazóns">
+<!ENTITY sb.info.home "Páxina de Scrapbook">
+<!ENTITY sb.info.sitemap "Mapa web">
+
+<!-- hlCustom.dtd -->
+<!ENTITY sb.hlCustom.preset "Estilos predefinidos">
+<!ENTITY sb.hlCustom.background "Fondo">
+<!ENTITY sb.hlCustom.color "Cor">
+<!ENTITY sb.hlCustom.text "Texto">
+<!ENTITY sb.hlCustom.bold "Negra">
+<!ENTITY sb.hlCustom.italic "Cursiva">
+<!ENTITY sb.hlCustom.line "Riscado">
+<!ENTITY sb.hlCustom.border "Bordo">
+<!ENTITY sb.hlCustom.type "Tipo">
+<!ENTITY sb.hlCustom.box "Marco">
+<!ENTITY sb.hlCustom.underline "Subliñado">
+<!ENTITY sb.hlCustom.style "Estilo">
+<!ENTITY sb.hlCustom.solid "Contínuo">
+<!ENTITY sb.hlCustom.dotted "Punteado">
+<!ENTITY sb.hlCustom.dashed "Guións">
+<!ENTITY sb.hlCustom.double "Dobre">
+<!ENTITY sb.hlCustom.width "Largura">
+<!ENTITY sb.hlCustom.thin "Fino">
+<!ENTITY sb.hlCustom.medium "Medio">
+<!ENTITY sb.hlCustom.thick "Groso">
+
+<!-- mbManage.dtd -->
+<!ENTITY mb.manager "Multi-ScrapBook Manager">
+<!ENTITY mb.prop.name "Nome">
+<!ENTITY mb.prop.path "Camiño">
+<!ENTITY mb.button.add "Engadir">
+<!ENTITY mb.button.edit "Editar">
+<!ENTITY mb.button.remove "Eliminar">
+
+<!-- multiple.dtd -->
+<!ENTITY sb.multiple.filter "Filtro">
+<!ENTITY sbp.multiple.titleofwebsite "Título do sitio web">
+<!ENTITY sbp.multiple.titleoflink "Título da ligazón">
+<!ENTITY sb.multiple.title "Título">
+<!ENTITY sbp.multiple.downloadmethod "Método">
+<!ENTITY sb.multiple.url "URL (Insira unha URL por liña)">
+<!ENTITY sb.multiple.detector "Detector de URLs">
+<!ENTITY sb.multiple.detector.plink "Todas as ligazóns da páxina">
+<!ENTITY sb.multiple.detector.slink "Todas as ligazóns da selección">
+<!ENTITY sb.multiple.detector.tabs "Todas as pestanas abertas na ventá">
+<!ENTITY sb.multiple.detector.local "Todos os HTMLs locais dun cartafol">
+<!ENTITY sb.multiple.detector.bookmarks "Marcadores">
+<!ENTITY sb.multiple.detector.clear "Limpar">
+<!ENTITY sbp.multiple.exclude "ignorar enderezos que xa existen no cartafol de destino">
+
+<!-- note.dtd -->
+<!ENTITY sb.note.save "Gardar">
+<!ENTITY sb.note.close "Pechar">
+<!ENTITY sb.note.tools "Ferramentas">
+<!ENTITY sb.note.htmlview "Vista HTML">
+<!ENTITY sb.note.normalview "Vista normal">
+<!ENTITY sb.note.template "Editar sobreplanta HTML">
+<!ENTITY sb.note.autolinefeed "Quebras de liña automáticas">
+<!ENTITY sb.note.autolinefeed.t "Engadir etiquetas &lt;br&gt; ao remate de cada liña en &sb.note.htmlview;">
+<!ENTITY sb.note.fontsize "Tamaño da fonte">
+<!ENTITY sb.note.help "Axuda">
+<!ENTITY sb.note.print "Imprimir">
+<!ENTITY sb.note.exit "Saír">
+<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "N">
+<!ENTITY sb.note.tools.accesskey "T">
+<!ENTITY sb.note.fontsize.accesskey "F">
+<!ENTITY sb.note.print.accesskey "P">
+<!ENTITY sb.note.exit.accesskey "X">
+
+<!-- notify.dtd -->
+<!ENTITY sb.capture.complete "Captura completada.">
+<!ENTITY sb.capture.complete.all "Completadas todas as capturas.">
+
+<!-- output.dtd -->
+<!ENTITY sb.output.option.all "Xerar a colección completa">
+<!ENTITY sb.output.option.frame "Xerar con marco">
+<!ENTITY sb.output.option.open "Despois de xerar, abrir no navegador">
+
+<!-- overlay.dtd -->
+<!ENTITY sb.capture.partial "Capturar selección">
+<!ENTITY sb.capture.partial.as "Capturar selección como">
+<!ENTITY sb.capture.entire "Capturar páxina">
+<!ENTITY sb.capture.entire.as "Capturar páxina como">
+<!ENTITY sb.capture.frame "Capturar cadro">
+<!ENTITY sb.capture.frame.as "Capturar cadro como">
+<!ENTITY sb.capture.target "Capturar ligazón">
+<!ENTITY sb.capture.target.as "Capturar ligazón como">
+<!ENTITY sb.capture.alltabs "Capturar todas as pestanas">
+<!ENTITY sb.capture.bookmark "Marcar co ScrapBook">
+<!ENTITY sb.sidebar "Amosar na barra lateral">
+<!ENTITY sb.menubar "Menú">
+<!ENTITY sb.editbefore "Editar antes de capturar">
+
+<!-- prefs.dtd -->
+<!ENTITY sb.prefs.main "Principal">
+<!ENTITY sb.prefs.keys "Keys">
+<!ENTITY sb.prefs.tabs "Pestanas">
+<!ENTITY sb.prefs.save "Gardar">
+<!ENTITY sb.prefs.edit "Editar">
+<!ENTITY sb.prefs.organize "Organizar">
+<!ENTITY sb.prefs.advanced "Avanzado">
+<!ENTITY sb.prefs.ui.contextMenu "Amosar no menú contextual">
+<!ENTITY sb.prefs.ui.contextSubMenu "Submenú">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Amosar o menú &apos;Marcar co ScrapBook&apos;">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Amosar até">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "cartafoles usados recentemente">
+<!ENTITY sb.prefs.ui.menuBar "Amosar na barra do menú">
+<!ENTITY sb.prefs.ui.menuBar.icon "Icona">
+<!ENTITY sb.prefs.ui.toolsMenu "Amosar no menú &apos;Ferramentas&apos;">
+<!ENTITY sb.prefs.ui.statusBar "Amosar na barra de estado">
+<!ENTITY sb.prefs.restart "É necesario reiniciar o Firefox despois dos cambios.">
+<!ENTITY sb.prefs.tabs.tips "Para as seguintes operacións abrirase unha pestana">
+<!ENTITY sb.prefs.tabs.note "Editar aviso">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
+<!ENTITY sb.prefs.data "Localización dos datos">
+<!ENTITY sb.prefs.data.default "Predeterminada (Cartafol do perfil)">
+<!ENTITY sb.prefs.data.custom "Gardar os datos en">
+<!ENTITY sb.prefs.data.tips "Escoller un cartafol onde gardar os datos de ScrapBook.">
+<!ENTITY sb.prefs.multibook.enabled "Activar Multi-ScrapBook">
+<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook activa localizacións múltiples para gardar os datos e poder escoller entre elas usando un botón da barra de tarefas.">
+<!ENTITY sb.prefs.confirmDelete "Avisarme cando se borren elementos da colección(s)">
+<!ENTITY sb.prefs.tree.autoCollapse "Ao abrir un cartafol da colección, pechar os outros cartafoles automaticamente">
+<!ENTITY sb.prefs.tree.unshift "Poñer o elemento">
+<!ENTITY sb.prefs.tree.unshift.top "na parte superior do cartafol">
+<!ENTITY sb.prefs.tree.unshift.bottom "na parte inferior do cartafol">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
+<!ENTITY sb.prefs.showDetailOnDrop "Amosar o diálogo &apos;Detalles da captura&apos; cando se capture arrastrando e soltando sobre o panel lateral">
+<!ENTITY sb.prefs.notifyOnComplete "Amosar o aviso de &apos;Captura completada&apos;">
+<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
+<!ENTITY sb.prefs.export "Export Preferences">
+<!ENTITY sb.prefs.import "Import Preferences">
+<!ENTITY sb.prefs.reset "Reset Preferences">
+<!ENTITY sb.button.customize "Personalizar">
+<!ENTITY sb.button.browse "Procurar">
+<!ENTITY sb.button.show "Amosar ficheiros">
+
+<!-- property.dtd -->
+<!ENTITY sb.prop.general "Información xeral">
+<!ENTITY sb.prop.type "Tipo">
+<!ENTITY sb.prop.date "Data"><!-- left for addon compatibility -->
+<!ENTITY sb.prop.create "Create">
+<!ENTITY sb.prop.modify "Modify">
+<!ENTITY sb.prop.encode "Codificar">
+<!ENTITY sb.prop.size "Tamaño">
+<!ENTITY sb.prop.content "Contido">
+<!ENTITY sb.prop.file "File">
+<!ENTITY sb.prop.folder "Cartafol">
+<!ENTITY sb.prop.icon "Icona">
+<!ENTITY sb.prop.icon.change "Cambiar">
+<!ENTITY sb.prop.icon.default "Predefinido">
+<!ENTITY sb.prop.icon.favicon "Escoller favicon">
+<!ENTITY sb.prop.icon.custom "Escoller icona do usuario">
+<!ENTITY sb.prop.mark "Marcar">
+<!ENTITY sb.prop.lock "Lock">
+
+<!-- repair.dtd -->
+<!ENTITY sb.repair.rdfFile "Restaurar scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript "Inténteo se a colección de ScrapBook desapareceu de repente.">
+<!ENTITY sb.repair.rdfFile.select "Escolla unha copia de seguridade para a restauración.">
+<!ENTITY sb.repair.rdfFile.file "Ficheiro">
+<!ENTITY sb.repair.rdfFile.time "Tempo">
+<!ENTITY sb.repair.rdfFile.size "Tamaño">
+<!ENTITY sb.repair.favicons "Restaurar os favicóns da colección">
+<!ENTITY sb.repair.favicons.descript "Inténteo se desapareceron algúns favicóns da colección.">
+<!ENTITY sb.repair.complete "Completado">
+
+<!-- scrapbook.dtd -->
+<!ENTITY sb.toggle.all "Abrir/Pechar todos os cartafoles">
+<!ENTITY sb.tools "Ferramentas">
+<!ENTITY sb.tools.options "Opcións">
+<!ENTITY sb.tools.manage "Xestor">
+<!ENTITY sb.tools.combine "Combinar">
+<!ENTITY sb.tools.trade "Importar/Exportar">
+<!ENTITY sb.tools.multiple "Capturar múltiples URLs">
+<!ENTITY sb.tools.directory "Cartafol do ScrapBook">
+<!ENTITY sb.tools.calculate "Cálculo do tamaño">
+<!ENTITY sb.tools.sorttree "Ordenar a colección">
+<!ENTITY sb.tools.output "Vista como HTML">
+<!ENTITY sb.tools.repair "Reparación de urxencia">
+<!ENTITY sb.tools.addons "Funcións do complemento">
+<!ENTITY sb.note.opentab "Abrir nunha pestana">
+
+<!-- sort.dtd -->
+<!ENTITY sb.sort "Ordenar">
+<!ENTITY sb.sort.reverse "Inversa">
+<!ENTITY sb.sort.title.asc "Ordenar polo título (A &gt; Z)">
+<!ENTITY sb.sort.title.desc "Ordenar polo título (Z &gt; A)">
+<!ENTITY sb.sort.date.asc "Cronolóxica">
+<!ENTITY sb.sort.date.desc "Cronolóxica inversa">
+<!ENTITY sb.sort.grouping "Group by Type">
+<!ENTITY sb.sort.recursive "Ordenar os sub-cartafoles recurrentemente">
+<!ENTITY sb.sort.warning "Aviso: Esta operación non se poderá desfacer.">
+
+<!-- templateHelp.dtd -->
+<!ENTITY sb.thelp.dir "ltr">
+<!ENTITY sb.thelp.title "ScrapBook Template HTML Help">
+<!ENTITY sb.thelp.tags "Two Special Tags">
+<!ENTITY sb.thelp.tag1 "O titulo (a primeira lina) da notae">
+<!ENTITY sb.thelp.tag2 "Os contidos (a segunda lina ou posterirores) da nota">
+<!ENTITY sb.thelp.preset "Preset Template">
+
+<!-- trade.dtd -->
+<!ENTITY sb.trade.import "Importar">
+<!ENTITY sb.trade.export "Exportar">
+<!ENTITY sb.trade.time "Data de exportación">
+<!ENTITY sb.trade.update "Import as latest ScrapBook X format">
+<!ENTITY sb.trade.restore "Importar restaurando a estrutura do cartafol">
+<!ENTITY sb.trade.remove "Eliminar os ficheiros despois de os importar">
+<!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">
+
+<!-- tree.dtd -->
+<!ENTITY sb.open "Abrir">
+<!ENTITY sb.open.native "Open in Default Program">
+<!ENTITY sb.open.tab "Abrir nunha pestana">
+<!ENTITY sb.open.newtab "Abrir nunha pestana nova">
+<!ENTITY sb.open.source "Abrir URL fonte">
+<!ENTITY sb.multi "Multi-ScrapBook">
+<!ENTITY sb.show.files "Amosar ficheiros">
+<!ENTITY sb.move "Mover">
+<!ENTITY sb.move.into "Mover para o cartafol">
+<!ENTITY sb.copy "Copy">
+<!ENTITY sb.renew "Capturar outra vez">
+<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.export "Exportar">
+<!ENTITY sb.remove "Borrar">
+<!ENTITY sb.property "Propiedades">
+<!ENTITY sb.listview "Vista en listaxe">
+<!ENTITY sb.prop.title "Título">
+<!ENTITY sb.prop.comment "Comentario">
+<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.id.date "ID">
+<!ENTITY sb.folder.combine "Vista combinada">
+<!ENTITY sb.folder.openall "Abrir todo en pestanas">
+<!ENTITY sb.folder.manage "Xestionar cartafol">
+<!ENTITY sb.new.folder "Novo cartafol">
+<!ENTITY sb.new.separator "Novo separador">
+<!ENTITY sb.new.note "Nova nota">
+<!ENTITY sb.new.notex "New Note Page">
+<!ENTITY sb.sort.folder "Ordenar cartafol">
+<!ENTITY sb.search "Procurar">
+<!ENTITY sb.search.fulltext "Procurar texto completo">
+<!ENTITY sb.search.all "Todo">
+<!ENTITY sb.search.re "Empregar Expresións Regulares">
+<!ENTITY sb.search.cs "Diferenciar maiúsulas/minúsculas">
+<!ENTITY sb.search.cache "Actualizar caché para a procura de texto completo">
+<!ENTITY sb.search.clear "Limpar a historia do formulario">
+<!ENTITY sb.search.days "Filtrar por días">
+<!ENTITY mb.manage "Xestión">
+<!ENTITY mb.profileFolder "Cartafol do perfil">
+

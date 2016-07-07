@@ -68,7 +68,7 @@ var sbSearchResult = {
         if ( this.resEnum.hasMoreElements() ) {
             if ( ++this.index % 100 == 0 ) {
                 setTimeout(function(){ sbSearchResult.process(); }, 0);
-                var msg = sbCommonUtils.lang("scrapbook", "SCANNING_TREE", [Math.round(this.index / this.count * 100) + "%"]);
+                var msg = sbCommonUtils.lang("SCANNING_TREE", Math.round(this.index / this.count * 100) + "%");
                 document.title = document.getElementById("sbResultHeaderMsg").value = msg;
             } else {
                 this.process();
@@ -130,7 +130,7 @@ var sbSearchResult = {
             });
         }, this);
         this.initTree();
-        var headerLabel1 = sbCommonUtils.lang("fulltext", "RESULTS_FOUND", [this.hit] );
+        var headerLabel1 = sbCommonUtils.lang("RESULTS_FOUND", this.hit);
         var headerLabel2 = this.query['q'];
         document.title = document.getElementById("sbResultHeaderMsg").value = headerLabel1 + " : " + headerLabel2;
     },
@@ -171,7 +171,7 @@ var sbSearchResult = {
     },
 
     localizedQuotation: function(aString) {
-        return sbCommonUtils.lang("fulltext", "QUOTATION", [aString]);
+        return sbCommonUtils.lang("QUOTATION", aString);
     },
 
     forward: function(key) {
@@ -298,8 +298,8 @@ var sbCacheService = {
     skipFiles: {},
 
     build: function() {
-        document.title = sbCommonUtils.lang("fulltext", "BUILD_CACHE") + " - ScrapBook";
-        gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_INIT");
+        document.title = sbCommonUtils.lang("BUILD_CACHE") + " - ScrapBook";
+        gCacheStatus.firstChild.value = sbCommonUtils.lang("BUILD_CACHE_INIT");
         sbCacheSource.refreshEntries();
         this.dataDir = sbCommonUtils.getScrapBookDir().clone();
         this.dataDir.append("data");
@@ -323,8 +323,8 @@ var sbCacheService = {
     processAsync: function() {
         var res = this.resList[this.index];
         // update trace message
-        document.title = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(this.folders[this.index]), "title") || sbCommonUtils.lang("fulltext", "BUILD_CACHE");
-        gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_UPDATE", [sbDataSource.getProperty(res, "title")]);
+        document.title = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(this.folders[this.index]), "title") || sbCommonUtils.lang("BUILD_CACHE");
+        gCacheStatus.firstChild.value = sbCommonUtils.lang("BUILD_CACHE_UPDATE", sbDataSource.getProperty(res, "title"));
         gCacheStatus.lastChild.value = Math.round((this.index + 1) / this.resList.length * 100);
         // inspect the data and do the cache
         var id = sbDataSource.getProperty(res, "id");
@@ -421,7 +421,7 @@ var sbCacheService = {
                 sbCacheService.inspectFile(null, "index.html", "none");
                 break;
             default:
-                sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERR_UNKNOWN_DATA_TYPE", [type]));
+                sbCommonUtils.error(sbCommonUtils.lang("ERR_UNKNOWN_DATA_TYPE", type));
                 break;
         }
         // next one
@@ -536,7 +536,7 @@ var sbCacheService = {
     },
 
     finalize: function() {
-        document.title = sbCommonUtils.lang("fulltext", "BUILD_CACHE");
+        document.title = sbCommonUtils.lang("BUILD_CACHE");
         var toRemove = [];
         for ( var uri in this.uriHash ) {
             if ( !this.uriHash[uri] && uri != "urn:scrapbook:cache" ) {
@@ -547,12 +547,12 @@ var sbCacheService = {
             var uri = toRemove.shift();
             if (uri) {
                 // next
-                gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_REMOVE", [uri]);
+                gCacheStatus.firstChild.value = sbCommonUtils.lang("BUILD_CACHE_REMOVE", uri);
                 sbCacheSource.removeEntry(sbCommonUtils.RDF.GetResource(uri));
                 setTimeout(arguments.callee, 0);
             } else {
                 // done
-                gCacheStatus.firstChild.value = sbCommonUtils.lang("fulltext", "BUILD_CACHE_UPDATE", ["cache.rdf"]);
+                gCacheStatus.firstChild.value = sbCommonUtils.lang("BUILD_CACHE_UPDATE", "cache.rdf");
                 sbCacheSource.flush();
                 try {
                     if ( window.arguments[0] ) {

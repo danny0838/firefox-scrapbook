@@ -1,0 +1,9 @@
+Scrapbook X 1.12.1
+==================
+
+Changes since v1.12.0
+---------------------
+
+- UPDATE: "All Links in the Selection" button of "Capture Multiple URLs" now detects all links when there are multiple selection ranges.
+- FIXED: "All Links in the Selection" button of "Capture Multiple URLs" doesn't work.
+- FIXED: An error occurs when a multiple capture process is completed.

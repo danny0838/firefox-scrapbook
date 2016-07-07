@@ -69,7 +69,7 @@ var sbTreeHandler = {
             var parRes = this.getParentResource(idxList[i]);
             if ( parRes.Value == "urn:scrapbook:search" ) {
                 parRes = sbDataSource.findParentResource(curRes);
-                if (!parRes) { sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SEND")); return; }
+                if (!parRes) { sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_SEND")); return; }
             }
             resList.push(curRes);
             parList.push(parRes);
@@ -86,7 +86,7 @@ var sbTreeHandler = {
             var parRes = this.getParentResource(idxList[i]);
             if ( parRes.Value == "urn:scrapbook:search" ) {
                 parRes = sbDataSource.findParentResource(curRes);
-                if (!parRes) { sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_SEND")); return; }
+                if (!parRes) { sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_SEND")); return; }
             }
             resList.push(curRes);
             parList.push(parRes);
@@ -105,7 +105,7 @@ var sbTreeHandler = {
         if ( !sbController.confirmRemovingFor(resList) ) return;
         var rmIDs = sbController.removeInternal(resList, parList, false);
         if ( rmIDs ) {
-            sbMainService.trace(sbCommonUtils.lang("scrapbook", "ITEMS_REMOVED", [rmIDs.length]));
+            sbMainService.trace(sbCommonUtils.lang("ITEMS_REMOVED", rmIDs.length));
             if ( "sbNoteService" in window && sbNoteService.resource && sbNoteService.resource.Value.substring(18,32) == rmIDs[0] ) sbNoteService.exit(false);
         }
     },

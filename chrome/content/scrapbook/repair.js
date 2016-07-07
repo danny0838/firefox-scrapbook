@@ -21,7 +21,7 @@ var sbRepair = {
         var backupDir = sbCommonUtils.getScrapBookDir();
         backupDir.append("backup");
         if ( !backupDir.exists() ) {
-            sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_NO_BACKUP_FILES"));
+            sbCommonUtils.alert(sbCommonUtils.lang("MSG_NO_BACKUP_FILES"));
             return;
         }
         var fileEnum = backupDir.directoryEntries;

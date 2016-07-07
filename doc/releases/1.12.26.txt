@@ -1,0 +1,7 @@
+Scrapbook X 1.12.26
+===================
+
+Changes since v1.12.25
+----------------------
+
+- FIXED: Capture the target URL as HTML if its HTTP header contentType is not declared.

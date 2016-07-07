@@ -1,0 +1,8 @@
+Scrapbook X 1.12.0a22
+=====================
+
+Changes since v1.12.0a21
+------------------------
+
+- UPDATE: Display an error message if the RegExp is invalid for a filter search.
+- FIXED: README.txt is not added to the pack in previous versions.

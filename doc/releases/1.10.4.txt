@@ -1,0 +1,7 @@
+Scrapbook X 1.10.4
+==================
+
+Changes since v1.10.3
+---------------------
+
+- Fix an issue that highlighters cannot be set to empty style.

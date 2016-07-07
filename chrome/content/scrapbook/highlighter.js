@@ -48,7 +48,7 @@ var sbHighlighter = {
             var sameNode = ( startC == endC );
 //sbCommonUtils.alert("startC - "+startC+"\nendC - "+endC+"\nsOffset - "+sOffset+"\neOffset - "+eOffset);
             if ( aNodeName == "a" && !sameNode ) {
-                sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "MSG_ATTACH_ACROSS_TAGS"));
+                sbCommonUtils.alert(sbCommonUtils.lang("MSG_ATTACH_ACROSS_TAGS"));
                 return;
             }
             // Replace faulty original function

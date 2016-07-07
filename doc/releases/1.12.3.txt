@@ -1,0 +1,13 @@
+Scrapbook X 1.12.3
+==================
+
+Changes since v1.12.2
+---------------------
+
+- UPDATE: Improve the intelligence of auto-adjustment of "Capture Detail" dialog field values.
+- UPDATE: Do not automatically update the cache when searching if the data is not actually newer.
+- UPDATE: Message strings in the fulltext search result window are now truncated if they are too long.
+- UPDATE: Error messages in the fulltext search result window are now shown in red.
+- UPDATE: Frame page of "Output HTML tree" now jumps to the corresponding item even if the URL hash is not pointed to index.html.
+- UPDATE: Search script of "Output HTML tree" now shows the subpath if it's other than index.html.
+- FIXED: Contents in an <xmp> node and its subsequent sibling nodes are sometimes not correctly captured.

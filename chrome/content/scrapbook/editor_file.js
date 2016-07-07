@@ -25,7 +25,7 @@ function accept() {
 
 function pickFile() {
     var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-    FP.init(window, sbCommonUtils.lang("overlay", "EDIT_ATTACH_FILE_TITLE"), FP.modeOpen);
+    FP.init(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), FP.modeOpen);
     var ret = FP.show();
     if ( ret != FP.returnOK ) return false;
     document.getElementById("sbFilePath").label = FP.file.path;

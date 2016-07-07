@@ -5,7 +5,7 @@
 
 <?xul-overlay href="chrome://scrapbook/content/tree.xul"?>
 
-<!DOCTYPE window SYSTEM "chrome://scrapbook/locale/scrapbook.dtd">
+<!DOCTYPE window SYSTEM "chrome://scrapbook/locale/message.dtd">
 
 <window id="ScrapBookWindow"
         title="ScrapBook"

@@ -75,7 +75,7 @@ var sbMainService = {
         // create item
         var newItem = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
         newItem.id = sbDataSource.identify(newItem.id);
-        newItem.title = sbCommonUtils.lang("scrapbook", "DEFAULT_FOLDER");
+        newItem.title = sbCommonUtils.lang("DEFAULT_FOLDER");
         newItem.type = "folder";
         // add resource
         var newRes = this.addNewResource(newItem, null, aAsChild);
@@ -115,7 +115,7 @@ var sbMainService = {
         // create item
         var newItem = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
         newItem.id = sbDataSource.identify(newItem.id);
-        newItem.title = sbCommonUtils.lang("scrapbook", "DEFAULT_NOTEX");
+        newItem.title = sbCommonUtils.lang("DEFAULT_NOTEX");
         newItem.type = "notex";
         newItem.chars = "UTF-8";
         // check the template file, create one if not exist
@@ -322,8 +322,6 @@ var sbController = {
             option: null,
             file2Url: null,
             preset: preset,
-            charset: null,
-            timeout: null,
             titles: null,
             context: "capture-again",
         };
@@ -492,7 +490,7 @@ var sbController = {
             if (!sbDataSource.exists(aResList[i])) {
                 continue;
             } else if (sbDataSource.getRelativeIndex(aParResList[i], aResList[i]) < 0) {
-                sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_FAIL_REMOVE_RESOURCE", [aResList[i].Value]));
+                sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_REMOVE_RESOURCE", aResList[i].Value));
                 continue;
             }
             sbDataSource.deleteItemDescending(aResList[i], aParResList[i], rmIDs);
@@ -518,7 +516,7 @@ var sbController = {
 
     confirmRemovingPrompt: function() {
         var button = sbCommonUtils.PROMPT.STD_YES_NO_BUTTONS + sbCommonUtils.PROMPT.BUTTON_POS_1_DEFAULT;
-        var text = sbCommonUtils.lang("scrapbook", "CONFIRM_DELETE");
+        var text = sbCommonUtils.lang("CONFIRM_DELETE");
         // pressing default button or closing the prompt returns 1
         // reverse it to mean "no" by default
         return !sbCommonUtils.PROMPT.confirmEx(null, "[ScrapBook]", text, button, null, null, null, null, {});
@@ -734,18 +732,17 @@ var sbTreeDNDHandler = {
                 option: null,
                 file2Url: null,
                 preset: null,
-                charset: null,
-                timeout: null,
                 titles: null,
+                context: "link",
             };
             top.window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
         } else if (url.indexOf("file://") == 0) {
             top.window.sbContentSaver.captureFile(
                 url, "file://", "file", sbCommonUtils.getPref("showDetailOnDrop", false),
-                res[0], res[1], null
+                res[0], res[1], null, "link"
             );
         } else {
-            sbCommonUtils.error(sbCommonUtils.lang("scrapbook", "ERROR_INVALID_URL", [url]));
+            sbCommonUtils.error(sbCommonUtils.lang("ERROR_INVALID_URL", url));
         }
     },
 
@@ -898,7 +895,7 @@ var sbSearchService = {
         sbTreeDNDHandler.quit();
         sbMainService.toggleHeader(
             true,
-            sbCommonUtils.lang("scrapbook", "SEARCH_RESULTS_FOUND", [this.container.GetCount()])
+            sbCommonUtils.lang("SEARCH_RESULTS_FOUND", this.container.GetCount())
         );
     },
 
@@ -925,7 +922,7 @@ var sbSearchService = {
         sbTreeDNDHandler.quit();
         sbMainService.toggleHeader(
             true,
-            sbCommonUtils.lang("scrapbook", "SEARCH_RESULTS_FOUND", [this.container.GetCount()])
+            sbCommonUtils.lang("SEARCH_RESULTS_FOUND", this.container.GetCount())
         );
     },
 
@@ -1090,7 +1087,7 @@ var sbSearchQueryHandler = {
                     try {
                         var regex = new RegExp(term, options);
                     } catch(ex) {
-                        addError(sbCommonUtils.lang("scrapbook", "ERR_SEARCH_REGEXP_INAVLID", [term]));
+                        addError(sbCommonUtils.lang("ERR_SEARCH_REGEXP_INAVLID", term));
                         return null;
                     }
                 } else {
@@ -1102,7 +1099,7 @@ var sbSearchQueryHandler = {
             function parseDate(term) {
                 var match = term.match(/^(\d{0,14})-?(\d{0,14})$/);
                 if (!match) {
-                    addError(sbCommonUtils.lang("scrapbook", "ERR_SEARCH_DATE_INAVLID", [term]));
+                    addError(sbCommonUtils.lang("ERR_SEARCH_DATE_INAVLID", term));
                     return null;
                 }
                 var since = match[1] ? fill(match[1], 14) : fill(match[1], 14);

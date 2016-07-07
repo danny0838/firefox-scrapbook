@@ -1,0 +1,9 @@
+Scrapbook X 1.12.0a24
+=====================
+
+Changes since v1.12.0a23
+------------------------
+
+- FIXED: Added some locale entries back and fixed some errorneous internal functions for compatibility with addons.
+- FIXED: Frames with malformed URI causes the capture freeze.
+- UPDATE: Added back the changelog file RELEASE.txt in the pack.

@@ -10,6 +10,7 @@ var EXPORTED_SYMBOLS = ["sbCommonUtils"];
 
 const { lang } = Components.utils.import("resource://scrapbook-modules/lang.jsm", {});
 const { console } = Components.utils.import("resource://scrapbook-modules/console.jsm", {});
+const { jsSHA } = Components.utils.import("resource://scrapbook-modules/lib/jsSHA.jsm", {});
 
 var sbCommonUtils = {
 
@@ -48,20 +49,6 @@ var sbCommonUtils = {
      * Version specific handling
      ***************************************************************/
 
-    get _fxVer36_saveURI() {
-        // Firefox >= 36: nsIWebBrowserPersist.saveURI takes 8 arguments
-        // Firefox < 36: nsIWebBrowserPersist.saveURI takes 7 arguments
-        var result;
-        try {
-            var WBP = Components.classes['@mozilla.org/embedding/browser/nsWebBrowserPersist;1'].createInstance(Components.interfaces.nsIWebBrowserPersist);
-            WBP.saveURI(null, null, null, null, null, null, null);
-        } catch(ex) {
-            result = (ex.name === "NS_ERROR_XPC_NOT_ENOUGH_ARGS") ? true : false;
-        }
-        delete this._fxVer36_saveURI;
-        return this._fxVer36_saveURI = result;
-    },
-
     /**
      * return (1, 0, -1) if ver1 (>, =, <) ver2
      */
@@ -75,8 +62,8 @@ var sbCommonUtils = {
      * ScrapBook language pack handling
      ***************************************************************/
 
-    lang: function (aBundle, aName, aArgs) {
-        return lang(aBundle, aName, aArgs);
+    lang: function () {
+        return lang.apply(lang, arguments);
     },
 
 
@@ -164,8 +151,13 @@ var sbCommonUtils = {
                     throw null;
             }
         } catch (ex) {
-            console.error(lang("scrapbook", "ERR_FAIL_SET_PREF", [aName]));
+            console.error(lang("ERR_FAIL_SET_PREF", aName));
         }
+    },
+
+    resetPref: function (aName, isGlobal) {
+        var branch = isGlobal ? this.prefBranchGlobal : this.prefBranch;
+        branch.clearUserPref(aName);
     },
 
     getPrefKeys: function () {
@@ -230,7 +222,7 @@ var sbCommonUtils = {
 
     getContentDir: function(aID, aSuppressCreate, aSkipIdCheck) {
         if ( !aSkipIdCheck && !this.validateID(aID) ) {
-            this.alert(lang("scrapbook", "ERR_FAIL_GET_DIR", [aID]));
+            this.alert(lang("ERR_FAIL_GET_DIR", aID));
             return null;
         }
         var dir = this.getScrapBookDir().clone();
@@ -353,7 +345,7 @@ var sbCommonUtils = {
             var resolved = baseURLObj.resolve(aRelURL);
             return this.convertURLToObject(resolved).spec;
         } catch(ex) {
-            console.error(lang("scrapbook", "ERR_FAIL_RESOLVE_URL", [aBaseURL, aRelURL]));
+            console.error(lang("ERR_FAIL_RESOLVE_URL", aBaseURL, aRelURL));
         }
     },
 
@@ -404,7 +396,13 @@ var sbCommonUtils = {
             istream.init(aFile, 1, 0, false);
             var sstream = Components.classes['@mozilla.org/scriptableinputstream;1'].createInstance(Components.interfaces.nsIScriptableInputStream);
             sstream.init(istream);
-            var content = sstream.read(sstream.available());
+            // only Firefox >= 4 supports readBytes method
+            // fallback to read, which gets truncated output when meeting a null byte
+            if (sstream.readBytes) {
+                var content = sstream.readBytes(sstream.available());
+            } else {
+                var content = sstream.read(sstream.available());
+            }
             sstream.close();
             istream.close();
             return content;
@@ -458,9 +456,16 @@ var sbCommonUtils = {
             if (aNoCatch) {
                 throw ex;
             } else {
-                this.alert(lang("scrapbook", "ERR_FAIL_WRITE_FILE", [aFile.path, ex]));
+                this.alert(lang("ERR_FAIL_WRITE_FILE", aFile.path, ex));
             }
         }
+    },
+
+    writeFileBytes: function (aFile, aBytes) {
+        var ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
+        ostream.init(aFile, -1, 0666, 0);
+        ostream.write(aBytes, aBytes.length);
+        ostream.close();
     },
 
     writeIndexDat: function(aItem, aFile) {
@@ -473,6 +478,15 @@ var sbCommonUtils = {
             content += prop + "\t" + aItem[prop] + "\n";
         }
         this.writeFile(aFile, content, "UTF-8");
+    },
+
+    // check if two files are identical
+    compareFiles: function(aFile1, aFile2) {
+        // quick check for difference and to prevent an error
+        if (!(aFile1.exists() && aFile2.exists() && aFile1.isFile() && aFile2.isFile() && aFile1.fileSize == aFile2.fileSize)) {
+            return false;
+        }
+        return (this.readFile(aFile1) === this.readFile(aFile2));
     },
 
     saveTemplateFile: function(aURISpec, aFile, aOverwrite) {
@@ -503,7 +517,7 @@ var sbCommonUtils = {
             curFile.remove(true);
             return true;
         } catch(ex) {
-            this.alert(lang("scrapbook", "ERR_FAIL_REMOVE_FILE", [curFile ? curFile.path : "", ex]));
+            this.alert(lang("ERR_FAIL_REMOVE_FILE", curFile ? curFile.path : "", ex));
             return false;
         }
     },
@@ -641,6 +655,19 @@ var sbCommonUtils = {
         return query;
     },
 
+    parseDataURI: function (aDataURI) {
+        var match = aDataURI.match(/^data:(?:\/\/)?([^;]*)(?:;charset=([^;,]*))?(?:;(base64))?,([\s\S]*)$/i);
+        if (match) {
+            return {
+                mime: match[1],
+                charset: match[2],
+                base64: !!match[3],
+                data: match[4],
+            };
+        }
+        return null;
+    },
+
 
     /****************************************************************
      * Javascript object utilies
@@ -666,8 +693,15 @@ var sbCommonUtils = {
         return decodeURIComponent(escape(bytes));
     },
 
+    // supported data types: "B64", "BYTES", "TEXT", "ARRAYBUFFER"
+    sha1: function (data, type) {
+        var shaObj = new jsSHA("SHA-1", type);
+        shaObj.update(data);
+        return shaObj.getHash("HEX");
+    },
+
     escapeComment: function(aStr) {
-        if ( aStr.length > 10000 ) this.alert(lang("scrapbook", "MSG_LARGE_COMMENT"));
+        if ( aStr.length > 10000 ) this.alert(lang("MSG_LARGE_COMMENT"));
         return aStr.replace(/\r|\n|\t/g, " __BR__ ");
     },
 
@@ -741,6 +775,13 @@ var sbCommonUtils = {
         return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
     },
 
+    getUUID: function () {
+        return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function (c) {
+            var r = Math.random()*16|0, v = c == 'x' ? r : (r&0x3|0x8);
+            return v.toString(16);
+        });
+    },
+    
     formatFileSize: function (bytes, si) {
         var thresh = si ? 1000 : 1024;
         var units = si

@@ -1,0 +1,10 @@
+Scrapbook X 1.12.0a18
+=====================
+
+Changes since v1.12.0a17
+------------------------
+
+- UPDATE: Remove README and RELEASE files from the source (moved to the wiki).
+- UPDATE: Insert source of HTML editor now uses monospace font.
+- FIXED: Insert source of HTML editor messed up the selection range when it's cancled.
+- FIXED: Backup rdf files are not auto cleaned normally.

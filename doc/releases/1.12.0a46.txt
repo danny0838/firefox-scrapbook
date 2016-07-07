@@ -1,0 +1,10 @@
+Scrapbook X 1.12.0a46
+=====================
+
+Changes since v1.12.0a45
+------------------------
+
+- FIXED: The combine wizard doesn't work properly if the user goes back from the preview page.
+- UPDATE: Adjusted the "position" style definition of the output HTML for the combine wizard.
+- UPDATE: Scripts for the search page of "Output HTML tree" are now saved to tree/search.js.
+- UPDATE: Optimized the internal codes.

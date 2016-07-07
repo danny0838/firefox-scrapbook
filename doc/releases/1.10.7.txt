@@ -1,0 +1,7 @@
+Scrapbook X 1.10.7
+==================
+
+Changes since v1.10.6
+---------------------
+
+- FIXED: web pages with non-ASCII name cause the link rebuilding process to freeze.

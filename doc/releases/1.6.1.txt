@@ -1,0 +1,33 @@
+ScrapBook X 1.6.1
+=================
+
+This is the first ScrapBook X release, which is based on ScrapBook 1.5.9.
+
+
+Changes since ScrapBook 1.5.9
+-----------------------------
+
+Bug fixes:
+- Fixed an issue that frame pages are messed up after capture and that some of them are not captured.
+- Fixed an issue that deep capture process frequently freezes.
+- Fixed an issue that re-capture prompts multiples dialogs.
+
+Improve the editor:
+- Delete and DOMEraser can now delete all ScrapBook additions, including highlights, inline annotation, sticky annotations, attached links, etc.
+- Removing a highlight no longer leaves an empty span tag.
+- No longer creates an empty span at the end of the previous paragraph or at the start of the next paragraph it no contents are in them.
+
+Improve the undo function:
+- Now all ScrapBook edit actions are undo-able and no longer asks for saving. (Note: linking to another page or moving a tab to another window still purges the action history)
+- Undos are now infinite, instead of only once.
+- Correctly separates the undo action across different tabs.
+
+Improve file name support:
+- Non-ASCII chars in the file name can now be preserved. Long file names are truncated to prevent potential issues.
+
+Support subfolders:
+- Allow subfolders in under each data entry (directory). Correctly calculates size of files in subfolders and no errors on deleting a data with subfolder in it. (ScrapBook doesn't create subfolders on capturing data, but you can add them manually, to embed web data from other sources)
+
+Others:
+- No longer opens the item clicked if Shift or Ctrl key is down for multiple selection.
+- All highlights and annotations are added "data-sb-obj" attribute for better scripting or automation.

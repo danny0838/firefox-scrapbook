@@ -1,0 +1,14 @@
+Scrapbook X 1.11.0
+==================
+
+Changes since v1.10.7
+---------------------
+
+- NEW: add "Media" option, media is only saved with it checked.
+- NEW: capture page with the original encoding.
+- NEW: capture text-like files (css, js, xml, ...) as html.
+- NEW: fulltext search is now available for text-like files (with known encoding).
+- UPDATE: improve the UI for "Capture As".
+- UPDATE: records and views charset for files.
+- UPDATE: fulltext search is now more precise for frame pages.
+- FIXED: charset for deep capture doesn't work.

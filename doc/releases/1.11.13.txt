@@ -1,0 +1,8 @@
+Scrapbook X 1.11.13
+===================
+
+Changes since v1.11.12
+----------------------
+
+- UPDATE: Replace save confirm before exit with exit confirm, and it works for all unsaved pages.
+- FIXED: Minor internal code fix.

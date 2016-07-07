@@ -1,0 +1,8 @@
+Scrapbook X 1.12.0a20
+=====================
+
+Changes since v1.12.0a19
+------------------------
+
+- FIXED: Sometimes an access denied error happens and causes the original file deleted on saving a page or a file.
+- FIXED: Now reports the exact file having an error to remove during deleting a data item.

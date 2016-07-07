@@ -1,0 +1,8 @@
+Scrapbook X 1.11.14
+===================
+
+Changes since v1.11.13
+----------------------
+
+- UPDATE: Adjust linefeeds between <html> and <head>, and after </html>.
+- FIXED: Drag and drop in the export manager doesn't work.

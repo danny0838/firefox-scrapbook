@@ -1,0 +1,11 @@
+Scrapbook X 1.12.0a2
+====================
+
+Changes since v1.12.0a
+----------------------
+
+- UPDATE: Add Shift+Enter and Shift+Space shortcuts for DOMEraser, to isolate the selected element.
+- UPDATE: Allow respecifying the charset of tree items. (NOTE: the charset of the data files are not changed by this. This is for fulltext index to determine the data encoding, and you should recreate the cache after changing this)
+- FIXED: Several non-editable URIs are regarded as editable.
+- FIXED: "Add-on Functions" menu doesn't work.
+- FIXED: Improve compatibility for ScrapBook addons.

@@ -1,0 +1,15 @@
+Scrapbook X 1.12.0a16
+=====================
+
+Changes since v1.12.0a15
+------------------------
+
+- UPDATE: Improved combine view of folder. Each item height is auto-adjusted by the data item content.
+- UPDATE: Adjusted the behavior of insert source of HTML editor. Now edits only the selected range but displays important context fragments for reference and modification.
+- UPDATE: Ctrl+Alt+7 of HTML editor now sets to div block.
+- UPDATE: Alt+I of HTML editor can now backup the current page into a history sub-page, which are not editable and are not included in fulltext search.
+- UPDATE: Moved the preference "Export folders" to the export/import manager.
+- UPDATE: No more auto fix data on export, instead, added an option to determine whether to convert data into latest version format on import.
+- UPDATE: Output HTML tree now shows the title of separators.
+- UPDATE: Output HTML tree now opens bookmarks in a new window.
+- UPDATE: Output HTML tree now adds the source URL of data items.

@@ -1,0 +1,405 @@
+<!-- calculate.dtd -->
+<!ENTITY sb.calc.total.size "Celková velikost">
+<!ENTITY sb.calc.diagnosis "Stav položek">
+
+<!-- capture.dtd -->
+<!ENTITY sb.capture "Zachycení">
+<!ENTITY sb.capture.abort "Zrušit">
+<!ENTITY sb.capture.start "Začít">
+<!ENTITY sb.capture.retry "Opakovat">
+<!ENTITY sb.capture.skip "Přeskočit">
+<!ENTITY sb.capture.pause "Pozastavit">
+<!ENTITY sb.capture.finish "Zrušit">
+<!ENTITY sb.capture.filter "Filtr">
+<!ENTITY sb.capture.filter.column.one "Zobrazit/Skrýt">
+<!ENTITY sb.capture.filter.column.two "Filtrovat (regulární výrazy)">
+<!ENTITY sb.capture.filter.accept "Přijmout">
+<!ENTITY sb.capture.filter.accept.tt "změní nebo upraví hodnotu">
+<!ENTITY sb.capture.filter.cancel "Zrušit">
+<!ENTITY sb.capture.filter.cancel.tt "zruší úpravy">
+<!ENTITY sb.capture.filter.delete "Smazat">
+<!ENTITY sb.capture.filter.delete.tt "vyjme filtr ze seznamu">
+<!ENTITY sbp.capture.column.one "Adresa URL">
+<!ENTITY sbp.capture.column.two "Název">
+<!ENTITY sbp.capture.column.three "Stav">
+
+<!-- combine.dtd -->
+<!ENTITY sb.combine.dragdrop "Přetažením ze seznamu přidejte položky v pořadí, ve kterém je chcete sloučit. Můžete také přetáhnout více položek najednou.">
+<!ENTITY sb.combine.preview "Náhled">
+<!ENTITY sb.combine.preview.d "Po ověření správnosti v náhledu klepněte na tlačítko &quot;Sloučit&quot;.">
+<!ENTITY sb.combine.option.remove "Odstranit původní stránky po dokončení sloučení">
+<!ENTITY sbp.combine.up "posunout položku výše">
+<!ENTITY sbp.combine.down "posunout položku níže">
+<!ENTITY sbp.combine.remove "odstranit položku">
+<!ENTITY sbp.combine.newTitle "nový název">
+
+<!-- detail.dtd -->
+<!ENTITY sb.detail.linked.timeout "Časový limit (v sekundách)">
+<!ENTITY sb.detail.linked.charset "Loading charset">
+<!ENTITY sb.detail "Detail zachycení">
+<!ENTITY sb.detail.new.folder "Nová složka">
+<!ENTITY sb.detail.select.folder "Vybrat složku">
+<!ENTITY sb.detail.option "Možnosti">
+<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.images "Obrázky">
+<!ENTITY sb.detail.option.media "Media">
+<!ENTITY sb.detail.option.fonts "Fonts">
+<!ENTITY sb.detail.option.frames "Frames">
+<!ENTITY sb.detail.option.styles "Styly">
+<!ENTITY sb.detail.option.scripts "Scripts">
+<!ENTITY sb.detail.option.keepLink "Keep linking to the source for not-captured objects">
+<!ENTITY sb.detail.option.saveDataURI "Save data URI as file">
+<!ENTITY sb.detail.option.rewriteStyles "Reorganize Styles">
+<!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.forceUtf8 "Save with UTF-8 encoding">
+<!ENTITY sb.detail.linked.file "Stáhnout odkazované soubory">
+<!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
+<!ENTITY sb.detail.linked.file.method1 "Match URL file extension">
+<!ENTITY sb.detail.linked.file.method2 "Match HTTP header and URL file extension">
+<!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped. Invalid RegExp will be skipped.">
+<!ENTITY sb.detail.linked.file.reset "Reset to default">
+<!ENTITY sb.detail.linked.page "Hloubkové zachycení">
+<!ENTITY sb.detail.linked.page.depth "Hloubkově procházet odkazy">
+<!ENTITY sb.detail.linked.page.text "Po dokončení zachycení budou všechny stránky vzájemně propojeny a dojde k vytvoření mapy stránek.">
+<!ENTITY sb.detail.warnAboutRenew "POZNÁMKA: &apos;Zachytit znovu&apos; přepíše předchozí uloženou stránku.">
+<!ENTITY sb.detail.warnAboutScript "POZNÁMKA: JavaScript může způsobit některé problémy.">
+
+<!-- editor.dtd -->
+<!ENTITY sb.toolbar.edit "Editační lišta">
+<!ENTITY sb.toolbar.info "Informační lišta">
+<!ENTITY sb.edit.folderView "Click to view the data directory. Middle-click to open in a new tab.">
+<!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
+<!ENTITY sb.edit.undo "Zpět">
+<!ENTITY sb.edit.save "Uložit změny">
+<!ENTITY sb.edit.comment "Rozšířit oblast pro komentář">
+<!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
+<!ENTITY sb.edit.sticky "Nálepka"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.sticky.create "Vytvořit nálepku"><!-- left for addon compatibility -->
+<!ENTITY sb.edit.freenote.create "Create Freenote">
+<!ENTITY sb.edit.inline.add "Přidat poznámku k výběru">
+<!ENTITY sb.edit.attach.file "Připojit k výběru soubor">
+<!ENTITY sb.edit.attach.link "Připojit k výběru odkaz">
+<!ENTITY sb.edit.attach.innerlink "Attach Inner Link to Selection">
+<!ENTITY sb.edit.cutterTool "Eraser Tool - Click to delete selection. Middle-click to clear ScrapBook notes in the selection.">
+<!ENTITY sb.edit.htmlTool "HTML Editor - Click to activate or deactivate. Pages are editable and edit commands are available via the hotkey or the context menu when activated.">
+<!ENTITY sb.edit.html "HTML Editor">
+<!ENTITY sb.edit.html.color "Edit Color">
+<!ENTITY sb.edit.html.color.forText "Set text color:">
+<!ENTITY sb.edit.html.color.forBg "Set background color:">
+<!ENTITY sb.edit.html.source "Edit HTML Source">
+<!ENTITY sb.edit.html.link "Insert Link">
+<!ENTITY sb.edit.html.link.url "Target URL:">
+<!ENTITY sb.edit.html.link.id "Item ID:">
+<!ENTITY sb.edit.html.link.format "Select insert format:">
+<!ENTITY sb.edit.html.file "Insert File">
+<!ENTITY sb.edit.html.file.pick "Insert file:">
+<!ENTITY sb.edit.html.file.html "Insert sub-page:">
+<!ENTITY sb.edit.html.file.format "Select insert format:">
+<!ENTITY sb.edit.html.backup "Backup the Current Page">
+<!ENTITY sb.edit.html.backup.desc "Description:">
+<!ENTITY sb.edit.html.menu.basic "Text">
+<!ENTITY sb.edit.html.menu.block "Block">
+<!ENTITY sb.edit.html.menu.insert "Insert">
+<!ENTITY sb.edit.html.menu.wrapper "Advanced">
+<!ENTITY sb.edit.html.menuitem.insertSource "Insert or Edit Source">
+<!ENTITY sb.edit.html.menuitem.removeFormat "Clear Formats">
+<!ENTITY sb.edit.html.menuitem.unlink "Clear Links">
+<!ENTITY sb.edit.html.menuitem.save "Save the Page">
+<!ENTITY sb.edit.html.menuitem.quit "Switch HTMLEditor">
+<!ENTITY sb.edit.html.menuitem.bold "Switch Bold">
+<!ENTITY sb.edit.html.menuitem.italic "Switch Italic">
+<!ENTITY sb.edit.html.menuitem.underline "Switch Underline">
+<!ENTITY sb.edit.html.menuitem.strikeThrough "Switch Line-through">
+<!ENTITY sb.edit.html.menuitem.setColor "Set Text and Background Color">
+<!ENTITY sb.edit.html.menuitem.increaseFontSize "Increase Text Size">
+<!ENTITY sb.edit.html.menuitem.decreaseFontSize "Decrease Text Size">
+<!ENTITY sb.edit.html.menuitem.superscript "Switch Superscript">
+<!ENTITY sb.edit.html.menuitem.subscript "Switch Subscript">
+<!ENTITY sb.edit.html.menuitem.formatblock_p "Set to Normal Paragraph">
+<!ENTITY sb.edit.html.menuitem.formatblock_h1 "Set to Header Level 1">
+<!ENTITY sb.edit.html.menuitem.formatblock_h2 "Set to Header Level 2">
+<!ENTITY sb.edit.html.menuitem.formatblock_h3 "Set to Header Level 3">
+<!ENTITY sb.edit.html.menuitem.formatblock_h4 "Set to Header Level 4">
+<!ENTITY sb.edit.html.menuitem.formatblock_h5 "Set to Header Level 5">
+<!ENTITY sb.edit.html.menuitem.formatblock_h6 "Set to Header Level 6">
+<!ENTITY sb.edit.html.menuitem.formatblock_div "Set to DIV Block">
+<!ENTITY sb.edit.html.menuitem.formatblock_pre "Set to PRE Block">
+<!ENTITY sb.edit.html.menuitem.insertUnorderedList "Switch Unordered List">
+<!ENTITY sb.edit.html.menuitem.insertOrderedList "Switch Ordered List">
+<!ENTITY sb.edit.html.menuitem.outdent "Outdent">
+<!ENTITY sb.edit.html.menuitem.indent "Indent">
+<!ENTITY sb.edit.html.menuitem.justifyLeft "Align Left">
+<!ENTITY sb.edit.html.menuitem.justifyRight "Align Right">
+<!ENTITY sb.edit.html.menuitem.justifyCenter "Align Center">
+<!ENTITY sb.edit.html.menuitem.justifyFull "Align Justify">
+<!ENTITY sb.edit.html.menuitem.attachLink "Insert a Link or Innerlink">
+<!ENTITY sb.edit.html.menuitem.attachFile "Insert a File or Sub-page">
+<!ENTITY sb.edit.html.menuitem.backupFile "Create a Backup for this Page">
+<!ENTITY sb.edit.html.menuitem.horizontalLine "Insert a Horizontal Rule">
+<!ENTITY sb.edit.html.menuitem.insertDate "Insert a Date">
+<!ENTITY sb.edit.html.menuitem.insertTodoBox "Insert a Todo Checkbox">
+<!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "Insert a Todo Checkbox (Checked)">
+<!ENTITY sb.edit.html.menuitem.wrapHTML "Format with Template">
+<!ENTITY sb.edit.cutter "Odstranit výběr">
+<!ENTITY sb.edit.remove.iframe "Odstranit VŠECHNY tagy IFRAME">
+<!ENTITY sb.edit.remove.script "Odstranit VŠECHNY tagy SCRIPT">
+<!ENTITY sb.highlighterTool "Highlighter Tool - Click to highlight the selection.">
+<!ENTITY sb.highlighter "Zvýrazňovač">
+<!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
+<!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
+<!ENTITY sb.locate "Zobrazit v postranní liště">
+<!ENTITY sb.indicators "Zobrazit ukazatele typů odkazů">
+<!ENTITY sb.info.home "Domů">
+<!ENTITY sb.info.sitemap "Mapa stránky">
+
+<!-- hlCustom.dtd -->
+<!ENTITY sb.hlCustom.preset "Připravené styly">
+<!ENTITY sb.hlCustom.background "Pozadí">
+<!ENTITY sb.hlCustom.color "Barva">
+<!ENTITY sb.hlCustom.text "Text">
+<!ENTITY sb.hlCustom.bold "Tučně">
+<!ENTITY sb.hlCustom.italic "Kurzíva">
+<!ENTITY sb.hlCustom.line "Přeškrtnutí">
+<!ENTITY sb.hlCustom.border "Rámeček">
+<!ENTITY sb.hlCustom.type "Typ">
+<!ENTITY sb.hlCustom.box "Orámování">
+<!ENTITY sb.hlCustom.underline "Podtržení">
+<!ENTITY sb.hlCustom.style "Styl">
+<!ENTITY sb.hlCustom.solid "Běžný">
+<!ENTITY sb.hlCustom.dotted "Tečkovaný">
+<!ENTITY sb.hlCustom.dashed "Čárkovaný">
+<!ENTITY sb.hlCustom.double "Dvojitý">
+<!ENTITY sb.hlCustom.width "Tloušťka">
+<!ENTITY sb.hlCustom.thin "Tenká">
+<!ENTITY sb.hlCustom.medium "Střední">
+<!ENTITY sb.hlCustom.thick "Tlustá">
+
+<!-- mbManage.dtd -->
+<!ENTITY mb.manager "Multi-ScrapBook Manager">
+<!ENTITY mb.prop.name "Název">
+<!ENTITY mb.prop.path "Cesta">
+<!ENTITY mb.button.add "Přidat">
+<!ENTITY mb.button.edit "Upravit">
+<!ENTITY mb.button.remove "Odstranit">
+
+<!-- multiple.dtd -->
+<!ENTITY sb.multiple.filter "Filtr (regulární výrazy)">
+<!ENTITY sbp.multiple.titleofwebsite "Název webové stránky">
+<!ENTITY sbp.multiple.titleoflink "Název odkazu">
+<!ENTITY sb.multiple.title "Název">
+<!ENTITY sbp.multiple.downloadmethod "Metoda">
+<!ENTITY sb.multiple.url "Adresa URL (zadávejte každou zvlášť na jeden řádek)">
+<!ENTITY sb.multiple.detector "Detektor URL">
+<!ENTITY sb.multiple.detector.plink "Všechny odkazy na stránce">
+<!ENTITY sb.multiple.detector.slink "Všechny odkazy ve výběru">
+<!ENTITY sb.multiple.detector.tabs "Všechny panely otevřené v tomto okně">
+<!ENTITY sb.multiple.detector.local "Všechny místní HTML dokumenty ve složce">
+<!ENTITY sb.multiple.detector.bookmarks "Záložky">
+<!ENTITY sb.multiple.detector.clear "Vyčistit">
+<!ENTITY sbp.multiple.exclude "ignorovat již existující adresy v cílové složce">
+
+<!-- note.dtd -->
+<!ENTITY sb.note.save "Uložit">
+<!ENTITY sb.note.close "Zavřít">
+<!ENTITY sb.note.tools "Nástroje">
+<!ENTITY sb.note.htmlview "Náhled v HTML">
+<!ENTITY sb.note.normalview "Běžný náhled">
+<!ENTITY sb.note.template "Upravit šablonu HTML">
+<!ENTITY sb.note.autolinefeed "Automatické řádkování">
+<!ENTITY sb.note.autolinefeed.t "Přidat tag &lt;br&gt; na konec řádku v &sb.note.htmlview;">
+<!ENTITY sb.note.fontsize "Velikost písma">
+<!ENTITY sb.note.help "Nápověda">
+<!ENTITY sb.note.print "Tisknout">
+<!ENTITY sb.note.exit "Ukončit">
+<!ENTITY sb.note.save.accesskey "S">
+<!ENTITY sb.note.htmlview.accesskey "H">
+<!ENTITY sb.note.normalview.accesskey "N">
+<!ENTITY sb.note.tools.accesskey "o">
+<!ENTITY sb.note.fontsize.accesskey "p">
+<!ENTITY sb.note.print.accesskey "T">
+<!ENTITY sb.note.exit.accesskey "k">
+
+<!-- notify.dtd -->
+<!ENTITY sb.capture.complete "Zachycení bylo dokončeno.">
+<!ENTITY sb.capture.complete.all "Všechna zachycení byla dokončena.">
+
+<!-- output.dtd -->
+<!ENTITY sb.output.option.all "Exportovat celý strom">
+<!ENTITY sb.output.option.frame "Exportovat rám">
+<!ENTITY sb.output.option.open "Otevřít v prohlížeči po dokončení exportování">
+
+<!-- overlay.dtd -->
+<!ENTITY sb.capture.partial "Zachytit výběr">
+<!ENTITY sb.capture.partial.as "Zachytit výběr jako">
+<!ENTITY sb.capture.entire "Zachytit stránku">
+<!ENTITY sb.capture.entire.as "Zachytit stránku jako">
+<!ENTITY sb.capture.frame "Zachytit rám">
+<!ENTITY sb.capture.frame.as "Zachytit rám jako">
+<!ENTITY sb.capture.target "Zachytit odkaz">
+<!ENTITY sb.capture.target.as "Zachytit odkaz jako">
+<!ENTITY sb.capture.alltabs "Zachytit všechny panely">
+<!ENTITY sb.capture.bookmark "Přidat mezi záložky ve ScrapBook">
+<!ENTITY sb.sidebar "Zobrazit v postranní liště">
+<!ENTITY sb.menubar "Hlavní nabídka">
+<!ENTITY sb.editbefore "Upravit před zachycením">
+
+<!-- prefs.dtd -->
+<!ENTITY sb.prefs.main "Hlavní">
+<!ENTITY sb.prefs.keys "Klávesy">
+<!ENTITY sb.prefs.tabs "Panely">
+<!ENTITY sb.prefs.save "Uložit">
+<!ENTITY sb.prefs.edit "Úpravy">
+<!ENTITY sb.prefs.organize "Správa">
+<!ENTITY sb.prefs.advanced "Pokročilé">
+<!ENTITY sb.prefs.ui.contextMenu "Zobrazit v místní nabídce prohlížeče">
+<!ENTITY sb.prefs.ui.contextSubMenu "Podnabídka">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Zobrazit nabídku &apos;Uložit do ScrapBooku&apos;">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Zobrazit maximálně">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "posledních použitých složek">
+<!ENTITY sb.prefs.ui.menuBar "Zobrazit v liště nabídek">
+<!ENTITY sb.prefs.ui.menuBar.icon "Ikona">
+<!ENTITY sb.prefs.ui.toolsMenu "Zobrazit v nabídce položku &apos;Nástroje&apos;">
+<!ENTITY sb.prefs.ui.statusBar "Zobrazit ve stavové liště">
+<!ENTITY sb.prefs.restart "Změna vyžaduje restart aplikace Firefox.">
+<!ENTITY sb.prefs.tabs.tips "Otevřít v panelu pro následující operace">
+<!ENTITY sb.prefs.tabs.note "Upravit poznámku">
+<!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
+<!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
+<!ENTITY sb.prefs.data "Umístění pro ukládání dat">
+<!ENTITY sb.prefs.data.default "Výchozí (Složka s profilem)">
+<!ENTITY sb.prefs.data.custom "Uložit data do">
+<!ENTITY sb.prefs.data.tips "Zvolí složku, kam se budou data rozšíření ScrapBook ukládat.">
+<!ENTITY sb.prefs.multibook.enabled "Zapnout Multi-ScrapBook">
+<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook umožňuje nastavit více umístění, kam se budou data ukládat, a rychle mezi nimi přepínat pomocí tlačítka v nástrojové liště.">
+<!ENTITY sb.prefs.confirmDelete "Varovat při odstraňování uložených položek">
+<!ENTITY sb.prefs.tree.autoCollapse "Při otevírání stromu složek automaticky zavřít ostatní složky">
+<!ENTITY sb.prefs.tree.unshift "Umístit položku na">
+<!ENTITY sb.prefs.tree.unshift.top "první místo ve složce">
+<!ENTITY sb.prefs.tree.unshift.bottom "poslední místo ve složce">
+<!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
+<!ENTITY sb.prefs.showDetailOnDrop "Zobrazit dialogové okno &apos;Zachytit detail&apos; při zachycování přetažením do postranní lišty">
+<!ENTITY sb.prefs.notifyOnComplete "Zobrazit oznámení &apos;Zachycení dokončeno&apos;">
+<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
+<!ENTITY sb.prefs.export "Export Preferences">
+<!ENTITY sb.prefs.import "Import Preferences">
+<!ENTITY sb.prefs.reset "Reset Preferences">
+<!ENTITY sb.button.customize "Přizpůsobit">
+<!ENTITY sb.button.browse "Procházet">
+<!ENTITY sb.button.show "Zobrazit soubory">
+
+<!-- property.dtd -->
+<!ENTITY sb.prop.general "Obecné informace">
+<!ENTITY sb.prop.type "Typ">
+<!ENTITY sb.prop.date "Datum"><!-- left for addon compatibility -->
+<!ENTITY sb.prop.create "Create">
+<!ENTITY sb.prop.modify "Modify">
+<!ENTITY sb.prop.encode "Kódování">
+<!ENTITY sb.prop.size "Velikost">
+<!ENTITY sb.prop.content "Obsah">
+<!ENTITY sb.prop.file "File">
+<!ENTITY sb.prop.folder "Složka">
+<!ENTITY sb.prop.icon "Ikona">
+<!ENTITY sb.prop.icon.change "Změnit">
+<!ENTITY sb.prop.icon.default "Výchozí">
+<!ENTITY sb.prop.icon.favicon "Vybrat favikonu">
+<!ENTITY sb.prop.icon.custom "Vybrat vlastní ikonu">
+<!ENTITY sb.prop.mark "Označit">
+<!ENTITY sb.prop.lock "Lock">
+
+<!-- repair.dtd -->
+<!ENTITY sb.repair.rdfFile "Obnovit scrapbook.rdf">
+<!ENTITY sb.repair.rdfFile.descript "Zkuste tehdy, zmizí-li vám najednou všechna uložená data.">
+<!ENTITY sb.repair.rdfFile.select "Vyberte soubor obsahující zálohovaná data.">
+<!ENTITY sb.repair.rdfFile.file "Soubor">
+<!ENTITY sb.repair.rdfFile.time "Čas">
+<!ENTITY sb.repair.rdfFile.size "Velikost">
+<!ENTITY sb.repair.favicons "Obnovit favikony">
+<!ENTITY sb.repair.favicons.descript "Zkuste tehdy, zmizí-li ze seznamu větší množství favikon.">
+<!ENTITY sb.repair.complete "Dokončeno.">
+
+<!-- scrapbook.dtd -->
+<!ENTITY sb.toggle.all "Otevřít/zavřít všechny složky">
+<!ENTITY sb.tools "Nástroje">
+<!ENTITY sb.tools.options "Nastavení">
+<!ENTITY sb.tools.manage "Správa dat">
+<!ENTITY sb.tools.combine "Průvodce sloučením">
+<!ENTITY sb.tools.trade "Import/Export">
+<!ENTITY sb.tools.multiple "Zachytit více odkazů">
+<!ENTITY sb.tools.directory "Adresář s uloženými daty">
+<!ENTITY sb.tools.calculate "Výpočet velikosti">
+<!ENTITY sb.tools.sorttree "Seřadit obsah">
+<!ENTITY sb.tools.output "Exportovat vše jako HTML">
+<!ENTITY sb.tools.repair "Nouzový stav">
+<!ENTITY sb.tools.addons "Přídavné funkce">
+<!ENTITY sb.note.opentab "Otevřít v panelu">
+
+<!-- sort.dtd -->
+<!ENTITY sb.sort "Seřadit">
+<!ENTITY sb.sort.reverse "Obráceně">
+<!ENTITY sb.sort.title.asc "Seřadit podle názvu (A &gt; Z)">
+<!ENTITY sb.sort.title.desc "Seřadit podle názvu (Z &gt; A)">
+<!ENTITY sb.sort.date.asc "Od nejstaršího k nejnovějšímu">
+<!ENTITY sb.sort.date.desc "Od nejnovějšího k nejstaršímu">
+<!ENTITY sb.sort.grouping "Group by Type">
+<!ENTITY sb.sort.recursive "Seřadit včetně všech podadresářů">
+<!ENTITY sb.sort.warning "Poznámka: Tuto operaci NELZE vrátit zpět.">
+
+<!-- templateHelp.dtd -->
+<!ENTITY sb.thelp.dir "ltr">
+<!ENTITY sb.thelp.title "ScrapBook - Šablona HTML nápovědy">
+<!ENTITY sb.thelp.tags "Dva speciální tagy">
+<!ENTITY sb.thelp.tag1 "Nadpis (první řádek) v poznámce">
+<!ENTITY sb.thelp.tag2 "Obsah (druhý řádek a dál) v poznámce">
+<!ENTITY sb.thelp.preset "Přednastavená šablona">
+
+<!-- trade.dtd -->
+<!ENTITY sb.trade.import "Importovat">
+<!ENTITY sb.trade.export "Exportovat">
+<!ENTITY sb.trade.time "Vyexportováno dne">
+<!ENTITY sb.trade.update "Import as latest ScrapBook X format">
+<!ENTITY sb.trade.restore "Při importu zároveň obnovit strukturu složky">
+<!ENTITY sb.trade.remove "Po dokončení importu odstranit původní soubory">
+<!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">
+
+<!-- tree.dtd -->
+<!ENTITY sb.open "Otevřít">
+<!ENTITY sb.open.native "Open in Default Program">
+<!ENTITY sb.open.tab "Otevřít v panelu">
+<!ENTITY sb.open.newtab "Otevřít v novém panelu">
+<!ENTITY sb.open.source "Otevřít zdrojovou adresu URL">
+<!ENTITY sb.multi "Multi-ScrapBook">
+<!ENTITY sb.show.files "Zobrazit soubory">
+<!ENTITY sb.move "Přesunout">
+<!ENTITY sb.move.into "Přesunout do složky">
+<!ENTITY sb.copy "Copy">
+<!ENTITY sb.renew "Zachytit znovu">
+<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.export "Exportovat">
+<!ENTITY sb.remove "Odstranit">
+<!ENTITY sb.property "Vlastnosti">
+<!ENTITY sb.listview "Seznam">
+<!ENTITY sb.prop.title "Název">
+<!ENTITY sb.prop.comment "Komentář">
+<!ENTITY sbp.prop.url "Adresa URL">
+<!ENTITY sb.prop.id.date "ID">
+<!ENTITY sb.folder.combine "Kombinovaný náhled">
+<!ENTITY sb.folder.openall "Otevřít vše v panelech">
+<!ENTITY sb.folder.manage "Spravovat složku">
+<!ENTITY sb.new.folder "Nová složka">
+<!ENTITY sb.new.separator "Nový oddělovač">
+<!ENTITY sb.new.note "Nová poznámka">
+<!ENTITY sb.new.notex "New Note Page">
+<!ENTITY sb.sort.folder "Seřadit složku">
+<!ENTITY sb.search "Hledat">
+<!ENTITY sb.search.fulltext "Fulltextové vyhledávání">
+<!ENTITY sb.search.all "Vše">
+<!ENTITY sb.search.re "Použít regulární výrazy">
+<!ENTITY sb.search.cs "Rozlišovat malá/VELKÁ">
+<!ENTITY sb.search.cache "Aktualizovat vyrovnávací paměť pro fulltextové vyhledávání">
+<!ENTITY sb.search.clear "Vymazat historii formuláře">
+<!ENTITY sb.search.days "Filtrovat podle dní">
+<!ENTITY mb.manage "Spravovat">
+<!ENTITY mb.profileFolder "Složka s profilem">
+
