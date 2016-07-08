@@ -16,7 +16,6 @@ var sbCaptureOptions = {
         document.getElementById("sbDetailOptionStyles").checked = sbCommonUtils.getPref("capture.default.styles", true);
         document.getElementById("sbDetailOptionScript").checked = sbCommonUtils.getPref("capture.default.script", false);
         document.getElementById("sbDetailOptionAsHtml").checked = sbCommonUtils.getPref("capture.default.asHtml", false);
-        document.getElementById("sbDetailOptionForceUtf8").checked = sbCommonUtils.getPref("capture.default.forceUtf8", true);
         document.getElementById("sbDetailOptionRewriteStyles").checked = sbCommonUtils.getPref("capture.default.rewriteStyles", true);
         document.getElementById("sbDetailOptionKeepLink").checked = sbCommonUtils.getPref("capture.default.keepLink", false);
         document.getElementById("sbDetailOptionSaveDataURI").checked = sbCommonUtils.getPref("capture.default.saveDataURI", false);
@@ -88,7 +87,6 @@ var sbCaptureOptions = {
         this.param.option["styles"] = document.getElementById("sbDetailOptionStyles").checked;
         this.param.option["script"] = document.getElementById("sbDetailOptionScript").checked;
         this.param.option["asHtml"] = document.getElementById("sbDetailOptionAsHtml").checked;
-        this.param.option["forceUtf8"] = document.getElementById("sbDetailOptionForceUtf8").checked;
         this.param.option["rewriteStyles"] = document.getElementById("sbDetailOptionRewriteStyles").checked;
         this.param.option["keepLink"] = document.getElementById("sbDetailOptionKeepLink").checked;
         this.param.option["saveDataURI"] = document.getElementById("sbDetailOptionSaveDataURI").checked;
@@ -105,7 +103,6 @@ var sbCaptureOptions = {
         sbCommonUtils.setPref("capture.default.styles", this.param.option["styles"]);
         sbCommonUtils.setPref("capture.default.script", this.param.option["script"]);
         sbCommonUtils.setPref("capture.default.asHtml", this.param.option["asHtml"]);
-        sbCommonUtils.setPref("capture.default.forceUtf8", this.param.option["forceUtf8"]);
         sbCommonUtils.setPref("capture.default.rewriteStyles", this.param.option["rewriteStyles"]);
         sbCommonUtils.setPref("capture.default.keepLink", this.param.option["keepLink"]);
         sbCommonUtils.setPref("capture.default.saveDataURI", this.param.option["saveDataURI"]);
