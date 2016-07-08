@@ -346,17 +346,6 @@ var sbCommonUtils = {
         return aURL.match(sbPath) ? RegExp.$1 : null;
     },
 
-    resolveURL: function(aBaseURL, aRelURL) {
-        try {
-            // URLObj.spec is encoded and usable URI
-            var baseURLObj = this.convertURLToObject(aBaseURL);
-            var resolved = baseURLObj.resolve(aRelURL);
-            return this.convertURLToObject(resolved).spec;
-        } catch(ex) {
-            console.error(lang("scrapbook", "ERR_FAIL_RESOLVE_URL", [aBaseURL, aRelURL]));
-        }
-    },
-
     validateID: function(aID) {
         return typeof(aID) == "string" && /^\d{14}$/.test(aID);
     },
@@ -591,6 +580,17 @@ var sbCommonUtils = {
     splitURLByAnchor: function(aURL) {
         var pos = 0;
         return ( (pos = aURL.indexOf("#")) < 0 ) ? [aURL, ""] : [aURL.substring(0, pos), aURL.substring(pos, aURL.length)];
+    },
+
+    resolveURL: function(aBaseURL, aRelURL) {
+        try {
+            // URLObj.spec is encoded and usable URI
+            var baseURLObj = this.convertURLToObject(aBaseURL);
+            var resolved = baseURLObj.resolve(aRelURL);
+            return this.convertURLToObject(resolved).spec;
+        } catch(ex) {
+            console.error(lang("scrapbook", "ERR_FAIL_RESOLVE_URL", [aBaseURL, aRelURL]));
+        }
     },
 
     convertPathToFile: function(aPath) {
