@@ -687,6 +687,11 @@ var sbCommonUtils = {
         return aStr.replace(/[&<>"']| (?= )/g, function(m){ return list[m]; });
     },
 
+    // add a thin space between "--" in the comment to prevent exploits
+    escapeHTMLComment: function(aStr) {
+        return aStr.replace(/--/g, "-\u2009-");
+    },
+
     escapeRegExp: function(aString) {
         return aString.replace(/([\*\+\?\.\^\/\$\\\|\[\]\{\}\(\)])/g, "\\$1");
     },

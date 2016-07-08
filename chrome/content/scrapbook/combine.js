@@ -413,8 +413,7 @@ var sbPageCombiner = {
     },
 
     getCiteHTML: function(aType) {
-        // add a thin space between "--" in the comment to prevent exploits
-        var src = '\n<!--' + sbCombineService.postfix.replace(/--/g, "- -") + '-->\n';
+        var src = '\n<!--' + sbCommonUtils.escapeHTMLComment(sbCombineService.postfix) + '-->\n';
         var title = sbDataSource.getProperty(sbCombineService.curRes, "title");
         var linkURL = "";
         switch ( aType ) {
