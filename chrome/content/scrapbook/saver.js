@@ -127,7 +127,7 @@ var sbContentSaver = {
             this.favicon = iconFileName;
         }
         if ( this.httpTask[this.item.id] == 0 ) {
-            setTimeout(function(){ sbCaptureObserverCallback.onCaptureComplete(sbContentSaver.item); }, 100);
+            setTimeout(function(){ sbCaptureObserverCallback.onAllDownloadsComplete(sbContentSaver.item); }, 100);
         }
         this.addResource(aResName, aResIndex);
         return [sbCommonUtils.splitFileName(newName)[0], this.file2URL, this.item.title];
