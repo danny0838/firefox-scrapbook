@@ -35,6 +35,7 @@ var sbContentSaver = {
             "rewriteStyles": sbCommonUtils.getPref("capture.default.rewriteStyles", true),
             "keepLink": sbCommonUtils.getPref("capture.default.keepLink", false),
             "saveDataURI": sbCommonUtils.getPref("capture.default.saveDataURI", false),
+            "serializeFilename": sbCommonUtils.getPref("capture.default.serializeFilename", false),
             "downLinkMethod": 0, // active only if explicitly set in detail dialog
             "downLinkFilter": "",
             "inDepth": 0, // active only if explicitly set in detail dialog
@@ -1214,6 +1215,9 @@ var sbContentSaver = {
      * @return  [(string) newFileName, (bool) isDuplicated]
      */
     getUniqueFileName: function(aSuggestFileName, aSourceURL, aSourceDoc) {
+        if (this.option["serializeFilename"]) {
+            return this.getUniqueFileNameSerialize(aSuggestFileName, aSourceURL, aSourceDoc);
+        }
         var newFileName = sbCommonUtils.validateFileName(aSuggestFileName || "untitled");
         var [newFileBase, newFileExt] = sbCommonUtils.splitFileName(newFileName);
         newFileBase = sbCommonUtils.crop(sbCommonUtils.crop(newFileBase, 240, true), 128);
@@ -1265,6 +1269,47 @@ var sbContentSaver = {
         //         or as a post-renaming-result of case 5 or 6.
         this.file2URL[newFileNameCI] = sourceURL;
         this.file2Doc[newFileNameCI] = sourceDoc;
+        return [newFileName, false];
+    },
+    
+    getUniqueFileNameSerialize: function(aSuggestFileName, aSourceURL, aSourceDoc) {
+        if (!arguments.callee._file2URL || (arguments.callee._file2URL !== this.file2URL)) {
+            arguments.callee._file2URL = this.file2URL;
+            arguments.callee.fileBase2URL = {};
+            for (var keyFileName in this.file2URL) {
+                var keyFileBase = sbCommonUtils.splitFileName(keyFileName)[0];
+                arguments.callee.fileBase2URL[keyFileBase] = this.file2URL[keyFileName];
+            }
+        }
+        var newFileName = sbCommonUtils.validateFileName(aSuggestFileName || "untitled");
+        var [newFileBase, newFileExt] = sbCommonUtils.splitFileName(newFileName);
+        newFileBase = "index";
+        newFileExt = (newFileExt || "dat").toLowerCase();
+        var sourceURL = sbCommonUtils.splitURLByAnchor(aSourceURL)[0];
+        var sourceDoc = aSourceDoc;
+
+        // CI means case insensitive
+        var seq = 0;
+        newFileName = newFileBase + "." + newFileExt;
+        while (arguments.callee.fileBase2URL[newFileBase] !== undefined) {
+            // special handle index.html
+            if (newFileName === "index.html" && this.file2URL[newFileName] === undefined) {
+                break;
+            }
+            if (this.file2URL[newFileName] === sourceURL) {
+                if (this.file2Doc[newFileName] === sourceDoc || !sourceDoc) {
+                    return [newFileName, true];
+                } else if (!this.file2Doc[newFileName]) {
+                    this.file2Doc[newFileName] = sourceDoc;
+                    return [newFileName, false];
+                }
+            }
+            newFileBase = "file" + "_" + sbCommonUtils.pad(++seq, 8);
+            newFileName = newFileBase + "." + newFileExt;
+        }
+        arguments.callee.fileBase2URL[newFileBase] = sourceURL;
+        this.file2URL[newFileName] = sourceURL;
+        this.file2Doc[newFileName] = sourceDoc;
         return [newFileName, false];
     },
 
