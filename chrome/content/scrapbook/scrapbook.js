@@ -416,14 +416,9 @@ var sbController = {
                 break;
             case "N": 
                 var index = sbCommonUtils.getContentDir(id); index.append("index.html");
-                // use a simple heuristic match for meta tag refresh
-                // should be enough for most cases
-                if (sbCommonUtils.readFile(index).match(/\s*content="\d+;URL=([^"]+)"/i)) {
-                    var relURL = sbCommonUtils.convertToUnicode(RegExp.$1, "UTF-8");
-                    var URI1 = sbCommonUtils.convertFilePathToURL(index.path);
-                    var URI2 = sbCommonUtils.resolveURL(URI1, relURL);
-                    var file = sbCommonUtils.convertURLToFile(URI2);
-                    this.launch(file);
+                var redirectFile = sbCommonUtils.readMetaRefresh(index);
+                if (redirectFile) {
+                    this.launch(redirectFile);
                 }
                 break;
             case "L": 

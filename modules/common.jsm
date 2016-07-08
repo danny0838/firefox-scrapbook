@@ -513,6 +513,19 @@ var sbCommonUtils = {
         return aString;
     },
 
+    // use a simple heuristic match for meta tag refresh
+    // should be enough for most cases
+    readMetaRefresh: function(aDocFile) {
+        if (sbCommonUtils.readFile(aDocFile).match(/\s*content="\d+;URL=([^"]+)"/i)) {
+            var relURL = sbCommonUtils.convertToUnicode(RegExp.$1, "UTF-8");
+            var URI1 = sbCommonUtils.convertFilePathToURL(aDocFile.path);
+            var URI2 = sbCommonUtils.resolveURL(URI1, relURL);
+            var file2 = sbCommonUtils.convertURLToFile(URI2);
+            return file2;
+        }
+        return false;
+    },
+
 
     /****************************************************************
      * MIME utilities
