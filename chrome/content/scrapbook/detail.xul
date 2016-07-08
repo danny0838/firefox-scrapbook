@@ -60,7 +60,6 @@
                     <checkbox id="sbDetailOptionSaveDataURI" label="&sb.detail.option.saveDataURI;" />
                     <checkbox id="sbDetailOptionKeepLink" label="&sb.detail.option.keepLink;" />
                     <checkbox id="sbDetailOptionRewriteStyles" label="&sb.detail.option.rewriteStyles;" />
-                    <checkbox id="sbDetailOptionForceUtf8" label="&sb.detail.option.forceUtf8;" />
                     <checkbox id="sbDetailOptionAsHtml" label="&sb.detail.option.asHtml;" />
                 </groupbox>
                 <groupbox group="capture-options" style="margin-top:8px;">
