@@ -1,3 +1,12 @@
+Scrapbook X 1.12.33
+----------------
+
+- FIXED: HTML5 <video> and <audio> tags with "src" attribute are not captured correctly.
+- FIXED: Bookmarks in the search results of the "Output HTML tree" search script do not point to the correct address.
+- FIXED: A rudendant page is created if an embeded media happen to linked to a webpage in certain rare cases.
+- UPDATE: Internal code optimization.
+
+
 Scrapbook X 1.12.32
 ----------------
 
