@@ -127,7 +127,7 @@ var sbContentSaver = {
             this.favicon = iconFileName;
         }
         if ( this.httpTask[this.item.id] == 0 ) {
-            setTimeout(function(){ sbCaptureObserverCallback.onCaptureComplete(sbContentSaver.item); }, 100);
+            setTimeout(function(){ sbCaptureObserverCallback.onAllDownloadsComplete(sbContentSaver.item); }, 100);
         }
         this.addResource(aResName, aResIndex);
         return [sbCommonUtils.splitFileName(newName)[0], this.file2URL, this.item.title];
@@ -1319,19 +1319,25 @@ var sbCaptureObserverCallback = {
             sbCommonUtils.writeFile(file, content, charset);
         });
 
-        if ( sbContentSaver.favicon ) {
-            sbContentSaver.favicon = sbContentSaver.restoreFileNameFromHash(sbContentSaver.favicon);
-            aItem.icon = sbCommonUtils.escapeFileName(sbContentSaver.favicon);
-        }
-
         // fix resource settings after capture complete
         // If it's an indepth capture, sbContentSaver.treeRes will be null for non-main documents,
         // and thus we don't have to update the resource for many times.
         var res = sbContentSaver.treeRes;
         if (res && sbDataSource.exists(res)) {
             sbDataSource.setProperty(res, "type", aItem.type);
+            if ( sbContentSaver.favicon ) {
+                sbContentSaver.favicon = sbContentSaver.restoreFileNameFromHash(sbContentSaver.favicon);
+                aItem.icon = sbCommonUtils.escapeFileName(sbContentSaver.favicon);
+            }
+            // We replace the "scrapbook://" and skip adding "resource://" to prevent an issue
+            // for URLs containing ":", such as "moz-icon://".
             if (aItem.icon) {
-                var iconURL = "resource://scrapbook/data/" + aItem.id + "/" + aItem.icon;
+                aItem.icon = sbContentSaver.restoreFileNameFromHash(aItem.icon);
+                if (aItem.icon.indexOf(":") >= 0) {
+                    var iconURL = aItem.icon;
+                } else {
+                    var iconURL = "resource://scrapbook/data/" + aItem.id + "/" + aItem.icon;
+                }
                 sbDataSource.setProperty(res, "icon", iconURL);
             }
             sbCommonUtils.rebuildGlobal();
