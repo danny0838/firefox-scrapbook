@@ -346,17 +346,6 @@ var sbCommonUtils = {
         return aURL.match(sbPath) ? RegExp.$1 : null;
     },
 
-    resolveURL: function(aBaseURL, aRelURL) {
-        try {
-            // URLObj.spec is encoded and usable URI
-            var baseURLObj = this.convertURLToObject(aBaseURL);
-            var resolved = baseURLObj.resolve(aRelURL);
-            return this.convertURLToObject(resolved).spec;
-        } catch(ex) {
-            console.error(lang("scrapbook", "ERR_FAIL_RESOLVE_URL", [aBaseURL, aRelURL]));
-        }
-    },
-
     validateID: function(aID) {
         return typeof(aID) == "string" && /^\d{14}$/.test(aID);
     },
@@ -404,7 +393,13 @@ var sbCommonUtils = {
             istream.init(aFile, 1, 0, false);
             var sstream = Components.classes['@mozilla.org/scriptableinputstream;1'].createInstance(Components.interfaces.nsIScriptableInputStream);
             sstream.init(istream);
-            var content = sstream.read(sstream.available());
+            // only Firefox >= 4 supports readBytes method
+            // fallback to read, which gets truncated output when meeting a null byte
+            if (sstream.readBytes) {
+                var content = sstream.readBytes(sstream.available());
+            } else {
+                var content = sstream.read(sstream.available());
+            }
             sstream.close();
             istream.close();
             return content;
@@ -518,6 +513,19 @@ var sbCommonUtils = {
         return aString;
     },
 
+    // use a simple heuristic match for meta tag refresh
+    // should be enough for most cases
+    readMetaRefresh: function(aDocFile) {
+        if (sbCommonUtils.readFile(aDocFile).match(/\s*content="\d+;URL=([^"]+)"/i)) {
+            var relURL = sbCommonUtils.convertToUnicode(RegExp.$1, "UTF-8");
+            var URI1 = sbCommonUtils.convertFilePathToURL(aDocFile.path);
+            var URI2 = sbCommonUtils.resolveURL(URI1, relURL);
+            var file2 = sbCommonUtils.convertURLToFile(URI2);
+            return file2;
+        }
+        return false;
+    },
+
 
     /****************************************************************
      * MIME utilities
@@ -585,6 +593,17 @@ var sbCommonUtils = {
     splitURLByAnchor: function(aURL) {
         var pos = 0;
         return ( (pos = aURL.indexOf("#")) < 0 ) ? [aURL, ""] : [aURL.substring(0, pos), aURL.substring(pos, aURL.length)];
+    },
+
+    resolveURL: function(aBaseURL, aRelURL) {
+        try {
+            // URLObj.spec is encoded and usable URI
+            var baseURLObj = this.convertURLToObject(aBaseURL);
+            var resolved = baseURLObj.resolve(aRelURL);
+            return this.convertURLToObject(resolved).spec;
+        } catch(ex) {
+            console.error(lang("scrapbook", "ERR_FAIL_RESOLVE_URL", [aBaseURL, aRelURL]));
+        }
     },
 
     convertPathToFile: function(aPath) {
@@ -679,6 +698,11 @@ var sbCommonUtils = {
     escapeHTMLWithSpace: function(aStr, aNoDoubleQuotes, aSingleQuotes, aNoAmp) {
         var list = {"&": (aNoAmp ? "&" : "&amp;"), "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&#39;" : "'"), " ": "&nbsp;" };
         return aStr.replace(/[&<>"']| (?= )/g, function(m){ return list[m]; });
+    },
+
+    // add a thin space between "--" in the comment to prevent exploits
+    escapeHTMLComment: function(aStr) {
+        return aStr.replace(/--/g, "-\u2009-");
     },
 
     escapeRegExp: function(aString) {

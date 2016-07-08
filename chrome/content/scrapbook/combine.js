@@ -413,21 +413,15 @@ var sbPageCombiner = {
     },
 
     getCiteHTML: function(aType) {
-        // add a thin space between "--" in the comment to prevent exploits
-        var src = '\n<!--' + sbCombineService.postfix.replace(/--/g, "- -") + '-->\n';
+        var src = '\n<!--' + sbCommonUtils.escapeHTMLComment(sbCombineService.postfix) + '-->\n';
         var title = sbDataSource.getProperty(sbCombineService.curRes, "title");
         var linkURL = "";
         switch ( aType ) {
             case "file":
-                var htmlFile = sbCommonUtils.getContentDir(sbCombineService.curID);
-                htmlFile.append("index.html");
-                if (sbCommonUtils.readFile(htmlFile).match(/\s*content="\d+;URL=([^"]+)"/i)) {
-                    var file = sbCommonUtils.getContentDir(sbCombineService.curID); file.append("index.html");
-                    var relURL = sbCommonUtils.convertToUnicode(RegExp.$1, "UTF-8");
-                    var URI1 = sbCommonUtils.convertFilePathToURL(file.path);
-                    var URI2 = sbCommonUtils.resolveURL(URI1, relURL);
-                    var file2 = sbCommonUtils.convertURLToFile(URI2);
-                    linkURL = sbCommonUtils.convertFilePathToURL(file2.path);
+                var htmlFile = sbCommonUtils.getContentDir(sbCombineService.curID); htmlFile.append("index.html");
+                var targetFile = sbCommonUtils.readMetaRefresh(htmlFile);
+                if (targetFile) {
+                    linkURL = sbCommonUtils.convertFilePathToURL(targetFile.path);
                 }
                 break;
             case "note":

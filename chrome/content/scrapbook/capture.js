@@ -13,7 +13,6 @@ var gPreset = [];
 var gContext = "";
 var gCharset = "";
 var gTitles = [];
-var gTitle;
 var gTimeout = null;
 
 
@@ -238,7 +237,6 @@ var sbCaptureTask = {
         }
         this.refreshHash = {};
         var url = aOverriddenURL || gURLs[this.index];
-        if ( gTitles ) gTitle = gTitles[this.index];
         SB_trace(sbCommonUtils.lang("capture", "CONNECT", [url]));
         this.sniffer = new sbHeaderSniffer(url, gRefURL);
         this.sniffer.checkURL();
@@ -678,7 +676,7 @@ var sbInvisibleBrowser = {
         sbCaptureTask.toggleSkipButton(false);
         var preset = gReferItem ? [gReferItem.id, SB_suggestName(this.ELEMENT.currentURI.spec), gOption, gFile2URL, gDepths[sbCaptureTask.index]] : null;
         if ( gPreset ) preset = gPreset;
-        var ret = sbContentSaver.captureWindow(this.ELEMENT.contentWindow, false, gShowDetail, gResName, gResIdx, preset, gContext, gTitle);
+        var ret = sbContentSaver.captureWindow(this.ELEMENT.contentWindow, false, gShowDetail, gResName, gResIdx, preset, gContext, gTitles[sbCaptureTask.index]);
         if ( ret ) {
             if ( gContext == "indepth" ) {
                 gURL2Name[sbCaptureTask.URL] = ret[0];

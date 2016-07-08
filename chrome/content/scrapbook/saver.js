@@ -26,10 +26,12 @@ var sbContentSaver = {
         this.name = "index";
         this.favicon = null;
         this.file2URL = { "index.dat": true, "index.png": true, "index.rdf": true, "sitemap.xml": true, "sitemap.xsl": true, "sb-file2url.txt": true, "sb-url2name.txt": true, };
+        this.file2Doc = {};
         this.option   = { "dlimg": false, "dlsnd": false, "dlmov": false, "dlarc": false, "custom": "", "inDepth": 0, "isPartial": false, "images": true, "media": true, "fonts": true, "frames": true, "styles": true, "script": false, "asHtml": false, "forceUtf8": true, "rewriteStyles": true, "keepLink": false, "internalize": false };
         this.plusoption = { "timeout": "0", "charset": "UTF-8" }
         this.linkURLs = [];
         this.frames = [];
+        this.canvases = [];
         this.isMainFrame = true;
         if ( aPresetData ) {
             if ( aPresetData[0] ) this.item.id = aPresetData[0];
@@ -175,9 +177,7 @@ var sbContentSaver = {
 
         if ( !this.option["internalize"] ) {
             var useXHTML = (contentType == "application/xhtml+xml") && (!this.option["asHtml"]);
-            var arr = this.getUniqueFileName(aFileKey + (useXHTML?".xhtml":".html"), this.refURLObj.spec, aDocument);
-            var myHTMLFileName = arr[0];
-            var myHTMLFileDone = arr[1];
+            var [myHTMLFileName, myHTMLFileDone] = this.getUniqueFileName(aFileKey + (useXHTML?".xhtml":".html"), this.refURLObj.spec, aDocument);
             if (myHTMLFileDone) return myHTMLFileName;
             // create a meta refresh for each *.xhtml
             if (useXHTML) {
@@ -189,8 +189,7 @@ var sbContentSaver = {
         }
 
         if ( this.option["rewriteStyles"] ) {
-            var arr = this.getUniqueFileName(aFileKey + ".css", this.refURLObj.spec, aDocument);
-            var myCSSFileName = arr[0];
+            var [myCSSFileName] = this.getUniqueFileName(aFileKey + ".css", this.refURLObj.spec, aDocument);
         }
 
         var htmlNode = aDocument.documentElement;
@@ -531,7 +530,21 @@ var sbContentSaver = {
                 }
                 break;
             case "embed": 
-            case "source":  // in <audio> and <vedio>
+            case "audio":
+            case "video":
+                if ( aNode.hasAttribute("src") ) {
+                    if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
+                    if ( this.option["media"] ) {
+                        var aFileName = this.download(aNode.src);
+                        if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
+                    } else if ( this.option["keepLink"] ) {
+                        aNode.setAttribute("src", aNode.src);
+                    } else {
+                        aNode.setAttribute("src", "about:blank");
+                    }
+                }
+                break;
+            case "source":  // in <picture>, <audio> and <video>
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
                     if ( this.option["media"] ) {
@@ -598,7 +611,7 @@ var sbContentSaver = {
                 }
                 aNode.removeAttribute("data-sb-canvas-id");
                 break;
-            case "track":  // in <audio> and <vedio>
+            case "track":  // in <audio> and <video>
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] ) break;
                     aNode.setAttribute("src", aNode.src);
@@ -1109,35 +1122,58 @@ var sbContentSaver = {
     /**
      * @return  [(string) newFileName, (bool) isDuplicated]
      */
-    getUniqueFileName: function(newFileName, aURLSpec, aDocumentSpec) {
-        if ( !newFileName ) newFileName = "untitled";
-        newFileName = newFileName;
-        newFileName = sbCommonUtils.validateFileName(newFileName);
-        var fileLR = sbCommonUtils.splitFileName(newFileName);
-        fileLR[0] = sbCommonUtils.crop(sbCommonUtils.crop(fileLR[0], 240, true), 128);
-        if ( !fileLR[1] ) fileLR[1] = "dat";
-        aURLSpec = sbCommonUtils.splitURLByAnchor(aURLSpec)[0];
+    getUniqueFileName: function(aSuggestFileName, aSourceURL, aSourceDoc) {
+        var newFileName = sbCommonUtils.validateFileName(aSuggestFileName || "untitled");
+        var [newFileBase, newFileExt] = sbCommonUtils.splitFileName(newFileName);
+        newFileBase = sbCommonUtils.crop(sbCommonUtils.crop(newFileBase, 240, true), 128);
+        newFileExt = newFileExt || "dat";
+        var sourceURL = sbCommonUtils.splitURLByAnchor(aSourceURL)[0];
+        var sourceDoc = aSourceDoc;
+
+        // CI means case insensitive
         var seq = 0;
-        newFileName = fileLR[0] + "." + fileLR[1];
+        newFileName = newFileBase + "." + newFileExt;
         var newFileNameCI = newFileName.toLowerCase();
-        while ( this.file2URL[newFileNameCI] != undefined ) {
-            if (this.file2URL[newFileNameCI] == aURLSpec) {
-                if (this.file2Doc[newFileNameCI] == aDocumentSpec) {
-                    // this.file2Doc is mainly to check for dynamic iframes without src attr
-                    // they have exactly same url with the main page
+        while (this.file2URL[newFileNameCI] !== undefined) {
+            if (this.file2URL[newFileNameCI] === sourceURL) {
+                if (this.file2Doc[newFileNameCI] === sourceDoc || !sourceDoc) {
+                    // case 1. this.file2Doc[newFileNameCI] === sourceDoc === undefined
+                    // Has been used by a non-HTML-doc file, e.g. <img src="http://some.url/someFile.png">
+                    // And now used by a non-HTML-doc file, e.g. <link rel="icon" href="http://some.url/someFile.png">
+                    // Action: mark as duplicate and do not download.
+                    //
+                    // case 2. this.file2Doc[newFileNameCI] === sourceDoc !== undefined
+                    // This case is impossible since any two nodes having HTML-doc are never identical.
+                    //
+                    // case 3. this.file2Doc[newFileNameCI] !== sourceDoc === undefined (bad use case)
+                    // Has been used by an HTML doc, e.g. an <iframe src="http://some.url/index_1.html"> saving to index_1.html
+                    // And now used as a non-HTML-doc file, e.g. <img src="http://some.url/index_1.html">
+                    // Action: mark as duplicate and do not download.
                     return [newFileName, true];
                 } else if (!this.file2Doc[newFileNameCI]) {
-                    // if this.file2Doc[newFileName] has no document set,
-                    // it should mean a preset url for the page and is safe to use
-                    this.file2Doc[newFileNameCI] = aDocumentSpec;
+                    // case 4. undefined === this.file2Doc[newFileNameCI] !== sourceDoc (bad use case)
+                    // Has been used by an HTML-doc which had been downloaded as a non-HTML-doc file, e.g. <img src="http://some.url/index_1.html">
+                    // And now used by an HTML-doc, e.g. an <iframe src="http://some.url/index_1.html"> saving to index_1.html
+                    // Action: mark as non-duplicate and capture the parsed doc,
+                    //         and record the sourceDoc so that further usage of sourceURL becomes case 3 or 6.
+                    this.file2Doc[newFileNameCI] = sourceDoc;
                     return [newFileName, false];
                 }
             }
-            newFileName = fileLR[0] + "_" + sbCommonUtils.pad(++seq, 3) + "." + fileLR[1];
+            // case 5. undefined !== this.file2URL[newFileNameCI] !== sourceURL
+            // Action: suggest another name to download.
+            //
+            // case 6. undefined !== this.file2Doc[newFileNameCI] !== sourceDoc !== undefined
+            // Has been used by an HTML-doc, e.g. an <iframe src="http://some.url/index_1.html"> saving to index_1.html
+            // And now used by another HTML doc with same sourceURL, e.g. a (indepth) main page http://some.url/index.html saving to index_1.html
+            // Action: suggest another name to download the doc.
+            newFileName = newFileBase + "_" + sbCommonUtils.pad(++seq, 3) + "." + newFileExt;
             newFileNameCI = newFileName.toLowerCase();
         }
-        this.file2URL[newFileNameCI] = aURLSpec;
-        this.file2Doc[newFileNameCI] = aDocumentSpec;
+        // case 7. undefined === this.file2URL[newFileNameCI] !== sourceURL
+        //         or as a post-renaming-result of case 5 or 6.
+        this.file2URL[newFileNameCI] = sourceURL;
+        this.file2Doc[newFileNameCI] = sourceDoc;
         return [newFileName, false];
     },
 
