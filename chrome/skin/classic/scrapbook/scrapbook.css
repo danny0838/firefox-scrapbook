@@ -69,91 +69,39 @@ menuitem[type="radio"][checked="true"] {
 
 /* ::::: TREE/LIST ::::: */
 
-treechildren::-moz-tree-image(sbTreeColTitle, leaf),
-richlistitem image.sblist-icon {
+treechildren::-moz-tree-image(sbTreeColTitle, leaf) {
     -moz-image-region: auto !important;
     list-style-image: url('chrome://scrapbook/skin/treeitem.png') !important;
     width: 16px; height: 16px;
 }
 
-treechildren::-moz-tree-image(sbTreeColTitle, note),
-richlistitem.note image.sblist-icon {
+treechildren::-moz-tree-image(sbTreeColTitle, note) {
     list-style-image: url('chrome://scrapbook/skin/treenote.png') !important;
 }
 
-treechildren::-moz-tree-image(sbTreeColTitle, notex),
-richlistitem.notex image.sblist-icon {
+treechildren::-moz-tree-image(sbTreeColTitle, notex) {
     list-style-image: url('chrome://scrapbook/skin/treenotex.png') !important;
 }
 
-treechildren::-moz-tree-cell-text(notex),
-richlistitem.marked .sblist-title {
+treechildren::-moz-tree-cell-text(notex) {
     color: rgb(80,0,32);
 }
 
-treechildren::-moz-tree-cell-text(marked),
-richlistitem.marked .sblist-title {
+treechildren::-moz-tree-cell-text(marked) {
     font-weight: bold;
 }
 
-treechildren::-moz-tree-cell-text(combine),
-richlistitem.combine .sblist-title {
+treechildren::-moz-tree-cell-text(combine) {
     color: blue;
 }
 
-treechildren::-moz-tree-cell-text(bookmark),
-richlistitem.bookmark .sblist-title {
+treechildren::-moz-tree-cell-text(bookmark) {
     color: rgb(32,192,32);
-}
-
-richlistitem.separator .sblist-title {
-    color: GrayText;
-}
-
-richlistitem.separator image.sblist-icon {
-    display: none;
 }
 
 treechildren::-moz-tree-cell-text(invalid) {
     color: red;
     font-weight: bold;
-}
-
-
-/* ::::: LIST ::::: */
-
-richlistitem {
-    border-bottom: 1px dotted ThreeDShadow;
-    padding: 3px 2px;
-}
-
-richlistitem[selected="true"] {
-    background-color: transparent;
-    background-image: url('chrome://scrapbook/skin/list_selected.png');
-}
-
-richlistitem .sblist-source {
-    color: #707070;
-}
-
-richlistitem .sblist-comment {
-    margin-top: 3px;
-}
-
-richlistitem .sblist-comment[value=""] {
-    display: none;
-}
-
-#sbListHeader toolbarbutton#sbListMoveUpButton {
-    list-style-image: url('chrome://scrapbook/skin/expander_up.png');
-}
-
-#sbListHeader toolbarbutton#sbListPickerButton {
-    list-style-image: url('chrome://scrapbook/skin/list_picker.png');
-}
-
-#sbListHeader toolbarbutton[type="menu"] dropmarker {
-    display: none;
 }
 
 
