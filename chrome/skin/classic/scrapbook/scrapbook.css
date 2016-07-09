@@ -36,8 +36,9 @@ toolbarbutton#mbToolbarButton {
 }
 
 .sb-create .menu-iconic-icon,
-menuitem#sbPopupRenew    .menu-iconic-icon,
-menuitem#sbPopupRemove   .menu-iconic-icon,
+menuitem#sbPopupRenew .menu-iconic-icon,
+menuitem#sbPopupInternalize .menu-iconic-icon,
+menuitem#sbPopupRemove .menu-iconic-icon,
 menuitem#sbPopupProperty .menu-iconic-icon {
     width : 13px !important;
     height: 13px !important;
@@ -60,7 +61,10 @@ toolbarbutton#sbToolbarProperty {
     list-style-image: url('chrome://scrapbook/skin/menu_property.png');
 }
 
-menuitem#sbPopupRenew { list-style-image: url('chrome://scrapbook/skin/capture_target_as.png'); }
+menuitem#sbPopupRenew,
+menuitem#sbPopupInternalize {
+    list-style-image: url('chrome://scrapbook/skin/capture_target.png');
+}
 
 menuitem[type="radio"][checked="true"] {
     font-weight: bold;
