@@ -61,6 +61,14 @@ toolbarbutton#sbToolbarProperty {
     list-style-image: url('chrome://scrapbook/skin/menu_property.png');
 }
 
+menuitem#sbPopupSend {
+    list-style-image: url('chrome://scrapbook/skin/toolbar_move.png');
+}
+
+menuitem#sbPopupCopy {
+    list-style-image: url('chrome://scrapbook/skin/toolbar_move.png');
+}
+
 menuitem#sbPopupRenew,
 menuitem#sbPopupInternalize {
     list-style-image: url('chrome://scrapbook/skin/capture_target.png');
