@@ -39,7 +39,8 @@ toolbarbutton#mbToolbarButton {
 menuitem#sbPopupRenew .menu-iconic-icon,
 menuitem#sbPopupInternalize .menu-iconic-icon,
 menuitem#sbPopupRemove .menu-iconic-icon,
-menuitem#sbPopupProperty .menu-iconic-icon {
+menuitem#sbPopupProperty .menu-iconic-icon,
+menuitem#sbToolsMenuPopupMultiple .menu-iconic-icon {
     width : 13px !important;
     height: 13px !important;
 }
@@ -71,6 +72,14 @@ menuitem#sbPopupCopy {
 
 menuitem#sbPopupRenew,
 menuitem#sbPopupInternalize {
+    list-style-image: url('chrome://scrapbook/skin/capture_target.png');
+}
+
+menuitem#sbToolsMenuPopupManage {
+    list-style-image: url('chrome://scrapbook/skin/sbpExtra/toolbar_manage.png');
+}
+
+menuitem#sbToolsMenuPopupMultiple {
     list-style-image: url('chrome://scrapbook/skin/capture_target.png');
 }
 
