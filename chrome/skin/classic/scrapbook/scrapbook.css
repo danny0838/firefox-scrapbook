@@ -75,6 +75,11 @@ menuitem#sbPopupInternalize {
     list-style-image: url('chrome://scrapbook/skin/capture_target.png');
 }
 
+menuitem#sbPopupOpenLocate {
+    list-style-image: url('chrome://scrapbook/skin/expander_left.png');
+    height: 13px !important;
+}
+
 menuitem#sbToolsMenuPopupManage {
     list-style-image: url('chrome://scrapbook/skin/sbpExtra/toolbar_manage.png');
 }
