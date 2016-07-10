@@ -55,7 +55,7 @@
 <!ENTITY sb.detail.linked.file.method0 "停用下载链接的文件">
 <!ENTITY sb.detail.linked.file.method1 "比对网址扩展名">
 <!ENTITY sb.detail.linked.file.method2 "比对 HTTP 标头及网址扩展名">
-<!ENTITY sb.detail.linked.file.desc "下载整个扩展名匹配任一行正则表达式的文件。忽略 &quot;#&quot; 开头的行。忽略语法错误的正则表达式。">
+<!ENTITY sb.detail.linked.file.desc "下载整个扩展名匹配任一行正则表达式的文件。忽略 &quot;#&quot; 开头的行。">
 <!ENTITY sb.detail.linked.file.reset "还原默认值">
 <!ENTITY sb.detail.linked.page "深层获取">
 <!ENTITY sb.detail.linked.page.depth "获取链接层数">
