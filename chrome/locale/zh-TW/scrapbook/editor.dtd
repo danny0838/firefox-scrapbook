@@ -71,7 +71,7 @@
 <!ENTITY sb.edit.html.menuitem.insertDate "插入日期">
 <!ENTITY sb.edit.html.menuitem.insertTodoBox "插入待辦事項核取方塊">
 <!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "插入待辦事項核取方塊 (已勾選)">
-<!ENTITY sb.edit.html.menuitem.wrapHTML "用模版格式化">
+<!ENTITY sb.edit.html.menuitem.wrapHTML "用模板格式化">
 <!ENTITY sb.edit.cutterTool "擦子工具 - 點擊刪除選取區，中鍵點擊清除選取區內的 ScrapBook 註記。">
 <!ENTITY sb.edit.cutter "刪除選取區">
 <!ENTITY sb.edit.remove.iframe "刪除所有 IFRAME 標籤">
