@@ -187,7 +187,13 @@ var sbCaptureTask = {
 
     init: function(myURLs) {
         if ( gContext != "indepth" && myURLs.length == 1 ) {
+            this.TREE.collapsed = true;
+            document.getElementById("sbpCaptureProgress").hidden = true;
+            document.getElementById("sbpChkFilter").hidden = true;
             document.getElementById("sbCaptureSkipButton").hidden = true;
+        } else {
+            document.getElementById("sbCaptureWindow").style.width = "800px";
+            document.getElementById("sbCaptureWindow").style.height = "600px";
         }
         if (!gTitles) gTitles = [];
         for ( var i = 0; i < myURLs.length; i++ ) this.add(myURLs[i], 1, gTitles[i]);

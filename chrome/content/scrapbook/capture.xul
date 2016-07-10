@@ -8,7 +8,7 @@
 <window id="sbCaptureWindow"
         title="&sb.capture; - ScrapBook"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        style="width: 800px; height: 600px;"
+        style="width: 360px;"
         onload="SB_initCapture();"
         onclose="event.preventDefault();sbCaptureTask.abort();"
         windowtype="scrapbook">
