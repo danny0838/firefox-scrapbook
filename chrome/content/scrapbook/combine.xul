@@ -38,11 +38,12 @@
                         ondragover="nsDragAndDrop.dragOver(event,sbCombineService.dropObserver);"
                         ondragdrop="nsDragAndDrop.drop(event,sbCombineService.dropObserver);"
                         onclick="sbCombineService.toggleButtons();"
+                        onkeypress="sbCombineService.onKeyPress(event);"
                         flex="1" style="margin-bottom: 12px;" />
                 <vbox flex="1">
-                    <button id="sbpUp" disabled="true" style="height: 25px;" image="chrome://scrapbook/skin/expander_up.png" tooltiptext="&sbp.combine.up;" oncommand="sbCombineService.moveUp();" />
-                    <button id="sbpDown" disabled="true" style="height: 25px;" image="chrome://scrapbook/skin/expander_down.png" tooltiptext="&sbp.combine.down;" oncommand="sbCombineService.moveDown();" />
-                    <button id="sbpDelete" disabled="true" style="height: 25px;" image="chrome://scrapbook/skin/menu_remove.png" tooltiptext="&sbp.combine.remove;" oncommand="sbCombineService.deleteItem();" />
+                    <button id="sbpUp" disabled="true" style="height: 25px;" image="chrome://scrapbook/skin/expander_up.png" tooltiptext="&sbp.combine.up; (Alt+Up)" oncommand="sbCombineService.moveUp();" />
+                    <button id="sbpDown" disabled="true" style="height: 25px;" image="chrome://scrapbook/skin/expander_down.png" tooltiptext="&sbp.combine.down; (Alt+Down)" oncommand="sbCombineService.moveDown();" />
+                    <button id="sbpDelete" disabled="true" style="height: 25px;" image="chrome://scrapbook/skin/menu_remove.png" tooltiptext="&sbp.combine.remove; (Del)" oncommand="sbCombineService.deleteItem();" />
                 </vbox>
             </hbox>
         </vbox>
