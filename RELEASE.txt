@@ -1,3 +1,14 @@
+Scrapbook X 1.12.35
+----------------
+
+- FIXED: Added mssing icons for several user interface commands.
+- UPDATE: The capture dialog now automatically starts the capture process without user confirmation and has a simpler user interface for link capture, capture again, and so on.
+- UPDATE: The "move up", "move down", and "delete" commands in the combine wizard now automatically scrolls the list and keeps the manipulated item visible.
+- UPDATE: Add "Alt+Up", "Alt+Down", and "Delete" as accesskies for the combine wizard commands.
+- UPDATE: Improved seeral zh-CN and zh-TW localization.
+- UPDATE: Trivial internal code documentation updates.
+
+
 Scrapbook X 1.12.33
 ----------------
 
