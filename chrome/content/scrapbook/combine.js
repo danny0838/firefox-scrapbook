@@ -221,7 +221,9 @@ var sbCombineService = {
         var mdNewItem = this.LISTBOX.insertItemAt( mdIndex+1, mdItem.getAttribute("label") );
         mdNewItem.setAttribute("class", "listitem-iconic");
         mdNewItem.setAttribute("image", mdItem.getAttribute("image"));
+        this.LISTBOX.ensureElementIsVisible(mdNewItem);
         this.LISTBOX.selectItem(mdNewItem);
+        this.LISTBOX.focus();
         this.toggleButtons();
     },
 
@@ -234,7 +236,9 @@ var sbCombineService = {
         var muNewItem = this.LISTBOX.insertItemAt( muIndex-1, muItem.getAttribute("label") );
         muNewItem.setAttribute("class", "listitem-iconic");
         muNewItem.setAttribute("image", muItem.getAttribute("image"));
+        this.LISTBOX.ensureElementIsVisible(muNewItem);
         this.LISTBOX.selectItem(muNewItem);
+        this.LISTBOX.focus();
         this.toggleButtons();
     },
 
