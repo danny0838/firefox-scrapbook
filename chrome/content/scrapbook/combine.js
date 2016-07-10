@@ -197,18 +197,10 @@ var sbCombineService = {
     },
 
     deleteItem: function() {
-        //Index festhalten
         var diIndex = this.LISTBOX.selectedIndex;
-        var diCount = this.LISTBOX.getRowCount();
-        var diVorher = "";
-        var diNachhr = "";
-        //Eintrag aus Listbox entfernen
         this.LISTBOX.removeItemAt(diIndex);
-        //this.idList aktualisieren
         this.idList.splice(diIndex, 1);
-        //this.resList aktualisieren
         this.resList.splice(diIndex, 1);
-        //this.parList aktualisieren
         this.parList.splice(diIndex, 1);
         this.toggleButtons();
         this.updateButtons();
@@ -216,42 +208,27 @@ var sbCombineService = {
 
     moveDown: function() {
         var mdIndex = this.LISTBOX.selectedIndex;
-        //Reihenfolge ändern
-        var mdPuffer = this.idList[mdIndex];
-        this.idList[mdIndex] = this.idList[mdIndex+1];
-        this.idList[mdIndex+1] = mdPuffer;
-        var mdPuffer = this.resList[mdIndex];
-        this.resList[mdIndex] = this.resList[mdIndex+1];
-        this.resList[mdIndex+1] = mdPuffer;
-        var mdPuffer = this.parList[mdIndex];
-        this.parList[mdIndex] = this.parList[mdIndex+1];
-        this.parList[mdIndex+1] = mdPuffer;
+        [this.idList[mdIndex], this.idList[mdIndex+1]] = [this.idList[mdIndex+1], this.idList[mdIndex]];
+        [this.resList[mdIndex], this.resList[mdIndex+1]] = [this.resList[mdIndex+1], this.resList[mdIndex]];
+        [this.parList[mdIndex], this.parList[mdIndex+1]] = [this.parList[mdIndex+1], this.parList[mdIndex]];
         var mdItem = this.LISTBOX.removeItemAt(mdIndex);
         var mdNewItem = this.LISTBOX.insertItemAt( mdIndex+1, mdItem.getAttribute("label") );
-        this.LISTBOX.selectItem(mdNewItem);
         mdNewItem.setAttribute("class", "listitem-iconic");
         mdNewItem.setAttribute("image", mdItem.getAttribute("image"));
+        this.LISTBOX.selectItem(mdNewItem);
         this.toggleButtons();
     },
 
     moveUp: function() {
-        //Index bestimmen
         var muIndex = this.LISTBOX.selectedIndex;
-        //Reihenfolge ändern
-        var muPuffer = this.idList[muIndex];
-        this.idList[muIndex] = this.idList[muIndex-1];
-        this.idList[muIndex-1] = muPuffer;
-        var muPuffer = this.resList[muIndex];
-        this.resList[muIndex] = this.resList[muIndex-1];
-        this.resList[muIndex-1] = muPuffer;
-        var muPuffer = this.parList[muIndex];
-        this.parList[muIndex] = this.parList[muIndex-1];
-        this.parList[muIndex-1] = muPuffer;
+        [this.idList[muIndex], this.idList[muIndex-1]] = [this.idList[muIndex-1], this.idList[muIndex]];
+        [this.resList[muIndex], this.resList[muIndex-1]] = [this.resList[muIndex-1], this.resList[muIndex]];
+        [this.parList[muIndex], this.parList[muIndex-1]] = [this.parList[muIndex-1], this.parList[muIndex]];
         var muItem = this.LISTBOX.removeItemAt(muIndex);
         var muNewItem = this.LISTBOX.insertItemAt( muIndex-1, muItem.getAttribute("label") );
-        this.LISTBOX.selectItem(muNewItem);
         muNewItem.setAttribute("class", "listitem-iconic");
         muNewItem.setAttribute("image", muItem.getAttribute("image"));
+        this.LISTBOX.selectItem(muNewItem);
         this.toggleButtons();
     },
 
