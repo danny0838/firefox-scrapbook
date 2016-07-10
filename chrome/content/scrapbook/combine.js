@@ -202,6 +202,12 @@ var sbCombineService = {
         this.idList.splice(diIndex, 1);
         this.resList.splice(diIndex, 1);
         this.parList.splice(diIndex, 1);
+        if (this.LISTBOX.getRowCount() > 0) {
+            var diNewItem = this.LISTBOX.getItemAtIndex(diIndex) || this.LISTBOX.getItemAtIndex(--diIndex);
+            this.LISTBOX.ensureElementIsVisible(diNewItem);
+            this.LISTBOX.selectItem(diNewItem);
+            this.LISTBOX.focus();
+        }
         this.toggleButtons();
         this.updateButtons();
     },
