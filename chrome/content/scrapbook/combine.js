@@ -196,8 +196,15 @@ var sbCombineService = {
         return newRes;
     },
 
+    onKeyPress: function(aEvent) {
+        if ( aEvent.keyCode === aEvent.DOM_VK_DELETE) {
+            this.deleteItem();
+        }
+    },
+
     deleteItem: function() {
         var diIndex = this.LISTBOX.selectedIndex;
+        if (diIndex < 0) return; // no select
         this.LISTBOX.removeItemAt(diIndex);
         this.idList.splice(diIndex, 1);
         this.resList.splice(diIndex, 1);

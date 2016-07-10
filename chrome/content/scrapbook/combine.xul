@@ -47,6 +47,7 @@
                         ondragover="nsDragAndDrop.dragOver(event,sbCombineService.dropObserver);"
                         ondragdrop="nsDragAndDrop.drop(event,sbCombineService.dropObserver);"
                         onclick="sbCombineService.toggleButtons();"
+                        onkeypress="sbCombineService.onKeyPress(event);"
                         flex="1" style="margin-bottom: 12px;" />
                 <vbox flex="1">
                     <button id="sbpUp" disabled="true" style="height: 25px;" image="chrome://scrapbook/skin/expander_up.png" tooltiptext="&sbp.combine.up;" oncommand="sbCombineService.moveUp();" />
