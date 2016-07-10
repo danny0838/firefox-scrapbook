@@ -1,0 +1,14 @@
+Scrapbook X 1.12.35
+===================
+
+We skipped version 1.12.34 to fix a pack error after uploading that version to the Firefox AMO.
+
+Changes since v1.12.33
+----------------------
+
+- FIXED: Added missing icons for several user interface commands.
+- UPDATE: The capture dialog now automatically starts the capture process without user confirmation and has a simpler user interface for link capture, capture again, and so on.
+- UPDATE: The "move up", "move down", and "delete" commands in the combine wizard now automatically scrolls the list and keeps the manipulated item visible.
+- UPDATE: Added "Alt+Up", "Alt+Down", and "Delete" as accesskeys for the combine wizard commands.
+- UPDATE: Improved several zh-CN and zh-TW localization.
+- UPDATE: Trivial internal code documentation updates.

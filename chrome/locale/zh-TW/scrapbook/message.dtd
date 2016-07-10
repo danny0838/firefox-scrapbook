@@ -55,7 +55,7 @@
 <!ENTITY sb.detail.linked.file.method0 "停用下載連結檔案">
 <!ENTITY sb.detail.linked.file.method1 "比對網址副檔名">
 <!ENTITY sb.detail.linked.file.method2 "比對 HTTP 標頭及網址副檔名">
-<!ENTITY sb.detail.linked.file.desc "下載完整副檔名符合任一行正規表示式的檔案。略過 &quot;#&quot; 開頭的行。略過語法錯誤的正規表示式。">
+<!ENTITY sb.detail.linked.file.desc "下載完整副檔名符合任一行正規表示式的檔案。略過 &quot;#&quot; 開頭的行。">
 <!ENTITY sb.detail.linked.file.reset "還原預設值">
 <!ENTITY sb.detail.linked.page "多層擷取">
 <!ENTITY sb.detail.linked.page.depth "擷取連結層數">
@@ -137,7 +137,7 @@
 <!ENTITY sb.edit.html.menuitem.insertDate "插入日期">
 <!ENTITY sb.edit.html.menuitem.insertTodoBox "插入待辦事項核取方塊">
 <!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "插入待辦事項核取方塊 (已勾選)">
-<!ENTITY sb.edit.html.menuitem.wrapHTML "用模版格式化">
+<!ENTITY sb.edit.html.menuitem.wrapHTML "用模板格式化">
 <!ENTITY sb.edit.cutterTool "擦子工具 - 點擊刪除選取區，中鍵點擊清除選取區內的 ScrapBook 註記。">
 <!ENTITY sb.edit.cutter "刪除選取區">
 <!ENTITY sb.edit.remove.iframe "刪除所有 IFRAME 標籤">
@@ -264,7 +264,7 @@
 <!ENTITY sb.prefs.tabs.note "編輯筆記">
 <!ENTITY sb.prefs.edit.autoEditNoteX "筆記頁面自動進入編輯模式">
 <!ENTITY sb.prefs.edit.insertDateFormat "插入日期格式 (strftime):">
-<!ENTITY sb.prefs.edit.wrapperFormat "HTML 格式化模版">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML 格式化模板">
 <!ENTITY sb.prefs.data "擷取資料存放處">
 <!ENTITY sb.prefs.data.default "預設（在您的個人設定檔資料夾中）">
 <!ENTITY sb.prefs.data.custom "存放至">

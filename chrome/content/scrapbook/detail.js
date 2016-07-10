@@ -121,6 +121,26 @@ var sbCaptureOptions = {
             var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
             sbDataSource.setProperty(res, "title", document.getElementById("sbDetailTitle").value);
         }
+        // check for regex error
+        var errors = [];
+        this.param.option["downLinkFilter"].split(/[\r\n]/).forEach(function (srcLine, index) {
+            if (srcLine.charAt(0) === "#") return;
+            var line = srcLine.trim();
+            if (line === "") return;
+            try {
+                new RegExp("^(?:" + line + ")$", "i");
+            } catch (ex) {
+                line =  sbCommonUtils.lang("ERR_CAPTURE_DOWNLINKFILTER_LINE", index+1, srcLine);
+                errors.push(line);
+            }
+        });
+        if (errors.length) {
+            var button = sbCommonUtils.PROMPT.STD_YES_NO_BUTTONS;
+            var text = sbCommonUtils.lang("ERR_CAPTURE_DOWNLINKFILTER", errors.join("\n\n"));
+            // yes => 0, no => 1, close => 1
+            return sbCommonUtils.PROMPT.confirmEx(null, "[ScrapBook]", text, button, null, null, null, null, {});
+        }
+        return true;
     },
 
     cancel: function() {

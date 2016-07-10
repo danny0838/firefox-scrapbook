@@ -12,7 +12,7 @@
         style="width: 400px;"
         persist="screenX screenY"
         onload="sbCaptureOptions.init();"
-        ondialogaccept="sbCaptureOptions.accept();"
+        ondialogaccept="return sbCaptureOptions.accept();"
         ondialogcancel="sbCaptureOptions.cancel();">
 
     <script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />

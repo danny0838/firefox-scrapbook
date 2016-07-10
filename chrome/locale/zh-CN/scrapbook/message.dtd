@@ -55,7 +55,7 @@
 <!ENTITY sb.detail.linked.file.method0 "停用下载链接的文件">
 <!ENTITY sb.detail.linked.file.method1 "比对网址扩展名">
 <!ENTITY sb.detail.linked.file.method2 "比对 HTTP 标头及网址扩展名">
-<!ENTITY sb.detail.linked.file.desc "下载整个扩展名匹配任一行正则表达式的文件。忽略 &quot;#&quot; 开头的行。忽略语法错误的正则表达式。">
+<!ENTITY sb.detail.linked.file.desc "下载整个扩展名匹配任一行正则表达式的文件。忽略 &quot;#&quot; 开头的行。">
 <!ENTITY sb.detail.linked.file.reset "还原默认值">
 <!ENTITY sb.detail.linked.page "深层获取">
 <!ENTITY sb.detail.linked.page.depth "获取链接层数">
@@ -138,7 +138,7 @@
 <!ENTITY sb.edit.html.menuitem.insertDate "插入日期">
 <!ENTITY sb.edit.html.menuitem.insertTodoBox "插入待办事项选框">
 <!ENTITY sb.edit.html.menuitem.insertTodoBoxDone "插入待办事项选框 (已勾选)">
-<!ENTITY sb.edit.html.menuitem.wrapHTML "用模版格式化">
+<!ENTITY sb.edit.html.menuitem.wrapHTML "用模板格式化">
 <!ENTITY sb.edit.cutter "删除所选内容">
 <!ENTITY sb.edit.remove.iframe "删除所有 IFRAME 标签">
 <!ENTITY sb.edit.remove.script "删除所有 SCRIPT 标签">
@@ -252,32 +252,32 @@
 <!ENTITY sb.prefs.advanced "高级">
 <!ENTITY sb.prefs.ui.contextMenu "在浏览器中显示上下文菜单">
 <!ENTITY sb.prefs.ui.contextSubMenu "子菜单">
-<!ENTITY sb.prefs.ui.bookmarkMenu "显示 &apos;Bookmark with ScrapBook&apos; 菜单">
-<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "突出显示于">
-<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "最近使用的文件夹">
+<!ENTITY sb.prefs.ui.bookmarkMenu "显示“加入 ScrapBook 书签”菜单">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "显示">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.2 "个最近使用的文件夹">
 <!ENTITY sb.prefs.ui.menuBar "在菜单栏中显示">
 <!ENTITY sb.prefs.ui.menuBar.icon "图标">
 <!ENTITY sb.prefs.ui.toolsMenu "在“工具”菜单显示">
 <!ENTITY sb.prefs.ui.statusBar "在状态栏显示">
 <!ENTITY sb.prefs.restart "更改需要重启 Firefox。">
-<!ENTITY sb.prefs.tabs.tips "随后的操作在标签页中打开">
+<!ENTITY sb.prefs.tabs.tips "这些操作在新标签页中打开">
 <!ENTITY sb.prefs.tabs.note "编辑笔记">
 <!ENTITY sb.prefs.edit.autoEditNoteX "便签页面自动进入编辑模式">
 <!ENTITY sb.prefs.edit.insertDateFormat "插入日期格式 (strftime):">
-<!ENTITY sb.prefs.edit.wrapperFormat "HTML 格式化模版">
-<!ENTITY sb.prefs.data "定位到存储数据的位置">
+<!ENTITY sb.prefs.edit.wrapperFormat "HTML 格式化模板">
+<!ENTITY sb.prefs.data "设定数据存储的位置">
 <!ENTITY sb.prefs.data.default "默认">
 <!ENTITY sb.prefs.data.custom "保存数据至">
 <!ENTITY sb.prefs.data.tips "选择用户存储 ScrapBook 数据的文件夹。">
-<!ENTITY sb.prefs.multibook.enabled "启动 Multi-ScrapBook">
+<!ENTITY sb.prefs.multibook.enabled "启用 Multi-ScrapBook">
 <!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook 可以使您设置多个存储数据的位置，而且您还可以在工具栏对这些位置进行快速切换。">
-<!ENTITY sb.prefs.confirmDelete "删除树状条目时警告万我">
+<!ENTITY sb.prefs.confirmDelete "删除树状条目时警告我">
 <!ENTITY sb.prefs.tree.autoCollapse "打开树状文件夹时，自动关闭其他文件夹">
 <!ENTITY sb.prefs.tree.unshift "放条目至">
 <!ENTITY sb.prefs.tree.unshift.top "文件夹顶部">
 <!ENTITY sb.prefs.tree.unshift.bottom "文件夹底部">
 <!ENTITY sb.prefs.asciiFilename "将文件保存为 ASCII 文件名">
-<!ENTITY sb.prefs.showDetailOnDrop "通过向侧栏拖拽进行捕获时显示 &apos;Capture Detail&apos; 对话框">
+<!ENTITY sb.prefs.showDetailOnDrop "向侧栏拖拽以捕获时显示“详细信息”对话框">
 <!ENTITY sb.prefs.notifyOnComplete "显示“捕获完成”提示">
 <!ENTITY sb.prefs.notifyPageCaptured "浏览获取过的页面时，显示提示">
 <!ENTITY sb.prefs.autoOutput "更动项目时，自动导出项目列表">
@@ -341,7 +341,7 @@
 <!ENTITY sb.sort.title.desc "标题 (Z &gt; A)">
 <!ENTITY sb.sort.date.asc "时间 (升序)">
 <!ENTITY sb.sort.date.desc "时间 (降序)">
-<!ENTITY sb.sort.grouping "依型态分组">
+<!ENTITY sb.sort.grouping "按类型分组">
 <!ENTITY sb.sort.recursive "包括所有子文件夹">
 <!ENTITY sb.sort.warning "注意: 此操作无法撤销。">
 

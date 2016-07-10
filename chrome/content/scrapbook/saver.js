@@ -1197,6 +1197,8 @@ var sbContentSaver = {
                 var ret = [];
                 that.option["downLinkFilter"].split(/[\r\n]/).forEach(function (line) {
                     if (line.charAt(0) === "#") return;
+                    line = line.trim();
+                    if (line === "") return;
                     try {
                         var regex = new RegExp("^(?:" + line + ")$", "i");
                         ret.push(regex);

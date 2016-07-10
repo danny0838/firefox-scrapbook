@@ -37,19 +37,19 @@
             <spacer flex="1" />
             <toolbarbutton type="menu" label="&sb.tools; ">
                 <menupopup id="sbToolsMenuPopup">
-                    <menuitem label="&sb.tools.options;..."   oncommand="sbMainService.openPrefWindow();" />
+                    <menuitem label="&sb.tools.options;..." oncommand="sbMainService.openPrefWindow();" />
                     <menuseparator />
-                    <menuitem label="&sb.tools.manage;..." oncommand="sbCommonUtils.openManageWindow(null,null);" />
-                    <menuitem label="&sb.tools.combine;..."   oncommand="sbCommonUtils.openManageWindow(null,'sbToolbarCombine');" />
-                    <menuitem label="&sb.tools.trade;..."     oncommand="sbCommonUtils.openManageWindow(null,'sbToolbarTrade');" />
-                    <menuitem label="&sb.tools.multiple;..."  oncommand="window.top.openDialog('chrome://scrapbook/content/multiple.xul','','chrome,centerscreen,all,resizable,dialog=no');" />
+                    <menuitem id="sbToolsMenuPopupManage" class="menuitem-iconic" label="&sb.tools.manage;..." oncommand="sbCommonUtils.openManageWindow(null,null);" />
+                    <menuitem label="&sb.tools.combine;..." oncommand="sbCommonUtils.openManageWindow(null,'sbToolbarCombine');" />
+                    <menuitem label="&sb.tools.trade;..." oncommand="sbCommonUtils.openManageWindow(null,'sbToolbarTrade');" />
+                    <menuitem id="sbToolsMenuPopupMultiple" class="menuitem-iconic" label="&sb.tools.multiple;..." oncommand="window.top.openDialog('chrome://scrapbook/content/multiple.xul','','chrome,centerscreen,all,resizable,dialog=no');" />
                     <menuitem label="&sb.tools.directory;" oncommand="sbController.launch(sbCommonUtils.getScrapBookDir());" />
                     <menuseparator />
                     <menu id="sbAddOns" label="&sb.tools.addons;"><menupopup id="sbAddOnsPopup" /></menu>
                     <menuitem label="&sb.tools.calculate;" oncommand="window.openDialog('chrome://scrapbook/content/calculate.xul','ScrapBook:Calculate','chrome,centerscreen,all,resizable,dialog=no');" />
-                    <menuitem label="&sb.tools.sorttree;..."  oncommand="window.openDialog('chrome://scrapbook/content/sort.xul','','chrome,centerscreen,modal');" />
-                    <menuitem label="&sb.tools.output;..."    oncommand="window.openDialog('chrome://scrapbook/content/output.xul','ScrapBook:Output','chrome,centerscreen,modal,resizable');" />
-                    <menuitem label="&sb.tools.repair;..."    oncommand="window.openDialog('chrome://scrapbook/content/repair.xul','ScrapBook:Repair','chrome,centerscreen,all,modal,resizable,dialog=no');" />
+                    <menuitem label="&sb.tools.sorttree;..." oncommand="window.openDialog('chrome://scrapbook/content/sort.xul','','chrome,centerscreen,modal');" />
+                    <menuitem label="&sb.tools.output;..." oncommand="window.openDialog('chrome://scrapbook/content/output.xul','ScrapBook:Output','chrome,centerscreen,modal,resizable');" />
+                    <menuitem label="&sb.tools.repair;..." oncommand="window.openDialog('chrome://scrapbook/content/repair.xul','ScrapBook:Repair','chrome,centerscreen,all,modal,resizable,dialog=no');" />
                 </menupopup>
             </toolbarbutton>
         </toolbar>
