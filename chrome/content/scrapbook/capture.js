@@ -141,9 +141,15 @@ function SB_initCapture() {
     if ( !("images" in gOption ) ) gOption["images"] = true;
     sbInvisibleBrowser.init();
     sbCaptureTask.init(myURLs);
-    //Es wird gar nichts gemacht. Der Benutzer muss den Download selbst starten!
-    sbCaptureTask.seconds = -1;
-    sbCaptureTask.toggleStartPause(false);
+    // link: 1 or more item (> 1 only for multiple capture)
+    // capture-again, capture-again-deep: 1 item
+    // in-depth: 1 or more item, but it's possible that new items be added if depth > 2
+    if ( gURLs.length == 1 && gContext != "indepth" ) {
+        sbCaptureTask.start();
+    } else {
+        sbCaptureTask.seconds = -1;
+        sbCaptureTask.toggleStartPause(false);
+    }
 }
 
 
@@ -181,7 +187,13 @@ var sbCaptureTask = {
 
     init: function(myURLs) {
         if ( gContext != "indepth" && myURLs.length == 1 ) {
+            this.TREE.collapsed = true;
+            document.getElementById("sbpCaptureProgress").hidden = true;
+            document.getElementById("sbpChkFilter").hidden = true;
             document.getElementById("sbCaptureSkipButton").hidden = true;
+        } else {
+            document.getElementById("sbCaptureWindow").style.width = "800px";
+            document.getElementById("sbCaptureWindow").style.height = "600px";
         }
         if (!gTitles) gTitles = [];
         for ( var i = 0; i < myURLs.length; i++ ) this.add(myURLs[i], 1, gTitles[i]);

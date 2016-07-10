@@ -35,8 +35,8 @@
             <menu id="sbPopupTools" label="&sb.tools;" onmouseover="event.stopPropagation();">
                 <menupopup id="sbPopupToolsMenu">
                     <menuitem id="sbPopupShowFiles" label="&sb.show.files;" oncommand="sbController.forward(null,'L');" />
-                    <menuitem id="sbPopupSend"      label="&sb.move;..."    oncommand="sbTreeHandler.send();" />
-                    <menuitem id="sbPopupCopy"      label="&sb.copy;..."    oncommand="sbTreeHandler.copy();" />
+                    <menuitem id="sbPopupSend" class="menuitem-iconic" label="&sb.move;..." oncommand="sbTreeHandler.send();" />
+                    <menuitem id="sbPopupCopy"  class="menuitem-iconic" label="&sb.copy;..." oncommand="sbTreeHandler.copy();" />
                     <menuseparator />
                     <menuitem id="sbPopupRenew" class="menuitem-iconic" label="&sb.renew;..." oncommand="sbController.renew(null, true);" onclick="if (event.button == 1) sbController.renew(null, false);" />
                     <menuitem id="sbPopupInternalize" class="menuitem-iconic" label="&sb.internalize;..." oncommand="sbController.internalize(null);" />

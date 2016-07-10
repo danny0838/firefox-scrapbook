@@ -2,14 +2,13 @@
 
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 <?xml-stylesheet href="chrome://scrapbook/skin/capture.css" type="text/css" ?>
-<?xml-stylesheet href="chrome://scrapbook/skin/sbpExtra/sbpCapture.css" type="text/css" ?>
 
 <!DOCTYPE window SYSTEM "chrome://scrapbook/locale/capture.dtd">
 
 <window id="sbCaptureWindow"
         title="&sb.capture; - ScrapBook"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        style="width: 800px; height: 600px;"
+        style="width: 360px;"
         onload="SB_initCapture();"
         onclose="event.preventDefault();sbCaptureTask.abort();"
         windowtype="scrapbook">
@@ -19,7 +18,7 @@
     <script type="application/x-javascript" src="chrome://scrapbook/content/capture.js" />
 
     <hbox>
-        <textbox id="sbpCaptureProgress" readonly="true" width="100"/>
+        <textbox id="sbpCaptureProgress" readonly="true" width="80"/>
         <textbox id="sbCaptureTextbox"   readonly="true" flex="1"/>
     </hbox>
 

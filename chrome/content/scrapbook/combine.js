@@ -196,62 +196,64 @@ var sbCombineService = {
         return newRes;
     },
 
+    onKeyPress: function(aEvent) {
+        if ( aEvent.keyCode === aEvent.DOM_VK_DELETE) {
+            this.deleteItem();
+        } else if (aEvent.altKey) {
+            if (aEvent.keyCode === aEvent.DOM_VK_UP) {
+                this.moveUp();
+            } else if (aEvent.keyCode === aEvent.DOM_VK_DOWN) {
+                this.moveDown();
+            }
+        }
+    },
+
     deleteItem: function() {
-        //Index festhalten
         var diIndex = this.LISTBOX.selectedIndex;
-        var diCount = this.LISTBOX.getRowCount();
-        var diVorher = "";
-        var diNachhr = "";
-        //Eintrag aus Listbox entfernen
+        if (diIndex < 0) return; // no select
         this.LISTBOX.removeItemAt(diIndex);
-        //this.idList aktualisieren
         this.idList.splice(diIndex, 1);
-        //this.resList aktualisieren
         this.resList.splice(diIndex, 1);
-        //this.parList aktualisieren
         this.parList.splice(diIndex, 1);
+        if (this.LISTBOX.getRowCount() > 0) {
+            var diNewItem = this.LISTBOX.getItemAtIndex(diIndex) || this.LISTBOX.getItemAtIndex(--diIndex);
+            this.LISTBOX.ensureElementIsVisible(diNewItem);
+            this.LISTBOX.selectItem(diNewItem);
+            this.LISTBOX.focus();
+        }
         this.toggleButtons();
         this.updateButtons();
     },
 
     moveDown: function() {
         var mdIndex = this.LISTBOX.selectedIndex;
-        //Reihenfolge ändern
-        var mdPuffer = this.idList[mdIndex];
-        this.idList[mdIndex] = this.idList[mdIndex+1];
-        this.idList[mdIndex+1] = mdPuffer;
-        var mdPuffer = this.resList[mdIndex];
-        this.resList[mdIndex] = this.resList[mdIndex+1];
-        this.resList[mdIndex+1] = mdPuffer;
-        var mdPuffer = this.parList[mdIndex];
-        this.parList[mdIndex] = this.parList[mdIndex+1];
-        this.parList[mdIndex+1] = mdPuffer;
+        if (mdIndex < 0 || mdIndex == this.LISTBOX.getRowCount() - 1) return; // no select, or at bottom
+        [this.idList[mdIndex], this.idList[mdIndex+1]] = [this.idList[mdIndex+1], this.idList[mdIndex]];
+        [this.resList[mdIndex], this.resList[mdIndex+1]] = [this.resList[mdIndex+1], this.resList[mdIndex]];
+        [this.parList[mdIndex], this.parList[mdIndex+1]] = [this.parList[mdIndex+1], this.parList[mdIndex]];
         var mdItem = this.LISTBOX.removeItemAt(mdIndex);
         var mdNewItem = this.LISTBOX.insertItemAt( mdIndex+1, mdItem.getAttribute("label") );
-        this.LISTBOX.selectItem(mdNewItem);
         mdNewItem.setAttribute("class", "listitem-iconic");
         mdNewItem.setAttribute("image", mdItem.getAttribute("image"));
+        this.LISTBOX.ensureElementIsVisible(mdNewItem);
+        this.LISTBOX.selectItem(mdNewItem);
+        this.LISTBOX.focus();
         this.toggleButtons();
     },
 
     moveUp: function() {
-        //Index bestimmen
         var muIndex = this.LISTBOX.selectedIndex;
-        //Reihenfolge ändern
-        var muPuffer = this.idList[muIndex];
-        this.idList[muIndex] = this.idList[muIndex-1];
-        this.idList[muIndex-1] = muPuffer;
-        var muPuffer = this.resList[muIndex];
-        this.resList[muIndex] = this.resList[muIndex-1];
-        this.resList[muIndex-1] = muPuffer;
-        var muPuffer = this.parList[muIndex];
-        this.parList[muIndex] = this.parList[muIndex-1];
-        this.parList[muIndex-1] = muPuffer;
+        if (muIndex <= 0) return; // no select, or at top
+        [this.idList[muIndex], this.idList[muIndex-1]] = [this.idList[muIndex-1], this.idList[muIndex]];
+        [this.resList[muIndex], this.resList[muIndex-1]] = [this.resList[muIndex-1], this.resList[muIndex]];
+        [this.parList[muIndex], this.parList[muIndex-1]] = [this.parList[muIndex-1], this.parList[muIndex]];
         var muItem = this.LISTBOX.removeItemAt(muIndex);
         var muNewItem = this.LISTBOX.insertItemAt( muIndex-1, muItem.getAttribute("label") );
-        this.LISTBOX.selectItem(muNewItem);
         muNewItem.setAttribute("class", "listitem-iconic");
         muNewItem.setAttribute("image", muItem.getAttribute("image"));
+        this.LISTBOX.ensureElementIsVisible(muNewItem);
+        this.LISTBOX.selectItem(muNewItem);
+        this.LISTBOX.focus();
         this.toggleButtons();
     },
 

@@ -24,9 +24,9 @@
 
     <popupset>
         <menupopup id="sbPopup">
-            <menuitem id="sbPopupOpen"       label="&sb.open;"        oncommand="sbSearchResult.forward('O');" />
+            <menuitem id="sbPopupOpen" label="&sb.open;" oncommand="sbSearchResult.forward('O');" />
             <menuitem id="sbPopupOpenNewTab" label="&sb.open.newtab;" oncommand="sbSearchResult.forward('T');" />
-            <menuitem id="sbPopupOpenLocate" label="&sb.locate;"      oncommand="sbSearchResult.forward('L');" />
+            <menuitem id="sbPopupOpenLocate" label="&sb.locate;" oncommand="sbSearchResult.forward('L');" class="menuitem-iconic" />
             <menuseparator />
             <menuitem id="sbPopupProperty" class="menuitem-iconic" label="&sb.property;" oncommand="sbSearchResult.forward('P');" />
         </menupopup>
