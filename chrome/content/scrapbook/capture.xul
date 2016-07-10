@@ -2,7 +2,6 @@
 
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 <?xml-stylesheet href="chrome://scrapbook/skin/capture.css" type="text/css" ?>
-<?xml-stylesheet href="chrome://scrapbook/skin/sbpExtra/sbpCapture.css" type="text/css" ?>
 
 <!DOCTYPE window SYSTEM "chrome://scrapbook/locale/capture.dtd">
 
