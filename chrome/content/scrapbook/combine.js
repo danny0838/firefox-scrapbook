@@ -199,6 +199,12 @@ var sbCombineService = {
     onKeyPress: function(aEvent) {
         if ( aEvent.keyCode === aEvent.DOM_VK_DELETE) {
             this.deleteItem();
+        } else if (aEvent.altKey) {
+            if (aEvent.keyCode === aEvent.DOM_VK_UP) {
+                this.moveUp();
+            } else if (aEvent.keyCode === aEvent.DOM_VK_DOWN) {
+                this.moveDown();
+            }
         }
     },
 
@@ -221,6 +227,7 @@ var sbCombineService = {
 
     moveDown: function() {
         var mdIndex = this.LISTBOX.selectedIndex;
+        if (mdIndex < 0 || mdIndex == this.LISTBOX.getRowCount() - 1) return; // no select, or at bottom
         [this.idList[mdIndex], this.idList[mdIndex+1]] = [this.idList[mdIndex+1], this.idList[mdIndex]];
         [this.resList[mdIndex], this.resList[mdIndex+1]] = [this.resList[mdIndex+1], this.resList[mdIndex]];
         [this.parList[mdIndex], this.parList[mdIndex+1]] = [this.parList[mdIndex+1], this.parList[mdIndex]];
@@ -236,6 +243,7 @@ var sbCombineService = {
 
     moveUp: function() {
         var muIndex = this.LISTBOX.selectedIndex;
+        if (muIndex <= 0) return; // no select, or at top
         [this.idList[muIndex], this.idList[muIndex-1]] = [this.idList[muIndex-1], this.idList[muIndex]];
         [this.resList[muIndex], this.resList[muIndex-1]] = [this.resList[muIndex-1], this.resList[muIndex]];
         [this.parList[muIndex], this.parList[muIndex-1]] = [this.parList[muIndex-1], this.parList[muIndex]];
