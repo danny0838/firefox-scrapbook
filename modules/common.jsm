@@ -23,25 +23,46 @@ var sbCommonUtils = {
      * Frequently used objects
      ***************************************************************/
 
-    RDF: Components.classes['@mozilla.org/rdf/rdf-service;1'].getService(Components.interfaces.nsIRDFService),
-
-    RDFC: Components.classes['@mozilla.org/rdf/container;1'].getService(Components.interfaces.nsIRDFContainer),
-
-    RDFCU: Components.classes['@mozilla.org/rdf/container-utils;1'].getService(Components.interfaces.nsIRDFContainerUtils),
-
-    DIR: Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties),
-
-    MIME: Components.classes["@mozilla.org/mime;1"].getService(Components.interfaces.nsIMIMEService),
-
-    IO: Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService),
-
-    UNICODE: Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter),
-
-    WINDOW: Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator),
-
-    CONSOLE: Components.classes['@mozilla.org/consoleservice;1'].getService(Components.interfaces.nsIConsoleService),
-
-    PROMPT: Components.classes['@mozilla.org/embedcomp/prompt-service;1'].getService(Components.interfaces.nsIPromptService),
+    get RDF() {
+        delete this.RDF;
+        return this.RDF = Components.classes['@mozilla.org/rdf/rdf-service;1'].getService(Components.interfaces.nsIRDFService);
+    },
+    get RDFC() {
+        delete this.RDFC;
+        return this.RDFC = Components.classes['@mozilla.org/rdf/container;1'].getService(Components.interfaces.nsIRDFContainer);
+    },
+    get RDFCU() {
+        delete this.RDFCU;
+        return this.RDFCU = Components.classes['@mozilla.org/rdf/container-utils;1'].getService(Components.interfaces.nsIRDFContainerUtils);
+    },
+    get DIR() {
+        delete this.DIR;
+        return this.DIR = Components.classes['@mozilla.org/file/directory_service;1'].getService(Components.interfaces.nsIProperties);
+    },
+    get MIME() {
+        delete this.MIME;
+        return this.MIME = Components.classes["@mozilla.org/mime;1"].getService(Components.interfaces.nsIMIMEService);
+    },
+    get IO() {
+        delete this.IO;
+        return this.IO = Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService);
+    },
+    get UNICODE() {
+        delete this.UNICODE;
+        return this.UNICODE = Components.classes['@mozilla.org/intl/scriptableunicodeconverter'].getService(Components.interfaces.nsIScriptableUnicodeConverter);
+    },
+    get WINDOW() {
+        delete this.WINDOW;
+        return this.WINDOW = Components.classes['@mozilla.org/appshell/window-mediator;1'].getService(Components.interfaces.nsIWindowMediator);
+    },
+    get CONSOLE() {
+        delete this.CONSOLE;
+        return this.CONSOLE = Components.classes['@mozilla.org/consoleservice;1'].getService(Components.interfaces.nsIConsoleService);
+    },
+    get PROMPT() {
+        delete this.PROMPT;
+        return this.PROMPT = Components.classes['@mozilla.org/embedcomp/prompt-service;1'].getService(Components.interfaces.nsIPromptService);
+    },
 
 
     /****************************************************************
