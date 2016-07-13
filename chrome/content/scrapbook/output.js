@@ -215,11 +215,17 @@ var sbOutputService = {
         var icon = sbDataSource.getProperty(aRes, "icon");
         var title = sbDataSource.getProperty(aRes, "title");
         var source = sbDataSource.getProperty(aRes, "source");
-        if ( icon.match(/(\/data\/\d{14}\/.*$)/) ) icon = ".." + RegExp.$1;
-        if ( !icon ) icon = sbCommonUtils.escapeFileName(sbCommonUtils.getFileName( sbCommonUtils.getDefaultIcon(type) ));
+        // fix icon path to fit tree output
+        if (icon) {
+            icon = icon.replace(/^resource:\/\/scrapbook\//, "../");
+        } else {
+            icon = sbCommonUtils.escapeFileName(sbCommonUtils.getFileName( sbCommonUtils.getDefaultIcon(type) ));
+        }
+        // escape paths for HTML safe
         icon = sbCommonUtils.escapeHTML(icon);
         title = sbCommonUtils.escapeHTMLWithSpace(title);
         source = sbCommonUtils.escapeHTML(source);
+        // generate HTML output
         var ret;
         switch (type) {
             case "separator": 
