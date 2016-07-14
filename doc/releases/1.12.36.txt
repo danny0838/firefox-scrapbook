@@ -4,7 +4,7 @@ Scrapbook X 1.12.36
 Changes since v1.12.35
 ----------------------
 
-- FIXED: Icons in the ScrapBook icon folder are missing in "Output HTML tree".
-- FIXED: Some item icons in the combined page use chrome: protocol and thus not protable.
+- FIXED: Item icons in the ScrapBook icon folder are missing in "Output HTML tree".
+- FIXED: Some item icons in the combined page use chrome: protocol and thus not portable.
 - FIXED: A potential file reading error for Firefox < 4.0.
 - UPDATE: Internal code optimization.
