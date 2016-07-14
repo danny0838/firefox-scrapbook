@@ -383,6 +383,7 @@
 <!ENTITY sb.prop.comment "注释">
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
+<!ENTITY sb.make.container "转换为文件夹">
 <!ENTITY sb.folder.combine "合并在同一标签页中打开">
 <!ENTITY sb.folder.openall "在标签页中打开所有项目">
 <!ENTITY sb.folder.manage "管理文件夹">

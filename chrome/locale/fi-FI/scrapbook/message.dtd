@@ -383,6 +383,7 @@
 <!ENTITY sb.prop.comment "Kommentti">
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "Tunnus">
+<!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.folder.combine "Yhdistetty näkymä">
 <!ENTITY sb.folder.openall "Avaa kaikki välilehtiin">
 <!ENTITY sb.folder.manage "Muokkaa kansiota">

@@ -383,6 +383,7 @@
 <!ENTITY sb.prop.comment "コメント">
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
+<!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.folder.combine "結合ビュー">
 <!ENTITY sb.folder.openall "すべてタブで開く">
 <!ENTITY sb.folder.manage "フォルダの管理">

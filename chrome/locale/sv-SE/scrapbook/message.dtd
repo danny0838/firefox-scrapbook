@@ -383,6 +383,7 @@
 <!ENTITY sb.prop.comment "Kommentar">
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
+<!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.folder.combine "Kombinerad vy">
 <!ENTITY sb.folder.openall "Öppna alla i flikar">
 <!ENTITY sb.folder.manage "Hantera mapp">

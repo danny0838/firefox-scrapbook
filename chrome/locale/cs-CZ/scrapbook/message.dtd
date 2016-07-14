@@ -383,6 +383,7 @@
 <!ENTITY sb.prop.comment "Komentář">
 <!ENTITY sbp.prop.url "Adresa URL">
 <!ENTITY sb.prop.id.date "ID">
+<!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.folder.combine "Kombinovaný náhled">
 <!ENTITY sb.folder.openall "Otevřít vše v panelech">
 <!ENTITY sb.folder.manage "Spravovat složku">

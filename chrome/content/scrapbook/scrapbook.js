@@ -188,6 +188,16 @@ var sbMainService = {
         return newRes;
     },
 
+    makeContainer: function() {
+        try {
+            var curIdx = sbTreeHandler.TREE.view.selection.count ? sbTreeHandler.TREE.currentIndex : -1;
+            var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
+            if (!sbDataSource.isContainer(curRes)) {
+                sbDataSource.createEmptySeq(curRes.Value);
+            }
+        } catch(ex) {}
+    },
+
     openPrefWindow: function() {
         var instantApply = sbCommonUtils.getPref("browser.preferences.instantApply", false, true);
         window.top.openDialog(
