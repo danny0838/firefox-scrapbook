@@ -219,7 +219,7 @@ var sbOutputService = {
         if (icon) {
             icon = icon.replace(/^resource:\/\/scrapbook\//, "../");
         } else {
-            icon = sbCommonUtils.escapeFileName(sbCommonUtils.getFileName( sbCommonUtils.getDefaultIcon(type) ));
+            icon = sbCommonUtils.getDefaultIcon(type).replace(/^chrome:\/\/scrapbook\/skin\//, "");
         }
         // escape paths for HTML safe
         icon = sbCommonUtils.escapeHTML(icon);
