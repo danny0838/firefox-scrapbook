@@ -412,18 +412,12 @@ var sbCommonUtils = {
         try {
             var istream = Components.classes['@mozilla.org/network/file-input-stream;1'].createInstance(Components.interfaces.nsIFileInputStream);
             istream.init(aFile, 1, 0, false);
-            var sstream = Components.classes['@mozilla.org/scriptableinputstream;1'].createInstance(Components.interfaces.nsIScriptableInputStream);
-            sstream.init(istream);
-            // only Firefox >= 4 supports readBytes method
-            // fallback to read, which gets truncated output when meeting a null byte
-            if (sstream.readBytes) {
-                var content = sstream.readBytes(sstream.available());
-            } else {
-                var content = sstream.read(sstream.available());
-            }
-            sstream.close();
+            var bistream = Components.classes["@mozilla.org/binaryinputstream;1"].createInstance(Components.interfaces.nsIBinaryInputStream);
+            bistream.setInputStream(istream);
+            var data = bistream.readBytes(bistream.available());
+            bistream.close();
             istream.close();
-            return content;
+            return data;
         } catch(ex) {
             return false;
         }
