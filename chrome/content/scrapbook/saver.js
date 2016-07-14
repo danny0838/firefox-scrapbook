@@ -1018,10 +1018,7 @@ var sbContentSaver = {
         var sourceURL = aURLSpec;
 
         try {
-            if (sourceURL.indexOf("chrome:") === 0) {
-                // never download "chrome://" resources
-                return "";
-            } else if ( sourceURL.indexOf("http:") === 0 || sourceURL.indexOf("https:") === 0 || sourceURL.indexOf("ftp:") === 0 ) {
+            if ( sourceURL.indexOf("http:") === 0 || sourceURL.indexOf("https:") === 0 || sourceURL.indexOf("ftp:") === 0 ) {
                 var targetDir = this.option["internalize"] ? this.option["internalize"].parent : this.contentDir.clone();
                 var hashKey = sbCommonUtils.getUUID();
                 var fileName, isDuplicate;
