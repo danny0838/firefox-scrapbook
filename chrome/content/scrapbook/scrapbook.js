@@ -881,10 +881,13 @@ var sbSearchService = {
         }
         sbDataSource.clearContainer("urn:scrapbook:search");
         this.container = sbDataSource.getContainer("urn:scrapbook:search", true);
-        var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource(this.treeRef), 2, true);
+        var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource(this.treeRef), 0, true);
+        resList.shift(); // remove root
         var result = [];
         resList.forEach(function(res) {
-            if (sbSearchQueryHandler.match(aKey, res, false)) result.push(res);
+            if (sbDataSource.getProperty(res, "type") !== "folder") {
+                if (sbSearchQueryHandler.match(aKey, res, false)) result.push(res);
+            }
         }, this);
         aKey.sort.forEach(function(sortKey){
             result.sort(function(a, b){
@@ -921,9 +924,12 @@ var sbSearchService = {
         }
         sbDataSource.clearContainer("urn:scrapbook:search");
         this.container = sbDataSource.getContainer("urn:scrapbook:search", true);
-        var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource(this.treeRef), 2, true);
+        var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource(this.treeRef), 0, true);
+        resList.shift(); // remove root
         resList.forEach(function(res) {
-            this.container.AppendElement(res);
+            if (sbDataSource.getProperty(res, "type") !== "folder") {
+                this.container.AppendElement(res);
+            }
         }, this);
         sbTreeHandler.TREE.ref = "urn:scrapbook:search";
         sbTreeHandler.TREE.builder.rebuild();
