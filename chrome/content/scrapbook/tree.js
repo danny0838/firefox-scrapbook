@@ -28,17 +28,34 @@ var sbTreeHandler = {
         }
     },
 
-
+    // aType: 0 = folderPicker.xul, 1 = manage.xul, 2 = scrapbook.xul
     onClick: function(aEvent, aType) {
         if ( aEvent.button != 0 && aEvent.button != 1 ) return;
         var obj = {};
         this.TREE.treeBoxObject.getCellAt(aEvent.clientX, aEvent.clientY, {}, {}, obj);
         if ( !obj.value || obj.value == "twisty" ) return;
+
         var curIdx = this.TREE.currentIndex;
-        if ( this.TREE.view.isContainer(curIdx) ) {
-            this.toggleFolder(curIdx);
+        if (aType < 2) {
+            // manage window, simple click to toggle container, mid-click to open in new tab
+            // forbid ctrl- or shift- click because they are for multiple selection
+            if (aEvent.button == 0 && !aEvent.ctrlKey && !aEvent.shiftKey && this.TREE.view.isContainer(curIdx)) {
+                this.toggleFolder(curIdx);
+            } else if (aEvent.button == 1 && sbDataSource.getProperty(this.resource, "type") != "folder") {
+                sbController.open(this.resource, true);
+            }
         } else {
-            if ( aType < 2 && aEvent.button != 1 ) return;
+            // sidebar, simple click to toggle container or to open data
+            // mid-, ctrl-, and shift-click to open in new tab (except for folders)
+            if (this.TREE.view.isContainer(curIdx)) {
+                if (aEvent.button == 0 && !aEvent.ctrlKey && !aEvent.shiftKey) {
+                    this.toggleFolder(curIdx);
+                    return;
+                }
+                if (sbDataSource.getProperty(this.resource, "type") == "folder") {
+                    return;
+                }
+            }
             sbController.open(this.resource, aEvent.button == 1 || aEvent.ctrlKey || aEvent.shiftKey);
         }
     },
@@ -54,6 +71,7 @@ var sbTreeHandler = {
         }
     },
 
+    // double click (any button) on container: toggle container (natively)
     onDblClick: function(aEvent) {
         if ( aEvent.originalTarget.localName != "treechildren" || aEvent.button != 0 ) return;
         if ( this.TREE.view.isContainer(this.TREE.currentIndex) ) return;
