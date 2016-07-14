@@ -354,6 +354,7 @@ var sbExportService = {
         if ( !sbDataSource.exists(aRes) ) throw "Datasource changed.";
         var item = sbDataSource.getItem(aRes);
         item.folder = sbDataSource.getFolderPath(aRes).join("\t");
+        item.container = sbDataSource.isContainer(aRes) ? "true" : "";
         if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) ) {
             item.icon = item.icon.match(/\d{14}\/(.+)$/) ? RegExp.$1 : "";
         }
@@ -509,7 +510,7 @@ var sbImportService = {
             if ( this.tarResArray[0] != window.top.sbTreeHandler.TREE.ref ) folder = " [" + item.folder + "] ";
         }
         var curRes = sbDataSource.addItem(item, this.tarResArray[0], this.tarResArray[1]);
-        if (item.type == "folder") sbDataSource.createEmptySeq(curRes.Value);
+        if (item.container || item.type == "folder") sbDataSource.createEmptySeq(curRes.Value);
         this.folderTable[item.title] = curRes.Value;
         window.top.sbTreeHandler.TREE.builder.rebuild();
     },
