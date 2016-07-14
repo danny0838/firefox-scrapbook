@@ -62,8 +62,6 @@ var sbPropService = {
         document.getElementById("sbPropLock").setAttribute("checked", this.item.lock == "true");
         this.ICON.src = this.item.icon ? this.item.icon : sbCommonUtils.getDefaultIcon(this.item.type);
         document.title = this.item.title;
-        if (sbDataSource.isContainer(this.resource))
-            this.item.type = "folder";
         var bundleName = "TYPE_PAGE";
         switch (this.item.type) {
             case "separator": this.isTypeSeparator = true; bundleName = "TYPE_SEPARATOR"; break;

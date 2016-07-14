@@ -225,6 +225,7 @@ var sbController = {
             aEvent.preventDefault();
             return;
         }
+        var isContainer = false;
         var isFile = false;
         var isNote = false;
         var isNotex = false;
@@ -233,6 +234,7 @@ var sbController = {
         var isSeparator = false;
         var isMultiple = ( sbTreeHandler.TREE.view.selection.count > 1 );
         if (!isMultiple) {
+            isContainer = sbDataSource.isContainer(res);
             switch (sbDataSource.getProperty(res, "type")) {
                 case "file": isFile = true; break;
                 case "note": isNote = true; break;
@@ -249,11 +251,12 @@ var sbController = {
         getElement("sbPopupOpen").hidden = isMultiple || isFolder || isSeparator;
         getElement("sbPopupOpenNewTab").hidden = isMultiple || isFolder || isSeparator;
         getElement("sbPopupOpenSource").hidden = isMultiple || isFolder || isSeparator || isNote;
-        getElement("sbPopupCombinedView").hidden = isMultiple || !isFolder;
-        getElement("sbPopupOpenAllItems").hidden = isMultiple || !isFolder;
-        getElement("sbPopupOpenAllItems").nextSibling.hidden = isMultiple || !isFolder;
-        getElement("sbPopupManage").hidden = isMultiple || !isFolder;
-        getElement("sbPopupSort").hidden = isMultiple || !isFolder;
+        getElement("sbPopupMakeContainer").hidden = isMultiple || isContainer || isSeparator;
+        getElement("sbPopupCombinedView").hidden = isMultiple || !isContainer;
+        getElement("sbPopupOpenAllItems").hidden = isMultiple || !isContainer;
+        getElement("sbPopupOpenAllItems").nextSibling.hidden = isMultiple || !isContainer;
+        getElement("sbPopupManage").hidden = isMultiple || !isContainer;
+        getElement("sbPopupSort").hidden = isMultiple || !isContainer;
         getElement("sbPopupNewFolder").hidden = isMultiple;
         getElement("sbPopupNewSeparator").hidden = isMultiple;
         getElement("sbPopupNewNote").hidden = isMultiple;
