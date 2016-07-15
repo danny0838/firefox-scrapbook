@@ -61,9 +61,13 @@ var sbTreeHandler = {
     },
 
     onKeyPress: function(aEvent) {
-        switch ( aEvent.keyCode ) {
+        switch ( aEvent.keyCode || aEvent.which ) {
             case aEvent.DOM_VK_RETURN: 
                 if ( this.TREE.view.isContainer(this.TREE.currentIndex) ) return;
+                sbController.open(this.resource, aEvent.ctrlKey || aEvent.shiftKey);
+                break;
+            case aEvent.DOM_VK_SPACE: 
+                if ( sbDataSource.getProperty(this.resource, "type") == "folder" ) return;
                 sbController.open(this.resource, aEvent.ctrlKey || aEvent.shiftKey);
                 break;
             case aEvent.DOM_VK_DELETE: this.remove(); break;
