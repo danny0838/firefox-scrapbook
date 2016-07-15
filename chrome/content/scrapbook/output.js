@@ -103,7 +103,7 @@ var sbOutputService = {
     processRescursively: function(aContRes) {
         this.depth++;
         var id = sbDataSource.getProperty(aContRes, "id") || "root";
-        this.content += '<ul id="folder-' + id + '">\n';
+        this.content += '<ul id="container-' + id + '">\n';
         var resList = sbDataSource.flattenResources(aContRes, 0, false);
         for (var i = 1; i < resList.length; i++) {
             this.content += '<li class="depth' + String(this.depth) + '">';
@@ -138,7 +138,7 @@ var sbOutputService = {
             + '    if (hash) {\n'
             + '        hashTargetUrl = hash.substring(1);\n'
             + '        var mainPage = hashTargetUrl.replace(/^(\\.\\.\\/data\\/\\d{14})\\/.*/, "$1/index.html");\n'
-            + '        var elems = document.getElementById("folder-root").getElementsByTagName("A");\n'
+            + '        var elems = document.getElementById("container-root").getElementsByTagName("A");\n'
             + '        for ( var i = 0, I = elems.length; i < I; i++ ) {\n'
             + '            if (elems[i].getAttribute("href") == mainPage) {\n'
             + '                hashTargetItem = elems[i];\n'
@@ -162,18 +162,26 @@ var sbOutputService = {
             + '        toggleAll();\n'
             + '        return false;\n'
             + '    }\n'
-            + '    var elems = document.getElementById("folder-root").getElementsByTagName("A");\n'
+            + '    var elems = document.getElementById("container-root").getElementsByTagName("A");\n'
             + '    for ( var i = 0, I = elems.length; i < I; i++ ) {\n'
-            + '        if (elems[i].className == "folder") {\n'
+            + '        if (elems[i].className == "container") {\n'
+            + '            elems[i].onclick = onClickContainer;\n'
+            + '        } else if (elems[i].className == "folder") {\n'
             + '            elems[i].onclick = onClickFolder;\n'
             + '        } else {\n'
             + '            elems[i].onclick = onClickItem;\n'
             + '        }\n'
             + '    }\n'
             + '}\n'
+            + 'function onClickContainer() {\n'
+            + '    var ulElem = document.getElementById(this.id.replace(/^item-/, "container-"));\n'
+            + '    if (ulElem) toggleElem(ulElem);\n'
+            + '    return false;\n'
+            + '}\n'
             + 'function onClickFolder() {\n'
-            + '    var folderElem = document.getElementById(this.id.replace(/^item-/, "folder-"));\n'
-            + '    if (folderElem) toggleElem(folderElem);\n'
+            + '    var cElem = this.previousSibling;\n'
+            + '    cElem.focus();\n'
+            + '    cElem.click();\n'
             + '    return false;\n'
             + '}\n'
             + 'function onClickItem() {\n'
@@ -185,17 +193,16 @@ var sbOutputService = {
             + '    top.document.title = title;\n'
             + '}\n'
             + 'function toggleElem(elem, willOpen) {\n'
-            + '    var itemElem = document.getElementById(elem.id.replace(/^folder-/, "item-"));\n'
-            + '    if (!itemElem) return;\n'
+            + '    var iElem = document.getElementById(elem.id.replace(/^container-/, "item-"));\n'
+            + '    if (!iElem) return;\n'
             + '    if (typeof willOpen === "undefined") willOpen = (elem.style.display == "none");\n'
-            + '    var idcElem = itemElem.firstChild;\n'
             + '    if (willOpen) {\n'
             + '        elem.style.display = "block";\n'
-            + '        if (idcElem) idcElem.textContent = "▽";\n'
+            + '        iElem.textContent = "▽";\n'
             + '    }\n'
             + '    else {\n'
             + '        elem.style.display = "none";\n'
-            + '        if (idcElem) idcElem.textContent = "▷";\n'
+            + '        iElem.textContent = "▷";\n'
             + '    }\n'
             + '}\n'
             + 'function toggleAll(willOpen) {\n'
@@ -235,23 +242,26 @@ var sbOutputService = {
         title = sbCommonUtils.escapeHTMLWithSpace(title);
         source = sbCommonUtils.escapeHTML(source);
         // generate HTML output
-        var ret;
+        var ret = "";
         switch (type) {
             case "separator": 
-                ret = '<fieldset class="separator" title="' + title + '"><legend>&nbsp;' + title + '&nbsp;</legend></fieldset>';
-                break;
-            case "folder": 
-                ret = '<a id="item-' + id + '" class="folder" title="' + title + '" href="#">'
-                    + '<span>▷</span>' + '<img src="' + icon + '" width="16" height="16" alt="">' + title + '</a>\n';
+                ret += '<fieldset class="separator" title="' + title + '"><legend>&nbsp;' + title + '&nbsp;</legend></fieldset>';
                 break;
             case "bookmark": 
-                ret = '<a class="' + type + '" title="' + title + '" href="' + source + '" target="_blank">'
+                ret += '<a class="' + type + '" title="' + title + '" href="' + source + '" target="_blank">'
                     + '<img src="' + icon + '" width="16" height="16" alt="">' + title + '</a>';
                 break;
+            case "folder": 
+                ret += '<a id="item-' + id + '" class="container" href="#">▷</a>';
             default: 
-                var href = sbCommonUtils.escapeHTML("../data/" + id + "/index.html");
-                var target = this.optionFrame ? ' target="main"' : "";
-                ret = '<a class="' + type + '" title="' + title + '" href="' + href + '"' + target + '>'
+                if (type != "folder") {
+                    var href = sbCommonUtils.escapeHTML("../data/" + id + "/index.html");
+                    var target = this.optionFrame ? ' target="main"' : "";
+                    var hrefTarget = ' href="' + href + '"' + target;
+                } else {
+                    var hrefTarget = '';
+                }
+                ret += '<a class="' + type + '" title="' + title + '"' + hrefTarget + '>'
                     + '<img src="' + icon + '" width="16" height="16" alt="">' + title + '</a>';
                 if (!source) break;
                 ret += ' <a class="bookmark" title="Source" href="' + source + '" target="_blank">➤</a>';

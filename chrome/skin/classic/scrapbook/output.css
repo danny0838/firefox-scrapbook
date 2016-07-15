@@ -46,8 +46,12 @@ a:focus {
     text-decoration: underline;
 }
 
+a.container:focus {
+    text-decoration: none;
+}
+
 /* ::::: type ::::: */
-a.folder > span { display: inline-block; margin-left: -16px; width: 16px; text-align: center; color: #aaa; }
+a.container { display: inline-block; margin-left: -16px; width: 16px; text-align: center; color: #aaa; }
 a.marked   { font-weight: bold; }
 a.combine  { color: blue; }
 a.bookmark { color: limegreen; }
