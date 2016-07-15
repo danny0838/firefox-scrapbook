@@ -133,8 +133,6 @@ var sbOutputService = {
             + '<link rel="stylesheet" type="text/css" href="custom.css" media="all">\n'
             + '<script>\n'
             + 'function init() {\n'
-            + '    if (arguments.callee.done) return;\n'
-            + '    arguments.callee.done = true;\n'
             + '    toggleAll(false);\n'
             + '    loadHash();\n'
             + '    registerRenewHash();\n'
