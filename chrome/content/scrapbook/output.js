@@ -135,6 +135,10 @@ var sbOutputService = {
             + 'function init() {\n'
             + '    toggleAll(false);\n'
             + '    loadHash();\n'
+            + '    document.getElementById("toggle-all").onclick = function () {\n'
+            + '        toggleAll();\n'
+            + '        return false;\n'
+            + '    }\n'
             + '    var elems = document.getElementById("folder-root").getElementsByTagName("A");\n'
             + '    for ( var i = 0, I = elems.length; i < I; i++ ) {\n'
             + '        if (elems[i].className == "folder") {\n'
@@ -205,7 +209,7 @@ var sbOutputService = {
             + '<script src="custom.js"></script>\n'
             + '</head>\n\n'
             + '<body>\n'
-            + '<div id="header"><a href="javascript:toggleAll();"><img src="toggle.png" width="16" height="16" alt="">ScrapBook</a> <a href="../search.html"><img src="search.png" width="18" height="12" alt=""></a></div>\n'
+            + '<div id="header"><a id="toggle-all" title="Toggle all folders" href="#"><img src="toggle.png" width="16" height="16" alt="">ScrapBook</a> <a href="../search.html"><img src="search.png" width="18" height="12" alt=""></a></div>\n'
         return HTML;
     },
 
