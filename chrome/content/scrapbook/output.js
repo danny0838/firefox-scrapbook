@@ -173,19 +173,22 @@ var sbOutputService = {
             + '    else top.location.hash = hash;\n'
             + '    top.document.title = title;\n'
             + '}\n'
-            + 'function toggle(id, willOpen) {\n'
-            + '    toggleElem(document.getElementById(id), willOpen);\n'
+            + 'function toggleFolder(elem, willOpen) {\n'
+            + '    var folderElem = document.getElementById(elem.id.replace(/^item-/, "folder-"));\n'
+            + '    if (folderElem) toggleElem(folderElem, willOpen);\n'
             + '}\n'
             + 'function toggleElem(elem, willOpen) {\n'
-            + '    var idcElem = elem.previousSibling.previousSibling.firstChild;\n'
+            + '    var itemElem = document.getElementById(elem.id.replace(/^folder-/, "item-"));\n'
+            + '    if (!itemElem) return;\n'
             + '    if (typeof willOpen === "undefined") willOpen = (elem.style.display == "none");\n'
+            + '    var idcElem = itemElem.firstChild;\n'
             + '    if (willOpen) {\n'
             + '        elem.style.display = "block";\n'
-            + '        idcElem.textContent = "▽";\n'
+            + '        if (idcElem) idcElem.textContent = "▽";\n'
             + '    }\n'
             + '    else {\n'
             + '        elem.style.display = "none";\n'
-            + '        idcElem.textContent = "▷";\n'
+            + '        if (idcElem) idcElem.textContent = "▷";\n'
             + '    }\n'
             + '}\n'
             + 'function toggleAll(willOpen) {\n'
@@ -231,7 +234,7 @@ var sbOutputService = {
                 ret = '<fieldset class="separator" title="' + title + '"><legend>&nbsp;' + title + '&nbsp;</legend></fieldset>';
                 break;
             case "folder": 
-                ret = '<a class="folder" href="javascript:toggle(\'folder-' + id + '\');" title="' + title + '">'
+                ret = '<a class="folder" id="item-' + id + '" onclick="toggleFolder(this); return false;" href="#" title="' + title + '">'
                     + '<span>▷</span>'
                     + '<img src="' + icon + '" width="16" height="16" alt="">' + title + '</a>\n';
                 break;
