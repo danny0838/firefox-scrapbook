@@ -60,10 +60,11 @@ var sbTreeHandler = {
         }
     },
 
+    // simple enter on container: toggle container (natively)
     onKeyPress: function(aEvent) {
         switch ( aEvent.keyCode || aEvent.which ) {
             case aEvent.DOM_VK_RETURN: 
-                if ( this.TREE.view.isContainer(this.TREE.currentIndex) ) return;
+                if ( this.TREE.view.isContainer(this.TREE.currentIndex) && !aEvent.ctrlKey && !aEvent.shiftKey ) return;
                 sbController.open(this.resource, aEvent.ctrlKey || aEvent.shiftKey);
                 break;
             case aEvent.DOM_VK_SPACE: 
