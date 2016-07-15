@@ -71,8 +71,7 @@ var sbOutputService = {
             "chrome://scrapbook/skin/treeitem.png": "treeitem.png",
             "chrome://scrapbook/skin/treenote.png": "treenote.png",
             "chrome://scrapbook/skin/treenotex.png": "treenotex.png",
-            "chrome://scrapbook/skin/treefolder.png": "folder.png",
-            "chrome://scrapbook/skin/treefolder_open.png": "folder_open.png",
+            "chrome://scrapbook/skin/treefolder.png": "treefolder.png",
             "chrome://scrapbook/skin/toolbar_toggle.png": "toggle.png",
             "chrome://scrapbook/skin/search_all.png": "search.png",
         };
@@ -178,15 +177,15 @@ var sbOutputService = {
             + '    toggleElem(document.getElementById(id), willOpen);\n'
             + '}\n'
             + 'function toggleElem(elem, willOpen) {\n'
-            + '    var iconElem = elem.previousSibling.previousSibling.firstChild;\n'
+            + '    var idcElem = elem.previousSibling.previousSibling.firstChild;\n'
             + '    if (typeof willOpen === "undefined") willOpen = (elem.style.display == "none");\n'
             + '    if (willOpen) {\n'
             + '        elem.style.display = "block";\n'
-            + '        iconElem.src = "folder_open.png";\n'
+            + '        idcElem.textContent = "▽";\n'
             + '    }\n'
             + '    else {\n'
             + '        elem.style.display = "none";\n'
-            + '        iconElem.src = "folder.png";\n'
+            + '        idcElem.textContent = "▷";\n'
             + '    }\n'
             + '}\n'
             + 'function toggleAll(willOpen) {\n'
@@ -233,7 +232,8 @@ var sbOutputService = {
                 break;
             case "folder": 
                 ret = '<a class="folder" href="javascript:toggle(\'folder-' + id + '\');" title="' + title + '">'
-                    + '<img src="folder.png" width="16" height="16" alt="">' + title + '</a>\n';
+                    + '<span>▷</span>'
+                    + '<img src="' + icon + '" width="16" height="16" alt="">' + title + '</a>\n';
                 break;
             case "bookmark": 
                 ret = '<a href="' + source + '" target="_blank" class="' + type + '" title="' + title + '">'
