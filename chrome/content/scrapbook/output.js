@@ -135,7 +135,27 @@ var sbOutputService = {
             + 'function init() {\n'
             + '    toggleAll(false);\n'
             + '    loadHash();\n'
-            + '    registerRenewHash();\n'
+            + '    var elems = document.getElementById("folder-root").getElementsByTagName("A");\n'
+            + '    for ( var i = 0, I = elems.length; i < I; i++ ) {\n'
+            + '        if (elems[i].className == "folder") {\n'
+            + '            elems[i].onclick = onClickFolder;\n'
+            + '        } else {\n'
+            + '            elems[i].onclick = onClickItem;\n'
+            + '        }\n'
+            + '    }\n'
+            + '}\n'
+            + 'function onClickFolder() {\n'
+            + '    var folderElem = document.getElementById(this.id.replace(/^item-/, "folder-"));\n'
+            + '    if (folderElem) toggleElem(folderElem);\n'
+            + '    return false;\n'
+            + '}\n'
+            + 'function onClickItem() {\n'
+            + '    if (self == top) return;\n'
+            + '    var hash = "#" + this.getAttribute("href");\n'
+            + '    var title = this.childNodes[1].nodeValue;\n'
+            + '    if (history && history.pushState) top.history.pushState("", title, hash);\n'
+            + '    else top.location.hash = hash;\n'
+            + '    top.document.title = title;\n'
             + '}\n'
             + 'function loadHash() {\n'
             + '    var hash = top.location.hash;\n'
@@ -154,26 +174,6 @@ var sbOutputService = {
             + '            break;\n'
             + '        }\n'
             + '    }\n'
-            + '}\n'
-            + 'function registerRenewHash() {\n'
-            + '    var elems = document.getElementById("folder-root").getElementsByTagName("A");\n'
-            + '    for ( var i = 1; i < elems.length; i++ ) {\n'
-            + '        if (elems[i].className != "folder") {\n'
-            + '            elems[i].onclick = renewHash;\n'
-            + '        }\n'
-            + '    }\n'
-            + '}\n'
-            + 'function renewHash() {\n'
-            + '    if (self == top) return;\n'
-            + '    var hash = "#" + this.getAttribute("href");\n'
-            + '    var title = this.childNodes[1].nodeValue;\n'
-            + '    if (history && history.pushState) top.history.pushState("", title, hash);\n'
-            + '    else top.location.hash = hash;\n'
-            + '    top.document.title = title;\n'
-            + '}\n'
-            + 'function toggleFolder(elem, willOpen) {\n'
-            + '    var folderElem = document.getElementById(elem.id.replace(/^item-/, "folder-"));\n'
-            + '    if (folderElem) toggleElem(folderElem, willOpen);\n'
             + '}\n'
             + 'function toggleElem(elem, willOpen) {\n'
             + '    var itemElem = document.getElementById(elem.id.replace(/^folder-/, "item-"));\n'
@@ -232,21 +232,20 @@ var sbOutputService = {
                 ret = '<fieldset class="separator" title="' + title + '"><legend>&nbsp;' + title + '&nbsp;</legend></fieldset>';
                 break;
             case "folder": 
-                ret = '<a class="folder" id="item-' + id + '" onclick="toggleFolder(this); return false;" href="#" title="' + title + '">'
-                    + '<span>▷</span>'
-                    + '<img src="' + icon + '" width="16" height="16" alt="">' + title + '</a>\n';
+                ret = '<a id="item-' + id + '" class="folder" title="' + title + '" href="#">'
+                    + '<span>▷</span>' + '<img src="' + icon + '" width="16" height="16" alt="">' + title + '</a>\n';
                 break;
             case "bookmark": 
-                ret = '<a href="' + source + '" target="_blank" class="' + type + '" title="' + title + '">'
+                ret = '<a class="' + type + '" title="' + title + '" href="' + source + '" target="_blank">'
                     + '<img src="' + icon + '" width="16" height="16" alt="">' + title + '</a>';
                 break;
             default: 
                 var href = sbCommonUtils.escapeHTML("../data/" + id + "/index.html");
                 var target = this.optionFrame ? ' target="main"' : "";
-                ret = '<a href="' + href + '"' + target + ' class="' + type + '" title="' + title + '">'
+                ret = '<a class="' + type + '" title="' + title + '" href="' + href + '"' + target + '>'
                     + '<img src="' + icon + '" width="16" height="16" alt="">' + title + '</a>';
                 if (!source) break;
-                ret += ' <a href="' + source + '" target="_blank" class="bookmark" title="Source">➤</a>';
+                ret += ' <a class="bookmark" title="Source" href="' + source + '" target="_blank">➤</a>';
                 break;
         }
         return ret;

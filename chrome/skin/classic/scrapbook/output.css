@@ -1,6 +1,9 @@
 body {
     margin: 0px;
     padding: 0px;
+    font-size: 12px;
+    font-family: sans-serif;
+    line-height: 1.35em;
 }
 
 /* ::::: header ::::: */
@@ -9,8 +12,6 @@ div#header {
     padding: 2px 8px;
     border: 1px solid ThreeDShadow;
     background-color: InfoBackground;
-    font-family: sans-serif;
-    font-size: 9pt;
 }
 
 div#header a {
@@ -28,8 +29,6 @@ li {
     list-style-type: none;
     margin: 2px 20px;
     white-space: nowrap;
-    font-family: sans-serif;
-    font-size: 9pt;
 }
 
 a {
@@ -48,7 +47,7 @@ a:focus {
 }
 
 /* ::::: type ::::: */
-a.folder span { display: inline-block; margin-left: -16px; width: 16px; text-align: center; color: #aaa; }
+a.folder > span { display: inline-block; margin-left: -16px; width: 16px; text-align: center; color: #aaa; }
 a.marked   { font-weight: bold; }
 a.combine  { color: blue; }
 a.bookmark { color: limegreen; }
