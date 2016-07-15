@@ -244,7 +244,7 @@ var sbOutputService = {
         // generate HTML output
         var ret = "";
         if (sbDataSource.isContainer(aRes)) {
-            ret += '<a id="item-' + id + '" class="container" href="#">▷</a>';
+            ret += '<a id="item-' + id + '" class="container" title="Toggle" href="#">▷</a>';
         }
         switch (type) {
             case "separator": 
