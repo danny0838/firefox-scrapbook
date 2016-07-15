@@ -243,6 +243,9 @@ var sbOutputService = {
         source = sbCommonUtils.escapeHTML(source);
         // generate HTML output
         var ret = "";
+        if (sbDataSource.isContainer(aRes)) {
+            ret += '<a id="item-' + id + '" class="container" href="#">▷</a>';
+        }
         switch (type) {
             case "separator": 
                 ret += '<fieldset class="separator" title="' + title + '"><legend>&nbsp;' + title + '&nbsp;</legend></fieldset>';
@@ -251,8 +254,6 @@ var sbOutputService = {
                 ret += '<a class="' + type + '" title="' + title + '" href="' + source + '" target="_blank">'
                     + '<img src="' + icon + '" width="16" height="16" alt="">' + title + '</a>';
                 break;
-            case "folder": 
-                ret += '<a id="item-' + id + '" class="container" href="#">▷</a>';
             default: 
                 if (type != "folder") {
                     var href = sbCommonUtils.escapeHTML("../data/" + id + "/index.html");
