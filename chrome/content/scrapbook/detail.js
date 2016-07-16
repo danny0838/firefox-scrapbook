@@ -58,8 +58,10 @@ var sbCaptureOptions = {
     },
 
     resetDownLinkFilters: function() {
+        var _filter = document.getElementById("sbDetailDownLinkFilter").value;
         sbCommonUtils.resetPref("capture.default.downLinkFilter");
         document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("capture.default.downLinkFilter", "");
+        sbCommonUtils.setPref("capture.default.downLinkFilter", _filter);
     },
 
     fillTitleList: function() {

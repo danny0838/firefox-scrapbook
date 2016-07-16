@@ -972,8 +972,8 @@ function sbHeaderSniffer(aURLSpec, aRefURLSpec) {
             }
 
             // attempt to load the content
-            var contentDisposition = that.getContentDisposition();
-            that.load(contentType, contentDisposition);
+            var isAttachment = that.getContentDisposition();
+            that.load(contentType, isAttachment);
         },
     };
 }
@@ -1044,6 +1044,7 @@ sbHeaderSniffer.prototype = {
         return null;
     },
 
+    // 1 if it is an attachment, null otherwise
     getContentDisposition: function() {
         try {
             return this._channel.contentDisposition;
