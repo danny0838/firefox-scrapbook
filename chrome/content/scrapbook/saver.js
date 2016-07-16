@@ -1143,7 +1143,8 @@ var sbContentSaver = {
             } else if ( sourceURL.indexOf("file:") === 0 ) {
                 // if sourceURL is not targeting a file, fail out
                 var sourceFile = sbCommonUtils.convertURLToFile(sourceURL);
-                if ( !(sourceFile.exists() && sourceFile.isFile()) ) return "";
+                if (!sourceFile.exists()) throw sourceURL + " does not exist";
+                if (!sourceFile.isFile()) throw sourceURL + " is not a file";
                 // apply the filter
                 // Download all non-HTML local files.
                 // This is primarily to enable the combine wizard to capture all "file:" data.
