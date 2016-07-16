@@ -81,15 +81,6 @@ var sbSearchResult = {
         if ( res.ValueUTF8 == "urn:scrapbook:cache" ) return this.next();
         var folder = sbCacheSource.getProperty(res, "folder");
         if ( this.targetFolders.length > 0 ) {
-            if ( folder && folder.indexOf("urn:scrapbook:item") != 0 ) {
-                try {
-                    var target = sbCommonUtils.RDF.GetLiteral(folder);
-                    var prop = sbDataSource.data.ArcLabelsIn(target).getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-                    var source = sbDataSource.data.GetSource(prop, target, true);
-                    folder = source.ValueUTF8;
-                } catch(ex) {
-                }
-            }
             if ( this.targetFolders.indexOf(folder) < 0 ) return this.next();
         }
         var content = sbCacheSource.getProperty(res, "content");
