@@ -383,6 +383,8 @@
 <!ENTITY sb.prop.comment "Comentário">
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
+<!ENTITY sb.make.container "Convert to Folder">
+<!ENTITY sb.remove.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Visualização Combinada">
 <!ENTITY sb.folder.openall "Abrir Tudo em Abas">
 <!ENTITY sb.folder.manage "Gerenciar Pasta">

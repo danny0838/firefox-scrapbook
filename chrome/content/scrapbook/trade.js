@@ -95,10 +95,13 @@ var sbTradeService = {
             file.append("index.dat");
             if ( !file.exists() ) continue;
             var item = this.parseIndexDat(file);
-            if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) ) {
-                item.icon = baseURL + dirName + "/" + item.icon;
+            if (item.icon) {
+                if ( !/^\w[\w\-]*\w:/.test(item.icon) ) {
+                    item.icon = baseURL + dirName + "/" + item.icon;
+                }
+            } else {
+                item.icon = sbCommonUtils.getDefaultIcon(item.type);
             }
-            if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(item.type);
             this.treeItems.push([
                 item.title,
                 (new Date(file.lastModifiedTime)).toLocaleString(),
@@ -354,9 +357,8 @@ var sbExportService = {
         if ( !sbDataSource.exists(aRes) ) throw "Datasource changed.";
         var item = sbDataSource.getItem(aRes);
         item.folder = sbDataSource.getFolderPath(aRes).join("\t");
-        if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) ) {
-            item.icon = item.icon.match(/\d{14}\/(.+)$/) ? RegExp.$1 : "";
-        }
+        item.container = sbDataSource.isContainer(aRes) ? "true" : "";
+        item.icon = item.icon.replace(new RegExp("^resource://scrapbook/data/" + item.id + "/"), "");
         var num = 0, destDir, dirName;
         do {
             dirName = sbCommonUtils.validateFileName(item.title).substring(0,60) || "untitled";
@@ -458,7 +460,9 @@ var sbImportService = {
         if ( !sbCommonUtils.validateID(item.id) ) throw "Invalid ID.";
         if ( sbDataSource.exists(item.id) ) throw sbCommonUtils.lang("ERROR_SAME_ID_EXISTS");
         var destDir = sbTradeService.leftDir.clone();
-        if ( item.icon && !item.icon.match(/^http|moz-icon|chrome/) ) item.icon = "resource://scrapbook/data/" + item.id + "/" + item.icon;
+        if ( item.icon && !/^\w[\w\-]*\w:/.test(item.icon) ) {
+            item.icon = "resource://scrapbook/data/" + item.id + "/" + item.icon;
+        }
         if ( document.getElementById("sbTradeOptionUpdate").checked ) {
             // generate create and modify if none
             // older version (<= ScrapBook X 1.12.0a10) do not have these records
@@ -509,7 +513,7 @@ var sbImportService = {
             if ( this.tarResArray[0] != window.top.sbTreeHandler.TREE.ref ) folder = " [" + item.folder + "] ";
         }
         var curRes = sbDataSource.addItem(item, this.tarResArray[0], this.tarResArray[1]);
-        if (item.type == "folder") sbDataSource.createEmptySeq(curRes.Value);
+        if (item.container || item.type == "folder") sbDataSource.createEmptySeq(curRes.Value);
         this.folderTable[item.title] = curRes.Value;
         window.top.sbTreeHandler.TREE.builder.rebuild();
     },

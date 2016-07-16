@@ -1,6 +1,9 @@
 body {
     margin: 0px;
     padding: 0px;
+    font-size: 12px;
+    font-family: sans-serif;
+    line-height: 1.35em;
 }
 
 /* ::::: header ::::: */
@@ -9,8 +12,6 @@ div#header {
     padding: 2px 8px;
     border: 1px solid ThreeDShadow;
     background-color: InfoBackground;
-    font-family: sans-serif;
-    font-size: 9pt;
 }
 
 div#header a {
@@ -28,8 +29,6 @@ li {
     list-style-type: none;
     margin: 2px 20px;
     white-space: nowrap;
-    font-family: sans-serif;
-    font-size: 9pt;
 }
 
 a {
@@ -37,17 +36,22 @@ a {
     color: #000000;
 }
 
-a:active {
-    background-color: #000000;
-    color: #FFFFFF;
-}
-
 a:focus {
     background-color: #6495ED;
     text-decoration: underline;
 }
 
+a.container:focus {
+    text-decoration: none;
+}
+
+a:active {
+    background-color: #000000;
+    color: #FFFFFF;
+}
+
 /* ::::: type ::::: */
+a.container { display: inline-block; margin-left: -16px; width: 16px; text-align: center; color: #aaa; }
 a.marked   { font-weight: bold; }
 a.combine  { color: blue; }
 a.bookmark { color: limegreen; }
@@ -65,9 +69,16 @@ fieldset.separator legend {
 }
 
 /* ::::: icon ::::: */
-li img {
-    border: none;
-    vertical-align: middle;
+#toggle-all img, #search img, #container-root img {
     margin-right: 5px;
+    border: none;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
 }
 
+#search img {
+    margin: auto;
+    width: 18px;
+    height: 12px;
+}

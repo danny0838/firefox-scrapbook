@@ -93,6 +93,19 @@ var sbCombineService = {
     },
 
     initPreview: function() {
+        // generate default tree icons
+        // borrow the tree folder
+        var dir = sbCommonUtils.getScrapBookDir().clone(); dir.append("tree");
+        var urlHash = {
+            "chrome://scrapbook/skin/treeitem.png": "treeitem.png",
+            "chrome://scrapbook/skin/treenote.png": "treenote.png",
+            "chrome://scrapbook/skin/treenotex.png": "treenotex.png",
+        };
+        for ( var url in urlHash ) {
+            var destFile = dir.clone(); destFile.append(urlHash[url]);
+            sbCommonUtils.saveTemplateFile(url, destFile);
+        }
+
 //        this.WIZARD.canRewind = false;
         this.WIZARD.canAdvance = false;
 //        this.WIZARD.getButton("back").onclick = null;
@@ -172,7 +185,7 @@ var sbCombineService = {
         this.toggleElements(true);
         SB_trace(sbCommonUtils.lang("CAPTURE_START"));
 //sbCommonUtils.alert("--"+document.getElementById("sbpTitleTextbox").value+"--");
-        setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null); }, 0);
+        setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null, "combine"); }, 0);
     },
 
     toggleElements: function(isProgressMode) {
@@ -432,8 +445,11 @@ var sbPageCombiner = {
                 linkURL = sbDataSource.getProperty(sbCombineService.curRes, "source"); break;
         }
         var icon = sbDataSource.getProperty(sbCombineService.curRes, "icon");
-        if ( !icon ) icon = sbCommonUtils.getDefaultIcon(aType);
-        icon = sbCommonUtils.convertResURLToURL(icon, true);
+        if (icon) {
+            icon = sbCommonUtils.convertResURLToURL(icon, true);
+        } else {
+            icon = sbCommonUtils.getDefaultIcon(aType).replace(/^chrome:\/\/scrapbook\/skin\//, "tree/");
+        }
         src += '<cite class="scrapbook-header' + '">\n';
         src += '\t<img src="' + sbCommonUtils.escapeHTML(icon) + '" width="16" height="16">\n';
         src += '\t<a class="' + aType + '"' + (linkURL ? ' href="' + sbCommonUtils.escapeHTML(linkURL) + '"' : "") + '>' + sbCommonUtils.escapeHTMLWithSpace(title, true) + '</a>\n';

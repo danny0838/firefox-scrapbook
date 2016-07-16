@@ -71,8 +71,7 @@ var sbOutputService = {
             "chrome://scrapbook/skin/treeitem.png": "treeitem.png",
             "chrome://scrapbook/skin/treenote.png": "treenote.png",
             "chrome://scrapbook/skin/treenotex.png": "treenotex.png",
-            "chrome://scrapbook/skin/treefolder.png": "folder.png",
-            "chrome://scrapbook/skin/treefolder_open.png": "folder_open.png",
+            "chrome://scrapbook/skin/treefolder.png": "treefolder.png",
             "chrome://scrapbook/skin/toolbar_toggle.png": "toggle.png",
             "chrome://scrapbook/skin/search_all.png": "search.png",
         };
@@ -104,7 +103,7 @@ var sbOutputService = {
     processRescursively: function(aContRes) {
         this.depth++;
         var id = sbDataSource.getProperty(aContRes, "id") || "root";
-        this.content += '<ul id="folder-' + id + '">\n';
+        this.content += '<ul id="container-' + id + '">\n';
         var resList = sbDataSource.flattenResources(aContRes, 0, false);
         for (var i = 1; i < resList.length; i++) {
             this.content += '<li class="depth' + String(this.depth) + '">';
@@ -134,39 +133,58 @@ var sbOutputService = {
             + '<link rel="stylesheet" type="text/css" href="custom.css" media="all">\n'
             + '<script>\n'
             + 'function init() {\n'
-            + '    if (arguments.callee.done) return;\n'
-            + '    arguments.callee.done = true;\n'
             + '    toggleAll(false);\n'
-            + '    loadHash();\n'
-            + '    registerRenewHash();\n'
-            + '}\n'
-            + 'function loadHash() {\n'
-            + '    var hash = top.location.hash;\n'
-            + '    if (!hash) return;\n'
-            + '    hash = hash.substring(1);\n'
-            + '    if (self != top) top.frames[1].location = hash;\n'
-            + '    hash = hash.replace(/^(\\.\\.\\/data\\/\\d{14})\\/.*/, "$1/index.html");\n'
-            + '    var elems = document.getElementsByTagName("A");\n'
-            + '    for ( var i = 1; i < elems.length; i++ ) {\n'
-            + '        var elem = elems[i];\n'
-            + '        if (elem.getAttribute("href") == hash) {\n'
-            + '            if (self != top) top.document.title = elem.childNodes[1].nodeValue;\n'
-            + '            var ancs = elem.parentNode;\n'
-            + '            while (ancs) { if (ancs.nodeName == "UL") toggleElem(ancs, true); ancs = ancs.parentNode; }\n'
-            + '            elem.focus();\n'
-            + '            break;\n'
+            + '    var hash = top.location.hash, hashTargetUrl, hashTargetItem;\n'
+            + '    if (hash) {\n'
+            + '        hashTargetUrl = hash.substring(1);\n'
+            + '        var mainPage = hashTargetUrl.replace(/^(\\.\\.\\/data\\/\\d{14})\\/.*/, "$1/index.html");\n'
+            + '        var elems = document.getElementById("container-root").getElementsByTagName("A");\n'
+            + '        for ( var i = 0, I = elems.length; i < I; i++ ) {\n'
+            + '            if (elems[i].getAttribute("href") == mainPage) {\n'
+            + '                hashTargetItem = elems[i];\n'
+            + '                break;\n'
+            + '            }\n'
+            + '        }\n'
+            + '    }\n'
+            + '    if (hashTargetUrl) {\n'
+            + '        if (self != top) top.frames["main"].location = hashTargetUrl;\n'
+            + '    }\n'
+            + '    if (hashTargetItem) {\n'
+            + '        if (self != top && hashTargetItem.title) top.document.title = hashTargetItem.title;\n'
+            + '        var ancs = hashTargetItem;\n'
+            + '        while (ancs) { \n'
+            + '            if (ancs.nodeName == "UL") toggleElem(ancs, true);\n' 
+            + '            ancs = ancs.parentNode;\n'
+            + '        }\n'
+            + '        hashTargetItem.focus();\n'
+            + '    }\n'
+            + '    document.getElementById("toggle-all").onclick = function () {\n'
+            + '        toggleAll();\n'
+            + '        return false;\n'
+            + '    }\n'
+            + '    var elems = document.getElementById("container-root").getElementsByTagName("A");\n'
+            + '    for ( var i = 0, I = elems.length; i < I; i++ ) {\n'
+            + '        if (elems[i].className == "container") {\n'
+            + '            elems[i].onclick = onClickContainer;\n'
+            + '        } else if (elems[i].className == "folder") {\n'
+            + '            elems[i].onclick = onClickFolder;\n'
+            + '        } else {\n'
+            + '            elems[i].onclick = onClickItem;\n'
             + '        }\n'
             + '    }\n'
             + '}\n'
-            + 'function registerRenewHash() {\n'
-            + '    var elems = document.getElementById("folder-root").getElementsByTagName("A");\n'
-            + '    for ( var i = 1; i < elems.length; i++ ) {\n'
-            + '        if (elems[i].className != "folder") {\n'
-            + '            elems[i].onclick = renewHash;\n'
-            + '        }\n'
-            + '    }\n'
+            + 'function onClickContainer() {\n'
+            + '    var ulElem = document.getElementById(this.id.replace(/^item-/, "container-"));\n'
+            + '    if (ulElem) toggleElem(ulElem);\n'
+            + '    return false;\n'
             + '}\n'
-            + 'function renewHash() {\n'
+            + 'function onClickFolder() {\n'
+            + '    var cElem = this.previousSibling;\n'
+            + '    cElem.focus();\n'
+            + '    cElem.click();\n'
+            + '    return false;\n'
+            + '}\n'
+            + 'function onClickItem() {\n'
             + '    if (self == top) return;\n'
             + '    var hash = "#" + this.getAttribute("href");\n'
             + '    var title = this.childNodes[1].nodeValue;\n'
@@ -174,19 +192,17 @@ var sbOutputService = {
             + '    else top.location.hash = hash;\n'
             + '    top.document.title = title;\n'
             + '}\n'
-            + 'function toggle(id, willOpen) {\n'
-            + '    toggleElem(document.getElementById(id), willOpen);\n'
-            + '}\n'
             + 'function toggleElem(elem, willOpen) {\n'
-            + '    var iconElem = elem.previousSibling.previousSibling.firstChild;\n'
+            + '    var iElem = document.getElementById(elem.id.replace(/^container-/, "item-"));\n'
+            + '    if (!iElem) return;\n'
             + '    if (typeof willOpen === "undefined") willOpen = (elem.style.display == "none");\n'
             + '    if (willOpen) {\n'
             + '        elem.style.display = "block";\n'
-            + '        iconElem.src = "folder_open.png";\n'
+            + '        iElem.textContent = "▽";\n'
             + '    }\n'
             + '    else {\n'
             + '        elem.style.display = "none";\n'
-            + '        iconElem.src = "folder.png";\n'
+            + '        iElem.textContent = "▷";\n'
             + '    }\n'
             + '}\n'
             + 'function toggleAll(willOpen) {\n'
@@ -205,7 +221,7 @@ var sbOutputService = {
             + '<script src="custom.js"></script>\n'
             + '</head>\n\n'
             + '<body>\n'
-            + '<div id="header"><a href="javascript:toggleAll();"><img src="toggle.png" width="16" height="16" alt="">ScrapBook</a> <a href="../search.html"><img src="search.png" width="18" height="12" alt=""></a></div>\n'
+            + '<div id="header"><a id="toggle-all" title="Toggle all folders" href="#"><img src="toggle.png" alt="">ScrapBook</a> <a id="search" href="../search.html"><img src="search.png" alt=""></a></div>\n'
         return HTML;
     },
 
@@ -215,31 +231,41 @@ var sbOutputService = {
         var icon = sbDataSource.getProperty(aRes, "icon");
         var title = sbDataSource.getProperty(aRes, "title");
         var source = sbDataSource.getProperty(aRes, "source");
-        if ( icon.match(/(\/data\/\d{14}\/.*$)/) ) icon = ".." + RegExp.$1;
-        if ( !icon ) icon = sbCommonUtils.escapeFileName(sbCommonUtils.getFileName( sbCommonUtils.getDefaultIcon(type) ));
+        // fix icon path to fit tree output
+        if (icon) {
+            icon = icon.replace(/^resource:\/\/scrapbook\//, "../");
+        } else {
+            icon = sbCommonUtils.getDefaultIcon(type).replace(/^chrome:\/\/scrapbook\/skin\//, "");
+        }
+        // escape paths for HTML safe
         icon = sbCommonUtils.escapeHTML(icon);
         title = sbCommonUtils.escapeHTMLWithSpace(title);
         source = sbCommonUtils.escapeHTML(source);
-        var ret;
+        // generate HTML output
+        var ret = "";
+        if (sbDataSource.isContainer(aRes)) {
+            ret += '<a id="item-' + id + '" class="container" title="Toggle" href="#">▷</a>';
+        }
         switch (type) {
             case "separator": 
-                ret = '<fieldset class="separator" title="' + title + '"><legend>&nbsp;' + title + '&nbsp;</legend></fieldset>';
-                break;
-            case "folder": 
-                ret = '<a class="folder" href="javascript:toggle(\'folder-' + id + '\');" title="' + title + '">'
-                    + '<img src="folder.png" width="16" height="16" alt="">' + title + '</a>\n';
+                ret += '<fieldset class="separator" title="' + title + '"><legend>&nbsp;' + title + '&nbsp;</legend></fieldset>';
                 break;
             case "bookmark": 
-                ret = '<a href="' + source + '" target="_blank" class="' + type + '" title="' + title + '">'
-                    + '<img src="' + icon + '" width="16" height="16" alt="">' + title + '</a>';
+                ret += '<a class="' + type + '" title="' + title + '" href="' + source + '" target="_blank">'
+                    + '<img src="' + icon + '" alt="">' + title + '</a>';
                 break;
             default: 
-                var href = sbCommonUtils.escapeHTML("../data/" + id + "/index.html");
-                var target = this.optionFrame ? ' target="main"' : "";
-                ret = '<a href="' + href + '"' + target + ' class="' + type + '" title="' + title + '">'
-                    + '<img src="' + icon + '" width="16" height="16" alt="">' + title + '</a>';
+                if (type != "folder") {
+                    var href = sbCommonUtils.escapeHTML("../data/" + id + "/index.html");
+                    var target = this.optionFrame ? ' target="main"' : "";
+                    var hrefTarget = ' href="' + href + '"' + target;
+                } else {
+                    var hrefTarget = '';
+                }
+                ret += '<a class="' + type + '" title="' + title + '"' + hrefTarget + '>'
+                    + '<img src="' + icon + '" alt="">' + title + '</a>';
                 if (!source) break;
-                ret += ' <a href="' + source + '" target="_blank" class="bookmark" title="Source">➤</a>';
+                ret += ' <a class="bookmark" title="Source" href="' + source + '" target="_blank">➤</a>';
                 break;
         }
         return ret;

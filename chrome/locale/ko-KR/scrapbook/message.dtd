@@ -383,6 +383,8 @@
 <!ENTITY sb.prop.comment "주석">
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
+<!ENTITY sb.make.container "Convert to Folder">
+<!ENTITY sb.remove.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "결합 결과">
 <!ENTITY sb.folder.openall "모두 탭으로 열기">
 <!ENTITY sb.folder.manage "폴더 관리">

@@ -383,6 +383,8 @@
 <!ENTITY sb.prop.comment "評註">
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
+<!ENTITY sb.make.container "轉換為資料夾">
+<!ENTITY sb.remove.container "轉換為非資料夾">
 <!ENTITY sb.folder.combine "合併檢視">
 <!ENTITY sb.folder.openall "以分頁開啟所有資料">
 <!ENTITY sb.folder.manage "管理資料夾">
