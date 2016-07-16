@@ -1006,13 +1006,20 @@ var sbContentSaver = {
         return aCSSText;
     },
 
-    // aURLSpec is an absolute URL
-    //
+
     // Converting a data URI to nsIURL will throw an NS_ERROR_MALFORMED_URI error
     // if the data URI is large (e.g. 5 MiB), so we manipulate the URL string instead
     // of converting the URI to nsIURI initially.
     //
+    // aURLSpec is an absolute URL
+    //
     // aIsLinkFilter is specific for download link filter
+    //
+    // return "": means no download happened (should no change the url)
+    // return <sourceURL>: deep capture for latter rewrite via sbCrossLinker (must have identical url)
+    // return "urn:scrapbook-download:<hash>": when download starts
+    // return "urn:scrapbook-download-error:<sourceURL>": when download error detected
+    // return fileName: a download happen, or used already downloaded file
     download: function(aURLSpec, aIsLinkFilter) {
         if ( !aURLSpec ) return "";
         var sourceURL = aURLSpec;
@@ -1024,6 +1031,7 @@ var sbContentSaver = {
                 var fileName, isDuplicate;
                 sbContentSaver.httpTask[sbContentSaver.item.id]++;
                 try {
+                    sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][hashKey] = "urn:scrapbook-download-error:" + sourceURL;
                     var channel = sbCommonUtils.IO.newChannel(sourceURL, null, null);
                     channel.asyncOpen({
                         _stream: null,
@@ -1074,7 +1082,6 @@ var sbContentSaver = {
                                 try {
                                     if (this._file) this._file.remove(true);
                                 } catch(ex) {}
-                                sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][hashKey] = sourceURL;
                                 sbContentSaver.downloadErrorHandler(sourceURL, "download channel fail");
                             }
                             sbCaptureObserverCallback.onDownloadComplete(sbContentSaver.item);
@@ -1172,8 +1179,9 @@ var sbContentSaver = {
             }
         } catch (ex) {
             this.downloadErrorHandler(sourceURL, ex);
+            return "urn:scrapbook-download-error:" + sourceURL;
         }
-        return "";
+        return sourceURL;
     },
 
     downloadErrorHandler: function(url, ex) {
