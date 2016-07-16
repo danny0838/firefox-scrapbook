@@ -385,6 +385,7 @@
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
+<!ENTITY sb.remove.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Birleşik Görünüm">
 <!ENTITY sb.folder.openall "Tümünü Sekmelerde Aç">
 <!ENTITY sb.folder.manage "Klasörü Düzenle">

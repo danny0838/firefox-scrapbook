@@ -27,12 +27,13 @@
             <menuitem id="sbPopupOpenNewTab" label="&sb.open.newtab;" nodelay="true" oncommand="sbController.open(null,true);" />
             <menuitem id="sbPopupOpenSource" label="&sb.open.source;" nodelay="true" oncommand="sbController.forward(null,'S');"
                       onclick="if (event.button != 1) return; this.parentNode.hidePopup(); sbController.forward(null,'S',true);" />
-            <menuitem id="sbPopupMakeContainer" label="&sb.make.container;" oncommand="sbMainService.makeContainer();" />
             <menuitem id="sbPopupCombinedView" label="&sb.folder.combine;" oncommand="sbController.forward(null,'C');"   hidden="true" />
             <menuitem id="sbPopupOpenAllItems" label="&sb.folder.openall;" oncommand="sbController.openAllInTabs(null);" hidden="true" />
             <menuseparator hidden="true" />
             <menuitem id="sbPopupManage" label="&sb.folder.manage;..." oncommand="sbController.forward(null,'M');" hidden="true" />
             <menuitem id="sbPopupSort"   label="&sb.sort.folder;..."   oncommand="sbController.forward(null,'Z');" hidden="true" />
+            <menuitem id="sbPopupMakeContainer" label="&sb.make.container;" oncommand="sbMainService.makeContainer();" />
+            <menuitem id="sbPopupRemoveContainer" label="&sb.remove.container;" oncommand="sbMainService.removeContainer();" />
             <menu id="sbPopupTools" label="&sb.tools;" onmouseover="event.stopPropagation();">
                 <menupopup id="sbPopupToolsMenu">
                     <menuitem id="sbPopupShowFiles" label="&sb.show.files;" oncommand="sbController.forward(null,'L');" />

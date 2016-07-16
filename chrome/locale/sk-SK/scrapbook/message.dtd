@@ -384,6 +384,7 @@
 <!ENTITY sbp.prop.url "Adresa URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
+<!ENTITY sb.remove.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Otvoriť v kombinovanom náhľade">
 <!ENTITY sb.folder.openall "Otvoriť všetko v kartách">
 <!ENTITY sb.folder.manage "Správca priečinkov">

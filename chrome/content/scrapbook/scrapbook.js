@@ -195,7 +195,30 @@ var sbMainService = {
             if (!sbDataSource.isContainer(curRes)) {
                 sbDataSource.createEmptySeq(curRes.Value);
             }
-        } catch(ex) {}
+        } catch (ex) {
+            sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_MAKE_CONTAINER", ex));
+        }
+    },
+
+    removeContainer: function() {
+        try {
+            var curIdx = sbTreeHandler.TREE.view.selection.count ? sbTreeHandler.TREE.currentIndex : -1;
+            var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
+            if (sbDataSource.isContainer(curRes)) {
+                if (sbDataSource.flattenResources(curRes, 0, false).length <= 1) {
+                    var curPar = sbTreeHandler.getParentResource(curIdx);
+                    var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
+                    var item = sbDataSource.getItem(curRes);
+                    sbDataSource.deleteItemDescending(curRes, curPar);
+                    sbDataSource.addItem(item, curPar.Value, curRelIdx);
+                    sbCommonUtils.rebuildGlobal();
+                } else {
+                    sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_REMOVE_CONTAINER_NONEMPTY"));
+                }
+            }
+        } catch (ex) {
+            sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_REMOVE_CONTAINER", ex));
+        }
     },
 
     openPrefWindow: function() {
@@ -251,12 +274,13 @@ var sbController = {
         getElement("sbPopupOpen").hidden = isMultiple || isFolder || isSeparator;
         getElement("sbPopupOpenNewTab").hidden = isMultiple || isFolder || isSeparator;
         getElement("sbPopupOpenSource").hidden = isMultiple || isFolder || isSeparator || isNote;
-        getElement("sbPopupMakeContainer").hidden = isMultiple || isContainer || isSeparator;
         getElement("sbPopupCombinedView").hidden = isMultiple || !isContainer;
         getElement("sbPopupOpenAllItems").hidden = isMultiple || !isContainer;
         getElement("sbPopupOpenAllItems").nextSibling.hidden = isMultiple || !isContainer;
         getElement("sbPopupManage").hidden = isMultiple || !isContainer;
         getElement("sbPopupSort").hidden = isMultiple || !isContainer;
+        getElement("sbPopupMakeContainer").hidden = isMultiple || isContainer || isSeparator;
+        getElement("sbPopupRemoveContainer").hidden = isMultiple || !isContainer || isFolder;
         getElement("sbPopupNewFolder").hidden = isMultiple;
         getElement("sbPopupNewSeparator").hidden = isMultiple;
         getElement("sbPopupNewNote").hidden = isMultiple;
