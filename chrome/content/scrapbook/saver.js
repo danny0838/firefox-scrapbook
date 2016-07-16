@@ -1351,8 +1351,10 @@ var sbContentSaver = {
     restoreFileNameFromHash: function (content, type) {
         return content.replace(/urn:scrapbook-download:([0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12})/g, function (match, key) {
             var url = sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][key];
-            // error handling, should be almost impossible
-            if (!url) return "urn:scrapbook-download-error:" + key;
+            // This could happen when a web page really contains a content text in our format.
+            // We return the original text for keys not defineded in the map to prevent a bad replace
+            // since it's nearly impossible for them to hit on the hash keys we are using.
+            if (!url) return match;
             if (type == "HTML") {
                 url = sbCommonUtils.escapeHTML(url);
             }
