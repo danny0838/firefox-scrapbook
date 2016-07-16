@@ -1028,6 +1028,22 @@ var sbContentSaver = {
         } catch(ex) {}
         sourceURL = encodeURI(sourceURL);
 
+        var errorHandler = function(ex) {
+            // crop to prevent large dataURI masking the exception info, especially dataURIs
+            sourceURL = sbCommonUtils.crop(sourceURL, 1024);
+            if (sourceURL.indexOf("file:") === 0) {
+                var msgType = "ERR_FAIL_COPY_FILE";
+            } else if (sourceURL.indexOf("data:") === 0) {
+                var msgType = "ERR_FAIL_WRITE_FILE";
+            } else {
+                var msgType = "ERR_FAIL_DOWNLOAD_FILE";
+            }
+            var errURL = "urn:scrapbook-download-error:" + sourceURL;
+            sbCommonUtils.error(sbCommonUtils.lang(msgType, sourceURL, ex));
+            if (hashKey) sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][hashKey] = errURL;
+            return errURL;
+        };
+
         try {
             if ( sourceURL.indexOf("http:") === 0 || sourceURL.indexOf("https:") === 0 || sourceURL.indexOf("ftp:") === 0 ) {
                 var targetDir = this.option["internalize"] ? this.option["internalize"].parent : this.contentDir.clone();
@@ -1035,80 +1051,93 @@ var sbContentSaver = {
                 var fileName, isDuplicate;
                 sbContentSaver.httpTask[sbContentSaver.item.id]++;
                 try {
-                    sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][hashKey] = "urn:scrapbook-download-error:" + sourceURL;
                     var channel = sbCommonUtils.IO.newChannel(sourceURL, null, null);
                     channel.asyncOpen({
                         _stream: null,
                         _file: null,
                         _skipped: false,
                         onStartRequest: function (aRequest, aContext) {
-                            // if header Content-Disposition is defined, use it
                             try {
-                                fileName = aRequest.contentDispositionFilename;
-                                var [, ext] = sbCommonUtils.splitFileName(fileName);
-                            } catch (ex) {}
-                            // if no ext defined, try header Content-Type
-                            if (!fileName) {
-                                var [base, ext] = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aRequest.name));
-                                if (!ext) {
-                                    ext = sbCommonUtils.getMimePrimaryExtension(aRequest.contentType, ext) || "dat";
-                                }
-                                fileName = base + "." + ext;
-                            }
-                            // apply the filter
-                            if (aIsLinkFilter) {
-                                var toDownload = sbContentSaver.downLinkFilter(ext);
-                                if (!toDownload) {
-                                    if ( sbContentSaver.option["inDepth"] > 0 ) {
-                                        // do not copy, but add to the link list if it's a work of deep capture
-                                        sbContentSaver.linkURLs.push(sourceURL);
+                                // if header Content-Disposition is defined, use it
+                                try {
+                                    fileName = aRequest.contentDispositionFilename;
+                                    var [, ext] = sbCommonUtils.splitFileName(fileName);
+                                } catch (ex) {}
+                                // if no ext defined, try header Content-Type
+                                if (!fileName) {
+                                    var [base, ext] = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aRequest.name));
+                                    if (!ext) {
+                                        try {
+                                            ext = sbCommonUtils.getMimePrimaryExtension(aRequest.contentType, ext) || "dat";
+                                        } catch (ex) {}
                                     }
-                                    sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][hashKey] = sourceURL;
+                                    fileName = base + "." + ext;
+                                }
+                                // apply the filter
+                                if (aIsLinkFilter) {
+                                    var toDownload = sbContentSaver.downLinkFilter(ext);
+                                    if (!toDownload) {
+                                        if ( sbContentSaver.option["inDepth"] > 0 ) {
+                                            // do not copy, but add to the link list if it's a work of deep capture
+                                            sbContentSaver.linkURLs.push(sourceURL);
+                                        }
+                                        sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][hashKey] = sourceURL;
+                                        this._skipped = true;
+                                        channel.cancel(Components.results.NS_BINDING_ABORTED);
+                                        return;
+                                    }
+                                }
+                                // determine the filename and check for duplicate
+                                [fileName, isDuplicate] = sbContentSaver.getUniqueFileName(fileName, sourceURL);
+                                sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][hashKey] = sbCommonUtils.escapeFileName(fileName);
+                                if (isDuplicate) {
                                     this._skipped = true;
                                     channel.cancel(Components.results.NS_BINDING_ABORTED);
-                                    return;
                                 }
-                            }
-                            // determine the filename and check for duplicate
-                            [fileName, isDuplicate] = sbContentSaver.getUniqueFileName(fileName, sourceURL);
-                            sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][hashKey] = sbCommonUtils.escapeFileName(fileName);
-                            if (isDuplicate) {
-                                this._skipped = true;
+                            } catch (ex) {
+                                sbCommonUtils.error(ex);
                                 channel.cancel(Components.results.NS_BINDING_ABORTED);
                             }
                         },
                         onStopRequest: function (aRequest, aContext, aStatusCode) {
-                            if (!!this._stream) {
-                                this._stream.close();
-                            }
-                            if (!this._skipped && aStatusCode != Components.results.NS_OK) {
-                                // download failed, remove the file and use the original URL
-                                try {
+                            try {
+                                if (!!this._stream) {
+                                    this._stream.close
+                                }
+                                if (!this._skipped && aStatusCode != Components.results.NS_OK) {
+                                    // download failed, remove the file and use the original URL
                                     if (this._file) this._file.remove(true);
-                                } catch(ex) {}
-                                sbContentSaver.downloadErrorHandler(sourceURL, "download channel fail");
+                                    throw "download channel fail";
+                                }
+                            } catch (ex) {
+                                errorHandler(ex);
                             }
                             sbCaptureObserverCallback.onDownloadComplete(sbContentSaver.item);
                         },
                         onDataAvailable: function (aRequest, aContext, aInputStream, aOffset, aCount) {
-                            if (!this._stream) {
-                                this._file = targetDir.clone(); this._file.append(fileName);
-                                var ostream = Components.classes['@mozilla.org/network/file-output-stream;1']
-                                        .createInstance(Components.interfaces.nsIFileOutputStream);
-                                ostream.init(this._file, -1, 0666, 0);
-                                var bostream = Components.classes['@mozilla.org/network/buffered-output-stream;1']
-                                        .createInstance(Components.interfaces.nsIBufferedOutputStream);
-                                bostream.init(ostream, 1024 * 1024);
-                                this._stream = bostream;
+                            try {
+                                if (!this._stream) {
+                                    this._file = targetDir.clone(); this._file.append(fileName);
+                                    var ostream = Components.classes['@mozilla.org/network/file-output-stream;1']
+                                            .createInstance(Components.interfaces.nsIFileOutputStream);
+                                    ostream.init(this._file, -1, 0666, 0);
+                                    var bostream = Components.classes['@mozilla.org/network/buffered-output-stream;1']
+                                            .createInstance(Components.interfaces.nsIBufferedOutputStream);
+                                    bostream.init(ostream, 1024 * 1024);
+                                    this._stream = bostream;
+                                }
+                                this._stream.writeFrom(aInputStream, aCount);
+                                this._stream.flush();
+                                sbCaptureObserverCallback.onDownloadProgress(sbContentSaver.item, fileName, aOffset);
+                            } catch(ex) {
+                                sbCommonUtils.error(ex);
+                                channel.cancel(Components.results.NS_BINDING_ABORTED);
                             }
-                            this._stream.writeFrom(aInputStream, aCount);
-                            this._stream.flush();
-                            sbCaptureObserverCallback.onDownloadProgress(sbContentSaver.item, fileName, aOffset);
                         }
                     }, null);
                 } catch (ex) {
                     sbContentSaver.httpTask[sbContentSaver.item.id]--;
-                    sbContentSaver.downloadErrorHandler(sourceURL, ex);
+                    errorHandler(ex);
                 }
                 return "urn:scrapbook-download:" + hashKey;
             } else if ( sourceURL.indexOf("file:") === 0 ) {
@@ -1182,23 +1211,9 @@ var sbContentSaver = {
                 return sbCommonUtils.escapeFileName(fileName);
             }
         } catch (ex) {
-            this.downloadErrorHandler(sourceURL, ex);
-            return "urn:scrapbook-download-error:" + sourceURL;
+            return errorHandler(ex);
         }
         return sourceURL;
-    },
-
-    downloadErrorHandler: function(url, ex) {
-        // crop to prevent large dataURI masking the exception info, especially dataURIs
-        url = sbCommonUtils.crop(url, 1024);
-        if (url.indexOf("file:") === 0) {
-            var msgType = "ERR_FAIL_COPY_FILE";
-        } else if (url.indexOf("data:") === 0) {
-            var msgType = "ERR_FAIL_WRITE_FILE";
-        } else {
-            var msgType = "ERR_FAIL_DOWNLOAD_FILE";
-        }
-        sbCommonUtils.error(sbCommonUtils.lang(msgType, url, ex));
     },
 
     downLinkFilter: function(aFileExt) {
