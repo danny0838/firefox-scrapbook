@@ -221,7 +221,7 @@ var sbOutputService = {
             + '<script src="custom.js"></script>\n'
             + '</head>\n\n'
             + '<body>\n'
-            + '<div id="header"><a id="toggle-all" title="Toggle all folders" href="#"><img src="toggle.png" width="16" height="16" alt="">ScrapBook</a> <a href="../search.html"><img src="search.png" width="18" height="12" alt=""></a></div>\n'
+            + '<div id="header"><a id="toggle-all" title="Toggle all folders" href="#"><img src="toggle.png" alt="">ScrapBook</a> <a id="search" href="../search.html"><img src="search.png" alt=""></a></div>\n'
         return HTML;
     },
 
@@ -252,7 +252,7 @@ var sbOutputService = {
                 break;
             case "bookmark": 
                 ret += '<a class="' + type + '" title="' + title + '" href="' + source + '" target="_blank">'
-                    + '<img src="' + icon + '" width="16" height="16" alt="">' + title + '</a>';
+                    + '<img src="' + icon + '" alt="">' + title + '</a>';
                 break;
             default: 
                 if (type != "folder") {
@@ -263,7 +263,7 @@ var sbOutputService = {
                     var hrefTarget = '';
                 }
                 ret += '<a class="' + type + '" title="' + title + '"' + hrefTarget + '>'
-                    + '<img src="' + icon + '" width="16" height="16" alt="">' + title + '</a>';
+                    + '<img src="' + icon + '" alt="">' + title + '</a>';
                 if (!source) break;
                 ret += ' <a class="bookmark" title="Source" href="' + source + '" target="_blank">➤</a>';
                 break;

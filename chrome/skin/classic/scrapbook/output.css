@@ -69,9 +69,16 @@ fieldset.separator legend {
 }
 
 /* ::::: icon ::::: */
-li img {
-    border: none;
-    vertical-align: middle;
+#toggle-all img, #search img, #container-root img {
     margin-right: 5px;
+    border: none;
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
 }
 
+#search img {
+    margin: auto;
+    width: 18px;
+    height: 12px;
+}
