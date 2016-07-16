@@ -296,8 +296,8 @@ var sbCacheService = {
         this.dataDir.append("data");
         var contResList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"), 1, true);
         for ( var i = 0; i < contResList.length; i++ ) {
-            var resList = sbDataSource.flattenResources(contResList[i], 2, false);
-            resList.push(contResList[i]);
+            var resList = sbDataSource.flattenResources(contResList[i], 0, false);
+            resList.shift(); // remove container itself
             for ( var j = 0; j < resList.length; j++ ) {
                 var type = sbDataSource.getProperty(resList[j], "type");
                 if ( type == "folder" || type == "separator" ) continue;
