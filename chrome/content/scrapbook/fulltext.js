@@ -84,8 +84,8 @@ var sbSearchResult = {
             if ( this.targetFolders.indexOf(folder) < 0 ) return this.next();
         }
         var content = sbCacheSource.getProperty(res, "content");
-        var nameLR = sbCommonUtils.splitURLByAnchor(res.ValueUTF8);
-        var resURI = nameLR[0], name = nameLR[1].substring(1) || "index.html";
+        var [resURI, name] = sbCommonUtils.splitURLByAnchor(res.ValueUTF8);
+        name = name.substring(1) || "index.html";
         res = sbCommonUtils.RDF.GetResource(resURI);
         if ( !sbDataSource.exists(res) ) return this.next();
         var hits = sbSearchQueryHandler.match(this.queryKey, res, content, name);
