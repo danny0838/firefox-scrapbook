@@ -1022,6 +1022,7 @@ var sbContentSaver = {
                 var targetDir = this.option["internalize"] ? this.option["internalize"].parent : this.contentDir.clone();
                 var hashKey = sbCommonUtils.getUUID();
                 var fileName, isDuplicate;
+                sbContentSaver.httpTask[sbContentSaver.item.id]++;
                 try {
                     var channel = sbCommonUtils.IO.newChannel(sourceURL, null, null);
                     channel.asyncOpen({
@@ -1070,11 +1071,11 @@ var sbContentSaver = {
                             }
                             if (!this._skipped && aStatusCode != Components.results.NS_OK) {
                                 // download failed, remove the file and use the original URL
-                                this._file.remove(true);
+                                try {
+                                    if (this._file) this._file.remove(true);
+                                } catch(ex) {}
                                 sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][hashKey] = sourceURL;
-                                // crop to prevent large dataURI masking the exception info, especially dataURIs
-                                sourceURL = sbCommonUtils.crop(sourceURL, 1024);
-                                sbCommonUtils.error(sbCommonUtils.lang("ERR_FAIL_DOWNLOAD_FILE", sourceURL, "download channel fail"));
+                                sbContentSaver.downloadErrorHandler(sourceURL, "download channel fail");
                             }
                             sbCaptureObserverCallback.onDownloadComplete(sbContentSaver.item);
                         },
@@ -1096,9 +1097,8 @@ var sbContentSaver = {
                     }, null);
                 } catch (ex) {
                     sbContentSaver.httpTask[sbContentSaver.item.id]--;
-                    throw ex;
+                    sbContentSaver.downloadErrorHandler(sourceURL, ex);
                 }
-                sbContentSaver.httpTask[sbContentSaver.item.id]++;
                 return "scrapbook://" + hashKey;
             } else if ( sourceURL.indexOf("file:") === 0 ) {
                 // if sourceURL is not targeting a file, fail out
@@ -1171,18 +1171,22 @@ var sbContentSaver = {
                 return fileName;
             }
         } catch (ex) {
-            // crop to prevent large dataURI masking the exception info, especially dataURIs
-            sourceURL = sbCommonUtils.crop(sourceURL, 1024);
-            if (sourceURL.indexOf("file:") === 0) {
-                var msgType = "ERR_FAIL_COPY_FILE";
-            } else if (sourceURL.indexOf("data:") === 0) {
-                var msgType = "ERR_FAIL_WRITE_FILE";
-            } else {
-                var msgType = "ERR_FAIL_DOWNLOAD_FILE";
-            }
-            sbCommonUtils.error(sbCommonUtils.lang(msgType, sourceURL, ex));
+            this.downloadErrorHandler(sourceURL, ex);
         }
         return "";
+    },
+
+    downloadErrorHandler: function(url, ex) {
+        // crop to prevent large dataURI masking the exception info, especially dataURIs
+        url = sbCommonUtils.crop(url, 1024);
+        if (url.indexOf("file:") === 0) {
+            var msgType = "ERR_FAIL_COPY_FILE";
+        } else if (url.indexOf("data:") === 0) {
+            var msgType = "ERR_FAIL_WRITE_FILE";
+        } else {
+            var msgType = "ERR_FAIL_DOWNLOAD_FILE";
+        }
+        sbCommonUtils.error(sbCommonUtils.lang(msgType, url, ex));
     },
 
     downLinkFilter: function(aFileExt) {
