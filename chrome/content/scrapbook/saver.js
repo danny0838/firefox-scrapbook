@@ -376,12 +376,12 @@ var sbContentSaver = {
             myHTMLFile.append(myHTMLFileName);
         }
         sbCommonUtils.writeFile(myHTMLFile, myHTML, charset);
-        this.downloadRewriteFiles[this.item.id].push([myHTMLFile, charset]);
+        this.downloadRewriteFiles[this.item.id].push([myHTMLFile, charset, "HTML"]);
         if ( myCSS ) {
             var myCSSFile = this.contentDir.clone();
             myCSSFile.append(myCSSFileName);
             sbCommonUtils.writeFile(myCSSFile, myCSS, charset);
-            this.downloadRewriteFiles[this.item.id].push([myCSSFile, charset]);
+            this.downloadRewriteFiles[this.item.id].push([myCSSFile, charset, "CSS"]);
         }
         return myHTMLFile.leafName;
     },
@@ -395,12 +395,12 @@ var sbContentSaver = {
         var newFileName = this.download(aFileURL);
         if (newFileName) {
             if ( aCaptureType == "image" ) {
-                var myHTML = '<html><head><meta charset="UTF-8"></head><body><img src="' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(newFileName)) + '"></body></html>';
+                var myHTML = '<html><head><meta charset="UTF-8"></head><body><img src="' + newFileName + '"></body></html>';
             } else {
-                var myHTML = '<html><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0;URL=./' + sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(newFileName)) + '"></head><body></body></html>';
+                var myHTML = '<html><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0;URL=' + newFileName + '"></head><body></body></html>';
             }
             if ( this.isMainFrame ) {
-                this.item.icon = "moz-icon://" + sbCommonUtils.escapeFileName(newFileName) + "?size=16";
+                this.item.icon = "moz-icon://" + newFileName + "?size=16";
                 this.item.type = aCaptureType;
                 this.item.chars = aCharset || "";
             }
@@ -410,7 +410,7 @@ var sbContentSaver = {
         var myHTMLFile = this.contentDir.clone();
         myHTMLFile.append(aFileKey + ".html");
         sbCommonUtils.writeFile(myHTMLFile, myHTML, "UTF-8");
-        this.downloadRewriteFiles[this.item.id].push([myHTMLFile, "UTF-8"]);
+        this.downloadRewriteFiles[this.item.id].push([myHTMLFile, "UTF-8", "HTML"]);
         return myHTMLFile.leafName;
     },
 
@@ -478,7 +478,7 @@ var sbContentSaver = {
                     if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("src")) ) break;
                     if ( this.option["images"] ) {
                         var aFileName = this.download(aNode.src);
-                        if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
+                        if (aFileName) aNode.setAttribute("src", aFileName);
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("src", aNode.src);
                     } else {
@@ -493,7 +493,7 @@ var sbContentSaver = {
                             var url = sbCommonUtils.resolveURL(that.refURLObj.spec, m2);
                             if ( that.option["images"] ) {
                                 var aFileName = that.download(url);
-                                if (aFileName) return m1 + sbCommonUtils.escapeFileName(aFileName) + m3;
+                                if (aFileName) return m1 + aFileName + m3;
                             } else if ( that.option["keepLink"] ) {
                                 return m1 + url + m3;
                             } else {
@@ -511,7 +511,7 @@ var sbContentSaver = {
                     if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
                     if ( this.option["media"] ) {
                         var aFileName = this.download(aNode.src);
-                        if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
+                        if (aFileName) aNode.setAttribute("src", aFileName);
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("src", aNode.src);
                     } else {
@@ -524,7 +524,7 @@ var sbContentSaver = {
                     if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
                     if ( this.option["media"] ) {
                         var aFileName = this.download(aNode.src);
-                        if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
+                        if (aFileName) aNode.setAttribute("src", aFileName);
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("src", aNode.src);
                     } else {
@@ -539,7 +539,7 @@ var sbContentSaver = {
                             var url = sbCommonUtils.resolveURL(that.refURLObj.spec, m2);
                             if ( that.option["media"] ) {
                                 var aFileName = that.download(url);
-                                if (aFileName) return m1 + sbCommonUtils.escapeFileName(aFileName) + m3;
+                                if (aFileName) return m1 + aFileName + m3;
                             } else if ( that.option["keepLink"] ) {
                                 return m1 + url + m3;
                             } else {
@@ -555,7 +555,7 @@ var sbContentSaver = {
                     if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("data")) ) break;
                     if ( this.option["media"] ) {
                         var aFileName = this.download(aNode.data);
-                        if (aFileName) aNode.setAttribute("data", sbCommonUtils.escapeFileName(aFileName));
+                        if (aFileName) aNode.setAttribute("data", aFileName);
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("data", aNode.src);
                     } else {
@@ -569,7 +569,7 @@ var sbContentSaver = {
                     var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("archive"));
                     if ( this.option["media"] ) {
                         var aFileName = this.download(url);
-                        if (aFileName) aNode.setAttribute("archive", sbCommonUtils.escapeFileName(aFileName));
+                        if (aFileName) aNode.setAttribute("archive", aFileName);
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("archive", url);
                     } else {
@@ -603,7 +603,7 @@ var sbContentSaver = {
                     var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("background"));
                     if ( this.option["images"] ) {
                         var aFileName = this.download(url);
-                        if (aFileName) aNode.setAttribute("background", sbCommonUtils.escapeFileName(aFileName));
+                        if (aFileName) aNode.setAttribute("background", aFileName);
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("background", url);
                     } else {
@@ -618,7 +618,7 @@ var sbContentSaver = {
                             if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("src")) ) break;
                             if ( this.option["images"] ) {
                                 var aFileName = this.download(aNode.src);
-                                if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
+                                if (aFileName) aNode.setAttribute("src", aFileName);
                             } else if ( this.option["keepLink"] ) {
                                 aNode.setAttribute("src", aNode.src);
                             } else {
@@ -647,7 +647,7 @@ var sbContentSaver = {
                             } else if ( this.option["styles"] && !this.option["rewriteStyles"] ) {
                                 // capturing styles with no rewrite, download it and rewrite the link
                                 var aFileName = this.download(aNode.href);
-                                if (aFileName) aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
+                                if (aFileName) aNode.setAttribute("href", aFileName);
                             } else if ( !this.option["styles"] && this.option["keepLink"] ) {
                                 // link to the source css file
                                 aNode.setAttribute("href", aNode.href);
@@ -663,7 +663,7 @@ var sbContentSaver = {
                             if ( this.option["internalize"] ) break;
                             var aFileName = this.download(aNode.href);
                             if (aFileName) {
-                                aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
+                                aNode.setAttribute("href", aFileName);
                                 if ( this.isMainFrame && !this.favicon ) this.favicon = aFileName;
                             }
                         }
@@ -701,7 +701,7 @@ var sbContentSaver = {
                     if ( aNode.hasAttribute("src") ) {
                         if ( this.option["internalize"] ) break;
                         var aFileName = this.download(aNode.src);
-                        if (aFileName) aNode.setAttribute("src", sbCommonUtils.escapeFileName(aFileName));
+                        if (aFileName) aNode.setAttribute("src", aFileName);
                     }
                 } else {
                     return this.removeNodeFromParent(aNode);
@@ -750,13 +750,13 @@ var sbContentSaver = {
                 switch (sbContentSaver.option["downLinkMethod"]) {
                     case 2: // check url and header filename
                         var aFileName = this.download(aNode.href, true);
-                        if (aFileName) aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
+                        if (aFileName) aNode.setAttribute("href", aFileName);
                         break;
                     case 1: // check url filename
                         var [,ext] = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aNode.href));
                         if (this.downLinkFilter(ext)) {
                             var aFileName = this.download(aNode.href);
-                            if (aFileName) aNode.setAttribute("href", sbCommonUtils.escapeFileName(aFileName));
+                            if (aFileName) aNode.setAttribute("href", aFileName);
                             break;
                         }
                     case 0: // no check
@@ -1011,7 +1011,7 @@ var sbContentSaver = {
     // if the data URI is large (e.g. 5 MiB), so we manipulate the URL string instead
     // of converting the URI to nsIURI initially.
     //
-    // aURLSpec is an absolute URL
+    // aURLSpec is an absolute URL, could be encodeURI or not
     //
     // aIsLinkFilter is specific for download link filter
     //
@@ -1019,10 +1019,14 @@ var sbContentSaver = {
     // return <sourceURL>: deep capture for latter rewrite via sbCrossLinker (must have identical url)
     // return "urn:scrapbook-download:<hash>": when download starts
     // return "urn:scrapbook-download-error:<sourceURL>": when download error detected
-    // return fileName: a download happen, or used already downloaded file
+    // return fileName: a download happen, or used already downloaded file (already escapeFileName)
     download: function(aURLSpec, aIsLinkFilter) {
         if ( !aURLSpec ) return "";
         var sourceURL = aURLSpec;
+        try {
+            sourceURL = decodeURI(sourceURL);
+        } catch(ex) {}
+        sourceURL = encodeURI(sourceURL);
 
         try {
             if ( sourceURL.indexOf("http:") === 0 || sourceURL.indexOf("https:") === 0 || sourceURL.indexOf("ftp:") === 0 ) {
@@ -1067,7 +1071,7 @@ var sbContentSaver = {
                             }
                             // determine the filename and check for duplicate
                             [fileName, isDuplicate] = sbContentSaver.getUniqueFileName(fileName, sourceURL);
-                            sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][hashKey] = fileName;
+                            sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][hashKey] = sbCommonUtils.escapeFileName(fileName);
                             if (isDuplicate) {
                                 this._skipped = true;
                                 channel.cancel(Components.results.NS_BINDING_ABORTED);
@@ -1121,7 +1125,7 @@ var sbContentSaver = {
                             // do not copy, but add to the link list if it's a work of deep capture
                             this.linkURLs.push(sourceURL);
                         }
-                        return "";
+                        return sourceURL;
                     }
                 }
                 // determine the filename
@@ -1134,18 +1138,18 @@ var sbContentSaver = {
                 fileName = sbCommonUtils.validateFileName(fileName);
                 var targetFile = targetDir.clone(); targetFile.append(fileName);
                 if (sbCommonUtils.compareFiles(sourceFile, targetFile)) {
-                    return fileName;
+                    return sbCommonUtils.escapeFileName(fileName);
                 }
                 // check for duplicate
                 [fileName, isDuplicate] = sbContentSaver.getUniqueFileName(fileName, sourceURL);
-                if (isDuplicate) return fileName;
+                if (isDuplicate) return sbCommonUtils.escapeFileName(fileName);
                 // set task
                 this.httpTask[this.item.id]++;
                 var item = this.item;
                 setTimeout(function(){ sbCaptureObserverCallback.onDownloadComplete(item); }, 0);
                 // do the copy
                 sourceFile.copyTo(targetDir, fileName);
-                return fileName;
+                return sbCommonUtils.escapeFileName(fileName);
             } else if ( sourceURL.indexOf("data:") === 0 ) {
                 // download "data:" only if option on
                 if (!this.option["saveDataURI"]) {
@@ -1162,12 +1166,12 @@ var sbContentSaver = {
                 var targetFile = targetDir.clone(); targetFile.append(fileName);
                 if (targetFile.exists() && targetFile.isFile()) {
                     if (sbCommonUtils.readFile(targetFile) === dataURIBytes) {
-                        return fileName;
+                        return sbCommonUtils.escapeFileName(fileName);
                     }
                 }
                 // determine the filename and check for duplicate
                 [fileName, isDuplicate] = sbContentSaver.getUniqueFileName(fileName, sourceURL);
-                if (isDuplicate) return fileName;
+                if (isDuplicate) return sbCommonUtils.escapeFileName(fileName);
                 // set task
                 this.httpTask[this.item.id]++;
                 var item = this.item;
@@ -1175,7 +1179,7 @@ var sbContentSaver = {
                 // do the save
                 var targetFile = targetDir.clone(); targetFile.append(fileName);
                 sbCommonUtils.writeFileBytes(targetFile, dataURIBytes);
-                return fileName;
+                return sbCommonUtils.escapeFileName(fileName);
             }
         } catch (ex) {
             this.downloadErrorHandler(sourceURL, ex);
@@ -1328,15 +1332,13 @@ var sbContentSaver = {
         return aURI.indexOf("://") === -1 && !(aURI.indexOf("data:") === 0);
     },
 
-    restoreFileNameFromHash: function (hash) {
-        return hash.replace(/urn:scrapbook-download:([0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12})/g, function (match, key) {
+    restoreFileNameFromHash: function (content, type) {
+        return content.replace(/urn:scrapbook-download:([0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12})/g, function (match, key) {
             var url = sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][key];
-            // error handling
+            // error handling, should be almost impossible
             if (!url) return "urn:scrapbook-download-error:" + key;
-            // if the url contains ":", it is the source absolute url (meaning download fail),
-            // and we should not escape it
-            if (url.indexOf(":") === -1) {
-                url = sbCommonUtils.escapeFileName(url);
+            if (type == "HTML") {
+                url = sbCommonUtils.escapeHTML(url);
             }
             return url;
         });
@@ -1369,9 +1371,9 @@ var sbCaptureObserverCallback = {
     onAllDownloadsComplete: function(aItem) {
         // restore downloaded file names
         sbContentSaver.downloadRewriteFiles[aItem.id].forEach(function (data) {
-            var [file, charset] = data;
+            var [file, charset, type] = data;
             var content = sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(file), charset);
-            content = sbContentSaver.restoreFileNameFromHash(content);
+            content = sbContentSaver.restoreFileNameFromHash(content, type);
             sbCommonUtils.writeFile(file, content, charset);
         });
 
@@ -1382,13 +1384,13 @@ var sbCaptureObserverCallback = {
         if (res && sbDataSource.exists(res)) {
             sbDataSource.setProperty(res, "type", aItem.type);
             if ( sbContentSaver.favicon ) {
-                sbContentSaver.favicon = sbContentSaver.restoreFileNameFromHash(sbContentSaver.favicon);
-                aItem.icon = sbCommonUtils.escapeFileName(sbContentSaver.favicon);
+                sbContentSaver.favicon = sbContentSaver.restoreFileNameFromHash(sbContentSaver.favicon, "TXT");
+                aItem.icon = sbContentSaver.favicon;
             }
             // We replace the "urn:scrapbook-download:*" and skip adding "resource://" to prevent an issue
             // for URLs containing ":", such as "moz-icon://".
             if (aItem.icon) {
-                aItem.icon = sbContentSaver.restoreFileNameFromHash(aItem.icon);
+                aItem.icon = sbContentSaver.restoreFileNameFromHash(aItem.icon, "TXT");
                 if (aItem.icon.indexOf(":") >= 0) {
                     var iconURL = aItem.icon;
                 } else {
