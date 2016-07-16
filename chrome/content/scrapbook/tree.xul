@@ -32,6 +32,8 @@
             <menuseparator hidden="true" />
             <menuitem id="sbPopupManage" label="&sb.folder.manage;..." oncommand="sbController.forward(null,'M');" hidden="true" />
             <menuitem id="sbPopupSort"   label="&sb.sort.folder;..."   oncommand="sbController.forward(null,'Z');" hidden="true" />
+            <menuitem id="sbPopupMakeContainer" label="&sb.make.container;" oncommand="sbMainService.makeContainer();" />
+            <menuitem id="sbPopupRemoveContainer" label="&sb.remove.container;" oncommand="sbMainService.removeContainer();" />
             <menu id="sbPopupTools" label="&sb.tools;" onmouseover="event.stopPropagation();">
                 <menupopup id="sbPopupToolsMenu">
                     <menuitem id="sbPopupShowFiles" label="&sb.show.files;" oncommand="sbController.forward(null,'L');" />

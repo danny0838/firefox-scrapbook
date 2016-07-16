@@ -306,9 +306,10 @@ var sbCacheService = {
         var contResList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"), 1, true);
         for ( var i = 0; i < contResList.length; i++ ) {
             var resList = sbDataSource.flattenResources(contResList[i], 2, false);
+            resList.push(contResList[i]);
             for ( var j = 0; j < resList.length; j++ ) {
                 var type = sbDataSource.getProperty(resList[j], "type");
-                if ( type == "separator" ) continue;
+                if ( type == "folder" || type == "separator" ) continue;
                 this.resList.push(resList[j]);
                 this.folders.push(contResList[i].ValueUTF8);
             }

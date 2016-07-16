@@ -188,6 +188,39 @@ var sbMainService = {
         return newRes;
     },
 
+    makeContainer: function() {
+        try {
+            var curIdx = sbTreeHandler.TREE.view.selection.count ? sbTreeHandler.TREE.currentIndex : -1;
+            var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
+            if (!sbDataSource.isContainer(curRes)) {
+                sbDataSource.createEmptySeq(curRes.Value);
+            }
+        } catch (ex) {
+            sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_MAKE_CONTAINER", ex));
+        }
+    },
+
+    removeContainer: function() {
+        try {
+            var curIdx = sbTreeHandler.TREE.view.selection.count ? sbTreeHandler.TREE.currentIndex : -1;
+            var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
+            if (sbDataSource.isContainer(curRes)) {
+                if (sbDataSource.flattenResources(curRes, 0, false).length <= 1) {
+                    var curPar = sbTreeHandler.getParentResource(curIdx);
+                    var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
+                    var item = sbDataSource.getItem(curRes);
+                    sbDataSource.deleteItemDescending(curRes, curPar);
+                    sbDataSource.addItem(item, curPar.Value, curRelIdx);
+                    sbCommonUtils.rebuildGlobal();
+                } else {
+                    sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_REMOVE_CONTAINER_NONEMPTY"));
+                }
+            }
+        } catch (ex) {
+            sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_REMOVE_CONTAINER", ex));
+        }
+    },
+
     openPrefWindow: function() {
         var instantApply = sbCommonUtils.getPref("browser.preferences.instantApply", false, true);
         window.top.openDialog(
@@ -215,6 +248,7 @@ var sbController = {
             aEvent.preventDefault();
             return;
         }
+        var isContainer = false;
         var isFile = false;
         var isNote = false;
         var isNotex = false;
@@ -223,6 +257,7 @@ var sbController = {
         var isSeparator = false;
         var isMultiple = ( sbTreeHandler.TREE.view.selection.count > 1 );
         if (!isMultiple) {
+            isContainer = sbDataSource.isContainer(res);
             switch (sbDataSource.getProperty(res, "type")) {
                 case "file": isFile = true; break;
                 case "note": isNote = true; break;
@@ -239,11 +274,13 @@ var sbController = {
         getElement("sbPopupOpen").hidden = isMultiple || isFolder || isSeparator;
         getElement("sbPopupOpenNewTab").hidden = isMultiple || isFolder || isSeparator;
         getElement("sbPopupOpenSource").hidden = isMultiple || isFolder || isSeparator || isNote;
-        getElement("sbPopupCombinedView").hidden = isMultiple || !isFolder;
-        getElement("sbPopupOpenAllItems").hidden = isMultiple || !isFolder;
-        getElement("sbPopupOpenAllItems").nextSibling.hidden = isMultiple || !isFolder;
-        getElement("sbPopupManage").hidden = isMultiple || !isFolder;
-        getElement("sbPopupSort").hidden = isMultiple || !isFolder;
+        getElement("sbPopupCombinedView").hidden = isMultiple || !isContainer;
+        getElement("sbPopupOpenAllItems").hidden = isMultiple || !isContainer;
+        getElement("sbPopupOpenAllItems").nextSibling.hidden = isMultiple || !isContainer;
+        getElement("sbPopupManage").hidden = isMultiple || !isContainer;
+        getElement("sbPopupSort").hidden = isMultiple || !isContainer;
+        getElement("sbPopupMakeContainer").hidden = isMultiple || isContainer || isSeparator;
+        getElement("sbPopupRemoveContainer").hidden = isMultiple || !isContainer || isFolder;
         getElement("sbPopupNewFolder").hidden = isMultiple;
         getElement("sbPopupNewSeparator").hidden = isMultiple;
         getElement("sbPopupNewNote").hidden = isMultiple;
@@ -868,10 +905,13 @@ var sbSearchService = {
         }
         sbDataSource.clearContainer("urn:scrapbook:search");
         this.container = sbDataSource.getContainer("urn:scrapbook:search", true);
-        var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource(this.treeRef), 2, true);
+        var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource(this.treeRef), 0, true);
+        resList.shift(); // remove root
         var result = [];
         resList.forEach(function(res) {
-            if (sbSearchQueryHandler.match(aKey, res, false)) result.push(res);
+            if (sbDataSource.getProperty(res, "type") !== "folder") {
+                if (sbSearchQueryHandler.match(aKey, res, false)) result.push(res);
+            }
         }, this);
         aKey.sort.forEach(function(sortKey){
             result.sort(function(a, b){
@@ -908,9 +948,12 @@ var sbSearchService = {
         }
         sbDataSource.clearContainer("urn:scrapbook:search");
         this.container = sbDataSource.getContainer("urn:scrapbook:search", true);
-        var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource(this.treeRef), 2, true);
+        var resList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource(this.treeRef), 0, true);
+        resList.shift(); // remove root
         resList.forEach(function(res) {
-            this.container.AppendElement(res);
+            if (sbDataSource.getProperty(res, "type") !== "folder") {
+                this.container.AppendElement(res);
+            }
         }, this);
         sbTreeHandler.TREE.ref = "urn:scrapbook:search";
         sbTreeHandler.TREE.builder.rebuild();
