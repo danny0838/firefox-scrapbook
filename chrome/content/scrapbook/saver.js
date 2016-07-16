@@ -1099,7 +1099,7 @@ var sbContentSaver = {
                     sbContentSaver.httpTask[sbContentSaver.item.id]--;
                     sbContentSaver.downloadErrorHandler(sourceURL, ex);
                 }
-                return "scrapbook://" + hashKey;
+                return "urn:scrapbook-download:" + hashKey;
             } else if ( sourceURL.indexOf("file:") === 0 ) {
                 // if sourceURL is not targeting a file, fail out
                 var sourceFile = sbCommonUtils.convertURLToFile(sourceURL);
@@ -1321,10 +1321,10 @@ var sbContentSaver = {
     },
 
     restoreFileNameFromHash: function (hash) {
-        return hash.replace(/scrapbook:\/\/([0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12})/g, function (match, key) {
+        return hash.replace(/urn:scrapbook-download:([0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12})/g, function (match, key) {
             var url = sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][key];
             // error handling
-            if (!url) return key;
+            if (!url) return "urn:scrapbook-download-error:" + key;
             // if the url contains ":", it is the source absolute url (meaning download fail),
             // and we should not escape it
             if (url.indexOf(":") === -1) {
@@ -1377,7 +1377,7 @@ var sbCaptureObserverCallback = {
                 sbContentSaver.favicon = sbContentSaver.restoreFileNameFromHash(sbContentSaver.favicon);
                 aItem.icon = sbCommonUtils.escapeFileName(sbContentSaver.favicon);
             }
-            // We replace the "scrapbook://" and skip adding "resource://" to prevent an issue
+            // We replace the "urn:scrapbook-download:*" and skip adding "resource://" to prevent an issue
             // for URLs containing ":", such as "moz-icon://".
             if (aItem.icon) {
                 aItem.icon = sbContentSaver.restoreFileNameFromHash(aItem.icon);
