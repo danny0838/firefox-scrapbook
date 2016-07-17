@@ -1309,7 +1309,7 @@ var sbContentSaver = {
     },
     
     getUniqueFileNameSerialize: function(aSuggestFileName, aSourceURL, aSourceDoc) {
-        if (!arguments.callee._file2URL || (arguments.callee._file2URL !== this.file2URL)) {
+        if (arguments.callee._file2URL !== this.file2URL) {
             arguments.callee._file2URL = this.file2URL;
             arguments.callee.fileBase2URL = {};
             for (var keyFileName in this.file2URL) {
