@@ -34,6 +34,7 @@ var sbContentSaver = {
             "keepLink": sbCommonUtils.getPref("capture.default.keepLink", false),
             "saveDataURI": sbCommonUtils.getPref("capture.default.saveDataURI", false),
             "serializeFilename": sbCommonUtils.getPref("capture.default.serializeFilename", false),
+            "linkURLFilters": sbCommonUtils.getPref("capture.default.linkURLFilters", ""),
             "downLinkMethod": 0, // active only if explicitly set in detail dialog
             "downLinkFilter": "",
             "inDepth": 0, // active only if explicitly set in detail dialog
@@ -747,6 +748,11 @@ var sbContentSaver = {
                 }
                 // determine whether to download (copy) the link target file
                 if ( url.indexOf("http:") === 0 || url.indexOf("https:") === 0 || url.indexOf("ftp:") === 0 ) {
+                    // if the URL matches the linkURLFilters (mostly meaning it's offending to visit)
+                    // skip it for downLink or inDepth
+                    if (!this.globalURLFilter(urlMain)) {
+                        break;
+                    }
                     if (this.option["downLinkMethod"] == 2) {
                         // check header and url extension
                         var fileName = this.download(url, null, true);
@@ -1245,6 +1251,45 @@ var sbContentSaver = {
             return filter.test(aFileExt);
         });
         return toDownload;
+    },
+
+    globalURLFilter: function (aURL) {
+        var that = this;
+        // use the cache if the filter is not changed
+        if (arguments.callee._filter !== that.option["linkURLFilters"]) {
+            arguments.callee._filter = that.option["linkURLFilters"];
+            arguments.callee.filters = (function () {
+                try {
+                    var filters = [];
+                    var dataStr = that.option["linkURLFilters"];
+                    var data = JSON.parse(dataStr);
+                    ((data instanceof Array) ? data : [data]).forEach(function (item) {
+                        // make sure each item is a valid RegExp
+                        try {
+                            item = item.toString();
+                            if (/^\/(.*)\/([a-z]*)$/.test(item)) {
+                                item = new RegExp(RegExp.$1, RegExp.$2);
+                            } else {
+                                item = new RegExp(sbCommonUtils.escapeRegExp(item));
+                            }
+                        } catch (ex) {
+                            sbCommonUtils.error("Invalid RegExp string '" + item + "'\n\n" + ex);
+                            return;
+                        }
+                        filters.push(item);
+                    });
+                    return filters;
+                } catch (ex) {
+                    sbCommonUtils.error("Unable to parse JSON data '" + dataStr + "'\n\n" + ex);
+                }
+                return [];
+            })();
+        }
+        // apply the filters
+        var toForbid = arguments.callee.filters.some(function (filter) {
+            return filter.test(aURL);
+        });
+        return !toForbid;
     },
 
     /**
