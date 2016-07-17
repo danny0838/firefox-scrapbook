@@ -59,7 +59,7 @@
             <vbox id="sbTreeOuter" flex="2" persist="height">
                 <tree id="sbTree"
                       onclick="sbTreeHandler.onClick(event, 1);"
-                      ondblclick="sbTreeHandler.onDblClick(event);"
+                      ondblclick="sbTreeHandler.onDblClick(event, 1);"
                       onkeypress="sbTreeHandler.onKeyPress(event);"
                       ondragenter="sbTreeDNDHandler.currentDataTransfer=event.dataTransfer;"
                       ondraggesture="if (event.originalTarget.localName == 'treechildren') nsDragAndDrop.startDrag(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"

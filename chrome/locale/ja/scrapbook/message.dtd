@@ -259,6 +259,7 @@
 <!ENTITY sb.prefs.ui.menuBar.icon "アイコン">
 <!ENTITY sb.prefs.ui.toolsMenu "'ツール' メニューに表示">
 <!ENTITY sb.prefs.ui.statusBar "ステータスバーに表示">
+<!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
 <!ENTITY sb.prefs.restart "変更は Firefox 再起動後に反映されます。">
 <!ENTITY sb.prefs.tabs.tips "次の操作を新しいタブで開く">
 <!ENTITY sb.prefs.tabs.note "ノートの編集">

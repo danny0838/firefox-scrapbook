@@ -259,6 +259,7 @@
 <!ENTITY sb.prefs.ui.menuBar.icon "Ikona">
 <!ENTITY sb.prefs.ui.toolsMenu "Wyświetlaj w menu „Narzędzia” element „ScrapBook”">
 <!ENTITY sb.prefs.ui.statusBar "Wyświetlaj ikonę rozszerzenia na pasku stanu">
+<!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
 <!ENTITY sb.prefs.restart "Zmiana wymaga ponownego uruchomienia Firefoksa">
 <!ENTITY sb.prefs.tabs.tips "Otwieraj w karcie wynik następujących poleceń">
 <!ENTITY sb.prefs.tabs.note "Edytuj notatkę">

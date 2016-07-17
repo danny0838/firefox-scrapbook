@@ -259,6 +259,7 @@
 <!ENTITY sb.prefs.ui.menuBar.icon "Ikona">
 <!ENTITY sb.prefs.ui.toolsMenu "Zobraziť v ponuke &apos;Nástroje&apos;">
 <!ENTITY sb.prefs.ui.statusBar "Zobraziť v stavovej lište">
+<!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
 <!ENTITY sb.prefs.restart "Zmeny sa prejavia po reštarte Firefoxu.">
 <!ENTITY sb.prefs.tabs.tips "Nasledovné akcie otvoria nové karty">
 <!ENTITY sb.prefs.tabs.note "Upraviť poznámku">
