@@ -37,11 +37,9 @@ var sbTreeHandler = {
 
         var curIdx = this.TREE.currentIndex;
         if (aType < 2) {
-            // manage window, simple click to toggle container, mid-click to open in new tab
+            // manage window, mid-click to open in new tab
             // forbid ctrl- or shift- click because they are for multiple selection
-            if (aEvent.button == 0 && !aEvent.ctrlKey && !aEvent.shiftKey && this.TREE.view.isContainer(curIdx)) {
-                this.toggleFolder(curIdx);
-            } else if (aEvent.button == 1 && sbDataSource.getProperty(this.resource, "type") != "folder") {
+            if (aEvent.button == 1 && sbDataSource.getProperty(this.resource, "type") != "folder") {
                 sbController.open(this.resource, true);
             }
         } else {
