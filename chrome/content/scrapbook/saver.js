@@ -717,7 +717,8 @@ var sbContentSaver = {
                     break;
                 }
                 // adjustment for hash links targeting the current page
-                var [urlMain, urlHash] = sbCommonUtils.splitURLByAnchor(aNode.href);
+                var url = aNode.href;
+                var [urlMain, urlHash] = sbCommonUtils.splitURLByAnchor(url);
                 if ( urlMain === sbCommonUtils.splitURLByAnchor(aNode.ownerDocument.location.href)[0] ) {
                     // This link targets the current page.
                     if ( urlHash === '' || urlHash === '#' ) {
@@ -747,27 +748,47 @@ var sbContentSaver = {
                     }
                 }
                 // determine whether to download (copy) the link target file
-                switch (sbContentSaver.option["downLinkMethod"]) {
-                    case 2: // check url and header filename
-                        var fileName = this.download(aNode.href, null, true);
-                        if (fileName) aNode.setAttribute("href", fileName);
-                        break;
-                    case 1: // check url filename
-                        var [,ext] = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aNode.href));
-                        if (this.downLinkFilter(ext)) {
-                            var fileName = this.download(aNode.href);
-                            if (fileName) aNode.setAttribute("href", fileName);
+                if ( url.indexOf("http:") === 0 || url.indexOf("https:") === 0 || url.indexOf("ftp:") === 0 ) {
+                    if (this.option["downLinkMethod"] == 2) {
+                        // check header and url extension
+                        var fileName = this.download(url, null, true);
+                        if (fileName) {
+                            aNode.setAttribute("href", fileName);
                             break;
                         }
-                    case 0: // no check
-                    default:
-                        if ( sbContentSaver.option["inDepth"] > 0 ) {
-                            // do not copy, but add to the link list if it's a work of deep capture
-                            sbContentSaver.linkURLs.push(aNode.href);
+                    } else if (this.option["downLinkMethod"] == 1) {
+                        // check url extension
+                        var [, ext] = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(url));
+                        if (this.downLinkFilter(ext)) {
+                            var fileName = this.download(url);
+                            if (fileName) {
+                                aNode.setAttribute("href", fileName);
+                                break;
+                            }
                         }
-                        aNode.setAttribute("href", aNode.href);
-                        break;
+                    }
+                } else if ( url.indexOf("file:") === 0 ) {
+                    // Download all non-HTML local files.
+                    // This is primarily for the combine wizard to capture all "file:" data.
+                    var mime = sbCommonUtils.getFileMime(sbCommonUtils.convertURLToFile(url));
+                    if ( ["text/html", "application/xhtml+xml"].indexOf(mime) < 0 ) {
+                        var fileName = this.download(url);
+                        if (fileName) {
+                            aNode.setAttribute("href", fileName);
+                            break;
+                        }
+                    }
+                } else {
+                    // We are not interested in URLs with other protocols
+                    // Just keep them as-is
+                    break;
                 }
+                // Add unfixed URLs to the link list if it's a work of deep capture
+                if ( this.option["inDepth"] > 0 ) {
+                    this.linkURLs.push(url);
+                }
+                // rewrite the URL to make it absolute
+                aNode.setAttribute("href", url);
                 break;
             case "form": 
                 if ( aNode.hasAttribute("action") ) {
@@ -1144,19 +1165,6 @@ var sbContentSaver = {
                 var sourceFile = sbCommonUtils.convertURLToFile(sourceURL);
                 if (!sourceFile.exists()) throw sourceURL + " does not exist";
                 if (!sourceFile.isFile()) throw sourceURL + " is not a file";
-                // apply the filter
-                // Download all non-HTML local files.
-                // This is primarily to enable the combine wizard to capture all "file:" data.
-                if (aIsLinkFilter) {
-                    var mime = sbCommonUtils.getFileMime(sourceFile);
-                    if ( ["text/html", "application/xhtml+xml"].indexOf(mime) >= 0 ) {
-                        if ( that.option["inDepth"] > 0 ) {
-                            // do not copy, but add to the link list if it's a work of deep capture
-                            that.linkURLs.push(sourceURL);
-                        }
-                        return that.escapeURL(sourceURL, aEscapeType);
-                    }
-                }
                 // determine the filename
                 var targetDir = that.option["internalize"] ? that.option["internalize"].parent : that.contentDir.clone();
                 var fileName, isDuplicate;
