@@ -35,29 +35,26 @@ var sbTreeHandler = {
     // aType: 0 = folderPicker.xul, 1 = manage.xul, 2 = scrapbook.xul
     onClick: function(aEvent, aType) {
         if ( aEvent.button != 0 && aEvent.button != 1 ) return;
+        // "twisty" is the small arrow at the side of a container item
+        // click on it toggles the container natively
         var obj = {};
         this.TREE.treeBoxObject.getCellAt(aEvent.clientX, aEvent.clientY, {}, {}, obj);
         if ( !obj.value || obj.value == "twisty" ) return;
 
         var curIdx = this.TREE.currentIndex;
         if (aType < 2 || sbCommonUtils.getPref("ui.sidebarManage", false)) {
-            // folder picker or manage window, mid-click to open in new tab
+            // folder picker or manage window: mid-click to open in new tab
             if (aEvent.button == 1 && sbDataSource.getProperty(this.resource, "type") != "folder") {
                 sbController.open(this.resource, true);
             }
         } else {
-            // sidebar, simple click to toggle container or to open data
-            // mid-, ctrl-, and shift-click to open in new tab (except for folders)
-            if (this.TREE.view.isContainer(curIdx)) {
-                if (aEvent.button == 0 && !aEvent.ctrlKey && !aEvent.shiftKey) {
-                    this.toggleFolder(curIdx);
-                    return;
-                }
-                if (sbDataSource.getProperty(this.resource, "type") == "folder") {
-                    return;
-                }
+            // sidebar: simple click to open data, mid-, ctrl-, and shift-click to open in new tab
+            // for folders, click or mid-click to toggle
+            if (sbDataSource.getProperty(this.resource, "type") != "folder") {
+                sbController.open(this.resource, aEvent.button == 1 || aEvent.ctrlKey || aEvent.shiftKey);
+            } else {
+                this.toggleFolder(curIdx);
             }
-            sbController.open(this.resource, aEvent.button == 1 || aEvent.ctrlKey || aEvent.shiftKey);
         }
     },
 
