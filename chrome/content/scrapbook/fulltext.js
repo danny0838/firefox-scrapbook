@@ -81,20 +81,11 @@ var sbSearchResult = {
         if ( res.ValueUTF8 == "urn:scrapbook:cache" ) return this.next();
         var folder = sbCacheSource.getProperty(res, "folder");
         if ( this.targetFolders.length > 0 ) {
-            if ( folder && folder.indexOf("urn:scrapbook:item") != 0 ) {
-                try {
-                    var target = sbCommonUtils.RDF.GetLiteral(folder);
-                    var prop = sbDataSource.data.ArcLabelsIn(target).getNext().QueryInterface(Components.interfaces.nsIRDFResource);
-                    var source = sbDataSource.data.GetSource(prop, target, true);
-                    folder = source.ValueUTF8;
-                } catch(ex) {
-                }
-            }
             if ( this.targetFolders.indexOf(folder) < 0 ) return this.next();
         }
         var content = sbCacheSource.getProperty(res, "content");
-        var nameLR = sbCommonUtils.splitURLByAnchor(res.ValueUTF8);
-        var resURI = nameLR[0], name = nameLR[1].substring(1) || "index.html";
+        var [resURI, name] = sbCommonUtils.splitURLByAnchor(res.ValueUTF8);
+        name = name.substring(1) || "index.html";
         res = sbCommonUtils.RDF.GetResource(resURI);
         if ( !sbDataSource.exists(res) ) return this.next();
         var hits = sbSearchQueryHandler.match(this.queryKey, res, content, name);
@@ -305,8 +296,8 @@ var sbCacheService = {
         this.dataDir.append("data");
         var contResList = sbDataSource.flattenResources(sbCommonUtils.RDF.GetResource("urn:scrapbook:root"), 1, true);
         for ( var i = 0; i < contResList.length; i++ ) {
-            var resList = sbDataSource.flattenResources(contResList[i], 2, false);
-            resList.push(contResList[i]);
+            var resList = sbDataSource.flattenResources(contResList[i], 0, false);
+            resList.shift(); // remove container itself
             for ( var j = 0; j < resList.length; j++ ) {
                 var type = sbDataSource.getProperty(resList[j], "type");
                 if ( type == "folder" || type == "separator" ) continue;

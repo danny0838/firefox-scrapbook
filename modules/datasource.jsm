@@ -353,6 +353,7 @@ var sbDataSource = {
             case "folder": return "chrome://scrapbook/content/view.xul?id=" + id; break;
             case "note": return "chrome://scrapbook/content/note.xul?id=" + id; break;
             case "bookmark": return this.getProperty(aRes, "source"); break;
+            case "separator": return false; break;
             default: return sbCommonUtils.getBaseHref(this._dataObj.URI) + "data/" + id + "/index.html";
         }
     },

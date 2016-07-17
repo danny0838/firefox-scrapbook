@@ -17,6 +17,10 @@ var sbTreeHandler = {
         this.TREE.database.AddDataSource(sbDataSource.data);
         this.autoCollapse = sbCommonUtils.getPref("tree.autoCollapse", false);
         if ( isContainer ) document.getElementById("sbTreeRule").setAttribute("iscontainer", true);
+        if (this.TREE.getAttribute("data-seltype") == "single") {
+            var selType = sbCommonUtils.getPref("ui.sidebarManage", false) ? "multiple" : "single";
+            this.TREE.setAttribute("seltype", selType);
+        }
         this.TREE.builder.rebuild();
     },
 
@@ -31,32 +35,26 @@ var sbTreeHandler = {
     // aType: 0 = folderPicker.xul, 1 = manage.xul, 2 = scrapbook.xul
     onClick: function(aEvent, aType) {
         if ( aEvent.button != 0 && aEvent.button != 1 ) return;
+        // "twisty" is the small arrow at the side of a container item
+        // click on it toggles the container natively
         var obj = {};
         this.TREE.treeBoxObject.getCellAt(aEvent.clientX, aEvent.clientY, {}, {}, obj);
         if ( !obj.value || obj.value == "twisty" ) return;
 
         var curIdx = this.TREE.currentIndex;
-        if (aType < 2) {
-            // manage window, simple click to toggle container, mid-click to open in new tab
-            // forbid ctrl- or shift- click because they are for multiple selection
-            if (aEvent.button == 0 && !aEvent.ctrlKey && !aEvent.shiftKey && this.TREE.view.isContainer(curIdx)) {
-                this.toggleFolder(curIdx);
-            } else if (aEvent.button == 1 && sbDataSource.getProperty(this.resource, "type") != "folder") {
+        if (aType < 2 || sbCommonUtils.getPref("ui.sidebarManage", false)) {
+            // folder picker or manage window: mid-click to open in new tab
+            if (aEvent.button == 1 && sbDataSource.getProperty(this.resource, "type") != "folder") {
                 sbController.open(this.resource, true);
             }
         } else {
-            // sidebar, simple click to toggle container or to open data
-            // mid-, ctrl-, and shift-click to open in new tab (except for folders)
-            if (this.TREE.view.isContainer(curIdx)) {
-                if (aEvent.button == 0 && !aEvent.ctrlKey && !aEvent.shiftKey) {
-                    this.toggleFolder(curIdx);
-                    return;
-                }
-                if (sbDataSource.getProperty(this.resource, "type") == "folder") {
-                    return;
-                }
+            // sidebar: simple click to open data, mid-, ctrl-, and shift-click to open in new tab
+            // for folders, click or mid-click to toggle
+            if (sbDataSource.getProperty(this.resource, "type") != "folder") {
+                sbController.open(this.resource, aEvent.button == 1 || aEvent.ctrlKey || aEvent.shiftKey);
+            } else {
+                this.toggleFolder(curIdx);
             }
-            sbController.open(this.resource, aEvent.button == 1 || aEvent.ctrlKey || aEvent.shiftKey);
         }
     },
 
@@ -77,8 +75,9 @@ var sbTreeHandler = {
     },
 
     // double click (any button) on container: toggle container (natively)
-    onDblClick: function(aEvent) {
+    onDblClick: function(aEvent, aType) {
         if ( aEvent.originalTarget.localName != "treechildren" || aEvent.button != 0 ) return;
+        if ( !(aType < 2 || sbCommonUtils.getPref("ui.sidebarManage", false)) ) return;
         if ( this.TREE.view.isContainer(this.TREE.currentIndex) ) return;
         sbController.open(this.resource, aEvent.ctrlKey || aEvent.shiftKey);
     },

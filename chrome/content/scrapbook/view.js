@@ -18,10 +18,10 @@ function SB_initView() {
 
     var src = SB_getHTMLHead(sbDataSource.getProperty(gRes, "title"));
 
-    var resList = sbDataSource.flattenResources(gRes, 2, false);
+    var resList = sbDataSource.flattenResources(gRes, 0, false);
     for ( var i = 0; i < resList.length; i++ ) {
         var res = resList[i];
-        if (sbDataSource.getProperty(res, "type") == "separator")
+        if (sbDataSource.getProperty(res, "type") == "folder" || sbDataSource.getProperty(res, "type") == "separator")
             continue;
         var item = sbDataSource.getItem(res);
         if ( !item.icon ) item.icon = sbCommonUtils.getDefaultIcon(item.type);

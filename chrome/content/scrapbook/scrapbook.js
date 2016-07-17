@@ -317,6 +317,12 @@ var sbController = {
                 break;
             case "separator": 
                 return;
+            case "notex":
+                sbCommonUtils.loadURL(
+                    sbMainService.baseURL + "data/" + id + "/index.html",
+                    aInTab || sbCommonUtils.getPref("tabs.note", false)
+                );
+                break;
             default:
                 sbCommonUtils.loadURL(
                     sbMainService.baseURL + "data/" + id + "/index.html",
@@ -330,9 +336,14 @@ var sbController = {
             aRes = sbTreeHandler.resource;
         if (!aRes)
             return;
-        var resList = sbDataSource.flattenResources(aRes, 2, false);
-        resList.forEach(function(res) {
-            sbCommonUtils.loadURL(sbDataSource.getURL(res), true);
+        sbDataSource.flattenResources(aRes, 0, false).forEach(function(res) {
+            switch (sbDataSource.getProperty(res, "type")) {
+                case "folder":
+                case "separator":
+                    break;
+                default:
+                    sbCommonUtils.loadURL(sbDataSource.getURL(res), true);
+            }
         });
     },
 
