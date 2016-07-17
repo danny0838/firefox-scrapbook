@@ -280,6 +280,12 @@ var sbController = {
                 break;
             case "separator": 
                 return;
+            case "notex":
+                sbCommonUtils.loadURL(
+                    sbMainService.baseURL + "data/" + id + "/index.html",
+                    aInTab || sbCommonUtils.getPref("tabs.note", false)
+                );
+                break;
             default:
                 sbCommonUtils.loadURL(
                     sbMainService.baseURL + "data/" + id + "/index.html",
