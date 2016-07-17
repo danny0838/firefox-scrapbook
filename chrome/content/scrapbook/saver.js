@@ -18,8 +18,6 @@ var sbContentSaver = {
     linkURLs: [],
     frames: [],
     canvases: [],
-    cachedDownLinkFilter: null,
-    cachedDownLinkFilterSource: null,
 
     init: function(aPresetData) {
         this.option = {
@@ -36,6 +34,7 @@ var sbContentSaver = {
             "keepLink": sbCommonUtils.getPref("capture.default.keepLink", false),
             "saveDataURI": sbCommonUtils.getPref("capture.default.saveDataURI", false),
             "serializeFilename": sbCommonUtils.getPref("capture.default.serializeFilename", false),
+            "linkURLFilters": sbCommonUtils.getPref("capture.default.linkURLFilters", ""),
             "downLinkMethod": 0, // active only if explicitly set in detail dialog
             "downLinkFilter": "",
             "inDepth": 0, // active only if explicitly set in detail dialog
@@ -125,7 +124,7 @@ var sbContentSaver = {
         var newName = this.saveDocumentInternal(aRootWindow.document, this.documentName);
         if ( this.item.icon && this.item.type != "image" && this.item.type != "file" ) {
             var iconFileName = this.download(this.item.icon);
-            this.favicon = iconFileName;
+            if (iconFileName) this.favicon = iconFileName;
         }
         if ( this.httpTask[this.item.id] == 0 ) {
             setTimeout(function(){ sbCaptureObserverCallback.onAllDownloadsComplete(sbContentSaver.item); }, 100);
@@ -376,12 +375,12 @@ var sbContentSaver = {
             myHTMLFile.append(myHTMLFileName);
         }
         sbCommonUtils.writeFile(myHTMLFile, myHTML, charset);
-        this.downloadRewriteFiles[this.item.id].push([myHTMLFile, charset, "HTML"]);
+        this.downloadRewriteFiles[this.item.id].push([myHTMLFile, charset]);
         if ( myCSS ) {
             var myCSSFile = this.contentDir.clone();
             myCSSFile.append(myCSSFileName);
             sbCommonUtils.writeFile(myCSSFile, myCSS, charset);
-            this.downloadRewriteFiles[this.item.id].push([myCSSFile, charset, "CSS"]);
+            this.downloadRewriteFiles[this.item.id].push([myCSSFile, charset]);
         }
         return myHTMLFile.leafName;
     },
@@ -392,7 +391,7 @@ var sbContentSaver = {
         if ( !this.refURLObj ) {
             this.refURLObj = urlObj;
         }
-        var newFileName = this.download(aFileURL);
+        var newFileName = this.download(aFileURL, "HTML");
         if (newFileName) {
             if ( aCaptureType == "image" ) {
                 var myHTML = '<html><head><meta charset="UTF-8"></head><body><img src="' + newFileName + '"></body></html>';
@@ -400,7 +399,7 @@ var sbContentSaver = {
                 var myHTML = '<html><head><meta charset="UTF-8"><meta http-equiv="refresh" content="0;URL=' + newFileName + '"></head><body></body></html>';
             }
             if ( this.isMainFrame ) {
-                this.item.icon = "moz-icon://" + newFileName + "?size=16";
+                this.item.icon = "moz-icon://" + this.download(aFileURL) + "?size=16";
                 this.item.type = aCaptureType;
                 this.item.chars = aCharset || "";
             }
@@ -410,7 +409,7 @@ var sbContentSaver = {
         var myHTMLFile = this.contentDir.clone();
         myHTMLFile.append(aFileKey + ".html");
         sbCommonUtils.writeFile(myHTMLFile, myHTML, "UTF-8");
-        this.downloadRewriteFiles[this.item.id].push([myHTMLFile, "UTF-8", "HTML"]);
+        this.downloadRewriteFiles[this.item.id].push([myHTMLFile, "UTF-8"]);
         return myHTMLFile.leafName;
     },
 
@@ -471,14 +470,14 @@ var sbContentSaver = {
         }
     },
 
-    inspectNode: function(aNode, rootNode) {
+    inspectNode: function(aNode, aRootNode) {
         switch ( aNode.nodeName.toLowerCase() ) {
             case "img": 
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("src")) ) break;
                     if ( this.option["images"] ) {
-                        var aFileName = this.download(aNode.src);
-                        if (aFileName) aNode.setAttribute("src", aFileName);
+                        var fileName = this.download(aNode.src);
+                        if (fileName) aNode.setAttribute("src", fileName);
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("src", aNode.src);
                     } else {
@@ -492,8 +491,8 @@ var sbContentSaver = {
                             if ( that.option["internalize"] && this.isInternalized(m2) ) return m;
                             var url = sbCommonUtils.resolveURL(that.refURLObj.spec, m2);
                             if ( that.option["images"] ) {
-                                var aFileName = that.download(url);
-                                if (aFileName) return m1 + aFileName + m3;
+                                var fileName = that.download(url);
+                                if (fileName) return m1 + fileName + m3;
                             } else if ( that.option["keepLink"] ) {
                                 return m1 + url + m3;
                             } else {
@@ -510,8 +509,8 @@ var sbContentSaver = {
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
                     if ( this.option["media"] ) {
-                        var aFileName = this.download(aNode.src);
-                        if (aFileName) aNode.setAttribute("src", aFileName);
+                        var fileName = this.download(aNode.src);
+                        if (fileName) aNode.setAttribute("src", fileName);
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("src", aNode.src);
                     } else {
@@ -523,8 +522,8 @@ var sbContentSaver = {
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
                     if ( this.option["media"] ) {
-                        var aFileName = this.download(aNode.src);
-                        if (aFileName) aNode.setAttribute("src", aFileName);
+                        var fileName = this.download(aNode.src);
+                        if (fileName) aNode.setAttribute("src", fileName);
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("src", aNode.src);
                     } else {
@@ -538,8 +537,8 @@ var sbContentSaver = {
                             if ( that.option["internalize"] && this.isInternalized(m2) ) return m;
                             var url = sbCommonUtils.resolveURL(that.refURLObj.spec, m2);
                             if ( that.option["media"] ) {
-                                var aFileName = that.download(url);
-                                if (aFileName) return m1 + aFileName + m3;
+                                var fileName = that.download(url);
+                                if (fileName) return m1 + fileName + m3;
                             } else if ( that.option["keepLink"] ) {
                                 return m1 + url + m3;
                             } else {
@@ -554,8 +553,8 @@ var sbContentSaver = {
                 if ( aNode.hasAttribute("data") ) {
                     if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("data")) ) break;
                     if ( this.option["media"] ) {
-                        var aFileName = this.download(aNode.data);
-                        if (aFileName) aNode.setAttribute("data", aFileName);
+                        var fileName = this.download(aNode.data);
+                        if (fileName) aNode.setAttribute("data", fileName);
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("data", aNode.src);
                     } else {
@@ -568,8 +567,8 @@ var sbContentSaver = {
                     if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("archive")) ) break;
                     var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("archive"));
                     if ( this.option["media"] ) {
-                        var aFileName = this.download(url);
-                        if (aFileName) aNode.setAttribute("archive", aFileName);
+                        var fileName = this.download(url);
+                        if (fileName) aNode.setAttribute("archive", fileName);
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("archive", url);
                     } else {
@@ -602,8 +601,8 @@ var sbContentSaver = {
                     if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("background")) ) break;
                     var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("background"));
                     if ( this.option["images"] ) {
-                        var aFileName = this.download(url);
-                        if (aFileName) aNode.setAttribute("background", aFileName);
+                        var fileName = this.download(url);
+                        if (fileName) aNode.setAttribute("background", fileName);
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("background", url);
                     } else {
@@ -617,8 +616,8 @@ var sbContentSaver = {
                         if ( aNode.hasAttribute("src") ) {
                             if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("src")) ) break;
                             if ( this.option["images"] ) {
-                                var aFileName = this.download(aNode.src);
-                                if (aFileName) aNode.setAttribute("src", aFileName);
+                                var fileName = this.download(aNode.src);
+                                if (fileName) aNode.setAttribute("src", fileName);
                             } else if ( this.option["keepLink"] ) {
                                 aNode.setAttribute("src", aNode.src);
                             } else {
@@ -646,8 +645,8 @@ var sbContentSaver = {
                                 return this.removeNodeFromParent(aNode);
                             } else if ( this.option["styles"] && !this.option["rewriteStyles"] ) {
                                 // capturing styles with no rewrite, download it and rewrite the link
-                                var aFileName = this.download(aNode.href);
-                                if (aFileName) aNode.setAttribute("href", aFileName);
+                                var fileName = this.download(aNode.href);
+                                if (fileName) aNode.setAttribute("href", fileName);
                             } else if ( !this.option["styles"] && this.option["keepLink"] ) {
                                 // link to the source css file
                                 aNode.setAttribute("href", aNode.href);
@@ -661,10 +660,10 @@ var sbContentSaver = {
                     case "icon":
                         if ( aNode.hasAttribute("href") ) {
                             if ( this.option["internalize"] ) break;
-                            var aFileName = this.download(aNode.href);
-                            if (aFileName) {
-                                aNode.setAttribute("href", aFileName);
-                                if ( this.isMainFrame && !this.favicon ) this.favicon = aFileName;
+                            var fileName = this.download(aNode.href);
+                            if (fileName) {
+                                aNode.setAttribute("href", fileName);
+                                if ( this.isMainFrame && !this.favicon ) this.favicon = fileName;
                             }
                         }
                         break;
@@ -700,8 +699,8 @@ var sbContentSaver = {
                 if ( this.option["script"] ) {
                     if ( aNode.hasAttribute("src") ) {
                         if ( this.option["internalize"] ) break;
-                        var aFileName = this.download(aNode.src);
-                        if (aFileName) aNode.setAttribute("src", aFileName);
+                        var fileName = this.download(aNode.src);
+                        if (fileName) aNode.setAttribute("src", fileName);
                     }
                 } else {
                     return this.removeNodeFromParent(aNode);
@@ -717,10 +716,11 @@ var sbContentSaver = {
                     break;
                 }
                 // adjustment for hash links targeting the current page
-                var urlParts = sbCommonUtils.splitURLByAnchor(aNode.href);
-                if ( urlParts[0] === sbCommonUtils.splitURLByAnchor(aNode.ownerDocument.location.href)[0] ) {
+                var url = aNode.href;
+                var [urlMain, urlHash] = sbCommonUtils.splitURLByAnchor(url);
+                if ( urlMain === sbCommonUtils.splitURLByAnchor(aNode.ownerDocument.location.href)[0] ) {
                     // This link targets the current page.
-                    if ( urlParts[1] === '' || urlParts[1] === '#' ) {
+                    if ( urlHash === '' || urlHash === '#' ) {
                         // link to the current page as a whole
                         aNode.setAttribute('href', '#');
                         break;
@@ -729,11 +729,11 @@ var sbContentSaver = {
                     // For partial capture, the captured page could be incomplete,
                     // relink to the captured page only when the target node is included in the selected fragment.
                     var hasLocalTarget = !this.selection;
-                    if ( !hasLocalTarget && rootNode.querySelector ) {
+                    if ( !hasLocalTarget && aRootNode.querySelector ) {
                         // Element.querySelector() is available only for Firefox >= 3.5
                         // For those with no support, simply skip the relink check.
-                        var targetId = decodeURIComponent(urlParts[1].substr(1)).replace(/\W/g, '\\$&');
-                        if ( rootNode.querySelector('[id="' + targetId + '"], a[name="' + targetId + '"]') ) {
+                        var targetId = decodeURIComponent(urlHash.substr(1)).replace(/\W/g, '\\$&');
+                        if ( aRootNode.querySelector('[id="' + targetId + '"], a[name="' + targetId + '"]') ) {
                             hasLocalTarget = true;
                         }
                     }
@@ -741,33 +741,58 @@ var sbContentSaver = {
                         // if the original link is already a pure hash, 
                         // skip the rewrite to prevent a potential encoding change
                         if (aNode.getAttribute('href').charAt(0) != "#") {
-                            aNode.setAttribute('href', urlParts[1]);
+                            aNode.setAttribute('href', urlHash);
                         }
                         break;
                     }
                 }
                 // determine whether to download (copy) the link target file
-                switch (sbContentSaver.option["downLinkMethod"]) {
-                    case 2: // check url and header filename
-                        var aFileName = this.download(aNode.href, true);
-                        if (aFileName) aNode.setAttribute("href", aFileName);
+                if ( url.indexOf("http:") === 0 || url.indexOf("https:") === 0 || url.indexOf("ftp:") === 0 ) {
+                    // if the URL matches the linkURLFilters (mostly meaning it's offending to visit)
+                    // skip it for downLink or inDepth
+                    if (!this.globalURLFilter(urlMain)) {
                         break;
-                    case 1: // check url filename
-                        var [,ext] = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aNode.href));
-                        if (this.downLinkFilter(ext)) {
-                            var aFileName = this.download(aNode.href);
-                            if (aFileName) aNode.setAttribute("href", aFileName);
+                    }
+                    if (this.option["downLinkMethod"] == 2) {
+                        // check header and url extension
+                        var fileName = this.download(url, null, true);
+                        if (fileName) {
+                            aNode.setAttribute("href", fileName);
                             break;
                         }
-                    case 0: // no check
-                    default:
-                        if ( sbContentSaver.option["inDepth"] > 0 ) {
-                            // do not copy, but add to the link list if it's a work of deep capture
-                            sbContentSaver.linkURLs.push(aNode.href);
+                    } else if (this.option["downLinkMethod"] == 1) {
+                        // check url extension
+                        var [, ext] = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(url));
+                        if (this.downLinkFilter(ext)) {
+                            var fileName = this.download(url);
+                            if (fileName) {
+                                aNode.setAttribute("href", fileName);
+                                break;
+                            }
                         }
-                        aNode.setAttribute("href", aNode.href);
-                        break;
+                    }
+                } else if ( url.indexOf("file:") === 0 ) {
+                    // Download all non-HTML local files.
+                    // This is primarily for the combine wizard to capture all "file:" data.
+                    var mime = sbCommonUtils.getFileMime(sbCommonUtils.convertURLToFile(url));
+                    if ( ["text/html", "application/xhtml+xml"].indexOf(mime) < 0 ) {
+                        var fileName = this.download(url);
+                        if (fileName) {
+                            aNode.setAttribute("href", fileName);
+                            break;
+                        }
+                    }
+                } else {
+                    // We are not interested in URLs with other protocols
+                    // Just keep them as-is
+                    break;
                 }
+                // Add unfixed URLs to the link list if it's a work of deep capture
+                if ( this.option["inDepth"] > 0 ) {
+                    this.linkURLs.push(url);
+                }
+                // rewrite the URL to make it absolute
+                aNode.setAttribute("href", url);
                 break;
             case "form": 
                 if ( aNode.hasAttribute("action") ) {
@@ -860,7 +885,7 @@ var sbContentSaver = {
       script.parentNode.removeChild(script);
     },
 
-    processCSSRecursively: function(aCSS, aDocument, isImport) {
+    processCSSRecursively: function(aCSS, aDocument, aIsImport) {
         // aCSS is invalid or disabled, skip it
         if (!aCSS || aCSS.disabled) return "";
         // a special stylesheet used by scrapbook, skip parsing it
@@ -889,7 +914,7 @@ var sbContentSaver = {
             media = " (@media " + media + ")";
         }
         if (aCSS.href) {
-            if (!isImport) {
+            if (!aIsImport) {
                 content = "/* ::::: " + aCSS.href + media + " ::::: */\n\n" + content;
             } else {
                 content = "/* ::::: " + "(import) " + aCSS.href + media + " ::::: */\n" + content + "/* ::::: " + "(end import)" + " ::::: */\n";
@@ -900,7 +925,7 @@ var sbContentSaver = {
         return content;
     },
 
-    processCSSRules: function(aCSS, aDocument, indent) {
+    processCSSRules: function(aCSS, aDocument, aIndent) {
         var content = "";
         Array.forEach(aCSS.cssRules, function(cssRule) {
             switch (cssRule.type) {
@@ -908,24 +933,24 @@ var sbContentSaver = {
                     content += this.processCSSRecursively(cssRule.styleSheet, aDocument, true);
                     break;
                 case Components.interfaces.nsIDOMCSSRule.FONT_FACE_RULE: 
-                    var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "font");
+                    var cssText = aIndent + this.inspectCSSText(cssRule.cssText, aCSS.href, "font");
                     if (cssText) content += cssText + "\n";
                     break;
                 case Components.interfaces.nsIDOMCSSRule.MEDIA_RULE: 
-                    cssText = indent + "@media " + cssRule.conditionText + " {\n"
-                        + this.processCSSRules(cssRule, aDocument, indent + "  ")
-                        + indent + "}";
+                    cssText = aIndent + "@media " + cssRule.conditionText + " {\n"
+                        + this.processCSSRules(cssRule, aDocument, aIndent + "  ")
+                        + aIndent + "}";
                     if (cssText) content += cssText + "\n";
                     break;
                 case Components.interfaces.nsIDOMCSSRule.STYLE_RULE: 
                     // if script is used, preserve all css in case it's used by a dynamic generated DOM
                     if (this.option["script"] || verifySelector(aDocument, cssRule.selectorText)) {
-                        var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "image");
+                        var cssText = aIndent + this.inspectCSSText(cssRule.cssText, aCSS.href, "image");
                         if (cssText) content += cssText + "\n";
                     }
                     break;
                 default: 
-                    var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "image");
+                    var cssText = aIndent + this.inspectCSSText(cssRule.cssText, aCSS.href, "image");
                     if (cssText) content += cssText + "\n";
                     break;
             }
@@ -972,7 +997,7 @@ var sbContentSaver = {
         }
     },
 
-    inspectCSSText: function(aCSSText, aCSSHref, type) {
+    inspectCSSText: function(aCSSText, aCSSHref, aType) {
         if (!aCSSHref) aCSSHref = this.refURLObj.spec;
         // CSS get by .cssText is always url("something-with-\"double-quote\"-escaped")
         // or url(something) (e.g. background-image in Firefox < 3.6)
@@ -983,19 +1008,19 @@ var sbContentSaver = {
             if (dataURL.indexOf("data:") === 0 && !sbContentSaver.option["saveDataURI"]) return ' url("' + dataURL + '")';
             if ( sbContentSaver.option["internalize"] && sbContentSaver.isInternalized(dataURL) ) return ' url("' + dataURL + '")';
             dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);
-            switch (type) {
+            switch (aType) {
                 case "image":
                     if (sbContentSaver.option["images"]) {
-                        var dataFile = sbContentSaver.download(dataURL);
-                        if (dataFile) dataURL = sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(dataFile));
+                        var dataFile = sbContentSaver.download(dataURL, "quote");
+                        if (dataFile) dataURL = dataFile;
                     } else if (!sbContentSaver.option["keepLink"]) {
                         dataURL = "about:blank";
                     }
                     break;
                 case "font":
                     if (sbContentSaver.option["fonts"]) {
-                        var dataFile = sbContentSaver.download(dataURL);
-                        if (dataFile) dataURL = sbCommonUtils.escapeHTML(sbCommonUtils.escapeFileName(dataFile));
+                        var dataFile = sbContentSaver.download(dataURL, "quote");
+                        if (dataFile) dataURL = dataFile;
                     } else if (!sbContentSaver.option["keepLink"]) {
                         dataURL = "about:blank";
                     }
@@ -1013,20 +1038,19 @@ var sbContentSaver = {
     //
     // aURLSpec is an absolute URL, could be encodeURI or not
     //
-    // aIsLinkFilter is specific for download link filter
+    // aEscapeType is how we escape the result URL, it will be passed to escapeURL and can be omitted
+    //
+    // aIsLinkFilter is specific for download link filter, can be omitted
     //
     // return "": means no download happened (should no change the url)
     // return <sourceURL>: deep capture for latter rewrite via sbCrossLinker (must have identical url)
     // return "urn:scrapbook-download:<hash>": when download starts
     // return "urn:scrapbook-download-error:<sourceURL>": when download error detected
-    // return fileName: a download happen, or used already downloaded file (already escapeFileName)
-    download: function(aURLSpec, aIsLinkFilter) {
+    // return <fileName>: a download happen, or used an already downloaded file
+    download: function(aURLSpec, aEscapeType, aIsLinkFilter) {
         if ( !aURLSpec ) return "";
         var sourceURL = aURLSpec;
-        try {
-            sourceURL = decodeURI(sourceURL);
-        } catch(ex) {}
-        sourceURL = encodeURI(sourceURL);
+        var that = this;
 
         var errorHandler = function(ex) {
             // crop to prevent large dataURI masking the exception info, especially dataURIs
@@ -1040,16 +1064,16 @@ var sbContentSaver = {
             }
             var errURL = "urn:scrapbook-download-error:" + sourceURL;
             sbCommonUtils.error(sbCommonUtils.lang(msgType, sourceURL, ex));
-            if (hashKey) sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][hashKey] = errURL;
+            if (hashKey) that.downloadRewriteMap[that.item.id][hashKey] = that.escapeURL(errURL, aEscapeType);
             return errURL;
         };
 
         try {
             if ( sourceURL.indexOf("http:") === 0 || sourceURL.indexOf("https:") === 0 || sourceURL.indexOf("ftp:") === 0 ) {
-                var targetDir = this.option["internalize"] ? this.option["internalize"].parent : this.contentDir.clone();
+                var targetDir = that.option["internalize"] ? that.option["internalize"].parent : that.contentDir.clone();
                 var hashKey = sbCommonUtils.getUUID();
                 var fileName, isDuplicate;
-                sbContentSaver.httpTask[sbContentSaver.item.id]++;
+                that.httpTask[that.item.id]++;
                 try {
                     var channel = sbCommonUtils.IO.newChannel(sourceURL, null, null);
                     channel.asyncOpen({
@@ -1075,21 +1099,21 @@ var sbContentSaver = {
                                 }
                                 // apply the filter
                                 if (aIsLinkFilter) {
-                                    var toDownload = sbContentSaver.downLinkFilter(ext);
+                                    var toDownload = that.downLinkFilter(ext);
                                     if (!toDownload) {
-                                        if ( sbContentSaver.option["inDepth"] > 0 ) {
+                                        if ( that.option["inDepth"] > 0 ) {
                                             // do not copy, but add to the link list if it's a work of deep capture
-                                            sbContentSaver.linkURLs.push(sourceURL);
+                                            that.linkURLs.push(sourceURL);
                                         }
-                                        sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][hashKey] = sourceURL;
+                                        that.downloadRewriteMap[that.item.id][hashKey] = that.escapeURL(sourceURL, aEscapeType);
                                         this._skipped = true;
                                         channel.cancel(Components.results.NS_BINDING_ABORTED);
                                         return;
                                     }
                                 }
                                 // determine the filename and check for duplicate
-                                [fileName, isDuplicate] = sbContentSaver.getUniqueFileName(fileName, sourceURL);
-                                sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][hashKey] = sbCommonUtils.escapeFileName(fileName);
+                                [fileName, isDuplicate] = that.getUniqueFileName(fileName, sourceURL);
+                                that.downloadRewriteMap[that.item.id][hashKey] = that.escapeURL(fileName, aEscapeType, true);
                                 if (isDuplicate) {
                                     this._skipped = true;
                                     channel.cancel(Components.results.NS_BINDING_ABORTED);
@@ -1112,7 +1136,7 @@ var sbContentSaver = {
                             } catch (ex) {
                                 errorHandler(ex);
                             }
-                            sbCaptureObserverCallback.onDownloadComplete(sbContentSaver.item);
+                            sbCaptureObserverCallback.onDownloadComplete(that.item);
                         },
                         onDataAvailable: function (aRequest, aContext, aInputStream, aOffset, aCount) {
                             try {
@@ -1128,7 +1152,7 @@ var sbContentSaver = {
                                 }
                                 this._stream.writeFrom(aInputStream, aCount);
                                 this._stream.flush();
-                                sbCaptureObserverCallback.onDownloadProgress(sbContentSaver.item, fileName, aOffset);
+                                sbCaptureObserverCallback.onDownloadProgress(that.item, fileName, aOffset);
                             } catch(ex) {
                                 sbCommonUtils.error(ex);
                                 channel.cancel(Components.results.NS_BINDING_ABORTED);
@@ -1136,7 +1160,7 @@ var sbContentSaver = {
                         }
                     }, null);
                 } catch (ex) {
-                    sbContentSaver.httpTask[sbContentSaver.item.id]--;
+                    that.httpTask[that.item.id]--;
                     errorHandler(ex);
                 }
                 return "urn:scrapbook-download:" + hashKey;
@@ -1145,21 +1169,8 @@ var sbContentSaver = {
                 var sourceFile = sbCommonUtils.convertURLToFile(sourceURL);
                 if (!sourceFile.exists()) throw sourceURL + " does not exist";
                 if (!sourceFile.isFile()) throw sourceURL + " is not a file";
-                // apply the filter
-                // Download all non-HTML local files.
-                // This is primarily to enable the combine wizard to capture all "file:" data.
-                if (aIsLinkFilter) {
-                    var mime = sbCommonUtils.getFileMime(sourceFile);
-                    if ( ["text/html", "application/xhtml+xml"].indexOf(mime) >= 0 ) {
-                        if ( this.option["inDepth"] > 0 ) {
-                            // do not copy, but add to the link list if it's a work of deep capture
-                            this.linkURLs.push(sourceURL);
-                        }
-                        return sourceURL;
-                    }
-                }
                 // determine the filename
-                var targetDir = this.option["internalize"] ? this.option["internalize"].parent : this.contentDir.clone();
+                var targetDir = that.option["internalize"] ? that.option["internalize"].parent : that.contentDir.clone();
                 var fileName, isDuplicate;
                 fileName = sbCommonUtils.getFileName(sourceURL);
                 // if the target file exists and has same content as the source file, skip copy
@@ -1168,61 +1179,61 @@ var sbContentSaver = {
                 fileName = sbCommonUtils.validateFileName(fileName);
                 var targetFile = targetDir.clone(); targetFile.append(fileName);
                 if (sbCommonUtils.compareFiles(sourceFile, targetFile)) {
-                    return sbCommonUtils.escapeFileName(fileName);
+                    return that.escapeURL(fileName, aEscapeType, true);
                 }
                 // check for duplicate
-                [fileName, isDuplicate] = sbContentSaver.getUniqueFileName(fileName, sourceURL);
-                if (isDuplicate) return sbCommonUtils.escapeFileName(fileName);
+                [fileName, isDuplicate] = that.getUniqueFileName(fileName, sourceURL);
+                if (isDuplicate) return that.escapeURL(fileName, aEscapeType, true);
                 // set task
-                this.httpTask[this.item.id]++;
-                var item = this.item;
+                that.httpTask[that.item.id]++;
+                var item = that.item;
                 setTimeout(function(){ sbCaptureObserverCallback.onDownloadComplete(item); }, 0);
                 // do the copy
                 sourceFile.copyTo(targetDir, fileName);
-                return sbCommonUtils.escapeFileName(fileName);
+                return that.escapeURL(fileName, aEscapeType, true);
             } else if ( sourceURL.indexOf("data:") === 0 ) {
                 // download "data:" only if option on
-                if (!this.option["saveDataURI"]) {
+                if (!that.option["saveDataURI"]) {
                     return "";
                 }
                 var { mime, charset, base64, data } = sbCommonUtils.parseDataURI(sourceURL);
                 var dataURIBytes = base64 ? atob(data) : decodeURIComponent(data); // in bytes
                 // use sha1sum as the filename
                 var dataURIFileName = sbCommonUtils.sha1(dataURIBytes, "BYTES") + "." + (sbCommonUtils.getMimePrimaryExtension(mime, null) || "dat");
-                var targetDir = this.option["internalize"] ? this.option["internalize"].parent : this.contentDir.clone();
+                var targetDir = that.option["internalize"] ? that.option["internalize"].parent : that.contentDir.clone();
                 var fileName, isDuplicate;
                 // if the target file exists and has same content as the dataURI, skip copy
                 fileName = dataURIFileName;
                 var targetFile = targetDir.clone(); targetFile.append(fileName);
                 if (targetFile.exists() && targetFile.isFile()) {
                     if (sbCommonUtils.readFile(targetFile) === dataURIBytes) {
-                        return sbCommonUtils.escapeFileName(fileName);
+                        return that.escapeURL(fileName, aEscapeType, true);
                     }
                 }
                 // determine the filename and check for duplicate
-                [fileName, isDuplicate] = sbContentSaver.getUniqueFileName(fileName, sourceURL);
-                if (isDuplicate) return sbCommonUtils.escapeFileName(fileName);
+                [fileName, isDuplicate] = that.getUniqueFileName(fileName, sourceURL);
+                if (isDuplicate) return that.escapeURL(fileName, aEscapeType, true);
                 // set task
-                this.httpTask[this.item.id]++;
-                var item = this.item;
+                that.httpTask[that.item.id]++;
+                var item = that.item;
                 setTimeout(function(){ sbCaptureObserverCallback.onDownloadComplete(item); }, 0);
                 // do the save
                 var targetFile = targetDir.clone(); targetFile.append(fileName);
                 sbCommonUtils.writeFileBytes(targetFile, dataURIBytes);
-                return sbCommonUtils.escapeFileName(fileName);
+                return that.escapeURL(fileName, aEscapeType, true);
             }
         } catch (ex) {
             return errorHandler(ex);
         }
-        return sourceURL;
+        return "";
     },
 
     downLinkFilter: function(aFileExt) {
         var that = this;
-        // use cache if there is the filter is not changed
-        if (that.cachedDownLinkFilterSource !== that.option["downLinkFilter"]) {
-            that.cachedDownLinkFilterSource = that.option["downLinkFilter"];
-            that.cachedDownLinkFilter = (function () {
+        // use cache if the filter is not changed
+        if (arguments.callee._filter !== that.option["downLinkFilter"]) {
+            arguments.callee._filter = that.option["downLinkFilter"];
+            arguments.callee.filters = (function () {
                 var ret = [];
                 that.option["downLinkFilter"].split(/[\r\n]/).forEach(function (line) {
                     if (line.charAt(0) === "#") return;
@@ -1236,10 +1247,49 @@ var sbContentSaver = {
                 return ret;
             })();
         }
-        var toDownload = that.cachedDownLinkFilter.some(function (filter) {
+        var toDownload = arguments.callee.filters.some(function (filter) {
             return filter.test(aFileExt);
         });
         return toDownload;
+    },
+
+    globalURLFilter: function (aURL) {
+        var that = this;
+        // use the cache if the filter is not changed
+        if (arguments.callee._filter !== that.option["linkURLFilters"]) {
+            arguments.callee._filter = that.option["linkURLFilters"];
+            arguments.callee.filters = (function () {
+                try {
+                    var filters = [];
+                    var dataStr = that.option["linkURLFilters"];
+                    var data = JSON.parse(dataStr);
+                    ((data instanceof Array) ? data : [data]).forEach(function (item) {
+                        // make sure each item is a valid RegExp
+                        try {
+                            item = item.toString();
+                            if (/^\/(.*)\/([a-z]*)$/.test(item)) {
+                                item = new RegExp(RegExp.$1, RegExp.$2);
+                            } else {
+                                item = new RegExp(sbCommonUtils.escapeRegExp(item));
+                            }
+                        } catch (ex) {
+                            sbCommonUtils.error("Invalid RegExp string '" + item + "'\n\n" + ex);
+                            return;
+                        }
+                        filters.push(item);
+                    });
+                    return filters;
+                } catch (ex) {
+                    sbCommonUtils.error("Unable to parse JSON data '" + dataStr + "'\n\n" + ex);
+                }
+                return [];
+            })();
+        }
+        // apply the filters
+        var toForbid = arguments.callee.filters.some(function (filter) {
+            return filter.test(aURL);
+        });
+        return !toForbid;
     },
 
     /**
@@ -1304,7 +1354,7 @@ var sbContentSaver = {
     },
     
     getUniqueFileNameSerialize: function(aSuggestFileName, aSourceURL, aSourceDoc) {
-        if (!arguments.callee._file2URL || (arguments.callee._file2URL !== this.file2URL)) {
+        if (arguments.callee._file2URL !== this.file2URL) {
             arguments.callee._file2URL = this.file2URL;
             arguments.callee.fileBase2URL = {};
             for (var keyFileName in this.file2URL) {
@@ -1348,14 +1398,32 @@ var sbContentSaver = {
         return aURI.indexOf("://") === -1 && !(aURI.indexOf("data:") === 0);
     },
 
-    restoreFileNameFromHash: function (content, type) {
+    // escapeType: determine how to escape the result url
+    //   (default): use plain URL text without additional escape
+    //   "quote": the result url is part of (double) quote content
+    //   "HTML": the result url is part of HTML content
+    // Note: if the url is to be passed to e.g. elem.setAttribute(), we should use default instead of HTML
+    //
+    // isFilename: true if the url contains only the filename; otherwise (e.g. undefined) if it's a full URL
+    escapeURL: function (url, escapeType, isFilename) {
+        if (isFilename) {
+            url = sbCommonUtils.escapeFileName(url);
+        }
+        if (escapeType == "quote") {
+            sbCommonUtils.escapeQuotes(url);
+        } else if (escapeType == "HTML") {
+            url = sbCommonUtils.escapeHTML(url);
+        }
+        return url;
+    },
+
+    restoreFileNameFromHash: function (content) {
         return content.replace(/urn:scrapbook-download:([0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12})/g, function (match, key) {
             var url = sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][key];
-            // error handling, should be almost impossible
-            if (!url) return "urn:scrapbook-download-error:" + key;
-            if (type == "HTML") {
-                url = sbCommonUtils.escapeHTML(url);
-            }
+            // This could happen when a web page really contains a content text in our format.
+            // We return the original text for keys not defineded in the map to prevent a bad replace
+            // since it's nearly impossible for them to hit on the hash keys we are using.
+            if (!url) return match;
             return url;
         });
     },
@@ -1387,9 +1455,9 @@ var sbCaptureObserverCallback = {
     onAllDownloadsComplete: function(aItem) {
         // restore downloaded file names
         sbContentSaver.downloadRewriteFiles[aItem.id].forEach(function (data) {
-            var [file, charset, type] = data;
+            var [file, charset] = data;
             var content = sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(file), charset);
-            content = sbContentSaver.restoreFileNameFromHash(content, type);
+            content = sbContentSaver.restoreFileNameFromHash(content);
             sbCommonUtils.writeFile(file, content, charset);
         });
 
@@ -1400,13 +1468,12 @@ var sbCaptureObserverCallback = {
         if (res && sbDataSource.exists(res)) {
             sbDataSource.setProperty(res, "type", aItem.type);
             if ( sbContentSaver.favicon ) {
-                sbContentSaver.favicon = sbContentSaver.restoreFileNameFromHash(sbContentSaver.favicon, "TXT");
                 aItem.icon = sbContentSaver.favicon;
             }
             // We replace the "urn:scrapbook-download:*" and skip adding "resource://" to prevent an issue
             // for URLs containing ":", such as "moz-icon://".
             if (aItem.icon) {
-                aItem.icon = sbContentSaver.restoreFileNameFromHash(aItem.icon, "TXT");
+                aItem.icon = sbContentSaver.restoreFileNameFromHash(aItem.icon);
                 if (aItem.icon.indexOf(":") >= 0) {
                     var iconURL = aItem.icon;
                 } else {

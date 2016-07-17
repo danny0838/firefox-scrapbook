@@ -728,6 +728,10 @@ var sbCommonUtils = {
         return shaObj.getHash("HEX");
     },
 
+    escapeQuotes: function(aStr) {
+        return aStr.replace(/[\\"]/g, "\\$&");
+    },
+
     escapeComment: function(aStr) {
         if ( aStr.length > 10000 ) this.alert(lang("MSG_LARGE_COMMENT"));
         return aStr.replace(/\r|\n|\t/g, " __BR__ ");
