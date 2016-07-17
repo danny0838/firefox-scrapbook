@@ -5,6 +5,7 @@ pref("extensions.scrapbook.ui.menuBar", true);
 pref("extensions.scrapbook.ui.menuBar.icon", false);
 pref("extensions.scrapbook.ui.toolsMenu", false);
 pref("extensions.scrapbook.ui.statusBar", true);
+pref("extensions.scrapbook.ui.sidebarManage", false);
 pref("extensions.scrapbook.ui.folderList", "");
 pref("extensions.scrapbook.ui.folderList.maxEntries", 5);
 pref("extensions.scrapbook.tabs.open", false);

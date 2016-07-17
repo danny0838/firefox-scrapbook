@@ -259,6 +259,7 @@
 <!ENTITY sb.prefs.ui.menuBar.icon "Значок">
 <!ENTITY sb.prefs.ui.toolsMenu "Показывать в меню «Инструменты»">
 <!ENTITY sb.prefs.ui.statusBar "Показывать в строке состояния">
+<!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
 <!ENTITY sb.prefs.restart "Изменения требуют перезапуска Firefox&apos;а">
 <!ENTITY sb.prefs.tabs.tips "Открывать в новых вкладках следующие операции">
 <!ENTITY sb.prefs.tabs.note "Изменить заметку">

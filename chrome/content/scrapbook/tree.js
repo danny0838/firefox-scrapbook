@@ -17,6 +17,10 @@ var sbTreeHandler = {
         this.TREE.database.AddDataSource(sbDataSource.data);
         this.autoCollapse = sbCommonUtils.getPref("tree.autoCollapse", false);
         if ( isContainer ) document.getElementById("sbTreeRule").setAttribute("iscontainer", true);
+        if (this.TREE.getAttribute("data-seltype") == "single") {
+            var selType = sbCommonUtils.getPref("ui.sidebarManage", false) ? "multiple" : "single";
+            this.TREE.setAttribute("seltype", selType);
+        }
         this.TREE.builder.rebuild();
     },
 
@@ -36,9 +40,8 @@ var sbTreeHandler = {
         if ( !obj.value || obj.value == "twisty" ) return;
 
         var curIdx = this.TREE.currentIndex;
-        if (aType < 2) {
-            // manage window, mid-click to open in new tab
-            // forbid ctrl- or shift- click because they are for multiple selection
+        if (aType < 2 || sbCommonUtils.getPref("ui.sidebarManage", false)) {
+            // folder picker or manage window, mid-click to open in new tab
             if (aEvent.button == 1 && sbDataSource.getProperty(this.resource, "type") != "folder") {
                 sbController.open(this.resource, true);
             }
@@ -75,8 +78,9 @@ var sbTreeHandler = {
     },
 
     // double click (any button) on container: toggle container (natively)
-    onDblClick: function(aEvent) {
+    onDblClick: function(aEvent, aType) {
         if ( aEvent.originalTarget.localName != "treechildren" || aEvent.button != 0 ) return;
+        if ( !(aType < 2 || sbCommonUtils.getPref("ui.sidebarManage", false)) ) return;
         if ( this.TREE.view.isContainer(this.TREE.currentIndex) ) return;
         sbController.open(this.resource, aEvent.ctrlKey || aEvent.shiftKey);
     },

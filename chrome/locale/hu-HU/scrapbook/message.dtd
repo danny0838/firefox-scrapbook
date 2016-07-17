@@ -259,6 +259,7 @@
 <!ENTITY sb.prefs.ui.menuBar.icon "Ikon">
 <!ENTITY sb.prefs.ui.toolsMenu "Megjelenítés az „Eszközök” menüben">
 <!ENTITY sb.prefs.ui.statusBar "Megjelenítés az állapotsorban">
+<!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
 <!ENTITY sb.prefs.restart "A változtatások érvényre jutásához a Firefox újraindítása szükséges">
 <!ENTITY sb.prefs.tabs.tips "Lap nyitása a következő műveletekhez">
 <!ENTITY sb.prefs.tabs.note "Jegyzet szerkesztése">

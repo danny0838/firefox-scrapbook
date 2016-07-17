@@ -64,6 +64,7 @@
         <vbox id="sbTreeOuter" flex="2" persist="height">
             <tree id="sbTree"
                   onclick="sbTreeHandler.onClick(event, 2);"
+                  ondblclick="sbTreeHandler.onDblClick(event, 2);"
                   onkeypress="sbTreeHandler.onKeyPress(event);"
                   ondragenter="sbTreeDNDHandler.currentDataTransfer=event.dataTransfer;"
                   ondraggesture="nsDragAndDrop.startDrag(event,sbTreeDNDHandler.dragDropObserver);"
@@ -73,6 +74,7 @@
                   contextmenu="sbPopup"
                   hidecolumnpicker="true"
                   seltype="single"
+                  data-seltype="single"
                   class="plain" flex="1" />
         </vbox>
         <splitter id="sbNoteSplitter" class="plain" hidden="true" />

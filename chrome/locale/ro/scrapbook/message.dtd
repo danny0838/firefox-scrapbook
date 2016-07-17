@@ -259,6 +259,7 @@
 <!ENTITY sb.prefs.ui.menuBar.icon "Afișează doar pictograma">
 <!ENTITY sb.prefs.ui.toolsMenu "Afișează în meniul „Unelte”">
 <!ENTITY sb.prefs.ui.statusBar "Afișează în bara de stare">
+<!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
 <!ENTITY sb.prefs.restart "Modificările sunt efective după repornirea navigatorului.">
 <!ENTITY sb.prefs.tabs.tips "Deschide în file pentru următoarele operații">
 <!ENTITY sb.prefs.tabs.note "Editează note">

@@ -259,6 +259,7 @@
 <!ENTITY sb.prefs.ui.menuBar.icon "Icono">
 <!ENTITY sb.prefs.ui.toolsMenu "Mostrar en el menú &apos;Herramientas&apos;">
 <!ENTITY sb.prefs.ui.statusBar "Mostrar en la barra de estado">
+<!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
 <!ENTITY sb.prefs.restart "El cambio requiere reiniciar Firefox">
 <!ENTITY sb.prefs.tabs.tips "Abrir en pestañas al realizar las siguientes operaciones">
 <!ENTITY sb.prefs.tabs.note "Editar Nota">
