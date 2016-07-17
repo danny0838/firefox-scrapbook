@@ -471,14 +471,14 @@ var sbContentSaver = {
         }
     },
 
-    inspectNode: function(aNode, rootNode) {
+    inspectNode: function(aNode, aRootNode) {
         switch ( aNode.nodeName.toLowerCase() ) {
             case "img": 
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("src")) ) break;
                     if ( this.option["images"] ) {
-                        var aFileName = this.download(aNode.src);
-                        if (aFileName) aNode.setAttribute("src", aFileName);
+                        var fileName = this.download(aNode.src);
+                        if (fileName) aNode.setAttribute("src", fileName);
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("src", aNode.src);
                     } else {
@@ -492,8 +492,8 @@ var sbContentSaver = {
                             if ( that.option["internalize"] && this.isInternalized(m2) ) return m;
                             var url = sbCommonUtils.resolveURL(that.refURLObj.spec, m2);
                             if ( that.option["images"] ) {
-                                var aFileName = that.download(url);
-                                if (aFileName) return m1 + aFileName + m3;
+                                var fileName = that.download(url);
+                                if (fileName) return m1 + fileName + m3;
                             } else if ( that.option["keepLink"] ) {
                                 return m1 + url + m3;
                             } else {
@@ -510,8 +510,8 @@ var sbContentSaver = {
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
                     if ( this.option["media"] ) {
-                        var aFileName = this.download(aNode.src);
-                        if (aFileName) aNode.setAttribute("src", aFileName);
+                        var fileName = this.download(aNode.src);
+                        if (fileName) aNode.setAttribute("src", fileName);
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("src", aNode.src);
                     } else {
@@ -523,8 +523,8 @@ var sbContentSaver = {
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
                     if ( this.option["media"] ) {
-                        var aFileName = this.download(aNode.src);
-                        if (aFileName) aNode.setAttribute("src", aFileName);
+                        var fileName = this.download(aNode.src);
+                        if (fileName) aNode.setAttribute("src", fileName);
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("src", aNode.src);
                     } else {
@@ -538,8 +538,8 @@ var sbContentSaver = {
                             if ( that.option["internalize"] && this.isInternalized(m2) ) return m;
                             var url = sbCommonUtils.resolveURL(that.refURLObj.spec, m2);
                             if ( that.option["media"] ) {
-                                var aFileName = that.download(url);
-                                if (aFileName) return m1 + aFileName + m3;
+                                var fileName = that.download(url);
+                                if (fileName) return m1 + fileName + m3;
                             } else if ( that.option["keepLink"] ) {
                                 return m1 + url + m3;
                             } else {
@@ -554,8 +554,8 @@ var sbContentSaver = {
                 if ( aNode.hasAttribute("data") ) {
                     if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("data")) ) break;
                     if ( this.option["media"] ) {
-                        var aFileName = this.download(aNode.data);
-                        if (aFileName) aNode.setAttribute("data", aFileName);
+                        var fileName = this.download(aNode.data);
+                        if (fileName) aNode.setAttribute("data", fileName);
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("data", aNode.src);
                     } else {
@@ -568,8 +568,8 @@ var sbContentSaver = {
                     if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("archive")) ) break;
                     var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("archive"));
                     if ( this.option["media"] ) {
-                        var aFileName = this.download(url);
-                        if (aFileName) aNode.setAttribute("archive", aFileName);
+                        var fileName = this.download(url);
+                        if (fileName) aNode.setAttribute("archive", fileName);
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("archive", url);
                     } else {
@@ -602,8 +602,8 @@ var sbContentSaver = {
                     if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("background")) ) break;
                     var url = sbCommonUtils.resolveURL(this.refURLObj.spec, aNode.getAttribute("background"));
                     if ( this.option["images"] ) {
-                        var aFileName = this.download(url);
-                        if (aFileName) aNode.setAttribute("background", aFileName);
+                        var fileName = this.download(url);
+                        if (fileName) aNode.setAttribute("background", fileName);
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("background", url);
                     } else {
@@ -617,8 +617,8 @@ var sbContentSaver = {
                         if ( aNode.hasAttribute("src") ) {
                             if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("src")) ) break;
                             if ( this.option["images"] ) {
-                                var aFileName = this.download(aNode.src);
-                                if (aFileName) aNode.setAttribute("src", aFileName);
+                                var fileName = this.download(aNode.src);
+                                if (fileName) aNode.setAttribute("src", fileName);
                             } else if ( this.option["keepLink"] ) {
                                 aNode.setAttribute("src", aNode.src);
                             } else {
@@ -646,8 +646,8 @@ var sbContentSaver = {
                                 return this.removeNodeFromParent(aNode);
                             } else if ( this.option["styles"] && !this.option["rewriteStyles"] ) {
                                 // capturing styles with no rewrite, download it and rewrite the link
-                                var aFileName = this.download(aNode.href);
-                                if (aFileName) aNode.setAttribute("href", aFileName);
+                                var fileName = this.download(aNode.href);
+                                if (fileName) aNode.setAttribute("href", fileName);
                             } else if ( !this.option["styles"] && this.option["keepLink"] ) {
                                 // link to the source css file
                                 aNode.setAttribute("href", aNode.href);
@@ -661,10 +661,10 @@ var sbContentSaver = {
                     case "icon":
                         if ( aNode.hasAttribute("href") ) {
                             if ( this.option["internalize"] ) break;
-                            var aFileName = this.download(aNode.href);
-                            if (aFileName) {
-                                aNode.setAttribute("href", aFileName);
-                                if ( this.isMainFrame && !this.favicon ) this.favicon = aFileName;
+                            var fileName = this.download(aNode.href);
+                            if (fileName) {
+                                aNode.setAttribute("href", fileName);
+                                if ( this.isMainFrame && !this.favicon ) this.favicon = fileName;
                             }
                         }
                         break;
@@ -700,8 +700,8 @@ var sbContentSaver = {
                 if ( this.option["script"] ) {
                     if ( aNode.hasAttribute("src") ) {
                         if ( this.option["internalize"] ) break;
-                        var aFileName = this.download(aNode.src);
-                        if (aFileName) aNode.setAttribute("src", aFileName);
+                        var fileName = this.download(aNode.src);
+                        if (fileName) aNode.setAttribute("src", fileName);
                     }
                 } else {
                     return this.removeNodeFromParent(aNode);
@@ -717,10 +717,10 @@ var sbContentSaver = {
                     break;
                 }
                 // adjustment for hash links targeting the current page
-                var urlParts = sbCommonUtils.splitURLByAnchor(aNode.href);
-                if ( urlParts[0] === sbCommonUtils.splitURLByAnchor(aNode.ownerDocument.location.href)[0] ) {
+                var [urlMain, urlHash] = sbCommonUtils.splitURLByAnchor(aNode.href);
+                if ( urlMain === sbCommonUtils.splitURLByAnchor(aNode.ownerDocument.location.href)[0] ) {
                     // This link targets the current page.
-                    if ( urlParts[1] === '' || urlParts[1] === '#' ) {
+                    if ( urlHash === '' || urlHash === '#' ) {
                         // link to the current page as a whole
                         aNode.setAttribute('href', '#');
                         break;
@@ -729,11 +729,11 @@ var sbContentSaver = {
                     // For partial capture, the captured page could be incomplete,
                     // relink to the captured page only when the target node is included in the selected fragment.
                     var hasLocalTarget = !this.selection;
-                    if ( !hasLocalTarget && rootNode.querySelector ) {
+                    if ( !hasLocalTarget && aRootNode.querySelector ) {
                         // Element.querySelector() is available only for Firefox >= 3.5
                         // For those with no support, simply skip the relink check.
-                        var targetId = decodeURIComponent(urlParts[1].substr(1)).replace(/\W/g, '\\$&');
-                        if ( rootNode.querySelector('[id="' + targetId + '"], a[name="' + targetId + '"]') ) {
+                        var targetId = decodeURIComponent(urlHash.substr(1)).replace(/\W/g, '\\$&');
+                        if ( aRootNode.querySelector('[id="' + targetId + '"], a[name="' + targetId + '"]') ) {
                             hasLocalTarget = true;
                         }
                     }
@@ -741,7 +741,7 @@ var sbContentSaver = {
                         // if the original link is already a pure hash, 
                         // skip the rewrite to prevent a potential encoding change
                         if (aNode.getAttribute('href').charAt(0) != "#") {
-                            aNode.setAttribute('href', urlParts[1]);
+                            aNode.setAttribute('href', urlHash);
                         }
                         break;
                     }
@@ -749,14 +749,14 @@ var sbContentSaver = {
                 // determine whether to download (copy) the link target file
                 switch (sbContentSaver.option["downLinkMethod"]) {
                     case 2: // check url and header filename
-                        var aFileName = this.download(aNode.href, null, true);
-                        if (aFileName) aNode.setAttribute("href", aFileName);
+                        var fileName = this.download(aNode.href, null, true);
+                        if (fileName) aNode.setAttribute("href", fileName);
                         break;
                     case 1: // check url filename
                         var [,ext] = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aNode.href));
                         if (this.downLinkFilter(ext)) {
-                            var aFileName = this.download(aNode.href);
-                            if (aFileName) aNode.setAttribute("href", aFileName);
+                            var fileName = this.download(aNode.href);
+                            if (fileName) aNode.setAttribute("href", fileName);
                             break;
                         }
                     case 0: // no check
@@ -860,7 +860,7 @@ var sbContentSaver = {
       script.parentNode.removeChild(script);
     },
 
-    processCSSRecursively: function(aCSS, aDocument, isImport) {
+    processCSSRecursively: function(aCSS, aDocument, aIsImport) {
         // aCSS is invalid or disabled, skip it
         if (!aCSS || aCSS.disabled) return "";
         // a special stylesheet used by scrapbook, skip parsing it
@@ -889,7 +889,7 @@ var sbContentSaver = {
             media = " (@media " + media + ")";
         }
         if (aCSS.href) {
-            if (!isImport) {
+            if (!aIsImport) {
                 content = "/* ::::: " + aCSS.href + media + " ::::: */\n\n" + content;
             } else {
                 content = "/* ::::: " + "(import) " + aCSS.href + media + " ::::: */\n" + content + "/* ::::: " + "(end import)" + " ::::: */\n";
@@ -900,7 +900,7 @@ var sbContentSaver = {
         return content;
     },
 
-    processCSSRules: function(aCSS, aDocument, indent) {
+    processCSSRules: function(aCSS, aDocument, aIndent) {
         var content = "";
         Array.forEach(aCSS.cssRules, function(cssRule) {
             switch (cssRule.type) {
@@ -908,24 +908,24 @@ var sbContentSaver = {
                     content += this.processCSSRecursively(cssRule.styleSheet, aDocument, true);
                     break;
                 case Components.interfaces.nsIDOMCSSRule.FONT_FACE_RULE: 
-                    var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "font");
+                    var cssText = aIndent + this.inspectCSSText(cssRule.cssText, aCSS.href, "font");
                     if (cssText) content += cssText + "\n";
                     break;
                 case Components.interfaces.nsIDOMCSSRule.MEDIA_RULE: 
-                    cssText = indent + "@media " + cssRule.conditionText + " {\n"
-                        + this.processCSSRules(cssRule, aDocument, indent + "  ")
-                        + indent + "}";
+                    cssText = aIndent + "@media " + cssRule.conditionText + " {\n"
+                        + this.processCSSRules(cssRule, aDocument, aIndent + "  ")
+                        + aIndent + "}";
                     if (cssText) content += cssText + "\n";
                     break;
                 case Components.interfaces.nsIDOMCSSRule.STYLE_RULE: 
                     // if script is used, preserve all css in case it's used by a dynamic generated DOM
                     if (this.option["script"] || verifySelector(aDocument, cssRule.selectorText)) {
-                        var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "image");
+                        var cssText = aIndent + this.inspectCSSText(cssRule.cssText, aCSS.href, "image");
                         if (cssText) content += cssText + "\n";
                     }
                     break;
                 default: 
-                    var cssText = indent + this.inspectCSSText(cssRule.cssText, aCSS.href, "image");
+                    var cssText = aIndent + this.inspectCSSText(cssRule.cssText, aCSS.href, "image");
                     if (cssText) content += cssText + "\n";
                     break;
             }
@@ -972,7 +972,7 @@ var sbContentSaver = {
         }
     },
 
-    inspectCSSText: function(aCSSText, aCSSHref, type) {
+    inspectCSSText: function(aCSSText, aCSSHref, aType) {
         if (!aCSSHref) aCSSHref = this.refURLObj.spec;
         // CSS get by .cssText is always url("something-with-\"double-quote\"-escaped")
         // or url(something) (e.g. background-image in Firefox < 3.6)
@@ -983,7 +983,7 @@ var sbContentSaver = {
             if (dataURL.indexOf("data:") === 0 && !sbContentSaver.option["saveDataURI"]) return ' url("' + dataURL + '")';
             if ( sbContentSaver.option["internalize"] && sbContentSaver.isInternalized(dataURL) ) return ' url("' + dataURL + '")';
             dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);
-            switch (type) {
+            switch (aType) {
                 case "image":
                     if (sbContentSaver.option["images"]) {
                         var dataFile = sbContentSaver.download(dataURL, "quote");
@@ -1417,7 +1417,6 @@ var sbCaptureObserverCallback = {
         if (res && sbDataSource.exists(res)) {
             sbDataSource.setProperty(res, "type", aItem.type);
             if ( sbContentSaver.favicon ) {
-                sbContentSaver.favicon = sbContentSaver.restoreFileNameFromHash(sbContentSaver.favicon);
                 aItem.icon = sbContentSaver.favicon;
             }
             // We replace the "urn:scrapbook-download:*" and skip adding "resource://" to prevent an issue
