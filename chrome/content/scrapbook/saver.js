@@ -18,8 +18,6 @@ var sbContentSaver = {
     linkURLs: [],
     frames: [],
     canvases: [],
-    cachedDownLinkFilter: null,
-    cachedDownLinkFilterSource: null,
 
     init: function(aPresetData) {
         this.option = {
@@ -1226,10 +1224,10 @@ var sbContentSaver = {
 
     downLinkFilter: function(aFileExt) {
         var that = this;
-        // use cache if there is the filter is not changed
-        if (that.cachedDownLinkFilterSource !== that.option["downLinkFilter"]) {
-            that.cachedDownLinkFilterSource = that.option["downLinkFilter"];
-            that.cachedDownLinkFilter = (function () {
+        // use cache if the filter is not changed
+        if (arguments.callee._filter !== that.option["downLinkFilter"]) {
+            arguments.callee._filter = that.option["downLinkFilter"];
+            arguments.callee.filters = (function () {
                 var ret = [];
                 that.option["downLinkFilter"].split(/[\r\n]/).forEach(function (line) {
                     if (line.charAt(0) === "#") return;
@@ -1243,7 +1241,7 @@ var sbContentSaver = {
                 return ret;
             })();
         }
-        var toDownload = that.cachedDownLinkFilter.some(function (filter) {
+        var toDownload = arguments.callee.filters.some(function (filter) {
             return filter.test(aFileExt);
         });
         return toDownload;
