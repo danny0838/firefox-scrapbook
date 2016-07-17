@@ -1028,6 +1028,8 @@ var sbContentSaver = {
         } catch(ex) {}
         sourceURL = encodeURI(sourceURL);
 
+        var that = this;
+
         var errorHandler = function(ex) {
             // crop to prevent large dataURI masking the exception info, especially dataURIs
             sourceURL = sbCommonUtils.crop(sourceURL, 1024);
@@ -1040,16 +1042,16 @@ var sbContentSaver = {
             }
             var errURL = "urn:scrapbook-download-error:" + sourceURL;
             sbCommonUtils.error(sbCommonUtils.lang(msgType, sourceURL, ex));
-            if (hashKey) sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][hashKey] = errURL;
+            if (hashKey) that.downloadRewriteMap[that.item.id][hashKey] = errURL;
             return errURL;
         };
 
         try {
             if ( sourceURL.indexOf("http:") === 0 || sourceURL.indexOf("https:") === 0 || sourceURL.indexOf("ftp:") === 0 ) {
-                var targetDir = this.option["internalize"] ? this.option["internalize"].parent : this.contentDir.clone();
+                var targetDir = that.option["internalize"] ? that.option["internalize"].parent : that.contentDir.clone();
                 var hashKey = sbCommonUtils.getUUID();
                 var fileName, isDuplicate;
-                sbContentSaver.httpTask[sbContentSaver.item.id]++;
+                that.httpTask[that.item.id]++;
                 try {
                     var channel = sbCommonUtils.IO.newChannel(sourceURL, null, null);
                     channel.asyncOpen({
@@ -1075,21 +1077,21 @@ var sbContentSaver = {
                                 }
                                 // apply the filter
                                 if (aIsLinkFilter) {
-                                    var toDownload = sbContentSaver.downLinkFilter(ext);
+                                    var toDownload = that.downLinkFilter(ext);
                                     if (!toDownload) {
-                                        if ( sbContentSaver.option["inDepth"] > 0 ) {
+                                        if ( that.option["inDepth"] > 0 ) {
                                             // do not copy, but add to the link list if it's a work of deep capture
-                                            sbContentSaver.linkURLs.push(sourceURL);
+                                            that.linkURLs.push(sourceURL);
                                         }
-                                        sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][hashKey] = sourceURL;
+                                        that.downloadRewriteMap[that.item.id][hashKey] = sourceURL;
                                         this._skipped = true;
                                         channel.cancel(Components.results.NS_BINDING_ABORTED);
                                         return;
                                     }
                                 }
                                 // determine the filename and check for duplicate
-                                [fileName, isDuplicate] = sbContentSaver.getUniqueFileName(fileName, sourceURL);
-                                sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][hashKey] = sbCommonUtils.escapeFileName(fileName);
+                                [fileName, isDuplicate] = that.getUniqueFileName(fileName, sourceURL);
+                                that.downloadRewriteMap[that.item.id][hashKey] = sbCommonUtils.escapeFileName(fileName);
                                 if (isDuplicate) {
                                     this._skipped = true;
                                     channel.cancel(Components.results.NS_BINDING_ABORTED);
@@ -1112,7 +1114,7 @@ var sbContentSaver = {
                             } catch (ex) {
                                 errorHandler(ex);
                             }
-                            sbCaptureObserverCallback.onDownloadComplete(sbContentSaver.item);
+                            sbCaptureObserverCallback.onDownloadComplete(that.item);
                         },
                         onDataAvailable: function (aRequest, aContext, aInputStream, aOffset, aCount) {
                             try {
@@ -1128,7 +1130,7 @@ var sbContentSaver = {
                                 }
                                 this._stream.writeFrom(aInputStream, aCount);
                                 this._stream.flush();
-                                sbCaptureObserverCallback.onDownloadProgress(sbContentSaver.item, fileName, aOffset);
+                                sbCaptureObserverCallback.onDownloadProgress(that.item, fileName, aOffset);
                             } catch(ex) {
                                 sbCommonUtils.error(ex);
                                 channel.cancel(Components.results.NS_BINDING_ABORTED);
@@ -1136,7 +1138,7 @@ var sbContentSaver = {
                         }
                     }, null);
                 } catch (ex) {
-                    sbContentSaver.httpTask[sbContentSaver.item.id]--;
+                    that.httpTask[that.item.id]--;
                     errorHandler(ex);
                 }
                 return "urn:scrapbook-download:" + hashKey;
@@ -1151,15 +1153,15 @@ var sbContentSaver = {
                 if (aIsLinkFilter) {
                     var mime = sbCommonUtils.getFileMime(sourceFile);
                     if ( ["text/html", "application/xhtml+xml"].indexOf(mime) >= 0 ) {
-                        if ( this.option["inDepth"] > 0 ) {
+                        if ( that.option["inDepth"] > 0 ) {
                             // do not copy, but add to the link list if it's a work of deep capture
-                            this.linkURLs.push(sourceURL);
+                            that.linkURLs.push(sourceURL);
                         }
                         return sourceURL;
                     }
                 }
                 // determine the filename
-                var targetDir = this.option["internalize"] ? this.option["internalize"].parent : this.contentDir.clone();
+                var targetDir = that.option["internalize"] ? that.option["internalize"].parent : that.contentDir.clone();
                 var fileName, isDuplicate;
                 fileName = sbCommonUtils.getFileName(sourceURL);
                 // if the target file exists and has same content as the source file, skip copy
@@ -1171,25 +1173,25 @@ var sbContentSaver = {
                     return sbCommonUtils.escapeFileName(fileName);
                 }
                 // check for duplicate
-                [fileName, isDuplicate] = sbContentSaver.getUniqueFileName(fileName, sourceURL);
+                [fileName, isDuplicate] = that.getUniqueFileName(fileName, sourceURL);
                 if (isDuplicate) return sbCommonUtils.escapeFileName(fileName);
                 // set task
-                this.httpTask[this.item.id]++;
-                var item = this.item;
+                that.httpTask[that.item.id]++;
+                var item = that.item;
                 setTimeout(function(){ sbCaptureObserverCallback.onDownloadComplete(item); }, 0);
                 // do the copy
                 sourceFile.copyTo(targetDir, fileName);
                 return sbCommonUtils.escapeFileName(fileName);
             } else if ( sourceURL.indexOf("data:") === 0 ) {
                 // download "data:" only if option on
-                if (!this.option["saveDataURI"]) {
+                if (!that.option["saveDataURI"]) {
                     return "";
                 }
                 var { mime, charset, base64, data } = sbCommonUtils.parseDataURI(sourceURL);
                 var dataURIBytes = base64 ? atob(data) : decodeURIComponent(data); // in bytes
                 // use sha1sum as the filename
                 var dataURIFileName = sbCommonUtils.sha1(dataURIBytes, "BYTES") + "." + (sbCommonUtils.getMimePrimaryExtension(mime, null) || "dat");
-                var targetDir = this.option["internalize"] ? this.option["internalize"].parent : this.contentDir.clone();
+                var targetDir = that.option["internalize"] ? that.option["internalize"].parent : that.contentDir.clone();
                 var fileName, isDuplicate;
                 // if the target file exists and has same content as the dataURI, skip copy
                 fileName = dataURIFileName;
@@ -1200,11 +1202,11 @@ var sbContentSaver = {
                     }
                 }
                 // determine the filename and check for duplicate
-                [fileName, isDuplicate] = sbContentSaver.getUniqueFileName(fileName, sourceURL);
+                [fileName, isDuplicate] = that.getUniqueFileName(fileName, sourceURL);
                 if (isDuplicate) return sbCommonUtils.escapeFileName(fileName);
                 // set task
-                this.httpTask[this.item.id]++;
-                var item = this.item;
+                that.httpTask[that.item.id]++;
+                var item = that.item;
                 setTimeout(function(){ sbCaptureObserverCallback.onDownloadComplete(item); }, 0);
                 // do the save
                 var targetFile = targetDir.clone(); targetFile.append(fileName);
