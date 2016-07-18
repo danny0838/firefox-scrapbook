@@ -482,7 +482,7 @@ var sbContentSaver = {
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("src", url);
                     } else {
-                        aNode.setAttribute("src", "about:blank");
+                        aNode.setAttribute("src", this.getSkippedURL(url));
                     }
                 }
                 if ( aNode.hasAttribute("srcset") ) {
@@ -496,7 +496,7 @@ var sbContentSaver = {
                         } else if ( that.option["keepLink"] ) {
                             return url;
                         } else {
-                            return "about:blank";
+                            return that.getSkippedURL(url);
                         }
                     });
                     aNode.setAttribute("srcset", newSrcset);
@@ -514,7 +514,7 @@ var sbContentSaver = {
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("src", url);
                     } else {
-                        aNode.setAttribute("src", "about:blank");
+                        aNode.setAttribute("src", this.getSkippedURL(url));
                     }
                 }
                 break;
@@ -528,7 +528,7 @@ var sbContentSaver = {
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("src", url);
                     } else {
-                        aNode.setAttribute("src", "about:blank");
+                        aNode.setAttribute("src", this.getSkippedURL(url));
                     }
                 }
                 if ( aNode.hasAttribute("srcset") ) {
@@ -542,7 +542,7 @@ var sbContentSaver = {
                         } else if ( that.option["keepLink"] ) {
                             return url;
                         } else {
-                            return "about:blank";
+                            return that.getSkippedURL(url);
                         }
                     });
                     aNode.setAttribute("srcset", newSrcset);
@@ -558,7 +558,7 @@ var sbContentSaver = {
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("data", url);
                     } else {
-                        aNode.setAttribute("data", "about:blank");
+                        aNode.setAttribute("data", this.getSkippedURL(url));
                     }
                 }
                 break;
@@ -572,7 +572,7 @@ var sbContentSaver = {
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("archive", url);
                     } else {
-                        aNode.setAttribute("archive", "about:blank");
+                        aNode.setAttribute("archive", this.getSkippedURL(url));
                     }
                 }
                 break;
@@ -606,7 +606,7 @@ var sbContentSaver = {
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("background", url);
                     } else {
-                        aNode.setAttribute("background", "about:blank");
+                        aNode.setAttribute("background", this.getSkippedURL(url));
                     }
                 }
                 break;
@@ -622,7 +622,7 @@ var sbContentSaver = {
                             } else if ( this.option["keepLink"] ) {
                                 aNode.setAttribute("src", url);
                             } else {
-                                aNode.setAttribute("src", "about:blank");
+                                aNode.setAttribute("src", this.getSkippedURL(url));
                             }
                         }
                         break;
@@ -654,7 +654,7 @@ var sbContentSaver = {
                                 aNode.setAttribute("href", url);
                             } else if ( !this.option["styles"] && !this.option["keepLink"] ) {
                                 // not capturing styles, set it blank
-                                aNode.setAttribute("href", "about:blank");
+                                aNode.setAttribute("href", this.getSkippedURL(url));
                             }
                         }
                         break;
@@ -850,7 +850,7 @@ var sbContentSaver = {
                 } else if ( this.option["keepLink"] ) {
                     aNode.setAttribute("src", aNode.src);
                 } else {
-                    aNode.setAttribute("src", "about:blank");
+                    aNode.setAttribute("src", this.getSkippedURL(aNode.src));
                 }
                 aNode.removeAttribute("data-sb-frame-id");
                 break;
@@ -1023,7 +1023,7 @@ var sbContentSaver = {
                         var dataFile = sbContentSaver.download(dataURL, "quote");
                         if (dataFile) dataURL = dataFile;
                     } else if (!sbContentSaver.option["keepLink"]) {
-                        dataURL = "about:blank";
+                        dataURL = this.getSkippedURL(dataURL);
                     }
                     break;
                 case "font":
@@ -1031,7 +1031,7 @@ var sbContentSaver = {
                         var dataFile = sbContentSaver.download(dataURL, "quote");
                         if (dataFile) dataURL = dataFile;
                     } else if (!sbContentSaver.option["keepLink"]) {
-                        dataURL = "about:blank";
+                        dataURL = this.getSkippedURL(dataURL);
                     }
                     break;
             }
@@ -1435,6 +1435,14 @@ var sbContentSaver = {
             if (!url) return match;
             return url;
         });
+    },
+
+    // get the skipped form for specific protocol that we do not handle
+    getSkippedURL: function (url) {
+        if (url.indexOf("http:") === 0 || url.indexOf("https:") === 0 || url.indexOf("ftp:") === 0 || url.indexOf("file:") === 0) {
+            return "urn:scrapbook-download-skip:" + url;
+        }
+        return url;
     },
 };
 
