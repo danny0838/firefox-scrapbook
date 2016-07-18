@@ -475,11 +475,12 @@ var sbContentSaver = {
             case "img": 
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("src")) ) break;
+                    var url = aNode.src;
                     if ( this.option["images"] ) {
-                        var fileName = this.download(aNode.src);
+                        var fileName = this.download(url);
                         if (fileName) aNode.setAttribute("src", fileName);
                     } else if ( this.option["keepLink"] ) {
-                        aNode.setAttribute("src", aNode.src);
+                        aNode.setAttribute("src", url);
                     } else {
                         aNode.setAttribute("src", "about:blank");
                     }
@@ -506,11 +507,12 @@ var sbContentSaver = {
             case "video":
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
+                    var url = aNode.src;
                     if ( this.option["media"] ) {
-                        var fileName = this.download(aNode.src);
+                        var fileName = this.download(url);
                         if (fileName) aNode.setAttribute("src", fileName);
                     } else if ( this.option["keepLink"] ) {
-                        aNode.setAttribute("src", aNode.src);
+                        aNode.setAttribute("src", url);
                     } else {
                         aNode.setAttribute("src", "about:blank");
                     }
@@ -519,11 +521,12 @@ var sbContentSaver = {
             case "source":  // in <picture>, <audio> and <video>
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
+                    var url = aNode.src;
                     if ( this.option["media"] ) {
-                        var fileName = this.download(aNode.src);
+                        var fileName = this.download(url);
                         if (fileName) aNode.setAttribute("src", fileName);
                     } else if ( this.option["keepLink"] ) {
-                        aNode.setAttribute("src", aNode.src);
+                        aNode.setAttribute("src", url);
                     } else {
                         aNode.setAttribute("src", "about:blank");
                     }
@@ -548,11 +551,12 @@ var sbContentSaver = {
             case "object": 
                 if ( aNode.hasAttribute("data") ) {
                     if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("data")) ) break;
+                    var url = aNode.data;
                     if ( this.option["media"] ) {
-                        var fileName = this.download(aNode.data);
+                        var fileName = this.download(url);
                         if (fileName) aNode.setAttribute("data", fileName);
                     } else if ( this.option["keepLink"] ) {
-                        aNode.setAttribute("data", aNode.data);
+                        aNode.setAttribute("data", url);
                     } else {
                         aNode.setAttribute("data", "about:blank");
                     }
@@ -611,11 +615,12 @@ var sbContentSaver = {
                     case "image": 
                         if ( aNode.hasAttribute("src") ) {
                             if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("src")) ) break;
+                            var url = aNode.src;
                             if ( this.option["images"] ) {
-                                var fileName = this.download(aNode.src);
+                                var fileName = this.download(url);
                                 if (fileName) aNode.setAttribute("src", fileName);
                             } else if ( this.option["keepLink"] ) {
-                                aNode.setAttribute("src", aNode.src);
+                                aNode.setAttribute("src", url);
                             } else {
                                 aNode.setAttribute("src", "about:blank");
                             }
@@ -629,10 +634,11 @@ var sbContentSaver = {
                     case "stylesheet":
                         if ( this.option["internalize"] ) break;
                         if ( aNode.hasAttribute("href") ) {
+                            var url = aNode.href;
                             if ( sbCommonUtils.getSbObjectType(aNode) == "stylesheet" ) {
                                 // a special stylesheet used by scrapbook, keep it intact
                                 // (it should use an absolute link or a chrome link, which don't break after capture)
-                            } else if ( aNode.href.indexOf("chrome://") == 0 ) {
+                            } else if ( url.indexOf("chrome://") == 0 ) {
                                 // a special stylesheet used by scrapbook or other addons/programs, keep it intact
                             } else if ( this.option["styles"] && this.option["rewriteStyles"] ) {
                                 // capturing styles with rewrite, the style should be already processed
@@ -641,11 +647,11 @@ var sbContentSaver = {
                                 return this.removeNodeFromParent(aNode);
                             } else if ( this.option["styles"] && !this.option["rewriteStyles"] ) {
                                 // capturing styles with no rewrite, download it and rewrite the link
-                                var fileName = this.download(aNode.href);
+                                var fileName = this.download(url);
                                 if (fileName) aNode.setAttribute("href", fileName);
                             } else if ( !this.option["styles"] && this.option["keepLink"] ) {
                                 // link to the source css file
-                                aNode.setAttribute("href", aNode.href);
+                                aNode.setAttribute("href", url);
                             } else if ( !this.option["styles"] && !this.option["keepLink"] ) {
                                 // not capturing styles, set it blank
                                 aNode.setAttribute("href", "about:blank");
@@ -705,14 +711,14 @@ var sbContentSaver = {
             case "a": 
             case "area": 
                 if ( this.option["internalize"] ) break;
-                if ( !aNode.href ) {
+                var url = aNode.href;
+                if ( !url ) {
                     break;
-                } else if ( aNode.href.match(/^javascript:/i) && !this.option["script"] ) {
+                } else if ( url.match(/^javascript:/i) && !this.option["script"] ) {
                     aNode.removeAttribute("href");
                     break;
                 }
                 // adjustment for hash links targeting the current page
-                var url = aNode.href;
                 var [urlMain, urlHash] = sbCommonUtils.splitURLByAnchor(url);
                 if ( urlMain === sbCommonUtils.splitURLByAnchor(aNode.ownerDocument.location.href)[0] ) {
                     // This link targets the current page.
