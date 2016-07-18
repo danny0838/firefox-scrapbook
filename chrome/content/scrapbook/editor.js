@@ -626,6 +626,12 @@ var sbPageEditor = {
 
 var sbHtmlEditor = {
 
+    get strftime() {
+        var { strftime } = Components.utils.import("resource://scrapbook-modules/lib/strftime.jsm", {});
+        delete this.strftime;
+        return this.strftime = strftime;
+    },
+
     enabled: false,
     _shortcut_table: {
         "F10": "quit",
@@ -1167,7 +1173,7 @@ var sbHtmlEditor = {
     cmd_insertDate: function (aDoc) {
         var fmt = sbCommonUtils.getPref("edit.insertDateFormat", "") || "%Y-%m-%d %H:%M:%S";
         var time = "&lt;time&gt;";
-        try { time = strftime(fmt, Math.round(new Date()/1000)); } catch (ex) {}
+        try { time = this.strftime(fmt); } catch (ex) {}
         aDoc.execCommand("insertHTML", false, time);
     },
 
