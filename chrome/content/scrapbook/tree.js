@@ -59,15 +59,18 @@ var sbTreeHandler = {
     },
 
     // simple Enter on container: toggle container (natively), no keypress event
-    onKeyPress: function(aEvent) {
+    onKeyPress: function(aEvent, aType) {
         switch ( aEvent.keyCode || aEvent.which ) {
             case aEvent.DOM_VK_RETURN: 
                 if ( sbDataSource.getProperty(this.resource, "type") == "folder" ) return;
                 sbController.open(this.resource, aEvent.ctrlKey || aEvent.shiftKey);
                 break;
             case aEvent.DOM_VK_SPACE: 
-                if ( sbDataSource.getProperty(this.resource, "type") == "folder" ) return;
-                sbController.open(this.resource, aEvent.ctrlKey || aEvent.shiftKey);
+                if (aType == 2 && !sbCommonUtils.getPref("ui.sidebarManage", false)) {
+                    if (sbDataSource.getProperty(this.resource, "type") != "folder") {
+                        sbController.open(this.resource, aEvent.ctrlKey || aEvent.shiftKey);
+                    }
+                }
                 break;
             case aEvent.DOM_VK_DELETE: this.remove(); break;
             case aEvent.DOM_VK_F2: sbController.forward(this.resource, "P"); break;
