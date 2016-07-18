@@ -26,8 +26,6 @@
     <tree id="sbTree"
           seltype="single"
           hidecolumnpicker="true"
-          onclick="sbTreeHandler.onClick(event, 0);"
-          onkeypress="event.stopPropagation();"
           onselect="sbFolderPicker.update();"
           style="-moz-appearance: listbox;"
           flex="1" />
