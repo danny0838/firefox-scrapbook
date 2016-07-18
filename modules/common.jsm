@@ -627,6 +627,7 @@ var sbCommonUtils = {
         } catch(ex) {
             console.error(lang("ERR_FAIL_RESOLVE_URL", aBaseURL, aRelURL));
         }
+        return aRelURL;
     },
 
     convertPathToFile: function(aPath) {
