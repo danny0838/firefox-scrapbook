@@ -1,0 +1,31 @@
+Scrapbook X 1.13.0b7
+====================
+
+Changes since v1.13.0b6
+-----------------------
+
+Bug fixes:
+
+ * The data link of an "object" element is not rewritten correctly on capture.
+
+ * A "source" element under a "picture" element is not handled correctly on capture.
+
+ * A script error occurs when internalizing a page with an "img" or "source" element having "srcset" attribute.
+
+Functionality changes:
+
+ * Non-captured media now writes a non-functional URI containing the source rather then "about:blank".
+
+ * Adjusted the user interface behavior of the data tree:
+
+   * Ctrl/Shift+Enter no more opens a folder-type folder.
+
+   * Ctrl/Shift+Space no more opens the item in the manage window.
+
+   * Mid-click no more works in the folder picker window.
+
+Core changes:
+
+ * Switch strftime to a new library.
+
+Also includes some internal code optimization and documentation improving.
