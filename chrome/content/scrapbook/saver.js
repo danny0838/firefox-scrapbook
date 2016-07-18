@@ -522,7 +522,8 @@ var sbContentSaver = {
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
                     var url = aNode.src;
-                    if ( this.option["media"] ) {
+                    var type = (this.getSourceParentType(aNode) === "picture") ? "images" : "media";
+                    if ( this.option[type] ) {
                         var fileName = this.download(url);
                         if (fileName) aNode.setAttribute("src", fileName);
                     } else if ( this.option["keepLink"] ) {
@@ -533,10 +534,11 @@ var sbContentSaver = {
                 }
                 if ( aNode.hasAttribute("srcset") ) {
                     var that = this;
+                    var type = (this.getSourceParentType(aNode) === "picture") ? "images" : "media";
                     var newSrcset = this.parseSrcset(aNode.getAttribute("srcset"), function(url){
                         if ( that.option["internalize"] && that.isInternalized(url) ) return url;
                         url = sbCommonUtils.resolveURL(that.refURLObj.spec, url);
-                        if ( that.option["media"] ) {
+                        if ( that.option[type] ) {
                             var fileName = that.download(url);
                             if (fileName) return fileName;
                         } else if ( that.option["keepLink"] ) {
@@ -883,6 +885,18 @@ var sbContentSaver = {
         return srcset.replace(/(\s*)([^ ,][^ ]*[^ ,])(\s*(?: [^ ,]+)?\s*(?:,|$))/g, function (m, m1, m2, m3) {
             return m1 + replaceFunc(m2) + m3;
         });
+    },
+
+    getSourceParentType: function (aSourceNode) {
+        var node = aSourceNode.parentNode;
+        while (node) {
+            var nn = node.nodeName.toLowerCase();
+            if (nn == "picture" || nn == "audio" || nn == "video") {
+                return nn;
+            }
+            node = node.parentNode;
+        }
+        return false;
     },
 
     inspectNodeSetCanvasData: function (data) {
