@@ -486,21 +486,19 @@ var sbContentSaver = {
                 }
                 if ( aNode.hasAttribute("srcset") ) {
                     var that = this;
-                    aNode.setAttribute("srcset", (function(srcset){
-                        return srcset.replace(/(\s*)([^ ,][^ ]*[^ ,])(\s*(?: [^ ,]+)?\s*(?:,|$))/g, function(m, m1, m2, m3){
-                            if ( that.option["internalize"] && that.isInternalized(m2) ) return m;
-                            var url = sbCommonUtils.resolveURL(that.refURLObj.spec, m2);
-                            if ( that.option["images"] ) {
-                                var fileName = that.download(url);
-                                if (fileName) return m1 + fileName + m3;
-                            } else if ( that.option["keepLink"] ) {
-                                return m1 + url + m3;
-                            } else {
-                                return m1 + "about:blank" + m3;
-                            }
-                            return m;
-                        });
-                    })(aNode.getAttribute("srcset")));
+                    var newSrcset = this.parseSrcset(aNode.getAttribute("srcset"), function(url){
+                        if ( that.option["internalize"] && that.isInternalized(url) ) return url;
+                        var url = sbCommonUtils.resolveURL(that.refURLObj.spec, url);
+                        if ( that.option["images"] ) {
+                            var fileName = that.download(url);
+                            if (fileName) return fileName;
+                        } else if ( that.option["keepLink"] ) {
+                            return url;
+                        } else {
+                            return "about:blank";
+                        }
+                    });
+                    aNode.setAttribute("srcset", newSrcset);
                 }
                 break;
             case "embed": 
@@ -532,21 +530,19 @@ var sbContentSaver = {
                 }
                 if ( aNode.hasAttribute("srcset") ) {
                     var that = this;
-                    aNode.setAttribute("srcset", (function(srcset){
-                        return srcset.replace(/(\s*)([^ ,][^ ]*[^ ,])(\s*(?: [^ ,]+)?\s*(?:,|$))/g, function(m, m1, m2, m3){
-                            if ( that.option["internalize"] && that.isInternalized(m2) ) return m;
-                            var url = sbCommonUtils.resolveURL(that.refURLObj.spec, m2);
-                            if ( that.option["media"] ) {
-                                var fileName = that.download(url);
-                                if (fileName) return m1 + fileName + m3;
-                            } else if ( that.option["keepLink"] ) {
-                                return m1 + url + m3;
-                            } else {
-                                return m1 + "about:blank" + m3;
-                            }
-                            return m;
-                        });
-                    })(aNode.getAttribute("srcset")));
+                    var newSrcset = this.parseSrcset(aNode.getAttribute("srcset"), function(url){
+                        if ( that.option["internalize"] && that.isInternalized(url) ) return url;
+                        url = sbCommonUtils.resolveURL(that.refURLObj.spec, url);
+                        if ( that.option["media"] ) {
+                            var fileName = that.download(url);
+                            if (fileName) return fileName;
+                        } else if ( that.option["keepLink"] ) {
+                            return url;
+                        } else {
+                            return "about:blank";
+                        }
+                    });
+                    aNode.setAttribute("srcset", newSrcset);
                 }
                 break;
             case "object": 
@@ -874,6 +870,13 @@ var sbContentSaver = {
             return canvasScript;
         }
         return aNode;
+    },
+
+    // replaceFunc = function (url) { return ...; }
+    parseSrcset: function (srcset, replaceFunc) {
+        return srcset.replace(/(\s*)([^ ,][^ ]*[^ ,])(\s*(?: [^ ,]+)?\s*(?:,|$))/g, function (m, m1, m2, m3) {
+            return m1 + replaceFunc(m2) + m3;
+        });
     },
 
     inspectNodeSetCanvasData: function (data) {
