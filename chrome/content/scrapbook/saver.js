@@ -488,7 +488,7 @@ var sbContentSaver = {
                     var that = this;
                     aNode.setAttribute("srcset", (function(srcset){
                         return srcset.replace(/(\s*)([^ ,][^ ]*[^ ,])(\s*(?: [^ ,]+)?\s*(?:,|$))/g, function(m, m1, m2, m3){
-                            if ( that.option["internalize"] && this.isInternalized(m2) ) return m;
+                            if ( that.option["internalize"] && that.isInternalized(m2) ) return m;
                             var url = sbCommonUtils.resolveURL(that.refURLObj.spec, m2);
                             if ( that.option["images"] ) {
                                 var fileName = that.download(url);
@@ -534,7 +534,7 @@ var sbContentSaver = {
                     var that = this;
                     aNode.setAttribute("srcset", (function(srcset){
                         return srcset.replace(/(\s*)([^ ,][^ ]*[^ ,])(\s*(?: [^ ,]+)?\s*(?:,|$))/g, function(m, m1, m2, m3){
-                            if ( that.option["internalize"] && this.isInternalized(m2) ) return m;
+                            if ( that.option["internalize"] && that.isInternalized(m2) ) return m;
                             var url = sbCommonUtils.resolveURL(that.refURLObj.spec, m2);
                             if ( that.option["media"] ) {
                                 var fileName = that.download(url);
