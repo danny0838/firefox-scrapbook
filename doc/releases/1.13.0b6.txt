@@ -1,0 +1,43 @@
+Scrapbook X 1.13.0b6
+====================
+
+Changes since v1.13.0b5
+-----------------------
+
+Bug fixes:
+
+ * Fixed several bad handling cases for URLs with non-ASCII chars on capture.
+
+ * Fixed an issue that some linked local files are not included when a page is captured or combined.
+
+ * "Combined View" and "Open All in tabs" do not work for non-folder-type folders.
+
+ * Fulltext search result shows incorrect folder for non-folder-type folders.
+
+   A rebuild of fulltext cache is required. If it does not fix the issue, manually delete of the cache.rdf file in the ScrapBook directory before rebuilding fulltext cache would be required.
+
+ * Fixed a rare risk of incorrectly modifying a page with a specific pattern including a UUID on capture.
+
+Functionality changes:
+
+ * Added a new usage demo to the default filters of the capture dialog.
+
+ * Adjusted the user interface behavior of the data tree:
+
+   * Single click on a folder no more toggles it in the manage window or folder picker dialog.
+
+   * Single click on a non-folder-type folder item now opens it in the sidebar.
+
+   * Note pages now are opened in the new tab according to the option "Edit Note" instead of "Open".
+
+ * Added a general option "Use manage mode in the sidebar".
+ 
+   This makes the sidebar work like the "Manage" window, such as allowing multiple selection and acting on double-click instead of single-click.
+
+ * New capture option available via "capture.default.linkURLFilters" user preference.
+
+   This is a JSON data containing a simple string, a RegExp string (e.g. "/\\.php/i"), or an array with combination of them. It can be used to exclude some offending URLs that should never be visited, for example, a link that logouts the user.
+
+   If the provided string is invalid, it will be ignored and the error will be output to the browser console for trouble shooting.
+
+Also includes some internal code optimization and documentation improving.
