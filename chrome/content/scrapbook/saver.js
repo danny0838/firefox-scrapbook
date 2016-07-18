@@ -556,7 +556,7 @@ var sbContentSaver = {
                         var fileName = this.download(aNode.data);
                         if (fileName) aNode.setAttribute("data", fileName);
                     } else if ( this.option["keepLink"] ) {
-                        aNode.setAttribute("data", aNode.src);
+                        aNode.setAttribute("data", aNode.data);
                     } else {
                         aNode.setAttribute("data", "about:blank");
                     }
