@@ -624,9 +624,8 @@ var sbCommonUtils = {
             var baseURLObj = this.convertURLToObject(aBaseURL);
             var resolved = baseURLObj.resolve(aRelURL);
             return this.convertURLToObject(resolved).spec;
-        } catch(ex) {
-            console.error(lang("scrapbook", "ERR_FAIL_RESOLVE_URL", [aBaseURL, aRelURL]));
-        }
+        } catch(ex) {}
+        return aRelURL;
     },
 
     convertPathToFile: function(aPath) {

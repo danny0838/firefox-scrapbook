@@ -136,7 +136,7 @@ var sbContentSaver = {
     captureFile: function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext) {
         this.init(aPresetData);
         this.item.title = sbCommonUtils.getFileName(aSourceURL);
-        this.item.icon = "moz-icon://" + sbCommonUtils.escapeFileName(this.item.title) + "?size=16";
+        this.item.icon = "moz-icon://" + this.escapeURL(this.item.title, null, true) + "?size=16";
         this.item.source = aSourceURL;
         this.item.type = aType;
         if ( aShowDetail ) {
@@ -475,32 +475,31 @@ var sbContentSaver = {
             case "img": 
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("src")) ) break;
+                    var url = aNode.src;
                     if ( this.option["images"] ) {
-                        var fileName = this.download(aNode.src);
+                        var fileName = this.download(url);
                         if (fileName) aNode.setAttribute("src", fileName);
                     } else if ( this.option["keepLink"] ) {
-                        aNode.setAttribute("src", aNode.src);
+                        aNode.setAttribute("src", url);
                     } else {
-                        aNode.setAttribute("src", "about:blank");
+                        aNode.setAttribute("src", this.getSkippedURL(url));
                     }
                 }
                 if ( aNode.hasAttribute("srcset") ) {
                     var that = this;
-                    aNode.setAttribute("srcset", (function(srcset){
-                        return srcset.replace(/(\s*)([^ ,][^ ]*[^ ,])(\s*(?: [^ ,]+)?\s*(?:,|$))/g, function(m, m1, m2, m3){
-                            if ( that.option["internalize"] && this.isInternalized(m2) ) return m;
-                            var url = sbCommonUtils.resolveURL(that.refURLObj.spec, m2);
-                            if ( that.option["images"] ) {
-                                var fileName = that.download(url);
-                                if (fileName) return m1 + fileName + m3;
-                            } else if ( that.option["keepLink"] ) {
-                                return m1 + url + m3;
-                            } else {
-                                return m1 + "about:blank" + m3;
-                            }
-                            return m;
-                        });
-                    })(aNode.getAttribute("srcset")));
+                    var newSrcset = this.parseSrcset(aNode.getAttribute("srcset"), function(url){
+                        if ( that.option["internalize"] && that.isInternalized(url) ) return url;
+                        var url = sbCommonUtils.resolveURL(that.refURLObj.spec, url);
+                        if ( that.option["images"] ) {
+                            var fileName = that.download(url);
+                            if (fileName) return fileName;
+                        } else if ( that.option["keepLink"] ) {
+                            return url;
+                        } else {
+                            return that.getSkippedURL(url);
+                        }
+                    });
+                    aNode.setAttribute("srcset", newSrcset);
                 }
                 break;
             case "embed": 
@@ -508,57 +507,60 @@ var sbContentSaver = {
             case "video":
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
+                    var url = aNode.src;
                     if ( this.option["media"] ) {
-                        var fileName = this.download(aNode.src);
+                        var fileName = this.download(url);
                         if (fileName) aNode.setAttribute("src", fileName);
                     } else if ( this.option["keepLink"] ) {
-                        aNode.setAttribute("src", aNode.src);
+                        aNode.setAttribute("src", url);
                     } else {
-                        aNode.setAttribute("src", "about:blank");
+                        aNode.setAttribute("src", this.getSkippedURL(url));
                     }
                 }
                 break;
             case "source":  // in <picture>, <audio> and <video>
                 if ( aNode.hasAttribute("src") ) {
                     if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
-                    if ( this.option["media"] ) {
-                        var fileName = this.download(aNode.src);
+                    var url = aNode.src;
+                    var type = (this.getSourceParentType(aNode) === "picture") ? "images" : "media";
+                    if ( this.option[type] ) {
+                        var fileName = this.download(url);
                         if (fileName) aNode.setAttribute("src", fileName);
                     } else if ( this.option["keepLink"] ) {
-                        aNode.setAttribute("src", aNode.src);
+                        aNode.setAttribute("src", url);
                     } else {
-                        aNode.setAttribute("src", "about:blank");
+                        aNode.setAttribute("src", this.getSkippedURL(url));
                     }
                 }
                 if ( aNode.hasAttribute("srcset") ) {
                     var that = this;
-                    aNode.setAttribute("srcset", (function(srcset){
-                        return srcset.replace(/(\s*)([^ ,][^ ]*[^ ,])(\s*(?: [^ ,]+)?\s*(?:,|$))/g, function(m, m1, m2, m3){
-                            if ( that.option["internalize"] && this.isInternalized(m2) ) return m;
-                            var url = sbCommonUtils.resolveURL(that.refURLObj.spec, m2);
-                            if ( that.option["media"] ) {
-                                var fileName = that.download(url);
-                                if (fileName) return m1 + fileName + m3;
-                            } else if ( that.option["keepLink"] ) {
-                                return m1 + url + m3;
-                            } else {
-                                return m1 + "about:blank" + m3;
-                            }
-                            return m;
-                        });
-                    })(aNode.getAttribute("srcset")));
+                    var type = (this.getSourceParentType(aNode) === "picture") ? "images" : "media";
+                    var newSrcset = this.parseSrcset(aNode.getAttribute("srcset"), function(url){
+                        if ( that.option["internalize"] && that.isInternalized(url) ) return url;
+                        url = sbCommonUtils.resolveURL(that.refURLObj.spec, url);
+                        if ( that.option[type] ) {
+                            var fileName = that.download(url);
+                            if (fileName) return fileName;
+                        } else if ( that.option["keepLink"] ) {
+                            return url;
+                        } else {
+                            return that.getSkippedURL(url);
+                        }
+                    });
+                    aNode.setAttribute("srcset", newSrcset);
                 }
                 break;
             case "object": 
                 if ( aNode.hasAttribute("data") ) {
                     if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("data")) ) break;
+                    var url = aNode.data;
                     if ( this.option["media"] ) {
-                        var fileName = this.download(aNode.data);
+                        var fileName = this.download(url);
                         if (fileName) aNode.setAttribute("data", fileName);
                     } else if ( this.option["keepLink"] ) {
-                        aNode.setAttribute("data", aNode.src);
+                        aNode.setAttribute("data", url);
                     } else {
-                        aNode.setAttribute("data", "about:blank");
+                        aNode.setAttribute("data", this.getSkippedURL(url));
                     }
                 }
                 break;
@@ -572,7 +574,7 @@ var sbContentSaver = {
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("archive", url);
                     } else {
-                        aNode.setAttribute("archive", "about:blank");
+                        aNode.setAttribute("archive", this.getSkippedURL(url));
                     }
                 }
                 break;
@@ -606,7 +608,7 @@ var sbContentSaver = {
                     } else if ( this.option["keepLink"] ) {
                         aNode.setAttribute("background", url);
                     } else {
-                        aNode.setAttribute("background", "about:blank");
+                        aNode.setAttribute("background", this.getSkippedURL(url));
                     }
                 }
                 break;
@@ -615,13 +617,14 @@ var sbContentSaver = {
                     case "image": 
                         if ( aNode.hasAttribute("src") ) {
                             if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("src")) ) break;
+                            var url = aNode.src;
                             if ( this.option["images"] ) {
-                                var fileName = this.download(aNode.src);
+                                var fileName = this.download(url);
                                 if (fileName) aNode.setAttribute("src", fileName);
                             } else if ( this.option["keepLink"] ) {
-                                aNode.setAttribute("src", aNode.src);
+                                aNode.setAttribute("src", url);
                             } else {
-                                aNode.setAttribute("src", "about:blank");
+                                aNode.setAttribute("src", this.getSkippedURL(url));
                             }
                         }
                         break;
@@ -633,10 +636,11 @@ var sbContentSaver = {
                     case "stylesheet":
                         if ( this.option["internalize"] ) break;
                         if ( aNode.hasAttribute("href") ) {
+                            var url = aNode.href;
                             if ( sbCommonUtils.getSbObjectType(aNode) == "stylesheet" ) {
                                 // a special stylesheet used by scrapbook, keep it intact
                                 // (it should use an absolute link or a chrome link, which don't break after capture)
-                            } else if ( aNode.href.indexOf("chrome://") == 0 ) {
+                            } else if ( url.indexOf("chrome://") == 0 ) {
                                 // a special stylesheet used by scrapbook or other addons/programs, keep it intact
                             } else if ( this.option["styles"] && this.option["rewriteStyles"] ) {
                                 // capturing styles with rewrite, the style should be already processed
@@ -645,14 +649,14 @@ var sbContentSaver = {
                                 return this.removeNodeFromParent(aNode);
                             } else if ( this.option["styles"] && !this.option["rewriteStyles"] ) {
                                 // capturing styles with no rewrite, download it and rewrite the link
-                                var fileName = this.download(aNode.href);
+                                var fileName = this.download(url);
                                 if (fileName) aNode.setAttribute("href", fileName);
                             } else if ( !this.option["styles"] && this.option["keepLink"] ) {
                                 // link to the source css file
-                                aNode.setAttribute("href", aNode.href);
+                                aNode.setAttribute("href", url);
                             } else if ( !this.option["styles"] && !this.option["keepLink"] ) {
                                 // not capturing styles, set it blank
-                                aNode.setAttribute("href", "about:blank");
+                                aNode.setAttribute("href", this.getSkippedURL(url));
                             }
                         }
                         break;
@@ -709,14 +713,14 @@ var sbContentSaver = {
             case "a": 
             case "area": 
                 if ( this.option["internalize"] ) break;
-                if ( !aNode.href ) {
+                var url = aNode.href;
+                if ( !url ) {
                     break;
-                } else if ( aNode.href.match(/^javascript:/i) && !this.option["script"] ) {
+                } else if ( url.match(/^javascript:/i) && !this.option["script"] ) {
                     aNode.removeAttribute("href");
                     break;
                 }
                 // adjustment for hash links targeting the current page
-                var url = aNode.href;
                 var [urlMain, urlHash] = sbCommonUtils.splitURLByAnchor(url);
                 if ( urlMain === sbCommonUtils.splitURLByAnchor(aNode.ownerDocument.location.href)[0] ) {
                     // This link targets the current page.
@@ -843,12 +847,12 @@ var sbContentSaver = {
                     // retrieve contentDocument from the corresponding real frame
                     var idx = aNode.getAttribute("data-sb-frame-id");
                     var newFileName = this.saveDocumentInternal(this.frames[idx].contentDocument, this.documentName + "_" + (parseInt(idx)+1));
-                    aNode.setAttribute("src", sbCommonUtils.escapeFileName(newFileName));
+                    aNode.setAttribute("src", this.escapeURL(newFileName, null, true));
                     this.refURLObj = tmpRefURL;
                 } else if ( this.option["keepLink"] ) {
                     aNode.setAttribute("src", aNode.src);
                 } else {
-                    aNode.setAttribute("src", "about:blank");
+                    aNode.setAttribute("src", this.getSkippedURL(aNode.src));
                 }
                 aNode.removeAttribute("data-sb-frame-id");
                 break;
@@ -874,6 +878,25 @@ var sbContentSaver = {
             return canvasScript;
         }
         return aNode;
+    },
+
+    // replaceFunc = function (url) { return ...; }
+    parseSrcset: function (srcset, replaceFunc) {
+        return srcset.replace(/(\s*)([^ ,][^ ]*[^ ,])(\s*(?: [^ ,]+)?\s*(?:,|$))/g, function (m, m1, m2, m3) {
+            return m1 + replaceFunc(m2) + m3;
+        });
+    },
+
+    getSourceParentType: function (aSourceNode) {
+        var node = aSourceNode.parentNode;
+        while (node) {
+            var nn = node.nodeName.toLowerCase();
+            if (nn == "picture" || nn == "audio" || nn == "video") {
+                return nn;
+            }
+            node = node.parentNode;
+        }
+        return false;
     },
 
     inspectNodeSetCanvasData: function (data) {
@@ -1014,7 +1037,7 @@ var sbContentSaver = {
                         var dataFile = sbContentSaver.download(dataURL, "quote");
                         if (dataFile) dataURL = dataFile;
                     } else if (!sbContentSaver.option["keepLink"]) {
-                        dataURL = "about:blank";
+                        dataURL = this.getSkippedURL(dataURL);
                     }
                     break;
                 case "font":
@@ -1022,7 +1045,7 @@ var sbContentSaver = {
                         var dataFile = sbContentSaver.download(dataURL, "quote");
                         if (dataFile) dataURL = dataFile;
                     } else if (!sbContentSaver.option["keepLink"]) {
-                        dataURL = "about:blank";
+                        dataURL = this.getSkippedURL(dataURL);
                     }
                     break;
             }
@@ -1426,6 +1449,14 @@ var sbContentSaver = {
             if (!url) return match;
             return url;
         });
+    },
+
+    // get the skipped form for specific protocol that we do not handle
+    getSkippedURL: function (url) {
+        if (url.indexOf("http:") === 0 || url.indexOf("https:") === 0 || url.indexOf("ftp:") === 0 || url.indexOf("file:") === 0) {
+            return "urn:scrapbook-download-skip:" + url;
+        }
+        return url;
     },
 };
 

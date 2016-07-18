@@ -42,32 +42,41 @@ var sbTreeHandler = {
         if ( !obj.value || obj.value == "twisty" ) return;
 
         var curIdx = this.TREE.currentIndex;
-        if (aType < 2 || sbCommonUtils.getPref("ui.sidebarManage", false)) {
-            // folder picker or manage window: mid-click to open in new tab
-            if (aEvent.button == 1 && sbDataSource.getProperty(this.resource, "type") != "folder") {
-                sbController.open(this.resource, true);
-            }
-        } else {
-            // sidebar: simple click to open data, mid-, ctrl-, and shift-click to open in new tab
+        if (aType == 2 && !sbCommonUtils.getPref("ui.sidebarManage", false)) {
+            // non-manage window:
+            // simple click to open item; mid-, ctrl-, and shift-click to open in new tab
             // for folders, click or mid-click to toggle
             if (sbDataSource.getProperty(this.resource, "type") != "folder") {
                 sbController.open(this.resource, aEvent.button == 1 || aEvent.ctrlKey || aEvent.shiftKey);
             } else {
                 this.toggleFolder(curIdx);
             }
+        } else {
+            // manage window: mid-click to open in new tab
+            if (aEvent.button == 1 && sbDataSource.getProperty(this.resource, "type") != "folder") {
+                sbController.open(this.resource, true);
+            }
         }
     },
 
-    // simple enter on container: toggle container (natively)
-    onKeyPress: function(aEvent) {
+    // simple Enter on container: toggle container (natively), no keypress event
+    onKeyPress: function(aEvent, aType) {
         switch ( aEvent.keyCode || aEvent.which ) {
-            case aEvent.DOM_VK_RETURN: 
-                if ( this.TREE.view.isContainer(this.TREE.currentIndex) && !aEvent.ctrlKey && !aEvent.shiftKey ) return;
-                sbController.open(this.resource, aEvent.ctrlKey || aEvent.shiftKey);
+            case aEvent.DOM_VK_RETURN:
+                // Enter to open item; Ctrl/Shift+Enter to open in new tab
+                // Enter for non-folder containers will toggle natively
+                if ( sbDataSource.getProperty(this.resource, "type") != "folder" ) {
+                    sbController.open(this.resource, aEvent.ctrlKey || aEvent.shiftKey);
+                }
                 break;
             case aEvent.DOM_VK_SPACE: 
-                if ( sbDataSource.getProperty(this.resource, "type") == "folder" ) return;
-                sbController.open(this.resource, aEvent.ctrlKey || aEvent.shiftKey);
+                // non-manage window:
+                // Space to open item; Ctrl/Shift+Space to open in new tab
+                if (aType == 2 && !sbCommonUtils.getPref("ui.sidebarManage", false)) {
+                    if (sbDataSource.getProperty(this.resource, "type") != "folder") {
+                        sbController.open(this.resource, aEvent.ctrlKey || aEvent.shiftKey);
+                    }
+                }
                 break;
             case aEvent.DOM_VK_DELETE: this.remove(); break;
             case aEvent.DOM_VK_F2: sbController.forward(this.resource, "P"); break;

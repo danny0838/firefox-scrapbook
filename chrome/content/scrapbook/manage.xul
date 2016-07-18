@@ -60,7 +60,7 @@
                 <tree id="sbTree"
                       onclick="sbTreeHandler.onClick(event, 1);"
                       ondblclick="sbTreeHandler.onDblClick(event, 1);"
-                      onkeypress="sbTreeHandler.onKeyPress(event);"
+                      onkeypress="sbTreeHandler.onKeyPress(event, 1);"
                       ondragenter="sbTreeDNDHandler.currentDataTransfer=event.dataTransfer;"
                       ondraggesture="if (event.originalTarget.localName == 'treechildren') nsDragAndDrop.startDrag(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
                       ondragover="nsDragAndDrop.dragOver(event,sbTreeDNDHandler.dragDropObserver);event.stopPropagation();"
