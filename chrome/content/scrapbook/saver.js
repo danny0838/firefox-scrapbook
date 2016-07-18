@@ -136,7 +136,7 @@ var sbContentSaver = {
     captureFile: function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext) {
         this.init(aPresetData);
         this.item.title = sbCommonUtils.getFileName(aSourceURL);
-        this.item.icon = "moz-icon://" + sbCommonUtils.escapeFileName(this.item.title) + "?size=16";
+        this.item.icon = "moz-icon://" + this.escapeURL(this.item.title, null, true) + "?size=16";
         this.item.source = aSourceURL;
         this.item.type = aType;
         if ( aShowDetail ) {
@@ -843,7 +843,7 @@ var sbContentSaver = {
                     // retrieve contentDocument from the corresponding real frame
                     var idx = aNode.getAttribute("data-sb-frame-id");
                     var newFileName = this.saveDocumentInternal(this.frames[idx].contentDocument, this.documentName + "_" + (parseInt(idx)+1));
-                    aNode.setAttribute("src", sbCommonUtils.escapeFileName(newFileName));
+                    aNode.setAttribute("src", this.escapeURL(newFileName, null, true));
                     this.refURLObj = tmpRefURL;
                 } else if ( this.option["keepLink"] ) {
                     aNode.setAttribute("src", aNode.src);
