@@ -603,8 +603,8 @@ var sbCommonUtils = {
     },
 
     splitURLByAnchor: function(aURL) {
-        var pos = 0;
-        return ( (pos = aURL.indexOf("#")) < 0 ) ? [aURL, ""] : [aURL.substring(0, pos), aURL.substring(pos, aURL.length)];
+        var pos = aURL.indexOf("#");
+        return (pos == -1) ? [aURL, ""] : [aURL.substring(0, pos), aURL.substring(pos)];
     },
 
     resolveURL: function(aBaseURL, aRelURL) {
