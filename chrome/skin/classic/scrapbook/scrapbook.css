@@ -24,7 +24,7 @@ toolbarbutton#sbToolbarListView {
 }
 
 toolbarbutton#sbToolbarManage {
-    list-style-image: url('chrome://scrapbook/skin/sbpExtra/toolbar_manage.png');
+    list-style-image: url('chrome://scrapbook/skin/toolbar_manage.png');
 }
 
 toolbarbutton#sbToolbarMove {
@@ -81,7 +81,7 @@ menuitem#sbPopupOpenLocate {
 }
 
 menuitem#sbToolsMenuPopupManage {
-    list-style-image: url('chrome://scrapbook/skin/sbpExtra/toolbar_manage.png');
+    list-style-image: url('chrome://scrapbook/skin/toolbar_manage.png');
 }
 
 menuitem#sbToolsMenuPopupMultiple {

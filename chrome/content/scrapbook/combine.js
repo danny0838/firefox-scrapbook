@@ -280,15 +280,15 @@ var sbCombineService = {
                     document.getElementById("sbpUp").disabled = true;
                     document.getElementById("sbpDown").disabled = true;
                     document.getElementById("sbpDelete").disabled = true;
-                    document.getElementById("sbpUp").setAttribute("image", "chrome://scrapbook/skin/sbpExtra/expander_up_dis.png");
-                    document.getElementById("sbpDown").setAttribute("image", "chrome://scrapbook/skin/sbpExtra/expander_down_dis.png");
-                    document.getElementById("sbpDelete").setAttribute("image", "chrome://scrapbook/skin/sbpExtra/menu_remove_dis.png");
+                    document.getElementById("sbpUp").setAttribute("image", "chrome://scrapbook/skin/expander_up_dis.png");
+                    document.getElementById("sbpDown").setAttribute("image", "chrome://scrapbook/skin/expander_down_dis.png");
+                    document.getElementById("sbpDelete").setAttribute("image", "chrome://scrapbook/skin/menu_remove_dis.png");
                     break;
                 case 0:
                     document.getElementById("sbpUp").disabled = true;
                     document.getElementById("sbpDown").disabled = false;
                     document.getElementById("sbpDelete").disabled = false;
-                    document.getElementById("sbpUp").setAttribute("image", "chrome://scrapbook/skin/sbpExtra/expander_up_dis.png");
+                    document.getElementById("sbpUp").setAttribute("image", "chrome://scrapbook/skin/expander_up_dis.png");
                     document.getElementById("sbpDown").setAttribute("image", "chrome://scrapbook/skin/expander_down.png");
                     document.getElementById("sbpDelete").setAttribute("image", "chrome://scrapbook/skin/menu_remove.png");
                     break;
@@ -297,7 +297,7 @@ var sbCombineService = {
                     document.getElementById("sbpDown").disabled = true;
                     document.getElementById("sbpDelete").disabled = false;
                     document.getElementById("sbpUp").setAttribute("image", "chrome://scrapbook/skin/expander_up.png");
-                    document.getElementById("sbpDown").setAttribute("image", "chrome://scrapbook/skin/sbpExtra/expander_down_dis.png");
+                    document.getElementById("sbpDown").setAttribute("image", "chrome://scrapbook/skin/expander_down_dis.png");
                     document.getElementById("sbpDelete").setAttribute("image", "chrome://scrapbook/skin/menu_remove.png");
                     break;
                 default:
@@ -313,14 +313,14 @@ var sbCombineService = {
             //Da keine Einträge vorhanden sind, kann auch nichts gemacht werden. Daher können sämtliche Knöpfe deaktiviert werden
             document.getElementById("sbpUp").disabled = true;
             document.getElementById("sbpDown").disabled = true;
-            document.getElementById("sbpUp").setAttribute("image", "chrome://scrapbook/skin/sbpExtra/expander_up_dis.png");
-            document.getElementById("sbpDown").setAttribute("image", "chrome://scrapbook/skin/sbpExtra/expander_down_dis.png");
+            document.getElementById("sbpUp").setAttribute("image", "chrome://scrapbook/skin/expander_up_dis.png");
+            document.getElementById("sbpDown").setAttribute("image", "chrome://scrapbook/skin/expander_down_dis.png");
             if ( tbIndex > -1 ) {
                 document.getElementById("sbpDelete").disabled = false;
                 document.getElementById("sbpDelete").setAttribute("image", "chrome://scrapbook/skin/menu_remove.png");
             } else {
                 document.getElementById("sbpDelete").disabled = true;
-                document.getElementById("sbpDelete").setAttribute("image", "chrome://scrapbook/skin/sbpExtra/menu_remove_dis.png");
+                document.getElementById("sbpDelete").setAttribute("image", "chrome://scrapbook/skin/menu_remove_dis.png");
             }
         }
     },
