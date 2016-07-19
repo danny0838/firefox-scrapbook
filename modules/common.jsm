@@ -836,7 +836,7 @@ var sbCommonUtils = {
         if (aByBytes) {
             var bytes= this.unicodeToUtf8(aString);
             if (bytes.length <= aMaxLength) return aString;
-            bytes = bytes.substring(0, aMaxLength - this.utf8ToUnicode(aEllipsis).length);
+            bytes = bytes.substring(0, aMaxLength - this.unicodeToUtf8(aEllipsis).length);
             while (true) {
                 try {
                     return this.utf8ToUnicode(bytes) + aEllipsis;
