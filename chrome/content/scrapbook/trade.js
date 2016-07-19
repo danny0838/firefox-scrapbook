@@ -73,12 +73,14 @@ var sbTradeService = {
     },
 
     selectDir: function() {
-        var picker = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-        picker.init(window, sbCommonUtils.lang("SELECT_PATH"), picker.modeGetFolder);
-        if ( this.rightDir ) picker.displayDirectory = this.rightDir;
-        var answer = picker.show();
-        if ( answer == picker.returnOK ) {
-            sbCommonUtils.setPref("trade.path", picker.file.path);
+        var pickedFile = sbCommonUtils.showFilePicker({
+            window: window,
+            title: sbCommonUtils.lang("SELECT_PATH"),
+            mode: 2, // modeGetFolder
+            dir: this.rightDir,
+        });
+        if (pickedFile) {
+            sbCommonUtils.setPref("trade.path", pickedFile.path);
             return true;
         }
         return false;

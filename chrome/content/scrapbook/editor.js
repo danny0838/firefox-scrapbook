@@ -2525,12 +2525,14 @@ var sbAnnotationService = {
             var htmlFile = sbCommonUtils.convertURLToFile(win.location.href);
             if (!htmlFile) return;
             // prompt a window to select file
-            var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-            FP.init(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), FP.modeOpen);
-            var ret = FP.show();
-            if ( ret != FP.returnOK ) return;
+            var pickedFile = sbCommonUtils.showFilePicker({
+                window: window,
+                title: sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"),
+                mode: 0, // modeOpen
+            });
+            if ( !pickedFile ) return;
             // upload the file
-            var filename = FP.file.leafName;
+            var filename = pickedFile.leafName;
             var filename2 = sbCommonUtils.validateFileName(filename);
             try {
                 var destFile = htmlFile.parent.clone();
@@ -2539,7 +2541,7 @@ var sbAnnotationService = {
                     if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("EDIT_ATTACH_FILE_OVERWRITE", filename2)) ) return;
                     destFile.remove(false);
                 }
-                FP.file.copyTo(destFile.parent, filename2);
+                pickedFile.copyTo(destFile.parent, filename2);
             } catch(ex) {
                 sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("EDIT_ATTACH_FILE_INVALID", filename2));
                 return;

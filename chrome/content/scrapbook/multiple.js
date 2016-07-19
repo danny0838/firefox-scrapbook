@@ -291,12 +291,14 @@ var sbURLDetector1 = {
 
     run: function() {
         this.index = 0;
-        var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-        FP.init(window, "", FP.modeGetFolder);
-        var answer = FP.show();
-        if ( answer == FP.returnOK ) {
+        var pickedDir = sbCommonUtils.showFilePicker({
+            window: window,
+            title: "",
+            mode: 2, // modeGetFolder
+        });
+        if (pickedDir) {
             sbMultipleService.clear();
-            this.inspectDirectory(FP.file, 0);
+            this.inspectDirectory(pickedDir, 0);
         }
     },
 
@@ -341,12 +343,16 @@ var sbURLDetector2 = {
         this.weboxBaseURL = "";
         var theFile ;
         if ( this.type == "W" ) {
-            var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-            FP.init(window, "Select default.html of WeBoX.", FP.modeOpen);
-            FP.appendFilters(FP.filterHTML);
-            var answer = FP.show();
-            if ( answer == FP.returnOK ) {
-                theFile = FP.file;
+            var pickedFile = sbCommonUtils.showFilePicker({
+                window: window,
+                title: "Select default.html of WeBoX.",
+                mode: 0, // modeOpen
+                filters: [
+                    2, // nsIFilePicker.filterHTML
+                ]
+            });
+            if (pickedFile) {
+                theFile = pickedFile;
             } else {
                 return;
             }

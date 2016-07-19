@@ -909,6 +909,34 @@ var sbCommonUtils = {
         }
     },
 
+    // aOptions.mode:
+    //   modeOpen         0  Load a file.
+    //   modeSave         1  Save a file.
+    //   modeGetFolder    2  Select a folder/directory.
+    //   modeOpenMultiple 3  Load multiple files.
+    showFilePicker: function(aOptions) {
+        aOptions = aOptions || {};
+        var FP = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
+        FP.init(aOptions.window, aOptions.title || "", aOptions.mode || 0);
+        if (aOptions.dir) FP.displayDirectory = aOptions.dir;
+        if (aOptions.filename) FP.defaultString = aOptions.filename;
+        if (aOptions.ext) FP.defaultExtension = aOptions.ext;
+        if (aOptions.filters) {
+            aOptions.filters.forEach(function(filter){
+                if (typeof filter == "number") {
+                    FP.appendFilters(filter);
+                } else {
+                    var [title, filter] = filter;
+                    FP.appendFilter(title, filter);
+                }
+            });
+        }
+        if (FP.show() !== FP.returnCancel) {
+            return FP.file;
+        }
+        return null;
+    },
+
 
     /****************************************************************
      * DOM elements handling
