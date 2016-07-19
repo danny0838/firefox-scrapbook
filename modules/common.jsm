@@ -591,15 +591,7 @@ var sbCommonUtils = {
 
     splitFileName: function(aFileName) {
         var pos = aFileName.lastIndexOf(".");
-        var ret = [];
-        if ( pos != -1 ) {
-            ret[0] = aFileName.substring(0, pos);
-            ret[1] = aFileName.substring(pos + 1, aFileName.length);
-        } else {
-            ret[0] = aFileName;
-            ret[1] = "";
-        }
-        return ret;
+        return (pos != -1) ? [aFileName.substring(0, pos), aFileName.substring(pos + 1)] : [aFileName, ""];
     },
 
     splitURLByAnchor: function(aURL) {
