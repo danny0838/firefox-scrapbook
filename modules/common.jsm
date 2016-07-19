@@ -828,24 +828,30 @@ var sbCommonUtils = {
         });
     },
  
-    // aByBytes: true to crop texts according to bytes under UTF-8 encoding
-    //           false to crop according to UTF-16 chars
+    // aCharLimit: UTF-16 chars limit, beyond which will be cropped. 0 means no crop.
+    // aByteLimit: UTF-8 bytes limit, beyond which will be cropped. 0 means no crop.
     // aEllipsis: text for ellipsis
-    crop: function(aString, aMaxLength, aByBytes, aEllipsis) {
-        if (typeof(aEllipsis) == "undefined") aEllipsis = "...";
-        if (aByBytes) {
-            var bytes= this.unicodeToUtf8(aString);
-            if (bytes.length <= aMaxLength) return aString;
-            bytes = bytes.substring(0, aMaxLength - this.unicodeToUtf8(aEllipsis).length);
-            while (true) {
-                try {
-                    return this.utf8ToUnicode(bytes) + aEllipsis;
-                } catch(e) {};
-                bytes= bytes.substring(0, bytes.length-1);
+    crop: function(aString, aCharLimit, aByteLimit, aEllipsis) {
+        var str = aString;
+        var ellipsis = (typeof aEllipsis != "undefined") ? aEllipsis : "...";
+        if (aCharLimit) {
+            if (str.length > aCharLimit) {
+                str = str.substring(0, aCharLimit - ellipsis.length) + ellipsis;
             }
-        } else {
-            return (aString.length > aMaxLength) ? aString.substr(0, aMaxLength - aEllipsis.length) + aEllipsis : aString;
         }
+        if (aByteLimit) {
+            var bytes = this.unicodeToUtf8(str);
+            if (bytes.length > aByteLimit) {
+                bytes = bytes.substring(0, aByteLimit - this.unicodeToUtf8(ellipsis).length);
+                while (true) {
+                    try {
+                        return this.utf8ToUnicode(bytes) + ellipsis;
+                    } catch(e) {};
+                    bytes = bytes.substring(0, bytes.length-1);
+                }
+            }
+        }
+        return str;
     },
         
     pad: function(n, width, z) {

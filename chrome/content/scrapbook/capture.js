@@ -878,7 +878,7 @@ var sbCrossLinker = {
     },
 
     createNode: function(aName, aText) {
-        aText = sbCommonUtils.crop(sbCommonUtils.crop(aText, 180, true), 150);
+        aText = sbCommonUtils.crop(aText, 150, 180);
         //Fehlermeldung könnte über Abfrage abgefangen werden.
         //Allerdings kann der Abbruch an dieser Stelle auch erwünscht sein (Nachforschungen!)
         var node = this.XML.createElement("page");
