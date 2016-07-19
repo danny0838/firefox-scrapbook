@@ -576,14 +576,7 @@ var sbCacheSource = {
     container: null,
 
     init: function() {
-        if ( !gCacheFile.exists() ) {
-            var iDS = Components.classes["@mozilla.org/rdf/datasource;1?name=xml-datasource"].createInstance(Components.interfaces.nsIRDFDataSource);
-            sbCommonUtils.RDFCU.MakeSeq(iDS, sbCommonUtils.RDF.GetResource("urn:scrapbook:cache"));
-            var iFileUrl = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newFileURI(gCacheFile);
-            iDS.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).FlushTo(iFileUrl.spec);
-        }
-        var filePath = sbCommonUtils.IO.newFileURI(gCacheFile).spec;
-        this.dataSource = sbCommonUtils.RDF.GetDataSourceBlocking(filePath);
+        this.dataSource = sbCommonUtils.getRDFDataSource(gCacheFile, "urn:scrapbook:cache");
         this.container = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
         try {
             this.container.Init(this.dataSource, sbCommonUtils.RDF.GetResource("urn:scrapbook:cache"));
