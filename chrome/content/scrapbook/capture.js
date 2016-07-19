@@ -966,7 +966,7 @@ function sbHeaderSniffer(aURLSpec, aRefURLSpec) {
             // manage redirect if defined
             var redirectURL = that.getHeader("Location");
             if ( redirectURL ) {
-                if ( redirectURL.indexOf("http") != 0 ) redirectURL = that._URL.resolve(redirectURL);
+                redirectURL = sbCommonUtils.resolveURL(that.URLSpec, redirectURL);
                 sbCaptureTask.start(redirectURL);
                 return;
             }
@@ -981,7 +981,6 @@ function sbHeaderSniffer(aURLSpec, aRefURLSpec) {
 
 sbHeaderSniffer.prototype = {
 
-    _URL: Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL),
     _channel: null,
     _headers: null,
 
@@ -1008,8 +1007,7 @@ sbHeaderSniffer.prototype = {
         sbCaptureTask.isLocal = false;
         this._channel = null;
         try {
-            this._URL.spec = this.URLSpec;
-            this._channel = sbCommonUtils.newChannel(this._URL).QueryInterface(Components.interfaces.nsIHttpChannel);
+            this._channel = sbCommonUtils.newChannel(this.URLSpec).QueryInterface(Components.interfaces.nsIHttpChannel);
             this._channel.loadFlags = this._channel.LOAD_BYPASS_CACHE;
             this._channel.setRequestHeader("User-Agent", navigator.userAgent, false);
             if ( this.refURLSpec ) this._channel.setRequestHeader("Referer", this.refURLSpec, false);
