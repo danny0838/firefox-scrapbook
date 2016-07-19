@@ -577,10 +577,10 @@ var sbCommonUtils = {
     },
 
     getFileName: function(aURI) {
-        var pos, name;
-        name = ( (pos = aURI.indexOf("?")) != -1 ) ? aURI.substring(0, pos) : aURI;
-        name = ( (pos = name.indexOf("#")) != -1 ) ? name.substring(0, pos) : name;
-        name = ( (pos = name.lastIndexOf("/")) != -1 ) ? name.substring(++pos) : name;
+        var name = aURI, pos;
+        if ((pos = name.indexOf("?")) !== -1) { name = name.substring(0, pos); }
+        if ((pos = name.indexOf("#")) !== -1) { name = name.substring(0, pos); }
+        if ((pos = name.lastIndexOf("/")) !== -1) { name = name.substring(pos + 1); }
         // decode %xx%xx%xx only if it's UTF-8 encoded
         try {
             return decodeURIComponent(name);
