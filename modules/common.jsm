@@ -807,6 +807,19 @@ var sbCommonUtils = {
         return aFileName;
     },
 
+    convertHTMLtoText: function(aStr) {
+        var converter = Components.classes['@mozilla.org/widget/htmlformatconverter;1'].createInstance(Components.interfaces.nsIFormatConverter);
+        var fromStr = Components.classes['@mozilla.org/supports-string;1'].createInstance(Components.interfaces.nsISupportsString);
+        fromStr.data = aStr;
+        var toStr = { value: null };
+        try {
+            converter.convert("text/html", fromStr, aStr.length, "text/unicode", toStr, {});
+            toStr = toStr.value.QueryInterface(Components.interfaces.nsISupportsString);
+            return toStr.toString();
+        } catch(ex) {}
+        return aStr;
+    },
+
     // aTplRegExp is a RegExp with label name in the frist parenthesis, eg. /{([\w_]+)}/g
     stringTemplate: function(aString, aTplRegExp, aTplArray) {
         return aString.replace(aTplRegExp, function(match, label){

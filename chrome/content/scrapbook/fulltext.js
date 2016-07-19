@@ -453,7 +453,7 @@ var sbCacheService = {
                 case "html":
                     var content = sbCommonUtils.readFile(aFile);
                     content = sbCommonUtils.convertToUnicode(content, charset);
-                    contents.push(sbCacheService.convertHTML2Text(content));
+                    contents.push(sbCommonUtils.convertHTMLtoText(content));
                     break;
                 case "text":
                     if (charset) {
@@ -549,20 +549,6 @@ var sbCacheService = {
                 window.close();
             }
         })();
-    },
-
-    convertHTML2Text: function(aStr) {
-        var FORMAT_CONVERTER = Components.classes['@mozilla.org/widget/htmlformatconverter;1'].createInstance(Components.interfaces.nsIFormatConverter);
-        var fromStr = Components.classes['@mozilla.org/supports-string;1'].createInstance(Components.interfaces.nsISupportsString);
-        var toStr = { value: null };
-        fromStr.data = aStr;
-        try {
-            FORMAT_CONVERTER.convert("text/html", fromStr, fromStr.toString().length, "text/unicode", toStr, {});
-            toStr = toStr.value.QueryInterface(Components.interfaces.nsISupportsString);
-            return toStr.toString();
-        } catch(ex) {
-            return aStr;
-        }
     },
 
 };
