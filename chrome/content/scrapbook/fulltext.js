@@ -144,7 +144,7 @@ var sbSearchResult = {
             var val = this._items[row][6];
             // Gecko >= 22 (Firefox >= 22): do not take properties and requires a return value
             if (properties) {
-                properties.AppendElement(ATOM_SERVICE.getAtom(val));
+                properties.AppendElement(sbCommonUtils.ATOM.getAtom(val));
             } else {
                 return val;
             }
