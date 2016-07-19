@@ -45,10 +45,9 @@ var sbTradeService = {
                 window.setTimeout(function() { window.close(); }, 0);
             return;
         }
-        this.rightDir = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
         var invalid = false;
         try {
-            this.rightDir.initWithPath(dirPath);
+            this.rightDir = sbCommonUtils.convertPathToFile(dirPath);
             if ( !this.rightDir.exists() || !this.rightDir.isDirectory() ) {
                 invalid = true;
             }

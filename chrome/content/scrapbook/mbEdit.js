@@ -11,8 +11,7 @@ var mbEditDialog = {
         var ret = window.arguments[0];
         this._nameTextbox.value = ret.value ? ret.value[0] : "";
         if (ret.value && ret.value[1]) {
-            var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-            file.initWithPath(ret.value[1]);
+            var file = sbCommonUtils.convertPathToFile(ret.value[1]);
             this._pathField.file = file;
             this._pathField.label = file.path;
         }
