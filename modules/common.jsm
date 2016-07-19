@@ -569,10 +569,10 @@ var sbCommonUtils = {
     },
 
     getBaseHref: function(sURI) {
-        var pos, base;
-        base = ( (pos = sURI.indexOf("?")) != -1 ) ? sURI.substring(0, pos) : sURI;
-        base = ( (pos = base.indexOf("#")) != -1 ) ? base.substring(0, pos) : base;
-        base = ( (pos = base.lastIndexOf("/")) != -1 ) ? base.substring(0, ++pos) : base;
+        var base = sURI, pos;
+        if ((pos = base.indexOf("?")) != -1) { base = base.substring(0, pos); }
+        if ((pos = base.indexOf("#")) != -1) { base = base.substring(0, pos); }
+        if ((pos = base.lastIndexOf("/")) != -1) { base = base.substring(0, pos + 1); }
         return base;
     },
 
