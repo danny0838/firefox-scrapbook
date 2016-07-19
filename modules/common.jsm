@@ -259,6 +259,18 @@ var sbCommonUtils = {
         return dir;
     },
 
+    writeIndexDat: function(aItem, aFile) {
+        if ( !aFile ) {
+            aFile = this.getContentDir(aItem.id).clone();
+            aFile.append("index.dat");
+        }
+        var content = "";
+        for ( var prop in aItem ) {
+            content += prop + "\t" + aItem[prop] + "\n";
+        }
+        this.writeFile(aFile, content, "UTF-8");
+    },
+
     getTimeStamp: function(aDate) {
         var dd = aDate || new Date();
         var y = dd.getFullYear();
@@ -295,17 +307,6 @@ var sbCommonUtils = {
             }
         }
         return id;
-    },
-
-    loadURL: function(aURL, tabbed) {
-        var win = this.WINDOW.getMostRecentWindow("navigator:browser");
-        if ( !win ) return;
-        var browser = win.gBrowser;
-        if ( tabbed ) {
-            browser.selectedTab = browser.addTab(aURL);
-        } else {
-            browser.loadURI(aURL);
-        }
     },
 
     rebuildGlobal: function() {
@@ -470,18 +471,6 @@ var sbCommonUtils = {
         ostream.init(aFile, -1, 0666, 0);
         ostream.write(aBytes, aBytes.length);
         ostream.close();
-    },
-
-    writeIndexDat: function(aItem, aFile) {
-        if ( !aFile ) {
-            aFile = this.getContentDir(aItem.id).clone();
-            aFile.append("index.dat");
-        }
-        var content = "";
-        for ( var prop in aItem ) {
-            content += prop + "\t" + aItem[prop] + "\n";
-        }
-        this.writeFile(aFile, content, "UTF-8");
     },
 
     // check if two files are identical
@@ -842,17 +831,28 @@ var sbCommonUtils = {
     warn: console.warn,
 
     error: console.error,
-
-    openManageWindow: function(aRes, aModEltID) {
-        var window = this.WINDOW.getMostRecentWindow("navigator:browser");
-        window.openDialog("chrome://scrapbook/content/manage.xul", "ScrapBook:Manage", "chrome,centerscreen,all,resizable,dialog=no", aRes, aModEltID);
-    },
  
     getFocusedWindow: function() {
         var window = this.WINDOW.getMostRecentWindow("navigator:browser");
         var win = window.document.commandDispatcher.focusedWindow;
         if ( !win || win == window || win instanceof Components.interfaces.nsIDOMChromeWindow ) win = window.content;
         return win;
+    },
+
+    openManageWindow: function(aRes, aModEltID) {
+        var window = this.WINDOW.getMostRecentWindow("navigator:browser");
+        window.openDialog("chrome://scrapbook/content/manage.xul", "ScrapBook:Manage", "chrome,centerscreen,all,resizable,dialog=no", aRes, aModEltID);
+    },
+
+    loadURL: function(aURL, tabbed) {
+        var win = this.WINDOW.getMostRecentWindow("navigator:browser");
+        if ( !win ) return;
+        var browser = win.gBrowser;
+        if ( tabbed ) {
+            browser.selectedTab = browser.addTab(aURL);
+        } else {
+            browser.loadURI(aURL);
+        }
     },
 
 
