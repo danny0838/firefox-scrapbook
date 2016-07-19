@@ -1098,7 +1098,7 @@ var sbContentSaver = {
                 var fileName, isDuplicate;
                 that.httpTask[that.item.id]++;
                 try {
-                    var channel = sbCommonUtils.IO.newChannel(sourceURL, null, null);
+                    var channel = sbCommonUtils.newChannel(sourceURL);
                     channel.asyncOpen({
                         _stream: null,
                         _file: null,

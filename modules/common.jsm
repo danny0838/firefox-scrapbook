@@ -484,7 +484,7 @@ var sbCommonUtils = {
 
     saveTemplateFile: function(aURISpec, aFile, aOverwrite) {
         if ( aFile.exists() && !aOverwrite ) return;
-        var istream = this.IO.newChannelFromURI(this.convertURLToObject(aURISpec)).open();
+        var istream = this.newChannel(aURISpec).open();
         var bistream = Components.classes["@mozilla.org/binaryinputstream;1"].createInstance(Components.interfaces.nsIBinaryInputStream);
         bistream.setInputStream(istream);
         var ostream = Components.classes['@mozilla.org/network/file-output-stream;1'].createInstance(Components.interfaces.nsIFileOutputStream);
@@ -652,6 +652,33 @@ var sbCommonUtils = {
             return fileHandler.getFileFromURLSpec(aURLString);
         } catch(ex) {
         }
+    },
+
+    // Create a channel from a URL string or URL object.
+    //
+    // Although nsIIOService.newChannel and nsIIOService.newChannelFromURI are deprecated
+    // nsIIOService.newChannel2 and nsIIOService.newChannelFromURI2 has an issue of not setting loadinfo,
+    // which currently seems to not causing a real issue besides producing an error log,
+    // but for error-proof, we stick to newChannel and newChannelFromURI as it's still available.
+    newChannel: function(aURI) {
+        if (typeof aURI == "string") {
+            if (typeof this.IO.newChannel != "undefined") {
+                return this.IO.newChannel(aURI, null, null);
+            } else if (typeof this.IO.newChannel2 != "undefined") {
+                return this.IO.newChannel2(aURI, null, null, null, null, null,
+                    Components.interfaces.nsILoadInfo.SEC_ALLOW_CROSS_ORIGIN_DATA_IS_NULL,
+                    Components.interfaces.nsIContentPolicy.TYPE_OTHER);
+            }
+        } else {
+            if (typeof this.IO.newChannelFromURI != "undefined") {
+                return this.IO.newChannelFromURI(aURI);
+            } else if (typeof this.IO.newChannelFromURI2 != "undefined") {
+                return this.IO.newChannelFromURI2(aURI, null, null, null,
+                    Components.interfaces.nsILoadInfo.SEC_ALLOW_CROSS_ORIGIN_DATA_IS_NULL,
+                    Components.interfaces.nsIContentPolicy.TYPE_OTHER);
+            }
+        }
+        return null;
     },
 
     parseURLQuery: function(aStr) {
