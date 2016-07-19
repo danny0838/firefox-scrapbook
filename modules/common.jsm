@@ -563,8 +563,7 @@ var sbCommonUtils = {
      ***************************************************************/
 
     getRootHref: function(aURLSpec) {
-        var url = Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL);
-        url.spec = aURLSpec;
+        var url = this.convertURLToObject(aURLSpec);
         return url.scheme + "://" + url.host + "/";
     },
 
