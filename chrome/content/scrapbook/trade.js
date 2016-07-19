@@ -87,7 +87,7 @@ var sbTradeService = {
 
     refreshTree: function() {
         this.treeItems = [];
-        var baseURL = sbCommonUtils.convertFilePathToURL(this.rightDir.path);
+        var baseURL = sbCommonUtils.convertFileToURL(this.rightDir);
         var dirEnum = this.rightDir.directoryEntries;
         while ( dirEnum.hasMoreElements() ) {
             var file = dirEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
@@ -230,7 +230,7 @@ var sbTradeService = {
         if (type == "bookmark" || type == "separator")
             return;
         sbCommonUtils.loadURL(
-            sbCommonUtils.convertFilePathToURL(this.rightDir.path) + this.getCurrentDirName() + "/index.html",
+            sbCommonUtils.convertFileToURL(this.rightDir) + this.getCurrentDirName() + "/index.html",
             aTabbed
         );
     },

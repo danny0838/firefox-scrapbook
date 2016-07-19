@@ -173,7 +173,7 @@ var sbPropService = {
             } else if ( aCommand == "U" && dir.contains(FP.file, false) ) {
                 iconURL = sbCommonUtils.convertFileToResURL(FP.file);
             } else {
-                iconURL = sbCommonUtils.convertFilePathToURL(FP.file.path);
+                iconURL = sbCommonUtils.convertFileToURL(FP.file);
             }
             this.ICON.src = iconURL;
         }

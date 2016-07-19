@@ -310,7 +310,7 @@ var sbURLDetector1 = {
             } else {
                 if ( entry.leafName.match(/\.(html|htm)$/i) ) {
                     var hash = {};
-                    hash[sbCommonUtils.convertFilePathToURL(entry.path)] = "";
+                    hash[sbCommonUtils.convertFileToURL(entry)] = "";
                     sbMultipleService.addURL(hash);
                 }
             }

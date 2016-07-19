@@ -354,8 +354,8 @@ var sbCommonUtils = {
     convertURLToId: function(aURL) {
         var file = sbCommonUtils.convertURLToFile(aURL);
         if (!file || !file.exists() || !file.isFile()) return null;
-        var aURL = sbCommonUtils.convertFilePathToURL(file.path);
-        var sbDir = sbCommonUtils.convertFilePathToURL(sbCommonUtils.getScrapBookDir().path);
+        var aURL = sbCommonUtils.convertFileToURL(file);
+        var sbDir = sbCommonUtils.convertFileToURL(sbCommonUtils.getScrapBookDir());
         var sbPath = new RegExp("^" + sbCommonUtils.escapeRegExp(sbDir) + "data/(\\d{14})/");
         return aURL.match(sbPath) ? RegExp.$1 : null;
     },
@@ -530,7 +530,7 @@ var sbCommonUtils = {
     readMetaRefresh: function(aDocFile) {
         if (sbCommonUtils.readFile(aDocFile).match(/\s*content="\d+;URL=([^"]+)"/i)) {
             var relURL = sbCommonUtils.convertToUnicode(RegExp.$1, "UTF-8");
-            var URI1 = sbCommonUtils.convertFilePathToURL(aDocFile.path);
+            var URI1 = sbCommonUtils.convertFileToURL(aDocFile);
             var URI2 = sbCommonUtils.resolveURL(URI1, relURL);
             var file2 = sbCommonUtils.convertURLToFile(URI2);
             return file2;
@@ -623,15 +623,17 @@ var sbCommonUtils = {
         return aFile;
     },
 
+    convertFileToURL: function(aFile) {
+        return this.IO.newFileURI(aFile).spec;
+    },
+
     convertFilePathToURL: function(aFilePath) {
-        var tmpFile = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
-        tmpFile.initWithPath(aFilePath);
-        return this.IO.newFileURI(tmpFile).spec;
+        return this.convertFileToURL(this.convertPathToFile(aFilePath));
     },
 
     convertFileToResURL: function(aFile) {
-        var pathFull = this.convertFilePathToURL(aFile.path);
-        var pathBase = this.convertFilePathToURL(this.getScrapBookDir().path);
+        var pathFull = this.convertFileToURL(aFile);
+        var pathBase = this.convertFileToURL(this.getScrapBookDir());
         return "resource://scrapbook/" + pathFull.substring(pathBase.length);
     },
 
@@ -641,7 +643,7 @@ var sbCommonUtils = {
         // if relative, return the subpath under the ScrapBook directory
         if ( aRelative ) return subPath;
         // else return the full path
-        var pathBase = this.convertFilePathToURL(this.getScrapBookDir().path);
+        var pathBase = this.convertFileToURL(this.getScrapBookDir());
         return pathBase + subPath;
     },
 

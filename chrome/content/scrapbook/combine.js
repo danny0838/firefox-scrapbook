@@ -158,7 +158,7 @@ var sbCombineService = {
         sbInvisibleBrowser.onLoadFinish = function() {
             sbCombineService.showBrowser();
         };
-        sbInvisibleBrowser.load(sbCommonUtils.convertFilePathToURL(htmlFile.path));
+        sbInvisibleBrowser.load(sbCommonUtils.convertFileToURL(htmlFile));
     },
 
     showBrowser: function() {
@@ -437,7 +437,7 @@ var sbPageCombiner = {
                 var htmlFile = sbCommonUtils.getContentDir(sbCombineService.curID); htmlFile.append("index.html");
                 var targetFile = sbCommonUtils.readMetaRefresh(htmlFile);
                 if (targetFile) {
-                    linkURL = sbCommonUtils.convertFilePathToURL(targetFile.path);
+                    linkURL = sbCommonUtils.convertFileToURL(targetFile);
                 }
                 break;
             case "note":

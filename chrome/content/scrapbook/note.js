@@ -76,7 +76,7 @@ var sbNoteService2 = {
         htmlFile.append("note.html");
         sbCommonUtils.writeFile(htmlFile, source, "UTF-8");
         this.toggleHTMLView(true);
-        this.BROWSER.loadURI(sbCommonUtils.convertFilePathToURL(htmlFile.path));
+        this.BROWSER.loadURI(sbCommonUtils.convertFileToURL(htmlFile));
         this.enabledHTMLView = true;
     },
 

@@ -917,7 +917,7 @@ var sbCrossLinker = {
     forceReloading: function(aID, aName) {
         var file = sbCommonUtils.getContentDir(aID);
         file.append(aName + ".html");
-        var url = sbCommonUtils.convertFilePathToURL(file.path);
+        var url = sbCommonUtils.convertFileToURL(file);
         this.forceReloadingURL(url);
     },
 
@@ -1096,7 +1096,7 @@ sbCaptureObserverCallback.onCaptureComplete = function(aItem) {
         sbDataSource.setProperty(res, "chars", aItem.chars);
         if ( gPreset[5] ) sbDataSource.setProperty(res, "type", "");
     } else if ( gContext == "internalize" ) {
-        sbCrossLinker.forceReloadingURL(sbCommonUtils.convertFilePathToURL(gOption.internalize.path));
+        sbCrossLinker.forceReloadingURL(sbCommonUtils.convertFileToURL(gOption.internalize));
     }
     sbCaptureTask.succeed();
 };

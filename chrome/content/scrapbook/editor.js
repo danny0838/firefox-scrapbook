@@ -78,7 +78,7 @@ var sbPageEditor = {
             icon.src = this.item.icon || sbCommonUtils.getDefaultIcon(this.item.type);
             try {
                 var curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
-                var url = sbCommonUtils.convertFilePathToURL(curFile.parent.path);
+                var url = sbCommonUtils.convertFileToURL(curFile.parent);
                 icon.onclick = function(aEvent){ sbCommonUtils.loadURL(url, aEvent.button == 1); };
             } catch(ex) {
                 sbCommonUtils.error(ex);
@@ -2615,7 +2615,7 @@ var sbInfoViewer = {
         // source image --> link to parent directory
         try {
             var curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
-            var url = sbCommonUtils.convertFilePathToURL(curFile.parent.path);
+            var url = sbCommonUtils.convertFileToURL(curFile.parent);
             var srcImage = document.getElementById("ScrapBookInfobar").firstChild;
             srcImage.onclick = function(aEvent){ sbCommonUtils.loadURL(url, aEvent.button == 1); };
         } catch(ex) {
@@ -2731,7 +2731,7 @@ var sbInfoViewer = {
 
     loadFile: function(aFileName) {
         var file = sbCommonUtils.getContentDir(sbPageEditor.item.id); file.append(aFileName);
-        var url = sbCommonUtils.convertFilePathToURL(file.path);
+        var url = sbCommonUtils.convertFileToURL(file);
         var dataXml = sbCommonUtils.convertURLToFile(url);
         // later Firefox version doesn't allow loading .xsl in the upper directory
         // if it's requested, patch it
