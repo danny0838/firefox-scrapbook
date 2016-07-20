@@ -41,6 +41,7 @@ function Shortcut(data) {
     if (data.modifiers.indexOf("Shift") !== -1) this.modifiers.push("Shift");
 }
 
+// returns the normalized string
 Shortcut.prototype.toString = function () {
     var keyName = keyCodeToNameMap[this.keyCode];
 
@@ -57,6 +58,7 @@ Shortcut.prototype.toString = function () {
     return parts.join("+");
 };
 
+// returns new object from a normalized string
 Shortcut.fromString = function (str) {
     var data = {}
     var parts = str.split("+");
