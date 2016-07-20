@@ -30,10 +30,11 @@ var sbBrowserOverlay = {
         document.getElementById("contentAreaContextMenu").addEventListener( "popupshowing", this, false);
         this.refresh();
         // hotkeys
-        var key = sbCommonUtils.getPref("key.menubar", "");
-        if (key.length == 1) {
-            var elt = document.getElementById("ScrapBookMenu");
-            elt.setAttribute("accesskey", key);
+        var keyStr = sbCommonUtils.getPref("key.menubar", "");
+        var shortcut = Shortcut.fromString(keyStr);
+        if (shortcut.isPrintable) {
+            var elem = document.getElementById("ScrapBookMenu");
+            elem.setAttribute("accesskey", shortcut.keyName);
         }
         var keyMap = {
             "key.sidebar": "key_openScrapBookSidebar",
@@ -43,12 +44,14 @@ var sbBrowserOverlay = {
             "key.bookmark": "key_BookmarkWithScrapBook",
         };
         for (let [pref, id] in Iterator(keyMap)) {
-            var key = sbCommonUtils.getPref(pref, "");
-            var elt = document.getElementById(id);
-            if (key.length == 1) {
-                elt.setAttribute("key", key);
+            var elem = document.getElementById(id);
+            var keyStr = sbCommonUtils.getPref(pref, "");
+            var shortcut = Shortcut.fromString(keyStr);
+            if (shortcut.isPrintable) {
+                elem.setAttribute("key", shortcut.keyName);
+                elem.setAttribute("modifiers", shortcut.getModifiers());
             } else {
-                elt.parentNode.removeChild(elt);
+                elem.parentNode.removeChild(elem);
             }
         }
     },

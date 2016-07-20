@@ -27,11 +27,11 @@
     </broadcasterset>
 
     <keyset id="mainKeyset">
-        <key id="key_openScrapBookSidebar"  modifiers="alt" command="viewScrapBookSidebar" />
-        <key id="key_ScrapBookCapture"      modifiers="accel shift" oncommand="sbBrowserOverlay.execCapture(0, null, false, 'urn:scrapbook:root');" />
-        <key id="key_ScrapBookCaptureAs"    modifiers="accel shift" oncommand="sbBrowserOverlay.execCapture(0, null, true , 'urn:scrapbook:root');" />
-        <key id="key_ScrapBookSaveAllTabs"  modifiers="accel shift" oncommand="sbMenuHandler.execCaptureAllTabs();" />
-        <key id="key_BookmarkWithScrapBook" modifiers="accel shift" oncommand="sbBrowserOverlay.execBookmark('ScrapBookContextPicking');" />
+        <key id="key_openScrapBookSidebar" command="viewScrapBookSidebar" />
+        <key id="key_ScrapBookCapture" oncommand="sbBrowserOverlay.execCapture(0, null, false, 'urn:scrapbook:root');" />
+        <key id="key_ScrapBookCaptureAs" oncommand="sbBrowserOverlay.execCapture(0, null, true , 'urn:scrapbook:root');" />
+        <key id="key_ScrapBookSaveAllTabs" oncommand="sbMenuHandler.execCaptureAllTabs();" />
+        <key id="key_BookmarkWithScrapBook" oncommand="sbBrowserOverlay.execBookmark('ScrapBookContextPicking');" />
     </keyset>
 
     <!-- sitebar list -->

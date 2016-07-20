@@ -12,20 +12,19 @@ var sbPrefWindow = {
                 elt.disabled = true;
             });
         }
-        if (navigator.platform.substr(0, 3) == "Mac") {
-            var modifiersMap = {
-                "Ctrl": "command",
-                "Shift": "shift",
-                "Alt": "option",
-            };
-            for (let [win, mac] in Iterator(modifiersMap)) {
-                var elts = document.querySelectorAll("label[value*='" + win + "']");
-                Array.forEach(elts, function(elt) {
-                    elt.value = elt.value.replace(win, mac);
-                });
+        // init keys UI to show beautiful
+        Array.prototype.forEach.call(document.getElementById("keysPane").getElementsByTagName("textbox"), function(elem){
+            var shortcut = Shortcut.fromString(elem.value);
+            if (shortcut.isPrintable) {
+                if (elem.getAttribute("preference") === "extensions.scrapbook.key.menubar") {
+                    elem.value = shortcut.keyName;
+                } else {
+                    elem.value = shortcut.getUIString();
+                }
+            } else {
+                elem.value = "";
             }
-            document.getElementById("sbKeysMenubar").hidden = true;
-        }
+        });
         // output tree requires correct pref and datasource,
         // we have to exec it before changing them
         sbDataSource.outputTreeAuto();
@@ -97,8 +96,25 @@ var sbPrefWindow = {
         }
     },
 
-    onInputKey: function(event) {
-        event.target.value = event.target.value.toUpperCase().replace(/[^A-Z]/g, '');
+    // for an element linked to preference
+    // we need to set the preference element's value to get it stored to preference
+    // modifying the element's value only changes the display effect
+    onKeyDown: function(elem, event) {
+        var shortcut = Shortcut.fromEvent(event);
+        var pref = elem.getAttribute("preference");
+        var prefElem = document.getElementById(pref);
+        if (shortcut.isPrintable) {
+            if (pref === "extensions.scrapbook.key.menubar") {
+                prefElem.value = shortcut.keyName;
+            } else {
+                prefElem.value = shortcut.toString();
+                elem.value = shortcut.getUIString();
+            }
+        } else {
+            prefElem.value = "";
+        }
+		event.preventDefault();
+		event.stopPropagation();
     },
 
     exportPrefs: function() {
