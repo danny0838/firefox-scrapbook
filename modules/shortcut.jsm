@@ -12,6 +12,10 @@ this.EXPORTED_SYMBOLS = ["Shortcut"];
  * Shortcut class
  */
 
+// possible values of nsIXULRuntime.OS:
+// https://developer.mozilla.org/en/OS_TARGET
+const nsIXULRuntime = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULRuntime);
+const isMac = (nsIXULRuntime.OS.substring(0, 3).toLowerCase() == "mac");
 const keyCodeToNameMap = {};
 const keyNameToCodeMap = {};
 
@@ -35,7 +39,6 @@ function Shortcut(data) {
     this.keyCode = data.keyCode;
     this.modifiers = [];
     // unify the order
-    if (data.modifiers.indexOf("Meta") !== -1) this.modifiers.push("Meta");
     if (data.modifiers.indexOf("Ctrl") !== -1) this.modifiers.push("Ctrl");
     if (data.modifiers.indexOf("Alt") !== -1) this.modifiers.push("Alt");
     if (data.modifiers.indexOf("Shift") !== -1) this.modifiers.push("Shift");
@@ -72,9 +75,10 @@ Shortcut.fromEvent = function (event) {
 
     data.keyCode = event.keyCode;
 
+    // normalized Ctrl = Command on Mac
+    // normalized Alt = Option on Mac
     var modifiers = [];
-    if (event.metaKey) modifiers.push("Meta");
-    if (event.ctrlKey) modifiers.push("Ctrl");
+    if ((event.ctrlKey && !isMac) || (event.metaKey && isMac)) modifiers.push("Ctrl");
     if (event.altKey) modifiers.push("Alt");
     if (event.shiftKey) modifiers.push("Shift");
     data.modifiers = modifiers;
