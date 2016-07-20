@@ -59,23 +59,27 @@ function Shortcut(data) {
 }
 
 Shortcut.prototype = {
+    get isValid() {
+        delete this.isValid;
+        return this.isValid = !!this.keyName;
+    },
+
     // A combination with all modifiers e.g. Ctrl+Alt is incomplete
     get isComplete() {
         delete this.isComplete;
-        if (!this.keyName) return this.isComplete = false;
+        if (!this.isValid) return this.isComplete = false;
         return this.isComplete = (["Win", "Control", "Alt", "Shift"].indexOf(this.keyName) == -1);
     },
 
     get isPrintable() {
         delete this.isPrintable;
-        if (!this.keyName) return this.isPrintable = false;
+        if (!this.isValid) return this.isPrintable = false;
         return this.isPrintable = printableRegex.test(this.keyName);
     },
 
     // returns the normalized string
     toString: function () {
-        // if the key is not registered, return empty string
-        if (!this.keyName) return "";
+        if (!this.isValid) return "";
 
         var parts = Array.prototype.slice.call(this.modifiers);
         if (["Win", "Control", "Alt", "Shift"].indexOf(this.keyName) == -1) {
@@ -89,8 +93,7 @@ Shortcut.prototype = {
 
     // return the modifiers attribute for XUL <key> elements
     getModifiers: function () {
-        // if the key is not registered, return empty string
-        if (!this.keyName) return "";
+        if (!this.isValid) return "";
 
         var modifiers = [];
         if (this.modifiers.indexOf("Ctrl") != -1) modifiers.push("accel");
@@ -101,8 +104,7 @@ Shortcut.prototype = {
 
     // return the string which is nice to show in the UI
     getUIString: function () {
-        // if the key is not registered, return empty string
-        if (!this.keyName) return "";
+        if (!this.isValid) return "";
 
         var parts = Array.prototype.slice.call(this.modifiers);
         if (["Win", "Control", "Alt", "Shift"].indexOf(this.keyName) == -1) {
