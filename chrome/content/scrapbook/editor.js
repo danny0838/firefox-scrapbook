@@ -807,6 +807,21 @@ var sbHtmlEditor = {
     },
     
     updatePopup: function() {
+        // update hotkey text, we only need to this once
+        if (!arguments.callee.hotkeyDone) {
+            arguments.callee.hotkeyDone = true;
+            var that = this;
+            Array.prototype.forEach.call(document.getElementById("ScrapBookContextMenu10").getElementsByTagName("menuitem"), function(elem){
+                for (var i in that._shortcut_table) {
+                    if (elem.value == that._shortcut_table[i]) {
+                        var shortcut = Shortcut.fromString(i);
+                        elem.setAttribute("acceltext", shortcut.getUIString());
+                        return;
+                    }
+                }
+            });
+        }
+
         document.getElementById("ScrapBookEditHTML_insertDate").tooltipText = sbCommonUtils.getPref("edit.insertDateFormat", "") || "%Y-%m-%d %H:%M:%S";
         document.getElementById("ScrapBookEditHTML_wrapHTML1").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.1", "") || "<code>{THIS}</code>";
         document.getElementById("ScrapBookEditHTML_wrapHTML2").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.2", "") || "<code>{THIS}</code>";
