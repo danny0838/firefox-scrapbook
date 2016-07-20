@@ -1,0 +1,19 @@
+#sbDetailDialog {
+    width: 400px;
+}
+
+#sbDetailProperties {
+    margin-top: 3px;
+}
+
+#sbDetailTitleRow, #sbDetailFolderRow {
+    margin-bottom: 6px;
+}
+
+groupbox [group="capture-options"] {
+    margin-top: 8px;
+}
+
+#sbDetailWarnAboutRenew, #sbDetailWarnAboutScript {
+    color: red;
+}
