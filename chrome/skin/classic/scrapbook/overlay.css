@@ -23,22 +23,22 @@ toolbar[iconsize="small"] #scrapbook-button {
 
 /* ::::: CONTEXT_MENU ::::: */
 
-.sb-capture-partial { list-style-image: url('chrome://scrapbook/skin/capture_partial.png'); }
-.sb-capture-entire  { list-style-image: url('chrome://scrapbook/skin/capture_entire.png'); }
-.sb-capture-target  { list-style-image: url('chrome://scrapbook/skin/capture_target.png'); }
-.sb-capture-frame   { list-style-image: url('chrome://scrapbook/skin/capture_frame.png'); }
+.sb-capture-partial { list-style-image: url("chrome://scrapbook/skin/capture_partial.png"); }
+.sb-capture-entire  { list-style-image: url("chrome://scrapbook/skin/capture_entire.png"); }
+.sb-capture-target  { list-style-image: url("chrome://scrapbook/skin/capture_target.png"); }
+.sb-capture-frame   { list-style-image: url("chrome://scrapbook/skin/capture_frame.png"); }
 
 .sb-capture-partial > .menu-iconic-left image,
 .sb-capture-entire  > .menu-iconic-left image,
 .sb-capture-target  > .menu-iconic-left image,
 .sb-capture-frame   > .menu-iconic-left image { width : 13px !important; height: 13px !important; }
 
-.sb-htmleditor { list-style-image: url('chrome://scrapbook/skin/edit_html.png'); }
-.sb-htmleditor menuitem[value="insertSource"] { list-style-image: url('chrome://scrapbook/skin/edit_html.png'); }
-.sb-htmleditor menuitem[value="removeFormat"] { list-style-image: url('chrome://scrapbook/skin/edit_cutter.png'); }
-.sb-htmleditor menuitem[value="unlink"] { list-style-image: url('chrome://scrapbook/skin/edit_cutter.png'); }
-.sb-htmleditor menuitem[value="save"] { list-style-image: url('chrome://scrapbook/skin/edit_save.png'); }
-.sb-htmleditor menuitem[value="quit"] { list-style-image: url('chrome://scrapbook/skin/edit_html_disable.png'); }
+.sb-htmleditor { list-style-image: url("chrome://scrapbook/skin/edit_html.png"); }
+.sb-htmleditor menuitem[value="insertSource"] { list-style-image: url("chrome://scrapbook/skin/edit_html.png"); }
+.sb-htmleditor menuitem[value="removeFormat"] { list-style-image: url("chrome://scrapbook/skin/edit_cutter.png"); }
+.sb-htmleditor menuitem[value="unlink"] { list-style-image: url("chrome://scrapbook/skin/edit_cutter.png"); }
+.sb-htmleditor menuitem[value="save"] { list-style-image: url("chrome://scrapbook/skin/edit_save.png"); }
+.sb-htmleditor menuitem[value="quit"] { list-style-image: url("chrome://scrapbook/skin/edit_html_disable.png"); }
 
 #ScrapBookContextSubmenu { list-style-image: url("chrome://scrapbook/skin/main_16.png"); }
 
@@ -46,19 +46,19 @@ toolbar[iconsize="small"] #scrapbook-button {
 /* ::::: MENUBAR ::::: */
 
 #ScrapBookMenu {
-    list-style-image: url('chrome://scrapbook/skin/main_16.png');
+    list-style-image: url("chrome://scrapbook/skin/main_16.png");
 }
 
 #ScrapBookMenu menuitem.sb-item {
-    list-style-image: url('chrome://scrapbook/skin/treeitem.png') !important;
+    list-style-image: url("chrome://scrapbook/skin/treeitem.png") !important;
 }
 
 #ScrapBookMenu menuitem.sb-item[sbtype="note"] {
-    list-style-image: url('chrome://scrapbook/skin/treenote.png') !important;
+    list-style-image: url("chrome://scrapbook/skin/treenote.png") !important;
 }
 
 #ScrapBookMenu menuitem.sb-item[sbtype="notex"] {
-    list-style-image: url('chrome://scrapbook/skin/treenotex.png') !important;
+    list-style-image: url("chrome://scrapbook/skin/treenotex.png") !important;
     color: rgb(80,0,32);
 }
 
@@ -119,19 +119,19 @@ toolbar#ScrapBookEditor #ScrapBookEditComment {
 }
 
 toolbar#ScrapBookEditor #ScrapBookToggleComment {
-    list-style-image: url('chrome://scrapbook/skin/edit_comment.png');
+    list-style-image: url("chrome://scrapbook/skin/edit_comment.png");
 }
 
 toolbar#ScrapBookEditor #ScrapBookToggleComment[disabled="true"] {
-    list-style-image: url('chrome://scrapbook/skin/edit_comment_disable.png');
+    list-style-image: url("chrome://scrapbook/skin/edit_comment_disable.png");
 }
 
 toolbar#ScrapBookEditor #ScrapBookHighlighter {
-    list-style-image: url('chrome://scrapbook/skin/edit_highlighter.png');
+    list-style-image: url("chrome://scrapbook/skin/edit_highlighter.png");
 }
 
 toolbar#ScrapBookEditor #ScrapBookHighlighter[disabled="true"] {
-    list-style-image: url('chrome://scrapbook/skin/edit_highlighter_disable.png');
+    list-style-image: url("chrome://scrapbook/skin/edit_highlighter_disable.png");
 }
 
 toolbar#ScrapBookEditor #ScrapBookHighlighter menuitem[type="radio"] {
@@ -148,55 +148,55 @@ toolbar#ScrapBookEditor #ScrapBookHighlighter menupopup {
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditAnnotation {
-    list-style-image: url('chrome://scrapbook/skin/edit_annotation.png');
+    list-style-image: url("chrome://scrapbook/skin/edit_annotation.png");
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditAnnotation[disabled="true"] {
-    list-style-image: url('chrome://scrapbook/skin/edit_annotation_disable.png');
+    list-style-image: url("chrome://scrapbook/skin/edit_annotation_disable.png");
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditHTML {
-    list-style-image: url('chrome://scrapbook/skin/edit_html.png');
+    list-style-image: url("chrome://scrapbook/skin/edit_html.png");
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditHTML[disabled="true"] {
-    list-style-image: url('chrome://scrapbook/skin/edit_html_disable.png');
+    list-style-image: url("chrome://scrapbook/skin/edit_html_disable.png");
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditCutter {
-    list-style-image: url('chrome://scrapbook/skin/edit_cutter.png');
+    list-style-image: url("chrome://scrapbook/skin/edit_cutter.png");
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditCutter[disabled="true"] {
-    list-style-image: url('chrome://scrapbook/skin/edit_cutter_disable.png');
+    list-style-image: url("chrome://scrapbook/skin/edit_cutter_disable.png");
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditEraser {
-    list-style-image: url('chrome://scrapbook/skin/edit_eraser.png');
+    list-style-image: url("chrome://scrapbook/skin/edit_eraser.png");
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditEraser[disabled="true"] {
-    list-style-image: url('chrome://scrapbook/skin/edit_eraser_disable.png');
+    list-style-image: url("chrome://scrapbook/skin/edit_eraser_disable.png");
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditUndo {
-    list-style-image: url('chrome://scrapbook/skin/edit_undo.png');
+    list-style-image: url("chrome://scrapbook/skin/edit_undo.png");
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditUndo[disabled="true"] {
-    list-style-image: url('chrome://scrapbook/skin/edit_undo_disable.png');
+    list-style-image: url("chrome://scrapbook/skin/edit_undo_disable.png");
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditSave {
-    list-style-image: url('chrome://scrapbook/skin/edit_save.png');
+    list-style-image: url("chrome://scrapbook/skin/edit_save.png");
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditSave[disabled="true"] {
-    list-style-image: url('chrome://scrapbook/skin/edit_save_disable.png');
+    list-style-image: url("chrome://scrapbook/skin/edit_save_disable.png");
 }
 
 toolbar#ScrapBookEditor #ScrapBookEditLocate {
-    list-style-image: url('chrome://scrapbook/skin/expander_left.png');
+    list-style-image: url("chrome://scrapbook/skin/expander_left.png");
 }
 
 
@@ -226,21 +226,21 @@ toolbar#ScrapBookInfobar toolbarbutton[disabled="true"] label {
 }
 
 toolbar#ScrapBookInfobar #ScrapBookInfoHome {
-    list-style-image: url('chrome://scrapbook/skin/info_home1.png');
+    list-style-image: url("chrome://scrapbook/skin/info_home1.png");
 }
 
 toolbar#ScrapBookInfobar #ScrapBookInfoHome[disabled="true"] {
-    list-style-image: url('chrome://scrapbook/skin/info_home0.png');
+    list-style-image: url("chrome://scrapbook/skin/info_home0.png");
 }
 
 toolbar#ScrapBookInfobar #ScrapBookInfoSite {
-    list-style-image: url('chrome://scrapbook/skin/info_link1.png');
+    list-style-image: url("chrome://scrapbook/skin/info_link1.png");
 }
 
 toolbar#ScrapBookInfobar #ScrapBookInfoSite[disabled="true"] {
-    list-style-image: url('chrome://scrapbook/skin/info_link0.png');
+    list-style-image: url("chrome://scrapbook/skin/info_link0.png");
 }
 
 toolbar#ScrapBookInfobar #ScrapBookInfoLocate {
-    list-style-image: url('chrome://scrapbook/skin/expander_left.png');
+    list-style-image: url("chrome://scrapbook/skin/expander_left.png");
 }
