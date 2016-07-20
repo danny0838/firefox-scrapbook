@@ -61,6 +61,20 @@ Shortcut.prototype.toString = function () {
     return parts.join("+");
 };
 
+// return the modifiers attribute for XUL <key> elements
+Shortcut.prototype.getModifiers = function () {
+    var keys = this.toString();
+
+    // if this shortcut is not effective, return empty string
+    if (!keys) return "";
+
+    var modifiers = [];
+    if (this.modifiers.indexOf("Ctrl") != -1) modifiers.push("accel");
+    if (this.modifiers.indexOf("Alt") != -1) modifiers.push("alt");
+    if (this.modifiers.indexOf("Shift") != -1) modifiers.push("shift");
+    return modifiers.join(" ");
+};
+
 // returns new object from a normalized string
 Shortcut.fromString = function (str) {
     var data = {}
