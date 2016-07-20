@@ -1,7 +1,10 @@
 /*===========================================================================
-*   Sticky Annotation
-*   (for downward compatibility with ScrapBook X <= 1.12.0a34)
-*==========================================================================*/
+ *  Sticky Annotation
+ *
+ *  This file is deprecated. We left it here only for downward compatibility
+ *  for pages with sticky annotations created by ScrapBook X < 1.12.0a35,
+ *  which linked to chrome://scrapbook/skin/annotation.css to work right.
+ *=========================================================================*/
 
 div.scrapbook-sticky {
     background-color: #FAFAFA;
