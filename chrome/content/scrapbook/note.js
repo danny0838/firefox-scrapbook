@@ -102,7 +102,7 @@ var sbNoteTemplate = {
     init: function() {
         this.file = sbCommonUtils.getScrapBookDir().clone();
         this.file.append("note_template.html");
-        if ( !this.file.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/note_template.html", this.file);
+        if ( !this.file.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/skin/note_template.html", this.file);
     },
 
     show: function(willShow) {
