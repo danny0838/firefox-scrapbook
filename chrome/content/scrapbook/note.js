@@ -83,7 +83,7 @@ var sbNoteService2 = {
     toggleHTMLView: function(willShow) {
         this.BROWSER.collapsed = !willShow;
         document.getElementById("sbSplitter").collapsed = !willShow;
-        document.getElementById("sbNoteHeader").lastChild.collapsed = !willShow;
+        document.getElementById("sbNoteExpand").hidden = !willShow;
         document.getElementById("sbNoteToolbarN").disabled = !willShow;
         this.enabledHTMLView = willShow;
     },
