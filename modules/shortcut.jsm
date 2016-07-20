@@ -18,6 +18,17 @@ const nsIXULRuntime = Components.classes["@mozilla.org/xre/app-info;1"].getServi
 const isMac = (nsIXULRuntime.OS.substring(0, 3).toLowerCase() == "mac");
 const keyCodeToNameMap = {};
 const keyNameToCodeMap = {};
+const keyNameToUIStringMap = {
+    "Left": "\u2190",
+    "Up": "\u2191",
+    "Right": "\u2192",
+    "Down": "\u2193",
+    "Comma": ",",
+    "Period": ".",
+    "Slash": "/",
+    "Open_Bracket": "[",
+    "Close_Bracket": "]",
+};
 
 // Ths list of nsIDOMKeyEvent constants can be found here:
 // https://dxr.mozilla.org/mozilla-central/source/dom/interfaces/events/nsIDOMKeyEvent.idl
@@ -90,7 +101,18 @@ Shortcut.prototype = {
 
     // return the string which is nice to show in the UI
     getUIString: function () {
-        var keys = this.toString();
+        // if the key is not registered, return empty string
+        if (!this.keyName) return "";
+
+        var parts = Array.prototype.slice.call(this.modifiers);
+        if (["Win", "Control", "Alt", "Shift"].indexOf(this.keyName) == -1) {
+            var mainKey = keyNameToUIStringMap[this.keyName] || this.keyName;
+        } else {
+            var mainKey = "";
+        }
+        parts.push(mainKey);
+
+        var keys = parts.join("+");
 
         if (isMac) {
             keys = keys.replace("Ctrl", "\u2318").replace("Alt", "\u2325").replace("Shift", "\u21E7");
