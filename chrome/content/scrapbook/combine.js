@@ -25,7 +25,7 @@ var sbCombineService = {
         onDragOver: function(event, flavour, session) {},
         onDragExit: function(event, session) {},
         onDrop: function(event, transferData, session) {
-            var idxList = window.top.sbTreeHandler.getSelection(false, 2);
+            var idxList = window.top.sbTreeHandler.getSelection(false, 0);
             idxList.forEach(function(aIdx) {
                 var res = window.top.sbTreeHandler.TREE.builderView.getResourceAtIndex(aIdx);
                 var parRes = window.top.sbTreeHandler.getParentResource(aIdx);
