@@ -45,8 +45,8 @@ Shortcut.prototype.toString = function () {
     var parts = [];
     var keyName = keyCodeToNameMap[this.keyCode];
 
-    // if the key is not registered, return null
-    if (!keyName) return null;
+    // if the key is not registered, return empty string
+    if (!keyName) return "";
 
     parts = parts.concat(this.modifiers);
     parts.push(keyName);
