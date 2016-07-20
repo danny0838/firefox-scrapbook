@@ -44,6 +44,13 @@ function Shortcut(data) {
     if (data.modifiers.indexOf("Shift") !== -1) this.modifiers.push("Shift");
 }
 
+// A combination with all modifiers e.g. Ctrl+Alt is incomplete
+Shortcut.prototype.isComplete = function () {
+    var keyName = keyCodeToNameMap[this.keyCode];
+    if (!keyName) return false;
+    return (["Win", "Control", "Alt", "Shift"].indexOf(keyName) == -1);
+};
+
 // returns the normalized string
 Shortcut.prototype.toString = function () {
     var keyName = keyCodeToNameMap[this.keyCode];
@@ -51,12 +58,12 @@ Shortcut.prototype.toString = function () {
     // if the key is not registered, return empty string
     if (!keyName) return "";
 
-    // if we only have modifiers, return empty string
-    if (["Win", "Control", "Alt", "Shift"].indexOf(keyName) != -1) return "";
-
-    var parts = [];
-    parts = parts.concat(this.modifiers);
-    parts.push(keyName);
+    var parts = Array.prototype.slice.call(this.modifiers);
+    if (["Win", "Control", "Alt", "Shift"].indexOf(keyName) == -1) {
+        parts.push(keyName);
+    } else {
+        parts.push("");
+    }
 
     return parts.join("+");
 };
