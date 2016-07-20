@@ -55,7 +55,7 @@
                         <checkbox id="sbDetailOptionFonts" label="&sb.detail.option.fonts;" />
                         <checkbox id="sbDetailOptionFrames" label="&sb.detail.option.frames;" />
                         <checkbox id="sbDetailOptionStyles" label="&sb.detail.option.styles;" />
-                        <checkbox id="sbDetailOptionScript" label="&sb.detail.option.scripts;" />
+                        <checkbox id="sbDetailOptionScript" label="&sb.detail.option.scripts;" oncommand="sbCaptureOptions.updateScriptWarning();" />
                     </hbox>
                     <checkbox id="sbDetailOptionSaveDataURI" label="&sb.detail.option.saveDataURI;" />
                     <checkbox id="sbDetailOptionKeepLink" label="&sb.detail.option.keepLink;" />
@@ -116,7 +116,7 @@
                     </hbox>
                 </groupbox>
                 <description id="sbDetailWarnAboutRenew"  flex="1" hidden="true">&sb.detail.warnAboutRenew;</description>
-                <description id="sbDetailWarnAboutScript" flex="1">&sb.detail.warnAboutScript;</description>
+                <description id="sbDetailWarnAboutScript" flex="1" hidden="true">&sb.detail.warnAboutScript;</description>
             </tabpanel>
             <tabpanel>
                 <textbox id="sbDetailComment" multiline="true" spellcheck="true" flex="1" />
