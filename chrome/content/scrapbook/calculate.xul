@@ -3,6 +3,7 @@
 <!--skin-->
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 <?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
+<?xml-stylesheet href="chrome://scrapbook/skin/calculate.css" type="text/css" ?>
 
 <!--locale-->
 <!DOCTYPE window SYSTEM "chrome://scrapbook/locale/message.dtd">
@@ -11,7 +12,6 @@
 <window id="sbCalcWindow"
         title="&sb.tools.calculate; - ScrapBook"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        width="500" height="450"
         persist="screenX screenY"
         onload="setTimeout(function(){ sbCalcService.exec(); }, 0);"
         windowtype="scrapbook">
@@ -39,7 +39,7 @@
         </menupopup>
     </popupset>
 
-    <grid style="margin:10px 10px 0px 10px;">
+    <grid id="sbCalcHeader">
         <columns>
             <column />
             <column flex="1" />
@@ -62,21 +62,20 @@
           seltype="single"
           ondblclick="sbCalcController.onDblClick(event);"
           onkeypress="if ( event.keyCode == 46 ) sbCalcController.remove();"
-          style="margin:12px;"
           flex="1">
         <treecols>
             <treecol id="sbTreeColTitle" label="&sb.prop.title;"     flex="7" sortIndex="2" primary="true" />
             <splitter class="tree-splitter" />
             <treecol id="sbTreeColSize"  label="&sb.prop.size;"      flex="2" sortIndex="4" sortDirection="descending" />
             <splitter class="tree-splitter" />
-            <treecol id="sbTreeColState" label="&sb.calc.diagnosis;" flex="1" sortIndex="6" style="max-width:120px;" />
+            <treecol id="sbTreeColState" label="&sb.calc.diagnosis;" flex="1" sortIndex="6" />
         </treecols>
         <treechildren />
     </tree>
 
-    <statusbar style="border-top: 1px solid ThreeDShadow;" align="center">
+    <statusbar id="sbCalcStatus" align="center">
         <statusbarpanel id="sbCalcMessage" class="plain" flex="1" />
-        <progressmeter id="sbCalcProgress" mode="determined" value="0" width="160" />
+        <progressmeter id="sbCalcProgress" mode="determined" value="0" />
     </statusbar>
 
 </window>
