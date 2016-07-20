@@ -52,10 +52,22 @@ function Shortcut(data) {
     this.keyCode = data.keyCode;
     this.keyName = keyCodeToNameMap[this.keyCode];
     // unify the order
+    this.ctrlKey = false;
+    this.altKey = false;
+    this.shiftKey = false;
     this.modifiers = [];
-    if (data.modifiers.indexOf("Ctrl") !== -1) this.modifiers.push("Ctrl");
-    if (data.modifiers.indexOf("Alt") !== -1) this.modifiers.push("Alt");
-    if (data.modifiers.indexOf("Shift") !== -1) this.modifiers.push("Shift");
+    if (data.modifiers.indexOf("Ctrl") !== -1) {
+        this.ctrlKey = true;
+        this.modifiers.push("Ctrl");
+    }
+    if (data.modifiers.indexOf("Alt") !== -1) {
+        this.altKey = true;
+        this.modifiers.push("Alt");
+    }
+    if (data.modifiers.indexOf("Shift") !== -1) {
+        this.shiftKey = true;
+        this.modifiers.push("Shift");
+    }
 }
 
 Shortcut.prototype = {
