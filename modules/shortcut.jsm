@@ -42,12 +42,15 @@ function Shortcut(data) {
 }
 
 Shortcut.prototype.toString = function () {
-    var parts = [];
     var keyName = keyCodeToNameMap[this.keyCode];
 
     // if the key is not registered, return empty string
     if (!keyName) return "";
 
+    // if we only have modifiers, return empty string
+    if (["Win", "Control", "Alt", "Shift"].indexOf(keyName) != -1) return "";
+
+    var parts = [];
     parts = parts.concat(this.modifiers);
     parts.push(keyName);
 
