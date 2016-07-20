@@ -15,6 +15,8 @@ this.EXPORTED_SYMBOLS = ["Shortcut"];
 const keyCodeToNameMap = {};
 const keyNameToCodeMap = {};
 
+// Ths list of nsIDOMKeyEvent constants can be found here:
+// https://dxr.mozilla.org/mozilla-central/source/dom/interfaces/events/nsIDOMKeyEvent.idl
 (function () {
     var keys = Components.interfaces.nsIDOMKeyEvent;
     for (var name in keys) {
