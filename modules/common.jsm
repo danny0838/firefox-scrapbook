@@ -503,6 +503,17 @@ var sbCommonUtils = {
         return (this.readFile(aFile1) === this.readFile(aFile2));
     },
 
+    // reads an url synchronously, should only be used for local data
+    readTemplateURL: function(aURISpec) {
+        var istream = this.newChannel(aURISpec).open();
+        var bistream = Components.classes["@mozilla.org/binaryinputstream;1"].createInstance(Components.interfaces.nsIBinaryInputStream);
+        bistream.setInputStream(istream);
+        var data = bistream.readBytes(bistream.available());
+        bistream.close();
+        istream.close();
+        return data;
+    },
+
     saveTemplateFile: function(aURISpec, aFile, aOverwrite) {
         if ( aFile.exists() && !aOverwrite ) return;
         var istream = this.newChannel(aURISpec).open();
