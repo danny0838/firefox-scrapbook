@@ -75,6 +75,19 @@ Shortcut.prototype.getModifiers = function () {
     return modifiers.join(" ");
 };
 
+// return the string which is nice to show in the UI
+Shortcut.prototype.getUIString = function () {
+    var keys = this.toString();
+
+    // if this shortcut is not effective, return empty string
+    if (!keys) return "";
+
+    if (isMac) {
+        keys = keys.replace("Ctrl", "\u2318").replace("Alt", "\u2325").replace("Shift", "\u21E7");
+    }
+    return keys;
+};
+
 // returns new object from a normalized string
 Shortcut.fromString = function (str) {
     var data = {}
