@@ -91,22 +91,18 @@ Shortcut.prototype = {
 
     // returns the normalized string
     toString: function () {
-        if (!this.isValid) return "";
-
+        var mainKey = this.keyName || "";
         var parts = Array.prototype.slice.call(this.modifiers);
-        if (["Win", "Control", "Alt", "Shift"].indexOf(this.keyName) == -1) {
-            parts.push(this.keyName);
+        if (["Win", "Control", "Alt", "Shift"].indexOf(mainKey) == -1) {
+            parts.push(mainKey);
         } else {
             parts.push("");
         }
-
         return parts.join("+");
     },
 
     // return the modifiers attribute for XUL <key> elements
     getModifiers: function () {
-        if (!this.isValid) return "";
-
         var modifiers = [];
         if (this.modifiers.indexOf("Ctrl") != -1) modifiers.push("accel");
         if (this.modifiers.indexOf("Alt") != -1) modifiers.push("alt");
@@ -116,13 +112,12 @@ Shortcut.prototype = {
 
     // return the string which is nice to show in the UI
     getUIString: function () {
-        if (!this.isValid) return "";
-
+        var mainKey = this.keyName || "";
         var parts = Array.prototype.slice.call(this.modifiers);
         if (["Win", "Control", "Alt", "Shift"].indexOf(this.keyName) == -1) {
-            var mainKey = keyNameToUIStringMap[this.keyName] || this.keyName;
+            mainKey = keyNameToUIStringMap[mainKey] || mainKey;
         } else {
-            var mainKey = "";
+            mainKey = "";
         }
         parts.push(mainKey);
 
