@@ -41,7 +41,7 @@
 
     <!-- main menu button -->
     <menubar id="main-menubar">
-        <menu id="ScrapBookMenu" class="menu-iconic" image="chrome://scrapbook/skin/main_16.png" data-label="ScrapBook X"
+        <menu id="ScrapBookMenu" class="menu-iconic" data-label="ScrapBook X"
               datasources="rdf:null" ref="urn:scrapbook:root" flags="dont-test-empty"
               insertafter="bookmarks-menu bookmarksMenu"
               oncommand="sbMenuHandler.onClick(event);"
@@ -212,15 +212,15 @@
             <toolbar id="ScrapBookInfobar" align="center" hidden="true" autoshow="false" persist="autoshow">
                 <image src="chrome://scrapbook/skin/info.png" tooltiptext="&sb.edit.folderView;" />
                 <label id="ScrapBookInfoSource" crop="end" flex="1" />
-                <toolbarbutton id="ScrapBookInfoHome" image="chrome://scrapbook/skin/info_home0.png" label="&sb.info.home;"    oncommand="sbInfoViewer.loadFile('index.html');" />
-                <toolbarbutton id="ScrapBookInfoSite" image="chrome://scrapbook/skin/info_link0.png" label="&sb.info.sitemap;" oncommand="sbInfoViewer.loadFile('sitemap.xml');" />
-                <toolbarbutton image="chrome://scrapbook/skin/expander_left.png" tooltiptext="&sb.locate;" oncommand="sbBrowserOverlay.execLocate(sbBrowserOverlay.resource);" />
+                <toolbarbutton id="ScrapBookInfoHome" label="&sb.info.home;" oncommand="sbInfoViewer.loadFile('index.html');" />
+                <toolbarbutton id="ScrapBookInfoSite" label="&sb.info.sitemap;" oncommand="sbInfoViewer.loadFile('sitemap.xml');" />
+                <toolbarbutton id="ScrapBookInfoLocate" tooltiptext="&sb.locate;" oncommand="sbBrowserOverlay.execLocate(sbBrowserOverlay.resource);" />
             </toolbar>
-            <toolbar id="ScrapBookEditor" align="center" hidden="true" autoshow="true" persist="autoshow" style="background-attachment: scroll !important;">
-                <image id="ScrapBookEditIcon" tooltiptext="&sb.edit.folderView;" style="width:16px;height:16px;" />
-                <textbox id="ScrapBookEditTitle"   oninput="sbPageEditor.changed2 = true;" onkeypress="if (event.keyCode == 13) sbPageEditor.saveResource();" onclick="if (event.button == 1) sbPageEditor.selection2Title(this);" flex="1" style="padding:2px;max-width:220px;" />
+            <toolbar id="ScrapBookEditor" align="center" hidden="true" autoshow="true" persist="autoshow">
+                <image id="ScrapBookEditIcon" tooltiptext="&sb.edit.folderView;" />
+                <textbox id="ScrapBookEditTitle"   oninput="sbPageEditor.changed2 = true;" onkeypress="if (event.keyCode == 13) sbPageEditor.saveResource();" onclick="if (event.button == 1) sbPageEditor.selection2Title(this);" flex="1" />
                 <toolbarbutton id="ScrapBookToggleComment" tooltiptext="&sb.edit.comment;" oncommand="sbPageEditor.toggleComment();" />
-                <textbox id="ScrapBookEditComment" spellcheck="true" oninput="sbPageEditor.onInputComment(this.value);" onkeypress="if (event.keyCode == 13) if (!sbPageEditor.multiline) sbPageEditor.saveResource();" flex="3" style="padding:2px;" />
+                <textbox id="ScrapBookEditComment" spellcheck="true" oninput="sbPageEditor.onInputComment(this.value);" onkeypress="if (event.keyCode == 13) if (!sbPageEditor.multiline) sbPageEditor.saveResource();" flex="3" />
                 <spacer id="ScrapBookEditSpacer" flex="0" />
                 <label id="ScrapBookHighlighterPreview" value="&sb.highlighter;" />
                 <toolbarbutton id="ScrapBookHighlighter" type="menu-button" persist="color" tooltiptext="&sb.highlighterTool;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbPageEditor.highlight();" accesskey="Q">
@@ -260,7 +260,7 @@
                 <toolbarbutton id="ScrapBookEditHTML" tooltiptext="&sb.edit.htmlTool;" oncommand="sbHtmlEditor.init();" />
                 <toolbarbutton id="ScrapBookEditUndo" tooltiptext="&sb.edit.undo;" oncommand="sbPageEditor.undo();" accesskey="Z" />
                 <toolbarbutton id="ScrapBookEditSave" tooltiptext="&sb.edit.save;" oncommand="sbPageEditor.saveOrCapture();" onclick="if (event.button == 1) sbPageEditor.saveOrCapture(true);" accesskey="S" />
-                <toolbarbutton image="chrome://scrapbook/skin/expander_left.png" tooltiptext="&sb.locate;" oncommand="sbBrowserOverlay.execLocate(sbBrowserOverlay.resource);" />
+                <toolbarbutton id="ScrapBookEditLocate" tooltiptext="&sb.locate;" oncommand="sbBrowserOverlay.execLocate(sbBrowserOverlay.resource);" />
             </toolbar>
         </toolbox>
     </vbox>

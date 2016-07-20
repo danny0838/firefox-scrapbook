@@ -2612,8 +2612,6 @@ var sbInfoViewer = {
         var isTypeSite = (sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "site");
         document.getElementById("ScrapBookInfoHome").disabled = !isTypeSite;
         document.getElementById("ScrapBookInfoSite").disabled = !isTypeSite;
-        document.getElementById("ScrapBookInfoHome").setAttribute("image", "chrome://scrapbook/skin/info_home" + (isTypeSite ? "1" : "0") +  ".png");
-        document.getElementById("ScrapBookInfoSite").setAttribute("image", "chrome://scrapbook/skin/info_link" + (isTypeSite ? "1" : "0") +  ".png");
         // source image --> link to parent directory
         try {
             var curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
