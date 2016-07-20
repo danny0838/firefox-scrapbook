@@ -22,7 +22,7 @@
             <image id="sbNoteImage" />
             <label id="sbNoteLabel" flex="1" crop="end" />
             <spacer flex="1" />
-            <toolbarbutton id="sbNoteExpand" image="chrome://scrapbook/skin/expander_up.png" style="-moz-appearance:none;" hidden="true" oncommand="sbNoteService2.toggleHTMLView(false);" />
+            <toolbarbutton id="sbNoteExpand" hidden="true" oncommand="sbNoteService2.toggleHTMLView(false);" />
         </hbox>
         <textbox id="sbNoteTextbox"
                  multiline="true"
