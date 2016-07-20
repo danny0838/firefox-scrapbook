@@ -51,6 +51,12 @@ Shortcut.prototype.isComplete = function () {
     return (["Win", "Control", "Alt", "Shift"].indexOf(keyName) == -1);
 };
 
+Shortcut.prototype.isPrintable = function () {
+    var keyName = keyCodeToNameMap[this.keyCode];
+    if (!keyName) return false;
+    return /^[0-9A-Za-z]$/.test(keyName);
+};
+
 // returns the normalized string
 Shortcut.prototype.toString = function () {
     var keyName = keyCodeToNameMap[this.keyCode];
