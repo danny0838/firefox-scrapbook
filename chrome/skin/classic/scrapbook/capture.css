@@ -1,3 +1,30 @@
+#sbCaptureWindow.simple {
+    width: 360px;
+}
+
+#sbCaptureWindow.complex {
+    width: 800px;
+    height: 600px;
+}
+
+#sbpURLList {
+    margin: 0px;
+}
+
+#sbpChkFilter {
+    margin-top: 5px;
+    margin-bottom: 7px;
+}
+
+#sbpFilterBox {
+    border: 1px solid black;
+    padding: 4px;
+}
+
+#sbpTreeFilter {
+    margin: 0px;
+}
+
 /* ::::: INDICATOR ::::: */
 
 listitem[indicated="true"] {

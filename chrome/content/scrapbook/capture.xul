@@ -8,7 +8,7 @@
 <window id="sbCaptureWindow"
         title="&sb.capture; - ScrapBook"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        style="width: 360px;"
+        class="simple"
         onload="SB_initCapture();"
         onclose="event.preventDefault();sbCaptureTask.abort();"
         windowtype="scrapbook">
@@ -28,7 +28,6 @@
         context="popup"
         seltype="multiple"
         enableColumnDrag="true"
-        style="margin:0px;"
         editable="true"
         autostretch="always"
     >
@@ -46,13 +45,9 @@
 
     <browser type="content" id="sbCaptureBrowser" collapsed="true" disablehistory="true" />
 
-    <spacer style="height:5px" />
-    <hbox>
-        <checkbox id="sbpChkFilter" label="&sb.capture.filter;" checked="false" oncommand="sbCaptureTask.toggleFilterBox(event);" />
-        <spacer flex="1" />
-    </hbox>
-    <spacer style="height:7px" />
-    <vbox id="sbpFilterBox" hidden="true" style="border: 1px solid black; padding:4px">
+    <checkbox id="sbpChkFilter" label="&sb.capture.filter;" checked="false" oncommand="sbCaptureTask.toggleFilterBox(event);" />
+
+    <vbox id="sbpFilterBox" hidden="true">
         <hbox>
             <menulist id="sbpMnuIncExc">
                 <menupopup>
@@ -78,7 +73,6 @@
               onclick="sbpFilter.editFilter();"
               rows="5"
               seltype="single"
-              style="margin:0px;"
         >
             <treecols>
                 <treecol label="&sb.capture.filter.column.one;" flex="1" editable="true" crop="right" persist="width hidden" />
