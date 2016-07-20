@@ -1,5 +1,17 @@
 /* ::::: Options ::::: */
 
+#sbPrefWindow {
+    width: 40em; height: 600px;
+}
+
+.notify-restart {
+    margin-top: 1em;
+}
+
+prefpane vbox {
+    overflow: auto;
+}
+
 radio[pane="mainPane"] {
     list-style-image: url("chrome://scrapbook/skin/prefs_main.png");
 }

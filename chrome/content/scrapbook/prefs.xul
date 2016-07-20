@@ -10,7 +10,6 @@
 <prefwindow id="sbPrefWindow"
             xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
             title="ScrapBook &sb.tools.options;"
-            style="width: 40em; height: 600px;"
             persist="width height"
             onload="sbPrefWindow.init();"
             onchange="sbPrefWindow.changed = true;"
@@ -27,7 +26,7 @@
             <preference id="extensions.scrapbook.ui.toolsMenu"      name="extensions.scrapbook.ui.toolsMenu"      type="bool" />
             <preference id="extensions.scrapbook.ui.sidebarManage"  name="extensions.scrapbook.ui.sidebarManage"      type="bool" />
         </preferences>
-        <vbox flex="1" style="overflow: auto;">
+        <vbox flex="1">
         <checkbox preference="extensions.scrapbook.ui.contextMenu"    label="&sb.prefs.ui.contextMenu;"
                   onsyncfrompreference="sbPrefWindow.updateGroupedUI('extensions.scrapbook.ui.contextMenu', 'contextmenu');" />
         <checkbox preference="extensions.scrapbook.ui.contextSubMenu" label="&sb.prefs.ui.contextSubMenu;" class="indent" group="contextmenu" />
@@ -54,7 +53,7 @@
             <preference id="extensions.scrapbook.key.captureAllTabs" name="extensions.scrapbook.key.captureAllTabs" type="string" />
             <preference id="extensions.scrapbook.key.bookmark"       name="extensions.scrapbook.key.bookmark"       type="string" />
         </preferences>
-        <vbox flex="1" style="overflow: auto;">
+        <vbox flex="1">
         <grid>
             <columns>
                 <column />
@@ -105,7 +104,7 @@
                 </row>
             </rows>
         </grid>
-        <description style="margin-top: 1em;">&sb.prefs.restart;</description>
+        <description class="notify-restart">&sb.prefs.restart;</description>
         </vbox>
     </prefpane>
 
@@ -117,7 +116,7 @@
             <preference id="extensions.scrapbook.tabs.searchResult" name="extensions.scrapbook.tabs.searchResult" type="bool" />
             <preference id="extensions.scrapbook.tabs.note"         name="extensions.scrapbook.tabs.note"         type="bool" />
         </preferences>
-        <vbox flex="1" style="overflow: auto;">
+        <vbox flex="1">
         <description value="&sb.prefs.tabs.tips;:" />
         <checkbox preference="extensions.scrapbook.tabs.open"         label="&sb.open;" />
         <checkbox preference="extensions.scrapbook.tabs.openSource"   label="&sb.open.source;" />
@@ -142,7 +141,7 @@
             <preference id="extensions.scrapbook.edit.wrapperFormat.9" name="extensions.scrapbook.edit.wrapperFormat.9" type="string" />
             <preference id="extensions.scrapbook.edit.wrapperFormat.0" name="extensions.scrapbook.edit.wrapperFormat.0" type="string" />
         </preferences>
-        <vbox flex="1" style="overflow: auto;">
+        <vbox flex="1">
         <groupbox>
             <caption label="&sb.highlighter;" />
             <hbox align="center">
@@ -252,7 +251,7 @@
             <preference id="extensions.scrapbook.tree.autoCollapse" name="extensions.scrapbook.tree.autoCollapse" type="bool" />
             <preference id="extensions.scrapbook.tree.unshift"      name="extensions.scrapbook.tree.unshift"      type="bool" />
         </preferences>
-        <vbox flex="1" style="overflow: auto;">
+        <vbox flex="1">
         <groupbox>
             <caption id="sbDataCaption" label="&sb.prefs.data;" />
             <radiogroup id="sbDataDefault"
@@ -296,7 +295,7 @@
             <preference id="extensions.scrapbook.notifyPageCaptured" name="extensions.scrapbook.notifyPageCaptured" type="bool" />
             <preference id="extensions.scrapbook.autoOutput"         name="extensions.scrapbook.autoOutput"   type="bool" />
         </preferences>
-        <vbox flex="1" style="overflow: auto;">
+        <vbox flex="1">
         <checkbox preference="extensions.scrapbook.asciiFilename" label="&sb.prefs.asciiFilename;" />
         <checkbox preference="extensions.scrapbook.showDetailOnDrop" label="&sb.prefs.showDetailOnDrop;" />
         <checkbox preference="extensions.scrapbook.notifyOnComplete" label="&sb.prefs.notifyOnComplete;" />
