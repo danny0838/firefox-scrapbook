@@ -206,8 +206,16 @@ browser {
 }
 
 
-/* ::::: NOTE (Fix for Firefox 3.5) ::::: */
+/* ::::: NOTE ::::: */
 
-textbox[class="plain"] {
-    background-color: -moz-Field;
+#sbNoteExpand {
+    list-style-image: url("chrome://scrapbook/skin/expander.png");
+}
+
+#sbNoteTextBg {
+    padding-left: 2px;
+}
+
+#sbNoteTextbox {
+    background-color: -moz-Field; /* Fix for Firefox 3.5 */
 }
