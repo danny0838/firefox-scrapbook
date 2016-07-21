@@ -1,10 +1,10 @@
 Scrapbook X 1.12.37
 ----------------
 
-- FIXED: Item icons are not exported, previewed, or imported correctly if it links a file in the ScrapBook icon folder or in the data folder of another item.
-- FIXED: Combine wizard fails out if the "tree" folder does not exist.
+- FIXED: Item icons are not exported, previewed, or imported correctly if it links to a file in the ScrapBook icon folder or in the data folder of another item.
+- FIXED: Combine wizard freezes up if the "tree" folder does not exist.
 - FIXED: Note pages now are opened in the new tab according to the option "Edit Note" instead of "Open".
-- FIXED: Restored a button of the Note editor to exit HTML view mode.
+- FIXED: Restored a missing button of the note editor to exit HTML view mode.
 
 
 Scrapbook X 1.12.36
