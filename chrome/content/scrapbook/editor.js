@@ -157,24 +157,22 @@ var sbPageEditor = {
 
     handleKeyEvent: function(aEvent) {
         if (!sbPageEditor.enabled || sbHtmlEditor.enabled || sbDOMEraser.enabled) return;
+        var shortcut = Shortcut.fromEvent(aEvent);
         // F9
-        if (aEvent.keyCode == aEvent.DOM_VK_F9 &&
-            !aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
+        if (shortcut.toString() == "F9") {
             sbDOMEraser.init(1);
             aEvent.preventDefault();
             return;
         }
         // F10
-        if (aEvent.keyCode == aEvent.DOM_VK_F10 &&
-            !aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
+        if (shortcut.toString() == "F10") {
             sbHtmlEditor.init(null, 1);
             aEvent.preventDefault();
             return;
         }
         // 1-8 or Alt + 1-8
-        var idx = aEvent.keyCode - (aEvent.DOM_VK_1 - 1);
-        if ((idx >= 1) && (idx <= 8) &&
-            !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
+        if (/^(?:Alt\+)?([1-8])$/.test(shortcut.toString())) {
+            var idx = parseInt(RegExp.$1, 10);
             sbPageEditor.highlight(idx);
             return;
         }

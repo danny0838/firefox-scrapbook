@@ -503,7 +503,8 @@ var sbMenuHandler = {
             default: url = this.baseURL + "data/" + id + "/index.html";
         }
         var openInTab = sbCommonUtils.getPref(pref, false);
-        sbCommonUtils.loadURL(url, openInTab || event.button == 1 || event.ctrlKey || event.shiftKey);
+        var shortcut = Shortcut.fromEvent(event);
+        sbCommonUtils.loadURL(url, openInTab || event.button == 1 || shortcut.accelKey || shortcut.shiftKey);
         event.stopPropagation();
     },
 

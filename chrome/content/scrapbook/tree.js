@@ -42,12 +42,13 @@ var sbTreeHandler = {
         if ( !obj.value || obj.value == "twisty" ) return;
 
         var curIdx = this.TREE.currentIndex;
+        var shortcut = Shortcut.fromEvent(aEvent);
         if (aType == 2 && !sbCommonUtils.getPref("ui.sidebarManage", false)) {
             // non-manage window:
             // simple click to open item; mid-, ctrl-, and shift-click to open in new tab
             // for folders, click or mid-click to toggle
             if (sbDataSource.getProperty(this.resource, "type") != "folder") {
-                sbController.open(this.resource, aEvent.button == 1 || aEvent.ctrlKey || aEvent.shiftKey);
+                sbController.open(this.resource, aEvent.button == 1 || shortcut.accelKey || shortcut.shiftKey);
             } else {
                 this.toggleFolder(curIdx);
             }
@@ -61,25 +62,30 @@ var sbTreeHandler = {
 
     // simple Enter on container: toggle container (natively), no keypress event
     onKeyPress: function(aEvent, aType) {
-        switch ( aEvent.keyCode || aEvent.which ) {
-            case aEvent.DOM_VK_RETURN:
+        var shortcut = Shortcut.fromEvent(aEvent);
+        switch (shortcut.keyName) {
+            case "Return":
                 // Enter to open item; Ctrl/Shift+Enter to open in new tab
                 // Enter for non-folder containers will toggle natively
                 if ( sbDataSource.getProperty(this.resource, "type") != "folder" ) {
-                    sbController.open(this.resource, aEvent.ctrlKey || aEvent.shiftKey);
+                    sbController.open(this.resource, shortcut.accelKey || shortcut.shiftKey);
                 }
                 break;
-            case aEvent.DOM_VK_SPACE: 
+            case "Space":
                 // non-manage window:
                 // Space to open item; Ctrl/Shift+Space to open in new tab
                 if (aType == 2 && !sbCommonUtils.getPref("ui.sidebarManage", false)) {
                     if (sbDataSource.getProperty(this.resource, "type") != "folder") {
-                        sbController.open(this.resource, aEvent.ctrlKey || aEvent.shiftKey);
+                        sbController.open(this.resource, shortcut.accelKey || shortcut.shiftKey);
                     }
                 }
                 break;
-            case aEvent.DOM_VK_DELETE: this.remove(); break;
-            case aEvent.DOM_VK_F2: sbController.forward(this.resource, "P"); break;
+            case "Delete":
+                this.remove();
+                break;
+            case "F2":
+                sbController.forward(this.resource, "P");
+                break;
         }
     },
 
@@ -88,7 +94,8 @@ var sbTreeHandler = {
         if ( aEvent.originalTarget.localName != "treechildren" || aEvent.button != 0 ) return;
         if ( !(aType < 2 || sbCommonUtils.getPref("ui.sidebarManage", false)) ) return;
         if ( this.TREE.view.isContainer(this.TREE.currentIndex) ) return;
-        sbController.open(this.resource, aEvent.ctrlKey || aEvent.shiftKey);
+        var shortcut = Shortcut.fromEvent(aEvent);
+        sbController.open(this.resource, shortcut.accelKey || shortcut.shiftKey);
     },
 
 
