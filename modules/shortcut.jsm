@@ -10,16 +10,11 @@ this.EXPORTED_SYMBOLS = ["Shortcut"];
 
 const { sbCommonUtils } = Components.utils.import("resource://scrapbook-modules/common.jsm", {});
 
-/**
- * Shortcut class
- */
-
 // possible values of nsIXULRuntime.OS:
 // https://developer.mozilla.org/en/OS_TARGET
 const nsIXULRuntime = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULRuntime);
 const isMac = (nsIXULRuntime.OS.substring(0, 3).toLowerCase() == "mac");
-const keyCodeToNameMap = {};
-const keyNameToCodeMap = {};
+
 const keyNameToUIStringMap = {
     "Back_Quote": "`",
     "Hyphen_Minus": "-",
@@ -63,8 +58,13 @@ const keyNameToUIStringMap = {
     "Multiply": "Num*",
 };
 
+// Retrieve native nsIDOMKeyEvent constants and build keyCode<->keyName map
+// Convert DOM_VK_XXX_YYY to the form Xxx_Yyy
+//
 // Ths list of nsIDOMKeyEvent constants can be found here:
 // https://dxr.mozilla.org/mozilla-central/source/dom/interfaces/events/nsIDOMKeyEvent.idl
+const keyCodeToNameMap = {};
+const keyNameToCodeMap = {};
 (function () {
     var keys = Components.interfaces.nsIDOMKeyEvent;
     for (var name in keys) {
