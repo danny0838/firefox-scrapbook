@@ -1,5 +1,9 @@
 /* ::::: TRADE ::::: */
 
+#sbTradeHeader {
+    padding:3px 1px;
+}
+
 tree {
     -moz-appearance: listbox;
 }
@@ -14,6 +18,18 @@ tree#sbTradeTree treechildren::-moz-tree-cell-text(separator) {
     color: GrayText;
 }
 
+#sbTradeToolbar {
+    padding-top: 2px;
+}
+
+#sbTradeExportButton {
+    list-style-image: url("chrome://scrapbook/skin/expander.png");
+}
+
+#sbTradeImportButton {
+    list-style-image: url("chrome://scrapbook/skin/expander_left.png");
+}
+
 #sbTradeLog {
     height: 6.4em;
     -moz-appearance: listbox;
@@ -24,5 +40,3 @@ tree#sbTradeTree treechildren::-moz-tree-cell-text(separator) {
     height: 16px;
     margin-left: 5px;
 }
-
-

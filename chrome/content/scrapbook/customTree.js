@@ -1,6 +1,4 @@
 
-const ATOM_SERVICE = Components.classes['@mozilla.org/atom-service;1'].getService(Components.interfaces.nsIAtomService);
-
 function sbCustomTreeView(aColIDs, aItems) {
     this._items = aItems;
     this._rowCount = aItems.length;

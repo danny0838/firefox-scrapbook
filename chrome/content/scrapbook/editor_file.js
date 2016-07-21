@@ -24,12 +24,14 @@ function accept() {
 }
 
 function pickFile() {
-    var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-    FP.init(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), FP.modeOpen);
-    var ret = FP.show();
-    if ( ret != FP.returnOK ) return false;
-    document.getElementById("sbFilePath").label = FP.file.path;
-    document.getElementById("sbFilePath").value = FP.file;
+    var pickedFile = sbCommonUtils.showFilePicker({
+        window: window,
+        title: sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"),
+        mode: 0, // modeOpen
+    });
+    if ( !pickedFile ) return false;
+    document.getElementById("sbFilePath").label = pickedFile.path;
+    document.getElementById("sbFilePath").value = pickedFile;
     return true;
 }
 

@@ -121,7 +121,7 @@ var sbMainService = {
         // check the template file, create one if not exist
         var template = sbCommonUtils.getScrapBookDir().clone();
         template.append("notex_template.html");
-        if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/notex_template.html", template);
+        if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/skin/notex_template.html", template);
         // create content
         var dir = sbCommonUtils.getContentDir(newItem.id);
         var html = dir.clone();

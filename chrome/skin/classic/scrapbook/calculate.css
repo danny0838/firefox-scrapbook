@@ -1,0 +1,20 @@
+#sbCalcWindow {
+    width: 500px;
+    height: 450px;
+}
+
+#sbCalcHeader {
+    margin: 10px 10px 0px 10px;
+}
+
+#sbTree {
+    margin: 12px;
+}
+
+#sbCalcStatus {
+    border-top: 1px solid ThreeDShadow;
+}
+
+#sbCalcProgress {
+    width: 160px;
+}

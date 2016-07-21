@@ -82,10 +82,10 @@
             <hbox id="sbNoteHeader" class="sb-header" align="center">
                 <label id="sbNoteLabel" flex="1" crop="end" />
                 <spacer flex="1" />
-                <toolbarbutton image="chrome://scrapbook/skin/expander.png" tooltiptext="&sb.note.opentab;" style="-moz-appearance:none;" oncommand="sbNoteService.expand();" />
+                <toolbarbutton id="sbNoteExpand" tooltiptext="&sb.note.opentab;" oncommand="sbNoteService.expand();" />
                 <toolbarbutton class="sb-header-exit" tooltiptext="&sb.note.close;" oncommand="sbNoteService.exit();" />
             </hbox>
-            <vbox flex="1" style="padding-left: 2px;">
+            <vbox id="sbNoteTextBg" flex="1">
                 <textbox id="sbNoteTextbox" multiline="true" class="plain" flex="1" tabindex="1" oninput="sbNoteService.change(true);" onkeypress="sbNoteService.insertString(event);" />
             </vbox>
         </vbox>

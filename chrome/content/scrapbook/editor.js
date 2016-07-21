@@ -78,7 +78,7 @@ var sbPageEditor = {
             icon.src = this.item.icon || sbCommonUtils.getDefaultIcon(this.item.type);
             try {
                 var curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
-                var url = sbCommonUtils.convertFilePathToURL(curFile.parent.path);
+                var url = sbCommonUtils.convertFileToURL(curFile.parent);
                 icon.onclick = function(aEvent){ sbCommonUtils.loadURL(url, aEvent.button == 1); };
             } catch(ex) {
                 sbCommonUtils.error(ex);
@@ -353,7 +353,7 @@ var sbPageEditor = {
         var win = sbCommonUtils.getFocusedWindow();
         var sel = this.getSelection(win);
         if ( !sel ) return;
-        aElement.value = sbCommonUtils.crop(sbCommonUtils.crop(sel.toString().replace(/[\r\n\t\s]+/g, " "), 180, true), 150);
+        aElement.value = sbCommonUtils.crop(sel.toString().replace(/[\r\n\t\s]+/g, " "), 150, 180);
         sel.removeAllRanges();
         sbCommonUtils.documentData(window.content.document, "propertyChanged", true);
     },
@@ -1086,7 +1086,7 @@ var sbHtmlEditor = {
                 // check the template file, create one if not exist
                 var template = sbCommonUtils.getScrapBookDir().clone();
                 template.append("notex_template.html");
-                if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/notex_template.html", template);
+                if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/skin/notex_template.html", template);
                 // create content
                 var content = sbCommonUtils.readFile(template);
                 content = sbCommonUtils.convertToUnicode(content, "UTF-8");
@@ -2427,7 +2427,7 @@ var sbAnnotationService = {
         if ( !sel ) return;
         // check and get the annotation
         var ret = {};
-        if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("EDIT_INLINE", sbCommonUtils.crop(sel.toString(), 80, true)), ret, null, {}) ) return;
+        if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("EDIT_INLINE", sbCommonUtils.crop(sel.toString(), null, 80)), ret, null, {}) ) return;
         if ( !ret.value ) return;
         // apply
         sbPageEditor.allowUndo(win.document);
@@ -2445,7 +2445,7 @@ var sbAnnotationService = {
         var doc = aElement.ownerDocument;
         // check and get the annotation
         var ret = { value: aElement.getAttribute("title") };
-        if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("EDIT_INLINE", sbCommonUtils.crop(aElement.textContent, 80, true)), ret, null, {}) ) return;
+        if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("EDIT_INLINE", sbCommonUtils.crop(aElement.textContent, null, 80)), ret, null, {}) ) return;
         // apply
         sbPageEditor.allowUndo(doc);
         var els = sbCommonUtils.getSbObjectsById(aElement);
@@ -2525,12 +2525,14 @@ var sbAnnotationService = {
             var htmlFile = sbCommonUtils.convertURLToFile(win.location.href);
             if (!htmlFile) return;
             // prompt a window to select file
-            var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-            FP.init(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), FP.modeOpen);
-            var ret = FP.show();
-            if ( ret != FP.returnOK ) return;
+            var pickedFile = sbCommonUtils.showFilePicker({
+                window: window,
+                title: sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"),
+                mode: 0, // modeOpen
+            });
+            if ( !pickedFile ) return;
             // upload the file
-            var filename = FP.file.leafName;
+            var filename = pickedFile.leafName;
             var filename2 = sbCommonUtils.validateFileName(filename);
             try {
                 var destFile = htmlFile.parent.clone();
@@ -2539,7 +2541,7 @@ var sbAnnotationService = {
                     if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("EDIT_ATTACH_FILE_OVERWRITE", filename2)) ) return;
                     destFile.remove(false);
                 }
-                FP.file.copyTo(destFile.parent, filename2);
+                pickedFile.copyTo(destFile.parent, filename2);
             } catch(ex) {
                 sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("EDIT_ATTACH_FILE_INVALID", filename2));
                 return;
@@ -2610,12 +2612,10 @@ var sbInfoViewer = {
         var isTypeSite = (sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "site");
         document.getElementById("ScrapBookInfoHome").disabled = !isTypeSite;
         document.getElementById("ScrapBookInfoSite").disabled = !isTypeSite;
-        document.getElementById("ScrapBookInfoHome").setAttribute("image", "chrome://scrapbook/skin/info_home" + (isTypeSite ? "1" : "0") +  ".png");
-        document.getElementById("ScrapBookInfoSite").setAttribute("image", "chrome://scrapbook/skin/info_link" + (isTypeSite ? "1" : "0") +  ".png");
         // source image --> link to parent directory
         try {
             var curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
-            var url = sbCommonUtils.convertFilePathToURL(curFile.parent.path);
+            var url = sbCommonUtils.convertFileToURL(curFile.parent);
             var srcImage = document.getElementById("ScrapBookInfobar").firstChild;
             srcImage.onclick = function(aEvent){ sbCommonUtils.loadURL(url, aEvent.button == 1); };
         } catch(ex) {
@@ -2731,7 +2731,7 @@ var sbInfoViewer = {
 
     loadFile: function(aFileName) {
         var file = sbCommonUtils.getContentDir(sbPageEditor.item.id); file.append(aFileName);
-        var url = sbCommonUtils.convertFilePathToURL(file.path);
+        var url = sbCommonUtils.convertFileToURL(file);
         var dataXml = sbCommonUtils.convertURLToFile(url);
         // later Firefox version doesn't allow loading .xsl in the upper directory
         // if it's requested, patch it

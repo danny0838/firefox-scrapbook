@@ -144,7 +144,7 @@ var sbSearchResult = {
             var val = this._items[row][6];
             // Gecko >= 22 (Firefox >= 22): do not take properties and requires a return value
             if (properties) {
-                properties.AppendElement(ATOM_SERVICE.getAtom(val));
+                properties.AppendElement(sbCommonUtils.ATOM.getAtom(val));
             } else {
                 return val;
             }
@@ -453,7 +453,7 @@ var sbCacheService = {
                 case "html":
                     var content = sbCommonUtils.readFile(aFile);
                     content = sbCommonUtils.convertToUnicode(content, charset);
-                    contents.push(sbCacheService.convertHTML2Text(content));
+                    contents.push(sbCommonUtils.convertHTMLtoText(content));
                     break;
                 case "text":
                     if (charset) {
@@ -551,20 +551,6 @@ var sbCacheService = {
         })();
     },
 
-    convertHTML2Text: function(aStr) {
-        var FORMAT_CONVERTER = Components.classes['@mozilla.org/widget/htmlformatconverter;1'].createInstance(Components.interfaces.nsIFormatConverter);
-        var fromStr = Components.classes['@mozilla.org/supports-string;1'].createInstance(Components.interfaces.nsISupportsString);
-        var toStr = { value: null };
-        fromStr.data = aStr;
-        try {
-            FORMAT_CONVERTER.convert("text/html", fromStr, fromStr.toString().length, "text/unicode", toStr, {});
-            toStr = toStr.value.QueryInterface(Components.interfaces.nsISupportsString);
-            return toStr.toString();
-        } catch(ex) {
-            return aStr;
-        }
-    },
-
 };
 
 
@@ -576,14 +562,7 @@ var sbCacheSource = {
     container: null,
 
     init: function() {
-        if ( !gCacheFile.exists() ) {
-            var iDS = Components.classes["@mozilla.org/rdf/datasource;1?name=xml-datasource"].createInstance(Components.interfaces.nsIRDFDataSource);
-            sbCommonUtils.RDFCU.MakeSeq(iDS, sbCommonUtils.RDF.GetResource("urn:scrapbook:cache"));
-            var iFileUrl = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newFileURI(gCacheFile);
-            iDS.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).FlushTo(iFileUrl.spec);
-        }
-        var filePath = sbCommonUtils.IO.newFileURI(gCacheFile).spec;
-        this.dataSource = sbCommonUtils.RDF.GetDataSourceBlocking(filePath);
+        this.dataSource = sbCommonUtils.getRDFDataSource(gCacheFile, "urn:scrapbook:cache");
         this.container = Components.classes['@mozilla.org/rdf/container;1'].createInstance(Components.interfaces.nsIRDFContainer);
         try {
             this.container.Init(this.dataSource, sbCommonUtils.RDF.GetResource("urn:scrapbook:cache"));

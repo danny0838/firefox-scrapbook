@@ -1,3 +1,30 @@
+#sbCaptureWindow.simple {
+    width: 360px;
+}
+
+#sbCaptureWindow.complex {
+    width: 800px;
+    height: 600px;
+}
+
+#sbpURLList {
+    margin: 0px;
+}
+
+#sbpChkFilter {
+    margin-top: 5px;
+    margin-bottom: 7px;
+}
+
+#sbpFilterBox {
+    border: 1px solid black;
+    padding: 4px;
+}
+
+#sbpTreeFilter {
+    margin: 0px;
+}
+
 /* ::::: INDICATOR ::::: */
 
 listitem[indicated="true"] {
@@ -39,14 +66,14 @@ toolbarbutton dropmarker {
 treechildren::-moz-tree-checkbox {
   /* unchecked checkbox treecells. This style MUST come before treechildren::-moz-tree-checkbox(checked) otherwise it won't take effect. */
   /* list-style-image: none; */
-  list-style-image: url("chrome://scrapbook/skin/sbpExtra/cbox-not-check.gif");
+  list-style-image: url("chrome://scrapbook/skin/cbox-not-check.gif");
 }
 
 treechildren::-moz-tree-checkbox(checked) {
   /* checked checkbox treecells. cbox-check.gif isn't available in
      Firefox 1, 2, and 3 in Mac OS X so you should specify a URL to an image
      in your extension or elsewhere. */
-  list-style-image: url("chrome://scrapbook/skin/sbpExtra/cbox-check.gif");
+  list-style-image: url("chrome://scrapbook/skin/cbox-check.gif");
 }
 
 treechildren::-moz-tree-checkbox(disabled) {
