@@ -45,7 +45,7 @@ prefpane > description {
 }
 
 #keysPane textbox {
-    width: 120px;
+    width: 180px;
 }
 
 #keysPane textbox[maxlength="1"] {

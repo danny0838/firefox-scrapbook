@@ -31,31 +31,17 @@ const keyNameToUIStringMap = {
     "Up": "\u2191",
     "Right": "\u2192",
     "Down": "\u2193",
-    "BackSpace": "\u232B",
-    "Return": "\u21B5", // U+23CE, U+21A9
-    "Space": "\u2423",
-    "Escape": "Esc", // U+238B, U+241B
+    "Return": "Enter",
+    "Escape": "Esc",
     "PageUp": "PgUp",
     "PageDown": "PgDn",
     "Insert": "Ins",
     "Delete": "Del", // U+2326, U+2421
-    // "Tab": "\u21E5",
-    // "CapsLock": "\u21EA",
-    "Numpad0": "Num0",
-    "Numpad1": "Num1",
-    "Numpad2": "Num2",
-    "Numpad3": "Num3",
-    "Numpad4": "Num4",
-    "Numpad5": "Num5",
-    "Numpad6": "Num6",
-    "Numpad7": "Num7",
-    "Numpad8": "Num8",
-    "Numpad9": "Num9",
-    "Decimal": "Num.",
-    "Add": "Num+",
-    "Subtract": "Num-",
-    "Divide": "Num/",
-    "Multiply": "Num*",
+    "Decimal": "Numpad.",
+    "Add": "Numpad+",
+    "Subtract": "Numpad-",
+    "Multiply": "Numpad*",
+    "Divide": "Numpad/",
 };
 
 // Mac style keys
@@ -64,7 +50,17 @@ const keyNameToUIStringMapMac = {
     "Ctrl": "\u2303",
     "Alt": "\u2325",
     "Shift": "\u21E7",
+    "Return": "\u21A9", // U+23CE, U+21B5; Numpad Enter is same as Return in Firefox
+    "Tab": "\u21E5",
     "CapsLock": "\u21EA",
+    "Space": "\u2423",
+    "Escape": "\u238B", // U+241B
+    "PageUp": "\u21DE",
+    "PageDown": "\u21DF",
+    "Home": "\u2196",
+    "End": "\u2198",
+    "BackSpace": "\u232B",
+    "Delete": "\u2326", // U+2421
 };
 
 // Retrieve native nsIDOMKeyEvent constants and build keyCode<->keyName map
