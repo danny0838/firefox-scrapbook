@@ -487,13 +487,14 @@ var sbMenuHandler = {
         var id = sbDataSource.getProperty(res, "id");
         if (!id)
             return;
-        var url;
+        var url, pref = "tabs.open";
         switch (sbDataSource.getProperty(res, "type")) {
             case "note": url = "chrome://scrapbook/content/note.xul?id=" + id; break;
+            case "notex": pref = "tabs.note"; break;
             case "bookmark": url = sbDataSource.getProperty(res, "source"); break;
             default: url = this.baseURL + "data/" + id + "/index.html";
         }
-        var openInTab = sbCommonUtils.getPref("tabs.open", false);
+        var openInTab = sbCommonUtils.getPref(pref, false);
         sbCommonUtils.loadURL(url, openInTab || event.button == 1 || event.ctrlKey || event.shiftKey);
         event.stopPropagation();
     },

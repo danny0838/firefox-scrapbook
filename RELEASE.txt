@@ -1,8 +1,17 @@
+Scrapbook X 1.12.37
+----------------
+
+- FIXED: Item icons are not exported, previewed, or imported correctly if it links to a file in the ScrapBook icon folder or in the data folder of another item.
+- FIXED: Combine wizard freezes up if the "tree" folder does not exist.
+- FIXED: Note pages now are opened in the new tab according to the option "Edit Note" instead of "Open".
+- FIXED: Restored a missing button of the note editor to exit HTML view mode.
+
+
 Scrapbook X 1.12.36
 ----------------
 
-- FIXED: Icons in the ScrapBook icon folder are missing in "Output HTML tree".
-- FIXED: Some item icons in the combined page use chrome: protocol and thus not protable.
+- FIXED: Item icons in the ScrapBook icon folder are missing in "Output HTML tree".
+- FIXED: Some item icons in the combined page use chrome: protocol and thus not portable.
 - FIXED: A potential file reading error for Firefox < 4.0.
 - UPDATE: Internal code optimization.
 
