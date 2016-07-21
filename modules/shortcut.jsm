@@ -58,6 +58,15 @@ const keyNameToUIStringMap = {
     "Multiply": "Num*",
 };
 
+// Mac style keys
+const keyNameToUIStringMapMac = {
+    "Meta": "\u2318",
+    "Ctrl": "\u2303",
+    "Alt": "\u2325",
+    "Shift": "\u21E7",
+    "CapsLock": "\u21EA",
+};
+
 // Retrieve native nsIDOMKeyEvent constants and build keyCode<->keyName map
 // Convert DOM_VK_XXX_YYY to the form XxxYyy
 //
@@ -144,48 +153,53 @@ Shortcut.prototype = {
         return this.getAccelKeyCode = getAccelKeyCode();
     },
 
+    // return an array containing the keys
+    getKeys: function() {
+        var mainKey = this.keyName || "";
+        if (["Win", "Control", "Alt", "Shift"].indexOf(mainKey) != -1) {
+            mainKey = "";
+        }
+        var parts = Array.prototype.slice.call(this.modifiers);
+        parts.push(mainKey);
+        return parts;
+    },
+
     // return the normalized string
     toString: function () {
-        var mainKey = this.keyName || "";
-        var parts = Array.prototype.slice.call(this.modifiers);
-        if (["Win", "Control", "Alt", "Shift"].indexOf(mainKey) == -1) {
-            parts.push(mainKey);
-        } else {
-            parts.push("");
-        }
-        return parts.join("+");
+        return this.getKeys().join("+");
     },
 
     // return the string which is nice to show in the UI
     getUIString: function () {
-        var mainKey = this.keyName || "";
-        var parts = Array.prototype.slice.call(this.modifiers);
-        if (["Win", "Control", "Alt", "Shift"].indexOf(this.keyName) == -1) {
-            mainKey = keyNameToUIStringMap[mainKey] || mainKey;
-        } else {
-            mainKey = "";
-        }
-        parts.push(mainKey);
+        var that = this;
+        return this.getKeys().map(function(key) {
+            // replace Accel
+            if (key == "Accel") {
+                if (that.getAccelKeyCode == 17) {
+                    key = "Ctrl";
+                } else if (that.getAccelKeyCode == 224) {
+                    key = "Meta";
+                } else if (that.getAccelKeyCode == 18) {
+                    key = "Alt";
+                } else if (that.getAccelKeyCode == 16) {
+                    key = "Shift";
+                }
+            }
 
-        var keys = parts.join("+");
+            // use Mac symbol if it's Mac
+            if (isMac) {
+                if (keyNameToUIStringMapMac[key]) {
+                    return keyNameToUIStringMapMac[key];
+                }
+            }
 
-        // replace Accel
-        if (this.getAccelKeyCode == 17) {
-            keys = keys.replace("Accel", "Ctrl");
-        } else if (this.getAccelKeyCode == 224) {
-            keys = keys.replace("Accel", "Meta");
-        } else if (this.getAccelKeyCode == 18) {
-            keys = keys.replace("Accel", "Alt");
-        } else if (this.getAccelKeyCode == 16) {
-            keys = keys.replace("Accel", "Shift");
-        }
+            // use the string for output
+            if (keyNameToUIStringMap[key]) {
+                return keyNameToUIStringMap[key];
+            }
 
-        // use key symbols for Mac
-        if (isMac) {
-            keys = keys.replace("Meta", "\u2318").replace("Ctrl", "\u2303").replace("Alt", "\u2325").replace("Shift", "\u21E7").replace("CapsLock", "\u21EA");
-        }
-
-        return keys;
+            return key;
+        }).join("+");
     },
 
     // return the keycode attribute for XUL <key> elements
