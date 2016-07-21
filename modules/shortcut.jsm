@@ -16,12 +16,12 @@ const nsIXULRuntime = Components.classes["@mozilla.org/xre/app-info;1"].getServi
 const isMac = (nsIXULRuntime.OS.substring(0, 3).toLowerCase() == "mac");
 
 const keyNameToUIStringMap = {
-    "Back_Quote": "`",
-    "Hyphen_Minus": "-",
+    "BackQuote": "`",
+    "HyphenMinus": "-",
     "Equals": "=",
-    "Back_Slash": "\\",
-    "Open_Bracket": "[",
-    "Close_Bracket": "]",
+    "BackSlash": "\\",
+    "OpenBracket": "[",
+    "CloseBracket": "]",
     "Semicolon": ";",
     "Quote": '"',
     "Comma": ",",
@@ -31,16 +31,16 @@ const keyNameToUIStringMap = {
     "Up": "\u2191",
     "Right": "\u2192",
     "Down": "\u2193",
-    "Back_Space": "\u232B",
+    "BackSpace": "\u232B",
     "Return": "\u21B5", // U+23CE, U+21A9
     "Space": "\u2423",
     "Escape": "Esc", // U+238B, U+241B
-    "Page_Up": "PgUp",
-    "Page_Down": "PgDn",
+    "PageUp": "PgUp",
+    "PageDown": "PgDn",
     "Insert": "Ins",
     "Delete": "Del", // U+2326, U+2421
     // "Tab": "\u21E5",
-    // "Caps_Lock": "\u21EA",
+    // "CapsLock": "\u21EA",
     "Numpad0": "Num0",
     "Numpad1": "Num1",
     "Numpad2": "Num2",
@@ -59,7 +59,7 @@ const keyNameToUIStringMap = {
 };
 
 // Retrieve native nsIDOMKeyEvent constants and build keyCode<->keyName map
-// Convert DOM_VK_XXX_YYY to the form Xxx_Yyy
+// Convert DOM_VK_XXX_YYY to the form XxxYyy
 //
 // Ths list of nsIDOMKeyEvent constants can be found here:
 // https://dxr.mozilla.org/mozilla-central/source/dom/interfaces/events/nsIDOMKeyEvent.idl
@@ -70,7 +70,7 @@ const keyNameToCodeMap = {};
     for (var name in keys) {
         if (name.match(/^DOM_VK_/)) {
             var keyName = RegExp.rightContext.toLowerCase().replace(/(^|_)([a-z])/g, function(){
-                return arguments[1] + arguments[2].toUpperCase();
+                return arguments[2].toUpperCase();
             });
             var keyCode = keys[name];
             keyCodeToNameMap[keyCode] = keyName;
@@ -175,7 +175,7 @@ Shortcut.prototype = {
 
         // use key symbols for Mac
         if (isMac) {
-            keys = keys.replace("Meta", "\u2318").replace("Ctrl", "\u2303").replace("Alt", "\u2325").replace("Shift", "\u21E7").replace("Caps_Lock", "\u21EA");
+            keys = keys.replace("Meta", "\u2318").replace("Ctrl", "\u2303").replace("Alt", "\u2325").replace("Shift", "\u21E7").replace("CapsLock", "\u21EA");
         }
 
         return keys;
@@ -184,7 +184,7 @@ Shortcut.prototype = {
     // return the keycode attribute for XUL <key> elements
     getKeyCode: function() {
         if (!this.isValid) return "";
-        return "VK_" + this.keyName.toUpperCase();
+        return "VK_" + this.keyName.replace(/(?!^)[A-Z]/g, "_$&").toUpperCase();
     },
 
     // return the modifiers attribute for XUL <key> elements

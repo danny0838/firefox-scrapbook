@@ -662,8 +662,8 @@ var sbHtmlEditor = {
 
         "Alt+U": "insertUnorderedList",
         "Alt+O": "insertOrderedList",
-        "Alt+Open_Bracket": "outdent",
-        "Alt+Close_Bracket": "indent",
+        "Alt+OpenBracket": "outdent",
+        "Alt+CloseBracket": "indent",
         "Alt+Comma": "justifyLeft",
         "Alt+Period": "justifyRight",
         "Alt+M": "justifyCenter",
