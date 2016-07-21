@@ -21,15 +21,46 @@ const isMac = (nsIXULRuntime.OS.substring(0, 3).toLowerCase() == "mac");
 const keyCodeToNameMap = {};
 const keyNameToCodeMap = {};
 const keyNameToUIStringMap = {
+    "Back_Quote": "`",
+    "Hyphen_Minus": "-",
+    "Equals": "=",
+    "Back_Slash": "\\",
+    "Open_Bracket": "[",
+    "Close_Bracket": "]",
+    "Semicolon": ";",
+    "Quote": '"',
+    "Comma": ",",
+    "Period": ".",
+    "Slash": "/",
     "Left": "\u2190",
     "Up": "\u2191",
     "Right": "\u2192",
     "Down": "\u2193",
-    "Comma": ",",
-    "Period": ".",
-    "Slash": "/",
-    "Open_Bracket": "[",
-    "Close_Bracket": "]",
+    "Back_Space": "\u232B",
+    "Return": "\u21B5", // U+23CE, U+21A9
+    "Space": "\u2423",
+    "Escape": "Esc", // U+238B, U+241B
+    "Page_Up": "PgUp",
+    "Page_Down": "PgDn",
+    "Insert": "Ins",
+    "Delete": "Del", // U+2326, U+2421
+    // "Tab": "\u21E5",
+    // "Caps_Lock": "\u21EA",
+    "Numpad0": "Num0",
+    "Numpad1": "Num1",
+    "Numpad2": "Num2",
+    "Numpad3": "Num3",
+    "Numpad4": "Num4",
+    "Numpad5": "Num5",
+    "Numpad6": "Num6",
+    "Numpad7": "Num7",
+    "Numpad8": "Num8",
+    "Numpad9": "Num9",
+    "Decimal": "Num.",
+    "Add": "Num+",
+    "Subtract": "Num-",
+    "Divide": "Num/",
+    "Multiply": "Num*",
 };
 
 // Ths list of nsIDOMKeyEvent constants can be found here:
@@ -161,7 +192,7 @@ Shortcut.prototype = {
 
         // use key symbols for Mac
         if (isMac) {
-            keys = keys.replace("Meta", "\u2318").replace("Ctrl", "\u2303").replace("Alt", "\u2325").replace("Shift", "\u21E7");
+            keys = keys.replace("Meta", "\u2318").replace("Ctrl", "\u2303").replace("Alt", "\u2325").replace("Shift", "\u21E7").replace("Caps_Lock", "\u21EA");
         }
 
         return keys;
