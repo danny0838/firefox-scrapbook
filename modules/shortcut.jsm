@@ -227,7 +227,8 @@ Shortcut.fromString = function (str) {
 
 Shortcut.fromEvent = function (event) {
     var data = {};
-    data.keyCode = event.keyCode;
+    // sometimes keyCode is 0 (e.g. Space onkeypress), and we need event.which to get it
+    data.keyCode = event.keyCode || event.which;
 
     // We haven't instintiate Shortcut object now. Read if from current pref.
     var accelKeyCode = getAccelKeyCode();
