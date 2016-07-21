@@ -1,0 +1,37 @@
+Scrapbook X 1.13.0b8
+====================
+
+Compatibility Notes
+-------------------
+
+ * Since this release we support customized hotkey combination. The recorded hotkey format is different to older ScrapBook versions, and as a result, if you switch from or back to the old version, you'd have to reset related hotkeys manually to get them work right.
+
+
+Changes since v1.13.0b7
+-----------------------
+
+Bug fixes:
+
+ * Warning about capture script does not show up in the capture detail dialog.
+
+ * Combine wizard freezes up if the "tree" folder does not exist.
+
+ * Combine wizard cannot add non-folder-type folders for combination.
+
+Functionality changes:
+
+ * Improve cross platform hotkey support, especially the command key support and the key symbol style for Macs.
+
+ * Allow customized hotkey combination in the user options.
+
+ * Slightly adjusted several styles of the user interface. 
+
+ * Restored a missing button of the note editor to exit HTML view mode.
+
+Core changes:
+
+ * Moved many styling effects to the skin CSS.
+
+ * Fixed a few potential core API error.
+
+ * Many internal code optimization and documentation improving.
