@@ -1037,7 +1037,7 @@ var sbContentSaver = {
                         var dataFile = sbContentSaver.download(dataURL, "quote");
                         if (dataFile) dataURL = dataFile;
                     } else if (!sbContentSaver.option["keepLink"]) {
-                        dataURL = this.getSkippedURL(dataURL);
+                        dataURL = sbContentSaver.getSkippedURL(dataURL);
                     }
                     break;
                 case "font":
@@ -1045,7 +1045,7 @@ var sbContentSaver = {
                         var dataFile = sbContentSaver.download(dataURL, "quote");
                         if (dataFile) dataURL = dataFile;
                     } else if (!sbContentSaver.option["keepLink"]) {
-                        dataURL = this.getSkippedURL(dataURL);
+                        dataURL = sbContentSaver.getSkippedURL(dataURL);
                     }
                     break;
             }
