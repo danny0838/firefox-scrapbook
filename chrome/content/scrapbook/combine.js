@@ -96,6 +96,7 @@ var sbCombineService = {
         // generate default tree icons
         // borrow the tree folder
         var dir = sbCommonUtils.getScrapBookDir().clone(); dir.append("tree");
+        if ( !dir.exists() ) dir.create(dir.DIRECTORY_TYPE, 0700);
         var urlHash = {
             "chrome://scrapbook/skin/treeitem.png": "treeitem.png",
             "chrome://scrapbook/skin/treenote.png": "treenote.png",
