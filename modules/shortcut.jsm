@@ -81,6 +81,13 @@ const keyNameToCodeMap = {};
 
 var printableRegex = /^[0-9A-Za-z]$/;
 
+function getAccelKeyCode() {
+    return sbCommonUtils.getPref("ui.key.accelKey", 0, true);
+}
+
+/**
+ * Shortcut class
+ */
 function Shortcut(data) {
     this.keyCode = data.keyCode;
     this.keyName = keyCodeToNameMap[this.keyCode];
@@ -134,7 +141,7 @@ Shortcut.prototype = {
 
     get getAccelKeyCode() {
         delete this.getAccelKeyCode;
-        return this.getAccelKeyCode = sbCommonUtils.getPref("ui.key.accelKey", 0, true);
+        return this.getAccelKeyCode = getAccelKeyCode();
     },
 
     // return the normalized string
@@ -213,7 +220,7 @@ Shortcut.fromEvent = function (event) {
     data.keyCode = event.keyCode;
 
     // We haven't instintiate Shortcut object now. Read if from current pref.
-    var accelKeyCode = sbCommonUtils.getPref("ui.key.accelKey", 0, true);
+    var accelKeyCode = getAccelKeyCode();
 
     // if accel key is pressed, record it as "Accel" rather than usual
     var modifiers = [];
