@@ -9,8 +9,7 @@
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         title="&mb.manager;"
         onload="gMultiBookManager.init();"
-        ondialogaccept="gMultiBookManager.done();"
-        style="width: 40em;">
+        ondialogaccept="gMultiBookManager.done();">
 
     <script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
     <script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />

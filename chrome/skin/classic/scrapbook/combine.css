@@ -1,4 +1,10 @@
-/* ::::: Combined Pages ::::: */
+/*===========================================================================
+ *  Combined Pages
+ *
+ *  This file is deprecated. We left it here only for downward compatibility
+ *  for combined pages created by ScrapBook X < 1.12.0a35,
+ *  which linked to chrome://scrapbook/skin/combine.css to work right.
+ *=========================================================================*/
 
 body {
     margin: 0px;

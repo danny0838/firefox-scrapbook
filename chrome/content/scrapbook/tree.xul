@@ -47,10 +47,10 @@
                 </menupopup>
             </menu>
             <menuseparator />
-            <menuitem id="sbPopupNewFolder"    class="menuitem-iconic sb-create" label="&sb.new.folder;..." oncommand="sbMainService.createFolder(event.ctrlKey || event.shiftKey);" />
-            <menuitem id="sbPopupNewSeparator" class="menuitem-iconic sb-create" label="&sb.new.separator;" oncommand="sbMainService.createSeparator(event.ctrlKey || event.shiftKey);" />
-            <menuitem id="sbPopupNewNote"      class="menuitem-iconic sb-create" label="&sb.new.note;"      oncommand="sbMainService.createNote(event.ctrlKey || event.shiftKey);" />
-            <menuitem id="sbPopupNewNotex"     class="menuitem-iconic sb-create" label="&sb.new.notex;"     oncommand="sbMainService.createNoteX(event.ctrlKey || event.shiftKey);" />
+            <menuitem id="sbPopupNewFolder"    class="menuitem-iconic sb-create" label="&sb.new.folder;..." oncommand="var shortcut = Shortcut.fromEvent(event); sbMainService.createFolder(shortcut.accelKey || shortcut.shiftKey);" />
+            <menuitem id="sbPopupNewSeparator" class="menuitem-iconic sb-create" label="&sb.new.separator;" oncommand="var shortcut = Shortcut.fromEvent(event); sbMainService.createSeparator(shortcut.accelKey || shortcut.shiftKey);" />
+            <menuitem id="sbPopupNewNote"      class="menuitem-iconic sb-create" label="&sb.new.note;"      oncommand="var shortcut = Shortcut.fromEvent(event); sbMainService.createNote(shortcut.accelKey || shortcut.shiftKey);" />
+            <menuitem id="sbPopupNewNotex"     class="menuitem-iconic sb-create" label="&sb.new.notex;"     oncommand="var shortcut = Shortcut.fromEvent(event); sbMainService.createNoteX(shortcut.accelKey || shortcut.shiftKey);" />
             <menuseparator />
             <menuitem id="sbPopupRemove"    class="menuitem-iconic" label="&sb.remove;"   oncommand="sbTreeHandler.remove();" />
             <menuseparator />

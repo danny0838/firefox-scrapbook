@@ -34,14 +34,7 @@ var sbDataSource = {
         try {
             this._dataFile = sbCommonUtils.getScrapBookDir();
             this._dataFile.append("scrapbook.rdf");
-            if ( !this._dataFile.exists() ) {
-                var iDS = Components.classes["@mozilla.org/rdf/datasource;1?name=xml-datasource"].createInstance(Components.interfaces.nsIRDFDataSource);
-                sbCommonUtils.RDFCU.MakeSeq(iDS, sbCommonUtils.RDF.GetResource("urn:scrapbook:root"));
-                var iFileUrl = Components.classes["@mozilla.org/network/io-service;1"].getService(Components.interfaces.nsIIOService).newFileURI(this._dataFile);
-                iDS.QueryInterface(Components.interfaces.nsIRDFRemoteDataSource).FlushTo(iFileUrl.spec);
-            }
-            var fileURL = sbCommonUtils.IO.newFileURI(this._dataFile).spec;
-            this._dataObj = sbCommonUtils.RDF.GetDataSourceBlocking(fileURL);
+            this._dataObj = sbCommonUtils.getRDFDataSource(this._dataFile, "urn:scrapbook:root");
             this._needReOutputTree = false;
         } catch(ex) {
             if ( !aQuietWarning ) sbCommonUtils.alert(lang("ERR_FAIL_INIT_DATASOURCE", ex));

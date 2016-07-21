@@ -25,10 +25,10 @@
         <toolbar id="sbMainToolbar" class="plain">
             <toolbarbutton id="sbToolbarNewFolder" type="menu">
                 <menupopup>
-                    <menuitem class="menuitem-iconic sb-create" label="&sb.new.folder;..." oncommand="sbMainService.createFolder(event.ctrlKey || event.shiftKey);" />
-                    <menuitem class="menuitem-iconic sb-create" label="&sb.new.separator;" oncommand="sbMainService.createSeparator(event.ctrlKey || event.shiftKey);" />
-                    <menuitem class="menuitem-iconic sb-create" label="&sb.new.note;"      oncommand="sbMainService.createNote(event.ctrlKey || event.shiftKey);" />
-                    <menuitem class="menuitem-iconic sb-create" label="&sb.new.notex;"     oncommand="sbMainService.createNoteX(event.ctrlKey || event.shiftKey);" />
+                    <menuitem class="menuitem-iconic sb-create" label="&sb.new.folder;..." oncommand="var shortcut = Shortcut.fromEvent(event); sbMainService.createFolder(shortcut.accelKey || shortcut.shiftKey);" />
+                    <menuitem class="menuitem-iconic sb-create" label="&sb.new.separator;" oncommand="var shortcut = Shortcut.fromEvent(event); sbMainService.createSeparator(shortcut.accelKey || shortcut.shiftKey);" />
+                    <menuitem class="menuitem-iconic sb-create" label="&sb.new.note;"      oncommand="var shortcut = Shortcut.fromEvent(event); sbMainService.createNote(shortcut.accelKey || shortcut.shiftKey);" />
+                    <menuitem class="menuitem-iconic sb-create" label="&sb.new.notex;"     oncommand="var shortcut = Shortcut.fromEvent(event); sbMainService.createNoteX(shortcut.accelKey || shortcut.shiftKey);" />
                 </menupopup>
             </toolbarbutton>
             <toolbarbutton id="sbToolbarToggle"   tooltiptext="&sb.toggle.all;"   oncommand="sbTreeHandler.toggleAllFolders();" />
@@ -82,10 +82,10 @@
             <hbox id="sbNoteHeader" class="sb-header" align="center">
                 <label id="sbNoteLabel" flex="1" crop="end" />
                 <spacer flex="1" />
-                <toolbarbutton image="chrome://scrapbook/skin/expander.png" tooltiptext="&sb.note.opentab;" style="-moz-appearance:none;" oncommand="sbNoteService.expand();" />
+                <toolbarbutton id="sbNoteExpand" tooltiptext="&sb.note.opentab;" oncommand="sbNoteService.expand();" />
                 <toolbarbutton class="sb-header-exit" tooltiptext="&sb.note.close;" oncommand="sbNoteService.exit();" />
             </hbox>
-            <vbox flex="1" style="padding-left: 2px;">
+            <vbox id="sbNoteTextBg" flex="1">
                 <textbox id="sbNoteTextbox" multiline="true" class="plain" flex="1" tabindex="1" oninput="sbNoteService.change(true);" onkeypress="sbNoteService.insertString(event);" />
             </vbox>
         </vbox>

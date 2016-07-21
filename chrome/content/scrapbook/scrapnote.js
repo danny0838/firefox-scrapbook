@@ -61,7 +61,7 @@ var sbNoteService = {
     },
 
     saveResource: function() {
-        var title = sbCommonUtils.crop(sbCommonUtils.crop(this.TEXTBOX.value.split("\n")[0].replace(/\t/g, " "), 180, true), 150);
+        var title = sbCommonUtils.crop(this.TEXTBOX.value.split("\n")[0].replace(/\t/g, " "), 150, 180);
         sbDataSource.setProperty(this.resource, "title", title);
     },
 
@@ -108,12 +108,13 @@ var sbNoteService = {
     },
 
     insertString: function(aEvent) {
-        if ( aEvent.keyCode == aEvent.DOM_VK_ESCAPE && this.sidebarContext ) { sbNoteService.exit(); return; }
-        if ( aEvent.ctrlKey || aEvent.altKey || aEvent.shiftKey ) return;
+        var shortcut = Shortcut.fromEvent(aEvent);
+        if ( shortcut.keyName == "Escape" && this.sidebarContext ) { sbNoteService.exit(); return; }
+        if ( shortcut.modifiers.length ) return;
         var str = "";
-        switch ( aEvent.keyCode ) {
-            case aEvent.DOM_VK_TAB: str = "\t"; break;
-            case aEvent.DOM_VK_F5: str = (new Date()).toLocaleString(); break;
+        switch ( shortcut.keyName ) {
+            case "Tab": str = "\t"; break;
+            case "F5": str = (new Date()).toLocaleString(); break;
             default: return;
         }
         aEvent.preventDefault();

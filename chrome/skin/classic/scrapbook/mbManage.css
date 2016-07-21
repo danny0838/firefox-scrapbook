@@ -1,5 +1,9 @@
 /* ::::: Multi-Book Manager ::::: */
 
+#mbManagerDialog {
+    width: 40em;
+}
+
 treechildren::-moz-tree-row {
     min-height: 1.8em;
 }

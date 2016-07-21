@@ -96,7 +96,7 @@ var sbOutputService = {
         sbDataSource.outputTreeAutoDone();
         if ( this.optionOpen ) {
             var fileName = this.optionFrame ? "frame.html" : "index.html";
-            sbCommonUtils.loadURL(sbCommonUtils.convertFilePathToURL(dir.path) + fileName, true);
+            sbCommonUtils.loadURL(sbCommonUtils.convertFileToURL(dir) + fileName, true);
         }
     },
 

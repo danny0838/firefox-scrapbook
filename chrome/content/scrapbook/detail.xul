@@ -2,6 +2,7 @@
 
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 <?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
+<?xml-stylesheet href="chrome://scrapbook/skin/detail.css" type="text/css" ?>
 <?xml-stylesheet href="chrome://browser/skin/places/editBookmarkOverlay.css" type="text/css" ?>
 
 <!DOCTYPE dialog SYSTEM "chrome://scrapbook/locale/message.dtd">
@@ -9,7 +10,6 @@
 <dialog id="sbDetailDialog"
         title="ScrapBook - &sb.detail;"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        style="width: 400px;"
         persist="screenX screenY"
         onload="sbCaptureOptions.init();"
         ondialogaccept="return sbCaptureOptions.accept();"
@@ -25,17 +25,17 @@
         </tabs>
         <tabpanels flex="1">
             <tabpanel orient="vertical">
-                <grid style="margin-top:3px;">
+                <grid id="sbDetailProperties">
                     <columns>
                         <column />
                         <column flex="1" />
                     </columns>
                     <rows>
-                        <row align="center" style="margin-bottom:6px;">
+                        <row id="sbDetailTitleRow" align="center">
                             <label control="sbDetailTitle" value="&sb.prop.title;:" />
                             <menulist id="sbDetailTitle" editable="true" flex="1" />
                         </row>
-                        <row id="sbDetailFolderRow" align="center" style="margin-bottom:6px;">
+                        <row id="sbDetailFolderRow" align="center">
                             <label value="&sb.prop.folder;:" />
                             <hbox>
                                 <menulist id="sbFolderList" class="folder-icon" flex="1" onclick="if ( event.button == 1 ) sbFolderSelector.onMiddleClick();" disabled="true">
@@ -46,7 +46,7 @@
                         </row>
                     </rows>
                 </grid>
-                <groupbox group="capture-options" style="margin-top:8px;">
+                <groupbox group="capture-options">
                     <caption label="&sb.detail.option;" />
                     <hbox align="center">
                     <caption label="&sb.detail.option.capture;:" />
@@ -55,14 +55,14 @@
                         <checkbox id="sbDetailOptionFonts" label="&sb.detail.option.fonts;" />
                         <checkbox id="sbDetailOptionFrames" label="&sb.detail.option.frames;" />
                         <checkbox id="sbDetailOptionStyles" label="&sb.detail.option.styles;" />
-                        <checkbox id="sbDetailOptionScript" label="&sb.detail.option.scripts;" />
+                        <checkbox id="sbDetailOptionScript" label="&sb.detail.option.scripts;" oncommand="sbCaptureOptions.updateScriptWarning();" />
                     </hbox>
                     <checkbox id="sbDetailOptionSaveDataURI" label="&sb.detail.option.saveDataURI;" />
                     <checkbox id="sbDetailOptionKeepLink" label="&sb.detail.option.keepLink;" />
                     <checkbox id="sbDetailOptionRewriteStyles" label="&sb.detail.option.rewriteStyles;" />
                     <checkbox id="sbDetailOptionAsHtml" label="&sb.detail.option.asHtml;" />
                 </groupbox>
-                <groupbox group="capture-options" style="margin-top:8px;">
+                <groupbox group="capture-options">
                     <caption label="&sb.detail.linked.file;" />
                     <description>&sb.detail.linked.file.desc;</description>
                     <hbox>
@@ -77,7 +77,7 @@
                     </hbox>
                     <textbox id="sbDetailDownLinkFilter" flex="1" multiline="true" rows="4" />
                 </groupbox>
-                <groupbox id="sbDetailInDepthBox" group="capture-options" style="margin-top:8px;">
+                <groupbox id="sbDetailInDepthBox" group="capture-options">
                     <caption label="&sb.detail.linked.page;" />
                     <hbox align="center">
                         <label id="sbDetailInDepthLabel" value="&sb.detail.linked.page.depth;:" />
@@ -115,8 +115,8 @@
                         </menulist>
                     </hbox>
                 </groupbox>
-                <description id="sbDetailWarnAboutRenew"  flex="1" style="color:red;" hidden="true">&sb.detail.warnAboutRenew;</description>
-                <description id="sbDetailWarnAboutScript" flex="1" style="color:red;">&sb.detail.warnAboutScript;</description>
+                <description id="sbDetailWarnAboutRenew"  flex="1" hidden="true">&sb.detail.warnAboutRenew;</description>
+                <description id="sbDetailWarnAboutScript" flex="1" hidden="true">&sb.detail.warnAboutScript;</description>
             </tabpanel>
             <tabpanel>
                 <textbox id="sbDetailComment" multiline="true" spellcheck="true" flex="1" />

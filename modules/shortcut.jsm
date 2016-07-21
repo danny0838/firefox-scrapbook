@@ -8,19 +8,74 @@
 
 this.EXPORTED_SYMBOLS = ["Shortcut"];
 
-/**
- * Shortcut class
- */
+const { sbCommonUtils } = Components.utils.import("resource://scrapbook-modules/common.jsm", {});
 
+// possible values of nsIXULRuntime.OS:
+// https://developer.mozilla.org/en/OS_TARGET
+const nsIXULRuntime = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULRuntime);
+const isMac = (nsIXULRuntime.OS.substring(0, 3).toLowerCase() == "mac");
+
+const keyNameToUIStringMap = {
+    "BackQuote": "`",
+    "HyphenMinus": "-",
+    "Equals": "=",
+    "BackSlash": "\\",
+    "OpenBracket": "[",
+    "CloseBracket": "]",
+    "Semicolon": ";",
+    "Quote": '"',
+    "Comma": ",",
+    "Period": ".",
+    "Slash": "/",
+    "Left": "\u2190",
+    "Up": "\u2191",
+    "Right": "\u2192",
+    "Down": "\u2193",
+    "Return": "Enter",
+    "Escape": "Esc",
+    "PageUp": "PgUp",
+    "PageDown": "PgDn",
+    "Insert": "Ins",
+    "Delete": "Del", // U+2326, U+2421
+    "Decimal": "Numpad.",
+    "Add": "Numpad+",
+    "Subtract": "Numpad-",
+    "Multiply": "Numpad*",
+    "Divide": "Numpad/",
+};
+
+// Mac style keys
+const keyNameToUIStringMapMac = {
+    "Meta": "\u2318",
+    "Ctrl": "\u2303",
+    "Alt": "\u2325",
+    "Shift": "\u21E7",
+    "Return": "\u21A9", // U+23CE, U+21B5; Numpad Enter is same as Return in Firefox
+    "Tab": "\u21E5",
+    "CapsLock": "\u21EA",
+    "Space": "\u2423",
+    "Escape": "\u238B", // U+241B
+    "PageUp": "\u21DE",
+    "PageDown": "\u21DF",
+    "Home": "\u2196",
+    "End": "\u2198",
+    "BackSpace": "\u232B",
+    "Delete": "\u2326", // U+2421
+};
+
+// Retrieve native nsIDOMKeyEvent constants and build keyCode<->keyName map
+// Convert DOM_VK_XXX_YYY to the form XxxYyy
+//
+// Ths list of nsIDOMKeyEvent constants can be found here:
+// https://dxr.mozilla.org/mozilla-central/source/dom/interfaces/events/nsIDOMKeyEvent.idl
 const keyCodeToNameMap = {};
 const keyNameToCodeMap = {};
-
 (function () {
     var keys = Components.interfaces.nsIDOMKeyEvent;
     for (var name in keys) {
         if (name.match(/^DOM_VK_/)) {
             var keyName = RegExp.rightContext.toLowerCase().replace(/(^|_)([a-z])/g, function(){
-                return arguments[1] + arguments[2].toUpperCase();
+                return arguments[2].toUpperCase();
             });
             var keyCode = keys[name];
             keyCodeToNameMap[keyCode] = keyName;
@@ -29,29 +84,135 @@ const keyNameToCodeMap = {};
     }
 })();
 
+const printableRegex = /^[0-9A-Za-z]$/;
+
+// This pref natively requires a restart to get it work,
+// and thus we only get it once and for all.
+const accelKeyCode = sbCommonUtils.getPref("ui.key.accelKey", 0, true);
+
+
+/**
+ * Shortcut class
+ */
 function Shortcut(data) {
     this.keyCode = data.keyCode;
-    this.modifiers = [];
+    this.keyName = keyCodeToNameMap[this.keyCode];
     // unify the order
-    if (data.modifiers.indexOf("Meta") !== -1) this.modifiers.push("Meta");
-    if (data.modifiers.indexOf("Ctrl") !== -1) this.modifiers.push("Ctrl");
-    if (data.modifiers.indexOf("Alt") !== -1) this.modifiers.push("Alt");
-    if (data.modifiers.indexOf("Shift") !== -1) this.modifiers.push("Shift");
+    this.accelKey = false;
+    this.metaKey = false;
+    this.ctrlKey = false;
+    this.altKey = false;
+    this.shiftKey = false;
+    this.modifiers = [];
+    if (data.modifiers.indexOf("Accel") !== -1) {
+        this.accelKey = true;
+        this.modifiers.push("Accel");
+    }
+    if (data.modifiers.indexOf("Meta") !== -1) {
+        this.metaKey = true;
+        this.modifiers.push("Meta");
+    }
+    if (data.modifiers.indexOf("Ctrl") !== -1) {
+        this.ctrlKey = true;
+        this.modifiers.push("Ctrl");
+    }
+    if (data.modifiers.indexOf("Alt") !== -1) {
+        this.altKey = true;
+        this.modifiers.push("Alt");
+    }
+    if (data.modifiers.indexOf("Shift") !== -1) {
+        this.shiftKey = true;
+        this.modifiers.push("Shift");
+    }
 }
 
-Shortcut.prototype.toString = function () {
-    var parts = [];
-    var keyName = keyCodeToNameMap[this.keyCode];
+Shortcut.prototype = {
+    get isValid() {
+        delete this.isValid;
+        return this.isValid = !!this.keyName;
+    },
 
-    // if the key is not registered, return null
-    if (!keyName) return null;
+    // A combination with all modifiers e.g. Ctrl+Alt is incomplete
+    get isComplete() {
+        delete this.isComplete;
+        if (!this.isValid) return this.isComplete = false;
+        return this.isComplete = (["Win", "Control", "Alt", "Shift"].indexOf(this.keyName) == -1);
+    },
 
-    parts = parts.concat(this.modifiers);
-    parts.push(keyName);
+    get isPrintable() {
+        delete this.isPrintable;
+        if (!this.isValid) return this.isPrintable = false;
+        return this.isPrintable = printableRegex.test(this.keyName);
+    },
 
-    return parts.join("+");
+    // return an array containing the keys
+    get getKeys() {
+        var mainKey = this.keyName || "";
+        if (["Win", "Control", "Alt", "Shift"].indexOf(mainKey) != -1) {
+            mainKey = "";
+        }
+        var parts = Array.prototype.slice.call(this.modifiers);
+        parts.push(mainKey);
+        delete this.getKeys;
+        return this.getKeys = parts;
+    },
+
+    // return the normalized string
+    toString: function () {
+        return this.getKeys.join("+");
+    },
+
+    // return the string which is nice to show in the UI
+    getUIString: function () {
+        return this.getKeys.map(function(key) {
+            // replace Accel
+            if (key == "Accel") {
+                if (accelKeyCode == 17) {
+                    key = "Ctrl";
+                } else if (accelKeyCode == 224) {
+                    key = "Meta";
+                } else if (accelKeyCode == 18) {
+                    key = "Alt";
+                } else if (accelKeyCode == 16) {
+                    key = "Shift";
+                }
+            }
+
+            // use Mac symbol if it's Mac
+            if (isMac) {
+                if (keyNameToUIStringMapMac[key]) {
+                    return keyNameToUIStringMapMac[key];
+                }
+            }
+
+            // use the string for output
+            if (keyNameToUIStringMap[key]) {
+                return keyNameToUIStringMap[key];
+            }
+
+            return key;
+        }).join("+");
+    },
+
+    // return the keycode attribute for XUL <key> elements
+    getKeyCode: function() {
+        if (!this.isValid) return "";
+        return "VK_" + this.keyName.replace(/(?!^)[A-Z]/g, "_$&").toUpperCase();
+    },
+
+    // return the modifiers attribute for XUL <key> elements
+    getModifiers: function () {
+        var modifiers = [];
+        if (this.accelKey) modifiers.push("accel");
+        if (this.metaKey) modifiers.push("meta");
+        if (this.ctrlKey) modifiers.push("control");
+        if (this.altKey) modifiers.push("alt");
+        if (this.shiftKey) modifiers.push("shift");
+        return modifiers.join(" ");
+    },
 };
 
+// returns new object from a normalized string
 Shortcut.fromString = function (str) {
     var data = {}
     var parts = str.split("+");
@@ -62,14 +223,21 @@ Shortcut.fromString = function (str) {
 
 Shortcut.fromEvent = function (event) {
     var data = {};
+    // sometimes keyCode is 0 (e.g. Space onkeypress), and we need event.which to get it
+    data.keyCode = event.keyCode || event.which;
 
-    data.keyCode = event.keyCode;
-
+    // if accel key is pressed, record it as "Accel" rather than usual
     var modifiers = [];
-    if (event.metaKey) modifiers.push("Meta");
-    if (event.ctrlKey) modifiers.push("Ctrl");
-    if (event.altKey) modifiers.push("Alt");
-    if (event.shiftKey) modifiers.push("Shift");
+    if ((event.ctrlKey && accelKeyCode == 17) ||
+        (event.metaKey && accelKeyCode == 224) ||
+        (event.altKey && accelKeyCode == 18) ||
+        (event.shiftKey && accelKeyCode == 16)) {
+        modifiers.push("Accel");
+    }
+    if (event.metaKey && accelKeyCode != 224) modifiers.push("Meta");
+    if (event.ctrlKey && accelKeyCode != 17) modifiers.push("Ctrl");
+    if (event.altKey && accelKeyCode != 18) modifiers.push("Alt");
+    if (event.shiftKey && accelKeyCode != 16) modifiers.push("Shift");
     data.modifiers = modifiers;
 
     return new Shortcut(data);

@@ -202,8 +202,7 @@ var sbCaptureTask = {
             document.getElementById("sbpChkFilter").hidden = true;
             document.getElementById("sbCaptureSkipButton").hidden = true;
         } else {
-            document.getElementById("sbCaptureWindow").style.width = "800px";
-            document.getElementById("sbCaptureWindow").style.height = "600px";
+            document.getElementById("sbCaptureWindow").className = "complex";
         }
         if (!gTitles) gTitles = [];
         for ( var i = 0; i < myURLs.length; i++ ) this.add(myURLs[i], 1, gTitles[i]);
@@ -878,7 +877,7 @@ var sbCrossLinker = {
     },
 
     createNode: function(aName, aText) {
-        aText = sbCommonUtils.crop(sbCommonUtils.crop(aText, 180, true), 150);
+        aText = sbCommonUtils.crop(aText, 150, 180);
         //Fehlermeldung könnte über Abfrage abgefangen werden.
         //Allerdings kann der Abbruch an dieser Stelle auch erwünscht sein (Nachforschungen!)
         var node = this.XML.createElement("page");
@@ -917,7 +916,7 @@ var sbCrossLinker = {
     forceReloading: function(aID, aName) {
         var file = sbCommonUtils.getContentDir(aID);
         file.append(aName + ".html");
-        var url = sbCommonUtils.convertFilePathToURL(file.path);
+        var url = sbCommonUtils.convertFileToURL(file);
         this.forceReloadingURL(url);
     },
 
@@ -966,7 +965,7 @@ function sbHeaderSniffer(aURLSpec, aRefURLSpec) {
             // manage redirect if defined
             var redirectURL = that.getHeader("Location");
             if ( redirectURL ) {
-                if ( redirectURL.indexOf("http") != 0 ) redirectURL = that._URL.resolve(redirectURL);
+                redirectURL = sbCommonUtils.resolveURL(that.URLSpec, redirectURL);
                 sbCaptureTask.start(redirectURL);
                 return;
             }
@@ -981,7 +980,6 @@ function sbHeaderSniffer(aURLSpec, aRefURLSpec) {
 
 sbHeaderSniffer.prototype = {
 
-    _URL: Components.classes['@mozilla.org/network/standard-url;1'].createInstance(Components.interfaces.nsIURL),
     _channel: null,
     _headers: null,
 
@@ -1008,8 +1006,7 @@ sbHeaderSniffer.prototype = {
         sbCaptureTask.isLocal = false;
         this._channel = null;
         try {
-            this._URL.spec = this.URLSpec;
-            this._channel = sbCommonUtils.IO.newChannelFromURI(this._URL).QueryInterface(Components.interfaces.nsIHttpChannel);
+            this._channel = sbCommonUtils.newChannel(this.URLSpec).QueryInterface(Components.interfaces.nsIHttpChannel);
             this._channel.loadFlags = this._channel.LOAD_BYPASS_CACHE;
             this._channel.setRequestHeader("User-Agent", navigator.userAgent, false);
             if ( this.refURLSpec ) this._channel.setRequestHeader("Referer", this.refURLSpec, false);
@@ -1096,7 +1093,7 @@ sbCaptureObserverCallback.onCaptureComplete = function(aItem) {
         sbDataSource.setProperty(res, "chars", aItem.chars);
         if ( gPreset[5] ) sbDataSource.setProperty(res, "type", "");
     } else if ( gContext == "internalize" ) {
-        sbCrossLinker.forceReloadingURL(sbCommonUtils.convertFilePathToURL(gOption.internalize.path));
+        sbCrossLinker.forceReloadingURL(sbCommonUtils.convertFileToURL(gOption.internalize));
     }
     sbCaptureTask.succeed();
 };

@@ -11,8 +11,7 @@ var mbEditDialog = {
         var ret = window.arguments[0];
         this._nameTextbox.value = ret.value ? ret.value[0] : "";
         if (ret.value && ret.value[1]) {
-            var file = Components.classes["@mozilla.org/file/local;1"].createInstance(Components.interfaces.nsILocalFile);
-            file.initWithPath(ret.value[1]);
+            var file = sbCommonUtils.convertPathToFile(ret.value[1]);
             this._pathField.file = file;
             this._pathField.label = file.path;
         }
@@ -29,13 +28,15 @@ var mbEditDialog = {
     },
 
     selectFolder: function(aTitle) {
-        var fp = Components.classes["@mozilla.org/filepicker;1"].createInstance(Components.interfaces.nsIFilePicker);
-        fp.init(window, aTitle, fp.modeGetFolder);
-        if (this._pathField.file)
-            fp.displayDirectory = this._pathField.file;
-        if (fp.show() == fp.returnOK) {
-            this._pathField.file = fp.file;
-            this._pathField.label = fp.file.path;
+        var pickedFile = sbCommonUtils.showFilePicker({
+            window: window,
+            title: aTitle,
+            mode: 2, // modeGetFolder
+            dir: this._pathField.file,
+        });
+        if (pickedFile) {
+            this._pathField.file = pickedFile;
+            this._pathField.label = pickedFile.path;
         }
     },
 

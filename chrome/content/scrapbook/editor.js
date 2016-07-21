@@ -78,7 +78,7 @@ var sbPageEditor = {
             icon.src = this.item.icon || sbCommonUtils.getDefaultIcon(this.item.type);
             try {
                 var curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
-                var url = sbCommonUtils.convertFilePathToURL(curFile.parent.path);
+                var url = sbCommonUtils.convertFileToURL(curFile.parent);
                 icon.onclick = function(aEvent){ sbCommonUtils.loadURL(url, aEvent.button == 1); };
             } catch(ex) {
                 sbCommonUtils.error(ex);
@@ -157,24 +157,22 @@ var sbPageEditor = {
 
     handleKeyEvent: function(aEvent) {
         if (!sbPageEditor.enabled || sbHtmlEditor.enabled || sbDOMEraser.enabled) return;
+        var shortcut = Shortcut.fromEvent(aEvent);
         // F9
-        if (aEvent.keyCode == aEvent.DOM_VK_F9 &&
-            !aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
+        if (shortcut.toString() == "F9") {
             sbDOMEraser.init(1);
             aEvent.preventDefault();
             return;
         }
         // F10
-        if (aEvent.keyCode == aEvent.DOM_VK_F10 &&
-            !aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
+        if (shortcut.toString() == "F10") {
             sbHtmlEditor.init(null, 1);
             aEvent.preventDefault();
             return;
         }
         // 1-8 or Alt + 1-8
-        var idx = aEvent.keyCode - (aEvent.DOM_VK_1 - 1);
-        if ((idx >= 1) && (idx <= 8) &&
-            !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
+        if (/^(?:Alt\+)?([1-8])$/.test(shortcut.toString())) {
+            var idx = parseInt(RegExp.$1, 10);
             sbPageEditor.highlight(idx);
             return;
         }
@@ -353,7 +351,7 @@ var sbPageEditor = {
         var win = sbCommonUtils.getFocusedWindow();
         var sel = this.getSelection(win);
         if ( !sel ) return;
-        aElement.value = sbCommonUtils.crop(sbCommonUtils.crop(sel.toString().replace(/[\r\n\t\s]+/g, " "), 180, true), 150);
+        aElement.value = sbCommonUtils.crop(sel.toString().replace(/[\r\n\t\s]+/g, " "), 150, 180);
         sel.removeAllRanges();
         sbCommonUtils.documentData(window.content.document, "propertyChanged", true);
     },
@@ -635,20 +633,20 @@ var sbHtmlEditor = {
     enabled: false,
     _shortcut_table: {
         "F10": "quit",
-        "Ctrl+S": "save",
-        "Ctrl+M": "removeFormat",
-        "Ctrl+N": "unlink",
-        "Ctrl+Alt+I": "insertSource",
+        "Accel+S": "save",
+        "Accel+M": "removeFormat",
+        "Accel+N": "unlink",
+        "Accel+Alt+I": "insertSource",
 
-        "Ctrl+B": "bold",
-        "Ctrl+I": "italic",
-        "Ctrl+U": "underline",
-        "Ctrl+T": "strikeThrough",
-        "Ctrl+E": "setColor",
-        "Ctrl+Up": "increaseFontSize",
-        "Ctrl+Down": "decreaseFontSize",
-        "Ctrl+K": "superscript",
-        "Ctrl+J": "subscript",
+        "Accel+B": "bold",
+        "Accel+I": "italic",
+        "Accel+U": "underline",
+        "Accel+T": "strikeThrough",
+        "Accel+E": "setColor",
+        "Accel+Up": "increaseFontSize",
+        "Accel+Down": "decreaseFontSize",
+        "Accel+K": "superscript",
+        "Accel+J": "subscript",
 
         "Alt+0": "formatblock_p",
         "Alt+1": "formatblock_h1",
@@ -662,31 +660,31 @@ var sbHtmlEditor = {
 
         "Alt+U": "insertUnorderedList",
         "Alt+O": "insertOrderedList",
-        "Alt+Open_Bracket": "outdent",
-        "Alt+Close_Bracket": "indent",
+        "Alt+OpenBracket": "outdent",
+        "Alt+CloseBracket": "indent",
         "Alt+Comma": "justifyLeft",
         "Alt+Period": "justifyRight",
         "Alt+M": "justifyCenter",
         "Alt+Slash": "justifyFull",
 
-        "Ctrl+Shift+L": "attachLink",
-        "Ctrl+Shift+F": "attachFile",
-        "Ctrl+Shift+B": "backupFile",
+        "Accel+Shift+L": "attachLink",
+        "Accel+Shift+F": "attachFile",
+        "Accel+Shift+B": "backupFile",
 
-        "Ctrl+Shift+H": "horizontalLine",
-        "Ctrl+Shift+D": "insertDate",
-        "Ctrl+Shift+C": "insertTodoBox",
-        "Ctrl+Alt+Shift+C": "insertTodoBoxDone",
-        "Ctrl+Alt+1": "wrapHTML1",
-        "Ctrl+Alt+2": "wrapHTML2",
-        "Ctrl+Alt+3": "wrapHTML3",
-        "Ctrl+Alt+4": "wrapHTML4",
-        "Ctrl+Alt+5": "wrapHTML5",
-        "Ctrl+Alt+6": "wrapHTML6",
-        "Ctrl+Alt+7": "wrapHTML7",
-        "Ctrl+Alt+8": "wrapHTML8",
-        "Ctrl+Alt+9": "wrapHTML9",
-        "Ctrl+Alt+0": "wrapHTML0",
+        "Accel+Shift+H": "horizontalLine",
+        "Accel+Shift+D": "insertDate",
+        "Accel+Shift+C": "insertTodoBox",
+        "Accel+Alt+Shift+C": "insertTodoBoxDone",
+        "Accel+Alt+1": "wrapHTML1",
+        "Accel+Alt+2": "wrapHTML2",
+        "Accel+Alt+3": "wrapHTML3",
+        "Accel+Alt+4": "wrapHTML4",
+        "Accel+Alt+5": "wrapHTML5",
+        "Accel+Alt+6": "wrapHTML6",
+        "Accel+Alt+7": "wrapHTML7",
+        "Accel+Alt+8": "wrapHTML8",
+        "Accel+Alt+9": "wrapHTML9",
+        "Accel+Alt+0": "wrapHTML0",
     },
 
     currentDocument: function(aMainDoc) {
@@ -807,6 +805,21 @@ var sbHtmlEditor = {
     },
     
     updatePopup: function() {
+        // update hotkey text, we only need to this once
+        if (!arguments.callee.hotkeyDone) {
+            arguments.callee.hotkeyDone = true;
+            var that = this;
+            Array.prototype.forEach.call(document.getElementById("ScrapBookContextMenu10").getElementsByTagName("menuitem"), function(elem){
+                for (var i in that._shortcut_table) {
+                    if (elem.value == that._shortcut_table[i]) {
+                        var shortcut = Shortcut.fromString(i);
+                        elem.setAttribute("acceltext", shortcut.getUIString());
+                        return;
+                    }
+                }
+            });
+        }
+
         document.getElementById("ScrapBookEditHTML_insertDate").tooltipText = sbCommonUtils.getPref("edit.insertDateFormat", "") || "%Y-%m-%d %H:%M:%S";
         document.getElementById("ScrapBookEditHTML_wrapHTML1").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.1", "") || "<code>{THIS}</code>";
         document.getElementById("ScrapBookEditHTML_wrapHTML2").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.2", "") || "<code>{THIS}</code>";
@@ -1086,7 +1099,7 @@ var sbHtmlEditor = {
                 // check the template file, create one if not exist
                 var template = sbCommonUtils.getScrapBookDir().clone();
                 template.append("notex_template.html");
-                if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/notex_template.html", template);
+                if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/skin/notex_template.html", template);
                 // create content
                 var content = sbCommonUtils.readFile(template);
                 content = sbCommonUtils.convertToUnicode(content, "UTF-8");
@@ -2427,7 +2440,7 @@ var sbAnnotationService = {
         if ( !sel ) return;
         // check and get the annotation
         var ret = {};
-        if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("EDIT_INLINE", sbCommonUtils.crop(sel.toString(), 80, true)), ret, null, {}) ) return;
+        if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("EDIT_INLINE", sbCommonUtils.crop(sel.toString(), null, 80)), ret, null, {}) ) return;
         if ( !ret.value ) return;
         // apply
         sbPageEditor.allowUndo(win.document);
@@ -2445,7 +2458,7 @@ var sbAnnotationService = {
         var doc = aElement.ownerDocument;
         // check and get the annotation
         var ret = { value: aElement.getAttribute("title") };
-        if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("EDIT_INLINE", sbCommonUtils.crop(aElement.textContent, 80, true)), ret, null, {}) ) return;
+        if ( !sbCommonUtils.PROMPT.prompt(window, "ScrapBook", sbCommonUtils.lang("EDIT_INLINE", sbCommonUtils.crop(aElement.textContent, null, 80)), ret, null, {}) ) return;
         // apply
         sbPageEditor.allowUndo(doc);
         var els = sbCommonUtils.getSbObjectsById(aElement);
@@ -2525,12 +2538,14 @@ var sbAnnotationService = {
             var htmlFile = sbCommonUtils.convertURLToFile(win.location.href);
             if (!htmlFile) return;
             // prompt a window to select file
-            var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-            FP.init(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), FP.modeOpen);
-            var ret = FP.show();
-            if ( ret != FP.returnOK ) return;
+            var pickedFile = sbCommonUtils.showFilePicker({
+                window: window,
+                title: sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"),
+                mode: 0, // modeOpen
+            });
+            if ( !pickedFile ) return;
             // upload the file
-            var filename = FP.file.leafName;
+            var filename = pickedFile.leafName;
             var filename2 = sbCommonUtils.validateFileName(filename);
             try {
                 var destFile = htmlFile.parent.clone();
@@ -2539,7 +2554,7 @@ var sbAnnotationService = {
                     if ( !sbCommonUtils.PROMPT.confirm(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("EDIT_ATTACH_FILE_OVERWRITE", filename2)) ) return;
                     destFile.remove(false);
                 }
-                FP.file.copyTo(destFile.parent, filename2);
+                pickedFile.copyTo(destFile.parent, filename2);
             } catch(ex) {
                 sbCommonUtils.PROMPT.alert(window, sbCommonUtils.lang("EDIT_ATTACH_FILE_TITLE"), sbCommonUtils.lang("EDIT_ATTACH_FILE_INVALID", filename2));
                 return;
@@ -2610,12 +2625,10 @@ var sbInfoViewer = {
         var isTypeSite = (sbDataSource.getProperty(sbBrowserOverlay.resource, "type") == "site");
         document.getElementById("ScrapBookInfoHome").disabled = !isTypeSite;
         document.getElementById("ScrapBookInfoSite").disabled = !isTypeSite;
-        document.getElementById("ScrapBookInfoHome").setAttribute("image", "chrome://scrapbook/skin/info_home" + (isTypeSite ? "1" : "0") +  ".png");
-        document.getElementById("ScrapBookInfoSite").setAttribute("image", "chrome://scrapbook/skin/info_link" + (isTypeSite ? "1" : "0") +  ".png");
         // source image --> link to parent directory
         try {
             var curFile = sbCommonUtils.convertURLToFile(gBrowser.currentURI.spec);
-            var url = sbCommonUtils.convertFilePathToURL(curFile.parent.path);
+            var url = sbCommonUtils.convertFileToURL(curFile.parent);
             var srcImage = document.getElementById("ScrapBookInfobar").firstChild;
             srcImage.onclick = function(aEvent){ sbCommonUtils.loadURL(url, aEvent.button == 1); };
         } catch(ex) {
@@ -2731,7 +2744,7 @@ var sbInfoViewer = {
 
     loadFile: function(aFileName) {
         var file = sbCommonUtils.getContentDir(sbPageEditor.item.id); file.append(aFileName);
-        var url = sbCommonUtils.convertFilePathToURL(file.path);
+        var url = sbCommonUtils.convertFileToURL(file);
         var dataXml = sbCommonUtils.convertURLToFile(url);
         // later Firefox version doesn't allow loading .xsl in the upper directory
         // if it's requested, patch it

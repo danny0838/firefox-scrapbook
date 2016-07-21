@@ -1,5 +1,18 @@
 /* ::::: Options ::::: */
 
+#sbPrefWindow {
+    width: 40em; height: 600px;
+}
+
+.notify-restart {
+    margin-top: 1em;
+    color: red;
+}
+
+prefpane vbox {
+    overflow: auto;
+}
+
 radio[pane="mainPane"] {
     list-style-image: url("chrome://scrapbook/skin/prefs_main.png");
 }
@@ -31,4 +44,11 @@ prefpane > description {
     margin-bottom: 5px;
 }
 
+#keysPane textbox {
+    width: 180px;
+}
 
+#keysPane textbox[maxlength="1"] {
+    width: 2em;
+    text-align: center;
+}

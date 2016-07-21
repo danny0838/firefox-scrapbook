@@ -1,8 +1,6 @@
 
 var sbCaptureOptions = {
 
-    get WARNING_UI(){ return document.getElementById("sbDetailWarnAboutScript"); },
-
     param: null,
 
     init: function() {
@@ -29,8 +27,7 @@ var sbCaptureOptions = {
         // title
         this.fillTitleList();
         // script warning
-        this.WARNING_UI.setAttribute("offset", this.WARNING_UI.boxObject.height || 32);
-        setTimeout(function(){ sbCaptureOptions.updateWarningUI(document.getElementById('sbDetailOptionScript').checked); }, 0);
+        this.updateScriptWarning();
         // context specific settings
         if ( this.param.context == "capture-again" || this.param.context == "capture-again-deep" ) {
             document.getElementById("sbDetailFolderRow").collapsed = true;
@@ -47,12 +44,15 @@ var sbCaptureOptions = {
         }
     },
 
-    updateWarningUI: function(checked) {
-        var oldHidden = this.WARNING_UI.hidden;
-        var newHidden = !checked;
-        this.WARNING_UI.hidden = newHidden;
+    // hiding/unhiding the elem does not automatically update XUL window height
+    // so we must do it on out own :(
+    updateScriptWarning: function() {
+        var elem = document.getElementById("sbDetailWarnAboutScript");
+        var oldHidden = elem.hidden;
+        var newHidden = !document.getElementById("sbDetailOptionScript").checked;
         if (oldHidden != newHidden) {
-            var offset = parseInt(this.WARNING_UI.getAttribute("offset"), 10);
+            elem.hidden = newHidden;
+            var offset = parseInt(elem.getAttribute("offset"), 10);
             newHidden ? window.outerHeight -= offset : window.outerHeight += offset;
         }
     },

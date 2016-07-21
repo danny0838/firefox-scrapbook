@@ -28,7 +28,7 @@ Bug fixes:
 
  * Default item icons in the combined page no more use chrome: protocol, which is not cross-platform compatible.
 
- * Item icons are not exported, previewed, or imported correctly if it links a file in the ScrapBook icon folder or in the data folder of another item.
+ * Item icons are not exported, previewed, or imported correctly if it links to a file in the ScrapBook icon folder or in the data folder of another item.
 
  * Fixed a potential file reading error for Firefox < 4.0.
 

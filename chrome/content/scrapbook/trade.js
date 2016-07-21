@@ -45,10 +45,9 @@ var sbTradeService = {
                 window.setTimeout(function() { window.close(); }, 0);
             return;
         }
-        this.rightDir = Components.classes['@mozilla.org/file/local;1'].createInstance(Components.interfaces.nsILocalFile);
         var invalid = false;
         try {
-            this.rightDir.initWithPath(dirPath);
+            this.rightDir = sbCommonUtils.convertPathToFile(dirPath);
             if ( !this.rightDir.exists() || !this.rightDir.isDirectory() ) {
                 invalid = true;
             }
@@ -74,12 +73,14 @@ var sbTradeService = {
     },
 
     selectDir: function() {
-        var picker = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-        picker.init(window, sbCommonUtils.lang("SELECT_PATH"), picker.modeGetFolder);
-        if ( this.rightDir ) picker.displayDirectory = this.rightDir;
-        var answer = picker.show();
-        if ( answer == picker.returnOK ) {
-            sbCommonUtils.setPref("trade.path", picker.file.path);
+        var pickedFile = sbCommonUtils.showFilePicker({
+            window: window,
+            title: sbCommonUtils.lang("SELECT_PATH"),
+            mode: 2, // modeGetFolder
+            dir: this.rightDir,
+        });
+        if (pickedFile) {
+            sbCommonUtils.setPref("trade.path", pickedFile.path);
             return true;
         }
         return false;
@@ -87,7 +88,7 @@ var sbTradeService = {
 
     refreshTree: function() {
         this.treeItems = [];
-        var baseURL = sbCommonUtils.convertFilePathToURL(this.rightDir.path);
+        var baseURL = sbCommonUtils.convertFileToURL(this.rightDir);
         var dirEnum = this.rightDir.directoryEntries;
         while ( dirEnum.hasMoreElements() ) {
             var file = dirEnum.getNext().QueryInterface(Components.interfaces.nsIFile);
@@ -136,7 +137,7 @@ var sbTradeService = {
             var val = this._items[row][7];
             // Gecko >= 22 (Firefox >= 22): do not take properties and requires a return value
             if (properties) {
-                properties.AppendElement(ATOM_SERVICE.getAtom(val));
+                properties.AppendElement(sbCommonUtils.ATOM.getAtom(val));
             } else {
                 return val;
             }
@@ -230,7 +231,7 @@ var sbTradeService = {
         if (type == "bookmark" || type == "separator")
             return;
         sbCommonUtils.loadURL(
-            sbCommonUtils.convertFilePathToURL(this.rightDir.path) + this.getCurrentDirName() + "/index.html",
+            sbCommonUtils.convertFileToURL(this.rightDir) + this.getCurrentDirName() + "/index.html",
             aTabbed
         );
     },

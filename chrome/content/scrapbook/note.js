@@ -76,14 +76,14 @@ var sbNoteService2 = {
         htmlFile.append("note.html");
         sbCommonUtils.writeFile(htmlFile, source, "UTF-8");
         this.toggleHTMLView(true);
-        this.BROWSER.loadURI(sbCommonUtils.convertFilePathToURL(htmlFile.path));
+        this.BROWSER.loadURI(sbCommonUtils.convertFileToURL(htmlFile));
         this.enabledHTMLView = true;
     },
 
     toggleHTMLView: function(willShow) {
         this.BROWSER.collapsed = !willShow;
         document.getElementById("sbSplitter").collapsed = !willShow;
-        document.getElementById("sbNoteHeader").lastChild.collapsed = !willShow;
+        document.getElementById("sbNoteExpand").hidden = !willShow;
         document.getElementById("sbNoteToolbarN").disabled = !willShow;
         this.enabledHTMLView = willShow;
     },
@@ -102,7 +102,7 @@ var sbNoteTemplate = {
     init: function() {
         this.file = sbCommonUtils.getScrapBookDir().clone();
         this.file.append("note_template.html");
-        if ( !this.file.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/note_template.html", this.file);
+        if ( !this.file.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/skin/note_template.html", this.file);
     },
 
     show: function(willShow) {

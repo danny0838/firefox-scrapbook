@@ -121,7 +121,7 @@ var sbMainService = {
         // check the template file, create one if not exist
         var template = sbCommonUtils.getScrapBookDir().clone();
         template.append("notex_template.html");
-        if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/content/notex_template.html", template);
+        if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/skin/notex_template.html", template);
         // create content
         var dir = sbCommonUtils.getContentDir(newItem.id);
         var html = dir.clone();
@@ -573,7 +573,7 @@ var sbController = {
 var sbTreeDNDHandler = {
 
     modAlt: false,
-    modShift: false,
+    modAccelShift: false,
     currentDataTransfer: null,
 
     dragDropObserver: {
@@ -674,8 +674,9 @@ var sbTreeDNDHandler = {
     },
 
     getModifiers: function(aEvent) {
-        this.modAlt = aEvent.altKey;
-        this.modShift = aEvent.ctrlKey || aEvent.shiftKey;
+        var shortcut = Shortcut.fromEvent(aEvent);
+        this.modAlt = shortcut.altKey;
+        this.modAccelShift = shortcut.accelKey || shortcut.shiftKey;
     },
 
     init: function() {
@@ -761,14 +762,14 @@ var sbTreeDNDHandler = {
             var targetWindow = isEntire ? top.window.content : win;
             top.window.sbContentSaver.captureWindow(
                 targetWindow, !isEntire,
-                sbCommonUtils.getPref("showDetailOnDrop", false) || this.modShift,
+                sbCommonUtils.getPref("showDetailOnDrop", false) || this.modAccelShift,
                 res[0], res[1], null
             );
         } else if (url.indexOf("http://") == 0 || url.indexOf("https://") == 0) {
             var data = {
                 urls: [url],
                 refUrl: win.location.href,
-                showDetail: sbCommonUtils.getPref("showDetailOnDrop", false) || this.modShift,
+                showDetail: sbCommonUtils.getPref("showDetailOnDrop", false) || this.modAccelShift,
                 resName: res[0],
                 resIdx: res[1],
                 referItem: null,

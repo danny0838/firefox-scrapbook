@@ -162,18 +162,23 @@ var sbPropService = {
             dir.append("icon");
             if ( !dir.exists() ) dir.create(dir.DIRECTORY_TYPE, 0700);
         }
-        var FP = Components.classes['@mozilla.org/filepicker;1'].createInstance(Components.interfaces.nsIFilePicker);
-        FP.init(window, aPickerLabel, FP.modeOpen);
-        FP.displayDirectory = dir;
-        FP.appendFilters(FP.filterImages);
-        if ( FP.show() == FP.returnOK ) {
+        var pickedFile = sbCommonUtils.showFilePicker({
+            window: window,
+            title: aPickerLabel,
+            mode: 0, // modeOpen
+            dir: dir,
+            filters: [
+                0x008, // nsIFilePicker.filterImages
+            ]
+        });
+        if (pickedFile) {
             var iconURL;
-            if ( aCommand == "F" && dir.contains(FP.file, false) ) {
-                iconURL = sbCommonUtils.convertFileToResURL(FP.file);
-            } else if ( aCommand == "U" && dir.contains(FP.file, false) ) {
-                iconURL = sbCommonUtils.convertFileToResURL(FP.file);
+            if ( aCommand == "F" && dir.contains(pickedFile, false) ) {
+                iconURL = sbCommonUtils.convertFileToResURL(pickedFile);
+            } else if ( aCommand == "U" && dir.contains(pickedFile, false) ) {
+                iconURL = sbCommonUtils.convertFileToResURL(pickedFile);
             } else {
-                iconURL = sbCommonUtils.convertFilePathToURL(FP.file.path);
+                iconURL = sbCommonUtils.convertFileToURL(pickedFile);
             }
             this.ICON.src = iconURL;
         }
