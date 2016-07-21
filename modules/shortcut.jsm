@@ -150,25 +150,26 @@ Shortcut.prototype = {
     },
 
     // return an array containing the keys
-    getKeys: function() {
+    get getKeys() {
         var mainKey = this.keyName || "";
         if (["Win", "Control", "Alt", "Shift"].indexOf(mainKey) != -1) {
             mainKey = "";
         }
         var parts = Array.prototype.slice.call(this.modifiers);
         parts.push(mainKey);
-        return parts;
+        delete this.getKeys;
+        return this.getKeys = parts;
     },
 
     // return the normalized string
     toString: function () {
-        return this.getKeys().join("+");
+        return this.getKeys.join("+");
     },
 
     // return the string which is nice to show in the UI
     getUIString: function () {
         var that = this;
-        return this.getKeys().map(function(key) {
+        return this.getKeys.map(function(key) {
             // replace Accel
             if (key == "Accel") {
                 if (that.getAccelKeyCode == 17) {
