@@ -8,6 +8,8 @@
 
 this.EXPORTED_SYMBOLS = ["Shortcut"];
 
+const { sbCommonUtils } = Components.utils.import("resource://scrapbook-modules/common.jsm", {});
+
 /**
  * Shortcut class
  */
@@ -52,10 +54,20 @@ function Shortcut(data) {
     this.keyCode = data.keyCode;
     this.keyName = keyCodeToNameMap[this.keyCode];
     // unify the order
+    this.accelKey = false;
+    this.metaKey = false;
     this.ctrlKey = false;
     this.altKey = false;
     this.shiftKey = false;
     this.modifiers = [];
+    if (data.modifiers.indexOf("Accel") !== -1) {
+        this.accelKey = true;
+        this.modifiers.push("Accel");
+    }
+    if (data.modifiers.indexOf("Meta") !== -1) {
+        this.metaKey = true;
+        this.modifiers.push("Meta");
+    }
     if (data.modifiers.indexOf("Ctrl") !== -1) {
         this.ctrlKey = true;
         this.modifiers.push("Ctrl");
@@ -89,7 +101,12 @@ Shortcut.prototype = {
         return this.isPrintable = printableRegex.test(this.keyName);
     },
 
-    // returns the normalized string
+    get getAccelKeyCode() {
+        delete this.getAccelKeyCode;
+        return this.getAccelKeyCode = sbCommonUtils.getPref("ui.key.accelKey", 0, true);
+    },
+
+    // return the normalized string
     toString: function () {
         var mainKey = this.keyName || "";
         var parts = Array.prototype.slice.call(this.modifiers);
@@ -104,9 +121,11 @@ Shortcut.prototype = {
     // return the modifiers attribute for XUL <key> elements
     getModifiers: function () {
         var modifiers = [];
-        if (this.modifiers.indexOf("Ctrl") != -1) modifiers.push("accel");
-        if (this.modifiers.indexOf("Alt") != -1) modifiers.push("alt");
-        if (this.modifiers.indexOf("Shift") != -1) modifiers.push("shift");
+        if (this.accelKey) modifiers.push("accel");
+        if (this.metaKey) modifiers.push("meta");
+        if (this.ctrlKey) modifiers.push("control");
+        if (this.altKey) modifiers.push("alt");
+        if (this.shiftKey) modifiers.push("shift");
         return modifiers.join(" ");
     },
 
@@ -123,8 +142,20 @@ Shortcut.prototype = {
 
         var keys = parts.join("+");
 
+        // replace Accel
+        if (this.getAccelKeyCode == 17) {
+            keys = keys.replace("Accel", "Ctrl");
+        } else if (this.getAccelKeyCode == 224) {
+            keys = keys.replace("Accel", "Meta");
+        } else if (this.getAccelKeyCode == 18) {
+            keys = keys.replace("Accel", "Alt");
+        } else if (this.getAccelKeyCode == 16) {
+            keys = keys.replace("Accel", "Shift");
+        }
+
+        // use key symbols for Mac
         if (isMac) {
-            keys = keys.replace("Ctrl", "\u2318").replace("Alt", "\u2325").replace("Shift", "\u21E7");
+            keys = keys.replace("Meta", "\u2318").replace("Ctrl", "\u2303").replace("Alt", "\u2325").replace("Shift", "\u21E7");
         }
 
         return keys;
@@ -142,15 +173,23 @@ Shortcut.fromString = function (str) {
 
 Shortcut.fromEvent = function (event) {
     var data = {};
-
     data.keyCode = event.keyCode;
 
-    // normalized Ctrl = Command on Mac
-    // normalized Alt = Option on Mac
+    // We haven't instintiate Shortcut object now. Read if from current pref.
+    var accelKeyCode = sbCommonUtils.getPref("ui.key.accelKey", 0, true);
+
+    // if accel key is pressed, record it as "Accel" rather than usual
     var modifiers = [];
-    if ((event.ctrlKey && !isMac) || (event.metaKey && isMac)) modifiers.push("Ctrl");
-    if (event.altKey) modifiers.push("Alt");
-    if (event.shiftKey) modifiers.push("Shift");
+    if ((event.ctrlKey && accelKeyCode == 17) ||
+        (event.metaKey && accelKeyCode == 224) ||
+        (event.altKey && accelKeyCode == 18) ||
+        (event.shiftKey && accelKeyCode == 16)) {
+        modifiers.push("Accel");
+    }
+    if (event.metaKey && accelKeyCode != 224) modifiers.push("Meta");
+    if (event.ctrlKey && accelKeyCode != 17) modifiers.push("Ctrl");
+    if (event.altKey && accelKeyCode != 18) modifiers.push("Alt");
+    if (event.shiftKey && accelKeyCode != 16) modifiers.push("Shift");
     data.modifiers = modifiers;
 
     return new Shortcut(data);
