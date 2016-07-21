@@ -84,11 +84,12 @@ const keyNameToCodeMap = {};
     }
 })();
 
-var printableRegex = /^[0-9A-Za-z]$/;
+const printableRegex = /^[0-9A-Za-z]$/;
 
-function getAccelKeyCode() {
-    return sbCommonUtils.getPref("ui.key.accelKey", 0, true);
-}
+// This pref natively requires a restart to get it work,
+// and thus we only get it once and for all.
+const accelKeyCode = sbCommonUtils.getPref("ui.key.accelKey", 0, true);
+
 
 /**
  * Shortcut class
@@ -144,11 +145,6 @@ Shortcut.prototype = {
         return this.isPrintable = printableRegex.test(this.keyName);
     },
 
-    get getAccelKeyCode() {
-        delete this.getAccelKeyCode;
-        return this.getAccelKeyCode = getAccelKeyCode();
-    },
-
     // return an array containing the keys
     get getKeys() {
         var mainKey = this.keyName || "";
@@ -168,17 +164,16 @@ Shortcut.prototype = {
 
     // return the string which is nice to show in the UI
     getUIString: function () {
-        var that = this;
         return this.getKeys.map(function(key) {
             // replace Accel
             if (key == "Accel") {
-                if (that.getAccelKeyCode == 17) {
+                if (accelKeyCode == 17) {
                     key = "Ctrl";
-                } else if (that.getAccelKeyCode == 224) {
+                } else if (accelKeyCode == 224) {
                     key = "Meta";
-                } else if (that.getAccelKeyCode == 18) {
+                } else if (accelKeyCode == 18) {
                     key = "Alt";
-                } else if (that.getAccelKeyCode == 16) {
+                } else if (accelKeyCode == 16) {
                     key = "Shift";
                 }
             }
@@ -230,9 +225,6 @@ Shortcut.fromEvent = function (event) {
     var data = {};
     // sometimes keyCode is 0 (e.g. Space onkeypress), and we need event.which to get it
     data.keyCode = event.keyCode || event.which;
-
-    // We haven't instintiate Shortcut object now. Read if from current pref.
-    var accelKeyCode = getAccelKeyCode();
 
     // if accel key is pressed, record it as "Accel" rather than usual
     var modifiers = [];
