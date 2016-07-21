@@ -149,23 +149,6 @@ Shortcut.prototype = {
         return parts.join("+");
     },
 
-    // return the keycode attribute for XUL <key> elements
-    getKeyCode: function() {
-        if (!this.isValid) return "";
-        return "VK_" + this.keyName.toUpperCase();
-    },
-
-    // return the modifiers attribute for XUL <key> elements
-    getModifiers: function () {
-        var modifiers = [];
-        if (this.accelKey) modifiers.push("accel");
-        if (this.metaKey) modifiers.push("meta");
-        if (this.ctrlKey) modifiers.push("control");
-        if (this.altKey) modifiers.push("alt");
-        if (this.shiftKey) modifiers.push("shift");
-        return modifiers.join(" ");
-    },
-
     // return the string which is nice to show in the UI
     getUIString: function () {
         var mainKey = this.keyName || "";
@@ -196,6 +179,23 @@ Shortcut.prototype = {
         }
 
         return keys;
+    },
+
+    // return the keycode attribute for XUL <key> elements
+    getKeyCode: function() {
+        if (!this.isValid) return "";
+        return "VK_" + this.keyName.toUpperCase();
+    },
+
+    // return the modifiers attribute for XUL <key> elements
+    getModifiers: function () {
+        var modifiers = [];
+        if (this.accelKey) modifiers.push("accel");
+        if (this.metaKey) modifiers.push("meta");
+        if (this.ctrlKey) modifiers.push("control");
+        if (this.altKey) modifiers.push("alt");
+        if (this.shiftKey) modifiers.push("shift");
+        return modifiers.join(" ");
     },
 };
 
