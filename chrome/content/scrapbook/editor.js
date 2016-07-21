@@ -157,24 +157,22 @@ var sbPageEditor = {
 
     handleKeyEvent: function(aEvent) {
         if (!sbPageEditor.enabled || sbHtmlEditor.enabled || sbDOMEraser.enabled) return;
+        var shortcut = Shortcut.fromEvent(aEvent);
         // F9
-        if (aEvent.keyCode == aEvent.DOM_VK_F9 &&
-            !aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
+        if (shortcut.toString() == "F9") {
             sbDOMEraser.init(1);
             aEvent.preventDefault();
             return;
         }
         // F10
-        if (aEvent.keyCode == aEvent.DOM_VK_F10 &&
-            !aEvent.altKey && !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
+        if (shortcut.toString() == "F10") {
             sbHtmlEditor.init(null, 1);
             aEvent.preventDefault();
             return;
         }
         // 1-8 or Alt + 1-8
-        var idx = aEvent.keyCode - (aEvent.DOM_VK_1 - 1);
-        if ((idx >= 1) && (idx <= 8) &&
-            !aEvent.ctrlKey && !aEvent.shiftKey && !aEvent.metaKey) {
+        if (/^(?:Alt\+)?([1-8])$/.test(shortcut.toString())) {
+            var idx = parseInt(RegExp.$1, 10);
             sbPageEditor.highlight(idx);
             return;
         }
@@ -635,20 +633,20 @@ var sbHtmlEditor = {
     enabled: false,
     _shortcut_table: {
         "F10": "quit",
-        "Ctrl+S": "save",
-        "Ctrl+M": "removeFormat",
-        "Ctrl+N": "unlink",
-        "Ctrl+Alt+I": "insertSource",
+        "Accel+S": "save",
+        "Accel+M": "removeFormat",
+        "Accel+N": "unlink",
+        "Accel+Alt+I": "insertSource",
 
-        "Ctrl+B": "bold",
-        "Ctrl+I": "italic",
-        "Ctrl+U": "underline",
-        "Ctrl+T": "strikeThrough",
-        "Ctrl+E": "setColor",
-        "Ctrl+Up": "increaseFontSize",
-        "Ctrl+Down": "decreaseFontSize",
-        "Ctrl+K": "superscript",
-        "Ctrl+J": "subscript",
+        "Accel+B": "bold",
+        "Accel+I": "italic",
+        "Accel+U": "underline",
+        "Accel+T": "strikeThrough",
+        "Accel+E": "setColor",
+        "Accel+Up": "increaseFontSize",
+        "Accel+Down": "decreaseFontSize",
+        "Accel+K": "superscript",
+        "Accel+J": "subscript",
 
         "Alt+0": "formatblock_p",
         "Alt+1": "formatblock_h1",
@@ -662,31 +660,31 @@ var sbHtmlEditor = {
 
         "Alt+U": "insertUnorderedList",
         "Alt+O": "insertOrderedList",
-        "Alt+Open_Bracket": "outdent",
-        "Alt+Close_Bracket": "indent",
+        "Alt+OpenBracket": "outdent",
+        "Alt+CloseBracket": "indent",
         "Alt+Comma": "justifyLeft",
         "Alt+Period": "justifyRight",
         "Alt+M": "justifyCenter",
         "Alt+Slash": "justifyFull",
 
-        "Ctrl+Shift+L": "attachLink",
-        "Ctrl+Shift+F": "attachFile",
-        "Ctrl+Shift+B": "backupFile",
+        "Accel+Shift+L": "attachLink",
+        "Accel+Shift+F": "attachFile",
+        "Accel+Shift+B": "backupFile",
 
-        "Ctrl+Shift+H": "horizontalLine",
-        "Ctrl+Shift+D": "insertDate",
-        "Ctrl+Shift+C": "insertTodoBox",
-        "Ctrl+Alt+Shift+C": "insertTodoBoxDone",
-        "Ctrl+Alt+1": "wrapHTML1",
-        "Ctrl+Alt+2": "wrapHTML2",
-        "Ctrl+Alt+3": "wrapHTML3",
-        "Ctrl+Alt+4": "wrapHTML4",
-        "Ctrl+Alt+5": "wrapHTML5",
-        "Ctrl+Alt+6": "wrapHTML6",
-        "Ctrl+Alt+7": "wrapHTML7",
-        "Ctrl+Alt+8": "wrapHTML8",
-        "Ctrl+Alt+9": "wrapHTML9",
-        "Ctrl+Alt+0": "wrapHTML0",
+        "Accel+Shift+H": "horizontalLine",
+        "Accel+Shift+D": "insertDate",
+        "Accel+Shift+C": "insertTodoBox",
+        "Accel+Alt+Shift+C": "insertTodoBoxDone",
+        "Accel+Alt+1": "wrapHTML1",
+        "Accel+Alt+2": "wrapHTML2",
+        "Accel+Alt+3": "wrapHTML3",
+        "Accel+Alt+4": "wrapHTML4",
+        "Accel+Alt+5": "wrapHTML5",
+        "Accel+Alt+6": "wrapHTML6",
+        "Accel+Alt+7": "wrapHTML7",
+        "Accel+Alt+8": "wrapHTML8",
+        "Accel+Alt+9": "wrapHTML9",
+        "Accel+Alt+0": "wrapHTML0",
     },
 
     currentDocument: function(aMainDoc) {
@@ -807,6 +805,21 @@ var sbHtmlEditor = {
     },
     
     updatePopup: function() {
+        // update hotkey text, we only need to this once
+        if (!arguments.callee.hotkeyDone) {
+            arguments.callee.hotkeyDone = true;
+            var that = this;
+            Array.prototype.forEach.call(document.getElementById("ScrapBookContextMenu10").getElementsByTagName("menuitem"), function(elem){
+                for (var i in that._shortcut_table) {
+                    if (elem.value == that._shortcut_table[i]) {
+                        var shortcut = Shortcut.fromString(i);
+                        elem.setAttribute("acceltext", shortcut.getUIString());
+                        return;
+                    }
+                }
+            });
+        }
+
         document.getElementById("ScrapBookEditHTML_insertDate").tooltipText = sbCommonUtils.getPref("edit.insertDateFormat", "") || "%Y-%m-%d %H:%M:%S";
         document.getElementById("ScrapBookEditHTML_wrapHTML1").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.1", "") || "<code>{THIS}</code>";
         document.getElementById("ScrapBookEditHTML_wrapHTML2").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.2", "") || "<code>{THIS}</code>";

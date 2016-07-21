@@ -211,14 +211,13 @@ var sbCombineService = {
     },
 
     onKeyPress: function(aEvent) {
-        if ( aEvent.keyCode === aEvent.DOM_VK_DELETE) {
+        var shortcut = Shortcut.fromEvent(aEvent);
+        if ( shortcut.toString() == "Delete") {
             this.deleteItem();
-        } else if (aEvent.altKey) {
-            if (aEvent.keyCode === aEvent.DOM_VK_UP) {
-                this.moveUp();
-            } else if (aEvent.keyCode === aEvent.DOM_VK_DOWN) {
-                this.moveDown();
-            }
+        } else if (shortcut.toString() == "Alt+Up") {
+            this.moveUp();
+        } else if (shortcut.toString() == "Alt+Down") {
+            this.moveDown();
         }
     },
 

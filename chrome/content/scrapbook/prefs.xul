@@ -57,50 +57,35 @@
         <grid>
             <columns>
                 <column />
-                <column flex="1" />
+                <column />
             </columns>
-            <rows oninput="sbPrefWindow.onInputKey(event);">
-                <row id="sbKeysMenubar" align="center">
+            <rows>
+                <row align="center">
                     <label value="&sb.menubar;:" group="menubar" />
                     <hbox align="center">
                         <label value="Alt+" group="menubar" />
-                        <textbox size="1" maxlength="1" preference="extensions.scrapbook.key.menubar" group="menubar" />
+                        <textbox maxlength="1" preference="extensions.scrapbook.key.menubar" group="menubar" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
                     </hbox>
                 </row>
                 <row align="center">
                     <label value="&sb.sidebar;:" />
-                    <hbox align="center">
-                        <label value="Alt+" />
-                        <textbox size="1" maxlength="1" preference="extensions.scrapbook.key.sidebar" />
-                    </hbox>
+                    <textbox preference="extensions.scrapbook.key.sidebar" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
                 </row>
                 <row align="center">
                     <label value="&sb.capture.entire;:" />
-                    <hbox align="center">
-                        <label value="Ctrl+Shift+" />
-                        <textbox size="1" maxlength="1" preference="extensions.scrapbook.key.capture" />
-                    </hbox>
+                    <textbox preference="extensions.scrapbook.key.capture" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
                 </row>
                 <row align="center">
                     <label value="&sb.capture.entire.as;:" />
-                    <hbox align="center">
-                        <label value="Ctrl+Shift+" />
-                        <textbox size="1" maxlength="1" preference="extensions.scrapbook.key.captureAs" />
-                    </hbox>
+                    <textbox preference="extensions.scrapbook.key.captureAs" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
                 </row>
                 <row align="center">
                     <label value="&sb.capture.alltabs;:" />
-                    <hbox align="center">
-                        <label value="Ctrl+Shift+" />
-                        <textbox size="1" maxlength="1" preference="extensions.scrapbook.key.captureAllTabs" />
-                    </hbox>
+                    <textbox preference="extensions.scrapbook.key.captureAllTabs" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
                 </row>
                 <row align="center">
                     <label value="&sb.capture.bookmark;:" />
-                    <hbox align="center">
-                        <label value="Ctrl+Shift+" />
-                        <textbox size="1" maxlength="1" preference="extensions.scrapbook.key.bookmark" />
-                    </hbox>
+                    <textbox preference="extensions.scrapbook.key.bookmark" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
                 </row>
             </rows>
         </grid>

@@ -44,4 +44,11 @@ prefpane > description {
     margin-bottom: 5px;
 }
 
+#keysPane textbox {
+    width: 180px;
+}
 
+#keysPane textbox[maxlength="1"] {
+    width: 2em;
+    text-align: center;
+}

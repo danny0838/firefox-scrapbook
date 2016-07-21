@@ -28,7 +28,7 @@ pref("extensions.scrapbook.notifyOnComplete", true);
 pref("extensions.scrapbook.notifyPageCaptured", false);
 pref("extensions.scrapbook.autoOutput", false);
 pref("extensions.scrapbook.key.menubar", "C");
-pref("extensions.scrapbook.key.sidebar", "K");
+pref("extensions.scrapbook.key.sidebar", "Alt+K");
 pref("extensions.scrapbook.key.capture", "");
 pref("extensions.scrapbook.key.captureAs", "");
 pref("extensions.scrapbook.key.captureAllTabs", "");
