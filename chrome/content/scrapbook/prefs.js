@@ -15,14 +15,18 @@ var sbPrefWindow = {
         // init keys UI to show beautiful
         Array.prototype.forEach.call(document.getElementById("keysPane").getElementsByTagName("textbox"), function(elem){
             var shortcut = Shortcut.fromString(elem.value);
-            if (shortcut.isPrintable) {
-                if (elem.getAttribute("preference") === "extensions.scrapbook.key.menubar") {
+            if (elem.getAttribute("preference") === "extensions.scrapbook.key.menubar") {
+                if (shortcut.isPrintable) {
                     elem.value = shortcut.keyName;
                 } else {
-                    elem.value = shortcut.getUIString();
+                    elem.value = "";
                 }
             } else {
-                elem.value = "";
+                if (shortcut.isComplete) {
+                    elem.value = shortcut.getUIString();
+                } else {
+                    elem.value = "";
+                }
             }
         });
         // output tree requires correct pref and datasource,
@@ -103,15 +107,19 @@ var sbPrefWindow = {
         var shortcut = Shortcut.fromEvent(event);
         var pref = elem.getAttribute("preference");
         var prefElem = document.getElementById(pref);
-        if (shortcut.isPrintable) {
-            if (pref === "extensions.scrapbook.key.menubar") {
+        if (pref === "extensions.scrapbook.key.menubar") {
+            if (shortcut.isPrintable) {
                 prefElem.value = shortcut.keyName;
             } else {
-                prefElem.value = shortcut.toString();
-                elem.value = shortcut.getUIString();
+                prefElem.value = "";
             }
         } else {
-            prefElem.value = "";
+            if (shortcut.isComplete) {
+                prefElem.value = shortcut.toString();
+                elem.value = shortcut.getUIString();
+            } else {
+                prefElem.value = "";
+            }
         }
 		event.preventDefault();
 		event.stopPropagation();

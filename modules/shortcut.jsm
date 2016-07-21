@@ -118,6 +118,12 @@ Shortcut.prototype = {
         return parts.join("+");
     },
 
+    // return the keycode attribute for XUL <key> elements
+    getKeyCode: function() {
+        if (!this.isValid) return "";
+        return "VK_" + this.keyName.toUpperCase();
+    },
+
     // return the modifiers attribute for XUL <key> elements
     getModifiers: function () {
         var modifiers = [];
