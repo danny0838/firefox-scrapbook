@@ -1,0 +1,8 @@
+Scrapbook X 1.12.38
+===================
+
+Changes since v1.12.37
+----------------------
+
+- FIXED: Capture again for a deep captured page may not work right if there are pages with non-ASCII filename.
+- FIXED: Fulltext index for a deep capture site may not work right if there are pages with non-ASCII filename.
