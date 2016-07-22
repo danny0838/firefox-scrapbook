@@ -63,7 +63,7 @@ var sbMultiBookService = {
                 sbCommonUtils.writeFile(this.file, "My ScrapBook\t" + path + "\n", "UTF-8");
         }
         var ret = [];
-        var lines = sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(this.file), "UTF-8").split("\n");
+        var lines = sbCommonUtils.readFile(this.file, "UTF-8").split("\n");
         for (var i = 0; i < lines.length; i++) {
             var item = lines[i].replace(/\r|\n/g, "").split("\t");
             if (item.length == 2)
