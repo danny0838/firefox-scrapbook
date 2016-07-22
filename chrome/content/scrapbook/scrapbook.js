@@ -131,8 +131,7 @@ var sbMainService = {
             SCRAPBOOK_DIR: "../..",
             DATA_DIR: ".",
         };
-        var content = sbCommonUtils.readFile(template);
-        content = sbCommonUtils.convertToUnicode(content, "UTF-8");
+        var content = sbCommonUtils.readFile(template, "UTF-8");
         content = content.replace(/<%([\w_]+)%>/g, function(){
             var label = arguments[1];
             if (tpl[label]) return tpl[label];

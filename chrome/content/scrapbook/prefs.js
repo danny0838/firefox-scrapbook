@@ -162,7 +162,7 @@ var sbPrefWindow = {
         });
         if (pickedFile) {
             try {
-                var data = sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(pickedFile), "UTF-8");
+                var data = sbCommonUtils.readFile(pickedFile, "UTF-8");
                 var prefs = JSON.parse(data);
                 for (var i in prefs) {
                     sbCommonUtils.setPref(i, prefs[i]);

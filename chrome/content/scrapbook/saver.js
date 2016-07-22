@@ -1488,7 +1488,7 @@ var sbCaptureObserverCallback = {
         // restore downloaded file names
         sbContentSaver.downloadRewriteFiles[aItem.id].forEach(function (data) {
             var [file, charset] = data;
-            var content = sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(file), charset);
+            var content = sbCommonUtils.readFile(file, charset);
             content = sbContentSaver.restoreFileNameFromHash(content);
             sbCommonUtils.writeFile(file, content, charset);
         });

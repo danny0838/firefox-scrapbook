@@ -451,14 +451,12 @@ var sbCacheService = {
         function addContent(aFile) {
             switch (mode) {
                 case "html":
-                    var content = sbCommonUtils.readFile(aFile);
-                    content = sbCommonUtils.convertToUnicode(content, charset);
+                    var content = sbCommonUtils.readFile(aFile, charset);
                     contents.push(sbCommonUtils.convertHTMLtoText(content));
                     break;
                 case "text":
                     if (charset) {
-                        var content = sbCommonUtils.readFile(aFile);
-                        content = sbCommonUtils.convertToUnicode(content, charset);
+                        var content = sbCommonUtils.readFile(aFile, charset);
                         contents.push(content);
                     } else {
                         contents.push("");
