@@ -408,15 +408,19 @@ var sbCommonUtils = {
         }
     },
 
-    readFile: function(aFile) {
+    readFile: function(aFile, aCharset) {
+        var file = (typeof aFile === "string") ? this.pathToFile(aFile) : aFile;
         try {
             var istream = Components.classes['@mozilla.org/network/file-input-stream;1'].createInstance(Components.interfaces.nsIFileInputStream);
-            istream.init(aFile, 1, 0, false);
+            istream.init(file, 1, 0, false);
             var bistream = Components.classes["@mozilla.org/binaryinputstream;1"].createInstance(Components.interfaces.nsIBinaryInputStream);
             bistream.setInputStream(istream);
             var data = bistream.readBytes(bistream.available());
             bistream.close();
             istream.close();
+            if (aCharset) {
+                data = this.convertToUnicode(data, aCharset);
+            }
             return data;
         } catch(ex) {
             return false;
