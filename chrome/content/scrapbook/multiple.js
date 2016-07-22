@@ -356,7 +356,7 @@ var sbURLDetector2 = {
             if ( !theFile.exists() ) return;
         }
         sbMultipleService.clear();
-        this.lines = sbCommonUtils.readFile(theFile).split("\n");
+        this.lines = sbCommonUtils.readFile(theFile, "UTF-8").split("\n");
         this.inspect();
     },
 
