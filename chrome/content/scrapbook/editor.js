@@ -1101,8 +1101,7 @@ var sbHtmlEditor = {
                 template.append("notex_template.html");
                 if ( !template.exists() ) sbCommonUtils.saveTemplateFile("chrome://scrapbook/skin/notex_template.html", template);
                 // create content
-                var content = sbCommonUtils.readFile(template);
-                content = sbCommonUtils.convertToUnicode(content, "UTF-8");
+                var content = sbCommonUtils.readFile(template, "UTF-8");
                 content = sbCommonUtils.stringTemplate(content, /<%([\w_]+)%>/g, {
                     NOTE_TITLE: title,
                     SCRAPBOOK_DIR: (function(aFile){
@@ -2757,8 +2756,7 @@ var sbInfoViewer = {
             // dataXml is flushed earlier than dataU2N in a new capture
             // if it has newer lastModifiedTime, treat as already patched
             if ( !dataU2N.exists() || dataXml.lastModifiedTime <= dataU2N.lastModifiedTime ) {
-                var lfData = sbCommonUtils.readFile(dataXml);
-                lfData = sbCommonUtils.convertToUnicode(lfData, "UTF-8");
+                var lfData = sbCommonUtils.readFile(dataXml, "UTF-8");
                 lfData = lfData.replace('<?xml-stylesheet href="../../sitemap.xsl"', '<?xml-stylesheet href="sitemap.xsl"');
                 dataXml.remove(false);
                 sbCommonUtils.writeFile(dataXml, lfData, "UTF-8");

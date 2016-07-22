@@ -1021,6 +1021,7 @@ var sbContentSaver = {
     },
 
     inspectCSSText: function(aCSSText, aCSSHref, aType) {
+        var that = this;
         if (!aCSSHref) aCSSHref = this.refURLObj.spec;
         // CSS get by .cssText is always url("something-with-\"double-quote\"-escaped")
         // or url(something) (e.g. background-image in Firefox < 3.6)
@@ -1028,24 +1029,24 @@ var sbContentSaver = {
         var regex = / url\(\"((?:\\.|[^"])+)\"\)| url\(((?:\\.|[^)])+)\)/g;
         aCSSText = aCSSText.replace(regex, function() {
             var dataURL = arguments[1] || arguments[2];
-            if (dataURL.indexOf("data:") === 0 && !sbContentSaver.option["saveDataURI"]) return ' url("' + dataURL + '")';
-            if ( sbContentSaver.option["internalize"] && sbContentSaver.isInternalized(dataURL) ) return ' url("' + dataURL + '")';
+            if (dataURL.indexOf("data:") === 0 && !that.option["saveDataURI"]) return ' url("' + dataURL + '")';
+            if ( that.option["internalize"] && that.isInternalized(dataURL) ) return ' url("' + dataURL + '")';
             dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);
             switch (aType) {
                 case "image":
-                    if (sbContentSaver.option["images"]) {
-                        var dataFile = sbContentSaver.download(dataURL, "quote");
+                    if (that.option["images"]) {
+                        var dataFile = that.download(dataURL, "quote");
                         if (dataFile) dataURL = dataFile;
-                    } else if (!sbContentSaver.option["keepLink"]) {
-                        dataURL = this.getSkippedURL(dataURL);
+                    } else if (!that.option["keepLink"]) {
+                        dataURL = that.getSkippedURL(dataURL);
                     }
                     break;
                 case "font":
-                    if (sbContentSaver.option["fonts"]) {
-                        var dataFile = sbContentSaver.download(dataURL, "quote");
+                    if (that.option["fonts"]) {
+                        var dataFile = that.download(dataURL, "quote");
                         if (dataFile) dataURL = dataFile;
-                    } else if (!sbContentSaver.option["keepLink"]) {
-                        dataURL = this.getSkippedURL(dataURL);
+                    } else if (!that.option["keepLink"]) {
+                        dataURL = that.getSkippedURL(dataURL);
                     }
                     break;
             }
@@ -1487,7 +1488,7 @@ var sbCaptureObserverCallback = {
         // restore downloaded file names
         sbContentSaver.downloadRewriteFiles[aItem.id].forEach(function (data) {
             var [file, charset] = data;
-            var content = sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(file), charset);
+            var content = sbCommonUtils.readFile(file, charset);
             content = sbContentSaver.restoreFileNameFromHash(content);
             sbCommonUtils.writeFile(file, content, charset);
         });

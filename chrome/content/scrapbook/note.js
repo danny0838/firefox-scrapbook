@@ -112,8 +112,7 @@ var sbNoteTemplate = {
     },
 
     getTemplate: function() {
-        var template = sbCommonUtils.readFile(this.file);
-        template = sbCommonUtils.convertToUnicode(template, "UTF-8");
+        var template = sbCommonUtils.readFile(this.file, "UTF-8");
         return template;
     },
 

@@ -351,7 +351,7 @@ var sbCacheService = {
                 sbCacheService.inspectFile(file, "index.html", "html");
                 var url2name = dir.clone(); url2name.append("sb-url2name.txt");
                 if (url2name.exists()) {
-                    url2name = sbCommonUtils.readFile(url2name).split("\n");
+                    url2name = sbCommonUtils.readFile(url2name, "UTF-8").split("\n");
                     var limit = sbCommonUtils.getPref("fulltext.sitePagesLimit", 0);
                     for (var i = 0; i < url2name.length; i++) {
                         if (limit && i > limit) break; // prevent too large cache
@@ -451,14 +451,12 @@ var sbCacheService = {
         function addContent(aFile) {
             switch (mode) {
                 case "html":
-                    var content = sbCommonUtils.readFile(aFile);
-                    content = sbCommonUtils.convertToUnicode(content, charset);
+                    var content = sbCommonUtils.readFile(aFile, charset);
                     contents.push(sbCommonUtils.convertHTMLtoText(content));
                     break;
                 case "text":
                     if (charset) {
-                        var content = sbCommonUtils.readFile(aFile);
-                        content = sbCommonUtils.convertToUnicode(content, charset);
+                        var content = sbCommonUtils.readFile(aFile, charset);
                         contents.push(content);
                     } else {
                         contents.push("");

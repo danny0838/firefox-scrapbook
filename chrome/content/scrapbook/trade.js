@@ -185,7 +185,7 @@ var sbTradeService = {
 
     parseIndexDat: function(aFile) {
         if ( !(aFile instanceof Components.interfaces.nsILocalFile) ) return sbCommonUtils.alert(sbCommonUtils.lang("ERR_TRADE_INVALID_ARGS"));
-        var data = sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(aFile), "UTF-8");
+        var data = sbCommonUtils.readFile(aFile, "UTF-8");
         data = data.split("\n");
         if ( data.length < 2 ) return;
         var item = sbCommonUtils.newItem();

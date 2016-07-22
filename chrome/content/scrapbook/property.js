@@ -203,7 +203,7 @@ var sbPropService = {
         var file = sbCommonUtils.getContentDir(aID, true);
         if ( !file ) return "";
         file.append("index.html");
-        var content = sbCommonUtils.convertToUnicode(sbCommonUtils.readFile(file), aChars);
+        var content = sbCommonUtils.readFile(file, aChars);
         return content.match(/<title>([^<]+?)<\/title>/im) ? RegExp.$1 : "";
     },
 

@@ -1,0 +1,17 @@
+Scrapbook X 1.13.0b9
+====================
+
+Changes since v1.13.0b8
+-----------------------
+
+Bug fixes:
+
+ * A capture process freezes up if there is an external image or font in the CSS and capture option set not to capture it and not link it to source.
+
+ * Capture again for a deep captured page may not work right if there are pages with non-ASCII filename.
+
+ * Fulltext index for a deep capture site may not work right if there are pages with non-ASCII filename.
+
+ * Unable to select the folder in the Multi-ScrapBook edit dialog.
+
+Also include some internal code optimization.

@@ -110,7 +110,7 @@ var sbBrowserOverlay = {
         var file = sbCommonUtils.getScrapBookDir().clone();
         file.append("folders.txt");
         if (file.exists()) {
-            sbCommonUtils.setPref("ui.folderList", sbCommonUtils.readFile(file));
+            sbCommonUtils.setPref("ui.folderList", sbCommonUtils.readFile(file, "UTF-8"));
         } else {
             var ids = sbCommonUtils.getPref("ui.folderList", "");
             sbCommonUtils.writeFile(file, ids, "UTF-8");
