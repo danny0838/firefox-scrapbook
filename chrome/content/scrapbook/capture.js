@@ -116,7 +116,7 @@ function SB_initCapture() {
         var file = contDir.clone();
         file.append("sb-file2url.txt");
         if ( !file.exists() ) { sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_NO_FILE2URL")); window.close(); }
-        var lines = sbCommonUtils.readFile(file).split("\n");
+        var lines = sbCommonUtils.readFile(file, "UTF-8").split("\n");
         for ( var i = 0; i < lines.length; i++ ) {
             var arr = lines[i].split("\t");
             if ( arr.length == 2 ) gFile2URL[arr[0]] = arr[1];
@@ -125,7 +125,7 @@ function SB_initCapture() {
         file = contDir.clone();
         file.append("sb-url2name.txt");
         if ( !file.exists() ) { sbCommonUtils.alert(sbCommonUtils.lang("scrapbook", "ERR_NO_URL2NAME")); window.close(); }
-        lines = sbCommonUtils.readFile(file).split("\n");
+        lines = sbCommonUtils.readFile(file, "UTF-8").split("\n");
         for ( i = 0; i < lines.length; i++ ) {
             var arr = lines[i].split("\t");
             if ( arr.length == 2 ) {
