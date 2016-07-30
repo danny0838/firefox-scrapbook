@@ -15,6 +15,15 @@ const { sbCommonUtils } = Components.utils.import("resource://scrapbook-modules/
 const nsIXULRuntime = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULRuntime);
 const isMac = (nsIXULRuntime.OS.substring(0, 3).toLowerCase() == "mac");
 
+// detect OS
+var window = sbCommonUtils.getFocusedWindow();
+sbCommonUtils.alert(
+	"nsIXULRuntime.OS: " + nsIXULRuntime.OS + "\n\n" +
+	"window.navigator.platform: " + window.navigator.platform + "\n\n" +
+	"window.navigator.userAgent:" + window.navigator.userAgent
+);
+
+
 const keyNameToUIStringMap = {
     "BackQuote": "`",
     "HyphenMinus": "-",
