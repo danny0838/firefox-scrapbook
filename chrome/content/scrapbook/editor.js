@@ -168,12 +168,24 @@ var sbPageEditor = {
         if (arguments.callee.domEraserToggle && shortcut.toString() == arguments.callee.domEraserToggle) {
             sbDOMEraser.init(1);
             aEvent.preventDefault();
+            try {
+                // event.stopImmediatePropagation is supported since Firefox 10
+                aEvent.stopImmediatePropagation();
+            } catch (ex) {
+                aEvent.stopPropagation();
+            }
             return;
         }
         // F10
         if (arguments.callee.htmlEditorToggle && shortcut.toString() == arguments.callee.htmlEditorToggle) {
             sbHtmlEditor.init(null, 1);
             aEvent.preventDefault();
+            try {
+                // event.stopImmediatePropagation is supported since Firefox 10
+                aEvent.stopImmediatePropagation();
+            } catch (ex) {
+                aEvent.stopPropagation();
+            }
             return;
         }
         // 1-8 or Alt + 1-8
@@ -809,6 +821,12 @@ var sbHtmlEditor = {
         // now we are sure we have the hotkey
         var callback = sbHtmlEditor["cmd_" + callback_name];
         aEvent.preventDefault();
+        try {
+            // event.stopImmediatePropagation is supported since Firefox 10
+            aEvent.stopImmediatePropagation();
+        } catch (ex) {
+            aEvent.stopPropagation();
+        }
 
         // check the document is editable and set
         var doc = sbHtmlEditor.currentDocument();
@@ -1506,6 +1524,12 @@ var sbDOMEraser = {
 
         // now we are sure we have the hotkey, skip the default key action
         aEvent.preventDefault();
+        try {
+            // event.stopImmediatePropagation is supported since Firefox 10
+            aEvent.stopImmediatePropagation();
+        } catch (ex) {
+            aEvent.stopPropagation();
+        }
 
         // The original key effect could not be blocked completely
         // if the command has a prompt or modal window that blocks.
@@ -1517,6 +1541,12 @@ var sbDOMEraser = {
 
     handleEvent: function(aEvent) {
         aEvent.preventDefault();
+        try {
+            // event.stopImmediatePropagation is supported since Firefox 10
+            aEvent.stopImmediatePropagation();
+        } catch (ex) {
+            aEvent.stopPropagation();
+        }
         var elem = aEvent.target;
         if ( aEvent.type == "mouseover" ) {
             if (sbDOMEraser._isNormalNode(elem)) {
