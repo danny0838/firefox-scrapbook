@@ -13,7 +13,7 @@ const { sbCommonUtils } = Components.utils.import("resource://scrapbook-modules/
 // possible values of nsIXULRuntime.OS:
 // https://developer.mozilla.org/en/OS_TARGET
 const nsIXULRuntime = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULRuntime);
-const isMac = (nsIXULRuntime.OS.substring(0, 3).toLowerCase() == "mac");
+const isMac = (nsIXULRuntime.OS == "Darwin");
 
 const keyNameToUIStringMap = {
     "BackQuote": "`",

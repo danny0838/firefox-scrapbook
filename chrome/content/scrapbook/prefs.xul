@@ -46,12 +46,60 @@
 
     <prefpane id="keysPane" label="&sb.prefs.keys;" flex="1">
         <preferences>
-            <preference id="extensions.scrapbook.key.menubar"        name="extensions.scrapbook.key.menubar"        type="string" />
-            <preference id="extensions.scrapbook.key.sidebar"        name="extensions.scrapbook.key.sidebar"        type="string" />
-            <preference id="extensions.scrapbook.key.capture"        name="extensions.scrapbook.key.capture"        type="string" />
-            <preference id="extensions.scrapbook.key.captureAs"      name="extensions.scrapbook.key.captureAs"      type="string" />
+            <preference id="extensions.scrapbook.key.menubar" name="extensions.scrapbook.key.menubar" type="string" />
+            <preference id="extensions.scrapbook.key.sidebar" name="extensions.scrapbook.key.sidebar" type="string" />
+            <preference id="extensions.scrapbook.key.capture" name="extensions.scrapbook.key.capture" type="string" />
+            <preference id="extensions.scrapbook.key.captureAs" name="extensions.scrapbook.key.captureAs" type="string" />
             <preference id="extensions.scrapbook.key.captureAllTabs" name="extensions.scrapbook.key.captureAllTabs" type="string" />
-            <preference id="extensions.scrapbook.key.bookmark"       name="extensions.scrapbook.key.bookmark"       type="string" />
+            <preference id="extensions.scrapbook.key.bookmark" name="extensions.scrapbook.key.bookmark" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.quit" name="extensions.scrapbook.key.htmlEditor.quit" type="string" />            
+            <preference id="extensions.scrapbook.key.htmlEditor.save" name="extensions.scrapbook.key.htmlEditor.save" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.removeFormat" name="extensions.scrapbook.key.htmlEditor.removeFormat" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.unlink" name="extensions.scrapbook.key.htmlEditor.unlink" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.insertSource" name="extensions.scrapbook.key.htmlEditor.insertSource" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.bold" name="extensions.scrapbook.key.htmlEditor.bold" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.italic" name="extensions.scrapbook.key.htmlEditor.italic" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.underline" name="extensions.scrapbook.key.htmlEditor.underline" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.strikeThrough" name="extensions.scrapbook.key.htmlEditor.strikeThrough" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.setColor" name="extensions.scrapbook.key.htmlEditor.setColor" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.increaseFontSize" name="extensions.scrapbook.key.htmlEditor.increaseFontSize" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.decreaseFontSize" name="extensions.scrapbook.key.htmlEditor.decreaseFontSize" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.superscript" name="extensions.scrapbook.key.htmlEditor.superscript" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.subscript" name="extensions.scrapbook.key.htmlEditor.subscript" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.formatblock_p" name="extensions.scrapbook.key.htmlEditor.formatblock_p" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.formatblock_h1" name="extensions.scrapbook.key.htmlEditor.formatblock_h1" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.formatblock_h2" name="extensions.scrapbook.key.htmlEditor.formatblock_h2" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.formatblock_h3" name="extensions.scrapbook.key.htmlEditor.formatblock_h3" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.formatblock_h4" name="extensions.scrapbook.key.htmlEditor.formatblock_h4" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.formatblock_h5" name="extensions.scrapbook.key.htmlEditor.formatblock_h5" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.formatblock_h6" name="extensions.scrapbook.key.htmlEditor.formatblock_h6" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.formatblock_div" name="extensions.scrapbook.key.htmlEditor.formatblock_div" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.formatblock_pre" name="extensions.scrapbook.key.htmlEditor.formatblock_pre" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.insertUnorderedList" name="extensions.scrapbook.key.htmlEditor.insertUnorderedList" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.insertOrderedList" name="extensions.scrapbook.key.htmlEditor.insertOrderedList" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.outdent" name="extensions.scrapbook.key.htmlEditor.outdent" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.indent" name="extensions.scrapbook.key.htmlEditor.indent" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.justifyLeft" name="extensions.scrapbook.key.htmlEditor.justifyLeft" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.justifyRight" name="extensions.scrapbook.key.htmlEditor.justifyRight" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.justifyCenter" name="extensions.scrapbook.key.htmlEditor.justifyCenter" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.justifyFull" name="extensions.scrapbook.key.htmlEditor.justifyFull" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.attachLink" name="extensions.scrapbook.key.htmlEditor.attachLink" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.attachFile" name="extensions.scrapbook.key.htmlEditor.attachFile" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.backupFile" name="extensions.scrapbook.key.htmlEditor.backupFile" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.horizontalLine" name="extensions.scrapbook.key.htmlEditor.horizontalLine" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.insertDate" name="extensions.scrapbook.key.htmlEditor.insertDate" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.insertTodoBox" name="extensions.scrapbook.key.htmlEditor.insertTodoBox" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.insertTodoBoxDone" name="extensions.scrapbook.key.htmlEditor.insertTodoBoxDone" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.wrapHTML1" name="extensions.scrapbook.key.htmlEditor.wrapHTML1" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.wrapHTML2" name="extensions.scrapbook.key.htmlEditor.wrapHTML2" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.wrapHTML3" name="extensions.scrapbook.key.htmlEditor.wrapHTML3" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.wrapHTML4" name="extensions.scrapbook.key.htmlEditor.wrapHTML4" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.wrapHTML5" name="extensions.scrapbook.key.htmlEditor.wrapHTML5" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.wrapHTML6" name="extensions.scrapbook.key.htmlEditor.wrapHTML6" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.wrapHTML7" name="extensions.scrapbook.key.htmlEditor.wrapHTML7" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.wrapHTML8" name="extensions.scrapbook.key.htmlEditor.wrapHTML8" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.wrapHTML9" name="extensions.scrapbook.key.htmlEditor.wrapHTML9" type="string" />
+            <preference id="extensions.scrapbook.key.htmlEditor.wrapHTML0" name="extensions.scrapbook.key.htmlEditor.wrapHTML0" type="string" />
         </preferences>
         <vbox flex="1">
         <grid>
@@ -86,6 +134,201 @@
                 <row align="center">
                     <label value="&sb.capture.bookmark;:" />
                     <textbox preference="extensions.scrapbook.key.bookmark" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html;" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.quit;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.quit" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.save;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.save" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.removeFormat;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.removeFormat" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.unlink;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.unlink" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.insertSource;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.insertSource" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.bold;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.bold" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.italic;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.italic" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.underline;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.underline" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.strikeThrough;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.strikeThrough" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.setColor;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.setColor" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.increaseFontSize;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.increaseFontSize" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.decreaseFontSize;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.decreaseFontSize" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.superscript;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.superscript" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.subscript;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.subscript" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.formatblock_p;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.formatblock_p" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.formatblock_h1;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.formatblock_h1" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.formatblock_h2;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.formatblock_h2" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.formatblock_h3;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.formatblock_h3" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.formatblock_h4;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.formatblock_h4" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.formatblock_h5;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.formatblock_h5" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.formatblock_h6;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.formatblock_h6" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.formatblock_div;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.formatblock_div" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.formatblock_pre;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.formatblock_pre" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.insertUnorderedList;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.insertUnorderedList" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.insertOrderedList;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.insertOrderedList" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.outdent;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.outdent" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.indent;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.indent" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.justifyLeft;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.justifyLeft" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.justifyRight;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.justifyRight" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.justifyCenter;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.justifyCenter" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.justifyFull;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.justifyFull" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.attachLink;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.attachLink" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.attachFile;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.attachFile" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.backupFile;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.backupFile" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.horizontalLine;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.horizontalLine" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.insertDate;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.insertDate" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.insertTodoBox;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.insertTodoBox" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.insertTodoBoxDone;:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.insertTodoBoxDone" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.wrapHTML; 1:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.wrapHTML1" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.wrapHTML; 2:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.wrapHTML2" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.wrapHTML; 3:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.wrapHTML3" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.wrapHTML; 4:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.wrapHTML4" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.wrapHTML; 5:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.wrapHTML5" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.wrapHTML; 6:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.wrapHTML6" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.wrapHTML; 7:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.wrapHTML7" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.wrapHTML; 8:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.wrapHTML8" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.wrapHTML; 9:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.wrapHTML9" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
+                </row>
+                <row align="center">
+                    <label value="&sb.edit.html.menuitem.wrapHTML; 0:" />
+                    <textbox preference="extensions.scrapbook.key.htmlEditor.wrapHTML0" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
                 </row>
             </rows>
         </grid>
