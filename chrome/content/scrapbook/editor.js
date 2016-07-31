@@ -642,12 +642,73 @@ var sbHtmlEditor = {
         if (arguments.callee.done) return;
         arguments.callee.done = true;
 
+        var that = this;
+
         // init shortkey table
-        ["quit", "save", "removeFormat", "unlink", "insertSource", "bold", "italic", "underline", "strikeThrough", "setColor", "increaseFontSize", "decreaseFontSize", "superscript", "subscript", "formatblock_p", "formatblock_h1", "formatblock_h2", "formatblock_h3", "formatblock_h4", "formatblock_h5", "formatblock_h6", "formatblock_div", "formatblock_pre", "insertUnorderedList", "insertOrderedList", "outdent", "indent", "justifyLeft", "justifyRight", "justifyCenter", "justifyFull", "attachLink", "attachFile", "backupFile", "horizontalLine", "insertDate", "insertTodoBox", "insertTodoBoxDone", "wrapHTML1", "wrapHTML2", "wrapHTML3", "wrapHTML4", "wrapHTML5", "wrapHTML6", "wrapHTML7", "wrapHTML8", "wrapHTML9", "wrapHTML0"].forEach(function(cmd){
-            var pref = "key.htmlEditor." + cmd;
-            var key = sbCommonUtils.getPref(pref, "");
+        [
+            "quit",
+            "save",
+            "removeFormat",
+            "unlink",
+            "insertSource",
+            "bold",
+            "italic",
+            "underline",
+            "strikeThrough",
+            "setColor",
+            "increaseFontSize",
+            "decreaseFontSize",
+            "superscript",
+            "subscript",
+            "formatblock_p",
+            "formatblock_h1",
+            "formatblock_h2",
+            "formatblock_h3",
+            "formatblock_h4",
+            "formatblock_h5",
+            "formatblock_h6",
+            "formatblock_div",
+            "formatblock_pre",
+            "insertUnorderedList",
+            "insertOrderedList",
+            "outdent",
+            "indent",
+            "justifyLeft",
+            "justifyRight",
+            "justifyCenter",
+            "justifyFull",
+            "attachLink",
+            "attachFile",
+            "backupFile",
+            "horizontalLine",
+            "insertDate",
+            "insertTodoBox",
+            "insertTodoBoxDone",
+            "wrapHTML1",
+            "wrapHTML2",
+            "wrapHTML3",
+            "wrapHTML4",
+            "wrapHTML5",
+            "wrapHTML6",
+            "wrapHTML7",
+            "wrapHTML8",
+            "wrapHTML9",
+            "wrapHTML0",
+        ].forEach(function(cmd){
+            var key = sbCommonUtils.getPref("key.htmlEditor." + cmd, "");
             if (key) {
-                sbHtmlEditor._shortcut_table[key] = cmd;
+                that._shortcut_table[key] = cmd;
+            }
+        });
+
+        // update hotkey text
+        Array.prototype.forEach.call(document.getElementById("ScrapBookContextMenu10").getElementsByTagName("menuitem"), function(elem){
+            for (var i in that._shortcut_table) {
+                if (elem.value == that._shortcut_table[i]) {
+                    var shortcut = sbShortcut.fromString(i);
+                    elem.setAttribute("acceltext", shortcut.getUIString());
+                    return;
+                }
             }
         });
     },
@@ -771,21 +832,6 @@ var sbHtmlEditor = {
     },
     
     updatePopup: function() {
-        // update hotkey text, we only need to this once
-        if (!arguments.callee.hotkeyDone) {
-            arguments.callee.hotkeyDone = true;
-            var that = this;
-            Array.prototype.forEach.call(document.getElementById("ScrapBookContextMenu10").getElementsByTagName("menuitem"), function(elem){
-                for (var i in that._shortcut_table) {
-                    if (elem.value == that._shortcut_table[i]) {
-                        var shortcut = sbShortcut.fromString(i);
-                        elem.setAttribute("acceltext", shortcut.getUIString());
-                        return;
-                    }
-                }
-            });
-        }
-
         document.getElementById("ScrapBookEditHTML_insertDate").tooltipText = sbCommonUtils.getPref("edit.insertDateFormat", "") || "%Y-%m-%d %H:%M:%S";
         document.getElementById("ScrapBookEditHTML_wrapHTML1").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.1", "") || "<code>{THIS}</code>";
         document.getElementById("ScrapBookEditHTML_wrapHTML2").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.2", "") || "<code>{THIS}</code>";
