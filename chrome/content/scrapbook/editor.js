@@ -157,6 +157,11 @@ var sbPageEditor = {
 
     handleKeyEvent: function(aEvent) {
         if (!sbPageEditor.enabled || sbHtmlEditor.enabled || sbDOMEraser.enabled) return;
+        // cache frequently used variables
+        if (!arguments.callee.cached) {
+            arguments.callee.cached = true;
+            arguments.callee.htmlEditorToggle = sbCommonUtils.getPref("key.htmlEditor.quit", "");
+        }
         var shortcut = sbShortcut.fromEvent(aEvent);
         // F9
         if (shortcut.toString() == "F9") {
@@ -165,7 +170,7 @@ var sbPageEditor = {
             return;
         }
         // F10
-        if (shortcut.toString() == "F10") {
+        if (arguments.callee.htmlEditorToggle && shortcut.toString() == arguments.callee.htmlEditorToggle) {
             sbHtmlEditor.init(null, 1);
             aEvent.preventDefault();
             return;
@@ -631,60 +636,20 @@ var sbHtmlEditor = {
     },
 
     enabled: false,
-    _shortcut_table: {
-        "F10": "quit",
-        "Accel+S": "save",
-        "Accel+M": "removeFormat",
-        "Accel+N": "unlink",
-        "Accel+Alt+I": "insertSource",
+    _shortcut_table: {},
 
-        "Accel+B": "bold",
-        "Accel+I": "italic",
-        "Accel+U": "underline",
-        "Accel+T": "strikeThrough",
-        "Accel+E": "setColor",
-        "Accel+Up": "increaseFontSize",
-        "Accel+Down": "decreaseFontSize",
-        "Accel+K": "superscript",
-        "Accel+J": "subscript",
+    _firstInit: function() {
+        if (arguments.callee.done) return;
+        arguments.callee.done = true;
 
-        "Alt+0": "formatblock_p",
-        "Alt+1": "formatblock_h1",
-        "Alt+2": "formatblock_h2",
-        "Alt+3": "formatblock_h3",
-        "Alt+4": "formatblock_h4",
-        "Alt+5": "formatblock_h5",
-        "Alt+6": "formatblock_h6",
-        "Alt+7": "formatblock_div",
-        "Alt+8": "formatblock_pre",
-
-        "Alt+U": "insertUnorderedList",
-        "Alt+O": "insertOrderedList",
-        "Alt+OpenBracket": "outdent",
-        "Alt+CloseBracket": "indent",
-        "Alt+Comma": "justifyLeft",
-        "Alt+Period": "justifyRight",
-        "Alt+M": "justifyCenter",
-        "Alt+Slash": "justifyFull",
-
-        "Accel+Shift+L": "attachLink",
-        "Accel+Shift+F": "attachFile",
-        "Accel+Shift+B": "backupFile",
-
-        "Accel+Shift+H": "horizontalLine",
-        "Accel+Shift+D": "insertDate",
-        "Accel+Shift+C": "insertTodoBox",
-        "Accel+Alt+Shift+C": "insertTodoBoxDone",
-        "Accel+Alt+1": "wrapHTML1",
-        "Accel+Alt+2": "wrapHTML2",
-        "Accel+Alt+3": "wrapHTML3",
-        "Accel+Alt+4": "wrapHTML4",
-        "Accel+Alt+5": "wrapHTML5",
-        "Accel+Alt+6": "wrapHTML6",
-        "Accel+Alt+7": "wrapHTML7",
-        "Accel+Alt+8": "wrapHTML8",
-        "Accel+Alt+9": "wrapHTML9",
-        "Accel+Alt+0": "wrapHTML0",
+        // init shortkey table
+        ["quit", "save", "removeFormat", "unlink", "insertSource", "bold", "italic", "underline", "strikeThrough", "setColor", "increaseFontSize", "decreaseFontSize", "superscript", "subscript", "formatblock_p", "formatblock_h1", "formatblock_h2", "formatblock_h3", "formatblock_h4", "formatblock_h5", "formatblock_h6", "formatblock_div", "formatblock_pre", "insertUnorderedList", "insertOrderedList", "outdent", "indent", "justifyLeft", "justifyRight", "justifyCenter", "justifyFull", "attachLink", "attachFile", "backupFile", "horizontalLine", "insertDate", "insertTodoBox", "insertTodoBoxDone", "wrapHTML1", "wrapHTML2", "wrapHTML3", "wrapHTML4", "wrapHTML5", "wrapHTML6", "wrapHTML7", "wrapHTML8", "wrapHTML9", "wrapHTML0"].forEach(function(cmd){
+            var pref = "key.htmlEditor." + cmd;
+            var key = sbCommonUtils.getPref(pref, "");
+            if (key) {
+                sbHtmlEditor._shortcut_table[key] = cmd;
+            }
+        });
     },
 
     currentDocument: function(aMainDoc) {
@@ -697,6 +662,7 @@ var sbHtmlEditor = {
     //   1: enable  (for a specific window document)
     //   2: refresh (updates toolbar)
     init: function(aDoc, aStateFlag) {
+        this._firstInit();
         aDoc = aDoc || sbCommonUtils.getFocusedWindow().document;
         var wasEnabled = sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled") || false;
         if ( aStateFlag === undefined ) aStateFlag = wasEnabled ? 0 : 1;
