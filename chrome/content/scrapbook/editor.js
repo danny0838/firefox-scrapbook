@@ -637,7 +637,7 @@ var sbHtmlEditor = {
     },
 
     enabled: false,
-    _shortcut_table: {},
+    _shortcutMap: {},
 
     _firstInit: function() {
         if (arguments.callee.done) return;
@@ -698,14 +698,14 @@ var sbHtmlEditor = {
         ].forEach(function(cmd){
             var key = sbCommonUtils.getPref("key.htmlEditor." + cmd, "");
             if (key) {
-                that._shortcut_table[key] = cmd;
+                that._shortcutMap[key] = cmd;
             }
         });
 
         // update hotkey text
         Array.prototype.forEach.call(document.getElementById("ScrapBookContextMenu10").getElementsByTagName("menuitem"), function(elem){
-            for (var i in that._shortcut_table) {
-                if (elem.value == that._shortcut_table[i]) {
+            for (var i in that._shortcutMap) {
+                if (elem.value == that._shortcutMap[i]) {
                     var shortcut = sbShortcut.fromString(i);
                     elem.setAttribute("acceltext", shortcut.getUIString());
                     return;
@@ -803,7 +803,7 @@ var sbHtmlEditor = {
         // set variables and check whether it's a defined hotkey combination
         var shortcut = sbShortcut.fromEvent(aEvent);
         var key = shortcut.toString();
-        var callback_name = sbHtmlEditor._shortcut_table[key];
+        var callback_name = sbHtmlEditor._shortcutMap[key];
         if (!callback_name) return;
 
         // now we are sure we have the hotkey
@@ -1391,7 +1391,7 @@ var sbHtmlEditor = {
 
 var sbDOMEraser = {
 
-    _shortcut_table: {},
+    _shortcutMap: {},
 
     enabled: false,
     lastX: 0,
@@ -1435,7 +1435,7 @@ var sbDOMEraser = {
             if (key) {
                 // commands with a number suffix are alternatives
                 var mainCmd = cmd.replace(/\d+$/, "");
-                that._shortcut_table[key] = mainCmd;
+                that._shortcutMap[key] = mainCmd;
             }
         });
     },
@@ -1501,7 +1501,7 @@ var sbDOMEraser = {
         // set variables and check whether it's a defined hotkey combination
         var shortcut = sbShortcut.fromEvent(aEvent);
         var key = shortcut.toString();
-        var command = sbDOMEraser._shortcut_table[key];
+        var command = sbDOMEraser._shortcutMap[key];
         if (!command) return;
 
         // now we are sure we have the hotkey, skip the default key action
