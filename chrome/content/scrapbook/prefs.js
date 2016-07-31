@@ -14,7 +14,7 @@ var sbPrefWindow = {
         }
         // init keys UI to show beautiful
         Array.prototype.forEach.call(document.getElementById("keysPane").getElementsByTagName("textbox"), function(elem){
-            var shortcut = Shortcut.fromString(elem.value);
+            var shortcut = sbShortcut.fromString(elem.value);
             if (elem.getAttribute("preference") === "extensions.scrapbook.key.menubar") {
                 if (shortcut.isPrintable) {
                     elem.value = shortcut.keyName;
@@ -104,7 +104,7 @@ var sbPrefWindow = {
     // we need to set the preference element's value to get it stored to preference
     // modifying the element's value only changes the display effect
     onKeyDown: function(elem, event) {
-        var shortcut = Shortcut.fromEvent(event);
+        var shortcut = sbShortcut.fromEvent(event);
         var pref = elem.getAttribute("preference");
         var prefElem = document.getElementById(pref);
         if (pref === "extensions.scrapbook.key.menubar") {

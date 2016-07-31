@@ -673,7 +673,7 @@ var sbTreeDNDHandler = {
     },
 
     getModifiers: function(aEvent) {
-        var shortcut = Shortcut.fromEvent(aEvent);
+        var shortcut = sbShortcut.fromEvent(aEvent);
         this.modAlt = shortcut.altKey;
         this.modAccelShift = shortcut.accelKey || shortcut.shiftKey;
     },
