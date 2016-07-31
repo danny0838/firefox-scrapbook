@@ -160,11 +160,12 @@ var sbPageEditor = {
         // cache frequently used variables
         if (!arguments.callee.cached) {
             arguments.callee.cached = true;
+            arguments.callee.domEraserToggle = sbCommonUtils.getPref("key.domEraser.quit2", "");
             arguments.callee.htmlEditorToggle = sbCommonUtils.getPref("key.htmlEditor.quit", "");
         }
         var shortcut = sbShortcut.fromEvent(aEvent);
         // F9
-        if (shortcut.toString() == "F9") {
+        if (arguments.callee.domEraserToggle && shortcut.toString() == arguments.callee.domEraserToggle) {
             sbDOMEraser.init(1);
             aEvent.preventDefault();
             return;
@@ -1390,28 +1391,7 @@ var sbHtmlEditor = {
 
 var sbDOMEraser = {
 
-    _shortcut_table: {
-        "F9": "quit",
-        "Escape": "quit",
-        "Return": "remove",
-        "Space": "remove",
-        "Shift+Return": "isolate",
-        "Shift+Space": "isolate",
-        "Add": "wider",
-        "Subtract": "narrower",
-        "Shift+Equals": "wider",
-        "Hyphen_Minus": "narrower",
-        "W": "wider",
-        "N": "narrower",
-        "R": "remove",
-        "I": "isolate",
-        "B": "blackOnWhite",
-        "C": "colorize",
-        "D": "deWrapping",
-        "U": "undo",
-        "H": "help",
-        "Q": "quit",
-    },
+    _shortcut_table: {},
 
     enabled: false,
     lastX: 0,
@@ -1422,10 +1402,49 @@ var sbDOMEraser = {
     lastTargetOutline: "",
     widerStack: null,
 
+    _firstInit: function() {
+        if (arguments.callee.done) return;
+        arguments.callee.done = true;
+
+        var that = this;
+
+        // init shortkey table
+        [
+           "wider",
+           "narrower",
+           "remove",
+           "isolate",
+           "blackOnWhite",
+           "colorize",
+           "deWrapping",
+           "undo",
+           "help",
+           "quit",
+           "quit2",
+           "quit3",
+           "remove2",
+           "remove3",
+           "isolate2",
+           "isolate3",
+           "wider2",
+           "narrower2",
+           "wider3",
+           "narrower3",
+        ].forEach(function(cmd){
+            var key = sbCommonUtils.getPref("key.domEraser." + cmd, "");
+            if (key) {
+                // commands with a number suffix are alternatives
+                var mainCmd = cmd.replace(/\d+$/, "");
+                that._shortcut_table[key] = mainCmd;
+            }
+        });
+    },
+    
     // aStateFlag
     //   0: disable
     //   1: enable
     init: function(aStateFlag) {
+        this._firstInit();
         var wasEnabled = this.enabled;
         this.enabled = (aStateFlag == 1);
         if (this.enabled == wasEnabled) return;
