@@ -121,8 +121,8 @@ var sbPrefWindow = {
                 prefElem.value = "";
             }
         }
-		event.preventDefault();
-		event.stopPropagation();
+        event.preventDefault();
+        event.stopPropagation();
     },
 
     exportPrefs: function() {
