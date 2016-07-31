@@ -42,7 +42,7 @@ var sbTreeHandler = {
         if ( !obj.value || obj.value == "twisty" ) return;
 
         var curIdx = this.TREE.currentIndex;
-        var shortcut = Shortcut.fromEvent(aEvent);
+        var shortcut = sbShortcut.fromEvent(aEvent);
         if (aType == 2 && !sbCommonUtils.getPref("ui.sidebarManage", false)) {
             // non-manage window:
             // simple click to open item; mid-, ctrl-, and shift-click to open in new tab
@@ -62,7 +62,7 @@ var sbTreeHandler = {
 
     // simple Enter on container: toggle container (natively), no keypress event
     onKeyPress: function(aEvent, aType) {
-        var shortcut = Shortcut.fromEvent(aEvent);
+        var shortcut = sbShortcut.fromEvent(aEvent);
         switch (shortcut.keyName) {
             case "Return":
                 // Enter to open item; Ctrl/Shift+Enter to open in new tab
@@ -94,7 +94,7 @@ var sbTreeHandler = {
         if ( aEvent.originalTarget.localName != "treechildren" || aEvent.button != 0 ) return;
         if ( !(aType < 2 || sbCommonUtils.getPref("ui.sidebarManage", false)) ) return;
         if ( this.TREE.view.isContainer(this.TREE.currentIndex) ) return;
-        var shortcut = Shortcut.fromEvent(aEvent);
+        var shortcut = sbShortcut.fromEvent(aEvent);
         sbController.open(this.resource, shortcut.accelKey || shortcut.shiftKey);
     },
 

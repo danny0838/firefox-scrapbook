@@ -211,7 +211,7 @@ var sbCombineService = {
     },
 
     onKeyPress: function(aEvent) {
-        var shortcut = Shortcut.fromEvent(aEvent);
+        var shortcut = sbShortcut.fromEvent(aEvent);
         if ( shortcut.toString() == "Delete") {
             this.deleteItem();
         } else if (shortcut.toString() == "Alt+Up") {
