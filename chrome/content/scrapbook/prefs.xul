@@ -17,28 +17,28 @@
 
     <prefpane id="mainPane" label="&sb.prefs.main;" flex="1">
         <preferences>
-            <preference id="extensions.scrapbook.ui.contextMenu"    name="extensions.scrapbook.ui.contextMenu"    type="bool" />
+            <preference id="extensions.scrapbook.ui.contextMenu" name="extensions.scrapbook.ui.contextMenu" type="bool" />
             <preference id="extensions.scrapbook.ui.contextSubMenu" name="extensions.scrapbook.ui.contextSubMenu" type="bool" />
             <preference id="extensions.scrapbook.ui.folderList.maxEntries" name="extensions.scrapbook.ui.folderList.maxEntries" type="int" />
-            <preference id="extensions.scrapbook.ui.bookmarkMenu"   name="extensions.scrapbook.ui.bookmarkMenu"   type="bool" />
-            <preference id="extensions.scrapbook.ui.menuBar"        name="extensions.scrapbook.ui.menuBar"        type="bool" />
-            <preference id="extensions.scrapbook.ui.menuBar.icon"   name="extensions.scrapbook.ui.menuBar.icon"   type="bool" />
-            <preference id="extensions.scrapbook.ui.toolsMenu"      name="extensions.scrapbook.ui.toolsMenu"      type="bool" />
-            <preference id="extensions.scrapbook.ui.sidebarManage"  name="extensions.scrapbook.ui.sidebarManage"      type="bool" />
+            <preference id="extensions.scrapbook.ui.bookmarkMenu" name="extensions.scrapbook.ui.bookmarkMenu" type="bool" />
+            <preference id="extensions.scrapbook.ui.menuBar" name="extensions.scrapbook.ui.menuBar" type="bool" />
+            <preference id="extensions.scrapbook.ui.menuBar.icon" name="extensions.scrapbook.ui.menuBar.icon" type="bool" />
+            <preference id="extensions.scrapbook.ui.toolsMenu" name="extensions.scrapbook.ui.toolsMenu" type="bool" />
+            <preference id="extensions.scrapbook.ui.sidebarManage" name="extensions.scrapbook.ui.sidebarManage" type="bool" />
         </preferences>
         <vbox flex="1">
-        <checkbox preference="extensions.scrapbook.ui.contextMenu"    label="&sb.prefs.ui.contextMenu;"
+        <checkbox preference="extensions.scrapbook.ui.contextMenu" label="&sb.prefs.ui.contextMenu;"
                   onsyncfrompreference="sbPrefWindow.updateGroupedUI('extensions.scrapbook.ui.contextMenu', 'contextmenu');" />
         <checkbox preference="extensions.scrapbook.ui.contextSubMenu" label="&sb.prefs.ui.contextSubMenu;" class="indent" group="contextmenu" />
-        <checkbox preference="extensions.scrapbook.ui.bookmarkMenu"   label="&sb.prefs.ui.bookmarkMenu;"     class="indent" group="contextmenu" />
+        <checkbox preference="extensions.scrapbook.ui.bookmarkMenu" label="&sb.prefs.ui.bookmarkMenu;" class="indent" group="contextmenu" />
         <hbox align="center">
             <label value="&sb.prefs.ui.folderList.maxEntries.1;" class="indent" />
             <textbox preference="extensions.scrapbook.ui.folderList.maxEntries" type="number" size="2" max="99" />
             <label value="&sb.prefs.ui.folderList.maxEntries.2;" />
         </hbox>
-        <checkbox preference="extensions.scrapbook.ui.menuBar"        label="&sb.prefs.ui.menuBar;"
+        <checkbox preference="extensions.scrapbook.ui.menuBar" label="&sb.prefs.ui.menuBar;"
                   onsyncfrompreference="sbPrefWindow.updateGroupedUI('extensions.scrapbook.ui.menuBar', 'menubar');" />
-        <checkbox preference="extensions.scrapbook.ui.menuBar.icon"   label="&sb.prefs.ui.menuBar.icon;"   class="indent" group="menubar" />
+        <checkbox preference="extensions.scrapbook.ui.menuBar.icon" label="&sb.prefs.ui.menuBar.icon;" class="indent" group="menubar" />
         <checkbox preference="extensions.scrapbook.ui.toolsMenu" label="&sb.prefs.ui.toolsMenu;" />
         <checkbox preference="extensions.scrapbook.ui.sidebarManage" label="&sb.prefs.ui.sidebarManage;" />
         </vbox>
@@ -95,19 +95,19 @@
 
     <prefpane id="tabsPane" label="&sb.prefs.tabs;" flex="1">
         <preferences>
-            <preference id="extensions.scrapbook.tabs.open"         name="extensions.scrapbook.tabs.open"         type="bool" />
-            <preference id="extensions.scrapbook.tabs.openSource"   name="extensions.scrapbook.tabs.openSource"   type="bool" />
+            <preference id="extensions.scrapbook.tabs.open" name="extensions.scrapbook.tabs.open" type="bool" />
+            <preference id="extensions.scrapbook.tabs.openSource" name="extensions.scrapbook.tabs.openSource" type="bool" />
             <preference id="extensions.scrapbook.tabs.combinedView" name="extensions.scrapbook.tabs.combinedView" type="bool" />
             <preference id="extensions.scrapbook.tabs.searchResult" name="extensions.scrapbook.tabs.searchResult" type="bool" />
-            <preference id="extensions.scrapbook.tabs.note"         name="extensions.scrapbook.tabs.note"         type="bool" />
+            <preference id="extensions.scrapbook.tabs.note" name="extensions.scrapbook.tabs.note" type="bool" />
         </preferences>
         <vbox flex="1">
         <description value="&sb.prefs.tabs.tips;:" />
-        <checkbox preference="extensions.scrapbook.tabs.open"         label="&sb.open;" />
-        <checkbox preference="extensions.scrapbook.tabs.openSource"   label="&sb.open.source;" />
+        <checkbox preference="extensions.scrapbook.tabs.open" label="&sb.open;" />
+        <checkbox preference="extensions.scrapbook.tabs.openSource" label="&sb.open.source;" />
         <checkbox preference="extensions.scrapbook.tabs.combinedView" label="&sb.folder.combine;" />
         <checkbox preference="extensions.scrapbook.tabs.searchResult" label="&sb.search.fulltext;" />
-        <checkbox preference="extensions.scrapbook.tabs.note"         label="&sb.prefs.tabs.note;" />
+        <checkbox preference="extensions.scrapbook.tabs.note" label="&sb.prefs.tabs.note;" />
         </vbox>
     </prefpane>
 
@@ -229,12 +229,12 @@
 
     <prefpane id="organizePane" label="&sb.prefs.organize;" flex="1">
         <preferences>
-            <preference id="extensions.scrapbook.data.default"      name="extensions.scrapbook.data.default"      type="bool" />
-            <preference id="extensions.scrapbook.data.path"         name="extensions.scrapbook.data.path"         type="file" />
+            <preference id="extensions.scrapbook.data.default" name="extensions.scrapbook.data.default" type="bool" />
+            <preference id="extensions.scrapbook.data.path" name="extensions.scrapbook.data.path" type="file" />
             <preference id="extensions.scrapbook.multibook.enabled" name="extensions.scrapbook.multibook.enabled" type="bool" />
-            <preference id="extensions.scrapbook.confirmDelete"     name="extensions.scrapbook.confirmDelete"     type="bool" />
+            <preference id="extensions.scrapbook.confirmDelete" name="extensions.scrapbook.confirmDelete" type="bool" />
             <preference id="extensions.scrapbook.tree.autoCollapse" name="extensions.scrapbook.tree.autoCollapse" type="bool" />
-            <preference id="extensions.scrapbook.tree.unshift"      name="extensions.scrapbook.tree.unshift"      type="bool" />
+            <preference id="extensions.scrapbook.tree.unshift" name="extensions.scrapbook.tree.unshift" type="bool" />
         </preferences>
         <vbox flex="1">
         <groupbox>
@@ -258,13 +258,13 @@
                       onsyncfrompreference="sbPrefWindow.updateDataUI();" />
             <description class="indent">&sb.prefs.multibook.tips;</description>
         </groupbox>
-        <checkbox preference="extensions.scrapbook.confirmDelete"     label="&sb.prefs.confirmDelete;" />
+        <checkbox preference="extensions.scrapbook.confirmDelete" label="&sb.prefs.confirmDelete;" />
         <checkbox preference="extensions.scrapbook.tree.autoCollapse" label="&sb.prefs.tree.autoCollapse;" />
         <hbox align="center">
             <label value="&sb.prefs.tree.unshift;" />
             <menulist preference="extensions.scrapbook.tree.unshift">
                 <menupopup>
-                    <menuitem value="true"  label="&sb.prefs.tree.unshift.top;" />
+                    <menuitem value="true" label="&sb.prefs.tree.unshift.top;" />
                     <menuitem value="false" label="&sb.prefs.tree.unshift.bottom;" />
                 </menupopup>
             </menulist>
@@ -274,18 +274,18 @@
 
     <prefpane id="advancedPane" label="&sb.prefs.advanced;" flex="1">
         <preferences>
-            <preference id="extensions.scrapbook.asciiFilename"   name="extensions.scrapbook.asciiFilename"   type="bool" />
-            <preference id="extensions.scrapbook.showDetailOnDrop"   name="extensions.scrapbook.showDetailOnDrop"   type="bool" />
-            <preference id="extensions.scrapbook.notifyOnComplete"   name="extensions.scrapbook.notifyOnComplete"   type="bool" />
+            <preference id="extensions.scrapbook.asciiFilename" name="extensions.scrapbook.asciiFilename" type="bool" />
+            <preference id="extensions.scrapbook.showDetailOnDrop" name="extensions.scrapbook.showDetailOnDrop" type="bool" />
+            <preference id="extensions.scrapbook.notifyOnComplete" name="extensions.scrapbook.notifyOnComplete" type="bool" />
             <preference id="extensions.scrapbook.notifyPageCaptured" name="extensions.scrapbook.notifyPageCaptured" type="bool" />
-            <preference id="extensions.scrapbook.autoOutput"         name="extensions.scrapbook.autoOutput"   type="bool" />
+            <preference id="extensions.scrapbook.autoOutput" name="extensions.scrapbook.autoOutput" type="bool" />
         </preferences>
         <vbox flex="1">
         <checkbox preference="extensions.scrapbook.asciiFilename" label="&sb.prefs.asciiFilename;" />
         <checkbox preference="extensions.scrapbook.showDetailOnDrop" label="&sb.prefs.showDetailOnDrop;" />
         <checkbox preference="extensions.scrapbook.notifyOnComplete" label="&sb.prefs.notifyOnComplete;" />
         <checkbox preference="extensions.scrapbook.notifyPageCaptured" label="&sb.prefs.notifyPageCaptured;" />
-        <checkbox preference="extensions.scrapbook.autoOutput"       label="&sb.prefs.autoOutput;" />
+        <checkbox preference="extensions.scrapbook.autoOutput" label="&sb.prefs.autoOutput;" />
         <hbox>
             <button label="&sb.prefs.export;" oncommand="sbPrefWindow.exportPrefs();" />
             <button label="&sb.prefs.import;" oncommand="sbPrefWindow.importPrefs();" />

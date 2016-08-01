@@ -32,7 +32,7 @@
         <label id="sbResultHeaderLoc" crop="end" flex="1" value="&sb.prop.folder;: " hidden="true" />
         <spacer flex="1000" />
         <toolbarbutton class="sb-header-locate" tooltiptext="&sb.locate;" oncommand="sbSearchResult.forward('L');" />
-        <toolbarbutton class="sb-header-exit"   oncommand="SB_exitResult();" />
+        <toolbarbutton class="sb-header-exit" oncommand="SB_exitResult();" />
     </hbox>
 
     <tree id="sbTree"

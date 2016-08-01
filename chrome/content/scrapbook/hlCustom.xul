@@ -35,7 +35,7 @@
             <checkbox id="hlTextEnabled" label="&sb.hlCustom.color;" /> 
             <colorpicker id="hlTextColor" type="button" /> 
             <spacer width="20" />
-            <checkbox id ="hlTextBold"   label="&sb.hlCustom.bold;" />
+            <checkbox id ="hlTextBold" label="&sb.hlCustom.bold;" />
             <checkbox id ="hlTextItalic" label="&sb.hlCustom.italic;" />
             <checkbox id ="hlTextStrike" label="&sb.hlCustom.line;" />
         </hbox>
@@ -60,7 +60,7 @@
             <label value="&sb.hlCustom.style;:" />
             <menulist id="hlBorderStyle">
                 <menupopup>
-                    <menuitem value="solid"  label="&sb.hlCustom.solid;" />
+                    <menuitem value="solid" label="&sb.hlCustom.solid;" />
                     <menuitem value="dotted" label="&sb.hlCustom.dotted;" />
                     <menuitem value="dashed" label="&sb.hlCustom.dashed;" />
                     <menuitem value="double" label="&sb.hlCustom.double;" />
@@ -69,9 +69,9 @@
             <label value="&sb.hlCustom.width;:" />
             <menulist id="hlBorderWidth">
                 <menupopup>
-                    <menuitem value="thin"   label="&sb.hlCustom.thin;" />
+                    <menuitem value="thin" label="&sb.hlCustom.thin;" />
                     <menuitem value="medium" label="&sb.hlCustom.medium;" />
-                    <menuitem value="thick"  label="&sb.hlCustom.thick;" />
+                    <menuitem value="thick" label="&sb.hlCustom.thick;" />
                 </menupopup>
             </menulist>
         </hbox>
