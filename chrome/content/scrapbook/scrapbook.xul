@@ -32,7 +32,6 @@
                 </menupopup>
             </toolbarbutton>
             <toolbarbutton id="sbToolbarToggle" tooltiptext="&sb.toggle.all;" oncommand="sbTreeHandler.toggleAllFolders();" />
-            <toolbarbutton id="sbToolbarManage" tooltiptext="&sb.tools.manage;..." oncommand="sbCommonUtils.openManageWindow(null,null);" />
             <toolbarbutton id="mbToolbarButton" />
             <spacer flex="1" />
             <toolbarbutton type="menu" label="&sb.tools; ">
