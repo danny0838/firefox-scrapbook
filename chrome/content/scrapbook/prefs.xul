@@ -51,6 +51,7 @@
             <preference id="extensions.scrapbook.key.captureAllTabs" name="extensions.scrapbook.key.captureAllTabs" type="string" />
             <preference id="extensions.scrapbook.key.bookmark"       name="extensions.scrapbook.key.bookmark"       type="string" />
         </preferences>
+        <description class="notify-restart">&sb.prefs.desc.restart;</description>
         <grid>
             <columns>
                 <column />
@@ -86,7 +87,6 @@
                 </row>
             </rows>
         </grid>
-        <description class="notify-restart">&sb.prefs.desc.restart;</description>
     </prefpane>
 
     <prefpane id="tabsPane" label="&sb.prefs.tabs;" flex="1">
