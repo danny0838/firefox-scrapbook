@@ -13,7 +13,7 @@ const { sbCommonUtils } = Components.utils.import("resource://scrapbook-modules/
 // possible values of nsIXULRuntime.OS:
 // https://developer.mozilla.org/en/OS_TARGET
 const nsIXULRuntime = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULRuntime);
-const isMac = (nsIXULRuntime.OS.substring(0, 3).toLowerCase() == "mac");
+const isMac = (nsIXULRuntime.OS == "Darwin");
 
 const keyNameToUIStringMap = {
     "BackQuote": "`",
@@ -164,7 +164,7 @@ sbShortcut.prototype = {
 
     // return the string which is nice to show in the UI
     getUIString: function () {
-        return this.getKeys.map(function(key) {
+        var keys = this.getKeys.map(function(key) {
             // replace Accel
             if (key == "Accel") {
                 if (accelKeyCode == 17) {
@@ -191,7 +191,18 @@ sbShortcut.prototype = {
             }
 
             return key;
-        }).join("+");
+        });
+
+        // Mac style modifier keys: reversed order and no "+" inbetween
+        if (isMac) {
+            var macKeys = [keys.pop()];
+            while (keys.length) {
+                macKeys.unshift(keys.shift());
+            }
+            return macKeys.join("");
+        }
+
+        return keys.join("+");
     },
 
     // return the keycode attribute for XUL <key> elements

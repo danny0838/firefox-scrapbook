@@ -157,17 +157,35 @@ var sbPageEditor = {
 
     handleKeyEvent: function(aEvent) {
         if (!sbPageEditor.enabled || sbHtmlEditor.enabled || sbDOMEraser.enabled) return;
+        // cache frequently used variables
+        if (!arguments.callee.cached) {
+            arguments.callee.cached = true;
+            arguments.callee.domEraserToggle = sbCommonUtils.getPref("key.domEraser.quit2", "");
+            arguments.callee.htmlEditorToggle = sbCommonUtils.getPref("key.htmlEditor.quit", "");
+        }
         var shortcut = sbShortcut.fromEvent(aEvent);
         // F9
-        if (shortcut.toString() == "F9") {
+        if (arguments.callee.domEraserToggle && shortcut.toString() == arguments.callee.domEraserToggle) {
             sbDOMEraser.init(1);
             aEvent.preventDefault();
+            try {
+                // event.stopImmediatePropagation is supported since Firefox 10
+                aEvent.stopImmediatePropagation();
+            } catch (ex) {
+                aEvent.stopPropagation();
+            }
             return;
         }
         // F10
-        if (shortcut.toString() == "F10") {
+        if (arguments.callee.htmlEditorToggle && shortcut.toString() == arguments.callee.htmlEditorToggle) {
             sbHtmlEditor.init(null, 1);
             aEvent.preventDefault();
+            try {
+                // event.stopImmediatePropagation is supported since Firefox 10
+                aEvent.stopImmediatePropagation();
+            } catch (ex) {
+                aEvent.stopPropagation();
+            }
             return;
         }
         // 1-8 or Alt + 1-8
@@ -631,60 +649,81 @@ var sbHtmlEditor = {
     },
 
     enabled: false,
-    _shortcut_table: {
-        "F10": "quit",
-        "Accel+S": "save",
-        "Accel+M": "removeFormat",
-        "Accel+N": "unlink",
-        "Accel+Alt+I": "insertSource",
+    _shortcutMap: {},
 
-        "Accel+B": "bold",
-        "Accel+I": "italic",
-        "Accel+U": "underline",
-        "Accel+T": "strikeThrough",
-        "Accel+E": "setColor",
-        "Accel+Up": "increaseFontSize",
-        "Accel+Down": "decreaseFontSize",
-        "Accel+K": "superscript",
-        "Accel+J": "subscript",
+    _firstInit: function() {
+        if (arguments.callee.done) return;
+        arguments.callee.done = true;
 
-        "Alt+0": "formatblock_p",
-        "Alt+1": "formatblock_h1",
-        "Alt+2": "formatblock_h2",
-        "Alt+3": "formatblock_h3",
-        "Alt+4": "formatblock_h4",
-        "Alt+5": "formatblock_h5",
-        "Alt+6": "formatblock_h6",
-        "Alt+7": "formatblock_div",
-        "Alt+8": "formatblock_pre",
+        var that = this;
 
-        "Alt+U": "insertUnorderedList",
-        "Alt+O": "insertOrderedList",
-        "Alt+OpenBracket": "outdent",
-        "Alt+CloseBracket": "indent",
-        "Alt+Comma": "justifyLeft",
-        "Alt+Period": "justifyRight",
-        "Alt+M": "justifyCenter",
-        "Alt+Slash": "justifyFull",
+        // init shortkey table
+        [
+            "quit",
+            "save",
+            "removeFormat",
+            "unlink",
+            "insertSource",
+            "bold",
+            "italic",
+            "underline",
+            "strikeThrough",
+            "setColor",
+            "increaseFontSize",
+            "decreaseFontSize",
+            "superscript",
+            "subscript",
+            "formatblock_p",
+            "formatblock_h1",
+            "formatblock_h2",
+            "formatblock_h3",
+            "formatblock_h4",
+            "formatblock_h5",
+            "formatblock_h6",
+            "formatblock_div",
+            "formatblock_pre",
+            "insertUnorderedList",
+            "insertOrderedList",
+            "outdent",
+            "indent",
+            "justifyLeft",
+            "justifyRight",
+            "justifyCenter",
+            "justifyFull",
+            "attachLink",
+            "attachFile",
+            "backupFile",
+            "horizontalLine",
+            "insertDate",
+            "insertTodoBox",
+            "insertTodoBoxDone",
+            "wrapHTML1",
+            "wrapHTML2",
+            "wrapHTML3",
+            "wrapHTML4",
+            "wrapHTML5",
+            "wrapHTML6",
+            "wrapHTML7",
+            "wrapHTML8",
+            "wrapHTML9",
+            "wrapHTML0",
+        ].forEach(function(cmd){
+            var key = sbCommonUtils.getPref("key.htmlEditor." + cmd, "");
+            if (key) {
+                that._shortcutMap[key] = cmd;
+            }
+        });
 
-        "Accel+Shift+L": "attachLink",
-        "Accel+Shift+F": "attachFile",
-        "Accel+Shift+B": "backupFile",
-
-        "Accel+Shift+H": "horizontalLine",
-        "Accel+Shift+D": "insertDate",
-        "Accel+Shift+C": "insertTodoBox",
-        "Accel+Alt+Shift+C": "insertTodoBoxDone",
-        "Accel+Alt+1": "wrapHTML1",
-        "Accel+Alt+2": "wrapHTML2",
-        "Accel+Alt+3": "wrapHTML3",
-        "Accel+Alt+4": "wrapHTML4",
-        "Accel+Alt+5": "wrapHTML5",
-        "Accel+Alt+6": "wrapHTML6",
-        "Accel+Alt+7": "wrapHTML7",
-        "Accel+Alt+8": "wrapHTML8",
-        "Accel+Alt+9": "wrapHTML9",
-        "Accel+Alt+0": "wrapHTML0",
+        // update hotkey text
+        Array.prototype.forEach.call(document.getElementById("ScrapBookContextMenu10").getElementsByTagName("menuitem"), function(elem){
+            for (var i in that._shortcutMap) {
+                if (elem.value == that._shortcutMap[i]) {
+                    var shortcut = sbShortcut.fromString(i);
+                    elem.setAttribute("acceltext", shortcut.getUIString());
+                    return;
+                }
+            }
+        });
     },
 
     currentDocument: function(aMainDoc) {
@@ -697,6 +736,7 @@ var sbHtmlEditor = {
     //   1: enable  (for a specific window document)
     //   2: refresh (updates toolbar)
     init: function(aDoc, aStateFlag) {
+        this._firstInit();
         aDoc = aDoc || sbCommonUtils.getFocusedWindow().document;
         var wasEnabled = sbCommonUtils.documentData(window.content.document, "sbHtmlEditor.enabled") || false;
         if ( aStateFlag === undefined ) aStateFlag = wasEnabled ? 0 : 1;
@@ -775,12 +815,18 @@ var sbHtmlEditor = {
         // set variables and check whether it's a defined hotkey combination
         var shortcut = sbShortcut.fromEvent(aEvent);
         var key = shortcut.toString();
-        var callback_name = sbHtmlEditor._shortcut_table[key];
+        var callback_name = sbHtmlEditor._shortcutMap[key];
         if (!callback_name) return;
 
         // now we are sure we have the hotkey
         var callback = sbHtmlEditor["cmd_" + callback_name];
         aEvent.preventDefault();
+        try {
+            // event.stopImmediatePropagation is supported since Firefox 10
+            aEvent.stopImmediatePropagation();
+        } catch (ex) {
+            aEvent.stopPropagation();
+        }
 
         // check the document is editable and set
         var doc = sbHtmlEditor.currentDocument();
@@ -805,21 +851,6 @@ var sbHtmlEditor = {
     },
     
     updatePopup: function() {
-        // update hotkey text, we only need to this once
-        if (!arguments.callee.hotkeyDone) {
-            arguments.callee.hotkeyDone = true;
-            var that = this;
-            Array.prototype.forEach.call(document.getElementById("ScrapBookContextMenu10").getElementsByTagName("menuitem"), function(elem){
-                for (var i in that._shortcut_table) {
-                    if (elem.value == that._shortcut_table[i]) {
-                        var shortcut = sbShortcut.fromString(i);
-                        elem.setAttribute("acceltext", shortcut.getUIString());
-                        return;
-                    }
-                }
-            });
-        }
-
         document.getElementById("ScrapBookEditHTML_insertDate").tooltipText = sbCommonUtils.getPref("edit.insertDateFormat", "") || "%Y-%m-%d %H:%M:%S";
         document.getElementById("ScrapBookEditHTML_wrapHTML1").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.1", "") || "<code>{THIS}</code>";
         document.getElementById("ScrapBookEditHTML_wrapHTML2").tooltipText = sbCommonUtils.getPref("edit.wrapperFormat.2", "") || "<code>{THIS}</code>";
@@ -1378,28 +1409,7 @@ var sbHtmlEditor = {
 
 var sbDOMEraser = {
 
-    _shortcut_table: {
-        "F9": "quit",
-        "Escape": "quit",
-        "Return": "remove",
-        "Space": "remove",
-        "Shift+Return": "isolate",
-        "Shift+Space": "isolate",
-        "Add": "wider",
-        "Subtract": "narrower",
-        "Shift+Equals": "wider",
-        "Hyphen_Minus": "narrower",
-        "W": "wider",
-        "N": "narrower",
-        "R": "remove",
-        "I": "isolate",
-        "B": "blackOnWhite",
-        "C": "colorize",
-        "D": "deWrapping",
-        "U": "undo",
-        "H": "help",
-        "Q": "quit",
-    },
+    _shortcutMap: {},
 
     enabled: false,
     lastX: 0,
@@ -1410,10 +1420,49 @@ var sbDOMEraser = {
     lastTargetOutline: "",
     widerStack: null,
 
+    _firstInit: function() {
+        if (arguments.callee.done) return;
+        arguments.callee.done = true;
+
+        var that = this;
+
+        // init shortkey table
+        [
+           "wider",
+           "narrower",
+           "remove",
+           "isolate",
+           "blackOnWhite",
+           "colorize",
+           "deWrapping",
+           "undo",
+           "help",
+           "quit",
+           "quit2",
+           "quit3",
+           "remove2",
+           "remove3",
+           "isolate2",
+           "isolate3",
+           "wider2",
+           "narrower2",
+           "wider3",
+           "narrower3",
+        ].forEach(function(cmd){
+            var key = sbCommonUtils.getPref("key.domEraser." + cmd, "");
+            if (key) {
+                // commands with a number suffix are alternatives
+                var mainCmd = cmd.replace(/\d+$/, "");
+                that._shortcutMap[key] = mainCmd;
+            }
+        });
+    },
+    
     // aStateFlag
     //   0: disable
     //   1: enable
     init: function(aStateFlag) {
+        this._firstInit();
         var wasEnabled = this.enabled;
         this.enabled = (aStateFlag == 1);
         if (this.enabled == wasEnabled) return;
@@ -1470,11 +1519,17 @@ var sbDOMEraser = {
         // set variables and check whether it's a defined hotkey combination
         var shortcut = sbShortcut.fromEvent(aEvent);
         var key = shortcut.toString();
-        var command = sbDOMEraser._shortcut_table[key];
+        var command = sbDOMEraser._shortcutMap[key];
         if (!command) return;
 
         // now we are sure we have the hotkey, skip the default key action
         aEvent.preventDefault();
+        try {
+            // event.stopImmediatePropagation is supported since Firefox 10
+            aEvent.stopImmediatePropagation();
+        } catch (ex) {
+            aEvent.stopPropagation();
+        }
 
         // The original key effect could not be blocked completely
         // if the command has a prompt or modal window that blocks.
@@ -1486,6 +1541,12 @@ var sbDOMEraser = {
 
     handleEvent: function(aEvent) {
         aEvent.preventDefault();
+        try {
+            // event.stopImmediatePropagation is supported since Firefox 10
+            aEvent.stopImmediatePropagation();
+        } catch (ex) {
+            aEvent.stopPropagation();
+        }
         var elem = aEvent.target;
         if ( aEvent.type == "mouseover" ) {
             if (sbDOMEraser._isNormalNode(elem)) {
