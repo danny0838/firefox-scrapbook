@@ -56,6 +56,10 @@ menuitem#sbToolsMenuPopupMultiple .menu-iconic-icon {
 
 /* ::::: POPUP ::::: */
 
+menuitem#sbPopupManage {
+    list-style-image: url("chrome://scrapbook/skin/toolbar_manage.png");
+}
+
 menuitem#sbPopupRemove {
     list-style-image: url("chrome://scrapbook/skin/menu_remove.png");
 }
