@@ -47,9 +47,9 @@
                                 <image id="sbPropIcon" style="width:16px;height:16px;margin:0px 8px;" />
                                 <toolbarbutton id="sbPropIconMenu" label="&sb.prop.icon.change;" type="menu">
                                     <menupopup>
-                                        <menuitem label="&sb.prop.icon.default;"    oncommand="sbPropService.setDefaultIcon();" />
+                                        <menuitem label="&sb.prop.icon.default;" oncommand="sbPropService.setDefaultIcon();" />
                                         <menuitem label="&sb.prop.icon.favicon;..." oncommand="sbPropService.pickupIcon('F',this.label);" />
-                                        <menuitem label="&sb.prop.icon.custom;..."  oncommand="sbPropService.pickupIcon('U',this.label);" />
+                                        <menuitem label="&sb.prop.icon.custom;..." oncommand="sbPropService.pickupIcon('U',this.label);" />
                                         <menuitem label="&sbp.prop.url;..." oncommand="sbPropService.setIconURL();" />
                                     </menupopup>
                                 </toolbarbutton>

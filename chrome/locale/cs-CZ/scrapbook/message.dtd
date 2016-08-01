@@ -260,7 +260,7 @@
 <!ENTITY sb.prefs.ui.toolsMenu "Zobrazit v nabídce položku &apos;Nástroje&apos;">
 <!ENTITY sb.prefs.ui.statusBar "Zobrazit ve stavové liště">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "Změna vyžaduje restart aplikace Firefox.">
+<!ENTITY sb.prefs.desc.restart "Změna vyžaduje restart aplikace Firefox.">
 <!ENTITY sb.prefs.tabs.tips "Otevřít v panelu pro následující operace">
 <!ENTITY sb.prefs.tabs.note "Upravit poznámku">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
@@ -385,7 +385,7 @@
 <!ENTITY sbp.prop.url "Adresa URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.remove.container "Convert to Non-folder">
+<!ENTITY sb.unmake.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Kombinovaný náhled">
 <!ENTITY sb.folder.openall "Otevřít vše v panelech">
 <!ENTITY sb.folder.manage "Spravovat složku">

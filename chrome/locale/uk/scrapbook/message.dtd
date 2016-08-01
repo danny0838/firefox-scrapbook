@@ -260,7 +260,7 @@
 <!ENTITY sb.prefs.ui.toolsMenu "Відображати у меню „Інструменти“">
 <!ENTITY sb.prefs.ui.statusBar "Відображати у рядку стану">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "Потребує перезавантаження Firefox.">
+<!ENTITY sb.prefs.desc.restart "Потребує перезавантаження Firefox.">
 <!ENTITY sb.prefs.tabs.tips "Відкривати у нових вкладках наступні дії">
 <!ENTITY sb.prefs.tabs.note "Редагувати нотатку">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
@@ -385,7 +385,7 @@
 <!ENTITY sbp.prop.url "Адреса">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.remove.container "Convert to Non-folder">
+<!ENTITY sb.unmake.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Комбінований вигляд">
 <!ENTITY sb.folder.openall "Відкрити усе у вкладках">
 <!ENTITY sb.folder.manage "Керування текою">

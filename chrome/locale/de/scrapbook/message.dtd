@@ -260,7 +260,7 @@
 <!ENTITY sb.prefs.ui.toolsMenu "ScrapBook-Eintrag im Menü &quot;Extras&quot; anzeigen">
 <!ENTITY sb.prefs.ui.statusBar "Symbol in der Statusleiste anzeigen">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "Änderung erfordert einen Firefox-Neustart.">
+<!ENTITY sb.prefs.desc.restart "Änderung erfordert einen Firefox-Neustart.">
 <!ENTITY sb.prefs.tabs.tips "Folgende Aktionen öffnen neue Tabs">
 <!ENTITY sb.prefs.tabs.note "Notiz bearbeiten">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
@@ -385,7 +385,7 @@
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.remove.container "Convert to Non-folder">
+<!ENTITY sb.unmake.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Zusammengefasste Ansicht öffnen">
 <!ENTITY sb.folder.openall "Alles in Tabs öffnen">
 <!ENTITY sb.folder.manage "Ordner verwalten">

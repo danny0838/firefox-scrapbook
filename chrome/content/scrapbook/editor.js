@@ -157,7 +157,7 @@ var sbPageEditor = {
 
     handleKeyEvent: function(aEvent) {
         if (!sbPageEditor.enabled || sbHtmlEditor.enabled || sbDOMEraser.enabled) return;
-        var shortcut = Shortcut.fromEvent(aEvent);
+        var shortcut = sbShortcut.fromEvent(aEvent);
         // F9
         if (shortcut.toString() == "F9") {
             sbDOMEraser.init(1);
@@ -773,7 +773,7 @@ var sbHtmlEditor = {
 
     handleKeyEvent: function(aEvent) {
         // set variables and check whether it's a defined hotkey combination
-        var shortcut = Shortcut.fromEvent(aEvent);
+        var shortcut = sbShortcut.fromEvent(aEvent);
         var key = shortcut.toString();
         var callback_name = sbHtmlEditor._shortcut_table[key];
         if (!callback_name) return;
@@ -812,7 +812,7 @@ var sbHtmlEditor = {
             Array.prototype.forEach.call(document.getElementById("ScrapBookContextMenu10").getElementsByTagName("menuitem"), function(elem){
                 for (var i in that._shortcut_table) {
                     if (elem.value == that._shortcut_table[i]) {
-                        var shortcut = Shortcut.fromString(i);
+                        var shortcut = sbShortcut.fromString(i);
                         elem.setAttribute("acceltext", shortcut.getUIString());
                         return;
                     }
@@ -1468,7 +1468,7 @@ var sbDOMEraser = {
 
     handleKeyEvent: function(aEvent) {
         // set variables and check whether it's a defined hotkey combination
-        var shortcut = Shortcut.fromEvent(aEvent);
+        var shortcut = sbShortcut.fromEvent(aEvent);
         var key = shortcut.toString();
         var command = sbDOMEraser._shortcut_table[key];
         if (!command) return;

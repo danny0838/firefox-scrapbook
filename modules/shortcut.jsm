@@ -2,11 +2,11 @@
  *
  * The class for keyboard shortcut
  *
- * @public {class} Shortcut
+ * @public {class} sbShortcut
  *
  *******************************************************************/
 
-this.EXPORTED_SYMBOLS = ["Shortcut"];
+this.EXPORTED_SYMBOLS = ["sbShortcut"];
 
 const { sbCommonUtils } = Components.utils.import("resource://scrapbook-modules/common.jsm", {});
 
@@ -92,9 +92,9 @@ const accelKeyCode = sbCommonUtils.getPref("ui.key.accelKey", 0, true);
 
 
 /**
- * Shortcut class
+ * sbShortcut class
  */
-function Shortcut(data) {
+function sbShortcut(data) {
     this.keyCode = data.keyCode;
     this.keyName = keyCodeToNameMap[this.keyCode];
     // unify the order
@@ -126,7 +126,7 @@ function Shortcut(data) {
     }
 }
 
-Shortcut.prototype = {
+sbShortcut.prototype = {
     get isValid() {
         delete this.isValid;
         return this.isValid = !!this.keyName;
@@ -213,15 +213,15 @@ Shortcut.prototype = {
 };
 
 // returns new object from a normalized string
-Shortcut.fromString = function (str) {
+sbShortcut.fromString = function (str) {
     var data = {}
     var parts = str.split("+");
     data.keyCode = keyNameToCodeMap[parts.pop()];
     data.modifiers = [].concat(parts);
-    return new Shortcut(data);
+    return new sbShortcut(data);
 };
 
-Shortcut.fromEvent = function (event) {
+sbShortcut.fromEvent = function (event) {
     var data = {};
     // sometimes keyCode is 0 (e.g. Space onkeypress), and we need event.which to get it
     data.keyCode = event.keyCode || event.which;
@@ -240,5 +240,5 @@ Shortcut.fromEvent = function (event) {
     if (event.shiftKey && accelKeyCode != 16) modifiers.push("Shift");
     data.modifiers = modifiers;
 
-    return new Shortcut(data);
+    return new sbShortcut(data);
 };

@@ -260,7 +260,7 @@
 <!ENTITY sb.prefs.ui.toolsMenu "&apos;Araçlar&apos; menüsünde göster">
 <!ENTITY sb.prefs.ui.statusBar "Durumu çubuğunda göster">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "Değişiklikler Firefox&apos;u yeniden başlatmanızı gerektirir.">
+<!ENTITY sb.prefs.desc.restart "Değişiklikler Firefox&apos;u yeniden başlatmanızı gerektirir.">
 <!ENTITY sb.prefs.tabs.tips "Aşağıdaki eylemleri sekmede aç">
 <!ENTITY sb.prefs.tabs.note "Notu Düzenle">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
@@ -386,7 +386,7 @@
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.remove.container "Convert to Non-folder">
+<!ENTITY sb.unmake.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Birleşik Görünüm">
 <!ENTITY sb.folder.openall "Tümünü Sekmelerde Aç">
 <!ENTITY sb.folder.manage "Klasörü Düzenle">

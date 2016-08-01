@@ -260,7 +260,7 @@
 <!ENTITY sb.prefs.ui.toolsMenu "Visa i &quot;Verktyg&quot;-menyn">
 <!ENTITY sb.prefs.ui.statusBar "Visa i statusfältet">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "Ändring kräver att Firefox startas om.">
+<!ENTITY sb.prefs.desc.restart "Ändring kräver att Firefox startas om.">
 <!ENTITY sb.prefs.tabs.tips "Öppna följande åtgärder i ny flik">
 <!ENTITY sb.prefs.tabs.note "Redigera anteckning">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
@@ -385,7 +385,7 @@
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.remove.container "Convert to Non-folder">
+<!ENTITY sb.unmake.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Kombinerad vy">
 <!ENTITY sb.folder.openall "Öppna alla i flikar">
 <!ENTITY sb.folder.manage "Hantera mapp">

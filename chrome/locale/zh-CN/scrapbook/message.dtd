@@ -260,7 +260,7 @@
 <!ENTITY sb.prefs.ui.toolsMenu "在“工具”菜单显示">
 <!ENTITY sb.prefs.ui.statusBar "在状态栏显示">
 <!ENTITY sb.prefs.ui.sidebarManage "侧栏操作使用管理模式">
-<!ENTITY sb.prefs.restart "更改需要重启 Firefox。">
+<!ENTITY sb.prefs.desc.restart "更改需要重启 Firefox。">
 <!ENTITY sb.prefs.tabs.tips "这些操作在新标签页中打开">
 <!ENTITY sb.prefs.tabs.note "编辑笔记">
 <!ENTITY sb.prefs.edit.autoEditNoteX "便签页面自动进入编辑模式">
@@ -385,7 +385,7 @@
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "转换为文件夹">
-<!ENTITY sb.remove.container "转换为非文件夹">
+<!ENTITY sb.unmake.container "转换为非文件夹">
 <!ENTITY sb.folder.combine "合并在同一标签页中打开">
 <!ENTITY sb.folder.openall "在标签页中打开所有项目">
 <!ENTITY sb.folder.manage "管理文件夹">

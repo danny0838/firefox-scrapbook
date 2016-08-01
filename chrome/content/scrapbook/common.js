@@ -4,10 +4,10 @@
  *
  * @public {class} sbCommonUtils
  * @public {class} sbDataSource
- * @public {class} Shortcut
+ * @public {class} sbShortcut
  *
  *******************************************************************/
 
 const { sbCommonUtils } = Components.utils.import("resource://scrapbook-modules/common.jsm", {});
 const { sbDataSource } = Components.utils.import("resource://scrapbook-modules/datasource.jsm", {});
-const { Shortcut } = Components.utils.import("resource://scrapbook-modules/shortcut.jsm", {});
+const { sbShortcut } = Components.utils.import("resource://scrapbook-modules/shortcut.jsm", {});

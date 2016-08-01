@@ -21,7 +21,7 @@
 
     <wizardpage pageid="sbRepairStartPage" label="&sb.tools.repair;" onpageshow="sbRepair.initStartPage();" next="sbRepairRDF1">
         <radiogroup id="sbRepairRadioGroup">
-            <radio label="&sb.repair.rdfFile;"  oncommand="sbRepair.initStartPage();" />
+            <radio label="&sb.repair.rdfFile;" oncommand="sbRepair.initStartPage();" />
             <description flex="1" style="margin-left:30px;margin-bottom:20px;">&sb.repair.rdfFile.descript;</description>
             <radio label="&sb.repair.favicons;" oncommand="sbRepair.initStartPage();" />
             <description flex="1" style="margin-left:30px;margin-bottom:20px;">&sb.repair.favicons.descript;</description>

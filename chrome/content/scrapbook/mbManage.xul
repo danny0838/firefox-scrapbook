@@ -28,9 +28,9 @@
     </tree>
     <spacer height="10" />
     <hbox>
-        <button id="mbAddButton"    label="&mb.button.add;..."  oncommand="gMultiBookManager.add();" />
-        <button id="mbEditButton"   label="&mb.button.edit;..." oncommand="gMultiBookManager.edit();" />
-        <button id="mbRemoveButton" label="&mb.button.remove;"  oncommand="gMultiBookManager.remove();" />
+        <button id="mbAddButton" label="&mb.button.add;..." oncommand="gMultiBookManager.add();" />
+        <button id="mbEditButton" label="&mb.button.edit;..." oncommand="gMultiBookManager.edit();" />
+        <button id="mbRemoveButton" label="&mb.button.remove;" oncommand="gMultiBookManager.remove();" />
     </hbox>
 
 </dialog>

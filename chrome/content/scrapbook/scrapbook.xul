@@ -25,14 +25,14 @@
         <toolbar id="sbMainToolbar" class="plain">
             <toolbarbutton id="sbToolbarNewFolder" type="menu">
                 <menupopup>
-                    <menuitem class="menuitem-iconic sb-create" label="&sb.new.folder;..." oncommand="var shortcut = Shortcut.fromEvent(event); sbMainService.createFolder(shortcut.accelKey || shortcut.shiftKey);" />
-                    <menuitem class="menuitem-iconic sb-create" label="&sb.new.separator;" oncommand="var shortcut = Shortcut.fromEvent(event); sbMainService.createSeparator(shortcut.accelKey || shortcut.shiftKey);" />
-                    <menuitem class="menuitem-iconic sb-create" label="&sb.new.note;"      oncommand="var shortcut = Shortcut.fromEvent(event); sbMainService.createNote(shortcut.accelKey || shortcut.shiftKey);" />
-                    <menuitem class="menuitem-iconic sb-create" label="&sb.new.notex;"     oncommand="var shortcut = Shortcut.fromEvent(event); sbMainService.createNoteX(shortcut.accelKey || shortcut.shiftKey);" />
+                    <menuitem class="menuitem-iconic sb-create" label="&sb.new.folder;..." oncommand="var shortcut = sbShortcut.fromEvent(event); sbMainService.createFolder(shortcut.accelKey || shortcut.shiftKey);" />
+                    <menuitem class="menuitem-iconic sb-create" label="&sb.new.separator;" oncommand="var shortcut = sbShortcut.fromEvent(event); sbMainService.createSeparator(shortcut.accelKey || shortcut.shiftKey);" />
+                    <menuitem class="menuitem-iconic sb-create" label="&sb.new.note;" oncommand="var shortcut = sbShortcut.fromEvent(event); sbMainService.createNote(shortcut.accelKey || shortcut.shiftKey);" />
+                    <menuitem class="menuitem-iconic sb-create" label="&sb.new.notex;" oncommand="var shortcut = sbShortcut.fromEvent(event); sbMainService.createNoteX(shortcut.accelKey || shortcut.shiftKey);" />
                 </menupopup>
             </toolbarbutton>
-            <toolbarbutton id="sbToolbarToggle"   tooltiptext="&sb.toggle.all;"   oncommand="sbTreeHandler.toggleAllFolders();" />
-            <toolbarbutton id="sbToolbarManage"   tooltiptext="&sb.tools.manage;..." oncommand="sbCommonUtils.openManageWindow(null,null);" />
+            <toolbarbutton id="sbToolbarToggle" tooltiptext="&sb.toggle.all;" oncommand="sbTreeHandler.toggleAllFolders();" />
+            <toolbarbutton id="sbToolbarManage" tooltiptext="&sb.tools.manage;..." oncommand="sbCommonUtils.openManageWindow(null,null);" />
             <toolbarbutton id="mbToolbarButton" />
             <spacer flex="1" />
             <toolbarbutton type="menu" label="&sb.tools; ">

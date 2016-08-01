@@ -19,7 +19,7 @@
 
     <hbox>
         <textbox id="sbpCaptureProgress" readonly="true" width="80"/>
-        <textbox id="sbCaptureTextbox"   readonly="true" flex="1"/>
+        <textbox id="sbCaptureTextbox" readonly="true" flex="1"/>
     </hbox>
 
     <tree
@@ -84,7 +84,7 @@
     </vbox>
 
     <hbox>
-        <button id="sbCaptureSkipButton"  label="&sb.capture.skip;"  oncommand="sbCaptureTask.next(true);" disabled="true" />
+        <button id="sbCaptureSkipButton" label="&sb.capture.skip;" oncommand="sbCaptureTask.next(true);" disabled="true" />
         <spacer flex="1" />
         <button id="sbCapturePauseButton" label="&sb.capture.pause;" oncommand="sbCaptureTask.pause();" />
         <button id="sbCaptureStartButton" label="&sb.capture.start;" oncommand="sbCaptureTask.activate();" hidden="true" />

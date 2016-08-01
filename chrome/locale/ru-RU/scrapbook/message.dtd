@@ -260,7 +260,7 @@
 <!ENTITY sb.prefs.ui.toolsMenu "Показывать в меню «Инструменты»">
 <!ENTITY sb.prefs.ui.statusBar "Показывать в строке состояния">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "Изменения требуют перезапуска Firefox&apos;а">
+<!ENTITY sb.prefs.desc.restart "Изменения требуют перезапуска Firefox&apos;а">
 <!ENTITY sb.prefs.tabs.tips "Открывать в новых вкладках следующие операции">
 <!ENTITY sb.prefs.tabs.note "Изменить заметку">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
@@ -385,7 +385,7 @@
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.remove.container "Convert to Non-folder">
+<!ENTITY sb.unmake.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Комбинированный вид">
 <!ENTITY sb.folder.openall "Открыть всё во вкладках">
 <!ENTITY sb.folder.manage "Управление каталогами">

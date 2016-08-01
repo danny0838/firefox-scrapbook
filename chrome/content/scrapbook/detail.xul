@@ -41,7 +41,7 @@
                                 <menulist id="sbFolderList" class="folder-icon" flex="1" onclick="if ( event.button == 1 ) sbFolderSelector.onMiddleClick();" disabled="true">
                                     <menupopup id="sbFolderPopup" oncommand="sbFolderSelector.onChange(event.target.id);" />
                                 </menulist>
-                                <toolbarbutton id="sbToolbarMove"      tooltiptext="&sb.detail.select.folder;..." oncommand="sbFolderSelector.pick();" />
+                                <toolbarbutton id="sbToolbarMove" tooltiptext="&sb.detail.select.folder;..." oncommand="sbFolderSelector.pick();" />
                             </hbox>
                         </row>
                     </rows>
@@ -115,7 +115,7 @@
                         </menulist>
                     </hbox>
                 </groupbox>
-                <description id="sbDetailWarnAboutRenew"  flex="1" hidden="true">&sb.detail.warnAboutRenew;</description>
+                <description id="sbDetailWarnAboutRenew" flex="1" hidden="true">&sb.detail.warnAboutRenew;</description>
                 <description id="sbDetailWarnAboutScript" flex="1" hidden="true">&sb.detail.warnAboutScript;</description>
             </tabpanel>
             <tabpanel>

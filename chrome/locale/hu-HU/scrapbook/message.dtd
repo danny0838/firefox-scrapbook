@@ -260,7 +260,7 @@
 <!ENTITY sb.prefs.ui.toolsMenu "Megjelenítés az „Eszközök” menüben">
 <!ENTITY sb.prefs.ui.statusBar "Megjelenítés az állapotsorban">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "A változtatások érvényre jutásához a Firefox újraindítása szükséges">
+<!ENTITY sb.prefs.desc.restart "A változtatások érvényre jutásához a Firefox újraindítása szükséges">
 <!ENTITY sb.prefs.tabs.tips "Lap nyitása a következő műveletekhez">
 <!ENTITY sb.prefs.tabs.note "Jegyzet szerkesztése">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
@@ -385,7 +385,7 @@
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.remove.container "Convert to Non-folder">
+<!ENTITY sb.unmake.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Összefűzés nézet">
 <!ENTITY sb.folder.openall "Összes megnyitása füleken">
 <!ENTITY sb.folder.manage "Mappa kezelése">

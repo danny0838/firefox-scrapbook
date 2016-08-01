@@ -43,8 +43,8 @@
                  class="plain" flex="1" wrap="off" />
     </vbox>
     <toolbar id="sbNoteToolbar" align="center">
-        <toolbarbutton id="sbNoteToolbarS" accesskey="&sb.note.save.accesskey;" label="&sb.note.save;"       disabled="true" oncommand="sbNoteService.save();sbNoteTemplate.save();" />
-        <toolbarbutton id="sbNoteToolbarH" accesskey="&sb.note.htmlview.accesskey;" label="&sb.note.htmlview;"   oncommand="sbNoteService2.initHTMLView();" />
+        <toolbarbutton id="sbNoteToolbarS" accesskey="&sb.note.save.accesskey;" label="&sb.note.save;" disabled="true" oncommand="sbNoteService.save();sbNoteTemplate.save();" />
+        <toolbarbutton id="sbNoteToolbarH" accesskey="&sb.note.htmlview.accesskey;" label="&sb.note.htmlview;" oncommand="sbNoteService2.initHTMLView();" />
         <toolbarbutton id="sbNoteToolbarN" accesskey="&sb.note.normalview.accesskey;" label="&sb.note.normalview;" disabled="true" oncommand="sbNoteService2.toggleHTMLView(false);" />
         <toolbarbutton type="menu" label="&sb.note.tools;" accesskey="&sb.note.tools.accesskey;">
             <menupopup>
