@@ -2,6 +2,7 @@
 
 <?xml-stylesheet href="chrome://global/skin/" type="text/css" ?>
 <?xml-stylesheet href="chrome://scrapbook/skin/scrapbook.css" type="text/css" ?>
+<?xml-stylesheet href="chrome://scrapbook/skin/result.css" type="text/css" ?>
 
 <!DOCTYPE window SYSTEM "chrome://scrapbook/locale/message.dtd">
 
@@ -26,12 +27,12 @@
     </popupset>
 
     <hbox id="sbResultHeader" class="sb-header" align="center">
-        <label id="sbResultHeaderNotice" crop="end" flex="1" style="color: red; min-width: 100px;" hidden="true" />
-        <label id="sbResultHeaderMsg" crop="end" flex="1" style="min-width: 100px;" />
-        <label id="sbResultHeaderLoc" crop="end" flex="1" value="&sb.prop.folder;: " style="color: blue; min-width: 100px;" hidden="true" />
+        <label id="sbResultHeaderNotice" crop="end" flex="1" hidden="true" />
+        <label id="sbResultHeaderMsg" crop="end" flex="1" />
+        <label id="sbResultHeaderLoc" crop="end" flex="1" value="&sb.prop.folder;: " hidden="true" />
         <spacer flex="1000" />
         <toolbarbutton class="sb-header-locate" tooltiptext="&sb.locate;" oncommand="sbSearchResult.forward('L');" />
-        <toolbarbutton class="sb-header-exit"   oncommand="SB_exitResult();" />
+        <toolbarbutton class="sb-header-exit" oncommand="SB_exitResult();" />
     </hbox>
 
     <tree id="sbTree"
@@ -39,8 +40,7 @@
           context="sbPopup"
           seltype="single"
           onselect="sbSearchResult.forward();"
-          class="plain"
-          style="height:160px;">
+          class="plain">
         <treecols>
             <treecol id="sbTreeColTitle" label="&sb.prop.title;" flex="3"
                      sortIndex="0" persist="width hidden ordinal" />

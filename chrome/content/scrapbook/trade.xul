@@ -23,11 +23,11 @@
 
     <popupset>
         <menupopup id="sbTradeTreePopup">
-            <menuitem label="&sb.open;"        oncommand="sbTradeService.open(false);" default="true" />
+            <menuitem label="&sb.open;" oncommand="sbTradeService.open(false);" default="true" />
             <menuitem label="&sb.open.newtab;" oncommand="sbTradeService.open(true);"  />
-            <menuitem label="&sb.show.files;"  oncommand="sbTradeService.browse();" />
+            <menuitem label="&sb.show.files;" oncommand="sbTradeService.browse();" />
             <menuseparator />
-            <menuitem class="menuitem-iconic" label="&sb.remove;"   src="chrome://scrapbook/skin/menu_remove.png"   oncommand="sbTradeService.remove();" />
+            <menuitem class="menuitem-iconic" label="&sb.remove;" src="chrome://scrapbook/skin/menu_remove.png" oncommand="sbTradeService.remove();" />
             <menuseparator />
             <menuitem class="menuitem-iconic" label="&sb.property;" src="chrome://scrapbook/skin/menu_property.png" oncommand="sbTradeService.showProperties();" />
         </menupopup>
@@ -52,9 +52,9 @@
           ondrop="nsDragAndDrop.drop(event, gDragDropObserver);"
           class="plain" flex="1">
         <treecols>
-            <treecol id="sbTradeTreeColTitle"  label="&sb.prop.title;"  sortIndex="0" flex="2" primary="true" />
+            <treecol id="sbTradeTreeColTitle" label="&sb.prop.title;" sortIndex="0" flex="2" primary="true" />
             <splitter class="tree-splitter" />
-            <treecol id="sbTradeTreeColDate"   label="&sb.trade.time;"  sortIndex="5" flex="1" sortDirection="ascending" />
+            <treecol id="sbTradeTreeColDate" label="&sb.trade.time;" sortIndex="5" flex="1" sortDirection="ascending" />
             <splitter class="tree-splitter" />
             <treecol id="sbTradeTreeColFolder" label="&sb.prop.folder;" sortIndex="2" flex="1" />
         </treecols>
@@ -67,10 +67,10 @@
             <button id="sbTradeImportButton" label="&sb.trade.import;" group="lockTarget" oncommand="sbImportService.exec(-128,-1);" />
         </hbox>
         <vbox>
-            <checkbox id="sbTradeOptionExportFolder"  label="&sb.trade.exportFolder; " group="lockTarget" checked="false" persist="checked" />
+            <checkbox id="sbTradeOptionExportFolder" label="&sb.trade.exportFolder; " group="lockTarget" checked="false" persist="checked" />
             <checkbox id="sbTradeOptionUpdate" label="&sb.trade.update;" group="lockTarget" checked="false" persist="checked" title="may lower performance" />
             <checkbox id="sbTradeOptionRestore" label="&sb.trade.restore;" group="lockTarget" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
-            <checkbox id="sbTradeOptionRemove"  label="&sb.trade.remove; " group="lockTarget" checked="false" persist="checked" />
+            <checkbox id="sbTradeOptionRemove" label="&sb.trade.remove; " group="lockTarget" checked="false" persist="checked" />
         </vbox>
     </toolbar>
 

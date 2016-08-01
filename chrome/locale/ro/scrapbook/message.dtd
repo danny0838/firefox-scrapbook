@@ -260,7 +260,7 @@
 <!ENTITY sb.prefs.ui.toolsMenu "Afișează în meniul „Unelte”">
 <!ENTITY sb.prefs.ui.statusBar "Afișează în bara de stare">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "Modificările sunt efective după repornirea navigatorului.">
+<!ENTITY sb.prefs.desc.restart "Modificările sunt efective după repornirea navigatorului.">
 <!ENTITY sb.prefs.tabs.tips "Deschide în file pentru următoarele operații">
 <!ENTITY sb.prefs.tabs.note "Editează note">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
@@ -385,7 +385,7 @@
 <!ENTITY sbp.prop.url "Adresă">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.remove.container "Convert to Non-folder">
+<!ENTITY sb.unmake.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Vizualizează combinat">
 <!ENTITY sb.folder.openall "Deschide totul în file">
 <!ENTITY sb.folder.manage "Gestionează dosarul">

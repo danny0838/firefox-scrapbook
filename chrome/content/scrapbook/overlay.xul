@@ -95,10 +95,10 @@
                        onclick="if (event.originalTarget.localName == 'toolbarbutton') if (event.button == 1) sbCommonUtils.openManageWindow();"
                        ondragover="toggleSidebar('viewScrapBookSidebar',true);">
             <menupopup id="ScrapBookStatusPopup" onpopupshowing="sbInfoViewer.onPopupShowing(event);">
-                <menuitem id="ScrapBookStatusPopupR" label="&sb.renew;..."     oncommand="sbInfoViewer.renew(true);" onclick="if (event.button == 1) sbInfoViewer.renew(false);" class="menuitem-iconic sb-capture-target" />
+                <menuitem id="ScrapBookStatusPopupR" label="&sb.renew;..." oncommand="sbInfoViewer.renew(true);" onclick="if (event.button == 1) sbInfoViewer.renew(false);" class="menuitem-iconic sb-capture-target" />
                 <menuitem id="ScrapBookStatusPopupT" label="&sb.internalize;..." oncommand="sbInfoViewer.internalize();" class="menuitem-iconic sb-capture-target" />
                 <menuseparator />
-                <menuitem id="ScrapBookStatusPopupD" label="&sb.indicators;"   type="checkbox" oncommand="sbInfoViewer.toggleIndicator(this.getAttribute('checked'));" persist="checked" />
+                <menuitem id="ScrapBookStatusPopupD" label="&sb.indicators;" type="checkbox" oncommand="sbInfoViewer.toggleIndicator(this.getAttribute('checked'));" persist="checked" />
                 <menuitem id="ScrapBookStatusPopupI" label="&sb.toolbar.info;" type="checkbox" oncommand="sbInfoViewer.toggle();" />
                 <menuitem id="ScrapBookStatusPopupE" label="&sb.toolbar.edit;" type="checkbox" oncommand="sbPageEditor.toggle();" />
                 <menuseparator />
@@ -111,14 +111,14 @@
     <menupopup id="contentAreaContextMenu">
         <menuseparator id="ScrapBookContextMenu0" />
         <!-- capture buttons -->
-        <menu     id="ScrapBookContextMenu1" class="menu-iconic     sb-capture-partial" label="&sb.capture.partial;"       oncommand="sbBrowserOverlay.execCapture(1, true , false, event.originalTarget.id);" onclick="sbBrowserOverlay.onMiddleClick(event,1);"><menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this);" onpopuphiding="sbBrowserOverlay.destroyPopup(this);" /></menu>
+        <menu     id="ScrapBookContextMenu1" class="menu-iconic     sb-capture-partial" label="&sb.capture.partial;" oncommand="sbBrowserOverlay.execCapture(1, true , false, event.originalTarget.id);" onclick="sbBrowserOverlay.onMiddleClick(event,1);"><menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this);" onpopuphiding="sbBrowserOverlay.destroyPopup(this);" /></menu>
         <menuitem id="ScrapBookContextMenu2" class="menuitem-iconic sb-capture-partial" label="&sb.capture.partial.as;..." oncommand="sbBrowserOverlay.execCapture(1, true , true , event.originalTarget.id);" />
-        <menu     id="ScrapBookContextMenu3" class="menu-iconic     sb-capture-entire"  label="&sb.capture.entire;"        oncommand="sbBrowserOverlay.execCapture(2, false, false, event.originalTarget.id);" onclick="sbBrowserOverlay.onMiddleClick(event,3);"><menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this);" onpopuphiding="sbBrowserOverlay.destroyPopup(this);" /></menu>
-        <menuitem id="ScrapBookContextMenu4" class="menuitem-iconic sb-capture-entire"  label="&sb.capture.entire.as;..."  oncommand="sbBrowserOverlay.execCapture(2, false, true , event.originalTarget.id);" />
-        <menu     id="ScrapBookContextMenu5" class="menu-iconic     sb-capture-frame"   label="&sb.capture.frame;"         oncommand="sbBrowserOverlay.execCapture(2, true , false, event.originalTarget.id);" onclick="sbBrowserOverlay.onMiddleClick(event,5);"><menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this);" onpopuphiding="sbBrowserOverlay.destroyPopup(this);" /></menu>
-        <menuitem id="ScrapBookContextMenu6" class="menuitem-iconic sb-capture-frame"   label="&sb.capture.frame.as;..."   oncommand="sbBrowserOverlay.execCapture(2, true , true , event.originalTarget.id);" />
-        <menu     id="ScrapBookContextMenu7" class="menu-iconic     sb-capture-target"  label="&sb.capture.target;"        oncommand="sbBrowserOverlay.execCaptureTarget(false, event.originalTarget.id);"     onclick="sbBrowserOverlay.onMiddleClick(event,7);"><menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this);" onpopuphiding="sbBrowserOverlay.destroyPopup(this);" /></menu>
-        <menuitem id="ScrapBookContextMenu8" class="menuitem-iconic sb-capture-target"  label="&sb.capture.target.as;..."  oncommand="sbBrowserOverlay.execCaptureTarget(true,  event.originalTarget.id);"     />
+        <menu     id="ScrapBookContextMenu3" class="menu-iconic     sb-capture-entire" label="&sb.capture.entire;" oncommand="sbBrowserOverlay.execCapture(2, false, false, event.originalTarget.id);" onclick="sbBrowserOverlay.onMiddleClick(event,3);"><menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this);" onpopuphiding="sbBrowserOverlay.destroyPopup(this);" /></menu>
+        <menuitem id="ScrapBookContextMenu4" class="menuitem-iconic sb-capture-entire" label="&sb.capture.entire.as;..." oncommand="sbBrowserOverlay.execCapture(2, false, true , event.originalTarget.id);" />
+        <menu     id="ScrapBookContextMenu5" class="menu-iconic     sb-capture-frame" label="&sb.capture.frame;" oncommand="sbBrowserOverlay.execCapture(2, true , false, event.originalTarget.id);" onclick="sbBrowserOverlay.onMiddleClick(event,5);"><menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this);" onpopuphiding="sbBrowserOverlay.destroyPopup(this);" /></menu>
+        <menuitem id="ScrapBookContextMenu6" class="menuitem-iconic sb-capture-frame" label="&sb.capture.frame.as;..." oncommand="sbBrowserOverlay.execCapture(2, true , true , event.originalTarget.id);" />
+        <menu     id="ScrapBookContextMenu7" class="menu-iconic     sb-capture-target" label="&sb.capture.target;" oncommand="sbBrowserOverlay.execCaptureTarget(false, event.originalTarget.id);" onclick="sbBrowserOverlay.onMiddleClick(event,7);"><menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this);" onpopuphiding="sbBrowserOverlay.destroyPopup(this);" /></menu>
+        <menuitem id="ScrapBookContextMenu8" class="menuitem-iconic sb-capture-target" label="&sb.capture.target.as;..." oncommand="sbBrowserOverlay.execCaptureTarget(true,  event.originalTarget.id);"     />
         <!-- bookmark -->
         <menu id="ScrapBookContextMenu9" label="&sb.capture.bookmark;" oncommand="sbBrowserOverlay.execBookmark(event.originalTarget.id);">
             <menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this);" onpopuphiding="sbBrowserOverlay.destroyPopup(this);" />
@@ -218,7 +218,7 @@
             </toolbar>
             <toolbar id="ScrapBookEditor" align="center" hidden="true" autoshow="true" persist="autoshow">
                 <image id="ScrapBookEditIcon" tooltiptext="&sb.edit.folderView;" />
-                <textbox id="ScrapBookEditTitle"   oninput="sbPageEditor.changed2 = true;" onkeypress="if (event.keyCode == 13) sbPageEditor.saveResource();" onclick="if (event.button == 1) sbPageEditor.selection2Title(this);" flex="1" />
+                <textbox id="ScrapBookEditTitle" oninput="sbPageEditor.changed2 = true;" onkeypress="if (event.keyCode == 13) sbPageEditor.saveResource();" onclick="if (event.button == 1) sbPageEditor.selection2Title(this);" flex="1" />
                 <toolbarbutton id="ScrapBookToggleComment" tooltiptext="&sb.edit.comment;" oncommand="sbPageEditor.toggleComment();" />
                 <textbox id="ScrapBookEditComment" spellcheck="true" oninput="sbPageEditor.onInputComment(this.value);" onkeypress="if (event.keyCode == 13) if (!sbPageEditor.multiline) sbPageEditor.saveResource();" flex="3" />
                 <spacer id="ScrapBookEditSpacer" flex="0" />
@@ -240,9 +240,9 @@
                         <menuitem label="&sb.edit.attach.link;..." oncommand="sbAnnotationService.attach('L');" />
                         <menuitem label="&sb.edit.attach.innerlink;..." oncommand="sbAnnotationService.attach('I');" />
                         <menuitem label="&sb.edit.attach.file;..." oncommand="sbAnnotationService.attach('F');" />
-                        <menuitem label="&sb.edit.inline.add;..."  oncommand="sbAnnotationService.addInline();" />
+                        <menuitem label="&sb.edit.inline.add;..." oncommand="sbAnnotationService.addInline();" />
                         <menuseparator />
-                        <menuitem label="&sb.edit.freenote.create;"  oncommand="sbAnnotationService.createFreenote();" />
+                        <menuitem label="&sb.edit.freenote.create;" oncommand="sbAnnotationService.createFreenote();" />
                     </menupopup>
                 </toolbarbutton>
                 <toolbarbutton id="ScrapBookEditCutter" type="menu-button" tooltiptext="&sb.edit.cutterTool;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbPageEditor.cutter();" onclick="if (event.originalTarget.localName == 'toolbarbutton') if (event.button == 1) sbPageEditor.removeSbObjectsSelected();">
@@ -251,7 +251,7 @@
                         <menuitem label="&sb.edit.remove.iframe;" oncommand="sbPageEditor.removeElementsByTagName('iframe');" />
                         <menuseparator />
                         <menuitem label="&sb.highlighter.remove.all;" oncommand="sbPageEditor.removeSbObjects();" />
-                        <menuitem label="&sb.highlighter.remove;"     oncommand="sbPageEditor.removeSbObjectsSelected();" />
+                        <menuitem label="&sb.highlighter.remove;" oncommand="sbPageEditor.removeSbObjectsSelected();" />
                         <menuseparator />
                         <menuitem label="&sb.edit.cutter;" oncommand="sbPageEditor.cutter();" />
                     </menupopup>

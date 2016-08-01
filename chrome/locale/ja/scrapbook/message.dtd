@@ -260,7 +260,7 @@
 <!ENTITY sb.prefs.ui.toolsMenu "'ツール' メニューに表示">
 <!ENTITY sb.prefs.ui.statusBar "ステータスバーに表示">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "変更は Firefox 再起動後に反映されます。">
+<!ENTITY sb.prefs.desc.restart "変更は Firefox 再起動後に反映されます。">
 <!ENTITY sb.prefs.tabs.tips "次の操作を新しいタブで開く">
 <!ENTITY sb.prefs.tabs.note "ノートの編集">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
@@ -385,7 +385,7 @@
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.remove.container "Convert to Non-folder">
+<!ENTITY sb.unmake.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "結合ビュー">
 <!ENTITY sb.folder.openall "すべてタブで開く">
 <!ENTITY sb.folder.manage "フォルダの管理">

@@ -107,7 +107,7 @@ var sbNoteService = {
     },
 
     insertString: function(aEvent) {
-        var shortcut = Shortcut.fromEvent(aEvent);
+        var shortcut = sbShortcut.fromEvent(aEvent);
         if ( shortcut.keyName == "Escape" && this.sidebarContext ) { sbNoteService.exit(); return; }
         if ( shortcut.modifiers.length ) return;
         var str = "";

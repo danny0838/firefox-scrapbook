@@ -260,7 +260,7 @@
 <!ENTITY sb.prefs.ui.toolsMenu "Wyświetlaj w menu „Narzędzia” element „ScrapBook”">
 <!ENTITY sb.prefs.ui.statusBar "Wyświetlaj ikonę rozszerzenia na pasku stanu">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "Zmiana wymaga ponownego uruchomienia Firefoksa">
+<!ENTITY sb.prefs.desc.restart "Zmiana wymaga ponownego uruchomienia Firefoksa">
 <!ENTITY sb.prefs.tabs.tips "Otwieraj w karcie wynik następujących poleceń">
 <!ENTITY sb.prefs.tabs.note "Edytuj notatkę">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
@@ -385,7 +385,7 @@
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.remove.container "Convert to Non-folder">
+<!ENTITY sb.unmake.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Połączony widok">
 <!ENTITY sb.folder.openall "Otwórz wszystko w nowych kartach">
 <!ENTITY sb.folder.manage "Zarządzanie katalogami">

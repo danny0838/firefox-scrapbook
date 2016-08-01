@@ -31,7 +31,7 @@ var sbBrowserOverlay = {
         this.refresh();
         // hotkeys
         var keyStr = sbCommonUtils.getPref("key.menubar", "");
-        var shortcut = Shortcut.fromString(keyStr);
+        var shortcut = sbShortcut.fromString(keyStr);
         if (shortcut.isPrintable) {
             var elem = document.getElementById("ScrapBookMenu");
             elem.setAttribute("accesskey", shortcut.keyName);
@@ -46,7 +46,7 @@ var sbBrowserOverlay = {
         for (let [pref, id] in Iterator(keyMap)) {
             var elem = document.getElementById(id);
             var keyStr = sbCommonUtils.getPref(pref, "");
-            var shortcut = Shortcut.fromString(keyStr);
+            var shortcut = sbShortcut.fromString(keyStr);
             if (!shortcut.isComplete) {
                 elem.parentNode.removeChild(elem);
             } else if (shortcut.isPrintable) {
@@ -503,7 +503,7 @@ var sbMenuHandler = {
             default: url = this.baseURL + "data/" + id + "/index.html";
         }
         var openInTab = sbCommonUtils.getPref(pref, false);
-        var shortcut = Shortcut.fromEvent(event);
+        var shortcut = sbShortcut.fromEvent(event);
         sbCommonUtils.loadURL(url, openInTab || event.button == 1 || shortcut.accelKey || shortcut.shiftKey);
         event.stopPropagation();
     },

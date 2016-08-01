@@ -260,7 +260,7 @@
 <!ENTITY sb.prefs.ui.toolsMenu "在「工具」功能表中顯示選項">
 <!ENTITY sb.prefs.ui.statusBar "在狀態列中顯示圖示">
 <!ENTITY sb.prefs.ui.sidebarManage "側欄操作使用管理模式">
-<!ENTITY sb.prefs.restart "需重新啟動 Firefox 方能生效。">
+<!ENTITY sb.prefs.desc.restart "需重新啟動 Firefox 方能生效。">
 <!ENTITY sb.prefs.tabs.tips "操作下列項目時，以分頁開啟">
 <!ENTITY sb.prefs.tabs.note "編輯筆記">
 <!ENTITY sb.prefs.edit.autoEditNoteX "筆記頁面自動進入編輯模式">
@@ -385,7 +385,7 @@
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "轉換為資料夾">
-<!ENTITY sb.remove.container "轉換為非資料夾">
+<!ENTITY sb.unmake.container "轉換為非資料夾">
 <!ENTITY sb.folder.combine "合併檢視">
 <!ENTITY sb.folder.openall "以分頁開啟所有資料">
 <!ENTITY sb.folder.manage "管理資料夾">

@@ -1,0 +1,17 @@
+#sbResultHeaderNotice {
+    color: red;
+    min-width: 100px;
+}
+
+#sbResultHeaderMsg {
+    min-width: 100px;
+}
+
+#sbResultHeaderLoc {
+    color: blue;
+    min-width: 100px;
+}
+
+#sbTree {
+    height: 160px;
+}
