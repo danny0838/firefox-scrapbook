@@ -385,7 +385,7 @@
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "Tunnus">
 <!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.remove.container "Convert to Non-folder">
+<!ENTITY sb.unmake.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Yhdistetty näkymä">
 <!ENTITY sb.folder.openall "Avaa kaikki välilehtiin">
 <!ENTITY sb.folder.manage "Muokkaa kansiota">

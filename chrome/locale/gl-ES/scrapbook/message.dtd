@@ -385,7 +385,7 @@
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.remove.container "Convert to Non-folder">
+<!ENTITY sb.unmake.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Vista combinada">
 <!ENTITY sb.folder.openall "Abrir todo en pestanas">
 <!ENTITY sb.folder.manage "Xestionar cartafol">

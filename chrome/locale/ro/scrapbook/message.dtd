@@ -385,7 +385,7 @@
 <!ENTITY sbp.prop.url "Adresă">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.remove.container "Convert to Non-folder">
+<!ENTITY sb.unmake.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Vizualizează combinat">
 <!ENTITY sb.folder.openall "Deschide totul în file">
 <!ENTITY sb.folder.manage "Gestionează dosarul">
