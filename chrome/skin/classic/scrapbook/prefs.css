@@ -9,7 +9,7 @@
     color: red;
 }
 
-prefpane vbox {
+prefpane .content-box {
     overflow: auto;
 }
 
