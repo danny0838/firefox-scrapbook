@@ -260,7 +260,7 @@
 <!ENTITY sb.prefs.ui.toolsMenu "Afișează în meniul „Unelte”">
 <!ENTITY sb.prefs.ui.statusBar "Afișează în bara de stare">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "Modificările sunt efective după repornirea navigatorului.">
+<!ENTITY sb.prefs.desc.restart "Modificările sunt efective după repornirea navigatorului.">
 <!ENTITY sb.prefs.tabs.tips "Deschide în file pentru următoarele operații">
 <!ENTITY sb.prefs.tabs.note "Editează note">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">

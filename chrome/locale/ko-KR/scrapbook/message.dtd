@@ -260,7 +260,7 @@
 <!ENTITY sb.prefs.ui.toolsMenu "&apos;도구&apos; 메뉴에 보이기">
 <!ENTITY sb.prefs.ui.statusBar "상태 표시줄에 보이기">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "표시 항목의 변경된 내용을 적용하려면 Firefox를 재시작해야 합니다.">
+<!ENTITY sb.prefs.desc.restart "표시 항목의 변경된 내용을 적용하려면 Firefox를 재시작해야 합니다.">
 <!ENTITY sb.prefs.tabs.tips "다음 동작은 탭으로 열기">
 <!ENTITY sb.prefs.tabs.note "노트 편집">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">

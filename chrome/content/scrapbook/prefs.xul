@@ -89,7 +89,7 @@
                 </row>
             </rows>
         </grid>
-        <description class="notify-restart">&sb.prefs.restart;</description>
+        <description class="notify-restart">&sb.prefs.desc.restart;</description>
         </vbox>
     </prefpane>
 

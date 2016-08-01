@@ -260,7 +260,7 @@
 <!ENTITY sb.prefs.ui.toolsMenu "عرض في قائمة &apos;الأدوات&apos;">
 <!ENTITY sb.prefs.ui.statusBar "عرض في شريط الحالة">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "التغيير يتطلب إعادة تشغيل فيرفوكس.">
+<!ENTITY sb.prefs.desc.restart "التغيير يتطلب إعادة تشغيل فيرفوكس.">
 <!ENTITY sb.prefs.tabs.tips "فتح في لسان للعمليات التالية">
 <!ENTITY sb.prefs.tabs.note "تحرير ملاحظة">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
