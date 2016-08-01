@@ -260,7 +260,7 @@
 <!ENTITY sb.prefs.ui.toolsMenu "在「工具」功能表中顯示選項">
 <!ENTITY sb.prefs.ui.statusBar "在狀態列中顯示圖示">
 <!ENTITY sb.prefs.ui.sidebarManage "側欄操作使用管理模式">
-<!ENTITY sb.prefs.restart "需重新啟動 Firefox 方能生效。">
+<!ENTITY sb.prefs.desc.restart "需重新啟動 Firefox 方能生效。">
 <!ENTITY sb.prefs.tabs.tips "操作下列項目時，以分頁開啟">
 <!ENTITY sb.prefs.tabs.note "編輯筆記">
 <!ENTITY sb.prefs.edit.autoEditNoteX "筆記頁面自動進入編輯模式">

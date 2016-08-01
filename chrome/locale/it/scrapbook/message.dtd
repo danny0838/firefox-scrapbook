@@ -260,7 +260,7 @@
 <!ENTITY sb.prefs.ui.toolsMenu "Mostra la voce &apos;ScrapBook&apos; nel menu &quot;Strumenti&quot;">
 <!ENTITY sb.prefs.ui.statusBar "Mostra l&apos;icona di ScrapBook nella barra di stato">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "Riavviare il browser per rendere effettive le modifiche">
+<!ENTITY sb.prefs.desc.restart "Riavviare il browser per rendere effettive le modifiche">
 <!ENTITY sb.prefs.tabs.tips "Azioni che verranno eseguite in nuove schede">
 <!ENTITY sb.prefs.tabs.note "Apri/modifica le note">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">

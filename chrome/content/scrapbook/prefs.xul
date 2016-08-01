@@ -86,7 +86,7 @@
                 </row>
             </rows>
         </grid>
-        <description class="notify-restart">&sb.prefs.restart;</description>
+        <description class="notify-restart">&sb.prefs.desc.restart;</description>
     </prefpane>
 
     <prefpane id="tabsPane" label="&sb.prefs.tabs;" flex="1">

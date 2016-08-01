@@ -260,7 +260,7 @@
 <!ENTITY sb.prefs.ui.toolsMenu "Visa i &quot;Verktyg&quot;-menyn">
 <!ENTITY sb.prefs.ui.statusBar "Visa i statusfältet">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "Ändring kräver att Firefox startas om.">
+<!ENTITY sb.prefs.desc.restart "Ändring kräver att Firefox startas om.">
 <!ENTITY sb.prefs.tabs.tips "Öppna följande åtgärder i ny flik">
 <!ENTITY sb.prefs.tabs.note "Redigera anteckning">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
