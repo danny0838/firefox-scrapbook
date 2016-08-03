@@ -117,8 +117,7 @@ var sbOutputService = {
     },
 
     getHTMLTitle: function() {
-        var multibook = sbCommonUtils.getPref("multibook.enabled", false);
-        var title = (multibook ? sbCommonUtils.getPref("data.title", "") + " - " : "") + "ScrapBook";
+        var title = sbCommonUtils.getPref("data.title", "") + " - ScrapBook";
         return sbCommonUtils.escapeHTMLWithSpace(title, true);
     },
 

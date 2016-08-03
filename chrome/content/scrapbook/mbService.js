@@ -1,19 +1,13 @@
 
 var sbMultiBookService = {
 
-    enabled: false,
     file: null,
-
-    showButton: function() {
-        this.enabled = sbCommonUtils.getPref("multibook.enabled", false);
-        document.getElementById("mbToolbarButton").hidden = !this.enabled;
-    },
 
     showSidebarTitle: function() {
         var sidebarTitleId = sbCommonUtils.getSidebarId("sidebar-title");
         var elem = window.top.document.getElementById(sidebarTitleId);
         if (!elem) return;
-        elem.value = "ScrapBook X" + (this.enabled ? " [" + sbCommonUtils.getPref("data.title", "") + "]" : "");
+        elem.value = "ScrapBook X [" + sbCommonUtils.getPref("data.title", "") + "]";
     },
 
     initMenu: function() {

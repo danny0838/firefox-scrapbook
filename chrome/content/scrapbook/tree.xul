@@ -119,7 +119,7 @@
         </template>
     </tree>
 
-    <toolbarbutton id="mbToolbarButton" type="menu" tooltiptext="&sb.multi;" onpopupshowing="sbMultiBookService.initMenu();" hidden="true">
+    <toolbarbutton id="mbToolbarButton" type="menu" tooltiptext="&sb.multi;" onpopupshowing="sbMultiBookService.initMenu();">
         <menupopup id="mbMenuPopup" oncommand="sbMultiBookService.change(event.originalTarget);">
             <menuitem id="mbMenuItemDefault" label="&mb.profileFolder;" type="radio" autocheck="false" />
             <menuseparator />

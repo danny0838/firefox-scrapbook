@@ -6,7 +6,6 @@ var sbMainService = {
 
 
     init: function() {
-        sbMultiBookService.showButton();
         sbTreeHandler.init(false);
         sbTreeDNDHandler.init();
         this.baseURL = sbCommonUtils.getBaseHref(sbDataSource.data.URI);
