@@ -11,7 +11,6 @@ var sbMultiBookService = {
     },
 
     initMenu: function() {
-        var isDefault = sbCommonUtils.getPref("data.default", true);
         var dataPath = sbCommonUtils.getPref("data.path", "");
         var popup = document.getElementById("mbMenuPopup");
         if (!this.file) {
@@ -29,7 +28,7 @@ var sbMultiBookService = {
                 popup.insertBefore(elem, popup.firstChild);
             }
         }
-        if (isDefault) {
+        if (!dataPath) {
             document.getElementById("mbMenuItemDefault").setAttribute("checked", true);
         } else {
             // if we don't remove the check explicitly,
@@ -72,9 +71,7 @@ var sbMultiBookService = {
         // we have to exec it before changing them
         sbDataSource.outputTreeAuto(window);
         aItem.setAttribute("checked", true);
-        var path = aItem.getAttribute("path");
-        sbCommonUtils.setPref("data.default", path == "");
-        if (path != "") sbCommonUtils.setPref("data.path", path);
+        sbCommonUtils.setPref("data.path", aItem.getAttribute("path"));
         sbCommonUtils.setPref("data.title", aItem.label);
         sbDataSource.checkRefresh();
     },

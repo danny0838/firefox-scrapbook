@@ -227,15 +227,13 @@ var sbCommonUtils = {
     },
 
     getScrapBookDir: function() {
-        var dir;
-        try {
-            var isDefault = this.getPref("data.default", true);
-            dir = this.getPref("data.path", "");
-            dir = this.convertPathToFile(dir);
-        } catch(ex) {
-            isDefault = true;
+        var dataPath = this.getPref("data.path", ""), dir;
+        if (dataPath) {
+            try {
+                dir = this.convertPathToFile(dataPath);
+            } catch(ex) {}
         }
-        if ( isDefault ) {
+        if ( !dir ) {
             dir = this.DIR.get("ProfD", Components.interfaces.nsIFile);
             dir.append("ScrapBook");
         }

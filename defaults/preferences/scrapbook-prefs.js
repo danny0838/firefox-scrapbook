@@ -13,7 +13,6 @@ pref("extensions.scrapbook.tabs.openSource", false);
 pref("extensions.scrapbook.tabs.combinedView", true);
 pref("extensions.scrapbook.tabs.searchResult", true);
 pref("extensions.scrapbook.tabs.note", false);
-pref("extensions.scrapbook.data.default", true);
 pref("extensions.scrapbook.data.path", "");
 pref("extensions.scrapbook.edit.autoEditNoteX", true);
 pref("extensions.scrapbook.edit.autoEditNoteX.active", true);
