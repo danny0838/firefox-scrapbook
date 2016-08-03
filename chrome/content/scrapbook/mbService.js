@@ -7,7 +7,7 @@ var sbMultiBookService = {
         var sidebarTitleId = sbCommonUtils.getSidebarId("sidebar-title");
         var elem = window.top.document.getElementById(sidebarTitleId);
         if (!elem) return;
-        elem.value = "ScrapBook X [" + sbCommonUtils.getPref("data.title", "") + "]";
+        elem.value = "ScrapBook X" + (sbCommonUtils.getPref("data.path", "") ? " [" + sbCommonUtils.getPref("data.title", "") + "]" : "");
     },
 
     initMenu: function() {
