@@ -266,12 +266,7 @@
 <!ENTITY sb.prefs.edit.autoEditNoteX "筆記頁面自動進入編輯模式">
 <!ENTITY sb.prefs.edit.insertDateFormat "插入日期格式 (strftime):">
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML 格式化模板">
-<!ENTITY sb.prefs.data "擷取資料存放處">
-<!ENTITY sb.prefs.data.default "預設（在您的個人設定檔資料夾中）">
-<!ENTITY sb.prefs.data.custom "存放至">
 <!ENTITY sb.prefs.data.tips "請選擇 ScrapBook 存放擷取資料的資料夾">
-<!ENTITY sb.prefs.multibook.enabled "啟用多重 ScrapBook 功能">
-<!ENTITY sb.prefs.multibook.tips "這個選項可讓你指定一個以上的資料存放處，並以工具列按鈕快速切換欲儲存位置。">
 <!ENTITY sb.prefs.confirmDelete "刪除資料需要確認">
 <!ENTITY sb.prefs.tree.autoCollapse "開啟某資料夾時，自動收合其他資料夾">
 <!ENTITY sb.prefs.tree.unshift "新增資料時，應放在">

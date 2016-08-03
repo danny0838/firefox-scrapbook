@@ -221,34 +221,10 @@
 
     <prefpane id="organizePane" label="&sb.prefs.organize;" flex="1">
         <preferences>
-            <preference id="extensions.scrapbook.data.default" name="extensions.scrapbook.data.default" type="bool" />
-            <preference id="extensions.scrapbook.data.path" name="extensions.scrapbook.data.path" type="file" />
-            <preference id="extensions.scrapbook.multibook.enabled" name="extensions.scrapbook.multibook.enabled" type="bool" />
             <preference id="extensions.scrapbook.confirmDelete" name="extensions.scrapbook.confirmDelete" type="bool" />
             <preference id="extensions.scrapbook.tree.autoCollapse" name="extensions.scrapbook.tree.autoCollapse" type="bool" />
             <preference id="extensions.scrapbook.tree.unshift" name="extensions.scrapbook.tree.unshift" type="bool" />
         </preferences>
-        <groupbox>
-            <caption id="sbDataCaption" label="&sb.prefs.data;" />
-            <radiogroup id="sbDataDefault"
-                        preference="extensions.scrapbook.data.default"
-                        onsyncfrompreference="sbPrefWindow.updateDataUI();">
-                <radio label="&sb.prefs.data.default;" value="true" />
-                <hbox>
-                    <radio label="&sb.prefs.data.custom;" value="false" />
-                    <filefield id="sbDataPath" flex="1" />
-                    <button id="sbDataButton"
-                            label="&sb.button.browse;..." label2="&sb.prefs.data.tips;"
-                            oncommand="sbPrefWindow.selectFolder(this.getAttribute('label2'));" />
-                </hbox>
-            </radiogroup>
-            <separator />
-            <checkbox id="sbMultiBookEnabled"
-                      preference="extensions.scrapbook.multibook.enabled"
-                      label="&sb.prefs.multibook.enabled;"
-                      onsyncfrompreference="sbPrefWindow.updateDataUI();" />
-            <description class="indent">&sb.prefs.multibook.tips;</description>
-        </groupbox>
         <checkbox preference="extensions.scrapbook.confirmDelete" label="&sb.prefs.confirmDelete;" />
         <checkbox preference="extensions.scrapbook.tree.autoCollapse" label="&sb.prefs.tree.autoCollapse;" />
         <hbox align="center">

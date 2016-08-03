@@ -266,12 +266,7 @@
 <!ENTITY sb.prefs.edit.autoEditNoteX "便签页面自动进入编辑模式">
 <!ENTITY sb.prefs.edit.insertDateFormat "插入日期格式 (strftime):">
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML 格式化模板">
-<!ENTITY sb.prefs.data "设定数据存储的位置">
-<!ENTITY sb.prefs.data.default "默认">
-<!ENTITY sb.prefs.data.custom "保存数据至">
 <!ENTITY sb.prefs.data.tips "选择用户存储 ScrapBook 数据的文件夹。">
-<!ENTITY sb.prefs.multibook.enabled "启用 Multi-ScrapBook">
-<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook 可以使您设置多个存储数据的位置，而且您还可以在工具栏对这些位置进行快速切换。">
 <!ENTITY sb.prefs.confirmDelete "删除树状条目时警告我">
 <!ENTITY sb.prefs.tree.autoCollapse "打开树状文件夹时，自动关闭其他文件夹">
 <!ENTITY sb.prefs.tree.unshift "放条目至">

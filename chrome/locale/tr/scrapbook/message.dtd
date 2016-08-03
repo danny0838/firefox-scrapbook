@@ -266,12 +266,7 @@
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
-<!ENTITY sb.prefs.data "Veri Saklama Konumu">
-<!ENTITY sb.prefs.data.default "Varsayılan (Profil Klasörü)">
-<!ENTITY sb.prefs.data.custom "Kaydetme konumu">
 <!ENTITY sb.prefs.data.tips "ScrapBook verilerinin saklanacağı konumu seçin.">
-<!ENTITY sb.prefs.multibook.enabled "Çoklu-ScrapBook&apos;u Etkinleştir">
-<!ENTITY sb.prefs.multibook.tips "Çoklu-ScrapBook, verileri saklamak için birden çok konum seçebilmenizi ve bunlar arasında, araç çubuğu düğmesi ile hızlı geçiş yapabilmenizi sağlar.">
 <!ENTITY sb.prefs.confirmDelete "Ağaç öğelerini silerken beni uyar">
 <!ENTITY sb.prefs.tree.autoCollapse "Ağaçta klasör açınca, otomatik olarak diğer klasörleri kapat">
 <!ENTITY sb.prefs.tree.unshift "Buraya öğe bilgisi ekle">
