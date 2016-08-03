@@ -117,7 +117,9 @@ var sbOutputService = {
     },
 
     getHTMLTitle: function() {
-        var title = (sbCommonUtils.getPref("data.path", "") ? sbCommonUtils.getPref("data.title", "") + " - " : "") + "ScrapBook";
+        var dataPath = sbCommonUtils.getPref("data.path", "");
+        var dataTitle = sbCommonUtils.getPref("data.title", "");
+        var title = ((dataPath && dataTitle) ? dataTitle + " - " : "") + "ScrapBook";
         return sbCommonUtils.escapeHTMLWithSpace(title, true);
     },
 
