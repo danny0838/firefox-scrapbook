@@ -266,12 +266,7 @@
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
-<!ENTITY sb.prefs.data "Расположение сохраняемой информации">
-<!ENTITY sb.prefs.data.default "По умолчанию (каталог профиля)">
-<!ENTITY sb.prefs.data.custom "Сохранить информацию в">
 <!ENTITY sb.prefs.data.tips "Выберите каталог для хранения данных Scrapbook.">
-<!ENTITY sb.prefs.multibook.enabled "Использовать Multi-ScrapBook">
-<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook позволяет одновременно использовать несколько веб-альбомов с возможностью быстрого переключения между ними с помощью соответствующей кнопки на панели инструментов.">
 <!ENTITY sb.prefs.confirmDelete "Предупреждать при удалении элементов дерева">
 <!ENTITY sb.prefs.tree.autoCollapse "При открытии каталога дерева автоматически закрывать остальные">
 <!ENTITY sb.prefs.tree.unshift "Поместить элемент в">

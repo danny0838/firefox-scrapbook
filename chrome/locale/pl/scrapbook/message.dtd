@@ -266,12 +266,7 @@
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
-<!ENTITY sb.prefs.data "Lokalizacja folderu zapisu danych">
-<!ENTITY sb.prefs.data.default "Domyślna (folder profilu)">
-<!ENTITY sb.prefs.data.custom "Zapisz dane w">
 <!ENTITY sb.prefs.data.tips "Wybierz folder, w którym będą zapisywane dane ScrapBooka">
-<!ENTITY sb.prefs.multibook.enabled "Włącz Multi-ScrapBook">
-<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook pozwala na określenie wielu lokalizacji folderu zapisu danych i szybkie przełączanie pomiędzy nimi za pomocą przycisku narzędziowego.">
 <!ENTITY sb.prefs.confirmDelete "Ostrzegaj, gdy jest usuwane drzewo elementów">
 <!ENTITY sb.prefs.tree.autoCollapse "Otwierając folder drzewa automatycznie zamykaj inne foldery">
 <!ENTITY sb.prefs.tree.unshift "Umieść element">

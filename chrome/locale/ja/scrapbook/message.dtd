@@ -266,12 +266,7 @@
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
-<!ENTITY sb.prefs.data "データ保存先">
-<!ENTITY sb.prefs.data.default "デフォルト (プロファイルフォルダ下)">
-<!ENTITY sb.prefs.data.custom "次のフォルダ">
 <!ENTITY sb.prefs.data.tips "ScrapBook のデータを保存するためのフォルダを選択してください。">
-<!ENTITY sb.prefs.multibook.enabled "Multi-ScrapBook 機能を有効にする">
-<!ENTITY sb.prefs.multibook.tips "複数のデータ保存先を設定し、ツールバーボタンから素早く切り替えることができます。">
 <!ENTITY sb.prefs.confirmDelete "削除確認をする">
 <!ENTITY sb.prefs.tree.autoCollapse "ツリーフォルダを開いたとき、他のフォルダを自動的に閉じる">
 <!ENTITY sb.prefs.tree.unshift "アイテムを追加する位置:">

@@ -3,9 +3,7 @@ var sbPrefWindow = {
     changed: false,
 
     init: function() {
-        this.updateDataPath();
         this.hlUpdateUI();
-        this._updateFileField("sbDataPath", "extensions.scrapbook.data.path");
         if (!sbMultiBookService.validateRefresh(true)) {
             var elts = document.getElementById("sbDataDefault").getElementsByTagName("*");
             Array.forEach(elts, function(elt) {
@@ -62,42 +60,6 @@ var sbPrefWindow = {
         );
         if (ret.result == 1) this.changed = true;
         this.hlUpdateUI();
-    },
-
-    updateDataUI: function() {
-        var isDefault = document.getElementById("extensions.scrapbook.data.default").value;
-        var mbEnabled = document.getElementById("extensions.scrapbook.multibook.enabled").value;
-        document.getElementById("sbDataDefault").disabled = mbEnabled;
-        document.getElementById("sbDataPath").disabled = isDefault || mbEnabled;
-        document.getElementById("sbDataButton").disabled = isDefault || mbEnabled;
-    },
-
-    updateDataPath: function() {
-        this._updateFileField("sbDataPath", "extensions.scrapbook.data.path");
-    },
-
-    _updateFileField: function(aEltID, aPrefID) {
-        var file = document.getElementById(aPrefID).value;
-        if (!file)
-            return;
-        var fileField = document.getElementById(aEltID);
-        fileField.file = file;
-        if (file.exists() && file.isDirectory())
-            fileField.label = file.path;
-    },
-
-    selectFolder: function(aPickerTitle) {
-        var file = document.getElementById("extensions.scrapbook.data.path").value;
-        var pickedFile = sbCommonUtils.showFilePicker({
-            window: window,
-            title: aPickerTitle,
-            mode: 2, // modeGetFolder
-            dir: file,
-        });
-        if (pickedFile) {
-            document.getElementById("extensions.scrapbook.data.path").value = pickedFile;
-            this.updateDataPath();
-        }
     },
 
     // for an element linked to preference

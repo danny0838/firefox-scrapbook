@@ -266,12 +266,7 @@
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
-<!ENTITY sb.prefs.data "Adattárolás helye">
-<!ENTITY sb.prefs.data.default "Alapértelmezett (Profil mappa)">
-<!ENTITY sb.prefs.data.custom "Mentés a következő helyre">
 <!ENTITY sb.prefs.data.tips "Válassza ki a mappát, ahová a Dosszié-adatok kerülnek">
-<!ENTITY sb.prefs.multibook.enabled "Többszörös dossziék engedélyezése">
-<!ENTITY sb.prefs.multibook.tips "Többszörös dossziék segítségével lehetőség van a dosszié-adatok több helyen történő tárolására. A tárolás helyének megváltoztatásához az eszköztár ikonra kell kattintani.">
 <!ENTITY sb.prefs.confirmDelete "Figyelmeztetés a dosszié-struktúra elemeinek törlése előtt">
 <!ENTITY sb.prefs.tree.autoCollapse "Mappa megnyitásakor a többi mappa automatikusan bezárásra kerül">
 <!ENTITY sb.prefs.tree.unshift "Elem elhelyezése a(z)">
