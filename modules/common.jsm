@@ -230,8 +230,16 @@ var sbCommonUtils = {
         var dataPath = this.getPref("data.path", ""), dir;
         if (dataPath) {
             try {
+                // if dataPath is absolute
                 dir = this.convertPathToFile(dataPath);
-            } catch(ex) {}
+            } catch(ex) {
+                try {
+                    // if data.path is relative (to Firefox profile directory)
+                    dir = this.DIR.get("ProfD", Components.interfaces.nsIFile);
+                    dir = this.convertFileToURL(dir) + dataPath.split(/[\/\\]/).map(function(part){return encodeURIComponent(part);}).join("/");
+                    dir = this.convertURLToFile(dir);
+                } catch(ex) {}
+            }
         }
         if ( !dir ) {
             dir = this.DIR.get("ProfD", Components.interfaces.nsIFile);
