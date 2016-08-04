@@ -100,7 +100,7 @@ pref("extensions.scrapbook.key.domEraser.isolate3", "Shift+Space");
 pref("extensions.scrapbook.key.domEraser.wider2", "Add");
 pref("extensions.scrapbook.key.domEraser.narrower2", "Subtract");
 pref("extensions.scrapbook.key.domEraser.wider3", "Shift+Equals");
-pref("extensions.scrapbook.key.domEraser.narrower3", "Hyphen_Minus");
+pref("extensions.scrapbook.key.domEraser.narrower3", "HyphenMinus");
 pref("extensions.scrapbook.capture.default.images", true);
 pref("extensions.scrapbook.capture.default.media", true);
 pref("extensions.scrapbook.capture.default.fonts", true);
