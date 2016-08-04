@@ -1022,7 +1022,7 @@ var sbContentSaver = {
         }
     },
 
-    inspectCSSText: function(aCSSText, aCSSHref, aType) {
+    inspectCSSText: function(aCSSText, aRefURL, aType) {
         var that = this;
         // CSS get by .cssText is always url("something-with-\"double-quote\"-escaped")
         // or url(something) (e.g. background-image in Firefox < 3.6)
@@ -1032,7 +1032,7 @@ var sbContentSaver = {
             var dataURL = arguments[1] || arguments[2];
             if (dataURL.indexOf("data:") === 0 && !that.option["saveDataURI"]) return ' url("' + dataURL + '")';
             if ( that.option["internalize"] && that.isInternalized(dataURL) ) return ' url("' + dataURL + '")';
-            dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);
+            dataURL = sbCommonUtils.resolveURL(aRefURL, dataURL);
             switch (aType) {
                 case "image":
                     if (that.option["images"]) {
