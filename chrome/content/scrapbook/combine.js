@@ -459,7 +459,15 @@ var sbPageCombiner = {
         if (aCSS.ownerNode && sbCommonUtils.getSbObjectType(aCSS.ownerNode) == "stylesheet") return "";
         // a special stylesheet used by scrapbook or other addons/programs, skip parsing it
         if (aCSS.href && aCSS.href.indexOf("chrome://") == 0) return "";
-        return this.processCSSRules(aCSS, this.BROWSER.currentURI.spec, "");
+        var content = this.processCSSRules(aCSS, this.BROWSER.currentURI.spec, "");
+        var media = aCSS.media.mediaText;
+        if (media) {
+            // omit "all" since it's defined in the link tag
+            if (media !== "all") {
+                content = "@media " + media + " {\n" + content + "}\n";
+            }
+        }
+        return content;
     },
 
     processCSSRules: function(aCSS, aRefURL) {
