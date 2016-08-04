@@ -478,6 +478,9 @@ var sbPageCombiner = {
             var cssText = "";
             if (this.isTargetCombined) {
                 cssText = cssRule.cssText;
+            } else if (cssRule.type == Components.interfaces.nsIDOMCSSRule.IMPORT_RULE) {
+                content += this.processCSSRecursively(cssRule.styleSheet);
+                return;
             } else if (cssRule.type == Components.interfaces.nsIDOMCSSRule.STYLE_RULE) {
                 cssText = this.remapCSSSelector(cssRule.selectorText) + "{" + cssRule.style.cssText + "}";
             } else if (cssRule.type == Components.interfaces.nsIDOMCSSRule.MEDIA_RULE) {
