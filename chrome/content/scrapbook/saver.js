@@ -927,7 +927,7 @@ var sbContentSaver = {
                 content += "/* ERROR: Unable to access this CSS */\n\n";
             skip = true;
         }
-        if (!skip) content += this.processCSSRules(aCSS, aDocument, "");
+        if (!skip) content += this.processCSSRules(aCSS, aDocument.location.href, aDocument, "");
         var media = aCSS.media.mediaText;
         if (media) {
             // omit "all" since it's defined in the link tag
@@ -948,32 +948,34 @@ var sbContentSaver = {
         return content;
     },
 
-    processCSSRules: function(aCSS, aDocument, aIndent) {
+    processCSSRules: function(aCSS, aRefURL, aDocument, aIndent) {
         var content = "";
+        // if aCSS is a rule set of an external CSS file, use its URL as reference
+        var refURL = aCSS.href || aRefURL;
         Array.forEach(aCSS.cssRules, function(cssRule) {
             switch (cssRule.type) {
                 case Components.interfaces.nsIDOMCSSRule.IMPORT_RULE: 
                     content += this.processCSSRecursively(cssRule.styleSheet, aDocument, true);
                     break;
                 case Components.interfaces.nsIDOMCSSRule.FONT_FACE_RULE: 
-                    var cssText = aIndent + this.inspectCSSText(cssRule.cssText, aCSS.href, "font");
+                    var cssText = aIndent + this.inspectCSSText(cssRule.cssText, refURL, "font");
                     if (cssText) content += cssText + "\n";
                     break;
                 case Components.interfaces.nsIDOMCSSRule.MEDIA_RULE: 
                     cssText = aIndent + "@media " + cssRule.conditionText + " {\n"
-                        + this.processCSSRules(cssRule, aDocument, aIndent + "  ")
+                        + this.processCSSRules(cssRule, refURL, aDocument, aIndent + "  ")
                         + aIndent + "}";
                     if (cssText) content += cssText + "\n";
                     break;
                 case Components.interfaces.nsIDOMCSSRule.STYLE_RULE: 
                     // if script is used, preserve all css in case it's used by a dynamic generated DOM
                     if (this.option["script"] || verifySelector(aDocument, cssRule.selectorText)) {
-                        var cssText = aIndent + this.inspectCSSText(cssRule.cssText, aCSS.href, "image");
+                        var cssText = aIndent + this.inspectCSSText(cssRule.cssText, refURL, "image");
                         if (cssText) content += cssText + "\n";
                     }
                     break;
                 default: 
-                    var cssText = aIndent + this.inspectCSSText(cssRule.cssText, aCSS.href, "image");
+                    var cssText = aIndent + this.inspectCSSText(cssRule.cssText, refURL, "image");
                     if (cssText) content += cssText + "\n";
                     break;
             }
@@ -1020,9 +1022,8 @@ var sbContentSaver = {
         }
     },
 
-    inspectCSSText: function(aCSSText, aCSSHref, aType) {
+    inspectCSSText: function(aCSSText, aRefURL, aType) {
         var that = this;
-        if (!aCSSHref) aCSSHref = this.refURLObj.spec;
         // CSS get by .cssText is always url("something-with-\"double-quote\"-escaped")
         // or url(something) (e.g. background-image in Firefox < 3.6)
         // and no CSS comment is in, so we can parse it safely with this RegExp.
@@ -1031,7 +1032,7 @@ var sbContentSaver = {
             var dataURL = arguments[1] || arguments[2];
             if (dataURL.indexOf("data:") === 0 && !that.option["saveDataURI"]) return ' url("' + dataURL + '")';
             if ( that.option["internalize"] && that.isInternalized(dataURL) ) return ' url("' + dataURL + '")';
-            dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);
+            dataURL = sbCommonUtils.resolveURL(aRefURL, dataURL);
             switch (aType) {
                 case "image":
                     if (that.option["images"]) {
