@@ -455,27 +455,31 @@ var sbPageCombiner = {
     },
 
     processCSSRecursively: function(aCSS) {
-        var ret = "";
         // a special stylesheet used by scrapbook, skip parsing it
-        if (aCSS.ownerNode && sbCommonUtils.getSbObjectType(aCSS.ownerNode) == "stylesheet") return ret;
+        if (aCSS.ownerNode && sbCommonUtils.getSbObjectType(aCSS.ownerNode) == "stylesheet") return "";
         // a special stylesheet used by scrapbook or other addons/programs, skip parsing it
-        if (aCSS.href && aCSS.href.indexOf("chrome://") == 0) return ret;
-        var cssRules = aCSS.cssRules;
-        for ( var i = 0; i < cssRules.length; i++ ) {
-            var cssRule = cssRules[i];
+        if (aCSS.href && aCSS.href.indexOf("chrome://") == 0) return "";
+        return this.processCSSRules(aCSS, this.BROWSER.currentURI.spec, "");
+    },
+
+    processCSSRules: function(aCSS, aRefURL) {
+        var content = "";
+        // if aCSS is a rule set of an external CSS file, use its URL as reference
+        var refURL = aCSS.href || aRefURL;
+        Array.forEach(aCSS.cssRules, function(cssRule) {
             var cssText = "";
             if (this.isTargetCombined) {
                 cssText = cssRule.cssText;
             } else if (cssRule.type == Components.interfaces.nsIDOMCSSRule.STYLE_RULE) {
                 cssText = this.remapCSSSelector(cssRule.selectorText) + "{" + cssRule.style.cssText + "}";
             } else if (cssRule.type == Components.interfaces.nsIDOMCSSRule.MEDIA_RULE) {
-                cssText = "@media " + cssRule.conditionText + " {\n" + this.processCSSRecursively(cssRule) + "}";
+                cssText = "@media " + cssRule.conditionText + " {\n" + this.processCSSRules(cssRule, refURL) + "}";
             } else {
                 cssText = cssRule.cssText;
             }
-            ret += this.inspectCSSText(cssText, aCSS.href) + "\n";
-        }
-        return ret;
+            content += this.inspectCSSText(cssText, refURL) + "\n";
+        }, this);
+        return content;
     },
 
     remapCSSSelector: function(selectorText) {
@@ -537,15 +541,14 @@ var sbPageCombiner = {
         return ret;
     },
 
-    inspectCSSText: function(aCSSText, aCSSHref) {
-        if (!aCSSHref) aCSSHref = this.BROWSER.currentURI.spec;
+    inspectCSSText: function(aCSSText, aRefURL) {
         // CSS get by cssText is always url("double-quoted-with-\"quote\"-escaped")
         // or url(something) (e.g. background-image in Firefox < 3.6)
         var regex = / url\(\"((?:\\.|[^"])+)\"\)| url\(((?:\\.|[^)])+)\)/g;
         aCSSText = aCSSText.replace(regex, function() {
             var dataURL = arguments[1] || arguments[2];
             if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
-            dataURL = sbCommonUtils.resolveURL(aCSSHref, dataURL);
+            dataURL = sbCommonUtils.resolveURL(aRefURL, dataURL);
             // redirect the files to the original folder so we can capture them later on (and will rewrite the CSS)
             return ' url("' + dataURL + '")';
         });
@@ -615,7 +618,7 @@ var sbPageCombiner = {
                 break;
         }
         if ( aNode.style && aNode.style.cssText ) {
-            var newCSStext = this.inspectCSSText(aNode.style.cssText);
+            var newCSStext = this.inspectCSSText(aNode.style.cssText, this.BROWSER.currentURI.spec);
             if ( newCSStext ) aNode.setAttribute("style", newCSStext);
         }
         return aNode;
