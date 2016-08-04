@@ -260,18 +260,13 @@
 <!ENTITY sb.prefs.ui.toolsMenu "Show in &apos;Tools&apos; menu">
 <!ENTITY sb.prefs.ui.statusBar "Show in status bar">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "Change requires Firefox restart.">
+<!ENTITY sb.prefs.desc.restart "Change requires Firefox restart.">
 <!ENTITY sb.prefs.tabs.tips "Open in tab for the following operations">
 <!ENTITY sb.prefs.tabs.note "Edit Note">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
-<!ENTITY sb.prefs.data "Location to Store Data">
-<!ENTITY sb.prefs.data.default "Default (Profile Folder)">
-<!ENTITY sb.prefs.data.custom "Save data to">
 <!ENTITY sb.prefs.data.tips "Choose a folder where to store the ScrapBook data.">
-<!ENTITY sb.prefs.multibook.enabled "Enable Multi-ScrapBook">
-<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook enables you to set up multiple locations to store data and switch between them quickly with toolbar button.">
 <!ENTITY sb.prefs.confirmDelete "Warn me when deleting tree item(s)">
 <!ENTITY sb.prefs.tree.autoCollapse "When opening a tree folder, automatically close other folders">
 <!ENTITY sb.prefs.tree.unshift "Put an item into">
@@ -385,7 +380,7 @@
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.remove.container "Convert to Non-folder">
+<!ENTITY sb.unmake.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Combined View">
 <!ENTITY sb.folder.openall "Open All in Tabs">
 <!ENTITY sb.folder.manage "Manage Folder">

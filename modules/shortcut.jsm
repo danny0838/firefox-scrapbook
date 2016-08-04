@@ -2,18 +2,18 @@
  *
  * The class for keyboard shortcut
  *
- * @public {class} Shortcut
+ * @public {class} sbShortcut
  *
  *******************************************************************/
 
-this.EXPORTED_SYMBOLS = ["Shortcut"];
+this.EXPORTED_SYMBOLS = ["sbShortcut"];
 
 const { sbCommonUtils } = Components.utils.import("resource://scrapbook-modules/common.jsm", {});
 
 // possible values of nsIXULRuntime.OS:
 // https://developer.mozilla.org/en/OS_TARGET
 const nsIXULRuntime = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULRuntime);
-const isMac = (nsIXULRuntime.OS.substring(0, 3).toLowerCase() == "mac");
+const isMac = (nsIXULRuntime.OS == "Darwin");
 
 const keyNameToUIStringMap = {
     "BackQuote": "`",
@@ -92,9 +92,9 @@ const accelKeyCode = sbCommonUtils.getPref("ui.key.accelKey", 0, true);
 
 
 /**
- * Shortcut class
+ * sbShortcut class
  */
-function Shortcut(data) {
+function sbShortcut(data) {
     this.keyCode = data.keyCode;
     this.keyName = keyCodeToNameMap[this.keyCode];
     // unify the order
@@ -126,7 +126,7 @@ function Shortcut(data) {
     }
 }
 
-Shortcut.prototype = {
+sbShortcut.prototype = {
     get isValid() {
         delete this.isValid;
         return this.isValid = !!this.keyName;
@@ -164,7 +164,7 @@ Shortcut.prototype = {
 
     // return the string which is nice to show in the UI
     getUIString: function () {
-        return this.getKeys.map(function(key) {
+        var keys = this.getKeys.map(function(key) {
             // replace Accel
             if (key == "Accel") {
                 if (accelKeyCode == 17) {
@@ -191,7 +191,18 @@ Shortcut.prototype = {
             }
 
             return key;
-        }).join("+");
+        });
+
+        // Mac style modifier keys: reversed order and no "+" inbetween
+        if (isMac) {
+            var macKeys = [keys.pop()];
+            while (keys.length) {
+                macKeys.unshift(keys.shift());
+            }
+            return macKeys.join("");
+        }
+
+        return keys.join("+");
     },
 
     // return the keycode attribute for XUL <key> elements
@@ -213,15 +224,15 @@ Shortcut.prototype = {
 };
 
 // returns new object from a normalized string
-Shortcut.fromString = function (str) {
+sbShortcut.fromString = function (str) {
     var data = {}
     var parts = str.split("+");
     data.keyCode = keyNameToCodeMap[parts.pop()];
     data.modifiers = [].concat(parts);
-    return new Shortcut(data);
+    return new sbShortcut(data);
 };
 
-Shortcut.fromEvent = function (event) {
+sbShortcut.fromEvent = function (event) {
     var data = {};
     // sometimes keyCode is 0 (e.g. Space onkeypress), and we need event.which to get it
     data.keyCode = event.keyCode || event.which;
@@ -240,5 +251,5 @@ Shortcut.fromEvent = function (event) {
     if (event.shiftKey && accelKeyCode != 16) modifiers.push("Shift");
     data.modifiers = modifiers;
 
-    return new Shortcut(data);
+    return new sbShortcut(data);
 };

@@ -117,8 +117,9 @@ var sbOutputService = {
     },
 
     getHTMLTitle: function() {
-        var multibook = sbCommonUtils.getPref("multibook.enabled", false);
-        var title = (multibook ? sbCommonUtils.getPref("data.title", "") + " - " : "") + "ScrapBook";
+        var dataPath = sbCommonUtils.getPref("data.path", "");
+        var dataTitle = sbCommonUtils.getPref("data.title", "");
+        var title = ((dataPath && dataTitle) ? dataTitle + " - " : "") + "ScrapBook";
         return sbCommonUtils.escapeHTMLWithSpace(title, true);
     },
 
@@ -134,6 +135,14 @@ var sbOutputService = {
             + '<script>\n'
             + 'function init() {\n'
             + '    toggleAll(false);\n'
+            + '    try {\n'
+            + '        initLoadHash();\n'
+            + '    } catch(ex) {'
+            + '        if (console && console.error) console.error(ex);\n'
+            + '    }\n'
+            + '    initEvents();\n'
+            + '}\n'
+            + 'function initLoadHash() {\n'
             + '    var hash = top.location.hash, hashTargetUrl, hashTargetItem;\n'
             + '    if (hash) {\n'
             + '        hashTargetUrl = hash.substring(1);\n'
@@ -158,6 +167,8 @@ var sbOutputService = {
             + '        }\n'
             + '        hashTargetItem.focus();\n'
             + '    }\n'
+            + '}\n'
+            + 'function initEvents() {\n'
             + '    document.getElementById("toggle-all").onclick = function () {\n'
             + '        toggleAll();\n'
             + '        return false;\n'
@@ -188,9 +199,13 @@ var sbOutputService = {
             + '    if (self == top) return;\n'
             + '    var hash = "#" + this.getAttribute("href");\n'
             + '    var title = this.childNodes[1].nodeValue;\n'
-            + '    if (history && history.pushState) top.history.pushState("", title, hash);\n'
-            + '    else top.location.hash = hash;\n'
-            + '    top.document.title = title;\n'
+            + '    try {\n'
+            + '        if (history && history.pushState) top.history.pushState("", title, hash);\n'
+            + '        else top.location.hash = hash;\n'
+            + '        top.document.title = title;\n'
+            + '    } catch(ex) {'
+            + '        if (console && console.error) console.error(ex);\n'
+            + '    }\n'
             + '}\n'
             + 'function toggleElem(elem, willOpen) {\n'
             + '    var iElem = document.getElementById(elem.id.replace(/^container-/, "item-"));\n'

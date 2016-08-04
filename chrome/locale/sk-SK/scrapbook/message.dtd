@@ -260,18 +260,13 @@
 <!ENTITY sb.prefs.ui.toolsMenu "Zobraziť v ponuke &apos;Nástroje&apos;">
 <!ENTITY sb.prefs.ui.statusBar "Zobraziť v stavovej lište">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "Zmeny sa prejavia po reštarte Firefoxu.">
+<!ENTITY sb.prefs.desc.restart "Zmeny sa prejavia po reštarte Firefoxu.">
 <!ENTITY sb.prefs.tabs.tips "Nasledovné akcie otvoria nové karty">
 <!ENTITY sb.prefs.tabs.note "Upraviť poznámku">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
-<!ENTITY sb.prefs.data "Umiestnenie pre ukladanie údajov">
-<!ENTITY sb.prefs.data.default "Predvolené">
-<!ENTITY sb.prefs.data.custom "Uložiť údaje do">
 <!ENTITY sb.prefs.data.tips "Zvoliť priečinok, kam ukladať ScrapBook údaje.">
-<!ENTITY sb.prefs.multibook.enabled "Povoliť Multi-ScrapBook">
-<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook umožní zvoliť si viaceré priečinky pre ukladanie údajov a jednoducho prepínať medzi nimi pomocou tlačidla na paneli nástrojov.">
 <!ENTITY sb.prefs.confirmDelete "Upozorniť pri odstránení položky">
 <!ENTITY sb.prefs.tree.autoCollapse "Pri otvorení priečinku automaticky zatvoriť ostatné priečinky">
 <!ENTITY sb.prefs.tree.unshift "Zaradiť položku na">
@@ -385,7 +380,7 @@
 <!ENTITY sbp.prop.url "Adresa URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.remove.container "Convert to Non-folder">
+<!ENTITY sb.unmake.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Otvoriť v kombinovanom náhľade">
 <!ENTITY sb.folder.openall "Otvoriť všetko v kartách">
 <!ENTITY sb.folder.manage "Správca priečinkov">

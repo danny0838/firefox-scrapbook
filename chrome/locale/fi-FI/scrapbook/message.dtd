@@ -260,18 +260,13 @@
 <!ENTITY sb.prefs.ui.toolsMenu "Näytä Työkalut-valikossa">
 <!ENTITY sb.prefs.ui.statusBar "Näytä tilarivillä">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "Muutokset saatetaan voimaan, kun Firefox käynnistetään uudelleen.">
+<!ENTITY sb.prefs.desc.restart "Muutokset saatetaan voimaan, kun Firefox käynnistetään uudelleen.">
 <!ENTITY sb.prefs.tabs.tips "Avaa välilehtiin seuraavilla toiminnoilla">
 <!ENTITY sb.prefs.tabs.note "Muokkaa muistilappua">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
-<!ENTITY sb.prefs.data "Tietojen tallennussijainti">
-<!ENTITY sb.prefs.data.default "Oletus (profiilikansio)">
-<!ENTITY sb.prefs.data.custom "Tallenna tiedot kohteeseen">
 <!ENTITY sb.prefs.data.tips "Valitse kansio, johon tallennetaan ScrapBookin tiedot.">
-<!ENTITY sb.prefs.multibook.enabled "Ota käyttöön Multi-ScrapBook">
-<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBookilla voit tallentaa sivuja moneen paikkaan ja vaihdella paikkoja työkalupalkin painikkeella.">
 <!ENTITY sb.prefs.confirmDelete "Varoita kohteiden poistamisesta puusta">
 <!ENTITY sb.prefs.tree.autoCollapse "Kun puun kansio avataan, sulje automaattisesti muut kansiot">
 <!ENTITY sb.prefs.tree.unshift "Aseta kohde">
@@ -385,7 +380,7 @@
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "Tunnus">
 <!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.remove.container "Convert to Non-folder">
+<!ENTITY sb.unmake.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Yhdistetty näkymä">
 <!ENTITY sb.folder.openall "Avaa kaikki välilehtiin">
 <!ENTITY sb.folder.manage "Muokkaa kansiota">

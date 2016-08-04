@@ -31,6 +31,10 @@ toolbarbutton#sbToolbarMove {
     list-style-image: url("chrome://scrapbook/skin/toolbar_move.png");
 }
 
+toolbarbutton#sbToolbarRemove {
+    list-style-image: url("chrome://scrapbook/skin/menu_remove.png");
+}
+
 toolbarbutton#mbToolbarButton {
     list-style-image: url("chrome://scrapbook/skin/main_16.png");
 }
@@ -52,13 +56,15 @@ menuitem#sbToolsMenuPopupMultiple .menu-iconic-icon {
 
 /* ::::: POPUP ::::: */
 
-menuitem#sbPopupRemove,
-toolbarbutton#sbToolbarRemove {
+menuitem#sbPopupManage {
+    list-style-image: url("chrome://scrapbook/skin/toolbar_manage.png");
+}
+
+menuitem#sbPopupRemove {
     list-style-image: url("chrome://scrapbook/skin/menu_remove.png");
 }
 
-menuitem#sbPopupProperty,
-toolbarbutton#sbToolbarProperty {
+menuitem#sbPopupProperty {
     list-style-image: url("chrome://scrapbook/skin/menu_property.png");
 }
 

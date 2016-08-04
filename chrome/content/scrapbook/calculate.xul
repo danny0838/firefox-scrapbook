@@ -25,16 +25,16 @@
 
     <keyset>
         <key keycode="VK_ESCAPE" oncommand="window.close();" />
-        <key keycode="VK_F5"     oncommand="window.location.reload();" />
+        <key keycode="VK_F5" oncommand="window.location.reload();" />
     </keyset>
 
     <!--popup-->
     <popupset>
         <menupopup id="sbCalcPopup" onpopupshowing="sbCalcController.createPopupMenu();">
-            <menuitem label="&sb.open;"        oncommand="sbCalcController.open(false);" default="true" />
+            <menuitem label="&sb.open;" oncommand="sbCalcController.open(false);" default="true" />
             <menuitem label="&sb.open.newtab;" oncommand="sbCalcController.open(true);" />
-            <menuitem label="&sb.show.files;"  oncommand="sbCalcController.forward('L');" />
-            <menuseparator /><menuitem id="sbPopupRemove"   class="menuitem-iconic" label="&sb.remove;"   oncommand="sbCalcController.remove();" disbabled="true" />
+            <menuitem label="&sb.show.files;" oncommand="sbCalcController.forward('L');" />
+            <menuseparator /><menuitem id="sbPopupRemove" class="menuitem-iconic" label="&sb.remove;" oncommand="sbCalcController.remove();" disbabled="true" />
             <menuseparator /><menuitem id="sbPopupProperty" class="menuitem-iconic" label="&sb.property;" oncommand="sbCalcController.forward('P');" />
         </menupopup>
     </popupset>
@@ -64,9 +64,9 @@
           onkeypress="if ( event.keyCode == 46 ) sbCalcController.remove();"
           flex="1">
         <treecols>
-            <treecol id="sbTreeColTitle" label="&sb.prop.title;"     flex="7" sortIndex="2" primary="true" />
+            <treecol id="sbTreeColTitle" label="&sb.prop.title;" flex="7" sortIndex="2" primary="true" />
             <splitter class="tree-splitter" />
-            <treecol id="sbTreeColSize"  label="&sb.prop.size;"      flex="2" sortIndex="4" sortDirection="descending" />
+            <treecol id="sbTreeColSize" label="&sb.prop.size;" flex="2" sortIndex="4" sortDirection="descending" />
             <splitter class="tree-splitter" />
             <treecol id="sbTreeColState" label="&sb.calc.diagnosis;" flex="1" sortIndex="6" />
         </treecols>

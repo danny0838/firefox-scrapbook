@@ -1,23 +1,18 @@
 
 var sbMultiBookService = {
 
-    enabled: false,
     file: null,
-
-    showButton: function() {
-        this.enabled = sbCommonUtils.getPref("multibook.enabled", false);
-        document.getElementById("mbToolbarButton").hidden = !this.enabled;
-    },
 
     showSidebarTitle: function() {
         var sidebarTitleId = sbCommonUtils.getSidebarId("sidebar-title");
         var elem = window.top.document.getElementById(sidebarTitleId);
         if (!elem) return;
-        elem.value = "ScrapBook X" + (this.enabled ? " [" + sbCommonUtils.getPref("data.title", "") + "]" : "");
+        var dataPath = sbCommonUtils.getPref("data.path", "");
+        var dataTitle = sbCommonUtils.getPref("data.title", "");
+        elem.value = "ScrapBook X" + ((dataPath && dataTitle) ? " [" + dataTitle + "]" : "");
     },
 
     initMenu: function() {
-        var isDefault = sbCommonUtils.getPref("data.default", true);
         var dataPath = sbCommonUtils.getPref("data.path", "");
         var popup = document.getElementById("mbMenuPopup");
         if (!this.file) {
@@ -35,7 +30,7 @@ var sbMultiBookService = {
                 popup.insertBefore(elem, popup.firstChild);
             }
         }
-        if (isDefault) {
+        if (!dataPath) {
             document.getElementById("mbMenuItemDefault").setAttribute("checked", true);
         } else {
             // if we don't remove the check explicitly,
@@ -78,9 +73,7 @@ var sbMultiBookService = {
         // we have to exec it before changing them
         sbDataSource.outputTreeAuto(window);
         aItem.setAttribute("checked", true);
-        var path = aItem.getAttribute("path");
-        sbCommonUtils.setPref("data.default", path == "");
-        if (path != "") sbCommonUtils.setPref("data.path", path);
+        sbCommonUtils.setPref("data.path", aItem.getAttribute("path"));
         sbCommonUtils.setPref("data.title", aItem.label);
         sbDataSource.checkRefresh();
     },

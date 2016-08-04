@@ -3,9 +3,7 @@ var sbPrefWindow = {
     changed: false,
 
     init: function() {
-        this.updateDataPath();
         this.hlUpdateUI();
-        this._updateFileField("sbDataPath", "extensions.scrapbook.data.path");
         if (!sbMultiBookService.validateRefresh(true)) {
             var elts = document.getElementById("sbDataDefault").getElementsByTagName("*");
             Array.forEach(elts, function(elt) {
@@ -14,7 +12,7 @@ var sbPrefWindow = {
         }
         // init keys UI to show beautiful
         Array.prototype.forEach.call(document.getElementById("keysPane").getElementsByTagName("textbox"), function(elem){
-            var shortcut = Shortcut.fromString(elem.value);
+            var shortcut = sbShortcut.fromString(elem.value);
             if (elem.getAttribute("preference") === "extensions.scrapbook.key.menubar") {
                 if (shortcut.isPrintable) {
                     elem.value = shortcut.keyName;
@@ -64,47 +62,11 @@ var sbPrefWindow = {
         this.hlUpdateUI();
     },
 
-    updateDataUI: function() {
-        var isDefault = document.getElementById("extensions.scrapbook.data.default").value;
-        var mbEnabled = document.getElementById("extensions.scrapbook.multibook.enabled").value;
-        document.getElementById("sbDataDefault").disabled = mbEnabled;
-        document.getElementById("sbDataPath").disabled = isDefault || mbEnabled;
-        document.getElementById("sbDataButton").disabled = isDefault || mbEnabled;
-    },
-
-    updateDataPath: function() {
-        this._updateFileField("sbDataPath", "extensions.scrapbook.data.path");
-    },
-
-    _updateFileField: function(aEltID, aPrefID) {
-        var file = document.getElementById(aPrefID).value;
-        if (!file)
-            return;
-        var fileField = document.getElementById(aEltID);
-        fileField.file = file;
-        if (file.exists() && file.isDirectory())
-            fileField.label = file.path;
-    },
-
-    selectFolder: function(aPickerTitle) {
-        var file = document.getElementById("extensions.scrapbook.data.path").value;
-        var pickedFile = sbCommonUtils.showFilePicker({
-            window: window,
-            title: aPickerTitle,
-            mode: 2, // modeGetFolder
-            dir: file,
-        });
-        if (pickedFile) {
-            document.getElementById("extensions.scrapbook.data.path").value = pickedFile;
-            this.updateDataPath();
-        }
-    },
-
     // for an element linked to preference
     // we need to set the preference element's value to get it stored to preference
     // modifying the element's value only changes the display effect
     onKeyDown: function(elem, event) {
-        var shortcut = Shortcut.fromEvent(event);
+        var shortcut = sbShortcut.fromEvent(event);
         var pref = elem.getAttribute("preference");
         var prefElem = document.getElementById(pref);
         if (pref === "extensions.scrapbook.key.menubar") {
@@ -121,8 +83,8 @@ var sbPrefWindow = {
                 prefElem.value = "";
             }
         }
-		event.preventDefault();
-		event.stopPropagation();
+        event.preventDefault();
+        event.stopPropagation();
     },
 
     exportPrefs: function() {

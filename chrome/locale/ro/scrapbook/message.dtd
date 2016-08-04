@@ -260,18 +260,13 @@
 <!ENTITY sb.prefs.ui.toolsMenu "Afișează în meniul „Unelte”">
 <!ENTITY sb.prefs.ui.statusBar "Afișează în bara de stare">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "Modificările sunt efective după repornirea navigatorului.">
+<!ENTITY sb.prefs.desc.restart "Modificările sunt efective după repornirea navigatorului.">
 <!ENTITY sb.prefs.tabs.tips "Deschide în file pentru următoarele operații">
 <!ENTITY sb.prefs.tabs.note "Editează note">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
-<!ENTITY sb.prefs.data "Locație stocare date">
-<!ENTITY sb.prefs.data.default "Implicit (dosarul profilului)">
-<!ENTITY sb.prefs.data.custom "Dosarul:">
 <!ENTITY sb.prefs.data.tips "Alegeți dosarul de stocare a datelor ScrapBook.">
-<!ENTITY sb.prefs.multibook.enabled "Activează Multi-ScrapBook">
-<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook vă permite să alegeți locații multiple de salvare a datelor și să comutați rapid între ele cu un buton de pe bară.">
 <!ENTITY sb.prefs.confirmDelete "Avertizează când se șterg elemente din arbore">
 <!ENTITY sb.prefs.tree.autoCollapse "La deschiderea unui arbore de dosare, închide automat celelalte dosare">
 <!ENTITY sb.prefs.tree.unshift "Pune noile elemente">
@@ -385,7 +380,7 @@
 <!ENTITY sbp.prop.url "Adresă">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.remove.container "Convert to Non-folder">
+<!ENTITY sb.unmake.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Vizualizează combinat">
 <!ENTITY sb.folder.openall "Deschide totul în file">
 <!ENTITY sb.folder.manage "Gestionează dosarul">

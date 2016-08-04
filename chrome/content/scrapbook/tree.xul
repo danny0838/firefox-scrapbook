@@ -16,29 +16,29 @@
 
     <keyset id="sbGenericKeys">
         <key keycode="VK_ESCAPE" oncommand="window.close();"/>
-        <key keycode="VK_F5"     oncommand="window.location.reload();"/>
+        <key keycode="VK_F5" oncommand="window.location.reload();"/>
     </keyset>
 
     <popupset id="sbPopupSet">
         <menupopup id="sbPopup" onpopupshowing="sbController.onPopupShowing(event);"
                onmouseover="if (event.originalTarget.getAttribute('nodelay')) document.getElementById('sbPopupToolsMenu').hidePopup();">
-            <menuitem id="sbPopupOpen"       label="&sb.open;"        nodelay="true" oncommand="sbController.open(null,false);" default="true" />
+            <menuitem id="sbPopupOpen" label="&sb.open;" nodelay="true" oncommand="sbController.open(null,false);" default="true" />
             <menuitem id="sbPopupOpenNative" label="&sb.open.native;" nodelay="true" oncommand="sbController.forward(null,'N');" />
             <menuitem id="sbPopupOpenNewTab" label="&sb.open.newtab;" nodelay="true" oncommand="sbController.open(null,true);" />
             <menuitem id="sbPopupOpenSource" label="&sb.open.source;" nodelay="true" oncommand="sbController.forward(null,'S');"
                       onclick="if (event.button != 1) return; this.parentNode.hidePopup(); sbController.forward(null,'S',true);" />
-            <menuitem id="sbPopupCombinedView" label="&sb.folder.combine;" oncommand="sbController.forward(null,'C');"   hidden="true" />
+            <menuitem id="sbPopupCombinedView" label="&sb.folder.combine;" oncommand="sbController.forward(null,'C');" hidden="true" />
             <menuitem id="sbPopupOpenAllItems" label="&sb.folder.openall;" oncommand="sbController.openAllInTabs(null);" hidden="true" />
             <menuseparator hidden="true" />
-            <menuitem id="sbPopupManage" label="&sb.folder.manage;..." oncommand="sbController.forward(null,'M');" hidden="true" />
-            <menuitem id="sbPopupSort"   label="&sb.sort.folder;..."   oncommand="sbController.forward(null,'Z');" hidden="true" />
+            <menuitem id="sbPopupManage" class="menuitem-iconic" label="&sb.folder.manage;..." oncommand="sbController.forward(null,'M');" hidden="true" />
+            <menuitem id="sbPopupSort" label="&sb.sort.folder;..." oncommand="sbController.forward(null,'Z');" hidden="true" />
             <menuitem id="sbPopupMakeContainer" label="&sb.make.container;" oncommand="sbMainService.makeContainer();" />
-            <menuitem id="sbPopupRemoveContainer" label="&sb.remove.container;" oncommand="sbMainService.removeContainer();" />
+            <menuitem id="sbPopupUnmakeContainer" label="&sb.unmake.container;" oncommand="sbMainService.unmakeContainer();" />
             <menu id="sbPopupTools" label="&sb.tools;" onmouseover="event.stopPropagation();">
                 <menupopup id="sbPopupToolsMenu">
                     <menuitem id="sbPopupShowFiles" label="&sb.show.files;" oncommand="sbController.forward(null,'L');" />
                     <menuitem id="sbPopupSend" class="menuitem-iconic" label="&sb.move;..." oncommand="sbTreeHandler.send();" />
-                    <menuitem id="sbPopupCopy"  class="menuitem-iconic" label="&sb.copy;..." oncommand="sbTreeHandler.copy();" />
+                    <menuitem id="sbPopupCopy" class="menuitem-iconic" label="&sb.copy;..." oncommand="sbTreeHandler.copy();" />
                     <menuseparator />
                     <menuitem id="sbPopupRenew" class="menuitem-iconic" label="&sb.renew;..." oncommand="sbController.renew(null, true);" onclick="if (event.button == 1) sbController.renew(null, false);" />
                     <menuitem id="sbPopupInternalize" class="menuitem-iconic" label="&sb.internalize;..." oncommand="sbController.internalize(null);" />
@@ -47,31 +47,31 @@
                 </menupopup>
             </menu>
             <menuseparator />
-            <menuitem id="sbPopupNewFolder"    class="menuitem-iconic sb-create" label="&sb.new.folder;..." oncommand="var shortcut = Shortcut.fromEvent(event); sbMainService.createFolder(shortcut.accelKey || shortcut.shiftKey);" />
-            <menuitem id="sbPopupNewSeparator" class="menuitem-iconic sb-create" label="&sb.new.separator;" oncommand="var shortcut = Shortcut.fromEvent(event); sbMainService.createSeparator(shortcut.accelKey || shortcut.shiftKey);" />
-            <menuitem id="sbPopupNewNote"      class="menuitem-iconic sb-create" label="&sb.new.note;"      oncommand="var shortcut = Shortcut.fromEvent(event); sbMainService.createNote(shortcut.accelKey || shortcut.shiftKey);" />
-            <menuitem id="sbPopupNewNotex"     class="menuitem-iconic sb-create" label="&sb.new.notex;"     oncommand="var shortcut = Shortcut.fromEvent(event); sbMainService.createNoteX(shortcut.accelKey || shortcut.shiftKey);" />
+            <menuitem id="sbPopupNewFolder" class="menuitem-iconic sb-create" label="&sb.new.folder;..." oncommand="var shortcut = sbShortcut.fromEvent(event); sbMainService.createFolder(shortcut.accelKey || shortcut.shiftKey);" />
+            <menuitem id="sbPopupNewSeparator" class="menuitem-iconic sb-create" label="&sb.new.separator;" oncommand="var shortcut = sbShortcut.fromEvent(event); sbMainService.createSeparator(shortcut.accelKey || shortcut.shiftKey);" />
+            <menuitem id="sbPopupNewNote" class="menuitem-iconic sb-create" label="&sb.new.note;" oncommand="var shortcut = sbShortcut.fromEvent(event); sbMainService.createNote(shortcut.accelKey || shortcut.shiftKey);" />
+            <menuitem id="sbPopupNewNotex" class="menuitem-iconic sb-create" label="&sb.new.notex;" oncommand="var shortcut = sbShortcut.fromEvent(event); sbMainService.createNoteX(shortcut.accelKey || shortcut.shiftKey);" />
             <menuseparator />
-            <menuitem id="sbPopupRemove"    class="menuitem-iconic" label="&sb.remove;"   oncommand="sbTreeHandler.remove();" />
+            <menuitem id="sbPopupRemove" class="menuitem-iconic" label="&sb.remove;" oncommand="sbTreeHandler.remove();" />
             <menuseparator />
-            <menuitem id="sbPopupProperty"  class="menuitem-iconic" label="&sb.property;" oncommand="sbController.forward(null,'P');" />
+            <menuitem id="sbPopupProperty" class="menuitem-iconic" label="&sb.property;" oncommand="sbController.forward(null,'P');" />
         </menupopup>
         <menupopup id="sbSearchPopup" onpopupshowing="sbSearchService.populatePopup(); document.getElementById('sbSearchTextbox').select();" position="after_start">
             <menuitem id="sbSearchPopupF" label="&sb.search.fulltext;" type="radio" oncommand="sbSearchService.change('fulltext');" />
             <menuseparator />
-            <menuitem id="sbSearchPopupT" label="&sb.prop.title;"   type="radio" oncommand="sbSearchService.change('title');" />
+            <menuitem id="sbSearchPopupT" label="&sb.prop.title;" type="radio" oncommand="sbSearchService.change('title');" />
             <menuitem id="sbSearchPopupC" label="&sb.prop.comment;" type="radio" oncommand="sbSearchService.change('comment');" />
-            <menuitem id="sbSearchPopupS" label="&sbp.prop.url;"    type="radio" oncommand="sbSearchService.change('source');" />
+            <menuitem id="sbSearchPopupS" label="&sbp.prop.url;" type="radio" oncommand="sbSearchService.change('source');" />
             <menuitem id="sbSearchPopupI" label="&sb.prop.id.date;" type="radio" oncommand="sbSearchService.change('id');" />
-            <menuitem id="sbSearchPopupA" label="&sb.search.all;"   type="radio" oncommand="sbSearchService.change('all');" />
+            <menuitem id="sbSearchPopupA" label="&sb.search.all;" type="radio" oncommand="sbSearchService.change('all');" />
             <menuseparator />
             <menuitem id="sbSearchPopupOptionRE" label="&sb.search.re;" type="checkbox" persist="checked" />
             <menuitem id="sbSearchPopupOptionCS" label="&sb.search.cs;" type="checkbox" persist="checked" />
             <menuseparator />
             <menu label="&sb.tools;">
                 <menupopup>
-                    <menuitem label="&sb.search.cache;"   oncommand="sbSearchService.updateCache();" />
-                    <menuitem label="&sb.search.clear;"   oncommand="sbSearchService.clearFormHistory();" />
+                    <menuitem label="&sb.search.cache;" oncommand="sbSearchService.updateCache();" />
+                    <menuitem label="&sb.search.clear;" oncommand="sbSearchService.clearFormHistory();" />
                 </menupopup>
             </menu>
         </menupopup>
@@ -119,7 +119,7 @@
         </template>
     </tree>
 
-    <toolbarbutton id="mbToolbarButton" type="menu" tooltiptext="&sb.multi;" onpopupshowing="sbMultiBookService.initMenu();" hidden="true">
+    <toolbarbutton id="mbToolbarButton" type="menu" tooltiptext="&sb.multi;" onpopupshowing="sbMultiBookService.initMenu();">
         <menupopup id="mbMenuPopup" oncommand="sbMultiBookService.change(event.originalTarget);">
             <menuitem id="mbMenuItemDefault" label="&mb.profileFolder;" type="radio" autocheck="false" />
             <menuseparator />

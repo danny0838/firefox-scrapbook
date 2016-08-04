@@ -6,7 +6,6 @@ var sbMainService = {
 
 
     init: function() {
-        sbMultiBookService.showButton();
         sbTreeHandler.init(false);
         sbTreeDNDHandler.init();
         this.baseURL = sbCommonUtils.getBaseHref(sbDataSource.data.URI);
@@ -199,7 +198,7 @@ var sbMainService = {
         }
     },
 
-    removeContainer: function() {
+    unmakeContainer: function() {
         try {
             var curIdx = sbTreeHandler.TREE.view.selection.count ? sbTreeHandler.TREE.currentIndex : -1;
             var curRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(curIdx);
@@ -212,11 +211,11 @@ var sbMainService = {
                     sbDataSource.addItem(item, curPar.Value, curRelIdx);
                     sbCommonUtils.rebuildGlobal();
                 } else {
-                    sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_REMOVE_CONTAINER_NONEMPTY"));
+                    sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_UNMAKE_CONTAINER_NONEMPTY"));
                 }
             }
         } catch (ex) {
-            sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_REMOVE_CONTAINER", ex));
+            sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_UNMAKE_CONTAINER", ex));
         }
     },
 
@@ -279,7 +278,7 @@ var sbController = {
         getElement("sbPopupManage").hidden = isMultiple || !isContainer;
         getElement("sbPopupSort").hidden = isMultiple || !isContainer;
         getElement("sbPopupMakeContainer").hidden = isMultiple || isContainer || isSeparator;
-        getElement("sbPopupRemoveContainer").hidden = isMultiple || !isContainer || isFolder;
+        getElement("sbPopupUnmakeContainer").hidden = isMultiple || !isContainer || isFolder;
         getElement("sbPopupNewFolder").hidden = isMultiple;
         getElement("sbPopupNewSeparator").hidden = isMultiple;
         getElement("sbPopupNewNote").hidden = isMultiple;
@@ -673,7 +672,7 @@ var sbTreeDNDHandler = {
     },
 
     getModifiers: function(aEvent) {
-        var shortcut = Shortcut.fromEvent(aEvent);
+        var shortcut = sbShortcut.fromEvent(aEvent);
         this.modAlt = shortcut.altKey;
         this.modAccelShift = shortcut.accelKey || shortcut.shiftKey;
     },

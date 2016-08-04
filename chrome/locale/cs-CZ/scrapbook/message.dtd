@@ -260,18 +260,13 @@
 <!ENTITY sb.prefs.ui.toolsMenu "Zobrazit v nabídce položku &apos;Nástroje&apos;">
 <!ENTITY sb.prefs.ui.statusBar "Zobrazit ve stavové liště">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "Změna vyžaduje restart aplikace Firefox.">
+<!ENTITY sb.prefs.desc.restart "Změna vyžaduje restart aplikace Firefox.">
 <!ENTITY sb.prefs.tabs.tips "Otevřít v panelu pro následující operace">
 <!ENTITY sb.prefs.tabs.note "Upravit poznámku">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
-<!ENTITY sb.prefs.data "Umístění pro ukládání dat">
-<!ENTITY sb.prefs.data.default "Výchozí (Složka s profilem)">
-<!ENTITY sb.prefs.data.custom "Uložit data do">
 <!ENTITY sb.prefs.data.tips "Zvolí složku, kam se budou data rozšíření ScrapBook ukládat.">
-<!ENTITY sb.prefs.multibook.enabled "Zapnout Multi-ScrapBook">
-<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook umožňuje nastavit více umístění, kam se budou data ukládat, a rychle mezi nimi přepínat pomocí tlačítka v nástrojové liště.">
 <!ENTITY sb.prefs.confirmDelete "Varovat při odstraňování uložených položek">
 <!ENTITY sb.prefs.tree.autoCollapse "Při otevírání stromu složek automaticky zavřít ostatní složky">
 <!ENTITY sb.prefs.tree.unshift "Umístit položku na">
@@ -385,7 +380,7 @@
 <!ENTITY sbp.prop.url "Adresa URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.remove.container "Convert to Non-folder">
+<!ENTITY sb.unmake.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Kombinovaný náhled">
 <!ENTITY sb.folder.openall "Otevřít vše v panelech">
 <!ENTITY sb.folder.manage "Spravovat složku">

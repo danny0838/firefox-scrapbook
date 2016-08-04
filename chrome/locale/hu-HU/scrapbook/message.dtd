@@ -260,18 +260,13 @@
 <!ENTITY sb.prefs.ui.toolsMenu "Megjelenítés az „Eszközök” menüben">
 <!ENTITY sb.prefs.ui.statusBar "Megjelenítés az állapotsorban">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "A változtatások érvényre jutásához a Firefox újraindítása szükséges">
+<!ENTITY sb.prefs.desc.restart "A változtatások érvényre jutásához a Firefox újraindítása szükséges">
 <!ENTITY sb.prefs.tabs.tips "Lap nyitása a következő műveletekhez">
 <!ENTITY sb.prefs.tabs.note "Jegyzet szerkesztése">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
-<!ENTITY sb.prefs.data "Adattárolás helye">
-<!ENTITY sb.prefs.data.default "Alapértelmezett (Profil mappa)">
-<!ENTITY sb.prefs.data.custom "Mentés a következő helyre">
 <!ENTITY sb.prefs.data.tips "Válassza ki a mappát, ahová a Dosszié-adatok kerülnek">
-<!ENTITY sb.prefs.multibook.enabled "Többszörös dossziék engedélyezése">
-<!ENTITY sb.prefs.multibook.tips "Többszörös dossziék segítségével lehetőség van a dosszié-adatok több helyen történő tárolására. A tárolás helyének megváltoztatásához az eszköztár ikonra kell kattintani.">
 <!ENTITY sb.prefs.confirmDelete "Figyelmeztetés a dosszié-struktúra elemeinek törlése előtt">
 <!ENTITY sb.prefs.tree.autoCollapse "Mappa megnyitásakor a többi mappa automatikusan bezárásra kerül">
 <!ENTITY sb.prefs.tree.unshift "Elem elhelyezése a(z)">
@@ -385,7 +380,7 @@
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.remove.container "Convert to Non-folder">
+<!ENTITY sb.unmake.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Összefűzés nézet">
 <!ENTITY sb.folder.openall "Összes megnyitása füleken">
 <!ENTITY sb.folder.manage "Mappa kezelése">

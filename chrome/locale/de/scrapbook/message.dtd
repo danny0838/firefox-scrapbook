@@ -260,18 +260,13 @@
 <!ENTITY sb.prefs.ui.toolsMenu "ScrapBook-Eintrag im Menü &quot;Extras&quot; anzeigen">
 <!ENTITY sb.prefs.ui.statusBar "Symbol in der Statusleiste anzeigen">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "Änderung erfordert einen Firefox-Neustart.">
+<!ENTITY sb.prefs.desc.restart "Änderung erfordert einen Firefox-Neustart.">
 <!ENTITY sb.prefs.tabs.tips "Folgende Aktionen öffnen neue Tabs">
 <!ENTITY sb.prefs.tabs.note "Notiz bearbeiten">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
-<!ENTITY sb.prefs.data "Zielordner für die Datenspeicherung">
-<!ENTITY sb.prefs.data.default "Standardordner (aktueller Profilordner)">
-<!ENTITY sb.prefs.data.custom "Daten speichern in">
 <!ENTITY sb.prefs.data.tips "ScrapBook-Ordner auswählen, in dem die gesammelten Daten gespeichert werden sollen.">
-<!ENTITY sb.prefs.multibook.enabled "Multi-ScrapBook aktivieren">
-<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook erlaubt das Einrichten unterschiedlicher Speicherorte, zwischen denen einfach mit einer Schaltfläche gewechselt werden kann.">
 <!ENTITY sb.prefs.confirmDelete "Vor dem Löschen von Listeneinträgen bestätigen">
 <!ENTITY sb.prefs.tree.autoCollapse "Beim Ausklappen eines Listenordners alle anderen Ordner einklappen">
 <!ENTITY sb.prefs.tree.unshift "Einen Eintrag am">
@@ -385,7 +380,7 @@
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.remove.container "Convert to Non-folder">
+<!ENTITY sb.unmake.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Zusammengefasste Ansicht öffnen">
 <!ENTITY sb.folder.openall "Alles in Tabs öffnen">
 <!ENTITY sb.folder.manage "Ordner verwalten">

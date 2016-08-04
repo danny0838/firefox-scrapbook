@@ -260,18 +260,13 @@
 <!ENTITY sb.prefs.ui.toolsMenu "Afficher dans le menu &apos;Outils&apos;">
 <!ENTITY sb.prefs.ui.statusBar "Afficher dans la barre d&apos;état">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.restart "La modification nécessite un redémarrage de Firefox">
+<!ENTITY sb.prefs.desc.restart "La modification nécessite un redémarrage de Firefox">
 <!ENTITY sb.prefs.tabs.tips "Ouvrir dans un nouvel onglet pour les opérations suivantes">
 <!ENTITY sb.prefs.tabs.note "Éditer une note">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
 <!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
-<!ENTITY sb.prefs.data "Emplacement de stockage des données">
-<!ENTITY sb.prefs.data.default "Par défaut (dossier du profil)">
-<!ENTITY sb.prefs.data.custom "Enregistrer les données dans">
 <!ENTITY sb.prefs.data.tips "Choisissez un répertoire où stocker les données ScrapBook">
-<!ENTITY sb.prefs.multibook.enabled "Activer Multi-ScrapBook">
-<!ENTITY sb.prefs.multibook.tips "Multi-ScrapBook vous permet de configurer des emplacements multiples pour stocker vos données et de basculer rapidement de l&apos;un à l&apos;autre avec un bouton de la barre d&apos;outil.">
 <!ENTITY sb.prefs.confirmDelete "M&apos;alerter lors de la suppression d&apos;élément(s) de l&apos;arborescence">
 <!ENTITY sb.prefs.tree.autoCollapse "Lors de l&apos;ouverture d&apos;un dossier de l&apos;arborescence, fermer automatiquement les autres dossiers">
 <!ENTITY sb.prefs.tree.unshift "Placer un nouvel élément dans">
@@ -385,7 +380,7 @@
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.remove.container "Convert to Non-folder">
+<!ENTITY sb.unmake.container "Convert to Non-folder">
 <!ENTITY sb.folder.combine "Vue combinée">
 <!ENTITY sb.folder.openall "Tout ouvrir dans des onglets">
 <!ENTITY sb.folder.manage "Gérer les dossiers">
