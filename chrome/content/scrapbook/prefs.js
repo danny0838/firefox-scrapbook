@@ -3,6 +3,10 @@ var sbPrefWindow = {
     changed: false,
 
     init: function() {
+        // init buttons
+        document.documentElement.getButton("extra2").setAttribute("popup", "sbPrefPopup");
+        
+        // init highlight UI
         this.hlUpdateUI();
         if (!sbMultiBookService.validateRefresh(true)) {
             var elts = document.getElementById("sbDataDefault").getElementsByTagName("*");
