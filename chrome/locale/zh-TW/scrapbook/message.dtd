@@ -277,9 +277,10 @@
 <!ENTITY sb.prefs.notifyOnComplete "顯示「擷取完畢」提醒視窗">
 <!ENTITY sb.prefs.notifyPageCaptured "瀏覽擷取過的頁面時，顯示提醒視窗">
 <!ENTITY sb.prefs.autoOutput "更動資料時，自動輸出 HTML 資料列表">
-<!ENTITY sb.prefs.export "匯出偏好設定">
-<!ENTITY sb.prefs.import "匯入偏好設定">
-<!ENTITY sb.prefs.reset "重設偏好設定">
+<!ENTITY sb.prefs.io "偏好設定">
+<!ENTITY sb.prefs.io.export "匯出偏好設定">
+<!ENTITY sb.prefs.io.import "匯入偏好設定">
+<!ENTITY sb.prefs.io.reset "重設偏好設定">
 <!ENTITY sb.button.customize "自訂">
 <!ENTITY sb.button.browse "瀏覽">
 <!ENTITY sb.button.show "顯示檔案">

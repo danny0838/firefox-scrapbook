@@ -4,6 +4,15 @@
     width: 40em; height: 600px;
 }
 
+.dialog-button[dlgtype="extra2"] {
+  list-style-image: url("expander_up.png");
+  -moz-box-direction: reverse;
+}
+
+.dialog-button[dlgtype="extra2"] .button-icon {
+  display: -moz-box; /* for Linux */
+}
+
 .notify-restart {
     margin-top: 1em;
     color: red;
