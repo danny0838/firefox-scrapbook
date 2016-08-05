@@ -94,7 +94,7 @@ var sbPrefWindow = {
     exportPrefs: function() {
         var pickedFile = sbCommonUtils.showFilePicker({
             window: window,
-            title: "Export Preferences",
+            title: document.getElementById("sbPrefPopupExport").label,
             mode: 1, // modeSave
             filename: "scrapbook.prefs." + sbCommonUtils.getTimeStamp().substring(0, 8) + ".json",
             ext: "json",
@@ -118,7 +118,7 @@ var sbPrefWindow = {
     importPrefs: function() {
         var pickedFile = sbCommonUtils.showFilePicker({
             window: window,
-            title: "Import Preferences",
+            title: document.getElementById("sbPrefPopupImport").label,
             mode: 0, // modeOpen
             ext: "json",
             filters: [

@@ -19,8 +19,8 @@
 
     <popupset>
         <menupopup id="sbPrefPopup" position="before_start">
-            <menuitem label="&sb.prefs.io.export;" oncommand="sbPrefWindow.exportPrefs();"/>
-            <menuitem label="&sb.prefs.io.import;" oncommand="sbPrefWindow.importPrefs();"/>
+            <menuitem id="sbPrefPopupExport" label="&sb.prefs.io.export;" oncommand="sbPrefWindow.exportPrefs();"/>
+            <menuitem id="sbPrefPopupImport" label="&sb.prefs.io.import;" oncommand="sbPrefWindow.importPrefs();"/>
             <menuitem label="&sb.prefs.io.reset;" oncommand="sbPrefWindow.resetPrefs();"/>
         </menupopup>
     </popupset>
