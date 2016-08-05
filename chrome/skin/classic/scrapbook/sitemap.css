@@ -43,7 +43,7 @@ a {
 }
 
 a:before {
-    content: url("chrome://scrapbook/skin/info_link0.png");
+    content: url("info_link0.png");
     margin-right: 4px;
 }
 
@@ -52,7 +52,7 @@ a:hover {
 }
 
 a:hover:before {
-    content: url("chrome://scrapbook/skin/info_link1.png");
+    content: url("info_link1.png");
     margin-right: 4px;
 }
 
@@ -61,10 +61,10 @@ a:visited {
 }
 
 div#sitemap-container > ul > li > a:before {
-    content: url("chrome://scrapbook/skin/info_home0.png");
+    content: url("info_home0.png");
 }
 
 div#sitemap-container > ul > li > a:hover:before {
-    content: url("chrome://scrapbook/skin/info_home1.png");
+    content: url("info_home1.png");
 }
 

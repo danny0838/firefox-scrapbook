@@ -17,14 +17,14 @@ treechildren::-moz-tree-drop-feedback {
 }
 
 button#mbAddButton {
-    list-style-image: url(chrome://scrapbook/skin/menu_create.png);
+    list-style-image: url(menu_create.png);
 }
 
 button#mbEditButton {
-    list-style-image: url(chrome://scrapbook/skin/menu_property.png);
+    list-style-image: url(menu_property.png);
 }
 
 button#mbRemoveButton {
-    list-style-image: url(chrome://scrapbook/skin/menu_remove.png);
+    list-style-image: url(menu_remove.png);
 }
 
