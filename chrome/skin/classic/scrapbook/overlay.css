@@ -199,6 +199,10 @@ toolbar#ScrapBookEditor #ScrapBookEditLocate {
     list-style-image: url("expander_left.png");
 }
 
+toolbar#ScrapBookEditor #ScrapBookEditLocate[disabled="true"] {
+    list-style-image: url("expander_left_dis.png");
+}
+
 
 /* ::::: INFOBAR ::::: */
 
@@ -243,4 +247,8 @@ toolbar#ScrapBookInfobar #ScrapBookInfoSite[disabled="true"] {
 
 toolbar#ScrapBookInfobar #ScrapBookInfoLocate {
     list-style-image: url("expander_left.png");
+}
+
+toolbar#ScrapBookInfobar #ScrapBookInfoLocate[disabled="true"] {
+    list-style-image: url("expander_left_dis.png");
 }
