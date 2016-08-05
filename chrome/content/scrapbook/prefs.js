@@ -10,7 +10,7 @@ var sbPrefWindow = {
                 elt.disabled = true;
             });
         }
-        // init keys UI to show beautiful
+        // init keys UI and event handlers
         Array.prototype.forEach.call(document.getElementById("keysPane").getElementsByTagName("textbox"), function(elem){
             var shortcut = sbShortcut.fromString(elem.value);
             if (elem.getAttribute("preference") === "extensions.scrapbook.key.menubar") {
@@ -26,6 +26,16 @@ var sbPrefWindow = {
                     elem.value = "";
                 }
             }
+            elem.defaultValue = elem.value;
+            var imgReset = document.createElement("image");
+            imgReset.className = "shortcut reset";
+            imgReset.addEventListener("click", sbPrefWindow.resetShortcut, true);
+            elem.appendChild(imgReset);
+            var imgDelete = document.createElement("image");
+            imgDelete.addEventListener("click", sbPrefWindow.deleteShortcut, true);
+            imgDelete.className = "shortcut delete";
+            elem.appendChild(imgDelete);
+            elem.addEventListener("keydown", sbPrefWindow.setShortcut, true);
         });
         // output tree requires correct pref and datasource,
         // we have to exec it before changing them
@@ -65,7 +75,8 @@ var sbPrefWindow = {
     // for an element linked to preference
     // we need to set the preference element's value to get it stored to preference
     // modifying the element's value only changes the display effect
-    onKeyDown: function(elem, event) {
+    setShortcut: function(event) {
+        var elem = event.target;
         var shortcut = sbShortcut.fromEvent(event);
         var pref = elem.getAttribute("preference");
         var prefElem = document.getElementById(pref);
@@ -85,6 +96,20 @@ var sbPrefWindow = {
         }
         event.preventDefault();
         event.stopPropagation();
+    },
+
+    resetShortcut: function(event) {
+        var elem = event.target.parentNode;
+        var pref = elem.getAttribute("preference");
+        var prefElem = document.getElementById(pref);
+        prefElem.value = elem.defaultValue;
+    },
+
+    deleteShortcut: function(event) {
+        var elem = event.target.parentNode;
+        var pref = elem.getAttribute("preference");
+        var prefElem = document.getElementById(pref);
+        prefElem.value = "";
     },
 
     exportPrefs: function() {
