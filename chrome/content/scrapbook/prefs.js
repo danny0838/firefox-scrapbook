@@ -83,15 +83,13 @@ var sbPrefWindow = {
         if (pref === "extensions.scrapbook.key.menubar") {
             if (shortcut.isPrintable) {
                 prefElem.value = shortcut.keyName;
-            } else {
+            } else if (shortcut.isComplete) {
                 prefElem.value = "";
             }
         } else {
             if (shortcut.isComplete) {
                 prefElem.value = shortcut.toString();
                 elem.value = shortcut.getUIString();
-            } else {
-                prefElem.value = "";
             }
         }
         event.preventDefault();
