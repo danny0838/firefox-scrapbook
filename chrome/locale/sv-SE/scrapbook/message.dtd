@@ -10,6 +10,8 @@
 <!ENTITY sb.capture.skip "Hoppa över">
 <!ENTITY sb.capture.pause "Pausa">
 <!ENTITY sb.capture.finish "Avbryt">
+<!ENTITY sb.capture.checkSelection "Check selected items">
+<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Filtrera">
 <!ENTITY sb.capture.filter.column.one "Visa/Dölj">
 <!ENTITY sb.capture.filter.column.two "Filter (reguljärt uttryck)">

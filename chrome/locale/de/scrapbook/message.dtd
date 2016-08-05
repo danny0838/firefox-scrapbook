@@ -10,6 +10,8 @@
 <!ENTITY sb.capture.skip "Überspringen">
 <!ENTITY sb.capture.pause "Anhalten">
 <!ENTITY sb.capture.finish "Beenden">
+<!ENTITY sb.capture.checkSelection "Check selected items">
+<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Filter">
 <!ENTITY sb.capture.filter.column.one "Ein-/Ausblenden">
 <!ENTITY sb.capture.filter.column.two "Filter (regulärer Ausdruck)">

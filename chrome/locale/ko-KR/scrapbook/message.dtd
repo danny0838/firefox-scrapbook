@@ -10,6 +10,8 @@
 <!ENTITY sb.capture.skip "건너뛰기">
 <!ENTITY sb.capture.pause "일시 중지">
 <!ENTITY sb.capture.finish "취소">
+<!ENTITY sb.capture.checkSelection "Check selected items">
+<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "필터">
 <!ENTITY sb.capture.filter.column.one "보이기/감추기">
 <!ENTITY sb.capture.filter.column.two "필터 (정규표현식)">

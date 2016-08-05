@@ -429,6 +429,24 @@ var sbCaptureTask = {
         document.getElementById("sbCaptureSkipButton").disabled = !willEnable;
     },
 
+    toggleSelection: function(willCheck) {
+        this.getSelection().forEach(function(index){
+            this.TREE.childNodes[1].childNodes[index].childNodes[0].childNodes[0].setAttribute("value", willCheck);
+        }, this);
+    },
+
+    getSelection: function() {
+        var ret = [];
+        for ( var rc = 0; rc < this.TREE.view.selection.getRangeCount(); rc++ ) {
+            var start = {}, end = {};
+            this.TREE.view.selection.getRangeAt(rc, start, end);
+            for ( var i = start.value; i <= end.value; i++ ) {
+                ret.push(i);
+            }
+        }
+        return ret;
+    },
+
 };
 
 var sbpFilter = {

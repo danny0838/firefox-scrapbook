@@ -10,6 +10,8 @@
 <!ENTITY sb.capture.skip "تجاوز">
 <!ENTITY sb.capture.pause "إيقاف مؤقت">
 <!ENTITY sb.capture.finish "ألغ">
+<!ENTITY sb.capture.checkSelection "Check selected items">
+<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "تصفية">
 <!ENTITY sb.capture.filter.column.one "أظهر/أخف">
 <!ENTITY sb.capture.filter.column.two "مرشح (تعبير نمطي)">

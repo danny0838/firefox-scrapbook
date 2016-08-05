@@ -10,6 +10,8 @@
 <!ENTITY sb.capture.skip "Ohita">
 <!ENTITY sb.capture.pause "Pysäytä">
 <!ENTITY sb.capture.finish "Peruuta">
+<!ENTITY sb.capture.checkSelection "Check selected items">
+<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Suodata">
 <!ENTITY sb.capture.filter.column.one "Näytä/Piilota">
 <!ENTITY sb.capture.filter.column.two "Suodata (RegExp)">

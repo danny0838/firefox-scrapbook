@@ -10,6 +10,8 @@
 <!ENTITY sb.capture.skip "スキップ">
 <!ENTITY sb.capture.pause "一時停止">
 <!ENTITY sb.capture.finish "キャンセル">
+<!ENTITY sb.capture.checkSelection "Check selected items">
+<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "フィルタ">
 <!ENTITY sb.capture.filter.column.one "含む/除外">
 <!ENTITY sb.capture.filter.column.two "フィルタ (正規表現)">
