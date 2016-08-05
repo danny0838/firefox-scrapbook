@@ -239,7 +239,7 @@
 <!ENTITY sb.capture.alltabs "すべてのタブを取り込み">
 <!ENTITY sb.capture.bookmark "ScrapBookにブックマーク">
 <!ENTITY sb.sidebar "サイドバーに表示">
-<!ENTITY sb.menubar "メニュー">
+<!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "取り込み前編集モード">
 
 <!-- prefs.dtd -->

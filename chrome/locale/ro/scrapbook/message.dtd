@@ -239,7 +239,7 @@
 <!ENTITY sb.capture.alltabs "Capturează din toate filele">
 <!ENTITY sb.capture.bookmark "Pune semn de carte ScrapBook">
 <!ENTITY sb.sidebar "Afișează în panoul lateral">
-<!ENTITY sb.menubar "Meniu">
+<!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Editează înaintea capturării">
 
 <!-- prefs.dtd -->

@@ -239,7 +239,7 @@
 <!ENTITY sb.capture.alltabs "Capture All Tabs">
 <!ENTITY sb.capture.bookmark "Bookmark with ScrapBook">
 <!ENTITY sb.sidebar "Kenar Çubuğunda Göster">
-<!ENTITY sb.menubar "Menü Çubuğu">
+<!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Kaydetmeden Önce Düzenle">
 
 <!-- prefs.dtd -->

@@ -108,10 +108,7 @@
             <rows>
                 <row align="center">
                     <label value="&sb.menubar;:" group="menubar" />
-                    <hbox align="center">
-                        <label value="Alt+" group="menubar" />
-                        <textbox maxlength="1" preference="extensions.scrapbook.key.menubar" group="menubar" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
-                    </hbox>
+                    <textbox group="menubar" preference="extensions.scrapbook.key.menubar" onkeydown="sbPrefWindow.onKeyDown(this, event);" />
                 </row>
                 <row align="center">
                     <label value="&sb.sidebar;:" />

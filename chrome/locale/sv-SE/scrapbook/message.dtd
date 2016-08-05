@@ -239,7 +239,7 @@
 <!ENTITY sb.capture.alltabs "Fånga in alla flikar">
 <!ENTITY sb.capture.bookmark "Bokmärk med ScrapBook">
 <!ENTITY sb.sidebar "Visa i sidopanelen">
-<!ENTITY sb.menubar "Meny">
+<!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Redigera innan infångst">
 
 <!-- prefs.dtd -->

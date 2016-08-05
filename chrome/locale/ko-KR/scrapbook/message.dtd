@@ -239,7 +239,7 @@
 <!ENTITY sb.capture.alltabs "모든 탭 캡처">
 <!ENTITY sb.capture.bookmark "ScrapBook으로 북마크">
 <!ENTITY sb.sidebar "탐색 창으로 보기">
-<!ENTITY sb.menubar "메뉴바">
+<!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "캡처하기 전에 편집하기">
 
 <!-- prefs.dtd -->

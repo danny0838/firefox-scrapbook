@@ -239,7 +239,7 @@
 <!ENTITY sb.capture.alltabs "التقاط كل الالسنة">
 <!ENTITY sb.capture.bookmark "علامة موقع بـ سكراببوك">
 <!ENTITY sb.sidebar "عرض في الشريط الجانبي">
-<!ENTITY sb.menubar "الفائمة">
+<!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "تحرير قبل الالتقاط">
 
 <!-- prefs.dtd -->

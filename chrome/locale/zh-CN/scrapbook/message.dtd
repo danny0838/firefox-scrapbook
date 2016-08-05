@@ -239,7 +239,7 @@
 <!ENTITY sb.capture.alltabs "获取所有标签页">
 <!ENTITY sb.capture.bookmark "加入 ScrapBook 书签">
 <!ENTITY sb.sidebar "在侧栏显示">
-<!ENTITY sb.menubar "菜单栏">
+<!ENTITY sb.menubar "菜单栏存取键">
 <!ENTITY sb.editbefore "获取前进行编辑">
 
 <!-- prefs.dtd -->

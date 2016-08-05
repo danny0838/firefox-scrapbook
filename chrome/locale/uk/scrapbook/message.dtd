@@ -239,7 +239,7 @@
 <!ENTITY sb.capture.alltabs "Зберегти усі вкладки">
 <!ENTITY sb.capture.bookmark "Додати до закладок у ScrapBook">
 <!ENTITY sb.sidebar "Відобразити у бічній панелі">
-<!ENTITY sb.menubar "Меню">
+<!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Редагувати перед збереженням">
 
 <!-- prefs.dtd -->

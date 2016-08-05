@@ -239,7 +239,7 @@
 <!ENTITY sb.capture.alltabs "Capture All Tabs">
 <!ENTITY sb.capture.bookmark "Bookmark with ScrapBook">
 <!ENTITY sb.sidebar "Show in Sidebar">
-<!ENTITY sb.menubar "Menubar">
+<!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Edit Before Capture">
 
 <!-- prefs.dtd -->

@@ -239,7 +239,7 @@
 <!ENTITY sb.capture.alltabs "Zachytit všechny panely">
 <!ENTITY sb.capture.bookmark "Přidat mezi záložky ve ScrapBook">
 <!ENTITY sb.sidebar "Zobrazit v postranní liště">
-<!ENTITY sb.menubar "Hlavní nabídka">
+<!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Upravit před zachycením">
 
 <!-- prefs.dtd -->

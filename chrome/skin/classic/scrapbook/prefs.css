@@ -48,7 +48,8 @@ prefpane > description {
     width: 180px;
 }
 
-#keysPane textbox[maxlength="1"] {
+#keysPane textbox[group="menubar"] {
     width: 2em;
+    max-width: 2em;
     text-align: center;
 }
