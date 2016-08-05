@@ -24,29 +24,29 @@
 
 #sbpUp {
     height: 25px;
-    list-style-image: url("chrome://scrapbook/skin/expander_up.png");
+    list-style-image: url("expander_up.png");
 }
 
 #sbpUp[disabled="true"] {
-    list-style-image: url("chrome://scrapbook/skin/expander_up_dis.png");
+    list-style-image: url("expander_up_dis.png");
 }
 
 #sbpDown {
     height: 25px;
-    list-style-image: url("chrome://scrapbook/skin/expander_down.png");
+    list-style-image: url("expander_down.png");
 }
 
 #sbpDown[disabled="true"] {
-    list-style-image: url("chrome://scrapbook/skin/expander_down_dis.png");
+    list-style-image: url("expander_down_dis.png");
 }
 
 #sbpDelete {
     height: 25px;
-    list-style-image: url("chrome://scrapbook/skin/menu_remove.png");
+    list-style-image: url("menu_remove.png");
 }
 
 #sbpDelete[disabled="true"] {
-    list-style-image: url("chrome://scrapbook/skin/menu_remove_dis.png");
+    list-style-image: url("menu_remove_dis.png");
 }
 
 #sbCombineOptionRemove {

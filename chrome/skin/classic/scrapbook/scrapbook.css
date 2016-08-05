@@ -6,7 +6,7 @@
 /* ::::: TOOLBAR ::::: */
 
 toolbarbutton#sbToolbarNewFolder {
-    list-style-image: url("chrome://scrapbook/skin/toolbar_create.png");
+    list-style-image: url("toolbar_create.png");
 }
 
 /*
@@ -16,27 +16,27 @@ toolbarbutton#sbToolbarNewFolder dropmarker {
 */
 
 toolbarbutton#sbToolbarToggle {
-    list-style-image: url("chrome://scrapbook/skin/toolbar_toggle.png");
+    list-style-image: url("toolbar_toggle.png");
 }
 
 toolbarbutton#sbToolbarListView {
-    list-style-image: url("chrome://scrapbook/skin/toolbar_listview.png");
+    list-style-image: url("toolbar_listview.png");
 }
 
 toolbarbutton#sbToolbarManage {
-    list-style-image: url("chrome://scrapbook/skin/toolbar_manage.png");
+    list-style-image: url("toolbar_manage.png");
 }
 
 toolbarbutton#sbToolbarMove {
-    list-style-image: url("chrome://scrapbook/skin/toolbar_move.png");
+    list-style-image: url("toolbar_move.png");
 }
 
 toolbarbutton#sbToolbarRemove {
-    list-style-image: url("chrome://scrapbook/skin/menu_remove.png");
+    list-style-image: url("menu_remove.png");
 }
 
 toolbarbutton#mbToolbarButton {
-    list-style-image: url("chrome://scrapbook/skin/main_16.png");
+    list-style-image: url("main_16.png");
 }
 
 .sb-create .menu-iconic-icon,
@@ -50,48 +50,48 @@ menuitem#sbToolsMenuPopupMultiple .menu-iconic-icon {
 }
 
 .sb-create {
-    list-style-image: url("chrome://scrapbook/skin/menu_create.png");
+    list-style-image: url("menu_create.png");
 }
 
 
 /* ::::: POPUP ::::: */
 
 menuitem#sbPopupManage {
-    list-style-image: url("chrome://scrapbook/skin/toolbar_manage.png");
+    list-style-image: url("toolbar_manage.png");
 }
 
 menuitem#sbPopupRemove {
-    list-style-image: url("chrome://scrapbook/skin/menu_remove.png");
+    list-style-image: url("menu_remove.png");
 }
 
 menuitem#sbPopupProperty {
-    list-style-image: url("chrome://scrapbook/skin/menu_property.png");
+    list-style-image: url("menu_property.png");
 }
 
 menuitem#sbPopupSend {
-    list-style-image: url("chrome://scrapbook/skin/toolbar_move.png");
+    list-style-image: url("toolbar_move.png");
 }
 
 menuitem#sbPopupCopy {
-    list-style-image: url("chrome://scrapbook/skin/toolbar_move.png");
+    list-style-image: url("toolbar_move.png");
 }
 
 menuitem#sbPopupRenew,
 menuitem#sbPopupInternalize {
-    list-style-image: url("chrome://scrapbook/skin/capture_target.png");
+    list-style-image: url("capture_target.png");
 }
 
 menuitem#sbPopupOpenLocate {
-    list-style-image: url("chrome://scrapbook/skin/expander_left.png");
+    list-style-image: url("expander_left.png");
     height: 13px !important;
 }
 
 menuitem#sbToolsMenuPopupManage {
-    list-style-image: url("chrome://scrapbook/skin/toolbar_manage.png");
+    list-style-image: url("toolbar_manage.png");
 }
 
 menuitem#sbToolsMenuPopupMultiple {
-    list-style-image: url("chrome://scrapbook/skin/capture_target.png");
+    list-style-image: url("capture_target.png");
 }
 
 menuitem[type="radio"][checked="true"] {
@@ -103,16 +103,16 @@ menuitem[type="radio"][checked="true"] {
 
 treechildren::-moz-tree-image(sbTreeColTitle, leaf) {
     -moz-image-region: auto !important;
-    list-style-image: url("chrome://scrapbook/skin/treeitem.png") !important;
+    list-style-image: url("treeitem.png") !important;
     width: 16px; height: 16px;
 }
 
 treechildren::-moz-tree-image(sbTreeColTitle, note) {
-    list-style-image: url("chrome://scrapbook/skin/treenote.png") !important;
+    list-style-image: url("treenote.png") !important;
 }
 
 treechildren::-moz-tree-image(sbTreeColTitle, notex) {
-    list-style-image: url("chrome://scrapbook/skin/treenotex.png") !important;
+    list-style-image: url("treenotex.png") !important;
 }
 
 treechildren::-moz-tree-cell-text(notex) {
@@ -164,11 +164,11 @@ sidebarheader toolbarbutton image,
 }
 
 .sb-header-exit {
-    list-style-image: url("chrome://scrapbook/skin/exit.png");
+    list-style-image: url("exit.png");
 }
 
 .sb-header-locate {
-    list-style-image: url("chrome://scrapbook/skin/expander_left.png");
+    list-style-image: url("expander_left.png");
 }
 
 .sb-header-red {
@@ -184,7 +184,7 @@ sidebarheader toolbarbutton image,
     max-height: 16px !important;
     margin : 2px !important;
     padding: 0px !important;
-    background-image: url("chrome://scrapbook/skin/dropdown.png");
+    background-image: url("dropdown.png");
 }
 
 
@@ -215,7 +215,7 @@ browser {
 /* ::::: NOTE ::::: */
 
 #sbNoteExpand {
-    list-style-image: url("chrome://scrapbook/skin/expander.png");
+    list-style-image: url("expander.png");
 }
 
 #sbNoteTextBg {

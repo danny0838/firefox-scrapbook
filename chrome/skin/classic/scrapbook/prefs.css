@@ -14,27 +14,27 @@ prefpane .content-box {
 }
 
 radio[pane="mainPane"] {
-    list-style-image: url("chrome://scrapbook/skin/prefs_main.png");
+    list-style-image: url("prefs_main.png");
 }
 
 radio[pane="keysPane"] {
-    list-style-image: url("chrome://scrapbook/skin/prefs_keys.png");
+    list-style-image: url("prefs_keys.png");
 }
 
 radio[pane="tabsPane"] {
-    list-style-image: url("chrome://scrapbook/skin/prefs_tabs.png");
+    list-style-image: url("prefs_tabs.png");
 }
 
 radio[pane="editPane"] {
-    list-style-image: url("chrome://scrapbook/skin/prefs_edit.png");
+    list-style-image: url("prefs_edit.png");
 }
 
 radio[pane="organizePane"] {
-    list-style-image: url("chrome://scrapbook/skin/prefs_organize.png");
+    list-style-image: url("prefs_organize.png");
 }
 
 radio[pane="advancedPane"] {
-    list-style-image: url("chrome://scrapbook/skin/prefs_advanced.png");
+    list-style-image: url("prefs_advanced.png");
 }
 
 prefpane > checkbox,

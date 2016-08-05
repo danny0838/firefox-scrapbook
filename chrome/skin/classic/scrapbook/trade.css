@@ -23,11 +23,11 @@ tree#sbTradeTree treechildren::-moz-tree-cell-text(separator) {
 }
 
 #sbTradeExportButton {
-    list-style-image: url("chrome://scrapbook/skin/expander.png");
+    list-style-image: url("expander.png");
 }
 
 #sbTradeImportButton {
-    list-style-image: url("chrome://scrapbook/skin/expander_left.png");
+    list-style-image: url("expander_left.png");
 }
 
 #sbTradeLog {
