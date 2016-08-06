@@ -12,7 +12,6 @@
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         onload="sbTradeService.init();">
 
-    <script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
     <script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
     <script type="application/x-javascript" src="chrome://scrapbook/content/customTree.js" />
     <script type="application/x-javascript" src="chrome://scrapbook/content/trade.js" />
@@ -46,10 +45,9 @@
           onclick="if (event.button == 1) sbTradeService.open(true);"
           ondblclick="sbTradeService.onDblClick(event);"
           onkeypress="sbTradeService.onKeyPress(event);"
-          ondraggesture="nsDragAndDrop.startDrag(event, gDragDropObserver);"
-          ondragover="nsDragAndDrop.dragOver(event, gDragDropObserver);"
-          ondragdrop="nsDragAndDrop.drop(event, gDragDropObserver);"
-          ondrop="nsDragAndDrop.drop(event, gDragDropObserver);"
+          ondragstart="sbTradeService.onDragStart(event);"
+          ondragover="sbTradeService.onDragOver(event);"
+          ondrop="sbTradeService.onDrop(event);"
           class="plain" flex="1">
         <treecols>
             <treecol id="sbTradeTreeColTitle" label="&sb.prop.title;" sortIndex="0" flex="2" primary="true" />

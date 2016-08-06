@@ -96,25 +96,14 @@ var gMultiBookManager = {
         this.edit();
     },
 
-};
-
-
-
-var gDragDropObserver = {
-
-    onDragStart: function (aEvent, aXferData, aDragAction) {
-        if (gMultiBookTreeView.selection.count != 1)
+    handleDragStart: function(event) {
+        if (gMultiBookTreeView.selection.count != 1) {
             return;
+        }
         var sourceIndex = gMultiBookTreeView.selection.currentIndex;
-        aXferData.data = new TransferData();
-        aXferData.data.addDataForFlavour("text/unicode", sourceIndex);
-        aDragAction.action = Components.interfaces.nsIDragService.DRAGDROP_ACTION_MOVE;
-    },
-
-    onDrop: function (aEvent, aXferData, aDragSession) {},
-    onDragExit: function (aEvent, aDragSession) {},
-    onDragOver: function (aEvent, aFlavour, aDragSession) {},
-    getSupportedFlavours: function() { return null; }
+        event.dataTransfer.setData("text/x-moz-tree-index", sourceIndex);
+        event.dataTransfer.dropEffect = "move";
+    }
 
 };
 
@@ -192,9 +181,13 @@ MultiBookTreeView.prototype = {
     isContainerEmpty: function(index) { return false; },
     isSeparator: function(index) { return false; },
     isSorted: function() { return false; },
-    canDrop: function(targetIndex, orientation) {
-        if (this.selection.count != 1)
+    canDrop: function(targetIndex, orientation, dataTransfer) {
+        if (!dataTransfer.types.contains("text/x-moz-tree-index")) {
             return false;
+        }
+        if (this.selection.count != 1) {
+            return false;
+        }
         var sourceIndex = this.selection.currentIndex;
         return (
             sourceIndex != -1 &&
@@ -202,9 +195,7 @@ MultiBookTreeView.prototype = {
             sourceIndex != (targetIndex + orientation)
         );
     },
-    drop: function(targetIndex, orientation) {
-        if (this.selection.count != 1)
-            return false;
+    drop: function(targetIndex, orientation, dataTransfer) {
         var sourceIndex = this.selection.currentIndex;
         if (sourceIndex < targetIndex) {
             if (orientation == Components.interfaces.nsITreeView.DROP_BEFORE)
