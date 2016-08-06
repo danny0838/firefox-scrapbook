@@ -160,6 +160,7 @@ var sbTreeHandler = {
         var ip = this._DropGetTargets(row, orient); // insert point
         var showDetail = sbCommonUtils.getPref("showDetailOnDrop", false) || dataTransfer.dropEffect == "copy";
         // drags a tab from Firefox
+        // => if it's the current tab, capture/bookmark it
         if (dataTransfer.types.contains("application/x-moz-tabbrowser-tab")) {
             var tab = dataTransfer.mozGetDataAt("application/x-moz-tabbrowser-tab", 0);
             if (tab instanceof XULElement && tab.localName == "tab" && 
@@ -171,9 +172,11 @@ var sbTreeHandler = {
                     this._captureInternal(ip, showDetail, false);
                 }
             }
-        // drags the icon of Firefox address bar
+        // drags something containing url
         } else if (dataTransfer.types.contains("text/x-moz-url")) {
             var url = dataTransfer.getData("URL");
+            // drags a link from the web page content
+            // => capture/bookmark it, using the link text as title
             if (dataTransfer.types.contains("text/x-moz-url-desc")) {
                 if (dataTransfer.dropEffect == "link") {
                     this._bookmarkInternal(
@@ -186,18 +189,26 @@ var sbTreeHandler = {
                 } else {
                     this._captureLinkInternal(ip, showDetail, url);
                 }
+            // drags Firefox address bar icon
+            // => if it's the current tab, capture/bookmark it
             } else if (url == window.top.content.location.href) {
                 if (dataTransfer.dropEffect == "link") {
                     this._bookmarkInternal(ip);
                 } else {
                     this._captureInternal(ip, showDetail, false);
                 }
+            // drags files
+            // => capture the first file
             } else if (dataTransfer.types.contains("Files")) {
                 this._captureFileInternal(ip, showDetail, dataTransfer.getData("text/x-moz-url"));
+            // unknown behavior
+            // => show error
             } else {
                 sbCommonUtils.error(sbCommonUtils.lang("ERROR_INVALID_URL", url));
             }
-        // drags Firefox browser content???
+        // drags rich text content
+        // could be from web page content, MS Word, etc
+        // => capture the current tab
         } else if (dataTransfer.types.contains("text/html")) {
             this._captureInternal(ip, showDetail, true);
         }
