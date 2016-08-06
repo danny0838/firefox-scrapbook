@@ -357,7 +357,6 @@ var sbTreeHandler = {
     
     // orient: -1 = drop before; 0 = drop on; 1 = drop after
     _DropMove: function(row, orient) {
-        if ( row == -1 ) return;
         var curResList = this.getSelection(true, 0);
         if (orient == 1) curResList.reverse();
         var tarRes = this.TREE.builderView.getResourceAtIndex(row);
