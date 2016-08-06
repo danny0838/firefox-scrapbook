@@ -287,6 +287,28 @@ var sbTradeService = {
         }
     },
 
+    onDragStart: function(event) {
+        if (event.target.localName != "treechildren") {
+            return;
+        }
+        event.dataTransfer.setData("sb/tradeitem", this.TREE.view.selection);
+        event.dataTransfer.dropEffect = "move";
+    },
+
+    onDragOver: function(event) {
+        if (event.dataTransfer.types.contains("moz/rdfitem")) {
+            event.preventDefault();
+        }
+    },
+
+    onDrop: function(event) {
+        event.preventDefault();
+        if (sbTradeService.locked) {
+            return;
+        }
+        sbExportService.exec();
+    },
+
 };
 
 
@@ -517,30 +539,3 @@ var sbImportService = {
     },
 
 };
-
-
-
-var gDragDropObserver = {
-
-    onDragStart: function(event, transferData, action) {
-        if (event.originalTarget.localName != "treechildren")
-            return;
-        transferData.data = new TransferData();
-        transferData.data.addDataForFlavour("sb/tradeitem", sbTradeService.TREE.view.selection);
-    },
-    getSupportedFlavours: function() {
-        var flavours = new FlavourSet();
-        flavours.appendFlavour("moz/rdfitem");
-        return flavours;
-    },
-    onDragOver: function(event, flavour, session) {},
-    onDragExit: function(event, session) {},
-    onDrop: function(event, transferData, session) {
-        if (sbTradeService.locked)
-            return;
-        sbExportService.exec();
-    },
-
-};
-
-
