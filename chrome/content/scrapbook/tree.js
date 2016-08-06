@@ -196,9 +196,14 @@ var sbTreeHandler = {
                     this._captureInternal(ip, showDetail, false);
                 }
             // drags files
-            // => capture the first file
+            // => capture/bookmark the first file
             } else if (dataTransfer.types.contains("Files")) {
-                this._captureFileInternal(ip, showDetail, dataTransfer.getData("text/x-moz-url"));
+                var url = dataTransfer.getData("text/x-moz-url");
+                if (dataTransfer.dropEffect == "link") {
+                    this._bookmarkInternal(ip, { title: sbCommonUtils.getFileName(url), source: url });
+                } else {
+                    this._captureFileInternal(ip, showDetail, url);
+                }
             // unknown behavior
             // => show error
             } else {
