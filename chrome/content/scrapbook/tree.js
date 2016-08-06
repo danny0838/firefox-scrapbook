@@ -205,11 +205,15 @@ var sbTreeHandler = {
                 sbCommonUtils.error(sbCommonUtils.lang("ERROR_INVALID_URL", url));
             }
         // drags rich text from Firefox web page content
-        // => capture selection for the current tab
+        // => capture selection for the current tab or bookmark the current tab
         // @TODO: prevent drag -> switch tab -> drop?
         // => Seems Firefox forbids natively (a drag becomes undroppable if switched tab)
         } else if (dataTransfer.types.contains("text/_moz_htmlcontext")) {
-            this._captureInternal(ip, showDetail, true);
+            if (dataTransfer.dropEffect == "link") {
+                this._bookmarkInternal(ip);
+            } else {
+                this._captureInternal(ip, showDetail, true);
+            }
         }
     },
 
