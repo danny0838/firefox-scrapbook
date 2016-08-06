@@ -223,7 +223,7 @@
                 <textbox id="ScrapBookEditComment" spellcheck="true" oninput="sbPageEditor.onInputComment(this.value);" onkeypress="if (event.keyCode == 13) if (!sbPageEditor.multiline) sbPageEditor.saveResource();" flex="3" />
                 <spacer id="ScrapBookEditSpacer" flex="0" />
                 <label id="ScrapBookHighlighterPreview" value="&sb.highlighter;" />
-                <toolbarbutton id="ScrapBookHighlighter" type="menu-button" persist="color" tooltiptext="&sb.highlighterTool;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbPageEditor.highlight();" accesskey="Q">
+                <toolbarbutton id="ScrapBookHighlighter" type="menu-button" persist="color" tooltiptext="&sb.highlighterTool;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbPageEditor.highlight();">
                     <menupopup onpopupshowing="sbHighlighter.updatePopup();">
                         <menuitem id="ScrapBookHighlighterM1" type="radio" label="&sb.highlighter; 1" oncommand="sbPageEditor.highlight(1);" />
                         <menuitem id="ScrapBookHighlighterM2" type="radio" label="&sb.highlighter; 2" oncommand="sbPageEditor.highlight(2);" />
@@ -235,7 +235,7 @@
                         <menuitem id="ScrapBookHighlighterM8" type="radio" label="&sb.highlighter; 8" oncommand="sbPageEditor.highlight(8);" />
                     </menupopup>
                 </toolbarbutton>
-                <toolbarbutton id="ScrapBookEditAnnotation" type="menu-button" tooltiptext="&sb.edit.annotationTool;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbAnnotationService.createFreenote();" accesskey="A">
+                <toolbarbutton id="ScrapBookEditAnnotation" type="menu-button" tooltiptext="&sb.edit.annotationTool;" oncommand="if (event.originalTarget.localName == 'toolbarbutton') sbAnnotationService.createFreenote();">
                     <menupopup>
                         <menuitem label="&sb.edit.attach.link;..." oncommand="sbAnnotationService.attach('L');" />
                         <menuitem label="&sb.edit.attach.innerlink;..." oncommand="sbAnnotationService.attach('I');" />
