@@ -6,7 +6,7 @@
     <Description about="urn:mozilla:install-manifest">
         <em:id>scrapbookx@addons.mozilla.org</em:id>
         <em:type>2</em:type>
-        <em:version>1.13.0b10</em:version>
+        <em:version>1.13.0b11</em:version>
         <em:unpack>false</em:unpack>
         <em:bootstrap>false</em:bootstrap>
         <em:multiprocessCompatible>false</em:multiprocessCompatible>
@@ -19,7 +19,7 @@
                 <!-- Firefox -->
                 <em:id>{ec8030f7-c20a-464f-9b0e-13a3a9e97384}</em:id>
                 <em:minVersion>3.0</em:minVersion>
-                <em:maxVersion>47.*</em:maxVersion>
+                <em:maxVersion>49.*</em:maxVersion>
             </Description>
         </em:targetApplication>
 
