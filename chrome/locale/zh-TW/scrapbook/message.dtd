@@ -10,6 +10,8 @@
 <!ENTITY sb.capture.skip "略過">
 <!ENTITY sb.capture.pause "暫停">
 <!ENTITY sb.capture.finish "取消">
+<!ENTITY sb.capture.checkSelection "勾選選取項目">
+<!ENTITY sb.capture.uncheckSelection "取消勾選選取項目">
 <!ENTITY sb.capture.filter "過濾">
 <!ENTITY sb.capture.filter.column.one "顯示/隱藏">
 <!ENTITY sb.capture.filter.column.two "篩選條件（使用規則運算式）">
@@ -239,7 +241,7 @@
 <!ENTITY sb.capture.alltabs "擷取所有分頁">
 <!ENTITY sb.capture.bookmark "加入 ScrapBook 書籤">
 <!ENTITY sb.sidebar "在側邊欄顯示">
-<!ENTITY sb.menubar "選單列">
+<!ENTITY sb.menubar "選單列存取鍵">
 <!ENTITY sb.editbefore "編輯後擷取">
 
 <!-- prefs.dtd -->
@@ -277,9 +279,10 @@
 <!ENTITY sb.prefs.notifyOnComplete "顯示「擷取完畢」提醒視窗">
 <!ENTITY sb.prefs.notifyPageCaptured "瀏覽擷取過的頁面時，顯示提醒視窗">
 <!ENTITY sb.prefs.autoOutput "更動資料時，自動輸出 HTML 資料列表">
-<!ENTITY sb.prefs.export "匯出偏好設定">
-<!ENTITY sb.prefs.import "匯入偏好設定">
-<!ENTITY sb.prefs.reset "重設偏好設定">
+<!ENTITY sb.prefs.io "偏好設定">
+<!ENTITY sb.prefs.io.export "匯出偏好設定">
+<!ENTITY sb.prefs.io.import "匯入偏好設定">
+<!ENTITY sb.prefs.io.reset "重設偏好設定">
 <!ENTITY sb.button.customize "自訂">
 <!ENTITY sb.button.browse "瀏覽">
 <!ENTITY sb.button.show "顯示檔案">

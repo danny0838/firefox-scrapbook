@@ -10,6 +10,8 @@
 <!ENTITY sb.capture.skip "Kihagyás">
 <!ENTITY sb.capture.pause "Szünet">
 <!ENTITY sb.capture.finish "Mégse">
+<!ENTITY sb.capture.checkSelection "Check selected items">
+<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Szűrés">
 <!ENTITY sb.capture.filter.column.one "Megjelenítés/elrejtés">
 <!ENTITY sb.capture.filter.column.two "Szűrő (reguláris kifejezés)">
@@ -239,7 +241,7 @@
 <!ENTITY sb.capture.alltabs "Összes lap rögzítése">
 <!ENTITY sb.capture.bookmark "Könyvjelző a Dossziéba">
 <!ENTITY sb.sidebar "Megjelenítés az Oldalsávon">
-<!ENTITY sb.menubar "Menü">
+<!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Szerkesztés rögzítés előtt">
 
 <!-- prefs.dtd -->
@@ -277,9 +279,10 @@
 <!ENTITY sb.prefs.notifyOnComplete "A „Rögzítés kész” értesítés megjelenítése">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
-<!ENTITY sb.prefs.export "Export Preferences">
-<!ENTITY sb.prefs.import "Import Preferences">
-<!ENTITY sb.prefs.reset "Reset Preferences">
+<!ENTITY sb.prefs.io "Preferences">
+<!ENTITY sb.prefs.io.export "Export Preferences">
+<!ENTITY sb.prefs.io.import "Import Preferences">
+<!ENTITY sb.prefs.io.reset "Reset Preferences">
 <!ENTITY sb.button.customize "Testreszabás">
 <!ENTITY sb.button.browse "Tallózás">
 <!ENTITY sb.button.show "Fájlok megjelenítése">

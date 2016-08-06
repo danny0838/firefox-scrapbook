@@ -10,6 +10,8 @@
 <!ENTITY sb.capture.skip "Пропустить">
 <!ENTITY sb.capture.pause "Пауза">
 <!ENTITY sb.capture.finish "Отменить">
+<!ENTITY sb.capture.checkSelection "Check selected items">
+<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Фильтр">
 <!ENTITY sb.capture.filter.column.one "Показать/Скрыть">
 <!ENTITY sb.capture.filter.column.two "Фильтр (регулярные выражения)">
@@ -239,7 +241,7 @@
 <!ENTITY sb.capture.alltabs "Захватить все вкладки">
 <!ENTITY sb.capture.bookmark "Добавить в закладки ScrapBook">
 <!ENTITY sb.sidebar "Показать в боковой панели">
-<!ENTITY sb.menubar "Меню">
+<!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Редактирование перед сохранением">
 
 <!-- prefs.dtd -->
@@ -277,9 +279,10 @@
 <!ENTITY sb.prefs.notifyOnComplete "Показывать сообщение «Сохранение завершено»">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
-<!ENTITY sb.prefs.export "Export Preferences">
-<!ENTITY sb.prefs.import "Import Preferences">
-<!ENTITY sb.prefs.reset "Reset Preferences">
+<!ENTITY sb.prefs.io "Preferences">
+<!ENTITY sb.prefs.io.export "Export Preferences">
+<!ENTITY sb.prefs.io.import "Import Preferences">
+<!ENTITY sb.prefs.io.reset "Reset Preferences">
 <!ENTITY sb.button.customize "Изменить">
 <!ENTITY sb.button.browse "Обзор">
 <!ENTITY sb.button.show "Показать файлы">

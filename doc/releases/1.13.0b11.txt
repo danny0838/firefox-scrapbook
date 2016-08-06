@@ -1,0 +1,27 @@
+Scrapbook X 1.13.0b11
+=====================
+
+Changes since v1.13.0b10
+------------------------
+
+Bug fixes:
+
+ * In certain situations a normal key is misintepreted as a hotkey and triggers an unexpected behavior.
+
+User interface changes:
+
+ * Added a context menu with "check/uncheck selected items" directives to the capture dialog.
+
+ * Added "L" accesskey for the "locate" directive of the editor toolbar.
+
+ * Moved import/export/reset preferences to the dropdown list of an indivisual dialog button from the advanced option.
+
+ * Added reset and delete buttons to the textboxes for hotkey customization.
+
+ * No more clear the hotkey when only modifier keys are pressed in the textboxes for hotkey customization.
+
+ * Adjusted the tooltip for main menu button hotkey customization.
+
+ * Added internal contrast to several icons so that they are more visible on platforms with a dark background theme.
+
+Also includes some internal code optimization.

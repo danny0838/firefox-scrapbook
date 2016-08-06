@@ -28,7 +28,7 @@ div.scrapbook-sticky * {
 
 div.scrapbook-sticky .scrapbook-sticky-header {
     height: 10px;
-    background-image: url("chrome://scrapbook/skin/sticky_header.png");
+    background-image: url("sticky_header.png");
 }
 
 div.scrapbook-sticky .scrapbook-sticky-header[data-sb-active="1"] {
@@ -47,7 +47,7 @@ div.scrapbook-sticky .scrapbook-sticky-footer {
 
 div.scrapbook-sticky .scrapbook-sticky-footer[data-sb-active="1"] {
     cursor: se-resize;
-    background-image: url("chrome://scrapbook/skin/sticky_resizer.png");
+    background-image: url("sticky_resizer.png");
     background-position: right bottom;
     background-repeat: no-repeat;
 }

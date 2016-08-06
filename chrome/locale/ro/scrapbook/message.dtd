@@ -10,6 +10,8 @@
 <!ENTITY sb.capture.skip "Ignoră">
 <!ENTITY sb.capture.pause "Întrerupe">
 <!ENTITY sb.capture.finish "Renunță">
+<!ENTITY sb.capture.checkSelection "Check selected items">
+<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Filtrare">
 <!ENTITY sb.capture.filter.column.one "Afișează/ascunde">
 <!ENTITY sb.capture.filter.column.two "Filtrare (expresie regulată)">
@@ -239,7 +241,7 @@
 <!ENTITY sb.capture.alltabs "Capturează din toate filele">
 <!ENTITY sb.capture.bookmark "Pune semn de carte ScrapBook">
 <!ENTITY sb.sidebar "Afișează în panoul lateral">
-<!ENTITY sb.menubar "Meniu">
+<!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Editează înaintea capturării">
 
 <!-- prefs.dtd -->
@@ -277,9 +279,10 @@
 <!ENTITY sb.prefs.notifyOnComplete "Afișează notificarea „Capturare finalizată”">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
-<!ENTITY sb.prefs.export "Export Preferences">
-<!ENTITY sb.prefs.import "Import Preferences">
-<!ENTITY sb.prefs.reset "Reset Preferences">
+<!ENTITY sb.prefs.io "Preferences">
+<!ENTITY sb.prefs.io.export "Export Preferences">
+<!ENTITY sb.prefs.io.import "Import Preferences">
+<!ENTITY sb.prefs.io.reset "Reset Preferences">
 <!ENTITY sb.button.customize "Personalizează">
 <!ENTITY sb.button.browse "Răsfoiește">
 <!ENTITY sb.button.show "Afișează fișierele">

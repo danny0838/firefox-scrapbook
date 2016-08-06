@@ -4,6 +4,15 @@
     width: 40em; height: 600px;
 }
 
+.dialog-button[dlgtype="extra2"] {
+  list-style-image: url("expander_up.png");
+  -moz-box-direction: reverse;
+}
+
+.dialog-button[dlgtype="extra2"] .button-icon {
+  display: -moz-box; /* for Linux */
+}
+
 .notify-restart {
     margin-top: 1em;
     color: red;
@@ -14,27 +23,27 @@ prefpane .content-box {
 }
 
 radio[pane="mainPane"] {
-    list-style-image: url("chrome://scrapbook/skin/prefs_main.png");
+    list-style-image: url("prefs_main.png");
 }
 
 radio[pane="keysPane"] {
-    list-style-image: url("chrome://scrapbook/skin/prefs_keys.png");
+    list-style-image: url("prefs_keys.png");
 }
 
 radio[pane="tabsPane"] {
-    list-style-image: url("chrome://scrapbook/skin/prefs_tabs.png");
+    list-style-image: url("prefs_tabs.png");
 }
 
 radio[pane="editPane"] {
-    list-style-image: url("chrome://scrapbook/skin/prefs_edit.png");
+    list-style-image: url("prefs_edit.png");
 }
 
 radio[pane="organizePane"] {
-    list-style-image: url("chrome://scrapbook/skin/prefs_organize.png");
+    list-style-image: url("prefs_organize.png");
 }
 
 radio[pane="advancedPane"] {
-    list-style-image: url("chrome://scrapbook/skin/prefs_advanced.png");
+    list-style-image: url("prefs_advanced.png");
 }
 
 prefpane > checkbox,
@@ -45,10 +54,32 @@ prefpane > description {
 }
 
 #keysPane textbox {
-    width: 180px;
+    width: 200px;
 }
 
-#keysPane textbox[maxlength="1"] {
-    width: 2em;
-    text-align: center;
+#keysPane textbox .shortcut {
+    -moz-box-ordinal-group: 100;
+    opacity: 0.75;
+    cursor: pointer;
+    height: 16px; /* height cannot smaller than textbox, width will be adjusted proportionally */
+}
+
+#keysPane textbox:not([focused]) .shortcut {
+    visibility: collapse;
+}
+
+#keysPane textbox .shortcut:hover {
+    background-color: yellow;
+}
+
+#keysPane textbox .shortcut:active {
+    background-color: #000000;
+}
+
+#keysPane textbox .reset {
+    list-style-image: url("shortcut-reset.png");
+}
+
+#keysPane textbox .delete {
+    list-style-image: url("shortcut-delete.png");
 }

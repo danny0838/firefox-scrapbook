@@ -10,6 +10,8 @@
 <!ENTITY sb.capture.skip "Пропустити">
 <!ENTITY sb.capture.pause "Призупинити">
 <!ENTITY sb.capture.finish "Скасувати">
+<!ENTITY sb.capture.checkSelection "Check selected items">
+<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Фільтр">
 <!ENTITY sb.capture.filter.column.one "Показати/сховати">
 <!ENTITY sb.capture.filter.column.two "Фільтр (регулярний вираз)">
@@ -239,7 +241,7 @@
 <!ENTITY sb.capture.alltabs "Зберегти усі вкладки">
 <!ENTITY sb.capture.bookmark "Додати до закладок у ScrapBook">
 <!ENTITY sb.sidebar "Відобразити у бічній панелі">
-<!ENTITY sb.menubar "Меню">
+<!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Редагувати перед збереженням">
 
 <!-- prefs.dtd -->
@@ -277,9 +279,10 @@
 <!ENTITY sb.prefs.notifyOnComplete "Показувати інформацію „Збереження виконано“">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
-<!ENTITY sb.prefs.export "Export Preferences">
-<!ENTITY sb.prefs.import "Import Preferences">
-<!ENTITY sb.prefs.reset "Reset Preferences">
+<!ENTITY sb.prefs.io "Preferences">
+<!ENTITY sb.prefs.io.export "Export Preferences">
+<!ENTITY sb.prefs.io.import "Import Preferences">
+<!ENTITY sb.prefs.io.reset "Reset Preferences">
 <!ENTITY sb.button.customize "Змінити">
 <!ENTITY sb.button.browse "Вибрати">
 <!ENTITY sb.button.show "Показати файли">

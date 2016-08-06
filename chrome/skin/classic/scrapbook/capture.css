@@ -66,14 +66,14 @@ toolbarbutton dropmarker {
 treechildren::-moz-tree-checkbox {
   /* unchecked checkbox treecells. This style MUST come before treechildren::-moz-tree-checkbox(checked) otherwise it won't take effect. */
   /* list-style-image: none; */
-  list-style-image: url("chrome://scrapbook/skin/cbox-not-check.gif");
+  list-style-image: url("cbox-not-check.gif");
 }
 
 treechildren::-moz-tree-checkbox(checked) {
   /* checked checkbox treecells. cbox-check.gif isn't available in
      Firefox 1, 2, and 3 in Mac OS X so you should specify a URL to an image
      in your extension or elsewhere. */
-  list-style-image: url("chrome://scrapbook/skin/cbox-check.gif");
+  list-style-image: url("cbox-check.gif");
 }
 
 treechildren::-moz-tree-checkbox(disabled) {

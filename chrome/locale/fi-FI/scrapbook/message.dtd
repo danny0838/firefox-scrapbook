@@ -10,6 +10,8 @@
 <!ENTITY sb.capture.skip "Ohita">
 <!ENTITY sb.capture.pause "Pysäytä">
 <!ENTITY sb.capture.finish "Peruuta">
+<!ENTITY sb.capture.checkSelection "Check selected items">
+<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Suodata">
 <!ENTITY sb.capture.filter.column.one "Näytä/Piilota">
 <!ENTITY sb.capture.filter.column.two "Suodata (RegExp)">
@@ -239,7 +241,7 @@
 <!ENTITY sb.capture.alltabs "Tallenna kaikki välilehdet">
 <!ENTITY sb.capture.bookmark "Tallenna kirjanmerkki">
 <!ENTITY sb.sidebar "Näytä sivupaneelissa">
-<!ENTITY sb.menubar "Valikko">
+<!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Muokkaa ennen tallennusta">
 
 <!-- prefs.dtd -->
@@ -277,9 +279,10 @@
 <!ENTITY sb.prefs.notifyOnComplete "Näytä Tallennus valmis -huomautus">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
-<!ENTITY sb.prefs.export "Export Preferences">
-<!ENTITY sb.prefs.import "Import Preferences">
-<!ENTITY sb.prefs.reset "Reset Preferences">
+<!ENTITY sb.prefs.io "Preferences">
+<!ENTITY sb.prefs.io.export "Export Preferences">
+<!ENTITY sb.prefs.io.import "Import Preferences">
+<!ENTITY sb.prefs.io.reset "Reset Preferences">
 <!ENTITY sb.button.customize "Muokkaa">
 <!ENTITY sb.button.browse "Selaa">
 <!ENTITY sb.button.show "Näytä tiedostot">

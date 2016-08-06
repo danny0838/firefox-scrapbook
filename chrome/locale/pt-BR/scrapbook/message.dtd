@@ -10,6 +10,8 @@
 <!ENTITY sb.capture.skip "Pular">
 <!ENTITY sb.capture.pause "Pausar">
 <!ENTITY sb.capture.finish "Cancelar">
+<!ENTITY sb.capture.checkSelection "Check selected items">
+<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Filtrar">
 <!ENTITY sb.capture.filter.column.one "Mostrar/Ocultar">
 <!ENTITY sb.capture.filter.column.two "Filtro (expressão regular)">
@@ -239,7 +241,7 @@
 <!ENTITY sb.capture.alltabs "Capturar Todas as Abas">
 <!ENTITY sb.capture.bookmark "Criar Favorito no ScrapBook">
 <!ENTITY sb.sidebar "Mostrar na Barra Lateral">
-<!ENTITY sb.menubar "Menu">
+<!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Editar Antes de Capturar">
 
 <!-- prefs.dtd -->
@@ -277,9 +279,10 @@
 <!ENTITY sb.prefs.notifyOnComplete "Mostrar notificação &apos;Captura Completa&apos;">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
-<!ENTITY sb.prefs.export "Export Preferences">
-<!ENTITY sb.prefs.import "Import Preferences">
-<!ENTITY sb.prefs.reset "Reset Preferences">
+<!ENTITY sb.prefs.io "Preferences">
+<!ENTITY sb.prefs.io.export "Export Preferences">
+<!ENTITY sb.prefs.io.import "Import Preferences">
+<!ENTITY sb.prefs.io.reset "Reset Preferences">
 <!ENTITY sb.button.customize "Personalizar">
 <!ENTITY sb.button.browse "Caminho">
 <!ENTITY sb.button.show "Mostrar arquivos">

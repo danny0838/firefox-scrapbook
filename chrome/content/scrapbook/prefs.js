@@ -3,6 +3,10 @@ var sbPrefWindow = {
     changed: false,
 
     init: function() {
+        // init buttons
+        document.documentElement.getButton("extra2").setAttribute("popup", "sbPrefPopup");
+        
+        // init highlight UI
         this.hlUpdateUI();
         if (!sbMultiBookService.validateRefresh(true)) {
             var elts = document.getElementById("sbDataDefault").getElementsByTagName("*");
@@ -10,7 +14,7 @@ var sbPrefWindow = {
                 elt.disabled = true;
             });
         }
-        // init keys UI to show beautiful
+        // init keys UI and event handlers
         Array.prototype.forEach.call(document.getElementById("keysPane").getElementsByTagName("textbox"), function(elem){
             var shortcut = sbShortcut.fromString(elem.value);
             if (elem.getAttribute("preference") === "extensions.scrapbook.key.menubar") {
@@ -26,6 +30,16 @@ var sbPrefWindow = {
                     elem.value = "";
                 }
             }
+            elem.defaultValue = elem.value;
+            var imgReset = document.createElement("image");
+            imgReset.className = "shortcut reset";
+            imgReset.addEventListener("click", sbPrefWindow.resetShortcut, true);
+            elem.appendChild(imgReset);
+            var imgDelete = document.createElement("image");
+            imgDelete.addEventListener("click", sbPrefWindow.deleteShortcut, true);
+            imgDelete.className = "shortcut delete";
+            elem.appendChild(imgDelete);
+            elem.addEventListener("keydown", sbPrefWindow.setShortcut, true);
         });
         // output tree requires correct pref and datasource,
         // we have to exec it before changing them
@@ -65,32 +79,45 @@ var sbPrefWindow = {
     // for an element linked to preference
     // we need to set the preference element's value to get it stored to preference
     // modifying the element's value only changes the display effect
-    onKeyDown: function(elem, event) {
+    setShortcut: function(event) {
+        var elem = event.target;
         var shortcut = sbShortcut.fromEvent(event);
         var pref = elem.getAttribute("preference");
         var prefElem = document.getElementById(pref);
         if (pref === "extensions.scrapbook.key.menubar") {
             if (shortcut.isPrintable) {
                 prefElem.value = shortcut.keyName;
-            } else {
+            } else if (shortcut.isComplete) {
                 prefElem.value = "";
             }
         } else {
             if (shortcut.isComplete) {
                 prefElem.value = shortcut.toString();
                 elem.value = shortcut.getUIString();
-            } else {
-                prefElem.value = "";
             }
         }
         event.preventDefault();
         event.stopPropagation();
     },
 
+    resetShortcut: function(event) {
+        var elem = event.target.parentNode;
+        var pref = elem.getAttribute("preference");
+        var prefElem = document.getElementById(pref);
+        prefElem.value = elem.defaultValue;
+    },
+
+    deleteShortcut: function(event) {
+        var elem = event.target.parentNode;
+        var pref = elem.getAttribute("preference");
+        var prefElem = document.getElementById(pref);
+        prefElem.value = "";
+    },
+
     exportPrefs: function() {
         var pickedFile = sbCommonUtils.showFilePicker({
             window: window,
-            title: "Export Preferences",
+            title: document.getElementById("sbPrefPopupExport").label,
             mode: 1, // modeSave
             filename: "scrapbook.prefs." + sbCommonUtils.getTimeStamp().substring(0, 8) + ".json",
             ext: "json",
@@ -114,7 +141,7 @@ var sbPrefWindow = {
     importPrefs: function() {
         var pickedFile = sbCommonUtils.showFilePicker({
             window: window,
-            title: "Import Preferences",
+            title: document.getElementById("sbPrefPopupImport").label,
             mode: 0, // modeOpen
             ext: "json",
             filters: [

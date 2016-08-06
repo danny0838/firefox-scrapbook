@@ -10,6 +10,8 @@
 <!ENTITY sb.capture.skip "Preskočiť">
 <!ENTITY sb.capture.pause "Pauza">
 <!ENTITY sb.capture.finish "Zrušiť">
+<!ENTITY sb.capture.checkSelection "Check selected items">
+<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Filter">
 <!ENTITY sb.capture.filter.column.one "Zobraziť/Skryť">
 <!ENTITY sb.capture.filter.column.two "Filter (regulárny výraz)">
@@ -239,7 +241,7 @@
 <!ENTITY sb.capture.alltabs "Zachytiť všetky karty">
 <!ENTITY sb.capture.bookmark "Záložka ScrapBook">
 <!ENTITY sb.sidebar "Zobraziť v bočnom paneli">
-<!ENTITY sb.menubar "Ponuka">
+<!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Upraviť pred zachytením">
 
 <!-- prefs.dtd -->
@@ -277,9 +279,10 @@
 <!ENTITY sb.prefs.notifyOnComplete "Zobraziť oznámenie &apos;Zachytenie dokončené&apos;">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
-<!ENTITY sb.prefs.export "Export Preferences">
-<!ENTITY sb.prefs.import "Import Preferences">
-<!ENTITY sb.prefs.reset "Reset Preferences">
+<!ENTITY sb.prefs.io "Preferences">
+<!ENTITY sb.prefs.io.export "Export Preferences">
+<!ENTITY sb.prefs.io.import "Import Preferences">
+<!ENTITY sb.prefs.io.reset "Reset Preferences">
 <!ENTITY sb.button.customize "Prispôsobiť">
 <!ENTITY sb.button.browse "Prehľadávať">
 <!ENTITY sb.button.show "Zobraziť súbory">

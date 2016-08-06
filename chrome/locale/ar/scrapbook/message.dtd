@@ -10,6 +10,8 @@
 <!ENTITY sb.capture.skip "تجاوز">
 <!ENTITY sb.capture.pause "إيقاف مؤقت">
 <!ENTITY sb.capture.finish "ألغ">
+<!ENTITY sb.capture.checkSelection "Check selected items">
+<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "تصفية">
 <!ENTITY sb.capture.filter.column.one "أظهر/أخف">
 <!ENTITY sb.capture.filter.column.two "مرشح (تعبير نمطي)">
@@ -239,7 +241,7 @@
 <!ENTITY sb.capture.alltabs "التقاط كل الالسنة">
 <!ENTITY sb.capture.bookmark "علامة موقع بـ سكراببوك">
 <!ENTITY sb.sidebar "عرض في الشريط الجانبي">
-<!ENTITY sb.menubar "الفائمة">
+<!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "تحرير قبل الالتقاط">
 
 <!-- prefs.dtd -->
@@ -277,9 +279,10 @@
 <!ENTITY sb.prefs.notifyOnComplete "عرض تنبيه &apos;تم الإلتقاط&apos;">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
-<!ENTITY sb.prefs.export "Export Preferences">
-<!ENTITY sb.prefs.import "Import Preferences">
-<!ENTITY sb.prefs.reset "Reset Preferences">
+<!ENTITY sb.prefs.io "Preferences">
+<!ENTITY sb.prefs.io.export "Export Preferences">
+<!ENTITY sb.prefs.io.import "Import Preferences">
+<!ENTITY sb.prefs.io.reset "Reset Preferences">
 <!ENTITY sb.button.customize "تخصيص">
 <!ENTITY sb.button.browse "استعراض">
 <!ENTITY sb.button.show "عرض الملفات">
