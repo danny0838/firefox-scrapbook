@@ -6,7 +6,7 @@
     <Description about="urn:mozilla:install-manifest">
         <em:id>scrapbookx@addons.mozilla.org</em:id>
         <em:type>2</em:type>
-        <em:version>1.13.0b10</em:version>
+        <em:version>1.13.0b11</em:version>
         <em:unpack>false</em:unpack>
         <em:bootstrap>false</em:bootstrap>
         <em:multiprocessCompatible>false</em:multiprocessCompatible>
