@@ -135,7 +135,7 @@ var sbTreeHandler = {
             dataTransfer.types.contains("sb/tradeitem") || 
             dataTransfer.types.contains("application/x-moz-tabbrowser-tab") || 
             dataTransfer.types.contains("text/x-moz-url") || 
-            dataTransfer.types.contains("text/html") 
+            dataTransfer.types.contains("text/_moz_htmlcontext")
         ) {
             event.preventDefault();
             var shortcut = sbShortcut.fromEvent(event);
@@ -202,10 +202,11 @@ var sbTreeHandler = {
             } else {
                 sbCommonUtils.error(sbCommonUtils.lang("ERROR_INVALID_URL", url));
             }
-        // drags rich text content
-        // could be from web page content, MS Word, etc
-        // => capture the current tab
-        } else if (dataTransfer.types.contains("text/html")) {
+        // drags rich text from Firefox web page content
+        // => capture selection for the current tab
+        // @TODO: prevent drag -> switch tab -> drop?
+        // => Seems Firefox forbids natively (a drag becomes undroppable if switched tab)
+        } else if (dataTransfer.types.contains("text/_moz_htmlcontext")) {
             this._captureInternal(ip, showDetail, true);
         }
     },
