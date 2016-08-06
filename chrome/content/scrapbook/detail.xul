@@ -10,7 +10,7 @@
 <dialog id="sbDetailDialog"
         title="ScrapBook - &sb.detail;"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        persist="screenX screenY"
+        persist="screenX screenY width height"
         onload="sbCaptureOptions.init();"
         ondialogaccept="return sbCaptureOptions.accept();"
         ondialogcancel="sbCaptureOptions.cancel();">
