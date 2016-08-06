@@ -144,6 +144,8 @@ var sbTreeHandler = {
             } else if (shortcut.altKey) {
                 dataTransfer.dropEffect = "link";
             }
+        } else {
+            dataTransfer.dropEffect = "none";
         }
     },
 
