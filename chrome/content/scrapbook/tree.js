@@ -178,16 +178,12 @@ var sbTreeHandler = {
             // drags a link from the web page content
             // => capture/bookmark it, using the link text as title
             if (dataTransfer.types.contains("text/x-moz-url-desc")) {
+                var url = dataTransfer.getData("text/x-moz-url-data");
+                var title = dataTransfer.getData("text/x-moz-url-desc");
                 if (dataTransfer.dropEffect == "link") {
-                    this._bookmarkInternal(
-                        ip, 
-                        {
-                            title: dataTransfer.getData("text/x-moz-url-desc"),
-                            source: url
-                        }
-                    );
+                    this._bookmarkInternal(ip, { title: title, source: url });
                 } else {
-                    this._captureLinkInternal(ip, showDetail, url);
+                    this._captureLinkInternal(ip, showDetail, url, title);
                 }
             // drags Firefox address bar icon
             // => if it's the current tab, capture/bookmark it
@@ -434,7 +430,7 @@ var sbTreeHandler = {
         );
     },
 
-    _captureLinkInternal: function(ip, showDetail, url) {
+    _captureLinkInternal: function(ip, showDetail, url, title) {
         var win = sbCommonUtils.getFocusedWindow();
         var data = {
             urls: [url],
@@ -446,7 +442,7 @@ var sbTreeHandler = {
             option: null,
             file2Url: null,
             preset: null,
-            titles: null,
+            titles: [title],
             context: "link",
         };
         window.top.openDialog(
