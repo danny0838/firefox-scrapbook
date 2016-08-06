@@ -260,7 +260,7 @@
                 <toolbarbutton id="ScrapBookEditHTML" tooltiptext="&sb.edit.htmlTool;" oncommand="sbHtmlEditor.init();" />
                 <toolbarbutton id="ScrapBookEditUndo" tooltiptext="&sb.edit.undo;" oncommand="sbPageEditor.undo();" accesskey="Z" />
                 <toolbarbutton id="ScrapBookEditSave" tooltiptext="&sb.edit.save;" oncommand="sbPageEditor.saveOrCapture();" onclick="if (event.button == 1) sbPageEditor.saveOrCapture(true);" accesskey="S" />
-                <toolbarbutton id="ScrapBookEditLocate" tooltiptext="&sb.locate;" oncommand="sbBrowserOverlay.execLocate(sbBrowserOverlay.resource);" />
+                <toolbarbutton id="ScrapBookEditLocate" tooltiptext="&sb.locate;" oncommand="sbBrowserOverlay.execLocate(sbBrowserOverlay.resource);" accesskey="L" />
             </toolbar>
         </toolbox>
     </vbox>
