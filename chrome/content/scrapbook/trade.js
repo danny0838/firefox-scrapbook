@@ -27,9 +27,6 @@ var sbTradeService = {
             document.documentElement.collapsed = true;
             return;
         }
-        window.top.sbTreeDNDHandler.importData = function(aRow, aOrient) {
-            sbImportService.exec(aRow, aOrient);
-        };
         setTimeout(function(){ sbTradeService.prepareRightDir(false); }, 100);
     },
 
@@ -406,7 +403,7 @@ var sbImportService = {
         sbTradeService.prepareLeftDir();
         this._dataURI = sbDataSource.data.URI;
         this.restoring = ( aRow == -128 ) ? document.getElementById("sbTradeOptionRestore").checked : false;
-        this.tarResArray = ( aRow < 0 ) ? [window.top.sbTreeHandler.TREE.ref, 0] : window.top.sbTreeDNDHandler.getTarget(aRow, aOrient);
+        this.tarResArray = window.top.sbTreeHandler._DropGetTargets(aRow, aOrient);
         this.ascending = ( aRow < 0 ) ? true : (aOrient == 0);
         this.idxList = sbCustomTreeUtil.getSelection(sbTradeService.TREE);
         this.count = this.ascending ? -1 : this.idxList.length;

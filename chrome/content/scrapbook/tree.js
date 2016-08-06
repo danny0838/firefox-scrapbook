@@ -13,22 +13,38 @@ var sbTreeHandler = {
 
     autoCollapse: false,
 
-    init: function(isContainer) {
+    init: function(aFoldersOnly) {
         this.TREE.database.AddDataSource(sbDataSource.data);
         this.autoCollapse = sbCommonUtils.getPref("tree.autoCollapse", false);
-        if ( isContainer ) document.getElementById("sbTreeRule").setAttribute("iscontainer", true);
+        if (aFoldersOnly) {
+            document.getElementById("sbTreeRule").setAttribute("iscontainer", true);
+        }
         if (this.TREE.getAttribute("data-seltype") == "single") {
             var selType = sbCommonUtils.getPref("ui.sidebarManage", false) ? "multiple" : "single";
             this.TREE.setAttribute("seltype", selType);
         }
         this.TREE.builder.rebuild();
+        if (!aFoldersOnly) {
+            this.enableDragDrop(true);
+        }
     },
 
-    exit: function() {
+    uninit: function() {
+        this.enableDragDrop(false);
         var dsEnum = this.TREE.database.GetDataSources();
         while ( dsEnum.hasMoreElements() ) {
             var ds = dsEnum.getNext().QueryInterface(Components.interfaces.nsIRDFDataSource);
             this.TREE.database.RemoveDataSource(ds);
+        }
+    },
+
+    enableDragDrop: function(aEnable) {
+        try {
+            this.TREE.builderView.removeObserver(sbTreeDNDObserver);
+        }
+        catch(ex) {}
+        if (aEnable) {
+            this.TREE.builderView.addObserver(sbTreeDNDObserver);
         }
     },
 
@@ -96,6 +112,95 @@ var sbTreeHandler = {
         if ( this.TREE.view.isContainer(this.TREE.currentIndex) ) return;
         var shortcut = sbShortcut.fromEvent(aEvent);
         sbController.open(this.resource, shortcut.accelKey || shortcut.shiftKey);
+    },
+
+    onDragStart: function(event) {
+        if (event.originalTarget.localName != "treechildren") {
+            return;
+        }
+        var idx = this.TREE.currentIndex;
+        var res = this.TREE.builderView.getResourceAtIndex(idx);
+        var dataTransfer = event.dataTransfer;
+        dataTransfer.setData("moz/rdfitem", res.Value);
+        if (sbDataSource.getProperty(res, "type") != "separator")
+            dataTransfer.setData("text/x-moz-url", sbDataSource.getURL(res));
+        dataTransfer.effectAllowed = "copy,move,link";
+    },
+
+    onDragOver: function(event) {
+        var dataTransfer = event.dataTransfer;
+        // drags items from tree
+        if (
+            dataTransfer.types.contains("moz/rdfitem") || 
+            dataTransfer.types.contains("sb/tradeitem") || 
+            dataTransfer.types.contains("application/x-moz-tabbrowser-tab") || 
+            dataTransfer.types.contains("text/x-moz-url") || 
+            dataTransfer.types.contains("text/html") 
+        ) {
+            event.preventDefault();
+            var shortcut = sbShortcut.fromEvent(event);
+            if (shortcut.accelKey || shortcut.shiftKey) {
+                dataTransfer.dropEffect = "copy";
+            } else if (shortcut.altKey) {
+                dataTransfer.dropEffect = "link";
+            }
+        }
+    },
+
+    onDrop: function(row, orient, dataTransfer) {
+        // drags items from tree
+        if (dataTransfer.types.contains("moz/rdfitem")) {
+            this._DropMove(row, orient);
+            return;
+        // drags items from the exported item tree
+        } else if (dataTransfer.types.contains("sb/tradeitem")) {
+            this._DropImportData(row, orient);
+            return;
+        }
+        var ip = this._DropGetTargets(row, orient); // insert point
+        var showDetail = sbCommonUtils.getPref("showDetailOnDrop", false) || dataTransfer.dropEffect == "copy";
+        // drags the icon of Firefox address bar
+        if (dataTransfer.types.contains("text/x-moz-url")) {
+            var url = dataTransfer.getData("URL");
+            if (dataTransfer.types.contains("text/x-moz-url-desc")) {
+                if (dataTransfer.dropEffect == "link") {
+                    this._bookmarkInternal(
+                        ip, 
+                        {
+                            title: dataTransfer.getData("text/x-moz-url-desc"),
+                            source: url
+                        }
+                    );
+                } else {
+                    this._captureLinkInternal(ip, showDetail, url);
+                }
+            } else if (url == window.top.content.location.href) {
+                if (dataTransfer.dropEffect == "link") {
+                    this._bookmarkInternal(ip);
+                } else {
+                    this._captureInternal(ip, showDetail, false);
+                }
+            } else if (dataTransfer.types.contains("Files")) {
+                this._captureFileInternal(ip, showDetail, dataTransfer.getData("text/x-moz-url"));
+            } else {
+                sbCommonUtils.error(sbCommonUtils.lang("ERROR_INVALID_URL", url));
+            }
+        // drags Firefox browser content???
+        } else if (dataTransfer.types.contains("text/html")) {
+            this._captureInternal(ip, showDetail, true);
+        // drags a tab from Firefox
+        } else if (dataTransfer.types.contains("application/x-moz-tabbrowser-tab")) {
+            var tab = dataTransfer.mozGetDataAt("application/x-moz-tabbrowser-tab", 0);
+            if (tab instanceof XULElement && tab.localName == "tab" && 
+                tab.ownerDocument.defaultView instanceof ChromeWindow && 
+                tab == window.top.gBrowser.mCurrentTab) {
+                if (dataTransfer.dropEffect == "link") {
+                    this._bookmarkInternal(ip, { title: tab.label, source: tab.linkedBrowser.currentURI.spec });
+                } else {
+                    this._captureInternal(ip, showDetail, false);
+                }
+            }
+        }
     },
 
 
@@ -226,5 +331,138 @@ var sbTreeHandler = {
             }
         }
     },
+    
+    // orient: -1 = drop before; 0 = drop on; 1 = drop after
+    _DropMove: function(row, orient) {
+        if ( row == -1 ) return;
+        var curResList = this.getSelection(true, 0);
+        if (orient == 1) curResList.reverse();
+        var tarRes = this.TREE.builderView.getResourceAtIndex(row);
+        var tarPar = (orient == 0) ? tarRes : this.getParentResource(row);
+        if (orient == 1 &&
+            this.TREE.view.isContainer(row) &&
+            this.TREE.view.isContainerOpen(row) &&
+            this.TREE.view.isContainerEmpty(row) == false) {
+            tarPar = tarRes;
+        }
+        curResList.forEach(function(curRes){
+            var curAbsIdx = this.TREE.builderView.getIndexOfResource(curRes);
+            if (curAbsIdx == -1) {
+                // This is somehow dirty but for some reason we might be unable to get the right index
+                // rebuilding the tree solves the problem
+                // mostly happen when selecting A/B/C, A/B, A, D together and moving them to E
+                this.TREE.builder.rebuild();
+                curAbsIdx = this.TREE.builderView.getIndexOfResource(curRes);
+            }
+            var curPar = this.getParentResource(curAbsIdx);
+            var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
+            var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
+            if (curRes.Value == tarRes.Value) return;
+            if (orient == 1) {
+                (tarRelIdx == -1) ? tarRelIdx = 1 : tarRelIdx++;
+            }
+            if (orient == -1 || orient == 1) {
+                if (curPar.Value == tarPar.Value && tarRelIdx > curRelIdx)
+                    tarRelIdx--;
+                if (curPar.Value == tarPar.Value && curRelIdx == tarRelIdx)
+                    return;
+            }
+            if (this.TREE.view.isContainer(curAbsIdx)) {
+                var tmpRes = tarRes;
+                var tmpIdx = this.TREE.builderView.getIndexOfResource(tmpRes);
+                while (tmpRes.Value != this.TREE.ref && tmpIdx != -1) {
+                    tmpRes = this.getParentResource(tmpIdx);
+                    tmpIdx = this.TREE.builderView.getIndexOfResource(tmpRes);
+                    if (tmpRes.Value == curRes.Value) {
+                        return;
+                    }
+                }
+            }
+            sbDataSource.moveItem(curRes, curPar, tarPar, tarRelIdx);
+        }, this);
+        sbCommonUtils.rebuildGlobal();
+    },
 
+    _DropImportData: function(aRow, aOrient) {
+        if (!window.sbManageService) {
+            return;
+        }
+        var win = window.top.document.getElementById("sbRightPaneBrowser").contentWindow;
+        win.sbImportService.exec(aRow, aOrient);
+    },
+
+    _DropGetTargets: function(aRow, aOrient) {
+        if (aRow == -1 || aRow == -128) {
+            return [this.TREE.ref, 0];
+        }
+        var tarRes = this.TREE.builderView.getResourceAtIndex(aRow);
+        var tarPar = (aOrient == 0) ? tarRes : this.getParentResource(aRow);
+        var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
+        if (aOrient == 1)
+            tarRelIdx++;
+        if (aOrient == 1 &&
+            this.TREE.view.isContainer(aRow) &&
+            this.TREE.view.isContainerOpen(aRow) &&
+            this.TREE.view.isContainerEmpty(aRow) == false) {
+            sbMainService.trace("drop after open container");
+            tarPar = tarRes; tarRelIdx = 1;
+        }
+        return [tarPar.Value, tarRelIdx];
+    },
+
+    _captureInternal: function(ip, showDetail, partial) {
+        var targetWindow = partial ? sbCommonUtils.getFocusedWindow() : window.top.content;
+        window.top.sbContentSaver.captureWindow(
+            targetWindow, partial, showDetail, ip[0], ip[1], null
+        );
+    },
+
+    _captureFileInternal: function(ip, showDetail, url) {
+        window.top.sbContentSaver.captureFile(
+            url, "file://", "file", showDetail, ip[0], ip[1], null, "link"
+        );
+    },
+
+    _captureLinkInternal: function(ip, showDetail, url) {
+        var win = sbCommonUtils.getFocusedWindow();
+        var data = {
+            urls: [url],
+            refUrl: win.location.href,
+            showDetail: showDetail,
+            resName: ip[0],
+            resIdx: ip[1],
+            referItem: null,
+            option: null,
+            file2Url: null,
+            preset: null,
+            titles: null,
+            context: "link",
+        };
+        window.top.openDialog(
+            "chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no",
+            data
+        );
+    },
+
+    _bookmarkInternal: function(ip, preset) {
+        window.top.sbBrowserOverlay.bookmark(ip[0], ip[1], preset);
+    },
+};
+
+var sbTreeDNDObserver = {
+    canDrop: function(row, orient, dataTransfer) {
+        return true;
+    },
+
+    onDrop: function(row, orient, dataTransfer) {
+        return sbTreeHandler.onDrop(row, orient, dataTransfer);
+    },
+
+    onToggleOpenState: function(index) {},
+    onCycleHeader: function(colID, elt) {},
+    onCycleCell: function(row, colID) {},
+    onSelectionChanged: function() {},
+    onPerformAction: function(action) {},
+    onPerformActionOnRow: function(action, row) {},
+    onPerformActionOnCell: function(action, row, colID) {},
 };
