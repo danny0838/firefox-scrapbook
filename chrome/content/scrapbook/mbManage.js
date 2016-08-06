@@ -196,9 +196,6 @@ MultiBookTreeView.prototype = {
         );
     },
     drop: function(targetIndex, orientation, dataTransfer) {
-        if (!this.canDrop(targetIndex, orientation, dataTransfer)) {
-            return;
-        }
         var sourceIndex = this.selection.currentIndex;
         if (sourceIndex < targetIndex) {
             if (orientation == Components.interfaces.nsITreeView.DROP_BEFORE)
