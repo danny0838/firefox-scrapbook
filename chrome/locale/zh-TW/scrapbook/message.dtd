@@ -239,7 +239,7 @@
 <!ENTITY sb.capture.alltabs "擷取所有分頁">
 <!ENTITY sb.capture.bookmark "加入 ScrapBook 書籤">
 <!ENTITY sb.sidebar "在側邊欄顯示">
-<!ENTITY sb.menubar "選單列">
+<!ENTITY sb.menubar "選單列存取鍵">
 <!ENTITY sb.editbefore "編輯後擷取">
 
 <!-- prefs.dtd -->

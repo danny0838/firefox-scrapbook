@@ -239,7 +239,7 @@
 <!ENTITY sb.capture.alltabs "Przechwyć wszystkie karty">
 <!ENTITY sb.capture.bookmark "Dodaj do zakładek używając ScrapBooka">
 <!ENTITY sb.sidebar "Wyświetl w panelu bocznym">
-<!ENTITY sb.menubar "Menu">
+<!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Edytuj przed przechwyceniem">
 
 <!-- prefs.dtd -->

@@ -54,10 +54,32 @@ prefpane > description {
 }
 
 #keysPane textbox {
-    width: 180px;
+    width: 200px;
 }
 
-#keysPane textbox[maxlength="1"] {
-    width: 2em;
-    text-align: center;
+#keysPane textbox .shortcut {
+    -moz-box-ordinal-group: 100;
+    opacity: 0.75;
+    cursor: pointer;
+    height: 16px; /* height cannot smaller than textbox, width will be adjusted proportionally */
+}
+
+#keysPane textbox:not([focused]) .shortcut {
+    visibility: collapse;
+}
+
+#keysPane textbox .shortcut:hover {
+    background-color: yellow;
+}
+
+#keysPane textbox .shortcut:active {
+    background-color: #000000;
+}
+
+#keysPane textbox .reset {
+    list-style-image: url("shortcut-reset.png");
+}
+
+#keysPane textbox .delete {
+    list-style-image: url("shortcut-delete.png");
 }

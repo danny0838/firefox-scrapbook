@@ -232,10 +232,12 @@ sbShortcut.fromString = function (str) {
     return new sbShortcut(data);
 };
 
+// Use keydown event as possible since keypress event could be inaccurate sometimes
+// e.g. Space gets event.keyCode = 0
+// and is more likely to be overriden by other key events.
 sbShortcut.fromEvent = function (event) {
     var data = {};
-    // sometimes keyCode is 0 (e.g. Space onkeypress), and we need event.which to get it
-    data.keyCode = event.keyCode || event.which;
+    data.keyCode = event.keyCode;
 
     // if accel key is pressed, record it as "Accel" rather than usual
     var modifiers = [];

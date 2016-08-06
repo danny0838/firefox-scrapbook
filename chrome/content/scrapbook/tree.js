@@ -60,8 +60,8 @@ var sbTreeHandler = {
         }
     },
 
-    // simple Enter on container: toggle container (natively), no keypress event
-    onKeyPress: function(aEvent, aType) {
+    // simple Enter on container: toggle container (natively)
+    onKeyDown: function(aEvent, aType) {
         var shortcut = sbShortcut.fromEvent(aEvent);
         switch (shortcut.keyName) {
             case "Return":

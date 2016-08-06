@@ -239,7 +239,7 @@
 <!ENTITY sb.capture.alltabs "Capture de tous les onglets">
 <!ENTITY sb.capture.bookmark "Marquer cette page avec ScrapBook">
 <!ENTITY sb.sidebar "Afficher dans le panneau latéral">
-<!ENTITY sb.menubar "Menu">
+<!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Éditer avant la capture">
 
 <!-- prefs.dtd -->
