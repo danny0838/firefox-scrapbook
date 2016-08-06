@@ -17,6 +17,14 @@
     <script type="application/x-javascript" src="chrome://scrapbook/content/saver.js" />
     <script type="application/x-javascript" src="chrome://scrapbook/content/capture.js" />
 
+    
+    <popupset id="sbCapturePopupSet">
+        <menupopup id="sbCapturePopup">
+            <menuitem id="sbCapturePopupCheck" label="&sb.capture.checkSelection;" oncommand="sbCaptureTask.toggleSelection(true);" />
+            <menuitem id="sbCapturePopupUncheck" label="&sb.capture.uncheckSelection;" oncommand="sbCaptureTask.toggleSelection(false);" />
+        </menupopup>
+    </popupset>
+
     <hbox>
         <textbox id="sbpCaptureProgress" readonly="true" width="80"/>
         <textbox id="sbCaptureTextbox" readonly="true" flex="1"/>
@@ -25,7 +33,7 @@
     <tree
         id="sbpURLList"
         flex="1"
-        context="popup"
+        contextmenu="sbCapturePopup"
         seltype="multiple"
         enableColumnDrag="true"
         editable="true"

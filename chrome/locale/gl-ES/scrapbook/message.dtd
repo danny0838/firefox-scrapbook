@@ -10,6 +10,8 @@
 <!ENTITY sb.capture.skip "Saltar">
 <!ENTITY sb.capture.pause "Pausar">
 <!ENTITY sb.capture.finish "Cancelar">
+<!ENTITY sb.capture.checkSelection "Check selected items">
+<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Filtro">
 <!ENTITY sb.capture.filter.column.one "Amosar/Agochar">
 <!ENTITY sb.capture.filter.column.two "Filtro (expresión regular)">

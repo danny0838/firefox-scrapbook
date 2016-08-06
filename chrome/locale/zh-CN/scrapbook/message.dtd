@@ -10,6 +10,8 @@
 <!ENTITY sb.capture.skip "忽略">
 <!ENTITY sb.capture.pause "暂停">
 <!ENTITY sb.capture.finish "取消">
+<!ENTITY sb.capture.checkSelection "打勾选中项目">
+<!ENTITY sb.capture.uncheckSelection "取消打勾选中项目">
 <!ENTITY sb.capture.filter "过滤器">
 <!ENTITY sb.capture.filter.column.one "显示/隐藏">
 <!ENTITY sb.capture.filter.column.two "过滤规则（正则表达式）">

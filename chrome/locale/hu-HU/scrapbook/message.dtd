@@ -10,6 +10,8 @@
 <!ENTITY sb.capture.skip "Kihagyás">
 <!ENTITY sb.capture.pause "Szünet">
 <!ENTITY sb.capture.finish "Mégse">
+<!ENTITY sb.capture.checkSelection "Check selected items">
+<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Szűrés">
 <!ENTITY sb.capture.filter.column.one "Megjelenítés/elrejtés">
 <!ENTITY sb.capture.filter.column.two "Szűrő (reguláris kifejezés)">

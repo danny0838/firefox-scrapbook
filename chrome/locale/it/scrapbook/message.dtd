@@ -10,6 +10,8 @@
 <!ENTITY sb.capture.skip "Salta">
 <!ENTITY sb.capture.pause "Pausa">
 <!ENTITY sb.capture.finish "Annulla">
+<!ENTITY sb.capture.checkSelection "Check selected items">
+<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Filtra">
 <!ENTITY sb.capture.filter.column.one "Mostra/nascondi">
 <!ENTITY sb.capture.filter.column.two "Filtra (espressione regolare)">

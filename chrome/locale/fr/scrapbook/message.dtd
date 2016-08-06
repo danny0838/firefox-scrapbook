@@ -10,6 +10,8 @@
 <!ENTITY sb.capture.skip "Ignorer">
 <!ENTITY sb.capture.pause "Pause">
 <!ENTITY sb.capture.finish "Annuler">
+<!ENTITY sb.capture.checkSelection "Check selected items">
+<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Filtrage">
 <!ENTITY sb.capture.filter.column.one "Afficher/Masquer">
 <!ENTITY sb.capture.filter.column.two "Filtrage (expression régulière)">
