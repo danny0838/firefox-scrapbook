@@ -130,13 +130,17 @@ var sbTreeHandler = {
     onDragOver: function(event) {
         var dataTransfer = event.dataTransfer;
         // drags items from tree
-        if (
-            dataTransfer.types.contains("moz/rdfitem") || 
-            dataTransfer.types.contains("sb/tradeitem") || 
-            dataTransfer.types.contains("application/x-moz-tabbrowser-tab") || 
-            dataTransfer.types.contains("text/x-moz-url") || 
-            dataTransfer.types.contains("text/_moz_htmlcontext")
-        ) {
+        if (dataTransfer.types.contains("moz/rdfitem")) {
+            event.preventDefault();
+        } else if (dataTransfer.types.contains("sb/tradeitem")) {
+            if (window.sbManageService) {
+                event.preventDefault();
+            } else {
+                dataTransfer.dropEffect = "none";
+            }
+        } else if (dataTransfer.types.contains("application/x-moz-tabbrowser-tab") || 
+                   dataTransfer.types.contains("text/x-moz-url") || 
+                   dataTransfer.types.contains("text/_moz_htmlcontext")) {
             event.preventDefault();
             var shortcut = sbShortcut.fromEvent(event);
             if (shortcut.accelKey || shortcut.shiftKey) {
@@ -403,9 +407,6 @@ var sbTreeHandler = {
     },
 
     _DropImportData: function(aRow, aOrient) {
-        if (!window.sbManageService) {
-            return;
-        }
         var win = window.top.document.getElementById("sbRightPaneBrowser").contentWindow;
         win.sbImportService.exec(aRow, aOrient);
     },
