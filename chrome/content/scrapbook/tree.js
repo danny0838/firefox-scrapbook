@@ -159,8 +159,20 @@ var sbTreeHandler = {
         }
         var ip = this._DropGetTargets(row, orient); // insert point
         var showDetail = sbCommonUtils.getPref("showDetailOnDrop", false) || dataTransfer.dropEffect == "copy";
+        // drags a tab from Firefox
+        if (dataTransfer.types.contains("application/x-moz-tabbrowser-tab")) {
+            var tab = dataTransfer.mozGetDataAt("application/x-moz-tabbrowser-tab", 0);
+            if (tab instanceof XULElement && tab.localName == "tab" && 
+                tab.ownerDocument.defaultView instanceof ChromeWindow && 
+                tab == window.top.gBrowser.mCurrentTab) {
+                if (dataTransfer.dropEffect == "link") {
+                    this._bookmarkInternal(ip, { title: tab.label, source: tab.linkedBrowser.currentURI.spec });
+                } else {
+                    this._captureInternal(ip, showDetail, false);
+                }
+            }
         // drags the icon of Firefox address bar
-        if (dataTransfer.types.contains("text/x-moz-url")) {
+        } else if (dataTransfer.types.contains("text/x-moz-url")) {
             var url = dataTransfer.getData("URL");
             if (dataTransfer.types.contains("text/x-moz-url-desc")) {
                 if (dataTransfer.dropEffect == "link") {
@@ -188,18 +200,6 @@ var sbTreeHandler = {
         // drags Firefox browser content???
         } else if (dataTransfer.types.contains("text/html")) {
             this._captureInternal(ip, showDetail, true);
-        // drags a tab from Firefox
-        } else if (dataTransfer.types.contains("application/x-moz-tabbrowser-tab")) {
-            var tab = dataTransfer.mozGetDataAt("application/x-moz-tabbrowser-tab", 0);
-            if (tab instanceof XULElement && tab.localName == "tab" && 
-                tab.ownerDocument.defaultView instanceof ChromeWindow && 
-                tab == window.top.gBrowser.mCurrentTab) {
-                if (dataTransfer.dropEffect == "link") {
-                    this._bookmarkInternal(ip, { title: tab.label, source: tab.linkedBrowser.currentURI.spec });
-                } else {
-                    this._captureInternal(ip, showDetail, false);
-                }
-            }
         }
     },
 
