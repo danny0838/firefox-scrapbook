@@ -210,9 +210,15 @@ var sbCombineService = {
 
     onDrop: function(event) {
         event.preventDefault();
-        window.top.sbTreeHandler.getSelection(false, 2).forEach(function(idx) {
-            var res = window.top.sbTreeHandler.TREE.builderView.getResourceAtIndex(idx);
-            var parRes = window.top.sbTreeHandler.getParentResource(idx);
+        var th = window.top.sbTreeHandler;
+        th.getComplexSelection(
+            event.dataTransfer.getData("moz/rdfitem").split("\n").map(function(resValue){
+                return sbCommonUtils.RDF.GetResource(resValue);
+            }),
+            0
+        ).forEach(function(res) {
+            var resIdx = th.TREE.builderView.getIndexOfResource(res);
+            var parRes = (resIdx >= 0) ? th.getParentResource(resIdx) : sbDataSource.findParentResource(res);
             sbCombineService.add(res, parRes);
         });
     },

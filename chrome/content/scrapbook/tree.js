@@ -151,10 +151,10 @@ var sbTreeHandler = {
                    dataTransfer.types.contains("text/_moz_htmlcontext")) {
             event.preventDefault();
             var shortcut = sbShortcut.fromEvent(event);
-            if (shortcut.accelKey || shortcut.shiftKey) {
-                dataTransfer.dropEffect = "copy";
-            } else if (shortcut.altKey) {
+            if (shortcut.altKey) {
                 dataTransfer.dropEffect = "link";
+            } else if (sbCommonUtils.getPref("showDetailOnDrop", false) || shortcut.accelKey || shortcut.shiftKey) {
+                dataTransfer.dropEffect = "copy";
             }
         } else {
             dataTransfer.dropEffect = "none";
@@ -168,11 +168,11 @@ var sbTreeHandler = {
             return;
         // drags items from the exported item tree
         } else if (dataTransfer.types.contains("sb/tradeitem")) {
-            this._importDataInternal(row, orient);
+            this._importDataInternal(row, orient, dataTransfer.getData("sb/tradeitem").split("\n"));
             return;
         }
         var ip = this._getInsertionPoint(row, orient);
-        var showDetail = sbCommonUtils.getPref("showDetailOnDrop", false) || dataTransfer.dropEffect == "copy";
+        var showDetail = dataTransfer.dropEffect == "copy";
         // drags a tab from Firefox
         // => if it's the current tab, capture/bookmark it
         if (dataTransfer.types.contains("application/x-moz-tabbrowser-tab")) {
@@ -324,6 +324,28 @@ var sbTreeHandler = {
         return ret;
     },
 
+    // modify current list so that items in a selected container are all considered selected
+    getComplexSelection: function(resList, rule) {
+        var ret = [];
+        var uriHash = {};
+        resList.forEach(function(res){
+            if ( sbDataSource.isContainer(res) ) {
+                sbDataSource.flattenResources(res, rule, true).forEach(function(childRes){
+                    if (!uriHash[childRes.Value]) {
+                        ret.push(childRes);
+                        uriHash[childRes.Value] = true;
+                    }
+                });
+            } else {
+                if (!uriHash[res.Value]) {
+                    ret.push(res);
+                    uriHash[res.Value] = true;
+                }
+            }
+        });
+        return ret;
+    },
+
 
     toggleFolder: function(aIdx) {
         if ( !aIdx ) aIdx = this.TREE.currentIndex;
@@ -377,9 +399,9 @@ var sbTreeHandler = {
         resValueList.forEach(function(resValue){
             var curRes = sbCommonUtils.RDF.GetResource(resValue);
             var curAbsIdx = this.TREE.builderView.getIndexOfResource(curRes);
-            // if curRes is not visible (mostly happen when dropping to another window where the dragged item is not visible in)
+            // if curRes is not visible (dropping to another window where a dragged item is not visible in)
             // use CPU consuming sbDataSource.findParentResource to get parent
-            var curPar = (curAbsIdx == -1) ? sbDataSource.findParentResource(curRes) : this.getParentResource(curAbsIdx);
+            var curPar = (curAbsIdx >= 0) ? this.getParentResource(curAbsIdx) : sbDataSource.findParentResource(curRes);
             var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
             var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
             // if moving to self, skip
@@ -415,9 +437,9 @@ var sbTreeHandler = {
         sbCommonUtils.rebuildGlobal();
     },
 
-    _importDataInternal: function(aRow, aOrient) {
+    _importDataInternal: function(row, orient, idxList) {
         var win = window.top.document.getElementById("sbRightPaneBrowser").contentWindow;
-        win.sbImportService.exec(aRow, aOrient);
+        win.sbImportService.importFromIndexList(row, orient, idxList);
     },
 
     _captureInternal: function(ip, showDetail, partial) {

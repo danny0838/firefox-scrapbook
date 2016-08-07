@@ -101,7 +101,10 @@ var gMultiBookManager = {
             return;
         }
         var sourceIndex = gMultiBookTreeView.selection.currentIndex;
+        var name = gMultiBookTreeView._data[sourceIndex][kNameCol];
+        var path = gMultiBookTreeView._data[sourceIndex][kPathCol];
         event.dataTransfer.setData("text/x-moz-tree-index", sourceIndex);
+        event.dataTransfer.setData("text/plain", name + "\t" + path);
         event.dataTransfer.dropEffect = "move";
     }
 
@@ -185,10 +188,7 @@ MultiBookTreeView.prototype = {
         if (!dataTransfer.types.contains("text/x-moz-tree-index")) {
             return false;
         }
-        if (this.selection.count != 1) {
-            return false;
-        }
-        var sourceIndex = this.selection.currentIndex;
+        var sourceIndex = parseInt(dataTransfer.getData("text/x-moz-tree-index"), 10);
         return (
             sourceIndex != -1 &&
             sourceIndex != targetIndex &&
