@@ -377,27 +377,29 @@ var sbTreeHandler = {
         resValueList.forEach(function(resValue){
             var curRes = sbCommonUtils.RDF.GetResource(resValue);
             var curAbsIdx = this.TREE.builderView.getIndexOfResource(curRes);
-            if (curAbsIdx == -1) {
-                // This is somehow dirty but for some reason we might be unable to get the right index
-                // rebuilding the tree solves the problem
-                // mostly happen when selecting A/B/C, A/B, A, D together and moving them to E
-                this.TREE.builder.rebuild();
-                curAbsIdx = this.TREE.builderView.getIndexOfResource(curRes);
-            }
-            var curPar = this.getParentResource(curAbsIdx);
+            // if curRes is not visible (mostly happen when dropping to another window where the dragged item is not visible in)
+            // use CPU consuming sbDataSource.findParentResource to get parent
+            var curPar = (curAbsIdx == -1) ? sbDataSource.findParentResource(curRes) : this.getParentResource(curAbsIdx);
             var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
             var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
+            // if moving to self, skip
             if (curRes.Value == tarRes.Value) return;
+            // if tarRes = tarPar, insert to first
             if (orient == 1) {
                 (tarRelIdx == -1) ? tarRelIdx = 1 : tarRelIdx++;
             }
             if (orient == -1 || orient == 1) {
+                // if moving forward, subtract self (because we'll insert after remove)
                 if (curPar.Value == tarPar.Value && tarRelIdx > curRelIdx)
                     tarRelIdx--;
+                // if moving to same position, skip
                 if (curPar.Value == tarPar.Value && curRelIdx == tarRelIdx)
                     return;
             }
-            if (this.TREE.view.isContainer(curAbsIdx)) {
+            // Prevent moving curRes to its child.
+            // - if curRes is invisible, then its child must be invisible and is impossible to be the target
+            // - if curRes is not a container then it must not have a child
+            if (curAbsIdx != -1 && this.TREE.view.isContainer(curAbsIdx)) {
                 var tmpRes = tarRes;
                 var tmpIdx = this.TREE.builderView.getIndexOfResource(tmpRes);
                 while (tmpRes.Value != this.TREE.ref && tmpIdx != -1) {
