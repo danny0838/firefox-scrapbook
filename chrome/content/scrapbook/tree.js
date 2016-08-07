@@ -324,6 +324,28 @@ var sbTreeHandler = {
         return ret;
     },
 
+    // modify current list so that items in a selected container are all considered selected
+    getComplexSelection: function(resList, rule) {
+        var ret = [];
+        var uriHash = {};
+        resList.forEach(function(res){
+            if ( sbDataSource.isContainer(res) ) {
+                sbDataSource.flattenResources(res, rule, true).forEach(function(childRes){
+                    if (!uriHash[childRes.Value]) {
+                        ret.push(childRes);
+                        uriHash[childRes.Value] = true;
+                    }
+                });
+            } else {
+                if (!uriHash[res.Value]) {
+                    ret.push(res);
+                    uriHash[res.Value] = true;
+                }
+            }
+        });
+        return ret;
+    },
+
 
     toggleFolder: function(aIdx) {
         if ( !aIdx ) aIdx = this.TREE.currentIndex;

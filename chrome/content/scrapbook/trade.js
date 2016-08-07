@@ -198,24 +198,6 @@ var sbTradeService = {
         return item;
     },
 
-    getComplexTreeSelection: function() {
-        var ret = [];
-        var uriList = [];
-        var selRes = window.top.sbTreeHandler.getSelection(true, 0);
-        var filterRule = document.getElementById("sbTradeOptionExportFolder").checked ? 0 : 2;
-        for ( var i = 0; i < selRes.length; i++ ) {
-            if ( sbDataSource.isContainer(selRes[i]) ) {
-                var childRes = sbDataSource.flattenResources(selRes[i], filterRule, true);
-                for ( var j = 0; j < childRes.length; j++ ) {
-                    if ( uriList.indexOf(childRes[j].Value) < 0 ) { ret.push(childRes[j]); uriList.push(childRes[j].Value); }
-                }
-            } else {
-                if ( uriList.indexOf(selRes[i].Value) < 0 ) { ret.push(selRes[i]); uriList.push(selRes[i].Value); }
-            }
-        }
-        return ret;
-    },
-
 
     getCurrentDirName: function() {
         var curIdx = sbCustomTreeUtil.getSelection(this.TREE)[0];
@@ -333,7 +315,10 @@ var sbExportService = {
         sbTradeService.lock(2);
         sbTradeService.prepareLeftDir();
         this.count = -1;
-        this.resList = sbTradeService.getComplexTreeSelection();
+        this.resList = window.top.sbTreeHandler.getComplexSelection(
+            window.top.sbTreeHandler.getSelection(true, 0),
+            document.getElementById("sbTradeOptionExportFolder").checked ? 0 : 2
+        );
         this.next();
     },
 
