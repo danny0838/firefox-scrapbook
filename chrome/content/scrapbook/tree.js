@@ -164,14 +164,14 @@ var sbTreeHandler = {
     onDrop: function(row, orient, dataTransfer) {
         // drags items from tree
         if (dataTransfer.types.contains("moz/rdfitem")) {
-            this._DropMove(row, orient, dataTransfer.getData("moz/rdfitem").split("\n"));
+            this._moveInternal(row, orient, dataTransfer.getData("moz/rdfitem").split("\n"));
             return;
         // drags items from the exported item tree
         } else if (dataTransfer.types.contains("sb/tradeitem")) {
-            this._DropImportData(row, orient);
+            this._importDataInternal(row, orient);
             return;
         }
-        var ip = this._DropGetTargets(row, orient); // insert point
+        var ip = this._getInsertionPoint(row, orient);
         var showDetail = sbCommonUtils.getPref("showDetailOnDrop", false) || dataTransfer.dropEffect == "copy";
         // drags a tab from Firefox
         // => if it's the current tab, capture/bookmark it
@@ -364,7 +364,7 @@ var sbTreeHandler = {
     },
     
     // orient: -1 = drop before; 0 = drop on; 1 = drop after
-    _DropMove: function(row, orient, resValueList) {
+    _moveInternal: function(row, orient, resValueList) {
         if (orient == 1) resValueList.reverse();
         var tarRes = this.TREE.builderView.getResourceAtIndex(row);
         var tarPar = (orient == 0) ? tarRes : this.getParentResource(row);
@@ -415,28 +415,9 @@ var sbTreeHandler = {
         sbCommonUtils.rebuildGlobal();
     },
 
-    _DropImportData: function(aRow, aOrient) {
+    _importDataInternal: function(aRow, aOrient) {
         var win = window.top.document.getElementById("sbRightPaneBrowser").contentWindow;
         win.sbImportService.exec(aRow, aOrient);
-    },
-
-    _DropGetTargets: function(aRow, aOrient) {
-        if (aRow == -1 || aRow == -128) {
-            return [this.TREE.ref, 0];
-        }
-        var tarRes = this.TREE.builderView.getResourceAtIndex(aRow);
-        var tarPar = (aOrient == 0) ? tarRes : this.getParentResource(aRow);
-        var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
-        if (aOrient == 1)
-            tarRelIdx++;
-        if (aOrient == 1 &&
-            this.TREE.view.isContainer(aRow) &&
-            this.TREE.view.isContainerOpen(aRow) &&
-            this.TREE.view.isContainerEmpty(aRow) == false) {
-            sbMainService.trace("drop after open container");
-            tarPar = tarRes; tarRelIdx = 1;
-        }
-        return [tarPar.Value, tarRelIdx];
     },
 
     _captureInternal: function(ip, showDetail, partial) {
@@ -475,6 +456,25 @@ var sbTreeHandler = {
 
     _bookmarkInternal: function(ip, preset) {
         window.top.sbBrowserOverlay.bookmark(ip[0], ip[1], preset);
+    },
+
+    _getInsertionPoint: function(aRow, aOrient) {
+        if (aRow == -1 || aRow == -128) {
+            return [this.TREE.ref, 0];
+        }
+        var tarRes = this.TREE.builderView.getResourceAtIndex(aRow);
+        var tarPar = (aOrient == 0) ? tarRes : this.getParentResource(aRow);
+        var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
+        if (aOrient == 1)
+            tarRelIdx++;
+        if (aOrient == 1 &&
+            this.TREE.view.isContainer(aRow) &&
+            this.TREE.view.isContainerOpen(aRow) &&
+            this.TREE.view.isContainerEmpty(aRow) == false) {
+            sbMainService.trace("drop after open container");
+            tarPar = tarRes; tarRelIdx = 1;
+        }
+        return [tarPar.Value, tarRelIdx];
     },
 };
 

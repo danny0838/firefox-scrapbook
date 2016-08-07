@@ -425,7 +425,7 @@ var sbImportService = {
         sbTradeService.prepareLeftDir();
         this._dataURI = sbDataSource.data.URI;
         this.restoring = ( aRow == -128 ) ? document.getElementById("sbTradeOptionRestore").checked : false;
-        this.tarResArray = window.top.sbTreeHandler._DropGetTargets(aRow, aOrient);
+        this.tarResArray = window.top.sbTreeHandler._getInsertionPoint(aRow, aOrient);
         this.ascending = ( aRow < 0 ) ? true : (aOrient == 0);
         this.idxList = sbCustomTreeUtil.getSelection(sbTradeService.TREE);
         this.count = this.ascending ? -1 : this.idxList.length;
