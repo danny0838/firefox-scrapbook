@@ -8,12 +8,7 @@ var sbPrefWindow = {
         
         // init highlight UI
         this.hlUpdateUI();
-        if (!sbMultiBookService.validateRefresh(true)) {
-            var elts = document.getElementById("sbDataDefault").getElementsByTagName("*");
-            Array.forEach(elts, function(elt) {
-                elt.disabled = true;
-            });
-        }
+
         // init keys UI and event handlers
         Array.prototype.forEach.call(document.getElementById("keysPane").getElementsByTagName("textbox"), function(elem){
             var shortcut = sbShortcut.fromString(elem.value);
@@ -41,6 +36,7 @@ var sbPrefWindow = {
             elem.appendChild(imgDelete);
             elem.addEventListener("keydown", sbPrefWindow.setShortcut, true);
         });
+
         // output tree requires correct pref and datasource,
         // we have to exec it before changing them
         sbDataSource.outputTreeAuto();

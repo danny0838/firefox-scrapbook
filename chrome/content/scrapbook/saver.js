@@ -733,9 +733,7 @@ var sbContentSaver = {
                     // For partial capture, the captured page could be incomplete,
                     // relink to the captured page only when the target node is included in the selected fragment.
                     var hasLocalTarget = !this.selection;
-                    if ( !hasLocalTarget && aRootNode.querySelector ) {
-                        // Element.querySelector() is available only for Firefox >= 3.5
-                        // For those with no support, simply skip the relink check.
+                    if ( !hasLocalTarget ) {
                         var targetId = decodeURIComponent(urlHash.substr(1)).replace(/\W/g, '\\$&');
                         if ( aRootNode.querySelector('[id="' + targetId + '"], a[name="' + targetId + '"]') ) {
                             hasLocalTarget = true;
@@ -983,8 +981,6 @@ var sbContentSaver = {
         return content;
 
         function verifySelector(doc, selectorText) {
-            // Firefox < 3.5: older Firefox versions don't support querySelector, simply return true
-            if (!doc.querySelector) return true;
             try {
                 if (doc.querySelector(selectorText)) return true;
                 // querySelector of selectors like a:hover or so always return null
@@ -1025,11 +1021,10 @@ var sbContentSaver = {
     inspectCSSText: function(aCSSText, aRefURL, aType) {
         var that = this;
         // CSS get by .cssText is always url("something-with-\"double-quote\"-escaped")
-        // or url(something) (e.g. background-image in Firefox < 3.6)
         // and no CSS comment is in, so we can parse it safely with this RegExp.
-        var regex = / url\(\"((?:\\.|[^"])+)\"\)| url\(((?:\\.|[^)])+)\)/g;
+        var regex = / url\(\"((?:\\.|[^"])+)\"\)/g;
         aCSSText = aCSSText.replace(regex, function() {
-            var dataURL = arguments[1] || arguments[2];
+            var dataURL = arguments[1];
             if (dataURL.indexOf("data:") === 0 && !that.option["saveDataURI"]) return ' url("' + dataURL + '")';
             if ( that.option["internalize"] && that.isInternalized(dataURL) ) return ' url("' + dataURL + '")';
             dataURL = sbCommonUtils.resolveURL(aRefURL, dataURL);

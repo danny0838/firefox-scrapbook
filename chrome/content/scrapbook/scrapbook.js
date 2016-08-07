@@ -7,7 +7,6 @@ var sbMainService = {
 
     init: function() {
         sbTreeHandler.init(false);
-        sbTreeDNDHandler.init();
         this.baseURL = sbCommonUtils.getBaseHref(sbDataSource.data.URI);
         sbSearchService.init();
         setTimeout(function() { sbMainService.delayedInit(); }, 0);
@@ -27,8 +26,7 @@ var sbMainService = {
     },
 
     refresh: function() {
-        sbTreeHandler.exit();
-        sbTreeDNDHandler.quit();
+        sbTreeHandler.uninit();
         sbMultiBookService.file = null;  // force sbMultiBookService.initMenu to run initFile when called
         this.init();
     },
@@ -567,252 +565,6 @@ var sbController = {
 
 
 
-
-var sbTreeDNDHandler = {
-
-    modAlt: false,
-    modAccelShift: false,
-    currentDataTransfer: null,
-
-    dragDropObserver: {
-        onDragStart: function(event, transferData, action) {
-            if (event.originalTarget.localName != "treechildren")
-                return;
-            var idx = sbTreeHandler.TREE.currentIndex;
-            var res = sbTreeHandler.TREE.builderView.getResourceAtIndex(idx);
-            transferData.data = new TransferData();
-            transferData.data.addDataForFlavour("moz/rdfitem", res.Value);
-            if (sbDataSource.getProperty(res, "type") != "separator")
-                transferData.data.addDataForFlavour("text/x-moz-url", sbDataSource.getURL(res));
-        },
-        getSupportedFlavours: function() {
-            var flavours = new FlavourSet();
-            flavours.appendFlavour("application/x-moz-tabbrowser-tab");
-            flavours.appendFlavour("moz/rdfitem");
-            flavours.appendFlavour("text/x-moz-url");
-            flavours.appendFlavour("text/html"); // drags rich text from Firefox browser content
-            flavours.appendFlavour("sb/tradeitem");
-            return flavours;
-        },
-        onDragOver: function() {},
-        onDragExit: function() {},
-        onDrop: function() {},
-    },
-
-    builderObserver: {
-        canDrop: function(targetIndex, orientation) {
-            return true;
-        },
-        onDrop: function(row, orient) {
-            var XferData, XferType;
-            // Gecko >= 1.9.1 (Firefox >= 3.5): has sbTreeDNDHandler.currentDataTransfer
-            if (sbTreeDNDHandler.currentDataTransfer) {
-                XferType = sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(0);
-                XferData = sbTreeDNDHandler.currentDataTransfer.getData(XferType);
-                // special fixes
-                switch (XferType) {
-                    case "application/x-moz-tabbrowser-tab": // drags a tab from Firefox
-                        XferData = sbTreeDNDHandler.currentDataTransfer.getData(sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(1)) + "\n" + document.commandDispatcher.focusedWindow.document.title;
-                        break;
-                    case "application/x-moz-file": // drag from files from file browser
-                        XferData = sbTreeDNDHandler.currentDataTransfer.getData(sbTreeDNDHandler.currentDataTransfer.mozTypesAt(0).item(1));
-                        break;
-                    case "text/x-moz-url": // drags the icon of Firefox address bar
-                    // case "text/_moz_htmlcontext": // drags rich text from Firefox browser content
-                    // case "text/html": // drags rich text from any application
-                    // case "text/plain": // drags plain text from any application
-                    case "moz/rdfitem": // drags items from tree
-                    case "sb/tradeitem": // drags items from the exported items tree
-                        break;
-                    default:                    
-                        sbCommonUtils.error("Unsupported XferType: " + XferType);
-                        XferType = null;
-                        break;
-                }
-            // older Firefox versions
-            } else {
-                var XferDataSet = nsTransferable.get(
-                    sbTreeDNDHandler.dragDropObserver.getSupportedFlavours(),
-                    nsDragAndDrop.getDragData || this.getDragData,
-                    true
-                );
-                XferData = XferDataSet.first.first.data;
-                XferType = XferDataSet.first.first.flavour.contentType;
-            }
-            if (XferType == "moz/rdfitem") {
-                sbTreeDNDHandler.move(row, orient);
-            } else if (XferType == "sb/tradeitem") {
-                sbTreeDNDHandler.importData(row, orient);
-            } else {
-                sbTreeDNDHandler.capture(XferData, row, orient);
-            }
-            sbCommonUtils.rebuildGlobal();
-        },
-        onToggleOpenState: function() {},
-        onCycleHeader: function() {},
-        onSelectionChanged: function() {},
-        onCycleCell: function() {},
-        isEditable: function() {},
-        onSetCellText: function() {},
-        onPerformAction: function() {},
-        onPerformActionOnRow: function() {},
-        onPerformActionOnCell: function() {},
-        getDragData: function (aFlavourSet) {
-            var supportsArray = Components.classes["@mozilla.org/supports-array;1"].
-                                createInstance(Components.interfaces.nsISupportsArray);
-            for (var i = 0; i < nsDragAndDrop.mDragSession.numDropItems; ++i) {
-                var trans = nsTransferable.createTransferable();
-                for (var j = 0; j < aFlavourSet.flavours.length; ++j)
-                trans.addDataFlavor(aFlavourSet.flavours[j].contentType);
-                nsDragAndDrop.mDragSession.getData(trans, i);
-                supportsArray.AppendElement(trans);
-            }
-            return supportsArray;
-        },
-    },
-
-    getModifiers: function(aEvent) {
-        var shortcut = sbShortcut.fromEvent(aEvent);
-        this.modAlt = shortcut.altKey;
-        this.modAccelShift = shortcut.accelKey || shortcut.shiftKey;
-    },
-
-    init: function() {
-        sbTreeHandler.TREE.builderView.addObserver(this.builderObserver);
-    },
-
-    quit: function() {
-        try {
-            sbTreeHandler.TREE.builderView.removeObserver(this.builderObserver);
-        } catch(ex) {}
-    },
-    
-    // orient: -1 = drop before; 0 = drop on; 1 = drop after
-    move: function(row, orient) {
-        //Für Firefox 3.5 notwendig, da sonst ein Fehler ausgegeben wird
-        if ( row == -1 ) return;
-        var curResList = sbTreeHandler.getSelection(true, 0);
-        if (orient == 1) curResList.reverse();
-        var tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(row);
-        var tarPar = (orient == 0) ? tarRes : sbTreeHandler.getParentResource(row);
-        if (orient == 1 &&
-            sbTreeHandler.TREE.view.isContainer(row) &&
-            sbTreeHandler.TREE.view.isContainerOpen(row) &&
-            sbTreeHandler.TREE.view.isContainerEmpty(row) == false) {
-            tarPar = tarRes;
-        }
-        curResList.forEach(function(curRes){
-            var curAbsIdx = sbTreeHandler.TREE.builderView.getIndexOfResource(curRes);
-            if (curAbsIdx == -1) {
-                // This is somehow dirty but for some reason we might be unable to get the right index
-                // rebuilding the tree solves the problem
-                // mostly happen when selecting A/B/C, A/B, A, D together and moving them to E
-                sbTreeHandler.TREE.builder.rebuild();
-                curAbsIdx = sbTreeHandler.TREE.builderView.getIndexOfResource(curRes);
-            }
-            var curPar = sbTreeHandler.getParentResource(curAbsIdx);
-            var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
-            var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
-            if (curRes.Value == tarRes.Value) return;
-            if (orient == 1) {
-                (tarRelIdx == -1) ? tarRelIdx = 1 : tarRelIdx++;
-            }
-            if (orient == -1 || orient == 1) {
-                if (curPar.Value == tarPar.Value && tarRelIdx > curRelIdx)
-                    tarRelIdx--;
-                if (curPar.Value == tarPar.Value && curRelIdx == tarRelIdx)
-                    return;
-            }
-            if (sbTreeHandler.TREE.view.isContainer(curAbsIdx)) {
-                var tmpRes = tarRes;
-                var tmpIdx = sbTreeHandler.TREE.builderView.getIndexOfResource(tmpRes);
-                while (tmpRes.Value != sbTreeHandler.TREE.ref && tmpIdx != -1) {
-                    tmpRes = sbTreeHandler.getParentResource(tmpIdx);
-                    tmpIdx = sbTreeHandler.TREE.builderView.getIndexOfResource(tmpRes);
-                    if (tmpRes.Value == curRes.Value) {
-                        return;
-                    }
-                }
-            }
-            sbDataSource.moveItem(curRes, curPar, tarPar, tarRelIdx);
-        }, this);
-        sbCommonUtils.rebuildGlobal();
-    },
-
-    capture: function(aXferString, aRow, aOrient) {
-        var url = aXferString.split("\n")[0];
-        var win = sbCommonUtils.getFocusedWindow();
-        var sel = win.getSelection();
-        var isSelected = false;
-        try {
-            isSelected = !(sel.anchorNode == sel.focusNode && sel.anchorOffset == sel.focusOffset);
-        } catch (ex) {}
-        var isEntire = (url == top.window.content.location.href);
-        var res = (aRow == -1) ? [sbTreeHandler.TREE.ref, 0] : this.getTarget(aRow, aOrient);
-        if (this.modAlt && !isSelected) {
-            if (isEntire) {
-                top.window.sbBrowserOverlay.bookmark(res[0], res[1]);
-            } else {
-                var arg = { title: aXferString.split("\n")[1], source: url };
-                top.window.sbBrowserOverlay.bookmark(res[0], res[1], arg);
-            }
-        } else if (isSelected || isEntire) {
-            var targetWindow = isEntire ? top.window.content : win;
-            top.window.sbContentSaver.captureWindow(
-                targetWindow, !isEntire,
-                sbCommonUtils.getPref("showDetailOnDrop", false) || this.modAccelShift,
-                res[0], res[1], null
-            );
-        } else if (url.indexOf("http://") == 0 || url.indexOf("https://") == 0) {
-            var data = {
-                urls: [url],
-                refUrl: win.location.href,
-                showDetail: sbCommonUtils.getPref("showDetailOnDrop", false) || this.modAccelShift,
-                resName: res[0],
-                resIdx: res[1],
-                referItem: null,
-                option: null,
-                file2Url: null,
-                preset: null,
-                titles: null,
-                context: "link",
-            };
-            top.window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
-        } else if (url.indexOf("file://") == 0) {
-            top.window.sbContentSaver.captureFile(
-                url, "file://", "file", sbCommonUtils.getPref("showDetailOnDrop", false),
-                res[0], res[1], null, "link"
-            );
-        } else {
-            sbCommonUtils.error(sbCommonUtils.lang("ERROR_INVALID_URL", url));
-        }
-    },
-
-    importData: function(aRow, aOrient) {
-        throw Components.results.NS_ERROR_NOT_IMPLEMENTED;
-    },
-
-    getTarget: function(aRow, aOrient) {
-        var tarRes = sbTreeHandler.TREE.builderView.getResourceAtIndex(aRow);
-        var tarPar = (aOrient == 0) ? tarRes : sbTreeHandler.getParentResource(aRow);
-        var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
-        if (aOrient == 1)
-            tarRelIdx++;
-        if (aOrient == 1 &&
-            sbTreeHandler.TREE.view.isContainer(aRow) &&
-            sbTreeHandler.TREE.view.isContainerOpen(aRow) &&
-            sbTreeHandler.TREE.view.isContainerEmpty(aRow) == false) {
-            sbMainService.trace("drop after open container");
-            tarPar = tarRes; tarRelIdx = 1;
-        }
-        return [tarPar.Value, tarRelIdx];
-    },
-
-};
-
-
-
-
 var sbSearchService = {
 
     get ELEMENT() { return document.getElementById("sbSearchImage"); },
@@ -937,7 +689,7 @@ var sbSearchService = {
         }, this);
         sbTreeHandler.TREE.ref = "urn:scrapbook:search";
         sbTreeHandler.TREE.builder.rebuild();
-        sbTreeDNDHandler.quit();
+        sbTreeHandler.enableDragDrop(false);
         sbMainService.toggleHeader(
             true,
             sbCommonUtils.lang("SEARCH_RESULTS_FOUND", this.container.GetCount())
@@ -947,7 +699,7 @@ var sbSearchService = {
     showErrorMessage: function(aStr) {
         sbTreeHandler.TREE.ref = "urn:scrapbook:search";
         sbTreeHandler.TREE.builder.rebuild();
-        sbTreeDNDHandler.quit();
+        sbTreeHandler.enableDragDrop(false);
         sbMainService.toggleHeader(true, aStr);
     },
 
@@ -967,7 +719,7 @@ var sbSearchService = {
         }, this);
         sbTreeHandler.TREE.ref = "urn:scrapbook:search";
         sbTreeHandler.TREE.builder.rebuild();
-        sbTreeDNDHandler.quit();
+        sbTreeHandler.enableDragDrop(false);
         sbMainService.toggleHeader(
             true,
             sbCommonUtils.lang("SEARCH_RESULTS_FOUND", this.container.GetCount())
@@ -981,8 +733,8 @@ var sbSearchService = {
         document.getElementById("sbSearchTextbox").value = "";
         sbTreeHandler.TREE.ref = this.treeRef;
         sbTreeHandler.TREE.builder.rebuild();
-        sbTreeDNDHandler.quit();
-        sbTreeDNDHandler.init();
+        sbTreeHandler.enableDragDrop(false);
+        sbTreeHandler.enableDragDrop(true);
         sbDataSource.clearContainer("urn:scrapbook:search");
     },
 

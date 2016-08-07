@@ -1,5 +1,5 @@
-#sbDetailDialog {
-    width: 400px;
+tabpanel {
+    overflow: auto;
 }
 
 #sbDetailProperties {

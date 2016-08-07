@@ -10,7 +10,6 @@
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         onunload="sbCombineService.done();">
 
-    <script type="application/x-javascript" src="chrome://global/content/nsDragAndDrop.js" />
     <script type="application/x-javascript" src="chrome://global/content/nsTransferable.js" />
     <script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
     <script type="application/x-javascript" src="chrome://scrapbook/content/saver.js" />
@@ -36,8 +35,8 @@
             <description id="sbDesc">&sb.combine.dragdrop;</description>
             <hbox>
                 <listbox id="sbCombineListbox"
-                        ondragover="nsDragAndDrop.dragOver(event,sbCombineService.dropObserver);"
-                        ondragdrop="nsDragAndDrop.drop(event,sbCombineService.dropObserver);"
+                        ondragover="sbCombineService.onDragOver(event);"
+                        ondrop="sbCombineService.onDrop(event);"
                         onclick="sbCombineService.toggleButtons();"
                         onkeypress="sbCombineService.onKeyPress(event);"
                         flex="1" />

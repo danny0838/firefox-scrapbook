@@ -27,9 +27,6 @@ var sbTradeService = {
             document.documentElement.collapsed = true;
             return;
         }
-        window.top.sbTreeDNDHandler.importData = function(aRow, aOrient) {
-            sbImportService.exec(aRow, aOrient);
-        };
         setTimeout(function(){ sbTradeService.prepareRightDir(false); }, 100);
     },
 
@@ -201,24 +198,6 @@ var sbTradeService = {
         return item;
     },
 
-    getComplexTreeSelection: function() {
-        var ret = [];
-        var uriList = [];
-        var selRes = window.top.sbTreeHandler.getSelection(true, 0);
-        var filterRule = document.getElementById("sbTradeOptionExportFolder").checked ? 0 : 2;
-        for ( var i = 0; i < selRes.length; i++ ) {
-            if ( sbDataSource.isContainer(selRes[i]) ) {
-                var childRes = sbDataSource.flattenResources(selRes[i], filterRule, true);
-                for ( var j = 0; j < childRes.length; j++ ) {
-                    if ( uriList.indexOf(childRes[j].Value) < 0 ) { ret.push(childRes[j]); uriList.push(childRes[j].Value); }
-                }
-            } else {
-                if ( uriList.indexOf(selRes[i].Value) < 0 ) { ret.push(selRes[i]); uriList.push(selRes[i].Value); }
-            }
-        }
-        return ret;
-    },
-
 
     getCurrentDirName: function() {
         var curIdx = sbCustomTreeUtil.getSelection(this.TREE)[0];
@@ -290,6 +269,34 @@ var sbTradeService = {
         }
     },
 
+    onDragStart: function(event) {
+        if (event.target.localName != "treechildren") {
+            return;
+        }
+        var idxList = sbCustomTreeUtil.getSelection(sbTradeService.TREE);
+        event.dataTransfer.setData("sb/tradeitem", idxList.join("\n"));
+        event.dataTransfer.setData("text/plain", idxList.map(function(idx){
+            var srcDir = sbTradeService.rightDir.clone();
+            srcDir.append(sbTradeService.treeItems[idx][6]);
+            return sbCommonUtils.convertFileToURL(srcDir);
+        }).join("\n"));
+        event.dataTransfer.dropEffect = "move";
+    },
+
+    onDragOver: function(event) {
+        if (event.dataTransfer.types.contains("moz/rdfitem")) {
+            event.preventDefault();
+        }
+    },
+
+    onDrop: function(event) {
+        event.preventDefault();
+        if (sbTradeService.locked) {
+            return;
+        }
+        sbExportService.exportFromResValueList(event.dataTransfer.getData("moz/rdfitem").split("\n"));
+    },
+
 };
 
 
@@ -302,13 +309,29 @@ var sbExportService = {
     count: -1,
     resList: [],
 
-    exec: function() {
+    exportFromSelection: function() {
+        var resList = window.top.sbTreeHandler.getComplexSelection(
+            window.top.sbTreeHandler.getSelection(true, 0),
+            document.getElementById("sbTradeOptionExportFolder").checked ? 0 : 2
+        );
+        this.exec(resList);
+    },
+
+    exportFromResValueList: function(resValueList) {
+        var resList = window.top.sbTreeHandler.getComplexSelection(
+            resValueList.map(function(resValue){return sbCommonUtils.RDF.GetResource(resValue);}),
+            document.getElementById("sbTradeOptionExportFolder").checked ? 0 : 2
+        );
+        this.exec(resList);
+    },
+
+    exec: function(resList) {
         if ( sbTradeService.locked ) return;
         if ( window.top.sbTreeHandler.TREE.view.selection.count == 0 ) return;
         sbTradeService.lock(2);
         sbTradeService.prepareLeftDir();
         this.count = -1;
-        this.resList = sbTradeService.getComplexTreeSelection();
+        this.resList = resList;
         this.next();
     },
 
@@ -399,16 +422,24 @@ var sbImportService = {
     folderTable: {},
     _dataURI: "",
 
-    exec: function(aRow, aOrient) {
+    importFromSelection: function() {
+        this.exec(-128, -1, sbCustomTreeUtil.getSelection(sbTradeService.TREE));
+    },
+
+    importFromIndexList: function(row, orient, idxList) {
+        this.exec(row, orient, idxList);
+    },
+
+    exec: function(aRow, aOrient, aIdxList) {
         if ( sbTradeService.locked ) return;
         if ( sbTradeService.TREE.view.selection.count == 0 ) return;
         sbTradeService.lock(2);
         sbTradeService.prepareLeftDir();
         this._dataURI = sbDataSource.data.URI;
         this.restoring = ( aRow == -128 ) ? document.getElementById("sbTradeOptionRestore").checked : false;
-        this.tarResArray = ( aRow < 0 ) ? [window.top.sbTreeHandler.TREE.ref, 0] : window.top.sbTreeDNDHandler.getTarget(aRow, aOrient);
+        this.tarResArray = window.top.sbTreeHandler._getInsertionPoint(aRow, aOrient);
         this.ascending = ( aRow < 0 ) ? true : (aOrient == 0);
-        this.idxList = sbCustomTreeUtil.getSelection(sbTradeService.TREE);
+        this.idxList = aIdxList;
         this.count = this.ascending ? -1 : this.idxList.length;
         this.folderTable = {};
         if ( this.restoring ) {
@@ -520,30 +551,3 @@ var sbImportService = {
     },
 
 };
-
-
-
-var gDragDropObserver = {
-
-    onDragStart: function(event, transferData, action) {
-        if (event.originalTarget.localName != "treechildren")
-            return;
-        transferData.data = new TransferData();
-        transferData.data.addDataForFlavour("sb/tradeitem", sbTradeService.TREE.view.selection);
-    },
-    getSupportedFlavours: function() {
-        var flavours = new FlavourSet();
-        flavours.appendFlavour("moz/rdfitem");
-        return flavours;
-    },
-    onDragOver: function(event, flavour, session) {},
-    onDragExit: function(event, session) {},
-    onDrop: function(event, transferData, session) {
-        if (sbTradeService.locked)
-            return;
-        sbExportService.exec();
-    },
-
-};
-
-

@@ -16,25 +16,6 @@ var sbCombineService = {
     prefix: "",
     postfix: "",
 
-    dropObserver: {
-        getSupportedFlavours: function() {
-            var flavours = new FlavourSet();
-            flavours.appendFlavour("moz/rdfitem");
-            return flavours;
-        },
-        onDragOver: function(event, flavour, session) {},
-        onDragExit: function(event, session) {},
-        onDrop: function(event, transferData, session) {
-            var idxList = window.top.sbTreeHandler.getSelection(false, 0);
-            idxList.forEach(function(aIdx) {
-                var res = window.top.sbTreeHandler.TREE.builderView.getResourceAtIndex(aIdx);
-                var parRes = window.top.sbTreeHandler.getParentResource(aIdx);
-                sbCombineService.add(res, parRes);
-            });
-        },
-    },
-
-
     init: function() {
         //Block wird benötigt, um Korrekturen bei fehlerhafter Zusammenstellung zu erlauben
         this.toggleElements(true);
@@ -219,6 +200,27 @@ var sbCombineService = {
         } else if (shortcut.toString() == "Alt+Down") {
             this.moveDown();
         }
+    },
+
+    onDragOver: function(event) {
+        if (event.dataTransfer.types.contains("moz/rdfitem")) {
+            event.preventDefault();
+        }
+    },
+
+    onDrop: function(event) {
+        event.preventDefault();
+        var th = window.top.sbTreeHandler;
+        th.getComplexSelection(
+            event.dataTransfer.getData("moz/rdfitem").split("\n").map(function(resValue){
+                return sbCommonUtils.RDF.GetResource(resValue);
+            }),
+            0
+        ).forEach(function(res) {
+            var resIdx = th.TREE.builderView.getIndexOfResource(res);
+            var parRes = (resIdx >= 0) ? th.getParentResource(resIdx) : sbDataSource.findParentResource(res);
+            sbCombineService.add(res, parRes);
+        });
     },
 
     deleteItem: function() {
@@ -554,10 +556,9 @@ var sbPageCombiner = {
 
     inspectCSSText: function(aCSSText, aRefURL) {
         // CSS get by cssText is always url("double-quoted-with-\"quote\"-escaped")
-        // or url(something) (e.g. background-image in Firefox < 3.6)
-        var regex = / url\(\"((?:\\.|[^"])+)\"\)| url\(((?:\\.|[^)])+)\)/g;
+        var regex = / url\(\"((?:\\.|[^"])+)\"\)/g;
         aCSSText = aCSSText.replace(regex, function() {
-            var dataURL = arguments[1] || arguments[2];
+            var dataURL = arguments[1];
             if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
             dataURL = sbCommonUtils.resolveURL(aRefURL, dataURL);
             // redirect the files to the original folder so we can capture them later on (and will rewrite the CSS)
