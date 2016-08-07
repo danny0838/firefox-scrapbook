@@ -377,9 +377,9 @@ var sbTreeHandler = {
         resValueList.forEach(function(resValue){
             var curRes = sbCommonUtils.RDF.GetResource(resValue);
             var curAbsIdx = this.TREE.builderView.getIndexOfResource(curRes);
-            // if curRes is not visible (mostly happen when dropping to another window where the dragged item is not visible in)
+            // if curRes is not visible (dropping to another window where a dragged item is not visible in)
             // use CPU consuming sbDataSource.findParentResource to get parent
-            var curPar = (curAbsIdx == -1) ? sbDataSource.findParentResource(curRes) : this.getParentResource(curAbsIdx);
+            var curPar = (curAbsIdx >= 0) ? this.getParentResource(curAbsIdx) : sbDataSource.findParentResource(curRes);
             var curRelIdx = sbDataSource.getRelativeIndex(curPar, curRes);
             var tarRelIdx = sbDataSource.getRelativeIndex(tarPar, tarRes);
             // if moving to self, skip
