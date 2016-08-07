@@ -61,7 +61,7 @@
 
     <toolbar id="sbTradeToolbar" class="plain">
         <hbox align="center">
-            <button id="sbTradeExportButton" label="&sb.trade.export;" group="lockTarget" oncommand="sbExportService.exec();" />
+            <button id="sbTradeExportButton" label="&sb.trade.export;" group="lockTarget" oncommand="sbExportService.exportFromSelection();" />
             <button id="sbTradeImportButton" label="&sb.trade.import;" group="lockTarget" oncommand="sbImportService.importFromSelection();" />
         </hbox>
         <vbox>

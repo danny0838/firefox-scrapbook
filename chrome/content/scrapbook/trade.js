@@ -294,7 +294,7 @@ var sbTradeService = {
         if (sbTradeService.locked) {
             return;
         }
-        sbExportService.exec();
+        sbExportService.exportFromResValueList(event.dataTransfer.getData("moz/rdfitem").split("\n"));
     },
 
 };
@@ -309,16 +309,29 @@ var sbExportService = {
     count: -1,
     resList: [],
 
-    exec: function() {
+    exportFromSelection: function() {
+        var resList = window.top.sbTreeHandler.getComplexSelection(
+            window.top.sbTreeHandler.getSelection(true, 0),
+            document.getElementById("sbTradeOptionExportFolder").checked ? 0 : 2
+        );
+        this.exec(resList);
+    },
+
+    exportFromResValueList: function(resValueList) {
+        var resList = window.top.sbTreeHandler.getComplexSelection(
+            resValueList.map(function(resValue){return sbCommonUtils.RDF.GetResource(resValue);}),
+            document.getElementById("sbTradeOptionExportFolder").checked ? 0 : 2
+        );
+        this.exec(resList);
+    },
+
+    exec: function(resList) {
         if ( sbTradeService.locked ) return;
         if ( window.top.sbTreeHandler.TREE.view.selection.count == 0 ) return;
         sbTradeService.lock(2);
         sbTradeService.prepareLeftDir();
         this.count = -1;
-        this.resList = window.top.sbTreeHandler.getComplexSelection(
-            window.top.sbTreeHandler.getSelection(true, 0),
-            document.getElementById("sbTradeOptionExportFolder").checked ? 0 : 2
-        );
+        this.resList = resList;
         this.next();
     },
 
