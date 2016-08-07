@@ -291,7 +291,13 @@ var sbTradeService = {
         if (event.target.localName != "treechildren") {
             return;
         }
-        event.dataTransfer.setData("sb/tradeitem", this.TREE.view.selection);
+        var idxList = sbCustomTreeUtil.getSelection(sbTradeService.TREE);
+        event.dataTransfer.setData("sb/tradeitem", idxList.join("\n"));
+        event.dataTransfer.setData("text/plain", idxList.map(function(idx){
+            var srcDir = sbTradeService.rightDir.clone();
+            srcDir.append(sbTradeService.treeItems[idx][6]);
+            return sbCommonUtils.convertFileToURL(srcDir);
+        }).join("\n"));
         event.dataTransfer.dropEffect = "move";
     },
 
