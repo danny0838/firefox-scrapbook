@@ -168,7 +168,7 @@ var sbTreeHandler = {
             return;
         // drags items from the exported item tree
         } else if (dataTransfer.types.contains("sb/tradeitem")) {
-            this._importDataInternal(row, orient);
+            this._importDataInternal(row, orient, dataTransfer.getData("sb/tradeitem").split("\n"));
             return;
         }
         var ip = this._getInsertionPoint(row, orient);
@@ -415,9 +415,9 @@ var sbTreeHandler = {
         sbCommonUtils.rebuildGlobal();
     },
 
-    _importDataInternal: function(aRow, aOrient) {
+    _importDataInternal: function(row, orient, idxList) {
         var win = window.top.document.getElementById("sbRightPaneBrowser").contentWindow;
-        win.sbImportService.exec(aRow, aOrient);
+        win.sbImportService.importFromIndexList(row, orient, idxList);
     },
 
     _captureInternal: function(ip, showDetail, partial) {

@@ -424,7 +424,15 @@ var sbImportService = {
     folderTable: {},
     _dataURI: "",
 
-    exec: function(aRow, aOrient) {
+    importFromSelection: function() {
+        this.exec(-128, -1, sbCustomTreeUtil.getSelection(sbTradeService.TREE));
+    },
+
+    importFromIndexList: function(row, orient, idxList) {
+        this.exec(row, orient, idxList);
+    },
+
+    exec: function(aRow, aOrient, aIdxList) {
         if ( sbTradeService.locked ) return;
         if ( sbTradeService.TREE.view.selection.count == 0 ) return;
         sbTradeService.lock(2);
@@ -433,7 +441,7 @@ var sbImportService = {
         this.restoring = ( aRow == -128 ) ? document.getElementById("sbTradeOptionRestore").checked : false;
         this.tarResArray = window.top.sbTreeHandler._getInsertionPoint(aRow, aOrient);
         this.ascending = ( aRow < 0 ) ? true : (aOrient == 0);
-        this.idxList = sbCustomTreeUtil.getSelection(sbTradeService.TREE);
+        this.idxList = aIdxList;
         this.count = this.ascending ? -1 : this.idxList.length;
         this.folderTable = {};
         if ( this.restoring ) {
