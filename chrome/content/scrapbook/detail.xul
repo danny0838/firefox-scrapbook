@@ -10,7 +10,7 @@
 <dialog id="sbDetailDialog"
         title="ScrapBook - &sb.detail;"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
-        persist="screenX screenY"
+        persist="screenX screenY width height"
         onload="sbCaptureOptions.init();"
         ondialogaccept="return sbCaptureOptions.accept();"
         ondialogcancel="sbCaptureOptions.cancel();">
@@ -24,7 +24,7 @@
             <tab label="&sb.prop.comment;" id="sbDetailTabComment" />
         </tabs>
         <tabpanels flex="1">
-            <tabpanel orient="vertical">
+            <tabpanel orient="vertical" flex="1">
                 <grid id="sbDetailProperties">
                     <columns>
                         <column />
@@ -118,7 +118,7 @@
                 <description id="sbDetailWarnAboutRenew" flex="1" hidden="true">&sb.detail.warnAboutRenew;</description>
                 <description id="sbDetailWarnAboutScript" flex="1" hidden="true">&sb.detail.warnAboutScript;</description>
             </tabpanel>
-            <tabpanel>
+            <tabpanel flex="1">
                 <textbox id="sbDetailComment" multiline="true" spellcheck="true" flex="1" />
             </tabpanel>
         </tabpanels>
