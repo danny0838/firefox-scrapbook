@@ -185,10 +185,7 @@ MultiBookTreeView.prototype = {
         if (!dataTransfer.types.contains("text/x-moz-tree-index")) {
             return false;
         }
-        if (this.selection.count != 1) {
-            return false;
-        }
-        var sourceIndex = this.selection.currentIndex;
+        var sourceIndex = parseInt(dataTransfer.getData("text/x-moz-tree-index"), 10);
         return (
             sourceIndex != -1 &&
             sourceIndex != targetIndex &&
