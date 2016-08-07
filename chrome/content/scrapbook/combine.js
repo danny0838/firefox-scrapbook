@@ -211,8 +211,12 @@ var sbCombineService = {
     onDrop: function(event) {
         event.preventDefault();
         var th = window.top.sbTreeHandler;
-        event.dataTransfer.getData("moz/rdfitem").split("\n").forEach(function(resValue) {
-            var res = sbCommonUtils.RDF.GetResource(resValue);
+        th.getComplexSelection(
+            event.dataTransfer.getData("moz/rdfitem").split("\n").map(function(resValue){
+                return sbCommonUtils.RDF.GetResource(resValue);
+            }),
+            0
+        ).forEach(function(res) {
             var resIdx = th.TREE.builderView.getIndexOfResource(res);
             var parRes = (resIdx >= 0) ? th.getParentResource(resIdx) : sbDataSource.findParentResource(res);
             sbCombineService.add(res, parRes);
