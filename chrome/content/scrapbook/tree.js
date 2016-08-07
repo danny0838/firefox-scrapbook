@@ -151,10 +151,10 @@ var sbTreeHandler = {
                    dataTransfer.types.contains("text/_moz_htmlcontext")) {
             event.preventDefault();
             var shortcut = sbShortcut.fromEvent(event);
-            if (shortcut.accelKey || shortcut.shiftKey) {
-                dataTransfer.dropEffect = "copy";
-            } else if (shortcut.altKey) {
+            if (shortcut.altKey) {
                 dataTransfer.dropEffect = "link";
+            } else if (sbCommonUtils.getPref("showDetailOnDrop", false) || shortcut.accelKey || shortcut.shiftKey) {
+                dataTransfer.dropEffect = "copy";
             }
         } else {
             dataTransfer.dropEffect = "none";
@@ -172,7 +172,7 @@ var sbTreeHandler = {
             return;
         }
         var ip = this._getInsertionPoint(row, orient);
-        var showDetail = sbCommonUtils.getPref("showDetailOnDrop", false) || dataTransfer.dropEffect == "copy";
+        var showDetail = dataTransfer.dropEffect == "copy";
         // drags a tab from Firefox
         // => if it's the current tab, capture/bookmark it
         if (dataTransfer.types.contains("application/x-moz-tabbrowser-tab")) {
