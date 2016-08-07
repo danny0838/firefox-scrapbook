@@ -101,7 +101,10 @@ var gMultiBookManager = {
             return;
         }
         var sourceIndex = gMultiBookTreeView.selection.currentIndex;
+        var name = gMultiBookTreeView._data[sourceIndex][kNameCol];
+        var path = gMultiBookTreeView._data[sourceIndex][kPathCol];
         event.dataTransfer.setData("text/x-moz-tree-index", sourceIndex);
+        event.dataTransfer.setData("text/plain", name + "\t" + path);
         event.dataTransfer.dropEffect = "move";
     }
 
