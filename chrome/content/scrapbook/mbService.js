@@ -94,7 +94,7 @@ var sbMultiBookService = {
 
     config: function() {
         window.openDialog(
-            "chrome://scrapbook/content/mbManage.xul", "",
+            "chrome://scrapbook/content/mbManage.xul", "ScrapBook:mbManage",
             "chrome,centerscreen,modal,resizable"
         );
     },
