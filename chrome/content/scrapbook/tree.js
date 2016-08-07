@@ -118,12 +118,20 @@ var sbTreeHandler = {
         if (event.originalTarget.localName != "treechildren") {
             return;
         }
-        var idx = this.TREE.currentIndex;
-        var res = this.TREE.builderView.getResourceAtIndex(idx);
+        var resList = this.getSelection(true, 0);
+        if (!resList.length) {
+            return;
+        }
         var dataTransfer = event.dataTransfer;
-        dataTransfer.setData("moz/rdfitem", res.Value);
-        if (sbDataSource.getProperty(res, "type") != "separator")
-            dataTransfer.setData("text/x-moz-url", sbDataSource.getURL(res));
+        dataTransfer.setData("moz/rdfitem", resList.map(function(res){
+            return res.Value;
+        }).join("\n"));
+        dataTransfer.setData("text/x-moz-url", resList.map(function(res){
+            return (sbDataSource.getURL(res) || "") + "\n" + sbDataSource.getProperty(res, "title");
+        }).join("\n"));
+        dataTransfer.setData("text/plain", resList.map(function(res){
+            return (sbDataSource.getURL(res) || "");
+        }).join("\n"));
         dataTransfer.effectAllowed = "copy,move,link";
     },
 
