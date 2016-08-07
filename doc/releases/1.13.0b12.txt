@@ -1,0 +1,47 @@
+Scrapbook X 1.13.0b12
+=====================
+
+Changes since v1.13.0b11
+------------------------
+
+Bug fixes:
+
+ * Fixed several unexpected behaviors for drag and drop, such as:
+
+   * Drop with Alt hold does not create a bookmark as expected in certain cases.
+
+   * A capture via dropping into the sidebar gets only the selected content of the currrent tab captured in certain cases.
+
+   * Dropping items into a different window causes wrong manipulation.
+
+   * Modifier keys for drag and drop don't work on several Linux platforms.
+
+ * Opening the options dialog gets incomplete initialization if Manage window is open.
+
+User interface changes:
+
+ * Improved drag and drop related user interface, such as:
+
+   * Better presentation of the current drag status, for example, whether it will pop a detail dialog, will creates a link, or will be forbidden.
+
+   * A drag now holds more basic data so that it can be dropped onto the tab list, the browser window, or a plain text editor and triggers a desirable behavior.
+
+ * Capture detail window now shows a scrollbar when the content overflows. 
+
+ * Capture detail window now has width and height persisted.
+
+ * Forbids opening multiple instances of Multi-ScrapBook manager dialog.
+
+ * Dropping folders into the combine wizard now adds all its child items.
+
+Core changes:
+
+ * Dropped support for Firefox 3.*.
+
+   Although we used to announce that Firefox 3.* is supported, the support is as minimal as keeping merely the basic functionality. Several advanced features are not available and there are persistently many unresolvable issues for them.
+
+   For instance, they generate problematic CSS, they don't support querySelector and cannot tidy captured CSS or resolve internal hash links, they cannot modify getters for prototypes and cannot work with our cross platform keyboard shortcut framework, they support HTML5 poorly and must use the ancient nsDragAndDrop API to support drag and drop, which is buggy in many cases.
+
+   Firefox 50 totally removed the support of nsDragAndDrop API. Even if we continue to support Firefox 3.*, all drag and drop function will die, which is probably unacceptable for most users. For the above reasons we decided to drop support for Firefox 3.* totally and upgrade the API for drag and drop accordingly.
+
+Also includes many internal code optimization and several documentation improvements.
