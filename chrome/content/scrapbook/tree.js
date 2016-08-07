@@ -164,7 +164,7 @@ var sbTreeHandler = {
     onDrop: function(row, orient, dataTransfer) {
         // drags items from tree
         if (dataTransfer.types.contains("moz/rdfitem")) {
-            this._DropMove(row, orient);
+            this._DropMove(row, orient, dataTransfer.getData("moz/rdfitem").split("\n"));
             return;
         // drags items from the exported item tree
         } else if (dataTransfer.types.contains("sb/tradeitem")) {
@@ -364,9 +364,8 @@ var sbTreeHandler = {
     },
     
     // orient: -1 = drop before; 0 = drop on; 1 = drop after
-    _DropMove: function(row, orient) {
-        var curResList = this.getSelection(true, 0);
-        if (orient == 1) curResList.reverse();
+    _DropMove: function(row, orient, resValueList) {
+        if (orient == 1) resValueList.reverse();
         var tarRes = this.TREE.builderView.getResourceAtIndex(row);
         var tarPar = (orient == 0) ? tarRes : this.getParentResource(row);
         if (orient == 1 &&
@@ -375,7 +374,8 @@ var sbTreeHandler = {
             this.TREE.view.isContainerEmpty(row) == false) {
             tarPar = tarRes;
         }
-        curResList.forEach(function(curRes){
+        resValueList.forEach(function(resValue){
+            var curRes = sbCommonUtils.RDF.GetResource(resValue);
             var curAbsIdx = this.TREE.builderView.getIndexOfResource(curRes);
             if (curAbsIdx == -1) {
                 // This is somehow dirty but for some reason we might be unable to get the right index
