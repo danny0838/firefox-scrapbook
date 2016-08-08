@@ -6,19 +6,19 @@ Changes since v1.13.0b9
 
 Bug fixes:
 
- * Background images declared inside a media rule of an external CSS are not correctly captured.
+ * A background image declared inside a media rule of an external CSS is not correctly captured.
 
- * The @import CSS rules and the media attribute of CSS link elements are not correctly handled by the combine wizard.
+ * A @import CSS rules or a media attribute of a CSS link element is not correctly handled by the combine wizard.
 
- * Several hotkeys for HTML editor and DOM erasor are overwritten by native Firefox hotkey and failed to work.
+ * Several hotkeys for HTML editor and DOM erasor are overwritten by native Firefox hotkey and fail to work.
 
  * The "-" hotkey for DOM erasor fails to work.
 
- * Hotkey text are not shown in Mac style on Macs.
+ * The hotkey text is not shown in Mac style on Macs.
 
- * Added the missing "Manage Folder" icon to the context menu of a folder item.
+ * Added the missing "Manage Folder" icon to the context menu of folder items.
 
- * Folders cannot be toggled in the HTML output page with frame in some browsers.
+ * A folder cannot be toggled in the HTML output page with a frame in some browsers.
 
 Functionality changes:
 
@@ -26,7 +26,7 @@ Functionality changes:
 
    Hotkeys for HTML editor is available in the options dialog and user preference. Hotkeys for DOM erasor is only available in the user preference.
 
- * Move restart notify for hotkey customization to the top of the keys option panel.
+ * Moved the restart notify for hotkey customization to the top of the keys option panel.
 
  * Removed the "manage" button from the main sidebar.
 
