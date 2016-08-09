@@ -35,11 +35,11 @@
             <description id="sbDesc">&sb.combine.dragdrop;</description>
             <hbox>
                 <listbox id="sbCombineListbox"
-                        ondragover="sbCombineService.onDragOver(event);"
-                        ondrop="sbCombineService.onDrop(event);"
-                        onclick="sbCombineService.toggleButtons();"
-                        onkeypress="sbCombineService.onKeyPress(event);"
-                        flex="1" />
+                         ondragover="sbCombineService.onDragOver(event);"
+                         ondrop="sbCombineService.onDrop(event);"
+                         onclick="sbCombineService.toggleButtons();"
+                         onkeypress="sbCombineService.onKeyPress(event);"
+                         flex="1" />
                 <vbox flex="1">
                     <button id="sbpUp" disabled="true" tooltiptext="&sbp.combine.up; (Alt+Up)" oncommand="sbCombineService.moveUp();" />
                     <button id="sbpDown" disabled="true" tooltiptext="&sbp.combine.down; (Alt+Down)" oncommand="sbCombineService.moveDown();" />
