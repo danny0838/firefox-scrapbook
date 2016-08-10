@@ -320,7 +320,9 @@ var sbContentSaver = {
             }
         }
         // process HTML DOM
-        this.processDOMRecursively(rootNode, rootNode);
+        Array.prototype.forEach.call(rootNode.querySelectorAll("*"), function(curNode){
+            this.inspectNode(curNode, rootNode);
+        }, this);
 
         // process all inline and link CSS, will merge them into index.css later
         var myCSS = "";
@@ -443,15 +445,6 @@ var sbContentSaver = {
             }
         }
         return headNode;
-    },
-
-
-    processDOMRecursively: function(startNode, rootNode) {
-        for ( var curNode = startNode.firstChild; curNode != null; curNode = curNode.nextSibling ) {
-            if ( curNode.nodeName == "#text" || curNode.nodeName == "#comment" ) continue;
-            curNode = this.inspectNode(curNode, rootNode);
-            this.processDOMRecursively(curNode, rootNode);
-        }
     },
 
     inspectNode: function(aNode, aRootNode) {
@@ -854,10 +847,6 @@ var sbContentSaver = {
             }
             // other specific
             aNode.removeAttribute("contextmenu");
-        }
-        if (canvasScript) {
-            // special handle: shift to the script node so that it won't get removed on next process
-            return canvasScript;
         }
         return aNode;
     },

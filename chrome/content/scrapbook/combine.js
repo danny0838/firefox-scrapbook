@@ -366,7 +366,10 @@ var sbPageCombiner = {
         } else {
             aType = sbDataSource.getProperty(sbCombineService.curRes, "type");
             this.cssText += this.surroundCSS();
-            this.processDOMRecursively(this.BODY);
+            this.inspectNode(this.BODY);
+            Array.prototype.forEach.call(this.BODY.querySelectorAll("*"), function(curNode){
+                this.inspectNode(curNode);
+            }, this);
             if ( this.isTargetCombined ) {
                 this.htmlSrc += this.surroundDOMCombined();
             } else {
@@ -565,15 +568,6 @@ var sbPageCombiner = {
             return ' url("' + dataURL + '")';
         });
         return aCSSText;
-    },
-
-    processDOMRecursively: function(rootNode) {
-        rootNode = this.inspectNode(rootNode);
-        for ( var curNode = rootNode.firstChild; curNode != null; curNode = curNode.nextSibling ) {
-            if ( curNode.nodeName == "#text" || curNode.nodeName == "#comment" ) continue;
-            curNode = this.processDOMRecursively(curNode);
-        }
-        return rootNode;
     },
 
     inspectNode: function(aNode) {
