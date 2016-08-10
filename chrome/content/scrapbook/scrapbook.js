@@ -42,19 +42,16 @@ var sbMainService = {
     },
 
     trace: function(aText, aMillisec) {
-        var status = top.window.document.getElementById("statusbar-display");
+        var win = top.window;
+        var status = win.document.getElementById("statusbar-display");
         if ( !status ) return;
         status.label = aText;
-        var callback = function(self) {
-            self._traceTimer = null;
-            if (status.label == aText)
-                status.label = "";
-            status = null;
-        };
-        this._traceTimer = window.setTimeout(callback, aMillisec || 5000, this);
+        if (status.timeout) win.clearTimeout(status.timeout);  // clear previous timeout
+        status.timeout = win.setTimeout(function() {
+            status.label = "";
+            status.timeout = null;
+        }, aMillisec || 5000);
     },
-
-    _traceTimer: null,
 
     locate: function(aRes) {
         if (!aRes)
