@@ -127,7 +127,8 @@ var sbContentSaver = {
             if (iconFileName) this.favicon = iconFileName;
         }
         if ( this.httpTask[this.item.id] == 0 ) {
-            setTimeout(function(){ sbCaptureObserverCallback.onAllDownloadsComplete(sbContentSaver.item); }, 100);
+            var that = this;
+            setTimeout(function(){ sbCaptureObserverCallback.onAllDownloadsComplete(that.item); }, 100);
         }
         this.addResource(aResName, aResIndex);
         return [sbCommonUtils.splitFileName(newName)[0], this.file2URL, this.item.title];
@@ -1411,8 +1412,9 @@ var sbContentSaver = {
     },
 
     restoreFileNameFromHash: function (content) {
+        var that = this;
         return content.replace(/urn:scrapbook-download:([0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12})/g, function (match, key) {
-            var url = sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][key];
+            var url = that.downloadRewriteMap[that.item.id][key];
             // This could happen when a web page really contains a content text in our format.
             // We return the original text for keys not defineded in the map to prevent a bad replace
             // since it's nearly impossible for them to hit on the hash keys we are using.
