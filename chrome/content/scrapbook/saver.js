@@ -1435,17 +1435,7 @@ var sbContentSaver = {
 
 var sbCaptureObserverCallback = {
 
-    trace: function(aText, aMillisec) {
-        var status = top.window.document.getElementById("statusbar-display");
-        if ( !status ) return;
-        status.label = aText;
-        if ( aMillisec>0 ) {
-            var callback = function() {
-                if ( status.label == aText) status.label = "";
-            };
-            window.setTimeout(callback, aMillisec);
-        }
-    },
+    trace: function(aText, aMillisec) {},
 
     onDownloadComplete: function(aItem) {
         if ( --sbContentSaver.httpTask[aItem.id] == 0 ) {
