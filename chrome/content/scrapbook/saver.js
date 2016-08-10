@@ -367,7 +367,7 @@ var sbContentSaver = {
         }
 
         // generate the HTML and CSS file and save
-        var myHTML = this.doctypeToString(aDocument.doctype) + sbCommonUtils.surroundByTags(rootNode, rootNode.innerHTML + "\n");
+        var myHTML = sbCommonUtils.doctypeToString(aDocument.doctype) + sbCommonUtils.surroundByTags(rootNode, rootNode.innerHTML + "\n");
         if ( this.option["internalize"] ) {
             var myHTMLFile = this.option["internalize"];
         } else {
@@ -433,15 +433,6 @@ var sbContentSaver = {
         aNode.parentNode.replaceChild(newNode, aNode);
         aNode = newNode;
         return aNode;
-    },
-
-    doctypeToString: function(aDoctype) {
-        if ( !aDoctype ) return "";
-        var ret = "<!DOCTYPE " + aDoctype.name;
-        if ( aDoctype.publicId ) ret += ' PUBLIC "' + aDoctype.publicId + '"';
-        if ( aDoctype.systemId ) ret += ' "'        + aDoctype.systemId + '"';
-        ret += ">\n";
-        return ret;
     },
 
     getHeadNode: function(aNode) {
