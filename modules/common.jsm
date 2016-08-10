@@ -995,12 +995,9 @@ var sbCommonUtils = {
         return tag + aContent + "</" + aNode.nodeName.toLowerCase() + ">\n";
     },
 
-    // return a empty text node to prevent breaking a special recursive loop
-    // @TODO: reconstruct the loop and remove this ugly workaround
-    removeNodeFromParent: function(aNode) {
-        var newNode = aNode.ownerDocument.createTextNode("");
-        aNode.parentNode.replaceChild(newNode, aNode);
-        return newNode;
+    // Node.remove() is supported since Firefox >= 23.0
+    removeNode: function(aNode) {
+        return aNode.parentNode.removeChild(aNode);
     },
 
     doctypeToString: function(aDoctype) {

@@ -546,7 +546,7 @@ var sbPageEditor = {
     },
 
     removeStyle: function(aWindow, aID) {
-        try { sbCommonUtils.removeNodeFromParent(aWindow.document.getElementById(aID)); } catch(ex) {}
+        try { sbCommonUtils.removeNode(aWindow.document.getElementById(aID)); } catch(ex) {}
     },
 
     documentBeforeEdit: function(aDoc) {
@@ -571,7 +571,7 @@ var sbPageEditor = {
         for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
             var node = nodes[i];
             if ( sbCommonUtils.getSbObjectType(node) == "stylesheet-temp") {
-                sbCommonUtils.removeNodeFromParent(node);
+                sbCommonUtils.removeNode(node);
             }
         }
         // record the status of todo form elements

@@ -578,7 +578,7 @@ var sbPageCombiner = {
                     // styles should already be processed
                     // in sbPageCombiner.exec => surroundCSS => processCSSRecursively
                     // just discard it here so that it never appear in the combined page
-                    return sbCommonUtils.removeNodeFromParent(aNode);
+                    return sbCommonUtils.removeNode(aNode);
                 }
                 break;
             case "style":
@@ -586,7 +586,7 @@ var sbPageCombiner = {
                 // styles should already be processed
                 // in sbPageCombiner.exec => surroundCSS => processCSSRecursively
                 // just discard it here so that it never appear in the combined page
-                return sbCommonUtils.removeNodeFromParent(aNode);
+                return sbCommonUtils.removeNode(aNode);
                 break;
             case "body": 
                 // move body specific attributes into inline styles so that it can be transfered to div

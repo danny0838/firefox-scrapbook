@@ -623,7 +623,7 @@ var sbContentSaver = {
                                 // capturing styles with rewrite, the style should be already processed
                                 // in saveDocumentInternal => processCSSRecursively
                                 // remove it here with safety
-                                return sbCommonUtils.removeNodeFromParent(aNode);
+                                return sbCommonUtils.removeNode(aNode);
                             } else if ( this.option["styles"] && !this.option["rewriteStyles"] ) {
                                 // capturing styles with no rewrite, download it and rewrite the link
                                 var fileName = this.download(url);
@@ -667,12 +667,12 @@ var sbContentSaver = {
                     // a special stylesheet used by scrapbook, keep it intact
                 } else if ( !this.option["styles"] && !this.option["keepLink"] ) {
                     // not capturing styles, remove it
-                    return sbCommonUtils.removeNodeFromParent(aNode);
+                    return sbCommonUtils.removeNode(aNode);
                 } else if ( this.option["rewriteStyles"] ) {
                     // capturing styles with rewrite, the styles should be already processed
                     // in saveDocumentInternal => processCSSRecursively
                     // remove it here with safety
-                    return sbCommonUtils.removeNodeFromParent(aNode);
+                    return sbCommonUtils.removeNode(aNode);
                 }
                 break;
             case "script": 
@@ -684,7 +684,7 @@ var sbContentSaver = {
                         if (fileName) aNode.setAttribute("src", fileName);
                     }
                 } else {
-                    return sbCommonUtils.removeNodeFromParent(aNode);
+                    return sbCommonUtils.removeNode(aNode);
                 }
                 break;
             case "a": 
