@@ -1,23 +1,65 @@
 
 var sbContentSaver = {
-    option: {},
-    documentName: "",
-    item: null,
-    favicon: null,
-    contentDir: null,
-    refURLObj: null,
-    isMainFrame: true,
-    selection: null,
-    treeRes: null,
-    presetData: null,
-    httpTask: {},
-    downloadRewriteFiles: {},
-    downloadRewriteMap: {},
-    file2URL: {},
-    file2Doc: {},
-    linkURLs: [],
-    frames: [],
-    canvases: [],
+    captureWindow: function(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData, aContext, aTitle) {
+        var saver = new sbContentSaverClass();
+        return saver.captureWindow(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData, aContext, aTitle);
+    },
+
+    captureFile: function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext) {
+        var saver = new sbContentSaverClass();
+        return saver.captureFile(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext);
+    },
+
+    notifyCaptureComplete: function(aItem) {
+        // aItem is the last item that is captured
+        // in a multiple capture it could be null 
+        if (aItem) {
+            if ( sbDataSource.getProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id), "type") == "marked" ) return;
+            if ( sbCommonUtils.getPref("notifyOnComplete", true) ) {
+                var icon = aItem.icon ? "resource://scrapbook/data/" + aItem.id + "/" + aItem.icon : sbCommonUtils.getDefaultIcon();
+                var title = "ScrapBook: " + sbCommonUtils.lang("CAPTURE_COMPLETE");
+                var text = sbCommonUtils.crop(aItem.title, null, 100);
+                var listener = {
+                    observe: function(subject, topic, data) {
+                        if (topic == "alertclickcallback")
+                            sbCommonUtils.loadURL("chrome://scrapbook/content/view.xul?id=" + data, true);
+                    }
+                };
+                var alertsSvc = Components.classes["@mozilla.org/alerts-service;1"].getService(Components.interfaces.nsIAlertsService);
+                alertsSvc.showAlertNotification(icon, title, text, true, aItem.id, listener);
+            }
+        } else {
+            var icon = sbCommonUtils.getDefaultIcon();
+            var title = "ScrapBook: " + sbCommonUtils.lang("CAPTURE_COMPLETE");
+            var alertsSvc = Components.classes["@mozilla.org/alerts-service;1"].getService(Components.interfaces.nsIAlertsService);
+            alertsSvc.showAlertNotification(icon, title, null);
+        }
+    },
+};
+
+
+function sbContentSaverClass() {
+    this.option = {};
+    this.documentName = "";
+    this.item = null;
+    this.favicon = null;
+    this.contentDir = null;
+    this.refURLObj = null;
+    this.isMainFrame = true;
+    this.selection = null;
+    this.treeRes = null;
+    this.presetData = null;
+    this.httpTask = {};
+    this.downloadRewriteFiles = {};
+    this.downloadRewriteMap = {};
+    this.file2URL = {};
+    this.file2Doc = {};
+    this.linkURLs = [];
+    this.frames = [];
+    this.canvases = [];
+}
+
+sbContentSaverClass.prototype = {
 
     init: function(aPresetData) {
         this.option = {
@@ -128,7 +170,7 @@ var sbContentSaver = {
         }
         if ( this.httpTask[this.item.id] == 0 ) {
             var that = this;
-            setTimeout(function(){ sbCaptureObserverCallback.onAllDownloadsComplete(that.item); }, 100);
+            setTimeout(function(){ that.onAllDownloadsComplete(that.item); }, 100);
         }
         this.addResource(aResName, aResIndex);
         return [sbCommonUtils.splitFileName(newName)[0], this.file2URL, this.item.title];
@@ -1130,7 +1172,7 @@ var sbContentSaver = {
                             } catch (ex) {
                                 errorHandler(ex);
                             }
-                            sbCaptureObserverCallback.onDownloadComplete(that.item);
+                            that.onDownloadComplete(that.item);
                         },
                         onDataAvailable: function (aRequest, aContext, aInputStream, aOffset, aCount) {
                             try {
@@ -1146,7 +1188,7 @@ var sbContentSaver = {
                                 }
                                 this._stream.writeFrom(aInputStream, aCount);
                                 this._stream.flush();
-                                sbCaptureObserverCallback.onDownloadProgress(that.item, fileName, aOffset);
+                                that.onDownloadProgress(that.item, fileName, aOffset);
                             } catch(ex) {
                                 sbCommonUtils.error(ex);
                                 channel.cancel(Components.results.NS_BINDING_ABORTED);
@@ -1181,7 +1223,7 @@ var sbContentSaver = {
                 // set task
                 that.httpTask[that.item.id]++;
                 var item = that.item;
-                setTimeout(function(){ sbCaptureObserverCallback.onDownloadComplete(item); }, 0);
+                setTimeout(function(){ that.onDownloadComplete(item); }, 0);
                 // do the copy
                 sourceFile.copyTo(targetDir, fileName);
                 return that.escapeURL(fileName, aEscapeType, true);
@@ -1210,7 +1252,7 @@ var sbContentSaver = {
                 // set task
                 that.httpTask[that.item.id]++;
                 var item = that.item;
-                setTimeout(function(){ sbCaptureObserverCallback.onDownloadComplete(item); }, 0);
+                setTimeout(function(){ that.onDownloadComplete(item); }, 0);
                 // do the save
                 var targetFile = targetDir.clone(); targetFile.append(fileName);
                 sbCommonUtils.writeFileBytes(targetFile, dataURIBytes);
@@ -1430,43 +1472,42 @@ var sbContentSaver = {
         }
         return url;
     },
-};
 
-
-var sbCaptureObserverCallback = {
-
+    /**
+     * Capture observer
+     */
     trace: function(aText, aMillisec) {},
 
     onDownloadComplete: function(aItem) {
-        if ( --sbContentSaver.httpTask[aItem.id] == 0 ) {
+        if ( --this.httpTask[aItem.id] == 0 ) {
             this.onAllDownloadsComplete(aItem);
             return;
         }
-        this.trace(sbCommonUtils.lang("CAPTURE", sbContentSaver.httpTask[aItem.id], aItem.title), 0);
+        this.trace(sbCommonUtils.lang("CAPTURE", this.httpTask[aItem.id], aItem.title), 0);
     },
 
     onAllDownloadsComplete: function(aItem) {
         // restore downloaded file names
-        sbContentSaver.downloadRewriteFiles[aItem.id].forEach(function (data) {
+        this.downloadRewriteFiles[aItem.id].forEach(function (data) {
             var [file, charset] = data;
             var content = sbCommonUtils.readFile(file, charset);
-            content = sbContentSaver.restoreFileNameFromHash(content);
+            content = this.restoreFileNameFromHash(content);
             sbCommonUtils.writeFile(file, content, charset);
-        });
+        }, this);
 
         // fix resource settings after capture complete
-        // If it's an indepth capture, sbContentSaver.treeRes will be null for non-main documents,
+        // If it's an indepth capture, this.treeRes will be null for non-main documents,
         // and thus we don't have to update the resource for many times.
-        var res = sbContentSaver.treeRes;
+        var res = this.treeRes;
         if (res && sbDataSource.exists(res)) {
             sbDataSource.setProperty(res, "type", aItem.type);
-            if ( sbContentSaver.favicon ) {
-                aItem.icon = sbContentSaver.favicon;
+            if ( this.favicon ) {
+                aItem.icon = this.favicon;
             }
             // We replace the "urn:scrapbook-download:*" and skip adding "resource://" to prevent an issue
             // for URLs containing ":", such as "moz-icon://".
             if (aItem.icon) {
-                aItem.icon = sbContentSaver.restoreFileNameFromHash(aItem.icon);
+                aItem.icon = this.restoreFileNameFromHash(aItem.icon);
                 if (aItem.icon.indexOf(":") >= 0) {
                     var iconURL = aItem.icon;
                 } else {
@@ -1477,28 +1518,28 @@ var sbCaptureObserverCallback = {
             sbCommonUtils.rebuildGlobal();
             sbCommonUtils.writeIndexDat(aItem);
 
-            if ( sbContentSaver.option["inDepth"] > 0 && sbContentSaver.linkURLs.length > 0 ) {
+            if ( this.option["inDepth"] > 0 && this.linkURLs.length > 0 ) {
                 // inDepth capture for "capture-again-deep" is pre-disallowed by hiding the options
                 // and should never occur here
-                if ( !sbContentSaver.presetData || aContext == "capture-again" ) {
-                    sbContentSaver.item.type = "marked";
+                if ( !this.presetData || aContext == "capture-again" ) {
+                    this.item.type = "marked";
                     var data = {
-                        urls: sbContentSaver.linkURLs,
-                        refUrl: sbContentSaver.refURLObj.spec,
+                        urls: this.linkURLs,
+                        refUrl: this.refURLObj.spec,
                         showDetail: false,
                         resName: null,
                         resIdx: 0,
-                        referItem: sbContentSaver.item,
-                        option: sbContentSaver.option,
-                        file2Url: sbContentSaver.file2URL,
+                        referItem: this.item,
+                        option: this.option,
+                        file2Url: this.file2URL,
                         preset: null,
                         titles: null,
                         context: "indepth",
                     };
                     window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no", data);
                 } else {
-                    for ( var i = 0; i < sbContentSaver.linkURLs.length; i++ ) {
-                        sbCaptureTask.add(sbContentSaver.linkURLs[i], sbContentSaver.presetData[4] + 1);
+                    for ( var i = 0; i < this.linkURLs.length; i++ ) {
+                        sbCaptureTask.add(this.linkURLs[i], this.presetData[4] + 1);
                     }
                 }
             }
@@ -1513,30 +1554,7 @@ var sbCaptureObserverCallback = {
     },
 
     onCaptureComplete: function(aItem) {
-        // aItem is the last item that is captured
-        // in a multiple capture it could be null 
-        if (aItem) {
-            if ( sbDataSource.getProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id), "type") == "marked" ) return;
-            if ( sbCommonUtils.getPref("notifyOnComplete", true) ) {
-                var icon = aItem.icon ? "resource://scrapbook/data/" + aItem.id + "/" + aItem.icon : sbCommonUtils.getDefaultIcon();
-                var title = "ScrapBook: " + sbCommonUtils.lang("CAPTURE_COMPLETE");
-                var text = sbCommonUtils.crop(aItem.title, null, 100);
-                var listener = {
-                    observe: function(subject, topic, data) {
-                        if (topic == "alertclickcallback")
-                            sbCommonUtils.loadURL("chrome://scrapbook/content/view.xul?id=" + data, true);
-                    }
-                };
-                var alertsSvc = Components.classes["@mozilla.org/alerts-service;1"].getService(Components.interfaces.nsIAlertsService);
-                alertsSvc.showAlertNotification(icon, title, text, true, aItem.id, listener);
-            }
-            if ( aItem.id in sbContentSaver.httpTask ) delete sbContentSaver.httpTask[aItem.id];
-        } else {
-            var icon = sbCommonUtils.getDefaultIcon();
-            var title = "ScrapBook: " + sbCommonUtils.lang("CAPTURE_COMPLETE");
-            var alertsSvc = Components.classes["@mozilla.org/alerts-service;1"].getService(Components.interfaces.nsIAlertsService);
-            alertsSvc.showAlertNotification(icon, title, null);
-        }
+        sbContentSaver.notifyCaptureComplete(aItem);
     },
 
 };

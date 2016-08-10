@@ -167,7 +167,7 @@ var sbCombineService = {
         this.toggleElements(true);
         SB_trace(sbCommonUtils.lang("CAPTURE_START"));
 //sbCommonUtils.alert("--"+document.getElementById("sbpTitleTextbox").value+"--");
-        setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null, "combine"); }, 0);
+        setTimeout(function(){ gContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null, "combine"); }, 0);
     },
 
     toggleElements: function(isProgressMode) {
@@ -642,7 +642,7 @@ var sbPageCombiner = {
 
 
 
-sbCaptureObserverCallback.onCaptureComplete = function(aItem) {
+gContentSaver.onCaptureComplete = function(aItem) {
     var newRes = sbCombineService.onCombineComplete(aItem);
     if ( sbCombineService.option["R"] ) {
         if ( sbCombineService.resList.length != sbCombineService.parList.length ) return;
