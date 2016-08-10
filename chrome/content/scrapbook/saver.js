@@ -428,13 +428,6 @@ var sbContentSaver = {
     },
 
 
-    removeNodeFromParent: function(aNode) {
-        var newNode = aNode.ownerDocument.createTextNode("");
-        aNode.parentNode.replaceChild(newNode, aNode);
-        aNode = newNode;
-        return aNode;
-    },
-
     getHeadNode: function(aNode) {
         var headNode = aNode.getElementsByTagName("head")[0];
         if (!headNode) {
@@ -637,7 +630,7 @@ var sbContentSaver = {
                                 // capturing styles with rewrite, the style should be already processed
                                 // in saveDocumentInternal => processCSSRecursively
                                 // remove it here with safety
-                                return this.removeNodeFromParent(aNode);
+                                return sbCommonUtils.removeNodeFromParent(aNode);
                             } else if ( this.option["styles"] && !this.option["rewriteStyles"] ) {
                                 // capturing styles with no rewrite, download it and rewrite the link
                                 var fileName = this.download(url);
@@ -681,12 +674,12 @@ var sbContentSaver = {
                     // a special stylesheet used by scrapbook, keep it intact
                 } else if ( !this.option["styles"] && !this.option["keepLink"] ) {
                     // not capturing styles, remove it
-                    return this.removeNodeFromParent(aNode);
+                    return sbCommonUtils.removeNodeFromParent(aNode);
                 } else if ( this.option["rewriteStyles"] ) {
                     // capturing styles with rewrite, the styles should be already processed
                     // in saveDocumentInternal => processCSSRecursively
                     // remove it here with safety
-                    return this.removeNodeFromParent(aNode);
+                    return sbCommonUtils.removeNodeFromParent(aNode);
                 }
                 break;
             case "script": 
@@ -698,7 +691,7 @@ var sbContentSaver = {
                         if (fileName) aNode.setAttribute("src", fileName);
                     }
                 } else {
-                    return this.removeNodeFromParent(aNode);
+                    return sbCommonUtils.removeNodeFromParent(aNode);
                 }
                 break;
             case "a": 

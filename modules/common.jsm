@@ -995,6 +995,14 @@ var sbCommonUtils = {
         return tag + aContent + "</" + aNode.nodeName.toLowerCase() + ">\n";
     },
 
+    // return a empty text node to prevent breaking a special recursive loop
+    // @TODO: reconstruct the loop and remove this ugly workaround
+    removeNodeFromParent: function(aNode) {
+        var newNode = aNode.ownerDocument.createTextNode("");
+        aNode.parentNode.replaceChild(newNode, aNode);
+        return newNode;
+    },
+
     doctypeToString: function(aDoctype) {
         if ( !aDoctype ) return "";
         var ret = "<!DOCTYPE " + aDoctype.name;
