@@ -648,7 +648,7 @@ sbContentSaverClass.prototype = {
                                 // capturing styles with rewrite, the style should be already processed
                                 // in saveDocumentInternal => processCSSRecursively
                                 // remove it here with safety
-                                sbCommonUtils.removeNode(aNode);
+                                aNode.setAttribute("href", this.getReorganizedURL(url));
                                 return;
                             } else if ( this.option["styles"] && !this.option["rewriteStyles"] ) {
                                 // capturing styles with no rewrite, download it and rewrite the link
@@ -693,13 +693,13 @@ sbContentSaverClass.prototype = {
                     // a special stylesheet used by scrapbook, keep it intact
                 } else if ( !this.option["styles"] && !this.option["keepLink"] ) {
                     // not capturing styles, remove it
-                    sbCommonUtils.removeNode(aNode);
+                    aNode.textContent = "/* Code removed by ScrapBook */";
                     return;
                 } else if ( this.option["rewriteStyles"] ) {
                     // capturing styles with rewrite, the styles should be already processed
                     // in saveDocumentInternal => processCSSRecursively
                     // remove it here with safety
-                    sbCommonUtils.removeNode(aNode);
+                    aNode.textContent = "/* Code reorganized by ScrapBook */";
                     return;
                 }
                 break;
@@ -711,7 +711,11 @@ sbContentSaverClass.prototype = {
                         if (fileName) aNode.setAttribute("src", fileName);
                     }
                 } else {
-                    sbCommonUtils.removeNode(aNode);
+                    if ( aNode.hasAttribute("src") ) {
+                        var url = aNode.src;
+                        aNode.setAttribute("src", this.getSkippedURL(url));
+                    }
+                    if (aNode.textContent) aNode.textContent = "/* Code removed by ScrapBook */";
                     return;
                 }
                 break;
@@ -1450,6 +1454,14 @@ sbContentSaverClass.prototype = {
             if (!url) return match;
             return url;
         });
+    },
+
+    // get the skipped form for specific cases we handled in another way
+    getReorganizedURL: function (url) {
+        if (url.indexOf("http:") === 0 || url.indexOf("https:") === 0 || url.indexOf("ftp:") === 0 || url.indexOf("file:") === 0) {
+            return "urn:scrapbook-download-reorganized:" + url;
+        }
+        return url;
     },
 
     // get the skipped form for specific protocol that we do not handle
