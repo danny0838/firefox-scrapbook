@@ -167,7 +167,7 @@ var sbCombineService = {
         this.toggleElements(true);
         SB_trace(sbCommonUtils.lang("CAPTURE_START"));
 //sbCommonUtils.alert("--"+document.getElementById("sbpTitleTextbox").value+"--");
-        setTimeout(function(){ sbContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null, "combine"); }, 0);
+        setTimeout(function(){ gContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null, "combine"); }, 0);
     },
 
     toggleElements: function(isProgressMode) {
@@ -366,7 +366,10 @@ var sbPageCombiner = {
         } else {
             aType = sbDataSource.getProperty(sbCombineService.curRes, "type");
             this.cssText += this.surroundCSS();
-            this.processDOMRecursively(this.BODY);
+            this.inspectNode(this.BODY);
+            Array.prototype.forEach.call(this.BODY.querySelectorAll("*"), function(curNode){
+                this.inspectNode(curNode);
+            }, this);
             if ( this.isTargetCombined ) {
                 this.htmlSrc += this.surroundDOMCombined();
             } else {
@@ -567,15 +570,6 @@ var sbPageCombiner = {
         return aCSSText;
     },
 
-    processDOMRecursively: function(rootNode) {
-        rootNode = this.inspectNode(rootNode);
-        for ( var curNode = rootNode.firstChild; curNode != null; curNode = curNode.nextSibling ) {
-            if ( curNode.nodeName == "#text" || curNode.nodeName == "#comment" ) continue;
-            curNode = this.processDOMRecursively(curNode);
-        }
-        return rootNode;
-    },
-
     inspectNode: function(aNode) {
         switch ( aNode.nodeName.toLowerCase() ) {
             case "link": 
@@ -584,7 +578,8 @@ var sbPageCombiner = {
                     // styles should already be processed
                     // in sbPageCombiner.exec => surroundCSS => processCSSRecursively
                     // just discard it here so that it never appear in the combined page
-                    return sbContentSaver.removeNodeFromParent(aNode);
+                    sbCommonUtils.removeNode(aNode);
+                    return;
                 }
                 break;
             case "style":
@@ -592,7 +587,8 @@ var sbPageCombiner = {
                 // styles should already be processed
                 // in sbPageCombiner.exec => surroundCSS => processCSSRecursively
                 // just discard it here so that it never appear in the combined page
-                return sbContentSaver.removeNodeFromParent(aNode);
+                sbCommonUtils.removeNode(aNode);
+                return;
                 break;
             case "body": 
                 // move body specific attributes into inline styles so that it can be transfered to div
@@ -633,7 +629,6 @@ var sbPageCombiner = {
             var newCSStext = this.inspectCSSText(aNode.style.cssText, this.BROWSER.currentURI.spec);
             if ( newCSStext ) aNode.setAttribute("style", newCSStext);
         }
-        return aNode;
     },
 
     setAbsoluteURL: function(aNode, aAttr) {
@@ -648,7 +643,7 @@ var sbPageCombiner = {
 
 
 
-sbCaptureObserverCallback.onCaptureComplete = function(aItem) {
+gContentSaver.onCaptureComplete = function(aItem) {
     var newRes = sbCombineService.onCombineComplete(aItem);
     if ( sbCombineService.option["R"] ) {
         if ( sbCombineService.resList.length != sbCombineService.parList.length ) return;

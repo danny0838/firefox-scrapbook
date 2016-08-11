@@ -1,23 +1,66 @@
 
 var sbContentSaver = {
-    option: {},
-    documentName: "",
-    item: null,
-    favicon: null,
-    contentDir: null,
-    refURLObj: null,
-    isMainFrame: true,
-    selection: null,
-    treeRes: null,
-    presetData: null,
-    httpTask: {},
-    downloadRewriteFiles: {},
-    downloadRewriteMap: {},
-    file2URL: {},
-    file2Doc: {},
-    linkURLs: [],
-    frames: [],
-    canvases: [],
+    captureWindow: function(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData, aContext, aTitle) {
+        var saver = new sbContentSaverClass();
+        return saver.captureWindow(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData, aContext, aTitle);
+    },
+
+    captureFile: function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext) {
+        var saver = new sbContentSaverClass();
+        return saver.captureFile(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext);
+    },
+
+    notifyCaptureComplete: function(aItem) {
+        // aItem is the last item that is captured
+        // in a multiple capture it could be null 
+        if (aItem) {
+            if ( sbDataSource.getProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id), "type") == "marked" ) return;
+            if ( sbCommonUtils.getPref("notifyOnComplete", true) ) {
+                var icon = aItem.icon ? "resource://scrapbook/data/" + aItem.id + "/" + aItem.icon : sbCommonUtils.getDefaultIcon();
+                var title = "ScrapBook: " + sbCommonUtils.lang("CAPTURE_COMPLETE");
+                var text = sbCommonUtils.crop(aItem.title, null, 100);
+                var listener = {
+                    observe: function(subject, topic, data) {
+                        if (topic == "alertclickcallback")
+                            sbCommonUtils.loadURL("chrome://scrapbook/content/view.xul?id=" + data, true);
+                    }
+                };
+                var alertsSvc = Components.classes["@mozilla.org/alerts-service;1"].getService(Components.interfaces.nsIAlertsService);
+                alertsSvc.showAlertNotification(icon, title, text, true, aItem.id, listener);
+            }
+        } else {
+            var icon = sbCommonUtils.getDefaultIcon();
+            var title = "ScrapBook: " + sbCommonUtils.lang("CAPTURE_COMPLETE");
+            var alertsSvc = Components.classes["@mozilla.org/alerts-service;1"].getService(Components.interfaces.nsIAlertsService);
+            alertsSvc.showAlertNotification(icon, title, null);
+        }
+    },
+};
+
+
+function sbContentSaverClass() {
+    this.option = {};
+    this.context = null;
+    this.documentName = "";
+    this.item = null;
+    this.favicon = null;
+    this.contentDir = null;
+    this.refURLObj = null;
+    this.isMainFrame = true;
+    this.selection = null;
+    this.treeRes = null;
+    this.presetData = null;
+    this.httpTask = {};
+    this.downloadRewriteFiles = {};
+    this.downloadRewriteMap = {};
+    this.file2URL = {};
+    this.file2Doc = {};
+    this.linkURLs = [];
+    this.frames = [];
+    this.canvases = [];
+}
+
+sbContentSaverClass.prototype = {
 
     init: function(aPresetData) {
         this.option = {
@@ -86,6 +129,7 @@ var sbContentSaver = {
     captureWindow: function(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData, aContext, aTitle) {
         this.init(aPresetData);
         this.option["isPartial"] = aIsPartial;
+        this.context = aContext;
         this.item.chars = this.option["forceUtf8"] ? "UTF-8" : aRootWindow.document.characterSet;
         this.item.source = aRootWindow.location.href;
         //Favicon der angezeigten Seite bestimmen (Unterscheidung zwischen FF2 und FF3 notwendig!)
@@ -127,7 +171,8 @@ var sbContentSaver = {
             if (iconFileName) this.favicon = iconFileName;
         }
         if ( this.httpTask[this.item.id] == 0 ) {
-            setTimeout(function(){ sbCaptureObserverCallback.onAllDownloadsComplete(sbContentSaver.item); }, 100);
+            var that = this;
+            setTimeout(function(){ that.onAllDownloadsComplete(that.item); }, 100);
         }
         this.addResource(aResName, aResIndex);
         return [sbCommonUtils.splitFileName(newName)[0], this.file2URL, this.item.title];
@@ -135,6 +180,7 @@ var sbContentSaver = {
 
     captureFile: function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext) {
         this.init(aPresetData);
+        this.context = aContext;
         this.item.title = sbCommonUtils.getFileName(aSourceURL);
         this.item.icon = "moz-icon://" + this.escapeURL(this.item.title, null, true) + "?size=16";
         this.item.source = aSourceURL;
@@ -158,7 +204,7 @@ var sbContentSaver = {
             titles: aTitles || [this.item.title],
             resURI: aResURI,
             result: 1,
-            context: aContext || "capture"
+            context: aContext
         };
         window.openDialog("chrome://scrapbook/content/detail.xul", "", "chrome,modal,centerscreen,resizable", ret);
         return ret;
@@ -183,7 +229,9 @@ var sbContentSaver = {
         // frames could have ridiculous malformed location.href, such as "javascript:foo.bar"
         // in this case catch the error and this.refURLObj should remain original (the parent frame)
         try {
-            this.refURLObj = sbCommonUtils.convertURLToObject(aDocument.location.href);
+            var elem = aDocument.createElement("A");
+            elem.href = "";
+            this.refURLObj = sbCommonUtils.convertURLToObject(elem.href);
         } catch(ex) {
         }
 
@@ -320,7 +368,9 @@ var sbContentSaver = {
             }
         }
         // process HTML DOM
-        this.processDOMRecursively(rootNode, rootNode);
+        Array.prototype.forEach.call(rootNode.querySelectorAll("*"), function(curNode){
+            this.inspectNode(curNode, rootNode);
+        }, this);
 
         // process all inline and link CSS, will merge them into index.css later
         var myCSS = "";
@@ -367,7 +417,7 @@ var sbContentSaver = {
         }
 
         // generate the HTML and CSS file and save
-        var myHTML = this.doctypeToString(aDocument.doctype) + sbCommonUtils.surroundByTags(rootNode, rootNode.innerHTML + "\n");
+        var myHTML = sbCommonUtils.doctypeToString(aDocument.doctype) + sbCommonUtils.surroundByTags(rootNode, rootNode.innerHTML + "\n");
         if ( this.option["internalize"] ) {
             var myHTMLFile = this.option["internalize"];
         } else {
@@ -428,22 +478,6 @@ var sbContentSaver = {
     },
 
 
-    removeNodeFromParent: function(aNode) {
-        var newNode = aNode.ownerDocument.createTextNode("");
-        aNode.parentNode.replaceChild(newNode, aNode);
-        aNode = newNode;
-        return aNode;
-    },
-
-    doctypeToString: function(aDoctype) {
-        if ( !aDoctype ) return "";
-        var ret = "<!DOCTYPE " + aDoctype.name;
-        if ( aDoctype.publicId ) ret += ' PUBLIC "' + aDoctype.publicId + '"';
-        if ( aDoctype.systemId ) ret += ' "'        + aDoctype.systemId + '"';
-        ret += ">\n";
-        return ret;
-    },
-
     getHeadNode: function(aNode) {
         var headNode = aNode.getElementsByTagName("head")[0];
         if (!headNode) {
@@ -459,15 +493,6 @@ var sbContentSaver = {
             }
         }
         return headNode;
-    },
-
-
-    processDOMRecursively: function(startNode, rootNode) {
-        for ( var curNode = startNode.firstChild; curNode != null; curNode = curNode.nextSibling ) {
-            if ( curNode.nodeName == "#text" || curNode.nodeName == "#comment" ) continue;
-            curNode = this.inspectNode(curNode, rootNode);
-            this.processDOMRecursively(curNode, rootNode);
-        }
     },
 
     inspectNode: function(aNode, aRootNode) {
@@ -646,7 +671,8 @@ var sbContentSaver = {
                                 // capturing styles with rewrite, the style should be already processed
                                 // in saveDocumentInternal => processCSSRecursively
                                 // remove it here with safety
-                                return this.removeNodeFromParent(aNode);
+                                sbCommonUtils.removeNode(aNode);
+                                return;
                             } else if ( this.option["styles"] && !this.option["rewriteStyles"] ) {
                                 // capturing styles with no rewrite, download it and rewrite the link
                                 var fileName = this.download(url);
@@ -690,12 +716,14 @@ var sbContentSaver = {
                     // a special stylesheet used by scrapbook, keep it intact
                 } else if ( !this.option["styles"] && !this.option["keepLink"] ) {
                     // not capturing styles, remove it
-                    return this.removeNodeFromParent(aNode);
+                    sbCommonUtils.removeNode(aNode);
+                    return;
                 } else if ( this.option["rewriteStyles"] ) {
                     // capturing styles with rewrite, the styles should be already processed
                     // in saveDocumentInternal => processCSSRecursively
                     // remove it here with safety
-                    return this.removeNodeFromParent(aNode);
+                    sbCommonUtils.removeNode(aNode);
+                    return;
                 }
                 break;
             case "script": 
@@ -707,7 +735,8 @@ var sbContentSaver = {
                         if (fileName) aNode.setAttribute("src", fileName);
                     }
                 } else {
-                    return this.removeNodeFromParent(aNode);
+                    sbCommonUtils.removeNode(aNode);
+                    return;
                 }
                 break;
             case "a": 
@@ -871,11 +900,6 @@ var sbContentSaver = {
             // other specific
             aNode.removeAttribute("contextmenu");
         }
-        if (canvasScript) {
-            // special handle: shift to the script node so that it won't get removed on next process
-            return canvasScript;
-        }
-        return aNode;
     },
 
     // replaceFunc = function (url) { return ...; }
@@ -1156,7 +1180,7 @@ var sbContentSaver = {
                             } catch (ex) {
                                 errorHandler(ex);
                             }
-                            sbCaptureObserverCallback.onDownloadComplete(that.item);
+                            that.onDownloadComplete(that.item);
                         },
                         onDataAvailable: function (aRequest, aContext, aInputStream, aOffset, aCount) {
                             try {
@@ -1172,7 +1196,7 @@ var sbContentSaver = {
                                 }
                                 this._stream.writeFrom(aInputStream, aCount);
                                 this._stream.flush();
-                                sbCaptureObserverCallback.onDownloadProgress(that.item, fileName, aOffset);
+                                that.onDownloadProgress(that.item, fileName, aOffset);
                             } catch(ex) {
                                 sbCommonUtils.error(ex);
                                 channel.cancel(Components.results.NS_BINDING_ABORTED);
@@ -1207,7 +1231,7 @@ var sbContentSaver = {
                 // set task
                 that.httpTask[that.item.id]++;
                 var item = that.item;
-                setTimeout(function(){ sbCaptureObserverCallback.onDownloadComplete(item); }, 0);
+                setTimeout(function(){ that.onDownloadComplete(item); }, 0);
                 // do the copy
                 sourceFile.copyTo(targetDir, fileName);
                 return that.escapeURL(fileName, aEscapeType, true);
@@ -1236,7 +1260,7 @@ var sbContentSaver = {
                 // set task
                 that.httpTask[that.item.id]++;
                 var item = that.item;
-                setTimeout(function(){ sbCaptureObserverCallback.onDownloadComplete(item); }, 0);
+                setTimeout(function(){ that.onDownloadComplete(item); }, 0);
                 // do the save
                 var targetFile = targetDir.clone(); targetFile.append(fileName);
                 sbCommonUtils.writeFileBytes(targetFile, dataURIBytes);
@@ -1438,8 +1462,9 @@ var sbContentSaver = {
     },
 
     restoreFileNameFromHash: function (content) {
+        var that = this;
         return content.replace(/urn:scrapbook-download:([0-9a-f]{8}-(?:[0-9a-f]{4}-){3}[0-9a-f]{12})/g, function (match, key) {
-            var url = sbContentSaver.downloadRewriteMap[sbContentSaver.item.id][key];
+            var url = that.downloadRewriteMap[that.item.id][key];
             // This could happen when a web page really contains a content text in our format.
             // We return the original text for keys not defineded in the map to prevent a bad replace
             // since it's nearly impossible for them to hit on the hash keys we are using.
@@ -1455,53 +1480,42 @@ var sbContentSaver = {
         }
         return url;
     },
-};
 
-
-var sbCaptureObserverCallback = {
-
-    trace: function(aText, aMillisec) {
-        var status = top.window.document.getElementById("statusbar-display");
-        if ( !status ) return;
-        status.label = aText;
-        if ( aMillisec>0 ) {
-            var callback = function() {
-                if ( status.label == aText) status.label = "";
-            };
-            window.setTimeout(callback, aMillisec);
-        }
-    },
+    /**
+     * Capture observer
+     */
+    trace: function(aText, aMillisec) {},
 
     onDownloadComplete: function(aItem) {
-        if ( --sbContentSaver.httpTask[aItem.id] == 0 ) {
+        if ( --this.httpTask[aItem.id] == 0 ) {
             this.onAllDownloadsComplete(aItem);
             return;
         }
-        this.trace(sbCommonUtils.lang("CAPTURE", sbContentSaver.httpTask[aItem.id], aItem.title), 0);
+        this.trace(sbCommonUtils.lang("CAPTURE", this.httpTask[aItem.id], aItem.title), 0);
     },
 
     onAllDownloadsComplete: function(aItem) {
         // restore downloaded file names
-        sbContentSaver.downloadRewriteFiles[aItem.id].forEach(function (data) {
+        this.downloadRewriteFiles[aItem.id].forEach(function (data) {
             var [file, charset] = data;
             var content = sbCommonUtils.readFile(file, charset);
-            content = sbContentSaver.restoreFileNameFromHash(content);
+            content = this.restoreFileNameFromHash(content);
             sbCommonUtils.writeFile(file, content, charset);
-        });
+        }, this);
 
         // fix resource settings after capture complete
-        // If it's an indepth capture, sbContentSaver.treeRes will be null for non-main documents,
+        // If it's an indepth capture, this.treeRes will be null for non-main documents,
         // and thus we don't have to update the resource for many times.
-        var res = sbContentSaver.treeRes;
+        var res = this.treeRes;
         if (res && sbDataSource.exists(res)) {
             sbDataSource.setProperty(res, "type", aItem.type);
-            if ( sbContentSaver.favicon ) {
-                aItem.icon = sbContentSaver.favicon;
+            if ( this.favicon ) {
+                aItem.icon = this.favicon;
             }
             // We replace the "urn:scrapbook-download:*" and skip adding "resource://" to prevent an issue
             // for URLs containing ":", such as "moz-icon://".
             if (aItem.icon) {
-                aItem.icon = sbContentSaver.restoreFileNameFromHash(aItem.icon);
+                aItem.icon = this.restoreFileNameFromHash(aItem.icon);
                 if (aItem.icon.indexOf(":") >= 0) {
                     var iconURL = aItem.icon;
                 } else {
@@ -1511,30 +1525,30 @@ var sbCaptureObserverCallback = {
             }
             sbCommonUtils.rebuildGlobal();
             sbCommonUtils.writeIndexDat(aItem);
+        }
 
-            if ( sbContentSaver.option["inDepth"] > 0 && sbContentSaver.linkURLs.length > 0 ) {
-                // inDepth capture for "capture-again-deep" is pre-disallowed by hiding the options
-                // and should never occur here
-                if ( !sbContentSaver.presetData || aContext == "capture-again" ) {
-                    sbContentSaver.item.type = "marked";
-                    var data = {
-                        urls: sbContentSaver.linkURLs,
-                        refUrl: sbContentSaver.refURLObj.spec,
-                        showDetail: false,
-                        resName: null,
-                        resIdx: 0,
-                        referItem: sbContentSaver.item,
-                        option: sbContentSaver.option,
-                        file2Url: sbContentSaver.file2URL,
-                        preset: null,
-                        titles: null,
-                        context: "indepth",
-                    };
-                    window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no", data);
-                } else {
-                    for ( var i = 0; i < sbContentSaver.linkURLs.length; i++ ) {
-                        sbCaptureTask.add(sbContentSaver.linkURLs[i], sbContentSaver.presetData[4] + 1);
-                    }
+        if ( this.option["inDepth"] > 0 && this.linkURLs.length > 0 ) {
+            // inDepth capture for "capture-again-deep" is pre-disallowed by hiding the options
+            // and should never occur here
+            if ( !this.presetData || this.context == "capture-again" ) {
+                this.item.type = "marked";
+                var data = {
+                    urls: this.linkURLs,
+                    refUrl: this.refURLObj.spec,
+                    showDetail: false,
+                    resName: null,
+                    resIdx: 0,
+                    referItem: this.item,
+                    option: this.option,
+                    file2Url: this.file2URL,
+                    preset: null,
+                    titles: null,
+                    context: "indepth",
+                };
+                window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no", data);
+            } else {
+                for ( var i = 0; i < this.linkURLs.length; i++ ) {
+                    sbCaptureTask.add(this.linkURLs[i], this.presetData[4] + 1);
                 }
             }
         }
@@ -1548,30 +1562,7 @@ var sbCaptureObserverCallback = {
     },
 
     onCaptureComplete: function(aItem) {
-        // aItem is the last item that is captured
-        // in a multiple capture it could be null 
-        if (aItem) {
-            if ( sbDataSource.getProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id), "type") == "marked" ) return;
-            if ( sbCommonUtils.getPref("notifyOnComplete", true) ) {
-                var icon = aItem.icon ? "resource://scrapbook/data/" + aItem.id + "/" + aItem.icon : sbCommonUtils.getDefaultIcon();
-                var title = "ScrapBook: " + sbCommonUtils.lang("CAPTURE_COMPLETE");
-                var text = sbCommonUtils.crop(aItem.title, null, 100);
-                var listener = {
-                    observe: function(subject, topic, data) {
-                        if (topic == "alertclickcallback")
-                            sbCommonUtils.loadURL("chrome://scrapbook/content/view.xul?id=" + data, true);
-                    }
-                };
-                var alertsSvc = Components.classes["@mozilla.org/alerts-service;1"].getService(Components.interfaces.nsIAlertsService);
-                alertsSvc.showAlertNotification(icon, title, text, true, aItem.id, listener);
-            }
-            if ( aItem.id in sbContentSaver.httpTask ) delete sbContentSaver.httpTask[aItem.id];
-        } else {
-            var icon = sbCommonUtils.getDefaultIcon();
-            var title = "ScrapBook: " + sbCommonUtils.lang("CAPTURE_COMPLETE");
-            var alertsSvc = Components.classes["@mozilla.org/alerts-service;1"].getService(Components.interfaces.nsIAlertsService);
-            alertsSvc.showAlertNotification(icon, title, null);
-        }
+        sbContentSaver.notifyCaptureComplete(aItem);
     },
 
 };

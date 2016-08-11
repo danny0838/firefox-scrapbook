@@ -255,7 +255,7 @@ var sbBrowserOverlay = {
         aTargetID = this.verifyTargetID(aTargetID);
         if ( !aTargetID ) return;
         var targetWindow = aFrameOnly ? sbCommonUtils.getFocusedWindow() : window.content;
-        var ret = sbContentSaver.captureWindow(targetWindow, aPartialEntire == 1, aShowDetail, aTargetID, 0, null);
+        var ret = sbContentSaver.captureWindow(targetWindow, aPartialEntire == 1, aShowDetail, aTargetID, 0, null, "capture", null);
         return ret;
     },
 
@@ -341,12 +341,7 @@ var sbBrowserOverlay = {
     },
 
     isSelected: function() {
-        var sel = sbCommonUtils.getFocusedWindow().getSelection().QueryInterface(Components.interfaces.nsISelectionPrivate);
-        var isSelected = false;
-        try {
-            isSelected = !(sel.anchorNode == sel.focusNode && sel.anchorOffset == sel.focusOffset);
-        } catch(ex) {}
-        return isSelected;
+        return !sbCommonUtils.getFocusedWindow().getSelection().isCollapsed;
     },
 
     handleEvent: function(event) {
@@ -528,7 +523,7 @@ var sbMenuHandler = {
         var win = gBrowser.getBrowserForTab(tab).contentWindow;
         if (win.location.href != "about:blank") {
             try {
-                sbContentSaver.captureWindow(win, false, false, aTargetID, 0, null);
+                sbContentSaver.captureWindow(win, false, false, aTargetID, 0, null, "capture", null);
             } catch(ex) {
             }
         }

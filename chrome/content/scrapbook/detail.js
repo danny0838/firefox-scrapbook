@@ -4,7 +4,7 @@ var sbCaptureOptions = {
     param: null,
 
     init: function() {
-        if ( !window.arguments || !("sbContentSaver" in window.opener) ) window.close();
+        if ( !window.arguments ) window.close();
         this.param = window.arguments[0];
         // load from preference
         document.getElementById("sbDetailOptionImages").checked = sbCommonUtils.getPref("capture.default.images", true);

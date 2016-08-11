@@ -995,6 +995,20 @@ var sbCommonUtils = {
         return tag + aContent + "</" + aNode.nodeName.toLowerCase() + ">\n";
     },
 
+    // Node.remove() is supported since Firefox >= 23.0
+    removeNode: function(aNode) {
+        return aNode.parentNode.removeChild(aNode);
+    },
+
+    doctypeToString: function(aDoctype) {
+        if ( !aDoctype ) return "";
+        var ret = "<!DOCTYPE " + aDoctype.name;
+        if ( aDoctype.publicId ) ret += ' PUBLIC "' + aDoctype.publicId + '"';
+        if ( aDoctype.systemId ) ret += ' "'        + aDoctype.systemId + '"';
+        ret += ">\n";
+        return ret;
+    },
+
     /**
      * DOM elements considered as ScrapBook additional
      *

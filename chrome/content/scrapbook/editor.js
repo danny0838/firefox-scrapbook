@@ -229,15 +229,8 @@ var sbPageEditor = {
     },
 
     getSelection: function(aWindow) {
-        var selText = aWindow.getSelection();
-        var sel = selText.QueryInterface(Components.interfaces.nsISelectionPrivate);
-        var isSelected = false;
-        try {
-            isSelected = ( sel.anchorNode == sel.focusNode && sel.anchorOffset == sel.focusOffset ) ? false : true;
-        } catch(ex) {
-            isSelected = false;
-        }
-        return isSelected ? sel : false;
+        var sel = aWindow.getSelection();
+        return !sel.isCollapsed ? sel : false;
     },
 
     getSelectionHTML: function(aSelection) {
@@ -470,7 +463,7 @@ var sbPageEditor = {
             }
             this.documentBeforeSave(doc);
             var rootNode = doc.getElementsByTagName("html")[0];
-            var src = sbContentSaver.doctypeToString(doc.doctype) + sbCommonUtils.surroundByTags(rootNode, rootNode.innerHTML);
+            var src = sbCommonUtils.doctypeToString(doc.doctype) + sbCommonUtils.surroundByTags(rootNode, rootNode.innerHTML);
             var file = sbCommonUtils.convertURLToFile(doc.location.href);
             sbCommonUtils.writeFile(file, src, charset);
             this.documentAfterSave(doc);
@@ -546,7 +539,7 @@ var sbPageEditor = {
     },
 
     removeStyle: function(aWindow, aID) {
-        try { sbContentSaver.removeNodeFromParent(aWindow.document.getElementById(aID)); } catch(ex) {}
+        try { sbCommonUtils.removeNode(aWindow.document.getElementById(aID)); } catch(ex) {}
     },
 
     documentBeforeEdit: function(aDoc) {
@@ -571,7 +564,7 @@ var sbPageEditor = {
         for ( var i = nodes.length - 1; i >= 0 ; i-- ) {
             var node = nodes[i];
             if ( sbCommonUtils.getSbObjectType(node) == "stylesheet-temp") {
-                sbContentSaver.removeNodeFromParent(node);
+                sbCommonUtils.removeNode(node);
             }
         }
         // record the status of todo form elements

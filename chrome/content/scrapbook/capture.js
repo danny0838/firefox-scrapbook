@@ -1,4 +1,5 @@
 
+var gContentSaver = new sbContentSaverClass();
 var gURLs = [];
 var gDepths = [];
 var gRefURL = "";
@@ -174,7 +175,7 @@ function SB_suggestName(aURL) {
 
 function SB_fireNotification(aItem) {
     var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
-    win.sbCaptureObserverCallback.onCaptureComplete(aItem);
+    win.sbContentSaver.notifyCaptureComplete(aItem);
 }
 
 
@@ -750,7 +751,7 @@ var sbInvisibleBrowser = {
         sbCaptureTask.toggleSkipButton(false);
         var preset = gReferItem ? [gReferItem.id, SB_suggestName(this.ELEMENT.currentURI.spec), gOption, gFile2URL, gDepths[sbCaptureTask.index]] : null;
         if ( gPreset ) preset = gPreset;
-        var ret = sbContentSaver.captureWindow(this.ELEMENT.contentWindow, false, gShowDetail, gResName, gResIdx, preset, gContext, gTitles[sbCaptureTask.index]);
+        var ret = gContentSaver.captureWindow(this.ELEMENT.contentWindow, false, gShowDetail, gResName, gResIdx, preset, gContext, gTitles[sbCaptureTask.index]);
         if ( ret ) {
             if ( gContext == "indepth" ) {
                 gURL2Name[sbCaptureTask.URL] = ret[0];
@@ -884,7 +885,7 @@ var sbCrossLinker = {
             }
             if ( shouldSave ) {
                 var rootNode = doc.getElementsByTagName("html")[0];
-                var src = sbContentSaver.doctypeToString(doc.doctype) + sbCommonUtils.surroundByTags(rootNode, rootNode.innerHTML);
+                var src = sbCommonUtils.doctypeToString(doc.doctype) + sbCommonUtils.surroundByTags(rootNode, rootNode.innerHTML);
                 var file = sbCommonUtils.getContentDir(gReferItem.id);
                 file.append(sbCommonUtils.getFileName(doc.location.href));
                 sbCommonUtils.writeFile(file, src, doc.characterSet);
@@ -1074,7 +1075,7 @@ sbHeaderSniffer.prototype = {
             sbInvisibleBrowser.load(this.URLSpec);
         } else if (gContext == "link") {
             // capture as file for link capture 
-            sbContentSaver.captureFile(this.URLSpec, gRefURL ? gRefURL : sbCaptureTask.URL, "file", gShowDetail, gResName, gResIdx, null, gContext);
+            gContentSaver.captureFile(this.URLSpec, gRefURL ? gRefURL : sbCaptureTask.URL, "file", gShowDetail, gResName, gResIdx, null, gContext);
         } else if (gContext == "indepth") {
             // in an indepth capture, files with defined extensions are pre-processed and is not send to the URL list
             // those who go here are undefined files, and should be skipped
@@ -1099,11 +1100,11 @@ sbHeaderSniffer.prototype = {
 
 
 
-sbCaptureObserverCallback.trace = function(aText) {
+gContentSaver.trace = function(aText) {
     SB_trace(aText);
 };
 
-sbCaptureObserverCallback.onCaptureComplete = function(aItem) {
+gContentSaver.onCaptureComplete = function(aItem) {
     if ( gContext != "indepth" && gURLs.length == 1 ) SB_fireNotification(aItem);
     if ( gContext == "capture-again" || gContext == "capture-again-deep" ) {
         sbCrossLinker.forceReloading(gPreset[0], gPreset[1]);

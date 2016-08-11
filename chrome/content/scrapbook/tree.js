@@ -445,7 +445,7 @@ var sbTreeHandler = {
     _captureInternal: function(ip, showDetail, partial) {
         var targetWindow = partial ? sbCommonUtils.getFocusedWindow() : window.top.content;
         window.top.sbContentSaver.captureWindow(
-            targetWindow, partial, showDetail, ip[0], ip[1], null
+            targetWindow, partial, showDetail, ip[0], ip[1], null, "capture", null
         );
     },
 
