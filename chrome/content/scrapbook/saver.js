@@ -1103,18 +1103,24 @@ sbContentSaverClass.prototype = {
                                         return;
                                     }
                                 }
+                                // special: use cssText
+                                if (aSpecialMode == "cssText") {
+                                    // use a dummy sourceDoc "cssText" as key to prevent a normal file used the same URL
+                                    [fileName, isDuplicate] = that.getUniqueFileName(fileName, sourceURL, "cssText");
+                                    that.downloadRewriteMap[that.item.id][hashKey] = that.escapeURL(fileName, aEscapeType, true);
+                                    if (!isDuplicate) {
+                                        var targetFile = targetDir.clone(); targetFile.append(fileName);
+                                        sbCommonUtils.writeFile(targetFile, aSpecialModeParams.cssText, "UTF-8");
+                                        that.downloadRewriteFiles[that.item.id].push([targetFile, "UTF-8"]);
+                                    }
+                                    this._skipped = true;
+                                    channel.cancel(Components.results.NS_BINDING_ABORTED);
+                                    return;
+                                }
                                 // determine the filename and check for duplicate
                                 [fileName, isDuplicate] = that.getUniqueFileName(fileName, sourceURL);
                                 that.downloadRewriteMap[that.item.id][hashKey] = that.escapeURL(fileName, aEscapeType, true);
                                 if (isDuplicate) {
-                                    this._skipped = true;
-                                    channel.cancel(Components.results.NS_BINDING_ABORTED);
-                                }
-                                // special: use cssText
-                                if (aSpecialMode == "cssText") {
-                                    var targetFile = targetDir.clone(); targetFile.append(fileName);
-                                    sbCommonUtils.writeFile(targetFile, aSpecialModeParams.cssText, "UTF-8");
-                                    that.downloadRewriteFiles[that.item.id].push([targetFile, "UTF-8"]);
                                     this._skipped = true;
                                     channel.cancel(Components.results.NS_BINDING_ABORTED);
                                 }
@@ -1184,6 +1190,15 @@ sbContentSaverClass.prototype = {
                 if (sbCommonUtils.compareFiles(sourceFile, targetFile)) {
                     return that.escapeURL(fileName, aEscapeType, true);
                 }
+                // special: use cssText
+                if (aSpecialMode == "cssText") {
+                    // use a dummy sourceDoc "cssText" as key to prevent a normal file used the same URL
+                    [fileName, isDuplicate] = that.getUniqueFileName(fileName, sourceURL, "cssText");
+                    if (isDuplicate) return that.escapeURL(fileName, aEscapeType, true);
+                    sbCommonUtils.writeFile(targetFile, aSpecialModeParams.cssText, "UTF-8");
+                    that.downloadRewriteFiles[that.item.id].push([targetFile, "UTF-8"]);
+                    return that.escapeURL(fileName, aEscapeType, true);
+                }
                 // check for duplicate
                 [fileName, isDuplicate] = that.getUniqueFileName(fileName, sourceURL);
                 if (isDuplicate) return that.escapeURL(fileName, aEscapeType, true);
@@ -1191,12 +1206,6 @@ sbContentSaverClass.prototype = {
                 that.httpTask[that.item.id]++;
                 var item = that.item;
                 setTimeout(function(){ that.onDownloadComplete(item); }, 0);
-                // special: use cssText
-                if (aSpecialMode == "cssText") {
-                    sbCommonUtils.writeFile(targetFile, aSpecialModeParams.cssText, "UTF-8");
-                    that.downloadRewriteFiles[that.item.id].push([targetFile, "UTF-8"]);
-                    return that.escapeURL(fileName, aEscapeType, true);
-                }
                 // do the copy
                 sourceFile.copyTo(targetDir, fileName);
                 return that.escapeURL(fileName, aEscapeType, true);
