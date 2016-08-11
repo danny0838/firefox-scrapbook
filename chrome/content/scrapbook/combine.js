@@ -435,12 +435,12 @@ var sbPageCombiner = {
             divHTML.setAttribute(attrs[i].name, attrs[i].value);
         }
         divHTML.id = "item" + sbCombineService.curID + "html";
-        divHTML = sbCommonUtils.surroundByTags(divHTML, "\n" + divBody + "\n");
+        divHTML = sbCommonUtils.surroundByTags(divHTML, divBody);
 
         var divWrap = this.BROWSER.contentDocument.createElement("DIV");
         divWrap.id = "item" + sbCombineService.curID;
         divWrap.style.position = "relative";
-        return sbCommonUtils.surroundByTags(divWrap, divHTML + "\n");
+        return sbCommonUtils.surroundByTags(divWrap, divHTML);
     },
 
     surroundDOMCombined: function() {
