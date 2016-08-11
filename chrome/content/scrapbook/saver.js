@@ -40,6 +40,7 @@ var sbContentSaver = {
 
 function sbContentSaverClass() {
     this.option = {};
+    this.context = null;
     this.documentName = "";
     this.item = null;
     this.favicon = null;
@@ -128,6 +129,7 @@ sbContentSaverClass.prototype = {
     captureWindow: function(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData, aContext, aTitle) {
         this.init(aPresetData);
         this.option["isPartial"] = aIsPartial;
+        this.context = aContext;
         this.item.chars = this.option["forceUtf8"] ? "UTF-8" : aRootWindow.document.characterSet;
         this.item.source = aRootWindow.location.href;
         //Favicon der angezeigten Seite bestimmen (Unterscheidung zwischen FF2 und FF3 notwendig!)
@@ -178,6 +180,7 @@ sbContentSaverClass.prototype = {
 
     captureFile: function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext) {
         this.init(aPresetData);
+        this.context = aContext;
         this.item.title = sbCommonUtils.getFileName(aSourceURL);
         this.item.icon = "moz-icon://" + this.escapeURL(this.item.title, null, true) + "?size=16";
         this.item.source = aSourceURL;
@@ -201,7 +204,7 @@ sbContentSaverClass.prototype = {
             titles: aTitles || [this.item.title],
             resURI: aResURI,
             result: 1,
-            context: aContext || "capture"
+            context: aContext
         };
         window.openDialog("chrome://scrapbook/content/detail.xul", "", "chrome,modal,centerscreen,resizable", ret);
         return ret;
@@ -1517,30 +1520,30 @@ sbContentSaverClass.prototype = {
             }
             sbCommonUtils.rebuildGlobal();
             sbCommonUtils.writeIndexDat(aItem);
+        }
 
-            if ( this.option["inDepth"] > 0 && this.linkURLs.length > 0 ) {
-                // inDepth capture for "capture-again-deep" is pre-disallowed by hiding the options
-                // and should never occur here
-                if ( !this.presetData || aContext == "capture-again" ) {
-                    this.item.type = "marked";
-                    var data = {
-                        urls: this.linkURLs,
-                        refUrl: this.refURLObj.spec,
-                        showDetail: false,
-                        resName: null,
-                        resIdx: 0,
-                        referItem: this.item,
-                        option: this.option,
-                        file2Url: this.file2URL,
-                        preset: null,
-                        titles: null,
-                        context: "indepth",
-                    };
-                    window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no", data);
-                } else {
-                    for ( var i = 0; i < this.linkURLs.length; i++ ) {
-                        sbCaptureTask.add(this.linkURLs[i], this.presetData[4] + 1);
-                    }
+        if ( this.option["inDepth"] > 0 && this.linkURLs.length > 0 ) {
+            // inDepth capture for "capture-again-deep" is pre-disallowed by hiding the options
+            // and should never occur here
+            if ( !this.presetData || this.context == "capture-again" ) {
+                this.item.type = "marked";
+                var data = {
+                    urls: this.linkURLs,
+                    refUrl: this.refURLObj.spec,
+                    showDetail: false,
+                    resName: null,
+                    resIdx: 0,
+                    referItem: this.item,
+                    option: this.option,
+                    file2Url: this.file2URL,
+                    preset: null,
+                    titles: null,
+                    context: "indepth",
+                };
+                window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no", data);
+            } else {
+                for ( var i = 0; i < this.linkURLs.length; i++ ) {
+                    sbCaptureTask.add(this.linkURLs[i], this.presetData[4] + 1);
                 }
             }
         }
