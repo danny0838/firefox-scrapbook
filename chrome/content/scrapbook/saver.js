@@ -1160,6 +1160,9 @@ sbContentSaverClass.prototype = {
                             that.onDownloadComplete(that.item);
                         },
                         onDataAvailable: function (aRequest, aContext, aInputStream, aOffset, aCount) {
+                            // Sometimes channel.cancel cannot terminate the data transfter.
+                            // We add a check here to avoid a skipped file be downloaded.
+                            if (this._skipped) return;
                             try {
                                 if (!this._stream) {
                                     this._file = targetDir.clone(); this._file.append(fileName);
