@@ -674,28 +674,22 @@ sbContentSaverClass.prototype = {
                 }
                 break;
             case "link": 
-                // gets "" if rel attribute not defined
-                switch ( aNode.rel.toLowerCase() ) {
-                    case "stylesheet":
+                // we are only interested in those with href
+                if ( aNode.hasAttribute("href") ) {
+                    if ( this.option["internalize"] ) break;
+                    // gets "" if rel attribute not defined
+                    var rels = aNode.rel.toLowerCase().split(/[ \t\r\n\v\f]+/);
+                    if (rels.indexOf("stylesheet") >= 0) {
                         // stylesheets should already been processed now
-                        break;
-                    case "shortcut icon":
-                    case "icon":
-                        if ( aNode.hasAttribute("href") ) {
-                            if ( this.option["internalize"] ) break;
-                            var fileName = this.download(aNode.href);
-                            if (fileName) {
-                                aNode.setAttribute("href", fileName);
-                                if ( this.isMainFrame && !this.favicon ) this.favicon = fileName;
-                            }
+                    } else if (rels.indexOf("icon") >= 0) {
+                        var fileName = this.download(aNode.href);
+                        if (fileName) {
+                            aNode.setAttribute("href", fileName);
+                            if ( this.isMainFrame && !this.favicon ) this.favicon = fileName;
                         }
-                        break;
-                    default:
-                        if ( aNode.hasAttribute("href") ) {
-                            if ( this.option["internalize"] ) break;
-                            aNode.setAttribute("href", aNode.href);
-                        }
-                        break;
+                    } else {
+                        aNode.setAttribute("href", aNode.href);
+                    }
                 }
                 break;
             case "base": 

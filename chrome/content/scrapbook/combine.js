@@ -573,7 +573,7 @@ var sbPageCombiner = {
     inspectNode: function(aNode) {
         switch ( aNode.nodeName.toLowerCase() ) {
             case "link": 
-                if ( aNode.rel.toLowerCase() == "stylesheet") {
+                if ( aNode.rel.toLowerCase().split(/[ \t\r\n\v\f]+/).indexOf("stylesheet") >= 0 ) {
                     // link tags in the body element is unusual
                     // styles should already be processed
                     // in sbPageCombiner.exec => surroundCSS => processCSSRecursively
