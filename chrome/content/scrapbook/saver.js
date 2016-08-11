@@ -607,7 +607,7 @@ sbContentSaverClass.prototype = {
                 if ( this.option["media"] && !this.option["script"] ) {
                     var canvasOrig = this.canvases[aNode.getAttribute("data-sb-canvas-id")];
                     var canvasScript = aNode.ownerDocument.createElement("script");
-                    canvasScript.textContent = "(" + this.setCanvasData.toString().replace(/\s+/g, " ") + ")('" + canvasOrig.toDataURL() + "')";
+                    canvasScript.textContent = '(' + this.setCanvasData.toString().replace(/\s+/g, ' ') + ')("' + canvasOrig.toDataURL() + '")';
                     aNode.parentNode.insertBefore(canvasScript, aNode.nextSibling);
                 }
                 aNode.removeAttribute("data-sb-canvas-id");
@@ -925,7 +925,7 @@ sbContentSaverClass.prototype = {
       var scripts = document.getElementsByTagName("script");
       var script = scripts[scripts.length-1], canvas = script.previousSibling;
       var img = new Image();
-      img.onload = function(){ canvas.getContext('2d').drawImage(img, 0, 0); };
+      img.onload = function(){ canvas.getContext("2d").drawImage(img, 0, 0); };
       img.src = data;
       script.parentNode.removeChild(script);
     },
