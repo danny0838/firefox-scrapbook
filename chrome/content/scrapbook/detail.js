@@ -47,14 +47,7 @@ var sbCaptureOptions = {
     // hiding/unhiding the elem does not automatically update XUL window height
     // so we must do it on out own :(
     updateScriptWarning: function() {
-        var elem = document.getElementById("sbDetailWarnAboutScript");
-        var oldHidden = elem.hidden;
-        var newHidden = !document.getElementById("sbDetailOptionScript").checked;
-        if (oldHidden != newHidden) {
-            elem.hidden = newHidden;
-            var offset = parseInt(elem.getAttribute("offset"), 10);
-            newHidden ? window.outerHeight -= offset : window.outerHeight += offset;
-        }
+        document.getElementById("sbDetailWarnAboutScript").hidden = !document.getElementById("sbDetailOptionScript").checked;
     },
 
     resetDownLinkFilters: function() {
