@@ -531,7 +531,7 @@ sbContentSaverClass.prototype = {
             case "audio":
             case "video":
                 if ( aNode.hasAttribute("src") ) {
-                    if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
+                    if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("src")) ) break;
                     var url = aNode.src;
                     if ( this.option["media"] ) {
                         var fileName = this.download(url);
@@ -545,7 +545,7 @@ sbContentSaverClass.prototype = {
                 break;
             case "source":  // in <picture>, <audio> and <video>
                 if ( aNode.hasAttribute("src") ) {
-                    if ( this.option["internalize"] && aNode.getAttribute("src").indexOf("://") == -1 ) break;
+                    if ( this.option["internalize"] && this.isInternalized(aNode.getAttribute("src")) ) break;
                     var url = aNode.src;
                     var type = (this.getSourceParentType(aNode) === "picture") ? "images" : "media";
                     if ( this.option[type] ) {
