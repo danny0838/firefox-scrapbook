@@ -74,7 +74,7 @@ sbContentSaverClass.prototype = {
             "script": sbCommonUtils.getPref("capture.default.script", false),
             "asHtml": sbCommonUtils.getPref("capture.default.asHtml", false),
             "forceUtf8": sbCommonUtils.getPref("capture.default.forceUtf8", true),
-            "rewriteStyles": sbCommonUtils.getPref("capture.default.rewriteStyles", true),
+            "tidyCSS": sbCommonUtils.getPref("capture.default.tidyCSS", true),
             "keepLink": sbCommonUtils.getPref("capture.default.keepLink", false),
             "saveDataURI": sbCommonUtils.getPref("capture.default.saveDataURI", false),
             "serializeFilename": sbCommonUtils.getPref("capture.default.serializeFilename", false),
@@ -360,7 +360,7 @@ sbContentSaverClass.prototype = {
                     // a special stylesheet used by scrapbook, keep it intact
                     return;
                 } else if ( this.option["styles"] || this.option["keepLink"] ) {
-                    if ( this.option["rewriteStyles"] ) {
+                    if ( this.option["tidyCSS"] ) {
                         // preserve <style> if option["keepLink"] == true even if option["styles"] == false
                         // since it makes less sense to preserve <link>s but remove <style>s
                         var cssText = this.processCSSRules(css, this.refURLObj.spec, aDocument, "");
@@ -384,7 +384,7 @@ sbContentSaverClass.prototype = {
                     // a special stylesheet used by scrapbook or other addons/programs, keep it intact
                     return;
                 } else if ( this.option["styles"] ) {
-                    if ( this.option["rewriteStyles"] ) {
+                    if ( this.option["tidyCSS"] ) {
                         var cssText = this.processCSSRules(css, url, aDocument, "");
                         cssText = "/* Code tidied up by ScrapBook */\n" + cssText;
                         var fileName = this.download(url, "quote", "cssText", { cssText: cssText });

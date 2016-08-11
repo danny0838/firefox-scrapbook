@@ -107,7 +107,7 @@ pref("extensions.scrapbook.capture.default.styles", true);
 pref("extensions.scrapbook.capture.default.script", false);
 pref("extensions.scrapbook.capture.default.asHtml", false);
 pref("extensions.scrapbook.capture.default.forceUtf8", true);
-pref("extensions.scrapbook.capture.default.rewriteStyles", true);
+pref("extensions.scrapbook.capture.default.tidyCSS", true);
 pref("extensions.scrapbook.capture.default.keepLink", false);
 pref("extensions.scrapbook.capture.default.saveDataURI", false);
 pref("extensions.scrapbook.capture.default.serializeFilename", false);

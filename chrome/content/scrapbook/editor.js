@@ -2763,7 +2763,7 @@ var sbInfoViewer = {
             "script": true,
             "asHtml": false,
             "forceUtf8": false,
-            "rewriteStyles": false,
+            "tidyCSS": false,
             "internalize": refFile,
         };
         var preset = [

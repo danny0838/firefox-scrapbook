@@ -42,7 +42,7 @@ function SB_trace(aMessage) {
                              script:
                              asHtml:
                              forceUtf8:
-                             rewriteStyles:
+                             tidyCSS:
                              keepLink:
                              dlimg:
                              dlsnd:
