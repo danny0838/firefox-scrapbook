@@ -229,15 +229,8 @@ var sbPageEditor = {
     },
 
     getSelection: function(aWindow) {
-        var selText = aWindow.getSelection();
-        var sel = selText.QueryInterface(Components.interfaces.nsISelectionPrivate);
-        var isSelected = false;
-        try {
-            isSelected = ( sel.anchorNode == sel.focusNode && sel.anchorOffset == sel.focusOffset ) ? false : true;
-        } catch(ex) {
-            isSelected = false;
-        }
-        return isSelected ? sel : false;
+        var sel = aWindow.getSelection();
+        return !sel.isCollapsed ? sel : false;
     },
 
     getSelectionHTML: function(aSelection) {

@@ -341,12 +341,7 @@ var sbBrowserOverlay = {
     },
 
     isSelected: function() {
-        var sel = sbCommonUtils.getFocusedWindow().getSelection().QueryInterface(Components.interfaces.nsISelectionPrivate);
-        var isSelected = false;
-        try {
-            isSelected = !(sel.anchorNode == sel.focusNode && sel.anchorOffset == sel.focusOffset);
-        } catch(ex) {}
-        return isSelected;
+        return !sbCommonUtils.getFocusedWindow().getSelection().isCollapsed;
     },
 
     handleEvent: function(event) {
