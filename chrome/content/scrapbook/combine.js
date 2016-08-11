@@ -322,6 +322,7 @@ var sbPageCombiner = {
     htmlSrc: "",
     cssText: "",
     isTargetCombined: false,
+    baseURI: "",
     htmlId: "",
     bodyId: "",
     refreshHash: null,
@@ -344,6 +345,9 @@ var sbPageCombiner = {
         }
 
         this.isTargetCombined = false;
+        var anchor = this.BROWSER.contentDocument.createElement("A");
+        anchor.href = "";
+        this.baseURI = anchor.href;
         if ( sbCombineService.index == 0 ) {
             if (!sbCombineService.option["T"]) {
                 sbCombineService.option["T"] = sbDataSource.getProperty(sbCombineService.curRes, "title");
@@ -464,7 +468,7 @@ var sbPageCombiner = {
         if (aCSS.ownerNode && sbCommonUtils.getSbObjectType(aCSS.ownerNode) == "stylesheet") return "";
         // a special stylesheet used by scrapbook or other addons/programs, skip parsing it
         if (aCSS.href && aCSS.href.startsWith("chrome:")) return "";
-        var content = this.processCSSRules(aCSS, this.BROWSER.currentURI.spec, "");
+        var content = this.processCSSRules(aCSS, this.baseURI, "");
         var media = aCSS.media.mediaText;
         if (media) {
             // omit "all" since it's defined in the link tag
@@ -626,14 +630,14 @@ var sbPageCombiner = {
                 break;
         }
         if ( aNode.style && aNode.style.cssText ) {
-            var newCSStext = this.inspectCSSText(aNode.style.cssText, this.BROWSER.currentURI.spec);
+            var newCSStext = this.inspectCSSText(aNode.style.cssText, this.baseURI);
             if ( newCSStext ) aNode.setAttribute("style", newCSStext);
         }
     },
 
     setAbsoluteURL: function(aNode, aAttr) {
         if ( aNode.getAttribute(aAttr) ) {
-            aNode.setAttribute(aAttr, sbCommonUtils.resolveURL(this.BROWSER.currentURI.spec, aNode.getAttribute(aAttr)));
+            aNode.setAttribute(aAttr, sbCommonUtils.resolveURL(this.baseURI, aNode.getAttribute(aAttr)));
         }
         return aNode;
     },
