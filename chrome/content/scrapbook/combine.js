@@ -578,7 +578,8 @@ var sbPageCombiner = {
                     // styles should already be processed
                     // in sbPageCombiner.exec => surroundCSS => processCSSRecursively
                     // just discard it here so that it never appear in the combined page
-                    return sbCommonUtils.removeNode(aNode);
+                    sbCommonUtils.removeNode(aNode);
+                    return;
                 }
                 break;
             case "style":
@@ -586,7 +587,8 @@ var sbPageCombiner = {
                 // styles should already be processed
                 // in sbPageCombiner.exec => surroundCSS => processCSSRecursively
                 // just discard it here so that it never appear in the combined page
-                return sbCommonUtils.removeNode(aNode);
+                sbCommonUtils.removeNode(aNode);
+                return;
                 break;
             case "body": 
                 // move body specific attributes into inline styles so that it can be transfered to div
@@ -627,7 +629,6 @@ var sbPageCombiner = {
             var newCSStext = this.inspectCSSText(aNode.style.cssText, this.BROWSER.currentURI.spec);
             if ( newCSStext ) aNode.setAttribute("style", newCSStext);
         }
-        return aNode;
     },
 
     setAbsoluteURL: function(aNode, aAttr) {

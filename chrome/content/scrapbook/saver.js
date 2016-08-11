@@ -671,7 +671,8 @@ sbContentSaverClass.prototype = {
                                 // capturing styles with rewrite, the style should be already processed
                                 // in saveDocumentInternal => processCSSRecursively
                                 // remove it here with safety
-                                return sbCommonUtils.removeNode(aNode);
+                                sbCommonUtils.removeNode(aNode);
+                                return;
                             } else if ( this.option["styles"] && !this.option["rewriteStyles"] ) {
                                 // capturing styles with no rewrite, download it and rewrite the link
                                 var fileName = this.download(url);
@@ -715,12 +716,14 @@ sbContentSaverClass.prototype = {
                     // a special stylesheet used by scrapbook, keep it intact
                 } else if ( !this.option["styles"] && !this.option["keepLink"] ) {
                     // not capturing styles, remove it
-                    return sbCommonUtils.removeNode(aNode);
+                    sbCommonUtils.removeNode(aNode);
+                    return;
                 } else if ( this.option["rewriteStyles"] ) {
                     // capturing styles with rewrite, the styles should be already processed
                     // in saveDocumentInternal => processCSSRecursively
                     // remove it here with safety
-                    return sbCommonUtils.removeNode(aNode);
+                    sbCommonUtils.removeNode(aNode);
+                    return;
                 }
                 break;
             case "script": 
@@ -732,7 +735,8 @@ sbContentSaverClass.prototype = {
                         if (fileName) aNode.setAttribute("src", fileName);
                     }
                 } else {
-                    return sbCommonUtils.removeNode(aNode);
+                    sbCommonUtils.removeNode(aNode);
+                    return;
                 }
                 break;
             case "a": 
@@ -896,7 +900,6 @@ sbContentSaverClass.prototype = {
             // other specific
             aNode.removeAttribute("contextmenu");
         }
-        return aNode;
     },
 
     // replaceFunc = function (url) { return ...; }
