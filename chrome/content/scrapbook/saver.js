@@ -704,7 +704,6 @@ sbContentSaverClass.prototype = {
                 }
                 break;
             case "script": 
-            case "noscript": 
                 if ( this.option["script"] ) {
                     if ( aNode.hasAttribute("src") ) {
                         if ( this.option["internalize"] ) break;
