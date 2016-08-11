@@ -229,7 +229,9 @@ sbContentSaverClass.prototype = {
         // frames could have ridiculous malformed location.href, such as "javascript:foo.bar"
         // in this case catch the error and this.refURLObj should remain original (the parent frame)
         try {
-            this.refURLObj = sbCommonUtils.convertURLToObject(aDocument.location.href);
+            var elem = aDocument.createElement("A");
+            elem.href = "";
+            this.refURLObj = sbCommonUtils.convertURLToObject(elem.href);
         } catch(ex) {
         }
 
