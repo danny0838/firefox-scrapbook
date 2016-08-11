@@ -58,6 +58,7 @@ function sbContentSaverClass() {
     this.linkURLs = [];
     this.elemMapKey = "data-sb-id-" + Date.now();
     this.elemMapOrig = [];
+    this.elemMapClone = [];
 }
 
 sbContentSaverClass.prototype = {
@@ -103,6 +104,7 @@ sbContentSaverClass.prototype = {
         this.file2Doc = {};
         this.linkURLs = [];
         this.elemMapOrig = [];
+        this.elemMapClone = [];
         this.presetData = aPresetData;
         if ( aPresetData ) {
             if ( aPresetData[0] ) this.item.id = aPresetData[0];
@@ -247,15 +249,11 @@ sbContentSaverClass.prototype = {
             }
         }
 
-        if ( this.option["rewriteStyles"] ) {
-            var [myCSSFileName] = this.getUniqueFileName(aFileKey + ".css", this.refURLObj.spec, aDocument);
-        }
-
         var htmlNode = aDocument.documentElement;
         // cloned frames has contentDocument = null
         // cloned canvas has no image data
         // give them an unique id for later retrieving
-        Array.prototype.forEach.call(htmlNode.querySelectorAll("frame, iframe, canvas"), function (elem) {
+        Array.prototype.forEach.call(htmlNode.querySelectorAll("frame, iframe, canvas, link, style"), function (elem) {
             var idx = this.elemMapOrig.length;
             this.elemMapOrig[idx] = elem;
             elem.setAttribute(this.elemMapKey, idx);
@@ -338,35 +336,84 @@ sbContentSaverClass.prototype = {
                 rootNode.insertBefore(aDocument.createTextNode("\n"), headNode.nextSibling);
             }
         }
+
+        // build the map of cloned style elements
+        Array.prototype.forEach.call(rootNode.querySelectorAll("link, style"), function (elem) {
+            var idx = elem.getAttribute(this.elemMapKey);
+            this.elemMapClone[idx] = elem;
+            elem.removeAttribute(this.elemMapKey);
+        }, this);
+
+        // process internal (style) and external (link) CSS
+        Array.prototype.forEach.call(aDocument.styleSheets, function(css){
+            var nodeOrig = css.ownerNode;
+            var node = this.elemMapClone[nodeOrig.getAttribute(this.elemMapKey)];
+
+            // this css node is out of the capture range
+            if (!node) return;
+
+            // do not rewrite CSS during an internalize
+            if (this.option["internalize"]) return;
+
+            if (node.nodeName == "STYLE") {
+                if ( sbCommonUtils.getSbObjectType(node) == "stylesheet" ) {
+                    // a special stylesheet used by scrapbook, keep it intact
+                    return;
+                } else if ( this.option["styles"] || this.option["keepLink"] ) {
+                    if ( this.option["rewriteStyles"] ) {
+                        // preserve <style> if option["keepLink"] == true even if option["styles"] == false
+                        // since it makes less sense to preserve <link>s but remove <style>s
+                        var cssText = this.processCSSRules(css, this.refURLObj.spec, aDocument, "");
+                        cssText = "\n/* Code tidied up by ScrapBook */\n" + cssText;
+                        node.textContent = cssText;
+                    } else {
+                        // keep the styles as-is
+                    }
+                } else {
+                    // not capturing styles, remove it
+                    if (node.textContent) node.textContent = "/* Code removed by ScrapBook */";
+                    return;
+                }
+            } else if (node.nodeName == "LINK") {
+                var url = css.href;
+                if ( sbCommonUtils.getSbObjectType(node) == "stylesheet" ) {
+                    // a special stylesheet used by scrapbook, keep it intact
+                    // (it should use an absolute link or a chrome link, which don't break after capture)
+                    return;
+                } else if ( url.startsWith("chrome:") ) {
+                    // a special stylesheet used by scrapbook or other addons/programs, keep it intact
+                    return;
+                } else if ( this.option["styles"] ) {
+                    if ( this.option["rewriteStyles"] ) {
+                        var cssText = this.processCSSRules(css, url, aDocument, "");
+                        cssText = "/* Code tidied up by ScrapBook */\n" + cssText;
+                        var fileName = this.download(url, "quote", "cssText", { cssText: cssText });
+                        if (fileName) node.setAttribute("href", fileName);
+                    } else {
+                        var fileName = this.download(url, null);
+                        if (fileName) node.setAttribute("href", fileName);
+                    }
+                } else if ( this.option["keepLink"] ) {
+                    // link to the source css file
+                    node.setAttribute("href", url);
+                } else {
+                    // not capturing styles, set it blank
+                    node.setAttribute("href", this.getSkippedURL(url));
+                }
+            }
+        }, this);
+
         // remove the temporary mapping key
         this.elemMapOrig.forEach(function (elem) {
             if (!sbCommonUtils.isDeadObject(elem)) {
                 elem.removeAttribute(this.elemMapKey);
             }
         }, this);
+
         // process HTML DOM
         Array.prototype.forEach.call(rootNode.querySelectorAll("*"), function(curNode){
             this.inspectNode(curNode, rootNode);
         }, this);
-
-        // process all inline and link CSS, will merge them into index.css later
-        var myCSS = "";
-        if ( (this.option["styles"] || this.option["keepLink"]) && this.option["rewriteStyles"] ) {
-            var myStyleSheets = aDocument.styleSheets;
-            for ( var i=0; i<myStyleSheets.length; i++ ) {
-                myCSS += this.processCSSRecursively(myStyleSheets[i], aDocument);
-            }
-            if ( myCSS ) {
-                var newLinkNode = aDocument.createElement("link");
-                newLinkNode.setAttribute("media", "all");
-                newLinkNode.setAttribute("href", myCSSFileName);
-                newLinkNode.setAttribute("type", "text/css");
-                newLinkNode.setAttribute("rel", "stylesheet");
-                headNode.appendChild(aDocument.createTextNode("\n"));
-                headNode.appendChild(newLinkNode);
-                headNode.appendChild(aDocument.createTextNode("\n"));
-            }
-        }
 
         // change the charset to UTF-8
         // also change the meta tag; generate one if none found
@@ -403,12 +450,6 @@ sbContentSaverClass.prototype = {
         }
         sbCommonUtils.writeFile(myHTMLFile, myHTML, charset);
         this.downloadRewriteFiles[this.item.id].push([myHTMLFile, charset]);
-        if ( myCSS ) {
-            var myCSSFile = this.contentDir.clone();
-            myCSSFile.append(myCSSFileName);
-            sbCommonUtils.writeFile(myCSSFile, myCSS, charset);
-            this.downloadRewriteFiles[this.item.id].push([myCSSFile, charset]);
-        }
         return myHTMLFile.leafName;
     },
 
@@ -636,32 +677,7 @@ sbContentSaverClass.prototype = {
                 // gets "" if rel attribute not defined
                 switch ( aNode.rel.toLowerCase() ) {
                     case "stylesheet":
-                        if ( this.option["internalize"] ) break;
-                        if ( aNode.hasAttribute("href") ) {
-                            var url = aNode.href;
-                            if ( sbCommonUtils.getSbObjectType(aNode) == "stylesheet" ) {
-                                // a special stylesheet used by scrapbook, keep it intact
-                                // (it should use an absolute link or a chrome link, which don't break after capture)
-                            } else if ( url.indexOf("chrome://") == 0 ) {
-                                // a special stylesheet used by scrapbook or other addons/programs, keep it intact
-                            } else if ( this.option["styles"] && this.option["rewriteStyles"] ) {
-                                // capturing styles with rewrite, the style should be already processed
-                                // in saveDocumentInternal => processCSSRecursively
-                                // remove it here with safety
-                                aNode.setAttribute("href", this.getReorganizedURL(url));
-                                return;
-                            } else if ( this.option["styles"] && !this.option["rewriteStyles"] ) {
-                                // capturing styles with no rewrite, download it and rewrite the link
-                                var fileName = this.download(url);
-                                if (fileName) aNode.setAttribute("href", fileName);
-                            } else if ( !this.option["styles"] && this.option["keepLink"] ) {
-                                // link to the source css file
-                                aNode.setAttribute("href", url);
-                            } else if ( !this.option["styles"] && !this.option["keepLink"] ) {
-                                // not capturing styles, set it blank
-                                aNode.setAttribute("href", this.getSkippedURL(url));
-                            }
-                        }
+                        // stylesheets should already been processed now
                         break;
                     case "shortcut icon":
                     case "icon":
@@ -686,21 +702,6 @@ sbContentSaverClass.prototype = {
                 if ( aNode.hasAttribute("href") ) {
                     if ( this.option["internalize"] ) break;
                     aNode.setAttribute("href", "");
-                }
-                break;
-            case "style": 
-                if ( sbCommonUtils.getSbObjectType(aNode) == "stylesheet" ) {
-                    // a special stylesheet used by scrapbook, keep it intact
-                } else if ( !this.option["styles"] && !this.option["keepLink"] ) {
-                    // not capturing styles, remove it
-                    aNode.textContent = "/* Code removed by ScrapBook */";
-                    return;
-                } else if ( this.option["rewriteStyles"] ) {
-                    // capturing styles with rewrite, the styles should be already processed
-                    // in saveDocumentInternal => processCSSRecursively
-                    // remove it here with safety
-                    aNode.textContent = "/* Code reorganized by ScrapBook */";
-                    return;
                 }
                 break;
             case "script": 
@@ -910,46 +911,6 @@ sbContentSaverClass.prototype = {
       script.parentNode.removeChild(script);
     },
 
-    processCSSRecursively: function(aCSS, aDocument, aIsImport) {
-        // aCSS is invalid or disabled, skip it
-        if (!aCSS || aCSS.disabled) return "";
-        // a special stylesheet used by scrapbook, skip parsing it
-        if (aCSS.ownerNode && sbCommonUtils.getSbObjectType(aCSS.ownerNode) == "stylesheet") return "";
-        // a special stylesheet used by scrapbook or other addons/programs, skip parsing it
-        if (aCSS.href && aCSS.href.startsWith("chrome:")) return "";
-        var content = "";
-        // sometimes <link> cannot access remote css
-        // and aCSS.cssRules fires an error (instead of returning undefined)...
-        // we need this try block to catch that
-        var skip = false;
-        try {
-            if (!aCSS.cssRules) skip = true;
-        } catch(ex) {
-            sbCommonUtils.warn(sbCommonUtils.lang("ERR_FAIL_GET_CSS", aCSS.href, aDocument.location.href, ex));
-                content += "/* ERROR: Unable to access this CSS */\n\n";
-            skip = true;
-        }
-        if (!skip) content += this.processCSSRules(aCSS, aDocument.location.href, aDocument, "");
-        var media = aCSS.media.mediaText;
-        if (media) {
-            // omit "all" since it's defined in the link tag
-            if (media !== "all") {
-                content = "@media " + media + " {\n" + content + "}\n";
-            }
-            media = " (@media " + media + ")";
-        }
-        if (aCSS.href) {
-            if (!aIsImport) {
-                content = "/* ::::: " + aCSS.href + media + " ::::: */\n\n" + content;
-            } else {
-                content = "/* ::::: " + "(import) " + aCSS.href + media + " ::::: */\n" + content + "/* ::::: " + "(end import)" + " ::::: */\n";
-            }
-        } else {
-            content = "/* ::::: " + "[internal]" + media + " ::::: */\n\n" + content;
-        }
-        return content;
-    },
-
     processCSSRules: function(aCSS, aRefURL, aDocument, aIndent) {
         var content = "";
         // if aCSS is a rule set of an external CSS file, use its URL as reference
@@ -957,7 +918,12 @@ sbContentSaverClass.prototype = {
         Array.forEach(aCSS.cssRules, function(cssRule) {
             switch (cssRule.type) {
                 case Components.interfaces.nsIDOMCSSRule.IMPORT_RULE: 
-                    content += this.processCSSRecursively(cssRule.styleSheet, aDocument, true);
+                    var importedCSS = cssRule.styleSheet;
+                    var importedCSSText = "/* Code tidied up by ScrapBook */\n"
+                        + this.processCSSRules(importedCSS, importedCSS.href, aDocument, "");
+                    var fileName = this.download(importedCSS.href, "quote", "cssText", { cssText: importedCSSText });
+                    var cssText = aIndent + '@import url("' + fileName + '");';
+                    if (cssText) content += cssText + "\n";
                     break;
                 case Components.interfaces.nsIDOMCSSRule.FONT_FACE_RULE: 
                     var cssText = aIndent + this.inspectCSSText(cssRule.cssText, refURL, "font");
@@ -1066,13 +1032,14 @@ sbContentSaverClass.prototype = {
     //
     // aSpecialMode is special handler, can be omitted
     //   "linkFilter": for a filter for download linked files
+    //   "cssText": use parsed cssText (aSpecialModeParams.cssText) as real file content
     //
     // return "": means no download happened (should no change the url)
     // return <sourceURL>: deep capture for latter rewrite via sbCrossLinker (must have identical url)
     // return "urn:scrapbook-download:<hash>": when download starts
     // return "urn:scrapbook-download-error:<sourceURL>": when download error detected
     // return <fileName>: a download happen, or used an already downloaded file
-    download: function(aURLSpec, aEscapeType, aSpecialMode) {
+    download: function(aURLSpec, aEscapeType, aSpecialMode, aSpecialModeParams) {
         if ( !aURLSpec ) return "";
         var sourceURL = aURLSpec;
         var that = this;
@@ -1140,6 +1107,14 @@ sbContentSaverClass.prototype = {
                                 [fileName, isDuplicate] = that.getUniqueFileName(fileName, sourceURL);
                                 that.downloadRewriteMap[that.item.id][hashKey] = that.escapeURL(fileName, aEscapeType, true);
                                 if (isDuplicate) {
+                                    this._skipped = true;
+                                    channel.cancel(Components.results.NS_BINDING_ABORTED);
+                                }
+                                // special: use cssText
+                                if (aSpecialMode == "cssText") {
+                                    var targetFile = targetDir.clone(); targetFile.append(fileName);
+                                    sbCommonUtils.writeFile(targetFile, aSpecialModeParams.cssText, "UTF-8");
+                                    that.downloadRewriteFiles[that.item.id].push([targetFile, "UTF-8"]);
                                     this._skipped = true;
                                     channel.cancel(Components.results.NS_BINDING_ABORTED);
                                 }
@@ -1216,10 +1191,26 @@ sbContentSaverClass.prototype = {
                 that.httpTask[that.item.id]++;
                 var item = that.item;
                 setTimeout(function(){ that.onDownloadComplete(item); }, 0);
+                // special: use cssText
+                if (aSpecialMode == "cssText") {
+                    sbCommonUtils.writeFile(targetFile, aSpecialModeParams.cssText, "UTF-8");
+                    that.downloadRewriteFiles[that.item.id].push([targetFile, "UTF-8"]);
+                    return that.escapeURL(fileName, aEscapeType, true);
+                }
                 // do the copy
                 sourceFile.copyTo(targetDir, fileName);
                 return that.escapeURL(fileName, aEscapeType, true);
             } else if ( sourceURL.startsWith("data:") ) {
+                // special: use cssText
+                if (aSpecialMode == "cssText") {
+                    var dataURI = "data:text/css;base64," + btoa(sbCommonUtils.unicodeToUtf8(aSpecialModeParams.cssText));
+                    if (!that.option["saveDataURI"]) {
+                        return that.escapeURL(dataURI, aEscapeType, true);
+                    } else {
+                        // replace sourceURL with cssText version
+                        sourceURL = dataURI;
+                    }
+                }
                 // download "data:" only if option on
                 if (!that.option["saveDataURI"]) {
                     return "";
@@ -1455,14 +1446,6 @@ sbContentSaverClass.prototype = {
             if (!url) return match;
             return url;
         });
-    },
-
-    // get the skipped form for specific cases we handled in another way
-    getReorganizedURL: function (url) {
-        if (url.indexOf("http:") === 0 || url.indexOf("https:") === 0 || url.indexOf("ftp:") === 0 || url.indexOf("file:") === 0) {
-            return "urn:scrapbook-download-reorganized:" + url;
-        }
-        return url;
     },
 
     // get the skipped form for specific protocol that we do not handle
