@@ -59,7 +59,6 @@
                     </hbox>
                     <checkbox id="sbDetailOptionSaveDataURI" label="&sb.detail.option.saveDataURI;" />
                     <checkbox id="sbDetailOptionKeepLink" label="&sb.detail.option.keepLink;" />
-                    <checkbox id="sbDetailOptionRewriteStyles" label="&sb.detail.option.rewriteStyles;" />
                     <checkbox id="sbDetailOptionAsHtml" label="&sb.detail.option.asHtml;" />
                 </groupbox>
                 <groupbox group="capture-options">
