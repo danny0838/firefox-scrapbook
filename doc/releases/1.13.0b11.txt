@@ -14,14 +14,14 @@ User interface changes:
 
  * Added "L" accesskey for the "locate" directive of the editor toolbar.
 
- * Moved import/export/reset preferences to the dropdown list of an indivisual dialog button from the advanced option.
+ * Moved import/export/reset preferences from the advanced option to the dropdown list of a new indivisual dialog button.
 
  * Added reset and delete buttons to the textboxes for hotkey customization.
 
- * No more clear the hotkey when only modifier keys are pressed in the textboxes for hotkey customization.
+ * No more clear the hotkey when only modifier keys are pressed in a textbox for hotkey customization.
 
- * Adjusted the tooltip for main menu button hotkey customization.
+ * Adjusted the hotkey description text for main menu button hotkey customization.
 
- * Added internal contrast to several icons so that they are more visible on platforms with a dark background theme.
+ * Added internal contrast to several icons so that they are more visible on a platform with a dark background theme.
 
 Also includes some internal code optimization.

@@ -8,7 +8,7 @@ Bug fixes:
 
  * Fixed several unexpected behaviors for drag and drop, such as:
 
-   * Drop with Alt hold does not create a bookmark as expected in certain cases.
+   * Dropping with Alt hold does not create a bookmark as expected in certain cases.
 
    * A capture via dropping into the sidebar gets only the selected content of the currrent tab captured in certain cases.
 

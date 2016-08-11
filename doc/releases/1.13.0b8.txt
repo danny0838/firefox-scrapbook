@@ -16,17 +16,17 @@ Bug fixes:
 
  * Combine wizard freezes up if the "tree" folder does not exist.
 
- * Combine wizard cannot add non-folder-type folders for combination.
+ * Non-folder-type folders cannot be added to combine wizard for combination.
 
 Functionality changes:
 
- * Improve cross platform hotkey support, especially the command key support and the key symbol style for Macs.
+ * Improved cross platform hotkey support, especially the support for the command key and the hotkey presentation style for Macs.
 
- * Allow customized hotkey combination in the user options.
+ * Allows customized hotkey combination in the user options.
 
  * Slightly adjusted several styles of the user interface. 
 
- * Restored a missing button of the note editor to exit HTML view mode.
+ * Restored a missing button of the note editor which exits HTML view mode.
 
 Core changes:
 
