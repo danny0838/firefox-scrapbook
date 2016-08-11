@@ -56,8 +56,8 @@ function sbContentSaverClass() {
     this.file2URL = {};
     this.file2Doc = {};
     this.linkURLs = [];
-    this.frames = [];
-    this.canvases = [];
+    this.elemMapKey = "data-sb-id-" + Date.now();
+    this.elemMapOrig = [];
 }
 
 sbContentSaverClass.prototype = {
@@ -102,8 +102,7 @@ sbContentSaverClass.prototype = {
         };
         this.file2Doc = {};
         this.linkURLs = [];
-        this.frames = [];
-        this.canvases = [];
+        this.elemMapOrig = [];
         this.presetData = aPresetData;
         if ( aPresetData ) {
             if ( aPresetData[0] ) this.item.id = aPresetData[0];
@@ -254,30 +253,13 @@ sbContentSaverClass.prototype = {
 
         var htmlNode = aDocument.documentElement;
         // cloned frames has contentDocument = null
-        // give all frames an unique id for later retrieving
-        var frames = htmlNode.getElementsByTagName("frame");
-        for (var i=0, len=frames.length; i<len; i++) {
-            var frame = frames[i];
-            var idx = this.frames.length;
-            this.frames[idx] = frame;
-            frame.setAttribute("data-sb-frame-id", idx);
-        }
-        var frames = htmlNode.getElementsByTagName("iframe");
-        for (var i=0, len=frames.length; i<len; i++) {
-            var frame = frames[i];
-            var idx = this.frames.length;
-            this.frames[idx] = frame;
-            frame.setAttribute("data-sb-frame-id", idx);
-        }
         // cloned canvas has no image data
-        // give all frames an unique id for later retrieving
-        var canvases = htmlNode.getElementsByTagName("canvas");
-        for (var i=0, len=canvases.length; i<len; i++) {
-            var canvas = canvases[i];
-            var idx = this.canvases.length;
-            this.canvases[idx] = canvas;
-            canvas.setAttribute("data-sb-canvas-id", idx);
-        }
+        // give them an unique id for later retrieving
+        Array.prototype.forEach.call(htmlNode.querySelectorAll("frame, iframe, canvas"), function (elem) {
+            var idx = this.elemMapOrig.length;
+            this.elemMapOrig[idx] = elem;
+            elem.setAttribute(this.elemMapKey, idx);
+        }, this);
         // construct the node list
         var rootNode;
         var headNode;
@@ -357,16 +339,11 @@ sbContentSaverClass.prototype = {
             }
         }
         // remove the temporary mapping key
-        for (var i=0, len=this.frames.length; i<len; i++) {
-            if (!sbCommonUtils.isDeadObject(this.frames[i])) {
-                this.frames[i].removeAttribute("data-sb-frame-id");
+        this.elemMapOrig.forEach(function (elem) {
+            if (!sbCommonUtils.isDeadObject(elem)) {
+                elem.removeAttribute(this.elemMapKey);
             }
-        }
-        for (var i=0, len=this.canvases.length; i<len; i++) {
-            if (!sbCommonUtils.isDeadObject(this.canvases[i])) {
-                this.canvases[i].removeAttribute("data-sb-canvas-id");
-            }
-        }
+        }, this);
         // process HTML DOM
         Array.prototype.forEach.call(rootNode.querySelectorAll("*"), function(curNode){
             this.inspectNode(curNode, rootNode);
@@ -605,12 +582,12 @@ sbContentSaverClass.prototype = {
                 break;
             case "canvas":
                 if ( this.option["media"] && !this.option["script"] ) {
-                    var canvasOrig = this.canvases[aNode.getAttribute("data-sb-canvas-id")];
+                    var canvasOrig = this.elemMapOrig[aNode.getAttribute(this.elemMapKey)];
                     var canvasScript = aNode.ownerDocument.createElement("script");
                     canvasScript.textContent = '(' + this.setCanvasData.toString().replace(/\s+/g, ' ') + ')("' + canvasOrig.toDataURL() + '")';
                     aNode.parentNode.insertBefore(canvasScript, aNode.nextSibling);
                 }
-                aNode.removeAttribute("data-sb-canvas-id");
+                aNode.removeAttribute(this.elemMapKey);
                 break;
             case "track":  // in <audio> and <video>
                 if ( aNode.hasAttribute("src") ) {
@@ -872,8 +849,8 @@ sbContentSaverClass.prototype = {
                     if ( this.selection ) this.selection = null;
                     var tmpRefURL = this.refURLObj;
                     // retrieve contentDocument from the corresponding real frame
-                    var idx = aNode.getAttribute("data-sb-frame-id");
-                    var newFileName = this.saveDocumentInternal(this.frames[idx].contentDocument, this.documentName + "_" + (parseInt(idx)+1));
+                    var idx = aNode.getAttribute(this.elemMapKey);
+                    var newFileName = this.saveDocumentInternal(this.elemMapOrig[idx].contentDocument, this.documentName + "_" + (parseInt(idx)+1));
                     aNode.setAttribute("src", this.escapeURL(newFileName, null, true));
                     this.refURLObj = tmpRefURL;
                 } else if ( this.option["keepLink"] ) {
@@ -881,7 +858,7 @@ sbContentSaverClass.prototype = {
                 } else {
                     aNode.setAttribute("src", this.getSkippedURL(aNode.src));
                 }
-                aNode.removeAttribute("data-sb-frame-id");
+                aNode.removeAttribute(this.elemMapKey);
                 break;
         }
         if ( aNode.style && aNode.style.cssText ) {
