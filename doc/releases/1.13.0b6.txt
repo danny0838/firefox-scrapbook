@@ -8,7 +8,7 @@ Bug fixes:
 
  * Fixed several bad handling cases for URLs with non-ASCII chars on capture.
 
- * Fixed an issue that some linked local files are not included when a page is captured or combined.
+ * Some linked local files are not included when a page is captured or combined.
 
  * "Combined View" and "Open All in tabs" do not work for non-folder-type folders.
 
