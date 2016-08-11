@@ -766,7 +766,7 @@ sbContentSaverClass.prototype = {
                     }
                     if (this.option["downLinkMethod"] == 2) {
                         // check header and url extension
-                        var fileName = this.download(url, null, true);
+                        var fileName = this.download(url, null, "linkFilter");
                         if (fileName) {
                             aNode.setAttribute("href", fileName);
                             break;
@@ -1064,14 +1064,15 @@ sbContentSaverClass.prototype = {
     //
     // aEscapeType is how we escape the result URL, it will be passed to escapeURL and can be omitted
     //
-    // aIsLinkFilter is specific for download link filter, can be omitted
+    // aSpecialMode is special handler, can be omitted
+    //   "linkFilter": for a filter for download linked files
     //
     // return "": means no download happened (should no change the url)
     // return <sourceURL>: deep capture for latter rewrite via sbCrossLinker (must have identical url)
     // return "urn:scrapbook-download:<hash>": when download starts
     // return "urn:scrapbook-download-error:<sourceURL>": when download error detected
     // return <fileName>: a download happen, or used an already downloaded file
-    download: function(aURLSpec, aEscapeType, aIsLinkFilter) {
+    download: function(aURLSpec, aEscapeType, aSpecialMode) {
         if ( !aURLSpec ) return "";
         var sourceURL = aURLSpec;
         var that = this;
@@ -1121,8 +1122,8 @@ sbContentSaverClass.prototype = {
                                     }
                                     fileName = base + "." + ext;
                                 }
-                                // apply the filter
-                                if (aIsLinkFilter) {
+                                // special: apply the filter
+                                if (aSpecialMode == "linkFilter") {
                                     var toDownload = that.downLinkFilter(ext);
                                     if (!toDownload) {
                                         if ( that.option["inDepth"] > 0 ) {
