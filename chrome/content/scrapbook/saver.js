@@ -91,17 +91,24 @@ sbContentSaverClass.prototype = {
         switch (this.context) {
             case "combine":
                 this.option["images"] = true;
+                this.option["media"] = true;
+                this.option["fonts"] = true;
+                this.option["frames"] = true;
+                this.option["styles"] = true;
                 this.option["script"] = true;
+                this.option["keepLink"] = false;
                 break;
             case "internalize":
                 this.option["isPartial"] = false;
                 this.option["images"] = true;
+                this.option["fonts"] = true;
                 this.option["media"] = true;
                 this.option["styles"] = true;
                 this.option["script"] = true;
                 this.option["asHtml"] = false;
                 this.option["forceUtf8"] = false;
                 this.option["tidyCSS"] = false;
+                this.option["keepLink"] = false;
                 break;
         }
         
