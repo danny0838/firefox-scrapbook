@@ -20,7 +20,6 @@ var sbCombineService = {
         //Block wird benötigt, um Korrekturen bei fehlerhafter Zusammenstellung zu erlauben
         this.toggleElements(true);
         //Ende Block
-        gOption = { "script": true, "images": true };
         if ( window.top.location.href != "chrome://scrapbook/content/manage.xul" ) {
             document.documentElement.collapsed = true;
             return;

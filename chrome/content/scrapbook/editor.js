@@ -2756,14 +2756,6 @@ var sbInfoViewer = {
         }, this);
 
         var options = {
-            "isPartial": false,
-            "images": true,
-            "media": true,
-            "styles": true,
-            "script": true,
-            "asHtml": false,
-            "forceUtf8": false,
-            "tidyCSS": false,
             "internalize": refFile,
         };
         var preset = [
