@@ -31,28 +31,13 @@ function SB_trace(aMessage) {
  *   resName:     string   the resource name to add
  *   resIdx:      string   the index to insert resource
  *   referItem:   string   (deep-capture, re-capture) the refer item,
-                           determine where to save file and to set resource property
- *   option:      object   capture options, such as:
-                             isPartial:
-                             images:
-                             media:
-                             fonts:
-                             frames:
-                             styles:
-                             script:
-                             asHtml:
-                             forceUtf8:
-                             tidyCSS:
-                             keepLink:
-                             dlimg:
-                             dlsnd:
-                             dlmov:
-                             dlarc:
-                             custom:
-                             inDepth:
-                             inDepthTimeout: (multi-capture, deep-capture) countdown seconds before next capture
-                             inDepthCharset: force using charset to load html, autodetect if not set      
-                             internalize:
+ *                         determine where to save file and to set resource property
+ *   option:      object   capture options, replace the default option in saver.js
+ *                         Those more relavant here are:
+ *                           inDepth:
+ *                           inDepthTimeout: (multi-capture, deep-capture) countdown seconds before next capture
+ *                           inDepthCharset: force using charset to load html, autodetect if not set      
+ *                           internalize:
  *   file2Url:    array    the file2URL data in saver.js from last capture,
  *                         will then pass to saver.js for next capture
  *   preset:      array    (re-capture) the preset data,
