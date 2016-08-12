@@ -945,13 +945,23 @@ var sbCrossLinker = {
 
 
 function sbHeaderSniffer(aURLSpec, aRefURLSpec) {
-    var that = this;
+    this._eventListener._sniffer = this;
     this.URLSpec = aURLSpec;
     this.refURLSpec = aRefURLSpec;
-    this._eventListener = {
+}
+
+
+sbHeaderSniffer.prototype = {
+
+    _channel: null,
+    _headers: null,
+    _eventListener: {
+        _sniffer: null,
         onDataAvailable: function(aRequest, aContext, aInputStream, aOffset, aCount) {},
         onStartRequest: function(aRequest, aContext) {},
         onStopRequest: function(aRequest, aContext, aStatus) {
+            var that = this._sniffer;
+
             // show connect success
             var contentType = that.getContentType() || "";
             SB_trace(sbCommonUtils.lang("CONNECT_SUCCESS", contentType));
@@ -978,14 +988,7 @@ function sbHeaderSniffer(aURLSpec, aRefURLSpec) {
             var isAttachment = that.getContentDisposition();
             that.load(that.URLSpec, contentType, isAttachment);
         },
-    };
-}
-
-
-sbHeaderSniffer.prototype = {
-
-    _channel: null,
-    _headers: null,
+    },
 
     checkURL: function() {
         if (this.URLSpec.startsWith("file:")) {
