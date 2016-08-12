@@ -316,7 +316,7 @@ var sbCaptureTask = {
         if ( ++this.index >= gURLs.length ) {
             this.finalize();
         } else {
-            if ( quickly || gURLs[this.index].indexOf("file://") == 0 ) {
+            if ( quickly || gURLs[this.index].startsWith("file:") ) {
                 window.setTimeout(function(){ sbCaptureTask.start(); }, 0);
             } else {
                 this.seconds = this.INTERVAL;
@@ -1003,7 +1003,7 @@ sbHeaderSniffer.prototype = {
     _headers: null,
 
     checkURL: function() {
-        if (this.URLSpec.indexOf("file://") == 0) {
+        if (this.URLSpec.startsWith("file:")) {
             this.checkLocalFile();
         } else {
             this.checkHttpHeader();

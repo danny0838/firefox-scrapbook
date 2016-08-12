@@ -40,7 +40,7 @@ var sbSearchResult = {
             this.query[key] = this.query[key] || "";
         }, this);
         // set target folder
-        if ( this.query['ref'] && this.query['ref'].indexOf("urn:scrapbook:item") == 0 ) {
+        if ( this.query['ref'] && this.query['ref'].startsWith("urn:scrapbook:item") ) {
             var refRes = sbCommonUtils.RDF.GetResource(this.query['ref']);
             var elt = document.getElementById("sbResultHeaderLoc");
             elt.value += sbDataSource.getProperty(refRes, "title");
@@ -93,7 +93,7 @@ var sbSearchResult = {
             var comment = sbDataSource.getProperty(res, "comment");
             var type = sbDataSource.getProperty(res, "type");
             var icon = sbDataSource.getProperty(res, "icon") || sbCommonUtils.getDefaultIcon(type);
-            if ( folder.indexOf("urn:scrapbook:") == 0 ) folder = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(folder), "title");
+            if ( folder.startsWith("urn:scrapbook:") ) folder = sbDataSource.getProperty(sbCommonUtils.RDF.GetResource(folder), "title");
             sbSearchResult.treeItems.push([
                 sbDataSource.getProperty(res, "title"),
                 this.extractRightContext(content, hits['content']),
@@ -393,7 +393,7 @@ var sbCacheService = {
                 if (redirectFile && redirectFile.exists()) {
                     var mime = sbCommonUtils.getFileMime(redirectFile);
                     var basePathCut = dir.path.length + 1;
-                    if ( mime && mime.indexOf("text/") == 0 ) {
+                    if ( mime && mime.startsWith("text/") ) {
                         sbCacheService.inspectFile(redirectFile, redirectFile.path.substring(basePathCut).replace(/\\/g, "/"), "text");
                     } else {
                         sbCacheService.inspectFile(redirectFile, redirectFile.path.substring(basePathCut).replace(/\\/g, "/"), "none");
@@ -539,7 +539,7 @@ var sbCacheService = {
                 try {
                     if ( window.arguments[0] ) {
                         var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
-                        var inTab = (win.content.location.href.indexOf("chrome://scrapbook/content/result.xul") == 0) ? false : sbCommonUtils.getPref("tabs.searchResult", false);
+                        var inTab = (win.content.location.href.startsWith("chrome://scrapbook/content/result.xul")) ? false : sbCommonUtils.getPref("tabs.searchResult", false);
                         sbCommonUtils.loadURL(window.arguments[0], inTab);
                     }
                 } catch(ex) {
