@@ -39,8 +39,8 @@ var sbContentSaver = {
 
 
 function sbContentSaverClass() {
-    this.option = {};
     this.context = null;
+    this.option = {};
     this.documentName = "";
     this.item = null;
     this.favicon = null;
@@ -63,9 +63,10 @@ function sbContentSaverClass() {
 
 sbContentSaverClass.prototype = {
 
-    init: function(aPresetData) {
+    init: function(aContext, aPresetData, aIsPartial) {
+        this.context = aContext;
         this.option = {
-            "isPartial": false,
+            "isPartial": !!aIsPartial,
             "images": sbCommonUtils.getPref("capture.default.images", true),
             "media": sbCommonUtils.getPref("capture.default.media", true),
             "fonts": sbCommonUtils.getPref("capture.default.fonts", true),
@@ -128,9 +129,7 @@ sbContentSaverClass.prototype = {
     // aPresetData: data comes from a capture.js, cold be: 
     //              link, indepth, capture-again, capture-again-deep
     captureWindow: function(aRootWindow, aIsPartial, aShowDetail, aResName, aResIndex, aPresetData, aContext, aTitle) {
-        this.init(aPresetData);
-        this.option["isPartial"] = aIsPartial;
-        this.context = aContext;
+        this.init(aContext, aPresetData, aIsPartial);
         this.item.chars = this.option["forceUtf8"] ? "UTF-8" : aRootWindow.document.characterSet;
         this.item.source = aRootWindow.location.href;
         //Favicon der angezeigten Seite bestimmen (Unterscheidung zwischen FF2 und FF3 notwendig!)
@@ -180,8 +179,7 @@ sbContentSaverClass.prototype = {
     },
 
     captureFile: function(aSourceURL, aReferURL, aType, aShowDetail, aResName, aResIndex, aPresetData, aContext) {
-        this.init(aPresetData);
-        this.context = aContext;
+        this.init(aContext, aPresetData);
         this.item.title = sbCommonUtils.getFileName(aSourceURL);
         this.item.icon = "moz-icon://" + this.escapeURL(this.item.title, null, true) + "?size=16";
         this.item.source = aSourceURL;
