@@ -976,7 +976,7 @@ function sbHeaderSniffer(aURLSpec, aRefURLSpec) {
 
             // attempt to load the content
             var isAttachment = that.getContentDisposition();
-            that.load(contentType, isAttachment);
+            that.load(that.URLSpec, contentType, isAttachment);
         },
     };
 }
@@ -989,31 +989,31 @@ sbHeaderSniffer.prototype = {
 
     checkURL: function() {
         if (this.URLSpec.startsWith("file:")) {
-            this.checkLocalFile();
+            this.checkLocalFile(this.URLSpec);
         } else {
-            this.checkHttpHeader();
+            this.checkHttpHeader(this.URLSpec, this.refURLSpec);
         }
     },
 
-    checkLocalFile: function() {
+    checkLocalFile: function(URL) {
         sbCaptureTask.isLocal = true;
-        var file = sbCommonUtils.convertURLToFile(this.URLSpec);
+        var file = sbCommonUtils.convertURLToFile(URL);
         if (!(file.exists() && file.isFile() && file.isReadable())) {
             this.reportError("can't access");
             return;
         }
         var mime = sbCommonUtils.getFileMime(file);
-        this.load(mime);
+        this.load(URL, mime);
     },
 
-    checkHttpHeader: function() {
+    checkHttpHeader: function(URL, refURL) {
         sbCaptureTask.isLocal = false;
         this._channel = null;
         try {
-            this._channel = sbCommonUtils.newChannel(this.URLSpec).QueryInterface(Components.interfaces.nsIHttpChannel);
+            this._channel = sbCommonUtils.newChannel(URL).QueryInterface(Components.interfaces.nsIHttpChannel);
             this._channel.loadFlags = this._channel.LOAD_BYPASS_CACHE;
             this._channel.setRequestHeader("User-Agent", navigator.userAgent, false);
-            if ( this.refURLSpec ) this._channel.setRequestHeader("Referer", this.refURLSpec, false);
+            if ( refURL ) this._channel.setRequestHeader("Referer", refURL, false);
         } catch(ex) {
             this.reportError("Invalid URL");
             return;
@@ -1053,14 +1053,15 @@ sbHeaderSniffer.prototype = {
         return null;
     },
 
-    load: function(contentType, isAttachment) {
+    load: function(URL, contentType, isAttachment) {
         contentType = contentType || "text/html";
         if (!isAttachment && ["text/html", "application/xhtml+xml"].indexOf(contentType) >= 0) {
             // for inline html or xhtml files, load the document and capture it
-            sbInvisibleBrowser.load(this.URLSpec);
+            sbInvisibleBrowser.load(URL);
         } else if (gContext == "link") {
-            // capture as file for link capture 
-            gContentSaver.captureFile(this.URLSpec, gRefURL ? gRefURL : sbCaptureTask.URL, "file", gShowDetail, gResName, gResIdx, null, gContext);
+            // capture as file for link capture
+            var refURL = this.refURLSpec || sbCaptureTask.URL;
+            gContentSaver.captureFile(URL, refURL, "file", gShowDetail, gResName, gResIdx, null, gContext);
         } else if (gContext == "indepth") {
             // in an indepth capture, files with defined extensions are pre-processed and is not send to the URL list
             // those who go here are undefined files, and should be skipped
