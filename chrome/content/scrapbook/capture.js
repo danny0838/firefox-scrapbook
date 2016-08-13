@@ -731,9 +731,12 @@ var sbInvisibleBrowser = {
     },
 
     execCapture: function() {
+        // update info
         SB_trace(sbCommonUtils.lang("CAPTURE_START"));
+
+        
+        // check for a potential meta refresh redirect
         if ( this.ELEMENT.contentDocument.body ) {
-            // potential meta refresh redirect
             var metaElems = this.ELEMENT.contentDocument.getElementsByTagName("meta");
             for ( var i = 0; i < metaElems.length; i++ ) {
                 if ( metaElems[i].hasAttribute("http-equiv") && metaElems[i].hasAttribute("content") &&
@@ -749,8 +752,12 @@ var sbInvisibleBrowser = {
                 }
             }
         }
+
+        // update UI
         document.getElementById("sbCapturePauseButton").disabled = true;
         sbCaptureTask.toggleSkipButton(false);
+
+        // start capture
         var preset = gReferItem ? [gReferItem.id, SB_suggestName(this.ELEMENT.currentURI.spec), gOption, gFile2URL, gDepths[sbCaptureTask.index]] : null;
         if ( gPreset ) preset = gPreset;
         var ret = gContentSaver.captureWindow(this.ELEMENT.contentWindow, false, gShowDetail, gResName, gResIdx, preset, gContext, gTitles[sbCaptureTask.index]);
