@@ -106,6 +106,7 @@ function SB_initCapture() {
     if ( gContext == "indepth" ) {
         gURL2Name[gReferItem.source] = "index";
     } else if ( gContext == "capture-again-deep" ) {
+        myURLs = null;
         var contDir = sbCommonUtils.getContentDir(gPreset[0]);
         // read sb-file2url.txt => gFile2URL for later usage
         var file = contDir.clone(); file.append("sb-file2url.txt");
@@ -133,7 +134,7 @@ function SB_initCapture() {
                 if ( docName == gPreset[1] ) myURLs = [url];
             }
         });
-        if ( !myURLs[0] ) {
+        if ( !myURLs ) {
             sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_SOURCE_URL", gPreset[1] + ".html."));
             window.close();
         }
