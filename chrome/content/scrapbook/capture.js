@@ -447,7 +447,7 @@ var sbpFilter = {
 
     // Add a new filter or modify an existing one
     add: function() {
-        var filterSelected = -1;
+        var filterDuplIdx = -1;
         var filterNew = document.getElementById("sbpTextboxFilter").value;
         var ruleNew = document.getElementById("sbpMnuIncExc").label;
         // 1. Confirm the filter is valid
@@ -459,10 +459,10 @@ var sbpFilter = {
         }
         // 2. Browse the filter list for an identical entry
         if ( this.filterEdited == -1 ) {
-            filterSelected = this.filterList.indexOf(filterNew);
+            filterDuplIdx = this.filterList.indexOf(filterNew);
         }
         // 3. Update filter list
-        if ( filterSelected == -1 ) {
+        if ( filterDuplIdx == -1 ) {
             var wrapper = document.getElementById("sbpTreeFilter").childNodes[1];
             if ( this.filterEdited == -1 ) {
                 // add a new filter
