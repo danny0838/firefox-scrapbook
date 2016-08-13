@@ -480,8 +480,8 @@ var sbpFilter = {
                 this.filterList.push(filterNew);
             } else {
                 // update an existing filter
-                wrapper.childNodes[0].childNodes[this.filterEdited].childNodes[0].setAttribute("label", ruleNew);
-                wrapper.childNodes[0].childNodes[this.filterEdited].childNodes[1].setAttribute("label", filterNew);
+                wrapper.childNodes[this.filterEdited].childNodes[0].childNodes[0].setAttribute("label", ruleNew);
+                wrapper.childNodes[this.filterEdited].childNodes[0].childNodes[1].setAttribute("label", filterNew);
                 this.ruleList[this.filterEdited] = ruleNew;
                 this.filterList[this.filterEdited] = filterNew;
                 this.filterEdited = -1;
