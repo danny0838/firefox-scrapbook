@@ -534,24 +534,17 @@ var sbpFilter = {
         }
     },
 
-    // Apply the filter to the passed URL and returns true or false
+    // Apply filters to the URL
+    // the URL must pass all filters
     filter: function(url) {
-        // 1. find search term(s) in URL
-        var rec = 0;
-        for ( var fI=0; fI<this.filterList.length; fI++ ) {
-            if ( this.ruleList[fI] == "Include" ) {
-                if ( url.match(sbpFilter.filterList[fI]) ) rec++;
+        for ( var i=0, I=this.filterList.length; i<I; i++ ) {
+            if ( this.ruleList[i] == "Include" ) {
+                if ( !url.match(sbpFilter.filterList[i]) ) return false;
             } else {
-                if ( !url.match(sbpFilter.filterList[fI]) ) rec++;
+                if ( url.match(sbpFilter.filterList[i]) ) return false;
             }
         }
-        // 2. determine return value
-        var ret = false;
-        if ( rec == this.filterList.length ) {
-            ret = true;
-        }
-        // 3. return true or false to the caller
-        return ret;
+        return true;
     },
 
     // If text is available, enabled the OK button; otherwise disabled it
