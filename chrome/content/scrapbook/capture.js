@@ -97,14 +97,13 @@ function SB_initCapture() {
     gResName = data.resName;
     gResIdx = data.resIdx;
     gReferItem = data.referItem;
-    gOption = data.option;
+    gOption = data.option || {};
     gFile2URL = data.file2Url;
     gPreset = data.preset;
-    gTitles = data.titles;
+    gTitles = data.titles || [];
     gContext = data.context;
 
     // preset for gOption
-    if ( !gOption ) gOption = {};
     if ( !("images" in gOption ) ) gOption["images"] = true;
     if ( !("media" in gOption ) ) gOption["media"] = true;
     if ( !("frames" in gOption ) ) gOption["frames"] = true;
@@ -201,7 +200,6 @@ var sbCaptureTask = {
     failed: 0,
 
     init: function(myURLs) {
-        if (!gTitles) gTitles = [];
         for ( var i = 0; i < myURLs.length; i++ ) this.add(myURLs[i], 1, gTitles[i]);
     },
 
