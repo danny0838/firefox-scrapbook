@@ -459,12 +459,7 @@ var sbpFilter = {
         var ruleNew = document.getElementById("sbpMnuIncExc").label;
         // 1. Browse the filter list for an identical entry
         if ( this.filterEdited == -1 ) {
-            for ( var aI=0; aI<this.filterList.length; aI++ ) {
-                if ( this.filterList[aI].match(filterNew) ) {
-                    filterSelected = aI;
-                    aI = this.filterList.length;
-                }
-            }
+            filterSelected = this.filterList.indexOf(filterNew);
         }
         // 2. Add the filter to table if not exist yet
         if ( filterSelected == -1 ) {
