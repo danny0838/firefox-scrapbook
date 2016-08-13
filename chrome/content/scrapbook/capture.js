@@ -448,8 +448,6 @@ var sbCaptureTask = {
 };
 
 var sbpFilter = {
-    sfLimitToDomain: 0,
-    sfRegularExpression: 0,
     sfFilter: [],
     sfFilterIncExc: [],
     sfFilterEdit: -1,            //enthält den Index des zu editierenden Filters
