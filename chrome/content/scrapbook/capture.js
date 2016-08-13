@@ -218,27 +218,20 @@ var sbCaptureTask = {
         }
         gURLs.push(aURL);
         gDepths.push(aDepth);
-        try {
-            var aObj = this.TREE;
-            for (var aI=0; aI < aObj.childNodes.length; aI++) {
-                if (aObj.childNodes[aI].nodeName == "treechildren") {
-                    var aTchild = aObj.childNodes[aI];
-                    var aTrow = document.createElement("treerow");
-                    var aTcell0 = document.createElement("treecell");
-                    aTcell0.setAttribute("value", sbpFilter.filter(aURL));
-                    aTrow.appendChild(aTcell0);
-                    var aTcell1 = document.createElement("treecell");
-                    aTcell1.setAttribute("label", aDepth + " [" + (gURLs.length - 1) + "] " + aURL);
-                    aTrow.appendChild(aTcell1);
-                    var aTcell2 = document.createElement("treecell");
-                    aTcell2.setAttribute("label", aTitle || "");
-                    aTrow.appendChild(aTcell2);
-                    var aTitem = document.createElement("treeitem");
-                    aTitem.appendChild(aTrow);
-                    aTchild.appendChild(aTitem);
-                }
-            }
-        } catch(aEx) { sbCommonUtils.alert("add\n---\n"+aEx); }
+        var wrapper = this.TREE.childNodes[1];
+        var item = document.createElement("treeitem");
+        wrapper.appendChild(item);
+        var row = document.createElement("treerow");
+        item.appendChild(row);
+        var cell0 = document.createElement("treecell");
+        cell0.setAttribute("value", sbpFilter.filter(aURL));
+        row.appendChild(cell0);
+        var cell1 = document.createElement("treecell");
+        cell1.setAttribute("label", aDepth + " [" + (gURLs.length - 1) + "] " + aURL);
+        row.appendChild(cell1);
+        var cell2 = document.createElement("treecell");
+        cell2.setAttribute("label", aTitle || "");
+        row.appendChild(cell2);
     },
 
     // start capture
@@ -461,37 +454,30 @@ var sbpFilter = {
         if ( this.filterEdited == -1 ) {
             filterSelected = this.filterList.indexOf(filterNew);
         }
-        // 2. Add the filter to table if not exist yet
+        // 2. Update filter list
         if ( filterSelected == -1 ) {
-            try {
-                var aTree = document.getElementById("sbpTreeFilter");
-                for ( var aI=0; aI<aTree.childNodes.length; aI++ ) {
-                    if ( aTree.childNodes[aI].nodeName == "treechildren" ) {
-                        if ( this.filterEdited == -1 ) {
-                            this.ruleList.push(ruleNew);
-                            this.filterList.push(filterNew);
-                            var aTchild = aTree.childNodes[aI];
-                            var aTrow = document.createElement("treerow");
-                            var aTcell0 = document.createElement("treecell");
-                            aTcell0.setAttribute("label", ruleNew);
-                            aTrow.appendChild(aTcell0);
-                            var aTcell1 = document.createElement("treecell");
-                            aTcell1.setAttribute("label", filterNew);
-                            aTrow.appendChild(aTcell1);
-                            var aTitem = document.createElement("treeitem");
-                            aTitem.appendChild(aTrow);
-                            aTchild.appendChild(aTitem);
-                        } else {
-                            aTree.childNodes[aI].childNodes[0].childNodes[this.filterEdited].childNodes[0].setAttribute("label", ruleNew);
-                            aTree.childNodes[aI].childNodes[0].childNodes[this.filterEdited].childNodes[1].setAttribute("label", filterNew);
-                            this.ruleList[this.filterEdited] = ruleNew;
-                            this.filterList[this.filterEdited] = filterNew;
-                            this.filterEdited = -1;
-                        }
-                    }
-                }
-            } catch(aEx) {
-                sbCommonUtils.alert("This shouldn't happen\n---\n"+aEx);
+            var wrapper = document.getElementById("sbpTreeFilter").childNodes[1];
+            if ( this.filterEdited == -1 ) {
+                // add a new filter
+                var item = document.createElement("treeitem");
+                wrapper.appendChild(item);
+                var row = document.createElement("treerow");
+                item.appendChild(row);
+                var cell0 = document.createElement("treecell");
+                cell0.setAttribute("label", ruleNew);
+                row.appendChild(cell0);
+                var cell1 = document.createElement("treecell");
+                cell1.setAttribute("label", filterNew);
+                row.appendChild(cell1);
+                this.ruleList.push(ruleNew);
+                this.filterList.push(filterNew);
+            } else {
+                // update an existing filter
+                wrapper.childNodes[0].childNodes[this.filterEdited].childNodes[0].setAttribute("label", ruleNew);
+                wrapper.childNodes[0].childNodes[this.filterEdited].childNodes[1].setAttribute("label", filterNew);
+                this.ruleList[this.filterEdited] = ruleNew;
+                this.filterList[this.filterEdited] = filterNew;
+                this.filterEdited = -1;
             }
         }
         // 3. Update selection
@@ -518,15 +504,8 @@ var sbpFilter = {
         this.ruleList.splice(this.filterEdited, 1);
         this.filterList.splice(this.filterEdited, 1);
         // 2. Remove entry from file
-        var dTree = document.getElementById("sbpTreeFilter");
-        for ( var dI=0; dI<dTree.childNodes.length; dI++ ) {
-            if ( dTree.childNodes[dI].nodeName == "treechildren" ) {
-                dTree.childNodes[dI].childNodes[this.filterEdited].childNodes[0].removeChild(dTree.childNodes[dI].childNodes[this.filterEdited].childNodes[0].childNodes[1]);
-                dTree.childNodes[dI].childNodes[this.filterEdited].childNodes[0].removeChild(dTree.childNodes[dI].childNodes[this.filterEdited].childNodes[0].childNodes[0]);
-                dTree.childNodes[dI].childNodes[this.filterEdited].removeChild(dTree.childNodes[dI].childNodes[this.filterEdited].childNodes[0]);
-                dTree.childNodes[dI].removeChild(dTree.childNodes[dI].childNodes[this.filterEdited]);
-            }
-        }
+        var wrapper = document.getElementById("sbpTreeFilter").childNodes[1];
+        sbCommonUtils.removeNode(wrapper.childNodes[this.filterEdited]);
         // 3. Update selection
         this.updateSelection();
         // 4. Finalize
@@ -587,19 +566,11 @@ var sbpFilter = {
 
     // Update the content of the current selection
     updateSelection: function() {
-        var filterNumber = this.filterList.length;
-
-        if ( filterNumber==0 ) this.filterList.push("");
-        if ( this.filterList[0].substr(this.filterList[0].length-1, this.filterList[0].length) != "\\" ) {
-            var tree = document.getElementById("sbpURLList");
-            if ( tree.childNodes[1].childNodes.length>0 ) {
-                for ( var aI=sbCaptureTask.index; aI<gURLs.length; aI++ ) {
-                    var aChecked = this.filter(gURLs[aI]);
-                    tree.childNodes[1].childNodes[aI].childNodes[0].childNodes[0].setAttribute("value", aChecked);
-                }
-            }
+        var wrapper = document.getElementById("sbpURLList").childNodes[1];
+        for ( var i=sbCaptureTask.index, I=gURLs.length; i<I; i++ ) {
+            var checked = this.filter(gURLs[i]);
+            wrapper.childNodes[i].childNodes[0].childNodes[0].setAttribute("value", checked);
         }
-        if ( filterNumber==0 ) this.filterList = [];
     },
 
 };
