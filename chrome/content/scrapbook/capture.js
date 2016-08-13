@@ -105,8 +105,9 @@ function SB_initCapture() {
 
     // preset for gOption
     if ( !gOption ) gOption = {};
-    if ( !("script" in gOption ) ) gOption["script"] = false;
     if ( !("images" in gOption ) ) gOption["images"] = true;
+    if ( !("media" in gOption ) ) gOption["media"] = true;
+    if ( !("frames" in gOption ) ) gOption["frames"] = true;
     if ( !("inDepthTimeout" in gOption) ) gOption["inDepthTimeout"] = 0;
 
     // handle specific contexts
@@ -695,8 +696,13 @@ var sbInvisibleBrowser = {
         }
         this.ELEMENT.addProgressListener(this._eventListener, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
         this.ELEMENT.docShell.allowImages = gOption["images"];
-        this.ELEMENT.docShell.allowJavascript = false;
-        this.ELEMENT.docShell.allowMetaRedirects = false;
+        // allowMedia is supported since Firefox 24
+        try {
+            this.ELEMENT.docShell.allowMedia = gOption["media"];
+        } catch(ex) {}
+        this.ELEMENT.docShell.allowSubframes = gOption["frames"];
+        this.ELEMENT.docShell.allowJavascript = false;  // javascript error will freeze up capture process
+        this.ELEMENT.docShell.allowMetaRedirects = false;  // we'll handle meta redirect in another way
         // older version of Firefox gets error on setting charset
         try {
             if (gOption["inDepthCharset"]) this.ELEMENT.docShell.charset = gOption["inDepthCharset"];
