@@ -103,6 +103,13 @@ function SB_initCapture() {
     gTitles = data.titles;
     gContext = data.context;
 
+    // preset for gOption
+    if ( !gOption ) gOption = {};
+    if ( !("script" in gOption ) ) gOption["script"] = false;
+    if ( !("images" in gOption ) ) gOption["images"] = true;
+    if ( !("inDepthTimeout" in gOption) ) gOption["inDepthTimeout"] = 0;
+
+    // handle specific contexts
     if ( gContext == "indepth" ) {
         gURL2Name[gReferItem.source] = "index";
     } else if ( gContext == "capture-again-deep" ) {
@@ -139,10 +146,8 @@ function SB_initCapture() {
             window.close();
         }
     }
-    if ( !gOption ) gOption = {};
-    if ( !("script" in gOption ) ) gOption["script"] = false;
-    if ( !("images" in gOption ) ) gOption["images"] = true;
-    if ( !("inDepthTimeout" in gOption) ) gOption["inDepthTimeout"] = 0;
+
+    // start capture
     sbInvisibleBrowser.init();
     sbCaptureTask.init(myURLs);
     // link: 1 or more item (> 1 only for multiple capture)
