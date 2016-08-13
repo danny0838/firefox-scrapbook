@@ -450,11 +450,18 @@ var sbpFilter = {
         var filterSelected = -1;
         var filterNew = document.getElementById("sbpTextboxFilter").value;
         var ruleNew = document.getElementById("sbpMnuIncExc").label;
-        // 1. Browse the filter list for an identical entry
+        // 1. Confirm the filter is valid
+        try {
+            new RegExp(filterNew);
+        } catch(ex) {
+            alert(sbCommonUtils.lang("ERR_INAVLID_REGEXP", filterNew));
+            return;
+        }
+        // 2. Browse the filter list for an identical entry
         if ( this.filterEdited == -1 ) {
             filterSelected = this.filterList.indexOf(filterNew);
         }
-        // 2. Update filter list
+        // 3. Update filter list
         if ( filterSelected == -1 ) {
             var wrapper = document.getElementById("sbpTreeFilter").childNodes[1];
             if ( this.filterEdited == -1 ) {
@@ -480,9 +487,9 @@ var sbpFilter = {
                 this.filterEdited = -1;
             }
         }
-        // 3. Update selection
+        // 4. Update selection
         this.updateSelection();
-        // 4. Finalize
+        // 5. Finalize
         document.getElementById("sbpTextboxFilter").value = "";
         document.getElementById("sbpBtnAccept").disabled = true;
         document.getElementById("sbpBtnCancel").disabled = true;
