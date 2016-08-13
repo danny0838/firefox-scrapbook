@@ -56,7 +56,7 @@
 <!ENTITY sb.detail.linked.file.method0 "停用下載連結檔案">
 <!ENTITY sb.detail.linked.file.method1 "比對網址副檔名">
 <!ENTITY sb.detail.linked.file.method2 "比對 HTTP 標頭及網址副檔名">
-<!ENTITY sb.detail.linked.file.desc "下載完整副檔名符合任一行正規表示式的檔案。略過 &quot;#&quot; 開頭的行。">
+<!ENTITY sb.detail.linked.file.desc "下載完整副檔名符合任一行規則運算式的檔案。略過 &quot;#&quot; 開頭的行。">
 <!ENTITY sb.detail.linked.file.reset "還原預設值">
 <!ENTITY sb.detail.linked.page "多層擷取">
 <!ENTITY sb.detail.linked.page.depth "擷取連結層數">
