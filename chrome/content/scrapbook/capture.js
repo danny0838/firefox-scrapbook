@@ -200,7 +200,9 @@ var sbCaptureTask = {
     failed: 0,
 
     init: function(myURLs) {
-        for ( var i = 0; i < myURLs.length; i++ ) this.add(myURLs[i], 1, gTitles[i]);
+        for ( var i = 0, I = myURLs.length; i < I; i++ ) {
+            this.add(myURLs[i], 1, gTitles[i]);
+        }
     },
 
     add: function(aURL, aDepth, aTitle) {
