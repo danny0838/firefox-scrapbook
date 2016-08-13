@@ -151,12 +151,17 @@ function SB_initCapture() {
     // start capture
     sbInvisibleBrowser.init();
     sbCaptureTask.init(myURLs);
-    // link: 1 or more item (> 1 only for multiple capture)
+    // link: 1 or more item (> 1 for multiple capture)
     // capture-again, capture-again-deep: 1 item
-    // in-depth: 1 or more item, but it's possible that new items be added if depth > 2
+    // in-depth: 1 or more item, but it's possible that new items be added if depth >= 2
     if ( gURLs.length == 1 && gContext != "indepth" ) {
+        sbCaptureTask.TREE.collapsed = true;
+        document.getElementById("sbpCaptureProgress").hidden = true;
+        document.getElementById("sbpChkFilter").hidden = true;
+        document.getElementById("sbCaptureSkipButton").hidden = true;
         sbCaptureTask.start();
     } else {
+        document.getElementById("sbCaptureWindow").className = "complex";
         sbCaptureTask.seconds = -1;
         sbCaptureTask.toggleStartPause(false);
     }
@@ -196,14 +201,6 @@ var sbCaptureTask = {
     failed: 0,
 
     init: function(myURLs) {
-        if ( gContext != "indepth" && myURLs.length == 1 ) {
-            this.TREE.collapsed = true;
-            document.getElementById("sbpCaptureProgress").hidden = true;
-            document.getElementById("sbpChkFilter").hidden = true;
-            document.getElementById("sbCaptureSkipButton").hidden = true;
-        } else {
-            document.getElementById("sbCaptureWindow").className = "complex";
-        }
         if (!gTitles) gTitles = [];
         for ( var i = 0; i < myURLs.length; i++ ) this.add(myURLs[i], 1, gTitles[i]);
     },
