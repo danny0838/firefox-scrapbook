@@ -108,28 +108,35 @@ function SB_initCapture() {
     } else if ( gContext == "capture-again-deep" ) {
         var contDir = sbCommonUtils.getContentDir(gPreset[0]);
         // read sb-file2url.txt => gFile2URL for later usage
-        var file = contDir.clone();
-        file.append("sb-file2url.txt");
-        if ( !file.exists() ) { sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_FILE2URL")); window.close(); }
-        var lines = sbCommonUtils.readFile(file, "UTF-8").split("\n");
-        for ( var i = 0; i < lines.length; i++ ) {
-            var arr = lines[i].split("\t");
-            if ( arr.length == 2 ) gFile2URL[arr[0]] = arr[1];
+        var file = contDir.clone(); file.append("sb-file2url.txt");
+        if ( !file.exists() ) {
+            sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_FILE2URL"));
+            window.close();
         }
-        // read sb-url2name.txt => gURL2Name and search for source URL of the current page
-        file = contDir.clone();
-        file.append("sb-url2name.txt");
-        if ( !file.exists() ) { sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_URL2NAME")); window.close(); }
-        lines = sbCommonUtils.readFile(file, "UTF-8").split("\n");
-        for ( i = 0; i < lines.length; i++ ) {
-            var arr = lines[i].split("\t");
-            if ( arr.length == 2 ) {
-                gURL2Name[arr[0]] = arr[1];
-                if ( arr[1] == gPreset[1] ) myURLs = [arr[0]];
+        sbCommonUtils.readFile(file, "UTF-8").split("\n").forEach(function (line) {
+            var [file, url] = line.split("\t", 2);
+            if (url) {
+                gFile2URL[file] = url;
             }
-        }
+        });
         gPreset[3] = gFile2URL;
-        if ( !myURLs[0] ) { sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_SOURCE_URL", gPreset[1] + ".html.")); window.close(); }
+        // read sb-url2name.txt => gURL2Name and search for source URL of the current page
+        var file = contDir.clone(); file.append("sb-url2name.txt");
+        if ( !file.exists() ) {
+            sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_URL2NAME"));
+            window.close();
+        }
+        sbCommonUtils.readFile(file, "UTF-8").split("\n").forEach(function (line) {
+            var [url, docName] = line.split("\t", 2);
+            if (docName) {
+                gURL2Name[url] = docName;
+                if ( docName == gPreset[1] ) myURLs = [url];
+            }
+        });
+        if ( !myURLs[0] ) {
+            sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_SOURCE_URL", gPreset[1] + ".html."));
+            window.close();
+        }
     }
     if ( !gOption ) gOption = {};
     if ( !("script" in gOption ) ) gOption["script"] = false;
