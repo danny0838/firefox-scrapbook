@@ -1,6 +1,7 @@
 
 var gContentSaver = new sbContentSaverClass();
 var gURLs = [];
+var gTitles = [];
 var gDepths = [];
 var gRefURL = "";
 var gShowDetail = false;
@@ -12,7 +13,6 @@ var gFile2URL = {};
 var gURL2Name = {};
 var gPreset = [];
 var gContext = "";
-var gTitles = [];
 
 
 
@@ -92,6 +92,7 @@ function SB_initCapture() {
     }
 
     var myURLs = data.urls;
+    gTitles = data.titles || [];
     gRefURL = data.refUrl;
     gShowDetail = data.showDetail;
     gResName = data.resName;
@@ -100,7 +101,6 @@ function SB_initCapture() {
     gOption = data.option || {};
     gFile2URL = data.file2Url;
     gPreset = data.preset;
-    gTitles = data.titles || [];
     gContext = data.context;
 
     // preset for gOption
