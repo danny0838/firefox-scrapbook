@@ -448,57 +448,50 @@ var sbCaptureTask = {
 };
 
 var sbpFilter = {
-    sfFilter: [],
-    sfFilterIncExc: [],
-    sfFilterEdit: -1,            //enthält den Index des zu editierenden Filters
+    filterList: [],
+    ruleList: [],
+    filterEdited: -1,  // index of the audited filter
 
+    // Add a new filter or modify an existing one
     add: function() {
-        //Nimmt einen neuen Filter auf oder ändert einen bestehenden
-        //
-        //Ablauf
-        //1. Filterliste durchsuchen nach identischem Eintrag
-        //2. Filter in Tabelle aufnehmen, sofern noch nicht vorhanden
-        //3. Selektion aktualisieren
-        //4. Vorgang beendet
-
-        var aFilterVorhanden = -1;
-        var aFilterNeu = document.getElementById("sbpTextboxFilter").value;
-        var aFilterIncExcNeu = document.getElementById("sbpMnuIncExc").label;
-        //1. Filterliste durchsuchen nach identischem Eintrag
-        if ( this.sfFilterEdit == -1 ) {
-            for ( var aI=0; aI<this.sfFilter.length; aI++ ) {
-                if ( this.sfFilter[aI].match(aFilterNeu) ) {
-                    aFilterVorhanden = aI;
-                    aI = this.sfFilter.length;
+        var filterSelected = -1;
+        var filterNew = document.getElementById("sbpTextboxFilter").value;
+        var ruleNew = document.getElementById("sbpMnuIncExc").label;
+        // 1. Browse the filter list for an identical entry
+        if ( this.filterEdited == -1 ) {
+            for ( var aI=0; aI<this.filterList.length; aI++ ) {
+                if ( this.filterList[aI].match(filterNew) ) {
+                    filterSelected = aI;
+                    aI = this.filterList.length;
                 }
             }
         }
-        //2. Filter in Tabelle aufnehmen, sofern noch nicht vorhanden
-        if ( aFilterVorhanden == -1 ) {
+        // 2. Add the filter to table if not exist yet
+        if ( filterSelected == -1 ) {
             try {
                 var aTree = document.getElementById("sbpTreeFilter");
                 for ( var aI=0; aI<aTree.childNodes.length; aI++ ) {
                     if ( aTree.childNodes[aI].nodeName == "treechildren" ) {
-                        if ( this.sfFilterEdit == -1 ) {
-                            this.sfFilterIncExc.push(aFilterIncExcNeu);
-                            this.sfFilter.push(aFilterNeu);
+                        if ( this.filterEdited == -1 ) {
+                            this.ruleList.push(ruleNew);
+                            this.filterList.push(filterNew);
                             var aTchild = aTree.childNodes[aI];
                             var aTrow = document.createElement("treerow");
                             var aTcell0 = document.createElement("treecell");
-                            aTcell0.setAttribute("label", aFilterIncExcNeu);
+                            aTcell0.setAttribute("label", ruleNew);
                             aTrow.appendChild(aTcell0);
                             var aTcell1 = document.createElement("treecell");
-                            aTcell1.setAttribute("label", aFilterNeu);
+                            aTcell1.setAttribute("label", filterNew);
                             aTrow.appendChild(aTcell1);
                             var aTitem = document.createElement("treeitem");
                             aTitem.appendChild(aTrow);
                             aTchild.appendChild(aTitem);
                         } else {
-                            aTree.childNodes[aI].childNodes[0].childNodes[this.sfFilterEdit].childNodes[0].setAttribute("label", aFilterIncExcNeu);
-                            aTree.childNodes[aI].childNodes[0].childNodes[this.sfFilterEdit].childNodes[1].setAttribute("label", aFilterNeu);
-                            this.sfFilterIncExc[this.sfFilterEdit] = aFilterIncExcNeu;
-                            this.sfFilter[this.sfFilterEdit] = aFilterNeu;
-                            this.sfFilterEdit = -1;
+                            aTree.childNodes[aI].childNodes[0].childNodes[this.filterEdited].childNodes[0].setAttribute("label", ruleNew);
+                            aTree.childNodes[aI].childNodes[0].childNodes[this.filterEdited].childNodes[1].setAttribute("label", filterNew);
+                            this.ruleList[this.filterEdited] = ruleNew;
+                            this.filterList[this.filterEdited] = filterNew;
+                            this.filterEdited = -1;
                         }
                     }
                 }
@@ -506,108 +499,89 @@ var sbpFilter = {
                 sbCommonUtils.alert("This shouldn't happen\n---\n"+aEx);
             }
         }
-        //3. Selektion aktualisieren
+        // 3. Update selection
         this.updateSelection();
-        //4. Vorgang beendet
+        // 4. Finalize
         document.getElementById("sbpTextboxFilter").value = "";
         document.getElementById("sbpBtnAccept").disabled = true;
         document.getElementById("sbpBtnCancel").disabled = true;
         document.getElementById("sbpBtnDel").disabled = true;
     },
 
+    // Cancel edit of the selected entry
     cancel: function() {
-        //Das Editieren des ausgewählten Eintrags wird vom Benutzer abgebrochen
-
-        this.sfFilterEdit = -1;
+        this.filterEdited = -1;
         document.getElementById("sbpTextboxFilter").value = "";
         document.getElementById("sbpBtnAccept").disabled = true;
         document.getElementById("sbpBtnCancel").disabled = true;
         document.getElementById("sbpBtnDel").disabled = true;
     },
 
+    // Delete the selected filter
     del: function() {
-        //Löscht den selektierten Filter
-        //
-        //Ablauf:
-        //1. Eintrag aus Array entfernen
-        //2. Eintrag aus Tree entfernen
-        //3. Selektion aktualisieren
-        //4. Vorgang beendet
-
-        //1. Eintrag aus Array entfernen
-        this.sfFilterIncExc.splice(this.sfFilterEdit, 1);
-        this.sfFilter.splice(this.sfFilterEdit, 1);
-        //2. Eintrag aus Tree entfernen
+        // 1. Remove item from Array
+        this.ruleList.splice(this.filterEdited, 1);
+        this.filterList.splice(this.filterEdited, 1);
+        // 2. Remove entry from file
         var dTree = document.getElementById("sbpTreeFilter");
         for ( var dI=0; dI<dTree.childNodes.length; dI++ ) {
             if ( dTree.childNodes[dI].nodeName == "treechildren" ) {
-                dTree.childNodes[dI].childNodes[this.sfFilterEdit].childNodes[0].removeChild(dTree.childNodes[dI].childNodes[this.sfFilterEdit].childNodes[0].childNodes[1]);
-                dTree.childNodes[dI].childNodes[this.sfFilterEdit].childNodes[0].removeChild(dTree.childNodes[dI].childNodes[this.sfFilterEdit].childNodes[0].childNodes[0]);
-                dTree.childNodes[dI].childNodes[this.sfFilterEdit].removeChild(dTree.childNodes[dI].childNodes[this.sfFilterEdit].childNodes[0]);
-                dTree.childNodes[dI].removeChild(dTree.childNodes[dI].childNodes[this.sfFilterEdit]);
+                dTree.childNodes[dI].childNodes[this.filterEdited].childNodes[0].removeChild(dTree.childNodes[dI].childNodes[this.filterEdited].childNodes[0].childNodes[1]);
+                dTree.childNodes[dI].childNodes[this.filterEdited].childNodes[0].removeChild(dTree.childNodes[dI].childNodes[this.filterEdited].childNodes[0].childNodes[0]);
+                dTree.childNodes[dI].childNodes[this.filterEdited].removeChild(dTree.childNodes[dI].childNodes[this.filterEdited].childNodes[0]);
+                dTree.childNodes[dI].removeChild(dTree.childNodes[dI].childNodes[this.filterEdited]);
             }
         }
-        //3. Selektion aktualisieren
+        // 3. Update selection
         this.updateSelection();
-        //4. Vorgang beendet
-        this.sfFilterEdit = -1;
+        // 4. Finalize
+        this.filterEdited = -1;
         document.getElementById("sbpTextboxFilter").value = "";
         document.getElementById("sbpBtnAccept").disabled = true;
         document.getElementById("sbpBtnCancel").disabled = true;
         document.getElementById("sbpBtnDel").disabled = true;
     },
 
+    // Prepare to edit or delete a filter
     editFilter: function() {
-        //Vorbereiten zum Editieren oder Löschen eines Filters
-        //
-        //Ablauf:
-        //1. Bestimmen der Position des selektierten Eintrags
-        //2. Wurde ein Eintrag ausgewählt, wird das Editieren dieses Eintrags ermöglicht
-
-        //1.
-        this.sfFilterEdit = document.getElementById("sbpTreeFilter").currentIndex;
-        //2.
-        if ( this.sfFilterEdit > -1 ) {
-            if ( this.sfFilterIncExc[this.sfFilterEdit] == "Include" ) {
+        // 1. Determine the position of the selected entry
+        this.filterEdited = document.getElementById("sbpTreeFilter").currentIndex;
+        // 2. Select the entry and allow editing
+        if ( this.filterEdited > -1 ) {
+            if ( this.ruleList[this.filterEdited] == "Include" ) {
                 document.getElementById("sbpMnuIncExc").selectedIndex = 0;
             } else {
                 document.getElementById("sbpMnuIncExc").selectedIndex = 1;
             }
-            document.getElementById("sbpTextboxFilter").value = this.sfFilter[this.sfFilterEdit];
+            document.getElementById("sbpTextboxFilter").value = this.filterList[this.filterEdited];
             document.getElementById("sbpBtnAccept").disabled = true;
             document.getElementById("sbpBtnCancel").disabled = false;
             document.getElementById("sbpBtnDel").disabled = false;
         }
     },
 
-    filter: function(fURL) {
-        //Wendet die gesetzten Filter auf die übergebene URL an und liefert true oder false zurück
-        //
-        //Ablauf:
-        //1. Suchbegriff(e) in URL finden
-        //2. fRWert bestimmen
-        //3. true oder false an aufrufende Funktion zurückgegeben
-
-        //1. Suchbegriff(e) in URL finden
-        var fAufnehmen = 0;
-        for ( var fI=0; fI<this.sfFilter.length; fI++ ) {
-            if ( this.sfFilterIncExc[fI] == "Include" ) {
-                if ( fURL.match(sbpFilter.sfFilter[fI]) ) fAufnehmen++;
+    // Apply the filter to the passed URL and returns true or false
+    filter: function(url) {
+        // 1. find search term(s) in URL
+        var rec = 0;
+        for ( var fI=0; fI<this.filterList.length; fI++ ) {
+            if ( this.ruleList[fI] == "Include" ) {
+                if ( url.match(sbpFilter.filterList[fI]) ) rec++;
             } else {
-                if ( !fURL.match(sbpFilter.sfFilter[fI]) ) fAufnehmen++;
+                if ( !url.match(sbpFilter.filterList[fI]) ) rec++;
             }
         }
-        //2. fRWert bestimmen
-        var fRWert = false;
-        if ( fAufnehmen == this.sfFilter.length ) {
-            fRWert = true;
+        // 2. determine return value
+        var ret = false;
+        if ( rec == this.filterList.length ) {
+            ret = true;
         }
-        //3. true oder false an aufrufende Funktion zurückgegeben
-        return fRWert;
+        // 3. return true or false to the caller
+        return ret;
     },
 
+    // If text is available, enabled the OK button; otherwise disabled it
     input: function() {
-        //Ist Text vorhanden, wird der OK-Knopf freigeschaltet, andernfalls deaktiviert
         var iText = document.getElementById("sbpTextboxFilter").value;
         if ( iText.length > 0 ) {
             document.getElementById("sbpBtnAccept").disabled=false;
@@ -616,22 +590,21 @@ var sbpFilter = {
         }
     },
 
+    // Update the content of the current selection
     updateSelection: function() {
-        //Funktion aktualisiert den Inhalt der aktuellen Auswahl
+        var filterNumber = this.filterList.length;
 
-        var usFilteranzahl = this.sfFilter.length;
-
-        if ( usFilteranzahl==0 ) this.sfFilter.push("");
-        if ( this.sfFilter[0].substr(this.sfFilter[0].length-1, this.sfFilter[0].length) != "\\" ) {
-            var usTree = document.getElementById("sbpURLList");
-            if ( usTree.childNodes[1].childNodes.length>0 ) {
-                for ( var usI=sbCaptureTask.index; usI<gURLs.length; usI++ ) {
-                    var usChecked = this.filter(gURLs[usI]);
-                    usTree.childNodes[1].childNodes[usI].childNodes[0].childNodes[0].setAttribute("value", usChecked);
+        if ( filterNumber==0 ) this.filterList.push("");
+        if ( this.filterList[0].substr(this.filterList[0].length-1, this.filterList[0].length) != "\\" ) {
+            var tree = document.getElementById("sbpURLList");
+            if ( tree.childNodes[1].childNodes.length>0 ) {
+                for ( var aI=sbCaptureTask.index; aI<gURLs.length; aI++ ) {
+                    var aChecked = this.filter(gURLs[aI]);
+                    tree.childNodes[1].childNodes[aI].childNodes[0].childNodes[0].setAttribute("value", aChecked);
                 }
             }
         }
-        if ( usFilteranzahl==0 ) this.sfFilter = [];
+        if ( filterNumber==0 ) this.filterList = [];
     },
 
 };
