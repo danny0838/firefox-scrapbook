@@ -110,7 +110,7 @@ function SB_initCapture() {
         var contDir = sbCommonUtils.getContentDir(gPreset[0]);
         // read sb-file2url.txt => gFile2URL for later usage
         var file = contDir.clone(); file.append("sb-file2url.txt");
-        if ( !file.exists() ) {
+        if ( !(file.exists() && file.isFile()) ) {
             sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_FILE2URL"));
             window.close();
         }
@@ -123,7 +123,7 @@ function SB_initCapture() {
         gPreset[3] = gFile2URL;
         // read sb-url2name.txt => gURL2Name and search for source URL of the current page
         var file = contDir.clone(); file.append("sb-url2name.txt");
-        if ( !file.exists() ) {
+        if ( !(file.exists() && file.isFile()) ) {
             sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_URL2NAME"));
             window.close();
         }
