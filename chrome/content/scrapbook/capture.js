@@ -543,7 +543,7 @@ var sbpFilter = {
     },
 
     // Prepare to edit or delete a filter
-    editFilter: function() {
+    selectFilter: function() {
         // 1. Determine the position of the selected entry
         this.filterEdited = document.getElementById("sbpTreeFilter").currentIndex;
         // 2. Select the entry and allow editing

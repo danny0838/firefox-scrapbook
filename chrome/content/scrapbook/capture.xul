@@ -78,7 +78,7 @@
         </hbox>
         <tree id="sbpTreeFilter"
               autostrech="always"
-              onclick="sbpFilter.editFilter();"
+              onclick="sbpFilter.selectFilter();"
               rows="5"
               seltype="single"
         >
