@@ -200,8 +200,9 @@ var sbCaptureTask = {
     failed: 0,
 
     init: function(myURLs) {
+        var depth = (gContext == "indepth" ? 1 : 0);
         for ( var i = 0, I = myURLs.length; i < I; i++ ) {
-            this.add(myURLs[i], 1, gTitles[i]);
+            this.add(myURLs[i], depth, gTitles[i]);
         }
     },
 
