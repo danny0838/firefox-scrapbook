@@ -299,7 +299,7 @@ var sbCaptureTask = {
         if ( ++this.index >= gURLs.length ) {
             this.finalize();
         } else {
-            if ( quickly || gURLs[this.index].startsWith("file:") ) {
+            if ( quickly || this.URL.startsWith("file:") ) {
                 window.setTimeout(function(){ sbCaptureTask.start(); }, 0);
             } else {
                 this.seconds = this.INTERVAL;
