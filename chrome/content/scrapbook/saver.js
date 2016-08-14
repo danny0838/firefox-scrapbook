@@ -112,6 +112,7 @@ sbContentSaverClass.prototype = {
         this.item = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
         this.item.id = sbDataSource.identify(this.item.id);
         this.isMainFrame = true;
+        this.selection = null;
 
         this.file2URL = {
             "index.dat": true,
@@ -153,12 +154,17 @@ sbContentSaverClass.prototype = {
         this.item.chars = this.option["forceUtf8"] ? "UTF-8" : aRootWindow.document.characterSet;
         this.item.source = aRootWindow.location.href;
 
+        // if there is no selection, process as non-partial
+        if ( aIsPartial ) {
+            var sel = aRootWindow.getSelection();
+            if (!sel.isCollapsed) this.selection = sel;
+        }
+
         // Build the title list.
         // First is default title (document title or URL), others are candidate.
         var titles = [aRootWindow.document.title || decodeURI(this.item.source)];
         if (aTitle) titles.push(aTitle);
-        if ( aIsPartial ) {
-            this.selection = aRootWindow.getSelection();
+        if ( this.selection ) {
             var lines = this.selection.toString().split("\n");
             for ( var i = 0, I = lines.length; i < I; i++ ) {
                 var line = lines[i].replace(/[\r\n\t]+/g, "");
@@ -167,8 +173,6 @@ sbContentSaverClass.prototype = {
                     if ( titles.length > 4 ) break;
                 }
             }
-        } else {
-            this.selection = null;
         }
         this.item.title = titles[1] || titles[0];
         // If the edit toolbar is showing, also modify its title
