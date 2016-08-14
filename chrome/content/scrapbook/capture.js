@@ -925,8 +925,7 @@ sbHeaderSniffer.prototype = {
             if ( statusCode !== false) {
                 sbCaptureTask.updateStatus(statusCode + " " + statusText);
                 if ( statusCode >= 400 && statusCode < 600 || statusCode == 305 ) {
-                    sbCaptureTask.failed++;
-                    sbCaptureTask.fail(statusCode + " " + statusText);
+                    that.reportError(statusCode + " " + statusText);
                     return;
                 }
             } else {
@@ -959,7 +958,7 @@ sbHeaderSniffer.prototype = {
     checkLocalFile: function(URL) {
         var file = sbCommonUtils.convertURLToFile(URL);
         if (!(file.exists() && file.isFile() && file.isReadable())) {
-            this.reportError("can't access");
+            this.reportConnectError("can't access");
             return;
         }
         var mime = sbCommonUtils.getFileMime(file);
@@ -974,14 +973,14 @@ sbHeaderSniffer.prototype = {
             this._channel.setRequestHeader("User-Agent", navigator.userAgent, false);
             if ( refURL ) this._channel.setRequestHeader("Referer", refURL, false);
         } catch(ex) {
-            this.reportError("Invalid URL");
+            this.reportConnectError("Invalid URL");
             return;
         }
         try {
             this._channel.requestMethod = "HEAD";
             this._channel.asyncOpen(this._eventListener, this);
         } catch(ex) {
-            this.reportError(ex);
+            this.reportConnectError(ex);
         }
     },
 
@@ -1034,10 +1033,15 @@ sbHeaderSniffer.prototype = {
         if (this._channel) this._channel.cancel(Components.results.NS_BINDING_ABORTED);
     },
 
-    reportError: function(aErrorMsg) {
-        //Ermitteln, wann der Wert this.failed erhoeht werden muss
+    reportConnectError: function(aErrorMsg) {
+        this.reportError(sbCommonUtils.lang("CONNECT_FAILURE", aErrorMsg), aErrorMsg);
+    },
+
+    reportError: function(aErrorMsg, aStatus) {
+        if (!aStatus) aStatus = aErrorMsg;
+        sbCaptureTask.updateStatus(aStatus);
         sbCaptureTask.failed++;
-        sbCaptureTask.fail(sbCommonUtils.lang("CONNECT_FAILURE", aErrorMsg));
+        sbCaptureTask.fail(aErrorMsg);
     },
 
 };
