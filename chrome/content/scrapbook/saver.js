@@ -704,7 +704,7 @@ sbContentSaverClass.prototype = {
                         var fileName = this.download(aNode.href);
                         if (fileName) {
                             aNode.setAttribute("href", fileName);
-                            if ( this.isMainFrame && !this.item.icon ) this.item.icon = fileName;
+                            if ( this.isMainFrame ) this.item.icon = fileName;
                         }
                     } else {
                         aNode.setAttribute("href", aNode.href);
