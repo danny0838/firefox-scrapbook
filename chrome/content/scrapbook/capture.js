@@ -191,7 +191,6 @@ var sbCaptureTask = {
     get URL()      { return gURLs[this.index]; },
 
     index: 0,
-    isLocal: false,
     refreshHash: null,
     sniffer: null,
     seconds: 3,
@@ -232,6 +231,8 @@ var sbCaptureTask = {
         var cell2 = document.createElement("treecell");
         cell2.setAttribute("label", aTitle || "");
         row.appendChild(cell2);
+        var cell3 = document.createElement("treecell");
+        row.appendChild(cell3);
     },
 
     // start capture
@@ -264,21 +265,19 @@ var sbCaptureTask = {
         }
     },
 
+    updateStatus: function(aStatus) {
+        this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[3].setAttribute("label", aStatus);
+    },
+
     // when a capture completes successfully
     succeed: function() {
         document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
-        if (!this.isLocal) {
-            var statusParts = this.sniffer.getStatus();
-            var status = (statusParts[0] === false) ? "???" : statusParts.join(" ");
-        } else {
-            var status = "OK";
-        }
-        var treecell = document.createElement("treecell");
-        treecell.setAttribute("label", status);
-        treecell.setAttribute("properties", "success");
-        this.TREE.childNodes[1].childNodes[this.index].childNodes[0].appendChild(treecell);
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "finished");
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[2].setAttribute("label", gTitles[this.index] || "");
+        this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[3].setAttribute("properties", "success");
+        if (!this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[3].hasAttribute("label")) {
+            this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[3].setAttribute("label", "OK");
+        }
         this.next(false);
     },
 
@@ -286,17 +285,11 @@ var sbCaptureTask = {
     fail: function(aErrorMsg) {
         document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
         if ( aErrorMsg ) SB_trace(aErrorMsg);
-        if (!this.isLocal) {
-            var statusParts = this.sniffer.getStatus();
-            var status = (statusParts[0] === false) ? "???" : statusParts.join(" ");
-        } else {
-            var status = "ERROR";
-        }
-        var treecell = document.createElement("treecell");
-        treecell.setAttribute("label", status);
-        treecell.setAttribute("properties", "failed");
-        this.TREE.childNodes[1].childNodes[this.index].childNodes[0].appendChild(treecell);
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "finished");
+        this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[3].setAttribute("properties", "failed");
+        if (!this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[3].hasAttribute("label")) {
+            this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[3].setAttribute("label", "ERROR");
+        }
         this.next(true);
     },
 
@@ -928,13 +921,17 @@ sbHeaderSniffer.prototype = {
             SB_trace(sbCommonUtils.lang("CONNECT_SUCCESS", contentType));
 
             // get and show http status
-            var httpStatus = that.getStatus();
-            if ( httpStatus[0] === false) {
+            var [statusCode, statusText] = that.getStatus();
+            if ( statusCode !== false) {
+                sbCaptureTask.updateStatus(statusCode + " " + statusText);
+                if ( statusCode >= 400 && statusCode < 600 || statusCode == 305 ) {
+                    sbCaptureTask.failed++;
+                    sbCaptureTask.fail(statusCode + " " + statusText);
+                    return;
+                }
+            } else {
+                sbCaptureTask.updateStatus("???");
                 // got no status code, do nothing (continue parsing HTML)
-            } else if ( httpStatus[0] >= 400 && httpStatus[0] < 600 || httpStatus[0] == 305 ) {
-                sbCaptureTask.failed++;
-                sbCaptureTask.fail(httpStatus.join(" "));
-                return;
             }
 
             // manage redirect if defined
@@ -960,7 +957,6 @@ sbHeaderSniffer.prototype = {
     },
 
     checkLocalFile: function(URL) {
-        sbCaptureTask.isLocal = true;
         var file = sbCommonUtils.convertURLToFile(URL);
         if (!(file.exists() && file.isFile() && file.isReadable())) {
             this.reportError("can't access");
@@ -971,7 +967,6 @@ sbHeaderSniffer.prototype = {
     },
 
     checkHttpHeader: function(URL, refURL) {
-        sbCaptureTask.isLocal = false;
         this._channel = null;
         try {
             this._channel = sbCommonUtils.newChannel(URL).QueryInterface(Components.interfaces.nsIHttpChannel);
