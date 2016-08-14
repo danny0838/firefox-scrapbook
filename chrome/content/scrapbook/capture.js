@@ -382,7 +382,7 @@ var sbCaptureTask = {
         document.getElementById("sbCaptureSkipButton").disabled = true;
 
         if (wasActive) {
-            this.index = gURLs.length - 1; // mark to finalize on next capture
+            this.next = this.finalize; // mark to finalize on next capture
         } else {
             this.finalize();
         }
