@@ -43,7 +43,6 @@ function sbContentSaverClass() {
     this.option = {};
     this.documentName = "";
     this.item = null;
-    this.favicon = null;
     this.contentDir = null;
     this.refURLObj = null;
     this.isMainFrame = true;
@@ -112,7 +111,6 @@ sbContentSaverClass.prototype = {
         this.documentName = "index";
         this.item = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
         this.item.id = sbDataSource.identify(this.item.id);
-        this.favicon = null;
         this.isMainFrame = true;
 
         this.file2URL = {
@@ -155,11 +153,6 @@ sbContentSaverClass.prototype = {
         this.item.chars = this.option["forceUtf8"] ? "UTF-8" : aRootWindow.document.characterSet;
         this.item.source = aRootWindow.location.href;
 
-        // use the favicon shown in the tab for the page
-        if ( "gBrowser" in window && aRootWindow == gBrowser.contentWindow ) {
-            this.item.icon = gBrowser.mCurrentBrowser.mIconURL;
-        }
-
         // Build the title list. First is default, others are selectable in the capture detail dialog.
         var titles = aRootWindow.document.title ? [aRootWindow.document.title] : [decodeURI(this.item.source)];
         if ( aTitle ) titles[0] = aTitle;
@@ -198,10 +191,14 @@ sbContentSaverClass.prototype = {
         this.contentDir = sbCommonUtils.getContentDir(this.item.id);
         var newName = this.saveDocumentInternal(aRootWindow.document, this.documentName);
 
-        // if tab item icon exists, use it as favicon
-        if ( this.item.icon && this.item.type != "image" && this.item.type != "file" ) {
-            var iconFileName = this.download(this.item.icon);
-            if (iconFileName) this.favicon = iconFileName;
+        // Use the tab icon as the item icon if it's available
+        // For a file or image, use default (file extension related icon)
+        if ( ["file", "image"].indexOf(this.item.type) == -1 ) {
+            if ( "gBrowser" in window && aRootWindow == gBrowser.contentWindow ) {
+                var iconURL = gBrowser.mCurrentBrowser.mIconURL;
+                var iconFileName = this.download(iconURL);
+                if (iconFileName) this.item.icon = iconFileName;
+            }
         }
 
         // register resource to the rdf
@@ -705,7 +702,7 @@ sbContentSaverClass.prototype = {
                         var fileName = this.download(aNode.href);
                         if (fileName) {
                             aNode.setAttribute("href", fileName);
-                            if ( this.isMainFrame && !this.favicon ) this.favicon = fileName;
+                            if ( this.isMainFrame && !this.item.icon ) this.item.icon = fileName;
                         }
                     } else {
                         aNode.setAttribute("href", aNode.href);
@@ -1505,9 +1502,6 @@ sbContentSaverClass.prototype = {
         var res = this.treeRes;
         if (res && sbDataSource.exists(res)) {
             sbDataSource.setProperty(res, "type", aItem.type);
-            if ( this.favicon ) {
-                aItem.icon = this.favicon;
-            }
             // We replace the "urn:scrapbook-download:*" and skip adding "resource://" to prevent an issue
             // for URLs containing ":", such as "moz-icon://".
             if (aItem.icon) {
