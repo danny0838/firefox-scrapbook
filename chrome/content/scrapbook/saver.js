@@ -76,7 +76,6 @@ sbContentSaverClass.prototype = {
             "asHtml": sbCommonUtils.getPref("capture.default.asHtml", false),
             "forceUtf8": sbCommonUtils.getPref("capture.default.forceUtf8", true),
             "tidyCSS": sbCommonUtils.getPref("capture.default.tidyCSS", true),
-            "keepLink": sbCommonUtils.getPref("capture.default.keepLink", false),
             "saveDataURI": sbCommonUtils.getPref("capture.default.saveDataURI", false),
             "serializeFilename": sbCommonUtils.getPref("capture.default.serializeFilename", false),
             "linkURLFilters": sbCommonUtils.getPref("capture.default.linkURLFilters", ""),
@@ -96,7 +95,6 @@ sbContentSaverClass.prototype = {
                 this.option["frames"] = true;
                 this.option["styles"] = true;
                 this.option["script"] = true;
-                this.option["keepLink"] = false;
                 break;
             case "internalize":
                 this.option["isPartial"] = false;
@@ -108,7 +106,6 @@ sbContentSaverClass.prototype = {
                 this.option["asHtml"] = false;
                 this.option["forceUtf8"] = false;
                 this.option["tidyCSS"] = false;
-                this.option["keepLink"] = false;
                 break;
         }
         
@@ -388,10 +385,8 @@ sbContentSaverClass.prototype = {
                 if ( sbCommonUtils.getSbObjectType(node) == "stylesheet" ) {
                     // a special stylesheet used by scrapbook, keep it intact
                     return;
-                } else if ( this.option["styles"] || this.option["keepLink"] ) {
+                } else if ( this.option["styles"] ) {
                     if ( this.option["tidyCSS"] ) {
-                        // preserve <style> if option["keepLink"] == true even if option["styles"] == false
-                        // since it makes less sense to preserve <link>s but remove <style>s
                         var cssText = this.processCSSRules(css, this.refURLObj.spec, aDocument, "");
                         cssText = "\n/* Code tidied up by ScrapBook */\n" + cssText;
                         node.textContent = cssText;
@@ -422,9 +417,6 @@ sbContentSaverClass.prototype = {
                         var fileName = this.download(url, null);
                         if (fileName) node.setAttribute("href", fileName);
                     }
-                } else if ( this.option["keepLink"] ) {
-                    // link to the source css file
-                    node.setAttribute("href", url);
                 } else {
                     // not capturing styles, set it blank
                     node.setAttribute("href", this.getSkippedURL(url));
@@ -551,8 +543,6 @@ sbContentSaverClass.prototype = {
                     if ( this.option["images"] ) {
                         var fileName = this.download(url);
                         if (fileName) aNode.setAttribute("src", fileName);
-                    } else if ( this.option["keepLink"] ) {
-                        aNode.setAttribute("src", url);
                     } else {
                         aNode.setAttribute("src", this.getSkippedURL(url));
                     }
@@ -565,8 +555,6 @@ sbContentSaverClass.prototype = {
                         if ( that.option["images"] ) {
                             var fileName = that.download(url);
                             if (fileName) return fileName;
-                        } else if ( that.option["keepLink"] ) {
-                            return url;
                         } else {
                             return that.getSkippedURL(url);
                         }
@@ -583,8 +571,6 @@ sbContentSaverClass.prototype = {
                     if ( this.option["media"] ) {
                         var fileName = this.download(url);
                         if (fileName) aNode.setAttribute("src", fileName);
-                    } else if ( this.option["keepLink"] ) {
-                        aNode.setAttribute("src", url);
                     } else {
                         aNode.setAttribute("src", this.getSkippedURL(url));
                     }
@@ -598,8 +584,6 @@ sbContentSaverClass.prototype = {
                     if ( this.option[type] ) {
                         var fileName = this.download(url);
                         if (fileName) aNode.setAttribute("src", fileName);
-                    } else if ( this.option["keepLink"] ) {
-                        aNode.setAttribute("src", url);
                     } else {
                         aNode.setAttribute("src", this.getSkippedURL(url));
                     }
@@ -613,8 +597,6 @@ sbContentSaverClass.prototype = {
                         if ( that.option[type] ) {
                             var fileName = that.download(url);
                             if (fileName) return fileName;
-                        } else if ( that.option["keepLink"] ) {
-                            return url;
                         } else {
                             return that.getSkippedURL(url);
                         }
@@ -629,8 +611,6 @@ sbContentSaverClass.prototype = {
                     if ( this.option["media"] ) {
                         var fileName = this.download(url);
                         if (fileName) aNode.setAttribute("data", fileName);
-                    } else if ( this.option["keepLink"] ) {
-                        aNode.setAttribute("data", url);
                     } else {
                         aNode.setAttribute("data", this.getSkippedURL(url));
                     }
@@ -643,8 +623,6 @@ sbContentSaverClass.prototype = {
                     if ( this.option["media"] ) {
                         var fileName = this.download(url);
                         if (fileName) aNode.setAttribute("archive", fileName);
-                    } else if ( this.option["keepLink"] ) {
-                        aNode.setAttribute("archive", url);
                     } else {
                         aNode.setAttribute("archive", this.getSkippedURL(url));
                     }
@@ -677,8 +655,6 @@ sbContentSaverClass.prototype = {
                     if ( this.option["images"] ) {
                         var fileName = this.download(url);
                         if (fileName) aNode.setAttribute("background", fileName);
-                    } else if ( this.option["keepLink"] ) {
-                        aNode.setAttribute("background", url);
                     } else {
                         aNode.setAttribute("background", this.getSkippedURL(url));
                     }
@@ -693,8 +669,6 @@ sbContentSaverClass.prototype = {
                             if ( this.option["images"] ) {
                                 var fileName = this.download(url);
                                 if (fileName) aNode.setAttribute("src", fileName);
-                            } else if ( this.option["keepLink"] ) {
-                                aNode.setAttribute("src", url);
                             } else {
                                 aNode.setAttribute("src", this.getSkippedURL(url));
                             }
@@ -880,8 +854,6 @@ sbContentSaverClass.prototype = {
                     var newFileName = this.saveDocumentInternal(this.elemMapOrig[idx].contentDocument, this.documentName + "_" + (parseInt(idx)+1));
                     aNode.setAttribute("src", this.escapeURL(newFileName, null, true));
                     this.refURLObj = tmpRefURL;
-                } else if ( this.option["keepLink"] ) {
-                    aNode.setAttribute("src", aNode.src);
                 } else {
                     aNode.setAttribute("src", this.getSkippedURL(aNode.src));
                 }
@@ -1026,7 +998,7 @@ sbContentSaverClass.prototype = {
                     if (that.option["images"]) {
                         var dataFile = that.download(dataURL, "quote");
                         if (dataFile) dataURL = dataFile;
-                    } else if (!that.option["keepLink"]) {
+                    } else {
                         dataURL = that.getSkippedURL(dataURL);
                     }
                     break;
@@ -1034,7 +1006,7 @@ sbContentSaverClass.prototype = {
                     if (that.option["fonts"]) {
                         var dataFile = that.download(dataURL, "quote");
                         if (dataFile) dataURL = dataFile;
-                    } else if (!that.option["keepLink"]) {
+                    } else {
                         dataURL = that.getSkippedURL(dataURL);
                     }
                     break;
