@@ -15,6 +15,7 @@ var sbp2CaptureAdd = {
 		//1. Variablen initialisieren
 		//2. Sicherstellen, dass mindestens eine Seite in this.caRes auf window.arguments[0].url verweist
 		//3. Return-Code abhängig vom Prüfungsergebnis zurückgeben
+		//3.1 Angaben zu Archivierungstiefe und Timeout übergeben
 
 		//1. Variablen initialisieren
 		var caData = null;
@@ -28,12 +29,12 @@ var sbp2CaptureAdd = {
 		caFile.append("sbp2-links.txt");
 		caData = sbp2Common.fileRead(caFile);
 		caLines = caData.split("\n");
-		for ( var caI=0; caI<caLines.length-1; caI = caI + 7 )
+		for ( var caI=0; caI<caLines.length-1; caI = caI + 8 )
 		{
 			//Adresse muss übereinstimmen
 			if ( window.arguments[0].url == caLines[caI] ) {
 				//Seite darf noch nicht archiviert worden sein
-				if ( caLines[caI+5] == 0 ) {
+				if ( caLines[caI+6] == 0 ) {
 					//Resource ist gültig und kann daher als Ziel genutzt werden
 					caI = caLines.length;
 					window.arguments[1].id = caID;
@@ -44,12 +45,12 @@ var sbp2CaptureAdd = {
 				}
 			}
 		}
-		//3. Angaben zu Archivierungstiefe und Timeout übergeben
-		window.arguments[1].depthMax = parseInt(document.getElementById("sbp2DetailInDepthRadioGroup").selectedItem.label);
-		window.arguments[1].mode = window.arguments[1].depthMax == 0 ? 2 : 3;
-		window.arguments[1].timeout = parseInt(document.getElementById("sbp2DetailTimeoutRadioGroup").selectedItem.label);
-		//4. Return-Code abhängig vom Prüfungsergebnis zurückgeben
+		//3. Return-Code abhängig vom Prüfungsergebnis zurückgeben
 		if ( caOK == 0 ) {
+			//3.1 Angaben zu Archivierungstiefe und Timeout übergeben
+			window.arguments[1].depthMax = parseInt(document.getElementById("sbp2DetailInDepthRadioGroup").selectedItem.label);
+			window.arguments[1].mode = window.arguments[1].depthMax == 0 ? 2 : 3;
+			window.arguments[1].timeout = parseInt(document.getElementById("sbp2DetailTimeoutRadioGroup").selectedItem.label);
 			return true;
 		} else if ( caOK == 1 ) {
 			alert(document.getElementById("sbp2CaptureAddString").getString("RESALREADYCONTAINSLINK"));
@@ -71,17 +72,33 @@ var sbp2CaptureAdd = {
 	{
 //wird von sbp2CaptureAdd.xul aufgerufen
 		//Ablauf:
-		//1. Datenquelle scrapbook.rdf laden
-		//2. Dem Tree die Datenquelle zuweisen. Ohne rebuild wird nichts angezeigt.
-		//3. OK-Knopf deaktivieren, da noch kein gültiger Eintrag im Tree ausgewählt worden ist
+		//1. tree-css.txt initialisieren, falls die Datei noch nicht existiert
+		//2. tree-css.txt laden
+		//4. Datenquelle scrapbook.rdf laden
+		//5. Dem Tree die Datenquelle zuweisen. Ohne rebuild wird nichts angezeigt.
+		//6. OK-Knopf deaktivieren, da noch kein gültiger Eintrag im Tree ausgewählt worden ist
 
-		//1. Datenquelle scrapbook.rdf laden
+		//1. tree-css.txt initialisieren, falls die Datei noch nicht existiert
+		var ciProfilVZ = sbp2Common.PVZ.get("ProfD", Components.interfaces.nsIFile);
+		ciProfilVZ.append("ScrapBookPlus2");
+		ciProfilVZ.append("tree-css.txt");
+		if ( !ciProfilVZ.exists() ) {
+			var ciData = "color: #20C020 ;\n";
+			sbp2Common.fileWrite(ciProfilVZ, ciData, "UTF-8");
+		}
+		//2. tree-css.txt laden
+		var ciData = sbp2Common.fileRead(ciProfilVZ);
+		var ciLines = ciData.split("\n");
+		if ( ciLines.length > 1 ) {
+			document.styleSheets[2].insertRule("treechildren::-moz-tree-cell-text(bookmark) { " + ciLines[0] + "}", 0);
+		}
+		//3. Datenquelle scrapbook.rdf laden
 		if ( sbp2DataSource.dbData == null ) sbp2DataSource.init();
-		//2. Dem Tree die Datenquelle zuweisen. Ohne rebuild wird nichts angezeigt.
+		//4. Dem Tree die Datenquelle zuweisen. Ohne rebuild wird nichts angezeigt.
 		var ciTree = document.getElementById("sbp2CATree");
 		ciTree.database.AddDataSource(sbp2DataSource.dbData);
 		ciTree.builder.rebuild();
-		//3. OK-Knopf deaktivieren, da noch kein gültiger Eintrag im Tree ausgewählt worden ist
+		//5. OK-Knopf deaktivieren, da noch kein gültiger Eintrag im Tree ausgewählt worden ist
 		document.documentElement.getButton("accept").disabled = true;
 	},
 
@@ -175,7 +192,7 @@ if ( ctocObject.value != "cell" && ctocObject.value != "image" && ctocObject.val
 		var ctocIndex = ctocTree.currentIndex;
 		var ctocRes = ctocTree.builderView.getResourceAtIndex(ctocIndex);
 		var ctocType = sbp2DataSource.propertyGet(sbp2DataSource.dbData, ctocRes, "type");
-		if ( ctocType == "folder" || ctocType == "separator" ) ctocDisabled = true;
+		if ( ctocType == "bookmark" || ctocType == "folder" || ctocType == "separator" ) ctocDisabled = true;
 		//4. Resource merken, falls ctocDisabled auf false steht
 		if ( ctocDisabled == false ) this.caRes = ctocRes;
 		//5. OK-Knopf aktivieren/deaktivieren

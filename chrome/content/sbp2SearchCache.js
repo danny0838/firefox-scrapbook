@@ -182,7 +182,7 @@ var sbp2SearchCache = {
 				//Frames extrahieren
 				var iaFrames = iaData.match(/<frame( |\r|\n).*>/gi);
 				//Text aus HTML-Seiten extrahieren
-				var iaData = sbp2Common.convertToUnicode(iaData, sbp2DataSource.propertyGet(sbp2DataSource.dbData, iaRes, "chars"));
+				var iaData = sbp2Common.convertToUnicode(iaData, sbp2DataSource.propertyGet(sbp2DataSource.dbData, iaRes, "chars"), iaFile.path);
 				var iaDataAll = this.convertHTML2Text(iaData);
 				if ( iaFrames ) {
 					for ( var iaJ=0; iaJ<iaFrames.length; iaJ++ )

@@ -5,6 +5,27 @@ var sbp2CaptureFilter = {
 	cfFilterIncExc		: [],			//Liste mit Include/Exclude-Angaben zu allen Einträgen in cfFilter
 	cfFilterEdit		: -1,			//enthält den Index des Filters, der gerade editiert wird
 
+	getFilterList : function()
+	{
+//Wird von sbp2CaptureSaverInDepth.captureComplete() aufgerufen.
+		//Liefert eine Zeichenkette mit allen Filtern an die aufrufende Funktion zurück.
+		//
+		//Ablauf:
+		//1. Variablen initialisieren
+		//2. Zeichenkette erstellen
+		//3. Zeichenkette zurückgeben an aufrufende Funktion
+
+		//1. Variablen initialisieren
+		var gflData = "";
+		//2. Zeichenkette erstellen
+		for ( var gflI=0; gflI<this.cfFilter.length; gflI++ )
+		{
+			gflData = gflData + this.cfFilterIncExc[gflI] + "\n" + this.cfFilter[gflI] + "\n";
+		}
+		//3. Zeichenkette zurückgeben an aufrufende Funktion
+		return gflData;
+	},
+
 	input : function()
 	{
 		//Ist Text vorhanden, wird der OK-Knopf freigeschaltet, andernfalls deaktiviert
@@ -16,7 +37,7 @@ var sbp2CaptureFilter = {
 		}
 	},
 
-	itemAdd : function()
+	itemAdd : function(iaIncExc, iaTitle)
 	{
 		//Nimmt einen neuen Filter auf oder ändert einen bestehenden.
 		//Die Anzahl der selektierten Einträge wird an die aufrufende Funktion zurückgegeben.
@@ -30,8 +51,10 @@ var sbp2CaptureFilter = {
 
 		//1. Variablen initialisieren
 		var iaExists = -1;
-		var iaIncExc = document.getElementById("sbp2MnuIncExc").label;
-		var iaTitle = document.getElementById("sbp2TextboxFilter").value;
+		if ( iaIncExc == null ) {
+			iaIncExc = document.getElementById("sbp2MnuIncExc").label;
+			iaTitle = document.getElementById("sbp2TextboxFilter").value;
+		}
 		//2. Prüfen, ob Eintrag gültig ist
 			var iaSlash = 0;
 			if ( iaTitle.substring(0, 1) == "+" ) {

@@ -9,10 +9,118 @@
 <prefwindow id="sbp2PrefWindow"
 			xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
 			onchange=""
-			onload="sbp2Preferences.keysInit();"
-			onunload="sbp2Preferences.keysAccept();"
-			style="height: 35em; width: 40em;"
+			ondialogaccept="sbp2Preferences.accept();"
+			onload="sbp2Preferences.init();"
+			style="height: 45em; width: 60em;"
 			title="ScrapBook Plus 2 - Einstellungen">
+
+
+	<prefpane id="sbp2PrefMain" label="&sbp2.prefs.main;" flex="1">
+		<hbox>
+			<vbox width="250px;" >
+				<label align="left" flex="1" value="&sbp2.prefs.main.treeColors;" />
+				<browser id="sbp2TreeColorsBrowser" collapsed="false" context="" disablehistory="true" style="width: 200px; height: 400px;" type="content" />
+			</vbox>
+			<spacer width="10px;" />
+			<vbox flex="1" pack="center" >
+				<groupbox>
+					<caption label="&sbp2.prefs.main.treeColors.type;" />
+					<textbox id="sbp2TreeColorsType" value="abc" disabled="true" width="100px;" />
+				</groupbox>
+				<groupbox>
+					<caption label="&sbp2.prefs.main.treeColors.color;" />
+					<hbox>
+						<colorpicker disabled="true" id="sbp2TreeColorsCl" type="button" color="#FFFFFF" onchange="sbp2Preferences.treecolorsUpdateBrowser();" />
+					</hbox>
+				</groupbox>
+			</vbox>
+		</hbox>
+	</prefpane>
+
+	<prefpane id="sbp2PrefeditorHighlighting" label="&sbp2.prefs.editorHighlighting;" flex="1">
+		<popupset>
+			<menupopup id="sbp2EditorHLPopup" onpopupshowing="sbp2Preferences.highlighterCheckNode(event);">
+				<menuitem id="sbp2EditorHLCut"	label="&sbp2.prefs.editorHighlighting.context.cut;"	  oncommand="sbp2Preferences.highlighterActionCut();" />
+				<menuitem id="sbp2EditorHLCopy"	label="&sbp2.prefs.editorHighlighting.context.copy;"  oncommand="sbp2Preferences.highlighterActionCopy();" />
+				<menuitem id="sbp2EditorHLPstB"	label="&sbp2.prefs.editorHighlighting.context.pstb;"  oncommand="sbp2Preferences.highlighterActionPasteB();" />
+				<menuitem id="sbp2EditorHLPstA"	label="&sbp2.prefs.editorHighlighting.context.psta;"  oncommand="sbp2Preferences.highlighterActionPasteA();" />
+				<menuseparator />
+				<menuitem id="sbp2EditorHLDel"	label="&sbp2.prefs.editorHighlighting.context.del;"   oncommand="sbp2Preferences.highlighterActionDelete();" />
+			</menupopup>
+		</popupset>
+		<hbox>
+			<vbox width="250px;" >
+				<label align="left" flex="1" value="&sbp2.prefs.editorHighlighting.title;" />
+				<browser id="sbp2EditorHLBrowser" collapsed="false" context="sbp2EditorHLPopup" disablehistory="true" style="width: 200px; height: 400px;" type="content" />
+			</vbox>
+			<spacer width="10px;" />
+			<vbox flex="1" pack="center" >
+				<groupbox>
+					<label value="&sbp2.prefs.editorHighlighting.title;" />
+					<textbox id="sbp2EditorHLTitle" value="abc" width="100px;" oninput="sbp2Preferences.highlighterUpdateName();" />
+				</groupbox>
+				<groupbox>
+					<caption label="&sbp2.prefs.editorHighlighting.background;" />
+					<hbox>
+						<checkbox id="sbp2EditorHLBackgroundCB" label="&sbp2.prefs.editorHighlighting.backgroundColor;" oncommand="sbp2Preferences.highlighterUpdatePreviewLabel();sbp2Preferences.highlighterUpdateUIPart3(0);" />
+						<colorpicker disabled="true" id="sbp2EditorHLBackgroundCl" type="button" color="#FFFFFF" onchange="sbp2Preferences.highlighterUpdatePreviewLabel();" />
+					</hbox>
+				</groupbox>
+				<groupbox>
+					<caption label="&sbp2.prefs.editorHighlighting.font;" />
+					<hbox>
+						<checkbox id="sbp2EditorHLFontCB" label="&sbp2.prefs.editorHighlighting.backgroundColor;"   oncommand="sbp2Preferences.highlighterUpdatePreviewLabel();sbp2Preferences.highlighterUpdateUIPart3(1);" />
+						<colorpicker disabled="true" id="sbp2EditorHLFontCl" type="button" color="#000000" onchange="sbp2Preferences.highlighterUpdatePreviewLabel();" />
+						<spacer width="20" />
+						<checkbox id="sbp2EditorHLFontBl" label="&sbp2.prefs.editorHighlighting.fontBold;"          oncommand="sbp2Preferences.highlighterUpdatePreviewLabel();sbp2Preferences.highlighterUpdateUIPart3(1);" />
+						<checkbox id="sbp2EditorHLFontIt" label="&sbp2.prefs.editorHighlighting.fontItalic;"        oncommand="sbp2Preferences.highlighterUpdatePreviewLabel();sbp2Preferences.highlighterUpdateUIPart3(1);" />
+						<checkbox id="sbp2EditorHLFontLn" label="&sbp2.prefs.editorHighlighting.fontStrikethrough;" oncommand="sbp2Preferences.highlighterUpdatePreviewLabel();sbp2Preferences.highlighterUpdateUIPart3(1);" />
+					</hbox>
+				</groupbox>
+				<groupbox>
+					<caption label="&sbp2.prefs.editorHighlighting.border;" />
+					<hbox>
+						<checkbox id="sbp2EditorHLBorderCB" label="&sbp2.prefs.editorHighlighting.backgroundColor;" oncommand="sbp2Preferences.highlighterUpdatePreviewLabel();sbp2Preferences.highlighterUpdateUIPart3(2);" />
+						<colorpicker disabled="true" id="sbp2EditorHLBorderCl" type="button" color="#FFFFFF" onchange="sbp2Preferences.highlighterUpdatePreviewLabel();" />
+					</hbox>
+					<hbox align="center" style="margin-top: 10px;">
+						<label value="&sbp2.prefs.editorHighlighting.borderType;" />
+						<menulist disabled="true" id="sbp2EditorHLBorderTp" oncommand="sbp2Preferences.highlighterUpdatePreviewLabel();">
+							<menupopup>
+								<menuitem value="border"        label="&sbp2.prefs.editorHighlighting.borderType.bordered;"   index="0" />
+								<menuitem value="border-bottom" label="&sbp2.prefs.editorHighlighting.borderType.underlined;" index="1" />
+							</menupopup>
+						</menulist>
+						<label value="&sbp2.prefs.editorHighlighting.borderStyle;" />
+						<menulist disabled="true" id="sbp2EditorHLBorderSt" oncommand="sbp2Preferences.highlighterUpdatePreviewLabel();">
+							<menupopup>
+								<menuitem value="solid"         label="&sbp2.prefs.editorHighlighting.borderStyle.solid;"     index="0" />
+								<menuitem value="dotted"        label="&sbp2.prefs.editorHighlighting.borderStyle.dotted;"    index="1" />
+								<menuitem value="dashed"        label="&sbp2.prefs.editorHighlighting.borderStyle.dashed;"    index="2" />
+								<menuitem value="double"        label="&sbp2.prefs.editorHighlighting.borderStyle.double;"    index="3" />
+							</menupopup>
+						</menulist>
+						<label value="&sbp2.prefs.editorHighlighting.borderWidth;" />
+						<menulist disabled="true" id="sbp2EditorHLBorderWd" oncommand="sbp2Preferences.highlighterUpdatePreviewLabel();">
+							<menupopup>
+								<menuitem value="thin"          label="&sbp2.prefs.editorHighlighting.borderWidth.thin;"      index="0" />
+								<menuitem value="medium"        label="&sbp2.prefs.editorHighlighting.borderWidth.medium;"    index="1" />
+								<menuitem value="thick"         label="&sbp2.prefs.editorHighlighting.borderWidth.thick;"     index="2" />
+							</menupopup>
+						</menulist>
+					</hbox>
+				</groupbox>
+				<vbox align="center" pack="center" style="background: white; height: 5em; border: 1px solid ThreeDShadow;">
+					<label id="sbp2EditorHLPreview" crop="end" value="abc" />
+				</vbox>
+				<hbox align="center" pack="center" style="margin-top: 20px;">
+					<button disabled="true"	id="sbp2EditorHLAdd"   label="&sbp2.prefs.editorHighlighting.btn.add;"   oncommand="sbp2Preferences.highlighterSettingsAdd();" />
+					<button disabled="true" id="sbp2EditorHLApply" label="&sbp2.prefs.editorHighlighting.btn.apply;" oncommand="sbp2Preferences.highlighterSettingsApply();" />
+					<button disabled="true" id="sbp2EditorHLReset" label="&sbp2.prefs.editorHighlighting.btn.reset;" oncommand="sbp2Preferences.highlighterSettingsReset();" />
+				</hbox>
+			</vbox>
+		</hbox>
+	</prefpane>
 
 	<prefpane id="sbp2PrefKeys" label="&sbp2.prefs.keys;" flex="1">
 		<preferences>
@@ -60,6 +168,7 @@
 		<description>&sbp2.prefs.keys.tip;</description>
 	</prefpane>
 
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Preferences.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Prefs.js" />
 

@@ -205,7 +205,7 @@ var sbp2HighlightNode = {
 		var hemOffsetTop = 0;
 		var hemOffsetLeft = 0;
 		if ( hemFrameWin.frameElement != null ) {
-			//obige Bedingung ist nur erfüllt, falls hemFrameWin tatäschlich ein Frame ist
+			//obige Bedingung ist nur erfüllt, falls hemFrameWin tatsächlich ein Frame ist
 			var hemFrameRect = hemFrameWin.frameElement.getBoundingClientRect();
 			var hemStyle = hemFrameWin.frameElement.contentWindow.getComputedStyle(hemFrameWin.frameElement, null);
 			if (hemStyle) {

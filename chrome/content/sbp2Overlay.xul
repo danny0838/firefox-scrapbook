@@ -17,6 +17,7 @@
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2DataSource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Editor.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Highlighter.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2HighlightNode.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2LinkRepl.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Overlay.js" />
@@ -57,7 +58,7 @@
 					 sidebarurl="chrome://scrapbookplus2/content/sbp2Sidebar.xul"
 					 sidebartitle="ScrapBook Plus 2"
 					 type="checkbox"
-					 oncommand="toggleSidebar('sbp2ViewSidebar');" />
+					 oncommand="SidebarUI.toggle('sbp2ViewSidebar');" />
 	</broadcasterset>
 
 	<popup id="contentAreaContextMenu">
@@ -77,12 +78,13 @@
 		<menuitem	id="sbp2ContextMenu13" class="menuitem-iconic sb-capture-partial" label="&sbp2.context.bm-link;"		oncommand="sbp2Common.captureBookmark(gContextMenu.target.href, gContextMenu.target.text);" />
 		<menuitem	id="sbp2ContextMenu14" class="menuitem-iconic sb-capture-partial" label="&sbp2.context.picture-frame;"	oncommand="sbp2Common.captureImage('focused');" />
 		<menuitem	id="sbp2ContextMenu15" class="menuitem-iconic sb-capture-partial" label="&sbp2.context.picture-page;"	oncommand="sbp2Common.captureImage('focused');" />
-		<menuitem	id="sbp2ContextMenu16" class="menuitem-iconic sb-capture-partial" label="&sbp2.context.linkmulti;"		oncommand="sbp2Common.captureLinks();" />
+		<menuitem	id="sbp2ContextMenu16" class="menuitem-iconic sb-capture-partial" label="&sbp2.context.linkmulti;"		oncommand="sbp2Common.captureTab(null, null, null, null, 10);" />
+		<menuitem	id="sbp2ContextMenu17" class="menuitem-iconic sb-capture-partial" label="&sbp2.context.editor;"			oncommand="sbp2Editor.toggleEditorContext(event, null);" />
 	</popup>
 
 	<popupset id="mainPopupSet">
 		<menupopup id="sbp2StatusPopup">
-			<menuitem id="sbp2StatusPopupE" label="&sbp2.status.editor;" type="checkbox" oncommand="sbp2Editor.toggle();" />
+			<menuitem id="sbp2StatusPopupE" label="&sbp2.status.editor;" type="checkbox" oncommand="sbp2Editor.toggleEditor();" />
 		</menupopup>
 	</popupset>
 
@@ -90,6 +92,12 @@
 		<toolbox id="sbp2Toolbox" hidden="true">
 			<toolbar id="sbp2Editor" align="center" hidden="false">
 				<spacer flex="1" />
+				<label id="sbp2EditorHLPreview" value="" />
+				<toolbarbutton id="sbp2EditorHLButton" type="menu-button" persist="color" image="chrome://scrapbookplus2/skin/edit_highlighter.png" tooltiptext="&sbp2.editor.hl.tt;" oncommand="if ( event.originalTarget.localName == 'toolbarbutton' ) sbp2Editor.hlHighlight();">
+					<menupopup id="sbp2EditorHLMenupopup" onpopupshowing="sbp2Highlighter.updatePopup();">
+						<menuitem id="sbp2EditorHLMenuitemTemplate" type="radio" label="" oncommand="" hidden="true" />
+					</menupopup>
+				</toolbarbutton>
 				<toolbarbutton  id="sbp2EditorDOMEraser" image="chrome://scrapbookplus2/skin/edit_domeraser.png" type="checkbox" oncommand="sbp2HighlightNode.init();" />
 				<toolbarbutton	id="sbp2EditorSave"      image="chrome://scrapbookplus2/skin/edit_save.png" tooltiptext="&sbp2.editor.save.tt;" oncommand="sbp2Editor.sSave();" />
 			</toolbar>
@@ -102,7 +110,7 @@
 					   context="sbp2StatusPopup"
 					   label="ScrapBook Plus 2"
 					   observes="sbp2ViewSidebar"
-					   ondragover="toggleSidebar('sbp2ViewSidebar',true);"
+					   ondragover="SidebarUI.toggle('sbp2ViewSidebar',true);"
 					   tooltiptext="ScrapBook Plus 2"
 					   >
 		</toolbarbutton>

@@ -168,7 +168,7 @@ if ( ocObject.value != "cell" && ocObject.value != "image" && ocObject.value != 
 		//2. Bei nicht ladbaren Elementen (folder, separator) Funktion verlassen
 		//3. Sonderbehandlung für Volltextsuche
 		//3.1 Anpassungen, falls ein bei einer Volltextsuche gefundener Eintrag angezeigt werden soll
-		//4.2 Texthervorhebung initiieren, falls ein Eintrag nach einer erfolgreichen Volltextsuche angezeigt werden soll
+		//3.2 Texthervorhebung initiieren, falls ein Eintrag nach einer erfolgreichen Volltextsuche angezeigt werden soll
 		//4. Unterscheidung zwischen Notizen und sonstigen Einträgen
 
 		//1. Variablen initialisieren

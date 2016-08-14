@@ -1,8 +1,41 @@
-<!ENTITY sbp2.prefs.keys						"keyboard shortcut">
-<!ENTITY sbp2.prefs.keys.tip					"Change requires a restart of the browser.">
-<!ENTITY sbp2.prefs.keys.sidebar				"Open sidebar">
-<!ENTITY sbp2.prefs.keys.save					"Capture page">
-<!ENTITY sbp2.prefs.keys.saveas					"Capture page as">
-<!ENTITY sbp2.prefs.keys.bookmark				"Create bookmark">
-<!ENTITY sbp2.prefs.keys.tabs					"Capture all tabs">
-<!ENTITY sbp2.prefs.keys.btn.reset				"Reset">
+<!ENTITY sbp2.prefs.main										"General">
+<!ENTITY sbp2.prefs.main.treeColors								"type of item">
+<!ENTITY sbp2.prefs.main.treeColors.type						"Name">
+<!ENTITY sbp2.prefs.main.treeColors.color						"Color">
+<!ENTITY sbp2.prefs.editorHighlighting							"Editor (Marker)">
+<!ENTITY sbp2.prefs.editorHighlighting.title					"Name">
+<!ENTITY sbp2.prefs.editorHighlighting.background				"Background">
+<!ENTITY sbp2.prefs.editorHighlighting.backgroundColor			"Color">
+<!ENTITY sbp2.prefs.editorHighlighting.font						"Font">
+<!ENTITY sbp2.prefs.editorHighlighting.fontBold					"Bold">
+<!ENTITY sbp2.prefs.editorHighlighting.fontItalic				"Italic">
+<!ENTITY sbp2.prefs.editorHighlighting.fontStrikethrough		"Strikethrough">
+<!ENTITY sbp2.prefs.editorHighlighting.border					"Border">
+<!ENTITY sbp2.prefs.editorHighlighting.borderType				"Type:">
+<!ENTITY sbp2.prefs.editorHighlighting.borderType.bordered		"Bordered">
+<!ENTITY sbp2.prefs.editorHighlighting.borderType.underlined	"Underlined">
+<!ENTITY sbp2.prefs.editorHighlighting.borderStyle				"Style:">
+<!ENTITY sbp2.prefs.editorHighlighting.borderStyle.solid		"Solid">
+<!ENTITY sbp2.prefs.editorHighlighting.borderStyle.dotted		"Dotted">
+<!ENTITY sbp2.prefs.editorHighlighting.borderStyle.dashed		"Dashed">
+<!ENTITY sbp2.prefs.editorHighlighting.borderStyle.double		"Double">
+<!ENTITY sbp2.prefs.editorHighlighting.borderWidth				"Width:">
+<!ENTITY sbp2.prefs.editorHighlighting.borderWidth.thin			"Thin">
+<!ENTITY sbp2.prefs.editorHighlighting.borderWidth.medium		"Medium">
+<!ENTITY sbp2.prefs.editorHighlighting.borderWidth.thick		"Thick">
+<!ENTITY sbp2.prefs.editorHighlighting.btn.add					"Add">
+<!ENTITY sbp2.prefs.editorHighlighting.btn.apply				"Apply">
+<!ENTITY sbp2.prefs.editorHighlighting.btn.reset				"Reset">
+<!ENTITY sbp2.prefs.editorHighlighting.context.cut				"Cut">
+<!ENTITY sbp2.prefs.editorHighlighting.context.copy				"Copy">
+<!ENTITY sbp2.prefs.editorHighlighting.context.pstb				"Paste (before)">
+<!ENTITY sbp2.prefs.editorHighlighting.context.psta				"Paste (after)">
+<!ENTITY sbp2.prefs.editorHighlighting.context.del				"Delete">
+<!ENTITY sbp2.prefs.keys										"Keyboard shortcut">
+<!ENTITY sbp2.prefs.keys.tip									"Change requires a restart of the browser.">
+<!ENTITY sbp2.prefs.keys.sidebar								"Open sidebar">
+<!ENTITY sbp2.prefs.keys.save									"Capture page">
+<!ENTITY sbp2.prefs.keys.saveas									"Capture page as">
+<!ENTITY sbp2.prefs.keys.bookmark								"Create bookmark">
+<!ENTITY sbp2.prefs.keys.tabs									"Capture all tabs">
+<!ENTITY sbp2.prefs.keys.btn.reset								"Reset">

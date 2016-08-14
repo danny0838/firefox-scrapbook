@@ -1,7 +1,7 @@
 
 Components.utils.import("resource://gre/modules/PrivateBrowsingUtils.jsm");
 
-const STATE_STOP = Components.interfaces.nsIWebProgressListener.STATE_STOP;
+//const STATE_STOP = Components.interfaces.nsIWebProgressListener.STATE_STOP;
 
 var sbp2CaptureSaverInDepth = {
 
@@ -23,6 +23,7 @@ var sbp2CaptureSaverInDepth = {
 	scsArrayURLDepth	: [],	//Ebene der Adresse
 	scsArrayURLFilename	: [],	//enthält den Dateinamen, unter dem die scsArrayURL gespeichert werden soll
 	scsArrayURLFiletype	: [],	//Dateityp (0=unbekannt, 1=HTML, 2=Bild, 3=Audio, 4=Film, 5=Archiv, 6=benutzerdefiniert)
+	scsArrayURLIsLinkedOn	: [],	//verlinkte Seite (0=keine Seite, auf die verlinkt wird, 1=Seite, auf die verlinkt wird) -> wird bei der Aufnahme von Seiten zu bestehenden Projekten verwendet
 	scsArrayURLLinks	: [],	//enthält die Nummern aller URLs, auf die verwiesen wird, als Zeichenkette (durch Komma getrennt)
 	scsArrayURLLinksSt	: [],	//enthält den Status für jeden Link als Zeichenkette (durch Komma getrennt)
 	scsArrayURLSelected	: [],	//gibt an, ob vorgesehen ist, die Datei herunterzuladen oder nicht (0=nein, 1=ja)
@@ -163,7 +164,10 @@ var sbp2CaptureSaverInDepth = {
 		this.scsArrayFrame = sbp2Common.getFrameList(cRootWindow);
 		for ( var cI=0; cI<this.scsArrayFrame.length; cI++ )
 		{
-			this.scsArrayFrameBase.push(null);
+			if ( this.scsArrayFrame[cI].document.baseURI == null ) alert("baseURI ist null");
+			if ( this.scsArrayFrame[cI].document.baseURI == undefined ) alert("baseURI ist undefined");
+			if ( this.scsArrayFrame[cI].document.baseURI.length == 0 ) alert("baseURI enthält keine Stellen");
+			this.scsArrayFrameBase.push(this.convertURLToObject(this.scsArrayFrame[cI].document.baseURI));
 			this.scsArrayFrameStyles.push(1);
 		}
 		//3. Seiteninhalt archivieren
@@ -200,16 +204,19 @@ alert("sbp2CaptureSaverInDepth.captureAddWebsite - Out of order.");
 		//- CSS-Dateien erstellen
 		//- sbp2-link.txt erstellen
 		//- sbp2-capset.txt erstellen
+		//- sbp2-capflt.txt erstellen
 		//
 		//Ablauf:
 		//1. Variablen initialisieren
-		//2. CSS-Seiten schreiben, falls dies gewünscht ist
+		//2. CSS-Dateien erstellen/aktualisieren, falls dies gewünscht ist
 		//3. Verweise korrigieren
 		//4. sbp2-links.txt erstellen
 		//5. sbp2-capset.txt erstellen
-		//6. modusabhängige End-Aktion durchführen
+		//6. sbp2-capflt.txt erstellen
+		//7. modusabhängige End-Aktion durchführen
 
-		//5. sbp2-links.txt erstellen
+		//0a. Inhalt von this.scsArray* abspeichern
+dump("sbp2 - Schreibe org_sbp2-links.txt... ");
 		var cfData = "";
 		for ( var cI=0; cI<this.scsArrayURL.length; cI++ )
 		{
@@ -221,133 +228,38 @@ alert("sbp2CaptureSaverInDepth.captureAddWebsite - Out of order.");
 							this.scsArrayURLDepth[cI] + "\n" +
 							this.scsArrayURLFilename[cI] + "\n" +
 							this.scsArrayURLFiletype[cI] + "\n" +
+							this.scsArrayURLIsLinkedOn[cI] + "\n" +
 							this.scsArrayURLLinks[cI] + "\n" +
 							this.scsArrayURLLinksSt[cI] + "\n" +
 							this.scsArrayURLState[cI] + "\n";
 		}
 		var cfFile = this.scsOptions.directoryDst.clone();
-		cfFile.append("sbp2-links_org.txt");
+		cfFile.append("org_sbp2-links.txt");
 		sbp2Common.fileWrite(cfFile, cfData, "UTF-8");
+dump("Fertig\n");
+		//0b. Inhalt von this.scsStyleSheetRules abspeichern
+dump("sbp2 - Schreibe css Rules in Dateien:\n");
+		for ( var cI=0; cI<this.scsStyleSheetFilename.length; cI++ )
+		{
+dump("sbp2 - Schreibe org_"+this.scsArrayURLFilename[this.scsStyleSheetFilename[cI]]+"... ");
+			cfData = "";
+			for ( var cJ=0; cJ<this.scsStyleSheetRules[cI].length; cJ++ )
+			{
+				cfData = cfData + "\n" + this.scsStyleSheetRules[cI][cJ] + "\n";
+			}
+			cfFile = this.scsOptions.directoryDst.clone();
+			cfFile.append("org_"+this.scsArrayURLFilename[this.scsStyleSheetFilename[cI]]);
+			sbp2Common.fileWrite(cfFile, cfData, "UTF-8");
+dump("Fertig\n");
+		}
 //wird von this.captureCompleteCheck aufgerufen
 		//1. Variablen initialisieren
 		var cDataNeu = null;
 		var cFile = null;
 		var cFileDst = null;
 		var cNr = -1;
-		//2. CSS-Seiten schreiben, falls dies gewünscht ist
-		if ( this.scsOptions.embeddedStyles ) {
-			cDataNeu = "";
-			for ( var cI=0; cI<this.scsStyleSheetFilename.length; cI++ )
-			{
-				if ( this.scsStyleSheetFilename[cI] > -1 ) {
-					cDataNeu = "";
-					//genutzte Rules zusammenstellen
-					for ( var cJ=0; cJ<this.scsStyleSheetRules[cI].length; cJ++ )
-					{
-						if ( this.scsStyleSheetRules[cI][cJ].length > 0 ) {
-							cDataNeu = cDataNeu + "\n" + this.scsStyleSheetRules[cI][cJ] + "\n";
-						}
-					}
-					//Datei erstellen oder aktualisieren, falls Daten vorhanden sind
-					if ( cDataNeu.length>0 ) {
-						cNr = this.scsStyleSheetFilename[cI];
-						cFileDst = this.scsOptions.directoryDst.clone();
-						cFileDst.append(this.scsArrayURLFilename[cNr]);
-						if ( this.scsArrayURLState[cNr] == 0 ) {
-							sbp2Common.fileWrite(cFileDst, cDataNeu, "UTF-8");
-							this.scsArrayURLState[cNr] = 1;
-						} else {
-							var cAltLen = 0;
-							var cAltPos = 1;
-							var cFound = 0;
-							var cKlammerOffen = 0;
-							var cKlammerAnzahl = 0;
-							var cNeuBeg = 1;
-							var cNeuLen = 0;
-							//bestehende Datei aktualisieren
-							var cDataAlt = sbp2Common.fileRead(cFileDst);
-							var cAltLen = cDataAlt.length;
-							var cNeuLen = cDataNeu.length;
-							for ( var cNeuPos = 1; cNeuPos < cNeuLen; cNeuPos++ )
-							{
-								cFound = 0;
-								cKlammerOffen = 0;
-								cKlammerAnzahl = 0;
-								cNeuBeg = cNeuPos;
-								for ( cAltPos = 1; cAltPos < cAltLen; cAltPos++ )
-								{
-									if ( cDataAlt[cAltPos] == cDataNeu[cNeuPos] ) {
-										if ( cDataAlt[cAltPos] == "{" ) {
-											cKlammerOffen++;
-											cKlammerAnzahl++;
-										} else if ( cDataAlt[cAltPos] == "}" ) {
-											cKlammerOffen--;
-											if ( cKlammerOffen == 0 && cKlammerAnzahl > 0 ) {
-												cFound = 1;
-												cAltPos = cAltLen;
-												cNeuPos++;
-											}
-										}
-										cNeuPos++;
-									} else {
-										//alte Regel überspringen, da keine Übereinstimmung mit neuer Regel
-										cAltPos--;
-										while ( cFound == 0 )
-										{
-											cAltPos++;
-											if ( cDataAlt[cAltPos] == "{" ) {
-												cKlammerOffen++;
-												cKlammerAnzahl++;
-											} else if ( cDataAlt[cAltPos] == "}" ) {
-												cKlammerOffen--;
-												if ( cKlammerOffen == 0 && cKlammerAnzahl > 0 ) {
-													cFound = 1;
-												}
-											}
-										}
-										cAltPos = cAltPos + 2;
-										cNeuPos = cNeuBeg;
-										cFound = 0;
-									}
-								}
-								if ( cFound == 0 ) {
-									//css-Rule aufnehmen
-									cKlammerOffen = 0;
-									cKlammerAnzahl = 0;
-									var cEnde = 0;
-									var cJ = 0;
-									cDataAlt = cDataAlt + "\n";
-									while ( cEnde == 0 )
-									{
-										cDataAlt = cDataAlt + cDataNeu[cNeuPos];
-										cJ++;
-										cNeuPos++;
-										if ( cDataNeu[cNeuPos] == "{" ) {
-											cKlammerOffen++;
-											cKlammerAnzahl++;
-										} else if ( cDataNeu[cNeuPos] == "}" ) {
-											cKlammerOffen--;
-											if ( cKlammerOffen == 0 && cKlammerAnzahl > 0 ) {
-												cEnde = 1;
-											}
-										}
-									}
-									//Die nächsten beiden Zeilenumbrüche werden übernommen
-									cDataAlt = cDataAlt + cDataNeu[cNeuPos];
-									cJ++;
-									cNeuPos++;
-									cDataAlt = cDataAlt + cDataNeu[cNeuPos];
-									cJ++;
-									cNeuPos++;
-								}
-							}
-							sbp2Common.fileWrite(cFileDst, cDataAlt, "UTF-8");
-						}
-					}
-				}
-			}
-		}
 		//3. Verweise korrigieren
+dump("sbp2 - Korrigiere Verweise... \n");
 		var cData = null;
 		var cDoc = null;
 		var cDocChanged = null;
@@ -358,6 +270,7 @@ alert("sbp2CaptureSaverInDepth.captureAddWebsite - Out of order.");
 		var cParser = null;
 		for ( var cI=0; cI<this.scsArrayURL.length; cI++ )
 		{
+dump("sbp2 - "+cI+" - Anzahl Verweise: "+this.scsArrayURLLinks[cI].length+"\n");
 			//Nur Seiten prüfen, die auch Verweise enthalten
 			if ( this.scsArrayURLFiletype[cI] == 1 ) {
 				if ( this.scsArrayURLLinks[cI].length > 0 ) {
@@ -393,7 +306,6 @@ alert(cAusgabe);
 								cNoHref++;
 							}
 						}
-dump(this.scsArrayURLState[cNr]+" != "+cSplitState[cJ]+" - "+this.scsArrayURL[cNr]+"\n");
 						if ( this.scsArrayURLState[cNr] != cSplitState[cJ] ) {
 							//Inhalt der Webseite in den Speicher holen und parsen, falls dies noch nicht geschehen ist
 							if ( cDocChanged == 0 ) {
@@ -473,7 +385,86 @@ dump(this.scsArrayURLState[cNr]+" != "+cSplitState[cJ]+" - "+this.scsArrayURL[cN
 				}
 			}
 		}
+		//2. CSS-Dateien erstellen/aktualisieren, falls dies gewünscht ist
+dump("sbp2 - Schreibe css-Dateien\n");
+		if ( this.scsOptions.embeddedStyles ) {
+			for ( var cI=0; cI<this.scsStyleSheetFilename.length; cI++ )
+			{
+				if ( this.scsStyleSheetFilename[cI] > -1 ) {
+					//File-Objekt für CSS-Datei erstellen
+					cNr = this.scsStyleSheetFilename[cI];
+					cFileDst = this.scsOptions.directoryDst.clone();
+					cFileDst.append(this.scsArrayURLFilename[cNr]);
+					//Ist File noch nicht vorhanden, diese erstellen, sonst aktualisieren
+					if ( this.scsArrayURLState[cNr] == 0 ) {
+						//neue Regeln zusammenstellen
+						cDataNeu = "";
+						for ( var cJ=0; cJ<this.scsStyleSheetRules[cI].length; cJ++ )
+						{
+							if ( this.scsStyleSheetRules[cI][cJ].length > 0 ) {
+								cDataNeu = cDataNeu + "\n" + this.scsStyleSheetRules[cI][cJ] + "\n";
+							}
+						}
+						//waren neue Regeln vorhanden, diese in File speichern
+						if ( cDataNeu.length > 0 ) {
+							sbp2Common.fileWrite(cFileDst, cDataNeu, "UTF-8");
+						}
+						//URL als bearbeitet markieren
+						this.scsArrayURLState[cNr] = 1;
+					} else {
+						//vorhandene CSS-Datei einlesen
+						var cDataAlt = sbp2Common.convertToUnicode(sbp2Common.fileRead(cFileDst), "UTF-8");
+						//Regeln aus Datei-Inhalt herausarbeiten
+						var cKlammerOffen = 0;
+						var cKlammerAnzahl = 0;
+						var cRuleBeg = 1;
+						var cRule = "";
+						var cRulePos = -1;
+						var cRules = [];
+						for ( var cJ=1; cJ<cDataAlt.length; cJ++ )
+						{
+							if ( cDataAlt[cJ] == "{" ) {
+								cKlammerOffen++;
+								cKlammerAnzahl++;
+							} else if ( cDataAlt[cJ] == "}" ) {
+								cKlammerOffen--;
+								if ( cKlammerOffen == 0 && cKlammerAnzahl > 0 ) {
+									cRule = cDataAlt.substring(cRuleBeg, cJ+1)
+									cRules.push(cRule);
+									cJ = cJ + 2;
+									cRuleBeg = cJ + 1;
+									cKlammerAnzahl = 0;
+								}
+							} else if ( cDataAlt[cJ] == "\n" ) {
+								if ( cDataAlt[cJ+1] == "\n" ) {
+									cRule = "";
+									cRules.push(cRule);
+									cJ = cJ + 1;
+									cRuleBeg = cJ + 1;
+								}
+							}
+						}
+						//neue Regeln bestimmen
+						var cFound = 0;
+						for ( var cJ=0; cJ<this.scsStyleSheetRules[cI].length; cJ++ )
+						{
+							if ( this.scsStyleSheetRules[cI][cJ].length > 0 ) {
+								cRulePos = this.scsStyleSheetRules[cI][cJ].indexOf(cRules);
+								if ( cRulePos == -1 ) {
+									//Regel aufnehmen
+									cDataAlt = cDataAlt + "\n" + this.scsStyleSheetRules[cI][cJ] + "\n";
+									//festhalten, das neue Regel(n) gefunden wurden
+									cFound = 1;
+								}
+							}
+						}
+						if ( cFound == 1 ) sbp2Common.fileWrite(cFileDst, cDataAlt, "UTF-8");
+					}
+				}
+			}
+		}
 		//4. sbp2-links.txt erstellen
+dump("sbp2 - Schreibe sbp2-links.txt\n");
 		cData = "";
 		for ( var cI=0; cI<this.scsArrayURL.length; cI++ )
 		{
@@ -481,6 +472,7 @@ dump(this.scsArrayURLState[cNr]+" != "+cSplitState[cJ]+" - "+this.scsArrayURL[cN
 							this.scsArrayURLDepth[cI] + "\n" +
 							this.scsArrayURLFilename[cI] + "\n" +
 							this.scsArrayURLFiletype[cI] + "\n" +
+							this.scsArrayURLIsLinkedOn[cI] + "\n" +
 							this.scsArrayURLLinks[cI] + "\n" +
 							this.scsArrayURLLinksSt[cI] + "\n" +
 							this.scsArrayURLState[cI] + "\n";
@@ -489,6 +481,7 @@ dump(this.scsArrayURLState[cNr]+" != "+cSplitState[cJ]+" - "+this.scsArrayURL[cN
 		cFile.append("sbp2-links.txt");
 		sbp2Common.fileWrite(cFile, cData, "UTF-8");
 		//5. sbp2-capset.txt erstellen
+dump("sbp2 - Schreibe sbp2-capset.txt\n");
 		cData = "";
 		cData += sbp2CaptureSaverInDepth.scsOptions.embeddedImages + "\n";
 		cData += sbp2CaptureSaverInDepth.scsOptions.embeddedStyles + "\n";
@@ -503,7 +496,13 @@ dump(this.scsArrayURLState[cNr]+" != "+cSplitState[cJ]+" - "+this.scsArrayURL[cN
 		cFile = this.scsOptions.directoryDst.clone();
 		cFile.append("sbp2-capset.txt");
 		sbp2Common.fileWrite(cFile, cData, "UTF-8");
-		//6. modusabhängige End-Aktion durchführen
+		//6. sbp2-capflt.txt erstellen
+dump("sbp2 - Schreibe sbp2-capflt.txt\n");
+		cData = sbp2CaptureFilter.getFilterList();
+		cFile = this.scsOptions.directoryDst.clone();
+		cFile.append("sbp2-capflt.txt");
+		sbp2Common.fileWrite(cFile, cData, "UTF-8");
+		//7. modusabhängige End-Aktion durchführen
 //alert("sbp2CaptureSaverInDepth.scsOptions.mode - "+this.scsOptions.mode);
 		if ( this.scsOptions.mode == 1 || this.scsOptions.mode == 3 ) {
 //nichts
@@ -531,7 +530,7 @@ alert("sbp2CaptureSaverInDepth.captureCompleteCheck - Unbekannter Modus -> "+thi
 		}
 	},
 
-	captureInitInDepthNormal : function(cinArrayURL, cinArrayURLDepth, cinArrayURLFilename, cinArrayURLHTML, cinArrayURLLinks, cinArrayURLLinksSt, cinArrayURLSelected, cinArrayURLState, cinDLProgress, cinHashURL, cinHashFilename, cinOptions, cinResDestination, cinStyleSheetFilename, cinStyleSheetRules, cinItem)
+	captureInitInDepthNormal : function(cinArrayURL, cinArrayURLDepth, cinArrayURLFilename, cinArrayURLFiletype, cinAttayURLIsLinkedOn, cinArrayURLLinks, cinArrayURLLinksSt, cinArrayURLSelected, cinArrayURLState, cinDLProgress, cinHashURL, cinHashFilename, cinOptions, cinResDestination, cinStyleSheetFilename, cinStyleSheetRules, cinItem)
 	{
 //wird von sbp2Capture.cInit aufgerufen
 		//
@@ -545,7 +544,8 @@ alert("sbp2CaptureSaverInDepth.captureCompleteCheck - Unbekannter Modus -> "+thi
 		this.scsArrayURL = cinArrayURL;
 		this.scsArrayURLDepth = cinArrayURLDepth;
 		this.scsArrayURLFilename = cinArrayURLFilename;
-		this.scsArrayURLFiletype = cinArrayURLHTML;
+		this.scsArrayURLFiletype = cinArrayURLFiletype;
+		this.scsArrayURLIsLinkedOn = cinAttayURLIsLinkedOn;
 		this.scsArrayURLLinks = cinArrayURLLinks;
 		this.scsArrayURLLinksSt = cinArrayURLLinksSt;
 		this.scsArrayURLSelected = cinArrayURLSelected;
@@ -618,84 +618,91 @@ alert("sbp2CaptureSaverInDepth.captureCompleteCheck - Unbekannter Modus -> "+thi
 		var sdiURLR = sdiDocument.URL;
 		var sdiURLT = sdiDocumentSrcURL;
 		//2. Adresse des Fensters/Frames aufnehmen
-		if ( this.scsHashURL[sdiURLR] ) {
-			sdiPosR = this.scsHashURL[sdiURLR];
-			sdiFileString = this.scsArrayURLFilename[sdiPosR];
+		if ( !sdiDocument.body || !sdiDocument.contentType.match(/html|xml/i) ) {
+			//in HTML eingebettete Bilder werden direkt heruntergeladen ohne den Umweg über processDOMRecursively
+			//Datei speichern
+			var sdiObjectType = ( sdiDocument.contentType.substring(0, 5) == "image" ) ? 2 : 0;
+			sdiFileString = this.saveFileInternal(sdiDocument.location.href, sdiDepthCur, sdiObjectType);
+			//(Redirect-)Seite erfolgreich gespeichert -> Status ändern
+			this.scsArrayURLState[sdiPosR] = 1;
 		} else {
-			sdiPosR = this.scsArrayURL.length;
-			if ( sdiFilename.length > 0 ) {
-				sdiFileString = sdiFilename;
+			if ( this.scsHashURL[sdiURLR] ) {
+				sdiPosR = this.scsHashURL[sdiURLR];
+				sdiFileString = this.scsArrayURLFilename[sdiPosR];
 			} else {
-				sdiFileString = this.getFilenameFromURL(sdiURLR, null);
-			}
-			this.scsArrayURL.push(sdiURLR);
-			this.scsArrayURLDepth.push(sdiDepthCur);
-			this.scsArrayURLFilename.push(sdiFileString);
-			this.scsArrayURLFiletype.push(1);
-			this.scsArrayURLLinks.push("");
-			this.scsArrayURLLinksSt.push("");
-			this.scsArrayURLSelected.push(1);
-			this.scsArrayURLState.push(0);
-			this.scsHashURL[sdiURLR] = sdiPosR;
-			this.scsHashFilename[sdiFileString] = sdiPosR;
-		}
-		if ( sdiURLT == sdiURLR ) {
-			sdiPosT = sdiPosR;
-		} else {
-			if ( this.scsHashURL[sdiURLT] ) {
-				sdiPosT = this.scsHashURL[sdiURLT];
-				this.scsArrayURLFilename[sdiPosT] = sdiFileString;
-			} else {
-				sdiPosT = this.scsArrayURL.length;
-				this.scsArrayURL.push(sdiURLT);
+				sdiPosR = this.scsArrayURL.length;
+				if ( sdiFilename.length > 0 ) {
+					sdiFileString = sdiFilename;
+				} else {
+					sdiFileString = this.getFilenameFromURL(sdiURLR, null);
+				}
+				this.scsArrayURL.push(sdiURLR);
 				this.scsArrayURLDepth.push(sdiDepthCur);
 				this.scsArrayURLFilename.push(sdiFileString);
 				this.scsArrayURLFiletype.push(1);
+				this.scsArrayURLIsLinkedOn.push(0);
 				this.scsArrayURLLinks.push("");
 				this.scsArrayURLLinksSt.push("");
 				this.scsArrayURLSelected.push(1);
 				this.scsArrayURLState.push(0);
-				this.scsHashURL[sdiURLT] = sdiPosT;
+				this.scsHashURL[sdiURLR] = sdiPosR;
+				this.scsHashFilename[sdiFileString] = sdiPosR;
 			}
-		}
+			if ( sdiURLT == sdiURLR ) {
+				sdiPosT = sdiPosR;
+			} else {
+				if ( this.scsHashURL[sdiURLT] ) {
+					sdiPosT = this.scsHashURL[sdiURLT];
+					this.scsArrayURLFilename[sdiPosT] = sdiFileString;
+				} else {
+					sdiPosT = this.scsArrayURL.length;
+					this.scsArrayURL.push(sdiURLT);
+					this.scsArrayURLDepth.push(sdiDepthCur);
+					this.scsArrayURLFilename.push(sdiFileString);
+					this.scsArrayURLFiletype.push(1);
+					this.scsArrayURLIsLinkedOn.push(0);
+					this.scsArrayURLLinks.push("");
+					this.scsArrayURLLinksSt.push("");
+					this.scsArrayURLSelected.push(1);
+					this.scsArrayURLState.push(0);
+					this.scsHashURL[sdiURLT] = sdiPosT;
+				}
+			}
 //alert("sdiURLT - "+sdiURLT+"\nsdiURLR - "+sdiURLR+"\nsdiPosT - "+sdiPosT+"\nsdiPosR - "+sdiPosR+"\nsdiFilename - "+sdiFilename+"\nsdiFileString - "+sdiFileString+"\n"+this.scsHashURL[sdiURLR]);
-		//3. Weiteren Download vermerken
-		this.scsDLProgress[1]++;
-		//4. Seite archivieren, falls sie noch nicht archiviert wurde
-		if ( this.scsArrayURLState[sdiPosR] == 0 ) {
-			//4.1 Variablen initialisieren
-			var sdiHTML = "";
-			var sdiNodeList = [];
-			var sdiURLNr = null;
-			if ( sdiDocument.baseURI == null ) alert("baseURI ist null");
-			if ( sdiDocument.baseURI == undefined ) alert("baseURI ist undefined");
-			if ( sdiDocument.baseURI.length == 0 ) alert("baseURI enthält keine Stellen");
-			this.scsArrayFrameBase[sdiDocumentNr] = this.convertURLToObject(sdiDocument.baseURI);
-			//4.2 Kopie der geladenen Seite im Speicher erstellen
+			//3. Weiteren Download vermerken
+			this.scsDLProgress[1]++;
+			//4. Seite archivieren, falls sie noch nicht archiviert wurde
+			if ( this.scsArrayURLState[sdiPosR] == 0 ) {
+				//4.1 Variablen initialisieren
+				var sdiHTML = "";
+				var sdiNodeList = [];
+				var sdiURLNr = null;
+				//4.2 Kopie der geladenen Seite im Speicher erstellen
 sdiNodeList.unshift(sdiDocument.body.cloneNode(true));			//Sinn unklar!
-			var sdiRootNode = sdiDocument.getElementsByTagName("html")[0].cloneNode(false);
-			var sdiHeadNode = sdiDocument.getElementsByTagName("head")[0].cloneNode(true);
-			sdiRootNode.appendChild(sdiHeadNode);
-			sdiRootNode.appendChild(sdiDocument.createTextNode("\n"));
-			sdiRootNode.appendChild(sdiNodeList[0]);
-			sdiRootNode.appendChild(sdiDocument.createTextNode("\n"));
-			//4.3 Inhalt prüfen und gegebenenfalls anpassen
-			this.processDOMRecursively(sdiRootNode, sdiPosR, sdiDepthCur);
-			//4.4 HTML-Code zusammenstellen
+				var sdiRootNode = sdiDocument.getElementsByTagName("html")[0].cloneNode(false);
+				var sdiHeadNode = sdiDocument.getElementsByTagName("head")[0].cloneNode(true);
+				sdiRootNode.appendChild(sdiHeadNode);
+				sdiRootNode.appendChild(sdiDocument.createTextNode("\n"));
+				sdiRootNode.appendChild(sdiNodeList[0]);
+				sdiRootNode.appendChild(sdiDocument.createTextNode("\n"));
+				//4.3 Inhalt prüfen und gegebenenfalls anpassen
+				this.processDOMRecursively(sdiRootNode, sdiPosR, sdiDepthCur);
+				//4.4 HTML-Code zusammenstellen
 var sdiMeta = sdiDocument.createElement("meta");
 sdiMeta.setAttribute("content", sdiDocument.contentType + "; charset=" + sdiDocument.characterSet);
 sdiMeta.setAttribute("http-equiv", "content-type");
 sdiRootNode.firstChild.insertBefore(sdiDocument.createTextNode("\n"), sdiRootNode.firstChild.firstChild);
 sdiRootNode.firstChild.insertBefore(sdiMeta, sdiRootNode.firstChild.firstChild);
 sdiRootNode.firstChild.insertBefore(sdiDocument.createTextNode("\n"), sdiRootNode.firstChild.firstChild);
-			var sdiHTML = this.addHTMLTag(sdiRootNode, sdiRootNode.innerHTML);
-			if ( sdiDocument.doctype ) sdiHTML = this.addHTMLDocType(sdiDocument.doctype) + sdiHTML;
-			//4.5 HTML-Code in Datei ablegen
-			var sdiFileDst = this.scsOptions.directoryDst.clone();
-			sdiFileDst.append(sdiFileString);
-			sbp2Common.fileWrite(sdiFileDst, sdiHTML, sdiDocument.characterSet);
-			//4.6 (Redirect-)Seite erfolgreich gespeichert -> Status ändern
-			this.scsArrayURLState[sdiPosR] = 1;
+				var sdiHTML = this.addHTMLTag(sdiRootNode, sdiRootNode.innerHTML);
+				if ( sdiDocument.doctype ) sdiHTML = this.addHTMLDocType(sdiDocument.doctype) + sdiHTML;
+				//4.5 HTML-Code in Datei ablegen
+				var sdiFileDst = this.scsOptions.directoryDst.clone();
+				sdiFileDst.append(sdiFileString);
+				sbp2Common.fileWrite(sdiFileDst, sdiHTML, sdiDocument.characterSet);
+				//4.6 (Redirect-)Seite erfolgreich gespeichert -> Status ändern
+				this.scsArrayURLState[sdiPosR] = 1;
+			}
 		}
 		//5. Seite erfolgreich gespeichert -> Status ändern
 		if ( sdiPosR != sdiPosT ) this.scsArrayURLState[sdiPosT] = 2;
@@ -778,6 +785,7 @@ sdiRootNode.firstChild.insertBefore(sdiDocument.createTextNode("\n"), sdiRootNod
 							this.scsArrayURLDepth.push(inDepthCur+1);
 							this.scsArrayURLFilename.push(inFilename);
 							this.scsArrayURLFiletype.push(0);
+							this.scsArrayURLIsLinkedOn.push(1);
 							this.scsArrayURLLinks.push("");
 							this.scsArrayURLLinksSt.push("");
 							this.scsArrayURLSelected.push(1);
@@ -842,6 +850,7 @@ sdiRootNode.firstChild.insertBefore(sdiDocument.createTextNode("\n"), sdiRootNod
 							this.scsArrayURLDepth.push(inDepthCur+1);
 							this.scsArrayURLFilename.push(inFilename);
 							this.scsArrayURLFiletype.push(inFiletype);
+							this.scsArrayURLIsLinkedOn.push(1);
 							this.scsArrayURLLinks.push("");
 							this.scsArrayURLLinksSt.push("");
 							this.scsArrayURLSelected.push(1);
@@ -1139,6 +1148,7 @@ sdiRootNode.firstChild.insertBefore(sdiDocument.createTextNode("\n"), sdiRootNod
 				this.scsArrayURLDepth.push(issDepthCur);
 				this.scsArrayURLFilename.push(issFilename);
 				this.scsArrayURLFiletype.push(0);
+				this.scsArrayURLIsLinkedOn.push(0);
 				this.scsArrayURLLinks.push("");
 				this.scsArrayURLLinksSt.push("");
 				this.scsArrayURLSelected.push(1);
@@ -1164,6 +1174,7 @@ sdiRootNode.firstChild.insertBefore(sdiDocument.createTextNode("\n"), sdiRootNod
 			//Dateiname bestimmen, falls das StyleSheet zuvor noch nicht bearbeitet worden ist.
 			if ( this.scsHashURL[issNode.href] ) {
 				var issURLNr = this.scsHashURL[issNode.href];
+/*
 				this.scsStyleSheetFilename.push(issURLNr);
 				issStyleSheetANr = this.scsStyleSheetFilename.length-1;
 				//Platzhalter für Regeln des aktuellen StyleSheet in this.scsStyleSheetRules erstellen
@@ -1173,8 +1184,17 @@ sdiRootNode.firstChild.insertBefore(sdiDocument.createTextNode("\n"), sdiRootNod
 					issRules[issI] = "";
 				}
 				this.scsStyleSheetRules.push(issRules);
+*/
+				for ( var issI=0; issI<this.scsStyleSheetFilename.length; issI++ )
+				{
+					if ( this.scsStyleSheetFilename[issI] == issURLNr ) {
+						issStyleSheetANr = issI;
+						issI = this.scsStyleSheetFilename.length;
+					}
+				}
 //alert("issStyleSheetNr - "+issStyleSheetNr+"\nissNode.href - "+issNode.href+"\n"+this.scsHashURL[issNode.href]+"\nthis.scsStyleSheetFilename.length - "+this.scsStyleSheetFilename.length);
 				if ( issStyleSheetANr == -1 ) {
+alert("sbp2CaptureSaverInDepth.inspectStyleSheet - Das sollte nicht vorkommen, da das Stylesheet eigentlich bekannt ist -> möglicher Fehler in Programmlogik!");
 					this.scsStyleSheetFilename.push(issURLNr);
 					issStyleSheetANr = this.scsStyleSheetFilename.length-1;
 					//Platzhalter für Regeln des aktuellen StyleSheet in this.scsStyleSheetRules erstellen
@@ -1194,6 +1214,7 @@ sdiRootNode.firstChild.insertBefore(sdiDocument.createTextNode("\n"), sdiRootNod
 				this.scsArrayURLDepth.push(issDepthCur);
 				this.scsArrayURLFilename.push(issFilename);
 				this.scsArrayURLFiletype.push(0);
+				this.scsArrayURLIsLinkedOn.push(0);
 				this.scsArrayURLLinks.push("");
 				this.scsArrayURLLinksSt.push("");
 				this.scsArrayURLSelected.push(1);
@@ -1356,6 +1377,7 @@ sdiRootNode.firstChild.insertBefore(sdiDocument.createTextNode("\n"), sdiRootNod
 		this.scsArrayURLDepth.push(dsfDepthCur);
 		this.scsArrayURLFilename.push(dsfFileString);
 		this.scsArrayURLFiletype.push(dsfFiletype);
+		this.scsArrayURLIsLinkedOn.push(0);
 		this.scsArrayURLLinks.push("");
 		this.scsArrayURLLinksSt.push("");
 		this.scsArrayURLSelected.push(1);
@@ -1490,6 +1512,16 @@ sdiRootNode.firstChild.insertBefore(sdiDocument.createTextNode("\n"), sdiRootNod
 		rnfpNode.parentNode.replaceChild(rnfpNodeNew, rnfpNode);
 		rnfpNode = rnfpNodeNew;
 		return rnfpNode;
+	},
+
+	saveFileInternal : function(sfiURL, sfiDepthCur, sfiObjectType)
+	{
+//wird von this.saveDocumentInternal aufgerufen
+		//Wird im Moment genutzt, um eingebettete Objekte herunterzuladen. Bilder werden von Firefox in ein HTML-Gerüst eingebettet.
+		//Diese Funktion läd nur das Bild herunter. Das Gerüst wird nicht gespeichert.
+		//(sfiObjectType = 2 -> Image; sfiObjectType = 0 -> kein Image; muss eventuell noch verfeinert werden)
+		var sfiFilename = this.downSaveFile(sfiURL, sfiDepthCur, sfiObjectType);
+		return sfiFilename;
 	},
 
 	setState : function(ssURL, ssState)

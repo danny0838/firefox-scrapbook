@@ -14,8 +14,8 @@
 
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Capture.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2CaptureFilter.js" />
+	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2CaptureSaver.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2CaptureSaverInDepth.js" />
-	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2CaptureSaverMultiple.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2Common.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2DataSource.js" />
 	<script type="application/x-javascript" src="chrome://scrapbookplus2/content/sbp2LinkRepl.js" />
@@ -112,9 +112,9 @@
 			style="margin:0px;"
 		>
 			<treecols>
-				<treecol label="&sbp2.capture.filter.regexp;" flex="1" editable="true" crop="right" persist="width hidden" />
+				<treecol label="&sbp2.capture.filter.show;" flex="1" editable="true" crop="right" persist="width hidden" />
 				<splitter class="tree-splitter"/>
-				<treecol label="&sbp2.capture.filter.show;" flex="10" editable="true" crop="right" persist="width hidden" />
+				<treecol label="&sbp2.capture.filter.regexp;" flex="10" editable="true" crop="right" persist="width hidden" />
 			</treecols>
 			<treechildren/>
 		</tree>

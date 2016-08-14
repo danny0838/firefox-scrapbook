@@ -272,6 +272,7 @@ if ( psNewVal == undefined ) alert("sbp2DataSource.propertySet\n---\npsNewVal no
 		//2. Datenbank laden
 		//2a. vorhandene Datenbank laden
 		//2b. leere Datenbank anlegen und laden
+		//3. Verzeichnis, in dem die gerade geöffnete Datenbank steht, zurück an aufrufende Funktion
 
 		//1. Vorarbeit
 		var iFile = sbp2Common.getBuchVZ();
@@ -291,6 +292,8 @@ if ( psNewVal == undefined ) alert("sbp2DataSource.propertySet\n---\npsNewVal no
 			sbp2DataSource.dsCreateEmptySeq(sbp2DataSource.dbData, sbp2Common.RDF.GetResource("urn:scrapbook:root"));
 			sbp2DataSource.dsFlush(sbp2DataSource.dbData);
 		}
+		//3. Verzeichnis, in dem die gerade geöffnete Datenbank steht, zurück an aufrufende Funktion
+		return iFile.parent.path;
 	},
 
 	initSearch : function()

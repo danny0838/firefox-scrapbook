@@ -1,8 +1,41 @@
-<!ENTITY sbp2.prefs.keys						"Tastenkürzel">
-<!ENTITY sbp2.prefs.keys.tip					"Änderungen werden erst nach einem Neustart von Firefox wirksam">
-<!ENTITY sbp2.prefs.keys.sidebar				"Sidebar öffnen">
-<!ENTITY sbp2.prefs.keys.save					"Seite archivieren">
-<!ENTITY sbp2.prefs.keys.saveas					"Seite archivieren als">
-<!ENTITY sbp2.prefs.keys.bookmark				"Lesezeichen erstellen">
-<!ENTITY sbp2.prefs.keys.tabs					"Alle Tabs archivieren">
-<!ENTITY sbp2.prefs.keys.btn.reset				"Reset">
+<!ENTITY sbp2.prefs.main										"Allgemein">
+<!ENTITY sbp2.prefs.main.treeColors								"Typ des Eintrags">
+<!ENTITY sbp2.prefs.main.treeColors.type						"Bezeichnung">
+<!ENTITY sbp2.prefs.main.treeColors.color						"Farbe">
+<!ENTITY sbp2.prefs.editorHighlighting							"Editor (Marker)">
+<!ENTITY sbp2.prefs.editorHighlighting.title					"Name">
+<!ENTITY sbp2.prefs.editorHighlighting.background				"Hintergrund">
+<!ENTITY sbp2.prefs.editorHighlighting.backgroundColor			"Farbe">
+<!ENTITY sbp2.prefs.editorHighlighting.font						"Schrift">
+<!ENTITY sbp2.prefs.editorHighlighting.fontBold					"Fett">
+<!ENTITY sbp2.prefs.editorHighlighting.fontItalic				"Kursiv">
+<!ENTITY sbp2.prefs.editorHighlighting.fontStrikethrough		"Durchgestrichen">
+<!ENTITY sbp2.prefs.editorHighlighting.border					"Rahmen">
+<!ENTITY sbp2.prefs.editorHighlighting.borderType				"Typ:">
+<!ENTITY sbp2.prefs.editorHighlighting.borderType.bordered		"Umrandet">
+<!ENTITY sbp2.prefs.editorHighlighting.borderType.underlined	"Unterstichen">
+<!ENTITY sbp2.prefs.editorHighlighting.borderStyle				"Stil:">
+<!ENTITY sbp2.prefs.editorHighlighting.borderStyle.solid		"Durchgehend">
+<!ENTITY sbp2.prefs.editorHighlighting.borderStyle.dotted		"Punktiert">
+<!ENTITY sbp2.prefs.editorHighlighting.borderStyle.dashed		"Gestrichelt">
+<!ENTITY sbp2.prefs.editorHighlighting.borderStyle.double		"Doppelt">
+<!ENTITY sbp2.prefs.editorHighlighting.borderWidth				"Breite:">
+<!ENTITY sbp2.prefs.editorHighlighting.borderWidth.thin			"Dünn">
+<!ENTITY sbp2.prefs.editorHighlighting.borderWidth.medium		"Mittel">
+<!ENTITY sbp2.prefs.editorHighlighting.borderWidth.thick		"Dick">
+<!ENTITY sbp2.prefs.editorHighlighting.btn.add					"Hinzufügen">
+<!ENTITY sbp2.prefs.editorHighlighting.btn.apply				"Anwenden">
+<!ENTITY sbp2.prefs.editorHighlighting.btn.reset				"Zurücksetzen">
+<!ENTITY sbp2.prefs.editorHighlighting.context.cut				"Ausschneiden">
+<!ENTITY sbp2.prefs.editorHighlighting.context.copy				"Kopieren">
+<!ENTITY sbp2.prefs.editorHighlighting.context.pstb				"Einfügen (davor)">
+<!ENTITY sbp2.prefs.editorHighlighting.context.psta				"Einfügen (danach)">
+<!ENTITY sbp2.prefs.editorHighlighting.context.del				"Löschen">
+<!ENTITY sbp2.prefs.keys										"Tastenkürzel">
+<!ENTITY sbp2.prefs.keys.tip									"Änderungen werden erst nach einem Neustart von Firefox wirksam">
+<!ENTITY sbp2.prefs.keys.sidebar								"Sidebar öffnen">
+<!ENTITY sbp2.prefs.keys.save									"Seite archivieren">
+<!ENTITY sbp2.prefs.keys.saveas									"Seite archivieren als">
+<!ENTITY sbp2.prefs.keys.bookmark								"Lesezeichen erstellen">
+<!ENTITY sbp2.prefs.keys.tabs									"Alle Tabs archivieren">
+<!ENTITY sbp2.prefs.keys.btn.reset								"Reset">

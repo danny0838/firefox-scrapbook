@@ -1,4 +1,6 @@
 
+//Components.utils.import("resource://gre/modules/osfile.jsm");
+
 var sbp2Common = {
 
 	get IO()		{ return Components.classes['@mozilla.org/network/io-service;1'].getService(Components.interfaces.nsIIOService); },
@@ -126,100 +128,6 @@ alert("sbp2Common.absoluteURL - "+auURLAbsolute);
 		sbp2CaptureSaverImage.save(ciElement, ciData);
 	},
 
-	captureLinks : function()
-	{
-		//Archiviert alle Seiten, auf die die Seite im aktiven Tab verweist.
-		//Der Anwender kann die Auswahl einschränken.
-		//
-		//Ablauf:
-		//1. Variablen initialisieren
-		//2. Parameter abfragen, die beim Speichern angewendet werden sollen
-		//2.1.1 Benutzereingaben anfordern
-		//2.1.2 Wurde Fenster mit OK beendet, werden die Seiten gespeichert
-		//2.1.2.1 sbp2Capture.xul einblenden
-
-		//1. Variablen initialisieren
-		var ctData = sbp2DataSource.dbData;
-		var ctContRes = sbp2Common.RDF.GetResource("urn:scrapbook:root");
-		var ctPosition = -1;
-		var ctFile = null;
-		var ctParameterIn = { window: null, title: null, url: null };
-		var ctParameterOut = {
-			autostart		: false,
-			charset			: window.content.document.characterSet,
-			comment			: "",
-			dialogAccepted	: true,
-			depthMax		: 0,
-			embeddedImages	: true,
-			embeddedStyles	: true,
-			embeddedScript	: false,
-			icon			: null,
-			id				: null,
-			linkedArchives	: false,
-			linkedAudio		: false,
-			linkedCustom	: false,
-			linkedImages	: false,
-			linkedMovies	: false,
-//			mode			: 0,			//0=Single, 1=InDepth Phase 1, 2=InDepth Phase 2, 3=Add, 4=Add InDepth Phase 1, 5=Add InDepth Phase 2
-			mode			: 10,			//0=Single, 1=InDepth, 2=Add, 3=Add InDepth, 9=Image, 10=Multiple
-			position		: ctPosition,
-			resCont			: ctContRes,
-			source			: null,
-			timeout			: 0,
-			title			: "",
-			type			: "",
-			window			: null,
-			links			: [],
-			types			: []
-		};
-		//2. Parameter abfragen, die beim Speichern angewendet werden sollen
-			//2.1.0 Variablen initialisieren
-			ctParameterIn.window = null;
-			ctParameterIn.title = null;
-			ctParameterIn.url = null;
-			//2.1.1 Benutzereingaben anfordern
-			window.openDialog("chrome://scrapbookplus2/content/sbp2CaptureLinks.xul", "", "chrome,modal,centerscreen,resizable", ctParameterIn, ctParameterOut);
-			//2.1.2 Wurde Fenster mit OK beendet, werden die Seiten gespeichert
-			if ( ctParameterOut.dialogAccepted ) {
-				//2.1.2.1 vom Anwender gemachte Angaben übertragen
-				var ctOptions = {
-					autostart		: false,
-					charset			: "",
-					comment			: "",
-					depthMax		: 0,
-					directoryDst	: ctParameterOut.resCont,
-					timeout			: ctParameterOut.timeout,
-					mode			: 10,
-					embeddedImages	: ctParameterOut.embeddedImages,
-					embeddedScript	: ctParameterOut.embeddedScript,
-					embeddedStyles	: ctParameterOut.embeddedStyles,
-					icon			: null,
-					id				: null,
-					linkedArchives	: ctParameterOut.linkedArchives,
-					linkedAudio		: ctParameterOut.linkedAudio,
-					linkedCustom	: ctParameterOut.linkedCustom,
-					linkedImages	: ctParameterOut.linkedImages,
-					linkedMovies	: ctParameterOut.linkedMovies,
-					position		: ctParameterOut.position,
-					resCont			: ctParameterOut.resCont,
-					source			: "",
-					timeout			: ctParameterOut.timeout,
-					title			: "",
-					type			: "",
-					window			: null
-				};
-				if ( ctOptions.fxVer18 == null )
-				{
-					var ctAppInfo = Components.classes["@mozilla.org/xre/app-info;1"].getService(Components.interfaces.nsIXULAppInfo);
-					var ctVerComparator = Components.classes["@mozilla.org/xpcom/version-comparator;1"].getService(Components.interfaces.nsIVersionComparator);
-					ctOptions.fxVer18 = ctVerComparator.compare(ctAppInfo.version, "18.0")>=0;
-					ctOptions.fxVer36 = ctVerComparator.compare(ctAppInfo.version, "36.0")>=0;
-				}
-				//2.1.2.2 sbp2Capture.xul einblenden
-				window.openDialog("chrome://scrapbookplus2/content/sbp2Capture.xul", "", "chrome,centerscreen,all,resizable", [], [], [], ctParameterOut.types, [], [], [], [], [0, 0], {}, {}, ctOptions, ctOptions.directoryDst, [], [], null, ctParameterOut.links);
-			}
-	},
-
 	captureTab : function(ctURL, ctTitle, ctContRes, ctPosition, ctCaptureMode)
 	{
 		//Archiviert die Seite im aktiven Tab im Verzeichnis ctContRes
@@ -228,6 +136,7 @@ alert("sbp2Common.absoluteURL - "+auURLAbsolute);
 		//1 -> Capture As
 		//2 -> Capture Add (einzelne Seite)
 		//3 -> Capture Add (alle verlinkten Seiten im Archiv)
+		//10 -> Capture Links (alle verlinkten Seiten im Tab)
 		//
 		//Ablauf:
 		//1. Variablen initialisieren
@@ -266,14 +175,16 @@ alert("sbp2Common.absoluteURL - "+auURLAbsolute);
 			linkedImages	: false,
 			linkedMovies	: false,
 //			mode			: 0,			//0=Single, 1=InDepth Phase 1, 2=InDepth Phase 2, 3=Add, 4=Add InDepth Phase 1, 5=Add InDepth Phase 2
-			mode			: 0,			//0=Single, 1=InDepth, 2=Add, 3=Add InDepth, 9=Image, 10=multiple
+			mode			: 0,			//0=Single, 1=InDepth, 2=Add, 3=InDepth Add, 9=Image, 10=Links
 			position		: ctPosition,
 			resCont			: ctContRes,
 			source			: ctURL,
 			timeout			: 0,
 			title			: ctTitle,
 			type			: "",
-			window			: null
+			window			: null,
+			links			: [],
+			types			: []
 		};
 		//2. Parameter abfragen, die beim Speichern angewendet werden sollen (optional)
 		if ( ctCaptureMode == 1 ) {
@@ -314,6 +225,23 @@ alert("sbp2Common.absoluteURL - "+auURLAbsolute);
 			if ( ctParameterOut.dialogAccepted ) {
 				sbp2CaptureSaver.captureInitAddMultiple(ctParameterOut);
 			}
+		} else if ( ctCaptureMode == 10 ) {
+			//2.2.0 Variablen initialisieren
+			ctParameterOut.mode = 10;
+			//2.2.1 Benutzereingaben anfordern
+			window.openDialog("chrome://scrapbookplus2/content/sbp2CaptureLinks.xul", "", "chrome,modal,centerscreen,resizable", ctParameterIn, ctParameterOut);
+			//2.2.2 Wurde Fenster mit OK beendet, wird InDepth-Capture-Add initiiert
+			if ( ctParameterOut.dialogAccepted ) {
+				//Verweise in Array ablegen
+				var ctLinks = [];
+				var ctTypes = [];
+				for ( var cilI=0; cilI<ctParameterOut.links.length; cilI++ )
+				{
+					ctLinks.push(ctParameterOut.links[cilI]);
+					ctTypes.push(ctParameterOut.types[cilI]);
+				}
+				window.openDialog("chrome://scrapbookplus2/content/sbp2Capture.xul", "", "chrome,centerscreen,all,resizable", [], [], [], ctTypes, [], [], [], [], [], [0, 0], {}, {}, ctParameterOut, null, [], [], null, ctLinks);
+			}
 		} else {
 			//2.3.1 Verzeichnis erstellen
 			ctParameterOut.id = sbp2Common.directoryCreate();
@@ -322,43 +250,46 @@ alert("sbp2Common.absoluteURL - "+auURLAbsolute);
 		}
 	},
 
-	captureTabFinish : function(ctfItem, ctfResCont, ctfPosition, ctfMode)
+	captureTabFinish : function(ctfItem, ctfResCont, ctfPosition, ctfMode, ctfFinishMessage)
 	{
+//Wird von sbp2Capture.close und sbp2CaptureSaver.captureComplete aufgerufen
 		//Funktion wird aufgerufen, sobald die in sbp2CaptureSaver durchgeführten asynchronen Downloads beendet sind.
 		//Es wird ein Eintrag in der Sidebar angelegt und die Datei index.dat erstellt. Außerdem werden die RDF-Dateien
 		//gespeichert.
 		//
 		//Ablauf:
-		//1. Variablen initialisieren
-		//2. index.dat erstellen
-		//3. Eintrag im Tree erstellen
-		//4. Aktualisieren der Ansicht
-		//5. RDF-Datei auf Platte aktualisieren (ohne geht der Datensatz beim Beenden von FF verloren)
-		//6. weitere Archivierung ermöglichen
-		//7. Nachricht bei abgeschlossener Archivierung ausgeben
+		//1. Modusabhängige Aktionen
+		//1.1 Variablen initialisieren
+		//1.2 index.dat erstellen
+		//1.3 Eintrag im Tree erstellen
+		//1.4 Aktualisieren der Ansicht
+		//1.5 RDF-Datei auf Platte aktualisieren (ohne geht der Datensatz beim Beenden von FF verloren)
+		//2. weitere Archivierung ermöglichen
+		//3. Popup anzeigen, falls zuvor wirklich etwas archiviert worden ist
 
-		if ( ctfMode < 3 || ctfMode == 9 ) {
-			//1. Variablen initialisieren
+		//1. Modusabhängige Aktionen
+		if ( ctfMode < 3 || ctfMode == 9 || ctfMode == 10 ) {
+			//1.1 Variablen initialisieren
 			var ctfData = sbp2DataSource.dbData;
-			//2. index.dat erstellen
+			//1.2 index.dat erstellen
 			var ctfFile = sbp2Common.getBuchVZ();
 			ctfFile.append("data");
 			ctfFile.append(ctfItem.id);
 			ctfFile.append("index.dat");
 			this.fileWriteIndexDat(ctfFile.path, ctfItem);
-			//3. Eintrag im Tree erstellen
+			//1.3 Eintrag im Tree erstellen
 			sbp2DataSource.itemAdd(ctfData, ctfItem, ctfResCont, ctfPosition);
-			//4. Aktualisieren der Ansicht
+			//1.4 Aktualisieren der Ansicht
 			var ctfTree = document.getElementById("sbp2Tree");
 			if ( ctfTree ) ctfTree.builder.rebuild();
-			//5. RDF-Datei auf Platte aktualisieren (ohne geht der Datensatz beim Beenden von FF verloren)
+			//1.5 RDF-Datei auf Platte aktualisieren (ohne geht der Datensatz beim Beenden von FF verloren)
 			sbp2DataSource.dsFlush(ctfData);
 			sbp2DataSource.dsFlush(sbp2DataSource.dbDataSearchCacheUpdate);
 		}
-		//6. weitere Archivierung ermöglichen (eventuell nach sbp2CaptureSaver verlagern)
+		//2. weitere Archivierung ermöglichen (eventuell nach sbp2CaptureSaver verlagern)
 		sbp2CaptureSaver.scsCaptureRunning = 0;
-		//7. Nachricht bei abgeschlossener Archivierung ausgeben
-		this.captureFinishMessage(ctfItem);
+		//3. Popup anzeigen, falls zuvor wirklich etwas archiviert worden ist
+		if ( ctfFinishMessage > 0 ) this.captureFinishMessage(ctfItem);
 	},
 
 	captureFinishMessage : function(cfmItem)
@@ -384,7 +315,7 @@ alert("sbp2Common.absoluteURL - "+auURLAbsolute);
 		}
 	},
 
-	convertToUnicode : function(ctuString, ctuCharset)
+	convertToUnicode : function(ctuString, ctuCharset, ctuFile)
 	{
 //wird von sbp2NoteSidebar.load() und sbp2SearchCache.itemAdd() aufgerufen
 		if ( !ctuString ) return "";
@@ -396,7 +327,7 @@ alert("sbp2Common.absoluteURL - "+auURLAbsolute);
 		} catch(ctuEx)
 		{
 			//Keine Meldung ausgeben, um Benutzer nicht zu beunruhigen
-			alert("sbp2Common.convertToUnicode\n---\n"+ctuEx+"\n\nData:\n"+ctuString);
+			alert("sbp2Common.convertToUnicode"+ctuFile+"\n---\n"+ctuEx+"\n\nData:\n"+ctuString);
 		}
 		return ctuString;
 	},
@@ -535,9 +466,10 @@ alert("sbp2Common.createItem\n---\ID "+ciNewID+" already exists. Contact the dev
 		{
 			var dcDatenVZ = dcFolderBase.clone();
 			dcDatenVZ.append(dcNewID);
+			//Eine ID kann schon vergeben sein, falls Funktion "mehrere Links archivieren" verwendet wird. Daher muss diese gegebenenfalls korrigiert werden.
 			while ( dcDatenVZ.exists() )
 			{
-alert("sbp2Common.directoryCreate\n---\ID "+ciNewID+" already exists. Contact the developer.");
+//alert("sbp2Common.directoryCreate\n---\ID "+dcNewID+" already exists. Contact the developer.");
 				dcNewID++;
 				dcDatenVZ = dcFolderBase.clone();
 				dcDatenVZ.append(dcNewID);
@@ -653,7 +585,7 @@ alert("sbp2Common.directoryRemove\n---\nThe directory "+drFile.path+" should not
 		}
 		catch(frEx)
 		{
-			alert("sbp2Common.fileRead\n---\n"+frDatei.path+"\n\n"+frEx);
+			dump("sbp2Common.fileRead\n---\n"+frDatei.path+"\n\n"+frEx+"\n-------\n");
 			return "";
 		}
 		//3. Gebe Daten an aufrufende Funktion zurück (???)
@@ -914,14 +846,24 @@ var loadCompletedListener = {
 								.rootTreeItem
 								.QueryInterface(Components.interfaces.nsIInterfaceRequestor)
 								.getInterface(Components.interfaces.nsIDOMWindow);
+			//Das Einblenden des Editors soll vom Anwender manuell per Kontextmenü vorgenommen werden -> Editor ausblenden
+			oscMainWindow.document.getElementById("sbp2Toolbox").hidden = true;
+/*
 			//Ein-/Ausblenden von Editor
 			if ( oscMainWindow.document.getElementById("content").currentURI.spec == oscURL ) {
 				//ID bestimmen
 				var oscEditierbar = (oscURL.indexOf("file") == 0 && oscURL.match(/\/data\/(\d{14})\//));
 				var oscID = oscEditierbar ? RegExp.$1 : null;
 				//Editor einblenden, falls vom Anwender gewünscht
-				oscMainWindow.document.getElementById("sbp2Toolbox").hidden = oscID ? false : true;
+				if ( oscID ) {
+					oscMainWindow.document.getElementById("sbp2Toolbox").hidden = false;
+					//Highlighter initialisieren
+					oscMainWindow.sbp2Editor.hlInit();
+				} else {
+					oscMainWindow.document.getElementById("sbp2Toolbox").hidden = true;
+				}
 			}
+*/
 		}
 	},
 

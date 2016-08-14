@@ -2,6 +2,7 @@
 
 <?xml-stylesheet type="text/css" href="chrome://browser/skin/places/places.css" ?>
 <?xml-stylesheet type="text/css" href="chrome://global/skin/" ?>
+<?xml-stylesheet type="text/css" href="chrome://scrapbookplus2/skin/CSS/sbp2Sidebar.css" ?>
 
 <!DOCTYPE window SYSTEM "chrome://scrapbookplus2/locale/captureadd.dtd">
 

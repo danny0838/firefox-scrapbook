@@ -89,9 +89,10 @@ var sbp2Manage = {
 		//3. übergabeparameter des Fensters übernehmen
 		//4. Datenquelle vom tree in der Sidebar trennen und den tree verstecken
 		//5. multibook.txt laden
-		//6. Listener einbinden
-		//7. Datenverwaltung aktivieren
-		//8. Ansicht wechseln, falls iModus != content
+		//6. CSS rules für Tree laden
+		//7. Listener einbinden
+		//8. Datenverwaltung aktivieren
+		//9. Ansicht wechseln, falls iModus != content
 
 		//1. Variablen initialisieren
 		this.mainTabContentLoaded.push(0);
@@ -129,11 +130,13 @@ var sbp2Manage = {
 		mlSidebarTree.hidden = true;
 		//5. multibook.txt laden
 		this.mbDatensaetze = this.mbLoadMultibookTxt();
-		//6. Listener einbinden
+		//6. CSS rules für Tree laden
+		document.styleSheets[2].insertRule(window.arguments[1][0], 0);
+		//7. Listener einbinden
 //		document.getElementById("sbp2MIETree1").builderView.addObserver(sbpMDragAndDrop.ddBuilderViewObserver);
-		//7. Ansicht aktualisieren (wird für die Anzeige der Einträge im Multibook-Tab benötigt, falls dieses direkt über die Sidebar aufgerufen wird)
+		//8. Ansicht aktualisieren (wird für die Anzeige der Einträge im Multibook-Tab benötigt, falls dieses direkt über die Sidebar aufgerufen wird)
 		this.mainChangeTab(mlModus);
-		//8. Ansicht wechseln, falls iModus != impexp
+		//9. Ansicht wechseln, falls iModus != impexp
 		if ( mlModus != "impexp" ) {
 			document.getElementById("sbp2MTabs").selectedIndex = 3;
 		}

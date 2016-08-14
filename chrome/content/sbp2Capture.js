@@ -5,6 +5,7 @@ const Cr = Components.results;
 
 var sbp2Capture = {
 
+	scDLProgress		: 0,
 	scParameter : {
 		autostart		: false,
 		charset			: "",
@@ -50,8 +51,8 @@ var sbp2Capture = {
 //		//1. Verbleibende Verweise auf "nicht heruntergeladen" setzen
 		//2. Arbeiten im InDepth-Modus abschließen
 		//2.1 CSS-Dateien sowie sbp2-html2filename.txt und sbp2.url2filename.txt schreiben
-		//2.2 Download als abgeschlossen kennzeichnen
-		//3. Fenster schließen
+		//3. Download als abgeschlossen kennzeichnen
+		//4. Fenster schließen
 
 //		//1. Verbleibende Verweise auf "nicht heruntergeladen" setzen
 //		for ( var cI=sbp2Capture.scURLTreePos+1; cI<sbp2Capture.scURLTree.length; cI++ )
@@ -59,11 +60,15 @@ var sbp2Capture = {
 //			sbp2CaptureSaverInDepth.setState(this.scURLTree[cI], 0);
 //		}
 		//2. Arbeiten im InDepth-Modus abschließen
+//Hier muss noch dran gearbeitet werden. Im InDepth Add (3) werden derzeit die sbp2-links.txt und andere aktualisiert, auch wenn nichts gespeichert worden ist.
+//Umstellung auf 10 geht nicht, da in sbp2Common.captureTabFinish sonst doch ein neuer Eintrag erstellt werden würde.
 		if ( this.scParameter.mode != 10 ) {
-			//2.1 CSS-Dateien sowie sbp2-html2filename.txt und sbp2.url2filename.txt schreiben
-			sbp2CaptureSaverInDepth.captureComplete();
+			if ( sbp2CaptureSaverInDepth.scsDLProgress[1] > 0 ) {
+				//2.1 CSS-Dateien sowie sbp2-html2filename.txt und sbp2.url2filename.txt schreiben
+				sbp2CaptureSaverInDepth.captureComplete();
+			}
 			//2.2 Download als abgeschlossen kennzeichnen
-			window.opener.sbp2Common.captureTabFinish(window.arguments[15], window.arguments[12].resCont, -1, window.arguments[11].mode);
+			window.opener.sbp2Common.captureTabFinish(window.arguments[16], window.arguments[13].resCont, -1, this.scParameter.mode, this.scDLProgress);
 		}
 		//3. Fenster schließen
 		window.close();
@@ -71,30 +76,49 @@ var sbp2Capture = {
 
 	cInit : function()
 	{
-		//window.arguments[11] in this.scParameter ablegen
-		this.scParameter.autostart = window.arguments[11].autostart;
-		this.scParameter.charset = window.arguments[11].charset;
-		this.scParameter.comment = window.arguments[11].comment;
-		this.scParameter.dialogAccepted = window.arguments[11].dialogAccepted;
-		this.scParameter.depthMax = window.arguments[11].depthMax;
-		this.scParameter.embeddedImages = window.arguments[11].embeddedImages;
-		this.scParameter.embeddedStyles = window.arguments[11].embeddedStyles;
-		this.scParameter.embeddedScript = window.arguments[11].embeddedScript;
-		this.scParameter.icon = window.arguments[11].icon;
-		this.scParameter.id = window.arguments[11].id;
-		this.scParameter.linkedArchives = window.arguments[11].linkedArchives;
-		this.scParameter.linkedAudio = window.arguments[11].linkedAudio;
-		this.scParameter.linkedCustom = window.arguments[11].linkedCustom;
-		this.scParameter.linkedImages = window.arguments[11].linkedImages;
-		this.scParameter.linkedMovies = window.arguments[11].linkedMovies;
-		this.scParameter.mode = window.arguments[11].mode;
-		this.scParameter.position = window.arguments[11].position;
-		this.scParameter.resCont = window.arguments[11].resCont;
-		this.scParameter.source = window.arguments[11].source;
-		this.scParameter.timeout = window.arguments[11].timeout;
-		this.scParameter.title = window.arguments[11].title;
-		this.scParameter.type = window.arguments[11].type;
-		this.scParameter.window = window.arguments[11].window;
+//Wird von sbp2Capture.xul aufgerufen
+		//
+		var cURLNr = null;
+		//this.scParameter initialisieren mit den Parametern, die an das Fenster übergeben wurden
+		this.scParameter.depthMax = window.arguments[12].depthMax;
+		this.scParameter.embeddedImages = window.arguments[12].embeddedImages;
+		this.scParameter.embeddedStyles = window.arguments[12].embeddedStyles;
+		this.scParameter.embeddedScript = window.arguments[12].embeddedScript;
+		this.scParameter.id = window.arguments[16].id;
+		this.scParameter.linkedArchives = window.arguments[12].linkedArchives;
+		this.scParameter.linkedAudio = window.arguments[12].linkedAudio;
+		this.scParameter.linkedCustom = window.arguments[12].linkedCustom;
+		this.scParameter.linkedImages = window.arguments[12].linkedImages;
+		this.scParameter.linkedMovies = window.arguments[12].linkedMovies;
+		this.scParameter.mode = window.arguments[12].mode;
+		this.scParameter.timeout = window.arguments[12].timeout;
+/*
+sbp2CaptureSaver.scsOptions (window.arguments[12]) enthält diese Parameter überhaupt nicht
+		this.scParameter.autostart = window.arguments[12].autostart;
+		this.scParameter.charset = window.arguments[12].charset;
+		this.scParameter.comment = window.arguments[12].comment;
+		this.scParameter.dialogAccepted = window.arguments[12].dialogAccepted;
+this.scParameter.depthMax = window.arguments[12].depthMax;
+this.scParameter.embeddedImages = window.arguments[12].embeddedImages;
+this.scParameter.embeddedStyles = window.arguments[12].embeddedStyles;
+this.scParameter.embeddedScript = window.arguments[12].embeddedScript;
+		this.scParameter.icon = window.arguments[12].icon;
+this.scParameter.id = window.arguments[12].id;
+this.scParameter.linkedArchives = window.arguments[12].linkedArchives;
+this.scParameter.linkedAudio = window.arguments[12].linkedAudio;
+this.scParameter.linkedCustom = window.arguments[12].linkedCustom;
+this.scParameter.linkedImages = window.arguments[12].linkedImages;
+this.scParameter.linkedMovies = window.arguments[12].linkedMovies;
+this.scParameter.mode = window.arguments[12].mode;
+		this.scParameter.position = window.arguments[12].position;
+		this.scParameter.resCont = window.arguments[12].resCont;
+		this.scParameter.source = window.arguments[12].source;
+this.scParameter.timeout = window.arguments[12].timeout;
+		this.scParameter.title = window.arguments[12].title;
+		this.scParameter.type = window.arguments[12].type;
+		this.scParameter.window = window.arguments[12].window;
+*/
+		
 		//window.arguments[3] in this.scURLTreeFiletype ablegen
 		for ( var ciI=0; ciI<window.arguments[3].length; ciI++ )
 		{
@@ -106,16 +130,32 @@ var sbp2Capture = {
 		this.scSecondsMax = this.scParameter.timeout;
 		this.scTree = document.getElementById("sbp2HTMLTree");
 		//Variablen von sbp2CaptureSaverInDepth setzen
-		if ( this.scParameter.mode == 1 ) sbp2CaptureSaverInDepth.captureInitInDepthNormal(window.arguments[0], window.arguments[1], window.arguments[2], window.arguments[3], window.arguments[4], window.arguments[5], window.arguments[6], window.arguments[7], window.arguments[8], window.arguments[9], window.arguments[10], window.arguments[11], window.arguments[12], window.arguments[13], window.arguments[14], window.arguments[15]);
+		if ( this.scParameter.mode == 1 || this.scParameter.mode == 3 ) sbp2CaptureSaverInDepth.captureInitInDepthNormal(window.arguments[0], window.arguments[1], window.arguments[2], window.arguments[3], window.arguments[4], window.arguments[5], window.arguments[6], window.arguments[7], window.arguments[8], window.arguments[9], window.arguments[10], window.arguments[11], window.arguments[12], window.arguments[13], window.arguments[14], window.arguments[15], window.arguments[16]);
 		//übergebene Links in Tree eintragen
-		for ( var iI=0; iI<window.arguments[16].length; iI++ )
+		for ( var iI=0; iI<window.arguments[17].length; iI++ )
 		{
 			if ( this.scParameter.mode == 1 ) {
-				this.itemAdd(window.arguments[16][iI], window.arguments[16][iI], "InDepth", 1);
+				this.itemAdd(window.arguments[17][iI], window.arguments[17][iI], "InDepth", 1);
+			} else if ( this.scParameter.mode == 3 ) {
+				cURLNr = window.arguments[10][window.arguments[17][iI]];
+				this.itemAdd(window.arguments[17][iI], window.arguments[17][iI], "InDepth Add", window.arguments[1][cURLNr]);
 			} else if ( this.scParameter.mode == 10 ) {
-				this.itemAdd(window.arguments[16][iI], window.arguments[16][iI], "Multiple", 1);
+				this.itemAdd(window.arguments[17][iI], window.arguments[17][iI], "Multiple", 1);
 			} else {
 				dump("sbp2Capture.cInit\n---\n\nunknown mode -- "+this.scParameter.mode+". Contact the developer.");
+			}
+		}
+		//Falls this.scParameter.mode == 3 oder 10, Filter-Einstellungen laden und Auswahl aktualisieren
+		if ( this.scParameter.mode == 3 || this.scParameter.mode == 10 ) {
+			var iFile = sbp2Common.getBuchVZ();
+			iFile.append("data");
+			iFile.append(this.scParameter.id);
+			iFile.append("sbp2-capflt.txt");
+			var iData = sbp2Common.fileRead(iFile);
+			var iLines = iData.split("\n");
+			for ( var iI=0; iI<iLines.length-1; iI=iI+2 )
+			{
+				sbp2CaptureFilter.itemAdd(iLines[iI], iLines[iI+1]);
 			}
 		}
 		//Anzahl an Einträgen im Tree merken und Benutzerinformation darüber ausgeben (this.scURLTreeItemsRem ist in itemAdd aktualisiert worden)
@@ -173,19 +213,23 @@ var sbp2Capture = {
 					this.scSecondsRem = this.scSecondsMax;
 					document.getElementById("sbp2Progress").value = document.getElementById("sbp2CaptureString").getString("LOAD") + " " + this.scURLTree[this.scURLTreePos] + " ...";
 					this.scParameter.source = this.scURLTree[this.scURLTreePos];
-					sbp2CaptureSaverMultiple.captureInitNormal(null, this.scParameter);
+//					sbp2CaptureSaverMultiple.captureInitNormal(null, this.scParameter);
+					this.scDLProgress = 1;
 					sbp2InvisibleBrowser.load(this.scURLTree[this.scURLTreePos]);
 				} else {
-					sbp2CaptureSaverMultiple.downSaveFileAdd(this.scURLTree[this.scURLTreePos], this.scURLTreeDepth[this.scURLTreePos], this.scURLTreeFiletype[csURLNr]);
-					this.onSuccess();
+alert("War hier!");
+//					sbp2CaptureSaverMultiple.downSaveFileAdd(this.scURLTree[this.scURLTreePos], this.scURLTreeDepth[this.scURLTreePos], this.scURLTreeFiletype[csURLNr]);
+//					this.onSuccess();
 				}
 			} else {
 				var csURLNr = sbp2CaptureSaverInDepth.scsHashURL[this.scURLTree[this.scURLTreePos]];
 				if ( sbp2CaptureSaverInDepth.scsArrayURLFiletype[csURLNr] < 2 ) {
 					this.scSecondsRem = this.scSecondsMax;
 					document.getElementById("sbp2Progress").value = document.getElementById("sbp2CaptureString").getString("LOAD") + " " + this.scURLTree[this.scURLTreePos] + " ...";
+					this.scDLProgress = 1;
 					sbp2InvisibleBrowser.load(this.scURLTree[this.scURLTreePos]);
 				} else {
+					this.scDLProgress = 1;
 					sbp2CaptureSaverInDepth.downSaveFileAdd(this.scURLTree[this.scURLTreePos], this.scURLTreeDepth[this.scURLTreePos], this.scURLTreeFiletype[csURLNr]);
 					this.onSuccess();
 				}
@@ -255,7 +299,7 @@ var sbp2Capture = {
 				iaTcell2.setAttribute("label", iaTitle);
 				iaTrow.appendChild(iaTcell2);
 				var iaTcell3 = document.createElement("treecell");
-				if ( iaMode == "InDepth" ) {
+				if ( iaMode == "InDepth" || iaMode == "InDepth Add" ) {
 					iaTcell3.setAttribute("label", iaMode+" ("+iaDepth+")");
 				} else {
 					iaTcell3.setAttribute("label", iaMode+" ("+this.scTree.childNodes[1].childNodes.length+")");
@@ -494,8 +538,16 @@ var sbp2InvisibleBrowser = {
 		//2. Seite archivieren
 		if ( sbp2Capture.scParameter.mode == 1 ) {
 			sbp2CaptureSaverInDepth.capture(this.ELEMENT.contentWindow, "", sbp2Capture.scURLTreeDepth[sbp2Capture.scURLTreePos]);
+		} else if ( sbp2Capture.scParameter.mode == 3 ) {
+			sbp2CaptureSaverInDepth.capture(this.ELEMENT.contentWindow, "", sbp2Capture.scURLTreeDepth[sbp2Capture.scURLTreePos]);
 		} else if ( sbp2Capture.scParameter.mode == 10 ) {
-			sbp2CaptureSaverMultiple.capture(this.ELEMENT.contentWindow, "index.html", 0);
+			//2.1 Verzeichnis erstellen
+			sbp2Capture.scParameter.id = sbp2Common.directoryCreate();
+			//2.2 Titel und Zeichensatz bestimmen
+			sbp2Capture.scParameter.title = this.ELEMENT.contentDocument.title;
+			sbp2Capture.scParameter.chars = this.ELEMENT.contentDocument.characterSet;
+			//2.3 Seite speichern
+			sbp2CaptureSaver.captureInitNormal(this.ELEMENT.contentWindow, sbp2Capture.scParameter);
 		} else {
 			alert("sbp2InvisibleBrowser.execCapture\n---\n\nunknown mode -- "+sbp2Capture.scParameter.mode+". Contact the developer.");
 		}

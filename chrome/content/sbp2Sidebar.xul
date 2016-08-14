@@ -86,13 +86,13 @@
 				</menupopup>
 			</toolbarbutton>
 			<toolbarbutton id="sbp2SidebarBToggle"	image="chrome://scrapbookplus2/skin/toolbar_toggle.png" tooltiptext="&sbp2.sidebar.collapse;"	oncommand="sbp2TreeHandle.changeFolderState();" />
-			<toolbarbutton id="sbp2SidebarBManage"	image="chrome://scrapbookplus2/skin/toolbar_manage.png" tooltiptext="&sbp2.sidebar.manage;"		oncommand="window.openDialog('chrome://scrapbookplus2/content/sbp2Manage.xul', 'ScrapBookPlus:Manage', 'chrome,centerscreen,all,resizable,dialog=no', 'impexp');" />
+			<toolbarbutton id="sbp2SidebarBManage"	image="chrome://scrapbookplus2/skin/toolbar_manage.png" tooltiptext="&sbp2.sidebar.manage;"		oncommand="window.openDialog('chrome://scrapbookplus2/content/sbp2Manage.xul', 'ScrapBookPlus:Manage', 'chrome,centerscreen,all,resizable,dialog=no', 'impexp', sbp2Sidebar.sTreeCSS);" />
 			<toolbarbutton id="sbp2SidebarBSwitch"	image="chrome://scrapbookplus2/skin/toolbar_multi.png"  tooltiptext="&sbp2.sidebar.multisb;" type="menu"	onpopupshowing="sbp2Manage.mbUpdatePopup();">
 				<menupopup id="sbp2SidebarBSwitchMPopup" oncommand="sbp2Common.loadScrapbook(event.originalTarget);">
 					<menuitem id="sbp2SidebarBSwitchMItem" type="radio" autocheck="false" hidden="true" />
 					<menuitem id="sbp2SidebarBSwitchMItemDefault" label="&sbp2.sidebar.profilefolder;" type="radio" autocheck="false" />
 					<menuseparator />
-					<menuitem id="sbp2SidebarBSwitchMItemManage" label="&sbp2.sidebar.manage;..." oncommand="window.openDialog('chrome://scrapbookplus2/content/sbp2Manage.xul', 'ScrapBookPlus:Manage', 'chrome,centerscreen,all,resizable,dialog=no','multibook');" />
+					<menuitem id="sbp2SidebarBSwitchMItemManage" label="&sbp2.sidebar.manage;..." oncommand="window.openDialog('chrome://scrapbookplus2/content/sbp2Manage.xul', 'ScrapBookPlus:Manage', 'chrome,centerscreen,all,resizable,dialog=no', 'multibook');" />
 				</menupopup>
 			</toolbarbutton>
 			<spacer flex="1" />

@@ -6,7 +6,7 @@ menuitem[type="radio"][checked="true"] {
 	font-weight: bold;
 }
 
-/* Formatierung der Einträge im Tree */
+/* Einträge im Tree */
 
 treechildren::-moz-tree-image() {
 	margin-right : 3px;
@@ -24,6 +24,12 @@ treechildren::-moz-tree-image(note) {
 	margin : 2px !important;
 	padding: 0px !important;
 	background-image: url('chrome://scrapbookplus2/skin/dropdown.png');
+}
+
+/* Formatierung der Einträge im Tree */
+
+treechildren::-moz-tree-cell-text(bookmark) {
+	color: rgb(32,192,32);
 }
 
 /* Formatierung des Headers der Sidebar */

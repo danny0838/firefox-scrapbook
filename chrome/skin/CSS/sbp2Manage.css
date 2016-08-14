@@ -6,10 +6,6 @@ treechildren::-moz-tree-image() {
 	margin-right : 3px;
 }
 
-treechildren::-moz-tree-cell-text(bookmark) {
-	color: rgb(32,192,32);
-}
-
 treechildren::-moz-tree-image(note) {
 	list-style-image: url('chrome://scrapbookplus2/skin/treenote.png');
 }

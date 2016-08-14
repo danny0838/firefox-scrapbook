@@ -7,8 +7,7 @@ var sbp2Overlay = {
 
 	handleEvent : function(heEvent)
 	{
-		//Dient zur Steuerung der angezeigten Menüeinträge im Kontextmenü des Browsers. Die Funktion muss "handleEvent" heißen,
-		//da Sie 
+		//Dient zur Steuerung der angezeigten Menüeinträge im Kontextmenü des Browsers.
 		//
 		//Ablauf:
 		//1. Nur ausführen, falls das Kontextmenü angezeigt werden soll
@@ -107,6 +106,12 @@ heElement("sbp2ContextMenu10").hidden = true;
 		sbp2DataSource.init();
 		sbp2DataSource.initSearchCacheUpdate();
 		sbp2LinkRepl.slrInitDatabase();
+		//Aktualisiert die Vorschau sowie den Inhalt der Menüliste für den Markierstift im Editor, sofern die Datei highlighter.txt zuvor schon geladen wurde.
+		if ( sbp2Editor.seHighlighterState > 0 ) {
+			sbp2Editor.hlInit();
+			sbp2Editor.hlUIUpdate();
+			sbp2Editor.seHighlighterState = 2;
+		}
 	},
 
 };

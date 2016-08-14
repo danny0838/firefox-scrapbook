@@ -23,3 +23,4 @@
 <!ENTITY sbp2.context.picture-frame	"Frame als Bild speichern...">
 <!ENTITY sbp2.context.picture-page	"Seite als Bild speichern...">
 <!ENTITY sbp2.context.linkmulti		"mehrere Links archivieren">
+<!ENTITY sbp2.context.editor		"Editor ein-/ausblenden">
