@@ -107,14 +107,10 @@ sbContentSaverClass.prototype = {
                 this.option["tidyCSS"] = false;
                 break;
         }
-        
-        this.documentName = "index";
+
         this.item = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
         this.item.id = sbDataSource.identify(this.item.id);
-        this.isMainFrame = true;
-        this.selection = null;
-        this.treeRes = null;
-
+        this.documentName = "index";
         this.file2URL = {
             "index.dat": true,
             "index.png": true,
@@ -124,10 +120,8 @@ sbContentSaverClass.prototype = {
             "sb-file2url.txt": true,
             "sb-url2name.txt": true,
         };
-        this.file2Doc = {};
-        this.linkURLs = [];
-        this.elemMapOrig = [];
-        this.elemMapClone = [];
+
+        // these could be modified or overwritten by preset data
         this.presetData = aPresetData;
         if ( aPresetData ) {
             if ( aPresetData[0] ) this.item.id = aPresetData[0];
@@ -139,6 +133,15 @@ sbContentSaverClass.prototype = {
         this.httpTask[this.item.id] = 0;
         this.downloadRewriteFiles[this.item.id] = [];
         this.downloadRewriteMap[this.item.id] = {};
+
+        // other resets
+        this.isMainFrame = true;
+        this.selection = null;
+        this.treeRes = null;
+        this.file2Doc = {};
+        this.linkURLs = [];
+        this.elemMapOrig = [];
+        this.elemMapClone = [];
     },
 
     // aRootWindow: window to be captured
