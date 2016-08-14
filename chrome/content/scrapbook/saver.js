@@ -204,14 +204,14 @@ sbContentSaverClass.prototype = {
             if (iconFileName) this.favicon = iconFileName;
         }
 
+        // register resource to the rdf
+        this.addResource(aResName, aResIndex);
+
         // if there is no further download task, complete the download
         if ( this.httpTask[this.item.id] == 0 ) {
             var that = this;
             setTimeout(function(){ that.onAllDownloadsComplete(that.item); }, 100);
         }
-
-        // register resource to the rdf
-        this.addResource(aResName, aResIndex);
 
         // finalize
         return [sbCommonUtils.splitFileName(newName)[0], this.file2URL, this.item.title];
