@@ -153,22 +153,24 @@ sbContentSaverClass.prototype = {
         this.item.chars = this.option["forceUtf8"] ? "UTF-8" : aRootWindow.document.characterSet;
         this.item.source = aRootWindow.location.href;
 
-        // Build the title list. First is default, others are selectable in the capture detail dialog.
-        var titles = aRootWindow.document.title ? [aRootWindow.document.title] : [decodeURI(this.item.source)];
-        if ( aTitle ) titles[0] = aTitle;
+        // Build the title list.
+        // First is default title (document title or URL), others are candidate.
+        var titles = [aRootWindow.document.title || decodeURI(this.item.source)];
+        if (aTitle) titles.push(aTitle);
         if ( aIsPartial ) {
             this.selection = aRootWindow.getSelection();
             var lines = this.selection.toString().split("\n");
-            for ( var i = 0; i < lines.length; i++ ) {
-                lines[i] = lines[i].replace(/\r|\n|\t/g, "");
-                if ( lines[i].length > 0 ) titles.push(sbCommonUtils.crop(lines[i], 150, 180));
-                if ( titles.length > 4 ) break;
+            for ( var i = 0, I = lines.length; i < I; i++ ) {
+                var line = lines[i].replace(/[\r\n\t]+/g, "");
+                if ( line.length > 0 ) {
+                    titles.push(sbCommonUtils.crop(line, 150, 180));
+                    if ( titles.length > 4 ) break;
+                }
             }
-            this.item.title = ( titles.length > 0 ) ? titles[1] : titles[0];
         } else {
             this.selection = null;
-            this.item.title = titles[0];
         }
+        this.item.title = titles[1] || titles[0];
         // If the edit toolbar is showing, also modify its title
         if ( document.getElementById("ScrapBookToolbox") && !document.getElementById("ScrapBookToolbox").hidden ) {
             var modTitle = document.getElementById("ScrapBookEditTitle").value;
