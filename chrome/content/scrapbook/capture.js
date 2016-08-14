@@ -8,10 +8,15 @@ var gShowDetail = false;
 var gResName = "";
 var gResIdx = 0;
 var gReferItem = null;
-var gOption = {};
+var gOption = {
+    "images": true,
+    "media": true,
+    "frames": true,
+    "inDepthTimeout": 0,
+};
 var gFile2URL = {};
 var gURL2Name = {};
-var gPreset = [];
+var gPreset = null;
 var gContext = "";
 
 
@@ -92,22 +97,16 @@ function SB_initCapture() {
     }
 
     var myURLs = data.urls;
-    gTitles = data.titles || [];
-    gRefURL = data.refUrl;
-    gShowDetail = data.showDetail;
-    gResName = data.resName;
-    gResIdx = data.resIdx;
-    gReferItem = data.referItem;
-    gOption = data.option || {};
-    gFile2URL = data.file2Url;
-    gPreset = data.preset;
-    gContext = data.context;
-
-    // preset for gOption
-    if ( !("images" in gOption ) ) gOption["images"] = true;
-    if ( !("media" in gOption ) ) gOption["media"] = true;
-    if ( !("frames" in gOption ) ) gOption["frames"] = true;
-    if ( !("inDepthTimeout" in gOption) ) gOption["inDepthTimeout"] = 0;
+    gTitles = data.titles || gTitles;
+    gRefURL = data.refUrl || gRefURL;
+    gShowDetail = !!data.showDetail;
+    gResName = data.resName || gResName;
+    gResIdx = data.resIdx || gResIdx;
+    gReferItem = data.referItem || gReferItem;
+    gOption = data.option ? sbCommonUtils.extendObject(gOption, data.option) : gOption;
+    gFile2URL = data.file2Url || gFile2URL;
+    gPreset = data.preset || gPreset;
+    gContext = data.context || gContext;
 
     // handle specific contexts
     if ( gContext == "indepth" ) {
