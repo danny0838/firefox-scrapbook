@@ -154,10 +154,13 @@ sbContentSaverClass.prototype = {
         this.init(aContext, aPresetData, aIsPartial);
         this.item.chars = this.option["forceUtf8"] ? "UTF-8" : aRootWindow.document.characterSet;
         this.item.source = aRootWindow.location.href;
-        //Favicon der angezeigten Seite bestimmen (Unterscheidung zwischen FF2 und FF3 notwendig!)
+
+        // use the favicon shown in the tab for the page
         if ( "gBrowser" in window && aRootWindow == gBrowser.contentWindow ) {
             this.item.icon = gBrowser.mCurrentBrowser.mIconURL;
         }
+
+        // Build the title list. First is default, others are selectable in the capture detail dialog.
         var titles = aRootWindow.document.title ? [aRootWindow.document.title] : [decodeURI(this.item.source)];
         if ( aTitle ) titles[0] = aTitle;
         if ( aIsPartial ) {
@@ -173,6 +176,7 @@ sbContentSaverClass.prototype = {
             this.selection = null;
             this.item.title = titles[0];
         }
+        // If the edit toolbar is showing, also modify its title
         if ( document.getElementById("ScrapBookToolbox") && !document.getElementById("ScrapBookToolbox").hidden ) {
             var modTitle = document.getElementById("ScrapBookEditTitle").value;
             if ( titles.indexOf(modTitle) < 0 ) {
@@ -181,22 +185,35 @@ sbContentSaverClass.prototype = {
             }
             this.item.comment = sbCommonUtils.escapeComment(sbPageEditor.COMMENT.value);
         }
+
+        // Show detail dialog
+        // if the user closes it, skip the capture process
         if ( aShowDetail ) {
             var ret = this.showDetailDialog(titles, aResName, aContext);
             if ( ret.result == 0 ) { return null; }
             if ( ret.result == 2 ) { aResName = ret.resURI; aResIndex = 0; }
         }
+
+        // save the document content to ScrapBook
         this.contentDir = sbCommonUtils.getContentDir(this.item.id);
         var newName = this.saveDocumentInternal(aRootWindow.document, this.documentName);
+
+        // if tab item icon exists, use it as favicon
         if ( this.item.icon && this.item.type != "image" && this.item.type != "file" ) {
             var iconFileName = this.download(this.item.icon);
             if (iconFileName) this.favicon = iconFileName;
         }
+
+        // if there is no further download task, complete the download
         if ( this.httpTask[this.item.id] == 0 ) {
             var that = this;
             setTimeout(function(){ that.onAllDownloadsComplete(that.item); }, 100);
         }
+
+        // register resource to the rdf
         this.addResource(aResName, aResIndex);
+
+        // finalize
         return [sbCommonUtils.splitFileName(newName)[0], this.file2URL, this.item.title];
     },
 
