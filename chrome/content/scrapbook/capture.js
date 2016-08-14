@@ -431,6 +431,38 @@ var sbCaptureTask = {
         return ret;
     },
 
+    _captureWindow: function(aWindow, aAllowPartial) {
+        // update info
+        SB_trace(sbCommonUtils.lang("CAPTURE_START"));
+
+        // update UI
+        document.getElementById("sbCapturePauseButton").disabled = true;
+        this.toggleSkipButton(false);
+
+        // start capture
+        var preset = gReferItem ? [gReferItem.id, SB_suggestName(aWindow.location.href), gOption, gFile2URL, gDepths[this.index]] : null;
+        if ( gPreset ) preset = gPreset;
+        var ret = gContentSaver.captureWindow(aWindow, aAllowPartial, gShowDetail, gResName, gResIdx, preset, gContext, gTitles[this.index]);
+        if ( ret ) {
+            if ( gContext == "indepth" ) {
+                gURL2Name[this.URL] = ret[0];
+                gFile2URL = ret[1];
+            } else if ( gContext == "capture-again-deep" ) {
+                gFile2URL = ret[1];
+                var contDir = sbCommonUtils.getContentDir(gPreset[0]);
+                var txtFile = contDir.clone();
+                txtFile.append("sb-file2url.txt");
+                var txt = "";
+                for ( var f in gFile2URL ) txt += f + "\t" + gFile2URL[f] + "\n";
+                sbCommonUtils.writeFile(txtFile, txt, "UTF-8");
+            }
+            gTitles[this.index] = ret[2];
+        } else {
+            if ( gShowDetail ) window.close();
+            SB_trace(sbCommonUtils.lang("CAPTURE_ABORT"));
+            this.fail("");
+        }
+    },
 };
 
 var sbpFilter = {
@@ -660,11 +692,11 @@ var sbInvisibleBrowser = {
         this.ELEMENT.stop();
     },
 
-    execCapture: function() {
-        // update info
-        SB_trace(sbCommonUtils.lang("CAPTURE_START"));
-
-        
+    onLoadStart: function() {
+        SB_trace(sbCommonUtils.lang("LOADING", this.fileCount, (this.ELEMENT.currentURI.spec || this.ELEMENT.contentDocument.title)));
+    },
+    
+    onLoadFinish: function() {
         // check for a potential meta refresh redirect
         if ( this.ELEMENT.contentDocument.body ) {
             var metaElems = this.ELEMENT.contentDocument.getElementsByTagName("meta");
@@ -682,42 +714,8 @@ var sbInvisibleBrowser = {
                 }
             }
         }
-
-        // update UI
-        document.getElementById("sbCapturePauseButton").disabled = true;
-        sbCaptureTask.toggleSkipButton(false);
-
-        // start capture
-        var preset = gReferItem ? [gReferItem.id, SB_suggestName(this.ELEMENT.currentURI.spec), gOption, gFile2URL, gDepths[sbCaptureTask.index]] : null;
-        if ( gPreset ) preset = gPreset;
-        var ret = gContentSaver.captureWindow(this.ELEMENT.contentWindow, false, gShowDetail, gResName, gResIdx, preset, gContext, gTitles[sbCaptureTask.index]);
-        if ( ret ) {
-            if ( gContext == "indepth" ) {
-                gURL2Name[sbCaptureTask.URL] = ret[0];
-                gFile2URL = ret[1];
-            } else if ( gContext == "capture-again-deep" ) {
-                gFile2URL = ret[1];
-                var contDir = sbCommonUtils.getContentDir(gPreset[0]);
-                var txtFile = contDir.clone();
-                txtFile.append("sb-file2url.txt");
-                var txt = "";
-                for ( var f in gFile2URL ) txt += f + "\t" + gFile2URL[f] + "\n";
-                sbCommonUtils.writeFile(txtFile, txt, "UTF-8");
-            }
-            gTitles[sbCaptureTask.index] = ret[2];
-        } else {
-            if ( gShowDetail ) window.close();
-            SB_trace(sbCommonUtils.lang("CAPTURE_ABORT"));
-            sbCaptureTask.fail("");
-        }
-    },
-
-    onLoadStart: function() {
-        SB_trace(sbCommonUtils.lang("LOADING", this.fileCount, (this.ELEMENT.currentURI.spec || this.ELEMENT.contentDocument.title)));
-    },
-    
-    onLoadFinish: function() {
-        this.execCapture();
+        // capture the window
+        sbCaptureTask._captureWindow(this.ELEMENT.contentWindow, false);
     },
 
 };
