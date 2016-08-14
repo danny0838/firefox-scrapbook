@@ -113,6 +113,7 @@ sbContentSaverClass.prototype = {
         this.item.id = sbDataSource.identify(this.item.id);
         this.isMainFrame = true;
         this.selection = null;
+        this.treeRes = null;
 
         this.file2URL = {
             "index.dat": true,
@@ -525,7 +526,6 @@ sbContentSaverClass.prototype = {
     // aResName is null if it's not the main document of an indepth capture
     // set treeRes to the created resource or null if aResName is not defined
     addResource: function(aResName, aResIndex) {
-        this.treeRes = null;
         if ( !aResName ) return;
         // We are during a capture process, temporarily set marked and no icon
         var [_type, _icon] = [this.item.type, this.item.icon];
