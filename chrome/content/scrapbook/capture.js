@@ -174,7 +174,7 @@ function SB_suggestName(aURL) {
 
 
 function SB_fireNotification(aItem) {
-    var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
+    var win = sbCommonUtils.getBrowserWindow();
     win.sbContentSaver.notifyCaptureComplete(aItem);
 }
 
@@ -941,7 +941,7 @@ var sbCrossLinker = {
 
     forceReloadingURL: function(aURL) {
         try {
-            var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
+            var win = sbCommonUtils.getBrowserWindow();
             var nodes = win.gBrowser.mTabContainer.childNodes;
             for ( var i = 0; i < nodes.length; i++ ) {
                 var uri = win.gBrowser.getBrowserForTab(nodes[i]).currentURI.spec;

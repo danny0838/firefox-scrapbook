@@ -23,7 +23,7 @@ var sbNoteService2 = {
     refreshTab: function() {
         var icon = sbCommonUtils.getDefaultIcon("note");
         document.getElementById("sbNoteImage").setAttribute("src", icon);
-        var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
+        var win = sbCommonUtils.getBrowserWindow();
         if ( win.content.location.href.indexOf(sbNoteService.resource.Value.substring(18)) > 0 ) {
             win.gBrowser.selectedTab.label = sbDataSource.getProperty(sbNoteService.resource, "title");
             win.gBrowser.selectedTab.setAttribute("image", icon);
@@ -37,7 +37,7 @@ var sbNoteService2 = {
         sbCommonUtils.setPref("note.linefeed", document.getElementById("sbNoteToolbarL").getAttribute("checked") ? true : false);
         sbCommonUtils.setPref("note.fontsize",  this.fontSize);
         if ( exit ) {
-            var browser = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser").getBrowser();
+            var browser = sbCommonUtils.getBrowserWindow().getBrowser();
             browser.mTabContainer.childNodes.length > 1 ? window.close() : browser.loadURI("about:blank");
         }
     },

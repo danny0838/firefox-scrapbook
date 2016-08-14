@@ -181,7 +181,7 @@ var sbSearchResult = {
                 window.openDialog("chrome://scrapbook/content/property.xul", "", "modal,centerscreen,chrome", id);
                 break;
             case "L": 
-                sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser").sbBrowserOverlay.execLocate(res);
+                sbCommonUtils.getBrowserWindow().sbBrowserOverlay.execLocate(res);
                 break;
             default: 
                 document.getElementById("sbBrowser").loadURI(getURL());
@@ -538,7 +538,7 @@ var sbCacheService = {
                 sbCacheSource.flush();
                 try {
                     if ( window.arguments[0] ) {
-                        var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
+                        var win = sbCommonUtils.getBrowserWindow();
                         var inTab = (win.content.location.href.startsWith("chrome://scrapbook/content/result.xul")) ? false : sbCommonUtils.getPref("tabs.searchResult", false);
                         sbCommonUtils.loadURL(window.arguments[0], inTab);
                     }
