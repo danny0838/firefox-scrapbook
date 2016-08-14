@@ -250,13 +250,19 @@ sbContentSaverClass.prototype = {
 
         // HTML document: save the current DOM
 
-        // frames could have ridiculous malformed location.href, such as "javascript:foo.bar"
-        // in this case catch the error and this.refURLObj should remain original (the parent frame)
+        // A frame could have a ridiculous location.href, such as "javascript:foo.bar",
+        // catch the error and this.refURLObj should remain original (the parent frame).
+        // The document might have a ridiculous location.href, such as "about:blank",
+        // if there is no refURLObj yet, use the "index.html" in the target item dir as ref.
         try {
             var elem = aDocument.createElement("A");
             elem.href = "";
             this.refURLObj = sbCommonUtils.convertURLToObject(elem.href);
         } catch(ex) {
+            if (!this.refURLObj) {
+                var refFile = this.contentDir.clone(); refFile.append("index.html");
+                this.refURLObj = sbCommonUtils.convertURLToObject(sbCommonUtils.convertFileToURL(refFile));
+            }
         }
 
         if ( !this.option["internalize"] ) {
