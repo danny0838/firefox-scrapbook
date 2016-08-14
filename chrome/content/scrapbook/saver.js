@@ -1535,13 +1535,9 @@ sbContentSaverClass.prototype = {
                     urls: this.linkURLs,
                     refUrl: this.refURLObj.spec,
                     showDetail: false,
-                    resName: null,
-                    resIdx: 0,
                     referItem: this.item,
                     option: this.option,
                     file2Url: this.file2URL,
-                    preset: null,
-                    titles: null,
                     context: "indepth",
                 };
                 window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no", data);

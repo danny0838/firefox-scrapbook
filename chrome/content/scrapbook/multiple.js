@@ -47,17 +47,12 @@ var sbMultipleService = {
         }
         var data = {
             urls: urlList,
-            refUrl: "",
             showDetail: false,
             resName: sbFolderSelector2.resURI,
-            resIdx: 0,
-            referItem: null,
             option: {
                 inDepthTimeout: timeout,
                 inDepthCharset: charset,
             },
-            file2Url: null,
-            preset: null,
             titles: (document.getElementById("sbLinktitle").value == "ScrapBook") ? null : namList,
             context: "link",
         };

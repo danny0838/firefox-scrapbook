@@ -2723,15 +2723,8 @@ var sbInfoViewer = {
         var source = fileName == "index" ? sbDataSource.getProperty(sbBrowserOverlay.resource, "source") : "";
         var data = {
             urls: [source],
-            refUrl: null,
             showDetail: showDetail,
-            resName: null,
-            resIdx: 0,
-            referItem: null,
-            option: null,
-            file2Url: {},
             preset: [id, fileName, null, null, 0],
-            titles: null,
             context: (fileName == "index") ? "capture-again" : "capture-again-deep",
         };
         top.window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
@@ -2768,15 +2761,10 @@ var sbInfoViewer = {
         ];
         var data = {
             urls: [window.content.location.href],
-            refUrl: null,
             showDetail: false,
-            resName: null,
-            resIdx: 0,
-            referItem: null,
             option: options,
             file2Url: file2Url,
             preset: preset,
-            titles: null,
             context: "internalize",
         };
         top.window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);

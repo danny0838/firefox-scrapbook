@@ -274,14 +274,6 @@ var sbBrowserOverlay = {
             refUrl: document.popupNode.ownerDocument.location.href,
             showDetail: aShowDetail,
             resName: aTargetID,
-            resIdx: 0,
-            referItem: null,
-            option: null,
-            file2Url: null,
-            preset: null,
-            charset: null,
-            timeout: null,
-            titles: null,
             context: "link",
         };
         window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
