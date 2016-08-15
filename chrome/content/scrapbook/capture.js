@@ -739,6 +739,11 @@ var sbCrossLinker = {
     invoke: function() {
         sbDataSource.setProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gReferItem.id), "type", "site");
         this.ELEMENT.docShell.allowImages = false;
+        try {
+            this.ELEMENT.docShell.allowMedia = false;
+        } catch(ex) {}
+        this.ELEMENT.docShell.allowJavascript = false;
+        this.ELEMENT.docShell.allowMetaRedirects = false;
         sbInvisibleBrowser.onLoadStart = function() {
             SB_trace(sbCommonUtils.lang("REBUILD_LINKS", sbCrossLinker.index + 1, sbCrossLinker.nameList.length, this.fileCount, sbCrossLinker.nameList[sbCrossLinker.index] + ".html"));
         };
