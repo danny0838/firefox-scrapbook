@@ -61,6 +61,7 @@ function sbContentSaverClass() {
         "inDepthCharset": "UTF-8",
         "internalize": false,
         "recordSkippedUrl": sbCommonUtils.getPref("capture.default.recordSkippedUrl", false),
+        "recordRemovedAttr": sbCommonUtils.getPref("capture.default.recordRemovedAttr", false),        
         "recordInDepthLink": sbCommonUtils.getPref("capture.default.recordInDepthLink", false),
     };
     this.documentName = "";
@@ -756,7 +757,7 @@ sbContentSaverClass.prototype = {
                 if ( !url ) {
                     break;
                 } else if ( url.match(/^javascript:/i) && !this.option["script"] ) {
-                    aNode.removeAttribute("href");
+                    this.removeAttr(aNode, "href");
                     break;
                 }
                 // adjustment for hash links targeting the current page
@@ -901,12 +902,12 @@ sbContentSaverClass.prototype = {
             var attrs = aNode.attributes;
             for (var i = 0; i < attrs.length; i++) {
                 if (attrs[i].name.toLowerCase().startsWith("on")) {
-                    aNode.removeAttribute(attrs[i].name);
+                    this.removeAttr(aNode, attrs[i].name);
                     i--;  // removing an attribute shrinks the list
                 }
             }
             // other specific
-            aNode.removeAttribute("contextmenu");
+            this.removeAttr(aNode, "contextmenu");
         }
     },
 
@@ -1494,6 +1495,15 @@ sbContentSaverClass.prototype = {
             }
         }
         return url;
+    },
+
+    // remove the specified attr, record it if option set
+    removeAttr: function (elem, attr) {
+        if (!elem.hasAttribute(attr)) return;
+        if (this.option["recordRemovedAttr"]) {
+            elem.setAttribute("data-sb-orig-" + attr, elem.getAttribute(attr));
+        }
+        elem.removeAttribute(attr);
     },
 
     /**
