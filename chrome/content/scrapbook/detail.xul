@@ -58,7 +58,7 @@
                         <checkbox id="sbDetailOptionScript" label="&sb.detail.option.scripts;" oncommand="sbCaptureOptions.updateScriptWarning();" />
                     </hbox>
                     <checkbox id="sbDetailOptionSaveDataURI" label="&sb.detail.option.saveDataURI;" />
-                    <checkbox id="sbDetailOptionAsHtml" label="&sb.detail.option.asHtml;" />
+                    <checkbox id="sbDetailOptionAsHtml" label="&sb.detail.option.fileAsHtml;" />
                 </groupbox>
                 <groupbox group="capture-options">
                     <caption label="&sb.detail.linked.file;" />

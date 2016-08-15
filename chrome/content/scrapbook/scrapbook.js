@@ -385,7 +385,7 @@ var sbController = {
             "media": true,
             "styles": true,
             "script": true,
-            "asHtml": false,
+            "fileAsHtml": false,
             "forceUtf8": false,
             "tidyCSS": false,
             "internalize": refFile,

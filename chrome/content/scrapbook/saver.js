@@ -48,7 +48,7 @@ function sbContentSaverClass() {
         "frames": sbCommonUtils.getPref("capture.default.frames", true),
         "styles": sbCommonUtils.getPref("capture.default.styles", true),
         "script": sbCommonUtils.getPref("capture.default.script", false),
-        "asHtml": sbCommonUtils.getPref("capture.default.asHtml", false),
+        "fileAsHtml": sbCommonUtils.getPref("capture.default.fileAsHtml", false),
         "forceUtf8": sbCommonUtils.getPref("capture.default.forceUtf8", true),
         "tidyCSS": sbCommonUtils.getPref("capture.default.tidyCSS", true),
         "removeIntegrity": sbCommonUtils.getPref("capture.default.removeIntegrity", true),
@@ -138,7 +138,7 @@ sbContentSaverClass.prototype = {
                 this.option["media"] = true;
                 this.option["styles"] = true;
                 this.option["script"] = true;
-                this.option["asHtml"] = false;
+                this.option["fileAsHtml"] = false;
                 this.option["forceUtf8"] = false;
                 this.option["tidyCSS"] = false;
                 this.option["removeIntegrity"] = false;
@@ -273,7 +273,7 @@ sbContentSaverClass.prototype = {
         var charset = this.option["forceUtf8"] ? "UTF-8" : aDocument.characterSet;
         var contentType = aDocument.contentType;
         if ( ["text/html", "application/xhtml+xml"].indexOf(contentType) < 0 ) {
-            if ( !(aDocument.documentElement.nodeName.toUpperCase() == "HTML" && this.option["asHtml"]) ) {
+            if ( !(aDocument.documentElement.nodeName.toUpperCase() == "HTML" && this.option["fileAsHtml"]) ) {
                 captureType = "file";
             }
         }
@@ -300,7 +300,7 @@ sbContentSaverClass.prototype = {
         }
 
         if ( !this.option["internalize"] ) {
-            var useXHTML = (contentType == "application/xhtml+xml") && (!this.option["asHtml"]);
+            var useXHTML = (contentType == "application/xhtml+xml") && (!this.option["fileAsHtml"]);
             var [myHTMLFileName, myHTMLFileDone] = this.getUniqueFileName(aFileKey + (useXHTML?".xhtml":".html"), this.refURLObj.spec, aDocument);
             if (myHTMLFileDone) return myHTMLFileName;
             // create a meta refresh for each *.xhtml

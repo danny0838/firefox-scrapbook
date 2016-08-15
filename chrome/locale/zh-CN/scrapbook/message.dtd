@@ -50,7 +50,7 @@
 <!ENTITY sb.detail.option.styles "样式">
 <!ENTITY sb.detail.option.scripts "动态脚本">
 <!ENTITY sb.detail.option.saveDataURI "将 data URI 保存为文件">
-<!ENTITY sb.detail.option.asHtml "非 HTML 档案获取呈现时的 HTML">
+<!ENTITY sb.detail.option.fileAsHtml "非 HTML 档案获取呈现时的 HTML">
 <!ENTITY sb.detail.linked.file "下载链接的文件">
 <!ENTITY sb.detail.linked.file.method0 "停用下载链接的文件">
 <!ENTITY sb.detail.linked.file.method1 "比对网址扩展名">

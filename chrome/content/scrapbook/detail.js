@@ -13,7 +13,7 @@ var sbCaptureOptions = {
         document.getElementById("sbDetailOptionFrames").checked = sbCommonUtils.getPref("capture.default.frames", true);
         document.getElementById("sbDetailOptionStyles").checked = sbCommonUtils.getPref("capture.default.styles", true);
         document.getElementById("sbDetailOptionScript").checked = sbCommonUtils.getPref("capture.default.script", false);
-        document.getElementById("sbDetailOptionAsHtml").checked = sbCommonUtils.getPref("capture.default.asHtml", false);
+        document.getElementById("sbDetailOptionAsHtml").checked = sbCommonUtils.getPref("capture.default.fileAsHtml", false);
         document.getElementById("sbDetailOptionSaveDataURI").checked = sbCommonUtils.getPref("capture.default.saveDataURI", false);
         document.getElementById("sbDetailDownLinkMethod").value = sbCommonUtils.getPref("capture.default.downLinkMethod", 0);
         document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("capture.default.downLinkFilter", "");
@@ -79,7 +79,7 @@ var sbCaptureOptions = {
         this.param.option["frames"] = document.getElementById("sbDetailOptionFrames").checked;
         this.param.option["styles"] = document.getElementById("sbDetailOptionStyles").checked;
         this.param.option["script"] = document.getElementById("sbDetailOptionScript").checked;
-        this.param.option["asHtml"] = document.getElementById("sbDetailOptionAsHtml").checked;
+        this.param.option["fileAsHtml"] = document.getElementById("sbDetailOptionAsHtml").checked;
         this.param.option["saveDataURI"] = document.getElementById("sbDetailOptionSaveDataURI").checked;
         this.param.option["downLinkMethod"] = parseInt("0" + document.getElementById("sbDetailDownLinkMethod").value, 10);
         this.param.option["downLinkFilter"] = document.getElementById("sbDetailDownLinkFilter").value;
@@ -93,7 +93,7 @@ var sbCaptureOptions = {
         sbCommonUtils.setPref("capture.default.frames", this.param.option["frames"]);
         sbCommonUtils.setPref("capture.default.styles", this.param.option["styles"]);
         sbCommonUtils.setPref("capture.default.script", this.param.option["script"]);
-        sbCommonUtils.setPref("capture.default.asHtml", this.param.option["asHtml"]);
+        sbCommonUtils.setPref("capture.default.fileAsHtml", this.param.option["fileAsHtml"]);
         sbCommonUtils.setPref("capture.default.saveDataURI", this.param.option["saveDataURI"]);
         sbCommonUtils.setPref("capture.default.downLinkMethod", this.param.option["downLinkMethod"]);
         sbCommonUtils.setPref("capture.default.downLinkFilter", this.param.option["downLinkFilter"]);
