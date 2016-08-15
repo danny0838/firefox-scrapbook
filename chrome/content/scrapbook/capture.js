@@ -689,7 +689,7 @@ var sbInvisibleBrowser = {
         try {
             if (aCharset) this.ELEMENT.docShell.charset = aCharset;
         } catch(ex) {
-            sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_CHANGE_CHARSET"));
+            sbCommonUtils.error(sbCommonUtils.lang("ERR_FAIL_CHANGE_CHARSET"));
         }
         this.ELEMENT.loadURI(aURL, null, null);
         // if aURL is different from the current URL only in hash,
