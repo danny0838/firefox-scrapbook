@@ -958,7 +958,7 @@ sbHeaderSniffer.prototype = {
     checkLocalFile: function(URL) {
         var file = sbCommonUtils.convertURLToFile(URL);
         if (!(file.exists() && file.isFile() && file.isReadable())) {
-            this.reportConnectError("can't access");
+            this.reportConnectError("Can't access");
             return;
         }
         var mime = sbCommonUtils.getFileMime(file);
