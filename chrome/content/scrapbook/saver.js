@@ -60,6 +60,7 @@ function sbContentSaverClass() {
         "inDepthTimeout": 0,
         "inDepthCharset": "UTF-8",
         "internalize": false,
+        "recordInDepthLink": sbCommonUtils.getPref("capture.default.recordInDepthLink", false),
     };
     this.documentName = "";
     this.item = null;

@@ -821,7 +821,9 @@ var sbCrossLinker = {
                 if ( gURL2Name[url] ) {
                     var name = gURL2Name[url];
                     link.href = encodeURIComponent(name) + ".html" + hash;
-                    link.setAttribute("data-sb-indepth", "true");
+                    if (gOption["recordInDepthLink"]) {
+                        link.setAttribute("data-sb-indepth", "true");
+                    }
                     if ( !this.nodeHash[name] ) {
                         var text = link.textContent;
                         text = (!/^\s*$/.test(text)) ? text.replace(/[\t\r\n\v\f]/g, " ") : "";

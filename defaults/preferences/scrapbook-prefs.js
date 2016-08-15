@@ -113,6 +113,7 @@ pref("extensions.scrapbook.capture.default.serializeFilename", false);
 pref("extensions.scrapbook.capture.default.linkURLFilters", "[]");
 pref("extensions.scrapbook.capture.default.downLinkMethod", 0);
 pref("extensions.scrapbook.capture.default.downLinkFilter", "###image\n#bmp|gif|ico|jp(e?g|e|2)|png|tiff?\n###audio\n#aac|ape|flac|midi?|mp3|og(g|a)|ram?|rm|rmx|wav|wma\n###video\n#avc|avi|flv|mkv|mov|mpe?g|mp4|wmv\n###archive\n#z(ip|[0-9]{2})|r(ar|[0-9]{2})|jar|bz2|gz|tar|rpm|7z(ip)?|xz|jar|xpi|lzh|lha|lzma\n###document\n#pdf|docx?|xlsx?|odt|ods|rtf|txt|csv\n###executable\n#exe|msi|dmg|bin|xpi|iso\n###any file except for web pages\n#(?!$|html?|xht(ml)?|php|py|pl|aspx?|cgi|jsp)(.*)");
+pref("extensions.scrapbook.capture.default.recordInDepthLink", false);
 pref("extensions.scrapbook.fulltext.sitePagesLimit", 256);
 pref("extensions.scrapbook.capture.default.inDepthLevels", 0);
 pref("extensions.scrapbook.capture.default.inDepthTimeout", 0);
