@@ -68,7 +68,7 @@ function sbContentSaverClass() {
     this.isMainFrame = true;
     this.selection = null;
     this.treeRes = null;
-    this.presetData = null;
+    this.depth = 0;
     this.httpTask = {};
     this.downloadRewriteFiles = {};
     this.downloadRewriteMap = {};
@@ -87,6 +87,7 @@ sbContentSaverClass.prototype = {
         this.item = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
         this.item.id = sbDataSource.identify(this.item.id);
         this.documentName = "index";
+        this.depth = 0;
         this.file2URL = {
             "index.dat": true,
             "index.png": true,
@@ -98,13 +99,12 @@ sbContentSaverClass.prototype = {
         };
 
         // these could be modified or overwritten by preset data
-        this.presetData = aPresetData;
         if ( aPresetData ) {
             if ( aPresetData[0] ) this.item.id = aPresetData[0];
             if ( aPresetData[1] ) this.documentName = aPresetData[1];
             if ( aPresetData[2] ) this.option = sbCommonUtils.extendObject(this.option, aPresetData[2]);
             if ( aPresetData[3] ) this.file2URL = aPresetData[3];
-            if ( aPresetData[4] >= this.option["inDepth"] ) this.option["inDepth"] = 0;
+            if ( aPresetData[4] ) this.depth = aPresetData[4];
         }
         this.httpTask[this.item.id] = 0;
         this.downloadRewriteFiles[this.item.id] = [];
@@ -820,7 +820,7 @@ sbContentSaverClass.prototype = {
                     break;
                 }
                 // Add unfixed URLs to the link list if it's a work of deep capture
-                if ( this.option["inDepth"] > 0 ) {
+                if ( this.option["inDepth"] > this.depth ) {
                     this.linkURLs.push(url);
                 }
                 // rewrite the URL to make it absolute
@@ -859,7 +859,7 @@ sbContentSaverClass.prototype = {
                                 var url = sbCommonUtils.resolveURL(this.refURLObj.spec, RegExp.$2);
                                 aNode.setAttribute("content", RegExp.$1 + url);
                                 // add to the link list if it's a work of deep capture
-                                if ( this.option["inDepth"] > 0 ) this.linkURLs.push(url);
+                                if ( this.option["inDepth"] > this.depth ) this.linkURLs.push(url);
                             }
                             break;
                     }
@@ -1111,7 +1111,7 @@ sbContentSaverClass.prototype = {
                                 if (aSpecialMode == "linkFilter") {
                                     var toDownload = that.downLinkFilter(ext);
                                     if (!toDownload) {
-                                        if ( that.option["inDepth"] > 0 ) {
+                                        if ( that.option["inDepth"] > that.depth ) {
                                             // do not copy, but add to the link list if it's a work of deep capture
                                             that.linkURLs.push(sourceURL);
                                         }
@@ -1526,10 +1526,8 @@ sbContentSaverClass.prototype = {
             sbCommonUtils.writeIndexDat(aItem);
         }
 
-        if ( this.option["inDepth"] > 0 && this.linkURLs.length > 0 ) {
-            // inDepth capture for "capture-again-deep" is pre-disallowed by hiding the options
-            // and should never occur here
-            if ( !this.presetData || this.context == "capture-again" ) {
+        if ( this.option["inDepth"] > this.depth && this.linkURLs.length > 0 ) {
+            if ( ["capture", "link", "capture-again"].indexOf(this.context) != -1 ) {
                 this.item.type = "marked";
                 var data = {
                     urls: this.linkURLs,
@@ -1543,7 +1541,7 @@ sbContentSaverClass.prototype = {
                 window.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,dialog=no", data);
             } else {
                 for ( var i = 0; i < this.linkURLs.length; i++ ) {
-                    sbCaptureTask.add(this.linkURLs[i], this.presetData[4] + 1);
+                    sbCaptureTask.add(this.linkURLs[i], this.depth + 1);
                 }
             }
         }
