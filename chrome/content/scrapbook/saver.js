@@ -54,8 +54,8 @@ function sbContentSaverClass() {
         "saveDataURI": sbCommonUtils.getPref("capture.default.saveDataURI", false),
         "serializeFilename": sbCommonUtils.getPref("capture.default.serializeFilename", false),
         "linkURLFilters": sbCommonUtils.getPref("capture.default.linkURLFilters", ""),
-        "downLinkMethod": 0, // active only if explicitly set in detail dialog
-        "downLinkFilter": "",
+        "downLinkMethod": sbCommonUtils.getPref("capture.default.downLinkMethod", 0),
+        "downLinkFilter": sbCommonUtils.getPref("capture.default.downLinkFilter", ""),
         "inDepth": 0, // active only if explicitly set in detail dialog
         "batchTimeout": sbCommonUtils.getPref("capture.default.batchTimeout", 0),
         "batchCharset": sbCommonUtils.getPref("capture.default.batchCharset", ""),
