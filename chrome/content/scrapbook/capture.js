@@ -283,6 +283,7 @@ var sbCaptureTask = {
 
     // when a capture fails
     fail: function(aErrorMsg) {
+        this.failed++;
         document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
         if ( aErrorMsg ) SB_trace(aErrorMsg);
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "finished");
@@ -1038,7 +1039,6 @@ sbHeaderSniffer.prototype = {
     reportError: function(aErrorMsg, aStatus) {
         if (!aStatus) aStatus = aErrorMsg;
         sbCaptureTask.updateStatus(aStatus);
-        sbCaptureTask.failed++;
         sbCaptureTask.fail(aErrorMsg);
     },
 
