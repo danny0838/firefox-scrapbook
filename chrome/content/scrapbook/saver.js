@@ -1487,12 +1487,12 @@ sbContentSaverClass.prototype = {
 
     // get the skipped form for specific protocol that we do not handle
     getSkippedURL: function (url) {
-        if (url.startsWith("http:") || url.startsWith("https:") || url.startsWith("ftp:") || url.startsWith("file:")) {
-            if (this.option["recordSkippedUrl"]) {
+        if (this.option["recordSkippedUrl"]) {
+            if (!url.startsWith("urn:scrapbook-download-skip:")) {
                 return "urn:scrapbook-download-skip:" + url;
-            } else {
-                return "about:blank";
             }
+        } else {
+            return "about:blank";
         }
         return url;
     },
