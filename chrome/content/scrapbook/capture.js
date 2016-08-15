@@ -810,7 +810,7 @@ var sbCrossLinker = {
                     link.setAttribute("data-sb-indepth", "true");
                     if ( !this.nodeHash[name] ) {
                         var text = link.textContent;
-                        text = (!/^\s*$/.test(text)) ? text.replace(/[\r\n\t]/g, " ") : "";
+                        text = (!/^\s*$/.test(text)) ? text.replace(/[\t\r\n\v\f]/g, " ") : "";
                         this.nodeHash[name] = this.createNode(name, text);
                         this.nodeHash[this.nameList[this.index]].appendChild(this.nodeHash[name]);
                     }
