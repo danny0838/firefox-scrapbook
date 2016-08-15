@@ -57,7 +57,7 @@ function sbContentSaverClass() {
         "downLinkMethod": 0, // active only if explicitly set in detail dialog
         "downLinkFilter": "",
         "inDepth": 0, // active only if explicitly set in detail dialog
-        "inDepthTimeout": 0,
+        "inDepthTimeout": sbCommonUtils.getPref("capture.default.inDepthTimeout", 0),
         "inDepthCharset": sbCommonUtils.getPref("capture.default.inDepthCharset", ""),
         "internalize": false,
         "recordSkippedUrl": sbCommonUtils.getPref("capture.default.recordSkippedUrl", false),
