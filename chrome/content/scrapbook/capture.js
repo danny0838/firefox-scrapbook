@@ -191,7 +191,7 @@ var sbCaptureTask = {
     get URL()      { return gURLs[this.index]; },
 
     index: 0,
-    refreshHash: null,
+    redirectHash: null,
     sniffer: null,
     seconds: 3,
     timerID: 0,
@@ -236,7 +236,7 @@ var sbCaptureTask = {
     },
 
     // start capture
-    start: function(aOverriddenURL) {
+    start: function(aRedirectURL) {
         this.seconds = -1;
 
         // Resume "pause" and "skip" buttons, which are temporarily diasbled
@@ -254,11 +254,25 @@ var sbCaptureTask = {
             this.next(true);
             return;
         }
-        this.refreshHash = {};
-        var url = aOverriddenURL || gURLs[this.index];
-        SB_trace(sbCommonUtils.lang("CONNECT", url));
+
+        // manage redirect and fail out on circular redirect
+        if (!aRedirectURL) {
+            var url = gURLs[this.index];
+            this.redirectHash = {};
+        } else {
+            if (!this.redirectHash[aRedirectURL]) {
+                var url = aRedirectURL;
+            } else {
+                var errMsg = "Circular redirect";
+                this.updateStatus(errMsg);
+                this.fail(errMsg);
+                return;
+            }
+        }
+        this.redirectHash[url] = true;
 
         // if active, start connection and capture
+        SB_trace(sbCommonUtils.lang("CONNECT", url));
         if (this.isActive()) {
             this.sniffer = new sbHeaderSniffer(url, gRefURL);
             this.sniffer.checkURL();
@@ -707,11 +721,8 @@ var sbInvisibleBrowser = {
                      metaElems[i].getAttribute("content").match(/URL\=(.*)$/i) ) {
                     var curURL = this.ELEMENT.currentURI.spec;
                     var newURL = sbCommonUtils.resolveURL(this.ELEMENT.currentURI.spec, RegExp.$1);
-                    if ( newURL != curURL && !sbCaptureTask.refreshHash[newURL] ) {
-                        sbCaptureTask.refreshHash[curURL] = true;
-                        sbCaptureTask.start(newURL);
-                        return;
-                    }
+                    sbCaptureTask.start(newURL);
+                    return;
                 }
             }
         }
