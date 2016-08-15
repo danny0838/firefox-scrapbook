@@ -748,6 +748,9 @@ var sbCrossLinker = {
         for ( var url in gURL2Name ) {
             this.nameList.push(gURL2Name[url]);
         }
+        // For a partial capture containing a link to self, the index may be overwritten and not exist
+        // Add it to prevent further error
+        if (this.nameList[0] != "index") this.nameList.unshift("index");
         this.XML = document.implementation.createDocument("", "", null);
         this.rootNode = this.XML.createElement("site");
         this.start();
