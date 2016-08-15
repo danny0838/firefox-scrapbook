@@ -51,6 +51,7 @@ function sbContentSaverClass() {
         "asHtml": sbCommonUtils.getPref("capture.default.asHtml", false),
         "forceUtf8": sbCommonUtils.getPref("capture.default.forceUtf8", true),
         "tidyCSS": sbCommonUtils.getPref("capture.default.tidyCSS", true),
+        "removeIntegrity": sbCommonUtils.getPref("capture.default.removeIntegrity", true),
         "saveDataURI": sbCommonUtils.getPref("capture.default.saveDataURI", false),
         "serializeFilename": sbCommonUtils.getPref("capture.default.serializeFilename", false),
         "linkURLFilters": sbCommonUtils.getPref("capture.default.linkURLFilters", ""),
@@ -126,6 +127,7 @@ sbContentSaverClass.prototype = {
                 this.option["frames"] = true;
                 this.option["styles"] = true;
                 this.option["script"] = true;
+                this.option["removeIntegrity"] = false;
                 this.option["downLinkMethod"] = 0;
                 this.option["inDepth"] = 0;
                 break;
@@ -139,6 +141,7 @@ sbContentSaverClass.prototype = {
                 this.option["asHtml"] = false;
                 this.option["forceUtf8"] = false;
                 this.option["tidyCSS"] = false;
+                this.option["removeIntegrity"] = false;
                 this.option["downLinkMethod"] = 0;
                 this.option["inDepth"] = 0;
                 break;
@@ -893,10 +896,12 @@ sbContentSaverClass.prototype = {
                 aNode.removeAttribute(this.elemMapKey);
                 break;
         }
+        // handle style attr
         if ( aNode.style && aNode.style.cssText ) {
             var newCSStext = this.inspectCSSText(aNode.style.cssText, this.refURLObj.spec, "image");
             if ( newCSStext ) aNode.setAttribute("style", newCSStext);
         }
+        // handle script related attrs
         if ( !this.option["script"] ) {
             // general: remove on* attributes
             var attrs = aNode.attributes;
@@ -908,6 +913,13 @@ sbContentSaverClass.prototype = {
             }
             // other specific
             this.removeAttr(aNode, "contextmenu");
+        }
+        // handle integrity
+        // We have to remove integrity check because we could modify the content
+        // and they might not work correctly in the offline environment.
+        if ( this.option["removeIntegrity"] ) {
+            this.removeAttr(aNode, "integrity");
+            this.removeAttr(aNode, "crossorigin");
         }
     },
 
