@@ -672,12 +672,6 @@ var sbInvisibleBrowser = {
         this.ELEMENT.docShell.allowSubframes = gOption["frames"];
         this.ELEMENT.docShell.allowJavascript = false;  // javascript error will freeze up capture process
         this.ELEMENT.docShell.allowMetaRedirects = false;  // we'll handle meta redirect in another way
-        // older version of Firefox gets error on setting charset
-        try {
-            if (gOption["inDepthCharset"]) this.ELEMENT.docShell.charset = gOption["inDepthCharset"];
-        } catch(ex) {
-            sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_CHANGE_CHARSET"));
-        }
         // nsIDocShellHistory is deprecated in newer version of Firefox
         // nsIDocShell in the old version doesn't work
         if ( Components.interfaces.nsIDocShellHistory ) {
@@ -689,8 +683,14 @@ var sbInvisibleBrowser = {
         }
     },
 
-    load: function(aURL) {
+    load: function(aURL, aCharset) {
         this.fileCount = 0;
+        // older version of Firefox (e.g. Firefox 4) gets an error on setting charset
+        try {
+            if (aCharset) this.ELEMENT.docShell.charset = aCharset;
+        } catch(ex) {
+            sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_CHANGE_CHARSET"));
+        }
         this.ELEMENT.loadURI(aURL, null, null);
         // if aURL is different from the current URL only in hash,
         // a loading is not performed unless forced to reload
@@ -1026,7 +1026,7 @@ sbHeaderSniffer.prototype = {
         contentType = contentType || "text/html";
         if (!isAttachment && ["text/html", "application/xhtml+xml"].indexOf(contentType) >= 0) {
             // for inline html or xhtml files, load the document and capture it
-            sbInvisibleBrowser.load(URL);
+            sbInvisibleBrowser.load(URL, gOption["inDepthCharset"]);
         } else if (gContext == "link") {
             // capture as file for link capture
             var refURL = this.refURLSpec || sbCaptureTask.URL;
