@@ -35,8 +35,8 @@ function SB_trace(aMessage) {
  *   option:      object   capture options, replace the default option in saver.js
  *                         Those more relavant here are:
  *                           inDepth:
- *                           inDepthTimeout: (multi-capture, deep-capture) countdown seconds before next capture
- *                           inDepthCharset: force using charset to load html, autodetect if not set      
+ *                           batchTimeout: (multi-capture, deep-capture) countdown seconds before next capture
+ *                           batchCharset: force using charset to load html, autodetect if not set      
  *                           internalize:
  *   file2Url:    array    the file2URL data in saver.js from last capture,
  *                         will then pass to saver.js for next capture
@@ -180,7 +180,7 @@ function SB_fireNotification(aItem) {
 
 var sbCaptureTask = {
 
-    get INTERVAL() { return gOption["inDepthTimeout"]; },
+    get INTERVAL() { return gOption["batchTimeout"]; },
     get TREE()     { return document.getElementById("sbpURLList"); },
     get URL()      { return gURLs[this.index]; },
 
@@ -1028,7 +1028,7 @@ sbHeaderSniffer.prototype = {
         contentType = contentType || "text/html";
         if (!isAttachment && ["text/html", "application/xhtml+xml"].indexOf(contentType) >= 0) {
             // for inline html or xhtml files, load the document and capture it
-            sbInvisibleBrowser.load(URL, gOption["inDepthCharset"]);
+            sbInvisibleBrowser.load(URL, gOption["batchCharset"]);
         } else if (gContext == "link") {
             // capture as file for link capture
             var refURL = this.refURLSpec || sbCaptureTask.URL;

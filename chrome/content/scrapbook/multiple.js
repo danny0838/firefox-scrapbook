@@ -50,8 +50,8 @@ var sbMultipleService = {
             showDetail: false,
             resName: sbFolderSelector2.resURI,
             option: {
-                inDepthTimeout: timeout,
-                inDepthCharset: charset,
+                batchTimeout: timeout,
+                batchCharset: charset,
             },
             titles: (document.getElementById("sbLinktitle").value == "ScrapBook") ? null : namList,
             context: "link",
