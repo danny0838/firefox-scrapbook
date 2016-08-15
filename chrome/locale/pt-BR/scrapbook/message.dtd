@@ -49,7 +49,7 @@
 <!ENTITY sb.detail.option.frames "Frames">
 <!ENTITY sb.detail.option.styles "Estilos">
 <!ENTITY sb.detail.option.scripts "Scripts">
-<!ENTITY sb.detail.option.saveDataURI "Save data URI as file">
+<!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.linked.file "Download de arquivos anexos">
 <!ENTITY sb.detail.linked.file.method0 "Disable download linked files">

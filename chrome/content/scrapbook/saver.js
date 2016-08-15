@@ -50,11 +50,11 @@ function sbContentSaverClass() {
         "script": sbCommonUtils.getPref("capture.default.script", false),
         "fileAsHtml": sbCommonUtils.getPref("capture.default.fileAsHtml", false),
         "forceUtf8": sbCommonUtils.getPref("capture.default.forceUtf8", true),
-        "tidyCSS": sbCommonUtils.getPref("capture.default.tidyCSS", true),
+        "tidyCss": sbCommonUtils.getPref("capture.default.tidyCss", true),
         "removeIntegrity": sbCommonUtils.getPref("capture.default.removeIntegrity", true),
-        "saveDataURI": sbCommonUtils.getPref("capture.default.saveDataURI", false),
+        "saveDataUri": sbCommonUtils.getPref("capture.default.saveDataUri", false),
         "serializeFilename": sbCommonUtils.getPref("capture.default.serializeFilename", false),
-        "linkURLFilters": sbCommonUtils.getPref("capture.default.linkURLFilters", ""),
+        "linkUrlFilters": sbCommonUtils.getPref("capture.default.linkUrlFilters", ""),
         "downLinkMethod": sbCommonUtils.getPref("capture.default.downLinkMethod", 0),
         "downLinkFilter": sbCommonUtils.getPref("capture.default.downLinkFilter", ""),
         "inDepth": 0, // active only if explicitly set in detail dialog
@@ -140,7 +140,7 @@ sbContentSaverClass.prototype = {
                 this.option["script"] = true;
                 this.option["fileAsHtml"] = false;
                 this.option["forceUtf8"] = false;
-                this.option["tidyCSS"] = false;
+                this.option["tidyCss"] = false;
                 this.option["removeIntegrity"] = false;
                 this.option["downLinkMethod"] = 0;
                 this.option["inDepth"] = 0;
@@ -423,7 +423,7 @@ sbContentSaverClass.prototype = {
                     // a special stylesheet used by scrapbook, keep it intact
                     return;
                 } else if ( this.option["styles"] ) {
-                    if ( this.option["tidyCSS"] ) {
+                    if ( this.option["tidyCss"] ) {
                         var cssText = this.processCSSRules(css, this.refURLObj.spec, aDocument, "");
                         cssText = "\n/* Code tidied up by ScrapBook */\n" + cssText;
                         node.textContent = cssText;
@@ -445,7 +445,7 @@ sbContentSaverClass.prototype = {
                     // a special stylesheet used by scrapbook or other addons/programs, keep it intact
                     return;
                 } else if ( this.option["styles"] ) {
-                    if ( this.option["tidyCSS"] ) {
+                    if ( this.option["tidyCss"] ) {
                         var cssText = this.processCSSRules(css, url, aDocument, "");
                         cssText = "/* Code tidied up by ScrapBook */\n" + cssText;
                         var fileName = this.download(url, "quote", "cssText", { cssText: cssText });
@@ -793,7 +793,7 @@ sbContentSaverClass.prototype = {
                 }
                 // determine whether to download (copy) the link target file
                 if ( url.indexOf("http:") === 0 || url.indexOf("https:") === 0 || url.indexOf("ftp:") === 0 ) {
-                    // if the URL matches the linkURLFilters (mostly meaning it's offending to visit)
+                    // if the URL matches the linkUrlFilters (mostly meaning it's offending to visit)
                     // skip it for downLink or inDepth
                     if (!this.globalURLFilter(urlMain)) {
                         break;
@@ -1035,7 +1035,7 @@ sbContentSaverClass.prototype = {
         var regex = / url\(\"((?:\\.|[^"])+)\"\)/g;
         aCSSText = aCSSText.replace(regex, function() {
             var dataURL = arguments[1];
-            if (dataURL.startsWith("data:") && !that.option["saveDataURI"]) return ' url("' + dataURL + '")';
+            if (dataURL.startsWith("data:") && !that.option["saveDataUri"]) return ' url("' + dataURL + '")';
             if ( that.option["internalize"] && that.isInternalized(dataURL) ) return ' url("' + dataURL + '")';
             dataURL = sbCommonUtils.resolveURL(aRefURL, dataURL);
             switch (aType) {
@@ -1253,7 +1253,7 @@ sbContentSaverClass.prototype = {
                 // special: use cssText
                 if (aSpecialMode == "cssText") {
                     var dataURI = "data:text/css;base64," + btoa(sbCommonUtils.unicodeToUtf8(aSpecialModeParams.cssText));
-                    if (!that.option["saveDataURI"]) {
+                    if (!that.option["saveDataUri"]) {
                         return that.escapeURL(dataURI, aEscapeType, true);
                     } else {
                         // replace sourceURL with cssText version
@@ -1261,7 +1261,7 @@ sbContentSaverClass.prototype = {
                     }
                 }
                 // download "data:" only if option on
-                if (!that.option["saveDataURI"]) {
+                if (!that.option["saveDataUri"]) {
                     return "";
                 }
                 var { mime, charset, base64, data } = sbCommonUtils.parseDataURI(sourceURL);
@@ -1324,12 +1324,12 @@ sbContentSaverClass.prototype = {
     globalURLFilter: function (aURL) {
         var that = this;
         // use the cache if the filter is not changed
-        if (arguments.callee._filter !== that.option["linkURLFilters"]) {
-            arguments.callee._filter = that.option["linkURLFilters"];
+        if (arguments.callee._filter !== that.option["linkUrlFilters"]) {
+            arguments.callee._filter = that.option["linkUrlFilters"];
             arguments.callee.filters = (function () {
                 try {
                     var filters = [];
-                    var dataStr = that.option["linkURLFilters"];
+                    var dataStr = that.option["linkUrlFilters"];
                     var data = JSON.parse(dataStr);
                     ((data instanceof Array) ? data : [data]).forEach(function (item) {
                         // make sure each item is a valid RegExp

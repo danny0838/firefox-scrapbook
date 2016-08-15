@@ -387,7 +387,7 @@ var sbController = {
             "script": true,
             "fileAsHtml": false,
             "forceUtf8": false,
-            "tidyCSS": false,
+            "tidyCss": false,
             "internalize": refFile,
         };
         var preset = [

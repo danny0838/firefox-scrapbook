@@ -49,7 +49,7 @@
 <!ENTITY sb.detail.option.frames "頁框">
 <!ENTITY sb.detail.option.styles "樣式">
 <!ENTITY sb.detail.option.scripts "動態腳本">
-<!ENTITY sb.detail.option.saveDataURI "將 data URI 儲存成檔案">
+<!ENTITY sb.detail.option.saveDataUri "將 data URI 儲存成檔案">
 <!ENTITY sb.detail.option.fileAsHtml "非 HTML 檔案擷取呈現時的 HTML">
 <!ENTITY sb.detail.linked.file "下載連結檔案">
 <!ENTITY sb.detail.linked.file.method0 "停用下載連結檔案">
