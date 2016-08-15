@@ -58,7 +58,7 @@ function sbContentSaverClass() {
         "downLinkFilter": "",
         "inDepth": 0, // active only if explicitly set in detail dialog
         "inDepthTimeout": 0,
-        "inDepthCharset": "UTF-8",
+        "inDepthCharset": sbCommonUtils.getPref("capture.default.inDepthCharset", ""),
         "internalize": false,
         "recordSkippedUrl": sbCommonUtils.getPref("capture.default.recordSkippedUrl", false),
         "recordRemovedAttr": sbCommonUtils.getPref("capture.default.recordRemovedAttr", false),        
