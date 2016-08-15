@@ -801,25 +801,22 @@ var sbCrossLinker = {
         this.nodeHash[this.nameList[this.index]].setAttribute("title", sbDataSource.sanitize(this.ELEMENT.contentTitle) || sbCommonUtils.getFileName(this.ELEMENT.currentURI.spec));
         sbCommonUtils.flattenFrames(this.ELEMENT.contentWindow).forEach(function(win) {
             var doc = win.document;
-            var linkList = doc.links;
-            if ( !linkList ) return;
             var shouldSave = false;
-            for ( var i = 0; i < linkList.length; i++ ) {
-                var urlLR = sbCommonUtils.splitURLByAnchor(linkList[i].href);
-                if ( gURL2Name[urlLR[0]] ) {
-                    var name = gURL2Name[urlLR[0]];
-                    linkList[i].href = encodeURIComponent(name) + ".html" + urlLR[1];
-                    linkList[i].setAttribute("data-sb-indepth", "true");
+            Array.prototype.forEach.call(doc.links, function(link) {
+                var [url, hash] = sbCommonUtils.splitURLByAnchor(link.href);
+                if ( gURL2Name[url] ) {
+                    var name = gURL2Name[url];
+                    link.href = encodeURIComponent(name) + ".html" + hash;
+                    link.setAttribute("data-sb-indepth", "true");
                     if ( !this.nodeHash[name] ) {
-                        var text = linkList[i].text ? linkList[i].text.replace(/\r|\n|\t/g, " ") : "";
-                        if ( text.replace(/\s/g, "") == "" ) text = "";
+                        var text = link.textContent;
+                        text = (!/^\s*$/.test(text)) ? text.replace(/[\r\n\t]/g, " ") : "";
                         this.nodeHash[name] = this.createNode(name, text);
-                        if ( !this.nodeHash[name] ) this.nodeHash[name] = name;
                         this.nodeHash[this.nameList[this.index]].appendChild(this.nodeHash[name]);
                     }
                     shouldSave = true;
                 }
-            }
+            }, this);
             if ( shouldSave ) {
                 var rootNode = doc.getElementsByTagName("html")[0];
                 var src = sbCommonUtils.doctypeToString(doc.doctype) + sbCommonUtils.surroundByTags(rootNode, rootNode.innerHTML);
