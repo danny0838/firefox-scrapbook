@@ -113,6 +113,9 @@ sbContentSaverClass.prototype = {
 
         // special handling of certain contexts
         switch (this.context) {
+            case "capture-again-deep":
+                this.option["inDepth"] = 0;
+                break;
             case "combine":
                 this.option["images"] = true;
                 this.option["media"] = true;
@@ -120,6 +123,8 @@ sbContentSaverClass.prototype = {
                 this.option["frames"] = true;
                 this.option["styles"] = true;
                 this.option["script"] = true;
+                this.option["downLinkMethod"] = 0;
+                this.option["inDepth"] = 0;
                 break;
             case "internalize":
                 this.option["isPartial"] = false;
@@ -131,6 +136,8 @@ sbContentSaverClass.prototype = {
                 this.option["asHtml"] = false;
                 this.option["forceUtf8"] = false;
                 this.option["tidyCSS"] = false;
+                this.option["downLinkMethod"] = 0;
+                this.option["inDepth"] = 0;
                 break;
         }
 
@@ -1527,7 +1534,7 @@ sbContentSaverClass.prototype = {
         }
 
         if ( this.option["inDepth"] > this.depth && this.linkURLs.length > 0 ) {
-            if ( ["capture", "link", "capture-again"].indexOf(this.context) != -1 ) {
+            if ( this.depth == 0 ) {
                 this.item.type = "marked";
                 var data = {
                     urls: this.linkURLs,
