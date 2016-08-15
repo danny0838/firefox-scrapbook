@@ -60,6 +60,7 @@ function sbContentSaverClass() {
         "inDepthTimeout": 0,
         "inDepthCharset": "UTF-8",
         "internalize": false,
+        "recordSkippedUrl": sbCommonUtils.getPref("capture.default.recordSkippedUrl", false),
         "recordInDepthLink": sbCommonUtils.getPref("capture.default.recordInDepthLink", false),
     };
     this.documentName = "";
@@ -1486,7 +1487,11 @@ sbContentSaverClass.prototype = {
     // get the skipped form for specific protocol that we do not handle
     getSkippedURL: function (url) {
         if (url.startsWith("http:") || url.startsWith("https:") || url.startsWith("ftp:") || url.startsWith("file:")) {
-            return "urn:scrapbook-download-skip:" + url;
+            if (this.option["recordSkippedUrl"]) {
+                return "urn:scrapbook-download-skip:" + url;
+            } else {
+                return "about:blank";
+            }
         }
         return url;
     },
