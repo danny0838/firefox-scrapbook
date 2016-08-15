@@ -40,7 +40,27 @@ var sbContentSaver = {
 
 function sbContentSaverClass() {
     this.context = null;
-    this.option = {};
+    this.option = {
+        "isPartial": false,
+        "images": sbCommonUtils.getPref("capture.default.images", true),
+        "media": sbCommonUtils.getPref("capture.default.media", true),
+        "fonts": sbCommonUtils.getPref("capture.default.fonts", true),
+        "frames": sbCommonUtils.getPref("capture.default.frames", true),
+        "styles": sbCommonUtils.getPref("capture.default.styles", true),
+        "script": sbCommonUtils.getPref("capture.default.script", false),
+        "asHtml": sbCommonUtils.getPref("capture.default.asHtml", false),
+        "forceUtf8": sbCommonUtils.getPref("capture.default.forceUtf8", true),
+        "tidyCSS": sbCommonUtils.getPref("capture.default.tidyCSS", true),
+        "saveDataURI": sbCommonUtils.getPref("capture.default.saveDataURI", false),
+        "serializeFilename": sbCommonUtils.getPref("capture.default.serializeFilename", false),
+        "linkURLFilters": sbCommonUtils.getPref("capture.default.linkURLFilters", ""),
+        "downLinkMethod": 0, // active only if explicitly set in detail dialog
+        "downLinkFilter": "",
+        "inDepth": 0, // active only if explicitly set in detail dialog
+        "inDepthTimeout": 0,
+        "inDepthCharset": "UTF-8",
+        "internalize": false,
+    };
     this.documentName = "";
     this.item = null;
     this.contentDir = null;
@@ -64,27 +84,6 @@ sbContentSaverClass.prototype = {
 
     init: function(aContext, aPresetData, aIsPartial) {
         this.context = aContext;
-        this.option = {
-            "isPartial": !!aIsPartial,
-            "images": sbCommonUtils.getPref("capture.default.images", true),
-            "media": sbCommonUtils.getPref("capture.default.media", true),
-            "fonts": sbCommonUtils.getPref("capture.default.fonts", true),
-            "frames": sbCommonUtils.getPref("capture.default.frames", true),
-            "styles": sbCommonUtils.getPref("capture.default.styles", true),
-            "script": sbCommonUtils.getPref("capture.default.script", false),
-            "asHtml": sbCommonUtils.getPref("capture.default.asHtml", false),
-            "forceUtf8": sbCommonUtils.getPref("capture.default.forceUtf8", true),
-            "tidyCSS": sbCommonUtils.getPref("capture.default.tidyCSS", true),
-            "saveDataURI": sbCommonUtils.getPref("capture.default.saveDataURI", false),
-            "serializeFilename": sbCommonUtils.getPref("capture.default.serializeFilename", false),
-            "linkURLFilters": sbCommonUtils.getPref("capture.default.linkURLFilters", ""),
-            "downLinkMethod": 0, // active only if explicitly set in detail dialog
-            "downLinkFilter": "",
-            "inDepth": 0, // active only if explicitly set in detail dialog
-            "inDepthTimeout": 0,
-            "inDepthCharset": "UTF-8",
-            "internalize": false,
-        };
         this.item = sbCommonUtils.newItem(sbCommonUtils.getTimeStamp());
         this.item.id = sbDataSource.identify(this.item.id);
         this.documentName = "index";
@@ -110,6 +109,7 @@ sbContentSaverClass.prototype = {
         this.httpTask[this.item.id] = 0;
         this.downloadRewriteFiles[this.item.id] = [];
         this.downloadRewriteMap[this.item.id] = {};
+        this.option["isPartial"] = !!aIsPartial;
 
         // special handling of certain contexts
         switch (this.context) {

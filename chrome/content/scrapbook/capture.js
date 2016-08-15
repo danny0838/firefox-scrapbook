@@ -8,12 +8,7 @@ var gShowDetail = false;
 var gResName = "";
 var gResIdx = 0;
 var gReferItem = null;
-var gOption = {
-    "images": true,
-    "media": true,
-    "frames": true,
-    "inDepthTimeout": 0,
-};
+var gOption = gContentSaver.option;
 var gFile2URL = {};
 var gURL2Name = {};
 var gPreset = null;
