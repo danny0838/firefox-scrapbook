@@ -1546,24 +1546,7 @@ sbContentSaverClass.prototype = {
             aItem.icon = this.restoreFileNameFromHash(aItem.icon);
         }
 
-        // fix resource settings after capture complete
-        // This is only run if we have addResource'd for this document.
-        var res = this.treeRes;
-        if (res && sbDataSource.exists(res)) {
-            sbDataSource.setProperty(res, "type", aItem.type);
-            // Don't add "resource://" for URLs like "moz-icon://"
-            if (aItem.icon) {
-                if (aItem.icon.indexOf(":") >= 0) {
-                    var iconURL = aItem.icon;
-                } else {
-                    var iconURL = "resource://scrapbook/data/" + aItem.id + "/" + aItem.icon;
-                }
-                sbDataSource.setProperty(res, "icon", iconURL);
-            }
-            sbCommonUtils.rebuildGlobal();
-            sbCommonUtils.writeIndexDat(aItem);
-        }
-
+        // invoke indepth capture dialog
         if ( this.option["inDepth"] > this.depth && this.linkURLs.length > 0 ) {
             if ( this.depth == 0 ) {
                 this.item.type = "marked";
@@ -1582,6 +1565,24 @@ sbContentSaverClass.prototype = {
                     sbCaptureTask.add(this.linkURLs[i], this.depth + 1);
                 }
             }
+        }
+
+        // fix resource settings after capture complete
+        // This is only run if we have addResource'd for this document.
+        var res = this.treeRes;
+        if (res && sbDataSource.exists(res)) {
+            sbDataSource.setProperty(res, "type", aItem.type);
+            // Don't add "resource://" for URLs like "moz-icon://"
+            if (aItem.icon) {
+                if (aItem.icon.indexOf(":") >= 0) {
+                    var iconURL = aItem.icon;
+                } else {
+                    var iconURL = "resource://scrapbook/data/" + aItem.id + "/" + aItem.icon;
+                }
+                sbDataSource.setProperty(res, "icon", iconURL);
+            }
+            sbCommonUtils.rebuildGlobal();
+            sbCommonUtils.writeIndexDat(aItem);
         }
 
         this.trace(sbCommonUtils.lang("CAPTURE_COMPLETE", aItem.title), 5000);
