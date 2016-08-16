@@ -685,11 +685,13 @@ var sbInvisibleBrowser = {
 
     load: function(aURL, aCharset) {
         this.fileCount = 0;
-        // older version of Firefox (e.g. Firefox 4) gets an error on setting charset
-        try {
-            if (aCharset) this.ELEMENT.docShell.charset = aCharset;
-        } catch(ex) {
-            sbCommonUtils.error(sbCommonUtils.lang("ERR_FAIL_CHANGE_CHARSET"));
+        // Firefox < 12.0 use nsIDocCharset instead of nsIDocShell
+        if (aCharset) {
+            if (Components.interfaces.nsIDocCharset) {
+                this.ELEMENT.docShell.QueryInterface(Components.interfaces.nsIDocCharset).charset = aCharset;
+            } else {
+                this.ELEMENT.docShell.charset = aCharset;
+            }
         }
         this.ELEMENT.loadURI(aURL, null, null);
         // if aURL is different from the current URL only in hash,
