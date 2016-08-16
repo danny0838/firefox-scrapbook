@@ -301,15 +301,15 @@ var sbCaptureTask = {
     // press "skip" button
     // shift to next item
     next: function(quickly) {
-        if ( ++this.index >= gURLs.length ) {
-            this.finalize();
-        } else {
+        if ( ++this.index < gURLs.length ) {
             if ( quickly || this.URL.startsWith("file:") ) {
                 window.setTimeout(function(){ sbCaptureTask.start(); }, 0);
             } else {
                 this.seconds = this.INTERVAL;
                 sbCaptureTask.countDown();
             }
+        } else {
+            this.finalize();
         }
     },
 
