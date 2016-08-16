@@ -194,6 +194,7 @@ var sbCaptureTask = {
     timerID: 0,
     forceExit: 0,
     failed: 0,
+    lastItem: null,
 
     init: function(myURLs) {
         var depth = (gContext == "indepth" ? 1 : 0);
@@ -343,8 +344,24 @@ var sbCaptureTask = {
         if ( gContext == "indepth" ) {
             sbCrossLinker.invoke();
         } else {
-            if ( gURLs.length > 1 ) SB_fireNotification(null);
-            //Fenster wird nur geschlossen, wenn alle ausgewaehlten Seiten heruntergeladen werden konnten
+            // multiple capture
+            if ( gURLs.length > 1 ) {
+                SB_fireNotification(null);
+            // link, capture-again, capture-again-deep, internalize
+            // make sure we have at least one item downloaded successfully
+            } else if (this.lastItem) {
+                if ( gContext == "capture-again" || gContext == "capture-again-deep" ) {
+                    sbCrossLinker.forceReloading(gPreset[0], gPreset[1]);
+                    var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gPreset[0]);
+                    sbDataSource.setProperty(res, "chars", this.lastItem.chars);
+                    if ( gPreset[5] ) sbDataSource.setProperty(res, "type", "");
+                } else if ( gContext == "internalize" ) {
+                    sbCrossLinker.forceReloadingURL(sbCommonUtils.convertFileToURL(gOption.internalize));
+                }
+                SB_fireNotification(this.lastItem);
+            }
+
+            // Close the window only if all selected pages can be downloaded
             if ( this.failed == 0 ) this.closeWindow();
         }
     },
@@ -791,7 +808,7 @@ var sbCrossLinker = {
             SB_trace(sbCommonUtils.lang("REBUILD_LINKS_COMPLETE"));
             this.flushXML();
             SB_fireNotification(gReferItem);
-            //Fenster wird nur geschlossen, wenn alle ausgewaehlten Seiten heruntergeladen werden konnten
+            // Close the window only if all selected pages can be downloaded
             if ( sbCaptureTask.failed == 0 ) {
                 sbCaptureTask.closeWindow();
             } else {
@@ -1080,15 +1097,7 @@ gContentSaver.trace = function(aText) {
 };
 
 gContentSaver.onCaptureComplete = function(aItem) {
-    if ( gContext != "indepth" && gURLs.length == 1 ) SB_fireNotification(aItem);
-    if ( gContext == "capture-again" || gContext == "capture-again-deep" ) {
-        sbCrossLinker.forceReloading(gPreset[0], gPreset[1]);
-        var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gPreset[0]);
-        sbDataSource.setProperty(res, "chars", aItem.chars);
-        if ( gPreset[5] ) sbDataSource.setProperty(res, "type", "");
-    } else if ( gContext == "internalize" ) {
-        sbCrossLinker.forceReloadingURL(sbCommonUtils.convertFileToURL(gOption.internalize));
-    }
+    sbCaptureTask.lastItem = aItem;
     sbCaptureTask.succeed();
 };
 
