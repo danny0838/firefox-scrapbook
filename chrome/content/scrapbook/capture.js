@@ -229,9 +229,8 @@ var sbCaptureTask = {
     start: function(aRedirectURL) {
         this.seconds = -1;
 
-        // Resume "pause" and "skip" buttons, which are temporarily diasbled
+        // Resume "skip" button, which is temporarily diasbled
         // when a capture is already executed (rather than waiting for connection)
-        document.getElementById("sbCapturePauseButton").disabled = false;
         this.toggleSkipButton(true);
 
         // mark the item we are currently on
@@ -315,11 +314,13 @@ var sbCaptureTask = {
 
     countDown: function() {
         SB_trace(sbCommonUtils.lang("WAITING", sbCaptureTask.seconds));
-        if ( this.seconds > 0 ) {
-            this.seconds--;
-            this.timerID = window.setTimeout(function(){ sbCaptureTask.countDown(); }, 1000);
-        } else {
-            this.timerID = window.setTimeout(function(){ sbCaptureTask.start(); }, 0);
+        if (document.getElementById("sbCaptureStartButton").hidden) {
+            if ( this.seconds > 0 ) {
+                this.seconds--;
+                this.timerID = window.setTimeout(function(){ sbCaptureTask.countDown(); }, 1000);
+            } else {
+                this.timerID = window.setTimeout(function(){ sbCaptureTask.start(); }, 0);
+            }
         }
     },
 
@@ -409,7 +410,6 @@ var sbCaptureTask = {
     },
 
     toggleStartPause: function(allowPause) {
-        document.getElementById("sbCapturePauseButton").disabled = false;
         document.getElementById("sbCapturePauseButton").hidden = !allowPause;
         document.getElementById("sbCaptureStartButton").hidden =  allowPause;
         document.getElementById("sbCaptureTextbox").disabled = !allowPause;
@@ -442,7 +442,6 @@ var sbCaptureTask = {
         SB_trace(sbCommonUtils.lang("CAPTURE_START"));
 
         // update UI
-        document.getElementById("sbCapturePauseButton").disabled = true;
         this.toggleSkipButton(false);
 
         // start capture
