@@ -57,10 +57,8 @@
                         <checkbox id="sbDetailOptionStyles" label="&sb.detail.option.styles;" />
                         <checkbox id="sbDetailOptionScript" label="&sb.detail.option.scripts;" oncommand="sbCaptureOptions.updateScriptWarning();" />
                     </hbox>
-                    <checkbox id="sbDetailOptionSaveDataURI" label="&sb.detail.option.saveDataURI;" />
-                    <checkbox id="sbDetailOptionKeepLink" label="&sb.detail.option.keepLink;" />
-                    <checkbox id="sbDetailOptionRewriteStyles" label="&sb.detail.option.rewriteStyles;" />
-                    <checkbox id="sbDetailOptionAsHtml" label="&sb.detail.option.asHtml;" />
+                    <checkbox id="sbDetailOptionSaveDataURI" label="&sb.detail.option.saveDataUri;" />
+                    <checkbox id="sbDetailOptionAsHtml" label="&sb.detail.option.fileAsHtml;" />
                 </groupbox>
                 <groupbox group="capture-options">
                     <caption label="&sb.detail.linked.file;" />
@@ -81,38 +79,7 @@
                     <caption label="&sb.detail.linked.page;" />
                     <hbox align="center">
                         <label id="sbDetailInDepthLabel" value="&sb.detail.linked.page.depth;:" />
-                        <menulist id="sbDetailInDepth" editable="true" flex="1" value="0" onchange="this.value = parseInt('0' + this.value, 10);">
-                            <menupopup>
-                                <menuitem value="0" label="0" />
-                                <menuitem value="1" label="1" />
-                                <menuitem value="2" label="2" />
-                                <menuitem value="3" label="3" />
-                            </menupopup>
-                        </menulist>
-                    </hbox>
-                    <hbox align="center">
-                        <label id="sbDetailTimeoutLabel" value="&sb.detail.linked.timeout;:" />
-                        <menulist id="sbDetailTimeout" editable="true" flex="1" value="0" onchange="this.value = parseInt('0' + this.value, 10);">
-                            <menupopup>
-                                <menuitem value="0" label="0" />
-                                <menuitem value="1" label="1" />
-                                <menuitem value="2" label="2" />
-                                <menuitem value="3" label="3" />
-                            </menupopup>
-                        </menulist>
-                    </hbox>
-                    <hbox align="center">
-                        <label id="sbDetailCharsetLabel" value="&sb.detail.linked.charset;:" />
-                        <menulist id="sbDetailCharset" editable="true" flex="1" value="">
-                            <menupopup>
-                                <menuitem value="" label="" />
-                                <menuitem value="BIG5" label="BIG5" />
-                                <menuitem value="GBK" label="GBK" />
-                                <menuitem value="ISO-8859-1" label="ISO-8859-1" />
-                                <menuitem value="SHIFT-JIS" label="SHIFT_JIS" />
-                                <menuitem value="UTF-8" label="UTF-8" />
-                            </menupopup>
-                        </menulist>
+                        <textbox id="sbDetailInDepth" type="number" size="3" value="0" min="0" />
                     </hbox>
                 </groupbox>
                 <description id="sbDetailWarnAboutRenew" flex="1" hidden="true">&sb.detail.warnAboutRenew;</description>

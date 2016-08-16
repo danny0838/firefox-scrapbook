@@ -20,7 +20,6 @@ var sbCombineService = {
         //Block wird benötigt, um Korrekturen bei fehlerhafter Zusammenstellung zu erlauben
         this.toggleElements(true);
         //Ende Block
-        gOption = { "script": true, "images": true };
         if ( window.top.location.href != "chrome://scrapbook/content/manage.xul" ) {
             document.documentElement.collapsed = true;
             return;
@@ -322,6 +321,7 @@ var sbPageCombiner = {
     htmlSrc: "",
     cssText: "",
     isTargetCombined: false,
+    baseURI: "",
     htmlId: "",
     bodyId: "",
     refreshHash: null,
@@ -344,6 +344,9 @@ var sbPageCombiner = {
         }
 
         this.isTargetCombined = false;
+        var anchor = this.BROWSER.contentDocument.createElement("A");
+        anchor.href = "";
+        this.baseURI = anchor.href;
         if ( sbCombineService.index == 0 ) {
             if (!sbCombineService.option["T"]) {
                 sbCombineService.option["T"] = sbDataSource.getProperty(sbCombineService.curRes, "title");
@@ -435,12 +438,12 @@ var sbPageCombiner = {
             divHTML.setAttribute(attrs[i].name, attrs[i].value);
         }
         divHTML.id = "item" + sbCombineService.curID + "html";
-        divHTML = sbCommonUtils.surroundByTags(divHTML, "\n" + divBody + "\n");
+        divHTML = sbCommonUtils.surroundByTags(divHTML, divBody);
 
         var divWrap = this.BROWSER.contentDocument.createElement("DIV");
         divWrap.id = "item" + sbCombineService.curID;
         divWrap.style.position = "relative";
-        return sbCommonUtils.surroundByTags(divWrap, divHTML + "\n");
+        return sbCommonUtils.surroundByTags(divWrap, divHTML);
     },
 
     surroundDOMCombined: function() {
@@ -464,7 +467,7 @@ var sbPageCombiner = {
         if (aCSS.ownerNode && sbCommonUtils.getSbObjectType(aCSS.ownerNode) == "stylesheet") return "";
         // a special stylesheet used by scrapbook or other addons/programs, skip parsing it
         if (aCSS.href && aCSS.href.startsWith("chrome:")) return "";
-        var content = this.processCSSRules(aCSS, this.BROWSER.currentURI.spec, "");
+        var content = this.processCSSRules(aCSS, this.baseURI, "");
         var media = aCSS.media.mediaText;
         if (media) {
             // omit "all" since it's defined in the link tag
@@ -573,7 +576,7 @@ var sbPageCombiner = {
     inspectNode: function(aNode) {
         switch ( aNode.nodeName.toLowerCase() ) {
             case "link": 
-                if ( aNode.rel.toLowerCase() == "stylesheet") {
+                if ( aNode.rel.toLowerCase().split(/[ \t\r\n\v\f]+/).indexOf("stylesheet") >= 0 ) {
                     // link tags in the body element is unusual
                     // styles should already be processed
                     // in sbPageCombiner.exec => surroundCSS => processCSSRecursively
@@ -626,14 +629,14 @@ var sbPageCombiner = {
                 break;
         }
         if ( aNode.style && aNode.style.cssText ) {
-            var newCSStext = this.inspectCSSText(aNode.style.cssText, this.BROWSER.currentURI.spec);
+            var newCSStext = this.inspectCSSText(aNode.style.cssText, this.baseURI);
             if ( newCSStext ) aNode.setAttribute("style", newCSStext);
         }
     },
 
     setAbsoluteURL: function(aNode, aAttr) {
         if ( aNode.getAttribute(aAttr) ) {
-            aNode.setAttribute(aAttr, sbCommonUtils.resolveURL(this.BROWSER.currentURI.spec, aNode.getAttribute(aAttr)));
+            aNode.setAttribute(aAttr, sbCommonUtils.resolveURL(this.baseURI, aNode.getAttribute(aAttr)));
         }
         return aNode;
     },

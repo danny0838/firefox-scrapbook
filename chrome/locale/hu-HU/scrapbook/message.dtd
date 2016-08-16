@@ -10,20 +10,20 @@
 <!ENTITY sb.capture.skip "Kihagyás">
 <!ENTITY sb.capture.pause "Szünet">
 <!ENTITY sb.capture.finish "Mégse">
+<!ENTITY sb.capture.column.address "URL">
+<!ENTITY sb.capture.column.title "Cím">
+<!ENTITY sb.capture.column.status "Állapot">
 <!ENTITY sb.capture.checkSelection "Check selected items">
 <!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Szűrés">
-<!ENTITY sb.capture.filter.column.one "Megjelenítés/elrejtés">
-<!ENTITY sb.capture.filter.column.two "Szűrő (reguláris kifejezés)">
+<!ENTITY sb.capture.filter.column.rule "Megjelenítés/elrejtés">
+<!ENTITY sb.capture.filter.column.content "Szűrő (reguláris kifejezés)">
 <!ENTITY sb.capture.filter.accept "Elfogadás">
 <!ENTITY sb.capture.filter.accept.tt "változtassa meg vagy adjon új értéket">
 <!ENTITY sb.capture.filter.cancel "Mégse">
 <!ENTITY sb.capture.filter.cancel.tt "szerkesztés megszakítása">
 <!ENTITY sb.capture.filter.delete "Törlés">
 <!ENTITY sb.capture.filter.delete.tt "szűrő eltávolítása a listáról">
-<!ENTITY sbp.capture.column.one "URL">
-<!ENTITY sbp.capture.column.two "Cím">
-<!ENTITY sbp.capture.column.three "Állapot">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Elemek hozzáadása húzd és ejtsd módszerrel a struktúrából, az összefűzés sorrendjének megfelelően. Egyszerre több elem is áthúzható a húzd és ejtsd módszerrel.">
@@ -49,10 +49,8 @@
 <!ENTITY sb.detail.option.frames "Frames">
 <!ENTITY sb.detail.option.styles "Stílusok">
 <!ENTITY sb.detail.option.scripts "Scripts">
-<!ENTITY sb.detail.option.keepLink "Keep linking to the source for not-captured objects">
-<!ENTITY sb.detail.option.saveDataURI "Save data URI as file">
-<!ENTITY sb.detail.option.rewriteStyles "Reorganize Styles">
-<!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
+<!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.linked.file "Hivatkozott fájlok letöltése">
 <!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
 <!ENTITY sb.detail.linked.file.method1 "Match URL file extension">

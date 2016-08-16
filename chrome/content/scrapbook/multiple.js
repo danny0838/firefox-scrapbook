@@ -28,8 +28,6 @@ var sbMultipleService = {
         var namList = [];
         var urlHash = {};
         var lines = this.TEXTBOX.value.split("\n");
-        var charset = document.getElementById("sbCharset").value;
-        var timeout = parseInt("0" + document.getElementById("sbTimeout").value, 10);
         for ( var i = 0; i < lines.length; i++ ) {
             if ( lines[i].length > 5 ) urlHash[lines[i]] = true;
         }
@@ -47,17 +45,8 @@ var sbMultipleService = {
         }
         var data = {
             urls: urlList,
-            refUrl: "",
             showDetail: false,
             resName: sbFolderSelector2.resURI,
-            resIdx: 0,
-            referItem: null,
-            option: {
-                inDepthTimeout: timeout,
-                inDepthCharset: charset,
-            },
-            file2Url: null,
-            preset: null,
             titles: (document.getElementById("sbLinktitle").value == "ScrapBook") ? null : namList,
             context: "link",
         };

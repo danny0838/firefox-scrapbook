@@ -10,20 +10,20 @@
 <!ENTITY sb.capture.skip "Hoppa över">
 <!ENTITY sb.capture.pause "Pausa">
 <!ENTITY sb.capture.finish "Avbryt">
+<!ENTITY sb.capture.column.address "URL">
+<!ENTITY sb.capture.column.title "Rubrik">
+<!ENTITY sb.capture.column.status "Status">
 <!ENTITY sb.capture.checkSelection "Check selected items">
 <!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Filtrera">
-<!ENTITY sb.capture.filter.column.one "Visa/Dölj">
-<!ENTITY sb.capture.filter.column.two "Filter (reguljärt uttryck)">
+<!ENTITY sb.capture.filter.column.rule "Visa/Dölj">
+<!ENTITY sb.capture.filter.column.content "Filter (reguljärt uttryck)">
 <!ENTITY sb.capture.filter.accept "Acceptera">
 <!ENTITY sb.capture.filter.accept.tt "Ändra eller redigera värde">
 <!ENTITY sb.capture.filter.cancel "Avbryt">
 <!ENTITY sb.capture.filter.cancel.tt "Avbryt redigering">
 <!ENTITY sb.capture.filter.delete "Ta bort">
 <!ENTITY sb.capture.filter.delete.tt "Ta bort filter från listan">
-<!ENTITY sbp.capture.column.one "URL">
-<!ENTITY sbp.capture.column.two "Rubrik">
-<!ENTITY sbp.capture.column.three "Status">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Lägg till objekt genom att dra och släppa från trädet i den ordning du vill kombinera dem. Du kan dra och släppa flera objekt samtidigt.">
@@ -49,10 +49,8 @@
 <!ENTITY sb.detail.option.frames "Frames">
 <!ENTITY sb.detail.option.styles "Format">
 <!ENTITY sb.detail.option.scripts "Scripts">
-<!ENTITY sb.detail.option.keepLink "Keep linking to the source for not-captured objects">
-<!ENTITY sb.detail.option.saveDataURI "Save data URI as file">
-<!ENTITY sb.detail.option.rewriteStyles "Reorganize Styles">
-<!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
+<!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.linked.file "Ladda ner länkade filer">
 <!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
 <!ENTITY sb.detail.linked.file.method1 "Match URL file extension">

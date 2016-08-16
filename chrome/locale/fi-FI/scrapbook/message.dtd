@@ -10,20 +10,20 @@
 <!ENTITY sb.capture.skip "Ohita">
 <!ENTITY sb.capture.pause "Pysäytä">
 <!ENTITY sb.capture.finish "Peruuta">
+<!ENTITY sb.capture.column.address "URL">
+<!ENTITY sb.capture.column.title "Otsikko">
+<!ENTITY sb.capture.column.status "Tila">
 <!ENTITY sb.capture.checkSelection "Check selected items">
 <!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Suodata">
-<!ENTITY sb.capture.filter.column.one "Näytä/Piilota">
-<!ENTITY sb.capture.filter.column.two "Suodata (RegExp)">
+<!ENTITY sb.capture.filter.column.rule "Näytä/Piilota">
+<!ENTITY sb.capture.filter.column.content "Suodata (RegExp)">
 <!ENTITY sb.capture.filter.accept "Hyväksy">
 <!ENTITY sb.capture.filter.accept.tt "Muuta tai muokkaa arvoa">
 <!ENTITY sb.capture.filter.cancel "Peruuta">
 <!ENTITY sb.capture.filter.cancel.tt "Keskeytä muokkaus">
 <!ENTITY sb.capture.filter.delete "Poista">
 <!ENTITY sb.capture.filter.delete.tt "Poista suodatin listasta">
-<!ENTITY sbp.capture.column.one "URL">
-<!ENTITY sbp.capture.column.two "Otsikko">
-<!ENTITY sbp.capture.column.three "Tila">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Lisää kohteita vetämällä yhdistämisjärjestyksessä sivupuusta. Voit lisätä useita kohteita samanaikaisesti.">
@@ -49,10 +49,8 @@
 <!ENTITY sb.detail.option.frames "Frames">
 <!ENTITY sb.detail.option.styles "Tyylit">
 <!ENTITY sb.detail.option.scripts "Scripts">
-<!ENTITY sb.detail.option.keepLink "Keep linking to the source for not-captured objects">
-<!ENTITY sb.detail.option.saveDataURI "Save data URI as file">
-<!ENTITY sb.detail.option.rewriteStyles "Reorganize Styles">
-<!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
+<!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.linked.file "Lataa linkitetyt tiedostot">
 <!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
 <!ENTITY sb.detail.linked.file.method1 "Match URL file extension">

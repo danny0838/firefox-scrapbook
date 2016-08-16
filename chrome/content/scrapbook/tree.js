@@ -463,10 +463,6 @@ var sbTreeHandler = {
             showDetail: showDetail,
             resName: ip[0],
             resIdx: ip[1],
-            referItem: null,
-            option: null,
-            file2Url: null,
-            preset: null,
             titles: [title],
             context: "link",
         };

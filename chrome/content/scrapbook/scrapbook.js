@@ -355,15 +355,8 @@ var sbController = {
         ];
         var data = {
             urls: [sbDataSource.getProperty(aRes, "source")],
-            refUrl: null,
             showDetail: aShowDetail,
-            resName: null,
-            resIdx: 0,
-            referItem: null,
-            option: null,
-            file2Url: null,
             preset: preset,
-            titles: null,
             context: "capture-again",
         };
         window.top.openDialog("chrome://scrapbook/content/capture.xul", "", "chrome,centerscreen,all,resizable,dialog=no", data);
@@ -392,9 +385,9 @@ var sbController = {
             "media": true,
             "styles": true,
             "script": true,
-            "asHtml": false,
+            "fileAsHtml": false,
             "forceUtf8": false,
-            "rewriteStyles": false,
+            "tidyCss": false,
             "internalize": refFile,
         };
         var preset = [
@@ -407,16 +400,10 @@ var sbController = {
         ];
         var data = {
             urls: [sbMainService.baseURL + "data/" + id + "/index.html"],
-            refUrl: null,
             showDetail: false,
-            resName: null,
-            resIdx: 0,
-            referItem: null,
             option: options,
             file2Url: file2Url,
             preset: preset,
-            charset: null,
-            timeout: null,
             titles: [sbDataSource.getProperty(aRes, "title")],
             context: "internalize",
         };
