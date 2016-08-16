@@ -236,10 +236,6 @@ var sbCaptureTask = {
     start: function(aRedirectURL) {
         this.seconds = -1;
 
-        // Resume "skip" button, which is temporarily diasbled
-        // when a capture is already executed (rather than waiting for connection)
-        this.toggleSkipButton(true);
-
         // mark the item we are currently on
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "selected");
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[0].setAttribute("properties", "disabled");
@@ -307,6 +303,10 @@ var sbCaptureTask = {
     // press "skip" button
     // shift to next item
     next: function(quickly) {
+        // Resume "skip" button, which is temporarily diasbled
+        // when a capture is already executed (rather than waiting for connection)
+        this.toggleSkipButton(true);
+
         if ( ++this.index < gURLs.length ) {
             if ( quickly || this.URL.startsWith("file:") ) {
                 window.setTimeout(function(){ sbCaptureTask.start(); }, 0);
@@ -448,7 +448,8 @@ var sbCaptureTask = {
         // update info
         SB_trace(sbCommonUtils.lang("CAPTURE_START"));
 
-        // update UI
+        // Disable "Skip" directive before the capture because we cannot reliably terminate
+        // a capture process once it's started, and it would result in partial saved files.
         this.toggleSkipButton(false);
 
         // start capture
