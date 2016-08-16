@@ -28,7 +28,6 @@ var sbMultipleService = {
         var namList = [];
         var urlHash = {};
         var lines = this.TEXTBOX.value.split("\n");
-        var charset = document.getElementById("sbCharset").value;
         for ( var i = 0; i < lines.length; i++ ) {
             if ( lines[i].length > 5 ) urlHash[lines[i]] = true;
         }
@@ -48,9 +47,6 @@ var sbMultipleService = {
             urls: urlList,
             showDetail: false,
             resName: sbFolderSelector2.resURI,
-            option: {
-                batchCharset: charset,
-            },
             titles: (document.getElementById("sbLinktitle").value == "ScrapBook") ? null : namList,
             context: "link",
         };

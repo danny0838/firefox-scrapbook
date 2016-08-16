@@ -35,7 +35,6 @@ function SB_trace(aMessage) {
  *   option:      object   capture options, replace the default option in saver.js
  *                         Those more relavant here are:
  *                           inDepth:
- *                           batchCharset: force using charset to load html, autodetect if not set      
  *                           internalize:
  *   file2Url:    array    the file2URL data in saver.js from last capture,
  *                         will then pass to saver.js for next capture
@@ -146,7 +145,7 @@ function SB_initCapture() {
     // link: 1 or more item (> 1 for multiple capture)
     // capture-again, capture-again-deep: 1 item
     // in-depth: 1 or more item, but it's possible that new items be added if depth >= 2
-    if ( gURLs.length == 1 && gContext != "indepth" ) {
+    if ( gURLs.length == 1 && gContext != "indepth" && !gShowDetail ) {
         sbCaptureTask.start();
     } else {
         document.getElementById("sbCaptureWindow").className = "complex";
@@ -176,6 +175,7 @@ function SB_fireNotification(aItem) {
 var sbCaptureTask = {
 
     get INTERVAL() { return parseInt(document.getElementById("sbCaptureTimeout").value, 10); },
+    get CHARSET()  { return document.getElementById("sbCaptureCharset").value; },
     get TREE()     { return document.getElementById("sbCaptureUrlList"); },
     get URL()      { return gURLs[this.index]; },
 
@@ -1028,7 +1028,7 @@ sbHeaderSniffer.prototype = {
         contentType = contentType || "text/html";
         if (!isAttachment && ["text/html", "application/xhtml+xml"].indexOf(contentType) >= 0) {
             // for inline html or xhtml files, load the document and capture it
-            sbInvisibleBrowser.load(URL, gOption["batchCharset"]);
+            sbInvisibleBrowser.load(URL, sbCaptureTask.CHARSET);
         } else if (gContext == "link") {
             // capture as file for link capture
             var refURL = this.refURLSpec || sbCaptureTask.URL;

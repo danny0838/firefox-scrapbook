@@ -81,19 +81,6 @@
                         <label id="sbDetailInDepthLabel" value="&sb.detail.linked.page.depth;:" />
                         <textbox id="sbDetailInDepth" type="number" size="3" value="0" min="0" />
                     </hbox>
-                    <hbox align="center">
-                        <label id="sbDetailCharsetLabel" value="&sb.detail.linked.charset;:" />
-                        <menulist id="sbDetailCharset" editable="true" flex="1" value="">
-                            <menupopup>
-                                <menuitem value="" label="" />
-                                <menuitem value="BIG5" label="BIG5" />
-                                <menuitem value="GBK" label="GBK" />
-                                <menuitem value="ISO-8859-1" label="ISO-8859-1" />
-                                <menuitem value="SHIFT-JIS" label="SHIFT_JIS" />
-                                <menuitem value="UTF-8" label="UTF-8" />
-                            </menupopup>
-                        </menulist>
-                    </hbox>
                 </groupbox>
                 <description id="sbDetailWarnAboutRenew" flex="1" hidden="true">&sb.detail.warnAboutRenew;</description>
                 <description id="sbDetailWarnAboutScript" flex="1" hidden="true">&sb.detail.warnAboutScript;</description>

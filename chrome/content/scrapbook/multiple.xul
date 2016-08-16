@@ -43,19 +43,6 @@
                     </menupopup>
                 </menulist>
             </row>
-            <row align="center" style="margin-bottom:8px;">
-                <label value="&sb.detail.linked.charset;:" />
-                <menulist id="sbCharset" editable="true">
-                    <menupopup id="sbCharsetitems">
-                        <menuitem value="" label="" selected="true" />
-                        <menuitem value="BIG5" label="BIG5" />
-                        <menuitem value="GBK" label="GBK" />
-                        <menuitem value="ISO-8859-1" label="ISO-8859-1" />
-                        <menuitem value="SHIFT-JIS" label="SHIFT_JIS" />
-                        <menuitem value="UTF-8" label="UTF-8" />
-                    </menupopup>
-                </menulist>
-            </row>
         </rows>
     </grid>
 

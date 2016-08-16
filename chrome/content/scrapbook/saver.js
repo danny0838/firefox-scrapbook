@@ -58,7 +58,6 @@ function sbContentSaverClass() {
         "downLinkMethod": sbCommonUtils.getPref("capture.default.downLinkMethod", 0),
         "downLinkFilter": sbCommonUtils.getPref("capture.default.downLinkFilter", ""),
         "inDepth": 0, // active only if explicitly set in detail dialog
-        "batchCharset": sbCommonUtils.getPref("capture.default.batchCharset", ""),
         "internalize": false,
         "recordSkippedUrl": sbCommonUtils.getPref("capture.default.recordSkippedUrl", false),
         "recordRemovedAttr": sbCommonUtils.getPref("capture.default.recordRemovedAttr", false),        
