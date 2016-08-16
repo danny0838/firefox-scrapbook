@@ -14,9 +14,10 @@ var sbContentSaver = {
         // aItem is the last item that is captured
         // in a multiple capture it could be null 
         if (aItem) {
-            if ( sbDataSource.getProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id), "type") == "marked" ) return;
+            var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + aItem.id);
+            if ( sbDataSource.getProperty(res, "type") == "marked" ) return;
             if ( sbCommonUtils.getPref("notifyOnComplete", true) ) {
-                var icon = aItem.icon ? "resource://scrapbook/data/" + aItem.id + "/" + aItem.icon : sbCommonUtils.getDefaultIcon();
+                var icon = sbDataSource.getProperty(res, "icon") || sbCommonUtils.getDefaultIcon(aItem.type);
                 var title = "ScrapBook: " + sbCommonUtils.lang("CAPTURE_COMPLETE");
                 var text = sbCommonUtils.crop(aItem.title, null, 100);
                 var listener = {
