@@ -139,6 +139,14 @@ function SB_initCapture() {
         }
     }
 
+    // use passed timeout and charset (mostly for indepth)
+    if (gOption["batchTimeout"]) {
+        document.getElementById("sbCaptureTimeout").value = gOption["batchTimeout"];
+    }
+    if (gOption["batchCharset"]) {
+        document.getElementById("sbCaptureCharset").value = gOption["batchCharset"];
+    }
+
     // start capture
     sbInvisibleBrowser.init();
     sbCaptureTask.init(myURLs);
@@ -449,8 +457,13 @@ var sbCaptureTask = {
         } else if (gReferItem) {
             var preset = [gReferItem.id, SB_suggestName(aWindow.location.href), gOption, gFile2URL, gDepths[this.index]];
         } else {
-            var preset = null;
+            var preset = [];
         }
+        // pass current timeout and charset to saver so that a potential indepth capture can use them
+        preset[2] = preset[2] || {};
+        preset[2]["batchTimeout"] = sbCaptureTask.INTERVAL;
+        preset[2]["batchCharset"] = sbCaptureTask.CHARSET;
+
         var ret = gContentSaver.captureWindow(aWindow, aAllowPartial, gShowDetail, gResName, gResIdx, preset, gContext, gTitles[this.index]);
         if ( ret ) {
             if ( gContext == "indepth" ) {

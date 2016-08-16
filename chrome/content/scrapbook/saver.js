@@ -62,6 +62,8 @@ function sbContentSaverClass() {
         "recordSkippedUrl": sbCommonUtils.getPref("capture.default.recordSkippedUrl", false),
         "recordRemovedAttr": sbCommonUtils.getPref("capture.default.recordRemovedAttr", false),        
         "recordInDepthLink": sbCommonUtils.getPref("capture.default.recordInDepthLink", false),
+        // "batchTimeout": null, // passed from capture.js via presetData[2]
+        // "batchCharset": null, // passed from capture.js via presetData[2]
     };
     this.documentName = "";
     this.item = null;
