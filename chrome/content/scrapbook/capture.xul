@@ -26,12 +26,12 @@
     </popupset>
 
     <hbox>
-        <textbox id="sbpCaptureProgress" readonly="true" width="80"/>
+        <textbox id="sbCaptureProgress" readonly="true" width="80"/>
         <textbox id="sbCaptureTextbox" readonly="true" flex="1"/>
     </hbox>
 
     <tree
-        id="sbpURLList"
+        id="sbCaptureUrlList"
         flex="1"
         contextmenu="sbCapturePopup"
         seltype="multiple"
@@ -42,50 +42,50 @@
         <treecols>
             <treecol type="checkbox" fixed="true" editable="true" ignoreincolumnpicker="true" />
             <splitter class="tree-splitter"/>
-            <treecol label="&sbp.capture.column.one;" flex="35" editable="true" crop="right" persist="width hidden" />
+            <treecol label="&sb.capture.column.address;" flex="35" editable="true" crop="right" persist="width hidden" />
             <splitter class="tree-splitter"/>
-            <treecol label="&sbp.capture.column.two;" flex="9" editable="true" persist="width hidden" />
+            <treecol label="&sb.capture.column.title;" flex="9" editable="true" persist="width hidden" />
             <splitter class="tree-splitter"/>
-            <treecol label="&sbp.capture.column.three;" flex="5" editable="true" persist="width hidden"/>
+            <treecol label="&sb.capture.column.status;" flex="5" editable="true" persist="width hidden"/>
         </treecols>
         <treechildren/>
     </tree>
 
     <browser type="content" id="sbCaptureBrowser" collapsed="true" disablehistory="true" />
 
-    <checkbox id="sbpChkFilter" label="&sb.capture.filter;" checked="false" oncommand="sbCaptureTask.toggleFilterBox(event);" />
+    <checkbox id="sbCaptureFilterToggle" label="&sb.capture.filter;" checked="false" oncommand="sbCaptureTask.toggleFilterBox(event);" />
 
-    <vbox id="sbpFilterBox" hidden="true">
+    <vbox id="sbCaptureFilterBox" hidden="true">
         <hbox>
-            <menulist id="sbpMnuIncExc">
+            <menulist id="sbCaptureFilterRule">
                 <menupopup>
                     <menuitem label="Include" />
                     <menuitem label="Exclude" />
                 </menupopup>
             </menulist>
-            <textbox id="sbpTextboxFilter"
+            <textbox id="sbCaptureFilterInput"
                      autocompletesearch="form-history"
                      autocompletesearchparam="sbSearchHistory"
                      enablehistory="true"
                      flex="1"
-                     oninput="sbpFilter.input();"
-                     ontextentered="sbpFilter.add();"
+                     oninput="sbCaptureFilter.input();"
+                     ontextentered="sbCaptureFilter.add();"
                      tabscrolling="true"
                      type="autocomplete" />
-            <button id="sbpBtnAccept" label="&sb.capture.filter.accept;" disabled="true" tooltiptext="&sb.capture.filter.accept.tt;" oncommand="sbpFilter.add();" />
-            <button id="sbpBtnCancel" label="&sb.capture.filter.cancel;" disabled="true" tooltiptext="&sb.capture.filter.cancel.tt;" oncommand="sbpFilter.cancel();" />
-            <button id="sbpBtnDel" label="&sb.capture.filter.delete;" disabled="true" tooltiptext="&sb.capture.filter.delete.tt;" oncommand="sbpFilter.del();" />
+            <button id="sbCaptureFilterAccept" label="&sb.capture.filter.accept;" disabled="true" tooltiptext="&sb.capture.filter.accept.tt;" oncommand="sbCaptureFilter.add();" />
+            <button id="sbCaptureFilterCancel" label="&sb.capture.filter.cancel;" disabled="true" tooltiptext="&sb.capture.filter.cancel.tt;" oncommand="sbCaptureFilter.cancel();" />
+            <button id="sbCaptureFilterDelete" label="&sb.capture.filter.delete;" disabled="true" tooltiptext="&sb.capture.filter.delete.tt;" oncommand="sbCaptureFilter.del();" />
         </hbox>
-        <tree id="sbpTreeFilter"
+        <tree id="sbCaptureFilter"
               autostrech="always"
-              onclick="sbpFilter.selectFilter();"
+              onclick="sbCaptureFilter.selectFilter();"
               rows="5"
               seltype="single"
         >
             <treecols>
-                <treecol label="&sb.capture.filter.column.one;" flex="1" editable="true" crop="right" persist="width hidden" />
+                <treecol label="&sb.capture.filter.column.rule;" flex="1" editable="true" crop="right" persist="width hidden" />
                 <splitter class="tree-splitter" />
-                <treecol label="&sb.capture.filter.column.two;" flex="10" editable="true" crop="right" persist="width hidden" />
+                <treecol label="&sb.capture.filter.column.content;" flex="10" editable="true" crop="right" persist="width hidden" />
             </treecols>
             <treechildren/>
         </tree>

@@ -177,7 +177,7 @@ function SB_fireNotification(aItem) {
 var sbCaptureTask = {
 
     get INTERVAL() { return gOption["batchTimeout"]; },
-    get TREE()     { return document.getElementById("sbpURLList"); },
+    get TREE()     { return document.getElementById("sbCaptureUrlList"); },
     get URL()      { return gURLs[this.index]; },
 
     index: 0,
@@ -213,7 +213,7 @@ var sbCaptureTask = {
         var row = document.createElement("treerow");
         item.appendChild(row);
         var cell0 = document.createElement("treecell");
-        cell0.setAttribute("value", sbpFilter.filter(aURL));
+        cell0.setAttribute("value", sbCaptureFilter.filter(aURL));
         row.appendChild(cell0);
         var cell1 = document.createElement("treecell");
         cell1.setAttribute("label", aDepth + " [" + (gURLs.length - 1) + "] " + aURL);
@@ -239,7 +239,7 @@ var sbCaptureTask = {
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[0].setAttribute("properties", "disabled");
         var checkstate = this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[0].getAttribute("value");
         if ( checkstate.match("false") ) {
-            document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
+            document.getElementById("sbCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
             this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "finished");
             this.next(true);
             return;
@@ -275,7 +275,7 @@ var sbCaptureTask = {
 
     // when a capture completes successfully
     succeed: function() {
-        document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
+        document.getElementById("sbCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "finished");
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[2].setAttribute("label", gTitles[this.index] || "");
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[3].setAttribute("properties", "success");
@@ -288,7 +288,7 @@ var sbCaptureTask = {
     // when a capture fails
     fail: function(aErrorMsg) {
         this.failed++;
-        document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
+        document.getElementById("sbCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
         if ( aErrorMsg ) SB_trace(aErrorMsg);
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "finished");
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[3].setAttribute("properties", "failed");
@@ -395,7 +395,7 @@ var sbCaptureTask = {
         //Blendet die Filterdetails an/aus
 
         var tfbChecked = true;
-        tfbChecked = document.getElementById("sbpChkFilter").checked;
+        tfbChecked = document.getElementById("sbCaptureFilterToggle").checked;
         if ( tfbEvent ) {
             if ( tfbEvent.button == 0 ) {
                 if ( tfbChecked ) {
@@ -405,7 +405,7 @@ var sbCaptureTask = {
                 }
             }
         }
-        document.getElementById("sbpFilterBox").hidden = !tfbChecked;
+        document.getElementById("sbCaptureFilterBox").hidden = !tfbChecked;
     },
 
     toggleStartPause: function(allowPause) {
@@ -471,7 +471,7 @@ var sbCaptureTask = {
     },
 };
 
-var sbpFilter = {
+var sbCaptureFilter = {
     filterList: [],
     ruleList: [],
     filterEdited: -1,  // index of the audited filter
@@ -479,8 +479,8 @@ var sbpFilter = {
     // Add a new filter or modify an existing one
     add: function() {
         var filterDuplIdx = -1;
-        var filterNew = document.getElementById("sbpTextboxFilter").value;
-        var ruleNew = document.getElementById("sbpMnuIncExc").label;
+        var filterNew = document.getElementById("sbCaptureFilterInput").value;
+        var ruleNew = document.getElementById("sbCaptureFilterRule").label;
         // 1. Confirm the filter is valid
         try {
             new RegExp(filterNew);
@@ -494,7 +494,7 @@ var sbpFilter = {
         }
         // 3. Update filter list
         if ( filterDuplIdx == -1 ) {
-            var wrapper = document.getElementById("sbpTreeFilter").childNodes[1];
+            var wrapper = document.getElementById("sbCaptureFilter").childNodes[1];
             if ( this.filterEdited == -1 ) {
                 // add a new filter
                 var item = document.createElement("treeitem");
@@ -521,19 +521,19 @@ var sbpFilter = {
         // 4. Update selection
         this.updateSelection();
         // 5. Finalize
-        document.getElementById("sbpTextboxFilter").value = "";
-        document.getElementById("sbpBtnAccept").disabled = true;
-        document.getElementById("sbpBtnCancel").disabled = true;
-        document.getElementById("sbpBtnDel").disabled = true;
+        document.getElementById("sbCaptureFilterInput").value = "";
+        document.getElementById("sbCaptureFilterAccept").disabled = true;
+        document.getElementById("sbCaptureFilterCancel").disabled = true;
+        document.getElementById("sbCaptureFilterDelete").disabled = true;
     },
 
     // Cancel edit of the selected entry
     cancel: function() {
         this.filterEdited = -1;
-        document.getElementById("sbpTextboxFilter").value = "";
-        document.getElementById("sbpBtnAccept").disabled = true;
-        document.getElementById("sbpBtnCancel").disabled = true;
-        document.getElementById("sbpBtnDel").disabled = true;
+        document.getElementById("sbCaptureFilterInput").value = "";
+        document.getElementById("sbCaptureFilterAccept").disabled = true;
+        document.getElementById("sbCaptureFilterCancel").disabled = true;
+        document.getElementById("sbCaptureFilterDelete").disabled = true;
     },
 
     // Delete the selected filter
@@ -542,33 +542,33 @@ var sbpFilter = {
         this.ruleList.splice(this.filterEdited, 1);
         this.filterList.splice(this.filterEdited, 1);
         // 2. Remove entry from file
-        var wrapper = document.getElementById("sbpTreeFilter").childNodes[1];
+        var wrapper = document.getElementById("sbCaptureFilter").childNodes[1];
         sbCommonUtils.removeNode(wrapper.childNodes[this.filterEdited]);
         // 3. Update selection
         this.updateSelection();
         // 4. Finalize
         this.filterEdited = -1;
-        document.getElementById("sbpTextboxFilter").value = "";
-        document.getElementById("sbpBtnAccept").disabled = true;
-        document.getElementById("sbpBtnCancel").disabled = true;
-        document.getElementById("sbpBtnDel").disabled = true;
+        document.getElementById("sbCaptureFilterInput").value = "";
+        document.getElementById("sbCaptureFilterAccept").disabled = true;
+        document.getElementById("sbCaptureFilterCancel").disabled = true;
+        document.getElementById("sbCaptureFilterDelete").disabled = true;
     },
 
     // Prepare to edit or delete a filter
     selectFilter: function() {
         // 1. Determine the position of the selected entry
-        this.filterEdited = document.getElementById("sbpTreeFilter").currentIndex;
+        this.filterEdited = document.getElementById("sbCaptureFilter").currentIndex;
         // 2. Select the entry and allow editing
         if ( this.filterEdited > -1 ) {
             if ( this.ruleList[this.filterEdited] == "Include" ) {
-                document.getElementById("sbpMnuIncExc").selectedIndex = 0;
+                document.getElementById("sbCaptureFilterRule").selectedIndex = 0;
             } else {
-                document.getElementById("sbpMnuIncExc").selectedIndex = 1;
+                document.getElementById("sbCaptureFilterRule").selectedIndex = 1;
             }
-            document.getElementById("sbpTextboxFilter").value = this.filterList[this.filterEdited];
-            document.getElementById("sbpBtnAccept").disabled = true;
-            document.getElementById("sbpBtnCancel").disabled = false;
-            document.getElementById("sbpBtnDel").disabled = false;
+            document.getElementById("sbCaptureFilterInput").value = this.filterList[this.filterEdited];
+            document.getElementById("sbCaptureFilterAccept").disabled = true;
+            document.getElementById("sbCaptureFilterCancel").disabled = false;
+            document.getElementById("sbCaptureFilterDelete").disabled = false;
         }
     },
 
@@ -577,9 +577,9 @@ var sbpFilter = {
     filter: function(url) {
         for ( var i=0, I=this.filterList.length; i<I; i++ ) {
             if ( this.ruleList[i] == "Include" ) {
-                if ( !url.match(sbpFilter.filterList[i]) ) return false;
+                if ( !url.match(sbCaptureFilter.filterList[i]) ) return false;
             } else {
-                if ( url.match(sbpFilter.filterList[i]) ) return false;
+                if ( url.match(sbCaptureFilter.filterList[i]) ) return false;
             }
         }
         return true;
@@ -587,17 +587,17 @@ var sbpFilter = {
 
     // If text is available, enabled the OK button; otherwise disabled it
     input: function() {
-        var iText = document.getElementById("sbpTextboxFilter").value;
+        var iText = document.getElementById("sbCaptureFilterInput").value;
         if ( iText.length > 0 ) {
-            document.getElementById("sbpBtnAccept").disabled=false;
+            document.getElementById("sbCaptureFilterAccept").disabled=false;
         } else {
-            document.getElementById("sbpBtnAccept").disabled=true;
+            document.getElementById("sbCaptureFilterAccept").disabled=true;
         }
     },
 
     // Update the content of the current selection
     updateSelection: function() {
-        var wrapper = document.getElementById("sbpURLList").childNodes[1];
+        var wrapper = document.getElementById("sbCaptureUrlList").childNodes[1];
         for ( var i=sbCaptureTask.index, I=gURLs.length; i<I; i++ ) {
             var checked = this.filter(gURLs[i]);
             wrapper.childNodes[i].childNodes[0].childNodes[0].setAttribute("value", checked);

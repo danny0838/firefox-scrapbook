@@ -10,20 +10,20 @@
 <!ENTITY sb.capture.skip "忽略">
 <!ENTITY sb.capture.pause "暂停">
 <!ENTITY sb.capture.finish "取消">
+<!ENTITY sb.capture.column.address "URL">
+<!ENTITY sb.capture.column.title "标题">
+<!ENTITY sb.capture.column.status "状态">
 <!ENTITY sb.capture.checkSelection "打勾选中项目">
 <!ENTITY sb.capture.uncheckSelection "取消打勾选中项目">
 <!ENTITY sb.capture.filter "过滤器">
-<!ENTITY sb.capture.filter.column.one "显示/隐藏">
-<!ENTITY sb.capture.filter.column.two "过滤规则（正则表达式）">
+<!ENTITY sb.capture.filter.column.rule "显示/隐藏">
+<!ENTITY sb.capture.filter.column.content "过滤规则（正则表达式）">
 <!ENTITY sb.capture.filter.accept "接受">
 <!ENTITY sb.capture.filter.accept.tt "修改或编辑值">
 <!ENTITY sb.capture.filter.cancel "取消">
 <!ENTITY sb.capture.filter.cancel.tt "中止编辑">
 <!ENTITY sb.capture.filter.delete "删除">
 <!ENTITY sb.capture.filter.delete.tt "从列表中移除过滤规则">
-<!ENTITY sbp.capture.column.one "URL">
-<!ENTITY sbp.capture.column.two "标题">
-<!ENTITY sbp.capture.column.three "状态">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "从树中拖拽您希望合并的条目到表中。您可以一次拖拽多个条目。">

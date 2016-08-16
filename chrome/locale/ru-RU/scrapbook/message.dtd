@@ -10,20 +10,20 @@
 <!ENTITY sb.capture.skip "Пропустить">
 <!ENTITY sb.capture.pause "Пауза">
 <!ENTITY sb.capture.finish "Отменить">
+<!ENTITY sb.capture.column.address "Адрес">
+<!ENTITY sb.capture.column.title "Заголовок">
+<!ENTITY sb.capture.column.status "Статус">
 <!ENTITY sb.capture.checkSelection "Check selected items">
 <!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Фильтр">
-<!ENTITY sb.capture.filter.column.one "Показать/Скрыть">
-<!ENTITY sb.capture.filter.column.two "Фильтр (регулярные выражения)">
+<!ENTITY sb.capture.filter.column.rule "Показать/Скрыть">
+<!ENTITY sb.capture.filter.column.content "Фильтр (регулярные выражения)">
 <!ENTITY sb.capture.filter.accept "Применить">
 <!ENTITY sb.capture.filter.accept.tt "изменить значение">
 <!ENTITY sb.capture.filter.cancel "Отмена">
 <!ENTITY sb.capture.filter.cancel.tt "отменить редактирование">
 <!ENTITY sb.capture.filter.delete "Удалить">
 <!ENTITY sb.capture.filter.delete.tt "удалить фильтр из списка">
-<!ENTITY sbp.capture.column.one "Адрес">
-<!ENTITY sbp.capture.column.two "Заголовок">
-<!ENTITY sbp.capture.column.three "Статус">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Добавляйте требуемые для объединения страницы обычным перетаскиванием их из дерева страниц. Также имеется возможность перетаскивать по несколько страниц сразу.">

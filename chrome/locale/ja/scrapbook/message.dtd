@@ -10,20 +10,20 @@
 <!ENTITY sb.capture.skip "スキップ">
 <!ENTITY sb.capture.pause "一時停止">
 <!ENTITY sb.capture.finish "キャンセル">
+<!ENTITY sb.capture.column.address "URL">
+<!ENTITY sb.capture.column.title "タイトル">
+<!ENTITY sb.capture.column.status "状態">
 <!ENTITY sb.capture.checkSelection "Check selected items">
 <!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "フィルタ">
-<!ENTITY sb.capture.filter.column.one "含む/除外">
-<!ENTITY sb.capture.filter.column.two "フィルタ (正規表現)">
+<!ENTITY sb.capture.filter.column.rule "含む/除外">
+<!ENTITY sb.capture.filter.column.content "フィルタ (正規表現)">
 <!ENTITY sb.capture.filter.accept "適用">
 <!ENTITY sb.capture.filter.accept.tt "値を変更または編集する">
 <!ENTITY sb.capture.filter.cancel "キャンセル">
 <!ENTITY sb.capture.filter.cancel.tt "編集を中止する">
 <!ENTITY sb.capture.filter.delete "削除">
 <!ENTITY sb.capture.filter.delete.tt "リストからフィルタを削除する">
-<!ENTITY sbp.capture.column.one "URL">
-<!ENTITY sbp.capture.column.two "タイトル">
-<!ENTITY sbp.capture.column.three "状態">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "結合したいページを順番にツリーからドラッグ＆ドロップして追加してください。複数のアイテムを一度にドラッグ＆ドロップして追加することも可能です。">

@@ -10,20 +10,20 @@
 <!ENTITY sb.capture.skip "Preskočiť">
 <!ENTITY sb.capture.pause "Pauza">
 <!ENTITY sb.capture.finish "Zrušiť">
+<!ENTITY sb.capture.column.address "Adresa URL">
+<!ENTITY sb.capture.column.title "Názov">
+<!ENTITY sb.capture.column.status "Stav">
 <!ENTITY sb.capture.checkSelection "Check selected items">
 <!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Filter">
-<!ENTITY sb.capture.filter.column.one "Zobraziť/Skryť">
-<!ENTITY sb.capture.filter.column.two "Filter (regulárny výraz)">
+<!ENTITY sb.capture.filter.column.rule "Zobraziť/Skryť">
+<!ENTITY sb.capture.filter.column.content "Filter (regulárny výraz)">
 <!ENTITY sb.capture.filter.accept "Prijať">
 <!ENTITY sb.capture.filter.accept.tt "zmení alebo upraví hodnotu">
 <!ENTITY sb.capture.filter.cancel "Zrušiť">
 <!ENTITY sb.capture.filter.cancel.tt "preruší úpravu">
 <!ENTITY sb.capture.filter.delete "Odstrániť">
 <!ENTITY sb.capture.filter.delete.tt "odstráni filter zo zoznamu">
-<!ENTITY sbp.capture.column.one "Adresa URL">
-<!ENTITY sbp.capture.column.two "Názov">
-<!ENTITY sbp.capture.column.three "Stav">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Položky pridávajte pomocou drag-and-drop v poradí, v akom ich chcete zlúčiť. Súčasne môžte pridať viacero položiek.">

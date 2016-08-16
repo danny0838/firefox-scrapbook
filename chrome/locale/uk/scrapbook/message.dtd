@@ -10,20 +10,20 @@
 <!ENTITY sb.capture.skip "Пропустити">
 <!ENTITY sb.capture.pause "Призупинити">
 <!ENTITY sb.capture.finish "Скасувати">
+<!ENTITY sb.capture.column.address "Адреса">
+<!ENTITY sb.capture.column.title "Назва">
+<!ENTITY sb.capture.column.status "Статус">
 <!ENTITY sb.capture.checkSelection "Check selected items">
 <!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Фільтр">
-<!ENTITY sb.capture.filter.column.one "Показати/сховати">
-<!ENTITY sb.capture.filter.column.two "Фільтр (регулярний вираз)">
+<!ENTITY sb.capture.filter.column.rule "Показати/сховати">
+<!ENTITY sb.capture.filter.column.content "Фільтр (регулярний вираз)">
 <!ENTITY sb.capture.filter.accept "Прийняти">
 <!ENTITY sb.capture.filter.accept.tt "змінити чи редагувати значення">
 <!ENTITY sb.capture.filter.cancel "Скасувати">
 <!ENTITY sb.capture.filter.cancel.tt "відмінити редагування">
 <!ENTITY sb.capture.filter.delete "Видалити">
 <!ENTITY sb.capture.filter.delete.tt "Вилучити фільтр зі списку">
-<!ENTITY sbp.capture.column.one "Адреса">
-<!ENTITY sbp.capture.column.two "Назва">
-<!ENTITY sbp.capture.column.three "Статус">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Додавайте необхідні сторінки з дерева сторінок перетягуванням. Ви можете перетягувати одразу декілька сторінок.">

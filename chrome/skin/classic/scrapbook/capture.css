@@ -2,9 +2,9 @@
     width: 360px;
 }
 
-#sbCaptureWindow.simple #sbpURLList,
-#sbCaptureWindow.simple #sbpCaptureProgress,
-#sbCaptureWindow.simple #sbpChkFilter,
+#sbCaptureWindow.simple #sbCaptureUrlList,
+#sbCaptureWindow.simple #sbCaptureProgress,
+#sbCaptureWindow.simple #sbCaptureFilterToggle,
 #sbCaptureWindow.simple #sbCaptureSkipButton {
     display: none;
 }
@@ -14,21 +14,21 @@
     height: 600px;
 }
 
-#sbpURLList {
+#sbCaptureUrlList {
     margin: 0px;
 }
 
-#sbpChkFilter {
+#sbCaptureFilterToggle {
     margin-top: 5px;
     margin-bottom: 7px;
 }
 
-#sbpFilterBox {
+#sbCaptureFilterBox {
     border: 1px solid black;
     padding: 4px;
 }
 
-#sbpTreeFilter {
+#sbCaptureFilter {
     margin: 0px;
 }
 

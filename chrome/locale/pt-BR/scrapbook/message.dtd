@@ -10,20 +10,20 @@
 <!ENTITY sb.capture.skip "Pular">
 <!ENTITY sb.capture.pause "Pausar">
 <!ENTITY sb.capture.finish "Cancelar">
+<!ENTITY sb.capture.column.address "URL">
+<!ENTITY sb.capture.column.title "Título">
+<!ENTITY sb.capture.column.status "Status">
 <!ENTITY sb.capture.checkSelection "Check selected items">
 <!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Filtrar">
-<!ENTITY sb.capture.filter.column.one "Mostrar/Ocultar">
-<!ENTITY sb.capture.filter.column.two "Filtro (expressão regular)">
+<!ENTITY sb.capture.filter.column.rule "Mostrar/Ocultar">
+<!ENTITY sb.capture.filter.column.content "Filtro (expressão regular)">
 <!ENTITY sb.capture.filter.accept "Aceitar">
 <!ENTITY sb.capture.filter.accept.tt "mudar ou editar valor">
 <!ENTITY sb.capture.filter.cancel "Cancelar">
 <!ENTITY sb.capture.filter.cancel.tt "abortar edição">
 <!ENTITY sb.capture.filter.delete "Apagar">
 <!ENTITY sb.capture.filter.delete.tt "remover filtro da lista">
-<!ENTITY sbp.capture.column.one "URL">
-<!ENTITY sbp.capture.column.two "Título">
-<!ENTITY sbp.capture.column.three "Status">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Adicione itens da árvore arrastando e soltando na ordem em que deseja combiná-los. Você pode fazer isso com vários itens de uma vez.">
