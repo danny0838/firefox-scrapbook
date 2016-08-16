@@ -1540,16 +1540,18 @@ sbContentSaverClass.prototype = {
             sbCommonUtils.writeFile(file, content, charset);
         }, this);
 
+        // restore item.icon
+        if (aItem.icon) {
+            aItem.icon = this.restoreFileNameFromHash(aItem.icon);
+        }
+
         // fix resource settings after capture complete
-        // If it's an indepth capture, this.treeRes will be null for non-main documents,
-        // and thus we don't have to update the resource for many times.
+        // This is only run if we have addResource'd for this document.
         var res = this.treeRes;
         if (res && sbDataSource.exists(res)) {
             sbDataSource.setProperty(res, "type", aItem.type);
-            // We replace the "urn:scrapbook-download:*" and skip adding "resource://" to prevent an issue
-            // for URLs containing ":", such as "moz-icon://".
+            // Don't add "resource://" for URLs like "moz-icon://"
             if (aItem.icon) {
-                aItem.icon = this.restoreFileNameFromHash(aItem.icon);
                 if (aItem.icon.indexOf(":") >= 0) {
                     var iconURL = aItem.icon;
                 } else {
