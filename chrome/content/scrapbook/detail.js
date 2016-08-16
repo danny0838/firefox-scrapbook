@@ -18,7 +18,6 @@ var sbCaptureOptions = {
         document.getElementById("sbDetailDownLinkMethod").value = sbCommonUtils.getPref("capture.default.downLinkMethod", 0);
         document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("capture.default.downLinkFilter", "");
         document.getElementById("sbDetailInDepth").value = sbCommonUtils.getPref("capture.default.inDepthLevels", 0);
-        document.getElementById("sbDetailTimeout").value = sbCommonUtils.getPref("capture.default.batchTimeout", 0);
         document.getElementById("sbDetailCharset").value = sbCommonUtils.getPref("capture.default.batchCharset", "");
         // accept button
         document.documentElement.getButton("accept").label = sbCommonUtils.lang("CAPTURE_OK_BUTTON");
@@ -84,7 +83,6 @@ var sbCaptureOptions = {
         this.param.option["downLinkMethod"] = parseInt("0" + document.getElementById("sbDetailDownLinkMethod").value, 10);
         this.param.option["downLinkFilter"] = document.getElementById("sbDetailDownLinkFilter").value;
         this.param.option["inDepth"] = parseInt(document.getElementById("sbDetailInDepth").value, 10);
-        this.param.option["batchTimeout"] = parseInt("0" + document.getElementById("sbDetailTimeout").value, 10);
         this.param.option["batchCharset"] = document.getElementById("sbDetailCharset").value;
         // save to preference
         sbCommonUtils.setPref("capture.default.images", this.param.option["images"]);
@@ -98,12 +96,10 @@ var sbCaptureOptions = {
         sbCommonUtils.setPref("capture.default.downLinkMethod", this.param.option["downLinkMethod"]);
         sbCommonUtils.setPref("capture.default.downLinkFilter", this.param.option["downLinkFilter"]);
         sbCommonUtils.setPref("capture.default.inDepthLevels", this.param.option["inDepth"]);
-        sbCommonUtils.setPref("capture.default.batchTimeout", this.param.option["batchTimeout"]);
         sbCommonUtils.setPref("capture.default.batchCharset", this.param.option["batchCharset"]);
         // post-fix for special cases
         if ( this.param.context === "capture-again-deep" ) {
             this.param.option["inDepth"] = 0;
-            this.param.option["batchTimeout"] = 0;
             this.param.option["batchCharset"] = "";
         }
         if ( this.param.context == "capture-again" ) {

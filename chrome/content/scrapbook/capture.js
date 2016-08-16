@@ -35,7 +35,6 @@ function SB_trace(aMessage) {
  *   option:      object   capture options, replace the default option in saver.js
  *                         Those more relavant here are:
  *                           inDepth:
- *                           batchTimeout: (multi-capture, deep-capture) countdown seconds before next capture
  *                           batchCharset: force using charset to load html, autodetect if not set      
  *                           internalize:
  *   file2Url:    array    the file2URL data in saver.js from last capture,
@@ -176,7 +175,7 @@ function SB_fireNotification(aItem) {
 
 var sbCaptureTask = {
 
-    get INTERVAL() { return gOption["batchTimeout"]; },
+    get INTERVAL() { return parseInt(document.getElementById("sbCaptureTimeout").value, 10); },
     get TREE()     { return document.getElementById("sbCaptureUrlList"); },
     get URL()      { return gURLs[this.index]; },
 

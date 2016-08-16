@@ -53,6 +53,11 @@
 
     <browser type="content" id="sbCaptureBrowser" collapsed="true" disablehistory="true" />
 
+    <hbox id="sbCaptureDefaultSettings">
+        <label value="&sb.detail.linked.timeout;:" />
+        <textbox id="sbCaptureTimeout" type="number" size="3" value="0" min="0" />
+    </hbox>
+
     <checkbox id="sbCaptureFilterToggle" label="&sb.capture.filter;" checked="false" oncommand="sbCaptureTask.toggleFilterBox(event);" />
 
     <vbox id="sbCaptureFilterBox" hidden="true">

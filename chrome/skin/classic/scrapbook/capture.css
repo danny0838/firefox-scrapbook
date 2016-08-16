@@ -4,6 +4,7 @@
 
 #sbCaptureWindow.simple #sbCaptureUrlList,
 #sbCaptureWindow.simple #sbCaptureProgress,
+#sbCaptureWindow.simple #sbCaptureDefaultSettings,
 #sbCaptureWindow.simple #sbCaptureFilterToggle,
 #sbCaptureWindow.simple #sbCaptureSkipButton {
     display: none;
@@ -14,12 +15,13 @@
     height: 600px;
 }
 
-#sbCaptureFilterToggle {
+#sbCaptureDefaultSettings {
     margin-top: 5px;
-    margin-bottom: 7px;
+    margin-bottom: 3px;
 }
 
 #sbCaptureFilterBox {
+    margin: 5px;
     border: 1px solid black;
     padding: 4px;
 }
