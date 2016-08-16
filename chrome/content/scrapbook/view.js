@@ -7,7 +7,7 @@ var gRes;
 function SB_initView() {
     gID = sbCommonUtils.parseURLQuery(document.location.search.substring(1))['id'];
     if ( !gID ) return;
-    var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
+    var win = sbCommonUtils.getBrowserWindow();
     if ( !win ) return;
     gRes = sbCommonUtils.RDF.GetResource(gID ? "urn:scrapbook:item" + gID : "urn:scrapbook:root");
     if ( !sbDataSource.isContainer(gRes) ) {

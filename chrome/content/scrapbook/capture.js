@@ -174,7 +174,7 @@ function SB_suggestName(aURL) {
 
 
 function SB_fireNotification(aItem) {
-    var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
+    var win = sbCommonUtils.getBrowserWindow();
     win.sbContentSaver.notifyCaptureComplete(aItem);
 }
 
@@ -316,7 +316,7 @@ var sbCaptureTask = {
         if ( ++this.index >= gURLs.length ) {
             this.finalize();
         } else {
-            if ( quickly || gURLs[this.index].indexOf("file://") == 0 ) {
+            if ( quickly || gURLs[this.index].startsWith("file:") ) {
                 window.setTimeout(function(){ sbCaptureTask.start(); }, 0);
             } else {
                 this.seconds = this.INTERVAL;
@@ -941,7 +941,7 @@ var sbCrossLinker = {
 
     forceReloadingURL: function(aURL) {
         try {
-            var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
+            var win = sbCommonUtils.getBrowserWindow();
             var nodes = win.gBrowser.mTabContainer.childNodes;
             for ( var i = 0; i < nodes.length; i++ ) {
                 var uri = win.gBrowser.getBrowserForTab(nodes[i]).currentURI.spec;
@@ -1003,7 +1003,7 @@ sbHeaderSniffer.prototype = {
     _headers: null,
 
     checkURL: function() {
-        if (this.URLSpec.indexOf("file://") == 0) {
+        if (this.URLSpec.startsWith("file:")) {
             this.checkLocalFile();
         } else {
             this.checkHttpHeader();

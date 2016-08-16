@@ -892,7 +892,7 @@ sbContentSaverClass.prototype = {
             // general: remove on* attributes
             var attrs = aNode.attributes;
             for (var i = 0; i < attrs.length; i++) {
-                if (attrs[i].name.toLowerCase().indexOf("on") == 0) {
+                if (attrs[i].name.toLowerCase().startsWith("on")) {
                     aNode.removeAttribute(attrs[i].name);
                     i--;  // removing an attribute shrinks the list
                 }
@@ -936,7 +936,7 @@ sbContentSaverClass.prototype = {
         // a special stylesheet used by scrapbook, skip parsing it
         if (aCSS.ownerNode && sbCommonUtils.getSbObjectType(aCSS.ownerNode) == "stylesheet") return "";
         // a special stylesheet used by scrapbook or other addons/programs, skip parsing it
-        if (aCSS.href && aCSS.href.indexOf("chrome://") == 0) return "";
+        if (aCSS.href && aCSS.href.startsWith("chrome:")) return "";
         var content = "";
         // sometimes <link> cannot access remote css
         // and aCSS.cssRules fires an error (instead of returning undefined)...
@@ -1049,7 +1049,7 @@ sbContentSaverClass.prototype = {
         var regex = / url\(\"((?:\\.|[^"])+)\"\)/g;
         aCSSText = aCSSText.replace(regex, function() {
             var dataURL = arguments[1];
-            if (dataURL.indexOf("data:") === 0 && !that.option["saveDataURI"]) return ' url("' + dataURL + '")';
+            if (dataURL.startsWith("data:") && !that.option["saveDataURI"]) return ' url("' + dataURL + '")';
             if ( that.option["internalize"] && that.isInternalized(dataURL) ) return ' url("' + dataURL + '")';
             dataURL = sbCommonUtils.resolveURL(aRefURL, dataURL);
             switch (aType) {
@@ -1099,9 +1099,9 @@ sbContentSaverClass.prototype = {
         var errorHandler = function(ex) {
             // crop to prevent large dataURI masking the exception info, especially dataURIs
             sourceURL = sbCommonUtils.crop(sourceURL, 1024);
-            if (sourceURL.indexOf("file:") === 0) {
+            if (sourceURL.startsWith("file:")) {
                 var msgType = "ERR_FAIL_COPY_FILE";
-            } else if (sourceURL.indexOf("data:") === 0) {
+            } else if (sourceURL.startsWith("data:")) {
                 var msgType = "ERR_FAIL_WRITE_FILE";
             } else {
                 var msgType = "ERR_FAIL_DOWNLOAD_FILE";
@@ -1113,7 +1113,7 @@ sbContentSaverClass.prototype = {
         };
 
         try {
-            if ( sourceURL.indexOf("http:") === 0 || sourceURL.indexOf("https:") === 0 || sourceURL.indexOf("ftp:") === 0 ) {
+            if ( sourceURL.startsWith("http:") || sourceURL.startsWith("https:") || sourceURL.startsWith("ftp:") ) {
                 var targetDir = that.option["internalize"] ? that.option["internalize"].parent : that.contentDir.clone();
                 var hashKey = sbCommonUtils.getUUID();
                 var fileName, isDuplicate;
@@ -1208,7 +1208,7 @@ sbContentSaverClass.prototype = {
                     errorHandler(ex);
                 }
                 return "urn:scrapbook-download:" + hashKey;
-            } else if ( sourceURL.indexOf("file:") === 0 ) {
+            } else if ( sourceURL.startsWith("file:") ) {
                 // if sourceURL is not targeting a file, fail out
                 var sourceFile = sbCommonUtils.convertURLToFile(sourceURL);
                 if (!sourceFile.exists()) throw sourceURL + " does not exist";
@@ -1235,7 +1235,7 @@ sbContentSaverClass.prototype = {
                 // do the copy
                 sourceFile.copyTo(targetDir, fileName);
                 return that.escapeURL(fileName, aEscapeType, true);
-            } else if ( sourceURL.indexOf("data:") === 0 ) {
+            } else if ( sourceURL.startsWith("data:") ) {
                 // download "data:" only if option on
                 if (!that.option["saveDataURI"]) {
                     return "";
@@ -1439,7 +1439,7 @@ sbContentSaverClass.prototype = {
     },
 
     isInternalized: function (aURI) {
-        return aURI.indexOf("://") === -1 && !(aURI.indexOf("data:") === 0);
+        return aURI.indexOf("://") === -1 && !aURI.startsWith("data:");
     },
 
     // escapeType: determine how to escape the result url
@@ -1475,7 +1475,7 @@ sbContentSaverClass.prototype = {
 
     // get the skipped form for specific protocol that we do not handle
     getSkippedURL: function (url) {
-        if (url.indexOf("http:") === 0 || url.indexOf("https:") === 0 || url.indexOf("ftp:") === 0 || url.indexOf("file:") === 0) {
+        if (url.startsWith("http:") || url.startsWith("https:") || url.startsWith("ftp:") || url.startsWith("file:")) {
             return "urn:scrapbook-download-skip:" + url;
         }
         return url;

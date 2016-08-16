@@ -646,8 +646,8 @@ var sbSearchService = {
         if (shouldBuild) {
             this.updateCache(uri + query);
         } else {
-            var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
-            var inTab = (win.content.location.href.indexOf(uri) == 0) ? false : sbCommonUtils.getPref("tabs.searchResult", false);
+            var win = sbCommonUtils.getBrowserWindow();
+            var inTab = (win.content.location.href.startsWith(uri)) ? false : sbCommonUtils.getPref("tabs.searchResult", false);
             sbCommonUtils.loadURL(uri + query, inTab);
             win.focus();
         }

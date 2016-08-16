@@ -912,21 +912,26 @@ var sbCommonUtils = {
     warn: console.warn,
 
     error: console.error,
+
+    // get the main browser window which is the backend of the current window
+    getBrowserWindow: function() {
+        return this.WINDOW.getMostRecentWindow("navigator:browser");
+    },
  
     getFocusedWindow: function() {
-        var window = this.WINDOW.getMostRecentWindow("navigator:browser");
+        var window = this.getBrowserWindow();
         var win = window.document.commandDispatcher.focusedWindow;
         if ( !win || win == window || win instanceof Components.interfaces.nsIDOMChromeWindow ) win = window.content;
         return win;
     },
 
     openManageWindow: function(aRes, aModEltID) {
-        var window = this.WINDOW.getMostRecentWindow("navigator:browser");
+        var window = this.getBrowserWindow();
         window.openDialog("chrome://scrapbook/content/manage.xul", "ScrapBook:Manage", "chrome,centerscreen,all,resizable,dialog=no", aRes, aModEltID);
     },
 
     loadURL: function(aURL, tabbed) {
-        var win = this.WINDOW.getMostRecentWindow("navigator:browser");
+        var win = this.getBrowserWindow();
         if ( !win ) return;
         var browser = win.gBrowser;
         if ( tabbed ) {

@@ -180,7 +180,7 @@ var sbCombineService = {
         sbDataSource.setProperty(newRes, "type", "combine");
         sbDataSource.setProperty(newRes, "source", sbDataSource.getProperty(this.resList[0], "source"));
         var newIcon = sbDataSource.getProperty(this.resList[0], "icon");
-        if ( newIcon.indexOf("resource://scrapbook/data/") == 0 ) newIcon = "resource://scrapbook/data/" + aItem.id + "/" + sbCommonUtils.getFileName(newIcon);
+        if ( newIcon.startsWith("resource://scrapbook/data/") ) newIcon = "resource://scrapbook/data/" + aItem.id + "/" + sbCommonUtils.getFileName(newIcon);
         sbDataSource.setProperty(newRes, "icon", newIcon);
         var newComment = "";
         for ( var i = 0; i < this.resList.length; i++ ) {
@@ -463,7 +463,7 @@ var sbPageCombiner = {
         // a special stylesheet used by scrapbook, skip parsing it
         if (aCSS.ownerNode && sbCommonUtils.getSbObjectType(aCSS.ownerNode) == "stylesheet") return "";
         // a special stylesheet used by scrapbook or other addons/programs, skip parsing it
-        if (aCSS.href && aCSS.href.indexOf("chrome://") == 0) return "";
+        if (aCSS.href && aCSS.href.startsWith("chrome:")) return "";
         var content = this.processCSSRules(aCSS, this.BROWSER.currentURI.spec, "");
         var media = aCSS.media.mediaText;
         if (media) {
@@ -562,7 +562,7 @@ var sbPageCombiner = {
         var regex = / url\(\"((?:\\.|[^"])+)\"\)/g;
         aCSSText = aCSSText.replace(regex, function() {
             var dataURL = arguments[1];
-            if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
+            if (dataURL.startsWith("data:")) return ' url("' + dataURL + '")';
             dataURL = sbCommonUtils.resolveURL(aRefURL, dataURL);
             // redirect the files to the original folder so we can capture them later on (and will rewrite the CSS)
             return ' url("' + dataURL + '")';
@@ -619,7 +619,7 @@ var sbPageCombiner = {
                 if ( aNode.type.toLowerCase() == "image" ) aNode.setAttribute("src", aNode.src);
                 break;
             case "a": case "area": 
-                if ( aNode.href.indexOf("file://") == 0 ) aNode.setAttribute("href", aNode.href);
+                if ( aNode.href.startsWith("file:") ) aNode.setAttribute("href", aNode.href);
                 break;
             case "cite": 
                 if ( aNode.className == "scrapbook-header" ) this.isTargetCombined = true;
