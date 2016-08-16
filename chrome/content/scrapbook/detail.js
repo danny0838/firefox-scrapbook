@@ -83,7 +83,7 @@ var sbCaptureOptions = {
         this.param.option["saveDataUri"] = document.getElementById("sbDetailOptionSaveDataURI").checked;
         this.param.option["downLinkMethod"] = parseInt("0" + document.getElementById("sbDetailDownLinkMethod").value, 10);
         this.param.option["downLinkFilter"] = document.getElementById("sbDetailDownLinkFilter").value;
-        this.param.option["inDepth"] = parseInt("0" + document.getElementById("sbDetailInDepth").value, 10);
+        this.param.option["inDepth"] = parseInt(document.getElementById("sbDetailInDepth").value, 10);
         this.param.option["batchTimeout"] = parseInt("0" + document.getElementById("sbDetailTimeout").value, 10);
         this.param.option["batchCharset"] = document.getElementById("sbDetailCharset").value;
         // save to preference
