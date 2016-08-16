@@ -445,8 +445,13 @@ var sbCaptureTask = {
         this.toggleSkipButton(false);
 
         // start capture
-        var preset = gReferItem ? [gReferItem.id, SB_suggestName(aWindow.location.href), gOption, gFile2URL, gDepths[this.index]] : null;
-        if ( gPreset ) preset = gPreset;
+        if (gPreset) {
+            var preset = gPreset;
+        } else if (gReferItem) {
+            var preset = [gReferItem.id, SB_suggestName(aWindow.location.href), gOption, gFile2URL, gDepths[this.index]];
+        } else {
+            var preset = null;
+        }
         var ret = gContentSaver.captureWindow(aWindow, aAllowPartial, gShowDetail, gResName, gResIdx, preset, gContext, gTitles[this.index]);
         if ( ret ) {
             if ( gContext == "indepth" ) {
