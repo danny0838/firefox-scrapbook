@@ -10,20 +10,20 @@
 <!ENTITY sb.capture.skip "Ignoră">
 <!ENTITY sb.capture.pause "Întrerupe">
 <!ENTITY sb.capture.finish "Renunță">
+<!ENTITY sb.capture.column.address "Adresă">
+<!ENTITY sb.capture.column.title "Denumire">
+<!ENTITY sb.capture.column.status "Stare">
 <!ENTITY sb.capture.checkSelection "Check selected items">
 <!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Filtrare">
-<!ENTITY sb.capture.filter.column.one "Afișează/ascunde">
-<!ENTITY sb.capture.filter.column.two "Filtrare (expresie regulată)">
+<!ENTITY sb.capture.filter.column.rule "Afișează/ascunde">
+<!ENTITY sb.capture.filter.column.content "Filtrare (expresie regulată)">
 <!ENTITY sb.capture.filter.accept "Acceptă">
 <!ENTITY sb.capture.filter.accept.tt "Modifică sau editează valoarea">
 <!ENTITY sb.capture.filter.cancel "Renunță">
 <!ENTITY sb.capture.filter.cancel.tt "Abandonează editarea">
 <!ENTITY sb.capture.filter.delete "Șterge">
 <!ENTITY sb.capture.filter.delete.tt "Elimină filtrul din listă">
-<!ENTITY sbp.capture.column.one "Adresă">
-<!ENTITY sbp.capture.column.two "Denumire">
-<!ENTITY sbp.capture.column.three "Stare">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Adăugați elemente din arbore prin glisare și fixare, în ordinea în care doriți să le combinați. Puteți glisa și fixa mai multe articole o dată.">
@@ -49,10 +49,8 @@
 <!ENTITY sb.detail.option.frames "Frames">
 <!ENTITY sb.detail.option.styles "Stiluri">
 <!ENTITY sb.detail.option.scripts "Scripts">
-<!ENTITY sb.detail.option.keepLink "Keep linking to the source for not-captured objects">
-<!ENTITY sb.detail.option.saveDataURI "Save data URI as file">
-<!ENTITY sb.detail.option.rewriteStyles "Reorganize Styles">
-<!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
+<!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.linked.file "Descărcare fișiere legate">
 <!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
 <!ENTITY sb.detail.linked.file.method1 "Match URL file extension">

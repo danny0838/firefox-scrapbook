@@ -109,7 +109,14 @@ var sbTreeHandler = {
     onDblClick: function(aEvent, aType) {
         if ( aEvent.originalTarget.localName != "treechildren" || aEvent.button != 0 ) return;
         if ( !(aType < 2 || sbCommonUtils.getPref("ui.sidebarManage", false)) ) return;
-        if ( this.TREE.view.isContainer(this.TREE.currentIndex) ) return;
+        if ( sbDataSource.getProperty(this.resource, "type") == "folder" ) return;
+        // manage window:
+        // left double click on an item => open
+        if ( this.TREE.view.isContainer(this.TREE.currentIndex) ) {
+            // toggle the non-folder container to nullify the default toggle behavior
+            // (preventDefault doesn't work here)
+            this.toggleFolder(this.TREE.currentIndex);
+        }
         var shortcut = sbShortcut.fromEvent(aEvent);
         sbController.open(this.resource, shortcut.accelKey || shortcut.shiftKey);
     },
@@ -463,10 +470,6 @@ var sbTreeHandler = {
             showDetail: showDetail,
             resName: ip[0],
             resIdx: ip[1],
-            referItem: null,
-            option: null,
-            file2Url: null,
-            preset: null,
             titles: [title],
             context: "link",
         };

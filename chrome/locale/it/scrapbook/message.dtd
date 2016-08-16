@@ -10,20 +10,20 @@
 <!ENTITY sb.capture.skip "Salta">
 <!ENTITY sb.capture.pause "Pausa">
 <!ENTITY sb.capture.finish "Annulla">
+<!ENTITY sb.capture.column.address "URL">
+<!ENTITY sb.capture.column.title "Titolo">
+<!ENTITY sb.capture.column.status "Stato">
 <!ENTITY sb.capture.checkSelection "Check selected items">
 <!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Filtra">
-<!ENTITY sb.capture.filter.column.one "Mostra/nascondi">
-<!ENTITY sb.capture.filter.column.two "Filtra (espressione regolare)">
+<!ENTITY sb.capture.filter.column.rule "Mostra/nascondi">
+<!ENTITY sb.capture.filter.column.content "Filtra (espressione regolare)">
 <!ENTITY sb.capture.filter.accept "Accetta">
 <!ENTITY sb.capture.filter.accept.tt "Sostituisci oppure modifica il valore">
 <!ENTITY sb.capture.filter.cancel "Annulla">
 <!ENTITY sb.capture.filter.cancel.tt "Annulla la modifica">
 <!ENTITY sb.capture.filter.delete "Elimina">
 <!ENTITY sb.capture.filter.delete.tt "Elimina il filtro dalla lista">
-<!ENTITY sbp.capture.column.one "URL">
-<!ENTITY sbp.capture.column.two "Titolo">
-<!ENTITY sbp.capture.column.three "Stato">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Aggiungere elementi da unire tramite trascinamento e rilascio dal diagramma delle cartelle. È possibile trascinare e rilasciare molteplici elementi contemporaneamente">
@@ -49,10 +49,8 @@
 <!ENTITY sb.detail.option.frames "Frames">
 <!ENTITY sb.detail.option.styles "Stili">
 <!ENTITY sb.detail.option.scripts "Scripts">
-<!ENTITY sb.detail.option.keepLink "Keep linking to the source for not-captured objects">
-<!ENTITY sb.detail.option.saveDataURI "Save data URI as file">
-<!ENTITY sb.detail.option.rewriteStyles "Reorganize Styles">
-<!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
+<!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.linked.file "File da scaricare contenuti nei link delle pagine web da catturare">
 <!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
 <!ENTITY sb.detail.linked.file.method1 "Match URL file extension">

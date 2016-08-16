@@ -10,20 +10,20 @@
 <!ENTITY sb.capture.skip "略過">
 <!ENTITY sb.capture.pause "暫停">
 <!ENTITY sb.capture.finish "取消">
+<!ENTITY sb.capture.column.address "位址">
+<!ENTITY sb.capture.column.title "標題">
+<!ENTITY sb.capture.column.status "狀態">
 <!ENTITY sb.capture.checkSelection "勾選選取項目">
 <!ENTITY sb.capture.uncheckSelection "取消勾選選取項目">
 <!ENTITY sb.capture.filter "過濾">
-<!ENTITY sb.capture.filter.column.one "顯示/隱藏">
-<!ENTITY sb.capture.filter.column.two "篩選條件（使用規則運算式）">
+<!ENTITY sb.capture.filter.column.rule "顯示/隱藏">
+<!ENTITY sb.capture.filter.column.content "篩選條件（使用規則運算式）">
 <!ENTITY sb.capture.filter.accept "確認">
 <!ENTITY sb.capture.filter.accept.tt "變更或編輯數值">
 <!ENTITY sb.capture.filter.cancel "取消">
 <!ENTITY sb.capture.filter.cancel.tt "中斷編輯">
 <!ENTITY sb.capture.filter.delete "刪除">
 <!ENTITY sb.capture.filter.delete.tt "從清單移除過濾條件">
-<!ENTITY sbp.capture.column.one "位址">
-<!ENTITY sbp.capture.column.two "標題">
-<!ENTITY sbp.capture.column.three "狀態">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "請以滑鼠將要合併的檔案從樹狀列表中拖曳至此，並依合併順序排列。一次可以拖曳多個檔案。">
@@ -49,15 +49,13 @@
 <!ENTITY sb.detail.option.frames "頁框">
 <!ENTITY sb.detail.option.styles "樣式">
 <!ENTITY sb.detail.option.scripts "動態腳本">
-<!ENTITY sb.detail.option.keepLink "不擷取的物件保持連往原址">
-<!ENTITY sb.detail.option.saveDataURI "將 data URI 儲存成檔案">
-<!ENTITY sb.detail.option.rewriteStyles "重組樣式表">
-<!ENTITY sb.detail.option.asHtml "非 HTML 檔案擷取呈現時的 HTML">
+<!ENTITY sb.detail.option.saveDataUri "將 data URI 儲存成檔案">
+<!ENTITY sb.detail.option.fileAsHtml "非 HTML 檔案擷取呈現時的 HTML">
 <!ENTITY sb.detail.linked.file "下載連結檔案">
 <!ENTITY sb.detail.linked.file.method0 "停用下載連結檔案">
 <!ENTITY sb.detail.linked.file.method1 "比對網址副檔名">
 <!ENTITY sb.detail.linked.file.method2 "比對 HTTP 標頭及網址副檔名">
-<!ENTITY sb.detail.linked.file.desc "下載完整副檔名符合任一行正規表示式的檔案。略過 &quot;#&quot; 開頭的行。">
+<!ENTITY sb.detail.linked.file.desc "下載完整副檔名符合任一行規則運算式的檔案。略過 &quot;#&quot; 開頭的行。">
 <!ENTITY sb.detail.linked.file.reset "還原預設值">
 <!ENTITY sb.detail.linked.page "多層擷取">
 <!ENTITY sb.detail.linked.page.depth "擷取連結層數">

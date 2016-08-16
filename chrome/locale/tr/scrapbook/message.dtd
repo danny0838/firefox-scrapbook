@@ -10,20 +10,20 @@
 <!ENTITY sb.capture.skip "Atla">
 <!ENTITY sb.capture.pause "Duraklat">
 <!ENTITY sb.capture.finish "Cancel">
+<!ENTITY sb.capture.column.address "URL">
+<!ENTITY sb.capture.column.title "Title">
+<!ENTITY sb.capture.column.status "Status">
 <!ENTITY sb.capture.checkSelection "Check selected items">
 <!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Filtre">
-<!ENTITY sb.capture.filter.column.one "Show/Hide">
-<!ENTITY sb.capture.filter.column.two "Filter (regular expression)">
+<!ENTITY sb.capture.filter.column.rule "Show/Hide">
+<!ENTITY sb.capture.filter.column.content "Filter (regular expression)">
 <!ENTITY sb.capture.filter.accept "Accept">
 <!ENTITY sb.capture.filter.accept.tt "change or edit value">
 <!ENTITY sb.capture.filter.cancel "Cancel">
 <!ENTITY sb.capture.filter.cancel.tt "abort editing">
 <!ENTITY sb.capture.filter.delete "Delete">
 <!ENTITY sb.capture.filter.delete.tt "remove filter from the list">
-<!ENTITY sbp.capture.column.one "URL">
-<!ENTITY sbp.capture.column.two "Title">
-<!ENTITY sbp.capture.column.three "Status">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Öğeleri ağaç görünümünden, birleştirmek istediğiniz sırayla, sürükleyip bırakarak ekleyin. Tek seferde birden çok öğeyi sürükleyip bırakabilirsiniz.">
@@ -49,10 +49,8 @@
 <!ENTITY sb.detail.option.frames "Frames">
 <!ENTITY sb.detail.option.styles "Stiller">
 <!ENTITY sb.detail.option.scripts "Scripts">
-<!ENTITY sb.detail.option.keepLink "Keep linking to the source for not-captured objects">
-<!ENTITY sb.detail.option.saveDataURI "Save data URI as file">
-<!ENTITY sb.detail.option.rewriteStyles "Reorganize Styles">
-<!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
+<!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.linked.file "Bağlantılı dosyaları indir">
 <!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
 <!ENTITY sb.detail.linked.file.method1 "Match URL file extension">

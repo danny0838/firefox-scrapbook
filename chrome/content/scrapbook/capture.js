@@ -1,18 +1,18 @@
 
 var gContentSaver = new sbContentSaverClass();
 var gURLs = [];
+var gTitles = [];
 var gDepths = [];
 var gRefURL = "";
 var gShowDetail = false;
 var gResName = "";
 var gResIdx = 0;
 var gReferItem = null;
-var gOption = {};
+var gOption = gContentSaver.option;
 var gFile2URL = {};
 var gURL2Name = {};
-var gPreset = [];
+var gPreset = null;
 var gContext = "";
-var gTitles = [];
 
 
 
@@ -31,28 +31,11 @@ function SB_trace(aMessage) {
  *   resName:     string   the resource name to add
  *   resIdx:      string   the index to insert resource
  *   referItem:   string   (deep-capture, re-capture) the refer item,
-                           determine where to save file and to set resource property
- *   option:      object   capture options, such as:
-                             isPartial:
-                             images:
-                             media:
-                             fonts:
-                             frames:
-                             styles:
-                             script:
-                             asHtml:
-                             forceUtf8:
-                             rewriteStyles:
-                             keepLink:
-                             dlimg:
-                             dlsnd:
-                             dlmov:
-                             dlarc:
-                             custom:
-                             inDepth:
-                             inDepthTimeout: (multi-capture, deep-capture) countdown seconds before next capture
-                             inDepthCharset: force using charset to load html, autodetect if not set      
-                             internalize:
+ *                         determine where to save file and to set resource property
+ *   option:      object   capture options, replace the default option in saver.js
+ *                         Those more relavant here are:
+ *                           inDepth:
+ *                           internalize:
  *   file2Url:    array    the file2URL data in saver.js from last capture,
  *                         will then pass to saver.js for next capture
  *   preset:      array    (re-capture) the preset data,
@@ -107,57 +90,73 @@ function SB_initCapture() {
     }
 
     var myURLs = data.urls;
-    gRefURL = data.refUrl;
-    gShowDetail = data.showDetail;
-    gResName = data.resName;
-    gResIdx = data.resIdx;
-    gReferItem = data.referItem;
-    gOption = data.option;
-    gFile2URL = data.file2Url;
-    gPreset = data.preset;
-    gTitles = data.titles;
-    gContext = data.context;
+    gTitles = data.titles || gTitles;
+    gRefURL = data.refUrl || gRefURL;
+    gShowDetail = !!data.showDetail;
+    gResName = data.resName || gResName;
+    gResIdx = data.resIdx || gResIdx;
+    gReferItem = data.referItem || gReferItem;
+    gOption = data.option ? sbCommonUtils.extendObject(gOption, data.option) : gOption;
+    gFile2URL = data.file2Url || gFile2URL;
+    gPreset = data.preset || gPreset;
+    gContext = data.context || gContext;
 
+    // handle specific contexts
     if ( gContext == "indepth" ) {
         gURL2Name[gReferItem.source] = "index";
     } else if ( gContext == "capture-again-deep" ) {
+        myURLs = null;
         var contDir = sbCommonUtils.getContentDir(gPreset[0]);
         // read sb-file2url.txt => gFile2URL for later usage
-        var file = contDir.clone();
-        file.append("sb-file2url.txt");
-        if ( !file.exists() ) { sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_FILE2URL")); window.close(); }
-        var lines = sbCommonUtils.readFile(file, "UTF-8").split("\n");
-        for ( var i = 0; i < lines.length; i++ ) {
-            var arr = lines[i].split("\t");
-            if ( arr.length == 2 ) gFile2URL[arr[0]] = arr[1];
+        var file = contDir.clone(); file.append("sb-file2url.txt");
+        if ( !(file.exists() && file.isFile()) ) {
+            sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_FILE2URL"));
+            window.close();
         }
-        // read sb-url2name.txt => gURL2Name and search for source URL of the current page
-        file = contDir.clone();
-        file.append("sb-url2name.txt");
-        if ( !file.exists() ) { sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_URL2NAME")); window.close(); }
-        lines = sbCommonUtils.readFile(file, "UTF-8").split("\n");
-        for ( i = 0; i < lines.length; i++ ) {
-            var arr = lines[i].split("\t");
-            if ( arr.length == 2 ) {
-                gURL2Name[arr[0]] = arr[1];
-                if ( arr[1] == gPreset[1] ) myURLs = [arr[0]];
+        sbCommonUtils.readFile(file, "UTF-8").split("\n").forEach(function (line) {
+            var [file, url] = line.split("\t", 2);
+            if (url) {
+                gFile2URL[file] = url;
             }
-        }
+        });
         gPreset[3] = gFile2URL;
-        if ( !myURLs[0] ) { sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_SOURCE_URL", gPreset[1] + ".html.")); window.close(); }
+        // read sb-url2name.txt => gURL2Name and search for source URL of the current page
+        var file = contDir.clone(); file.append("sb-url2name.txt");
+        if ( !(file.exists() && file.isFile()) ) {
+            sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_URL2NAME"));
+            window.close();
+        }
+        sbCommonUtils.readFile(file, "UTF-8").split("\n").forEach(function (line) {
+            var [url, docName] = line.split("\t", 2);
+            if (docName) {
+                gURL2Name[url] = docName;
+                if ( docName == gPreset[1] ) myURLs = [url];
+            }
+        });
+        if ( !myURLs ) {
+            sbCommonUtils.alert(sbCommonUtils.lang("ERR_NO_SOURCE_URL", gPreset[1] + ".html."));
+            window.close();
+        }
     }
-    if ( !gOption ) gOption = {};
-    if ( !("script" in gOption ) ) gOption["script"] = false;
-    if ( !("images" in gOption ) ) gOption["images"] = true;
-    if ( !("inDepthTimeout" in gOption) ) gOption["inDepthTimeout"] = 0;
+
+    // use passed timeout and charset (mostly for indepth)
+    if (gOption["batchTimeout"]) {
+        document.getElementById("sbCaptureTimeout").value = gOption["batchTimeout"];
+    }
+    if (gOption["batchCharset"]) {
+        document.getElementById("sbCaptureCharset").value = gOption["batchCharset"];
+    }
+
+    // start capture
     sbInvisibleBrowser.init();
     sbCaptureTask.init(myURLs);
-    // link: 1 or more item (> 1 only for multiple capture)
+    // link: 1 or more item (> 1 for multiple capture)
     // capture-again, capture-again-deep: 1 item
-    // in-depth: 1 or more item, but it's possible that new items be added if depth > 2
-    if ( gURLs.length == 1 && gContext != "indepth" ) {
+    // in-depth: 1 or more item, but it's possible that new items be added if depth >= 2
+    if ( gURLs.length == 1 && gContext != "indepth" && !gShowDetail ) {
         sbCaptureTask.start();
     } else {
+        document.getElementById("sbCaptureWindow").className = "complex";
         sbCaptureTask.seconds = -1;
         sbCaptureTask.toggleStartPause(false);
     }
@@ -174,7 +173,7 @@ function SB_suggestName(aURL) {
 
 
 function SB_fireNotification(aItem) {
-    var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
+    var win = sbCommonUtils.getBrowserWindow();
     win.sbContentSaver.notifyCaptureComplete(aItem);
 }
 
@@ -183,13 +182,13 @@ function SB_fireNotification(aItem) {
 
 var sbCaptureTask = {
 
-    get INTERVAL() { return gOption["inDepthTimeout"]; },
-    get TREE()     { return document.getElementById("sbpURLList"); },
+    get INTERVAL() { return parseInt(document.getElementById("sbCaptureTimeout").value, 10); },
+    get CHARSET()  { return document.getElementById("sbCaptureCharset").value; },
+    get TREE()     { return document.getElementById("sbCaptureUrlList"); },
     get URL()      { return gURLs[this.index]; },
 
     index: 0,
-    isLocal: false,
-    refreshHash: null,
+    redirectHash: null,
     sniffer: null,
     seconds: 3,
     timerID: 0,
@@ -197,16 +196,10 @@ var sbCaptureTask = {
     failed: 0,
 
     init: function(myURLs) {
-        if ( gContext != "indepth" && myURLs.length == 1 ) {
-            this.TREE.collapsed = true;
-            document.getElementById("sbpCaptureProgress").hidden = true;
-            document.getElementById("sbpChkFilter").hidden = true;
-            document.getElementById("sbCaptureSkipButton").hidden = true;
-        } else {
-            document.getElementById("sbCaptureWindow").className = "complex";
+        var depth = (gContext == "indepth" ? 1 : 0);
+        for ( var i = 0, I = myURLs.length; i < I; i++ ) {
+            this.add(myURLs[i], depth, gTitles[i]);
         }
-        if (!gTitles) gTitles = [];
-        for ( var i = 0; i < myURLs.length; i++ ) this.add(myURLs[i], 1, gTitles[i]);
     },
 
     add: function(aURL, aDepth, aTitle) {
@@ -221,36 +214,30 @@ var sbCaptureTask = {
         }
         gURLs.push(aURL);
         gDepths.push(aDepth);
-        try {
-            var aObj = this.TREE;
-            for (var aI=0; aI < aObj.childNodes.length; aI++) {
-                if (aObj.childNodes[aI].nodeName == "treechildren") {
-                    var aTchild = aObj.childNodes[aI];
-                    var aTrow = document.createElement("treerow");
-                    var aTcell0 = document.createElement("treecell");
-                    aTcell0.setAttribute("value", sbpFilter.filter(aURL));
-                    aTrow.appendChild(aTcell0);
-                    var aTcell1 = document.createElement("treecell");
-                    aTcell1.setAttribute("label", aDepth + " [" + (gURLs.length - 1) + "] " + aURL);
-                    aTrow.appendChild(aTcell1);
-                    var aTcell2 = document.createElement("treecell");
-                    aTcell2.setAttribute("label", aTitle || "");
-                    aTrow.appendChild(aTcell2);
-                    var aTitem = document.createElement("treeitem");
-                    aTitem.appendChild(aTrow);
-                    aTchild.appendChild(aTitem);
-                }
-            }
-        } catch(aEx) { sbCommonUtils.alert("add\n---\n"+aEx); }
+        var wrapper = this.TREE.childNodes[1];
+        var item = document.createElement("treeitem");
+        wrapper.appendChild(item);
+        var row = document.createElement("treerow");
+        item.appendChild(row);
+        var cell0 = document.createElement("treecell");
+        cell0.setAttribute("value", sbCaptureFilter.filter(aURL));
+        row.appendChild(cell0);
+        var cell1 = document.createElement("treecell");
+        cell1.setAttribute("label", aDepth + " [" + (gURLs.length - 1) + "] " + aURL);
+        row.appendChild(cell1);
+        var cell2 = document.createElement("treecell");
+        cell2.setAttribute("label", aTitle || "");
+        row.appendChild(cell2);
+        var cell3 = document.createElement("treecell");
+        row.appendChild(cell3);
     },
 
     // start capture
-    start: function(aOverriddenURL) {
+    start: function(aRedirectURL) {
         this.seconds = -1;
 
-        // Resume "pause" and "skip" buttons, which are temporarily diasbled
+        // Resume "skip" button, which is temporarily diasbled
         // when a capture is already executed (rather than waiting for connection)
-        document.getElementById("sbCapturePauseButton").disabled = false;
         this.toggleSkipButton(true);
 
         // mark the item we are currently on
@@ -258,80 +245,89 @@ var sbCaptureTask = {
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[0].setAttribute("properties", "disabled");
         var checkstate = this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[0].getAttribute("value");
         if ( checkstate.match("false") ) {
-            document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
+            document.getElementById("sbCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
             this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "finished");
             this.next(true);
             return;
         }
-        this.refreshHash = {};
-        var url = aOverriddenURL || gURLs[this.index];
-        SB_trace(sbCommonUtils.lang("CONNECT", url));
+
+        // manage redirect and fail out on circular redirect
+        if (!aRedirectURL) {
+            var url = gURLs[this.index];
+            this.redirectHash = {};
+        } else {
+            if (!this.redirectHash[aRedirectURL]) {
+                var url = aRedirectURL;
+            } else {
+                var errMsg = "Circular redirect";
+                this.updateStatus(errMsg);
+                this.fail(errMsg);
+                return;
+            }
+        }
+        this.redirectHash[url] = true;
 
         // if active, start connection and capture
+        SB_trace(sbCommonUtils.lang("CONNECT", url));
         if (this.isActive()) {
             this.sniffer = new sbHeaderSniffer(url, gRefURL);
             this.sniffer.checkURL();
         }
     },
 
+    updateStatus: function(aStatus) {
+        this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[3].setAttribute("label", aStatus);
+    },
+
     // when a capture completes successfully
     succeed: function() {
-        document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
-        if (!this.isLocal) {
-            var statusParts = this.sniffer.getStatus();
-            var status = (statusParts[0] === false) ? "???" : statusParts.join(" ");
-        } else {
-            var status = "OK";
-        }
-        var treecell = document.createElement("treecell");
-        treecell.setAttribute("label", status);
-        treecell.setAttribute("properties", "success");
-        this.TREE.childNodes[1].childNodes[this.index].childNodes[0].appendChild(treecell);
+        document.getElementById("sbCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "finished");
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[2].setAttribute("label", gTitles[this.index] || "");
+        this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[3].setAttribute("properties", "success");
+        if (!this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[3].hasAttribute("label")) {
+            this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[3].setAttribute("label", "OK");
+        }
         this.next(false);
     },
 
     // when a capture fails
     fail: function(aErrorMsg) {
-        document.getElementById("sbpCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
+        this.failed++;
+        document.getElementById("sbCaptureProgress").value = (this.index+1)+" \/ "+gURLs.length;
         if ( aErrorMsg ) SB_trace(aErrorMsg);
-        if (!this.isLocal) {
-            var statusParts = this.sniffer.getStatus();
-            var status = (statusParts[0] === false) ? "???" : statusParts.join(" ");
-        } else {
-            var status = "ERROR";
-        }
-        var treecell = document.createElement("treecell");
-        treecell.setAttribute("label", status);
-        treecell.setAttribute("properties", "failed");
-        this.TREE.childNodes[1].childNodes[this.index].childNodes[0].appendChild(treecell);
         this.TREE.childNodes[1].childNodes[this.index].childNodes[0].setAttribute("properties", "finished");
+        this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[3].setAttribute("properties", "failed");
+        if (!this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[3].hasAttribute("label")) {
+            this.TREE.childNodes[1].childNodes[this.index].childNodes[0].childNodes[3].setAttribute("label", "ERROR");
+        }
         this.next(true);
     },
 
     // press "skip" button
     // shift to next item
     next: function(quickly) {
-        if ( ++this.index >= gURLs.length ) {
-            this.finalize();
-        } else {
-            if ( quickly || gURLs[this.index].indexOf("file://") == 0 ) {
+        if ( ++this.index < gURLs.length ) {
+            if ( quickly || this.URL.startsWith("file:") ) {
                 window.setTimeout(function(){ sbCaptureTask.start(); }, 0);
             } else {
                 this.seconds = this.INTERVAL;
                 sbCaptureTask.countDown();
             }
+        } else {
+            this.finalize();
         }
     },
 
     countDown: function() {
         SB_trace(sbCommonUtils.lang("WAITING", sbCaptureTask.seconds));
-        if ( this.seconds > 0 ) {
-            this.seconds--;
-            this.timerID = window.setTimeout(function(){ sbCaptureTask.countDown(); }, 1000);
-        } else {
-            this.timerID = window.setTimeout(function(){ sbCaptureTask.start(); }, 0);
+        if (document.getElementById("sbCaptureStartButton").hidden) {
+            if ( this.seconds > 0 ) {
+                this.seconds--;
+                this.timerID = window.setTimeout(function(){ sbCaptureTask.countDown(); }, 1000);
+            } else {
+                this.timerID = window.setTimeout(function(){ sbCaptureTask.start(); }, 0);
+            }
         }
     },
 
@@ -343,6 +339,7 @@ var sbCaptureTask = {
         document.getElementById("sbCaptureCancelButton").hidden = true;
         document.getElementById("sbCaptureFinishButton").hidden = false;
         document.getElementById("sbCaptureSkipButton").disabled = true;
+        window.clearTimeout(this.timerID);
         if ( gContext == "indepth" ) {
             sbCrossLinker.invoke();
         } else {
@@ -392,7 +389,7 @@ var sbCaptureTask = {
         document.getElementById("sbCaptureSkipButton").disabled = true;
 
         if (wasActive) {
-            this.index = gURLs.length - 1; // mark to finalize on next capture
+            this.next = this.finalize; // mark to finalize on next capture
         } else {
             this.finalize();
         }
@@ -406,7 +403,7 @@ var sbCaptureTask = {
         //Blendet die Filterdetails an/aus
 
         var tfbChecked = true;
-        tfbChecked = document.getElementById("sbpChkFilter").checked;
+        tfbChecked = document.getElementById("sbCaptureFilterToggle").checked;
         if ( tfbEvent ) {
             if ( tfbEvent.button == 0 ) {
                 if ( tfbChecked ) {
@@ -416,11 +413,10 @@ var sbCaptureTask = {
                 }
             }
         }
-        document.getElementById("sbpFilterBox").hidden = !tfbChecked;
+        document.getElementById("sbCaptureFilterBox").hidden = !tfbChecked;
     },
 
     toggleStartPause: function(allowPause) {
-        document.getElementById("sbCapturePauseButton").disabled = false;
         document.getElementById("sbCapturePauseButton").hidden = !allowPause;
         document.getElementById("sbCaptureStartButton").hidden =  allowPause;
         document.getElementById("sbCaptureTextbox").disabled = !allowPause;
@@ -448,195 +444,180 @@ var sbCaptureTask = {
         return ret;
     },
 
+    _captureWindow: function(aWindow, aAllowPartial) {
+        // update info
+        SB_trace(sbCommonUtils.lang("CAPTURE_START"));
+
+        // update UI
+        this.toggleSkipButton(false);
+
+        // start capture
+        if (gPreset) {
+            var preset = gPreset;
+        } else if (gReferItem) {
+            var preset = [gReferItem.id, SB_suggestName(aWindow.location.href), gOption, gFile2URL, gDepths[this.index]];
+        } else {
+            var preset = [];
+        }
+        // pass current timeout and charset to saver so that a potential indepth capture can use them
+        preset[2] = preset[2] || {};
+        preset[2]["batchTimeout"] = sbCaptureTask.INTERVAL;
+        preset[2]["batchCharset"] = sbCaptureTask.CHARSET;
+
+        var ret = gContentSaver.captureWindow(aWindow, aAllowPartial, gShowDetail, gResName, gResIdx, preset, gContext, gTitles[this.index]);
+        if ( ret ) {
+            if ( gContext == "indepth" ) {
+                gURL2Name[this.URL] = ret[0];
+                gFile2URL = ret[1];
+            } else if ( gContext == "capture-again-deep" ) {
+                gFile2URL = ret[1];
+                var contDir = sbCommonUtils.getContentDir(gPreset[0]);
+                var txtFile = contDir.clone();
+                txtFile.append("sb-file2url.txt");
+                var txt = "";
+                for ( var f in gFile2URL ) txt += f + "\t" + gFile2URL[f] + "\n";
+                sbCommonUtils.writeFile(txtFile, txt, "UTF-8");
+            }
+            gTitles[this.index] = ret[2];
+        } else {
+            if ( gShowDetail ) window.close();
+            SB_trace(sbCommonUtils.lang("CAPTURE_ABORT"));
+            this.fail("");
+        }
+    },
 };
 
-var sbpFilter = {
-    sfLimitToDomain: 0,
-    sfRegularExpression: 0,
-    sfFilter: [],
-    sfFilterIncExc: [],
-    sfFilterEdit: -1,            //enthält den Index des zu editierenden Filters
+var sbCaptureFilter = {
+    filterList: [],
+    ruleList: [],
+    filterEdited: -1,  // index of the audited filter
 
+    // Add a new filter or modify an existing one
     add: function() {
-        //Nimmt einen neuen Filter auf oder ändert einen bestehenden
-        //
-        //Ablauf
-        //1. Filterliste durchsuchen nach identischem Eintrag
-        //2. Filter in Tabelle aufnehmen, sofern noch nicht vorhanden
-        //3. Selektion aktualisieren
-        //4. Vorgang beendet
-
-        var aFilterVorhanden = -1;
-        var aFilterNeu = document.getElementById("sbpTextboxFilter").value;
-        var aFilterIncExcNeu = document.getElementById("sbpMnuIncExc").label;
-        //1. Filterliste durchsuchen nach identischem Eintrag
-        if ( this.sfFilterEdit == -1 ) {
-            for ( var aI=0; aI<this.sfFilter.length; aI++ ) {
-                if ( this.sfFilter[aI].match(aFilterNeu) ) {
-                    aFilterVorhanden = aI;
-                    aI = this.sfFilter.length;
-                }
+        var filterDuplIdx = -1;
+        var filterNew = document.getElementById("sbCaptureFilterInput").value;
+        var ruleNew = document.getElementById("sbCaptureFilterRule").label;
+        // 1. Confirm the filter is valid
+        try {
+            new RegExp(filterNew);
+        } catch(ex) {
+            alert(sbCommonUtils.lang("ERR_INAVLID_REGEXP", filterNew));
+            return;
+        }
+        // 2. Browse the filter list for an identical entry
+        if ( this.filterEdited == -1 ) {
+            filterDuplIdx = this.filterList.indexOf(filterNew);
+        }
+        // 3. Update filter list
+        if ( filterDuplIdx == -1 ) {
+            var wrapper = document.getElementById("sbCaptureFilter").childNodes[1];
+            if ( this.filterEdited == -1 ) {
+                // add a new filter
+                var item = document.createElement("treeitem");
+                wrapper.appendChild(item);
+                var row = document.createElement("treerow");
+                item.appendChild(row);
+                var cell0 = document.createElement("treecell");
+                cell0.setAttribute("label", ruleNew);
+                row.appendChild(cell0);
+                var cell1 = document.createElement("treecell");
+                cell1.setAttribute("label", filterNew);
+                row.appendChild(cell1);
+                this.ruleList.push(ruleNew);
+                this.filterList.push(filterNew);
+            } else {
+                // update an existing filter
+                wrapper.childNodes[this.filterEdited].childNodes[0].childNodes[0].setAttribute("label", ruleNew);
+                wrapper.childNodes[this.filterEdited].childNodes[0].childNodes[1].setAttribute("label", filterNew);
+                this.ruleList[this.filterEdited] = ruleNew;
+                this.filterList[this.filterEdited] = filterNew;
+                this.filterEdited = -1;
             }
         }
-        //2. Filter in Tabelle aufnehmen, sofern noch nicht vorhanden
-        if ( aFilterVorhanden == -1 ) {
-            try {
-                var aTree = document.getElementById("sbpTreeFilter");
-                for ( var aI=0; aI<aTree.childNodes.length; aI++ ) {
-                    if ( aTree.childNodes[aI].nodeName == "treechildren" ) {
-                        if ( this.sfFilterEdit == -1 ) {
-                            this.sfFilterIncExc.push(aFilterIncExcNeu);
-                            this.sfFilter.push(aFilterNeu);
-                            var aTchild = aTree.childNodes[aI];
-                            var aTrow = document.createElement("treerow");
-                            var aTcell0 = document.createElement("treecell");
-                            aTcell0.setAttribute("label", aFilterIncExcNeu);
-                            aTrow.appendChild(aTcell0);
-                            var aTcell1 = document.createElement("treecell");
-                            aTcell1.setAttribute("label", aFilterNeu);
-                            aTrow.appendChild(aTcell1);
-                            var aTitem = document.createElement("treeitem");
-                            aTitem.appendChild(aTrow);
-                            aTchild.appendChild(aTitem);
-                        } else {
-                            aTree.childNodes[aI].childNodes[0].childNodes[this.sfFilterEdit].childNodes[0].setAttribute("label", aFilterIncExcNeu);
-                            aTree.childNodes[aI].childNodes[0].childNodes[this.sfFilterEdit].childNodes[1].setAttribute("label", aFilterNeu);
-                            this.sfFilterIncExc[this.sfFilterEdit] = aFilterIncExcNeu;
-                            this.sfFilter[this.sfFilterEdit] = aFilterNeu;
-                            this.sfFilterEdit = -1;
-                        }
-                    }
-                }
-            } catch(aEx) {
-                sbCommonUtils.alert("This shouldn't happen\n---\n"+aEx);
-            }
-        }
-        //3. Selektion aktualisieren
+        // 4. Update selection
         this.updateSelection();
-        //4. Vorgang beendet
-        document.getElementById("sbpTextboxFilter").value = "";
-        document.getElementById("sbpBtnAccept").disabled = true;
-        document.getElementById("sbpBtnCancel").disabled = true;
-        document.getElementById("sbpBtnDel").disabled = true;
+        // 5. Finalize
+        document.getElementById("sbCaptureFilterInput").value = "";
+        document.getElementById("sbCaptureFilterAccept").disabled = true;
+        document.getElementById("sbCaptureFilterCancel").disabled = true;
+        document.getElementById("sbCaptureFilterDelete").disabled = true;
     },
 
+    // Cancel edit of the selected entry
     cancel: function() {
-        //Das Editieren des ausgewählten Eintrags wird vom Benutzer abgebrochen
-
-        this.sfFilterEdit = -1;
-        document.getElementById("sbpTextboxFilter").value = "";
-        document.getElementById("sbpBtnAccept").disabled = true;
-        document.getElementById("sbpBtnCancel").disabled = true;
-        document.getElementById("sbpBtnDel").disabled = true;
+        this.filterEdited = -1;
+        document.getElementById("sbCaptureFilterInput").value = "";
+        document.getElementById("sbCaptureFilterAccept").disabled = true;
+        document.getElementById("sbCaptureFilterCancel").disabled = true;
+        document.getElementById("sbCaptureFilterDelete").disabled = true;
     },
 
+    // Delete the selected filter
     del: function() {
-        //Löscht den selektierten Filter
-        //
-        //Ablauf:
-        //1. Eintrag aus Array entfernen
-        //2. Eintrag aus Tree entfernen
-        //3. Selektion aktualisieren
-        //4. Vorgang beendet
-
-        //1. Eintrag aus Array entfernen
-        this.sfFilterIncExc.splice(this.sfFilterEdit, 1);
-        this.sfFilter.splice(this.sfFilterEdit, 1);
-        //2. Eintrag aus Tree entfernen
-        var dTree = document.getElementById("sbpTreeFilter");
-        for ( var dI=0; dI<dTree.childNodes.length; dI++ ) {
-            if ( dTree.childNodes[dI].nodeName == "treechildren" ) {
-                dTree.childNodes[dI].childNodes[this.sfFilterEdit].childNodes[0].removeChild(dTree.childNodes[dI].childNodes[this.sfFilterEdit].childNodes[0].childNodes[1]);
-                dTree.childNodes[dI].childNodes[this.sfFilterEdit].childNodes[0].removeChild(dTree.childNodes[dI].childNodes[this.sfFilterEdit].childNodes[0].childNodes[0]);
-                dTree.childNodes[dI].childNodes[this.sfFilterEdit].removeChild(dTree.childNodes[dI].childNodes[this.sfFilterEdit].childNodes[0]);
-                dTree.childNodes[dI].removeChild(dTree.childNodes[dI].childNodes[this.sfFilterEdit]);
-            }
-        }
-        //3. Selektion aktualisieren
+        // 1. Remove item from Array
+        this.ruleList.splice(this.filterEdited, 1);
+        this.filterList.splice(this.filterEdited, 1);
+        // 2. Remove entry from file
+        var wrapper = document.getElementById("sbCaptureFilter").childNodes[1];
+        sbCommonUtils.removeNode(wrapper.childNodes[this.filterEdited]);
+        // 3. Update selection
         this.updateSelection();
-        //4. Vorgang beendet
-        this.sfFilterEdit = -1;
-        document.getElementById("sbpTextboxFilter").value = "";
-        document.getElementById("sbpBtnAccept").disabled = true;
-        document.getElementById("sbpBtnCancel").disabled = true;
-        document.getElementById("sbpBtnDel").disabled = true;
+        // 4. Finalize
+        this.filterEdited = -1;
+        document.getElementById("sbCaptureFilterInput").value = "";
+        document.getElementById("sbCaptureFilterAccept").disabled = true;
+        document.getElementById("sbCaptureFilterCancel").disabled = true;
+        document.getElementById("sbCaptureFilterDelete").disabled = true;
     },
 
-    editFilter: function() {
-        //Vorbereiten zum Editieren oder Löschen eines Filters
-        //
-        //Ablauf:
-        //1. Bestimmen der Position des selektierten Eintrags
-        //2. Wurde ein Eintrag ausgewählt, wird das Editieren dieses Eintrags ermöglicht
-
-        //1.
-        this.sfFilterEdit = document.getElementById("sbpTreeFilter").currentIndex;
-        //2.
-        if ( this.sfFilterEdit > -1 ) {
-            if ( this.sfFilterIncExc[this.sfFilterEdit] == "Include" ) {
-                document.getElementById("sbpMnuIncExc").selectedIndex = 0;
+    // Prepare to edit or delete a filter
+    selectFilter: function() {
+        // 1. Determine the position of the selected entry
+        this.filterEdited = document.getElementById("sbCaptureFilter").currentIndex;
+        // 2. Select the entry and allow editing
+        if ( this.filterEdited > -1 ) {
+            if ( this.ruleList[this.filterEdited] == "Include" ) {
+                document.getElementById("sbCaptureFilterRule").selectedIndex = 0;
             } else {
-                document.getElementById("sbpMnuIncExc").selectedIndex = 1;
+                document.getElementById("sbCaptureFilterRule").selectedIndex = 1;
             }
-            document.getElementById("sbpTextboxFilter").value = this.sfFilter[this.sfFilterEdit];
-            document.getElementById("sbpBtnAccept").disabled = true;
-            document.getElementById("sbpBtnCancel").disabled = false;
-            document.getElementById("sbpBtnDel").disabled = false;
+            document.getElementById("sbCaptureFilterInput").value = this.filterList[this.filterEdited];
+            document.getElementById("sbCaptureFilterAccept").disabled = true;
+            document.getElementById("sbCaptureFilterCancel").disabled = false;
+            document.getElementById("sbCaptureFilterDelete").disabled = false;
         }
     },
 
-    filter: function(fURL) {
-        //Wendet die gesetzten Filter auf die übergebene URL an und liefert true oder false zurück
-        //
-        //Ablauf:
-        //1. Suchbegriff(e) in URL finden
-        //2. fRWert bestimmen
-        //3. true oder false an aufrufende Funktion zurückgegeben
-
-        //1. Suchbegriff(e) in URL finden
-        var fAufnehmen = 0;
-        for ( var fI=0; fI<this.sfFilter.length; fI++ ) {
-            if ( this.sfFilterIncExc[fI] == "Include" ) {
-                if ( fURL.match(sbpFilter.sfFilter[fI]) ) fAufnehmen++;
+    // Apply filters to the URL
+    // the URL must pass all filters
+    filter: function(url) {
+        for ( var i=0, I=this.filterList.length; i<I; i++ ) {
+            if ( this.ruleList[i] == "Include" ) {
+                if ( !url.match(sbCaptureFilter.filterList[i]) ) return false;
             } else {
-                if ( !fURL.match(sbpFilter.sfFilter[fI]) ) fAufnehmen++;
+                if ( url.match(sbCaptureFilter.filterList[i]) ) return false;
             }
         }
-        //2. fRWert bestimmen
-        var fRWert = false;
-        if ( fAufnehmen == this.sfFilter.length ) {
-            fRWert = true;
-        }
-        //3. true oder false an aufrufende Funktion zurückgegeben
-        return fRWert;
+        return true;
     },
 
+    // If text is available, enabled the OK button; otherwise disabled it
     input: function() {
-        //Ist Text vorhanden, wird der OK-Knopf freigeschaltet, andernfalls deaktiviert
-        var iText = document.getElementById("sbpTextboxFilter").value;
+        var iText = document.getElementById("sbCaptureFilterInput").value;
         if ( iText.length > 0 ) {
-            document.getElementById("sbpBtnAccept").disabled=false;
+            document.getElementById("sbCaptureFilterAccept").disabled=false;
         } else {
-            document.getElementById("sbpBtnAccept").disabled=true;
+            document.getElementById("sbCaptureFilterAccept").disabled=true;
         }
     },
 
+    // Update the content of the current selection
     updateSelection: function() {
-        //Funktion aktualisiert den Inhalt der aktuellen Auswahl
-
-        var usFilteranzahl = this.sfFilter.length;
-
-        if ( usFilteranzahl==0 ) this.sfFilter.push("");
-        if ( this.sfFilter[0].substr(this.sfFilter[0].length-1, this.sfFilter[0].length) != "\\" ) {
-            var usTree = document.getElementById("sbpURLList");
-            if ( usTree.childNodes[1].childNodes.length>0 ) {
-                for ( var usI=sbCaptureTask.index; usI<gURLs.length; usI++ ) {
-                    var usChecked = this.filter(gURLs[usI]);
-                    usTree.childNodes[1].childNodes[usI].childNodes[0].childNodes[0].setAttribute("value", usChecked);
-                }
-            }
+        var wrapper = document.getElementById("sbCaptureUrlList").childNodes[1];
+        for ( var i=sbCaptureTask.index, I=gURLs.length; i<I; i++ ) {
+            var checked = this.filter(gURLs[i]);
+            wrapper.childNodes[i].childNodes[0].childNodes[0].setAttribute("value", checked);
         }
-        if ( usFilteranzahl==0 ) this.sfFilter = [];
     },
 
 };
@@ -697,14 +678,13 @@ var sbInvisibleBrowser = {
         }
         this.ELEMENT.addProgressListener(this._eventListener, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
         this.ELEMENT.docShell.allowImages = gOption["images"];
-        this.ELEMENT.docShell.allowJavascript = false;
-        this.ELEMENT.docShell.allowMetaRedirects = false;
-        // older version of Firefox gets error on setting charset
+        // allowMedia is supported since Firefox 24
         try {
-            if (gOption["inDepthCharset"]) this.ELEMENT.docShell.charset = gOption["inDepthCharset"];
-        } catch(ex) {
-            sbCommonUtils.alert(sbCommonUtils.lang("ERR_FAIL_CHANGE_CHARSET"));
-        }
+            this.ELEMENT.docShell.allowMedia = gOption["media"];
+        } catch(ex) {}
+        this.ELEMENT.docShell.allowSubframes = gOption["frames"];
+        this.ELEMENT.docShell.allowJavascript = false;  // javascript error will freeze up capture process
+        this.ELEMENT.docShell.allowMetaRedirects = false;  // we'll handle meta redirect in another way
         // nsIDocShellHistory is deprecated in newer version of Firefox
         // nsIDocShell in the old version doesn't work
         if ( Components.interfaces.nsIDocShellHistory ) {
@@ -716,8 +696,16 @@ var sbInvisibleBrowser = {
         }
     },
 
-    load: function(aURL) {
+    load: function(aURL, aCharset) {
         this.fileCount = 0;
+        // Firefox < 12.0 use nsIDocCharset instead of nsIDocShell
+        if (aCharset) {
+            if (Components.interfaces.nsIDocCharset) {
+                this.ELEMENT.docShell.QueryInterface(Components.interfaces.nsIDocCharset).charset = aCharset;
+            } else {
+                this.ELEMENT.docShell.charset = aCharset;
+            }
+        }
         this.ELEMENT.loadURI(aURL, null, null);
         // if aURL is different from the current URL only in hash,
         // a loading is not performed unless forced to reload
@@ -728,10 +716,13 @@ var sbInvisibleBrowser = {
         this.ELEMENT.stop();
     },
 
-    execCapture: function() {
-        SB_trace(sbCommonUtils.lang("CAPTURE_START"));
+    onLoadStart: function() {
+        SB_trace(sbCommonUtils.lang("LOADING", this.fileCount, (this.ELEMENT.currentURI.spec || this.ELEMENT.contentDocument.title)));
+    },
+    
+    onLoadFinish: function() {
+        // check for a potential meta refresh redirect
         if ( this.ELEMENT.contentDocument.body ) {
-            // potential meta refresh redirect
             var metaElems = this.ELEMENT.contentDocument.getElementsByTagName("meta");
             for ( var i = 0; i < metaElems.length; i++ ) {
                 if ( metaElems[i].hasAttribute("http-equiv") && metaElems[i].hasAttribute("content") &&
@@ -739,46 +730,13 @@ var sbInvisibleBrowser = {
                      metaElems[i].getAttribute("content").match(/URL\=(.*)$/i) ) {
                     var curURL = this.ELEMENT.currentURI.spec;
                     var newURL = sbCommonUtils.resolveURL(this.ELEMENT.currentURI.spec, RegExp.$1);
-                    if ( newURL != curURL && !sbCaptureTask.refreshHash[newURL] ) {
-                        sbCaptureTask.refreshHash[curURL] = true;
-                        sbCaptureTask.start(newURL);
-                        return;
-                    }
+                    sbCaptureTask.start(newURL);
+                    return;
                 }
             }
         }
-        document.getElementById("sbCapturePauseButton").disabled = true;
-        sbCaptureTask.toggleSkipButton(false);
-        var preset = gReferItem ? [gReferItem.id, SB_suggestName(this.ELEMENT.currentURI.spec), gOption, gFile2URL, gDepths[sbCaptureTask.index]] : null;
-        if ( gPreset ) preset = gPreset;
-        var ret = gContentSaver.captureWindow(this.ELEMENT.contentWindow, false, gShowDetail, gResName, gResIdx, preset, gContext, gTitles[sbCaptureTask.index]);
-        if ( ret ) {
-            if ( gContext == "indepth" ) {
-                gURL2Name[sbCaptureTask.URL] = ret[0];
-                gFile2URL = ret[1];
-            } else if ( gContext == "capture-again-deep" ) {
-                gFile2URL = ret[1];
-                var contDir = sbCommonUtils.getContentDir(gPreset[0]);
-                var txtFile = contDir.clone();
-                txtFile.append("sb-file2url.txt");
-                var txt = "";
-                for ( var f in gFile2URL ) txt += f + "\t" + gFile2URL[f] + "\n";
-                sbCommonUtils.writeFile(txtFile, txt, "UTF-8");
-            }
-            gTitles[sbCaptureTask.index] = ret[2];
-        } else {
-            if ( gShowDetail ) window.close();
-            SB_trace(sbCommonUtils.lang("CAPTURE_ABORT"));
-            sbCaptureTask.fail("");
-        }
-    },
-
-    onLoadStart: function() {
-        SB_trace(sbCommonUtils.lang("LOADING", this.fileCount, (sbCaptureTask.URL || this.ELEMENT.contentDocument.title)));
-    },
-    
-    onLoadFinish: function() {
-        this.execCapture();
+        // capture the window
+        sbCaptureTask._captureWindow(this.ELEMENT.contentWindow, false);
     },
 
 };
@@ -801,6 +759,11 @@ var sbCrossLinker = {
     invoke: function() {
         sbDataSource.setProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gReferItem.id), "type", "site");
         this.ELEMENT.docShell.allowImages = false;
+        try {
+            this.ELEMENT.docShell.allowMedia = false;
+        } catch(ex) {}
+        this.ELEMENT.docShell.allowJavascript = false;
+        this.ELEMENT.docShell.allowMetaRedirects = false;
         sbInvisibleBrowser.onLoadStart = function() {
             SB_trace(sbCommonUtils.lang("REBUILD_LINKS", sbCrossLinker.index + 1, sbCrossLinker.nameList.length, this.fileCount, sbCrossLinker.nameList[sbCrossLinker.index] + ".html"));
         };
@@ -811,6 +774,9 @@ var sbCrossLinker = {
         for ( var url in gURL2Name ) {
             this.nameList.push(gURL2Name[url]);
         }
+        // For a partial capture containing a link to self, the index may be overwritten and not exist
+        // Add it to prevent further error
+        if (this.nameList[0] != "index") this.nameList.unshift("index");
         this.XML = document.implementation.createDocument("", "", null);
         this.rootNode = this.XML.createElement("site");
         this.start();
@@ -864,25 +830,24 @@ var sbCrossLinker = {
         this.nodeHash[this.nameList[this.index]].setAttribute("title", sbDataSource.sanitize(this.ELEMENT.contentTitle) || sbCommonUtils.getFileName(this.ELEMENT.currentURI.spec));
         sbCommonUtils.flattenFrames(this.ELEMENT.contentWindow).forEach(function(win) {
             var doc = win.document;
-            var linkList = doc.links;
-            if ( !linkList ) return;
             var shouldSave = false;
-            for ( var i = 0; i < linkList.length; i++ ) {
-                var urlLR = sbCommonUtils.splitURLByAnchor(linkList[i].href);
-                if ( gURL2Name[urlLR[0]] ) {
-                    var name = gURL2Name[urlLR[0]];
-                    linkList[i].href = encodeURIComponent(name) + ".html" + urlLR[1];
-                    linkList[i].setAttribute("data-sb-indepth", "true");
+            Array.prototype.forEach.call(doc.links, function(link) {
+                var [url, hash] = sbCommonUtils.splitURLByAnchor(link.href);
+                if ( gURL2Name[url] ) {
+                    var name = gURL2Name[url];
+                    link.href = encodeURIComponent(name) + ".html" + hash;
+                    if (gOption["recordInDepthLink"]) {
+                        link.setAttribute("data-sb-indepth", "true");
+                    }
                     if ( !this.nodeHash[name] ) {
-                        var text = linkList[i].text ? linkList[i].text.replace(/\r|\n|\t/g, " ") : "";
-                        if ( text.replace(/\s/g, "") == "" ) text = "";
+                        var text = link.textContent;
+                        text = (!/^\s*$/.test(text)) ? text.replace(/[\t\r\n\v\f]/g, " ") : "";
                         this.nodeHash[name] = this.createNode(name, text);
-                        if ( !this.nodeHash[name] ) this.nodeHash[name] = name;
                         this.nodeHash[this.nameList[this.index]].appendChild(this.nodeHash[name]);
                     }
                     shouldSave = true;
                 }
-            }
+            }, this);
             if ( shouldSave ) {
                 var rootNode = doc.getElementsByTagName("html")[0];
                 var src = sbCommonUtils.doctypeToString(doc.doctype) + sbCommonUtils.surroundByTags(rootNode, rootNode.innerHTML);
@@ -941,7 +906,7 @@ var sbCrossLinker = {
 
     forceReloadingURL: function(aURL) {
         try {
-            var win = sbCommonUtils.WINDOW.getMostRecentWindow("navigator:browser");
+            var win = sbCommonUtils.getBrowserWindow();
             var nodes = win.gBrowser.mTabContainer.childNodes;
             for ( var i = 0; i < nodes.length; i++ ) {
                 var uri = win.gBrowser.getBrowserForTab(nodes[i]).currentURI.spec;
@@ -960,25 +925,38 @@ var sbCrossLinker = {
 
 
 function sbHeaderSniffer(aURLSpec, aRefURLSpec) {
-    var that = this;
+    this._eventListener._sniffer = this;
     this.URLSpec = aURLSpec;
     this.refURLSpec = aRefURLSpec;
-    this._eventListener = {
+}
+
+
+sbHeaderSniffer.prototype = {
+
+    _channel: null,
+    _headers: null,
+    _eventListener: {
+        _sniffer: null,
         onDataAvailable: function(aRequest, aContext, aInputStream, aOffset, aCount) {},
         onStartRequest: function(aRequest, aContext) {},
         onStopRequest: function(aRequest, aContext, aStatus) {
+            var that = this._sniffer;
+
             // show connect success
             var contentType = that.getContentType() || "";
             SB_trace(sbCommonUtils.lang("CONNECT_SUCCESS", contentType));
 
             // get and show http status
-            var httpStatus = that.getStatus();
-            if ( httpStatus[0] === false) {
+            var [statusCode, statusText] = that.getStatus();
+            if ( statusCode !== false) {
+                sbCaptureTask.updateStatus(statusCode + " " + statusText);
+                if ( statusCode >= 400 && statusCode < 600 || statusCode == 305 ) {
+                    that.reportError(statusCode + " " + statusText);
+                    return;
+                }
+            } else {
+                sbCaptureTask.updateStatus("???");
                 // got no status code, do nothing (continue parsing HTML)
-            } else if ( httpStatus[0] >= 400 && httpStatus[0] < 600 || httpStatus[0] == 305 ) {
-                sbCaptureTask.failed++;
-                sbCaptureTask.fail(httpStatus.join(" "));
-                return;
             }
 
             // manage redirect if defined
@@ -991,53 +969,44 @@ function sbHeaderSniffer(aURLSpec, aRefURLSpec) {
 
             // attempt to load the content
             var isAttachment = that.getContentDisposition();
-            that.load(contentType, isAttachment);
+            that.load(that.URLSpec, contentType, isAttachment);
         },
-    };
-}
-
-
-sbHeaderSniffer.prototype = {
-
-    _channel: null,
-    _headers: null,
+    },
 
     checkURL: function() {
-        if (this.URLSpec.indexOf("file://") == 0) {
-            this.checkLocalFile();
+        if (this.URLSpec.startsWith("file:")) {
+            this.checkLocalFile(this.URLSpec);
         } else {
-            this.checkHttpHeader();
+            this.checkHttpHeader(this.URLSpec, this.refURLSpec);
         }
     },
 
-    checkLocalFile: function() {
-        sbCaptureTask.isLocal = true;
-        var file = sbCommonUtils.convertURLToFile(this.URLSpec);
+    checkLocalFile: function(URL) {
+        var file = sbCommonUtils.convertURLToFile(URL);
         if (!(file.exists() && file.isFile() && file.isReadable())) {
-            this.reportError("can't access");
+            this.reportConnectError("Can't access");
             return;
         }
         var mime = sbCommonUtils.getFileMime(file);
-        this.load(mime);
+        this.load(URL, mime);
     },
 
-    checkHttpHeader: function() {
-        sbCaptureTask.isLocal = false;
+    checkHttpHeader: function(URL, refURL) {
         this._channel = null;
         try {
-            this._channel = sbCommonUtils.newChannel(this.URLSpec).QueryInterface(Components.interfaces.nsIHttpChannel);
+            this._channel = sbCommonUtils.newChannel(URL).QueryInterface(Components.interfaces.nsIHttpChannel);
             this._channel.loadFlags = this._channel.LOAD_BYPASS_CACHE;
             this._channel.setRequestHeader("User-Agent", navigator.userAgent, false);
-            if ( this.refURLSpec ) this._channel.setRequestHeader("Referer", this.refURLSpec, false);
+            if ( refURL ) this._channel.setRequestHeader("Referer", refURL, false);
         } catch(ex) {
-            this.reportError("Invalid URL");
+            this.reportConnectError("Invalid URL");
             return;
         }
         try {
             this._channel.requestMethod = "HEAD";
             this._channel.asyncOpen(this._eventListener, this);
         } catch(ex) {
-            this.reportError(ex);
+            this.reportConnectError(ex);
         }
     },
 
@@ -1068,14 +1037,15 @@ sbHeaderSniffer.prototype = {
         return null;
     },
 
-    load: function(contentType, isAttachment) {
+    load: function(URL, contentType, isAttachment) {
         contentType = contentType || "text/html";
         if (!isAttachment && ["text/html", "application/xhtml+xml"].indexOf(contentType) >= 0) {
             // for inline html or xhtml files, load the document and capture it
-            sbInvisibleBrowser.load(this.URLSpec);
+            sbInvisibleBrowser.load(URL, sbCaptureTask.CHARSET);
         } else if (gContext == "link") {
-            // capture as file for link capture 
-            gContentSaver.captureFile(this.URLSpec, gRefURL ? gRefURL : sbCaptureTask.URL, "file", gShowDetail, gResName, gResIdx, null, gContext);
+            // capture as file for link capture
+            var refURL = this.refURLSpec || sbCaptureTask.URL;
+            gContentSaver.captureFile(URL, refURL, "file", gShowDetail, gResName, gResIdx, null, gContext);
         } else if (gContext == "indepth") {
             // in an indepth capture, files with defined extensions are pre-processed and is not send to the URL list
             // those who go here are undefined files, and should be skipped
@@ -1089,10 +1059,14 @@ sbHeaderSniffer.prototype = {
         if (this._channel) this._channel.cancel(Components.results.NS_BINDING_ABORTED);
     },
 
-    reportError: function(aErrorMsg) {
-        //Ermitteln, wann der Wert this.failed erhoeht werden muss
-        sbCaptureTask.failed++;
-        sbCaptureTask.fail(sbCommonUtils.lang("CONNECT_FAILURE", aErrorMsg));
+    reportConnectError: function(aErrorMsg) {
+        this.reportError(sbCommonUtils.lang("CONNECT_FAILURE", aErrorMsg), aErrorMsg);
+    },
+
+    reportError: function(aErrorMsg, aStatus) {
+        if (!aStatus) aStatus = aErrorMsg;
+        sbCaptureTask.updateStatus(aStatus);
+        sbCaptureTask.fail(aErrorMsg);
     },
 
 };

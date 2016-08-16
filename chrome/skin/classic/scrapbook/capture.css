@@ -2,26 +2,31 @@
     width: 360px;
 }
 
+#sbCaptureWindow.simple #sbCaptureUrlList,
+#sbCaptureWindow.simple #sbCaptureProgress,
+#sbCaptureWindow.simple #sbCaptureDefaultSettings,
+#sbCaptureWindow.simple #sbCaptureFilterToggle,
+#sbCaptureWindow.simple #sbCaptureSkipButton {
+    display: none;
+}
+
 #sbCaptureWindow.complex {
     width: 800px;
     height: 600px;
 }
 
-#sbpURLList {
-    margin: 0px;
-}
-
-#sbpChkFilter {
+#sbCaptureDefaultSettings {
     margin-top: 5px;
-    margin-bottom: 7px;
+    margin-bottom: 3px;
 }
 
-#sbpFilterBox {
+#sbCaptureFilterBox {
+    margin: 5px;
     border: 1px solid black;
     padding: 4px;
 }
 
-#sbpTreeFilter {
+#sbCaptureFilter {
     margin: 0px;
 }
 

@@ -10,20 +10,20 @@
 <!ENTITY sb.capture.skip "Ignorer">
 <!ENTITY sb.capture.pause "Pause">
 <!ENTITY sb.capture.finish "Annuler">
+<!ENTITY sb.capture.column.address "URL">
+<!ENTITY sb.capture.column.title "Titre">
+<!ENTITY sb.capture.column.status "Statut">
 <!ENTITY sb.capture.checkSelection "Check selected items">
 <!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Filtrage">
-<!ENTITY sb.capture.filter.column.one "Afficher/Masquer">
-<!ENTITY sb.capture.filter.column.two "Filtrage (expression régulière)">
+<!ENTITY sb.capture.filter.column.rule "Afficher/Masquer">
+<!ENTITY sb.capture.filter.column.content "Filtrage (expression régulière)">
 <!ENTITY sb.capture.filter.accept "Accepter">
 <!ENTITY sb.capture.filter.accept.tt "changer ou modifier la valeur">
 <!ENTITY sb.capture.filter.cancel "Annuler">
 <!ENTITY sb.capture.filter.cancel.tt "abandonner l'édition">
 <!ENTITY sb.capture.filter.delete "Supprimer">
 <!ENTITY sb.capture.filter.delete.tt "retirer le filtre de la liste">
-<!ENTITY sbp.capture.column.one "URL">
-<!ENTITY sbp.capture.column.two "Titre">
-<!ENTITY sbp.capture.column.three "Statut">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Ajouter les éléments par glisser-déposer à partir de l&apos;arborescence dans l&apos;ordre de la combinaison désirée. Vous pouvez glisser-déposer plusieurs éléments à la fois.">
@@ -49,10 +49,8 @@
 <!ENTITY sb.detail.option.frames "Frames">
 <!ENTITY sb.detail.option.styles "Styles">
 <!ENTITY sb.detail.option.scripts "Scripts">
-<!ENTITY sb.detail.option.keepLink "Keep linking to the source for not-captured objects">
-<!ENTITY sb.detail.option.saveDataURI "Save data URI as file">
-<!ENTITY sb.detail.option.rewriteStyles "Reorganize Styles">
-<!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
+<!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.linked.file "Capturer les fichiers liés">
 <!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
 <!ENTITY sb.detail.linked.file.method1 "Match URL file extension">

@@ -10,20 +10,20 @@
 <!ENTITY sb.capture.skip "Pomiń">
 <!ENTITY sb.capture.pause "Pauza">
 <!ENTITY sb.capture.finish "Anuluj">
+<!ENTITY sb.capture.column.address "URL">
+<!ENTITY sb.capture.column.title "Tytuł">
+<!ENTITY sb.capture.column.status "Status">
 <!ENTITY sb.capture.checkSelection "Check selected items">
 <!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
 <!ENTITY sb.capture.filter "Filtrowanie">
-<!ENTITY sb.capture.filter.column.one "Pokaż/Ukryj">
-<!ENTITY sb.capture.filter.column.two "Filtr (wyrażenie regularne)">
+<!ENTITY sb.capture.filter.column.rule "Pokaż/Ukryj">
+<!ENTITY sb.capture.filter.column.content "Filtr (wyrażenie regularne)">
 <!ENTITY sb.capture.filter.accept "Akceptuj">
 <!ENTITY sb.capture.filter.accept.tt "Zmień lub edytuj wartość">
 <!ENTITY sb.capture.filter.cancel "Anuluj">
 <!ENTITY sb.capture.filter.cancel.tt "przerwij edytowanie">
 <!ENTITY sb.capture.filter.delete "Usuń">
 <!ENTITY sb.capture.filter.delete.tt "usuń filtr z listy">
-<!ENTITY sbp.capture.column.one "URL">
-<!ENTITY sbp.capture.column.two "Tytuł">
-<!ENTITY sbp.capture.column.three "Status">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Dodaj elementy przeciągając je z drzewa w kolejności w jakiej chcesz je połączyć. Można jednocześnie przeciągać wiele elementów.">
@@ -49,10 +49,8 @@
 <!ENTITY sb.detail.option.frames "Frames">
 <!ENTITY sb.detail.option.styles "Style">
 <!ENTITY sb.detail.option.scripts "Scripts">
-<!ENTITY sb.detail.option.keepLink "Keep linking to the source for not-captured objects">
-<!ENTITY sb.detail.option.saveDataURI "Save data URI as file">
-<!ENTITY sb.detail.option.rewriteStyles "Reorganize Styles">
-<!ENTITY sb.detail.option.asHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
+<!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.linked.file "Pobierz odnośniki do">
 <!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
 <!ENTITY sb.detail.linked.file.method1 "Match URL file extension">

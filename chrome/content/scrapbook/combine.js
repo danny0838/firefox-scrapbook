@@ -20,7 +20,6 @@ var sbCombineService = {
         //Block wird benötigt, um Korrekturen bei fehlerhafter Zusammenstellung zu erlauben
         this.toggleElements(true);
         //Ende Block
-        gOption = { "script": true, "images": true };
         if ( window.top.location.href != "chrome://scrapbook/content/manage.xul" ) {
             document.documentElement.collapsed = true;
             return;
@@ -180,7 +179,7 @@ var sbCombineService = {
         sbDataSource.setProperty(newRes, "type", "combine");
         sbDataSource.setProperty(newRes, "source", sbDataSource.getProperty(this.resList[0], "source"));
         var newIcon = sbDataSource.getProperty(this.resList[0], "icon");
-        if ( newIcon.indexOf("resource://scrapbook/data/") == 0 ) newIcon = "resource://scrapbook/data/" + aItem.id + "/" + sbCommonUtils.getFileName(newIcon);
+        if ( newIcon.startsWith("resource://scrapbook/data/") ) newIcon = "resource://scrapbook/data/" + aItem.id + "/" + sbCommonUtils.getFileName(newIcon);
         sbDataSource.setProperty(newRes, "icon", newIcon);
         var newComment = "";
         for ( var i = 0; i < this.resList.length; i++ ) {
@@ -322,6 +321,7 @@ var sbPageCombiner = {
     htmlSrc: "",
     cssText: "",
     isTargetCombined: false,
+    baseURI: "",
     htmlId: "",
     bodyId: "",
     refreshHash: null,
@@ -344,6 +344,9 @@ var sbPageCombiner = {
         }
 
         this.isTargetCombined = false;
+        var anchor = this.BROWSER.contentDocument.createElement("A");
+        anchor.href = "";
+        this.baseURI = anchor.href;
         if ( sbCombineService.index == 0 ) {
             if (!sbCombineService.option["T"]) {
                 sbCombineService.option["T"] = sbDataSource.getProperty(sbCombineService.curRes, "title");
@@ -435,12 +438,12 @@ var sbPageCombiner = {
             divHTML.setAttribute(attrs[i].name, attrs[i].value);
         }
         divHTML.id = "item" + sbCombineService.curID + "html";
-        divHTML = sbCommonUtils.surroundByTags(divHTML, "\n" + divBody + "\n");
+        divHTML = sbCommonUtils.surroundByTags(divHTML, divBody);
 
         var divWrap = this.BROWSER.contentDocument.createElement("DIV");
         divWrap.id = "item" + sbCombineService.curID;
         divWrap.style.position = "relative";
-        return sbCommonUtils.surroundByTags(divWrap, divHTML + "\n");
+        return sbCommonUtils.surroundByTags(divWrap, divHTML);
     },
 
     surroundDOMCombined: function() {
@@ -463,8 +466,8 @@ var sbPageCombiner = {
         // a special stylesheet used by scrapbook, skip parsing it
         if (aCSS.ownerNode && sbCommonUtils.getSbObjectType(aCSS.ownerNode) == "stylesheet") return "";
         // a special stylesheet used by scrapbook or other addons/programs, skip parsing it
-        if (aCSS.href && aCSS.href.indexOf("chrome://") == 0) return "";
-        var content = this.processCSSRules(aCSS, this.BROWSER.currentURI.spec, "");
+        if (aCSS.href && aCSS.href.startsWith("chrome:")) return "";
+        var content = this.processCSSRules(aCSS, this.baseURI, "");
         var media = aCSS.media.mediaText;
         if (media) {
             // omit "all" since it's defined in the link tag
@@ -562,7 +565,7 @@ var sbPageCombiner = {
         var regex = / url\(\"((?:\\.|[^"])+)\"\)/g;
         aCSSText = aCSSText.replace(regex, function() {
             var dataURL = arguments[1];
-            if (dataURL.indexOf("data:") === 0) return ' url("' + dataURL + '")';
+            if (dataURL.startsWith("data:")) return ' url("' + dataURL + '")';
             dataURL = sbCommonUtils.resolveURL(aRefURL, dataURL);
             // redirect the files to the original folder so we can capture them later on (and will rewrite the CSS)
             return ' url("' + dataURL + '")';
@@ -573,7 +576,7 @@ var sbPageCombiner = {
     inspectNode: function(aNode) {
         switch ( aNode.nodeName.toLowerCase() ) {
             case "link": 
-                if ( aNode.rel.toLowerCase() == "stylesheet") {
+                if ( aNode.rel.toLowerCase().split(/[ \t\r\n\v\f]+/).indexOf("stylesheet") >= 0 ) {
                     // link tags in the body element is unusual
                     // styles should already be processed
                     // in sbPageCombiner.exec => surroundCSS => processCSSRecursively
@@ -619,21 +622,21 @@ var sbPageCombiner = {
                 if ( aNode.type.toLowerCase() == "image" ) aNode.setAttribute("src", aNode.src);
                 break;
             case "a": case "area": 
-                if ( aNode.href.indexOf("file://") == 0 ) aNode.setAttribute("href", aNode.href);
+                if ( aNode.href.startsWith("file:") ) aNode.setAttribute("href", aNode.href);
                 break;
             case "cite": 
                 if ( aNode.className == "scrapbook-header" ) this.isTargetCombined = true;
                 break;
         }
         if ( aNode.style && aNode.style.cssText ) {
-            var newCSStext = this.inspectCSSText(aNode.style.cssText, this.BROWSER.currentURI.spec);
+            var newCSStext = this.inspectCSSText(aNode.style.cssText, this.baseURI);
             if ( newCSStext ) aNode.setAttribute("style", newCSStext);
         }
     },
 
     setAbsoluteURL: function(aNode, aAttr) {
         if ( aNode.getAttribute(aAttr) ) {
-            aNode.setAttribute(aAttr, sbCommonUtils.resolveURL(this.BROWSER.currentURI.spec, aNode.getAttribute(aAttr)));
+            aNode.setAttribute(aAttr, sbCommonUtils.resolveURL(this.baseURI, aNode.getAttribute(aAttr)));
         }
         return aNode;
     },
