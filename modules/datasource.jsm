@@ -210,8 +210,7 @@ var sbDataSource = {
         var newID = this.identify(oldID);
         // copy content
         var oldDir = sbCommonUtils.getContentDir(oldID);
-        var newDir = sbCommonUtils.getContentDir(newID);
-        oldDir.copyTo(newDir.parent, newID);
+        oldDir.copyTo(oldDir.parent, newID);
         // create new item
         var newItem = this.getItem(curRes);
         newItem.id = newID;
