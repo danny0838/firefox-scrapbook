@@ -331,6 +331,7 @@ var sbCaptureTask = {
         document.getElementById("sbCaptureCancelButton").hidden = true;
         document.getElementById("sbCaptureFinishButton").hidden = false;
         document.getElementById("sbCaptureSkipButton").disabled = true;
+        window.clearTimeout(this.timerID);
         if ( gContext == "indepth" ) {
             sbCrossLinker.invoke();
         } else {
