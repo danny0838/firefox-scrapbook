@@ -148,10 +148,6 @@ function SB_initCapture() {
     // capture-again, capture-again-deep: 1 item
     // in-depth: 1 or more item, but it's possible that new items be added if depth >= 2
     if ( gURLs.length == 1 && gContext != "indepth" ) {
-        sbCaptureTask.TREE.collapsed = true;
-        document.getElementById("sbpCaptureProgress").hidden = true;
-        document.getElementById("sbpChkFilter").hidden = true;
-        document.getElementById("sbCaptureSkipButton").hidden = true;
         sbCaptureTask.start();
     } else {
         document.getElementById("sbCaptureWindow").className = "complex";

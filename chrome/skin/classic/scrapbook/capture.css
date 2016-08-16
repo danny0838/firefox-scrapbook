@@ -2,6 +2,13 @@
     width: 360px;
 }
 
+#sbCaptureWindow.simple #sbpURLList,
+#sbCaptureWindow.simple #sbpCaptureProgress,
+#sbCaptureWindow.simple #sbpChkFilter,
+#sbCaptureWindow.simple #sbCaptureSkipButton {
+    display: none;
+}
+
 #sbCaptureWindow.complex {
     width: 800px;
     height: 600px;
