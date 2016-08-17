@@ -564,7 +564,7 @@ var sbPageCombiner = {
         // CSS get by cssText is always url("double-quoted-with-\"quote\"-escaped")
         var regex = / url\(\"((?:\\.|[^"])+)\"\)/g;
         aCSSText = aCSSText.replace(regex, function() {
-            var dataURL = arguments[1];
+            var dataURL = sbCommonUtils.unescapeCss(arguments[1]);
             if (dataURL.startsWith("data:")) return ' url("' + dataURL + '")';
             dataURL = sbCommonUtils.resolveURL(aRefURL, dataURL);
             // redirect the files to the original folder so we can capture them later on (and will rewrite the CSS)

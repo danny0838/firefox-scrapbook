@@ -808,6 +808,23 @@ var sbCommonUtils = {
         return aString.replace(/([\*\+\?\.\^\/\$\\\|\[\]\{\}\(\)])/g, "\\$1");
     },
 
+    unescapeCss: function(aStr) {
+        var that = arguments.callee;
+        if (!that.replaceRegex) {
+            that.replaceRegex = /\\([0-9A-Fa-f]{1,6}) ?|\\(.)/g;
+            that.getCodes = function (n) {
+                if (n < 0x10000) return [n];
+                n -= 0x10000;
+                return [0xD800+(n>>10), 0xDC00+(n&0x3FF)];
+            };
+            that.replaceFunc = function (m, u, c) {
+                if (c) return c;
+                if (u) return String.fromCharCode.apply(null, that.getCodes(parseInt(u, 16)));
+            };
+        }
+        return aStr.replace(that.replaceRegex, that.replaceFunc);
+    },
+
     // escape valid filename characters that are misleading in the URI
     // preserve other chars for beauty
     // see also: validateFilename

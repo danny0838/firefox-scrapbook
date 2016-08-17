@@ -1035,7 +1035,7 @@ sbContentSaverClass.prototype = {
         // and no CSS comment is in, so we can parse it safely with this RegExp.
         var regex = / url\(\"((?:\\.|[^"])+)\"\)/g;
         aCSSText = aCSSText.replace(regex, function() {
-            var dataURL = arguments[1];
+            var dataURL = sbCommonUtils.unescapeCss(arguments[1]);
             if (dataURL.startsWith("data:") && !that.option["saveDataUri"]) return ' url("' + dataURL + '")';
             if ( that.option["internalize"] && that.isInternalized(dataURL) ) return ' url("' + dataURL + '")';
             dataURL = sbCommonUtils.resolveURL(aRefURL, dataURL);
