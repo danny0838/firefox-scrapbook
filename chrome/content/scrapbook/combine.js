@@ -593,6 +593,11 @@ var sbPageCombiner = {
                 sbCommonUtils.removeNode(aNode);
                 return;
                 break;
+            case "base":
+                // base tags in the body element is unusual
+                // blank it anyway
+                if ( aNode.hasAttribute("href") ) aNode.setAttribute("href", "");
+                break;
             case "body": 
                 // move body specific attributes into inline styles so that it can be transfered to div
                 // inline style takes precedence than the corresponding HTML attribute
@@ -609,20 +614,33 @@ var sbPageCombiner = {
                     aNode.removeAttribute("text");
                 }
                 break;
-            case "img": case "embed": case "source": case "iframe": 
+            case "img": case "source": 
+                if ( aNode.hasAttribute("srcset") ) {
+                    var that = this;
+                    var newSrcset = gContentSaver.parseSrcset(aNode.getAttribute("srcset"), function(url){
+                        return sbCommonUtils.resolveURL(that.baseURI, url);
+                    });
+                    aNode.setAttribute("srcset", newSrcset);
+                }
+            case "input": 
+                if ( aNode.nodeName.toLowerCase() == "input" && aNode.type.toLowerCase() != "image" ) break;
+            case "embed": case "audio": case "video": case "track": case "iframe": case "script": 
                 if ( aNode.src ) aNode.setAttribute("src", aNode.src);
                 break;
             case "object": 
                 if ( aNode.data ) aNode.setAttribute("data", aNode.data);
+                break;
+            case "applet": 
+                if ( aNode.hasAttribute("archive") ) {
+                    var url = sbCommonUtils.resolveURL(this.baseURI, aNode.getAttribute("archive"));
+                    aNode.setAttribute("archive", url);
+                }
                 break;
             case "table":  case "tr":  case "th": case "td": 
                 if ( aNode.hasAttribute("background") ) {
                     var url = sbCommonUtils.resolveURL(this.baseURI, aNode.getAttribute("background"));
                     aNode.setAttribute("background", url);
                 }
-                break;
-            case "input": 
-                if ( aNode.type.toLowerCase() == "image" ) aNode.setAttribute("src", aNode.src);
                 break;
             case "a": case "area": 
                 if ( aNode.href.startsWith("file:") ) aNode.setAttribute("href", aNode.href);
