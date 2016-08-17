@@ -290,7 +290,7 @@ sbContentSaverClass.prototype = {
         // The document might have a ridiculous location.href, such as "about:blank",
         // if there is no refURLObj yet, use the "index.html" in the target item dir as ref.
         try {
-            var elem = aDocument.createElement("A");
+            var elem = aDocument.createElement("a");
             elem.href = "";
             this.refURLObj = sbCommonUtils.convertURLToObject(elem.href);
         } catch(ex) {
@@ -419,46 +419,49 @@ sbContentSaverClass.prototype = {
             // do not rewrite CSS during an internalize
             if (this.option["internalize"]) return;
 
-            if (node.nodeName == "STYLE") {
-                if ( sbCommonUtils.getSbObjectType(node) == "stylesheet" ) {
-                    // a special stylesheet used by scrapbook, keep it intact
-                    return;
-                } else if ( this.option["styles"] ) {
-                    if ( this.option["tidyCss"] ) {
-                        var cssText = this.processCSSRules(css, this.refURLObj.spec, aDocument, "");
-                        cssText = "\n/* Code tidied up by ScrapBook */\n" + cssText;
-                        node.textContent = cssText;
+            switch (node.nodeName.toLowerCase()) {
+                case "style":
+                    if ( sbCommonUtils.getSbObjectType(node) == "stylesheet" ) {
+                        // a special stylesheet used by scrapbook, keep it intact
+                        return;
+                    } else if ( this.option["styles"] ) {
+                        if ( this.option["tidyCss"] ) {
+                            var cssText = this.processCSSRules(css, this.refURLObj.spec, aDocument, "");
+                            cssText = "\n/* Code tidied up by ScrapBook */\n" + cssText;
+                            node.textContent = cssText;
+                        } else {
+                            // keep the styles as-is
+                        }
                     } else {
-                        // keep the styles as-is
+                        // not capturing styles, remove it
+                        if (node.textContent) node.textContent = "/* Code removed by ScrapBook */";
+                        return;
                     }
-                } else {
-                    // not capturing styles, remove it
-                    if (node.textContent) node.textContent = "/* Code removed by ScrapBook */";
-                    return;
-                }
-            } else if (node.nodeName == "LINK") {
-                var url = css.href;
-                if ( sbCommonUtils.getSbObjectType(node) == "stylesheet" ) {
-                    // a special stylesheet used by scrapbook, keep it intact
-                    // (it should use an absolute link or a chrome link, which don't break after capture)
-                    return;
-                } else if ( url.startsWith("chrome:") ) {
-                    // a special stylesheet used by scrapbook or other addons/programs, keep it intact
-                    return;
-                } else if ( this.option["styles"] ) {
-                    if ( this.option["tidyCss"] ) {
-                        var cssText = this.processCSSRules(css, url, aDocument, "");
-                        cssText = "/* Code tidied up by ScrapBook */\n" + cssText;
-                        var fileName = this.download(url, "quote", "cssText", { cssText: cssText });
-                        if (fileName) node.setAttribute("href", fileName);
+                    break;
+                case "link":
+                    var url = css.href;
+                    if ( sbCommonUtils.getSbObjectType(node) == "stylesheet" ) {
+                        // a special stylesheet used by scrapbook, keep it intact
+                        // (it should use an absolute link or a chrome link, which don't break after capture)
+                        return;
+                    } else if ( url.startsWith("chrome:") ) {
+                        // a special stylesheet used by scrapbook or other addons/programs, keep it intact
+                        return;
+                    } else if ( this.option["styles"] ) {
+                        if ( this.option["tidyCss"] ) {
+                            var cssText = this.processCSSRules(css, url, aDocument, "");
+                            cssText = "/* Code tidied up by ScrapBook */\n" + cssText;
+                            var fileName = this.download(url, "quote", "cssText", { cssText: cssText });
+                            if (fileName) node.setAttribute("href", fileName);
+                        } else {
+                            var fileName = this.download(url, null);
+                            if (fileName) node.setAttribute("href", fileName);
+                        }
                     } else {
-                        var fileName = this.download(url, null);
-                        if (fileName) node.setAttribute("href", fileName);
+                        // not capturing styles, set it blank
+                        node.setAttribute("href", this.getSkippedURL(url));
                     }
-                } else {
-                    // not capturing styles, set it blank
-                    node.setAttribute("href", this.getSkippedURL(url));
-                }
+                    break;
             }
         }, this);
 
@@ -500,13 +503,28 @@ sbContentSaverClass.prototype = {
         }
 
         // generate the HTML and CSS file and save
-        var myHTML = sbCommonUtils.doctypeToString(aDocument.doctype) + sbCommonUtils.surroundByTags(rootNode, rootNode.innerHTML + "\n");
+        var myHTML = sbCommonUtils.doctypeToString(aDocument.doctype);
+        if (contentType == "application/xhtml+xml" && this.option["fileAsHtml"]) {
+            // convert xhtml into html
+            var iframe = aDocument.createElement("iframe");
+            iframe.style.display = "hidden";
+            htmlNode.appendChild(iframe);
+            var doc = iframe.contentDocument.documentElement;
+            htmlNode.removeChild(iframe);
+            while (doc.firstChild) doc.removeChild(doc.firstChild);
+            this.cloneNodeData(rootNode, doc);
+            myHTML += sbCommonUtils.surroundByTags(doc, doc.innerHTML + "\n");
+        } else {
+            myHTML += sbCommonUtils.surroundByTags(rootNode, rootNode.innerHTML + "\n");
+        }
+
         if ( this.option["internalize"] ) {
             var myHTMLFile = this.option["internalize"];
         } else {
             var myHTMLFile = this.contentDir.clone();
             myHTMLFile.append(myHTMLFileName);
         }
+
         sbCommonUtils.writeFile(myHTMLFile, myHTML, charset);
         this.downloadRewriteFiles[this.item.id].push([myHTMLFile, charset]);
         return myHTMLFile.leafName;
@@ -922,6 +940,26 @@ sbContentSaverClass.prototype = {
             this.removeAttr(aNode, "integrity");
             this.removeAttr(aNode, "crossorigin");
         }
+    },
+
+    // clone the attributes and childNodes (recursively) to the targetNode
+    cloneNodeData: function (sourceNode, targetNode) {
+        // copy attributes
+        Array.prototype.forEach.call(sourceNode.attributes, function(attr){
+            targetNode.setAttribute(attr.name, attr.value);
+        }, this);
+        if (!sourceNode.hasChildNodes()) return;
+        Array.prototype.forEach.call(sourceNode.childNodes, function(elem){
+            if (elem.nodeType === 1) {
+                var newElem = targetNode.ownerDocument.createElement(elem.nodeName);
+                targetNode.appendChild(newElem);
+                this.cloneNodeData(elem, newElem);
+            }
+            else {
+                var newElem = elem.cloneNode(true);
+                targetNode.appendChild(newElem);
+            }
+        }, this);
     },
 
     // replaceFunc = function (url) { return ...; }

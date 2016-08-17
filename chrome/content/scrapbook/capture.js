@@ -103,7 +103,7 @@ function SB_initCapture() {
 
     // handle specific contexts
     if ( gContext == "indepth" ) {
-        gURL2Name[gReferItem.source] = "index";
+        gURL2Name[sbCommonUtils.normalizeURI(gReferItem.source)] = "index";
     } else if ( gContext == "capture-again-deep" ) {
         myURLs = null;
         var contDir = sbCommonUtils.getContentDir(gPreset[0]);
@@ -129,7 +129,7 @@ function SB_initCapture() {
         sbCommonUtils.readFile(file, "UTF-8").split("\n").forEach(function (line) {
             var [url, docName] = line.split("\t", 2);
             if (docName) {
-                gURL2Name[url] = docName;
+                gURL2Name[sbCommonUtils.normalizeURI(url)] = docName;
                 if ( docName == gPreset[1] ) myURLs = [url];
             }
         });
@@ -485,7 +485,7 @@ var sbCaptureTask = {
         var ret = gContentSaver.captureWindow(aWindow, aAllowPartial, gShowDetail, gResName, gResIdx, preset, gContext, gTitles[this.index]);
         if ( ret ) {
             if ( gContext == "indepth" ) {
-                gURL2Name[this.URL] = ret[0];
+                gURL2Name[sbCommonUtils.normalizeURI(this.URL)] = ret[0];
                 gFile2URL = ret[1];
             } else if ( gContext == "capture-again-deep" ) {
                 gFile2URL = ret[1];
@@ -851,8 +851,8 @@ var sbCrossLinker = {
             var shouldSave = false;
             Array.prototype.forEach.call(doc.links, function(link) {
                 var [url, hash] = sbCommonUtils.splitURLByAnchor(link.href);
-                if ( gURL2Name[url] ) {
-                    var name = gURL2Name[url];
+                var name = gURL2Name[sbCommonUtils.normalizeURI(url)];
+                if ( name ) {
                     link.href = sbCommonUtils.escapeFileName(name) + ".html" + hash;
                     if (gOption["recordInDepthLink"]) {
                         link.setAttribute("data-sb-indepth", "true");

@@ -236,7 +236,7 @@ var sbPageEditor = {
     getSelectionHTML: function(aSelection) {
         var range = aSelection.getRangeAt(0);
         var content = range.cloneContents();
-        var elem = aSelection.anchorNode.ownerDocument.createElement("DIV");
+        var elem = aSelection.anchorNode.ownerDocument.createElement("div");
         elem.appendChild(content);
         return elem.innerHTML;
     },
@@ -1390,7 +1390,7 @@ var sbHtmlEditor = {
         function textToHtmlOffset(aNode, aOffset) {
             // if (aNode.nodeName !== "#text") return aOffset;
             var content = (typeof aOffset == "undefined") ? aNode.textContent : aNode.textContent.substring(0, aOffset);
-            var span = aNode.ownerDocument.createElement("SPAN");
+            var span = aNode.ownerDocument.createElement("span");
             span.appendChild(aNode.ownerDocument.createTextNode(content));
             return span.innerHTML.length;
         }
@@ -1692,7 +1692,7 @@ var sbDOMEraser = {
         }
 
         // create new help
-        var helpElem = doc.createElement("DIV");
+        var helpElem = doc.createElement("div");
         helpElem.id = id;
         helpElem.isDOMEraser = true; // mark as ours
 
@@ -1768,8 +1768,8 @@ var sbDOMEraser = {
             + '</style>'
             + '<div class="header">ScrapBook DOM Eraser Usage</div>'
             + '<div class="desc">'
-                + 'Move the mouse to select an element.<br>'
-                + 'Use the following commands to operate on.<br>'
+                + 'Move the mouse to select an element.<br/>'
+                + 'Use the following commands to operate on.<br/>'
             + '</div>'
             + '<div class="table-wrapper">'
             + '<table class="keytable">'
@@ -1921,7 +1921,7 @@ var sbDOMEraser = {
         x += pos.x;
         y += pos.y;
 
-        var keyboxElem = doc.createElement("DIV");
+        var keyboxElem = doc.createElement("div");
         keyboxElem.isDOMEraser = true; // mark as ours
         keyboxElem.style.backgroundColor = "#dfd";
         keyboxElem.style.border = "2px solid black";
@@ -2074,7 +2074,7 @@ var sbDOMEraser = {
             var pos = sbDOMEraser._getPos(elem), x = pos.x, y = pos.y;
             y += elem.offsetHeight;
 
-            var labelElem = doc.createElement("DIV");
+            var labelElem = doc.createElement("div");
             labelElem.isDOMEraser = true; // mark as ours
             labelElem.style.backgroundColor = "#fff0cc";
             labelElem.style.border = "2px solid black";
@@ -2225,7 +2225,7 @@ var sbAnnotationService = {
                     }
                     sbAnnotationService.createFreenote({
                         element: sticky,
-                        content: sbCommonUtils.escapeHTMLWithSpace(text, true).replace("\n", "<br>"),
+                        content: sbCommonUtils.escapeHTMLWithSpace(text, true).replace("\n", "<br/>"),
                         isRelative: sticky.className.indexOf("scrapbook-sticky-relative") != -1,
                     });
                     break;
@@ -2288,7 +2288,7 @@ var sbAnnotationService = {
         }
 
         // create a new freenote
-        var mainDiv = win.content.document.createElement("DIV");
+        var mainDiv = win.content.document.createElement("div");
         mainDiv.setAttribute("data-sb-obj", "freenote");
         mainDiv.style.cursor = "help";
         mainDiv.style.overflow = "visible";
@@ -2348,7 +2348,7 @@ var sbAnnotationService = {
         function findTargetNode(refNode) {
             var targetNode = refNode;
             // must be one of these block elements
-            while (["BODY", "DIV", "BLOCKQUOTE", "PRE", "P", "TD", "LI", "DT", "DD"].indexOf(targetNode.nodeName) == -1 || sbCommonUtils.getSbObjectType(targetNode)) {
+            while (["body", "div", "blockquote", "pre", "p", "td", "li", "dt", "dd"].indexOf(targetNode.nodeName.toLowerCase()) == -1 || sbCommonUtils.getSbObjectType(targetNode)) {
                 targetNode = targetNode.parentNode;
             }
             // if it's before a freenote, move it after
@@ -2369,7 +2369,7 @@ var sbAnnotationService = {
         var isRelative = mainDiv.style.position != "absolute";
         mainDiv.setAttribute("data-sb-active", "1");
 
-        var headDiv = doc.createElement("DIV");
+        var headDiv = doc.createElement("div");
         headDiv.setAttribute("data-sb-obj", "freenote-header");
         headDiv.style.cursor = isRelative ? "auto" : "move";
         headDiv.style.position = "absolute";
@@ -2381,7 +2381,7 @@ var sbAnnotationService = {
         headDiv.style.width = "inherit";
         headDiv.style.height = this.FREENOTE_HEADER_HEIGHT + "px";
 
-        var bodyDiv = doc.createElement("DIV");
+        var bodyDiv = doc.createElement("div");
         bodyDiv.setAttribute("data-sb-obj", "freenote-body");
         bodyDiv.setAttribute("contentEditable", true);
         bodyDiv.style.cursor = "auto";
@@ -2395,7 +2395,7 @@ var sbAnnotationService = {
         bodyDiv.style.textAlign = "inherit";
         while ((child = mainDiv.firstChild)) bodyDiv.appendChild(child);
 
-        var footDiv = doc.createElement("DIV");
+        var footDiv = doc.createElement("div");
         footDiv.setAttribute("data-sb-obj", "freenote-footer");
         footDiv.style.cursor = "se-resize";
         footDiv.style.margin = "0px";
@@ -2405,7 +2405,7 @@ var sbAnnotationService = {
         footDiv.style.textAlign = "inherit";
         footDiv.style.height = this.FREENOTE_FOOTER_HEIGHT + "px";
 
-        var button1 = doc.createElement("INPUT");
+        var button1 = doc.createElement("input");
         button1.setAttribute("data-sb-obj", "freenote-save");
         button1.setAttribute("type", "image");
         button1.setAttribute("src", "chrome://scrapbook/skin/freenote_save.gif");
@@ -2415,7 +2415,7 @@ var sbAnnotationService = {
         button1.style.width = "16px";
         button1.style.height = "16px";
         button1.style.verticalAlign = "baseline";
-        var button2 = doc.createElement("INPUT");
+        var button2 = doc.createElement("input");
         button2.setAttribute("data-sb-obj", "freenote-delete");
         button2.setAttribute("type", "image");
         button2.setAttribute("src", "chrome://scrapbook/skin/freenote_delete.gif");
