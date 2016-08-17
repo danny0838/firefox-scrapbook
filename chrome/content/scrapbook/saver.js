@@ -290,7 +290,7 @@ sbContentSaverClass.prototype = {
         // The document might have a ridiculous location.href, such as "about:blank",
         // if there is no refURLObj yet, use the "index.html" in the target item dir as ref.
         try {
-            var elem = aDocument.createElement("A");
+            var elem = aDocument.createElement("a");
             elem.href = "";
             this.refURLObj = sbCommonUtils.convertURLToObject(elem.href);
         } catch(ex) {

@@ -1023,7 +1023,7 @@ var sbCommonUtils = {
         var outer = aNode.outerHTML;
         if (typeof(outer) != "undefined") return outer;
         // older versions without native outerHTML
-        var wrapper = aNode.ownerDocument.createElement("DIV");
+        var wrapper = aNode.ownerDocument.createElement("div");
         wrapper.appendChild(aNode.cloneNode(true));
         return wrapper.innerHTML;
     },
