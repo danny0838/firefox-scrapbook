@@ -812,7 +812,9 @@ var sbCommonUtils = {
     // preserve other chars for beauty
     // see also: validateFilename
     escapeFileName: function(aString) {
-        return aString.replace(/[#]+|(?:%[0-9A-Fa-f]{2})+/g, function(m){return encodeURIComponent(m);});
+        // " ": breaks srcset
+        // "#": as the demarcation of main location and hash
+        return aString.replace(/(?:[ #]|%[0-9A-Fa-f]{2})+/g, function(m){return encodeURIComponent(m);});
     },
 
     // process filename to make safe
