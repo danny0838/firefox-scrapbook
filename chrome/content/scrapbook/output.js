@@ -52,7 +52,7 @@ var sbOutputService = {
     exec: function() {
         this.content = this.getHTMLHead();
         var selResList = sbTreeHandler.getSelection(true, 1);
-        this.content += "<ul>\n";
+        this.content += '<ul id="container-root">\n';
         for ( var i = 0; i < selResList.length; i++ ) {
             this.content += '<li class="depth' + String(this.depth) + '">';
             this.content += this.getHTMLBody(selResList[i]);
