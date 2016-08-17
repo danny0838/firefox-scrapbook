@@ -1768,8 +1768,8 @@ var sbDOMEraser = {
             + '</style>'
             + '<div class="header">ScrapBook DOM Eraser Usage</div>'
             + '<div class="desc">'
-                + 'Move the mouse to select an element.<br>'
-                + 'Use the following commands to operate on.<br>'
+                + 'Move the mouse to select an element.<br/>'
+                + 'Use the following commands to operate on.<br/>'
             + '</div>'
             + '<div class="table-wrapper">'
             + '<table class="keytable">'
@@ -2225,7 +2225,7 @@ var sbAnnotationService = {
                     }
                     sbAnnotationService.createFreenote({
                         element: sticky,
-                        content: sbCommonUtils.escapeHTMLWithSpace(text, true).replace("\n", "<br>"),
+                        content: sbCommonUtils.escapeHTMLWithSpace(text, true).replace("\n", "<br/>"),
                         isRelative: sticky.className.indexOf("scrapbook-sticky-relative") != -1,
                     });
                     break;
