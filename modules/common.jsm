@@ -817,7 +817,7 @@ var sbCommonUtils = {
         return aString.replace(/(?:[ #]|%[0-9A-Fa-f]{2})+/g, function(m){return encodeURIComponent(m);});
     },
 
-    // process filename to make safe
+    // Tidy chars that may not be valid in a filename on a platform.
     // see also: escapeFileName
     validateFileName: function(aFileName) {
         aFileName = aFileName.replace(/[\x00-\x1F\x7F]+|^ +/g, "");
