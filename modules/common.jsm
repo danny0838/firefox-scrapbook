@@ -632,6 +632,22 @@ var sbCommonUtils = {
         }
     },
 
+    // This ensures normalizeURI("http://abc/?中文#!def%") == normalizeURI("http://ab%63/?%E4%B8%AD%E6%96%87#%21def%")
+    // Mainly to recover an overencode issue that !'()~ be saved encoded for xhtml files.
+    normalizeURI: function(aURI) {
+        try {
+            return aURI.replace(/((?!%[0-9A-F]{2}).)+|(%[0-9A-F]{2})+/gi, function (m, u, e) {
+                // unencoded part => encode as it's safe
+                if (u) return encodeURI(m);
+                // encoded part => decode-encode so that overencoded chars are recovered
+                return encodeURIComponent(decodeURIComponent(m));
+            });
+        } catch(ex) {}
+        // This URI is not encoded as UTF-8.
+        // Keep it unchanged since we cannot confidently decode it without breaking functional URI chars
+        return aURI;
+    },
+
     splitFileName: function(aFileName) {
         var pos = aFileName.lastIndexOf(".");
         return (pos != -1) ? [aFileName.substring(0, pos), aFileName.substring(pos + 1)] : [aFileName, ""];
