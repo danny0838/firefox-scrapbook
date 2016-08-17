@@ -616,7 +616,10 @@ var sbPageCombiner = {
                 if ( aNode.data ) aNode.setAttribute("data", aNode.data);
                 break;
             case "table":  case "tr":  case "th": case "td": 
-                aNode = this.setAbsoluteURL(aNode, "background");
+                if ( aNode.hasAttribute("background") ) {
+                    var url = sbCommonUtils.resolveURL(this.baseURI, aNode.getAttribute("background"));
+                    aNode.setAttribute("background", url);
+                }
                 break;
             case "input": 
                 if ( aNode.type.toLowerCase() == "image" ) aNode.setAttribute("src", aNode.src);
@@ -632,13 +635,6 @@ var sbPageCombiner = {
             var newCSStext = this.inspectCSSText(aNode.style.cssText, this.baseURI);
             if ( newCSStext ) aNode.setAttribute("style", newCSStext);
         }
-    },
-
-    setAbsoluteURL: function(aNode, aAttr) {
-        if ( aNode.getAttribute(aAttr) ) {
-            aNode.setAttribute(aAttr, sbCommonUtils.resolveURL(this.baseURI, aNode.getAttribute(aAttr)));
-        }
-        return aNode;
     },
 
 };
