@@ -853,7 +853,7 @@ var sbCrossLinker = {
                 var [url, hash] = sbCommonUtils.splitURLByAnchor(link.href);
                 if ( gURL2Name[url] ) {
                     var name = gURL2Name[url];
-                    link.href = encodeURIComponent(name) + ".html" + hash;
+                    link.href = sbCommonUtils.escapeFileName(name) + ".html" + hash;
                     if (gOption["recordInDepthLink"]) {
                         link.setAttribute("data-sb-indepth", "true");
                     }
