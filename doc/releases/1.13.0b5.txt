@@ -1,7 +1,7 @@
 Scrapbook X 1.13.0b5
 ====================
 
-Compatibility Notes
+Compatibility notes
 -------------------
 
  * This release added a feature to convert a non-folder-type item into

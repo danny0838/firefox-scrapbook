@@ -4,6 +4,7 @@ Scrapbook X 1.13.0b4
 We skipped version 1.13.0b3 to fix a pack error after uploading that
 version to the Firefox AMO.
 
+
 Changes since v1.13.0b2
 -----------------------
 

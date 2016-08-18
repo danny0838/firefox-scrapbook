@@ -1,7 +1,7 @@
 Scrapbook X 1.13.0b8
 ====================
 
-Compatibility Notes
+Compatibility notes
 -------------------
 
  * Since this release we support customized hotkey combination.

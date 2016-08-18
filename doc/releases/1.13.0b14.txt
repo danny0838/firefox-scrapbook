@@ -1,7 +1,8 @@
 Scrapbook X 1.13.0b14
 =====================
 
-Compatibility notes:
+Compatibility notes
+-------------------
 
  * Some user preferences are modified. Those set in previous versions
    would be unavailable and need a reset.
