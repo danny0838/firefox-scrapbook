@@ -55,7 +55,8 @@ var sbNoteService = {
     save: function() {
         if ( !this.changed ) return;
         if ( !sbDataSource.exists(this.resource) ) return;
-        sbCommonUtils.writeFile(this.notefile, this.HTML_HEAD + this.TEXTBOX.value + this.HTML_FOOT, "UTF-8");
+        var data = this.HTML_HEAD + sbCommonUtils.escapeHTMLWithSpace(this.TEXTBOX.value, true) + this.HTML_FOOT;
+        sbCommonUtils.writeFile(this.notefile, data, "UTF-8");
         this.saveResource();
         this.change(false);
     },
@@ -93,6 +94,7 @@ var sbNoteService = {
         var content = sbCommonUtils.readFile(aFile, "UTF-8");
         content = content.replace(this.HTML_HEAD, "");
         content = content.replace(this.HTML_FOOT, "");
+        content = sbCommonUtils.unescapeHTML(content);
         return content;
     },
 
