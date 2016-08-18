@@ -60,16 +60,11 @@ var sbNoteService2 = {
         sbNoteService.save();
         sbNoteTemplate.save();
         var source = sbNoteTemplate.getTemplate();
-        var title, content;
-        if ( sbNoteService.TEXTBOX.value.match(/\n/) ) {
-            title = RegExp.leftContext;
-            content = RegExp.rightContext;
-        } else {
-            title = sbNoteService.TEXTBOX.value;
-            content = "";
-        }
-        title = sbCommonUtils.escapeHTMLWithSpace(title, false, true, true);
-        if ( document.getElementById("sbNoteToolbarL").getAttribute("checked") ) content = content.replace(/([^>])$/mg, "$1<br>");
+        /\n|$/.test(sbNoteService.TEXTBOX.value);
+        var [title, content] = [RegExp.leftContext, RegExp.rightContext];
+        title = sbCommonUtils.escapeHTMLWithSpace(title, false, true);
+        content = sbCommonUtils.escapeHTMLWithSpace(content, false, true);
+        if ( document.getElementById("sbNoteToolbarL").getAttribute("checked") ) content = content.replace(/$/mg, "<br>");
         source = source.replace(/<%NOTE_TITLE%>/g,   title);
         source = source.replace(/<%NOTE_CONTENT%>/g, content);
         var htmlFile = sbCommonUtils.getScrapBookDir().clone();
