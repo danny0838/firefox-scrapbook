@@ -624,10 +624,28 @@ var sbCommonUtils = {
         if ((pos = name.lastIndexOf("/")) !== -1) { name = name.substring(pos + 1); }
         // decode %xx%xx%xx only if it's UTF-8 encoded
         try {
-            return decodeURIComponent(name);
+            // A URL containing non-encoded single % causes a malformed URI sequence error.
+            // Replace it with encoded %25 so that the decoding works right
+            return decodeURIComponent(name.replace(/%(?![0-9A-F]{2})/gi, "%25"));
         } catch(ex) {
             return name;
         }
+    },
+
+    // This ensures normalizeURI("http://abc/?中文#!def%") == normalizeURI("http://ab%63/?%E4%B8%AD%E6%96%87#%21def%")
+    // Mainly to recover an overencode issue that !'()~ be saved encoded for xhtml files.
+    normalizeURI: function(aURI) {
+        try {
+            return aURI.replace(/((?!%[0-9A-F]{2}).)+|(%[0-9A-F]{2})+/gi, function (m, u, e) {
+                // unencoded part => encode as it's safe
+                if (u) return encodeURI(m);
+                // encoded part => decode-encode so that overencoded chars are recovered
+                return encodeURIComponent(decodeURIComponent(m));
+            });
+        } catch(ex) {}
+        // This URI is not encoded as UTF-8.
+        // Keep it unchanged since we cannot confidently decode it without breaking functional URI chars
+        return aURI;
     },
 
     splitFileName: function(aFileName) {
@@ -806,14 +824,33 @@ var sbCommonUtils = {
         return aString.replace(/([\*\+\?\.\^\/\$\\\|\[\]\{\}\(\)])/g, "\\$1");
     },
 
+    unescapeCss: function(aStr) {
+        var that = arguments.callee;
+        if (!that.replaceRegex) {
+            that.replaceRegex = /\\([0-9A-Fa-f]{1,6}) ?|\\(.)/g;
+            that.getCodes = function (n) {
+                if (n < 0x10000) return [n];
+                n -= 0x10000;
+                return [0xD800+(n>>10), 0xDC00+(n&0x3FF)];
+            };
+            that.replaceFunc = function (m, u, c) {
+                if (c) return c;
+                if (u) return String.fromCharCode.apply(null, that.getCodes(parseInt(u, 16)));
+            };
+        }
+        return aStr.replace(that.replaceRegex, that.replaceFunc);
+    },
+
     // escape valid filename characters that are misleading in the URI
     // preserve other chars for beauty
     // see also: validateFilename
     escapeFileName: function(aString) {
-        return aString.replace(/[#]+|(?:%[0-9A-Fa-f]{2})+/g, function(m){return encodeURIComponent(m);});
+        // " ": breaks srcset
+        // "#": as the demarcation of main location and hash
+        return aString.replace(/(?:[ #]|%[0-9A-Fa-f]{2})+/g, function(m){return encodeURIComponent(m);});
     },
 
-    // process filename to make safe
+    // Tidy chars that may not be valid in a filename on a platform.
     // see also: escapeFileName
     validateFileName: function(aFileName) {
         aFileName = aFileName.replace(/[\x00-\x1F\x7F]+|^ +/g, "");
@@ -986,7 +1023,7 @@ var sbCommonUtils = {
         var outer = aNode.outerHTML;
         if (typeof(outer) != "undefined") return outer;
         // older versions without native outerHTML
-        var wrapper = aNode.ownerDocument.createElement("DIV");
+        var wrapper = aNode.ownerDocument.createElement("div");
         wrapper.appendChild(aNode.cloneNode(true));
         return wrapper.innerHTML;
     },

@@ -52,7 +52,7 @@ var sbOutputService = {
     exec: function() {
         this.content = this.getHTMLHead();
         var selResList = sbTreeHandler.getSelection(true, 1);
-        this.content += "<ul>\n";
+        this.content += '<ul id="container-root">\n';
         for ( var i = 0; i < selResList.length; i++ ) {
             this.content += '<li class="depth' + String(this.depth) + '">';
             this.content += this.getHTMLBody(selResList[i]);
@@ -780,7 +780,7 @@ var sbOutputService = {
             + '        var cache = data.cache;\n'
             + '        var item = data.item;\n'
             + '        var wrapper = document.getElementById("result");\n'
-            + '        var result = document.createElement("LI");\n'
+            + '        var result = document.createElement("li");\n'
             + '        var subpath = "data/" + item.id + "/" + cache.path.replace(/[^\\/]+/g, function(m){return encodeURIComponent(m);});\n'
             + '        var bullet = this.config["list_bullet"] + " ";\n'
             + '        var text = item.type == "bookmark" ?\n'
@@ -788,7 +788,7 @@ var sbOutputService = {
             + '            item.title + ((cache.path != "index.html") ? (" (" + cache.path + ")") : "");\n'
             + '        if (item.type != "bookmark") {\n'
             + '            var href = scrapbook.path + "/" + "tree/frame.html#../" + subpath;\n'
-            + '            var link = document.createElement("A");\n'
+            + '            var link = document.createElement("a");\n'
             + '            link.setAttribute("href", href);\n'
             + '            link.setAttribute("target", "_blank");\n'
             + '            link.setAttribute("class", "bookmark");\n'
@@ -798,7 +798,7 @@ var sbOutputService = {
             + '        }\n'
             + '        var href = (item.type == "bookmark") ? item.source : scrapbook.path + "/" + subpath;\n'
             + '        var target = (item.type == "bookmark") ? "_blank" : "main";\n'
-            + '        var link = document.createElement("A");\n'
+            + '        var link = document.createElement("a");\n'
             + '        link.setAttribute("href", href);\n'
             + '        link.setAttribute("target", target);\n'
             + '        link.setAttribute("class", item.type);\n'
@@ -815,7 +815,7 @@ var sbOutputService = {
             + '\n'
             + '    addMsg: function(msg) {\n'
             + '        var wrapper = document.getElementById("result");\n'
-            + '        var result = document.createElement("LI");\n'
+            + '        var result = document.createElement("li");\n'
             + '        result.appendChild(document.createTextNode(msg));\n'
             + '        wrapper.appendChild(result);\n'
             + '    },\n'

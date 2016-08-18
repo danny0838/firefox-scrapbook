@@ -344,7 +344,7 @@ var sbPageCombiner = {
         }
 
         this.isTargetCombined = false;
-        var anchor = this.BROWSER.contentDocument.createElement("A");
+        var anchor = this.BROWSER.contentDocument.createElement("a");
         anchor.href = "";
         this.baseURI = anchor.href;
         if ( sbCombineService.index == 0 ) {
@@ -424,7 +424,7 @@ var sbPageCombiner = {
             window.location.reload();
         }
 
-        var divBody = this.BROWSER.contentDocument.createElement("DIV");
+        var divBody = this.BROWSER.contentDocument.createElement("div");
         var attrs = this.BODY.attributes;
         for (var i = 0; i < attrs.length; i++) {
             divBody.setAttribute(attrs[i].name, attrs[i].value);
@@ -432,7 +432,7 @@ var sbPageCombiner = {
         divBody.id = "item" + sbCombineService.curID + "body";
         divBody = sbCommonUtils.surroundByTags(divBody, this.BODY.innerHTML);
 
-        var divHTML = this.BROWSER.contentDocument.createElement("DIV");
+        var divHTML = this.BROWSER.contentDocument.createElement("div");
         var attrs = this.BROWSER.contentDocument.getElementsByTagName("html")[0].attributes;
         for (var i = 0; i < attrs.length; i++) {
             divHTML.setAttribute(attrs[i].name, attrs[i].value);
@@ -440,14 +440,14 @@ var sbPageCombiner = {
         divHTML.id = "item" + sbCombineService.curID + "html";
         divHTML = sbCommonUtils.surroundByTags(divHTML, divBody);
 
-        var divWrap = this.BROWSER.contentDocument.createElement("DIV");
+        var divWrap = this.BROWSER.contentDocument.createElement("div");
         divWrap.id = "item" + sbCombineService.curID;
         divWrap.style.position = "relative";
         return sbCommonUtils.surroundByTags(divWrap, divHTML);
     },
 
     surroundDOMCombined: function() {
-        var divWrap = this.BROWSER.contentDocument.createElement("DIV");
+        var divWrap = this.BROWSER.contentDocument.createElement("div");
         divWrap.id = "item" + sbCombineService.curID;
         return sbCommonUtils.surroundByTags(divWrap, this.BODY.innerHTML);
     },
@@ -564,7 +564,7 @@ var sbPageCombiner = {
         // CSS get by cssText is always url("double-quoted-with-\"quote\"-escaped")
         var regex = / url\(\"((?:\\.|[^"])+)\"\)/g;
         aCSSText = aCSSText.replace(regex, function() {
-            var dataURL = arguments[1];
+            var dataURL = sbCommonUtils.unescapeCss(arguments[1]);
             if (dataURL.startsWith("data:")) return ' url("' + dataURL + '")';
             dataURL = sbCommonUtils.resolveURL(aRefURL, dataURL);
             // redirect the files to the original folder so we can capture them later on (and will rewrite the CSS)
@@ -593,6 +593,11 @@ var sbPageCombiner = {
                 sbCommonUtils.removeNode(aNode);
                 return;
                 break;
+            case "base":
+                // base tags in the body element is unusual
+                // blank it anyway
+                if ( aNode.hasAttribute("href") ) aNode.setAttribute("href", "");
+                break;
             case "body": 
                 // move body specific attributes into inline styles so that it can be transfered to div
                 // inline style takes precedence than the corresponding HTML attribute
@@ -609,17 +614,33 @@ var sbPageCombiner = {
                     aNode.removeAttribute("text");
                 }
                 break;
-            case "img": case "embed": case "source": case "iframe": 
+            case "img": case "source": 
+                if ( aNode.hasAttribute("srcset") ) {
+                    var that = this;
+                    var newSrcset = gContentSaver.parseSrcset(aNode.getAttribute("srcset"), function(url){
+                        return sbCommonUtils.resolveURL(that.baseURI, url);
+                    });
+                    aNode.setAttribute("srcset", newSrcset);
+                }
+            case "input": 
+                if ( aNode.nodeName.toLowerCase() == "input" && aNode.type.toLowerCase() != "image" ) break;
+            case "embed": case "audio": case "video": case "track": case "iframe": case "script": 
                 if ( aNode.src ) aNode.setAttribute("src", aNode.src);
                 break;
             case "object": 
                 if ( aNode.data ) aNode.setAttribute("data", aNode.data);
                 break;
-            case "table":  case "tr":  case "th": case "td": 
-                aNode = this.setAbsoluteURL(aNode, "background");
+            case "applet": 
+                if ( aNode.hasAttribute("archive") ) {
+                    var url = sbCommonUtils.resolveURL(this.baseURI, aNode.getAttribute("archive"));
+                    aNode.setAttribute("archive", url);
+                }
                 break;
-            case "input": 
-                if ( aNode.type.toLowerCase() == "image" ) aNode.setAttribute("src", aNode.src);
+            case "table":  case "tr":  case "th": case "td": 
+                if ( aNode.hasAttribute("background") ) {
+                    var url = sbCommonUtils.resolveURL(this.baseURI, aNode.getAttribute("background"));
+                    aNode.setAttribute("background", url);
+                }
                 break;
             case "a": case "area": 
                 if ( aNode.href.startsWith("file:") ) aNode.setAttribute("href", aNode.href);
@@ -632,13 +653,6 @@ var sbPageCombiner = {
             var newCSStext = this.inspectCSSText(aNode.style.cssText, this.baseURI);
             if ( newCSStext ) aNode.setAttribute("style", newCSStext);
         }
-    },
-
-    setAbsoluteURL: function(aNode, aAttr) {
-        if ( aNode.getAttribute(aAttr) ) {
-            aNode.setAttribute(aAttr, sbCommonUtils.resolveURL(this.baseURI, aNode.getAttribute(aAttr)));
-        }
-        return aNode;
     },
 
 };
