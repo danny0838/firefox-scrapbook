@@ -805,13 +805,13 @@ var sbCommonUtils = {
         return aStr.replace(/\r|\n|\t/g, " __BR__ ");
     },
 
-    escapeHTML: function(aStr, aNoDoubleQuotes, aSingleQuotes, aNoAmp) {
-        var list = {"&": (aNoAmp ? "&" : "&amp;"), "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&#39;" : "'") };
+    escapeHTML: function(aStr, aNoDoubleQuotes, aSingleQuotes) {
+        var list = {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&#39;" : "'") };
         return aStr.replace(/[&<>"']/g, function(m){ return list[m]; });
     },
 
-    escapeHTMLWithSpace: function(aStr, aNoDoubleQuotes, aSingleQuotes, aNoAmp) {
-        var list = {"&": (aNoAmp ? "&" : "&amp;"), "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&#39;" : "'"), " ": "&nbsp;" };
+    escapeHTMLWithSpace: function(aStr, aNoDoubleQuotes, aSingleQuotes) {
+        var list = {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&#39;" : "'"), " ": "&nbsp;" };
         return aStr.replace(/[&<>"']| (?= )/g, function(m){ return list[m]; });
     },
 
