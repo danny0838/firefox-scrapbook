@@ -4,8 +4,22 @@ var sbCaptureOptions = {
     param: null,
 
     init: function() {
-        if ( !window.arguments ) window.close();
-        this.param = window.arguments[0];
+        if (window.arguments) {
+            // opened from capture detail
+            this.param = window.arguments[0];
+            document.documentElement.getButton("accept").label = sbCommonUtils.lang("CAPTURE_OK_BUTTON");
+        } else {
+            // opened for default capture options
+            // this.param.item = undefined
+            this.param = {
+                option: {},
+                result: 1,
+            };
+            document.getElementById("sbDetailTabs").selectedIndex = 1;
+            document.getElementById("sbDetailTabGeneral").collapsed = true;
+            document.getElementById("sbDetailInDepthBox").collapsed = true;
+        }
+
         // load from preference
         document.getElementById("sbDetailOptionImages").checked = sbCommonUtils.getPref("capture.default.images", true);
         document.getElementById("sbDetailOptionMedia").checked = sbCommonUtils.getPref("capture.default.media", true);
@@ -18,25 +32,30 @@ var sbCaptureOptions = {
         document.getElementById("sbDetailDownLinkMethod").value = sbCommonUtils.getPref("capture.default.downLinkMethod", 0);
         document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("capture.default.downLinkFilter", "");
         document.getElementById("sbDetailInDepth").value = sbCommonUtils.getPref("capture.default.inDepthLevels", 0);
-        // accept button
-        document.documentElement.getButton("accept").label = sbCommonUtils.lang("CAPTURE_OK_BUTTON");
+
         // title
-        this.fillTitleList();
+        if (this.param.item) {
+            this.fillTitleList();
+        }
+
         // script warning
         this.updateScriptWarning();
+
         // context specific settings
-        if ( this.param.context == "capture-again" || this.param.context == "capture-again-deep" ) {
-            document.getElementById("sbDetailFolderRow").collapsed = true;
-            document.getElementById("sbDetailCommentRow").collapsed = true;
-            document.getElementById("sbDetailWarnAboutRenew").hidden = false;
-            if ( this.param.context == "capture-again-deep" ) {
-                document.getElementById("sbDetailInDepthBox").collapsed = true;
+        if (this.param.item) {
+            if ( this.param.context == "capture-again" || this.param.context == "capture-again-deep" ) {
+                document.getElementById("sbDetailFolderRow").collapsed = true;
+                document.getElementById("sbDetailCommentRow").collapsed = true;
+                document.getElementById("sbDetailWarnAboutRenew").hidden = false;
+                if ( this.param.context == "capture-again-deep" ) {
+                    document.getElementById("sbDetailInDepthBox").collapsed = true;
+                }
+            } else {
+                // make folder list
+                setTimeout(function(){ sbFolderSelector.init(); }, 100);
+                // comment
+                document.getElementById("sbDetailComment").value = this.param.item.comment.replace(/ __BR__ /g, "\n");
             }
-        } else {
-            // make folder list
-            setTimeout(function(){ sbFolderSelector.init(); }, 100);
-            // comment
-            document.getElementById("sbDetailComment").value = this.param.item.comment.replace(/ __BR__ /g, "\n");
         }
     },
 
@@ -69,8 +88,10 @@ var sbCaptureOptions = {
 
     accept: function() {
         // set return values
-        this.param.item.comment = sbCommonUtils.escapeComment(document.getElementById("sbDetailComment").value);
-        this.param.item.title = document.getElementById("sbDetailTitle").value;
+        if (this.param.item) {
+            this.param.item.title = document.getElementById("sbDetailTitle").value;
+            this.param.item.comment = sbCommonUtils.escapeComment(document.getElementById("sbDetailComment").value);
+        }
         this.param.option["images"] = document.getElementById("sbDetailOptionImages").checked;
         this.param.option["media"] = document.getElementById("sbDetailOptionMedia").checked;
         this.param.option["fonts"] = document.getElementById("sbDetailOptionFonts").checked;
@@ -82,6 +103,7 @@ var sbCaptureOptions = {
         this.param.option["downLinkMethod"] = parseInt("0" + document.getElementById("sbDetailDownLinkMethod").value, 10);
         this.param.option["downLinkFilter"] = document.getElementById("sbDetailDownLinkFilter").value;
         this.param.option["inDepth"] = parseInt(document.getElementById("sbDetailInDepth").value, 10);
+
         // save to preference
         sbCommonUtils.setPref("capture.default.images", this.param.option["images"]);
         sbCommonUtils.setPref("capture.default.media", this.param.option["media"]);
@@ -94,6 +116,7 @@ var sbCaptureOptions = {
         sbCommonUtils.setPref("capture.default.downLinkMethod", this.param.option["downLinkMethod"]);
         sbCommonUtils.setPref("capture.default.downLinkFilter", this.param.option["downLinkFilter"]);
         sbCommonUtils.setPref("capture.default.inDepthLevels", this.param.option["inDepth"]);
+
         // post-fix for special cases
         if ( this.param.context === "capture-again-deep" ) {
             this.param.option["inDepth"] = 0;
@@ -102,6 +125,7 @@ var sbCaptureOptions = {
             var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
             sbDataSource.setProperty(res, "title", document.getElementById("sbDetailTitle").value);
         }
+
         // check for regex error
         var errors = [];
         this.param.option["downLinkFilter"].split(/[\r\n]/).forEach(function (srcLine, index) {
@@ -121,6 +145,7 @@ var sbCaptureOptions = {
             // yes => 0, no => 1, close => 1
             return sbCommonUtils.PROMPT.confirmEx(null, "[ScrapBook]", text, button, null, null, null, null, {});
         }
+
         return true;
     },
 

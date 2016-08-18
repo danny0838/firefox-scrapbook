@@ -363,6 +363,10 @@
         </preferences>
 
         <hbox align="center">
+            <label value="&sb.prefs.captureDefault;" />
+            <button label="&sb.button.customize;..." oncommand="window.openDialog('chrome://scrapbook/content/detail.xul?m=default', '', 'chrome,modal,centerscreen,resizable');" />
+        </hbox>
+        <hbox align="center">
             <label value="&sb.prefs.tree.unshift;" />
             <menulist preference="extensions.scrapbook.tree.unshift">
                 <menupopup>

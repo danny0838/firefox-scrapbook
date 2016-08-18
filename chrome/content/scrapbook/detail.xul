@@ -18,9 +18,9 @@
     <script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
     <script type="application/x-javascript" src="chrome://scrapbook/content/detail.js" />
 
-    <tabbox flex="1">
-        <tabs orient="horizontal">
-            <tab label="&sb.prop.general;" />
+    <tabbox id="sbDetailTabbox" flex="1" persist="selectedIndex">
+        <tabs id="sbDetailTabs" orient="horizontal">
+            <tab label="&sb.prop.general;" id="sbDetailTabGeneral" />
             <tab label="&sb.detail.option;" />
         </tabs>
         <tabpanels flex="1">

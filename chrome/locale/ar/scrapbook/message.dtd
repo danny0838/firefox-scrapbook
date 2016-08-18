@@ -268,6 +268,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "إختر مجلدا لتخزين بيانات ScrapBook.">
 <!ENTITY sb.prefs.confirmDelete "نبهني عند ازالة عناصر الشجرة">
+<!ENTITY sb.prefs.captureDefault "Default capture settings">
 <!ENTITY sb.prefs.tree.autoCollapse "عند فتح مجلد في الشجرة, تلقائيا أغلق المجلدات الاخرى">
 <!ENTITY sb.prefs.tree.unshift "وضع عنصر في">
 <!ENTITY sb.prefs.tree.unshift.top "أعلى المجلد">
