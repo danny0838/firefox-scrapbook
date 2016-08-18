@@ -1,7 +1,8 @@
 Scrapbook X 1.13.0b4
 ====================
 
-We skipped version 1.13.0b3 to fix a pack error after uploading that version to the Firefox AMO.
+We skipped version 1.13.0b3 to fix a pack error after uploading that
+version to the Firefox AMO.
 
 Changes since v1.13.0b2
 -----------------------
@@ -12,10 +13,16 @@ Bug fixes:
 
 Functionality changes:
 
- * The capture dialog now automatically starts the capture process without user confirmation and has a simpler user interface for link capture, capture again, and so on.
+ * The capture dialog now automatically starts the capture process
+   without user confirmation and has a simpler user interface for link
+   capture, capture again, and so on.
 
- * The "move up", "move down", and "delete" commands in the combine wizard now automatically scrolls the list and keeps the manipulated item visible.
+ * The "move up", "move down", and "delete" commands in the combine
+   wizard now automatically scrolls the list and keeps the manipulated
+   item visible.
 
- * Added "Alt+Up", "Alt+Down", and "Delete" as accesskeys for the combine wizard commands.
+ * Added "Alt+Up", "Alt+Down", and "Delete" as accesskeys for the combine
+   wizard commands.
 
-Also improved several zh-CN and zh-TW localization and includes several trivial internal code documentation updates.
+Also improved several zh-CN and zh-TW localization and includes several
+trivial internal code documentation updates.

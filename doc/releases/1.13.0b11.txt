@@ -6,22 +6,29 @@ Changes since v1.13.0b10
 
 Bug fixes:
 
- * In certain situations a normal key is misintepreted as a hotkey and triggers an unexpected behavior.
+ * In certain situations a normal key is misintepreted as a hotkey and
+   triggers an unexpected behavior.
 
 User interface changes:
 
- * Added a context menu with "check/uncheck selected items" directives to the capture dialog.
+ * Added a context menu with "check/uncheck selected items" directives
+   to the capture dialog.
 
  * Added "L" accesskey for the "locate" directive of the editor toolbar.
 
- * Moved import/export/reset preferences from the advanced option to the dropdown list of a new indivisual dialog button.
+ * Moved import/export/reset preferences from the advanced option to
+   the dropdown list of a new indivisual dialog button.
 
- * Added reset and delete buttons to the textboxes for hotkey customization.
+ * Added reset and delete buttons to the textboxes for hotkey
+   customization.
 
- * No more clear the hotkey when only modifier keys are pressed in a textbox for hotkey customization.
+ * No more clear the hotkey when only modifier keys are pressed in a
+   textbox for hotkey customization.
 
- * Adjusted the hotkey description text for main menu button hotkey customization.
+ * Adjusted the hotkey description text for main menu button hotkey
+   customization.
 
- * Added internal contrast to several icons so that they are more visible on a platform with a dark background theme.
+ * Added internal contrast to several icons so that they are more visible
+   on a platform with a dark background theme.
 
 Also includes some internal code optimization.

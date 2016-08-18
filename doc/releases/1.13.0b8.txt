@@ -4,7 +4,10 @@ Scrapbook X 1.13.0b8
 Compatibility Notes
 -------------------
 
- * Since this release we support customized hotkey combination. The recorded hotkey format is different to older ScrapBook versions, and as a result, if you switch from or back to the old version, you'd have to reset related hotkeys manually to get them work right.
+ * Since this release we support customized hotkey combination.
+   The recorded hotkey format is different to older ScrapBook versions,
+   and as a result, if you switch from or back to the old version,
+   you'd have to reset related hotkeys manually to get them work right.
 
 
 Changes since v1.13.0b7
@@ -12,15 +15,18 @@ Changes since v1.13.0b7
 
 Bug fixes:
 
- * Warning about capture script does not show up in the capture detail dialog.
+ * Warning about capture script does not show up in the capture detail
+   dialog.
 
  * Combine wizard freezes up if the "tree" folder does not exist.
 
- * Non-folder-type folders cannot be added to combine wizard for combination.
+ * Non-folder-type folders cannot be added to combine wizard for
+   combination.
 
 Functionality changes:
 
- * Improved cross platform hotkey support, especially the support for the command key and the hotkey presentation style for Macs.
+ * Improved cross platform hotkey support, especially the support for
+   the command key and the hotkey presentation style for Macs.
 
  * Allows customized hotkey combination in the user options.
 
