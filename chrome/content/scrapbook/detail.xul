@@ -88,8 +88,10 @@
                         <textbox id="sbDetailInDepth" type="number" size="3" value="0" min="0" />
                     </hbox>
                 </groupbox>
-                <description id="sbDetailWarnAboutRenew" flex="1" hidden="true">&sb.detail.warnAboutRenew;</description>
-                <description id="sbDetailWarnAboutScript" flex="1" hidden="true">&sb.detail.warnAboutScript;</description>
+                <vbox>
+                    <description id="sbDetailWarnAboutRenew" flex="1" hidden="true">&sb.detail.warnAboutRenew;</description>
+                    <description id="sbDetailWarnAboutScript" flex="1" hidden="true">&sb.detail.warnAboutScript;</description>
+                </vbox>
             </tabpanel>
         </tabpanels>
     </tabbox>
