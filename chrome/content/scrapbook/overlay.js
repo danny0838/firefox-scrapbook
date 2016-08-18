@@ -38,6 +38,7 @@ var sbBrowserOverlay = {
         }
         var keyMap = {
             "key.sidebar": "key_openScrapBookSidebar",
+            "key.manage": "key_ScrapBookManage",
             "key.capture": "key_ScrapBookCapture",
             "key.captureAs": "key_ScrapBookCaptureAs",
             "key.captureAllTabs": "key_ScrapBookSaveAllTabs",

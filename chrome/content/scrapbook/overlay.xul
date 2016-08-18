@@ -28,6 +28,7 @@
 
     <keyset id="mainKeyset">
         <key id="key_openScrapBookSidebar" command="viewScrapBookSidebar" />
+        <key id="key_ScrapBookManage" oncommand="sbCommonUtils.openManageWindow();" />
         <key id="key_ScrapBookCapture" oncommand="sbBrowserOverlay.execCapture(0, null, false, 'urn:scrapbook:root');" />
         <key id="key_ScrapBookCaptureAs" oncommand="sbBrowserOverlay.execCapture(0, null, true , 'urn:scrapbook:root');" />
         <key id="key_ScrapBookSaveAllTabs" oncommand="sbMenuHandler.execCaptureAllTabs();" />

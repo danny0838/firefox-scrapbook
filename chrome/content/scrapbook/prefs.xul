@@ -56,6 +56,7 @@
         <preferences>
             <preference id="extensions.scrapbook.key.menubar" name="extensions.scrapbook.key.menubar" type="string" />
             <preference id="extensions.scrapbook.key.sidebar" name="extensions.scrapbook.key.sidebar" type="string" />
+            <preference id="extensions.scrapbook.key.manage" name="extensions.scrapbook.key.manage" type="string" />
             <preference id="extensions.scrapbook.key.capture" name="extensions.scrapbook.key.capture" type="string" />
             <preference id="extensions.scrapbook.key.captureAs" name="extensions.scrapbook.key.captureAs" type="string" />
             <preference id="extensions.scrapbook.key.captureAllTabs" name="extensions.scrapbook.key.captureAllTabs" type="string" />
@@ -125,6 +126,15 @@
                     <textbox preference="extensions.scrapbook.key.sidebar" />
                 </row>
                 <row align="center">
+                    <label value="&sb.tools.manage;:" />
+                    <textbox preference="extensions.scrapbook.key.manage" />
+                </row>
+
+                <!-- Capture -->
+                <row align="center">
+                    <label value="&sb.capture;" />
+                </row>
+                <row align="center">
                     <label value="&sb.capture.entire;:" />
                     <textbox preference="extensions.scrapbook.key.capture" />
                 </row>
@@ -140,6 +150,8 @@
                     <label value="&sb.capture.bookmark;:" />
                     <textbox preference="extensions.scrapbook.key.bookmark" />
                 </row>
+
+                <!-- HTML Editor -->
                 <row align="center">
                     <label value="&sb.edit.html;" />
                 </row>
