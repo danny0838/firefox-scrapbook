@@ -35,7 +35,7 @@ var sbNoteService2 = {
         sbNoteService.save(window);
         sbCommonUtils.setPref("note.preview",  this.enabledHTMLView);
         sbCommonUtils.setPref("note.linefeed", document.getElementById("sbNoteToolbarL").getAttribute("checked") ? true : false);
-        sbCommonUtils.setPref("note.fontsize",  this.fontSize);
+        sbCommonUtils.setPref("note.fontSize",  this.fontSize);
         if ( exit ) {
             var browser = sbCommonUtils.getBrowserWindow().getBrowser();
             browser.mTabContainer.childNodes.length > 1 ? window.close() : browser.loadURI("about:blank");
@@ -43,14 +43,15 @@ var sbNoteService2 = {
     },
 
     initFontSize: function() {
-        this.fontSize = sbCommonUtils.getPref("note.fontsize", 16);
+        this.fontSize = sbCommonUtils.getPref("note.fontSize", 12);
         this.changeFontSize(this.fontSize);
-        document.getElementById("sbNoteToolbarF" + this.fontSize).setAttribute("checked", true)
+        var fontSizeElem = document.getElementById("sbNoteToolbarF" + this.fontSize);
+        if (fontSizeElem) fontSizeElem.setAttribute("checked", true);
     },
 
-    changeFontSize: function(aPixel) {
-        this.fontSize = aPixel;
-        var newStyle = "font-size: " + aPixel + "px; font-family: monospace;";
+    changeFontSize: function(aSize) {
+        this.fontSize = aSize;
+        var newStyle = "font-size: " + aSize + "pt; font-family: monospace;";
         sbNoteService.TEXTBOX.setAttribute("style", newStyle);
         sbNoteTemplate.TEXTBOX.setAttribute("style", newStyle);
     },
