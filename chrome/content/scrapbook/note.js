@@ -45,7 +45,8 @@ var sbNoteService2 = {
     initFontSize: function() {
         this.fontSize = sbCommonUtils.getPref("note.fontsize", 16);
         this.changeFontSize(this.fontSize);
-        document.getElementById("sbNoteToolbarF" + this.fontSize).setAttribute("checked", true)
+        var fontSizeElem = document.getElementById("sbNoteToolbarF" + this.fontSize);
+        if (fontSizeElem) fontSizeElem.setAttribute("checked", true);
     },
 
     changeFontSize: function(aPixel) {
