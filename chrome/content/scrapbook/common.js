@@ -8,9 +8,9 @@
  *
  *******************************************************************/
 
-const { sbCommonUtils } = Components.utils.import("resource://scrapbook-modules/common.jsm", {});
-const { sbDataSource } = Components.utils.import("resource://scrapbook-modules/datasource.jsm", {});
-const { sbShortcut } = Components.utils.import("resource://scrapbook-modules/shortcut.jsm", {});
+Components.utils.import("resource://scrapbook-modules/common.jsm");
+Components.utils.import("resource://scrapbook-modules/datasource.jsm");
+Components.utils.import("resource://scrapbook-modules/shortcut.jsm");
 
 /* javascript polyfill */
 if (!String.prototype.startsWith) {
