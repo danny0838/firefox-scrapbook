@@ -31,6 +31,7 @@ pref("extensions.scrapbook.key.manage", "");
 pref("extensions.scrapbook.key.capture", "");
 pref("extensions.scrapbook.key.captureAs", "");
 pref("extensions.scrapbook.key.captureAllTabs", "");
+pref("extensions.scrapbook.key.captureMultiple", "");
 pref("extensions.scrapbook.key.bookmark", "");
 pref("extensions.scrapbook.key.htmlEditor.quit", "F10");
 pref("extensions.scrapbook.key.htmlEditor.save", "Accel+S");

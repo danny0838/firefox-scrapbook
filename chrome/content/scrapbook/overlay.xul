@@ -32,6 +32,7 @@
         <key id="key_ScrapBookCapture" oncommand="sbBrowserOverlay.execCapture(0, null, false, 'urn:scrapbook:root');" />
         <key id="key_ScrapBookCaptureAs" oncommand="sbBrowserOverlay.execCapture(0, null, true , 'urn:scrapbook:root');" />
         <key id="key_ScrapBookSaveAllTabs" oncommand="sbMenuHandler.execCaptureAllTabs();" />
+        <key id="key_ScrapBookCaptureMultiple" oncommand="window.top.openDialog('chrome://scrapbook/content/multiple.xul','','chrome,centerscreen,all,resizable,dialog=no');" />
         <key id="key_BookmarkWithScrapBook" oncommand="sbBrowserOverlay.execBookmark('ScrapBookContextPicking');" />
     </keyset>
 
