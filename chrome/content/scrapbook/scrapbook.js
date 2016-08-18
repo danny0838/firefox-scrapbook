@@ -1055,5 +1055,9 @@ var sbSearchQueryHandler = {
 
 };
 
+window.addEventListener("SidebarFocused", function () {
+    console.log("SidebarFocused");
+    return document.getElementById("sbTree").focus();
+}, false);
 
 
