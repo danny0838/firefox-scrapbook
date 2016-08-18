@@ -27,8 +27,8 @@ var sbCaptureOptions = {
         // context specific settings
         if ( this.param.context == "capture-again" || this.param.context == "capture-again-deep" ) {
             document.getElementById("sbDetailFolderRow").collapsed = true;
+            document.getElementById("sbDetailCommentRow").collapsed = true;
             document.getElementById("sbDetailWarnAboutRenew").hidden = false;
-            document.getElementById("sbDetailTabComment").hidden = true;
             if ( this.param.context == "capture-again-deep" ) {
                 document.getElementById("sbDetailInDepthBox").collapsed = true;
             }
