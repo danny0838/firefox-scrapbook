@@ -364,6 +364,7 @@
             <preference id="extensions.scrapbook.tree.unshift" name="extensions.scrapbook.tree.unshift" type="bool" />
             <preference id="extensions.scrapbook.tree.autoCollapse" name="extensions.scrapbook.tree.autoCollapse" type="bool" />
             <preference id="extensions.scrapbook.confirmDelete" name="extensions.scrapbook.confirmDelete" type="bool" />
+            <preference id="extensions.scrapbook.autoOutput" name="extensions.scrapbook.autoOutput" type="bool" />
         </preferences>
 
         <hbox align="center">
@@ -385,6 +386,7 @@
         </hbox>
         <checkbox preference="extensions.scrapbook.tree.autoCollapse" label="&sb.prefs.tree.autoCollapse;" />
         <checkbox preference="extensions.scrapbook.confirmDelete" label="&sb.prefs.confirmDelete;" />
+        <checkbox preference="extensions.scrapbook.autoOutput" label="&sb.prefs.autoOutput;" />
     </prefpane>
 
     <prefpane id="editPane" label="&sb.prefs.edit;" flex="1">
@@ -499,13 +501,6 @@
             <label value="&sb.prefs.edit.wrapperFormat; 0:" />
             <textbox preference="extensions.scrapbook.edit.wrapperFormat.0" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
         </hbox>
-    </prefpane>
-
-    <prefpane id="advancedPane" label="&sb.prefs.advanced;" flex="1">
-        <preferences>
-            <preference id="extensions.scrapbook.autoOutput" name="extensions.scrapbook.autoOutput" type="bool" />
-        </preferences>
-        <checkbox preference="extensions.scrapbook.autoOutput" label="&sb.prefs.autoOutput;" />
     </prefpane>
 
     <script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
