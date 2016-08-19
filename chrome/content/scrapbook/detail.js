@@ -42,9 +42,7 @@ var sbCaptureOptions = {
                 }
                 document.getElementById("sbDetailWarnAboutRenew").hidden = false;
             } else {
-                // make folder list
-                setTimeout(function(){ sbFolderSelector.init(); }, 100);
-                // comment
+                sbFolderSelector.init();
                 document.getElementById("sbDetailComment").value = this.param.item.comment.replace(/ __BR__ /g, "\n");
             }
         } else {
