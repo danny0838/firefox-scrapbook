@@ -59,17 +59,6 @@ var sbCaptureOptions = {
         }
     },
 
-    updateScriptWarning: function() {
-        document.getElementById("sbDetailWarnAboutScript").hidden = !document.getElementById("sbDetailOptionScript").checked;
-    },
-
-    resetDownLinkFilters: function() {
-        var _filter = document.getElementById("sbDetailDownLinkFilter").value;
-        sbCommonUtils.resetPref("capture.default.downLinkFilter");
-        document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("capture.default.downLinkFilter", "");
-        sbCommonUtils.setPref("capture.default.downLinkFilter", _filter);
-    },
-
     fillTitleList: function() {
         var isPartial = this.param.titles.length > 1;
         var list = document.getElementById("sbDetailTitle");
@@ -82,6 +71,17 @@ var sbCaptureOptions = {
             if ( i == 0 && this.param.titles.length > 1 ) list.firstChild.appendChild(document.createElement("menuseparator"));
         }
         list.selectedIndex = isPartial ? 2 : 0;
+    },
+
+    updateScriptWarning: function() {
+        document.getElementById("sbDetailWarnAboutScript").hidden = !document.getElementById("sbDetailOptionScript").checked;
+    },
+
+    resetDownLinkFilters: function() {
+        var _filter = document.getElementById("sbDetailDownLinkFilter").value;
+        sbCommonUtils.resetPref("capture.default.downLinkFilter");
+        document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("capture.default.downLinkFilter", "");
+        sbCommonUtils.setPref("capture.default.downLinkFilter", _filter);
     },
 
     accept: function() {
