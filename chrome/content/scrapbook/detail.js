@@ -46,10 +46,10 @@ var sbCaptureOptions = {
             if ( this.param.context == "capture-again" || this.param.context == "capture-again-deep" ) {
                 document.getElementById("sbDetailFolderRow").collapsed = true;
                 document.getElementById("sbDetailCommentRow").collapsed = true;
-                document.getElementById("sbDetailWarnAboutRenew").hidden = false;
                 if ( this.param.context == "capture-again-deep" ) {
                     document.getElementById("sbDetailInDepthBox").collapsed = true;
                 }
+                document.getElementById("sbDetailWarnAboutRenew").hidden = false;
             } else {
                 // make folder list
                 setTimeout(function(){ sbFolderSelector.init(); }, 100);
