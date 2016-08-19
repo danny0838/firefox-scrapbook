@@ -27,7 +27,9 @@ var sbCaptureOptions = {
         document.getElementById("sbDetailOptionSaveDataURI").checked = sbCommonUtils.getPref("capture.default.saveDataUri", false);
         document.getElementById("sbDetailDownLinkMethod").value = sbCommonUtils.getPref("capture.default.downLinkMethod", 0);
         document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("capture.default.downLinkFilter", "");
-        document.getElementById("sbDetailInDepth").value = sbCommonUtils.getPref("capture.default.inDepthLevels", 0);
+        if ( this.param.context !== "capture-again-deep" ) {
+            document.getElementById("sbDetailInDepth").value = sbCommonUtils.getPref("capture.default.inDepthLevels", 0);
+        }
 
         // init UI
         this.updateScriptWarning();
@@ -93,7 +95,9 @@ var sbCaptureOptions = {
         this.param.option["saveDataUri"] = document.getElementById("sbDetailOptionSaveDataURI").checked;
         this.param.option["downLinkMethod"] = parseInt("0" + document.getElementById("sbDetailDownLinkMethod").value, 10);
         this.param.option["downLinkFilter"] = document.getElementById("sbDetailDownLinkFilter").value;
-        this.param.option["inDepth"] = parseInt(document.getElementById("sbDetailInDepth").value, 10);
+        if ( this.param.context !== "capture-again-deep" ) {
+            this.param.option["inDepth"] = parseInt(document.getElementById("sbDetailInDepth").value, 10);
+        }
 
         // save to preference
         sbCommonUtils.setPref("capture.default.images", this.param.option["images"]);
@@ -106,11 +110,8 @@ var sbCaptureOptions = {
         sbCommonUtils.setPref("capture.default.saveDataUri", this.param.option["saveDataUri"]);
         sbCommonUtils.setPref("capture.default.downLinkMethod", this.param.option["downLinkMethod"]);
         sbCommonUtils.setPref("capture.default.downLinkFilter", this.param.option["downLinkFilter"]);
-        sbCommonUtils.setPref("capture.default.inDepthLevels", this.param.option["inDepth"]);
-
-        // post-fix for special cases
-        if ( this.param.context === "capture-again-deep" ) {
-            this.param.option["inDepth"] = 0;
+        if ( this.param.context !== "capture-again-deep" ) {
+            sbCommonUtils.setPref("capture.default.inDepthLevels", this.param.option["inDepth"]);
         }
 
         // check for regex error
