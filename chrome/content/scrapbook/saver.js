@@ -1210,7 +1210,7 @@ sbContentSaverClass.prototype = {
                         onStopRequest: function (aRequest, aContext, aStatusCode) {
                             try {
                                 if (!!this._stream) {
-                                    this._stream.close
+                                    this._stream.close;
                                 }
                                 if (!this._skipped && aStatusCode != Components.results.NS_OK) {
                                     // download failed, remove the file and use the original URL
