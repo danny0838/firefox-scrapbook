@@ -1,0 +1,69 @@
+Scrapbook X 1.13.0rc1
+=====================
+
+Compatibility notes:
+
+ * Notes are now plain-text only.
+
+   A note saved in old versions with functional HTML markups will be
+   load as plain-text since this version, and a note saved in this
+   version may be load as HTML special chars encoded in the old
+   versions.
+
+ * Font size settings for notes now use pt instead of px unit.
+
+   The underlying user preference recoding the font size is also
+   changed.  Previous font size settings in an old version won't
+   apply to new version and vice versa.
+
+
+Changes since v1.13.0b15
+------------------------
+
+Bug fixes:
+
+ * Middle click on the ScrapBook X toolbar button doesn't work.
+
+Functionality changes:
+
+ * The "crossorigin" attribute is no more removed when capturing.
+
+ * Notes are now plain-text only.
+
+   Previously a note saves raw HTML text as-is, and its content is
+   sometimes shown as plain-text and sometimes as HTML, depending on
+   the context.  This is highly inconsistent and confusing.  Since a
+   note is more likely used for quick noting in the sidebar, and we
+   already have Note Page as a full HTML-featured note, we decided
+   to make notes strictly plain-text-only so that the user can
+   easily paste-in any plain-text contents without worrying about
+   breaking anything when they're read.
+
+ * Font size settings for notes now use pt instead of px unit.
+
+   Most softwares use pt for font size, and we made this change to
+   make it more familiar to general users.
+
+User interface changes:
+
+ * Reorganized Capture Detail dialog.
+
+   Page related information are now put in the "General" tab, and
+   capture options are put in another "Options" tab.  The last used
+   tab will be remembered.
+
+ * Reorganized Options dialog.
+
+   * Options in the Advanced tab are moved to the Organize tab.
+
+   * Added a button to set the default capture options.
+
+   * Adjusted the order of several options.
+
+ * Allows hotkey customization for Manage window and Capture Multiple
+   URLs.
+
+ * The focus is now automatically set on the data tree when the
+   ScrapBook X sidebar is toggled shown.
+
+Also includes internal code optimization and documentation revise.
