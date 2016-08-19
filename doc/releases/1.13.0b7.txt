@@ -6,15 +6,19 @@ Changes since v1.13.0b6
 
 Bug fixes:
 
- * The data link of an "object" element is not rewritten correctly on capture.
+ * The data link of an "object" element is not rewritten correctly on
+   capture.
 
- * A "source" element under a "picture" element is not handled correctly on capture.
+ * A "source" element under a "picture" element is not handled correctly
+   on capture.
 
- * A script error occurs when internalizing a page with an "img" or "source" element having "srcset" attribute.
+ * A script error occurs when internalizing a page with an "img" or
+   "source" element having "srcset" attribute.
 
 Functionality changes:
 
- * Non-captured media now writes a non-functional URI containing the source rather then "about:blank".
+ * Non-captured media now writes a non-functional URI containing the
+   source rather then "about:blank".
 
  * Adjusted the user interface behavior of the data tree:
 

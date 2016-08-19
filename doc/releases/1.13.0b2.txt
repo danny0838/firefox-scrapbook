@@ -10,18 +10,29 @@ Bug fixes:
 
  * Incomplete finalization of captures containing no embeded file download.
 
- * Bookmarks in the search results of the "Output HTML tree" search script do not point to the correct address.
+ * Bookmarks in the search results of the "Output HTML tree" search script
+   do not point to the correct address.
 
- * A rudendant page is created if an embeded media happen to linked to a webpage in certain rare cases.
+ * A rudendant page is created if an embeded media happen to linked to a
+   webpage in certain rare cases.
 
 Functionality changes:
 
- * New capture option available via "capture.default.serializeFilename" user preference.
+ * New capture option available via "capture.default.serializeFilename"
+   user preference.
 
-   With this option on, captured files are named using increamental number with the order they appear in the document flow. This would be useful when we want to manage the embeded files with a correct order and can be in regular capture, internalize, or combind. However it also has shortcomings due to lost of the orinigal filename and thus should only be used for special cases rather that usual usage.
+   With this option on, captured files are named using increamental number
+   with the order they appear in the document flow.  This would be useful
+   when we want to manage the embeded files with a correct order and can
+   be in regular capture, internalize, or combind.  However it also has
+   shortcomings due to lost of the orinigal filename and thus should only
+   be used for special cases rather that usual usage.
 
  * Removed "Save with UTF-8 encoding" from the capture detail option dialog.
 
-   This feature seems to be useful only in some very rare cases, and therfore we removed it from the dialog to "keep it simple and stupid". It is still available via the "capture.default.forceUtf8" user preference if you really need it.
+   This feature seems to be useful only in some very rare cases, and
+   therfore we removed it from the dialog to "keep it simple and stupid".
+   It is still available via the "capture.default.forceUtf8" user
+   preference if you really need it.
 
 Also includes some code optimization.
