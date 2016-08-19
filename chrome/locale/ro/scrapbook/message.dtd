@@ -268,6 +268,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "Alegeți dosarul de stocare a datelor ScrapBook.">
 <!ENTITY sb.prefs.confirmDelete "Avertizează când se șterg elemente din arbore">
+<!ENTITY sb.prefs.captureDefault "Default capture settings">
 <!ENTITY sb.prefs.tree.autoCollapse "La deschiderea unui arbore de dosare, închide automat celelalte dosare">
 <!ENTITY sb.prefs.tree.unshift "Pune noile elemente">
 <!ENTITY sb.prefs.tree.unshift.top "la începutul arborelui">

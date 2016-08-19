@@ -372,6 +372,30 @@
         <checkbox preference="extensions.scrapbook.tabs.note" label="&sb.prefs.tabs.note;" />
     </prefpane>
 
+    <prefpane id="organizePane" label="&sb.prefs.organize;" flex="1">
+        <preferences>
+            <preference id="extensions.scrapbook.tree.unshift" name="extensions.scrapbook.tree.unshift" type="bool" />
+            <preference id="extensions.scrapbook.tree.autoCollapse" name="extensions.scrapbook.tree.autoCollapse" type="bool" />
+            <preference id="extensions.scrapbook.confirmDelete" name="extensions.scrapbook.confirmDelete" type="bool" />
+        </preferences>
+
+        <hbox align="center">
+            <label value="&sb.prefs.captureDefault;" />
+            <button label="&sb.button.customize;..." oncommand="window.openDialog('chrome://scrapbook/content/detail.xul?m=default', '', 'chrome,modal,centerscreen,resizable');" />
+        </hbox>
+        <hbox align="center">
+            <label value="&sb.prefs.tree.unshift;" />
+            <menulist preference="extensions.scrapbook.tree.unshift">
+                <menupopup>
+                    <menuitem value="true" label="&sb.prefs.tree.unshift.top;" />
+                    <menuitem value="false" label="&sb.prefs.tree.unshift.bottom;" />
+                </menupopup>
+            </menulist>
+        </hbox>
+        <checkbox preference="extensions.scrapbook.tree.autoCollapse" label="&sb.prefs.tree.autoCollapse;" />
+        <checkbox preference="extensions.scrapbook.confirmDelete" label="&sb.prefs.confirmDelete;" />
+    </prefpane>
+
     <prefpane id="editPane" label="&sb.prefs.edit;" flex="1">
         <preferences>
             <preference id="extensions.scrapbook.edit.autoEditNoteX" name="extensions.scrapbook.edit.autoEditNoteX" type="bool" />
@@ -483,25 +507,6 @@
         <hbox>
             <label value="&sb.prefs.edit.wrapperFormat; 0:" />
             <textbox preference="extensions.scrapbook.edit.wrapperFormat.0" placeholder="eg. &lt;code&gt;{THIS}&lt;/code&gt;" flex="1" />
-        </hbox>
-    </prefpane>
-
-    <prefpane id="organizePane" label="&sb.prefs.organize;" flex="1">
-        <preferences>
-            <preference id="extensions.scrapbook.confirmDelete" name="extensions.scrapbook.confirmDelete" type="bool" />
-            <preference id="extensions.scrapbook.tree.autoCollapse" name="extensions.scrapbook.tree.autoCollapse" type="bool" />
-            <preference id="extensions.scrapbook.tree.unshift" name="extensions.scrapbook.tree.unshift" type="bool" />
-        </preferences>
-        <checkbox preference="extensions.scrapbook.confirmDelete" label="&sb.prefs.confirmDelete;" />
-        <checkbox preference="extensions.scrapbook.tree.autoCollapse" label="&sb.prefs.tree.autoCollapse;" />
-        <hbox align="center">
-            <label value="&sb.prefs.tree.unshift;" />
-            <menulist preference="extensions.scrapbook.tree.unshift">
-                <menupopup>
-                    <menuitem value="true" label="&sb.prefs.tree.unshift.top;" />
-                    <menuitem value="false" label="&sb.prefs.tree.unshift.bottom;" />
-                </menupopup>
-            </menulist>
         </hbox>
     </prefpane>
 

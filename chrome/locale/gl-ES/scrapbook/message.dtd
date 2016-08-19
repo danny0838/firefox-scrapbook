@@ -268,6 +268,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "Escoller un cartafol onde gardar os datos de ScrapBook.">
 <!ENTITY sb.prefs.confirmDelete "Avisarme cando se borren elementos da colección(s)">
+<!ENTITY sb.prefs.captureDefault "Default capture settings">
 <!ENTITY sb.prefs.tree.autoCollapse "Ao abrir un cartafol da colección, pechar os outros cartafoles automaticamente">
 <!ENTITY sb.prefs.tree.unshift "Poñer o elemento">
 <!ENTITY sb.prefs.tree.unshift.top "na parte superior do cartafol">
