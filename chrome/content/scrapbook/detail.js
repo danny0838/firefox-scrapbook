@@ -4,8 +4,18 @@ var sbCaptureOptions = {
     param: null,
 
     init: function() {
-        if ( !window.arguments ) window.close();
-        this.param = window.arguments[0];
+        if (window.arguments) {
+            // opened from capture detail
+            this.param = window.arguments[0];
+        } else {
+            // opened for default capture options
+            // this.param.item = undefined
+            this.param = {
+                option: {},
+                result: 1,
+            };
+        }
+
         // load from preference
         document.getElementById("sbDetailOptionImages").checked = sbCommonUtils.getPref("capture.default.images", true);
         document.getElementById("sbDetailOptionMedia").checked = sbCommonUtils.getPref("capture.default.media", true);
@@ -17,60 +27,39 @@ var sbCaptureOptions = {
         document.getElementById("sbDetailOptionSaveDataURI").checked = sbCommonUtils.getPref("capture.default.saveDataUri", false);
         document.getElementById("sbDetailDownLinkMethod").value = sbCommonUtils.getPref("capture.default.downLinkMethod", 0);
         document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("capture.default.downLinkFilter", "");
-        document.getElementById("sbDetailInDepth").value = sbCommonUtils.getPref("capture.default.inDepthLevels", 0);
-        // accept button
-        document.documentElement.getButton("accept").label = sbCommonUtils.lang("CAPTURE_OK_BUTTON");
-        // title
-        this.fillTitleList();
-        // script warning
+        if ( this.param.context !== "capture-again-deep" ) {
+            document.getElementById("sbDetailInDepth").value = sbCommonUtils.getPref("capture.default.inDepthLevels", 0);
+        }
+
+        // init UI
         this.updateScriptWarning();
-        // context specific settings
-        if ( this.param.context == "capture-again" || this.param.context == "capture-again-deep" ) {
-            document.getElementById("sbDetailFolderRow").collapsed = true;
-            document.getElementById("sbDetailWarnAboutRenew").hidden = false;
-            document.getElementById("sbDetailTabComment").hidden = true;
-            if ( this.param.context == "capture-again-deep" ) {
-                document.getElementById("sbDetailInDepthBox").collapsed = true;
+        if (this.param.item) {
+            document.documentElement.getButton("accept").label = sbCommonUtils.lang("CAPTURE_OK_BUTTON");
+            this.fillTitleList();
+            if ( this.param.context == "capture-again" || this.param.context == "capture-again-deep" ) {
+                document.getElementById("sbDetailFolderRow").collapsed = true;
+                document.getElementById("sbDetailCommentRow").collapsed = true;
+                if ( this.param.context == "capture-again-deep" ) {
+                    document.getElementById("sbDetailInDepthBox").collapsed = true;
+                }
+                document.getElementById("sbDetailWarnAboutRenew").hidden = false;
+            } else {
+                sbFolderSelector.init();
+                document.getElementById("sbDetailComment").value = this.param.item.comment.replace(/ __BR__ /g, "\n");
             }
         } else {
-            // make folder list
-            setTimeout(function(){ sbFolderSelector.init(); }, 100);
-            // comment
-            document.getElementById("sbDetailComment").value = this.param.item.comment.replace(/ __BR__ /g, "\n");
+            document.getElementById("sbDetailTabs").selectedIndex = 1;
+            document.getElementById("sbDetailTabGeneral").collapsed = true;
+            document.getElementById("sbDetailInDepthBox").collapsed = true;
         }
-    },
-
-    // hiding/unhiding the elem does not automatically update XUL window height
-    // so we must do it on out own :(
-    updateScriptWarning: function() {
-        document.getElementById("sbDetailWarnAboutScript").hidden = !document.getElementById("sbDetailOptionScript").checked;
-    },
-
-    resetDownLinkFilters: function() {
-        var _filter = document.getElementById("sbDetailDownLinkFilter").value;
-        sbCommonUtils.resetPref("capture.default.downLinkFilter");
-        document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("capture.default.downLinkFilter", "");
-        sbCommonUtils.setPref("capture.default.downLinkFilter", _filter);
-    },
-
-    fillTitleList: function() {
-        var isPartial = this.param.titles.length > 1;
-        var list = document.getElementById("sbDetailTitle");
-        if ( this.param.context == "capture-again" ) {
-            var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
-            list.appendItem(sbDataSource.getProperty(res, "title"));
-        }
-        for ( var i = 0; i < this.param.titles.length; i++ ) {
-            list.appendItem(this.param.titles[i]);
-            if ( i == 0 && this.param.titles.length > 1 ) list.firstChild.appendChild(document.createElement("menuseparator"));
-        }
-        list.selectedIndex = isPartial ? 2 : 0;
     },
 
     accept: function() {
         // set return values
-        this.param.item.comment = sbCommonUtils.escapeComment(document.getElementById("sbDetailComment").value);
-        this.param.item.title = document.getElementById("sbDetailTitle").value;
+        if (this.param.item) {
+            this.param.item.title = document.getElementById("sbDetailTitle").value;
+            this.param.item.comment = sbCommonUtils.escapeComment(document.getElementById("sbDetailComment").value);
+        }
         this.param.option["images"] = document.getElementById("sbDetailOptionImages").checked;
         this.param.option["media"] = document.getElementById("sbDetailOptionMedia").checked;
         this.param.option["fonts"] = document.getElementById("sbDetailOptionFonts").checked;
@@ -81,7 +70,10 @@ var sbCaptureOptions = {
         this.param.option["saveDataUri"] = document.getElementById("sbDetailOptionSaveDataURI").checked;
         this.param.option["downLinkMethod"] = parseInt("0" + document.getElementById("sbDetailDownLinkMethod").value, 10);
         this.param.option["downLinkFilter"] = document.getElementById("sbDetailDownLinkFilter").value;
-        this.param.option["inDepth"] = parseInt(document.getElementById("sbDetailInDepth").value, 10);
+        if ( this.param.context !== "capture-again-deep" ) {
+            this.param.option["inDepth"] = parseInt(document.getElementById("sbDetailInDepth").value, 10);
+        }
+
         // save to preference
         sbCommonUtils.setPref("capture.default.images", this.param.option["images"]);
         sbCommonUtils.setPref("capture.default.media", this.param.option["media"]);
@@ -93,15 +85,10 @@ var sbCaptureOptions = {
         sbCommonUtils.setPref("capture.default.saveDataUri", this.param.option["saveDataUri"]);
         sbCommonUtils.setPref("capture.default.downLinkMethod", this.param.option["downLinkMethod"]);
         sbCommonUtils.setPref("capture.default.downLinkFilter", this.param.option["downLinkFilter"]);
-        sbCommonUtils.setPref("capture.default.inDepthLevels", this.param.option["inDepth"]);
-        // post-fix for special cases
-        if ( this.param.context === "capture-again-deep" ) {
-            this.param.option["inDepth"] = 0;
+        if ( this.param.context !== "capture-again-deep" ) {
+            sbCommonUtils.setPref("capture.default.inDepthLevels", this.param.option["inDepth"]);
         }
-        if ( this.param.context == "capture-again" ) {
-            var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
-            sbDataSource.setProperty(res, "title", document.getElementById("sbDetailTitle").value);
-        }
+
         // check for regex error
         var errors = [];
         this.param.option["downLinkFilter"].split(/[\r\n]/).forEach(function (srcLine, index) {
@@ -121,11 +108,37 @@ var sbCaptureOptions = {
             // yes => 0, no => 1, close => 1
             return sbCommonUtils.PROMPT.confirmEx(null, "[ScrapBook]", text, button, null, null, null, null, {});
         }
+
         return true;
     },
 
     cancel: function() {
         this.param.result = 0;
+    },
+
+    fillTitleList: function() {
+        var isPartial = this.param.titles.length > 1;
+        var list = document.getElementById("sbDetailTitle");
+        if ( this.param.context == "capture-again" ) {
+            var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
+            list.appendItem(sbDataSource.getProperty(res, "title"));
+        }
+        for ( var i = 0; i < this.param.titles.length; i++ ) {
+            list.appendItem(this.param.titles[i]);
+            if ( i == 0 && this.param.titles.length > 1 ) list.firstChild.appendChild(document.createElement("menuseparator"));
+        }
+        list.selectedIndex = isPartial ? 2 : 0;
+    },
+
+    updateScriptWarning: function() {
+        document.getElementById("sbDetailWarnAboutScript").hidden = !document.getElementById("sbDetailOptionScript").checked;
+    },
+
+    resetDownLinkFilters: function() {
+        var _filter = document.getElementById("sbDetailDownLinkFilter").value;
+        sbCommonUtils.resetPref("capture.default.downLinkFilter");
+        document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("capture.default.downLinkFilter", "");
+        sbCommonUtils.setPref("capture.default.downLinkFilter", _filter);
     },
 
 };

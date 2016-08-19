@@ -1,9 +1,11 @@
 Scrapbook X 1.13.0b14
 =====================
 
-Compatibility notes:
+Compatibility notes
+-------------------
 
- * Some user preferences are modified. Those set in previous versions would be unavailable and need a reset.
+ * Some user preferences are modified. Those set in previous versions
+   would be unavailable and need a reset.
 
 
 Changes since v1.13.0b13
@@ -11,79 +13,120 @@ Changes since v1.13.0b13
 
 Bug fixes:
 
- * An error can occur when capturing a special page such as an "about:" page.
+ * An error can occur when capturing a special page such as an "about:"
+   page.
 
- * The favicon of a page captured by link or deep capture can sometimes be different to that captured from direct browse.
+ * The favicon of a page captured by link or deep capture can sometimes be
+   different to that captured from direct browse.
 
- * Elements with a special protocol (such as chrome, moz-icon, or about) that are set to be not captured are still captured.
+ * Elements with a special protocol (such as chrome, moz-icon, or about)
+   that are set to be not captured are still captured.
 
  * "Capture As" dialog becomes collapsed when toggling the script option.
 
  * "Loading charset" option only works for one deep-captured page.
 
- * Invoking "Abort" in the Capture dialog during a countdown can lead to an incomplete abort and a further error.
+ * Invoking "Abort" in the Capture dialog during a countdown can lead to an
+   incomplete abort and a further error.
 
- * Invoking "Abort" in the Capture dialog when an item is being captured causes the wrong item be marked.
+ * Invoking "Abort" in the Capture dialog when an item is being captured
+   causes the wrong item be marked.
 
- * Adding a duplicated filter in the Capture dialog is not avoided correctly in certain cases.
+ * Adding a duplicated filter in the Capture dialog is not avoided correctly
+   in certain cases.
 
  * Modifying a non-first filter in the Capture dialog triggers an error.
 
- * A deep capture can freeze up in certain cases if "Capture Selection" is run and there is a link referencing the main page.
+ * A deep capture can freeze up in certain cases if "Capture Selection"
+   is run and there is a link referencing the main page.
 
- * An embeded media may not be included correctly if a page put into the Combine Wizard contains a <base> element.
+ * An embeded media may not be included correctly if a page put into
+   the Combine Wizard contains a <base> element.
 
  * Copy Item may not work correctly on some platforms.
 
 Functionality changes:
 
- * Added capture options to determine whether to record some detail during a capture.
+ * Added capture options to determine whether to record some detail
+   during a capture.
 
-   "capture.default.recordSkippedUrl", "capture.default.recordRemovedAttr", and "capture.default.recordInDepthLink" user preferences are now available to determine whether to record the skipped URLs, the removed attributes, and mark deep capture page links during a capture. They are disabled by default since such information are more for debugging and are less likely needed for general users.
+   "capture.default.recordSkippedUrl", "capture.default.recordRemovedAttr",
+   and "capture.default.recordInDepthLink" user preferences are now
+   available to determine whether to record the skipped URLs, the removed
+   attributes, and mark deep capture page links during a capture.  They are
+   disabled by default since such information are more for debugging and
+   are less likely needed for general users.
 
  * Removed the "Reorganize Styles" capture option.
 
-   All stylesheets are now saved in their original <link> or <style> tags after tidied up. We made this change since the previous behavior of merging all styles into a single .css file fails to preserve the original data structure and causes some unresolvable issues, especially when javascript is involved.
+   All stylesheets are now saved in their original <link> or <style> tags
+   after tidied up.  We made this change since the previous behavior of
+   merging all styles into a single .css file fails to preserve the
+   original data structure and causes some unresolvable issues, especially
+   when javascript is involved.
 
-   The corresponding user preference "capture.default.rewriteStyles" is removed. A similar user preference "capture.default.tidyCss" which defaults to true and can be used to determine whether to remove non-effective styles is added.
+   The corresponding user preference "capture.default.rewriteStyles"
+   is removed.  A similar user preference "capture.default.tidyCss" which
+   defaults to true and can be used to determine whether to remove
+   non-effective styles is added.
 
- * Removed the "Keep linking to the source for not-captured objects" capture option.
+ * Removed the "Keep linking to the source for not-captured objects"
+   capture option.
 
-   This option could cause some unresolvable issues and thus we decided to remove it. We'll consider implementing this feature in another way in the future.
+   This option could cause some unresolvable issues and thus we decided
+   to remove it.  We'll consider implementing this feature in another way
+   in the future.
 
  * <noscript> tags are now always saved when capturing.
 
- * Every non-captured <link> or <script> tag now writes a non-functional URI containing the source rather then be removed when capturing.
+ * Every non-captured <link> or <script> tag now writes a non-functional
+   URI containing the source rather then be removed when capturing.
 
- * A capture now removes the integrity check related attributes from web page elements (especially stylesheets) so that they won't be blocked due to a modification made by ScrapBook X or a context change from online to offline.
+ * A capture now removes the integrity check related attributes from
+   web page elements (especially stylesheets) so that they won't be
+   blocked due to a modification made by ScrapBook X or a context
+   change from online to offline.
 
-   A new user preference "capture.default.removeIntegrity" can be used to disable this behavior is added.
+   A new user preference "capture.default.removeIntegrity" can be used
+   to disable this behavior is added.
 
- * "Download linked files" option now uses the previously used value in a Capture As.
+ * "Download linked files" option now uses the previously used value
+   in a Capture As.
 
  * Moved "Timeout" and "Loading charset" options to the capture dialog.
 
-   These options only work before a page is loaded. Previously they have been placed in the Capture As dialog, which show up after the page is loaded, causing them be ignored when capturing the main page.
+   These options only work before a page is loaded. Previously they
+   have been placed in the Capture As dialog, which show up after the
+   page is loaded, causing them be ignored when capturing the main page.
 
- * The script that saves the status of a canvas now uses double quotes instead of single quotes.
+ * The script that saves the status of a canvas now uses double quotes
+   instead of single quotes.
 
- * Combine Wizard now doesn't produce the redundant linefeeds between the wrapping div elements of each item combined.
+ * Combine Wizard now doesn't produce the redundant linefeeds between
+   the wrapping div elements of each item combined.
 
- * Combine and Internalize now always preserve all images, media, fonts, frames, styles, and scripts no matter how the capture detail options are set.
+ * Combine and Internalize now always preserve all images, media, fonts,
+   frames, styles, and scripts no matter how the capture detail options
+   are set.
 
 User interface changes:
 
- * The default document title is now selectable for a "Capture As" via dragging.
+ * The default document title is now selectable for a "Capture As"
+   via dragging.
 
- * "Pause" in Capture dialog can now be invoked at any time during the batch capture.
+ * "Pause" in Capture dialog can now be invoked at any time during
+   the batch capture.
 
- * An invalid RegExp is now forbidden in Capture dialog to prevent an error on filtering URLs.
+ * An invalid RegExp is now forbidden in Capture dialog to prevent
+   an error on filtering URLs.
 
  * Capture dialog now shows real-time status for each entry.
 
- * Capture dialog now automatically detects an entry with circular redirection and fails out on it.
+ * Capture dialog now automatically detects an entry with circular
+   redirection and fails out on it.
 
- * Double left click in Manage window now opens the content of a non-folder-type folder.
+ * Double left click in Manage window now opens the content of a
+   non-folder-type folder.
 
  * Fixed the inconsistent zh-tw localization about RegExp.
 

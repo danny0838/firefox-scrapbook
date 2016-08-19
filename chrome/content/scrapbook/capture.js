@@ -351,10 +351,16 @@ var sbCaptureTask = {
             // make sure we have at least one item downloaded successfully
             } else if (this.lastItem) {
                 if ( gContext == "capture-again" || gContext == "capture-again-deep" ) {
+                    if ( gContext == "capture-again" ) {
+                        var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gPreset[0]);
+                        sbDataSource.setProperty(res, "title", this.lastItem.title);
+                        if ( gPreset[5] ) {
+                            // converts bookmark to normal
+                            sbDataSource.setProperty(res, "type", "");
+                        }
+                        sbDataSource.setProperty(res, "chars", this.lastItem.chars);
+                    }
                     sbCrossLinker.forceReloading(gPreset[0], gPreset[1]);
-                    var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gPreset[0]);
-                    sbDataSource.setProperty(res, "chars", this.lastItem.chars);
-                    if ( gPreset[5] ) sbDataSource.setProperty(res, "type", "");
                 } else if ( gContext == "internalize" ) {
                     sbCrossLinker.forceReloadingURL(sbCommonUtils.convertFileToURL(gOption.internalize));
                 }
@@ -695,10 +701,10 @@ var sbInvisibleBrowser = {
         } catch(ex) {
         }
         this.ELEMENT.addProgressListener(this._eventListener, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
-        this.ELEMENT.docShell.allowImages = gOption["images"];
+        this.ELEMENT.docShell.allowImages = false;
         // allowMedia is supported since Firefox 24
         try {
-            this.ELEMENT.docShell.allowMedia = gOption["media"];
+            this.ELEMENT.docShell.allowMedia = false;
         } catch(ex) {}
         this.ELEMENT.docShell.allowSubframes = gOption["frames"];
         this.ELEMENT.docShell.allowJavascript = false;  // javascript error will freeze up capture process
@@ -776,12 +782,6 @@ var sbCrossLinker = {
 
     invoke: function() {
         sbDataSource.setProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gReferItem.id), "type", "site");
-        this.ELEMENT.docShell.allowImages = false;
-        try {
-            this.ELEMENT.docShell.allowMedia = false;
-        } catch(ex) {}
-        this.ELEMENT.docShell.allowJavascript = false;
-        this.ELEMENT.docShell.allowMetaRedirects = false;
         sbInvisibleBrowser.onLoadStart = function() {
             SB_trace(sbCommonUtils.lang("REBUILD_LINKS", sbCrossLinker.index + 1, sbCrossLinker.nameList.length, this.fileCount, sbCrossLinker.nameList[sbCrossLinker.index] + ".html"));
         };

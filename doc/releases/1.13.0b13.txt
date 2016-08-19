@@ -6,12 +6,14 @@ Changes since v1.13.0b12
 
 Bug fixes:
 
- * Prevent a capture error when multiple capture processes are running together.
+ * Prevent a capture error when multiple capture processes are
+   running together.
 
  * A deep capture with depth more than 1 doesn't work.
 
  * A deep capture for "Capture Again" doesn't work.
 
- * An embeded media might be not downloaded correctly if the source page contains a <base> element.
+ * An embeded media might be not downloaded correctly if the
+   source page contains a <base> element.
 
 Also includes some internal code optimization and revised some documentation.

@@ -18,14 +18,14 @@
     <script type="application/x-javascript" src="chrome://scrapbook/content/common.js" />
     <script type="application/x-javascript" src="chrome://scrapbook/content/detail.js" />
 
-    <tabbox flex="1">
-        <tabs orient="horizontal">
-            <tab label="&sb.prop.general;" />
-            <tab label="&sb.prop.comment;" id="sbDetailTabComment" />
+    <tabbox id="sbDetailTabbox" flex="1" persist="selectedIndex">
+        <tabs id="sbDetailTabs" orient="horizontal">
+            <tab label="&sb.prop.general;" id="sbDetailTabGeneral" />
+            <tab label="&sb.detail.option;" />
         </tabs>
         <tabpanels flex="1">
             <tabpanel orient="vertical" flex="1">
-                <grid id="sbDetailProperties">
+                <grid id="sbDetailProperties" flex="1">
                     <columns>
                         <column />
                         <column flex="1" />
@@ -44,8 +44,14 @@
                                 <toolbarbutton id="sbToolbarMove" tooltiptext="&sb.detail.select.folder;..." oncommand="sbFolderSelector.pick();" />
                             </hbox>
                         </row>
+                        <row id="sbDetailCommentRow" flex="1">
+                            <label value="&sb.prop.comment;:" />
+                            <textbox id="sbDetailComment" multiline="true" spellcheck="true" flex="1" />
+                        </row>
                     </rows>
                 </grid>
+            </tabpanel>
+            <tabpanel orient="vertical" flex="1">
                 <groupbox group="capture-options">
                     <caption label="&sb.detail.option;" />
                     <hbox align="center">
@@ -82,11 +88,10 @@
                         <textbox id="sbDetailInDepth" type="number" size="3" value="0" min="0" />
                     </hbox>
                 </groupbox>
-                <description id="sbDetailWarnAboutRenew" flex="1" hidden="true">&sb.detail.warnAboutRenew;</description>
-                <description id="sbDetailWarnAboutScript" flex="1" hidden="true">&sb.detail.warnAboutScript;</description>
-            </tabpanel>
-            <tabpanel flex="1">
-                <textbox id="sbDetailComment" multiline="true" spellcheck="true" flex="1" />
+                <vbox>
+                    <description id="sbDetailWarnAboutRenew" flex="1" hidden="true">&sb.detail.warnAboutRenew;</description>
+                    <description id="sbDetailWarnAboutScript" flex="1" hidden="true">&sb.detail.warnAboutScript;</description>
+                </vbox>
             </tabpanel>
         </tabpanels>
     </tabbox>

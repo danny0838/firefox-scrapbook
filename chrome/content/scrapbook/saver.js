@@ -938,7 +938,6 @@ sbContentSaverClass.prototype = {
         // and they might not work correctly in the offline environment.
         if ( this.option["removeIntegrity"] ) {
             this.removeAttr(aNode, "integrity");
-            this.removeAttr(aNode, "crossorigin");
         }
     },
 

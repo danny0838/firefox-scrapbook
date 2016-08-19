@@ -38,9 +38,11 @@ var sbBrowserOverlay = {
         }
         var keyMap = {
             "key.sidebar": "key_openScrapBookSidebar",
+            "key.manage": "key_ScrapBookManage",
             "key.capture": "key_ScrapBookCapture",
             "key.captureAs": "key_ScrapBookCaptureAs",
             "key.captureAllTabs": "key_ScrapBookSaveAllTabs",
+            "key.captureMultiple": "key_ScrapBookCaptureMultiple",
             "key.bookmark": "key_BookmarkWithScrapBook",
         };
         for (let [pref, id] in Iterator(keyMap)) {
@@ -433,7 +435,8 @@ var sbMenuHandler = {
             getElement("ScrapBookMenubarItem2").setAttribute("label", document.getElementById("ScrapBookContextMenu" + (selected ? 2 : 4)).getAttribute("label"));
             getElement("ScrapBookMenubarItem1").className = "menuitem-iconic " + (selected ? "sb-capture-partial" : "sb-capture-entire");
             getElement("ScrapBookMenubarItem2").className = "menuitem-iconic " + (selected ? "sb-capture-partial" : "sb-capture-entire");
-            getElement("ScrapBookMenubarItem5").label = getElement("ScrapBookMenubarItem5").getAttribute("sblabel");            if (!this.shouldRebuild)
+            getElement("ScrapBookMenubarItem5").label = getElement("ScrapBookMenubarItem5").getAttribute("sblabel");
+            if (!this.shouldRebuild)
                 return;
             this.shouldRebuild = false;
             this._menu.builder.rebuild();

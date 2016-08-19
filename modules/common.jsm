@@ -805,14 +805,31 @@ var sbCommonUtils = {
         return aStr.replace(/\r|\n|\t/g, " __BR__ ");
     },
 
-    escapeHTML: function(aStr, aNoDoubleQuotes, aSingleQuotes, aNoAmp) {
-        var list = {"&": (aNoAmp ? "&" : "&amp;"), "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&#39;" : "'") };
+    escapeHTML: function(aStr, aNoDoubleQuotes, aSingleQuotes) {
+        var list = {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&#39;" : "'") };
         return aStr.replace(/[&<>"']/g, function(m){ return list[m]; });
     },
 
-    escapeHTMLWithSpace: function(aStr, aNoDoubleQuotes, aSingleQuotes, aNoAmp) {
-        var list = {"&": (aNoAmp ? "&" : "&amp;"), "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&#39;" : "'"), " ": "&nbsp;" };
+    escapeHTMLWithSpace: function(aStr, aNoDoubleQuotes, aSingleQuotes) {
+        var list = {"&": "&amp;", "<": "&lt;", ">": "&gt;", '"': (aNoDoubleQuotes ? '"' : "&quot;"), "'": (aSingleQuotes ? "&#39;" : "'"), " ": "&nbsp;" };
         return aStr.replace(/[&<>"']| (?= )/g, function(m){ return list[m]; });
+    },
+
+    unescapeHTML: function(aStr) {
+        var list = {
+            "&amp;": "&",
+            "&lt;": "<",
+            "&gt;" : ">",
+            "&quot;" : '"',
+            "&apos;" : "'",
+            "&nbsp;" : " "
+        };
+
+        return aStr.replace(/&(?:amp|lt|gt|quot|apos|nbsp);|&#(?:(\d+)|x([0-9A-Fa-f]+));/g, function(entity, dec, hex) {
+            if (dec) return String.fromCharCode(parseInt(dec, 10));
+            if (hex) return String.fromCharCode(parseInt(hex, 16));
+            return list[entity];
+        });
     },
 
     // add a thin space between "--" in the comment to prevent exploits

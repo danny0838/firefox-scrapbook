@@ -268,6 +268,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML 格式化模板">
 <!ENTITY sb.prefs.data.tips "选择用户存储 ScrapBook 数据的文件夹。">
 <!ENTITY sb.prefs.confirmDelete "删除树状条目时警告我">
+<!ENTITY sb.prefs.captureDefault "默认获取设定">
 <!ENTITY sb.prefs.tree.autoCollapse "打开树状文件夹时，自动关闭其他文件夹">
 <!ENTITY sb.prefs.tree.unshift "放条目至">
 <!ENTITY sb.prefs.tree.unshift.top "文件夹顶部">
