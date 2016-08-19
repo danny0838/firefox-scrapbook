@@ -351,13 +351,16 @@ var sbCaptureTask = {
             // make sure we have at least one item downloaded successfully
             } else if (this.lastItem) {
                 if ( gContext == "capture-again" || gContext == "capture-again-deep" ) {
-                    sbCrossLinker.forceReloading(gPreset[0], gPreset[1]);
-                    var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gPreset[0]);
                     if ( gContext == "capture-again" ) {
+                        var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gPreset[0]);
                         sbDataSource.setProperty(res, "title", this.lastItem.title);
+                        if ( gPreset[5] ) {
+                            // converts bookmark to normal
+                            sbDataSource.setProperty(res, "type", "");
+                        }
+                        sbDataSource.setProperty(res, "chars", this.lastItem.chars);
                     }
-                    sbDataSource.setProperty(res, "chars", this.lastItem.chars);
-                    if ( gPreset[5] ) sbDataSource.setProperty(res, "type", "");
+                    sbCrossLinker.forceReloading(gPreset[0], gPreset[1]);
                 } else if ( gContext == "internalize" ) {
                     sbCrossLinker.forceReloadingURL(sbCommonUtils.convertFileToURL(gOption.internalize));
                 }
