@@ -112,10 +112,6 @@ var sbCaptureOptions = {
         if ( this.param.context === "capture-again-deep" ) {
             this.param.option["inDepth"] = 0;
         }
-        if ( this.param.context == "capture-again" ) {
-            var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
-            sbDataSource.setProperty(res, "title", document.getElementById("sbDetailTitle").value);
-        }
 
         // check for regex error
         var errors = [];

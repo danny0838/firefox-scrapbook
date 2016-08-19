@@ -353,6 +353,9 @@ var sbCaptureTask = {
                 if ( gContext == "capture-again" || gContext == "capture-again-deep" ) {
                     sbCrossLinker.forceReloading(gPreset[0], gPreset[1]);
                     var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gPreset[0]);
+                    if ( gContext == "capture-again" ) {
+                        sbDataSource.setProperty(res, "title", this.lastItem.title);
+                    }
                     sbDataSource.setProperty(res, "chars", this.lastItem.chars);
                     if ( gPreset[5] ) sbDataSource.setProperty(res, "type", "");
                 } else if ( gContext == "internalize" ) {
