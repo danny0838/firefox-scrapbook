@@ -52,6 +52,7 @@ function sbContentSaverClass() {
         "fileAsHtml": sbCommonUtils.getPref("capture.default.fileAsHtml", false),
         "forceUtf8": sbCommonUtils.getPref("capture.default.forceUtf8", true),
         "tidyCss": sbCommonUtils.getPref("capture.default.tidyCss", true),
+        "rewriteCss": sbCommonUtils.getPref("capture.default.rewriteCss", true),
         "removeIntegrity": sbCommonUtils.getPref("capture.default.removeIntegrity", true),
         "saveDataUri": sbCommonUtils.getPref("capture.default.saveDataUri", false),
         "serializeFilename": sbCommonUtils.getPref("capture.default.serializeFilename", false),
@@ -142,6 +143,7 @@ sbContentSaverClass.prototype = {
                 this.option["fileAsHtml"] = false;
                 this.option["forceUtf8"] = false;
                 this.option["tidyCss"] = false;
+                this.option["rewriteCss"] = false;
                 this.option["removeIntegrity"] = false;
                 this.option["downLinkMethod"] = 0;
                 this.option["inDepth"] = 0;
@@ -429,6 +431,9 @@ sbContentSaverClass.prototype = {
                             var cssText = this.processCSSRules(css, this.refURLObj.spec, aDocument, "");
                             cssText = "\n/* Code tidied up by ScrapBook */\n" + cssText;
                             node.textContent = cssText;
+                        } else if ( this.option["rewriteCss"] ) {
+                            var cssText = this.inspectCSSFileText(node.textContent, this.refURLObj.spec);
+                            node.textContent = cssText;
                         } else {
                             // keep the styles as-is
                         }
@@ -452,6 +457,10 @@ sbContentSaverClass.prototype = {
                             var cssText = this.processCSSRules(css, url, aDocument, "");
                             cssText = "/* Code tidied up by ScrapBook */\n" + cssText;
                             var fileName = this.download(url, "quote", "cssText", { cssText: cssText });
+                            if (fileName) node.setAttribute("href", fileName);
+                        } else if ( this.option["rewriteCss"] ) {
+                            var url = css.href;
+                            var fileName = this.download(url, "quote", "cssFile");
                             if (fileName) node.setAttribute("href", fileName);
                         } else {
                             var fileName = this.download(url, null);
@@ -1066,6 +1075,138 @@ sbContentSaverClass.prototype = {
         }
     },
 
+    // Process a downloaded css file and rewrite it
+    // Browser normally determine the charset of a CSS file via:
+    // 1. HTTP header content-type
+    // 2. Unicode BOM in the CSS file
+    // 3. @charset rule in the CSS file
+    // 4. assume it's UTF-8
+    // We follow 1-3 but not 4: if no charset found, manipulate it as byte string.
+    processCSSFile: function(aCSSFile, aRefURL, aCharset) {
+        var charset = aCharset;
+        var cssText = sbCommonUtils.readFile(aCSSFile, charset);
+        var hasAtRule = false;
+
+        if (!charset) {
+            if (cssText.startsWith("\xEF\xBB\xBF")) {
+                charset = "UTF-8";
+            } else if (cssText.startsWith("\xFE\xFF")) {
+                charset = "UTF-16BE";
+            } else if (cssText.startsWith("\xFF\xFE")) {
+                charset = "UTF-16LE";
+            } else if (cssText.startsWith("\x00\x00\xFE\xFF")) {
+                charset = "UTF-32BE";
+            } else if (cssText.startsWith("\x00\x00\xFF\xFE")) {
+                charset = "UTF-32LE";
+            } else if (/^@charset (["'])(\w+)\1;/.test(cssText)) {
+                charset = RegExp.$2;
+                hasAtRule = true;
+            }
+            if (charset) cssText = sbCommonUtils.convertToUnicode(cssText, charset);
+        } else {
+            if (/^@charset (["'])(\w+)\1;/.test(cssText)) {
+                hasAtRule = true;
+            }
+        }
+
+        // if the CSS file doesn't have @charset, save it as UTF-8 so that it can be load correctly
+        if (!hasAtRule) charset = "UTF-8";
+
+        cssText = this.inspectCSSFileText(cssText, aRefURL);
+        if (charset) {
+            sbCommonUtils.writeFile(aCSSFile, cssText, charset);
+        } else {
+            sbCommonUtils.writeFileBytes(aCSSFile, cssText);
+        }
+        this.downloadRewriteFiles[this.item.id].push([aCSSFile, charset]);
+    },
+
+    // process the CSS text of whole <style> or CSS file
+    //
+    // @TODO: current code is heuristic and ugly,
+    //        consider implementing a real CSS parser to prevent potential error
+    //        for certain complicated CSS
+    inspectCSSFileText: function(aCSSText, aRefURL) {
+        var that = this;
+        var pCm = "(?:/\\*[\\s\\S]*?\\*/)"; // comment
+        var pSp = "(?:[ \\t\\r\\n\\v\\f]*)"; // space equivalents
+        var pCmSp = "(?:" + "(?:" + pCm + "|" + pSp + ")" + "*" + ")"; // comment or space
+        var pChar = "(?:\\\\.|[^\\\\])"; // a char, or escaped
+        var pStr = "(?:" + pChar + "*?" + ")"; // string
+        var pSStr = "(?:" + pCmSp + pStr + pCmSp + ")"; // spaced string
+        var pDQStr = "(?:" + '"' + pStr + '"' + ")"; // single quoted string
+        var pSQStr = "(?:" + "'" + pStr + "'" + ")"; // double quoted string
+        var pES = "(?:" + "(?:" + [pCm, pDQStr, pSQStr, pChar].join("|") + ")*?" + ")"; // embeded string
+        var pUrl = "(?:" + "url\\(" + pSp + "(?:" + [pDQStr, pSQStr, pSStr].join("|") + ")" + pSp + "\\)" + ")";
+        var pUrl2 = "(" + "url\\(" + pSp + ")(" + [pDQStr, pSQStr, pSStr].join("|") + ")(" + pSp + "\\)" + ")"; // catch 3
+        var pRImport = "(" + "@import" + pCmSp + ")(" + [pUrl, pDQStr, pSQStr].join("|") + ")(" + pCmSp + ";" + ")"; // catch 3
+        var pRFontFace = "(" + "@font-face" + pCmSp + "{" + pES + "}" + ")"; // catch 1
+
+        var parseUrlFunc = function (text, callback) {
+            return text.replace(new RegExp(pUrl2, "gi"), function (m, u1, u2, u3) {
+                if (u2.startsWith('"') && u2.endsWith('"')) {
+                    var ret = callback(u2.slice(1, -1));
+                } else if (u2.startsWith("'") && u2.endsWith("'")) {
+                    var ret = callback(u2.slice(1, -1));
+                } else {
+                    var ret = callback(u2.trim());
+                }
+                return u1 + '"' + ret + '"' + u3;
+            });
+        };
+        var importParseUrlFunc = function (url) {
+            var dataURL = sbCommonUtils.unescapeCss(url);
+            if (dataURL.startsWith("data:") && !that.option["saveDataUri"]) return dataURL;
+            dataURL = sbCommonUtils.resolveURL(aRefURL, dataURL);
+            var dataFile = that.download(dataURL, "quote", "cssFile");
+            if (dataFile) dataURL = dataFile;
+            return dataURL;
+        };
+
+        var cssText = aCSSText.replace(
+            new RegExp([pCm, pRImport, pRFontFace, "("+pUrl+")"].join("|"), "gi"),
+            function (m, im1, im2, im3, ff, u) {
+                if (im2) {
+                    if (im2.startsWith('"') && im2.endsWith('"')) {
+                        var ret = 'url("' + importParseUrlFunc(im2.slice(1, -1)) + '")';
+                    } else if (im2.startsWith("'") && im2.endsWith("'")) {
+                        var ret = 'url("' + importParseUrlFunc(im2.slice(1, -1)) + '")';
+                    } else {
+                        var ret = parseUrlFunc(im2, importParseUrlFunc);
+                    }
+                    return im1 + ret + im3;
+                } else if (ff) {
+                    return parseUrlFunc(m, function (url) {
+                        var dataURL = sbCommonUtils.unescapeCss(url);
+                        if (dataURL.startsWith("data:") && !that.option["saveDataUri"]) return dataURL;
+                        dataURL = sbCommonUtils.resolveURL(aRefURL, dataURL);
+                        if (that.option["fonts"]) {
+                            var dataFile = that.download(dataURL, "quote");
+                            if (dataFile) dataURL = dataFile;
+                        } else {
+                            dataURL = that.getSkippedURL(dataURL);
+                        }
+                        return dataURL;
+                    });
+                } else if (u) {
+                    return parseUrlFunc(m, function (url) {
+                        var dataURL = sbCommonUtils.unescapeCss(url);
+                        if (dataURL.startsWith("data:") && !that.option["saveDataUri"]) return dataURL;
+                        dataURL = sbCommonUtils.resolveURL(aRefURL, dataURL);
+                        if (that.option["images"]) {
+                            var dataFile = that.download(dataURL, "quote");
+                            if (dataFile) dataURL = dataFile;
+                        } else {
+                            dataURL = that.getSkippedURL(dataURL);
+                        }
+                        return dataURL;
+                    });
+                }
+                return m;
+            });
+        return cssText;
+    },
+
     inspectCSSText: function(aCSSText, aRefURL, aType) {
         var that = this;
         // CSS get by .cssText is always url("something-with-\"double-quote\"-escaped")
@@ -1111,6 +1252,7 @@ sbContentSaverClass.prototype = {
     // aSpecialMode is special handler, can be omitted
     //   "linkFilter": for a filter for download linked files
     //   "cssText": use parsed cssText (aSpecialModeParams.cssText) as real file content
+    //   "cssFile": parse the file content as CSS after downloaded
     //
     // return "": means no download happened (should no change the url)
     // return <sourceURL>: deep capture for latter rewrite via sbCrossLinker (must have identical url)
@@ -1222,6 +1364,10 @@ sbContentSaverClass.prototype = {
                                     if (this._file) this._file.remove(true);
                                     throw "download channel fail";
                                 }
+                                // special: parse CSS file
+                                if (aSpecialMode == "cssFile") {
+                                    that.processCSSFile(this._file, sourceURL, this._content.contentCharset);
+                                }
                             } catch (ex) {
                                 errorHandler(ex);
                             }
@@ -1291,6 +1437,10 @@ sbContentSaverClass.prototype = {
                 setTimeout(function(){ that.onDownloadComplete(item); }, 0);
                 // do the copy
                 sourceFile.copyTo(targetDir, fileName);
+                // special: parse CSS file
+                if (aSpecialMode == "cssFile") {
+                    that.processCSSFile(targetFile, sourceURL);
+                }
                 return that.escapeURL(fileName, aEscapeType, true);
             } else if ( sourceURL.startsWith("data:") ) {
                 // special: use cssText
@@ -1580,7 +1730,11 @@ sbContentSaverClass.prototype = {
             var [file, charset] = data;
             var content = sbCommonUtils.readFile(file, charset);
             content = this.restoreFileNameFromHash(content);
-            sbCommonUtils.writeFile(file, content, charset);
+            if (charset) {
+                sbCommonUtils.writeFile(file, content, charset);
+            } else {
+                sbCommonUtils.writeFileBytes(file, content);
+            }
         }, this);
 
         // restore item.icon
