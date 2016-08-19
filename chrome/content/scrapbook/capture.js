@@ -701,10 +701,10 @@ var sbInvisibleBrowser = {
         } catch(ex) {
         }
         this.ELEMENT.addProgressListener(this._eventListener, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
-        this.ELEMENT.docShell.allowImages = gOption["images"];
+        this.ELEMENT.docShell.allowImages = false;
         // allowMedia is supported since Firefox 24
         try {
-            this.ELEMENT.docShell.allowMedia = gOption["media"];
+            this.ELEMENT.docShell.allowMedia = false;
         } catch(ex) {}
         this.ELEMENT.docShell.allowSubframes = gOption["frames"];
         this.ELEMENT.docShell.allowJavascript = false;  // javascript error will freeze up capture process
@@ -782,12 +782,6 @@ var sbCrossLinker = {
 
     invoke: function() {
         sbDataSource.setProperty(sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + gReferItem.id), "type", "site");
-        this.ELEMENT.docShell.allowImages = false;
-        try {
-            this.ELEMENT.docShell.allowMedia = false;
-        } catch(ex) {}
-        this.ELEMENT.docShell.allowJavascript = false;
-        this.ELEMENT.docShell.allowMetaRedirects = false;
         sbInvisibleBrowser.onLoadStart = function() {
             SB_trace(sbCommonUtils.lang("REBUILD_LINKS", sbCrossLinker.index + 1, sbCrossLinker.nameList.length, this.fileCount, sbCrossLinker.nameList[sbCrossLinker.index] + ".html"));
         };
