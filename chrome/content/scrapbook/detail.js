@@ -54,31 +54,6 @@ var sbCaptureOptions = {
         }
     },
 
-    fillTitleList: function() {
-        var isPartial = this.param.titles.length > 1;
-        var list = document.getElementById("sbDetailTitle");
-        if ( this.param.context == "capture-again" ) {
-            var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
-            list.appendItem(sbDataSource.getProperty(res, "title"));
-        }
-        for ( var i = 0; i < this.param.titles.length; i++ ) {
-            list.appendItem(this.param.titles[i]);
-            if ( i == 0 && this.param.titles.length > 1 ) list.firstChild.appendChild(document.createElement("menuseparator"));
-        }
-        list.selectedIndex = isPartial ? 2 : 0;
-    },
-
-    updateScriptWarning: function() {
-        document.getElementById("sbDetailWarnAboutScript").hidden = !document.getElementById("sbDetailOptionScript").checked;
-    },
-
-    resetDownLinkFilters: function() {
-        var _filter = document.getElementById("sbDetailDownLinkFilter").value;
-        sbCommonUtils.resetPref("capture.default.downLinkFilter");
-        document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("capture.default.downLinkFilter", "");
-        sbCommonUtils.setPref("capture.default.downLinkFilter", _filter);
-    },
-
     accept: function() {
         // set return values
         if (this.param.item) {
@@ -139,6 +114,31 @@ var sbCaptureOptions = {
 
     cancel: function() {
         this.param.result = 0;
+    },
+
+    fillTitleList: function() {
+        var isPartial = this.param.titles.length > 1;
+        var list = document.getElementById("sbDetailTitle");
+        if ( this.param.context == "capture-again" ) {
+            var res = sbCommonUtils.RDF.GetResource("urn:scrapbook:item" + this.param.item.id);
+            list.appendItem(sbDataSource.getProperty(res, "title"));
+        }
+        for ( var i = 0; i < this.param.titles.length; i++ ) {
+            list.appendItem(this.param.titles[i]);
+            if ( i == 0 && this.param.titles.length > 1 ) list.firstChild.appendChild(document.createElement("menuseparator"));
+        }
+        list.selectedIndex = isPartial ? 2 : 0;
+    },
+
+    updateScriptWarning: function() {
+        document.getElementById("sbDetailWarnAboutScript").hidden = !document.getElementById("sbDetailOptionScript").checked;
+    },
+
+    resetDownLinkFilters: function() {
+        var _filter = document.getElementById("sbDetailDownLinkFilter").value;
+        sbCommonUtils.resetPref("capture.default.downLinkFilter");
+        document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("capture.default.downLinkFilter", "");
+        sbCommonUtils.setPref("capture.default.downLinkFilter", _filter);
     },
 
 };
