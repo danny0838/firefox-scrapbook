@@ -7,7 +7,6 @@ var sbCaptureOptions = {
         if (window.arguments) {
             // opened from capture detail
             this.param = window.arguments[0];
-            document.documentElement.getButton("accept").label = sbCommonUtils.lang("CAPTURE_OK_BUTTON");
         } else {
             // opened for default capture options
             // this.param.item = undefined
@@ -15,9 +14,6 @@ var sbCaptureOptions = {
                 option: {},
                 result: 1,
             };
-            document.getElementById("sbDetailTabs").selectedIndex = 1;
-            document.getElementById("sbDetailTabGeneral").collapsed = true;
-            document.getElementById("sbDetailInDepthBox").collapsed = true;
         }
 
         // load from preference
@@ -33,16 +29,11 @@ var sbCaptureOptions = {
         document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("capture.default.downLinkFilter", "");
         document.getElementById("sbDetailInDepth").value = sbCommonUtils.getPref("capture.default.inDepthLevels", 0);
 
-        // title
-        if (this.param.item) {
-            this.fillTitleList();
-        }
-
-        // script warning
+        // init UI
         this.updateScriptWarning();
-
-        // context specific settings
         if (this.param.item) {
+            document.documentElement.getButton("accept").label = sbCommonUtils.lang("CAPTURE_OK_BUTTON");
+            this.fillTitleList();
             if ( this.param.context == "capture-again" || this.param.context == "capture-again-deep" ) {
                 document.getElementById("sbDetailFolderRow").collapsed = true;
                 document.getElementById("sbDetailCommentRow").collapsed = true;
@@ -56,6 +47,10 @@ var sbCaptureOptions = {
                 // comment
                 document.getElementById("sbDetailComment").value = this.param.item.comment.replace(/ __BR__ /g, "\n");
             }
+        } else {
+            document.getElementById("sbDetailTabs").selectedIndex = 1;
+            document.getElementById("sbDetailTabGeneral").collapsed = true;
+            document.getElementById("sbDetailInDepthBox").collapsed = true;
         }
     },
 
