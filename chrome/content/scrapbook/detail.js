@@ -59,8 +59,6 @@ var sbCaptureOptions = {
         }
     },
 
-    // hiding/unhiding the elem does not automatically update XUL window height
-    // so we must do it on out own :(
     updateScriptWarning: function() {
         document.getElementById("sbDetailWarnAboutScript").hidden = !document.getElementById("sbDetailOptionScript").checked;
     },
