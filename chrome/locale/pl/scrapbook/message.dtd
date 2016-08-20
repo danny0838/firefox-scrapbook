@@ -49,6 +49,15 @@
 <!ENTITY sb.detail.option.frames "Frames">
 <!ENTITY sb.detail.option.styles "Style">
 <!ENTITY sb.detail.option.scripts "Scripts">
+<!ENTITY sb.detail.option.tidyCss "Process CSS">
+<!ENTITY sb.detail.option.tidyCss.0 "No rewrite">
+<!ENTITY sb.detail.option.tidyCss.0.desc "Save as-is. Links may be broken.">
+<!ENTITY sb.detail.option.tidyCss.1 "Rewrite links">
+<!ENTITY sb.detail.option.tidyCss.1.desc "CSS with highly complicated syntax might not be processed correctly.">
+<!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
+<!ENTITY sb.detail.option.tidyCss.2.desc "Comments and browser unsupported CSS declaration will be removed.">
+<!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
+<!ENTITY sb.detail.option.tidyCss.3.desc "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.linked.file "Pobierz odnośniki do">
