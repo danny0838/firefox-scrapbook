@@ -1102,7 +1102,7 @@ var sbp2Manage = {
 
 	mbLoadMultibookTxt : function()
 	{
-		//Läd multiple.txt und zeigt die gefundenen Einträge in sbp2MMBTree an
+		//Läd multibook.txt und liefert die Daten an die aufrufende Funktion zurück.
 		//
 		//Ablauf:
 		//1. Dateiobjekt erstellen

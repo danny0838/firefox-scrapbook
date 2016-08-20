@@ -159,11 +159,11 @@ var sbp2SearchCache = {
 			if ( iaFile.exists() ) {
 				var iaData = sbp2Common.fileRead(iaFile);
 				var iaSplit = iaData.split("\n");
-				for ( var iaI=6; iaI<iaSplit.length - 4; iaI = iaI + 7 )
+				for ( var iaI=7; iaI<iaSplit.length - 4; iaI = iaI + 8 )
 				{
 					if ( iaSplit[iaI] == 1 ) {
-						if ( iaSplit[iaI-3] == 1 ) {
-							iaFilenames.push(iaSplit[iaI-4]);
+						if ( iaSplit[iaI-4] == 1 ) {
+							iaFilenames.push(iaSplit[iaI-5]);
 						}
 					}
 				}
@@ -183,20 +183,23 @@ var sbp2SearchCache = {
 				var iaFrames = iaData.match(/<frame( |\r|\n).*>/gi);
 				//Text aus HTML-Seiten extrahieren
 				var iaData = sbp2Common.convertToUnicode(iaData, sbp2DataSource.propertyGet(sbp2DataSource.dbData, iaRes, "chars"), iaFile.path);
-				var iaDataAll = this.convertHTML2Text(iaData);
-				if ( iaFrames ) {
-					for ( var iaJ=0; iaJ<iaFrames.length; iaJ++ )
-					{
-						//Dateiname bestimmen
-						var iaFilename = iaFrames[iaJ].match(/src=\S+"/i);
-						iaFilename = iaFilename[0].substring(5, iaFilename[0].length-1);
-						//Inhalt der Datei laden und nur den Text übernehmen
-						var iaFileFrame = iaDirectory.clone();
-						iaFileFrame.append(iaID);
-						iaFileFrame.append(iaFilename);
-						iaData = sbp2Common.fileRead(iaFileFrame);
-						iaData = sbp2Common.convertToUnicode(iaData, sbp2DataSource.propertyGet(sbp2DataSource.dbData, iaRes, "chars"));
-						iaDataAll += this.convertHTML2Text(iaData);
+				var iaDataAll = "";
+				if ( iaData.length > 0 ) {
+					iaDataAll = this.convertHTML2Text(iaData);
+					if ( iaFrames ) {
+						for ( var iaJ=0; iaJ<iaFrames.length; iaJ++ )
+						{
+							//Dateiname bestimmen
+							var iaFilename = iaFrames[iaJ].match(/src=\S+"/i);
+							iaFilename = iaFilename[0].substring(5, iaFilename[0].length-1);
+							//Inhalt der Datei laden und nur den Text übernehmen
+							var iaFileFrame = iaDirectory.clone();
+							iaFileFrame.append(iaID);
+							iaFileFrame.append(iaFilename);
+							iaData = sbp2Common.fileRead(iaFileFrame);
+							iaData = sbp2Common.convertToUnicode(iaData, sbp2DataSource.propertyGet(sbp2DataSource.dbData, iaRes, "chars"), iaFileFrame.path);
+							iaDataAll += this.convertHTML2Text(iaData);
+						}
 					}
 				}
 				//Steuerzeichen entfernen

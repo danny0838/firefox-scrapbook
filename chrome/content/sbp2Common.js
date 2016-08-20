@@ -327,7 +327,8 @@ alert("sbp2Common.absoluteURL - "+auURLAbsolute);
 		} catch(ctuEx)
 		{
 			//Keine Meldung ausgeben, um Benutzer nicht zu beunruhigen
-			alert("sbp2Common.convertToUnicode"+ctuFile+"\n---\n"+ctuEx+"\n\nData:\n"+ctuString);
+//			alert("sbp2Common.convertToUnicode"+ctuFile+"\n---\n"+ctuEx+"\n\nData:\n"+ctuString.substring(0, 100)+"\n");
+			ctuString = "";
 		}
 		return ctuString;
 	},
