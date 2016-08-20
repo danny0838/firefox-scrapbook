@@ -37,7 +37,7 @@
                         </row>
                         <row id="sbDetailFolderRow" align="center">
                             <label value="&sb.prop.folder;:" />
-                            <hbox>
+                            <hbox align="center">
                                 <menulist id="sbFolderList" class="folder-icon" flex="1" onclick="if ( event.button == 1 ) sbFolderSelector.onMiddleClick();" disabled="true">
                                     <menupopup id="sbFolderPopup" oncommand="sbFolderSelector.onChange(event.target.id);" />
                                 </menulist>
@@ -63,13 +63,24 @@
                         <checkbox id="sbDetailOptionStyles" label="&sb.detail.option.styles;" />
                         <checkbox id="sbDetailOptionScript" label="&sb.detail.option.scripts;" oncommand="sbCaptureOptions.updateScriptWarning();" />
                     </hbox>
+                    <hbox align="center">
+                        <label value="&sb.detail.option.tidyCss;:" />
+                        <menulist id="sbDetailOptionTidyCss" value="3">
+                            <menupopup>
+                                <menuitem value="0" label="&sb.detail.option.tidyCss.0;" tooltiptext="&sb.detail.option.tidyCss.0.desc;" />
+                                <menuitem value="1" label="&sb.detail.option.tidyCss.1;" tooltiptext="&sb.detail.option.tidyCss.1.desc;" />
+                                <menuitem value="2" label="&sb.detail.option.tidyCss.2;" tooltiptext="&sb.detail.option.tidyCss.2.desc;" />
+                                <menuitem value="3" label="&sb.detail.option.tidyCss.3;" tooltiptext="&sb.detail.option.tidyCss.3.desc;" />
+                            </menupopup>
+                        </menulist>
+                    </hbox>
                     <checkbox id="sbDetailOptionSaveDataURI" label="&sb.detail.option.saveDataUri;" />
                     <checkbox id="sbDetailOptionAsHtml" label="&sb.detail.option.fileAsHtml;" />
                 </groupbox>
                 <groupbox group="capture-options">
                     <caption label="&sb.detail.linked.file;" />
                     <description>&sb.detail.linked.file.desc;</description>
-                    <hbox>
+                    <hbox align="center">
                         <menulist id="sbDetailDownLinkMethod" flex="1" value="0">
                             <menupopup>
                                 <menuitem value="0" label="&sb.detail.linked.file.method0;" />

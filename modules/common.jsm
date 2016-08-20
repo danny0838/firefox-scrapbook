@@ -429,7 +429,7 @@ var sbCommonUtils = {
     },
 
     readFile: function(aFile, aCharset) {
-        var file = (typeof aFile === "string") ? this.pathToFile(aFile) : aFile;
+        var file = (typeof aFile === "string") ? this.convertPathToFile(aFile) : aFile;
         try {
             var istream = Components.classes['@mozilla.org/network/file-input-stream;1'].createInstance(Components.interfaces.nsIFileInputStream);
             istream.init(file, 1, 0, false);
