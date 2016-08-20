@@ -66,8 +66,8 @@ var sbCaptureOptions = {
         this.param.option["frames"] = document.getElementById("sbDetailOptionFrames").checked;
         this.param.option["styles"] = document.getElementById("sbDetailOptionStyles").checked;
         this.param.option["script"] = document.getElementById("sbDetailOptionScript").checked;
-        this.param.option["fileAsHtml"] = document.getElementById("sbDetailOptionAsHtml").checked;
         this.param.option["saveDataUri"] = document.getElementById("sbDetailOptionSaveDataURI").checked;
+        this.param.option["fileAsHtml"] = document.getElementById("sbDetailOptionAsHtml").checked;
         this.param.option["downLinkMethod"] = parseInt("0" + document.getElementById("sbDetailDownLinkMethod").value, 10);
         this.param.option["downLinkFilter"] = document.getElementById("sbDetailDownLinkFilter").value;
         if ( this.param.context !== "capture-again-deep" ) {
