@@ -51,8 +51,7 @@ function sbContentSaverClass() {
         "script": sbCommonUtils.getPref("capture.default.script", false),
         "fileAsHtml": sbCommonUtils.getPref("capture.default.fileAsHtml", false),
         "forceUtf8": sbCommonUtils.getPref("capture.default.forceUtf8", true),
-        "tidyCss": sbCommonUtils.getPref("capture.default.tidyCss", true),
-        "rewriteCss": sbCommonUtils.getPref("capture.default.rewriteCss", true),
+        "tidyCss": sbCommonUtils.getPref("capture.default.tidyCss", 3), // 0: none, 1: +rewrite link, 2: +remove unknown; 3: +remove unused
         "removeIntegrity": sbCommonUtils.getPref("capture.default.removeIntegrity", true),
         "saveDataUri": sbCommonUtils.getPref("capture.default.saveDataUri", false),
         "serializeFilename": sbCommonUtils.getPref("capture.default.serializeFilename", false),
@@ -142,8 +141,7 @@ sbContentSaverClass.prototype = {
                 this.option["script"] = true;
                 this.option["fileAsHtml"] = false;
                 this.option["forceUtf8"] = false;
-                this.option["tidyCss"] = false;
-                this.option["rewriteCss"] = false;
+                this.option["tidyCss"] = 0;
                 this.option["removeIntegrity"] = false;
                 this.option["downLinkMethod"] = 0;
                 this.option["inDepth"] = 0;
@@ -427,11 +425,11 @@ sbContentSaverClass.prototype = {
                         // a special stylesheet used by scrapbook, keep it intact
                         return;
                     } else if ( this.option["styles"] ) {
-                        if ( this.option["tidyCss"] ) {
+                        if ( this.option["tidyCss"] >= 2 ) {
                             var cssText = this.processCSSRules(css, this.refURLObj.spec, aDocument, "");
                             cssText = "\n/* Code tidied up by ScrapBook */\n" + cssText;
                             node.textContent = cssText;
-                        } else if ( this.option["rewriteCss"] ) {
+                        } else if ( this.option["tidyCss"] == 1 ) {
                             var cssText = this.inspectCSSFileText(node.textContent, this.refURLObj.spec);
                             node.textContent = cssText;
                         } else {
@@ -453,12 +451,12 @@ sbContentSaverClass.prototype = {
                         // a special stylesheet used by scrapbook or other addons/programs, keep it intact
                         return;
                     } else if ( this.option["styles"] ) {
-                        if ( this.option["tidyCss"] ) {
+                        if ( this.option["tidyCss"] >= 2 ) {
                             var cssText = this.processCSSRules(css, url, aDocument, "");
                             cssText = "/* Code tidied up by ScrapBook */\n" + cssText;
                             var fileName = this.download(url, "quote", "cssText", { cssText: cssText });
                             if (fileName) node.setAttribute("href", fileName);
-                        } else if ( this.option["rewriteCss"] ) {
+                        } else if ( this.option["tidyCss"] == 1 ) {
                             var url = css.href;
                             var fileName = this.download(url, "quote", "cssFile");
                             if (fileName) node.setAttribute("href", fileName);
@@ -1024,7 +1022,7 @@ sbContentSaverClass.prototype = {
                     break;
                 case Components.interfaces.nsIDOMCSSRule.STYLE_RULE: 
                     // if script is used, preserve all css in case it's used by a dynamic generated DOM
-                    if (this.option["script"] || verifySelector(aDocument, cssRule.selectorText)) {
+                    if (this.option["script"] || (this.option["tidyCss"] < 3) || verifySelector(aDocument, cssRule.selectorText)) {
                         var cssText = aIndent + this.inspectCSSText(cssRule.cssText, refURL, "image");
                         if (cssText) content += cssText + "\n";
                     }
