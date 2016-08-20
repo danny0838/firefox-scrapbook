@@ -37,7 +37,7 @@
                         </row>
                         <row id="sbDetailFolderRow" align="center">
                             <label value="&sb.prop.folder;:" />
-                            <hbox>
+                            <hbox align="center">
                                 <menulist id="sbFolderList" class="folder-icon" flex="1" onclick="if ( event.button == 1 ) sbFolderSelector.onMiddleClick();" disabled="true">
                                     <menupopup id="sbFolderPopup" oncommand="sbFolderSelector.onChange(event.target.id);" />
                                 </menulist>
@@ -69,7 +69,7 @@
                 <groupbox group="capture-options">
                     <caption label="&sb.detail.linked.file;" />
                     <description>&sb.detail.linked.file.desc;</description>
-                    <hbox>
+                    <hbox align="center">
                         <menulist id="sbDetailDownLinkMethod" flex="1" value="0">
                             <menupopup>
                                 <menuitem value="0" label="&sb.detail.linked.file.method0;" />
