@@ -1147,25 +1147,30 @@ sbContentSaverClass.prototype = {
                 try {
                     var channel = sbCommonUtils.newChannel(sourceURL);
                     channel.asyncOpen({
+                        _content: {},
                         _stream: null,
                         _file: null,
                         _skipped: false,
                         onStartRequest: function (aRequest, aContext) {
                             try {
+                                // get header info
+                                try { this._content.filename = aRequest.contentDispositionFilename; } catch (ex) {}
+                                try { this._content.isAttachment = aRequest.contentDisposition; } catch (ex) {}
+                                try { this._content.contentType = aRequest.contentType; } catch (ex) {}
+                                try { this._content.contentCharset = aRequest.contentCharset; } catch (ex) {}
+                                try { this._content.contentLength = aRequest.contentLength; } catch (ex) {}
                                 // if header Content-Disposition is defined, use it
-                                try {
-                                    fileName = aRequest.contentDispositionFilename;
+                                if (this._content.filename) {
+                                    fileName = this._content.filename;
                                     var [, ext] = sbCommonUtils.splitFileName(fileName);
-                                } catch (ex) {}
+                                }
                                 // if no ext defined, try header Content-Type
                                 if (!fileName) {
                                     var [base, ext] = sbCommonUtils.splitFileName(sbCommonUtils.getFileName(aRequest.name));
-                                    if (!ext) {
-                                        try {
-                                            ext = sbCommonUtils.getMimePrimaryExtension(aRequest.contentType, ext) || "dat";
-                                        } catch (ex) {}
+                                    if (!ext && this._content.contentType) {
+                                        ext = sbCommonUtils.getMimePrimaryExtension(this._content.contentType, ext);
                                     }
-                                    fileName = base + "." + ext;
+                                    fileName = base + "." + (ext || "dat");
                                 }
                                 // special: apply the filter
                                 if (aSpecialMode == "linkFilter") {
@@ -1210,7 +1215,7 @@ sbContentSaverClass.prototype = {
                         onStopRequest: function (aRequest, aContext, aStatusCode) {
                             try {
                                 if (!!this._stream) {
-                                    this._stream.close
+                                    this._stream.close;
                                 }
                                 if (!this._skipped && aStatusCode != Components.results.NS_OK) {
                                     // download failed, remove the file and use the original URL
