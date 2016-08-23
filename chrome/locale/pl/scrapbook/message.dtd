@@ -344,10 +344,9 @@
 <!-- sort.dtd -->
 <!ENTITY sb.sort "Sortowanie">
 <!ENTITY sb.sort.reverse "Odwróć kolejność">
-<!ENTITY sb.sort.title.asc "Sortuj wg tytułów (od A do Z)">
-<!ENTITY sb.sort.title.desc "Sortuj wg tytułów (od Z do A)">
-<!ENTITY sb.sort.id.asc "Sort by ID (0  &gt; 9)">
-<!ENTITY sb.sort.id.desc "Sort by ID (9 &gt; 0)">
+<!ENTITY sb.sort.title "Sortuj wg tytułów">
+<!ENTITY sb.sort.id "Sort by ID">
+<!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
 <!ENTITY sb.sort.recursive "Sortuj subfoldery z całą zawartością">

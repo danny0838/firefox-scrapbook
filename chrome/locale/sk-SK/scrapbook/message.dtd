@@ -344,10 +344,9 @@
 <!-- sort.dtd -->
 <!ENTITY sb.sort "Zoradiť">
 <!ENTITY sb.sort.reverse "Opačne">
-<!ENTITY sb.sort.title.asc "Zoradiť podľa názvu (A &gt; Z)">
-<!ENTITY sb.sort.title.desc "Zoradiť podľa názvu (Z &gt; A)">
-<!ENTITY sb.sort.id.asc "Sort by ID (0  &gt; 9)">
-<!ENTITY sb.sort.id.desc "Sort by ID (9 &gt; 0)">
+<!ENTITY sb.sort.title "Zoradiť podľa názvu">
+<!ENTITY sb.sort.id "Sort by ID">
+<!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
 <!ENTITY sb.sort.recursive "Zoradiť vrátane všetkých podpriečinkov">

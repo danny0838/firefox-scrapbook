@@ -344,10 +344,9 @@
 <!-- sort.dtd -->
 <!ENTITY sb.sort "ソート">
 <!ENTITY sb.sort.reverse "逆順にソート">
-<!ENTITY sb.sort.title.asc "タイトルでソート (A &gt; Z)">
-<!ENTITY sb.sort.title.desc "タイトルでソート (Z &gt; A)">
-<!ENTITY sb.sort.id.asc "IDでソート (0  &gt; 9)">
-<!ENTITY sb.sort.id.desc "IDでソート (9 &gt; 0)">
+<!ENTITY sb.sort.title "タイトルでソート">
+<!ENTITY sb.sort.id "IDでソート">
+<!ENTITY sb.sort.descending "下行">
 <!ENTITY sb.sort.grouping "形式によってグループ化">
 <!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
 <!ENTITY sb.sort.recursive "サブフォルダ内も再帰的にソートする">

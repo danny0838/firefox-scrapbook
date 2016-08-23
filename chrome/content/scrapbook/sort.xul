@@ -17,12 +17,11 @@
     <wizardpage pageid="sbSortStartPage" label="&sb.sort;">
         <radiogroup id="sbSortRadioGroup" persist="sortIndex">
             <radio label="&sb.sort.reverse;" />
-            <radio label="&sb.sort.title.asc;" />
-            <radio label="&sb.sort.title.desc;" />
-            <radio label="&sb.sort.id.asc;" />
-            <radio label="&sb.sort.id.desc;" />
+            <radio label="&sb.sort.title;" />
+            <radio label="&sb.sort.id;" />
         </radiogroup>
         <separator class="groove" />
+        <checkbox id="sbSortDescending" label="&sb.sort.descending;" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
         <checkbox id="sbSortGrouping" label="&sb.sort.grouping;" tooltiptext="&sb.sort.grouping.desc;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
         <checkbox id="sbSortRecursive" label="&sb.sort.recursive;" persist="checked" />
         <description id="sbSortWarning" value="&sb.sort.warning;" style="margin:10px;color:red;" />

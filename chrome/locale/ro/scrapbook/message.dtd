@@ -344,10 +344,9 @@
 <!-- sort.dtd -->
 <!ENTITY sb.sort "Sortare">
 <!ENTITY sb.sort.reverse "Inversează ordinea">
-<!ENTITY sb.sort.title.asc "Sortează după denumire (A -&gt; Z)">
-<!ENTITY sb.sort.title.desc "Sortează după denumire (Z -&gt; A)">
-<!ENTITY sb.sort.id.asc "Sort by ID (0  &gt; 9)">
-<!ENTITY sb.sort.id.desc "Sort by ID (9 &gt; 0)">
+<!ENTITY sb.sort.title "Sortează după denumire">
+<!ENTITY sb.sort.id "Sort by ID">
+<!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
 <!ENTITY sb.sort.recursive "Sortează recursiv în subdosare">

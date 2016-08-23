@@ -37,15 +37,14 @@ var sbSortService = {
 
     exec: function() {
         this.WIZARD.getButton("cancel").hidden = true;
+        this.order = document.getElementById("sbSortDescending").checked ? -1 : 1;
         this.grouping = document.getElementById("sbSortGrouping").checked;
         if (document.getElementById("sbSortRecursive").checked)
             this.contResList = sbDataSource.flattenResources(this.contResList[0], 1, true);
         switch ( this.RADIO_GROUP.selectedIndex ) {
             case 0: break;
-            case 1: this.key = "title"; this.order = 1;  break;
-            case 2: this.key = "title"; this.order = -1; break;
-            case 3: this.key = "id";    this.order = 1;  break;
-            case 4: this.key = "id";    this.order = -1; break;
+            case 1: this.key = "title"; break;
+            case 2: this.key = "id";    break;
         }
         this.next();
     },

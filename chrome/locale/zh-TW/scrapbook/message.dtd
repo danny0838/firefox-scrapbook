@@ -344,10 +344,9 @@
 <!-- sort.dtd -->
 <!ENTITY sb.sort "排序">
 <!ENTITY sb.sort.reverse "反序">
-<!ENTITY sb.sort.title.asc "依標題排序 (A &gt; Z)">
-<!ENTITY sb.sort.title.desc "依標題排序 (Z &gt; A)">
-<!ENTITY sb.sort.id.asc "依 ID 排序 (0 &gt; 9)">
-<!ENTITY sb.sort.id.desc "依 ID 排序 (9 &gt; 0)">
+<!ENTITY sb.sort.title "依標題排序">
+<!ENTITY sb.sort.id "依 ID 排序">
+<!ENTITY sb.sort.descending "降序">
 <!ENTITY sb.sort.grouping "依類型分組">
 <!ENTITY sb.sort.grouping.desc "按資料夾、頁面、筆記頁面、筆記分組排序">
 <!ENTITY sb.sort.recursive "也排序子資料夾中的項目">
