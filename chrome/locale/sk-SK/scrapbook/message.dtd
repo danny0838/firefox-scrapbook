@@ -349,6 +349,7 @@
 <!ENTITY sb.sort.id.asc "Sort by ID (0  &gt; 9)">
 <!ENTITY sb.sort.id.desc "Sort by ID (9 &gt; 0)">
 <!ENTITY sb.sort.grouping "Group by Type">
+<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
 <!ENTITY sb.sort.recursive "Zoradiť vrátane všetkých podpriečinkov">
 <!ENTITY sb.sort.warning "Upozornenie: Túto operáciu nieje možné vrátiť. Chcete zoradiť celý priečinok?">
 
