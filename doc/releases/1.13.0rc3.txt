@@ -1,0 +1,30 @@
+Scrapbook X 1.13.0rc3
+=====================
+
+Changes since v1.13.0rc2
+------------------------
+
+Bug fixes:
+
+ * The "Process CSS" option is not persisted when loading the capture
+   dialog.
+
+ * CSS file not encoded as UTF-8 may be saved as unrecoverable
+   gibberish.
+
+ * An error may occur when saving a CSS file if "Process CSS" is set to
+   "Rewrite links".
+
+Functionality changes:
+
+ * Reworked "Sort" function.
+ 
+   * Added "Sort by Create Time" and "Sort by Modify Time" options.
+
+   * Added an individual checkbox for descending sort and reduced
+     corresponding options that sorts with descending order.
+
+   * When "Group by Type" is checked, note pages are now placed in front
+     of notes.
+
+Also includes some localization updates.
