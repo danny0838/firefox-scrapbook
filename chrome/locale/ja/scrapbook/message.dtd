@@ -37,7 +37,7 @@
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "タイムアウト（秒）">
-<!ENTITY sb.detail.linked.charset "Loading charset">
+<!ENTITY sb.detail.linked.charset "読み込んで文字セット">
 <!ENTITY sb.detail "取り込み詳細">
 <!ENTITY sb.detail.new.folder "新しいフォルダ">
 <!ENTITY sb.detail.select.folder "フォルダの選択">
@@ -253,7 +253,7 @@
 
 <!-- prefs.dtd -->
 <!ENTITY sb.prefs.main "一般">
-<!ENTITY sb.prefs.keys "Keys">
+<!ENTITY sb.prefs.keys "キー">
 <!ENTITY sb.prefs.tabs "タブ">
 <!ENTITY sb.prefs.save "保存">
 <!ENTITY sb.prefs.edit "編集">
@@ -287,10 +287,10 @@
 <!ENTITY sb.prefs.notifyOnComplete "取り込みが完了したら通知する">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
-<!ENTITY sb.prefs.io "Preferences">
-<!ENTITY sb.prefs.io.export "Export Preferences">
-<!ENTITY sb.prefs.io.import "Import Preferences">
-<!ENTITY sb.prefs.io.reset "Reset Preferences">
+<!ENTITY sb.prefs.io "設定">
+<!ENTITY sb.prefs.io.export "設定をエクスポート">
+<!ENTITY sb.prefs.io.import "設定をインポート">
+<!ENTITY sb.prefs.io.reset "設定をリセット">
 <!ENTITY sb.button.customize "カスタマイズ">
 <!ENTITY sb.button.browse "参照">
 <!ENTITY sb.button.show "ファイルを表示">
@@ -299,8 +299,8 @@
 <!ENTITY sb.prop.general "一般情報">
 <!ENTITY sb.prop.type "形式">
 <!ENTITY sb.prop.date "日時"><!-- left for addon compatibility -->
-<!ENTITY sb.prop.create "Create">
-<!ENTITY sb.prop.modify "Modify">
+<!ENTITY sb.prop.create "作成時間">
+<!ENTITY sb.prop.modify "変更時間">
 <!ENTITY sb.prop.encode "文字コード">
 <!ENTITY sb.prop.size "サイズ">
 <!ENTITY sb.prop.content "本文">
@@ -312,7 +312,7 @@
 <!ENTITY sb.prop.icon.favicon "faviconを選択">
 <!ENTITY sb.prop.icon.custom "ユーザーアイコンを選択">
 <!ENTITY sb.prop.mark "マーク">
-<!ENTITY sb.prop.lock "Lock">
+<!ENTITY sb.prop.lock "ロッキング">
 
 <!-- repair.dtd -->
 <!ENTITY sb.repair.rdfFile "scrapbook.rdf の復元">
@@ -348,7 +348,7 @@
 <!ENTITY sb.sort.title.desc "タイトルでソート (Z &gt; A)">
 <!ENTITY sb.sort.date.asc "日時でソート (古い順)">
 <!ENTITY sb.sort.date.desc "日時でソート (新しい順)">
-<!ENTITY sb.sort.grouping "Group by Type">
+<!ENTITY sb.sort.grouping "形式によってグループ化">
 <!ENTITY sb.sort.recursive "サブフォルダ内も再帰的にソートする">
 <!ENTITY sb.sort.warning "注意：ソートを実行すると元には戻せません。">
 
@@ -371,7 +371,7 @@
 
 <!-- tree.dtd -->
 <!ENTITY sb.open "開く">
-<!ENTITY sb.open.native "Open in Default Program">
+<!ENTITY sb.open.native "既定のプログラムで開く">
 <!ENTITY sb.open.tab "タブで開く">
 <!ENTITY sb.open.newtab "新しいタブで開く">
 <!ENTITY sb.open.source "ソースURLを開く">
@@ -390,8 +390,8 @@
 <!ENTITY sb.prop.comment "コメント">
 <!ENTITY sbp.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
-<!ENTITY sb.make.container "Convert to Folder">
-<!ENTITY sb.unmake.container "Convert to Non-folder">
+<!ENTITY sb.make.container "フォルダへの変換">
+<!ENTITY sb.unmake.container "非フォルダに変換">
 <!ENTITY sb.folder.combine "結合ビュー">
 <!ENTITY sb.folder.openall "すべてタブで開く">
 <!ENTITY sb.folder.manage "フォルダの管理">
