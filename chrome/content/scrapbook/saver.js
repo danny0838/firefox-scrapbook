@@ -1108,7 +1108,7 @@ sbContentSaverClass.prototype = {
         }
 
         // if the CSS file doesn't have @charset, save it as UTF-8 so that it can be load correctly
-        if (!hasAtRule) charset = "UTF-8";
+        if (charset && !hasAtRule) charset = "UTF-8";
 
         cssText = this.inspectCSSFileText(cssText, aRefURL);
         if (charset) {
@@ -1357,14 +1357,16 @@ sbContentSaverClass.prototype = {
                                 if (!!this._stream) {
                                     this._stream.close;
                                 }
-                                if (!this._skipped && aStatusCode != Components.results.NS_OK) {
-                                    // download failed, remove the file and use the original URL
-                                    if (this._file) this._file.remove(true);
-                                    throw "download channel fail";
-                                }
-                                // special: parse CSS file
-                                if (aSpecialMode == "cssFile") {
-                                    that.processCSSFile(this._file, sourceURL, this._content.contentCharset);
+                                if (!this._skipped) {
+                                    if (aStatusCode != Components.results.NS_OK) {
+                                        // download failed, remove the file and use the original URL
+                                        if (this._file) this._file.remove(true);
+                                        throw "download channel fail";
+                                    }
+                                    // special: parse CSS file
+                                    if (aSpecialMode == "cssFile") {
+                                        that.processCSSFile(this._file, sourceURL, this._content.contentCharset);
+                                    }
                                 }
                             } catch (ex) {
                                 errorHandler(ex);

@@ -25,7 +25,7 @@ var sbCaptureOptions = {
         document.getElementById("sbDetailOptionScript").checked = sbCommonUtils.getPref("capture.default.script", false);
         document.getElementById("sbDetailOptionAsHtml").checked = sbCommonUtils.getPref("capture.default.fileAsHtml", false);
         document.getElementById("sbDetailOptionSaveDataURI").checked = sbCommonUtils.getPref("capture.default.saveDataUri", false);
-        document.getElementById("sbDetailOptionTidyCss").checked = sbCommonUtils.getPref("capture.default.tidyCss", 3);
+        document.getElementById("sbDetailOptionTidyCss").value = sbCommonUtils.getPref("capture.default.tidyCss", 3);
         document.getElementById("sbDetailDownLinkMethod").value = sbCommonUtils.getPref("capture.default.downLinkMethod", 0);
         document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("capture.default.downLinkFilter", "");
         if ( this.param.context !== "capture-again-deep" ) {
@@ -69,7 +69,7 @@ var sbCaptureOptions = {
         this.param.option["script"] = document.getElementById("sbDetailOptionScript").checked;
         this.param.option["saveDataUri"] = document.getElementById("sbDetailOptionSaveDataURI").checked;
         this.param.option["fileAsHtml"] = document.getElementById("sbDetailOptionAsHtml").checked;
-        this.param.option["tidyCss"] = document.getElementById("sbDetailOptionTidyCss").value;
+        this.param.option["tidyCss"] = parseInt(document.getElementById("sbDetailOptionTidyCss").value, 10);
         this.param.option["downLinkMethod"] = parseInt("0" + document.getElementById("sbDetailDownLinkMethod").value, 10);
         this.param.option["downLinkFilter"] = document.getElementById("sbDetailDownLinkFilter").value;
         if ( this.param.context !== "capture-again-deep" ) {
