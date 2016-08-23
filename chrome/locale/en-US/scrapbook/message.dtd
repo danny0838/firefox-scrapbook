@@ -346,8 +346,8 @@
 <!ENTITY sb.sort.reverse "Reverse">
 <!ENTITY sb.sort.title.asc "Sort by Title (A &gt; Z)">
 <!ENTITY sb.sort.title.desc "Sort by Title (Z &gt; A)">
-<!ENTITY sb.sort.date.asc "Chronological">
-<!ENTITY sb.sort.date.desc "Reverse Chronological">
+<!ENTITY sb.sort.id.asc "Sort by ID (0  &gt; 9)">
+<!ENTITY sb.sort.id.desc "Sort by ID (9 &gt; 0)">
 <!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.recursive "Sort Sub-folders Recursively">
 <!ENTITY sb.sort.warning "Notice: You can&apos;t undo this operation.">

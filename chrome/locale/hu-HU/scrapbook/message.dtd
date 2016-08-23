@@ -346,8 +346,8 @@
 <!ENTITY sb.sort.reverse "Visszafelé">
 <!ENTITY sb.sort.title.asc "Cím szerinti rendezés (A → Z)">
 <!ENTITY sb.sort.title.desc "Cím szerinti rendezés (Z → A)">
-<!ENTITY sb.sort.date.asc "Időrend">
-<!ENTITY sb.sort.date.desc "Fordított időrend">
+<!ENTITY sb.sort.id.asc "Sort by ID (0  &gt; 9)">
+<!ENTITY sb.sort.id.desc "Sort by ID (9 &gt; 0)">
 <!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.recursive "Almappák rekurzív rendezése">
 <!ENTITY sb.sort.warning "Megjegyzés: Ez a művelet visszavonhatatlan.">

@@ -346,8 +346,8 @@
 <!ENTITY sb.sort.reverse "反序">
 <!ENTITY sb.sort.title.asc "依標題排序 (A &gt; Z)">
 <!ENTITY sb.sort.title.desc "依標題排序 (Z &gt; A)">
-<!ENTITY sb.sort.date.asc "依日期排序 (舊 &gt; 新)">
-<!ENTITY sb.sort.date.desc "依日期排序 (新 &gt; 舊)">
+<!ENTITY sb.sort.id.asc "依 ID 排序 (0 &gt; 9)">
+<!ENTITY sb.sort.id.desc "依 ID 排序 (9 &gt; 0)">
 <!ENTITY sb.sort.grouping "依類型分組">
 <!ENTITY sb.sort.recursive "也排序子資料夾中的項目">
 <!ENTITY sb.sort.warning "請注意：此操作無法復原。">

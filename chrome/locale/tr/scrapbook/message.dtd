@@ -346,8 +346,8 @@
 <!ENTITY sb.sort.reverse "Ters Çevir">
 <!ENTITY sb.sort.title.asc "Başlığa Göre Sırala (A &gt; Z)">
 <!ENTITY sb.sort.title.desc "Başlığa Göre Sırala (Z &gt; A)">
-<!ENTITY sb.sort.date.asc "Kronolojik">
-<!ENTITY sb.sort.date.desc "Kronolojiyi Ters Çevir">
+<!ENTITY sb.sort.id.asc "Sort by ID (0  &gt; 9)">
+<!ENTITY sb.sort.id.desc "Sort by ID (9 &gt; 0)">
 <!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.recursive "Alt-Klasörleri Tekrar Tekrar Sırala">
 <!ENTITY sb.sort.warning "Dikkat: Bu eylemi geri alamazsınız.">

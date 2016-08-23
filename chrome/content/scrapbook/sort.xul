@@ -19,8 +19,8 @@
             <radio label="&sb.sort.reverse;" />
             <radio label="&sb.sort.title.asc;" />
             <radio label="&sb.sort.title.desc;" />
-            <radio label="&sb.sort.date.asc;" />
-            <radio label="&sb.sort.date.desc;" />
+            <radio label="&sb.sort.id.asc;" />
+            <radio label="&sb.sort.id.desc;" />
         </radiogroup>
         <separator class="groove" />
         <checkbox id="sbSortGrouping" label="&sb.sort.grouping;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />

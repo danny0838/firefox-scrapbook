@@ -346,8 +346,8 @@
 <!ENTITY sb.sort.reverse "У зворотньому напрямку">
 <!ENTITY sb.sort.title.asc "Сортувати за назвою (A &gt; Z, А &gt; Я)">
 <!ENTITY sb.sort.title.desc "Сортувати за назвою (Z &gt; A, Я &gt; А)">
-<!ENTITY sb.sort.date.asc "За датою">
-<!ENTITY sb.sort.date.desc "За датою у зворотньому порядку">
+<!ENTITY sb.sort.id.asc "Sort by ID (0  &gt; 9)">
+<!ENTITY sb.sort.id.desc "Sort by ID (9 &gt; 0)">
 <!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.recursive "Сортувати каталоги рекурсивно">
 <!ENTITY sb.sort.warning "Увага: Вороття назад не буде.">

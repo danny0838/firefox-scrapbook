@@ -346,8 +346,8 @@
 <!ENTITY sb.sort.reverse "Orden Inverso">
 <!ENTITY sb.sort.title.asc "Ordenar por Título (A &gt; Z)">
 <!ENTITY sb.sort.title.desc "Ordenar por Título (Z &gt; A)">
-<!ENTITY sb.sort.date.asc "Cronológicamente">
-<!ENTITY sb.sort.date.desc "Cronológicamente-orden inverso">
+<!ENTITY sb.sort.id.asc "Sort by ID (0  &gt; 9)">
+<!ENTITY sb.sort.id.desc "Sort by ID (9 &gt; 0)">
 <!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.recursive "Ordenar sub-carpetas recursivamente">
 <!ENTITY sb.sort.warning "Nota: esta operación no puede deshacerse.">

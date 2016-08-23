@@ -346,8 +346,8 @@
 <!ENTITY sb.sort.reverse "Reihenfolge umkehren">
 <!ENTITY sb.sort.title.asc "Alphabetisch nach Namen sortieren (A &gt; Z)">
 <!ENTITY sb.sort.title.desc "Umgekehrt alphabetisch nach Namen sortieren (Z &gt; A)">
-<!ENTITY sb.sort.date.asc "Chronologisch sortieren">
-<!ENTITY sb.sort.date.desc "Umgekehrt chronologisch sortieren">
+<!ENTITY sb.sort.id.asc "Sort by ID (0  &gt; 9)">
+<!ENTITY sb.sort.id.desc "Sort by ID (9 &gt; 0)">
 <!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.recursive "Unterordner ebenfalls sortieren">
 <!ENTITY sb.sort.warning "HINWEIS: Dieser Vorgang kann nicht rückgängig gemacht werden.">

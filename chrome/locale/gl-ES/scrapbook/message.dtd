@@ -346,8 +346,8 @@
 <!ENTITY sb.sort.reverse "Inversa">
 <!ENTITY sb.sort.title.asc "Ordenar polo título (A &gt; Z)">
 <!ENTITY sb.sort.title.desc "Ordenar polo título (Z &gt; A)">
-<!ENTITY sb.sort.date.asc "Cronolóxica">
-<!ENTITY sb.sort.date.desc "Cronolóxica inversa">
+<!ENTITY sb.sort.id.asc "Sort by ID (0  &gt; 9)">
+<!ENTITY sb.sort.id.desc "Sort by ID (9 &gt; 0)">
 <!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.recursive "Ordenar os sub-cartafoles recurrentemente">
 <!ENTITY sb.sort.warning "Aviso: Esta operación non se poderá desfacer.">
