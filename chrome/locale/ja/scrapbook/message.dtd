@@ -346,6 +346,8 @@
 <!ENTITY sb.sort.reverse "逆順にソート">
 <!ENTITY sb.sort.title "タイトルでソート">
 <!ENTITY sb.sort.id "IDでソート">
+<!ENTITY sb.sort.create "作成時間でソート">
+<!ENTITY sb.sort.modify "変更時間でソート">
 <!ENTITY sb.sort.descending "下行">
 <!ENTITY sb.sort.grouping "形式によってグループ化">
 <!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">

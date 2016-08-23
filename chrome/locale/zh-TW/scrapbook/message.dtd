@@ -346,6 +346,8 @@
 <!ENTITY sb.sort.reverse "反序">
 <!ENTITY sb.sort.title "依標題排序">
 <!ENTITY sb.sort.id "依 ID 排序">
+<!ENTITY sb.sort.create "依建立時間排序">
+<!ENTITY sb.sort.modify "依修改時間排序">
 <!ENTITY sb.sort.descending "降序">
 <!ENTITY sb.sort.grouping "依類型分組">
 <!ENTITY sb.sort.grouping.desc "按資料夾、頁面、筆記頁面、筆記分組排序">

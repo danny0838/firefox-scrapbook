@@ -346,6 +346,8 @@
 <!ENTITY sb.sort.reverse "Inverti">
 <!ENTITY sb.sort.title "Ordine per titolo">
 <!ENTITY sb.sort.id "Sort by ID">
+<!ENTITY sb.sort.create "Sort by Create Time">
+<!ENTITY sb.sort.modify "Sort by Modify Time">
 <!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">

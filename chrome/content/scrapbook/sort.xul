@@ -19,6 +19,8 @@
             <radio label="&sb.sort.reverse;" />
             <radio label="&sb.sort.title;" />
             <radio label="&sb.sort.id;" />
+            <radio label="&sb.sort.create;" />
+            <radio label="&sb.sort.modify;" />
         </radiogroup>
         <separator class="groove" />
         <checkbox id="sbSortDescending" label="&sb.sort.descending;" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />

@@ -43,8 +43,10 @@ var sbSortService = {
             this.contResList = sbDataSource.flattenResources(this.contResList[0], 1, true);
         switch ( this.RADIO_GROUP.selectedIndex ) {
             case 0: break;
-            case 1: this.key = "title"; break;
-            case 2: this.key = "id";    break;
+            case 1: this.key = "title";  break;
+            case 2: this.key = "id";     break;
+            case 3: this.key = "create"; break;
+            case 4: this.key = "modify"; break;
         }
         this.next();
     },
