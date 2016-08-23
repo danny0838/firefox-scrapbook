@@ -95,13 +95,13 @@ var sbSortService = {
                 resListI.reverse();
                 resListN.reverse();
                 resListX.reverse();
-                resListF = resListF.concat(resListI).concat(resListN).concat(resListX);
+                resListF = resListF.concat(resListI).concat(resListX).concat(resListN);
             } else {
                 resListF.sort(this.compare);
                 resListI.sort(this.compare);
                 resListN.sort(this.compare);
                 resListX.sort(this.compare);
-                resListF = resListF.concat(resListI).concat(resListN).concat(resListX);
+                resListF = resListF.concat(resListI).concat(resListX).concat(resListN);
             }
         } else {
             while ( resEnum.hasMoreElements() ) {
