@@ -1,0 +1,15 @@
+Scrapbook X 1.13.0rc2
+=====================
+
+Changes since v1.13.0rc1
+------------------------
+
+Functionality changes:
+
+ * Added an option to determine how to process CSS.
+
+User interface changes:
+
+ * Slightly adjusted the capture detail dialog layout.
+
+Also includes some code cleanup and avoids some potential errors.
