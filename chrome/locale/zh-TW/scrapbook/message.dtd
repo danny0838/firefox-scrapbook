@@ -344,11 +344,13 @@
 <!-- sort.dtd -->
 <!ENTITY sb.sort "排序">
 <!ENTITY sb.sort.reverse "反序">
-<!ENTITY sb.sort.title.asc "依標題排序 (A &gt; Z)">
-<!ENTITY sb.sort.title.desc "依標題排序 (Z &gt; A)">
-<!ENTITY sb.sort.date.asc "依日期排序 (舊 &gt; 新)">
-<!ENTITY sb.sort.date.desc "依日期排序 (新 &gt; 舊)">
+<!ENTITY sb.sort.title "依標題排序">
+<!ENTITY sb.sort.id "依 ID 排序">
+<!ENTITY sb.sort.create "依建立時間排序">
+<!ENTITY sb.sort.modify "依修改時間排序">
+<!ENTITY sb.sort.descending "降序">
 <!ENTITY sb.sort.grouping "依類型分組">
+<!ENTITY sb.sort.grouping.desc "按資料夾、頁面、筆記頁面、筆記分組排序">
 <!ENTITY sb.sort.recursive "也排序子資料夾中的項目">
 <!ENTITY sb.sort.warning "請注意：此操作無法復原。">
 

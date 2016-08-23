@@ -344,11 +344,13 @@
 <!-- sort.dtd -->
 <!ENTITY sb.sort "Zoradiť">
 <!ENTITY sb.sort.reverse "Opačne">
-<!ENTITY sb.sort.title.asc "Zoradiť podľa názvu (A &gt; Z)">
-<!ENTITY sb.sort.title.desc "Zoradiť podľa názvu (Z &gt; A)">
-<!ENTITY sb.sort.date.asc "Chronologicky">
-<!ENTITY sb.sort.date.desc "Od najnovšieho k najstaršiemu">
+<!ENTITY sb.sort.title "Zoradiť podľa názvu">
+<!ENTITY sb.sort.id "Sort by ID">
+<!ENTITY sb.sort.create "Sort by Create Time">
+<!ENTITY sb.sort.modify "Sort by Modify Time">
+<!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
+<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
 <!ENTITY sb.sort.recursive "Zoradiť vrátane všetkých podpriečinkov">
 <!ENTITY sb.sort.warning "Upozornenie: Túto operáciu nieje možné vrátiť. Chcete zoradiť celý priečinok?">
 

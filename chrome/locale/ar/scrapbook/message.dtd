@@ -344,11 +344,13 @@
 <!-- sort.dtd -->
 <!ENTITY sb.sort "ترتيب">
 <!ENTITY sb.sort.reverse "عكس">
-<!ENTITY sb.sort.title.asc "ترتيب بالعنوان (A &gt; Z)">
-<!ENTITY sb.sort.title.desc "ترتيب بالعنوان (Z &gt; A)">
-<!ENTITY sb.sort.date.asc "زمني">
-<!ENTITY sb.sort.date.desc "زمني عكسي">
+<!ENTITY sb.sort.title "ترتيب بالعنوان">
+<!ENTITY sb.sort.id "Sort by ID">
+<!ENTITY sb.sort.create "Sort by Create Time">
+<!ENTITY sb.sort.modify "Sort by Modify Time">
+<!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
+<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
 <!ENTITY sb.sort.recursive "ترتيب المجلدات الفرعية تبعا">
 <!ENTITY sb.sort.warning "انتبه: لا يمكنك&apos; التراجع عن العملية.">
 

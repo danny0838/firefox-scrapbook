@@ -344,11 +344,13 @@
 <!-- sort.dtd -->
 <!ENTITY sb.sort "Järjestä">
 <!ENTITY sb.sort.reverse "Käänteinen">
-<!ENTITY sb.sort.title.asc "Järjestä otsikon mukaan (A-Ö)">
-<!ENTITY sb.sort.title.desc "Järjestä otsikon mukaan (Ö-A)">
-<!ENTITY sb.sort.date.asc "Aikajärjestys">
-<!ENTITY sb.sort.date.desc "Käänteinen aikajärjestys">
+<!ENTITY sb.sort.title "Järjestä otsikon mukaan">
+<!ENTITY sb.sort.id "Sort by ID">
+<!ENTITY sb.sort.create "Sort by Create Time">
+<!ENTITY sb.sort.modify "Sort by Modify Time">
+<!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
+<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
 <!ENTITY sb.sort.recursive "Järjestä alikansioiden sisältö">
 <!ENTITY sb.sort.warning "HUOM.: Tätä toimintoa ei voi kumota.">
 

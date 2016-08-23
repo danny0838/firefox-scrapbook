@@ -344,11 +344,13 @@
 <!-- sort.dtd -->
 <!ENTITY sb.sort "Classement">
 <!ENTITY sb.sort.reverse "Inverser">
-<!ENTITY sb.sort.title.asc "Classer par titre (A &gt; Z)">
-<!ENTITY sb.sort.title.desc "Classer par titre (Z &gt; A)">
-<!ENTITY sb.sort.date.asc "Chronologique">
-<!ENTITY sb.sort.date.desc "Chronologique inverse">
+<!ENTITY sb.sort.title "Classer par titre">
+<!ENTITY sb.sort.id "Sort by ID">
+<!ENTITY sb.sort.create "Sort by Create Time">
+<!ENTITY sb.sort.modify "Sort by Modify Time">
+<!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
+<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
 <!ENTITY sb.sort.recursive "Classer récursivement les sous-dossiers">
 <!ENTITY sb.sort.warning "Important : vous ne pouvez pas annuler cette opération.">
 
