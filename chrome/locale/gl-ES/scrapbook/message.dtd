@@ -344,11 +344,13 @@
 <!-- sort.dtd -->
 <!ENTITY sb.sort "Ordenar">
 <!ENTITY sb.sort.reverse "Inversa">
-<!ENTITY sb.sort.title.asc "Ordenar polo título (A &gt; Z)">
-<!ENTITY sb.sort.title.desc "Ordenar polo título (Z &gt; A)">
-<!ENTITY sb.sort.date.asc "Cronolóxica">
-<!ENTITY sb.sort.date.desc "Cronolóxica inversa">
+<!ENTITY sb.sort.title "Ordenar polo título">
+<!ENTITY sb.sort.id "Sort by ID">
+<!ENTITY sb.sort.create "Sort by Create Time">
+<!ENTITY sb.sort.modify "Sort by Modify Time">
+<!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
+<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
 <!ENTITY sb.sort.recursive "Ordenar os sub-cartafoles recurrentemente">
 <!ENTITY sb.sort.warning "Aviso: Esta operación non se poderá desfacer.">
 

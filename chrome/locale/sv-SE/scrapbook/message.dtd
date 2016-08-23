@@ -344,11 +344,13 @@
 <!-- sort.dtd -->
 <!ENTITY sb.sort "Sortera">
 <!ENTITY sb.sort.reverse "Omvänd ordning">
-<!ENTITY sb.sort.title.asc "Sortera efter rubrik (A &gt; Ö)">
-<!ENTITY sb.sort.title.desc "Sortera efter rubrik (Ö &gt; A)">
-<!ENTITY sb.sort.date.asc "Sortera kronologiskt">
-<!ENTITY sb.sort.date.desc "Omvänd kronologisk ordning">
+<!ENTITY sb.sort.title "Sortera efter rubrik">
+<!ENTITY sb.sort.id "Sort by ID">
+<!ENTITY sb.sort.create "Sort by Create Time">
+<!ENTITY sb.sort.modify "Sort by Modify Time">
+<!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
+<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
 <!ENTITY sb.sort.recursive "Sortera undermappar rekursivt">
 <!ENTITY sb.sort.warning "Obs: Du kan inte ångra denna åtgärd.">
 

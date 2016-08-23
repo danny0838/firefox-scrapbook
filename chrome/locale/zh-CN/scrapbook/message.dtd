@@ -344,11 +344,13 @@
 <!-- sort.dtd -->
 <!ENTITY sb.sort "排列项目列表">
 <!ENTITY sb.sort.reverse "反序">
-<!ENTITY sb.sort.title.asc "标题 (A &gt; Z)">
-<!ENTITY sb.sort.title.desc "标题 (Z &gt; A)">
-<!ENTITY sb.sort.date.asc "时间 (升序)">
-<!ENTITY sb.sort.date.desc "时间 (降序)">
+<!ENTITY sb.sort.title "标题">
+<!ENTITY sb.sort.id "ID">
+<!ENTITY sb.sort.create "建立时间">
+<!ENTITY sb.sort.modify "修改时间">
+<!ENTITY sb.sort.descending "降序">
 <!ENTITY sb.sort.grouping "按类型分组">
+<!ENTITY sb.sort.grouping.desc "按文件夹、页面、便签页面、便签分组排序">
 <!ENTITY sb.sort.recursive "包括所有子文件夹">
 <!ENTITY sb.sort.warning "注意: 此操作无法撤销。">
 

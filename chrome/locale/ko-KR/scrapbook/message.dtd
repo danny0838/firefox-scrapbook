@@ -344,11 +344,13 @@
 <!-- sort.dtd -->
 <!ENTITY sb.sort "정렬">
 <!ENTITY sb.sort.reverse "역순으로 정렬">
-<!ENTITY sb.sort.title.asc "제목으로 정렬 (A &gt; Z)">
-<!ENTITY sb.sort.title.desc "제목으로 정렬 (Z &gt; A)">
-<!ENTITY sb.sort.date.asc "날짜로 정렬 (오래된 순)">
-<!ENTITY sb.sort.date.desc "날짜로 정렬 (새로운 순)">
+<!ENTITY sb.sort.title "제목으로 정렬">
+<!ENTITY sb.sort.id "Sort by ID">
+<!ENTITY sb.sort.create "Sort by Create Time">
+<!ENTITY sb.sort.modify "Sort by Modify Time">
+<!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
+<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
 <!ENTITY sb.sort.recursive "하위 폴더 포함">
 <!ENTITY sb.sort.warning "주의: 이 실행은 되돌릴 수 없습니다.">
 

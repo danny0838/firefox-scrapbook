@@ -37,15 +37,16 @@ var sbSortService = {
 
     exec: function() {
         this.WIZARD.getButton("cancel").hidden = true;
+        this.order = document.getElementById("sbSortDescending").checked ? -1 : 1;
         this.grouping = document.getElementById("sbSortGrouping").checked;
         if (document.getElementById("sbSortRecursive").checked)
             this.contResList = sbDataSource.flattenResources(this.contResList[0], 1, true);
         switch ( this.RADIO_GROUP.selectedIndex ) {
             case 0: break;
-            case 1: this.key = "title"; this.order = 1;  break;
-            case 2: this.key = "title"; this.order = -1; break;
-            case 3: this.key = "id";    this.order = 1;  break;
-            case 4: this.key = "id";    this.order = -1; break;
+            case 1: this.key = "title";  break;
+            case 2: this.key = "id";     break;
+            case 3: this.key = "create"; break;
+            case 4: this.key = "modify"; break;
         }
         this.next();
     },
@@ -95,13 +96,13 @@ var sbSortService = {
                 resListI.reverse();
                 resListN.reverse();
                 resListX.reverse();
-                resListF = resListF.concat(resListI).concat(resListN).concat(resListX);
+                resListF = resListF.concat(resListI).concat(resListX).concat(resListN);
             } else {
                 resListF.sort(this.compare);
                 resListI.sort(this.compare);
                 resListN.sort(this.compare);
                 resListX.sort(this.compare);
-                resListF = resListF.concat(resListI).concat(resListN).concat(resListX);
+                resListF = resListF.concat(resListI).concat(resListX).concat(resListN);
             }
         } else {
             while ( resEnum.hasMoreElements() ) {

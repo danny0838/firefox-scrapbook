@@ -344,11 +344,13 @@
 <!-- sort.dtd -->
 <!ENTITY sb.sort "Sırala">
 <!ENTITY sb.sort.reverse "Ters Çevir">
-<!ENTITY sb.sort.title.asc "Başlığa Göre Sırala (A &gt; Z)">
-<!ENTITY sb.sort.title.desc "Başlığa Göre Sırala (Z &gt; A)">
-<!ENTITY sb.sort.date.asc "Kronolojik">
-<!ENTITY sb.sort.date.desc "Kronolojiyi Ters Çevir">
+<!ENTITY sb.sort.title "Başlığa Göre Sırala">
+<!ENTITY sb.sort.id "Sort by ID">
+<!ENTITY sb.sort.create "Sort by Create Time">
+<!ENTITY sb.sort.modify "Sort by Modify Time">
+<!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
+<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
 <!ENTITY sb.sort.recursive "Alt-Klasörleri Tekrar Tekrar Sırala">
 <!ENTITY sb.sort.warning "Dikkat: Bu eylemi geri alamazsınız.">
 
