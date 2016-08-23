@@ -1108,7 +1108,7 @@ sbContentSaverClass.prototype = {
         }
 
         // if the CSS file doesn't have @charset, save it as UTF-8 so that it can be load correctly
-        if (!hasAtRule) charset = "UTF-8";
+        if (charset && !hasAtRule) charset = "UTF-8";
 
         cssText = this.inspectCSSFileText(cssText, aRefURL);
         if (charset) {
