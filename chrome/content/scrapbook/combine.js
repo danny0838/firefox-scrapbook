@@ -17,9 +17,7 @@ var sbCombineService = {
     postfix: "",
 
     init: function() {
-        //Block wird benötigt, um Korrekturen bei fehlerhafter Zusammenstellung zu erlauben
         this.toggleElements(true);
-        //Ende Block
         if ( window.top.location.href != "chrome://scrapbook/content/manage.xul" ) {
             document.documentElement.collapsed = true;
             return;
@@ -27,9 +25,7 @@ var sbCombineService = {
         window.top.document.getElementById("mbToolbarButton").disabled = true;
         this.index = 0;
         sbFolderSelector2.init();
-//        this.WIZARD.getButton("back").onclick = function(){ sbCombineService.undo(); };
         this.WIZARD.getButton("back").hidden = true;
-//        this.WIZARD.getButton("cancel").hidden = true;
         this.WIZARD.getButton("cancel").onclick = function(){ sbCombineService.abort(); };
         this.toggleButtons();
         this.updateButtons();
@@ -42,10 +38,7 @@ var sbCombineService = {
     add: function(aRes, aParRes) {
         if ( this.resList.indexOf(aRes) != -1 ) return;
         var type = sbDataSource.getProperty(aRes, "type");
-        if (type == "folder" || type == "separator")
-            return;
-        if (type == "site")
-            sbCommonUtils.alert(sbCommonUtils.lang("WARN_ABOUT_INDEPTH"));
+        if (type == "folder" || type == "separator") return;
         var icon = sbDataSource.getProperty(aRes, "icon");
         if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
         var listItem = this.LISTBOX.appendItem(sbDataSource.getProperty(aRes, "title"));
@@ -57,16 +50,7 @@ var sbCombineService = {
         this.toggleButtons();
         this.updateButtons();
     },
-/*
-    undo: function() {
-        if ( this.idList.length == 0 ) return;
-        this.LISTBOX.removeItemAt(this.idList.length - 1);
-        this.idList.pop();
-        this.resList.pop();
-        this.parList.pop();
-        this.updateButtons();
-    },
-*/
+
     updateButtons: function() {
         this.WIZARD.canRewind = this.idList.length > 0;
         this.WIZARD.canAdvance = this.idList.length > 1;
@@ -87,26 +71,26 @@ var sbCombineService = {
             sbCommonUtils.saveTemplateFile(url, destFile);
         }
 
-//        this.WIZARD.canRewind = false;
         this.WIZARD.canAdvance = false;
-//        this.WIZARD.getButton("back").onclick = null;
         this.WIZARD.getButton("back").hidden = false;
         this.WIZARD.getButton("back").disabled = true;
         this.WIZARD.getButton("finish").label = sbCommonUtils.lang("FINISH_BUTTON_LABEL");
         this.WIZARD.getButton("finish").disabled = true;
         this.WIZARD.getButton("cancel").hidden = false;
         this.WIZARD.getButton("cancel").disabled = true;
-//        this.WIZARD.getButton("cancel").onclick = function(){ sbCombineService.abort(); };
         this.option["T"] = document.getElementById("sbTitleTextbox").value;
         this.option["R"] = document.getElementById("sbCombineOptionRemove").checked;
+
         // reset the variables to prevent double-charged content when reloaded
         sbPageCombiner.htmlSrc = "";
         sbPageCombiner.cssText = "";
-        sbPageCombiner.isTargetCombined = false;
-        sbInvisibleBrowser.init();
+        sbPageCombiner.hasSite = false;
+
+        sbInvisibleBrowser.init(true); // load embeded media so that they aren't broken when previewing
         sbInvisibleBrowser.onLoadFinish = function() {
             sbPageCombiner.exec();
         };
+
         this.next();
     },
 
@@ -165,7 +149,6 @@ var sbCombineService = {
         this.option["R"] = document.getElementById("sbCombineOptionRemove").checked;
         this.toggleElements(true);
         SB_trace(sbCommonUtils.lang("CAPTURE_START"));
-//sbCommonUtils.alert("--"+document.getElementById("sbTitleTextbox").value+"--");
         setTimeout(function(){ gContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null, "combine"); }, 0);
     },
 
@@ -272,10 +255,10 @@ var sbCombineService = {
     },
 
     toggleButtons: function() {
-        var tbIndex = this.LISTBOX.selectedIndex;
-        var tbEintraege = this.LISTBOX.getRowCount();
-        if ( tbEintraege>1 ) {
-            switch ( tbIndex ) {
+        var index = this.LISTBOX.selectedIndex;
+        var entry = this.LISTBOX.getRowCount();
+        if ( entry > 1 ) {
+            switch ( index ) {
                 case -1:
                     document.getElementById("sbUp").disabled = true;
                     document.getElementById("sbDown").disabled = true;
@@ -286,7 +269,7 @@ var sbCombineService = {
                     document.getElementById("sbDown").disabled = false;
                     document.getElementById("sbDelete").disabled = false;
                     break;
-                case tbEintraege-1:
+                case entry - 1:
                     document.getElementById("sbUp").disabled = false;
                     document.getElementById("sbDown").disabled = true;
                     document.getElementById("sbDelete").disabled = false;
@@ -298,10 +281,9 @@ var sbCombineService = {
                     break;
             }
         } else {
-            //Da keine Einträge vorhanden sind, kann auch nichts gemacht werden. Daher können sämtliche Knöpfe deaktiviert werden
             document.getElementById("sbUp").disabled = true;
             document.getElementById("sbDown").disabled = true;
-            if ( tbIndex > -1 ) {
+            if ( index > -1 ) {
                 document.getElementById("sbDelete").disabled = false;
             } else {
                 document.getElementById("sbDelete").disabled = true;
@@ -321,6 +303,7 @@ var sbPageCombiner = {
     htmlSrc: "",
     cssText: "",
     isTargetCombined: false,
+    hasSite: false,
     baseURI: "",
     htmlId: "",
     bodyId: "",
@@ -368,6 +351,12 @@ var sbPageCombiner = {
             this.htmlSrc += this.getCiteHTML(aType);
         } else {
             aType = sbDataSource.getProperty(sbCombineService.curRes, "type");
+
+            if (aType == "site" && !this.hasSite) {
+                this.hasSite = true;
+                sbCommonUtils.alert(sbCommonUtils.lang("WARN_ABOUT_INDEPTH"));
+            }
+            
             this.cssText += this.surroundCSS();
             this.inspectNode(this.BODY);
             Array.prototype.forEach.call(this.BODY.querySelectorAll("*"), function(curNode){
