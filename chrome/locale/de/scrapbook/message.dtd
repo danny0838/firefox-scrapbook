@@ -19,11 +19,11 @@
 <!ENTITY sb.capture.filter.column.rule "Ein-/Ausblenden">
 <!ENTITY sb.capture.filter.column.content "Filter (regulärer Ausdruck)">
 <!ENTITY sb.capture.filter.accept "OK">
-<!ENTITY sb.capture.filter.accept.tt "Wert übernehmen/Wert ändern">
+<!ENTITY sb.capture.filter.accept.help "Wert übernehmen/Wert ändern">
 <!ENTITY sb.capture.filter.cancel "Abbrechen">
-<!ENTITY sb.capture.filter.cancel.tt "Editieren abbreche">
+<!ENTITY sb.capture.filter.cancel.help "Editieren abbreche">
 <!ENTITY sb.capture.filter.delete "Entfernen">
-<!ENTITY sb.capture.filter.delete.tt "Filter aus der Liste entfernen">
+<!ENTITY sb.capture.filter.delete.help "Filter aus der Liste entfernen">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Fügen Sie Einträge, die Sie zusammenfassen wollen, durch &quot;Ziehen und Ablegen&quot; aus dem Baum hinzu. Sie können auch mehrere Einträge auf einmal auswählen.">

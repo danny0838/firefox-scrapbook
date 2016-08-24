@@ -19,11 +19,11 @@
 <!ENTITY sb.capture.filter.column.rule "Показати/сховати">
 <!ENTITY sb.capture.filter.column.content "Фільтр (регулярний вираз)">
 <!ENTITY sb.capture.filter.accept "Прийняти">
-<!ENTITY sb.capture.filter.accept.tt "змінити чи редагувати значення">
+<!ENTITY sb.capture.filter.accept.help "змінити чи редагувати значення">
 <!ENTITY sb.capture.filter.cancel "Скасувати">
-<!ENTITY sb.capture.filter.cancel.tt "відмінити редагування">
+<!ENTITY sb.capture.filter.cancel.help "відмінити редагування">
 <!ENTITY sb.capture.filter.delete "Видалити">
-<!ENTITY sb.capture.filter.delete.tt "Вилучити фільтр зі списку">
+<!ENTITY sb.capture.filter.delete.help "Вилучити фільтр зі списку">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Додавайте необхідні сторінки з дерева сторінок перетягуванням. Ви можете перетягувати одразу декілька сторінок.">

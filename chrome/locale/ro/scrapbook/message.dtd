@@ -19,11 +19,11 @@
 <!ENTITY sb.capture.filter.column.rule "Afișează/ascunde">
 <!ENTITY sb.capture.filter.column.content "Filtrare (expresie regulată)">
 <!ENTITY sb.capture.filter.accept "Acceptă">
-<!ENTITY sb.capture.filter.accept.tt "Modifică sau editează valoarea">
+<!ENTITY sb.capture.filter.accept.help "Modifică sau editează valoarea">
 <!ENTITY sb.capture.filter.cancel "Renunță">
-<!ENTITY sb.capture.filter.cancel.tt "Abandonează editarea">
+<!ENTITY sb.capture.filter.cancel.help "Abandonează editarea">
 <!ENTITY sb.capture.filter.delete "Șterge">
-<!ENTITY sb.capture.filter.delete.tt "Elimină filtrul din listă">
+<!ENTITY sb.capture.filter.delete.help "Elimină filtrul din listă">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Adăugați elemente din arbore prin glisare și fixare, în ordinea în care doriți să le combinați. Puteți glisa și fixa mai multe articole o dată.">

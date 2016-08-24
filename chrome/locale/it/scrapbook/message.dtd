@@ -19,11 +19,11 @@
 <!ENTITY sb.capture.filter.column.rule "Mostra/nascondi">
 <!ENTITY sb.capture.filter.column.content "Filtra (espressione regolare)">
 <!ENTITY sb.capture.filter.accept "Accetta">
-<!ENTITY sb.capture.filter.accept.tt "Sostituisci oppure modifica il valore">
+<!ENTITY sb.capture.filter.accept.help "Sostituisci oppure modifica il valore">
 <!ENTITY sb.capture.filter.cancel "Annulla">
-<!ENTITY sb.capture.filter.cancel.tt "Annulla la modifica">
+<!ENTITY sb.capture.filter.cancel.help "Annulla la modifica">
 <!ENTITY sb.capture.filter.delete "Elimina">
-<!ENTITY sb.capture.filter.delete.tt "Elimina il filtro dalla lista">
+<!ENTITY sb.capture.filter.delete.help "Elimina il filtro dalla lista">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Aggiungere elementi da unire tramite trascinamento e rilascio dal diagramma delle cartelle. È possibile trascinare e rilasciare molteplici elementi contemporaneamente">

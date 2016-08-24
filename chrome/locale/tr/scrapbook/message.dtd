@@ -19,11 +19,11 @@
 <!ENTITY sb.capture.filter.column.rule "Show/Hide">
 <!ENTITY sb.capture.filter.column.content "Filter (regular expression)">
 <!ENTITY sb.capture.filter.accept "Accept">
-<!ENTITY sb.capture.filter.accept.tt "change or edit value">
+<!ENTITY sb.capture.filter.accept.help "change or edit value">
 <!ENTITY sb.capture.filter.cancel "Cancel">
-<!ENTITY sb.capture.filter.cancel.tt "abort editing">
+<!ENTITY sb.capture.filter.cancel.help "abort editing">
 <!ENTITY sb.capture.filter.delete "Delete">
-<!ENTITY sb.capture.filter.delete.tt "remove filter from the list">
+<!ENTITY sb.capture.filter.delete.help "remove filter from the list">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Öğeleri ağaç görünümünden, birleştirmek istediğiniz sırayla, sürükleyip bırakarak ekleyin. Tek seferde birden çok öğeyi sürükleyip bırakabilirsiniz.">

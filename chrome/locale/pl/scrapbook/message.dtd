@@ -19,11 +19,11 @@
 <!ENTITY sb.capture.filter.column.rule "Pokaż/Ukryj">
 <!ENTITY sb.capture.filter.column.content "Filtr (wyrażenie regularne)">
 <!ENTITY sb.capture.filter.accept "Akceptuj">
-<!ENTITY sb.capture.filter.accept.tt "Zmień lub edytuj wartość">
+<!ENTITY sb.capture.filter.accept.help "Zmień lub edytuj wartość">
 <!ENTITY sb.capture.filter.cancel "Anuluj">
-<!ENTITY sb.capture.filter.cancel.tt "przerwij edytowanie">
+<!ENTITY sb.capture.filter.cancel.help "przerwij edytowanie">
 <!ENTITY sb.capture.filter.delete "Usuń">
-<!ENTITY sb.capture.filter.delete.tt "usuń filtr z listy">
+<!ENTITY sb.capture.filter.delete.help "usuń filtr z listy">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Dodaj elementy przeciągając je z drzewa w kolejności w jakiej chcesz je połączyć. Można jednocześnie przeciągać wiele elementów.">

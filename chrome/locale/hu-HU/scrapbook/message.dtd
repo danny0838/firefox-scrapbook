@@ -19,11 +19,11 @@
 <!ENTITY sb.capture.filter.column.rule "Megjelenítés/elrejtés">
 <!ENTITY sb.capture.filter.column.content "Szűrő (reguláris kifejezés)">
 <!ENTITY sb.capture.filter.accept "Elfogadás">
-<!ENTITY sb.capture.filter.accept.tt "változtassa meg vagy adjon új értéket">
+<!ENTITY sb.capture.filter.accept.help "változtassa meg vagy adjon új értéket">
 <!ENTITY sb.capture.filter.cancel "Mégse">
-<!ENTITY sb.capture.filter.cancel.tt "szerkesztés megszakítása">
+<!ENTITY sb.capture.filter.cancel.help "szerkesztés megszakítása">
 <!ENTITY sb.capture.filter.delete "Törlés">
-<!ENTITY sb.capture.filter.delete.tt "szűrő eltávolítása a listáról">
+<!ENTITY sb.capture.filter.delete.help "szűrő eltávolítása a listáról">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Elemek hozzáadása húzd és ejtsd módszerrel a struktúrából, az összefűzés sorrendjének megfelelően. Egyszerre több elem is áthúzható a húzd és ejtsd módszerrel.">

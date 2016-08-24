@@ -19,11 +19,11 @@
 <!ENTITY sb.capture.filter.column.rule "顯示/隱藏">
 <!ENTITY sb.capture.filter.column.content "篩選條件（使用規則運算式）">
 <!ENTITY sb.capture.filter.accept "確認">
-<!ENTITY sb.capture.filter.accept.tt "變更或編輯數值">
+<!ENTITY sb.capture.filter.accept.help "變更或編輯數值">
 <!ENTITY sb.capture.filter.cancel "取消">
-<!ENTITY sb.capture.filter.cancel.tt "中斷編輯">
+<!ENTITY sb.capture.filter.cancel.help "中斷編輯">
 <!ENTITY sb.capture.filter.delete "刪除">
-<!ENTITY sb.capture.filter.delete.tt "從清單移除過濾條件">
+<!ENTITY sb.capture.filter.delete.help "從清單移除過濾條件">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "從樹狀列表將待合併項目中拖曳至此並依序排列。一次可拖曳多個項目。">

@@ -19,11 +19,11 @@
 <!ENTITY sb.capture.filter.column.rule "보이기/감추기">
 <!ENTITY sb.capture.filter.column.content "필터 (정규표현식)">
 <!ENTITY sb.capture.filter.accept "승인">
-<!ENTITY sb.capture.filter.accept.tt "값 수정">
+<!ENTITY sb.capture.filter.accept.help "값 수정">
 <!ENTITY sb.capture.filter.cancel "취소">
-<!ENTITY sb.capture.filter.cancel.tt "편집 취소">
+<!ENTITY sb.capture.filter.cancel.help "편집 취소">
 <!ENTITY sb.capture.filter.delete "삭제">
-<!ENTITY sb.capture.filter.delete.tt "목록에서 필터 제거">
+<!ENTITY sb.capture.filter.delete.help "목록에서 필터 제거">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "트리로부터 결합하고자 하는 항목을 끌어다 놓기로 추가하십시오. 한번에 여러 항목을 선택하여 끌어다 놓을 수 있습니다.">

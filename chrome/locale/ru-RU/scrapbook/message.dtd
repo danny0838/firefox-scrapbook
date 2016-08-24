@@ -19,11 +19,11 @@
 <!ENTITY sb.capture.filter.column.rule "Показать/Скрыть">
 <!ENTITY sb.capture.filter.column.content "Фильтр (регулярные выражения)">
 <!ENTITY sb.capture.filter.accept "Применить">
-<!ENTITY sb.capture.filter.accept.tt "изменить значение">
+<!ENTITY sb.capture.filter.accept.help "изменить значение">
 <!ENTITY sb.capture.filter.cancel "Отмена">
-<!ENTITY sb.capture.filter.cancel.tt "отменить редактирование">
+<!ENTITY sb.capture.filter.cancel.help "отменить редактирование">
 <!ENTITY sb.capture.filter.delete "Удалить">
-<!ENTITY sb.capture.filter.delete.tt "удалить фильтр из списка">
+<!ENTITY sb.capture.filter.delete.help "удалить фильтр из списка">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Добавляйте требуемые для объединения страницы обычным перетаскиванием их из дерева страниц. Также имеется возможность перетаскивать по несколько страниц сразу.">

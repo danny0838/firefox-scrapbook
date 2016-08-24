@@ -19,11 +19,11 @@
 <!ENTITY sb.capture.filter.column.rule "Zobraziť/Skryť">
 <!ENTITY sb.capture.filter.column.content "Filter (regulárny výraz)">
 <!ENTITY sb.capture.filter.accept "Prijať">
-<!ENTITY sb.capture.filter.accept.tt "zmení alebo upraví hodnotu">
+<!ENTITY sb.capture.filter.accept.help "zmení alebo upraví hodnotu">
 <!ENTITY sb.capture.filter.cancel "Zrušiť">
-<!ENTITY sb.capture.filter.cancel.tt "preruší úpravu">
+<!ENTITY sb.capture.filter.cancel.help "preruší úpravu">
 <!ENTITY sb.capture.filter.delete "Odstrániť">
-<!ENTITY sb.capture.filter.delete.tt "odstráni filter zo zoznamu">
+<!ENTITY sb.capture.filter.delete.help "odstráni filter zo zoznamu">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Položky pridávajte pomocou drag-and-drop v poradí, v akom ich chcete zlúčiť. Súčasne môžte pridať viacero položiek.">

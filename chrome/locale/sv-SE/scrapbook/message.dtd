@@ -19,11 +19,11 @@
 <!ENTITY sb.capture.filter.column.rule "Visa/Dölj">
 <!ENTITY sb.capture.filter.column.content "Filter (reguljärt uttryck)">
 <!ENTITY sb.capture.filter.accept "Acceptera">
-<!ENTITY sb.capture.filter.accept.tt "Ändra eller redigera värde">
+<!ENTITY sb.capture.filter.accept.help "Ändra eller redigera värde">
 <!ENTITY sb.capture.filter.cancel "Avbryt">
-<!ENTITY sb.capture.filter.cancel.tt "Avbryt redigering">
+<!ENTITY sb.capture.filter.cancel.help "Avbryt redigering">
 <!ENTITY sb.capture.filter.delete "Ta bort">
-<!ENTITY sb.capture.filter.delete.tt "Ta bort filter från listan">
+<!ENTITY sb.capture.filter.delete.help "Ta bort filter från listan">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Lägg till objekt genom att dra och släppa från trädet i den ordning du vill kombinera dem. Du kan dra och släppa flera objekt samtidigt.">

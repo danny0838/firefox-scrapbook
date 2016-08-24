@@ -19,11 +19,11 @@
 <!ENTITY sb.capture.filter.column.rule "Mostrar/Ocultar">
 <!ENTITY sb.capture.filter.column.content "Filtro (expresión patrón)">
 <!ENTITY sb.capture.filter.accept "Aceptar">
-<!ENTITY sb.capture.filter.accept.tt "cambiar o editar el valor">
+<!ENTITY sb.capture.filter.accept.help "cambiar o editar el valor">
 <!ENTITY sb.capture.filter.cancel "Cancelar">
-<!ENTITY sb.capture.filter.cancel.tt "abortar edición">
+<!ENTITY sb.capture.filter.cancel.help "abortar edición">
 <!ENTITY sb.capture.filter.delete "Borrar">
-<!ENTITY sb.capture.filter.delete.tt "borrar filtro de la lista">
+<!ENTITY sb.capture.filter.delete.help "borrar filtro de la lista">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Añadir elementos 'Arrastrando y Soltando' desde el árbol, en el orden en el que quiera combinarlos. Puede 'arrastrar y soltar' varios elementos a la vez.">

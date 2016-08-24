@@ -19,11 +19,11 @@
 <!ENTITY sb.capture.filter.column.rule "Amosar/Agochar">
 <!ENTITY sb.capture.filter.column.content "Filtro (expresión regular)">
 <!ENTITY sb.capture.filter.accept "Aceptar">
-<!ENTITY sb.capture.filter.accept.tt "cambiar ou editar o valor">
+<!ENTITY sb.capture.filter.accept.help "cambiar ou editar o valor">
 <!ENTITY sb.capture.filter.cancel "Cancelar">
-<!ENTITY sb.capture.filter.cancel.tt "cancelar a edición">
+<!ENTITY sb.capture.filter.cancel.help "cancelar a edición">
 <!ENTITY sb.capture.filter.delete "Eliminar">
-<!ENTITY sb.capture.filter.delete.tt "eliminar o filtro da lista">
+<!ENTITY sb.capture.filter.delete.help "eliminar o filtro da lista">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Engadir elementos, na orde desexada, arrastrando e soltando desde a colección . Pode mover varios elementos á vez.">

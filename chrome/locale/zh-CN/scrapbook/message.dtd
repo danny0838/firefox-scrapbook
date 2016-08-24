@@ -19,11 +19,11 @@
 <!ENTITY sb.capture.filter.column.rule "显示/隐藏">
 <!ENTITY sb.capture.filter.column.content "过滤规则（正则表达式）">
 <!ENTITY sb.capture.filter.accept "接受">
-<!ENTITY sb.capture.filter.accept.tt "修改或编辑值">
+<!ENTITY sb.capture.filter.accept.help "修改或编辑值">
 <!ENTITY sb.capture.filter.cancel "取消">
-<!ENTITY sb.capture.filter.cancel.tt "中止编辑">
+<!ENTITY sb.capture.filter.cancel.help "中止编辑">
 <!ENTITY sb.capture.filter.delete "删除">
-<!ENTITY sb.capture.filter.delete.tt "从列表中移除过滤规则">
+<!ENTITY sb.capture.filter.delete.help "从列表中移除过滤规则">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "从树中拖拽您希望合并的条目到表中。您可以一次拖拽多个条目。">

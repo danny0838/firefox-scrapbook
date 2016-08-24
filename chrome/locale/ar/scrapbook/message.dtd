@@ -19,11 +19,11 @@
 <!ENTITY sb.capture.filter.column.rule "أظهر/أخف">
 <!ENTITY sb.capture.filter.column.content "مرشح (تعبير نمطي)">
 <!ENTITY sb.capture.filter.accept "إقبل">
-<!ENTITY sb.capture.filter.accept.tt "غير أو حرر القيمة">
+<!ENTITY sb.capture.filter.accept.help "غير أو حرر القيمة">
 <!ENTITY sb.capture.filter.cancel "ألغ">
-<!ENTITY sb.capture.filter.cancel.tt "ألغ التحرير">
+<!ENTITY sb.capture.filter.cancel.help "ألغ التحرير">
 <!ENTITY sb.capture.filter.delete "احذف">
-<!ENTITY sb.capture.filter.delete.tt "أزل المرشح من القائمة">
+<!ENTITY sb.capture.filter.delete.help "أزل المرشح من القائمة">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "اضافة عناصر بالسحب والإفلات من القائمة بالترتيب الذي تريد  الجمع به. يمكنك سحب و إفلات عناصر متعددة معاً.">

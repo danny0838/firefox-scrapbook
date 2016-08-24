@@ -19,11 +19,11 @@
 <!ENTITY sb.capture.filter.column.rule "Afficher/Masquer">
 <!ENTITY sb.capture.filter.column.content "Filtrage (expression régulière)">
 <!ENTITY sb.capture.filter.accept "Accepter">
-<!ENTITY sb.capture.filter.accept.tt "changer ou modifier la valeur">
+<!ENTITY sb.capture.filter.accept.help "changer ou modifier la valeur">
 <!ENTITY sb.capture.filter.cancel "Annuler">
-<!ENTITY sb.capture.filter.cancel.tt "abandonner l'édition">
+<!ENTITY sb.capture.filter.cancel.help "abandonner l'édition">
 <!ENTITY sb.capture.filter.delete "Supprimer">
-<!ENTITY sb.capture.filter.delete.tt "retirer le filtre de la liste">
+<!ENTITY sb.capture.filter.delete.help "retirer le filtre de la liste">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Ajouter les éléments par glisser-déposer à partir de l'arborescence dans l'ordre de la combinaison désirée. Vous pouvez glisser-déposer plusieurs éléments à la fois.">

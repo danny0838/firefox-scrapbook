@@ -88,9 +88,9 @@
                      ontextentered="sbCaptureFilter.add();"
                      tabscrolling="true"
                      type="autocomplete" />
-            <button id="sbCaptureFilterAccept" label="&sb.capture.filter.accept;" disabled="true" tooltiptext="&sb.capture.filter.accept.tt;" oncommand="sbCaptureFilter.add();" />
-            <button id="sbCaptureFilterCancel" label="&sb.capture.filter.cancel;" disabled="true" tooltiptext="&sb.capture.filter.cancel.tt;" oncommand="sbCaptureFilter.cancel();" />
-            <button id="sbCaptureFilterDelete" label="&sb.capture.filter.delete;" disabled="true" tooltiptext="&sb.capture.filter.delete.tt;" oncommand="sbCaptureFilter.del();" />
+            <button id="sbCaptureFilterAccept" label="&sb.capture.filter.accept;" disabled="true" tooltiptext="&sb.capture.filter.accept.help;" oncommand="sbCaptureFilter.add();" />
+            <button id="sbCaptureFilterCancel" label="&sb.capture.filter.cancel;" disabled="true" tooltiptext="&sb.capture.filter.cancel.help;" oncommand="sbCaptureFilter.cancel();" />
+            <button id="sbCaptureFilterDelete" label="&sb.capture.filter.delete;" disabled="true" tooltiptext="&sb.capture.filter.delete.help;" oncommand="sbCaptureFilter.del();" />
         </hbox>
         <tree id="sbCaptureFilter"
               autostrech="always"
