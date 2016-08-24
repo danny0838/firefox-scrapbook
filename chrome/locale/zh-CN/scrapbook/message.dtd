@@ -51,12 +51,12 @@
 <!ENTITY sb.detail.option.scripts "动态脚本">
 <!ENTITY sb.detail.option.tidyCss "CSS 处理">
 <!ENTITY sb.detail.option.tidyCss.0 "不改写">
-<!ENTITY sb.detail.option.tidyCss.0.help "完全按原样存档，可能会导致连结失效。">
-<!ENTITY sb.detail.option.tidyCss.1 "改写超连结">
+<!ENTITY sb.detail.option.tidyCss.0.help "完全按原样存档，可能会导致链接失效。">
+<!ENTITY sb.detail.option.tidyCss.1 "改写链接">
 <!ENTITY sb.detail.option.tidyCss.1.help "一些语法结构复杂的 CSS 可能无法正确​​处理。">
-<!ENTITY sb.detail.option.tidyCss.2 "改写超连结，移除未知者">
+<!ENTITY sb.detail.option.tidyCss.2 "改写链接，移除未知者">
 <!ENTITY sb.detail.option.tidyCss.2.help "移​​除注解及浏览器无法识别的样式宣告。">
-<!ENTITY sb.detail.option.tidyCss.3 "改写超连结，移除未知及未使用者">
+<!ENTITY sb.detail.option.tidyCss.3 "改写链接，移除未知及未使用者">
 <!ENTITY sb.detail.option.tidyCss.3.help "移​​除注解及浏览器无法识别的样式宣告。不撷取动态脚本时，也移除未套用于任何元素的样式宣告。">
 <!ENTITY sb.detail.option.saveDataUri "将 data URI 保存为文件">
 <!ENTITY sb.detail.option.fileAsHtml "非 HTML 档案获取呈现时的 HTML">
