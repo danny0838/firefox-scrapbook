@@ -81,8 +81,6 @@
 <!ENTITY sb.edit.save "Änderungen speichern">
 <!ENTITY sb.edit.comment "Beschreibungsfeld vergrößern">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "Notizkommentar"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "&sb.edit.sticky; erstellen"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Zeilenkommentar für Auswahl anlegen">
 <!ENTITY sb.edit.attach.file "Auswahl mit Datei verknüpfen">
@@ -195,7 +193,6 @@
 <!ENTITY sb.multiple.titleofwebsite "Webseitentitel">
 <!ENTITY sb.multiple.titleoflink "Verweistext">
 <!ENTITY sb.multiple.title "Titel">
-<!ENTITY sb.multiple.downloadmethod "Methode">
 <!ENTITY sb.multiple.url "Zu archivierende URLs zeilenweise eingeben">
 <!ENTITY sb.multiple.detector "URLs automatisch ermitteln">
 <!ENTITY sb.multiple.detector.plink "Alle Links innerhalb der Seite">
@@ -226,10 +223,6 @@
 <!ENTITY sb.note.fontsize.accesskey "i">
 <!ENTITY sb.note.print.accesskey "u">
 <!ENTITY sb.note.exit.accesskey "n">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Archivierung abgeschlossen.">
-<!ENTITY sb.capture.complete.all "Alle Archivierungen abgeschlossen.">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "Alles für die Ausgabe auswählen">
@@ -298,7 +291,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Allgemeine Informationen">
 <!ENTITY sb.prop.type "Typ">
-<!ENTITY sb.prop.date "Datum"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Kodierung">

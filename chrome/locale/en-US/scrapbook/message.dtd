@@ -81,8 +81,6 @@
 <!ENTITY sb.edit.save "Save Changes">
 <!ENTITY sb.edit.comment "Expand Comment Area">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "Sticky Annotation"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "Create &sb.edit.sticky;"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Add Inline Annotation to Selection">
 <!ENTITY sb.edit.attach.file "Attach File to Selection">
@@ -195,7 +193,6 @@
 <!ENTITY sb.multiple.titleofwebsite "Title of website">
 <!ENTITY sb.multiple.titleoflink "Title of link">
 <!ENTITY sb.multiple.title "Title">
-<!ENTITY sb.multiple.downloadmethod "Method">
 <!ENTITY sb.multiple.url "URL (Enter URLs line-by-line)">
 <!ENTITY sb.multiple.detector "URL Detector">
 <!ENTITY sb.multiple.detector.plink "All Links in the Page">
@@ -226,10 +223,6 @@
 <!ENTITY sb.note.fontsize.accesskey "F">
 <!ENTITY sb.note.print.accesskey "P">
 <!ENTITY sb.note.exit.accesskey "X">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Capture Completed.">
-<!ENTITY sb.capture.complete.all "All Captures Completed.">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "Output whole tree">
@@ -298,7 +291,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "General Info">
 <!ENTITY sb.prop.type "Type">
-<!ENTITY sb.prop.date "Date"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Encode">

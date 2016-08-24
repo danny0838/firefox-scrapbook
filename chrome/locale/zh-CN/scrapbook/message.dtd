@@ -81,8 +81,6 @@
 <!ENTITY sb.edit.save "保存">
 <!ENTITY sb.edit.comment "展开注释区">
 <!ENTITY sb.edit.annotationTool "注解工具 - 点击建立自由注解，锚定于选取区后，无选取区则自由浮动。">
-<!ENTITY sb.edit.sticky "即时贴"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "创建即时贴"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "创建自由注解">
 <!ENTITY sb.edit.inline.add "为所选内容添加行內注解">
 <!ENTITY sb.edit.attach.file "为所选内容附加文件">
@@ -195,7 +193,6 @@
 <!ENTITY sb.multiple.titleofwebsite "站点标题">
 <!ENTITY sb.multiple.titleoflink "链接标题">
 <!ENTITY sb.multiple.title "标题">
-<!ENTITY sb.multiple.downloadmethod "方法">
 <!ENTITY sb.multiple.url "URL (每行输入一个 URL)">
 <!ENTITY sb.multiple.detector "检测 URL">
 <!ENTITY sb.multiple.detector.plink "页面中包含的所有链接">
@@ -226,10 +223,6 @@
 <!ENTITY sb.note.fontsize.accesskey "F">
 <!ENTITY sb.note.print.accesskey "P">
 <!ENTITY sb.note.exit.accesskey "X">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "获取完成">
-<!ENTITY sb.capture.complete.all "全部获取完成">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "输出整个树">
@@ -298,7 +291,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "常规">
 <!ENTITY sb.prop.type "类型">
-<!ENTITY sb.prop.date "日期"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "建立时间">
 <!ENTITY sb.prop.modify "修改时间">
 <!ENTITY sb.prop.encode "编码">

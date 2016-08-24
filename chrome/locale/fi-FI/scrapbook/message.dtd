@@ -81,8 +81,6 @@
 <!ENTITY sb.edit.save "Tallenna muutokset">
 <!ENTITY sb.edit.comment "Laajenna kommenttialuetta">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "Muistilappu"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "Luo &sb.edit.sticky;"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Lisää valinnan tekstiin huomautus">
 <!ENTITY sb.edit.attach.file "Liitä tiedosto valintaan">
@@ -195,7 +193,6 @@
 <!ENTITY sb.multiple.titleofwebsite "Verkkopaikan otsikko">
 <!ENTITY sb.multiple.titleoflink "Otsikon linkki">
 <!ENTITY sb.multiple.title "Otsikko">
-<!ENTITY sb.multiple.downloadmethod "Menetelmä">
 <!ENTITY sb.multiple.url "URL (Kukin URL omalle rivilleen)">
 <!ENTITY sb.multiple.detector "URL-tunnistin">
 <!ENTITY sb.multiple.detector.plink "Kaikki sivun linkit">
@@ -226,10 +223,6 @@
 <!ENTITY sb.note.fontsize.accesskey "K">
 <!ENTITY sb.note.print.accesskey "u">
 <!ENTITY sb.note.exit.accesskey "L">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Tallennus valmis.">
-<!ENTITY sb.capture.complete.all "Kaikki tallennukset valmiina.">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "Luo koko puu">
@@ -298,7 +291,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Yleiset">
 <!ENTITY sb.prop.type "Tyyppi">
-<!ENTITY sb.prop.date "Päiväys"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Merkistökoodaus">

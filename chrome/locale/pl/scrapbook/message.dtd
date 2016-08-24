@@ -81,8 +81,6 @@
 <!ENTITY sb.edit.save "Zapisz zmiany">
 <!ENTITY sb.edit.comment "Zmień obszar komentarza">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "Przyklejona notatka"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "Utwórz przyklejoną notatkę"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Dodaj komentarz w linii zaznaczenia">
 <!ENTITY sb.edit.attach.file "Dołącz plik do zaznaczenia">
@@ -195,7 +193,6 @@
 <!ENTITY sb.multiple.titleofwebsite "Tytuł witryny">
 <!ENTITY sb.multiple.titleoflink "Tytuł odnośnika">
 <!ENTITY sb.multiple.title "Tytuł">
-<!ENTITY sb.multiple.downloadmethod "Metoda">
 <!ENTITY sb.multiple.url "URL (wprowadzaj adresy URL linia po linii)">
 <!ENTITY sb.multiple.detector "Wykrywacz adresów URL">
 <!ENTITY sb.multiple.detector.plink "Wszystkie odnośniki na tej stronie">
@@ -226,10 +223,6 @@
 <!ENTITY sb.note.fontsize.accesskey "O">
 <!ENTITY sb.note.print.accesskey "U">
 <!ENTITY sb.note.exit.accesskey "Z">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Przechwytywanie zakończone.">
-<!ENTITY sb.capture.complete.all "Wszystkie przechwytywania zakończono.">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "Utwórz całe drzewo">
@@ -298,7 +291,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Informacje podstawowe">
 <!ENTITY sb.prop.type "Typ">
-<!ENTITY sb.prop.date "Data"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Kodowanie">

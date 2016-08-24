@@ -81,8 +81,6 @@
 <!ENTITY sb.edit.save "Сохранить изменения">
 <!ENTITY sb.edit.comment "Увеличить размер текстового поля для комментария">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "Быстрое примечание"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "Создать быстрое примечание"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Присоединить файл к выделенному фрагменту">
 <!ENTITY sb.edit.attach.file "Присоединить файл к выделенному">
@@ -195,7 +193,6 @@
 <!ENTITY sb.multiple.titleofwebsite "Заголовок веб-сайта">
 <!ENTITY sb.multiple.titleoflink "Заголовок ссылки">
 <!ENTITY sb.multiple.title "Заголовок">
-<!ENTITY sb.multiple.downloadmethod "Метод">
 <!ENTITY sb.multiple.url "URL (В одной строке должен быть один адрес)">
 <!ENTITY sb.multiple.detector "URL детектор">
 <!ENTITY sb.multiple.detector.plink "Все ссылки на странице">
@@ -226,10 +223,6 @@
 <!ENTITY sb.note.fontsize.accesskey "а">
 <!ENTITY sb.note.print.accesskey "е">
 <!ENTITY sb.note.exit.accesskey "х">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Сохранение завершено">
-<!ENTITY sb.capture.complete.all "Все сохранения выполнены">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "Вывести целое дерево">
@@ -298,7 +291,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Основная информация">
 <!ENTITY sb.prop.type "Тип">
-<!ENTITY sb.prop.date "Дата"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Кодировка">

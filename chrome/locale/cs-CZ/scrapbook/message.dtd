@@ -81,8 +81,6 @@
 <!ENTITY sb.edit.save "Uložit změny">
 <!ENTITY sb.edit.comment "Rozšířit oblast pro komentář">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "Nálepka"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "Vytvořit nálepku"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Přidat poznámku k výběru">
 <!ENTITY sb.edit.attach.file "Připojit k výběru soubor">
@@ -195,7 +193,6 @@
 <!ENTITY sb.multiple.titleofwebsite "Název webové stránky">
 <!ENTITY sb.multiple.titleoflink "Název odkazu">
 <!ENTITY sb.multiple.title "Název">
-<!ENTITY sb.multiple.downloadmethod "Metoda">
 <!ENTITY sb.multiple.url "Adresa URL (zadávejte každou zvlášť na jeden řádek)">
 <!ENTITY sb.multiple.detector "Detektor URL">
 <!ENTITY sb.multiple.detector.plink "Všechny odkazy na stránce">
@@ -226,10 +223,6 @@
 <!ENTITY sb.note.fontsize.accesskey "p">
 <!ENTITY sb.note.print.accesskey "T">
 <!ENTITY sb.note.exit.accesskey "k">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Zachycení bylo dokončeno.">
-<!ENTITY sb.capture.complete.all "Všechna zachycení byla dokončena.">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "Exportovat celý strom">
@@ -298,7 +291,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Obecné informace">
 <!ENTITY sb.prop.type "Typ">
-<!ENTITY sb.prop.date "Datum"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Kódování">

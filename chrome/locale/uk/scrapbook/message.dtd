@@ -81,8 +81,6 @@
 <!ENTITY sb.edit.save "Зберегти зміни">
 <!ENTITY sb.edit.comment "Збільшити форму коментування">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "Пересувна нотатка"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "Створити пересувну нотатку"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Додати приховану нотатку до обраного">
 <!ENTITY sb.edit.attach.file "Додати файл до обраного">
@@ -195,7 +193,6 @@
 <!ENTITY sb.multiple.titleofwebsite "Назва сайту">
 <!ENTITY sb.multiple.titleoflink "Посилання">
 <!ENTITY sb.multiple.title "Назва">
-<!ENTITY sb.multiple.downloadmethod "Метод">
 <!ENTITY sb.multiple.url "Адреса (один рядок — одна адреса)">
 <!ENTITY sb.multiple.detector "Шукач адрес">
 <!ENTITY sb.multiple.detector.plink "Усі посилання на сторінці">
@@ -226,10 +223,6 @@
 <!ENTITY sb.note.fontsize.accesskey "F">
 <!ENTITY sb.note.print.accesskey "P">
 <!ENTITY sb.note.exit.accesskey "X">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Збереження виконано.">
-<!ENTITY sb.capture.complete.all "Усі сторінки збережено.">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "Відобразити усе дерево">
@@ -298,7 +291,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Загальна інформація">
 <!ENTITY sb.prop.type "Тип">
-<!ENTITY sb.prop.date "Дата"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Кодування">

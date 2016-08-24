@@ -81,8 +81,6 @@
 <!ENTITY sb.edit.save "Değişiklikleri Kaydet">
 <!ENTITY sb.edit.comment "Yorum Bölgesini Genişlet">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "Kalıcı Dipnot"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "&sb.edit.sticky; Oluştur"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Seçime Satır-Arası Dipnot Ekle">
 <!ENTITY sb.edit.attach.file "Seçime Dosya Ekle">
@@ -195,7 +193,6 @@
 <!ENTITY sb.multiple.titleofwebsite "Title of website">
 <!ENTITY sb.multiple.titleoflink "Title of link">
 <!ENTITY sb.multiple.title "Title">
-<!ENTITY sb.multiple.downloadmethod "Method">
 <!ENTITY sb.multiple.url "URL (URL&apos;leri satır satır girin)">
 <!ENTITY sb.multiple.detector "URL Algılayıcı">
 <!ENTITY sb.multiple.detector.plink "Sayfadaki Tüm Linkler">
@@ -226,10 +223,6 @@
 <!ENTITY sb.note.fontsize.accesskey "F">
 <!ENTITY sb.note.print.accesskey "Y">
 <!ENTITY sb.note.exit.accesskey "Ç">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Capture Completed.">
-<!ENTITY sb.capture.complete.all "All Captures Completed.">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "Tüm ağacı çıkart">
@@ -298,7 +291,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Genel Bilgi">
 <!ENTITY sb.prop.type "Tür">
-<!ENTITY sb.prop.date "Tarih"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Kodlama">

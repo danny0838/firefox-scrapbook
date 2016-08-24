@@ -81,8 +81,6 @@
 <!ENTITY sb.edit.save "Salva">
 <!ENTITY sb.edit.comment "Espandi/contrai l&apos;area per il commento">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "Annotazione"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "Crea annotazione"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Aggiungi annotazione in linea alla selezione">
 <!ENTITY sb.edit.attach.file "Allega file alla selezione">
@@ -195,7 +193,6 @@
 <!ENTITY sb.multiple.titleofwebsite "Titolo del sito">
 <!ENTITY sb.multiple.titleoflink "Titolo del link">
 <!ENTITY sb.multiple.title "Titolo">
-<!ENTITY sb.multiple.downloadmethod "Metodo">
 <!ENTITY sb.multiple.url "URL (inserire un URL per riga)">
 <!ENTITY sb.multiple.detector "Rilevatore URL">
 <!ENTITY sb.multiple.detector.plink "Tutti i link nella pagina">
@@ -226,10 +223,6 @@
 <!ENTITY sb.note.fontsize.accesskey "G">
 <!ENTITY sb.note.print.accesskey "a">
 <!ENTITY sb.note.exit.accesskey "E">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Cattura completata">
-<!ENTITY sb.capture.complete.all "Tutte le catture completate">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "Esporta l&apos;intero diagramma">
@@ -298,7 +291,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Informazioni generali">
 <!ENTITY sb.prop.type "Tipo">
-<!ENTITY sb.prop.date "Data"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Codifica">

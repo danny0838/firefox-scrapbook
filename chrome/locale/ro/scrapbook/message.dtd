@@ -81,8 +81,6 @@
 <!ENTITY sb.edit.save "Salvează modificările">
 <!ENTITY sb.edit.comment "Extinde zona comentariu">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "notă adezivă"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "Creează o &sb.edit.sticky;"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Adaugă o adnotare la selecție">
 <!ENTITY sb.edit.attach.file "Atașează un fișier la selecție">
@@ -195,7 +193,6 @@
 <!ENTITY sb.multiple.titleofwebsite "Denumire sait web">
 <!ENTITY sb.multiple.titleoflink "Denumire legătură">
 <!ENTITY sb.multiple.title "Denumire">
-<!ENTITY sb.multiple.downloadmethod "Metodă">
 <!ENTITY sb.multiple.url "Adrese (furnizați adresele câte una pe linie)">
 <!ENTITY sb.multiple.detector "Detector de adrese">
 <!ENTITY sb.multiple.detector.plink "Toate legăturile din pagină">
@@ -226,10 +223,6 @@
 <!ENTITY sb.note.fontsize.accesskey "f">
 <!ENTITY sb.note.print.accesskey "p">
 <!ENTITY sb.note.exit.accesskey "T">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Capturare finalizată.">
-<!ENTITY sb.capture.complete.all "Toate capturările sunt finalizate.">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "Scrie arborele complet">
@@ -298,7 +291,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Informații generale">
 <!ENTITY sb.prop.type "Tip">
-<!ENTITY sb.prop.date "Dată"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Codare">

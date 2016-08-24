@@ -81,8 +81,6 @@
 <!ENTITY sb.edit.save "変更を保存する">
 <!ENTITY sb.edit.comment "コメントエリアを広げる">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "付箋アノテーション"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "&sb.edit.sticky;を作成"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "自由ノートを作成">
 <!ENTITY sb.edit.inline.add "選択範囲にインライン注釈を入力">
 <!ENTITY sb.edit.attach.file "選択範囲にファイルを添付">
@@ -195,7 +193,6 @@
 <!ENTITY sb.multiple.titleofwebsite "ウェブサイトのタイトル">
 <!ENTITY sb.multiple.titleoflink "リンクのタイトル">
 <!ENTITY sb.multiple.title "タイトル">
-<!ENTITY sb.multiple.downloadmethod "メソッド">
 <!ENTITY sb.multiple.url "URL （改行して複数入力可）">
 <!ENTITY sb.multiple.detector "URL検出ツール">
 <!ENTITY sb.multiple.detector.plink "ページ内のすべてのリンク">
@@ -226,10 +223,6 @@
 <!ENTITY sb.note.fontsize.accesskey "F">
 <!ENTITY sb.note.print.accesskey "P">
 <!ENTITY sb.note.exit.accesskey "X">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "取り込み完了">
-<!ENTITY sb.capture.complete.all "すべての取り込みが完了しました。">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "すべてを出力">
@@ -298,7 +291,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "一般情報">
 <!ENTITY sb.prop.type "形式">
-<!ENTITY sb.prop.date "日時"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "作成時間">
 <!ENTITY sb.prop.modify "変更時間">
 <!ENTITY sb.prop.encode "文字コード">

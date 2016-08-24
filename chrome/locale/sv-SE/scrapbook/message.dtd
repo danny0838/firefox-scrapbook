@@ -81,8 +81,6 @@
 <!ENTITY sb.edit.save "Spara ändringar">
 <!ENTITY sb.edit.comment "Visa kommenteringsområdet">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "Klisterlapp"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "Skapa klisterlapp"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Lägg till infogad anteckning i markering">
 <!ENTITY sb.edit.attach.file "Bifoga fil till markering">
@@ -195,7 +193,6 @@
 <!ENTITY sb.multiple.titleofwebsite "Webbplatsrubrik">
 <!ENTITY sb.multiple.titleoflink "Länkrubrik">
 <!ENTITY sb.multiple.title "Rubrik">
-<!ENTITY sb.multiple.downloadmethod "Metod">
 <!ENTITY sb.multiple.url "URL:er (ange en URL per rad)">
 <!ENTITY sb.multiple.detector "URL-identifiering">
 <!ENTITY sb.multiple.detector.plink "Alla länkar på sidan">
@@ -226,10 +223,6 @@
 <!ENTITY sb.note.fontsize.accesskey "F">
 <!ENTITY sb.note.print.accesskey "u">
 <!ENTITY sb.note.exit.accesskey "A">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Infångsten har slutförts.">
-<!ENTITY sb.capture.complete.all "Alla infångster har slutförts.">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "Utdata för hela trädet">
@@ -298,7 +291,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Allmän information">
 <!ENTITY sb.prop.type "Typ">
-<!ENTITY sb.prop.date "Datum"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Kodning">

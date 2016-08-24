@@ -81,8 +81,6 @@
 <!ENTITY sb.edit.save "حفظ التغييرات">
 <!ENTITY sb.edit.comment "توسيع مكان التعليق">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "حاشية ملتصقة"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "إعمل &sb.edit.sticky;"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "إضافة حاشية مضمنة">
 <!ENTITY sb.edit.attach.file "إرفاق ملف بالمحدد">
@@ -195,7 +193,6 @@
 <!ENTITY sb.multiple.titleofwebsite "عنوان الموقع">
 <!ENTITY sb.multiple.titleoflink "عنوان الرابط">
 <!ENTITY sb.multiple.title "العنوان">
-<!ENTITY sb.multiple.downloadmethod "الأسلوب">
 <!ENTITY sb.multiple.url "عنوان (ادخل العناوين واحدا تحت الآخر)">
 <!ENTITY sb.multiple.detector "كاشف العناوين">
 <!ENTITY sb.multiple.detector.plink "كل الارتباطات في الصفحة">
@@ -226,10 +223,6 @@
 <!ENTITY sb.note.fontsize.accesskey "F">
 <!ENTITY sb.note.print.accesskey "P">
 <!ENTITY sb.note.exit.accesskey "X">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "تم الالتقاط.">
-<!ENTITY sb.capture.complete.all "كل الالتقاطات تمت.">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "استخراج كل الشجرة">
@@ -298,7 +291,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "معلومات عامة">
 <!ENTITY sb.prop.type "النوع">
-<!ENTITY sb.prop.date "التاريخ"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "الترميز">

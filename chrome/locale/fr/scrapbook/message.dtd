@@ -81,8 +81,6 @@
 <!ENTITY sb.edit.save "Sauvegarder les changements">
 <!ENTITY sb.edit.comment "Déployer la zone de commentaire">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "Note collante"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "Créer une &sb.edit.sticky;"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Ajouter une annotation à la sélection">
 <!ENTITY sb.edit.attach.file "Attacher un fichier à la sélection">
@@ -195,7 +193,6 @@
 <!ENTITY sb.multiple.titleofwebsite "Titre du site Web">
 <!ENTITY sb.multiple.titleoflink "Titre du lien">
 <!ENTITY sb.multiple.title "Titre">
-<!ENTITY sb.multiple.downloadmethod "Méthode">
 <!ENTITY sb.multiple.url "URL (entrer les URL ligne par ligne)">
 <!ENTITY sb.multiple.detector "Détecteur d&apos;URL">
 <!ENTITY sb.multiple.detector.plink "Tous les liens de la page">
@@ -226,10 +223,6 @@
 <!ENTITY sb.note.fontsize.accesskey "T">
 <!ENTITY sb.note.print.accesskey "P">
 <!ENTITY sb.note.exit.accesskey "X">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Capture terminée.">
-<!ENTITY sb.capture.complete.all "Toutes les captures sont terminées.">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "Sortie de l&apos;arborescence complète">
@@ -298,7 +291,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Information générale">
 <!ENTITY sb.prop.type "Type">
-<!ENTITY sb.prop.date "Date"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Encodage">

@@ -81,8 +81,6 @@
 <!ENTITY sb.edit.save "Guardar">
 <!ENTITY sb.edit.comment "Expandir área de comentarios">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "Anotación Post-it"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "Crear &sb.edit.sticky;"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Añadir comentario a la selección">
 <!ENTITY sb.edit.attach.file "Anexar fichero a la selección">
@@ -195,7 +193,6 @@
 <!ENTITY sb.multiple.titleofwebsite "Título de la página WEB">
 <!ENTITY sb.multiple.titleoflink "Título del enlace">
 <!ENTITY sb.multiple.title "Título">
-<!ENTITY sb.multiple.downloadmethod "Método">
 <!ENTITY sb.multiple.url "URL (Introduzca URLs línea por línea)">
 <!ENTITY sb.multiple.detector "Detector URL">
 <!ENTITY sb.multiple.detector.plink "Todos los enlaces en la página">
@@ -226,10 +223,6 @@
 <!ENTITY sb.note.fontsize.accesskey "F">
 <!ENTITY sb.note.print.accesskey "P">
 <!ENTITY sb.note.exit.accesskey "X">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Captura finalizada.">
-<!ENTITY sb.capture.complete.all "Todas las capturas finalizadas.">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "Exportar el árbol completo">
@@ -298,7 +291,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Info General">
 <!ENTITY sb.prop.type "Tipo">
-<!ENTITY sb.prop.date "Fecha"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Codificación">
