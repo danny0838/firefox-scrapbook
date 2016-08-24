@@ -342,7 +342,7 @@
 <!ENTITY sb.sort.modify "Sort by Modify Time">
 <!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
-<!ENTITY sb.sort.grouping.help "Sort with items grouped by folder, page, note page, and note">
+<!ENTITY sb.sort.grouping.help "Sort with items grouped by folder, page, note page, and note.">
 <!ENTITY sb.sort.recursive "Unterordner ebenfalls sortieren">
 <!ENTITY sb.sort.warning "HINWEIS: Dieser Vorgang kann nicht rückgängig gemacht werden.">
 

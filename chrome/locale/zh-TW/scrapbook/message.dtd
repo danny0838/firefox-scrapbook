@@ -51,13 +51,13 @@
 <!ENTITY sb.detail.option.scripts "動態腳本">
 <!ENTITY sb.detail.option.tidyCss "CSS 處理">
 <!ENTITY sb.detail.option.tidyCss.0 "不改寫">
-<!ENTITY sb.detail.option.tidyCss.0.help "完全按原樣存檔，可能會導致連結失效">
+<!ENTITY sb.detail.option.tidyCss.0.help "完全按原樣存檔，可能會導致連結失效。">
 <!ENTITY sb.detail.option.tidyCss.1 "改寫超連結">
-<!ENTITY sb.detail.option.tidyCss.1.help "一些語法結構複雜的 CSS 可能無法正確處理">
+<!ENTITY sb.detail.option.tidyCss.1.help "一些語法結構複雜的 CSS 可能無法正確處理。">
 <!ENTITY sb.detail.option.tidyCss.2 "改寫超連結，移除未知者">
-<!ENTITY sb.detail.option.tidyCss.2.help "移除註解及瀏覽器無法識別的樣式宣告">
+<!ENTITY sb.detail.option.tidyCss.2.help "移除註解及瀏覽器無法識別的樣式宣告。">
 <!ENTITY sb.detail.option.tidyCss.3 "改寫超連結，移除未知及未使用者">
-<!ENTITY sb.detail.option.tidyCss.3.help "移除註解及瀏覽器無法識別的樣式宣告。不擷取動態腳本時，也移除未套用於任何元素的樣式宣告">
+<!ENTITY sb.detail.option.tidyCss.3.help "移除註解及瀏覽器無法識別的樣式宣告。不擷取動態腳本時，也移除未套用於任何元素的樣式宣告。">
 <!ENTITY sb.detail.option.saveDataUri "將 data URI 儲存成檔案">
 <!ENTITY sb.detail.option.fileAsHtml "非 HTML 檔案擷取呈現時的 HTML">
 <!ENTITY sb.detail.linked.file "下載連結檔案">
@@ -342,7 +342,7 @@
 <!ENTITY sb.sort.modify "依修改時間排序">
 <!ENTITY sb.sort.descending "降序">
 <!ENTITY sb.sort.grouping "依類型分組">
-<!ENTITY sb.sort.grouping.help "按資料夾、頁面、筆記頁面、筆記分組排序">
+<!ENTITY sb.sort.grouping.help "按資料夾、頁面、筆記頁面、筆記分組排序。">
 <!ENTITY sb.sort.recursive "也排序子資料夾中的項目">
 <!ENTITY sb.sort.warning "請注意：此操作無法復原。">
 
