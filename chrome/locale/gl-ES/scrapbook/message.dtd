@@ -67,8 +67,8 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Captura en niveis">
+<!ENTITY sb.detail.linked.page.desc "Despois de completar as capturas, todas as páxinas serán ligadas e crearase un mapa web">
 <!ENTITY sb.detail.linked.page.depth "Número de niveis">
-<!ENTITY sb.detail.linked.page.text "Despois de completar as capturas, todas as páxinas serán ligadas e crearase un mapa web">
 <!ENTITY sb.detail.warnAboutRenew "AVISO: &apos;Capturar outra vez&apos;">
 <!ENTITY sb.detail.warnAboutScript "AVISO: JavaScrip pode producir un funcionamento anormal.">
 

@@ -67,8 +67,8 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Глибоке збереження">
+<!ENTITY sb.detail.linked.page.desc "Після завершення збереження усі сторінки будуть пов’язані між собою та буде створена карта сайту.">
 <!ENTITY sb.detail.linked.page.depth "Глибина збереження">
-<!ENTITY sb.detail.linked.page.text "Після завершення збереження усі сторінки будуть пов’язані між собою та буде створена карта сайту.">
 <!ENTITY sb.detail.warnAboutRenew "Увага: Функція „Зберегти знову“ перезаписує раніше збережену сторінку.">
 <!ENTITY sb.detail.warnAboutScript "Увага: Можливі проблеми з JavaScript.">
 

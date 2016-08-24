@@ -67,8 +67,8 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Derinlemesine Kaydet">
+<!ENTITY sb.detail.linked.page.desc "Kayıt etme işlemi tamamlandıktan sonra, tüm sayfalar birbirine bağlanacak ve site haritası oluşturulacak.">
 <!ENTITY sb.detail.linked.page.depth "Linkleri izleme derinliği">
-<!ENTITY sb.detail.linked.page.text "Kayıt etme işlemi tamamlandıktan sonra, tüm sayfalar birbirine bağlanacak ve site haritası oluşturulacak.">
 <!ENTITY sb.detail.warnAboutRenew "DİKKAT: &apos;Yeniden Kaydet&apos; önceden kaydedilmiş sayfanın üzerine yazar.">
 <!ENTITY sb.detail.warnAboutScript "DİKKAT: JavaScript bazı problemlere yol açabilir.">
 

@@ -67,8 +67,8 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Многоуровневый захват">
+<!ENTITY sb.detail.linked.page.desc "После завершения сохранения веб-страниц они будут связаны между собой.">
 <!ENTITY sb.detail.linked.page.depth "Уровень глубины захвата ссылок">
-<!ENTITY sb.detail.linked.page.text "После завершения сохранения веб-страниц они будут связаны между собой.">
 <!ENTITY sb.detail.warnAboutRenew "Примечание: При использовании функции «Захватить снова» сохранённая страница будет перезаписана.">
 <!ENTITY sb.detail.warnAboutScript "Внимание: Могут возникнуть проблемы с JavaScript.">
 

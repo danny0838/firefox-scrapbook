@@ -67,8 +67,8 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Przechwytywanie szczegółowe">
+<!ENTITY sb.detail.linked.page.desc "Po zakończeniu przechwytywania wszystkie strony będą powiązane ze sobą i zostanie utworzona mapa stron.">
 <!ENTITY sb.detail.linked.page.depth "Głębokość podążania za odnośnikami">
-<!ENTITY sb.detail.linked.page.text "Po zakończeniu przechwytywania wszystkie strony będą powiązane ze sobą i zostanie utworzona mapa stron.">
 <!ENTITY sb.detail.warnAboutRenew "Uwaga: Opcja &quot;Przechwyć ponownie&quot; nadpisze poprzednio zapisaną stronę">
 <!ENTITY sb.detail.warnAboutScript "Uwaga: JavaScript może powodować problemy.">
 

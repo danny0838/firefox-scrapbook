@@ -67,8 +67,8 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Syvätallennus">
+<!ENTITY sb.detail.linked.page.desc "Tallennusten valmistuttua kaikki sivut linkitetään toisiinsa.">
 <!ENTITY sb.detail.linked.page.depth "Linkkien seuraussyvyys">
-<!ENTITY sb.detail.linked.page.text "Tallennusten valmistuttua kaikki sivut linkitetään toisiinsa.">
 <!ENTITY sb.detail.warnAboutRenew "HUOM.: &quot;Tallenna uudestaan&quot; korvaa aiemmin tallennetun sivun.">
 <!ENTITY sb.detail.warnAboutScript "HUOM.: JavaScript voi aiheuttaa ongelmia.">
 

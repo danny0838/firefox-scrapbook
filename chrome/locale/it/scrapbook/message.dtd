@@ -67,8 +67,8 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Livello di cattura dei link presenti nelle pagine web">
+<!ENTITY sb.detail.linked.page.desc "Dopo aver completato la cattura, tutte le pagine verranno elencate e verrà creata una mappa del sito">
 <!ENTITY sb.detail.linked.page.depth "Cattura fino al seguente livello">
-<!ENTITY sb.detail.linked.page.text "Dopo aver completato la cattura, tutte le pagine verranno elencate e verrà creata una mappa del sito">
 <!ENTITY sb.detail.warnAboutRenew "AVVISO: l&apos;opzione &apos;Cattura ancora&apos; sovrascrive le pagine precedentemente salvate">
 <!ENTITY sb.detail.warnAboutScript "AVVISO: gli JavaScript potrebbero causare problemi">
 

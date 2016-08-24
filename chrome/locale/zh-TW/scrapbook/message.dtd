@@ -67,8 +67,8 @@
 <!ENTITY sb.detail.linked.file.desc "下載完整副檔名符合任一行規則運算式的檔案。略過 &quot;#&quot; 開頭的行。">
 <!ENTITY sb.detail.linked.file.reset "還原預設值">
 <!ENTITY sb.detail.linked.page "多層擷取">
+<!ENTITY sb.detail.linked.page.desc "全部擷取完成後，會將所有頁面互相連結，並產生站台地圖。">
 <!ENTITY sb.detail.linked.page.depth "擷取連結層數">
-<!ENTITY sb.detail.linked.page.text "全部擷取完成後，會將所有頁面互相連結，並產生站台地圖。">
 <!ENTITY sb.detail.warnAboutRenew "請注意：「重新擷取」將覆蓋之前擷取的頁面。">
 <!ENTITY sb.detail.warnAboutScript "請注意：儲存 JavaScript 可能會引發許多問題。">
 

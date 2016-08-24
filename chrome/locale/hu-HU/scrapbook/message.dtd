@@ -67,8 +67,8 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Részletes rögzítés">
+<!ENTITY sb.detail.linked.page.desc "A rögzítések befejezése után egymáshoz kapcsolja valamennyi oldalt, és elkészíti a webhely szerkezetét.">
 <!ENTITY sb.detail.linked.page.depth "Hivatkozás-követés mélysége">
-<!ENTITY sb.detail.linked.page.text "A rögzítések befejezése után egymáshoz kapcsolja valamennyi oldalt, és elkészíti a webhely szerkezetét.">
 <!ENTITY sb.detail.warnAboutRenew "MEGJEGYZÉS: A „Rögzítés ismét” lehetőség felülírja a már elmentett oldalt.">
 <!ENTITY sb.detail.warnAboutScript "MEGJEGYZÉS: A JavaScript problémákat okozhat.">
 

@@ -67,8 +67,8 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Hloubkové zachycení">
+<!ENTITY sb.detail.linked.page.desc "Po dokončení zachycení budou všechny stránky vzájemně propojeny a dojde k vytvoření mapy stránek.">
 <!ENTITY sb.detail.linked.page.depth "Hloubkově procházet odkazy">
-<!ENTITY sb.detail.linked.page.text "Po dokončení zachycení budou všechny stránky vzájemně propojeny a dojde k vytvoření mapy stránek.">
 <!ENTITY sb.detail.warnAboutRenew "POZNÁMKA: &apos;Zachytit znovu&apos; přepíše předchozí uloženou stránku.">
 <!ENTITY sb.detail.warnAboutScript "POZNÁMKA: JavaScript může způsobit některé problémy.">
 

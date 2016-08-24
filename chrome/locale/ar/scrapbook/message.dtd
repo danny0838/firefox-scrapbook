@@ -67,8 +67,8 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "إلتقاط في العمق">
+<!ENTITY sb.detail.linked.page.desc "بعد إتمام الالتقاط, سيتم ربط الصفحات مع بعضها و عمل خريطة الموقع.">
 <!ENTITY sb.detail.linked.page.depth "عمق الارتباطات">
-<!ENTITY sb.detail.linked.page.text "بعد إتمام الالتقاط, سيتم ربط الصفحات مع بعضها و عمل خريطة الموقع.">
 <!ENTITY sb.detail.warnAboutRenew "لاحظ: &apos;الالتقاط مجدداً&apos; يكتب فوق الصفحات المحفوظة.">
 <!ENTITY sb.detail.warnAboutScript "لاحظ: نصوص-الجافا  قد تؤدي الى بعض المشاكل.">
 

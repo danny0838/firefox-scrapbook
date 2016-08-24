@@ -67,8 +67,8 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "In-depth Capture">
+<!ENTITY sb.detail.linked.page.desc "After all pages are captured, they will be linked with each other and a sitemap will be created.">
 <!ENTITY sb.detail.linked.page.depth "Depth to follow links">
-<!ENTITY sb.detail.linked.page.text "After all pages are captured, they will be linked with each other and a sitemap will be created.">
 <!ENTITY sb.detail.warnAboutRenew "NOTICE: &apos;Capture Again&apos; overwrites the previously saved page.">
 <!ENTITY sb.detail.warnAboutScript "NOTICE: JavaScript may cause some problems.">
 

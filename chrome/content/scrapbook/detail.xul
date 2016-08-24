@@ -94,6 +94,7 @@
                 </groupbox>
                 <groupbox id="sbDetailInDepthBox" group="capture-options">
                     <caption label="&sb.detail.linked.page;" />
+                    <description>&sb.detail.linked.page.desc;</description>
                     <hbox align="center">
                         <label id="sbDetailInDepthLabel" value="&sb.detail.linked.page.depth;:" />
                         <textbox id="sbDetailInDepth" type="number" size="3" value="0" min="0" />

@@ -67,8 +67,8 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Djupgående infångst">
+<!ENTITY sb.detail.linked.page.desc "När infångsterna har slutförts, så kommer alla sidor att vara länkade till varandra och en webbplatskarta kommer att skapas.">
 <!ENTITY sb.detail.linked.page.depth "Siddjup">
-<!ENTITY sb.detail.linked.page.text "När infångsterna har slutförts, så kommer alla sidor att vara länkade till varandra och en webbplatskarta kommer att skapas.">
 <!ENTITY sb.detail.warnAboutRenew "OBS: &quot;Fånga in igen&quot; ersätter den tidigare sparade sidan.">
 <!ENTITY sb.detail.warnAboutScript "OBS: JavaScript kan orsaka vissa problem.">
 
