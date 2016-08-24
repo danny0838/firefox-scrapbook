@@ -26,13 +26,13 @@
 <!ENTITY sb.capture.filter.delete.tt "從清單移除過濾條件">
 
 <!-- combine.dtd -->
-<!ENTITY sb.combine.dragdrop "請以滑鼠將要合併的檔案從樹狀列表中拖曳至此，並依合併順序排列。一次可以拖曳多個檔案。">
+<!ENTITY sb.combine.dragdrop "從樹狀列表將待合併項目中拖曳至此並依序排列。一次可拖曳多個項目。">
 <!ENTITY sb.combine.preview "預覽">
-<!ENTITY sb.combine.preview.d "確認預覽結果後，請按下「合併」鈕。">
+<!ENTITY sb.combine.preview.d "確認預覽結果無誤後，點擊「合併」繼續進行。">
 <!ENTITY sb.combine.option.remove "合併後刪除原頁面">
-<!ENTITY sbp.combine.up "檔案上移">
-<!ENTITY sbp.combine.down "檔案下移">
-<!ENTITY sbp.combine.remove "移除檔案">
+<!ENTITY sbp.combine.up "上移項目">
+<!ENTITY sbp.combine.down "下移項目">
+<!ENTITY sbp.combine.remove "移除項目">
 <!ENTITY sbp.combine.newTitle "新標題">
 
 <!-- detail.dtd -->
@@ -68,7 +68,7 @@
 <!ENTITY sb.detail.linked.file.reset "還原預設值">
 <!ENTITY sb.detail.linked.page "多層擷取">
 <!ENTITY sb.detail.linked.page.depth "擷取連結層數">
-<!ENTITY sb.detail.linked.page.text "（擷取完畢後，網頁連結會自動依硬碟中位置更新。）">
+<!ENTITY sb.detail.linked.page.text "全部擷取完成後，會將所有頁面互相連結，並產生站台地圖。">
 <!ENTITY sb.detail.warnAboutRenew "請注意：「重新擷取」將覆蓋之前擷取的頁面。">
 <!ENTITY sb.detail.warnAboutScript "請注意：儲存 JavaScript 可能會引發許多問題。">
 

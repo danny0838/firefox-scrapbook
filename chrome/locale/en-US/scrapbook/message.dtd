@@ -68,7 +68,7 @@
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "In-depth Capture">
 <!ENTITY sb.detail.linked.page.depth "Depth to follow links">
-<!ENTITY sb.detail.linked.page.text "After completing captures, all pages will be linked each other and sitemap will be created.">
+<!ENTITY sb.detail.linked.page.text "After all pages are captured, they will be linked with each other and a sitemap will be created.">
 <!ENTITY sb.detail.warnAboutRenew "NOTICE: &apos;Capture Again&apos; overwrites the previously saved page.">
 <!ENTITY sb.detail.warnAboutScript "NOTICE: JavaScript may cause some problems.">
 

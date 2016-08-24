@@ -13,8 +13,8 @@
 <!ENTITY sb.capture.column.address "URL">
 <!ENTITY sb.capture.column.title "タイトル">
 <!ENTITY sb.capture.column.status "状態">
-<!ENTITY sb.capture.checkSelection "Check selected items">
-<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
+<!ENTITY sb.capture.checkSelection "選択した項目をチェック">
+<!ENTITY sb.capture.uncheckSelection "選択した項目のチェックを外します">
 <!ENTITY sb.capture.filter "フィルタ">
 <!ENTITY sb.capture.filter.column.rule "含む/除外">
 <!ENTITY sb.capture.filter.column.content "フィルタ (正規表現)">
@@ -46,26 +46,26 @@
 <!ENTITY sb.detail.option.images "画像">
 <!ENTITY sb.detail.option.media "メディア">
 <!ENTITY sb.detail.option.fonts "フォント">
-<!ENTITY sb.detail.option.frames "Frames">
+<!ENTITY sb.detail.option.frames "フレーム">
 <!ENTITY sb.detail.option.styles "スタイル">
 <!ENTITY sb.detail.option.scripts "スクリプト">
-<!ENTITY sb.detail.option.tidyCss "Process CSS">
-<!ENTITY sb.detail.option.tidyCss.0 "No rewrite">
+<!ENTITY sb.detail.option.tidyCss "CSSの処理">
+<!ENTITY sb.detail.option.tidyCss.0 "なし">
 <!ENTITY sb.detail.option.tidyCss.0.desc "Save as-is. Links may be broken.">
-<!ENTITY sb.detail.option.tidyCss.1 "Rewrite links">
+<!ENTITY sb.detail.option.tidyCss.1 "リンクを変更">
 <!ENTITY sb.detail.option.tidyCss.1.desc "CSS with highly complicated syntax might not be processed correctly.">
-<!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
+<!ENTITY sb.detail.option.tidyCss.2 "リンクを変更；未知を削除">
 <!ENTITY sb.detail.option.tidyCss.2.desc "Comments and browser unsupported CSS declaration will be removed.">
-<!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
+<!ENTITY sb.detail.option.tidyCss.3 "リンクを変更；未知と未使用を削除">
 <!ENTITY sb.detail.option.tidyCss.3.desc "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
-<!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
+<!ENTITY sb.detail.option.saveDataUri "ファイルとしてデータURIを保存">
 <!ENTITY sb.detail.option.fileAsHtml "HTMLとして取り込み">
 <!ENTITY sb.detail.linked.file "リンク先ファイルのダウンロード">
 <!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
 <!ENTITY sb.detail.linked.file.method1 "Match URL file extension">
 <!ENTITY sb.detail.linked.file.method2 "Match HTTP header and URL file extension">
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
-<!ENTITY sb.detail.linked.file.reset "Reset to default">
+<!ENTITY sb.detail.linked.file.reset "初期設定に戻し">
 <!ENTITY sb.detail.linked.page "掘り下げ取り込み">
 <!ENTITY sb.detail.linked.page.depth "リンクをたどる深さ">
 <!ENTITY sb.detail.linked.page.text "取り込み完了後、すべてのページは相互にリンクされ、サイトマップが生成されます。">
@@ -248,7 +248,7 @@
 <!ENTITY sb.capture.alltabs "すべてのタブを取り込み">
 <!ENTITY sb.capture.bookmark "ScrapBookにブックマーク">
 <!ENTITY sb.sidebar "サイドバーに表示">
-<!ENTITY sb.menubar "Menubar accesskey">
+<!ENTITY sb.menubar "メニューバーのアクセスキー">
 <!ENTITY sb.editbefore "取り込み前編集モード">
 
 <!-- prefs.dtd -->
@@ -312,7 +312,7 @@
 <!ENTITY sb.prop.icon.favicon "faviconを選択">
 <!ENTITY sb.prop.icon.custom "ユーザーアイコンを選択">
 <!ENTITY sb.prop.mark "マーク">
-<!ENTITY sb.prop.lock "ロッキング">
+<!ENTITY sb.prop.lock "ロック">
 
 <!-- repair.dtd -->
 <!ENTITY sb.repair.rdfFile "scrapbook.rdf の復元">
@@ -366,10 +366,10 @@
 <!ENTITY sb.trade.import "インポート">
 <!ENTITY sb.trade.export "エクスポート">
 <!ENTITY sb.trade.time "エクスポートした日時">
-<!ENTITY sb.trade.update "Import as latest ScrapBook X format">
+<!ENTITY sb.trade.update "最新のScrapBook X形式としてインポート">
 <!ENTITY sb.trade.restore "フォルダ構成を復元しながらインポート">
 <!ENTITY sb.trade.remove "インポート後にファイルを削除する">
-<!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">
+<!ENTITY sb.trade.exportFolder "エクスポートフォルダのアイテム（インポートする際の順序に注意）">
 
 <!-- tree.dtd -->
 <!ENTITY sb.open "開く">
@@ -381,7 +381,7 @@
 <!ENTITY sb.show.files "ファイルを表示">
 <!ENTITY sb.move "移動">
 <!ENTITY sb.move.into "フォルダへ移動">
-<!ENTITY sb.copy "Copy">
+<!ENTITY sb.copy "コピー">
 <!ENTITY sb.renew "再取り込み">
 <!ENTITY sb.internalize "Localize Embedded External Media">
 <!ENTITY sb.export "エクスポート">
