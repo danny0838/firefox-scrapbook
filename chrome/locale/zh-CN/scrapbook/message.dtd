@@ -375,7 +375,8 @@
 <!ENTITY sb.move.into "移动">
 <!ENTITY sb.copy "复制">
 <!ENTITY sb.renew "重新获取">
-<!ENTITY sb.internalize "将内嵌的外部媒体存入资料目录">
+<!ENTITY sb.internalize "Internalize">
+<!ENTITY sb.internalize.help "将页面内嵌的外部媒体存入本地目录。">
 <!ENTITY sb.export "导出">
 <!ENTITY sb.remove "删除">
 <!ENTITY sb.property "属性">

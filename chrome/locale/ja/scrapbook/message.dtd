@@ -375,7 +375,8 @@
 <!ENTITY sb.move.into "フォルダへ移動">
 <!ENTITY sb.copy "コピー">
 <!ENTITY sb.renew "再取り込み">
-<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.internalize "内在化">
+<!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "エクスポート">
 <!ENTITY sb.remove "削除">
 <!ENTITY sb.property "プロパティ">

@@ -375,7 +375,8 @@
 <!ENTITY sb.move.into "Flytta till mapp">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Fånga in igen">
-<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.internalize "Internalize">
+<!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "Exportera">
 <!ENTITY sb.remove "Ta bort">
 <!ENTITY sb.property "Egenskaper">

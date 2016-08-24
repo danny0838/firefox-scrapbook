@@ -375,7 +375,8 @@
 <!ENTITY sb.move.into "Přesunout do složky">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Zachytit znovu">
-<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.internalize "Internalize">
+<!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "Exportovat">
 <!ENTITY sb.remove "Odstranit">
 <!ENTITY sb.property "Vlastnosti">

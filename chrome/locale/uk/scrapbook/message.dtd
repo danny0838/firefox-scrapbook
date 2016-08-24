@@ -375,7 +375,8 @@
 <!ENTITY sb.move.into "Пересунути у теку">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Зберегти знову">
-<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.internalize "Internalize">
+<!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "Експорт">
 <!ENTITY sb.remove "Вилучити">
 <!ENTITY sb.property "Властивості">

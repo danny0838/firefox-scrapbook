@@ -375,7 +375,8 @@
 <!ENTITY sb.move.into "Mover para o cartafol">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Capturar outra vez">
-<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.internalize "Internalize">
+<!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "Exportar">
 <!ENTITY sb.remove "Borrar">
 <!ENTITY sb.property "Propiedades">

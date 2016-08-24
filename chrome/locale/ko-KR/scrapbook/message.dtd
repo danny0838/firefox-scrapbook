@@ -375,7 +375,8 @@
 <!ENTITY sb.move.into "폴더로 이동">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "다시 캡처하기">
-<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.internalize "Internalize">
+<!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "가져오기">
 <!ENTITY sb.remove "삭제">
 <!ENTITY sb.property "속성">
