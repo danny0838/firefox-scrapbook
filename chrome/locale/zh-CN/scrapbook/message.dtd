@@ -69,8 +69,8 @@
 <!ENTITY sb.detail.linked.page "深层获取">
 <!ENTITY sb.detail.linked.page.desc "全部获取完成后，将保持所有页面彼此链接并创建网站地图。">
 <!ENTITY sb.detail.linked.page.depth "获取链接层数">
-<!ENTITY sb.detail.warnAboutRenew "注意: “重新获取” 会覆盖以前保存的页面。">
-<!ENTITY sb.detail.warnAboutScript "注意: 将会因为 JavaScript 而引起很多问题。">
+<!ENTITY sb.detail.warnAboutRenew "注意：“重新获取” 会覆盖以前保存的页面。">
+<!ENTITY sb.detail.warnAboutScript "注意：将会因为 JavaScript 而引起很多问题。">
 
 <!-- editor.dtd -->
 <!ENTITY sb.toolbar.edit "编辑工具栏">
@@ -344,7 +344,7 @@
 <!ENTITY sb.sort.grouping "按类型分组">
 <!ENTITY sb.sort.grouping.desc "按文件夹、页面、便签页面、便签分组排序">
 <!ENTITY sb.sort.recursive "包括所有子文件夹">
-<!ENTITY sb.sort.warning "注意: 此操作无法撤销。">
+<!ENTITY sb.sort.warning "注意：此操作无法撤销。">
 
 <!-- templateHelp.dtd -->
 <!ENTITY sb.thelp.dir "ltr">
