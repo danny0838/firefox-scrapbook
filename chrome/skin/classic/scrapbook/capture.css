@@ -66,7 +66,7 @@ toolbarbutton dropmarker {
     padding-left: 5px;
 }
 
-/* ::::: sbpCapture ::::: */
+/* ::::: sbCapture ::::: */
 
 treechildren::-moz-tree-checkbox {
   /* unchecked checkbox treecells. This style MUST come before treechildren::-moz-tree-checkbox(checked) otherwise it won't take effect. */

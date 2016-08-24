@@ -30,10 +30,10 @@
 <!ENTITY sb.combine.preview "Previzualizare">
 <!ENTITY sb.combine.preview.d "Apăsați butonul „Combină” după ce verificați rezultatul.">
 <!ENTITY sb.combine.option.remove "Elimină paginile originale după finalizarea combinării">
-<!ENTITY sbp.combine.up "Mută elementul în sus">
-<!ENTITY sbp.combine.down "Mută elementul în jos">
-<!ENTITY sbp.combine.remove "Elimină elementul">
-<!ENTITY sbp.combine.newTitle "Denumire nouă">
+<!ENTITY sb.combine.up "Mută elementul în sus">
+<!ENTITY sb.combine.down "Mută elementul în jos">
+<!ENTITY sb.combine.remove "Elimină elementul">
+<!ENTITY sb.combine.newTitle "Denumire nouă">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Temporizare (secunde)">
@@ -192,10 +192,10 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "Filtru">
-<!ENTITY sbp.multiple.titleofwebsite "Denumire sait web">
-<!ENTITY sbp.multiple.titleoflink "Denumire legătură">
+<!ENTITY sb.multiple.titleofwebsite "Denumire sait web">
+<!ENTITY sb.multiple.titleoflink "Denumire legătură">
 <!ENTITY sb.multiple.title "Denumire">
-<!ENTITY sbp.multiple.downloadmethod "Metodă">
+<!ENTITY sb.multiple.downloadmethod "Metodă">
 <!ENTITY sb.multiple.url "Adrese (furnizați adresele câte una pe linie)">
 <!ENTITY sb.multiple.detector "Detector de adrese">
 <!ENTITY sb.multiple.detector.plink "Toate legăturile din pagină">
@@ -204,7 +204,7 @@
 <!ENTITY sb.multiple.detector.local "Toate paginile HTML locale din dosar">
 <!ENTITY sb.multiple.detector.bookmarks "Semne de carte">
 <!ENTITY sb.multiple.detector.clear "Șterge">
-<!ENTITY sbp.multiple.exclude "Ignoră adresele deja existente în dosarul destinație">
+<!ENTITY sb.multiple.exclude "Ignoră adresele deja existente în dosarul destinație">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "Salvează">
@@ -390,7 +390,7 @@
 <!ENTITY sb.listview "Afișează în mod listă">
 <!ENTITY sb.prop.title "Denumire">
 <!ENTITY sb.prop.comment "Comentariu">
-<!ENTITY sbp.prop.url "Adresă">
+<!ENTITY sb.prop.url "Adresă">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

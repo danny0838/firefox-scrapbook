@@ -30,10 +30,10 @@
 <!ENTITY sb.combine.preview "Anteprima">
 <!ENTITY sb.combine.preview.d "Premere &apos;Unisci&apos; dopo aver verificato l&apos;anteprima">
 <!ENTITY sb.combine.option.remove "Dopo aver completato l&apos;unione, eliminare la pagina originale">
-<!ENTITY sbp.combine.up "Sposta su">
-<!ENTITY sbp.combine.down "Sposta giù">
-<!ENTITY sbp.combine.remove "Elimina">
-<!ENTITY sbp.combine.newTitle "Nuovo titolo">
+<!ENTITY sb.combine.up "Sposta su">
+<!ENTITY sb.combine.down "Sposta giù">
+<!ENTITY sb.combine.remove "Elimina">
+<!ENTITY sb.combine.newTitle "Nuovo titolo">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Timeout (in secondi)">
@@ -192,10 +192,10 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "Filtro">
-<!ENTITY sbp.multiple.titleofwebsite "Titolo del sito">
-<!ENTITY sbp.multiple.titleoflink "Titolo del link">
+<!ENTITY sb.multiple.titleofwebsite "Titolo del sito">
+<!ENTITY sb.multiple.titleoflink "Titolo del link">
 <!ENTITY sb.multiple.title "Titolo">
-<!ENTITY sbp.multiple.downloadmethod "Metodo">
+<!ENTITY sb.multiple.downloadmethod "Metodo">
 <!ENTITY sb.multiple.url "URL (inserire un URL per riga)">
 <!ENTITY sb.multiple.detector "Rilevatore URL">
 <!ENTITY sb.multiple.detector.plink "Tutti i link nella pagina">
@@ -204,7 +204,7 @@
 <!ENTITY sb.multiple.detector.local "Tutti i file HTML in una cartella da selezionare…">
 <!ENTITY sb.multiple.detector.bookmarks "Segnalibri">
 <!ENTITY sb.multiple.detector.clear "Svuota">
-<!ENTITY sbp.multiple.exclude "Ignora gli indirizzi web già esistenti nella cartella di destinazione">
+<!ENTITY sb.multiple.exclude "Ignora gli indirizzi web già esistenti nella cartella di destinazione">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "Salva">
@@ -390,7 +390,7 @@
 <!ENTITY sb.listview "Visualizza la lista">
 <!ENTITY sb.prop.title "Titolo">
 <!ENTITY sb.prop.comment "Commenti">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

@@ -30,10 +30,10 @@
 <!ENTITY sb.combine.preview "Pré-visualização">
 <!ENTITY sb.combine.preview.d "Pressione o botão &apos;Combinar&apos; após verificar a pré-visualização.">
 <!ENTITY sb.combine.option.remove "Após terminar de combinar, remover as páginas originais">
-<!ENTITY sbp.combine.up "mover item para cima">
-<!ENTITY sbp.combine.down "mover item para baixo">
-<!ENTITY sbp.combine.remove "remover item">
-<!ENTITY sbp.combine.newTitle "novo título">
+<!ENTITY sb.combine.up "mover item para cima">
+<!ENTITY sb.combine.down "mover item para baixo">
+<!ENTITY sb.combine.remove "remover item">
+<!ENTITY sb.combine.newTitle "novo título">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Timeout (em segundos)">
@@ -192,10 +192,10 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "Filtro (expressão regular)">
-<!ENTITY sbp.multiple.titleofwebsite "Título do website">
-<!ENTITY sbp.multiple.titleoflink "Título do link">
+<!ENTITY sb.multiple.titleofwebsite "Título do website">
+<!ENTITY sb.multiple.titleoflink "Título do link">
 <!ENTITY sb.multiple.title "Título">
-<!ENTITY sbp.multiple.downloadmethod "Método">
+<!ENTITY sb.multiple.downloadmethod "Método">
 <!ENTITY sb.multiple.url "URL (Insira uma URL por linha)">
 <!ENTITY sb.multiple.detector "Detector de URL">
 <!ENTITY sb.multiple.detector.plink "Todos os Links na Página">
@@ -204,7 +204,7 @@
 <!ENTITY sb.multiple.detector.local "Todos os HTMLs em um Diretório Local">
 <!ENTITY sb.multiple.detector.bookmarks "Favoritos">
 <!ENTITY sb.multiple.detector.clear "Limpar">
-<!ENTITY sbp.multiple.exclude "ignorar endereço já existente na pasta de destino">
+<!ENTITY sb.multiple.exclude "ignorar endereço já existente na pasta de destino">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "Salvar">
@@ -390,7 +390,7 @@
 <!ENTITY sb.listview "Visão em Lista">
 <!ENTITY sb.prop.title "Título">
 <!ENTITY sb.prop.comment "Comentário">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

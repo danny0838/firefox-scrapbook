@@ -30,10 +30,10 @@
 <!ENTITY sb.combine.preview "Ön İzleme">
 <!ENTITY sb.combine.preview.d "Ön izlemeyi doğruladıktan sonra &apos;Kaydet&apos; düğmesine basın.">
 <!ENTITY sb.combine.option.remove "Birleştirme tamamlandıktan sonra önceki sayfaları kaldır">
-<!ENTITY sbp.combine.up "move item upwards">
-<!ENTITY sbp.combine.down "move item downwards">
-<!ENTITY sbp.combine.remove "remove item">
-<!ENTITY sbp.combine.newTitle "new title">
+<!ENTITY sb.combine.up "move item upwards">
+<!ENTITY sb.combine.down "move item downwards">
+<!ENTITY sb.combine.remove "remove item">
+<!ENTITY sb.combine.newTitle "new title">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Timeout (in seconds)">
@@ -192,10 +192,10 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "Filter (regular expression)">
-<!ENTITY sbp.multiple.titleofwebsite "Title of website">
-<!ENTITY sbp.multiple.titleoflink "Title of link">
+<!ENTITY sb.multiple.titleofwebsite "Title of website">
+<!ENTITY sb.multiple.titleoflink "Title of link">
 <!ENTITY sb.multiple.title "Title">
-<!ENTITY sbp.multiple.downloadmethod "Method">
+<!ENTITY sb.multiple.downloadmethod "Method">
 <!ENTITY sb.multiple.url "URL (URL&apos;leri satır satır girin)">
 <!ENTITY sb.multiple.detector "URL Algılayıcı">
 <!ENTITY sb.multiple.detector.plink "Sayfadaki Tüm Linkler">
@@ -204,7 +204,7 @@
 <!ENTITY sb.multiple.detector.local "Bir Dizindeki Tüm Yerel HTML&apos;ler">
 <!ENTITY sb.multiple.detector.bookmarks "Yer İmleri">
 <!ENTITY sb.multiple.detector.clear "Temizle">
-<!ENTITY sbp.multiple.exclude "ignore already existing addresses in destination folder">
+<!ENTITY sb.multiple.exclude "ignore already existing addresses in destination folder">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "Kaydet">
@@ -391,7 +391,7 @@
 <!ENTITY sb.prop.title "Başlık">
 <!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.comment "Yorum">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

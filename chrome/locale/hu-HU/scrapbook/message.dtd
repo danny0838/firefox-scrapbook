@@ -30,10 +30,10 @@
 <!ENTITY sb.combine.preview "Előnézet">
 <!ENTITY sb.combine.preview.d "Nyomja meg az „Összefűzés” gombot az előnézet ellenőrzése után.">
 <!ENTITY sb.combine.option.remove "Távolítsa el az összefűzés befejezése után az eredeti oldalakat">
-<!ENTITY sbp.combine.up "Mozgatás felfelé">
-<!ENTITY sbp.combine.down "Mozgatás lefelé">
-<!ENTITY sbp.combine.remove "Elem eltávolítása">
-<!ENTITY sbp.combine.newTitle "új cím">
+<!ENTITY sb.combine.up "Mozgatás felfelé">
+<!ENTITY sb.combine.down "Mozgatás lefelé">
+<!ENTITY sb.combine.remove "Elem eltávolítása">
+<!ENTITY sb.combine.newTitle "új cím">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Időtúllépés (másodpercben megadva)">
@@ -192,10 +192,10 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "Szűrő">
-<!ENTITY sbp.multiple.titleofwebsite "Webhely címe">
-<!ENTITY sbp.multiple.titleoflink "Link címe">
+<!ENTITY sb.multiple.titleofwebsite "Webhely címe">
+<!ENTITY sb.multiple.titleoflink "Link címe">
 <!ENTITY sb.multiple.title "Cím">
-<!ENTITY sbp.multiple.downloadmethod "Eljárás">
+<!ENTITY sb.multiple.downloadmethod "Eljárás">
 <!ENTITY sb.multiple.url "Webcím (Soronként írja be a webcímeket)">
 <!ENTITY sb.multiple.detector "Webcímérzékelő">
 <!ENTITY sb.multiple.detector.plink "Az oldalon lévő összes hivatkozás">
@@ -204,7 +204,7 @@
 <!ENTITY sb.multiple.detector.local "Az összes helyi HTML valamelyik mappában">
 <!ENTITY sb.multiple.detector.bookmarks "Könyvjelzők">
 <!ENTITY sb.multiple.detector.clear "Törlés">
-<!ENTITY sbp.multiple.exclude "A célmappában már létező címek figyelmen kívül hagyása.">
+<!ENTITY sb.multiple.exclude "A célmappában már létező címek figyelmen kívül hagyása.">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "Mentés">
@@ -390,7 +390,7 @@
 <!ENTITY sb.listview "Utolsó megtekintés">
 <!ENTITY sb.prop.title "Név">
 <!ENTITY sb.prop.comment "Megjegyzés">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

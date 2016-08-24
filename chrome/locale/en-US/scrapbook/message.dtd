@@ -30,10 +30,10 @@
 <!ENTITY sb.combine.preview "Preview">
 <!ENTITY sb.combine.preview.d "Press &apos;Combine&apos; button after verifying the preview.">
 <!ENTITY sb.combine.option.remove "After completing combine, remove original pages">
-<!ENTITY sbp.combine.up "move item upwards">
-<!ENTITY sbp.combine.down "move item downwards">
-<!ENTITY sbp.combine.remove "remove item">
-<!ENTITY sbp.combine.newTitle "new title">
+<!ENTITY sb.combine.up "move item upwards">
+<!ENTITY sb.combine.down "move item downwards">
+<!ENTITY sb.combine.remove "remove item">
+<!ENTITY sb.combine.newTitle "new title">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Timeout (in seconds)">
@@ -192,10 +192,10 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "Filter (regular expression)">
-<!ENTITY sbp.multiple.titleofwebsite "Title of website">
-<!ENTITY sbp.multiple.titleoflink "Title of link">
+<!ENTITY sb.multiple.titleofwebsite "Title of website">
+<!ENTITY sb.multiple.titleoflink "Title of link">
 <!ENTITY sb.multiple.title "Title">
-<!ENTITY sbp.multiple.downloadmethod "Method">
+<!ENTITY sb.multiple.downloadmethod "Method">
 <!ENTITY sb.multiple.url "URL (Enter URLs line-by-line)">
 <!ENTITY sb.multiple.detector "URL Detector">
 <!ENTITY sb.multiple.detector.plink "All Links in the Page">
@@ -204,7 +204,7 @@
 <!ENTITY sb.multiple.detector.local "All Local HTMLs in a Directory">
 <!ENTITY sb.multiple.detector.bookmarks "Bookmarks">
 <!ENTITY sb.multiple.detector.clear "Clear">
-<!ENTITY sbp.multiple.exclude "ignore already existing addresses in destination folder">
+<!ENTITY sb.multiple.exclude "ignore already existing addresses in destination folder">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "Save">
@@ -390,7 +390,7 @@
 <!ENTITY sb.listview "List View">
 <!ENTITY sb.prop.title "Title">
 <!ENTITY sb.prop.comment "Comment">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

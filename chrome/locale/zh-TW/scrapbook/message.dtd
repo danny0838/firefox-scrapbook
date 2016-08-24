@@ -30,10 +30,10 @@
 <!ENTITY sb.combine.preview "預覽">
 <!ENTITY sb.combine.preview.d "確認預覽結果無誤後，點擊「合併」繼續進行。">
 <!ENTITY sb.combine.option.remove "合併後刪除原頁面">
-<!ENTITY sbp.combine.up "上移項目">
-<!ENTITY sbp.combine.down "下移項目">
-<!ENTITY sbp.combine.remove "移除項目">
-<!ENTITY sbp.combine.newTitle "新標題">
+<!ENTITY sb.combine.up "上移項目">
+<!ENTITY sb.combine.down "下移項目">
+<!ENTITY sb.combine.remove "移除項目">
+<!ENTITY sb.combine.newTitle "新標題">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "逾時（秒數）">
@@ -192,10 +192,10 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "篩選條件（使用規則運算式）">
-<!ENTITY sbp.multiple.titleofwebsite "網站標題">
-<!ENTITY sbp.multiple.titleoflink "連結標題">
+<!ENTITY sb.multiple.titleofwebsite "網站標題">
+<!ENTITY sb.multiple.titleoflink "連結標題">
 <!ENTITY sb.multiple.title "標題">
-<!ENTITY sbp.multiple.downloadmethod "方式">
+<!ENTITY sb.multiple.downloadmethod "方式">
 <!ENTITY sb.multiple.url "URL (每行一個 URL)">
 <!ENTITY sb.multiple.detector "自動偵測 URL">
 <!ENTITY sb.multiple.detector.plink "本頁所有連結">
@@ -204,7 +204,7 @@
 <!ENTITY sb.multiple.detector.local "某目錄下所有的 HTML 檔">
 <!ENTITY sb.multiple.detector.bookmarks "書籤">
 <!ENTITY sb.multiple.detector.clear "清除">
-<!ENTITY sbp.multiple.exclude "略過已存在於目標資料夾的位址">
+<!ENTITY sb.multiple.exclude "略過已存在於目標資料夾的位址">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "存檔">
@@ -390,7 +390,7 @@
 <!ENTITY sb.listview "列表模式">
 <!ENTITY sb.prop.title "標題">
 <!ENTITY sb.prop.comment "評註">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "轉換為資料夾">
 <!ENTITY sb.unmake.container "轉換為非資料夾">

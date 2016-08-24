@@ -30,10 +30,10 @@
 <!ENTITY sb.combine.preview "미리 보기">
 <!ENTITY sb.combine.preview.d "미리 보기를 확인하고 이상이 없으면 결합 버튼을 누르십시오.">
 <!ENTITY sb.combine.option.remove "결합 완료 후 결합된 원래의 페이지는 삭제">
-<!ENTITY sbp.combine.up "위로 이동">
-<!ENTITY sbp.combine.down "아래로 이동">
-<!ENTITY sbp.combine.remove "항목 제거">
-<!ENTITY sbp.combine.newTitle "새 제목">
+<!ENTITY sb.combine.up "위로 이동">
+<!ENTITY sb.combine.down "아래로 이동">
+<!ENTITY sb.combine.remove "항목 제거">
+<!ENTITY sb.combine.newTitle "새 제목">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "시간 제한 (초)">
@@ -192,10 +192,10 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "필터">
-<!ENTITY sbp.multiple.titleofwebsite "웹 사이트 제목">
-<!ENTITY sbp.multiple.titleoflink "링크 제목">
+<!ENTITY sb.multiple.titleofwebsite "웹 사이트 제목">
+<!ENTITY sb.multiple.titleoflink "링크 제목">
 <!ENTITY sb.multiple.title "제목">
-<!ENTITY sbp.multiple.downloadmethod "방식">
+<!ENTITY sb.multiple.downloadmethod "방식">
 <!ENTITY sb.multiple.url "URL (여러 개를 입력하려면 줄을 바꾸어 입력하십시오.)">
 <!ENTITY sb.multiple.detector "URL 검출자">
 <!ENTITY sb.multiple.detector.plink "페이지의 모든 링크">
@@ -204,7 +204,7 @@
 <!ENTITY sb.multiple.detector.local "지정 폴더 아래의 로컬 HTML">
 <!ENTITY sb.multiple.detector.bookmarks "북마크">
 <!ENTITY sb.multiple.detector.clear "비우기">
-<!ENTITY sbp.multiple.exclude "목적지 폴더에 같은 주소가 존재하면 무시">
+<!ENTITY sb.multiple.exclude "목적지 폴더에 같은 주소가 존재하면 무시">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "저장">
@@ -390,7 +390,7 @@
 <!ENTITY sb.listview "목록 보기">
 <!ENTITY sb.prop.title "제목">
 <!ENTITY sb.prop.comment "주석">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

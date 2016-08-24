@@ -60,7 +60,7 @@
             <menuseparator />
             <menuitem id="sbSearchPopupT" label="&sb.prop.title;" type="radio" oncommand="sbSearchService.change('title');" />
             <menuitem id="sbSearchPopupC" label="&sb.prop.comment;" type="radio" oncommand="sbSearchService.change('comment');" />
-            <menuitem id="sbSearchPopupS" label="&sbp.prop.url;" type="radio" oncommand="sbSearchService.change('source');" />
+            <menuitem id="sbSearchPopupS" label="&sb.prop.url;" type="radio" oncommand="sbSearchService.change('source');" />
             <menuitem id="sbSearchPopupI" label="&sb.prop.id.date;" type="radio" oncommand="sbSearchService.change('id');" />
             <menuitem id="sbSearchPopupA" label="&sb.search.all;" type="radio" oncommand="sbSearchService.change('all');" />
             <menuseparator />

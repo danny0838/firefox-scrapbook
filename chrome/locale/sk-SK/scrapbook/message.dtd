@@ -30,10 +30,10 @@
 <!ENTITY sb.combine.preview "Náhľad">
 <!ENTITY sb.combine.preview.d "Stlačením tlačidla &apos;Zlúčenie&apos; skontrolujte ukážku.">
 <!ENTITY sb.combine.option.remove "Po dokončení zlúčenia, odstrániť originálne stránky">
-<!ENTITY sbp.combine.up "move item upwards">
-<!ENTITY sbp.combine.down "move item downwards">
-<!ENTITY sbp.combine.remove "remove item">
-<!ENTITY sbp.combine.newTitle "nový názov">
+<!ENTITY sb.combine.up "move item upwards">
+<!ENTITY sb.combine.down "move item downwards">
+<!ENTITY sb.combine.remove "remove item">
+<!ENTITY sb.combine.newTitle "nový názov">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Časový limit (v sekundách)">
@@ -192,10 +192,10 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "Filter">
-<!ENTITY sbp.multiple.titleofwebsite "Názov webovej stránky">
-<!ENTITY sbp.multiple.titleoflink "Názov odkazu">
+<!ENTITY sb.multiple.titleofwebsite "Názov webovej stránky">
+<!ENTITY sb.multiple.titleoflink "Názov odkazu">
 <!ENTITY sb.multiple.title "Názov">
-<!ENTITY sbp.multiple.downloadmethod "Metóda">
+<!ENTITY sb.multiple.downloadmethod "Metóda">
 <!ENTITY sb.multiple.url "URL (Vložte URL adresy riadok po riadku)">
 <!ENTITY sb.multiple.detector "URL detektor">
 <!ENTITY sb.multiple.detector.plink "Všetky odkazy na stránke">
@@ -204,7 +204,7 @@
 <!ENTITY sb.multiple.detector.local "Všetky lokálne HTML dokumenty v priečinku">
 <!ENTITY sb.multiple.detector.bookmarks "Záložky">
 <!ENTITY sb.multiple.detector.clear "Vyčistiť">
-<!ENTITY sbp.multiple.exclude "ignorovať už existujúce adresy v cieľovom priečinku">
+<!ENTITY sb.multiple.exclude "ignorovať už existujúce adresy v cieľovom priečinku">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "Uložiť">
@@ -390,7 +390,7 @@
 <!ENTITY sb.listview "Zoznam">
 <!ENTITY sb.prop.title "Názov">
 <!ENTITY sb.prop.comment "Komentár">
-<!ENTITY sbp.prop.url "Adresa URL">
+<!ENTITY sb.prop.url "Adresa URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

@@ -30,10 +30,10 @@
 <!ENTITY sb.combine.preview "Podgląd">
 <!ENTITY sb.combine.preview.d "Po weryfikacji podglądu naciśnij przycisk &quot;Połącz&quot;.">
 <!ENTITY sb.combine.option.remove "Po zakończeniu łączenia usuń oryginalne strony">
-<!ENTITY sbp.combine.up "przesuń elementy do góry">
-<!ENTITY sbp.combine.down "przesuń elementy w dół">
-<!ENTITY sbp.combine.remove "usuń elementy">
-<!ENTITY sbp.combine.newTitle "nowy tytuł">
+<!ENTITY sb.combine.up "przesuń elementy do góry">
+<!ENTITY sb.combine.down "przesuń elementy w dół">
+<!ENTITY sb.combine.remove "usuń elementy">
+<!ENTITY sb.combine.newTitle "nowy tytuł">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Limit czasu (s)">
@@ -192,10 +192,10 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "Filtr">
-<!ENTITY sbp.multiple.titleofwebsite "Tytuł witryny">
-<!ENTITY sbp.multiple.titleoflink "Tytuł odnośnika">
+<!ENTITY sb.multiple.titleofwebsite "Tytuł witryny">
+<!ENTITY sb.multiple.titleoflink "Tytuł odnośnika">
 <!ENTITY sb.multiple.title "Tytuł">
-<!ENTITY sbp.multiple.downloadmethod "Metoda">
+<!ENTITY sb.multiple.downloadmethod "Metoda">
 <!ENTITY sb.multiple.url "URL (wprowadzaj adresy URL linia po linii)">
 <!ENTITY sb.multiple.detector "Wykrywacz adresów URL">
 <!ENTITY sb.multiple.detector.plink "Wszystkie odnośniki na tej stronie">
@@ -204,7 +204,7 @@
 <!ENTITY sb.multiple.detector.local "Wszystkie lokalne strony w katalogu">
 <!ENTITY sb.multiple.detector.bookmarks "Zakładki">
 <!ENTITY sb.multiple.detector.clear "Wyczyść">
-<!ENTITY sbp.multiple.exclude "Ignoruj już istniejące adresy w folderze docelowym">
+<!ENTITY sb.multiple.exclude "Ignoruj już istniejące adresy w folderze docelowym">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "Zapisz">
@@ -390,7 +390,7 @@
 <!ENTITY sb.listview "Widok listy">
 <!ENTITY sb.prop.title "Tytuł">
 <!ENTITY sb.prop.comment "Komentarz">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

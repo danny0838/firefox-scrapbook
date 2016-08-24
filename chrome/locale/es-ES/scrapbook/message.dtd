@@ -30,10 +30,10 @@
 <!ENTITY sb.combine.preview "Previsualización">
 <!ENTITY sb.combine.preview.d "Pulsar el botón &apos;Combinar&apos; después de verificar la previsualización.">
 <!ENTITY sb.combine.option.remove "Después de completar la combinación, borrar las páginas originales">
-<!ENTITY sbp.combine.up "subir elemento">
-<!ENTITY sbp.combine.down "bajar elemento">
-<!ENTITY sbp.combine.remove "borrar elemento">
-<!ENTITY sbp.combine.newTitle "nuevo título">
+<!ENTITY sb.combine.up "subir elemento">
+<!ENTITY sb.combine.down "bajar elemento">
+<!ENTITY sb.combine.remove "borrar elemento">
+<!ENTITY sb.combine.newTitle "nuevo título">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Desconexión (en segundos)">
@@ -192,10 +192,10 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "Filtro">
-<!ENTITY sbp.multiple.titleofwebsite "Título de la página WEB">
-<!ENTITY sbp.multiple.titleoflink "Título del enlace">
+<!ENTITY sb.multiple.titleofwebsite "Título de la página WEB">
+<!ENTITY sb.multiple.titleoflink "Título del enlace">
 <!ENTITY sb.multiple.title "Título">
-<!ENTITY sbp.multiple.downloadmethod "Método">
+<!ENTITY sb.multiple.downloadmethod "Método">
 <!ENTITY sb.multiple.url "URL (Introduzca URLs línea por línea)">
 <!ENTITY sb.multiple.detector "Detector URL">
 <!ENTITY sb.multiple.detector.plink "Todos los enlaces en la página">
@@ -204,7 +204,7 @@
 <!ENTITY sb.multiple.detector.local "Todos los HTMLs locales en un directorio">
 <!ENTITY sb.multiple.detector.bookmarks "Marcadores">
 <!ENTITY sb.multiple.detector.clear "Limpiar">
-<!ENTITY sbp.multiple.exclude "ignorar direcciones ya existentes en la carpeta de destino">
+<!ENTITY sb.multiple.exclude "ignorar direcciones ya existentes en la carpeta de destino">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "Guardar">
@@ -390,7 +390,7 @@
 <!ENTITY sb.listview "Vista en modo lista">
 <!ENTITY sb.prop.title "Título">
 <!ENTITY sb.prop.comment "Comentario">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

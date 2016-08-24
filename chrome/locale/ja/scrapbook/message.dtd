@@ -30,10 +30,10 @@
 <!ENTITY sb.combine.preview "プレビュー">
 <!ENTITY sb.combine.preview.d "プレビューを確認して、よろしければ結合ボタンを押してください。">
 <!ENTITY sb.combine.option.remove "結合完了後、結合された元のページを削除する">
-<!ENTITY sbp.combine.up "上へ">
-<!ENTITY sbp.combine.down "下へ">
-<!ENTITY sbp.combine.remove "削除">
-<!ENTITY sbp.combine.newTitle "新しいタイトル">
+<!ENTITY sb.combine.up "上へ">
+<!ENTITY sb.combine.down "下へ">
+<!ENTITY sb.combine.remove "削除">
+<!ENTITY sb.combine.newTitle "新しいタイトル">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "タイムアウト（秒）">
@@ -192,10 +192,10 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "フィルタ（正規表現）">
-<!ENTITY sbp.multiple.titleofwebsite "ウェブサイトのタイトル">
-<!ENTITY sbp.multiple.titleoflink "リンクのタイトル">
+<!ENTITY sb.multiple.titleofwebsite "ウェブサイトのタイトル">
+<!ENTITY sb.multiple.titleoflink "リンクのタイトル">
 <!ENTITY sb.multiple.title "タイトル">
-<!ENTITY sbp.multiple.downloadmethod "メソッド">
+<!ENTITY sb.multiple.downloadmethod "メソッド">
 <!ENTITY sb.multiple.url "URL （改行して複数入力可）">
 <!ENTITY sb.multiple.detector "URL検出ツール">
 <!ENTITY sb.multiple.detector.plink "ページ内のすべてのリンク">
@@ -204,7 +204,7 @@
 <!ENTITY sb.multiple.detector.local "指定したフォルダ以下のローカルHTML">
 <!ENTITY sb.multiple.detector.bookmarks "ブックマーク">
 <!ENTITY sb.multiple.detector.clear "クリア">
-<!ENTITY sbp.multiple.exclude "保存先フォルダにすでに存在するアドレスは無視する">
+<!ENTITY sb.multiple.exclude "保存先フォルダにすでに存在するアドレスは無視する">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "保存">
@@ -390,7 +390,7 @@
 <!ENTITY sb.listview "リストビュー">
 <!ENTITY sb.prop.title "タイトル">
 <!ENTITY sb.prop.comment "コメント">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "フォルダへの変換">
 <!ENTITY sb.unmake.container "非フォルダに変換">

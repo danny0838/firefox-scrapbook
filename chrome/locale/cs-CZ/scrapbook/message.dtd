@@ -30,10 +30,10 @@
 <!ENTITY sb.combine.preview "Náhled">
 <!ENTITY sb.combine.preview.d "Po ověření správnosti v náhledu klepněte na tlačítko &quot;Sloučit&quot;.">
 <!ENTITY sb.combine.option.remove "Odstranit původní stránky po dokončení sloučení">
-<!ENTITY sbp.combine.up "posunout položku výše">
-<!ENTITY sbp.combine.down "posunout položku níže">
-<!ENTITY sbp.combine.remove "odstranit položku">
-<!ENTITY sbp.combine.newTitle "nový název">
+<!ENTITY sb.combine.up "posunout položku výše">
+<!ENTITY sb.combine.down "posunout položku níže">
+<!ENTITY sb.combine.remove "odstranit položku">
+<!ENTITY sb.combine.newTitle "nový název">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Časový limit (v sekundách)">
@@ -192,10 +192,10 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "Filtr (regulární výrazy)">
-<!ENTITY sbp.multiple.titleofwebsite "Název webové stránky">
-<!ENTITY sbp.multiple.titleoflink "Název odkazu">
+<!ENTITY sb.multiple.titleofwebsite "Název webové stránky">
+<!ENTITY sb.multiple.titleoflink "Název odkazu">
 <!ENTITY sb.multiple.title "Název">
-<!ENTITY sbp.multiple.downloadmethod "Metoda">
+<!ENTITY sb.multiple.downloadmethod "Metoda">
 <!ENTITY sb.multiple.url "Adresa URL (zadávejte každou zvlášť na jeden řádek)">
 <!ENTITY sb.multiple.detector "Detektor URL">
 <!ENTITY sb.multiple.detector.plink "Všechny odkazy na stránce">
@@ -204,7 +204,7 @@
 <!ENTITY sb.multiple.detector.local "Všechny místní HTML dokumenty ve složce">
 <!ENTITY sb.multiple.detector.bookmarks "Záložky">
 <!ENTITY sb.multiple.detector.clear "Vyčistit">
-<!ENTITY sbp.multiple.exclude "ignorovat již existující adresy v cílové složce">
+<!ENTITY sb.multiple.exclude "ignorovat již existující adresy v cílové složce">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "Uložit">
@@ -390,7 +390,7 @@
 <!ENTITY sb.listview "Seznam">
 <!ENTITY sb.prop.title "Název">
 <!ENTITY sb.prop.comment "Komentář">
-<!ENTITY sbp.prop.url "Adresa URL">
+<!ENTITY sb.prop.url "Adresa URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

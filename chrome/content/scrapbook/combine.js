@@ -97,7 +97,7 @@ var sbCombineService = {
         this.WIZARD.getButton("cancel").hidden = false;
         this.WIZARD.getButton("cancel").disabled = true;
 //        this.WIZARD.getButton("cancel").onclick = function(){ sbCombineService.abort(); };
-        this.option["T"] = document.getElementById("sbpTitleTextbox").value;
+        this.option["T"] = document.getElementById("sbTitleTextbox").value;
         this.option["R"] = document.getElementById("sbCombineOptionRemove").checked;
         // reset the variables to prevent double-charged content when reloaded
         sbPageCombiner.htmlSrc = "";
@@ -165,7 +165,7 @@ var sbCombineService = {
         this.option["R"] = document.getElementById("sbCombineOptionRemove").checked;
         this.toggleElements(true);
         SB_trace(sbCommonUtils.lang("CAPTURE_START"));
-//sbCommonUtils.alert("--"+document.getElementById("sbpTitleTextbox").value+"--");
+//sbCommonUtils.alert("--"+document.getElementById("sbTitleTextbox").value+"--");
         setTimeout(function(){ gContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null, "combine"); }, 0);
     },
 
@@ -277,34 +277,34 @@ var sbCombineService = {
         if ( tbEintraege>1 ) {
             switch ( tbIndex ) {
                 case -1:
-                    document.getElementById("sbpUp").disabled = true;
-                    document.getElementById("sbpDown").disabled = true;
-                    document.getElementById("sbpDelete").disabled = true;
+                    document.getElementById("sbUp").disabled = true;
+                    document.getElementById("sbDown").disabled = true;
+                    document.getElementById("sbDelete").disabled = true;
                     break;
                 case 0:
-                    document.getElementById("sbpUp").disabled = true;
-                    document.getElementById("sbpDown").disabled = false;
-                    document.getElementById("sbpDelete").disabled = false;
+                    document.getElementById("sbUp").disabled = true;
+                    document.getElementById("sbDown").disabled = false;
+                    document.getElementById("sbDelete").disabled = false;
                     break;
                 case tbEintraege-1:
-                    document.getElementById("sbpUp").disabled = false;
-                    document.getElementById("sbpDown").disabled = true;
-                    document.getElementById("sbpDelete").disabled = false;
+                    document.getElementById("sbUp").disabled = false;
+                    document.getElementById("sbDown").disabled = true;
+                    document.getElementById("sbDelete").disabled = false;
                     break;
                 default:
-                    document.getElementById("sbpUp").disabled = false;
-                    document.getElementById("sbpDown").disabled = false;
-                    document.getElementById("sbpDelete").disabled = false;
+                    document.getElementById("sbUp").disabled = false;
+                    document.getElementById("sbDown").disabled = false;
+                    document.getElementById("sbDelete").disabled = false;
                     break;
             }
         } else {
             //Da keine Einträge vorhanden sind, kann auch nichts gemacht werden. Daher können sämtliche Knöpfe deaktiviert werden
-            document.getElementById("sbpUp").disabled = true;
-            document.getElementById("sbpDown").disabled = true;
+            document.getElementById("sbUp").disabled = true;
+            document.getElementById("sbDown").disabled = true;
             if ( tbIndex > -1 ) {
-                document.getElementById("sbpDelete").disabled = false;
+                document.getElementById("sbDelete").disabled = false;
             } else {
-                document.getElementById("sbpDelete").disabled = true;
+                document.getElementById("sbDelete").disabled = true;
             }
         }
     },

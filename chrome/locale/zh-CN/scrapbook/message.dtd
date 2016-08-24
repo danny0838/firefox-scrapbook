@@ -30,10 +30,10 @@
 <!ENTITY sb.combine.preview "预览">
 <!ENTITY sb.combine.preview.d "预览确认无误后单击“合并”。">
 <!ENTITY sb.combine.option.remove "合并完成后删除原始页面">
-<!ENTITY sbp.combine.up "上移条目">
-<!ENTITY sbp.combine.down "下移条目">
-<!ENTITY sbp.combine.remove "移除条目">
-<!ENTITY sbp.combine.newTitle "新标题">
+<!ENTITY sb.combine.up "上移条目">
+<!ENTITY sb.combine.down "下移条目">
+<!ENTITY sb.combine.remove "移除条目">
+<!ENTITY sb.combine.newTitle "新标题">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "超时 (秒)">
@@ -192,10 +192,10 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "过滤器">
-<!ENTITY sbp.multiple.titleofwebsite "站点标题">
-<!ENTITY sbp.multiple.titleoflink "链接标题">
+<!ENTITY sb.multiple.titleofwebsite "站点标题">
+<!ENTITY sb.multiple.titleoflink "链接标题">
 <!ENTITY sb.multiple.title "标题">
-<!ENTITY sbp.multiple.downloadmethod "方法">
+<!ENTITY sb.multiple.downloadmethod "方法">
 <!ENTITY sb.multiple.url "URL (每行输入一个 URL)">
 <!ENTITY sb.multiple.detector "检测 URL">
 <!ENTITY sb.multiple.detector.plink "页面中包含的所有链接">
@@ -204,7 +204,7 @@
 <!ENTITY sb.multiple.detector.local "本地存储的 HTML 文件">
 <!ENTITY sb.multiple.detector.bookmarks "Bookmarks">
 <!ENTITY sb.multiple.detector.clear "清除">
-<!ENTITY sbp.multiple.exclude "忽略目的文件夹中已存在的地址">
+<!ENTITY sb.multiple.exclude "忽略目的文件夹中已存在的地址">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "保存">
@@ -390,7 +390,7 @@
 <!ENTITY sb.listview "详细列表">
 <!ENTITY sb.prop.title "标题">
 <!ENTITY sb.prop.comment "注释">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "转换为文件夹">
 <!ENTITY sb.unmake.container "转换为非文件夹">

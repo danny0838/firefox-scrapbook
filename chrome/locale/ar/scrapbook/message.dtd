@@ -30,10 +30,10 @@
 <!ENTITY sb.combine.preview "معاينة">
 <!ENTITY sb.combine.preview.d "إضغط &apos;جمع&apos; بعد التأكد بالمعاينة.">
 <!ENTITY sb.combine.option.remove "بعد إكمال الجمع, أزل الصفحات الأصلية.">
-<!ENTITY sbp.combine.up "انقل العنصر للأعلى">
-<!ENTITY sbp.combine.down "انقل العنصر للأسفل">
-<!ENTITY sbp.combine.remove "أزل العنصر">
-<!ENTITY sbp.combine.newTitle "عنوان جديد">
+<!ENTITY sb.combine.up "انقل العنصر للأعلى">
+<!ENTITY sb.combine.down "انقل العنصر للأسفل">
+<!ENTITY sb.combine.remove "أزل العنصر">
+<!ENTITY sb.combine.newTitle "عنوان جديد">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "المهلة (ثواني)">
@@ -192,10 +192,10 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "المرشح">
-<!ENTITY sbp.multiple.titleofwebsite "عنوان الموقع">
-<!ENTITY sbp.multiple.titleoflink "عنوان الرابط">
+<!ENTITY sb.multiple.titleofwebsite "عنوان الموقع">
+<!ENTITY sb.multiple.titleoflink "عنوان الرابط">
 <!ENTITY sb.multiple.title "العنوان">
-<!ENTITY sbp.multiple.downloadmethod "الأسلوب">
+<!ENTITY sb.multiple.downloadmethod "الأسلوب">
 <!ENTITY sb.multiple.url "عنوان (ادخل العناوين واحدا تحت الآخر)">
 <!ENTITY sb.multiple.detector "كاشف العناوين">
 <!ENTITY sb.multiple.detector.plink "كل الارتباطات في الصفحة">
@@ -204,7 +204,7 @@
 <!ENTITY sb.multiple.detector.local "كل HTMLs المحلية في دليل">
 <!ENTITY sb.multiple.detector.bookmarks "علامات المواقع">
 <!ENTITY sb.multiple.detector.clear "مسح">
-<!ENTITY sbp.multiple.exclude "تجاهل العناوين الموجودة مسبقا في المجلد الوجهه">
+<!ENTITY sb.multiple.exclude "تجاهل العناوين الموجودة مسبقا في المجلد الوجهه">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "حفظ">
@@ -390,7 +390,7 @@
 <!ENTITY sb.listview "عرض قائمة">
 <!ENTITY sb.prop.title "العنونة">
 <!ENTITY sb.prop.comment "التعليق">
-<!ENTITY sbp.prop.url "العنوان">
+<!ENTITY sb.prop.url "العنوان">
 <!ENTITY sb.prop.id.date "المعرف">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

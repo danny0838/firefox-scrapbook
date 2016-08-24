@@ -30,10 +30,10 @@
 <!ENTITY sb.combine.preview "Vorschau">
 <!ENTITY sb.combine.preview.d "Nach Überprüfung der Vorschau mit &quot;Zusammenfassen&quot; fortfahren.">
 <!ENTITY sb.combine.option.remove "Nach erfolgter Zusammenfassung Originalseiten entfernen">
-<!ENTITY sbp.combine.up "Eintrag nach oben verschieben">
-<!ENTITY sbp.combine.down "Eintrag nach unten verschieben">
-<!ENTITY sbp.combine.remove "Eintrag entfernen">
-<!ENTITY sbp.combine.newTitle "neuer Titel">
+<!ENTITY sb.combine.up "Eintrag nach oben verschieben">
+<!ENTITY sb.combine.down "Eintrag nach unten verschieben">
+<!ENTITY sb.combine.remove "Eintrag entfernen">
+<!ENTITY sb.combine.newTitle "neuer Titel">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Wartezeit (in Sekunden)">
@@ -192,10 +192,10 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "Filter (regulärer Ausdruck)">
-<!ENTITY sbp.multiple.titleofwebsite "Webseitentitel">
-<!ENTITY sbp.multiple.titleoflink "Verweistext">
+<!ENTITY sb.multiple.titleofwebsite "Webseitentitel">
+<!ENTITY sb.multiple.titleoflink "Verweistext">
 <!ENTITY sb.multiple.title "Titel">
-<!ENTITY sbp.multiple.downloadmethod "Methode">
+<!ENTITY sb.multiple.downloadmethod "Methode">
 <!ENTITY sb.multiple.url "Zu archivierende URLs zeilenweise eingeben">
 <!ENTITY sb.multiple.detector "URLs automatisch ermitteln">
 <!ENTITY sb.multiple.detector.plink "Alle Links innerhalb der Seite">
@@ -204,7 +204,7 @@
 <!ENTITY sb.multiple.detector.local "Alle lokalen HTML-Dateien in einem Verzeichnis">
 <!ENTITY sb.multiple.detector.bookmarks "Lesezeichen">
 <!ENTITY sb.multiple.detector.clear "Löschen">
-<!ENTITY sbp.multiple.exclude "vorhandene Adressen im Zielordner ignorieren">
+<!ENTITY sb.multiple.exclude "vorhandene Adressen im Zielordner ignorieren">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "Speichern">
@@ -390,7 +390,7 @@
 <!ENTITY sb.listview "Geteilte Listenansicht">
 <!ENTITY sb.prop.title "Name">
 <!ENTITY sb.prop.comment "Beschreibung">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">
