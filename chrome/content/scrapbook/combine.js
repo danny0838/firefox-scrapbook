@@ -103,7 +103,7 @@ var sbCombineService = {
         sbPageCombiner.htmlSrc = "";
         sbPageCombiner.cssText = "";
         sbPageCombiner.isTargetCombined = false;
-        sbInvisibleBrowser.init();
+        sbInvisibleBrowser.init(true); // load embeded media so that they aren't broken when previewing
         sbInvisibleBrowser.onLoadFinish = function() {
             sbPageCombiner.exec();
         };
