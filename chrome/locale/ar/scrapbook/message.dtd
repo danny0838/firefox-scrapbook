@@ -19,25 +19,27 @@
 <!ENTITY sb.capture.filter.column.rule "أظهر/أخف">
 <!ENTITY sb.capture.filter.column.content "مرشح (تعبير نمطي)">
 <!ENTITY sb.capture.filter.accept "إقبل">
-<!ENTITY sb.capture.filter.accept.tt "غير أو حرر القيمة">
+<!ENTITY sb.capture.filter.accept.help "غير أو حرر القيمة">
 <!ENTITY sb.capture.filter.cancel "ألغ">
-<!ENTITY sb.capture.filter.cancel.tt "ألغ التحرير">
+<!ENTITY sb.capture.filter.cancel.help "ألغ التحرير">
 <!ENTITY sb.capture.filter.delete "احذف">
-<!ENTITY sb.capture.filter.delete.tt "أزل المرشح من القائمة">
+<!ENTITY sb.capture.filter.delete.help "أزل المرشح من القائمة">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "اضافة عناصر بالسحب والإفلات من القائمة بالترتيب الذي تريد  الجمع به. يمكنك سحب و إفلات عناصر متعددة معاً.">
 <!ENTITY sb.combine.preview "معاينة">
-<!ENTITY sb.combine.preview.d "إضغط &apos;جمع&apos; بعد التأكد بالمعاينة.">
+<!ENTITY sb.combine.preview.d "إضغط 'جمع' بعد التأكد بالمعاينة.">
 <!ENTITY sb.combine.option.remove "بعد إكمال الجمع, أزل الصفحات الأصلية.">
-<!ENTITY sbp.combine.up "انقل العنصر للأعلى">
-<!ENTITY sbp.combine.down "انقل العنصر للأسفل">
-<!ENTITY sbp.combine.remove "أزل العنصر">
-<!ENTITY sbp.combine.newTitle "عنوان جديد">
+<!ENTITY sb.combine.up "انقل العنصر للأعلى">
+<!ENTITY sb.combine.down "انقل العنصر للأسفل">
+<!ENTITY sb.combine.remove "أزل العنصر">
+<!ENTITY sb.combine.newTitle "عنوان جديد">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "المهلة (ثواني)">
-<!ENTITY sb.detail.linked.charset "Loading charset">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "ضبط المحارف">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail "تفاصيل الالتقاط">
 <!ENTITY sb.detail.new.folder "مجلد جديد">
 <!ENTITY sb.detail.select.folder "حدد مجلد">
@@ -51,13 +53,13 @@
 <!ENTITY sb.detail.option.scripts "Scripts">
 <!ENTITY sb.detail.option.tidyCss "Process CSS">
 <!ENTITY sb.detail.option.tidyCss.0 "No rewrite">
-<!ENTITY sb.detail.option.tidyCss.0.desc "Save as-is. Links may be broken.">
+<!ENTITY sb.detail.option.tidyCss.0.help "Save as-is. Links may be broken.">
 <!ENTITY sb.detail.option.tidyCss.1 "Rewrite links">
-<!ENTITY sb.detail.option.tidyCss.1.desc "CSS with highly complicated syntax might not be processed correctly.">
+<!ENTITY sb.detail.option.tidyCss.1.help "CSS with highly complicated syntax might not be processed correctly.">
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
-<!ENTITY sb.detail.option.tidyCss.2.desc "Comments and browser unsupported CSS declaration will be removed.">
+<!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.desc "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.linked.file "تحميل الملفات المرتبطة">
@@ -67,9 +69,9 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "إلتقاط في العمق">
+<!ENTITY sb.detail.linked.page.desc "بعد إتمام الالتقاط, سيتم ربط الصفحات مع بعضها و عمل خريطة الموقع.">
 <!ENTITY sb.detail.linked.page.depth "عمق الارتباطات">
-<!ENTITY sb.detail.linked.page.text "بعد إتمام الالتقاط, سيتم ربط الصفحات مع بعضها و عمل خريطة الموقع.">
-<!ENTITY sb.detail.warnAboutRenew "لاحظ: &apos;الالتقاط مجدداً&apos; يكتب فوق الصفحات المحفوظة.">
+<!ENTITY sb.detail.warnAboutRenew "لاحظ: 'الالتقاط مجدداً' يكتب فوق الصفحات المحفوظة.">
 <!ENTITY sb.detail.warnAboutScript "لاحظ: نصوص-الجافا  قد تؤدي الى بعض المشاكل.">
 
 <!-- editor.dtd -->
@@ -81,8 +83,6 @@
 <!ENTITY sb.edit.save "حفظ التغييرات">
 <!ENTITY sb.edit.comment "توسيع مكان التعليق">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "حاشية ملتصقة"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "إعمل &sb.edit.sticky;"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "إضافة حاشية مضمنة">
 <!ENTITY sb.edit.attach.file "إرفاق ملف بالمحدد">
@@ -192,10 +192,9 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "المرشح">
-<!ENTITY sbp.multiple.titleofwebsite "عنوان الموقع">
-<!ENTITY sbp.multiple.titleoflink "عنوان الرابط">
+<!ENTITY sb.multiple.titleofwebsite "عنوان الموقع">
+<!ENTITY sb.multiple.titleoflink "عنوان الرابط">
 <!ENTITY sb.multiple.title "العنوان">
-<!ENTITY sbp.multiple.downloadmethod "الأسلوب">
 <!ENTITY sb.multiple.url "عنوان (ادخل العناوين واحدا تحت الآخر)">
 <!ENTITY sb.multiple.detector "كاشف العناوين">
 <!ENTITY sb.multiple.detector.plink "كل الارتباطات في الصفحة">
@@ -204,7 +203,7 @@
 <!ENTITY sb.multiple.detector.local "كل HTMLs المحلية في دليل">
 <!ENTITY sb.multiple.detector.bookmarks "علامات المواقع">
 <!ENTITY sb.multiple.detector.clear "مسح">
-<!ENTITY sbp.multiple.exclude "تجاهل العناوين الموجودة مسبقا في المجلد الوجهه">
+<!ENTITY sb.multiple.exclude "تجاهل العناوين الموجودة مسبقا في المجلد الوجهه">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "حفظ">
@@ -226,10 +225,6 @@
 <!ENTITY sb.note.fontsize.accesskey "F">
 <!ENTITY sb.note.print.accesskey "P">
 <!ENTITY sb.note.exit.accesskey "X">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "تم الالتقاط.">
-<!ENTITY sb.capture.complete.all "كل الالتقاطات تمت.">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "استخراج كل الشجرة">
@@ -261,12 +256,12 @@
 <!ENTITY sb.prefs.advanced "متقدم">
 <!ENTITY sb.prefs.ui.contextMenu "عرض في قائمة النص في المتصفح">
 <!ENTITY sb.prefs.ui.contextSubMenu "قائمة فرعية">
-<!ENTITY sb.prefs.ui.bookmarkMenu "عرض قائمة&apos;اشارة مرجعية مع ScrapBook&apos;">
+<!ENTITY sb.prefs.ui.bookmarkMenu "عرض قائمة'اشارة مرجعية مع ScrapBook'">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "إعرض حتى">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "دليل مستخدم  مؤخراً">
 <!ENTITY sb.prefs.ui.menuBar "عرض في شريط القوائم">
 <!ENTITY sb.prefs.ui.menuBar.icon "رمز">
-<!ENTITY sb.prefs.ui.toolsMenu "عرض في قائمة &apos;الأدوات&apos;">
+<!ENTITY sb.prefs.ui.toolsMenu "عرض في قائمة 'الأدوات'">
 <!ENTITY sb.prefs.ui.statusBar "عرض في شريط الحالة">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
 <!ENTITY sb.prefs.desc.restart "التغيير يتطلب إعادة تشغيل فيرفوكس.">
@@ -283,8 +278,8 @@
 <!ENTITY sb.prefs.tree.unshift.top "أعلى المجلد">
 <!ENTITY sb.prefs.tree.unshift.bottom "أسفل المجلد">
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
-<!ENTITY sb.prefs.showDetailOnDrop "عرض مربع&apos;تفاصيل الإلتقاط&apos; عند الإلتقاط بالسحب و الإفلات داخل الشريط الجانبي">
-<!ENTITY sb.prefs.notifyOnComplete "عرض تنبيه &apos;تم الإلتقاط&apos;">
+<!ENTITY sb.prefs.showDetailOnDrop "عرض مربع'تفاصيل الإلتقاط' عند الإلتقاط بالسحب و الإفلات داخل الشريط الجانبي">
+<!ENTITY sb.prefs.notifyOnComplete "عرض تنبيه 'تم الإلتقاط'">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
@@ -298,7 +293,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "معلومات عامة">
 <!ENTITY sb.prop.type "النوع">
-<!ENTITY sb.prop.date "التاريخ"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "الترميز">
@@ -350,9 +344,9 @@
 <!ENTITY sb.sort.modify "Sort by Modify Time">
 <!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
-<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
+<!ENTITY sb.sort.grouping.help "Sort with items grouped by folder, page, note page, and note.">
 <!ENTITY sb.sort.recursive "ترتيب المجلدات الفرعية تبعا">
-<!ENTITY sb.sort.warning "انتبه: لا يمكنك&apos; التراجع عن العملية.">
+<!ENTITY sb.sort.warning "انتبه: لا يمكنك' التراجع عن العملية.">
 
 <!-- templateHelp.dtd -->
 <!ENTITY sb.thelp.dir "rtl">
@@ -383,14 +377,15 @@
 <!ENTITY sb.move.into "نقل إلى مجلد">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "إلتقاط مجدداً">
-<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.internalize "Internalize">
+<!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "تصدير">
 <!ENTITY sb.remove "إزالة">
 <!ENTITY sb.property "خصائص">
 <!ENTITY sb.listview "عرض قائمة">
 <!ENTITY sb.prop.title "العنونة">
 <!ENTITY sb.prop.comment "التعليق">
-<!ENTITY sbp.prop.url "العنوان">
+<!ENTITY sb.prop.url "العنوان">
 <!ENTITY sb.prop.id.date "المعرف">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

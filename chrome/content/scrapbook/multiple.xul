@@ -38,8 +38,8 @@
                 <label value="&sb.multiple.title;:" />
                 <menulist id="sbLinktitle" editable="false">
                     <menupopup id="sbLinktitleitems">
-                        <menuitem value="ScrapBook" label="&sbp.multiple.titleofwebsite;"/>
-                        <menuitem value="Linkname" label="&sbp.multiple.titleoflink;"/>
+                        <menuitem value="ScrapBook" label="&sb.multiple.titleofwebsite;"/>
+                        <menuitem value="Linkname" label="&sb.multiple.titleoflink;"/>
                     </menupopup>
                 </menulist>
             </row>
@@ -49,7 +49,7 @@
     <description>&sb.multiple.url;:</description>
     <hbox>
         <vbox flex="1">
-            <label id="sbpCounter" flex="1" value="" />
+            <label id="sbCounter" flex="1" value="" />
         </vbox>
         <vbox>
             <button type="menu" label="&sb.multiple.detector;">
@@ -67,7 +67,7 @@
         </vbox>
     </hbox>
     <textbox id="ScrapBookTextbox" multiline="true" rows="15" flex="1" />
-    <checkbox id="sbpExcludeExistingAddresses" label="&sbp.multiple.exclude;" checked="true" onclick="sbMultipleService.updateSelection(event);" />
+    <checkbox id="sbExcludeExistingAddresses" label="&sb.multiple.exclude;" checked="true" onclick="sbMultipleService.updateSelection(event);" />
     <label id="sbStatus" crop="end" value="" />
 
 </dialog>

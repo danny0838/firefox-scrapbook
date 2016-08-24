@@ -19,25 +19,27 @@
 <!ENTITY sb.capture.filter.column.rule "Mostrar/Ocultar">
 <!ENTITY sb.capture.filter.column.content "Filtro (expresión patrón)">
 <!ENTITY sb.capture.filter.accept "Aceptar">
-<!ENTITY sb.capture.filter.accept.tt "cambiar o editar el valor">
+<!ENTITY sb.capture.filter.accept.help "cambiar o editar el valor">
 <!ENTITY sb.capture.filter.cancel "Cancelar">
-<!ENTITY sb.capture.filter.cancel.tt "abortar edición">
+<!ENTITY sb.capture.filter.cancel.help "abortar edición">
 <!ENTITY sb.capture.filter.delete "Borrar">
-<!ENTITY sb.capture.filter.delete.tt "borrar filtro de la lista">
+<!ENTITY sb.capture.filter.delete.help "borrar filtro de la lista">
 
 <!-- combine.dtd -->
-<!ENTITY sb.combine.dragdrop "Añadir elementos &apos;Arrastrando y Soltando&apos; desde el árbol, en el orden en el que quiera combinarlos. Puede &apos;arrastrar y soltar&apos; varios elementos a la vez.">
+<!ENTITY sb.combine.dragdrop "Añadir elementos 'Arrastrando y Soltando' desde el árbol, en el orden en el que quiera combinarlos. Puede 'arrastrar y soltar' varios elementos a la vez.">
 <!ENTITY sb.combine.preview "Previsualización">
-<!ENTITY sb.combine.preview.d "Pulsar el botón &apos;Combinar&apos; después de verificar la previsualización.">
+<!ENTITY sb.combine.preview.d "Pulsar el botón 'Combinar' después de verificar la previsualización.">
 <!ENTITY sb.combine.option.remove "Después de completar la combinación, borrar las páginas originales">
-<!ENTITY sbp.combine.up "subir elemento">
-<!ENTITY sbp.combine.down "bajar elemento">
-<!ENTITY sbp.combine.remove "borrar elemento">
-<!ENTITY sbp.combine.newTitle "nuevo título">
+<!ENTITY sb.combine.up "subir elemento">
+<!ENTITY sb.combine.down "bajar elemento">
+<!ENTITY sb.combine.remove "borrar elemento">
+<!ENTITY sb.combine.newTitle "nuevo título">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Desconexión (en segundos)">
-<!ENTITY sb.detail.linked.charset "Loading charset">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "Juego de Caracteres">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail "Detalles de la captura">
 <!ENTITY sb.detail.new.folder "Nueva carpeta">
 <!ENTITY sb.detail.select.folder "Seleccionar Carpeta">
@@ -51,13 +53,13 @@
 <!ENTITY sb.detail.option.scripts "Scripts">
 <!ENTITY sb.detail.option.tidyCss "Process CSS">
 <!ENTITY sb.detail.option.tidyCss.0 "No rewrite">
-<!ENTITY sb.detail.option.tidyCss.0.desc "Save as-is. Links may be broken.">
+<!ENTITY sb.detail.option.tidyCss.0.help "Save as-is. Links may be broken.">
 <!ENTITY sb.detail.option.tidyCss.1 "Rewrite links">
-<!ENTITY sb.detail.option.tidyCss.1.desc "CSS with highly complicated syntax might not be processed correctly.">
+<!ENTITY sb.detail.option.tidyCss.1.help "CSS with highly complicated syntax might not be processed correctly.">
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
-<!ENTITY sb.detail.option.tidyCss.2.desc "Comments and browser unsupported CSS declaration will be removed.">
+<!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.desc "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.linked.file "Descargar ficheros enlazados">
@@ -67,9 +69,9 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Captura de enlaces en varios niveles">
+<!ENTITY sb.detail.linked.page.desc "Después de completar las capturas, todas las páginas estarán enlazadas entre ellas, y será creado un mapa del sitio.">
 <!ENTITY sb.detail.linked.page.depth "Nivel de profundidad de enlaces">
-<!ENTITY sb.detail.linked.page.text "Después de completar las capturas, todas las páginas estarán enlazadas entre ellas, y será creado un mapa del sitio.">
-<!ENTITY sb.detail.warnAboutRenew "NOTA: &apos;Capturar Otra vez&apos; sobre-escribe la página guardada previamente.">
+<!ENTITY sb.detail.warnAboutRenew "NOTA: 'Capturar Otra vez' sobre-escribe la página guardada previamente.">
 <!ENTITY sb.detail.warnAboutScript "NOTA: JavaScript puede causar algunos problemas.">
 
 <!-- editor.dtd -->
@@ -81,8 +83,6 @@
 <!ENTITY sb.edit.save "Guardar">
 <!ENTITY sb.edit.comment "Expandir área de comentarios">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "Anotación Post-it"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "Crear &sb.edit.sticky;"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Añadir comentario a la selección">
 <!ENTITY sb.edit.attach.file "Anexar fichero a la selección">
@@ -192,10 +192,9 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "Filtro">
-<!ENTITY sbp.multiple.titleofwebsite "Título de la página WEB">
-<!ENTITY sbp.multiple.titleoflink "Título del enlace">
+<!ENTITY sb.multiple.titleofwebsite "Título de la página WEB">
+<!ENTITY sb.multiple.titleoflink "Título del enlace">
 <!ENTITY sb.multiple.title "Título">
-<!ENTITY sbp.multiple.downloadmethod "Método">
 <!ENTITY sb.multiple.url "URL (Introduzca URLs línea por línea)">
 <!ENTITY sb.multiple.detector "Detector URL">
 <!ENTITY sb.multiple.detector.plink "Todos los enlaces en la página">
@@ -204,7 +203,7 @@
 <!ENTITY sb.multiple.detector.local "Todos los HTMLs locales en un directorio">
 <!ENTITY sb.multiple.detector.bookmarks "Marcadores">
 <!ENTITY sb.multiple.detector.clear "Limpiar">
-<!ENTITY sbp.multiple.exclude "ignorar direcciones ya existentes en la carpeta de destino">
+<!ENTITY sb.multiple.exclude "ignorar direcciones ya existentes en la carpeta de destino">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "Guardar">
@@ -226,10 +225,6 @@
 <!ENTITY sb.note.fontsize.accesskey "F">
 <!ENTITY sb.note.print.accesskey "P">
 <!ENTITY sb.note.exit.accesskey "X">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Captura finalizada.">
-<!ENTITY sb.capture.complete.all "Todas las capturas finalizadas.">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "Exportar el árbol completo">
@@ -261,12 +256,12 @@
 <!ENTITY sb.prefs.advanced "Avanzado">
 <!ENTITY sb.prefs.ui.contextMenu "Mostrar en menú contextual del navegador">
 <!ENTITY sb.prefs.ui.contextSubMenu "Submenú">
-<!ENTITY sb.prefs.ui.bookmarkMenu "Muestra el menú &apos;Marcar con Scrapbook&apos;">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Muestra el menú 'Marcar con Scrapbook'">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Mostrar hasta">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "carpetas usadas recientemente">
 <!ENTITY sb.prefs.ui.menuBar "Mostrar en la barra de Menú">
 <!ENTITY sb.prefs.ui.menuBar.icon "Icono">
-<!ENTITY sb.prefs.ui.toolsMenu "Mostrar en el menú &apos;Herramientas&apos;">
+<!ENTITY sb.prefs.ui.toolsMenu "Mostrar en el menú 'Herramientas'">
 <!ENTITY sb.prefs.ui.statusBar "Mostrar en la barra de estado">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
 <!ENTITY sb.prefs.desc.restart "El cambio requiere reiniciar Firefox">
@@ -283,8 +278,8 @@
 <!ENTITY sb.prefs.tree.unshift.top "la parte alta de una carpeta">
 <!ENTITY sb.prefs.tree.unshift.bottom "la parte baja de una carpeta">
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
-<!ENTITY sb.prefs.showDetailOnDrop "Mostrar el diálogo &apos;Detalles de Captura&apos; cuando se capture mediante &apos;arrastrar y soltar&apos; en la barra lateral">
-<!ENTITY sb.prefs.notifyOnComplete "Mostrar notificación de &apos;Captura Finalizada&apos;">
+<!ENTITY sb.prefs.showDetailOnDrop "Mostrar el diálogo 'Detalles de Captura' cuando se capture mediante 'arrastrar y soltar' en la barra lateral">
+<!ENTITY sb.prefs.notifyOnComplete "Mostrar notificación de 'Captura Finalizada'">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
@@ -298,7 +293,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Info General">
 <!ENTITY sb.prop.type "Tipo">
-<!ENTITY sb.prop.date "Fecha"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Codificación">
@@ -350,7 +344,7 @@
 <!ENTITY sb.sort.modify "Sort by Modify Time">
 <!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
-<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
+<!ENTITY sb.sort.grouping.help "Sort with items grouped by folder, page, note page, and note.">
 <!ENTITY sb.sort.recursive "Ordenar sub-carpetas recursivamente">
 <!ENTITY sb.sort.warning "Nota: esta operación no puede deshacerse.">
 
@@ -383,14 +377,15 @@
 <!ENTITY sb.move.into "Mover a carpeta">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Capturar otra vez">
-<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.internalize "Internalize">
+<!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "Exportar">
 <!ENTITY sb.remove "Borrar">
 <!ENTITY sb.property "Propiedades">
 <!ENTITY sb.listview "Vista en modo lista">
 <!ENTITY sb.prop.title "Título">
 <!ENTITY sb.prop.comment "Comentario">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

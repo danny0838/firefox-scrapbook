@@ -19,25 +19,27 @@
 <!ENTITY sb.capture.filter.column.rule "보이기/감추기">
 <!ENTITY sb.capture.filter.column.content "필터 (정규표현식)">
 <!ENTITY sb.capture.filter.accept "승인">
-<!ENTITY sb.capture.filter.accept.tt "값 수정">
+<!ENTITY sb.capture.filter.accept.help "값 수정">
 <!ENTITY sb.capture.filter.cancel "취소">
-<!ENTITY sb.capture.filter.cancel.tt "편집 취소">
+<!ENTITY sb.capture.filter.cancel.help "편집 취소">
 <!ENTITY sb.capture.filter.delete "삭제">
-<!ENTITY sb.capture.filter.delete.tt "목록에서 필터 제거">
+<!ENTITY sb.capture.filter.delete.help "목록에서 필터 제거">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "트리로부터 결합하고자 하는 항목을 끌어다 놓기로 추가하십시오. 한번에 여러 항목을 선택하여 끌어다 놓을 수 있습니다.">
 <!ENTITY sb.combine.preview "미리 보기">
 <!ENTITY sb.combine.preview.d "미리 보기를 확인하고 이상이 없으면 결합 버튼을 누르십시오.">
 <!ENTITY sb.combine.option.remove "결합 완료 후 결합된 원래의 페이지는 삭제">
-<!ENTITY sbp.combine.up "위로 이동">
-<!ENTITY sbp.combine.down "아래로 이동">
-<!ENTITY sbp.combine.remove "항목 제거">
-<!ENTITY sbp.combine.newTitle "새 제목">
+<!ENTITY sb.combine.up "위로 이동">
+<!ENTITY sb.combine.down "아래로 이동">
+<!ENTITY sb.combine.remove "항목 제거">
+<!ENTITY sb.combine.newTitle "새 제목">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "시간 제한 (초)">
-<!ENTITY sb.detail.linked.charset "Loading charset">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "문자셋">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail "캡처 상세 설정">
 <!ENTITY sb.detail.new.folder "새 폴더">
 <!ENTITY sb.detail.select.folder "폴더 선택">
@@ -51,13 +53,13 @@
 <!ENTITY sb.detail.option.scripts "Scripts">
 <!ENTITY sb.detail.option.tidyCss "Process CSS">
 <!ENTITY sb.detail.option.tidyCss.0 "No rewrite">
-<!ENTITY sb.detail.option.tidyCss.0.desc "Save as-is. Links may be broken.">
+<!ENTITY sb.detail.option.tidyCss.0.help "Save as-is. Links may be broken.">
 <!ENTITY sb.detail.option.tidyCss.1 "Rewrite links">
-<!ENTITY sb.detail.option.tidyCss.1.desc "CSS with highly complicated syntax might not be processed correctly.">
+<!ENTITY sb.detail.option.tidyCss.1.help "CSS with highly complicated syntax might not be processed correctly.">
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
-<!ENTITY sb.detail.option.tidyCss.2.desc "Comments and browser unsupported CSS declaration will be removed.">
+<!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.desc "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.linked.file "링크된 파일 다운로드">
@@ -67,9 +69,9 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "상세 캡처">
+<!ENTITY sb.detail.linked.page.desc "캡처 완료 후 모든 페이지는 상호 링크되어 사이트 맵이 생성됩니다.">
 <!ENTITY sb.detail.linked.page.depth "연결 링크 단계">
-<!ENTITY sb.detail.linked.page.text "캡처 완료 후 모든 페이지는 상호 링크되어 사이트 맵이 생성됩니다.">
-<!ENTITY sb.detail.warnAboutRenew "알림: &apos;다시 캡처하기&apos; 기능은 이전에 저장된 페이지에 덮어씁니다.">
+<!ENTITY sb.detail.warnAboutRenew "알림: '다시 캡처하기' 기능은 이전에 저장된 페이지에 덮어씁니다.">
 <!ENTITY sb.detail.warnAboutScript "알림: 자바스크립트에서 문제가 발생될 수 있습니다.">
 
 <!-- editor.dtd -->
@@ -81,8 +83,6 @@
 <!ENTITY sb.edit.save "변경 사항 저장">
 <!ENTITY sb.edit.comment "주석 영역 확장">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "주석"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "&sb.edit.sticky; 만들기"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "선택 부분에 인라인 주석 추가">
 <!ENTITY sb.edit.attach.file "선택 부분에 파일 첨부">
@@ -192,10 +192,9 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "필터">
-<!ENTITY sbp.multiple.titleofwebsite "웹 사이트 제목">
-<!ENTITY sbp.multiple.titleoflink "링크 제목">
+<!ENTITY sb.multiple.titleofwebsite "웹 사이트 제목">
+<!ENTITY sb.multiple.titleoflink "링크 제목">
 <!ENTITY sb.multiple.title "제목">
-<!ENTITY sbp.multiple.downloadmethod "방식">
 <!ENTITY sb.multiple.url "URL (여러 개를 입력하려면 줄을 바꾸어 입력하십시오.)">
 <!ENTITY sb.multiple.detector "URL 검출자">
 <!ENTITY sb.multiple.detector.plink "페이지의 모든 링크">
@@ -204,7 +203,7 @@
 <!ENTITY sb.multiple.detector.local "지정 폴더 아래의 로컬 HTML">
 <!ENTITY sb.multiple.detector.bookmarks "북마크">
 <!ENTITY sb.multiple.detector.clear "비우기">
-<!ENTITY sbp.multiple.exclude "목적지 폴더에 같은 주소가 존재하면 무시">
+<!ENTITY sb.multiple.exclude "목적지 폴더에 같은 주소가 존재하면 무시">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "저장">
@@ -226,10 +225,6 @@
 <!ENTITY sb.note.fontsize.accesskey "F">
 <!ENTITY sb.note.print.accesskey "P">
 <!ENTITY sb.note.exit.accesskey "X">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "캡처 완료">
-<!ENTITY sb.capture.complete.all "모든 캡처가 완료되었습니다.">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "전체 트리 출력">
@@ -261,12 +256,12 @@
 <!ENTITY sb.prefs.advanced "고급">
 <!ENTITY sb.prefs.ui.contextMenu "브라우저 컨텍스트 메뉴에 보이기">
 <!ENTITY sb.prefs.ui.contextSubMenu "부메뉴">
-<!ENTITY sb.prefs.ui.bookmarkMenu "&apos;ScrapBook으로 북마크&apos; 메뉴 표시">
+<!ENTITY sb.prefs.ui.bookmarkMenu "'ScrapBook으로 북마크' 메뉴 표시">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Show up to">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "recently used folders">
 <!ENTITY sb.prefs.ui.menuBar "메뉴 도구 모음에 보이기">
 <!ENTITY sb.prefs.ui.menuBar.icon "아이콘">
-<!ENTITY sb.prefs.ui.toolsMenu "&apos;도구&apos; 메뉴에 보이기">
+<!ENTITY sb.prefs.ui.toolsMenu "'도구' 메뉴에 보이기">
 <!ENTITY sb.prefs.ui.statusBar "상태 표시줄에 보이기">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
 <!ENTITY sb.prefs.desc.restart "표시 항목의 변경된 내용을 적용하려면 Firefox를 재시작해야 합니다.">
@@ -283,8 +278,8 @@
 <!ENTITY sb.prefs.tree.unshift.top "폴더 맨 위">
 <!ENTITY sb.prefs.tree.unshift.bottom "폴더 맨 아래">
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
-<!ENTITY sb.prefs.showDetailOnDrop "탐색 창으로 끌어다 놓기하여 캡처할 때 &apos;상세 캡처&apos; 창 보이기">
-<!ENTITY sb.prefs.notifyOnComplete "&apos;캡처 완료&apos; 알림 보이기">
+<!ENTITY sb.prefs.showDetailOnDrop "탐색 창으로 끌어다 놓기하여 캡처할 때 '상세 캡처' 창 보이기">
+<!ENTITY sb.prefs.notifyOnComplete "'캡처 완료' 알림 보이기">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
@@ -298,7 +293,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "일반">
 <!ENTITY sb.prop.type "형식">
-<!ENTITY sb.prop.date "날짜"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "인코딩">
@@ -350,7 +344,7 @@
 <!ENTITY sb.sort.modify "Sort by Modify Time">
 <!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
-<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
+<!ENTITY sb.sort.grouping.help "Sort with items grouped by folder, page, note page, and note.">
 <!ENTITY sb.sort.recursive "하위 폴더 포함">
 <!ENTITY sb.sort.warning "주의: 이 실행은 되돌릴 수 없습니다.">
 
@@ -383,14 +377,15 @@
 <!ENTITY sb.move.into "폴더로 이동">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "다시 캡처하기">
-<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.internalize "Internalize">
+<!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "가져오기">
 <!ENTITY sb.remove "삭제">
 <!ENTITY sb.property "속성">
 <!ENTITY sb.listview "목록 보기">
 <!ENTITY sb.prop.title "제목">
 <!ENTITY sb.prop.comment "주석">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

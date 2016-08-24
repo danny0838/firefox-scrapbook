@@ -19,25 +19,27 @@
 <!ENTITY sb.capture.filter.column.rule "Afficher/Masquer">
 <!ENTITY sb.capture.filter.column.content "Filtrage (expression régulière)">
 <!ENTITY sb.capture.filter.accept "Accepter">
-<!ENTITY sb.capture.filter.accept.tt "changer ou modifier la valeur">
+<!ENTITY sb.capture.filter.accept.help "changer ou modifier la valeur">
 <!ENTITY sb.capture.filter.cancel "Annuler">
-<!ENTITY sb.capture.filter.cancel.tt "abandonner l'édition">
+<!ENTITY sb.capture.filter.cancel.help "abandonner l'édition">
 <!ENTITY sb.capture.filter.delete "Supprimer">
-<!ENTITY sb.capture.filter.delete.tt "retirer le filtre de la liste">
+<!ENTITY sb.capture.filter.delete.help "retirer le filtre de la liste">
 
 <!-- combine.dtd -->
-<!ENTITY sb.combine.dragdrop "Ajouter les éléments par glisser-déposer à partir de l&apos;arborescence dans l&apos;ordre de la combinaison désirée. Vous pouvez glisser-déposer plusieurs éléments à la fois.">
+<!ENTITY sb.combine.dragdrop "Ajouter les éléments par glisser-déposer à partir de l'arborescence dans l'ordre de la combinaison désirée. Vous pouvez glisser-déposer plusieurs éléments à la fois.">
 <!ENTITY sb.combine.preview "Aperçu">
-<!ENTITY sb.combine.preview.d "Presser le bouton &apos;Combiner&apos; après vérification de l&apos;aperçu.">
-<!ENTITY sb.combine.option.remove "Supprimer les pages d&apos;origine après combinaison">
-<!ENTITY sbp.combine.up "Déplacer l&apos;élément vers le haut">
-<!ENTITY sbp.combine.down "Déplacer l&apos;élément vers le bas">
-<!ENTITY sbp.combine.remove "Retirer l&apos;élément">
-<!ENTITY sbp.combine.newTitle "Nouveau titre">
+<!ENTITY sb.combine.preview.d "Presser le bouton 'Combiner' après vérification de l'aperçu.">
+<!ENTITY sb.combine.option.remove "Supprimer les pages d'origine après combinaison">
+<!ENTITY sb.combine.up "Déplacer l'élément vers le haut">
+<!ENTITY sb.combine.down "Déplacer l'élément vers le bas">
+<!ENTITY sb.combine.remove "Retirer l'élément">
+<!ENTITY sb.combine.newTitle "Nouveau titre">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Temporisation (en secondes)">
-<!ENTITY sb.detail.linked.charset "Loading charset">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "Jeu de caractères">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail "Détail de la capture">
 <!ENTITY sb.detail.new.folder "Nouveau dossier">
 <!ENTITY sb.detail.select.folder "Sélectionner le dossier">
@@ -51,13 +53,13 @@
 <!ENTITY sb.detail.option.scripts "Scripts">
 <!ENTITY sb.detail.option.tidyCss "Process CSS">
 <!ENTITY sb.detail.option.tidyCss.0 "No rewrite">
-<!ENTITY sb.detail.option.tidyCss.0.desc "Save as-is. Links may be broken.">
+<!ENTITY sb.detail.option.tidyCss.0.help "Save as-is. Links may be broken.">
 <!ENTITY sb.detail.option.tidyCss.1 "Rewrite links">
-<!ENTITY sb.detail.option.tidyCss.1.desc "CSS with highly complicated syntax might not be processed correctly.">
+<!ENTITY sb.detail.option.tidyCss.1.help "CSS with highly complicated syntax might not be processed correctly.">
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
-<!ENTITY sb.detail.option.tidyCss.2.desc "Comments and browser unsupported CSS declaration will be removed.">
+<!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.desc "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.linked.file "Capturer les fichiers liés">
@@ -67,22 +69,20 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Capture en profondeur">
+<!ENTITY sb.detail.linked.page.desc "Une fois les captures terminées, toutes les pages seront liées entre elles et un plan du site sera créé.">
 <!ENTITY sb.detail.linked.page.depth "Profondeur de capture des liens">
-<!ENTITY sb.detail.linked.page.text "Une fois les captures terminées, toutes les pages seront liées entre elles et un plan du site sera créé.">
-<!ENTITY sb.detail.warnAboutRenew "IMPORTANT : &apos;Capturer à nouveau&apos; remplace la page sauvegardée précédemment.">
+<!ENTITY sb.detail.warnAboutRenew "IMPORTANT : 'Capturer à nouveau' remplace la page sauvegardée précédemment.">
 <!ENTITY sb.detail.warnAboutScript "IMPORTANT : JavaScript peut causer des problèmes.">
 
 <!-- editor.dtd -->
-<!ENTITY sb.toolbar.edit "Barre d&apos;outils d&apos;édition">
-<!ENTITY sb.toolbar.info "Barre d&apos;information">
+<!ENTITY sb.toolbar.edit "Barre d'outils d'édition">
+<!ENTITY sb.toolbar.info "Barre d'information">
 <!ENTITY sb.edit.folderView "Click to view the data directory. Middle-click to open in a new tab.">
 <!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
 <!ENTITY sb.edit.undo "Annuler">
 <!ENTITY sb.edit.save "Sauvegarder les changements">
 <!ENTITY sb.edit.comment "Déployer la zone de commentaire">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "Note collante"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "Créer une &sb.edit.sticky;"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Ajouter une annotation à la sélection">
 <!ENTITY sb.edit.attach.file "Attacher un fichier à la sélection">
@@ -155,7 +155,7 @@
 <!ENTITY sb.highlighter "Surligneur">
 <!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
 <!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
-<!ENTITY sb.locate "Synchroniser avec l&apos;arborescence de la barre latérale">
+<!ENTITY sb.locate "Synchroniser avec l'arborescence de la barre latérale">
 <!ENTITY sb.indicators "Montrer les indicateurs de lien">
 <!ENTITY sb.info.home "Origine">
 <!ENTITY sb.info.sitemap "Plan du site">
@@ -192,19 +192,18 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "Filtre">
-<!ENTITY sbp.multiple.titleofwebsite "Titre du site Web">
-<!ENTITY sbp.multiple.titleoflink "Titre du lien">
+<!ENTITY sb.multiple.titleofwebsite "Titre du site Web">
+<!ENTITY sb.multiple.titleoflink "Titre du lien">
 <!ENTITY sb.multiple.title "Titre">
-<!ENTITY sbp.multiple.downloadmethod "Méthode">
 <!ENTITY sb.multiple.url "URL (entrer les URL ligne par ligne)">
-<!ENTITY sb.multiple.detector "Détecteur d&apos;URL">
+<!ENTITY sb.multiple.detector "Détecteur d'URL">
 <!ENTITY sb.multiple.detector.plink "Tous les liens de la page">
 <!ENTITY sb.multiple.detector.slink "Tous les liens de la sélection">
 <!ENTITY sb.multiple.detector.tabs "Tous les onglets ouverts dans la fenêtre">
 <!ENTITY sb.multiple.detector.local "Tous les HTML locaux dans un répertoire">
 <!ENTITY sb.multiple.detector.bookmarks "Marque-pages">
 <!ENTITY sb.multiple.detector.clear "Effacer">
-<!ENTITY sbp.multiple.exclude "ignorer les adresses déjà présentes dans le dossier de destination">
+<!ENTITY sb.multiple.exclude "ignorer les adresses déjà présentes dans le dossier de destination">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "Sauvegarder">
@@ -227,12 +226,8 @@
 <!ENTITY sb.note.print.accesskey "P">
 <!ENTITY sb.note.exit.accesskey "X">
 
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Capture terminée.">
-<!ENTITY sb.capture.complete.all "Toutes les captures sont terminées.">
-
 <!-- output.dtd -->
-<!ENTITY sb.output.option.all "Sortie de l&apos;arborescence complète">
+<!ENTITY sb.output.option.all "Sortie de l'arborescence complète">
 <!ENTITY sb.output.option.frame "Sortie avec cadre">
 <!ENTITY sb.output.option.open "Après la sortie, ouvrir dans le navigateur">
 
@@ -261,13 +256,13 @@
 <!ENTITY sb.prefs.advanced "Avancés">
 <!ENTITY sb.prefs.ui.contextMenu "Afficher dans le menu contextuel du navigateur">
 <!ENTITY sb.prefs.ui.contextSubMenu "Sous-menu">
-<!ENTITY sb.prefs.ui.bookmarkMenu "Afficher le menu &apos;Marquer cette page avec ScrapBook&apos;">
-<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Afficher jusqu&apos;à">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Afficher le menu 'Marquer cette page avec ScrapBook'">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Afficher jusqu'à">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "dossiers récents">
 <!ENTITY sb.prefs.ui.menuBar "Afficher dans la barre des menus">
 <!ENTITY sb.prefs.ui.menuBar.icon "Icône">
-<!ENTITY sb.prefs.ui.toolsMenu "Afficher dans le menu &apos;Outils&apos;">
-<!ENTITY sb.prefs.ui.statusBar "Afficher dans la barre d&apos;état">
+<!ENTITY sb.prefs.ui.toolsMenu "Afficher dans le menu 'Outils'">
+<!ENTITY sb.prefs.ui.statusBar "Afficher dans la barre d'état">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
 <!ENTITY sb.prefs.desc.restart "La modification nécessite un redémarrage de Firefox">
 <!ENTITY sb.prefs.tabs.tips "Ouvrir dans un nouvel onglet pour les opérations suivantes">
@@ -276,15 +271,15 @@
 <!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "Choisissez un répertoire où stocker les données ScrapBook">
-<!ENTITY sb.prefs.confirmDelete "M&apos;alerter lors de la suppression d&apos;élément(s) de l&apos;arborescence">
+<!ENTITY sb.prefs.confirmDelete "M'alerter lors de la suppression d'élément(s) de l'arborescence">
 <!ENTITY sb.prefs.captureDefault "Default capture settings">
-<!ENTITY sb.prefs.tree.autoCollapse "Lors de l&apos;ouverture d&apos;un dossier de l&apos;arborescence, fermer automatiquement les autres dossiers">
+<!ENTITY sb.prefs.tree.autoCollapse "Lors de l'ouverture d'un dossier de l'arborescence, fermer automatiquement les autres dossiers">
 <!ENTITY sb.prefs.tree.unshift "Placer un nouvel élément dans">
-<!ENTITY sb.prefs.tree.unshift.top "le haut d&apos;un dossier">
-<!ENTITY sb.prefs.tree.unshift.bottom "le bas d&apos;un dossier">
+<!ENTITY sb.prefs.tree.unshift.top "le haut d'un dossier">
+<!ENTITY sb.prefs.tree.unshift.bottom "le bas d'un dossier">
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
-<!ENTITY sb.prefs.showDetailOnDrop "Afficher la boîte de dialogue &apos;Détail de la capture&apos; lors de la capture par un glisser-déposer dans le panneau latéral">
-<!ENTITY sb.prefs.notifyOnComplete "Afficher la notification &apos;Capture terminée&apos;">
+<!ENTITY sb.prefs.showDetailOnDrop "Afficher la boîte de dialogue 'Détail de la capture' lors de la capture par un glisser-déposer dans le panneau latéral">
+<!ENTITY sb.prefs.notifyOnComplete "Afficher la notification 'Capture terminée'">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
@@ -298,7 +293,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Information générale">
 <!ENTITY sb.prop.type "Type">
-<!ENTITY sb.prop.date "Date"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Encodage">
@@ -316,13 +310,13 @@
 
 <!-- repair.dtd -->
 <!ENTITY sb.repair.rdfFile "Restaurer scrapbook.rdf">
-<!ENTITY sb.repair.rdfFile.descript "Essayez cela si l&apos;arborescence de ScrapBook disparaît brutalement.">
+<!ENTITY sb.repair.rdfFile.descript "Essayez cela si l'arborescence de ScrapBook disparaît brutalement.">
 <!ENTITY sb.repair.rdfFile.select "Selectionnez un fichier de sauvegarde pour la restauration.">
 <!ENTITY sb.repair.rdfFile.file "Fichier">
 <!ENTITY sb.repair.rdfFile.time "Date/Heure">
 <!ENTITY sb.repair.rdfFile.size "Taille">
-<!ENTITY sb.repair.favicons "Restaurer les favicônes dans l&apos;arborescence">
-<!ENTITY sb.repair.favicons.descript "Essayez cela si plusieurs favicônes disparaissent de l&apos;arborescence de ScrapBook.">
+<!ENTITY sb.repair.favicons "Restaurer les favicônes dans l'arborescence">
+<!ENTITY sb.repair.favicons.descript "Essayez cela si plusieurs favicônes disparaissent de l'arborescence de ScrapBook.">
 <!ENTITY sb.repair.complete "Terminé.">
 
 <!-- scrapbook.dtd -->
@@ -335,9 +329,9 @@
 <!ENTITY sb.tools.multiple "Capturer des URLs multiples">
 <!ENTITY sb.tools.directory "Répertoire de ScrapBook">
 <!ENTITY sb.tools.calculate "Calcul de la taille">
-<!ENTITY sb.tools.sorttree "Classer l&apos;arborescence entière">
+<!ENTITY sb.tools.sorttree "Classer l'arborescence entière">
 <!ENTITY sb.tools.output "Arborescence en HTML">
-<!ENTITY sb.tools.repair "Réparation d&apos;urgence">
+<!ENTITY sb.tools.repair "Réparation d'urgence">
 <!ENTITY sb.tools.addons "Fonctions additionnelles">
 <!ENTITY sb.note.opentab "Éditer dans un onglet">
 
@@ -350,7 +344,7 @@
 <!ENTITY sb.sort.modify "Sort by Modify Time">
 <!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
-<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
+<!ENTITY sb.sort.grouping.help "Sort with items grouped by folder, page, note page, and note.">
 <!ENTITY sb.sort.recursive "Classer récursivement les sous-dossiers">
 <!ENTITY sb.sort.warning "Important : vous ne pouvez pas annuler cette opération.">
 
@@ -365,10 +359,10 @@
 <!-- trade.dtd -->
 <!ENTITY sb.trade.import "Importer">
 <!ENTITY sb.trade.export "Exporter">
-<!ENTITY sb.trade.time "Date d&apos;exportation">
+<!ENTITY sb.trade.time "Date d'exportation">
 <!ENTITY sb.trade.update "Import as latest ScrapBook X format">
 <!ENTITY sb.trade.restore "Importer avec la structure du dossier à restaurer">
-<!ENTITY sb.trade.remove "Supprimer les fichiers après l&apos;importation">
+<!ENTITY sb.trade.remove "Supprimer les fichiers après l'importation">
 <!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">
 
 <!-- tree.dtd -->
@@ -376,21 +370,22 @@
 <!ENTITY sb.open.native "Open in Default Program">
 <!ENTITY sb.open.tab "Ouvrir dans un onglet">
 <!ENTITY sb.open.newtab "Ouvrir dans un nouvel onglet">
-<!ENTITY sb.open.source "Ouvrir l&apos;URL de la source">
+<!ENTITY sb.open.source "Ouvrir l'URL de la source">
 <!ENTITY sb.multi "Multi-ScrapBook">
 <!ENTITY sb.show.files "Afficher les fichiers">
 <!ENTITY sb.move "Déplacer">
 <!ENTITY sb.move.into "Déplacer dans un dossier">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Capturer à nouveau">
-<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.internalize "Internalize">
+<!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "Exporter">
 <!ENTITY sb.remove "Supprimer">
 <!ENTITY sb.property "Propriétés">
 <!ENTITY sb.listview "Vue de la liste">
 <!ENTITY sb.prop.title "Titre">
 <!ENTITY sb.prop.comment "Commentaire">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">
@@ -408,7 +403,7 @@
 <!ENTITY sb.search.re "Utiliser une expression régulière (RegExp)">
 <!ENTITY sb.search.cs "Respecter la casse">
 <!ENTITY sb.search.cache "Mettre à jour le cache pour la recherche sur texte entier">
-<!ENTITY sb.search.clear "Nettoyer l&apos;historique">
+<!ENTITY sb.search.clear "Nettoyer l'historique">
 <!ENTITY sb.search.days "Filtre par jour">
 <!ENTITY mb.manage "Gérer">
 <!ENTITY mb.profileFolder "Dossier du profil">

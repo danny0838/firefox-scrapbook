@@ -19,25 +19,27 @@
 <!ENTITY sb.capture.filter.column.rule "Показати/сховати">
 <!ENTITY sb.capture.filter.column.content "Фільтр (регулярний вираз)">
 <!ENTITY sb.capture.filter.accept "Прийняти">
-<!ENTITY sb.capture.filter.accept.tt "змінити чи редагувати значення">
+<!ENTITY sb.capture.filter.accept.help "змінити чи редагувати значення">
 <!ENTITY sb.capture.filter.cancel "Скасувати">
-<!ENTITY sb.capture.filter.cancel.tt "відмінити редагування">
+<!ENTITY sb.capture.filter.cancel.help "відмінити редагування">
 <!ENTITY sb.capture.filter.delete "Видалити">
-<!ENTITY sb.capture.filter.delete.tt "Вилучити фільтр зі списку">
+<!ENTITY sb.capture.filter.delete.help "Вилучити фільтр зі списку">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Додавайте необхідні сторінки з дерева сторінок перетягуванням. Ви можете перетягувати одразу декілька сторінок.">
 <!ENTITY sb.combine.preview "Попередній перегляд">
 <!ENTITY sb.combine.preview.d "Натисніть кнопку 'Об’єднати' після перегляду попереднього перегляду.">
 <!ENTITY sb.combine.option.remove "Вилучити вихідні сторінки після закінчення об’єднання">
-<!ENTITY sbp.combine.up "перемістити вище">
-<!ENTITY sbp.combine.down "перемістити нижче">
-<!ENTITY sbp.combine.remove "вилучити">
-<!ENTITY sbp.combine.newTitle "нова назва">
+<!ENTITY sb.combine.up "перемістити вище">
+<!ENTITY sb.combine.down "перемістити нижче">
+<!ENTITY sb.combine.remove "вилучити">
+<!ENTITY sb.combine.newTitle "нова назва">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Час очікування (секунд)">
-<!ENTITY sb.detail.linked.charset "Loading charset">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "Кодування">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail "Подробиці збереження">
 <!ENTITY sb.detail.new.folder "Нова тека">
 <!ENTITY sb.detail.select.folder "Оберіть теку">
@@ -51,13 +53,13 @@
 <!ENTITY sb.detail.option.scripts "Scripts">
 <!ENTITY sb.detail.option.tidyCss "Process CSS">
 <!ENTITY sb.detail.option.tidyCss.0 "No rewrite">
-<!ENTITY sb.detail.option.tidyCss.0.desc "Save as-is. Links may be broken.">
+<!ENTITY sb.detail.option.tidyCss.0.help "Save as-is. Links may be broken.">
 <!ENTITY sb.detail.option.tidyCss.1 "Rewrite links">
-<!ENTITY sb.detail.option.tidyCss.1.desc "CSS with highly complicated syntax might not be processed correctly.">
+<!ENTITY sb.detail.option.tidyCss.1.help "CSS with highly complicated syntax might not be processed correctly.">
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
-<!ENTITY sb.detail.option.tidyCss.2.desc "Comments and browser unsupported CSS declaration will be removed.">
+<!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.desc "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.linked.file "Завантаження файлів за посиланнями на сторінці">
@@ -67,8 +69,8 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Глибоке збереження">
+<!ENTITY sb.detail.linked.page.desc "Після завершення збереження усі сторінки будуть пов’язані між собою та буде створена карта сайту.">
 <!ENTITY sb.detail.linked.page.depth "Глибина збереження">
-<!ENTITY sb.detail.linked.page.text "Після завершення збереження усі сторінки будуть пов’язані між собою та буде створена карта сайту.">
 <!ENTITY sb.detail.warnAboutRenew "Увага: Функція „Зберегти знову“ перезаписує раніше збережену сторінку.">
 <!ENTITY sb.detail.warnAboutScript "Увага: Можливі проблеми з JavaScript.">
 
@@ -81,8 +83,6 @@
 <!ENTITY sb.edit.save "Зберегти зміни">
 <!ENTITY sb.edit.comment "Збільшити форму коментування">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "Пересувна нотатка"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "Створити пересувну нотатку"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Додати приховану нотатку до обраного">
 <!ENTITY sb.edit.attach.file "Додати файл до обраного">
@@ -192,10 +192,9 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "Фільтр (регулярний вираз)">
-<!ENTITY sbp.multiple.titleofwebsite "Назва сайту">
-<!ENTITY sbp.multiple.titleoflink "Посилання">
+<!ENTITY sb.multiple.titleofwebsite "Назва сайту">
+<!ENTITY sb.multiple.titleoflink "Посилання">
 <!ENTITY sb.multiple.title "Назва">
-<!ENTITY sbp.multiple.downloadmethod "Метод">
 <!ENTITY sb.multiple.url "Адреса (один рядок — одна адреса)">
 <!ENTITY sb.multiple.detector "Шукач адрес">
 <!ENTITY sb.multiple.detector.plink "Усі посилання на сторінці">
@@ -204,7 +203,7 @@
 <!ENTITY sb.multiple.detector.local "Усі локальні сторінці у теці">
 <!ENTITY sb.multiple.detector.bookmarks "Закладки">
 <!ENTITY sb.multiple.detector.clear "Очистити">
-<!ENTITY sbp.multiple.exclude "ігнорувати адреси наявні у теці призначення">
+<!ENTITY sb.multiple.exclude "ігнорувати адреси наявні у теці призначення">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "Зберегти">
@@ -226,10 +225,6 @@
 <!ENTITY sb.note.fontsize.accesskey "F">
 <!ENTITY sb.note.print.accesskey "P">
 <!ENTITY sb.note.exit.accesskey "X">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Збереження виконано.">
-<!ENTITY sb.capture.complete.all "Усі сторінки збережено.">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "Відобразити усе дерево">
@@ -298,7 +293,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Загальна інформація">
 <!ENTITY sb.prop.type "Тип">
-<!ENTITY sb.prop.date "Дата"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Кодування">
@@ -350,7 +344,7 @@
 <!ENTITY sb.sort.modify "Sort by Modify Time">
 <!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
-<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
+<!ENTITY sb.sort.grouping.help "Sort with items grouped by folder, page, note page, and note.">
 <!ENTITY sb.sort.recursive "Сортувати каталоги рекурсивно">
 <!ENTITY sb.sort.warning "Увага: Вороття назад не буде.">
 
@@ -383,14 +377,15 @@
 <!ENTITY sb.move.into "Пересунути у теку">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Зберегти знову">
-<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.internalize "Internalize">
+<!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "Експорт">
 <!ENTITY sb.remove "Вилучити">
 <!ENTITY sb.property "Властивості">
 <!ENTITY sb.listview "Список">
 <!ENTITY sb.prop.title "Назва">
 <!ENTITY sb.prop.comment "Коментар">
-<!ENTITY sbp.prop.url "Адреса">
+<!ENTITY sb.prop.url "Адреса">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

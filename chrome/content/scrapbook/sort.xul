@@ -24,7 +24,7 @@
         </radiogroup>
         <separator class="groove" />
         <checkbox id="sbSortDescending" label="&sb.sort.descending;" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
-        <checkbox id="sbSortGrouping" label="&sb.sort.grouping;" tooltiptext="&sb.sort.grouping.desc;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
+        <checkbox id="sbSortGrouping" label="&sb.sort.grouping;" tooltiptext="&sb.sort.grouping.help;" checked="true" persist="checked" oncommand="if (!this.checked) this.setAttribute('checked', 'false');" />
         <checkbox id="sbSortRecursive" label="&sb.sort.recursive;" persist="checked" />
         <description id="sbSortWarning" value="&sb.sort.warning;" style="margin:10px;color:red;" />
     </wizardpage>

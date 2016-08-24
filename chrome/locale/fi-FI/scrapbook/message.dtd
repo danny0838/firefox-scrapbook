@@ -19,25 +19,27 @@
 <!ENTITY sb.capture.filter.column.rule "Näytä/Piilota">
 <!ENTITY sb.capture.filter.column.content "Suodata (RegExp)">
 <!ENTITY sb.capture.filter.accept "Hyväksy">
-<!ENTITY sb.capture.filter.accept.tt "Muuta tai muokkaa arvoa">
+<!ENTITY sb.capture.filter.accept.help "Muuta tai muokkaa arvoa">
 <!ENTITY sb.capture.filter.cancel "Peruuta">
-<!ENTITY sb.capture.filter.cancel.tt "Keskeytä muokkaus">
+<!ENTITY sb.capture.filter.cancel.help "Keskeytä muokkaus">
 <!ENTITY sb.capture.filter.delete "Poista">
-<!ENTITY sb.capture.filter.delete.tt "Poista suodatin listasta">
+<!ENTITY sb.capture.filter.delete.help "Poista suodatin listasta">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Lisää kohteita vetämällä yhdistämisjärjestyksessä sivupuusta. Voit lisätä useita kohteita samanaikaisesti.">
 <!ENTITY sb.combine.preview "Esikatsele">
 <!ENTITY sb.combine.preview.d "Napsauta Yhdistä-painiketta esikatselun jälkeen.">
 <!ENTITY sb.combine.option.remove "Poista alkuperäiset sivut yhdistämisen jälkeen">
-<!ENTITY sbp.combine.up "Siirrä kohdetta ylöspäin">
-<!ENTITY sbp.combine.down "Siirrä kohdetta alaspäin">
-<!ENTITY sbp.combine.remove "Poista kohde">
-<!ENTITY sbp.combine.newTitle "Uusi otsikko">
+<!ENTITY sb.combine.up "Siirrä kohdetta ylöspäin">
+<!ENTITY sb.combine.down "Siirrä kohdetta alaspäin">
+<!ENTITY sb.combine.remove "Poista kohde">
+<!ENTITY sb.combine.newTitle "Uusi otsikko">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Aikaraja (sekunneissa)">
-<!ENTITY sb.detail.linked.charset "Loading charset">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "Merkistö">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail "Tallenna osa">
 <!ENTITY sb.detail.new.folder "Uusi kansio">
 <!ENTITY sb.detail.select.folder "Valitse kansio">
@@ -51,13 +53,13 @@
 <!ENTITY sb.detail.option.scripts "Scripts">
 <!ENTITY sb.detail.option.tidyCss "Process CSS">
 <!ENTITY sb.detail.option.tidyCss.0 "No rewrite">
-<!ENTITY sb.detail.option.tidyCss.0.desc "Save as-is. Links may be broken.">
+<!ENTITY sb.detail.option.tidyCss.0.help "Save as-is. Links may be broken.">
 <!ENTITY sb.detail.option.tidyCss.1 "Rewrite links">
-<!ENTITY sb.detail.option.tidyCss.1.desc "CSS with highly complicated syntax might not be processed correctly.">
+<!ENTITY sb.detail.option.tidyCss.1.help "CSS with highly complicated syntax might not be processed correctly.">
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
-<!ENTITY sb.detail.option.tidyCss.2.desc "Comments and browser unsupported CSS declaration will be removed.">
+<!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.desc "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.linked.file "Lataa linkitetyt tiedostot">
@@ -67,8 +69,8 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Syvätallennus">
+<!ENTITY sb.detail.linked.page.desc "Tallennusten valmistuttua kaikki sivut linkitetään toisiinsa.">
 <!ENTITY sb.detail.linked.page.depth "Linkkien seuraussyvyys">
-<!ENTITY sb.detail.linked.page.text "Tallennusten valmistuttua kaikki sivut linkitetään toisiinsa.">
 <!ENTITY sb.detail.warnAboutRenew "HUOM.: &quot;Tallenna uudestaan&quot; korvaa aiemmin tallennetun sivun.">
 <!ENTITY sb.detail.warnAboutScript "HUOM.: JavaScript voi aiheuttaa ongelmia.">
 
@@ -81,8 +83,6 @@
 <!ENTITY sb.edit.save "Tallenna muutokset">
 <!ENTITY sb.edit.comment "Laajenna kommenttialuetta">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "Muistilappu"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "Luo &sb.edit.sticky;"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Lisää valinnan tekstiin huomautus">
 <!ENTITY sb.edit.attach.file "Liitä tiedosto valintaan">
@@ -192,10 +192,9 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "Suodatin (RegExp)">
-<!ENTITY sbp.multiple.titleofwebsite "Verkkopaikan otsikko">
-<!ENTITY sbp.multiple.titleoflink "Otsikon linkki">
+<!ENTITY sb.multiple.titleofwebsite "Verkkopaikan otsikko">
+<!ENTITY sb.multiple.titleoflink "Otsikon linkki">
 <!ENTITY sb.multiple.title "Otsikko">
-<!ENTITY sbp.multiple.downloadmethod "Menetelmä">
 <!ENTITY sb.multiple.url "URL (Kukin URL omalle rivilleen)">
 <!ENTITY sb.multiple.detector "URL-tunnistin">
 <!ENTITY sb.multiple.detector.plink "Kaikki sivun linkit">
@@ -204,7 +203,7 @@
 <!ENTITY sb.multiple.detector.local "Kansion kaikki paikalliset HTML:t">
 <!ENTITY sb.multiple.detector.bookmarks "Kirjanmerkit">
 <!ENTITY sb.multiple.detector.clear "Tyhjennä">
-<!ENTITY sbp.multiple.exclude "Älä ota huomioon olemassaolevia osoitteita kohdekansiossa">
+<!ENTITY sb.multiple.exclude "Älä ota huomioon olemassaolevia osoitteita kohdekansiossa">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "Tallenna">
@@ -226,10 +225,6 @@
 <!ENTITY sb.note.fontsize.accesskey "K">
 <!ENTITY sb.note.print.accesskey "u">
 <!ENTITY sb.note.exit.accesskey "L">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Tallennus valmis.">
-<!ENTITY sb.capture.complete.all "Kaikki tallennukset valmiina.">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "Luo koko puu">
@@ -298,7 +293,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Yleiset">
 <!ENTITY sb.prop.type "Tyyppi">
-<!ENTITY sb.prop.date "Päiväys"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Merkistökoodaus">
@@ -350,7 +344,7 @@
 <!ENTITY sb.sort.modify "Sort by Modify Time">
 <!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
-<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
+<!ENTITY sb.sort.grouping.help "Sort with items grouped by folder, page, note page, and note.">
 <!ENTITY sb.sort.recursive "Järjestä alikansioiden sisältö">
 <!ENTITY sb.sort.warning "HUOM.: Tätä toimintoa ei voi kumota.">
 
@@ -383,14 +377,15 @@
 <!ENTITY sb.move.into "Siirrä kansioon">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Kaappaa uudestaan">
-<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.internalize "Internalize">
+<!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "Vie">
 <!ENTITY sb.remove "Poista">
 <!ENTITY sb.property "Ominaisuudet">
 <!ENTITY sb.listview "Luettelo">
 <!ENTITY sb.prop.title "Otsikko">
 <!ENTITY sb.prop.comment "Kommentti">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "Tunnus">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

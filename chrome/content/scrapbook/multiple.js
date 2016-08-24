@@ -59,7 +59,7 @@ var sbMultipleService = {
         var auCount = 0;
         var auFilter = this.FILTER.value;
         if ( auExclude == null ) {
-            auExclude = document.getElementById("sbpExcludeExistingAddresses").checked;
+            auExclude = document.getElementById("sbExcludeExistingAddresses").checked;
         }
         for ( var auURL in auAllHash ) {
             auCount++;
@@ -90,9 +90,9 @@ var sbMultipleService = {
                     }
                 }
             }
-            document.getElementById("sbpCounter").setAttribute("value", auSelected+" \/ "+auCount);
+            document.getElementById("sbCounter").setAttribute("value", auSelected+" \/ "+auCount);
         } else {
-            document.getElementById("sbpCounter").setAttribute("value", "");
+            document.getElementById("sbCounter").setAttribute("value", "");
         }
         this.TEXTBOX.value = auAll;
     },
@@ -185,7 +185,7 @@ var sbMultipleService = {
         var duisAllHash = {};
         var sel = window.opener.top.sbPageEditor.getSelection(sbCommonUtils.getFocusedWindow());
         if ( !sel ) {
-            document.getElementById("sbpCounter").setAttribute("value", "");
+            document.getElementById("sbCounter").setAttribute("value", "");
             return;
         }
         this.allURLs = [];
@@ -241,7 +241,7 @@ var sbMultipleService = {
         var usCount = this.allURLs.length;
         var usAllHash = {};
         var usExclude = true;
-        usExclude = document.getElementById("sbpExcludeExistingAddresses").checked;
+        usExclude = document.getElementById("sbExcludeExistingAddresses").checked;
         if ( usEvent ) {
             if ( usEvent.button == 0 ) {
                 if ( usExclude ) {

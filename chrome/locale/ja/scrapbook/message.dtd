@@ -13,31 +13,33 @@
 <!ENTITY sb.capture.column.address "URL">
 <!ENTITY sb.capture.column.title "タイトル">
 <!ENTITY sb.capture.column.status "状態">
-<!ENTITY sb.capture.checkSelection "Check selected items">
-<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
+<!ENTITY sb.capture.checkSelection "選択した項目をチェック">
+<!ENTITY sb.capture.uncheckSelection "選択した項目のチェックを外します">
 <!ENTITY sb.capture.filter "フィルタ">
 <!ENTITY sb.capture.filter.column.rule "含む/除外">
 <!ENTITY sb.capture.filter.column.content "フィルタ (正規表現)">
 <!ENTITY sb.capture.filter.accept "適用">
-<!ENTITY sb.capture.filter.accept.tt "値を変更または編集する">
+<!ENTITY sb.capture.filter.accept.help "値を変更または編集する">
 <!ENTITY sb.capture.filter.cancel "キャンセル">
-<!ENTITY sb.capture.filter.cancel.tt "編集を中止する">
+<!ENTITY sb.capture.filter.cancel.help "編集を中止する">
 <!ENTITY sb.capture.filter.delete "削除">
-<!ENTITY sb.capture.filter.delete.tt "リストからフィルタを削除する">
+<!ENTITY sb.capture.filter.delete.help "リストからフィルタを削除する">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "結合したいページを順番にツリーからドラッグ＆ドロップして追加してください。複数のアイテムを一度にドラッグ＆ドロップして追加することも可能です。">
 <!ENTITY sb.combine.preview "プレビュー">
 <!ENTITY sb.combine.preview.d "プレビューを確認して、よろしければ結合ボタンを押してください。">
 <!ENTITY sb.combine.option.remove "結合完了後、結合された元のページを削除する">
-<!ENTITY sbp.combine.up "上へ">
-<!ENTITY sbp.combine.down "下へ">
-<!ENTITY sbp.combine.remove "削除">
-<!ENTITY sbp.combine.newTitle "新しいタイトル">
+<!ENTITY sb.combine.up "上へ">
+<!ENTITY sb.combine.down "下へ">
+<!ENTITY sb.combine.remove "削除">
+<!ENTITY sb.combine.newTitle "新しいタイトル">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.linked.timeout "タイムアウト（秒）">
-<!ENTITY sb.detail.linked.charset "読み込んで文字セット">
+<!ENTITY sb.detail.linked.timeout "待ち（秒）">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "文字セット">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail "取り込み詳細">
 <!ENTITY sb.detail.new.folder "新しいフォルダ">
 <!ENTITY sb.detail.select.folder "フォルダの選択">
@@ -46,31 +48,31 @@
 <!ENTITY sb.detail.option.images "画像">
 <!ENTITY sb.detail.option.media "メディア">
 <!ENTITY sb.detail.option.fonts "フォント">
-<!ENTITY sb.detail.option.frames "Frames">
+<!ENTITY sb.detail.option.frames "フレーム">
 <!ENTITY sb.detail.option.styles "スタイル">
 <!ENTITY sb.detail.option.scripts "スクリプト">
-<!ENTITY sb.detail.option.tidyCss "Process CSS">
-<!ENTITY sb.detail.option.tidyCss.0 "No rewrite">
-<!ENTITY sb.detail.option.tidyCss.0.desc "Save as-is. Links may be broken.">
-<!ENTITY sb.detail.option.tidyCss.1 "Rewrite links">
-<!ENTITY sb.detail.option.tidyCss.1.desc "CSS with highly complicated syntax might not be processed correctly.">
-<!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
-<!ENTITY sb.detail.option.tidyCss.2.desc "Comments and browser unsupported CSS declaration will be removed.">
-<!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.desc "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
-<!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
+<!ENTITY sb.detail.option.tidyCss "CSSの処理">
+<!ENTITY sb.detail.option.tidyCss.0 "なし">
+<!ENTITY sb.detail.option.tidyCss.0.help "Save as-is. Links may be broken.">
+<!ENTITY sb.detail.option.tidyCss.1 "リンクを変更">
+<!ENTITY sb.detail.option.tidyCss.1.help "CSS with highly complicated syntax might not be processed correctly.">
+<!ENTITY sb.detail.option.tidyCss.2 "リンクを変更；未知を削除">
+<!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
+<!ENTITY sb.detail.option.tidyCss.3 "リンクを変更；未知と未使用を削除">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.saveDataUri "ファイルとしてデータURIを保存">
 <!ENTITY sb.detail.option.fileAsHtml "HTMLとして取り込み">
 <!ENTITY sb.detail.linked.file "リンク先ファイルのダウンロード">
 <!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
 <!ENTITY sb.detail.linked.file.method1 "Match URL file extension">
 <!ENTITY sb.detail.linked.file.method2 "Match HTTP header and URL file extension">
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
-<!ENTITY sb.detail.linked.file.reset "Reset to default">
+<!ENTITY sb.detail.linked.file.reset "初期設定に戻し">
 <!ENTITY sb.detail.linked.page "掘り下げ取り込み">
+<!ENTITY sb.detail.linked.page.desc "取り込み完了後、すべてのページは相互にリンクされ、サイトマップが生成されます。">
 <!ENTITY sb.detail.linked.page.depth "リンクをたどる深さ">
-<!ENTITY sb.detail.linked.page.text "取り込み完了後、すべてのページは相互にリンクされ、サイトマップが生成されます。">
-<!ENTITY sb.detail.warnAboutRenew "注意: 再取り込みを行うと元のページに上書きされます。">
-<!ENTITY sb.detail.warnAboutScript "注意: JavaScriptは何らかの問題を引き起こす可能性があります。">
+<!ENTITY sb.detail.warnAboutRenew "注意：再取り込みを行うと元のページに上書きされます。">
+<!ENTITY sb.detail.warnAboutScript "注意：JavaScriptは何らかの問題を引き起こす可能性があります。">
 
 <!-- editor.dtd -->
 <!ENTITY sb.toolbar.edit "編集ツールバー">
@@ -81,8 +83,6 @@
 <!ENTITY sb.edit.save "変更を保存する">
 <!ENTITY sb.edit.comment "コメントエリアを広げる">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "付箋アノテーション"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "&sb.edit.sticky;を作成"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "自由ノートを作成">
 <!ENTITY sb.edit.inline.add "選択範囲にインライン注釈を入力">
 <!ENTITY sb.edit.attach.file "選択範囲にファイルを添付">
@@ -192,10 +192,9 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "フィルタ（正規表現）">
-<!ENTITY sbp.multiple.titleofwebsite "ウェブサイトのタイトル">
-<!ENTITY sbp.multiple.titleoflink "リンクのタイトル">
+<!ENTITY sb.multiple.titleofwebsite "ウェブサイトのタイトル">
+<!ENTITY sb.multiple.titleoflink "リンクのタイトル">
 <!ENTITY sb.multiple.title "タイトル">
-<!ENTITY sbp.multiple.downloadmethod "メソッド">
 <!ENTITY sb.multiple.url "URL （改行して複数入力可）">
 <!ENTITY sb.multiple.detector "URL検出ツール">
 <!ENTITY sb.multiple.detector.plink "ページ内のすべてのリンク">
@@ -204,7 +203,7 @@
 <!ENTITY sb.multiple.detector.local "指定したフォルダ以下のローカルHTML">
 <!ENTITY sb.multiple.detector.bookmarks "ブックマーク">
 <!ENTITY sb.multiple.detector.clear "クリア">
-<!ENTITY sbp.multiple.exclude "保存先フォルダにすでに存在するアドレスは無視する">
+<!ENTITY sb.multiple.exclude "保存先フォルダにすでに存在するアドレスは無視する">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "保存">
@@ -227,10 +226,6 @@
 <!ENTITY sb.note.print.accesskey "P">
 <!ENTITY sb.note.exit.accesskey "X">
 
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "取り込み完了">
-<!ENTITY sb.capture.complete.all "すべての取り込みが完了しました。">
-
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "すべてを出力">
 <!ENTITY sb.output.option.frame "フレーム付きのHTMLを出力">
@@ -248,7 +243,7 @@
 <!ENTITY sb.capture.alltabs "すべてのタブを取り込み">
 <!ENTITY sb.capture.bookmark "ScrapBookにブックマーク">
 <!ENTITY sb.sidebar "サイドバーに表示">
-<!ENTITY sb.menubar "Menubar accesskey">
+<!ENTITY sb.menubar "メニューバーのアクセスキー">
 <!ENTITY sb.editbefore "取り込み前編集モード">
 
 <!-- prefs.dtd -->
@@ -298,7 +293,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "一般情報">
 <!ENTITY sb.prop.type "形式">
-<!ENTITY sb.prop.date "日時"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "作成時間">
 <!ENTITY sb.prop.modify "変更時間">
 <!ENTITY sb.prop.encode "文字コード">
@@ -312,7 +306,7 @@
 <!ENTITY sb.prop.icon.favicon "faviconを選択">
 <!ENTITY sb.prop.icon.custom "ユーザーアイコンを選択">
 <!ENTITY sb.prop.mark "マーク">
-<!ENTITY sb.prop.lock "ロッキング">
+<!ENTITY sb.prop.lock "ロック">
 
 <!-- repair.dtd -->
 <!ENTITY sb.repair.rdfFile "scrapbook.rdf の復元">
@@ -350,7 +344,7 @@
 <!ENTITY sb.sort.modify "変更時間でソート">
 <!ENTITY sb.sort.descending "下行">
 <!ENTITY sb.sort.grouping "形式によってグループ化">
-<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
+<!ENTITY sb.sort.grouping.help "Sort with items grouped by folder, page, note page, and note.">
 <!ENTITY sb.sort.recursive "サブフォルダ内も再帰的にソートする">
 <!ENTITY sb.sort.warning "注意：ソートを実行すると元には戻せません。">
 
@@ -366,10 +360,10 @@
 <!ENTITY sb.trade.import "インポート">
 <!ENTITY sb.trade.export "エクスポート">
 <!ENTITY sb.trade.time "エクスポートした日時">
-<!ENTITY sb.trade.update "Import as latest ScrapBook X format">
+<!ENTITY sb.trade.update "最新のScrapBook X形式としてインポート">
 <!ENTITY sb.trade.restore "フォルダ構成を復元しながらインポート">
 <!ENTITY sb.trade.remove "インポート後にファイルを削除する">
-<!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">
+<!ENTITY sb.trade.exportFolder "エクスポートフォルダのアイテム（インポートする際の順序に注意）">
 
 <!-- tree.dtd -->
 <!ENTITY sb.open "開く">
@@ -381,16 +375,17 @@
 <!ENTITY sb.show.files "ファイルを表示">
 <!ENTITY sb.move "移動">
 <!ENTITY sb.move.into "フォルダへ移動">
-<!ENTITY sb.copy "Copy">
+<!ENTITY sb.copy "コピー">
 <!ENTITY sb.renew "再取り込み">
-<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.internalize "内在化">
+<!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "エクスポート">
 <!ENTITY sb.remove "削除">
 <!ENTITY sb.property "プロパティ">
 <!ENTITY sb.listview "リストビュー">
 <!ENTITY sb.prop.title "タイトル">
 <!ENTITY sb.prop.comment "コメント">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "フォルダへの変換">
 <!ENTITY sb.unmake.container "非フォルダに変換">

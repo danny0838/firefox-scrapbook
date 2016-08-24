@@ -695,16 +695,16 @@ var sbInvisibleBrowser = {
 
     fileCount: 0,
 
-    init: function() {
+    init: function(aLoadMedia) {
         try {
             this.ELEMENT.removeProgressListener(this._eventListener, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
         } catch(ex) {
         }
         this.ELEMENT.addProgressListener(this._eventListener, Components.interfaces.nsIWebProgress.NOTIFY_ALL);
-        this.ELEMENT.docShell.allowImages = false;
+        this.ELEMENT.docShell.allowImages = !!aLoadMedia;
         // allowMedia is supported since Firefox 24
         try {
-            this.ELEMENT.docShell.allowMedia = false;
+            this.ELEMENT.docShell.allowMedia = !!aLoadMedia;
         } catch(ex) {}
         this.ELEMENT.docShell.allowSubframes = gOption["frames"];
         this.ELEMENT.docShell.allowJavascript = false;  // javascript error will freeze up capture process

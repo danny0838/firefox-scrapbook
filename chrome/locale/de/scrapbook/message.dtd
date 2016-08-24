@@ -19,25 +19,27 @@
 <!ENTITY sb.capture.filter.column.rule "Ein-/Ausblenden">
 <!ENTITY sb.capture.filter.column.content "Filter (regulärer Ausdruck)">
 <!ENTITY sb.capture.filter.accept "OK">
-<!ENTITY sb.capture.filter.accept.tt "Wert übernehmen/Wert ändern">
+<!ENTITY sb.capture.filter.accept.help "Wert übernehmen/Wert ändern">
 <!ENTITY sb.capture.filter.cancel "Abbrechen">
-<!ENTITY sb.capture.filter.cancel.tt "Editieren abbreche">
+<!ENTITY sb.capture.filter.cancel.help "Editieren abbreche">
 <!ENTITY sb.capture.filter.delete "Entfernen">
-<!ENTITY sb.capture.filter.delete.tt "Filter aus der Liste entfernen">
+<!ENTITY sb.capture.filter.delete.help "Filter aus der Liste entfernen">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Fügen Sie Einträge, die Sie zusammenfassen wollen, durch &quot;Ziehen und Ablegen&quot; aus dem Baum hinzu. Sie können auch mehrere Einträge auf einmal auswählen.">
 <!ENTITY sb.combine.preview "Vorschau">
 <!ENTITY sb.combine.preview.d "Nach Überprüfung der Vorschau mit &quot;Zusammenfassen&quot; fortfahren.">
 <!ENTITY sb.combine.option.remove "Nach erfolgter Zusammenfassung Originalseiten entfernen">
-<!ENTITY sbp.combine.up "Eintrag nach oben verschieben">
-<!ENTITY sbp.combine.down "Eintrag nach unten verschieben">
-<!ENTITY sbp.combine.remove "Eintrag entfernen">
-<!ENTITY sbp.combine.newTitle "neuer Titel">
+<!ENTITY sb.combine.up "Eintrag nach oben verschieben">
+<!ENTITY sb.combine.down "Eintrag nach unten verschieben">
+<!ENTITY sb.combine.remove "Eintrag entfernen">
+<!ENTITY sb.combine.newTitle "neuer Titel">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Wartezeit (in Sekunden)">
-<!ENTITY sb.detail.linked.charset "Loading charset">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "Zeichensatz">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail "Archivierungsdetails">
 <!ENTITY sb.detail.new.folder "Neuer Ordner">
 <!ENTITY sb.detail.select.folder "Ordner auswählen">
@@ -51,13 +53,13 @@
 <!ENTITY sb.detail.option.scripts "Scripts">
 <!ENTITY sb.detail.option.tidyCss "Process CSS">
 <!ENTITY sb.detail.option.tidyCss.0 "No rewrite">
-<!ENTITY sb.detail.option.tidyCss.0.desc "Save as-is. Links may be broken.">
+<!ENTITY sb.detail.option.tidyCss.0.help "Save as-is. Links may be broken.">
 <!ENTITY sb.detail.option.tidyCss.1 "Rewrite links">
-<!ENTITY sb.detail.option.tidyCss.1.desc "CSS with highly complicated syntax might not be processed correctly.">
+<!ENTITY sb.detail.option.tidyCss.1.help "CSS with highly complicated syntax might not be processed correctly.">
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
-<!ENTITY sb.detail.option.tidyCss.2.desc "Comments and browser unsupported CSS declaration will be removed.">
+<!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.desc "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.linked.file "Verlinkte Dateien herunterladen">
@@ -67,8 +69,8 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Archivierungstiefe">
+<!ENTITY sb.detail.linked.page.desc "Nach Abschluss der Archivierung werden alle Seiten untereinander verlinkt und es wird eine Sitemap erstellt.">
 <!ENTITY sb.detail.linked.page.depth "Verzeichnistiefe der Links">
-<!ENTITY sb.detail.linked.page.text "Nach Abschluss der Archivierung werden alle Seiten untereinander verlinkt und es wird eine Sitemap erstellt.">
 <!ENTITY sb.detail.warnAboutRenew "HINWEIS: &quot;Erneut archivieren&quot; überschreibt zuvor gespeicherte Seiten.">
 <!ENTITY sb.detail.warnAboutScript "HINWEIS: JavaScript kann eine Reihe von Problemen verursachen.">
 
@@ -81,8 +83,6 @@
 <!ENTITY sb.edit.save "Änderungen speichern">
 <!ENTITY sb.edit.comment "Beschreibungsfeld vergrößern">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "Notizkommentar"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "&sb.edit.sticky; erstellen"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Zeilenkommentar für Auswahl anlegen">
 <!ENTITY sb.edit.attach.file "Auswahl mit Datei verknüpfen">
@@ -192,10 +192,9 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "Filter (regulärer Ausdruck)">
-<!ENTITY sbp.multiple.titleofwebsite "Webseitentitel">
-<!ENTITY sbp.multiple.titleoflink "Verweistext">
+<!ENTITY sb.multiple.titleofwebsite "Webseitentitel">
+<!ENTITY sb.multiple.titleoflink "Verweistext">
 <!ENTITY sb.multiple.title "Titel">
-<!ENTITY sbp.multiple.downloadmethod "Methode">
 <!ENTITY sb.multiple.url "Zu archivierende URLs zeilenweise eingeben">
 <!ENTITY sb.multiple.detector "URLs automatisch ermitteln">
 <!ENTITY sb.multiple.detector.plink "Alle Links innerhalb der Seite">
@@ -204,7 +203,7 @@
 <!ENTITY sb.multiple.detector.local "Alle lokalen HTML-Dateien in einem Verzeichnis">
 <!ENTITY sb.multiple.detector.bookmarks "Lesezeichen">
 <!ENTITY sb.multiple.detector.clear "Löschen">
-<!ENTITY sbp.multiple.exclude "vorhandene Adressen im Zielordner ignorieren">
+<!ENTITY sb.multiple.exclude "vorhandene Adressen im Zielordner ignorieren">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "Speichern">
@@ -226,10 +225,6 @@
 <!ENTITY sb.note.fontsize.accesskey "i">
 <!ENTITY sb.note.print.accesskey "u">
 <!ENTITY sb.note.exit.accesskey "n">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Archivierung abgeschlossen.">
-<!ENTITY sb.capture.complete.all "Alle Archivierungen abgeschlossen.">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "Alles für die Ausgabe auswählen">
@@ -298,7 +293,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Allgemeine Informationen">
 <!ENTITY sb.prop.type "Typ">
-<!ENTITY sb.prop.date "Datum"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Kodierung">
@@ -350,7 +344,7 @@
 <!ENTITY sb.sort.modify "Sort by Modify Time">
 <!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
-<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
+<!ENTITY sb.sort.grouping.help "Sort with items grouped by folder, page, note page, and note.">
 <!ENTITY sb.sort.recursive "Unterordner ebenfalls sortieren">
 <!ENTITY sb.sort.warning "HINWEIS: Dieser Vorgang kann nicht rückgängig gemacht werden.">
 
@@ -383,14 +377,15 @@
 <!ENTITY sb.move.into "In Ordner verschieben">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Erneut archivieren">
-<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.internalize "Internalize">
+<!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "Exportieren">
 <!ENTITY sb.remove "Löschen">
 <!ENTITY sb.property "Eigenschaften">
 <!ENTITY sb.listview "Geteilte Listenansicht">
 <!ENTITY sb.prop.title "Name">
 <!ENTITY sb.prop.comment "Beschreibung">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

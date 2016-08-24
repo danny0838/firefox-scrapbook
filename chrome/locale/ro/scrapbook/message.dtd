@@ -19,25 +19,27 @@
 <!ENTITY sb.capture.filter.column.rule "Afișează/ascunde">
 <!ENTITY sb.capture.filter.column.content "Filtrare (expresie regulată)">
 <!ENTITY sb.capture.filter.accept "Acceptă">
-<!ENTITY sb.capture.filter.accept.tt "Modifică sau editează valoarea">
+<!ENTITY sb.capture.filter.accept.help "Modifică sau editează valoarea">
 <!ENTITY sb.capture.filter.cancel "Renunță">
-<!ENTITY sb.capture.filter.cancel.tt "Abandonează editarea">
+<!ENTITY sb.capture.filter.cancel.help "Abandonează editarea">
 <!ENTITY sb.capture.filter.delete "Șterge">
-<!ENTITY sb.capture.filter.delete.tt "Elimină filtrul din listă">
+<!ENTITY sb.capture.filter.delete.help "Elimină filtrul din listă">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Adăugați elemente din arbore prin glisare și fixare, în ordinea în care doriți să le combinați. Puteți glisa și fixa mai multe articole o dată.">
 <!ENTITY sb.combine.preview "Previzualizare">
 <!ENTITY sb.combine.preview.d "Apăsați butonul „Combină” după ce verificați rezultatul.">
 <!ENTITY sb.combine.option.remove "Elimină paginile originale după finalizarea combinării">
-<!ENTITY sbp.combine.up "Mută elementul în sus">
-<!ENTITY sbp.combine.down "Mută elementul în jos">
-<!ENTITY sbp.combine.remove "Elimină elementul">
-<!ENTITY sbp.combine.newTitle "Denumire nouă">
+<!ENTITY sb.combine.up "Mută elementul în sus">
+<!ENTITY sb.combine.down "Mută elementul în jos">
+<!ENTITY sb.combine.remove "Elimină elementul">
+<!ENTITY sb.combine.newTitle "Denumire nouă">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Temporizare (secunde)">
-<!ENTITY sb.detail.linked.charset "Loading charset">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "Codare">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail "Detalii de capturare">
 <!ENTITY sb.detail.new.folder "Dosar nou">
 <!ENTITY sb.detail.select.folder "Selectează dosarul">
@@ -51,13 +53,13 @@
 <!ENTITY sb.detail.option.scripts "Scripts">
 <!ENTITY sb.detail.option.tidyCss "Process CSS">
 <!ENTITY sb.detail.option.tidyCss.0 "No rewrite">
-<!ENTITY sb.detail.option.tidyCss.0.desc "Save as-is. Links may be broken.">
+<!ENTITY sb.detail.option.tidyCss.0.help "Save as-is. Links may be broken.">
 <!ENTITY sb.detail.option.tidyCss.1 "Rewrite links">
-<!ENTITY sb.detail.option.tidyCss.1.desc "CSS with highly complicated syntax might not be processed correctly.">
+<!ENTITY sb.detail.option.tidyCss.1.help "CSS with highly complicated syntax might not be processed correctly.">
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
-<!ENTITY sb.detail.option.tidyCss.2.desc "Comments and browser unsupported CSS declaration will be removed.">
+<!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.desc "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.linked.file "Descărcare fișiere legate">
@@ -67,8 +69,8 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Capturare în profunzime">
+<!ENTITY sb.detail.linked.page.desc "După finalizarea capturării, paginile vor fi legate una de alta și se va construi harta saitului.">
 <!ENTITY sb.detail.linked.page.depth "Nivelul de urmărire a legăturilor (profunzimea)">
-<!ENTITY sb.detail.linked.page.text "După finalizarea capturării, paginile vor fi legate una de alta și se va construi harta saitului.">
 <!ENTITY sb.detail.warnAboutRenew "NOTĂ: Operațiunea „Capturează din nou” va suprascrie paginile salvate anterior.">
 <!ENTITY sb.detail.warnAboutScript "NOTĂ: JavaScript poate crea unele probleme.">
 
@@ -81,8 +83,6 @@
 <!ENTITY sb.edit.save "Salvează modificările">
 <!ENTITY sb.edit.comment "Extinde zona comentariu">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "notă adezivă"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "Creează o &sb.edit.sticky;"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Adaugă o adnotare la selecție">
 <!ENTITY sb.edit.attach.file "Atașează un fișier la selecție">
@@ -192,10 +192,9 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "Filtru">
-<!ENTITY sbp.multiple.titleofwebsite "Denumire sait web">
-<!ENTITY sbp.multiple.titleoflink "Denumire legătură">
+<!ENTITY sb.multiple.titleofwebsite "Denumire sait web">
+<!ENTITY sb.multiple.titleoflink "Denumire legătură">
 <!ENTITY sb.multiple.title "Denumire">
-<!ENTITY sbp.multiple.downloadmethod "Metodă">
 <!ENTITY sb.multiple.url "Adrese (furnizați adresele câte una pe linie)">
 <!ENTITY sb.multiple.detector "Detector de adrese">
 <!ENTITY sb.multiple.detector.plink "Toate legăturile din pagină">
@@ -204,7 +203,7 @@
 <!ENTITY sb.multiple.detector.local "Toate paginile HTML locale din dosar">
 <!ENTITY sb.multiple.detector.bookmarks "Semne de carte">
 <!ENTITY sb.multiple.detector.clear "Șterge">
-<!ENTITY sbp.multiple.exclude "Ignoră adresele deja existente în dosarul destinație">
+<!ENTITY sb.multiple.exclude "Ignoră adresele deja existente în dosarul destinație">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "Salvează">
@@ -226,10 +225,6 @@
 <!ENTITY sb.note.fontsize.accesskey "f">
 <!ENTITY sb.note.print.accesskey "p">
 <!ENTITY sb.note.exit.accesskey "T">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Capturare finalizată.">
-<!ENTITY sb.capture.complete.all "Toate capturările sunt finalizate.">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "Scrie arborele complet">
@@ -298,7 +293,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Informații generale">
 <!ENTITY sb.prop.type "Tip">
-<!ENTITY sb.prop.date "Dată"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Codare">
@@ -350,7 +344,7 @@
 <!ENTITY sb.sort.modify "Sort by Modify Time">
 <!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
-<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
+<!ENTITY sb.sort.grouping.help "Sort with items grouped by folder, page, note page, and note.">
 <!ENTITY sb.sort.recursive "Sortează recursiv în subdosare">
 <!ENTITY sb.sort.warning "Notă: Nu puteți anula această operațiune.">
 
@@ -383,14 +377,15 @@
 <!ENTITY sb.move.into "Mută în dosar">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Capturează din nou">
-<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.internalize "Internalize">
+<!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "Exportă">
 <!ENTITY sb.remove "Șterge">
 <!ENTITY sb.property "Proprietăți">
 <!ENTITY sb.listview "Afișează în mod listă">
 <!ENTITY sb.prop.title "Denumire">
 <!ENTITY sb.prop.comment "Comentariu">
-<!ENTITY sbp.prop.url "Adresă">
+<!ENTITY sb.prop.url "Adresă">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

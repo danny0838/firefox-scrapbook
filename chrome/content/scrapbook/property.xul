@@ -38,7 +38,7 @@
                             </hbox>
                         </row>
                         <row id="sbPropSourceRow" align="center">
-                            <label control="sbPropSource" value="&sbp.prop.url;:" />
+                            <label control="sbPropSource" value="&sb.prop.url;:" />
                             <textbox id="sbPropSource" />
                         </row>
                         <row id="sbPropIconRow" align="center">
@@ -50,7 +50,7 @@
                                         <menuitem label="&sb.prop.icon.default;" oncommand="sbPropService.setDefaultIcon();" />
                                         <menuitem label="&sb.prop.icon.favicon;..." oncommand="sbPropService.pickupIcon('F',this.label);" />
                                         <menuitem label="&sb.prop.icon.custom;..." oncommand="sbPropService.pickupIcon('U',this.label);" />
-                                        <menuitem label="&sbp.prop.url;..." oncommand="sbPropService.setIconURL();" />
+                                        <menuitem label="&sb.prop.url;..." oncommand="sbPropService.setIconURL();" />
                                     </menupopup>
                                 </toolbarbutton>
                                 <spacer flex="1" />
