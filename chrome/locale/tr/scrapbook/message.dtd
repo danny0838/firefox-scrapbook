@@ -28,7 +28,7 @@
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Öğeleri ağaç görünümünden, birleştirmek istediğiniz sırayla, sürükleyip bırakarak ekleyin. Tek seferde birden çok öğeyi sürükleyip bırakabilirsiniz.">
 <!ENTITY sb.combine.preview "Ön İzleme">
-<!ENTITY sb.combine.preview.d "Ön izlemeyi doğruladıktan sonra &apos;Kaydet&apos; düğmesine basın.">
+<!ENTITY sb.combine.preview.d "Ön izlemeyi doğruladıktan sonra 'Kaydet' düğmesine basın.">
 <!ENTITY sb.combine.option.remove "Birleştirme tamamlandıktan sonra önceki sayfaları kaldır">
 <!ENTITY sb.combine.up "move item upwards">
 <!ENTITY sb.combine.down "move item downwards">
@@ -69,7 +69,7 @@
 <!ENTITY sb.detail.linked.page "Derinlemesine Kaydet">
 <!ENTITY sb.detail.linked.page.desc "Kayıt etme işlemi tamamlandıktan sonra, tüm sayfalar birbirine bağlanacak ve site haritası oluşturulacak.">
 <!ENTITY sb.detail.linked.page.depth "Linkleri izleme derinliği">
-<!ENTITY sb.detail.warnAboutRenew "DİKKAT: &apos;Yeniden Kaydet&apos; önceden kaydedilmiş sayfanın üzerine yazar.">
+<!ENTITY sb.detail.warnAboutRenew "DİKKAT: 'Yeniden Kaydet' önceden kaydedilmiş sayfanın üzerine yazar.">
 <!ENTITY sb.detail.warnAboutScript "DİKKAT: JavaScript bazı problemlere yol açabilir.">
 
 <!-- editor.dtd -->
@@ -193,12 +193,12 @@
 <!ENTITY sb.multiple.titleofwebsite "Title of website">
 <!ENTITY sb.multiple.titleoflink "Title of link">
 <!ENTITY sb.multiple.title "Title">
-<!ENTITY sb.multiple.url "URL (URL&apos;leri satır satır girin)">
+<!ENTITY sb.multiple.url "URL (URL'leri satır satır girin)">
 <!ENTITY sb.multiple.detector "URL Algılayıcı">
 <!ENTITY sb.multiple.detector.plink "Sayfadaki Tüm Linkler">
 <!ENTITY sb.multiple.detector.slink "Seçimdeki Tüm Linkler">
 <!ENTITY sb.multiple.detector.tabs "Pencerede Açık Olan Tüm Sekmeler">
-<!ENTITY sb.multiple.detector.local "Bir Dizindeki Tüm Yerel HTML&apos;ler">
+<!ENTITY sb.multiple.detector.local "Bir Dizindeki Tüm Yerel HTML'ler">
 <!ENTITY sb.multiple.detector.bookmarks "Yer İmleri">
 <!ENTITY sb.multiple.detector.clear "Temizle">
 <!ENTITY sb.multiple.exclude "ignore already existing addresses in destination folder">
@@ -209,9 +209,9 @@
 <!ENTITY sb.note.tools "Araçlar">
 <!ENTITY sb.note.htmlview "HTML Görünümü">
 <!ENTITY sb.note.normalview "Normal Görünüm">
-<!ENTITY sb.note.template "Şablon HTML&apos;i Düzenle">
+<!ENTITY sb.note.template "Şablon HTML'i Düzenle">
 <!ENTITY sb.note.autolinefeed "Otomatik Satırlama">
-<!ENTITY sb.note.autolinefeed.t "&sb.note.htmlview;&apos;nde satırların sonuna <br> etiketi ekle">
+<!ENTITY sb.note.autolinefeed.t "&sb.note.htmlview;'nde satırların sonuna <br> etiketi ekle">
 <!ENTITY sb.note.fontsize "Yazı Tipi Boyutu">
 <!ENTITY sb.note.help "Yardım">
 <!ENTITY sb.note.print "Yazdır">
@@ -259,10 +259,10 @@
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "klasörü göster">
 <!ENTITY sb.prefs.ui.menuBar "Menü çubuğunda göster">
 <!ENTITY sb.prefs.ui.menuBar.icon "Simge">
-<!ENTITY sb.prefs.ui.toolsMenu "&apos;Araçlar&apos; menüsünde göster">
+<!ENTITY sb.prefs.ui.toolsMenu "'Araçlar' menüsünde göster">
 <!ENTITY sb.prefs.ui.statusBar "Durumu çubuğunda göster">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.desc.restart "Değişiklikler Firefox&apos;u yeniden başlatmanızı gerektirir.">
+<!ENTITY sb.prefs.desc.restart "Değişiklikler Firefox'u yeniden başlatmanızı gerektirir.">
 <!ENTITY sb.prefs.tabs.tips "Aşağıdaki eylemleri sekmede aç">
 <!ENTITY sb.prefs.tabs.note "Notu Düzenle">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
@@ -276,8 +276,8 @@
 <!ENTITY sb.prefs.tree.unshift.top "Klasörün üstü">
 <!ENTITY sb.prefs.tree.unshift.bottom "Klasörün altı">
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
-<!ENTITY sb.prefs.showDetailOnDrop "Kenar çubuğuna sürükleyip-bırakarak kaydetmelerde &apos;Kayıt Detayları&apos; diyaloğunu göster">
-<!ENTITY sb.prefs.notifyOnComplete "&apos;Kaydetme Tamamlandı&apos; uyarısını göster">
+<!ENTITY sb.prefs.showDetailOnDrop "Kenar çubuğuna sürükleyip-bırakarak kaydetmelerde 'Kayıt Detayları' diyaloğunu göster">
+<!ENTITY sb.prefs.notifyOnComplete "'Kaydetme Tamamlandı' uyarısını göster">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
@@ -307,7 +307,7 @@
 <!ENTITY sb.prop.lock "Lock">
 
 <!-- repair.dtd -->
-<!ENTITY sb.repair.rdfFile "Scrapbook.rdf&apos;yi geri yükle">
+<!ENTITY sb.repair.rdfFile "Scrapbook.rdf'yi geri yükle">
 <!ENTITY sb.repair.rdfFile.descript "ScrapBook ağacı aniden kaybolursa bunu deneyin.">
 <!ENTITY sb.repair.rdfFile.select "Geri yükleme için bir yedekleme dosyası seçin.">
 <!ENTITY sb.repair.rdfFile.file "Dosya">
@@ -324,7 +324,7 @@
 <!ENTITY sb.tools.manage "Yönet">
 <!ENTITY sb.tools.combine "Birleştirme Sihirbazı">
 <!ENTITY sb.tools.trade "İçe/Dışa Aktar">
-<!ENTITY sb.tools.multiple "Birden Çok URL&apos;yi Kaydet">
+<!ENTITY sb.tools.multiple "Birden Çok URL'yi Kaydet">
 <!ENTITY sb.tools.directory "ScrapBook Dizini">
 <!ENTITY sb.tools.calculate "Boyut Hesaplama">
 <!ENTITY sb.tools.sorttree "Tüm Ağacı Sırala">
@@ -368,7 +368,7 @@
 <!ENTITY sb.open.native "Open in Default Program">
 <!ENTITY sb.open.tab "Sekmede Aç">
 <!ENTITY sb.open.newtab "Yeni Sekmede Aç">
-<!ENTITY sb.open.source "Kaynak URL&apos;yi Aç">
+<!ENTITY sb.open.source "Kaynak URL'yi Aç">
 <!ENTITY sb.multi "Multi-ScrapBook">
 <!ENTITY sb.show.files "Dosyaları Göster">
 <!ENTITY sb.move "Taşı">

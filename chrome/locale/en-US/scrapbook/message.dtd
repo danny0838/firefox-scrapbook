@@ -28,7 +28,7 @@
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Add items by drag-and-drop from the tree in the order you want to combine. You can drag-and-drop multiple items at once.">
 <!ENTITY sb.combine.preview "Preview">
-<!ENTITY sb.combine.preview.d "Press &apos;Combine&apos; button after verifying the preview.">
+<!ENTITY sb.combine.preview.d "Press 'Combine' button after verifying the preview.">
 <!ENTITY sb.combine.option.remove "After completing combine, remove original pages">
 <!ENTITY sb.combine.up "move item upwards">
 <!ENTITY sb.combine.down "move item downwards">
@@ -69,7 +69,7 @@
 <!ENTITY sb.detail.linked.page "In-depth Capture">
 <!ENTITY sb.detail.linked.page.desc "After all pages are captured, they will be linked with each other and a sitemap will be created.">
 <!ENTITY sb.detail.linked.page.depth "Depth to follow links">
-<!ENTITY sb.detail.warnAboutRenew "NOTICE: &apos;Capture Again&apos; overwrites the previously saved page.">
+<!ENTITY sb.detail.warnAboutRenew "NOTICE: 'Capture Again' overwrites the previously saved page.">
 <!ENTITY sb.detail.warnAboutScript "NOTICE: JavaScript may cause some problems.">
 
 <!-- editor.dtd -->
@@ -254,12 +254,12 @@
 <!ENTITY sb.prefs.advanced "Advanced">
 <!ENTITY sb.prefs.ui.contextMenu "Show in browser context menu">
 <!ENTITY sb.prefs.ui.contextSubMenu "Submenu">
-<!ENTITY sb.prefs.ui.bookmarkMenu "Show &apos;Bookmark with ScrapBook&apos; menu">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Show 'Bookmark with ScrapBook' menu">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Show up to">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "recently used folders">
 <!ENTITY sb.prefs.ui.menuBar "Show in menu bar">
 <!ENTITY sb.prefs.ui.menuBar.icon "Icon">
-<!ENTITY sb.prefs.ui.toolsMenu "Show in &apos;Tools&apos; menu">
+<!ENTITY sb.prefs.ui.toolsMenu "Show in 'Tools' menu">
 <!ENTITY sb.prefs.ui.statusBar "Show in status bar">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
 <!ENTITY sb.prefs.desc.restart "Change requires Firefox restart.">
@@ -276,8 +276,8 @@
 <!ENTITY sb.prefs.tree.unshift.top "the top of a folder">
 <!ENTITY sb.prefs.tree.unshift.bottom "the bottom of a folder">
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
-<!ENTITY sb.prefs.showDetailOnDrop "Show &apos;Capture Detail&apos; dialog when capturing by drag-and-drop into Sidebar">
-<!ENTITY sb.prefs.notifyOnComplete "Show &apos;Capture Completed&apos; notification">
+<!ENTITY sb.prefs.showDetailOnDrop "Show 'Capture Detail' dialog when capturing by drag-and-drop into Sidebar">
+<!ENTITY sb.prefs.notifyOnComplete "Show 'Capture Completed' notification">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
@@ -344,7 +344,7 @@
 <!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
 <!ENTITY sb.sort.recursive "Sort Sub-folders Recursively">
-<!ENTITY sb.sort.warning "Notice: You can&apos;t undo this operation.">
+<!ENTITY sb.sort.warning "Notice: You can't undo this operation.">
 
 <!-- templateHelp.dtd -->
 <!ENTITY sb.thelp.dir "ltr">

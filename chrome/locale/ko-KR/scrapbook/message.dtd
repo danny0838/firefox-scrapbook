@@ -69,7 +69,7 @@
 <!ENTITY sb.detail.linked.page "상세 캡처">
 <!ENTITY sb.detail.linked.page.desc "캡처 완료 후 모든 페이지는 상호 링크되어 사이트 맵이 생성됩니다.">
 <!ENTITY sb.detail.linked.page.depth "연결 링크 단계">
-<!ENTITY sb.detail.warnAboutRenew "알림: &apos;다시 캡처하기&apos; 기능은 이전에 저장된 페이지에 덮어씁니다.">
+<!ENTITY sb.detail.warnAboutRenew "알림: '다시 캡처하기' 기능은 이전에 저장된 페이지에 덮어씁니다.">
 <!ENTITY sb.detail.warnAboutScript "알림: 자바스크립트에서 문제가 발생될 수 있습니다.">
 
 <!-- editor.dtd -->
@@ -254,12 +254,12 @@
 <!ENTITY sb.prefs.advanced "고급">
 <!ENTITY sb.prefs.ui.contextMenu "브라우저 컨텍스트 메뉴에 보이기">
 <!ENTITY sb.prefs.ui.contextSubMenu "부메뉴">
-<!ENTITY sb.prefs.ui.bookmarkMenu "&apos;ScrapBook으로 북마크&apos; 메뉴 표시">
+<!ENTITY sb.prefs.ui.bookmarkMenu "'ScrapBook으로 북마크' 메뉴 표시">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Show up to">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "recently used folders">
 <!ENTITY sb.prefs.ui.menuBar "메뉴 도구 모음에 보이기">
 <!ENTITY sb.prefs.ui.menuBar.icon "아이콘">
-<!ENTITY sb.prefs.ui.toolsMenu "&apos;도구&apos; 메뉴에 보이기">
+<!ENTITY sb.prefs.ui.toolsMenu "'도구' 메뉴에 보이기">
 <!ENTITY sb.prefs.ui.statusBar "상태 표시줄에 보이기">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
 <!ENTITY sb.prefs.desc.restart "표시 항목의 변경된 내용을 적용하려면 Firefox를 재시작해야 합니다.">
@@ -276,8 +276,8 @@
 <!ENTITY sb.prefs.tree.unshift.top "폴더 맨 위">
 <!ENTITY sb.prefs.tree.unshift.bottom "폴더 맨 아래">
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
-<!ENTITY sb.prefs.showDetailOnDrop "탐색 창으로 끌어다 놓기하여 캡처할 때 &apos;상세 캡처&apos; 창 보이기">
-<!ENTITY sb.prefs.notifyOnComplete "&apos;캡처 완료&apos; 알림 보이기">
+<!ENTITY sb.prefs.showDetailOnDrop "탐색 창으로 끌어다 놓기하여 캡처할 때 '상세 캡처' 창 보이기">
+<!ENTITY sb.prefs.notifyOnComplete "'캡처 완료' 알림 보이기">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">

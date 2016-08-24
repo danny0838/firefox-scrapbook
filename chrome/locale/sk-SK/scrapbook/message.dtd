@@ -28,7 +28,7 @@
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Položky pridávajte pomocou drag-and-drop v poradí, v akom ich chcete zlúčiť. Súčasne môžte pridať viacero položiek.">
 <!ENTITY sb.combine.preview "Náhľad">
-<!ENTITY sb.combine.preview.d "Stlačením tlačidla &apos;Zlúčenie&apos; skontrolujte ukážku.">
+<!ENTITY sb.combine.preview.d "Stlačením tlačidla 'Zlúčenie' skontrolujte ukážku.">
 <!ENTITY sb.combine.option.remove "Po dokončení zlúčenia, odstrániť originálne stránky">
 <!ENTITY sb.combine.up "move item upwards">
 <!ENTITY sb.combine.down "move item downwards">
@@ -69,7 +69,7 @@
 <!ENTITY sb.detail.linked.page "Hĺbkové zachytenie">
 <!ENTITY sb.detail.linked.page.desc "Po dokončení zachytenia budú všetky stránky vzájomne prepojené a bude vytvorená mapa stránok.">
 <!ENTITY sb.detail.linked.page.depth "Hĺbkovo prechádzať odkazy">
-<!ENTITY sb.detail.warnAboutRenew "UPOZORNENIE: &apos;Znovuzachytenie&apos; prepíše naposledy uloženú stránku.">
+<!ENTITY sb.detail.warnAboutRenew "UPOZORNENIE: 'Znovuzachytenie' prepíše naposledy uloženú stránku.">
 <!ENTITY sb.detail.warnAboutScript "UPOZORNENIE: JavaScript môže byť príčinou problémov.">
 
 <!-- editor.dtd -->
@@ -254,12 +254,12 @@
 <!ENTITY sb.prefs.advanced "Pokročilé">
 <!ENTITY sb.prefs.ui.contextMenu "Zobraziť v kontextovej ponuke prehliadača">
 <!ENTITY sb.prefs.ui.contextSubMenu "Podponuka">
-<!ENTITY sb.prefs.ui.bookmarkMenu "Zobraziť ponuku &apos;Vytvoriť záložku&apos;">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Zobraziť ponuku 'Vytvoriť záložku'">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Zobraziť maximálne">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "posledných použitých priečinkov">
 <!ENTITY sb.prefs.ui.menuBar "Zobraziť v ponukovej lište">
 <!ENTITY sb.prefs.ui.menuBar.icon "Ikona">
-<!ENTITY sb.prefs.ui.toolsMenu "Zobraziť v ponuke &apos;Nástroje&apos;">
+<!ENTITY sb.prefs.ui.toolsMenu "Zobraziť v ponuke 'Nástroje'">
 <!ENTITY sb.prefs.ui.statusBar "Zobraziť v stavovej lište">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
 <!ENTITY sb.prefs.desc.restart "Zmeny sa prejavia po reštarte Firefoxu.">
@@ -276,8 +276,8 @@
 <!ENTITY sb.prefs.tree.unshift.top "prvé miesto v priečinku">
 <!ENTITY sb.prefs.tree.unshift.bottom "posledné miesto v priečinku">
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
-<!ENTITY sb.prefs.showDetailOnDrop "Zobraziť dialóg &apos;Detail zachytenia&apos;, keď sa zachytenie vykoná pomocou drag-and-drop do bočného panelu">
-<!ENTITY sb.prefs.notifyOnComplete "Zobraziť oznámenie &apos;Zachytenie dokončené&apos;">
+<!ENTITY sb.prefs.showDetailOnDrop "Zobraziť dialóg 'Detail zachytenia', keď sa zachytenie vykoná pomocou drag-and-drop do bočného panelu">
+<!ENTITY sb.prefs.notifyOnComplete "Zobraziť oznámenie 'Zachytenie dokončené'">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">

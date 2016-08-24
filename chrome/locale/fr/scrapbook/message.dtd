@@ -26,13 +26,13 @@
 <!ENTITY sb.capture.filter.delete.tt "retirer le filtre de la liste">
 
 <!-- combine.dtd -->
-<!ENTITY sb.combine.dragdrop "Ajouter les éléments par glisser-déposer à partir de l&apos;arborescence dans l&apos;ordre de la combinaison désirée. Vous pouvez glisser-déposer plusieurs éléments à la fois.">
+<!ENTITY sb.combine.dragdrop "Ajouter les éléments par glisser-déposer à partir de l'arborescence dans l'ordre de la combinaison désirée. Vous pouvez glisser-déposer plusieurs éléments à la fois.">
 <!ENTITY sb.combine.preview "Aperçu">
-<!ENTITY sb.combine.preview.d "Presser le bouton &apos;Combiner&apos; après vérification de l&apos;aperçu.">
-<!ENTITY sb.combine.option.remove "Supprimer les pages d&apos;origine après combinaison">
-<!ENTITY sb.combine.up "Déplacer l&apos;élément vers le haut">
-<!ENTITY sb.combine.down "Déplacer l&apos;élément vers le bas">
-<!ENTITY sb.combine.remove "Retirer l&apos;élément">
+<!ENTITY sb.combine.preview.d "Presser le bouton 'Combiner' après vérification de l'aperçu.">
+<!ENTITY sb.combine.option.remove "Supprimer les pages d'origine après combinaison">
+<!ENTITY sb.combine.up "Déplacer l'élément vers le haut">
+<!ENTITY sb.combine.down "Déplacer l'élément vers le bas">
+<!ENTITY sb.combine.remove "Retirer l'élément">
 <!ENTITY sb.combine.newTitle "Nouveau titre">
 
 <!-- detail.dtd -->
@@ -69,12 +69,12 @@
 <!ENTITY sb.detail.linked.page "Capture en profondeur">
 <!ENTITY sb.detail.linked.page.desc "Une fois les captures terminées, toutes les pages seront liées entre elles et un plan du site sera créé.">
 <!ENTITY sb.detail.linked.page.depth "Profondeur de capture des liens">
-<!ENTITY sb.detail.warnAboutRenew "IMPORTANT : &apos;Capturer à nouveau&apos; remplace la page sauvegardée précédemment.">
+<!ENTITY sb.detail.warnAboutRenew "IMPORTANT : 'Capturer à nouveau' remplace la page sauvegardée précédemment.">
 <!ENTITY sb.detail.warnAboutScript "IMPORTANT : JavaScript peut causer des problèmes.">
 
 <!-- editor.dtd -->
-<!ENTITY sb.toolbar.edit "Barre d&apos;outils d&apos;édition">
-<!ENTITY sb.toolbar.info "Barre d&apos;information">
+<!ENTITY sb.toolbar.edit "Barre d'outils d'édition">
+<!ENTITY sb.toolbar.info "Barre d'information">
 <!ENTITY sb.edit.folderView "Click to view the data directory. Middle-click to open in a new tab.">
 <!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
 <!ENTITY sb.edit.undo "Annuler">
@@ -153,7 +153,7 @@
 <!ENTITY sb.highlighter "Surligneur">
 <!ENTITY sb.highlighter.remove "Clear ScrapBook Notes in the Selection">
 <!ENTITY sb.highlighter.remove.all "Clear all ScrapBook Notes">
-<!ENTITY sb.locate "Synchroniser avec l&apos;arborescence de la barre latérale">
+<!ENTITY sb.locate "Synchroniser avec l'arborescence de la barre latérale">
 <!ENTITY sb.indicators "Montrer les indicateurs de lien">
 <!ENTITY sb.info.home "Origine">
 <!ENTITY sb.info.sitemap "Plan du site">
@@ -194,7 +194,7 @@
 <!ENTITY sb.multiple.titleoflink "Titre du lien">
 <!ENTITY sb.multiple.title "Titre">
 <!ENTITY sb.multiple.url "URL (entrer les URL ligne par ligne)">
-<!ENTITY sb.multiple.detector "Détecteur d&apos;URL">
+<!ENTITY sb.multiple.detector "Détecteur d'URL">
 <!ENTITY sb.multiple.detector.plink "Tous les liens de la page">
 <!ENTITY sb.multiple.detector.slink "Tous les liens de la sélection">
 <!ENTITY sb.multiple.detector.tabs "Tous les onglets ouverts dans la fenêtre">
@@ -225,7 +225,7 @@
 <!ENTITY sb.note.exit.accesskey "X">
 
 <!-- output.dtd -->
-<!ENTITY sb.output.option.all "Sortie de l&apos;arborescence complète">
+<!ENTITY sb.output.option.all "Sortie de l'arborescence complète">
 <!ENTITY sb.output.option.frame "Sortie avec cadre">
 <!ENTITY sb.output.option.open "Après la sortie, ouvrir dans le navigateur">
 
@@ -254,13 +254,13 @@
 <!ENTITY sb.prefs.advanced "Avancés">
 <!ENTITY sb.prefs.ui.contextMenu "Afficher dans le menu contextuel du navigateur">
 <!ENTITY sb.prefs.ui.contextSubMenu "Sous-menu">
-<!ENTITY sb.prefs.ui.bookmarkMenu "Afficher le menu &apos;Marquer cette page avec ScrapBook&apos;">
-<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Afficher jusqu&apos;à">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Afficher le menu 'Marquer cette page avec ScrapBook'">
+<!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Afficher jusqu'à">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "dossiers récents">
 <!ENTITY sb.prefs.ui.menuBar "Afficher dans la barre des menus">
 <!ENTITY sb.prefs.ui.menuBar.icon "Icône">
-<!ENTITY sb.prefs.ui.toolsMenu "Afficher dans le menu &apos;Outils&apos;">
-<!ENTITY sb.prefs.ui.statusBar "Afficher dans la barre d&apos;état">
+<!ENTITY sb.prefs.ui.toolsMenu "Afficher dans le menu 'Outils'">
+<!ENTITY sb.prefs.ui.statusBar "Afficher dans la barre d'état">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
 <!ENTITY sb.prefs.desc.restart "La modification nécessite un redémarrage de Firefox">
 <!ENTITY sb.prefs.tabs.tips "Ouvrir dans un nouvel onglet pour les opérations suivantes">
@@ -269,15 +269,15 @@
 <!ENTITY sb.prefs.edit.insertDateFormat "Insert Date Format (strftime):">
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "Choisissez un répertoire où stocker les données ScrapBook">
-<!ENTITY sb.prefs.confirmDelete "M&apos;alerter lors de la suppression d&apos;élément(s) de l&apos;arborescence">
+<!ENTITY sb.prefs.confirmDelete "M'alerter lors de la suppression d'élément(s) de l'arborescence">
 <!ENTITY sb.prefs.captureDefault "Default capture settings">
-<!ENTITY sb.prefs.tree.autoCollapse "Lors de l&apos;ouverture d&apos;un dossier de l&apos;arborescence, fermer automatiquement les autres dossiers">
+<!ENTITY sb.prefs.tree.autoCollapse "Lors de l'ouverture d'un dossier de l'arborescence, fermer automatiquement les autres dossiers">
 <!ENTITY sb.prefs.tree.unshift "Placer un nouvel élément dans">
-<!ENTITY sb.prefs.tree.unshift.top "le haut d&apos;un dossier">
-<!ENTITY sb.prefs.tree.unshift.bottom "le bas d&apos;un dossier">
+<!ENTITY sb.prefs.tree.unshift.top "le haut d'un dossier">
+<!ENTITY sb.prefs.tree.unshift.bottom "le bas d'un dossier">
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
-<!ENTITY sb.prefs.showDetailOnDrop "Afficher la boîte de dialogue &apos;Détail de la capture&apos; lors de la capture par un glisser-déposer dans le panneau latéral">
-<!ENTITY sb.prefs.notifyOnComplete "Afficher la notification &apos;Capture terminée&apos;">
+<!ENTITY sb.prefs.showDetailOnDrop "Afficher la boîte de dialogue 'Détail de la capture' lors de la capture par un glisser-déposer dans le panneau latéral">
+<!ENTITY sb.prefs.notifyOnComplete "Afficher la notification 'Capture terminée'">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
@@ -308,13 +308,13 @@
 
 <!-- repair.dtd -->
 <!ENTITY sb.repair.rdfFile "Restaurer scrapbook.rdf">
-<!ENTITY sb.repair.rdfFile.descript "Essayez cela si l&apos;arborescence de ScrapBook disparaît brutalement.">
+<!ENTITY sb.repair.rdfFile.descript "Essayez cela si l'arborescence de ScrapBook disparaît brutalement.">
 <!ENTITY sb.repair.rdfFile.select "Selectionnez un fichier de sauvegarde pour la restauration.">
 <!ENTITY sb.repair.rdfFile.file "Fichier">
 <!ENTITY sb.repair.rdfFile.time "Date/Heure">
 <!ENTITY sb.repair.rdfFile.size "Taille">
-<!ENTITY sb.repair.favicons "Restaurer les favicônes dans l&apos;arborescence">
-<!ENTITY sb.repair.favicons.descript "Essayez cela si plusieurs favicônes disparaissent de l&apos;arborescence de ScrapBook.">
+<!ENTITY sb.repair.favicons "Restaurer les favicônes dans l'arborescence">
+<!ENTITY sb.repair.favicons.descript "Essayez cela si plusieurs favicônes disparaissent de l'arborescence de ScrapBook.">
 <!ENTITY sb.repair.complete "Terminé.">
 
 <!-- scrapbook.dtd -->
@@ -327,9 +327,9 @@
 <!ENTITY sb.tools.multiple "Capturer des URLs multiples">
 <!ENTITY sb.tools.directory "Répertoire de ScrapBook">
 <!ENTITY sb.tools.calculate "Calcul de la taille">
-<!ENTITY sb.tools.sorttree "Classer l&apos;arborescence entière">
+<!ENTITY sb.tools.sorttree "Classer l'arborescence entière">
 <!ENTITY sb.tools.output "Arborescence en HTML">
-<!ENTITY sb.tools.repair "Réparation d&apos;urgence">
+<!ENTITY sb.tools.repair "Réparation d'urgence">
 <!ENTITY sb.tools.addons "Fonctions additionnelles">
 <!ENTITY sb.note.opentab "Éditer dans un onglet">
 
@@ -357,10 +357,10 @@
 <!-- trade.dtd -->
 <!ENTITY sb.trade.import "Importer">
 <!ENTITY sb.trade.export "Exporter">
-<!ENTITY sb.trade.time "Date d&apos;exportation">
+<!ENTITY sb.trade.time "Date d'exportation">
 <!ENTITY sb.trade.update "Import as latest ScrapBook X format">
 <!ENTITY sb.trade.restore "Importer avec la structure du dossier à restaurer">
-<!ENTITY sb.trade.remove "Supprimer les fichiers après l&apos;importation">
+<!ENTITY sb.trade.remove "Supprimer les fichiers après l'importation">
 <!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">
 
 <!-- tree.dtd -->
@@ -368,7 +368,7 @@
 <!ENTITY sb.open.native "Open in Default Program">
 <!ENTITY sb.open.tab "Ouvrir dans un onglet">
 <!ENTITY sb.open.newtab "Ouvrir dans un nouvel onglet">
-<!ENTITY sb.open.source "Ouvrir l&apos;URL de la source">
+<!ENTITY sb.open.source "Ouvrir l'URL de la source">
 <!ENTITY sb.multi "Multi-ScrapBook">
 <!ENTITY sb.show.files "Afficher les fichiers">
 <!ENTITY sb.move "Déplacer">
@@ -400,7 +400,7 @@
 <!ENTITY sb.search.re "Utiliser une expression régulière (RegExp)">
 <!ENTITY sb.search.cs "Respecter la casse">
 <!ENTITY sb.search.cache "Mettre à jour le cache pour la recherche sur texte entier">
-<!ENTITY sb.search.clear "Nettoyer l&apos;historique">
+<!ENTITY sb.search.clear "Nettoyer l'historique">
 <!ENTITY sb.search.days "Filtre par jour">
 <!ENTITY mb.manage "Gérer">
 <!ENTITY mb.profileFolder "Dossier du profil">

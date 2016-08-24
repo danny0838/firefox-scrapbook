@@ -26,9 +26,9 @@
 <!ENTITY sb.capture.filter.delete.tt "borrar filtro de la lista">
 
 <!-- combine.dtd -->
-<!ENTITY sb.combine.dragdrop "Añadir elementos &apos;Arrastrando y Soltando&apos; desde el árbol, en el orden en el que quiera combinarlos. Puede &apos;arrastrar y soltar&apos; varios elementos a la vez.">
+<!ENTITY sb.combine.dragdrop "Añadir elementos 'Arrastrando y Soltando' desde el árbol, en el orden en el que quiera combinarlos. Puede 'arrastrar y soltar' varios elementos a la vez.">
 <!ENTITY sb.combine.preview "Previsualización">
-<!ENTITY sb.combine.preview.d "Pulsar el botón &apos;Combinar&apos; después de verificar la previsualización.">
+<!ENTITY sb.combine.preview.d "Pulsar el botón 'Combinar' después de verificar la previsualización.">
 <!ENTITY sb.combine.option.remove "Después de completar la combinación, borrar las páginas originales">
 <!ENTITY sb.combine.up "subir elemento">
 <!ENTITY sb.combine.down "bajar elemento">
@@ -69,7 +69,7 @@
 <!ENTITY sb.detail.linked.page "Captura de enlaces en varios niveles">
 <!ENTITY sb.detail.linked.page.desc "Después de completar las capturas, todas las páginas estarán enlazadas entre ellas, y será creado un mapa del sitio.">
 <!ENTITY sb.detail.linked.page.depth "Nivel de profundidad de enlaces">
-<!ENTITY sb.detail.warnAboutRenew "NOTA: &apos;Capturar Otra vez&apos; sobre-escribe la página guardada previamente.">
+<!ENTITY sb.detail.warnAboutRenew "NOTA: 'Capturar Otra vez' sobre-escribe la página guardada previamente.">
 <!ENTITY sb.detail.warnAboutScript "NOTA: JavaScript puede causar algunos problemas.">
 
 <!-- editor.dtd -->
@@ -254,12 +254,12 @@
 <!ENTITY sb.prefs.advanced "Avanzado">
 <!ENTITY sb.prefs.ui.contextMenu "Mostrar en menú contextual del navegador">
 <!ENTITY sb.prefs.ui.contextSubMenu "Submenú">
-<!ENTITY sb.prefs.ui.bookmarkMenu "Muestra el menú &apos;Marcar con Scrapbook&apos;">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Muestra el menú 'Marcar con Scrapbook'">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Mostrar hasta">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "carpetas usadas recientemente">
 <!ENTITY sb.prefs.ui.menuBar "Mostrar en la barra de Menú">
 <!ENTITY sb.prefs.ui.menuBar.icon "Icono">
-<!ENTITY sb.prefs.ui.toolsMenu "Mostrar en el menú &apos;Herramientas&apos;">
+<!ENTITY sb.prefs.ui.toolsMenu "Mostrar en el menú 'Herramientas'">
 <!ENTITY sb.prefs.ui.statusBar "Mostrar en la barra de estado">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
 <!ENTITY sb.prefs.desc.restart "El cambio requiere reiniciar Firefox">
@@ -276,8 +276,8 @@
 <!ENTITY sb.prefs.tree.unshift.top "la parte alta de una carpeta">
 <!ENTITY sb.prefs.tree.unshift.bottom "la parte baja de una carpeta">
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
-<!ENTITY sb.prefs.showDetailOnDrop "Mostrar el diálogo &apos;Detalles de Captura&apos; cuando se capture mediante &apos;arrastrar y soltar&apos; en la barra lateral">
-<!ENTITY sb.prefs.notifyOnComplete "Mostrar notificación de &apos;Captura Finalizada&apos;">
+<!ENTITY sb.prefs.showDetailOnDrop "Mostrar el diálogo 'Detalles de Captura' cuando se capture mediante 'arrastrar y soltar' en la barra lateral">
+<!ENTITY sb.prefs.notifyOnComplete "Mostrar notificación de 'Captura Finalizada'">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">

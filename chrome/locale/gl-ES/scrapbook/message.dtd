@@ -28,7 +28,7 @@
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Engadir elementos, na orde desexada, arrastrando e soltando desde a colección . Pode mover varios elementos á vez.">
 <!ENTITY sb.combine.preview "Previsualizar">
-<!ENTITY sb.combine.preview.d "Prema &apos;Combinar&apos; despois de revisar a previsualización.">
+<!ENTITY sb.combine.preview.d "Prema 'Combinar' despois de revisar a previsualización.">
 <!ENTITY sb.combine.option.remove "Despois de completar a combinación, eliminar as páxinas orixinais">
 <!ENTITY sb.combine.up "Mover cara arriba">
 <!ENTITY sb.combine.down "Mover cara abaixo">
@@ -69,7 +69,7 @@
 <!ENTITY sb.detail.linked.page "Captura en niveis">
 <!ENTITY sb.detail.linked.page.desc "Despois de completar as capturas, todas as páxinas serán ligadas e crearase un mapa web">
 <!ENTITY sb.detail.linked.page.depth "Número de niveis">
-<!ENTITY sb.detail.warnAboutRenew "AVISO: &apos;Capturar outra vez&apos;">
+<!ENTITY sb.detail.warnAboutRenew "AVISO: 'Capturar outra vez'">
 <!ENTITY sb.detail.warnAboutScript "AVISO: JavaScrip pode producir un funcionamento anormal.">
 
 <!-- editor.dtd -->
@@ -254,12 +254,12 @@
 <!ENTITY sb.prefs.advanced "Avanzado">
 <!ENTITY sb.prefs.ui.contextMenu "Amosar no menú contextual">
 <!ENTITY sb.prefs.ui.contextSubMenu "Submenú">
-<!ENTITY sb.prefs.ui.bookmarkMenu "Amosar o menú &apos;Marcar co ScrapBook&apos;">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Amosar o menú 'Marcar co ScrapBook'">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Amosar até">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "cartafoles usados recentemente">
 <!ENTITY sb.prefs.ui.menuBar "Amosar na barra do menú">
 <!ENTITY sb.prefs.ui.menuBar.icon "Icona">
-<!ENTITY sb.prefs.ui.toolsMenu "Amosar no menú &apos;Ferramentas&apos;">
+<!ENTITY sb.prefs.ui.toolsMenu "Amosar no menú 'Ferramentas'">
 <!ENTITY sb.prefs.ui.statusBar "Amosar na barra de estado">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
 <!ENTITY sb.prefs.desc.restart "É necesario reiniciar o Firefox despois dos cambios.">
@@ -276,8 +276,8 @@
 <!ENTITY sb.prefs.tree.unshift.top "na parte superior do cartafol">
 <!ENTITY sb.prefs.tree.unshift.bottom "na parte inferior do cartafol">
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
-<!ENTITY sb.prefs.showDetailOnDrop "Amosar o diálogo &apos;Detalles da captura&apos; cando se capture arrastrando e soltando sobre o panel lateral">
-<!ENTITY sb.prefs.notifyOnComplete "Amosar o aviso de &apos;Captura completada&apos;">
+<!ENTITY sb.prefs.showDetailOnDrop "Amosar o diálogo 'Detalles da captura' cando se capture arrastrando e soltando sobre o panel lateral">
+<!ENTITY sb.prefs.notifyOnComplete "Amosar o aviso de 'Captura completada'">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">

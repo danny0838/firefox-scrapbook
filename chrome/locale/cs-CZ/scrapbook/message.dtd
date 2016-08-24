@@ -69,7 +69,7 @@
 <!ENTITY sb.detail.linked.page "Hloubkové zachycení">
 <!ENTITY sb.detail.linked.page.desc "Po dokončení zachycení budou všechny stránky vzájemně propojeny a dojde k vytvoření mapy stránek.">
 <!ENTITY sb.detail.linked.page.depth "Hloubkově procházet odkazy">
-<!ENTITY sb.detail.warnAboutRenew "POZNÁMKA: &apos;Zachytit znovu&apos; přepíše předchozí uloženou stránku.">
+<!ENTITY sb.detail.warnAboutRenew "POZNÁMKA: 'Zachytit znovu' přepíše předchozí uloženou stránku.">
 <!ENTITY sb.detail.warnAboutScript "POZNÁMKA: JavaScript může způsobit některé problémy.">
 
 <!-- editor.dtd -->
@@ -254,12 +254,12 @@
 <!ENTITY sb.prefs.advanced "Pokročilé">
 <!ENTITY sb.prefs.ui.contextMenu "Zobrazit v místní nabídce prohlížeče">
 <!ENTITY sb.prefs.ui.contextSubMenu "Podnabídka">
-<!ENTITY sb.prefs.ui.bookmarkMenu "Zobrazit nabídku &apos;Uložit do ScrapBooku&apos;">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Zobrazit nabídku 'Uložit do ScrapBooku'">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Zobrazit maximálně">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "posledních použitých složek">
 <!ENTITY sb.prefs.ui.menuBar "Zobrazit v liště nabídek">
 <!ENTITY sb.prefs.ui.menuBar.icon "Ikona">
-<!ENTITY sb.prefs.ui.toolsMenu "Zobrazit v nabídce položku &apos;Nástroje&apos;">
+<!ENTITY sb.prefs.ui.toolsMenu "Zobrazit v nabídce položku 'Nástroje'">
 <!ENTITY sb.prefs.ui.statusBar "Zobrazit ve stavové liště">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
 <!ENTITY sb.prefs.desc.restart "Změna vyžaduje restart aplikace Firefox.">
@@ -276,8 +276,8 @@
 <!ENTITY sb.prefs.tree.unshift.top "první místo ve složce">
 <!ENTITY sb.prefs.tree.unshift.bottom "poslední místo ve složce">
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
-<!ENTITY sb.prefs.showDetailOnDrop "Zobrazit dialogové okno &apos;Zachytit detail&apos; při zachycování přetažením do postranní lišty">
-<!ENTITY sb.prefs.notifyOnComplete "Zobrazit oznámení &apos;Zachycení dokončeno&apos;">
+<!ENTITY sb.prefs.showDetailOnDrop "Zobrazit dialogové okno 'Zachytit detail' při zachycování přetažením do postranní lišty">
+<!ENTITY sb.prefs.notifyOnComplete "Zobrazit oznámení 'Zachycení dokončeno'">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">

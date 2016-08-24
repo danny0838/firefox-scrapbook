@@ -28,8 +28,8 @@
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Aggiungere elementi da unire tramite trascinamento e rilascio dal diagramma delle cartelle. È possibile trascinare e rilasciare molteplici elementi contemporaneamente">
 <!ENTITY sb.combine.preview "Anteprima">
-<!ENTITY sb.combine.preview.d "Premere &apos;Unisci&apos; dopo aver verificato l&apos;anteprima">
-<!ENTITY sb.combine.option.remove "Dopo aver completato l&apos;unione, eliminare la pagina originale">
+<!ENTITY sb.combine.preview.d "Premere 'Unisci' dopo aver verificato l'anteprima">
+<!ENTITY sb.combine.option.remove "Dopo aver completato l'unione, eliminare la pagina originale">
 <!ENTITY sb.combine.up "Sposta su">
 <!ENTITY sb.combine.down "Sposta giù">
 <!ENTITY sb.combine.remove "Elimina">
@@ -69,7 +69,7 @@
 <!ENTITY sb.detail.linked.page "Livello di cattura dei link presenti nelle pagine web">
 <!ENTITY sb.detail.linked.page.desc "Dopo aver completato la cattura, tutte le pagine verranno elencate e verrà creata una mappa del sito">
 <!ENTITY sb.detail.linked.page.depth "Cattura fino al seguente livello">
-<!ENTITY sb.detail.warnAboutRenew "AVVISO: l&apos;opzione &apos;Cattura ancora&apos; sovrascrive le pagine precedentemente salvate">
+<!ENTITY sb.detail.warnAboutRenew "AVVISO: l'opzione 'Cattura ancora' sovrascrive le pagine precedentemente salvate">
 <!ENTITY sb.detail.warnAboutScript "AVVISO: gli JavaScript potrebbero causare problemi">
 
 <!-- editor.dtd -->
@@ -79,7 +79,7 @@
 <!ENTITY sb.edit.eraser "DOM Eraser - Delete unwanted elements or ScrapBook notes.">
 <!ENTITY sb.edit.undo "Annulla">
 <!ENTITY sb.edit.save "Salva">
-<!ENTITY sb.edit.comment "Espandi/contrai l&apos;area per il commento">
+<!ENTITY sb.edit.comment "Espandi/contrai l'area per il commento">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Aggiungi annotazione in linea alla selezione">
@@ -211,7 +211,7 @@
 <!ENTITY sb.note.normalview "Visualizzazione normale">
 <!ENTITY sb.note.template "Modifica modello HTML">
 <!ENTITY sb.note.autolinefeed "Tag automatico a fine riga">
-<!ENTITY sb.note.autolinefeed.t "Aggiungi il tag &lt;br&gt; a fine riga nell&apos;anteprima HTML">
+<!ENTITY sb.note.autolinefeed.t "Aggiungi il tag &lt;br&gt; a fine riga nell'anteprima HTML">
 <!ENTITY sb.note.fontsize "Grandezza carattere">
 <!ENTITY sb.note.help "Contenuti guida">
 <!ENTITY sb.note.print "Stampa">
@@ -225,9 +225,9 @@
 <!ENTITY sb.note.exit.accesskey "E">
 
 <!-- output.dtd -->
-<!ENTITY sb.output.option.all "Esporta l&apos;intero diagramma">
+<!ENTITY sb.output.option.all "Esporta l'intero diagramma">
 <!ENTITY sb.output.option.frame "Esporta il riquadro">
-<!ENTITY sb.output.option.open "Dopo l&apos;esportazione degli elementi, aprili nel browser">
+<!ENTITY sb.output.option.open "Dopo l'esportazione degli elementi, aprili nel browser">
 
 <!-- overlay.dtd -->
 <!ENTITY sb.capture.partial "Cattura selezione">
@@ -253,14 +253,14 @@
 <!ENTITY sb.prefs.organize "Gestione">
 <!ENTITY sb.prefs.advanced "Avanzate">
 <!ENTITY sb.prefs.ui.contextMenu "Mostra gli elementi di ScrapBook nel menu contestuale del browser">
-<!ENTITY sb.prefs.ui.contextSubMenu "Mostra gli elementi come sottomenu della voce &apos;ScrapBook&apos;">
-<!ENTITY sb.prefs.ui.bookmarkMenu "Mostra &apos;Nei segnalibri con ScrapBook&apos;">
+<!ENTITY sb.prefs.ui.contextSubMenu "Mostra gli elementi come sottomenu della voce 'ScrapBook'">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Mostra 'Nei segnalibri con ScrapBook'">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Cartelle recentemente utilizzate da mostrare:">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 " ">
-<!ENTITY sb.prefs.ui.menuBar "Mostra la voce &apos;ScrapBook&apos; nella barra dei menu">
+<!ENTITY sb.prefs.ui.menuBar "Mostra la voce 'ScrapBook' nella barra dei menu">
 <!ENTITY sb.prefs.ui.menuBar.icon "Mostra come icona">
-<!ENTITY sb.prefs.ui.toolsMenu "Mostra la voce &apos;ScrapBook&apos; nel menu &quot;Strumenti&quot;">
-<!ENTITY sb.prefs.ui.statusBar "Mostra l&apos;icona di ScrapBook nella barra di stato">
+<!ENTITY sb.prefs.ui.toolsMenu "Mostra la voce 'ScrapBook' nel menu &quot;Strumenti&quot;">
+<!ENTITY sb.prefs.ui.statusBar "Mostra l'icona di ScrapBook nella barra di stato">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
 <!ENTITY sb.prefs.desc.restart "Riavviare il browser per rendere effettive le modifiche">
 <!ENTITY sb.prefs.tabs.tips "Azioni che verranno eseguite in nuove schede">
@@ -276,8 +276,8 @@
 <!ENTITY sb.prefs.tree.unshift.top "in cima alla cartella">
 <!ENTITY sb.prefs.tree.unshift.bottom "in fondo alla cartella">
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
-<!ENTITY sb.prefs.showDetailOnDrop "Mostra la finestra di dialogo &apos;Dettagli cattura&apos; quando si cattura tramite trascinamento e rilascio nella barra laterale">
-<!ENTITY sb.prefs.notifyOnComplete "Mostra la finestra di notifica &apos;Cattura completata&apos;">
+<!ENTITY sb.prefs.showDetailOnDrop "Mostra la finestra di dialogo 'Dettagli cattura' quando si cattura tramite trascinamento e rilascio nella barra laterale">
+<!ENTITY sb.prefs.notifyOnComplete "Mostra la finestra di notifica 'Cattura completata'">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
@@ -302,7 +302,7 @@
 <!ENTITY sb.prop.icon.change "Cambia">
 <!ENTITY sb.prop.icon.default "Predefinita">
 <!ENTITY sb.prop.icon.favicon "Seleziona una favicon">
-<!ENTITY sb.prop.icon.custom "Seleziona un&apos;icona personale">
+<!ENTITY sb.prop.icon.custom "Seleziona un'icona personale">
 <!ENTITY sb.prop.mark "Segna">
 <!ENTITY sb.prop.lock "Lock">
 
@@ -329,7 +329,7 @@
 <!ENTITY sb.tools.calculate "Calcola la dimensione">
 <!ENTITY sb.tools.sorttree "Ordina il diagramma delle cartelle">
 <!ENTITY sb.tools.output "Esporta il diagramma delle cartelle come file HTML">
-<!ENTITY sb.tools.repair "Riparazione d&apos;emergenza">
+<!ENTITY sb.tools.repair "Riparazione d'emergenza">
 <!ENTITY sb.tools.addons "Funzioni dei componenti aggiuntivi">
 <!ENTITY sb.note.opentab "Apri in una scheda">
 
@@ -360,7 +360,7 @@
 <!ENTITY sb.trade.time "Data/ora della cattura">
 <!ENTITY sb.trade.update "Import as latest ScrapBook X format">
 <!ENTITY sb.trade.restore "Importa e ripristina la struttura della cartella">
-<!ENTITY sb.trade.remove "Elimina i file dopo l&apos;importazione">
+<!ENTITY sb.trade.remove "Elimina i file dopo l'importazione">
 <!ENTITY sb.trade.exportFolder "Export folder items (re-import with care)">
 
 <!-- tree.dtd -->
@@ -368,7 +368,7 @@
 <!ENTITY sb.open.native "Open in Default Program">
 <!ENTITY sb.open.tab "Apri in una scheda">
 <!ENTITY sb.open.newtab "Apri in una nuova scheda">
-<!ENTITY sb.open.source "Apri l&apos;indirizzo web sorgente">
+<!ENTITY sb.open.source "Apri l'indirizzo web sorgente">
 <!ENTITY sb.multi "Multi-ScrapBook">
 <!ENTITY sb.show.files "Visualizza i file">
 <!ENTITY sb.move "Sposta">

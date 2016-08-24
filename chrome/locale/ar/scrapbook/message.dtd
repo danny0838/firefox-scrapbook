@@ -28,7 +28,7 @@
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "اضافة عناصر بالسحب والإفلات من القائمة بالترتيب الذي تريد  الجمع به. يمكنك سحب و إفلات عناصر متعددة معاً.">
 <!ENTITY sb.combine.preview "معاينة">
-<!ENTITY sb.combine.preview.d "إضغط &apos;جمع&apos; بعد التأكد بالمعاينة.">
+<!ENTITY sb.combine.preview.d "إضغط 'جمع' بعد التأكد بالمعاينة.">
 <!ENTITY sb.combine.option.remove "بعد إكمال الجمع, أزل الصفحات الأصلية.">
 <!ENTITY sb.combine.up "انقل العنصر للأعلى">
 <!ENTITY sb.combine.down "انقل العنصر للأسفل">
@@ -69,7 +69,7 @@
 <!ENTITY sb.detail.linked.page "إلتقاط في العمق">
 <!ENTITY sb.detail.linked.page.desc "بعد إتمام الالتقاط, سيتم ربط الصفحات مع بعضها و عمل خريطة الموقع.">
 <!ENTITY sb.detail.linked.page.depth "عمق الارتباطات">
-<!ENTITY sb.detail.warnAboutRenew "لاحظ: &apos;الالتقاط مجدداً&apos; يكتب فوق الصفحات المحفوظة.">
+<!ENTITY sb.detail.warnAboutRenew "لاحظ: 'الالتقاط مجدداً' يكتب فوق الصفحات المحفوظة.">
 <!ENTITY sb.detail.warnAboutScript "لاحظ: نصوص-الجافا  قد تؤدي الى بعض المشاكل.">
 
 <!-- editor.dtd -->
@@ -254,12 +254,12 @@
 <!ENTITY sb.prefs.advanced "متقدم">
 <!ENTITY sb.prefs.ui.contextMenu "عرض في قائمة النص في المتصفح">
 <!ENTITY sb.prefs.ui.contextSubMenu "قائمة فرعية">
-<!ENTITY sb.prefs.ui.bookmarkMenu "عرض قائمة&apos;اشارة مرجعية مع ScrapBook&apos;">
+<!ENTITY sb.prefs.ui.bookmarkMenu "عرض قائمة'اشارة مرجعية مع ScrapBook'">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "إعرض حتى">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "دليل مستخدم  مؤخراً">
 <!ENTITY sb.prefs.ui.menuBar "عرض في شريط القوائم">
 <!ENTITY sb.prefs.ui.menuBar.icon "رمز">
-<!ENTITY sb.prefs.ui.toolsMenu "عرض في قائمة &apos;الأدوات&apos;">
+<!ENTITY sb.prefs.ui.toolsMenu "عرض في قائمة 'الأدوات'">
 <!ENTITY sb.prefs.ui.statusBar "عرض في شريط الحالة">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
 <!ENTITY sb.prefs.desc.restart "التغيير يتطلب إعادة تشغيل فيرفوكس.">
@@ -276,8 +276,8 @@
 <!ENTITY sb.prefs.tree.unshift.top "أعلى المجلد">
 <!ENTITY sb.prefs.tree.unshift.bottom "أسفل المجلد">
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
-<!ENTITY sb.prefs.showDetailOnDrop "عرض مربع&apos;تفاصيل الإلتقاط&apos; عند الإلتقاط بالسحب و الإفلات داخل الشريط الجانبي">
-<!ENTITY sb.prefs.notifyOnComplete "عرض تنبيه &apos;تم الإلتقاط&apos;">
+<!ENTITY sb.prefs.showDetailOnDrop "عرض مربع'تفاصيل الإلتقاط' عند الإلتقاط بالسحب و الإفلات داخل الشريط الجانبي">
+<!ENTITY sb.prefs.notifyOnComplete "عرض تنبيه 'تم الإلتقاط'">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
@@ -344,7 +344,7 @@
 <!ENTITY sb.sort.grouping "Group by Type">
 <!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
 <!ENTITY sb.sort.recursive "ترتيب المجلدات الفرعية تبعا">
-<!ENTITY sb.sort.warning "انتبه: لا يمكنك&apos; التراجع عن العملية.">
+<!ENTITY sb.sort.warning "انتبه: لا يمكنك' التراجع عن العملية.">
 
 <!-- templateHelp.dtd -->
 <!ENTITY sb.thelp.dir "rtl">
