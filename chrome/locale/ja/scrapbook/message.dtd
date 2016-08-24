@@ -51,13 +51,13 @@
 <!ENTITY sb.detail.option.scripts "スクリプト">
 <!ENTITY sb.detail.option.tidyCss "CSSの処理">
 <!ENTITY sb.detail.option.tidyCss.0 "なし">
-<!ENTITY sb.detail.option.tidyCss.0.desc "Save as-is. Links may be broken.">
+<!ENTITY sb.detail.option.tidyCss.0.help "Save as-is. Links may be broken.">
 <!ENTITY sb.detail.option.tidyCss.1 "リンクを変更">
-<!ENTITY sb.detail.option.tidyCss.1.desc "CSS with highly complicated syntax might not be processed correctly.">
+<!ENTITY sb.detail.option.tidyCss.1.help "CSS with highly complicated syntax might not be processed correctly.">
 <!ENTITY sb.detail.option.tidyCss.2 "リンクを変更；未知を削除">
-<!ENTITY sb.detail.option.tidyCss.2.desc "Comments and browser unsupported CSS declaration will be removed.">
+<!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "リンクを変更；未知と未使用を削除">
-<!ENTITY sb.detail.option.tidyCss.3.desc "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
 <!ENTITY sb.detail.option.saveDataUri "ファイルとしてデータURIを保存">
 <!ENTITY sb.detail.option.fileAsHtml "HTMLとして取り込み">
 <!ENTITY sb.detail.linked.file "リンク先ファイルのダウンロード">
@@ -342,7 +342,7 @@
 <!ENTITY sb.sort.modify "変更時間でソート">
 <!ENTITY sb.sort.descending "下行">
 <!ENTITY sb.sort.grouping "形式によってグループ化">
-<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
+<!ENTITY sb.sort.grouping.help "Sort with items grouped by folder, page, note page, and note">
 <!ENTITY sb.sort.recursive "サブフォルダ内も再帰的にソートする">
 <!ENTITY sb.sort.warning "注意：ソートを実行すると元には戻せません。">
 

@@ -67,10 +67,10 @@
                         <label value="&sb.detail.option.tidyCss;:" />
                         <menulist id="sbDetailOptionTidyCss" value="3">
                             <menupopup>
-                                <menuitem value="0" label="&sb.detail.option.tidyCss.0;" tooltiptext="&sb.detail.option.tidyCss.0.desc;" />
-                                <menuitem value="1" label="&sb.detail.option.tidyCss.1;" tooltiptext="&sb.detail.option.tidyCss.1.desc;" />
-                                <menuitem value="2" label="&sb.detail.option.tidyCss.2;" tooltiptext="&sb.detail.option.tidyCss.2.desc;" />
-                                <menuitem value="3" label="&sb.detail.option.tidyCss.3;" tooltiptext="&sb.detail.option.tidyCss.3.desc;" />
+                                <menuitem value="0" label="&sb.detail.option.tidyCss.0;" tooltiptext="&sb.detail.option.tidyCss.0.help;" />
+                                <menuitem value="1" label="&sb.detail.option.tidyCss.1;" tooltiptext="&sb.detail.option.tidyCss.1.help;" />
+                                <menuitem value="2" label="&sb.detail.option.tidyCss.2;" tooltiptext="&sb.detail.option.tidyCss.2.help;" />
+                                <menuitem value="3" label="&sb.detail.option.tidyCss.3;" tooltiptext="&sb.detail.option.tidyCss.3.help;" />
                             </menupopup>
                         </menulist>
                     </hbox>
