@@ -58,17 +58,19 @@
             <label value="&sb.detail.linked.timeout;:" />
             <textbox id="sbCaptureTimeout" type="number" size="3" value="0" min="0" />
         </hbox>
-        <label value="&sb.detail.linked.charset;:" />
-        <menulist id="sbCaptureCharset" editable="true">
-            <menupopup>
-                <menuitem value="" label="" selected="true" />
-                <menuitem value="ISO-8859-1" label="ISO-8859-1" />
-                <menuitem value="BIG5" label="BIG5" />
-                <menuitem value="GBK" label="GBK" />
-                <menuitem value="SHIFT-JIS" label="SHIFT_JIS" />
-                <menuitem value="UTF-8" label="UTF-8" />
-            </menupopup>
-        </menulist>
+        <hbox align="center" tooltiptext="&sb.detail.linked.charset.help;">
+            <label value="&sb.detail.linked.charset;:" />
+            <menulist id="sbCaptureCharset" editable="true">
+                <menupopup>
+                    <menuitem value="" label="" selected="true" />
+                    <menuitem value="ISO-8859-1" label="ISO-8859-1" />
+                    <menuitem value="BIG5" label="BIG5" />
+                    <menuitem value="GBK" label="GBK" />
+                    <menuitem value="SHIFT-JIS" label="SHIFT_JIS" />
+                    <menuitem value="UTF-8" label="UTF-8" />
+                </menupopup>
+            </menulist>
+        </hbox>
     </hbox>
 
     <checkbox id="sbCaptureFilterToggle" label="&sb.capture.filter;" checked="false" oncommand="sbCaptureTask.toggleFilterBox(event);" />

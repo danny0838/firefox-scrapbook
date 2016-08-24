@@ -38,7 +38,8 @@
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Limit czasu (s)">
 <!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
-<!ENTITY sb.detail.linked.charset "Loading charset">
+<!ENTITY sb.detail.linked.charset "Zestaw znaków">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail "Szczegóły przechwytywania">
 <!ENTITY sb.detail.new.folder "Nowy folder">
 <!ENTITY sb.detail.select.folder "Wybierz folder">
