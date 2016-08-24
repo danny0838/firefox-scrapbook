@@ -19,25 +19,27 @@
 <!ENTITY sb.capture.filter.column.rule "显示/隐藏">
 <!ENTITY sb.capture.filter.column.content "过滤规则（正则表达式）">
 <!ENTITY sb.capture.filter.accept "接受">
-<!ENTITY sb.capture.filter.accept.tt "修改或编辑值">
+<!ENTITY sb.capture.filter.accept.help "修改或编辑值">
 <!ENTITY sb.capture.filter.cancel "取消">
-<!ENTITY sb.capture.filter.cancel.tt "中止编辑">
+<!ENTITY sb.capture.filter.cancel.help "中止编辑">
 <!ENTITY sb.capture.filter.delete "删除">
-<!ENTITY sb.capture.filter.delete.tt "从列表中移除过滤规则">
+<!ENTITY sb.capture.filter.delete.help "从列表中移除过滤规则">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "从树中拖拽您希望合并的条目到表中。您可以一次拖拽多个条目。">
 <!ENTITY sb.combine.preview "预览">
 <!ENTITY sb.combine.preview.d "预览确认无误后单击“合并”。">
 <!ENTITY sb.combine.option.remove "合并完成后删除原始页面">
-<!ENTITY sbp.combine.up "上移条目">
-<!ENTITY sbp.combine.down "下移条目">
-<!ENTITY sbp.combine.remove "移除条目">
-<!ENTITY sbp.combine.newTitle "新标题">
+<!ENTITY sb.combine.up "上移条目">
+<!ENTITY sb.combine.down "下移条目">
+<!ENTITY sb.combine.remove "移除条目">
+<!ENTITY sb.combine.newTitle "新标题">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.linked.timeout "超时 (秒)">
-<!ENTITY sb.detail.linked.charset "用这个字符集载入">
+<!ENTITY sb.detail.linked.timeout "等候 (秒)">
+<!ENTITY sb.detail.linked.timeout.help "获取下一个 URL 之前的等候时间。">
+<!ENTITY sb.detail.linked.charset "字符集">
+<!ENTITY sb.detail.linked.charset.help "强制使用这个字符集载入页面。留空则自动侦测。">
 <!ENTITY sb.detail "详细信息">
 <!ENTITY sb.detail.new.folder "新建文件夹">
 <!ENTITY sb.detail.select.folder "选择文件夹">
@@ -51,13 +53,13 @@
 <!ENTITY sb.detail.option.scripts "动态脚本">
 <!ENTITY sb.detail.option.tidyCss "CSS 处理">
 <!ENTITY sb.detail.option.tidyCss.0 "不改写">
-<!ENTITY sb.detail.option.tidyCss.0.desc "完全按原样存档，可能会导致连结失效">
-<!ENTITY sb.detail.option.tidyCss.1 "改写超连结">
-<!ENTITY sb.detail.option.tidyCss.1.desc "一些语法结构复杂的 CSS 可能无法正确​​处理">
-<!ENTITY sb.detail.option.tidyCss.2 "改写超连结，移除未知者">
-<!ENTITY sb.detail.option.tidyCss.2.desc "移​​除注解及浏览器无法识别的样式宣告">
-<!ENTITY sb.detail.option.tidyCss.3 "改写超连结，移除未知及未使用者">
-<!ENTITY sb.detail.option.tidyCss.3.desc "移​​除注解及浏览器无法识别的样式宣告。不撷取动态脚本时，也移除未套用于任何元素的样式宣告">
+<!ENTITY sb.detail.option.tidyCss.0.help "完全按原样存档，可能会导致链接失效。">
+<!ENTITY sb.detail.option.tidyCss.1 "改写链接">
+<!ENTITY sb.detail.option.tidyCss.1.help "一些语法结构复杂的 CSS 可能无法正确​​处理。">
+<!ENTITY sb.detail.option.tidyCss.2 "改写链接，移除未知者">
+<!ENTITY sb.detail.option.tidyCss.2.help "移​​除注解及浏览器无法识别的样式宣告。">
+<!ENTITY sb.detail.option.tidyCss.3 "改写链接，移除未知及未使用者">
+<!ENTITY sb.detail.option.tidyCss.3.help "移​​除注解及浏览器无法识别的样式宣告。不撷取动态脚本时，也移除未套用于任何元素的样式宣告。">
 <!ENTITY sb.detail.option.saveDataUri "将 data URI 保存为文件">
 <!ENTITY sb.detail.option.fileAsHtml "非 HTML 档案获取呈现时的 HTML">
 <!ENTITY sb.detail.linked.file "下载链接的文件">
@@ -67,10 +69,10 @@
 <!ENTITY sb.detail.linked.file.desc "下载整个扩展名匹配任一行正则表达式的文件。忽略 &quot;#&quot; 开头的行。">
 <!ENTITY sb.detail.linked.file.reset "还原默认值">
 <!ENTITY sb.detail.linked.page "深层获取">
+<!ENTITY sb.detail.linked.page.desc "全部获取完成后，将保持所有页面彼此链接并创建网站地图。">
 <!ENTITY sb.detail.linked.page.depth "获取链接层数">
-<!ENTITY sb.detail.linked.page.text "全部获取完成后，所有页面将保持彼此的链接并创建网站地图。">
-<!ENTITY sb.detail.warnAboutRenew "注意: “重新获取” 会覆盖以前保存的页面。">
-<!ENTITY sb.detail.warnAboutScript "注意: 将会因为 JavaScript 而引起很多问题。">
+<!ENTITY sb.detail.warnAboutRenew "注意：“重新获取” 会覆盖以前保存的页面。">
+<!ENTITY sb.detail.warnAboutScript "注意：将会因为 JavaScript 而引起很多问题。">
 
 <!-- editor.dtd -->
 <!ENTITY sb.toolbar.edit "编辑工具栏">
@@ -81,8 +83,6 @@
 <!ENTITY sb.edit.save "保存">
 <!ENTITY sb.edit.comment "展开注释区">
 <!ENTITY sb.edit.annotationTool "注解工具 - 点击建立自由注解，锚定于选取区后，无选取区则自由浮动。">
-<!ENTITY sb.edit.sticky "即时贴"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "创建即时贴"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "创建自由注解">
 <!ENTITY sb.edit.inline.add "为所选内容添加行內注解">
 <!ENTITY sb.edit.attach.file "为所选内容附加文件">
@@ -192,10 +192,9 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "过滤器">
-<!ENTITY sbp.multiple.titleofwebsite "站点标题">
-<!ENTITY sbp.multiple.titleoflink "链接标题">
+<!ENTITY sb.multiple.titleofwebsite "站点标题">
+<!ENTITY sb.multiple.titleoflink "链接标题">
 <!ENTITY sb.multiple.title "标题">
-<!ENTITY sbp.multiple.downloadmethod "方法">
 <!ENTITY sb.multiple.url "URL (每行输入一个 URL)">
 <!ENTITY sb.multiple.detector "检测 URL">
 <!ENTITY sb.multiple.detector.plink "页面中包含的所有链接">
@@ -204,7 +203,7 @@
 <!ENTITY sb.multiple.detector.local "本地存储的 HTML 文件">
 <!ENTITY sb.multiple.detector.bookmarks "Bookmarks">
 <!ENTITY sb.multiple.detector.clear "清除">
-<!ENTITY sbp.multiple.exclude "忽略目的文件夹中已存在的地址">
+<!ENTITY sb.multiple.exclude "忽略目的文件夹中已存在的地址">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "保存">
@@ -226,10 +225,6 @@
 <!ENTITY sb.note.fontsize.accesskey "F">
 <!ENTITY sb.note.print.accesskey "P">
 <!ENTITY sb.note.exit.accesskey "X">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "获取完成">
-<!ENTITY sb.capture.complete.all "全部获取完成">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "输出整个树">
@@ -298,7 +293,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "常规">
 <!ENTITY sb.prop.type "类型">
-<!ENTITY sb.prop.date "日期"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "建立时间">
 <!ENTITY sb.prop.modify "修改时间">
 <!ENTITY sb.prop.encode "编码">
@@ -350,9 +344,9 @@
 <!ENTITY sb.sort.modify "修改时间">
 <!ENTITY sb.sort.descending "降序">
 <!ENTITY sb.sort.grouping "按类型分组">
-<!ENTITY sb.sort.grouping.desc "按文件夹、页面、便签页面、便签分组排序">
+<!ENTITY sb.sort.grouping.help "按文件夹、页面、便签页面、便签分组排序。">
 <!ENTITY sb.sort.recursive "包括所有子文件夹">
-<!ENTITY sb.sort.warning "注意: 此操作无法撤销。">
+<!ENTITY sb.sort.warning "注意：此操作无法撤销。">
 
 <!-- templateHelp.dtd -->
 <!ENTITY sb.thelp.dir "ltr">
@@ -383,14 +377,15 @@
 <!ENTITY sb.move.into "移动">
 <!ENTITY sb.copy "复制">
 <!ENTITY sb.renew "重新获取">
-<!ENTITY sb.internalize "将内嵌的外部媒体存入资料目录">
+<!ENTITY sb.internalize "Internalize">
+<!ENTITY sb.internalize.help "将页面内嵌的外部媒体存入本地目录。">
 <!ENTITY sb.export "导出">
 <!ENTITY sb.remove "删除">
 <!ENTITY sb.property "属性">
 <!ENTITY sb.listview "详细列表">
 <!ENTITY sb.prop.title "标题">
 <!ENTITY sb.prop.comment "注释">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "转换为文件夹">
 <!ENTITY sb.unmake.container "转换为非文件夹">

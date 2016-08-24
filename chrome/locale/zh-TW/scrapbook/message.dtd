@@ -19,25 +19,27 @@
 <!ENTITY sb.capture.filter.column.rule "顯示/隱藏">
 <!ENTITY sb.capture.filter.column.content "篩選條件（使用規則運算式）">
 <!ENTITY sb.capture.filter.accept "確認">
-<!ENTITY sb.capture.filter.accept.tt "變更或編輯數值">
+<!ENTITY sb.capture.filter.accept.help "變更或編輯數值">
 <!ENTITY sb.capture.filter.cancel "取消">
-<!ENTITY sb.capture.filter.cancel.tt "中斷編輯">
+<!ENTITY sb.capture.filter.cancel.help "中斷編輯">
 <!ENTITY sb.capture.filter.delete "刪除">
-<!ENTITY sb.capture.filter.delete.tt "從清單移除過濾條件">
+<!ENTITY sb.capture.filter.delete.help "從清單移除過濾條件">
 
 <!-- combine.dtd -->
-<!ENTITY sb.combine.dragdrop "請以滑鼠將要合併的檔案從樹狀列表中拖曳至此，並依合併順序排列。一次可以拖曳多個檔案。">
+<!ENTITY sb.combine.dragdrop "從樹狀列表將待合併項目中拖曳至此並依序排列。一次可拖曳多個項目。">
 <!ENTITY sb.combine.preview "預覽">
-<!ENTITY sb.combine.preview.d "確認預覽結果後，請按下「合併」鈕。">
+<!ENTITY sb.combine.preview.d "確認預覽結果無誤後，點擊「合併」繼續進行。">
 <!ENTITY sb.combine.option.remove "合併後刪除原頁面">
-<!ENTITY sbp.combine.up "檔案上移">
-<!ENTITY sbp.combine.down "檔案下移">
-<!ENTITY sbp.combine.remove "移除檔案">
-<!ENTITY sbp.combine.newTitle "新標題">
+<!ENTITY sb.combine.up "上移項目">
+<!ENTITY sb.combine.down "下移項目">
+<!ENTITY sb.combine.remove "移除項目">
+<!ENTITY sb.combine.newTitle "新標題">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.linked.timeout "逾時（秒數）">
-<!ENTITY sb.detail.linked.charset "以此文字編碼載入">
+<!ENTITY sb.detail.linked.timeout "等候（秒）">
+<!ENTITY sb.detail.linked.timeout.help "擷取下一個 URL 之前的等候時間。">
+<!ENTITY sb.detail.linked.charset "文字編碼">
+<!ENTITY sb.detail.linked.charset.help "強制使用指定的文字編碼載入頁面。留空則自動偵測。">
 <!ENTITY sb.detail "擷取細節">
 <!ENTITY sb.detail.new.folder "開新資料夾">
 <!ENTITY sb.detail.select.folder "選取資料夾">
@@ -51,13 +53,13 @@
 <!ENTITY sb.detail.option.scripts "動態腳本">
 <!ENTITY sb.detail.option.tidyCss "CSS 處理">
 <!ENTITY sb.detail.option.tidyCss.0 "不改寫">
-<!ENTITY sb.detail.option.tidyCss.0.desc "完全按原樣存檔，可能會導致連結失效">
-<!ENTITY sb.detail.option.tidyCss.1 "改寫超連結">
-<!ENTITY sb.detail.option.tidyCss.1.desc "一些語法結構複雜的 CSS 可能無法正確處理">
-<!ENTITY sb.detail.option.tidyCss.2 "改寫超連結，移除未知者">
-<!ENTITY sb.detail.option.tidyCss.2.desc "移除註解及瀏覽器無法識別的樣式宣告">
-<!ENTITY sb.detail.option.tidyCss.3 "改寫超連結，移除未知及未使用者">
-<!ENTITY sb.detail.option.tidyCss.3.desc "移除註解及瀏覽器無法識別的樣式宣告。不擷取動態腳本時，也移除未套用於任何元素的樣式宣告">
+<!ENTITY sb.detail.option.tidyCss.0.help "完全按原樣存檔，可能會導致連結失效。">
+<!ENTITY sb.detail.option.tidyCss.1 "改寫連結">
+<!ENTITY sb.detail.option.tidyCss.1.help "一些語法結構複雜的 CSS 可能無法正確處理。">
+<!ENTITY sb.detail.option.tidyCss.2 "改寫連結，移除未知者">
+<!ENTITY sb.detail.option.tidyCss.2.help "移除註解及瀏覽器無法識別的樣式宣告。">
+<!ENTITY sb.detail.option.tidyCss.3 "改寫連結，移除未知及未使用者">
+<!ENTITY sb.detail.option.tidyCss.3.help "移除註解及瀏覽器無法識別的樣式宣告。不擷取動態腳本時，也移除未套用於任何元素的樣式宣告。">
 <!ENTITY sb.detail.option.saveDataUri "將 data URI 儲存成檔案">
 <!ENTITY sb.detail.option.fileAsHtml "非 HTML 檔案擷取呈現時的 HTML">
 <!ENTITY sb.detail.linked.file "下載連結檔案">
@@ -67,8 +69,8 @@
 <!ENTITY sb.detail.linked.file.desc "下載完整副檔名符合任一行規則運算式的檔案。略過 &quot;#&quot; 開頭的行。">
 <!ENTITY sb.detail.linked.file.reset "還原預設值">
 <!ENTITY sb.detail.linked.page "多層擷取">
+<!ENTITY sb.detail.linked.page.desc "全部擷取完成後，會將所有頁面互相連結，並產生站台地圖。">
 <!ENTITY sb.detail.linked.page.depth "擷取連結層數">
-<!ENTITY sb.detail.linked.page.text "（擷取完畢後，網頁連結會自動依硬碟中位置更新。）">
 <!ENTITY sb.detail.warnAboutRenew "請注意：「重新擷取」將覆蓋之前擷取的頁面。">
 <!ENTITY sb.detail.warnAboutScript "請注意：儲存 JavaScript 可能會引發許多問題。">
 
@@ -81,8 +83,6 @@
 <!ENTITY sb.edit.save "存檔">
 <!ENTITY sb.edit.comment "展開評注區">
 <!ENTITY sb.edit.annotationTool "註解工具 - 點擊建立自由註解，錨定於選取區後，無選取區則自由浮動。">
-<!ENTITY sb.edit.sticky "自由註解"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "添增&sb.edit.sticky;"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "建立自由註解">
 <!ENTITY sb.edit.inline.add "為選取區加上行內註解">
 <!ENTITY sb.edit.attach.file "為選取區附加檔案">
@@ -192,10 +192,9 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "篩選條件（使用規則運算式）">
-<!ENTITY sbp.multiple.titleofwebsite "網站標題">
-<!ENTITY sbp.multiple.titleoflink "連結標題">
+<!ENTITY sb.multiple.titleofwebsite "網站標題">
+<!ENTITY sb.multiple.titleoflink "連結標題">
 <!ENTITY sb.multiple.title "標題">
-<!ENTITY sbp.multiple.downloadmethod "方式">
 <!ENTITY sb.multiple.url "URL (每行一個 URL)">
 <!ENTITY sb.multiple.detector "自動偵測 URL">
 <!ENTITY sb.multiple.detector.plink "本頁所有連結">
@@ -204,7 +203,7 @@
 <!ENTITY sb.multiple.detector.local "某目錄下所有的 HTML 檔">
 <!ENTITY sb.multiple.detector.bookmarks "書籤">
 <!ENTITY sb.multiple.detector.clear "清除">
-<!ENTITY sbp.multiple.exclude "略過已存在於目標資料夾的位址">
+<!ENTITY sb.multiple.exclude "略過已存在於目標資料夾的位址">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "存檔">
@@ -226,10 +225,6 @@
 <!ENTITY sb.note.fontsize.accesskey "F">
 <!ENTITY sb.note.print.accesskey "P">
 <!ENTITY sb.note.exit.accesskey "X">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "擷取完成。">
-<!ENTITY sb.capture.complete.all "擷取全部完成。">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "輸出所有項目">
@@ -298,7 +293,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "一般資訊">
 <!ENTITY sb.prop.type "類型">
-<!ENTITY sb.prop.date "日期"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "建立時間">
 <!ENTITY sb.prop.modify "修改時間">
 <!ENTITY sb.prop.encode "編碼">
@@ -350,7 +344,7 @@
 <!ENTITY sb.sort.modify "依修改時間排序">
 <!ENTITY sb.sort.descending "降序">
 <!ENTITY sb.sort.grouping "依類型分組">
-<!ENTITY sb.sort.grouping.desc "按資料夾、頁面、筆記頁面、筆記分組排序">
+<!ENTITY sb.sort.grouping.help "按資料夾、頁面、筆記頁面、筆記分組排序。">
 <!ENTITY sb.sort.recursive "也排序子資料夾中的項目">
 <!ENTITY sb.sort.warning "請注意：此操作無法復原。">
 
@@ -383,14 +377,15 @@
 <!ENTITY sb.move.into "移到其他資料夾">
 <!ENTITY sb.copy "複製">
 <!ENTITY sb.renew "重新擷取">
-<!ENTITY sb.internalize "將內嵌的外部媒體存入資料目錄">
+<!ENTITY sb.internalize "内置化">
+<!ENTITY sb.internalize.help "將頁面內嵌的外部媒體存入本機目錄。">
 <!ENTITY sb.export "匯出">
 <!ENTITY sb.remove "刪除">
 <!ENTITY sb.property "屬性">
 <!ENTITY sb.listview "列表模式">
 <!ENTITY sb.prop.title "標題">
 <!ENTITY sb.prop.comment "評註">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "轉換為資料夾">
 <!ENTITY sb.unmake.container "轉換為非資料夾">

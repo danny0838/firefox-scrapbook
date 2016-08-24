@@ -19,25 +19,27 @@
 <!ENTITY sb.capture.filter.column.rule "Mostrar/Ocultar">
 <!ENTITY sb.capture.filter.column.content "Filtro (expressão regular)">
 <!ENTITY sb.capture.filter.accept "Aceitar">
-<!ENTITY sb.capture.filter.accept.tt "mudar ou editar valor">
+<!ENTITY sb.capture.filter.accept.help "mudar ou editar valor">
 <!ENTITY sb.capture.filter.cancel "Cancelar">
-<!ENTITY sb.capture.filter.cancel.tt "abortar edição">
+<!ENTITY sb.capture.filter.cancel.help "abortar edição">
 <!ENTITY sb.capture.filter.delete "Apagar">
-<!ENTITY sb.capture.filter.delete.tt "remover filtro da lista">
+<!ENTITY sb.capture.filter.delete.help "remover filtro da lista">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Adicione itens da árvore arrastando e soltando na ordem em que deseja combiná-los. Você pode fazer isso com vários itens de uma vez.">
 <!ENTITY sb.combine.preview "Pré-visualização">
-<!ENTITY sb.combine.preview.d "Pressione o botão &apos;Combinar&apos; após verificar a pré-visualização.">
+<!ENTITY sb.combine.preview.d "Pressione o botão 'Combinar' após verificar a pré-visualização.">
 <!ENTITY sb.combine.option.remove "Após terminar de combinar, remover as páginas originais">
-<!ENTITY sbp.combine.up "mover item para cima">
-<!ENTITY sbp.combine.down "mover item para baixo">
-<!ENTITY sbp.combine.remove "remover item">
-<!ENTITY sbp.combine.newTitle "novo título">
+<!ENTITY sb.combine.up "mover item para cima">
+<!ENTITY sb.combine.down "mover item para baixo">
+<!ENTITY sb.combine.remove "remover item">
+<!ENTITY sb.combine.newTitle "novo título">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Timeout (em segundos)">
-<!ENTITY sb.detail.linked.charset "Loading charset">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "Conjunto de caracteres">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail "Detalhe da Captura">
 <!ENTITY sb.detail.new.folder "Nova Pasta">
 <!ENTITY sb.detail.select.folder "Selecionar Pasta">
@@ -51,13 +53,13 @@
 <!ENTITY sb.detail.option.scripts "Scripts">
 <!ENTITY sb.detail.option.tidyCss "Process CSS">
 <!ENTITY sb.detail.option.tidyCss.0 "No rewrite">
-<!ENTITY sb.detail.option.tidyCss.0.desc "Save as-is. Links may be broken.">
+<!ENTITY sb.detail.option.tidyCss.0.help "Save as-is. Links may be broken.">
 <!ENTITY sb.detail.option.tidyCss.1 "Rewrite links">
-<!ENTITY sb.detail.option.tidyCss.1.desc "CSS with highly complicated syntax might not be processed correctly.">
+<!ENTITY sb.detail.option.tidyCss.1.help "CSS with highly complicated syntax might not be processed correctly.">
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
-<!ENTITY sb.detail.option.tidyCss.2.desc "Comments and browser unsupported CSS declaration will be removed.">
+<!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.desc "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.linked.file "Download de arquivos anexos">
@@ -67,8 +69,8 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Captura em Nível">
+<!ENTITY sb.detail.linked.page.desc "Após completar as capturas, todas as páginas serão ligadas umas às outras e o mapa do site será criado.">
 <!ENTITY sb.detail.linked.page.depth "Profundidade para seguir os links">
-<!ENTITY sb.detail.linked.page.text "Após completar as capturas, todas as páginas serão ligadas umas às outras e o mapa do site será criado.">
 <!ENTITY sb.detail.warnAboutRenew "AVISO: 'Capturar Novamente' substitui a página salva anteriormente.">
 <!ENTITY sb.detail.warnAboutScript "AVISO: O JavaScript pode causar alguns problemas.">
 
@@ -81,8 +83,6 @@
 <!ENTITY sb.edit.save "Salvar Mudanças">
 <!ENTITY sb.edit.comment "Expandir Área do Comentário">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "Anotação"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "Criar &sb.edit.sticky;"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Adicionar Comentário à Seleção">
 <!ENTITY sb.edit.attach.file "Anexar um Arquivo à Seleção">
@@ -192,10 +192,9 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "Filtro (expressão regular)">
-<!ENTITY sbp.multiple.titleofwebsite "Título do website">
-<!ENTITY sbp.multiple.titleoflink "Título do link">
+<!ENTITY sb.multiple.titleofwebsite "Título do website">
+<!ENTITY sb.multiple.titleoflink "Título do link">
 <!ENTITY sb.multiple.title "Título">
-<!ENTITY sbp.multiple.downloadmethod "Método">
 <!ENTITY sb.multiple.url "URL (Insira uma URL por linha)">
 <!ENTITY sb.multiple.detector "Detector de URL">
 <!ENTITY sb.multiple.detector.plink "Todos os Links na Página">
@@ -204,7 +203,7 @@
 <!ENTITY sb.multiple.detector.local "Todos os HTMLs em um Diretório Local">
 <!ENTITY sb.multiple.detector.bookmarks "Favoritos">
 <!ENTITY sb.multiple.detector.clear "Limpar">
-<!ENTITY sbp.multiple.exclude "ignorar endereço já existente na pasta de destino">
+<!ENTITY sb.multiple.exclude "ignorar endereço já existente na pasta de destino">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "Salvar">
@@ -226,10 +225,6 @@
 <!ENTITY sb.note.fontsize.accesskey "T">
 <!ENTITY sb.note.print.accesskey "I">
 <!ENTITY sb.note.exit.accesskey "r">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Captura Completa.">
-<!ENTITY sb.capture.complete.all "Todas as Capturas Completas.">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "Output whole tree">
@@ -261,12 +256,12 @@
 <!ENTITY sb.prefs.advanced "Avançado">
 <!ENTITY sb.prefs.ui.contextMenu "Mostrar no menu de contexto do navegador">
 <!ENTITY sb.prefs.ui.contextSubMenu "Submenu">
-<!ENTITY sb.prefs.ui.bookmarkMenu "Mostrar menu &apos;Criar Favorito no ScrapBook&apos;">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Mostrar menu 'Criar Favorito no ScrapBook'">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Mostrar até">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "pastas usadas recentemente">
 <!ENTITY sb.prefs.ui.menuBar "Mostrar na barra de menus">
 <!ENTITY sb.prefs.ui.menuBar.icon "Ícone">
-<!ENTITY sb.prefs.ui.toolsMenu "Mostrar no menu &apos;Ferramentas&apos;">
+<!ENTITY sb.prefs.ui.toolsMenu "Mostrar no menu 'Ferramentas'">
 <!ENTITY sb.prefs.ui.statusBar "Mostrar na barra de status">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
 <!ENTITY sb.prefs.desc.restart "A mudança requer o reinício do Firefox.">
@@ -283,8 +278,8 @@
 <!ENTITY sb.prefs.tree.unshift.top "topo da pasta">
 <!ENTITY sb.prefs.tree.unshift.bottom "rodapé da pasta">
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
-<!ENTITY sb.prefs.showDetailOnDrop "Mostrar janela &apos;Detalhe de Captura&apos; quando capturando via arrastar e soltar na barra lateral">
-<!ENTITY sb.prefs.notifyOnComplete "Mostrar notificação &apos;Captura Completa&apos;">
+<!ENTITY sb.prefs.showDetailOnDrop "Mostrar janela 'Detalhe de Captura' quando capturando via arrastar e soltar na barra lateral">
+<!ENTITY sb.prefs.notifyOnComplete "Mostrar notificação 'Captura Completa'">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
@@ -298,7 +293,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Informação Geral">
 <!ENTITY sb.prop.type "Tipo">
-<!ENTITY sb.prop.date "Data"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Codificação">
@@ -350,7 +344,7 @@
 <!ENTITY sb.sort.modify "Sort by Modify Time">
 <!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
-<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
+<!ENTITY sb.sort.grouping.help "Sort with items grouped by folder, page, note page, and note.">
 <!ENTITY sb.sort.recursive "Ordenar Sub-Pastas Recursivamente">
 <!ENTITY sb.sort.warning "Aviso: você não pode desfazer esta operação.">
 
@@ -383,14 +377,15 @@
 <!ENTITY sb.move.into "Mover para a Pasta">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Capturar Novamente">
-<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.internalize "Internalize">
+<!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "Exportar">
 <!ENTITY sb.remove "Apagar">
 <!ENTITY sb.property "Propriedades">
 <!ENTITY sb.listview "Visão em Lista">
 <!ENTITY sb.prop.title "Título">
 <!ENTITY sb.prop.comment "Comentário">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

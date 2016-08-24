@@ -98,7 +98,7 @@
                        ondragover="toggleSidebar('viewScrapBookSidebar',true);">
             <menupopup id="ScrapBookStatusPopup" onpopupshowing="sbInfoViewer.onPopupShowing(event);">
                 <menuitem id="ScrapBookStatusPopupR" label="&sb.renew;..." oncommand="sbInfoViewer.renew(true);" onclick="if (event.button == 1) sbInfoViewer.renew(false);" class="menuitem-iconic sb-capture-target" />
-                <menuitem id="ScrapBookStatusPopupT" label="&sb.internalize;..." oncommand="sbInfoViewer.internalize();" class="menuitem-iconic sb-capture-target" />
+                <menuitem id="ScrapBookStatusPopupT" label="&sb.internalize;..." tooltiptext="&sb.internalize.help;" oncommand="sbInfoViewer.internalize();" class="menuitem-iconic sb-capture-target" />
                 <menuseparator />
                 <menuitem id="ScrapBookStatusPopupD" label="&sb.indicators;" type="checkbox" oncommand="sbInfoViewer.toggleIndicator(this.getAttribute('checked'));" persist="checked" />
                 <menuitem id="ScrapBookStatusPopupI" label="&sb.toolbar.info;" type="checkbox" oncommand="sbInfoViewer.toggle();" />

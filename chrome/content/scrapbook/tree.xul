@@ -40,7 +40,7 @@
                     <menuitem id="sbPopupCopy" class="menuitem-iconic" label="&sb.copy;..." oncommand="sbTreeHandler.copy();" />
                     <menuseparator />
                     <menuitem id="sbPopupRenew" class="menuitem-iconic" label="&sb.renew;..." oncommand="sbController.renew(null, true);" onclick="if (event.button == 1) sbController.renew(null, false);" />
-                    <menuitem id="sbPopupInternalize" class="menuitem-iconic" label="&sb.internalize;..." oncommand="sbController.internalize(null);" />
+                    <menuitem id="sbPopupInternalize" class="menuitem-iconic" label="&sb.internalize;..." tooltiptext="&sb.internalize.help;" oncommand="sbController.internalize(null);" />
                     <menuseparator />
                     <menuitem id="sbPopupExport" label="&sb.export;" oncommand="sbController.forward(null,'E');" />
                 </menupopup>
@@ -60,7 +60,7 @@
             <menuseparator />
             <menuitem id="sbSearchPopupT" label="&sb.prop.title;" type="radio" oncommand="sbSearchService.change('title');" />
             <menuitem id="sbSearchPopupC" label="&sb.prop.comment;" type="radio" oncommand="sbSearchService.change('comment');" />
-            <menuitem id="sbSearchPopupS" label="&sbp.prop.url;" type="radio" oncommand="sbSearchService.change('source');" />
+            <menuitem id="sbSearchPopupS" label="&sb.prop.url;" type="radio" oncommand="sbSearchService.change('source');" />
             <menuitem id="sbSearchPopupI" label="&sb.prop.id.date;" type="radio" oncommand="sbSearchService.change('id');" />
             <menuitem id="sbSearchPopupA" label="&sb.search.all;" type="radio" oncommand="sbSearchService.change('all');" />
             <menuseparator />

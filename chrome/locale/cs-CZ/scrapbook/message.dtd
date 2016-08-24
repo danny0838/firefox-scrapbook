@@ -19,25 +19,27 @@
 <!ENTITY sb.capture.filter.column.rule "Zobrazit/Skrýt">
 <!ENTITY sb.capture.filter.column.content "Filtrovat (regulární výrazy)">
 <!ENTITY sb.capture.filter.accept "Přijmout">
-<!ENTITY sb.capture.filter.accept.tt "změní nebo upraví hodnotu">
+<!ENTITY sb.capture.filter.accept.help "změní nebo upraví hodnotu">
 <!ENTITY sb.capture.filter.cancel "Zrušit">
-<!ENTITY sb.capture.filter.cancel.tt "zruší úpravy">
+<!ENTITY sb.capture.filter.cancel.help "zruší úpravy">
 <!ENTITY sb.capture.filter.delete "Smazat">
-<!ENTITY sb.capture.filter.delete.tt "vyjme filtr ze seznamu">
+<!ENTITY sb.capture.filter.delete.help "vyjme filtr ze seznamu">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Přetažením ze seznamu přidejte položky v pořadí, ve kterém je chcete sloučit. Můžete také přetáhnout více položek najednou.">
 <!ENTITY sb.combine.preview "Náhled">
 <!ENTITY sb.combine.preview.d "Po ověření správnosti v náhledu klepněte na tlačítko &quot;Sloučit&quot;.">
 <!ENTITY sb.combine.option.remove "Odstranit původní stránky po dokončení sloučení">
-<!ENTITY sbp.combine.up "posunout položku výše">
-<!ENTITY sbp.combine.down "posunout položku níže">
-<!ENTITY sbp.combine.remove "odstranit položku">
-<!ENTITY sbp.combine.newTitle "nový název">
+<!ENTITY sb.combine.up "posunout položku výše">
+<!ENTITY sb.combine.down "posunout položku níže">
+<!ENTITY sb.combine.remove "odstranit položku">
+<!ENTITY sb.combine.newTitle "nový název">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Časový limit (v sekundách)">
-<!ENTITY sb.detail.linked.charset "Loading charset">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "Znaková sada">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail "Detail zachycení">
 <!ENTITY sb.detail.new.folder "Nová složka">
 <!ENTITY sb.detail.select.folder "Vybrat složku">
@@ -51,13 +53,13 @@
 <!ENTITY sb.detail.option.scripts "Scripts">
 <!ENTITY sb.detail.option.tidyCss "Process CSS">
 <!ENTITY sb.detail.option.tidyCss.0 "No rewrite">
-<!ENTITY sb.detail.option.tidyCss.0.desc "Save as-is. Links may be broken.">
+<!ENTITY sb.detail.option.tidyCss.0.help "Save as-is. Links may be broken.">
 <!ENTITY sb.detail.option.tidyCss.1 "Rewrite links">
-<!ENTITY sb.detail.option.tidyCss.1.desc "CSS with highly complicated syntax might not be processed correctly.">
+<!ENTITY sb.detail.option.tidyCss.1.help "CSS with highly complicated syntax might not be processed correctly.">
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
-<!ENTITY sb.detail.option.tidyCss.2.desc "Comments and browser unsupported CSS declaration will be removed.">
+<!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.desc "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.linked.file "Stáhnout odkazované soubory">
@@ -67,9 +69,9 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Hloubkové zachycení">
+<!ENTITY sb.detail.linked.page.desc "Po dokončení zachycení budou všechny stránky vzájemně propojeny a dojde k vytvoření mapy stránek.">
 <!ENTITY sb.detail.linked.page.depth "Hloubkově procházet odkazy">
-<!ENTITY sb.detail.linked.page.text "Po dokončení zachycení budou všechny stránky vzájemně propojeny a dojde k vytvoření mapy stránek.">
-<!ENTITY sb.detail.warnAboutRenew "POZNÁMKA: &apos;Zachytit znovu&apos; přepíše předchozí uloženou stránku.">
+<!ENTITY sb.detail.warnAboutRenew "POZNÁMKA: 'Zachytit znovu' přepíše předchozí uloženou stránku.">
 <!ENTITY sb.detail.warnAboutScript "POZNÁMKA: JavaScript může způsobit některé problémy.">
 
 <!-- editor.dtd -->
@@ -81,8 +83,6 @@
 <!ENTITY sb.edit.save "Uložit změny">
 <!ENTITY sb.edit.comment "Rozšířit oblast pro komentář">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "Nálepka"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "Vytvořit nálepku"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Přidat poznámku k výběru">
 <!ENTITY sb.edit.attach.file "Připojit k výběru soubor">
@@ -192,10 +192,9 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "Filtr (regulární výrazy)">
-<!ENTITY sbp.multiple.titleofwebsite "Název webové stránky">
-<!ENTITY sbp.multiple.titleoflink "Název odkazu">
+<!ENTITY sb.multiple.titleofwebsite "Název webové stránky">
+<!ENTITY sb.multiple.titleoflink "Název odkazu">
 <!ENTITY sb.multiple.title "Název">
-<!ENTITY sbp.multiple.downloadmethod "Metoda">
 <!ENTITY sb.multiple.url "Adresa URL (zadávejte každou zvlášť na jeden řádek)">
 <!ENTITY sb.multiple.detector "Detektor URL">
 <!ENTITY sb.multiple.detector.plink "Všechny odkazy na stránce">
@@ -204,7 +203,7 @@
 <!ENTITY sb.multiple.detector.local "Všechny místní HTML dokumenty ve složce">
 <!ENTITY sb.multiple.detector.bookmarks "Záložky">
 <!ENTITY sb.multiple.detector.clear "Vyčistit">
-<!ENTITY sbp.multiple.exclude "ignorovat již existující adresy v cílové složce">
+<!ENTITY sb.multiple.exclude "ignorovat již existující adresy v cílové složce">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "Uložit">
@@ -226,10 +225,6 @@
 <!ENTITY sb.note.fontsize.accesskey "p">
 <!ENTITY sb.note.print.accesskey "T">
 <!ENTITY sb.note.exit.accesskey "k">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Zachycení bylo dokončeno.">
-<!ENTITY sb.capture.complete.all "Všechna zachycení byla dokončena.">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "Exportovat celý strom">
@@ -261,12 +256,12 @@
 <!ENTITY sb.prefs.advanced "Pokročilé">
 <!ENTITY sb.prefs.ui.contextMenu "Zobrazit v místní nabídce prohlížeče">
 <!ENTITY sb.prefs.ui.contextSubMenu "Podnabídka">
-<!ENTITY sb.prefs.ui.bookmarkMenu "Zobrazit nabídku &apos;Uložit do ScrapBooku&apos;">
+<!ENTITY sb.prefs.ui.bookmarkMenu "Zobrazit nabídku 'Uložit do ScrapBooku'">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "Zobrazit maximálně">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.2 "posledních použitých složek">
 <!ENTITY sb.prefs.ui.menuBar "Zobrazit v liště nabídek">
 <!ENTITY sb.prefs.ui.menuBar.icon "Ikona">
-<!ENTITY sb.prefs.ui.toolsMenu "Zobrazit v nabídce položku &apos;Nástroje&apos;">
+<!ENTITY sb.prefs.ui.toolsMenu "Zobrazit v nabídce položku 'Nástroje'">
 <!ENTITY sb.prefs.ui.statusBar "Zobrazit ve stavové liště">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
 <!ENTITY sb.prefs.desc.restart "Změna vyžaduje restart aplikace Firefox.">
@@ -283,8 +278,8 @@
 <!ENTITY sb.prefs.tree.unshift.top "první místo ve složce">
 <!ENTITY sb.prefs.tree.unshift.bottom "poslední místo ve složce">
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
-<!ENTITY sb.prefs.showDetailOnDrop "Zobrazit dialogové okno &apos;Zachytit detail&apos; při zachycování přetažením do postranní lišty">
-<!ENTITY sb.prefs.notifyOnComplete "Zobrazit oznámení &apos;Zachycení dokončeno&apos;">
+<!ENTITY sb.prefs.showDetailOnDrop "Zobrazit dialogové okno 'Zachytit detail' při zachycování přetažením do postranní lišty">
+<!ENTITY sb.prefs.notifyOnComplete "Zobrazit oznámení 'Zachycení dokončeno'">
 <!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
@@ -298,7 +293,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Obecné informace">
 <!ENTITY sb.prop.type "Typ">
-<!ENTITY sb.prop.date "Datum"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Kódování">
@@ -350,7 +344,7 @@
 <!ENTITY sb.sort.modify "Sort by Modify Time">
 <!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
-<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
+<!ENTITY sb.sort.grouping.help "Sort with items grouped by folder, page, note page, and note.">
 <!ENTITY sb.sort.recursive "Seřadit včetně všech podadresářů">
 <!ENTITY sb.sort.warning "Poznámka: Tuto operaci NELZE vrátit zpět.">
 
@@ -383,14 +377,15 @@
 <!ENTITY sb.move.into "Přesunout do složky">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Zachytit znovu">
-<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.internalize "Internalize">
+<!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "Exportovat">
 <!ENTITY sb.remove "Odstranit">
 <!ENTITY sb.property "Vlastnosti">
 <!ENTITY sb.listview "Seznam">
 <!ENTITY sb.prop.title "Název">
 <!ENTITY sb.prop.comment "Komentář">
-<!ENTITY sbp.prop.url "Adresa URL">
+<!ENTITY sb.prop.url "Adresa URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

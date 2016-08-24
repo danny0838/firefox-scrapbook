@@ -54,19 +54,23 @@
     <browser type="content" id="sbCaptureBrowser" collapsed="true" disablehistory="true" />
 
     <hbox id="sbCaptureDefaultSettings">
-        <label value="&sb.detail.linked.timeout;:" />
-        <textbox id="sbCaptureTimeout" type="number" size="3" value="0" min="0" />
-        <label value="&sb.detail.linked.charset;:" />
-        <menulist id="sbCaptureCharset" editable="true">
-            <menupopup>
-                <menuitem value="" label="" selected="true" />
-                <menuitem value="ISO-8859-1" label="ISO-8859-1" />
-                <menuitem value="BIG5" label="BIG5" />
-                <menuitem value="GBK" label="GBK" />
-                <menuitem value="SHIFT-JIS" label="SHIFT_JIS" />
-                <menuitem value="UTF-8" label="UTF-8" />
-            </menupopup>
-        </menulist>
+        <hbox align="center" tooltiptext="&sb.detail.linked.timeout.help;">
+            <label value="&sb.detail.linked.timeout;:" />
+            <textbox id="sbCaptureTimeout" type="number" size="3" value="0" min="0" />
+        </hbox>
+        <hbox align="center" tooltiptext="&sb.detail.linked.charset.help;">
+            <label value="&sb.detail.linked.charset;:" />
+            <menulist id="sbCaptureCharset" editable="true">
+                <menupopup>
+                    <menuitem value="" label="" selected="true" />
+                    <menuitem value="ISO-8859-1" label="ISO-8859-1" />
+                    <menuitem value="BIG5" label="BIG5" />
+                    <menuitem value="GBK" label="GBK" />
+                    <menuitem value="SHIFT-JIS" label="SHIFT_JIS" />
+                    <menuitem value="UTF-8" label="UTF-8" />
+                </menupopup>
+            </menulist>
+        </hbox>
     </hbox>
 
     <checkbox id="sbCaptureFilterToggle" label="&sb.capture.filter;" checked="false" oncommand="sbCaptureTask.toggleFilterBox(event);" />
@@ -88,9 +92,9 @@
                      ontextentered="sbCaptureFilter.add();"
                      tabscrolling="true"
                      type="autocomplete" />
-            <button id="sbCaptureFilterAccept" label="&sb.capture.filter.accept;" disabled="true" tooltiptext="&sb.capture.filter.accept.tt;" oncommand="sbCaptureFilter.add();" />
-            <button id="sbCaptureFilterCancel" label="&sb.capture.filter.cancel;" disabled="true" tooltiptext="&sb.capture.filter.cancel.tt;" oncommand="sbCaptureFilter.cancel();" />
-            <button id="sbCaptureFilterDelete" label="&sb.capture.filter.delete;" disabled="true" tooltiptext="&sb.capture.filter.delete.tt;" oncommand="sbCaptureFilter.del();" />
+            <button id="sbCaptureFilterAccept" label="&sb.capture.filter.accept;" disabled="true" tooltiptext="&sb.capture.filter.accept.help;" oncommand="sbCaptureFilter.add();" />
+            <button id="sbCaptureFilterCancel" label="&sb.capture.filter.cancel;" disabled="true" tooltiptext="&sb.capture.filter.cancel.help;" oncommand="sbCaptureFilter.cancel();" />
+            <button id="sbCaptureFilterDelete" label="&sb.capture.filter.delete;" disabled="true" tooltiptext="&sb.capture.filter.delete.help;" oncommand="sbCaptureFilter.del();" />
         </hbox>
         <tree id="sbCaptureFilter"
               autostrech="always"

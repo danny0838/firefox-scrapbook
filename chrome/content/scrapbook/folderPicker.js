@@ -53,7 +53,7 @@ var sbFolderSelector2 = {
         if ( ret.resource ) {
             this.TEXTBOX.value = ret.title;
             this.TEXTBOX.setAttribute("resuri", ret.resource.Value);
-            if ( document.getElementById("sbpCounter") ) {
+            if ( document.getElementById("sbCounter") ) {
                 sbMultipleService.currentID = this.resURI;
                 if ( sbMultipleService.currentID != sbMultipleService.lastID ) sbMultipleService.detectExistingLinks();
                 sbMultipleService.updateSelection();

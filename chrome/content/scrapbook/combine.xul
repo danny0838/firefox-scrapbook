@@ -24,8 +24,8 @@
                 onpageshow="sbCombineService.init();">
         <vbox flex="1">
             <hbox id="sbTitleBox" align="center">
-                <label id="sbTitleLabel" value="&sbp.combine.newTitle;:" />
-                <textbox id="sbpTitleTextbox" flex="1" />
+                <label id="sbTitleLabel" value="&sb.combine.newTitle;:" />
+                <textbox id="sbTitleTextbox" flex="1" />
             </hbox>
             <hbox id="sbFolderBox" align="center">
                 <label id="sbFolderLabel" value="&sb.prop.folder;:" />
@@ -41,9 +41,9 @@
                          onkeypress="sbCombineService.onKeyPress(event);"
                          flex="1" />
                 <vbox flex="1">
-                    <button id="sbpUp" disabled="true" tooltiptext="&sbp.combine.up; (Alt+Up)" oncommand="sbCombineService.moveUp();" />
-                    <button id="sbpDown" disabled="true" tooltiptext="&sbp.combine.down; (Alt+Down)" oncommand="sbCombineService.moveDown();" />
-                    <button id="sbpDelete" disabled="true" tooltiptext="&sbp.combine.remove; (Del)" oncommand="sbCombineService.deleteItem();" />
+                    <button id="sbUp" disabled="true" tooltiptext="&sb.combine.up; (Alt+Up)" oncommand="sbCombineService.moveUp();" />
+                    <button id="sbDown" disabled="true" tooltiptext="&sb.combine.down; (Alt+Down)" oncommand="sbCombineService.moveDown();" />
+                    <button id="sbDelete" disabled="true" tooltiptext="&sb.combine.remove; (Del)" oncommand="sbCombineService.deleteItem();" />
                 </vbox>
             </hbox>
         </vbox>

@@ -19,25 +19,27 @@
 <!ENTITY sb.capture.filter.column.rule "Visa/Dölj">
 <!ENTITY sb.capture.filter.column.content "Filter (reguljärt uttryck)">
 <!ENTITY sb.capture.filter.accept "Acceptera">
-<!ENTITY sb.capture.filter.accept.tt "Ändra eller redigera värde">
+<!ENTITY sb.capture.filter.accept.help "Ändra eller redigera värde">
 <!ENTITY sb.capture.filter.cancel "Avbryt">
-<!ENTITY sb.capture.filter.cancel.tt "Avbryt redigering">
+<!ENTITY sb.capture.filter.cancel.help "Avbryt redigering">
 <!ENTITY sb.capture.filter.delete "Ta bort">
-<!ENTITY sb.capture.filter.delete.tt "Ta bort filter från listan">
+<!ENTITY sb.capture.filter.delete.help "Ta bort filter från listan">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Lägg till objekt genom att dra och släppa från trädet i den ordning du vill kombinera dem. Du kan dra och släppa flera objekt samtidigt.">
 <!ENTITY sb.combine.preview "Förhandsgranska">
 <!ENTITY sb.combine.preview.d "Klicka på knappen &quot;Kombinera&quot; när du har godkänt förhandsgranskningen.">
 <!ENTITY sb.combine.option.remove "Ta bort originalsidorna efter slutförd kombinering">
-<!ENTITY sbp.combine.up "Flytta objekt uppåt">
-<!ENTITY sbp.combine.down "Flytta objekt nedåt">
-<!ENTITY sbp.combine.remove "Ta bort objekt">
-<!ENTITY sbp.combine.newTitle "Ny rubrik">
+<!ENTITY sb.combine.up "Flytta objekt uppåt">
+<!ENTITY sb.combine.down "Flytta objekt nedåt">
+<!ENTITY sb.combine.remove "Ta bort objekt">
+<!ENTITY sb.combine.newTitle "Ny rubrik">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Tidsgräns (s)">
-<!ENTITY sb.detail.linked.charset "Loading charset">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "Teckenuppsättning">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail "Infångstinformation">
 <!ENTITY sb.detail.new.folder "Ny mapp">
 <!ENTITY sb.detail.select.folder "Välj mapp">
@@ -51,13 +53,13 @@
 <!ENTITY sb.detail.option.scripts "Scripts">
 <!ENTITY sb.detail.option.tidyCss "Process CSS">
 <!ENTITY sb.detail.option.tidyCss.0 "No rewrite">
-<!ENTITY sb.detail.option.tidyCss.0.desc "Save as-is. Links may be broken.">
+<!ENTITY sb.detail.option.tidyCss.0.help "Save as-is. Links may be broken.">
 <!ENTITY sb.detail.option.tidyCss.1 "Rewrite links">
-<!ENTITY sb.detail.option.tidyCss.1.desc "CSS with highly complicated syntax might not be processed correctly.">
+<!ENTITY sb.detail.option.tidyCss.1.help "CSS with highly complicated syntax might not be processed correctly.">
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
-<!ENTITY sb.detail.option.tidyCss.2.desc "Comments and browser unsupported CSS declaration will be removed.">
+<!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.desc "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.linked.file "Ladda ner länkade filer">
@@ -67,8 +69,8 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Djupgående infångst">
+<!ENTITY sb.detail.linked.page.desc "När infångsterna har slutförts, så kommer alla sidor att vara länkade till varandra och en webbplatskarta kommer att skapas.">
 <!ENTITY sb.detail.linked.page.depth "Siddjup">
-<!ENTITY sb.detail.linked.page.text "När infångsterna har slutförts, så kommer alla sidor att vara länkade till varandra och en webbplatskarta kommer att skapas.">
 <!ENTITY sb.detail.warnAboutRenew "OBS: &quot;Fånga in igen&quot; ersätter den tidigare sparade sidan.">
 <!ENTITY sb.detail.warnAboutScript "OBS: JavaScript kan orsaka vissa problem.">
 
@@ -81,8 +83,6 @@
 <!ENTITY sb.edit.save "Spara ändringar">
 <!ENTITY sb.edit.comment "Visa kommenteringsområdet">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "Klisterlapp"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "Skapa klisterlapp"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Lägg till infogad anteckning i markering">
 <!ENTITY sb.edit.attach.file "Bifoga fil till markering">
@@ -192,10 +192,9 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "Filter (reguljärt uttryck)">
-<!ENTITY sbp.multiple.titleofwebsite "Webbplatsrubrik">
-<!ENTITY sbp.multiple.titleoflink "Länkrubrik">
+<!ENTITY sb.multiple.titleofwebsite "Webbplatsrubrik">
+<!ENTITY sb.multiple.titleoflink "Länkrubrik">
 <!ENTITY sb.multiple.title "Rubrik">
-<!ENTITY sbp.multiple.downloadmethod "Metod">
 <!ENTITY sb.multiple.url "URL:er (ange en URL per rad)">
 <!ENTITY sb.multiple.detector "URL-identifiering">
 <!ENTITY sb.multiple.detector.plink "Alla länkar på sidan">
@@ -204,7 +203,7 @@
 <!ENTITY sb.multiple.detector.local "Alla lokala HTML-filer i en mapp">
 <!ENTITY sb.multiple.detector.bookmarks "Bokmärken">
 <!ENTITY sb.multiple.detector.clear "Rensa">
-<!ENTITY sbp.multiple.exclude "Ignorera redan befintliga adresser i målmappen">
+<!ENTITY sb.multiple.exclude "Ignorera redan befintliga adresser i målmappen">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "Spara">
@@ -226,10 +225,6 @@
 <!ENTITY sb.note.fontsize.accesskey "F">
 <!ENTITY sb.note.print.accesskey "u">
 <!ENTITY sb.note.exit.accesskey "A">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Infångsten har slutförts.">
-<!ENTITY sb.capture.complete.all "Alla infångster har slutförts.">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "Utdata för hela trädet">
@@ -298,7 +293,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Allmän information">
 <!ENTITY sb.prop.type "Typ">
-<!ENTITY sb.prop.date "Datum"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Kodning">
@@ -350,7 +344,7 @@
 <!ENTITY sb.sort.modify "Sort by Modify Time">
 <!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
-<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
+<!ENTITY sb.sort.grouping.help "Sort with items grouped by folder, page, note page, and note.">
 <!ENTITY sb.sort.recursive "Sortera undermappar rekursivt">
 <!ENTITY sb.sort.warning "Obs: Du kan inte ångra denna åtgärd.">
 
@@ -383,14 +377,15 @@
 <!ENTITY sb.move.into "Flytta till mapp">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Fånga in igen">
-<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.internalize "Internalize">
+<!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "Exportera">
 <!ENTITY sb.remove "Ta bort">
 <!ENTITY sb.property "Egenskaper">
 <!ENTITY sb.listview "Listvy">
 <!ENTITY sb.prop.title "Rubrik">
 <!ENTITY sb.prop.comment "Kommentar">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

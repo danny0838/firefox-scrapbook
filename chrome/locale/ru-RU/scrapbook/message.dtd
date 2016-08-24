@@ -19,25 +19,27 @@
 <!ENTITY sb.capture.filter.column.rule "Показать/Скрыть">
 <!ENTITY sb.capture.filter.column.content "Фильтр (регулярные выражения)">
 <!ENTITY sb.capture.filter.accept "Применить">
-<!ENTITY sb.capture.filter.accept.tt "изменить значение">
+<!ENTITY sb.capture.filter.accept.help "изменить значение">
 <!ENTITY sb.capture.filter.cancel "Отмена">
-<!ENTITY sb.capture.filter.cancel.tt "отменить редактирование">
+<!ENTITY sb.capture.filter.cancel.help "отменить редактирование">
 <!ENTITY sb.capture.filter.delete "Удалить">
-<!ENTITY sb.capture.filter.delete.tt "удалить фильтр из списка">
+<!ENTITY sb.capture.filter.delete.help "удалить фильтр из списка">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Добавляйте требуемые для объединения страницы обычным перетаскиванием их из дерева страниц. Также имеется возможность перетаскивать по несколько страниц сразу.">
 <!ENTITY sb.combine.preview "Предварительный просмотр">
 <!ENTITY sb.combine.preview.d "Для запуска операции объединения нажмите кнопку «Начать объединение».">
 <!ENTITY sb.combine.option.remove "После окончания операции объединения удалить исходные страницы из веб-альбома ScrapBook">
-<!ENTITY sbp.combine.up "переместить выше">
-<!ENTITY sbp.combine.down "переместить ниже">
-<!ENTITY sbp.combine.remove "удалить">
-<!ENTITY sbp.combine.newTitle "новый заголовок">
+<!ENTITY sb.combine.up "переместить выше">
+<!ENTITY sb.combine.down "переместить ниже">
+<!ENTITY sb.combine.remove "удалить">
+<!ENTITY sb.combine.newTitle "новый заголовок">
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Задержка (в сек)">
-<!ENTITY sb.detail.linked.charset "Loading charset">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "Кодировка">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail "Настройки сохранения веб-страницы">
 <!ENTITY sb.detail.new.folder "Новый каталог">
 <!ENTITY sb.detail.select.folder "Выбрать каталог">
@@ -51,13 +53,13 @@
 <!ENTITY sb.detail.option.scripts "Scripts">
 <!ENTITY sb.detail.option.tidyCss "Process CSS">
 <!ENTITY sb.detail.option.tidyCss.0 "No rewrite">
-<!ENTITY sb.detail.option.tidyCss.0.desc "Save as-is. Links may be broken.">
+<!ENTITY sb.detail.option.tidyCss.0.help "Save as-is. Links may be broken.">
 <!ENTITY sb.detail.option.tidyCss.1 "Rewrite links">
-<!ENTITY sb.detail.option.tidyCss.1.desc "CSS with highly complicated syntax might not be processed correctly.">
+<!ENTITY sb.detail.option.tidyCss.1.help "CSS with highly complicated syntax might not be processed correctly.">
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
-<!ENTITY sb.detail.option.tidyCss.2.desc "Comments and browser unsupported CSS declaration will be removed.">
+<!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.desc "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
 <!ENTITY sb.detail.linked.file "Загрузка содержимого по ссылкам на странице">
@@ -67,8 +69,8 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Многоуровневый захват">
+<!ENTITY sb.detail.linked.page.desc "После завершения сохранения веб-страниц они будут связаны между собой.">
 <!ENTITY sb.detail.linked.page.depth "Уровень глубины захвата ссылок">
-<!ENTITY sb.detail.linked.page.text "После завершения сохранения веб-страниц они будут связаны между собой.">
 <!ENTITY sb.detail.warnAboutRenew "Примечание: При использовании функции «Захватить снова» сохранённая страница будет перезаписана.">
 <!ENTITY sb.detail.warnAboutScript "Внимание: Могут возникнуть проблемы с JavaScript.">
 
@@ -81,8 +83,6 @@
 <!ENTITY sb.edit.save "Сохранить изменения">
 <!ENTITY sb.edit.comment "Увеличить размер текстового поля для комментария">
 <!ENTITY sb.edit.annotationTool "Annotation Tool - Click to create a freenote, which is anchored below the selection, or floats if there's none.">
-<!ENTITY sb.edit.sticky "Быстрое примечание"><!-- left for addon compatibility -->
-<!ENTITY sb.edit.sticky.create "Создать быстрое примечание"><!-- left for addon compatibility -->
 <!ENTITY sb.edit.freenote.create "Create Freenote">
 <!ENTITY sb.edit.inline.add "Присоединить файл к выделенному фрагменту">
 <!ENTITY sb.edit.attach.file "Присоединить файл к выделенному">
@@ -192,10 +192,9 @@
 
 <!-- multiple.dtd -->
 <!ENTITY sb.multiple.filter "Фильтр">
-<!ENTITY sbp.multiple.titleofwebsite "Заголовок веб-сайта">
-<!ENTITY sbp.multiple.titleoflink "Заголовок ссылки">
+<!ENTITY sb.multiple.titleofwebsite "Заголовок веб-сайта">
+<!ENTITY sb.multiple.titleoflink "Заголовок ссылки">
 <!ENTITY sb.multiple.title "Заголовок">
-<!ENTITY sbp.multiple.downloadmethod "Метод">
 <!ENTITY sb.multiple.url "URL (В одной строке должен быть один адрес)">
 <!ENTITY sb.multiple.detector "URL детектор">
 <!ENTITY sb.multiple.detector.plink "Все ссылки на странице">
@@ -204,7 +203,7 @@
 <!ENTITY sb.multiple.detector.local "Все веб-страницы в каталоге">
 <!ENTITY sb.multiple.detector.bookmarks "Закладки">
 <!ENTITY sb.multiple.detector.clear "Очистить">
-<!ENTITY sbp.multiple.exclude "игнорировать уже созданные адреса в папке назначения">
+<!ENTITY sb.multiple.exclude "игнорировать уже созданные адреса в папке назначения">
 
 <!-- note.dtd -->
 <!ENTITY sb.note.save "Сохранить">
@@ -226,10 +225,6 @@
 <!ENTITY sb.note.fontsize.accesskey "а">
 <!ENTITY sb.note.print.accesskey "е">
 <!ENTITY sb.note.exit.accesskey "х">
-
-<!-- notify.dtd -->
-<!ENTITY sb.capture.complete "Сохранение завершено">
-<!ENTITY sb.capture.complete.all "Все сохранения выполнены">
 
 <!-- output.dtd -->
 <!ENTITY sb.output.option.all "Вывести целое дерево">
@@ -269,7 +264,7 @@
 <!ENTITY sb.prefs.ui.toolsMenu "Показывать в меню «Инструменты»">
 <!ENTITY sb.prefs.ui.statusBar "Показывать в строке состояния">
 <!ENTITY sb.prefs.ui.sidebarManage "Use manage mode in the sidebar">
-<!ENTITY sb.prefs.desc.restart "Изменения требуют перезапуска Firefox&apos;а">
+<!ENTITY sb.prefs.desc.restart "Изменения требуют перезапуска Firefox'а">
 <!ENTITY sb.prefs.tabs.tips "Открывать в новых вкладках следующие операции">
 <!ENTITY sb.prefs.tabs.note "Изменить заметку">
 <!ENTITY sb.prefs.edit.autoEditNoteX "Auto edit Note Pages">
@@ -298,7 +293,6 @@
 <!-- property.dtd -->
 <!ENTITY sb.prop.general "Основная информация">
 <!ENTITY sb.prop.type "Тип">
-<!ENTITY sb.prop.date "Дата"><!-- left for addon compatibility -->
 <!ENTITY sb.prop.create "Create">
 <!ENTITY sb.prop.modify "Modify">
 <!ENTITY sb.prop.encode "Кодировка">
@@ -350,7 +344,7 @@
 <!ENTITY sb.sort.modify "Sort by Modify Time">
 <!ENTITY sb.sort.descending "In descending order">
 <!ENTITY sb.sort.grouping "Group by Type">
-<!ENTITY sb.sort.grouping.desc "Sort with items grouped by folder, page, note page, and note">
+<!ENTITY sb.sort.grouping.help "Sort with items grouped by folder, page, note page, and note.">
 <!ENTITY sb.sort.recursive "Сортировать подкаталоги рекурсивно">
 <!ENTITY sb.sort.warning "Внимание: Выполнение данной операции отменить невозможно.">
 
@@ -383,14 +377,15 @@
 <!ENTITY sb.move.into "Переместить в каталог">
 <!ENTITY sb.copy "Copy">
 <!ENTITY sb.renew "Захватить снова">
-<!ENTITY sb.internalize "Localize Embedded External Media">
+<!ENTITY sb.internalize "Internalize">
+<!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "Экспортировать">
 <!ENTITY sb.remove "Удалить">
 <!ENTITY sb.property "Свойства">
 <!ENTITY sb.listview "Список">
 <!ENTITY sb.prop.title "Заголовок">
 <!ENTITY sb.prop.comment "Комментарий">
-<!ENTITY sbp.prop.url "URL">
+<!ENTITY sb.prop.url "URL">
 <!ENTITY sb.prop.id.date "ID">
 <!ENTITY sb.make.container "Convert to Folder">
 <!ENTITY sb.unmake.container "Convert to Non-folder">

@@ -22,30 +22,30 @@
     border: 1px solid ThreeDShadow;
 }
 
-#sbpUp {
+#sbUp {
     height: 25px;
     list-style-image: url("expander_up.png");
 }
 
-#sbpUp[disabled="true"] {
+#sbUp[disabled="true"] {
     list-style-image: url("expander_up_dis.png");
 }
 
-#sbpDown {
+#sbDown {
     height: 25px;
     list-style-image: url("expander_down.png");
 }
 
-#sbpDown[disabled="true"] {
+#sbDown[disabled="true"] {
     list-style-image: url("expander_down_dis.png");
 }
 
-#sbpDelete {
+#sbDelete {
     height: 25px;
     list-style-image: url("menu_remove.png");
 }
 
-#sbpDelete[disabled="true"] {
+#sbDelete[disabled="true"] {
     list-style-image: url("menu_remove_dis.png");
 }
 
