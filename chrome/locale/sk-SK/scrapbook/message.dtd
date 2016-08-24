@@ -37,6 +37,7 @@
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Časový limit (v sekundách)">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
 <!ENTITY sb.detail.linked.charset "Loading charset">
 <!ENTITY sb.detail "Detail zachytenia">
 <!ENTITY sb.detail.new.folder "Nový priečinok">

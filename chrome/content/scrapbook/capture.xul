@@ -54,8 +54,10 @@
     <browser type="content" id="sbCaptureBrowser" collapsed="true" disablehistory="true" />
 
     <hbox id="sbCaptureDefaultSettings">
-        <label value="&sb.detail.linked.timeout;:" />
-        <textbox id="sbCaptureTimeout" type="number" size="3" value="0" min="0" />
+        <hbox align="center" tooltiptext="&sb.detail.linked.timeout.help;">
+            <label value="&sb.detail.linked.timeout;:" />
+            <textbox id="sbCaptureTimeout" type="number" size="3" value="0" min="0" />
+        </hbox>
         <label value="&sb.detail.linked.charset;:" />
         <menulist id="sbCaptureCharset" editable="true">
             <menupopup>

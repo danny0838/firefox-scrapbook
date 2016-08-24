@@ -36,7 +36,8 @@
 <!ENTITY sb.combine.newTitle "新しいタイトル">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.linked.timeout "タイムアウト（秒）">
+<!ENTITY sb.detail.linked.timeout "待ち（秒）">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
 <!ENTITY sb.detail.linked.charset "読み込んで文字セット">
 <!ENTITY sb.detail "取り込み詳細">
 <!ENTITY sb.detail.new.folder "新しいフォルダ">

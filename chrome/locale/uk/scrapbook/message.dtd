@@ -37,6 +37,7 @@
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Час очікування (секунд)">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
 <!ENTITY sb.detail.linked.charset "Loading charset">
 <!ENTITY sb.detail "Подробиці збереження">
 <!ENTITY sb.detail.new.folder "Нова тека">

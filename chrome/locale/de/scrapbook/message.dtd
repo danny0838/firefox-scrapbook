@@ -37,6 +37,7 @@
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Wartezeit (in Sekunden)">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
 <!ENTITY sb.detail.linked.charset "Loading charset">
 <!ENTITY sb.detail "Archivierungsdetails">
 <!ENTITY sb.detail.new.folder "Neuer Ordner">

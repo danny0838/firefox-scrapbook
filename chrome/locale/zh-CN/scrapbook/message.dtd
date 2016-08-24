@@ -36,7 +36,8 @@
 <!ENTITY sb.combine.newTitle "新标题">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.linked.timeout "超时 (秒)">
+<!ENTITY sb.detail.linked.timeout "等候 (秒)">
+<!ENTITY sb.detail.linked.timeout.help "获取下一个 URL 之前的等候时间。">
 <!ENTITY sb.detail.linked.charset "用这个字符集载入">
 <!ENTITY sb.detail "详细信息">
 <!ENTITY sb.detail.new.folder "新建文件夹">

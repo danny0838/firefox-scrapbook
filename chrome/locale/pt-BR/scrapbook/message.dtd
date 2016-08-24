@@ -37,6 +37,7 @@
 
 <!-- detail.dtd -->
 <!ENTITY sb.detail.linked.timeout "Timeout (em segundos)">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
 <!ENTITY sb.detail.linked.charset "Loading charset">
 <!ENTITY sb.detail "Detalhe da Captura">
 <!ENTITY sb.detail.new.folder "Nova Pasta">

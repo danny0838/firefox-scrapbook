@@ -36,7 +36,8 @@
 <!ENTITY sb.combine.newTitle "新標題">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.linked.timeout "逾時（秒數）">
+<!ENTITY sb.detail.linked.timeout "等候（秒）">
+<!ENTITY sb.detail.linked.timeout.help "擷取下一個 URL 之前的等候時間。">
 <!ENTITY sb.detail.linked.charset "以此文字編碼載入">
 <!ENTITY sb.detail "擷取細節">
 <!ENTITY sb.detail.new.folder "開新資料夾">
