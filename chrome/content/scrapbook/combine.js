@@ -39,8 +39,6 @@ var sbCombineService = {
         if ( this.resList.indexOf(aRes) != -1 ) return;
         var type = sbDataSource.getProperty(aRes, "type");
         if (type == "folder" || type == "separator") return;
-        if (type == "site")
-            sbCommonUtils.alert(sbCommonUtils.lang("WARN_ABOUT_INDEPTH"));
         var icon = sbDataSource.getProperty(aRes, "icon");
         if ( !icon ) icon = sbCommonUtils.getDefaultIcon(type);
         var listItem = this.LISTBOX.appendItem(sbDataSource.getProperty(aRes, "title"));
@@ -86,6 +84,7 @@ var sbCombineService = {
         // reset the variables to prevent double-charged content when reloaded
         sbPageCombiner.htmlSrc = "";
         sbPageCombiner.cssText = "";
+        sbPageCombiner.hasSite = false;
 
         sbInvisibleBrowser.init(true); // load embeded media so that they aren't broken when previewing
         sbInvisibleBrowser.onLoadFinish = function() {
@@ -304,6 +303,7 @@ var sbPageCombiner = {
     htmlSrc: "",
     cssText: "",
     isTargetCombined: false,
+    hasSite: false,
     baseURI: "",
     htmlId: "",
     bodyId: "",
@@ -351,6 +351,12 @@ var sbPageCombiner = {
             this.htmlSrc += this.getCiteHTML(aType);
         } else {
             aType = sbDataSource.getProperty(sbCombineService.curRes, "type");
+
+            if (aType == "site" && !this.hasSite) {
+                this.hasSite = true;
+                sbCommonUtils.alert(sbCommonUtils.lang("WARN_ABOUT_INDEPTH"));
+            }
+            
             this.cssText += this.surroundCSS();
             this.inspectNode(this.BODY);
             Array.prototype.forEach.call(this.BODY.querySelectorAll("*"), function(curNode){
