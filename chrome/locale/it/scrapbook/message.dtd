@@ -404,7 +404,6 @@
 <!ENTITY sb.search.cs "Maiuscole/minuscole">
 <!ENTITY sb.search.cache "Aggiorna la cache per la ricerca di testo semplice">
 <!ENTITY sb.search.clear "Elimina la cronologia dei moduli">
-<!ENTITY sb.search.days "Filtra in base ai giorni">
 <!ENTITY mb.manage "Gestione">
 <!ENTITY mb.profileFolder "Cartella del profilo">
 

@@ -404,7 +404,6 @@
 <!ENTITY sb.search.cs "Mayúsculas/minúsculas">
 <!ENTITY sb.search.cache "Actualizar caché al buscar en todo el texto">
 <!ENTITY sb.search.clear "Limpiar historial de búsqueda">
-<!ENTITY sb.search.days "Filtrar por días">
 <!ENTITY mb.manage "Administrar">
 <!ENTITY mb.profileFolder "Carpeta de Perfiles">
 

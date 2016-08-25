@@ -404,7 +404,6 @@
 <!ENTITY sb.search.cs "Ține cont de majuscule și minuscule">
 <!ENTITY sb.search.cache "Actualizează cache-ul pentru căutare în tot conținutul">
 <!ENTITY sb.search.clear "Șterge istoricul">
-<!ENTITY sb.search.days "Filtrează după zile">
 <!ENTITY mb.manage "Gestionează">
 <!ENTITY mb.profileFolder "Dosar profil">
 

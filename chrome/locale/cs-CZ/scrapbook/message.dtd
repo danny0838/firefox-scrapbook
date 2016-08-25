@@ -404,7 +404,6 @@
 <!ENTITY sb.search.cs "Rozlišovat malá/VELKÁ">
 <!ENTITY sb.search.cache "Aktualizovat vyrovnávací paměť pro fulltextové vyhledávání">
 <!ENTITY sb.search.clear "Vymazat historii formuláře">
-<!ENTITY sb.search.days "Filtrovat podle dní">
 <!ENTITY mb.manage "Spravovat">
 <!ENTITY mb.profileFolder "Složka s profilem">
 

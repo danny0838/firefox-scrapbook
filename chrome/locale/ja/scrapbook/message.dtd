@@ -404,7 +404,6 @@
 <!ENTITY sb.search.cs "大文字/小文字の区別">
 <!ENTITY sb.search.cache "全文検索用キャッシュを更新">
 <!ENTITY sb.search.clear "入力履歴のクリア">
-<!ENTITY sb.search.days "日数でフィルタリング">
 <!ENTITY mb.manage "管理">
 <!ENTITY mb.profileFolder "プロファイルフォルダ">
 

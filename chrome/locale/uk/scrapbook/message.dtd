@@ -404,7 +404,6 @@
 <!ENTITY sb.search.cs "З урахуванням регістру">
 <!ENTITY sb.search.cache "Поновити кеш повнотекстового пошуку">
 <!ENTITY sb.search.clear "Очистити історію автозаповнення">
-<!ENTITY sb.search.days "Показати за останні:">
 <!ENTITY mb.manage "Керування">
 <!ENTITY mb.profileFolder "Тека профілю">
 

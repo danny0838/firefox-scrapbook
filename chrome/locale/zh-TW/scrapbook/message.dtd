@@ -404,7 +404,6 @@
 <!ENTITY sb.search.cs "大小寫需相符">
 <!ENTITY sb.search.cache "更新全文搜尋快取">
 <!ENTITY sb.search.clear "清除搜尋歷史記錄">
-<!ENTITY sb.search.days "依擷取日期檢視">
 <!ENTITY mb.manage "管理">
 <!ENTITY mb.profileFolder "設定檔資料夾">
 

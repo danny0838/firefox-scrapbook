@@ -404,7 +404,6 @@
 <!ENTITY sb.search.cs "Porovnať podľa dôležitosti">
 <!ENTITY sb.search.cache "Aktualizovať cache pre fulltextové hľadanie">
 <!ENTITY sb.search.clear "Vymazať históriu formulára">
-<!ENTITY sb.search.days "Filter podľa dní">
 <!ENTITY mb.manage "Spravovať">
 <!ENTITY mb.profileFolder "Používateľský priečinok">
 

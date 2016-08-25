@@ -404,7 +404,6 @@
 <!ENTITY sb.search.cs "A kis- és nagybetűk megkülönböztetése">
 <!ENTITY sb.search.cache "A gyorsítótár frissítése a teljes szövegben kereséshez">
 <!ENTITY sb.search.clear "Törlés az előzményekből">
-<!ENTITY sb.search.days "Szűrés napok alapján">
 <!ENTITY mb.manage "Kezelés">
 <!ENTITY mb.profileFolder "Profil mappa">
 

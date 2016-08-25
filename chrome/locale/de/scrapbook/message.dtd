@@ -404,7 +404,6 @@
 <!ENTITY sb.search.cs "Groß-/Kleinschreibung beachten">
 <!ENTITY sb.search.cache "Cache für Volltextsuche aktualisieren">
 <!ENTITY sb.search.clear "Suchchronik löschen">
-<!ENTITY sb.search.days "Nach Datum filtern">
 <!ENTITY mb.manage "Verwalten">
 <!ENTITY mb.profileFolder "Profilordner">
 

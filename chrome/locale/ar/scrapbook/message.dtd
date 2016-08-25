@@ -404,7 +404,6 @@
 <!ENTITY sb.search.cs "مطابقة الكتابة">
 <!ENTITY sb.search.cache "تحديث المحفوظات لفحص نصي كامل">
 <!ENTITY sb.search.clear "مسح محفوظات البحث">
-<!ENTITY sb.search.days "التصفية بحسب الايام">
 <!ENTITY mb.manage "إدارة">
 <!ENTITY mb.profileFolder "مجلد المستخدم في ويندوز">
 

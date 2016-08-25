@@ -404,7 +404,6 @@
 <!ENTITY sb.search.cs "С учётом регистра">
 <!ENTITY sb.search.cache "Обновить кэш для полнотекстового поиска">
 <!ENTITY sb.search.clear "Удалить всю историю автозаполнения">
-<!ENTITY sb.search.days "Показать за последние:">
 <!ENTITY mb.manage "Организовать">
 <!ENTITY mb.profileFolder "Каталог профиля">
 

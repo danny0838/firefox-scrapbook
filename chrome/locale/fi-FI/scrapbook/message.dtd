@@ -404,7 +404,6 @@
 <!ENTITY sb.search.cs "Isot ja pienet kirjaimet erikseen">
 <!ENTITY sb.search.cache "Päivitä välimuisti täydellistä tekstihakua varten">
 <!ENTITY sb.search.clear "Tyhjennä hakukentän muisti">
-<!ENTITY sb.search.days "Suodatus päivien mukaan">
 <!ENTITY mb.manage "Hallinnoi">
 <!ENTITY mb.profileFolder "Profiilikansio">
 

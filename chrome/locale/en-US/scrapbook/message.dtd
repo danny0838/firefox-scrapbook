@@ -404,7 +404,6 @@
 <!ENTITY sb.search.cs "Match Case">
 <!ENTITY sb.search.cache "Update Cache for Full Text Search">
 <!ENTITY sb.search.clear "Clear Form History">
-<!ENTITY sb.search.days "Filtering by Days">
 <!ENTITY mb.manage "Manage">
 <!ENTITY mb.profileFolder "Profile Folder">
 

@@ -404,7 +404,6 @@
 <!ENTITY sb.search.cs "区分大小写">
 <!ENTITY sb.search.cache "更新全文搜索缓存">
 <!ENTITY sb.search.clear "清空搜索历史记录">
-<!ENTITY sb.search.days "按时间段过滤查寻">
 <!ENTITY mb.manage "管理">
 <!ENTITY mb.profileFolder "配置文件夹">
 

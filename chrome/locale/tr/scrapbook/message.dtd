@@ -405,7 +405,6 @@
 <!ENTITY sb.search.cs "Büyük-Küçük Harf Eşleştir">
 <!ENTITY sb.search.cache "Tam Metin Arama İçin Belleği Güncelle">
 <!ENTITY sb.search.clear "Geçmişten Temizle">
-<!ENTITY sb.search.days "Güne Göre Filteleme">
 <!ENTITY mb.manage "Yönet">
 <!ENTITY mb.profileFolder "Profil Klasörü">
 

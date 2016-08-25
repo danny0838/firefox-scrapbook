@@ -404,7 +404,6 @@
 <!ENTITY sb.search.cs "Respecter la casse">
 <!ENTITY sb.search.cache "Mettre à jour le cache pour la recherche sur texte entier">
 <!ENTITY sb.search.clear "Nettoyer l'historique">
-<!ENTITY sb.search.days "Filtre par jour">
 <!ENTITY mb.manage "Gérer">
 <!ENTITY mb.profileFolder "Dossier du profil">
 

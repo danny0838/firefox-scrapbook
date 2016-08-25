@@ -404,7 +404,6 @@
 <!ENTITY sb.search.cs "Skiftlägeskänslig">
 <!ENTITY sb.search.cache "Uppdatera cachen för fulltextsökning">
 <!ENTITY sb.search.clear "Rensa formulärhistorik">
-<!ENTITY sb.search.days "Filtrera efter dagar">
 <!ENTITY mb.manage "Hantera">
 <!ENTITY mb.profileFolder "Profilmapp">
 
