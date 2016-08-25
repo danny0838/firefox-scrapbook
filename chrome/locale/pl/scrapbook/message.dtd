@@ -272,7 +272,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "Wybierz folder, w którym będą zapisywane dane ScrapBooka">
 <!ENTITY sb.prefs.confirmDelete "Ostrzegaj, gdy jest usuwane drzewo elementów">
-<!ENTITY sb.prefs.captureDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default capture settings">
 <!ENTITY sb.prefs.tree.autoCollapse "Otwierając folder drzewa automatycznie zamykaj inne foldery">
 <!ENTITY sb.prefs.tree.unshift "Umieść element">
 <!ENTITY sb.prefs.tree.unshift.top "na górze folderu">
@@ -280,7 +280,7 @@
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Wyświetlaj okno dialogowe „Szczegóły przechwytywania” podczas przechwytywania za pomocą przeciągania do panelu bocznego">
 <!ENTITY sb.prefs.notifyOnComplete "Wyświetlaj powiadomienie o zakończeniu przechwytywania">
-<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">

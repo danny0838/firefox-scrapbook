@@ -272,7 +272,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "Valitse kansio, johon tallennetaan ScrapBookin tiedot.">
 <!ENTITY sb.prefs.confirmDelete "Varoita kohteiden poistamisesta puusta">
-<!ENTITY sb.prefs.captureDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default capture settings">
 <!ENTITY sb.prefs.tree.autoCollapse "Kun puun kansio avataan, sulje automaattisesti muut kansiot">
 <!ENTITY sb.prefs.tree.unshift "Aseta kohde">
 <!ENTITY sb.prefs.tree.unshift.top "kansion ylimmäksi merkinnäksi">
@@ -280,7 +280,7 @@
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Näytä Tallennuksen tiedot -ikkuna kun sivu tallennetaan vetämällä sivupaneeliin">
 <!ENTITY sb.prefs.notifyOnComplete "Näytä Tallennus valmis -huomautus">
-<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">

@@ -272,7 +272,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "ScrapBook のデータを保存するためのフォルダを選択してください。">
 <!ENTITY sb.prefs.confirmDelete "削除確認をする">
-<!ENTITY sb.prefs.captureDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default capture settings">
 <!ENTITY sb.prefs.tree.autoCollapse "ツリーフォルダを開いたとき、他のフォルダを自動的に閉じる">
 <!ENTITY sb.prefs.tree.unshift "アイテムを追加する位置:">
 <!ENTITY sb.prefs.tree.unshift.top "フォルダの一番上">
@@ -280,7 +280,7 @@
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "サイドバーへのドラッグ＆ドロップ時、詳細な取り込みをする">
 <!ENTITY sb.prefs.notifyOnComplete "取り込みが完了したら通知する">
-<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "設定">
 <!ENTITY sb.prefs.io.export "設定をエクスポート">

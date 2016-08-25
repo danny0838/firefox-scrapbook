@@ -272,7 +272,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "Elegir una carpeta donde guardar los datos de Scrapbook.">
 <!ENTITY sb.prefs.confirmDelete "Avisarme cuando se borren elementos del árbol">
-<!ENTITY sb.prefs.captureDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default capture settings">
 <!ENTITY sb.prefs.tree.autoCollapse "Cuando abra una carpeta del árbol, automáticamente cierra otras carpetas">
 <!ENTITY sb.prefs.tree.unshift "Poner un elemento en">
 <!ENTITY sb.prefs.tree.unshift.top "la parte alta de una carpeta">
@@ -280,7 +280,7 @@
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Mostrar el diálogo 'Detalles de Captura' cuando se capture mediante 'arrastrar y soltar' en la barra lateral">
 <!ENTITY sb.prefs.notifyOnComplete "Mostrar notificación de 'Captura Finalizada'">
-<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">

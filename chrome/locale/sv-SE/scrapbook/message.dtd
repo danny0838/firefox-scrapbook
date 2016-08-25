@@ -272,7 +272,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "Välj en mapp där ScrapBook-data skall lagras.">
 <!ENTITY sb.prefs.confirmDelete "Varna mig vid borttagning av trädobjekt">
-<!ENTITY sb.prefs.captureDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default capture settings">
 <!ENTITY sb.prefs.tree.autoCollapse "När en trädmapp öppnas, stäng automatiskt övriga mappar">
 <!ENTITY sb.prefs.tree.unshift "Placera nya objekt">
 <!ENTITY sb.prefs.tree.unshift.top "överst i mappen">
@@ -280,7 +280,7 @@
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Visa dialogen &quot;Infångstinformation&quot; vid infångst via dra och släpp i sidofältet">
 <!ENTITY sb.prefs.notifyOnComplete "Visa meddelandet &quot;Infångsten har slutförts&quot;">
-<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">

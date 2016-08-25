@@ -385,12 +385,12 @@
         </preferences>
 
         <hbox align="center">
-            <label value="&sb.prefs.captureDefault;" />
+            <label value="&sb.prefs.saveDefault;" />
             <button label="&sb.button.customize;..." oncommand="window.openDialog('chrome://scrapbook/content/detail.xul?m=default', '', 'chrome,modal,centerscreen,resizable');" />
         </hbox>
         <checkbox preference="extensions.scrapbook.showDetailOnDrop" label="&sb.prefs.showDetailOnDrop;" />
         <checkbox preference="extensions.scrapbook.notifyOnComplete" label="&sb.prefs.notifyOnComplete;" />
-        <checkbox preference="extensions.scrapbook.notifyPageCaptured" label="&sb.prefs.notifyPageCaptured;" />
+        <checkbox preference="extensions.scrapbook.notifyPageCaptured" label="&sb.prefs.notifyPageSaved;" />
         <checkbox preference="extensions.scrapbook.asciiFilename" label="&sb.prefs.asciiFilename;" />
         <hbox align="center">
             <label value="&sb.prefs.tree.unshift;" />

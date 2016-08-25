@@ -272,7 +272,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "ScrapBook verilerinin saklanacağı konumu seçin.">
 <!ENTITY sb.prefs.confirmDelete "Ağaç öğelerini silerken beni uyar">
-<!ENTITY sb.prefs.captureDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default capture settings">
 <!ENTITY sb.prefs.tree.autoCollapse "Ağaçta klasör açınca, otomatik olarak diğer klasörleri kapat">
 <!ENTITY sb.prefs.tree.unshift "Buraya öğe bilgisi ekle">
 <!ENTITY sb.prefs.tree.unshift.top "Klasörün üstü">
@@ -280,7 +280,7 @@
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Kenar çubuğuna sürükleyip-bırakarak kaydetmelerde 'Kayıt Detayları' diyaloğunu göster">
 <!ENTITY sb.prefs.notifyOnComplete "'Kaydetme Tamamlandı' uyarısını göster">
-<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been captured">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">

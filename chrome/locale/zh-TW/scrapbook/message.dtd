@@ -272,7 +272,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML 格式化模板">
 <!ENTITY sb.prefs.data.tips "請選擇 ScrapBook 存放擷取資料的資料夾">
 <!ENTITY sb.prefs.confirmDelete "刪除資料需要確認">
-<!ENTITY sb.prefs.captureDefault "預設擷取設定">
+<!ENTITY sb.prefs.saveDefault "預設擷取設定">
 <!ENTITY sb.prefs.tree.autoCollapse "開啟某資料夾時，自動收合其他資料夾">
 <!ENTITY sb.prefs.tree.unshift "新增資料時，應放在">
 <!ENTITY sb.prefs.tree.unshift.top "最前面">
@@ -280,7 +280,7 @@
 <!ENTITY sb.prefs.asciiFilename "將檔案儲存為 ASCII 檔名">
 <!ENTITY sb.prefs.showDetailOnDrop "以拖曳方式擷取資料時，顯示「詳細資訊」對話方塊">
 <!ENTITY sb.prefs.notifyOnComplete "顯示「擷取完畢」提醒視窗">
-<!ENTITY sb.prefs.notifyPageCaptured "瀏覽擷取過的頁面時，顯示提醒視窗">
+<!ENTITY sb.prefs.notifyPageSaved "瀏覽擷取過的頁面時，顯示提醒視窗">
 <!ENTITY sb.prefs.autoOutput "更動資料時，自動輸出 HTML 資料列表">
 <!ENTITY sb.prefs.io "偏好設定">
 <!ENTITY sb.prefs.io.export "匯出偏好設定">

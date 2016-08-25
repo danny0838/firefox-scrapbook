@@ -272,7 +272,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML 格式化模板">
 <!ENTITY sb.prefs.data.tips "选择用户存储 ScrapBook 数据的文件夹。">
 <!ENTITY sb.prefs.confirmDelete "删除树状条目时警告我">
-<!ENTITY sb.prefs.captureDefault "默认获取设定">
+<!ENTITY sb.prefs.saveDefault "默认获取设定">
 <!ENTITY sb.prefs.tree.autoCollapse "打开树状文件夹时，自动关闭其他文件夹">
 <!ENTITY sb.prefs.tree.unshift "放条目至">
 <!ENTITY sb.prefs.tree.unshift.top "文件夹顶部">
@@ -280,7 +280,7 @@
 <!ENTITY sb.prefs.asciiFilename "将文件保存为 ASCII 文件名">
 <!ENTITY sb.prefs.showDetailOnDrop "向侧栏拖拽以捕获时显示“详细信息”对话框">
 <!ENTITY sb.prefs.notifyOnComplete "显示“捕获完成”提示">
-<!ENTITY sb.prefs.notifyPageCaptured "浏览获取过的页面时，显示提示">
+<!ENTITY sb.prefs.notifyPageSaved "浏览获取过的页面时，显示提示">
 <!ENTITY sb.prefs.autoOutput "更动项目时，自动导出项目列表">
 <!ENTITY sb.prefs.io "偏好设定">
 <!ENTITY sb.prefs.io.export "导出偏好设定">
