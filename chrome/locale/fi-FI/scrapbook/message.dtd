@@ -3,27 +3,27 @@
 <!ENTITY sb.calc.diagnosis "Tila">
 
 <!-- capture.dtd -->
-<!ENTITY sb.capture "Tallenna">
-<!ENTITY sb.capture.abort "Keskeytä">
-<!ENTITY sb.capture.start "Aloita">
-<!ENTITY sb.capture.retry "Yritä uudelleen">
-<!ENTITY sb.capture.skip "Ohita">
-<!ENTITY sb.capture.pause "Pysäytä">
-<!ENTITY sb.capture.finish "Peruuta">
-<!ENTITY sb.capture.column.address "URL">
-<!ENTITY sb.capture.column.title "Otsikko">
-<!ENTITY sb.capture.column.status "Tila">
-<!ENTITY sb.capture.checkSelection "Check selected items">
-<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
-<!ENTITY sb.capture.filter "Suodata">
-<!ENTITY sb.capture.filter.column.rule "Näytä/Piilota">
-<!ENTITY sb.capture.filter.column.content "Suodata (RegExp)">
-<!ENTITY sb.capture.filter.accept "Hyväksy">
-<!ENTITY sb.capture.filter.accept.help "Muuta tai muokkaa arvoa">
-<!ENTITY sb.capture.filter.cancel "Peruuta">
-<!ENTITY sb.capture.filter.cancel.help "Keskeytä muokkaus">
-<!ENTITY sb.capture.filter.delete "Poista">
-<!ENTITY sb.capture.filter.delete.help "Poista suodatin listasta">
+<!ENTITY sb.save "Tallenna">
+<!ENTITY sb.save.abort "Keskeytä">
+<!ENTITY sb.save.start "Aloita">
+<!ENTITY sb.save.retry "Yritä uudelleen">
+<!ENTITY sb.save.skip "Ohita">
+<!ENTITY sb.save.pause "Pysäytä">
+<!ENTITY sb.save.finish "Peruuta">
+<!ENTITY sb.save.column.address "URL">
+<!ENTITY sb.save.column.title "Otsikko">
+<!ENTITY sb.save.column.status "Tila">
+<!ENTITY sb.save.checkSelection "Check selected items">
+<!ENTITY sb.save.uncheckSelection "Uncheck selected items">
+<!ENTITY sb.save.filter "Suodata">
+<!ENTITY sb.save.filter.column.rule "Näytä/Piilota">
+<!ENTITY sb.save.filter.column.content "Suodata (RegExp)">
+<!ENTITY sb.save.filter.accept "Hyväksy">
+<!ENTITY sb.save.filter.accept.help "Muuta tai muokkaa arvoa">
+<!ENTITY sb.save.filter.cancel "Peruuta">
+<!ENTITY sb.save.filter.cancel.help "Keskeytä muokkaus">
+<!ENTITY sb.save.filter.delete "Poista">
+<!ENTITY sb.save.filter.delete.help "Poista suodatin listasta">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Lisää kohteita vetämällä yhdistämisjärjestyksessä sivupuusta. Voit lisätä useita kohteita samanaikaisesti.">
@@ -36,15 +36,11 @@
 <!ENTITY sb.combine.newTitle "Uusi otsikko">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.linked.timeout "Aikaraja (sekunneissa)">
-<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
-<!ENTITY sb.detail.linked.charset "Merkistö">
-<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
-<!ENTITY sb.detail "Tallenna osa">
+<!ENTITY sb.detail.title "Tallenna osa">
 <!ENTITY sb.detail.new.folder "Uusi kansio">
 <!ENTITY sb.detail.select.folder "Valitse kansio">
 <!ENTITY sb.detail.option "Asetukset">
-<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.save "Save">
 <!ENTITY sb.detail.option.images "Kuvat">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -59,9 +55,15 @@
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
 <!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not saving scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
-<!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
+<!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
+<!ENTITY sb.detail.option.fileAsHtml.help "When a non-HTML file is viewed by the browser, save its rendering HTML content. (Including XHTML files.)">
+<!ENTITY sb.detail.linked.timeout "Aikaraja (sekunneissa)">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "Merkistö">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail.linked.file "Lataa linkitetyt tiedostot">
 <!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
 <!ENTITY sb.detail.linked.file.method1 "Match URL file extension">
@@ -232,16 +234,16 @@
 <!ENTITY sb.output.option.open "Kun valmis, avaa HTML-tiedosto">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.capture.partial "Tallenna valinta">
-<!ENTITY sb.capture.partial.as "Tallennna valinta nimellä">
-<!ENTITY sb.capture.entire "Tallenna sivu">
-<!ENTITY sb.capture.entire.as "Tallenna sivu nimellä">
-<!ENTITY sb.capture.frame "Tallenna kehys">
-<!ENTITY sb.capture.frame.as "Tallenna kehys nimellä">
-<!ENTITY sb.capture.target "Tallenna linkki">
-<!ENTITY sb.capture.target.as "Tallenna linkki nimellä">
-<!ENTITY sb.capture.alltabs "Tallenna kaikki välilehdet">
-<!ENTITY sb.capture.bookmark "Tallenna kirjanmerkki">
+<!ENTITY sb.save.partial "Tallenna valinta">
+<!ENTITY sb.save.partial.as "Tallennna valinta nimellä">
+<!ENTITY sb.save.entire "Tallenna sivu">
+<!ENTITY sb.save.entire.as "Tallenna sivu nimellä">
+<!ENTITY sb.save.frame "Tallenna kehys">
+<!ENTITY sb.save.frame.as "Tallenna kehys nimellä">
+<!ENTITY sb.save.target "Tallenna linkki">
+<!ENTITY sb.save.target.as "Tallenna linkki nimellä">
+<!ENTITY sb.save.alltabs "Tallenna kaikki välilehdet">
+<!ENTITY sb.save.bookmark "Tallenna kirjanmerkki">
 <!ENTITY sb.sidebar "Näytä sivupaneelissa">
 <!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Muokkaa ennen tallennusta">
@@ -272,7 +274,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "Valitse kansio, johon tallennetaan ScrapBookin tiedot.">
 <!ENTITY sb.prefs.confirmDelete "Varoita kohteiden poistamisesta puusta">
-<!ENTITY sb.prefs.captureDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default save settings">
 <!ENTITY sb.prefs.tree.autoCollapse "Kun puun kansio avataan, sulje automaattisesti muut kansiot">
 <!ENTITY sb.prefs.tree.unshift "Aseta kohde">
 <!ENTITY sb.prefs.tree.unshift.top "kansion ylimmäksi merkinnäksi">
@@ -280,7 +282,7 @@
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Näytä Tallennuksen tiedot -ikkuna kun sivu tallennetaan vetämällä sivupaneeliin">
 <!ENTITY sb.prefs.notifyOnComplete "Näytä Tallennus valmis -huomautus">
-<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been saved">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">
@@ -404,7 +406,6 @@
 <!ENTITY sb.search.cs "Isot ja pienet kirjaimet erikseen">
 <!ENTITY sb.search.cache "Päivitä välimuisti täydellistä tekstihakua varten">
 <!ENTITY sb.search.clear "Tyhjennä hakukentän muisti">
-<!ENTITY sb.search.days "Suodatus päivien mukaan">
 <!ENTITY mb.manage "Hallinnoi">
 <!ENTITY mb.profileFolder "Profiilikansio">
 

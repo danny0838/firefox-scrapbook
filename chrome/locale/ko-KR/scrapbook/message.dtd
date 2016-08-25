@@ -3,27 +3,27 @@
 <!ENTITY sb.calc.diagnosis "데이터 진단">
 
 <!-- capture.dtd -->
-<!ENTITY sb.capture "캡처">
-<!ENTITY sb.capture.abort "중지">
-<!ENTITY sb.capture.start "시작">
-<!ENTITY sb.capture.retry "다시 실행">
-<!ENTITY sb.capture.skip "건너뛰기">
-<!ENTITY sb.capture.pause "일시 중지">
-<!ENTITY sb.capture.finish "취소">
-<!ENTITY sb.capture.column.address "URL">
-<!ENTITY sb.capture.column.title "제목">
-<!ENTITY sb.capture.column.status "상태">
-<!ENTITY sb.capture.checkSelection "Check selected items">
-<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
-<!ENTITY sb.capture.filter "필터">
-<!ENTITY sb.capture.filter.column.rule "보이기/감추기">
-<!ENTITY sb.capture.filter.column.content "필터 (정규표현식)">
-<!ENTITY sb.capture.filter.accept "승인">
-<!ENTITY sb.capture.filter.accept.help "값 수정">
-<!ENTITY sb.capture.filter.cancel "취소">
-<!ENTITY sb.capture.filter.cancel.help "편집 취소">
-<!ENTITY sb.capture.filter.delete "삭제">
-<!ENTITY sb.capture.filter.delete.help "목록에서 필터 제거">
+<!ENTITY sb.save "저장">
+<!ENTITY sb.save.abort "중지">
+<!ENTITY sb.save.start "시작">
+<!ENTITY sb.save.retry "다시 실행">
+<!ENTITY sb.save.skip "건너뛰기">
+<!ENTITY sb.save.pause "일시 중지">
+<!ENTITY sb.save.finish "취소">
+<!ENTITY sb.save.column.address "URL">
+<!ENTITY sb.save.column.title "제목">
+<!ENTITY sb.save.column.status "상태">
+<!ENTITY sb.save.checkSelection "Check selected items">
+<!ENTITY sb.save.uncheckSelection "Uncheck selected items">
+<!ENTITY sb.save.filter "필터">
+<!ENTITY sb.save.filter.column.rule "보이기/감추기">
+<!ENTITY sb.save.filter.column.content "필터 (정규표현식)">
+<!ENTITY sb.save.filter.accept "승인">
+<!ENTITY sb.save.filter.accept.help "값 수정">
+<!ENTITY sb.save.filter.cancel "취소">
+<!ENTITY sb.save.filter.cancel.help "편집 취소">
+<!ENTITY sb.save.filter.delete "삭제">
+<!ENTITY sb.save.filter.delete.help "목록에서 필터 제거">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "트리로부터 결합하고자 하는 항목을 끌어다 놓기로 추가하십시오. 한번에 여러 항목을 선택하여 끌어다 놓을 수 있습니다.">
@@ -36,15 +36,11 @@
 <!ENTITY sb.combine.newTitle "새 제목">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.linked.timeout "시간 제한 (초)">
-<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
-<!ENTITY sb.detail.linked.charset "문자셋">
-<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
-<!ENTITY sb.detail "캡처 상세 설정">
+<!ENTITY sb.detail.title "상세 저장">
 <!ENTITY sb.detail.new.folder "새 폴더">
 <!ENTITY sb.detail.select.folder "폴더 선택">
 <!ENTITY sb.detail.option "설정">
-<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.save "저장">
 <!ENTITY sb.detail.option.images "이미지">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -59,16 +55,22 @@
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
 <!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not saving scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
-<!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
+<!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
+<!ENTITY sb.detail.option.fileAsHtml.help "When a non-HTML file is viewed by the browser, save its rendering HTML content. (Including XHTML files.)">
+<!ENTITY sb.detail.linked.timeout "시간 제한 (초)">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "문자셋">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail.linked.file "링크된 파일 다운로드">
 <!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
 <!ENTITY sb.detail.linked.file.method1 "Match URL file extension">
 <!ENTITY sb.detail.linked.file.method2 "Match HTTP header and URL file extension">
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
-<!ENTITY sb.detail.linked.page "상세 캡처">
+<!ENTITY sb.detail.linked.page "단계 저장">
 <!ENTITY sb.detail.linked.page.desc "캡처 완료 후 모든 페이지는 상호 링크되어 사이트 맵이 생성됩니다.">
 <!ENTITY sb.detail.linked.page.depth "연결 링크 단계">
 <!ENTITY sb.detail.warnAboutRenew "알림: '다시 캡처하기' 기능은 이전에 저장된 페이지에 덮어씁니다.">
@@ -232,16 +234,16 @@
 <!ENTITY sb.output.option.open "출력 후, 브라우저로 열기">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.capture.partial "선택 부분 캡처">
-<!ENTITY sb.capture.partial.as "선택 부분 상세 캡처">
-<!ENTITY sb.capture.entire "페이지 캡처">
-<!ENTITY sb.capture.entire.as "페이지 상세 캡처">
-<!ENTITY sb.capture.frame "프레임 캡처">
-<!ENTITY sb.capture.frame.as "프레임 상세 캡처">
-<!ENTITY sb.capture.target "링크 캡처">
-<!ENTITY sb.capture.target.as "링크 상세 캡처">
-<!ENTITY sb.capture.alltabs "모든 탭 캡처">
-<!ENTITY sb.capture.bookmark "ScrapBook으로 북마크">
+<!ENTITY sb.save.partial "선택 저장">
+<!ENTITY sb.save.partial.as "다른 이름으로 선택 저장">
+<!ENTITY sb.save.entire "페이지 저장">
+<!ENTITY sb.save.entire.as "다른 이름으로 페이지 저장">
+<!ENTITY sb.save.frame "프레임 저장">
+<!ENTITY sb.save.frame.as "다른 이름으로 프레임 저장">
+<!ENTITY sb.save.target "링크 저장">
+<!ENTITY sb.save.target.as "다른 이름으로 링크 저장">
+<!ENTITY sb.save.alltabs "탭 저장">
+<!ENTITY sb.save.bookmark "다른 이름으로 북마크 저장">
 <!ENTITY sb.sidebar "탐색 창으로 보기">
 <!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "캡처하기 전에 편집하기">
@@ -272,7 +274,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "ScrapBook 데이터를 저장할 폴더를 선택하십시오.">
 <!ENTITY sb.prefs.confirmDelete "트리 항목 삭제 시 경고하기">
-<!ENTITY sb.prefs.captureDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default save settings">
 <!ENTITY sb.prefs.tree.autoCollapse "트리 폴더를 열 때, 자동으로 다른 폴더 닫기">
 <!ENTITY sb.prefs.tree.unshift "항목 저장 위치:">
 <!ENTITY sb.prefs.tree.unshift.top "폴더 맨 위">
@@ -280,7 +282,7 @@
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "탐색 창으로 끌어다 놓기하여 캡처할 때 '상세 캡처' 창 보이기">
 <!ENTITY sb.prefs.notifyOnComplete "'캡처 완료' 알림 보이기">
-<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been saved">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">
@@ -404,7 +406,6 @@
 <!ENTITY sb.search.cs "대/소문자 구별하기">
 <!ENTITY sb.search.cache "전체 검색 캐시 갱신하기">
 <!ENTITY sb.search.clear "입력 목록 비우기">
-<!ENTITY sb.search.days "날짜로 필터링">
 <!ENTITY mb.manage "관리">
 <!ENTITY mb.profileFolder "프로필 폴더">
 

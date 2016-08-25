@@ -17,25 +17,25 @@ var sbCaptureOptions = {
         }
 
         // load from preference
-        document.getElementById("sbDetailOptionImages").checked = sbCommonUtils.getPref("capture.default.images", true);
-        document.getElementById("sbDetailOptionMedia").checked = sbCommonUtils.getPref("capture.default.media", true);
-        document.getElementById("sbDetailOptionFonts").checked = sbCommonUtils.getPref("capture.default.fonts", true);
-        document.getElementById("sbDetailOptionFrames").checked = sbCommonUtils.getPref("capture.default.frames", true);
-        document.getElementById("sbDetailOptionStyles").checked = sbCommonUtils.getPref("capture.default.styles", true);
-        document.getElementById("sbDetailOptionScript").checked = sbCommonUtils.getPref("capture.default.script", false);
-        document.getElementById("sbDetailOptionAsHtml").checked = sbCommonUtils.getPref("capture.default.fileAsHtml", false);
-        document.getElementById("sbDetailOptionSaveDataURI").checked = sbCommonUtils.getPref("capture.default.saveDataUri", false);
-        document.getElementById("sbDetailOptionTidyCss").value = sbCommonUtils.getPref("capture.default.tidyCss", 3);
-        document.getElementById("sbDetailDownLinkMethod").value = sbCommonUtils.getPref("capture.default.downLinkMethod", 0);
-        document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("capture.default.downLinkFilter", "");
+        document.getElementById("sbDetailOptionImages").checked = sbCommonUtils.getPref("save.default.images", true);
+        document.getElementById("sbDetailOptionMedia").checked = sbCommonUtils.getPref("save.default.media", true);
+        document.getElementById("sbDetailOptionFonts").checked = sbCommonUtils.getPref("save.default.fonts", true);
+        document.getElementById("sbDetailOptionFrames").checked = sbCommonUtils.getPref("save.default.frames", true);
+        document.getElementById("sbDetailOptionStyles").checked = sbCommonUtils.getPref("save.default.styles", true);
+        document.getElementById("sbDetailOptionScript").checked = sbCommonUtils.getPref("save.default.script", false);
+        document.getElementById("sbDetailOptionAsHtml").checked = sbCommonUtils.getPref("save.default.fileAsHtml", false);
+        document.getElementById("sbDetailOptionSaveDataURI").checked = sbCommonUtils.getPref("save.default.saveDataUri", false);
+        document.getElementById("sbDetailOptionTidyCss").value = sbCommonUtils.getPref("save.default.tidyCss", 3);
+        document.getElementById("sbDetailDownLinkMethod").value = sbCommonUtils.getPref("save.default.downLinkMethod", 0);
+        document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("save.default.downLinkFilter", "");
         if ( this.param.context !== "capture-again-deep" ) {
-            document.getElementById("sbDetailInDepth").value = sbCommonUtils.getPref("capture.default.inDepthLevels", 0);
+            document.getElementById("sbDetailInDepth").value = sbCommonUtils.getPref("save.default.inDepthLevels", 0);
         }
 
         // init UI
         this.updateScriptWarning();
         if (this.param.item) {
-            document.documentElement.getButton("accept").label = sbCommonUtils.lang("CAPTURE_OK_BUTTON");
+            document.documentElement.getButton("accept").label = sbCommonUtils.lang("SAVE_OK_BUTTON");
             this.fillTitleList();
             if ( this.param.context == "capture-again" || this.param.context == "capture-again-deep" ) {
                 document.getElementById("sbDetailFolderRow").collapsed = true;
@@ -77,19 +77,19 @@ var sbCaptureOptions = {
         }
 
         // save to preference
-        sbCommonUtils.setPref("capture.default.images", this.param.option["images"]);
-        sbCommonUtils.setPref("capture.default.media", this.param.option["media"]);
-        sbCommonUtils.setPref("capture.default.fonts", this.param.option["fonts"]);
-        sbCommonUtils.setPref("capture.default.frames", this.param.option["frames"]);
-        sbCommonUtils.setPref("capture.default.styles", this.param.option["styles"]);
-        sbCommonUtils.setPref("capture.default.script", this.param.option["script"]);
-        sbCommonUtils.setPref("capture.default.fileAsHtml", this.param.option["fileAsHtml"]);
-        sbCommonUtils.setPref("capture.default.saveDataUri", this.param.option["saveDataUri"]);
-        sbCommonUtils.setPref("capture.default.tidyCss", this.param.option["tidyCss"]);
-        sbCommonUtils.setPref("capture.default.downLinkMethod", this.param.option["downLinkMethod"]);
-        sbCommonUtils.setPref("capture.default.downLinkFilter", this.param.option["downLinkFilter"]);
+        sbCommonUtils.setPref("save.default.images", this.param.option["images"]);
+        sbCommonUtils.setPref("save.default.media", this.param.option["media"]);
+        sbCommonUtils.setPref("save.default.fonts", this.param.option["fonts"]);
+        sbCommonUtils.setPref("save.default.frames", this.param.option["frames"]);
+        sbCommonUtils.setPref("save.default.styles", this.param.option["styles"]);
+        sbCommonUtils.setPref("save.default.script", this.param.option["script"]);
+        sbCommonUtils.setPref("save.default.fileAsHtml", this.param.option["fileAsHtml"]);
+        sbCommonUtils.setPref("save.default.saveDataUri", this.param.option["saveDataUri"]);
+        sbCommonUtils.setPref("save.default.tidyCss", this.param.option["tidyCss"]);
+        sbCommonUtils.setPref("save.default.downLinkMethod", this.param.option["downLinkMethod"]);
+        sbCommonUtils.setPref("save.default.downLinkFilter", this.param.option["downLinkFilter"]);
         if ( this.param.context !== "capture-again-deep" ) {
-            sbCommonUtils.setPref("capture.default.inDepthLevels", this.param.option["inDepth"]);
+            sbCommonUtils.setPref("save.default.inDepthLevels", this.param.option["inDepth"]);
         }
 
         // check for regex error
@@ -101,13 +101,13 @@ var sbCaptureOptions = {
             try {
                 new RegExp("^(?:" + line + ")$", "i");
             } catch (ex) {
-                line =  sbCommonUtils.lang("ERR_CAPTURE_DOWNLINKFILTER_LINE", index+1, srcLine);
+                line =  sbCommonUtils.lang("ERR_SAVE_DOWNLINKFILTER_LINE", index+1, srcLine);
                 errors.push(line);
             }
         });
         if (errors.length) {
             var button = sbCommonUtils.PROMPT.STD_YES_NO_BUTTONS;
-            var text = sbCommonUtils.lang("ERR_CAPTURE_DOWNLINKFILTER", errors.join("\n\n"));
+            var text = sbCommonUtils.lang("ERR_SAVE_DOWNLINKFILTER", errors.join("\n\n"));
             // yes => 0, no => 1, close => 1
             return sbCommonUtils.PROMPT.confirmEx(null, "[ScrapBook]", text, button, null, null, null, null, {});
         }
@@ -139,9 +139,9 @@ var sbCaptureOptions = {
 
     resetDownLinkFilters: function() {
         var _filter = document.getElementById("sbDetailDownLinkFilter").value;
-        sbCommonUtils.resetPref("capture.default.downLinkFilter");
-        document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("capture.default.downLinkFilter", "");
-        sbCommonUtils.setPref("capture.default.downLinkFilter", _filter);
+        sbCommonUtils.resetPref("save.default.downLinkFilter");
+        document.getElementById("sbDetailDownLinkFilter").value = sbCommonUtils.getPref("save.default.downLinkFilter", "");
+        sbCommonUtils.setPref("save.default.downLinkFilter", _filter);
     },
 
 };

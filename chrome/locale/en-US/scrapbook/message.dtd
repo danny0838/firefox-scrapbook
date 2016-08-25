@@ -3,27 +3,27 @@
 <!ENTITY sb.calc.diagnosis "Diagnosis">
 
 <!-- capture.dtd -->
-<!ENTITY sb.capture "Capture">
-<!ENTITY sb.capture.abort "Abort">
-<!ENTITY sb.capture.start "Start">
-<!ENTITY sb.capture.retry "Retry">
-<!ENTITY sb.capture.skip "Skip">
-<!ENTITY sb.capture.pause "Pause">
-<!ENTITY sb.capture.finish "Cancel">
-<!ENTITY sb.capture.column.address "URL">
-<!ENTITY sb.capture.column.title "Title">
-<!ENTITY sb.capture.column.status "Status">
-<!ENTITY sb.capture.checkSelection "Check selected items">
-<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
-<!ENTITY sb.capture.filter "Filter">
-<!ENTITY sb.capture.filter.column.rule "Show/Hide">
-<!ENTITY sb.capture.filter.column.content "Filter (regular expression)">
-<!ENTITY sb.capture.filter.accept "Accept">
-<!ENTITY sb.capture.filter.accept.help "change or edit value">
-<!ENTITY sb.capture.filter.cancel "Cancel">
-<!ENTITY sb.capture.filter.cancel.help "abort editing">
-<!ENTITY sb.capture.filter.delete "Delete">
-<!ENTITY sb.capture.filter.delete.help "remove filter from the list">
+<!ENTITY sb.save "Save">
+<!ENTITY sb.save.abort "Abort">
+<!ENTITY sb.save.start "Start">
+<!ENTITY sb.save.retry "Retry">
+<!ENTITY sb.save.skip "Skip">
+<!ENTITY sb.save.pause "Pause">
+<!ENTITY sb.save.finish "Cancel">
+<!ENTITY sb.save.column.address "URL">
+<!ENTITY sb.save.column.title "Title">
+<!ENTITY sb.save.column.status "Status">
+<!ENTITY sb.save.checkSelection "Check selected items">
+<!ENTITY sb.save.uncheckSelection "Uncheck selected items">
+<!ENTITY sb.save.filter "Filter">
+<!ENTITY sb.save.filter.column.rule "Show/Hide">
+<!ENTITY sb.save.filter.column.content "Filter (regular expression)">
+<!ENTITY sb.save.filter.accept "Accept">
+<!ENTITY sb.save.filter.accept.help "change or edit value">
+<!ENTITY sb.save.filter.cancel "Cancel">
+<!ENTITY sb.save.filter.cancel.help "abort editing">
+<!ENTITY sb.save.filter.delete "Delete">
+<!ENTITY sb.save.filter.delete.help "remove filter from the list">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Add items by drag-and-drop from the tree in the order you want to combine. You can drag-and-drop multiple items at once.">
@@ -36,15 +36,11 @@
 <!ENTITY sb.combine.newTitle "new title">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.linked.timeout "Timeout (in seconds)">
-<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
-<!ENTITY sb.detail.linked.charset "Charset">
-<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
-<!ENTITY sb.detail "Capture Detail">
+<!ENTITY sb.detail.title "Save Detail">
 <!ENTITY sb.detail.new.folder "New Folder">
 <!ENTITY sb.detail.select.folder "Select Folder">
 <!ENTITY sb.detail.option "Options">
-<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.save "Save">
 <!ENTITY sb.detail.option.images "Images">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -59,19 +55,25 @@
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
 <!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not saving scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
-<!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
+<!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
+<!ENTITY sb.detail.option.fileAsHtml.help "When a non-HTML file is viewed by the browser, save its rendering HTML content. (Including XHTML files.)">
+<!ENTITY sb.detail.linked.timeout "Timeout (in seconds)">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "Charset">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail.linked.file "Download linked files">
 <!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
 <!ENTITY sb.detail.linked.file.method1 "Match URL file extension">
 <!ENTITY sb.detail.linked.file.method2 "Match HTTP header and URL file extension">
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
-<!ENTITY sb.detail.linked.page "In-depth Capture">
-<!ENTITY sb.detail.linked.page.desc "After all pages are captured, they will be linked with each other and a sitemap will be created.">
+<!ENTITY sb.detail.linked.page "In-depth Save">
+<!ENTITY sb.detail.linked.page.desc "After all pages are saved, they will be linked with each other and a sitemap will be created.">
 <!ENTITY sb.detail.linked.page.depth "Depth to follow links">
-<!ENTITY sb.detail.warnAboutRenew "NOTICE: 'Capture Again' overwrites the previously saved page.">
+<!ENTITY sb.detail.warnAboutRenew "NOTICE: 'Save Again' will overwrite the previously saved page.">
 <!ENTITY sb.detail.warnAboutScript "NOTICE: JavaScript may cause some problems.">
 
 <!-- editor.dtd -->
@@ -232,19 +234,19 @@
 <!ENTITY sb.output.option.open "After outputting, open it in browser">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.capture.partial "Capture Selection">
-<!ENTITY sb.capture.partial.as "Capture Selection As">
-<!ENTITY sb.capture.entire "Capture Page">
-<!ENTITY sb.capture.entire.as "Capture Page As">
-<!ENTITY sb.capture.frame "Capture Frame">
-<!ENTITY sb.capture.frame.as "Capture Frame As">
-<!ENTITY sb.capture.target "Capture Link">
-<!ENTITY sb.capture.target.as "Capture Link As">
-<!ENTITY sb.capture.alltabs "Capture All Tabs">
-<!ENTITY sb.capture.bookmark "Bookmark with ScrapBook">
+<!ENTITY sb.save.partial "Save Selection">
+<!ENTITY sb.save.partial.as "Save Selection As">
+<!ENTITY sb.save.entire "Save Page">
+<!ENTITY sb.save.entire.as "Save Page As">
+<!ENTITY sb.save.frame "Save Frame">
+<!ENTITY sb.save.frame.as "Save Frame As">
+<!ENTITY sb.save.target "Save Link">
+<!ENTITY sb.save.target.as "Save Link As">
+<!ENTITY sb.save.alltabs "Save All Tabs">
+<!ENTITY sb.save.bookmark "Save As Bookmark">
 <!ENTITY sb.sidebar "Show in Sidebar">
 <!ENTITY sb.menubar "Menubar accesskey">
-<!ENTITY sb.editbefore "Edit Before Capture">
+<!ENTITY sb.editbefore "Edit Before Save">
 
 <!-- prefs.dtd -->
 <!ENTITY sb.prefs.main "Main">
@@ -272,15 +274,15 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "Choose a folder where to store the ScrapBook data.">
 <!ENTITY sb.prefs.confirmDelete "Warn me when deleting tree item(s)">
-<!ENTITY sb.prefs.captureDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default save settings">
 <!ENTITY sb.prefs.tree.autoCollapse "When opening a tree folder, automatically close other folders">
 <!ENTITY sb.prefs.tree.unshift "Put an item into">
 <!ENTITY sb.prefs.tree.unshift.top "the top of a folder">
 <!ENTITY sb.prefs.tree.unshift.bottom "the bottom of a folder">
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
-<!ENTITY sb.prefs.showDetailOnDrop "Show 'Capture Detail' dialog when capturing by drag-and-drop into Sidebar">
-<!ENTITY sb.prefs.notifyOnComplete "Show 'Capture Completed' notification">
-<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.showDetailOnDrop "Show 'Save Detail' dialog when saving by drag-and-drop into the sidebar">
+<!ENTITY sb.prefs.notifyOnComplete "Show 'Save Completed' notification">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been saved">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">
@@ -326,7 +328,7 @@
 <!ENTITY sb.tools.manage "Manage">
 <!ENTITY sb.tools.combine "Combine Wizard">
 <!ENTITY sb.tools.trade "Import / Export">
-<!ENTITY sb.tools.multiple "Capture Multiple URLs">
+<!ENTITY sb.tools.multiple "Save Multiple URLs">
 <!ENTITY sb.tools.directory "ScrapBook Directory">
 <!ENTITY sb.tools.calculate "Calculation of Size">
 <!ENTITY sb.tools.sorttree "Sort Entire Tree">
@@ -376,7 +378,7 @@
 <!ENTITY sb.move "Move">
 <!ENTITY sb.move.into "Move into Folder">
 <!ENTITY sb.copy "Copy">
-<!ENTITY sb.renew "Capture Again">
+<!ENTITY sb.renew "Save Again">
 <!ENTITY sb.internalize "Internalize">
 <!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "Export">
@@ -404,7 +406,6 @@
 <!ENTITY sb.search.cs "Match Case">
 <!ENTITY sb.search.cache "Update Cache for Full Text Search">
 <!ENTITY sb.search.clear "Clear Form History">
-<!ENTITY sb.search.days "Filtering by Days">
 <!ENTITY mb.manage "Manage">
 <!ENTITY mb.profileFolder "Profile Folder">
 

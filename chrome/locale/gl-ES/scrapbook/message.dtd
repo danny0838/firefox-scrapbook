@@ -3,27 +3,27 @@
 <!ENTITY sb.calc.diagnosis "Diagnose">
 
 <!-- capture.dtd -->
-<!ENTITY sb.capture "Capturar">
-<!ENTITY sb.capture.abort "Abortar">
-<!ENTITY sb.capture.start "Comezar">
-<!ENTITY sb.capture.retry "Reintentar">
-<!ENTITY sb.capture.skip "Saltar">
-<!ENTITY sb.capture.pause "Pausar">
-<!ENTITY sb.capture.finish "Cancelar">
-<!ENTITY sb.capture.column.address "URL">
-<!ENTITY sb.capture.column.title "Título">
-<!ENTITY sb.capture.column.status "Estado">
-<!ENTITY sb.capture.checkSelection "Check selected items">
-<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
-<!ENTITY sb.capture.filter "Filtro">
-<!ENTITY sb.capture.filter.column.rule "Amosar/Agochar">
-<!ENTITY sb.capture.filter.column.content "Filtro (expresión regular)">
-<!ENTITY sb.capture.filter.accept "Aceptar">
-<!ENTITY sb.capture.filter.accept.help "cambiar ou editar o valor">
-<!ENTITY sb.capture.filter.cancel "Cancelar">
-<!ENTITY sb.capture.filter.cancel.help "cancelar a edición">
-<!ENTITY sb.capture.filter.delete "Eliminar">
-<!ENTITY sb.capture.filter.delete.help "eliminar o filtro da lista">
+<!ENTITY sb.save "Gardar">
+<!ENTITY sb.save.abort "Abortar">
+<!ENTITY sb.save.start "Comezar">
+<!ENTITY sb.save.retry "Reintentar">
+<!ENTITY sb.save.skip "Saltar">
+<!ENTITY sb.save.pause "Pausar">
+<!ENTITY sb.save.finish "Cancelar">
+<!ENTITY sb.save.column.address "URL">
+<!ENTITY sb.save.column.title "Título">
+<!ENTITY sb.save.column.status "Estado">
+<!ENTITY sb.save.checkSelection "Check selected items">
+<!ENTITY sb.save.uncheckSelection "Uncheck selected items">
+<!ENTITY sb.save.filter "Filtro">
+<!ENTITY sb.save.filter.column.rule "Amosar/Agochar">
+<!ENTITY sb.save.filter.column.content "Filtro (expresión regular)">
+<!ENTITY sb.save.filter.accept "Aceptar">
+<!ENTITY sb.save.filter.accept.help "cambiar ou editar o valor">
+<!ENTITY sb.save.filter.cancel "Cancelar">
+<!ENTITY sb.save.filter.cancel.help "cancelar a edición">
+<!ENTITY sb.save.filter.delete "Eliminar">
+<!ENTITY sb.save.filter.delete.help "eliminar o filtro da lista">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Engadir elementos, na orde desexada, arrastrando e soltando desde a colección . Pode mover varios elementos á vez.">
@@ -36,15 +36,11 @@
 <!ENTITY sb.combine.newTitle "Título novo">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.linked.timeout "Temporizador (en segundos)">
-<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
-<!ENTITY sb.detail.linked.charset "Xogo de caracteres">
-<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
-<!ENTITY sb.detail "Detalles da captura">
+<!ENTITY sb.detail.title "Información da captura">
 <!ENTITY sb.detail.new.folder "Novo cartafol">
 <!ENTITY sb.detail.select.folder "Seleccione un cartafol">
 <!ENTITY sb.detail.option "Opcións">
-<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.save "Gardar">
 <!ENTITY sb.detail.option.images "Imaxes">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -59,16 +55,22 @@
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
 <!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not saving scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
-<!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
+<!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
+<!ENTITY sb.detail.option.fileAsHtml.help "When a non-HTML file is viewed by the browser, save its rendering HTML content. (Including XHTML files.)">
+<!ENTITY sb.detail.linked.timeout "Temporizador (en segundos)">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "Xogo de caracteres">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail.linked.file "Descargar ficheiros ligados">
 <!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
 <!ENTITY sb.detail.linked.file.method1 "Match URL file extension">
 <!ENTITY sb.detail.linked.file.method2 "Match HTTP header and URL file extension">
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
-<!ENTITY sb.detail.linked.page "Captura en niveis">
+<!ENTITY sb.detail.linked.page "Gardar con niveis">
 <!ENTITY sb.detail.linked.page.desc "Despois de completar as capturas, todas as páxinas serán ligadas e crearase un mapa web">
 <!ENTITY sb.detail.linked.page.depth "Número de niveis">
 <!ENTITY sb.detail.warnAboutRenew "AVISO: 'Capturar outra vez'">
@@ -232,19 +234,19 @@
 <!ENTITY sb.output.option.open "Despois de xerar, abrir no navegador">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.capture.partial "Capturar selección">
-<!ENTITY sb.capture.partial.as "Capturar selección como">
-<!ENTITY sb.capture.entire "Capturar páxina">
-<!ENTITY sb.capture.entire.as "Capturar páxina como">
-<!ENTITY sb.capture.frame "Capturar cadro">
-<!ENTITY sb.capture.frame.as "Capturar cadro como">
-<!ENTITY sb.capture.target "Capturar ligazón">
-<!ENTITY sb.capture.target.as "Capturar ligazón como">
-<!ENTITY sb.capture.alltabs "Capturar todas as pestanas">
-<!ENTITY sb.capture.bookmark "Marcar co ScrapBook">
+<!ENTITY sb.save.partial "Gardar a selección">
+<!ENTITY sb.save.partial.as "Gardar a selección como">
+<!ENTITY sb.save.entire "Gardar a páxina">
+<!ENTITY sb.save.entire.as "Gardar a páxina como">
+<!ENTITY sb.save.frame "Gardar o marco">
+<!ENTITY sb.save.frame.as "Gardar o marco como">
+<!ENTITY sb.save.target "Gardar a ligazón">
+<!ENTITY sb.save.target.as "Gardar a ligazón como">
+<!ENTITY sb.save.alltabs "Gardar todas as pestanas">
+<!ENTITY sb.save.bookmark "Gardar como marcador">
 <!ENTITY sb.sidebar "Amosar na barra lateral">
 <!ENTITY sb.menubar "Menubar accesskey">
-<!ENTITY sb.editbefore "Editar antes de capturar">
+<!ENTITY sb.editbefore "Editar antes da captura">
 
 <!-- prefs.dtd -->
 <!ENTITY sb.prefs.main "Principal">
@@ -272,7 +274,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "Escoller un cartafol onde gardar os datos de ScrapBook.">
 <!ENTITY sb.prefs.confirmDelete "Avisarme cando se borren elementos da colección(s)">
-<!ENTITY sb.prefs.captureDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default save settings">
 <!ENTITY sb.prefs.tree.autoCollapse "Ao abrir un cartafol da colección, pechar os outros cartafoles automaticamente">
 <!ENTITY sb.prefs.tree.unshift "Poñer o elemento">
 <!ENTITY sb.prefs.tree.unshift.top "na parte superior do cartafol">
@@ -280,7 +282,7 @@
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Amosar o diálogo 'Detalles da captura' cando se capture arrastrando e soltando sobre o panel lateral">
 <!ENTITY sb.prefs.notifyOnComplete "Amosar o aviso de 'Captura completada'">
-<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been saved">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">
@@ -404,7 +406,6 @@
 <!ENTITY sb.search.cs "Diferenciar maiúsulas/minúsculas">
 <!ENTITY sb.search.cache "Actualizar caché para a procura de texto completo">
 <!ENTITY sb.search.clear "Limpar a historia do formulario">
-<!ENTITY sb.search.days "Filtrar por días">
 <!ENTITY mb.manage "Xestión">
 <!ENTITY mb.profileFolder "Cartafol do perfil">
 

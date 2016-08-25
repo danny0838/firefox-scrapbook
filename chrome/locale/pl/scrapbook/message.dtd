@@ -3,27 +3,27 @@
 <!ENTITY sb.calc.diagnosis "Kontrola poprawności">
 
 <!-- capture.dtd -->
-<!ENTITY sb.capture "Przechwyć">
-<!ENTITY sb.capture.abort "Usuń">
-<!ENTITY sb.capture.start "Start">
-<!ENTITY sb.capture.retry "Spróbuj ponownie">
-<!ENTITY sb.capture.skip "Pomiń">
-<!ENTITY sb.capture.pause "Pauza">
-<!ENTITY sb.capture.finish "Anuluj">
-<!ENTITY sb.capture.column.address "URL">
-<!ENTITY sb.capture.column.title "Tytuł">
-<!ENTITY sb.capture.column.status "Status">
-<!ENTITY sb.capture.checkSelection "Check selected items">
-<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
-<!ENTITY sb.capture.filter "Filtrowanie">
-<!ENTITY sb.capture.filter.column.rule "Pokaż/Ukryj">
-<!ENTITY sb.capture.filter.column.content "Filtr (wyrażenie regularne)">
-<!ENTITY sb.capture.filter.accept "Akceptuj">
-<!ENTITY sb.capture.filter.accept.help "Zmień lub edytuj wartość">
-<!ENTITY sb.capture.filter.cancel "Anuluj">
-<!ENTITY sb.capture.filter.cancel.help "przerwij edytowanie">
-<!ENTITY sb.capture.filter.delete "Usuń">
-<!ENTITY sb.capture.filter.delete.help "usuń filtr z listy">
+<!ENTITY sb.save "Przechwyć">
+<!ENTITY sb.save.abort "Usuń">
+<!ENTITY sb.save.start "Start">
+<!ENTITY sb.save.retry "Spróbuj ponownie">
+<!ENTITY sb.save.skip "Pomiń">
+<!ENTITY sb.save.pause "Pauza">
+<!ENTITY sb.save.finish "Anuluj">
+<!ENTITY sb.save.column.address "URL">
+<!ENTITY sb.save.column.title "Tytuł">
+<!ENTITY sb.save.column.status "Status">
+<!ENTITY sb.save.checkSelection "Check selected items">
+<!ENTITY sb.save.uncheckSelection "Uncheck selected items">
+<!ENTITY sb.save.filter "Filtrowanie">
+<!ENTITY sb.save.filter.column.rule "Pokaż/Ukryj">
+<!ENTITY sb.save.filter.column.content "Filtr (wyrażenie regularne)">
+<!ENTITY sb.save.filter.accept "Akceptuj">
+<!ENTITY sb.save.filter.accept.help "Zmień lub edytuj wartość">
+<!ENTITY sb.save.filter.cancel "Anuluj">
+<!ENTITY sb.save.filter.cancel.help "przerwij edytowanie">
+<!ENTITY sb.save.filter.delete "Usuń">
+<!ENTITY sb.save.filter.delete.help "usuń filtr z listy">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Dodaj elementy przeciągając je z drzewa w kolejności w jakiej chcesz je połączyć. Można jednocześnie przeciągać wiele elementów.">
@@ -36,15 +36,11 @@
 <!ENTITY sb.combine.newTitle "nowy tytuł">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.linked.timeout "Limit czasu (s)">
-<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
-<!ENTITY sb.detail.linked.charset "Zestaw znaków">
-<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
-<!ENTITY sb.detail "Szczegóły przechwytywania">
+<!ENTITY sb.detail.title "Szczegóły przechwytywania">
 <!ENTITY sb.detail.new.folder "Nowy folder">
 <!ENTITY sb.detail.select.folder "Wybierz folder">
 <!ENTITY sb.detail.option "Opcje">
-<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.save "Save">
 <!ENTITY sb.detail.option.images "Obrazki">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -59,9 +55,15 @@
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
 <!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not saving scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
-<!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
+<!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
+<!ENTITY sb.detail.option.fileAsHtml.help "When a non-HTML file is viewed by the browser, save its rendering HTML content. (Including XHTML files.)">
+<!ENTITY sb.detail.linked.timeout "Limit czasu (s)">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "Zestaw znaków">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail.linked.file "Pobierz odnośniki do">
 <!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
 <!ENTITY sb.detail.linked.file.method1 "Match URL file extension">
@@ -232,16 +234,16 @@
 <!ENTITY sb.output.option.open "Po utworzeniu otwórz dokument w przeglądarce">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.capture.partial "Przechwyć zaznaczenie">
-<!ENTITY sb.capture.partial.as "Przechwyć zaznaczenie jako">
-<!ENTITY sb.capture.entire "Przechwyć stronę">
-<!ENTITY sb.capture.entire.as "Przechwyć stronę jako">
-<!ENTITY sb.capture.frame "Przechwyć ramkę">
-<!ENTITY sb.capture.frame.as "Przechwyć ramkę jako">
-<!ENTITY sb.capture.target "Przechwyć odnośnik">
-<!ENTITY sb.capture.target.as "Przechwyć odnośnik jako">
-<!ENTITY sb.capture.alltabs "Przechwyć wszystkie karty">
-<!ENTITY sb.capture.bookmark "Dodaj do zakładek używając ScrapBooka">
+<!ENTITY sb.save.partial "Przechwyć zaznaczenie">
+<!ENTITY sb.save.partial.as "Przechwyć zaznaczenie jako">
+<!ENTITY sb.save.entire "Przechwyć stronę">
+<!ENTITY sb.save.entire.as "Przechwyć stronę jako">
+<!ENTITY sb.save.frame "Przechwyć ramkę">
+<!ENTITY sb.save.frame.as "Przechwyć ramkę jako">
+<!ENTITY sb.save.target "Przechwyć odnośnik">
+<!ENTITY sb.save.target.as "Przechwyć odnośnik jako">
+<!ENTITY sb.save.alltabs "Przechwyć wszystkie karty">
+<!ENTITY sb.save.bookmark "Dodaj do zakładek używając ScrapBooka">
 <!ENTITY sb.sidebar "Wyświetl w panelu bocznym">
 <!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Edytuj przed przechwyceniem">
@@ -272,7 +274,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "Wybierz folder, w którym będą zapisywane dane ScrapBooka">
 <!ENTITY sb.prefs.confirmDelete "Ostrzegaj, gdy jest usuwane drzewo elementów">
-<!ENTITY sb.prefs.captureDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default save settings">
 <!ENTITY sb.prefs.tree.autoCollapse "Otwierając folder drzewa automatycznie zamykaj inne foldery">
 <!ENTITY sb.prefs.tree.unshift "Umieść element">
 <!ENTITY sb.prefs.tree.unshift.top "na górze folderu">
@@ -280,7 +282,7 @@
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Wyświetlaj okno dialogowe „Szczegóły przechwytywania” podczas przechwytywania za pomocą przeciągania do panelu bocznego">
 <!ENTITY sb.prefs.notifyOnComplete "Wyświetlaj powiadomienie o zakończeniu przechwytywania">
-<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been saved">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">
@@ -404,7 +406,6 @@
 <!ENTITY sb.search.cs "Uwzględnij wielkość liter">
 <!ENTITY sb.search.cache "Uaktualnij pamięć podręczną dla szukania wszystkich słów">
 <!ENTITY sb.search.clear "Wyczyść formularz historii">
-<!ENTITY sb.search.days "Filtrowanie wg dni">
 <!ENTITY mb.manage "Zarządzaj">
 <!ENTITY mb.profileFolder "Folder profilu">
 

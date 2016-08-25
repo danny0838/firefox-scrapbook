@@ -3,27 +3,27 @@
 <!ENTITY sb.calc.diagnosis "Teşhis">
 
 <!-- capture.dtd -->
-<!ENTITY sb.capture "Kaydet">
-<!ENTITY sb.capture.abort "İptal Et">
-<!ENTITY sb.capture.start "Başla">
-<!ENTITY sb.capture.retry "Yeniden Dene">
-<!ENTITY sb.capture.skip "Atla">
-<!ENTITY sb.capture.pause "Duraklat">
-<!ENTITY sb.capture.finish "Cancel">
-<!ENTITY sb.capture.column.address "URL">
-<!ENTITY sb.capture.column.title "Title">
-<!ENTITY sb.capture.column.status "Status">
-<!ENTITY sb.capture.checkSelection "Check selected items">
-<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
-<!ENTITY sb.capture.filter "Filtre">
-<!ENTITY sb.capture.filter.column.rule "Show/Hide">
-<!ENTITY sb.capture.filter.column.content "Filter (regular expression)">
-<!ENTITY sb.capture.filter.accept "Accept">
-<!ENTITY sb.capture.filter.accept.help "change or edit value">
-<!ENTITY sb.capture.filter.cancel "Cancel">
-<!ENTITY sb.capture.filter.cancel.help "abort editing">
-<!ENTITY sb.capture.filter.delete "Delete">
-<!ENTITY sb.capture.filter.delete.help "remove filter from the list">
+<!ENTITY sb.save "Kaydet">
+<!ENTITY sb.save.abort "İptal Et">
+<!ENTITY sb.save.start "Başla">
+<!ENTITY sb.save.retry "Yeniden Dene">
+<!ENTITY sb.save.skip "Atla">
+<!ENTITY sb.save.pause "Duraklat">
+<!ENTITY sb.save.finish "Cancel">
+<!ENTITY sb.save.column.address "URL">
+<!ENTITY sb.save.column.title "Title">
+<!ENTITY sb.save.column.status "Status">
+<!ENTITY sb.save.checkSelection "Check selected items">
+<!ENTITY sb.save.uncheckSelection "Uncheck selected items">
+<!ENTITY sb.save.filter "Filtre">
+<!ENTITY sb.save.filter.column.rule "Show/Hide">
+<!ENTITY sb.save.filter.column.content "Filter (regular expression)">
+<!ENTITY sb.save.filter.accept "Accept">
+<!ENTITY sb.save.filter.accept.help "change or edit value">
+<!ENTITY sb.save.filter.cancel "Cancel">
+<!ENTITY sb.save.filter.cancel.help "abort editing">
+<!ENTITY sb.save.filter.delete "Delete">
+<!ENTITY sb.save.filter.delete.help "remove filter from the list">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Öğeleri ağaç görünümünden, birleştirmek istediğiniz sırayla, sürükleyip bırakarak ekleyin. Tek seferde birden çok öğeyi sürükleyip bırakabilirsiniz.">
@@ -36,15 +36,11 @@
 <!ENTITY sb.combine.newTitle "new title">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.linked.timeout "Timeout (in seconds)">
-<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
-<!ENTITY sb.detail.linked.charset "Charset">
-<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
-<!ENTITY sb.detail "Capture Detail">
+<!ENTITY sb.detail.title "Capture Detail">
 <!ENTITY sb.detail.new.folder "Yeni Klasör">
 <!ENTITY sb.detail.select.folder "Klasör Seç">
 <!ENTITY sb.detail.option "Ayarlar">
-<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.save "Save">
 <!ENTITY sb.detail.option.images "Resimler">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -59,9 +55,15 @@
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
 <!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not saving scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
-<!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
+<!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
+<!ENTITY sb.detail.option.fileAsHtml.help "When a non-HTML file is viewed by the browser, save its rendering HTML content. (Including XHTML files.)">
+<!ENTITY sb.detail.linked.timeout "Timeout (in seconds)">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "Charset">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail.linked.file "Bağlantılı dosyaları indir">
 <!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
 <!ENTITY sb.detail.linked.file.method1 "Match URL file extension">
@@ -232,16 +234,16 @@
 <!ENTITY sb.output.option.open "Çıkarttıktan sonra tarayıcı ile aç">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.capture.partial "Capture Selection">
-<!ENTITY sb.capture.partial.as "Capture Selection As">
-<!ENTITY sb.capture.entire "Capture Page">
-<!ENTITY sb.capture.entire.as "Capture Page As">
-<!ENTITY sb.capture.frame "Capture Frame">
-<!ENTITY sb.capture.frame.as "Capture Frame As">
-<!ENTITY sb.capture.target "Capture Link">
-<!ENTITY sb.capture.target.as "Capture Link As">
-<!ENTITY sb.capture.alltabs "Capture All Tabs">
-<!ENTITY sb.capture.bookmark "Bookmark with ScrapBook">
+<!ENTITY sb.save.partial "Capture Selection">
+<!ENTITY sb.save.partial.as "Capture Selection As">
+<!ENTITY sb.save.entire "Capture Page">
+<!ENTITY sb.save.entire.as "Capture Page As">
+<!ENTITY sb.save.frame "Capture Frame">
+<!ENTITY sb.save.frame.as "Capture Frame As">
+<!ENTITY sb.save.target "Capture Link">
+<!ENTITY sb.save.target.as "Capture Link As">
+<!ENTITY sb.save.alltabs "Capture All Tabs">
+<!ENTITY sb.save.bookmark "Bookmark with ScrapBook">
 <!ENTITY sb.sidebar "Kenar Çubuğunda Göster">
 <!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Kaydetmeden Önce Düzenle">
@@ -272,7 +274,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "ScrapBook verilerinin saklanacağı konumu seçin.">
 <!ENTITY sb.prefs.confirmDelete "Ağaç öğelerini silerken beni uyar">
-<!ENTITY sb.prefs.captureDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default save settings">
 <!ENTITY sb.prefs.tree.autoCollapse "Ağaçta klasör açınca, otomatik olarak diğer klasörleri kapat">
 <!ENTITY sb.prefs.tree.unshift "Buraya öğe bilgisi ekle">
 <!ENTITY sb.prefs.tree.unshift.top "Klasörün üstü">
@@ -280,7 +282,7 @@
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Kenar çubuğuna sürükleyip-bırakarak kaydetmelerde 'Kayıt Detayları' diyaloğunu göster">
 <!ENTITY sb.prefs.notifyOnComplete "'Kaydetme Tamamlandı' uyarısını göster">
-<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been saved">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">
@@ -405,7 +407,6 @@
 <!ENTITY sb.search.cs "Büyük-Küçük Harf Eşleştir">
 <!ENTITY sb.search.cache "Tam Metin Arama İçin Belleği Güncelle">
 <!ENTITY sb.search.clear "Geçmişten Temizle">
-<!ENTITY sb.search.days "Güne Göre Filteleme">
 <!ENTITY mb.manage "Yönet">
 <!ENTITY mb.profileFolder "Profil Klasörü">
 

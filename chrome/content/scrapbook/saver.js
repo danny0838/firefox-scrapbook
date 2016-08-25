@@ -18,7 +18,7 @@ var sbContentSaver = {
             if ( sbDataSource.getProperty(res, "type") == "marked" ) return;
             if ( sbCommonUtils.getPref("notifyOnComplete", true) ) {
                 var icon = sbDataSource.getProperty(res, "icon") || sbCommonUtils.getDefaultIcon(aItem.type);
-                var title = "ScrapBook: " + sbCommonUtils.lang("CAPTURE_COMPLETE");
+                var title = "ScrapBook: " + sbCommonUtils.lang("SAVE_COMPLETE");
                 var text = sbCommonUtils.crop(aItem.title, null, 100);
                 var listener = {
                     observe: function(subject, topic, data) {
@@ -31,7 +31,7 @@ var sbContentSaver = {
             }
         } else {
             var icon = sbCommonUtils.getDefaultIcon();
-            var title = "ScrapBook: " + sbCommonUtils.lang("CAPTURE_COMPLETE");
+            var title = "ScrapBook: " + sbCommonUtils.lang("SAVE_COMPLETE");
             var alertsSvc = Components.classes["@mozilla.org/alerts-service;1"].getService(Components.interfaces.nsIAlertsService);
             alertsSvc.showAlertNotification(icon, title, null);
         }
@@ -43,26 +43,26 @@ function sbContentSaverClass() {
     this.context = null;
     this.option = {
         "isPartial": false,
-        "images": sbCommonUtils.getPref("capture.default.images", true),
-        "media": sbCommonUtils.getPref("capture.default.media", true),
-        "fonts": sbCommonUtils.getPref("capture.default.fonts", true),
-        "frames": sbCommonUtils.getPref("capture.default.frames", true),
-        "styles": sbCommonUtils.getPref("capture.default.styles", true),
-        "script": sbCommonUtils.getPref("capture.default.script", false),
-        "fileAsHtml": sbCommonUtils.getPref("capture.default.fileAsHtml", false),
-        "forceUtf8": sbCommonUtils.getPref("capture.default.forceUtf8", true),
-        "tidyCss": sbCommonUtils.getPref("capture.default.tidyCss", 3), // 0: none, 1: +rewrite link, 2: +remove unknown; 3: +remove unused
-        "removeIntegrity": sbCommonUtils.getPref("capture.default.removeIntegrity", true),
-        "saveDataUri": sbCommonUtils.getPref("capture.default.saveDataUri", false),
-        "serializeFilename": sbCommonUtils.getPref("capture.default.serializeFilename", false),
-        "linkUrlFilters": sbCommonUtils.getPref("capture.default.linkUrlFilters", ""),
-        "downLinkMethod": sbCommonUtils.getPref("capture.default.downLinkMethod", 0),
-        "downLinkFilter": sbCommonUtils.getPref("capture.default.downLinkFilter", ""),
+        "images": sbCommonUtils.getPref("save.default.images", true),
+        "media": sbCommonUtils.getPref("save.default.media", true),
+        "fonts": sbCommonUtils.getPref("save.default.fonts", true),
+        "frames": sbCommonUtils.getPref("save.default.frames", true),
+        "styles": sbCommonUtils.getPref("save.default.styles", true),
+        "script": sbCommonUtils.getPref("save.default.script", false),
+        "fileAsHtml": sbCommonUtils.getPref("save.default.fileAsHtml", false),
+        "forceUtf8": sbCommonUtils.getPref("save.default.forceUtf8", true),
+        "tidyCss": sbCommonUtils.getPref("save.default.tidyCss", 3), // 0: none, 1: +rewrite link, 2: +remove unknown; 3: +remove unused
+        "removeIntegrity": sbCommonUtils.getPref("save.default.removeIntegrity", true),
+        "saveDataUri": sbCommonUtils.getPref("save.default.saveDataUri", false),
+        "serializeFilename": sbCommonUtils.getPref("save.default.serializeFilename", false),
+        "linkUrlFilters": sbCommonUtils.getPref("save.default.linkUrlFilters", ""),
+        "downLinkMethod": sbCommonUtils.getPref("save.default.downLinkMethod", 0),
+        "downLinkFilter": sbCommonUtils.getPref("save.default.downLinkFilter", ""),
         "inDepth": 0, // active only if explicitly set in detail dialog
         "internalize": false,
-        "recordSkippedUrl": sbCommonUtils.getPref("capture.default.recordSkippedUrl", false),
-        "recordRemovedAttr": sbCommonUtils.getPref("capture.default.recordRemovedAttr", false),        
-        "recordInDepthLink": sbCommonUtils.getPref("capture.default.recordInDepthLink", false),
+        "recordSkippedUrl": sbCommonUtils.getPref("save.default.recordSkippedUrl", false),
+        "recordRemovedAttr": sbCommonUtils.getPref("save.default.recordRemovedAttr", false),        
+        "recordInDepthLink": sbCommonUtils.getPref("save.default.recordInDepthLink", false),
         // "batchTimeout": null, // passed from capture.js via presetData[2]
         // "batchCharset": null, // passed from capture.js via presetData[2]
     };
@@ -1721,7 +1721,7 @@ sbContentSaverClass.prototype = {
             this.onAllDownloadsComplete(aItem);
             return;
         }
-        this.trace(sbCommonUtils.lang("CAPTURE", this.httpTask[aItem.id], aItem.title), 0);
+        this.trace(sbCommonUtils.lang("SAVE", this.httpTask[aItem.id], aItem.title), 0);
     },
 
     onAllDownloadsComplete: function(aItem) {
@@ -1781,7 +1781,7 @@ sbContentSaverClass.prototype = {
             sbCommonUtils.writeIndexDat(aItem);
         }
 
-        this.trace(sbCommonUtils.lang("CAPTURE_COMPLETE", aItem.title), 5000);
+        this.trace(sbCommonUtils.lang("SAVE_COMPLETE", aItem.title), 5000);
         this.onCaptureComplete(aItem);
     },
 

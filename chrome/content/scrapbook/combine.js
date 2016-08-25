@@ -148,7 +148,7 @@ var sbCombineService = {
         this.WIZARD.getButton("cancel").disabled = true;
         this.option["R"] = document.getElementById("sbCombineOptionRemove").checked;
         this.toggleElements(true);
-        SB_trace(sbCommonUtils.lang("CAPTURE_START"));
+        SB_trace(sbCommonUtils.lang("SAVE_START"));
         setTimeout(function(){ gContentSaver.captureWindow(sbInvisibleBrowser.ELEMENT.contentWindow, false, false, sbFolderSelector2.resURI, 0, null, "combine"); }, 0);
     },
 
