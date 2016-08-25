@@ -15,7 +15,7 @@ var sbMultipleService = {
 
     init: function() {
         document.documentElement.buttons = "accept,cancel,extra2";
-        document.documentElement.getButton("accept").label = sbCommonUtils.lang("CAPTURE_OK_BUTTON");
+        document.documentElement.getButton("accept").label = sbCommonUtils.lang("SAVE_OK_BUTTON");
         document.documentElement.getButton("accept").accesskey = "C";
         this.TEXTBOX.focus();
         sbFolderSelector2.init();

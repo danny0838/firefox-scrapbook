@@ -469,7 +469,7 @@ var sbCaptureTask = {
 
     _captureWindow: function(aWindow, aAllowPartial) {
         // update info
-        SB_trace(sbCommonUtils.lang("CAPTURE_START"));
+        SB_trace(sbCommonUtils.lang("SAVE_START"));
 
         // Disable "Skip" directive before the capture because we cannot reliably terminate
         // a capture process once it's started, and it would result in partial saved files.
@@ -505,7 +505,7 @@ var sbCaptureTask = {
             gTitles[this.index] = ret[2];
         } else {
             if ( gShowDetail ) window.close();
-            SB_trace(sbCommonUtils.lang("CAPTURE_ABORT"));
+            SB_trace(sbCommonUtils.lang("SAVE_ABORT"));
             this.fail("");
         }
     },

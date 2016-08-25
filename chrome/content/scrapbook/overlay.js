@@ -175,7 +175,7 @@ var sbBrowserOverlay = {
             var icon = sbDataSource.getProperty(res, "icon") || sbCommonUtils.getDefaultIcon(type);
 
             var text = title;
-            var title = sbCommonUtils.lang("PAGE_CAPTURED", result.length);
+            var title = sbCommonUtils.lang("PAGE_SAVED", result.length);
             var listener = {
                 observe: function(subject, topic, data) {
                     if (topic == "alertclickcallback")

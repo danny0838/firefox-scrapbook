@@ -35,7 +35,7 @@ var sbCaptureOptions = {
         // init UI
         this.updateScriptWarning();
         if (this.param.item) {
-            document.documentElement.getButton("accept").label = sbCommonUtils.lang("CAPTURE_OK_BUTTON");
+            document.documentElement.getButton("accept").label = sbCommonUtils.lang("SAVE_OK_BUTTON");
             this.fillTitleList();
             if ( this.param.context == "capture-again" || this.param.context == "capture-again-deep" ) {
                 document.getElementById("sbDetailFolderRow").collapsed = true;
@@ -101,13 +101,13 @@ var sbCaptureOptions = {
             try {
                 new RegExp("^(?:" + line + ")$", "i");
             } catch (ex) {
-                line =  sbCommonUtils.lang("ERR_CAPTURE_DOWNLINKFILTER_LINE", index+1, srcLine);
+                line =  sbCommonUtils.lang("ERR_SAVE_DOWNLINKFILTER_LINE", index+1, srcLine);
                 errors.push(line);
             }
         });
         if (errors.length) {
             var button = sbCommonUtils.PROMPT.STD_YES_NO_BUTTONS;
-            var text = sbCommonUtils.lang("ERR_CAPTURE_DOWNLINKFILTER", errors.join("\n\n"));
+            var text = sbCommonUtils.lang("ERR_SAVE_DOWNLINKFILTER", errors.join("\n\n"));
             // yes => 0, no => 1, close => 1
             return sbCommonUtils.PROMPT.confirmEx(null, "[ScrapBook]", text, button, null, null, null, null, {});
         }

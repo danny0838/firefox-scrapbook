@@ -18,7 +18,7 @@ var sbContentSaver = {
             if ( sbDataSource.getProperty(res, "type") == "marked" ) return;
             if ( sbCommonUtils.getPref("notifyOnComplete", true) ) {
                 var icon = sbDataSource.getProperty(res, "icon") || sbCommonUtils.getDefaultIcon(aItem.type);
-                var title = "ScrapBook: " + sbCommonUtils.lang("CAPTURE_COMPLETE");
+                var title = "ScrapBook: " + sbCommonUtils.lang("SAVE_COMPLETE");
                 var text = sbCommonUtils.crop(aItem.title, null, 100);
                 var listener = {
                     observe: function(subject, topic, data) {
@@ -31,7 +31,7 @@ var sbContentSaver = {
             }
         } else {
             var icon = sbCommonUtils.getDefaultIcon();
-            var title = "ScrapBook: " + sbCommonUtils.lang("CAPTURE_COMPLETE");
+            var title = "ScrapBook: " + sbCommonUtils.lang("SAVE_COMPLETE");
             var alertsSvc = Components.classes["@mozilla.org/alerts-service;1"].getService(Components.interfaces.nsIAlertsService);
             alertsSvc.showAlertNotification(icon, title, null);
         }
@@ -1721,7 +1721,7 @@ sbContentSaverClass.prototype = {
             this.onAllDownloadsComplete(aItem);
             return;
         }
-        this.trace(sbCommonUtils.lang("CAPTURE", this.httpTask[aItem.id], aItem.title), 0);
+        this.trace(sbCommonUtils.lang("SAVE", this.httpTask[aItem.id], aItem.title), 0);
     },
 
     onAllDownloadsComplete: function(aItem) {
@@ -1781,7 +1781,7 @@ sbContentSaverClass.prototype = {
             sbCommonUtils.writeIndexDat(aItem);
         }
 
-        this.trace(sbCommonUtils.lang("CAPTURE_COMPLETE", aItem.title), 5000);
+        this.trace(sbCommonUtils.lang("SAVE_COMPLETE", aItem.title), 5000);
         this.onCaptureComplete(aItem);
     },
 
