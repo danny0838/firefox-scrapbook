@@ -61,6 +61,7 @@
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
 <!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
+<!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
 <!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
 <!ENTITY sb.detail.option.fileAsHtml.help "When a non-HTML file is viewed by the browser, save its rendering HTML content. (Including XHTML files.)">
 <!ENTITY sb.detail.linked.file "Pobierz odnośniki do">

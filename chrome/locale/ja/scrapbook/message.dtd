@@ -61,6 +61,7 @@
 <!ENTITY sb.detail.option.tidyCss.3 "リンクを変更；未知と未使用を削除">
 <!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
 <!ENTITY sb.detail.option.saveDataUri "ファイルとしてデータURIを保存">
+<!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
 <!ENTITY sb.detail.option.fileAsHtml "HTMLなどの非HTMLファイルを保存">
 <!ENTITY sb.detail.option.fileAsHtml.help "When a non-HTML file is viewed by the browser, save its rendering HTML content. (Including XHTML files.)">
 <!ENTITY sb.detail.linked.file "リンク先ファイルのダウンロード">

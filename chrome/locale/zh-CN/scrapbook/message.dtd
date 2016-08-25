@@ -61,6 +61,7 @@
 <!ENTITY sb.detail.option.tidyCss.3 "改写链接，移除未知及未使用者">
 <!ENTITY sb.detail.option.tidyCss.3.help "移​​除注解及浏览器无法识别的样式宣告。不撷取动态脚本时，也移除未套用于任何元素的样式宣告。">
 <!ENTITY sb.detail.option.saveDataUri "将 data URI 保存为文件">
+<!ENTITY sb.detail.option.saveDataUri.help "文件将命名为內容的 SHA1 校验码。">
 <!ENTITY sb.detail.option.fileAsHtml "非 HTML 文件保存为 HTML">
 <!ENTITY sb.detail.option.fileAsHtml.help "以浏览器查看非 HTML 文件时，保存呈现的 HTML 内容。（包括 XHTML 文件）">
 <!ENTITY sb.detail.linked.file "下载链接的文件">

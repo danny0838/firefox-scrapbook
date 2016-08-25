@@ -74,7 +74,7 @@
                             </menupopup>
                         </menulist>
                     </hbox>
-                    <checkbox id="sbDetailOptionSaveDataURI" label="&sb.detail.option.saveDataUri;" />
+                    <checkbox id="sbDetailOptionSaveDataURI" label="&sb.detail.option.saveDataUri;" tooltiptext="&sb.detail.option.saveDataUri.help;" />
                     <checkbox id="sbDetailOptionAsHtml" label="&sb.detail.option.fileAsHtml;" tooltiptext="&sb.detail.option.fileAsHtml.help;" />
                 </groupbox>
                 <groupbox group="capture-options">
