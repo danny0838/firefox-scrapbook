@@ -17,11 +17,11 @@
 <!ENTITY sb.save.uncheckSelection "取消勾選選取項目">
 <!ENTITY sb.save.filter "過濾">
 <!ENTITY sb.save.filter.column.rule "顯示/隱藏">
-<!ENTITY sb.save.filter.column.content "篩選條件（使用規則運算式）">
+<!ENTITY sb.save.filter.column.content "篩選條件（規則運算式）">
 <!ENTITY sb.save.filter.accept "確認">
-<!ENTITY sb.save.filter.accept.help "變更或編輯數值">
+<!ENTITY sb.save.filter.accept.help "修改選取項目或編輯新項目">
 <!ENTITY sb.save.filter.cancel "取消">
-<!ENTITY sb.save.filter.cancel.help "中斷編輯">
+<!ENTITY sb.save.filter.cancel.help "中止編輯">
 <!ENTITY sb.save.filter.delete "刪除">
 <!ENTITY sb.save.filter.delete.help "從清單移除過濾條件">
 
@@ -70,9 +70,9 @@
 <!ENTITY sb.detail.linked.file.method2 "比對 HTTP 標頭及網址副檔名">
 <!ENTITY sb.detail.linked.file.desc "下載完整副檔名符合任一行規則運算式的檔案。略過 &quot;#&quot; 開頭的行。">
 <!ENTITY sb.detail.linked.file.reset "還原預設值">
-<!ENTITY sb.detail.linked.page "多層擷取">
+<!ENTITY sb.detail.linked.page "深入擷取">
 <!ENTITY sb.detail.linked.page.desc "全部擷取完成後，會將所有頁面互相連結，並產生站台地圖。">
-<!ENTITY sb.detail.linked.page.depth "擷取連結層數">
+<!ENTITY sb.detail.linked.page.depth "深入連結層數">
 <!ENTITY sb.detail.warnAboutRenew "請注意：「重新擷取」將覆蓋之前擷取的頁面。">
 <!ENTITY sb.detail.warnAboutScript "請注意：儲存 JavaScript 可能會引發許多問題。">
 
@@ -256,7 +256,7 @@
 <!ENTITY sb.prefs.edit "編輯設定">
 <!ENTITY sb.prefs.organize "組織設定">
 <!ENTITY sb.prefs.advanced "進階設定">
-<!ENTITY sb.prefs.ui.contextMenu "於快捷選單中顯示擷取選項">
+<!ENTITY sb.prefs.ui.contextMenu "在右鍵選單中顯示">
 <!ENTITY sb.prefs.ui.contextSubMenu "以子選單方式顯示">
 <!ENTITY sb.prefs.ui.bookmarkMenu "顯示「加入 ScrapBook 書籤」選項">
 <!ENTITY sb.prefs.ui.folderList.maxEntries.1 "最多顯示">
@@ -272,7 +272,7 @@
 <!ENTITY sb.prefs.edit.autoEditNoteX "筆記頁面自動進入編輯模式">
 <!ENTITY sb.prefs.edit.insertDateFormat "插入日期格式 (strftime):">
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML 格式化模板">
-<!ENTITY sb.prefs.data.tips "請選擇 ScrapBook 存放擷取資料的資料夾">
+<!ENTITY sb.prefs.data.tips "請選擇 ScrapBook 存放資料的資料夾">
 <!ENTITY sb.prefs.confirmDelete "刪除資料需要確認">
 <!ENTITY sb.prefs.saveDefault "預設擷取設定">
 <!ENTITY sb.prefs.tree.autoCollapse "開啟某資料夾時，自動收合其他資料夾">
@@ -325,7 +325,7 @@
 <!ENTITY sb.toggle.all "開啟/收合所有資料夾">
 <!ENTITY sb.tools "工具">
 <!ENTITY sb.tools.options "設定">
-<!ENTITY sb.tools.manage "管理擷取資料">
+<!ENTITY sb.tools.manage "管理資料">
 <!ENTITY sb.tools.combine "合併精靈">
 <!ENTITY sb.tools.trade "匯入 / 匯出">
 <!ENTITY sb.tools.multiple "擷取多重 URL">

@@ -7,7 +7,7 @@
 <!ENTITY sb.save.abort "中止">
 <!ENTITY sb.save.start "开始">
 <!ENTITY sb.save.retry "重试">
-<!ENTITY sb.save.skip "忽略">
+<!ENTITY sb.save.skip "跳过">
 <!ENTITY sb.save.pause "暂停">
 <!ENTITY sb.save.finish "取消">
 <!ENTITY sb.save.column.address "URL">
@@ -15,11 +15,11 @@
 <!ENTITY sb.save.column.status "状态">
 <!ENTITY sb.save.checkSelection "打勾选中项目">
 <!ENTITY sb.save.uncheckSelection "取消打勾选中项目">
-<!ENTITY sb.save.filter "过滤器">
+<!ENTITY sb.save.filter "过滤">
 <!ENTITY sb.save.filter.column.rule "显示/隐藏">
 <!ENTITY sb.save.filter.column.content "过滤规则（正则表达式）">
 <!ENTITY sb.save.filter.accept "接受">
-<!ENTITY sb.save.filter.accept.help "修改或编辑值">
+<!ENTITY sb.save.filter.accept.help "修改选取项目或编辑新项目">
 <!ENTITY sb.save.filter.cancel "取消">
 <!ENTITY sb.save.filter.cancel.help "中止编辑">
 <!ENTITY sb.save.filter.delete "删除">
@@ -72,7 +72,7 @@
 <!ENTITY sb.detail.linked.file.reset "还原默认值">
 <!ENTITY sb.detail.linked.page "深层获取">
 <!ENTITY sb.detail.linked.page.desc "全部获取完成后，将保持所有页面彼此链接并创建网站地图。">
-<!ENTITY sb.detail.linked.page.depth "获取链接层数">
+<!ENTITY sb.detail.linked.page.depth "深入链接层数">
 <!ENTITY sb.detail.warnAboutRenew "注意：“重新获取” 会覆盖以前保存的页面。">
 <!ENTITY sb.detail.warnAboutScript "注意：将会因为 JavaScript 而引起很多问题。">
 
