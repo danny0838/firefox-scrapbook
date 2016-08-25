@@ -40,9 +40,9 @@ var sbBrowserOverlay = {
             "key.sidebar": "key_openScrapBookSidebar",
             "key.manage": "key_ScrapBookManage",
             "key.save": "key_ScrapBookCapture",
-            "key.captureAs": "key_ScrapBookCaptureAs",
-            "key.captureAllTabs": "key_ScrapBookSaveAllTabs",
-            "key.captureMultiple": "key_ScrapBookCaptureMultiple",
+            "key.saveAs": "key_ScrapBookCaptureAs",
+            "key.saveAllTabs": "key_ScrapBookSaveAllTabs",
+            "key.saveMultiple": "key_ScrapBookCaptureMultiple",
             "key.bookmark": "key_BookmarkWithScrapBook",
         };
         for (let [pref, id] in Iterator(keyMap)) {
