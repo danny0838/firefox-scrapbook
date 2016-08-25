@@ -1,0 +1,17 @@
+Scrapbook X 1.13.0rc4
+=====================
+
+Changes since v1.13.0rc3
+------------------------
+
+Bug fixes:
+
+ * Images are not shown in the preview window of Combine Wizard.
+
+Functionality changes:
+
+ * The warning message about deep captured pages in Combine Wizard
+   now shows only once.
+
+Also includes some code clean-up, localization updates, and GUI 
+tooltip changes.

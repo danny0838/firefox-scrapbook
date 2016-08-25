@@ -6,7 +6,7 @@
     <Description about="urn:mozilla:install-manifest">
         <em:id>scrapbookx@addons.mozilla.org</em:id>
         <em:type>2</em:type>
-        <em:version>1.13.0rc3</em:version>
+        <em:version>1.13.0rc4</em:version>
         <em:unpack>false</em:unpack>
         <em:bootstrap>false</em:bootstrap>
         <em:multiprocessCompatible>false</em:multiprocessCompatible>
@@ -254,6 +254,7 @@
                 <em:translator>George C. Tsoi</em:translator>
                 <em:translator>blackdire</em:translator>
                 <em:translator>fishbone</em:translator>
+                <em:translator>yfdyh000</em:translator>
                 <em:homepageURL>https://addons.mozilla.org/firefox/addon/scrapbook-x/</em:homepageURL>
             </Description>
         </em:localized>
