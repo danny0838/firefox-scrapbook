@@ -3,7 +3,7 @@
 <!ENTITY sb.calc.diagnosis "Diagnostic">
 
 <!-- capture.dtd -->
-<!ENTITY sb.save "Capturează">
+<!ENTITY sb.save "Salvează">
 <!ENTITY sb.save.abort "Întrerupe">
 <!ENTITY sb.save.start "Pornește">
 <!ENTITY sb.save.retry "Reîncearcă">
@@ -36,11 +36,11 @@
 <!ENTITY sb.combine.newTitle "Denumire nouă">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.title "Detalii de capturare">
+<!ENTITY sb.detail.title "Detalii de salvare">
 <!ENTITY sb.detail.new.folder "Dosar nou">
 <!ENTITY sb.detail.select.folder "Selectează dosarul">
 <!ENTITY sb.detail.option "Opțiuni">
-<!ENTITY sb.detail.option.save "Capture">
+<!ENTITY sb.detail.option.save "Salvează">
 <!ENTITY sb.detail.option.images "Imagini">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -55,7 +55,7 @@
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
 <!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not saving scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
 <!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
@@ -70,10 +70,10 @@
 <!ENTITY sb.detail.linked.file.method2 "Match HTTP header and URL file extension">
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
-<!ENTITY sb.detail.linked.page "Capturare în profunzime">
-<!ENTITY sb.detail.linked.page.desc "După finalizarea capturării, paginile vor fi legate una de alta și se va construi harta saitului.">
+<!ENTITY sb.detail.linked.page "Salvare în profunzime">
+<!ENTITY sb.detail.linked.page.desc "După finalizarea salvării, paginile vor fi legate una de alta și se va construi harta saitului.">
 <!ENTITY sb.detail.linked.page.depth "Nivelul de urmărire a legăturilor (profunzimea)">
-<!ENTITY sb.detail.warnAboutRenew "NOTĂ: Operațiunea „Capturează din nou” va suprascrie paginile salvate anterior.">
+<!ENTITY sb.detail.warnAboutRenew "NOTĂ: Operațiunea „Salvează din nou” va suprascrie paginile salvate anterior.">
 <!ENTITY sb.detail.warnAboutScript "NOTĂ: JavaScript poate crea unele probleme.">
 
 <!-- editor.dtd -->
@@ -234,23 +234,23 @@
 <!ENTITY sb.output.option.open "După scriere, deschide fișierul în navigator">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.save.partial "Capturează selecția">
-<!ENTITY sb.save.partial.as "Capturează selecția ca">
-<!ENTITY sb.save.entire "Capturează pagina">
-<!ENTITY sb.save.entire.as "Capturează pagina ca">
-<!ENTITY sb.save.frame "Capturează cadrul">
-<!ENTITY sb.save.frame.as "Capturează cadrul ca">
-<!ENTITY sb.save.target "Capturează legătura">
-<!ENTITY sb.save.target.as "Capturează legătura ca">
-<!ENTITY sb.save.alltabs "Capturează din toate filele">
-<!ENTITY sb.save.bookmark "Pune semn de carte ScrapBook">
+<!ENTITY sb.save.partial "Salvează selecția">
+<!ENTITY sb.save.partial.as "Salvează selecția ca">
+<!ENTITY sb.save.entire "Salvează pagina">
+<!ENTITY sb.save.entire.as "Salvează pagina ca">
+<!ENTITY sb.save.frame "Salvează cadrul">
+<!ENTITY sb.save.frame.as "Salvează cadrul ca">
+<!ENTITY sb.save.target "Salvează legătura">
+<!ENTITY sb.save.target.as "Salvează legătura ca">
+<!ENTITY sb.save.alltabs "Salvează toate filele">
+<!ENTITY sb.save.bookmark "Salvează ca semn de carte">
 <!ENTITY sb.sidebar "Afișează în panoul lateral">
 <!ENTITY sb.menubar "Menubar accesskey">
-<!ENTITY sb.editbefore "Editează înaintea capturării">
+<!ENTITY sb.editbefore "Editează înaintea salvării">
 
 <!-- prefs.dtd -->
 <!ENTITY sb.prefs.main "Principal">
-<!ENTITY sb.prefs.keys "Keys">
+<!ENTITY sb.prefs.keys "Comenzi rapide">
 <!ENTITY sb.prefs.tabs "File">
 <!ENTITY sb.prefs.save "Salvare">
 <!ENTITY sb.prefs.edit "Editare">
@@ -274,15 +274,15 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "Alegeți dosarul de stocare a datelor ScrapBook.">
 <!ENTITY sb.prefs.confirmDelete "Avertizează când se șterg elemente din arbore">
-<!ENTITY sb.prefs.saveDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default save settings">
 <!ENTITY sb.prefs.tree.autoCollapse "La deschiderea unui arbore de dosare, închide automat celelalte dosare">
 <!ENTITY sb.prefs.tree.unshift "Pune noile elemente">
 <!ENTITY sb.prefs.tree.unshift.top "la începutul arborelui">
 <!ENTITY sb.prefs.tree.unshift.bottom "la sfârșitul arborelui">
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
-<!ENTITY sb.prefs.showDetailOnDrop "Afișează caseta „Detalii capturare” când se capturează prin glisare și fixare în panoul lateral">
-<!ENTITY sb.prefs.notifyOnComplete "Afișează notificarea „Capturare finalizată”">
-<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.showDetailOnDrop "Afișează caseta „Detalii de salvare” la salvarea prin glisare și fixare în panoul lateral">
+<!ENTITY sb.prefs.notifyOnComplete "Afișează notificarea „Salvare finalizată”">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been saved">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">
@@ -328,7 +328,7 @@
 <!ENTITY sb.tools.manage "Configurare">
 <!ENTITY sb.tools.combine "Asistent combinare">
 <!ENTITY sb.tools.trade "Import/Export">
-<!ENTITY sb.tools.multiple "Capturare adrese multiple">
+<!ENTITY sb.tools.multiple "Salvează adrese multiple">
 <!ENTITY sb.tools.directory "Dosar ScrapBook">
 <!ENTITY sb.tools.calculate "Calculator dimensiuni">
 <!ENTITY sb.tools.sorttree "Sortare arbore de dosare">
@@ -378,7 +378,7 @@
 <!ENTITY sb.move "Mută">
 <!ENTITY sb.move.into "Mută în dosar">
 <!ENTITY sb.copy "Copy">
-<!ENTITY sb.renew "Capturează din nou">
+<!ENTITY sb.renew "Salvează din nou">
 <!ENTITY sb.internalize "Internalize">
 <!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "Exportă">

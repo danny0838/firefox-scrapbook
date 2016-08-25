@@ -3,7 +3,7 @@
 <!ENTITY sb.calc.diagnosis "Diagnos">
 
 <!-- capture.dtd -->
-<!ENTITY sb.save "Fånga in">
+<!ENTITY sb.save "Spara">
 <!ENTITY sb.save.abort "Avbryt">
 <!ENTITY sb.save.start "Starta">
 <!ENTITY sb.save.retry "Försök igen">
@@ -36,11 +36,11 @@
 <!ENTITY sb.combine.newTitle "Ny rubrik">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.title "Infångstinformation">
+<!ENTITY sb.detail.title "Information om objekt">
 <!ENTITY sb.detail.new.folder "Ny mapp">
 <!ENTITY sb.detail.select.folder "Välj mapp">
 <!ENTITY sb.detail.option "Inställningar">
-<!ENTITY sb.detail.option.save "Capture">
+<!ENTITY sb.detail.option.save "Spara">
 <!ENTITY sb.detail.option.images "Bilder">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -55,7 +55,7 @@
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
 <!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not saving scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
 <!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
@@ -71,9 +71,9 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Djupgående infångst">
-<!ENTITY sb.detail.linked.page.desc "När infångsterna har slutförts, så kommer alla sidor att vara länkade till varandra och en webbplatskarta kommer att skapas.">
+<!ENTITY sb.detail.linked.page.desc "När objekten har sparats, så kommer alla sidor att vara länkade till varandra och en webbplatskarta kommer att skapas.">
 <!ENTITY sb.detail.linked.page.depth "Siddjup">
-<!ENTITY sb.detail.warnAboutRenew "OBS: &quot;Fånga in igen&quot; ersätter den tidigare sparade sidan.">
+<!ENTITY sb.detail.warnAboutRenew "OBS: &quot;Spara igen&quot; ersätter den tidigare sparade sidan.">
 <!ENTITY sb.detail.warnAboutScript "OBS: JavaScript kan orsaka vissa problem.">
 
 <!-- editor.dtd -->
@@ -234,19 +234,19 @@
 <!ENTITY sb.output.option.open "Öppna utdataresultatet i webbläsaren">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.save.partial "Fånga in markering">
-<!ENTITY sb.save.partial.as "Fånga in markering som">
-<!ENTITY sb.save.entire "Fånga in sida">
-<!ENTITY sb.save.entire.as "Fånga in sida som">
-<!ENTITY sb.save.frame "Fånga in ram">
-<!ENTITY sb.save.frame.as "Fånga in ram som">
-<!ENTITY sb.save.target "Fånga in länk">
-<!ENTITY sb.save.target.as "Fånga in länk som">
-<!ENTITY sb.save.alltabs "Fånga in alla flikar">
-<!ENTITY sb.save.bookmark "Bokmärk med ScrapBook">
+<!ENTITY sb.save.partial "Spara markering">
+<!ENTITY sb.save.partial.as "Spara markering som">
+<!ENTITY sb.save.entire "Spara sida">
+<!ENTITY sb.save.entire.as "Spara sida som">
+<!ENTITY sb.save.frame "Spara ram">
+<!ENTITY sb.save.frame.as "Spara ram som">
+<!ENTITY sb.save.target "Spara länk">
+<!ENTITY sb.save.target.as "Spara länk som">
+<!ENTITY sb.save.alltabs "Spara alla flikar">
+<!ENTITY sb.save.bookmark "Spara som bokmärke">
 <!ENTITY sb.sidebar "Visa i sidopanelen">
 <!ENTITY sb.menubar "Menubar accesskey">
-<!ENTITY sb.editbefore "Redigera innan infångst">
+<!ENTITY sb.editbefore "Redigera innan objekt sparas">
 
 <!-- prefs.dtd -->
 <!ENTITY sb.prefs.main "Allmänt">
@@ -274,15 +274,15 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "Välj en mapp där ScrapBook-data skall lagras.">
 <!ENTITY sb.prefs.confirmDelete "Varna mig vid borttagning av trädobjekt">
-<!ENTITY sb.prefs.saveDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default save settings">
 <!ENTITY sb.prefs.tree.autoCollapse "När en trädmapp öppnas, stäng automatiskt övriga mappar">
 <!ENTITY sb.prefs.tree.unshift "Placera nya objekt">
 <!ENTITY sb.prefs.tree.unshift.top "överst i mappen">
 <!ENTITY sb.prefs.tree.unshift.bottom "nederst i mappen">
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
-<!ENTITY sb.prefs.showDetailOnDrop "Visa dialogen &quot;Infångstinformation&quot; vid infångst via dra och släpp i sidofältet">
-<!ENTITY sb.prefs.notifyOnComplete "Visa meddelandet &quot;Infångsten har slutförts&quot;">
-<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.showDetailOnDrop "Visa dialogen &quot;Information om objekt&quot; när du sparar via dra och släpp i sidofältet">
+<!ENTITY sb.prefs.notifyOnComplete "Visa meddelandet &quot;Alla objekt har sparats&quot;">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been saved">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">
@@ -328,7 +328,7 @@
 <!ENTITY sb.tools.manage "Hantera">
 <!ENTITY sb.tools.combine "Kombineringsguiden">
 <!ENTITY sb.tools.trade "Importera/Exportera">
-<!ENTITY sb.tools.multiple "Fånga in flera URL:er">
+<!ENTITY sb.tools.multiple "Spara flera URL:er">
 <!ENTITY sb.tools.directory "Öppna ScrapBook-mappen">
 <!ENTITY sb.tools.calculate "Beräkning av storlek">
 <!ENTITY sb.tools.sorttree "Sortera hela trädet">
@@ -378,7 +378,7 @@
 <!ENTITY sb.move "Flytta">
 <!ENTITY sb.move.into "Flytta till mapp">
 <!ENTITY sb.copy "Copy">
-<!ENTITY sb.renew "Fånga in igen">
+<!ENTITY sb.renew "Spara igen">
 <!ENTITY sb.internalize "Internalize">
 <!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "Exportera">

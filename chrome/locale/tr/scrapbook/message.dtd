@@ -40,7 +40,7 @@
 <!ENTITY sb.detail.new.folder "Yeni Klasör">
 <!ENTITY sb.detail.select.folder "Klasör Seç">
 <!ENTITY sb.detail.option "Ayarlar">
-<!ENTITY sb.detail.option.save "Capture">
+<!ENTITY sb.detail.option.save "Save">
 <!ENTITY sb.detail.option.images "Resimler">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -55,7 +55,7 @@
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
 <!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not saving scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
 <!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
@@ -274,7 +274,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "ScrapBook verilerinin saklanacağı konumu seçin.">
 <!ENTITY sb.prefs.confirmDelete "Ağaç öğelerini silerken beni uyar">
-<!ENTITY sb.prefs.saveDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default save settings">
 <!ENTITY sb.prefs.tree.autoCollapse "Ağaçta klasör açınca, otomatik olarak diğer klasörleri kapat">
 <!ENTITY sb.prefs.tree.unshift "Buraya öğe bilgisi ekle">
 <!ENTITY sb.prefs.tree.unshift.top "Klasörün üstü">
@@ -282,7 +282,7 @@
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Kenar çubuğuna sürükleyip-bırakarak kaydetmelerde 'Kayıt Detayları' diyaloğunu göster">
 <!ENTITY sb.prefs.notifyOnComplete "'Kaydetme Tamamlandı' uyarısını göster">
-<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been saved">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">

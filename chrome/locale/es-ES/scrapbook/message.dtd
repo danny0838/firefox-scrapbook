@@ -3,7 +3,7 @@
 <!ENTITY sb.calc.diagnosis "Diagnóstico">
 
 <!-- capture.dtd -->
-<!ENTITY sb.save "Capturar">
+<!ENTITY sb.save "Guardar">
 <!ENTITY sb.save.abort "Abortar">
 <!ENTITY sb.save.start "Comenzar">
 <!ENTITY sb.save.retry "Reintentar">
@@ -36,11 +36,11 @@
 <!ENTITY sb.combine.newTitle "nuevo título">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.title "Detalles de la captura">
+<!ENTITY sb.detail.title "Detalles del guardado">
 <!ENTITY sb.detail.new.folder "Nueva carpeta">
 <!ENTITY sb.detail.select.folder "Seleccionar Carpeta">
 <!ENTITY sb.detail.option "Opciones">
-<!ENTITY sb.detail.option.save "Capture">
+<!ENTITY sb.detail.option.save "Guardar">
 <!ENTITY sb.detail.option.images "Imágenes">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -55,7 +55,7 @@
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
 <!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not saving scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
 <!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
@@ -70,9 +70,9 @@
 <!ENTITY sb.detail.linked.file.method2 "Match HTTP header and URL file extension">
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
-<!ENTITY sb.detail.linked.page "Captura de enlaces en varios niveles">
+<!ENTITY sb.detail.linked.page "Guardado multi-nivel">
 <!ENTITY sb.detail.linked.page.desc "Después de completar las capturas, todas las páginas estarán enlazadas entre ellas, y será creado un mapa del sitio.">
-<!ENTITY sb.detail.linked.page.depth "Nivel de profundidad de enlaces">
+<!ENTITY sb.detail.linked.page.depth "Profundidad en la captura enlaces">
 <!ENTITY sb.detail.warnAboutRenew "NOTA: 'Capturar Otra vez' sobre-escribe la página guardada previamente.">
 <!ENTITY sb.detail.warnAboutScript "NOTA: JavaScript puede causar algunos problemas.">
 
@@ -234,16 +234,16 @@
 <!ENTITY sb.output.option.open "Después de exportar, abrirlo en el navegador">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.save.partial "Capturar Selección">
-<!ENTITY sb.save.partial.as "Capturar Selección como">
-<!ENTITY sb.save.entire "Capturar Página">
-<!ENTITY sb.save.entire.as "Capturar Página como">
-<!ENTITY sb.save.frame "Capturar Marco">
-<!ENTITY sb.save.frame.as "Capturar Marco como">
-<!ENTITY sb.save.target "Capturar Enlace">
-<!ENTITY sb.save.target.as "Capturar Enlace como">
-<!ENTITY sb.save.alltabs "Capturar todas las pestañas">
-<!ENTITY sb.save.bookmark "Marcar con Scrapbook">
+<!ENTITY sb.save.partial "Guardar selección">
+<!ENTITY sb.save.partial.as "Guardar selección como">
+<!ENTITY sb.save.entire "Guardar página">
+<!ENTITY sb.save.entire.as "Guardar página como">
+<!ENTITY sb.save.frame "Guardar marco">
+<!ENTITY sb.save.frame.as "Guardar marco como">
+<!ENTITY sb.save.target "Guardar enlaces">
+<!ENTITY sb.save.target.as "Guardar enlaces como">
+<!ENTITY sb.save.alltabs "Guardar todas las pestañas">
+<!ENTITY sb.save.bookmark "Guardar como marcador">
 <!ENTITY sb.sidebar "Mostrar en la barra lateral">
 <!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Editar antes de capturar">
@@ -274,7 +274,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "Elegir una carpeta donde guardar los datos de Scrapbook.">
 <!ENTITY sb.prefs.confirmDelete "Avisarme cuando se borren elementos del árbol">
-<!ENTITY sb.prefs.saveDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default save settings">
 <!ENTITY sb.prefs.tree.autoCollapse "Cuando abra una carpeta del árbol, automáticamente cierra otras carpetas">
 <!ENTITY sb.prefs.tree.unshift "Poner un elemento en">
 <!ENTITY sb.prefs.tree.unshift.top "la parte alta de una carpeta">
@@ -282,7 +282,7 @@
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Mostrar el diálogo 'Detalles de Captura' cuando se capture mediante 'arrastrar y soltar' en la barra lateral">
 <!ENTITY sb.prefs.notifyOnComplete "Mostrar notificación de 'Captura Finalizada'">
-<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been saved">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">
@@ -378,7 +378,7 @@
 <!ENTITY sb.move "Mover">
 <!ENTITY sb.move.into "Mover a carpeta">
 <!ENTITY sb.copy "Copy">
-<!ENTITY sb.renew "Capturar otra vez">
+<!ENTITY sb.renew "Guardar otra vez">
 <!ENTITY sb.internalize "Internalize">
 <!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "Exportar">

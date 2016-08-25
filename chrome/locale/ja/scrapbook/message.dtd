@@ -3,7 +3,7 @@
 <!ENTITY sb.calc.diagnosis "データ診断">
 
 <!-- capture.dtd -->
-<!ENTITY sb.save "取り込み">
+<!ENTITY sb.save "保存">
 <!ENTITY sb.save.abort "中止">
 <!ENTITY sb.save.start "開始">
 <!ENTITY sb.save.retry "再試行">
@@ -36,11 +36,11 @@
 <!ENTITY sb.combine.newTitle "新しいタイトル">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.title "取り込み詳細">
+<!ENTITY sb.detail.title "保存の詳細">
 <!ENTITY sb.detail.new.folder "新しいフォルダ">
 <!ENTITY sb.detail.select.folder "フォルダの選択">
 <!ENTITY sb.detail.option "オプション">
-<!ENTITY sb.detail.option.save "取り込む">
+<!ENTITY sb.detail.option.save "保存">
 <!ENTITY sb.detail.option.images "画像">
 <!ENTITY sb.detail.option.media "メディア">
 <!ENTITY sb.detail.option.fonts "フォント">
@@ -55,7 +55,7 @@
 <!ENTITY sb.detail.option.tidyCss.2 "リンクを変更；未知を削除">
 <!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "リンクを変更；未知と未使用を削除">
-<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not saving scripts.">
 <!ENTITY sb.detail.option.saveDataUri "ファイルとしてデータURIを保存">
 <!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
 <!ENTITY sb.detail.option.fileAsHtml "HTMLなどの非HTMLファイルを保存">
@@ -70,10 +70,10 @@
 <!ENTITY sb.detail.linked.file.method2 "Match HTTP header and URL file extension">
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "初期設定に戻し">
-<!ENTITY sb.detail.linked.page "掘り下げ取り込み">
-<!ENTITY sb.detail.linked.page.desc "取り込み完了後、すべてのページは相互にリンクされ、サイトマップが生成されます。">
+<!ENTITY sb.detail.linked.page "掘り下げ保存">
+<!ENTITY sb.detail.linked.page.desc "保存完了後、すべてのページは相互にリンクされ、サイトマップが生成されます。">
 <!ENTITY sb.detail.linked.page.depth "リンクをたどる深さ">
-<!ENTITY sb.detail.warnAboutRenew "注意：再取り込みを行うと元のページに上書きされます。">
+<!ENTITY sb.detail.warnAboutRenew "注意：再保存を行うと元のページに上書きされます。">
 <!ENTITY sb.detail.warnAboutScript "注意：JavaScriptは何らかの問題を引き起こす可能性があります。">
 
 <!-- editor.dtd -->
@@ -234,19 +234,19 @@
 <!ENTITY sb.output.option.open "HTML出力後、ブラウザで開く">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.save.partial "選択範囲の取り込み">
-<!ENTITY sb.save.partial.as "選択範囲の詳細な取り込み">
-<!ENTITY sb.save.entire "ページの取り込み">
-<!ENTITY sb.save.entire.as "ページの詳細な取り込み">
-<!ENTITY sb.save.frame "フレームの取り込み">
-<!ENTITY sb.save.frame.as "フレームの詳細な取り込み">
-<!ENTITY sb.save.target "リンク先の取り込み">
-<!ENTITY sb.save.target.as "リンク先の詳細な取り込み">
-<!ENTITY sb.save.alltabs "すべてのタブを取り込み">
-<!ENTITY sb.save.bookmark "ScrapBookにブックマーク">
-<!ENTITY sb.sidebar "サイドバーに表示">
+<!ENTITY sb.save.partial "選択範囲を保存">
+<!ENTITY sb.save.partial.as "選択範囲を詳細に保存">
+<!ENTITY sb.save.entire "ページを保存">
+<!ENTITY sb.save.entire.as "ページを詳細に保存">
+<!ENTITY sb.save.frame "フレームを保存">
+<!ENTITY sb.save.frame.as "フレームを詳細に保存">
+<!ENTITY sb.save.target "リンク先を保存">
+<!ENTITY sb.save.target.as "リンク先を詳細に保存">
+<!ENTITY sb.save.alltabs "すべてのタブを保存">
+<!ENTITY sb.save.bookmark "ブックマーク形式で保存">
+<!ENTITY sb.sidebar "サイドバーで表示">
 <!ENTITY sb.menubar "メニューバーのアクセスキー">
-<!ENTITY sb.editbefore "取り込み前編集モード">
+<!ENTITY sb.editbefore "保存前編集モード">
 
 <!-- prefs.dtd -->
 <!ENTITY sb.prefs.main "一般">
@@ -274,15 +274,15 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "ScrapBook のデータを保存するためのフォルダを選択してください。">
 <!ENTITY sb.prefs.confirmDelete "削除確認をする">
-<!ENTITY sb.prefs.saveDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default save settings">
 <!ENTITY sb.prefs.tree.autoCollapse "ツリーフォルダを開いたとき、他のフォルダを自動的に閉じる">
 <!ENTITY sb.prefs.tree.unshift "アイテムを追加する位置:">
 <!ENTITY sb.prefs.tree.unshift.top "フォルダの一番上">
 <!ENTITY sb.prefs.tree.unshift.bottom "フォルダの一番下">
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
-<!ENTITY sb.prefs.showDetailOnDrop "サイドバーへのドラッグ＆ドロップ時、詳細な取り込みをする">
-<!ENTITY sb.prefs.notifyOnComplete "取り込みが完了したら通知する">
-<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.showDetailOnDrop "サイドバーへのドラッグ＆ドロップ時、詳細な保存をする">
+<!ENTITY sb.prefs.notifyOnComplete "保存が完了したら通知する">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been saved">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "設定">
 <!ENTITY sb.prefs.io.export "設定をエクスポート">
@@ -328,7 +328,7 @@
 <!ENTITY sb.tools.manage "管理">
 <!ENTITY sb.tools.combine "結合ウィザード">
 <!ENTITY sb.tools.trade "インポート/エクスポート">
-<!ENTITY sb.tools.multiple "URL一括取り込み">
+<!ENTITY sb.tools.multiple "URL一括保存">
 <!ENTITY sb.tools.directory "ScrapBookフォルダ">
 <!ENTITY sb.tools.calculate "データサイズ計算">
 <!ENTITY sb.tools.sorttree "ツリー全体をソート">
@@ -378,7 +378,7 @@
 <!ENTITY sb.move "移動">
 <!ENTITY sb.move.into "フォルダへ移動">
 <!ENTITY sb.copy "コピー">
-<!ENTITY sb.renew "再取り込み">
+<!ENTITY sb.renew "再保存">
 <!ENTITY sb.internalize "内在化">
 <!ENTITY sb.internalize.help "Save external media embedded by the page into the local directory.">
 <!ENTITY sb.export "エクスポート">

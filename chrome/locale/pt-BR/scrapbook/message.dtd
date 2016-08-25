@@ -3,7 +3,7 @@
 <!ENTITY sb.calc.diagnosis "Diagnóstico">
 
 <!-- capture.dtd -->
-<!ENTITY sb.save "Capturar">
+<!ENTITY sb.save "Salvar">
 <!ENTITY sb.save.abort "Abortar">
 <!ENTITY sb.save.start "Iniciar">
 <!ENTITY sb.save.retry "Tentar novamente">
@@ -36,11 +36,11 @@
 <!ENTITY sb.combine.newTitle "novo título">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.title "Detalhe da Captura">
+<!ENTITY sb.detail.title "Salvar detalhe">
 <!ENTITY sb.detail.new.folder "Nova Pasta">
 <!ENTITY sb.detail.select.folder "Selecionar Pasta">
 <!ENTITY sb.detail.option "Opções">
-<!ENTITY sb.detail.option.save "Capture">
+<!ENTITY sb.detail.option.save "Salvar">
 <!ENTITY sb.detail.option.images "Imagens">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -55,7 +55,7 @@
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
 <!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not saving scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
 <!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
@@ -71,7 +71,7 @@
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
 <!ENTITY sb.detail.linked.page "Captura em Nível">
-<!ENTITY sb.detail.linked.page.desc "Após completar as capturas, todas as páginas serão ligadas umas às outras e o mapa do site será criado.">
+<!ENTITY sb.detail.linked.page.desc "Após completar as capturas, todas as páginas serão linkadas umas às outras.">
 <!ENTITY sb.detail.linked.page.depth "Profundidade para seguir os links">
 <!ENTITY sb.detail.warnAboutRenew "AVISO: 'Capturar Novamente' substitui a página salva anteriormente.">
 <!ENTITY sb.detail.warnAboutScript "AVISO: O JavaScript pode causar alguns problemas.">
@@ -234,19 +234,19 @@
 <!ENTITY sb.output.option.open "After outputting, open it in browser">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.save.partial "Capturar Seleção">
-<!ENTITY sb.save.partial.as "Capturar Seleção Como">
-<!ENTITY sb.save.entire "Capturar Página">
-<!ENTITY sb.save.entire.as "Capturar Página Como">
-<!ENTITY sb.save.frame "Capturar Frame">
-<!ENTITY sb.save.frame.as "Capturar Frame Como">
-<!ENTITY sb.save.target "Capturar Link">
-<!ENTITY sb.save.target.as "Capturar Link Como">
-<!ENTITY sb.save.alltabs "Capturar Todas as Abas">
-<!ENTITY sb.save.bookmark "Criar Favorito no ScrapBook">
+<!ENTITY sb.save.partial "Salvar seleção">
+<!ENTITY sb.save.partial.as "Salvar seleção como">
+<!ENTITY sb.save.entire "Salvar página">
+<!ENTITY sb.save.entire.as "Salvar página como">
+<!ENTITY sb.save.frame "Salvar quadro">
+<!ENTITY sb.save.frame.as "Salvar quadro como">
+<!ENTITY sb.save.target "Salvar link">
+<!ENTITY sb.save.target.as "Salvar link">
+<!ENTITY sb.save.alltabs "Salvar todas as abas">
+<!ENTITY sb.save.bookmark "Salvar como favorito">
 <!ENTITY sb.sidebar "Mostrar na Barra Lateral">
 <!ENTITY sb.menubar "Menubar accesskey">
-<!ENTITY sb.editbefore "Editar Antes de Capturar">
+<!ENTITY sb.editbefore "Editar antes de salvar">
 
 <!-- prefs.dtd -->
 <!ENTITY sb.prefs.main "Principal">
@@ -274,15 +274,15 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "Escolha uma pasta para salvar os dados do ScrapBook.">
 <!ENTITY sb.prefs.confirmDelete "Avisar quando for apagar item(ns) da árvore">
-<!ENTITY sb.prefs.saveDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default save settings">
 <!ENTITY sb.prefs.tree.autoCollapse "Ao abrir uma pasta da árvore, fechar automaticamente outras pastas">
 <!ENTITY sb.prefs.tree.unshift "Colocar um item dentro do">
 <!ENTITY sb.prefs.tree.unshift.top "topo da pasta">
 <!ENTITY sb.prefs.tree.unshift.bottom "rodapé da pasta">
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
-<!ENTITY sb.prefs.showDetailOnDrop "Mostrar janela 'Detalhe de Captura' quando capturando via arrastar e soltar na barra lateral">
-<!ENTITY sb.prefs.notifyOnComplete "Mostrar notificação 'Captura Completa'">
-<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.showDetailOnDrop "Quando arrastar e soltar no painel lateral, mostrar o diálogo 'Salvar detalhe'">
+<!ENTITY sb.prefs.notifyOnComplete "Mostrar notificação 'Salvamento completo'">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been saved">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">

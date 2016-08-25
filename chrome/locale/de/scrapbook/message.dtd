@@ -3,7 +3,7 @@
 <!ENTITY sb.calc.diagnosis "Diagnose">
 
 <!-- capture.dtd -->
-<!ENTITY sb.save "Archivierung">
+<!ENTITY sb.save "Archivieren">
 <!ENTITY sb.save.abort "Abbrechen">
 <!ENTITY sb.save.start "Starten">
 <!ENTITY sb.save.retry "Wiederholen">
@@ -40,7 +40,7 @@
 <!ENTITY sb.detail.new.folder "Neuer Ordner">
 <!ENTITY sb.detail.select.folder "Ordner auswählen">
 <!ENTITY sb.detail.option "Einschließen">
-<!ENTITY sb.detail.option.save "Capture">
+<!ENTITY sb.detail.option.save "Archivieren">
 <!ENTITY sb.detail.option.images "Grafiken">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -55,7 +55,7 @@
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
 <!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not saving scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
 <!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
@@ -70,9 +70,9 @@
 <!ENTITY sb.detail.linked.file.method2 "Match HTTP header and URL file extension">
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
-<!ENTITY sb.detail.linked.page "Archivierungstiefe">
-<!ENTITY sb.detail.linked.page.desc "Nach Abschluss der Archivierung werden alle Seiten untereinander verlinkt und es wird eine Sitemap erstellt.">
-<!ENTITY sb.detail.linked.page.depth "Verzeichnistiefe der Links">
+<!ENTITY sb.detail.linked.page "Ausführliche Archivierung">
+<!ENTITY sb.detail.linked.page.desc "Nach Abschluss der Archivierung werden alle Seiten untereinander verlinkt.">
+<!ENTITY sb.detail.linked.page.depth "Links folgen bis zu einer Tiefe von">
 <!ENTITY sb.detail.warnAboutRenew "HINWEIS: &quot;Erneut archivieren&quot; überschreibt zuvor gespeicherte Seiten.">
 <!ENTITY sb.detail.warnAboutScript "HINWEIS: JavaScript kann eine Reihe von Problemen verursachen.">
 
@@ -243,7 +243,7 @@
 <!ENTITY sb.save.target "Link archivieren">
 <!ENTITY sb.save.target.as "Link archivieren als">
 <!ENTITY sb.save.alltabs "Alle Tabs archivieren">
-<!ENTITY sb.save.bookmark "Lesezeichen mit ScrapBook erstellen">
+<!ENTITY sb.save.bookmark "Als Lesezeichen archivieren">
 <!ENTITY sb.sidebar "ScrapBook-Sidebar öffnen">
 <!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Vor dem Archivieren bearbeiten">
@@ -274,7 +274,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "ScrapBook-Ordner auswählen, in dem die gesammelten Daten gespeichert werden sollen.">
 <!ENTITY sb.prefs.confirmDelete "Vor dem Löschen von Listeneinträgen bestätigen">
-<!ENTITY sb.prefs.saveDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default save settings">
 <!ENTITY sb.prefs.tree.autoCollapse "Beim Ausklappen eines Listenordners alle anderen Ordner einklappen">
 <!ENTITY sb.prefs.tree.unshift "Einen Eintrag am">
 <!ENTITY sb.prefs.tree.unshift.top "Anfang eines Ordners erstellen">
@@ -282,7 +282,7 @@
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Dialog &quot;Archivierungsdetails&quot; anzeigen, wenn eine Archivierung durch Ziehen mit der Maus in die Sidebar erfolgt">
 <!ENTITY sb.prefs.notifyOnComplete "Meldung nach Abschluss der Archivierung anzeigen">
-<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been saved">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">

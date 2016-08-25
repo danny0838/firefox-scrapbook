@@ -3,7 +3,7 @@
 <!ENTITY sb.calc.diagnosis "Diagnostika">
 
 <!-- capture.dtd -->
-<!ENTITY sb.save "Zachytenie">
+<!ENTITY sb.save "Uložiť">
 <!ENTITY sb.save.abort "Zrušiť">
 <!ENTITY sb.save.start "Štart">
 <!ENTITY sb.save.retry "Reštartovať">
@@ -36,11 +36,11 @@
 <!ENTITY sb.combine.newTitle "nový názov">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.title "Detail zachytenia">
+<!ENTITY sb.detail.title "Uložiť detail">
 <!ENTITY sb.detail.new.folder "Nový priečinok">
 <!ENTITY sb.detail.select.folder "Vybrať priečinok">
 <!ENTITY sb.detail.option "Možnosti">
-<!ENTITY sb.detail.option.save "Capture">
+<!ENTITY sb.detail.option.save "Uložiť">
 <!ENTITY sb.detail.option.images "Obrázky">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -55,7 +55,7 @@
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
 <!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not saving scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
 <!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
@@ -70,7 +70,7 @@
 <!ENTITY sb.detail.linked.file.method2 "Match HTTP header and URL file extension">
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
-<!ENTITY sb.detail.linked.page "Hĺbkové zachytenie">
+<!ENTITY sb.detail.linked.page "Uložiť podrobne">
 <!ENTITY sb.detail.linked.page.desc "Po dokončení zachytenia budú všetky stránky vzájomne prepojené a bude vytvorená mapa stránok.">
 <!ENTITY sb.detail.linked.page.depth "Hĺbkovo prechádzať odkazy">
 <!ENTITY sb.detail.warnAboutRenew "UPOZORNENIE: 'Znovuzachytenie' prepíše naposledy uloženú stránku.">
@@ -234,16 +234,16 @@
 <!ENTITY sb.output.option.open "HTML výstup otvoriť v prehliadači">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.save.partial "Zachytiť výber">
-<!ENTITY sb.save.partial.as "Zachytiť výber ako...">
-<!ENTITY sb.save.entire "Zachytiť stránku">
-<!ENTITY sb.save.entire.as "Zachytiť stránku ako...">
-<!ENTITY sb.save.frame "Zachytiť rámec">
-<!ENTITY sb.save.frame.as "Zachytiť rámec ako...">
-<!ENTITY sb.save.target "Zachytiť odkaz">
-<!ENTITY sb.save.target.as "Zachytiť odkaz ako...">
-<!ENTITY sb.save.alltabs "Zachytiť všetky karty">
-<!ENTITY sb.save.bookmark "Záložka ScrapBook">
+<!ENTITY sb.save.partial "Uložiť výber">
+<!ENTITY sb.save.partial.as "Uložiť výber ako">
+<!ENTITY sb.save.entire "Uložiť stránku">
+<!ENTITY sb.save.entire.as "Uložiť stránku ako">
+<!ENTITY sb.save.frame "Uložiť rámec">
+<!ENTITY sb.save.frame.as "Uložiť rámec ako">
+<!ENTITY sb.save.target "Uložiť odkaz">
+<!ENTITY sb.save.target.as "Uložiť odkaz ako">
+<!ENTITY sb.save.alltabs "Uložiť všetky karty">
+<!ENTITY sb.save.bookmark "Uložiť ako záložku">
 <!ENTITY sb.sidebar "Zobraziť v bočnom paneli">
 <!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Upraviť pred zachytením">
@@ -274,7 +274,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "Zvoliť priečinok, kam ukladať ScrapBook údaje.">
 <!ENTITY sb.prefs.confirmDelete "Upozorniť pri odstránení položky">
-<!ENTITY sb.prefs.saveDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default save settings">
 <!ENTITY sb.prefs.tree.autoCollapse "Pri otvorení priečinku automaticky zatvoriť ostatné priečinky">
 <!ENTITY sb.prefs.tree.unshift "Zaradiť položku na">
 <!ENTITY sb.prefs.tree.unshift.top "prvé miesto v priečinku">
@@ -282,7 +282,7 @@
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Zobraziť dialóg 'Detail zachytenia', keď sa zachytenie vykoná pomocou drag-and-drop do bočného panelu">
 <!ENTITY sb.prefs.notifyOnComplete "Zobraziť oznámenie 'Zachytenie dokončené'">
-<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been saved">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">

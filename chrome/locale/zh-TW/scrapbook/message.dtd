@@ -3,7 +3,7 @@
 <!ENTITY sb.calc.diagnosis "資料診斷">
 
 <!-- capture.dtd -->
-<!ENTITY sb.save "擷取">
+<!ENTITY sb.save "儲存">
 <!ENTITY sb.save.abort "中止">
 <!ENTITY sb.save.start "開始">
 <!ENTITY sb.save.retry "重試">
@@ -36,11 +36,11 @@
 <!ENTITY sb.combine.newTitle "新標題">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.title "擷取細節">
+<!ENTITY sb.detail.title "儲存細節">
 <!ENTITY sb.detail.new.folder "開新資料夾">
 <!ENTITY sb.detail.select.folder "選取資料夾">
 <!ENTITY sb.detail.option "選項">
-<!ENTITY sb.detail.option.save "擷取">
+<!ENTITY sb.detail.option.save "儲存">
 <!ENTITY sb.detail.option.images "圖片">
 <!ENTITY sb.detail.option.media "多媒體">
 <!ENTITY sb.detail.option.fonts "字體">
@@ -55,7 +55,7 @@
 <!ENTITY sb.detail.option.tidyCss.2 "改寫連結，移除未知者">
 <!ENTITY sb.detail.option.tidyCss.2.help "移除註解及瀏覽器無法識別的樣式宣告。">
 <!ENTITY sb.detail.option.tidyCss.3 "改寫連結，移除未知及未使用者">
-<!ENTITY sb.detail.option.tidyCss.3.help "移除註解及瀏覽器無法識別的樣式宣告。不擷取動態腳本時，也移除未套用於任何元素的樣式宣告。">
+<!ENTITY sb.detail.option.tidyCss.3.help "移除註解及瀏覽器無法識別的樣式宣告。不儲存動態腳本時，也移除未套用於任何元素的樣式宣告。">
 <!ENTITY sb.detail.option.saveDataUri "將 data URI 儲存成檔案">
 <!ENTITY sb.detail.option.saveDataUri.help "檔案將命名為其內容之 SHA1 校驗和。">
 <!ENTITY sb.detail.option.fileAsHtml "非 HTML 檔案儲存為 HTML">
@@ -70,10 +70,10 @@
 <!ENTITY sb.detail.linked.file.method2 "比對 HTTP 標頭及網址副檔名">
 <!ENTITY sb.detail.linked.file.desc "下載完整副檔名符合任一行規則運算式的檔案。略過 &quot;#&quot; 開頭的行。">
 <!ENTITY sb.detail.linked.file.reset "還原預設值">
-<!ENTITY sb.detail.linked.page "深入擷取">
-<!ENTITY sb.detail.linked.page.desc "全部擷取完成後，會將所有頁面互相連結，並產生站台地圖。">
+<!ENTITY sb.detail.linked.page "深入儲存">
+<!ENTITY sb.detail.linked.page.desc "全部儲存完成後，會將所有頁面互相連結，並產生站台地圖。">
 <!ENTITY sb.detail.linked.page.depth "深入連結層數">
-<!ENTITY sb.detail.warnAboutRenew "請注意：「重新擷取」將覆蓋之前擷取的頁面。">
+<!ENTITY sb.detail.warnAboutRenew "請注意：「重新儲存」將覆蓋之前儲存的頁面。">
 <!ENTITY sb.detail.warnAboutScript "請注意：儲存 JavaScript 可能會引發許多問題。">
 
 <!-- editor.dtd -->
@@ -234,19 +234,19 @@
 <!ENTITY sb.output.option.open "輸出完成後，以瀏覽器開啟">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.save.partial "擷取選擇區域">
-<!ENTITY sb.save.partial.as "擷取選擇區域細節">
-<!ENTITY sb.save.entire "擷取網頁">
-<!ENTITY sb.save.entire.as "擷取網頁細節">
-<!ENTITY sb.save.frame "擷取頁框">
-<!ENTITY sb.save.frame.as "擷取頁框細節">
-<!ENTITY sb.save.target "擷取連結">
-<!ENTITY sb.save.target.as "擷取連結細節">
-<!ENTITY sb.save.alltabs "擷取所有分頁">
-<!ENTITY sb.save.bookmark "加入 ScrapBook 書籤">
+<!ENTITY sb.save.partial "儲存選擇區域">
+<!ENTITY sb.save.partial.as "儲存選擇區域為">
+<!ENTITY sb.save.entire "儲存網頁">
+<!ENTITY sb.save.entire.as "儲存網頁為">
+<!ENTITY sb.save.frame "儲存頁框">
+<!ENTITY sb.save.frame.as "儲存頁框為">
+<!ENTITY sb.save.target "儲存連結">
+<!ENTITY sb.save.target.as "儲存連結為">
+<!ENTITY sb.save.alltabs "儲存所有分頁">
+<!ENTITY sb.save.bookmark "儲存為 ScrapBook 書籤">
 <!ENTITY sb.sidebar "在側邊欄顯示">
 <!ENTITY sb.menubar "選單列存取鍵">
-<!ENTITY sb.editbefore "編輯後擷取">
+<!ENTITY sb.editbefore "編輯後儲存">
 
 <!-- prefs.dtd -->
 <!ENTITY sb.prefs.main "一般設定">
@@ -274,15 +274,15 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML 格式化模板">
 <!ENTITY sb.prefs.data.tips "請選擇 ScrapBook 存放資料的資料夾">
 <!ENTITY sb.prefs.confirmDelete "刪除資料需要確認">
-<!ENTITY sb.prefs.saveDefault "預設擷取設定">
+<!ENTITY sb.prefs.saveDefault "預設儲存設定">
 <!ENTITY sb.prefs.tree.autoCollapse "開啟某資料夾時，自動收合其他資料夾">
 <!ENTITY sb.prefs.tree.unshift "新增資料時，應放在">
 <!ENTITY sb.prefs.tree.unshift.top "最前面">
 <!ENTITY sb.prefs.tree.unshift.bottom "最後面">
 <!ENTITY sb.prefs.asciiFilename "將檔案儲存為 ASCII 檔名">
-<!ENTITY sb.prefs.showDetailOnDrop "以拖曳方式擷取資料時，顯示「詳細資訊」對話方塊">
-<!ENTITY sb.prefs.notifyOnComplete "顯示「擷取完畢」提醒視窗">
-<!ENTITY sb.prefs.notifyPageSaved "瀏覽擷取過的頁面時，顯示提醒視窗">
+<!ENTITY sb.prefs.showDetailOnDrop "以拖曳方式儲存資料時，顯示「詳細資訊」對話方塊">
+<!ENTITY sb.prefs.notifyOnComplete "顯示「儲存完畢」提醒視窗">
+<!ENTITY sb.prefs.notifyPageSaved "瀏覽儲存過的頁面時，顯示提醒視窗">
 <!ENTITY sb.prefs.autoOutput "更動資料時，自動輸出 HTML 資料列表">
 <!ENTITY sb.prefs.io "偏好設定">
 <!ENTITY sb.prefs.io.export "匯出偏好設定">
@@ -328,7 +328,7 @@
 <!ENTITY sb.tools.manage "管理資料">
 <!ENTITY sb.tools.combine "合併精靈">
 <!ENTITY sb.tools.trade "匯入 / 匯出">
-<!ENTITY sb.tools.multiple "擷取多重 URL">
+<!ENTITY sb.tools.multiple "儲存多重 URL">
 <!ENTITY sb.tools.directory "開啟 ScrapBook 目錄">
 <!ENTITY sb.tools.calculate "計算資料大小">
 <!ENTITY sb.tools.sorttree "排序所有項目">
@@ -378,7 +378,7 @@
 <!ENTITY sb.move "移動">
 <!ENTITY sb.move.into "移到其他資料夾">
 <!ENTITY sb.copy "複製">
-<!ENTITY sb.renew "重新擷取">
+<!ENTITY sb.renew "重新儲存">
 <!ENTITY sb.internalize "内置化">
 <!ENTITY sb.internalize.help "將頁面內嵌的外部媒體存入本機目錄。">
 <!ENTITY sb.export "匯出">

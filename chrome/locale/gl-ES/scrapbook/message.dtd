@@ -3,7 +3,7 @@
 <!ENTITY sb.calc.diagnosis "Diagnose">
 
 <!-- capture.dtd -->
-<!ENTITY sb.save "Capturar">
+<!ENTITY sb.save "Gardar">
 <!ENTITY sb.save.abort "Abortar">
 <!ENTITY sb.save.start "Comezar">
 <!ENTITY sb.save.retry "Reintentar">
@@ -36,11 +36,11 @@
 <!ENTITY sb.combine.newTitle "Título novo">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.title "Detalles da captura">
+<!ENTITY sb.detail.title "Información da captura">
 <!ENTITY sb.detail.new.folder "Novo cartafol">
 <!ENTITY sb.detail.select.folder "Seleccione un cartafol">
 <!ENTITY sb.detail.option "Opcións">
-<!ENTITY sb.detail.option.save "Capture">
+<!ENTITY sb.detail.option.save "Gardar">
 <!ENTITY sb.detail.option.images "Imaxes">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -55,7 +55,7 @@
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
 <!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not saving scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
 <!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
@@ -70,7 +70,7 @@
 <!ENTITY sb.detail.linked.file.method2 "Match HTTP header and URL file extension">
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
-<!ENTITY sb.detail.linked.page "Captura en niveis">
+<!ENTITY sb.detail.linked.page "Gardar con niveis">
 <!ENTITY sb.detail.linked.page.desc "Despois de completar as capturas, todas as páxinas serán ligadas e crearase un mapa web">
 <!ENTITY sb.detail.linked.page.depth "Número de niveis">
 <!ENTITY sb.detail.warnAboutRenew "AVISO: 'Capturar outra vez'">
@@ -234,19 +234,19 @@
 <!ENTITY sb.output.option.open "Despois de xerar, abrir no navegador">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.save.partial "Capturar selección">
-<!ENTITY sb.save.partial.as "Capturar selección como">
-<!ENTITY sb.save.entire "Capturar páxina">
-<!ENTITY sb.save.entire.as "Capturar páxina como">
-<!ENTITY sb.save.frame "Capturar cadro">
-<!ENTITY sb.save.frame.as "Capturar cadro como">
-<!ENTITY sb.save.target "Capturar ligazón">
-<!ENTITY sb.save.target.as "Capturar ligazón como">
-<!ENTITY sb.save.alltabs "Capturar todas as pestanas">
-<!ENTITY sb.save.bookmark "Marcar co ScrapBook">
+<!ENTITY sb.save.partial "Gardar a selección">
+<!ENTITY sb.save.partial.as "Gardar a selección como">
+<!ENTITY sb.save.entire "Gardar a páxina">
+<!ENTITY sb.save.entire.as "Gardar a páxina como">
+<!ENTITY sb.save.frame "Gardar o marco">
+<!ENTITY sb.save.frame.as "Gardar o marco como">
+<!ENTITY sb.save.target "Gardar a ligazón">
+<!ENTITY sb.save.target.as "Gardar a ligazón como">
+<!ENTITY sb.save.alltabs "Gardar todas as pestanas">
+<!ENTITY sb.save.bookmark "Gardar como marcador">
 <!ENTITY sb.sidebar "Amosar na barra lateral">
 <!ENTITY sb.menubar "Menubar accesskey">
-<!ENTITY sb.editbefore "Editar antes de capturar">
+<!ENTITY sb.editbefore "Editar antes da captura">
 
 <!-- prefs.dtd -->
 <!ENTITY sb.prefs.main "Principal">
@@ -274,7 +274,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "Escoller un cartafol onde gardar os datos de ScrapBook.">
 <!ENTITY sb.prefs.confirmDelete "Avisarme cando se borren elementos da colección(s)">
-<!ENTITY sb.prefs.saveDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default save settings">
 <!ENTITY sb.prefs.tree.autoCollapse "Ao abrir un cartafol da colección, pechar os outros cartafoles automaticamente">
 <!ENTITY sb.prefs.tree.unshift "Poñer o elemento">
 <!ENTITY sb.prefs.tree.unshift.top "na parte superior do cartafol">
@@ -282,7 +282,7 @@
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Amosar o diálogo 'Detalles da captura' cando se capture arrastrando e soltando sobre o panel lateral">
 <!ENTITY sb.prefs.notifyOnComplete "Amosar o aviso de 'Captura completada'">
-<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been saved">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">

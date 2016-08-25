@@ -3,7 +3,7 @@
 <!ENTITY sb.calc.diagnosis "Перевірка">
 
 <!-- capture.dtd -->
-<!ENTITY sb.save "Збереження">
+<!ENTITY sb.save "Зберегти">
 <!ENTITY sb.save.abort "Скасувати">
 <!ENTITY sb.save.start "Розпочати">
 <!ENTITY sb.save.retry "Повторити">
@@ -36,11 +36,11 @@
 <!ENTITY sb.combine.newTitle "нова назва">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.title "Подробиці збереження">
+<!ENTITY sb.detail.title "Деталі збереження">
 <!ENTITY sb.detail.new.folder "Нова тека">
 <!ENTITY sb.detail.select.folder "Оберіть теку">
 <!ENTITY sb.detail.option "Параметри">
-<!ENTITY sb.detail.option.save "Capture">
+<!ENTITY sb.detail.option.save "Зберегти">
 <!ENTITY sb.detail.option.images "Зображення">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -55,7 +55,7 @@
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
 <!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not saving scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
 <!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
@@ -234,16 +234,16 @@
 <!ENTITY sb.output.option.open "Відкрити у браузері після відображення">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.save.partial "Зберегти обране">
-<!ENTITY sb.save.partial.as "Зберегти обране як">
+<!ENTITY sb.save.partial "Зберегти вибране">
+<!ENTITY sb.save.partial.as "Зберегти вибране як">
 <!ENTITY sb.save.entire "Зберегти сторінку">
 <!ENTITY sb.save.entire.as "Зберегти сторінку як">
 <!ENTITY sb.save.frame "Зберегти фрейм">
 <!ENTITY sb.save.frame.as "Зберегти фрейм як">
 <!ENTITY sb.save.target "Зберегти посилання">
 <!ENTITY sb.save.target.as "Зберегти посилання як">
-<!ENTITY sb.save.alltabs "Зберегти усі вкладки">
-<!ENTITY sb.save.bookmark "Додати до закладок у ScrapBook">
+<!ENTITY sb.save.alltabs "Зберегти всі вкладки">
+<!ENTITY sb.save.bookmark "Зберегти як закладку">
 <!ENTITY sb.sidebar "Відобразити у бічній панелі">
 <!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Редагувати перед збереженням">
@@ -274,7 +274,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "Оберіть теку для збереження даних ScrapBook.">
 <!ENTITY sb.prefs.confirmDelete "Попереджати при вилученні елементів дерева">
-<!ENTITY sb.prefs.saveDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default save settings">
 <!ENTITY sb.prefs.tree.autoCollapse "При розгортанні теки дерева автоматично згортати інші теки">
 <!ENTITY sb.prefs.tree.unshift "Розміщувати елементи">
 <!ENTITY sb.prefs.tree.unshift.top "спочатку теки">
@@ -282,7 +282,7 @@
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Відображати діалог „Налаштування збереження“ при збереженні перетягуванням на бічну панель">
 <!ENTITY sb.prefs.notifyOnComplete "Показувати інформацію „Збереження виконано“">
-<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been saved">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">

@@ -36,11 +36,11 @@
 <!ENTITY sb.combine.newTitle "Nuovo titolo">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.title "Dettagli cattura ">
+<!ENTITY sb.detail.title "Dettagli della cattura">
 <!ENTITY sb.detail.new.folder "Nuova cartella">
 <!ENTITY sb.detail.select.folder "Seleziona cartella">
 <!ENTITY sb.detail.option "Opzioni">
-<!ENTITY sb.detail.option.save "Capture">
+<!ENTITY sb.detail.option.save "Save">
 <!ENTITY sb.detail.option.images "Immagini">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -55,7 +55,7 @@
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
 <!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not saving scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
 <!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
 <!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
@@ -70,7 +70,7 @@
 <!ENTITY sb.detail.linked.file.method2 "Match HTTP header and URL file extension">
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
-<!ENTITY sb.detail.linked.page "Livello di cattura dei link presenti nelle pagine web">
+<!ENTITY sb.detail.linked.page "Cattura in profondità">
 <!ENTITY sb.detail.linked.page.desc "Dopo aver completato la cattura, tutte le pagine verranno elencate e verrà creata una mappa del sito">
 <!ENTITY sb.detail.linked.page.depth "Cattura fino al seguente livello">
 <!ENTITY sb.detail.warnAboutRenew "AVVISO: l'opzione 'Cattura ancora' sovrascrive le pagine precedentemente salvate">
@@ -274,7 +274,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "Selezionare una cartella dove conservare i dati di ScrapBook">
 <!ENTITY sb.prefs.confirmDelete "Avvisa quando si eliminano elementi">
-<!ENTITY sb.prefs.saveDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default save settings">
 <!ENTITY sb.prefs.tree.autoCollapse "Quando si espande una cartella nel diagramma, contrarre tutte le altre (come in IE)">
 <!ENTITY sb.prefs.tree.unshift "Inserisci elemento">
 <!ENTITY sb.prefs.tree.unshift.top "in cima alla cartella">
@@ -282,7 +282,7 @@
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Mostra la finestra di dialogo 'Dettagli cattura' quando si cattura tramite trascinamento e rilascio nella barra laterale">
 <!ENTITY sb.prefs.notifyOnComplete "Mostra la finestra di notifica 'Cattura completata'">
-<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been saved">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">
