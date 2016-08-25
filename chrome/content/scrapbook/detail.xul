@@ -8,7 +8,7 @@
 <!DOCTYPE dialog SYSTEM "chrome://scrapbook/locale/message.dtd">
 
 <dialog id="sbDetailDialog"
-        title="ScrapBook - &sb.detail;"
+        title="ScrapBook - &sb.detail.title;"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         persist="screenX screenY width height"
         onload="sbCaptureOptions.init();"
@@ -55,7 +55,7 @@
                 <groupbox group="capture-options">
                     <caption label="&sb.detail.option;" />
                     <hbox align="center">
-                    <caption label="&sb.detail.option.capture;:" />
+                    <caption label="&sb.detail.option.save;:" />
                         <checkbox id="sbDetailOptionImages" label="&sb.detail.option.images;" />
                         <checkbox id="sbDetailOptionMedia" label="&sb.detail.option.media;" />
                         <checkbox id="sbDetailOptionFonts" label="&sb.detail.option.fonts;" />
@@ -74,8 +74,8 @@
                             </menupopup>
                         </menulist>
                     </hbox>
-                    <checkbox id="sbDetailOptionSaveDataURI" label="&sb.detail.option.saveDataUri;" />
-                    <checkbox id="sbDetailOptionAsHtml" label="&sb.detail.option.fileAsHtml;" />
+                    <checkbox id="sbDetailOptionSaveDataURI" label="&sb.detail.option.saveDataUri;" tooltiptext="&sb.detail.option.saveDataUri.help;" />
+                    <checkbox id="sbDetailOptionAsHtml" label="&sb.detail.option.fileAsHtml;" tooltiptext="&sb.detail.option.fileAsHtml.help;" />
                 </groupbox>
                 <groupbox group="capture-options">
                     <caption label="&sb.detail.linked.file;" />

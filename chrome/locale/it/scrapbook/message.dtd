@@ -3,27 +3,27 @@
 <!ENTITY sb.calc.diagnosis "Risultato">
 
 <!-- capture.dtd -->
-<!ENTITY sb.capture "Cattura">
-<!ENTITY sb.capture.abort "Interrompi">
-<!ENTITY sb.capture.start "Avvia">
-<!ENTITY sb.capture.retry "Ritenta">
-<!ENTITY sb.capture.skip "Salta">
-<!ENTITY sb.capture.pause "Pausa">
-<!ENTITY sb.capture.finish "Annulla">
-<!ENTITY sb.capture.column.address "URL">
-<!ENTITY sb.capture.column.title "Titolo">
-<!ENTITY sb.capture.column.status "Stato">
-<!ENTITY sb.capture.checkSelection "Check selected items">
-<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
-<!ENTITY sb.capture.filter "Filtra">
-<!ENTITY sb.capture.filter.column.rule "Mostra/nascondi">
-<!ENTITY sb.capture.filter.column.content "Filtra (espressione regolare)">
-<!ENTITY sb.capture.filter.accept "Accetta">
-<!ENTITY sb.capture.filter.accept.help "Sostituisci oppure modifica il valore">
-<!ENTITY sb.capture.filter.cancel "Annulla">
-<!ENTITY sb.capture.filter.cancel.help "Annulla la modifica">
-<!ENTITY sb.capture.filter.delete "Elimina">
-<!ENTITY sb.capture.filter.delete.help "Elimina il filtro dalla lista">
+<!ENTITY sb.save "Cattura">
+<!ENTITY sb.save.abort "Interrompi">
+<!ENTITY sb.save.start "Avvia">
+<!ENTITY sb.save.retry "Ritenta">
+<!ENTITY sb.save.skip "Salta">
+<!ENTITY sb.save.pause "Pausa">
+<!ENTITY sb.save.finish "Annulla">
+<!ENTITY sb.save.column.address "URL">
+<!ENTITY sb.save.column.title "Titolo">
+<!ENTITY sb.save.column.status "Stato">
+<!ENTITY sb.save.checkSelection "Check selected items">
+<!ENTITY sb.save.uncheckSelection "Uncheck selected items">
+<!ENTITY sb.save.filter "Filtra">
+<!ENTITY sb.save.filter.column.rule "Mostra/nascondi">
+<!ENTITY sb.save.filter.column.content "Filtra (espressione regolare)">
+<!ENTITY sb.save.filter.accept "Accetta">
+<!ENTITY sb.save.filter.accept.help "Sostituisci oppure modifica il valore">
+<!ENTITY sb.save.filter.cancel "Annulla">
+<!ENTITY sb.save.filter.cancel.help "Annulla la modifica">
+<!ENTITY sb.save.filter.delete "Elimina">
+<!ENTITY sb.save.filter.delete.help "Elimina il filtro dalla lista">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Aggiungere elementi da unire tramite trascinamento e rilascio dal diagramma delle cartelle. È possibile trascinare e rilasciare molteplici elementi contemporaneamente">
@@ -36,15 +36,11 @@
 <!ENTITY sb.combine.newTitle "Nuovo titolo">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.linked.timeout "Timeout (in secondi)">
-<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
-<!ENTITY sb.detail.linked.charset "Codifica">
-<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
-<!ENTITY sb.detail "Dettagli cattura ">
+<!ENTITY sb.detail.title "Dettagli della cattura">
 <!ENTITY sb.detail.new.folder "Nuova cartella">
 <!ENTITY sb.detail.select.folder "Seleziona cartella">
 <!ENTITY sb.detail.option "Opzioni">
-<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.save "Save">
 <!ENTITY sb.detail.option.images "Immagini">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -59,16 +55,22 @@
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
 <!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not saving scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
-<!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
+<!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
+<!ENTITY sb.detail.option.fileAsHtml.help "When a non-HTML file is viewed by the browser, save its rendering HTML content. (Including XHTML files.)">
+<!ENTITY sb.detail.linked.timeout "Timeout (in secondi)">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "Codifica">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail.linked.file "File da scaricare contenuti nei link delle pagine web da catturare">
 <!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
 <!ENTITY sb.detail.linked.file.method1 "Match URL file extension">
 <!ENTITY sb.detail.linked.file.method2 "Match HTTP header and URL file extension">
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
-<!ENTITY sb.detail.linked.page "Livello di cattura dei link presenti nelle pagine web">
+<!ENTITY sb.detail.linked.page "Cattura in profondità">
 <!ENTITY sb.detail.linked.page.desc "Dopo aver completato la cattura, tutte le pagine verranno elencate e verrà creata una mappa del sito">
 <!ENTITY sb.detail.linked.page.depth "Cattura fino al seguente livello">
 <!ENTITY sb.detail.warnAboutRenew "AVVISO: l'opzione 'Cattura ancora' sovrascrive le pagine precedentemente salvate">
@@ -232,16 +234,16 @@
 <!ENTITY sb.output.option.open "Dopo l'esportazione degli elementi, aprili nel browser">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.capture.partial "Cattura selezione">
-<!ENTITY sb.capture.partial.as "Cattura selezione con nome">
-<!ENTITY sb.capture.entire "Cattura pagina">
-<!ENTITY sb.capture.entire.as "Cattura pagina con nome">
-<!ENTITY sb.capture.frame "Cattura riquadro">
-<!ENTITY sb.capture.frame.as "Cattura riquadro con nome">
-<!ENTITY sb.capture.target "Cattura link">
-<!ENTITY sb.capture.target.as "Cattura link con nome">
-<!ENTITY sb.capture.alltabs "Cattura tutte le schede">
-<!ENTITY sb.capture.bookmark "Nei segnalibri con ScrapBook">
+<!ENTITY sb.save.partial "Cattura selezione">
+<!ENTITY sb.save.partial.as "Cattura selezione con nome">
+<!ENTITY sb.save.entire "Cattura pagina">
+<!ENTITY sb.save.entire.as "Cattura pagina con nome">
+<!ENTITY sb.save.frame "Cattura riquadro">
+<!ENTITY sb.save.frame.as "Cattura riquadro con nome">
+<!ENTITY sb.save.target "Cattura link">
+<!ENTITY sb.save.target.as "Cattura link con nome">
+<!ENTITY sb.save.alltabs "Cattura tutte le schede">
+<!ENTITY sb.save.bookmark "Nei segnalibri con ScrapBook">
 <!ENTITY sb.sidebar "Mostra nella barra laterale">
 <!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Modifica prima di catturare">
@@ -272,7 +274,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "Selezionare una cartella dove conservare i dati di ScrapBook">
 <!ENTITY sb.prefs.confirmDelete "Avvisa quando si eliminano elementi">
-<!ENTITY sb.prefs.captureDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default save settings">
 <!ENTITY sb.prefs.tree.autoCollapse "Quando si espande una cartella nel diagramma, contrarre tutte le altre (come in IE)">
 <!ENTITY sb.prefs.tree.unshift "Inserisci elemento">
 <!ENTITY sb.prefs.tree.unshift.top "in cima alla cartella">
@@ -280,7 +282,7 @@
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Mostra la finestra di dialogo 'Dettagli cattura' quando si cattura tramite trascinamento e rilascio nella barra laterale">
 <!ENTITY sb.prefs.notifyOnComplete "Mostra la finestra di notifica 'Cattura completata'">
-<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been saved">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">
@@ -404,7 +406,6 @@
 <!ENTITY sb.search.cs "Maiuscole/minuscole">
 <!ENTITY sb.search.cache "Aggiorna la cache per la ricerca di testo semplice">
 <!ENTITY sb.search.clear "Elimina la cronologia dei moduli">
-<!ENTITY sb.search.days "Filtra in base ai giorni">
 <!ENTITY mb.manage "Gestione">
 <!ENTITY mb.profileFolder "Cartella del profilo">
 

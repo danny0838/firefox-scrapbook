@@ -57,10 +57,10 @@
             <preference id="extensions.scrapbook.key.menubar" name="extensions.scrapbook.key.menubar" type="string" />
             <preference id="extensions.scrapbook.key.sidebar" name="extensions.scrapbook.key.sidebar" type="string" />
             <preference id="extensions.scrapbook.key.manage" name="extensions.scrapbook.key.manage" type="string" />
-            <preference id="extensions.scrapbook.key.capture" name="extensions.scrapbook.key.capture" type="string" />
-            <preference id="extensions.scrapbook.key.captureAs" name="extensions.scrapbook.key.captureAs" type="string" />
-            <preference id="extensions.scrapbook.key.captureAllTabs" name="extensions.scrapbook.key.captureAllTabs" type="string" />
-            <preference id="extensions.scrapbook.key.captureMultiple" name="extensions.scrapbook.key.captureMultiple" type="string" />
+            <preference id="extensions.scrapbook.key.save" name="extensions.scrapbook.key.save" type="string" />
+            <preference id="extensions.scrapbook.key.saveAs" name="extensions.scrapbook.key.saveAs" type="string" />
+            <preference id="extensions.scrapbook.key.saveAllTabs" name="extensions.scrapbook.key.saveAllTabs" type="string" />
+            <preference id="extensions.scrapbook.key.saveMultiple" name="extensions.scrapbook.key.saveMultiple" type="string" />
             <preference id="extensions.scrapbook.key.bookmark" name="extensions.scrapbook.key.bookmark" type="string" />
             <preference id="extensions.scrapbook.key.htmlEditor.quit" name="extensions.scrapbook.key.htmlEditor.quit" type="string" />            
             <preference id="extensions.scrapbook.key.htmlEditor.save" name="extensions.scrapbook.key.htmlEditor.save" type="string" />
@@ -133,26 +133,26 @@
 
                 <!-- Capture -->
                 <row align="center">
-                    <label value="&sb.capture;" />
+                    <label value="&sb.save;" />
                 </row>
                 <row align="center">
-                    <label value="&sb.capture.entire;:" />
-                    <textbox preference="extensions.scrapbook.key.capture" />
+                    <label value="&sb.save.entire;:" />
+                    <textbox preference="extensions.scrapbook.key.save" />
                 </row>
                 <row align="center">
-                    <label value="&sb.capture.entire.as;:" />
-                    <textbox preference="extensions.scrapbook.key.captureAs" />
+                    <label value="&sb.save.entire.as;:" />
+                    <textbox preference="extensions.scrapbook.key.saveAs" />
                 </row>
                 <row align="center">
-                    <label value="&sb.capture.alltabs;:" />
-                    <textbox preference="extensions.scrapbook.key.captureAllTabs" />
+                    <label value="&sb.save.alltabs;:" />
+                    <textbox preference="extensions.scrapbook.key.saveAllTabs" />
                 </row>
                 <row align="center">
                     <label value="&sb.tools.multiple;:" />
-                    <textbox preference="extensions.scrapbook.key.captureMultiple" />
+                    <textbox preference="extensions.scrapbook.key.saveMultiple" />
                 </row>
                 <row align="center">
-                    <label value="&sb.capture.bookmark;:" />
+                    <label value="&sb.save.bookmark;:" />
                     <textbox preference="extensions.scrapbook.key.bookmark" />
                 </row>
 
@@ -385,12 +385,12 @@
         </preferences>
 
         <hbox align="center">
-            <label value="&sb.prefs.captureDefault;" />
+            <label value="&sb.prefs.saveDefault;" />
             <button label="&sb.button.customize;..." oncommand="window.openDialog('chrome://scrapbook/content/detail.xul?m=default', '', 'chrome,modal,centerscreen,resizable');" />
         </hbox>
         <checkbox preference="extensions.scrapbook.showDetailOnDrop" label="&sb.prefs.showDetailOnDrop;" />
         <checkbox preference="extensions.scrapbook.notifyOnComplete" label="&sb.prefs.notifyOnComplete;" />
-        <checkbox preference="extensions.scrapbook.notifyPageCaptured" label="&sb.prefs.notifyPageCaptured;" />
+        <checkbox preference="extensions.scrapbook.notifyPageCaptured" label="&sb.prefs.notifyPageSaved;" />
         <checkbox preference="extensions.scrapbook.asciiFilename" label="&sb.prefs.asciiFilename;" />
         <hbox align="center">
             <label value="&sb.prefs.tree.unshift;" />

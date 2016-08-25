@@ -51,8 +51,8 @@
             <menupopup onpopupshowing="sbMenuHandler.onPopupShowing(event, this);">
                 <menuitem id="ScrapBookMenubarItem1" key="key_ScrapBookCapture" />
                 <menuitem id="ScrapBookMenubarItem2" key="key_ScrapBookCaptureAs" />
-                <menuitem id="ScrapBookMenubarItem3" key="key_BookmarkWithScrapBook" label="&sb.capture.bookmark;..." oncommand="sbBrowserOverlay.execBookmark('ScrapBookContextPicking'); event.stopPropagation();" />
-                <menuitem id="ScrapBookMenubarItem4" key="key_ScrapBookSaveAllTabs" label="&sb.capture.alltabs;..." oncommand="sbMenuHandler.execCaptureAllTabs(); event.stopPropagation();" />
+                <menuitem id="ScrapBookMenubarItem3" key="key_BookmarkWithScrapBook" label="&sb.save.bookmark;..." oncommand="sbBrowserOverlay.execBookmark('ScrapBookContextPicking'); event.stopPropagation();" />
+                <menuitem id="ScrapBookMenubarItem4" key="key_ScrapBookSaveAllTabs" label="&sb.save.alltabs;..." oncommand="sbMenuHandler.execCaptureAllTabs(); event.stopPropagation();" />
                 <menuitem id="ScrapBookMenubarItem5" key="key_openScrapBookSidebar" sblabel="&sb.sidebar;" observes="viewScrapBookSidebar" />
                 <menuseparator />
             </menupopup>
@@ -113,16 +113,16 @@
     <menupopup id="contentAreaContextMenu">
         <menuseparator id="ScrapBookContextMenu0" />
         <!-- capture buttons -->
-        <menu id="ScrapBookContextMenu1" class="menu-iconic sb-capture-partial" label="&sb.capture.partial;" oncommand="sbBrowserOverlay.execCapture(1, true , false, event.originalTarget.id);" onclick="sbBrowserOverlay.onMiddleClick(event,1);"><menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this);" onpopuphiding="sbBrowserOverlay.destroyPopup(this);" /></menu>
-        <menuitem id="ScrapBookContextMenu2" class="menuitem-iconic sb-capture-partial" label="&sb.capture.partial.as;..." oncommand="sbBrowserOverlay.execCapture(1, true , true , event.originalTarget.id);" />
-        <menu id="ScrapBookContextMenu3" class="menu-iconic sb-capture-entire" label="&sb.capture.entire;" oncommand="sbBrowserOverlay.execCapture(2, false, false, event.originalTarget.id);" onclick="sbBrowserOverlay.onMiddleClick(event,3);"><menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this);" onpopuphiding="sbBrowserOverlay.destroyPopup(this);" /></menu>
-        <menuitem id="ScrapBookContextMenu4" class="menuitem-iconic sb-capture-entire" label="&sb.capture.entire.as;..." oncommand="sbBrowserOverlay.execCapture(2, false, true , event.originalTarget.id);" />
-        <menu id="ScrapBookContextMenu5" class="menu-iconic sb-capture-frame" label="&sb.capture.frame;" oncommand="sbBrowserOverlay.execCapture(2, true , false, event.originalTarget.id);" onclick="sbBrowserOverlay.onMiddleClick(event,5);"><menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this);" onpopuphiding="sbBrowserOverlay.destroyPopup(this);" /></menu>
-        <menuitem id="ScrapBookContextMenu6" class="menuitem-iconic sb-capture-frame" label="&sb.capture.frame.as;..." oncommand="sbBrowserOverlay.execCapture(2, true , true , event.originalTarget.id);" />
-        <menu id="ScrapBookContextMenu7" class="menu-iconic sb-capture-target" label="&sb.capture.target;" oncommand="sbBrowserOverlay.execCaptureTarget(false, event.originalTarget.id);" onclick="sbBrowserOverlay.onMiddleClick(event,7);"><menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this);" onpopuphiding="sbBrowserOverlay.destroyPopup(this);" /></menu>
-        <menuitem id="ScrapBookContextMenu8" class="menuitem-iconic sb-capture-target" label="&sb.capture.target.as;..." oncommand="sbBrowserOverlay.execCaptureTarget(true,  event.originalTarget.id);"     />
+        <menu id="ScrapBookContextMenu1" class="menu-iconic sb-capture-partial" label="&sb.save.partial;" oncommand="sbBrowserOverlay.execCapture(1, true , false, event.originalTarget.id);" onclick="sbBrowserOverlay.onMiddleClick(event,1);"><menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this);" onpopuphiding="sbBrowserOverlay.destroyPopup(this);" /></menu>
+        <menuitem id="ScrapBookContextMenu2" class="menuitem-iconic sb-capture-partial" label="&sb.save.partial.as;..." oncommand="sbBrowserOverlay.execCapture(1, true , true , event.originalTarget.id);" />
+        <menu id="ScrapBookContextMenu3" class="menu-iconic sb-capture-entire" label="&sb.save.entire;" oncommand="sbBrowserOverlay.execCapture(2, false, false, event.originalTarget.id);" onclick="sbBrowserOverlay.onMiddleClick(event,3);"><menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this);" onpopuphiding="sbBrowserOverlay.destroyPopup(this);" /></menu>
+        <menuitem id="ScrapBookContextMenu4" class="menuitem-iconic sb-capture-entire" label="&sb.save.entire.as;..." oncommand="sbBrowserOverlay.execCapture(2, false, true , event.originalTarget.id);" />
+        <menu id="ScrapBookContextMenu5" class="menu-iconic sb-capture-frame" label="&sb.save.frame;" oncommand="sbBrowserOverlay.execCapture(2, true , false, event.originalTarget.id);" onclick="sbBrowserOverlay.onMiddleClick(event,5);"><menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this);" onpopuphiding="sbBrowserOverlay.destroyPopup(this);" /></menu>
+        <menuitem id="ScrapBookContextMenu6" class="menuitem-iconic sb-capture-frame" label="&sb.save.frame.as;..." oncommand="sbBrowserOverlay.execCapture(2, true , true , event.originalTarget.id);" />
+        <menu id="ScrapBookContextMenu7" class="menu-iconic sb-capture-target" label="&sb.save.target;" oncommand="sbBrowserOverlay.execCaptureTarget(false, event.originalTarget.id);" onclick="sbBrowserOverlay.onMiddleClick(event,7);"><menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this);" onpopuphiding="sbBrowserOverlay.destroyPopup(this);" /></menu>
+        <menuitem id="ScrapBookContextMenu8" class="menuitem-iconic sb-capture-target" label="&sb.save.target.as;..." oncommand="sbBrowserOverlay.execCaptureTarget(true,  event.originalTarget.id);"     />
         <!-- bookmark -->
-        <menu id="ScrapBookContextMenu9" label="&sb.capture.bookmark;" oncommand="sbBrowserOverlay.execBookmark(event.originalTarget.id);">
+        <menu id="ScrapBookContextMenu9" label="&sb.save.bookmark;" oncommand="sbBrowserOverlay.execBookmark(event.originalTarget.id);">
             <menupopup onpopupshowing="sbBrowserOverlay.buildPopup(this);" onpopuphiding="sbBrowserOverlay.destroyPopup(this);" />
         </menu>
         <!-- HTMLEditor -->

@@ -3,27 +3,27 @@
 <!ENTITY sb.calc.diagnosis "Перевірка">
 
 <!-- capture.dtd -->
-<!ENTITY sb.capture "Збереження">
-<!ENTITY sb.capture.abort "Скасувати">
-<!ENTITY sb.capture.start "Розпочати">
-<!ENTITY sb.capture.retry "Повторити">
-<!ENTITY sb.capture.skip "Пропустити">
-<!ENTITY sb.capture.pause "Призупинити">
-<!ENTITY sb.capture.finish "Скасувати">
-<!ENTITY sb.capture.column.address "Адреса">
-<!ENTITY sb.capture.column.title "Назва">
-<!ENTITY sb.capture.column.status "Статус">
-<!ENTITY sb.capture.checkSelection "Check selected items">
-<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
-<!ENTITY sb.capture.filter "Фільтр">
-<!ENTITY sb.capture.filter.column.rule "Показати/сховати">
-<!ENTITY sb.capture.filter.column.content "Фільтр (регулярний вираз)">
-<!ENTITY sb.capture.filter.accept "Прийняти">
-<!ENTITY sb.capture.filter.accept.help "змінити чи редагувати значення">
-<!ENTITY sb.capture.filter.cancel "Скасувати">
-<!ENTITY sb.capture.filter.cancel.help "відмінити редагування">
-<!ENTITY sb.capture.filter.delete "Видалити">
-<!ENTITY sb.capture.filter.delete.help "Вилучити фільтр зі списку">
+<!ENTITY sb.save "Зберегти">
+<!ENTITY sb.save.abort "Скасувати">
+<!ENTITY sb.save.start "Розпочати">
+<!ENTITY sb.save.retry "Повторити">
+<!ENTITY sb.save.skip "Пропустити">
+<!ENTITY sb.save.pause "Призупинити">
+<!ENTITY sb.save.finish "Скасувати">
+<!ENTITY sb.save.column.address "Адреса">
+<!ENTITY sb.save.column.title "Назва">
+<!ENTITY sb.save.column.status "Статус">
+<!ENTITY sb.save.checkSelection "Check selected items">
+<!ENTITY sb.save.uncheckSelection "Uncheck selected items">
+<!ENTITY sb.save.filter "Фільтр">
+<!ENTITY sb.save.filter.column.rule "Показати/сховати">
+<!ENTITY sb.save.filter.column.content "Фільтр (регулярний вираз)">
+<!ENTITY sb.save.filter.accept "Прийняти">
+<!ENTITY sb.save.filter.accept.help "змінити чи редагувати значення">
+<!ENTITY sb.save.filter.cancel "Скасувати">
+<!ENTITY sb.save.filter.cancel.help "відмінити редагування">
+<!ENTITY sb.save.filter.delete "Видалити">
+<!ENTITY sb.save.filter.delete.help "Вилучити фільтр зі списку">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Додавайте необхідні сторінки з дерева сторінок перетягуванням. Ви можете перетягувати одразу декілька сторінок.">
@@ -36,15 +36,11 @@
 <!ENTITY sb.combine.newTitle "нова назва">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.linked.timeout "Час очікування (секунд)">
-<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
-<!ENTITY sb.detail.linked.charset "Кодування">
-<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
-<!ENTITY sb.detail "Подробиці збереження">
+<!ENTITY sb.detail.title "Деталі збереження">
 <!ENTITY sb.detail.new.folder "Нова тека">
 <!ENTITY sb.detail.select.folder "Оберіть теку">
 <!ENTITY sb.detail.option "Параметри">
-<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.save "Зберегти">
 <!ENTITY sb.detail.option.images "Зображення">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -59,9 +55,15 @@
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
 <!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not saving scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
-<!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
+<!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
+<!ENTITY sb.detail.option.fileAsHtml.help "When a non-HTML file is viewed by the browser, save its rendering HTML content. (Including XHTML files.)">
+<!ENTITY sb.detail.linked.timeout "Час очікування (секунд)">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "Кодування">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail.linked.file "Завантаження файлів за посиланнями на сторінці">
 <!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
 <!ENTITY sb.detail.linked.file.method1 "Match URL file extension">
@@ -232,16 +234,16 @@
 <!ENTITY sb.output.option.open "Відкрити у браузері після відображення">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.capture.partial "Зберегти обране">
-<!ENTITY sb.capture.partial.as "Зберегти обране як">
-<!ENTITY sb.capture.entire "Зберегти сторінку">
-<!ENTITY sb.capture.entire.as "Зберегти сторінку як">
-<!ENTITY sb.capture.frame "Зберегти фрейм">
-<!ENTITY sb.capture.frame.as "Зберегти фрейм як">
-<!ENTITY sb.capture.target "Зберегти посилання">
-<!ENTITY sb.capture.target.as "Зберегти посилання як">
-<!ENTITY sb.capture.alltabs "Зберегти усі вкладки">
-<!ENTITY sb.capture.bookmark "Додати до закладок у ScrapBook">
+<!ENTITY sb.save.partial "Зберегти вибране">
+<!ENTITY sb.save.partial.as "Зберегти вибране як">
+<!ENTITY sb.save.entire "Зберегти сторінку">
+<!ENTITY sb.save.entire.as "Зберегти сторінку як">
+<!ENTITY sb.save.frame "Зберегти фрейм">
+<!ENTITY sb.save.frame.as "Зберегти фрейм як">
+<!ENTITY sb.save.target "Зберегти посилання">
+<!ENTITY sb.save.target.as "Зберегти посилання як">
+<!ENTITY sb.save.alltabs "Зберегти всі вкладки">
+<!ENTITY sb.save.bookmark "Зберегти як закладку">
 <!ENTITY sb.sidebar "Відобразити у бічній панелі">
 <!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Редагувати перед збереженням">
@@ -272,7 +274,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "Оберіть теку для збереження даних ScrapBook.">
 <!ENTITY sb.prefs.confirmDelete "Попереджати при вилученні елементів дерева">
-<!ENTITY sb.prefs.captureDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default save settings">
 <!ENTITY sb.prefs.tree.autoCollapse "При розгортанні теки дерева автоматично згортати інші теки">
 <!ENTITY sb.prefs.tree.unshift "Розміщувати елементи">
 <!ENTITY sb.prefs.tree.unshift.top "спочатку теки">
@@ -280,7 +282,7 @@
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Відображати діалог „Налаштування збереження“ при збереженні перетягуванням на бічну панель">
 <!ENTITY sb.prefs.notifyOnComplete "Показувати інформацію „Збереження виконано“">
-<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been saved">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">
@@ -404,7 +406,6 @@
 <!ENTITY sb.search.cs "З урахуванням регістру">
 <!ENTITY sb.search.cache "Поновити кеш повнотекстового пошуку">
 <!ENTITY sb.search.clear "Очистити історію автозаповнення">
-<!ENTITY sb.search.days "Показати за останні:">
 <!ENTITY mb.manage "Керування">
 <!ENTITY mb.profileFolder "Тека профілю">
 

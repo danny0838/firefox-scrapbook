@@ -3,27 +3,27 @@
 <!ENTITY sb.calc.diagnosis "Diagnose">
 
 <!-- capture.dtd -->
-<!ENTITY sb.capture "Archivierung">
-<!ENTITY sb.capture.abort "Abbrechen">
-<!ENTITY sb.capture.start "Starten">
-<!ENTITY sb.capture.retry "Wiederholen">
-<!ENTITY sb.capture.skip "Überspringen">
-<!ENTITY sb.capture.pause "Anhalten">
-<!ENTITY sb.capture.finish "Beenden">
-<!ENTITY sb.capture.column.address "URL">
-<!ENTITY sb.capture.column.title "Titel">
-<!ENTITY sb.capture.column.status "Status">
-<!ENTITY sb.capture.checkSelection "Check selected items">
-<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
-<!ENTITY sb.capture.filter "Filter">
-<!ENTITY sb.capture.filter.column.rule "Ein-/Ausblenden">
-<!ENTITY sb.capture.filter.column.content "Filter (regulärer Ausdruck)">
-<!ENTITY sb.capture.filter.accept "OK">
-<!ENTITY sb.capture.filter.accept.help "Wert übernehmen/Wert ändern">
-<!ENTITY sb.capture.filter.cancel "Abbrechen">
-<!ENTITY sb.capture.filter.cancel.help "Editieren abbreche">
-<!ENTITY sb.capture.filter.delete "Entfernen">
-<!ENTITY sb.capture.filter.delete.help "Filter aus der Liste entfernen">
+<!ENTITY sb.save "Archivieren">
+<!ENTITY sb.save.abort "Abbrechen">
+<!ENTITY sb.save.start "Starten">
+<!ENTITY sb.save.retry "Wiederholen">
+<!ENTITY sb.save.skip "Überspringen">
+<!ENTITY sb.save.pause "Anhalten">
+<!ENTITY sb.save.finish "Beenden">
+<!ENTITY sb.save.column.address "URL">
+<!ENTITY sb.save.column.title "Titel">
+<!ENTITY sb.save.column.status "Status">
+<!ENTITY sb.save.checkSelection "Check selected items">
+<!ENTITY sb.save.uncheckSelection "Uncheck selected items">
+<!ENTITY sb.save.filter "Filter">
+<!ENTITY sb.save.filter.column.rule "Ein-/Ausblenden">
+<!ENTITY sb.save.filter.column.content "Filter (regulärer Ausdruck)">
+<!ENTITY sb.save.filter.accept "OK">
+<!ENTITY sb.save.filter.accept.help "Wert übernehmen/Wert ändern">
+<!ENTITY sb.save.filter.cancel "Abbrechen">
+<!ENTITY sb.save.filter.cancel.help "Editieren abbreche">
+<!ENTITY sb.save.filter.delete "Entfernen">
+<!ENTITY sb.save.filter.delete.help "Filter aus der Liste entfernen">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Fügen Sie Einträge, die Sie zusammenfassen wollen, durch &quot;Ziehen und Ablegen&quot; aus dem Baum hinzu. Sie können auch mehrere Einträge auf einmal auswählen.">
@@ -36,15 +36,11 @@
 <!ENTITY sb.combine.newTitle "neuer Titel">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.linked.timeout "Wartezeit (in Sekunden)">
-<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
-<!ENTITY sb.detail.linked.charset "Zeichensatz">
-<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
-<!ENTITY sb.detail "Archivierungsdetails">
+<!ENTITY sb.detail.title "Archivierungsdetails">
 <!ENTITY sb.detail.new.folder "Neuer Ordner">
 <!ENTITY sb.detail.select.folder "Ordner auswählen">
 <!ENTITY sb.detail.option "Einschließen">
-<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.save "Archivieren">
 <!ENTITY sb.detail.option.images "Grafiken">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -59,18 +55,24 @@
 <!ENTITY sb.detail.option.tidyCss.2 "Rewrite links; remove unknown">
 <!ENTITY sb.detail.option.tidyCss.2.help "Comments and browser unsupported CSS declaration will be removed.">
 <!ENTITY sb.detail.option.tidyCss.3 "Rewrite links; remove unknown and unused">
-<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not capturing scripts.">
+<!ENTITY sb.detail.option.tidyCss.3.help "Comments and browser unsupported CSS declaration will be removed. CSS declaration not applying to any element will be removed if not saving scripts.">
 <!ENTITY sb.detail.option.saveDataUri "Save data URI as file">
-<!ENTITY sb.detail.option.fileAsHtml "Capture presenting HTML for non-HTML files">
+<!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
+<!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
+<!ENTITY sb.detail.option.fileAsHtml.help "When a non-HTML file is viewed by the browser, save its rendering HTML content. (Including XHTML files.)">
+<!ENTITY sb.detail.linked.timeout "Wartezeit (in Sekunden)">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "Zeichensatz">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail.linked.file "Verlinkte Dateien herunterladen">
 <!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
 <!ENTITY sb.detail.linked.file.method1 "Match URL file extension">
 <!ENTITY sb.detail.linked.file.method2 "Match HTTP header and URL file extension">
 <!ENTITY sb.detail.linked.file.desc "Files with a full extension matching any RegExp in the lines will be downloaded. Lines starting with &quot;#&quot; will be skipped.The following RegExps are invalid and will be skipped on execution">
 <!ENTITY sb.detail.linked.file.reset "Reset to default">
-<!ENTITY sb.detail.linked.page "Archivierungstiefe">
-<!ENTITY sb.detail.linked.page.desc "Nach Abschluss der Archivierung werden alle Seiten untereinander verlinkt und es wird eine Sitemap erstellt.">
-<!ENTITY sb.detail.linked.page.depth "Verzeichnistiefe der Links">
+<!ENTITY sb.detail.linked.page "Ausführliche Archivierung">
+<!ENTITY sb.detail.linked.page.desc "Nach Abschluss der Archivierung werden alle Seiten untereinander verlinkt.">
+<!ENTITY sb.detail.linked.page.depth "Links folgen bis zu einer Tiefe von">
 <!ENTITY sb.detail.warnAboutRenew "HINWEIS: &quot;Erneut archivieren&quot; überschreibt zuvor gespeicherte Seiten.">
 <!ENTITY sb.detail.warnAboutScript "HINWEIS: JavaScript kann eine Reihe von Problemen verursachen.">
 
@@ -232,16 +234,16 @@
 <!ENTITY sb.output.option.open "HTML-Ausgabe im Browser öffnen">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.capture.partial "Auswahl archivieren">
-<!ENTITY sb.capture.partial.as "Auswahl archivieren als">
-<!ENTITY sb.capture.entire "Seite archivieren">
-<!ENTITY sb.capture.entire.as "Seite archivieren als">
-<!ENTITY sb.capture.frame "Frame archivieren">
-<!ENTITY sb.capture.frame.as "Frame archivieren als">
-<!ENTITY sb.capture.target "Link archivieren">
-<!ENTITY sb.capture.target.as "Link archivieren als">
-<!ENTITY sb.capture.alltabs "Alle Tabs archivieren">
-<!ENTITY sb.capture.bookmark "Lesezeichen mit ScrapBook erstellen">
+<!ENTITY sb.save.partial "Auswahl archivieren">
+<!ENTITY sb.save.partial.as "Auswahl archivieren als">
+<!ENTITY sb.save.entire "Seite archivieren">
+<!ENTITY sb.save.entire.as "Seite archivieren als">
+<!ENTITY sb.save.frame "Frame archivieren">
+<!ENTITY sb.save.frame.as "Frame archivieren als">
+<!ENTITY sb.save.target "Link archivieren">
+<!ENTITY sb.save.target.as "Link archivieren als">
+<!ENTITY sb.save.alltabs "Alle Tabs archivieren">
+<!ENTITY sb.save.bookmark "Als Lesezeichen archivieren">
 <!ENTITY sb.sidebar "ScrapBook-Sidebar öffnen">
 <!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Vor dem Archivieren bearbeiten">
@@ -272,7 +274,7 @@
 <!ENTITY sb.prefs.edit.wrapperFormat "HTML formatting template">
 <!ENTITY sb.prefs.data.tips "ScrapBook-Ordner auswählen, in dem die gesammelten Daten gespeichert werden sollen.">
 <!ENTITY sb.prefs.confirmDelete "Vor dem Löschen von Listeneinträgen bestätigen">
-<!ENTITY sb.prefs.captureDefault "Default capture settings">
+<!ENTITY sb.prefs.saveDefault "Default save settings">
 <!ENTITY sb.prefs.tree.autoCollapse "Beim Ausklappen eines Listenordners alle anderen Ordner einklappen">
 <!ENTITY sb.prefs.tree.unshift "Einen Eintrag am">
 <!ENTITY sb.prefs.tree.unshift.top "Anfang eines Ordners erstellen">
@@ -280,7 +282,7 @@
 <!ENTITY sb.prefs.asciiFilename "Save files with ASCII filename">
 <!ENTITY sb.prefs.showDetailOnDrop "Dialog &quot;Archivierungsdetails&quot; anzeigen, wenn eine Archivierung durch Ziehen mit der Maus in die Sidebar erfolgt">
 <!ENTITY sb.prefs.notifyOnComplete "Meldung nach Abschluss der Archivierung anzeigen">
-<!ENTITY sb.prefs.notifyPageCaptured "Show notification on browsing a page having been captured">
+<!ENTITY sb.prefs.notifyPageSaved "Show notification on browsing a page having been saved">
 <!ENTITY sb.prefs.autoOutput "Automatically output tree as HTML when data is changed">
 <!ENTITY sb.prefs.io "Preferences">
 <!ENTITY sb.prefs.io.export "Export Preferences">
@@ -404,7 +406,6 @@
 <!ENTITY sb.search.cs "Groß-/Kleinschreibung beachten">
 <!ENTITY sb.search.cache "Cache für Volltextsuche aktualisieren">
 <!ENTITY sb.search.clear "Suchchronik löschen">
-<!ENTITY sb.search.days "Nach Datum filtern">
 <!ENTITY mb.manage "Verwalten">
 <!ENTITY mb.profileFolder "Profilordner">
 

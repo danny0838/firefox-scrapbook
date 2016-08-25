@@ -1,0 +1,19 @@
+Scrapbook X 1.13.0rc5
+=====================
+
+Compatibility notes
+-------------------
+
+* User preferences for page saving were renamed from "capture.*"
+  to "save.*".  Previous preferences will no longer work.
+
+
+Changes since v1.13.0rc4
+------------------------
+
+Core changes:
+
+ * Merged localization from legacy ScrapBook by Gomita, especially
+   the change that replaced "capture" with "save".
+
+Also includes some localization updates and added a little tooltips.
