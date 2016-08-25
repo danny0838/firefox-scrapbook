@@ -36,10 +36,6 @@
 <!ENTITY sb.combine.newTitle "nový názov">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.linked.timeout "Časový limit (v sekundách)">
-<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
-<!ENTITY sb.detail.linked.charset "Sada znakov">
-<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail.title "Detail zachytenia">
 <!ENTITY sb.detail.new.folder "Nový priečinok">
 <!ENTITY sb.detail.select.folder "Vybrať priečinok">
@@ -64,6 +60,10 @@
 <!ENTITY sb.detail.option.saveDataUri.help "The saved file will be named as its SHA1 checksum.">
 <!ENTITY sb.detail.option.fileAsHtml "Save non-HTML file as HTML">
 <!ENTITY sb.detail.option.fileAsHtml.help "When a non-HTML file is viewed by the browser, save its rendering HTML content. (Including XHTML files.)">
+<!ENTITY sb.detail.linked.timeout "Časový limit (v sekundách)">
+<!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
+<!ENTITY sb.detail.linked.charset "Sada znakov">
+<!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
 <!ENTITY sb.detail.linked.file "Stiahnuť previazané súbory">
 <!ENTITY sb.detail.linked.file.method0 "Disable download linked files">
 <!ENTITY sb.detail.linked.file.method1 "Match URL file extension">

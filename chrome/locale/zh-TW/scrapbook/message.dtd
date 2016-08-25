@@ -36,10 +36,6 @@
 <!ENTITY sb.combine.newTitle "新標題">
 
 <!-- detail.dtd -->
-<!ENTITY sb.detail.linked.timeout "等候（秒）">
-<!ENTITY sb.detail.linked.timeout.help "擷取下一個 URL 之前的等候時間。">
-<!ENTITY sb.detail.linked.charset "文字編碼">
-<!ENTITY sb.detail.linked.charset.help "強制使用指定的文字編碼載入頁面。留空則自動偵測。">
 <!ENTITY sb.detail.title "擷取細節">
 <!ENTITY sb.detail.new.folder "開新資料夾">
 <!ENTITY sb.detail.select.folder "選取資料夾">
@@ -64,6 +60,10 @@
 <!ENTITY sb.detail.option.saveDataUri.help "檔案將命名為其內容之 SHA1 校驗和。">
 <!ENTITY sb.detail.option.fileAsHtml "非 HTML 檔案儲存為 HTML">
 <!ENTITY sb.detail.option.fileAsHtml.help "以瀏覽器檢視非 HTML 檔案時，儲存呈現的 HTML 內容。（包括 XHTML 檔案）">
+<!ENTITY sb.detail.linked.timeout "等候（秒）">
+<!ENTITY sb.detail.linked.timeout.help "擷取下一個 URL 之前的等候時間。">
+<!ENTITY sb.detail.linked.charset "文字編碼">
+<!ENTITY sb.detail.linked.charset.help "強制使用指定的文字編碼載入頁面。留空則自動偵測。">
 <!ENTITY sb.detail.linked.file "下載連結檔案">
 <!ENTITY sb.detail.linked.file.method0 "停用下載連結檔案">
 <!ENTITY sb.detail.linked.file.method1 "比對網址副檔名">
