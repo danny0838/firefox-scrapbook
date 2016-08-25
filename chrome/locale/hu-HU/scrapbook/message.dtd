@@ -3,27 +3,27 @@
 <!ENTITY sb.calc.diagnosis "Diagnózis">
 
 <!-- capture.dtd -->
-<!ENTITY sb.capture "Rögzítés">
-<!ENTITY sb.capture.abort "Mégse">
-<!ENTITY sb.capture.start "Indítás">
-<!ENTITY sb.capture.retry "Ismét">
-<!ENTITY sb.capture.skip "Kihagyás">
-<!ENTITY sb.capture.pause "Szünet">
-<!ENTITY sb.capture.finish "Mégse">
-<!ENTITY sb.capture.column.address "URL">
-<!ENTITY sb.capture.column.title "Cím">
-<!ENTITY sb.capture.column.status "Állapot">
-<!ENTITY sb.capture.checkSelection "Check selected items">
-<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
-<!ENTITY sb.capture.filter "Szűrés">
-<!ENTITY sb.capture.filter.column.rule "Megjelenítés/elrejtés">
-<!ENTITY sb.capture.filter.column.content "Szűrő (reguláris kifejezés)">
-<!ENTITY sb.capture.filter.accept "Elfogadás">
-<!ENTITY sb.capture.filter.accept.help "változtassa meg vagy adjon új értéket">
-<!ENTITY sb.capture.filter.cancel "Mégse">
-<!ENTITY sb.capture.filter.cancel.help "szerkesztés megszakítása">
-<!ENTITY sb.capture.filter.delete "Törlés">
-<!ENTITY sb.capture.filter.delete.help "szűrő eltávolítása a listáról">
+<!ENTITY sb.save "Rögzítés">
+<!ENTITY sb.save.abort "Mégse">
+<!ENTITY sb.save.start "Indítás">
+<!ENTITY sb.save.retry "Ismét">
+<!ENTITY sb.save.skip "Kihagyás">
+<!ENTITY sb.save.pause "Szünet">
+<!ENTITY sb.save.finish "Mégse">
+<!ENTITY sb.save.column.address "URL">
+<!ENTITY sb.save.column.title "Cím">
+<!ENTITY sb.save.column.status "Állapot">
+<!ENTITY sb.save.checkSelection "Check selected items">
+<!ENTITY sb.save.uncheckSelection "Uncheck selected items">
+<!ENTITY sb.save.filter "Szűrés">
+<!ENTITY sb.save.filter.column.rule "Megjelenítés/elrejtés">
+<!ENTITY sb.save.filter.column.content "Szűrő (reguláris kifejezés)">
+<!ENTITY sb.save.filter.accept "Elfogadás">
+<!ENTITY sb.save.filter.accept.help "változtassa meg vagy adjon új értéket">
+<!ENTITY sb.save.filter.cancel "Mégse">
+<!ENTITY sb.save.filter.cancel.help "szerkesztés megszakítása">
+<!ENTITY sb.save.filter.delete "Törlés">
+<!ENTITY sb.save.filter.delete.help "szűrő eltávolítása a listáról">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Elemek hozzáadása húzd és ejtsd módszerrel a struktúrából, az összefűzés sorrendjének megfelelően. Egyszerre több elem is áthúzható a húzd és ejtsd módszerrel.">
@@ -44,7 +44,7 @@
 <!ENTITY sb.detail.new.folder "Új mappa">
 <!ENTITY sb.detail.select.folder "Mappa kiválasztása">
 <!ENTITY sb.detail.option "Beállítások">
-<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.save "Capture">
 <!ENTITY sb.detail.option.images "Képek">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -232,16 +232,16 @@
 <!ENTITY sb.output.option.open "Leképzés után megnyitás a böngészőben">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.capture.partial "Kijelölés rögzítése">
-<!ENTITY sb.capture.partial.as "Kijelölés rögzítése másként">
-<!ENTITY sb.capture.entire "Oldal rögzítése">
-<!ENTITY sb.capture.entire.as "Oldal rögzítése másként">
-<!ENTITY sb.capture.frame "Keret rögzítése">
-<!ENTITY sb.capture.frame.as "Keret rögzítése másként">
-<!ENTITY sb.capture.target "Hivatkozás rögzítése">
-<!ENTITY sb.capture.target.as "Hivatkozás rögzítése másként">
-<!ENTITY sb.capture.alltabs "Összes lap rögzítése">
-<!ENTITY sb.capture.bookmark "Könyvjelző a Dossziéba">
+<!ENTITY sb.save.partial "Kijelölés rögzítése">
+<!ENTITY sb.save.partial.as "Kijelölés rögzítése másként">
+<!ENTITY sb.save.entire "Oldal rögzítése">
+<!ENTITY sb.save.entire.as "Oldal rögzítése másként">
+<!ENTITY sb.save.frame "Keret rögzítése">
+<!ENTITY sb.save.frame.as "Keret rögzítése másként">
+<!ENTITY sb.save.target "Hivatkozás rögzítése">
+<!ENTITY sb.save.target.as "Hivatkozás rögzítése másként">
+<!ENTITY sb.save.alltabs "Összes lap rögzítése">
+<!ENTITY sb.save.bookmark "Könyvjelző a Dossziéba">
 <!ENTITY sb.sidebar "Megjelenítés az Oldalsávon">
 <!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Szerkesztés rögzítés előtt">

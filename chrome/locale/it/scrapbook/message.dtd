@@ -3,27 +3,27 @@
 <!ENTITY sb.calc.diagnosis "Risultato">
 
 <!-- capture.dtd -->
-<!ENTITY sb.capture "Cattura">
-<!ENTITY sb.capture.abort "Interrompi">
-<!ENTITY sb.capture.start "Avvia">
-<!ENTITY sb.capture.retry "Ritenta">
-<!ENTITY sb.capture.skip "Salta">
-<!ENTITY sb.capture.pause "Pausa">
-<!ENTITY sb.capture.finish "Annulla">
-<!ENTITY sb.capture.column.address "URL">
-<!ENTITY sb.capture.column.title "Titolo">
-<!ENTITY sb.capture.column.status "Stato">
-<!ENTITY sb.capture.checkSelection "Check selected items">
-<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
-<!ENTITY sb.capture.filter "Filtra">
-<!ENTITY sb.capture.filter.column.rule "Mostra/nascondi">
-<!ENTITY sb.capture.filter.column.content "Filtra (espressione regolare)">
-<!ENTITY sb.capture.filter.accept "Accetta">
-<!ENTITY sb.capture.filter.accept.help "Sostituisci oppure modifica il valore">
-<!ENTITY sb.capture.filter.cancel "Annulla">
-<!ENTITY sb.capture.filter.cancel.help "Annulla la modifica">
-<!ENTITY sb.capture.filter.delete "Elimina">
-<!ENTITY sb.capture.filter.delete.help "Elimina il filtro dalla lista">
+<!ENTITY sb.save "Cattura">
+<!ENTITY sb.save.abort "Interrompi">
+<!ENTITY sb.save.start "Avvia">
+<!ENTITY sb.save.retry "Ritenta">
+<!ENTITY sb.save.skip "Salta">
+<!ENTITY sb.save.pause "Pausa">
+<!ENTITY sb.save.finish "Annulla">
+<!ENTITY sb.save.column.address "URL">
+<!ENTITY sb.save.column.title "Titolo">
+<!ENTITY sb.save.column.status "Stato">
+<!ENTITY sb.save.checkSelection "Check selected items">
+<!ENTITY sb.save.uncheckSelection "Uncheck selected items">
+<!ENTITY sb.save.filter "Filtra">
+<!ENTITY sb.save.filter.column.rule "Mostra/nascondi">
+<!ENTITY sb.save.filter.column.content "Filtra (espressione regolare)">
+<!ENTITY sb.save.filter.accept "Accetta">
+<!ENTITY sb.save.filter.accept.help "Sostituisci oppure modifica il valore">
+<!ENTITY sb.save.filter.cancel "Annulla">
+<!ENTITY sb.save.filter.cancel.help "Annulla la modifica">
+<!ENTITY sb.save.filter.delete "Elimina">
+<!ENTITY sb.save.filter.delete.help "Elimina il filtro dalla lista">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Aggiungere elementi da unire tramite trascinamento e rilascio dal diagramma delle cartelle. È possibile trascinare e rilasciare molteplici elementi contemporaneamente">
@@ -44,7 +44,7 @@
 <!ENTITY sb.detail.new.folder "Nuova cartella">
 <!ENTITY sb.detail.select.folder "Seleziona cartella">
 <!ENTITY sb.detail.option "Opzioni">
-<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.save "Capture">
 <!ENTITY sb.detail.option.images "Immagini">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -232,16 +232,16 @@
 <!ENTITY sb.output.option.open "Dopo l'esportazione degli elementi, aprili nel browser">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.capture.partial "Cattura selezione">
-<!ENTITY sb.capture.partial.as "Cattura selezione con nome">
-<!ENTITY sb.capture.entire "Cattura pagina">
-<!ENTITY sb.capture.entire.as "Cattura pagina con nome">
-<!ENTITY sb.capture.frame "Cattura riquadro">
-<!ENTITY sb.capture.frame.as "Cattura riquadro con nome">
-<!ENTITY sb.capture.target "Cattura link">
-<!ENTITY sb.capture.target.as "Cattura link con nome">
-<!ENTITY sb.capture.alltabs "Cattura tutte le schede">
-<!ENTITY sb.capture.bookmark "Nei segnalibri con ScrapBook">
+<!ENTITY sb.save.partial "Cattura selezione">
+<!ENTITY sb.save.partial.as "Cattura selezione con nome">
+<!ENTITY sb.save.entire "Cattura pagina">
+<!ENTITY sb.save.entire.as "Cattura pagina con nome">
+<!ENTITY sb.save.frame "Cattura riquadro">
+<!ENTITY sb.save.frame.as "Cattura riquadro con nome">
+<!ENTITY sb.save.target "Cattura link">
+<!ENTITY sb.save.target.as "Cattura link con nome">
+<!ENTITY sb.save.alltabs "Cattura tutte le schede">
+<!ENTITY sb.save.bookmark "Nei segnalibri con ScrapBook">
 <!ENTITY sb.sidebar "Mostra nella barra laterale">
 <!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Modifica prima di catturare">

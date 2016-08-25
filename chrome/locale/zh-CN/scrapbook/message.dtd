@@ -3,27 +3,27 @@
 <!ENTITY sb.calc.diagnosis "检查结果">
 
 <!-- capture.dtd -->
-<!ENTITY sb.capture "获取">
-<!ENTITY sb.capture.abort "中止">
-<!ENTITY sb.capture.start "开始">
-<!ENTITY sb.capture.retry "重试">
-<!ENTITY sb.capture.skip "忽略">
-<!ENTITY sb.capture.pause "暂停">
-<!ENTITY sb.capture.finish "取消">
-<!ENTITY sb.capture.column.address "URL">
-<!ENTITY sb.capture.column.title "标题">
-<!ENTITY sb.capture.column.status "状态">
-<!ENTITY sb.capture.checkSelection "打勾选中项目">
-<!ENTITY sb.capture.uncheckSelection "取消打勾选中项目">
-<!ENTITY sb.capture.filter "过滤器">
-<!ENTITY sb.capture.filter.column.rule "显示/隐藏">
-<!ENTITY sb.capture.filter.column.content "过滤规则（正则表达式）">
-<!ENTITY sb.capture.filter.accept "接受">
-<!ENTITY sb.capture.filter.accept.help "修改或编辑值">
-<!ENTITY sb.capture.filter.cancel "取消">
-<!ENTITY sb.capture.filter.cancel.help "中止编辑">
-<!ENTITY sb.capture.filter.delete "删除">
-<!ENTITY sb.capture.filter.delete.help "从列表中移除过滤规则">
+<!ENTITY sb.save "获取">
+<!ENTITY sb.save.abort "中止">
+<!ENTITY sb.save.start "开始">
+<!ENTITY sb.save.retry "重试">
+<!ENTITY sb.save.skip "忽略">
+<!ENTITY sb.save.pause "暂停">
+<!ENTITY sb.save.finish "取消">
+<!ENTITY sb.save.column.address "URL">
+<!ENTITY sb.save.column.title "标题">
+<!ENTITY sb.save.column.status "状态">
+<!ENTITY sb.save.checkSelection "打勾选中项目">
+<!ENTITY sb.save.uncheckSelection "取消打勾选中项目">
+<!ENTITY sb.save.filter "过滤器">
+<!ENTITY sb.save.filter.column.rule "显示/隐藏">
+<!ENTITY sb.save.filter.column.content "过滤规则（正则表达式）">
+<!ENTITY sb.save.filter.accept "接受">
+<!ENTITY sb.save.filter.accept.help "修改或编辑值">
+<!ENTITY sb.save.filter.cancel "取消">
+<!ENTITY sb.save.filter.cancel.help "中止编辑">
+<!ENTITY sb.save.filter.delete "删除">
+<!ENTITY sb.save.filter.delete.help "从列表中移除过滤规则">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "从树中拖拽您希望合并的条目到表中。您可以一次拖拽多个条目。">
@@ -44,7 +44,7 @@
 <!ENTITY sb.detail.new.folder "新建文件夹">
 <!ENTITY sb.detail.select.folder "选择文件夹">
 <!ENTITY sb.detail.option "选项">
-<!ENTITY sb.detail.option.capture "获取">
+<!ENTITY sb.detail.option.save "获取">
 <!ENTITY sb.detail.option.images "图片">
 <!ENTITY sb.detail.option.media "多媒体">
 <!ENTITY sb.detail.option.fonts "字体">
@@ -232,16 +232,16 @@
 <!ENTITY sb.output.option.open "输出完成后，用浏览器打开">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.capture.partial "获取所选内容">
-<!ENTITY sb.capture.partial.as "获取所选内容为">
-<!ENTITY sb.capture.entire "获取页面">
-<!ENTITY sb.capture.entire.as "获取页面为">
-<!ENTITY sb.capture.frame "获取框架">
-<!ENTITY sb.capture.frame.as "获取页框为">
-<!ENTITY sb.capture.target "获取链接">
-<!ENTITY sb.capture.target.as "获取链接为">
-<!ENTITY sb.capture.alltabs "获取所有标签页">
-<!ENTITY sb.capture.bookmark "加入 ScrapBook 书签">
+<!ENTITY sb.save.partial "获取所选内容">
+<!ENTITY sb.save.partial.as "获取所选内容为">
+<!ENTITY sb.save.entire "获取页面">
+<!ENTITY sb.save.entire.as "获取页面为">
+<!ENTITY sb.save.frame "获取框架">
+<!ENTITY sb.save.frame.as "获取页框为">
+<!ENTITY sb.save.target "获取链接">
+<!ENTITY sb.save.target.as "获取链接为">
+<!ENTITY sb.save.alltabs "获取所有标签页">
+<!ENTITY sb.save.bookmark "加入 ScrapBook 书签">
 <!ENTITY sb.sidebar "在侧栏显示">
 <!ENTITY sb.menubar "菜单栏存取键">
 <!ENTITY sb.editbefore "获取前进行编辑">

@@ -3,27 +3,27 @@
 <!ENTITY sb.calc.diagnosis "Diagnose">
 
 <!-- capture.dtd -->
-<!ENTITY sb.capture "Archivierung">
-<!ENTITY sb.capture.abort "Abbrechen">
-<!ENTITY sb.capture.start "Starten">
-<!ENTITY sb.capture.retry "Wiederholen">
-<!ENTITY sb.capture.skip "Überspringen">
-<!ENTITY sb.capture.pause "Anhalten">
-<!ENTITY sb.capture.finish "Beenden">
-<!ENTITY sb.capture.column.address "URL">
-<!ENTITY sb.capture.column.title "Titel">
-<!ENTITY sb.capture.column.status "Status">
-<!ENTITY sb.capture.checkSelection "Check selected items">
-<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
-<!ENTITY sb.capture.filter "Filter">
-<!ENTITY sb.capture.filter.column.rule "Ein-/Ausblenden">
-<!ENTITY sb.capture.filter.column.content "Filter (regulärer Ausdruck)">
-<!ENTITY sb.capture.filter.accept "OK">
-<!ENTITY sb.capture.filter.accept.help "Wert übernehmen/Wert ändern">
-<!ENTITY sb.capture.filter.cancel "Abbrechen">
-<!ENTITY sb.capture.filter.cancel.help "Editieren abbreche">
-<!ENTITY sb.capture.filter.delete "Entfernen">
-<!ENTITY sb.capture.filter.delete.help "Filter aus der Liste entfernen">
+<!ENTITY sb.save "Archivierung">
+<!ENTITY sb.save.abort "Abbrechen">
+<!ENTITY sb.save.start "Starten">
+<!ENTITY sb.save.retry "Wiederholen">
+<!ENTITY sb.save.skip "Überspringen">
+<!ENTITY sb.save.pause "Anhalten">
+<!ENTITY sb.save.finish "Beenden">
+<!ENTITY sb.save.column.address "URL">
+<!ENTITY sb.save.column.title "Titel">
+<!ENTITY sb.save.column.status "Status">
+<!ENTITY sb.save.checkSelection "Check selected items">
+<!ENTITY sb.save.uncheckSelection "Uncheck selected items">
+<!ENTITY sb.save.filter "Filter">
+<!ENTITY sb.save.filter.column.rule "Ein-/Ausblenden">
+<!ENTITY sb.save.filter.column.content "Filter (regulärer Ausdruck)">
+<!ENTITY sb.save.filter.accept "OK">
+<!ENTITY sb.save.filter.accept.help "Wert übernehmen/Wert ändern">
+<!ENTITY sb.save.filter.cancel "Abbrechen">
+<!ENTITY sb.save.filter.cancel.help "Editieren abbreche">
+<!ENTITY sb.save.filter.delete "Entfernen">
+<!ENTITY sb.save.filter.delete.help "Filter aus der Liste entfernen">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Fügen Sie Einträge, die Sie zusammenfassen wollen, durch &quot;Ziehen und Ablegen&quot; aus dem Baum hinzu. Sie können auch mehrere Einträge auf einmal auswählen.">
@@ -44,7 +44,7 @@
 <!ENTITY sb.detail.new.folder "Neuer Ordner">
 <!ENTITY sb.detail.select.folder "Ordner auswählen">
 <!ENTITY sb.detail.option "Einschließen">
-<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.save "Capture">
 <!ENTITY sb.detail.option.images "Grafiken">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -232,16 +232,16 @@
 <!ENTITY sb.output.option.open "HTML-Ausgabe im Browser öffnen">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.capture.partial "Auswahl archivieren">
-<!ENTITY sb.capture.partial.as "Auswahl archivieren als">
-<!ENTITY sb.capture.entire "Seite archivieren">
-<!ENTITY sb.capture.entire.as "Seite archivieren als">
-<!ENTITY sb.capture.frame "Frame archivieren">
-<!ENTITY sb.capture.frame.as "Frame archivieren als">
-<!ENTITY sb.capture.target "Link archivieren">
-<!ENTITY sb.capture.target.as "Link archivieren als">
-<!ENTITY sb.capture.alltabs "Alle Tabs archivieren">
-<!ENTITY sb.capture.bookmark "Lesezeichen mit ScrapBook erstellen">
+<!ENTITY sb.save.partial "Auswahl archivieren">
+<!ENTITY sb.save.partial.as "Auswahl archivieren als">
+<!ENTITY sb.save.entire "Seite archivieren">
+<!ENTITY sb.save.entire.as "Seite archivieren als">
+<!ENTITY sb.save.frame "Frame archivieren">
+<!ENTITY sb.save.frame.as "Frame archivieren als">
+<!ENTITY sb.save.target "Link archivieren">
+<!ENTITY sb.save.target.as "Link archivieren als">
+<!ENTITY sb.save.alltabs "Alle Tabs archivieren">
+<!ENTITY sb.save.bookmark "Lesezeichen mit ScrapBook erstellen">
 <!ENTITY sb.sidebar "ScrapBook-Sidebar öffnen">
 <!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Vor dem Archivieren bearbeiten">

@@ -3,27 +3,27 @@
 <!ENTITY sb.calc.diagnosis "Diagnos">
 
 <!-- capture.dtd -->
-<!ENTITY sb.capture "Fånga in">
-<!ENTITY sb.capture.abort "Avbryt">
-<!ENTITY sb.capture.start "Starta">
-<!ENTITY sb.capture.retry "Försök igen">
-<!ENTITY sb.capture.skip "Hoppa över">
-<!ENTITY sb.capture.pause "Pausa">
-<!ENTITY sb.capture.finish "Avbryt">
-<!ENTITY sb.capture.column.address "URL">
-<!ENTITY sb.capture.column.title "Rubrik">
-<!ENTITY sb.capture.column.status "Status">
-<!ENTITY sb.capture.checkSelection "Check selected items">
-<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
-<!ENTITY sb.capture.filter "Filtrera">
-<!ENTITY sb.capture.filter.column.rule "Visa/Dölj">
-<!ENTITY sb.capture.filter.column.content "Filter (reguljärt uttryck)">
-<!ENTITY sb.capture.filter.accept "Acceptera">
-<!ENTITY sb.capture.filter.accept.help "Ändra eller redigera värde">
-<!ENTITY sb.capture.filter.cancel "Avbryt">
-<!ENTITY sb.capture.filter.cancel.help "Avbryt redigering">
-<!ENTITY sb.capture.filter.delete "Ta bort">
-<!ENTITY sb.capture.filter.delete.help "Ta bort filter från listan">
+<!ENTITY sb.save "Fånga in">
+<!ENTITY sb.save.abort "Avbryt">
+<!ENTITY sb.save.start "Starta">
+<!ENTITY sb.save.retry "Försök igen">
+<!ENTITY sb.save.skip "Hoppa över">
+<!ENTITY sb.save.pause "Pausa">
+<!ENTITY sb.save.finish "Avbryt">
+<!ENTITY sb.save.column.address "URL">
+<!ENTITY sb.save.column.title "Rubrik">
+<!ENTITY sb.save.column.status "Status">
+<!ENTITY sb.save.checkSelection "Check selected items">
+<!ENTITY sb.save.uncheckSelection "Uncheck selected items">
+<!ENTITY sb.save.filter "Filtrera">
+<!ENTITY sb.save.filter.column.rule "Visa/Dölj">
+<!ENTITY sb.save.filter.column.content "Filter (reguljärt uttryck)">
+<!ENTITY sb.save.filter.accept "Acceptera">
+<!ENTITY sb.save.filter.accept.help "Ändra eller redigera värde">
+<!ENTITY sb.save.filter.cancel "Avbryt">
+<!ENTITY sb.save.filter.cancel.help "Avbryt redigering">
+<!ENTITY sb.save.filter.delete "Ta bort">
+<!ENTITY sb.save.filter.delete.help "Ta bort filter från listan">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Lägg till objekt genom att dra och släppa från trädet i den ordning du vill kombinera dem. Du kan dra och släppa flera objekt samtidigt.">
@@ -44,7 +44,7 @@
 <!ENTITY sb.detail.new.folder "Ny mapp">
 <!ENTITY sb.detail.select.folder "Välj mapp">
 <!ENTITY sb.detail.option "Inställningar">
-<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.save "Capture">
 <!ENTITY sb.detail.option.images "Bilder">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -232,16 +232,16 @@
 <!ENTITY sb.output.option.open "Öppna utdataresultatet i webbläsaren">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.capture.partial "Fånga in markering">
-<!ENTITY sb.capture.partial.as "Fånga in markering som">
-<!ENTITY sb.capture.entire "Fånga in sida">
-<!ENTITY sb.capture.entire.as "Fånga in sida som">
-<!ENTITY sb.capture.frame "Fånga in ram">
-<!ENTITY sb.capture.frame.as "Fånga in ram som">
-<!ENTITY sb.capture.target "Fånga in länk">
-<!ENTITY sb.capture.target.as "Fånga in länk som">
-<!ENTITY sb.capture.alltabs "Fånga in alla flikar">
-<!ENTITY sb.capture.bookmark "Bokmärk med ScrapBook">
+<!ENTITY sb.save.partial "Fånga in markering">
+<!ENTITY sb.save.partial.as "Fånga in markering som">
+<!ENTITY sb.save.entire "Fånga in sida">
+<!ENTITY sb.save.entire.as "Fånga in sida som">
+<!ENTITY sb.save.frame "Fånga in ram">
+<!ENTITY sb.save.frame.as "Fånga in ram som">
+<!ENTITY sb.save.target "Fånga in länk">
+<!ENTITY sb.save.target.as "Fånga in länk som">
+<!ENTITY sb.save.alltabs "Fånga in alla flikar">
+<!ENTITY sb.save.bookmark "Bokmärk med ScrapBook">
 <!ENTITY sb.sidebar "Visa i sidopanelen">
 <!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Redigera innan infångst">

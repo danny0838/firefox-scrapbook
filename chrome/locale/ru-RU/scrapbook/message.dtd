@@ -3,27 +3,27 @@
 <!ENTITY sb.calc.diagnosis "Состояние">
 
 <!-- capture.dtd -->
-<!ENTITY sb.capture "Сохранение">
-<!ENTITY sb.capture.abort "Прервать">
-<!ENTITY sb.capture.start "Старт">
-<!ENTITY sb.capture.retry "Повтор">
-<!ENTITY sb.capture.skip "Пропустить">
-<!ENTITY sb.capture.pause "Пауза">
-<!ENTITY sb.capture.finish "Отменить">
-<!ENTITY sb.capture.column.address "Адрес">
-<!ENTITY sb.capture.column.title "Заголовок">
-<!ENTITY sb.capture.column.status "Статус">
-<!ENTITY sb.capture.checkSelection "Check selected items">
-<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
-<!ENTITY sb.capture.filter "Фильтр">
-<!ENTITY sb.capture.filter.column.rule "Показать/Скрыть">
-<!ENTITY sb.capture.filter.column.content "Фильтр (регулярные выражения)">
-<!ENTITY sb.capture.filter.accept "Применить">
-<!ENTITY sb.capture.filter.accept.help "изменить значение">
-<!ENTITY sb.capture.filter.cancel "Отмена">
-<!ENTITY sb.capture.filter.cancel.help "отменить редактирование">
-<!ENTITY sb.capture.filter.delete "Удалить">
-<!ENTITY sb.capture.filter.delete.help "удалить фильтр из списка">
+<!ENTITY sb.save "Сохранение">
+<!ENTITY sb.save.abort "Прервать">
+<!ENTITY sb.save.start "Старт">
+<!ENTITY sb.save.retry "Повтор">
+<!ENTITY sb.save.skip "Пропустить">
+<!ENTITY sb.save.pause "Пауза">
+<!ENTITY sb.save.finish "Отменить">
+<!ENTITY sb.save.column.address "Адрес">
+<!ENTITY sb.save.column.title "Заголовок">
+<!ENTITY sb.save.column.status "Статус">
+<!ENTITY sb.save.checkSelection "Check selected items">
+<!ENTITY sb.save.uncheckSelection "Uncheck selected items">
+<!ENTITY sb.save.filter "Фильтр">
+<!ENTITY sb.save.filter.column.rule "Показать/Скрыть">
+<!ENTITY sb.save.filter.column.content "Фильтр (регулярные выражения)">
+<!ENTITY sb.save.filter.accept "Применить">
+<!ENTITY sb.save.filter.accept.help "изменить значение">
+<!ENTITY sb.save.filter.cancel "Отмена">
+<!ENTITY sb.save.filter.cancel.help "отменить редактирование">
+<!ENTITY sb.save.filter.delete "Удалить">
+<!ENTITY sb.save.filter.delete.help "удалить фильтр из списка">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Добавляйте требуемые для объединения страницы обычным перетаскиванием их из дерева страниц. Также имеется возможность перетаскивать по несколько страниц сразу.">
@@ -44,7 +44,7 @@
 <!ENTITY sb.detail.new.folder "Новый каталог">
 <!ENTITY sb.detail.select.folder "Выбрать каталог">
 <!ENTITY sb.detail.option "Составные части страницы">
-<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.save "Capture">
 <!ENTITY sb.detail.option.images "Изображения">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -232,16 +232,16 @@
 <!ENTITY sb.output.option.open "После вывода открыть в браузере">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.capture.partial "Захватить выделенное">
-<!ENTITY sb.capture.partial.as "Захватить выделенное как">
-<!ENTITY sb.capture.entire "Захватить веб-страницу">
-<!ENTITY sb.capture.entire.as "Захватить веб-страницу как">
-<!ENTITY sb.capture.frame "Захватить фрейм">
-<!ENTITY sb.capture.frame.as "Захватить фрейм как">
-<!ENTITY sb.capture.target "Захватить ссылку">
-<!ENTITY sb.capture.target.as "Захватить ссылку как">
-<!ENTITY sb.capture.alltabs "Захватить все вкладки">
-<!ENTITY sb.capture.bookmark "Добавить в закладки ScrapBook">
+<!ENTITY sb.save.partial "Захватить выделенное">
+<!ENTITY sb.save.partial.as "Захватить выделенное как">
+<!ENTITY sb.save.entire "Захватить веб-страницу">
+<!ENTITY sb.save.entire.as "Захватить веб-страницу как">
+<!ENTITY sb.save.frame "Захватить фрейм">
+<!ENTITY sb.save.frame.as "Захватить фрейм как">
+<!ENTITY sb.save.target "Захватить ссылку">
+<!ENTITY sb.save.target.as "Захватить ссылку как">
+<!ENTITY sb.save.alltabs "Захватить все вкладки">
+<!ENTITY sb.save.bookmark "Добавить в закладки ScrapBook">
 <!ENTITY sb.sidebar "Показать в боковой панели">
 <!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Редактирование перед сохранением">

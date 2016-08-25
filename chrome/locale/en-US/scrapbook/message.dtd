@@ -3,27 +3,27 @@
 <!ENTITY sb.calc.diagnosis "Diagnosis">
 
 <!-- capture.dtd -->
-<!ENTITY sb.capture "Capture">
-<!ENTITY sb.capture.abort "Abort">
-<!ENTITY sb.capture.start "Start">
-<!ENTITY sb.capture.retry "Retry">
-<!ENTITY sb.capture.skip "Skip">
-<!ENTITY sb.capture.pause "Pause">
-<!ENTITY sb.capture.finish "Cancel">
-<!ENTITY sb.capture.column.address "URL">
-<!ENTITY sb.capture.column.title "Title">
-<!ENTITY sb.capture.column.status "Status">
-<!ENTITY sb.capture.checkSelection "Check selected items">
-<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
-<!ENTITY sb.capture.filter "Filter">
-<!ENTITY sb.capture.filter.column.rule "Show/Hide">
-<!ENTITY sb.capture.filter.column.content "Filter (regular expression)">
-<!ENTITY sb.capture.filter.accept "Accept">
-<!ENTITY sb.capture.filter.accept.help "change or edit value">
-<!ENTITY sb.capture.filter.cancel "Cancel">
-<!ENTITY sb.capture.filter.cancel.help "abort editing">
-<!ENTITY sb.capture.filter.delete "Delete">
-<!ENTITY sb.capture.filter.delete.help "remove filter from the list">
+<!ENTITY sb.save "Capture">
+<!ENTITY sb.save.abort "Abort">
+<!ENTITY sb.save.start "Start">
+<!ENTITY sb.save.retry "Retry">
+<!ENTITY sb.save.skip "Skip">
+<!ENTITY sb.save.pause "Pause">
+<!ENTITY sb.save.finish "Cancel">
+<!ENTITY sb.save.column.address "URL">
+<!ENTITY sb.save.column.title "Title">
+<!ENTITY sb.save.column.status "Status">
+<!ENTITY sb.save.checkSelection "Check selected items">
+<!ENTITY sb.save.uncheckSelection "Uncheck selected items">
+<!ENTITY sb.save.filter "Filter">
+<!ENTITY sb.save.filter.column.rule "Show/Hide">
+<!ENTITY sb.save.filter.column.content "Filter (regular expression)">
+<!ENTITY sb.save.filter.accept "Accept">
+<!ENTITY sb.save.filter.accept.help "change or edit value">
+<!ENTITY sb.save.filter.cancel "Cancel">
+<!ENTITY sb.save.filter.cancel.help "abort editing">
+<!ENTITY sb.save.filter.delete "Delete">
+<!ENTITY sb.save.filter.delete.help "remove filter from the list">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Add items by drag-and-drop from the tree in the order you want to combine. You can drag-and-drop multiple items at once.">
@@ -44,7 +44,7 @@
 <!ENTITY sb.detail.new.folder "New Folder">
 <!ENTITY sb.detail.select.folder "Select Folder">
 <!ENTITY sb.detail.option "Options">
-<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.save "Capture">
 <!ENTITY sb.detail.option.images "Images">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -232,16 +232,16 @@
 <!ENTITY sb.output.option.open "After outputting, open it in browser">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.capture.partial "Capture Selection">
-<!ENTITY sb.capture.partial.as "Capture Selection As">
-<!ENTITY sb.capture.entire "Capture Page">
-<!ENTITY sb.capture.entire.as "Capture Page As">
-<!ENTITY sb.capture.frame "Capture Frame">
-<!ENTITY sb.capture.frame.as "Capture Frame As">
-<!ENTITY sb.capture.target "Capture Link">
-<!ENTITY sb.capture.target.as "Capture Link As">
-<!ENTITY sb.capture.alltabs "Capture All Tabs">
-<!ENTITY sb.capture.bookmark "Bookmark with ScrapBook">
+<!ENTITY sb.save.partial "Capture Selection">
+<!ENTITY sb.save.partial.as "Capture Selection As">
+<!ENTITY sb.save.entire "Capture Page">
+<!ENTITY sb.save.entire.as "Capture Page As">
+<!ENTITY sb.save.frame "Capture Frame">
+<!ENTITY sb.save.frame.as "Capture Frame As">
+<!ENTITY sb.save.target "Capture Link">
+<!ENTITY sb.save.target.as "Capture Link As">
+<!ENTITY sb.save.alltabs "Capture All Tabs">
+<!ENTITY sb.save.bookmark "Bookmark with ScrapBook">
 <!ENTITY sb.sidebar "Show in Sidebar">
 <!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Edit Before Capture">

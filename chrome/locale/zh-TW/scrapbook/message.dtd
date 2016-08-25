@@ -3,27 +3,27 @@
 <!ENTITY sb.calc.diagnosis "資料診斷">
 
 <!-- capture.dtd -->
-<!ENTITY sb.capture "擷取">
-<!ENTITY sb.capture.abort "中止">
-<!ENTITY sb.capture.start "開始">
-<!ENTITY sb.capture.retry "重試">
-<!ENTITY sb.capture.skip "略過">
-<!ENTITY sb.capture.pause "暫停">
-<!ENTITY sb.capture.finish "取消">
-<!ENTITY sb.capture.column.address "位址">
-<!ENTITY sb.capture.column.title "標題">
-<!ENTITY sb.capture.column.status "狀態">
-<!ENTITY sb.capture.checkSelection "勾選選取項目">
-<!ENTITY sb.capture.uncheckSelection "取消勾選選取項目">
-<!ENTITY sb.capture.filter "過濾">
-<!ENTITY sb.capture.filter.column.rule "顯示/隱藏">
-<!ENTITY sb.capture.filter.column.content "篩選條件（使用規則運算式）">
-<!ENTITY sb.capture.filter.accept "確認">
-<!ENTITY sb.capture.filter.accept.help "變更或編輯數值">
-<!ENTITY sb.capture.filter.cancel "取消">
-<!ENTITY sb.capture.filter.cancel.help "中斷編輯">
-<!ENTITY sb.capture.filter.delete "刪除">
-<!ENTITY sb.capture.filter.delete.help "從清單移除過濾條件">
+<!ENTITY sb.save "擷取">
+<!ENTITY sb.save.abort "中止">
+<!ENTITY sb.save.start "開始">
+<!ENTITY sb.save.retry "重試">
+<!ENTITY sb.save.skip "略過">
+<!ENTITY sb.save.pause "暫停">
+<!ENTITY sb.save.finish "取消">
+<!ENTITY sb.save.column.address "位址">
+<!ENTITY sb.save.column.title "標題">
+<!ENTITY sb.save.column.status "狀態">
+<!ENTITY sb.save.checkSelection "勾選選取項目">
+<!ENTITY sb.save.uncheckSelection "取消勾選選取項目">
+<!ENTITY sb.save.filter "過濾">
+<!ENTITY sb.save.filter.column.rule "顯示/隱藏">
+<!ENTITY sb.save.filter.column.content "篩選條件（使用規則運算式）">
+<!ENTITY sb.save.filter.accept "確認">
+<!ENTITY sb.save.filter.accept.help "變更或編輯數值">
+<!ENTITY sb.save.filter.cancel "取消">
+<!ENTITY sb.save.filter.cancel.help "中斷編輯">
+<!ENTITY sb.save.filter.delete "刪除">
+<!ENTITY sb.save.filter.delete.help "從清單移除過濾條件">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "從樹狀列表將待合併項目中拖曳至此並依序排列。一次可拖曳多個項目。">
@@ -44,7 +44,7 @@
 <!ENTITY sb.detail.new.folder "開新資料夾">
 <!ENTITY sb.detail.select.folder "選取資料夾">
 <!ENTITY sb.detail.option "選項">
-<!ENTITY sb.detail.option.capture "擷取">
+<!ENTITY sb.detail.option.save "擷取">
 <!ENTITY sb.detail.option.images "圖片">
 <!ENTITY sb.detail.option.media "多媒體">
 <!ENTITY sb.detail.option.fonts "字體">
@@ -232,16 +232,16 @@
 <!ENTITY sb.output.option.open "輸出完成後，以瀏覽器開啟">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.capture.partial "擷取選擇區域">
-<!ENTITY sb.capture.partial.as "擷取選擇區域細節">
-<!ENTITY sb.capture.entire "擷取網頁">
-<!ENTITY sb.capture.entire.as "擷取網頁細節">
-<!ENTITY sb.capture.frame "擷取頁框">
-<!ENTITY sb.capture.frame.as "擷取頁框細節">
-<!ENTITY sb.capture.target "擷取連結">
-<!ENTITY sb.capture.target.as "擷取連結細節">
-<!ENTITY sb.capture.alltabs "擷取所有分頁">
-<!ENTITY sb.capture.bookmark "加入 ScrapBook 書籤">
+<!ENTITY sb.save.partial "擷取選擇區域">
+<!ENTITY sb.save.partial.as "擷取選擇區域細節">
+<!ENTITY sb.save.entire "擷取網頁">
+<!ENTITY sb.save.entire.as "擷取網頁細節">
+<!ENTITY sb.save.frame "擷取頁框">
+<!ENTITY sb.save.frame.as "擷取頁框細節">
+<!ENTITY sb.save.target "擷取連結">
+<!ENTITY sb.save.target.as "擷取連結細節">
+<!ENTITY sb.save.alltabs "擷取所有分頁">
+<!ENTITY sb.save.bookmark "加入 ScrapBook 書籤">
 <!ENTITY sb.sidebar "在側邊欄顯示">
 <!ENTITY sb.menubar "選單列存取鍵">
 <!ENTITY sb.editbefore "編輯後擷取">

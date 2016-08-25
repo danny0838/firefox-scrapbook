@@ -3,27 +3,27 @@
 <!ENTITY sb.calc.diagnosis "تشخيص">
 
 <!-- capture.dtd -->
-<!ENTITY sb.capture "إلتقط">
-<!ENTITY sb.capture.abort "أجهض">
-<!ENTITY sb.capture.start "إبدأ">
-<!ENTITY sb.capture.retry "إعادة">
-<!ENTITY sb.capture.skip "تجاوز">
-<!ENTITY sb.capture.pause "إيقاف مؤقت">
-<!ENTITY sb.capture.finish "ألغ">
-<!ENTITY sb.capture.column.address "الرابط">
-<!ENTITY sb.capture.column.title "العنوان">
-<!ENTITY sb.capture.column.status "الحالة">
-<!ENTITY sb.capture.checkSelection "Check selected items">
-<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
-<!ENTITY sb.capture.filter "تصفية">
-<!ENTITY sb.capture.filter.column.rule "أظهر/أخف">
-<!ENTITY sb.capture.filter.column.content "مرشح (تعبير نمطي)">
-<!ENTITY sb.capture.filter.accept "إقبل">
-<!ENTITY sb.capture.filter.accept.help "غير أو حرر القيمة">
-<!ENTITY sb.capture.filter.cancel "ألغ">
-<!ENTITY sb.capture.filter.cancel.help "ألغ التحرير">
-<!ENTITY sb.capture.filter.delete "احذف">
-<!ENTITY sb.capture.filter.delete.help "أزل المرشح من القائمة">
+<!ENTITY sb.save "إلتقط">
+<!ENTITY sb.save.abort "أجهض">
+<!ENTITY sb.save.start "إبدأ">
+<!ENTITY sb.save.retry "إعادة">
+<!ENTITY sb.save.skip "تجاوز">
+<!ENTITY sb.save.pause "إيقاف مؤقت">
+<!ENTITY sb.save.finish "ألغ">
+<!ENTITY sb.save.column.address "الرابط">
+<!ENTITY sb.save.column.title "العنوان">
+<!ENTITY sb.save.column.status "الحالة">
+<!ENTITY sb.save.checkSelection "Check selected items">
+<!ENTITY sb.save.uncheckSelection "Uncheck selected items">
+<!ENTITY sb.save.filter "تصفية">
+<!ENTITY sb.save.filter.column.rule "أظهر/أخف">
+<!ENTITY sb.save.filter.column.content "مرشح (تعبير نمطي)">
+<!ENTITY sb.save.filter.accept "إقبل">
+<!ENTITY sb.save.filter.accept.help "غير أو حرر القيمة">
+<!ENTITY sb.save.filter.cancel "ألغ">
+<!ENTITY sb.save.filter.cancel.help "ألغ التحرير">
+<!ENTITY sb.save.filter.delete "احذف">
+<!ENTITY sb.save.filter.delete.help "أزل المرشح من القائمة">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "اضافة عناصر بالسحب والإفلات من القائمة بالترتيب الذي تريد  الجمع به. يمكنك سحب و إفلات عناصر متعددة معاً.">
@@ -44,7 +44,7 @@
 <!ENTITY sb.detail.new.folder "مجلد جديد">
 <!ENTITY sb.detail.select.folder "حدد مجلد">
 <!ENTITY sb.detail.option "خيارات">
-<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.save "Capture">
 <!ENTITY sb.detail.option.images "صور">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -232,16 +232,16 @@
 <!ENTITY sb.output.option.open "بعد الاستخراج, افتحها ضمن المتصفح.">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.capture.partial "التقاط المحدد">
-<!ENTITY sb.capture.partial.as "التقاط المحدد كـ">
-<!ENTITY sb.capture.entire "التقاط الصفحة">
-<!ENTITY sb.capture.entire.as "التقاط الصفحة كـ">
-<!ENTITY sb.capture.frame "التقاط الاطار">
-<!ENTITY sb.capture.frame.as "التقاط الاطاركـ">
-<!ENTITY sb.capture.target "التقاط الرابط">
-<!ENTITY sb.capture.target.as "التقاط الرابط كـ">
-<!ENTITY sb.capture.alltabs "التقاط كل الالسنة">
-<!ENTITY sb.capture.bookmark "علامة موقع بـ سكراببوك">
+<!ENTITY sb.save.partial "التقاط المحدد">
+<!ENTITY sb.save.partial.as "التقاط المحدد كـ">
+<!ENTITY sb.save.entire "التقاط الصفحة">
+<!ENTITY sb.save.entire.as "التقاط الصفحة كـ">
+<!ENTITY sb.save.frame "التقاط الاطار">
+<!ENTITY sb.save.frame.as "التقاط الاطاركـ">
+<!ENTITY sb.save.target "التقاط الرابط">
+<!ENTITY sb.save.target.as "التقاط الرابط كـ">
+<!ENTITY sb.save.alltabs "التقاط كل الالسنة">
+<!ENTITY sb.save.bookmark "علامة موقع بـ سكراببوك">
 <!ENTITY sb.sidebar "عرض في الشريط الجانبي">
 <!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "تحرير قبل الالتقاط">

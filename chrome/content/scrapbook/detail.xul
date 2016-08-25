@@ -55,7 +55,7 @@
                 <groupbox group="capture-options">
                     <caption label="&sb.detail.option;" />
                     <hbox align="center">
-                    <caption label="&sb.detail.option.capture;:" />
+                    <caption label="&sb.detail.option.save;:" />
                         <checkbox id="sbDetailOptionImages" label="&sb.detail.option.images;" />
                         <checkbox id="sbDetailOptionMedia" label="&sb.detail.option.media;" />
                         <checkbox id="sbDetailOptionFonts" label="&sb.detail.option.fonts;" />

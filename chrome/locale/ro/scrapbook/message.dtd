@@ -3,27 +3,27 @@
 <!ENTITY sb.calc.diagnosis "Diagnostic">
 
 <!-- capture.dtd -->
-<!ENTITY sb.capture "Capturează">
-<!ENTITY sb.capture.abort "Întrerupe">
-<!ENTITY sb.capture.start "Pornește">
-<!ENTITY sb.capture.retry "Reîncearcă">
-<!ENTITY sb.capture.skip "Ignoră">
-<!ENTITY sb.capture.pause "Întrerupe">
-<!ENTITY sb.capture.finish "Renunță">
-<!ENTITY sb.capture.column.address "Adresă">
-<!ENTITY sb.capture.column.title "Denumire">
-<!ENTITY sb.capture.column.status "Stare">
-<!ENTITY sb.capture.checkSelection "Check selected items">
-<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
-<!ENTITY sb.capture.filter "Filtrare">
-<!ENTITY sb.capture.filter.column.rule "Afișează/ascunde">
-<!ENTITY sb.capture.filter.column.content "Filtrare (expresie regulată)">
-<!ENTITY sb.capture.filter.accept "Acceptă">
-<!ENTITY sb.capture.filter.accept.help "Modifică sau editează valoarea">
-<!ENTITY sb.capture.filter.cancel "Renunță">
-<!ENTITY sb.capture.filter.cancel.help "Abandonează editarea">
-<!ENTITY sb.capture.filter.delete "Șterge">
-<!ENTITY sb.capture.filter.delete.help "Elimină filtrul din listă">
+<!ENTITY sb.save "Capturează">
+<!ENTITY sb.save.abort "Întrerupe">
+<!ENTITY sb.save.start "Pornește">
+<!ENTITY sb.save.retry "Reîncearcă">
+<!ENTITY sb.save.skip "Ignoră">
+<!ENTITY sb.save.pause "Întrerupe">
+<!ENTITY sb.save.finish "Renunță">
+<!ENTITY sb.save.column.address "Adresă">
+<!ENTITY sb.save.column.title "Denumire">
+<!ENTITY sb.save.column.status "Stare">
+<!ENTITY sb.save.checkSelection "Check selected items">
+<!ENTITY sb.save.uncheckSelection "Uncheck selected items">
+<!ENTITY sb.save.filter "Filtrare">
+<!ENTITY sb.save.filter.column.rule "Afișează/ascunde">
+<!ENTITY sb.save.filter.column.content "Filtrare (expresie regulată)">
+<!ENTITY sb.save.filter.accept "Acceptă">
+<!ENTITY sb.save.filter.accept.help "Modifică sau editează valoarea">
+<!ENTITY sb.save.filter.cancel "Renunță">
+<!ENTITY sb.save.filter.cancel.help "Abandonează editarea">
+<!ENTITY sb.save.filter.delete "Șterge">
+<!ENTITY sb.save.filter.delete.help "Elimină filtrul din listă">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Adăugați elemente din arbore prin glisare și fixare, în ordinea în care doriți să le combinați. Puteți glisa și fixa mai multe articole o dată.">
@@ -44,7 +44,7 @@
 <!ENTITY sb.detail.new.folder "Dosar nou">
 <!ENTITY sb.detail.select.folder "Selectează dosarul">
 <!ENTITY sb.detail.option "Opțiuni">
-<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.save "Capture">
 <!ENTITY sb.detail.option.images "Imagini">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -232,16 +232,16 @@
 <!ENTITY sb.output.option.open "După scriere, deschide fișierul în navigator">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.capture.partial "Capturează selecția">
-<!ENTITY sb.capture.partial.as "Capturează selecția ca">
-<!ENTITY sb.capture.entire "Capturează pagina">
-<!ENTITY sb.capture.entire.as "Capturează pagina ca">
-<!ENTITY sb.capture.frame "Capturează cadrul">
-<!ENTITY sb.capture.frame.as "Capturează cadrul ca">
-<!ENTITY sb.capture.target "Capturează legătura">
-<!ENTITY sb.capture.target.as "Capturează legătura ca">
-<!ENTITY sb.capture.alltabs "Capturează din toate filele">
-<!ENTITY sb.capture.bookmark "Pune semn de carte ScrapBook">
+<!ENTITY sb.save.partial "Capturează selecția">
+<!ENTITY sb.save.partial.as "Capturează selecția ca">
+<!ENTITY sb.save.entire "Capturează pagina">
+<!ENTITY sb.save.entire.as "Capturează pagina ca">
+<!ENTITY sb.save.frame "Capturează cadrul">
+<!ENTITY sb.save.frame.as "Capturează cadrul ca">
+<!ENTITY sb.save.target "Capturează legătura">
+<!ENTITY sb.save.target.as "Capturează legătura ca">
+<!ENTITY sb.save.alltabs "Capturează din toate filele">
+<!ENTITY sb.save.bookmark "Pune semn de carte ScrapBook">
 <!ENTITY sb.sidebar "Afișează în panoul lateral">
 <!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Editează înaintea capturării">

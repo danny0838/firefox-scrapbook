@@ -3,27 +3,27 @@
 <!ENTITY sb.calc.diagnosis "Diagnóstico">
 
 <!-- capture.dtd -->
-<!ENTITY sb.capture "Capturar">
-<!ENTITY sb.capture.abort "Abortar">
-<!ENTITY sb.capture.start "Iniciar">
-<!ENTITY sb.capture.retry "Tentar novamente">
-<!ENTITY sb.capture.skip "Pular">
-<!ENTITY sb.capture.pause "Pausar">
-<!ENTITY sb.capture.finish "Cancelar">
-<!ENTITY sb.capture.column.address "URL">
-<!ENTITY sb.capture.column.title "Título">
-<!ENTITY sb.capture.column.status "Status">
-<!ENTITY sb.capture.checkSelection "Check selected items">
-<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
-<!ENTITY sb.capture.filter "Filtrar">
-<!ENTITY sb.capture.filter.column.rule "Mostrar/Ocultar">
-<!ENTITY sb.capture.filter.column.content "Filtro (expressão regular)">
-<!ENTITY sb.capture.filter.accept "Aceitar">
-<!ENTITY sb.capture.filter.accept.help "mudar ou editar valor">
-<!ENTITY sb.capture.filter.cancel "Cancelar">
-<!ENTITY sb.capture.filter.cancel.help "abortar edição">
-<!ENTITY sb.capture.filter.delete "Apagar">
-<!ENTITY sb.capture.filter.delete.help "remover filtro da lista">
+<!ENTITY sb.save "Capturar">
+<!ENTITY sb.save.abort "Abortar">
+<!ENTITY sb.save.start "Iniciar">
+<!ENTITY sb.save.retry "Tentar novamente">
+<!ENTITY sb.save.skip "Pular">
+<!ENTITY sb.save.pause "Pausar">
+<!ENTITY sb.save.finish "Cancelar">
+<!ENTITY sb.save.column.address "URL">
+<!ENTITY sb.save.column.title "Título">
+<!ENTITY sb.save.column.status "Status">
+<!ENTITY sb.save.checkSelection "Check selected items">
+<!ENTITY sb.save.uncheckSelection "Uncheck selected items">
+<!ENTITY sb.save.filter "Filtrar">
+<!ENTITY sb.save.filter.column.rule "Mostrar/Ocultar">
+<!ENTITY sb.save.filter.column.content "Filtro (expressão regular)">
+<!ENTITY sb.save.filter.accept "Aceitar">
+<!ENTITY sb.save.filter.accept.help "mudar ou editar valor">
+<!ENTITY sb.save.filter.cancel "Cancelar">
+<!ENTITY sb.save.filter.cancel.help "abortar edição">
+<!ENTITY sb.save.filter.delete "Apagar">
+<!ENTITY sb.save.filter.delete.help "remover filtro da lista">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Adicione itens da árvore arrastando e soltando na ordem em que deseja combiná-los. Você pode fazer isso com vários itens de uma vez.">
@@ -44,7 +44,7 @@
 <!ENTITY sb.detail.new.folder "Nova Pasta">
 <!ENTITY sb.detail.select.folder "Selecionar Pasta">
 <!ENTITY sb.detail.option "Opções">
-<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.save "Capture">
 <!ENTITY sb.detail.option.images "Imagens">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -232,16 +232,16 @@
 <!ENTITY sb.output.option.open "After outputting, open it in browser">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.capture.partial "Capturar Seleção">
-<!ENTITY sb.capture.partial.as "Capturar Seleção Como">
-<!ENTITY sb.capture.entire "Capturar Página">
-<!ENTITY sb.capture.entire.as "Capturar Página Como">
-<!ENTITY sb.capture.frame "Capturar Frame">
-<!ENTITY sb.capture.frame.as "Capturar Frame Como">
-<!ENTITY sb.capture.target "Capturar Link">
-<!ENTITY sb.capture.target.as "Capturar Link Como">
-<!ENTITY sb.capture.alltabs "Capturar Todas as Abas">
-<!ENTITY sb.capture.bookmark "Criar Favorito no ScrapBook">
+<!ENTITY sb.save.partial "Capturar Seleção">
+<!ENTITY sb.save.partial.as "Capturar Seleção Como">
+<!ENTITY sb.save.entire "Capturar Página">
+<!ENTITY sb.save.entire.as "Capturar Página Como">
+<!ENTITY sb.save.frame "Capturar Frame">
+<!ENTITY sb.save.frame.as "Capturar Frame Como">
+<!ENTITY sb.save.target "Capturar Link">
+<!ENTITY sb.save.target.as "Capturar Link Como">
+<!ENTITY sb.save.alltabs "Capturar Todas as Abas">
+<!ENTITY sb.save.bookmark "Criar Favorito no ScrapBook">
 <!ENTITY sb.sidebar "Mostrar na Barra Lateral">
 <!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Editar Antes de Capturar">

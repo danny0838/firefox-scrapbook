@@ -3,27 +3,27 @@
 <!ENTITY sb.calc.diagnosis "Stav položek">
 
 <!-- capture.dtd -->
-<!ENTITY sb.capture "Zachycení">
-<!ENTITY sb.capture.abort "Zrušit">
-<!ENTITY sb.capture.start "Začít">
-<!ENTITY sb.capture.retry "Opakovat">
-<!ENTITY sb.capture.skip "Přeskočit">
-<!ENTITY sb.capture.pause "Pozastavit">
-<!ENTITY sb.capture.finish "Zrušit">
-<!ENTITY sb.capture.column.address "Adresa URL">
-<!ENTITY sb.capture.column.title "Název">
-<!ENTITY sb.capture.column.status "Stav">
-<!ENTITY sb.capture.checkSelection "Check selected items">
-<!ENTITY sb.capture.uncheckSelection "Uncheck selected items">
-<!ENTITY sb.capture.filter "Filtr">
-<!ENTITY sb.capture.filter.column.rule "Zobrazit/Skrýt">
-<!ENTITY sb.capture.filter.column.content "Filtrovat (regulární výrazy)">
-<!ENTITY sb.capture.filter.accept "Přijmout">
-<!ENTITY sb.capture.filter.accept.help "změní nebo upraví hodnotu">
-<!ENTITY sb.capture.filter.cancel "Zrušit">
-<!ENTITY sb.capture.filter.cancel.help "zruší úpravy">
-<!ENTITY sb.capture.filter.delete "Smazat">
-<!ENTITY sb.capture.filter.delete.help "vyjme filtr ze seznamu">
+<!ENTITY sb.save "Zachycení">
+<!ENTITY sb.save.abort "Zrušit">
+<!ENTITY sb.save.start "Začít">
+<!ENTITY sb.save.retry "Opakovat">
+<!ENTITY sb.save.skip "Přeskočit">
+<!ENTITY sb.save.pause "Pozastavit">
+<!ENTITY sb.save.finish "Zrušit">
+<!ENTITY sb.save.column.address "Adresa URL">
+<!ENTITY sb.save.column.title "Název">
+<!ENTITY sb.save.column.status "Stav">
+<!ENTITY sb.save.checkSelection "Check selected items">
+<!ENTITY sb.save.uncheckSelection "Uncheck selected items">
+<!ENTITY sb.save.filter "Filtr">
+<!ENTITY sb.save.filter.column.rule "Zobrazit/Skrýt">
+<!ENTITY sb.save.filter.column.content "Filtrovat (regulární výrazy)">
+<!ENTITY sb.save.filter.accept "Přijmout">
+<!ENTITY sb.save.filter.accept.help "změní nebo upraví hodnotu">
+<!ENTITY sb.save.filter.cancel "Zrušit">
+<!ENTITY sb.save.filter.cancel.help "zruší úpravy">
+<!ENTITY sb.save.filter.delete "Smazat">
+<!ENTITY sb.save.filter.delete.help "vyjme filtr ze seznamu">
 
 <!-- combine.dtd -->
 <!ENTITY sb.combine.dragdrop "Přetažením ze seznamu přidejte položky v pořadí, ve kterém je chcete sloučit. Můžete také přetáhnout více položek najednou.">
@@ -44,7 +44,7 @@
 <!ENTITY sb.detail.new.folder "Nová složka">
 <!ENTITY sb.detail.select.folder "Vybrat složku">
 <!ENTITY sb.detail.option "Možnosti">
-<!ENTITY sb.detail.option.capture "Capture">
+<!ENTITY sb.detail.option.save "Capture">
 <!ENTITY sb.detail.option.images "Obrázky">
 <!ENTITY sb.detail.option.media "Media">
 <!ENTITY sb.detail.option.fonts "Fonts">
@@ -232,16 +232,16 @@
 <!ENTITY sb.output.option.open "Otevřít v prohlížeči po dokončení exportování">
 
 <!-- overlay.dtd -->
-<!ENTITY sb.capture.partial "Zachytit výběr">
-<!ENTITY sb.capture.partial.as "Zachytit výběr jako">
-<!ENTITY sb.capture.entire "Zachytit stránku">
-<!ENTITY sb.capture.entire.as "Zachytit stránku jako">
-<!ENTITY sb.capture.frame "Zachytit rám">
-<!ENTITY sb.capture.frame.as "Zachytit rám jako">
-<!ENTITY sb.capture.target "Zachytit odkaz">
-<!ENTITY sb.capture.target.as "Zachytit odkaz jako">
-<!ENTITY sb.capture.alltabs "Zachytit všechny panely">
-<!ENTITY sb.capture.bookmark "Přidat mezi záložky ve ScrapBook">
+<!ENTITY sb.save.partial "Zachytit výběr">
+<!ENTITY sb.save.partial.as "Zachytit výběr jako">
+<!ENTITY sb.save.entire "Zachytit stránku">
+<!ENTITY sb.save.entire.as "Zachytit stránku jako">
+<!ENTITY sb.save.frame "Zachytit rám">
+<!ENTITY sb.save.frame.as "Zachytit rám jako">
+<!ENTITY sb.save.target "Zachytit odkaz">
+<!ENTITY sb.save.target.as "Zachytit odkaz jako">
+<!ENTITY sb.save.alltabs "Zachytit všechny panely">
+<!ENTITY sb.save.bookmark "Přidat mezi záložky ve ScrapBook">
 <!ENTITY sb.sidebar "Zobrazit v postranní liště">
 <!ENTITY sb.menubar "Menubar accesskey">
 <!ENTITY sb.editbefore "Upravit před zachycením">
