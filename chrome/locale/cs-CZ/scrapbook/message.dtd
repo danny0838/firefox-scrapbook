@@ -40,7 +40,7 @@
 <!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
 <!ENTITY sb.detail.linked.charset "Znaková sada">
 <!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
-<!ENTITY sb.detail "Detail zachycení">
+<!ENTITY sb.detail.title "Detail zachycení">
 <!ENTITY sb.detail.new.folder "Nová složka">
 <!ENTITY sb.detail.select.folder "Vybrat složku">
 <!ENTITY sb.detail.option "Možnosti">

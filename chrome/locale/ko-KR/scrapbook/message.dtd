@@ -40,7 +40,7 @@
 <!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
 <!ENTITY sb.detail.linked.charset "문자셋">
 <!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
-<!ENTITY sb.detail "캡처 상세 설정">
+<!ENTITY sb.detail.title "캡처 상세 설정">
 <!ENTITY sb.detail.new.folder "새 폴더">
 <!ENTITY sb.detail.select.folder "폴더 선택">
 <!ENTITY sb.detail.option "설정">

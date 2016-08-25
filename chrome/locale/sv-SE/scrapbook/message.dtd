@@ -40,7 +40,7 @@
 <!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
 <!ENTITY sb.detail.linked.charset "Teckenuppsättning">
 <!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
-<!ENTITY sb.detail "Infångstinformation">
+<!ENTITY sb.detail.title "Infångstinformation">
 <!ENTITY sb.detail.new.folder "Ny mapp">
 <!ENTITY sb.detail.select.folder "Välj mapp">
 <!ENTITY sb.detail.option "Inställningar">

@@ -40,7 +40,7 @@
 <!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
 <!ENTITY sb.detail.linked.charset "Кодування">
 <!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
-<!ENTITY sb.detail "Подробиці збереження">
+<!ENTITY sb.detail.title "Подробиці збереження">
 <!ENTITY sb.detail.new.folder "Нова тека">
 <!ENTITY sb.detail.select.folder "Оберіть теку">
 <!ENTITY sb.detail.option "Параметри">

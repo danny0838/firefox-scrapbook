@@ -40,7 +40,7 @@
 <!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
 <!ENTITY sb.detail.linked.charset "文字セット">
 <!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
-<!ENTITY sb.detail "取り込み詳細">
+<!ENTITY sb.detail.title "取り込み詳細">
 <!ENTITY sb.detail.new.folder "新しいフォルダ">
 <!ENTITY sb.detail.select.folder "フォルダの選択">
 <!ENTITY sb.detail.option "オプション">

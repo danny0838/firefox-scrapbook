@@ -40,7 +40,7 @@
 <!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
 <!ENTITY sb.detail.linked.charset "Karakterkészlet">
 <!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
-<!ENTITY sb.detail "Rögzítés adatai">
+<!ENTITY sb.detail.title "Rögzítés adatai">
 <!ENTITY sb.detail.new.folder "Új mappa">
 <!ENTITY sb.detail.select.folder "Mappa kiválasztása">
 <!ENTITY sb.detail.option "Beállítások">

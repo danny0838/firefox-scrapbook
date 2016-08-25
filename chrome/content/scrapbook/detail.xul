@@ -8,7 +8,7 @@
 <!DOCTYPE dialog SYSTEM "chrome://scrapbook/locale/message.dtd">
 
 <dialog id="sbDetailDialog"
-        title="ScrapBook - &sb.detail;"
+        title="ScrapBook - &sb.detail.title;"
         xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
         persist="screenX screenY width height"
         onload="sbCaptureOptions.init();"

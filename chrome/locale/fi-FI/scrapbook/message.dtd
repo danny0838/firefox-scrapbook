@@ -40,7 +40,7 @@
 <!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
 <!ENTITY sb.detail.linked.charset "Merkistö">
 <!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
-<!ENTITY sb.detail "Tallenna osa">
+<!ENTITY sb.detail.title "Tallenna osa">
 <!ENTITY sb.detail.new.folder "Uusi kansio">
 <!ENTITY sb.detail.select.folder "Valitse kansio">
 <!ENTITY sb.detail.option "Asetukset">

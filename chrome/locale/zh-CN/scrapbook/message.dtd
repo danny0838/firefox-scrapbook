@@ -40,7 +40,7 @@
 <!ENTITY sb.detail.linked.timeout.help "获取下一个 URL 之前的等候时间。">
 <!ENTITY sb.detail.linked.charset "字符集">
 <!ENTITY sb.detail.linked.charset.help "强制使用这个字符集载入页面。留空则自动侦测。">
-<!ENTITY sb.detail "详细信息">
+<!ENTITY sb.detail.title "详细信息">
 <!ENTITY sb.detail.new.folder "新建文件夹">
 <!ENTITY sb.detail.select.folder "选择文件夹">
 <!ENTITY sb.detail.option "选项">

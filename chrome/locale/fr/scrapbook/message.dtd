@@ -40,7 +40,7 @@
 <!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
 <!ENTITY sb.detail.linked.charset "Jeu de caractères">
 <!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
-<!ENTITY sb.detail "Détail de la capture">
+<!ENTITY sb.detail.title "Détail de la capture">
 <!ENTITY sb.detail.new.folder "Nouveau dossier">
 <!ENTITY sb.detail.select.folder "Sélectionner le dossier">
 <!ENTITY sb.detail.option "Options">

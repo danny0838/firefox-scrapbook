@@ -40,7 +40,7 @@
 <!ENTITY sb.detail.linked.timeout.help "Delay before capturing the next URL.">
 <!ENTITY sb.detail.linked.charset "ضبط المحارف">
 <!ENTITY sb.detail.linked.charset.help "Force loading the page using the specified charset. Leave blank to detect automatically.">
-<!ENTITY sb.detail "تفاصيل الالتقاط">
+<!ENTITY sb.detail.title "تفاصيل الالتقاط">
 <!ENTITY sb.detail.new.folder "مجلد جديد">
 <!ENTITY sb.detail.select.folder "حدد مجلد">
 <!ENTITY sb.detail.option "خيارات">
