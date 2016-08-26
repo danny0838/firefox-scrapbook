@@ -1,0 +1,499 @@
+Scrapbook X 1.13.0
+==================
+
+This is the first release of 1.13 series, which is identical to v1.13.0rc5
+except for documentation.
+
+
+Compatibility notes (with 1.12.*)
+---------------------------------
+
+ * Added support for Firefox 50 and dropped support for Firefox 3.
+
+   Firefox 50 totally removed the support of nsDragAndDrop API, which is
+   required by the drag and drop function for Firefox 3 since it doesn't
+   support the new API.
+
+   Additionally, there have been many advanced features unavailable and
+   many unresolvable issues persisted for Firefox 3.  Even if we keep
+   support for Firefox 3, it's still problematic and not full-featured.
+
+   As a result, we decided to shift to the new API (as legacy ScrapBook
+   by Gomita had done) to support Firefox 50 and drop support for
+   Firefox 3 to keep the code clean and simple.
+
+ * Added support for non-folder-type folders.
+
+   A new feature that a non-folder-type item can be converted into a
+   folder to contain subitems (and vice versa) is added.
+
+   Older ScrapBook versions can read the same ScrapBook directory saved
+   by the new version, but they would have problems on the GUI, or when
+   searching, fulltext-indexing, importing, or exporting them.
+
+ * Notes now use plain-text and use pt as the font size unit.
+
+   A note with functional HTML markups which is saved in an old version
+   will be load as plain-text and loses all HTML formats.  A note saved
+   in this version may be load with HTML special chars encoded in an old
+   version.
+
+   The font size for notes now uses pt rather than px as the unit.
+   The underlying user preference recoding font size is also changed.
+   Previous font size settings in an old version won't apply to the new
+   version and vice versa.
+
+ * The name and/or format of several user preferences are modified.
+ 
+   A user preference set in an old version would be unavailable in the
+   current version and needs a reset, and vice versa.
+
+ * Language packs are largely modified.
+
+   One thing has to be explicitly noted is that "capture" has been renamed
+   to "save", as legacy ScrapBook by Gomita has done.  Additionally, previous "Localize Embedded External Media" has been simplified to 
+   "Internalize".  Some documentation may need to be updated accordingly.
+
+
+Changes since v1.12.38
+----------------------
+
+Bug fixes:
+
+ * Downloaded files now use HTTP header defined filename if it's available.
+
+   This avoids some files be saved as .dat files, and also fixed an issue 
+   for embeded media rendering if it depends on the file extension.  For
+   example, an svg file is not rendered correctly if it's not saved with
+   the file extension "svg".
+
+ * A file whose URL is mixed with percent encoded components and standalone
+   "%"s was not saved decoded.  For example, "process%20%2350%.txt" would
+   be saved as "process%20%2350%.txt", and now will be "process #50%.txt".
+
+ * A "srcset" attribute embedded image whose URL has an encoded space "%20"
+   is not shown correctly after saved.
+
+ * A CSS-linked file with a filename containing "'" is not saved correctly.
+
+ * An error can occur when saving a page with a special protocol, such as
+   an "about:" page.
+
+ * A deep save can freeze up in certain cases if "Save Selection" is run
+   and there is a link referencing the main page.
+
+ * An unexpected result can occur when multiple page saving processes are
+   running at the same time.
+
+ * A <source> element under a <picture> element is not correctly saved.
+
+ * An embeded media might be not downloaded correctly if the source page
+   contains a <base> element.
+
+ * A background image declared inside a media rule of an external CSS is
+   not saved correctly.
+
+ * A @import CSS rule or a media attribute of a stylesheet link element
+   is not correctly handled by the combine wizard.
+
+ * A script error occurs when internalizing a page with an <img> or
+   <source> element having a "srcset" attribute.
+
+ * The favicon of a page saved by link or deep save can sometimes be
+   different to that saved from a direct browse.
+
+ * A page linked from an XHTML page and has a path containing certain
+   special characters (such as "!", "'", or "~") causes some interlinks be
+   not builded.
+
+ * Certain styles and scripts become broken when a XHTML page is saved
+   as HTML via "Save presenting HTML for non-HTML files".
+
+ * Some editor functions, such as DOM Erasor and Freenote, do not work for
+   an XHTML page.
+
+ * Modifying a non-first filter in the Save dialog triggers an error.
+
+ * Fixed several unexpected behaviors for drag and drop, such as:
+
+   * Dropping with Alt hold does not create a bookmark as expected in 
+     certain cases.
+
+   * A save via dropping into the sidebar gets only the selected content
+     of the currrent tab saved in certain cases.
+
+   * Dropping items into a different window causes a wrong behavior.
+
+   * Modifier keys for drag and drop don't work on several Linux platforms.
+
+ * Copy Item may not work correctly on some platforms, such as Mac.
+
+Save functionality:
+
+ * A non-detail save now uses previously used detail save options.
+
+   Note that there are some exceptions and not every option will be
+   applied to every case.  For example, the deep save level is only
+   available via Save As.  Combine and Internalize always preserve all
+   images, media, fonts, frames, styles, and scripts no matter how the
+   save detail options are set.  These hard settings are to prevent some
+   unexpected or critical issues.
+
+ * Save detail options are now remembered via the user preference.
+
+ * Spaces in a URL now are saved encoded.
+
+ * The filename of a deep saved webpage is now saved minimal encoded like
+   an embeded file is.
+
+ * <noscript> tags are now always saved when saving.
+
+ * Every non-saved <link> or <script> tag now writes a non-functional URI
+   containing the source rather then be removed when saving.
+
+ * CSS are now saved in their original <link> or <style> tags.
+
+   We made this change since the previous behavior of merging all styles
+   into a single .css file fails to preserve the original data structure
+   and causes some unresolvable issues, especially when javascript is
+   involved.
+
+ * Reworked CSS processing.
+ 
+   The old option "Reorganize Styles" save option is removed and a new
+   option "Process CSS" is added, which provides more options to process
+   the CSS—like the one to rewrite links only (and thus preserves Firefox
+   unsupported styles) and the one to not remove unused styles.
+
+ * Removal of the "integrity" attribute.
+
+   A save now removes the integrity attribute from web page elements
+   (mainly <link>s and <script>s) so that they won't be blocked due to a
+   modification made by ScrapBook X or a context change from online to
+   offline.
+
+   A new user preference "save.default.removeIntegrity" which can be used
+   to disable this behavior is added.
+
+ * The <script> element saving the status of a canvas now uses double
+   quotes instead of single quotes.
+
+ * A not downloadable file now uses a special URI.
+
+   Files not saved successfully are now shown in a URI like
+   "urn:scrapbook-download-error:http://..." rather than the original
+   link, which is mostly relative link and will be invalid.
+
+ * A local file is no more saved duplicated if it's identical.
+ 
+   The saver no more duplicates a file when it is about to save a local
+   file to a target with exactly same path and content.
+ 
+   A relative link in Firefox will become absolute when it is copied or 
+   cut to otherwhere, this feature used to cause a chaos when the user
+   edits a note page or moves an embeded image.  With this change we can
+   easily rewrite the absolute links back to relative using the
+   internalizer.
+
+ * A save via dragging a link now uses the link text as the default title.
+
+   The default document title is selectable from the dropdown list of 
+   title in the Save Detail dialog.
+
+ * Modified the layout of Save Detail dialog.
+
+   Page related information are now put in the "General" tab, and save 
+   options are put in another "Options" tab.  The last used tab will be
+   remembered.
+
+ * Reworked the save dialog.
+
+   * Save dialog now shows real-time status for each entry.
+
+   * Save dialog now automatically detects an entry with circular
+     redirection and fails out on it.
+
+   * Moved "Timeout" and "Charset" options to Save dialog.
+
+     These options only work before a page is loaded.  Previously they
+     have been placed in the Save As dialog, which shows up after the
+     page is loaded, causing them ignored when saving the main page.
+ 
+   * Fixed several issues that "Pause", "Skip", and "Abort" buttons didn't
+     work as expected when clicked in some cases.
+
+   * "Skip" button now never resumes a paused task, which allows the user
+     to skip multiple items during a pause.
+
+   * "Abort" button now attempts to stop and finalize the current save
+     when clicked once, and forces the save task to be terminated when
+     clicked for the second time.
+
+   * Added a context menu with "check/uncheck selected items" directives.
+
+   * An invalid RegExp is now forbidden in to prevent an error on
+     filtering URLs.
+
+ * Added save option "Save data URI as file".
+ 
+   When checked, data URIs will be saved as a local file using its SHA1
+   checksum as its filename.
+
+   This also allows the internalizer to save data URI images, which are
+   mostly created from dragging local files into an editable note page,
+   into normal embeded files.
+
+ * Removed save option "Save with UTF-8 encoding".
+
+   This feature seems to be useful only in some very rare cases, and
+   therfore we removed it from the dialog to "keep it simple and stupid".
+
+   It is still available via the "save.default.forceUtf8" user
+   preference if you really need it.
+
+ * Removed the "Keep linking to the source for not-captured objects"
+   save option.
+
+   This option could cause some unresolvable issues and thus we decided
+   to remove it.  We'll consider implementing this feature in another way
+   in the future.
+
+ * Reworked "Download linked files".
+ 
+   It now uses regular expressions to filter the file extension, which
+   is more flexible and portable.
+
+   Additionally, an option that uses the file extension defined in the
+   HTTP header of each link is added. This would be useful in certain
+   cases, but note that it could also cause a bad performance.
+
+ * New user preference "save.default.serializeFilename".
+
+   With this option on, saved files are named using increamental number
+   with the order they appear in the document flow.  This would be useful
+   when we want to manage the embeded files with a correct order and can
+   be in regular save, internalize, or combind.  However it may also cause
+   issues due to the lost of the orinigal filenames, and thus its usage
+   should be limited to certain special cases only.
+
+ * New user preference "save.default.linkUrlFilters".
+
+   This is a JSON string containing a simple string, a RegExp string
+   (e.g. "/\\.php/i"), or an array with a combination of them.
+   
+   A URL in an anchor (<a> or <area>) matching it (or one of it if it's
+   an array) will be totally ignored so that it's never condidered a
+   candidate of download linked files or deep save.
+
+   It can be used to exclude an offending URL that should never be visited,
+   for example, a link that logouts the user.
+
+   If the provided string is invalid, it will be ignored and the error
+   will be output to the browser console for trouble shooting.
+
+ * New user preferences to determine certain details to record.
+
+   "save.default.recordSkippedUrl", "save.default.recordRemovedAttr", and
+   "save.default.recordInDepthLink" user preferences are now available to
+   determine whether to record the skipped URLs, the removed attributes,
+   and mark deep save page links during a save.  They are disabled by
+   default since such information are more for debugging and are less
+   likely needed for general users.
+
+General user interface:
+
+ * The focus is now automatically set on the data tree when the
+   ScrapBook X sidebar is toggled shown.
+
+ * Added internal contrast to several icons so that they are more visible
+   on a platform with a dark background theme.
+
+ * Adjusted Save detail dialog.
+
+   * Save detail dialog now shows a scrollbar when the content overflows. 
+
+   * Save detail dialog now has width and height persisted.
+
+ * Modified the layout of Options dialog.
+
+   * Options in the Advanced tab are moved to the Organize tab.
+
+   * Added a button to set the default save options.
+
+   * Moved the restart notify for hotkey customization to the top of the
+     keys option panel.
+
+   * Adjusted the order of several options.
+
+   * Moved import/export/reset preferences from the advanced option to
+     the dropdown list of a new indivisual dialog button.
+
+ * Multi-ScrapBook is now always active.
+
+   To reduce the complexity of managing ScrapBook directories, we now
+   always activate the multi-ScrapBook mode and removed several unneeded
+   options, user preferences, and internal codes.
+
+   This also fixes some issues of the previous user interface.  For
+   example, when the user selects the default ScrapBook folder and then
+   enters the multi-ScrapBook manager, the previously selected ScrapBook
+   directory is no more "active" and undeletable.
+
+   Also, if the user selects the default ScrapBook directory, the sidebar
+   shows only "ScrapBook X" and the output HTML page shows only "ScrapBook"
+   instead of having "Profile folder".
+
+ * Opening multiple instances of Multi-ScrapBook manager dialog is now
+   forbidden.
+
+ * Removed the "manage" button from the main sidebar.
+
+ * Improved drag and drop related user interface, such as:
+
+   * Better presentation of the current drag status, for example, whether
+     it will pop a detail dialog, will creates a link, or will be forbidden.
+
+   * A drag now holds more basic data so that it can be dropped onto the
+     tab list, the browser window, or a plain text editor and triggers a
+     more desirable behavior.
+
+ * Added "L" accesskey for the "locate" directive of the editor toolbar.
+
+Data tree, sidebar, and manager:
+
+ * Incomplete ScrapBook directory paths are now treated as relative.
+
+   This is to prevent a possible error for the multi-ScrapBook system.
+   This change would also allow the user to set up a ScrapBook directory
+   relative to the Firefox profile directory by modifying the entries
+   in the multiple.txt or the value of "data.path" user prefreence.  Be
+   aware that such usage is not downward compatible, breaks the GUI,
+   could cause other issues and thus not encouraged, though.
+
+ * Added support for non-folder-type folders.
+ 
+   A new command "Convert to Folder" is added to convert a non-folder-type
+   item (which is not a separator) into a "folder", so that other items
+   can be placed under it.
+
+   This would be useful if the user wants to leave notes in the folder,
+   to make a folder searchable, or to create a more natural tree structure
+   to publish.  These can now be easily achieved by converting a note
+   page into a non-folder-type folder.
+
+ * Adjusted the mouse and keyboard behavior.
+
+   * Added space as a hotkey to open an item in the sidebar.
+
+   * Ctrl/Shift+Enter no more opens a folder-type folder.
+
+   * Single click on a folder no more toggles it in Manage window
+     or folder picker dialog.
+
+   * Ctrl- or Shift- click no more toggles a folder in Manage window.
+
+   * Mid-click no more works in the folder picker dialog.
+
+ * Added a general option "Use manage mode in the sidebar".
+ 
+   This makes the sidebar work like Manage window, such as allowing
+   multiple selection and acting on double-click instead of
+   single-click.
+
+ * Reworked "Sort" function.
+ 
+   * Added "Sort by Create Time" and "Sort by Modify Time" options.
+
+   * Added an "Descending" checkbox and reduced corresponding options
+     for sorting with descending order.
+
+   * When "Group by Type" is checked, note pages are now placed before
+     (rather then after) notes.
+
+Hotkey:
+
+ * Improved cross platform hotkey support.
+
+   Now supports the command key and the hotkey presentation style for
+   Macs.  Also added the support for customized accel key via the user
+   preference "ui.key.accelKey".
+
+ * Improved hotkey customization support.
+
+   * A combination of keys is now allowed for a general hotkey.
+
+   * The hotkeys of HTML editor and DOM eraser are now customizable.
+
+     Hotkeys for HTML editor is available in the options dialog and user
+     preference.  Hotkeys for DOM erasor is only available in the user
+     preference.
+
+ * Added new hotkeys.
+
+   Customization of the hotkeys for opening Manage window and Save
+   Multiple URLs are now allowed.
+
+Combine wizard:
+
+ * The combine wizard now supports HTML5 tags and attributes.
+
+ * Combine Wizard no more produce redundant linefeeds between the wrapping
+   div elements of each item combined.
+
+ * Dropping a folder into the combine wizard now adds all its child items.
+
+ * The warning message about deep saved pages now shows only once at the
+   previewing time.
+
+Output HTML tree:
+
+ * Improved the user interface for the generated page.
+
+   * Added an arrow to indicate folder status.
+
+   * Customized folder icons are now shown.
+
+   * Added a hover tooltip text for buttons toggling a folder.
+
+   * The animation for an item action is now more clear.
+
+ * No more uses the "opened folder" icon.
+
+   Now use "treefolder.png" instead of "folder.png" as the default folder
+   icon name, and no more generates "folder_open.png" accordingly.
+
+The notes:
+
+ * Notes are now plain-text only.
+
+   Previously a note saves raw HTML text as-is, and its content is
+   sometimes shown as plain-text and sometimes as HTML, depending on the
+   context.  This is highly inconsistent and confusing.  Since a note is
+   more likely used for quick noting in the sidebar, and we already have
+   a note page as the full HTML-featured note, we decided to make notes
+   strictly plain-text-only so that the user can easily paste-in any
+   plain-text contents without worrying about breaking anything when
+   they're read.
+
+ * Font size settings for notes now uses pt instead of px unit.
+
+   Most softwares use pt for font size, and we made this change to make
+   it more familiar to general users.
+
+Core changes:
+
+ * Added several new core APIs and removed several ones.
+
+ * Merged language files into two files—"message.dtd" and
+   "message.properties"—for each language.
+
+ * Moved many styling effects from XUL and javascript code to the skin CSS.
+
+ * Switch strftime to a new library.
+
+Documentation changes:
+
+ * Release notes now goes one-file-for-one-version.
+
+Also includes many code clean-up, documentation revises, and localization 
+and tooltip improvements.
