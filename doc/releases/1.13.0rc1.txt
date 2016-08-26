@@ -1,7 +1,8 @@
 Scrapbook X 1.13.0rc1
 =====================
 
-Compatibility notes:
+Compatibility notes
+-------------------
 
  * Notes are now plain-text only.
 
